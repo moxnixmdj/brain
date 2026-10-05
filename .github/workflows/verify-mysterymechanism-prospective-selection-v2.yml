@@ -1,0 +1,26 @@
+name: Verify MysteryMechanism prospective selection V2
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/runtime/mysterymechanism_separable_transform_v1.py'
+      - 'canonical/runtime/mysterymechanism_separable_transform_v2.py'
+      - 'canonical/runtime/mysterymechanism_sparse_symbolic_adapter_v1.py'
+      - 'canonical/tests/test_mysterymechanism_separable_transform_v2.py'
+      - 'canonical/governance/MYSTERYMECHANISM_PROSPECTIVE_SELECTION_GATE_20261005_V1.json'
+      - '.github/workflows/verify-mysterymechanism-prospective-selection-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12.10'
+      - run: python -m pytest -q canonical/tests/test_mysterymechanism_separable_transform_v2.py
