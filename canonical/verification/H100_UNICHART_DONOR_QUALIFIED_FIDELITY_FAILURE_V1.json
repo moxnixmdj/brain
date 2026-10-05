@@ -1,0 +1,90 @@
+{
+  "byte_pass": true,
+  "complete_bundle_bytes": 99999997,
+  "evaluated_cases": 6,
+  "exact_agreements_so_far": 4,
+  "h100_budget_bytes": 100000000,
+  "h100_credit_delta": 0,
+  "hard_nonclaims": [
+    "DONOR_QUALIFIED_FIDELITY_IS_NOT_FULL_CHARTQA_ACCURACY",
+    "NO_CHARTOGRAPHY_THRESHOLD_CREDIT",
+    "NO_FULL_H100_TERMINAL_CREDIT"
+  ],
+  "load": {
+    "candidate_group_count": 550936,
+    "packed_bytes": 94686795,
+    "selected_candidate_w4_groups": 189006
+  },
+  "max_possible_exact_agreements": 18,
+  "max_possible_packed_correct": 18,
+  "packed_correct_so_far": 4,
+  "packed_sha256": "89d0dfe759920047c8668d398b0811efad962f0194f36f3858bedf290af3d429",
+  "pass": false,
+  "required_exact_agreements": 17,
+  "required_packed_correct": 19,
+  "rows": [
+    {
+      "exact_agreement": true,
+      "fp32_prediction": "68",
+      "id": "DQH_20",
+      "index": 1,
+      "label": "68",
+      "packed_prediction": "68",
+      "relaxed_correct": true,
+      "split": "human"
+    },
+    {
+      "exact_agreement": true,
+      "fp32_prediction": "Yes",
+      "id": "DQH_22",
+      "index": 2,
+      "label": "Yes",
+      "packed_prediction": "Yes",
+      "relaxed_correct": true,
+      "split": "human"
+    },
+    {
+      "exact_agreement": true,
+      "fp32_prediction": "12",
+      "id": "DQH_30",
+      "index": 3,
+      "label": "12",
+      "packed_prediction": "12",
+      "relaxed_correct": true,
+      "split": "human"
+    },
+    {
+      "exact_agreement": false,
+      "fp32_prediction": "Kenya",
+      "id": "DQH_40",
+      "index": 4,
+      "label": "Kenya",
+      "packed_prediction": "Poland",
+      "relaxed_correct": false,
+      "split": "human"
+    },
+    {
+      "exact_agreement": true,
+      "fp32_prediction": "2",
+      "id": "DQH_42",
+      "index": 5,
+      "label": "2",
+      "packed_prediction": "2",
+      "relaxed_correct": true,
+      "split": "human"
+    },
+    {
+      "exact_agreement": false,
+      "fp32_prediction": "0.688",
+      "id": "DQH_47",
+      "index": 6,
+      "label": "0.68",
+      "packed_prediction": "0.77",
+      "relaxed_correct": false,
+      "split": "human"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_H100_UNICHART_DONOR_QUALIFIED_FIDELITY_RESULT_V1",
+  "selected_case_count": 20,
+  "status": "FAIL__DONOR_QUALIFIED_FIDELITY_GATE_MATHEMATICALLY_IMPOSSIBLE"
+}
