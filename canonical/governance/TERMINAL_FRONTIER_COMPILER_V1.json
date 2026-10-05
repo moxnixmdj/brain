@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FRONTIER_COMPILER_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__LIVE_DERIVED_ROOT2_ROOT3_META_ENVELOPE_FRONTIER__FAIL_CLOSED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Eliminate stale hand-maintained Root2/Root3 scheduler projections and prevent false terminal finality by deriving the live frontier from current canonical truth and binding the active Root1 meta-envelope as a first-class finality input.",
+  "breakthrough": [
+    "ROOT2_AND_ROOT3_TOUCHING_SETS_ARE_DERIVED_FROM_CURRENT_RESIDUAL_ROOT_PARTITION_EVERY_RUN_NOT_HARDCODED_VERSION_COUNTS",
+    "ACTIVE_ROOT1_META_ENVELOPE_IS_DISCOVERED_BY_HIGHEST_ACTIVE_VERSION_AND_ITS_SUBJECT_BLOB_IS_VERIFIED",
+    "ACTIVE_ZERO_REALITY_MINIMUM_CUT_IS_DISCOVERED_BY_HIGHEST_ACTIVE_VERSION_AND_ITS_SUBJECT_BLOB_IS_VERIFIED",
+    "TERMINAL_FINALITY_EQUALS_ACCEPTANCE_CLOSED_AND_ROOT1_POSITIVE_ZERO_AND_META_ENVELOPE_CLOSED",
+    "FRONTIER_EPOCH_HASHES_ROOT_STATE_ACCEPTANCE_EVIDENCE_META_ACTIVATION_META_SUBJECT_ZERO_REALITY_ACTIVATION_AND_ZERO_REALITY_SUBJECT"
+  ],
+  "current_recomputed_truth": {
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "root2_touching": 18,
+    "root3_touching": 9,
+    "root1_positive_gap_count": 0,
+    "active_root1_meta_envelope_min_version": 5,
+    "terminal": false,
+    "note": "Meta-envelope obligations are not added arithmetically to the 24 atomic residuals because overlap is not yet proven disjoint."
+  },
+  "current_failure_modes_deleted": [
+    "STATIC_ROOT2_19_TO_18_REBIND_AS_A_REQUIRED_CONTROL_PLANE_STEP",
+    "STATIC_ROOT3_10_TO_9_REBIND_AS_A_REQUIRED_CONTROL_PLANE_STEP",
+    "TERMINAL_38_OF_38_FINALITY_WITHOUT_CURRENT_META_ENVELOPE_CLOSURE",
+    "SILENT_USE_OF_AN_ACTIVE_META_ENVELOPE_ACTIVATION_WHOSE_SUBJECT_BLOB_DRIFTED"
+  ],
+  "files": {
+    "runtime": "canonical/runtime/terminal_frontier_compiler_v1.py",
+    "tests": "canonical/tests/test_terminal_frontier_compiler_v1.py"
+  },
+  "promotion_rule": "MAY_NOT_BECOME_SCHEDULING_OR_TERMINAL_AUTHORITY_UNTIL_INDEPENDENT_VERIFICATION_RECOMPUTES_CURRENT_COUNTS_META_BINDING_BLOB_CHECKS_AND_FALSE_FINALITY_TESTS.",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_ANY_OF_THE_24_OPEN_ATOMIC_PREDICATES_IS_CLOSED",
+    "NO_CLAIM_META_ENVELOPE_OBLIGATIONS_ARE_DISJOINT_FROM_CURRENT_ATOMIC_RESIDUALS",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
