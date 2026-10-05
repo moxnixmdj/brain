@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V7_WINDOWS_V2_CHANNEL_FAILURE_DIAGNOSIS_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FAILURE_LOCALIZED_TO_VERIFICATION_CHANNEL__NO_SUBJECT_COUNTEREXAMPLE__ZERO_CREDIT",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "failed_gate": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_ISOLATED_ROOT3_REPROMOTION_GATE_20261005_V2.json",
+  "failed_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "head_sha": "6fea34cdb9c5ec52bfe9deae6cab9708a80d48aa",
+    "workflow_run_id": 37246058457,
+    "job_id": 111564090127,
+    "conclusion": "failure"
+  },
+  "observed_failures": [
+    {
+      "class": "WINDOWS_CHECKOUT_LINE_ENDING_MATERIALIZATION",
+      "evidence": "WORKING_TREE_SHA1_VALUES_F5120E7B_D88CA616_9B229924_DID_NOT_MATCH_GIT_OBJECT_BLOBS_0FAA62FC_1961CFF0_2DA564D2",
+      "root_cause": "VERIFIER_HASHED_WORKING_TREE_BYTES_ON_WINDOWS_INSTEAD_OF_REPOSITORY_GIT_OBJECT_IDENTITIES",
+      "subject_implication": "NONE__THE_FROZEN_GIT_OBJECT_BLOBS_REMAIN_EXACTLY_BOUND"
+    },
+    {
+      "class": "MISSING_TEST_DEPENDENCY",
+      "evidence": "PYTHON_3_12_10_STEP_REPORTED_NO_MODULE_NAMED_PYTEST",
+      "root_cause": "WORKFLOW_INVOKED_PYTEST_WITHOUT_INSTALLING_OR_PROVING_AVAILABILITY",
+      "subject_implication": "NONE"
+    },
+    {
+      "class": "CASCADE",
+      "evidence": "NO_RECEIPT_CREATED__PYTHON_3_13_SKIPPED__ARTIFACT_UPLOAD_FAILED",
+      "root_cause": "FIRST_RUNTIME_STEP_FAILURE_SHORT_CIRCUITED_THE_JOB",
+      "subject_implication": "NONE"
+    }
+  ],
+  "repaired_channel_requirements": [
+    "HASH_SUBJECT_AND_LAUNCHER_IDENTITIES_VIA_GIT_OBJECT_LOOKUP_NOT_CHECKOUT_BYTES",
+    "INSTALL_PINNED_PYTEST_BEFORE_REGRESSION_EXECUTION",
+    "ATTEMPT_BOTH_REQUIRED_PYTHON_RUNTIMES_EVEN_IF_ONE_RUNTIME_FAILS",
+    "REQUIRE_BOTH_RUNTIME_PASS_MARKERS_BEFORE_GREEN_JOB",
+    "FREEZE_EXACT_REPAIRED_VERIFIER_WORKFLOW_AND_BRANCH_HEAD_BEFORE_DEDICATED_TRIGGER"
+  ],
+  "unchanged_subject_blobs": {
+    "generator_v5": "0faa62fce4bc2f2a99c173b0a10a32d5e1c6a244",
+    "tests": "1961cff0013ff9f17feca981409d89d01ecf6769",
+    "universal_proof": "2da564d27a318a99713165208126aaaf36ebc924"
+  },
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_cases_consumed": 0
+  }
+}
