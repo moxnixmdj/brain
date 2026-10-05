@@ -128,3 +128,41 @@ def test_uninstall_restores_exact_original_function_objects():
     assert state["installed"] is False
     assert subprocess.run is m._ORIGINAL_RUN
     assert subprocess.Popen is m._ORIGINAL_POPEN
+
+def test_executable_override_is_rejected_from_strict_request():
+    with pytest.raises(
+        m.ProcessEffectDenied,
+        match="SUBPROCESS_KWARG_NOT_YET_MEDIATED:executable",
+    ):
+        m._request(
+            "subprocess.run",
+            ([sys.executable, "-c", "pass"],),
+            {"executable": sys.executable, "check": True},
+        )
+
+
+def test_unclassified_future_kwarg_fails_closed():
+    with pytest.raises(
+        m.ProcessEffectDenied,
+        match="SUBPROCESS_KWARG_UNCLASSIFIED:future_process_knob",
+    ):
+        m._request(
+            "subprocess.run",
+            ([sys.executable, "-c", "pass"],),
+            {"future_process_knob": "surprise"},
+        )
+
+
+def test_neutral_forbidden_kwarg_does_not_change_request_digest():
+    base = m._request(
+        "subprocess.run",
+        ([sys.executable, "-c", "pass"],),
+        {"check": True},
+    )
+    neutral = m._request(
+        "subprocess.run",
+        ([sys.executable, "-c", "pass"],),
+        {"check": True, "executable": None},
+    )
+    assert neutral == base
+
