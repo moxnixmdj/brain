@@ -1,0 +1,180 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TRANSIENT_REDISCOVERY_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_REDISCOVERY_OUTCOMES__FIVE_FRESH_DEPTH4_STRUCTURES__RESEARCH_BRANCH_ONLY",
+  "objective": "Test whether post-evidence compiled capability selections can be removed from persistent state and rediscovered transiently at task time using only generic deterministic structural search.",
+  "accounting_target": {
+    "primary_axis": "M_fit",
+    "requirement": "ZERO_PERSISTENT_MACHINE_FIT_OR_SEARCH_SELECTED_STATE",
+    "allowed": "TRANSIENT_RUNTIME_FIT_AND_SELECTED_STRUCTURE_IN_MEMORY",
+    "forbidden": "WRITING_DISCOVERED_STRUCTURE_INTO_A_PERSISTENT_CAPABILITY_REGISTRY"
+  },
+  "operator_order": [
+    "neg",
+    "abs",
+    "square",
+    "sqrt_abs",
+    "log1p_abs",
+    "sat"
+  ],
+  "max_depth": 4,
+  "enumeration_count": 1554,
+  "train_x": [
+    -4,
+    -3.5,
+    -3,
+    -2.5,
+    -2,
+    -1.5,
+    -1,
+    -0.6,
+    -0.2,
+    0,
+    0.4,
+    0.8,
+    1,
+    1.5,
+    2,
+    2.5,
+    3,
+    3.5,
+    4
+  ],
+  "holdout_x": [
+    -3.8,
+    -3.2,
+    -2.8,
+    -2.2,
+    -1.8,
+    -1.2,
+    -0.8,
+    -0.4,
+    0.2,
+    0.6,
+    1.2,
+    1.8,
+    2.2,
+    2.8,
+    3.2,
+    3.8
+  ],
+  "tasks": [
+    {
+      "id": "REDISC_A",
+      "sequence": [
+        "sqrt_abs",
+        "sat",
+        "log1p_abs",
+        "square"
+      ],
+      "seed": [
+        0.17,
+        -0.23,
+        0.91
+      ],
+      "transfer": [
+        -0.44,
+        0.12,
+        -1.07
+      ]
+    },
+    {
+      "id": "REDISC_B",
+      "sequence": [
+        "log1p_abs",
+        "square",
+        "sat",
+        "sqrt_abs"
+      ],
+      "seed": [
+        -0.31,
+        0.19,
+        1.14
+      ],
+      "transfer": [
+        0.62,
+        -0.27,
+        0.73
+      ]
+    },
+    {
+      "id": "REDISC_C",
+      "sequence": [
+        "sat",
+        "sqrt_abs",
+        "log1p_abs",
+        "sat"
+      ],
+      "seed": [
+        0.08,
+        0.33,
+        -0.88
+      ],
+      "transfer": [
+        -0.51,
+        -0.16,
+        1.29
+      ]
+    },
+    {
+      "id": "REDISC_D",
+      "sequence": [
+        "square",
+        "sat",
+        "sqrt_abs",
+        "log1p_abs"
+      ],
+      "seed": [
+        0.49,
+        -0.09,
+        0.77
+      ],
+      "transfer": [
+        -0.22,
+        0.24,
+        -1.31
+      ]
+    },
+    {
+      "id": "REDISC_E",
+      "sequence": [
+        "sqrt_abs",
+        "log1p_abs",
+        "sat",
+        "log1p_abs"
+      ],
+      "seed": [
+        -0.13,
+        0.28,
+        1.03
+      ],
+      "transfer": [
+        0.37,
+        -0.21,
+        -0.69
+      ]
+    }
+  ],
+  "search_contract": [
+    "ENUMERATE_ALL_NONEMPTY_UNARY_CHAINS_DEPTH_1_THROUGH_4",
+    "FIT_INTERCEPT_PLUS_X_PLUS_ONE_CHAIN_FEATURE",
+    "NO_REGISTRY_LOOKUP",
+    "NO_PERSISTED_SEARCH_RESULT",
+    "SELECT_LOWEST_DEPTH_EXACT_CANDIDATE_THEN_LEXICOGRAPHIC_SIGNATURE",
+    "EXACT_REQUIRES_TRAIN_NRMSE_LE_1E-10_AND_HOLDOUT_NRMSE_LE_1E-8",
+    "REFIT_ONLY_LINEAR_COEFFICIENTS_ON_TRANSFER_USING_THE_TRANSIENTLY_DISCOVERED_STRUCTURE"
+  ],
+  "pass_gate": [
+    "ALL_FIVE_HAVE_AN_EXACT_SEED_STRUCTURE",
+    "ALL_FIVE_TRANSFER_HOLDOUT_NRMSE_LE_1E-8",
+    "CUMULATIVE_ENUMERATION_COUNT_1554_PER_TASK",
+    "PERSISTENT_M_fit_BYTES_ZERO",
+    "NO_DISCOVERED_STRUCTURE_IS_WRITTEN_TO_A_CAPABILITY_REGISTRY"
+  ],
+  "hard_nonclaims": [
+    "SYNTHETIC_DEPTH4_UNARY_CHAINS_DO_NOT_PROVE_GENERAL_PROGRAM_SEARCH",
+    "M_dev_FOR_THE_GENERIC_SEARCH_IMPLEMENTATION_IS_SEPARATE",
+    "M_cap_IS_NONZERO_BECAUSE_THE_GENERIC_SEARCH_PROGRAM_EXISTS",
+    "PASSING_DOES_NOT_REPAIR_ALL_CURRENT_REGISTRY_PROVENANCE_RETROACTIVELY"
+  ]
+}
