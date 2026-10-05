@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OPUS55_PUBLIC_PROTOCOL_REGRESSION_RECONCILIATION_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__DERIVED_PRECEDENCE_REPAIR__PRIOR_INDEPENDENT_PRIMARY_PDF_VERIFICATION_RESTORED__ZERO_CREDIT",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "subject": {
+    "path": "canonical/governance/HLE_OPUS55_PUBLIC_PROTOCOL_REGRESSION_RECONCILIATION_20261005_V1.json"
+  },
+  "load_bearing_precedence": {
+    "verified_primary_pdf_receipt": {
+      "path": "canonical/verification/HLE_OPUS55_ROUTE_TRUTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "2d4c75810e7de516019b4cd6553514c52fb9af09",
+      "conclusion": "INDEPENDENT_PUBLIC_RUNNER_PASS"
+    },
+    "verified_tool_adapter": {
+      "path": "canonical/governance/HLE_OPUS55_TOOL_ADAPTER_ACTIVATION_V1.json",
+      "git_blob_sha": "95b5b520a8eb9b288e6818bf591a7ab9de379fd5"
+    },
+    "launch_page_only_boundary": {
+      "path": "canonical/verification/HLE_OPUS55_PUBLIC_PROTOCOL_INFORMATION_BOUNDARY_20261005_V1.json",
+      "git_blob_sha": "d013ac8d4e47cd66b9a3bbe392e299095d7e2d50",
+      "disposition": "NON_LOAD_BEARING_WHERE_IT_CONFLICTS_WITH_STRONGER_ALREADY_VERIFIED_PRIMARY_SYSTEM_CARD_EVIDENCE"
+    }
+  },
+  "effective_remaining_hle_residuals": [
+    "MATERIAL_CAIS_HLE_FULL_2500_AUTO_GATE_ACCOUNT_ACCESS_WITHOUT_CONTAMINATION",
+    "ZERO_COST_CLAUDE_OPUS_4_6_COMPARABLE_GRADER_OR_SEPARATELY_PROVED_CONSERVATIVE_SCORER_RELATION",
+    "BRAIN_SCORE_CERTIFICATE_GE_67_7"
+  ],
+  "deleted_scheduler_work": [
+    "SEARCH_FOR_OPUS55_HLE_TOOL_PROTOCOL",
+    "SEARCH_FOR_OPUS55_HLE_GRADER_IDENTITY",
+    "SEARCH_FOR_OPUS55_HLE_CONTAMINATION_POLICY"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
