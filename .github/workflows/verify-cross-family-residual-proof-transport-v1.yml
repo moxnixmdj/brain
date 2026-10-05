@@ -1,0 +1,22 @@
+name: Verify cross-family residual proof transport V1
+
+on:
+  pull_request:
+    paths:
+      - canonical/governance/CROSS_FAMILY_RESIDUAL_PROOF_TRANSPORT_V1.json
+      - canonical/runtime/cross_family_residual_proof_transport_v1.py
+      - canonical/tests/test_cross_family_residual_proof_transport_v1.py
+      - .github/workflows/verify-cross-family-residual-proof-transport-v1.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run exact transport verifier and adversarial tests
+        run: python -m unittest -v canonical.tests.test_cross_family_residual_proof_transport_v1
+      - name: Emit exact derivation
+        run: python canonical/runtime/cross_family_residual_proof_transport_v1.py
