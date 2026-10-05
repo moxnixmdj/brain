@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__V5_SPLIT_FRONTIER_COUNTS_AND_PRECEDENCE_COHERENT__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+    "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+  },
+  "inputs": {
+    "v4": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V4.json",
+      "git_blob_sha": "f004248ddf87f94fdc8e85e6fa95a7dda8af28b9"
+    },
+    "exhaustiveness_quarantine": {
+      "path": "canonical/governance/ROOT1_ENVELOPE_V3_EXHAUSTIVENESS_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "18b878c19af54b76df1805753d8e062a2730a2a8"
+    },
+    "multilingual_long_context_boundary": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V1.json",
+      "git_blob_sha": "31a148ac13966ff6199b63c63ecd0a42fa506da9"
+    },
+    "creative_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    }
+  },
+  "checks": {
+    "family_mapping_group_count": 5,
+    "family_mapping_group_count_is_5": true,
+    "cross_cutting_condition_count": 2,
+    "cross_cutting_condition_count_is_2": true,
+    "creative_basis_repair_present": true,
+    "root1_positive_zero": true,
+    "no_38_of_38_finality": true,
+    "errors": []
+  },
+  "consequence": [
+    "V5_IS_COHERENT_SUCCESSOR_FRONTIER_FOR_META_ENVELOPE_SCHEDULING",
+    "PRESERVE_ROOT1_POSITIVE_ZERO",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
