@@ -1,0 +1,180 @@
+{
+  "schema": "PROJECT_BRAIN_SHARED_BEHAVIORAL_LEAF_REUSE_BINDING_RECONCILIATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TWO_EXACT_REUSE_BINDINGS_RESOLVED_FROM_EXISTING_INDEPENDENT_SCOPE_COMPLETE_RECEIPTS__ZERO_CREDIT",
+  "objective": "Resolve the live inconsistency between the shared-residual cut, which still labels two reuse edges unproved, and the verified six-family scope partition, which already treats those exact behavioral leaves as discharged. Prove only exact behavioral-leaf reuse from content-addressed existing scope-complete evidence; grant no new acceptance, family, capability, or ownership credit.",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authorities": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "acceptance_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "six_family_scope_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+      "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f"
+    },
+    "six_family_scope_partition_verification": {
+      "path": "canonical/verification/SIX_BENCHMARK_PROXY_SCOPE_PARTITION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "5a9dca45230e4dd108e131165347bb1c9ad54b7d"
+    },
+    "older_shared_residual_cut": {
+      "path": "canonical/governance/FIVE_FAMILY_SHARED_RESIDUAL_SCOPE_CLOSURE_CUT_20261005_V1.json",
+      "git_blob_sha": "61a8764d8e48b2b8abefcacb0d474226f69ea8c9"
+    }
+  },
+  "reuse_law": "A content-addressed proof of a canonical behavioral contract may be reused at every family occurrence of that exact same behavior_id when the host occurrence adds no stronger input, environment, authority, transformation, success, or failure semantics. Reuse discharges only that leaf; it never promotes the host family or substitutes for its public benchmark predicates.",
+  "bindings": [
+    {
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "prior_ambiguity": "FIVE_FAMILY_SHARED_RESIDUAL_SCOPE_CLOSURE_CUT_20261005_V1 labels exact contract scope and route binding not yet proved.",
+      "current_exact_chain": {
+        "scope_restoration_candidate": {
+          "path": "canonical/governance/P1_UNIVERSAL_SCOPE_RESTORATION_V9_CANDIDATE.json",
+          "git_blob_sha": "6ebaed1262bed76f003c2a337e3a80b3b099e9e0",
+          "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+        },
+        "universal_scope_reduction": {
+          "path": "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_SCOPE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+          "git_blob_sha": "f327bfdb5d52bb9551b52f67da14a4cd425533a3",
+          "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+          "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+          "remaining_failure_semantics_information_residual": 0
+        },
+        "whole_scope_restoration": {
+          "path": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+          "git_blob_sha": "2c6bb594d353e4c6a169821da5f84a91be212ca7",
+          "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+          "whole_p1_contract_restored": true,
+          "whole_scope_quarantined_contract_count": 0
+        },
+        "recovery_acceptance": {
+          "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+          "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483",
+          "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+          "scope_complete": true,
+          "objective_ceiling_or_floor": true
+        }
+      },
+      "exact_identity_basis": [
+        "P1_UNIVERSAL_SCOPE_RESTORATION_V9_CANDIDATE_NAMES_THE_EXACT_CANONICAL_BEHAVIOR_ID",
+        "THE_INDEPENDENT_SCOPE_REDUCTION_DISCHARGES_ALL_THREE_FROZEN_FAILURE_SEMANTICS_TRANSPORT_REQUIREMENTS_WITH_ZERO_REMAINING_INFORMATION_RESIDUAL",
+        "THE_INDEPENDENT_V9_RESTORATION_LIFTS_THE_PRIOR_P1_SCOPE_QUARANTINE_WITHOUT_USING_THE_QUARANTINED_EXECUTION",
+        "RECOVERY_V2_THEN_PROVES_THE_SCOPE_COMPLETE_RECOVERY_ACCEPTANCE CONDITIONS_AT_OBJECTIVE_CEILING_OR_FLOOR",
+        "THE_VERIFIED_SIX_FAMILY_PARTITION_MAPS_HOST_OCCURRENCES_TO_THIS_EXACT_REGISTRY_BEHAVIOR_ID"
+      ],
+      "reusable_in_exact_leaf_occurrences": [
+        "ADVANCED_AGENTIC_CODING",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "COMPUTER_AND_BROWSER_USE"
+      ],
+      "verdict": "PROVED_EXACT_BEHAVIORAL_LEAF_REUSE",
+      "scope_limit": "ONLY_TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_AS_FROZEN_IN_THE_CANONICAL_BEHAVIORAL_REGISTRY__NO_TRANSFER_TO_OTHER_CODING_SCIENCE_BROWSER_OR_WORKFLOW_BEHAVIORS"
+    },
+    {
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "prior_ambiguity": "FIVE_FAMILY_SHARED_RESIDUAL_SCOPE_CLOSURE_CUT_20261005_V1 labels exact contract scope and route binding not yet proved.",
+      "current_exact_chain": {
+        "scope_relation": {
+          "path": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json",
+          "git_blob_sha": "009ab8e14ee14b76d799a826de34d07586a69918",
+          "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+          "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
+        },
+        "scope_certificate": {
+          "path": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V1.json",
+          "git_blob_sha": "dd94bef997603ddd71224100d33fe3889a93d3c4",
+          "basis_kind": "UNIVERSAL_FORMAL_SCOPE_PROOF"
+        },
+        "independent_scope_verification": {
+          "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+          "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4",
+          "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+          "universal_scope_proved": true,
+          "uses_empirical_generalization": false
+        },
+        "acceptance_reduction": {
+          "path": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+          "git_blob_sha": "913d171b3c855000d322e183b142b3200eeaf0a9",
+          "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+          "candidate_target_state": "PROVED",
+          "scope_complete": true,
+          "objective_ceiling": true
+        }
+      },
+      "information_boundary_check": {
+        "canonical_contract_input": "available tool schemas/capabilities plus historical outcomes and active constraints",
+        "formal_relation_input": "finite observable tool set with visible tool identity/cost/availability/authorization and hidden capability truth",
+        "relation_exclusion": "NO_OPEN_WORLD_INTERNET_TOOL_IDENTITY_COMPLETENESS_CLAIM",
+        "compatibility": "PASS_FOR_THE_CANONICAL_LEAF_AS_REGISTERED__THE_LEAF_STARTS_FROM_AVAILABLE_TOOL_SCHEMAS_CAPABILITIES_AND_DOES_NOT_REQUIRE_INTERNET_WIDE_TOOL_IDENTITY_COMPLETENESS"
+      },
+      "exact_identity_basis": [
+        "THE_FORMAL_SCOPE_RELATION_EXPLICITLY_NAMES_THE_EXACT_CANONICAL_BEHAVIOR_ID",
+        "THE_SCOPE_CERTIFICATE_BINDS_THE_BEHAVIORAL_CONTRACT_REGISTRY_AND_EXACT_OPERATIVE TOOL_DISCOVERY ROUTE",
+        "THE_INDEPENDENT_RUNNER_PROVES UNIVERSAL SCOPE FOR THE FROZEN INFORMATION BOUNDARY WITHOUT FINITE-SAMPLE GENERALIZATION",
+        "THE_ACCEPTANCE_REDUCTION PROVES THE TARGET PREDICATE AT OBJECTIVE CEILING WITH UNIVERSAL FORMAL SCOPE COMPLETENESS",
+        "THE_VERIFIED_SIX_FAMILY_PARTITION MAPS HOST OCCURRENCES TO THIS EXACT REGISTRY BEHAVIOR ID"
+      ],
+      "reusable_in_exact_leaf_occurrences": [
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE"
+      ],
+      "verdict": "PROVED_EXACT_BEHAVIORAL_LEAF_REUSE_WITH_FROZEN_INFORMATION_BOUNDARY",
+      "scope_limit": "ONLY_TOOL_ROUTE_DISCOVERY_AND_SELECTION_001_UNDER_THE_CANONICAL_AVAILABLE_TOOL_SCHEMA_CAPABILITY_INPUT_BOUNDARY__NO_INTERNET_WIDE_TOOL_IDENTITY_DISCOVERY_CLAIM"
+    }
+  ],
+  "reconciliation": {
+    "older_candidate_states_superseded_for_these_two_reuse_edges": true,
+    "six_family_partition_discharge_for_these_two_leaves_supported": true,
+    "unique_surviving_scope_repair_leaf_count_after_reconciliation": 7,
+    "new_unique_proof_programs_required_for_these_two_leaves": 0,
+    "new_terminal_cases_required": 0,
+    "fresh_reality_required": false,
+    "root1_positive_gap_delta": 0,
+    "atomic_acceptance_credit_delta": 0,
+    "family_acceptance_credit_delta": 0
+  },
+  "scheduler_effect": {
+    "delete": [
+      "REPROVE_TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_SEPARATELY_FOR_EACH_AFFECTED_HOST_FAMILY",
+      "REPROVE_TOOL_ROUTE_DISCOVERY_AND_SELECTION_001_SEPARATELY_FOR_BUSINESS_WORKFLOW_AUTOMATION",
+      "REPROVE_TOOL_ROUTE_DISCOVERY_AND_SELECTION_001_SEPARATELY_FOR_COMPUTER_AND_BROWSER_USE",
+      "TREAT_THE_TWO_REUSE_EDGES_AS_UNRESOLVED_BINDING_AUDITS"
+    ],
+    "preserve": [
+      "ALL_SEVEN_SURVIVING_SCOPE_REPAIR_LEAVES",
+      "ALL_LOAD_BEARING_PUBLIC_BENCHMARK_PREDICATES",
+      "ALL_HOST_FAMILY_ACCEPTANCE_GATES",
+      "ALL_SCOPE_LIMITS_AND_INFORMATION_BOUNDARIES",
+      "CURRENT_14_OF_38_ACCEPTANCE_ACCOUNTING",
+      "TERMINAL_FALSE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_NEW_ACCEPTANCE_PREDICATE_IS_PROVED_BY_THIS_RECONCILIATION",
+    "NO_HOST_FAMILY_IS_PROMOTED",
+    "NO_NEW_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TRANSFER_BEYOND_THE_TWO_EXACT_BEHAVIORAL_LEAVES",
+    "NO_OPEN_WORLD_TOOL_IDENTITY_DISCOVERY_CLAIM",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_GOAL_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
