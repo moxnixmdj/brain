@@ -23,7 +23,7 @@
     },
     "hidden_evaluator_boundary": {
       "path": "canonical/governance/HIDDEN_EVALUATOR_DOMINANCE_BOUNDARY_V1.json",
-      "git_blob_sha": "678f728089a8df815153af6dd58a88894dd0671f"
+      "git_blob_sha": "094d50ef0c2a54e7bc1b9cfd7f96c1b970b8b0ca"
     },
     "top_support_route": {
       "path": "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json",
