@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_COMPUTER_BROWSER_OPENWEIGHT_DONOR_FRONTIER_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_OPENWEIGHT_COMPUTER_USE_PARETO_FRONTIER_BOUND__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Replace stale single-candidate browser acquisition scheduling with a fail-closed Pareto frontier over current public open-weight computer-use donors, while preserving the exact OSWorld 2.1 partial acceptance predicate and the observable-behavior-not-mechanism correction.",
+  "canonical_authorities": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "browser_mechanism_truth_repair": {
+      "path": "canonical/governance/BROWSER_VISUAL_TARGET_PROJECTION_MECHANISM_ENTAILMENT_CORRECTION_20261005_V1.json",
+      "git_blob_sha": "e2c2ff211b2762e4c7f07ba492281c70981de9aa"
+    },
+    "browser_mechanism_verification": {
+      "path": "canonical/verification/BROWSER_VISUAL_TARGET_PROJECTION_MECHANISM_ENTAILMENT_CORRECTION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": ""
+    },
+    "osworld_scope_reduction": {
+      "path": "canonical/governance/OSWORLD_V21_COMPUTER_BROWSER_SCOPE_BLOCKER_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "0c00d17e784924be063b18b9f82f94b130ea8e71"
+    },
+    "osworld_release_pin": {
+      "path": "canonical/governance/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_V1.json",
+      "git_blob_sha": "be3e5952330fd331768405a9dc2c384812415c7d"
+    }
+  },
+  "frozen_target": {
+    "family": "COMPUTER_AND_BROWSER_USE",
+    "useful_behavior": "Complete multi-step workflows across browsers and arbitrary applications with planning, visual grounding and judgment.",
+    "atomic_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "rule": "THE_EXACT_COMPOSITE_MECHANISM_IDENTITY_BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001_IS_NOT_LOGICALLY_REQUIRED; THE_OBSERVABLE_VISUALLY_GROUNDED_WORKFLOW_OUTCOME_REMAINS REQUIRED."
+  },
+  "public_openweight_frontier": [
+    {
+      "id": "NEX_N2_5_PRO",
+      "repository": "nex-agi/Nex-N2.5-Pro",
+      "license": "APACHE_2_0",
+      "weights_released": true,
+      "self_hostable": true,
+      "reported_scores": {
+        "OSWORLD_VERIFIED": 82.2,
+        "OSWORLD_2": 56.4,
+        "OSWORLD_G": 87.4
+      },
+      "runtime_note": "OFFICIAL_MODEL_CARD_RECOMMENDS_SINGLE_NODE_8X_H100_FOR_PRO",
+      "role": "HIGHEST_CAPABILITY_CURRENT_OPENWEIGHT_GENERAL_DONOR_FOUND_IN_THIS_SWEEP",
+      "acceptance_effect": "ZERO__BENCHMARK_AND_HARNESS_IDENTITY_DO_NOT_MATCH_OSWORLD_2_1_PARTIAL"
+    },
+    {
+      "id": "UI_MATE_27B",
+      "repository": "tencent/UI-Mate-27B",
+      "license": "APACHE_2_0",
+      "weights_released": true,
+      "self_hostable": true,
+      "parameters": "27B",
+      "reported_scores": {
+        "OSWORLD_VERIFIED": 77,
+        "WINDOWS_AGENT_ARENA": 66.2,
+        "OSWORKERBENCH_STRICT": 41,
+        "OSWORKERBENCH_PROGRESS": 76.86
+      },
+      "action_surface": "LIVE_SCREEN_PLUS_STRUCTURED_MOUSE_KEYBOARD_SCROLL_WAIT_USER_INTERACTION_AND_COMPLETION_ACTIONS",
+      "role": "LOWER_COMPUTE_FULL_GUI_OPENWEIGHT_DONOR_WITH_EXPLICIT_LONG_HORIZON_MULTI_APP_TRAINING",
+      "acceptance_effect": "ZERO__OSWORLD_VERIFIED_IS_NOT_OSWORLD_2_1_PARTIAL"
+    },
+    {
+      "id": "SCALECUA_QWEN3_5_9B",
+      "repository": "extreme1228/ScaleCUA-qwen3.5-osworld",
+      "license_metadata": "OTHER__CARD_STATES_RESEARCH_RELEASE_AND_INHERITS_QWEN3_5_9B_BASE_LICENSE",
+      "base_model_license": "APACHE_2_0",
+      "weights_released": true,
+      "self_hostable": true,
+      "parameters": "9B",
+      "dtype": "BF16",
+      "reported_scores": {
+        "OSWORLD": 68.7
+      },
+      "role": "SMALLER_SPECIALIZED_OSWORLD_DONOR__NOT_CURRENT_PRIMARY_GENERAL_COMPUTER_USE_DONOR",
+      "acceptance_effect": "ZERO__REPORTED_OSWORLD_RESULT_NOT PROVED COMPARABLE TO OSWORLD_2_1_PARTIAL"
+    }
+  ],
+  "frontier_theorem": {
+    "statement": "NO_SINGLE_CURRENT_PUBLIC_OPENWEIGHT_CANDIDATE_IDENTIFIED_HERE_DOMINATES_ON_CAPABILITY_COMPUTE_LICENSE_AND_EXACT_TARGET_COMPARABILITY_SIMULTANEOUSLY.",
+    "pareto_axes": [
+      "OBSERVED_COMPUTER_USE_CAPABILITY",
+      "SELF_HOSTED_COMPUTE_COST",
+      "LICENSE_AND_OWNERSHIP_CLARITY",
+      "EXACT_OSWORLD_2_1_PARTIAL_COMPARABILITY",
+      "ACTION_SCOPE_COMPLETENESS"
+    ],
+    "consequence": [
+      "USE_NEX_N2_5_PRO_AS_THE_CAPABILITY_CEILING_DONOR_CANDIDATE_NOT_AS_A_ZERO_COST EXECUTION CLAIM",
+      "USE_UI_MATE_27B_AS_THE_STRONGER_SMALLER_APACHE_2_0_FULL_GUI_DONOR_CANDIDATE",
+      "KEEP_SCALECUA_QWEN3_5_9B_ONLY_WHERE_9B_COMPUTE_OR_OSWORLD_SPECIALIZATION_IS_DECISION_RELEVANT",
+      "DO_NOT_NUMERICALLY_COMPARE_OSWORLD_VERIFIED_OR_OSWORLD_2_TO_OSWORLD_2_1_PARTIAL_FOR_ACCEPTANCE"
+    ]
+  },
+  "breakthrough": {
+    "stale_route_deleted": "QWEN3_VL_8B_67_7_AS_PRIMARY_BROWSER_DONOR",
+    "reason": "CURRENT_PUBLIC_SOURCES_NOW_EXPOSE_STRONGER_OPENWEIGHT_CANDIDATES_AT_68_7_77_0_AND_82_2_ON_THEIR_RESPECTIVE_REPORTED_OSWORLD_SURFACES.",
+    "stronger_strategy": "TREAT_OPEN_WEIGHTS_AS_CAPABILITY_DONORS_AND_COMPILE_ONLY_TARGET_ENTAILED_OBSERVABLE_BEHAVIOR_INTO_BRAIN_OWNED_CONFIGURATION; DO_NOT_REQUIRE_CLONING_ONE DONOR'S INTERNAL MECHANISM.",
+    "critical_path_gain": "STOPS SPENDING QUALIFICATION WORK ON A DOMINATED 8B PRIMARY AND SEPARATES DONOR_QUALITY FROM EXACT_TERMINAL_COMPARATOR_PROOF."
+  },
+  "zero_spend_boundary": {
+    "current_verified_zero_cost_carrier_for_nex_pro": false,
+    "current_verified_zero_cost_carrier_for_ui_mate_27b": false,
+    "current_verified_zero_cost_carrier_for_scalecua_9b": false,
+    "rule": "WEIGHT_AVAILABILITY_IS_NOT ZERO_COST_RUNTIME_AVAILABILITY. DO NOT SCHEDULE TERMINAL EXECUTION UNTIL A HARD_ZERO_SPEND_CARRIER_OR SMALLER_INTERNALIZED_DERIVATION IS VERIFIED."
+  },
+  "next_minimum_actions": [
+    "BIND_IMMUTABLE_CHECKPOINT_REVISIONS_AND_FILE_HASH_MANIFESTS_FOR_FRONTIER_DONORS_ONLY_IF THEY SURVIVE THE ZERO_SPEND_OR_DERIVATION_GATE",
+    "EXTRACT_TARGET_ENTAILED_OBSERVABLE_ACTION_AND_RECOVERY CONTRACTS FROM THE DONOR/HARNESS WITHOUT IMPORTING NON_TARGET MECHANISM IDENTITY",
+    "RACE A SMALLER BRAIN_OWNED_DERIVATION_OR_COMPOSITION AGAINST A VERIFIED ZERO_COST CARRIER; STOP LOSERS IMMEDIATELY",
+    "WHEN EXACT OSWORLD_2_1 ACCESS IS AVAILABLE, QUALIFY ONLY THE SURVIVING BRAIN_OWNED CONFIGURATION UNDER THE PINNED 108_TASK PARTIAL METRIC"
+  ],
+  "public_sources": [
+    "https://github.com/nex-agi/Nex-N2.5",
+    "https://huggingface.co/nex-agi/Nex-N2.5-Pro",
+    "https://github.com/Tencent/UI-Mate",
+    "https://huggingface.co/tencent/UI-Mate-27B",
+    "https://github.com/THUDM/SCALE-CUA",
+    "https://huggingface.co/extreme1228/ScaleCUA-qwen3.5-osworld"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_DONOR_CLOSES_OSWORLD_2_1_PARTIAL_GE_81_8",
+    "NO_CLAIM_OSWORLD_VERIFIED_OSWORLD_2_AND_OSWORLD_2_1_PARTIAL_ARE SCORE_COMPARABLE",
+    "NO_CLAIM_OPEN_WEIGHTS_EQUAL_BRAIN_OWNERSHIP_OR_INTERNALIZATION",
+    "NO_CLAIM_ZERO_COST_RUNTIME_EXISTS_FOR_ANY_CANDIDATE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
