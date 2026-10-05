@@ -1,0 +1,206 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_BUILDKITE_PROTOCOL_EQUIVALENCE_FALSIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "ACTIVE_CANDIDATE__CURRENT_BUILDKITE_RESOURCE_RECEIPT_DOES_NOT_PROVE_TB4_PROTOCOL_EQUIVALENCE__MINIMUM_ZERO_CASE_REPAIR_COMPILED__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "objective": "Falsify or prove the Buildkite carrier protocol-equivalence premise without reading Terminal-Bench instructions, solutions, tests, or executing terminal cases; reduce any failure to the smallest zero-case protocol probes.",
+  "frozen_public_subject": {
+    "repository": "harbor-framework/terminal-bench",
+    "commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "source_class": "task.toml only",
+    "instruction_files_read": 0,
+    "solution_files_read": 0,
+    "test_payload_files_read": 0,
+    "terminal_cases_executed": 0,
+    "exact_eight_task_manifest": {
+      "path": "canonical/governance/TB4_RECOVERY_TASK_IDENTITY_MANIFEST_20261006_V1.json",
+      "git_blob_sha": "2398e449340708a683ae66ce8ff4ac6482fd8fb3"
+    }
+  },
+  "exact_public_metadata_observations": {
+    "task_count": 8,
+    "separate_verifier_task_count": 8,
+    "artifact_declared_task_count": 8,
+    "verifier_no_network_task_count": 1,
+    "mcp_sidecar_task_count": 1,
+    "service_scoped_artifact_task_count": 1,
+    "verifier_collect_hook_task_count": 1,
+    "maximum_agent_timeout_sec": 28800,
+    "maximum_verifier_timeout_sec": 5400,
+    "maximum_environment_build_timeout_sec": 1800,
+    "observed_schema_versions": [
+      "1.0",
+      "1.1",
+      "2.0"
+    ],
+    "task_blob_bindings": [
+      {
+        "task": "terminal-bench/distributed-dedup",
+        "git_blob_sha": "1f8c3227a481265942d8620e34afc208f924fdf2",
+        "protocol": [
+          "SEPARATE_VERIFIER",
+          "ARTIFACT_HANDOFF"
+        ]
+      },
+      {
+        "task": "terminal-bench/formal-crypto",
+        "git_blob_sha": "f64854fc9eb8eac67caf69156062eed654e98b12",
+        "protocol": [
+          "SEPARATE_VERIFIER",
+          "ARTIFACT_HANDOFF"
+        ]
+      },
+      {
+        "task": "terminal-bench/lake-temp-glm",
+        "git_blob_sha": "bf8261cae0de06816a9c38780c7d09fac5a1a1a2",
+        "protocol": [
+          "SEPARATE_VERIFIER",
+          "ARTIFACT_HANDOFF",
+          "VERIFIER_NO_NETWORK_BASELINE"
+        ]
+      },
+      {
+        "task": "terminal-bench/medical-claims-processing",
+        "git_blob_sha": "b69d79b477e74ffb360810f8d8ee43781bcaa2b3",
+        "protocol": [
+          "SEPARATE_VERIFIER",
+          "SERVICE_SCOPED_ARTIFACT",
+          "MCP_SSE_SIDECAR"
+        ]
+      },
+      {
+        "task": "terminal-bench/shadow-relay",
+        "git_blob_sha": "cebfb8e95d1180814abae4cfe9b089b756b31dc7",
+        "protocol": [
+          "SEPARATE_VERIFIER",
+          "ARTIFACT_HANDOFF",
+          "VERIFIER_COLLECT_HOOK"
+        ]
+      },
+      {
+        "task": "terminal-bench/takens-embedding-lean",
+        "git_blob_sha": "948b469df23344b05d54cfc7b3a26568e175a6e0",
+        "protocol": [
+          "SEPARATE_VERIFIER",
+          "ARTIFACT_HANDOFF"
+        ]
+      },
+      {
+        "task": "terminal-bench/uefi-bootkit",
+        "git_blob_sha": "57aa7fca4eccd86a0b3c093a8410a668aed2f7de",
+        "protocol": [
+          "SEPARATE_VERIFIER",
+          "ARTIFACT_HANDOFF"
+        ]
+      },
+      {
+        "task": "terminal-bench/wdm-design",
+        "git_blob_sha": "97694f6ec692307e9540133ee183d54deb0bfe24",
+        "protocol": [
+          "SEPARATE_VERIFIER",
+          "ARTIFACT_HANDOFF"
+        ]
+      }
+    ]
+  },
+  "public_semantics_sources": [
+    {
+      "url": "https://www.harborframework.com/docs/tasks",
+      "fact": "Harbor separate verifiers copy configured artifacts at identical absolute paths; network baselines include no-network; MCP servers and compose-capable sidecar artifacts/collect hooks are protocol features; provider support can differ."
+    },
+    {
+      "url": "https://www.harborframework.com/docs/run-jobs/results-and-artifacts",
+      "fact": "Sidecar artifact collection and collect-hook ordering are explicit Harbor semantics and require a compose-capable provider."
+    },
+    {
+      "url": "https://buildkite.com/docs/agent/buildkite-hosted/linux",
+      "fact": "Buildkite hosted Linux provides Docker and Docker Compose, but generic presence does not establish Harbor artifact, isolation, network-policy, sidecar, timeout, or resource-limit semantics."
+    },
+    {
+      "url": "https://buildkite.com/docs/pipelines/configure/build-timeouts",
+      "fact": "Buildkite command timeouts are provider/organization/pipeline constrained; exact account timeout sufficiency must be bound rather than assumed."
+    }
+  ],
+  "current_buildkite_receipt": {
+    "path": "canonical/verification/BUILDKITE_ZERO_CASE_RUNTIME_RECEIPT_20261006_V1.json",
+    "git_blob_sha": "5a10884bc32d3c003a26306ec67bbc902b7338bb",
+    "verified": [
+      "HOST_8_VCPU",
+      "HOST_MEMORY_GE_16GB",
+      "HOST_FREE_DISK_GE_50GB",
+      "DOCKER_CLI_AND_SERVER",
+      "DOCKER_COMPOSE_CLI",
+      "ORDINARY_CONTAINER_RUN",
+      "EIGHT_CPU_CONTAINER_LIMIT_ACCEPTANCE",
+      "PRIVATE_REPOSITORY_CLONE"
+    ],
+    "not_verified": [
+      "EXACT_HARBOR_RUNTIME_AND_FROZEN_DATASET_BINDING",
+      "SEPARATE_VERIFIER_ISOLATION_AND_ARTIFACT_REHYDRATION",
+      "SIDECAR_SERVICE_ARTIFACT_AND_MCP_SSE_COMPOSE_SEMANTICS",
+      "VERIFIER_NETWORK_DENY_BASELINE",
+      "VERIFIER_COLLECT_HOOK_ORDERING",
+      "CONTAINER_MEMORY_AND_STORAGE_LIMIT_SEMANTICS",
+      "FULL_TRIAL_TIMEOUT_ENVELOPE_COMPATIBILITY"
+    ],
+    "conclusion": "RESOURCE_PREFLIGHT_PASS_IS_NOT_PROTOCOL_EQUIVALENCE"
+  },
+  "minimum_zero_case_protocol_probe": [
+    {
+      "id": "P1_EXACT_HARBOR_RUNTIME_BINDING",
+      "decisive_test": "Run a synthetic Harbor task through the exact pinned Harbor runtime/environment backend and bind runtime version/digest plus frozen dataset commit without loading any TB4 task content."
+    },
+    {
+      "id": "P2_SEPARATE_VERIFIER_ARTIFACT_REHYDRATION",
+      "decisive_test": "Synthetic agent writes a canary artifact; separate verifier must receive it at the same absolute path and agent runtime state must not leak."
+    },
+    {
+      "id": "P3_COMPOSE_SIDECAR_MCP_AND_SERVICE_ARTIFACT",
+      "decisive_test": "Synthetic compose task must reach an SSE sidecar by service DNS and collect a service-scoped canary artifact before separate verification."
+    },
+    {
+      "id": "P4_VERIFIER_NO_NETWORK_BASELINE",
+      "decisive_test": "Synthetic separate verifier with no-network baseline must fail public egress while local verifier execution succeeds."
+    },
+    {
+      "id": "P5_COLLECT_HOOK_ORDERING",
+      "decisive_test": "Synthetic collect hook must snapshot a canary before artifact transfer and the verifier must observe the collected value."
+    },
+    {
+      "id": "P6_CONTAINER_RESOURCE_LIMITS",
+      "decisive_test": "Synthetic containers must observe/enforce declared CPU and memory limits; storage semantics must match the selected Harbor Docker backend or be proven non-load-bearing for the exact eight."
+    },
+    {
+      "id": "P7_TIMEOUT_ENVELOPE",
+      "decisive_test": "Bind account/pipeline/organization command-step limits to an envelope no stricter than the Harbor trial semantics required by the exact eight; documentary or API quota receipt is sufficient, no long-running trial required."
+    }
+  ],
+  "falsification": {
+    "proposal": "CURRENT_BUILDKITE_ZERO_CASE_RUNTIME_RECEIPT_IS_SUFFICIENT_TO_BIND_PROTOCOL_EQUIVALENCE_FOR_THE_EXACT_EIGHT_TB4_RECOVERY_TASKS",
+    "verdict": "FALSIFIED_BY_UNMEASURED_LOAD_BEARING_PROTOCOL_DIMENSIONS",
+    "counterexample_class": "EXACT_FROZEN_TASK_METADATA_REQUIRES_PROTOCOL_FEATURES_NOT_OBSERVED_BY_RESOURCE_PREFLIGHT",
+    "scheduler_effect": "DO_NOT_PROMOTE_BUILDKITE_PROTOCOL_EQUIVALENCE_FROM_RESOURCE_RECEIPT__RUN_ONLY_THE_SEVEN_ZERO_CASE_PROBES_OR_ACCEPT_A_STRONGER_CONTENT_ADDRESSED_RECEIPT"
+  },
+  "separate_open_obligations": [
+    "ANTHROPIC_RELEASE_TB4_4_0_TARGET_HARNESS_RELATION",
+    "ACCOUNT_SPECIFIC_ZERO_INCREMENTAL_SPEND_HARD_STOP_OR_EQUIVALENT_RECEIPT",
+    "THRESHOLD_REACHING_SUCCESS_RECEIPTS_OR_SOUND_TASK_CONDITIONED_DOMINANCE_CERTIFICATE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_BUILDKITE_CANNOT_RUN_TB4",
+    "NO_CLAIM_THE_SEVEN_PROBES_PROVE_ANTHROPIC_TARGET_HARNESS_EQUIVALENCE",
+    "NO_TERMINAL_TASK_EXECUTED",
+    "NO_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
