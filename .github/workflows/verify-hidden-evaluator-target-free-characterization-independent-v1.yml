@@ -26,4 +26,4 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run independent exhaustive characterization verifier
-        run: python canonical/tests/test_hidden_evaluator_target_free_characterization_independent_v1.py
+        run: python -m canonical.tests.test_hidden_evaluator_target_free_characterization_independent_v1
