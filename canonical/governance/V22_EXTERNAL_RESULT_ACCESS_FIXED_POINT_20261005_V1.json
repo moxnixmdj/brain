@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_V22_EXTERNAL_RESULT_ACCESS_FIXED_POINT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PUBLIC_ACCESS_RECOMPUTATION_PASS__EXTERNAL_RESIDUALS_REDUCED_TO_OWNER_EVALUATOR_OR_PUBLIC_HARNESS_ZERO_COST_COMPUTE__ZERO_CREDIT",
+  "objective": "Delete repeated low-information searches for public submission paths and route each score residual to the smallest actual access prerequisite.",
+  "public_facts": [
+    {
+      "surface": "AA-Briefcase v1.1",
+      "classification": "OWNER_EVALUATOR_GATE",
+      "facts": [
+        "OFFICIAL_EVALUATION_DATASET_PRIVATE",
+        "PUBLIC_REPRESENTATIVE_SCENARIO_DEMONSTRATIVE_ONLY_AND_DOES_NOT_COUNT_TOWARD_OFFICIAL_RESULTS",
+        "OFFICIAL_SCORE_REQUIRES_PRIVATE_EVALUATION_SURFACE"
+      ],
+      "source": "https://artificialanalysis.ai/evaluations/aa-briefcase"
+    },
+    {
+      "surface": "Vals private benchmarks including Finance Agent and MysteryMechanism",
+      "classification": "OWNER_EVALUATOR_GATE",
+      "facts": [
+        "VALS_REPORTS_PRIVATE_HELD_OUT_TEST_SETS",
+        "VALS_RUNS_ITS_OWN_EVALUATIONS",
+        "PUBLIC_SITE_DIRECTS_BUILDERS_SEEKING_EVALUATION_TO_CONTACT_VALS"
+      ],
+      "source": "https://www.vals.ai/about"
+    },
+    {
+      "surface": "Terminal-Bench 4.0",
+      "classification": "PUBLIC_HARNESS_PLUS_ZERO_COST_COMPUTE_GATE",
+      "facts": [
+        "BENCHMARK_EXECUTION_SURFACE_PUBLIC",
+        "COMMUNITY_LEADERBOARD_SUBMISSIONS_CURRENTLY_CLOSED",
+        "ONLY_MAINTAINER_RUN_SUBMISSIONS_ADDED_TO_LEADERBOARD_AT_PRESENT"
+      ],
+      "source": "https://github.com/harbor-framework/terminal-bench/blob/main/leaderboard/SUBMIT.md"
+    },
+    {
+      "surface": "Terminal-Bench-Science",
+      "classification": "PUBLIC_HARNESS_PLUS_ZERO_COST_COMPUTE_AND_TARGET_IDENTITY_GATE",
+      "facts": [
+        "BENCHMARK_PUBLICLY_RUNNABLE_THROUGH_HARBOR",
+        "PUBLISHED_GUIDANCE_RECOMMENDS_MODAL_OR_DAYTONA",
+        "CURRENT_FROZEN_OPUS_TARGET_REMAINS_ANTHROPIC_RELEASE_CONFIGURATION_NOT_AUTOMATICALLY_IDENTICAL_TO_PUBLIC_LEADERBOARD_CONFIGURATIONS"
+      ],
+      "source": "https://github.com/harbor-framework/terminal-bench-science"
+    }
+  ],
+  "scheduler_delta": {
+    "delete": [
+      "REPEAT_GENERIC_WEB_SEARCH_FOR_PUBLIC_AA_BRIEFCASE_OFFICIAL_TEST_SET",
+      "REPEAT_GENERIC_WEB_SEARCH_FOR_PUBLIC_VALS_PRIVATE_BENCHMARK_TEST_SET",
+      "REPEAT_TERMINAL_BENCH_4_COMMUNITY_LEADERBOARD_SUBMISSION_SEARCH_WITHOUT_POLICY_CHANGE"
+    ],
+    "owner_evaluator_lane": [
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_GE_49_55"
+    ],
+    "public_harness_compute_lane": [
+      "CODING_TB4_GE_66_4",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "wake_conditions": [
+      "EVALUATOR_POLICY_OR_SUBMISSION_INTERFACE_CHANGES",
+      "OWNER_EVALUATION_OFFER_OR_RESULT_RECEIPT_ARRIVES",
+      "AUTHENTICATED_ZERO_INCREMENTAL_COMPUTE_CARRIER_BECOMES_AVAILABLE",
+      "STRONGER_SCOPE_COMPLETE_PROOF_REMOVES_SCORE_RESIDUAL"
+    ]
+  },
+  "hard_rules": [
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT_FROM_ACCESS_CLASSIFICATION",
+    "NO_PUBLIC_DEMONSTRATION_SCENARIO_SUBSTITUTION_FOR_PRIVATE_OFFICIAL_RESULT",
+    "NO_CROSS_HARNESS_OR_CROSS_CONFIGURATION_SCORE_MERGE",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
