@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__PRIOR_SEVEN_EXACTLY_PARTITIONED__TWO_SCOPE_CLOSED_PERFORMANCE_OPEN__FIVE_SCOPE_REPAIR_OPEN__ONE_SEPARATE_HYPOTHESIS_CANDIDATE_QUARANTINED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2.json",
+    "git_blob_sha": "629fb370b6da7296685e9e79c2e2a76c25fd9106"
+  },
+  "inputs": {
+    "prior_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "fdc70d49bfe3f4691fab728f2016242632018ce4"
+    },
+    "synthesis_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "structured_method_scope_audit": {
+      "path": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json",
+      "git_blob_sha": "1db04e3c2c523dfe5f2ebe719b7c63dc9ccd808e"
+    },
+    "hypothesis_candidate": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "f0c6e15e6af698a80895eedf2c39bb874b4697b8"
+    }
+  },
+  "recomputed": {
+    "prior_unique_surviving_leaf_count": 7,
+    "prior_surviving_occurrences": 12,
+    "exact_partition_of_prior_seven": true,
+    "synthesis_scope_verified_independent_exact_union_proven_stronger": true,
+    "structured_method_scope_closed_zero_unresolved_dimensions_admissible_substitution": true,
+    "scope_closed_performance_open_unique": 2,
+    "scope_closed_occurrences_removed_from_scope_repair": 4,
+    "active_registry_scope_repair_open_unique": 5,
+    "active_registry_scope_repair_open_occurrences": 8,
+    "candidate_hypothesis_is_not_claimed_active": true,
+    "errors": []
+  },
+  "verified_consequence": [
+    "DELETE_FURTHER_SCOPE_COMPLETENESS_WORK_FOR_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "DELETE_FURTHER_SCOPE_COMPLETENESS_WORK_FOR_STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "PRESERVE_THEIR_PERFORMANCE_ACCEPTANCE_WORK",
+    "SCHEDULE_ONLY_FIVE_ACTIVE_REGISTRY_LEAVES_AS_SCOPE_REPAIR_OPEN",
+    "KEEP_SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_IN_SEPARATE_ADMISSION_QUARANTINE"
+  ],
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_A_NEW_INDEPENDENT_PUBLIC_RUNNER_RECEIPT",
+    "NO_SYNTHESIS_OR_STRUCTURED_METHOD_PERFORMANCE_CLOSURE",
+    "NO_NEW_ACTIVE_BEHAVIORAL_CONTRACT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
