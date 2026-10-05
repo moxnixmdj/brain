@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_COMPUTER_BROWSER_SCOPE_BLOCKER_REDUCTION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__COMPUTER_BROWSER_SCOPE_BLOCKER_IS_EXACT_108_TASK_UNION_SEMANTIC_AUDIT__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OSWORLD_V21_COMPUTER_BROWSER_SCOPE_BLOCKER_REDUCTION_20261005_V1.json",
+    "git_blob_sha": "0c00d17e784924be063b18b9f82f94b130ea8e71"
+  },
+  "checks": {
+    "exact_target_wording": true,
+    "exact_active_osworld_release": true,
+    "exact_task_count": 108,
+    "exact_task_revision": "0a1aadad95aa79b00b3783e717d865089ab06e26",
+    "official_task_semantics_separately_distributed": true,
+    "public_repo_intentionally_excludes_official_task_classes": true,
+    "unknown_domain_transfer_receipt_not_scope_equivalent_to_gui_application_transfer": true,
+    "no_terminal_execution_required": true,
+    "errors": []
+  },
+  "verified_consequence": [
+    "DELETE_VAGUE_COMPUTER_BROWSER_SCOPE_RESEARCH",
+    "SCHEDULE_ONE_EXACT_OSWORLD_V21_108_TASK_UNION_SEMANTIC_COVERAGE_MATRIX",
+    "IF_THE_MATRIX_EXHIBITS_A_GAP_CREATE_ONLY_THE_MINIMUM_OBSERVABLE_RESIDUAL_TRANSFER_CLASS",
+    "KEEP_OSWORLD_PERFORMANCE_AND_COMPARATOR_SETUP_SEPARATE"
+  ],
+  "verification_class": "CONNECTED_CANONICAL_AND_UPSTREAM_SOURCE_RECOMPUTATION__SCHEDULING_ONLY",
+  "hard_nonclaims": [
+    "NO_SCOPE_CLOSURE",
+    "NO_UNIVERSAL_APPLICATION_TRANSFER",
+    "NO_OSWORLD_SCORE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
