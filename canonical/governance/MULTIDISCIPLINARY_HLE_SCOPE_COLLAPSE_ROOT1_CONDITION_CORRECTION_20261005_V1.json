@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_MULTIDISCIPLINARY_HLE_SCOPE_COLLAPSE_ROOT1_CONDITION_CORRECTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH_REPAIR__PRIMITIVE_FAMILY_SCOPE_COLLAPSE_PRESERVED__ROOT1_DOMAIN_AND_CROSS_CUTTING_CONDITION_PARITY_PRESERVED__ZERO_CREDIT",
+  "objective": "Narrow the HLE target-scope collapse to exactly the primitive MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING family sentence and prevent accidental deletion of separately terminal-required first-party domain/language condition parity.",
+  "corrects": {
+    "activation": "canonical/governance/MULTIDISCIPLINARY_REASONING_HLE_TARGET_SCOPE_COLLAPSE_ACTIVATION_20261005_V1.json",
+    "activation_commit": "bcc2a254c7f9f451360de545ea59d60f401504ae",
+    "exact_overbroad_phrase": "SET_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING_SCOPE_REPAIR_RESIDUAL_COUNT_TO_ZERO",
+    "corrected_reading": "SET_PRIMITIVE_MULTIDISCIPLINARY_FAMILY_SENTENCE_SCOPE_REPAIR_RESIDUAL_TO_ZERO__PRESERVE_SEPARATE_ROOT1_TERMINAL_CONDITION_PARITY"
+  },
+  "authorities": {
+    "hle_scope_collapse": {
+      "path": "canonical/governance/MULTIDISCIPLINARY_REASONING_HLE_TARGET_SCOPE_COLLAPSE_20261005_V1.json",
+      "git_blob_sha": "d101d656cbadd588a08e7e98aee3fd9d27a5a074"
+    },
+    "root1_v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "first_party_surface_union": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "git_blob_sha": "58b7a3a25d4f19eb34182f1dfbd36634f1c75142"
+    },
+    "target_mechanism_guard": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1.json"
+    }
+  },
+  "preserved_primitive_family_result": {
+    "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+    "primitive_useful_behavior": "Solve difficult expert-level questions across domains with search/code/tools.",
+    "primitive_scope_residual": 0,
+    "remaining_family_numeric_predicate": "HLE_TOOLS_GE_67_7",
+    "nonentailed_mechanism_edges_removed_from_family_scope_scheduling": [
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+    ]
+  },
+  "separately_preserved_terminal_condition_frontier": {
+    "family_mapping_conditions": [
+      "CYBERSECURITY",
+      "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "HEALTHCARE",
+      "MATHEMATICAL_REASONING_ARXIVMATH"
+    ],
+    "cross_cutting_conditions": [
+      "MULTILINGUAL_PERFORMANCE",
+      "LONG_CONTEXT"
+    ],
+    "rule": "These are terminal surface/condition parity obligations over family unions. Primitive family scope collapse does not discharge them and does not require them to be paid specifically through the multidisciplinary family."
+  },
+  "scheduler_repair": {
+    "delete": [
+      "INTERPRET_HLE_PRIMITIVE_FAMILY_SCOPE_COLLAPSE_AS_GLOBAL_DOMAIN_CONDITION_PARITY",
+      "DUPLICATE_THE_SAME_DOMAIN_OR_LANGUAGE_CONDITION_INSIDE_A_STANDALONE_MULTIDISCIPLINARY_FAMILY_SCOPE_GROUP_WHEN_A_SHARED_TERMINAL_CONDITION_MATRIX_CAN_CARRY_IT"
+    ],
+    "preserve": [
+      "HLE_TOOLS_GE_67_7",
+      "ALL_ROOT1_V5_FIVE_FAMILY_MAPPING_CHECKS",
+      "MULTILINGUAL_CONDITION_COVERAGE_PROOF",
+      "LONG_CONTEXT_CONDITION_COVERAGE_PROOF",
+      "CREATIVE_DIAGRAM_BASIS_REPAIR"
+    ],
+    "next_structural_move": "MERGE_MULTIDISCIPLINARY_GROUP_D_DOMAIN_AND_LANGUAGE_CONDITION_CELLS_INTO_ONE_SHARED_TERMINAL_CONDITION_MATRIX__DELETE_ONLY_THE_PRIMITIVE_FAMILY_SCOPE_DUPLICATION"
+  },
+  "hard_nonclaims": [
+    "NO_DOMAIN_CONDITION_PARITY_CREDIT",
+    "NO_MULTILINGUAL_PARITY_CREDIT",
+    "NO_HLE_SCORE_CREDIT",
+    "NO_FAMILY_PROMOTION",
+    "NO_TARGET_WEAKENING",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
