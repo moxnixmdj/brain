@@ -30,10 +30,32 @@
   },
   "indistinguishability_theorem": {
     "shared_public_payload": {
-      "claim": {"claim_id": "C", "metric": "M", "relation": "at_least", "threshold": 50, "unit": "index_point"},
+      "claim": {
+        "claim_id": "C",
+        "metric": "M",
+        "relation": "at_least",
+        "threshold": 50,
+        "unit": "index_point"
+      },
       "evidence": [
-        {"evidence_id": "E_HIGH", "metric": "M", "value": 60, "unit": "index_point", "provenance": ["SRC_A"]},
-        {"evidence_id": "E_LOW", "metric": "M", "value": 40, "unit": "index_point", "provenance": ["SRC_B"]}
+        {
+          "evidence_id": "E_HIGH",
+          "metric": "M",
+          "value": 60,
+          "unit": "index_point",
+          "provenance": [
+            "SRC_A"
+          ]
+        },
+        {
+          "evidence_id": "E_LOW",
+          "metric": "M",
+          "value": 40,
+          "unit": "index_point",
+          "provenance": [
+            "SRC_B"
+          ]
+        }
       ]
     },
     "world_a_hidden_truth": "E_HIGH_IS_ADMISSIBLE_AND_E_LOW_IS_INADMISSIBLE",
@@ -51,6 +73,7 @@
   },
   "implemented_gate": {
     "path": "canonical/runtime/synthesis_r6_source_authority_information_bound_v1.py",
+    "git_blob_sha": "35cc18e2d9bf0c88e2cd5bd8c3ccd58a4bd23407",
     "contract": [
       "AUTHORITY_FACT_BINDS_EXACT_EVIDENCE_ID",
       "AUTHORITY_FACT_BINDS_EXACT_PROVENANCE_SEQUENCE",
@@ -100,5 +123,12 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "verification_candidate": {
+    "tests_path": "canonical/tests/test_synthesis_r6_source_authority_information_bound_v1.py",
+    "tests_git_blob_sha": "ea53d85be30731ac96bcb3050ad9fe95b4574578",
+    "workflow_path": ".github/workflows/verify-synthesis-r6-source-authority-information-bound-v1.yml",
+    "workflow_git_blob_sha": "ee7145732bf237969b7de97fe25aaa7efc49701b",
+    "required_result": "ALL_TESTS_PASS_ON_INDEPENDENT_GITHUB_RUNNER"
+  }
 }
