@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_POST_CLEAN_LIVEBENCH_18_REUSE_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_TOOL_RECOMPUTATION_PASS__EXACT_18_SET_IDENTITY__PRIOR_VERIFIED_ROUTE_MAP_REUSED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "objective": "Re-enable the already verified 18-predicate output-only Root2 scheduling policy after clean LiveBench closure by proving exact current-set identity and current root/acceptance bindings, while excluding the obsolete negative LiveBench rationale.",
+  "evidence": {
+    "current_projection": {
+      "path": "canonical/governance/ROOT2_POST_CLEAN_LIVEBENCH_18_PROJECTION_V1.json",
+      "git_blob_sha": "d4af381cd2b7ed325288c69f438ae99b0caa6fb1"
+    },
+    "current_root": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "1a94fa8f0961edc420a56f6e7c2ca8764be67373"
+    },
+    "current_acceptance": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "25d3408c7ee746f0f853d718ffa1af1ecff14596"
+    },
+    "prior_18_policy": {
+      "path": "canonical/governance/ROOT2_POST_LIVEBENCH_18_PREDICATE_REBIND_V1.json",
+      "git_blob_sha": "8ccf5c09357e0d644a90af67dbcd18c3b5ce5925"
+    },
+    "prior_verification": {
+      "path": "canonical/verification/POST_LIVEBENCH_ROOT2_REBIND_CONNECTOR_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "569fad34651f724d0746a09a3413a8ca7258d928"
+    }
+  },
+  "recomputation": {
+    "projection_binds_exact_current_root": true,
+    "projection_binds_exact_current_acceptance": true,
+    "exact_root2_touching_set_equal_to_prior_verified_18": true,
+    "root2_touching_count": 18,
+    "route_map_complete_for_all_18": true,
+    "missing_route_count": 0,
+    "extra_route_count": 0,
+    "prior_proof_precedence_preserved": true,
+    "prior_cross_predicate_reuse_preserved": true,
+    "current_partition": {
+      "proved_atomic": 13,
+      "unresolved_atomic": 25,
+      "root1_only": 0,
+      "root2_only": 15,
+      "root3_only": 7,
+      "root2_and_root3": 3,
+      "root2_touching": 18
+    },
+    "livebench_current_state": "CLOSED__PROVED__CLEAN_CASE_INDEPENDENT_FORMAL_POINTWISE_DOMINANCE",
+    "old_livebench_negative_resolution_reused": false,
+    "reused_scope": "ONLY_THE_18_NON_LIVEBENCH_PREDICATE_ROUTE_CLASSIFICATIONS_PROOF_PRECEDENCE_AND_CROSS_PREDICATE_REUSE_RULES"
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "hard_rules": [
+    "DO_NOT_REUSE_OLD_LIVEBENCH_FORCED_FAIL_OR_ROOT1_REASONING",
+    "DO_NOT_REINTRODUCE_LIVEBENCH_IF_GE_65_7_INTO_ROOT2",
+    "FAIL_CLOSED_IF_CURRENT_PROJECTION_ROOT_OR_ACCEPTANCE_BLOB_CHANGES",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA",
+    "NO_EXECUTION_PROMOTION_FRESH_REALITY_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
