@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_PUBLIC_CAPABILITY_WEIGHT_BINDING_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_PRIMARY_SOURCE_RECOMPUTATION_PASS__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/FINANCE_INDEX_PUBLIC_CAPABILITY_WEIGHT_BINDING_20261005_V1.json",
+    "git_blob_sha": "85aff2dfce806ffbafe857aadb31ae01445a1be2"
+  },
+  "source_recomputation": {
+    "sources": [
+      "https://artificialanalysis.ai/methodology/capability-indices",
+      "https://artificialanalysis.ai/models/capabilities/finance-and-accounting",
+      "https://artificialanalysis.ai/articles/artificial-analysis-capability-indices-v1-1"
+    ],
+    "checks": {
+      "target_opus55_score_61": true,
+      "business_knowledge_weight_30": true,
+      "agentic_knowledge_work_weight_30": true,
+      "reasoning_weight_20": true,
+      "agentic_tool_use_weight_10": true,
+      "long_context_weight_5": true,
+      "non_hallucination_weight_5": true,
+      "weights_sum_100": true,
+      "evaluation_membership_matches": true,
+      "public_raw_eval_subweights_not_assumed": true
+    },
+    "errors": []
+  },
+  "consequence": "DELETE_ONLY_TOP_LEVEL_FINANCE_INDEX_WEIGHT_AND_MEMBERSHIP_DISCOVERY__PRESERVE_SUBSCORE_LOWER_BOUND_AND_WITHIN_GROUP_AGGREGATION_PROOF",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
