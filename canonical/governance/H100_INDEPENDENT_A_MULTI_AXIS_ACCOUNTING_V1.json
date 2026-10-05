@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_H100_INDEPENDENT_A_MULTI_AXIS_ACCOUNTING_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_METRIC__PRIMARY_LEARNED_BYTE_OBJECTIVE_PRESERVED__MANDATORY_SIDE_CHANNELS_ADDED",
+  "primary_metric": {
+    "id": "PERSISTENT_LEARNED_BYTES",
+    "target": 0,
+    "fallback_ceiling": 100000000,
+    "authority": "USER_DEFINED_H100_OBJECTIVE"
+  },
+  "mandatory_side_metrics": [
+    {
+      "id": "RESIDENT_DETERMINISTIC_CAPABILITY_DESCRIPTION_BITS",
+      "reason": "PREVENT_ZERO_LEARNED_BYTE_SUCCESS_FROM_HIDING_ARBITRARILY_LARGE_CAPABILITY_CODE"
+    },
+    {
+      "id": "INCREMENTAL_SEARCH_REFERENCE_BITS",
+      "reason": "MEASURE_CAPABILITY_RATCHET_SEARCH_ADVANTAGE_SEPARATELY_FROM_LIBRARY_STORAGE"
+    },
+    {
+      "id": "RUNTIME_OR_VERIFIER_COST",
+      "reason": "DISTINGUISH_STORAGE_SAVINGS_FROM_COMPUTE_EXPLOSION"
+    },
+    {
+      "id": "FRESH_GENERALIZATION",
+      "reason": "RULE_OUT_FINITE_LOOKUP_MEMORIZATION"
+    },
+    {
+      "id": "PROVENANCE",
+      "reason": "DISTINGUISH_HAND_DESIGNED_OR_SEARCH_SYNTHESIZED_CAPABILITY_CODE_FROM_EXTERNAL_KNOWLEDGE_AND_TRANSFORMED_LEARNED_STATE"
+    }
+  ],
+  "existing_measured_non_synthetic_subset": {
+    "source": "canonical/verification/H100_NON_SYNTHETIC_DESCRIPTION_LENGTH_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+    "capability_count": 4,
+    "subjects": [
+      {
+        "id": "OEWN_REAL_LEXICAL",
+        "raw_program_bits": 224085,
+        "compiled_reference_bits": 6,
+        "median_verifier_seconds": 0.08317402900047455
+      },
+      {
+        "id": "LEXICAL_SOURCE_FALLBACK",
+        "raw_program_bits": 103691,
+        "compiled_reference_bits": 6,
+        "median_verifier_seconds": 0.08135506600046938
+      },
+      {
+        "id": "COMPOSITIONAL_LANGUAGE",
+        "raw_program_bits": 334799,
+        "compiled_reference_bits": 6,
+        "median_verifier_seconds": 0.08382214500034024
+      },
+      {
+        "id": "TOOL_TRACE_NORMALIZER",
+        "raw_program_bits": 291167,
+        "compiled_reference_bits": 6,
+        "median_verifier_seconds": 0.07755760300005932
+      }
+    ],
+    "total_raw_program_bits": 953742,
+    "total_raw_program_bytes_equivalent": 119217.75,
+    "total_canonical_ast_utf8_bytes": 119203,
+    "per_invocation_reference_bits": 6,
+    "interpretation": "THE_6_BIT_REFERENCE_IS_INCREMENTAL_SELECTION_COST_ONLY__THE_APPROX_119KB_MEASURED_IMPLEMENTATION_SUBSET_REMAINS_RESIDENT"
+  },
+  "research_objective_vector": [
+    "MINIMIZE_PERSISTENT_LEARNED_BYTES",
+    "MINIMIZE_RESIDENT_CAPABILITY_DESCRIPTION_BITS_SUBJECT_TO_GENERALIZATION",
+    "MINIMIZE_RUNTIME_COMPUTE_OR_WALL_CLOCK",
+    "MAXIMIZE_FRESH_TRANSFER_AND_SCOPE"
+  ],
+  "hard_nonclaims": [
+    "FOUR_CAPABILITIES_ARE_NOT_THE_TOTAL_CURRENT_LIBRARY",
+    "CANONICAL_AST_LENGTH_IS_NOT_KOLMOGOROV_COMPLEXITY",
+    "REFERENCE_BITS_DO_NOT_REPLACE_RESIDENT_IMPLEMENTATION_STORAGE",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
