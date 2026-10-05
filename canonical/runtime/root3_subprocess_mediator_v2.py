@@ -1,7 +1,7 @@
 """Class-bound fail-closed subprocess mediator V2.
 
 V2 composes three already-separated facts:
-1) the current runtime has an exact 29-site subprocess universe,
+1) the current runtime has an exact 18-site subprocess universe,
 2) every site has one frozen effect class, and
 3) the global subprocess choke point can recover that exact class at runtime.
 

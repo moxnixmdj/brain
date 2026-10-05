@@ -1,8 +1,8 @@
-"""Compile the exact 19-site subprocess universe into seven semantic effect classes.
+"""Compile the exact 18-site subprocess universe into seven semantic effect classes.
 
 This is a classification/compression layer only. It does NOT infer that a child
 program is free of hidden effects from its declared class. The purpose is to
-replace 19 remaining policy-verifier obligations with seven class-specific
+replace 18 remaining policy-verifier obligations with seven class-specific
 semantic proof obligations, while retaining exact per-call-site identity.
 
 Any call-site drift, new process API, missing mapping, duplicate mapping, or
@@ -31,7 +31,7 @@ CLASSES = {
     "ARBITRARY_COMMAND_EXECUTION",
 }
 
-# Exact mapping over the already content-addressed 19-site current universe.
+# Exact mapping over the already content-addressed 18-site current universe.
 # Keys are (module_path, lineno, process_api).
 EXPECTED: dict[tuple[str, int, str], str] = {
     ("canonical/runtime/astra_runtime.py", 325, "subprocess.run"): "ARBITRARY_COMMAND_EXECUTION",
@@ -44,7 +44,6 @@ EXPECTED: dict[tuple[str, int, str], str] = {
 
     ("canonical/runtime/auto_python_source_codec_acquisition.py", 217, "subprocess.run"): "BOUND_CHILD_CODE_EXECUTION",
     ("canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py", 32, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
-    ("canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py", 40, "subprocess.run"): "TEMPORARY_FILESYSTEM_TRANSFORM",
     ("canonical/runtime/bound_capabilities/browser_chromedriver.py", 50, "subprocess.Popen"): "LOCAL_LOOPBACK_SERVICE",
     ("canonical/runtime/bound_capabilities/cli_command.py", 27, "subprocess.run"): "ARBITRARY_COMMAND_EXECUTION",
     ("canonical/runtime/bound_capabilities/jq_query.py", 41, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
@@ -142,22 +141,22 @@ def classify_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
             }
         )
 
-    if len(classified) != 19 or sum(counts.values()) != 19:
-        raise EffectClassRegistryError("CLASSIFICATION_COUNT_NOT_19")
+    if len(classified) != 18 or sum(counts.values()) != 18:
+        raise EffectClassRegistryError("CLASSIFICATION_COUNT_NOT_18")
     if any(v == 0 for v in counts.values()):
         raise EffectClassRegistryError("EMPTY_DECLARED_EFFECT_CLASS")
 
     return {
         "schema": SCHEMA,
-        "status": "PASS__EXACT_19_PROCESS_SITES_PARTITIONED_INTO_7_DECLARED_EFFECT_CLASSES",
-        "site_count": 19,
+        "status": "PASS__EXACT_18_PROCESS_SITES_PARTITIONED_INTO_7_DECLARED_EFFECT_CLASSES",
+        "site_count": 18,
         "class_count": len(CLASSES),
         "class_counts": counts,
         "classified_sites": classified,
-        "semantic_verifier_obligations_before": 19,
+        "semantic_verifier_obligations_before": 18,
         "semantic_verifier_classes_after": len(CLASSES),
-        "duplicate_policy_obligations_deleted": 19 - len(CLASSES),
-        "compression_percent": (19 - len(CLASSES)) / 19 * 100.0,
+        "duplicate_policy_obligations_deleted": 18 - len(CLASSES),
+        "compression_percent": (18 - len(CLASSES)) / 18 * 100.0,
         "class_proof_residuals": CLASS_PROOF_RESIDUALS,
         "truth_boundary": {
             "classification_is_scope_complete_for_current_direct_python_process_sites": True,

@@ -15,9 +15,9 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 ASTRA_REL = "canonical/runtime/astra_runtime.py"
-C1_VERIFY_REL = "canonical/verification/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_DELTA_VERIFICATION_20261005_V4.json"
+C1_VERIFY_REL = "canonical/verification/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_DELTA_VERIFICATION_20261005_V5.json"
 EXPECTED_ASTRA_BLOB = "15dd59ad644c5c73a9218dba4fcc17f880d725f0"
-EXPECTED_C1_VERIFY_BLOB = "c9a22ab3bb931886c0a82a3045b2d3282e8318c6"
+EXPECTED_C1_VERIFY_BLOB = "519f02995f6ff7cb344cecab1d4a9a5615e6b36e"
 SNAPSHOT_REL = "canonical/runtime/apt_metadata_snapshot_v1.py"
 EXPECTED_SNAPSHOT_BLOB = "426189ed3a8c37d3ecb515cc8f89ab31e927fd24"
 SCHEMA = "PROJECT_BRAIN_ROOT3_CHILD_PROCESS_CHANNEL_REGISTRY_V1"
@@ -163,9 +163,9 @@ def compile_registry(root: Path = ROOT) -> dict[str, Any]:
     popen_count = sum(x["process_api"] == "subprocess.Popen" for x in rows)
     modules_with_children = sorted({x["module_path"] for x in rows})
 
-    if len(rows) != 19:
+    if len(rows) != 18:
         raise ChildProcessRegistryError("WHOLE_RUNTIME_CHILD_PROCESS_COUNT_DRIFT:" + str(len(rows)))
-    if run_count != 18 or popen_count != 1:
+    if run_count != 17 or popen_count != 1:
         raise ChildProcessRegistryError(
             f"PROCESS_API_COUNT_DRIFT:run={run_count}:popen={popen_count}"
         )
@@ -178,7 +178,7 @@ def compile_registry(root: Path = ROOT) -> dict[str, Any]:
 
     return {
         "schema": SCHEMA,
-        "status": "PASS__WHOLE_CURRENT_REPO_RUNTIME_CHILD_PROCESS_UNIVERSE_FINITE__19_EXACT_PROCESS_CREATION_SITES__TEN_APT_METADATA_PROCESS_SITES_DELETED__MEDIATION_STILL_OPEN",
+        "status": "PASS__WHOLE_CURRENT_REPO_RUNTIME_CHILD_PROCESS_UNIVERSE_FINITE__18_EXACT_PROCESS_CREATION_SITES__TAR_EXTRACTION_PROCESS_SITE_DELETED__MEDIATION_STILL_OPEN",
         "authority": {
             "astra_runtime_path": ASTRA_REL,
             "astra_runtime_git_blob_sha": EXPECTED_ASTRA_BLOB,

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Independently verify a tar.gz bundle with GNU tar plus source SHA-256 comparison."""
 from __future__ import annotations
-import hashlib,json,pathlib,subprocess,tempfile
+import hashlib,json,pathlib,subprocess,tarfile
 
 def _safe(root, raw):
     root=pathlib.Path(root).resolve()
@@ -36,23 +36,28 @@ def run(args, root):
     if observed!=expected:
         raise RuntimeError("ARCHIVE_MEMBER_SET_MISMATCH:"+json.dumps({"expected":expected,"observed":observed},sort_keys=True)[:3000])
     mismatches=[]
-    with tempfile.TemporaryDirectory() as td:
-        extract=subprocess.run(["tar","-xzf",str(archive_path),"-C",td],text=True,capture_output=True,timeout=60)
-        if extract.returncode!=0:
-            raise RuntimeError("GNU_TAR_EXTRACT_FAILED:"+extract.stderr[-1200:])
-        base=pathlib.Path(td)
-        for rel in expected:
-            src=_safe(root,rel)
-            ext=(base/rel).resolve()
-            if base.resolve() not in ext.parents:
-                raise RuntimeError("EXTRACT_PATH_OUTSIDE_TEMP")
-            if not ext.is_file():
-                mismatches.append({"path":rel,"reason":"missing_extracted"})
-                continue
-            a=hashlib.sha256(src.read_bytes()).hexdigest()
-            b=hashlib.sha256(ext.read_bytes()).hexdigest()
-            if a!=b:
-                mismatches.append({"path":rel,"source_sha256":a,"archive_sha256":b})
+    try:
+        with tarfile.open(archive_path,"r:gz") as tf:
+            py_members={m.name.rstrip("/"):m for m in tf.getmembers() if m.name.strip()}
+            if sorted(py_members)!=expected:
+                raise RuntimeError("PY_TAR_MEMBER_SET_MISMATCH")
+            for rel in expected:
+                src=_safe(root,rel)
+                member=py_members.get(rel)
+                if member is None or not member.isfile() or member.issym() or member.islnk():
+                    mismatches.append({"path":rel,"reason":"non_regular_or_missing_archive_member"})
+                    continue
+                fh=tf.extractfile(member)
+                if fh is None:
+                    mismatches.append({"path":rel,"reason":"archive_member_unreadable"})
+                    continue
+                data=fh.read()
+                a=hashlib.sha256(src.read_bytes()).hexdigest()
+                b=hashlib.sha256(data).hexdigest()
+                if a!=b:
+                    mismatches.append({"path":rel,"source_sha256":a,"archive_sha256":b})
+    except (tarfile.TarError,OSError) as exc:
+        raise RuntimeError("PY_TAR_READ_FAILED:"+type(exc).__name__) from exc
     if mismatches:
         raise RuntimeError("ARCHIVE_HASH_MISMATCH:"+json.dumps(mismatches,sort_keys=True)[:3000])
     return {
