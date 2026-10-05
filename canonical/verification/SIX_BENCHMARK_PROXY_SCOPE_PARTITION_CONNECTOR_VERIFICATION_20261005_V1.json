@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_SCOPE_PARTITION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__SIX_FAMILIES_19_TO_7_SCOPE_COMPRESSION__ZERO_CREDIT",
+  "quarantine": {
+    "path": "canonical/governance/BENCHMARK_PROXY_SCOPE_COMPLETENESS_QUARANTINE_V2_20261005.json",
+    "git_blob_sha": "c62b7c1f8e838a1a37d8b5513953191f717b40e8"
+  },
+  "subject": {
+    "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+    "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f"
+  },
+  "inputs": {
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "acceptance_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    }
+  },
+  "verified": {
+    "affected_family_count": 6,
+    "original_leaf_occurrences": 19,
+    "discharged_occurrences": 7,
+    "surviving_leaf_occurrences": 12,
+    "unique_surviving_leaves": 7,
+    "exact_family_to_registry_contract_mapping": true,
+    "tool_discovery_scope_complete_reuse": true,
+    "recovery_scope_complete_reuse": true,
+    "artifact_mechanical_scope_complete_reuse": true,
+    "unique_surviving": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+    ]
+  },
+  "consequence": [
+    "SUPERSEDE_FIVE_FAMILY_SCOPE_PARTITION_FOR_SCHEDULING",
+    "SCHEDULE_SCOPE_REPAIR_BY_SEVEN_UNIQUE_LEAVES_NOT_SIX_DUPLICATE_FAMILY_PORTFOLIOS",
+    "PUBLIC_OR_MATCHED_BENCHMARKS_MAY_DISCHARGE_SURVIVING_LEAVES_ONLY_AFTER_EXPLICIT_LOSSLESS_SCOPE_BINDING",
+    "NO_ACCEPTANCE_ACCOUNTING_CHANGE"
+  ],
+  "hard_nonclaims": [
+    "NO_SURVIVING_LEAF_CLOSED_BY_THIS_RECEIPT",
+    "NO_ROOT1_GAP",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
