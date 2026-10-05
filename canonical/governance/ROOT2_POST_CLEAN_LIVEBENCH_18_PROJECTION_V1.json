@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_POST_CLEAN_LIVEBENCH_18_PROJECTION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_CURRENT_ROOT2_TOUCHING_PROJECTION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "source_root": {
+    "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "git_blob_sha": "1a94fa8f0961edc420a56f6e7c2ca8764be67373"
+  },
+  "source_acceptance": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "git_blob_sha": "25d3408c7ee746f0f853d718ffa1af1ecff14596"
+  },
+  "clean_livebench_reduction": {
+    "path": "canonical/governance/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "git_blob_sha": "5e9d6d560f7ff6a3a8a6e8cff7d52e31cd71d957"
+  },
+  "counts": {
+    "proved_atomic": 13,
+    "unresolved_atomic": 25,
+    "root1_only": 0,
+    "root2_only": 15,
+    "root3_only": 7,
+    "root2_and_root3": 3,
+    "root2_touching": 18
+  },
+  "root2_only": [
+    "ARTIFACT_AA_BRIEFCASE_GE_1822",
+    "AUTOMATIONBENCH_GE_40",
+    "CHARTOGRAPHY_TOOLS_GE_89",
+    "CODING_CURSORBENCH_GE_57_8",
+    "CODING_FRONTIERCODE_GE_54_4",
+    "CODING_TB4_GE_66_4",
+    "FINANCE_ACCOUNTING_INDEX_GE_61",
+    "FINANCE_AGENT_V2_GE_58_59",
+    "HLE_TOOLS_GE_67_7",
+    "MYSTERYMECHANISM_GE_49_55",
+    "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "PROWORK_AA_BRIEFCASE_GE_1822",
+    "PROWORK_GDPVAL_GE_1846",
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "TB_SCIENCE_GE_58_7"
+  ],
+  "root2_and_root3": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+  ],
+  "exact_root2_touching": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "ARTIFACT_AA_BRIEFCASE_GE_1822",
+    "AUTOMATIONBENCH_GE_40",
+    "CHARTOGRAPHY_TOOLS_GE_89",
+    "CODING_CURSORBENCH_GE_57_8",
+    "CODING_FRONTIERCODE_GE_54_4",
+    "CODING_TB4_GE_66_4",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+    "FINANCE_ACCOUNTING_INDEX_GE_61",
+    "FINANCE_AGENT_V2_GE_58_59",
+    "HLE_TOOLS_GE_67_7",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "MYSTERYMECHANISM_GE_49_55",
+    "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "PROWORK_AA_BRIEFCASE_GE_1822",
+    "PROWORK_GDPVAL_GE_1846",
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "TB_SCIENCE_GE_58_7"
+  ],
+  "removed_predicate": "LIVEBENCH_IF_GE_65_7",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
