@@ -125,6 +125,7 @@ class _Visitor(ast.NodeVisitor):
         self.sites: list[dict[str, Any]] = []
         self.unmediated: list[dict[str, Any]] = []
         self.rebindings: list[dict[str, Any]] = []
+        self.declared_chokepoint_rebindings: list[dict[str, Any]] = []
         self.dynamic_process_refs: list[dict[str, Any]] = []
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
@@ -163,28 +164,62 @@ class _Visitor(ast.NodeVisitor):
 
     def visit_Assign(self, node: ast.Assign) -> None:
         for target in node.targets:
-            self._check_rebinding(target, node.lineno)
+            self._check_rebinding(target, node.value, node.lineno)
         self.generic_visit(node)
 
     def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
-        self._check_rebinding(node.target, node.lineno)
+        self._check_rebinding(node.target, node.value, node.lineno)
         self.generic_visit(node)
 
     def visit_AugAssign(self, node: ast.AugAssign) -> None:
-        self._check_rebinding(node.target, node.lineno)
+        self._check_rebinding(node.target, node.value, node.lineno)
         self.generic_visit(node)
 
-    def _check_rebinding(self, target: ast.AST, lineno: int) -> None:
-        for name in _target_names(target):
-            bound = self.aliases.get(name)
+    def _check_rebinding(
+        self, target: ast.AST, value: ast.AST | None, lineno: int
+    ) -> None:
+        if isinstance(target, ast.Name):
+            bound = self.aliases.get(target.id)
             if bound and bound.split(".")[0] in PROCESS_MODULE_ROOTS:
                 self.rebindings.append({
                     "module_path": self.rel,
                     "lineno": lineno,
                     "kind": "PROCESS_IMPORT_LOCAL_REBINDING",
-                    "name": name,
+                    "name": target.id,
                     "bound_import": bound,
                 })
+            return
+
+        q = _qname(target, self.aliases)
+        if q not in {"subprocess.run", "subprocess.Popen"}:
+            return
+        assigned = _qname(value, self.aliases) if value is not None else None
+        mediator_name = Path(self.rel).name
+        allowed = {
+            ("subprocess.run", "_guarded_run"),
+            ("subprocess.run", "_ORIGINAL_RUN"),
+            ("subprocess.Popen", "_guarded_popen"),
+            ("subprocess.Popen", "_ORIGINAL_POPEN"),
+        }
+        row = {
+            "module_path": self.rel,
+            "lineno": lineno,
+            "target": q,
+            "assigned": assigned,
+        }
+        if (
+            mediator_name.startswith("root3_subprocess_mediator_v")
+            and (q, assigned) in allowed
+        ):
+            self.declared_chokepoint_rebindings.append({
+                **row,
+                "kind": "DECLARED_ROOT3_CHOKEPOINT_INSTALL_OR_RESTORE",
+            })
+        else:
+            self.rebindings.append({
+                **row,
+                "kind": "UNDECLARED_SUBPROCESS_CHOKEPOINT_REBINDING",
+            })
 
     def visit_Call(self, node: ast.Call) -> None:
         q = _qname(node.func, self.aliases)
@@ -284,6 +319,7 @@ def compile_universe(root: Path = ROOT) -> dict[str, Any]:
     unmediated: list[dict[str, Any]] = []
     rebindings: list[dict[str, Any]] = []
     dynamic_refs: list[dict[str, Any]] = []
+    declared_chokepoint_rebindings: list[dict[str, Any]] = []
     parse_failures: list[dict[str, Any]] = []
 
     for path in files:
@@ -312,6 +348,9 @@ def compile_universe(root: Path = ROOT) -> dict[str, Any]:
         sites.extend(visitor.sites)
         unmediated.extend(visitor.unmediated)
         rebindings.extend(visitor.rebindings)
+        declared_chokepoint_rebindings.extend(
+            visitor.declared_chokepoint_rebindings
+        )
         dynamic_refs.extend(visitor.dynamic_process_refs)
         file_rows.append(row)
 
@@ -359,6 +398,10 @@ def compile_universe(root: Path = ROOT) -> dict[str, Any]:
             rebindings,
             key=lambda x: (x["module_path"], x["lineno"], x["kind"]),
         ),
+        "declared_chokepoint_rebindings": sorted(
+            declared_chokepoint_rebindings,
+            key=lambda x: (x["module_path"], x["lineno"], x["target"]),
+        ),
         "dynamic_process_refs": sorted(
             dynamic_refs,
             key=lambda x: (x["module_path"], x["lineno"], x["kind"]),
@@ -402,6 +445,9 @@ def compile_universe(root: Path = ROOT) -> dict[str, Any]:
         "process_sites": normalized_sites,
         "unmediated_process_sites": universe_material["unmediated"],
         "process_import_rebindings": universe_material["rebindings"],
+        "declared_chokepoint_rebindings": universe_material[
+            "declared_chokepoint_rebindings"
+        ],
         "dynamic_process_module_refs": universe_material["dynamic_process_refs"],
         "interception_key_collisions": collisions,
         "whole_runtime_python_universe_sha256": digest,
