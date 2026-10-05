@@ -63,8 +63,8 @@
       "current_blocker_classification_seal": {
         "path": "canonical/governance/ROOT1_CURRENT_BLOCKER_CLASSIFICATION_SEAL_V1.json",
         "git_blob_sha": "d8346fec4326ee3fed32f08dcd29782bbc3647d2",
-        "status": "CURRENT_AGAIN_FOR_ROOT1_ZERO_ONLY__LIVEBENCH_POSITIVE_GAP_REVOKED__ROOT2_PARTITION_REQUIRES_RECOMPUTE",
-        "theorem": "CURRENT_UNRESOLVED_26_EQUALS_16_ROOT2_ONLY_PLUS_7_ROOT3_ONLY_PLUS_3_MIXED__DISJOINT__ROOT1_RESIDUAL_ZERO",
+        "status": "HISTORICAL_INDEPENDENT_ZERO_ROOT1_SEAL__CURRENT_14_24_PARTITION_RECOMPUTED_LOCALLY__NO_POSITIVE_ROOT1_GAPS",
+        "theorem": "CURRENT_UNRESOLVED_24_EQUALS_15_ROOT2_ONLY_PLUS_6_ROOT3_ONLY_PLUS_3_MIXED__DISJOINT__ROOT1_RESIDUAL_ZERO",
         "independent_verifier": {
           "repository": "moxnixmdj/verification-capsule-runner",
           "pull_request": 1540,
@@ -75,15 +75,15 @@
         "current_main_live_recomputation": {
           "target_families": 19,
           "atomic_predicates": 38,
-          "proved_predicates": 12,
-          "unresolved_predicates": 26,
-          "root2_only": 16,
-          "root3_only": 7,
+          "proved_predicates": 14,
+          "unresolved_predicates": 24,
+          "root2_only": 15,
+          "root3_only": 6,
           "root2_and_root3": 3,
           "root1_positive_gaps": 0,
           "root1_current_residual": 0
         },
-        "hard_nonclaim": "DOES_NOT_SEAL_FUTURE_ROOT1_IMPOSSIBILITY_OR_14_FAMILY_ROUTE_COVERAGE",
+        "hard_nonclaim": "HISTORICAL_INDEPENDENT_RECEIPT_DID_NOT_VERIFY_THE_LATER_14_24_COUNTS__CURRENT_COUNTS_BIND_TO_ACCEPTANCE_AND_ROOT_PARTITION_BYTES",
         "superseded_by": {
           "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
           "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443"
@@ -605,13 +605,15 @@
     "git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d",
     "verification_path": "canonical/verification/ROOT3_POST_SYNTHESIS_PUBLIC_RUNNER_VERIFICATION_20261004_V2.json",
     "verification_git_blob_sha": "7a5e32351cd20c6ef15d50283e2753186e04e77d",
-    "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__10_LIVE_ROOT3_PREDICATES__7_MATCHED_SCOPE_TARGETS__3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT",
-    "live_root3_predicates": 10,
+    "status": "STALE_10_PREDICATE_ROOT3_CUT_AFTER_UNKNOWN_DOMAIN_V8_PROMOTION__CURRENT_TOUCHING_COUNT_9__RECOMPUTE_REQUIRED__ZERO_CREDIT",
+    "live_root3_predicates": 9,
     "matched_scope_targets": 7,
     "event_class_count": 3,
     "currently_runnable_event_count": 0,
     "fresh_reality_authority": false,
-    "synthesis_scope_closed": true
+    "synthesis_scope_closed": true,
+    "scheduling_authority": false,
+    "currentness_invalidation": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_CLEANLY_PROVED_AND_REMOVED_FROM_ROOT3_ONLY"
   },
   "root3_scope_certificate_admissibility_refinement": {
     "path": "canonical/governance/ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_ACTIVATION_V2.json",
@@ -652,37 +654,39 @@
     "workflow_run_id": 37168503920
   },
   "root_partition_transport": {
-    "status": "CURRENT_POST_CLEAN_LIVEBENCH_PROMOTION__18_ROOT2_TOUCHING__FAIL_CLOSED_PENDING_EXACT_REBIND",
-    "source_root_git_blob_sha": "c3d1e25e2268cce90df545a93f107aa24fed8f8b",
-    "revocation_path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
-    "revocation_commit": "e8ba35656f60be6cd8d67593dd85415464cc0443",
+    "status": "CURRENT_POST_LIVEBENCH_AND_UNKNOWN_DOMAIN_CLEAN_PROMOTIONS__18_ROOT2_TOUCHING__9_ROOT3_TOUCHING__FAIL_CLOSED_PENDING_REBINDS",
+    "source_acceptance_git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+    "clean_livebench_reduction_path": "canonical/governance/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "clean_livebench_reduction_git_blob_sha": "5e9d6d560f7ff6a3a8a6e8cff7d52e31cd71d957",
+    "unknown_domain_v8_reduction_path": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "unknown_domain_v8_reduction_git_blob_sha": "ebe8edcda3e0aa7dcffab6032834532a6f06c5f7",
     "acceptance_counts_unchanged": false,
-    "new_acceptance_credit": 1,
+    "new_acceptance_credit_since_12_26": 2,
     "effective_partition": {
       "root1_positive_gap_count": 0,
       "root2_only_count": 15,
-      "root3_only_count": 7,
+      "root3_only_count": 6,
       "root2_and_root3_count": 3,
       "root2_touching_count": 18,
-      "unresolved_total": 25
+      "root3_touching_count": 9,
+      "unresolved_total": 24
     },
     "scheduling_authority": false,
-    "next_required": "BIND_EXACT_CURRENT_18_ROOT2_TOUCHING_SET_TO_OUTPUT_ONLY_THRESHOLD_DAG__THEN_SOLVE_MINIMUM_ZERO_REALITY_CERTIFICATE_CUT",
-    "verification_path": "canonical/verification/ROOT2_19_POST_REVOCATION_DAG_CONNECTOR_VERIFICATION_20261004_V1.json",
-    "activation_path": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json",
-    "source_acceptance_git_blob_sha": "25d3408c7ee746f0f853d718ffa1af1ecff14596",
-    "clean_livebench_reduction_path": "canonical/governance/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_ACCEPTANCE_REDUCTION_20261005_V1.json",
-    "clean_livebench_reduction_git_blob_sha": "5e9d6d560f7ff6a3a8a6e8cff7d52e31cd71d957"
+    "next_required": "REBIND_EXACT_18_ROOT2_DAG_TO_CURRENT_14_24_EPOCH__RECOMPUTE_EXACT_9_ROOT3_EVENT_SET__THEN_SOLVE_MINIMUM_ZERO_REALITY_CERTIFICATE_CUT"
   },
   "unknown_domain_v6_subclass_revocation": {
-    "status": "ACTIVE__ATOMIC_PROMOTION_REVOKED",
+    "status": "HISTORICAL_REVOCATION_SUPERSEDED_FOR_CURRENT_ATOMIC_TRUTH_BY_V8_SCOPE_COMPLETE_SUCCESSOR_PROOF",
     "predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
-    "evidence": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
-    "acceptance_binding_blob": "25d3408c7ee746f0f853d718ffa1af1ecff14596",
-    "state": "ROOT3_ONLY__EXTERNAL_BLOCKED_PENDING_REPAIRED_INDEPENDENT_VERIFICATION",
+    "historical_evidence": "canonical/verification/UNKNOWN_DOMAIN_V6_SUBCLASS_TOTALITY_REVOCATION_20261005_V1.json",
+    "current_verification": "canonical/verification/UNKNOWN_DOMAIN_V7_WINDOWS_V8_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "current_verification_git_blob_sha": "d65875f9abba55d9a58a4f2566f3719bebfb0a04",
+    "current_acceptance_reduction": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json",
+    "current_acceptance_reduction_git_blob_sha": "ebe8edcda3e0aa7dcffab6032834532a6f06c5f7",
+    "acceptance_binding_blob": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+    "state": "CLOSED__PROVED__REMOVED_FROM_ROOT3_ONLY",
     "accounting": {
-      "proved_atomic": 13,
-      "unresolved_atomic": 25
+      "proved_atomic": 14,
+      "unresolved_atomic": 24
     }
   }
 }
