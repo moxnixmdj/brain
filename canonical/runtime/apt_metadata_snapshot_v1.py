@@ -180,6 +180,88 @@ def decompress_lz4_frame(raw:bytes, *, max_output_bytes:int=1_500_000_000)->byte
     return bytes(out)
 
 
+def iter_lz4_frame_chunks(raw:bytes, *, max_output_bytes:int=1_500_000_000)->Iterator[bytes]:
+    raw=bytes(raw)
+    if len(raw)<7 or int.from_bytes(raw[:4],"little")!=LZ4_MAGIC:
+        raise AptSnapshotError("LZ4_MAGIC_INVALID")
+    pos=4
+    flg=raw[pos]; bd=raw[pos+1]; pos+=2
+    if (flg>>6)!=1 or (flg & 0x02):
+        raise AptSnapshotError("LZ4_FRAME_FLAGS_INVALID")
+    independent=bool(flg & 0x20)
+    block_checksum=bool(flg & 0x10)
+    content_size_flag=bool(flg & 0x08)
+    content_checksum=bool(flg & 0x04)
+    dict_id_flag=bool(flg & 0x01)
+    if content_checksum:
+        yield decompress_lz4_frame(raw,max_output_bytes=max_output_bytes)
+        return
+    descriptor=bytearray([flg,bd])
+    declared_size=None
+    if content_size_flag:
+        if pos+8>len(raw): raise AptSnapshotError("LZ4_CONTENT_SIZE_TRUNCATED")
+        declared_size=int.from_bytes(raw[pos:pos+8],"little")
+        descriptor.extend(raw[pos:pos+8]); pos+=8
+    if dict_id_flag:
+        if pos+4>len(raw): raise AptSnapshotError("LZ4_DICT_ID_TRUNCATED")
+        descriptor.extend(raw[pos:pos+4]); pos+=4
+    if pos>=len(raw): raise AptSnapshotError("LZ4_HEADER_CHECKSUM_MISSING")
+    hc=raw[pos]; pos+=1
+    if ((xxh32(bytes(descriptor))>>8)&0xFF)!=hc:
+        raise AptSnapshotError("LZ4_HEADER_CHECKSUM_MISMATCH")
+    history=b""
+    total=0
+    while True:
+        if pos+4>len(raw): raise AptSnapshotError("LZ4_BLOCK_HEADER_TRUNCATED")
+        size_word=int.from_bytes(raw[pos:pos+4],"little"); pos+=4
+        if size_word==0:
+            break
+        uncompressed=bool(size_word & 0x80000000)
+        size=size_word & 0x7FFFFFFF
+        if size<=0 or pos+size>len(raw):
+            raise AptSnapshotError("LZ4_BLOCK_SIZE_INVALID")
+        payload=raw[pos:pos+size]; pos+=size
+        if block_checksum:
+            if pos+4>len(raw): raise AptSnapshotError("LZ4_BLOCK_CHECKSUM_TRUNCATED")
+            expected=int.from_bytes(raw[pos:pos+4],"little"); pos+=4
+            if xxh32(payload)!=expected:
+                raise AptSnapshotError("LZ4_BLOCK_CHECKSUM_MISMATCH")
+        chunk=payload if uncompressed else _decode_block(payload,b"" if independent else history)
+        total+=len(chunk)
+        if total>max_output_bytes:
+            raise AptSnapshotError("LZ4_OUTPUT_LIMIT_EXCEEDED")
+        history=(history+chunk)[-65536:]
+        yield chunk
+    if declared_size is not None and total!=declared_size:
+        raise AptSnapshotError("LZ4_CONTENT_SIZE_MISMATCH")
+    if pos!=len(raw):
+        raise AptSnapshotError("LZ4_TRAILING_BYTES")
+
+
+def iter_apt_index_lines(
+    path:str|os.PathLike[str],
+    *,
+    max_output_bytes:int=1_500_000_000,
+)->Iterator[str]:
+    p=pathlib.Path(path)
+    name=p.name.lower()
+    pending=b""
+    if name.endswith(".lz4"):
+        chunks=iter_lz4_frame_chunks(p.read_bytes(),max_output_bytes=max_output_bytes)
+        for chunk in chunks:
+            pending+=chunk
+            parts=pending.split(b"\n")
+            pending=parts.pop()
+            for line in parts:
+                yield line.decode("utf-8","replace")
+    else:
+        raw=read_apt_index(p,max_output_bytes=max_output_bytes)
+        for line in raw.splitlines():
+            yield line.decode("utf-8","replace")
+    if pending:
+        yield pending.decode("utf-8","replace")
+
+
 def read_apt_index(path:str|os.PathLike[str], *, max_output_bytes:int=1_500_000_000)->bytes:
     p=pathlib.Path(path)
     raw=p.read_bytes()
@@ -296,11 +378,11 @@ def executable_owners(
     total=0
     files=apt_index_target_files(lists_dir,identifier="Contents")
     for path in files:
-        raw=read_apt_index(path,max_output_bytes=max_total_output_bytes-total)
-        total+=len(raw)
+        compressed_bytes=pathlib.Path(path).stat().st_size
+        total+=compressed_bytes
         if total>max_total_output_bytes:
-            raise AptSnapshotError("CONTENTS_TOTAL_OUTPUT_LIMIT_EXCEEDED")
-        for line in raw.decode("utf-8","replace").splitlines():
+            raise AptSnapshotError("CONTENTS_COMPRESSED_INPUT_LIMIT_EXCEEDED")
+        for line in iter_apt_index_lines(path,max_output_bytes=max_total_output_bytes):
             if not line:
                 continue
             try:
