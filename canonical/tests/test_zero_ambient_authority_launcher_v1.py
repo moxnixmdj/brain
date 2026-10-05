@@ -28,6 +28,7 @@ class Tests(unittest.TestCase):
             args = docker_argv(self.policy(td))
         joined = "\n".join(args)
         for token in [
+            "--pull=never", "--log-driver=none",
             "--network=none", "--read-only", "--cap-drop=ALL",
             "--security-opt=no-new-privileges:true", "--user=65534:65534",
             "--ipc=private",
