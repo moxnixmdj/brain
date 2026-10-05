@@ -1,0 +1,105 @@
+"""Fail-closed typed compiler for coverage-dominance sandwich certificates.
+
+This module does not prove semantic coverage or dominance. It only composes
+already-admissible certificates after verifying that they inhabit one frozen
+region universe with stable atom IDs.
+"""
+from __future__ import annotations
+
+from collections.abc import Mapping, Sequence
+from typing import Any
+
+SCHEMA = "PROJECT_BRAIN_OPUS55_TYPED_COVERAGE_DOMINANCE_BRIDGE_RUNTIME_V1"
+
+class BridgeError(ValueError):
+    pass
+
+def _require_bool(obj: Mapping[str, Any], key: str) -> None:
+    if obj.get(key) is not True:
+        raise BridgeError(f"{key}_REQUIRED_TRUE")
+
+def _ids(value: Any, label: str) -> set[str]:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes, bytearray)):
+        raise BridgeError(f"{label}_NOT_SEQUENCE")
+    out=set()
+    for item in value:
+        if not isinstance(item,str) or not item:
+            raise BridgeError(f"{label}_INVALID_ATOM")
+        if item in out:
+            raise BridgeError(f"{label}_DUPLICATE_ATOM:{item}")
+        out.add(item)
+    return out
+
+def compile_typed_sandwich(manifest: Mapping[str, Any]) -> dict[str, Any]:
+    try:
+        if not isinstance(manifest, Mapping):
+            raise BridgeError("MANIFEST_NOT_OBJECT")
+        universe_id=manifest.get("universe_id")
+        if not isinstance(universe_id,str) or not universe_id:
+            raise BridgeError("UNIVERSE_ID_INVALID")
+        universe=_ids(manifest.get("universe_atoms"),"UNIVERSE_ATOMS")
+        if not universe:
+            raise BridgeError("UNIVERSE_EMPTY")
+
+        coverage=manifest.get("coverage_certificates")
+        dominance=manifest.get("dominance_certificates")
+        if not isinstance(coverage,Sequence) or isinstance(coverage,(str,bytes,bytearray)) or not coverage:
+            raise BridgeError("NO_COVERAGE_CERTIFICATE")
+        if not isinstance(dominance,Sequence) or isinstance(dominance,(str,bytes,bytearray)):
+            raise BridgeError("DOMINANCE_CERTIFICATES_NOT_SEQUENCE")
+
+        c_star=set(universe)
+        cov_ids=[]
+        for i,cert in enumerate(coverage):
+            if not isinstance(cert,Mapping):
+                raise BridgeError(f"COVERAGE_{i}_NOT_OBJECT")
+            if cert.get("universe_id") != universe_id:
+                raise BridgeError(f"COVERAGE_{i}_UNIVERSE_MISMATCH")
+            _require_bool(cert,"content_addressed")
+            _require_bool(cert,"independent_or_objective")
+            _require_bool(cert,"u_subset_domain_proved")
+            cells=_ids(cert.get("cells"),f"COVERAGE_{i}_CELLS")
+            if not cells <= universe:
+                raise BridgeError(f"COVERAGE_{i}_UNKNOWN_REGION")
+            c_star &= cells
+            cov_ids.append(str(cert.get("id",f"coverage_{i}")))
+
+        b_star=set()
+        dom_ids=[]
+        for i,cert in enumerate(dominance):
+            if not isinstance(cert,Mapping):
+                raise BridgeError(f"DOMINANCE_{i}_NOT_OBJECT")
+            if cert.get("universe_id") != universe_id:
+                raise BridgeError(f"DOMINANCE_{i}_UNIVERSE_MISMATCH")
+            _require_bool(cert,"content_addressed")
+            _require_bool(cert,"independent_or_objective")
+            _require_bool(cert,"scope_complete")
+            _require_bool(cert,"b_subset_q_proved")
+            cells=_ids(cert.get("cells"),f"DOMINANCE_{i}_CELLS")
+            if not cells <= universe:
+                raise BridgeError(f"DOMINANCE_{i}_UNKNOWN_REGION")
+            b_star |= cells
+            dom_ids.append(str(cert.get("id",f"dominance_{i}")))
+
+        residual=c_star-b_star
+        return {
+            "schema":SCHEMA,
+            "status":"CLOSED" if not residual else "OPEN",
+            "universe_id":universe_id,
+            "coverage_certificate_ids":cov_ids,
+            "dominance_certificate_ids":dom_ids,
+            "c_star":sorted(c_star),
+            "b_star":sorted(b_star),
+            "residual":sorted(residual),
+            "residual_count":len(residual),
+            "behavioral_parity_certificate_sufficient":not residual,
+            "capability_credit_delta":0,
+        }
+    except Exception as exc:
+        return {
+            "schema":SCHEMA,
+            "status":"FAIL_CLOSED",
+            "reason":type(exc).__name__+":"+str(exc),
+            "behavioral_parity_certificate_sufficient":False,
+            "capability_credit_delta":0,
+        }
