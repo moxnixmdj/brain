@@ -1,0 +1,9 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-05",
+  "intent_id": "SYNTHESIS_R6_SOURCE_AUTHORITY_INFORMATION_BOUND_20261005_SOL_V1",
+  "status": "PREMUTATION_INTENT__ZERO_CREDIT",
+  "base_commit": "2552d802291899c6e13303c4e449bf6bcb497be7",
+  "objective": "Prove that source-sensitive synthesis needs explicit verified source-trust information or must return unresolved.",
+  "accounting": {"incremental_spend_usd": 0, "new_reality_units_consumed": 0, "terminal_cases_consumed": 0}
+}

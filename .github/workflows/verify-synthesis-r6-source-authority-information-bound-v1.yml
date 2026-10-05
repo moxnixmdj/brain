@@ -1,0 +1,26 @@
+name: Verify synthesis R6 source-authority information bound V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/SYNTHESIS_R6_SOURCE_AUTHORITY_INFORMATION_BOUND_20261005_V1.json
+      - canonical/runtime/synthesis_r6_source_authority_information_bound_v1.py
+      - canonical/tests/test_synthesis_r6_source_authority_information_bound_v1.py
+      - .github/workflows/verify-synthesis-r6-source-authority-information-bound-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Run R6 authority-bound tests
+        run: python -m pytest -q canonical/tests/test_synthesis_r6_source_authority_information_bound_v1.py
