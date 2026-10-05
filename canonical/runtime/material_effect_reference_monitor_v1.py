@@ -239,6 +239,8 @@ class ReferenceMonitor:
                 _inside(p, root) for root in auth.allowed_path_prefixes
             ):
                 raise EffectDenied(f"PATH_NOT_AUTHORIZED:{auth.rule_id}")
+        if sink_kind.startswith("network.") and network_host is None:
+            raise EffectDenied(f"NETWORK_ENDPOINT_UNBOUND:{auth.rule_id}")
         if network_host is not None:
             host = str(network_host).lower()
             if not auth.allowed_network_hosts or host not in auth.allowed_network_hosts:
@@ -275,11 +277,21 @@ def classify_audit_event(event: str, args: tuple[Any, ...]) -> tuple[str | None,
         return "process.spawn", {}
     if event == "socket.connect":
         address = args[1] if len(args) > 1 else None
-        host = address[0] if isinstance(address, tuple) and address else None
+        if isinstance(address, tuple) and address:
+            host = address[0]
+        elif isinstance(address, str):
+            host = "unix:" + address
+        else:
+            host = None
         return "network.connect", {"network_host": host}
     if event == "socket.bind":
         address = args[1] if len(args) > 1 else None
-        host = address[0] if isinstance(address, tuple) and address else None
+        if isinstance(address, tuple) and address:
+            host = address[0]
+        elif isinstance(address, str):
+            host = "unix:" + address
+        else:
+            host = None
         return "network.bind", {"network_host": host}
     if event in {"ctypes.dlopen", "ctypes.dlsym", "ctypes.dlsym/handle"}:
         return "native.escape", {}
