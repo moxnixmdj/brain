@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11_INSTANCE",
+  "action_id": "VERIFY-SYNTHESIS-C1-C2-V2-CI-BINDINGS-20261005-V1",
+  "date": "2026-10-05",
+  "status": "ZERO_REALITY_INDEPENDENT_VERIFICATION_ENABLEMENT__NO_TERMINAL_OR_PROMOTION_AUTHORITY",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "776bab19a4e129391aba9aa6ed026681fb409a1a",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "REPAIR_STALE_VERIFICATION_CARRIER_BINDINGS",
+  "blocker_lease_key": "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS::C1_R5_AND_C2_BOUNDED_PREFIX::INDEPENDENT_VERIFICATION_PENDING",
+  "expected_parent_frontier_change": "IF_RUNNERS_PASS__PROMOTE_EXACT_BOUNDED_C1_R5_CONTROL_SLICE_AND_C2_VERBATIM_GROUNDED_PREFIX_TO_VERIFIED_REUSE_INPUTS_WITH_ZERO_ACCEPTANCE_CREDIT",
+  "theory_invariants": {
+    "terminal_goal_unchanged": true,
+    "fresh_reality_units": 0,
+    "terminal_cases": 0,
+    "incremental_spend_usd": 0,
+    "no_capability_credit_from_ci_binding": true,
+    "exact_blob_binding_required": true,
+    "v1_superseded_bytes_must_not_be_reverified": true
+  },
+  "recursive_obs": {
+    "obs1_goal": "CLOSE_HIGHEST_FANOUT_ZERO_REALITY_SYNTHESIS_TYPED_SCOPE_ROOT_WITH_MINIMUM_ACTIONS",
+    "obs2_required_capability": "INDEPENDENTLY_VERIFIED_C1_REQUIRED_SUPPORT_FAIL_CLOSED_CONTROL_AND_C2_BOUNDED_GROUNDED_EXPRESSION",
+    "obs3_blocker": "EXISTING_GITHUB_WORKFLOWS_REFERENCE_SUPERSEDED_V1_PATHS_OR_BLOB_HASHES_SO_CURRENT_V2_BYTES_CANNOT_EARN_CLEAN_RUNNER_EVIDENCE",
+    "obs4_solution": "REBIND_EXISTING_WORKFLOWS_TO_EXACT_V2_RUNTIME_TEST_AND_GOVERNANCE_BLOBS_AND_ENABLE_PR_VERIFICATION",
+    "obs5_verification": "GITHUB_HOSTED_CLEAN_RUNNER_EXECUTES_EXACT_BLOB_CHECKS_AND_COMMITTED_UNIT_TESTS",
+    "obs6_after_win": "USE_ONLY_DECLARED_BOUNDED_SCOPE;KEEP_C0_C1_C2_SEMANTIC_TAILS_OPEN",
+    "obs7_obs": "STOP_IF_BLOB_DRIFT_OR_ANY_UNIT_TEST_FAILS;NO_REPAIR_BY_WEAKENING_TESTS",
+    "deletion_first_order_checked": [
+      "REUSE",
+      "CONFIGURE",
+      "INTEGRATE",
+      "DELETE_DUPLICATE_TEST_INFRA"
+    ],
+    "selected_route": "REPAIR_TWO_STALE_WORKFLOW_BINDINGS",
+    "discovery_required": false,
+    "discovery_exemption_reason": "VERIFICATION_CARRIER_REPAIR_ONLY",
+    "exact_base_commit_binding": true,
+    "material_state_change_invalidates": false,
+    "reason_material_state_change_not_automatic_invalidator": "WORKFLOW_EXACT_BLOB_CHECKS_FAIL_CLOSED_IF_THE_SIX_BOUND_V2_ARTIFACTS_CHANGE"
+  },
+  "behavioral_contract": {
+    "behavior_id": "SYNTHESIS_V2_VERIFICATION_CARRIER_001",
+    "required_output_or_action": "CLEAN_RUNNER_PASS_OR_FAIL_FOR_EXACT_CURRENT_V2_BLOBS",
+    "success_condition": "BOUND_CLAIM_GUARD_V2_AND_C2_GROUNDED_EXPRESSION_V2_EXACT_BLOB_CHECKS_AND_ALL_COMMITTED_TESTS_PASS",
+    "failure_condition": "ANY_BLOB_DRIFT_TEST_FAILURE_OR_RUNNER_EXECUTION_ERROR",
+    "terminal_consequence": "VERIFICATION_EVIDENCE_ONLY__NO_ACCEPTANCE_CREDIT"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
