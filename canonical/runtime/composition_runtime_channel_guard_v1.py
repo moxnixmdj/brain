@@ -174,6 +174,42 @@ def _file_state(path: Path | None, label: str) -> dict[str, Any]:
         }
 
 
+def _repo_snapshot(root: Path) -> dict[str, Any]:
+    records: list[dict[str, Any]] = []
+    with _internal():
+        for p in sorted(root.rglob("*"), key=lambda x: str(x.relative_to(root))):
+            rel = p.relative_to(root).as_posix()
+            try:
+                if p.is_symlink():
+                    records.append({
+                        "path": rel,
+                        "kind": "symlink",
+                        "target": os.readlink(p),
+                    })
+                elif p.is_dir():
+                    records.append({"path": rel, "kind": "dir"})
+                elif p.is_file():
+                    st = p.stat()
+                    records.append({
+                        "path": rel,
+                        "kind": "file",
+                        "size": st.st_size,
+                        "sha256": _sha256_file(p),
+                    })
+                else:
+                    records.append({"path": rel, "kind": "other"})
+            except Exception as exc:
+                records.append({
+                    "path": rel,
+                    "kind": "unreadable",
+                    "error": type(exc).__name__,
+                })
+    return {
+        "entry_count": len(records),
+        "sha256": _sha256_value(records),
+    }
+
+
 def _directory_state(path: Path | None, label: str) -> dict[str, Any]:
     if path is None:
         return {"path": label, "exists": None, "manifest_sha256": None}
@@ -251,6 +287,7 @@ class Capture:
             "environment_sha256": _sha256_value(env),
             "python_executable": str(Path(sys.executable).resolve()),
             "python_version": sys.version,
+            "repo_pre_state": _repo_snapshot(self.repo_root) if self.strict else None,
         }
 
     def _record_file_read(self, raw_path: Any) -> None:
@@ -363,6 +400,7 @@ class Capture:
             "action_type": self.action_type,
             "strict_action_type_audited": self.action_type in STRICT_C1_ACTION_TYPES,
             "ambient_input": self.ambient_input,
+            "repo_post_state": _repo_snapshot(self.repo_root) if self.strict else None,
             "file_reads": reads,
             "directory_reads": dirs,
             "mutations": mutations,
@@ -382,6 +420,13 @@ class Capture:
         body["closed_world_observed_subset"] = (
             not self.forbidden_events
             and body["strict_action_type_audited"]
+            and (
+                not self.strict
+                or (
+                    isinstance(self.ambient_input.get("repo_pre_state"), dict)
+                    and isinstance(body.get("repo_post_state"), dict)
+                )
+            )
         )
         body["status"] = "PASS" if body["closed_world_observed_subset"] else "FAIL_CLOSED"
         body["acceptance_credit_delta"] = 0
