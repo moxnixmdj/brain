@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SCORE_MASS_PORTFOLIO_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PARTIAL_SCORE_PORTFOLIO_DOMINANCE__PINNED_PUBLIC_CHECKER_CONTRACTS__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Delete the all-or-nothing multi-checker bottleneck by generating a deterministic response portfolio, exactly postvalidating each response against reproduced pinned public checker contracts, and selecting the response with maximum proved checker-success count.",
+  "mathematical_breakthrough": {
+    "frozen_score_rule": "IF_A_CASE_HAS_k_CHECKERS_AND_g_LT_k_ARE_GUARANTEED_TRUE__SAFE_SCORE_LOWER_BOUND_IS_g_DIVIDED_BY_2k__IF_g_EQUALS_k_SCORE_IS_1",
+    "selection_theorem": "FOR_FIXED_CASE_k__ARGMAX_RESPONSE_OF_PROVED_g_ALSO_ARGMAXES_THE_CONSERVATIVE_PARTIAL_SCORE_LOWER_BOUND__k_IS_NOT_REQUIRED_TO_SELECT_THE_DOMINANT_RESPONSE",
+    "consequence": "A_MULTI_CHECKER_CASE_NO_LONGER_COLLAPSES_TO_ZERO_MERELY_BECAUSE_FULL_CONJUNCTION_IS_UNPROVED",
+    "strict_improvement_example": "TWO_RECOGNIZED_INCOMPATIBLE_CHECKERS__OLD_FAIL_CLOSED_ZERO__PORTFOLIO_PROVES_ONE_OF_TWO__LOWER_BOUND_ONE_QUARTER"
+  },
+  "pinned_public_sources": {
+    "ifbench_repository": "allenai/IFBench",
+    "ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "instructions_blob": "7f167018e0c5472b04e13cbf847e5988c04ecb11",
+    "instructions_util_blob": "1751ab60b97063bd047b1e1a5cf8eaaabee2aefb",
+    "public_test_population_blob": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "public_test_population_rows": 300,
+    "terminal_population_identity_claimed": false
+  },
+  "upstream_brain_score_theorem": {
+    "path": "canonical/governance/LIVEBENCH_IF_SCORE_MASS_MINIMUM_CUT_V1.json",
+    "runtime": "canonical/runtime/livebench_if_score_bound_v1.py",
+    "independent_verification_run_id": 37198748968
+  },
+  "runtime": {
+    "path": "canonical/runtime/livebench_score_mass_portfolio_compiler_v1.py",
+    "test_path": "canonical/tests/test_livebench_score_mass_portfolio_compiler_v1.py",
+    "supported_public_checker_contracts": [
+      "count:word_count_range",
+      "count:unique_word_count",
+      "count:numbers",
+      "words:consonants",
+      "format:parentheses",
+      "format:quotes",
+      "format:no_whitespace",
+      "format:list",
+      "format:sub-bullets"
+    ],
+    "selection_requires_total_instruction_count": false,
+    "absolute_score_bound_requires_total_instruction_count": true,
+    "unsupported_checkers_counted_true": false,
+    "model_dependency_count": 0,
+    "network_dependency_at_runtime": false
+  },
+  "public_distribution_guidance_only": {
+    "source": "allenai/IFBench public 300-row test population",
+    "not_terminal_distribution_evidence": true,
+    "high_mass_supported_families": {
+      "words:consonants": 15,
+      "format:sub-bullets": 12,
+      "count:word_count_range": 11,
+      "count:unique_word_count": 9,
+      "count:numbers": 8,
+      "format:parentheses": 8,
+      "format:quotes": 8,
+      "format:list": 9,
+      "format:no_whitespace": 4
+    }
+  },
+  "composition_effect": [
+    "KEEP_EACH_SINGLE_CHECKER_WITNESS_AS_A_PORTFOLIO_MEMBER",
+    "ADD_ONE_MULTI_CONSTRAINT_CONSTRUCTIVE_WITNESS",
+    "POSTVALIDATE_EVERY_CANDIDATE_AGAINST_EVERY_RECOGNIZED_PINNED_PUBLIC_CHECKER",
+    "SELECT_MAXIMUM_PROVED_g_WITH_DETERMINISTIC_TIE_BREAK",
+    "TREAT_UNSUPPORTED_CHECKERS_AS_UNKNOWN_NOT_TRUE",
+    "WHEN_TRUSTED_k_IS_AVAILABLE_COMPUTE_EXACT_CONSERVATIVE_CASE_LOWER_BOUND"
+  ],
+  "hard_nonclaims": [
+    "NO_FROZEN_TERMINAL_LIVEBENCH_SCORE",
+    "NO_CLAIM_PUBLIC_300_ROW_IFBENCH_POPULATION_IS_ROW_IDENTICAL_TO_FROZEN_2026_06_25_TERMINAL_POPULATION",
+    "NO_CLAIM_ALL_PUBLIC_CHECKER_TYPES_ARE_SUPPORTED",
+    "NO_GENERAL_SEMANTIC_INSTRUCTION_FOLLOWING_CAPABILITY_CLAIM",
+    "NO_TERMINAL_CASE_CONTENT_OR_HIDDEN_KWARGS_USED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "next": [
+    "INDEPENDENTLY_VERIFY_THE_EXACT_RUNTIME_AND_TEST_BYTES",
+    "RUN_THE_FROZEN_PUBLIC_300_ROW_IFBENCH_POPULATION_AS_ZERO_TERMINAL_REALITY_TO_MEASURE_PROVED_SCORE_MASS_DELTA_WITH_PUBLIC_instruction_id_list_USED_ONLY_BY_THE_VERIFIER",
+    "COMPOSE_WITH_THE_SOURCE_DERIVED_DESCRIPTION_INVERTER_AND_PROMPT_ONLY_RATIO_OVERLAP_CONSTRUCTOR_AFTER_THEIR_OWN_VERIFICATION",
+    "FREEZE_A_SUCCESSOR_ONLY_AFTER_ZERO_REALITY_PUBLIC_AND_ALREADY_EXPOSED_PREFIX_EVIDENCE_DOMINATES_THE_FAILED_64_PERCENT_INCUMBENT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
