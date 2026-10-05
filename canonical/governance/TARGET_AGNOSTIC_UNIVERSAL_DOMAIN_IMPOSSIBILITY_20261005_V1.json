@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_AGNOSTIC_UNIVERSAL_DOMAIN_IMPOSSIBILITY_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__OVERBROAD_DOMAIN_ESCAPE_REFUTED__TARGET_SPECIFIC_COMPLETENESS_INFORMATION_IRREDUCIBLE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Test whether literal target-discovery completeness can avoid target-specific characterization by selecting a target-agnostic universal behavior domain D that is guaranteed to contain every possible Opus 5.5 behavior, then proving Brain dominates all D.",
+  "theorem": {
+    "name": "MUTUALLY_INCOMPATIBLE_TARGET_DOMAIN_OBSTRUCTION",
+    "statement": "If a proposed target-agnostic domain D contains two behaviors that require mutually incompatible outputs/actions on the same admissible state under an exact or otherwise mutually exclusive success criterion, no single deterministic Brain policy can dominate both on that state. Therefore an unconstrained domain broad enough to include arbitrary possible target behaviors is not a viable universal-dominance escape from target characterization.",
+    "minimal_witness": {
+      "state": "x",
+      "behavior_A": "SUCCESS_IFF_BRAIN_OUTPUT_ON_x_EQUALS_0",
+      "behavior_B": "SUCCESS_IFF_BRAIN_OUTPUT_ON_x_EQUALS_1",
+      "deterministic_brain_output": "b_IN_{0,1}",
+      "contradiction": "DOMINATING_A_AND_B_REQUIRES_b_EQUALS_0_AND_b_EQUALS_1"
+    },
+    "scope": "THIS_THEOREM_BLOCKS_ONLY_TARGET_AGNOSTIC_SUPERDOMAINS_THAT_ADMIT_MUTUALLY_INCOMPATIBLE_REQUIREMENTS. IT_DOES_NOT_BLOCK_A_TARGET_SPECIFIC_COMPLETE_DOMAIN_PROVED_TO_MATCH_OR_COVER_ACTUAL_OPUS55_BEHAVIOR."
+  },
+  "relation_to_w3_collapse": {
+    "prior_theorem": "canonical/governance/OPUS55_W3_DOMAIN_PREMISE_COLLAPSE_THEOREM_20261005_V1.json",
+    "consequence": [
+      "W3_NEEDS_U_SUBSET_OF_D_OR_EQUIVALENT_COMPLETE_DOMAIN_PREMISE.",
+      "CHOOSING_D_AS_AN_UNCONSTRAINED_ALL_POSSIBLE_BEHAVIORS_SUPERDOMAIN_DOES_NOT_REMOVE_THE_PREMISE_BECAUSE_SUCH_A_DOMAIN_CAN_CONTAIN_MUTUALLY_INCOMPATIBLE_BEHAVIORS_AND_BECOME_UNDOMINATABLE.",
+      "A_USEFUL_D_MUST_BE_NARROWED_BY_TARGET_SPECIFIC_SEMANTICS_OR_ANOTHER_SOUND_COMPLETENESS_CHARACTERIZATION."
+    ]
+  },
+  "irreducible_information_result": {
+    "statement": "ANY_SOUND_LITERAL_ALL_CERTIFICATION_ROUTE_MUST CONTAIN TARGET-SPECIFIC INFORMATION SUFFICIENT TO DISTINGUISH THE ACTUAL OPUS55 BEHAVIOR DOMAIN FROM OVERBROAD DOMAINS THAT INCLUDE INCOMPATIBLE NON-TARGET BEHAVIORS.",
+    "possible_sources": [
+      "EXPLICIT_TARGET_OWNER_EXHAUSTIVE_SPECIFICATION",
+      "IMPLEMENTATION_LEVEL_CHARACTERIZATION_SUFFICIENT_TO_DERIVE_THE_TARGET_DOMAIN",
+      "ANOTHER_INDEPENDENTLY_VERIFIED_COMPLETE_TARGET_DOMAIN_CHARACTERIZATION"
+    ],
+    "not_sufficient": [
+      "FINITE_NONEXHAUSTIVE_BENCHMARK_ACCUMULATION",
+      "SELF_REFERENTIAL_LABEL_ALL_USEFUL_OPUS55_BEHAVIORS_WITHOUT_EXTENT_PROOF",
+      "TARGET_AGNOSTIC_ALL_POSSIBLE_BEHAVIORS_DOMAIN",
+      "W3_DOMINANCE_PROOF_OVER_A_DOMAIN_WITH_UNPROVED_TARGET_COVERAGE"
+    ]
+  },
+  "scheduler_delta": {
+    "delete": [
+      "BUILD_DOMINANCE_OVER_UNCONSTRAINED_ALL_POSSIBLE_BEHAVIOR_DOMAIN",
+      "SEARCH_FOR_TARGET_AGNOSTIC_UNIVERSAL_SUPERDOMAIN_AS_LITERAL_COMPLETENESS_SHORTCUT",
+      "TREAT_COMPUTATIONAL_EXPRESSIVITY_OR_TURING_COMPLETENESS_AS_PERFORMANCE_DOMINANCE"
+    ],
+    "prioritize": [
+      "COMPLETE_TARGET_SPECIFIC_DOMAIN_INFORMATION",
+      "OBSERVED_EPOCH_ACCEPTANCE_CLOSURE_IN_PARALLEL",
+      "AFTER_TARGET_DOMAIN_COMPLETENESS__MINIMUM_SOUND_DOMINANCE_OR_COMPONENT_PROOF"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_TARGET_SPECIFIC_COMPLETE_DOMAIN_CHARACTERIZATION_IS_IMPOSSIBLE",
+    "NO_CLAIM_OPUS55_CONTAINS_CONTRADICTORY_BEHAVIORS",
+    "NO_CLAIM_COMPUTATIONAL_UNIVERSALITY_IS_USELESS",
+    "NO_LITERAL_TERMINAL_COMPLETION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
