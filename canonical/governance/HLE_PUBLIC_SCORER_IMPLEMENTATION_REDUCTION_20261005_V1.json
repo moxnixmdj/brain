@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_PUBLIC_SCORER_IMPLEMENTATION_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PUBLIC_HLE_SCORER_IMPLEMENTATION_BOUND__ANTHROPIC_FROZEN_JUDGE_COMPARABILITY_STILL_OPEN__ZERO_CREDIT__NO_CASE_EXPOSURE",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "objective": "Delete any residual assumption that the base HLE scorer implementation is private while preserving the stricter requirement to prove comparability to the frozen Anthropic HLE-with-tools evaluation protocol before score credit.",
+  "primary_source_binding": {
+    "repository": "centerforaisafety/hle",
+    "commit": "22ed3074b1e7b134bcbc09028d0ba320839b0655",
+    "judge_path": "hle_eval/run_judge_results.py",
+    "judge_git_blob_sha": "4caca7c5e6eaa9c64ec33e5f1bcc93312e6c5b31",
+    "readme_path": "README.md",
+    "readme_git_blob_sha": "a948c9512541fff702aaf5e0c8bc371fded3689c"
+  },
+  "verified_source_facts": {
+    "official_simple_evaluation_code_is_public": true,
+    "official_judge_prompt_is_public": true,
+    "official_current_default_judge_model": "o3-mini-2025-01-31",
+    "prior_default_judge_comment": "gpt-4o-2024-08-06",
+    "judge_task": "EXTRACT_FINAL_ANSWER_AND_COMPARE_TO_SUPPLIED_CORRECT_ANSWER_WITH_SMALL_NUMERICAL_MARGIN",
+    "accuracy_reducer_is_public": true,
+    "dataset_access_remains_gated": true
+  },
+  "scheduler_delta": {
+    "delete": [
+      "HLE_BASE_SCORER_IMPLEMENTATION_PRIVATE_OR_UNDISCOVERED_AS_A_BLOCKER",
+      "GENERIC_SEARCH_FOR_HLE_JUDGE_PROMPT_OR_ACCURACY_REDUCER"
+    ],
+    "preserve": [
+      "AUTHENTICATED_HUGGING_FACE_HLE_ACCESS",
+      "EXACT_2500_POPULATION_AND_FROZEN_REVISION_BINDING",
+      "ANTHROPIC_HLE_WITH_TOOLS_JUDGE_AND_CONTAMINATION_PROTOCOL_COMPARABILITY_OR_SEPARATELY_VERIFIED_CONSERVATIVE_STRONGER_SCORER_RELATION",
+      "BRAIN_SCORE_CERTIFICATE_GE_67_7"
+    ],
+    "rule": "PUBLIC_CAIS_JUDGE_IMPLEMENTATION_MUST_NOT_BE_SUBSTITUTED_FOR_THE_FROZEN_ANTHROPIC_RESULT_PROTOCOL_WITHOUT_EXACT_EQUIVALENCE_OR_A_SOUND_CONSERVATIVE_SCORE_RELATION"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_CAIS_DEFAULT_O3_MINI_JUDGE_IS_IDENTICAL_TO_ANTHROPIC_HLE_WITH_TOOLS_GRADING",
+    "NO_CLAIM_HUGGING_FACE_HLE_GATE_IS_ACCEPTED",
+    "NO_DATASET_CASES_DOWNLOADED_OR_EXPOSED",
+    "NO_HLE_BRAIN_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "observed_brain_head_before_write": "e139660d9e26fd5c1c45ba1f5d77e1639a619ad6"
+}
