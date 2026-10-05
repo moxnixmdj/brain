@@ -31,7 +31,7 @@ def mediator_request():
         "process_api":"subprocess.run",
         "function":"run",
         "effect_class":"READ_ONLY_DECLARED_QUERY",
-        "registry_site_count":29,
+        "registry_site_count":22,
         "runtime_join":"EXACT_PATH_LINE_API",
       },
     }
