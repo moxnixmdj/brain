@@ -58,7 +58,7 @@ class PandocArtifactExecutorTests(unittest.TestCase):
             def fake(prepared,popen_impl):
                 pathlib.Path(prepared["output_dir"],"artifact.pdf").write_bytes(payload)
                 return {"timed_out":False,"returncode":0,"stdout_b64":base64.b64encode(b"ok").decode(),"stderr_b64":""}
-            with patch.object(ex,"_resolve_tool",side_effect=lambda n:"/usr/bin/"+n), patch.object(ex.confinement,"_inside_mounts",return_value=[]), patch.object(ex.confinement,"_run_confined",side_effect=fake):
+            with patch.object(ex,"_resolve_tool",side_effect=lambda n:"/usr/bin/"+n), patch.object(ex.confinement,"_inside_mounts",return_value=[]), patch.object(ex.confinement,"_run_confined",side_effect=fake), patch.object(ex.os,"geteuid",create=True,return_value=-1):
                 cp=ex.make_executor(popen_impl=lambda *a,**kw:None)(c)
             self.assertEqual(cp.returncode,0)
             self.assertEqual((root/"out.pdf").read_bytes(),payload)
