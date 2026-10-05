@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_V12_REMOTE_DEVICE_ACCESS_STATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "POINT_IN_TIME_REMOTE_DEVICE_OFFLINE__ACCOUNT_CLI_PREFLIGHT_UNAVAILABLE__ZERO_CREDIT",
+  "source": "ChatGPT Remote Desktop Commander device registry",
+  "observed": {
+    "device_name": "Mo",
+    "device_id": "2dd01132-a622-46ff-bb43-1ac1e0d70960",
+    "status": "OFFLINE",
+    "last_seen": "approximately 80 hours before observation",
+    "app_version": "0.2.51"
+  },
+  "impact": [
+    "CANNOT_RUN_BUILDKITE_ACCOUNT_ZERO_CASE_PREFLIGHT_ON_USER_LAPTOP_NOW",
+    "CANNOT_INSPECT_EXISTING_AUTHENTICATED_HF_GOOGLE_OR_BUILDKITE_CLI_BINDINGS_NOW",
+    "DOES_NOT_PROVE_THOSE_ACCOUNTS_OR_CREDENTIALS_DO_NOT_EXIST",
+    "REMOTE_DEVICE_AVAILABILITY_IS_AN_ACCESS_BLOCKER_ONLY__NOT_A_CAPABILITY_OR_ACCEPTANCE_FAILURE"
+  ],
+  "hard_rules": [
+    "NO_SECRET_VALUES_READ",
+    "NO_CREDENTIAL_INFERENCE_FROM_OFFLINE_STATE",
+    "NO_TERMINAL_CASES_CONSUMED",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
