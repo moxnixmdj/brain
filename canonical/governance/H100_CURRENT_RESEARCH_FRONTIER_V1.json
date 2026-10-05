@@ -500,6 +500,37 @@
       "unverified_cosh_fail_closed": true,
       "persistent_learned_bytes": 0,
       "deduction": "THE_JIT_OPERATOR_ACQUISITION_TO_TRANSFER_TO_COMPILE_TO_ZERO_RAW_SEARCH_REUSE_LOOP_IS NOW PUBLIC_RUNNER_VERIFIED FOR_ERF"
+    },
+    "safe_stdlib_operator_acquisition": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__GENERIC_ATAN_TANH_ACQUISITION_AND_TRANSFER__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_SAFE_STDLIB_OPERATOR_ACQUISITION_PRECOMMIT_V1.json",
+      "verification": "canonical/verification/H100_SAFE_STDLIB_OPERATOR_ACQUISITION_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "runtime": "canonical/runtime/h100_safe_stdlib_operator_acquisition_v1.py",
+      "operators": [
+        "atan",
+        "tanh"
+      ],
+      "arbitrary_module_imports": 0,
+      "arbitrary_code_execution": 0,
+      "external_learned_capability_calls": 0,
+      "persistent_learned_bytes": 0,
+      "deduction": "ONE_DESCRIPTOR_DRIVEN_STDLIB_MATH_OPERATOR_GATE ACQUIRED AND TRANSFERRED TWO DISTINCT NEW OPERATORS AFTER REGISTRY_V5 AND FIXED_EXPRESSION_GRAMMAR MISSES__THIS GENERALIZES THE PRIOR ERF ONE_OFF WITHIN A SAFE STDLIB MATH SCOPE"
+    },
+    "verified_capability_registry_v6": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__SIXTEEN_ENTRIES__ATAN_TANH_RATCHET_CLOSED__ZERO_CREDIT",
+      "runtime": "canonical/runtime/h100_verified_capability_registry_v6.py",
+      "verification": "canonical/verification/H100_REGISTRY_V6_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "entry_count": 16,
+      "added_capabilities": [
+        "CAP_AFFINE_ATAN_V1",
+        "CAP_AFFINE_TANH_V1"
+      ],
+      "atan_transfer_library_hit": true,
+      "tanh_transfer_library_hit": true,
+      "legacy_erf_library_hit": true,
+      "unverified_cosh_fail_closed": true,
+      "persistent_learned_bytes": 0,
+      "deduction": "THE VERIFIED CAPABILITY LIBRARY NOW COMPILES TWO GENERICALLY ACQUIRED STDLIB OPERATORS WITH ZERO RAW SEARCH ON THEIR TRANSFER TASKS AND PRESERVES FAIL_CLOSED BEHAVIOR FOR AN UNVERIFIED OPERATOR FAMILY"
     }
   },
   "next_structural_residuals_ranked": [
@@ -510,8 +541,8 @@
     },
     {
       "rank": 2,
-      "residual": "SAFE_GENERAL_OPERATOR_AND_EXECUTABLE_CAPABILITY_ACQUISITION_BEYOND_FROZEN_STDLIB_ERF",
-      "reason": "REGISTRY_V5 PUBLIC RUNNER CLOSES A CONSTRUCTIVE FIXED_OPERATOR_SET FAILURE VIA JIT VERIFIED MATH_ERF ACQUISITION AND COMPILE_REUSE__THE NEXT INTERNAL A LIMIT IS A GENERAL SAFE CONTENT_ADDRESSED ACQUISITION CONTRACT FOR NEW EXECUTABLE PRIMITIVES AND TOOLS WITHOUT GRANTING ARBITRARY CODE_EXECUTION OR LEARNED_PROVIDER SUBSTITUTION"
+      "residual": "SAFE_CONTENT_ADDRESSED_NON_STDLIB_EXECUTABLE_OR_TOOL_ACQUISITION_WITHOUT_ARBITRARY_CODE_AUTHORITY",
+      "reason": "GENERIC STDLIB MATH OPERATOR ACQUISITION IS NOW SECOND_CARRIER VERIFIED ACROSS ERF ATAN AND TANH AND REGISTRY_V6 COMPILES ALL THREE FAMILIES__THE NEXT INTERNAL A BOUNDARY IS ACQUIRING NON_STDLIB EXECUTABLE CAPABILITIES OR TOOLS THROUGH A CONTENT_ADDRESSED TYPED CONTRACT WITHOUT GRANTING ARBITRARY CODE_EXECUTION NETWORK OR LEARNED_PROVIDER SUBSTITUTION"
     },
     {
       "rank": 3,
@@ -633,7 +664,12 @@
     "jit_verified_operator_acquisition_demonstrated": true,
     "jit_verified_operator_scope": "ONE_PYTHON_STDLIB_ERF_PRIMITIVE_WITH_FROZEN_PROBES_AND_TRANSFER",
     "registry_v5_jit_primitive_public_runner_verified": true,
-    "learned_byte_rung_still_zero_after_registry_v5": true
+    "learned_byte_rung_still_zero_after_registry_v5": true,
+    "safe_stdlib_operator_acquisition_multi_operator_verified": true,
+    "safe_stdlib_operator_acquisition_scope": "PYTHON_STDLIB_MATH_UNARY_FLOAT__ERF_ATAN_TANH",
+    "registry_v6_operator_ratchet_verified": true,
+    "registry_v6_entry_count": 16,
+    "safe_nonstdlib_executable_acquisition_verified": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
