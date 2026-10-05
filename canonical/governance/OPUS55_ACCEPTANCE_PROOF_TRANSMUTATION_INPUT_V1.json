@@ -1,15 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1",
-  "date": "2026-10-02",
-  "status": "FROZEN_TWO_TYPED_FULL_PROTOCOL_WITNESSES__PRESERVE_2_EXISTING__EXPECT_4_OF_19",
+  "date": "2026-10-03",
+  "status": "FROZEN_CURRENT_SCOPE_COMPLETE_RECOVERY_WITNESS__EXPECT_4_OF_19__TOOL_DISCOVERY_REOPENED",
   "protocols": {
     "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
     "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
   },
   "evidence": [
     {
-      "id": "TOOL_DISCOVERY_TERMINAL_CEILING_ABSOLUTE_DOMINANCE_20261002_V1",
-      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "id": "RECOVERY_UNIVERSAL_SCOPE_OBJECTIVE_BOUND_20261003_V2",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "mode": "ABSOLUTE_DOMINANCE",
       "verified": true,
       "independent": true,
@@ -17,46 +17,47 @@
       "binds_frozen_protocol": true,
       "scope_relation": "PROVEN_STRONGER",
       "closes_entire_protocol": true,
-      "source_witness_path": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
-      "source_terminal_full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
-      "independent_verification": "canonical/verification/TERMINAL_CEILING_WITNESS_LIFTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "source_witness_path": "canonical/governance/RECOVERY_OPUS55_ZERO_REALITY_ACCEPTANCE_CANDIDATE_V1.json",
+      "independent_verification": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "scope_completeness": {
+        "verified": true,
+        "independent": true,
+        "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "all_admissible_target_inputs_proved": true,
+        "formal_completeness": true,
+        "receipt": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json"
+      },
       "result": {
         "direction": "higher",
         "brain_lower_bound": 1,
         "theoretical_upper_bound": 1
-      }
+      },
+      "scope_note": "The independently verified Recovery V2 receipt proves the whole frozen Recovery protocol via universal P1 scope restoration and objective ceiling/floor bounds. The transmuter needs one scalar dominance relation; terminal recovery at the theoretical ceiling supplies the higher-is-better witness while the same receipt separately verifies causal localization ceiling and zero critical fail-closed misses."
+    }
+  ],
+  "excluded_stale_witnesses": [
+    {
+      "id": "TOOL_DISCOVERY_TERMINAL_CEILING_ABSOLUTE_DOMINANCE_20261002_V1",
+      "reason": "REOPENED_BY_SCOPE_COMPLETENESS_FIREWALL__FINITE_SAMPLE_PERFECT_SCORE_DOES_NOT_ESTABLISH_PROTOCOL_WIDE_SCOPE__CURRENT_TOOL_DISCOVERY_V2_FRONTIER_REMAINS_OPEN"
     },
     {
       "id": "DELEGATION_TEMPORAL_TERMINAL_CEILING_ABSOLUTE_DOMINANCE_20261002_V1",
-      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "mode": "ABSOLUTE_DOMINANCE",
-      "verified": true,
-      "independent": true,
-      "contamination_clean": true,
-      "binds_frozen_protocol": true,
-      "scope_relation": "PROVEN_STRONGER",
-      "closes_entire_protocol": true,
-      "source_witness_path": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
-      "source_terminal_full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
-      "independent_verification": "canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "result": {
-        "direction": "higher",
-        "brain_lower_bound": 1,
-        "theoretical_upper_bound": 1
-      }
+      "reason": "DELEGATION_ALREADY_PASS_IN_FROZEN_PROTOCOLS__REDUNDANT_TYPED_WITNESS_NOT_REQUIRED_FOR_CURRENT_COMPILE"
     }
   ],
-  "reason": "Two independently verified full-protocol absolute-dominance witnesses now exist: tool discovery and temporally transported delegation. No other open family receives transmuted acceptance credit.",
+  "reason": "Current frozen protocols already carry three PASS rows: long-horizon memory, subagent delegation, and exact symbolic computation. Recovery is the only additional open family with a current independently verified full-protocol scope-complete stronger witness. Tool Discovery remains explicitly open.",
   "expected_compile_result": {
     "family_count": 19,
     "closed_family_count": 4,
     "open_family_count": 15,
-    "new_family_promotions": 2,
-    "newly_closed_families": [
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-      "SUBAGENT_DELEGATION_AND_COORDINATION"
+    "new_family_promotions_from_input": 1,
+    "newly_closed_families_from_input": [
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+    ],
+    "must_remain_open": [
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
     ]
   },
-  "next": "RUN_ACCEPTANCE_PROOF_TRANSMUTER__INDEPENDENTLY_VERIFY_EXACT_4_OF_19_RESULT__ONLY_THEN_UPDATE_ACCEPTANCE_CALIBRATION_RESIDUAL_AND_TERMINAL_AUTHORITY",
+  "next": "RUN_ACCEPTANCE_PROOF_TRANSMUTER__INDEPENDENTLY_VERIFY_EXACT_4_OF_19_RESULT__USE_ONLY_AS_CURRENT_PROOF_ROUTING_TRUTH__RECOVERY_ACCEPTANCE_ALREADY_CANONICALLY_PROMOTED",
   "incremental_spend_usd": 0
 }

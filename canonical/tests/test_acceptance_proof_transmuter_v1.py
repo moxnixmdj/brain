@@ -82,13 +82,15 @@ class Tests(unittest.TestCase):
     def test_bad_evidence_shape_fails_closed(self):
         self.assertEqual(evaluate(protocols(),{"evidence":"bad"})["status"],"FAIL_CLOSED")
 
-    def test_live_repo_stays_2_17_without_typed_witnesses(self):
+    def test_live_repo_reflects_current_4_15_scope_complete_witness_set(self):
         root=Path(__file__).resolve().parents[2]
         pp=root/"canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
         ep=root/"canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json"
         if not pp.exists() or not ep.exists(): self.skipTest("integration fixtures absent")
         out=evaluate(json.loads(pp.read_text()),json.loads(ep.read_text()))
-        self.assertEqual((out["family_count"],out["closed_family_count"],out["open_family_count"]),(19,2,17))
+        self.assertEqual((out["family_count"],out["closed_family_count"],out["open_family_count"]),(19,4,15))
+        self.assertEqual(self.row(out,"SELF_VERIFICATION_DEBUGGING_AND_RECOVERY")["result_status"],"PASS")
+        self.assertEqual(self.row(out,"TOOL_DISCOVERY_SELECTION_AND_LEARNING")["result_status"],"DEFINED_RESULT_OPEN")
 
 if __name__=="__main__":
     unittest.main(verbosity=2)

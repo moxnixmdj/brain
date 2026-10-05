@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_COMPILER_V1",
-  "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__SCHEDULING_AND_PROOF_ROUTING_ONLY__ZERO_CAPABILITY_CREDIT",
+  "date": "2026-10-03",
+  "status": "ACTIVE_FAIL_CLOSED__CURRENT_4_OF_19_PROOF_ROUTING_TRUTH__ZERO_CAPABILITY_CREDIT",
   "objective": "Delete unnecessary comparator and fresh-reality work by allowing only formally stronger full-scope proof modes to satisfy an unchanged frozen Opus 5.5 acceptance protocol.",
   "runtime": "canonical/runtime/acceptance_proof_transmuter_v1.py",
   "tests": "canonical/tests/test_acceptance_proof_transmuter_v1.py",
@@ -49,11 +49,15 @@
   },
   "current_truth": {
     "behavioral_family_pass": "19/19",
-    "opus55_acceptance_closed": "2/19",
-    "opus55_acceptance_open": "17/19",
+    "opus55_acceptance_closed": "4/19",
+    "opus55_acceptance_open": "15/19",
+    "proved_atomic_predicates": "11/38",
+    "unresolved_atomic_predicates": "27/38",
+    "tool_discovery_scope_status": "OPEN",
+    "recovery_status": "PROMOTED_FROM_INDEPENDENT_SCOPE_COMPLETE_STRONGER_PROOF",
     "terminal_goal_achieved": false
   },
-  "expected_breakthrough": "Machine-realize the obstruction certificate escape hatch COMPLETE_ABSOLUTE_OR_FORMAL_CEILING_PROOF_THAT_ELIMINATES_COMPARATOR and generalize it to universal or exhaustive full-scope proofs before new evidence spend.",
+  "expected_breakthrough": "Reuse the verified proof-transmutation machinery only on current full-scope witnesses. Recovery demonstrates the route; Tool Discovery remains open until scope completeness or matched evidence is independently proved.",
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
@@ -66,5 +70,12 @@
     "workflow_run_id": 36982809428,
     "workflow_job_id": 110760951980,
     "verifier_merge_commit": "5581a1e6b5fcc49d6f14488288d9cc4137de2b10"
+  },
+  "live_input_truth_repair": {
+    "action_intent": "canonical/action_intents/2026-10-03_REPAIR_PROOF_TRANSMUTER_LIVE_WITNESS_SET_V1.json",
+    "stale_tool_discovery_witness_removed": true,
+    "recovery_scope_complete_witness_bound": true,
+    "delegation_redundant_witness_removed": true,
+    "acceptance_delta_from_this_repair": 0
   }
 }
