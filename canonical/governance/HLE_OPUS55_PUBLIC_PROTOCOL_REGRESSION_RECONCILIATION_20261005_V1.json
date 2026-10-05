@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OPUS55_PUBLIC_PROTOCOL_REGRESSION_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "DERIVED_TRUTH_REPAIR__PRIOR_INDEPENDENT_PRIMARY_PDF_VERIFICATION_DOMINATES_LAUNCH_PAGE_ONLY_UNDERSPECIFICATION__ZERO_CREDIT",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "regressed_receipt": {
+    "path": "canonical/verification/HLE_OPUS55_PUBLIC_PROTOCOL_INFORMATION_BOUNDARY_20261005_V1.json",
+    "git_blob_sha": "d013ac8d4e47cd66b9a3bbe392e299095d7e2d50",
+    "error": "It correctly observes that the launch page alone is underspecified, but incorrectly elevates that local observation into a global public-protocol residual despite stronger already-bound primary system-card evidence."
+  },
+  "dominating_verified_evidence": {
+    "path": "canonical/verification/HLE_OPUS55_ROUTE_TRUTH_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+    "git_blob_sha": "2d4c75810e7de516019b4cd6553514c52fb9af09",
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__PRIMARY_ANTHROPIC_PDF",
+    "proved_protocol": [
+      "FULL_HLE_2500",
+      "WEB_SEARCH",
+      "WEB_FETCH",
+      "PROGRAMMATIC_TOOL_CALLING",
+      "CODE_EXECUTION",
+      "TOTAL_TOKEN_CAP_1000000",
+      "NO_CONTEXT_COMPACTION",
+      "CLAUDE_OPUS_4_6_GRADER",
+      "HLE_SOURCE_BLOCKLIST_AND_CONTAMINATION_REVIEW"
+    ]
+  },
+  "already_active_tool_semantics": {
+    "path": "canonical/governance/HLE_OPUS55_TOOL_ADAPTER_ACTIVATION_V1.json",
+    "git_blob_sha": "95b5b520a8eb9b288e6818bf591a7ab9de379fd5",
+    "status": "ACTIVE__INDEPENDENTLY_VERIFIED"
+  },
+  "scheduler_repair": {
+    "delete": [
+      "ANTHROPIC_HLE_PROTOCOL_OR_TOOLSET_IDENTITY_AS_UNKNOWN",
+      "GENERIC_SEARCH_FOR_OPUS55_HLE_TOOL_PROTOCOL",
+      "GENERIC_SEARCH_FOR_OPUS55_HLE_CONTAMINATION_POLICY"
+    ],
+    "preserve": [
+      "MATERIAL_CAIS_HLE_FULL_2500_AUTO_GATE_ACCOUNT_ACCESS_WITHOUT_CONTAMINATION",
+      "ZERO_COST_CLAUDE_OPUS_4_6_COMPARABLE_GRADER_OR_SEPARATELY_PROVED_CONSERVATIVE_SCORER_RELATION",
+      "BRAIN_SCORE_CERTIFICATE_GE_67_7"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_CAIS_O3_MINI_DEFAULT_EQUALS_OPUS55_GRADER",
+    "NO_DATASET_CASES_READ",
+    "NO_BRAIN_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
