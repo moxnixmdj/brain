@@ -1,0 +1,200 @@
+{
+  "schema": "PROJECT_BRAIN_H100_NESTED_BINARY_TRANSIENT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_FRESH_NESTED_BINARY_OUTCOMES__RESEARCH_BRANCH_ONLY",
+  "objective": "Test zero-persistent-M_fit recursive composition with two binary nodes: an inner binary composition of unary sign classes, followed by an outer binary composition with a third unary class.",
+  "accounting_target": {
+    "persistent_M_fit_bytes": 0,
+    "persistent_inner_binary_classes": 0,
+    "persistent_terminal_index": 0,
+    "persistent_selected_structure": 0
+  },
+  "unary_basis": {
+    "max_depth": 2,
+    "operator_order": [
+      "neg",
+      "abs",
+      "square",
+      "sqrt_abs",
+      "log1p_abs",
+      "sat"
+    ],
+    "target_values_used": false
+  },
+  "binary_operators": [
+    "add",
+    "sub",
+    "mul",
+    "stable_div"
+  ],
+  "recursive_contract": [
+    "BUILD_TRANSIENT_UNARY_SIGN_CLASSES_THROUGH_DEPTH2",
+    "ENUMERATE_INNER_BINARY_COMPOSITIONS_WITH_SIGN_ORIENTATION_COMPLETENESS",
+    "DEDUP_INNER_BINARY_RESULTS_ONLY_BY_EXACT_BEHAVIOR_UP_TO_GLOBAL_SIGN_ON_ALL_X",
+    "COMPOSE_EACH_INNER_SIGN_CLASS_WITH_EACH_UNARY_SIGN_CLASS_AT_THE_OUTER_BINARY_NODE",
+    "GENERATE_BOTH_STABLE_DIV_ORIENTATIONS_AT_THE_OUTER_NODE",
+    "USE_TERMINAL_RESIDUAL_DIRECTION_HASHING_ONLY_AFTER_THE_FINAL_BINARY_NODE",
+    "NO_TARGET_Y_DURING_ANY_BASIS_OR_INDEX_CONSTRUCTION",
+    "VERIFY_HASH_PROPOSALS_ON_TRAIN_AND_HOLDOUT",
+    "PERSIST_NOTHING_DISCOVERED"
+  ],
+  "fresh_tasks": [
+    {
+      "id": "NEST_A",
+      "inner_op": "add",
+      "left": [
+        "log1p_abs",
+        "sat"
+      ],
+      "right": [
+        "square",
+        "log1p_abs"
+      ],
+      "outer_op": "mul",
+      "third": [
+        "sqrt_abs",
+        "sat"
+      ],
+      "seed": [
+        0.22,
+        -0.12,
+        0.86
+      ],
+      "transfer": [
+        -0.38,
+        0.23,
+        -1.01
+      ]
+    },
+    {
+      "id": "NEST_B",
+      "inner_op": "sub",
+      "left": [
+        "sqrt_abs",
+        "log1p_abs"
+      ],
+      "right": [
+        "sat",
+        "square"
+      ],
+      "outer_op": "stable_div",
+      "third": [
+        "log1p_abs",
+        "sat"
+      ],
+      "seed": [
+        -0.26,
+        0.15,
+        1.04
+      ],
+      "transfer": [
+        0.54,
+        -0.22,
+        0.77
+      ]
+    },
+    {
+      "id": "NEST_C",
+      "inner_op": "mul",
+      "left": [
+        "square",
+        "sat"
+      ],
+      "right": [
+        "log1p_abs",
+        "sqrt_abs"
+      ],
+      "outer_op": "add",
+      "third": [
+        "sat",
+        "log1p_abs"
+      ],
+      "seed": [
+        0.13,
+        0.29,
+        -0.81
+      ],
+      "transfer": [
+        -0.45,
+        -0.15,
+        1.18
+      ]
+    },
+    {
+      "id": "NEST_D",
+      "inner_op": "stable_div",
+      "left": [
+        "log1p_abs",
+        "square"
+      ],
+      "right": [
+        "sqrt_abs",
+        "sat"
+      ],
+      "outer_op": "sub",
+      "third": [
+        "square",
+        "log1p_abs"
+      ],
+      "seed": [
+        0.4,
+        -0.08,
+        0.73
+      ],
+      "transfer": [
+        -0.19,
+        0.21,
+        -1.23
+      ]
+    },
+    {
+      "id": "NEST_E",
+      "inner_op": "mul",
+      "left": [
+        "sat",
+        "log1p_abs"
+      ],
+      "right": [
+        "sqrt_abs",
+        "square"
+      ],
+      "outer_op": "stable_div_reverse",
+      "third": [
+        "log1p_abs",
+        "sqrt_abs"
+      ],
+      "seed": [
+        -0.13,
+        0.25,
+        0.97
+      ],
+      "transfer": [
+        0.31,
+        -0.18,
+        -0.66
+      ]
+    }
+  ],
+  "pass_gate": [
+    "ALL_FIVE_TARGETS_HASH_TO_NONEMPTY_TERMINAL_BUCKETS",
+    "ALL_FIVE_SEED_HOLDOUT_NRMSE_LE_1E-8",
+    "ALL_FIVE_TRANSFER_HOLDOUT_NRMSE_LE_1E-8",
+    "INDEX_CONSTRUCTION_USES_ZERO_TARGET_VALUES",
+    "PERSISTENT_M_fit_BYTES_ZERO",
+    "NO_INTERMEDIATE_OR_TERMINAL_DISCOVERY_IS_PERSISTED"
+  ],
+  "measurements": [
+    "UNARY_CLASS_COUNT",
+    "INNER_RAW_PROPOSAL_COUNT",
+    "INNER_SIGN_CLASS_COUNT",
+    "OUTER_RAW_PROPOSAL_COUNT",
+    "TERMINAL_RESIDUAL_KEY_COUNT",
+    "INDEX_BUILD_SECONDS",
+    "LOOKUP_PLUS_VERIFICATION_SECONDS"
+  ],
+  "hard_nonclaims": [
+    "THIS_IS_TWO_BINARY_NODES_NOT_ARBITRARY_RECURSIVE_TREE_DEPTH",
+    "EXACT_HASHING_DOES_NOT_SOLVE_NOISY_TARGETS",
+    "M_cap_AND_M_dev_ARE_SEPARATE_FROM_M_fit"
+  ]
+}
