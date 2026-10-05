@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_AUTHORITY_EPOCH_PREEMPTION_V3_SPRITE_CORROBORATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ISOLATED_REMOTE_REPLAY_PASS__CONTENT_BOUND__GITHUB_RUNNER_CARRIER_FAILED_ZERO_STEPS__CORROBORATION_ONLY__ZERO_CREDIT",
+  "subject": {
+    "governance_path": "canonical/governance/AUTHORITY_EPOCH_PREEMPTION_V3.json",
+    "runtime_path": "canonical/runtime/authority_epoch_guard_v1.py",
+    "tests_path": "canonical/tests/test_authority_epoch_guard_v1.py",
+    "branch": "authority-epoch-preemption-v14-20261005",
+    "head_at_replay": "ae746e4f1c30cafc1c527457d9d8483677b2cd50"
+  },
+  "frozen_epoch": {
+    "expected_sha256": "29e4167d1559a954ffd067d6a5d008570a70e99f0e6b776225f5fd0679a6d11b",
+    "components": {
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "ce04ca62612681d3d3493bf8a664f066e0b61b98",
+      "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860",
+      "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+      "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_ACTIVATION_V1.json": "343be0d774f96ed851d668ad29045a12195f12ce",
+      "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14.json": "ecf98388d2055ce9212b14570bc3f86877bc7c6f"
+    }
+  },
+  "github_runner_observation": {
+    "workflow_run_ids": [
+      37250062563,
+      37250062636
+    ],
+    "job_ids": [
+      111575711234,
+      111575711301
+    ],
+    "conclusions": [
+      "failure",
+      "failure"
+    ],
+    "observed_job_steps_each": 0,
+    "observed_runner_id_each": 0,
+    "interpretation": "CARRIER_FAILURE_NO_USER_STEPS_EXECUTED__NOT_TEST_OR_PROOF_FAILURE"
+  },
+  "isolated_replay": {
+    "carrier": "EXISTING_COLD_SPRITE__REMOTE__NO_USER_LAPTOP",
+    "sprite_name": "brain-heldout003-one-shot",
+    "python": "3.14.4",
+    "reconstructed_git_repo": "/tmp/authority-v14-verify",
+    "exact_control_plane_blob_matches": 5,
+    "exact_control_plane_blob_mismatches": 0,
+    "unit_tests": "7_OF_7_PASS",
+    "clean_epoch_check": {
+      "expected": "29e4167d1559a954ffd067d6a5d008570a70e99f0e6b776225f5fd0679a6d11b",
+      "observed": "29e4167d1559a954ffd067d6a5d008570a70e99f0e6b776225f5fd0679a6d11b",
+      "status": "PASS__AUTHORITY_EPOCH_CURRENT"
+    },
+    "adversarial_control_plane_mutation": {
+      "mutated_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "original_blob": "ce04ca62612681d3d3493bf8a664f066e0b61b98",
+      "mutated_blob": "93605c93cd7b9d11d2738420ec43698477185773",
+      "mutated_epoch": "c10168cccd9fb87a18da164f8328643b874fa1afee06f255e1fe0ec045f9233b",
+      "guard_status": "FAIL_CLOSED__STALE_AUTHORITY_EPOCH",
+      "pass_field": false
+    }
+  },
+  "non_control_plane_churn_check": {
+    "observed_main_head_after_replay": "22f3273dd40f56d28fb2c0f16103358a72dd45b3",
+    "control_plane_components_unchanged": true,
+    "epoch_remains": "29e4167d1559a954ffd067d6a5d008570a70e99f0e6b776225f5fd0679a6d11b",
+    "consequence": "UNRELATED_REPOSITORY_CHURN_DOES_NOT_INVALIDATE_FROZEN_WORK"
+  },
+  "hard_nonclaims": [
+    "NOT_AN_INDEPENDENT_PUBLIC_RUNNER_RECEIPT",
+    "DOES_NOT_ACTIVATE_THE_GUARD",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_BENCHMARK_OR_TERMINAL_CASES_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
