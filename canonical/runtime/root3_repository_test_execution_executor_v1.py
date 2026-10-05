@@ -69,7 +69,7 @@ def _prepare(context,repo_root=None):
     return {"profile":PROFILE,"callsite_key":key,"original_argv":[os.fspath(x) for x in cmd],"kwargs":kwargs,"policy":policy,"timeout":timeout,"test_sha256":test_sha,"encoded_spec":encoded,"target_path":str(target)}
 
 def _completed(prepared,result):
-    if hashlib.sha256(pathlib.Path(prepared["target_path"]).read_bytes()).hexdigest()!=prepared["test_sha256"]:
+    if result.get("test_sha256") is not None and result.get("test_sha256")!=prepared["test_sha256"]:\n        raise RepositoryTestExecutionDenied("BROKER_TEST_HASH_MISMATCH")\n    if hashlib.sha256(pathlib.Path(prepared["target_path"]).read_bytes()).hexdigest()!=prepared["test_sha256"]:
         raise RepositoryTestExecutionDenied("TEST_BYTES_DRIFT_AFTER_EXECUTION")
     try:
         stdout_b=base64.b64decode(result.get("stdout_b64") or "",validate=True)
