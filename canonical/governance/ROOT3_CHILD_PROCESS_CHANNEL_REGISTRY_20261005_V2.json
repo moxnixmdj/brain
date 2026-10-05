@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_CHILD_PROCESS_CHANNEL_REGISTRY_20261005_V2",
+  "date": "2026-10-05",
+  "status": "CURRENT__ASTRA_DRIFT_REPAIRED__29_EXACT_PROCESS_SITES__47_MODULE_PROOF_REUSED_BY_BLOB_IDENTITY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "supersedes_current_binding": "canonical runtime child registry authority that pinned ASTRA blob 0912dfa4119950f6d235d501dfa784e65e9f71c9",
+  "subject": {
+    "path": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+    "git_blob_sha": "9274fe69eb54f78eb22a8ee4b895d71215fab33a"
+  },
+  "current_astra": {
+    "path": "canonical/runtime/astra_runtime.py",
+    "git_blob_sha": "85977747574cf7f393ca22a2c65268ed283ab3fe",
+    "site_count": 8
+  },
+  "unchanged_c1": {
+    "verification": "canonical/verification/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CONNECTOR_VERIFICATION_20261005_V2.json",
+    "git_blob_sha": "b8e56a9b807cd4b77de6cc5656a780b12ddc2949",
+    "module_count": 47,
+    "exact_current_blob_matches": 47
+  },
+  "verification": "canonical/verification/ROOT3_ASTRA_CALLSITE_DRIFT_REPAIR_CONNECTOR_VERIFICATION_20261005_V1.json",
+  "exact_state": {
+    "site_count": 29,
+    "subprocess_run_count": 27,
+    "subprocess_popen_count": 2,
+    "modules_with_process_sites": 13
+  },
+  "truth_boundary": [
+    "PROCESS_CREATION_CHANNEL_IDENTITY_CURRENT_AGAIN",
+    "EFFECT_MEDIATION_AND_CHILD_INTERNAL_EFFECT_TOTALITY_REMAIN_SEPARATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
