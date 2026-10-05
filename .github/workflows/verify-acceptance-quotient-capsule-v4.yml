@@ -1,0 +1,54 @@
+name: Verify acceptance quotient capsule V4
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/ACCEPTANCE_QUOTIENT_CAPSULE_NO_HIDDEN_DEBT_REDUCTION_20261005_V1.json"
+      - "canonical/runtime/acceptance_cutpoint_capsule_quotient_v1.py"
+      - "canonical/tests/test_acceptance_cutpoint_capsule_quotient_v1.py"
+      - "canonical/runtime/acceptance_quotient_simulation_v4_capsule_bound.py"
+      - "canonical/tests/test_acceptance_quotient_simulation_v4_capsule_bound.py"
+      - ".github/workflows/verify-acceptance-quotient-capsule-v4.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Verify exact bound blobs
+        shell: python
+        run: |
+          import hashlib
+          from pathlib import Path
+
+          expected = {
+              "canonical/governance/ACCEPTANCE_QUOTIENT_CAPSULE_NO_HIDDEN_DEBT_REDUCTION_20261005_V1.json": "0f4da31ad48a955c86974579b4fbb519f1036e8a",
+              "canonical/runtime/acceptance_cutpoint_capsule_quotient_v1.py": "33fafd04d4c7a29738f11ad9e7b050a037f1c091",
+              "canonical/tests/test_acceptance_cutpoint_capsule_quotient_v1.py": "d0019360d55c0edb03aeac27da34a3e0caf3ad40",
+              "canonical/runtime/acceptance_quotient_simulation_v4_capsule_bound.py": "b96c0a0dd7d309afe8eaf4444270c3064f4ee15f",
+              "canonical/tests/test_acceptance_quotient_simulation_v4_capsule_bound.py": "8913b71d8094c1fe399e06b382562c0987637fb5",
+              "canonical/runtime/composition_state_capsule_v2.py": "cf72b9211872dfe1994248cc2395e031554507b4",
+              "canonical/runtime/acceptance_quotient_simulation_v3.py": "53c0ddfe38d959f664b4306d7e346802f8c948c8",
+          }
+          for path, want in expected.items():
+              data = Path(path).read_bytes()
+              got = hashlib.sha1(
+                  b"blob " + str(len(data)).encode() + b"\0" + data
+              ).hexdigest()
+              if got != want:
+                  raise SystemExit(f"BLOB_DRIFT {path} {got} != {want}")
+          print("EXACT_BLOBS_PASS")
+      - name: Run capsule and V4 adversarial tests
+        run: |
+          python -m unittest -v \
+            canonical.tests.test_acceptance_cutpoint_capsule_quotient_v1 \
+            canonical.tests.test_acceptance_quotient_simulation_v4_capsule_bound \
+            canonical.tests.test_acceptance_quotient_simulation_v3
