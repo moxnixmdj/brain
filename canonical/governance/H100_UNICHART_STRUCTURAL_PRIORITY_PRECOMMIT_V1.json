@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_STRUCTURAL_PRIORITY_PRECOMMIT_V1",
+  "date": "2026-10-05",
+  "status": "PRECOMMITTED_AFTER_COARSE_AND_ERROR_FIRST_DEV_FAILURES__BEFORE_STRUCTURAL_PRIORITY_OUTPUTS__ZERO_CREDIT",
+  "objective": "Test whether structural sensitivity allocation, rather than pure source reconstruction SSE, can preserve UniChart behavior under the same 100,000,000-byte ceiling.",
+  "development_state": {
+    "prior_public_20_case_slice": "NOW_TREATED_AS_DEVELOPMENT_DATA_ONLY",
+    "reason": "COARSE_W4_W3_AND_ERROR_FIRST_KNAPSACK_OUTCOMES_HAVE_BEEN_OBSERVED",
+    "final_claim_rule": "A_NEW_UNTOUCHED_PUBLIC_HOLDOUT_MUST_BE_FROZEN_BEFORE_ANY_FINAL_CANDIDATE_HOLDOUT_OUTPUTS"
+  },
+  "policy": {
+    "forced_w4": [
+      "TIED_TOKEN_EMBEDDING_AND_LM_HEAD",
+      "DECODER_POSITIONAL_EMBEDDINGS",
+      "RELATIVE_POSITION_BIAS_TABLES",
+      "LAYERNORM_AND_NORM_PARAMETERS",
+      "ONE_DIMENSIONAL_TENSORS",
+      "BIASES",
+      "ENCODER_EMBEDDING_STEM"
+    ],
+    "remaining_budget": "SOURCE_ONLY_DESCENDING_SSE_W3_MINUS_SSE_W4",
+    "i64": "LOSSLESS",
+    "group_size": 256,
+    "benchmark_labels_used_for_precision_selection": false,
+    "benchmark_outputs_used_for_precision_selection": false
+  },
+  "byte_contract": {
+    "h100_budget_bytes": 100000000,
+    "ancillary_bytes": 5313202,
+    "complete_bundle_must_be_le_budget": true
+  },
+  "runtime": "canonical/runtime/h100_unichart_structural_priority_v1.py",
+  "tests": "canonical/tests/test_h100_unichart_structural_priority_v1.py",
+  "next_actions": [
+    "RUN_SOURCE_ONLY_PACKER_AND_BYTE_AUDIT",
+    "USE_EXISTING_20_CASE_SLICE_ONLY_AS_DEVELOPMENT_DIAGNOSTIC",
+    "IF_PROMISING__FREEZE_NEW_UNTOUCHED_CHARTQA_HOLDOUT_BEFORE_FINAL_EVALUATION",
+    "NO_FINAL_H100_CAPABILITY_CREDIT_FROM_THE_DEVELOPMENT_SLICE"
+  ],
+  "hard_nonclaims": [
+    "NO_CAPABILITY_PRESERVATION_CLAIM",
+    "NO_CHARTOGRAPHY_THRESHOLD_CREDIT",
+    "NO_FULL_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false
+}
