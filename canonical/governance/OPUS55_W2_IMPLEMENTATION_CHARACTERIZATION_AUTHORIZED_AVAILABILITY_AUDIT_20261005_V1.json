@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_W2_IMPLEMENTATION_CHARACTERIZATION_AUTHORIZED_AVAILABILITY_AUDIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CURRENT_AUTHORIZED_EVIDENCE_AUDIT__NO_BRAIN_ACCESSIBLE_W2_COMPLETE_IMPLEMENTATION_CHARACTERIZATION_FOUND__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Test the W2 implementation-level complete-characterization route for literal-all finality using current authorized first-party evidence, without inferring global nonexistence from public absence.",
+  "w2_requirement": "Exact target implementation information plus serving/tool/interface semantics sufficient for a sound derivation or exact internal simulation of every admissible useful Opus 5.5 behavior.",
+  "authorities": {
+    "minimum_information_cut": "canonical/governance/OPUS55_TARGET_DISCOVERY_MINIMUM_INFORMATION_CUT_20261005_V1.json",
+    "route_collapse": "canonical/governance/UNIVERSAL_DOMINANCE_ROUTE_COLLAPSE_THEOREM_20261005_V1.json",
+    "finite_black_box_lower_bound": "canonical/governance/FINITE_BLACK_BOX_TARGET_UNIVERSAL_CERTIFICATION_LOWER_BOUND_V2.json"
+  },
+  "first_party_observations": [
+    {
+      "source_url": "https://www.anthropic.com/claude/opus",
+      "observation": "Opus 5.5 is offered publicly through Claude products, the Claude Platform, AWS, Google Cloud, and Microsoft Foundry as hosted model access.",
+      "effect": "HOSTED_INFERENCE_ACCESS_IS_NOT_IMPLEMENTATION_LEVEL_COMPLETE_CHARACTERIZATION"
+    },
+    {
+      "source_url": "https://www.anthropic.com/transparency",
+      "observation": "Anthropic describes Opus 5.5 training data as a proprietary mix and provides high-level architecture/training-methodology summaries rather than exact model implementation semantics.",
+      "effect": "HIGH_LEVEL_MODEL_REPORT_DOES_NOT_SUPPLY_W2"
+    },
+    {
+      "source_url": "https://www.anthropic.com/responsible-scaling-policy",
+      "observation": "Anthropic requires access controls around model weights including multi-party authorization, temporary least-privilege access and measures intended to reduce weight exfiltration.",
+      "effect": "MODEL_WEIGHTS_ARE_TREATED_AS_PROTECTED_INTERNAL_ASSETS__NOT_CURRENT_PUBLIC_IMPLEMENTATION_INPUTS"
+    },
+    {
+      "source_url": "https://www.anthropic.com/research/deprecation-commitments",
+      "observation": "Anthropic commits to preserving weights of publicly released models and discusses possible future public availability of select past models while stating that maintaining public inference access is currently costly/complex.",
+      "effect": "WEIGHT_PRESERVATION_BY_TARGET_OWNER_IS_NOT_BRAIN_ACCESS_OR_W2_CHARACTERIZATION"
+    },
+    {
+      "source_url": "https://www.anthropic.com/research/confidential-inference-trusted-vms",
+      "observation": "Anthropic describes model weights as sensitive data delivered to protected inference servers.",
+      "effect": "FURTHER_SUPPORTS_THAT_PUBLIC_INFERENCE_INTERFACE_DOES_NOT_EXPOSE_COMPLETE_INTERNAL_MODEL_STATE"
+    }
+  ],
+  "recomputed": {
+    "exact_opus55_weights_in_current_authorized_brain_evidence": false,
+    "exact_architecture_and_all_serving_semantics_in_current_authorized_brain_evidence": false,
+    "exact_tool_interface_and_safeguard_semantics_sufficient_for_full_behavior_derivation": false,
+    "hosted_api_access_available": true,
+    "hosted_api_access_counts_as_brain_owned_internal_simulation": false,
+    "finite_black_box_queries_can_reconstruct_w2_exactly": false,
+    "w2_currently_discharged": false,
+    "global_nonexistence_of_private_w2_information_proved": false
+  },
+  "truth_boundary": {
+    "proved": "CURRENT_AUTHORIZED_PUBLIC_AND_CANONICAL_BRAIN_EVIDENCE_DOES_NOT_SUPPLY_W2.",
+    "not_proved": "ANTHROPIC_OR_AN_AUTHORIZED_PARTY_CAN_NEVER_SUPPLY_W2.",
+    "forbidden_inference": "NO_PUBLIC_WEIGHTS_FOUND_THEREFORE_WEIGHTS_DO_NOT_EXIST.",
+    "ownership_rule": "REMOTE_OPUS_INFERENCE_IS_A_COMPARATOR_OR_EXTERNAL_PROVIDER_CAPABILITY__NOT_BRAIN_OWNED_INTERNALIZED_CAPABILITY."
+  },
+  "scheduler_effect": {
+    "delete": [
+      "TREAT_HOSTED_OPUS55_API_ACCESS_AS_W2",
+      "TRY_FINITE_MODEL_EXTRACTION_OR_BENCHMARK_ACCUMULATION_AS_EXACT_W2_RECONSTRUCTION",
+      "SPEND_COMPUTE_ON_UNIVERSAL_SIMULATION_PROOF_WITHOUT_IMPLEMENTATION_LEVEL_CHARACTERIZATION"
+    ],
+    "activate_only_on_new_evidence": [
+      "AUTHORIZED_RELEASE_OF_EXACT_WEIGHTS_AND_REQUIRED_SERVING_SEMANTICS",
+      "TARGET_OWNER_SUPPLIED_COMPLETE_EXECUTABLE_CHARACTERIZATION",
+      "OTHER_AUTHORIZED_CONTENT_ADDRESSED_IMPLEMENTATION_PACKAGE_PROVED_SUFFICIENT_FOR_EXACT_BEHAVIORAL_DERIVATION"
+    ],
+    "preserve": [
+      "SCOPED_EXACT_COMPARATOR_USE_FOR_ROOT2_WHERE_ZERO_INCREMENTAL_ROUTE_IS_VERIFIED",
+      "OBSERVED_EPOCH_ACCEPTANCE_WORK",
+      "FAIL_CLOSED_LITERAL_ALL_FINALITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_LITERAL_TERMINAL_GOAL_IS_IMPOSSIBLE_IN_PRINCIPLE",
+    "NO_CLAIM_ANTHROPIC_WILL_NEVER_RELEASE_WEIGHTS_OR_COMPLETE_SEMANTICS",
+    "NO_CLAIM_CURRENT_BRAIN_LACKS_ANY_SPECIFIC_USEFUL_CAPABILITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
