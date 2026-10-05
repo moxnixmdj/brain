@@ -1,6 +1,12 @@
 name: Verify LiveBench legacy15 joint witness V1
 
 on:
+  push:
+    paths:
+      - "canonical/runtime/livebench_legacy15_joint_witness_v1.py"
+      - "canonical/runtime/livebench_legacy15_joint_witness_exact_synthetic_audit_v1.py"
+      - "canonical/tests/test_livebench_legacy15_joint_witness_v1.py"
+      - ".github/workflows/verify-livebench-legacy-joint-witness-v1.yml"
   pull_request:
     paths:
       - "canonical/runtime/livebench_legacy15_joint_witness_v1.py"
