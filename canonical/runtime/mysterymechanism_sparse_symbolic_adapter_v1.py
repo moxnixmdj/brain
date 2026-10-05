@@ -574,14 +574,14 @@ def choose_final_experiment(
     target: str = "out",
     grid_levels: int = 7,
 ) -> dict[str, Any]:
-    """Choose the reserved experiment by route-balanced disagreement without repeats.
+    """Choose the reserved experiment by route-balanced information value.
 
-    The benchmark budget makes the final intervention uniquely scarce.  A probe
-    already present in the observations has zero information value, so observed
-    points are excluded before scoring.  When multiple plausible mechanisms are
-    available, the selector maximizes normalized predictive disagreement with
-    route-balanced weights.  If disagreement is unavailable, it uses a
-    deterministic maximin exploration point rather than blindly reusing center.
+    The benchmark observations are noisy, so an exact replicate is not assumed
+    worthless: it can reduce uncertainty.  Instead, predictive disagreement is
+    the primary signal and geometric novelty supplies a bounded redundancy
+    penalty.  A repeat may still win when competing hypotheses disagree there
+    strongly enough.  If useful disagreement is unavailable, the selector uses
+    deterministic maximin exploration instead of blindly reusing the center.
     """
     b = _normalize_bounds(bounds)
     if not isinstance(grid_levels, int) or not 3 <= grid_levels <= 9:
@@ -623,31 +623,10 @@ def choose_final_experiment(
             vals = [lo + (hi - lo) * i / (grid_levels - 1) for i in range(grid_levels)]
         axes.append(vals)
 
-    novel_grid = []
+    grid = []
     for values in itertools.product(*axes):
         point = dict(zip(names, values))
-        n = novelty(point)
-        if n > 1e-10:
-            novel_grid.append((n, tuple(float(v) for v in values), point))
-
-    # The task contract provides only O(d) observations, while the grid has at
-    # least 3**d points, so exhaustion should be unreachable in normal use.
-    # Fail closed instead of returning a known duplicate if a caller violates
-    # that contract.
-    if not novel_grid:
-        return {
-            "status": "FAIL_CLOSED__NO_NOVEL_GRID_POINT",
-            "point": None,
-            "reason": "EVERY_CANDIDATE_GRID_POINT_ALREADY_OBSERVED",
-            "repeated_existing_point": False,
-            "candidate_count": 0,
-            "route_candidate_counts": {},
-            "private_score_claimed": False,
-            "acceptance_credit_delta": 0,
-            "family_credit_delta": 0,
-            "capability_credit_delta": 0,
-            "ownership_credit_delta": 0,
-        }
+        grid.append((novelty(point), tuple(float(v) for v in values), point))
 
     # Pool high-quality hypotheses from independent internal grammars.  The
     # previous selector used only BASE_ZERO_LEARNED candidates, so disagreement
@@ -679,8 +658,8 @@ def choose_final_experiment(
         pass
 
     # Once seven or more rows exist, include the stronger V2 separable route as
-    # well.  Before the reserved benchmark intervention this branch is usually
-    # unavailable by design, because V2's delete-two estimator requires >=7.
+    # well.  Before the reserved 2-D benchmark intervention this branch is
+    # normally unavailable because V2's delete-two estimator requires >=7.
     if len(names) == 2 and len(rows) >= 7:
         try:
             from canonical.runtime import mysterymechanism_separable_transform_v2 as separable
@@ -697,25 +676,26 @@ def choose_final_experiment(
         except (ValueError, OverflowError, ArithmeticError):
             pass
 
-    route_counts = {}
-    for route, _, _, _ in pool:
-        route_counts[route] = route_counts.get(route, 0) + 1
-
-    # Remove obviously dominated tails without assuming risks from different
-    # grammars are calibrated as probabilities.  This prevents one bad
-    # high-amplitude formula from manufacturing artificial disagreement.
+    # Remove obviously dominated tails without pretending the route-specific
+    # errors are calibrated posterior probabilities.
     if pool:
         best_risk = min(item[2] for item in pool)
         risk_ceiling = max(best_risk + 0.05, best_risk * 3.0 + 1e-12)
         pool = [item for item in pool if item[2] <= risk_ceiling]
-        route_counts = {}
-        for route, _, _, _ in pool:
-            route_counts[route] = route_counts.get(route, 0) + 1
+
+    route_counts = {}
+    for route, _, _, _ in pool:
+        route_counts[route] = route_counts.get(route, 0) + 1
 
     best = None
     if len(pool) >= 2:
+        # Each mechanism family receives equal total mass so eight variants from
+        # one grammar cannot outvote one candidate from another grammar merely
+        # because that grammar enumerates more syntactic forms.
         route_mass = {route: 1.0 / count for route, count in route_counts.items()}
-        for n, values, point in novel_grid:
+        total_route_mass = float(len(route_mass))
+        noise_nrmse = max(1e-6, min(item[2] for item in pool))
+        for n, values, point in grid:
             preds = []
             weights = []
             for route, cand, _, predictor in pool:
@@ -726,7 +706,7 @@ def choose_final_experiment(
                 if not math.isfinite(pred):
                     continue
                 preds.append(pred)
-                weights.append(route_mass[route])
+                weights.append(route_mass[route] / total_route_mass)
             if len(preds) < 2:
                 continue
             total_w = sum(weights)
@@ -734,21 +714,29 @@ def choose_final_experiment(
             variance = sum(w * (p - mean) ** 2 for w, p in zip(weights, preds)) / total_w
             rms = math.sqrt(sum(w * p * p for w, p in zip(weights, preds)) / total_w)
             disagreement = math.sqrt(max(0.0, variance)) / max(1.0, abs(mean), rms)
-            # Information first; novelty breaks ties and keeps equal-information
-            # probes away from already sampled neighborhoods.
-            key = (disagreement, n, values)
-            if best is None or key > best[0]:
-                best = (key, point)
 
-    if best is not None and best[0][0] > 1e-12:
+            # Approximate signal-to-noise value, then apply a bounded novelty
+            # factor.  The 0.25 floor deliberately keeps replicates admissible
+            # when they are much more discriminative than any novel point.
+            snr_value = disagreement / math.sqrt(disagreement * disagreement + noise_nrmse * noise_nrmse)
+            novelty_factor = 0.25 + 0.75 * min(1.0, 2.0 * n)
+            acquisition = snr_value * novelty_factor
+            key = (acquisition, disagreement, n, values)
+            if best is None or key > best[0]:
+                best = (key, point, noise_nrmse)
+
+    if best is not None and best[0][1] > 1e-12:
         return {
             "status": "BOUND_CONSTRAINED_INFORMATION_DISCRIMINATOR_V2",
             "point": best[1],
-            "normalized_disagreement": best[0][0],
-            "normalized_novelty": best[0][1],
+            "acquisition_score": best[0][0],
+            "normalized_disagreement": best[0][1],
+            "normalized_novelty": best[0][2],
+            "estimated_noise_nrmse": best[2],
+            "repeat_penalty_floor": 0.25,
             "candidate_count": len(pool),
             "route_candidate_counts": route_counts,
-            "repeated_existing_point": False,
+            "repeated_existing_point": best[0][2] <= 1e-10,
             "all_coordinates_within_declared_bounds": True,
             "private_score_claimed": False,
             "acceptance_credit_delta": 0,
@@ -757,11 +745,10 @@ def choose_final_experiment(
             "ownership_credit_delta": 0,
         }
 
-    # No meaningful model disagreement exists yet.  Spend the reserved
-    # experiment on the point farthest from all observations rather than on an
-    # already-measured center.  This is deterministic, bounded, and strictly
-    # information-safe with respect to exact duplicate probes.
-    n, _, point = max(novel_grid, key=lambda item: (item[0], item[1]))
+    # With no meaningful disagreement, maximize geometric novelty.  This is a
+    # deterministic exploration fallback, not a claim that novelty alone is an
+    # optimal noisy-experiment policy.
+    n, _, point = max(grid, key=lambda item: (item[0], item[1]))
     return {
         "status": "MAXIMIN_NOVEL_EXPLORATION_V2",
         "point": point,
@@ -769,7 +756,7 @@ def choose_final_experiment(
         "reason": "FEWER_THAN_TWO_PLAUSIBLE_CANDIDATES_OR_NO_USEFUL_DISAGREEMENT",
         "candidate_count": len(pool),
         "route_candidate_counts": route_counts,
-        "repeated_existing_point": False,
+        "repeated_existing_point": n <= 1e-10,
         "all_coordinates_within_declared_bounds": True,
         "private_score_claimed": False,
         "acceptance_credit_delta": 0,
