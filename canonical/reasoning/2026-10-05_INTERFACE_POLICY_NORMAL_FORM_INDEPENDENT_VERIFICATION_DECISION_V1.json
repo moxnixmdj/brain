@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
+  "receipt_id": "INTERFACE-POLICY-NORMAL-FORM-INDEPENDENT-VERIFICATION-DECISION-20261005-V1",
+  "date": "2026-10-05",
+  "status": "DURABLE_VERIFIED_REASONING__ZERO_CREDIT__RECONCILIATION_CANDIDATE",
+  "canonical_base_commit": "27508bd12d5229ab3f5ad90e5195cf5e9cb8637f",
+  "real_objective": "Advance permanent Brain ownership of all useful Opus 5.5 capabilities by deleting false target obligations while preserving every real model-policy requirement.",
+  "governing_invariants": [
+    "TERMINAL_TARGET_REMAINS_ALL_USEFUL_OPUS55_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL.",
+    "KNOWLEDGE_EXTERNAL_JIT_ONLY.",
+    "CAPABILITY_OWNERSHIP_CANNOT_BE_CREDITED_TO_OPAQUE_EXTERNAL_PROVIDERS.",
+    "EXTERNAL_EXECUTOR_COMPUTATION_MUST_NOT_BE_MISATTRIBUTED_TO_MODEL_POLICY.",
+    "NO_CAPABILITY_OR_TERMINAL_CREDIT_FROM_ONTOLOGY_CLEANUP_ALONE."
+  ],
+  "material_premises": [
+    "Current first-party documentation distinguishes client-executed tools from server-executed tools.",
+    "For client tools, Claude emits structured actions and the caller executes them and returns results.",
+    "For server tools, Anthropic infrastructure executes the tool and returns structured results into the interaction.",
+    "Browser and computer use are client toolsets executed by the application.",
+    "The model's operative contribution on these surfaces is the policy mapping from observable interaction state and schemas/results to text/thinking/tool actions.",
+    "Executor internals not exposed in the model observation trace cannot be a direct causal input to that model policy."
+  ],
+  "evidence_refs": [
+    "canonical/reasoning/2026-10-05_OPUS55_INTERFACE_POLICY_NORMAL_FORM_V1.json",
+    "canonical/verification/OPUS55_INTERFACE_POLICY_NORMAL_FORM_INDEPENDENT_VERIFICATION_20261005_V1.json",
+    "https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works",
+    "https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools",
+    "https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool",
+    "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool",
+    "https://platform.claude.com/docs/en/api/messages/create",
+    "https://platform.claude.com/docs/en/models/opus-5-5/overview"
+  ],
+  "conclusion": {
+    "primary": "The interface-policy normal form is independently supported for the checked documented Opus 5.5 tool surfaces.",
+    "breakthrough": "Intrinsic tool-use capability should be defined modulo trace-equivalent executor substitution: executor implementation variants that preserve the model-visible interface and result trace are the same intrinsic-policy test condition.",
+    "deletion": "Do not create new intrinsic Opus capability obligations merely because a new external tool name or implementation exists.",
+    "preserve": "Continue testing the model-policy functions required to use arbitrary replaceable executors: schema understanding, tool choice, arguments, ordering, observation integration, recovery, coordination, memory/continuity and scope judgment.",
+    "terminal_truth": "This deletes a false infinity but does not supply the missing literal-completeness witness and does not prove terminal completion."
+  },
+  "selected_route": "REUSE_AND_INDEPENDENTLY_VERIFY_EXISTING_INTERFACE_POLICY_CANDIDATE__DERIVE_EXECUTOR_SUBSTITUTION_INVARIANCE__HAND_OFF_FOR_CANONICAL_RECONCILIATION",
+  "rejected_material_alternatives": [
+    {
+      "route": "ENUMERATE_EVERY_EXTERNAL_TOOL_IMPLEMENTATION_AS_A_DISTINCT_INTRINSIC_OPUS_CAPABILITY",
+      "reason": "Causally misattributes executor computation to the model and creates an artificial open-ended target."
+    },
+    {
+      "route": "DECLARE_ALL_TOOL_USE_SOLVED_BY_THE_FACTORIZATION",
+      "reason": "Wrong direction; policy quality over schemas, actions, results, recovery and long horizons remains a real Opus capability target."
+    },
+    {
+      "route": "PROMOTE_CURRENT_19_FAMILY_ENVELOPE_AS_EXHAUSTIVE",
+      "reason": "The verification does not establish literal target-domain completeness."
+    }
+  ],
+  "uncertainties": [
+    "Private or undocumented Claude product surfaces may expose additional intrinsic channels.",
+    "The current 19-family mapping to the policy basis remains a separate lossless-coverage problem.",
+    "Literal all-useful target completeness still lacks W1, W2 or an equivalent sound complete-domain witness."
+  ],
+  "assumptions": [
+    "First-party documentation accurately describes the checked public interfaces.",
+    "Intrinsic model capability attribution is causal and limited to information/action channels available to the model policy."
+  ],
+  "non_goals": [
+    "No redefinition of all useful to currently observed.",
+    "No claim Brain already dominates Opus 5.5 policy behavior.",
+    "No capability family or ownership promotion.",
+    "No fresh held-out task execution."
+  ],
+  "next_action": "CANONICAL_RECONCILIATION_SHOULD_APPLY_EXECUTOR_SUBSTITUTION_INVARIANCE_AS_A_TARGET_ONTOLOGY_RULE_AND_RECOMPUTE_ONLY_THE_TOOL_MEDIATED_TARGET_DISCOVERY_OBLIGATIONS_AFFECTED_BY_THIS_DELETION.",
+  "supersession_conditions": [
+    "A current first-party surface proves a model-intrinsic execution channel not factorizable as model policy plus external transition.",
+    "Canonical target semantics explicitly change to include external executor implementation internals as Opus-owned capability.",
+    "A stronger verified ontology theorem strictly subsumes executor-substitution invariance."
+  ],
+  "supersedes": [],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false
+}
