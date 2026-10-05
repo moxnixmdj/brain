@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_BUILDKITE_PUBLIC_TRIAL_RESOURCE_POLICY_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PUBLIC_PRIMARY_SOURCE_ROUTE_REDUCTION__ZERO_CREDIT",
+  "targets": [
+    "CODING_TB4_GE_66_4",
+    "CHARTOGRAPHY_TOOLS_GE_89"
+  ],
+  "sources": [
+    {
+      "url": "https://buildkite.com/pricing/",
+      "facts": [
+        "ALL_ACCESS_TRIAL_30_DAYS",
+        "NO_CREDIT_CARD_REQUIRED",
+        "NO_COMMITMENT_AFTER_TRIAL",
+        "ALL_ACCESS_TRIAL_FULL_PLATFORM_ACCESS"
+      ]
+    },
+    {
+      "url": "https://buildkite.com/docs/platform/limits",
+      "facts": [
+        "ALL_ACCESS_TRIAL_LINUX_VCPU_CONCURRENCY_24",
+        "ALL_ACCESS_TRIAL_LINUX_VCPU_MINUTES_4000_INCLUDED"
+      ]
+    },
+    {
+      "url": "https://buildkite.com/platform/pipelines/hosting-options/linux-hosted-agents/",
+      "facts": [
+        "LARGE_LINUX_HOSTED_AGENT_8_VCPU_32_GB_RAM",
+        "HOSTED_AGENTS_SUPPORT_DOCKER_WORKLOADS",
+        "NEW_SIGNUPS_CAN_EVALUATE_HOSTED_AGENTS_FREE_IN_30_DAY_ALL_ACCESS_TRIAL"
+      ]
+    }
+  ],
+  "prior_owner_confirmation": {
+    "path": "canonical/governance/BUILDKITE_TRIAL_OWNER_CONFIRMATION_20261005_V1.json",
+    "consequence": "SUPPORT_WAIT_ALREADY_DELETED"
+  },
+  "scheduler_delta": {
+    "delete": [
+      "DISCOVER_WHETHER_TRIAL_REQUIRES_CREDIT_CARD",
+      "DISCOVER_WHETHER_8_VCPU_32_GB_LINUX_SHAPE_EXISTS",
+      "DISCOVER_TRIAL_LINUX_VCPU_CONCURRENCY",
+      "DISCOVER_INCLUDED_TRIAL_LINUX_VCPU_MINUTES",
+      "GENERIC_PUBLIC_BUILDKITE_TRIAL_POLICY_SEARCH"
+    ],
+    "preserve": [
+      "CREATE_OR_ACCESS_AUTHENTICATED_TRIAL_ORGANIZATION",
+      "OBSERVE_SELECTED_LARGE_SHAPE_IN_ACCOUNT",
+      "RUN_ONE_ZERO_CASE_JOB_AND_BIND_OBSERVED_NPROC_RAM_FREE_DISK",
+      "OBSERVE_DOCKER_AND_DOCKER_COMPOSE_RUNTIME_SUCCESS",
+      "MATERIALIZE_PINNED_QWEN3_VL4B_AND_RUN_SYNTHETIC_IMAGE_TEXT_LOAD_SMOKE",
+      "NO_TERMINAL_CASES"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_USER_ACCOUNT_OR_TRIAL_ORGANIZATION_ALREADY_EXISTS",
+    "NO_CLAIM_LARGE_SHAPE_IS_CURRENTLY_SELECTABLE_IN_THE_USERS_ACCOUNT_UNTIL_OBSERVED",
+    "NO_CLAIM_RUNTIME_FREE_DISK_GE_50_GB_UNTIL_OBSERVED",
+    "NO_CLAIM_DOCKER_COMPOSE_RUNTIME_SUCCESS_UNTIL_OBSERVED",
+    "NO_CLAIM_QWEN_LOAD_OR_CHARTOGRAPHY_SCORE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
