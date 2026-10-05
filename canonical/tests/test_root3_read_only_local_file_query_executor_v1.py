@@ -4,6 +4,7 @@ import pathlib
 import sqlite3
 import subprocess
 import tempfile
+import tarfile
 import unittest
 
 from canonical.runtime import root3_read_only_local_file_query_executor_v1 as ro
@@ -94,6 +95,27 @@ class ReadOnlyLocalFileExecutorTests(unittest.TestCase):
             with self.assertRaisesRegex(ro.ReadOnlyQueryDenied,"MUTATING_OR_UNKNOWN_SQL"):
                 ex(ctx)
         self.assertEqual(calls,[])
+
+    def test_real_tar_listing_runs_inside_namespace(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            payload=root/"x.txt"; payload.write_text("hello\n",encoding="utf-8")
+            archive=root/"a.tar.gz"
+            with tarfile.open(archive,"w:gz") as tf:
+                tf.add(payload,arcname="x.txt")
+            ex=ro.make_executor(popen_impl=mediator._ORIGINAL_POPEN)
+            ctx={
+              "effect_class":"READ_ONLY_DECLARED_QUERY",
+              "callsite":{
+                "module_path":"canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",
+                "lineno":32,"process_api":"subprocess.run",
+              },
+              "args":(["tar","-tzf",str(archive)],),
+              "kwargs":{"text":True,"capture_output":True,"timeout":60},
+            }
+            p=ex(ctx)
+            self.assertEqual(p.returncode,0)
+            self.assertEqual(p.stdout.strip(),"x.txt")
 
     def test_real_jq_call_routes_through_mediator_and_namespace(self):
         with tempfile.TemporaryDirectory() as td:
