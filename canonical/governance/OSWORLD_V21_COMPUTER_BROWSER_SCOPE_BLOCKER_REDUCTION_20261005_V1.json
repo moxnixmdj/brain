@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_COMPUTER_BROWSER_SCOPE_BLOCKER_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SCOPE_BLOCKER_REDUCED_TO_EXACT_108_TASK_UNION_SEMANTIC_AUDIT__ZERO_CREDIT",
+  "objective": "Reduce the Computer and Browser scope blocker to one exact semantic coverage audit over the pinned OSWorld 2.1 task union.",
+  "authorities": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "active_scheduler": {
+      "path": "canonical/governance/BENCHMARK_PROXY_TARGET_RECONCILIATION_HLE_REBASE_ACTIVATION_V1.json",
+      "git_blob_sha": "46b4e11ed08c63d326244b2f3a853ac0752d9a30"
+    },
+    "acceptance_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "osworld_readme": {
+      "repository": "xlang-ai/OSWorld-V2",
+      "path": "README.md",
+      "git_blob_sha": "1dc05f1acee1412c92e7f103a518fc128f7d14cb"
+    },
+    "osworld_manifest": {
+      "repository": "xlang-ai/OSWorld-V2",
+      "path": "benchmark_releases/osworld-v2.1.json",
+      "git_blob_sha": "6d37c6f4c6c4f6daa5077d4e4c828f68360b7e36"
+    }
+  },
+  "frozen_target": {
+    "family": "COMPUTER_AND_BROWSER_USE",
+    "useful_behavior": "Complete multi-step workflows across browsers and arbitrary applications with planning, visual grounding and judgment.",
+    "public_bar": [
+      {
+        "benchmark": "OSWorld 2.1 partial",
+        "opus_5_5": 81.8,
+        "unit": "percent",
+        "comparison_warning": "Published Astra OSWorld result uses a different evaluation setup; do not compare directly."
+      }
+    ]
+  },
+  "target_atoms": [
+    "MULTI_STEP_WORKFLOW",
+    "BROWSER_SURFACE",
+    "APPLICATION_BREADTH",
+    "PLANNING",
+    "VISUAL_GROUNDING",
+    "JUDGMENT"
+  ],
+  "exact_release": {
+    "release": "osworld-v2.1",
+    "status": "active",
+    "task_repository": "xlangai/osworld_v2_tasks",
+    "task_revision": "0a1aadad95aa79b00b3783e717d865089ab06e26",
+    "task_count": 108,
+    "task_hash_manifest_sha256": "sha256:c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb"
+  },
+  "single_scope_question": "DOES_THE_EXACT_PINNED_OSWORLD_V21_108_TASK_UNION_SUPPORT_EACH_FROZEN_TARGET_ATOM_WITH_SUFFICIENT_DOMAIN_COVERAGE__OTHERWISE_RETURN_THE_MINIMUM_OBSERVABLE_RESIDUAL_CLASS",
+  "required_artifact": "TASK_UNION_SEMANTIC_COVERAGE_MATRIX_OVER_THE_EXACT_PINNED_108_TASKS",
+  "audit_columns": [
+    "TASK_ID",
+    "APPLICATION_SET",
+    "BROWSER_DESKTOP_OR_CROSS_APP",
+    "MULTI_STEP",
+    "VISUAL_GROUNDING",
+    "PLANNING",
+    "JUDGMENT",
+    "TRANSFER_CLASS"
+  ],
+  "audit_rules": [
+    "FAIL_CLOSED_WHEN_A_TARGET_ATOM_LACKS_EXPLICIT_SUPPORT",
+    "FINITE_APPLICATION_COVERAGE_DOES_NOT_BY_ITSELF_PROVE_UNIVERSAL_ARBITRARY_APPLICATION_TRANSFER",
+    "RETURN_A_MINIMUM_RESIDUAL_CLASS_INSTEAD_OF_WHOLE_SCOPE_CLOSURE_WHEN_TRANSFER_REMAINS_UNPROVED",
+    "KEEP_PERFORMANCE_AND_COMPARATOR_SETUP_SEPARATE"
+  ],
+  "no_terminal_execution_required": true,
+  "exact_task_semantics_available_in_connected_public_github": false,
+  "exact_task_source_is_release_pinned_but_separately_distributed": true,
+  "current_blocker": "EXACT_PINNED_TASK_UNION_SEMANTICS_NOT_AVAILABLE_IN_CURRENT_CONNECTED_SOURCE",
+  "transfer_nonreuse": {
+    "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "state": "PROVED",
+    "scope_limit": "PROVES_ONLY_THE_FROZEN_UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_OVER_THE_EXACT_BOUND_EVALUATOR_AND_REACHABLE_LAUNCHER_DOMAIN__MYSTERYMECHANISM_REMAINS_SEPARATE__NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "disposition": "NOT_A_GUI_APPLICATION_TRANSFER_PROOF"
+  },
+  "hard_nonclaims": [
+    "NO_SCOPE_CLOSURE",
+    "NO_UNIVERSAL_APPLICATION_TRANSFER",
+    "NO_SCORE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
