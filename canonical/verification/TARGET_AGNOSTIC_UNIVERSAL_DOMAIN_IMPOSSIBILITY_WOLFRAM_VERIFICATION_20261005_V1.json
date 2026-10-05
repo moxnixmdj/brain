@@ -1,28 +1,24 @@
 {
   "schema": "PROJECT_BRAIN_TARGET_AGNOSTIC_UNIVERSAL_DOMAIN_IMPOSSIBILITY_WOLFRAM_VERIFICATION_20261005_V1",
   "date": "2026-10-05",
-  "status": "INDEPENDENT_SYMBOLIC_KERNEL_PASS__MUTUALLY_INCOMPATIBLE_BINARY_REQUIREMENTS_CANNOT_BE_JOINTLY_SATISFIED__ZERO_CREDIT",
-  "subject": {
-    "path": "canonical/governance/TARGET_AGNOSTIC_UNIVERSAL_DOMAIN_IMPOSSIBILITY_20261005_V1.json",
-    "commit_sha": "d5877b469d4ac82d8b09e951a8daaf050255f86c"
-  },
+  "status": "INDEPENDENT_SYMBOLIC_KERNEL_PASS__FIXED_POLICY_BINARY_CONFLICT_ONLY__CONFIGURABLE_GENERALIZATION_REVOKED__ZERO_CREDIT",
+  "original_subject_commit": "d5877b469d4ac82d8b09e951a8daaf050255f86c",
+  "current_subject_blob": "8fe2b00be6e127f60bd498840c2d7a12cc9d7557",
   "verifier": {
     "provider": "WOLFRAM_LANGUAGE_KERNEL",
     "result": {
       "conflict_tautology": true,
       "exists_policy_satisfying_p_and_not_p": false
     },
-    "formulas": [
-      "RESOLVE[FORALL[p, NOT[p AND NOT[p]]], BOOLEANS] == TRUE",
-      "RESOLVE[EXISTS[p, p AND NOT[p]], BOOLEANS] == FALSE"
-    ]
+    "scope": "ONE_FIXED_BINARY_DECISION_OR_POLICY_REQUIREMENT"
   },
-  "deduction": "A_SINGLE_BINARY_DECISION_CANNOT_SIMULTANEOUSLY_SATISFY_TWO_EXACTLY_OPPOSITE_TARGET_REQUIREMENTS_ON_THE_SAME_STATE. THEREFORE_ANY_TARGET_AGNOSTIC DOMAIN THAT ADMITS_BOTH_CANNOT_BE_UNIVERSALLY_DOMINATED_BY_ONE_DETERMINISTIC_POLICY.",
-  "hard_nonclaims": [
-    "NO_CLAIM_ACTUAL_OPUS55_DOMAIN_CONTAINS_THE_CONFLICTING_PAIR",
-    "NO_LITERAL_TERMINAL_COMPLETION",
-    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  "verified_claim": "A_SINGLE_FIXED_BINARY_DECISION_CANNOT_SIMULTANEOUSLY_SATISFY_EXACTLY_OPPOSITE_REQUIREMENTS.",
+  "does_not_verify": [
+    "FOR_ALL_TASKS_EXISTS_TASK_CONDITIONED_BRAIN_CONFIGURATION_DOMINANCE_IS_IMPOSSIBLE",
+    "TARGET_SPECIFIC_INFORMATION_IS_ALWAYS_REQUIRED",
+    "ROUTE_C_CONFIGURABLE_CAPABILITY_DOMINANCE_IS_CLOSED"
   ],
+  "correcting_authority": "canonical/governance/OPUS55_CONFIGURABLE_CAPABILITY_QUANTIFIER_CORRECTION_20261005_V1.json",
   "accounting": {
     "incremental_spend_usd": 0,
     "new_reality_units_consumed": 0,
@@ -32,7 +28,7 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
   },
-  "scheduling_authority": true,
+  "scheduling_authority": false,
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false
