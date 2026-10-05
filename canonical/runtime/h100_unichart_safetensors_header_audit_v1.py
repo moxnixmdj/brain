@@ -9,6 +9,7 @@ This does not download or execute model weights and creates no capability credit
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import struct
