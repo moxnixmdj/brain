@@ -1,0 +1,157 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_CURRENT_14_24_MINIMUM_EVENT_CUT_V3",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_14_24_ROOT3_RECOMPUTED_TO_9_TOUCHING__UNKNOWN_DOMAIN_DIRECT_ORACLE_DELETED_AFTER_PROOF__THREE_EVENT_CLASSES_PRESERVED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Recompute the Root3 minimum action/event cut on the current 14-proved/24-unresolved authority, deleting the already-proved UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT and its two stale direct-oracle leaves while preserving every still-live Root3 predicate and event dependency.",
+  "source_bindings": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "9015b1fcacb40222f920c124986fcea63cc6e5ee"
+    },
+    "prior_root3_minimum_action_cut": {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
+      "git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d"
+    },
+    "root3_residual_compression": {
+      "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
+      "git_blob_sha": "5f3e5b7164f964fb1992b23f35069e3755673271"
+    },
+    "matched_superportfolio_v2": {
+      "path": "canonical/governance/ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_V2.json",
+      "git_blob_sha": "e886f262aa4b4946b290d636d336bf857afa946c"
+    },
+    "unknown_domain_acceptance_reduction": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "ebe8edcda3e0aa7dcffab6032834532a6f06c5f7"
+    },
+    "unknown_domain_independent_verification": {
+      "path": "canonical/verification/UNKNOWN_DOMAIN_V7_WINDOWS_V8_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "d65875f9abba55d9a58a4f2566f3719bebfb0a04"
+    },
+    "root2_current_compilation": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V3.json",
+      "git_blob_sha": "82612b803c1d47eeb8888cf99a00c14a1bea54e1"
+    }
+  },
+  "derivation": {
+    "current_global_state": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 24,
+      "root1_only": 0,
+      "root2_only": 15,
+      "root3_only": 6,
+      "root2_and_root3": 3,
+      "root2_touching": 18,
+      "root3_touching": 9,
+      "terminal": false
+    },
+    "root3_touching_identity": "ROOT3_TOUCHING = ROOT3_ONLY + ROOT2_AND_ROOT3 = 6 + 3 = 9",
+    "prior_root3_touching": 10,
+    "removed_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "removal_basis": "CURRENT_UNKNOWN_DOMAIN_V8_ACCEPTANCE_REDUCTION_PROMOTES_THE_PREDICATE_TO_PROVED_WITH_INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "current_root3_touching": 9,
+    "current_predicate_partition": {
+      "matched_scope_targets": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+        "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "VISION_DENSE_NONCHART_SCOPE"
+      ],
+      "event_driven_dependency": [
+        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+      ],
+      "direct_oracle_residual": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT"
+      ]
+    },
+    "exact_count_check": "7_MATCHED_SCOPE + 1_COMPOSITION_DEPENDENCY + 1_FINANCE_DIRECT_ORACLE = 9"
+  },
+  "stale_work_deleted": {
+    "predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "prior_direct_oracle_leaves": [
+      "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+      "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS"
+    ],
+    "deletion_reason": "THE_ATOMIC_PREDICATE_IS_ALREADY_PROVED_SCOPE_COMPLETE; RETAINING ITS FRESH-REALITY LEAVES WOULD RE-RUN A CLOSED OBLIGATION AND CANNOT IMPROVE TERMINAL PROOF STATE.",
+    "mysterymechanism_preserved_separately": true,
+    "mysterymechanism_note": "MYSTERYMECHANISM_GE_49_55 REMAINS OPEN IN ROOT2 AND IS NOT DISCHARGED BY THIS ROOT3 REPAIR."
+  },
+  "minimum_event_classes": [
+    {
+      "id": "NEW_SCOPE_CERTIFICATE_EVENT",
+      "effect": "Run the existing scope-closure machinery against a new independently verified lossless/exhaustive/universal certificate; may delete formal Root3 targets or finance direct leaves without fresh reality."
+    },
+    {
+      "id": "UPSTREAM_SCOPE_RECEIPT_EVENT",
+      "effect": "Recompute COMPOSITION_COMPONENT_SCOPED_PROOFS from newly accepted scope-complete upstream family receipts; no direct composition reality."
+    },
+    {
+      "id": "ROOT3_FRESH_REALITY_EVENT",
+      "effect": "Only after zero-reality fixed point and explicit fresh-reality authority, execute the one shared seven-target matched superportfolio wave and the surviving two Finance direct-oracle leaves in parallel."
+    }
+  ],
+  "minimum_future_reality_shape_if_no_stronger_proof_arrives": {
+    "matched_superportfolio_wave_count": 1,
+    "matched_superportfolio_target_count": 7,
+    "direct_oracle_predicate_count": 1,
+    "direct_oracle_predicate": "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "direct_oracle_leaf_count": 2,
+    "unknown_domain_direct_oracle_leaf_count": 0,
+    "prior_direct_oracle_predicate_count": 2,
+    "prior_direct_oracle_leaf_count": 4,
+    "deleted_direct_oracle_predicates": 1,
+    "deleted_direct_oracle_leaves": 2,
+    "claim": "THIS_IS_A_SHAPE/COUNT_REDUCTION ONLY; IT DOES NOT AUTHORIZE OR EXECUTE FRESH REALITY."
+  },
+  "scheduler_effect_if_verified": {
+    "delete": [
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_FROM_ROOT3_TOUCHING_SET",
+      "TWO_UNKNOWN_DOMAIN_DIRECT_ORACLE_LEAVES_FROM_FUTURE_ROOT3_REALITY_BATCH",
+      "ANY_ROOT3_10_PREDICATE_OR_4_DIRECT_LEAF_PROJECTION_DERIVED_BEFORE_UNKNOWN_DOMAIN_V8_PROMOTION"
+    ],
+    "preserve": [
+      "SEVEN_MATCHED_SCOPE_TARGETS_IN_ONE_SHARED_FUTURE_SUPERPORTFOLIO_WAVE",
+      "FINANCE_UNCOVERED_SCOPE_AUDIT_TWO_DIRECT_ORACLE_LEAVES",
+      "COMPOSITION_COMPONENT_SCOPED_PROOFS_AS_EVENT_DRIVEN_UPSTREAM_DEPENDENCY",
+      "THREE_ROOT3_EVENT_CLASSES",
+      "NO_FRESH_REALITY_BEFORE_EXPLICIT_AUTHORITY"
+    ],
+    "next": "ROOT3_HAS_ZERO_CURRENT_NONDOMINATED_EXECUTION; RESUME ONLY ON NEW_SCOPE_CERTIFICATE_EVENT, UPSTREAM_SCOPE_RECEIPT_EVENT, OR EXPLICIT_ROOT3_FRESH_REALITY_EVENT."
+  },
+  "falsifiers": [
+    "CURRENT_TERMINAL_AUTHORITY_ROOT_PARTITION_DIFFERS_FROM_0_ROOT1_ONLY_15_ROOT2_ONLY_6_ROOT3_ONLY_3_MIXED.",
+    "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_IS_REOPENED_BY_A_VALID_REVOCATION_OF_ITS_CURRENT_SCOPE_COMPLETE_PROOF.",
+    "THE_SEVEN_MATCHED_SCOPE_TARGET_SET_CHANGES.",
+    "FINANCE_UNCOVERED_SCOPE_AUDIT_DIRECT_ORACLE_RESIDUAL_IS CLOSED_OR_REFINED BY_NEW_VERIFIED_EVIDENCE.",
+    "COMPOSITION_COMPONENT_SCOPED_PROOFS_IS_CLOSED_OR_ITS_UPSTREAM_DEPENDENCY_SET_CHANGES."
+  ],
+  "hard_nonclaims": [
+    "NO_NEW_ACCEPTANCE_PREDICATE_PROVED",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_MYSTERYMECHANISM_CREDIT",
+    "NO_FINANCE_SCOPE_CREDIT",
+    "NO_COMPOSITION_SCOPE_CREDIT",
+    "NO_FRESH_REALITY_EXECUTED_OR_AUTHORIZED",
+    "NO_LITERAL_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
