@@ -1,0 +1,33 @@
+name: Verify hybrid evaluator dominance cut
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/hybrid_evaluator_dominance_cut_v1.py"
+      - "canonical/tests/test_hybrid_evaluator_dominance_cut_v1.py"
+      - "canonical/governance/OPUS55_HYBRID_EXPLICIT_HIDDEN_EVALUATOR_DOMINANCE_CUT_20261005_V1.json"
+      - ".github/workflows/verify-hybrid-evaluator-dominance-cut-v1.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/hybrid_evaluator_dominance_cut_v1.py"
+      - "canonical/tests/test_hybrid_evaluator_dominance_cut_v1.py"
+      - "canonical/governance/OPUS55_HYBRID_EXPLICIT_HIDDEN_EVALUATOR_DOMINANCE_CUT_20261005_V1.json"
+      - ".github/workflows/verify-hybrid-evaluator-dominance-cut-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Run exact hybrid dominance tests
+        run: python -m pytest -q canonical/tests/test_hybrid_evaluator_dominance_cut_v1.py
