@@ -36,15 +36,10 @@ def test_frozen_first_word_domain_guard():
         raise AssertionError("out-of-domain first word admitted")
 
 
-def test_exact_language_compatible_active15_set_and_33_kernel_candidate():
-    out = r.verify()
-    assert len(out["language_compatible_active15"]) == 9
-    assert out["kernel_reduction_candidate"] == {
-        "prior_conservative_total": 64,
-        "language_sensitive_prior": 31,
-        "language_residual_after_failopen": 8,
-        "total_after_failopen": 33,
-    }
-    assert out["acceptance_credit"] is False
-    assert out["capability_credit"] is False
-    assert out["independent_verification_required"] is True
+def test_prefix_shield_theorem_is_revoked_by_unbound_logging_handler():
+    try:
+        r.verify()
+    except AssertionError as exc:
+        assert "FALSIFIED__PINNED_SCORER_EXCEPTION_HANDLER_RAISES_NAMEERROR" in str(exc)
+    else:
+        raise AssertionError("revoked prefix-shield theorem unexpectedly promoted")
