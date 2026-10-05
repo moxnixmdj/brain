@@ -54,9 +54,32 @@ def _token(value: Any, label: str, max_len: int = 512) -> str:
     return value.strip()
 
 
+MEDIATOR_REQUEST_KEYS = {
+    "schema",
+    "api",
+    "command",
+    "cwd",
+    "env",
+    "stdin",
+    "stdout",
+    "stderr",
+    "input",
+    "shell",
+    "text",
+    "capture_output",
+    "timeout",
+    "encoding",
+    "errors",
+    "close_fds",
+    "request_sha256",
+}
+
+
 def verify_mediator_request(value: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(value, Mapping) or value.get("schema") != MEDIATOR_SCHEMA:
         raise AdapterError("MEDIATOR_REQUEST_SCHEMA_INVALID")
+    if set(value) != MEDIATOR_REQUEST_KEYS:
+        raise AdapterError("MEDIATOR_REQUEST_FIELD_SET_INVALID")
     request_sha = value.get("request_sha256")
     if not isinstance(request_sha, str) or not SHA256_RE.fullmatch(request_sha):
         raise AdapterError("MEDIATOR_REQUEST_SHA256_INVALID")
