@@ -873,6 +873,61 @@ def _ensure_apt_dependencies(source):
             raise Blocker("BOUND_APT_INSTALLED_VERSION_MISMATCH:"+name+":"+q.stdout.strip())
     return {"status":"INSTALLED_VERIFIED","origin":source.get("origin"),"packages":evidence}
 
+_NATIVE_RISK_ISOLATED_ADAPTERS = {
+    "python_library_codec",
+    "docx_report_from_json",
+    "python_document_builder",
+    "xlsx_verify_openpyxl",
+}
+
+
+def _invoke_isolated_bound_adapter(module_name, entrypoint, call_args):
+    if module_name not in _NATIVE_RISK_ISOLATED_ADAPTERS:
+        raise Blocker("ISOLATED_BOUND_ADAPTER_NOT_ALLOWLISTED:"+str(module_name))
+    if not isinstance(entrypoint,str) or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",entrypoint):
+        raise Blocker("ISOLATED_BOUND_ADAPTER_ENTRYPOINT_INVALID")
+    runner=ROOT/"canonical"/"runtime"/"bound_capability_isolated_runner_v1.py"
+    if not runner.is_file():
+        raise Blocker("ISOLATED_BOUND_ADAPTER_RUNNER_MISSING")
+    try:
+        payload=json.dumps(
+            {"args":call_args},
+            sort_keys=True,separators=(",",":"),ensure_ascii=False,allow_nan=False,
+        )
+    except Exception as exc:
+        raise Blocker("ISOLATED_BOUND_ADAPTER_INPUT_NOT_JSON:"+type(exc).__name__) from exc
+    if len(payload.encode("utf-8"))>8_000_000:
+        raise Blocker("ISOLATED_BOUND_ADAPTER_INPUT_TOO_LARGE")
+    with tempfile.TemporaryDirectory(prefix="project-brain-isolated-cap-") as td:
+        result_path=pathlib.Path(td)/"result.json"
+        proc=subprocess.run(
+            [
+                sys.executable,str(runner),str(module_name),str(entrypoint),
+                str(result_path),
+            ],
+            cwd=ROOT,text=True,input=payload,capture_output=True,timeout=300,
+        )
+        if proc.returncode!=0:
+            raise Blocker(
+                "ISOLATED_BOUND_ADAPTER_FAILED:"
+                +str(module_name)+":"
+                +(proc.stderr or proc.stdout or "")[-1600:]
+            )
+        if not result_path.is_file():
+            raise Blocker("ISOLATED_BOUND_ADAPTER_RESULT_MISSING:"+str(module_name))
+        raw=result_path.read_bytes()
+        if len(raw)>8_000_000:
+            raise Blocker("ISOLATED_BOUND_ADAPTER_RESULT_TOO_LARGE")
+        try:
+            result=json.loads(raw.decode("utf-8"))
+        except Exception as exc:
+            raise Blocker("ISOLATED_BOUND_ADAPTER_RESULT_INVALID:"+type(exc).__name__) from exc
+    if not isinstance(result,dict):
+        raise Blocker("ISOLATED_BOUND_ADAPTER_RESULT_NOT_OBJECT")
+    result.setdefault("native_extension_isolation","CHILD_PROCESS_V1")
+    return result
+
+
 def _invoke_bound_capability(args):
     cid=str(args.get("capability_id") or "").strip()
     if not cid:
@@ -906,16 +961,20 @@ def _invoke_bound_capability(args):
     path=ROOT/"canonical"/"runtime"/"bound_capabilities"/(module_name+".py")
     if not path.is_file():
         raise Blocker("BOUND_CAPABILITY_ADAPTER_MISSING")
-    spec=importlib.util.spec_from_file_location("project_brain_bound_"+module_name,path)
-    if spec is None or spec.loader is None:
-        raise Blocker("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
-    module=importlib.util.module_from_spec(spec)
-    sys.modules[spec.name]=module
-    spec.loader.exec_module(module)
-    fn=getattr(module,str(entry.get("entrypoint") or "run"),None)
-    if not callable(fn):
-        raise Blocker("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
-    result=fn(call_args,ROOT)
+    entrypoint=str(entry.get("entrypoint") or "run")
+    if module_name in _NATIVE_RISK_ISOLATED_ADAPTERS:
+        result=_invoke_isolated_bound_adapter(module_name,entrypoint,call_args)
+    else:
+        spec=importlib.util.spec_from_file_location("project_brain_bound_"+module_name,path)
+        if spec is None or spec.loader is None:
+            raise Blocker("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
+        module=importlib.util.module_from_spec(spec)
+        sys.modules[spec.name]=module
+        spec.loader.exec_module(module)
+        fn=getattr(module,entrypoint,None)
+        if not callable(fn):
+            raise Blocker("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
+        result=fn(call_args,ROOT)
     if not isinstance(result,dict):
         raise Blocker("BOUND_CAPABILITY_RESULT_INVALID")
     result.setdefault("capability_id",cid)
