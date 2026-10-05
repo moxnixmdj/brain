@@ -34,14 +34,14 @@ CLASSES = {
 # Exact mapping over the already content-addressed 29-site current universe.
 # Keys are (module_path, lineno, process_api).
 EXPECTED: dict[tuple[str, int, str], str] = {
-    ("canonical/runtime/astra_runtime.py", 263, "subprocess.run"): "ARBITRARY_COMMAND_EXECUTION",
-    ("canonical/runtime/astra_runtime.py", 526, "subprocess.run"): "PACKAGE_ENV_MUTATION",
-    ("canonical/runtime/astra_runtime.py", 604, "subprocess.run"): "PACKAGE_ENV_MUTATION",
-    ("canonical/runtime/astra_runtime.py", 849, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
-    ("canonical/runtime/astra_runtime.py", 864, "subprocess.run"): "PACKAGE_ENV_MUTATION",
-    ("canonical/runtime/astra_runtime.py", 871, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
-    ("canonical/runtime/astra_runtime.py", 1140, "subprocess.run"): "BOUND_CHILD_CODE_EXECUTION",
-    ("canonical/runtime/astra_runtime.py", 5702, "subprocess.run"): "BOUND_CHILD_CODE_EXECUTION",
+    ("canonical/runtime/astra_runtime.py", 325, "subprocess.run"): "ARBITRARY_COMMAND_EXECUTION",
+    ("canonical/runtime/astra_runtime.py", 595, "subprocess.run"): "PACKAGE_ENV_MUTATION",
+    ("canonical/runtime/astra_runtime.py", 673, "subprocess.run"): "PACKAGE_ENV_MUTATION",
+    ("canonical/runtime/astra_runtime.py", 918, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
+    ("canonical/runtime/astra_runtime.py", 933, "subprocess.run"): "PACKAGE_ENV_MUTATION",
+    ("canonical/runtime/astra_runtime.py", 940, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
+    ("canonical/runtime/astra_runtime.py", 1209, "subprocess.run"): "BOUND_CHILD_CODE_EXECUTION",
+    ("canonical/runtime/astra_runtime.py", 5771, "subprocess.run"): "BOUND_CHILD_CODE_EXECUTION",
 
     ("canonical/runtime/capability_discovery.py", 267, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
     ("canonical/runtime/capability_discovery.py", 359, "subprocess.run"): "READ_ONLY_DECLARED_QUERY",
