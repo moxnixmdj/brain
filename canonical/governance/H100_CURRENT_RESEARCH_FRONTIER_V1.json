@@ -594,6 +594,35 @@
       "unknown_tool_id_fail_closed": true,
       "persistent_learned_bytes": 0,
       "deduction": "THE TYPED_EFFECT TOOL ACQUISITION TO COMPILE_REUSE LOOP IS CLOSED FOR TWO REAL FILESYSTEM EFFECT TOOLS"
+    },
+    "pinned_https_tool_acquisition_v2": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__FRESH_TWO_OF_TWO_PINNED_READ_ONLY_HTTPS_TOOLS__V1_FAILURE_PRESERVED__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_PINNED_HTTPS_TOOL_ACQUISITION_PRECOMMIT_V2.json",
+      "verification": "canonical/verification/H100_PINNED_HTTPS_TOOL_ACQUISITION_V2_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "v1_failure": "canonical/verification/H100_PINNED_HTTPS_TOOL_ACQUISITION_V1_FAILURE_20261005.json",
+      "runtime": "canonical/runtime/h100_pinned_https_tool_acquisition_v2.py",
+      "caller_supplied_endpoints": 0,
+      "credentials_used": 0,
+      "redirects_followed": 0,
+      "shell_calls": 0,
+      "subprocess_calls": 0,
+      "arbitrary_code_execution": 0,
+      "persistent_learned_bytes": 0,
+      "deduction": "FRESH_PINNED_READ_ONLY_NETWORK_CAPABILITY CAN BE ACQUIRED THROUGH CONTENT_ADDRESSED LITERAL_ENDPOINT PACKS WITH EXACT RESPONSE HASH BINDING AND SANDBOXED OUTPUT__THE PRIOR FIXTURE_BUG FAILURE REMAINS RECORDED"
+    },
+    "verified_read_only_network_tool_registry_v1": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__TWO_VERIFIED_PINNED_NETWORK_TOOLS__ZERO_CREDIT",
+      "runtime": "canonical/runtime/h100_verified_read_only_network_tool_registry_v1.py",
+      "verification": "canonical/verification/H100_READ_ONLY_NETWORK_TOOL_REGISTRY_V1_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "entry_count": 2,
+      "tools": [
+        "PINNED_HTTPS_JSON_FIXTURE_V2",
+        "PINNED_HTTPS_TEXT_FIXTURE_V2"
+      ],
+      "raw_network_tool_acquisition_attempts_before_verified_hit": 0,
+      "unknown_network_tool_id_fail_closed": true,
+      "persistent_learned_bytes": 0,
+      "deduction": "THE PINNED_READ_ONLY_NETWORK ACQUISITION TO COMPILE_REUSE LOOP IS CLOSED FOR TWO FRESH TOOLS"
     }
   },
   "next_structural_residuals_ranked": [
@@ -604,8 +633,8 @@
     },
     {
       "rank": 2,
-      "residual": "SAFE_TYPED_NETWORK_OR_EXTERNAL_SERVICE_ACQUISITION_WITHOUT_ARBITRARY_ENDPOINT_AUTHORITY",
-      "reason": "CONTENT_ADDRESSED NON_STDLIB COMPUTE PACKS AND SANDBOXED FILESYSTEM EFFECT_TOOLS ARE NOW SECOND_CARRIER VERIFIED AND COMPILED__THE NEXT INTERNAL A BOUNDARY IS READ_ONLY OR EFFECTFUL NETWORK_EXTERNAL_SERVICE ACQUISITION THROUGH A TYPED CONTENT_BOUND CONTRACT THAT CANNOT ESCALATE TO USER_SUPPLIED ENDPOINTS CREDENTIALS SHELL OR LEARNED_PROVIDER SUBSTITUTION"
+      "residual": "SAFE_AUTHENTICATED_OR_MUTATING_EXTERNAL_SERVICE_ACQUISITION_WITH_SCOPED_CREDENTIALS_IDEMPOTENCY_AND_AUDIT",
+      "reason": "FRESH CONTENT_ADDRESSED PINNED HTTPS GET ACQUISITION AND READ_ONLY NETWORK TOOL REGISTRY ARE NOW SECOND_CARRIER VERIFIED WITH ZERO CALLER_ENDPOINT CREDENTIAL REDIRECT SHELL SUBPROCESS OR ARBITRARY_CODE AUTHORITY__THE NEXT INTERNAL A BOUNDARY IS AUTHENTICATED OR MUTATING EXTERNAL SERVICE ACCESS WHERE CREDENTIAL_SCOPE ACTION_SCOPE IDEMPOTENCY REPLAY SAFETY AND AUDIT RECEIPTS MUST BE VERIFIED WITHOUT OPEN_ENDED NETWORK AUTHORITY OR LEARNED_PROVIDER SUBSTITUTION"
     },
     {
       "rank": 3,
@@ -739,7 +768,10 @@
     "safe_typed_effectful_external_tool_acquisition_verified": true,
     "safe_typed_effectful_external_tool_scope": "CONTENT_ADDRESSED_FILESYSTEM_WRITE_AND_APPEND_TO_CALLER_SUPPLIED_SANDBOX_ROOT",
     "verified_effect_tool_registry_v1": true,
-    "safe_typed_network_external_service_acquisition_verified": false
+    "safe_typed_network_external_service_acquisition_verified": true,
+    "safe_typed_network_external_service_scope": "PINNED_READ_ONLY_HTTPS_GET_TO_RAW_GITHUB_CONTENT__LITERAL_ENDPOINTS__EXACT_RESPONSE_HASH",
+    "verified_read_only_network_tool_registry_v1": true,
+    "safe_authenticated_mutating_external_service_acquisition_verified": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
