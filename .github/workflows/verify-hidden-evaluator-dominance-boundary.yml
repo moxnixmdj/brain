@@ -1,0 +1,33 @@
+name: Verify hidden evaluator dominance boundary
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/hidden_evaluator_dominance_boundary_v1.py"
+      - "canonical/tests/test_hidden_evaluator_dominance_boundary_v1.py"
+      - "canonical/governance/HIDDEN_EVALUATOR_DOMINANCE_BOUNDARY_V1.json"
+      - ".github/workflows/verify-hidden-evaluator-dominance-boundary.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/hidden_evaluator_dominance_boundary_v1.py"
+      - "canonical/tests/test_hidden_evaluator_dominance_boundary_v1.py"
+      - "canonical/governance/HIDDEN_EVALUATOR_DOMINANCE_BOUNDARY_V1.json"
+      - ".github/workflows/verify-hidden-evaluator-dominance-boundary.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify finite hidden-evaluator theorem
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_hidden_evaluator_dominance_boundary_v1
