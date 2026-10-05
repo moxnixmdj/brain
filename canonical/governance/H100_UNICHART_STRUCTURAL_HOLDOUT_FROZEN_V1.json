@@ -1,0 +1,209 @@
+{
+  "annotation_blob_sha_verified": true,
+  "case_count": 20,
+  "cases": [
+    {
+      "annotation_index": 10,
+      "id": "H2_10",
+      "image_bytes": 49433,
+      "image_sha256": "c37758591f55a1b65bb72edc2819bbf06100d9d928d13f416d7bcc4aec4fb469",
+      "imgname": "16718.png",
+      "kind": "human",
+      "label": "Mostly good news",
+      "query": "Which indicator remains all time lowest from Dec. 2008 to Sep. 2011?"
+    },
+    {
+      "annotation_index": 11,
+      "id": "H2_11",
+      "image_bytes": 49433,
+      "image_sha256": "c37758591f55a1b65bb72edc2819bbf06100d9d928d13f416d7bcc4aec4fb469",
+      "imgname": "16718.png",
+      "kind": "human",
+      "label": "37",
+      "query": "How much value of 'Mostly bad news' increased from Jan. 2011 to Sept. 2011?"
+    },
+    {
+      "annotation_index": 12,
+      "id": "H2_12",
+      "image_bytes": 49127,
+      "image_sha256": "1d783ef3ce12d2a5cd6659dc2f4eb9ad2ef1d9f3d7c5f11b2008d305cd03ee34",
+      "imgname": "16723.png",
+      "kind": "human",
+      "label": "44538",
+      "query": "When does the red line reach the peak?"
+    },
+    {
+      "annotation_index": 13,
+      "id": "H2_13",
+      "image_bytes": 49127,
+      "image_sha256": "1d783ef3ce12d2a5cd6659dc2f4eb9ad2ef1d9f3d7c5f11b2008d305cd03ee34",
+      "imgname": "16723.png",
+      "kind": "human",
+      "label": "155",
+      "query": "What's the total sum of peak points of all three lines?"
+    },
+    {
+      "annotation_index": 14,
+      "id": "H2_14",
+      "image_bytes": 52790,
+      "image_sha256": "97a2f03c395272176e53e3e96def08e6fe4fee6e234ddfc75c83fd07f43c9aa0",
+      "imgname": "16804.png",
+      "kind": "human",
+      "label": "44207",
+      "query": "When does the yellow line reach the peak?"
+    },
+    {
+      "annotation_index": 15,
+      "id": "H2_15",
+      "image_bytes": 52790,
+      "image_sha256": "97a2f03c395272176e53e3e96def08e6fe4fee6e234ddfc75c83fd07f43c9aa0",
+      "imgname": "16804.png",
+      "kind": "human",
+      "label": "87",
+      "query": "What's the total sum of peak points of green and red lines?"
+    },
+    {
+      "annotation_index": 16,
+      "id": "H2_16",
+      "image_bytes": 43447,
+      "image_sha256": "513d5034a3211974555ed1d5ade4245f1e0e555162fee30123acc11278bb493d",
+      "imgname": "17081.png",
+      "kind": "human",
+      "label": "19",
+      "query": "What's the lowest value of yellow line?"
+    },
+    {
+      "annotation_index": 17,
+      "id": "H2_17",
+      "image_bytes": 43447,
+      "image_sha256": "513d5034a3211974555ed1d5ade4245f1e0e555162fee30123acc11278bb493d",
+      "imgname": "17081.png",
+      "kind": "human",
+      "label": "79",
+      "query": "What's the difference of value of highiest value of red and lowest value of green line?"
+    },
+    {
+      "annotation_index": 18,
+      "id": "H2_18",
+      "image_bytes": 24869,
+      "image_sha256": "542db6b22adc16f108e351842459eb2f94544bfa66e7cc418daf7dcb92095f4e",
+      "imgname": "17256.png",
+      "kind": "human",
+      "label": "Light blue",
+      "query": "What is the colour of oppose in the graph?"
+    },
+    {
+      "annotation_index": 19,
+      "id": "H2_19",
+      "image_bytes": 24869,
+      "image_sha256": "542db6b22adc16f108e351842459eb2f94544bfa66e7cc418daf7dcb92095f4e",
+      "imgname": "17256.png",
+      "kind": "human",
+      "label": "3",
+      "query": "How many times there is 44 value in the Favor?"
+    },
+    {
+      "annotation_index": 10,
+      "id": "A2_10",
+      "image_bytes": 60658,
+      "image_sha256": "353b5d97a472c27d6277debf3d84d3f1e044fccf39706e7ec4cb5baed5311acf",
+      "imgname": "multi_col_80751.png",
+      "kind": "augmented",
+      "label": "53",
+      "query": "What was the average ticket in general merchandisers and grocers during the week of February 25 to March 2, 2020?"
+    },
+    {
+      "annotation_index": 11,
+      "id": "A2_11",
+      "image_bytes": 60658,
+      "image_sha256": "353b5d97a472c27d6277debf3d84d3f1e044fccf39706e7ec4cb5baed5311acf",
+      "imgname": "multi_col_80751.png",
+      "kind": "augmented",
+      "label": "49",
+      "query": "What was the average transaction value in grocers in prior weeks?"
+    },
+    {
+      "annotation_index": 12,
+      "id": "A2_12",
+      "image_bytes": 60658,
+      "image_sha256": "353b5d97a472c27d6277debf3d84d3f1e044fccf39706e7ec4cb5baed5311acf",
+      "imgname": "multi_col_80751.png",
+      "kind": "augmented",
+      "label": "46",
+      "query": "What was the average transaction value in general merchandisers and grocers in prior weeks?"
+    },
+    {
+      "annotation_index": 13,
+      "id": "A2_13",
+      "image_bytes": 33950,
+      "image_sha256": "695eb7c4799297733067c902f2af318ffe1b9f71cff24bfb100715f8896c5f8d",
+      "imgname": "multi_col_21042.png",
+      "kind": "augmented",
+      "label": "6.25",
+      "query": "How much did a 24 ounce beer cost in the 2012-13 season?"
+    },
+    {
+      "annotation_index": 14,
+      "id": "A2_14",
+      "image_bytes": 39360,
+      "image_sha256": "38585b235d29ea3e932ef7eb40c38dcac5725b1c266a2f3cf7b7b6b438db66fe",
+      "imgname": "multi_col_60848.png",
+      "kind": "augmented",
+      "label": "Danish citizenship",
+      "query": "What did the majority of people who immigrated to Greenland in 2020 have?"
+    },
+    {
+      "annotation_index": 15,
+      "id": "A2_15",
+      "image_bytes": 39360,
+      "image_sha256": "38585b235d29ea3e932ef7eb40c38dcac5725b1c266a2f3cf7b7b6b438db66fe",
+      "imgname": "multi_col_60848.png",
+      "kind": "augmented",
+      "label": "Danish citizenship",
+      "query": "What does the vast majority of the population of Greenland have?"
+    },
+    {
+      "annotation_index": 16,
+      "id": "A2_16",
+      "image_bytes": 39360,
+      "image_sha256": "38585b235d29ea3e932ef7eb40c38dcac5725b1c266a2f3cf7b7b6b438db66fe",
+      "imgname": "multi_col_60848.png",
+      "kind": "augmented",
+      "label": "Danish citizenship",
+      "query": "What is included in the statistics for people originating from Greenland moving back home to Greenland as well as Danish people born in Denmark moving to"
+    },
+    {
+      "annotation_index": 17,
+      "id": "A2_17",
+      "image_bytes": 50430,
+      "image_sha256": "f7342e1c9e754fdbebc6dbf9fbb1a4dcefe62c406446bf557500562e1449db74",
+      "imgname": "multi_col_80016.png",
+      "kind": "augmented",
+      "label": "2022",
+      "query": "What is the forecast for the ICT sector in Italy in 2020?"
+    },
+    {
+      "annotation_index": 18,
+      "id": "A2_18",
+      "image_bytes": 50430,
+      "image_sha256": "f7342e1c9e754fdbebc6dbf9fbb1a4dcefe62c406446bf557500562e1449db74",
+      "imgname": "multi_col_80016.png",
+      "kind": "augmented",
+      "label": "12.3",
+      "query": "What was the revenue of the software and ICT solutions sector in 2019?"
+    },
+    {
+      "annotation_index": 19,
+      "id": "A2_19",
+      "image_bytes": 34256,
+      "image_sha256": "ce9929ad6d5ef5de5dee8d97e6e6a7814404389a5773659ee2f404414c3634c2",
+      "imgname": "multi_col_40524.png",
+      "kind": "augmented",
+      "label": "Millennials",
+      "query": "What generation was most satisfied with their sex life?"
+    }
+  ],
+  "chartqa_commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+  "schema": "PROJECT_BRAIN_H100_UNICHART_STRUCTURAL_HOLDOUT_MATERIALIZATION_V1",
+  "selection": "FIRST_10_POST_INDEX9_NONDEV_IMAGES_PER_SPLIT"
+}
