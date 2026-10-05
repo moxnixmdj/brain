@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_W3_DOMAIN_PREMISE_COLLAPSE_THEOREM_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__W3_NOT_INDEPENDENT_TARGET_DISCOVERY_WITNESS__COMPLETE_DOMAIN_PREMISE_IS_LOAD_BEARING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Determine whether W3_UNIVERSAL_BEHAVIORAL_DOMINANCE_THEOREM can bypass the unresolved target-discovery completeness premise. Prove the minimum dependency structure and delete dominance work that cannot settle literal-all finality.",
+  "authorities": [
+    {
+      "path": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+      "role": "LITERAL_ALL_REQUIRES_TARGET_DISCOVERY_COMPLETENESS_PREMISE"
+    },
+    {
+      "path": "canonical/governance/OPUS55_TARGET_DISCOVERY_MINIMUM_INFORMATION_CUT_20261005_V1.json",
+      "role": "DEFINES_W1_W2_W3_MINIMAL_SUFFICIENT_WITNESS_CLASSES"
+    },
+    {
+      "path": "canonical/governance/OPUS55_AUTHORITATIVE_COMPLETENESS_SOURCE_AUDIT_20261005_V1.json",
+      "role": "CURRENT_BOUND_FIRST_PARTY_SCAN_FOUND_NO_EXPLICIT_EXHAUSTIVE_USEFUL_CAPABILITY_ATTESTATION"
+    }
+  ],
+  "definitions": {
+    "U": "THE_ACTUAL_SET_OF_ALL_USEFUL_OPUS_5_5_BEHAVIORS_RELEVANT_TO_THE_FROZEN_TERMINAL_OBJECTIVE",
+    "D": "THE_BEHAVIOR_DOMAIN_OVER_WHICH_A_PROPOSED_W3_DOMINANCE_THEOREM_QUANTIFIES",
+    "DOMINATES": "FOR_EVERY_BEHAVIOR_OR_ACCEPTANCE_OBLIGATION_IN_THE_QUANTIFIED_DOMAIN__BRAIN_IS_PROVED_EQUAL_OR_BETTER_UNDER_THE_BOUND_SEMANTICS"
+  },
+  "theorem": {
+    "name": "W3_DOMAIN_PREMISE_COLLAPSE",
+    "statement": "A W3 universal behavioral dominance proof over D can establish literal target completeness only if a separate sound premise establishes U_SUBSET_OF_D (or an equivalent complete target-domain relation). The dominance proof over D does not itself establish that target-membership premise unless its proof already contains information sufficient to characterize U.",
+    "proof": [
+      "Literal completion requires FOR_EVERY_u_IN_U__BRAIN_DOMINATES_u.",
+      "A W3 proof over D establishes FOR_EVERY_d_IN_D__BRAIN_DOMINATES_d.",
+      "The desired conclusion follows by universal instantiation only if FOR_EVERY_u_IN_U__u_IN_D, i.e. U_SUBSET_OF_D.",
+      "If U_SUBSET_OF_D is unproved, there is a countermodel consistent with the W3 statement: choose x_IN_U_MINUS_D. W3 can be true for every d_IN_D while saying nothing about x.",
+      "Therefore W3 performance dominance and target-domain completeness are logically distinct premises.",
+      "If a proposed W3 proof claims to establish U_SUBSET_OF_D by defining D as 'all useful Opus 5.5 behaviors', the unresolved information has merely moved into the denotation/completeness proof for D; the phrase does not supply its own extensional witness."
+    ],
+    "countermodel": {
+      "assumption": "D_IS_NOT_PROVED_TO_COVER_U",
+      "construction": "EXISTS_X_IN_U_MINUS_D",
+      "w3_can_remain_true": true,
+      "literal_terminal_can_remain_false": true,
+      "consequence": "W3_WITHOUT_COMPLETE_DOMAIN_PREMISE_IS_NOT_A_TARGET_DISCOVERY_COMPLETENESS_WITNESS"
+    }
+  },
+  "consequence": {
+    "prior_three_witness_classes": [
+      "W1_TARGET_OWNER_EXHAUSTIVE_BEHAVIOR_SPECIFICATION",
+      "W2_IMPLEMENTATION_LEVEL_COMPLETE_CHARACTERIZATION",
+      "W3_UNIVERSAL_BEHAVIORAL_DOMINANCE_THEOREM"
+    ],
+    "refined_information_structure": [
+      "W1_OR_W2_OR_ANOTHER_SOUND_SOURCE_MAY_DIRECTLY_SUPPLY_COMPLETE_TARGET_DOMAIN_INFORMATION",
+      "W3_REQUIRES_COMPLETE_TARGET_DOMAIN_INFORMATION_PLUS_A_DOMINANCE_PROOF",
+      "THEREFORE_W3_IS_NOT_AN_INDEPENDENT_ESCAPE_FROM_TARGET_DISCOVERY"
+    ],
+    "minimum_literal_completeness_cut": "OBTAIN_OR_PROVE_A_COMPLETE_TARGET_DOMAIN_PREMISE_FIRST__THEN_USE_THE_CHEAPEST_SOUND_DOMINANCE_OR_COMPONENT_PROOF_OVER_THAT_DOMAIN",
+    "no_goal_substitution": true
+  },
+  "scheduler_delta": {
+    "delete": [
+      "BUILD_W3_UNIVERSAL_DOMINANCE_PROOF_BEFORE_ANY_COMPLETE_TARGET_DOMAIN_PREMISE_EXISTS",
+      "COUNT_W3_AS_AN_INDEPENDENT_INFORMATION_SOURCE_FOR_WHAT_COUNTS_AS_ALL_USEFUL_OPUS55_BEHAVIOR",
+      "USE_A_SELF_REFERENTIAL_DOMAIN_LABEL_AS_EVIDENCE_OF_DOMAIN_EXTENT"
+    ],
+    "activate": [
+      "SEARCH_FOR_COMPLETE_TARGET_DOMAIN_WITNESS_OR_CHARACTERIZATION",
+      "IF_COMPLETE_DOMAIN_WITNESS_ARRIVES__RECOMPUTE_W1_W2_W3_AND_SELECT_MINIMUM_PROOF_ROUTE",
+      "CONTINUE_OBSERVED_EPOCH_ACCEPTANCE_WORK_IN_PARALLEL_WITHOUT_MISLABELING_IT_LITERAL_ALL_COMPLETENESS"
+    ]
+  },
+  "current_first_party_public_check": {
+    "date": "2026-10-05",
+    "observations": [
+      "ANTHROPIC_TRANSPARENCY_HUB_LABELS_SECTION_8_AS_BENCHMARKED_CAPABILITIES_AND_REFERS_TO_COMPLETE_PUBLICLY_REPORTED_EVALUATION_RESULTS",
+      "ANTHROPIC_OPUS_PRODUCT_PAGE_USES_KEY_USE_CASES_INCLUDE",
+      "ANTHROPIC_OPUS55_LAUNCH_ARTICLE_DESCRIBES_SELECTED_IMPROVEMENTS_BENCHMARKS_AND_EXAMPLES"
+    ],
+    "deduction": "NONE_OF_THE_BOUND_WORDING_IS_AN_EXPLICIT_EXHAUSTIVENESS_ATTESTATION_FOR_THE_SET_U",
+    "sources": [
+      "https://www.anthropic.com/transparency",
+      "https://www.anthropic.com/claude/opus",
+      "https://www.anthropic.com/claude-opus-5-5",
+      "https://www.anthropic.com/system-cards"
+    ],
+    "hard_nonclaim": "BOUNDED_PUBLIC_CHECK_DOES_NOT_PROVE_GLOBAL_ABSENCE_OF_A_PRIVATE_OR_UNINDEXED_COMPLETE_SPECIFICATION"
+  },
+  "breakthrough": "THE_LITERAL_FINALITY_FRONTIER_IS_NOT_THREE_INDEPENDENT_W1_W2_W3_LANES. W3_FACTORS_INTO_COMPLETE_TARGET_DOMAIN_INFORMATION_PLUS_DOMINANCE. UNTIL_THE_DOMAIN_PREMISE_EXISTS__DOMINANCE_THEOREM_CONSTRUCTION_CANNOT_SETTLE_THE_OPEN_WORLD_REMAINDER.",
+  "hard_nonclaims": [
+    "NO_CLAIM_LITERAL_TERMINAL_GOAL_IS_IMPOSSIBLE",
+    "NO_CLAIM_CURRENT_OBSERVED_CAPABILITY_ENVELOPE_IS_COMPLETE",
+    "NO_CLAIM_W1_OR_W2_IS_THE_ONLY_POSSIBLE_COMPLETE_DOMAIN_WITNESS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
