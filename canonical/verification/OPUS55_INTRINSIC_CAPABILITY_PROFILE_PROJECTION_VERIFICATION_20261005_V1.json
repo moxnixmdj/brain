@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_INTRINSIC_CAPABILITY_PROFILE_PROJECTION_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_SYMBOLIC_KERNEL_AND_PRIMARY_SOURCE_RECOMPUTATION_PASS__CAUSAL_PROFILE_PROJECTION_SOUND__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_PROFILE_PROJECTION_20261005_V1.json",
+    "git_blob_sha": "c1aa58b8864a6fbe46d3c68bc42ca25b33e6f063",
+    "commit_sha": "20a41cd092ee790161f696d6294b073c54f35c6c"
+  },
+  "primary_source_recomputation": {
+    "sources": [
+      "https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback",
+      "https://www.anthropic.com/claude-opus-5-5",
+      "https://www.anthropic.com/news/life-sciences-verification-program",
+      "https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works"
+    ],
+    "checks": {
+      "opus55_classifier_decline_exists": true,
+      "fallback_can_be_served_by_different_model": true,
+      "serving_model_identity_is_observable": true,
+      "most_default_cyber_tasks_can_reroute_to_opus48": true,
+      "authorized_cyber_and_bio_profiles_can_be_more_permissive": true,
+      "client_tool_execution_is_external_to_model_policy": true
+    },
+    "conclusion": "WHOLE_DEPLOYMENT_PROFILE_BEHAVIOR_CONTAINS_CAUSAL_COMPONENTS_NOT_GENERATED_BY_OPUS55__AUTHORIZED_PROFILES_ARE_VALID_DISCOVERY_WINDOWS_FOR_ADDITIONAL_OPUS55_SERVED_BEHAVIOR_BUT_NOT_LICENSE_TO_ATTRIBUTE_EXTERNAL_ROUTING_OR_EXECUTION_TO_OPUS55"
+  },
+  "symbolic_verification": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "class": "STATELESS_SYMBOLIC_RECOMPUTATION",
+    "encoding": {
+      "i1_i2_i3": "MEMBERSHIP_OF_ONE_BEHAVIOR_x_IN_INTRINSIC_OPUS55_BEHAVIOR_SET_FOR_THREE_REPRESENTATIVE_AUTHORIZED_PROFILES",
+      "e": "BEHAVIOR_x_PRESENT_ONLY_DUE_TO_EXTERNAL_DEPLOYMENT_COMPONENT",
+      "u_intrinsic": "i1 OR i2 OR i3",
+      "u_system": "i1 OR i2 OR i3 OR e"
+    },
+    "results": {
+      "each_profile_intrinsic_set_is_subset_of_union": true,
+      "fallback_only_countermodel_found": {
+        "i1": false,
+        "i2": false,
+        "i3": false,
+        "e": true,
+        "u_system": true,
+        "u_intrinsic": false
+      },
+      "intrinsic_union_is_subset_of_system_union_when_system_union_adds_external_behavior": true
+    },
+    "deduction": [
+      "UNIONING_INTRINSIC_OPUS55_BEHAVIOR_ACROSS_PROFILES_CANNOT_DROP_ANY_PROFILE_SPECIFIC_INTRINSIC_BEHAVIOR",
+      "UNIONING_WHOLE_DEPLOYED_PROFILE_BEHAVIOR_CAN_ADD_NON_OPUS55_BEHAVIOR",
+      "THEREFORE_CAUSAL_PROJECTION_IS_REQUIRED_TO_KEEP_THE_TARGET_EQUAL_TO_OPUS55_CAPABILITY_RATHER_THAN_DEPLOYMENT_SYSTEM_CAPABILITY"
+    ]
+  },
+  "scheduling_consequence": {
+    "activate": [
+      "TREAT_AUTHORIZED_PROFILES_AS_DISCOVERY_WINDOWS_FOR_OPUS55_SERVED_BEHAVIOR",
+      "REQUIRE_SERVED_MODEL_OR_EQUIVALENT_CAUSAL_ATTRIBUTION_BEFORE_PROFILE_SPECIFIC_BEHAVIOR_ENTERS_OPUS55_TARGET",
+      "REQUIRE_CAUSAL_ATTRIBUTION_BEFORE_EXTERNAL_SECURITY_CONTROL_PERFORMANCE_BECOMES_AN_OPUS55_ACCEPTANCE_OBLIGATION"
+    ],
+    "block": [
+      "COUNT_OPUS48_OR_OTHER_FALLBACK_OUTPUT_AS_OPUS55_CAPABILITY",
+      "COUNT_SEPARATE_CLASSIFIER_DECISION_AS_OPUS55_MODEL_CAPABILITY_WITHOUT_MODEL_CAUSAL_EVIDENCE",
+      "COUNT_CLIENT_TOOL_BACKEND_COMPUTATION_AS_OPUS55_CAPABILITY",
+      "EXPAND_TERMINAL_TARGET_TO_CLONE_ANTHROPIC_DEPLOYMENT_INFRASTRUCTURE_BY_DEFAULT"
+    ],
+    "preserve": [
+      "BIO_AND_CYBER_CAPABILITIES_ACTUALLY_SERVED_BY_OPUS55_UNDER_AUTHORIZED_MORE_PERMISSIVE_ACCESS",
+      "MODEL_INTRINSIC_SECURITY_SCOPE_JUDGMENT_AND_RECOVERY_WHERE_CAUSALLY_VERIFIED",
+      "ALL_EXISTING_PERFORMANCE_PREDICATES_UNTIL_SEPARATE_TARGET_RECONCILIATION_PROVES_A_CHANGE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_CLOSED_BY_THIS_VERIFICATION",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_ALL_CURRENT_PROFILE_UNION_OBLIGATIONS_ARE_EXTERNAL",
+    "NO_CLAIM_SECURITY_BEHAVIOR_IS_NONINTRINSIC_UNLESS_CAUSALLY_SHOWN",
+    "NO_TERMINAL_COMPLETION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
