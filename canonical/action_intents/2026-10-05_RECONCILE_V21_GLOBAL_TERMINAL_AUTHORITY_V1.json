@@ -3,7 +3,7 @@
   "action_id": "RECONCILE-V21-GLOBAL-TERMINAL-AUTHORITY-20261005-V1",
   "status": "CANDIDATE__EXACT_BASE_BOUND__ZERO_CREDIT__NO_EXECUTION",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "f8b44ca7ef7408de0159df1e4c380e90201d2310",
+  "canonical_base_commit": "3fe47a768ae288f638d0c519ef4eccec7b7415dd",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
@@ -27,12 +27,13 @@
     "V21 connector verification blob 0e182c72d3b59079ca198db27091f1972cb318ae is activation-bound.",
     "Active zero-reality pointer still names V18.",
     "Current terminal authority preserves correct 14/38 atomic truth but does not expose V21's eight meta-envelope obligations.",
-    "PR 2113 and PR 2165 are stale V14-era repairs rather than owners of this exact V21 blocker."
+    "PR 2113 and PR 2165 are stale V14-era repairs rather than owners of this exact V21 blocker.",
+    "Current-main revalidation: f8b44ca7..3fe47a76 is exactly one commit adding only canonical/verification/DECLARED_ARTIFACT_FINALIZER_SPRITE_REPLAY_20261005_V1.json; no V21, authority, pointer, scheduler, or lease input changed."
   ],
   "stop_condition": "Stop when exact V21 is the current scheduling entrypoint, 24 atomic and 8 meta residuals are explicitly distinguished, 32 global open truth obligations are exposed, terminal=false and zero-credit invariants remain intact, and independent consistency verification passes. No fresh terminal cases.",
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "f8b44ca7ef7408de0159df1e4c380e90201d2310",
+    "canonical_base_commit": "3fe47a768ae288f638d0c519ef4eccec7b7415dd",
     "real_outcome": "One exact V21-bound terminal control plane that cannot schedule stale V18 work or hide the eight meta-envelope obligations.",
     "required_capability": "CANONICAL_CONTROL_PLANE_EXACT_FRONTIER_CONSISTENCY",
     "obs_goal": {
