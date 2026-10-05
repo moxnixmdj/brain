@@ -1,0 +1,208 @@
+{
+  "schema": "PROJECT_BRAIN_FIVE_PUBLIC_BAR_FAMILY_SCOPE_PARTITION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIVE_PUBLIC_BAR_ONLY_FAMILIES_PARTITIONED_TO_SHARED_BEHAVIORAL_LEAVES__SCOPE_COMPLETE_RECEIPT_REUSE_APPLIED__ZERO_CREDIT",
+  "objective": "Minimize the scope-completeness repair created by PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE by reusing already proved scope-complete behavioral receipts and deduplicating the surviving uncovered behavioral leaves across families.",
+  "authorities": {
+    "quarantine": {
+      "path": "canonical/governance/PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "fa4cddb4af4fb29c7e19e004774b11d6b874359a"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "acceptance_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    }
+  },
+  "reusable_scope_complete_receipts": {
+    "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001": {
+      "supporting_predicates": [
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+        "RECOVERY_TERMINAL_NONINFERIOR",
+        "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+      ],
+      "proof_kind": "SCOPE_COMPLETE_STRONGER_PROOF",
+      "receipt": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "reuse_rule": "REUSE_ONLY_FOR_THE_IDENTICAL_FROZEN_RECOVERY_BEHAVIORAL_LEAF__NO_TRANSFER_TO_UNRELATED_DOMAIN_REASONING"
+    },
+    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001": {
+      "supporting_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "proof_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+      "receipt": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "reuse_rule": "REUSE_ONLY_FOR_THE_IDENTICAL_FROZEN_TOOL_DISCOVERY_SELECTION_LEAF"
+    },
+    "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001": {
+      "supporting_predicate": "ARTIFACT_MECHANICAL_GATES_CEILING",
+      "proof_kind": "ABSOLUTE_CEILING",
+      "supporting_scope_partition": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "reuse_rule": "REUSE_ONLY_FOR_NATIVE_DOCX_XLSX_PPTX_PDF_STRUCTURED_EDIT_PRESERVATION__NO_PROFESSIONAL_QUALITY_CREDIT"
+    }
+  },
+  "family_partitions": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "original_behavioral_leaves": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+      ],
+      "discharged_by_existing_scope_complete_receipts": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "surviving_scope_leaves": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+      ],
+      "public_bar_union_may_discharge_survivors_only_after": "EXPLICIT_LOSSLESS_SCOPE_COVERAGE_PROOF"
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "original_behavioral_leaves": [
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "discharged_by_existing_scope_complete_or_objective_receipts": [
+        "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001"
+      ],
+      "surviving_scope_leaves": [
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "public_bar_union_may_discharge_survivors_only_after": "EXPLICIT_LOSSLESS_SCOPE_COVERAGE_PROOF"
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "original_behavioral_leaves": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "discharged_by_existing_scope_complete_receipts": [
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "surviving_scope_leaves": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+      ],
+      "public_bar_may_discharge_survivor_only_after": "EXPLICIT_AUTOMATIONBENCH_SCOPE_COVERAGE_PROOF"
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "original_behavioral_leaves": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+      ],
+      "discharged_by_existing_scope_complete_receipts": [],
+      "surviving_scope_leaves": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+      ],
+      "public_bar_may_discharge_survivors_only_after": "EXPLICIT_HLE_WITH_TOOLS_SCOPE_COVERAGE_PROOF"
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "original_behavioral_leaves": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "discharged_by_existing_scope_complete_receipts": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "surviving_scope_leaves": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "public_bar_may_discharge_survivors_only_after": "EXPLICIT_TB_SCIENCE_SCOPE_COVERAGE_PROOF"
+    }
+  ],
+  "deduplicated_surviving_leaf_hypergraph": [
+    {
+      "leaf": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "fanout": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ]
+    },
+    {
+      "leaf": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+      ]
+    },
+    {
+      "leaf": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "fanout": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ]
+    },
+    {
+      "leaf": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING"
+      ]
+    },
+    {
+      "leaf": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING"
+      ]
+    },
+    {
+      "leaf": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "fanout": [
+        "PROFESSIONAL_KNOWLEDGE_WORK"
+      ]
+    },
+    {
+      "leaf": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "fanout": [
+        "BUSINESS_WORKFLOW_AUTOMATION"
+      ]
+    }
+  ],
+  "counts": {
+    "original_leaf_occurrences": 16,
+    "discharged_occurrences_by_existing_receipts": 5,
+    "surviving_leaf_occurrences": 11,
+    "unique_surviving_behavioral_leaves": 7,
+    "maximum_cross_family_fanout": 3
+  },
+  "priority": [
+    "FIRST_ATTEMPT_SCOPE_EQUIVALENCE_FROM_EXISTING_PUBLIC_BAR_UNIONS_TO_THE_SEVEN_SURVIVING_LEAVES",
+    "REUSE_ANY_FUTURE_ACCEPTED_FAMILY_OR_SCOPE_COMPLETE_RECEIPT_BY_EXACT_BEHAVIORAL_IDENTITY",
+    "ONLY_THEN_CREATE_MINIMUM_UNCOVERED_SCOPE_OBLIGATIONS_FOR_SURVIVING_LEAVES"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_BARS_COVER_ANY_SURVIVING_LEAF_YET",
+    "NO_NEW_ACCEPTANCE_PREDICATE_CREATED_BY_THIS PARTITION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_ROOT1_POSITIVE_GAP",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
