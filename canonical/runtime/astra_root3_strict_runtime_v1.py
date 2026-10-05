@@ -6,11 +6,14 @@ import importlib
 import sys
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 from canonical.runtime import root3_strict_current_bootstrap_v3 as bootstrap
 from canonical.runtime import root3_two_class_attempt_authorizer_v2 as authorizer
 
 SCHEMA = "PROJECT_BRAIN_ASTRA_ROOT3_STRICT_RUNTIME_V1"
-REPO_ROOT = Path(__file__).resolve().parents[2]
 MISSION_ROOT = (REPO_ROOT / "canonical/astra_runtime/missions").resolve()
 
 
