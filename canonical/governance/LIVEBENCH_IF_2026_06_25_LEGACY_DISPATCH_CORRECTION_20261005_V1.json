@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_2026_06_25_LEGACY_DISPATCH_CORRECTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CRITICAL_ROUTE_CORRECTION__ACTIVE_POPULATION_LEGACY_DISPATCH__ZERO_TERMINAL_CONTENT__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Correct the scorer-route critical path for the exact frozen 2026-06-25 LiveBench instruction-following population without reading terminal prompts, kwargs, instruction lists, responses, or target scores.",
+  "frozen_population_binding": {
+    "repository": "livebench/instruction_following",
+    "revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "parquet_bytes": 537024,
+    "total_rows": 400,
+    "active_2026_06_25_rows": 200,
+    "active_counts": {
+      "paraphrase": 50,
+      "simplify": 50,
+      "story_generation": 50,
+      "summarize": 50
+    },
+    "prior_independent_verification": {
+      "brain_receipt": "canonical/verification/LIVEBENCH_IF_2026_06_25_RELEASE_POPULATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "verifier_repository": "moxnixmdj/verification-capsule-runner",
+      "verifier_pull_request": 1380,
+      "workflow_run_id": 37149624542,
+      "workflow_job_id": 111280524841,
+      "conclusion": "success"
+    }
+  },
+  "pinned_dispatch_runtime": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "path": "livebench/gen_ground_truth_judgment.py",
+    "git_blob_sha": "b36561da5b54380c724c507462d0ee65feefeac8",
+    "exact_dispatch_rule": "instruction_following rows with row.livebench_release_date < '2025-11-25' are separated into old_instruction_following_matches and scored by instruction_following_process_results; other instruction_following rows use ifbench_process_results"
+  },
+  "first_party_dataset_metadata": {
+    "current_main_latest_data_commit": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "latest_data_commit_date": "2025-04-07",
+    "exact_lfs_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "dataset_viewer_rows": 400,
+    "livebench_release_date_min": "2024-06-24",
+    "livebench_release_date_max": "2024-11-25",
+    "consequence": "EVERY_ROW_IN_THE_EXACT_FROZEN_DATASET_HAS_ROW_RELEASE_DATE_BEFORE_2025_11_25"
+  },
+  "route_theorem": {
+    "name": "FROZEN_POPULATION_LEGACY_DISPATCH",
+    "premises": [
+      "THE_EXACT_BRAIN_FROZEN_PARQUET_IS_THE_LATEST_MAIN_DATA_COMMIT_0868379_AND_HAS_SHA256_A9BB97",
+      "FIRST_PARTY_DATASET_METADATA_REPORTS_ROW_LIVEBENCH_RELEASE_DATE_RANGE_2024_06_24_THROUGH_2024_11_25",
+      "PINNED_RUNTIME_DISPATCHES_INSTRUCTION_FOLLOWING_ROWS_WITH_ROW_RELEASE_DATE_BEFORE_2025_11_25_TO_THE_LEGACY_EVALUATOR"
+    ],
+    "conclusion": "ALL_ROWS_IN_THE_EXACT_FROZEN_INSTRUCTION_FOLLOWING_DATASET__INCLUDING_THE_200_ROWS_ACTIVE_UNDER_THE_2026_06_25_REMOVAL_FILTER__DISPATCH_TO_THE_LEGACY_INSTRUCTION_FOLLOWING_EVALUATOR__NOT_IFBENCH58",
+    "proof": [
+      "MAX_ROW_RELEASE_DATE_2024_11_25_IS_STRICTLY_LESS_THAN_DISPATCH_CUTOFF_2025_11_25",
+      "THEREFORE_EVERY_FROZEN_ROW_SATISFIES_THE_OLD_INSTRUCTION_FOLLOWING_PREDICATE",
+      "ACTIVE_2026_06_25_POPULATION_IS_A_SUBSET_OF_THE_SAME_FROZEN_ROWS",
+      "THEREFORE_EVERY_ACTIVE_ROW_DISPATCHES_TO_THE_LEGACY_EVALUATOR"
+    ]
+  },
+  "critical_path_correction": {
+    "demote": [
+      "IFBENCH58_VISIBLE_STATE_INVERSION",
+      "IFBENCH58_RATIO_OVERLAP_REFERENCE_TEXT_PROVENANCE",
+      "IFBENCH58_REPEAT_SPAN_PROMPT_TO_REPEAT_PROVENANCE",
+      "IFBENCH58_ZERO_INDEX_STOCHASTICITY_AS_A_BLOCKER_FOR_LIVEBENCH_IF_GE_65_7"
+    ],
+    "reason": "THESE_ARE_REAL_SCORER_PROPERTIES_BUT_NON_LOAD_BEARING_FOR_THE_EXACT_FROZEN_2026_06_25_ACCEPTANCE_POPULATION",
+    "promote": "LEGACY15_POINTWISE_OPTIMALITY_AND_GENERATOR_DOMAIN_COMPLETENESS",
+    "supersession_scope": "LIVEBENCH_IF_GE_65_7_CRITICAL_PATH_ONLY__DO_NOT_DELETE_IFBENCH58_RESEARCH_ARTIFACTS"
+  },
+  "already_verified_legacy_assets": {
+    "composer_receipt": "canonical/verification/LIVEBENCH_COMPOSER_V2_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "composer_verification_status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "pointwise_verifier": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 2128,
+      "merged": true,
+      "head_sha": "3a3b0d61f6abd0370d98203fbe2d5df308c0394b",
+      "merge_commit": "31474945bf8bec12c1b142d7edf89386d879a565",
+      "workflow_run_id": 37242824231,
+      "workflow_job_id": 111554757257,
+      "conclusion": "success",
+      "artifact_digest": "sha256:57a14be315c9954cdb5e882f5166d102c5cff6ae7074e7b398b4b4f9715c0dc7",
+      "cases": 12489,
+      "pointwise_exact_optimum_match": 12489,
+      "candidate_witness_cases": 10959,
+      "proved_unsat_cases": 1530,
+      "terminal_rows_read": 0,
+      "terminal_kwargs_read": 0,
+      "terminal_instruction_id_lists_read": 0,
+      "target_scores_read": 0
+    },
+    "exact_remaining_nonclaim": "POINTWISE_MAXIMALITY_IS_INDEPENDENTLY_VERIFIED_OVER_A_LARGE_FINITE_GENERATOR_ENVELOPE__NOT_YET_A_FORMAL_PROOF_OF_THE_FULL_GENERATOR_ADMITTED_SLOT_CARTESIAN_PRODUCT"
+  },
+  "new_minimum_critical_path": [
+    {
+      "rank": 1,
+      "obligation": "INDEPENDENTLY_RECOMPUTE_AND_BIND_THE_LEGACY_DISPATCH_THEOREM",
+      "minimum_evidence": "EXACT_FROZEN_DATASET_HASH_PLUS_METADATA_ONLY_MIN_MAX_ROW_RELEASE_DATE_PLUS_PINNED_DISPATCH_BLOB",
+      "terminal_content_required": false
+    },
+    {
+      "rank": 2,
+      "obligation": "CLOSE_FULL_GENERATOR_DOMAIN_COMPLETENESS_FOR_LEGACY15_POINTWISE_PLANNER",
+      "minimum_evidence": "PROVE_EVERY_GENERATOR_ADMITTED_ID_SET_AND_SLOT_VALUE_LIES_INSIDE_THE_VERIFIED_POINTWISE_THEOREM_OR_EXTEND_THE_THEOREM_FAIL_CLOSED",
+      "terminal_content_required": false
+    },
+    {
+      "rank": 3,
+      "obligation": "PROMOTE_LIVEBENCH_IF_GE_65_7_BY_DISTRIBUTION_FREE_POINTWISE_DOMINANCE",
+      "minimum_evidence": "FULL_DOMAIN_POINTWISE_MAXIMUM_PLUS_VERIFIED_OPUS_MEAN_65_73775_ON_IDENTICAL_FROZEN_POPULATION",
+      "terminal_content_required": false
+    }
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_ACCEPTANCE_CREDIT_FROM_THIS_ROUTE_CORRECTION_ALONE",
+    "NO_CLAIM_THE_FULL_LEGACY15_SLOT_CARTESIAN_PRODUCT_IS_ALREADY_PROVED",
+    "NO_TERMINAL_PROMPTS_READ",
+    "NO_TERMINAL_KWARGS_READ",
+    "NO_TERMINAL_INSTRUCTION_LISTS_READ",
+    "NO_TERMINAL_RESPONSES_READ",
+    "NO_FRESH_TERMINAL_EXECUTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_rows_read": 0,
+    "terminal_kwargs_read": 0,
+    "terminal_instruction_lists_read": 0,
+    "target_scores_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
