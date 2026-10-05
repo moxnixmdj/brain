@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ONE_CANDIDATE_NEW_RESIDUAL_TARGET_CONDITIONED_TO_ZERO_CURRENTLY_MANDATORY_NEW_RESIDUALS__ONE_CONFIGURATION_IDENTITY_CHECK_REMAINS__ZERO_CREDIT",
+  "objective": "Reconcile the source-backed five-family public-task-union audit with the independently fail-closed target-scope status of its only newly proposed behavioral residual.",
+  "authorities": {
+    "task_union_audit": {
+      "path": "canonical/governance/PUBLIC_BAR_TASK_UNION_SCOPE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2295a03fe9090e6842c6bd850b7bca67d1f71131",
+      "aggregate": "40_FROZEN_BASIS_LEAVES__38_DIRECT_OR_DEPENDENCY__1_CONFIGURATION_IDENTITY_OPEN__1_NEW_CANDIDATE_RESIDUAL"
+    },
+    "hypothesis_target_scope_quarantine": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_TARGET_SCOPE_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "de091bdc3c1e3bb4ec793afa44cf2b2caf51bae7",
+      "status": "EXACT_HYPOTHESIS_FORMATION_TARGET_REQUIREMENT_NOT_YET_PROVED__CONDITIONAL_SCOPE_CANDIDATE"
+    },
+    "independent_edge_falsification": {
+      "path": "canonical/verification/TERMINAL_ACCEPTANCE_V3_SCIENTIFIC_HYPOTHESIS_EDGE_FALSIFICATION_20261005_V1.json",
+      "git_blob_sha": "830dcd19615923f55ded7159da608e7ad85b110e",
+      "result": "TARGET_SCOPE_REQUIREMENT_ESTABLISHED_FALSE__MANDATORY_ACCEPTANCE_OBLIGATION_ESTABLISHED_FALSE"
+    },
+    "target_behavior_guard": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1.json",
+      "rule": "NO_MANDATORY_ACCEPTANCE_SCOPE_FROM_UNPROVED_TARGET_ENTAILMENT"
+    }
+  },
+  "reconciliation": {
+    "candidate_new_residual_from_unconditioned_basis_difference": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+    "candidate_residual_count": 1,
+    "target_requirement_currently_established": false,
+    "mandatory_new_behavioral_residual_count_under_current_frozen_target_evidence": 0,
+    "configuration_identity_open_count": 1,
+    "configuration_identity_open_dimension": "MULTIMODAL_OR_NON_TEXT_INPUT_WHERE_PRESENT__HLE_WITH_TOOLS_CONDITION_IDENTITY",
+    "existing_dependency_graph_preserved": true,
+    "broad_family_target_obligations_deleted": 0,
+    "public_thresholds_deleted": 0
+  },
+  "theorem": {
+    "name": "TARGET_CONDITIONED_SET_DIFFERENCE",
+    "statement": "A behavior leaf produced by benchmark-union set difference becomes a mandatory terminal residual only when it is also inside the frozen useful target set. Therefore an audit residual R with target-membership unproved cannot be scheduled as mandatory acceptance work; it remains a conditional candidate that wakes only on a verified target-scope receipt.",
+    "application": "The sole new residual emitted by the five-family task-union audit is scientific hypothesis/question formation. Current independent falsification establishes that its target requirement is not proved. Therefore current mandatory NEW behavioral residual count is zero, without deleting the scientific-research family or any benchmark-scored workflow behavior."
+  },
+  "structural_scope_state_after_reconciliation": {
+    "frozen_family_count": 5,
+    "frozen_observable_basis_leaf_count": 40,
+    "new_mandatory_behavioral_residuals": 0,
+    "conditional_candidate_behavioral_residuals": [
+      "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001"
+    ],
+    "open_configuration_identity_checks": [
+      "HLE_WITH_TOOLS_MULTIMODAL_OR_NON_TEXT_SCOPE_IDENTITY"
+    ],
+    "remaining_scope_work_classes": [
+      "VERIFY_SCOPE_STRENGTH_OF_EXISTING_DEPENDENCIES_WHERE_REFERENCED",
+      "RESOLVE_HLE_WITH_TOOLS_MULTIMODAL_CONFIGURATION_IDENTITY",
+      "WAKE_SCIENTIFIC_HYPOTHESIS_RESIDUAL_ONLY_IF_NEW_TARGET_SCOPE_EVIDENCE_PROVES_IT_REQUIRED"
+    ]
+  },
+  "scheduler_delta": {
+    "delete": [
+      "UNCONDITIONAL_NEW_PERFORMANCE_OR_MATCHED_COMPARATOR_PROGRAM_FOR_SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+      "UNCONDITIONAL_NEW_REGISTRY_FREEZE_FOR_SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001"
+    ],
+    "preserve": [
+      "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_AS_CONDITIONAL_CANDIDATE_ONLY",
+      "ALL_EXISTING_DEPENDENCY_AND_PUBLIC_THRESHOLD_WORK",
+      "HLE_WITH_TOOLS_CONFIGURATION_IDENTITY_CHECK"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_OPUS55_LACKS_HYPOTHESIS_FORMATION",
+    "NO_CLAIM_SCIENTIFIC_RESEARCH_FAMILY_IS_CLOSED",
+    "NO_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_FAMILY_PROMOTION",
+    "NO_TARGET_WEAKENING",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
