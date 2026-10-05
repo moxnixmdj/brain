@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_MATERIAL_ORDER_MONOTONICITY_CERTIFICATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FROZEN_SYNTHESIS_MATERIAL_VECTOR_AND_COORDINATEWISE_MONOTONICITY__ZERO_CREDIT",
+  "target_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "objective": "Discharge the first two hidden-evaluator coupling prerequisites for the frozen synthesis predicate without matched case execution: bind a complete material outcome vector relative to the frozen predicate and prove the frozen quality/coverage observables are coordinatewise monotone in that vector.",
+  "exact_sources": {
+    "acceptance_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "matched_quality_activation": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_ACTIVATION_V1.json",
+      "git_blob_sha": "1ca2de029b02ca8518e59e0d66a973e3e26e251b"
+    },
+    "matched_quality_runtime": {
+      "path": "canonical/runtime/synthesis_matched_quality_metric_v1.py",
+      "git_blob_sha": "116b7394f4b0a6845056c798e966f4cc26f294bf"
+    },
+    "dimension_scorer_contract": {
+      "path": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json",
+      "git_blob_sha": "8206cb013b5cd0d653ffa70d1e867f8c4d4630b8"
+    },
+    "dimension_scorer_runtime": {
+      "path": "canonical/runtime/synthesis_dimension_scorers_and_strict_reducer_v1.py",
+      "git_blob_sha": "3e2c155e76a2a2965bd340f1fb93b7c4abc0c721"
+    },
+    "hidden_evaluator_coupling": {
+      "path": "canonical/governance/HIDDEN_EVALUATOR_MONOTONE_COUPLING_DOMINANCE_V1.json",
+      "git_blob_sha": "678f728089a8df815153af6dd58a88894dd0671f"
+    }
+  },
+  "frozen_predicate_semantics": {
+    "acceptance": "Brain conservative matched quality/coverage bound >= Opus matched bound on frozen synthesis portfolio.",
+    "matched_quality_rule": "IF_UNSUPPORTED_MATERIAL_CLAIMS_GT_0_THEN_0_ELSE_MIN_OF_FIVE_FROZEN_QUALITY_COMPONENTS",
+    "required_claim_coverage": "SEPARATE_NORMALIZED_METRIC_NOT_INCLUDED_IN_MATCHED_QUALITY_MINIMUM"
+  },
+  "material_outcome_vector": {
+    "coordinate_order": [
+      "ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "CLAIM_TO_SOURCE_FIDELITY",
+      "UNCERTAINTY_AND_DISAGREEMENT_PRESERVATION",
+      "AUDIENCE_ADAPTATION",
+      "FORMAT_AND_STYLE_CONSTRAINTS",
+      "COMPRESSION_WITHOUT_DECISION_RELEVANT_LOSS",
+      "REQUIRED_CLAIM_COVERAGE"
+    ],
+    "domains": {
+      "ZERO_UNSUPPORTED_MATERIAL_CLAIMS": "BINARY_0_OR_1__1_IFF_UNSUPPORTED_MATERIAL_CLAIMS_EQUALS_0",
+      "CLAIM_TO_SOURCE_FIDELITY": "[0,1]",
+      "UNCERTAINTY_AND_DISAGREEMENT_PRESERVATION": "[0,1]",
+      "AUDIENCE_ADAPTATION": "[0,1]",
+      "FORMAT_AND_STYLE_CONSTRAINTS": "[0,1]",
+      "COMPRESSION_WITHOUT_DECISION_RELEVANT_LOSS": "[0,1]",
+      "REQUIRED_CLAIM_COVERAGE": "[0,1]"
+    },
+    "order": "BRAIN_GE_MATERIAL_OPUS_IFF_BRAIN_IS_GREATER_OR_EQUAL_ON_ALL_SEVEN_COORDINATES",
+    "completeness_relative_to_frozen_predicate": [
+      "THE_FIVE_QUALITY_COORDINATES_PLUS_ZERO_UNSUPPORTED_BINARY_DETERMINE_THE_FROZEN_MATCHED_QUALITY_EXACTLY",
+      "REQUIRED_CLAIM_COVERAGE_IS_THE_ONLY_SEPARATE_COVERAGE_METRIC_DECLARED_BY_THE_FROZEN_SYNTHESIS_ACCEPTANCE_SHAPE",
+      "NO_ADDITIONAL_MATERIAL_COORDINATE_IS_USED_BY_THE_FROZEN_MATCHED_QUALITY_RUNTIME_OR_ACCEPTANCE_TEXT"
+    ]
+  },
+  "theorem": {
+    "id": "SYNTHESIS_COORDINATEWISE_MATERIAL_DOMINANCE_IMPLIES_FROZEN_QUALITY_AND_COVERAGE_DOMINANCE",
+    "quality_formula": "Q(z,q1,q2,q3,q4,q5)=z*MIN(q1,q2,q3,q4,q5)",
+    "premises": [
+      "zB_AND_zO_ARE_BINARY_AND_zB_GE_zO",
+      "FOR_EACH_i_IN_1_TO_5__0_LE_qOi_LE_qBi_LE_1",
+      "0_LE_cO_LE_cB_LE_1"
+    ],
+    "result": [
+      "Q_B_GE_Q_O",
+      "cB_GE_cO"
+    ],
+    "proof_partition": [
+      "zB=0,zO=0 => BOTH_QUALITY_ZERO",
+      "zB=1,zO=0 => BRAIN_QUALITY_NONNEGATIVE_AND_OPUS_QUALITY_ZERO",
+      "zB=1,zO=1 => MIN_IS_COORDINATEWISE_MONOTONE",
+      "COVERAGE_DOMINANCE_IS_DIRECT_FROM_cB_GE_cO"
+    ]
+  },
+  "coupling_route_effect": {
+    "discharged_prerequisites": [
+      "SOUND_MATERIAL_OUTCOME_ORDER_FOR_THE_FROZEN_SYNTHESIS_QUALITY_COVERAGE_PREDICATE",
+      "COORDINATEWISE_MONOTONICITY_OF_THE_FROZEN_QUALITY_AND_COVERAGE_OBSERVABLES"
+    ],
+    "still_open": [
+      "COMPILE_CURRENT_BRAIN_AND_TARGET_EVIDENCE_INTO_SCOPE_COMPLETE_FINITE_OUTCOME_CLASSES_OR_CONSERVATIVE_MASS_BOUNDS",
+      "PROVE_A_FULL_MASS_DOMINANCE_PRESERVING_COUPLING_OR_OBTAIN_AN_EXACT_COMPARATOR_RESULT"
+    ],
+    "forbidden_inference": "THIS_CERTIFICATE_ALONE_DOES_NOT_SUPPLY_OPUS_OUTCOME_MASS_BRAIN_OUTCOME_MASS_OR_A_COUPLING"
+  },
+  "hard_nonclaims": [
+    "NO_SYNTHESIS_PREDICATE_CLOSURE",
+    "NO_OPUS_OUTPUT_OR_CASE_RESULT_INFERRED",
+    "NO_MATCHED_CASE_GENERATION_OR_EXECUTION",
+    "NO_CLAIM_ALL_POSSIBLE_HIDDEN_EVALUATORS_ARE_MONOTONE_OUTSIDE_THE_FROZEN_PREDICATE_SEMANTICS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
