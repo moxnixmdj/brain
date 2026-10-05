@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_SUB100MB_VERIFIED_CAPABILITY_RATCHET_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ZERO_LEARNED_STATE_CAPABILITY_RATCHET__CI_AND_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "MAKE_EACH_VERIFIED_INDUCED_PROGRAM_A_PERMANENT_SEARCH_SHORTCUT_SO_FUTURE_CAPABILITY_GROWS_WITHOUT_GROWING_PERSISTENT_LEARNED_STATE",
+  "bound_artifacts": {
+    "runtime": {
+      "path": "canonical/runtime/verified_capability_ratchet_v1.py",
+      "git_blob_sha": "c36b02ec84403d0435b7c3ab16ea16ec5003e2d2"
+    },
+    "tests": {
+      "path": "canonical/tests/test_verified_capability_ratchet_v1.py",
+      "git_blob_sha": "b8fc3af2b0920d5ca8f17f481ea82cacb72903a0"
+    },
+    "induction_kernel": {
+      "path": "canonical/runtime/mdl_program_induction_v1.py",
+      "git_blob_sha": "fa07fbc00a76fefa4441d806e8fc3a4b50d555ff"
+    }
+  },
+  "promotion_rule": [
+    "PROGRAM_MUST_HAVE_EXACT_HELDOUT_VERIFICATION_PASS",
+    "VERIFICATION_MUST_BIND_THE_EXACT_PROGRAM",
+    "VERIFICATION_MUST_BIND_THE_EXACT_PRIMITIVE_REGISTRY_FINGERPRINT",
+    "UNVERIFIED_PROGRAMS_FAIL_CLOSED",
+    "PROMOTED_MACRO_PERSISTENT_LEARNED_STATE_BYTES_MUST_EQUAL_ZERO"
+  ],
+  "expected_leverage": {
+    "before": "SEARCH_DESCRIPTION_LENGTH_SCALES_WITH_FULL_PRIMITIVE_SEQUENCE",
+    "after": "VERIFIED_REUSABLE_SUBPROGRAM_CAN_BE_SEARCHED_AS_ONE_MACRO_PRIMITIVE",
+    "demonstration": "THE_TESTED_AFFINE_SUBPROGRAM_REDUCES_A_FUTURE_COMPOSED_TARGET_FROM_DESCRIPTION_LENGTH_4_TO_2_WITH_ZERO_LEARNED_STATE",
+    "terminal_interpretation": "CAPABILITY_LIBRARY_SIZE_MAY_GROW_WHILE_PERSISTENT_LEARNED_PARAMETER_BYTES_REMAIN_CONSTANT"
+  },
+  "mathematical_target": {
+    "capability_growth": "dC/dt > 0",
+    "learned_state_growth": "dM_L/dt -> 0",
+    "search_effect": "REUSABLE_VERIFIED_MACROS_REDUCE_EFFECTIVE_PROGRAM_DEPTH_AND_BRANCHING_BURDEN"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_MACROS_REMOVE_ALL_EXPONENTIAL_SEARCH",
+    "NO_CLAIM_OF_UNKNOWN_DOMAIN_NONINFERIORITY",
+    "NO_CLAIM_OF_FRONTIER_LEVEL_CAPABILITY",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT_FROM_LIBRARY_PROMOTION",
+    "NO_PROMOTION_WITHOUT_HELDOUT_VERIFICATION"
+  ],
+  "next_falsification_target": "MEASURE_MACRO_LIBRARY_TRANSFER_ON_HELDOUT_TASK_DISTRIBUTIONS_AND_QUANTIFY_PROGRAMS_EVALUATED_PER_SUCCESS_AS_LIBRARY_GROWS",
+  "accounting": {
+    "persistent_learned_state_bytes": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

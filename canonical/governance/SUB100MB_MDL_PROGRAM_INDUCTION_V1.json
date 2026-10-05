@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_SUB100MB_MDL_PROGRAM_INDUCTION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__ZERO_LEARNED_STATE_SEMANTIC_INDUCTION_KERNEL__CI_AND_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "REMOVE_AS_MUCH_UNKNOWN_DOMAIN_SEMANTIC_LEARNING_AS_POSSIBLE_FROM_THE_NEURAL_CORE_BY_SYNTHESIZING_MINIMUM_DESCRIPTION_LENGTH_DETERMINISTIC_PROGRAMS_FROM_TASK_EXAMPLES",
+  "terminal_hypothesis": "FRONTIER_LEVEL_SYSTEM_CAPABILITY_WITH_TOTAL_PERSISTENT_LEARNED_STATE_LE_100000000_BYTES",
+  "bound_artifacts": {
+    "runtime": {
+      "path": "canonical/runtime/mdl_program_induction_v1.py",
+      "git_blob_sha": "fa07fbc00a76fefa4441d806e8fc3a4b50d555ff"
+    },
+    "tests": {
+      "path": "canonical/tests/test_mdl_program_induction_v1.py",
+      "git_blob_sha": "116d4f37c496a14ab83a21fa779813d479033da2"
+    }
+  },
+  "mechanism": {
+    "search": "UNIFORM_COST_OVER_EXPLICIT_DETERMINISTIC_PRIMITIVE_COMPOSITIONS",
+    "objective": "MINIMUM_DESCRIPTION_LENGTH_EXACT_FIT",
+    "semantic_compression": "PRUNE_MORE_EXPENSIVE_PROGRAMS_WITH_IDENTICAL_TRAINING_OUTPUT_SIGNATURES",
+    "verification": "HELDOUT_EXAMPLES_CAN_BE_CHECKED_WITH_THE_SAME_EXPLICIT_PROGRAM",
+    "compilation": "SUCCESSFUL_TASK_PROGRAM_CAN_BE_STORED_AS_DETERMINISTIC_REUSABLE_CAPABILITY_WITHOUT_RETRAINING",
+    "persistent_learned_state_bytes": 0,
+    "external_frontier_model_required": false
+  },
+  "relationship_to_existing_universal_learning_control": {
+    "control_verification": "canonical/verification/UNIVERSAL_LEARNING_CONTRACT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "remaining_residual_before_this_kernel": "MATCHED_EMPIRICAL_LEARNING_EFFECTIVENESS_NONINFERIORITY",
+    "contribution": "SUPPLIES_ONE_ZERO_LEARNED_STATE_CANDIDATE_GENERATION_ROUTE_FOR_TASKS_EXPRESSIBLE_AS_COMPOSITIONS_OF_AVAILABLE_PRIMITIVES",
+    "does_not_close_empirical_noninferiority": true
+  },
+  "external_research_basis": [
+    {
+      "name": "CompressARC",
+      "repository": "iliao2345/CompressARC",
+      "license": "MIT",
+      "readme_git_blob_sha": "72057e749685d9fc407a5bb93cef0d2113ad4889",
+      "license_git_blob_sha": "546b2ba6d025950c85677fbeb52836b562190130",
+      "reported_result": "76K_PARAMETER_NO_PRETRAINING_METHOD_REPORTED_20_PERCENT_ARC_AGI_1_EVALUATION_BY_TASK_TIME_MINIMUM_DESCRIPTION_LENGTH_OPTIMIZATION",
+      "paper": "https://arxiv.org/abs/2512.06104",
+      "role": "MECHANISM_EVIDENCE_AND_DESIGN_INSPIRATION_ONLY__NO_PERFORMANCE_INHERITANCE"
+    }
+  ],
+  "current_verified_scope_if_tests_pass": [
+    "GENERIC_FUNCTION_COMPOSITION_SEARCH_OVER_CALLER_SUPPLIED_DETERMINISTIC_PRIMITIVES",
+    "INTEGER_AND_STRING_DOMAINS_USE_THE_SAME_KERNEL",
+    "SHORTEST_EXACT_PROGRAM_SELECTED_WITHIN_DECLARED_SEARCH_SPACE",
+    "HELDOUT_VERIFICATION_SUPPORTED",
+    "SUCCESSFUL_PROGRAM_COMPILES_WITH_ZERO_PERSISTENT_LEARNED_STATE"
+  ],
+  "load_bearing_limitations": [
+    "NO_CLAIM_OF_ARC_PERFORMANCE",
+    "NO_CLAIM_OF_FRONTIER_UNKNOWN_DOMAIN_PARITY",
+    "NO_CLAIM_THAT_THE_REQUIRED_PRIMITIVE_LIBRARY_IS_COMPLETE",
+    "SEARCH_COST_CAN_GROW_EXPONENTIALLY_WITH_DESCRIPTION_LENGTH_AND_PRIMITIVE_COUNT",
+    "PRIMITIVE_DISCOVERY_OR_CREATION_REMAINS_A_SEPARATE_RESIDUAL",
+    "NO_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_KERNEL_INSTALLATION"
+  ],
+  "next_falsification_experiment": {
+    "target": "MEASURE_WHETHER_EXPLICIT_PROGRAM_INDUCTION_PLUS_JIT_PRIMITIVE_ACQUISITION_PREVENTS_PROPOSAL_PROBABILITY_FROM_COLLAPSING_ON_HELDOUT_NOVEL_TASKS",
+    "primary_metrics": [
+      "HELDOUT_EXACT_SUCCESS_RATE",
+      "PROGRAMS_EVALUATED_PER_SUCCESS",
+      "WALL_CLOCK_PER_SUCCESS",
+      "DESCRIPTION_LENGTH",
+      "PRIMITIVE_LIBRARY_GROWTH",
+      "PERSISTENT_LEARNED_STATE_BYTES"
+    ],
+    "hard_budget": {
+      "persistent_learned_state_bytes_max": 100000000,
+      "current_kernel_persistent_learned_state_bytes": 0
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
