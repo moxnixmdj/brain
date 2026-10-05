@@ -34,9 +34,7 @@ def _authorize_external_information(kind,payload):
     verdict["mission_id"]=_ACTIVE_CONTINUOUS_OBS_MISSION_ID
     evidence_id=_ACTIVE_CONTINUOUS_OBS_MISSION_ID or "UNBOUND"
     p=EVID_DIR/f"{evidence_id}__INFORMATION_ADMISSION.jsonl"
-    p.parent.mkdir(parents=True,exist_ok=True)
-    with p.open("a",encoding="utf-8",newline="\n") as fh:
-        fh.write(json.dumps(verdict,sort_keys=True,separators=(",",":"))+"\n")
+    _append_admin_jsonl(p,verdict)
     if not verdict.get("pass"):
         raise Blocker(
             "CONTINUOUS_OBS_INFORMATION_BLOCKED:"
@@ -59,9 +57,61 @@ STATE_DIR=ROOT/"canonical"/"astra_runtime"/"state"
 EVID_DIR=ROOT/"canonical"/"astra_runtime"/"evidence"
 
 def utc(): return datetime.now(timezone.utc).isoformat()
+def _admin_destination_class(p):
+    p=pathlib.Path(p)
+    raw=p if p.is_absolute() else ROOT/p
+    lex=pathlib.Path(os.path.abspath(raw))
+    state_root=pathlib.Path(os.path.abspath(STATE_DIR))
+    evid_root=pathlib.Path(os.path.abspath(EVID_DIR))
+    if lex.parent==state_root and lex.suffix==".json":
+        return "ASTRA_STATE_JSON"
+    if lex.parent==evid_root and lex.suffix==".json":
+        return "ASTRA_EVIDENCE_JSON"
+    if lex.parent==evid_root and lex.suffix==".jsonl":
+        return "ASTRA_EVIDENCE_JSONL"
+    return None
+
+def _admin_expected_prestate(p):
+    p=pathlib.Path(p)
+    if p.is_symlink() or p.parent.is_symlink() or not p.exists():
+        return "ABSENT"
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+
+def _typed_admin_commit(p,payload,destination_class,operation):
+    p=pathlib.Path(p)
+    raw=p if p.is_absolute() else ROOT/p
+    lex=pathlib.Path(os.path.abspath(raw))
+    root_lex=pathlib.Path(os.path.abspath(ROOT))
+    try:
+        rel=lex.relative_to(root_lex).as_posix()
+    except ValueError as exc:
+        raise Blocker("TYPED_ADMIN_WRITE_PATH_OUTSIDE_ROOT") from exc
+    mod=_load_runtime_helper("root3_typed_durable_admin_write_v1")
+    plan=mod.build_plan(
+        operation=operation,
+        destination_class=destination_class,
+        path=rel,
+        payload=payload,
+        expected_pre_sha256=_admin_expected_prestate(lex),
+    )
+    return mod.commit(ROOT,plan,payload)
+
 def writej(p,x):
-    p=pathlib.Path(p); p.parent.mkdir(parents=True,exist_ok=True)
+    p=pathlib.Path(p)
+    destination_class=_admin_destination_class(p)
+    if destination_class in {"ASTRA_STATE_JSON","ASTRA_EVIDENCE_JSON"}:
+        payload=(json.dumps(x,indent=2,sort_keys=True)+"\n").encode("utf-8")
+        _typed_admin_commit(p,payload,destination_class,"REPLACE")
+        return
+    p.parent.mkdir(parents=True,exist_ok=True)
     p.write_text(json.dumps(x,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+
+def _append_admin_jsonl(p,x):
+    p=pathlib.Path(p)
+    if _admin_destination_class(p)!="ASTRA_EVIDENCE_JSONL":
+        raise Blocker("TYPED_ADMIN_JSONL_DESTINATION_REQUIRED")
+    payload=(json.dumps(x,sort_keys=True,separators=(",",":"))+"\n").encode("utf-8")
+    return _typed_admin_commit(p,payload,"ASTRA_EVIDENCE_JSONL","APPEND_JSONL")
 def readj(p): return json.loads(pathlib.Path(p).read_text(encoding="utf-8"))
 
 DECLARED_CROSS_STEP_CONTEXT_MODE="DECLARED_CONTENT_BOUND_V1"
@@ -6406,9 +6456,7 @@ def main():
         verdict["mission_id"]=mid
         verdict["mission_sha256"]=mission_sha256
         obs_path=EVID_DIR/f"{mid}__CONTINUOUS_OBS.jsonl"
-        obs_path.parent.mkdir(parents=True,exist_ok=True)
-        with obs_path.open("a",encoding="utf-8",newline="\n") as fh:
-            fh.write(json.dumps(verdict,sort_keys=True,separators=(",",":"))+"\n")
+        _append_admin_jsonl(obs_path,verdict)
         if not verdict.get("pass"):
             raise Blocker(
                 "CONTINUOUS_OBS_BLOCKED:"+"|".join(verdict.get("errors") or ["UNKNOWN"])
