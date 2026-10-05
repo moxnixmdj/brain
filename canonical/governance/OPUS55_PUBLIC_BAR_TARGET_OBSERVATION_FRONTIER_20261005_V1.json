@@ -1,0 +1,226 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_PUBLIC_BAR_TARGET_OBSERVATION_FRONTIER_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TARGET_OBSERVATION_IDENTITY_AND_MUTABLE_SOURCE_CONFLICTS_EXPOSED__ZERO_CREDIT",
+  "objective": "Prevent terminal acceptance from proving against a stale, weaker, ambiguous, or metric-incomparable Opus 5.5 public bar.",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "observation_identity_tuple": [
+    "benchmark_name",
+    "benchmark_version",
+    "task_set_or_snapshot",
+    "metric_semantics",
+    "harness",
+    "agent_scaffold",
+    "reasoning_effort",
+    "fallback_policy",
+    "scorer_or_grader",
+    "publisher_or_benchmark_owner",
+    "observation_date"
+  ],
+  "laws": [
+    "BENCHMARK_NAME_ALONE_IS_NOT_A_TARGET_IDENTITY",
+    "DO_NOT_MAX_OR_AVERAGE_INCOMPARABLE_HARNESSES_METRICS_OR_FALLBACK_POLICIES",
+    "FOR_COMPARABLE_OBSERVATIONS_USE_THE_STRONGEST_ADMISSIBLE_OPUS55_OBSERVATION_WITHIN_THE_CLAIMED_TARGET_CONDITIONS",
+    "FOR_NONCOMPARABLE_BUT_MATERIAL_TARGET_CONDITIONS_KEEP_SEPARATE_LOAD_BEARING_PREDICATES",
+    "MUTABLE_LEADERBOARDS_MUST_BE_FROZEN_BY_DATE_AND_EXACT_CONFIGURATION_BEFORE_TERMINAL_PROMOTION",
+    "A_WEAKER_OR_STALE_BAR_CANNOT_DISCHARGE_A_STRONGER_CURRENT_TARGET_OBLIGATION"
+  ],
+  "observations": [
+    {
+      "benchmark": "Terminal-Bench 4.0",
+      "canonical_bar": "66.4%",
+      "current_classification": "NO_NUMERIC_REPAIR_PROVED",
+      "evidence": [
+        {
+          "source": "https://www.anthropic.com/claude-opus-5-5",
+          "observed": "66.4%",
+          "configuration": "Anthropic vendor-reported Opus 5.5; launch table; high/max-class published setup",
+          "role": "CURRENT_CANONICAL_VENDOR_BAR"
+        },
+        {
+          "source": "https://artificialanalysis.ai/articles/claude-opus-5-5/",
+          "observed": "59.6%",
+          "configuration": "Artificial Analysis independent run; different harness/configuration",
+          "role": "SEPARATE_NONCOMPARABLE_OBSERVATION"
+        }
+      ],
+      "action": "PRESERVE_66_4_AS_VENDOR_BAR__DO_NOT_COLLAPSE_WITH_59_6"
+    },
+    {
+      "benchmark": "FrontierCode v1.1 Main",
+      "canonical_bar": "54.4%",
+      "current_classification": "NO_CONFLICT_FOUND_IN_THIS_REFRESH",
+      "evidence": [
+        {
+          "source": "https://www.anthropic.com/claude-opus-5-5",
+          "observed": "54.4%",
+          "role": "VENDOR_BAR"
+        },
+        {
+          "source": "https://cognition.com/blog/frontier-code-1-1",
+          "role": "BENCHMARK_SCOPE_AUTHORITY"
+        }
+      ],
+      "action": "PRESERVE_BAR__FREEZE_EXACT_PROTOCOL_METADATA"
+    },
+    {
+      "benchmark": "CursorBench 4.0",
+      "canonical_bar": "57.8%",
+      "current_classification": "NO_CONFLICT_FOUND_IN_THIS_REFRESH",
+      "evidence": [
+        {
+          "source": "https://prod.cursor.com/evals",
+          "observed": "57.8%",
+          "configuration": "Opus 5.5 Max",
+          "role": "BENCHMARK_OWNER_CURRENT_LEADERBOARD"
+        }
+      ],
+      "action": "PRESERVE_BAR__FREEZE_EXACT_PROTOCOL_METADATA"
+    },
+    {
+      "benchmark": "GDPval-AA v2.1",
+      "canonical_bar": "1846 Elo",
+      "current_classification": "MUTABLE_SOURCE_CONFLICT__DO_NOT_SILENTLY_OVERWRITE",
+      "evidence": [
+        {
+          "source": "https://www.anthropic.com/claude-opus-5-5",
+          "observed": "1846 Elo",
+          "role": "VENDOR_LAUNCH_BAR"
+        },
+        {
+          "source": "https://artificialanalysis.ai/articles/claude-opus-5-5/",
+          "observed": "1846 Elo",
+          "role": "BENCHMARK_OWNER_RELEASE_ARTICLE"
+        },
+        {
+          "source": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+          "observed_during_2026_10_05_refresh": "1867 Elo shown for Claude Opus 5.5 Max Default Fallback in current leaderboard surface",
+          "role": "BENCHMARK_OWNER_MUTABLE_LEADERBOARD"
+        },
+        {
+          "source": "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-low-vs-claude-opus-5-5",
+          "observed_during_2026_10_05_refresh": "1867 for Max Default Fallback",
+          "role": "BENCHMARK_OWNER_MODEL_COMPARISON_SURFACE"
+        }
+      ],
+      "action": "FREEZE_SOURCE_SNAPSHOT_AND_CONFIGURATION__IF_1867_IS_CONFIRMED_AS_SAME_METRIC_AND_ADMISSIBLE_CURRENT_TARGET_THEN_RAISE_BAR"
+    },
+    {
+      "benchmark": "AA-Briefcase v1.1",
+      "canonical_bar": "1822 Elo",
+      "current_classification": "MUTABLE_SOURCE_CONFLICT__DO_NOT_SILENTLY_OVERWRITE",
+      "evidence": [
+        {
+          "source": "https://www.anthropic.com/claude-opus-5-5",
+          "observed": "1822 Elo",
+          "role": "VENDOR_LAUNCH_BAR"
+        },
+        {
+          "source": "https://artificialanalysis.ai/articles/claude-opus-5-5/",
+          "observed": "1822 Elo",
+          "role": "BENCHMARK_OWNER_RELEASE_ARTICLE"
+        },
+        {
+          "source": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+          "observed_during_2026_10_05_refresh": "current page surface returned 1808 Elo for Claude Opus 5.5 Max Default Fallback",
+          "role": "BENCHMARK_OWNER_MUTABLE_LEADERBOARD"
+        },
+        {
+          "source": "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-sonnet-5-5",
+          "observed_during_2026_10_05_refresh": "1822 Elo",
+          "role": "BENCHMARK_OWNER_MODEL_COMPARISON_SURFACE"
+        }
+      ],
+      "action": "KEEP_1822_LOAD_BEARING_UNTIL_EXACT_MUTABLE_SNAPSHOT_IS_RECONCILED__NEVER_LOWER_TARGET_FROM_TRANSIENT_PAGE_CONFLICT"
+    },
+    {
+      "benchmark": "AutomationBench",
+      "canonical_bar": "40.0%",
+      "current_classification": "METRIC_IDENTITY_AMBIGUITY__CRITICAL",
+      "evidence": [
+        {
+          "source": "https://www.anthropic.com/claude-opus-5-5",
+          "observed": "40.0%",
+          "role": "VENDOR_REPORTED_AUTOMATIONBENCH_BAR"
+        },
+        {
+          "source": "https://artificialanalysis.ai/evaluations/automationbench-aa",
+          "observed_during_2026_10_05_refresh": "about 69.5-70% for Opus 5.5 Max Default Fallback",
+          "metric": "share of task objectives completed where a guardrail violation zeros the task",
+          "role": "DIFFERENT_AUTOMATIONBENCH_AA_METRIC"
+        },
+        {
+          "source": "https://github.com/zapier/AutomationBench",
+          "metric": "public benchmark full task pass rate / end-state correctness",
+          "role": "BENCHMARK_IMPLEMENTATION_AND_SCOPE_AUTHORITY"
+        }
+      ],
+      "action": "SPLIT_METRIC_IDENTITIES__DO_NOT_COMPARE_40_0_TO_AUTOMATIONBENCH_AA_SCORE_AS_IF_SAME_MEASURE"
+    },
+    {
+      "benchmark": "Humanity's Last Exam with tools",
+      "canonical_bar": "67.7%",
+      "current_classification": "NO_CONFLICT_FOUND_IN_THIS_REFRESH",
+      "evidence": [
+        {
+          "source": "https://www.anthropic.com/claude-opus-5-5",
+          "observed": "67.7%",
+          "role": "VENDOR_BAR"
+        },
+        {
+          "source": "https://www.lastexam.ai/",
+          "role": "BENCHMARK_SCOPE_AUTHORITY"
+        }
+      ],
+      "action": "PRESERVE_BAR__SCOPE_PARTITION_STILL_REQUIRED"
+    },
+    {
+      "benchmark": "Terminal-Bench-Science 0.1",
+      "canonical_bar": "58.7%",
+      "current_classification": "STRONGER_CURRENT_OBSERVATION_FOUND__CONFIGURATION_RECONCILIATION_REQUIRED",
+      "evidence": [
+        {
+          "source": "https://www.anthropic.com/claude-opus-5-5",
+          "observed": "58.7%",
+          "role": "VENDOR_LAUNCH_BAR"
+        },
+        {
+          "source": "https://www.terminal-bench-science.ai/",
+          "observed_during_2026_10_05_refresh": "63.3% +/- 3.3%",
+          "configuration": "Opus 5.5 max with Claude Code on benchmark-owner leaderboard",
+          "role": "BENCHMARK_OWNER_CURRENT_LEADERBOARD"
+        }
+      ],
+      "action": "ADD_SEPARATE_63_3_TARGET_OBLIGATION_IF_CLAUDE_CODE_MAX_CONFIGURATION_IS_INSIDE_TERMINAL_TARGET_SCOPE__DO_NOT_TREAT_58_7_AS_GLOBALLY_SUFFICIENT"
+    }
+  ],
+  "scheduler_effect": {
+    "activate": [
+      "FREEZE_PUBLIC_BAR_OBSERVATION_TUPLES",
+      "RECONCILE_GDPVAL_MUTABLE_SCORE_SURFACES",
+      "RECONCILE_AA_BRIEFCASE_MUTABLE_SCORE_SURFACES",
+      "SPLIT_AUTOMATIONBENCH_METRIC_IDENTITIES",
+      "DECIDE_TB_SCIENCE_63_3_CLAUDE_CODE_TARGET_SCOPE"
+    ],
+    "block": [
+      "TERMINAL_PROMOTION_FROM_BENCHMARK_NAME_PLUS_SCALAR_ONLY",
+      "SILENT_TARGET_LOWERING",
+      "SILENT_TARGET_RAISE_WITHOUT_COMPARABILITY_CHECK",
+      "AVERAGING_OR_MAXING_INCOMPARABLE_OBSERVATIONS"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
