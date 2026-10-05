@@ -118,16 +118,16 @@
         "activation_git_blob_sha": "4cbc1b9f478654b2dc671a8b54f91b5c4b91c019",
         "verification_path": "canonical/verification/ROOT2_CLOSURE_CONTROLLER_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
         "verification_git_blob_sha": "430b5918cb455304bf9227f4ada8dd686f615f78",
-        "current_frontier_path": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
-        "current_frontier_git_blob_sha": "75ca9127a73ca2dd52a49f2f09e2e0ccc384129a",
-        "status": "STALE_19_PREDICATE_SCHEDULER_AFTER_CLEAN_LIVEBENCH_PROMOTION__EXACT_18_REBIND_REQUIRED__ZERO_CREDIT",
+        "current_frontier_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+        "current_frontier_git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f",
+        "status": "ACTIVE__EXACT_18_V4_PLUS_WAKE_AWARE_EXECUTABLE_V3__ZERO_CREDIT",
         "current_partition": "15_ROOT2_ONLY__3_ROOT2_AND_ROOT3__18_TOUCHING_ROOT2__LIVEBENCH_PROVED",
         "fresh_reality_authority": false,
-        "current_frontier_verification_path": "canonical/verification/ROOT2_FRONTIER_V12_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
-        "current_frontier_verification_git_blob_sha": "c13903bb6b0f2b03f934664e2af77fdc4cc0696b",
-        "effective_scheduling_authority": false,
-        "current_frontier_activation_path": "canonical/governance/ROOT2_FRONTIER_V12_FINAL_ACTIVATION_V1.json",
-        "current_frontier_activation_git_blob_sha": "f3b97a8a2a54d4d0571911691677ae9046413103",
+        "current_frontier_verification_path": "canonical/verification/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_CONNECTOR_VERIFICATION_20261005_V1.json",
+        "current_frontier_verification_git_blob_sha": "d197df20e5192f6613169d4620d7649fdf0e4884",
+        "effective_scheduling_authority": true,
+        "current_frontier_activation_path": "canonical/governance/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_ACTIVATION_V1.json",
+        "current_frontier_activation_git_blob_sha": "d739ade25b0c00cee069add72dab9677fa31e027",
         "external_fact_acquisition_overlay": {
           "activation_path": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V2_ACTIVATION_V1.json",
           "activation_git_blob_sha": "400cf1fa6516d384b8781201841c3359851b070b",
@@ -185,7 +185,7 @@
           "reduction_path": "canonical/governance/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_ACCEPTANCE_REDUCTION_20261005_V1.json",
           "reduction_git_blob_sha": "5e9d6d560f7ff6a3a8a6e8cff7d52e31cd71d957"
         },
-        "current_effective_state": "FAIL_CLOSED_PENDING_EXACT_CURRENT_18_PREDICATE_REBIND",
+        "current_effective_state": "ACTIVE__EXACT_CURRENT_18_WAKE_AWARE",
         "post_revocation_19_dag_reactivation": {
           "activation_path": "canonical/governance/ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1.json",
           "activation_git_blob_sha": "3acbf619667fb8db5884069b4721b460f2da322c",
@@ -194,6 +194,15 @@
           "status": "SUPERSEDED__LIVEBENCH_CLEANLY_PROVED__19_DOMAIN_NO_LONGER_CURRENT",
           "exact_touching_predicates": 19,
           "current_evidence_delta_recompile_required": true,
+          "fresh_reality_authority": false
+        },
+        "wake_aware_executable_cut": {
+          "path": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3.json",
+          "git_blob_sha": "d09abed23287560508353ce0e0476b98a9749cef",
+          "status": "ACTIVE__SIX_INFORMATION_POSITIVE_GROUPS__THREE_SLEEP_UNTIL_WAKE_BRANCHES__ZERO_CREDIT",
+          "scheduling_authority": true,
+          "execution_authority": false,
+          "promotion_authority": false,
           "fresh_reality_authority": false
         }
       },
@@ -241,8 +250,8 @@
     "no_credit_from_classification_itself": true,
     "root1_currently_active": false,
     "root2_active_controller": "ROOT2_CLOSURE_CONTROLLER_V2",
-    "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
-    "root2_effective_scheduling_authority": false,
+    "root2_current_frontier": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "root2_effective_scheduling_authority": true,
     "root2_external_fact_acquisition_overlay": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V2_ACTIVATION_V1.json",
     "low_value_free_tier_trial_quota_support_outreach_forbidden": true,
     "self_service_facts_are_owner_waits": false,
@@ -262,7 +271,8 @@
       "status": "ACTIVE__INDEPENDENT_PACKAGE_PASS__ROOT2_V12__SCHEDULING_ONLY__ZERO_CREDIT",
       "execution_authority": false,
       "promotion_authority": false,
-      "fresh_reality_authority": false
+      "fresh_reality_authority": false,
+      "currentness_note": "POLICY_MECHANISM_REUSABLE__ROOT2_V12_MEMBERSHIP_IS_HISTORICAL__CURRENT_TARGET_MEMBERSHIP_AND_WAKE_STATE_COME_FROM_V4_PLUS_EXECUTABLE_CUT_V3"
     },
     "root2_osworld_v21_official_component_pin_reduction": "canonical/governance/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_ACTIVATION_V1.json",
     "repeat_search_for_verified_osworld_v21_official_component_identity_forbidden": true,
@@ -411,7 +421,7 @@
       "acceptance_credit_delta": 0,
       "scheduling_authority": false,
       "currentness_invalidation": "CURRENT_ROOT2_TOUCHING_COUNT_IS_18_AFTER_CLEAN_LIVEBENCH_ACCEPTANCE_PROMOTION",
-      "current_effective_state": "PENDING_EXACT_18_PREDICATE_REBIND"
+      "current_effective_state": "HISTORICAL_19_PREDICATE_SUBJECT__SUPERSEDED_BY_CURRENT_V4_EXACT_18_COMPILATION"
     },
     "terminal_minimum_causal_depth": {
       "activation_path": "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_ACTIVATION_V1.json",
@@ -511,9 +521,32 @@
       "prior_activation_mismatch": "PRIOR_ACTIVATION_BOUND_1_ROOT1_15_ROOT2_7_ROOT3_3_MIXED__CURRENT_IS_0_15_7_3_AFTER_LIVEBENCH_ACCEPTANCE",
       "status": "CURRENT_18_IDENTITY_KNOWN__FRESH_PARTITION_BINDING_REQUIRED"
     },
-    "root2_effective_scheduling_authority_source": "PENDING_EXACT_CURRENT_18_PREDICATE_REBIND_AFTER_CLEAN_LIVEBENCH_PROMOTION",
-    "root2_effective_scheduling_scope": "EXACT_18_TOUCHING_SET__PRIOR_19_MINUS_LIVEBENCH_IF_GE_65_7",
-    "root2_current_scheduling_compiler": "PENDING_EXACT_18_REBIND"
+    "root2_effective_scheduling_authority_source": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3.json",
+    "root2_effective_scheduling_scope": "EXACT_CURRENT_18_ROOT2_TOUCHING_PREDICATES__14_PROVED_24_UNRESOLVED_EPOCH",
+    "root2_current_scheduling_compiler": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "root2_current_frontier_git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f",
+    "root2_current_scheduling_compiler_git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f",
+    "root2_current_scheduling_activation": {
+      "path": "canonical/governance/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_ACTIVATION_V1.json",
+      "git_blob_sha": "d739ade25b0c00cee069add72dab9677fa31e027",
+      "status": "ACTIVE__EXACT_18_ROOT2_SCHEDULING__CURSOR_OWNER_ROUTE_DELETED__SCHEDULING_ONLY__ZERO_CREDIT",
+      "scheduling_authority": true,
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false
+    },
+    "root2_current_wake_aware_executable_cut": {
+      "path": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3.json",
+      "git_blob_sha": "d09abed23287560508353ce0e0476b98a9749cef",
+      "status": "ACTIVE__CONNECTOR_RECOMPUTED_WAKE_AWARE_ROOT2_CUT__SIX_INFORMATION_POSITIVE_GROUPS__SLEEP_SATURATED_BRANCHES__ZERO_CREDIT",
+      "active_information_positive_group_count": 6,
+      "sleep_until_wake_branch_count": 3,
+      "deferred_fresh_reality_predicate": "TB_SCIENCE_GE_58_7",
+      "scheduling_authority": true,
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false
+    }
   },
   "accounting": {
     "acceptance_credit_delta": 0,
@@ -688,5 +721,30 @@
       "proved_atomic": 14,
       "unresolved_atomic": 24
     }
+  },
+  "root2_authority_reconciliation": {
+    "date": "2026-10-05",
+    "status": "CANDIDATE_BRANCH_RECONCILIATION__LIVE_ROOT2_POINTERS_MATCH_ALREADY_ACTIVE_V4_AND_WAKE_AWARE_V3__ZERO_CREDIT",
+    "reason": "CURRENT_ROOT_STATE_IS_14_24_AND_EXACT_18_BUT_TOP_LEVEL_ROOT2_POINTERS_STILL_REFERRED_TO_STALE_V12_PENDING_REBIND_TEXT_AFTER_V4_AND_WAKE_AWARE_V3_BECAME_ACTIVE",
+    "compilation_path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "compilation_git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f",
+    "activation_path": "canonical/governance/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "d739ade25b0c00cee069add72dab9677fa31e027",
+    "verification_path": "canonical/verification/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "verification_git_blob_sha": "d197df20e5192f6613169d4620d7649fdf0e4884",
+    "wake_aware_cut_path": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3.json",
+    "wake_aware_cut_git_blob_sha": "d09abed23287560508353ce0e0476b98a9749cef",
+    "accounting": {
+      "incremental_spend_usd": 0,
+      "new_reality_units_consumed": 0,
+      "terminal_cases_consumed": 0,
+      "acceptance_credit_delta": 0,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0
+    },
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
   }
 }
