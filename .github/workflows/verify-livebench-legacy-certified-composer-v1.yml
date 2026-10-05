@@ -1,0 +1,43 @@
+name: Verify legacy IFEval certified composer v1
+on:
+  push:
+    branches:
+      - breakthrough/livebench-legacy-certified-composer-v1-20261004-sol
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run verifier and capture trace
+        id: verify
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euxo pipefail
+            python -m pip install --disable-pip-version-check pytest nltk langdetect immutabledict
+            python - <<'PY'
+          import nltk
+          print("punkt", nltk.download("punkt", quiet=True))
+          print("punkt_tab", nltk.download("punkt_tab", quiet=True))
+          PY
+            python -m pytest -q canonical/tests/test_livebench_legacy_ifeval_certified_composer_v1.py
+          ) > /tmp/certified-composer-verify.log 2>&1
+          status=$?
+          cat /tmp/certified-composer-verify.log
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit "$status"
+      - name: Upload verifier trace
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: certified-composer-verifier-trace
+          path: /tmp/certified-composer-verify.log
+          if-no-files-found: error
