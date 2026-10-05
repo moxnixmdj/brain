@@ -345,6 +345,24 @@
       "positive_median_end_to_end_seconds": 0.14910022099957132,
       "persistent_learned_bytes": 0,
       "deduction": "A_THREE_STAGE_COMPOSITION_OF_VERIFIED_LANGUAGE_TOOL_TRACE_AND_PARAMETRIC_REASONING_CAPABILITIES_SOLVED_ALL_FROZEN_POSITIVE_TASKS_WITH_ZERO_RAW_SYNTHESIS_AND_ZERO_LEARNED_BYTES__THE_REMAINING_GAP_IS_AUTONOMOUS_PLAN_SELECTION_BECAUSE_THE_STAGE_SEQUENCE_WAS_PREDECLARED"
+    },
+    "typed_capability_planner": {
+      "status": "SECOND_ISOLATED_CARRIER_PASS__AUTONOMOUS_TYPED_SHORTEST_PLAN_DERIVED__ZERO_CREDIT",
+      "precommit": "canonical/governance/H100_TYPED_CAPABILITY_PLANNER_PRECOMMIT_V1.json",
+      "verification": "canonical/verification/H100_TYPED_CAPABILITY_PLANNER_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "derived_plan": [
+        "OP_COMPOSITIONAL_LANGUAGE",
+        "OP_TOOL_TRACE_NORMALIZER",
+        "OP_PARAMETRIC_REGISTRY_RESOLVER"
+      ],
+      "plan_length": 3,
+      "expanded_states": 4,
+      "planning_median_seconds": 0.00006826299977547023,
+      "positive_tasks_passed": "3_OF_3",
+      "negative_control_fail_closed": true,
+      "raw_synthesis_attempts_executed": 0,
+      "persistent_learned_bytes": 0,
+      "deduction": "A_DETERMINISTIC_TYPED_CONTRACT_PLANNER_CAN_SELECT_THE_SHORTEST_VERIFIED_CAPABILITY_CHAIN_WITHOUT_TASK_VALUES_OR_IDS__THE_CURRENT_RESIDUAL_MOVES_TO_MINIMAL_PATCH_SEARCH_AFTER_A_VERIFIED_REGISTRY_MISS"
     }
   },
   "next_structural_residuals_ranked": [
@@ -355,8 +373,8 @@
     },
     {
       "rank": 2,
-      "residual": "AUTONOMOUS_TYPED_CAPABILITY_PLAN_SELECTION_AND_PATCH_SEARCH",
-      "reason": "PREDECLARED_MULTI_CAPABILITY_COMPOSITION_NOW_PASSES_ON_SECOND_CARRIER__THE_NEXT_INTERNAL H100 GAP IS SELECTING_A_SHORT_VERIFIED_CAPABILITY_SEQUENCE_FROM_INPUT_OUTPUT_CONTRACTS_WITHOUT_TASK_ID_OR_PREDECLARED_STAGE_ORDER__THEN_FALLING_TO_PATCH_OR_RAW_SEARCH_ONLY_ON_VERIFIED_MISS"
+      "residual": "MINIMAL_PATCH_SEARCH_AFTER_VERIFIED_LIBRARY_MISS_AND_TRANSFER_COMPILE_RATCHET",
+      "reason": "AUTONOMOUS_TYPED_PLAN_SELECTION_IS_NOW_SECOND_CARRIER_VERIFIED__THE_OUT_OF_LIBRARY_CUBIC_CONTROL_CLEANLY_REACHES_THE_RAW_SEARCH_BOUNDARY__THE_NEXT_INTERNAL H100 MOVE_IS_TO_SEARCH_A_SMALL_PATCH_GRAMMAR_COMPILE_THE_MINIMAL_VERIFIED_REPAIR_INTO_THE_LIBRARY_AND_RETEST_A_DISTINCT_FROZEN_TASK"
     },
     {
       "rank": 3,
@@ -452,7 +470,8 @@
     "non_synthetic_description_length_scope": "FOUR_PRIOR_VERIFIED_CAPABILITIES__FROZEN_PYTHON_3_11_CANONICAL_AST_CODE__IMPLEMENTATION_LEVEL_NOT_KOLMOGOROV",
     "predeclared_multi_capability_composition_verified": true,
     "predeclared_multi_capability_composition_scope": "THREE_POSITIVE_SYNTHETIC_TASKS_PLUS_ONE_FAIL_CLOSED_CONTROL",
-    "autonomous_multi_capability_plan_selection_verified": false
+    "autonomous_multi_capability_plan_selection_verified": true,
+    "autonomous_multi_capability_plan_scope": "MONOTONIC_TYPED_RESOURCE_GRAPH__NO_SIDE_EFFECTS__RETROSPECTIVE_FROZEN_COMPOSITION_TASKS"
   },
   "accounting": {
     "incremental_spend_usd": 0,
