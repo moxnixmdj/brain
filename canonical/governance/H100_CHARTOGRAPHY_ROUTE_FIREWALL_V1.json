@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CHARTOGRAPHY_ROUTE_FIREWALL_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__MISSION_LOCK_FIREWALL__QWEN_TERMINAL_FALLBACK_H100_INADMISSIBLE_AS_IS__ZERO_CREDIT",
+  "objective": "Prevent a large open-weight vision fallback from being mistaken for evidence that the sub-100MB learned-state hypothesis is solved.",
+  "target_hypothesis": "FULL_FROZEN_BRAIN_CAPABILITY_ENVELOPE_WITH_LE_100000000_PERSISTENT_LEARNED_BYTES_AND_ZERO_EXTERNAL_LEARNED_CAPABILITY_PROVIDER_DURING_SCORED_EXECUTION",
+  "subject": {
+    "path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_VISION_ACQUISITION_ROUTE_V1.json",
+    "model": "Qwen/Qwen3-VL-4B-Instruct",
+    "parameter_count": 4437815808
+  },
+  "exact_budget_math": {
+    "h100_budget_bytes": 100000000,
+    "information_capacity_bits_at_budget": 800000000,
+    "idealized_weight_bytes": {
+      "one_bit": 554726976,
+      "one_point_five_eight_bit": 876468023,
+      "four_bit": 2218907904,
+      "eight_bit": 4437815808,
+      "sixteen_bit": 8875631616
+    },
+    "one_bit_over_budget_factor": 5.54726976,
+    "maximum_parameters_at_one_bit_under_budget": 800000000,
+    "conclusion": "UNTRANSFORMED_4_437815808B_PARAMETER_SUBJECT_CANNOT_FIT_H100_EVEN_AT_IDEAL_ONE_BIT_PER_PARAMETER"
+  },
+  "separation_of_claims": {
+    "terminal_capability_route": "MAY_REMAIN_A_ZERO_LICENSE_COST_CHARTOGRAPHY_ACQUISITION_FALLBACK_SUBJECT_TO_RESOURCE_AND_PERFORMANCE_VERIFICATION",
+    "h100_route": "INADMISSIBLE_AS_IS_AND_INADMISSIBLE_BY_QUANTIZATION_ALONE",
+    "reopening_condition": "A_SEPARATELY_FROZEN_TRANSFORMED_SUBJECT_WITH_TOTAL_PERSISTENT_LEARNED_STATE_LE_100000000_BYTES_AND_INDEPENDENT_CAPABILITY_VERIFICATION"
+  },
+  "hard_rules": [
+    "DO_NOT_COUNT_EXTERNAL_OR_LARGE_LOCAL_QWEN_CAPABILITY_AS_H100_PROGRESS",
+    "DO_NOT_TREAT_QUANTIZATION_AS_PARAMETER_ELIMINATION",
+    "COUNT_ALL_PERSISTENT_LEARNED_STATE_IN_TRANSFORMED_SUBJECT",
+    "NO_H100_LEARNED_BYTE_RUNG_ADVANCE_FROM_EXISTENCE_OF_THIS_ROUTE",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
