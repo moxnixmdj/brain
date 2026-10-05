@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_QUARANTINE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__WHOLE_LEAF_REUSE_INFERENCE_FAILS__PREDICATE_SCOPE_CERTIFICATE_PRESERVED__TYPED_INPUT_DOMAIN_RESIDUAL_RESTORED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Fail closed on the overextension of SYNTHESIS_SCOPE_CERTIFICATE_V1 from a proved acceptance-predicate dimension relation to whole EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 input-domain completeness, while preserving every valid narrower proof.",
+  "authorities": {
+    "overextended_activation": {
+      "path": "canonical/governance/EVIDENCE_SYNTHESIS_EXISTING_SCOPE_CERTIFICATE_REUSE_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "71c7dfbd8154319fe3f3d71ab1d99f2d6530b2f4"
+    },
+    "scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "lossless_decomposition_candidate": {
+      "path": "canonical/governance/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_V1.json",
+      "git_blob_sha": "72f31ed22331be258e8762bedf0f0df3596af8d7"
+    },
+    "lossless_decomposition_verifier": {
+      "path": "canonical/runtime/synthesis_lossless_scope_decomposition_verifier_v1.py",
+      "git_blob_sha": "5ba044bc63cc6d47a4034b166e8f8e099f601c66"
+    },
+    "independent_decomposition_receipt": {
+      "path": "canonical/verification/SYNTHESIS_LOSSLESS_SCOPE_DECOMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "1852516f725f5b72badfc2f65be22e542ed83623"
+    },
+    "p3_semantic_reduction": {
+      "path": "canonical/governance/SYNTHESIS_P3_CONTRACT_SEMANTIC_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "f6b83872bf1288693e4e5250a561599f1cc6fa75"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    }
+  },
+  "preserved_valid_proof": {
+    "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "certificate_target_scope_id": "scope://opus55/SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "certificate_witness_scope_id": "scope://brain/EVIDENCE_TO_AUDIENCE_SYNTHESIS_001/T1_T3_TERMINAL",
+    "proved_relation": "THE_SIX_DECLARED_TARGET_PREDICATE_DIMENSIONS_ARE_LOSSLESSLY_BOUND_TO_CONTRACT_FRAGMENTS_AND_PROVED_OPERATIONAL_ATOMS",
+    "root3_predicate_scope_relation_closed": true,
+    "predicate_remains_root2_only": true,
+    "remaining_root2_residuals": [
+      "metric:matched_quality",
+      "matched_quality_noninferiority",
+      "required_claim_coverage_noninferiority"
+    ]
+  },
+  "invalid_inference": {
+    "claim": "SYNTHESIS_SCOPE_CERTIFICATE_V1_IS_A_SCOPE_COMPLETE_CERTIFICATE_FOR_EVERY_ADMISSIBLE_INPUT_IN_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "verdict": "NOT_PROVED",
+    "reason": [
+      "THE_CERTIFICATE_TARGET_SCOPE_IS_THE_ACCEPTANCE_PREDICATE_SCOPE_NOT_THE_WHOLE_BEHAVIORAL_INPUT_DOMAIN",
+      "THE_LOSSLESS_DECOMPOSITION_VERIFIER_CHECKS_THE_EXACT_SIX_DECLARED_DIMENSION_NAMES_AND_TEXTUAL_CONTRACT_WITNESSES",
+      "THE_VERIFIER_DOES_NOT_ENUMERATE_OR_UNIVERSALLY_QUANTIFY_ALL_ADMISSIBLE_NORMALIZED_EVIDENCE_AUDIENCE_CONSTRAINT_INPUTS",
+      "THE_DECOMPOSITION_CANDIDATE_HARD_RULE_STATES_IT_PROVES_ONLY_TARGET_SCOPE_SUBSET_OF_THE_EXISTING_VERIFIED_SYNTHESIS_WITNESS_SCOPE",
+      "TARGET_SCOPE_SUBSET_OF_WITNESS_SCOPE_DOES_NOT_LOGICALLY_IMPLY_WITNESS_SCOPE_INPUT_DOMAIN_COMPLETENESS"
+    ]
+  },
+  "formal_countermodel": {
+    "premises_preserved": [
+      "ALL_SIX_ACCEPTANCE_TARGET_DIMENSIONS_MAP_TO_THE_SYNTHESIS_CONTRACT",
+      "THE_WITNESS_ROUTE_HAS_PROVED_OPERATIONAL_ATOMS_ON_ITS_BOUND_SURFACES",
+      "THE_ACCEPTANCE_TARGET_SCOPE_IS_SUBSUMED_BY_THE_WITNESS_SCOPE"
+    ],
+    "additional_world_consistent_with_all_preserved_premises": "THERE_EXISTS_AN_ADMISSIBLE_SYNTHESIS_INPUT_CLASS_OUTSIDE_THE_BOUND_T1_T3_NORMALIZED_INPUT_DOMAIN_FOR_WHICH_NO_TOTALITY_OR_SCOPE_RELATION_HAS_BEEN_PROVED",
+    "consequence": "ALL_PRESERVED_CERTIFICATE_PREMISES_CAN_BE_TRUE_WHILE_WHOLE_BEHAVIOR_INPUT_DOMAIN_COMPLETENESS_IS_FALSE__THEREFORE_THE_WHOLE_LEAF_REUSE_INFERENCE_IS_INVALID"
+  },
+  "correct_remaining_scope_root": {
+    "id": "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS",
+    "statement": "Prove totality and scope completeness of the frozen synthesis route over every admissible normalized evidence/audience/constraint input in EVIDENCE_TO_AUDIENCE_SYNTHESIS_001, or losslessly partition and close the uncovered residual input classes.",
+    "fanout": [
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH"
+    ],
+    "fanout_count": 3
+  },
+  "scheduler_if_independently_verified": {
+    "quarantine": [
+      "EVIDENCE_SYNTHESIS_EXISTING_SCOPE_CERTIFICATE_REUSE_ACTIVATION_20261005_V1::WHOLE_LEAF_SCOPE_CONSTRUCTION_CLOSED",
+      "DELETE_NEW_SYNTHESIS_SCOPE_CONSTRUCTION_FOR_THREE_FAMILIES"
+    ],
+    "preserve": [
+      "SYNTHESIS_SCOPE_CERTIFICATE_V1::PREDICATE_ROOT3_SCOPE_RELATION_CLOSED",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR::ROOT2_ONLY",
+      "ALL_PRIOR_ZERO_CREDIT_RECEIPTS"
+    ],
+    "activate": [
+      "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS"
+    ],
+    "priority": "CLOSE_ONE_SHARED_TYPED_INPUT_DOMAIN_SCOPE_ROOT_WITH_FANOUT_THREE__DO_NOT_DUPLICATE_PER_FAMILY"
+  },
+  "hard_nonclaims": [
+    "NO_REVOCATION_OF_THE_VALID_PREDICATE_LEVEL_ROOT3_CERTIFICATE",
+    "NO_CLAIM_THE_SYNTHESIS_MECHANISM_FAILS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_SCHEDULER_MUTATION_UNTIL_INDEPENDENT_VERIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
