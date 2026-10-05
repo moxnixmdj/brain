@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_LEGACY_TARGET_TUPLE_REBIND_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__V22_LEGACY_TARGET_IDENTITY_SEARCH_DISCHARGED__TEN_PREDICATES_BOUND__NINE_TUPLES__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_LEGACY_TARGET_TUPLE_REBIND_20261005_V1.json",
+    "git_blob_sha": "7368d3a5c266b6077288915a35ac414ac8f0d02a"
+  },
+  "verification": {
+    "path": "canonical/verification/OPUS55_LEGACY_TARGET_TUPLE_REBIND_SPRITE_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "0c1f0d217277e48b2ac47e3c5966645d18f5f083"
+  },
+  "effects": [
+    "SET_V22_LEGACY_UNBOUND_TARGET_IDENTITY_COUNT_TO_ZERO",
+    "DELETE_GENERIC_TARGET_IDENTITY_SEARCH_FOR_THE_TEN_BOUND_PREDICATES",
+    "PRESERVE_SCORE_ACCESS_HARNESS_EQUIVALENCE_RELATIVE_POOL_SCOPE_AND_ACCEPTANCE_WORK",
+    "PRESERVE_TB_SCIENCE_PUBLIC_CURRENT_63_333333_ROUTE_AND_CONSUMED_SLOT_HISTORY",
+    "RECOMPUTE_ALL_32_OPEN_TRUTH_OBLIGATIONS_WITHOUT_ACCEPTANCE_CREDIT"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
