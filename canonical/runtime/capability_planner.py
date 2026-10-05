@@ -172,7 +172,7 @@ def _resolve_effect_bindings(value, consumer, providers):
                     "BINDING_RESULT_FIELD_UNDECLARED",
                     f"{producer.capability_id}:{field}",
                 )
-            return {"$result": {"cycle": cycle, "field": field}}
+            return {"$result": {"cycle": cycle, "effect": effect, "field": field}}
         return {
             key: _resolve_effect_bindings(item, consumer, providers)
             for key, item in value.items()
@@ -193,6 +193,17 @@ def plan_actions(problem):
         action = _resolve_effect_bindings(cap.action, cap, providers)
         action.setdefault("args", {})
         action["capability_id"] = cid
+        internal_requires = sorted(effect for effect in cap.requires if effect in providers)
+        external_requires = sorted(effect for effect in cap.requires if effect not in providers)
+        action["_brain_composition_contract"] = {
+            "schema": "PROJECT_BRAIN_CAPABILITY_ACTION_STATE_CONTRACT_V1",
+            "capability_id": cid,
+            "requires": sorted(cap.requires),
+            "internal_requires": internal_requires,
+            "external_requires": external_requires,
+            "provides": sorted(cap.provides),
+            "result_fields": sorted(cap.result_fields),
+        }
         cycle = len(actions)
         actions.append(action)
         for effect in cap.provides:
