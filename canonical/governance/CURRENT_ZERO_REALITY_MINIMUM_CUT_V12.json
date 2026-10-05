@@ -57,7 +57,7 @@
     },
     "buildkite_trial_owner_confirmation": {
       "path": "canonical/governance/BUILDKITE_TRIAL_OWNER_CONFIRMATION_20261005_V1.json",
-      "git_blob_sha": "4bbaac76d887593a80b7a26b2e9f681256d857a1"
+      "git_blob_sha": "931806f3051f4476babf7e6af97dd04d1d400242"
     }
   },
   "deletions_since_v11": [
