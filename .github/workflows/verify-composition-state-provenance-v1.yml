@@ -1,0 +1,36 @@
+name: Verify composition state provenance v1
+
+on:
+  push:
+    branches:
+      - "chatgpt/composition-state-provenance-v1-20261005"
+    paths:
+      - "canonical/runtime/astra_runtime.py"
+      - "canonical/tests/test_composition_state_provenance_v1.py"
+      - "canonical/governance/COMPOSITION_EXPLICIT_STATE_PROVENANCE_REDUCTION_20261005_V1.json"
+      - ".github/workflows/verify-composition-state-provenance-v1.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/astra_runtime.py"
+      - "canonical/tests/test_composition_state_provenance_v1.py"
+      - "canonical/governance/COMPOSITION_EXPLICIT_STATE_PROVENANCE_REDUCTION_20261005_V1.json"
+      - ".github/workflows/verify-composition-state-provenance-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile touched runtime
+        run: python -m py_compile canonical/runtime/astra_runtime.py canonical/tests/test_composition_state_provenance_v1.py
+      - name: Run adversarial state and provenance tests
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_composition_state_provenance_v1
