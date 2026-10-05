@@ -241,8 +241,8 @@
     "no_credit_from_classification_itself": true,
     "root1_currently_active": false,
     "root2_active_controller": "ROOT2_CLOSURE_CONTROLLER_V2",
-    "root2_current_frontier": "canonical/governance/ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V12.json",
-    "root2_effective_scheduling_authority": false,
+    "root2_current_frontier": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "root2_effective_scheduling_authority": true,
     "root2_external_fact_acquisition_overlay": "canonical/governance/ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V2_ACTIVATION_V1.json",
     "low_value_free_tier_trial_quota_support_outreach_forbidden": true,
     "self_service_facts_are_owner_waits": false,
@@ -262,7 +262,8 @@
       "status": "ACTIVE__INDEPENDENT_PACKAGE_PASS__ROOT2_V12__SCHEDULING_ONLY__ZERO_CREDIT",
       "execution_authority": false,
       "promotion_authority": false,
-      "fresh_reality_authority": false
+      "fresh_reality_authority": false,
+      "currentness_note": "POLICY_MECHANISM_REUSABLE__ROOT2_V12_MEMBERSHIP_IS_HISTORICAL__CURRENT_TARGET_MEMBERSHIP_AND_WAKE_STATE_COME_FROM_V4_PLUS_EXECUTABLE_CUT_V3"
     },
     "root2_osworld_v21_official_component_pin_reduction": "canonical/governance/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_ACTIVATION_V1.json",
     "repeat_search_for_verified_osworld_v21_official_component_identity_forbidden": true,
@@ -411,7 +412,7 @@
       "acceptance_credit_delta": 0,
       "scheduling_authority": false,
       "currentness_invalidation": "CURRENT_ROOT2_TOUCHING_COUNT_IS_18_AFTER_CLEAN_LIVEBENCH_ACCEPTANCE_PROMOTION",
-      "current_effective_state": "PENDING_EXACT_18_PREDICATE_REBIND"
+      "current_effective_state": "HISTORICAL_19_PREDICATE_SUBJECT__SUPERSEDED_BY_CURRENT_V4_EXACT_18_COMPILATION"
     },
     "terminal_minimum_causal_depth": {
       "activation_path": "canonical/governance/TERMINAL_MINIMUM_CAUSAL_DEPTH_ACTIVATION_V1.json",
@@ -509,11 +510,55 @@
       "exact_18_predicate_identity_reusable": true,
       "prior_activation_reusable": false,
       "prior_activation_mismatch": "PRIOR_ACTIVATION_BOUND_1_ROOT1_15_ROOT2_7_ROOT3_3_MIXED__CURRENT_IS_0_15_7_3_AFTER_LIVEBENCH_ACCEPTANCE",
-      "status": "CURRENT_18_IDENTITY_KNOWN__FRESH_PARTITION_BINDING_REQUIRED"
+      "status": "CURRENT_18_IDENTITY_REUSED__CURRENT_PARTITION_BINDING_SUPPLIED_BY_V4_ACTIVATION",
+      "current_partition_activation_path": "canonical/governance/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_ACTIVATION_V1.json",
+      "current_partition_activation_git_blob_sha": "d739ade25b0c00cee069add72dab9677fa31e027"
     },
-    "root2_effective_scheduling_authority_source": "PENDING_EXACT_CURRENT_18_PREDICATE_REBIND_AFTER_CLEAN_LIVEBENCH_PROMOTION",
-    "root2_effective_scheduling_scope": "EXACT_18_TOUCHING_SET__PRIOR_19_MINUS_LIVEBENCH_IF_GE_65_7",
-    "root2_current_scheduling_compiler": "PENDING_EXACT_18_REBIND"
+    "root2_effective_scheduling_authority_source": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3.json",
+    "root2_effective_scheduling_scope": "EXACT_CURRENT_18_ROOT2_TOUCHING_PREDICATES__14_PROVED_24_UNRESOLVED_EPOCH",
+    "root2_current_scheduling_compiler": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "root2_current_frontier_git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f",
+    "root2_current_scheduling_compiler_git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f",
+    "root2_current_scheduling_activation": {
+      "path": "canonical/governance/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_ACTIVATION_V1.json",
+      "git_blob_sha": "d739ade25b0c00cee069add72dab9677fa31e027",
+      "status": "ACTIVE__EXACT_18_ROOT2_SCHEDULING__CURSOR_OWNER_ROUTE_DELETED__SCHEDULING_ONLY__ZERO_CREDIT",
+      "scheduling_authority": true,
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false
+    },
+    "root2_current_wake_aware_executable_cut": {
+      "path": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3.json",
+      "git_blob_sha": "d09abed23287560508353ce0e0476b98a9749cef",
+      "status": "ACTIVE__CONNECTOR_RECOMPUTED_WAKE_AWARE_ROOT2_CUT__SIX_INFORMATION_POSITIVE_GROUPS__SLEEP_SATURATED_BRANCHES__ZERO_CREDIT",
+      "active_information_positive_group_count": 6,
+      "sleep_until_wake_branch_count": 3,
+      "deferred_fresh_reality_predicate": "TB_SCIENCE_GE_58_7",
+      "synthesis_truth_repair": {
+        "preserve": "THE_EXISTING_SYNTHESIS_CERTIFICATE_CLOSES_THE_ACCEPTANCE_PREDICATE_SCOPE_RELATION_FOR_SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "revoke_for_scheduling": "DO_NOT_TREAT_THAT_PREDICATE_SCOPE_CERTIFICATE_AS_UNIVERSAL_WHOLE_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_TYPED_INPUT_DOMAIN_COMPLETENESS",
+        "root2_effect": "SYNTHESIS_ROOT2_MATCHED_PERFORMANCE_REMAINS_THE_ONLY_ROOT2_SYNTHESIS_TARGET; WHOLE_LEAF_SCOPE_REPAIR_BELONGS_TO_THE_SEPARATE_SCOPE_FRONTIER AND EARNS_NO ROOT2 PERFORMANCE CREDIT"
+      },
+      "scheduling_authority": true,
+      "execution_authority": false,
+      "promotion_authority": false,
+      "fresh_reality_authority": false
+    },
+    "root2_prior_wake_aware_v2_activation": {
+      "path": "canonical/governance/ROOT2_18_WAKE_AWARE_ZERO_REALITY_CUT_V2_ACTIVATION_V1.json",
+      "git_blob_sha": "a73f2e2dd3f37b50c96893bf47d99febb66ebb30",
+      "status": "HISTORICAL_PARENT__SUPERSEDED_FOR_EXECUTABLE_SCHEDULING_BY_ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3"
+    },
+    "root2_authority_reconciliation": {
+      "date": "2026-10-05",
+      "reason": "CURRENT_ROOT_STATE_ALREADY_14_24_AND_EXACT_18_BUT_SCHEDULER_POINTERS_STILL_REFERRED_TO_STALE_V12_PENDING_REBIND_TEXT_AFTER_V4_AND_EXECUTABLE_V3_BECAME_ACTIVE",
+      "acceptance_credit_delta": 0,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0,
+      "new_reality_units_consumed": 0
+    }
   },
   "accounting": {
     "acceptance_credit_delta": 0,
