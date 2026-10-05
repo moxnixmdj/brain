@@ -907,6 +907,11 @@ def _ensure_apt_dependencies(source):
     requested=[]
     expected={}
     evidence=[]
+    try:
+        from canonical.runtime.apt_metadata_snapshot_v1 import package_records, installed_version
+        apt_records=package_records()
+    except Exception as exc:
+        raise Blocker("BOUND_APT_METADATA_SNAPSHOT_FAILED:"+type(exc).__name__+":"+str(exc)) from exc
     for pkg in packages:
         if not isinstance(pkg,dict):
             raise Blocker("BOUND_APT_PACKAGE_INVALID")
@@ -915,15 +920,16 @@ def _ensure_apt_dependencies(source):
         sha=str(pkg.get("sha256") or "").strip().lower()
         if not name or not version or len(sha)!=64:
             raise Blocker("BOUND_APT_PACKAGE_METADATA_INCOMPLETE")
-        show=subprocess.run(["apt-cache","show",f"{name}={version}"],text=True,capture_output=True,timeout=30)
-        if show.returncode!=0:
+        hashes={
+            str(rec.get("SHA256") or "").strip().lower()
+            for rec in apt_records
+            if str(rec.get("Package") or "").strip()==name
+            and str(rec.get("Version") or "").strip()==version
+            and str(rec.get("SHA256") or "").strip()
+        }
+        if not hashes:
             raise Blocker("BOUND_APT_METADATA_NOT_FOUND:"+name)
-        found=None
-        for line in show.stdout.splitlines():
-            if line.startswith("SHA256:"):
-                found=line.split(":",1)[1].strip().lower()
-                break
-        if found!=sha:
+        if hashes!={sha}:
             raise Blocker("BOUND_APT_PACKAGE_HASH_MISMATCH:"+name)
         requested.append(f"{name}={version}")
         expected[name]=version
@@ -937,9 +943,9 @@ def _ensure_apt_dependencies(source):
     if proc.returncode!=0:
         raise Blocker("BOUND_APT_INSTALL_FAILED:"+proc.stderr[-1600:])
     for name,version in expected.items():
-        q=subprocess.run(["dpkg-query","-W","-f=$"+"{Version}",name],text=True,capture_output=True,timeout=30)
-        if q.returncode!=0 or q.stdout.strip()!=version:
-            raise Blocker("BOUND_APT_INSTALLED_VERSION_MISMATCH:"+name+":"+q.stdout.strip())
+        observed=installed_version(name)
+        if observed!=version:
+            raise Blocker("BOUND_APT_INSTALLED_VERSION_MISMATCH:"+name+":"+str(observed or ""))
     return {"status":"INSTALLED_VERIFIED","origin":source.get("origin"),"packages":evidence}
 
 def _invoke_bound_capability(args):
