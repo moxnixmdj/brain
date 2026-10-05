@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_SCOPE_CLOSURE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261003_V1",
+  "date": "2026-10-03",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BYTES_REGRESSION_AND_ADVERSARIAL_FAIL_CLOSED_VERIFIED__ZERO_CREDIT",
+  "source_brain": {
+    "commit": "e17a2d9d7740f436bb1d8df52e5eb623173c6146",
+    "exact_blobs": {
+      "canonical/runtime/universal_scope_closure_compiler_v1.py": "b208255789b14e44e86c82c196e06b5c41b3d039",
+      "canonical/tests/test_universal_scope_closure_compiler_v1.py": "dc3c3abdfa5c0fb7ff76fa897eb9b23accfca71d",
+      "canonical/governance/UNIVERSAL_SCOPE_CLOSURE_COMPILER_ACTIVATION_V1.json": "beef965fd2c0e3628c2312113f844ffdd1a1ed4e"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1425,
+    "verifier_head_sha": "ffd200e75e7a51d63d412dfaccd6d5301af85517",
+    "merge_commit": "966cca4c393b32e42ed5331b8089a188bb3f7a9f",
+    "workflow_run_id": 37156756044,
+    "workflow_job_id": 111301607829,
+    "conclusion": "success",
+    "workflow_blob": "dedade2676e2f8c0aba9afbc0a7a79b5e300ce60",
+    "independent_verifier_blob": "c31ad525755a1f624907c19e4a548dbf4306dd99",
+    "expected_brain_blobs_manifest": "c0296fd7e6f6563552d894af5bdf4a64000c7cf1"
+  },
+  "verified": {
+    "exact_brain_blob_identities": true,
+    "compiler_compiles": true,
+    "copied_brain_regression_suite_pass": true,
+    "independent_adversarial_verifier_pass": true,
+    "admissible_bases": [
+      "UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+      "EXHAUSTIVE_FINITE_SUPERSET",
+      "LOSSLESS_DECOMPOSITION"
+    ],
+    "unverified_certificate_fails_closed": true,
+    "nonindependent_certificate_fails_closed": true,
+    "invalid_scope_relation_fails_closed": true,
+    "finite_perfect_sample_without_complete_universe_fails_closed": true,
+    "incomplete_universal_premises_fail_closed": true,
+    "incomplete_superset_relation_fails_closed": true,
+    "duplicate_decomposition_child_fails_closed": true,
+    "scope_never_grants_performance_credit": true,
+    "zero_terminal_credit_preserved": true
+  },
+  "interpretation": "THE_GENERIC_ROOT3_SCOPE_CERTIFICATE_TYPE_SYSTEM_IS_INDEPENDENTLY_VERIFIED_AS_FAIL_CLOSED_INFRASTRUCTURE__THIS_DOES_NOT_CLOSE_ANY_OPEN_PREDICATE_WITHOUT_A_SEPARATE_PREDICATE_SPECIFIC_ADMISSIBLE_CERTIFICATE",
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
