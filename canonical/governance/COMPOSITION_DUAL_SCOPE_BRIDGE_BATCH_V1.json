@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_COMPOSITION_DUAL_SCOPE_BRIDGE_BATCH_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__JOINT_ZERO_REALITY_TWO_COMPONENT_SCOPE_BATCH__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_PARENT_OR_PERFORMANCE_CREDIT",
+  "status": "CANDIDATE__ARTIFACT_SCOPE_ROUTE_PLUS_CONDITIONAL_SYNTHESIS_ROUTE__KNOWN_SOURCE_ACCEPTANCE_SEMANTIC_GATE_OPEN__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "objective": "Verify the artifact-creation and evidence-synthesis scope bridges in one content-addressed transaction and, only if both pass against the same frozen 4-of-12 base, admit both receipts simultaneously for a deterministic 6-of-12 scoped-proof projection.",
   "base": {
     "main_commit": "e057a7f756cbe93cdb277ad5ecb800103977c4f1",
@@ -75,18 +75,23 @@
     "pairwise_distinct": true,
     "shared_base_required": true,
     "scoped_proved_before": 4,
-    "scoped_proved_after_if_both_independently_verified": 6,
-    "open_after_if_both_independently_verified": 6,
     "parent_component_dependency_predicate_closed": false,
     "parent_composition_predicate_closed": false,
-    "strict_opus55_acceptance_delta": 0
+    "strict_opus55_acceptance_delta": 0,
+    "artifact_only_projection_after_independent_verification": {
+      "scoped_proved": 5,
+      "open": 7
+    },
+    "scoped_proved_after_if_both_bridges_and_semantic_gate_independently_pass": 6,
+    "open_after_if_both_bridges_and_semantic_gate_independently_pass": 6
   },
   "verification_collapse": {
     "serial_candidate_verifications_avoided": 1,
     "required_independent_transactions": 1,
-    "rule": "ONE_INDEPENDENT_REPLAY_MUST_VERIFY_BOTH_FULL_SOURCE_CHAINS_AND_THE_JOINT_NONOVERLAP_PROJECTION__PARTIAL_PASS_ADMITS_ONLY_THE_INDIVIDUALLY_VERIFIED_RECEIPT_AND_MUST_NOT_CLAIM_6_OF_12"
+    "rule": "ONE_INDEPENDENT_REPLAY_MAY_VERIFY_BOTH_FULL_SOURCE_CHAINS_AND_THE_JOINT_NONOVERLAP_PROJECTION__BUT_SIX_OF_TWELVE_IS_FORBIDDEN_UNLESS_THE_KNOWN_SOURCE_ACCEPTANCE_SEMANTIC_GATE_IS_SEPARATELY_AND_INDEPENDENTLY_DISCHARGED__WITHOUT_THAT_GATE_ARTIFACT_CREATION_MAY_ADVANCE_ONLY_TO_FIVE_OF_TWELVE"
   },
   "hard_rules": [
+    "KNOWN_PUBLIC_VERIFIER_PR_2234_SOURCE_ACCEPTANCE_SEMANTIC_OBJECTION_MUST_BE_DISCHARGED_BEFORE_EVIDENCE_SYNTHESIS_COMPONENT_ADMISSION",
     "FAIL_CLOSED_IF_CURRENT_COMPOSITION_BASE_IS_NOT_EXACTLY_4_OF_12_WITH_MEMORY_RECOVERY_DELEGATION_TOOL_DISCOVERY",
     "FAIL_CLOSED_IF_EITHER_BRIDGE_SOURCE_BLOB_OR_ANY_LOAD_BEARING_SOURCE_BLOB_DRIFTS",
     "NO_SYNONYM_TRANSPORT_TO_ARTIFACT_PRODUCTION",
@@ -96,7 +101,7 @@
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT",
     "NO_FRESH_REALITY"
   ],
-  "next": "INDEPENDENTLY_REPLAY_THE_SINGLE_JOINT_TEST_TRANSACTION__IF_BOTH_CHAINS_PASS_MATERIALIZE_A_SIX_RECEIPT_COMPOSITION_SLICE_AND_RERUN_THE_EXISTING_EXACT_SLICER__OTHERWISE_ADMIT_ONLY_ANY_INDIVIDUALLY_VERIFIED_BRIDGE",
+  "next": "FIRST_INDEPENDENTLY_VERIFY_ARTIFACT_CREATION_AND_RESOLVE_THE_PR_2234_SOURCE_ACCEPTANCE_SEMANTIC_GATE__IF_GATE_FAILS_PROJECT_ONLY_FIVE_OF_TWELVE__IF_GATE_PASSES_AND_BOTH_BRIDGES_VERIFY_MATERIALIZE_SIX_RECEIPT_SLICE_AND_RERUN_EXACT_SLICER",
   "new_reality_units_consumed": 0,
   "terminal_results_replayed": 0,
   "incremental_spend_usd": 0,
@@ -107,5 +112,12 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "known_falsifier": {
+    "public_verifier_pr": 2234,
+    "url": "https://github.com/moxnixmdj/verification-capsule-runner/pull/2234",
+    "finding": "AN_EARLIER_INDEPENDENT_REVIEW_CONCLUDED_THAT_A_COMPOSITION_SCOPED_ACCEPTANCE_PROOF_REQUIRES_THE_SOURCE_COMPONENT_ACCEPTANCE_TO_BE_CLOSED__SYNTHESIS_MATCHED_QUALITY_ACCEPTANCE_IS_OPEN",
+    "consequence": "EVIDENCE_SYNTHESIS_MUST_NOT_BE_ADMITTED_UNLESS_A_NEW_INDEPENDENT_SEMANTIC_RULING_PROVES_THAT_THE_FROZEN_COMPOSITION_DEPENDENCY_REQUIRES_SCOPE_COMPLETENESS_ONLY_OR_OTHERWISE_DISCHARGES_THE_SOURCE_ACCEPTANCE_REQUIREMENT",
+    "current_gate_state": "OPEN__DO_NOT_CLAIM_SIX_OF_TWELVE"
+  }
 }
