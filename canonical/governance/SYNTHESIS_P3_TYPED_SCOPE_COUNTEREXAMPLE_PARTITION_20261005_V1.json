@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_P3_TYPED_SCOPE_COUNTEREXAMPLE_PARTITION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__P3_V3_UNIVERSAL_SCOPE_COMPLETENESS_REFUTED_BY_FROZEN_CODE_BOUNDARY__EXPLICIT_RESIDUAL_PARTITION_REQUIRED__ZERO_CREDIT",
+  "objective": "Falsify the incorrect next step of attempting a universal scope-completeness proof for the bounded P3 v3 prequalification implementation, while preserving its valid terminal/preflight evidence and isolating the actual uncovered synthesis scope.",
+  "authorities": {
+    "candidate": {
+      "path": "canonical/runtime/p3_information_safe_candidate_v3.py",
+      "git_blob_sha": "54bfc7e5ee205aa328863a5ea1ca6f47f864d85a"
+    },
+    "proof_suite": {
+      "path": "canonical/runtime/p3_information_safe_proof_suite_v3.py",
+      "git_blob_sha": "7b4fef2a2ba2c84b3499ded1ed4bbaac6714fa42"
+    },
+    "preflight_verification": {
+      "path": "canonical/verification/P3_INFORMATION_SAFE_V3_PREFLIGHT_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "c0812ad6e7ee1e1c93d7419ed72f4fc7c9980381"
+    },
+    "contract": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    },
+    "semantic_reduction": {
+      "path": "canonical/governance/SYNTHESIS_P3_CONTRACT_SEMANTIC_REDUCTION_20261005_V1.json"
+    }
+  },
+  "falsification": {
+    "target": "PROVE_TOTALITY_AND_SCOPE_COMPLETENESS_OF_P3_V3_IMPLEMENTATION_OVER_ALL_ADMISSIBLE_EVIDENCE_TO_AUDIENCE_SYNTHESIS_INPUTS",
+    "result": "REFUTED",
+    "reason": "THE_FROZEN_IMPLEMENTATION_AND_BOUNDED_SCORER_IMPLEMENT_ONLY_A_STRICT_SUBDOMAIN_OF_THE_OPEN_ENDED_CONTRACT"
+  },
+  "code_bound_facts": [
+    {
+      "fact": "Candidate output contains selected_claims, uncertainty_claims, and terminal_authority only; it does not emit a natural-language or artifact synthesis.",
+      "consequence": "Cannot by itself satisfy the broad contract action SELECT_ORGANIZE_AND_EXPRESS for arbitrary deliverable forms."
+    },
+    {
+      "fact": "Evidence is consumed as float(value) grouped by metric; claims require scalar threshold plus relation at_least or at_most.",
+      "consequence": "Qualitative, categorical, relational, textual, multimodal, document-structural, and non-threshold evidence/claim relations are outside this implementation."
+    },
+    {
+      "fact": "Audience preference table contains only executive, engineer, auditor and only two preferred kinds per audience.",
+      "consequence": "Open audience adaptation is not represented by the bounded route."
+    },
+    {
+      "fact": "Candidate does not consume objective semantics beyond task presence and does not consume explicit format/style constraints.",
+      "consequence": "General objective-conditioned organization and arbitrary format/style compliance are outside this implementation."
+    },
+    {
+      "fact": "Input evidence may contain provenance but candidate output does not carry provenance.",
+      "consequence": "General provenance-preserving synthesis cannot be established from this candidate alone."
+    },
+    {
+      "fact": "Bounded score_case checks exact selected_claims and uncertainty_claims plus budget; it does not directly score free-form expression, provenance emission, arbitrary formatting, or general decision-relevant compression.",
+      "consequence": "The declared P3 required-check set is semantically sufficient as a specification, but this bounded preflight scorer is not an implementation of the whole declared check set."
+    },
+    {
+      "fact": "Independent preflight verification explicitly states PREQUALIFICATION_ONLY and does_not_prove WHOLE_OPEN_ENDED_CONTRACT_SCOPE_EQUIVALENCE.",
+      "consequence": "Any universal scope promotion from P3 v3 would contradict its own verified authority boundary."
+    }
+  ],
+  "preserved_evidence": {
+    "p3_v3_valid_role": "INFORMATION_SAFE_BOUNDED_PREQUALIFICATION_AND_MUTATION_SUPPORT_FOR_NUMERIC_CLAIM_SELECTION_UNCERTAINTY_SUBDOMAIN",
+    "terminal_wave_validity_revoked": false,
+    "semantic_check_set_implication_revoked": false,
+    "scope_complete_credit_from_p3_v3": false
+  },
+  "explicit_residual_scope": [
+    "FREE_FORM_OR_STRUCTURED_NATURAL_LANGUAGE_SYNTHESIS_EXPRESSION",
+    "QUALITATIVE_AND_NON_SCALAR_EVIDENCE",
+    "NON_THRESHOLD_AND_RELATIONAL_CLAIM_SUPPORT",
+    "OPEN_AUDIENCE_AND_OBJECTIVE_ADAPTATION",
+    "ARBITRARY_FORMAT_STYLE_AND_ARTIFACT_CONSTRAINTS",
+    "PROVENANCE_PRESERVING_OUTPUT",
+    "GENERAL_CONFLICT_AND_UNCERTAINTY_EXPRESSION_BEYOND_SELECTED_ID_FLAGS",
+    "GENERAL_DECISION_RELEVANCE_AND_COMPRESSION_UNDER_ARBITRARY_OUTPUT_BUDGET",
+    "MULTIMODAL_OR_DOCUMENT_STRUCTURAL_EVIDENCE_WHERE_CLAIMED"
+  ],
+  "minimum_next_action": {
+    "first": "SEARCH_CURRENT_BRAIN_FOR_AN_EXISTING_BRAIN_OWNED_ROUTE_AND_SCOPE_COMPLETE_RECEIPT_THAT_COVERS_ANY_OR_ALL_EXPLICIT_RESIDUAL_SCOPE_CLASSES",
+    "second_if_absent": "CREATE_THE_MINIMUM_RESIDUAL_CONTRACT_OR_MECHANISM_ONLY_FOR_CLASSES_NOT_ALREADY_COVERED",
+    "forbidden": [
+      "ATTEMPT_UNIVERSAL_SCOPE_PROOF_OF_P3_V3_AS_CURRENTLY_FROZEN",
+      "REPLAY_TERMINAL_WAVE",
+      "DISCARD_VALID_P3_V3_SUBDOMAIN_EVIDENCE",
+      "DUPLICATE_RESIDUALS_PER_FAMILY_WHEN_THE_BEHAVIOR_CONTRACT_IS_IDENTICAL"
+    ]
+  },
+  "fanout": {
+    "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "families": [
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH"
+    ],
+    "rule": "CLOSE_OR_PARTITION_THE_BEHAVIOR_ONCE_AT_THE_CONTRACT_BOUNDARY_THEN_REUSE_ACROSS_IDENTICAL_FAMILY_EDGES"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_BRAIN_LACKS_THE_RESIDUAL_CAPABILITIES__ONLY_THIS_FROZEN_P3_V3_ROUTE_DOES_NOT_PROVE_THEM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
