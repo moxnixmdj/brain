@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BAR_SCOPE_GAP_DEDUPLICATION_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__FIVE_SCOPE_GAPS_COMPRESSED_TO_REUSE_EDGE_AUDITS_PLUS_ONE_CANDIDATE_NEW_BEHAVIOR__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PUBLIC_BAR_SCOPE_GAP_DEDUPLICATION_20261005_V1.json",
+    "git_blob_sha": "c52e499b54dd9f5eaed80647dd855615448752b0"
+  },
+  "verification": {
+    "path": "canonical/verification/PUBLIC_BAR_SCOPE_GAP_DEDUPLICATION_CONNECTOR_VERIFICATION_20261005_V1.json"
+  },
+  "effects": {
+    "delete": [
+      "DEFAULT_PLAN_OF_FIVE_SEPARATE_NEW_SCOPE_PORTFOLIOS"
+    ],
+    "activate": [
+      "AUDIT_EACH_PUBLIC_BENCHMARK_TASK_UNION_AGAINST_ITS_FROZEN_BEHAVIORAL_BASIS",
+      "VERIFY_40_REUSE_EDGES_FOR_SCOPE_STRENGTH_AND_DEDUPE_THEM_TO_THE_MINIMUM_LOAD_BEARING_SET",
+      "FREEZE_SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_AS_A_NEW_CONTRACT_ONLY_IF_NO_STRONGER_EXISTING_CONTRACT_IS_FOUND",
+      "RESOLVE_PUBLIC_BAR_TARGET_OBSERVATION_IDENTITY_BEFORE_NUMERIC_PROMOTION"
+    ],
+    "preserve": [
+      "ROOT1_POSITIVE_GAP_ZERO",
+      "CURRENT_ACCEPTANCE_COUNTS_UNCHANGED",
+      "ZERO_FRESH_REALITY",
+      "FAIL_CLOSED_TERMINAL_FINALITY"
+    ]
+  },
+  "critical_path_order": [
+    "TARGET_OBSERVATION_IDENTITY_AND_METRIC_RECONCILIATION",
+    "PUBLIC_TASK_UNION_TO_BASIS_COVERAGE_AUDIT",
+    "REUSE_EDGE_SCOPE_STRENGTH_VERIFICATION",
+    "ONLY_THEN_CREATE_ANY_NONEMPTY_RESIDUAL_ACCEPTANCE_CASE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
