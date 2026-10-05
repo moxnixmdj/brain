@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_ADAPTER_ROUTE_TRUTH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ADAPTER_RESIDUAL_RECLASSIFIED_TO_VERIFIED_VISION_TRANSPORT_OR_CAPABILITY_PREREQUISITE__NOT_ROOT1_YET__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "objective": "Prevent the Chartography Brain-adapter residual from being misclassified as thin textual harness glue when the official task requires chart-image input and current verified Brain visual surfaces are OCR-bounded.",
+  "official_chartography": {
+    "repository": "surge-ai/chartography",
+    "commit": "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b",
+    "task_path": "src/chartography/task.py",
+    "task_contract": [
+      "INSPECT_GENERATE_SOLVER_CALLS_EVALUATED_MODEL_ON_SAMPLE_WITH_CHART_ATTACHED_INLINE",
+      "SCORER_CONSUMES_TEXTUAL_MODEL_COMPLETION",
+      "LEADERBOARD_USES_10_EPOCHS_PER_100_TASKS_AND_GOOGLE_GEMINI_3_5_FLASH_JUDGE"
+    ],
+    "scorer_path": "src/chartography/scorer.py"
+  },
+  "current_brain_surfaces": {
+    "bound_capability_directory_observation": [
+      "image_ocr_tesseract.py",
+      "image_ocr_tesseract_positioned.py",
+      "pdf_ocr_tesseract.py",
+      "pdf_pypdf.py"
+    ],
+    "astra_runtime_observation": [
+      "IMAGE_CODE_DECODE_AND_OCR_ARTIFACT_PATHS_EXIST",
+      "NO_GENERIC_ATTACHMENT_MULTIMODAL_CHART_OR_FILE_PATH_INFERENCE_INTERFACE_IDENTIFIED_IN_CURRENT_RUNTIME_AUDIT"
+    ],
+    "positioned_ocr_scope": {
+      "source_commit": "653725aa1bf27f96366d50d8e94585a6e1fd0d54",
+      "implementation": "canonical/runtime/bound_capabilities/image_ocr_tesseract_positioned.py",
+      "runtime_blob": "19f3087489ce7f6f935fc7baaebdc8cd672f4b62",
+      "scope": "M1A_PINNED_POSITIONED_OCR_TSV_BRIDGE__STATIC_INTERFACE_COMPONENT_ONLY__FRESH_PROMOTION_CASE_REQUIRED"
+    }
+  },
+  "deduction": [
+    "CHARTOGRAPHY_CANNOT_BE_DISCHARGED_BY_A_TEXT_ONLY_AST​RA_RUN_GOAL_ADAPTER_BECAUSE_THE_EVALUATED_MODEL_MUST_RECEIVE_THE_CHART_IMAGE.",
+    "CURRENT_VERIFIED_OCR_SURFACES_DO_NOT_BY_THEMSELVES_PROVE_PROFESSIONAL_CHART_VISUAL_REASONING_OVER_CONTOURS_SANKEYS_BODE_PLOTS_CANDLESTICKS_AND_OTHER_DOMAIN_NATIVE_CHARTS.",
+    "THEREFORE_BRAIN_EVALUATION_ADAPTER_IS_NOT_YET_A_THIN_WRAPPER_OBLIGATION; IT_HAS_A_LOAD_BEARING_PREREQUISITE: AN_OPERATIVE_VERIFIED_CHART_IMAGE_REASONING_INPUT_ROUTE_OR_A_SEPARATELY_VERIFIED_STRONGER_PROOF.",
+    "THIS_DOES_NOT_YET_ESTABLISH_ROOT1_MISSING_CAPABILITY_BECAUSE ACQUISITION_OR_STRONGER_PROOF_ROUTES_HAVE_NOT_BEEN EXHAUSTIVELY FALSIFIED."
+  ],
+  "revised_zero_reality_residuals": [
+    "PROJECT_SPECIFIC_GEMINI_3_5_FLASH_FREE_CAPACITY_RECEIPT_FOR_AT_LEAST_1000_JUDGE_CALLS_PLUS_RESERVE",
+    "VERIFIED_CHART_IMAGE_INPUT_AND_REASONING_ROUTE_OR_SCOPE_COMPLETE_STRONGER_PROOF",
+    "THIN_INSPECT_MODEL_ADAPTER_ONLY_AFTER_THE_PREVIOUS_ITEM_IS_PROVED",
+    "BRAIN_THRESHOLD_CERTIFICATE_AFTER_EXPLICIT_REALITY_AUTHORITY_UNLESS_STRONGER_PROOF_SETTLES_BAR"
+  ],
+  "route_priority": [
+    "SEARCH_CURRENT_BRAIN_AND_FREE_ZERO_SPEND_ACQUISITION_SURFACES_FOR_GENERAL_CHART_IMAGE_REASONING_ROUTE",
+    "TRY_SCOPE_COMPLETE_DETERMINISTIC_CHART_RECONSTRUCTION_ONLY_IF_IT_COVERS_FULL_PUBLIC_CHARTOGRAPHY_TASK_DOMAIN",
+    "DO_NOT_BUILD_TEXT_ONLY_ADAPTER_AND_CALL_IT_CHARTOGRAPHY_READY"
+  ],
+  "hard_nonclaims": [
+    "NO_ROOT1_RECLASSIFICATION",
+    "NO_CLAIM_OCR_CANNOT_SOLVE_ANY_CHARTOGRAPHY_CASE",
+    "NO_CLAIM_NO_OTHER_BRAIN_VISION_ROUTE_EXISTS_OUTSIDE_AUDITED_CURRENT_SURFACES",
+    "NO_ACCEPTANCE_OR_EXECUTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
