@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_OPUS55_TARGET_FRESHNESS_CONNECTOR_BROWSER_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_AND_CURRENT_PUBLIC_SOURCE_RECOMPUTATION_PASS__GDPVAL_CURRENT_OPUS55_MAX_1867__LEGACY_1846_CROSS_EPOCH_FALSE_POSITIVE_RISK_CONFIRMED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/GDPVAL_OPUS55_TARGET_FRESHNESS_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "31549db051bd6b3111d02fa4b48b5174df2d350b"
+  },
+  "canonical_recomputed_inputs": {
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+      "observed_gdpval_target": 1846
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+      "observed_predicate": "PROWORK_GDPVAL_GE_1846"
+    },
+    "score_readiness": {
+      "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+      "git_blob_sha": "4e59e30461c9ff1bee1a9474627d5fb4074844b2",
+      "observed_route_ready": false
+    }
+  },
+  "current_public_source_recomputation": {
+    "source": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "benchmark": "GDPval-AA v2.1",
+    "model": "Claude Opus 5.5 (Max, Default Fallback)",
+    "observed_current_elo": 1867,
+    "methodology_fact": "GDPval-AA v2.1 current ratings use a Crowd-BT fit anchored to DeepSeek V4.1 Flash (max) at 1600",
+    "source_checked_date": "2026-10-05"
+  },
+  "exact_logic_checks": {
+    "legacy_threshold_less_than_current_target": true,
+    "legacy_threshold": 1846,
+    "current_target": 1867,
+    "counterexample_brain_score": 1850,
+    "counterexample_passes_legacy": true,
+    "counterexample_fails_current_target": true,
+    "cross_epoch_unconditioned_gate_can_change_terminal_truth": true,
+    "historical_threshold_may_be_preserved_only_under_exact_historical_epoch_identity": true
+  },
+  "conclusion": [
+    "THE_UNCONDITIONED_1846_GATE_IS_NOT_SAFE_FOR_A_CURRENT_GDPVAL_AA_V2_1_OWNER_EPOCH_RESULT",
+    "CURRENT_OWNER_EPOCH_RESULTS_MUST_USE_1867_OR_A_LATER_SAME_EPOCH_OPUS55_REFERENCE_IF_THE_OWNER_UPDATES_IT_BEFORE_BRAIN_CASE_EXPOSURE",
+    "HISTORICAL_1846_REMAINS_ADMISSIBLE_ONLY_WITH_EXACT_HISTORICAL_SETUP_AND_RATING_EPOCH_IDENTITY",
+    "TARGET_EPOCH_MUST_BE_FROZEN_BEFORE_BRAIN_RESULT_EXPOSURE"
+  ],
+  "hard_nonclaims": [
+    "THIS_IS_NOT_AN_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION",
+    "NO_GDPVAL_BRAIN_SCORE_WAS_RUN",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

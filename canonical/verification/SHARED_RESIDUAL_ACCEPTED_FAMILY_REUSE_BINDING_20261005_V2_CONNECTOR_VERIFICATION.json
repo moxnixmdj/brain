@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_SHARED_RESIDUAL_ACCEPTED_FAMILY_REUSE_BINDING_20261005_V2_CONNECTOR_VERIFICATION",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__COMPUTER_BROWSER_EXACT_CONTRACT_IDENTITY__TWO_ACCEPTED_OWNED_SOURCE_PROOFS_REUSABLE__TWO_NEW_DUPLICATE_SLOTS_DELETED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SHARED_RESIDUAL_ACCEPTED_FAMILY_REUSE_BINDING_20261005_V2.json",
+    "git_blob_sha": "11f593a5a9f2536e0e02e734f91aabb708a4d887"
+  },
+  "inputs": {
+    "registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "ownership": {
+      "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+      "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+    }
+  },
+  "recomputed": {
+    "computer_browser_contract_set_exact": true,
+    "business_workflow_and_computer_browser_contract_sets_equal": true,
+    "recovery_source_family_acceptance_pass_and_verified_owned": true,
+    "tool_discovery_source_family_acceptance_pass_and_verified_owned": true,
+    "recovery_scope_receipts_bound": true,
+    "tool_discovery_scope_receipt_bound": true,
+    "computer_browser_residual_after_reuse": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+    ],
+    "predecessor_avoided_slots": 4,
+    "newly_avoided_slots": 2,
+    "total_avoided_slots": 6,
+    "errors": []
+  },
+  "hard_nonclaims": [
+    "NO_BROWSER_VISUAL_GROUNDING_CLOSURE",
+    "NO_COMPUTER_BROWSER_FAMILY_ACCEPTANCE",
+    "NO_NEW_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ROOT1_FIVE_MAPPING_BEHAVIORAL_UNION_REDUCTION_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__FIVE_FIRST_PARTY_MAPPING_GROUPS_REDUCED_TO_EXISTING_19_FAMILY_UNION__ACCOUNTING_CLOSURE_ONLY__ZERO_CREDIT",
+  "status": "SUPERSEDED__USE_ACTIVE_OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2_ACTIVATION_V1__NO_AUTHORITY__ZERO_CREDIT",
   "objective": "Close the five remaining first-party family-mapping obligations by reducing each source-bounded useful behavior to the existing 19-family capability union, without granting behavioral parity, acceptance, capability, family, ownership, or terminal credit.",
   "authority": {
     "family_envelope": {
@@ -206,5 +206,10 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "superseded_by": {
+    "mapping": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+    "activation": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2_ACTIVATION_V1.json",
+    "reason": "ACTIVE_FAIL_CLOSED_MAPPING_PROVES_ACCOUNTING_DESTINATIONS_ONLY_AND_CORRECTLY_PRESERVES_LOSSLESS_SCOPE_AND_PARITY_AS_OPEN; THIS_EARLIER_CANDIDATE_USED_STRONGER_LOSSLESS_MAPPING_WORDING_WITHOUT_INDEPENDENT_SCOPE_PROOF"
+  }
 }

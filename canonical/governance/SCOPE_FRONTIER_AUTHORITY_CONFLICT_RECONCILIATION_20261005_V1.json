@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_SCOPE_FRONTIER_AUTHORITY_CONFLICT_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SUPERSEDED_FAIL_CLOSED__SYNTHESIS_WHOLE_LEAF_SCOPE_PREMISE_FALSIFIED__NO_CURRENT_SCHEDULING_AUTHORITY",
+  "original_commit": "604fe702e594be384a08939c524367dd0639374f",
+  "supersession_reason": "A later canonical countermodel and connector verification proved that SYNTHESIS_SCOPE_CERTIFICATE_V1 closes the acceptance-predicate dimension relation but does not entail universal whole EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 input-domain completeness. The original five-open/two-closed reconciliation therefore contained one invalid premise.",
+  "new_authorities": {
+    "synthesis_overextension_quarantine": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "c1b2d488dfd38c27b533f98424036be874d5e829"
+    },
+    "synthesis_overextension_connector": {
+      "path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "result": "PREDICATE_SCOPE_PROOF_VALID__WHOLE_BEHAVIOR_INPUT_DOMAIN_COMPLETENESS_NOT_ENTAILED"
+    },
+    "corrected_frontier_candidate": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3.json",
+      "role": "CORRECTED_SIX_SCOPE_ROOT_CANDIDATE__INDEPENDENT_OR_CONNECTOR_ACTIVATION_PENDING"
+    }
+  },
+  "preserved_valid_deductions": [
+    "FINITE_TERMINAL_V3_RECEIPTS_DO_NOT_BY_THEMSELVES_PROVE_UNIVERSAL_SCOPE_COMPLETENESS",
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001_REMAINS_SCOPE_CLOSED_UNDER_ITS_SEPARATE_SCOPE_AUDIT",
+    "TERMINAL_V3_RECEIPTS_REMAIN_VALID_FINITE_BEHAVIOR_EVIDENCE",
+    "SYNTHESIS_PREDICATE_LEVEL_ROOT3_SCOPE_RELATION_REMAINS_CLOSED",
+    "ALL_PERFORMANCE_ACCEPTANCE_OBLIGATIONS_REMAIN_OPEN_OR_CLOSED_EXACTLY_AS_THEIR_SEPARATE_AUTHORITIES_STATE"
+  ],
+  "revoked_deductions": [
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_WHOLE_LEAF_SCOPE_CLOSED",
+    "EXACT_FIVE_ACTIVE_SCOPE_REPAIR_LEAVES",
+    "DO_NOT_REOPEN_SYNTHESIS_WHOLE_LEAF_SCOPE_WORK"
+  ],
+  "fail_closed_current_rule": "DO_NOT_USE_THIS_FILE_FOR_SCOPE_SCHEDULING__USE_A_NEWER_VERIFIED_OR_ACTIVATED_FRONTIER_THAT_INCORPORATES_THE_SYNTHESIS_WHOLE_LEAF_COUNTERMODEL",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

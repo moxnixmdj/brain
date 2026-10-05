@@ -1,0 +1,180 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TRUTH_REPAIR__REGISTRY_INCIDENCE_IS_NOT_MANDATORY_ACCEPTANCE_ENTAILMENT__ZERO_CREDIT",
+  "objective": "Prevent benchmark-scope repair from expanding the frozen Opus 5.5 target by confusing useful target behavior with a particular internal mechanism. Preserve all real family behaviors and benchmark thresholds; require explicit target entailment before a behavioral-contract edge becomes a mandatory family acceptance obligation.",
+  "authorities": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "target_rule": "USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+      "relevant_semantics": [
+        "OPUS55_FAMILY_ROWS_ARE_ACCOUNTING_LABELS",
+        "BROAD_TERMS_ARE_UNDEFINED_OR_ACCOUNTING_ONLY_UNTIL_SPLIT_INTO_MEASURABLE_TRANSFORMS",
+        "MECHANISM_OWNERSHIP_IS_SEPARATE_FROM_FAMILY_ACCOUNTING"
+      ]
+    },
+    "current_proxy_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+      "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f"
+    },
+    "finite_observable_basis": {
+      "path": "canonical/governance/PUBLIC_BAR_SCOPE_PARTITION_COMPILER_20261005_V1.json",
+      "role": "USE_OBSERVABLE_FAMILY_DIMENSIONS_FOR_SCOPE_AUDIT__DO_NOT_USE_INTERNAL_MECHANISM_INCIDENCE_AS_TARGET_DEFINITION"
+    },
+    "gate": {
+      "path": "canonical/runtime/target_behavior_mechanism_entailment_gate_v1.py"
+    },
+    "tests": {
+      "path": "canonical/tests/test_target_behavior_mechanism_entailment_gate_v1.py"
+    }
+  },
+  "theorem": {
+    "name": "TARGET_BEHAVIOR_NECESSITY_BEFORE_MECHANISM_OBLIGATION",
+    "statement": "Let T be a frozen useful target behavior and M a Brain implementation mechanism or behavioral residual contract. M may be sufficient or load-bearing for one implementation of T without being a necessary part of T. Therefore M can be a mandatory Opus-5.5 acceptance obligation only if T explicitly contains M as observable target behavior or an independently verified entailment proves that every admissible realization of T must satisfy the observable consequence represented by M. Registry incidence, historical failure, donor usefulness, or current route choice alone is insufficient.",
+    "corollary": "A mandatory proof requirement that is neither explicit target behavior nor a proved necessary observable consequence is target-scope expansion, not conservative acceptance.",
+    "preserves": "This rule does not delete any family-level target behavior, benchmark threshold, or already-required observable outcome."
+  },
+  "current_frontier_audit": {
+    "source_surviving_leaf_occurrences": 12,
+    "unique_surviving_leaf_ids": 7,
+    "edges": [
+      {
+        "family": "ADVANCED_AGENTIC_CODING",
+        "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "classification": "SUFFICIENT_MECHANISM_ONLY__TARGET_ENTAILMENT_NOT_PROVED",
+        "reason": "Frozen family requires ambiguous multi-file work and self-checking outcomes, but does not require an independent acceptance-model implementation specifically.",
+        "mandatory_from_registry_incidence": false,
+        "preserved_target_obligation": "AMBIGUOUS_MULTI_FILE_CHANGE_CORRECTNESS_AND_SELF_CHECKING_OUTCOME"
+      },
+      {
+        "family": "ADVANCED_AGENTIC_CODING",
+        "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "classification": "ADJACENT_NOT_ENTAILED",
+        "reason": "Frozen coding behavior names codebase implementation/debugging/refactoring/review/terminal operation; it does not require a normalized formula/schema calculation graph.",
+        "mandatory_from_registry_incidence": false
+      },
+      {
+        "family": "ADVANCED_AGENTIC_CODING",
+        "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+        "classification": "OUT_OF_SCOPE_UNDER_CURRENT_FROZEN_FAMILY_WORDING",
+        "reason": "Engineering-drawing-to-CAD-solid reconstruction is not contained in the frozen Advanced Agentic Coding useful-behavior sentence. A coding benchmark may contain such a task without making CAD reconstruction a separate mandatory coding-family behavior.",
+        "mandatory_from_registry_incidence": false
+      },
+      {
+        "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "classification": "SUFFICIENT_MECHANISM_ONLY__TARGET_QUALITY_OUTCOME_IS_LOAD_BEARING",
+        "reason": "The family requires high-quality professional work products and multi-stage office-task completion. A particular internal revision-planning mechanism is not itself required if the observable professional-quality outcome is proved.",
+        "mandatory_from_registry_incidence": false,
+        "preserved_target_obligation": "HIGH_QUALITY_PROFESSIONAL_WORK_PRODUCT_AND_MULTI_STAGE_OFFICE_TASK_COMPLETION"
+      },
+      {
+        "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+        "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "classification": "TARGET_ENTAILMENT_NOT_PROVED_FOR_WHOLE_FAMILY",
+        "reason": "Evidence synthesis can be a professional-work behavior, but the frozen family sentence does not make that exact synthesis transform mandatory for every represented professional task. Public-bar scope must be audited at observable-task level.",
+        "mandatory_from_registry_incidence": false
+      },
+      {
+        "family": "BUSINESS_WORKFLOW_AUTOMATION",
+        "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "classification": "SUFFICIENT_ROUTE_NOT_NECESSARY_TARGET_BEHAVIOR",
+        "reason": "The family requires accurate end-to-end multi-application business workflows. It does not require visual browser grounding specifically; API/tool-mediated realizations remain admissible unless target semantics separately require UI interaction.",
+        "mandatory_from_registry_incidence": false,
+        "preserved_target_obligation": "REAL_MULTI_APPLICATION_END_TO_END_WORKFLOW_SUCCESS"
+      },
+      {
+        "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "classification": "SUFFICIENT_MECHANISM_ONLY__TARGET_ENTAILMENT_NOT_PROVED",
+        "reason": "The family requires solving difficult expert-level questions with search/code/tools, not a particular long-horizon evidence-controller implementation.",
+        "mandatory_from_registry_incidence": false
+      },
+      {
+        "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "classification": "ADJACENT_NOT_ENTAILED",
+        "reason": "Audience-oriented synthesis is a separate useful capability surface and is not explicit in the frozen expert-question-solving family definition.",
+        "mandatory_from_registry_incidence": false
+      },
+      {
+        "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "classification": "SUFFICIENT_MECHANISM_ONLY__TARGET_ENTAILMENT_NOT_PROVED",
+        "reason": "Independent acceptance-model construction can improve correctness but is not itself the target behavior of answering expert questions with tools.",
+        "mandatory_from_registry_incidence": false
+      },
+      {
+        "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+        "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "classification": "PARTIAL_TARGET_ALIGNMENT__EXACT_MECHANISM_NOT_ENTAILED",
+        "reason": "The frozen family explicitly includes iterative reasoning and scientific tool use, but does not require this exact query/source/stop controller. Preserve the observable long-horizon scientific-task behavior and audit benchmark coverage directly.",
+        "mandatory_from_registry_incidence": false
+      },
+      {
+        "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+        "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "classification": "TARGET_ENTAILMENT_NOT_PROVED_FOR_CURRENT_FROZEN_SENTENCE",
+        "reason": "Scientific communication/synthesis may be a distinct useful surface, but the current family sentence requires solving long-horizon research/technical tasks and does not by itself prove this exact audience-synthesis transform mandatory.",
+        "mandatory_from_registry_incidence": false
+      },
+      {
+        "family": "COMPUTER_AND_BROWSER_USE",
+        "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "classification": "EXPLICIT_TARGET_BEHAVIOR",
+        "reason": "The frozen family explicitly requires browser/arbitrary-application workflows with visual grounding and judgment; state-conditioned grounded action is an observable necessary component of that stated scope.",
+        "mandatory_from_registry_incidence": true,
+        "target_entailment_receipt": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json::COMPUTER_AND_BROWSER_USE"
+      }
+    ]
+  },
+  "recomputed_effect": {
+    "registry_derived_surviving_edge_count": 12,
+    "edges_with_current_explicit_target_entailment": 1,
+    "registry_only_or_unproved_entailment_edges": 11,
+    "target_behaviors_deleted": 0,
+    "benchmark_thresholds_deleted": 0,
+    "acceptance_credit_delta": 0,
+    "root1_positive_gap_delta": 0,
+    "rule": "THE_11_UNPROVED_EDGES_ARE_NOT_DECLARED_FALSE_CAPABILITIES; THEY_ARE_QUARANTINED_AS_MANDATORY_ACCEPTANCE_REQUIREMENTS_UNTIL_TARGET_ENTAILMENT_IS_PROVED. FAMILY_LEVEL_OBSERVABLE_SCOPE_REPAIR_REMAINS_OPEN."
+  },
+  "scheduler_repair": {
+    "delete": [
+      "TREAT_FAMILY_TO_RESIDUAL_CONTRACTS_REGISTRY_INCIDENCE_AS_AUTOMATIC_MANDATORY_ACCEPTANCE_SCOPE",
+      "SPEND_NEW_REALITY_TO_PROVE_A_MECHANISM_BEFORE_PROVING_THE_TARGET_REQUIRES_THAT_MECHANISM"
+    ],
+    "activate": [
+      "AUDIT_EACH_AFFECTED_FAMILY_PUBLIC_BENCHMARK_UNION_AGAINST_THE_FINITE_OBSERVABLE_BEHAVIOR_BASIS",
+      "FOR_EACH_UNCOVERED_OBSERVABLE_TARGET_DIMENSION__REUSE_ANY_STRONGER_EXISTING_RECEIPT_REGARDLESS_OF_INTERNAL_ROUTE",
+      "ONLY_IF_AN_UNCOVERED_TARGET_DIMENSION_LOGICALLY_REQUIRES_A_SPECIFIC_MECHANISM__BIND_THAT_ENTAILMENT_AND_SCHEDULE_THE_MECHANISM_PROOF",
+      "KEEP_BROWSER_VISUAL_GROUNDING_AS_DIRECTLY_TARGET_ENTAILED_FOR_COMPUTER_AND_BROWSER_USE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_SIX_BROAD_FAMILY_SCOPE_GAPS_ARE_CLOSED",
+    "NO_CLAIM_THE_11_QUARANTINED_EDGES_ARE_USELESS",
+    "NO_CLAIM_A_SUPPORTED_MECHANISM_CANNOT_BE_REUSED_AS_SUFFICIENT_EVIDENCE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TARGET_WEAKENING",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

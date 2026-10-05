@@ -1,0 +1,131 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_TYPED_DOMAIN_CAUSAL_BASIS_COMPRESSION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SEVEN_CONSTRUCTIVE_SYNTHESIS_RESIDUAL_CLASSES_FACTORED_TO_THREE_CAUSAL_INTERFACES__TWO_REUSE_EXISTING_SHARED_SEMANTIC_RESIDUAL_CLASSES__ONE_SYNTHESIS_SPECIFIC_REALIZATION_CLASS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Replace seven symptom-shaped P3 synthesis typed-domain residual classes with the minimum currently supported causal interface basis, reusing existing cross-lane semantic residual classes where the same missing transform is already canonical. This is work-graph compression only; it grants no synthesis scope, performance, family, capability or ownership credit.",
+  "authorities": {
+    "typed_domain_countermodel": {
+      "path": "canonical/governance/SYNTHESIS_P3_TYPED_INPUT_DOMAIN_COUNTERMODEL_PARTITION_20261005_V1.json",
+      "git_blob_sha": "4150a16f4c20bf0bfcaa23d31b0b03af69417b2b"
+    },
+    "shared_semantic_basis": {
+      "path": "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
+      "git_blob_sha": "ca28ce910e0d946bc7f78d556d47d0ac109a36f2"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    },
+    "target_mechanism_guard": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1.json",
+      "rule": "USE_SHARED_MECHANISM_RESIDUALS_ONLY_AS_OPTIONAL_SUFFICIENT_IMPLEMENTATION_INTERFACES_UNLESS_TARGET_ENTAILMENT_IS_SEPARATELY_PROVED"
+    }
+  },
+  "causal_basis": [
+    {
+      "id": "SYNTHESIS_C0_SOURCE_TRACEABLE_SEMANTIC_GROUNDING",
+      "reuses_existing_shared_class": "S0_RAW_CONTEXT_TO_TYPED_FACT_TEMPLATE_AND_EFFECT_MODEL",
+      "transform": "Qualitative, categorical, relational, textual, multimodal or document-structural evidence plus provenance -> source-traceable typed facts/relations/support candidates with explicit ambiguity and unit/source identity preserved.",
+      "absorbs": [
+        "SYNTHESIS_SCOPE_R2_NONNUMERIC_OR_STRUCTURED_EVIDENCE",
+        "SYNTHESIS_SCOPE_R3_GENERAL_CLAIM_SEMANTICS",
+        "SYNTHESIS_SCOPE_R6_PROVENANCE_AND_UNIT_SENSITIVE_SUPPORT"
+      ],
+      "justification": [
+        "R2 is an input representation/normalization failure, not a distinct synthesis policy.",
+        "R3 requires typed semantic relation acquisition beyond the current numeric-threshold predicate.",
+        "R6 requires preserving source/unit/provenance identity through that same semantic representation rather than collapsing evidence by metric label."
+      ],
+      "current_state": "SHARED_RESIDUAL_CLASS_ALREADY_CANONICAL__NOT_CLAIMED_OWNED_OR_SCOPE_COMPLETE"
+    },
+    {
+      "id": "SYNTHESIS_C1_OBJECTIVE_CONDITIONED_SALIENCE_AND_ABSTENTION",
+      "reuses_existing_shared_class": "S1_IMPLICIT_SEMANTIC_ADJUDICATION_AND_ABSTENTION",
+      "transform": "Typed evidence/claims plus objective, audience, constraints and budget -> partial order/inclusion decision with uncertainty, abstention or more-information state when required support is absent or ambiguous.",
+      "absorbs": [
+        "SYNTHESIS_SCOPE_R1_OPEN_AUDIENCE_ADAPTATION",
+        "SYNTHESIS_SCOPE_R5_INSUFFICIENT_EVIDENCE_FOR_REQUIRED_CLAIM"
+      ],
+      "also_load_bearing_for": "The decision-relevance/selection component that precedes realized expression in R7.",
+      "justification": [
+        "R1 is not a new audience ontology primitive; it is objective-conditioned semantic adjudication over candidate content.",
+        "R5 requires fail-closed abstention or explicit unresolved state rather than silent omission when required support is absent."
+      ],
+      "current_state": "SHARED_RESIDUAL_CLASS_ALREADY_CANONICAL__NOT_CLAIMED_OWNED_OR_SCOPE_COMPLETE"
+    },
+    {
+      "id": "SYNTHESIS_C2_GROUNDED_EXPRESSION_AND_CONSTRAINT_REALIZATION",
+      "new_shared_candidate_class": true,
+      "transform": "Selected source-grounded content plus provenance, conflict/uncertainty state, audience/objective and explicit output constraints -> realized prose or structured artifact content whose material claims remain traceably supported and whose requested format/style/structure is satisfied.",
+      "absorbs": [
+        "SYNTHESIS_SCOPE_R4_GENERAL_OUTPUT_CONSTRAINTS",
+        "SYNTHESIS_SCOPE_R7_REALIZED_SYNTHESIS_EXPRESSION"
+      ],
+      "includes_required_properties": [
+        "PROVENANCE_BINDINGS_SURVIVE_TO_REALIZED_MATERIAL_CLAIMS_WHERE_REQUIRED",
+        "MATERIAL_CONFLICT_AND_UNCERTAINTY_ARE_EXPRESSED_NOT_MERELY_STORED_AS_IDS",
+        "FORMAT_STYLE_STRUCTURE_AND_ARTIFACT_CONSTRAINTS_ARE_REALIZED",
+        "NO_NEW_UNSUPPORTED_MATERIAL_CLAIMS_INTRODUCED_BY_REALIZATION",
+        "DECISION_RELEVANT_SELECTED_CONTENT_IS_NOT_DROPPED_DURING_EXPRESSION"
+      ],
+      "existing_partial_substrates": [
+        "NATIVE_STRUCTURED_ARTIFACT_EDIT_PRESERVATION_HAS_VERIFIED_BOUNDED_FORMAT_SUBSCOPES",
+        "P3_REQUIRED_CHECK_SET_ALREADY_STATES_THE_RIGHT_OUTPUT_INVARIANTS",
+        "CURRENT_P3_V3_DOES_NOT_IMPLEMENT_GENERAL_REALIZED_EXPRESSION"
+      ],
+      "current_state": "NEW_CAUSAL_INTERFACE_CANDIDATE__MUST_SEARCH_REUSE_BEFORE_IMPLEMENTATION__NO_CAPABILITY_CREDIT"
+    }
+  ],
+  "compression": {
+    "source_constructive_residual_classes": 7,
+    "causal_interface_count": 3,
+    "existing_shared_semantic_classes_reused": 2,
+    "synthesis_specific_new_interface_classes": 1,
+    "arithmetic": "7 symptom classes -> 3 causal interfaces; 2/3 are existing shared cross-lane residual classes, so only 1 synthesis-specific mechanism research lane remains after cross-lane reuse.",
+    "fresh_reality_required_for_compression": false
+  },
+  "scheduler_delta": {
+    "delete": [
+      "SEVEN_INDEPENDENT_SYNTHESIS_MECHANISM_RESEARCH_LANES",
+      "DUPLICATE_ACQUISITION_OF_S0_STYLE_SEMANTIC_GROUNDING_FOR_SYNTHESIS_ONLY",
+      "DUPLICATE_ACQUISITION_OF_S1_STYLE_SEMANTIC_ADJUDICATION_FOR_SYNTHESIS_ONLY"
+    ],
+    "preserve": [
+      "ALL_SEVEN_SOURCE_BOUND_COUNTEREXAMPLES_AS_REGRESSION_REQUIREMENTS",
+      "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS_AS_OPEN",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_AS_SEPARATE_ROOT2_PERFORMANCE_OBLIGATION",
+      "TARGET_BEHAVIOR_BEFORE_MECHANISM_ENTAILMENT_GUARD",
+      "ZERO_FRESH_REALITY"
+    ],
+    "next_order": [
+      "SEARCH_CURRENT_BRAIN_FOR_EXISTING_ROUTE_THAT_ALREADY_REALIZES_C2_WITH_PROVENANCE_UNCERTAINTY_AND_OUTPUT_CONSTRAINTS",
+      "REUSE_SHARED_S0_AND_S1_PROGRESS_ACROSS_ALL_LANES_INSTEAD_OF_SYNTHESIS_LOCAL_DUPLICATION",
+      "ONLY_IF_C2_REUSE_IS_ABSENT_BUILD_THE_MINIMUM_C2_INTERFACE_AND_VERIFY_R4_R7_PLUS_COMPOSED_R1_R7_REGRESSIONS",
+      "AFTER_C0_C1_C2_COMPOSITION_PROVE_ADMITTED_DOMAIN_PLUS_FAIL_CLOSED_RESIDUAL_PARTITION_EXHAUSTIVE_RELATIVE_TO_THE_FROZEN_SYNTHESIS_CONTRACT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_THREE_INTERFACES_ARE_ALREADY_IMPLEMENTED_OR_OWNED",
+    "NO_CLAIM_THE_SEVEN_COUNTEREXAMPLES_EXHAUST_ALL_OPEN_ENDED_SYNTHESIS_SEMANTICS",
+    "NO_SYNTHESIS_SCOPE_COMPLETENESS_CREDIT",
+    "NO_MATCHED_PERFORMANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

@@ -1,0 +1,33 @@
+name: Verify exact information gain kernel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/exact_information_gain.py"
+      - "canonical/tests/test_exact_information_gain.py"
+      - "canonical/governance/EXACT_INFORMATION_GAIN_KERNEL_V1.json"
+      - ".github/workflows/verify-exact-information-gain.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/exact_information_gain.py"
+      - "canonical/tests/test_exact_information_gain.py"
+      - "canonical/governance/EXACT_INFORMATION_GAIN_KERNEL_V1.json"
+      - ".github/workflows/verify-exact-information-gain.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify exact rational information-gain ordering
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_exact_information_gain

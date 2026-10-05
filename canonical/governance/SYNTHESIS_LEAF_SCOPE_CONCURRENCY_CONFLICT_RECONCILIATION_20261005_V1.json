@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_LEAF_SCOPE_CONCURRENCY_CONFLICT_RECONCILIATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FAIL_CLOSED_CONCURRENT_GOVERNANCE_COLLISION__WHOLE_LEAF_SCOPE_CLOSURE_NOT_ENTITLED__PREDICATE_SCOPE_CERTIFICATE_PRESERVED__ZERO_CREDIT",
+  "objective": "Resolve a same-minute governance race in which a valid countermodel against whole-leaf scope closure and a later activation of that same closure coexist on current main. Preserve only propositions supported by both branches; restore the shared typed-input-domain scope obligation until a proof addresses the countermodel.",
+  "authorities": {
+    "overextension_quarantine": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "c1b2d488dfd38c27b533f98424036be874d5e829"
+    },
+    "later_bridge_candidate": {
+      "path": "canonical/governance/EVIDENCE_SYNTHESIS_LEAF_SCOPE_COMPLETE_BRIDGE_20261005_V1.json",
+      "git_blob_sha": "5654d4a2350016624b11820013b1df330787aca1"
+    },
+    "later_connector_verification": {
+      "path": "canonical/verification/EVIDENCE_SYNTHESIS_LEAF_SCOPE_COMPLETE_BRIDGE_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "52ad9a49ac606a989df68e8a03fdc9143de75d23"
+    },
+    "later_activation": {
+      "path": "canonical/governance/EVIDENCE_SYNTHESIS_LEAF_SCOPE_COMPLETE_BRIDGE_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "64b6beffd6e9a0884df75b7687d906a39c4d0860"
+    },
+    "preserved_predicate_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    }
+  },
+  "collision": {
+    "proposition_A": "The six declared SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR target dimensions are losslessly covered by the verified witness route.",
+    "proposition_B": "Every admissible normalized evidence/audience/constraint input in the entire EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 behavioral contract is covered.",
+    "quarantine_result": "A is proved; A=>B is not proved. The quarantine supplies a countermodel in which A is true and an admissible behavioral input class exists outside the bound T1/T3 normalized witness domain.",
+    "later_bridge_result": "Marks B proved by reusing A plus exact behavior-id naming.",
+    "logical_resolution": "B must remain open because exact behavior-id naming and predicate-dimension completeness do not eliminate the quarantine countermodel. A later activation timestamp is not an additional premise."
+  },
+  "verification_gap_in_later_bridge": {
+    "observed_checks": [
+      "certificate witness scope string names EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "six target dimensions match the frozen synthesis protocol",
+      "children are independently verified/formally complete for all admissible TARGET inputs"
+    ],
+    "missing_check": "UNIVERSAL_QUANTIFICATION_OR_LOSSLESS_PARTITION_OVER_ALL_ADMISSIBLE_INPUTS_OF_THE_BEHAVIORAL_CONTRACT_ITSELF",
+    "why_material": "The word TARGET in the existing child proofs denotes the acceptance-predicate target dimensions. It does not prove equality between that target input domain and the full behavioral contract input domain.",
+    "countermodel_survives": true
+  },
+  "fail_closed_truth": {
+    "predicate_level_root3_scope_relation_closed": true,
+    "synthesis_matched_performance_open": true,
+    "whole_behavior_leaf_input_domain_scope_complete": false,
+    "correct_open_root": {
+      "id": "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS",
+      "statement": "Prove totality and scope completeness over every admissible normalized evidence/audience/constraint input of EVIDENCE_TO_AUDIENCE_SYNTHESIS_001, or losslessly partition and close every uncovered residual class.",
+      "fanout": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ],
+      "fanout_count": 3
+    }
+  },
+  "scheduling_effect_if_activated": {
+    "quarantine": [
+      "EVIDENCE_SYNTHESIS_LEAF_SCOPE_COMPLETE_BRIDGE_ACTIVATION_20261005_V1::MARK_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_SCOPE_COMPLETENESS_PROVED_FOR_SCOPE_REPAIR_SCHEDULING",
+      "EVIDENCE_SYNTHESIS_LEAF_SCOPE_COMPLETE_BRIDGE_ACTIVATION_20261005_V1::DELETE_NEW_SCOPE_COMPLETENESS_PROGRAM_FOR_THIS_LEAF",
+      "WHOLE_LEAF_SCOPE_REUSE_TO_OTHER_FAMILIES"
+    ],
+    "preserve": [
+      "SYNTHESIS_SCOPE_CERTIFICATE_V1::PREDICATE_ROOT3_SCOPE_RELATION_CLOSED",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR::ROOT2_PERFORMANCE_WORK",
+      "EXACT_BEHAVIOR_ID_REUSE_ONLY_AFTER_THE_TYPED_INPUT_DOMAIN_ROOT_IS_ACTUALLY_CLOSED"
+    ],
+    "activate": [
+      "ONE_SHARED_SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS_ROOT_WITH_FANOUT_THREE"
+    ],
+    "portfolio_delta": 0,
+    "fresh_reality_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_SYNTHESIS_CAPABILITY_FAILS",
+    "NO_REVOCATION_OF_THE_VALID_PREDICATE_LEVEL_SCOPE_CERTIFICATE",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_CHANGE",
+    "NO_NEW_TERMINAL_PORTFOLIO_REQUIRED",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

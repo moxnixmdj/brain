@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_W1_MODELS_API_NONEXHAUSTIVENESS_AUDIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SOURCE_BACKED_W1_FALSE_POSITIVE_BLOCK__MODELS_API_CAPABILITIES_OBJECT_IS_INTERFACE_FEATURE_SUPPORT_NOT_EXHAUSTIVE_USEFUL_BEHAVIOR_SPEC__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Close a tempting but invalid W1 shortcut: Anthropic's Models API uses the word capabilities and says keys are present for all known capabilities, but the schema enumerates platform/API feature support rather than an exhaustive ontology of useful observable Opus 5.5 behaviors.",
+  "fresh_official_sources": [
+    {
+      "url": "https://platform.claude.com/docs/en/api/models",
+      "observed": "ModelCapabilities is an API schema containing feature-support fields such as batch, citations, code_execution, context_management, effort and thinking; 'keys are always present for all known capabilities' is scoped to that ModelCapabilities schema."
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/models/overview",
+      "observed": "Models API is described as querying model capabilities and token limits programmatically; the page separately describes broad performance areas and does not state the API object is an exhaustive useful-behavior specification."
+    },
+    {
+      "url": "https://www.anthropic.com/claude/opus",
+      "observed": "Opus 5.5 product page says 'Key use cases include' coding, agents, enterprise workflows, financial analysis, and vision/computer use, which is non-exhaustive wording."
+    },
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "observed": "Transparency Hub describes complete publicly reported evaluation results while also describing benchmarked capabilities and selected summaries; completeness is for reported evaluation results, not the behavior universe."
+    }
+  ],
+  "deduction": {
+    "w1_candidate": "ANTHROPIC_MODELS_API_CAPABILITIES_OBJECT",
+    "verdict": "NOT_W1",
+    "reason": [
+      "The object type is a finite API/interface feature schema, not an extensional or intensional specification of every useful input-output behavior.",
+      "A model can have useful reasoning, coding, synthesis, planning or domain behavior without each such behavior appearing as a ModelCapabilities key.",
+      "Therefore completeness of schema keys does not entail completeness of useful behavioral capabilities."
+    ],
+    "target_discovery_completeness_delta": 0
+  },
+  "scheduler_effect": {
+    "delete": [
+      "TREAT_MODELS_API_ALL_KNOWN_CAPABILITY_KEYS_AS_W1_EXHAUSTIVE_BEHAVIOR_SPEC"
+    ],
+    "preserve": [
+      "W1_TARGET_OWNER_EXHAUSTIVE_BEHAVIOR_SPECIFICATION_OPEN",
+      "W2_IMPLEMENTATION_LEVEL_COMPLETE_CHARACTERIZATION_OPEN",
+      "W3_UNIVERSAL_BEHAVIORAL_DOMINANCE_DOMAIN_EQUIVALENCE_OPEN"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_PROOF_THAT_ANTHROPIC_HAS_NO_EXHAUSTIVE_PRIVATE_SPEC",
+    "NO_CLAIM_MODELS_API_FEATURE_SCHEMA_IS_UNIMPORTANT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

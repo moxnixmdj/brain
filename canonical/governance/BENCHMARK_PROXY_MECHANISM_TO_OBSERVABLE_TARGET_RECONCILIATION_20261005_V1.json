@@ -1,0 +1,216 @@
+{
+  "schema": "PROJECT_BRAIN_BENCHMARK_PROXY_MECHANISM_TO_OBSERVABLE_TARGET_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIVE_REGISTRY_DERIVED_SCOPE_ROOTS_REDUCED_TO_ONE_EXPLICIT_TARGET_ENTAILED_EDGE_PLUS_OBSERVABLE_SCOPE_AUDIT__ZERO_CREDIT",
+  "objective": "Reconcile the newer five-root benchmark-proxy scope frontier with the already-active target-behavior-before-mechanism guard. Remove exact implementation/residual mechanisms from mandatory family scope work unless the frozen Opus target explicitly requires them; preserve every observable family behavior, public threshold, and open scope dimension.",
+  "authorities": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "target_rule": "USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION"
+    },
+    "target_behavior_guard": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1.json",
+      "git_blob_sha": "f9fff2497d9a27da64ecffcd12f4cca78dc2e4ea",
+      "subject_path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_20261005_V1.json",
+      "subject_git_blob_sha": "251cac9c9f7892e26ca90f2f5118f31e1df02099"
+    },
+    "current_five_root_frontier": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V4.json",
+      "git_blob_sha": "4df5d3b73a5f25fd37c4c4e115c6fbcfaa9bb9c9",
+      "activation_path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V4_ACTIVATION_V1.json",
+      "activation_git_blob_sha": "07f012e596d5c504a29a125b34988a770e04b5fd"
+    },
+    "five_family_observable_task_union": {
+      "path": "canonical/governance/PUBLIC_BAR_TASK_UNION_SCOPE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2295a03fe9090e6842c6bd850b7bca67d1f71131"
+    },
+    "target_conditioned_task_union": {
+      "path": "canonical/governance/PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_20261005_V1.json",
+      "git_blob_sha": "d2a204be38378841c353decad6368af66aa48724"
+    }
+  },
+  "conflict": {
+    "statement": "The V4 five-root frontier still schedules registry-derived residual mechanisms as family scope roots, while the active guard forbids mandatory acceptance scope from registry incidence without explicit target entailment.",
+    "v4_active_root_count": 5,
+    "guard_registry_derived_surviving_edges": 12,
+    "guard_direct_explicit_target_entailment_edges": 1,
+    "resolution_rule": "ACTIVE_TARGET_BEHAVIOR_GUARD_CONTROLS_MANDATORY_SCOPE__REGISTRY_RESIDUALS_REMAIN_OPTIONAL_SUFFICIENT_EVIDENCE_ROUTES_UNLESS_TARGET_ENTAILMENT_IS_PROVED"
+  },
+  "root_reclassification": [
+    {
+      "id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "edge_rows": [
+        {
+          "family": "BUSINESS_WORKFLOW_AUTOMATION",
+          "classification": "SUFFICIENT_ROUTE_NOT_NECESSARY_TARGET_BEHAVIOR",
+          "mandatory_from_registry_incidence": false,
+          "preserved_target_obligation": "REAL_MULTI_APPLICATION_END_TO_END_WORKFLOW_SUCCESS"
+        },
+        {
+          "family": "COMPUTER_AND_BROWSER_USE",
+          "classification": "EXPLICIT_TARGET_BEHAVIOR",
+          "mandatory_from_registry_incidence": true,
+          "preserved_target_obligation": null
+        }
+      ],
+      "mandatory_exact_mechanism_edges_after_guard": [
+        "COMPUTER_AND_BROWSER_USE"
+      ],
+      "mandatory_exact_mechanism_edge_count": 1,
+      "disposition": "PRESERVE_ONLY_EXPLICIT_TARGET_ENTAILED_FAMILY_EDGE__DELETE_OTHER_FANOUT_FROM_MANDATORY_MECHANISM_SCOPE"
+    },
+    {
+      "id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "edge_rows": [
+        {
+          "family": "ADVANCED_AGENTIC_CODING",
+          "classification": "OUT_OF_SCOPE_UNDER_CURRENT_FROZEN_FAMILY_WORDING",
+          "mandatory_from_registry_incidence": false,
+          "preserved_target_obligation": null
+        }
+      ],
+      "mandatory_exact_mechanism_edges_after_guard": [],
+      "mandatory_exact_mechanism_edge_count": 0,
+      "disposition": "DELETE_FROM_MANDATORY_EXACT_MECHANISM_SCOPE_REPAIR__PRESERVE_OBSERVABLE_TARGET_AND_OPTIONAL_EVIDENCE_ROUTE"
+    },
+    {
+      "id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "edge_rows": [
+        {
+          "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+          "classification": "SUFFICIENT_MECHANISM_ONLY__TARGET_ENTAILMENT_NOT_PROVED",
+          "mandatory_from_registry_incidence": false,
+          "preserved_target_obligation": null
+        },
+        {
+          "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+          "classification": "PARTIAL_TARGET_ALIGNMENT__EXACT_MECHANISM_NOT_ENTAILED",
+          "mandatory_from_registry_incidence": false,
+          "preserved_target_obligation": null
+        }
+      ],
+      "mandatory_exact_mechanism_edges_after_guard": [],
+      "mandatory_exact_mechanism_edge_count": 0,
+      "disposition": "DELETE_FROM_MANDATORY_EXACT_MECHANISM_SCOPE_REPAIR__PRESERVE_OBSERVABLE_TARGET_AND_OPTIONAL_EVIDENCE_ROUTE"
+    },
+    {
+      "id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "edge_rows": [
+        {
+          "family": "ADVANCED_AGENTIC_CODING",
+          "classification": "SUFFICIENT_MECHANISM_ONLY__TARGET_ENTAILMENT_NOT_PROVED",
+          "mandatory_from_registry_incidence": false,
+          "preserved_target_obligation": "AMBIGUOUS_MULTI_FILE_CHANGE_CORRECTNESS_AND_SELF_CHECKING_OUTCOME"
+        },
+        {
+          "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+          "classification": "SUFFICIENT_MECHANISM_ONLY__TARGET_ENTAILMENT_NOT_PROVED",
+          "mandatory_from_registry_incidence": false,
+          "preserved_target_obligation": null
+        }
+      ],
+      "mandatory_exact_mechanism_edges_after_guard": [],
+      "mandatory_exact_mechanism_edge_count": 0,
+      "disposition": "DELETE_FROM_MANDATORY_EXACT_MECHANISM_SCOPE_REPAIR__PRESERVE_OBSERVABLE_TARGET_AND_OPTIONAL_EVIDENCE_ROUTE"
+    },
+    {
+      "id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "edge_rows": [
+        {
+          "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+          "classification": "TARGET_ENTAILMENT_NOT_PROVED_FOR_WHOLE_FAMILY",
+          "mandatory_from_registry_incidence": false,
+          "preserved_target_obligation": null
+        },
+        {
+          "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+          "classification": "ADJACENT_NOT_ENTAILED",
+          "mandatory_from_registry_incidence": false,
+          "preserved_target_obligation": null
+        },
+        {
+          "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+          "classification": "TARGET_ENTAILMENT_NOT_PROVED_FOR_CURRENT_FROZEN_SENTENCE",
+          "mandatory_from_registry_incidence": false,
+          "preserved_target_obligation": null
+        }
+      ],
+      "mandatory_exact_mechanism_edges_after_guard": [],
+      "mandatory_exact_mechanism_edge_count": 0,
+      "disposition": "DELETE_FROM_MANDATORY_EXACT_MECHANISM_SCOPE_REPAIR__PRESERVE_OBSERVABLE_TARGET_AND_OPTIONAL_EVIDENCE_ROUTE"
+    }
+  ],
+  "recomputed": {
+    "prior_v4_exact_mechanism_root_count": 5,
+    "prior_v4_exact_mechanism_edge_occurrences": 10,
+    "explicit_target_entailed_exact_mechanism_edges": [
+      {
+        "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "family": "COMPUTER_AND_BROWSER_USE"
+      }
+    ],
+    "explicit_target_entailed_exact_mechanism_edge_count": 1,
+    "mandatory_exact_mechanism_root_ids": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+    ],
+    "mandatory_exact_mechanism_root_count": 1,
+    "five_family_observable_basis_leaf_count": 40,
+    "five_family_open_configuration_identity_count": 1,
+    "open_configuration_identity_dimension": "MULTIMODAL_OR_NON_TEXT_INPUT_WHERE_PRESENT__HLE_WITH_TOOLS_CONDITION_IDENTITY"
+  },
+  "exact_result": {
+    "browser_visual_grounding": "MANDATORY_ONLY_FOR_COMPUTER_AND_BROWSER_USE__NOT_FOR_BUSINESS_WORKFLOW_AUTOMATION_BY_TARGET_WORDING",
+    "cad": "NOT_A_MANDATORY_ADVANCED_AGENTIC_CODING_TARGET_BEHAVIOR_UNDER_FROZEN_WORDING",
+    "specification_acceptance_model": "NOT_A_MANDATORY_CODING_OR_MULTIDISCIPLINARY_TARGET_MECHANISM__PRESERVE_CORRECTNESS_SELF_CHECKING_OBSERVABLE_OUTCOMES",
+    "iterative_research_controller": "NOT_A_MANDATORY_MULTIDISCIPLINARY_OR_SCIENTIFIC_CONTROLLER_IMPLEMENTATION__PRESERVE_LONG_HORIZON_SCIENTIFIC_AND_TOOL_AUGMENTED_OUTCOMES",
+    "synthesis_typed_domain": "DO_NOT_USE_THREE_PROXY_FAMILY_REGISTRY_INCIDENCES_TO_MAKE_THE_EXACT_SYNTHESIS_TRANSFORM_MANDATORY__PRESERVE_COMMUNICATION_AND_SYNTHESIS_TARGET_AND_ITS_OWN_ROOT2_ROOT3_WORK_SEPARATELY",
+    "five_public_bar_family_new_residuals": "ZERO_CURRENTLY_MANDATORY_NEW_BEHAVIORAL_RESIDUALS_AFTER_TARGET_CONDITIONING__NOT_SCOPE_CLOSURE"
+  },
+  "scheduler_delta": {
+    "delete": [
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001_AS_MANDATORY_ADVANCED_AGENTIC_CODING_SCOPE_ROOT",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001_AS_MANDATORY_ADVANCED_AGENTIC_CODING_OR_MULTIDISCIPLINARY_SCOPE_ROOT",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001_AS_MANDATORY_MULTIDISCIPLINARY_OR_SCIENTIFIC_SCOPE_ROOT",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_THREE_PROXY_FAMILY_INCIDENCES_AS_AUTOMATIC_MANDATORY_SCOPE_ROOT",
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001_AS_MANDATORY_BUSINESS_WORKFLOW_AUTOMATION_SCOPE_ROOT"
+    ],
+    "preserve": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001_FOR_COMPUTER_AND_BROWSER_USE_AS_EXPLICIT_TARGET_ENTAILED_BEHAVIOR",
+      "ALL_PUBLIC_FIXED_AND_MATCHED_BENCHMARK_THRESHOLDS",
+      "FIVE_FAMILY_40_LEAF_OBSERVABLE_SCOPE_AUDIT",
+      "HLE_WITH_TOOLS_MULTIMODAL_OR_NON_TEXT_SCOPE_IDENTITY_CHECK",
+      "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_AS_CONDITIONAL_CANDIDATE_ONLY",
+      "SYNTHESIS_MATCHED_QUALITY_AND_TYPED_INPUT_SCOPE_WORK_FOR_COMMUNICATION_AND_SYNTHESIS_OR_OTHER_EXPLICITLY_ENTAILED_TARGET_SCOPE",
+      "ALL_OPTIONAL_MECHANISM_RECEIPTS_AS_SUFFICIENT_EVIDENCE_WHERE_SCOPE_STRENGTH_IS_PROVED"
+    ],
+    "next": [
+      "VERIFY_SCOPE_STRENGTH_ONLY_FOR_OBSERVABLE_DEPENDENCY_EDGES_THAT_REMAIN_LOAD_BEARING_AFTER_TARGET_CONDITIONING",
+      "RESOLVE_HLE_WITH_TOOLS_MULTIMODAL_CONFIGURATION_IDENTITY",
+      "AUDIT_COMPUTER_AND_BROWSER_USE_OSWORLD_SCOPE_AGAINST_ITS_EXPLICIT_ARBITRARY_APPLICATION_PLUS_VISUAL_GROUNDING_TARGET",
+      "DO_NOT_SPEND_FRESH_REALITY_ON_QUARANTINED_EXACT_MECHANISMS_WITHOUT_NEW_TARGET_ENTAILMENT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_WHOLE_FAMILY_SCOPE_CLOSURE",
+    "NO_PUBLIC_BAR_PERFORMANCE_CREDIT",
+    "NO_DELETION_OF_OBSERVABLE_TARGET_BEHAVIORS",
+    "NO_CLAIM_QUARANTINED_MECHANISMS_ARE_USELESS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

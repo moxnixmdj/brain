@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_FIVE_STANDALONE_MECHANISM_ENTAILMENT_REDUCTION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_FIVE_SET_INTERSECTED_WITH_ACTIVE_ENTAILMENT_GUARD__ONE_DIRECT_TARGET_EDGE_FOUR_QUARANTINED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/FIVE_STANDALONE_MECHANISM_ENTAILMENT_REDUCTION_20261005_V1.json",
+    "git_blob_sha": "5f56aff3073ac7e5113805915fa0d37fbb273282"
+  },
+  "recomputed_authorities": {
+    "five_program_source": {
+      "path": "canonical/governance/SEVEN_LEAF_PERFORMANCE_OBLIGATION_COMPRESSION_V1.json",
+      "git_blob_sha": "fb8f0dfd2d500015e058523a9ef644e8efe2be11"
+    },
+    "five_program_verification": {
+      "path": "canonical/verification/SEVEN_LEAF_PERFORMANCE_OBLIGATION_COMPRESSION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_7_EQUALS_2_PLUS_5_PARTITION__SCOPE_AND_PREDICATE_BINDINGS_MATCH__ZERO_CREDIT"
+    },
+    "entailment_subject": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_20261005_V1.json",
+      "git_blob_sha": "251cac9c9f7892e26ca90f2f5118f31e1df02099"
+    },
+    "entailment_activation": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1.json",
+      "activation_commit": "69f3c05e6be905c3d3a17f4a0d024f025e96547c",
+      "scheduling_authority": true
+    }
+  },
+  "checks": {
+    "prior_standalone_set_exact": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+    ],
+    "specification_leaf_target_entailment_proved": false,
+    "iterative_research_leaf_exact_mechanism_target_entailment_proved": false,
+    "structured_method_leaf_target_entailment_proved": false,
+    "cad_leaf_in_current_frozen_coding_family_scope": false,
+    "browser_visual_leaf_explicit_target_entailment_proved": true,
+    "browser_visual_target_family": "COMPUTER_AND_BROWSER_USE",
+    "quarantined_count": 4,
+    "preserved_direct_target_count": 1,
+    "set_cardinality_recomputed": "5=4+1",
+    "broad_family_target_deletion_count": 0,
+    "benchmark_threshold_deletion_count": 0,
+    "acceptance_credit_delta": 0
+  },
+  "verified_consequence": [
+    "THE_PRIOR FIVE STANDALONE PERFORMANCE PROGRAM LABELS CANNOT ALL REMAIN MANDATORY SPECIFIC-MECHANISM OBLIGATIONS UNDER THE LATER ACTIVE ENTAILMENT GUARD",
+    "ONLY BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001 CURRENTLY HAS DIRECT TARGET-ENTAILMENT AMONG THE FIVE",
+    "THE OTHER FOUR MAY REMAIN OPTIONAL SUFFICIENT EVIDENCE ROUTES BUT MUST NOT TRIGGER MANDATORY MECHANISM-SPECIFIC EXECUTION OR FRESH REALITY",
+    "ALL OBSERVABLE FAMILY TARGETS AND STRICT OPUS55 THRESHOLDS REMAIN OPEN EXACTLY AS BEFORE"
+  ],
+  "verification_class": "DETERMINISTIC_CURRENT_MAIN_CONNECTOR_RECOMPUTATION__SCHEDULING_PRECEDENCE_ONLY__NOT_PERFORMANCE_VERIFICATION",
+  "hard_nonclaims": [
+    "NO_ATOMIC_PREDICATE_CLOSED",
+    "NO_FAMILY_PROMOTED",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

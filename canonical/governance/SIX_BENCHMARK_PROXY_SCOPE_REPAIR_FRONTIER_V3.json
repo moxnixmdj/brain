@@ -1,0 +1,153 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TRUTH_REPAIR_OF_V2__SYNTHESIS_WHOLE_LEAF_SCOPE_REOPENED_FAIL_CLOSED__STRUCTURED_METHOD_ONLY_SCOPE_CLOSED__SIX_ACTIVE_REGISTRY_SCOPE_ROOTS__ZERO_CREDIT",
+  "objective": "Supersede V2 after a valid countermodel showed SYNTHESIS_SCOPE_CERTIFICATE_V1 proves the acceptance-predicate dimension relation but not universal whole-leaf typed input-domain completeness.",
+  "supersedes": {
+    "candidate": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2.json",
+      "git_blob_sha": "629fb370b6da7296685e9e79c2e2a76c25fd9106"
+    },
+    "activation": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2_ACTIVATION_V1.json",
+    "reason": "V2_OVEREXTENDED_PREDICATE_LEVEL_SYNTHESIS_SCOPE_CERTIFICATE_TO_WHOLE_BEHAVIOR_INPUT_DOMAIN"
+  },
+  "authorities": {
+    "six_family_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "fdc70d49bfe3f4691fab728f2016242632018ce4"
+    },
+    "structured_method_scope_audit": {
+      "path": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json",
+      "git_blob_sha": "1db04e3c2c523dfe5f2ebe719b7c63dc9ccd808e"
+    },
+    "synthesis_predicate_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "synthesis_overextension_countermodel": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "c1b2d488dfd38c27b533f98424036be874d5e829"
+    },
+    "scientific_hypothesis_candidate": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "f0c6e15e6af698a80895eedf2c39bb874b4697b8"
+    }
+  },
+  "preserved_narrow_synthesis_proof": {
+    "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "predicate_scope_relation_closed": true,
+    "root_class": "ROOT2_ONLY",
+    "whole_behavioral_leaf_scope_complete": false,
+    "reason": "TARGET_PREDICATE_SCOPE_SUBSET_OF_WITNESS_SCOPE_DOES_NOT_IMPLY_UNIVERSAL_TOTALITY_OVER_ALL_ADMISSIBLE_EVIDENCE_AUDIENCE_CONSTRAINT_INPUTS"
+  },
+  "scope_closed_performance_open": [
+    {
+      "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING"
+      ],
+      "authority": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json",
+      "unresolved_scope_dimensions": 0,
+      "scope_gate_verdict": "ADMISSIBLE_SUBSTITUTION",
+      "remaining": "PERFORMANCE_ACCEPTANCE_ONLY"
+    }
+  ],
+  "active_registry_scope_repair_roots": [
+    {
+      "id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "fanout": [
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE"
+      ]
+    },
+    {
+      "id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING"
+      ]
+    },
+    {
+      "id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "fanout": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ]
+    },
+    {
+      "id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "fanout": [
+        "PROFESSIONAL_KNOWLEDGE_WORK"
+      ]
+    },
+    {
+      "id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+      ]
+    },
+    {
+      "id": "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "fanout": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ],
+      "closure": "PROVE_TOTALITY_OVER_EVERY_ADMISSIBLE_NORMALIZED_EVIDENCE_AUDIENCE_CONSTRAINT_INPUT_OR_LOSSLESSLY_PARTITION_AND_CLOSE_RESIDUAL_CLASSES",
+      "preserve_existing_predicate_certificate": true
+    }
+  ],
+  "candidate_new_behavior_quarantine": {
+    "behavior_id": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+    "current_active_registry_member": false,
+    "current_state": "CANDIDATE__SEPARATE_ADMISSION_OR_STRONGER_COVERAGE_REQUIRED",
+    "note": "A_NEWER_CANDIDATE_FACTORIZATION_REDUCES_THIS_TO_OWNED_DETERMINISTIC_SUBTRANSFORMS_PLUS_ONE_OPEN_SEMANTIC_RESIDUAL_BUT_INDEPENDENT_VERIFICATION_IS_STILL_REQUIRED"
+  },
+  "recomputed_frontier": {
+    "prior_v1_unique_surviving_behavior_leaves": 7,
+    "structurally_scope_closed_unique": 1,
+    "active_registry_scope_repair_root_count": 6,
+    "scope_closed_occurrences_removed": 1,
+    "active_registry_scope_open_occurrences": 11,
+    "synthesis_three_family_fanout_compressed_to_one_shared_scope_root": true,
+    "quarantined_candidate_new_behavior_count": 1
+  },
+  "scheduling_delta": {
+    "delete": [
+      "V2_CLAIM_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_WHOLE_LEAF_SCOPE_CLOSED",
+      "THREE_SEPARATE_FAMILY_LOCAL_SYNTHESIS_SCOPE_PROGRAMS",
+      "FURTHER_SCOPE_WORK_FOR_STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+    ],
+    "activate": [
+      "ONE_SHARED_SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS_ROOT",
+      "FIVE_OTHER_ACTIVE_REGISTRY_SCOPE_REPAIR_ROOTS"
+    ],
+    "preserve": [
+      "SYNTHESIS_PREDICATE_LEVEL_ROOT3_SCOPE_CERTIFICATE",
+      "ALL_PERFORMANCE_ACCEPTANCE_OBLIGATIONS",
+      "SCIENTIFIC_HYPOTHESIS_CANDIDATE_QUARANTINE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_WHOLE_LEAF_SYNTHESIS_SCOPE_COMPLETENESS_CLAIM",
+    "NO_STRUCTURED_METHOD_PERFORMANCE_CLOSURE",
+    "NO_NEW_ACTIVE_BEHAVIOR_CONTRACT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

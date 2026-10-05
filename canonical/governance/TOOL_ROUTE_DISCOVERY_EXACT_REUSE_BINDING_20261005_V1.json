@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_ROUTE_DISCOVERY_EXACT_REUSE_BINDING_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__DEDUCTIVE_EXACT_CONTRACT_REUSE_BINDING__ACCEPTED_TOOL_ROUTE_MAY_DISCHARGE_IDENTICAL_RESIDUAL_ACROSS_SIX_FAMILY_LABELS_IF_INDEPENDENT_RECOMPUTATION_PASSES__ZERO_NEW_REALITY__ZERO_CREDIT",
+  "objective": "Prove or falsify the second critical-path reuse candidate in FIVE_FAMILY_SHARED_RESIDUAL_SCOPE_CLOSURE_CUT_20261005_V1 without new reality spend and without broadening the canonical contract to internet-wide tool identity discovery.",
+  "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+  "canonical_scope_boundary": {
+    "inputs": "Current subproblem contract, available tool schemas/capabilities, historical tool outcomes and active constraints",
+    "scope": "Unknown/changing tool ecosystem to verified usable route",
+    "excluded_claim": "Internet-wide completeness of tool identity discovery is not part of this reuse theorem; the independently proved protocol exposes the finite current tool identities and hides capability truth.",
+    "reason": "The formal universal proof is exact only for the canonical observable finite tool-set decision boundary and its hidden capability uncertainty."
+  },
+  "authorities": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "shared_residual_cut": {
+      "path": "canonical/governance/FIVE_FAMILY_SHARED_RESIDUAL_SCOPE_CLOSURE_CUT_20261005_V1.json",
+      "git_blob_sha": "61a8764d8e48b2b8abefcacb0d474226f69ea8c9"
+    },
+    "universal_scope_receipt": {
+      "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+    },
+    "acceptance_reduction_receipt": {
+      "path": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "913d171b3c855000d322e183b142b3200eeaf0a9"
+    },
+    "universal_scope_relation": {
+      "path": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json",
+      "git_blob_sha": "009ab8e14ee14b76d799a826de34d07586a69918"
+    },
+    "universal_scope_certificate": {
+      "path": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dd94bef997603ddd71224100d33fe3889a93d3c4"
+    },
+    "ownership_promotion": {
+      "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+      "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+    },
+    "operative_artifact": {
+      "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+      "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+    }
+  },
+  "exact_reuse_obligations": {
+    "frozen_behavior_id": {
+      "candidate_verdict": "PASS",
+      "evidence": [
+        "TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1 binds behavior_id TOOL_ROUTE_DISCOVERY_AND_SELECTION_001.",
+        "TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1 binds the same behavior_id.",
+        "The behavioral registry contains one global contract object under this exact id."
+      ]
+    },
+    "contract_information_boundary": {
+      "candidate_verdict": "PASS_WITH_EXPLICIT_BOUNDARY",
+      "evidence": [
+        "The registry input starts from available tool schemas/capabilities rather than an unbounded unknown universe of identities.",
+        "The universal relation proves every finite observable current tool set with hidden capability truth, truthful bounded safe probes, epoch receipts and public version changes.",
+        "The universal proof explicitly rejects an internet-wide identity-completeness claim; this theorem preserves that exclusion rather than silently widening scope."
+      ]
+    },
+    "success_failure_semantics": {
+      "candidate_verdict": "PASS",
+      "evidence": [
+        "Universal scope proves least-cost sufficient route selection, correct no-route escalation, finite hidden capability search termination, transfer and version invalidation.",
+        "Acceptance reduction independently verifies scope_complete=true, objective_ceiling=true, brain_value=1 and proof kind ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS.",
+        "Universal proof uses no empirical generalization and does not depend on the historical 180/180 sample."
+      ]
+    },
+    "operative_route_identity": {
+      "candidate_verdict": "PASS",
+      "evidence": [
+        "Universal scope receipt binds canonical/runtime/tool_discovery_information_safe_candidate.py blob 64c02edd568d95ec5ed54b7b8122183ce5b82e17.",
+        "Accepted ownership promotion binds TOOL_DISCOVERY_SELECTION_AND_LEARNING to the identical path/blob.",
+        "Accepted ownership reports exact_receipt_binding=true, external_target_capability_provider=false and no forbidden provider/escape hits."
+      ]
+    },
+    "proof_scope": {
+      "candidate_verdict": "PASS",
+      "evidence": [
+        "Universal scope verification is an independent public-runner universal formal scope proof for the frozen hidden-tool protocol.",
+        "Acceptance reduction independently closes TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR at the objective ceiling with scope completeness.",
+        "The accepted Tool Discovery family maps exactly to TOOL_ROUTE_DISCOVERY_AND_SELECTION_001 in the canonical registry."
+      ]
+    }
+  },
+  "global_contract_incidence": {
+    "mapped_family_count": 6,
+    "mapped_families": [
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "COMPUTER_AND_BROWSER_USE",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "MULTI_CAPABILITY_COMPOSITION"
+    ],
+    "already_accepted_anchor_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "additional_family_local_slots_if_verified": 5,
+    "five_family_cut_slots_if_verified": 1,
+    "five_family_cut_family": "BUSINESS_WORKFLOW_AUTOMATION"
+  },
+  "theorem": {
+    "premise": "Family accounting references the same global behavior_id, and the accepted Tool Discovery route is independently bound to the exact operative bytes plus a universal formal proof over the canonical observable finite-tool-set information boundary.",
+    "conclusion": "Within that exact canonical information boundary, the accepted TOOL_ROUTE_DISCOVERY_AND_SELECTION_001 proof is eligible for contract-level reuse wherever the identical residual appears. No internet-wide tool-identity completeness or adjacent browser/action-selection behavior is inherited.",
+    "discharged_unique_contracts_in_five_family_cut_if_verified": 1
+  },
+  "fail_closed_checks": [
+    "Recompute every cited current blob.",
+    "Verify the registry still maps exactly the six listed families to this behavior_id.",
+    "Verify TOOL_DISCOVERY_SELECTION_AND_LEARNING still maps exactly to this one residual contract.",
+    "Verify universal scope receipt still reports universal_scope_proved=true, uses_empirical_generalization=false and internet_wide_tool_identity_completeness_claim=false.",
+    "Verify acceptance reduction remains scope_complete at objective ceiling.",
+    "Verify accepted ownership still binds the identical operative path/blob and contains no target-capability provider.",
+    "Reject any interpretation that widens this proof to unenumerated internet-wide tool identity discovery.",
+    "Do not grant family acceptance, browser-grounding, public-bar or whole-family credit from this residual reuse alone."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "next": "INDEPENDENTLY_RECOMPUTE_EXACT_SOURCE_BLOBS_SCOPE_BOUNDARY_GLOBAL_INCIDENCE_AND_ROUTE_IDENTITY__IF_PASS_ACTIVATE_CONTRACT_REUSE_AND_RECOMPUTE_FIVE_FAMILY_SCOPE_CLOSURE"
+}

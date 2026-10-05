@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_OPUS55_TARGET_FRESHNESS_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__GDPVAL_TARGET_EPOCH_FIREWALL__CURRENT_OWNER_EPOCH_1867__HISTORICAL_1846_EXACT_IDENTITY_ONLY__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/GDPVAL_OPUS55_TARGET_FRESHNESS_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "31549db051bd6b3111d02fa4b48b5174df2d350b"
+  },
+  "verification": {
+    "path": "canonical/verification/GDPVAL_OPUS55_TARGET_FRESHNESS_CONNECTOR_BROWSER_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "7a14896420ac57653fabf433dafb5e70141c36bf",
+    "strength": "CONNECTOR_PLUS_CURRENT_PUBLIC_SOURCE_RECOMPUTATION__NOT_INDEPENDENT_PUBLIC_RUNNER"
+  },
+  "effects": [
+    "TREAT_PROWORK_GDPVAL_GE_1846_AS_A_LEGACY_PREDICATE_NAME_NOT_AN_UNCONDITIONAL_CROSS_EPOCH_NUMERIC_AUTHORITY",
+    "IF_BRAIN_USES_CURRENT_GDPVAL_AA_V2_1_OWNER_SCORER_HARNESS_AND_RATING_EPOCH_REQUIRE_OPUS55_TARGET_1867_ELO",
+    "ALLOW_1846_ONLY_IF_EXACT_HISTORICAL_DATASET_HARNESS_SCORER_RATING_EPOCH_AND_OPUS55_CONFIGURATION_IDENTITY_IS_INDEPENDENTLY_BOUND",
+    "OTHERWISE_REQUIRE_MATCHED_SAME_HARNESS_OPUS55_REFERENCE_OR_SCOPE_SAFE_STRONGER_PROOF",
+    "FREEZE_TARGET_EPOCH_BEFORE_ANY_BRAIN_GDPVAL_RESULT_EXPOSURE",
+    "RECOMPUTE_PROFESSIONAL_KNOWLEDGE_WORK_CLOSURE_AND_ANY_EARLY_STOP_CERTIFICATE_AGAINST_THE_SELECTED_TARGET"
+  ],
+  "current_truth": {
+    "professional_knowledge_work_accepted": false,
+    "gdpval_predicate_proved": false,
+    "current_owner_epoch_target_elo": 1867,
+    "legacy_historical_target_elo": 1846,
+    "false_positive_interval_if_legacy_target_is_misapplied_to_current_epoch": "(1846,1867)",
+    "terminal": false
+  },
+  "scheduler_delta": {
+    "delete": [
+      "UNCONDITIONAL_USE_OF_1846_FOR_ANY_CURRENT_OR_UNKNOWN_GDPVAL_AA_V2_1_SCORE_EPOCH"
+    ],
+    "activate": [
+      "GDPVAL_TARGET_EPOCH_IDENTITY_BINDING_BEFORE_SCORE_ACCEPTANCE"
+    ],
+    "preserve": [
+      "ZERO_INCREMENTAL_SPEND",
+      "ZERO_FRESH_REALITY_UNTIL_SEPARATE_AUTHORITY",
+      "PUBLIC_BAR_SCOPE_COMPLETENESS_FIREWALL"
+    ]
+  },
+  "hard_rules": [
+    "NO_RETROACTIVE_REJECTION_OF_A_VALIDLY_BOUND_HISTORICAL_1846_COMPARISON",
+    "NO_CURRENT_EPOCH_ACCEPTANCE_BELOW_1867_ON_THE_CURRENT_OWNER_SCORE_EPOCH",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT_FROM_THIS_ACTIVATION",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__ONE_AUDIT_CANDIDATE_RESIDUAL_IS_NOT_CURRENTLY_TARGET_JUSTIFIED__ZERO_MANDATORY_NEW_RESIDUALS__ONE_CONFIGURATION_IDENTITY_CHECK__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "d2a204be38378841c353decad6368af66aa48724"
+  },
+  "checks": {
+    "task_union_audit_unique_new_residual_count": 1,
+    "task_union_audit_unique_new_residual_id": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+    "task_union_audit_configuration_identity_open_count": 1,
+    "scientific_hypothesis_target_requirement_proved": false,
+    "scientific_hypothesis_mandatory_acceptance_obligation_proved": false,
+    "target_behavior_guard_requires_entailment_for_mandatory_new_behavior": true,
+    "mandatory_new_behavioral_residual_count_after_target_conditioning": 0,
+    "configuration_identity_open_count_after_target_conditioning": 1,
+    "public_threshold_deletion_count": 0,
+    "broad_family_target_deletion_count": 0,
+    "acceptance_credit_delta": 0
+  },
+  "logical_recomputation": [
+    "AUDIT_SET_DIFFERENCE_CANDIDATE_COUNT_EQUALS_ONE",
+    "INDEPENDENT_TARGET_SCOPE_FALSIFICATION_MARKS_THAT_ONE_CANDIDATE_AS_NOT_CURRENTLY_JUSTIFIED_AS_MANDATORY",
+    "ACTIVE_TARGET_BEHAVIOR_GUARD_FORBIDS_PROMOTION_OF_UNPROVED_TARGET MEMBERSHIP_TO_MANDATORY_ACCEPTANCE",
+    "THEREFORE CURRENT_MANDATORY_NEW_BEHAVIORAL_RESIDUAL_COUNT_EQUALS_ZERO",
+    "THE_CANDIDATE_REMAINS_CONDITIONAL_AND_WAKES_ON_NEW_LOAD_BEARING_TARGET_SCOPE_EVIDENCE"
+  ],
+  "remaining_structural_scope_work": [
+    "EXISTING_DEPENDENCY_SCOPE_STRENGTH_RECOMPUTATION",
+    "HLE_WITH_TOOLS_MULTIMODAL_OR_NON_TEXT_CONFIGURATION_IDENTITY"
+  ],
+  "verification_class": "DETERMINISTIC_CURRENT_MAIN_CONNECTOR_RECOMPUTATION__SCHEDULING_AND_SCOPE_PRECEDENCE_ONLY__NOT_PERFORMANCE_VERIFICATION",
+  "hard_nonclaims": [
+    "NO_CLAIM_OPUS55_LACKS_SCIENTIFIC_HYPOTHESIS_FORMATION",
+    "NO_CLAIM_FIVE_PUBLIC_BAR_FAMILIES_ARE_ACCEPTED",
+    "NO_ATOMIC_PREDICATE_CLOSED",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

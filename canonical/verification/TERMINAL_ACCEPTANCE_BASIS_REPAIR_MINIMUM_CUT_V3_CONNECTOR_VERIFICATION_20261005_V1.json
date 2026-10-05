@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_V3_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__V3_REPAIRS_HYPOTHESIS_FORMATION_AND_DIAGRAM_DECOMPOSITION_WITHOUT_NINTH_GROUP_OR_FIFTH_OUTER_PORTFOLIO__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V3.json",
+    "git_blob_sha": "09503a3485a101b45f29c17d6af4f8c488351aad"
+  },
+  "inputs": {
+    "v2": {
+      "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V2.json",
+      "git_blob_sha": "d2867bdcb4e2a721c2dbcde59100627508a7866a"
+    },
+    "scientific_gap": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "f0c6e15e6af698a80895eedf2c39bb874b4697b8"
+    },
+    "creative_repair": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_V2_20261005.json",
+      "git_blob_sha": "02ee9918fc38f3bdee96f847d04e7fd1337b9e46"
+    },
+    "route_reuse": {
+      "path": "canonical/governance/SEVEN_LEAF_EXISTING_ROUTE_REUSE_COMPRESSION_V1.json",
+      "git_blob_sha": "326a4baedb2a04b7d29e4a55a7f1bca2a695ce7a"
+    },
+    "outer_portfolios": {
+      "path": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
+      "git_blob_sha": "7c49e3a44dc9a827e84a12b572ea6b8e9b2fa1f5"
+    }
+  },
+  "recomputation": {
+    "action_group_count": 8,
+    "action_group_count_is_8": true,
+    "unique_action_group_count": 8,
+    "six_benchmark_proxy_scope_families_exact_set": true,
+    "scientific_group_contains_explicit_hypothesis_question_formation": true,
+    "scientific_group_contains_discriminating_test_plan": true,
+    "scientific_group_preserves_selection_update_cell": true,
+    "creative_diagram_children_exactly_match_v2_replacement_basis": true,
+    "every_action_group_has_existing_outer_portfolio_mapping": true,
+    "every_mapped_portfolio_is_one_of_existing_T0_T1_T2_T3": true,
+    "scientific_hypothesis_maps_to_T3": true,
+    "creative_diagram_maps_to_T1": true,
+    "prior_outer_portfolio_count": 4,
+    "required_new_outer_portfolio_count": 0,
+    "preserved_outer_portfolio_count": 4,
+    "seven_proxy_scope_leaves_reuse_existing_routes": true,
+    "new_scope_definitions_for_seven": 0,
+    "legacy_registry_count_changed": false,
+    "legacy_proved_count_changed": false,
+    "root1_positive_gap_changed": false
+  },
+  "consequence": [
+    "V2_IS_STRUCTURALLY_STALE_FOR_LITERAL_FINALITY_BECAUSE_HYPOTHESIS_FORMATION_WAS_NOT_EXPLICIT_AND_DIAGRAM_REPAIR_WAS_NOT_MINIMALLY_DECOMPOSED",
+    "V3_PRESERVES_EIGHT_ACTION_GROUPS",
+    "V3_PRESERVES_EXISTING_T0_T1_T2_T3_OUTER_WAVE_WITH_ZERO_NEW_PORTFOLIOS_IF_REFROZEN_BEFORE_RESULTS",
+    "SCIENTIFIC_HYPOTHESIS_FORMATION_BECOMES_AN_EXPLICIT_GROUP_E_CELL_AND_T3_SLICE",
+    "DIAGRAM_OUTPUT_NO_LONGER_OPENS_A_NEW_BROAD_LEARNED_CAPABILITY_BY_DEFAULT",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_AN_INDEPENDENT_PUBLIC_RUNNER_RECEIPT",
+    "NO_CLAIM_HYPOTHESIS_FORMATION_PARITY_IS_PROVED",
+    "NO_CLAIM_CREATIVE_OR_DIAGRAM_PARITY_IS_PROVED",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

@@ -1,0 +1,448 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BAR_TASK_UNION_SCOPE_COVERAGE_AUDIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SOURCE_BACKED_TASK_UNION_TO_FROZEN_BASIS_MAPPING__ONE_NEW_UNIQUE_RESIDUAL_PERSISTS__ZERO_CREDIT",
+  "objective": "Execute the activated public-task-union coverage audit for the five public-bar-only families without granting benchmark scope beyond explicit benchmark-owner descriptions.",
+  "authorities": {
+    "scope_compiler": {
+      "path": "canonical/governance/PUBLIC_BAR_SCOPE_PARTITION_COMPILER_20261005_V1.json",
+      "git_blob_sha": "112a06136e077a72de8e29ebbf9f242f129067c5"
+    },
+    "deduplication": {
+      "path": "canonical/governance/PUBLIC_BAR_SCOPE_GAP_DEDUPLICATION_20261005_V1.json",
+      "git_blob_sha": "c52e499b54dd9f5eaed80647dd855615448752b0"
+    }
+  },
+  "source_snapshots": [
+    {
+      "source": "https://artificialanalysis.ai/evaluations/terminalbench-4-0",
+      "observed_scope": "66 complex terminal tasks spanning software, machine learning, science, operations, security, hardware and media; each task is terminal-executed and passes only if every task-specific test passes."
+    },
+    {
+      "source": "https://prod.cursor.com/evals",
+      "observed_scope": "CursorBench 4.0 uses ambiguous multi-file tasks from real Cursor sessions; v4 adds long-horizon edit, refactor, investigation, intent understanding, job management and design-adherence problems; earlier suite scope includes codebase understanding, bug finding, planning and code review."
+    },
+    {
+      "source": "https://cognition.com/blog/frontier-code-1-1",
+      "observed_scope": "FrontierCode 1.1 evaluates code correctness and code quality with refined grading and internet-use rules."
+    },
+    {
+      "source": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+      "observed_scope": "GDPval-AA v2.1 uses 220 real-world tasks across 44 occupations and 9 industries; agents use shell/web and produce documents, slides, diagrams and spreadsheets."
+    },
+    {
+      "source": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "observed_scope": "AA-Briefcase v1.1 has 91 tasks across four multi-week knowledge-work projects with thousands of input files; realistic workflows include data science, product management and corporate strategy; rubric checks include required content, citations and planted cross-source conflict resolution."
+    },
+    {
+      "source": "https://arxiv.org/abs/2604.18934",
+      "observed_scope": "AutomationBench evaluates cross-application REST workflow orchestration, autonomous API discovery, policy adherence and correct end-state writes across Sales, Marketing, Operations, Support, Finance and HR with irrelevant/misleading records."
+    },
+    {
+      "source": "https://github.com/zapier/AutomationBench",
+      "observed_scope": "Public implementation spans 47 simulated SaaS tools and six business domains; tasks initialize realistic app state and grade end-state correctness."
+    },
+    {
+      "source": "https://www.lastexam.ai/",
+      "observed_scope": "Humanity's Last Exam is a frontier expert benchmark with roughly 2,500 questions across more than 100 subjects and multimodal content; tool-augmented published conditions add search/code capability but remain exam-style question answering."
+    },
+    {
+      "source": "https://www.terminal-bench-science.ai/announcement",
+      "observed_scope": "Terminal-Bench-Science 0.1 contains 70 expert-curated research-workflow tasks across five scientific domains, including data analysis, statistics, simulation, optimization, theorem proving, image reconstruction, signal processing, inverse problems, sensor calibration, model fitting, classification and scientific ML. Its own overview distinguishes these workflows from human-judgment activities such as defining research questions, forming hypotheses, interpreting/validating results and communicating findings."
+    }
+  ],
+  "mappings": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "leaves": [
+        {
+          "id": "UNFAMILIAR_REPOSITORY_INTENT_AND_CODEBASE_UNDERSTANDING",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "CursorBench"
+          ]
+        },
+        {
+          "id": "FEATURE_IMPLEMENTATION_AND_MULTI_FILE_EDIT",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "CursorBench",
+            "Terminal-Bench",
+            "FrontierCode"
+          ]
+        },
+        {
+          "id": "BUG_FINDING_DEBUGGING_AND_ROOT_CAUSE_LOCALIZATION",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION_FOR_BUGFINDING_AND_INVESTIGATION__CAUSAL_RECOVERY_DEPENDENCY_FOR_STRONGER_ROOT_CAUSE_CLAIM",
+          "basis": [
+            "CursorBench"
+          ],
+          "dependency": [
+            "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+            "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR"
+          ]
+        },
+        {
+          "id": "REFACTORING_WITH_BEHAVIOR_PRESERVATION",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "CursorBench",
+            "Terminal-Bench"
+          ]
+        },
+        {
+          "id": "PLANNING_REVIEW_AND_DESIGN_ADHERENCE",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "CursorBench"
+          ]
+        },
+        {
+          "id": "TERMINAL_BUILD_TEST_JOB_AND_OPERATION_EXECUTION",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "Terminal-Bench",
+            "CursorBench"
+          ]
+        },
+        {
+          "id": "LONG_HORIZON_AMBIGUITY_AND_STATE_RETENTION",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION_FOR_LONG_HORIZON_AMBIGUITY__GENERAL_STATE_RETENTION_DEPENDENCY_IF_STRONGER_THAN_TASK_HORIZON",
+          "basis": [
+            "CursorBench"
+          ],
+          "dependency": [
+            "AGENCY_MATCHED_SUCCESS_NONINFERIOR"
+          ]
+        },
+        {
+          "id": "SELF_CHECK_AND_RECOVERY_AFTER_FAILED_CHANGE",
+          "coverage": "EXISTING_DEPENDENCY",
+          "dependency": [
+            "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+            "RECOVERY_TERMINAL_NONINFERIOR",
+            "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+          ]
+        }
+      ],
+      "new_family_specific_residuals": []
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "leaves": [
+        {
+          "id": "MULTI_SOURCE_PROFESSIONAL_RESEARCH_AND_FACT_EXTRACTION",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION_PLUS_EXISTING_RESEARCH_DEPENDENCY",
+          "basis": [
+            "GDPval-AA",
+            "AA-Briefcase"
+          ],
+          "dependency": [
+            "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001"
+          ]
+        },
+        {
+          "id": "ANALYTICAL_REASONING_AND_DECISION_SUPPORT",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "GDPval-AA",
+            "AA-Briefcase"
+          ]
+        },
+        {
+          "id": "DOCUMENT_SPREADSHEET_SLIDE_DIAGRAM_DELIVERABLE_PRODUCTION",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION_PLUS_ARTIFACT_DEPENDENCIES",
+          "basis": [
+            "GDPval-AA",
+            "AA-Briefcase"
+          ],
+          "dependency": [
+            "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+            "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
+          ]
+        },
+        {
+          "id": "MULTI_STAGE_TASK_DEPENDENCY_AND_STATE_RETENTION",
+          "coverage": "DIRECT_PUBLIC_PROJECT_SCOPE_PLUS_EXISTING_AGENCY_DEPENDENCY",
+          "basis": [
+            "AA-Briefcase"
+          ],
+          "dependency": [
+            "AGENCY_MATCHED_SUCCESS_NONINFERIOR"
+          ]
+        },
+        {
+          "id": "CONFLICT_RESOLUTION_AND_SOURCE_FIDELITY",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION_PLUS_SYNTHESIS_INVARIANT",
+          "basis": [
+            "AA-Briefcase"
+          ],
+          "dependency": [
+            "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+            "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+          ]
+        },
+        {
+          "id": "PROFESSIONAL_PRESENTATION_AND_RUBRIC_COMPLIANCE",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION_PLUS_QUALITY_CONTRACT",
+          "basis": [
+            "GDPval-AA",
+            "AA-Briefcase"
+          ],
+          "dependency": [
+            "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
+          ]
+        },
+        {
+          "id": "CROSS_OCCUPATION_AND_CROSS_INDUSTRY_TRANSFER",
+          "coverage": "EXISTING_DEPENDENCY_FOR_TRANSFER_CLAIM",
+          "basis": [
+            "GDPval-AA"
+          ],
+          "dependency": [
+            "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+          ]
+        },
+        {
+          "id": "TOOL_USING_OFFICE_WORKFLOW_COMPLETION",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION_PLUS_TOOL_DEPENDENCY",
+          "basis": [
+            "GDPval-AA",
+            "AA-Briefcase"
+          ],
+          "dependency": [
+            "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
+          ]
+        }
+      ],
+      "new_family_specific_residuals": []
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "leaves": [
+        {
+          "id": "CROSS_APPLICATION_ORCHESTRATION",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "AutomationBench"
+          ]
+        },
+        {
+          "id": "API_OR_TOOL_DISCOVERY",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "AutomationBench"
+          ]
+        },
+        {
+          "id": "BUSINESS_POLICY_AND_GUARDRAIL_COMPLIANCE",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "AutomationBench"
+          ]
+        },
+        {
+          "id": "IRRELEVANT_OR_MISLEADING_RECORD_FILTERING",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "AutomationBench"
+          ]
+        },
+        {
+          "id": "CORRECT_END_STATE_WRITES",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "AutomationBench"
+          ]
+        },
+        {
+          "id": "MULTI_DOMAIN_BUSINESS_TRANSFER",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION_ACROSS_SIX_BUSINESS_DOMAINS",
+          "basis": [
+            "AutomationBench"
+          ]
+        },
+        {
+          "id": "FAILURE_RECOVERY_AND_PARTIAL_PROGRESS_INTEGRITY",
+          "coverage": "EXISTING_DEPENDENCY",
+          "dependency": [
+            "RECOVERY_TERMINAL_NONINFERIOR",
+            "AGENCY_MATCHED_SUCCESS_NONINFERIOR"
+          ]
+        },
+        {
+          "id": "NON_REST_OR_UI_MEDIATED_WORKFLOW_WHERE_CLAIMED",
+          "coverage": "EXISTING_DEPENDENCY_IF_TARGET_SCOPE_INCLUDES_UI_ROUTE",
+          "dependency": [
+            "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+          ]
+        }
+      ],
+      "new_family_specific_residuals": [],
+      "metric_warning": "AutomationBench 40.0 vendor bar and AutomationBench-AA objective-share score are not the same metric identity."
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "leaves": [
+        {
+          "id": "EXPERT_LEVEL_CLOSED_ENDED_REASONING",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "HLE"
+          ]
+        },
+        {
+          "id": "MULTIDOMAIN_TRANSFER",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION_ACROSS_MORE_THAN_100_SUBJECTS",
+          "basis": [
+            "HLE"
+          ]
+        },
+        {
+          "id": "SEARCH_AUGMENTED_EVIDENCE_GATHERING",
+          "coverage": "DIRECT_IN_WITH_TOOLS_CONDITION",
+          "basis": [
+            "HLE with tools"
+          ]
+        },
+        {
+          "id": "CODE_OR_COMPUTATION_TOOL_USE",
+          "coverage": "DIRECT_IN_WITH_TOOLS_CONDITION",
+          "basis": [
+            "HLE with tools"
+          ]
+        },
+        {
+          "id": "MULTIMODAL_OR_NON_TEXT_INPUT_WHERE_PRESENT",
+          "coverage": "CONDITION_IDENTITY_MUST_BE_FROZEN__BASE_HLE_IS_MULTIMODAL_BUT_VENDOR_WITH_TOOLS_SCOPE_MAY_DIFFER",
+          "dependency": []
+        },
+        {
+          "id": "OPEN_ENDED_SYNTHESIS_AND_ARGUMENT",
+          "coverage": "EXISTING_DEPENDENCY",
+          "dependency": [
+            "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+            "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+          ]
+        },
+        {
+          "id": "ITERATIVE_TOOL_PLANNING_AND_REVISION",
+          "coverage": "EXISTING_DEPENDENCY",
+          "dependency": [
+            "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+            "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+          ]
+        },
+        {
+          "id": "CALIBRATED_UNCERTAINTY_AND_ABSTENTION",
+          "coverage": "EXISTING_DEPENDENCY",
+          "dependency": [
+            "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+          ]
+        }
+      ],
+      "new_family_specific_residuals": [],
+      "open_configuration_identity": [
+        "MULTIMODAL_OR_NON_TEXT_INPUT_WHERE_PRESENT"
+      ]
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "leaves": [
+        {
+          "id": "SCIENTIFIC_DATA_ANALYSIS_AND_STATISTICAL_INFERENCE",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "Terminal-Bench-Science"
+          ]
+        },
+        {
+          "id": "SIMULATION_OPTIMIZATION_AND_MODEL_FITTING",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "Terminal-Bench-Science"
+          ]
+        },
+        {
+          "id": "THEOREM_PROVING_AND_MATHEMATICAL_WORKFLOW",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "Terminal-Bench-Science"
+          ]
+        },
+        {
+          "id": "SIGNAL_IMAGE_INVERSE_AND_SENSOR_WORKFLOWS",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "Terminal-Bench-Science"
+          ]
+        },
+        {
+          "id": "SCIENTIFIC_CODE_SOFTWARE_AND_ARTIFACT_EXECUTION",
+          "coverage": "DIRECT_PUBLIC_TASK_UNION",
+          "basis": [
+            "Terminal-Bench-Science"
+          ]
+        },
+        {
+          "id": "ITERATIVE_LONG_HORIZON_WORKFLOW_CONTROL",
+          "coverage": "DIRECT_AGENTIC_WORKFLOW_SCOPE_PLUS_EXISTING_RESEARCH_CONTROL_DEPENDENCY",
+          "basis": [
+            "Terminal-Bench-Science"
+          ],
+          "dependency": [
+            "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001"
+          ]
+        },
+        {
+          "id": "HYPOTHESIS_OR_RESEARCH_QUESTION_FORMATION_WHERE_CLAIMED",
+          "coverage": "NEW_UNIQUE_RESIDUAL__BENCHMARK_OWNER_OVERVIEW_EXPLICITLY_PLACES_THIS_OUTSIDE_THE_EXECUTION_WORKFLOW_ROLE",
+          "new_residual": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001"
+        },
+        {
+          "id": "RESULT_INTERPRETATION_VALIDATION_AND_SCIENTIFIC_COMMUNICATION_WHERE_CLAIMED",
+          "coverage": "EXISTING_DEPENDENCIES__BENCHMARK_OWNER_OVERVIEW_DOES_NOT_GRANT_THIS_SCOPE",
+          "dependency": [
+            "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+            "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+            "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS"
+          ]
+        }
+      ],
+      "new_family_specific_residuals": [
+        "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001"
+      ],
+      "target_observation_warning": "Canonical 58.7% vendor bar coexists with a current benchmark-owner 63.3% +/- 3.3% Opus 5.5 max Claude Code observation; target configuration identity must be frozen before promotion."
+    }
+  ],
+  "aggregate": {
+    "frozen_family_count": 5,
+    "frozen_basis_leaf_count": 40,
+    "direct_or_direct_plus_dependency_leaf_count": 38,
+    "configuration_identity_open_leaf_count": 1,
+    "new_unique_behavioral_residual_leaf_count": 1,
+    "new_unique_behavioral_residual_id": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+    "structural_scope_repair_state": "THE_FIVE_BROAD_GAPS_ARE_NOW_A_FINITE_GRAPH_OF_PUBLIC_COVERAGE_EXISTING_DEPENDENCIES_ONE_CONFIGURATION_IDENTITY_CHECK_AND_ONE_NEW_UNIQUE_RESIDUAL"
+  },
+  "hard_nonclaims": [
+    "PUBLIC_SCOPE_DESCRIPTION_IS_NOT_A_SCORE_PASS",
+    "DEPENDENCY_REFERENCE_IS_NOT_SCOPE_STRENGTH_PROOF_UNLESS_EXPLICITLY_VERIFIED",
+    "NO_BRAIN_VS_OPUS_MATCHED_COMPARATOR_EXECUTION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_SEAL"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

@@ -2002,7 +2002,51 @@
     "scheduling_authority": true,
     "acceptance_credit_delta": 0,
     "activation_path": "canonical/governance/ROOT2_18_CURRENT_14_24_SCHEDULING_ACTIVATION_V1.json",
-    "verification_path": "canonical/verification/ROOT2_18_CURRENT_14_24_RECOMPUTATION_V1.json"
+    "verification_path": "canonical/verification/ROOT2_18_CURRENT_14_24_RECOMPUTATION_V1.json",
+    "tb_science_target_freshness_overlay": {
+      "status": "ACTIVE__HARNESS_CONDITIONAL_TARGET_FRESHNESS_RESOLVED__ACCEPTANCE_OPEN",
+      "activation_path": "canonical/governance/TB_SCIENCE_OPUS55_TARGET_FRESHNESS_ACTIVATION_20261005_V1.json",
+      "activation_commit": "ed2ead30b5d8e7a3b475b8b7c9ce62a37ab8ca75",
+      "verification_path": "canonical/verification/TB_SCIENCE_OPUS55_TARGET_FRESHNESS_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "public_current_route_target_percent": 63.3,
+      "anthropic_release_route_target_percent": 58.7,
+      "rule": "FREEZE_HARNESS_IDENTITY_BEFORE_BRAIN_RESULT__PUBLIC_CURRENT_ROUTE_USES_63_3__58_7_ONLY_FOR_PROVED_IDENTICAL_ANTHROPIC_RELEASE_SETUP__ELSE_MATCHED_SAME_HARNESS_OR_FAIL_CLOSED",
+      "predicate_proved": false,
+      "acceptance_credit_delta": 0
+    },
+    "mechanism_entailment_reduction_overlay": {
+      "status": "ACTIVE__FIVE_PRIOR_STANDALONE_SPECIFIC_MECHANISM_PROGRAMS_TO_ONE_MANDATORY_PLUS_FOUR_QUARANTINED_OPTIONAL_ROUTES__ZERO_CREDIT",
+      "activation_path": "canonical/governance/FIVE_STANDALONE_MECHANISM_ENTAILMENT_REDUCTION_ACTIVATION_20261005_V1.json",
+      "activation_commit": "a4cfdd0c1d75e3407f43e8f6f587ba4acb4c5395",
+      "verification_path": "canonical/verification/FIVE_STANDALONE_MECHANISM_ENTAILMENT_REDUCTION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "mandatory_specific_mechanism_programs": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+      ],
+      "quarantined_optional_evidence_routes": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+      ],
+      "rule": "NO_SPECIFIC_MECHANISM_IS_MANDATORY_WITHOUT_VERIFIED_TARGET_ENTAILMENT__PRESERVE_ALL_OBSERVABLE_TARGETS_AND_THRESHOLDS",
+      "acceptance_credit_delta": 0,
+      "fresh_reality_authority": false
+    },
+    "public_bar_target_conditioned_scope_overlay": {
+      "status": "ACTIVE__ZERO_CURRENTLY_MANDATORY_NEW_BEHAVIORAL_RESIDUALS__ONE_HLE_CONFIGURATION_IDENTITY_CHECK__ZERO_CREDIT",
+      "activation_path": "canonical/governance/PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_ACTIVATION_20261005_V1.json",
+      "activation_commit": "dcd9ac5191842903a9181283df064dee72711dd9",
+      "verification_path": "canonical/verification/PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "conditional_candidate_only": [
+        "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001"
+      ],
+      "open_configuration_identity_checks": [
+        "HLE_WITH_TOOLS_MULTIMODAL_OR_NON_TEXT_SCOPE_IDENTITY"
+      ],
+      "rule": "NEW_SCOPE_RESIDUAL_MUST_BE_INSIDE_FROZEN_TARGET_SET_BEFORE_BECOMING_MANDATORY",
+      "acceptance_credit_delta": 0,
+      "fresh_reality_authority": false
+    }
   },
   "promotion_accounting_invariant": {
     "status": "ACTIVE_FAIL_CLOSED",

@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_OWNER_EXHAUSTIVENESS_ATTESTATION_PUBLIC_SEARCH_SATURATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_FIRST_PARTY_PUBLIC_SURFACES_DO_NOT_SUPPLY_TARGET_OWNER_EXHAUSTIVENESS_ATTESTATION__GENERIC_PUBLIC_SEARCH_SATURATED_FOR_CURRENT_SOURCE_SET__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Test the cheapest admissible discharge route for target-discovery completeness: an explicit Anthropic attestation that the bound public capability/evaluation surface exhausts all useful Opus 5.5 behaviors.",
+  "parent_boundary": {
+    "path": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+    "git_blob_sha": "2476ab2d8220994d7858c80409b563e1582c88e6"
+  },
+  "official_sources_checked": [
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "observed": [
+        "Opus 5.5 Benchmarked Capabilities points readers to System Card Section 8 rather than asserting exhaustiveness.",
+        "The model report describes itself as a summary/highlight surface.",
+        "Safety material is explicitly presented as select summaries and states that additional evaluations were conducted."
+      ],
+      "exhaustiveness_attestation_found": false
+    },
+    {
+      "url": "https://www.anthropic.com/claude/opus",
+      "observed": [
+        "Lists key use cases including advanced coding, agents, enterprise workflows, financial analysis, and vision/computer use.",
+        "Publishes benchmark results and evaluation notes.",
+        "Does not state that the listed use cases or benchmarks exhaust every useful behavior of Opus 5.5."
+      ],
+      "exhaustiveness_attestation_found": false
+    },
+    {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "observed": [
+        "Release announcement presents improvements, examples, benchmarks, and a pointer to the full System Card.",
+        "No statement encountered declaring the published capability/evaluation taxonomy complete over all useful model behaviors."
+      ],
+      "exhaustiveness_attestation_found": false
+    },
+    {
+      "url": "https://www.anthropic.com/system-cards",
+      "observed": [
+        "Provides the Opus 5.5 System Card entry as a technical capability/safety report.",
+        "The public system-card index itself supplies no all-useful-behaviors exhaustiveness attestation."
+      ],
+      "exhaustiveness_attestation_found": false
+    }
+  ],
+  "logical_result": {
+    "owner_exhaustiveness_route_currently_closed": false,
+    "reason": "THE_CHECKED_OWNER MATERIAL DESCRIBES_CAPABILITIES_EVALUATIONS_USE_CASES_AND_SELECT_OR_PUBLICLY_REPORTED_RESULTS_BUT_DOES_NOT_ASSERT THAT_THE_BOUND_SET_EQUALS_THE_SET_OF_ALL_ACTUAL_USEFUL_OPUS55_BEHAVIORS",
+    "implication": "CURRENT_38_OR_ANY_FINITE_PUBLIC_SURFACE_DERIVED_EXTENSION_CANNOT_INHERIT_LITERAL_ALL_USEFUL_FINALITY_FROM_AN_OWNER_EXHAUSTIVENESS_PREMISE_THAT_IS_NOT_PRESENT",
+    "nonimplication": "ABSENCE_OF_AN_ATTESTATION_IN_THE_CHECKED_PUBLIC_SURFACES_DOES_NOT_PROVE_AN_UNDISCLOSED_CAPABILITY_EXISTS"
+  },
+  "scheduler_delta_if_verified": {
+    "sleep": [
+      "REPEAT_GENERIC_SEARCH_OF_UNCHANGED_ANTHROPIC_OPUS55_RELEASE_TRANSPARENCY_AND_SYSTEM_CARD_INDEX_SURFACES_FOR_THE_SAME_EXHAUSTIVENESS_ATTESTATION"
+    ],
+    "wake_on": [
+      "NEW_OR_CHANGED_ANTHROPIC_OPUS55_SYSTEM_CARD_OR_TRANSPARENCY_REPORT",
+      "NEW_EXPLICIT_OWNER_STATEMENT_CLAIMING_BEHAVIORAL_CAPABILITY_EXHAUSTIVENESS",
+      "NEW_OWNER_PROVIDED_SCOPE_COMPLETE_TASK_OR_CAPABILITY_TAXONOMY_WITH_EXHAUSTIVENESS_SEMANTICS",
+      "A_STRONGER_FORMAL_BEHAVIORAL_CHARACTERIZATION_THEOREM"
+    ],
+    "preserve": [
+      "CURRENT_EPOCH_ACCEPTANCE_CLOSURE_WORK",
+      "TARGET_DISCOVERY_COMPLETENESS_AS_SEPARATE_LITERAL_TERMINAL_PREMISE",
+      "NO_GOAL_WEAKENING"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_ANTHROPIC_PRIVATE_INFORMATION_WAS_SEARCHED",
+    "NO_CLAIM_NO_FUTURE_OR_UNINDEXED_PUBLIC_ATTESTATION_CAN_EXIST",
+    "NO_CLAIM_UNDISCLOSED_USEFUL_CAPABILITY_EXISTS",
+    "NO_REDEFINITION_OF_ALL_USEFUL_TO_MEAN_ALL_PUBLICLY_LISTED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

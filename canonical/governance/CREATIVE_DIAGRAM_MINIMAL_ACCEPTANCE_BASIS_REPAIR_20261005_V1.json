@@ -1,0 +1,152 @@
+{
+  "schema": "PROJECT_BRAIN_CREATIVE_DIAGRAM_MINIMAL_ACCEPTANCE_BASIS_REPAIR_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ONE_SHARED_BEHAVIORAL_LEAF__TWO_INDEPENDENTLY_FALSIFIABLE_ACCEPTANCE_STRATA__NO_FAKE_ATOMIC_COMPRESSION__NO_NEW_FAMILY__ZERO_CREDIT",
+  "objective": "Repair the verified creative-task and diagram-output terminal proof-basis gap with the smallest lossless behavioral model while preserving every independently falsifiable acceptance obligation.",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "supersedes_same_path_v1_commit": "f97b6aaacaa5bffd03dbe6c5c9314a99a947f3c9",
+  "truth_repair": {
+    "retracted_v1_claim": "ONE_SHARED_BEHAVIORAL_LEAF_IMPLIES_ONE_NEW_ATOMIC_PREDICATE_AND_38_TO_39_BASIS_COUNT",
+    "reason": "CREATIVE_TEXT_AND_TEXT_BASED_DIAGRAM ARE INDEPENDENTLY_FALSIFIABLE. WRITING A_CONJUNCTION_AS_ONE_REGISTRY_ROW DOES_NOT_REDUCE_THE_PROOF_BURDEN_AND_IS_NOT_A_SOUND_ATOMIC_COMPRESSION.",
+    "preserved_breakthrough": "THE TWO SURFACES SHARE_ONE_CAUSAL_BEHAVIORAL_LEAF_AND_DO_NOT_REQUIRE_A_NEW_CAPABILITY_FAMILY; IMPLEMENTATION_MECHANISM_AND_CONTROL_RESEARCH_MAY_BE_SHARED EVEN THOUGH ACCEPTANCE_MUST_RETAIN_BOTH_STRATA."
+  },
+  "source_bindings": {
+    "verified_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    },
+    "first_party_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "family_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    }
+  },
+  "lossless_reuse_falsification": [
+    {
+      "existing_leaf": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "cannot_cover_whole_creative_surface": true,
+      "reason": "ITS INPUT CONTRACT REQUIRES VERIFIED_EVIDENCE_UNITS_AND_REQUIRED_CLAIMS; OPEN_ENDED_CREATIVE_GENERATION_NEED_NOT_HAVE_EITHER."
+    },
+    {
+      "existing_leaf": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "cannot_cover_whole_diagram_surface": true,
+      "reason": "ITS REQUIRED_OUTPUT_CAN_BE_A_PLAN_AND_CONCRETE_EDITS_WITHOUT_REQUIRING_A_FINISHED_RENDERABLE_DIAGRAM."
+    },
+    {
+      "existing_leaf": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "cannot_cover_whole_diagram_surface": true,
+      "reason": "ITS SCOPE_IS_NATIVE_DOCX_XLSX_PPTX_PDF_EDIT_PRESERVATION_NOT_NEW_TEXT_DIAGRAM_REALIZATION."
+    }
+  ],
+  "minimal_common_residual": {
+    "behavior_id": "CONSTRAINT_TO_CREATIVE_TEXT_OR_TEXT_DIAGRAM_REALIZATION_001",
+    "why_shared": "BOTH SURFACES REQUIRE_OBJECTIVE_PLUS_CONSTRAINTS_PLUS_TARGET_MEDIUM_TO_FINISHED_QUALITY_BEARING_OUTPUT; MEDIUM_SPECIFIC_ORACLES_REMAIN_SEPARATE.",
+    "inputs": "User objective; explicit constraints; audience/style/tone when relevant; target_medium in {CREATIVE_TEXT,TEXT_BASED_DIAGRAM}; optional factual evidence, data, entities, or relationships.",
+    "required_output_or_action": "Produce the finished creative text or finished renderable text-based diagram itself, not merely a plan, outline, critique, or summary.",
+    "common_success_conditions": [
+      "EXPLICIT_USER_CONSTRAINTS_SATISFIED",
+      "OUTPUT_COMPLETE_FOR_REQUESTED_MEDIUM",
+      "NO_UNSUPPORTED_MATERIAL_FACTUAL_CLAIM_WHEN_FACTUAL_CONTENT_IS_LOAD_BEARING"
+    ],
+    "scope": "OPEN_ENDED_CREATIVE_TEXT_AND_TEXT_BASED_DIAGRAM_OUTPUT_ONLY",
+    "scope_exclusions": [
+      "RASTER_OR_PHOTOREALISTIC_IMAGE_GENERATION",
+      "AUDIO_GENERATION",
+      "ARBITRARY_NATIVE_DOCX_XLSX_PPTX_PDF_EDIT_MECHANICS",
+      "CAD_OR_3D_GEOMETRY_GENERATION",
+      "DIAGRAM_UNDERSTANDING_AS_INPUT"
+    ]
+  },
+  "acceptance_strata": [
+    {
+      "candidate_predicate_id": "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "success": [
+        "INDEPENDENT_FROZEN_RUBRIC_QUALITY_NONINFERIOR_TO_OPUS55",
+        "COHERENCE_STYLE_AND_REQUESTED_FORM_CONSTRAINTS_PASS"
+      ],
+      "independently_falsifiable": true
+    },
+    {
+      "candidate_predicate_id": "TEXT_BASED_DIAGRAM_REALIZATION_NONINFERIOR",
+      "family": "ARTIFACT_CREATION",
+      "success": [
+        "PARSER_OR_RENDERER_VALIDITY_PASS",
+        "REQUIRED_ENTITIES_RELATIONSHIPS_LABELS_AND_DIRECTIONALITY_SEMANTIC_CHECKS_PASS_WHERE_OBJECTIVELY_SPECIFIED",
+        "INDEPENDENT_FROZEN_PRESENTATION_AND_READABILITY_RUBRIC_QUALITY_NONINFERIOR_TO_OPUS55"
+      ],
+      "independently_falsifiable": true
+    }
+  ],
+  "acceptance_basis_effect": {
+    "current_declared_atomic_basis": 38,
+    "minimal_new_independently_falsifiable_obligations": 2,
+    "candidate_basis_if_both_are_frozen_as_separate_atomic_predicates": 40,
+    "joint_discharge_allowed": "YES_ONLY_IF_A_SINGLE_SCOPE_COMPLETE_STRONGER_PROOF_LOGICALLY_IMPLIES_BOTH_PREDICATES; THE_REGISTRY_MAY_STILL_RETAIN_TWO_ATOMIC_CLAIMS_WITH_ONE_SHARED_RECEIPT.",
+    "forbidden_compression": "DO_NOT_RENAME_A_AND_B_AS_ONE_ATOMIC_ROW_MERELY_TO_REPORT_39_INSTEAD_OF_40."
+  },
+  "family_mapping": {
+    "new_family_required": false,
+    "load_bearing_families": [
+      "COMMUNICATION_AND_SYNTHESIS",
+      "ARTIFACT_CREATION"
+    ],
+    "twentieth_family_open_condition": "ONLY_IF_CONSTRUCTIVE_ANALYSIS_PROVES_A_USEFUL_FIRST_PARTY_CREATIVE_OR_DIAGRAM_BEHAVIOR_CANNOT_BE_REPRESENTED_BY_THIS_LEAF_PLUS_THE_EXISTING_FAMILY_UNION."
+  },
+  "proof_strategy": {
+    "shared_mechanism_research": true,
+    "shared_candidate_runtime_allowed": true,
+    "separate_acceptance_bounds_required": true,
+    "admissible_modes": [
+      "SCOPE_COMPLETE_STRONGER_PROOF",
+      "PREDECLARED_MATCHED_STATISTICAL_COMPARISON_AGAINST_OPUS55"
+    ],
+    "promotion_rule": "EACH_STRATUM_MUST_PASS_ITS_OWN_PREDECLARED_BOUND; ONE_STRATUM_CANNOT_COMPENSATE_FOR_THE_OTHER."
+  },
+  "root_effect": {
+    "root1_positive_capability_gap_delta": 0,
+    "root2_threshold_predicate_delta_now": 0,
+    "root3_scope_predicate_delta_now": 0,
+    "terminal_finality_effect": "BASIS_SHAPE_REPAIR_ONLY_PENDING_INDEPENDENT_VERIFICATION_AND_REGISTRY_FREEZE."
+  },
+  "scheduler_delta": {
+    "delete_if_verified": [
+      "GENERIC_SEARCH_FOR_A_20TH_CREATIVE_OR_DIAGRAM_FAMILY",
+      "DUPLICATE_MECHANISM_RESEARCH_FOR_CREATIVE_TEXT_AND_TEXT_DIAGRAM_WHERE_THE_SHARED_TRANSFORM_IS_LOAD_BEARING",
+      "FAKE_ATOMIC_COUNT_COMPRESSION"
+    ],
+    "activate_if_verified": [
+      "ONE_SHARED_BEHAVIORAL_MECHANISM_LANE",
+      "TWO_SEPARATE_ACCEPTANCE_STRATA",
+      "SEARCH_FOR_ONE_SCOPE_COMPLETE_STRONGER_PROOF_CAPABLE_OF_DISCHARGING_BOTH_BEFORE_ANY_FRESH_MATCHED_COMPARATOR_EXECUTION"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_CURRENTLY_PASSES_EITHER_NEW_STRATUM",
+    "NO_CLAIM_40_IS_CANONICAL_UNTIL_EXPLICIT_REGISTRY_FREEZE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

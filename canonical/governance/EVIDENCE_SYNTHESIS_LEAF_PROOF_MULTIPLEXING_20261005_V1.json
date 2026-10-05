@@ -1,0 +1,145 @@
+{
+  "schema": "PROJECT_BRAIN_EVIDENCE_SYNTHESIS_LEAF_PROOF_MULTIPLEXING_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SHARED_BEHAVIORAL_LEAF_PROOF_MULTIPLEXING__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Eliminate duplicate proof work for EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 by requiring one scope-complete behavioral certificate and reusing it only by exact behavioral identity across every family that maps to the same frozen leaf.",
+  "source_bindings": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "terminal_proof_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "five_public_bar_family_partition": {
+      "path": "canonical/governance/FIVE_PUBLIC_BAR_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "8f74ca3d9609737913714844a793b8566028a0aa"
+    },
+    "current_zero_reality_minimum_cut": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12.json",
+      "git_blob_sha": "2628f99626ca64f4d57920f732b19021f8cc34c2"
+    }
+  },
+  "frozen_leaf": {
+    "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "scope": "Grounded evidence synthesis under audience and format constraints",
+    "required_output_or_action": "Select, organize and express the necessary evidence so required claims are supported, material uncertainty/disagreement is preserved and irrelevant detail is omitted",
+    "success_dimensions": [
+      "NO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "REQUIRED_EVIDENCE_COVERAGE_COMPLETE",
+      "MATERIAL_UNCERTAINTY_AND_DISAGREEMENT_PRESERVED",
+      "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS",
+      "NO_DECISION_RELEVANT_EVIDENCE_LOST_BY_COMPRESSION"
+    ]
+  },
+  "registry_identity": {
+    "families_mapping_to_identical_leaf": [
+      "COMMUNICATION_AND_SYNTHESIS",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "FINANCIAL_ANALYSIS"
+    ],
+    "public_bar_partition_occurrences": [
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH"
+    ],
+    "public_bar_partition_occurrence_count": 3
+  },
+  "single_certificate_route": {
+    "existing_cut_action_group": "F_SYNTHESIS_COMPARATOR_CERTIFICATE",
+    "anchor_family": "COMMUNICATION_AND_SYNTHESIS",
+    "anchor_family_registry_residuals": [
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    ],
+    "anchor_protocol_task_dimensions": [
+      "claim-to-source fidelity",
+      "required evidence coverage",
+      "uncertainty/disagreement preservation",
+      "audience adaptation",
+      "format/style constraints",
+      "compression without decision-relevant loss"
+    ],
+    "anchor_protocol_primary_metrics": [
+      "unsupported_material_claim_rate",
+      "required_claim_coverage",
+      "constraint_pass_rate",
+      "decision_relevant_omission_rate",
+      "independent_quality_score"
+    ],
+    "required_certificate_strength": "SCOPE_COMPLETE_FOR_THE_FROZEN_BEHAVIORAL_LEAF__NOT_MERELY_AGGREGATE_FAMILY_SCORE",
+    "required_checks_before_reuse": [
+      "FROZEN_PORTFOLIO_EXERCISES_EVERY_SUCCESS_DIMENSION_OF_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "ZERO_UNSUPPORTED_MATERIAL_CLAIMS_ON_OBJECTIVE_SOURCE_CASES",
+      "CONSERVATIVE_MATCHED_QUALITY_AND_COVERAGE_BOUND_GE_OPUS55_BOUND",
+      "NO_DIMENSION_IS_SATISFIED_ONLY_BY_AN_UNAUDITED_AGGREGATE_SCORE",
+      "SUBJECT_AND_PROTOCOL_SOURCE_BINDINGS_MATCH_THIS_CANDIDATE"
+    ]
+  },
+  "multiplexing_rule": {
+    "if": "ONE_INDEPENDENTLY_VERIFIED_SCOPE_COMPLETE_CERTIFICATE_CLOSES_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "then": [
+      "REUSE_THE_SAME_CERTIFICATE_FOR_THE_IDENTICAL_LEAF_IN_COMMUNICATION_AND_SYNTHESIS",
+      "REUSE_THE_SAME_CERTIFICATE_FOR_THE_IDENTICAL_LEAF_IN_PROFESSIONAL_KNOWLEDGE_WORK",
+      "REUSE_THE_SAME_CERTIFICATE_FOR_THE_IDENTICAL_LEAF_IN_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "REUSE_THE_SAME_CERTIFICATE_FOR_THE_IDENTICAL_LEAF_IN_AGENTIC_SCIENTIFIC_RESEARCH",
+      "REUSE_THE_SAME_CERTIFICATE_FOR_THE_IDENTICAL_LEAF_IN_FINANCIAL_ANALYSIS"
+    ],
+    "forbidden": [
+      "NO_TRANSFER_TO_NONIDENTICAL_BEHAVIORAL_LEAVES",
+      "NO_WHOLE_FAMILY_PROMOTION_FROM_THIS_LEAF_ALONE",
+      "NO_PUBLIC_BAR_SCOPE_EQUIVALENCE_INFERENCE_FROM_THIS_MULTIPLEXER",
+      "NO_REUSE_IF_THE_CERTIFICATE_IS_ONLY_PARTIAL_OR_AGGREGATE"
+    ]
+  },
+  "scheduling_delta": {
+    "before": {
+      "public_bar_partition_surviving_leaf_occurrences": 11,
+      "public_bar_partition_unique_surviving_leaves": 7,
+      "evidence_synthesis_occurrences_requiring_resolution": 3
+    },
+    "after_scope_complete_certificate_only": {
+      "public_bar_partition_surviving_leaf_occurrences": 8,
+      "public_bar_partition_unique_surviving_leaves": 6,
+      "evidence_synthesis_occurrences_requiring_resolution": 0
+    },
+    "immediate_scheduler_effect": [
+      "DO_NOT_CREATE_THREE_SEPARATE_FAMILY_SPECIFIC_EVIDENCE_SYNTHESIS_SCOPE_PROOFS",
+      "MAKE_F_SYNTHESIS_COMPARATOR_CERTIFICATE_SCOPE_COMPLETE_AT_THE_BEHAVIORAL_LEAF_LEVEL",
+      "ON_VERIFIED_CLOSURE_RECOMPUTE_PUBLIC_BAR_SCOPE_PARTITION_AND_ALL_FIVE_CONSUMER_FAMILIES"
+    ]
+  },
+  "why_this_is_load_bearing": [
+    "THE_FIVE_PUBLIC_BAR_PARTITION_EXPLICITLY_DEDUPLICATES_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_ACROSS_THREE_AFFECTED_FAMILIES",
+    "THE_ACTIVE_BEHAVIORAL_REGISTRY_MAPS_THE_SAME_FROZEN_LEAF_TO_FIVE_FAMILY_LABELS",
+    "COMMUNICATION_AND_SYNTHESIS_HAS_NO_OTHER_ACTIVE_RESIDUAL_CONTRACT_IN_THE_REGISTRY",
+    "THE_CURRENT_ZERO_REALITY_MINIMUM_CUT_ALREADY_CONTAINS_F_SYNTHESIS_COMPARATOR_CERTIFICATE",
+    "THEREFORE_ONE_SCOPE_COMPLETE_LEAF_CERTIFICATE_CAN_REPLACE_DUPLICATE_FAMILY_LOCAL_PROOF_WORK_WITHOUT_WEAKENING_SCOPE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_SYNTHESIS_CERTIFICATE_IS_ALREADY_CLOSED",
+    "NO_CLAIM_ANY_AFFECTED_PUBLIC_BAR_FAMILY_IS_ALREADY_ACCEPTED",
+    "NO_CLAIM_THE_CURRENT_PUBLIC_BARS_COVER_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_ROOT1_POSITIVE_GAP",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "next": "INDEPENDENTLY_RECOMPUTE_REGISTRY_IDENTITY_AND_PROTOCOL_DIMENSION_COVERAGE__IF_PASS_ACTIVATE_MULTIPLEXING_RULE_AND_BIND_ACTION_GROUP_F_AS_THE_SINGLE_SYNTHESIS_LEAF_CERTIFICATE"
+}

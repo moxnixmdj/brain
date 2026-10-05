@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__TARGET_MECHANISM_SEPARATION__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_20261005_V1.json",
+    "git_blob_sha": "251cac9c9f7892e26ca90f2f5118f31e1df02099"
+  },
+  "gate": {
+    "path": "canonical/runtime/target_behavior_mechanism_entailment_gate_v1.py",
+    "git_blob_sha": "771fc5271f5cf1f9fe5a3152fd311d3e668d1014"
+  },
+  "tests": {
+    "path": "canonical/tests/test_target_behavior_mechanism_entailment_gate_v1.py",
+    "git_blob_sha": "135e5c82d191f5b2f18b5765eb914f02aa748e48",
+    "execution_state": "NOT_CLAIMED_BY_CONNECTOR_RECOMPUTATION"
+  },
+  "exact_authority_recomputation": {
+    "target_envelope_rule": "USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION",
+    "registry_family_rows_class": "ACCOUNTING_LABEL",
+    "registry_mechanism_ownership_separate": true,
+    "proxy_partition_source_edges": 12,
+    "proxy_partition_unique_leaves": 7,
+    "explicit_target_entailment_edges_identified": 1,
+    "explicit_entailment_edge": "COMPUTER_AND_BROWSER_USE::BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+    "registry_only_or_unproved_entailment_edges": 11,
+    "target_behaviors_deleted": 0,
+    "benchmark_thresholds_deleted": 0,
+    "root1_positive_gap_delta": 0
+  },
+  "verified_logic": [
+    "A_SUFFICIENT_IMPLEMENTATION_MECHANISM_IS_NOT_LOGICALLY_NECESSARY_TARGET_BEHAVIOR_WITHOUT_ENTAILMENT",
+    "REGISTRY_INCIDENCE_ALONE_CANNOT_EXPAND_THE_FROZEN_TARGET",
+    "COMPUTER_AND_BROWSER_USE_EXPLICITLY_NAMES_VISUAL_GROUNDING__BROWSER_GROUNDED_ACTION_REMAINS_DIRECTLY_TARGET_ALIGNED",
+    "ADVANCED_AGENTIC_CODING_FROZEN_WORDING_DOES_NOT_EXPLICITLY_INCLUDE_CAD_DRAWING_TO_SOLID_RECONSTRUCTION",
+    "ALL_SIX_FAMILY_LEVEL_SCOPE_GAPS_REMAIN_OPEN_UNTIL_OBSERVABLE_TARGET_BASIS_COVERAGE_IS_PROVED",
+    "ALL_EXISTING_PERFORMANCE_THRESHOLDS_AND_RECEIPTS_ARE_PRESERVED"
+  ],
+  "consequence": [
+    "QUARANTINE_AUTOMATIC_MANDATORY_ACCEPTANCE_STATUS_FOR_REGISTRY_DERIVED_MECHANISM_EDGES_WITHOUT_TARGET_ENTAILMENT",
+    "RETAIN_EXISTING_MECHANISM_ROUTES_AS_OPTIONAL_SUFFICIENT_IMPLEMENTATIONS_OR_REUSABLE_EVIDENCE",
+    "SCHEDULE_OBSERVABLE_FAMILY_BEHAVIOR_COVERAGE_AUDIT_BEFORE_ANY_NEW_MECHANISM_PROOF_SPEND"
+  ],
+  "hard_nonclaims": [
+    "NO_RUNTIME_TEST_EXECUTION_CLAIM",
+    "NO_FAMILY_SCOPE_CLOSURE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
+    "NO_TARGET_WEAKENING",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

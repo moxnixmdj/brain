@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_OPUS55_TARGET_FRESHNESS_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__AA_BRIEFCASE_V1_1_TARGET_EPOCH_REPAIR__CURRENT_OWNER_OPUS55_MAX_1808__FROZEN_1822_ONLY_UNDER_BOUND_SOURCE_EPOCH__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Prevent the two AA-Briefcase predicates from treating 1822 Elo as a timeless scalar when the current benchmark-owner v1.1 leaderboard places Claude Opus 5.5 Max at 1808 Elo.",
+  "canonical_inputs": {
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+      "stored_target": "AA-Briefcase v1.1 >= 1822 Elo"
+    },
+    "capability_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "stored_target": 1822
+    },
+    "affected_predicates": [
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822"
+    ]
+  },
+  "public_owner_observation": {
+    "source": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+    "benchmark": "AA-Briefcase v1.1",
+    "observed_date": "2026-10-05",
+    "observed_model": "Claude Opus 5.5 (Max, Default Fallback)",
+    "observed_elo": 1808,
+    "confidence_interval": "-13/+12",
+    "methodology_facts": [
+      "AA-Briefcase v1.1 covers 91 tasks across four multi-week knowledge-work projects.",
+      "Its Elo is a combined metric aggregating rubric pass rate, analytical-quality Elo and presentation Elo."
+    ],
+    "source_role": "CURRENT_BENCHMARK_OWNER_PUBLISHED_REFERENCE"
+  },
+  "target_epoch_rule": {
+    "current_owner_methodology_route": {
+      "condition": "BRAIN_RESULT_IS_PRODUCED_ON_CURRENT_AA_BRIEFCASE_V1_1_OWNER_TASK_POPULATION_HARNESS_GRADING_AND_RATING_EPOCH_WITH_MATCHED_CONFIGURATION",
+      "minimum_opus55_target_elo": 1808
+    },
+    "historical_1822_route": {
+      "condition": "INDEPENDENT_EVIDENCE_BINDS_BRAIN_RESULT_TO_THE_EXACT_SOURCE_EPOCH_TASK_POPULATION_HARNESS_GRADING_RATING_AND_OPUS55_CONFIGURATION_THAT_PRODUCED_1822",
+      "minimum_opus55_target_elo": 1822
+    },
+    "otherwise": "FAIL_CLOSED__REQUIRE_MATCHED_SAME_EPOCH_OPUS55_REFERENCE_OR_SCOPE_SAFE_STRONGER_PROOF"
+  },
+  "truth_counterexample": {
+    "brain_score_on_current_owner_epoch": 1815,
+    "stale_1822_result": "FAIL",
+    "matched_current_1808_result": "PASS",
+    "conclusion": "AN_UNCONDITIONED_CROSS_EPOCH_1822_SCALAR_CAN_CHANGE_TERMINAL_TRUTH_EVEN_WHEN_BENCHMARK_VERSION_LABEL_REMAINS_V1_1"
+  },
+  "reuse_rule": "ONE_EXACT_CURRENT_EPOCH_AA_BRIEFCASE_SCORE_RECEIPT_MAY_SERVE_BOTH_AFFECTED_PREDICATES_ONLY_AFTER_EACH_PREDICATE_SCOPE_BINDING_IS_INDEPENDENTLY_SATISFIED",
+  "generalizable_breakthrough": "RELATIVE_RATING_TARGETS_MUST_BE_CONTENT_ADDRESSED_BY_DATASET_TASK_POPULATION_HARNESS_GRADER_AGGREGATION_OR_RATING_EPOCH_AND_TARGET_MODEL_CONFIGURATION__VERSION_LABEL_PLUS_SCALAR_IS_INSUFFICIENT",
+  "hard_nonclaims": [
+    "NO_CLAIM_1808_APPLIES_TO_NONIDENTICAL_HISTORICAL_SETUP",
+    "NO_CLAIM_1822_WAS_FALSE_IN_ITS_SOURCE_EPOCH",
+    "NO_PREDICATE_OR_FAMILY_ACCEPTANCE_CREDIT",
+    "NO_BRAIN_SCORE",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

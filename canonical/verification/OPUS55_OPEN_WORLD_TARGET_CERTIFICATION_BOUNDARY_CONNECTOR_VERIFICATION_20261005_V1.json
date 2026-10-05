@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_CONNECTOR_RECOMPUTATION_PASS__FINITE_NONEXHAUSTIVE_OBSERVATION_CANNOT_PROVE_LITERAL_ALL_TARGET__EPOCH_SEMANTICS_SOUND__ZERO_CREDIT",
+  "candidate": {
+    "path": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+    "git_blob_sha": "2476ab2d8220994d7858c80409b563e1582c88e6"
+  },
+  "independently_recomputed_sources": {
+    "first_party_observable_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c",
+      "exact_load_bearing_nonclaim": "NO_CLAIM_THE_FIRST_PARTY_SOURCE_SET_IS_ALL_POSSIBLE_PUBLIC_OR_PRIVATE_OPUS55_BEHAVIOR_EVIDENCE"
+    },
+    "useful_capability_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "target_rule": "USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION",
+      "target_family_count": 19
+    },
+    "outer_brain_obligation_universe": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
+      "git_blob_sha": "ff97ffee7c9b25a491ff5ee231919ea4964f09e3",
+      "role_check": "FROZEN_BRAIN_OBLIGATION_UNIVERSE_DOES_NOT_BY_ITSELF_ESTABLISH_EXHAUSTIVE_DISCOVERY_OF_ALL_TARGET_BEHAVIORS"
+    },
+    "current_public_primary_observation": {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "checked_utc": "2026-10-05",
+      "observed": "ANTHROPIC_PUBLICLY_DESCRIBES_MULTIPLE_CAPABILITY_AND_BEHAVIOR_SURFACES_AND_LINKS_A_DEDICATED_OPUS_5_5_SYSTEM_CARD",
+      "role": "SUPPORTS_THAT_PUBLIC_EVIDENCE_IS_AN_OBSERVATIONAL_SOURCE__NOT_AN_OWNER_ATTESTATION_THAT_NO_OTHER_USEFUL_TARGET_BEHAVIOR_EXISTS"
+    },
+    "current_transparency_observation": {
+      "url": "https://www.anthropic.com/transparency",
+      "checked_utc": "2026-10-05",
+      "observed": "OPUS_5_5_MODALITIES_AND_BENCHMARKED_CAPABILITIES_ARE_PUBLICLY_SUMMARIZED_WITH_REFERENCE_TO_SYSTEM_CARD_SECTION_8_AND_ADDITIONAL_EVALUATIONS",
+      "role": "PUBLIC_REPORTING_SURFACE_ONLY__NO_LITERAL_ALL_ACTUAL_USEFUL_BEHAVIORS_EXHAUSTIVENESS_ATTESTATION_FOUND"
+    }
+  },
+  "proof_recomputation": {
+    "definitions": {
+      "U": "SET_OF_ALL_ACTUAL_USEFUL_OPUS_5_5_BEHAVIORS_RELEVANT_TO_THE_TERMINAL_OBJECTIVE",
+      "O": "CURRENT_FINITE_OBSERVED_AND_CONTENT_ADDRESSED_TARGET_EVIDENCE_SET"
+    },
+    "premises": [
+      "O_IS_FINITE",
+      "CURRENT_CANONICAL_AUDIT_EXPLICITLY_REFUSES_THE_PREMISE_O_EQUALS_U",
+      "LITERAL_TERMINAL_OBJECTIVE_QUANTIFIES_OVER_U_NOT_ONLY_O"
+    ],
+    "indistinguishability_argument": [
+      "ASSUME_ONLY_ALL_O_DERIVED_OBLIGATIONS_ARE_PROVED",
+      "THAT_EVIDENCE_STATE_IS_COMPATIBLE_WITH_WORLD_W0_WHERE_U_EQUALS_O",
+      "THE_SAME_EVIDENCE_STATE_IS_ALSO_COMPATIBLE_WITH_WORLD_W1_WHERE_U_EQUALS_O_UNION_{X}_FOR_SOME_UNOBSERVED_USEFUL_X",
+      "IF_X_HAS_NOT_BEEN_MAPPED_AND_PROVED_THEN_LITERAL_ALL_USEFUL_TARGET_IS_FALSE_IN_W1",
+      "THEREFORE_PROOF_OF_ALL_O_DERIVED_OBLIGATIONS_DOES_NOT_ENTAIL_LITERAL_TERMINAL_FINALITY"
+    ],
+    "theorem_verified": true,
+    "theorem": "NO_FINITE_NONEXHAUSTIVE_OBSERVATION_SET_CAN_CERTIFY_A_UNIVERSAL_CLAIM_OVER_POSSIBLY_UNOBSERVED_TARGET_BEHAVIORS_WITHOUT_AN_ADDITIONAL_COMPLETENESS_PREMISE"
+  },
+  "certification_semantics_recomputation": {
+    "epoch_predicate_sound": true,
+    "literal_predicate_requires_epoch_plus_target_discovery_completeness": true,
+    "goal_substitution": false,
+    "sufficient_completeness_routes": [
+      "TARGET_OWNER_EXHAUSTIVENESS_ATTESTATION_OVER_THE_BOUND_EVIDENCE_UNIVERSE",
+      "INDEPENDENT_SCOPE_COMPLETE_CHARACTERIZATION_THEOREM_COVERING_EVERY_ADMISSIBLE_USEFUL_OPUS55_INPUT_OUTPUT_BEHAVIOR",
+      "ANY_STRONGER_PROOF_THAT_LOGICALLY_EXCLUDES_USEFUL_UNOBSERVED_TARGET_BEHAVIOR"
+    ],
+    "current_target_discovery_completeness": "UNPROVED"
+  },
+  "scheduler_verdict": {
+    "delete": [
+      "FINITE_SOURCE_SEARCH_AS_A_STANDALONE_ROUTE_TO_LITERAL_ALL_USEFUL_TARGET_CERTIFICATION",
+      "TERMINAL_FINALITY_FROM_CURRENT_38_OR_ANY_OTHER_FINITE_NONEXHAUSTIVE_PREDICATE_SET_ALONE",
+      "REPEATED_DOMAIN_LABEL_ENUMERATION_AS_A_PROOF_OF_ABSENCE_OF_UNOBSERVED_BEHAVIOR"
+    ],
+    "preserve": [
+      "CLOSE_THE_FROZEN_OBSERVED_EPOCH",
+      "SEARCH_FOR_OR_PROVE_A_SCOPE_COMPLETE_TARGET_CHARACTERIZATION",
+      "OWNER_EXHAUSTIVENESS_ATTESTATION_IF_EVER_AVAILABLE",
+      "AUTOMATIC_REOPEN_ON_MATERIAL_TARGET_EVIDENCE_CHANGE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_UNDISCLOSED_USEFUL_OPUS55_BEHAVIORS_EXIST",
+    "NO_CLAIM_THAT_UNDISCLOSED_USEFUL_OPUS55_BEHAVIORS_DO_NOT_EXIST",
+    "NO_CLAIM_CURRENT_PUBLIC_SOURCES_ARE_EXHAUSTIVE",
+    "NO_WEAKENING_OR_REDEFINITION_OF_THE_LITERAL_TERMINAL_OBJECTIVE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "verification_result": "PASS"
+}

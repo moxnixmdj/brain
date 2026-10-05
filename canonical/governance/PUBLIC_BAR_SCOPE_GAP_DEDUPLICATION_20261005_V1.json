@@ -1,0 +1,168 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BAR_SCOPE_GAP_DEDUPLICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIVE_PUBLIC_BAR_ONLY_SCOPE_GAPS_REDUCED_TO_EXISTING_DEPENDENCIES_PLUS_ONE_NEW_BEHAVIORAL_RESIDUAL__ZERO_CREDIT",
+  "objective": "Minimize new terminal proof obligations after the public-bar scope partition by reusing only scope-sufficient existing predicates/contracts.",
+  "inputs": {
+    "scope_compiler": {
+      "path": "canonical/governance/PUBLIC_BAR_SCOPE_PARTITION_COMPILER_20261005_V1.json",
+      "git_blob_sha": "112a06136e077a72de8e29ebbf9f242f129067c5"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    }
+  },
+  "reuse_law": "A residual may be discharged by another predicate/contract only when its inputs, environment/tool authority, required transformation and success metric are at least as strong as the residual claim. Otherwise the dependency is advisory only and the residual remains open.",
+  "family_reductions": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "public_predicates": [
+        "CODING_TB4_GE_66_4",
+        "CODING_FRONTIERCODE_GE_54_4",
+        "CODING_CURSORBENCH_GE_57_8"
+      ],
+      "existing_dependency_candidates": [
+        "RECOVERY_TERMINAL_NONINFERIOR",
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+        "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR"
+      ],
+      "unresolved_after_semantic_dedupe": [
+        "PUBLIC_TASK_UNION_MUST_BE_AUDITED_AGAINST_THE_EIGHT_FROZEN_CODING_BASIS_LEAVES_BEFORE_ANY_REMAINING_CODING_SPECIFIC_RESIDUAL_IS_CREATED"
+      ],
+      "new_unique_residual_count": 0
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "public_predicates": [
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822"
+      ],
+      "existing_dependency_candidates": [
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+      ],
+      "unresolved_after_semantic_dedupe": [
+        "GDPVAL_AND_AA_BRIEFCASE_TASK_UNION_MUST_BE_MAPPED_TO_THE_EIGHT_FROZEN_PROWORK_BASIS_LEAVES; ONLY_UNCOVERED_LEAVES_NOT_STRONGLY_IMPLIED_BY_THE_EXISTING_DEPENDENCIES_MAY_CREATE_NEW_CASES"
+      ],
+      "new_unique_residual_count": 0
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "public_predicates": [
+        "AUTOMATIONBENCH_GE_40"
+      ],
+      "existing_dependency_candidates": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "RECOVERY_TERMINAL_NONINFERIOR",
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR"
+      ],
+      "unresolved_after_semantic_dedupe": [
+        "FIRST_RESOLVE_AUTOMATIONBENCH_METRIC_IDENTITY_AND_FROZEN_SCOPE",
+        "NON_REST_OR_UI_MEDIATED_WORKFLOWS_REQUIRE_BROWSER_COMPUTER_DEPENDENCY_ONLY_IF_INCLUDED_IN_THE_CLAIMED_TARGET_SCOPE"
+      ],
+      "new_unique_residual_count": 0
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "public_predicates": [
+        "HLE_TOOLS_GE_67_7"
+      ],
+      "existing_dependency_candidates": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+      ],
+      "unresolved_after_semantic_dedupe": [
+        "HLE_WITH_TOOLS_SCOPE_MUST_BE_MAPPED_TO_THE_EIGHT_FROZEN_REASONING_BASIS_LEAVES; OPEN_ENDED_SYNTHESIS_ITERATIVE_TOOL_CONTROL_AND_CALIBRATION_CAN_REUSE_EXISTING_DEPENDENCIES_ONLY_AFTER_SCOPE_STRENGTH_CHECK"
+      ],
+      "new_unique_residual_count": 0
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "public_predicates": [
+        "TB_SCIENCE_GE_58_7"
+      ],
+      "existing_dependency_candidates": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+      ],
+      "unique_residual": {
+        "behavior_id": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+        "inputs": "Observed phenomenon, existing evidence/provenance, domain constraints, unresolved anomalies, available tools and research budget",
+        "environment_state": "Scientific inquiry state before or between execution workflows where the next useful research question or falsifiable hypothesis is not already supplied",
+        "allowed_information": "JIT literature/data/tools plus current evidence graph; no hidden target answer",
+        "required_output_or_action": "Formulate one or more decision-relevant, falsifiable research questions or hypotheses; rank them by expected information gain and feasibility; specify a discriminating test or observation plan",
+        "success_condition": "On frozen held-out scientific inquiry states, proposed questions/hypotheses are scientifically coherent, falsifiable, nontrivial relative to given evidence, and lead to tests whose outcomes materially discriminate between live explanations; Brain matched conservative quality/usefulness bound >= Opus 5.5 on the same portfolio or a stronger objective ceiling is proved",
+        "failure_condition": "Tautological or unfalsifiable hypothesis, restatement of given facts, question with no discriminating test, ignored decisive evidence, or research choice dominated by an available higher-information feasible alternative",
+        "scope": "Scientific research-question and hypothesis formation from evidence state",
+        "dependency_boundary": "Search execution, citation storage and deterministic statistical calculations are separate; this residual is the scientific choice of what to ask/test next",
+        "proof_mode": "MATCHED_DIRECT_NONINFERIORITY_OR_STRONGER_OBJECTIVE_DISCRIMINATION_CEILING"
+      },
+      "unresolved_after_semantic_dedupe": [
+        "TB_SCIENCE_TARGET_OBSERVATION_IDENTITY_MUST_BE_RECONCILED_58_7_VS_CURRENT_63_3_CONDITION",
+        "RESULT_INTERPRETATION_VALIDATION_AND_COMMUNICATION_SHOULD_REUSE_EXISTING_SYNTHESIS_VERIFICATION_DEPENDENCIES_WHEN_SCOPE_STRENGTH_IS_CONFIRMED"
+      ],
+      "new_unique_residual_count": 1
+    }
+  ],
+  "aggregate": {
+    "original_broad_scope_gap_count": 5,
+    "new_unique_behavioral_residuals_after_semantic_dedupe": 1,
+    "residual_id": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+    "compression_ratio_new_residuals_per_original_gap": 0.2,
+    "caveat": "THIS_IS_SEMANTIC_DEPENDENCY_COMPRESSION_NOT_ACCEPTANCE CLOSURE; EACH REUSE EDGE STILL REQUIRES SCOPE-STRENGTH VERIFICATION."
+  },
+  "scheduler_effect": {
+    "delete": [
+      "CREATE_FIVE_INDEPENDENT_BESPOKE_SCOPE_PORTFOLIOS_BY_DEFAULT"
+    ],
+    "activate": [
+      "VERIFY_SCOPE_STRENGTH_OF_REUSE_EDGES",
+      "AUDIT_PUBLIC_TASK_UNIONS_AGAINST_FROZEN_BASIS_LEAVES",
+      "FREEZE_SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_IF_NO_EXISTING_STRONGER_CONTRACT_IS_FOUND"
+    ],
+    "preserve": [
+      "ALL_EXISTING_PUBLIC_FIXED_BARS_AS_NECESSARY_PENDING_TARGET_OBSERVATION_REFRESH",
+      "ZERO_ACCEPTANCE_CREDIT",
+      "ROOT1_POSITIVE_GAP_ZERO"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

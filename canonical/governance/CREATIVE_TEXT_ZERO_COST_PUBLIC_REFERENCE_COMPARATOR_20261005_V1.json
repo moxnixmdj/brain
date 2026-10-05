@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_CREATIVE_TEXT_ZERO_COST_PUBLIC_REFERENCE_COMPARATOR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PUBLIC_OPUS55_OUTPUTS_ENABLE_OFFLINE_MATCHED_CREATIVE_COMPARATOR__ZERO_CREDIT",
+  "objective": "Replace paid live creative-text comparator dependence with a contamination-controlled offline matched comparison against already-public Opus 5.5 outputs.",
+  "target_stratum": "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+  "public_reference": {
+    "source": "https://github.com/lechmazur/writing",
+    "facts": [
+      "fixed creative briefs are public",
+      "generated stories are public under stories_wc/<model>/",
+      "Claude Opus 5.5 high is included in the current fitted writer set",
+      "machine-readable leaderboard and judgment data are public",
+      "the 2026-08-23 public data snapshot includes source stories and prompts with hashes"
+    ],
+    "current_public_opus55_summary": {
+      "model": "Claude Opus 5.5 (high)",
+      "comparison_score": 3.767,
+      "estimated_win_chance": "93%",
+      "reported_95pct_bootstrap_interval": "3.676 to 3.882"
+    },
+    "role": "FROZEN_REFERENCE_OUTPUT_SOURCE__NOT_INHERITED_BRAIN_SCORE"
+  },
+  "open_judge_candidates": [
+    {
+      "id": "SAA_LAB_LLAMA8B_CREATIVE_WRITING_VERIFIER",
+      "source": "https://huggingface.co/SAA-Lab/Llama8B-CreativeWritingVerifier",
+      "type": "scalar creative-writing reward model",
+      "size": "8B",
+      "license": "llama3.1",
+      "usage": "score raw story text directly",
+      "strength": "purpose-built verifier from the LitBench research line"
+    },
+    {
+      "id": "QWEN35_4B_CREATIVE_WRITING_JUDGE",
+      "source": "https://huggingface.co/selfhypnosis-ai/Qwen3.5-4B-Creative-Writing-Judge",
+      "type": "pairwise creative-writing judge",
+      "size": "4B",
+      "license": "Apache-2.0",
+      "quantized_route": "published GPTQ 4-bit variant reported by model card with no measurable evaluation degradation",
+      "strength": "smaller zero-cost local judge candidate"
+    }
+  ],
+  "human_grounding_reference": {
+    "source": "LitBench, arXiv:2507.00769",
+    "facts": [
+      "held-out test set uses debiased human-labeled creative-writing comparisons",
+      "training corpus contains 43,827 human preference pairs",
+      "trained reward models reported 78% held-out human-preference accuracy and were checked in an online human study"
+    ],
+    "rule": "JUDGE_SELECTION_OR_CALIBRATION_MUST_BE_FROZEN_BEFORE_BRAIN_OUTPUT_GENERATION; DO_NOT_TREAT_ANY_JUDGE_AS_GROUND_TRUTH"
+  },
+  "clean_room_protocol_candidate": {
+    "precommit_before_generation": [
+      "exact public benchmark revision and SHA256 manifests",
+      "Opus 5.5 reference story IDs",
+      "Brain prompt IDs",
+      "judge model hash and quantization",
+      "preprocessing and max-length rules",
+      "statistical test and failure threshold"
+    ],
+    "generation_isolation": [
+      "Brain generation lane receives prompt only",
+      "Opus reference stories and evaluator prose are inaccessible to Brain generation",
+      "network/JIT retrieval disabled unless the frozen prompt itself requires external knowledge",
+      "no iterative optimization against held-out judge scores"
+    ],
+    "paired_test": {
+      "unit": "same prompt / same required creative brief",
+      "primary_effect": "judge_score(Brain_story) - judge_score(Opus55_story)",
+      "acceptance": "predeclared conservative lower confidence bound of paired Brain-minus-Opus effect >= 0",
+      "secondary_guards": [
+        "all mandatory brief elements materially integrated",
+        "length normalization or bounded length window",
+        "position-order symmetry for pairwise judges",
+        "bootstrap or exact paired uncertainty",
+        "judge-disagreement reported rather than silently averaged"
+      ]
+    }
+  },
+  "breakthrough": {
+    "live_opus_api_required_for_this_route": false,
+    "paid_judge_api_required_for_this_route": false,
+    "new_target_generation_cost_usd": 0,
+    "reference_opus_generation_cost_usd": 0,
+    "remaining_cost": "LOCAL_OR_ALREADY_AVAILABLE_COMPUTE_ONLY",
+    "remaining_uncertainty": "OPEN_JUDGE_VALIDITY_AND_SCOPE_MATCH_MUST_BE_CALIBRATED_AND_INDEPENDENTLY_VERIFIED"
+  },
+  "priority": [
+    "PIN_PUBLIC_WRITING_BENCHMARK_REVISION_AND_OPUS55_STORY_SET",
+    "SELECT_SMALLEST_OPEN_JUDGE_THAT_PASSES_HUMAN_PREFERENCE_CALIBRATION",
+    "FREEZE_CLEAN_ROOM_MATCHED_PROTOCOL",
+    "RUN_NONTERMINAL_SMOKE_SET_FIRST",
+    "ONLY_THEN_REQUEST_OR_USE_FRESH_ACCEPTANCE_AUTHORITY_IF_THE_STRATUM_REQUIRES_TERMINAL_CASES"
+  ],
+  "hard_nonclaims": [
+    "NO_CREATIVE_TEXT_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_PUBLIC_LECHMAZUR_SCORE_IS_THE_TERMINAL_METRIC",
+    "NO_CLAIM_OPEN_JUDGE_IS_UNBIASED",
+    "NO_CLAIM_CURRENT_BRAIN_OUTPUTS_HAVE_BEEN_SCORED",
+    "NO_TERMINAL_CASES_CONSUMED",
+    "NO_INCREMENTAL_SPEND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}

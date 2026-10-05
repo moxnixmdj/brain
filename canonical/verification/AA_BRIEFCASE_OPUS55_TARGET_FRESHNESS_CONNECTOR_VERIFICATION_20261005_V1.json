@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_OPUS55_TARGET_FRESHNESS_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_PRIMARY_SOURCE_RECOMPUTATION_PASS__CURRENT_OWNER_OPUS55_MAX_1808__FROZEN_1822_NOT_UNCONDITIONAL__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/AA_BRIEFCASE_OPUS55_TARGET_FRESHNESS_RECONCILIATION_20261005_V1.json"
+  },
+  "primary_source": {
+    "url": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+    "observed_date": "2026-10-05",
+    "benchmark": "AA-Briefcase v1.1",
+    "model": "Claude Opus 5.5 (Max, Default Fallback)",
+    "elo": 1808,
+    "confidence_interval": "-13/+12",
+    "task_count": 91
+  },
+  "checks": {
+    "frozen_brain_target_1822": true,
+    "current_owner_target_1808": true,
+    "current_owner_page_defines_combined_relative_elo_metric": true,
+    "unconditional_cross_epoch_1822_is_not_scope_safe": true,
+    "current_epoch_1808_and_historical_1822_require_separate_identity_bindings": true,
+    "two_predicate_score_reuse_requires_separate_scope_bindings": true
+  },
+  "verified_consequence": "CONDITIONALIZE_AA_BRIEFCASE_TARGET_BY_EXACT_RATING_EPOCH_BEFORE_ANY_SCORE_RECEIPT_CAN_BE_PROMOTED",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_SCORE_RECEIPT",
+    "NO_CLAIM_OF_HISTORICAL_SOURCE_IDENTITY",
+    "NO_FRESH_TERMINAL_REALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

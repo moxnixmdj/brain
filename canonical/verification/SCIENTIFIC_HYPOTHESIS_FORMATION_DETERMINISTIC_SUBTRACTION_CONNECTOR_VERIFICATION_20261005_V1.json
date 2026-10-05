@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_HYPOTHESIS_FORMATION_DETERMINISTIC_SUBTRACTION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__THREE_OWNED_SUBTRANSFORMS_SOUNDLY_SUBTRACTED__ONE_SEMANTIC_RESIDUAL_PRESERVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_DETERMINISTIC_SUBTRACTION_20261005_V1.json",
+    "git_blob_sha": "da24aa0173be9dc5d43bdb427cdc790bf7481c14"
+  },
+  "source_recomputation": {
+    "typed_hypothesis_compiler": {
+      "path": "canonical/capabilities/opus55/TYPED_HYPOTHESIS_COMPILER_001.json",
+      "git_blob_sha": "07f16c9e0a61904bf2aff306e4cba4a68e05d65c",
+      "implementation_blob_sha": "c52407e8e399edbc7254dddf76f615a4e4136d79",
+      "independent_run_id": 36950600157,
+      "verified_scope": "EXPLICIT_TYPED_ENTITY_FACT_AND_TEMPLATE_UNIVERSE_TO_EXHAUSTIVE_SUPPORTED_CANDIDATE_SET"
+    },
+    "deterministic_decision_primitives": {
+      "path": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json",
+      "git_blob_sha": "c15ba1718df2d7108c371d0a5a1193fb88ba00df",
+      "runner_verified_blob_sha": "7f880b31274cec24e0f241fcf03d3af41f4d6bf8",
+      "independent_run_id": 36902437206,
+      "verified_scope": [
+        "HARD_CONSTRAINT_ADMISSIBILITY",
+        "EXPECTED_UTILITY",
+        "BAYES_POSTERIOR",
+        "EXPECTED_INFORMATION_GAIN",
+        "INTERVENABILITY_FROM_EXPLICIT_AUTHORITY"
+      ]
+    },
+    "conditional_discriminator": {
+      "path": "canonical/governance/UNIVERSAL_LEARNING_DECISION_ROUTER_V3.json",
+      "git_blob_sha": "093da5ba9294fbc4374b63ac65ed96dcfd869511",
+      "implementation_blob_sha": "3ec9e43a7bbe40a264fa3560a93039461941dbee",
+      "verification_path": "canonical/verification/UNIVERSAL_LEARNING_DECISION_ROUTER_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "verification_git_blob_sha": "6810cce4dfeee587fde449951f17da8d37c1eb6e",
+      "independent_run_id": 37157661615
+    }
+  },
+  "checks": {
+    "typed_candidate_enumeration_owned_only_when_templates_types_and_fact_universe_are_explicit": true,
+    "typed_candidate_enumeration_explicitly_excludes_open_ended_template_invention": true,
+    "bayes_information_gain_and_expected_utility_owned_only_when_probability_and_observation_models_are_explicit": true,
+    "decision_primitives_explicitly_leave_semantic_plausibility_hypothesis_generation_and_model_estimation_open_when_models_are_missing": true,
+    "conditional_discriminator_verified_only_for_declared_hypotheses_actions_probabilities_and_predicted_outcomes": true,
+    "conditional_discriminator_does_not_claim_predicted_outcome_models_are_true": true,
+    "three_subtractions_do_not_cover_open_ended_scientific_semantic_invention": true,
+    "minimum_open_residual_is_strictly_narrower_than_unfactored_hypothesis_formation": true,
+    "open_residual_preserved": "SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001",
+    "no_matched_opus_repayment_required_for_the_three_owned_subtransforms": true,
+    "no_terminal_acceptance_inferred_from_component_ownership": true
+  },
+  "verified_reduction": {
+    "prior_unfactored_obligation": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+    "owned_subtransform_count": 3,
+    "open_semantic_residual_count": 1,
+    "deleted_new_proof_work": [
+      "MATCHED_OPUS_EVALUATION_OF_EXPLICIT_TYPED_CANDIDATE_ENUMERATION",
+      "MATCHED_OPUS_EVALUATION_OF_EXACT_INFORMATION_GAIN_ON_EXPLICIT_MODELS",
+      "MATCHED_OPUS_EVALUATION_OF_EXACT_CONDITIONAL_DISCRIMINATION_ON_DECLARED_MODELS"
+    ],
+    "preserved_new_proof_work": [
+      "SCIENTIFIC_HYPOTHESIS_SEMANTIC_INVENTION_AND_MODEL_FORMATION_001"
+    ],
+    "fresh_reality_required_for_reduction": false
+  },
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_A_NEW_INDEPENDENT_PUBLIC_RUNNER_EXECUTION",
+    "NO_CLAIM_OPEN_ENDED_SCIENTIFIC_HYPOTHESIS_FORMATION_IS_SOLVED",
+    "NO_CLAIM_SEMANTIC_MODEL_ESTIMATION_IS_OWNED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_ROOT1_POSITIVE_CAPABILITY_GAP",
+    "NO_NEW_FAMILY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "verdict": "PASS"
+}

@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BAR_SCOPE_COMPLETION_RESIDUAL_CONTRACT_BRIDGE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIVE_PUBLIC_BAR_SCOPE_GAPS_FACTORED_TO_EXISTING_RESIDUAL_CONTRACTS__FINITE_SHARED_PROOF_BASIS__ZERO_CREDIT",
+  "objective": "Repair the five verified public-bar-only whole-family scope-completeness gaps without inventing new capability families or treating benchmark names as whole-family proxies. Public bars retain only their represented scope; the existing behavioral-contract registry supplies explicit uncovered-scope obligations.",
+  "authorities": {
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "capability_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "public_bar_scope_quarantine": {
+      "path": "canonical/governance/PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "fa4cddb4af4fb29c7e19e004774b11d6b874359a"
+    }
+  },
+  "bridge_rule": "For each affected family, retain every existing public fixed-bar predicate only for the behavioral scope actually exercised by that benchmark, and add every behavior_id in the exact current family_to_residual_contracts mapping as an explicit uncovered-scope obligation unless a separately verified lossless benchmark-scope equivalence theorem removes that obligation.",
+  "affected_families": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "residual_contracts": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+      ]
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "residual_contracts": [
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ]
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "residual_contracts": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ]
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "residual_contracts": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+      ]
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "residual_contracts": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ]
+    }
+  ],
+  "compression": {
+    "affected_family_count": 5,
+    "family_contract_incidence_count": 16,
+    "unique_residual_contract_count": 10,
+    "duplicate_incidences_eliminable_by_contract_level_proof_reuse": 6,
+    "unique_residual_contracts": [
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+    ]
+  },
+  "consequence": [
+    "REPLACE_FIVE_UNBOUNDED_SCOPE_PARTITION_OR_EQUIVALENCE_TASKS_WITH_ONE_FINITE_SHARED_RESIDUAL_CONTRACT_PROOF_GRAPH",
+    "KEEP_PUBLIC_BARS_LOAD_BEARING_ONLY_FOR_SCOPE_THEY_ACTUALLY_EXERCISE",
+    "ALLOW_ONE_CONTRACT_LEVEL_PROOF_TO_DISCHARGE_MULTIPLE_IDENTICAL_BEHAVIOR_ID_INCIDENCES_ONLY_WHEN_SCOPE_IDENTITY_AND_PROOF_DOMAIN_ARE_VERIFIED",
+    "PRESERVE_ROOT1_POSITIVE_GAP_ZERO",
+    "DO_NOT_OPEN_NEW_CAPABILITY_FAMILY_FROM_SCOPE_BASIS_REPAIR"
+  ],
+  "hard_nonclaims": [
+    "NO_FAMILY_ACCEPTANCE_CREDIT",
+    "NO_ATOMIC_PREDICATE_CREDIT",
+    "NO_OWNERSHIP_OR_CAPABILITY_CREDIT",
+    "NO_BENCHMARK_WHOLE_FAMILY_EQUIVALENCE_CLAIM",
+    "NO_CLAIM_ANY_RESIDUAL_CONTRACT_IS_ALREADY_PROVED_BY_THIS_BRIDGE",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "atomic_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

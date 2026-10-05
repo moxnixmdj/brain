@@ -1,0 +1,212 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_THREE_DOMAIN_INSTANCE_EXISTING_FAMILY_MAPPING_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__GRANULAR_EXAMPLES_FACTOR_THROUGH_EXISTING_FAMILIES__THREE_BROAD_DOMAIN_UMBRELLAS_COMPRESSED_TO_ONE_DECOMPOSITION_COMPLETENESS_GATE__ZERO_CREDIT",
+  "objective": "Resolve the three remaining domain-labeled Root1 meta-mapping groups by erasing domain nouns and mapping each currently evidenced useful operation to the existing functional capability envelope; keep open-world target discovery separate.",
+  "source_bindings": {
+    "first_party_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    },
+    "family_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "open_world_boundary": {
+      "path": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json"
+    },
+    "first_party_domain_operation_facts": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_DOMAIN_OPERATION_FACTS_20261005_V1.json",
+      "git_blob_sha": "c50e3a3f3c67b098148fcf4ca3128cc72122b31b"
+    }
+  },
+  "first_party_public_observations": {
+    "cybersecurity": {
+      "source": "https://www.anthropic.com/claude-opus-5-5",
+      "observed_useful_operations": [
+        "IDENTIFY_BUGS_IN_CODE",
+        "FIX_BUGS_IN_CODE",
+        "CYBERDEFENDER_WORK_UNDER_VERIFIED_ACCESS"
+      ],
+      "boundary": "MOST_CYBERSECURITY_TASKS_MAY_BE_REROUTED_BY_PRODUCTION_SAFEGUARDS; THIS MAPPING IS ABOUT UNDERLYING_USEFUL_BEHAVIOR_CLASSIFICATION_NOT_ACCESS_POLICY."
+    },
+    "biology_r_and_d": {
+      "source": "https://www.anthropic.com/claude-opus-5-5",
+      "observed_useful_operations": [
+        "LONG_HORIZON_MOLECULAR_PREDICTION",
+        "MOLECULAR_DESIGN",
+        "SCIENTIFIC_NOVELTY_GENERATION_OR_JUDGMENT",
+        "BIOLOGY_RESEARCH_AND_DEVELOPMENT_WORK"
+      ]
+    },
+    "ai_r_and_d": {
+      "sources": [
+        "https://www.anthropic.com/transparency",
+        "https://www.anthropic.com/institute/measuring-pace-of-ai-development"
+      ],
+      "observed_functional_task_examples": [
+        "EVAL_PLATFORM_DEFECT_DIAGNOSIS_AND_FIXES",
+        "RL_SANDBOX_EGRESS_AND_NETWORK_POLICY",
+        "SERVING_INCIDENT_POSTMORTEMS",
+        "LONG_HORIZON_RESEARCH_AND_ENGINEERING_AGENT_WORK",
+        "RESEARCH_DIRECTION_SELECTION_UNDER_HUMAN_SUPERVISION"
+      ],
+      "task_tree_context": "ANTHROPIC_REPORTS_A_FROZEN_AI_R_AND_D_TREE_WITH_542_NODES_AND_378_LEAVES_FROM_APPROXIMATELY_15000_GRANULAR_TASKS; THE REPORT_IS_EVIDENCE_OF_FUNCTIONAL_DIVERSITY_NOT_AN_OPUS55_EXHAUSTIVENESS_CERTIFICATE."
+    }
+  },
+  "domain_erasure_rule": "A DOMAIN LABEL DOES_NOT_CONSTITUTE_A_NEW_CAPABILITY_FAMILY_IF, AFTER REPLACING DOMAIN_SPECIFIC_ENTITIES_AND_KNOWLEDGE_WITH_TYPED_INPUTS_OR_JIT_KNOWLEDGE, EVERY OBSERVED REQUIRED_TRANSFORM_IS_ALREADY_EXPRESSIBLE_AS A COMPOSITION_OF_EXISTING_FUNCTIONAL_FAMILIES_AND_NO_NEW_CONTROL_OR_TRANSFORMATION_PRIMITIVE_REMAINS.",
+  "mappings": [
+    {
+      "surface_group": "CYBERSECURITY",
+      "domain_erased_transforms": [
+        "CODE_OR_SYSTEM_STATE_TO_DEFECT_HYPOTHESIS",
+        "DEFECT_HYPOTHESIS_TO_PATCH_OR_MITIGATION",
+        "TOOL_MEDIATED_VALIDATION_AND_RECOVERY"
+      ],
+      "existing_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "COMPUTER_AND_BROWSER_USE",
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "existing_behavioral_leaves": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+      ],
+      "new_family_counterexample": null,
+      "classification": "CURRENTLY_OBSERVED_DOMAIN_INSTANCE_OF_EXISTING_FUNCTIONAL_UNION"
+    },
+    {
+      "surface_group": "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "domain_erased_transforms": [
+        "LONG_HORIZON_RESEARCH_QUESTION_TO_EVIDENCE_AND_HYPOTHESES",
+        "SPECIALIZED_TOOL_OR_MODEL_SELECTION_AND_USE",
+        "ITERATIVE_PREDICTION_OR_DESIGN_UNDER_DOMAIN_CONSTRAINTS",
+        "NOVELTY_OR_RESULT_TO_EVIDENCE_GROUNDED_SYNTHESIS"
+      ],
+      "existing_family_union": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "existing_behavioral_leaves": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "new_family_counterexample": null,
+      "classification": "CURRENTLY_OBSERVED_DOMAIN_INSTANCE_OF_EXISTING_FUNCTIONAL_UNION"
+    },
+    {
+      "surface_group": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "domain_erased_transforms": [
+        "ENGINEERING_DEFECT_DIAGNOSIS_TO_FIX",
+        "RESEARCH_REQUIREMENT_TO_EVIDENCE_HYPOTHESIS_AND_EXPERIMENT",
+        "SYSTEM_POLICY_OR_INFRASTRUCTURE_REQUIREMENT_TO_IMPLEMENTATION_AND_VALIDATION",
+        "INCIDENT_TRAJECTORY_TO_CAUSAL_POSTMORTEM_AND_REPAIR",
+        "TASK_GRAPH_TO_DELEGATED_MULTI_AGENT_EXECUTION",
+        "MULTI_CAPABILITY_RESULT_TO_VERIFIED_INTEGRATION"
+      ],
+      "existing_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "MULTI_CAPABILITY_COMPOSITION",
+        "COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "existing_behavioral_leaves": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "TASK_TO_DELEGATION_GRAPH_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "new_family_counterexample": null,
+      "classification": "CURRENTLY_OBSERVED_DOMAIN_INSTANCE_OF_EXISTING_FUNCTIONAL_UNION"
+    }
+  ],
+  "knowledge_capability_separation": {
+    "domain_facts_ontologies_and_current_literature": "EXTERNAL_JIT_KNOWLEDGE",
+    "internalized_target": "FUNCTIONAL_TRANSFORMS_CONTROL_POLICIES_TOOL_USE_VERIFICATION_AND_COMPOSITION",
+    "effect": "DOMAIN_NOUNS_CANNOT_FORCE_NEW_INTERNALIZED_FAMILY_WHEN ONLY THE KNOWLEDGE_PAYLOAD_CHANGES."
+  },
+  "result": {
+    "granular_observed_examples_map_to_existing_family_union": true,
+    "positive_new_family_counterexample_found": false,
+    "three_meta_mapping_groups_closed": false,
+    "new_family_count_delta": 0,
+    "root1_positive_capability_gap_delta": 0,
+    "compressed_shared_residual": {
+      "id": "THREE_DOMAIN_UMBRELLA_TO_FUNCTIONAL_LEAF_DECOMPOSITION_COMPLETE",
+      "predicate": "FOR_EACH_OF_CYBERSECURITY_BIOLOGY_R_AND_D_AUTOMATED_AI_R_AND_D__EVERY_USEFUL_BEHAVIOR_WITHIN_THE_FIRST_PARTY_ASSERTED_UMBRELLA_FACTORS_THROUGH_THE_EXISTING_FUNCTIONAL_FAMILY_UNION_OR_A_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_IS_EXHIBITED",
+      "current": false,
+      "discharge_routes": [
+        "CONTENT_ADDRESSED_OWNER_TASK_TAXONOMY_OR_EVAL_SCOPE_COMPLETE_ENOUGH_TO_ENUMERATE_THE_ASSERTED_UMBRELLA",
+        "SCOPE_COMPLETE_FUNCTIONAL_UNIVERSALITY_THEOREM_OVER_THE_DOMAIN_UMBRELLA",
+        "STRONGER_PROOF_LOGICALLY_IMPLYING_COMPLETE_DECOMPOSITION"
+      ]
+    },
+    "relation_to_open_world_boundary": "THIS_GATE_HANDLES_BROAD_BUT_ALREADY_ASSERTED_DOMAIN_UMBRELLAS; THE_OPEN_WORLD_TARGET_BOUNDARY_HANDLES_USEFUL_TARGET_BEHAVIORS_NOT_YET_EVIDENCED_AT_ALL."
+  },
+  "falsifiers": [
+    "A_FIRST_PARTY_USEFUL_CYBER_BIOLOGY_OR_AI_R_AND_D_BEHAVIOR_REQUIRES_AN_OPERATION_NOT_EXPRESSIBLE_AS_A_COMPOSITION_OF_THE_BOUND_EXISTING_FUNCTIONAL_FAMILIES.",
+    "A_DOMAIN_SPECIFIC_INTERNALIZED_MECHANISM_IS_PROVED_LOAD_BEARING_EVEN_WHEN_DOMAIN_KNOWLEDGE_IS_AVAILABLE_JIT_AND_CANNOT_BE_REPRESENTED_AS_TYPED_INPUT_PLUS_EXISTING_CONTROL_TRANSFORMS.",
+    "INDEPENDENT_VERIFICATION_FINDS_AN_OBSERVED_SOURCE_BEHAVIOR_OMITTED_FROM_THE_OPERATION_MAPPING."
+  ],
+  "scheduler_delta": {
+    "delete_if_verified": [
+      "THREE_SEPARATE_GENERIC_NEW_FAMILY_SEARCHES_FOR_CYBERSECURITY_BIOLOGY_AND_AI_R_AND_D",
+      "DOMAIN_LABEL_TO_NEW_FAMILY_INFERENCE",
+      "CLAIM_THREE_DOMAIN_GROUPS_CLOSED_FROM_GRANULAR_EXAMPLES_ONLY"
+    ],
+    "activate": [
+      "ONE_SHARED_THREE_STRATUM_DOMAIN_DECOMPOSITION_COMPLETENESS_GATE",
+      "SEARCH_SYSTEM_CARD_OR_OWNER_EVAL_TAXONOMY_FOR_SCOPE_COMPLETE_DOMAIN_DECOMPOSITION",
+      "REOPEN_NEW_FAMILY_ONLY_ON_CONSTRUCTIVE_UNMAPPED_FUNCTIONAL_BEHAVIOR"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_POSSIBLE_PUBLIC_OR_PRIVATE_CYBER_BIOLOGY_OR_AI_R_AND_D_BEHAVIORS_HAVE_BEEN_OBSERVED",
+    "NO_CLAIM_EXISTING_FAMILIES_ARE_ACCEPTED_OR_OWNED_MERELY_BY_THIS_MAPPING",
+    "NO_CLAIM_DOMAIN_KNOWLEDGE_IS_INTERNALIZED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "truth_repair": {
+    "retracted_v1_implication": "CONTENT_ADDRESSED_GRANULAR_EXAMPLES_WERE_SUFFICIENT_TO_CLOSE_THE_THREE_DOMAIN_META_MAPPING_GROUPS",
+    "reason": "THE FIRST_PARTY SOURCES ALSO ASSERT_BROAD_CYBERDEFENDER_BIOLOGY_R_AND_D_AND_AUTOMATED_AI_R_AND_D_SCOPES_WITHOUT_PUBLISHING_AN_EXHAUSTIVE_OPERATION_LIST; EXAMPLE_LEVEL_MAPPING_CANNOT_PROVE_LOSSLESS_UMBRELLA_COVERAGE."
+  }
+}

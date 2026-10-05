@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_TARGET_DISCOVERY_MINIMUM_INFORMATION_CUT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__MINIMUM_INFORMATION_CUT__LITERAL_TARGET_COMPLETENESS_REDUCED_TO_ONE_OF_THREE_WITNESS_CLASSES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Eliminate benchmark accumulation as a purported proof of literal target-discovery completeness and reduce the open-world remainder to the minimum logically sufficient information classes.",
+  "authority": [
+    "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+    "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json"
+  ],
+  "bounded_first_party_public_scan": {
+    "as_of_utc": "2026-10-05T01:55:00Z",
+    "sources": [
+      {
+        "url": "https://www.anthropic.com/system-cards",
+        "observed_semantics": "System cards document capabilities, safety evaluations, and deployment decisions; no exhaustiveness claim for all useful behaviors observed on the indexed page."
+      },
+      {
+        "url": "https://www.anthropic.com/transparency",
+        "observed_semantics": "Transparency Hub points to Section 8 benchmarked capabilities and describes complete publicly reported evaluation results; completeness is stated for reported evaluation results, not for the universe of useful behaviors."
+      },
+      {
+        "url": "https://www.anthropic.com/claude/opus",
+        "observed_semantics": "Opus 5.5 product page uses non-exhaustive wording 'Key use cases include' for coding, agents, enterprise workflows, financial analysis, and vision/computer use."
+      },
+      {
+        "url": "https://www.anthropic.com/claude-opus-5-5",
+        "observed_semantics": "Launch article presents selected improvements, examples, and benchmarks rather than an exhaustive behavioral specification."
+      }
+    ],
+    "owner_exhaustiveness_attestation_found": false,
+    "hard_nonclaim": "This bounded scan does not prove that no exhaustiveness attestation exists anywhere; it proves only that the currently bound first-party surfaces inspected here do not supply one."
+  },
+  "theorem": {
+    "name": "TARGET_DISCOVERY_MINIMUM_INFORMATION_CUT",
+    "statement": "Let U be the actual set of useful Opus 5.5 observable capabilities. A proof that Brain owns every element of U requires either a complete specification of U, direct implementation-level information sufficient to derive U, or a universal dominance proof whose quantifier already ranges over the complete admissible Opus behavior domain. Finite benchmark or demonstration sets without a completeness premise cannot discharge this quantifier.",
+    "proof": [
+      "Any finite observed set O that is not proven equal to U is consistent with an unobserved x in U minus O.",
+      "Passing or owning every element induced by O therefore cannot imply ownership of x.",
+      "Adding another finite observation merely replaces O by a larger finite O' and leaves the same logical gap unless completeness is separately established.",
+      "Therefore benchmark accumulation is not on the literal-completeness critical path after the observed epoch is covered."
+    ]
+  },
+  "minimal_sufficient_witness_classes": [
+    {
+      "id": "W1_TARGET_OWNER_EXHAUSTIVE_BEHAVIOR_SPECIFICATION",
+      "sufficient_if": "Anthropic or another authority competent to define the target supplies a content-addressed statement/specification that is explicitly exhaustive for the useful behavior universe of the frozen Opus 5.5 target.",
+      "current_state": "NOT_PRESENT_IN_BOUND_FIRST_PARTY_PUBLIC_SCAN"
+    },
+    {
+      "id": "W2_IMPLEMENTATION_LEVEL_COMPLETE_CHARACTERIZATION",
+      "sufficient_if": "Exact target implementation information plus semantics is available at a level that permits a sound derivation of every admissible useful input-output behavior and comparison against Brain.",
+      "examples": [
+        "exact executable/model with complete semantics",
+        "weights plus serving semantics plus tool/interface semantics sufficient for formal characterization"
+      ],
+      "current_state": "NOT_AVAILABLE_IN_CURRENT_CANONICAL_EVIDENCE"
+    },
+    {
+      "id": "W3_UNIVERSAL_BEHAVIORAL_DOMINANCE_THEOREM",
+      "sufficient_if": "An independently verified theorem proves Brain equal-or-better for every behavior in a domain independently proven extensionally equal to the complete useful Opus 5.5 behavior domain.",
+      "current_state": "NO_COMPLETE_DOMAIN_EQUIVALENCE_PREMISE_YET"
+    }
+  ],
+  "dominated_actions": [
+    "ADD_MORE_BENCHMARKS_FOR_THE_PURPOSE_OF_PROVING_ABSENCE_OF_UNOBSERVED_TARGET_BEHAVIOR",
+    "PROMOTE_CURRENT_38_OR_ANY_FINITE_EXTENSION_TO_LITERAL_ALL_USEFUL_COMPLETENESS_WITHOUT_W1_W2_OR_W3",
+    "TREAT_REGISTRY_INCIDENCE_OR_CURRENT_IMPLEMENTATION_MECHANISMS_AS_TARGET_DISCOVERY_COMPLETENESS"
+  ],
+  "scheduler_recommendation": {
+    "literal_terminal_completeness_lane": [
+      "SEARCH_OR_REQUEST_W1_FIRST_BECAUSE_IT_HAS_THE_LOWEST_INFORMATION_AND_COMPUTE_COST",
+      "IF_W1_UNAVAILABLE__TEST_W2_AVAILABILITY_WITHOUT_PAID_OR_UNAUTHORIZED_EXTRACTION",
+      "IN_PARALLEL_BUILD_W3_ONLY_IF_A_COMPLETE_TARGET_DOMAIN_PREMISE_CAN_BE_PROVED_WITHOUT_REDEFINING_THE_TARGET"
+    ],
+    "observed_epoch_lane": "Continue closing currently evidenced target obligations because this advances the ontological goal, but do not mislabel epoch closure as literal target completeness.",
+    "recompute_rule": "Any verified W1/W2/W3 witness immediately supersedes this cut and triggers full terminal recomputation."
+  },
+  "hard_nonclaims": [
+    "NO_WEAKENING_OR_REDEFINITION_OF_ALL_USEFUL",
+    "NO_CLAIM_CURRENT_PUBLIC_SOURCES_ARE_EXHAUSTIVE",
+    "NO_CLAIM_THE_LITERAL_TERMINAL_GOAL_IS_IMPOSSIBLE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

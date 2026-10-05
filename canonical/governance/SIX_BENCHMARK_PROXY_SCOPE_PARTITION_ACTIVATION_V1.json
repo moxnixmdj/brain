@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_SCOPE_PARTITION_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__CONNECTOR_RECOMPUTATION_PASS__SIX_BROAD_FAMILIES_COMPRESSED_TO_SEVEN_UNIQUE_SCOPE_LEAVES__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subjects": {
+    "quarantine": {
+      "path": "canonical/governance/BENCHMARK_PROXY_SCOPE_COMPLETENESS_QUARANTINE_V2_20261005.json",
+      "git_blob_sha": "c62b7c1f8e838a1a37d8b5513953191f717b40e8"
+    },
+    "partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+      "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f"
+    },
+    "verification": {
+      "path": "canonical/verification/SIX_BENCHMARK_PROXY_SCOPE_PARTITION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "3854e8db30023d29ae6b2157b1b359a6be13b347"
+    }
+  },
+  "supersedes_for_scheduling": [
+    "canonical/governance/PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_ACTIVATION_V1.json",
+    "canonical/governance/FIVE_PUBLIC_BAR_FAMILY_SCOPE_PARTITION_V1.json"
+  ],
+  "current_scope_repair_frontier": [
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+    "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+  ],
+  "priority": [
+    "EXACT_EXISTING_BENCHMARK_SCOPE_BINDING_OR_EXISTING_SCOPE_COMPLETE_RECEIPT",
+    "DETERMINISTIC_OR_FORMAL_STRONGER_PROOF",
+    "SHARED_SCOPE_CERTIFICATE",
+    "ONLY_THEN_MINIMUM_NEW_REALITY_FOR_SURVIVING_LEAVES"
+  ],
+  "effects": [
+    "BLOCK_WHOLE_FAMILY_PROMOTION_FOR_SIX_AFFECTED_FAMILIES_UNTIL_SCOPE_REPAIR_CLOSES",
+    "DO_NOT_DUPLICATE_RECOVERY_TOOL_DISCOVERY_OR_NATIVE_ARTIFACT_MECHANICS_EVIDENCE",
+    "RECOMPUTE_ALL_SIX_FAMILIES_AFTER_EACH_OF_SEVEN_LEAF_DELTAS"
+  ],
+  "current_accounting": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic_registry": 14,
+    "unresolved_atomic_registry": 24,
+    "root1_positive_gap_count": 0,
+    "literal_terminal_finality": false
+  },
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_BENCHMARK_PROXY_TO_WHOLE_SCOPE_WITHOUT_LOSSLESS_BINDING",
+    "UNKNOWN_IS_NOT_MISSING"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

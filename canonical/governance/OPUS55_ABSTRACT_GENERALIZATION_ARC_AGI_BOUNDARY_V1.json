@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ABSTRACT_GENERALIZATION_ARC_AGI_BOUNDARY_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXTERNAL_VERIFIED_CAPABILITY_DIMENSION_NOT_EXPLICIT_IN_V5__EXISTING_FAMILY_CONDITION_MAPPING__PARITY_OPEN__ZERO_CREDIT",
+  "observation": {
+    "benchmark": "ARC-AGI",
+    "model": "Claude Opus 5.5",
+    "source": "https://arcprize.org/results/anthropic-claude-opus-5.5",
+    "verified_scores": {
+      "arc_agi_1_high_percent": 98.5,
+      "arc_agi_2_high_percent": 93.3
+    },
+    "role": "Evidence that abstract/few-shot visual generalization is a material demonstrated Opus 5.5 capability dimension."
+  },
+  "current_authority": {
+    "v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "current_surface_mapping": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "git_blob_sha": "58b7a3a25d4f19eb34182f1dfbd36634f1c75142"
+    }
+  },
+  "classification": {
+    "surface": "ABSTRACT_GENERALIZATION_ARC_AGI",
+    "kind": "CROSS_CUTTING_NOVEL_TASK_GENERALIZATION_CONDITION",
+    "existing_family_union": [
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+    ],
+    "new_accounting_family_required": false,
+    "reason": "ARC-AGI changes the novelty/abstraction condition over existing visual reasoning and adaptation behavior; the benchmark label alone does not define a distinct mechanism."
+  },
+  "remaining": [
+    "PROVE_EQUAL_OR_BETTER_ABSTRACT_GENERALIZATION_ON_MATERIAL_ARC_AGI_LIKE_SCOPE_OR_SCOPE_SAFE_STRONGER_CERTIFICATE",
+    "NO_INHERITANCE_FROM_HLE_OR_MYSTERYMECHANISM_WITHOUT_EXPLICIT_SCOPE_RELATION",
+    "NO_INHERITANCE_FROM_BOUNDED_EXACT_SYMBOLIC_COMPUTATION"
+  ],
+  "source_universe_effect": {
+    "v5_exhaustive": false,
+    "add_condition": "ABSTRACT_GENERALIZATION_ARC_AGI",
+    "global_source_universe_sealed": false
+  },
+  "root1_effect": {
+    "positive_gap_delta": 0,
+    "root1_reopened": false
+  },
+  "hard_nonclaims": [
+    "NO_ARC_AGI_PARITY_CLAIM",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_GLOBAL_ENVELOPE_SEAL",
+    "NO_NEW_FAMILY_FROM_BENCHMARK_LABEL_ALONE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

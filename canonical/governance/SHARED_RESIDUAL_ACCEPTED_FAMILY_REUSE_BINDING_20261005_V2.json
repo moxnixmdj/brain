@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_SHARED_RESIDUAL_ACCEPTED_FAMILY_REUSE_BINDING_20261005_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SIX_FAMILY_RECONCILIATION__ACCEPTED_RECOVERY_AND_TOOL_DISCOVERY_REUSED_IN_COMPUTER_BROWSER__SIX_DUPLICATE_PROOF_SLOTS_AVOIDED__ZERO_CREDIT",
+  "supersedes": {
+    "path": "canonical/governance/SHARED_RESIDUAL_ACCEPTED_FAMILY_REUSE_BINDING_20261005_V1.json",
+    "git_blob_sha": "b7a9c7632acc5068fbe5c1b7de5398c1bca2749d"
+  },
+  "authorities": {
+    "registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "ownership": {
+      "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+      "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+    },
+    "predecessor": "canonical/governance/SHARED_RESIDUAL_ACCEPTED_FAMILY_REUSE_BINDING_20261005_V1.json"
+  },
+  "theorem": "IDENTICAL_FROZEN_RESIDUAL_BEHAVIOR_MAY_REUSE_AN_INDEPENDENTLY_SCOPE_COMPLETE_ACCEPTED_AND_BRAIN_OWNED_SOURCE_FAMILY_PROOF__SIMILARITY_IS_INSUFFICIENT__DESTINATION_FAMILY_MUST_STILL_CLOSE_ALL_OTHER_LEAVES_AND_FAMILY_BARS",
+  "bindings": [
+    {
+      "contract": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "source_family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "source_state": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "destination_families": [
+        "ADVANCED_AGENTIC_CODING",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE"
+      ],
+      "newly_added_destination": "COMPUTER_AND_BROWSER_USE",
+      "registry_identity_required": true,
+      "fresh_reality_required": false
+    },
+    {
+      "contract": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "source_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "source_state": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "destination_families": [
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE"
+      ],
+      "newly_added_destination": "COMPUTER_AND_BROWSER_USE",
+      "registry_identity_required": true,
+      "fresh_reality_required": false
+    }
+  ],
+  "consequence": {
+    "predecessor_avoided_duplicate_scope_proof_slots": 4,
+    "newly_avoided_duplicate_scope_proof_slots": 2,
+    "total_avoided_duplicate_scope_proof_slots": 6,
+    "computer_browser_residuals_before_reuse": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    ],
+    "computer_browser_residuals_after_accepted_reuse": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+    ],
+    "computer_browser_family_accepted": false
+  },
+  "hard_nonclaims": [
+    "NO_BROWSER_VISUAL_GROUNDING_ACCEPTANCE_CREDIT",
+    "NO_COMPUTER_BROWSER_FAMILY_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_TRANSFER_TO_NONIDENTICAL_CONTRACTS",
+    "NO_NUMERIC_PUBLIC_BAR_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

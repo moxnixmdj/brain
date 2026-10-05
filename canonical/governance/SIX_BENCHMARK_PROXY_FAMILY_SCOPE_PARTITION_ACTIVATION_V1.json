@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__CONNECTOR_RECOMPUTATION_PASS__SIX_FAMILY_SCOPE_REPAIR_FIXED_AT_SEVEN_UNIQUE_SURVIVING_LEAVES__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V1.json",
+    "git_blob_sha": "fdc70d49bfe3f4691fab728f2016242632018ce4"
+  },
+  "verification": {
+    "path": "canonical/verification/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "3ffb7fa61fc60e18f1b2db1e995d9bbcaee25d52"
+  },
+  "supersedes_for_scheduling": {
+    "path": "canonical/governance/FIVE_PUBLIC_BAR_FAMILY_SCOPE_PARTITION_V1.json",
+    "git_blob_sha": "8f74ca3d9609737913714844a793b8566028a0aa",
+    "reason": "BENCHMARK_PROXY_SCOPE_COMPLETENESS_QUARANTINE_V2_ADDS_COMPUTER_AND_BROWSER_USE_BUT_EXACT_CONTRACT_IDENTITY_ADDS_ZERO_NEW_UNIQUE_SURVIVING_LEAF"
+  },
+  "effects": [
+    "SCHEDULE_SCOPE_REPAIR_OVER_SIX_AFFECTED_BENCHMARK_PROXY_FAMILIES",
+    "KEEP_UNIQUE_SURVIVING_BEHAVIORAL_LEAF_COUNT_AT_SEVEN",
+    "ADD_COMPUTER_AND_BROWSER_USE_TO_BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001_FANOUT",
+    "DELETE_ANY_SCHEDULING_BRANCH_THAT_CREATES_A_SEPARATE_COMPUTER_BROWSER_SCOPE_LEAF_WITHOUT_A_NEW_BEHAVIORAL_CONTRACT_COUNTEREXAMPLE",
+    "REUSE_SCOPE_COMPLETE_TOOL_DISCOVERY_AND_RECOVERY_RECEIPTS_BY_EXACT_BEHAVIORAL_IDENTITY",
+    "PRESERVE_ALL_BENCHMARK_SCORE_AND_SCOPE_EQUIVALENCE_OBLIGATIONS"
+  ],
+  "fixed_point": {
+    "affected_families": 6,
+    "unique_surviving_behavioral_leaves": 7,
+    "unique_leaf_delta_from_five_family_partition": 0,
+    "structural_expansion_cost": "ZERO_NEW_UNIQUE_SCOPE_REPAIR_LEAF"
+  },
+  "hard_rules": [
+    "NO_BENCHMARK_PROXY_TO_WHOLE_FAMILY_PROMOTION_WITHOUT_SCOPE_EQUIVALENCE_OR_UNCOVERED_SCOPE_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_ACTIVATION",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

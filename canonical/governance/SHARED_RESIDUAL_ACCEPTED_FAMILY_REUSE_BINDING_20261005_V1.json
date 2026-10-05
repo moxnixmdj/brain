@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_SHARED_RESIDUAL_ACCEPTED_FAMILY_REUSE_BINDING_20261005_V1",
+  "date": "2026-10-05",
+  "status": "DEDUCTIVE_ZERO_REALITY_PASS__TWO_SHARED_RESIDUAL_CONTRACTS_BOUND_TO_EXISTING_STRICTLY_ACCEPTED_OWNED_FAMILY_PROOFS__NO_NEW_FAMILY_CREDIT",
+  "objective": "Make exact cross-family reuse explicit for two residual contracts whose acceptance and ownership are already established by scope-complete independently verified family proofs, so affected families do not repay proof cost for identical frozen residual behavior.",
+  "authorities": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "accepted_three_ownership": {
+      "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+      "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+    },
+    "recovery_candidate": {
+      "path": "canonical/governance/RECOVERY_OPUS55_ZERO_REALITY_ACCEPTANCE_CANDIDATE_V1.json",
+      "git_blob_sha": "89929d767f94052a9d28a958b0eb1b89dd1d6782"
+    },
+    "recovery_verification": {
+      "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+    },
+    "tool_discovery_witness": {
+      "path": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "git_blob_sha": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7"
+    },
+    "tool_discovery_scope_verification": {
+      "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+    }
+  },
+  "theorem": "IF a canonical family has exactly one active residual behavioral contract C, the family has independently verified scope-complete Opus-5.5 acceptance at an objective ceiling/floor or stronger proof, the exact operative Brain route is content-addressed and accepted as Brain-owned, and the proof basis explicitly binds that same residual behavior, THEN C is already proved equal-or-better and Brain-owned on that frozen scope; another family that depends on the identical frozen C may reuse that contract proof without fresh reality, but must still close its other residual contracts and fixed family bars.",
+  "bindings": [
+    {
+      "contract": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "source_family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "exact_registry_family_residuals": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "accepted_route": {
+        "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+        "git_blob_sha": "28940387bd6c11671035ad9201e37bba13fd9bc9"
+      },
+      "independently_verified_scope_complete": true,
+      "objective_ceiling_or_floor": true,
+      "accepted_owned_family": true,
+      "destination_families": [
+        "ADVANCED_AGENTIC_CODING",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "BUSINESS_WORKFLOW_AUTOMATION"
+      ],
+      "binding_state": "PROVED_REUSABLE_ON_IDENTICAL_FROZEN_CONTRACT_SCOPE",
+      "fresh_reality_required": false
+    },
+    {
+      "contract": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "source_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "exact_registry_family_residuals": [
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+      ],
+      "explicit_source_behavior_id_in_accepted_witness": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "accepted_route": {
+        "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+        "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+      },
+      "independently_verified_universal_scope": true,
+      "theoretical_ceiling": true,
+      "accepted_owned_family": true,
+      "destination_families": [
+        "BUSINESS_WORKFLOW_AUTOMATION"
+      ],
+      "binding_state": "PROVED_REUSABLE_ON_IDENTICAL_FROZEN_CONTRACT_SCOPE",
+      "fresh_reality_required": false
+    }
+  ],
+  "consequence": {
+    "five_family_unique_residual_contracts_before_reuse": 10,
+    "shared_residual_contracts_discharged_by_existing_accepted_evidence": 2,
+    "novel_unique_residual_contracts_remaining": 8,
+    "family_local_residual_slots_before_factoring": 16,
+    "newly_avoided_duplicate_or_redundant_scope_proof_slots": 4,
+    "note": "The four avoided slots are the three destination uses of TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001 plus the one destination use of TOOL_ROUTE_DISCOVERY_AND_SELECTION_001; source-family acceptance was already closed."
+  },
+  "hard_nonclaims": [
+    "THIS_DOES_NOT_CLOSE_ANY_AFFECTED_FAMILY_BY_ITSELF",
+    "THIS_DOES_NOT_CREATE_NEW_PUBLIC_FIXED_BAR_RESULTS",
+    "THIS_DOES_NOT_GENERALIZE_TO_SIMILAR_BUT_NONIDENTICAL_CONTRACTS",
+    "THIS_DOES_NOT_CHANGE_THE_38_ATOMIC_ACCEPTANCE_LEDGER_BY_ITSELF",
+    "THIS_DOES_NOT_CREATE_NEW_FAMILY_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

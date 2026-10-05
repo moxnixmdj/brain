@@ -1,0 +1,293 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_SYSTEM_CARD_CAPABILITY_CHAPTER_COVERAGE_MATRIX_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ALL_16_FIRST_PARTY_SYSTEM_CARD_CAPABILITY_SUBSECTIONS_HAVE_CURRENT_ACCOUNTING_DESTINATIONS__ZERO_NEW_FAMILY__PARITY_OPEN__ZERO_CREDIT",
+  "objective": "Freeze the current first-party Opus 5.5 System Card capability chapter as a finite observable evidence slice and map every Section 8.2-8.17 capability surface to existing Brain families, predicates, or active repair groups. This is source-accounting closure for the frozen chapter, not literal target-discovery exhaustiveness.",
+  "first_party_authorities": [
+    "https://www.anthropic.com/claude-opus-5-5-system-card",
+    "https://www.anthropic.com/claude-opus-5-5",
+    "https://www.anthropic.com/transparency",
+    "https://platform.claude.com/docs/en/models/opus-5-5/overview"
+  ],
+  "brain_authorities": {
+    "family_envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "predicate_registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "surface_mapping": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+    "terminal_cut_v4": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V4.json",
+    "open_world_boundary": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json"
+  },
+  "coverage": [
+    {
+      "section": "8.2",
+      "surface": "SWE_BENCH_PRO_MULTILINGUAL_MULTIMODAL",
+      "destinations": [
+        "ADVANCED_AGENTIC_CODING",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "G_CROSS_CUTTING_CONDITION_MATRIX__MULTILINGUAL"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.3",
+      "surface": "DEEPSWE_V1_1_LONG_HORIZON_SOFTWARE_ENGINEERING",
+      "destinations": [
+        "ADVANCED_AGENTIC_CODING",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.4",
+      "surface": "FRONTIERCODE",
+      "destinations": [
+        "ADVANCED_AGENTIC_CODING",
+        "CODING_FRONTIERCODE_GE_54_4"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.5",
+      "surface": "TERMINAL_BENCH_4_0",
+      "destinations": [
+        "ADVANCED_AGENTIC_CODING",
+        "CODING_TB4_GE_66_4"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.6",
+      "surface": "TERMINAL_BENCH_SCIENCE_0_1",
+      "destinations": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "TB_SCIENCE_GE_58_7",
+        "E_SCIENTIFIC_RESEARCH_UNCOVERED_SCOPE_PARTITION"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.7",
+      "surface": "FRONTIERSWE_V2_ULTRA_LONG_HORIZON_ENGINEERING_RESEARCH_VISUAL",
+      "destinations": [
+        "ADVANCED_AGENTIC_CODING",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.8",
+      "surface": "CURSORBENCH_4_0",
+      "destinations": [
+        "ADVANCED_AGENTIC_CODING",
+        "CODING_CURSORBENCH_GE_57_8"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.9",
+      "surface": "ARXIVMATH",
+      "destinations": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "EXACT_SYMBOLIC_COMPUTATION",
+        "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.10",
+      "surface": "LONG_CONTEXT_PROGRAMBENCH",
+      "destinations": [
+        "ADVANCED_AGENTIC_CODING",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+        "G_CROSS_CUTTING_CONDITION_MATRIX__LONG_CONTEXT"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.11",
+      "surface": "AGENTIC_SEARCH",
+      "destinations": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "HLE_TOOLS_GE_67_7"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.12",
+      "surface": "MULTI_AGENT",
+      "destinations": [
+        "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+        "DELEGATION_SPEEDUP_NO_CORRECTNESS_TRADE",
+        "DELEGATION_ZERO_CRITICAL_COORDINATION_VIOLATIONS"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.13",
+      "surface": "MULTIMODAL_CHARTOGRAPHY_BENCHCAD_OSWORLD",
+      "destinations": [
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "COMPUTER_AND_BROWSER_USE",
+        "ADVANCED_AGENTIC_CODING",
+        "CHARTOGRAPHY_TOOLS_GE_89",
+        "VISION_DENSE_NONCHART_SCOPE",
+        "OSWORLD_2_1_PARTIAL_GE_81_8",
+        "H_COMPUTER_BROWSER_UNCOVERED_SCOPE_PARTITION"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.14",
+      "surface": "REAL_WORLD_PROFESSIONAL_TASKS",
+      "destinations": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "ARTIFACT_CREATION",
+        "FINANCIAL_ANALYSIS",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "B_PROFESSIONAL_WORK_UNCOVERED_SCOPE_PARTITION",
+        "C_BUSINESS_AUTOMATION_UNCOVERED_SCOPE_PARTITION"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.15",
+      "surface": "HEALTHCARE",
+      "destinations": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "B_PROFESSIONAL_WORK_UNCOVERED_SCOPE_PARTITION",
+        "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.16",
+      "surface": "MULTILINGUAL_PERFORMANCE",
+      "destinations": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "G_CROSS_CUTTING_CONDITION_MATRIX__MULTILINGUAL"
+      ],
+      "new_family_required": false
+    },
+    {
+      "section": "8.17",
+      "surface": "LIFE_SCIENCES_CAPABILITIES",
+      "destinations": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "E_SCIENTIFIC_RESEARCH_UNCOVERED_SCOPE_PARTITION",
+        "D_MULTIDISCIPLINARY_REASONING_UNCOVERED_SCOPE_PARTITION"
+      ],
+      "new_family_required": false
+    }
+  ],
+  "adjacent_first_party_surfaces": [
+    {
+      "surface": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "destinations": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "new_family_required": false
+    },
+    {
+      "surface": "CYBERSECURITY",
+      "destinations": [
+        "ADVANCED_AGENTIC_CODING",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "COMPUTER_AND_BROWSER_USE",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "new_family_required": false
+    },
+    {
+      "surface": "CREATIVE_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUT",
+      "destinations": [
+        "COMMUNICATION_AND_SYNTHESIS",
+        "ARTIFACT_CREATION",
+        "F_CREATIVE_AND_DIAGRAM_ACCEPTANCE_BASIS_REPAIR"
+      ],
+      "new_family_required": false
+    },
+    {
+      "surface": "ONE_MILLION_TOKEN_CONTEXT_TEXT_IMAGE_INPUT_TOOL_USE",
+      "destinations": [
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "G_CROSS_CUTTING_CONDITION_MATRIX__LONG_CONTEXT"
+      ],
+      "new_family_required": false
+    }
+  ],
+  "external_condition_delta": {
+    "surface": "ABSTRACT_GENERALIZATION_ARC_AGI",
+    "classification": "CROSS_CUTTING_CONDITION",
+    "destinations": [
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "G_CROSS_CUTTING_CONDITION_MATRIX__ABSTRACT_GENERALIZATION_ARC_AGI"
+    ],
+    "new_family_required": false,
+    "parity_open": true
+  },
+  "recomputed_counts": {
+    "system_card_capability_subsections_expected": 16,
+    "system_card_capability_subsections_accounted": 16,
+    "unmapped_system_card_capability_subsections": 0,
+    "new_accounting_families_required_by_frozen_section8_chapter": 0
+  },
+  "consequence": [
+    "STOP_OPEN_ENDED_REDISCOVERY_OF_SECTION8_AS_IF_EACH_BENCHMARK_LABEL_WERE_A_NEW_CAPABILITY",
+    "USE_CHANGE_DETECTION_ON_BOUND_FIRST_PARTY_RELEASE_AUTHORITIES_AFTER_THIS_FROZEN_EPOCH",
+    "REOPEN_MAPPING_ON_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_NOT_ON_BENCHMARK_NAME_ALONE",
+    "PRESERVE_ALL_PARITY_SCOPE_AND_ACCEPTANCE_OBLIGATIONS",
+    "DO_NOT_CONFUSE_16_OF_16_FROZEN_SECTION_ACCOUNTING_WITH_LITERAL_ALL_USEFUL_TARGET_DISCOVERY_COMPLETENESS"
+  ],
+  "target_discovery_boundary": {
+    "frozen_first_party_section8_accounting_complete": true,
+    "literal_all_useful_target_discovery_complete": false,
+    "reason": "FINITE_RELEASE_CHAPTER_ACCOUNTING_CANNOT_EXCLUDE_UNOBSERVED_USEFUL_BEHAVIOR_WITHOUT_A_SEPARATE_COMPLETENESS_PREMISE",
+    "authority": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json"
+  },
+  "hard_nonclaims": [
+    "NO_PARITY_FROM_ACCOUNTING_MAPPING",
+    "NO_CLAIM_EXTERNAL_PUBLIC_EVIDENCE_UNIVERSE_IS_EXHAUSTIVE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_LITERAL_TERMINAL_SEAL",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

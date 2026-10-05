@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_SEVEN_LEAF_PERFORMANCE_OBLIGATION_COMPRESSION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_7_EQUALS_2_PLUS_5_PARTITION__SCOPE_AND_PREDICATE_BINDINGS_MATCH__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SEVEN_LEAF_PERFORMANCE_OBLIGATION_COMPRESSION_V1.json",
+    "git_blob_sha": "fb8f0dfd2d500015e058523a9ef644e8efe2be11"
+  },
+  "recomputed_sources": {
+    "seven_leaf_saturation": {
+      "path": "canonical/governance/SEVEN_SURVIVING_LEAF_ZERO_REALITY_RECEIPT_SATURATION_20261005_V1.json",
+      "git_blob_sha": "2ad6f6e4d367b0b73e019f677e3c7a0bb1ed815a"
+    },
+    "six_family_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+      "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f"
+    },
+    "synthesis_cross_family_reuse": {
+      "path": "canonical/governance/SYNTHESIS_LEAF_CROSS_FAMILY_REUSE_BINDING_V1.json",
+      "git_blob_sha": "9fea1b94709027c3152aaf2b3e3076d90a0a0875"
+    },
+    "synthesis_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "aa_briefcase_multiplex": {
+      "path": "canonical/governance/AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_BINDING_V1.json",
+      "git_blob_sha": "65512b512ebe44eea63fb849293e07be87e0b7fa"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    }
+  },
+  "checks": {
+    "partition_unique_surviving_leaf_count_7": true,
+    "saturation_leaf_receipt_count_7": true,
+    "reused_binding_leaf_count_2": true,
+    "standalone_residual_leaf_count_5": true,
+    "reused_and_standalone_sets_disjoint": true,
+    "reused_union_standalone_equals_exact_partition": true,
+    "synthesis_leaf_identity_exact": true,
+    "synthesis_scope_relation_proven_stronger": true,
+    "synthesis_coverage_relation_exact_union": true,
+    "synthesis_coverage_complete": true,
+    "synthesis_certificate_verified_and_independent": true,
+    "synthesis_atomic_predicate_exists_in_registry": true,
+    "aa_briefcase_leaf_identity_exact": true,
+    "aa_briefcase_two_atomic_predicates_exact": true,
+    "aa_briefcase_two_atomic_predicates_exist_in_registry": true,
+    "arithmetic_7_minus_2_equals_5": true
+  },
+  "consequence": [
+    "DELETE_STANDALONE_SYNTHESIS_LEAF_PERFORMANCE_PROGRAM_OUTSIDE_EXISTING_SYNTHESIS_ATOMIC_PREDICATE",
+    "DELETE_STANDALONE_PROFESSIONAL_QUALITY_LEAF_PERFORMANCE_PROGRAM_OUTSIDE_SHARED_AA_BRIEFCASE_RECEIPT",
+    "SCHEDULE_ONLY_FIVE_STANDALONE_RESIDUAL_LEAF_PERFORMANCE_OBLIGATIONS",
+    "PRESERVE_TWO_REUSED_LEAVES_AS_OPEN_UNTIL_BOUND_EXISTING_ACCEPTANCE_PREDICATES_PASS"
+  ],
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_AN_INDEPENDENT_PUBLIC_RUNNER_RECEIPT",
+    "NO_ATOMIC_PREDICATE_CLOSED",
+    "NO_FAMILY_PROMOTION",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "atomic_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

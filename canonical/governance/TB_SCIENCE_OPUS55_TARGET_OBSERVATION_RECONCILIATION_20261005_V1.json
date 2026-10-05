@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_OPUS55_TARGET_OBSERVATION_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TWO_NONIDENTICAL_PUBLISHED_OPUS55_TB_SCIENCE_OBSERVATIONS_BOUND__TARGET_IDENTITY_FAIL_CLOSED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate_current_id": "TB_SCIENCE_GE_58_7",
+  "problem": "The current acceptance registry encodes one scalar 58.7% target, while a current benchmark-owner leaderboard exposes a stronger 63.3% +/- 3.3% Opus 5.5(max) + Claude Code observation. The two observations are not proven to be the same run, harness, agent configuration, or safety/fallback condition and therefore must not be silently substituted for one another.",
+  "observations": [
+    {
+      "id": "ANTHROPIC_LAUNCH_20260922",
+      "source_authority": "FIRST_PARTY_MODEL_PROVIDER",
+      "source_url": "https://www.anthropic.com/claude-opus-5-5",
+      "benchmark": "Terminal-Bench-Science 0.1",
+      "model": "Claude Opus 5.5",
+      "score_percent": 58.7,
+      "effort": "max unless otherwise noted by provider",
+      "agent_or_harness": "provider launch evaluation; exact equivalence to the current benchmark-owner leaderboard row is not established here",
+      "published_date": "2026-09-22",
+      "important_conditions": [
+        "Anthropic states Opus 5.5 was evaluated with production safeguards enabled.",
+        "When safeguards intervened, some cybersecurity tasks used Claude Opus 4.8 and some biology/frontier-LLM-development tasks used Claude Opus 5."
+      ],
+      "role": "VALID_PROVIDER_REPORTED_OBSERVATION__NOT_AUTOMATICALLY_THE_UNIQUE_CURRENT_TARGET"
+    },
+    {
+      "id": "TB_SCIENCE_LIVE_LEADERBOARD_20261005",
+      "source_authority": "BENCHMARK_OWNER_LIVE_LEADERBOARD",
+      "source_url": "https://www.terminal-bench-science.ai/",
+      "benchmark": "Terminal-Bench-Science 0.1",
+      "model": "Opus 5.5(max)",
+      "agent": "Claude Code",
+      "score_percent": 63.3,
+      "standard_error_percent": 3.3,
+      "task_count": 70,
+      "release_date_shown": "2026-09-22",
+      "observed_date": "2026-10-05",
+      "role": "CURRENT_STRONGER_OBSERVED_CONFIGURATION__PROTOCOL_IDENTITY_WITH_ANTHROPIC_58_7_NOT_PROVED"
+    }
+  ],
+  "truth_rules": [
+    "DO_NOT_TREAT_58_7_AND_63_3_AS_THE_SAME_OBSERVATION_WITHOUT_EXACT_PROTOCOL_OR_RESULT_IDENTITY.",
+    "DO_NOT_LOWER_THE_TERMINAL_TARGET_TO_58_7_BY_IGNORING_A_CURRENT_STRONGER_RELEVANT_OPUS55_CONFIGURATION.",
+    "DO_NOT_PROMOTE_63_3_INTO_THE_FROZEN_ATOMIC_REGISTRY UNTIL THE TARGET_CONFIGURATION_RULE_IS_EXPLICITLY_RECONCILED.",
+    "FOR_THE_TERMINAL_OBJECTIVE, A HIGHER CURRENT OBSERVED CONFIGURATION IS RELEVANT WHEN ITS AGENT_TOOL_CONFIGURATION_LIES_INSIDE_THE_CLAIMED_USEFUL_CAPABILITY_SCOPE; OTHERWISE ITS EXCLUSION MUST BE EXPLICIT_AND_JUSTIFIED.",
+    "NO_FRESH_TB_SCIENCE_SCORE_EXECUTION_WHILE_TARGET_OBSERVATION_IDENTITY_IS_UNRESOLVED."
+  ],
+  "reconciliation_state": {
+    "anthropic_launch_observation_valid": true,
+    "live_leaderboard_observation_valid_as_current_public_observation": true,
+    "same_protocol_identity_proved": false,
+    "same_agent_configuration_proved": false,
+    "same_safety_fallback_condition_proved": false,
+    "single_scalar_target_currently_truth_safe_for_literal_finality": false,
+    "historical_58_7_may_remain_as_named_provider_protocol_bar": true,
+    "63_3_is_current_fail_closed_target_candidate_for_the_benchmark_owner_claude_code_configuration": true
+  },
+  "scheduler_effect": {
+    "delete": [
+      "ASSUME_TB_SCIENCE_58_7_IS_THE_UNIQUE_CURRENT_OPUS55_TARGET",
+      "EXECUTE_FRESH_TB_SCIENCE_CASES_BEFORE_TARGET_PROTOCOL_IDENTITY_IS_FROZEN"
+    ],
+    "activate": [
+      "RECONCILE_TB_SCIENCE_TARGET_CONFIGURATION_AND_PROTOCOL_IDENTITY",
+      "IF_BENCHMARK_OWNER_CLAUDE_CODE_CONFIGURATION_IS_IN_TERMINAL_SCOPE__MIGRATE_THE_TARGET_TO_AT_LEAST_63_3_OR_A_SCOPE_SAFE_STRONGER_CERTIFICATE",
+      "IF_IT_IS_OUT_OF_SCOPE__BIND_THE_EXACT_EXCLUSION_AND_RETAIN_58_7_ONLY_FOR_THE_NAMED_ANTHROPIC_LAUNCH_PROTOCOL"
+    ],
+    "preserve": [
+      "TB_SCIENCE_FRESH_REALITY_DEFERRED",
+      "ZERO_INCREMENTAL_SPEND",
+      "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required_for_registry_migration": true
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V4_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__PROFESSIONAL_QUALITY_SCOPE_ALREADY_COMPLETE__ACTIVE_SCOPE_ROOTS_6_TO_5__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V4.json",
+    "git_blob_sha": "4df5d3b73a5f25fd37c4c4e115c6fbcfaa9bb9c9"
+  },
+  "content_address_checks": {
+    "authority_bindings_checked": 6,
+    "authority_bindings_exact": 6,
+    "authority_binding_mismatches": 0
+  },
+  "recomputed": {
+    "v3_active_scope_root_count": 6,
+    "professional_leaf_present_in_v3_scope_roots": true,
+    "professional_leaf_behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "artifact_partition_names_exact_same_behavior_id": true,
+    "artifact_partition_no_uncovered_contracted_leaf": true,
+    "artifact_partition_disposition": "COVERED_BY_AA_BRIEFCASE_PUBLIC_BAR_SCOPE_IF_AND_ONLY_IF_BRAIN_MEETS_THE_FROZEN_1822_ELO_THRESHOLD",
+    "current_acceptance_ledger_artifact_scope_audit_state": "PROVED",
+    "current_acceptance_ledger_artifact_scope_audit_scope_complete": true,
+    "current_acceptance_ledger_artifact_scope_audit_independent_or_objective": true,
+    "aa_briefcase_leaf_multiplex_exact_behavior_id": true,
+    "aa_briefcase_performance_proved": false,
+    "professional_leaf_scope_repair_needed": false,
+    "professional_leaf_performance_obligation_preserved": true,
+    "new_active_scope_root_count": 5,
+    "active_scope_open_occurrences": 10,
+    "current_acceptance_count_changed": false,
+    "root1_positive_gap_changed": false,
+    "errors": []
+  },
+  "verified_consequence": [
+    "DELETE_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001_FROM_SCOPE_COMPLETENESS_SCHEDULING",
+    "PRESERVE_PROWORK_AA_BRIEFCASE_GE_1822_AND_ARTIFACT_AA_BRIEFCASE_GE_1822_PERFORMANCE_OBLIGATIONS",
+    "PRESERVE_ONE_SHARED_AA_BRIEFCASE_RECEIPT_MULTIPLEX_ROUTE",
+    "SCHEDULE_ONLY_FIVE_ACTIVE_REGISTRY_SCOPE_ROOTS",
+    "PRESERVE_SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS_AS_OPEN",
+    "PRESERVE_SCIENTIFIC_HYPOTHESIS_CANDIDATE_QUARANTINE"
+  ],
+  "hard_nonclaims": [
+    "NO_AA_BRIEFCASE_SCORE_CREDIT",
+    "NO_FAMILY_PROMOTION",
+    "NO_SYNTHESIS_SCOPE_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

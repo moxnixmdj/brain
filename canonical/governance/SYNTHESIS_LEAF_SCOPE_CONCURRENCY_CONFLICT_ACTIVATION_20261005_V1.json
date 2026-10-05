@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_LEAF_SCOPE_CONCURRENCY_CONFLICT_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__FAIL_CLOSED_SYNTHESIS_WHOLE_LEAF_SCOPE_RACE_RECONCILED__TYPED_INPUT_DOMAIN_ROOT_RESTORED__PREDICATE_SCOPE_CERTIFICATE_PRESERVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_LEAF_SCOPE_CONCURRENCY_CONFLICT_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "4b1b9c7149eb040447b8dd1665366eccfbca60f4"
+  },
+  "verification": {
+    "path": "canonical/verification/SYNTHESIS_LEAF_SCOPE_CONCURRENCY_CONFLICT_CONNECTOR_VERIFICATION_20261005_V1.json"
+  },
+  "effects": [
+    "QUARANTINE_WHOLE_LEAF_SCOPE_COMPLETE_EFFECTS_OF_EVIDENCE_SYNTHESIS_LEAF_SCOPE_COMPLETE_BRIDGE_ACTIVATION_20261005_V1",
+    "PRESERVE_SYNTHESIS_SCOPE_CERTIFICATE_V1_ONLY_AT_ITS_VALID_ACCEPTANCE_PREDICATE_SCOPE",
+    "RESTORE_SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS_AS_ONE_SHARED_SCOPE_ROOT",
+    "FAN_OUT_THAT_ONE_ROOT_TO_PROFESSIONAL_KNOWLEDGE_WORK_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING_AND_AGENTIC_SCIENTIFIC_RESEARCH_WITHOUT_DUPLICATION",
+    "PRESERVE_SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_AS_ROOT2_PERFORMANCE_RESIDUAL",
+    "PRESERVE_FOUR_OUTER_PORTFOLIO_CUT__NO_FIFTH_PORTFOLIO"
+  ],
+  "current_truth": {
+    "whole_behavior_leaf_scope_complete": false,
+    "predicate_scope_relation_closed": true,
+    "performance_open": true,
+    "shared_typed_input_scope_root_count": 1,
+    "fanout_count": 3
+  },
+  "hard_rules": [
+    "CONCURRENT_LATER_ACTIVATION_DOES_NOT_OVERRIDE_AN_UNREFUTED_COUNTERMODEL",
+    "EXACT_BEHAVIOR_ID_NAME_IS_NOT_INPUT_DOMAIN_TOTALITY",
+    "NO_DUPLICATE_FAMILY_LOCAL_SYNTHESIS_SCOPE_PROGRAMS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

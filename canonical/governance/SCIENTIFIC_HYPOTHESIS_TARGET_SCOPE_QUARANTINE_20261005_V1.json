@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_HYPOTHESIS_TARGET_SCOPE_QUARANTINE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_HYPOTHESIS_FORMATION_TARGET_REQUIREMENT_NOT_YET_PROVED__QUARANTINE_AS_CONDITIONAL_SCOPE_CANDIDATE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Prevent an unproved scientific-hypothesis/question-formation leaf from becoming a mandatory terminal acceptance blocker merely because it is a plausible scientific capability. Separate target-scope evidence from Brain-contract noncoverage.",
+  "authorities": {
+    "proposed_gap": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "f0c6e15e6af698a80895eedf2c39bb874b4697b8"
+    },
+    "public_task_union_audit": {
+      "path": "canonical/governance/PUBLIC_BAR_TASK_UNION_SCOPE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2295a03fe9090e6842c6bd850b7bca67d1f71131"
+    },
+    "first_party_surface_audit": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+      "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c"
+    }
+  },
+  "recomputation": {
+    "current_behavioral_registry_noncoverage": "SUPPORTED__ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001_RECEIVES_RESEARCH_QUESTION_OR_TASK_OBJECTIVE_AS_INPUT_AND_DOES_NOT_GENERATE_THE_QUESTION__SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001_AND_TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_ARE_DIFFERENT_TRANSFORMS",
+    "terminal_bench_science_support_for_exact_leaf": false,
+    "terminal_bench_science_basis": "PUBLIC_BAR_TASK_UNION_SCOPE_COVERAGE_AUDIT records the benchmark-owner overview as distinguishing its research-workflow tasks from human-judgment activities including defining research questions and forming hypotheses.",
+    "first_party_exact_leaf_observed": false,
+    "first_party_broad_scientific_surfaces_observed": [
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT_CAPABILITY_EVALUATION",
+      "BIOLOGY_RESEARCH_AND_DEVELOPMENT_CAPABILITIES",
+      "FRONTIER_LLM_DEVELOPMENT_TASKS"
+    ],
+    "first_party_mapping_state": "BROAD_R_AND_D_SURFACES_ARE_CANDIDATE_EXISTING_FAMILY_MAPPINGS_WITH_FORMAL_LOSSLESS_UNION_COVERAGE_STILL_OPEN",
+    "proposed_gap_own_caveat": "Its first_party_relation says the system-card science surface supports materiality of scientific inquiry/research capability but does not itself prove this exact leaf or Brain parity."
+  },
+  "theorem": {
+    "name": "TARGET_REQUIREMENT_PRECEDES_NONCOVERAGE_OBLIGATION",
+    "statement": "For literal all-useful-Opus-5.5 finality, a Brain behavior can become a mandatory acceptance obligation only after evidence shows that the target capability envelope contains that behavior or a stronger target scope logically entails it. Proving that the current Brain registry does not subsume a hypothesized behavior establishes only conditional noncoverage, not that the target requires the behavior.",
+    "application": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001 currently satisfies Brain-registry noncoverage but not the target-requirement premise."
+  },
+  "classification": {
+    "behavior_id": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+    "current_state": "CONDITIONAL_TARGET_SCOPE_CANDIDATE__NOT_YET_MANDATORY_TERMINAL_ACCEPTANCE_OBLIGATION",
+    "root1_positive_gap_delta": 0,
+    "new_family_required": false,
+    "current_38_registry_changed": false,
+    "current_14_of_38_changed": false,
+    "mandatory_terminal_blocker_created": false,
+    "broader_agentic_scientific_research_mapping_obligation_remains_open": true
+  },
+  "scheduler_effect": {
+    "delete": [
+      "TREAT_SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_AS_MANDATORY_TERMINAL_BLOCKER_FROM_BRAIN_NONCOVERAGE_ALONE",
+      "CREATE_FRESH_MATCHED_HYPOTHESIS_FORMATION_CASES_BEFORE_TARGET_SCOPE_REQUIREMENT_IS_PROVED"
+    ],
+    "activate": [
+      "RESOLVE_EXACT_TARGET_SCOPE_FOR_HYPOTHESIS_OR_RESEARCH_QUESTION_FORMATION_FROM_FIRST_PARTY_OR_SCOPE_SAFE_STRONGER_EVIDENCE",
+      "IF_TARGET_REQUIREMENT_IS_PROVED__THEN_DECOMPOSE_AGAINST_EXISTING_BRAIN_OWNED_COMPONENTS_BEFORE_CREATING_ANY_NEW_ROUTE_OR_PORTFOLIO"
+    ],
+    "preserve": [
+      "AGENTIC_SCIENTIFIC_RESEARCH_FAMILY",
+      "TERMINAL_BENCH_SCIENCE_EXECUTION_WORKFLOW_SCOPE",
+      "BROAD_BIOLOGY_AND_AUTOMATED_AI_R_AND_D_LOSSLESS_MAPPING_OBLIGATIONS",
+      "ZERO_FRESH_REALITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_OPUS_5_5_LACKS_HYPOTHESIS_FORMATION",
+    "NO_CLAIM_OPUS_5_5_HAS_HYPOTHESIS_FORMATION_AS_A_LOAD_BEARING_USEFUL_TARGET_BEHAVIOR",
+    "NO_CLAIM_BRAIN_ALREADY_MATCHES_OPUS_5_5_ON_THIS_BEHAVIOR",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY_CLAIM",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

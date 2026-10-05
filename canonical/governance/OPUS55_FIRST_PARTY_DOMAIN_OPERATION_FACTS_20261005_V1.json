@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FIRST_PARTY_DOMAIN_OPERATION_FACTS_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_PARAPHRASED_PUBLIC_SOURCE_FACTS__ZERO_CREDIT",
+  "purpose": "Content-address the minimum public first-party facts used by the three-domain functional mapping without copying source prose.",
+  "sources": [
+    {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "retrieved_date": "2026-10-05",
+      "facts": [
+        "Anthropic describes Opus 5.5 as having strong cybersecurity capability.",
+        "Anthropic states routine software-development use includes identifying and fixing bugs in user code.",
+        "Anthropic states most cybersecurity tasks are rerouted under production safeguards, with a verification program for trusted cyber practitioners.",
+        "Anthropic reports biology capability including long-horizon molecular prediction and design.",
+        "Anthropic reports expert assessment of scientific novelty and trusted-access biology R&D."
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "retrieved_date": "2026-10-05",
+      "facts": [
+        "Anthropic reports automated AI R&D capability for Opus 5.5 at or slightly above its prior frontier comparison, while below its substitution threshold.",
+        "Anthropic reports an internal real-engineering test score of 55.8% for Opus 5.5 versus an 85% research-staff substitution reference threshold.",
+        "Anthropic lists Opus 5.5 modalities including text, image input, conversation, analysis, coding, creative tasks, text-based artifacts, and diagrams."
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/institute/measuring-pace-of-ai-development",
+      "retrieved_date": "2026-10-05",
+      "role": "AI_R_AND_D_TASK_ONTOLOGY_CONTEXT_ONLY__NOT_OPUS55_ACCEPTANCE_EVIDENCE",
+      "facts": [
+        "Anthropic describes a frozen AI R&D work tree built from roughly 15000 granular internal tasks.",
+        "The reported tree has 542 nodes and 378 leaves.",
+        "Published leaf examples include evaluation-platform defect diagnosis and fixes, RL sandbox egress and network policy, and serving-incident postmortems.",
+        "Anthropic describes AI R&D work as research and engineering performed by agents with varying degrees of human supervision."
+      ]
+    }
+  ],
+  "hard_nonclaims": [
+    "NO_SOURCE_EXHAUSTIVENESS_CLAIM",
+    "NO_PRIVATE_CAPABILITY_INFERENCE",
+    "NO_ACCEPTANCE_OR_CAPABILITY_CREDIT",
+    "NO_CLAIM_THE_AI_R_AND_D_TASK_TREE_IS_AN_OPUS55_BENCHMARK"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_cases_consumed": 0
+}

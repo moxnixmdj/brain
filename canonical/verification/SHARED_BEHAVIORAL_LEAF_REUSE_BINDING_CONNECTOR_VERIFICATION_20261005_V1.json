@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_SHARED_BEHAVIORAL_LEAF_REUSE_BINDING_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__13_OF_13_CONTENT_BINDINGS_EXACT__TWO_SHARED_REUSE_EDGES_STRUCTURALLY_PROVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SHARED_BEHAVIORAL_LEAF_REUSE_BINDING_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "25799a3536566b228396450c89ea7fce588ad8e5"
+  },
+  "recomputed_content_bindings": {
+    "checked": 13,
+    "matched": 13,
+    "mismatched": 0,
+    "all_exact": true
+  },
+  "verified_recovery_reuse": {
+    "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+    "candidate_behavior_id_exact": true,
+    "universal_scope_reduction_behavior_id_exact": true,
+    "universal_scope_reduction_independent_pass": true,
+    "remaining_failure_semantics_information_residual": 0,
+    "whole_p1_contract_restored": true,
+    "whole_scope_quarantined_contract_count": 0,
+    "recovery_acceptance_scope_complete": true,
+    "recovery_acceptance_objective_ceiling_or_floor": true,
+    "host_family_occurrences_in_verified_six_family_partition": [
+      "ADVANCED_AGENTIC_CODING",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "COMPUTER_AND_BROWSER_USE"
+    ],
+    "verdict": "PASS__EXACT_BEHAVIORAL_LEAF_REUSE_SUPPORTED_BY_EXISTING_INDEPENDENT_SCOPE_COMPLETE_CHAIN"
+  },
+  "verified_tool_route_reuse": {
+    "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+    "formal_scope_relation_behavior_id_exact": true,
+    "formal_scope_relation_target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "universal_scope_independent_pass": true,
+    "uses_empirical_generalization": false,
+    "acceptance_reduction_scope_complete": true,
+    "acceptance_reduction_objective_ceiling": true,
+    "canonical_information_boundary": "AVAILABLE_TOOL_SCHEMAS_CAPABILITIES_AND_CONSTRAINTS__NOT_INTERNET_WIDE_TOOL_IDENTITY_COMPLETENESS",
+    "formal_information_boundary": "FINITE_VISIBLE_TOOL_IDENTITIES_WITH_HIDDEN_CAPABILITY_TRUTH__NO_OPEN_WORLD_INTERNET_TOOL_IDENTITY_COMPLETENESS",
+    "information_boundary_compatible": true,
+    "host_family_occurrences_in_verified_six_family_partition": [
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "COMPUTER_AND_BROWSER_USE"
+    ],
+    "verdict": "PASS__EXACT_BEHAVIORAL_LEAF_REUSE_SUPPORTED_UNDER_FROZEN_INFORMATION_BOUNDARY"
+  },
+  "partition_consistency": {
+    "six_family_partition_exact_family_to_registry_contract_mapping": true,
+    "six_family_partition_existing_scope_complete_receipt_reuse": true,
+    "six_family_partition_unique_surviving_leaves": 7,
+    "reconciliation_changes_unique_surviving_leaf_count": false,
+    "reconciliation_role": "JUSTIFIES_TWO_EXISTING_DISCHARGE_CLASSES_AND_REMOVES_STALE_REUSE_BINDING_AMBIGUITY"
+  },
+  "scheduling_consequence": {
+    "delete_two_reuse_edge_audits_from_open_scope_strength_queue": true,
+    "delete_separate_host_family_reproof_for_trajectory_leaf": true,
+    "delete_separate_host_family_reproof_for_tool_route_leaf": true,
+    "host_leaf_occurrences_covered_by_reuse": 6,
+    "new_unique_proof_programs_for_these_two_leaves": 0,
+    "new_terminal_cases": 0,
+    "new_reality_units": 0
+  },
+  "hard_nonclaims": [
+    "NO_ATOMIC_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_PUBLIC_BENCHMARK_RESULT",
+    "NO_HOST_FAMILY_PROMOTION",
+    "NO_SCOPE_TRANSFER_OUTSIDE_EXACT_BEHAVIOR_IDS",
+    "NO_OPEN_WORLD_TOOL_IDENTITY_DISCOVERY_CLAIM",
+    "NO_TERMINAL_GOAL_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

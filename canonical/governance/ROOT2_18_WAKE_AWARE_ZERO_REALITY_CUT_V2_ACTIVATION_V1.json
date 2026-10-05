@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_18_WAKE_AWARE_ZERO_REALITY_CUT_V2_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__ROOT2_FIRST_WAKE_AWARE_SCHEDULING__15_NON_OWNER__2_SHARED_AA_EVENT__1_TB_SCIENCE_DEFERRED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_18_WAKE_AWARE_ZERO_REALITY_CUT_V2.json",
+    "git_blob_sha": "d9e7965346fad08855b13fd049da3f657a1b98df"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_18_WAKE_AWARE_ZERO_REALITY_CUT_V2_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "a83f6bd49f84715caab381c3725da1f924bce294"
+  },
+  "supersedes": {
+    "path": "canonical/governance/ROOT2_18_ZERO_REALITY_CERTIFICATE_CUT_ACTIVATION_V1.json",
+    "git_blob_sha": "3e710e3348c86b0e9451467a74ffdbd80f5e0b61"
+  },
+  "effects": [
+    "ACTIVATE_WAKE_AWARE_ROOT2_FIRST_SCHEDULING",
+    "RUN_ONLY_SEVEN_NON_OWNER_ZERO_REALITY_GROUPS_WHEN_THEIR_REQUIRED_INFORMATION_OR_ZERO_COST_ACCESS_EXISTS",
+    "DO_NOT_POLL_OWNER_MAILBOX__WAKE_ONLY_ON_MATERIAL_MAILBOX_EVENT_OR_NEXT_RECOMPUTE",
+    "TREAT_TWO_AA_BRIEFCASE_ATOMS_AS_ONE_SHARED_FUTURE_RECEIPT_DEPENDENCY",
+    "KEEP_SIX_OWNER_TOUCHED_ATOMS_MOVING_ON_NON_OWNER_ROUTES",
+    "BIND_GDPVAL_TARGET_EPOCH_FIREWALL",
+    "BIND_TB_SCIENCE_HARNESS_SAFE_TARGET_RULE_AND_KEEP_SCORE_EXECUTION_DISABLED",
+    "DELETE_REDUNDANT_SYNTHESIS_SCOPE_CONSTRUCTION",
+    "PRESERVE_CURSORBENCH_STRONGER_PROOF_ONLY_ROUTE_UNDER_CURRENT_OWNER_POLICY",
+    "RECOMPUTE_ON_ANY_BOUND_BLOB_CHANGE"
+  ],
+  "current_partition_counts": {
+    "active_non_owner_zero_reality": 15,
+    "event_only_atomic": 2,
+    "fresh_reality_deferred": 1,
+    "total_root2": 18
+  },
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_CASES_FROM_THIS_ACTIVATION",
+    "NO_OWNER_MAILBOX_POLLING_WITHOUT_WAKE",
+    "NO_CURSORBENCH_OWNER_WAIT",
+    "NO_GDPVAL_CURRENT_EPOCH_TARGET_BELOW_1867",
+    "NO_TB_SCIENCE_POST_RESULT_TARGET_SELECTION",
+    "NO_DUPLICATE_AA_BRIEFCASE_SCORE_EXECUTION",
+    "NO_REOPEN_SYNTHESIS_SCOPE_CONSTRUCTION",
+    "NO_ROOT3_ONLY_WORK_IN_ROOT2_FIRST_PHASE",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CREDIT"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "next": "EXECUTE_INFORMATION_POSITIVE_NON_OWNER_ZERO_REALITY_GROUPS_ONLY__SLEEP_OWNER_RECEIPT_LANE__RECOMPUTE_ON_DELTA__DO_NOT_ENTER_TB_SCIENCE_SCORE_LANE_WITHOUT_EXPLICIT_FRESH_REALITY_AUTHORITY"
+}

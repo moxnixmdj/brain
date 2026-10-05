@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_OPUS55_TARGET_FRESHNESS_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__ROOT2_TB_SCIENCE_TARGET_FRESHNESS_OVERLAY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TB_SCIENCE_OPUS55_TARGET_FRESHNESS_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "0d3bb8b5e0b0cbab18d21d9be3d0bccf0baddfc7"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_OPUS55_TARGET_FRESHNESS_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "a2a2a637d2d96b757a73b2aee927afed2ab47504"
+  },
+  "effects": [
+    "BIND_TB_SCIENCE_GE_58_7_LEGACY_ATOM_TO_HARNESS_CONDITIONAL_TARGET_RULE",
+    "FOR_CURRENT_PUBLIC_TB_SCIENCE_0_1_LEADERBOARD_ROUTE_USE_OPUS55_FLOOR_63_3_PERCENT",
+    "ALLOW_58_7_PERCENT_ONLY_FOR_INDEPENDENTLY_PROVED_IDENTICAL_ANTHROPIC_RELEASE_20260922_SETUP",
+    "OTHERWISE_REQUIRE_MATCHED_SAME_HARNESS_OPUS55_COMPARATOR_OR_FAIL_CLOSED",
+    "FREEZE_HARNESS_TARGET_BRANCH_BEFORE_ANY_BRAIN_RESULT",
+    "PRESERVE_14_OF_38_PROVED_24_OPEN_ACCOUNTING",
+    "PRESERVE_ZERO_FRESH_REALITY_UNTIL_SEPARATE_EXECUTION_AUTHORITY"
+  ],
+  "root2_scheduler_delta": {
+    "predicate_id": "TB_SCIENCE_GE_58_7",
+    "prior_route": "VERIFIER_SUCCESS_MASS_WITH_EARLY_STOP_CERTIFICATE__TARGET_FRESHNESS_MUST_BE_RESOLVED_BEFORE_ACCEPTANCE",
+    "new_route": "FREEZE_HARNESS_IDENTITY__PUBLIC_CURRENT_ROUTE_TARGET_63_3__ANTHROPIC_RELEASE_ROUTE_TARGET_58_7_ONLY_IF_EXACT_SETUP_IDENTITY__ELSE_MATCHED_SAME_HARNESS_OR_FAIL_CLOSED__THEN_VERIFIER_SUCCESS_MASS_WITH_EARLY_STOP",
+    "target_freshness_blocker_resolved": true,
+    "acceptance_predicate_proved": false
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

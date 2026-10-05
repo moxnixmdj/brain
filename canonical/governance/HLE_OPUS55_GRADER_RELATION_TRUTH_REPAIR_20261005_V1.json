@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OPUS55_GRADER_RELATION_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PUBLIC_HLE_REFERENCE_GRADER_IS_NOT_YET_PROVED_COMPARABLE_TO_OPUS55_TARGET_GRADER__MINIMUM_MISSING_RELATION_EXPOSED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "objective": "Fail-close an unsafe scorer substitution before any HLE terminal execution and reduce R2C_HLE_GRADER_RELATION to the smallest genuinely missing information.",
+  "current_root2_role": {
+    "group": "R2C_HLE_GRADER_RELATION",
+    "required_action": "BIND_PRIMARY_PUBLIC_REPRODUCIBLE_COMPARABLE_GRADER_OR_FORMALLY_PROVED_CONSERVATIVE_SCORER_RELATION",
+    "score_execution_authority": false
+  },
+  "public_hle_reference_implementation": {
+    "repository": "centerforaisafety/hle",
+    "repository_revision_observed": "22ed3074b1e7b134bcbc09028d0ba320839b0655",
+    "readme_blob_sha": "a948c9512541fff702aaf5e0c8bc371fded3689c",
+    "judge_runtime_path": "hle_eval/run_judge_results.py",
+    "judge_runtime_blob_sha": "4caca7c5e6eaa9c64ec33e5f1bcc93312e6c5b31",
+    "facts": [
+      "HLE is a 2500-question multimodal benchmark with multiple-choice and short-answer questions suitable for automated grading.",
+      "The public reference runtime compares the extracted final answer to the precise ground-truth answer through an LLM judge.",
+      "The current public reference runtime defaults to judge model o3-mini-2025-01-31; the source comment records gpt-4o-2024-08-06 as the previous judge.",
+      "The public judge criterion accepts an exact/equivalent match and permits a small numerical margin; ambiguity or non-equivalence is incorrect.",
+      "Reported accuracy is the count of judge correct=yes divided by the full question count."
+    ]
+  },
+  "opus55_target_evaluation": {
+    "first_party_system_card_url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+    "first_party_public_result": 67.7,
+    "configuration_facts_observed_in_system_card": [
+      "HLE with web search, web fetch, programmatic tool calling, and code execution.",
+      "Thinking set to auto.",
+      "Total tokens across contexts capped at 1M.",
+      "No context compaction.",
+      "Claude Opus 4.6 served as the model grader.",
+      "HLE-discussing sources were blocklisted and transcripts were contamination-screened; confirmed contamination was regraded incorrect."
+    ]
+  },
+  "decisive_mismatch": {
+    "public_reference_default_grader": "o3-mini-2025-01-31",
+    "opus55_target_grader": "Claude Opus 4.6",
+    "exact_target_grader_prompt_publicly_bound_in_current_evidence": false,
+    "exact_target_grader_decoding_and_edge_case_policy_publicly_bound_in_current_evidence": false,
+    "proved_score_equivalence_between_public_reference_and_target_grader": false,
+    "proved_one_sided_conservative_relation_between_public_reference_and_target_grader": false
+  },
+  "theorem": {
+    "name": "GRADER_IDENTITY_OR_PROVED_RELATION_REQUIRED_FOR_THRESHOLD_TRANSFER",
+    "statement": "A threshold measured by grader G_target cannot be soundly transferred to scores from a distinct grader G_public merely because both consume the same questions and reference answers. Threshold transfer requires either evaluator identity at all load-bearing semantics or a proved directional relation strong enough for the intended inequality.",
+    "application": "The public HLE o3-mini evaluator and the Opus 5.5 Claude Opus 4.6 evaluator are distinct. Therefore a Brain score produced only by the public o3-mini route cannot currently be asserted comparable to the published 67.7 target."
+  },
+  "strict_exact_match_candidate": {
+    "role": "POSSIBLE_FUTURE_CONSERVATIVE_FLOOR__NOT_CURRENTLY_PROVED_TARGET_COMPARABLE",
+    "construction": [
+      "Require a predeclared machine-readable final-answer field.",
+      "For multiple-choice, count correct only on exact canonical option-token equality.",
+      "For short-answer, count correct only under a deterministic normalization whose accepted equivalences are mathematically or textually proved sound; all uncertain cases are incorrect.",
+      "Never award semantic-credit cases requiring an unbound model judge."
+    ],
+    "remaining_proof_obligation": "Prove that every case accepted by the strict scorer is necessarily accepted by the exact Opus 5.5 target grading semantics, including extraction, equivalence, numerical tolerance, and contamination policy. Current evidence does not expose enough target-grader semantics to prove this implication."
+  },
+  "minimum_missing_information": [
+    {
+      "id": "HLE_TARGET_GRADER_PROTOCOL_BINDING",
+      "sufficient_examples": [
+        "Anthropic confirmation that the published Opus 5.5 HLE score used the official HLE judge prompt/protocol with only the judge model substituted to Claude Opus 4.6, plus any decoding/aggregation details material to correctness.",
+        "A first-party published grader prompt/runtime or content-addressed evaluation recipe sufficient to reconstruct the 67.7 scoring semantics."
+      ]
+    },
+    {
+      "id": "HLE_CONSERVATIVE_SCORER_RELATION",
+      "sufficient_examples": [
+        "An independently verified proof that a deterministic strict scorer has zero false positives relative to the bound target grader semantics.",
+        "A separately validated lower-bound theorem whose assumptions are all content-addressed in the target evaluation protocol."
+      ]
+    }
+  ],
+  "scheduler_delta": {
+    "delete": [
+      "RUN_HLE_TERMINAL_CASES_UNDER_PUBLIC_O3_MINI_AND_TREAT_SCORE_AS_DIRECTLY_COMPARABLE_TO_OPUS55_67_7",
+      "ASSUME_SAME_DATASET_IMPLIES_SAME_GRADING_SCALE",
+      "CLAIM_STRICT_EXACT_MATCH_IS_A_TARGET_LOWER_BOUND_BEFORE_BINDING_TARGET_GRADER_SEMANTICS"
+    ],
+    "preserve": [
+      "OWNER_PROTOCOL_CLARIFICATION_AS_LOAD_BEARING_IF_NO_FIRST_PARTY_PUBLIC_RECIPE_EXISTS",
+      "SEARCH_FOR_EXISTING_FIRST_PARTY_GRADER_PROTOCOL_RECEIPT",
+      "BUILD_ZERO_REALITY_STRICT_SCORER_ONLY_AS_A_CANDIDATE_UNTIL_DIRECTIONAL_RELATION_IS_PROVED"
+    ],
+    "next": "SEARCH_ONLY_FOR_THE_MINIMUM_TARGET_GRADER_PROTOCOL DATUM OR A PREEXISTING PROVED DIRECTIONAL RELATION; DO_NOT CONSUME HLE TERMINAL CASES FIRST"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_PUBLIC_HLE_GRADER_IS_BAD",
+    "NO_CLAIM_CLAUDE_OPUS_4_6_AND_O3_MINI_MUST_DISAGREE_MATERIALLY",
+    "NO_CLAIM_THE_67_7_TARGET_IS_INVALID",
+    "NO_HLE_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TARGET_WEAKENING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

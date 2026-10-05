@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_EVIDENCE_SYNTHESIS_LEAF_PROOF_MULTIPLEXING_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__ONE_FROZEN_SYNTHESIS_LEAF_FIVE_FAMILY_CONSUMERS__THREE_CURRENT_SCOPE_REPAIR_OCCURRENCES__CURRENT_V13_GROUP_F_BINDING__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/EVIDENCE_SYNTHESIS_LEAF_PROOF_MULTIPLEXING_20261005_V1.json",
+    "git_blob_sha": "dba44ea8aa649dfe1b826ac1c75144a5042c1463"
+  },
+  "recomputed_sources": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "current_scope_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "fdc70d49bfe3f4691fab728f2016242632018ce4"
+    },
+    "terminal_proof_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "current_zero_reality_cut": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V13.json",
+      "git_blob_sha": "13f22a51407199628aab2138e1e3ed0f32a99b41"
+    }
+  },
+  "checks": {
+    "exact_behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "registry_consumer_families": [
+      "COMMUNICATION_AND_SYNTHESIS",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "FINANCIAL_ANALYSIS"
+    ],
+    "registry_consumer_count": 5,
+    "current_six_family_scope_partition_occurrences": [
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH"
+    ],
+    "current_scope_partition_occurrence_count": 3,
+    "communication_and_synthesis_has_only_this_active_residual_contract": true,
+    "current_v13_contains_finance_and_synthesis_certificate_group": true,
+    "current_v13_group_id": "F_FINANCE_AND_SYNTHESIS_CERTIFICATE_COMPILATION",
+    "protocol_dimensions_cover_leaf_success_dimensions": true,
+    "browser_computer_family_addition_changes_synthesis_leaf_occurrence_count": false,
+    "candidate_predecessor_partition_reference_is_scheduling_stale_but_semantically_nonbreaking": true
+  },
+  "deduction": {
+    "if_one_certificate_is_scope_complete_for_exact_frozen_leaf": true,
+    "then_reuse_by_exact_behavioral_identity_across_all_five_consumers": true,
+    "whole_family_acceptance_from_leaf_alone": false,
+    "nonidentical_leaf_transfer": false,
+    "public_bar_aggregate_scope_equivalence_inferred": false
+  },
+  "scheduler_consequence": [
+    "REPLACE_THREE_DUPLICATE_CURRENT_SCOPE_REPAIR_PROOFS_FOR_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_WITH_ONE_SCOPE_COMPLETE_LEAF_CERTIFICATE",
+    "BIND_CURRENT_V13_GROUP_F_AS_THE_SINGLE_ZERO_REALITY_SYNTHESIS_CERTIFICATE_ROUTE",
+    "ON_CLOSURE_PROPAGATE_THE_IDENTICAL_LEAF_RECEIPT_TO_ALL_FIVE_REGISTRY_CONSUMERS",
+    "RECOMPUTE_SIX_FAMILY_SCOPE_PARTITION_AND_TERMINAL_FIXED_POINT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_CERTIFICATE_ITSELF_IS_ALREADY_PROVED",
+    "NO_FAMILY_ACCEPTANCE",
+    "NO_ATOMIC_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

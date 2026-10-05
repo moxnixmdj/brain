@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_EVIDENCE_AUDIENCE_SYNTHESIS_SCOPE_EQUIVALENCE_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TB_SCIENCE_WHOLE_LEAF_EQUIVALENCE_FALSIFIED__SHARED_DIRECT_SCOPE_PROOF_ROUTE_ACTIVATED__ZERO_CREDIT",
+  "objective": "Eliminate a provably futile Root-3 branch for EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 and replace per-family public-bar equivalence work with the minimum shared direct proof obligation.",
+  "authority": {
+    "brain_base_head_before_this_candidate": "6c0db6ad9d386ba1302edb9eba2f4b9a056aee40",
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "five_family_partition": {
+      "path": "canonical/governance/FIVE_PUBLIC_BAR_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "8f74ca3d9609737913714844a793b8566028a0aa"
+    },
+    "existing_atomic_evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+      "relevant_predicate": "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS"
+    },
+    "p3_binding": {
+      "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+    },
+    "p3_prewave_receipt": {
+      "path": "canonical/verification/P3_INFORMATION_SAFE_V3_PREFLIGHT_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "c0812ad6e7ee1e1c93d7419ed72f4fc7c9980381"
+    },
+    "tb_science_official_scope_authority": {
+      "repository": "harbor-framework/terminal-bench-science",
+      "repository_head_sha_observed": "61f4a549ebf77c29bedda0faf10779c9333ddad2",
+      "path": "rubrics/task-proposal.md",
+      "git_blob_sha": "f226e0fd7f3b6b5147dbeb627d3272921b337292"
+    }
+  },
+  "frozen_leaf": {
+    "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "inputs": "Verified evidence units with provenance, user objective/audience, output constraints and required claims",
+    "required_output_or_action": "Select, organize and express the necessary evidence so required claims are supported, material uncertainty/disagreement is preserved and irrelevant detail is omitted",
+    "success_conditions": [
+      "NO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "REQUIRED_COVERAGE_COMPLETE",
+      "PROVENANCE_PRESERVED",
+      "MATERIAL_CONFLICT_AND_UNCERTAINTY_PRESERVED",
+      "NO_DECISION_RELEVANT_EVIDENCE_DROPPED_UNDER_COMPRESSION",
+      "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS",
+      "IRRELEVANT_DETAIL_OMITTED_WITHOUT_DELETING_REQUIRED_SUPPORT"
+    ],
+    "scope": "Grounded evidence synthesis under audience and format constraints"
+  },
+  "tb_science_falsification": {
+    "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+    "candidate_equivalence_claim": "TERMINAL_BENCH_SCIENCE_0_1_SCOPE_LOSSLESSLY_COVERS_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "result": "FALSE",
+    "official_scope_facts": [
+      "TB_SCIENCE_REQUIRES_CONCRETE_PROGRAMMATICALLY_VERIFIABLE_OUTCOMES",
+      "TB_SCIENCE_EXPLICITLY_REJECTS_OPEN_ENDED_TASKS_LIKE_HYPOTHESIS_GENERATION_OR_LITERATURE_REVIEW",
+      "TB_SCIENCE_GRADES_OUTCOMES_NOT_GENERAL_OPEN_ENDED_SYNTHESIS_PROCESS"
+    ],
+    "constructive_counterexample_class": {
+      "input": "A verified scientific evidence bundle containing multiple studies with provenance, conflicting results, material uncertainty, an explicit audience, explicit required claims, and a strict output budget.",
+      "required_behavior": "Produce a concise audience-specific synthesis that covers the required claims, preserves the disagreement and uncertainty, retains decision-relevant evidence, and omits irrelevant detail.",
+      "leaf_membership": "YES__DIRECT_INSTANCE_OF_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "tb_science_membership": "NO__OPEN_ENDED_LITERATURE_REVIEW_OR_SYNTHESIS_CLASS_IS_EXPLICITLY_REJECTED_UNLESS_REDUCED_TO_A_CONCRETE_PROGRAMMATICALLY_VERIFIABLE_OUTCOME",
+      "witness_consequence": "EXISTS_LEAF_INPUT_NOT_IN_TB_SCIENCE_SCOPE__THEREFORE_SET_EQUIVALENCE_AND_TB_SCIENCE_SUPERSET_CLAIMS_FAIL"
+    }
+  },
+  "existing_p3_evidence_reconciliation": {
+    "terminal_wave_observation": "T1_AND_T3_DIRECT_P3_INSTRUMENTATION_PASSED_ON_THE_FROZEN_TERMINAL_WAVE",
+    "what_it_proves": [
+      "SCOPE_LOCAL_PASS_ON_THE_FROZEN_T1_T3_LOAD_BEARING_OBSERVATIONS",
+      "EXISTING_ATOMIC_PREDICATE_SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_REMAINS_VALID_IN_ITS_FROZEN_SCOPE"
+    ],
+    "what_it_does_not_prove": [
+      "WHOLE_OPEN_ENDED_EVIDENCE_TO_AUDIENCE_SYNTHESIS_SCOPE",
+      "LOSSLESS_EQUIVALENCE_BETWEEN_TB_SCIENCE_AND_THE_SYNTHESIS_LEAF",
+      "UNIVERSAL_COVERAGE_OF_ALL_AUDIENCES_EVIDENCE_TYPES_CONFLICT_STRUCTURES_AND_BUDGETS"
+    ],
+    "reason": "P3_INFORMATION_SAFE_V3_PREFLIGHT_EXPLICITLY_DISCLAIMS_WHOLE_OPEN_ENDED_CONTRACT_SCOPE_EQUIVALENCE_AND_USES_A_BOUNDED_NUMERIC_THRESHOLD_SYNTHESIS_CANDIDATE"
+  },
+  "scope_reduction": {
+    "original_unique_surviving_behavioral_leaves": 7,
+    "this_candidate_does_not_discharge_the_leaf": true,
+    "new_information": "THE_PUBLIC_BAR_EQUIVALENCE_BRANCH_FOR_THIS_LEAF_IS_FALSIFIED_FOR_AGENTIC_SCIENTIFIC_RESEARCH",
+    "minimum_remaining_global_route_for_this_leaf": "ONE_SHARED_SCOPE_COMPLETE_DIRECT_PROOF_OR_STRONGER_PROOF_OF_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001__REUSE_BY_EXACT_BEHAVIOR_IDENTITY_ACROSS_ALL_FAMILIES",
+    "fanout_if_closed": [
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH"
+    ],
+    "fanout_count": 3
+  },
+  "scheduler_effect": {
+    "delete": [
+      "AGENTIC_SCIENTIFIC_RESEARCH__TRY_TB_SCIENCE_WHOLE_LEAF_EQUIVALENCE_FOR_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "ANY_INFERENCE_THAT_TB_SCIENCE_NAME_OR_SCORE_COVERS_OPEN_ENDED_SCIENTIFIC_EVIDENCE_SYNTHESIS"
+    ],
+    "activate": [
+      "SHARED_DIRECT_SCOPE_COMPLETE_PROOF__EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    ],
+    "priority_reason": "ONE_DIRECT_SCOPE_COMPLETE_LEAF_PROOF_HAS_FANOUT_THREE_AND_IS_NOW_STRICTLY_MORE_GENERAL_THAN_THE_FALSIFIED_TB_SCIENCE_EQUIVALENCE_BRANCH",
+    "preserve": [
+      "TB_SCIENCE_PUBLIC_BAR_AS_A_NECESSARY_PERFORMANCE_BAR_FOR_ITS_ACTUAL_DECLARED_SCIENTIFIC_COMPUTING_SCOPE",
+      "ALL_EXISTING_ACCEPTANCE_COUNTS",
+      "ALL_EXISTING_FIXED_BAR_THRESHOLDS",
+      "ZERO_FRESH_REALITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CREDIT",
+    "NO_CAPABILITY_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_ROOT1_POSITIVE_GAP",
+    "NO_CLAIM_THAT_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_IS_SCOPE_COMPLETE",
+    "NO_CLAIM_THAT_TB_SCIENCE_IS_UNNECESSARY_FOR_ITS_EXISTING_PERFORMANCE_PREDICATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

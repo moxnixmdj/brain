@@ -1,0 +1,111 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ZERO_INCREMENTAL_EXACT_COMPARATOR_ACCESS_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "VERIFIED_CONDITIONAL_ACCESS_GRAPH__TWO_EXACT_MODEL_ROUTES_EXIST__CURRENT_ZERO_INCREMENTAL_ACCOUNT_CAPACITY_UNRESOLVED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Recompute whether exact Opus 5.5 comparator access is categorically blocked by the hard $0 incremental-spend rule, using current first-party/public platform facts plus authenticated account evidence.",
+  "routes": [
+    {
+      "id": "ANTHROPIC_FIRST_PARTY_FREE_CREDIT_ROUTE",
+      "model_id": "claude-opus-5-5",
+      "public_facts": {
+        "model_active": true,
+        "pricing_usd_per_mtok": {
+          "input": 4,
+          "output": 20
+        },
+        "new_api_users_receive_small_free_credits": true,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "authenticated_account_evidence": {
+        "mailbox_has_anthropic_account_related_notice": true,
+        "mailbox_has_claude_api_console_or_credit_receipt": false,
+        "eligibility_for_new_api_user_credit": "UNVERIFIED",
+        "available_credit_amount": "UNVERIFIED"
+      },
+      "admissible_if": [
+        "ACCOUNT_IS_ACTUALLY_ELIGIBLE_FOR_FREE_API_CREDIT",
+        "MODEL_RESOLVES_TO_claude-opus-5-5",
+        "NO_PAID_BALANCE_OR_POST_CREDIT_BILLING_CAN_BE_CONSUMED",
+        "FREE_CREDIT_BALANCE_COVERS_PREDECLARED_MINIMUM_DECISION_CERTIFICATE",
+        "EVAL_CONTEXT_AND_TARGET_MODEL_CONFIGURATION_ARE_FROZEN_BEFORE_RESULT"
+      ]
+    },
+    {
+      "id": "OPENROUTER_EXISTING_ACCOUNT_ANTHROPIC_PIN_ROUTE",
+      "model_id": "anthropic/claude-opus-5.5",
+      "public_facts": {
+        "model_currently_available": true,
+        "price_usd_per_mtok": {
+          "input": 4,
+          "output": 20
+        },
+        "provider_pin_supported": true,
+        "exact_provider_pin_shape": "provider.only/order may restrict to Anthropic with allow_fallbacks=false",
+        "sources": [
+          "https://openrouter.ai/anthropic/claude-opus-5.5",
+          "https://openrouter.ai/blog/insights/model-routing/",
+          "https://openrouter.ai/blog/insights/reliability-failover/"
+        ]
+      },
+      "authenticated_account_evidence": {
+        "account_exists": true,
+        "evidence": "OpenRouter welcome email dated 2026-04-04 states account exists",
+        "current_credit_balance": "UNVERIFIED",
+        "purchase_or_topup_receipt_found_in_connected_mailbox": false,
+        "policy_email_facts": [
+          "full catalog requires credits",
+          "credits never expire",
+          "no subscription or auto-renewal"
+        ]
+      },
+      "admissible_if": [
+        "EXISTING_CREDIT_BALANCE_GREATER_THAN_OR_EQUAL_TO_PREDECLARED_MAXIMUM_CERTIFICATE_COST",
+        "REQUEST_MODEL_IS_anthropic/claude-opus-5.5",
+        "PROVIDER_IS_PINNED_TO_ANTHROPIC_AND_FALLBACKS_DISABLED_WHEN_DIRECT_PROVIDER_IDENTITY_IS_REQUIRED",
+        "HARD_REQUEST_COUNT_TOKEN_AND_COST_CAP_ABORTS_BEFORE_EXCEEDING_EXISTING_BALANCE",
+        "NO_NEW_CREDIT_PURCHASE"
+      ]
+    }
+  ],
+  "deduction": {
+    "old_overbroad_claim": "EXACT_OPUS55_COMPARATOR_ACCESS_NECESSARILY_REQUIRES_INCREMENTAL_SPEND",
+    "verdict": "REVOKED",
+    "current_truth": "EXACT_OPUS55_COMPARATOR_ACCESS_HAS_CONDITIONAL_ZERO_INCREMENTAL_ROUTES_BUT CURRENT ACCOUNT-SPECIFIC ELIGIBILITY_OR_BALANCE_IS_NOT YET VERIFIED",
+    "minimum_missing_fact": "ONE_AUTHENTICATED_ACCOUNT_CAPACITY_SNAPSHOT_FROM_EITHER_ANTHROPIC_FREE_CREDIT_ELIGIBILITY_OR_OPENROUTER_EXISTING_BALANCE",
+    "after_positive_snapshot": "COMPILE_THE_SMALLEST_DECISION_CHANGING_COMPARATOR_CERTIFICATE_AND HARD-CAP COST AT VERIFIED_PREEXISTING_OR_FREE_BALANCE",
+    "after_negative_snapshot": "KEEP_COMPARATOR_ROUTE_BLOCKED_AND_CONTINUE_STRONGER_PROOF_OR_OWNER_RECEIPT_BRANCHES"
+  },
+  "scheduler_delta": {
+    "activate_fact_check": "EXACT_COMPARATOR_ACCOUNT_CAPACITY_SNAPSHOT",
+    "preference": [
+      "OPENROUTER_BALANCE_SNAPSHOT_FIRST_BECAUSE_ACCOUNT_EXISTENCE_IS_AUTHENTICATED AND EXACT_OPUS55_ROUTE_IS PUBLICLY AVAILABLE",
+      "ANTHROPIC_FREE_CREDIT_ELIGIBILITY_SECOND_IF_OPENROUTER_HAS_NO_USABLE_PREEXISTING_BALANCE"
+    ],
+    "do_not_execute_comparator_yet": true,
+    "reason": "ACCOUNT_CAPACITY_AND_HARD_ZERO_SPEND_GUARD_NOT_VERIFIED"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_OPENROUTER_BALANCE_IS_POSITIVE",
+    "NO_CLAIM_CURRENT_ANTHROPIC_ACCOUNT_IS_FREE_CREDIT_ELIGIBLE",
+    "NO_COMPARATOR_OUTPUT_ACQUIRED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_TERMINAL_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

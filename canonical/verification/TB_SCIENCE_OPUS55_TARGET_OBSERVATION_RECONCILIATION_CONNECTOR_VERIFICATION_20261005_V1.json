@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_OPUS55_TARGET_OBSERVATION_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__58_7_AND_63_3_ARE_DISTINCT_PUBLISHED_OBSERVATIONS__SINGLE_SCALAR_TARGET_FAIL_CLOSED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TB_SCIENCE_OPUS55_TARGET_OBSERVATION_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "d9a04099c634f8f1a29846e5eb1b18c67145eac5"
+  },
+  "repo_authorities": {
+    "acceptance_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+      "current_predicate": "TB_SCIENCE_GE_58_7"
+    },
+    "root2_cut": {
+      "path": "canonical/governance/ROOT2_18_ZERO_REALITY_CERTIFICATE_CUT_V1.json",
+      "git_blob_sha": "6ec6de4472342297fca54771499cce385cffeb9f",
+      "current_state": "TB_SCIENCE_GE_58_7_INTENTIONALLY_DEFERRED_BEYOND_ZERO_REALITY_FIXED_POINT"
+    }
+  },
+  "external_observations_recomputed": [
+    {
+      "source": "https://www.anthropic.com/claude-opus-5-5",
+      "authority": "FIRST_PARTY_MODEL_PROVIDER",
+      "published_date": "2026-09-22",
+      "benchmark": "Terminal-Bench-Science 0.1",
+      "opus55_score_percent": 58.7,
+      "conditions_materially_noted": [
+        "max effort unless otherwise noted",
+        "production safeguards enabled",
+        "fallback models used on some safety-intervened task categories"
+      ]
+    },
+    {
+      "source": "https://www.terminal-bench-science.ai/",
+      "authority": "BENCHMARK_OWNER_LIVE_LEADERBOARD",
+      "observed_date": "2026-10-05",
+      "benchmark": "Terminal-Bench-Science 0.1",
+      "model": "Opus 5.5(max)",
+      "agent": "Claude Code",
+      "opus55_score_percent": 63.3,
+      "standard_error_percent": 3.3,
+      "task_count": 70,
+      "release_date_shown": "2026-09-22"
+    }
+  ],
+  "checks": {
+    "same_benchmark_name": true,
+    "same_model_label_family": true,
+    "score_values_equal": false,
+    "score_delta_percentage_points": 4.6,
+    "exact_run_identity_proved": false,
+    "exact_harness_identity_proved": false,
+    "exact_agent_identity_proved": false,
+    "exact_safety_fallback_identity_proved": false,
+    "current_registry_represents_both_observations": false,
+    "fresh_score_execution_needed_to_detect_this_issue": false,
+    "zero_reality_truth_repair_available": true
+  },
+  "deductions": [
+    "THE_CURRENT_SINGLE_58_7_SCALAR_IS_A_VALID_NAMED_ANTHROPIC_LAUNCH_OBSERVATION_BUT_NOT_A_COMPLETE_ENCODING_OF_CURRENT_PUBLIC_OPUS55_TB_SCIENCE_OBSERVATIONS.",
+    "THE_63_3_LIVE_LEADERBOARD_ROW_IS_STRONGER_BY_4_6_PERCENTAGE_POINTS_AND_CANNOT_BE_IGNORED_IF_THE_CLAIMED_TERMINAL_SCOPE_INCLUDES_ITS_CLAUDE_CODE_AGENT_CONFIGURATION.",
+    "THE_TWO_VALUES_MUST_REMAIN_PROTOCOL_INDEXED_UNTIL_EQUIVALENCE_OR_EXCLUSION_IS_PROVED.",
+    "TB_SCIENCE_FRESH_REALITY_EXECUTION_REMAINS_DOMINATED_BY_TARGET_IDENTITY_RECONCILIATION."
+  ],
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION.",
+    "NO_CLAIM_63_3_IS_ALREADY_THE_FINAL_FROZEN_REGISTRY_THRESHOLD.",
+    "NO_CLAIM_58_7_IS_INVALID.",
+    "NO_BRAIN_TB_SCIENCE_SCORE_HAS_BEEN_RUN.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

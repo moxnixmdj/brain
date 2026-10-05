@@ -1,0 +1,154 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TRUTH_REPAIR__SEPARATE_SCOPE_CLOSED_PERFORMANCE_OPEN_FROM_SCOPE_REPAIR_OPEN__FIVE_ACTIVE_REGISTRY_SCOPE_REPAIR_LEAVES_PLUS_ONE_QUARANTINED_SCIENTIFIC_HYPOTHESIS_CANDIDATE__ZERO_CREDIT",
+  "objective": "Prevent already-certified scope from being rescheduled as scope work, reconcile the six-family benchmark-proxy quarantine with current independent scope certificates, and quarantine the newly exposed scientific hypothesis-formation behavior until independent admission.",
+  "authorities": {
+    "six_family_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "fdc70d49bfe3f4691fab728f2016242632018ce4"
+    },
+    "synthesis_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "structured_method_scope_audit": {
+      "path": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json",
+      "git_blob_sha": "1db04e3c2c523dfe5f2ebe719b7c63dc9ccd808e"
+    },
+    "scientific_hypothesis_candidate": {
+      "path": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "f0c6e15e6af698a80895eedf2c39bb874b4697b8"
+    },
+    "five_family_dependency_dedup": {
+      "path": "canonical/governance/PUBLIC_BAR_SCOPE_GAP_DEDUPLICATION_20261005_V1.json",
+      "git_blob_sha": "c52e499b54dd9f5eaed80647dd855615448752b0"
+    }
+  },
+  "distinction": {
+    "law": "SCOPE_COMPLETENESS_AND_PERFORMANCE_ACCEPTANCE_ARE_ORTHOGONAL_OBLIGATIONS__A_LEAF_WITH_INDEPENDENT_SCOPE_CLOSURE_MUST_NOT_REMAIN_ON_THE_SCOPE_REPAIR_FRONTIER_SOLELY_BECAUSE_ITS_NUMERIC_OR_MATCHED_PERFORMANCE_RESULT_IS_OPEN",
+    "no_credit": "RECLASSIFICATION_ONLY__NO_PERFORMANCE_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  },
+  "scope_closed_performance_open": [
+    {
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "prior_scope_repair_fanout": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ],
+      "scope_authority": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "verified": true,
+      "independent": true,
+      "coverage_complete": true,
+      "coverage_relation": "EXACT_UNION",
+      "scope_relation": "PROVEN_STRONGER",
+      "remaining": "PERFORMANCE_ONLY__MATCHED_QUALITY_AND_REQUIRED_CLAIM_COVERAGE_NONINFERIORITY_REMAIN_OPEN",
+      "scope_repair_occurrences_removed": 3
+    },
+    {
+      "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "prior_scope_repair_fanout": [
+        "ADVANCED_AGENTIC_CODING"
+      ],
+      "scope_authority": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json",
+      "status_required": "SCOPE_CLOSED",
+      "unresolved_scope_dimensions_required": 0,
+      "scope_gate_verdict_required": "ADMISSIBLE_SUBSTITUTION",
+      "remaining": "PERFORMANCE_ONLY__TERMINAL_ACCEPTANCE_PROOF_REMAINS_OPEN",
+      "scope_repair_occurrences_removed": 1
+    }
+  ],
+  "active_registry_scope_repair_open": [
+    {
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "fanout": [
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE"
+      ]
+    },
+    {
+      "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING"
+      ]
+    },
+    {
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "fanout": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ]
+    },
+    {
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "fanout": [
+        "PROFESSIONAL_KNOWLEDGE_WORK"
+      ]
+    },
+    {
+      "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+      ]
+    }
+  ],
+  "candidate_new_behavior_quarantine": {
+    "behavior_id": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+    "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+    "source": "canonical/governance/SCIENTIFIC_HYPOTHESIS_FORMATION_PROOF_BASIS_GAP_20261005_V1.json",
+    "current_active_registry_member": false,
+    "current_state": "CANDIDATE_DISTINCT_BEHAVIOR__INDEPENDENT_ADMISSION_PENDING",
+    "why_not_fold_into_iterative_research": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001_RECEIVES_A_RESEARCH_QUESTION_OR_TASK_OBJECTIVE_AS_INPUT_AND_CONTROLS_EVIDENCE_ACQUISITION__IT_DOES_NOT_GENERATE_OR_RANK_THE_RESEARCH_QUESTION_OR_HYPOTHESIS",
+    "scheduling_rule": "KEEP_SEPARATE_QUARANTINE_LANE__DO_NOT_COUNT_AS_ACTIVE_REGISTRY_LEAF_OR_IGNORE_IT__SEARCH_STRONGER_EXISTING_CONTRACT_OR_RECEIPT_BEFORE_REGISTRY_EXTENSION"
+  },
+  "recomputed_frontier": {
+    "prior_unique_active_registry_surviving_leaves": 7,
+    "prior_surviving_occurrences": 12,
+    "scope_closed_performance_open_unique": 2,
+    "scope_closed_occurrences_removed_from_scope_repair": 4,
+    "active_registry_scope_repair_open_unique": 5,
+    "active_registry_scope_repair_open_occurrences": 8,
+    "quarantined_candidate_new_behavior_count": 1,
+    "terminal_acceptance_leaf_count_not_reduced_by_scope_reclassification": true
+  },
+  "scheduling_delta": {
+    "delete": [
+      "SCOPE_COMPLETENESS_WORK_FOR_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "SCOPE_COMPLETENESS_WORK_FOR_STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "CLAIM_THAT_SEVEN_ACTIVE_REGISTRY_SURVIVORS_ARE_ALL_SCOPE_OPEN"
+    ],
+    "preserve": [
+      "SYNTHESIS_PERFORMANCE_ACCEPTANCE_WORK",
+      "STRUCTURED_METHOD_PERFORMANCE_ACCEPTANCE_WORK",
+      "FIVE_ACTIVE_REGISTRY_SCOPE_REPAIR_LEAVES",
+      "ALL_PUBLIC_BAR_NUMERIC_OR_MATCHED_ACCEPTANCE_OBLIGATIONS"
+    ],
+    "quarantine": [
+      "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001_UNTIL_STRONGER_EXISTING_COVERAGE_OR_INDEPENDENT_ADMISSION"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_SYNTHESIS_OR_STRUCTURED_METHOD_PERFORMANCE_ACCEPTANCE_IS_CLOSED",
+    "NO_CLAIM_THE_FIVE_SCOPE_REPAIR_OPEN_LEAVES_LACK_ADMISSIBLE_ROUTES",
+    "NO_CLAIM_SCIENTIFIC_HYPOTHESIS_CANDIDATE_IS_ALREADY_AN_ACTIVE_CONTRACT",
+    "NO_CLAIM_CURRENT_ACCEPTANCE_COUNTS_CHANGE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

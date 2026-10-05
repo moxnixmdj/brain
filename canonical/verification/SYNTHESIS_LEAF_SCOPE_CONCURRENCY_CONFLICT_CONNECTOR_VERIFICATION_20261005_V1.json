@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_LEAF_SCOPE_CONCURRENCY_CONFLICT_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__LATER_WHOLE_LEAF_ACTIVATION_DOES_NOT_DISCHARGE_EARLIER_TYPED_INPUT_DOMAIN_COUNTERMODEL__FAIL_CLOSED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_LEAF_SCOPE_CONCURRENCY_CONFLICT_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "4b1b9c7149eb040447b8dd1665366eccfbca60f4"
+  },
+  "recomputed": {
+    "quarantine": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "c1b2d488dfd38c27b533f98424036be874d5e829"
+    },
+    "later_verifier": {
+      "path": "canonical/verification/EVIDENCE_SYNTHESIS_LEAF_SCOPE_COMPLETE_BRIDGE_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "52ad9a49ac606a989df68e8a03fdc9143de75d23"
+    },
+    "later_activation": {
+      "path": "canonical/governance/EVIDENCE_SYNTHESIS_LEAF_SCOPE_COMPLETE_BRIDGE_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "64b6beffd6e9a0884df75b7687d906a39c4d0860"
+    },
+    "predicate_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    }
+  },
+  "checks": {
+    "quarantine_explicitly_marks_whole_leaf_inference_not_proved": true,
+    "quarantine_restores_synthesis_typed_input_domain_scope_completeness": true,
+    "later_activation_claims_whole_leaf_scope_complete": true,
+    "later_verifier_explicit_behavioral_input_domain_totality_check_present": false,
+    "predicate_certificate_target_scope": "scope://opus55/SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "predicate_certificate_witness_scope": "scope://brain/EVIDENCE_TO_AUDIENCE_SYNTHESIS_001/T1_T3_TERMINAL",
+    "target_and_witness_scopes_distinct": true,
+    "countermodel_premise_negated_by_later_verifier": false,
+    "errors": []
+  },
+  "theorem": "When a preserved countermodel shows predicate-scope dimension completeness can coexist with an uncovered admissible behavioral input class, a later verifier that rechecks only predicate/witness dimension completeness and exact behavior-id naming cannot prove whole behavioral-domain completeness. The countermodel remains live until an explicit totality or lossless partition proof closes it.",
+  "consequence": "FAIL_CLOSED_WHOLE_LEAF_SCOPE_COMPLETENESS__PRESERVE_PREDICATE_SCOPE_CERTIFICATE__RESTORE_ONE_SHARED_TYPED_INPUT_DOMAIN_SCOPE_ROOT",
+  "verification_class": "DETERMINISTIC_CURRENT_MAIN_CONTENT_RECOMPUTATION__NO_PERFORMANCE_CLAIM",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

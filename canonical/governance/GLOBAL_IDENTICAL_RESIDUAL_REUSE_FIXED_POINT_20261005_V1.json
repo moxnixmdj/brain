@@ -1,0 +1,185 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_IDENTICAL_RESIDUAL_REUSE_FIXED_POINT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__THREE_ALREADY_ACCEPTED_SINGLETON_BEHAVIORS_REUSED_BY_EXACT_ID_ACROSS_FULL_19_FAMILY_GRAPH__14_DUPLICATE_TARGET_INCIDENCES_DELETED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Lift exact behavioral-contract reuse from local family repair cuts to the full canonical 19-family residual graph, using only identical behavior_id objects whose singleton source families already have scope-complete independently verified Opus-5.5 acceptance and Brain-owned operative routes.",
+  "authorities": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "ownership_matrix": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+    },
+    "accepted_ownership_promotion": {
+      "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+      "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+    },
+    "recovery_scope_complete_receipt": {
+      "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+    },
+    "tool_discovery_scope_complete_receipt": {
+      "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+    },
+    "delegation_scope_complete_receipt": {
+      "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23"
+    }
+  },
+  "theorem": {
+    "name": "GLOBAL_EXACT_BEHAVIOR_ID_SINGLETON_SOURCE_REUSE",
+    "rule": "For a behavior_id B in one frozen content-addressed behavioral registry: if source family S maps exactly to [B], S is currently VERIFIED_OWNED_EQUAL_OR_BETTER, its Opus-5.5 acceptance is scope-complete for B, and its operative route is Brain-owned, then the proof of B may be reused at every other family mapping that contains the exact same B. Only B is discharged there; no other target-family behavior, public bar, matched predicate, family acceptance, capability ownership, or terminal credit follows.",
+    "fail_closed_conditions": [
+      "SAME_BEHAVIOR_ID_AND_SAME_BEHAVIORAL_REGISTRY_BLOB",
+      "SOURCE_FAMILY_MAPPING_IS_EXACT_SINGLETON",
+      "SOURCE_FAMILY_CURRENTLY_VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "SOURCE_ACCEPTANCE_SCOPE_IS_COMPLETE_OR_PROVEN_STRONGER_FOR_B",
+      "TARGET_FAMILY_MAPPING_CONTAINS_EXACT_B",
+      "NO_TARGET_WHOLE_FAMILY_OR_ATOMIC_PREDICATE_CREDIT_FROM_REUSE"
+    ]
+  },
+  "reusable_singleton_behaviors": [
+    {
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "source_family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "source_family_mapping": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "source_acceptance_status": "PASS_VIA_SCOPE_COMPLETE_STRONGER_PROOF_AT_OBJECTIVE_CEILING_OR_FLOOR",
+      "all_registry_occurrences": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "COMPUTER_AND_BROWSER_USE",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "target_reuse_families": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "COMPUTER_AND_BROWSER_USE",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "target_reuse_incidence_count": 7
+    },
+    {
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "source_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "source_family_mapping": [
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+      ],
+      "source_acceptance_status": "PASS_VIA_ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+      "all_registry_occurrences": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "target_reuse_families": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "target_reuse_incidence_count": 5
+    },
+    {
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "source_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "source_family_mapping": [
+        "TASK_TO_DELEGATION_GRAPH_001"
+      ],
+      "source_acceptance_status": "PASS_VIA_ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+      "all_registry_occurrences": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "target_reuse_families": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "target_reuse_incidence_count": 2
+    }
+  ],
+  "global_reduction": {
+    "canonical_family_count": 19,
+    "registry_family_residual_incidences": 44,
+    "registry_unique_behavior_ids": 12,
+    "singleton_behaviors_already_scope_complete_and_owned": 3,
+    "occurrences_of_these_three_including_sources": 17,
+    "duplicate_target_incidences_deleted_from_new_proof_work": 14,
+    "affected_target_family_count": 8,
+    "affected_target_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "COMPUTER_AND_BROWSER_USE",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "MULTI_CAPABILITY_COMPOSITION"
+    ],
+    "incidences_not_discharged_by_this_theorem": 27,
+    "unique_behavior_ids_not_discharged_by_this_theorem": 9,
+    "caution": "THE_27_AND_9_ARE ONLY THE COMPLEMENT OF THIS THEOREM. SOME MAY BE CLOSED OR COMPRESSED BY OTHER CURRENT PROOFS; DO_NOT INTERPRET THEM AS AN OPEN-WORK COUNT WITHOUT RECOMPUTATION."
+  },
+  "scheduler_effect": {
+    "delete": [
+      "NEW_TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_PROOF_FOR_SEVEN_TARGET_FAMILY_OCCURRENCES",
+      "NEW_TOOL_ROUTE_DISCOVERY_AND_SELECTION_PROOF_FOR_FIVE_TARGET_FAMILY_OCCURRENCES",
+      "NEW_TASK_TO_DELEGATION_GRAPH_PROOF_FOR_TWO_TARGET_FAMILY_OCCURRENCES"
+    ],
+    "preserve": [
+      "ALL_OTHER_RESIDUAL_CONTRACTS",
+      "ALL_PUBLIC_FIXED_BARS_AND_MATCHED_NONINFERIORITY_PREDICATES",
+      "ALL_SCOPE_QUARANTINES",
+      "ALL_TARGET_FAMILY_ACCEPTANCE_REQUIREMENTS",
+      "ZERO_FRESH_REALITY"
+    ],
+    "recompute_after_activation": [
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "COMPUTER_AND_BROWSER_USE",
+      "MULTI_CAPABILITY_COMPOSITION",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "ADVANCED_AGENTIC_CODING",
+      "AGENTIC_SCIENTIFIC_RESEARCH"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_NEW_ATOMIC_ACCEPTANCE_PREDICATE_PROVED",
+    "NO_WHOLE_TARGET_FAMILY_ACCEPTANCE",
+    "NO_TARGET_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TRANSFER_TO_SIMILAR_OR_SEMANTICALLY_RELATED_NONIDENTICAL_BEHAVIOR_IDS",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_CASES_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "connector_recomputation_required": true,
+  "independent_verification_required_for_any_acceptance_credit": true
+}

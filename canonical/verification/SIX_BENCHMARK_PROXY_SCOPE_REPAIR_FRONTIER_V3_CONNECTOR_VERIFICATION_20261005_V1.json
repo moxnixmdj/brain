@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__V2_SYNTHESIS_OVEREXTENSION_REMOVED__STRUCTURED_METHOD_SCOPE_CLOSED__SIX_ACTIVE_SCOPE_ROOTS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3.json",
+    "git_blob_sha": "2442af340f6445c1c8fbba7d770461a4e20a0378"
+  },
+  "checks": {
+    "structured_method_exact_behavior_scope_closed_zero_unresolved": true,
+    "structured_method_scope_gate_admissible_substitution": true,
+    "synthesis_whole_leaf_overextension_verdict_not_proved": true,
+    "synthesis_remaining_shared_typed_input_domain_root_exact": true,
+    "synthesis_fanout_count": 3,
+    "active_registry_scope_repair_root_count": 6,
+    "structurally_scope_closed_unique_count": 1,
+    "narrow_synthesis_predicate_certificate_preserved": true,
+    "v2_whole_leaf_scope_closed_claim_rejected": true,
+    "errors": []
+  },
+  "consequence": [
+    "SUPERSEDE_V2_FIVE_SCOPE_ROOT_CLAIM",
+    "USE_SIX_ACTIVE_REGISTRY_SCOPE_REPAIR_ROOTS",
+    "KEEP_STRUCTURED_METHOD_OFF_SCOPE_REPAIR_FRONTIER",
+    "KEEP_SYNTHESIS_ON_ONE_SHARED_TYPED_INPUT_DOMAIN_SCOPE_ROOT_NOT_THREE_FAMILY_LOCAL_ROOTS",
+    "PRESERVE_SYNTHESIS_PREDICATE_LEVEL_SCOPE_CERTIFICATE"
+  ],
+  "hard_nonclaims": [
+    "NO_NEW_INDEPENDENT_PUBLIC_RUNNER_RECEIPT",
+    "NO_SYNTHESIS_WHOLE_LEAF_SCOPE_CLOSURE",
+    "NO_PERFORMANCE_OR_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

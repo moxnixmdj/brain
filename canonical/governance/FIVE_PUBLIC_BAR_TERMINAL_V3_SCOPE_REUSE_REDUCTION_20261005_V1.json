@@ -1,0 +1,253 @@
+{
+  "schema": "PROJECT_BRAIN_FIVE_PUBLIC_BAR_TERMINAL_V3_SCOPE_REUSE_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ZERO_NEW_UNCOVERED_BEHAVIORAL_LEAVES_AFTER_EXACT_TERMINAL_V3_REUSE__PUBLIC_BARS_UNCHANGED__ZERO_CREDIT",
+  "objective": "Eliminate duplicated scope-repair work for the five public-bar families by reusing immutable Terminal V3 passes only for identical current behavioral leaves, while preserving every current Opus 5.5 public performance bar and every unresolved acceptance threshold.",
+  "authorities": {
+    "quarantine": {
+      "path": "canonical/governance/PUBLIC_BAR_ONLY_SCOPE_COMPLETENESS_QUARANTINE_20261005_V1.json",
+      "git_blob_sha": "fa4cddb4af4fb29c7e19e004774b11d6b874359a"
+    },
+    "five_family_partition": {
+      "path": "canonical/governance/FIVE_PUBLIC_BAR_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "8f74ca3d9609737913714844a793b8566028a0aa"
+    },
+    "current_behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "terminal_v3_wave": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2"
+    },
+    "terminal_v3_postwave_reduction": {
+      "path": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "git_blob_sha": "51e3e7578e9adbeee2168d2223b84481fea16a09",
+      "public_runner": {
+        "repository": "moxnixmdj/verification-capsule-runner",
+        "pull_request": 800,
+        "head_sha": "f14d6cc9685d5c1fd2eb60444b4efae746acf5b2",
+        "workflow_run_id": 36978438396,
+        "workflow_job_id": 110747302593,
+        "conclusion": "success"
+      }
+    },
+    "current_terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+      "no_proxy_substitution": "A benchmark can prove only the behavioral scope it actually exercises. Additional leaves remain separate obligations."
+    }
+  },
+  "admissibility_checks": {
+    "current_behavioral_registry_exactly_matches_terminal_v3_semantic_input": true,
+    "terminal_v3_contract_verdict_valid": true,
+    "terminal_v3_all_12_contracts_pass": true,
+    "surviving_partition_leaf_count": 7,
+    "surviving_partition_leaves_all_present_in_terminal_v3_passed_contracts": true,
+    "missing_surviving_leaf_receipts": [],
+    "terminal_v3_replay_forbidden": true,
+    "current_protocol_preserves_no_proxy_substitution_rule": true
+  },
+  "exact_reused_surviving_leaves": [
+    {
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "terminal_v3_pass": true,
+      "semantic_identity": "EXACT_BEHAVIOR_ID_ON_UNCHANGED_BEHAVIORAL_CONTRACT_REGISTRY_BLOB",
+      "use": "DISCHARGE_ONLY_THE_SEPARATE_UNCOVERED_BEHAVIORAL_LEAF_OBLIGATION_CREATED_BY_PUBLIC_BAR_SCOPE_NONEXHAUSTIVENESS",
+      "forbidden_use": "DO_NOT_INFER_ANY_PUBLIC_BENCHMARK_SCORE_OR_OPUS_NONINFERIORITY_THRESHOLD_FROM_THIS_RECEIPT"
+    },
+    {
+      "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "terminal_v3_pass": true,
+      "semantic_identity": "EXACT_BEHAVIOR_ID_ON_UNCHANGED_BEHAVIORAL_CONTRACT_REGISTRY_BLOB",
+      "use": "DISCHARGE_ONLY_THE_SEPARATE_UNCOVERED_BEHAVIORAL_LEAF_OBLIGATION_CREATED_BY_PUBLIC_BAR_SCOPE_NONEXHAUSTIVENESS",
+      "forbidden_use": "DO_NOT_INFER_ANY_PUBLIC_BENCHMARK_SCORE_OR_OPUS_NONINFERIORITY_THRESHOLD_FROM_THIS_RECEIPT"
+    },
+    {
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "terminal_v3_pass": true,
+      "semantic_identity": "EXACT_BEHAVIOR_ID_ON_UNCHANGED_BEHAVIORAL_CONTRACT_REGISTRY_BLOB",
+      "use": "DISCHARGE_ONLY_THE_SEPARATE_UNCOVERED_BEHAVIORAL_LEAF_OBLIGATION_CREATED_BY_PUBLIC_BAR_SCOPE_NONEXHAUSTIVENESS",
+      "forbidden_use": "DO_NOT_INFER_ANY_PUBLIC_BENCHMARK_SCORE_OR_OPUS_NONINFERIORITY_THRESHOLD_FROM_THIS_RECEIPT"
+    },
+    {
+      "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "terminal_v3_pass": true,
+      "semantic_identity": "EXACT_BEHAVIOR_ID_ON_UNCHANGED_BEHAVIORAL_CONTRACT_REGISTRY_BLOB",
+      "use": "DISCHARGE_ONLY_THE_SEPARATE_UNCOVERED_BEHAVIORAL_LEAF_OBLIGATION_CREATED_BY_PUBLIC_BAR_SCOPE_NONEXHAUSTIVENESS",
+      "forbidden_use": "DO_NOT_INFER_ANY_PUBLIC_BENCHMARK_SCORE_OR_OPUS_NONINFERIORITY_THRESHOLD_FROM_THIS_RECEIPT"
+    },
+    {
+      "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "terminal_v3_pass": true,
+      "semantic_identity": "EXACT_BEHAVIOR_ID_ON_UNCHANGED_BEHAVIORAL_CONTRACT_REGISTRY_BLOB",
+      "use": "DISCHARGE_ONLY_THE_SEPARATE_UNCOVERED_BEHAVIORAL_LEAF_OBLIGATION_CREATED_BY_PUBLIC_BAR_SCOPE_NONEXHAUSTIVENESS",
+      "forbidden_use": "DO_NOT_INFER_ANY_PUBLIC_BENCHMARK_SCORE_OR_OPUS_NONINFERIORITY_THRESHOLD_FROM_THIS_RECEIPT"
+    },
+    {
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "terminal_v3_pass": true,
+      "semantic_identity": "EXACT_BEHAVIOR_ID_ON_UNCHANGED_BEHAVIORAL_CONTRACT_REGISTRY_BLOB",
+      "use": "DISCHARGE_ONLY_THE_SEPARATE_UNCOVERED_BEHAVIORAL_LEAF_OBLIGATION_CREATED_BY_PUBLIC_BAR_SCOPE_NONEXHAUSTIVENESS",
+      "forbidden_use": "DO_NOT_INFER_ANY_PUBLIC_BENCHMARK_SCORE_OR_OPUS_NONINFERIORITY_THRESHOLD_FROM_THIS_RECEIPT"
+    },
+    {
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "terminal_v3_pass": true,
+      "semantic_identity": "EXACT_BEHAVIOR_ID_ON_UNCHANGED_BEHAVIORAL_CONTRACT_REGISTRY_BLOB",
+      "use": "DISCHARGE_ONLY_THE_SEPARATE_UNCOVERED_BEHAVIORAL_LEAF_OBLIGATION_CREATED_BY_PUBLIC_BAR_SCOPE_NONEXHAUSTIVENESS",
+      "forbidden_use": "DO_NOT_INFER_ANY_PUBLIC_BENCHMARK_SCORE_OR_OPUS_NONINFERIORITY_THRESHOLD_FROM_THIS_RECEIPT"
+    }
+  ],
+  "family_repaired_bases": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "existing_public_bar_requirement": "UNCHANGED__CURRENT_OPUS55_TERMINAL_PROOF_PROTOCOL_CONTINUES_TO_GOVERN_PERFORMANCE_PARITY",
+      "previously_discharged_scope_leaves": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "terminal_v3_exact_identity_scope_receipts": [
+        {
+          "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+          "terminal_v3_contract_pass": true,
+          "reuse_class": "IDENTICAL_FROZEN_BEHAVIORAL_LEAF__SCOPE_AND_DIRECT_BEHAVIOR_RECEIPT_ONLY__NO_PUBLIC_BAR_PERFORMANCE_INHERITANCE"
+        },
+        {
+          "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+          "terminal_v3_contract_pass": true,
+          "reuse_class": "IDENTICAL_FROZEN_BEHAVIORAL_LEAF__SCOPE_AND_DIRECT_BEHAVIOR_RECEIPT_ONLY__NO_PUBLIC_BAR_PERFORMANCE_INHERITANCE"
+        },
+        {
+          "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+          "terminal_v3_contract_pass": true,
+          "reuse_class": "IDENTICAL_FROZEN_BEHAVIORAL_LEAF__SCOPE_AND_DIRECT_BEHAVIOR_RECEIPT_ONLY__NO_PUBLIC_BAR_PERFORMANCE_INHERITANCE"
+        }
+      ],
+      "remaining_uncovered_behavioral_scope_leaves": []
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "existing_public_bar_requirement": "UNCHANGED__CURRENT_OPUS55_TERMINAL_PROOF_PROTOCOL_CONTINUES_TO_GOVERN_PERFORMANCE_PARITY",
+      "previously_discharged_scope_leaves": [
+        "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001"
+      ],
+      "terminal_v3_exact_identity_scope_receipts": [
+        {
+          "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+          "terminal_v3_contract_pass": true,
+          "reuse_class": "IDENTICAL_FROZEN_BEHAVIORAL_LEAF__SCOPE_AND_DIRECT_BEHAVIOR_RECEIPT_ONLY__NO_PUBLIC_BAR_PERFORMANCE_INHERITANCE"
+        },
+        {
+          "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+          "terminal_v3_contract_pass": true,
+          "reuse_class": "IDENTICAL_FROZEN_BEHAVIORAL_LEAF__SCOPE_AND_DIRECT_BEHAVIOR_RECEIPT_ONLY__NO_PUBLIC_BAR_PERFORMANCE_INHERITANCE"
+        }
+      ],
+      "remaining_uncovered_behavioral_scope_leaves": []
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "existing_public_bar_requirement": "UNCHANGED__CURRENT_OPUS55_TERMINAL_PROOF_PROTOCOL_CONTINUES_TO_GOVERN_PERFORMANCE_PARITY",
+      "previously_discharged_scope_leaves": [
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "terminal_v3_exact_identity_scope_receipts": [
+        {
+          "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+          "terminal_v3_contract_pass": true,
+          "reuse_class": "IDENTICAL_FROZEN_BEHAVIORAL_LEAF__SCOPE_AND_DIRECT_BEHAVIOR_RECEIPT_ONLY__NO_PUBLIC_BAR_PERFORMANCE_INHERITANCE"
+        }
+      ],
+      "remaining_uncovered_behavioral_scope_leaves": []
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "existing_public_bar_requirement": "UNCHANGED__CURRENT_OPUS55_TERMINAL_PROOF_PROTOCOL_CONTINUES_TO_GOVERN_PERFORMANCE_PARITY",
+      "previously_discharged_scope_leaves": [],
+      "terminal_v3_exact_identity_scope_receipts": [
+        {
+          "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+          "terminal_v3_contract_pass": true,
+          "reuse_class": "IDENTICAL_FROZEN_BEHAVIORAL_LEAF__SCOPE_AND_DIRECT_BEHAVIOR_RECEIPT_ONLY__NO_PUBLIC_BAR_PERFORMANCE_INHERITANCE"
+        },
+        {
+          "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+          "terminal_v3_contract_pass": true,
+          "reuse_class": "IDENTICAL_FROZEN_BEHAVIORAL_LEAF__SCOPE_AND_DIRECT_BEHAVIOR_RECEIPT_ONLY__NO_PUBLIC_BAR_PERFORMANCE_INHERITANCE"
+        },
+        {
+          "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+          "terminal_v3_contract_pass": true,
+          "reuse_class": "IDENTICAL_FROZEN_BEHAVIORAL_LEAF__SCOPE_AND_DIRECT_BEHAVIOR_RECEIPT_ONLY__NO_PUBLIC_BAR_PERFORMANCE_INHERITANCE"
+        }
+      ],
+      "remaining_uncovered_behavioral_scope_leaves": []
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "existing_public_bar_requirement": "UNCHANGED__CURRENT_OPUS55_TERMINAL_PROOF_PROTOCOL_CONTINUES_TO_GOVERN_PERFORMANCE_PARITY",
+      "previously_discharged_scope_leaves": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "terminal_v3_exact_identity_scope_receipts": [
+        {
+          "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+          "terminal_v3_contract_pass": true,
+          "reuse_class": "IDENTICAL_FROZEN_BEHAVIORAL_LEAF__SCOPE_AND_DIRECT_BEHAVIOR_RECEIPT_ONLY__NO_PUBLIC_BAR_PERFORMANCE_INHERITANCE"
+        },
+        {
+          "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+          "terminal_v3_contract_pass": true,
+          "reuse_class": "IDENTICAL_FROZEN_BEHAVIORAL_LEAF__SCOPE_AND_DIRECT_BEHAVIOR_RECEIPT_ONLY__NO_PUBLIC_BAR_PERFORMANCE_INHERITANCE"
+        }
+      ],
+      "remaining_uncovered_behavioral_scope_leaves": []
+    }
+  ],
+  "counts": {
+    "original_leaf_occurrences": 16,
+    "previously_discharged_occurrences_by_existing_scope_complete_receipts": 5,
+    "surviving_leaf_occurrences_before_terminal_v3_reuse": 11,
+    "unique_surviving_leaves_before_terminal_v3_reuse": 7,
+    "terminal_v3_reused_surviving_leaf_occurrences": 11,
+    "terminal_v3_reused_unique_surviving_leaves": 7,
+    "remaining_uncovered_leaf_occurrences_after_reuse": 0,
+    "remaining_unique_uncovered_behavioral_leaves_after_reuse": 0,
+    "new_scope_predicates_required_for_these_five_family_scope_gaps": 0
+  },
+  "consequence": {
+    "five_family_public_bar_scope_overclaim_repair": "CANDIDATE_STRUCTURALLY_COMPLETE_BY_PUBLIC_BAR_PLUS_IDENTICAL_PREEXISTING_TERMINAL_BEHAVIOR_RECEIPTS",
+    "public_bar_performance_requirements": "UNCHANGED_AND_STILL_MUST_CLOSE_UNDER_CURRENT_PROTOCOLS",
+    "current_14_of_38_acceptance_count_changed": false,
+    "root1_positive_gap_changed": false,
+    "family_acceptance_closed": false,
+    "terminal_goal_achieved": false,
+    "fresh_reality_needed_for_this_scope_repair": false,
+    "terminal_v3_reexecution_needed": false
+  },
+  "hard_nonclaims": [
+    "NO_PUBLIC_BAR_SCORE_INFERRED_FROM_TERMINAL_V3_BEHAVIORAL_RECEIPTS",
+    "NO_OPUS_NONINFERIORITY_INFERRED_WHERE_CURRENT_PROTOCOL_REQUIRES_A_PUBLIC_FIXED_BAR_OR_MATCHED_COMPARATOR",
+    "NO_ACCEPTANCE_PREDICATE_PROMOTION",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_REPLAY_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CLAIM_GLOBAL_FIRST_PARTY_SOURCE_UNIVERSE_IS_EXHAUSTIVE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

@@ -1,0 +1,181 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3",
+  "date": "2026-10-05",
+  "status": "ACTIVE__CONNECTOR_RECOMPUTED_WAKE_AWARE_ROOT2_CUT__SIX_INFORMATION_POSITIVE_GROUPS__SLEEP_SATURATED_BRANCHES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Minimize current Root2 wall-clock by running only zero-reality branches whose premise state can still change now, while converting saturated/searchless/owner-only branches to explicit wake conditions and preserving fail-closed truth.",
+  "parent": {
+    "path": "canonical/governance/ROOT2_18_WAKE_AWARE_ZERO_REALITY_CUT_V2.json",
+    "git_blob_sha": "d9e7965346fad08855b13fd049da3f657a1b98df",
+    "note": "V2 is used as the 18-predicate partition basis; V3 narrows executable scheduling and repairs synthesis authority interpretation."
+  },
+  "new_bound_evidence": {
+    "finance_fixed_point": {
+      "path": "canonical/governance/FINANCE_INDEX_DETERMINISTIC_ZERO_REALITY_FIXED_POINT_20261005_V1.json"
+    },
+    "hle_search_saturation": {
+      "path": "canonical/governance/HLE_OPUS46_GRADER_PUBLIC_SEARCH_SATURATION_20261005_V1.json",
+      "git_blob_sha": "e275b34b2cbcf245e162f4f1269b5db8c52acf53"
+    },
+    "owner_mailbox_scan": {
+      "path": "canonical/governance/ROOT2_OWNER_RECEIPT_AUTHENTICATED_MAILBOX_SCAN_20261005_V1.json",
+      "git_blob_sha": "5c2465594a8a7279c18aca59da58610108466188"
+    },
+    "comparator_firewall": {
+      "path": "canonical/governance/ROOT2_MUTABLE_COMPARATOR_CONTEXT_FIREWALL_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "7a7ca6bb17a73692b7521901ff731901a6bcf1f4"
+    },
+    "synthesis_overextension_verification": {
+      "path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "efa108a7b8003845acaa9d35bad01502593d46ed"
+    }
+  },
+  "synthesis_truth_repair": {
+    "preserve": "THE_EXISTING_SYNTHESIS_CERTIFICATE_CLOSES_THE_ACCEPTANCE_PREDICATE_SCOPE_RELATION_FOR_SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "revoke_for_scheduling": "DO_NOT_TREAT_THAT_PREDICATE_SCOPE_CERTIFICATE_AS_UNIVERSAL_WHOLE_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_TYPED_INPUT_DOMAIN_COMPLETENESS",
+    "root2_effect": "SYNTHESIS_ROOT2_MATCHED_PERFORMANCE_REMAINS_THE_ONLY_ROOT2_SYNTHESIS_TARGET; WHOLE_LEAF_SCOPE_REPAIR_BELONGS_TO_THE_SEPARATE_SCOPE_FRONTIER AND EARNS_NO ROOT2 PERFORMANCE CREDIT"
+  },
+  "information_positive_now": [
+    {
+      "id": "R2A_SHARED_TB4_CHARTOGRAPHY_PREFLIGHT",
+      "action": "RUN_ZERO_COST_RUNTIME_RESOURCE_PREFLIGHT_AND_PINNED_SYNTHETIC_LOAD_ONLY_WHERE_AUTHENTICATED_ACCESS_EXISTS",
+      "predicates": [
+        "CODING_TB4_GE_66_4",
+        "CHARTOGRAPHY_TOOLS_GE_89"
+      ]
+    },
+    {
+      "id": "R2B_SELF_SERVICE_ACCESS_FACTS",
+      "action": "BIND_SELF_SERVICE_AUTH_ASSET_AND_FREE_CAPACITY_FACTS_WHERE_ACCOUNT_ACCESS_EXISTS",
+      "predicates": [
+        "HLE_TOOLS_GE_67_7",
+        "CHARTOGRAPHY_TOOLS_GE_89",
+        "OSWORLD_2_1_PARTIAL_GE_81_8"
+      ]
+    },
+    {
+      "id": "R2D_FINANCE_AGENT_PREFLIGHT",
+      "action": "BIND_EXACT_SUITE_ID_AND_FREE_ONLY_PROVIDER_ACCOUNT_FACTS_AND_ZERO_COST_TELEMETRY_WHERE ACCESS EXISTS",
+      "predicates": [
+        "FINANCE_AGENT_V2_GE_58_59"
+      ]
+    },
+    {
+      "id": "R2E_NON_OWNER_CERTIFICATE_AND_BRIDGE_LANE",
+      "action": "WORK_ONLY_ON_NEW_LOAD_BEARING_PUBLIC_CERTIFICATES_OR_RELATIVE_SCORE_BRIDGES; NO OWNER POLLING",
+      "predicates": [
+        "CODING_FRONTIERCODE_GE_54_4",
+        "PROWORK_GDPVAL_GE_1846",
+        "AUTOMATIONBENCH_GE_40",
+        "MYSTERYMECHANISM_GE_49_55"
+      ]
+    },
+    {
+      "id": "R2F_SYNTHESIS_MATCHED_PERFORMANCE_ONLY",
+      "action": "WORK_ONLY_ON_PREDECLARED_MATCHED_QUALITY_NONINFERIORITY_OR A SEPARATELY VERIFIED STRONGER PERFORMANCE PROOF; DO NOT REBUILD PREDICATE SCOPE",
+      "predicates": [
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+      ]
+    },
+    {
+      "id": "R2G_STRONGER_SCOPE_COMPLETE_PROOF_LANE",
+      "action": "SEARCH_ONLY NEW LOAD_BEARING STRONGER UNIVERSAL CERTIFICATES; CURSOR OWNER SCORE WAIT REMAINS FORBIDDEN",
+      "predicates": [
+        "CODING_CURSORBENCH_GE_57_8",
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ]
+    }
+  ],
+  "sleep_until_wake": [
+    {
+      "id": "R2C_HLE_GRADER_RELATION",
+      "predicates": [
+        "HLE_TOOLS_GE_67_7"
+      ],
+      "reason": "CURRENT_PRIMARY_AND_CODE_SEARCH SET SATURATED; NO PUBLIC OPUS46 GRADER PROMPT OR PROVED CONSERVATIVE CAIS RELATION FOUND",
+      "wake": [
+        "NEW_PRIMARY_SOURCE_OR_CODE_RELEASE",
+        "OWNER_REPLY",
+        "NEW_FORMAL_SCORER_RELATION_EVIDENCE"
+      ]
+    },
+    {
+      "id": "R2F_FINANCE_DETERMINISTIC_COMPILER",
+      "predicates": [
+        "FINANCE_ACCOUNTING_INDEX_GE_61"
+      ],
+      "reason": "CURRENT_BOUND PREMISE VECTOR CONTAINS NO RECEIPTED NORMALIZED COMPONENT LOWER BOUND AND NO VERIFIED SUBSTITUTE FLOOR; PUBLIC INNER TRANSFORM ROUTE SATURATED",
+      "wake": [
+        "NEW_COMPONENT_BOUND",
+        "NEW_VERIFIED_FLOOR_OR_TRANSFORM",
+        "RESULT_BEARING_OWNER_RECEIPT",
+        "MATERIAL_SCHEMA_CHANGE",
+        "STRONGER_DIRECT_PROOF"
+      ]
+    },
+    {
+      "id": "OWNER_RECEIPT_MULTIPLEX",
+      "predicates": [
+        "CODING_FRONTIERCODE_GE_54_4",
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822",
+        "AUTOMATIONBENCH_GE_40",
+        "FINANCE_ACCOUNTING_INDEX_GE_61",
+        "FINANCE_AGENT_V2_GE_58_59",
+        "MYSTERYMECHANISM_GE_49_55"
+      ],
+      "reason": "AUTHENTICATED_SCAN FOUND ZERO INBOUND RECEIPTS; POLLING HAS ZERO INFORMATION UNTIL MAILBOX EVENT",
+      "wake": [
+        "MATERIAL_MAILBOX_EVENT",
+        "NEXT_GLOBAL_RECOMPUTE_AFTER_OTHER_VERIFIED_DELTA"
+      ]
+    }
+  ],
+  "deferred_fresh_reality": {
+    "predicate": "TB_SCIENCE_GE_58_7",
+    "target_rule": "CURRENT_PUBLIC_COMPARABLE_ROUTE_63_3; LEGACY_58_7 ONLY UNDER INDEPENDENTLY PROVED IDENTICAL ANTHROPIC RELEASE SETUP; OTHERWISE MATCHED SAME CONTEXT OR FAIL CLOSED",
+    "execution_authority": false
+  },
+  "scheduler_delta": {
+    "active_group_count": 6,
+    "slept_zero_information_or_event_only_branches": [
+      "R2C_HLE_GRADER_RELATION",
+      "R2F_FINANCE_DETERMINISTIC_COMPILER",
+      "OWNER_RECEIPT_MULTIPLEX"
+    ],
+    "delete": [
+      "REPEAT_HLE_GRADER_GENERIC_SEARCH_WITH_UNCHANGED_SOURCE_SET",
+      "REPEAT_FINANCE_ARITHMETIC_WITH_UNCHANGED_PREMISES",
+      "OWNER_INBOX_POLLING",
+      "WHOLE_LEAF_SYNTHESIS_SCOPE_CREDIT_FROM_PREDICATE_LEVEL_CERTIFICATE"
+    ],
+    "invariant": "A_BRANCH_RUNS_IFF_CURRENTLY_AVAILABLE_ACTION_CAN_CHANGE_A_LOAD_BEARING_PREMISE_OR PRODUCE_A_DECISION_CERTIFICATE"
+  },
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_TERMINAL_CASE_EXPOSURE",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_POST_RESULT_TARGET_SELECTION",
+    "NO_DEFAULT_FINANCE_COMPONENT_FLOORS",
+    "NO_OWNER_MAILBOX_POLLING_WITHOUT_WAKE",
+    "NO_WHOLE_LEAF_SYNTHESIS_SCOPE_INFERENCE_FROM_PREDICATE_SCOPE_CERTIFICATE",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_SCHEDULING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_SCOPE_FRONTIER_AUTHORITY_CONFLICT_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SUPERSEDED_BY_LATER_COUNTEREVIDENCE__ORIGINAL_RECOMPUTATION_WAS_CONDITIONAL_ON_INVALID_SYNTHESIS_WHOLE_LEAF_PREMISE__ZERO_CREDIT",
+  "original_commit": "0202f32124c2c71fc11f28b39367dc06e1300410",
+  "original_subject_blob": "09ed9417e40cb520d0cdfd4c634aaa7367713cd5",
+  "later_counterevidence": {
+    "path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "finding": "WHOLE_BEHAVIOR_INPUT_DOMAIN_COMPLETENESS_NOT_ENTAILED"
+  },
+  "preserved_checks": [
+    "FIVE_PLUS_TWO_WAS_ARITHMETICALLY_RECOMPUTED_CORRECTLY_UNDER_THE_OLD_PREMISES",
+    "FINITE_TERMINAL_RECEIPT_IS_NOT_UNIVERSAL_SCOPE_PROOF",
+    "STRUCTURED_METHOD_SCOPE_CLOSED"
+  ],
+  "invalidated_check": "SYNTHESIS_INDEPENDENT_SCOPE_COMPLETE_AS_WHOLE_BEHAVIORAL_LEAF",
+  "consequence": "THIS_VERIFICATION_HAS_NO_CURRENT_SCHEDULING_AUTHORITY__RECOMPUTE_WITH_SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_REOPENED",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

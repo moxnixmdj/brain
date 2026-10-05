@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_FIVE_PUBLIC_BAR_TERMINAL_V3_SCOPE_REUSE_REVOCATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH_REPAIR__PRIOR_ZERO_NEW_SCOPE_LEAF_CANDIDATE_REVOKED__ZERO_CREDIT",
+  "revoked": [
+    {
+      "path": "canonical/governance/FIVE_PUBLIC_BAR_TERMINAL_V3_SCOPE_REUSE_REDUCTION_20261005_V1.json",
+      "reason": "Finite Terminal V3 passes do not establish universal whole-leaf typed-input scope completeness."
+    },
+    {
+      "path": "canonical/verification/FIVE_PUBLIC_BAR_TERMINAL_V3_SCOPE_REUSE_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "reason": "The recomputation verified receipt-set identity but omitted the universal-totality entailment required for scope closure."
+    }
+  ],
+  "preserved_fact": "All seven prior surviving behavior IDs have finite Terminal V3 pass receipts on the unchanged behavioral registry; this is receipt inventory only.",
+  "current_authority": [
+    "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3_ACTIVATION_V1.json",
+    "canonical/governance/SYNTHESIS_WHOLE_LEAF_SCOPE_OVEREXTENSION_QUARANTINE_ACTIVATION_V1.json",
+    "canonical/verification/SCOPE_FRONTIER_AUTHORITY_CONFLICT_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1.json"
+  ],
+  "current_truth": {
+    "active_registry_scope_repair_roots": 6,
+    "structured_method_scope_closed_performance_open": true,
+    "synthesis_predicate_scope_certificate_valid": true,
+    "synthesis_whole_leaf_scope_complete": false,
+    "finite_receipt_saturation_is_not_universal_scope_proof": true
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CLOSURE",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
