@@ -1,0 +1,127 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V2",
+  "date": "2026-10-05",
+  "status": "CURRENT_CANDIDATE__DECLARED_19_FAMILY_ENVELOPE_PRESERVED__5_VERIFIED_OWNED__14_ROUTE_COVERAGE_UNPROVED__FIRST_PARTY_SURFACE_LOSSLESS_MAPPING_OPEN__ROOT1_POSITIVE_ZERO__GLOBAL_ENVELOPE_UNSEALED",
+  "scope": "ROOT1_CAPABILITY_MISSING_PLUS_TERMINAL_ENVELOPE_COMPLETENESS_BOUNDARY",
+  "predecessor": {
+    "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V1.json",
+    "git_blob_sha": "1318af58b44ea733421aded33b56144875e0a3e3"
+  },
+  "first_party_surface_audit": {
+    "path": "canonical/governance/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1.json",
+    "git_blob_sha": "2c414bdd07e11c9706bf9753e807b3f9e4b93f8c",
+    "verification_path": "canonical/verification/OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "verification_git_blob_sha": "ee23236266d9039fadcd4642216fd6f03ccf4702"
+  },
+  "declared_terminal_family_envelope": {
+    "expected_family_count": 19,
+    "actual_family_count": 19,
+    "verified_owned_count": 5,
+    "route_coverage_unproved_count": 14,
+    "complete_primitive_causal_basis_claimed": false,
+    "first_party_observable_surface_lossless_mapping_proved": false,
+    "global_all_useful_capabilities_envelope_sealed": false
+  },
+  "root1_classification": {
+    "root1_positive_gap_count": 0,
+    "root1_currently_active": false,
+    "route_coverage_unproved_is_capability_missing": false,
+    "unmapped_surface_candidate_is_capability_missing": false,
+    "rule": "UNKNOWN_OR_UNPROVED_MAPPING_IS_NOT_A_POSITIVE_MISSING_CAPABILITY;ROOT1_REOPENS_ONLY_AFTER_EXACT_SCOPE_ANALYSIS_ESTABLISHES_AN_OPUS55_USEFUL_BEHAVIOR_NOT_COVERABLE_BY_ANY_EXISTING_FAMILY_UNION"
+  },
+  "meta_envelope_mapping_frontier": [
+    {
+      "surface_group": "CYBERSECURITY",
+      "candidate_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "COMPUTER_AND_BROWSER_USE",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "closure": "LOSSLESS_SCOPE_UNION_PROOF_OR_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE"
+    },
+    {
+      "surface_group": "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "candidate_family_union": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "closure": "LOSSLESS_SCOPE_UNION_PROOF_OR_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE"
+    },
+    {
+      "surface_group": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "candidate_family_union": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+      ],
+      "closure": "LOSSLESS_SCOPE_UNION_PROOF_OR_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE"
+    },
+    {
+      "surface_group": "IMAGE_INPUT_AND_VISUAL_REASONING",
+      "candidate_family_union": [
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "COMPUTER_AND_BROWSER_USE"
+      ],
+      "closure": "MODALITY_PLUS_BEHAVIOR_SCOPE_COVERAGE_PROOF_OR_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE"
+    },
+    {
+      "surface_group": "CREATIVE_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUT",
+      "candidate_family_union": [
+        "COMMUNICATION_AND_SYNTHESIS",
+        "ARTIFACT_CREATION",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+      ],
+      "closure": "OUTPUT_BEHAVIOR_SCOPE_COVERAGE_PROOF_OR_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE"
+    },
+    {
+      "surface_group": "VOICE_DICTATION_INPUT",
+      "candidate_family_union": [
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "closure": "FIRST_CLASSIFY_NATIVE_MODEL_CAPABILITY_VS_CLIENT_TRANSCRIPTION_SURFACE__THEN_BIND_IF_LOAD_BEARING"
+    }
+  ],
+  "terminal_finality_rule": "DO_NOT_DECLARE_LITERAL_ALL_USEFUL_OPUS55_CAPABILITIES_TERMINAL_SUCCESS_FROM_38_OF_38_ATOMIC_ACCEPTANCE_ALONE_UNLESS_GLOBAL_ENVELOPE_COMPLETENESS_IS_SEPARATELY_SEALED_OR_THE_TERMINAL_CLAIM_IS_EXPLICITLY_LIMITED_TO_THE_DECLARED_19_FAMILY_ENVELOPE",
+  "scheduler_effect": {
+    "activate": [
+      "PARALLEL_META_ENVELOPE_LOSSLESS_MAPPING_FRONTIER",
+      "CONSTRUCTIVE_COUNTEREXAMPLE_SEARCH_ONLY_AGAINST_EXACT_FIRST_PARTY_USEFUL_BEHAVIOR_SURFACES"
+    ],
+    "preserve": [
+      "CURRENT_24_ATOMIC_ACCEPTANCE_FRONTIER",
+      "CURRENT_ROOT1_POSITIVE_GAP_COUNT_ZERO",
+      "NO_CAPABILITY_ACQUISITION_FROM_DOMAIN_LABELS_ALONE"
+    ],
+    "delete": [
+      "TERMINAL_FINALITY_FROM_38_OF_38_ALONE_WHILE_GLOBAL_ENVELOPE_UNSEALED",
+      "GENERIC_NEW_FAMILY_INVENTION_WITHOUT_CONSTRUCTIVE_UNMAPPED_BEHAVIOR"
+    ]
+  },
+  "hard_rules": [
+    "NO_ROOT1_REOPEN_FROM_UNCERTAINTY_ALONE",
+    "NO_DOMAIN_NAME_TO_CAPABILITY_FAMILY_EQUIVALENCE",
+    "NO_EXISTING_FAMILY_UNION_COVERAGE_BY_PROSE_SIMILARITY_ONLY",
+    "NO_TERMINAL_ENVELOPE_SEAL_UNTIL_FIRST_PARTY_SURFACES_HAVE_LOSSLESS_MAPPING_OR_EXPLICIT_NEW_FAMILY_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_META_MAPPING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
