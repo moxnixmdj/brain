@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_UNIVERSAL_CORRECTNESS_CONNECTOR_PREFLIGHT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__18_OF_18_THEOREM_SOURCE_FACTS__4_ADVERSARIAL_MUTATIONS_DETECTED__PUBLIC_RUNNER_SUBMITTED_BUT_QUEUE_SATURATED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "live_route": {
+    "activation_path": "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_CEILING_ROUTE_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "ad844630a932a0de2c0855b9fb8a4e3ad8c157b2",
+    "premise_verification_path": "canonical/verification/STRUCTURED_METHOD_UNIVERSAL_CEILING_PREMISE_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "premise_verification_git_blob_sha": "3269cdb520e0181985e8a7ce586f9b764fc4e51f",
+    "prior_candidate_path": "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_PERFORMANCE_CEILING_CANDIDATE_V1.json",
+    "prior_candidate_git_blob_sha": "160ab6fbd05d1f29ffa5ea6bd9054fdde4b780e0"
+  },
+  "strengthened_candidate": {
+    "relation": [
+      "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_CORRECTNESS_RELATION_V1.json",
+      "4e7c2c43cae956ce8eadf29ae04165ed2c9e77a7"
+    ],
+    "theorem_runtime": [
+      "canonical/runtime/structured_method_universal_correctness_certificate_v1.py",
+      "68b74726f8b95877b786309c1b51d665929478da"
+    ],
+    "mutation_tests": [
+      "canonical/tests/test_structured_method_universal_correctness_certificate_v1.py",
+      "47e65b23bbd55e2130c3f486d192f39495428cb2"
+    ],
+    "certificate": [
+      "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_CORRECTNESS_CERTIFICATE_V1.json",
+      "fc4bcf84aff19ed4b96c93166a1e7044d6b689d0"
+    ]
+  },
+  "recomputed": {
+    "theorem_source_fact_count": 18,
+    "theorem_source_fact_pass_count": 18,
+    "missing_source_facts": [],
+    "scope_already_closed": true,
+    "independently_verified_scope_gate_admissible": true,
+    "independent_oracle_source_bound": true,
+    "compiler_oracle_state_transition_correspondence": true,
+    "finite_pending_rule_ranking_function_bound": true,
+    "unresolved_or_cyclic_instances_fail_closed": true,
+    "final_requirement_and_output_gates_correspond": true,
+    "oracle_compares_every_expected_structural_field": true,
+    "empirical_generalization_required": false,
+    "candidate_brain_value": 1,
+    "theoretical_upper_bound": 1
+  },
+  "adversarial_mutations": {
+    "mutation_count": 4,
+    "detected_count": 4,
+    "cases": [
+      "REMOVE_READY_RULE_PREDICATE__KILLS_READY_PREDICATE_FACT",
+      "REVERSE_COMPILER_EDGE_TRANSITION__KILLS_STATE_BISIMULATION_FACT",
+      "REOPEN_SCOPE_DIMENSION__KILLS_SCOPE_CLOSED_FACT",
+      "REMOVE_ORACLE_EXPECTED_FIELD_LOOP__KILLS_SCORE_IMPLICATION_FACT"
+    ]
+  },
+  "external_independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2250,
+    "workflow_name": "Verify Brain Structured Method universal correctness V1",
+    "original_workflow_run_id": 37253558130,
+    "original_workflow_job_id": 111585904606,
+    "original_head_sha": "8af88283c104d79a8a03aad6aca19b4b2a997753",
+    "corrected_capsule_head_sha": "42054f141671037e9b086a77ad239f9be3c739ac",
+    "observed_queue_state": {
+      "queued_runs": 2500,
+      "in_progress_runs": 2,
+      "conclusion": "INFRASTRUCTURE_SATURATION__NOT_A_THEOREM_FAILURE"
+    },
+    "independent_conclusion": "PENDING",
+    "load_bearing_for_credit": false
+  },
+  "deduction": {
+    "theorem_candidate_strengthened_beyond_prior_candidate": true,
+    "exact_independent_oracle_bisimulation_added": true,
+    "adversarial_fail_closed_checks_added": true,
+    "matched_opus_comparator_required_if_independent_runner_passes": false,
+    "fresh_terminal_cases_required_if_independent_runner_passes": 0,
+    "standalone_leaf_performance_program_elimination_eligible_if_independent_runner_passes": true,
+    "acceptance_credit_now": 0
+  },
+  "hard_nonclaims": [
+    "CONNECTOR_RECOMPUTATION_IS_NOT_THE_REQUIRED_INDEPENDENT_PUBLIC_RUNNER",
+    "NO_PERFORMANCE_ACCEPTANCE_CREDIT_BEFORE_INDEPENDENT_THEOREM_VERIFICATION",
+    "NO_LEGACY_ATOMIC_PREDICATE_CREDIT",
+    "NO_WHOLE_FAMILY_PROMOTION",
+    "NO_SEMANTIC_EXTRACTION_OF_UNSTATED_OR_IMPLICIT_RULES_CLAIM",
+    "NO_OPERATOR_NUMERICAL_SEMANTICS_EXECUTION_CLAIM",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "next": "INDEPENDENTLY_EXECUTE_EXACT_CORRECTED_CAPSULE__ON_PASS_INTEGRATE_OBJECTIVE_CEILING_RECEIPT_AND_REMOVE_STRUCTURED_METHOD_STANDALONE_PERFORMANCE_PROGRAM_FROM_CURRENT_SCOPE_REPAIR_FRONTIER"
+}
