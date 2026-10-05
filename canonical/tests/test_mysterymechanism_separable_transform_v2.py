@@ -39,6 +39,17 @@ class MysteryMechanismProspectiveSelectionV2Tests(unittest.TestCase):
             bounds={"x": [-2.0, 2.0], "z": [-2.0, 2.0]},
             target="out",
         )
+        cls.good_solve = sep.solve(
+            fit_rows + [{**cls.good_point, "out": _law(**cls.good_point)}],
+            bounds={"x": [-2.0, 2.0], "z": [-2.0, 2.0]},
+            target="out",
+        )
+        cls.hostile_solve = sep.solve(
+            fit_rows
+            + [{**cls.hostile_point, "out": _law(**cls.hostile_point) + 1000.0}],
+            bounds={"x": [-2.0, 2.0], "z": [-2.0, 2.0]},
+            target="out",
+        )
 
     def test_reserved_observation_is_causally_absent_from_selection(self):
         # Both the reserved coordinates and target are different.  The complete
@@ -90,6 +101,30 @@ class MysteryMechanismProspectiveSelectionV2Tests(unittest.TestCase):
         self.assertEqual(self.good["capability_credit_delta"], 0)
         self.assertEqual(self.good["ownership_credit_delta"], 0)
         self.assertFalse(self.good["private_score_claimed"])
+
+    def test_solver_audits_before_reusing_final_observation_for_refinement(self):
+        self.assertEqual(
+            self.good_solve["status"],
+            "CANDIDATE_READY__PROSPECTIVE_AUDIT_PASSED__ZERO_PRIVATE_SCORE_CREDIT",
+        )
+        self.assertTrue(self.good_solve["audit_passed_before_refinement"])
+        self.assertTrue(self.good_solve["final_row_reused_for_refinement"])
+        self.assertEqual(
+            self.good_solve["route"],
+            "PROSPECTIVE_AUDIT_THEN_ACTIVE_REFINEMENT",
+        )
+        self.assertFalse(
+            self.good_solve["final_row_refinement_metric_is_independent_validation"]
+        )
+        self.assertIsNotNone(self.good_solve["candidate"])
+
+        self.assertEqual(
+            self.hostile_solve["status"],
+            "FAIL_CLOSED__PROSPECTIVE_AUDIT_FAILED__NO_REFINEMENT",
+        )
+        self.assertFalse(self.hostile_solve["final_row_reused_for_refinement"])
+        self.assertIsNone(self.hostile_solve["candidate"])
+        self.assertIsNone(self.hostile_solve["expression"])
 
     def test_nonfinite_input_still_fails_before_search(self):
         rows = _fit_rows() + [{"x": 0.4, "z": 0.5, "out": _law(0.4, 0.5)}]
