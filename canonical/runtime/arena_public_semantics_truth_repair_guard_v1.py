@@ -29,8 +29,8 @@ def verify()->dict:
         assert ptr["execution_authority"] is False
         assert ptr["fresh_reality_authority"] is False
     a=root["current_acceptance"]
-    c=current["current_root_partition_override"] if "current" in locals() else cur["current_root_partition_override"]
-    atomic=(current if "current" in locals() else cur)["atomic_acceptance_frontier"]
+    c=cur["current_root_partition_override"]
+    atomic=cur["atomic_acceptance_frontier"]
     assert a["accepted_families"]==c["accepted_families"]
     assert a["open_families"]==c["open_families"]
     assert a["proved_atomic"]==c["proved_atomic"]==atomic["proved"]
