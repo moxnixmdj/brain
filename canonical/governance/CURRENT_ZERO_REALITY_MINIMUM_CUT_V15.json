@@ -1,0 +1,115 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_V15",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__V14_PLUS_LOSSLESS_OPUS55_META_ENVELOPE_REDUCTION__TEN_ACTION_GROUPS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Extend the active V14 atomic zero-reality cut with the later Root1 envelope V5 terminal-finality obligations while preserving V14 CursorBench dormancy truth and all existing atomic work.",
+  "source_bindings": {
+    "predecessor_v14": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14.json",
+      "git_blob_sha": "ecf98388d2055ce9212b14570bc3f86877bc7c6f"
+    },
+    "predecessor_v14_activation": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_ACTIVATION_V1.json",
+      "git_blob_sha": "343be0d774f96ed851d668ad29045a12195f12ce"
+    },
+    "root1_envelope_v5": {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V5.json",
+      "git_blob_sha": "737b20eddfcb2aac31b87f94f93c427230565e95"
+    },
+    "meta_envelope_joint_certificate": {
+      "path": "canonical/governance/OPUS55_TERMINAL_META_ENVELOPE_JOINT_CERTIFICATE_V1.json",
+      "git_blob_sha": "e56d367766c9a425e6277d5502c0ec2f6d5ec597"
+    }
+  },
+  "preserved_atomic_state": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "total_atomic": 38,
+    "root1_positive_gap_count": 0,
+    "root2_touching_count": 18,
+    "root3_touching_count": 9,
+    "cursorbench_state": "OPEN_BUT_DORMANT__REOPEN_ONLY_ON_MATERIAL_CURSOR_POLICY_OR_INTERFACE_CHANGE_OR_SEPARATELY_ADMISSIBLE_STRONGER_SCOPE_COMPLETE_PROOF",
+    "terminal": false
+  },
+  "preserved_v14_action_groups": [
+    "A_SHARED_BUILDKITE_TB4_CHARTOGRAPHY_PREFLIGHT",
+    "B_SELF_SERVICE_AND_ACCOUNT_FACT_SWEEP",
+    "C_HLE_GRADER_RELATION",
+    "D_VALS_FINANCE_AGENT_PREFLIGHT",
+    "E_OWNER_OR_PLATFORM_RESULT_BATCH",
+    "F_FINANCE_AND_SYNTHESIS_CERTIFICATE_COMPILATION",
+    "G_ROOT3_SCOPE_CERTIFICATE_RACE",
+    "H_COMPOSITION_UPSTREAM_RECEIPT_RECOMPUTE",
+    "I_FINANCE_DIRECT_ORACLE_HOLD"
+  ],
+  "new_action_group": {
+    "id": "J_TERMINAL_META_ENVELOPE_JOINT_REDUCTION",
+    "semantic_slots": [
+      "CYBERSECURITY",
+      "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "HEALTHCARE",
+      "MATHEMATICAL_REASONING_ARXIVMATH",
+      "MULTILINGUAL_PERFORMANCE",
+      "LONG_CONTEXT",
+      "CREATIVE_TEXT_GENERATION",
+      "DIAGRAM_OUTPUT"
+    ],
+    "action": "ONE_CONTENT_ADDRESSED_JOINT_ZERO_REALITY_COMPILE__PRESERVE_ALL_NINE_SEMANTIC_SLOTS__COALESCE_ONLY_BIOLOGY_AND_AUTOMATED_AI_R_AND_D_ON_THE_VERIFIED_SHARED_HYPOTHESIS_INTERVENTION_EVIDENCE_UPDATE_BEHAVIORAL_LEAF__EMIT_EXPLICIT_RESIDUALS__NO_TERMINAL_CASES",
+    "substantive_residuals": [
+      "AUTHORIZED_SECURITY_STATE_TO_VERIFIED_FINDING_AND_REMEDIATION_001",
+      "HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001",
+      "HEALTHCARE_LOSSLESS_MAPPING_OR_EXPLICIT_LEAF",
+      "MATHEMATICAL_REASONING_ARXIVMATH_LOSSLESS_MAPPING_OR_EXPLICIT_LEAF",
+      "MULTILINGUAL_APPLICABLE_SCOPE_PARITY",
+      "LONG_CONTEXT_APPLICABLE_SCOPE_PARITY",
+      "CREATIVE_TEXT_GENERATION_QUALITY_NONINFERIOR",
+      "DIAGRAM_OUTPUT_SCOPE_QUALITY_NONINFERIOR"
+    ],
+    "fresh_reality": false
+  },
+  "compression": {
+    "root1_v5_scheduled_meta_checks": 8,
+    "v15_meta_compile_action_groups": 1,
+    "meta_semantic_slots": 9,
+    "meta_substantive_residuals": 8,
+    "coalescence_count": 1,
+    "coalescence_basis": "BIOLOGY_AND_AUTOMATED_AI_R_AND_D_SHARE_THE_SAME_EXPLICIT_HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_BEHAVIORAL_LEAF",
+    "atomic_v14_groups_deleted": 0
+  },
+  "combined_action_group_count": 10,
+  "scheduling": {
+    "priority": "RUN_J_DEDUCTIVE_REDUCTION_IMMEDIATELY__IN_PARALLEL_RUN_ONLY_INFORMATION_POSITIVE_V14_GROUPS_WITH_AVAILABLE_ACCESS",
+    "recompute_rule": "AFTER_EVERY_VERIFIED_ATOMIC_OR_META_DELTA_REBUILD_THE_COMBINED_MINIMUM_CUT_AND_DELETE_CLOSED_DORMANT_OR_DOMINATED_WORK",
+    "fresh_reality_before_zero_reality_fixed_point": false
+  },
+  "terminal_finality_rule": "THE_EXISTING_38_ATOM_ACCEPTANCE_LEDGER_REMAINS_AUTHORITATIVE_FOR_ITS_OWN_SCOPE_BUT_IS_NOT_BY_ITSELF_SUFFICIENT_FOR_LITERAL_ALL_USEFUL_OPUS55_FINALITY__META_ENVELOPE_RESIDUALS_MUST_ALSO_CLOSE",
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_TERMINAL_CASE_EXPOSURE_FROM_V15",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ROOT1_REOPEN_FROM_UNKNOWN_OR_UNCONTRACTED_STATUS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_META_CLASSIFICATION",
+    "NO_NEW_ACCOUNTING_FAMILY_UNLESS_EXISTING_FAMILY_MAPPING_IS_CONSTRUCTIVELY_FALSIFIED",
+    "NO_DROP_OR_MERGE_OF_META_RESIDUALS_EXCEPT_BY_VERIFIED_EQUIVALENCE_OR_SHARED_BEHAVIOR_IDENTITY",
+    "PRESERVE_CURSORBENCH_DORMANCY_TRUTH_REPAIR",
+    "NO_38_OF_38_TERMINAL_CLAIM_WITHOUT_META_ENVELOPE_CLOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
