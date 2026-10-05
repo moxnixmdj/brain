@@ -1,0 +1,156 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V4",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TRUTH_REPAIR_OF_V3__PROFESSIONAL_QUALITY_SCOPE_ALREADY_PARTITIONED_TO_AA_BRIEFCASE__FIVE_ACTIVE_SCOPE_ROOTS__ZERO_CREDIT",
+  "objective": "Remove PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001 from scope-repair scheduling because its frozen contracted scope is already independently/objectively proved to partition into the AA-Briefcase professional-quality surface, while preserving the AA-Briefcase >=1822 performance obligation and all other fail-closed scope roots.",
+  "supersedes": {
+    "candidate": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3.json",
+      "git_blob_sha": "2442af340f6445c1c8fbba7d770461a4e20a0378"
+    },
+    "activation": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3_ACTIVATION_V1.json",
+    "reason": "V3_CORRECTLY_REOPENED_SYNTHESIS_BUT_LEFT_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001_ON_SCOPE_FRONTIER_DESPITE_EXISTING_SCOPE_COMPLETE_ARTIFACT_PARTITION"
+  },
+  "authorities": {
+    "artifact_scope_partition": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d",
+      "status": "PASS__FROZEN_CONTRACTED_ARTIFACT_SCOPE_PARTITIONS_COMPLETELY_INTO_NATIVE_MECHANICS_PLUS_AA_BRIEFCASE_PROFESSIONAL_QUALITY__NO_EXTRA_DIRECT_QUALITY_LEAF"
+    },
+    "artifact_scope_map": {
+      "path": "canonical/governance/AA_BRIEFCASE_ARTIFACT_SCOPE_COVERAGE_MAP_V1.json",
+      "git_blob_sha": "87c362eee0b012baa3f89890b4f7d78a6f23684a"
+    },
+    "current_acceptance_bindings": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "aa_briefcase_leaf_multiplex": {
+      "path": "canonical/governance/AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_BINDING_V1.json",
+      "git_blob_sha": "65512b512ebe44eea63fb849293e07be87e0b7fa"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    }
+  },
+  "professional_quality_scope_reconciliation": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "scope": "Professional deliverable planning and revision judgment",
+    "artifact_partition_disposition": "COVERED_BY_AA_BRIEFCASE_PUBLIC_BAR_SCOPE_IF_AND_ONLY_IF_BRAIN_MEETS_THE_FROZEN_1822_ELO_THRESHOLD",
+    "artifact_partition_no_uncovered_contracted_leaf": true,
+    "acceptance_ledger_scope_predicate": "ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT",
+    "acceptance_ledger_scope_predicate_state": "PROVED",
+    "acceptance_ledger_scope_complete": true,
+    "acceptance_ledger_independent_or_objective": true,
+    "performance_state": "OPEN__AA_BRIEFCASE_GE_1822_REMAINS_REQUIRED",
+    "professional_work_fanout": [
+      "PROFESSIONAL_KNOWLEDGE_WORK"
+    ],
+    "scope_verdict": "CLOSED_BY_EXISTING_SCOPE_PARTITION__PERFORMANCE_OPEN"
+  },
+  "scope_closed_performance_open": [
+    {
+      "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "authority": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json",
+      "remaining": "PERFORMANCE_ACCEPTANCE_ONLY"
+    },
+    {
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "authority": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "remaining": "AA_BRIEFCASE_PERFORMANCE_ACCEPTANCE_ONLY__SHARED_RECEIPT_WITH_PROWORK_AA_BRIEFCASE_GE_1822_AND_ARTIFACT_AA_BRIEFCASE_GE_1822"
+    }
+  ],
+  "active_registry_scope_repair_roots": [
+    {
+      "id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "fanout": [
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE"
+      ]
+    },
+    {
+      "id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING"
+      ]
+    },
+    {
+      "id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "fanout": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ]
+    },
+    {
+      "id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "fanout": [
+        "ADVANCED_AGENTIC_CODING",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+      ]
+    },
+    {
+      "id": "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "fanout": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH"
+      ],
+      "closure": "PROVE_TOTALITY_OVER_EVERY_ADMISSIBLE_NORMALIZED_EVIDENCE_AUDIENCE_CONSTRAINT_INPUT_OR_LOSSLESSLY_PARTITION_AND_CLOSE_RESIDUAL_CLASSES",
+      "preserve_existing_predicate_certificate": true
+    }
+  ],
+  "candidate_new_behavior_quarantine": {
+    "behavior_id": "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001",
+    "current_active_registry_member": false,
+    "current_state": "QUARANTINED_PENDING_STRONGER_EXISTING_COVERAGE_OR_INDEPENDENT_ADMISSION"
+  },
+  "recomputed_frontier": {
+    "v3_active_scope_root_count": 6,
+    "newly_removed_scope_root_count": 1,
+    "active_registry_scope_repair_root_count": 5,
+    "v3_active_scope_open_occurrences": 11,
+    "newly_removed_scope_occurrences": 1,
+    "active_registry_scope_open_occurrences": 10,
+    "scope_closed_performance_open_unique": 2,
+    "current_acceptance_count_changed": false,
+    "root1_positive_gap_changed": false
+  },
+  "scheduling_delta": {
+    "delete": [
+      "SCOPE_COMPLETENESS_WORK_FOR_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "SEPARATE_PROFESSIONAL_QUALITY_SCOPE_PORTFOLIO"
+    ],
+    "preserve": [
+      "AA_BRIEFCASE_GE_1822_PERFORMANCE_WORK",
+      "ONE_SHARED_AA_BRIEFCASE_RECEIPT_MULTIPLEX_ROUTE",
+      "FIVE_ACTIVE_SCOPE_REPAIR_ROOTS",
+      "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_ROOT",
+      "SCIENTIFIC_HYPOTHESIS_CANDIDATE_QUARANTINE",
+      "ALL_PUBLIC_BAR_AND_MATCHED_PERFORMANCE_OBLIGATIONS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_AA_BRIEFCASE_SCORE_CREDIT",
+    "NO_PROFESSIONAL_KNOWLEDGE_WORK_OR_ARTIFACT_CREATION_FAMILY_PROMOTION",
+    "NO_SYNTHESIS_WHOLE_LEAF_SCOPE_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_GOAL_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
