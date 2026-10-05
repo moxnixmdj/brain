@@ -41,6 +41,10 @@
     "svg_real_render_oracle": {
       "path": "canonical/runtime/svg_diagram_render_oracle_v1.py",
       "git_blob_sha": "9a66f7d915fa6d510c9cda50b569f6e4ddd8eb25"
+    },
+    "creative_metric_independence_verification": {
+      "path": "canonical/verification/CREATIVE_TEXT_METRIC_INDEPENDENCE_WOLFRAM_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "47e0782a83e5c26d265df44606f509bb32d8a35c"
     }
   },
   "state_change_since_v2": {
@@ -110,6 +114,12 @@
       "creative_quality_dimension_present": false,
       "reason": "OPEN_ENDED_CREATIVE_QUALITY_CAN_DIVERGE_WHILE_ALL_FIVE_CURRENT_SYNTHESIS_DIMENSIONS_PASS; SILENTLY CALLING_THE_EXISTING_SYNTHESIS_PREDICATE_SUFFICIENT_WOULD_LEAVE_THE_CREATIVE_QUALITY_TARGET_UNMEASURED.",
       "rule": "DO_NOT_RETROACTIVELY_REINTERPRET_THE_EXISTING_FROZEN_SYNTHESIS_SCORER_AS_CREATIVE_QUALITY."
+    },
+    "logical_independence_verification": {
+      "result": "PASS__CONSTRUCTIVE_COUNTERMODEL",
+      "path": "canonical/verification/CREATIVE_TEXT_METRIC_INDEPENDENCE_WOLFRAM_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "47e0782a83e5c26d265df44606f509bb32d8a35c",
+      "implication": "PERFECT_OR_EQUAL_CURRENT_FIVE_DIMENSION_SCORES_DO_NOT_LOGICALLY_DETERMINE_CREATIVE_QUALITY"
     }
   },
   "minimality": {
