@@ -66,6 +66,19 @@ class SubprocessFinalAuthorizerAdapterTests(unittest.TestCase):
         self.assertIn("CONTENT_HASH_MISMATCH", out["reason"])
         self.assertEqual(calls, [])
 
+    def test_extra_hashed_field_still_fails_closed(self):
+        calls = []
+        auth = self.authorizer(lambda req: calls.append(req))
+        req = mediator_request()
+        req["unexpected"] = "x"
+        core = dict(req)
+        core.pop("request_sha256")
+        req["request_sha256"] = hashlib.sha256(canon(core)).hexdigest()
+        out = auth(req)
+        self.assertFalse(out["allowed"])
+        self.assertIn("FIELD_SET_INVALID", out["reason"])
+        self.assertEqual(calls, [])
+
     def test_grant_provider_exception_fails_closed(self):
         def boom(req):
             raise RuntimeError("no grant")
