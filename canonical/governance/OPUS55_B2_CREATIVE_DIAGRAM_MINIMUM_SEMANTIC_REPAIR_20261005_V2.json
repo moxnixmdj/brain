@@ -1,0 +1,145 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_B2_CREATIVE_DIAGRAM_MINIMUM_SEMANTIC_REPAIR_20261005_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_MAIN_REBASED__19_FAMILIES_PRESERVED__CREATIVE_REUSES_UNEXECUTED_SYNTHESIS_PREDICATE__ONE_NEW_DIAGRAM_SEMANTIC_ATOM__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Convert the remaining creative/general-analysis and diagram proof-basis gaps into the smallest acceptance repair compatible with the current W4 target-coverage certificate, the V2 literal-finality guard, the active V15 zero-reality cut, and the new deterministic SVG mechanics substrate.",
+  "bound_current_state": {
+    "base_commit": "7164aa7e7f0831fda97bff9abef35db00df1a312",
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "creative_diagram_gap": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json",
+      "git_blob_sha": "07de409df048ba2e8e9598f917fa937656b2f354"
+    },
+    "root_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860"
+    },
+    "active_zero_reality_cut": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V15.json",
+      "git_blob_sha": "37c58301f1e002a200dc93a2e7d771cd1ffc5dcb"
+    },
+    "active_zero_reality_cut_activation": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V15_ACTIVATION_V1.json",
+      "git_blob_sha": "e4667972a22e8e1c60aaa4542950abc68e89067c"
+    },
+    "synthesis_preexposure_scorer_activation": {
+      "path": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_ACTIVATION_V1.json",
+      "git_blob_sha": "300fb663e6b598b389961ddf663d88abcd206545"
+    },
+    "functional_role_falsification_activation": {
+      "path": "canonical/governance/OPUS55_FUNCTIONAL_ROLE_BASIS_TARGET_DISCOVERY_FALSIFICATION_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "1898ecf493d21b340e9de7f62a71880f5d0b90f5"
+    },
+    "w4_target_discovery_activation": {
+      "path": "canonical/governance/OPUS55_TARGET_DISCOVERY_COMPLETENESS_CERTIFICATE_V1_ACTIVATION_V1.json",
+      "git_blob_sha": "8382da2ed68c531e596f0cbe424f7028d30eae50"
+    },
+    "literal_finality_guard": {
+      "path": "canonical/governance/TERMINAL_FRONTIER_COMPILER_V2.json",
+      "git_blob_sha": "cfdebaf429e66f118b5e9bccc147feb1f054ed01"
+    },
+    "diagram_mechanics_runtime": {
+      "path": "canonical/runtime/html_svg_diagram_mechanics_v1.py",
+      "git_blob_sha": "9476c34e34f64f0e5babd00fa2e5967f41b4f5bb"
+    }
+  },
+  "truth_reconciliation": {
+    "current_acceptance": "14_PROVED__24_UNRESOLVED__38_TOTAL__5_OF_19_FAMILIES_ACCEPTED",
+    "target_family_discovery": "W4_FIXED_INTERFACE_COVERAGE_ACTIVE_FOR_TOP_LEVEL_FAMILY_DISCOVERY",
+    "literal_target_discovery_for_finality": "FALSE_UNDER_TERMINAL_FRONTIER_COMPILER_V2_BECAUSE_W4_COVERAGE_IS_NOT_W1_W2_OR_W3_DOMINANCE",
+    "functional_role_basis": "ONTOLOGY_ONLY__ROLE_COVERAGE_ALONE_CANNOT_PROVE_BEHAVIORAL_COMPLETENESS",
+    "consequence": "DO_NOT_USE_B2_ROLE_ASSIGNMENT_TO_CLAIM_LITERAL_TARGET_COMPLETENESS; USE_THE_CREATIVE_B2_FINDING_ONLY_TO_REPAIR_ACCEPTANCE_SCOPE_INSIDE_THE_ALREADY_FIXED_19_FAMILY_UNIVERSE."
+  },
+  "breakthrough": {
+    "name": "SPLIT_MECHANICS_FROM_SEMANTICS__REUSE_ONLY_UNEXECUTED_SYNTHESIS_SCOPE__ADD_ONE_DIAGRAM_SEMANTIC_ATOM",
+    "creative_general_analysis": {
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "existing_unresolved_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "repair": "BEFORE_MATCHED_CASE_POPULATION_EXPOSURE__VERSION_THE_SYNTHESIS_PORTFOLIO_DEFINITION_TO_INCLUDE_MANDATORY_GENERAL_NON_SPECIALIZED_ANALYSIS_AND_OPEN_ENDED_CREATIVE_TEXT_STRATA__PRESERVE_THE_FROZEN_REGISTRY_PREDICATE_TEXT__VERSION_ANY_SCORER_DIMENSION_BINDINGS_REQUIRED_BY_THE_NEW_STRATA__REUSE_NO_OUT_OF_SCOPE_RECEIPT",
+      "why_no_new_atom_yet": "THE_REGISTRY_PREDICATE_IS_UNRESOLVED_AND_REFERENCES_A_FROZEN_SYNTHESIS_PORTFOLIO; THE CURRENT ACTIVE V15 LANE EXPLICITLY SAYS NO_MATCHED_CASE_EXECUTION_YET AND THE PREEXPOSURE ACTIVATION STILL LISTS THE FROZEN_MATCHED_CASE_POPULATION_AND_RESULT_AS REMAINING. THEREFORE THE PORTFOLIO CAN BE FROZEN CORRECTLY ONCE, WITH THE MISSING STRATA INCLUDED, WITHOUT RETROACTIVELY CHANGING A PROVED RESULT.",
+      "fail_closed_precondition": "IF_ANY_RESULT_BEARING_MATCHED_SYNTHESIS_CASE_POPULATION_HAS_ALREADY_BEEN FROZEN_OR_EXPOSED_UNDER_A_SCOPE_EXCLUDING_THE_NEW_STRATA__THIS_REUSE_ROUTE_IS_INVALID_AND_A_NEW_ATOMIC_PREDICATE_IS_REQUIRED."
+    },
+    "diagram": {
+      "mechanics_owned_by": "canonical/runtime/html_svg_diagram_mechanics_v1.py",
+      "mechanics_scope": "TYPED_IR_VALIDATION__SAFE_SVG_SERIALIZATION__STRUCTURAL_ROUNDTRIP__REAL_BROWSER_RENDER_SMOKE",
+      "mechanics_explicitly_excludes": [
+        "CONTENT_SELECTION",
+        "LAYOUT_QUALITY",
+        "PRESENTATION_QUALITY"
+      ],
+      "new_atomic_obligation": {
+        "id": "DIAGRAM_SEMANTIC_LAYOUT_PRESENTATION_NONINFERIOR",
+        "family": "ARTIFACT_CREATION",
+        "kind": "MATCHED_NONINFERIORITY",
+        "acceptance": "Conditioned on the deterministic diagram mechanics gate passing, Brain conservative semantic correctness, information selection, layout quality, readability, and presentation bound must equal or exceed Opus 5.5 on a predeclared scope-certified diagram portfolio.",
+        "scope_exclusion": "DO_NOT_RESCORE_MECHANICAL_SVG_VALIDITY_OR_RENDERABILITY_AS_MATCHED_QUALITY; THOSE ARE OWNED_BY_THE_DETERMINISTIC_CEILING_GATE.",
+        "root_classification_if_integrated_unproved": "ROOT2_AND_ROOT3"
+      }
+    }
+  },
+  "minimality": {
+    "family_count_before": 19,
+    "family_count_after": 19,
+    "atomic_count_before": 38,
+    "atomic_count_after_if_integrated": 39,
+    "proved_atomic_before": 14,
+    "proved_atomic_after_if_integrated": 14,
+    "unresolved_atomic_before": 24,
+    "unresolved_atomic_after_if_integrated": 25,
+    "why_not_20th_family": "CURRENT_W4_TOP_LEVEL_FAMILY_DISCOVERY IS ACTIVE AND THE CREATIVE_GENERAL_ANALYSIS GAP DOES NOT INTRODUCE A NEW INTERFACE CHANNEL; ADDING A 20TH FAMILY WOULD CONTRADICT THE CURRENT MINIMUM DISCOVERY FRONTIER WITHOUT A DECLARED FALSIFIER.",
+    "why_not_two_new_atoms": "A SECOND CREATIVE_TEXT_ATOM IS DOMINATED WHILE THE SYNTHESIS MATCHED PREDICATE REMAINS UNEXECUTED AND ITS CASE POPULATION IS NOT YET FROZEN; CORRECTLY FREEZING THAT PORTFOLIO WITH THE MISSING STRATA PRESERVES THE EXISTING ATOMIC CONTRACT.",
+    "why_one_diagram_atom_is_irreducible": "THE DETERMINISTIC SVG RUNTIME CLOSES ONLY MECHANICS AND EXPLICITLY EXCLUDES CONTENT_LAYOUT_PRESENTATION QUALITY; THE EXISTING PROVED ARTIFACT SCOPE EVIDENCE CANNOT BE SILENTLY WIDENED. ONE SEMANTIC_QUALITY ATOM IS THE MINIMUM NON_REVOKING RESIDUAL."
+  },
+  "required_independent_verification": [
+    "RECOMPUTE_ALL_BOUND_GIT_BLOB_IDENTITIES.",
+    "PROVE_SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_IS_STILL_UNRESOLVED.",
+    "PROVE_CURRENT_V15_SYNTHESIS_LANE_STILL_FORBIDS_MATCHED_CASE_EXECUTION_BEFORE_CAPACITY_OR_STRONGER_PROOF.",
+    "PROVE_NO_RESULT_BEARING_SYNTHESIS_MATCHED_CASE_POPULATION_HAS_ALREADY_BEEN_FROZEN_OR_EXPOSED; ABSENCE_OF_THIS PROOF INVALIDATES CREATIVE_REUSE.",
+    "VERIFY_VERSIONED_SYNTHESIS_STRATA COVER GENERAL_NON_SPECIALIZED_ANALYSIS AND OPEN_ENDED_CREATIVE_TEXT WITHOUT REMOVING ANY PRIOR SYNTHESIS REQUIREMENT.",
+    "VERIFY_HTML_SVG_DIAGRAM_MECHANICS_OWNS ONLY MECHANICS AND EXCLUDES CONTENT_LAYOUT_PRESENTATION QUALITY.",
+    "SEARCH_CURRENT_REGISTRY_AND_ACTIVE_CANDIDATES_FOR AN EXISTING LOAD_BEARING DIAGRAM SEMANTIC QUALITY ATOM; IF ONE EXISTS, DELETE THIS PROPOSED ATOM AS DUPLICATE.",
+    "VERIFY_W4_COVERAGE IS NOT MISUSED AS LITERAL W1_W2_W3 FINALITY CREDIT.",
+    "VERIFY_ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_AND_FRESH_REALITY CREDIT."
+  ],
+  "integration_if_verified": [
+    "VERSION_THE_SYNTHESIS_PORTFOLIO_AND_SCORER_BINDINGS_BEFORE_ANY_RESULT_BEARING_CASE_EXPOSURE.",
+    "ADD_ONLY_DIAGRAM_SEMANTIC_LAYOUT_PRESENTATION_NONINFERIOR_TO_A_VERSIONED ACCEPTANCE_REGISTRY SUCCESSOR.",
+    "RECOMPUTE_REGISTRY_MINUS_PROVED_IDENTITY_WITH_TERMINAL_FRONTIER_COMPILER; NEVER HAND_EDIT_COUNTS.",
+    "UPDATE_META_ENVELOPE SO CREATIVE_TEXT_BASIS_REPAIR CLOSES ONLY AFTER THE VERSIONED SYNTHESIS SCOPE BINDING PASSES.",
+    "KEEP_DIAGRAM_SEMANTIC_LAYOUT_PRESENTATION_NONINFERIOR OPEN UNTIL ITS OWN SCOPE_AND_PERFORMANCE PROOF PASSES.",
+    "PRESERVE_TERMINAL_FALSE UNTIL THE SEPARATE W1_W2_OR_W3 LITERAL_FINALITY PREMISE AND ALL ACCEPTANCE_META_OWNERSHIP GATES CLOSE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_TERMINAL_GOAL_REACHED.",
+    "NO_CLAIM_W4_COVERAGE_IS_LITERAL_DOMINANCE_OR_W1_W2_W3.",
+    "NO_CLAIM_CREATIVE_GENERAL_ANALYSIS PARITY IS PROVED.",
+    "NO_CLAIM_DIAGRAM SEMANTIC QUALITY PARITY IS PROVED.",
+    "NO_NEW_FAMILY_CREDIT.",
+    "NO_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT.",
+    "NO_FRESH_REALITY_AUTHORITY.",
+    "NO_TARGET_WEAKENING.",
+    "NO_SILENT_REUSE_OF_PROOF_RECEIPTS_ACROSS_WIDENED_SCOPE."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
