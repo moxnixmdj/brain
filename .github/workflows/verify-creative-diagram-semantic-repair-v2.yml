@@ -1,0 +1,37 @@
+name: Verify creative diagram semantic repair v2
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/OPUS55_B2_CREATIVE_DIAGRAM_MINIMUM_SEMANTIC_REPAIR_20261005_V2.json
+      - canonical/runtime/verify_opus55_b2_creative_diagram_minimum_semantic_repair_v2.py
+      - canonical/tests/test_opus55_b2_creative_diagram_minimum_semantic_repair_v2.py
+      - canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json
+      - canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json
+      - canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json
+      - canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json
+      - canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V15.json
+      - canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V15_ACTIVATION_V1.json
+      - canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_ACTIVATION_V1.json
+      - canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json
+      - canonical/governance/OPUS55_FUNCTIONAL_ROLE_BASIS_TARGET_DISCOVERY_FALSIFICATION_ACTIVATION_20261005_V1.json
+      - canonical/governance/OPUS55_TARGET_DISCOVERY_COMPLETENESS_CERTIFICATE_V1_ACTIVATION_V1.json
+      - canonical/governance/TERMINAL_FRONTIER_COMPILER_V2.json
+      - canonical/runtime/html_svg_diagram_mechanics_v1.py
+      - .github/workflows/verify-creative-diagram-semantic-repair-v2.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Verify current-state candidate
+        run: python canonical/runtime/verify_opus55_b2_creative_diagram_minimum_semantic_repair_v2.py
+      - name: Run fail-closed mutation tests
+        run: python -m unittest -v canonical.tests.test_opus55_b2_creative_diagram_minimum_semantic_repair_v2
