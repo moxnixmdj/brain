@@ -1,0 +1,128 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_CONTENT_ADDRESSED_TYPED_PROTOCOL_MANIFEST_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_REFETCH_PASS__PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_CONTENT_ADDRESSED_TYPED_PROTOCOL_MANIFEST_20261005_V1.json",
+    "git_blob_sha": "a611c2cd2df23babac5252293d9f096a77d76458"
+  },
+  "action_intent": {
+    "path": "canonical/action_intents/2026-10-05_VERIFY_OPUS55_CONTENT_ADDRESSED_TYPED_PROTOCOL_MANIFEST_SOL_V1.json",
+    "git_blob_sha": "6ef08f2b790a7874961c66260d78fc2667e51770"
+  },
+  "machine_verifier": {
+    "path": "canonical/runtime/verify_opus55_content_addressed_typed_protocol_manifest_v1.py",
+    "git_blob_sha": "d736c6673a3a7e712370ddbce8762107f448a73f"
+  },
+  "source": {
+    "repository": "anthropics/anthropic-sdk-python",
+    "release_commit_sha": "18f25547f20cf5f01da69ac611e700e3bc9ebf21",
+    "refetched_blobs": {
+      "src/anthropic/types/content_block.py": "a0baaeb69bab7c74ae6e6aa9613f3381ad416811",
+      "src/anthropic/types/content_block_param.py": "b6a481a0ab64424475760b6e63316ed9177dc532",
+      "src/anthropic/types/stop_reason.py": "d28f681b8464057da3ddac61a83548e266880e10",
+      "src/anthropic/types/message.py": "34dc178ccec1f6b49bfacd0743dcd18689bc3c0d",
+      "src/anthropic/types/message_param.py": "c3a2046f2ad752cd87722fac4bae8545e317d474"
+    },
+    "all_blob_shas_match_manifest": true
+  },
+  "reconstructed_sets": {
+    "response_content_union": [
+      "BashCodeExecutionToolResultBlock",
+      "CodeExecutionToolResultBlock",
+      "ContainerUploadBlock",
+      "RedactedThinkingBlock",
+      "ServerToolUseBlock",
+      "TextBlock",
+      "TextEditorCodeExecutionToolResultBlock",
+      "ThinkingBlock",
+      "ToolSearchToolResultBlock",
+      "ToolUseBlock",
+      "WebFetchToolResultBlock",
+      "WebSearchToolResultBlock"
+    ],
+    "request_content_param_union": [
+      "BashCodeExecutionToolResultBlockParam",
+      "CodeExecutionToolResultBlockParam",
+      "ContainerUploadBlockParam",
+      "DocumentBlockParam",
+      "ImageBlockParam",
+      "RedactedThinkingBlockParam",
+      "SearchResultBlockParam",
+      "ServerToolUseBlockParam",
+      "TextBlockParam",
+      "TextEditorCodeExecutionToolResultBlockParam",
+      "ThinkingBlockParam",
+      "ToolResultBlockParam",
+      "ToolSearchToolResultBlockParam",
+      "ToolUseBlockParam",
+      "WebFetchToolResultBlockParam",
+      "WebSearchToolResultBlockParam"
+    ],
+    "stop_reason_union": [
+      "end_turn",
+      "max_tokens",
+      "model_context_window_exceeded",
+      "pause_turn",
+      "refusal",
+      "stop_sequence",
+      "tool_use"
+    ],
+    "message_fields_needing_load_bearing_classification": [
+      "container",
+      "diagnostics",
+      "model",
+      "role",
+      "stop_details",
+      "stop_reason",
+      "stop_sequence",
+      "usage"
+    ],
+    "message_param_roles": [
+      "assistant",
+      "system",
+      "user"
+    ]
+  },
+  "first_party_docs_corroboration_only": {
+    "model_overview": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+    "messages_create": "https://platform.claude.com/docs/en/api/messages/create",
+    "observations": [
+      "OPUS_5_5_CURRENT_MODEL_SURFACE_EXPOSES_ADAPTIVE_THINKING",
+      "MESSAGES_API_REQUIRES_THINKING_SIGNATURE_ROUND_TRIP",
+      "REDACTED_THINKING_IS_OPAQUE_STATE_TO_PRESERVE",
+      "MESSAGES_API_EXPOSES_PAUSE_TURN_REFUSAL_AND_CONTEXT_WINDOW_STOP_CONTROL"
+    ],
+    "authority": "CORROBORATION_ONLY__PINNED_SDK_BLOBS_DEFINE_THIS_SNAPSHOT_VERIFICATION"
+  },
+  "result": "PASS_FOR_PINNED_SDK_SNAPSHOT_INTEGRITY_AND_DECLARED_SET_RECONSTRUCTION",
+  "independent_public_runner_pending": true,
+  "required_public_runner_result": "MACHINE_VERIFIER_EXITS_ZERO_ON_STANDARD_GITHUB_RUNNER",
+  "scheduler_effect_if_public_runner_passes": [
+    "MARK_PINNED_SDK_SNAPSHOT_INTEGRITY_INDEPENDENTLY_REPRODUCIBLE",
+    "DELETE_REPEAT_MANUAL_REENUMERATION_WHILE_COMMIT_AND_FIVE_BLOB_SHAS_ARE_UNCHANGED",
+    "RETAIN_TOTAL_LOSSLESS_NORMALIZATION_AND_PROFILE_COVERAGE_AS_OPEN_PREMISES"
+  ],
+  "hard_nonclaims": [
+    "NO_PROOF_THE_PINNED_SDK_SUPERSET_EQUALS_ALL_OPUS55_DEPLOYMENT_PROFILE_SEMANTICS",
+    "NO_TOTAL_LOSSLESS_NORMALIZATION_PROOF",
+    "NO_LOCAL_REFINEMENT_OR_PERFORMANCE_DOMINANCE_PROOF",
+    "NO_TARGET_COVERAGE_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_W3_ACTIVATION",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
