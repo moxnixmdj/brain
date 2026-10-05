@@ -1,0 +1,32 @@
+name: Verify B2 creative diagram minimum semantic repair
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/OPUS55_B2_CREATIVE_DIAGRAM_MINIMUM_SEMANTIC_REPAIR_20261005_V1.json
+      - canonical/runtime/verify_opus55_b2_creative_diagram_minimum_semantic_repair_v1.py
+      - canonical/tests/test_opus55_b2_creative_diagram_minimum_semantic_repair_v1.py
+      - canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json
+      - canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json
+      - canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json
+      - canonical/governance/OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_CHARACTERIZATION_20261005_V1.json
+      - canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json
+      - canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12.json
+      - canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_ACTIVATION_V1.json
+      - .github/workflows/verify-b2-creative-diagram-minimum-semantic-repair-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Verify candidate
+        run: python canonical/runtime/verify_opus55_b2_creative_diagram_minimum_semantic_repair_v1.py
+      - name: Run fail-closed tests
+        run: python -m unittest -v canonical.tests.test_opus55_b2_creative_diagram_minimum_semantic_repair_v1
