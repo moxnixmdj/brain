@@ -15,7 +15,7 @@
     },
     "browser_mechanism_verification": {
       "path": "canonical/verification/BROWSER_VISUAL_TARGET_PROJECTION_MECHANISM_ENTAILMENT_CORRECTION_CONNECTOR_VERIFICATION_20261005_V1.json",
-      "git_blob_sha": ""
+      "git_blob_sha": "2e2cd067b261d46ccdfa6caddf0fe395ed43cef1"
     },
     "osworld_scope_reduction": {
       "path": "canonical/governance/OSWORLD_V21_COMPUTER_BROWSER_SCOPE_BLOCKER_REDUCTION_20261005_V1.json",
