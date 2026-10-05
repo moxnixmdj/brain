@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_SUPERSET_COVERAGE_DOMINANCE_NORMAL_FORM_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__SCHEDULING_LOGIC_ONLY__EXACT_ENUMERATION_REQUIREMENT_RELAXED_TO_SOUND_TARGET_SUPERSET_COVERAGE__CONFIGURABLE_DOMINANCE_ALLOWED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TARGET_SUPERSET_COVERAGE_DOMINANCE_NORMAL_FORM_20261005_V1.json",
+    "git_blob_sha": "55a027d50e6f9d1c4d70a75b39d6a536e26a4277"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/TARGET_SUPERSET_COVERAGE_DOMINANCE_NORMAL_FORM_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "6bffc82d79ec10e0357dc6ef5560bf4be6fdc1f9",
+    "result": "PASS"
+  },
+  "compatible_authority": {
+    "path": "canonical/verification/OPUS55_CONFIGURABLE_CAPABILITY_QUANTIFIER_CORRECTION_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "effect": "DOMAIN_DOMINANCE_MAY_USE_TASK_CONDITIONED_OWNED_CONFIGURATIONS_WHEN_TASK_INFORMATION_AND_ACCEPTANCE_SEMANTICS_ARE_ADMISSIBLE"
+  },
+  "scheduling_effect": {
+    "replace_overstrong_requirement": [
+      "REQUIRE_D_EXTENSIONALLY_EQUAL_U",
+      "REQUIRE_EXACT_ENUMERATION_OF_EVERY_USEFUL_TARGET_BEHAVIOR_AS_THE_ONLY_COVERAGE_ROUTE"
+    ],
+    "with": [
+      "PROVE_A_SOUND_TARGET_COVERAGE_CERTIFICATE_U_SUBSET_OR_EQUAL_D_FOR_SOME_DOMAIN_D",
+      "PROVE_BRAIN_SYSTEM_DOMINANCE_OVER_D_UNDER_FULL_LOAD_BEARING_SEMANTICS"
+    ],
+    "prioritize": [
+      "SEARCH_FOR_THE_SMALLEST_SOUND_FIRST_PARTY_OR_IMPLEMENTATION_DERIVED_TARGET_UPPER_ENVELOPE_D",
+      "REUSE_AUTHORITATIVE_EXCLUSIONS_INTERFACE_MODALITY_AND_ACTION_CHANNEL_BOUNDARIES_ONLY_WHERE_THEY_LOGICALLY_SUPPORT_U_SUBSET_OR_EQUAL_D",
+      "MINIMIZE_TOTAL_COVERAGE_PLUS_DOMINANCE_PROOF_COST_WITHOUT_SHRINKING_D_BY_ASSUMPTION",
+      "ALLOW_FORALL_TASK_EXISTS_ADMISSIBLE_OWNED_CONFIGURATION_DOMINANCE_WHEN_TASK_SEMANTICS_SUPPORT_IT"
+    ],
+    "preserve": [
+      "FAIL_CLOSED_LITERAL_ALL_FINALITY_UNTIL_BOTH_COVERAGE_AND_DOMINANCE_ARE_PROVED",
+      "ALL_CURRENT_STRICT_OPUS55_ACCEPTANCE_THRESHOLDS",
+      "OBSERVED_EPOCH_ROOT2_AND_ROOT3_WORK",
+      "NO_CREDIT_FROM_INTERFACE_CHANNEL_FACTS_ALONE"
+    ]
+  },
+  "current_state": {
+    "target_coverage_certificate": false,
+    "complete_domain_dominance": false,
+    "literal_terminal_finality": false,
+    "acceptance_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_DOCUMENTED_API_INTERFACE_IS_A_COMPLETE_SEMANTIC_TARGET_SUPERSET",
+    "NO_CLAIM_CURRENT_19_FAMILIES_ARE_EXHAUSTIVE",
+    "NO_CLAIM_BRAIN_DOMINATES_A_COMPLETE_TARGET_SUPERDOMAIN",
+    "NO_LITERAL_TERMINAL_COMPLETION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
