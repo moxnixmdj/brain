@@ -96,5 +96,12 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "proof_carrying_normal_form": {
+    "runtime_path": "canonical/runtime/composition_component_proof_contract_v1.py",
+    "test_path": "canonical/tests/test_composition_component_proof_contract_v1.py",
+    "rule": "EXACT_SUBJECT_AND_SCOPE_IDENTITY_ADMITS_DIRECTLY__ANY_NONEXACT_SUBJECT_OR_SCOPE_RELATION_REQUIRES_A_CONTENT_BOUND_INDEPENDENTLY_VERIFIED_CERTIFICATE_BINDING_EXACT_SOURCE_AND_TARGET_IDS",
+    "consequence": "REPLACE_SELF_ASSERTED_SEMANTIC_ENTAILMENT_FLAGS_WITH_MACHINE_CHECKABLE_PROOF_CARRYING_ENDPOINT_BINDINGS",
+    "current_component_credit_delta": 0
+  }
 }
