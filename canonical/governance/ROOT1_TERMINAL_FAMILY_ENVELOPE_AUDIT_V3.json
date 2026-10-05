@@ -1,0 +1,130 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V3",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIRST_PARTY_META_ENVELOPE_FRONTIER_REDUCED_FROM_6_TO_4_SURFACE_GROUPS__VOICE_DICTATION_NON_MODEL_BOUNDARY_CLOSED__IMAGE_INPUT_EXISTING_FAMILY_MAPPING_CLOSED__ROOT1_POSITIVE_ZERO__GLOBAL_ENVELOPE_UNSEALED__ZERO_CREDIT",
+  "scope": "ROOT1_CAPABILITY_MISSING_PLUS_TERMINAL_ENVELOPE_COMPLETENESS_BOUNDARY",
+  "predecessor": {
+    "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V2.json",
+    "git_blob_sha": "53abbfc02b100b5bcb9aaffe5f7b85802f267852"
+  },
+  "closure_receipts": {
+    "voice_dictation": {
+      "reconciliation": {
+        "path": "canonical/governance/OPUS55_VOICE_DICTATION_MODEL_BOUNDARY_RECONCILIATION_20261005_V1.json",
+        "git_blob_sha": "b8367a8a5094a70d09db1105bdf37907b49eacd2"
+      },
+      "verification": {
+        "path": "canonical/verification/OPUS55_VOICE_DICTATION_MODEL_BOUNDARY_BROWSER_VERIFICATION_20261005_V1.json",
+        "git_blob_sha": "ab752c94b04d239b23d34cbb3121bdd0a40f0258"
+      },
+      "conclusion": "DICTATION_SPEECH_RECOGNITION_IS_UPSTREAM_PRODUCT_TRANSCRIPTION__OPUS55_LOAD_BEARING_INPUT_IS_TEXT__NO_NEW_AUDIO_FAMILY"
+    },
+    "image_input": {
+      "mapping": {
+        "path": "canonical/governance/OPUS55_IMAGE_INPUT_EXISTING_FAMILY_MAPPING_20261005_V1.json",
+        "git_blob_sha": "fceb02c70aa49b5e07ba7dc49fa092dad2570fc8"
+      },
+      "verification": {
+        "path": "canonical/verification/OPUS55_IMAGE_INPUT_MAPPING_CONNECTOR_VERIFICATION_20261005_V1.json",
+        "git_blob_sha": "dc099b80e811d841a153aa0cf01ffae6c0464172"
+      },
+      "conclusion": "IMAGE_INPUT_USEFUL_BEHAVIOR_IS_CONTAINED_IN_EXISTING_VISION_AND_COMPUTER_BROWSER_FAMILY_UNION__NO_NEW_IMAGE_FAMILY"
+    }
+  },
+  "declared_terminal_family_envelope": {
+    "expected_family_count": 19,
+    "actual_family_count": 19,
+    "verified_owned_count": 5,
+    "route_coverage_unproved_count": 14,
+    "complete_primitive_causal_basis_claimed": false,
+    "first_party_observable_surface_lossless_mapping_proved": false,
+    "global_all_useful_capabilities_envelope_sealed": false
+  },
+  "root1_classification": {
+    "root1_positive_gap_count": 0,
+    "root1_currently_active": false,
+    "rule": "UNKNOWN_OR_UNPROVED_MAPPING_IS_NOT_A_POSITIVE_MISSING_CAPABILITY__ROOT1_REOPENS_ONLY_ON_CONSTRUCTIVE_USEFUL_BEHAVIOR_NOT_COVERABLE_BY_ANY_EXISTING_FAMILY_UNION"
+  },
+  "closed_meta_surface_groups": [
+    "VOICE_DICTATION_INPUT",
+    "IMAGE_INPUT_AND_VISUAL_REASONING"
+  ],
+  "meta_envelope_mapping_frontier": [
+    {
+      "surface_group": "CYBERSECURITY",
+      "candidate_family_union": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "COMPUTER_AND_BROWSER_USE",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "closure": "LOSSLESS_SCOPE_UNION_PROOF_OR_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE"
+    },
+    {
+      "surface_group": "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "candidate_family_union": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "closure": "LOSSLESS_SCOPE_UNION_PROOF_OR_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE"
+    },
+    {
+      "surface_group": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "candidate_family_union": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+      ],
+      "closure": "LOSSLESS_SCOPE_UNION_PROOF_OR_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE"
+    },
+    {
+      "surface_group": "CREATIVE_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUT",
+      "candidate_family_union": [
+        "COMMUNICATION_AND_SYNTHESIS",
+        "ARTIFACT_CREATION",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+      ],
+      "closure": "OUTPUT_BEHAVIOR_SCOPE_COVERAGE_PROOF_OR_CONSTRUCTIVE_UNMAPPED_BEHAVIOR_COUNTEREXAMPLE"
+    }
+  ],
+  "terminal_finality_rule": "DO_NOT_DECLARE_LITERAL_ALL_USEFUL_OPUS55_CAPABILITIES_TERMINAL_SUCCESS_FROM_38_OF_38_ALONE_UNLESS_THE_FOUR_REMAINING_META_SURFACE_GROUPS_CLOSE_OR_A_NEW_REQUIRED FAMILY IS OPENED_AND_CLOSED",
+  "scheduler_effect": {
+    "activate": [
+      "PARALLEL_EXACT_MAPPING_OR_COUNTEREXAMPLE_WORK_ON_ONLY_THE_FOUR_REMAINING_META_SURFACE_GROUPS"
+    ],
+    "delete": [
+      "VOICE_DICTATION_META_MAPPING_WORK",
+      "IMAGE_INPUT_NEW_FAMILY_SEARCH",
+      "GENERIC_NEW_FAMILY_INVENTION_WITHOUT_CONSTRUCTIVE_UNMAPPED_BEHAVIOR"
+    ],
+    "preserve": [
+      "CURRENT_24_ATOMIC_ACCEPTANCE_FRONTIER",
+      "CURRENT_ROOT1_POSITIVE_GAP_COUNT_ZERO"
+    ]
+  },
+  "hard_rules": [
+    "NO_ROOT1_REOPEN_FROM_UNCERTAINTY_ALONE",
+    "NO_DOMAIN_NAME_TO_CAPABILITY_FAMILY_EQUIVALENCE",
+    "NO_EXISTING_FAMILY_UNION_COVERAGE_BY_PROSE_SIMILARITY_ONLY",
+    "NO_TERMINAL_ENVELOPE_SEAL_UNTIL_REMAINING_FIRST_PARTY_SURFACES_HAVE_LOSSLESS_MAPPING_OR_EXPLICIT_NEW_FAMILY_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_META_MAPPING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
