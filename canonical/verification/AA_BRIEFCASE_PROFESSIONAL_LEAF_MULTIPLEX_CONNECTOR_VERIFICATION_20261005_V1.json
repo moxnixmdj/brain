@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_SAME_SURFACE_SAME_THRESHOLD_AND_INDEPENDENT_SCOPE_PARTITION_BINDING__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/AA_BRIEFCASE_PROFESSIONAL_LEAF_MULTIPLEX_BINDING_V1.json",
+    "git_blob_sha": "65512b512ebe44eea63fb849293e07be87e0b7fa"
+  },
+  "recomputed_authorities": {
+    "artifact_scope_partition": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d"
+    },
+    "artifact_scope_map": {
+      "path": "canonical/governance/AA_BRIEFCASE_ARTIFACT_SCOPE_COVERAGE_MAP_V1.json",
+      "git_blob_sha": "87c362eee0b012baa3f89890b4f7d78a6f23684a"
+    },
+    "comparator_provenance": {
+      "path": "canonical/governance/AA_BRIEFCASE_OPUS55_COMPARATOR_PROVENANCE_RECONCILIATION_V1.json",
+      "git_blob_sha": "55974d8c5d8e32f276149543959ad88f2c5abb89"
+    },
+    "score_readiness": {
+      "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+      "git_blob_sha": "4e59e30461c9ff1bee1a9474627d5fb4074844b2"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "six_family_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+      "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f"
+    }
+  },
+  "checks": {
+    "comparator_provenance_target_predicates_exact": [
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822"
+    ],
+    "both_predicates_exist_in_registry": true,
+    "registry_surface_equal": true,
+    "common_surface": "AA-Briefcase v1.1",
+    "both_acceptance_thresholds_include_1822": true,
+    "readiness_matrix_has_single_common_surface_row": true,
+    "readiness_row_families_exactly_include_both_consumers": true,
+    "artifact_scope_partition_exact_leaf": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "artifact_scope_partition_disposition": "COVERED_BY_AA_BRIEFCASE_PUBLIC_BAR_SCOPE_IF_AND_ONLY_IF_BRAIN_MEETS_THE_FROZEN_1822_ELO_THRESHOLD",
+    "six_family_partition_professional_survivor_contains_exact_leaf": true,
+    "score_producing_route_ready": false,
+    "errors": []
+  },
+  "deduction": [
+    "A_SECOND_AA_BRIEFCASE_SCORE_EXECUTION_FOR_THE_SECOND_FAMILY_CANNOT_ADD_DISTINCT_EVIDENCE_IF_THE_FIRST_RECEIPT_IS_BOUND_TO_THE_EXACT_SAME_FROZEN_SURFACE_AND_PROTOCOL",
+    "A_SEPARATE_PERFORMANCE_PORTFOLIO_FOR_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001_IS_REDUNDANT_BECAUSE_THE_INDEPENDENT_SCOPE_PARTITION_ALREADY_BINDS_THAT_EXACT_LEAF_TO_THE_AA_BRIEFCASE_PUBLIC_BAR_CONDITION",
+    "ONE_FUTURE_ADMISSIBLE_GE_1822_RECEIPT_MAY_THEREFORE_BE_REFERENCED_BY_BOTH_ATOMIC_PREDICATES_AND_THE_EXACT_LEAF",
+    "THIS_IS_SCHEDULING_COMPRESSION_ONLY_WHILE_SCORE_ROUTE_READY_FALSE"
+  ],
+  "verification_class": "DETERMINISTIC_CURRENT_MAIN_CONNECTOR_RECOMPUTATION__NOT_A_NEW_INDEPENDENT_PERFORMANCE_VERIFIER",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "atomic_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
