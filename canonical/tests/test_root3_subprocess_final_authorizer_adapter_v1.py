@@ -5,7 +5,10 @@ import json
 import tempfile
 import unittest
 from unittest.mock import patch
+from pathlib import Path
 
+from canonical.runtime.effect_broker_contract_v1 import make_grant
+from canonical.runtime.effect_broker_receipt_resolver_v2 import git_blob_id
 from canonical.runtime.root3_subprocess_final_authorizer_adapter_v1 import (
     make_authorizer,
 )
@@ -86,6 +89,55 @@ class SubprocessFinalAuthorizerAdapterTests(unittest.TestCase):
         out = self.authorizer(boom)(mediator_request())
         self.assertFalse(out["allowed"])
         self.assertIn("RuntimeError:no grant", out["reason"])
+
+    def test_real_final_authorizer_remains_denied_with_empty_semantic_registry(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            req_holder = {}
+
+            def write_receipt(rel, schema):
+                path = root / rel
+                path.parent.mkdir(parents=True, exist_ok=True)
+                data = (json.dumps({"schema": schema}, sort_keys=True) + "\n").encode()
+                path.write_bytes(data)
+                return {
+                    "path": rel,
+                    "git_blob_sha": git_blob_id(data, object_format="sha1"),
+                }
+
+            authority_ref = write_receipt("canonical/verification/a.json", "AUTH_UNBOUND_V1")
+            composition_ref = write_receipt("canonical/verification/c.json", "COMP_UNBOUND_V1")
+            authority_ref.update({
+                "scope_complete": True,
+                "allow_implies_zero_critical_authority_violation": True,
+                "independent_or_objective": True,
+            })
+            composition_ref.update({
+                "scope_complete": True,
+                "state_and_provenance_invariants_hold": True,
+                "independent_or_objective": True,
+            })
+
+            def provider(canonical_request):
+                req_holder["request"] = canonical_request
+                return make_grant(
+                    request=canonical_request,
+                    authority_receipt=authority_ref,
+                    composition_receipt=composition_ref,
+                    max_payload_bytes=100000,
+                )
+
+            auth = make_authorizer(
+                mission_id="m1",
+                capsule_head_sha256="c" * 64,
+                action_ref_prefix="root3-subprocess",
+                repo_root=root,
+                grant_provider=provider,
+            )
+            out = auth(mediator_request())
+            self.assertFalse(out["allowed"])
+            self.assertIn("SEMANTIC_VERIFICATION", out["reason"])
+            self.assertIn("request", req_holder)
 
     def test_nonfinal_allow_is_rejected(self):
         grants = []
