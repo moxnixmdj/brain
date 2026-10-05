@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_DIRECT_NATIVE_LOADER_CENSUS_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_SOURCE_CENSUS__48_REGISTERED_REPO_EXECUTION_PATHS__ZERO_DIRECT_STANDARD_NATIVE_LOADER_PRIMITIVES_FOUND__ZERO_CREDIT",
+  "subject": {
+    "canonical_brain_commit": "4b0e6b3efdfaf4ed85e56157f50917f232c79cef",
+    "c1_manifest_path": "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json",
+    "c1_manifest_git_blob_sha": "7e2a232d8c7c66d711e858cc75c647c5690a43eb"
+  },
+  "census": {
+    "unique_registered_repo_execution_paths": 48,
+    "searched_primitive_classes": [
+      "ctypes",
+      "cffi",
+      "CDLL",
+      "PyDLL",
+      "dlopen",
+      "LoadLibrary",
+      "ffi.dlopen",
+      "numpy.ctypeslib"
+    ],
+    "direct_matches": 0
+  },
+  "deduction": [
+    "NO_DIRECT_STANDARD_NATIVE_LIBRARY_LOADER_PRIMITIVE_WAS_FOUND_IN_THE_48_REGISTERED_REPOSITORY_EXECUTION_PATHS",
+    "OBSERVED_NATIVE_EXTENSION_RISK_IS_THEREFORE_CONCENTRATED_IN_IMPORTED_THIRD_PARTY_PACKAGE_INTERNALS_AND_CHILD_OR_SYSTEM_TOOL_PROCESSES",
+    "THIS_SUPPORTS_ISOLATING_THE_FINITE_RISKY_IN_PROCESS_ADAPTER_SET_INSTEAD_OF_SEARCHING_FOR_ARBITRARY_REPOSITORY_CTYPES_SITES"
+  ],
+  "hard_nonclaims": [
+    "TEXTUAL_ZERO_MATCH_IS_NOT_A_PROOF_THAT_PURE_PYTHON_THIRD_PARTY_SOURCE_CANNOT_REACH_NATIVE_CODE",
+    "TEXTUAL_ZERO_MATCH_DOES_NOT_EXCLUDE_CUSTOM_EXTENSION_IMPORTS_OR_OBFUSCATED_DYNAMIC_LOADERS",
+    "THIRD_PARTY_PACKAGE_INTERNALS_REMAIN_SEPARATE_EVIDENCE",
+    "NO_FULL_C1_SCOPE_COMPLETENESS",
+    "NO_ROOT3_PREDICATE_CLOSED"
+  ],
+  "next_required_evidence": [
+    "VERIFY_FOUR_NATIVE_RISK_ADAPTER_CHILD_ISOLATION_ON_EXECUTED_REGRESSIONS",
+    "SOURCE_AUDIT_PLATFORM_INDEPENDENT_THIRD_PARTY_PACKAGES_FOR_DYNAMIC_NATIVE_LOADERS",
+    "CONTINUE_CHILD_PROCESS_MEDIATION_CLASSIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
