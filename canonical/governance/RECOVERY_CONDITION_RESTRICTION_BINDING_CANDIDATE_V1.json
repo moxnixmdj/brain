@@ -1,0 +1,62 @@
+{
+  "schema":"PROJECT_BRAIN_RECOVERY_CONDITION_RESTRICTION_BINDING_CANDIDATE_V1",
+  "date":"2026-10-05",
+  "status":"FROZEN_PREVERIFICATION__TWO_CONDITION_CELLS_ONLY__ZERO_CREDIT",
+  "family":"SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+  "behavior_id":"TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "covered_conditions":[
+    "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+    "MATHEMATICAL_REASONING_ARXIVMATH"
+  ],
+  "authorities":{
+    "condition_matrix":{"path":"canonical/governance/TERMINAL_CONDITION_RESTRICTION_TRANSFER_MATRIX_20261005_V1.json","git_blob_sha":"c3ba5ef92057607d6b072867eb31d0c6a21aafb1"},
+    "accepted_route":{"path":"canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py","git_blob_sha":"28940387bd6c11671035ad9201e37bba13fd9bc9"},
+    "recovery_acceptance":{"path":"canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json","git_blob_sha":"981c8ac9b66ee7fccf5b531525849e29df9be483"},
+    "ownership":{"path":"canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json","git_blob_sha":"4711fb5eed330990edea369725de6eaedfd3bc70"},
+    "shared_residual_reuse":{"path":"canonical/governance/SHARED_RESIDUAL_ACCEPTED_FAMILY_REUSE_BINDING_20261005_V1.json","git_blob_sha":"b7a9c7632acc5068fbe5c1b7de5398c1bca2749d"},
+    "domain_invariance_runtime":{"path":"canonical/runtime/recovery_typed_ir_domain_invariance_v1.py","git_blob_sha":"dfe9c8f0c605c75ab09ba1c2b09965b2bf8b3228"},
+    "domain_invariance_tests":{"path":"canonical/tests/test_recovery_typed_ir_domain_invariance_v1.py","git_blob_sha":"100349bdf89374cf19dc5b9dfc120fa19cb1041c"},
+    "inherited_proof_population":{"path":"canonical/runtime/trajectory_failure_typed_ir_proof_v6.py","git_blob_sha":"0f41a36e6ad16722ce05b180e036fb921a2ef886"},
+    "derived_only_counterexample":{"path":"canonical/runtime/p1_v6_derived_only_counterexample_v1.py","git_blob_sha":"3466e7382d940133fa2b10206874bb39cdf3722f"}
+  },
+  "proof_rule":{
+    "premise_1":"The accepted Recovery family has exactly one active residual contract and the exact accepted V7 route is content-addressed and Brain-owned.",
+    "premise_2":"The Recovery acceptance proof is independently scope-complete at objective ceiling/floor for that frozen residual contract.",
+    "premise_3":"The condition matrix maps both listed conditions to SELF_VERIFICATION_DEBUGGING_AND_RECOVERY.",
+    "premise_4":"The exact V7 solver is invariant to semantic domain labels and bijective resource-token renaming while preserving graph, check kind, failure semantics, composition, and evidence.",
+    "conclusion":"Within the normalized typed-IR input boundary, each listed semantic condition is a restriction of the already-proved Recovery contract rather than a new Recovery behavior class."
+  },
+  "projected_compiler_receipt":{
+    "proof_id":"RECOVERY_CONDITION_RESTRICTION::TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001::V1",
+    "family":"SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "proof_class":"OBJECTIVE_CEILING",
+    "covered_conditions":[
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "MATHEMATICAL_REASONING_ARXIVMATH"
+    ],
+    "independent_or_objective":true,
+    "scope_complete":true,
+    "source_path":"PENDING_INDEPENDENT_VERIFICATION_RECEIPT",
+    "source_sha":"PENDING_INDEPENDENT_VERIFICATION_RECEIPT"
+  },
+  "hard_nonclaims":[
+    "NO_RAW_TASK_TO_TYPED_IR_NORMALIZATION_CLAIM",
+    "NO_NON_RECOVERY_FAMILY_CREDIT",
+    "NO_ARXIVMATH_REASONING_CREDIT_OUTSIDE_RECOVERY_BEHAVIOR",
+    "NO_AI_R_AND_D_CAPABILITY_CREDIT_OUTSIDE_RECOVERY_BEHAVIOR",
+    "NO_TERMINAL_TRUTH_OBLIGATION_CLOSED_BY_THIS_CANDIDATE",
+    "NO_CONDITION_CELL_CREDIT_BEFORE_INDEPENDENT_PUBLIC_VERIFICATION"
+  ],
+  "accounting":{
+    "incremental_spend_usd":0,
+    "new_reality_units_consumed":0,
+    "terminal_cases_consumed":0,
+    "acceptance_credit_delta":0,
+    "family_credit_delta":0,
+    "capability_credit_delta":0,
+    "ownership_credit_delta":0
+  },
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false
+}
