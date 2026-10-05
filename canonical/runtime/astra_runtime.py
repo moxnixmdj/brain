@@ -4339,7 +4339,7 @@ def _run_model_independent_goal(step, mission, goal):
         if composition_guard is not None and composition_row is not None:
             try:
                 composition_capsule=composition_guard.append_action_result(
-                    composition_capsule,composition_row,result
+                    composition_capsule,composition_row,action,result
                 )
                 composition_verdict=composition_guard.verify_capsule(
                     composition_capsule
