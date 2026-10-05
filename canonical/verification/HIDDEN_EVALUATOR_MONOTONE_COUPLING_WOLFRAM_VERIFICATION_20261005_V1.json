@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_HIDDEN_EVALUATOR_MONOTONE_COUPLING_WOLFRAM_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_SYMBOLIC_KERNEL_PASS__THEOREM_CORE_AND_MEAN_DOMINANCE_FALSIFIER__RUNTIME_CI_SEPARATE__ZERO_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/HIDDEN_EVALUATOR_MONOTONE_COUPLING_DOMINANCE_V1.json",
+      "git_blob_sha": "678f728089a8df815153af6dd58a88894dd0671f"
+    },
+    "runtime": {
+      "path": "canonical/runtime/hidden_evaluator_monotone_coupling_v1.py",
+      "git_blob_sha": "bdc95dc750b3c25162f97181ac4c66a2eaf8d012"
+    },
+    "tests": {
+      "path": "canonical/tests/test_hidden_evaluator_monotone_coupling_v1.py",
+      "git_blob_sha": "bf97d240c11f11f560b329c9b5c8bb3bfb6b679a"
+    }
+  },
+  "independent_kernel": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "check_1": {
+      "claim": "NONNEGATIVE_COUPLING_MASS_SUPPORTED_ONLY_ON_PAIRS_WITH_uB_GE_uT_IMPLIES_NONNEGATIVE_EXPECTED_UTILITY_DIFFERENCE",
+      "result": "TRUE"
+    },
+    "check_2": {
+      "claim": "COORDINATEWISE_EXPECTED_SCORE_OR_MEAN_DOMINANCE_ALONE_IS_NOT_SUFFICIENT_FOR_ALL_MONOTONE_UTILITIES",
+      "counterexample": {
+        "target_outcome": 1,
+        "brain_distribution": [{"outcome": 0, "probability": "1/2"}, {"outcome": 2, "probability": "1/2"}],
+        "target_mean": 1,
+        "brain_mean": 1,
+        "monotone_utility": "MIN(x,1)",
+        "target_expected_utility": 1,
+        "brain_expected_utility": "1/2"
+      },
+      "result": "COUNTEREXAMPLE_CONFIRMED"
+    },
+    "raw_kernel_result": "{True,{TargetMean->1,BrainMean->1,TargetMonotoneUtility->1,BrainMonotoneUtility->1/2}}"
+  },
+  "verified_scope": [
+    "THE_COUPLING_TO_MONOTONE_UTILITY_EXPECTATION_IMPLICATION",
+    "THE_REJECTION_OF_MEAN_ONLY_DOMINANCE_AS_A_UNIVERSAL_MONOTONE_UTILITY_CERTIFICATE"
+  ],
+  "not_verified_here": [
+    "ANY_TASK_SPECIFIC_MATERIAL_ORDER_CERTIFICATE",
+    "THE_RUNTIME_MAX_FLOW_IMPLEMENTATION",
+    "ANY_CURRENT_OPUS55_PREDICATE_CLOSURE",
+    "LITERAL_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
