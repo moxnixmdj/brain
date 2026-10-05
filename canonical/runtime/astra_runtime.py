@@ -4325,7 +4325,7 @@ def _validated_checkpoint_prefix(completed):
     return completed,None
 
 
-def _load_controller_checkpoint(step,mission,actions):
+def _load_controller_checkpoint(step,mission,actions,fail_on_invalid_prefix=False):
     plan_sha=_controller_plan_sha256(actions)
     path=_controller_checkpoint_path(step,mission,plan_sha=plan_sha)
     # Anonymous invocations have no durable continuation identity. Reusing
@@ -4359,6 +4359,11 @@ def _load_controller_checkpoint(step,mission,actions):
         raise Blocker("CONTROLLER_CHECKPOINT_SEQUENCE_INVALID")
     valid_prefix,rewound_from=_validated_checkpoint_prefix(completed)
     if rewound_from is not None:
+        if fail_on_invalid_prefix:
+            raise Blocker(
+                "COMPOSITION_C1_STRICT_ROLLBACK_REESTABLISHMENT_UNPROVED:"
+                +str(rewound_from)
+            )
         data["completed_actions"]=valid_prefix
         data["rewind_count"]=int(data.get("rewind_count") or 0)+1
         data["last_rewound_from_action_index"]=rewound_from
@@ -4394,11 +4399,14 @@ def _run_model_independent_goal(step, mission, goal):
     }
 
     composition_guard=None
+    composition_channel_guard=None
     composition_contract=None
     composition_initial_facts=None
     composition_capsule=None
+    composition_c1_strict=bool(step.get("_composition_c1_strict"))
     if step.get("_composition_capsule_enforced") is True:
         composition_guard=_load_composition_state_capsule_guard()
+        composition_channel_guard=_load_composition_runtime_channel_guard()
         composition_contract=step.get("_composition_contract")
         composition_initial_facts=step.get("_composition_initial_facts")
         try:
@@ -4411,7 +4419,9 @@ def _run_model_independent_goal(step, mission, goal):
                 +type(exc).__name__+":"+str(exc)
             ) from exc
 
-    checkpoint_path,checkpoint,resumed=_load_controller_checkpoint(step,mission,actions)
+    checkpoint_path,checkpoint,resumed=_load_controller_checkpoint(
+        step,mission,actions,fail_on_invalid_prefix=composition_c1_strict
+    )
     trace=list(checkpoint.get("completed_actions") or [])
     start_cycle=len(trace)
 
@@ -4424,6 +4434,11 @@ def _run_model_independent_goal(step, mission, goal):
             valid_count=int(rebuilt.get("valid_count") or 0)
             if valid_count < min(len(trace),len(composition_contract)):
                 rewound_from=len(trace)
+                if composition_c1_strict:
+                    raise Blocker(
+                        "COMPOSITION_C1_STRICT_CAPSULE_PREFIX_INVALID:"
+                        +str(rebuilt.get("reason") or rewound_from)
+                    )
                 trace=trace[:valid_count]
                 start_cycle=len(trace)
                 checkpoint["rewind_count"]=int(checkpoint.get("rewind_count") or 0)+1
@@ -4479,7 +4494,21 @@ def _run_model_independent_goal(step, mission, goal):
         if not isinstance(action.get("args",{}),dict):
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ARGS_INVALID")
         action.setdefault("args",{})
-        result=_goal_action(action)
+        composition_channel_receipt=None
+        if composition_guard is not None and composition_row is not None:
+            try:
+                with composition_channel_guard.capture_runtime_channels(
+                    ROOT,strict=composition_c1_strict
+                ) as channel_capture:
+                    result=_goal_action(action)
+                composition_channel_receipt=channel_capture.finish()
+            except Exception as exc:
+                raise Blocker(
+                    "COMPOSITION_RUNTIME_CHANNEL_GUARD_BLOCKED:"
+                    +type(exc).__name__+":"+str(exc)
+                ) from exc
+        else:
+            result=_goal_action(action)
         if isinstance(result,dict) and result.get("error"):
             raise Blocker("MODEL_INDEPENDENT_ACTION_ERROR:"+str(result.get("error")))
         _verify_action_expectation(action,result)
@@ -4488,7 +4517,11 @@ def _run_model_independent_goal(step, mission, goal):
         if composition_guard is not None and composition_row is not None:
             try:
                 composition_capsule=composition_guard.append_action_result(
-                    composition_capsule,composition_row,action,result
+                    composition_capsule,
+                    composition_row,
+                    action,
+                    result,
+                    composition_channel_receipt,
                 )
                 composition_verdict=composition_guard.verify_capsule(
                     composition_capsule
@@ -4508,6 +4541,8 @@ def _run_model_independent_goal(step, mission, goal):
                 ) from exc
 
         record={"cycle":cycle,"plan":action,"result":result}
+        if composition_channel_receipt is not None:
+            record["composition_channel_receipt"]=composition_channel_receipt
         if composition_head is not None:
             record["composition_capsule_head_hash"]=composition_head
         trace.append(record)
@@ -4539,16 +4574,55 @@ def _run_model_independent_goal(step, mission, goal):
                     checkpoint_path.stem+"__COMPOSITION_STATE_CAPSULE.json"
                 )
                 writej(capsule_path,composition_capsule)
+                channel_receipts=[
+                    rec.get("composition_channel_receipt")
+                    for rec in trace[:len(composition_contract)]
+                    if isinstance(rec,dict)
+                ]
+                channel_receipts_complete=(
+                    len(channel_receipts)==len(composition_contract)
+                    and all(
+                        isinstance(x,dict)
+                        and x.get("schema")=="PROJECT_BRAIN_COMPOSITION_RUNTIME_CHANNEL_GUARD_V1"
+                        for x in channel_receipts
+                    )
+                )
+                observed_subset_closed=(
+                    channel_receipts_complete
+                    and all(x.get("status")=="PASS" for x in channel_receipts)
+                )
                 composition_summary={
                   "schema":"PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_RUNTIME_BINDING_V2",
                   "status":"PASS",
                   "scope":"DETERMINISTIC_CAPABILITY_GRAPH_DECLARED_CROSS_CAPABILITY_STATE",
+                  "capsule_schema":composition_capsule.get("schema"),
                   "declared_cross_capability_state_no_bypass":True,
                   "state_reads_are_capsule_sourced":True,
                   "producer_action_and_execution_evidence_are_content_bound":True,
+                  "content_bound_action_result_provenance":True,
                   "resume_prefix_is_capsule_head_checked":True,
-                  "semantic_declaration_completeness":"UNVERIFIED",
-                  "external_evidence_channel_completeness":"UNVERIFIED",
+                  "runtime_channel_receipts_complete":channel_receipts_complete,
+                  "observed_file_ambient_channel_subset_closed":observed_subset_closed,
+                  "semantic_declaration_completeness":(
+                      True if composition_c1_strict and observed_subset_closed
+                      else "UNVERIFIED"
+                  ),
+                  "external_evidence_channel_completeness":(
+                      True if composition_c1_strict and observed_subset_closed
+                      else "UNVERIFIED"
+                  ),
+                  "broader_runtime_channel_totality":(
+                      True if composition_c1_strict and observed_subset_closed
+                      else "UNVERIFIED"
+                  ),
+                  "rollback_scope_complete":(
+                      True if composition_c1_strict else "UNVERIFIED"
+                  ),
+                  "rollback_policy":(
+                      "FAIL_CLOSED_ON_INVALID_PREFIX"
+                      if composition_c1_strict
+                      else "LEGACY_PREFIX_REWIND"
+                  ),
                   "head_hash":composition_capsule.get("head_hash"),
                   "record_count":verdict.get("record_count"),
                   "latest_key_count":verdict.get("latest_key_count"),
@@ -5120,6 +5194,18 @@ def _load_composition_state_capsule_guard():
     spec.loader.exec_module(module)
     return module
 
+def _load_composition_runtime_channel_guard():
+    path=pathlib.Path(__file__).resolve().with_name("composition_runtime_channel_guard_v1.py")
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_composition_runtime_channel_guard_v1",path
+    )
+    if spec is None or spec.loader is None:
+        raise Blocker("COMPOSITION_RUNTIME_CHANNEL_GUARD_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
 def _external_package_name_searcher(effect,ecosystem,tokens,limit,timeout_s):
     bridged=_external_tool_bridge("package_name_search",{
       "effect":str(effect),"ecosystem":str(ecosystem),
@@ -5573,6 +5659,7 @@ def _run_capability_planned_goal(step, mission, goal):
     derived.pop("capability_problem_ref",None)
     derived["controller_actions"]=planned["actions"]
     derived["_composition_capsule_enforced"]=True
+    derived["_composition_c1_strict"]=bool(problem.get("composition_c1_strict",False))
     derived["_composition_contract"]=planned["composition_contract"]
     derived["_composition_initial_facts"]=planned["planning"].get("initial_facts",[])
     derived["max_controller_actions"]=max(
