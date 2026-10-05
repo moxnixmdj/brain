@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_DIAGRAM_MECHANICS_ZERO_COST_ACQUISITION_RACE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXISTING_OPEN_DETERMINISTIC_MECHANISMS_FOUND__ZERO_CREDIT",
+  "objective": "Eliminate the deterministic static diagram mechanics residual without inventing a new capability or using an opaque provider.",
+  "authority": {
+    "acquisition_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
+    "creative_diagram_repair": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_V2_20261005.json",
+      "git_blob_sha": "02ee9918fc38f3bdee96f847d04e7fd1337b9e46"
+    }
+  },
+  "race": [
+    {
+      "id": "MERMAID_12",
+      "source": "https://github.com/mermaid-js/mermaid",
+      "license": "MIT",
+      "role": "broad text diagram DSL; 20+ published diagram types",
+      "classification": "DETERMINISTIC_SOFTWARE_SUBSTITUTE"
+    },
+    {
+      "id": "MERMAID_CLI_12_0_0",
+      "source": "https://github.com/mermaid-js/mermaid-cli",
+      "license": "MIT",
+      "role": "Mermaid to SVG/PNG/PDF",
+      "runtime_dependencies": ["Node.js >=22.13.0", "Puppeteer >=25", "Chromium"],
+      "classification": "PRIMARY_BROAD_GENERATOR_CANDIDATE"
+    },
+    {
+      "id": "RESVG_0_48_1",
+      "source": "https://github.com/linebender/resvg",
+      "license": "MIT_OR_APACHE_2_0",
+      "role": "independent static SVG parse/render oracle",
+      "properties": ["around 1600 public SVG-to-PNG regression tests", "small portable CLI", "reported reproducible cross-platform pixel output"],
+      "limitations": ["static SVG only", "no animation or scripting"],
+      "classification": "PRIMARY_INDEPENDENT_MECHANICAL_VERIFIER_CANDIDATE"
+    },
+    {
+      "id": "GRAPHVIZ_DOT",
+      "source": "https://graphviz.org/",
+      "role": "directed graph/flow layout to SVG",
+      "classification": "LEAN_SCOPE_SPECIFIC_FAST_PATH"
+    }
+  ],
+  "decision": {
+    "primary": "MERMAID_12_PLUS_MERMAID_CLI_12_0_0_PLUS_RESVG_0_48_1",
+    "specialized_fast_path": "GRAPHVIZ_DOT_PLUS_RESVG_FOR_DIRECTED_GRAPH_FLOW_SCOPE",
+    "reason": "broad structured diagram coverage plus a different-codebase independent static SVG renderer",
+    "new_learned_primitive_required": false
+  },
+  "brain_owned_configuration_candidate": {
+    "input": "typed diagram spec: nodes, edges, groups, labels, relations, layout intent and presentation constraints",
+    "route": [
+      "validate typed spec",
+      "compile to Mermaid or scope-specific DOT",
+      "render SVG",
+      "independently parse/render with resvg",
+      "check typed node/edge/group/label relations",
+      "check broken references, clipping, bounds and required text visibility",
+      "emit SVG plus receipt"
+    ],
+    "mechanical_ceiling": [
+      "100% well-formed static SVG on frozen supported scope",
+      "100% required typed relations preserved",
+      "100% independent resvg render success",
+      "zero broken references",
+      "zero clipping of required elements under frozen viewport rules"
+    ]
+  },
+  "boundary": "Content selection, layout taste and professional presentation judgment remain with existing Brain behavioral contracts; deterministic mechanics get no quality credit.",
+  "next": [
+    "pin exact upstream release hashes and license texts",
+    "reuse any existing Brain Node/Chromium runtime instead of duplicating it",
+    "build a nonterminal conformance corpus across claimed diagram types",
+    "mutation-test structural and clipping checks",
+    "execute generator plus independent resvg verification",
+    "package only after the exact route passes"
+  ],
+  "hard_nonclaims": [
+    "NO_DIAGRAM_QUALITY_ACCEPTANCE_CREDIT",
+    "NO_DYNAMIC_INTERACTIVE_VISUAL_CLOSURE",
+    "NO_FRESH_TERMINAL_CASES",
+    "NO_NEW_LEARNED_DIAGRAM_PRIMITIVE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
