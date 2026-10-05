@@ -222,10 +222,21 @@ def inject_response_once(
     if dict(response_envelope) != expected:
         raise EpisodeProtocolError("RESPONSE_CONTENT_OR_HASH_MISMATCH")
 
-    response_dir = root / pathlib.Path(*RESPONSES_REL.parts)
-    response_dir.mkdir(parents=True, exist_ok=True)
-    if response_dir.is_symlink():
-        raise EpisodeProtocolError("RESPONSE_DIR_SYMLINK_REJECTED")
+    cursor = root
+    for part in RESPONSES_REL.parts:
+        candidate = cursor / part
+        if candidate.exists() or candidate.is_symlink():
+            if candidate.is_symlink():
+                raise EpisodeProtocolError("RESPONSE_PATH_SYMLINK_REJECTED")
+            if not candidate.is_dir():
+                raise EpisodeProtocolError("RESPONSE_PATH_NOT_DIRECTORY")
+        else:
+            candidate.mkdir()
+        resolved = candidate.resolve(strict=True)
+        if resolved == root or root not in resolved.parents:
+            raise EpisodeProtocolError("RESPONSE_PATH_ESCAPE")
+        cursor = resolved
+    response_dir = cursor
     target = response_dir / (expected["request_id"] + ".json")
     if target.exists() or target.is_symlink():
         raise EpisodeProtocolError("RESPONSE_ALREADY_EXISTS")
