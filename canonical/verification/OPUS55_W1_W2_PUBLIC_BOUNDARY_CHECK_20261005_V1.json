@@ -1,0 +1,50 @@
+{
+  "schema":"PROJECT_BRAIN_OPUS55_W1_W2_PUBLIC_BOUNDARY_CHECK_20261005_V1",
+  "date":"2026-10-05",
+  "status":"BOUNDED_FIRST_PARTY_PUBLIC_CHECK__W1_NOT_FOUND__W2_NOT_FOUND__ZERO_CREDIT",
+  "objective":"Independently test the two lowest-information witness classes from OPUS55_TARGET_DISCOVERY_MINIMUM_INFORMATION_CUT_20261005_V1 against current first-party public Anthropic surfaces.",
+  "w1":{
+    "witness":"TARGET_OWNER_EXHAUSTIVE_BEHAVIOR_SPECIFICATION",
+    "checked":[
+      "https://www.anthropic.com/claude/opus",
+      "https://www.anthropic.com/transparency",
+      "https://www.anthropic.com/system-cards",
+      "https://www.anthropic.com/claude-opus-5-5"
+    ],
+    "observed":[
+      "Opus product page says Key use cases include rather than asserting exhaustive useful-behavior coverage",
+      "Transparency Hub labels Section 8 as Benchmarked Capabilities",
+      "Transparency Hub says complete publicly reported evaluation results, which is completeness of reported evaluation results rather than the useful-behavior universe"
+    ],
+    "result":"NO_EXPLICIT_EXHAUSTIVE_USEFUL_BEHAVIOR_SPECIFICATION_FOUND_ON_CHECKED_SURFACES"
+  },
+  "w2":{
+    "witness":"IMPLEMENTATION_LEVEL_COMPLETE_CHARACTERIZATION",
+    "checked":[
+      "https://www.anthropic.com/claude/opus",
+      "https://www.anthropic.com/transparency",
+      "https://www.anthropic.com/claude-opus-5-5"
+    ],
+    "observed":[
+      "Public access is offered through hosted Claude and API/cloud surfaces",
+      "Transparency Hub describes high-level architecture/training methodology and a proprietary training-data mix",
+      "No public exact weights, executable, serving semantics, or equivalent complete implementation characterization was found on checked surfaces"
+    ],
+    "result":"NO_PUBLIC_IMPLEMENTATION_LEVEL_COMPLETE_CHARACTERIZATION_FOUND_ON_CHECKED_SURFACES"
+  },
+  "logical_consequence":{
+    "literal_all_useful_terminal_certification":"NOT_DISCHARGED_BY_W1_OR_W2",
+    "benchmark_accumulation_alone":"INSUFFICIENT_FOR_LITERAL_COMPLETENESS",
+    "remaining_global_witness_class":"W3_UNIVERSAL_BEHAVIORAL_DOMINANCE_WITH_COMPLETE_TARGET_DOMAIN_PREMISE_OR_NEW_W1_W2_INFORMATION",
+    "observed_epoch_work":"STILL_ADVANCES_REAL_CAPABILITY_AND_ACCEPTANCE_BUT_MUST_NOT_BE_MISLABELED_LITERAL_ALL_USEFUL_COMPLETENESS"
+  },
+  "hard_nonclaims":[
+    "NOT_A_PROOF_THAT_NO_W1_OR_W2_EXISTS_ANYWHERE",
+    "NOT_A_CLAIM_TERMINAL_GOAL_IS_IMPOSSIBLE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0},
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false
+}
