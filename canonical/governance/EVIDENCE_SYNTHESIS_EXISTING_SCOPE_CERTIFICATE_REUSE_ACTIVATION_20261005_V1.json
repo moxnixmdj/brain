@@ -1,0 +1,137 @@
+{
+  "schema": "PROJECT_BRAIN_EVIDENCE_SYNTHESIS_EXISTING_SCOPE_CERTIFICATE_REUSE_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__CONNECTOR_RECOMPUTATION_PASS__EXISTING_INDEPENDENT_SCOPE_CERTIFICATE_REUSED_BY_EXACT_BEHAVIOR_IDENTITY__ZERO_PERFORMANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Delete redundant new scope-construction work for EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 by binding the already independently verified exact-union synthesis scope certificate to every occurrence of the identical frozen behavioral leaf. Preserve the separate Root2 matched-performance obligation.",
+  "authorities": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "terminal_proof_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "six_family_scope_partition": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+      "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f"
+    },
+    "prior_multiplex_candidate": {
+      "path": "canonical/governance/EVIDENCE_SYNTHESIS_LEAF_PROOF_MULTIPLEXING_20261005_V1.json",
+      "git_blob_sha": "dba44ea8aa649dfe1b826ac1c75144a5042c1463"
+    },
+    "existing_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "existing_independent_activation_verification": {
+      "path": "canonical/verification/SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "1528485a15c98e89c9fb4dc50d691b6682e08542",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SYNTHESIS_ROOT2_AND_ROOT3_TO_ROOT2_ONLY__ZERO_ACCEPTANCE_CREDIT"
+    },
+    "v5_four_portfolio_overlay": {
+      "path": "canonical/governance/OPUS55_V5_GAP_TO_T0_T3_MULTIPLEX_OVERLAY_V1.json",
+      "git_blob_sha": "1fc6f13d644ed88f37940487f1d3cfc41c7aca0a"
+    }
+  },
+  "connector_recomputation": {
+    "exact_behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "certificate_witness_scope_id": "scope://brain/EVIDENCE_TO_AUDIENCE_SYNTHESIS_001/T1_T3_TERMINAL",
+    "behavior_id_literal_present_in_witness_scope_id": true,
+    "certificate_verified": true,
+    "certificate_independent": true,
+    "certificate_scope_relation": "PROVEN_STRONGER",
+    "certificate_coverage_complete": true,
+    "certificate_coverage_relation": "EXACT_UNION",
+    "certificate_coverage_proof_verified": true,
+    "certificate_registry_binding_matches_current_registry_blob": true,
+    "certificate_protocol_binding_matches_current_protocol_blob": true,
+    "independently_verified_dimensions": [
+      "CLAIM_TO_SOURCE_FIDELITY",
+      "REQUIRED_EVIDENCE_COVERAGE",
+      "UNCERTAINTY_DISAGREEMENT_PRESERVATION",
+      "AUDIENCE_ADAPTATION",
+      "FORMAT_STYLE_CONSTRAINTS",
+      "COMPRESSION_WITHOUT_DECISION_RELEVANT_LOSS"
+    ],
+    "current_partition_occurrence_families": [
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH"
+    ],
+    "current_partition_occurrence_count": 3,
+    "registry_identity_consumers": [
+      "COMMUNICATION_AND_SYNTHESIS",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "FINANCIAL_ANALYSIS"
+    ],
+    "result": "SCOPE_COMPLETE_CERTIFICATE_ALREADY_EXISTS_AND_IS_CONTENT_BOUND_TO_THE_IDENTICAL_FROZEN_BEHAVIORAL_LEAF"
+  },
+  "deduction": {
+    "theorem": "Exact behavioral identity plus an independently verified scope-complete exact-union certificate allows the same scope certificate to discharge scope-construction for every occurrence of that identical frozen behavior_id. Family-specific performance and unrelated leaves do not inherit credit.",
+    "synthesis_scope_construction_state": "CLOSED_BY_EXISTING_INDEPENDENT_CERTIFICATE",
+    "synthesis_performance_state": "OPEN",
+    "open_performance_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "root2_performance_obligation_preserved": true,
+    "family_acceptance_delta": 0,
+    "atomic_acceptance_delta": 0
+  },
+  "scheduling_delta": {
+    "six_family_partition_surviving_leaf_occurrences_before_scope_reuse": 12,
+    "synthesis_scope_occurrences_removed_from_new_scope_construction": 3,
+    "leaf_occurrences_still_requiring_new_scope_construction_after_scope_reuse": 9,
+    "unique_surviving_behavioral_leaves_before_scope_reuse": 7,
+    "unique_leaves_still_requiring_new_scope_construction_after_scope_reuse": 6,
+    "synthesis_leaf_still_load_bearing_for_performance": true,
+    "delete": [
+      "NEW_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_SCOPE_COMPLETENESS_CONSTRUCTION_FOR_PROFESSIONAL_KNOWLEDGE_WORK",
+      "NEW_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_SCOPE_COMPLETENESS_CONSTRUCTION_FOR_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "NEW_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_SCOPE_COMPLETENESS_CONSTRUCTION_FOR_AGENTIC_SCIENTIFIC_RESEARCH",
+      "MAKE_F_SYNTHESIS_COMPARATOR_CERTIFICATE_SCOPE_COMPLETE_AT_THE_BEHAVIORAL_LEAF_LEVEL"
+    ],
+    "replace_with": [
+      "BIND_EXISTING_SYNTHESIS_SCOPE_CERTIFICATE_V1_TO_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_BY_EXACT_BEHAVIORAL_IDENTITY",
+      "KEEP_ONLY_MATCHED_SYNTHESIS_PERFORMANCE_AND_REQUIRED_CLAIM_COVERAGE_NONINFERIORITY_WORK"
+    ]
+  },
+  "overlay_reduction": {
+    "t1_prior_scope_item": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_SCOPE_COMPLETENESS",
+    "t3_prior_scope_item": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_SHARED_SCOPE_BINDING",
+    "disposition": "SATISFY_BY_CONTENT_ADDRESSED_REFERENCE_TO_EXISTING_SYNTHESIS_SCOPE_CERTIFICATE_V1__DO_NOT_ADD_TERMINAL_CASES_OR_A_NEW_SCOPE_SCORER_FOR_THIS_LEAF",
+    "reality_unit_delta": 0
+  },
+  "supersession": {
+    "prior_multiplex_candidate_hard_nonclaim": "NO_CLAIM_THE_SYNTHESIS_CERTIFICATE_IS_ALREADY_CLOSED",
+    "corrected_scope_only_truth": "THE_SCOPE_CERTIFICATE_IS_ALREADY_CLOSED_AND_INDEPENDENTLY_VERIFIED__ONLY_SYNTHESIS_MATCHED_PERFORMANCE_REMAINS_OPEN",
+    "prior_future_scope_certificate_construction": "DELETE_AS_REDUNDANT"
+  },
+  "hard_nonclaims": [
+    "NO_SYNTHESIS_MATCHED_PERFORMANCE_PASS",
+    "NO_SYNTHESIS_ACCEPTANCE_PREDICATE_CREDIT",
+    "NO_PUBLIC_BAR_SCORE_CREDIT",
+    "NO_WHOLE_FAMILY_PROMOTION",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TRANSFER_TO_NONIDENTICAL_BEHAVIORAL_LEAVES",
+    "NO_TERMINAL_FINALITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "atomic_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_source_certificate_verified": true,
+  "connector_identity_recomputation_pass": true
+}
