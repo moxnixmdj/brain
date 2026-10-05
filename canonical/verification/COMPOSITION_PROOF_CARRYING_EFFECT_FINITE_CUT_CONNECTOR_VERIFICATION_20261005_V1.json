@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_COMPOSITION_PROOF_CARRYING_EFFECT_FINITE_CUT_CONNECTOR_VERIFICATION_20261005_V1",
   "date": "2026-10-05",
-  "status": "CONNECTOR_EXACT_BLOB_RECOMPUTATION_PASS__FINITE_41_ENTRY_DOMAIN_CONFIRMED__RUNTIME_LIFTING_STRUCTURE_CONFIRMED__CONTENT_BINDING_AND_EFFECT_SEMANTICS_REMAIN_OPEN__ZERO_CREDIT",
+  "status": "CONNECTOR_EXACT_BLOB_RECOMPUTATION_PASS__FINITE_41_ENTRY_DOMAIN_CONFIRMED__E2_IMPLEMENTATION_STATICALLY_BOUND__INDEPENDENT_EXECUTION_PENDING__E1_SEMANTICS_OPEN__ZERO_CREDIT",
   "subject": {
     "path": "canonical/governance/COMPOSITION_PROOF_CARRYING_EFFECT_FINITE_CUT_20261005_V1.json",
-    "git_blob_sha": "2adf6ce0c4afac99f074b38542d59e04ad5cecc7"
+    "git_blob_sha": "2692bb37b7704c698619ff4cd47f91d730c4a3ee"
   },
   "exact_inputs": [
     {
@@ -63,7 +63,7 @@
     "anonymous_invocations_do_not_resume_stale_checkpoint_state": true,
     "resume_validates_durable_output_paths_and_hashes_where_available": true,
     "resume_rewinds_from_first_invalid_durable_effect": true,
-    "complete_result_trace_universally_cryptographically_chained": false,
+    "complete_result_trace_universally_cryptographically_chained": "IMPLEMENTED_FOR_GROUNDED_COMPOSITION_CANDIDATE__NOT_YET_INDEPENDENTLY_EXECUTED",
     "semantic_provides_implied_by_expectation_for_all_41_entries": false,
     "errors": []
   },
@@ -83,11 +83,13 @@
     "new_minimum_cut": [
       {
         "id": "E1_EFFECT_WITNESS_SEMANTIC_BINDING_TABLE",
-        "finite_entry_count": 41
+        "finite_entry_count": 41,
+        "status": "OPEN"
       },
       {
         "id": "E2_APPEND_ONLY_CONTENT_BOUND_TRACE_PROVENANCE",
-        "generic_mechanism_count": 1
+        "generic_mechanism_count": 1,
+        "status": "IMPLEMENTED_CANDIDATE__INDEPENDENT_EXECUTION_PENDING"
       }
     ],
     "p3_recomputed_now": false,
@@ -104,11 +106,13 @@
     "finite_current_domain_claim": "PASS",
     "existing_runtime_structural_lifting_claim": "PASS",
     "effect_semantic_totality": "OPEN",
-    "universal_content_bound_provenance": "OPEN",
+    "universal_content_bound_provenance": "IMPLEMENTED_CANDIDATE__NOT_YET_PROVED",
     "p1_closed": false,
     "p2_closed": false,
     "p3_zero_failures_closed": false,
-    "target_predicate_closed": false
+    "target_predicate_closed": false,
+    "e2_static_implementation_bound": true,
+    "e2_independent_execution_pass": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -122,5 +126,22 @@
   "scheduling_authority": false,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "candidate_runtime_delta": {
+    "executor_blob": "cf9f657d52e6cdc67652377555e5c6593ecaad46",
+    "grounded_composer_blob": "2ce040f6e6b96801bd7bd82a6ead39c17a6c6179",
+    "grounded_composition_verifier_blob": "ceb260d03a145a428fd0ad23095836ff3039d386",
+    "adversarial_test_blob": "ab95d48782230993fb0d2eb139e6a6a4cb0667ae",
+    "static_checks": {
+      "trace_record_contains_plan_digest": true,
+      "trace_record_contains_result_digest": true,
+      "trace_record_contains_previous_record_digest": true,
+      "checkpoint_contains_chain_head": true,
+      "resume_recomputes_chain": true,
+      "invalid_chain_rewinds": true,
+      "grounded_composition_requires_content_bound_trace": true,
+      "legacy_unbound_trace_path_preserved": true
+    },
+    "execution_verification": "PENDING"
+  }
 }
