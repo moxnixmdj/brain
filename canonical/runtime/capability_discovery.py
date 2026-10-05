@@ -286,26 +286,21 @@ def _legacy_search_apt_packages(effect, limit=12):
     by_name={}
     errors=[]
 
-    machine=(getattr(os.uname(),"machine","") or "").lower()
-    host_arch={
-        "x86_64":"amd64","amd64":"amd64",
-        "aarch64":"arm64","arm64":"arm64",
-        "i386":"i386","i686":"i386",
-        "ppc64le":"ppc64el","s390x":"s390x",
-    }.get(machine)
-
     for rec in packages:
-        name=str(rec.get("Package") or "").strip()
-        version=str(rec.get("Version") or "").strip()
-        sha=str(rec.get("SHA256") or "").strip().lower()
-        arch=str(rec.get("Architecture") or "").strip().lower()
+        # _apt_full_metadata_records normalizes the raw Debian snapshot to one
+        # deterministic metadata candidate per package name.  Its version and
+        # archive_sha256 remain candidate evidence only; apt_cli_probe is the
+        # downstream authority for usability.
+        name=str(rec.get("name") or "").strip()
+        version=str(rec.get("version") or "").strip()
+        sha=str(rec.get("archive_sha256") or "").strip().lower()
+        arch=str(rec.get("architecture") or "").strip().lower()
         if (
             not name or not version
             or re.fullmatch(r"[0-9a-f]{64}",sha) is None
-            or (host_arch and arch and arch not in {"all",host_arch})
         ):
             continue
-        description=str(rec.get("description") or rec.get("Description") or "").strip()
+        description=str(rec.get("description") or "").strip()
         blob=(name+" "+description).lower()
         if not any(re.search(q,blob,flags=re.IGNORECASE) for q in apt_queries):
             continue
