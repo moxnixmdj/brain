@@ -1,6 +1,7 @@
 from __future__ import annotations
 import copy, unittest
 from canonical.runtime.terminal_projection_consistency_v1 import PATHS,_git_blob_sha,_load,evaluate_documents
+from canonical.runtime.terminal_authority_epoch_guard_v1 import verify_repository_epoch
 
 class TerminalProjectionConsistencyTests(unittest.TestCase):
     def live(self):
@@ -36,6 +37,49 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
         self.assertEqual(current["critical_blocker"],expected_blocker)
         self.assertEqual(current["highest_leverage_capability_gap"],expected_blocker)
         self.assertEqual(current["next_step"],docs["authority"]["next_terminal_action"])
+
+    def test_live_control_plane_tracks_active_v16_scheduler(self):
+        authority=_load("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json")
+        hierarchy=_load("canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json")
+        pointer=_load("canonical/CANONICAL_POINTER.json")
+        queue=_load("canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json")
+        scoreboard=_load("canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json")
+        activation=_load("canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V16_ACTIVATION_V1.json")
+        root=authority["current_root_partition_override"]
+        blocker=(
+            f"TERMINAL_FALSE__{root['open_families']}_OF_19_FAMILIES_OPEN__"
+            f"{root['unresolved_atomic']}_OF_38_ATOMIC_PREDICATES_UNRESOLVED__"
+            "SEE_CURRENT_TERMINAL_AUTHORITY_NEXT_FOR_EXACT_ACTIVE_ROUTE"
+        )
+        next_action=authority["next_terminal_action"]
+        progress=hierarchy["next_progress_event_target"]
+        self.assertTrue(activation["scheduling_authority"])
+        self.assertEqual(
+            activation["subject"]["path"],
+            "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V16.json",
+        )
+        self.assertIn("CURRENT_ZERO_REALITY_MINIMUM_CUT_V16",next_action)
+        self.assertNotIn("SOLVE_MINIMUM_ZERO_REALITY_CERTIFICATE_CUT",next_action)
+        current=pointer["current_frontier"]
+        immediate=queue["immediate_frontier"]
+        accounting=scoreboard["active_frontier_accounting"]
+        self.assertEqual(hierarchy["current_parent_blocker"],blocker)
+        self.assertEqual(current["critical_blocker"],blocker)
+        self.assertEqual(current["highest_leverage_capability_gap"],blocker)
+        self.assertEqual(immediate["exact_blocker"],blocker)
+        self.assertEqual(accounting["current_parent_blocker"],blocker)
+        self.assertEqual(accounting["residual_gap"],blocker)
+        self.assertEqual(hierarchy["next_required_action_class"],next_action)
+        self.assertEqual(current["next_step"],next_action)
+        self.assertEqual(immediate["next_action"],next_action)
+        self.assertEqual(scoreboard["next_required_action"],next_action)
+        self.assertEqual(accounting["next_required_action"],next_action)
+        self.assertEqual(immediate["next_progress_event_target"],progress)
+        self.assertEqual(scoreboard["next_progress_event_target"],progress)
+
+    def test_terminal_authority_epoch_is_current_on_live_bytes(self):
+        out=verify_repository_epoch()
+        self.assertTrue(out["admitted"],out)
 
     def test_next_residual_family_closure_is_derived_without_code_change(self):
         docs,shas=self.live(); docs=copy.deepcopy(docs)
