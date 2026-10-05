@@ -120,6 +120,8 @@ def docker_argv(policy: Mapping[str, Any]) -> list[str]:
     limits = p["limits"]
     args = [
         "docker", "run", "--rm",
+        "--pull=never",
+        "--log-driver=none",
         "--network=none",
         "--read-only",
         "--cap-drop=ALL",
