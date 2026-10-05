@@ -172,10 +172,10 @@ def quantize_group(values: list[float], bits: int) -> tuple[bytes, bytes]:
     if not values:
         raise PackerError("EMPTY_QUANT_GROUP")
     qmax = (1 << bits) - 1
+    if not all(math.isfinite(v) for v in values):
+        raise PackerError("NONFINITE_SOURCE_WEIGHT")
     lo = min(values)
     hi = max(values)
-    if not math.isfinite(lo) or not math.isfinite(hi):
-        raise PackerError("NONFINITE_SOURCE_WEIGHT")
     if hi == lo:
         scale = 0.0
         offset = lo
