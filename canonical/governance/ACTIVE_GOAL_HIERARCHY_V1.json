@@ -6,8 +6,8 @@
   "active_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "active_probe": null,
   "probe_state": "TERMINAL_V3_ONE_SHOT_CONSUMED__3352_OF_3352_PASS__12_OF_12_BEHAVIORAL_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__5_OF_19_FROZEN_OPUS55_ACCEPTANCE_PROTOCOL_RESULTS_PASS__14_OPEN",
-  "current_parent_blocker": "TERMINAL_FALSE__14_OF_19_FAMILIES_OPEN__24_OF_38_ATOMIC_PREDICATES_UNRESOLVED__14_OF_38_PROVED__CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_ACTIVE__ROOT1_POSITIVE_GAP_ZERO__META_ENVELOPE_AND_ACCEPTANCE_CLOSURE_REMAIN_OPEN",
-  "next_required_action_class": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V12__EXECUTE_ONLY_INFORMATION_POSITIVE_ZERO_REALITY_GROUPS_WITH_AVAILABLE_ACCESS__NO_FRESH_REALITY__RECOMPUTE_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA",
+  "current_parent_blocker": "TERMINAL_FALSE__14_OF_19_FAMILIES_OPEN__24_OF_38_ATOMIC_PREDICATES_UNRESOLVED__14_OF_38_PROVED__CURRENT_ZERO_REALITY_MINIMUM_CUT_V17_ACTIVE__ROOT1_POSITIVE_GAP_ZERO__META_ENVELOPE_AND_ACCEPTANCE_CLOSURE_REMAIN_OPEN",
+  "next_required_action_class": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V17__EXECUTE_ONLY_FIVE_INFORMATION_POSITIVE_ZERO_REALITY_GROUPS_WITH_AVAILABLE_ACCESS__NO_FRESH_REALITY__RECOMPUTE_FIXED_POINT_AFTER_EVERY_VERIFIED_DELTA",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_REPLAY__PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_REPLAY__PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001_REPLAY__TERMINAL_V3_REPLAY__NAMED_BENCHMARK_SCORE_INHERITANCE__PROVISIONAL_BEHAVIORAL_PASS_PROMOTED_AS_OPUS55_OWNERSHIP__HIDDEN_EXTERNAL_TARGET_CAPABILITY_PROVIDER_PROMOTED_AS_BRAIN_OWNERSHIP__CLEAN_ACCEPTANCE_CASE_SPEND_BEFORE_SOURCE_GATE_V2_PASS",
   "progress_level_minimum": "PERMANENT_VERIFIED_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP",
   "probe_budget": {
@@ -200,7 +200,7 @@
     "parent_capability_promoted": false,
     "whole_envelope_complete": false
   },
-  "next_progress_event_target": "FIRST_VERIFIED_DELTA_OR_FALSIFICATION_FROM_CURRENT_ZERO_REALITY_MINIMUM_CUT_V12__THEN_IMMEDIATE_FIXED_POINT_RECOMPILE_AND_DOMINATED_WORK_DELETION",
+  "next_progress_event_target": "FIRST_VERIFIED_DELTA_OR_FALSIFICATION_FROM_CURRENT_ZERO_REALITY_MINIMUM_CUT_V17__THEN_IMMEDIATE_FIXED_POINT_RECOMPILE_AND_DOMINATED_WORK_DELETION",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -1009,37 +1009,37 @@
   },
   "terminal_authority_projection": {
     "authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-    "authority_git_blob_sha": "b1870974faf1579ea2da3b7000070b3d715fb8e2",
-    "source_commit_sha": "548061bf91476f381e58766e3e363aefb0a6882a",
+    "authority_git_blob_sha": "9015b1fcacb40222f920c124986fcea63cc6e5ee",
+    "source_commit_sha": "be07ce1020ac956508023707f61914ff2646c112",
     "projected_atomic_acceptance": "14_OF_38_PROVED__24_OF_38_OPEN",
     "projected_family_acceptance": "5_OF_19_PASS__14_OF_19_OPEN",
     "rule": "NEXT_AND_ACCEPTANCE_COUNTS_DERIVED_FROM_CURRENT_TERMINAL_AUTHORITY__FAIL_CLOSED_ON_BLOB_OR_COUNT_DRIFT"
   },
   "current_acceptance_reconciliation": {
-    "status": "CURRENT_TERMINAL_AUTHORITY_RECONCILED__5_OF_19_ACCEPTANCE_PASS__14_OF_38_ATOMIC_PROVED__24_OPEN",
+    "status": "CURRENT_TERMINAL_AUTHORITY_RECONCILED__V17_FIVE_GROUP_SCHEDULER__5_OF_19_ACCEPTANCE_PASS__14_OF_38_ATOMIC_PROVED__24_OPEN",
     "authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-    "authority_git_blob_sha": "b1870974faf1579ea2da3b7000070b3d715fb8e2",
-    "zero_reality_cut_activation": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_ACTIVATION_V1.json",
-    "zero_reality_cut_git_blob_sha": "c36ba3a9b49f54ebe8a3ebcb435cf3d4798c2398",
+    "authority_git_blob_sha": "9015b1fcacb40222f920c124986fcea63cc6e5ee",
+    "authority_source_commit_sha": "be07ce1020ac956508023707f61914ff2646c112",
+    "zero_reality_cut_subject": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V17.json",
+    "zero_reality_cut_subject_git_blob_sha": "2a291c27fc386ca620b7b1a53a3fdb2d2c59c4fa",
+    "zero_reality_cut_activation": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V17_ACTIVATION_V1.json",
+    "zero_reality_cut_git_blob_sha": "d0ef95dc4db16da024842129a1f8743e9d74e986",
+    "zero_reality_cut_activation_source_commit_sha": "62cb9a0b0429d1a5f953d4a3975321dce39b6c95",
     "ownership_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "fresh_reality_authorized": false,
     "authorized_action_groups": [
-      "A_TB4_ZERO_COST_CARRIER_RACE",
-      "B_AUTHENTICATED_SELF_SERVICE_ACCESS_SWEEP",
-      "C_VALS_FINANCE_AGENT_PREFLIGHT",
-      "D_OWNER_OR_PLATFORM_RESULT_BATCH",
-      "E_FINANCE_INDEX_COMPONENT_BOUND_COMPILATION",
-      "F_SYNTHESIS_COMPARATOR_CERTIFICATE",
-      "G_ROOT3_SCOPE_CERTIFICATE_RACE",
-      "H_COMPOSITION_UPSTREAM_RECEIPT_RECOMPUTE",
-      "I_FINANCE_DIRECT_ORACLE_HOLD"
+      "A_SHARED_BUILDKITE_TB4_CHARTOGRAPHY_PREFLIGHT",
+      "B_SELF_SERVICE_AND_ACCOUNT_FACT_SWEEP",
+      "D_VALS_FINANCE_AGENT_PREFLIGHT",
+      "E_OWNER_OR_PLATFORM_RESULT_BATCH",
+      "G_ROOT3_SCOPE_CERTIFICATE_RACE"
     ]
   },
   "current_acceptance_scoreboard_overlay_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_CURRENT_ACCEPTANCE_OVERLAY_V1.json",
   "current_authority_reconciliation_20261005": {
     "schema": "PROJECT_BRAIN_ACTIVE_GOAL_HIERARCHY_CURRENT_AUTHORITY_RECONCILIATION_V1",
-    "status": "ACTIVE_TRUTH_REPAIR__STALE_12_OF_38_PROJECTION_DELETED__14_OF_38_AUTHORITY_BOUND__ZERO_CREDIT",
+    "status": "HISTORICAL_SUPERSEDED__V12_CUT_SUPERSEDED_BY_V17__PRESERVED_FOR_AUDIT",
     "date": "2026-10-05",
     "canonical_base_commit": "2b68ed8fa4ad32393ccea092278b3d78f255082a",
     "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
@@ -1192,6 +1192,94 @@
       "NO_TERMINAL_GOAL_ACHIEVED_CLAIM",
       "NO_NEW_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
       "NO_FRESH_REALITY_AUTHORITY"
-    ]
+    ],
+    "superseded_by": "current_authority_reconciliation_v17_20261005"
+  },
+  "current_authority_reconciliation_v17_20261005": {
+    "schema": "PROJECT_BRAIN_ACTIVE_GOAL_HIERARCHY_V17_CURRENT_AUTHORITY_RECONCILIATION_V1",
+    "status": "ACTIVE_TRUTH_REPAIR_CANDIDATE__STALE_V12_SCHEDULER_PROJECTION_REBOUND_TO_ACTIVE_V17__ZERO_CREDIT",
+    "date": "2026-10-05",
+    "objective": "Make the live hierarchy scheduling projection equal the current terminal authority and active V17 zero-reality cut without rewriting historical V12 evidence.",
+    "source_bindings": {
+      "current_terminal_authority": {
+        "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+        "git_blob_sha": "9015b1fcacb40222f920c124986fcea63cc6e5ee",
+        "source_commit_sha": "be07ce1020ac956508023707f61914ff2646c112",
+        "state": "14_OF_38_PROVED__24_OPEN__5_OF_19_ACCEPTED__TERMINAL_FALSE"
+      },
+      "current_zero_reality_cut": {
+        "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V17.json",
+        "git_blob_sha": "2a291c27fc386ca620b7b1a53a3fdb2d2c59c4fa",
+        "state": "FIVE_INFORMATION_POSITIVE_GROUPS__HLE_AND_SYNTHESIS_EVENT_BOUND"
+      },
+      "current_zero_reality_cut_activation": {
+        "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V17_ACTIVATION_V1.json",
+        "git_blob_sha": "d0ef95dc4db16da024842129a1f8743e9d74e986",
+        "source_commit_sha": "62cb9a0b0429d1a5f953d4a3975321dce39b6c95",
+        "scheduling_authority": true
+      }
+    },
+    "stale_projection_falsifier": {
+      "observed_hierarchy_blob": "2a2440604d65f523d16f0b78735be441644a1bce",
+      "stale_fields": [
+        "current_parent_blocker named CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_ACTIVE",
+        "next_required_action_class named CURRENT_ZERO_REALITY_MINIMUM_CUT_V12",
+        "next_progress_event_target named CURRENT_ZERO_REALITY_MINIMUM_CUT_V12",
+        "current_acceptance_reconciliation bound V12 activation and nine V12 groups"
+      ],
+      "prior_self_supersession_condition": "current_authority_reconciliation_20261005.reasoning_durability.supersession_conditions contains V12_CUT_SUPERSEDED",
+      "observed_trigger": "V17 activation explicitly supersedes V16, which superseded V15 ... and therefore V12 is historical"
+    },
+    "action_intent_v11": {
+      "action_id": "ACTIVE_GOAL_HIERARCHY_V17_RECONCILIATION_20261005_V1",
+      "status": "PROPOSED_CONTROL_PLANE_TRUTH_REPAIR__POSTMERGE_REVALIDATION_REQUIRED",
+      "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+      "action_kind": "CONTROL_PLANE_TRUTH_RECONCILIATION__NO_FRESH_REALITY",
+      "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::STALE_ACTIVE_GOAL_HIERARCHY_ZERO_REALITY_CUT_POINTER",
+      "expected_parent_frontier_change": "DELETE_STALE_V12_SCHEDULING_PROJECTION__BIND_ACTIVE_V17_FIVE_GROUP_CUT",
+      "theory_invariants": {
+        "terminal_objective_unchanged": true,
+        "knowledge_policy": "EXTERNAL_JIT",
+        "capability_policy": "DURABLE_BRAIN_OWNED_AND_VERIFIED_GE_OPUS55",
+        "capability_invention": false,
+        "incremental_spend_usd": 0
+      },
+      "selected_route": "UPDATE_ONLY_LIVE_DERIVED_PROJECTION_FIELDS__PRESERVE_HISTORICAL_V12_RECONCILIATION_BLOCK_AS_SUPERSEDED",
+      "rejected_material_alternatives": [
+        "EXECUTE_FROM_V12__STALE",
+        "DELETE_HISTORICAL_V12_EVIDENCE__DESTROYS_PROVENANCE",
+        "RECOMPUTE_ACCEPTANCE_FROM_SCRATCH__DUPLICATE",
+        "SPEND_FRESH_TERMINAL_EVIDENCE__UNAUTHORIZED_AND_UNNECESSARY"
+      ],
+      "next_action": "POSTMERGE_REREAD_HIERARCHY_AUTHORITY_AND_V17_ACTIVATION__FAIL_CLOSED_ON_ANY_CONCURRENT_SUPERSESSION"
+    },
+    "success_condition": {
+      "hierarchy_atomic_projection": "14_OF_38_PROVED__24_OPEN",
+      "hierarchy_family_projection": "5_OF_19_PASS__14_OPEN",
+      "active_cut": "V17",
+      "active_group_count": 5,
+      "active_groups": [
+        "A_SHARED_BUILDKITE_TB4_CHARTOGRAPHY_PREFLIGHT",
+        "B_SELF_SERVICE_AND_ACCOUNT_FACT_SWEEP",
+        "D_VALS_FINANCE_AGENT_PREFLIGHT",
+        "E_OWNER_OR_PLATFORM_RESULT_BATCH",
+        "G_ROOT3_SCOPE_CERTIFICATE_RACE"
+      ],
+      "no_new_credit": true,
+      "no_fresh_reality": true
+    },
+    "accounting": {
+      "incremental_spend_usd": 0,
+      "new_reality_units_consumed": 0,
+      "terminal_cases_consumed": 0,
+      "acceptance_credit_delta": 0,
+      "family_credit_delta": 0,
+      "capability_credit_delta": 0,
+      "ownership_credit_delta": 0
+    },
+    "scheduling_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false
   }
 }
