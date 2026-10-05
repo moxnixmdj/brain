@@ -7,6 +7,8 @@ on:
       - "canonical/runtime/composition_state_capsule_v2.py"
       - "canonical/runtime/composition_state_capsule_guard_v2.py"
       - "canonical/runtime/composition_runtime_channel_guard_v1.py"
+      - "canonical/runtime/root3_effect_channel_registry_v2.py"
+      - "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json"
       - "canonical/runtime/capability_planner.py"
       - "canonical/runtime/astra_runtime.py"
       - "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py"
@@ -23,6 +25,8 @@ on:
       - "canonical/runtime/composition_state_capsule_v2.py"
       - "canonical/runtime/composition_state_capsule_guard_v2.py"
       - "canonical/runtime/composition_runtime_channel_guard_v1.py"
+      - "canonical/runtime/root3_effect_channel_registry_v2.py"
+      - "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json"
       - "canonical/runtime/capability_planner.py"
       - "canonical/runtime/astra_runtime.py"
       - "canonical/tests/test_composition_state_capsule_guard_v2.py"
@@ -51,3 +55,16 @@ jobs:
           python -m unittest -v canonical.tests.test_composition_state_capsule_runtime_integration_v1
           python -m unittest -v canonical.tests.test_astra_declared_cross_step_boundary_v1
           python -m unittest -v canonical.tests.test_composition_cross_step_no_bypass_audit_v1
+          python - <<'PY'
+          from canonical.runtime.root3_effect_channel_registry_v2 import compile_registry
+          out = compile_registry(
+              ".",
+              "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json",
+          )
+          assert out["repo_local_dynamic_execution_universe_closed"] is True, out
+          assert out["spec_loader_site_count"] == 14, out
+          assert out["registered_repo_module_count"] == 48, out
+          assert out["c1_channel_registry_scope_complete"] is False, out
+          assert out["acceptance_credit_delta"] == 0, out
+          print(out["status"])
+          PY
