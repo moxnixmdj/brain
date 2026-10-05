@@ -856,7 +856,15 @@ def _resolve_result_refs(value, trace):
             cycle=int(spec.get("cycle",-1))
             if cycle<0 or cycle>=len(trace):
                 raise Blocker("RESULT_REFERENCE_CYCLE_INVALID:"+str(cycle))
-            current=trace[cycle].get("result")
+            record=trace[cycle]
+            previous_chain_sha256=(
+                trace[cycle-1].get("chain_sha256") if cycle>0 else None
+            )
+            if not _controller_record_lineage_valid(
+                record,cycle,previous_chain_sha256
+            ):
+                raise Blocker("RESULT_REFERENCE_LINEAGE_INVALID:"+str(cycle))
+            current=record.get("result")
             field=str(spec.get("field") or "").strip()
             if field:
                 for part in field.split("."):
@@ -868,7 +876,6 @@ def _resolve_result_refs(value, trace):
     if isinstance(value,list):
         return [_resolve_result_refs(v,trace) for v in value]
     return value
-
 
 def _knowledge_source_identity(url,json_path):
     raw_url=str(url or "")
@@ -4145,39 +4152,149 @@ def _controller_plan_sha256(actions):
     return hashlib.sha256(raw).hexdigest()
 
 
-def _controller_checkpoint_record_valid(record):
+def _controller_durable_effect_hashes(action,result):
+    """Content-bind durable controller effects independently of adapter metadata."""
+    if not isinstance(action,dict) or not isinstance(result,dict):
+        raise Blocker("CONTROLLER_TRACE_RECORD_INVALID")
+    path_specs=(
+        ("output_path","output_sha256"),
+        ("screenshot_path","screenshot_sha256"),
+        ("xlsx_path","xlsx_sha256"),
+        ("result_path",None),
+        ("manifest_path",None),
+        ("decision_path",None),
+    )
+    observed={}
+    for path_key,reported_hash_key in path_specs:
+        raw=result.get(path_key)
+        if not isinstance(raw,str) or not raw:
+            continue
+        p=_safe_repo_path(raw)
+        if not p.is_file():
+            raise Blocker("CONTROLLER_DURABLE_EFFECT_MISSING:"+raw)
+        actual=sha_file(p)
+        reported=result.get(reported_hash_key) if reported_hash_key else None
+        if isinstance(reported,str) and reported and reported!=actual:
+            raise Blocker("CONTROLLER_DURABLE_EFFECT_HASH_MISMATCH:"+raw)
+        observed[raw]=actual
+    if str(action.get("type") or "")=="assert_file_exists":
+        raw=(action.get("args") or {}).get("path")
+        if isinstance(raw,str) and raw:
+            p=_safe_repo_path(raw)
+            if not p.is_file():
+                raise Blocker("CONTROLLER_DURABLE_EFFECT_MISSING:"+raw)
+            observed[raw]=sha_file(p)
+    return dict(sorted(observed.items()))
+
+
+def _controller_trace_record(cycle,action,result,previous_chain_sha256):
+    if not isinstance(action,dict) or not isinstance(result,dict):
+        raise Blocker("CONTROLLER_TRACE_RECORD_INVALID")
+    cycle=int(cycle)
+    if cycle<0:
+        raise Blocker("CONTROLLER_TRACE_CYCLE_INVALID")
+    if previous_chain_sha256 is not None and (
+        not isinstance(previous_chain_sha256,str) or len(previous_chain_sha256)!=64
+    ):
+        raise Blocker("CONTROLLER_TRACE_PREVIOUS_CHAIN_INVALID")
+    plan_sha=_controller_plan_sha256(action)
+    result_sha=_controller_plan_sha256(result)
+    durable=_controller_durable_effect_hashes(action,result)
+    lineage_payload={
+      "cycle":cycle,
+      "plan_sha256":plan_sha,
+      "result_sha256":result_sha,
+      "previous_chain_sha256":previous_chain_sha256,
+      "durable_effect_sha256":durable,
+    }
+    chain_sha=_controller_plan_sha256(lineage_payload)
+    return {
+      "cycle":cycle,
+      "plan":action,
+      "result":result,
+      "plan_sha256":plan_sha,
+      "result_sha256":result_sha,
+      "previous_chain_sha256":previous_chain_sha256,
+      "durable_effect_sha256":durable,
+      "chain_sha256":chain_sha,
+    }
+
+
+def _controller_record_lineage_valid(record,expected_cycle,expected_previous_chain_sha256):
     if not isinstance(record,dict):
         return False
     action=record.get("plan")
     result=record.get("result")
     if not isinstance(action,dict) or not isinstance(result,dict):
         return False
+    if record.get("cycle")!=expected_cycle:
+        return False
+    if record.get("previous_chain_sha256")!=expected_previous_chain_sha256:
+        return False
+    durable=record.get("durable_effect_sha256")
+    if not isinstance(durable,dict) or any(
+        not isinstance(k,str) or not isinstance(v,str) or len(v)!=64
+        for k,v in durable.items()
+    ):
+        return False
+    plan_sha=_controller_plan_sha256(action)
+    result_sha=_controller_plan_sha256(result)
+    if record.get("plan_sha256")!=plan_sha or record.get("result_sha256")!=result_sha:
+        return False
+    payload={
+      "cycle":expected_cycle,
+      "plan_sha256":plan_sha,
+      "result_sha256":result_sha,
+      "previous_chain_sha256":expected_previous_chain_sha256,
+      "durable_effect_sha256":durable,
+    }
+    return record.get("chain_sha256")==_controller_plan_sha256(payload)
+
+
+def _controller_checkpoint_record_valid(record,expected_cycle,expected_previous_chain_sha256):
+    if not _controller_record_lineage_valid(
+        record,expected_cycle,expected_previous_chain_sha256
+    ):
+        return False
+    action=record.get("plan")
+    result=record.get("result")
     typ=str(action.get("type") or "")
     if typ=="finish":
         return True
 
+    durable=dict(record.get("durable_effect_sha256") or {})
     checks=[]
     for path_key,hash_key in (
         ("output_path","output_sha256"),
         ("screenshot_path","screenshot_sha256"),
         ("xlsx_path","xlsx_sha256"),
+        ("result_path",None),
+        ("manifest_path",None),
+        ("decision_path",None),
     ):
         raw=result.get(path_key)
         if isinstance(raw,str) and raw:
-            checks.append((raw,result.get(hash_key)))
-
-    # Some adapters report durable paths without hashes. Existence is still
-    # required before trusting a checkpointed effect.
-    for path_key in ("result_path","manifest_path","decision_path"):
-        raw=result.get(path_key)
-        if isinstance(raw,str) and raw and not any(x[0]==raw for x in checks):
-            checks.append((raw,None))
+            expected_hash=durable.get(raw)
+            if not isinstance(expected_hash,str) or len(expected_hash)!=64:
+                return False
+            reported=result.get(hash_key) if hash_key else None
+            if isinstance(reported,str) and reported and reported!=expected_hash:
+                return False
+            checks.append((raw,expected_hash))
 
     if typ=="assert_file_exists":
         raw=(action.get("args") or {}).get("path")
         if isinstance(raw,str) and raw:
-            checks.append((raw,result.get("sha256")))
+            expected_hash=durable.get(raw)
+            if not isinstance(expected_hash,str) or len(expected_hash)!=64:
+                return False
+            reported=result.get("sha256")
+            if isinstance(reported,str) and reported and reported!=expected_hash:
+                return False
+            checks.append((raw,expected_hash))
 
+    if set(durable)!=set(raw for raw,_expected in checks):
+        return False
     for raw,expected_hash in checks:
         try:
             p=_safe_repo_path(raw)
@@ -4185,21 +4302,22 @@ def _controller_checkpoint_record_valid(record):
             return False
         if not p.is_file():
             return False
-        if isinstance(expected_hash,str) and expected_hash:
-            try:
-                if sha_file(p)!=expected_hash:
-                    return False
-            except Exception:
+        try:
+            if sha_file(p)!=expected_hash:
                 return False
+        except Exception:
+            return False
     return True
 
-
 def _validated_checkpoint_prefix(completed):
+    previous_chain_sha256=None
     for index,record in enumerate(completed):
-        if not _controller_checkpoint_record_valid(record):
+        if not _controller_checkpoint_record_valid(
+            record,index,previous_chain_sha256
+        ):
             return completed[:index],index
+        previous_chain_sha256=record.get("chain_sha256")
     return completed,None
-
 
 def _load_controller_checkpoint(step,mission,actions):
     plan_sha=_controller_plan_sha256(actions)
@@ -4286,7 +4404,12 @@ def _run_model_independent_goal(step, mission, goal):
         if isinstance(result,dict) and result.get("error"):
             raise Blocker("MODEL_INDEPENDENT_ACTION_ERROR:"+str(result.get("error")))
         _verify_action_expectation(action,result)
-        trace.append({"cycle":cycle,"plan":action,"result":result})
+        previous_chain_sha256=trace[-1].get("chain_sha256") if trace else None
+        trace.append(
+            _controller_trace_record(
+                cycle,action,result,previous_chain_sha256
+            )
+        )
         checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace)
         interrupt_after=step.get("interrupt_after_controller_actions_once")
         if interrupt_after is not None:
