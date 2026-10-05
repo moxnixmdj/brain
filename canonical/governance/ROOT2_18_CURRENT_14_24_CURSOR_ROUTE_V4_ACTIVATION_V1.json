@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__EXACT_18_ROOT2_SCHEDULING__CURSOR_OWNER_ROUTE_DELETED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f"
+  },
+  "verification": {
+    "path": "canonical/verification/ROOT2_18_CURRENT_14_24_CURSOR_ROUTE_V4_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "d197df20e5192f6613169d4620d7649fdf0e4884"
+  },
+  "supersedes": {
+    "path": "canonical/governance/ROOT2_18_CURRENT_14_24_SCHEDULING_ACTIVATION_V1.json",
+    "git_blob_sha": "7d0dd1a755d5e278897791e11884d4a4287ef58d"
+  },
+  "effects": [
+    "PRESERVE_EXACT_CURRENT_18_ROOT2_PREDICATES",
+    "DELETE_CURSORBENCH_OWNER_SCORE_OR_EXTERNAL_SUBMISSION_WAIT_UNDER_CURRENT_CURSOR_POLICY",
+    "PRESERVE_CURSORBENCH_STRONGER_SCOPE_COMPLETE_PROOF_ROUTE",
+    "REOPEN_CURSOR_OWNER_ROUTE_ONLY_ON_MATERIAL_OWNER_POLICY_OR_INTERFACE_CHANGE",
+    "RECOMPUTE_GLOBAL_ZERO_REALITY_CUT"
+  ],
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "acceptance_credit_delta": 0,
+  "hard_rules": [
+    "NO_CURSORBENCH_SCORE_CLAIM",
+    "NO_ACCEPTANCE_CREDIT_FROM_ROUTE_DELETION",
+    "NO_GENERIC_PUBLIC_CURSORBENCH_SELF_RUN_SEARCH",
+    "NO_PAID_REVERSE_DIRECTION_SUBSTITUTE"
+  ]
+}
