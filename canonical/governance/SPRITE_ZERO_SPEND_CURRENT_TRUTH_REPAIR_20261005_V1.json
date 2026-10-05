@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_SPRITE_ZERO_SPEND_CURRENT_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_FAIL_CLOSED_CANDIDATE__SPRITE_TECHNICAL_REPLAYS_PRESERVED__HARD_ZERO_CARRIER_INTERPRETATION_REVOKED__ZERO_CREDIT",
+  "objective": "Preserve technical replay outcomes while preventing unproved account-cost metadata from qualifying the existing Sprite as a hard-$0 verification carrier.",
+  "affected_receipts": [
+    {
+      "path": "canonical/verification/ROOT3_SUBPROCESS_EFFECT_CLASS_REGISTRY_SPRITE_REPLAY_20261005_V1.json",
+      "git_blob_sha": "3c8f7e6e02f6c96c5821e91c98de4fa69911a275",
+      "technical_result": "PRESERVE_DIAGNOSTIC_29_TO_7_CLASSIFICATION_PASS",
+      "cost_field": "environment.incremental_spend_usd",
+      "cost_interpretation": "UNPROVED"
+    },
+    {
+      "path": "canonical/verification/ROOT3_SEVEN_CLASS_ONE_SUBSTRATE_POLICY_SPRITE_REPLAY_20261005_V1.json",
+      "git_blob_sha": "65744dc9f0918fe4e3140bf8312a43d227886fd9",
+      "technical_result": "PRESERVE_DIAGNOSTIC_7_TO_1_SUBSTRATE_POLICY_REPLAY_PASS",
+      "cost_field": "environment.incremental_spend_usd",
+      "cost_interpretation": "UNPROVED"
+    }
+  ],
+  "account_evidence": {
+    "fly_trial_started": "2026-09-04__7_DAYS_OR_2_RUNTIME_HOURS",
+    "fly_trial_ended": "2026-09-11__CONTINUATION_REQUIRES_PAYMENT_DETAILS_OR_PAY_AS_YOU_GO",
+    "current_sprite": {
+      "name": "brain-heldout003-one-shot",
+      "id": "sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589",
+      "status": "cold",
+      "current_metadata_exposes_remaining_credit": false
+    },
+    "attempted_zero_spend_gate": {
+      "branch": "sprites-zero-spend-carrier-gate-20261005-sol",
+      "commit_prefix": "9c852ee",
+      "run_id": 37255057104,
+      "jobs": [
+        {
+          "job_id": 111590238172,
+          "name": "guard",
+          "steps": null,
+          "conclusion": "failure"
+        },
+        {
+          "job_id": 111590238289,
+          "name": "continuous-obs-runtime",
+          "steps": null,
+          "conclusion": "failure"
+        }
+      ],
+      "conclusion": "ZERO_STEP_PRE_ASSIGNMENT_FAILURE__NO_ZERO_SPEND_CHECK_EXECUTED"
+    }
+  },
+  "scheduling_effect": {
+    "preserve": [
+      "TECHNICAL_SOURCE_AND_BEHAVIOR_RESULTS_AS_ZERO_CREDIT_DIAGNOSTIC_EVIDENCE",
+      "FUTURE_SPRITE_ROUTE_IF_ACCOUNT_SPECIFIC_NONBILLABLE_CAPACITY_IS_PROVED_FIRST"
+    ],
+    "delete": [
+      "TREAT_EITHER_SPRITE_REPLAY_AS_HARD_ZERO_CARRIER_QUALIFICATION",
+      "WAKE_EXISTING_SPRITE_UNDER_HARD_ZERO_RULE_WITHOUT_CURRENT_ACCOUNT_SPECIFIC_CREDIT_OR_NONBILLABLE_CAPACITY_RECEIPT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_PRIOR_SPRITE_REPLAYS_DEFINITELY_INCURRED_A_CHARGE",
+    "NO_CLAIM_PRIOR_TECHNICAL_RESULTS_ARE_FALSE",
+    "NO_NEW_SPRITE_WAKE",
+    "NO_ROOT3_OR_ACCEPTANCE_CREDIT_CHANGE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
