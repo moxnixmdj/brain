@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_CEILING_TARGET_PRECEDENCE_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__STRUCTURED_METHOD_CEILING_NOT_CURRENTLY_TARGET_ENTAILED__REMOVE_FROM_MANDATORY_PRIORITY__PRESERVE_OPTIONAL__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/STRUCTURED_METHOD_CEILING_TARGET_PRECEDENCE_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "d46427c929d035fb236340c47a45b4df17c231b8"
+  },
+  "recomputed_inputs": {
+    "structured_method_priority_activation_commit": "9a43903f4dd8556d0577971fa526ee639935f06b",
+    "target_conditioned_proxy_activation_commit": "05d0751713585902116eee7c2d37c62f11f0188f",
+    "target_behavior_guard_activation_commit": "69f3c05e6be905c3d3a17f4a0d024f025e96547c",
+    "five_to_one_activation_commit": "a4cfdd0c1d75e3407f43e8f6f587ba4acb4c5395"
+  },
+  "checks": {
+    "structured_method_present_in_prior_five_standalone_set": true,
+    "structured_method_quarantined_by_five_to_one_activation": true,
+    "newer_proxy_reconciliation_exact_target_entailed_mechanism_edge_count": 1,
+    "newer_proxy_reconciliation_only_exact_edge_is_browser_visual_for_computer_browser_use": true,
+    "structured_method_present_in_newer_exact_target_entailed_set": false,
+    "target_guard_blocks_mandatory_mechanism_proof_without_entailment": true,
+    "removing_structured_method_formal_theorem_from_mandatory_priority_deletes_target_behavior": false,
+    "removing_structured_method_formal_theorem_from_mandatory_priority_deletes_threshold": false,
+    "optional_evidence_route_preserved": true,
+    "acceptance_credit_delta": 0
+  },
+  "consequence": [
+    "FORMAL_STRUCTURED_METHOD_CEILING_VERIFICATION_IS_NOT_CURRENTLY_A_TERMINAL_CRITICAL_PATH_REQUIREMENT",
+    "KEEP_THE_CANDIDATE_AND_PREMISE_RECEIPT_AVAILABLE_AS_OPTIONAL_EVIDENCE",
+    "DO_NOT_SPEND_RUNNER_OR_FRESH_REALITY_CAPACITY_ON_IT_UNLESS_WAKE_CONDITION_FIRES"
+  ],
+  "verification_class": "CONNECTED_CURRENT_MAIN_PRECEDENCE_RECOMPUTATION__SCHEDULING_ONLY__NOT_PERFORMANCE_VERIFICATION",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_THEOREM_IS_FALSE",
+    "NO_ATOMIC_PREDICATE_CLOSED",
+    "NO_FAMILY_PROMOTED",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
