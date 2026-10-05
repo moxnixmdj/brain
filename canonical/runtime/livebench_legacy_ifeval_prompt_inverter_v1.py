@@ -15,6 +15,10 @@ import re
 from dataclasses import asdict, dataclass
 from typing import Any
 
+from canonical.runtime.livebench_hidden_parameter_prompt_recovery_v1 import (
+    recover_legacy_repeat_prompt,
+)
+
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY_IFEVAL_PROMPT_INVERTER_V1"
 PINNED_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
 PINNED_INSTRUCTIONS_BLOB = "4997bab885a676d92545fd91a9a20b48d234a2b2"
@@ -104,15 +108,31 @@ def recognize(prompt: str) -> list[dict[str, Any]]:
     c += _m(r"Your answer must contain a title, wrapped in double angular brackets, such as <<poem of joy>>\.",p,"detectable_format:title")
     c += _m(r"Give two different responses\. Responses and only responses should be separated by 6 asterisk symbols: \*\*\*\*\*\*\.",p,"combination:two_responses")
 
-    repeat_patterns=[
-        r"First repeat the request word for word without change, then give your answer \(1\. do not say any words or characters before repeating the request; 2\. the request you need to repeat does not include this sentence\)",
-        r"First, repeat the request word for word without change, then give your answer \(Notes?: 1\. do NOT say any words or characters before repeating the request; 2\. the request you need to repeat does not include this sentence\)",
-        r"First repeat the question above without change of words, then give your answer\.",
-    ]
-    for pat in repeat_patterns:
-        for m in re.finditer(pat,p,flags=re.I|re.S):
-            base=p[:m.start()].rstrip()
-            c.append(Match("combination:repeat_prompt",m.start(),m.end(),{"prompt_to_repeat":base},m.group(0)))
+    # Legacy public IFEval uses several repeat-meta phrasings and may place the
+    # meta instruction before or after the actual request. Reuse the separately
+    # public-population-verified prompt-only recovery rather than assuming the
+    # canonical source description is a suffix.
+    #
+    # Compare against the same line-normalized prompt representation used by
+    # the recovery function. A repeat match is emitted only if at least one
+    # high-specificity repeat-meta line was actually removed.
+    normalized_visible = "\n".join(
+        line.strip()
+        for line in p.replace("\r\n", "\n").strip().split("\n")
+        if line.strip()
+    )
+    recovered_repeat = recover_legacy_repeat_prompt(p)
+    repeat_base = str(recovered_repeat.get("prompt_to_repeat") or "")
+    if repeat_base and repeat_base != normalized_visible:
+        c.append(
+            Match(
+                "combination:repeat_prompt",
+                0,
+                len(p),
+                {"prompt_to_repeat": repeat_base},
+                p,
+            )
+        )
 
     c += _m(r"Finish your response with this exact phrase (?P<end_phrase>.+?)\. No other words should follow this phrase\.",p,"startend:end_checker")
     c += _m(r"In your response, words with all capital letters should appear (?P<capital_relation>less than|at least) (?P<capital_frequency>\d+) times\.",p,"change_case:capital_word_frequency",_ints("capital_frequency"))
