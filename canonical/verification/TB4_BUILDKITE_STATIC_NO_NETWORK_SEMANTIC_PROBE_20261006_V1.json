@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_BUILDKITE_STATIC_NO_NETWORK_SEMANTIC_PROBE_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PROVIDER_EXECUTED_ZERO_CASE_PASS__DOCKER_STATIC_NONE_NETWORK_SEMANTICS_VERIFIED__ZERO_TB4_CASES__ZERO_SCORE_CREDIT",
+  "purpose": "Test the exact semantic property needed by the exceptional lake-temp-glm separate verifier without executing or reading any Terminal-Bench task case.",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "provider_execution": {
+    "provider": "Buildkite",
+    "pipeline_slug": "brain-harbor-protocol-preflight",
+    "build_number": 9,
+    "frozen_brain_commit": "06a8c1d0e808b05bb7816767dec2e21b9c7a8fb9",
+    "queue": "linux-large",
+    "state": "passed",
+    "exit_status": 0
+  },
+  "carrier": {
+    "architecture": "amd64",
+    "docker_server": "29.3.0-namespace",
+    "isolation_primitive": "docker run --network none"
+  },
+  "observed": {
+    "ipv4_route_table_empty": true,
+    "ipv6_route_table_empty": true,
+    "external_https_probe": "BLOCKED__DNS_RESOLUTION_FAILED_AS_EXPECTED_WITH_NO_EGRESS",
+    "extra_nonrouted_tunnel_interfaces_observed": [
+      "ip6tnl0",
+      "tunl0"
+    ],
+    "semantic_isolation_pass": true
+  },
+  "overstrong_probe_falsification": {
+    "prior_build_number": 8,
+    "prior_assertion": "ONLY_LOOPBACK_INTERFACE_EXISTS",
+    "result": "FALSIFIED_BY_NONROUTED_TUNNEL_INTERFACES",
+    "consequence": "INTERFACE_COUNT_IS_NOT_THE SECURITY OR PROTOCOL CONTRACT__ROUTE_AND_EXTERNAL_REACHABILITY_SEMANTICS_CONTROL"
+  },
+  "contamination_boundary": {
+    "terminal_benchmark_case_content_read": 0,
+    "terminal_benchmark_tasks_executed": 0,
+    "terminal_cases_consumed": 0
+  },
+  "source_task_binding": {
+    "benchmark_repo": "harbor-framework/terminal-bench",
+    "frozen_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "task": "lake-temp-glm",
+    "task_toml_blob_sha": "bf8261cae0de06816a9c38780c7d09fac5a1a1a2",
+    "verifier_environment_mode": "separate",
+    "verifier_allow_internet": false,
+    "verifier_cpus": 2,
+    "verifier_memory_mb": 4096,
+    "verifier_storage_mb": 10240,
+    "task_environment_cpus": 8,
+    "task_environment_memory_mb": 8192,
+    "task_environment_storage_mb": 20480
+  },
+  "deduction": [
+    "THE_FAILED_HARBOR_NFT_FIB_INET_PROBE FALSIFIES ONE HARBOR DOCKER EGRESS-SIDECAR IMPLEMENTATION ROUTE__NOT THE REQUIRED NO-NETWORK SEMANTICS",
+    "THE ACTUAL BUILDKITE CARRIER CAN ENFORCE STATIC NO-EXTERNAL-NETWORK SEMANTICS WITH DOCKER BUILTIN NONE NETWORK",
+    "THIS REMOVES KERNEL_EGRESS_SIDECAR_SUPPORT AS A NECESSARY TB4 RECOVERY PREMISE FOR THE STATIC SEPARATE VERIFIER CASE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_FULL_TB4_HARNESS_EQUIVALENCE",
+    "NO_CLAIM_LAKE_TEMP_GLM_TASK_SUCCESS",
+    "NO_CLAIM_TB4_THRESHOLD_REACHED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_TERMINAL_CASE_CONTENT_EXPOSED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
