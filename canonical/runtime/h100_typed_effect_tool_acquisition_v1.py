@@ -36,7 +36,7 @@ def _scalar(v:Any)->bool:
     return v is None or isinstance(v,(str,int,float,bool))
 
 def _validate_path(rel:Any)->str:
-    if not isinstance(rel,str) or not rel or "\" in rel or not _PATH_RE.fullmatch(rel):
+    if not isinstance(rel,str) or not rel or "\\" in rel or not _PATH_RE.fullmatch(rel):
         raise TypedEffectToolError("PATH_INVALID")
     p=PurePosixPath(rel)
     if p.is_absolute() or any(part in {"","..","."} for part in p.parts):
