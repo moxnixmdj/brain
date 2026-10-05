@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_BOUND_CLAIM_GUARD_V2_REBIND_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PREVERIFICATION_FAIL_CLOSED_REPAIR__REBIND_ROOT3_DETERMINISTIC_R5_R6_CONTROL_SLICE_TO_V2__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Repair the deterministic required-support/provenance transport slice before independent promotion. Preserve the semantic boundary: the guard still consumes externally supplied support bindings and does not infer support, relevance, audience salience or source authority.",
+  "supersedes_for_future_verification_only": {
+    "root3_cut": "canonical/governance/SYNTHESIS_ROOT3_RESIDUAL_REUSE_MINIMUM_CUT_20261005_V1.json",
+    "old_guard_runtime_sha": "bd631efbfd76787e9dc1d4f9e276c195d1142790",
+    "old_guard_tests_sha": "4fbe63bd742e8a18c652fc7efd6e4b141649ba7a",
+    "rule": "DO_NOT_INDEPENDENTLY_PROMOTE_THE_V1_GUARD_BYTES_AFTER_THIS_REPAIR__VERIFY_V2_INSTEAD"
+  },
+  "v2": {
+    "runtime": {
+      "path": "canonical/runtime/synthesis_bound_claim_guard_v2.py",
+      "git_blob_sha": "6d342f37140c1790485366dada18e32d5f7aa8d0",
+      "commit": "488f946533a21e0584aa0ea31ecf8aa43ad357af"
+    },
+    "tests": {
+      "path": "canonical/tests/test_synthesis_bound_claim_guard_v2.py",
+      "git_blob_sha": "3e5c4ec8b391388a28554769ef38aa296471db0e",
+      "commit": "9e2b23ee88e172f0557be1eae7e0df6cfb7a4a0c"
+    }
+  },
+  "falsified_v1_boundary_cases": [
+    {
+      "id": "NON_MAPPING_TOP_LEVEL_NOT_TOTAL_FAIL_CLOSED",
+      "witness": "solve(None) reaches public.get in V1 and can raise instead of returning a fail-closed result.",
+      "repair": "V2 rejects non-Mapping top-level inputs as INPUT_INVALID before field access."
+    },
+    {
+      "id": "WHITESPACE_ONLY_NORMALIZED_TOKENS_ACCEPTED",
+      "witness": "V1 treats whitespace-only claim IDs, evidence IDs and provenance strings as nonempty.",
+      "repair": "V2 requires normalized tokens to be strings, nonempty after strip, and already equal to their stripped form."
+    }
+  ],
+  "preserved_scope": {
+    "does": [
+      "FAIL_CLOSED_WHEN_REQUIRED_CLAIM_LACKS_SUPPORTED_OR_CONFLICTED_BOUND_SUPPORT",
+      "PRESERVE_EXACT_CLAIM_TO_EVIDENCE_BINDINGS",
+      "PRESERVE_AND_DEDUPLICATE_CLAIM_TO_PROVENANCE_BINDINGS",
+      "PRESERVE_CONFLICTED_CLAIMS_AS_UNCERTAINTY",
+      "REJECT_UNKNOWN_EVIDENCE_REFERENCES_DUPLICATE_IDS_EMPTY_OR_NONNORMALIZED_IDENTIFIERS_AND_EMPTY_OR_NONNORMALIZED_PROVENANCE"
+    ],
+    "does_not": [
+      "INFER_SUPPORT",
+      "INFER_RELEVANCE",
+      "INFER_AUDIENCE_SALIENCE",
+      "GENERATE_PROSE",
+      "PROVE_SOURCE_QUALITY_OR_INDEPENDENCE",
+      "GRANT_TERMINAL_AUTHORITY"
+    ]
+  },
+  "scheduler_effect_if_verified": {
+    "replace": "SYNTHESIS_BOUND_CLAIM_GUARD_V1",
+    "with": "SYNTHESIS_BOUND_CLAIM_GUARD_V2",
+    "affected_root3_slices": [
+      "R5_INSUFFICIENT_REQUIRED_SUPPORT_CONTROL",
+      "R6_POST_BINDING_PROVENANCE_TRANSPORT_CONTROL"
+    ],
+    "G1_G2_G3_semantic_or_generative_residuals_unchanged": true
+  },
+  "hard_nonclaims": [
+    "NO_SYNTHESIS_ROOT3_CLOSURE",
+    "NO_G1_OR_G2_SEMANTIC_CLOSURE",
+    "NO_GENERAL_G3_CLOSURE",
+    "NO_SYNTHESIS_MATCHED_QUALITY_PASS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V2_RUNTIME_AND_TEST_BLOBS__THEN_REBIND_THE_ROOT3_MINIMUM_CUT_CONTROL_SLICE_WITH_ZERO_SEMANTIC_CREDIT"
+}
