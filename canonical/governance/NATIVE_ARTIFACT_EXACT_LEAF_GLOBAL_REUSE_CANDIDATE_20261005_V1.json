@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_NATIVE_ARTIFACT_EXACT_LEAF_GLOBAL_REUSE_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PROVED_SCOPE_COMPLETE_ATOMIC_COMPONENT_REUSED_BY_EXACT_BEHAVIOR_ID__ZERO_NEW_CREDIT",
+  "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+  "objective": "Reuse the already-proved native-artifact mechanical ceiling for the identical frozen behavioral leaf wherever it appears, without requiring ARTIFACT_CREATION whole-family acceptance.",
+  "authorities": {
+    "registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "evidence_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
+    },
+    "artifact_scope_partition": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d"
+    },
+    "source_predicate": "ARTIFACT_MECHANICAL_GATES_CEILING"
+  },
+  "proof_basis": {
+    "source_predicate_state": "PROVED",
+    "proof_kind": "ABSOLUTE_CEILING",
+    "scope_complete": true,
+    "independent_or_objective": true,
+    "objective_ceiling": true,
+    "brain_value": 1,
+    "theoretical_ceiling_value": 1,
+    "exact_scope": "EXPLICIT_LOW_LEVEL_NATIVE_EDIT_PRESERVATION_FOR_DOCX_XLSX_PPTX_PDF_ONLY",
+    "partition_binding": "ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF explicitly maps NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001 to ARTIFACT_MECHANICAL_GATES_CEILING as already proved."
+  },
+  "exact_registry_occurrences": [
+    "PROFESSIONAL_KNOWLEDGE_WORK",
+    "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+    "ARTIFACT_CREATION"
+  ],
+  "source_occurrence": "ARTIFACT_CREATION",
+  "target_reuse_occurrences": [
+    "PROFESSIONAL_KNOWLEDGE_WORK",
+    "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+  ],
+  "theorem": "A scope-complete objective-ceiling proof of a frozen behavioral component may be reused at every occurrence of that exact behavior_id in the same registry blob. Whole source-family acceptance is unnecessary because the reused proposition is the component itself, not the source family.",
+  "consequence_if_verified": [
+    "DELETE_NEW_NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_PROOF_FOR_PROFESSIONAL_KNOWLEDGE_WORK",
+    "DELETE_NEW_NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_PROOF_FOR_VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+    "PRESERVE_PROFESSIONAL_QUALITY_VISUAL_UNDERSTANDING_AND_ALL_PUBLIC_BAR_OBLIGATIONS"
+  ],
+  "hard_nonclaims": [
+    "NO_PROFESSIONAL_ARTIFACT_QUALITY_CREDIT",
+    "NO_SEMANTIC_TARGET_SELECTION_CREDIT",
+    "NO_WHOLE_TARGET_FAMILY_ACCEPTANCE",
+    "NO_NEW_ATOMIC_PREDICATE_CREDIT",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
