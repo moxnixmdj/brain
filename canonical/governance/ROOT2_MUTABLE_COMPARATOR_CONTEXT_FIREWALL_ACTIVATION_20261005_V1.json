@@ -1,0 +1,112 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_MUTABLE_COMPARATOR_CONTEXT_FIREWALL_ACTIVATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__PRIMARY_SOURCE_CONNECTOR_VERIFIED__FOUR_PREDICATE_TARGET_CONTEXT_FIREWALL__SCHEDULING_ONLY__ZERO_CREDIT",
+  "objective": "Make stale scalar comparator targets incapable of changing terminal truth by binding each mutable Opus 5.5 public reference to the exact benchmark/harness/scorer/aggregation epoch and target-model configuration before any Brain result is exposed.",
+  "active_parent": {
+    "path": "canonical/governance/ROOT2_18_ZERO_REALITY_CERTIFICATE_CUT_ACTIVATION_V1.json",
+    "git_blob_sha": "3e710e3348c86b0e9451467a74ffdbd80f5e0b61"
+  },
+  "verified_reconciliations": [
+    {
+      "predicates": [
+        "PROWORK_GDPVAL_GE_1846"
+      ],
+      "candidate": {
+        "path": "canonical/governance/GDPVAL_OPUS55_TARGET_FRESHNESS_RECONCILIATION_20261005_V1.json",
+        "git_blob_sha": "31549db051bd6b3111d02fa4b48b5174df2d350b"
+      },
+      "verification": {
+        "path": "canonical/verification/GDPVAL_OPUS55_TARGET_FRESHNESS_CONNECTOR_VERIFICATION_20261005_V1.json",
+        "git_blob_sha": "e2a85be95fc2d1174699ce6b865767dce86c103e"
+      },
+      "current_owner_context_target": 1867,
+      "historical_frozen_target": 1846,
+      "unit": "Elo"
+    },
+    {
+      "predicates": [
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "candidate": {
+        "path": "canonical/governance/AA_BRIEFCASE_OPUS55_TARGET_FRESHNESS_RECONCILIATION_20261005_V1.json",
+        "git_blob_sha": "327cc547fee52f4df007921116261012b465679b"
+      },
+      "verification": {
+        "path": "canonical/verification/AA_BRIEFCASE_OPUS55_TARGET_FRESHNESS_CONNECTOR_VERIFICATION_20261005_V1.json",
+        "git_blob_sha": "0bdc767d99283eaee08237270d5cc941bcf7cb9e"
+      },
+      "current_owner_context_target": 1808,
+      "historical_frozen_target": 1822,
+      "unit": "Elo"
+    },
+    {
+      "predicates": [
+        "TB_SCIENCE_GE_58_7"
+      ],
+      "candidate": {
+        "path": "canonical/governance/TB_SCIENCE_OPUS55_TARGET_FRESHNESS_RECONCILIATION_20261005_V1.json"
+      },
+      "verification": {
+        "path": "canonical/verification/TB_SCIENCE_OPUS55_TARGET_FRESHNESS_CONNECTOR_VERIFICATION_20261005_V1.json"
+      },
+      "current_public_context_target": 63.3,
+      "historical_anthropic_release_target": 58.7,
+      "unit": "percent",
+      "root2_phase": "PRESERVE_DEFERRED_UNTIL_POST_ZERO_REALITY_FIXED_POINT"
+    }
+  ],
+  "theorem": {
+    "target_identity": "TARGET = F(BENCHMARK_VERSION,TASK_POPULATION_OR_DATASET,HARNESS,SCORER_OR_GRADER,AGGREGATION_OR_RATING_EPOCH,TARGET_MODEL_CONFIGURATION)",
+    "scalar_rule": "A_NUMERIC_TARGET_WITHOUT_THE_BOUND_CONTEXT_ABOVE_IS_NOT_A_TERMINAL_COMPARATOR",
+    "precommit_rule": "FREEZE_THE_APPLICABLE_COMPARATOR_CONTEXT_AND_TARGET_BEFORE_OBSERVING_ANY_BRAIN_RESULT",
+    "fallback": "IF_CONTEXT_IDENTITY_IS_NOT_PROVED__USE_MATCHED_SAME_CONTEXT_OPUS55_COMPARATOR_OR_FAIL_CLOSED_NOT_PROVEN"
+  },
+  "scheduler_effects": [
+    "CONDITIONALIZE_THREE_RELATIVE_RATING_PREDICATES_AND_ONE_SCIENCE_PERCENTAGE_PREDICATE_BY_COMPARATOR_CONTEXT",
+    "DELETE_UNCONDITIONAL_CROSS_EPOCH_USE_OF_1846_1822_AND_58_7",
+    "PRESERVE_CURRENT_ROOT2_18_MEMBERSHIP_AND_SEVEN_GROUP_CUT",
+    "PRESERVE_TB_SCIENCE_AS_THE_SINGLE_DEFERRED_ROOT2_PREDICATE",
+    "FOR_CURRENT_OWNER_GDPVAL_ROUTE_REQUIRE_1867_NOT_1846",
+    "FOR_CURRENT_OWNER_AA_BRIEFCASE_ROUTE_REQUIRE_1808_NOT_1822",
+    "FOR_CURRENT_PUBLIC_TB_SCIENCE_ROUTE_REQUIRE_63_3_NOT_58_7",
+    "ALLOW_HISTORICAL_TARGETS_ONLY_INSIDE_INDEPENDENTLY_BOUND_HISTORICAL_CONTEXTS",
+    "RECOMPUTE_ANY_EARLY_STOP_OR_SCORE_CERTIFICATE_AFTER_CONTEXT_SELECTION"
+  ],
+  "false_truth_change_examples": [
+    {
+      "surface": "GDPval-AA v2.1",
+      "score": 1850,
+      "stale_result": "PASS_AT_1846",
+      "current_owner_context_result": "FAIL_AT_1867"
+    },
+    {
+      "surface": "AA-Briefcase v1.1",
+      "score": 1815,
+      "stale_result": "FAIL_AT_1822",
+      "current_owner_context_result": "PASS_AT_1808"
+    }
+  ],
+  "hard_rules": [
+    "NO_POST_RESULT_TARGET_SELECTION",
+    "NO_CROSS_HARNESS_OR_CROSS_RATING_EPOCH_SCORE_TRANSPLANT",
+    "NO_ACCEPTANCE_CREDIT_FROM_TARGET_RECONCILIATION",
+    "NO_FRESH_TERMINAL_CASE_EXECUTION_AUTHORITY",
+    "NO_CHANGE_TO_ROOT2_PREDICATE_COUNT_FROM_THIS_OVERLAY",
+    "FAIL_CLOSED_IF_BOUND_PRIMARY_SOURCE_OR_ACTIVE_ROOT2_AUTHORITY_CHANGES_MATERIALLY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "next": "APPLY_CONTEXT_FIREWALL_INSIDE_R2E_AND_R2F_RECEIPT_OR_CERTIFICATE_BINDING__PRESERVE_TB_SCIENCE_DEFERRED__RECOMPUTE_AFTER_EACH_VERIFIED_DELTA"
+}
