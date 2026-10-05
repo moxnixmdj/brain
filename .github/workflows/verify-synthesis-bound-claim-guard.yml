@@ -1,0 +1,33 @@
+name: Verify synthesis bound claim guard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/synthesis_bound_claim_guard_v1.py"
+      - "canonical/tests/test_synthesis_bound_claim_guard_v1.py"
+      - "canonical/governance/SYNTHESIS_ROOT3_RESIDUAL_REUSE_MINIMUM_CUT_20261005_V1.json"
+      - ".github/workflows/verify-synthesis-bound-claim-guard.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/synthesis_bound_claim_guard_v1.py"
+      - "canonical/tests/test_synthesis_bound_claim_guard_v1.py"
+      - "canonical/governance/SYNTHESIS_ROOT3_RESIDUAL_REUSE_MINIMUM_CUT_20261005_V1.json"
+      - ".github/workflows/verify-synthesis-bound-claim-guard.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify synthesis bound claim guard
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_synthesis_bound_claim_guard_v1
