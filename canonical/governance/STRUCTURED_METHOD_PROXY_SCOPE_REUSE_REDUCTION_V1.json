@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_PROXY_SCOPE_REUSE_REDUCTION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__STRUCTURED_METHOD_PROXY_SCOPE_RESIDUAL_DISCHARGED_BY_EXISTING_INDEPENDENT_SCOPE_EQUIVALENCE_RECEIPT__TERMINAL_PERFORMANCE_OPEN__ZERO_CREDIT",
+  "objective": "Remove STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001 from the newly constructed benchmark-proxy scope residual because an existing independently verified exact behavior-and-interaction scope substitution already closes its scope dimensions.",
+  "source_partition": {
+    "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json",
+    "git_blob_sha": "e549ad51cbf8653132820e3c9d7a5b79ffa1054f",
+    "prior_classification": "SURVIVING_SCOPE_LEAF"
+  },
+  "decisive_scope_receipt": {
+    "audit_path": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json",
+    "audit_git_blob_sha": "1db04e3c2c523dfe5f2ebe719b7c63dc9ccd808e",
+    "gate_input_path": "canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+    "gate_input_git_blob_sha": "fc2e739789825bba5f30da56c6896de11678b6e8",
+    "verification_path": "canonical/verification/STRUCTURED_METHOD_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "verification_git_blob_sha": "5325382e88f003b5685d9da13df321c23829174f"
+  },
+  "verified_scope_facts": {
+    "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "verification_status": "INDEPENDENT_PASS__ADMISSIBLE_SUBSTITUTION__ZERO_UNRESOLVED_DIMENSIONS__ZERO_TERMINAL_CREDIT",
+    "required_behavior_count": 1,
+    "covered_behavior_count": 1,
+    "required_interaction_count": 8,
+    "covered_interaction_count": 8,
+    "unresolved_required_dimensions": 0,
+    "leaked_inference_ids": 0,
+    "population_relation": "CANDIDATE_SUPERSET_PROVEN",
+    "environment_relation": "EXACT",
+    "oracle_relation": "CANDIDATE_STRONGER_PROVEN",
+    "subjective_quality_dimensions": 0,
+    "contamination_safe": true,
+    "target_weakened": false
+  },
+  "reduction": {
+    "leaf_scope_state": "DISCHARGED_BY_EXISTING_INDEPENDENT_SCOPE_EQUIVALENCE_RECEIPT",
+    "family_fanout": [
+      "ADVANCED_AGENTIC_CODING"
+    ],
+    "prior_unique_scope_residual_leaves": 7,
+    "new_unique_scope_residual_leaves_upper_bound": 6,
+    "fresh_reality_units_required_for_scope_discharge": 0,
+    "action_deleted": "NEW_UNCOVERED_SCOPE_PROGRAM_FOR_STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "preserved_open_work": [
+      "TERMINAL_ACCEPTANCE_PERFORMANCE_FOR_STRUCTURED_METHOD_ON_ITS_EXISTING_FROZEN_ROUTE",
+      "ADVANCED_AGENTIC_CODING_PUBLIC_FIXED_BARS",
+      "ANY_SCOPE_SAFE_OPUS55_PERFORMANCE_BINDING_REQUIRED_BY_CURRENT_ACCEPTANCE_AUTHORITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_OPUS55_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_ADVANCED_AGENTIC_CODING_FAMILY_PROMOTION",
+    "NO_TERMINAL_PERFORMANCE_CREDIT",
+    "NO_INFERENCE_FROM_SCOPE_EQUIVALENCE_TO_SCORE_NONINFERIORITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": false,
+  "independent_verification_reused": true
+}
