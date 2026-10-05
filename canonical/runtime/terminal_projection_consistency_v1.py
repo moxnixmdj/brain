@@ -16,6 +16,11 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any, Mapping
 
+try:
+    from canonical.runtime.material_condition_closure_v1 import compile_material_condition_closure
+except ModuleNotFoundError:  # direct execution: python canonical/runtime/terminal_projection_consistency_v1.py
+    from material_condition_closure_v1 import compile_material_condition_closure
+
 ROOT=Path(__file__).resolve().parents[2]
 PATHS={
     "authority":"canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
@@ -24,6 +29,8 @@ PATHS={
     "atomic_bindings":"canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
     "predicate_registry":"canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
     "target_envelope":"canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "material_condition_registry":"canonical/governance/OPUS55_MATERIAL_CONDITION_REGISTRY_V1.json",
+    "material_condition_evidence":"canonical/governance/OPUS55_MATERIAL_CONDITION_EVIDENCE_BINDINGS_V1.json",
 }
 
 def _load(rel:str)->dict[str,Any]:
@@ -50,7 +57,7 @@ def _derive(registry:Mapping[str,Any], atomic:Mapping[str,Any], envelope:Mapping
     preds=[x for x in registry.get("predicates",[]) if isinstance(x,Mapping)]
     ids=[x.get("id") for x in preds]
     if None in ids or len(ids)!=len(set(ids)): errors.append("REGISTRY_PREDICATE_IDS_INVALID")
-    if len(preds)!=38: errors.append("REGISTRY_PREDICATE_COUNT_NOT_38")
+    if not preds: errors.append("REGISTRY_PREDICATES_EMPTY")
     by_family=defaultdict(list)
     for p in preds:
         fam=p.get("family")
@@ -87,12 +94,33 @@ def _derive(registry:Mapping[str,Any], atomic:Mapping[str,Any], envelope:Mapping
 
 def evaluate_documents(authority:Mapping[str,Any], closure:Mapping[str,Any], matrix:Mapping[str,Any],
                        atomic:Mapping[str,Any], registry:Mapping[str,Any], envelope:Mapping[str,Any],
-                       actual_blob_shas:Mapping[str,str]|None=None)->dict[str,Any]:
+                       actual_blob_shas:Mapping[str,str]|None=None,
+                       material_registry:Mapping[str,Any]|None=None,
+                       material_evidence:Mapping[str,Any]|None=None,
+                       material_source_receipt_blob_sha:str|None=None)->dict[str,Any]:
     d=_derive(registry,atomic,envelope)
     errors=list(d["errors"])
     accepted=d["accepted_families"]; opened=d["open_families"]
     proved=d["proved_predicates"]; unresolved=d["unresolved_predicates"]
     total_families=len(d["target_families"]); total_predicates=len(d["predicate_ids"])
+
+    if material_registry is not None and material_evidence is not None:
+        material=compile_material_condition_closure(
+            material_registry,material_evidence,envelope,
+            verified_source_universe_receipt_sha=material_source_receipt_blob_sha,
+        )
+        if not material.get("pass"):
+            errors.extend("MATERIAL_CONDITION_GATE:"+str(e) for e in material.get("errors",[]))
+    else:
+        material={
+            "pass":True,
+            "condition_count":0,
+            "proved_condition_count":0,
+            "open_condition_count":0,
+            "open_conditions":[],
+            "source_universe_sealed":False,
+            "terminal_condition_gate_pass":False,
+        }
 
     sat=atomic.get("saturation") if isinstance(atomic.get("saturation"),Mapping) else {}
     if (sat.get("proved_predicate_count"),sat.get("unresolved_predicate_count"))!=(len(proved),len(unresolved)):
@@ -101,7 +129,15 @@ def evaluate_documents(authority:Mapping[str,Any], closure:Mapping[str,Any], mat
     truth=authority.get("truth") if isinstance(authority.get("truth"),Mapping) else {}
     if truth.get("opus55_acceptance")!=f"{len(accepted)}/{total_families}_PASS__{len(opened)}/{total_families}_OPEN":
         errors.append("AUTHORITY_ACCEPTANCE_MISMATCH")
-    if truth.get("achieved") is not False: errors.append("AUTHORITY_TERMINAL_MUST_REMAIN_FALSE")
+    claimed_achieved=truth.get("achieved")
+    if claimed_achieved not in (True,False):
+        errors.append("AUTHORITY_TERMINAL_ACHIEVED_NOT_BOOLEAN")
+    acceptance_complete=(len(opened)==0 and len(unresolved)==0)
+    terminal_finality_eligible=acceptance_complete and bool(material.get("terminal_condition_gate_pass"))
+    if claimed_achieved is True and not acceptance_complete:
+        errors.append("AUTHORITY_TERMINAL_TRUE_WITH_OPEN_ACCEPTANCE")
+    if claimed_achieved is True and not material.get("terminal_condition_gate_pass"):
+        errors.append("AUTHORITY_TERMINAL_TRUE_WITH_OPEN_MATERIAL_CONDITION_GATE")
     af=authority.get("atomic_acceptance_frontier") if isinstance(authority.get("atomic_acceptance_frontier"),Mapping) else {}
     if (af.get("proved"),af.get("unresolved"),af.get("total"))!=(len(proved),len(unresolved),total_predicates):
         errors.append("AUTHORITY_ATOMIC_FRONTIER_MISMATCH")
@@ -178,17 +214,35 @@ def evaluate_documents(authority:Mapping[str,Any], closure:Mapping[str,Any], mat
         "baseline_families":sorted(d["baseline_families"]),
         "atomic_predicates_proved":len(proved),
         "atomic_predicates_unresolved":len(unresolved),
-        "terminal_goal_achieved":False,
+        "material_conditions_total":material.get("condition_count",0),
+        "material_conditions_proved":material.get("proved_condition_count",0),
+        "material_conditions_open":material.get("open_condition_count",0),
+        "material_condition_open_ids":material.get("open_conditions",[]),
+        "material_condition_source_universe_sealed":bool(material.get("source_universe_sealed")),
+        "material_condition_gate_pass":bool(material.get("terminal_condition_gate_pass")),
+        "terminal_finality_eligible":terminal_finality_eligible,
+        "terminal_goal_achieved":bool(claimed_achieved is True and terminal_finality_eligible),
         "capability_credit_delta":0,"family_credit_delta":0,
         "promotion_authority":False,"execution_authority":False,
-        "rule":"LIVE_COUNTS_DERIVED_FROM_19_FAMILY_TARGET_ENVELOPE__FROZEN_RESIDUAL_PREDICATE_REGISTRY__CURRENT_SCOPE_COMPLETE_ATOMIC_LEDGER",
+        "rule":"TERMINAL_FINALITY_REQUIRES_DYNAMIC_FAMILY_ACCEPTANCE_CLOSURE__DYNAMIC_MATERIAL_CONDITION_CLOSURE__AND_INDEPENDENT_SOURCE_UNIVERSE_SEAL__NO_FIXED_PREDICATE_DENOMINATOR_IS_TERMINAL_SUFFICIENT",
     }
 
 def evaluate_live()->dict[str,Any]:
     docs={k:_load(v) for k,v in PATHS.items()}
     shas={v:_git_blob_sha(v) for v in PATHS.values()}
+    receipt_sha=None
+    source_universe=docs["material_condition_registry"].get("source_universe")
+    if isinstance(source_universe,Mapping) and source_universe.get("sealed") is True:
+        receipt=source_universe.get("independent_seal_receipt")
+        if isinstance(receipt,Mapping) and isinstance(receipt.get("path"),str):
+            try:
+                receipt_sha=_git_blob_sha(receipt["path"])
+            except (FileNotFoundError, OSError):
+                receipt_sha=None
     return evaluate_documents(docs["authority"],docs["closure"],docs["matrix"],docs["atomic_bindings"],
-                              docs["predicate_registry"],docs["target_envelope"],shas)
+                              docs["predicate_registry"],docs["target_envelope"],shas,
+                              docs["material_condition_registry"],docs["material_condition_evidence"],
+                              receipt_sha)
 
 def main()->int:
     out=evaluate_live(); print(json.dumps(out,indent=2,sort_keys=True))

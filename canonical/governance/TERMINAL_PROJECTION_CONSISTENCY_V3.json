@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROJECTION_CONSISTENCY_V3",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CONDITION_AWARE_OPEN_WORLD_FINALITY_GUARD__PR_2088_VERIFICATION_PENDING__ZERO_CREDIT",
+  "objective": "Make the live terminal projection count-generic and condition-aware so no finite atomic-predicate denominator can authorize literal terminal finality while registered material conditions or target-discovery completeness remain open.",
+  "logical_basis": {
+    "open_world_boundary": {
+      "path": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+      "git_blob_sha": "2476ab2d8220994d7858c80409b563e1582c88e6"
+    },
+    "literal_exhaustiveness_theorem": {
+      "path": "canonical/governance/LITERAL_ALL_CAPABILITY_UNIVERSE_EXHAUSTIVENESS_THEOREM_V1.json",
+      "git_blob_sha": "2ee40ca11e58f19b34fc8cd1bb849a4b4cf08ec1"
+    },
+    "public_source_universe": {
+      "path": "canonical/governance/OPUS55_PUBLIC_CAPABILITY_SOURCE_UNIVERSE_V1.json",
+      "git_blob_sha": "26814f5bad298e1d73b257f5289051744ca381f3"
+    },
+    "known_basis_repair_cut": {
+      "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V3.json",
+      "git_blob_sha": "09503a3485a101b45f29c17d6af4f8c488351aad"
+    }
+  },
+  "runtime": {
+    "path": "canonical/runtime/terminal_projection_consistency_v1.py",
+    "git_blob_sha": "aab1b6973fd38fe5273f84a5eaa87e9a4162a738"
+  },
+  "tests": {
+    "path": "canonical/tests/test_terminal_projection_consistency_v1.py",
+    "git_blob_sha": "0f94788b4bb68317ba0605bb42c1fa22d84cd93c"
+  },
+  "workflow": {
+    "path": ".github/workflows/verify-terminal-projection-consistency.yml",
+    "git_blob_sha": "a70fc8af46828827fd403652b01a29a01b4edc85"
+  },
+  "material_condition_gate": {
+    "registry_path": "canonical/governance/OPUS55_MATERIAL_CONDITION_REGISTRY_V1.json",
+    "registry_git_blob_sha": "9248a6d848aa43b9cdd8877bf8a8f0bad7563758",
+    "evidence_path": "canonical/governance/OPUS55_MATERIAL_CONDITION_EVIDENCE_BINDINGS_V1.json",
+    "evidence_git_blob_sha": "5b7371fa97afdecce1360b0be157367fa42da03e",
+    "runtime_path": "canonical/runtime/material_condition_closure_v1.py",
+    "runtime_git_blob_sha": "283f3870c2c90a6d60e8f0013dce2bcfd33a4dd9",
+    "tests_path": "canonical/tests/test_material_condition_closure_v1.py",
+    "tests_git_blob_sha": "50d66534eed5f44374b1c392f1c2875d479091da"
+  },
+  "derivation_rule": "LITERAL_TERMINAL_FINALITY_REQUIRES_LIVE_FAMILY_AND_ATOMIC_ACCEPTANCE_CLOSURE__ALL_REGISTERED_MATERIAL_CONDITIONS_PROVED_SCOPE_COMPLETE__AND_INDEPENDENT_TARGET_SOURCE_UNIVERSE_SEAL__NO_FIXED_N_OF_N_ACCEPTANCE_DENOMINATOR_IS_TERMINAL_SUFFICIENT",
+  "current_effect": {
+    "current_acceptance_credit_delta": 0,
+    "current_family_credit_delta": 0,
+    "current_capability_credit_delta": 0,
+    "current_ownership_credit_delta": 0,
+    "terminal_goal_achieved": false,
+    "reason": "LIVE_ACCEPTANCE_REMAINS_OPEN__REGISTERED_MATERIAL_CONDITIONS_REMAIN_OPEN__TARGET_DISCOVERY_COMPLETENESS_REMAINS_UNPROVED"
+  },
+  "hard_rules": [
+    "NO_MAGIC_ATOMIC_PREDICATE_COUNT_IN_RUNTIME",
+    "NEW_MATERIAL_CONDITIONS_EXTEND_DATA_NOT_CODE",
+    "PROVED_WITHOUT_SCOPE_COMPLETE_DOES_NOT_CLOSE_A_CONDITION",
+    "ALL_KNOWN_CONDITIONS_CLOSED_DOES_NOT_SEAL_AN_UNSEALED_SOURCE_UNIVERSE",
+    "AUTHORITY_TERMINAL_TRUE_FAILS_CLOSED_IF_ACCEPTANCE_OR_MATERIAL_CONDITION_GATE_IS_OPEN",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT_FROM_THIS_GUARD",
+    "SOURCE_UNIVERSE_SEAL_REQUIRES_CONTENT_ADDRESSED_INDEPENDENT_PASS_RECEIPT_RECOMPUTED_FROM_THE_LIVE_FILE"
+  ],
+  "verification": {
+    "pull_request": 2088,
+    "state": "PENDING_CURRENT_GITHUB_ACTIONS_RUN",
+    "independent_public_runner_pass": false
+  },
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}

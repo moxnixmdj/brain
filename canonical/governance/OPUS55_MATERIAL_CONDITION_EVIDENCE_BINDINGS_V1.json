@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_MATERIAL_CONDITION_EVIDENCE_BINDINGS_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_FAIL_CLOSED__NO_MATERIAL_CONDITION_PROMOTION_WITHOUT_EXPLICIT_SCOPE_COMPLETE_BINDING__ZERO_CREDIT",
+  "registry": "canonical/governance/OPUS55_MATERIAL_CONDITION_REGISTRY_V1.json",
+  "claims": [],
+  "rule": "ABSENCE_OF_AN_EXPLICIT_PROVED_SCOPE_COMPLETE_CLAIM_MEANS_OPEN__NEVER_INFER_CONDITION_PARITY_FROM_FAMILY_ACCEPTANCE_OR_BENCHMARK_ADJACENCY",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
