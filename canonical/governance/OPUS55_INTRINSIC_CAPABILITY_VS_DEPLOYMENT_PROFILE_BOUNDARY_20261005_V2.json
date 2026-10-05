@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_INTRINSIC_CAPABILITY_VS_DEPLOYMENT_PROFILE_BOUNDARY_20261005_V2",
   "date": "2026-10-05",
-  "status": "CANDIDATE__GOAL_PRESERVING_CAUSAL_TARGET_REPAIR__PROFILE_SWEEP_FOR_DISCOVERY_WITH_ACTOR_ATTRIBUTION__EXTERNAL_BACKENDS_AND_FALLBACKS_EXCLUDED_FROM_INTRINSIC_CREDIT__ZERO_CREDIT",
+  "status": "CANDIDATE__GOAL_PRESERVING_CAUSAL_TARGET_REPAIR__PROFILE_SWEEP_FOR_DISCOVERY_WITH_ACTOR_ATTRIBUTION__EXTERNAL_BACKENDS_AND_FALLBACKS_EXCLUDED_FROM_INTRINSIC_CREDIT__ZERO_CREDIT__NO_AUTHORITY",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "objective": "Resolve target identity without accidentally treating external tool computation, fallback-model behavior, or wrapper safeguards as intrinsic Claude Opus 5.5 capability. Use all authorized first-party deployment profiles as discovery/evidence lenses while crediting only behavior causally attributable to the Opus 5.5 policy.",
   "authorities": [
@@ -133,7 +133,7 @@
   ],
   "accounting": {
     "incremental_spend_usd": 0,
-    "new_reality_units_consumed": 2,
+    "new_reality_units_consumed": 0,
     "terminal_cases_consumed": 0,
     "acceptance_credit_delta": 0,
     "family_credit_delta": 0,
@@ -143,6 +143,15 @@
   "scheduling_authority": false,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": true,
-  "independent_verification_required": true
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "authority_repair": {
+    "date": "2026-10-05",
+    "reason": "THIS_DOCUMENT_IS_A ZERO_CREDIT TARGET_SEMANTICS CANDIDATE BASED ON PUBLIC_FIRST_PARTY_EVIDENCE; IT HAS NO SEPARATE EXECUTION OR FRESH_REALITY ACTIVATION AND CANNOT OVERRIDE CURRENT_TERMINAL_AUTHORITY.",
+    "effective_rule": "PUBLIC_TARGET_DISCOVERY_AND_CAUSAL_ATTRIBUTION_ANALYSIS_CONSUME_ZERO_TERMINAL_REALITY_UNITS; ANY FUTURE EMPIRICAL OR TERMINAL REALITY REQUIRES A SEPARATE CONTENT_ADDRESSED INDEPENDENTLY VERIFIED AUTHORITY.",
+    "prior_fields_quarantined": [
+      "fresh_reality_authority=true",
+      "new_reality_units_consumed=2"
+    ]
+  }
 }
