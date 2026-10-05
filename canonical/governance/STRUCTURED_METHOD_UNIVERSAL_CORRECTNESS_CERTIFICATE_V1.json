@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_UNIVERSAL_CORRECTNESS_CERTIFICATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__UNIVERSAL_FORMAL_CORRECTNESS_AND_OBJECTIVE_CEILING__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "basis_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+  "exact_candidate_blobs": {
+    "canonical/governance/STRUCTURED_METHOD_UNIVERSAL_CORRECTNESS_RELATION_V1.json": "4e7c2c43cae956ce8eadf29ae04165ed2c9e77a7",
+    "canonical/runtime/structured_method_universal_correctness_certificate_v1.py": "68b74726f8b95877b786309c1b51d665929478da",
+    "canonical/tests/test_structured_method_universal_correctness_certificate_v1.py": "47e65b23bbd55e2130c3f486d192f39495428cb2",
+    "canonical/runtime/structured_method_normalized_rule_graph_v3.py": "79d3896818b03223348f05adf4fdcd574f6f355e",
+    "canonical/runtime/structured_method_normalized_rule_oracle_v3.py": "5d92b1360fbb1bb27baacc8a04adb3744abf690c",
+    "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json": "1db04e3c2c523dfe5f2ebe719b7c63dc9ccd808e",
+    "canonical/verification/STRUCTURED_METHOD_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "5325382e88f003b5685d9da13df321c23829174f",
+    "canonical/verification/STRUCTURED_METHOD_NORMALIZED_RULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "1d6159334bf8e7067f5cb8d31ae0f25b7bb473c3"
+  },
+  "candidate_theorem": {
+    "universal_correctness_over_admissible_finite_normalized_rule_tasks": true,
+    "compiler_oracle_state_bisimulation": true,
+    "finite_pending_rule_induction": true,
+    "invalid_cycle_or_unresolved_dependency_fails_closed": true,
+    "every_oracle_compared_structural_field_equal": true,
+    "brain_value": 1,
+    "theoretical_upper_bound": 1,
+    "empirical_generalization_used": false
+  },
+  "scope_boundary": {
+    "scope_already_independently_closed": true,
+    "unresolved_scope_dimensions": 0,
+    "semantic_extraction_of_unstated_or_implicit_rules": "OUTSIDE_CONTRACT_AND_NOT_CLAIMED",
+    "operator_semantics": "UPSTREAM_NORMALIZED_INPUT",
+    "finite_normalized_rule_graph_size": "ARBITRARY"
+  },
+  "consequence_if_independently_verified": {
+    "leaf_state": "SCOPE_COMPLETE_OBJECTIVE_CEILING_ELIGIBLE_FOR_DISCHARGE",
+    "surviving_leaf": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "affected_public_bar_scope_repair_family": "ADVANCED_AGENTIC_CODING",
+    "removable_leaf_occurrence_count": 1,
+    "unique_surviving_scope_leaf_count_before": 7,
+    "unique_surviving_scope_leaf_count_after_candidate": 6,
+    "fresh_reality_units_required": 0,
+    "terminal_replay_required": false,
+    "matched_opus_case_level_comparator_required": false
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_LEDGER_MUTATION_FROM_THIS_CANDIDATE",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_BEFORE_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_AND_SEPARATE_REDUCTION",
+    "NO_CLAIM_ABOUT_NATURAL_LANGUAGE_RULE_EXTRACTION",
+    "NO_CLAIM_ABOUT_EXECUTING_OR_NUMERICALLY_VALIDATING_OPAQUE_OPERATOR_SEMANTICS",
+    "NO_FINITE_TERMINAL_SAMPLE_USED_AS_UNIVERSAL_PROOF",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "next": "RUN_INDEPENDENT_PUBLIC_RUNNER_ON_EXACT_BLOBS__IF_PASS_RUN_SEPARATE_SCOPE_REPAIR_REDUCTION_AND_RECOMPUTE_SURVIVING_LEAF_FRONTIER"
+}
