@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_QWEN3_VL4B_VISION_ACQUISITION_ROUTE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PUBLIC_OPEN_WEIGHT_MULTIMODAL_ROUTE_IDENTIFIED__ZERO_CREDIT__LOCAL_FIT_AND_CHARTOGRAPHY_THRESHOLD_UNPROVED",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "causal_blocker": "CURRENT_BRAIN_AUDIT_HAS_NO_VERIFIED_GENERIC_CHART_IMAGE_INPUT_AND_REASONING_ROUTE_BEYOND_OCR_STYLE_SURFACES",
+  "donor": {
+    "model": "Qwen/Qwen3-VL-4B-Instruct",
+    "provider": "Qwen",
+    "huggingface_revision": "ebb281ec70b05090aa6165b016eac8ec08e71b17",
+    "public": true,
+    "gated": false,
+    "license": "apache-2.0",
+    "pipeline_tag": "image-text-to-text",
+    "model_type": "qwen3_vl",
+    "parameter_count": 4437815808,
+    "stored_bf16_bytes": 8875719344,
+    "official_transformers_interface": "AutoProcessor + AutoModelForMultimodalLM",
+    "native_image_input": true,
+    "official_local_serving_routes": [
+      "TRANSFORMERS",
+      "VLLM",
+      "SGLANG",
+      "DOCKER_MODEL_RUNNER"
+    ]
+  },
+  "source_evidence": [
+    "https://huggingface.co/api/models/Qwen/Qwen3-VL-4B-Instruct",
+    "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct/tree/main"
+  ],
+  "scheduler_effect_if_independently_verified": [
+    "DELETE_CLAIM_THAT_NO_PUBLIC_ZERO_LICENSE_COST_GENERIC_IMAGE_TEXT_MODEL_ROUTE_EXISTS",
+    "PRESERVE_REQUIREMENT_TO_VERIFY_EXACT_BRAIN_INTERNALIZED_EXECUTION_SUBJECT",
+    "PRESERVE_REQUIREMENT_TO_VERIFY_CHART_IMAGE_REASONING_ON_SCOPE_RELEVANT_NONTERMINAL_EVIDENCE",
+    "PRESERVE_CHARTOGRAPHY_89_THRESHOLD_CERTIFICATE",
+    "PRESERVE_PROJECT_SPECIFIC_GEMINI_JUDGE_CAPACITY_RECEIPT"
+  ],
+  "local_execution_fit": {
+    "bf16_full_gpu_fit": "NOT_PROVED__STORED_WEIGHT_BYTES_EXCEED_8GB_VRAM_CLASS",
+    "candidate_routes": [
+      "CPU_OR_SYSTEM_RAM_OFFLOAD",
+      "8_BIT_OR_4_BIT_QUANTIZATION"
+    ],
+    "quantization_rule": "ANY_QUANTIZED_OR_TRANSFORMED_VARIANT_IS_A_NEW_EXECUTION_SUBJECT_AND_INHERITS_NO_PERFORMANCE_CREDIT",
+    "current_fit_verdict": "UNBOUND_UNTIL_AUTHORIZED_DEVICE_OR_OTHER_ZERO_COST_CARRIER_IS_ONLINE_AND_OBSERVED"
+  },
+  "minimum_next_actions": [
+    "PIN_EXACT_WEIGHT_AND_PROCESSOR_MANIFEST",
+    "WHEN_ZERO_COST_CARRIER_AVAILABLE_RUN_ONE_NONTERMINAL_IMAGE_TEXT_SMOKE_AND_RESOURCE_PREFLIGHT",
+    "IF_QUANTIZED_OR_OFFLOADED_BIND_EXACT_TRANSFORMED_SUBJECT_AND_VERIFY_OUTPUT_ROUTE",
+    "RUN_SCOPE_RELEVANT_PUBLIC_OR_NONTERMINAL_CHART_REASONING_QUALIFICATION_WITHOUT_READING_CHARTOGRAPHY_TERMINAL_CASES",
+    "ONLY_THEN_BIND_THIN_OFFICIAL_CHARTOGRAPHY_ADAPTER"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CHARTOGRAPHY_GE_89",
+    "NO_CLAIM_MODEL_FITS_8GB_VRAM_AS_BF16",
+    "NO_CLAIM_QUANTIZATION_PRESERVES_CAPABILITY",
+    "NO_CLAIM_GENERAL_VISION_MODEL_IS_ALREADY_BRAIN_OWNED_CAPABILITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
