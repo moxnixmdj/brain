@@ -10,8 +10,19 @@ _ACTIVE_CONTINUOUS_OBS_CONTEXT=None
 _ACTIVE_CONTINUOUS_OBS_MODULE=None
 _ACTIVE_CONTINUOUS_OBS_MISSION_ID=None
 
+_EXTERNAL_TOOL_BRIDGE_KINDS=frozenset({
+    "urlopen",
+    "http_get",
+    "planner",
+    "package_name_search",
+    "python_source_tree",
+    "pypi_wheel_closure",
+})
+
 def _authorize_external_information(kind,payload):
     raw_kind=str(kind)
+    if raw_kind not in _EXTERNAL_TOOL_BRIDGE_KINDS:
+        raise Blocker("EXTERNAL_TOOL_KIND_UNREGISTERED:"+raw_kind)
     # Information-authority routes must be observational only.  In particular,
     # urllib.Request can silently turn a data-bearing request into POST, while
     # the old bridge classified every "urlopen" as EXACT_FETCH.  Reject any
