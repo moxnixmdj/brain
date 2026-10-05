@@ -180,7 +180,8 @@
         "packed_correct": 11,
         "fp32_accuracy": 0.55,
         "packed_accuracy": 0.55,
-        "same_carrier_pass": true
+        "same_carrier_pass": true,
+        "independent_provider_pass": true
       },
       "fresh_holdout_v2": {
         "cases": 100,
@@ -195,7 +196,17 @@
         "independent_provider_verified": false
       },
       "persistent_learned_byte_rung_effect": "NONE__CURRENT_RUNG_REMAINS_ZERO__THIS_IS_A_CONTINGENCY_PROOF_NOT_A_RUNG_ADVANCE",
-      "deduction": "A_REAL_COMPLETE_99_999_997_BYTE_UNICHART_SUBJECT_PRESERVED_BOUNDED_PUBLIC_CHARTQA_CAPABILITY_WITHIN_THE_FROZEN_5_POINT_NONINFERIORITY_MARGIN_ON_A_FRESH_100_CASE_HOLDOUT_AND_WAS_REGENERATED_ON_A_DISTINCT_ISOLATED_CARRIER__THIS_PROVES_BOUNDED_SUB100MB_CHART_QA_CAPABILITY_PRESERVATION_BUT_NOT_CHARTOGRAPHY_GE_89_OPEN_WORLD_VISION_OR_FULL_H100"
+      "deduction": "A_REAL_COMPLETE_99_999_997_BYTE_UNICHART_SUBJECT_PRESERVED_BOUNDED_PUBLIC_CHARTQA_CAPABILITY_WITHIN_THE_FROZEN_5_POINT_NONINFERIORITY_MARGIN_ON_A_FRESH_100_CASE_HOLDOUT_AND_WAS_REGENERATED_ON_A_DISTINCT_ISOLATED_CARRIER__THIS_PROVES_BOUNDED_SUB100MB_CHART_QA_CAPABILITY_PRESERVATION_BUT_NOT_CHARTOGRAPHY_GE_89_OPEN_WORLD_VISION_OR_FULL_H100",
+      "provider_diverse_verification": {
+        "status": "GITHUB_HOSTED_V1_FRESH20_PASS",
+        "verification": "canonical/verification/H100_UNICHART_FRESH_CAPABILITY_V1_GITHUB_PROVIDER_VERIFICATION_20261005_V1.json",
+        "cases": 20,
+        "fp32_correct": 11,
+        "packed_correct": 11,
+        "packed_minus_fp32_accuracy": 0,
+        "exact_pack_sha_reproduced": true,
+        "scope_note": "PROVIDER_DIVERSE_VERIFICATION_APPLIES_TO_V1_20_CASE_HOLDOUT_ONLY__V2_100_CASE_PROVIDER_DIVERSE_REPLAY_REMAINS_UNPROVED"
+      }
     },
     "universal_proposal_probability_bound": {
       "status": "SECOND_ISOLATED_CARRIER_FORMAL_PASS__UNIFORM_NONCOLLAPSE_PROVED_IMPOSSIBLE__COMPLEXITY_CONDITIONED_PREFIX_SEARCH_BOUND_VERIFIED",
@@ -707,7 +718,7 @@
     "chartography_sub100mb_capability_preservation_proved": true,
     "chartography_sub100mb_capability_scope": "BOUNDED_PUBLIC_CHARTQA_ONLY__100_CASE_FRESH_HOLDOUT__NOT_CHARTOGRAPHY_GE_89__NOT_OPEN_WORLD_VISION",
     "chartography_sub100mb_independent_second_carrier_verified": true,
-    "chartography_sub100mb_independent_provider_verified": false,
+    "chartography_sub100mb_independent_provider_verified": true,
     "uniform_open_world_proposal_mass_noncollapse_possible": false,
     "uniform_open_world_proposal_mass_noncollapse_impossibility_proved": true,
     "complexity_conditioned_prefix_search_positive_mass_proved": true,
@@ -771,7 +782,9 @@
     "safe_typed_network_external_service_acquisition_verified": true,
     "safe_typed_network_external_service_scope": "PINNED_READ_ONLY_HTTPS_GET_TO_RAW_GITHUB_CONTENT__LITERAL_ENDPOINTS__EXACT_RESPONSE_HASH",
     "verified_read_only_network_tool_registry_v1": true,
-    "safe_authenticated_mutating_external_service_acquisition_verified": false
+    "safe_authenticated_mutating_external_service_acquisition_verified": false,
+    "chartography_sub100mb_independent_provider_verification_scope": "V1_20_CASE_FRESH_HOLDOUT_ONLY",
+    "chartography_sub100mb_v2_100_case_independent_provider_verified": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
