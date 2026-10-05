@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TOOLATHLON_TOOL_DISCOVERY_SCOPE_CUT_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__PUBLIC_HARNESS_SCOPE_CUT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "benchmark": {
+    "repository": "hkust-nlp/Toolathlon",
+    "frozen_commit": "9be8d8fe07a497b18ee61e3f2ae694e9797f39eb",
+    "finalpool_tree_sha": "0e6db218108c4666f3cdaa8d1ab976ab4807617c",
+    "task_count": 108
+  },
+  "public_harness_observations_to_verify": [
+    "ALL_108_TASKS_HAVE_TASK_CONFIG_JSON_CONTAINING_NEEDED_MCP_SERVERS",
+    "TASK_AGENT_CONNECTS_ONLY_TASK_CONFIG_NEEDED_MCP_SERVERS_BEFORE_AGENT_SETUP",
+    "TASK_AGENT_CALLS_GET_ALL_TOOLS_BEFORE_TASK_EXECUTION",
+    "THE_RESULTING_CONNECTED_MCP_SERVERS_AND_LOCAL_TOOLS_ARE_BOUND_INTO_THE_AGENT_TOOL_SURFACE"
+  ],
+  "scope_relation": {
+    "verdict": "PARTIAL_STRICT_SUBSET__SUPPLEMENT_REQUIRED",
+    "represented_directly": [
+      "REAL_WORLD_LONG_HORIZON_TOOL_EXECUTION",
+      "SELECTION_AND_USE_FROM_A_FRESH_TASK_SPECIFIC_MCP_TOOL_SURFACE",
+      "END_STATE_EXECUTION_BASED_TERMINAL_SUCCESS"
+    ],
+    "not_directly_represented": [
+      "BRAIN_OWNED_DISCOVERY_SOURCE_SELECTION_BEYOND_THE_TASK_CONFIG_PREDECLARED_MCP_SERVER_SET",
+      "DISCOVERY_SOURCE_COMPLETENESS_OR_EXHAUSTION",
+      "A_BRAIN_DISCOVER_ACTION_THAT_EXPANDS_THE_SERVER_OR_TOOL_IDENTITY_UNIVERSE_AFTER_THE_AGENT_LOOP_BEGINS"
+    ],
+    "reason": "The benchmark harness predeclares each tasks MCP server set, connects those servers, enumerates all available tools, and supplies that tool surface to the agent before task execution. This can test route choice over fresh unseen tools, but it cannot by itself prove the Brain-owned DISCOVER-source behavior required by the frozen unknown/changing-tool-ecosystem contract."
+  },
+  "composition_consequence": {
+    "toolathlon_role_preserved": "REAL_WORLD_FIXED_BAR_FOR_LONG_HORIZON_TERMINAL_TOOL_USE",
+    "internal_v2_role_preserved": "TRANSFER_VERSIONING_LEAST_COST_AUTHORITY_AND_ESCALATION",
+    "remaining_scope_leaf": "BRAIN_OWNED_UNKNOWN_TOOL_IDENTITY_OR_DISCOVERY_SOURCE_EXPANSION_PROOF",
+    "compatible_existing_route": "INDEPENDENT_VERIFIED_COMPLETE_DISCOVERY_INTERFACE_INSTANCE_SATISFYING_TOOL_DISCOVERY_COMPLETE_INTERFACE_CONTRACT_V1"
+  },
+  "scheduler_effect_if_verified": [
+    "DO_NOT_EXECUTE_TOOLATHLON_AS_A_STANDALONE_WHOLE_FAMILY_CLOSURE_ATTEMPT",
+    "PRESERVE_TOOLATHLON_AS_A_COMPONENT_OF_A_COMPOSITE_MATCHED_ROUTE",
+    "PRIORITIZE_THE_MISSING_BRAIN_OWNED_DYNAMIC_DISCOVERY_LEAF_BEFORE_ANY_FULL_108_TASK_RUN",
+    "ALLOW_A_FULL_TOOLATHLON_RUN_ONLY_AFTER_THE_COMPOSITE_ROUTE_CAN_CLOSE_THE_FROZEN_PROTOCOL_IF_THE_BAR_IS_MET"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_TOOLATHLON_IS_WEAK_OR_INVALID",
+    "NO_CLAIM_THAT_TOOLATHLON_TOOLS_ARE_KNOWN_TO_THE_MODEL_FROM_PRETRAINING",
+    "NO_CLAIM_THAT_TOOLATHLON_PROVIDES_ZERO_EVIDENCE_FOR_TOOL_DISCOVERY",
+    "NO_WHOLE_FAMILY_ACCEPTANCE",
+    "NO_TERMINAL_RESULT_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
