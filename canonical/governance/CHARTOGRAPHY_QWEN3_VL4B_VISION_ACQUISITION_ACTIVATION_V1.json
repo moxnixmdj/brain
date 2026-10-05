@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_QWEN3_VL4B_VISION_ACQUISITION_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__PUBLIC_SOURCE_ROUTE_EXISTENCE_VERIFIED__SCHEDULING_ONLY__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "subject": {
+    "path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_VISION_ACQUISITION_ROUTE_V1.json",
+    "git_blob_sha": "2c682676f05ef6b7568a9bc79530be4d1b352aff"
+  },
+  "verification": {
+    "path": "canonical/verification/CHARTOGRAPHY_QWEN3_VL4B_PUBLIC_SOURCE_VERIFICATION_20261005_V1.json",
+    "mode": "PUBLIC_PRIMARY_SOURCE_RECOMPUTATION_PASS"
+  },
+  "scheduler_delta": {
+    "delete": [
+      "GENERIC_SEARCH_FOR_ANY_PUBLIC_ZERO_LICENSE_COST_GENERIC_IMAGE_TEXT_MODEL_ROUTE",
+      "TEXT_ONLY_AST​RA_ADAPTER_AS_IF_SUFFICIENT_FOR_CHARTOGRAPHY"
+    ],
+    "preserve": [
+      "EXACT_EXECUTION_SUBJECT_FIT_AND_RESOURCE_PREFLIGHT",
+      "NONTERMINAL_SCOPE_RELEVANT_CHART_IMAGE_REASONING_QUALIFICATION",
+      "PROJECT_SPECIFIC_GEMINI_3_5_FLASH_JUDGE_CAPACITY_RECEIPT",
+      "THIN_OFFICIAL_CHARTOGRAPHY_ADAPTER_AFTER_VISION_ROUTE_IS_PROVED",
+      "CHARTOGRAPHY_THRESHOLD_CERTIFICATE_GE_89"
+    ],
+    "current_best_route": "Qwen/Qwen3-VL-4B-Instruct@ebb281ec70b05090aa6165b016eac8ec08e71b17",
+    "bf16_full_gpu_fit": "UNPROVED_AND_NOT_ASSUMED_ON_8GB_VRAM_CLASS",
+    "transformed_variant_rule": "NEW_EXECUTION_SUBJECT__NO_INHERITED_PERFORMANCE_CREDIT"
+  },
+  "hard_nonclaims": [
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_VISION_DENSE_NONCHART_SCOPE_CREDIT",
+    "NO_CAPABILITY_OR_OWNERSHIP_PROMOTION",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
