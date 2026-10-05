@@ -34,9 +34,7 @@ def _authorize_external_information(kind,payload):
     verdict["mission_id"]=_ACTIVE_CONTINUOUS_OBS_MISSION_ID
     evidence_id=_ACTIVE_CONTINUOUS_OBS_MISSION_ID or "UNBOUND"
     p=EVID_DIR/f"{evidence_id}__INFORMATION_ADMISSION.jsonl"
-    p.parent.mkdir(parents=True,exist_ok=True)
-    with p.open("a",encoding="utf-8",newline="\n") as fh:
-        fh.write(json.dumps(verdict,sort_keys=True,separators=(",",":"))+"\n")
+    _append_admin_jsonl(p,verdict)
     if not verdict.get("pass"):
         raise Blocker(
             "CONTINUOUS_OBS_INFORMATION_BLOCKED:"
@@ -59,9 +57,73 @@ STATE_DIR=ROOT/"canonical"/"astra_runtime"/"state"
 EVID_DIR=ROOT/"canonical"/"astra_runtime"/"evidence"
 
 def utc(): return datetime.now(timezone.utc).isoformat()
-def writej(p,x):
-    p=pathlib.Path(p); p.parent.mkdir(parents=True,exist_ok=True)
+def _admin_destination_class(p):
+    p=pathlib.Path(p)
+    raw=p if p.is_absolute() else ROOT/p
+    lex=pathlib.Path(os.path.abspath(raw))
+    state_root=pathlib.Path(os.path.abspath(STATE_DIR))
+    evid_root=pathlib.Path(os.path.abspath(EVID_DIR))
+    if lex.parent==state_root and lex.suffix==".json":
+        return "ASTRA_STATE_JSON"
+    if lex.parent==evid_root and lex.suffix==".json":
+        return "ASTRA_EVIDENCE_JSON"
+    if lex.parent==evid_root and lex.suffix==".jsonl":
+        return "ASTRA_EVIDENCE_JSONL"
+    return None
+
+def _admin_expected_prestate(p):
+    p=pathlib.Path(p)
+    if p.is_symlink() or p.parent.is_symlink() or not p.exists():
+        return "ABSENT"
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+
+def _typed_admin_commit(p,payload,destination_class,operation):
+    p=pathlib.Path(p)
+    raw=p if p.is_absolute() else ROOT/p
+    lex=pathlib.Path(os.path.abspath(raw))
+    root_lex=pathlib.Path(os.path.abspath(ROOT))
+    try:
+        rel=lex.relative_to(root_lex).as_posix()
+    except ValueError as exc:
+        raise Blocker("TYPED_ADMIN_WRITE_PATH_OUTSIDE_ROOT") from exc
+    mod=_load_runtime_helper("root3_typed_durable_admin_write_v1")
+    plan=mod.build_plan(
+        operation=operation,
+        destination_class=destination_class,
+        path=rel,
+        payload=payload,
+        expected_pre_sha256=_admin_expected_prestate(lex),
+    )
+    return mod.commit(ROOT,plan,payload)
+
+def writej(p,x,admin_class=None):
+    p=pathlib.Path(p)
+    destination_class=_admin_destination_class(p)
+    if destination_class is not None:
+        if admin_class!=destination_class:
+            raise Blocker("TYPED_ADMIN_WRITE_EXPLICIT_CLASS_REQUIRED")
+        if destination_class not in {"ASTRA_STATE_JSON","ASTRA_EVIDENCE_JSON"}:
+            raise Blocker("TYPED_ADMIN_WRITE_REPLACE_CLASS_REQUIRED")
+        payload=(json.dumps(x,indent=2,sort_keys=True)+"\n").encode("utf-8")
+        _typed_admin_commit(p,payload,destination_class,"REPLACE")
+        return
+    if admin_class is not None:
+        raise Blocker("TYPED_ADMIN_CLASS_ON_NONADMIN_PATH")
+    p.parent.mkdir(parents=True,exist_ok=True)
     p.write_text(json.dumps(x,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+
+def write_statej(p,x):
+    return writej(p,x,admin_class="ASTRA_STATE_JSON")
+
+def write_evidencej(p,x):
+    return writej(p,x,admin_class="ASTRA_EVIDENCE_JSON")
+
+def _append_admin_jsonl(p,x):
+    p=pathlib.Path(p)
+    if _admin_destination_class(p)!="ASTRA_EVIDENCE_JSONL":
+        raise Blocker("TYPED_ADMIN_JSONL_DESTINATION_REQUIRED")
+    payload=(json.dumps(x,sort_keys=True,separators=(",",":"))+"\n").encode("utf-8")
+    return _typed_admin_commit(p,payload,"ASTRA_EVIDENCE_JSONL","APPEND_JSONL")
 def readj(p): return json.loads(pathlib.Path(p).read_text(encoding="utf-8"))
 
 DECLARED_CROSS_STEP_CONTEXT_MODE="DECLARED_CONTENT_BOUND_V1"
@@ -429,6 +491,13 @@ def _safe_repo_path(raw):
     p=(ROOT/value).resolve()
     if p != ROOT.resolve() and ROOT.resolve() not in p.parents:
         raise Blocker("PATH_OUTSIDE_REPOSITORY")
+    return p
+
+def _safe_repo_mutation_path(raw):
+    p=_safe_repo_path(raw)
+    for reserved in (STATE_DIR.resolve(),EVID_DIR.resolve()):
+        if p==reserved or reserved in p.parents:
+            raise Blocker("ADMIN_RUNTIME_PATH_RESERVED_FOR_TYPED_DRIVER")
     return p
 
 def _load_bound_capability_registry():
@@ -1053,7 +1122,7 @@ def _goal_action(action):
                 if len(hits)>=80: break
         return {"type":typ,"query":q,"hits":hits,"truncated":len(hits)>=80}
     if typ=="write_json_records":
-        output=_safe_repo_path(args.get("output_path",""))
+        output=_safe_repo_mutation_path(args.get("output_path",""))
         fields=args.get("fields")
         records=args.get("records")
         if (
@@ -1350,8 +1419,8 @@ def _goal_action(action):
         }
     if typ=="invoke_capability_until":
         template=args.get("action")
-        attempts_dir=_safe_repo_path(args.get("attempts_dir",""))
-        result_path=_safe_repo_path(args.get("result_path",""))
+        attempts_dir=_safe_repo_mutation_path(args.get("attempts_dir",""))
+        result_path=_safe_repo_mutation_path(args.get("result_path",""))
         max_attempts=int(args.get("max_attempts") or 0)
         value_key=str(args.get("value_key") or "")
         match_chars=set(str(args.get("match_chars") or "").lower())
@@ -1490,7 +1559,7 @@ def _goal_action(action):
         fallback=args.get("fallback_action")
         primary_condition=args.get("primary_postcondition")
         fallback_condition=args.get("fallback_postcondition")
-        decision_path=_safe_repo_path(args.get("decision_path",""))
+        decision_path=_safe_repo_mutation_path(args.get("decision_path",""))
         if (
             not isinstance(primary,dict) or primary.get("type")!="invoke_capability"
             or not isinstance(fallback,dict) or fallback.get("type")!="invoke_capability"
@@ -1621,7 +1690,7 @@ def _goal_action(action):
 
     if typ=="invoke_capability_fanout":
         source=_safe_repo_path(args.get("source_path",""))
-        manifest_path=_safe_repo_path(args.get("manifest_path",""))
+        manifest_path=_safe_repo_mutation_path(args.get("manifest_path",""))
         if not source.is_file():
             return {"type":typ,"output_verified":False,"error":"FANOUT_SOURCE_MISSING"}
         wrapper=json.loads(source.read_text(encoding="utf-8"))
@@ -1666,7 +1735,7 @@ def _goal_action(action):
             if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",expected_field):
                 return {"type":typ,"output_verified":False,"error":"FANOUT_ITEM_FALLBACK_EXPECTED_FIELD_INVALID"}
 
-            output_dir=_safe_repo_path(output_dir_raw)
+            output_dir=_safe_repo_mutation_path(output_dir_raw)
             attempt_dir=output_dir/".primary_attempts"
             output_dir.mkdir(parents=True,exist_ok=True)
             attempt_dir.mkdir(parents=True,exist_ok=True)
@@ -1720,7 +1789,7 @@ def _goal_action(action):
                 if primary_valid:
                     primary_valid_count+=1
                     src=_safe_repo_path(primary_out)
-                    dst=_safe_repo_path(final_out)
+                    dst=_safe_repo_mutation_path(final_out)
                     if dst.exists():
                         dst.unlink()
                     src.replace(dst)
@@ -1729,7 +1798,7 @@ def _goal_action(action):
                 else:
                     fallback_count+=1
                     try:
-                        dst=_safe_repo_path(final_out)
+                        dst=_safe_repo_mutation_path(final_out)
                         if dst.exists():
                             dst.unlink()
                         invoke_nested(fallback,item,item_id,final_out)
@@ -1808,7 +1877,7 @@ def _goal_action(action):
                         or not isinstance(template.get("args"),dict)
                     ):
                         return {"type":typ,"output_verified":False,"error":"FANOUT_ITEM_ACTION_SPEC_INVALID","id":item_id}
-                    output_dir=_safe_repo_path(output_dir_raw)
+                    output_dir=_safe_repo_mutation_path(output_dir_raw)
                     output_dir.mkdir(parents=True,exist_ok=True)
                     out=str((output_dir/(item_id+extension)).relative_to(ROOT))
                     def subst(v):
@@ -1849,7 +1918,7 @@ def _goal_action(action):
             }
 
         # Legacy conditional mode remains supported for already-verified plans.
-        output_dir=_safe_repo_path(args.get("output_dir",""))
+        output_dir=_safe_repo_mutation_path(args.get("output_dir",""))
         value_field=str(args.get("value_field") or "")
         threshold=int(args.get("max_length") or 0)
         output_dir.mkdir(parents=True,exist_ok=True)
@@ -2158,7 +2227,7 @@ def _goal_action(action):
     if typ=="derive_grouped_records":
         dimension_path=_safe_repo_path(args.get("dimension_path",""))
         fact_path=_safe_repo_path(args.get("fact_path",""))
-        output_path=_safe_repo_path(args.get("output_path",""))
+        output_path=_safe_repo_mutation_path(args.get("output_path",""))
         dimension_key=str(args.get("dimension_key") or "")
         fact_key=str(args.get("fact_key") or "")
         output_id_field=str(args.get("output_id_field") or "")
@@ -2443,7 +2512,7 @@ def _goal_action(action):
 
     if typ=="select_ranked_record":
         source_path=_safe_repo_path(args.get("source_path",""))
-        output_path=_safe_repo_path(args.get("output_path",""))
+        output_path=_safe_repo_mutation_path(args.get("output_path",""))
         order_by=list(args.get("order_by") or [])
         output_fields=list(args.get("output_fields") or [])
         try:
@@ -2557,7 +2626,7 @@ def _goal_action(action):
     if typ=="aggregate_runtime_json_arrays":
         dimension_path=_safe_repo_path(args.get("dimension_path",""))
         fact_path=_safe_repo_path(args.get("fact_path",""))
-        output_path=_safe_repo_path(args.get("output_path",""))
+        output_path=_safe_repo_mutation_path(args.get("output_path",""))
         dimension_key=str(args.get("dimension_key") or "")
         fact_key=str(args.get("fact_key") or "")
         output_id_field=str(args.get("output_id_field") or "")
@@ -2700,7 +2769,7 @@ def _goal_action(action):
     if typ=="join_runtime_json_arrays":
         left_path=_safe_repo_path(args.get("left_path",""))
         right_path=_safe_repo_path(args.get("right_path",""))
-        output_path=_safe_repo_path(args.get("output_path",""))
+        output_path=_safe_repo_mutation_path(args.get("output_path",""))
         left_key=str(args.get("left_key") or "")
         right_key=str(args.get("right_key") or "")
         left_entity=str(args.get("left_entity") or "left")
@@ -2876,7 +2945,7 @@ def _goal_action(action):
 
     if typ=="project_browser_result_json":
         source=_safe_repo_path(args.get("source_path",""))
-        output=_safe_repo_path(args.get("output_path",""))
+        output=_safe_repo_mutation_path(args.get("output_path",""))
         if not source.is_file():
             return {"type":typ,"error":"SOURCE_JSON_NOT_FOUND","path":str(args.get("source_path",""))}
         try:
@@ -3000,7 +3069,7 @@ def _goal_action(action):
 
     if typ=="extract_labeled_fields_from_rendered_source":
         source_path=_safe_repo_path(args.get("browser_result_path",""))
-        output_path=_safe_repo_path(args.get("output_path",""))
+        output_path=_safe_repo_mutation_path(args.get("output_path",""))
         specs=args.get("fields") or []
         if not source_path.is_file():
             return {"type":typ,"verified":False,"error":"SEMANTIC_EXTRACTION_SOURCE_MISSING"}
@@ -3124,7 +3193,7 @@ def _goal_action(action):
 
     if typ=="resolve_authority_identity":
         entity_name=str(args.get("entity_name") or "").strip()
-        output=_safe_repo_path(args.get("output_path",""))
+        output=_safe_repo_mutation_path(args.get("output_path",""))
         if not entity_name:
             return {"type":typ,"verified":False,"error":"AUTHORITY_ENTITY_NAME_REQUIRED"}
         search_url="https://www.wikidata.org/w/api.php?"+urllib.parse.urlencode({
@@ -3276,7 +3345,7 @@ def _goal_action(action):
 
     if typ=="discover_authoritative_web_source":
         query=str(args.get("query") or "").strip()
-        output=_safe_repo_path(args.get("output_path",""))
+        output=_safe_repo_mutation_path(args.get("output_path",""))
         authority_domains=args.get("authority_domains") or []
         if not query:
             return {"type":typ,"verified":False,"error":"SOURCE_DISCOVERY_QUERY_REQUIRED"}
@@ -3724,7 +3793,7 @@ def _goal_action(action):
 
     if typ=="fetch_json_knowledge":
         url=str(args.get("url") or "").strip()
-        output=_safe_repo_path(args.get("output_path",""))
+        output=_safe_repo_mutation_path(args.get("output_path",""))
         path_spec=args.get("json_path") or []
         if not url.startswith(("https://","http://")):
             return {"type":typ,"verified":False,"error":"KNOWLEDGE_URL_INVALID"}
@@ -3777,7 +3846,7 @@ def _goal_action(action):
 
     if typ=="assess_knowledge_consistency":
         evidence_paths=args.get("evidence_paths") or []
-        output=_safe_repo_path(args.get("output_path",""))
+        output=_safe_repo_mutation_path(args.get("output_path",""))
         max_age_s=args.get("max_age_s")
         if (
             not isinstance(evidence_paths,list) or not evidence_paths
@@ -3887,7 +3956,7 @@ def _goal_action(action):
 
     if typ=="materialize_supported_knowledge":
         assessment_path=_safe_repo_path(args.get("assessment_path",""))
-        output=_safe_repo_path(args.get("output_path",""))
+        output=_safe_repo_mutation_path(args.get("output_path",""))
         field_name=str(args.get("field_name") or "value").strip()
         if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",field_name):
             return {"type":typ,"output_verified":False,"error":"KNOWLEDGE_MATERIALIZE_FIELD_INVALID"}
@@ -4366,7 +4435,7 @@ def _load_controller_checkpoint(step,mission,actions):
     data["resume_count"]=int(data.get("resume_count") or 0)+1
     data["next_action_index"]=len(data.get("completed_actions") or [])
     data["updated_at_utc"]=utc()
-    writej(path,data)
+    write_statej(path,data)
     return path,data,True
 
 
@@ -4376,7 +4445,7 @@ def _write_controller_checkpoint(path,data,trace,status="IN_PROGRESS"):
     data["next_action_index"]=len(trace)
     data["status"]=status
     data["updated_at_utc"]=utc()
-    writej(path,data)
+    write_statej(path,data)
     return data
 
 
@@ -4538,7 +4607,7 @@ def _run_model_independent_goal(step, mission, goal):
                 capsule_path=EVID_DIR/(
                     checkpoint_path.stem+"__COMPOSITION_STATE_CAPSULE.json"
                 )
-                writej(capsule_path,composition_capsule)
+                write_evidencej(capsule_path,composition_capsule)
                 composition_summary={
                   "schema":"PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_RUNTIME_BINDING_V2",
                   "status":"PASS",
@@ -5221,7 +5290,7 @@ def _run_open_research_source_frontend(mission, goal, decomposition):
         ) from exc
     mid=str(mission.get("mission_id") or "UNKNOWN")
     path=EVID_DIR/f"{mid}__OPEN_RESEARCH_SOURCE_FRONTEND.json"
-    writej(path,result)
+    write_evidencej(path,result)
     return path,result
 
 
@@ -5245,7 +5314,7 @@ def _ground_plain_goal_to_bound_capabilities(mission, goal):
         ) from exc
     mid=str(mission.get("mission_id") or "UNKNOWN")
     path=EVID_DIR/f"{mid}__BOUND_CAPABILITY_GROUNDING.json"
-    writej(path,result)
+    write_evidencej(path,result)
     return path,result
 
 
@@ -5294,7 +5363,7 @@ def _compose_grounding_to_capability_problem(
         raise Blocker("GROUNDED_EXECUTABLE_COMPOSITION_VERIFY_FAILED:"+str(reason))
     mid=str(mission.get("mission_id") or "UNKNOWN")
     path=EVID_DIR/f"{mid}__GROUNDED_EXECUTABLE_COMPOSITION.json"
-    writej(path,composition)
+    write_evidencej(path,composition)
     return path,composition
 
 def _load_auto_capability_acquisition():
@@ -5362,7 +5431,7 @@ def _discover_unreachable_effects(mission, error):
     }
     mid=str(mission.get("mission_id") or "UNKNOWN")
     path=EVID_DIR/f"{mid}__CAPABILITY_ACQUISITION_GAP.json"
-    writej(path,evidence)
+    write_evidencej(path,evidence)
     return path,evidence
 
 def _render_bound_template(value, inputs):
@@ -5639,7 +5708,7 @@ def _write_goal_gap_classification(mission, subgoal, gap_class, compile_error):
       "policy":"ONLY_CAPABILITY_CANDIDATE_MAY_TRIGGER_EXTERNAL_CAPABILITY_ACQUISITION",
       "observed_at_utc":utc(),
     }
-    writej(path,evidence)
+    write_evidencej(path,evidence)
     return path,evidence
 
 
@@ -6035,7 +6104,7 @@ def _run_goal_unstamped(step, mission):
                   "status":"AUTO_ACQUISITION_DISPATCHED",
                   "observed_at_utc":utc()
                 }
-                writej(ep,evidence)
+                write_evidencej(ep,evidence)
                 verified_acquisition=_verify_and_promote_acquisition(dispatch)
                 compiled_after_acquisition=_compile_plain_goal(goal)
                 acquired_result=_run_compiled_plain_goal(
@@ -6074,7 +6143,7 @@ def _run_goal_unstamped(step, mission):
             else:
                 evidence["auto_acquisition"]=dispatch
                 evidence["status"]="AUTO_ACQUISITION_DISPATCHED"
-            writej(ep,evidence)
+            write_evidencej(ep,evidence)
             if dispatch is not None:
                 verified_acquisition=_verify_and_promote_acquisition(dispatch)
                 compiled_after_acquisition=_compile_plain_goal(goal)
@@ -6406,9 +6475,7 @@ def main():
         verdict["mission_id"]=mid
         verdict["mission_sha256"]=mission_sha256
         obs_path=EVID_DIR/f"{mid}__CONTINUOUS_OBS.jsonl"
-        obs_path.parent.mkdir(parents=True,exist_ok=True)
-        with obs_path.open("a",encoding="utf-8",newline="\n") as fh:
-            fh.write(json.dumps(verdict,sort_keys=True,separators=(",",":"))+"\n")
+        _append_admin_jsonl(obs_path,verdict)
         if not verdict.get("pass"):
             raise Blocker(
                 "CONTINUOUS_OBS_BLOCKED:"+"|".join(verdict.get("errors") or ["UNKNOWN"])
@@ -6449,7 +6516,7 @@ def main():
           "current_mission_sha256":mission_sha256,
           "observed_at_utc":utc()
         }
-        writej(EVID_DIR/f"{mid}__MISSION_DRIFT_BLOCKER.json",blocker)
+        write_evidencej(EVID_DIR/f"{mid}__MISSION_DRIFT_BLOCKER.json",blocker)
         print(json.dumps(blocker))
         return 5
     state["mission_path"]=mission_rel
@@ -6476,9 +6543,9 @@ def main():
                   "error":type(e).__name__+":"+str(e),
                   "observed_at_utc":utc()
                 }
-                writej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
+                write_evidencej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
                 state["status"]="BLOCKED"; state["blocker"]=blocker; state["updated_at_utc"]=utc()
-                writej(state_path,state)
+                write_statej(state_path,state)
                 print(json.dumps(blocker)); return 3
             rec={"step_index":j,"step_id":prior["id"],"ok":bool(ok),"result":result,
                  "rehydration":True,"completed_at_utc":utc()}
@@ -6490,16 +6557,16 @@ def main():
                   "adapter":prior["adapter"],"phase":"REHYDRATION",
                   "error":"VERIFICATION_FAILED","result":result,"observed_at_utc":utc()
                 }
-                writej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
+                write_evidencej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
                 state["status"]="BLOCKED"; state["blocker"]=blocker; state["updated_at_utc"]=utc()
-                writej(state_path,state)
+                write_statej(state_path,state)
                 print(json.dumps(blocker)); return 4
         if rehydrated:
             state.setdefault("rehydrations",[]).append({
               "at_utc":utc(),"before_step":state["next_step"],"steps":rehydrated
             })
             state["updated_at_utc"]=utc()
-            writej(state_path,state)
+            write_statej(state_path,state)
 
     for i in range(state["next_step"],len(mission["steps"])):
         step=mission["steps"][i]
@@ -6516,9 +6583,9 @@ def main():
               "adapter":adapter,"error":type(e).__name__+":"+str(e),
               "observed_at_utc":utc()
             }
-            writej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
+            write_evidencej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
             state["status"]="BLOCKED"; state["blocker"]=blocker; state["updated_at_utc"]=utc()
-            writej(state_path,state)
+            write_statej(state_path,state)
             print(json.dumps(blocker)); return 3
         rec={"step_index":i,"step_id":step["id"],"ok":bool(ok),"result":result,"completed_at_utc":utc()}
         state["history"].append(rec)
@@ -6529,9 +6596,9 @@ def main():
               "adapter":adapter,"error":"VERIFICATION_FAILED",
               "result":result,"observed_at_utc":utc()
             }
-            writej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
+            write_evidencej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
             state["status"]="BLOCKED"; state["blocker"]=blocker; state["updated_at_utc"]=utc()
-            writej(state_path,state)
+            write_statej(state_path,state)
             print(json.dumps(blocker)); return 4
         state["next_step"]=i+1
         # A previously blocked mission may later succeed after a verified
@@ -6540,11 +6607,11 @@ def main():
         state.pop("blocker",None)
         state["status"]="RUNNING"
         state["updated_at_utc"]=utc()
-        writej(state_path,state)
+        write_statej(state_path,state)
     _continuous_obs_revalidate("BEFORE_TERMINAL_RECEIPT")
     state.pop("blocker",None)
     state["status"]="COMPLETE"; state["completed_at_utc"]=utc()
-    writej(state_path,state)
+    write_statej(state_path,state)
     receipt={
       "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
       "mission_id":mid,"mission_path":a.mission,"mission_sha256":mission_sha256,
@@ -6554,7 +6621,7 @@ def main():
       "status":"COMPLETE","steps_completed":len(state["history"]),
       "state_sha256":sha_file(state_path),"completed_at_utc":utc()
     }
-    writej(EVID_DIR/f"{mid}__RECEIPT.json",receipt)
+    write_evidencej(EVID_DIR/f"{mid}__RECEIPT.json",receipt)
     print(json.dumps(receipt)); return 0
 
 if __name__=="__main__":
