@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_SEVEN_SURVIVING_LEAF_ZERO_REALITY_RECEIPT_SATURATION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__SEVEN_OF_SEVEN_HAVE_BEHAVIOR_BOUND_TERMINAL_PASS_RECEIPTS__SCOPE_COMPLETENESS_STILL_OPEN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SEVEN_SURVIVING_LEAF_ZERO_REALITY_RECEIPT_SATURATION_20261005_V1.json",
+    "git_blob_sha": "2ad6f6e4d367b0b73e019f677e3c7a0bb1ed815a"
+  },
+  "inputs": {
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "terminal_wave": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    },
+    "active_scope_fixed_point": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_ACTIVATION_V1.json"
+    }
+  },
+  "exact_leaf_set": [
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+  ],
+  "checks": {
+    "all_seven_ids_exist_in_current_behavioral_registry": true,
+    "direct_route_receipts": {
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001": "180/180_PASS",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001": "128/128_PASS",
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001": "150/150_PASS"
+    },
+    "parent_instrumentation": {
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001": "T1_AND_T3_LOAD_BEARING_DIRECT_INSTRUMENTATION_PASS",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001": "T0_T1_T2_T3_LOAD_BEARING_DIRECT_INSTRUMENTATION_PASS",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001": "T0_AND_T1_LOAD_BEARING_DIRECT_INSTRUMENTATION_PASS",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001": "T1_LOAD_BEARING_DIRECT_INSTRUMENTATION_PASS"
+    },
+    "all_parent_rows_parent_terminal_acceptance_pass": true,
+    "all_parent_rows_case_replaced_false": true,
+    "all_parent_rows_tuning_replay_false": true,
+    "all_parent_rows_result_to_runtime_feedback_false": true,
+    "terminal_wave_no_case_replacement": true,
+    "terminal_wave_no_tuning_replay": true,
+    "terminal_wave_result_to_runtime_feedback_during_wave_false": true,
+    "terminal_wave_direct_route_duplicate_execution_count_zero": true,
+    "behavior_credit_claimed_by_rows": false
+  },
+  "consequence": [
+    "NONE_OF_THE_SEVEN_LEAF_LABELS_JUSTIFIES_NEW_MECHANISM_ACQUISITION",
+    "NONE_OF_THE_SEVEN_JUSTIFIES_FRESH_TERMINAL_RERUN_WITHOUT_A_CONSTRUCTIVE_UNCOVERED_SCOPE_CELL",
+    "REMAINING_WORK_FOR_THE_SEVEN_IS_SCOPE_COMPLETENESS_OR_EXPLICIT_RESIDUAL_SCOPE_ONLY",
+    "ONE_SCOPE_COMPLETE_RECEIPT_MAY_FAN_OUT_ONLY_BY_EXACT_BEHAVIOR_IDENTITY"
+  ],
+  "hard_nonclaims": [
+    "FINITE_OR_PORTFOLIO_TERMINAL_PASS_DOES_NOT_PROVE_WHOLE_CONTRACT_SCOPE_COMPLETENESS",
+    "NO_ACCEPTANCE_PREDICATE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
