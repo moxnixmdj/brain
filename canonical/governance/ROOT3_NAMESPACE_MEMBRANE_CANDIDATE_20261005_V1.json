@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_NAMESPACE_MEMBRANE_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__DOCKER_NOT_REQUIRED_FOR_ZERO_AMBIENT_ROOT3_CONFINEMENT__LIVE_LOCAL_CANARY_PASS__EXACT_BRANCH_BYTES_FROZEN__ZERO_CREDIT__INDEPENDENT_REPLAY_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Replace the Docker-carrier dependency for the Root3 zero-ambient escape theorem with a direct Linux-kernel namespace membrane using one explicit broker file descriptor.",
+  "subject": {
+    "path": "canonical/tests/root3_namespace_membrane_canary_v1.py",
+    "git_blob_sha": "391a174d3a5cafc238bc2f281f4ae8c45cbd3e55",
+    "branch_commit_sha": "44cfcda592b1731d433697f45dfd16defc35dff6"
+  },
+  "construction": {
+    "isolation_primitives": [
+      "USER_NAMESPACE",
+      "MOUNT_NAMESPACE",
+      "NETWORK_NAMESPACE",
+      "PID_NAMESPACE",
+      "IPC_NAMESPACE",
+      "UTS_NAMESPACE",
+      "CHROOT_TO_TMPFS_ROOT",
+      "READ_ONLY_BIND_MOUNTS_FOR_SYSTEM_RUNTIME_AND_INPUT",
+      "PRIVATE_TMPFS_SCRATCH",
+      "NO_NEW_PRIVILEGES",
+      "EMPTY_CAPABILITY_BOUNDING_SET",
+      "EMPTY_INHERITABLE_CAPABILITIES",
+      "EMPTY_AMBIENT_CAPABILITIES",
+      "CPU_ADDRESS_SPACE_FILE_SIZE_OPEN_FD_AND_PROCESS_LIMITS"
+    ],
+    "deliberate_application_channel": "ONE_INHERITED_UNIX_SOCKETPAIR_BROKER_FD",
+    "ambient_channels_removed": [
+      "HOST_NETWORK_NAMESPACE",
+      "HOST_ABSTRACT_UNIX_SOCKET_NAMESPACE",
+      "HOST_FILESYSTEM_ROOT",
+      "HOST_ETC",
+      "HOST_DEV",
+      "HOST_PROC",
+      "HOST_SYS",
+      "HOST_HOME",
+      "UNDECLARED_INHERITED_FILE_DESCRIPTORS"
+    ]
+  },
+  "live_execution_observation": {
+    "kernel": "Linux 6.18.44 x86_64",
+    "result": "PASS",
+    "broker_fd_open": true,
+    "unpassed_fd_closed": true,
+    "host_paths_hidden": [
+      "/etc",
+      "/dev",
+      "/proc",
+      "/sys",
+      "/home"
+    ],
+    "system_runtime_read_only": true,
+    "declared_input_read_only": true,
+    "private_scratch_writable": true,
+    "inner_loopback_bind": true,
+    "outer_tcp_unreachable": true,
+    "outer_abstract_unix_unreachable": true,
+    "child_exit_zero": true,
+    "stderr_empty": true,
+    "resource_limits": {
+      "cpu_seconds": 2,
+      "address_space_bytes": 268435456,
+      "file_size_bytes": 1048576,
+      "open_fds": 32,
+      "processes": 32
+    }
+  },
+  "deduction": "DOCKER_IS_NOT_A_LOGICAL_REQUIREMENT_FOR_THE_CURRENT_ROOT3_ZERO_AMBIENT_CONFINEMENT_THEOREM. ON_A_LINUX_CARRIER_SUPPORTING_UNPRIVILEGED_USER_MOUNT_NETWORK_PID_IPC_AND_UTS_NAMESPACES, THE_REQUIRED_BOUNDARY_CAN_BE_CONSTRUCTED_DIRECTLY_FROM_KERNEL_PRIMITIVES WITH_ONE_EXPLICIT_BROKER_FD.",
+  "critical_path_deletion": [
+    "DOCKER_DAEMON_AVAILABILITY_IS_NOT_REQUIRED_FOR_THIS_CONFINEMENT_ROUTE",
+    "DOCKER_HOSTED_CARRIER_SEARCH_IS_NOT_REQUIRED_FOR_THIS_CONFINEMENT_ROUTE",
+    "DOCKER_IMAGE_PULL_OR_DAEMON_LOG_POLICY_IS_NOT_PART_OF_THIS_ALTERNATE_ROUTE"
+  ],
+  "remaining": [
+    "INDEPENDENTLY_REPLAY_THE_EXACT_FROZEN_BRANCH_BYTES_ON_A_SEPARATE_ADMISSIBLE_LINUX_CARRIER",
+    "FACTOR_CANARY_CONSTRUCTION_INTO_A_REUSABLE_RUNTIME_LAUNCHER",
+    "BIND_THE_EXISTING_CANONICAL_EFFECT_BROKER_TO_THE_SINGLE_INHERITED_BROKER_FD",
+    "IMPLEMENT_AND_VERIFY_TYPED_PARENT_ARTIFACT_FINALIZATION",
+    "PROVE_ALL_CREDITED_RUNTIME_ENTRYPOINTS_ENTER_THE_MEMBRANE_BEFORE_UNTRUSTED_CAPABILITY_CODE",
+    "PROVE_C3_NO_BYPASS_DOMINANCE_OVER_THE_COMPLETE_CREDITED_RUNTIME_SCOPE",
+    "RUN_TARGET_SPECIFIC_ROOT3_REDUCTIONS_ONLY_AFTER_SCOPE_COMPLETE_INDEPENDENT_RECEIPTS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_LINUX_KERNELS_OR_CARRIERS_SUPPORT_THIS_EXACT_NAMESPACE_CONSTRUCTION",
+    "NO_CLAIM_THE_EXACT_FROZEN_BRANCH_BYTES_HAVE_YET_RECEIVED_INDEPENDENT_REPLAY",
+    "NO_CLAIM_WHOLE_CREDITED_RUNTIME_ENTRY_DOMINANCE_IS_PROVED",
+    "NO_CLAIM_TYPED_PARENT_FINALIZATION_IS_CANONICALLY_IMPLEMENTED",
+    "NO_CLAIM_C1_C2_OR_C3_COMPLETE",
+    "NO_ROOT3_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
