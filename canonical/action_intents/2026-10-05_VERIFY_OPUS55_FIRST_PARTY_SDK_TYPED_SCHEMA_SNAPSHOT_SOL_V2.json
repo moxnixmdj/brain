@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-05",
+  "intent_id": "VERIFY_OPUS55_FIRST_PARTY_SDK_TYPED_SCHEMA_SNAPSHOT_20261005_SOL_V2",
+  "status": "PREMUTATION_INTENT__ZERO_CREDIT",
+  "base_commit": "32b94089c44c5bd8f9992b0682a4ad22559edec9",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Independently refetch every content-addressed GA and beta source blob in OPUS55_FIRST_PARTY_SDK_TYPED_SCHEMA_SNAPSHOT_20261005_V1, reconstruct all declared extracted typed unions and top-level control/state partitions from source AST, and fail closed on any mismatch. This executes the snapshot's explicit next action without granting profile-completeness or performance credit.",
+  "blocker_lease_key": "2026-10-05-opus55-first-party-sdk-schema-snapshot::INDEPENDENT_UNION_RECOMPUTATION",
+  "dedupe": {
+    "superseded_pr": 2213,
+    "reason": "MAIN_ADVANCED_TO_STRONGER_GA_PLUS_BETA_SCHEMA_SNAPSHOT_AFTER_PR_2213_OPENED",
+    "stronger_main_subject": "canonical/governance/OPUS55_FIRST_PARTY_SDK_TYPED_SCHEMA_SNAPSHOT_20261005_V1.json",
+    "checked_at_main": "32b94089c44c5bd8f9992b0682a4ad22559edec9"
+  },
+  "success_condition": "STANDARD_PUBLIC_GITHUB_RUNNER_REFETCHES_ALL_BOUND_BLOBS_AT_V1_11_0_AND_RECONSTRUCTS_EXACTLY_THE_SNAPSHOT_TYPED_UNIONS_AND_CONTROL_STATE_PARTITIONS",
+  "hard_nonclaims": [
+    "NO_CLAIM_GA_PLUS_BETA_SDK_SURFACE_IS_COMPLETE_FOR_EVERY_OPUS55_PROFILE",
+    "NO_CLAIM_ALL_BETA_FEATURES_ARE_OPUS55_ADMISSIBLE",
+    "NO_TOTAL_BRAIN_IR_ENCODER_PROOF",
+    "NO_PRIMITIVE_OR_COMPOSITIONAL_PERFORMANCE_DOMINANCE",
+    "NO_TARGET_DISCOVERY_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
