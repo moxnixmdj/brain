@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_LEAF_CROSS_FAMILY_REUSE_BINDING_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CONDITIONAL_THREE_FAMILY_REUSE__NO_CURRENT_PERFORMANCE_CREDIT__ZERO_CREDIT",
+  "objective": "Delete redundant future uncovered-scope evaluation of EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 by binding the existing independently verified synthesis scope certificate to the exact shared behavioral leaf.",
+  "source_bindings": {
+    "synthesis_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "five_family_scope_partition": {
+      "path": "canonical/governance/FIVE_PUBLIC_BAR_FAMILY_SCOPE_PARTITION_V1.json",
+      "git_blob_sha": "8f74ca3d9609737913714844a793b8566028a0aa"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    }
+  },
+  "exact_identity": {
+    "behavioral_leaf": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "witness_scope_id": "scope://brain/EVIDENCE_TO_AUDIENCE_SYNTHESIS_001/T1_T3_TERMINAL",
+    "certificate_target": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "scope_relation": "PROVEN_STRONGER",
+    "coverage_relation": "EXACT_UNION",
+    "coverage_complete": true,
+    "certificate_verified": true,
+    "certificate_independent": true
+  },
+  "fanout": [
+    "PROFESSIONAL_KNOWLEDGE_WORK",
+    "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+    "AGENTIC_SCIENTIFIC_RESEARCH"
+  ],
+  "conditional_reduction": {
+    "antecedent": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_BECOMES_PROVED_ON_THE_BOUND_SYNTHESIS_SCOPE_WITH_NO_SCOPE_REBASE",
+    "consequence": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_REQUIRES_NO_SEPARATE_PER_FAMILY_SCOPE_OR_PERFORMANCE_EVALUATION__REUSE_IDENTICAL_CONTENT_ADDRESSED_SCOPE_AND_PERFORMANCE_RECEIPT_ACROSS_THE_THREE_FAMILY_SCOPE_REPAIRS",
+    "current_state": "ANTECEDENT_OPEN__NO_LEAF_PERFORMANCE_CREDIT_YET"
+  },
+  "action_deletion": {
+    "now_delete": [
+      "PLAN_THREE_SEPARATE_EVIDENCE_TO_AUDIENCE_UNCOVERED_SCOPE_RUNS",
+      "PLAN_THREE_SEPARATE_EVIDENCE_TO_AUDIENCE_MATCHED_COMPARATORS"
+    ],
+    "preserve": [
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_CURRENT_ROOT2_WORK",
+      "ALL_OTHER_SURVIVING_SCOPE_LEAVES"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_SYNTHESIS_PERFORMANCE_PREDICATE_IS_PROVED",
+    "NO_CURRENT_FAMILY_ACCEPTANCE_CREDIT",
+    "NO_TRANSFER_TO_DIFFERENT_BEHAVIORAL_LEAVES",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
