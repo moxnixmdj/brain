@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_VISION_NONCHART_FOUR_LEAF_PARTITION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__LITERAL_SCOPE_PARTITION__ZERO_CREDIT",
+  "target_predicate": "VISION_DENSE_NONCHART_SCOPE",
+  "source": {
+    "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+    "literal": "Read and reason over dense documents, charts, screenshots, diagrams and complex real-world imagery."
+  },
+  "protocol": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "rule": "non-chart leaves require matched direct scope audit if not exercised by Chartography"
+  },
+  "partition": {
+    "chart": [
+      "charts"
+    ],
+    "nonchart": [
+      "dense documents",
+      "screenshots",
+      "diagrams",
+      "complex real-world imagery"
+    ],
+    "nonchart_count": 4
+  },
+  "consequence": "SEARCH_AND_PROVE_ONLY_THE_FOUR_DECLARED_NONCHART_LEAVES_OR_ONE_VERIFIED_SUPERSET_COVERING_THEM",
+  "hard_nonclaims": [
+    "NO_NONCHART_LEAF_PROVED_BY_THIS_PARTITION",
+    "NO_PROXY_CREDIT_WITHOUT_EXACT_OR_SUPERSET_BINDING",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
