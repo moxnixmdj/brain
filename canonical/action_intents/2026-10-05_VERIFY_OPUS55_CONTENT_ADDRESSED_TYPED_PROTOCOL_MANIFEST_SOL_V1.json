@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-05",
+  "intent_id": "VERIFY_OPUS55_CONTENT_ADDRESSED_TYPED_PROTOCOL_MANIFEST_20261005_SOL_V1",
+  "status": "PREMUTATION_INTENT__ZERO_CREDIT",
+  "base_commit": "3d7634c830287604911ecda5912f7ee4c26f2d88",
+  "objective": "Independently re-fetch the five pinned Anthropic SDK source blobs underlying the Opus 5.5 typed-protocol manifest, mechanically reconstruct the declared type unions and stop-reason set, and fail closed on any content-address or semantic-set mismatch without granting target-coverage or performance credit.",
+  "blocker_lease_key": "2026-10-05-opus55-typed-protocol-manifest::SNAPSHOT_INDEPENDENT_VERIFICATION",
+  "dedupe": {
+    "open_pr_search": "NO_OPEN_PR_MATCH_FOR_CONTENT_ADDRESSED_TYPED_PROTOCOL_MANIFEST_OR_SNAPSHOT_INTEGRITY_AT_PREMUTATION_CHECK",
+    "checked_at_main": "3d7634c830287604911ecda5912f7ee4c26f2d88"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_TARGET_COVERAGE_CREDIT",
+    "NO_PERFORMANCE_CREDIT",
+    "NO_W3_ACTIVATION",
+    "NO_TERMINAL_FINALITY"
+  ]
+}
