@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_OWNER_OUTREACH_STATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CURRENT_MAILBOX_RECONCILIATION__DUPLICATE_OUTREACH_FORBIDDEN__ZERO_CREDIT",
+  "providers": [
+    {
+      "provider": "Vals AI",
+      "targets": ["FINANCE_AGENT_V2_GE_58_59", "MYSTERYMECHANISM_GE_49_55"],
+      "sent": true,
+      "sent_date": "2026-10-03",
+      "recipient": "contact@vals.ai",
+      "reply_received_as_of_2026_10_05": false,
+      "scheduler_effect": "WAIT_FOR_REPLY_OR_MATERIAL_PUBLIC_METHOD_CHANGE__NO_DUPLICATE_OUTREACH"
+    },
+    {
+      "provider": "Artificial Analysis",
+      "targets": ["FINANCE_ACCOUNTING_INDEX_GE_61", "PROWORK_AA_BRIEFCASE_GE_1822", "ARTIFACT_AA_BRIEFCASE_GE_1822"],
+      "sent": true,
+      "sent_date": "2026-10-03",
+      "recipient": "contact@artificialanalysis.ai",
+      "reply_received_as_of_2026_10_05": false,
+      "scheduler_effect": "WAIT_FOR_REPLY_OR_MATERIAL_PUBLIC_METHOD_CHANGE__NO_DUPLICATE_OUTREACH"
+    },
+    {
+      "provider": "Cognition",
+      "targets": ["CODING_FRONTIERCODE_GE_54_4"],
+      "sent": true,
+      "sent_date": "2026-10-03",
+      "recipient": "ben@cognition.ai",
+      "reply_received_as_of_2026_10_05": false,
+      "scheduler_effect": "WAIT_FOR_REPLY_OR_NEW_STRONGER_PROOF__NO_DUPLICATE_OUTREACH"
+    },
+    {
+      "provider": "Zapier",
+      "targets": ["AUTOMATIONBENCH_GE_40"],
+      "sent": true,
+      "sent_date": "2026-10-03",
+      "recipient": "daniel.shepard@zapier.com",
+      "reply_received_as_of_2026_10_05": false,
+      "scheduler_effect": "WAIT_FOR_REPLY_OR_NEW_SCOPE_COMPLETE_PROOF__NO_DUPLICATE_OUTREACH"
+    },
+    {
+      "provider": "Buildkite",
+      "targets": ["CODING_TB4_GE_66_4"],
+      "sent": true,
+      "sent_date": "2026-10-03",
+      "reply_received": true,
+      "reply_date": "2026-10-05",
+      "canonical_receipt": "canonical/governance/BUILDKITE_TRIAL_OWNER_CONFIRMATION_20261005_V1.json",
+      "scheduler_effect": "OWNER_SUPPORT_WAIT_CLOSED__ACCOUNT_AND_ZERO_CASE_RUNTIME_PREFLIGHT_REMAIN"
+    }
+  ],
+  "hard_rules": [
+    "NO_DUPLICATE_PROVIDER_OUTREACH_WITHOUT_MATERIAL_NEW_INFORMATION",
+    "NO_REPLY_ABSENCE_INTERPRETED_AS_DENIAL",
+    "NO_ACCEPTANCE_OR_CAPABILITY_CREDIT_FROM_OUTREACH_STATE",
+    "NO_USER_EMAIL_ADDRESS_STORED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
