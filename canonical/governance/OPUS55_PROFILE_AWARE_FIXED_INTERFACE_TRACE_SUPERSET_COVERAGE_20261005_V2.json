@@ -16,7 +16,7 @@
     },
     "interface_policy_first_party_verification": {
       "path": "canonical/verification/OPUS55_INTERFACE_POLICY_NORMAL_FORM_FIRST_PARTY_VERIFICATION_20261005_V1.json",
-      "git_blob_sha": "8a1a4b64c8fc45c1d9e4129e8e495dd42e00927d"
+      "git_blob_sha": "9bd6b2196cb3b6e66357df61d31d1293a2e18f14"
     },
     "target_profile_union": {
       "path": "canonical/governance/OPUS55_TARGET_PROFILE_UNION_BOUNDARY_20261005_V1.json",
