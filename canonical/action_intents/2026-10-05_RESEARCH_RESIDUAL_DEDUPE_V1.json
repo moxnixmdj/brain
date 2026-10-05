@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11_INSTANCE",
+  "date": "2026-10-05",
+  "action_id": "2026-10-05_RESEARCH_RESIDUAL_DEDUPE_V1",
+  "status": "LEASED__ZERO_REALITY",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "6b8b082515d3d7caf837bdbf15e6ab36f6901b1c",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "ZERO_REALITY_BEHAVIORAL_SUBSUMPTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::DUPLICATE_RESEARCH_HYPOTHESIS_RESIDUAL_PENDING_EXACT_SUBSUMPTION_CHECK",
+  "causal_blocker": "DUPLICATE_RESEARCH_HYPOTHESIS_RESIDUAL_PENDING_EXACT_SUBSUMPTION_CHECK",
+  "expected_parent_frontier_change": "DELETE_SEPARATE_SCIENTIFIC_ONLY_RESIDUAL_IF_PREEXISTING_GENERIC_RESEARCH_INTERVENTION_BEHAVIOR_STRICTLY_SUBSUMES_IT__NO_ACCEPTANCE_CREDIT",
+  "theory_invariants": [
+    "DELETE_BEFORE_INVENT",
+    "NO_DUPLICATE_EXECUTION",
+    "NO_SCOPE_WEAKENING",
+    "FAIL_CLOSED",
+    "ZERO_REALITY_FIRST"
+  ],
+  "ownership_tests": {
+    "promotion": false,
+    "credit": 0
+  },
+  "reasoning_durability": {
+    "real_objective": "Minimize terminal proof basis without weakening Opus 5.5 useful behavior.",
+    "evidence_refs": [
+      "canonical/governance/PUBLIC_BAR_SCOPE_GAP_DEDUPLICATION_20261005_V1.json",
+      "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_V1.json"
+    ],
+    "selected_route": "EXACT_FIELDWISE_BEHAVIORAL_SUBSUMPTION",
+    "rejected_material_alternatives": [
+      "Freeze a second domain-specific residual before checking reuse."
+    ],
+    "uncertainties": [
+      "Generic candidate is not itself terminally proved."
+    ],
+    "non_goals": [
+      "No acceptance promotion",
+      "No fresh task execution",
+      "No threshold change"
+    ],
+    "next_action": "Produce fieldwise containment receipt and request independent recomputation.",
+    "supersession_conditions": [
+      "A current canonical source proves material scientific behavior outside the generic candidate."
+    ]
+  },
+  "recursive_obs": {
+    "selected": "REUSE",
+    "stop_if": "FIELDWISE_CONTAINMENT_FAILS"
+  },
+  "behavioral_contract": {
+    "behavior_id": "HYPOTHESIS_INTERVENTION_TO_EVIDENCE_UPDATE_001",
+    "inputs": "Research objective, evidence, candidate hypotheses/interventions, measurable outcomes, tool or experiment constraints",
+    "environment_state": "Iterative research or engineering environment where actions produce observations",
+    "allowed_information": "JIT knowledge, task-visible state, allowed tools, owned analysis mechanisms",
+    "required_output_or_action": "Choose a falsifiable hypothesis or intervention, choose or specify a discriminating action, and update belief or priority from resulting evidence",
+    "success_condition": "Selected intervention is relevant and discriminating, evidence update is correct, and repeated iterations improve progress",
+    "failure_condition": "Non-falsifiable or irrelevant experiment, evidence-insensitive update, low-information repetition, or unsupported conclusion",
+    "terminal_consequence": "Shared active-research behavior across scientific and AI-engineering domains",
+    "verification_route": "Scope-complete research/engineering portfolio with intervention-value and evidence-update scoring",
+    "dependency_boundary": "Knowledge retrieval is external; experiment choice and evidence-conditioned update are capability behavior",
+    "scope": "Iterative hypothesis, experiment selection, and evidence update"
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "No fresh or untouched evidence and no promotion."
+  },
+  "qualification_stage": "ZERO_REALITY_DEDUCTIVE",
+  "terminal_proof_control": {
+    "proof_obligation": "Prove or falsify scientific question/hypothesis formation is a specialization of the preexisting generic hypothesis/intervention behavior.",
+    "hole_type": "DUPLICATE_BEHAVIORAL_ONTOLOGY",
+    "expected_certificate_or_receipt": "FIELDWISE_SUBSUMPTION_RECEIPT",
+    "validator": "Independent exact-source recomputation",
+    "maximum_cheap_test_cost": "0_USD",
+    "prerequisites": [
+      "Exact source blobs"
+    ],
+    "contamination_risk": "NONE",
+    "reversibility": true,
+    "falsification_condition": "Any required scientific behavior or success condition lies outside generic scope.",
+    "critical_path_relation": "Removes duplicate learned-behavior proof work."
+  },
+  "continuous_obs": {
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_state_dependencies": [
+      "canonical/governance/PUBLIC_BAR_SCOPE_GAP_DEDUPLICATION_20261005_V1.json",
+      "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_BEHAVIORAL_DECOMPOSITION_V1.json"
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "obs_layers_current": true,
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": true,
+    "information_boundary_complete": true,
+    "information_policy": "EXISTING_CANONICAL_EVIDENCE_ONLY",
+    "dependencies": []
+  },
+  "reality_query_admission": {
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "minimum_reality_cut": [],
+    "candidate_observations": [],
+    "terminal_decision_value": "DEDUCTIVE_DEDUPE"
+  },
+  "global_terminal_proof_cut": {
+    "required": false,
+    "graph_snapshot": "6b8b082515d3d7caf837bdbf15e6ab36f6901b1c",
+    "proposed_action_membership": false,
+    "exact_global_minimum_reality_cut": []
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
