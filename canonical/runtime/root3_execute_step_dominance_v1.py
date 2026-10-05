@@ -31,16 +31,17 @@ class DominanceError(RuntimeError):
 
 class Calls(ast.NodeVisitor):
     def __init__(self)->None:
-        self.current="<module>"
+        self.stack:list[str]=[]
         self.calls:list[tuple[str,str,int]]=[]
     def visit_FunctionDef(self,node:ast.FunctionDef)->Any:
-        prev=self.current; self.current=node.name
+        self.stack.append(node.name)
         self.generic_visit(node)
-        self.current=prev
+        self.stack.pop()
     visit_AsyncFunctionDef=visit_FunctionDef
     def visit_Call(self,node:ast.Call)->Any:
         if isinstance(node.func,ast.Name):
-            self.calls.append((self.current,node.func.id,node.lineno))
+            lexical=self.stack[0] if self.stack else "<module>"
+            self.calls.append((lexical,node.func.id,node.lineno))
         self.generic_visit(node)
 
 def _adapter_literals(tree:ast.AST)->set[str]:
@@ -111,8 +112,8 @@ def audit(root:Path|str=".")->dict[str,Any]:
             "ALL_MISSION_STEP_EXECUTION_IN_main_IS_FUNNELED_THROUGH_execute_step; "
             "execute_step_HAS_EXACTLY_shell_http_goal_ADAPTERS; "
             "run_shell_AND_run_goal_HAVE_NO_OTHER_DIRECT_CALLERS; "
-            "run_http_EXTRA_CALL_IS_INSIDE__goal_action_AND_THEREFORE_INSIDE_THE_goal_PATH; "
-            "ALL_DIRECT__invoke_bound_capability_CALLS_ARE_INSIDE__goal_action. "
+            "run_http_EXTRA_CALL_IS_LEXICALLY_INSIDE__goal_action_AND_THEREFORE_INSIDE_THE_goal_PATH; "
+            "ALL_DIRECT__invoke_bound_capability_CALLS_INCLUDING_NESTED_HELPERS_ARE_LEXICALLY_INSIDE__goal_action. "
             "THEREFORE_A_SINGLE_PRE_execute_step_CONFINEMENT_GATE_DOMINATES_CURRENT_MISSION_STEP_EXECUTION, "
             "SUBJECT_TO_SEPARATE_PARENT_ORCHESTRATION_EFFECT_ACCOUNTING."
         ),
