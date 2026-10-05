@@ -1,0 +1,41 @@
+{
+  "schema":"PROJECT_BRAIN_ROOT3_TERMINAL_EXECUTION_ROOT_COMPRESSION_20261005_V1",
+  "date":"2026-10-05",
+  "status":"CANDIDATE__HISTORICAL_TERMINAL_EXECUTION_ROOT_12_TO_1_PROVED_BY_EXACT_RUNNER_CALL__ZERO_CREDIT",
+  "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "evidence":{
+    "launcher_binding":{"path":"canonical/governance/TERMINAL_PARENT_LAUNCHER_BINDING_V1.json","git_blob_sha":"f93cef4dd589cc66ff04fa4f229d6dba23833e38"},
+    "launcher":{"path":"canonical/runtime/terminal_parent_portfolio_launcher_v1.py","git_blob_sha":"d7f20a66f1f534b06ea11782cb350a582c07d985"},
+    "route_manifest":{"path":"canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json","git_blob_sha":"c61882d69a66f61b4ea1ce6ad14f86fcefd1f76a","bound_executor_count":12},
+    "terminal_result":{"path":"canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json","git_blob_sha":"bd86b4c53992b47a4a60b64a60ba03db9a442cfc","fresh_case_executions":3352},
+    "independent_runner":{"repository":"moxnixmdj/verification-capsule-runner","commit_sha":"b896e4363f87ea19e023e3ddb95e549a332a5bbb","workflow_path":".github/workflows/execute-terminal-v3-wave-once.yml","workflow_git_blob_sha":"9c0ce5052185f930ee77e3578e5bfc55e1218b4e"}
+  },
+  "exact_execution_fact":"THE_INDEPENDENT_ONE_SHOT_WORKFLOW_IMPORTED_canonical.runtime.terminal_parent_portfolio_launcher_v1_AS_launcher_AND_EXECUTED_launcher.execute_wave(commitment=...,beacon=...,root=Path('.'))_AS_THE_TERMINAL_WAVE_CALL",
+  "structural_fact":"terminal_parent_portfolio_launcher_v1.execute_wave_DISPATCHES_ALL_6_UNIQUE_DIRECT_ROUTES_AND_ALL_4_PARENT_PORTFOLIOS_COVERING_THE_12_FROZEN_ACTIVE_CONTRACTS",
+  "compression":{
+    "historically_bound_executor_rows":12,
+    "verified_terminal_wave_python_entry_roots":1,
+    "root_reduction_percent":91.66666666666667
+  },
+  "deduction":"THE_IMMUTABLE_3352_CASE_TERMINAL_V3_WAVE_DID_NOT_HAVE_12_INDEPENDENT_TOP_LEVEL_EXECUTION_ROOTS; ITS_EXECUTION_CARRIER_CALLED_ONE_CONTENT_BOUND_PARENT_LAUNCHER_ENTRYPOINT_WHICH_DISPATCHED_THE_FULL_FROZEN_ROUTE_SET.",
+  "supports":[
+    "FUTURE_C3_DESIGN_CAN_PLACE_A_MEMBRANE_ABOVE_ONE_TERMINAL_LAUNCHER_ROOT_FOR_THIS_EXECUTION_FAMILY",
+    "HISTORICAL_ROOT_COUNT_FOR_THE_TERMINAL_V3_WAVE_IS_ONE_NOT_TWELVE"
+  ],
+  "hard_nonclaims":[
+    "NO_CLAIM_THE_2026_10_02_HISTORICAL_WAVE_EXECUTED_INSIDE_THE_NEW_NAMESPACE_MEMBRANE",
+    "NO_CLAIM_ALL_PROJECT_BRAIN_RUNTIME_ENTRYPOINTS_OUTSIDE_THE_TERMINAL_V3_WAVE_ARE_DOMINATED_BY_THIS_LAUNCHER",
+    "NO_CLAIM_MATCHED_NONINFERIORITY_OR_UNCOVERED_SCOPE_PREDICATES_CLOSE",
+    "NO_CLAIM_C1_C2_OR_C3_COMPLETE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting":{
+    "incremental_spend_usd":0,
+    "new_reality_units_consumed":0,
+    "terminal_cases_consumed":0,
+    "acceptance_credit_delta":0,
+    "family_credit_delta":0,
+    "capability_credit_delta":0,
+    "ownership_credit_delta":0
+  }
+}
