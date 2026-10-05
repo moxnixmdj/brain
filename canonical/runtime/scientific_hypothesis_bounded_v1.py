@@ -74,7 +74,7 @@ def _parse_observations(rows: Any) -> set[tuple[str, int]]:
         direction = row.get("direction")
         if not isinstance(variable, str) or not variable:
             raise HypothesisKernelError(f"OBSERVATION_VARIABLE_INVALID:{i}")
-        if direction not in (-1, 1):
+        if isinstance(direction, bool) or direction not in (-1, 1):
             raise HypothesisKernelError(f"OBSERVATION_DIRECTION_INVALID:{i}")
         out.add((variable, int(direction)))
     return out
@@ -105,7 +105,7 @@ def generate_hypotheses(
         seen.add(mid)
         if not isinstance(target, str) or not target:
             raise HypothesisKernelError(f"MECHANISM_TARGET_INVALID:{mid}")
-        if direction not in (-1, 1):
+        if isinstance(direction, bool) or direction not in (-1, 1):
             raise HypothesisKernelError(f"MECHANISM_DIRECTION_INVALID:{mid}")
         if not isinstance(statement, str) or not statement.strip():
             raise HypothesisKernelError(f"MECHANISM_HYPOTHESIS_INVALID:{mid}")
