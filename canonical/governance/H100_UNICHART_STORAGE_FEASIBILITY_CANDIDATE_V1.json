@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_STORAGE_FEASIBILITY_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CONDITIONAL_STORAGE_FEASIBILITY__ZERO_CREDIT__CAPABILITY_PRESERVATION_UNPROVED",
+  "objective": "Establish a conservative sub-100MB storage route for a chart-specialized vision model without counting it as H100 capability until exact state-dict enumeration and nonterminal capability preservation are independently verified.",
+  "target_hypothesis": "FULL_FROZEN_BRAIN_CAPABILITY_ENVELOPE_WITH_LE_100000000_PERSISTENT_LEARNED_BYTES_AND_ZERO_EXTERNAL_LEARNED_CAPABILITY_PROVIDER_DURING_SCORED_EXECUTION",
+  "donor": {
+    "model": "ahmed-masry/unichart-base-960",
+    "model_revision": "e145bd54ec4efbb6f944df5aef605450887f9280",
+    "checkpoint_file": "pytorch_model.bin",
+    "checkpoint_blob_id": "1b9577b9f0ec249a6487d465e570fe30fb98b2d0",
+    "checkpoint_sha256": "d238d25a8f1aef1fb4670145854354090e72ec68cca6d526b963e7184b8f0ceb",
+    "checkpoint_bytes": 809199995,
+    "config_declared_torch_dtype": "float32",
+    "paper_reported_parameters": "201M",
+    "license": "gpl-3.0",
+    "gated": false
+  },
+  "observed_ancillary_bundle_bytes": {
+    "gitattributes": 1477,
+    "readme": 4909,
+    "added_tokens_json": 235,
+    "config_json": 4941,
+    "generation_config_json": 186,
+    "preprocessor_config_json": 420,
+    "sentencepiece_bpe_model": 1296245,
+    "special_tokens_map_json": 355,
+    "tokenizer_json": 4008718,
+    "tokenizer_config_json": 510,
+    "total": 5317996
+  },
+  "conditional_storage_theorem": {
+    "premise": "All persistent learned checkpoint tensors covered by the weight transform are FP32 as declared by the released config; exact tensor enumeration is required before promotion.",
+    "max_fp32_values_from_checkpoint_file_size": 202299998,
+    "packing": "ALL_W3",
+    "group_size": 256,
+    "per_group_metadata": "FP16_SCALE_PLUS_FP16_ZERO_POINT",
+    "packed_weight_bytes": 75862500,
+    "quant_metadata_bytes": 3160940,
+    "ancillary_bytes": 5317996,
+    "total_candidate_bytes": 84341436,
+    "h100_budget_bytes": 100000000,
+    "margin_bytes": 15658564,
+    "result": "FITS_CONDITIONALLY"
+  },
+  "optional_capability_preserving_followup": {
+    "description": "After exact state-dict enumeration, test a mixed W4 vision / W3 decoder layout if all-W3 harms chart reasoning. Mixed precision is optimization only and is not the proof foundation.",
+    "prior_architecture_estimate_total_parameters": 201858168,
+    "prior_mixed_candidate_total_bytes": 97493413,
+    "prior_mixed_candidate_margin_bytes": 2506587,
+    "status": "PROVISIONAL_UNTIL_EXACT_STATE_DICT_ENUMERATION"
+  },
+  "required_next_actions": [
+    "ENUMERATE_EXACT_UNIQUE_STATE_DICT_TENSORS_AND_DTYPES_FROM_THE_PINNED_CHECKPOINT",
+    "FREEZE_THE_TRANSFORMATION_FORMAT_AND_COUNT_ALL_PERSISTENT_LEARNED_BYTES",
+    "PRODUCE_A_REAL_PACKED_CHECKPOINT_LE_100000000_BYTES",
+    "RUN_PUBLIC_OR_NONTERMINAL_CHART_REASONING_QUALIFICATION",
+    "IF_ALL_W3_DEGRADES_CAPABILITY_TEST_MIXED_W4_VISION_W3_DECODER_WITHIN_THE_SAME_BYTE_CEILING",
+    "ONLY_AFTER_BYTE_AND_CAPABILITY_PASS_MAY_THIS_ROUTE_AFFECT_H100"
+  ],
+  "source_evidence": [
+    "https://huggingface.co/api/models/ahmed-masry/unichart-base-960?blobs=true",
+    "https://huggingface.co/ahmed-masry/unichart-base-960/raw/e145bd54ec4efbb6f944df5aef605450887f9280/config.json",
+    "https://aclanthology.org/2023.emnlp-main.906/"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_EXACT_STATE_DICT_PARAMETER_COUNT_FROM_FILE_SIZE_ALONE",
+    "NO_CLAIM_W3_PRESERVES_UNICHART_CAPABILITY",
+    "NO_CLAIM_CHARTOGRAPHY_GE_89",
+    "NO_CLAIM_THIS_ROUTE_IS_ALREADY_INTERNALIZED",
+    "NO_H100_TERMINAL_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  },
+  "runtime": "canonical/runtime/h100_unichart_storage_feasibility_v1.py",
+  "tests": "canonical/tests/test_h100_unichart_storage_feasibility_v1.py",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
