@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OPUS46_GPT54_CROSS_JUDGE_EMPIRICAL_BRIDGE_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_CROSS_SOURCE_RECOMPUTATION_PASS__FINITE_EMPIRICAL_FACTS_ONLY__NOT_INDEPENDENT_PUBLIC_RUNNER__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/HLE_OPUS46_GPT54_CROSS_JUDGE_EMPIRICAL_BRIDGE_20261005_V1.json",
+    "git_blob_sha": "007b8be31735808ff6b9d4d5fbcba45ff3d1c3a5",
+    "commit_sha": "23478292ba01be429f49c7475c82506c495b8251"
+  },
+  "checks": [
+    {
+      "id": "PAPER_IDENTITY",
+      "pass": true,
+      "observed": "ARXIV_2606_17930__HOW_INFERENCE_COMPUTE_SHAPES_FRONTIER_LLM_EVALUATION"
+    },
+    {
+      "id": "STRONG_JUDGES",
+      "pass": true,
+      "observed": "OPENAI_GPT_5_4_AND_ANTHROPIC_CLAUDE_OPUS_4_6"
+    },
+    {
+      "id": "HLE_TEMPLATE",
+      "pass": true,
+      "observed": "PAPER_STATES_STRONG_JUDGE_RESCORE_USED_EXACT_IN_EXPERIMENT_HLE_GRADER_TEMPLATE__INSPECT_EVALS_HLE_JUDGE_JUDGE_PROMPT"
+    },
+    {
+      "id": "FINITE_AGREEMENT",
+      "pass": true,
+      "observed": "2370_OF_2373_PAIRED_HLE_SUBMISSIONS__PAPER_REPORTS_99_9_PERCENT_AGREEMENT"
+    },
+    {
+      "id": "WEAK_JUDGE_ERROR_COUNTS",
+      "pass": true,
+      "observed": "GPT_4O_MINI__1_FALSE_POSITIVE_OF_2186_ACTUALLY_INCORRECT__22_FALSE_NEGATIVES_OF_184_CORRECT__RELATIVE_TO_STRONG_JUDGE_CONSENSUS"
+    },
+    {
+      "id": "PUBLIC_EVALEVAL_HLE_OPUS46_ARTIFACT_CLASS",
+      "pass": true,
+      "observed": "PUBLIC_EEE_DATASTORE_CONTAINS_HLE_ANTHROPIC_CLAUDE_OPUS_4_6_EVALUATION_CARD_PATHS_WITH_CAIS_HLE_AND_INSPECT_AI_METADATA"
+    },
+    {
+      "id": "NO_UNIVERSAL_TRANSPORT_OVERCLAIM",
+      "pass": true,
+      "observed": "SUBJECT_EXPLICITLY_DENIES_UNIVERSAL_LABEL_EQUIVALENCE__DISTRIBUTION_FREE_FUTURE_BOUND__ONE_SIDED_PROXY__AND_ANTHROPIC_TARGET_PROMPT_IDENTITY"
+    }
+  ],
+  "recomputation": {
+    "finite_disagreements": 3,
+    "paired_submissions": 2373,
+    "finite_agreements": 2370,
+    "exact_fraction_identity": "2370+3=2373",
+    "threshold_transfer_closed": false,
+    "hle_acceptance_closed": false
+  },
+  "decisive_boundary": "THE_NEW_SOURCE_PROVES_A_FINITE_EMPIRICAL_CROSS_JUDGE_RELATION_UNDER_THE_PUBLIC_INSPECT_HLE_TEMPLATE__IT_DOES_NOT_PROVE_ANTHROPIC_USED_THAT_TEMPLATE_FOR_THE_OPUS55_67_7_RESULT_AND_DOES_NOT_PROVE_A_SCOPE_COMPLETE_DIRECTIONAL_RELATION.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_public_runner": false,
+  "independent_verification_required": true
+}
