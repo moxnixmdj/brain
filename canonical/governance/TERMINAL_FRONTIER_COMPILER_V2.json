@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FRONTIER_COMPILER_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__LITERAL_FINALITY_TARGET_DISCOVERY_GUARD__FAIL_CLOSED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Repair V1 terminal finality so acceptance closure, Root1/meta closure, and ownership cannot produce literal terminal=true unless a separately active, content-bound, passing-verification target-discovery completeness certificate exists.",
+  "bug_found": {
+    "predecessor": "canonical/governance/TERMINAL_FRONTIER_COMPILER_V1.json",
+    "issue": "V1 terminal_finality checked acceptance, Root1-positive-zero, and meta-envelope closure but did not conjunct the separate target-discovery completeness premise required by the active open-world/minimum-information cuts.",
+    "consequence": "A future hypothetical 19/19 + 38/38 + meta-closed state could be mislabeled literal terminal even while W1/W2/W3 completeness remained unproved."
+  },
+  "repair": {
+    "runtime": "canonical/runtime/terminal_frontier_compiler_v2.py",
+    "tests": "canonical/tests/test_terminal_frontier_compiler_v2.py",
+    "positive_certificate_pattern": "OPUS55_TARGET_DISCOVERY_COMPLETENESS_CERTIFICATE_V<N>_ACTIVATION_V1.json",
+    "accepted_witness_classes": [
+      "W1_TARGET_OWNER_EXHAUSTIVE_BEHAVIOR_SPECIFICATION",
+      "W2_IMPLEMENTATION_LEVEL_COMPLETE_CHARACTERIZATION",
+      "W3_UNIVERSAL_BEHAVIORAL_DOMINANCE_THEOREM"
+    ],
+    "fail_closed_rule": "NO_ACTIVE_CONTENT_BOUND_PASSING_VERIFICATION_CERTIFICATE=>TARGET_DISCOVERY_COMPLETE_FALSE=>TERMINAL_FALSE",
+    "terminal_rule": "ACCEPTANCE_CLOSED AND ROOT1_POSITIVE_ZERO AND META_ENVELOPE_CLOSED AND TARGET_DISCOVERY_COMPLETE"
+  },
+  "current_recomputed_truth": {
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "root2_touching": 18,
+    "root3_touching": 9,
+    "meta_envelope_open": 8,
+    "target_discovery_complete": false,
+    "terminal": false
+  },
+  "falsification_tests": [
+    "HYPOTHETICAL_19_OF_19_38_OF_38_META_CLOSED_WITHOUT_TARGET_DISCOVERY_CERTIFICATE_MUST_REMAIN_TERMINAL_FALSE",
+    "EXPLICIT_POSITIVE_CERTIFICATE_MUST_USE_ONE_OF_W1_W2_W3_WITNESS_CLASSES",
+    "INVENTED_WITNESS_CLASS_MUST_NOT_ENABLE_FINALITY",
+    "FALSE_COMPLETENESS_BOOLEAN_MUST_NOT_ENABLE_FINALITY",
+    "ACTIVE_CERTIFICATE_SUBJECT_OR_VERIFICATION_BLOB_DRIFT_MUST_FAIL_CLOSED_THROUGH_EXISTING_ACTIVATION_VALIDATION"
+  ],
+  "scheduling_effect_if_verified": [
+    "SUPERSEDE_V1_FOR_LITERAL_TERMINAL_FINALITY_PROJECTION",
+    "KEEP_CURRENT_OBSERVED_EPOCH_ACCEPTANCE_WORK_UNCHANGED",
+    "KEEP_LITERAL_FINALITY_FALSE_UNTIL_A_REAL_COMPLETE_TARGET_DOMAIN_WITNESS_IS_POSITIVELY_CERTIFIED"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_W1_W2_OR_W3_IS_CURRENTLY_SATISFIED",
+    "NO_WEAKENING_OF_ALL_USEFUL",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
