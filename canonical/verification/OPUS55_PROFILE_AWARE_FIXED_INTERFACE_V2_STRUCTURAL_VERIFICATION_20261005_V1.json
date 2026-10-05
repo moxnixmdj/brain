@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_PROFILE_AWARE_FIXED_INTERFACE_V2_STRUCTURAL_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_AND_FIRST_PARTY_RECOMPUTATION_PASS__V1_OMISSION_CONFIRMED__V2_SET_REDUCER_STRUCTURALLY_VALID__SEMANTIC_INTERFACE_TOTALITY_STILL_OPEN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_PROFILE_AWARE_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE_20261005_V2.json",
+    "git_blob_sha": "fd136189b99cbaf333c317bc275337c0d081d88d"
+  },
+  "recomputed_first_party_facts": [
+    {
+      "source": "https://platform.claude.com/docs/en/models/opus-5-5/migration-guide",
+      "checks": {
+        "thinking_runs_on_every_opus55_request": true,
+        "response_can_begin_with_thinking_blocks": true,
+        "tool_loop_requires_thinking_blocks_returned_unmodified": true,
+        "text_between_tool_calls_can_be_returned_in_thinking_blocks": true
+      }
+    },
+    {
+      "source": "https://platform.claude.com/docs/en/api/messages/create",
+      "checks": {
+        "thinking_block_is_a_documented_content_block": true,
+        "redacted_thinking_block_is_a_documented_content_block": true,
+        "thinking_signature_is_stateful_verification_data": true,
+        "thinking_and_redacted_thinking_can_be_returned_as_prior_assistant_content": true
+      }
+    },
+    {
+      "source": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "checks": {
+        "adaptive_thinking_always_on": true,
+        "thinking_blocks_tied_to_model_and_conversation": true
+      }
+    }
+  ],
+  "v1_recomputation": {
+    "subject": {
+      "path": "canonical/governance/OPUS55_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE_CERTIFICATE_20261005_V1.json",
+      "git_blob_sha": "146b237515ba8867acd6778b291e340e5e9138fc"
+    },
+    "model_emissions": [
+      "TEXT",
+      "STRUCTURED_TOOL_USE_OR_SERVER_TOOL_USE_REQUEST"
+    ],
+    "contains_thinking_block": false,
+    "contains_redacted_thinking_block": false,
+    "verdict": "V1_INTERFACE_ALPHABET_INCOMPLETE_FOR_DOCUMENTED_OPUS55_API_TRACE_SHAPE"
+  },
+  "v2_recomputation": {
+    "required_model_emissions_present": {
+      "TEXT": true,
+      "THINKING_BLOCK": true,
+      "REDACTED_THINKING_BLOCK": true,
+      "STRUCTURED_TOOL_USE_OR_SERVER_TOOL_USE_REQUEST": true
+    },
+    "signed_thinking_state_return_path_present": true,
+    "profile_key_present": true,
+    "performance_credit_claimed": false,
+    "new_family_claimed": false
+  },
+  "wolfram_structural_check": {
+    "engine": "WOLFRAM_LANGUAGE",
+    "formula": "Resolve[ForAll[{u1,a1,u2,a2,d}, Implies[(Implies[u1,a1] && Implies[a1,d] && Implies[u2,a2] && Implies[a2,d]), Implies[(u1 || u2), d]]], Booleans]",
+    "result": true,
+    "interpretation": "For arbitrary represented profiles, per-profile U_p subset A_p plus A_p subset D entails union-profile U_star subset D. The same implication generalizes by induction to any finite profile registry.",
+    "scope": "STRUCTURAL_LOGIC_ONLY"
+  },
+  "verdict": {
+    "v1_target_coverage_certificate_admissible_as_written": false,
+    "v2_repair_removes_identified_thinking_channel_counterexample": true,
+    "v2_coverage_theorem_shape_logically_valid": true,
+    "v2_semantic_interface_totality_proved": false,
+    "v2_role_basis_extensional_totality_proved": false,
+    "literal_terminal_finality": false
+  },
+  "next_minimum_falsification_cut": [
+    "ENUMERATE_ONLY_FIRST_PARTY_MODEL_SIDE_CONTENT_BLOCK_AND_CONTROL_CHANNEL_TYPES_FOR_EACH_AUTHORIZED_PROFILE",
+    "SEARCH_FOR_ANY_VALID_OPUS55_TRACE_EVENT_OR_STATE_DEPENDENCY_NOT_REPRESENTABLE_IN_V2",
+    "IF_NONE_SURVIVES__INDEPENDENTLY_VERIFY_B0_B9_EXTENSIONAL_ROLE_TOTALITY_OVER_THE_REPAIRED_ALPHABET",
+    "ONLY_AFTER_COVERAGE_CLOSES__COMPILE_EXISTING_RECEIPTS_INTO_STATE_CONDITIONED_LOCAL_REFINEMENT_TRIPLES"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_COMPLETENESS_FROM_BOOLEAN_SET_LOGIC",
+    "NO_CLAIM_ALL_AUTHORIZED_PROFILES_HAVE_ALREADY_BEEN_ENUMERATED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_LITERAL_TERMINAL_COMPLETION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
