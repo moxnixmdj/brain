@@ -1,0 +1,191 @@
+{
+  "schema": "PROJECT_BRAIN_SIX_FAMILY_TARGET_BEHAVIOR_MECHANISM_ENTAILMENT_AUDIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ELEVEN_SCOPE_ROOT_FAMILY_EDGES_AUDITED_AGAINST_TARGET_BEHAVIOR_RULE__ONE_DIRECT_MANDATORY_EDGE__TEN_INCIDENCE_EDGES_NOT_YET_ENTITLED_AS_MANDATORY__ZERO_CREDIT",
+  "objective": "Apply the canonical USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION rule to the current six-family benchmark-proxy scope-repair frontier so Brain implementation mechanisms and registry incidence cannot silently become Opus-5.5 target obligations.",
+  "authorities": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "target_rule": "USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "current_scope_frontier": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3.json",
+      "git_blob_sha": "2442af340f6445c1c8fbba7d770461a4e20a0378"
+    },
+    "entailment_gate": {
+      "path": "canonical/runtime/target_behavior_mechanism_entailment_gate_v1.py",
+      "git_blob_sha": "771fc5271f5cf1f9fe5a3152fd311d3e668d1014"
+    }
+  },
+  "target_rule": "USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION",
+  "obligations": [
+    {
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "contract_kind": "OBSERVABLE_TARGET_TRANSFORM",
+      "registry_incidence_only": false,
+      "mandatory_acceptance_obligation": true,
+      "target_entailment_relation": "EXPLICIT_TARGET_BEHAVIOR",
+      "target_entailment_receipt": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json::COMPUTER_AND_BROWSER_USE",
+      "basis": "The target family explicitly requires multi-step browser/arbitrary-application workflows with planning, visual grounding and judgment; state-conditioned grounded action is directly observable target behavior."
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "contract_kind": "OBSERVABLE_TARGET_TRANSFORM",
+      "registry_incidence_only": true,
+      "mandatory_acceptance_obligation": false,
+      "target_entailment_relation": "ADJACENT_NOT_ENTAILED",
+      "basis": "The target family requires accurate end-to-end multi-application workflows but does not require that the operative route be visual browser grounding. The canonical AutomationBench route is simulated SaaS/API-oriented; UI-mediated scope remains conditional only when separately claimed."
+    },
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "contract_kind": "DOMAIN_SPECIFIC_OBSERVABLE_BEHAVIOR",
+      "registry_incidence_only": true,
+      "mandatory_acceptance_obligation": false,
+      "target_entailment_relation": "ADJACENT_NOT_ENTAILED",
+      "basis": "The coding target requires software feature implementation, debugging, refactoring, review, terminal operation, ambiguous multi-file change, root-cause analysis and self-checking. Engineering-drawing-to-CAD reconstruction is not logically necessary to those target behaviors and needs its own target-surface evidence if claimed globally."
+    },
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "contract_kind": "IMPLEMENTATION_MECHANISM",
+      "registry_incidence_only": true,
+      "mandatory_acceptance_obligation": false,
+      "target_entailment_relation": "SUFFICIENT_MECHANISM_ONLY",
+      "basis": "An independently derived acceptance model is a Brain verification strategy. The coding target requires correct self-checked outcomes, not exposure of this particular internal verification representation."
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "contract_kind": "IMPLEMENTATION_MECHANISM",
+      "registry_incidence_only": true,
+      "mandatory_acceptance_obligation": false,
+      "target_entailment_relation": "SUFFICIENT_MECHANISM_ONLY",
+      "basis": "The target is difficult expert-level problem solving with search/code/tools. A separate independent-acceptance-model representation may improve reliability but is not itself required observable target behavior."
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "contract_kind": "IMPLEMENTATION_ORCHESTRATION_MECHANISM",
+      "registry_incidence_only": true,
+      "mandatory_acceptance_obligation": false,
+      "target_entailment_relation": "ADJACENT_NOT_ENTAILED",
+      "basis": "The target family is expert-level question solving with search/code/tools. It does not require a long-horizon research evidence-control loop as the operative mechanism; outcome-level tool-augmented reasoning remains governed by the public/matched acceptance basis."
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "contract_kind": "IMPLEMENTATION_ORCHESTRATION_MECHANISM",
+      "registry_incidence_only": true,
+      "mandatory_acceptance_obligation": false,
+      "target_entailment_relation": "TARGET_ENTAILMENT_UNPROVED",
+      "basis": "Scientific software/tool use, analysis and iterative reasoning are explicit targets, but the current contract specifically requires query/source/evidence-graph control in an open information environment. That narrower mechanism is not logically necessary for every long-horizon scientific/technical task without a target-surface entailment receipt."
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "contract_kind": "MIXED_TARGET_OUTCOME_AND_IMPLEMENTATION_MECHANISM",
+      "registry_incidence_only": true,
+      "mandatory_acceptance_obligation": false,
+      "target_entailment_relation": "PARTIAL_TARGET_OVERLAP__WHOLE_CONTRACT_NOT_ENTAILED",
+      "basis": "High-quality professional deliverable outcomes are explicit target behavior, but the contract additionally mandates an internal content/analysis/layout revision plan. The outcome is load-bearing; the specific planning representation is not. Preserve GDPval/AA-Briefcase and any observable-quality residual, not the internal-plan requirement by incidence."
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "contract_kind": "OBSERVABLE_TARGET_TRANSFORM",
+      "registry_incidence_only": true,
+      "mandatory_acceptance_obligation": false,
+      "target_entailment_relation": "TARGET_ENTAILMENT_UNPROVED",
+      "basis": "Evidence-grounded audience synthesis is useful and separately targeted by COMMUNICATION_AND_SYNTHESIS, but not every professional-work target task necessarily contains an evidence-to-audience synthesis transform. Cross-family incidence alone cannot make the entire synthesis leaf mandatory here."
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "contract_kind": "OBSERVABLE_TARGET_TRANSFORM",
+      "registry_incidence_only": true,
+      "mandatory_acceptance_obligation": false,
+      "target_entailment_relation": "ADJACENT_NOT_ENTAILED",
+      "basis": "Difficult expert-level question solving does not logically require the full audience/format/compression synthesis contract. Relevant answer correctness remains in the reasoning acceptance basis; synthesis remains independently targeted where actually claimed."
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "contract_kind": "OBSERVABLE_TARGET_TRANSFORM",
+      "registry_incidence_only": true,
+      "mandatory_acceptance_obligation": false,
+      "target_entailment_relation": "TARGET_ENTAILMENT_UNPROVED",
+      "basis": "The current scientific-research target requires solving long-horizon research/technical tasks with software, tools, analysis and iterative reasoning. Scientific communication may be useful but the whole audience/format synthesis contract needs explicit target-surface entailment rather than registry fanout."
+    }
+  ],
+  "recomputed": {
+    "current_scope_root_family_edge_count": 11,
+    "directly_target_entailed_mandatory_edge_count": 1,
+    "registry_or_mechanism_edges_not_currently_entitled_as_mandatory": 10,
+    "mandatory_edge": "COMPUTER_AND_BROWSER_USE::BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+    "whole_contract_partial_target_overlap_edges": [
+      "PROFESSIONAL_KNOWLEDGE_WORK::PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
+    ],
+    "conditional_or_unproved_target_edges": [
+      "AGENTIC_SCIENTIFIC_RESEARCH::ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "PROFESSIONAL_KNOWLEDGE_WORK::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "AGENTIC_SCIENTIFIC_RESEARCH::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    ]
+  },
+  "scheduler_effect_if_verified": {
+    "delete_from_mandatory_scope_repair_frontier": [
+      "ADVANCED_AGENTIC_CODING::SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "ADVANCED_AGENTIC_CODING::CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "BUSINESS_WORKFLOW_AUTOMATION::BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING::SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING::ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    ],
+    "quarantine_pending_explicit_target_entailment_or_outcome_projection": [
+      "AGENTIC_SCIENTIFIC_RESEARCH::ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "PROFESSIONAL_KNOWLEDGE_WORK::PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "PROFESSIONAL_KNOWLEDGE_WORK::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "AGENTIC_SCIENTIFIC_RESEARCH::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    ],
+    "preserve_as_direct_mandatory_scope_root": [
+      "COMPUTER_AND_BROWSER_USE::BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001"
+    ],
+    "preserve_without_change": [
+      "ALL_PUBLIC_FIXED_BARS_AND_MATCHED_PERFORMANCE_PREDICATES",
+      "DEDICATED_COMMUNICATION_AND_SYNTHESIS_ACCEPTANCE_BASIS",
+      "ANY_CAPABILITY_DISCOVERY_CANDIDATE_THAT_LATER_ACQUIRES_INDEPENDENT_TARGET_SURFACE_EVIDENCE",
+      "STRUCTURED_METHOD_SCOPE_CLOSURE_AND_ALL_PERFORMANCE_WORK",
+      "ROOT1_OPEN_WORLD_FINALITY_BOUNDARY"
+    ],
+    "rule": "A NONMANDATORY FAMILY_EDGE IS NOT A CLAIM_THE_BEHAVIOR_IS_USELESS_OR_UNOWNED. IT MEANS ONLY THAT THIS FAMILY EDGE CANNOT BLOCK TERMINAL ACCEPTANCE WITHOUT TARGET-BEHAVIOR ENTAILMENT."
+  },
+  "hard_nonclaims": [
+    "NO_PUBLIC_OR_MATCHED_PERFORMANCE_BAR_IS_WEAKENED_OR_DELETED",
+    "NO_CLAIM_ANY_BRAIN_MECHANISM_IS_USELESS",
+    "NO_CLAIM_CAD_RESEARCH_SYNTHESIS_OR_PROFESSIONAL_PLANNING_CAPABILITIES_ARE_OUTSIDE_THE_GLOBAL_TARGET_UNIVERSE_FOREVER",
+    "NO_CLAIM_THE_CURRENT_TARGET_SURFACE_ENUMERATION_IS_EXHAUSTIVE",
+    "NO_FAMILY_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
