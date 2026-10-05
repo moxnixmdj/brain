@@ -1,0 +1,32 @@
+name: Verify composition capsule authority V1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/astra_runtime.py"
+      - "canonical/runtime/composition_state_capsule_guard_v1.py"
+      - "canonical/runtime/composition_state_capsule_v1.py"
+      - "canonical/runtime/capability_planner.py"
+      - "canonical/tests/test_composition_state_capsule_guard_v1.py"
+      - "canonical/tests/test_astra_runtime_composition_capsule_authority_v1.py"
+      - ".github/workflows/verify-composition-capsule-authority-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Compile composition runtime
+        run: |
+          python -m py_compile             canonical/runtime/astra_runtime.py             canonical/runtime/capability_planner.py             canonical/runtime/composition_state_capsule_v1.py             canonical/runtime/composition_state_capsule_guard_v1.py
+      - name: Run capsule authority falsification suite
+        run: |
+          python -m unittest -v             canonical.tests.test_composition_state_capsule_v1             canonical.tests.test_composition_state_capsule_guard_v1             canonical.tests.test_astra_runtime_composition_capsule_authority_v1             canonical.tests.test_capability_planner             canonical.tests.test_astra_runtime_model_independence
