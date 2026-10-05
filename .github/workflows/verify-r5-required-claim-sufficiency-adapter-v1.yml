@@ -1,0 +1,22 @@
+name: Verify R5 required-claim sufficiency adapter V1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/required_claim_sufficiency_adapter_v1.py"
+      - "canonical/tests/test_required_claim_sufficiency_adapter_v1.py"
+      - "canonical/governance/SYNTHESIS_R5_REQUIRED_CLAIM_SUFFICIENCY_ADAPTER_CANDIDATE_20261005_V1.json"
+      - ".github/workflows/verify-r5-required-claim-sufficiency-adapter-v1.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run adapter adversarial tests
+        run: python -m unittest canonical.tests.test_required_claim_sufficiency_adapter_v1 -v
