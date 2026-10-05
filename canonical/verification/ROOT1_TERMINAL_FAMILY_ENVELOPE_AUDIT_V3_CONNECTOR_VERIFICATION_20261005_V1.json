@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V3_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__META_ENVELOPE_FRONTIER_6_TO_4__ROOT1_POSITIVE_ZERO__GLOBAL_ENVELOPE_UNSEALED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V3.json",
+    "git_blob_sha": "a8c6a107f46081be2f124f404eba5e253d04e9a0"
+  },
+  "inputs": [
+    {
+      "path": "canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V2.json",
+      "git_blob_sha": "53abbfc02b100b5bcb9aaffe5f7b85802f267852"
+    },
+    {
+      "path": "canonical/verification/OPUS55_VOICE_DICTATION_MODEL_BOUNDARY_BROWSER_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "ab752c94b04d239b23d34cbb3121bdd0a40f0258"
+    },
+    {
+      "path": "canonical/verification/OPUS55_IMAGE_INPUT_MAPPING_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "dc099b80e811d841a153aa0cf01ffae6c0464172"
+    }
+  ],
+  "recomputed": {
+    "predecessor_meta_groups": 6,
+    "closed_groups": [
+      "VOICE_DICTATION_INPUT",
+      "IMAGE_INPUT_AND_VISUAL_REASONING"
+    ],
+    "remaining_groups": [
+      "CYBERSECURITY",
+      "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "CREATIVE_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUT"
+    ],
+    "remaining_group_count": 4,
+    "root1_positive_gap_count": 0,
+    "global_envelope_sealed": false
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
