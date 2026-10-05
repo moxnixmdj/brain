@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_INTERFACE_POLICY_NORMAL_FORM_FIRST_PARTY_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_FIRST_PARTY_SOURCE_RECOMPUTATION_PASS_WITH_PRODUCT_SURFACE_BOUNDARY__DOCUMENTED_TOOL_TRAJECTORIES_FACTOR_MODEL_POLICY_PLUS_EXTERNAL_EXECUTION__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/reasoning/2026-10-05_OPUS55_INTERFACE_POLICY_NORMAL_FORM_V1.json",
+    "git_blob_sha": "506b9deb251160f1d47d2d23fb897f852f17c541",
+    "commit_sha": "ecf4e6a3718d7d4395dfaaf76cdfd93b300a9a16"
+  },
+  "first_party_recomputation": [
+    {
+      "source": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works",
+      "observed": [
+        "TOOL_USE_IS_A_CONTRACT_BETWEEN_APPLICATION_AND_MODEL",
+        "MODEL_EMITS_STRUCTURED_TOOL_REQUEST",
+        "CLIENT_OR_ANTHROPIC_SERVER_EXECUTES_OPERATION",
+        "RESULT_FLOWS_BACK_TO_CONVERSATION",
+        "USER_DEFINED_AND_ANTHROPIC_SCHEMA_CLIENT_TOOLS_EXECUTE_OUTSIDE_MODEL"
+      ]
+    },
+    {
+      "source": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference",
+      "observed": [
+        "ANTHROPIC_EXPLICITLY_DISTINGUISHES_SERVER_TOOLS_FROM_CLIENT_TOOLS_BY_EXECUTION_LOCATION"
+      ]
+    },
+    {
+      "source": "https://platform.claude.com/docs/en/api/messages/create",
+      "observed": [
+        "MESSAGES_API_REPRESENTS_TEXT_IMAGE_DOCUMENT_SEARCH_RESULT_THINKING_TOOL_USE_TOOL_RESULT_AND_SERVER_TOOL_USE_AS_STRUCTURED_CONTENT_BLOCKS",
+        "CLIENT_TOOL_DEFINITIONS_SUPPLY_NAME_DESCRIPTION_AND_INPUT_SCHEMA__MODEL_PRODUCES_TOOL_USE_INPUT"
+      ]
+    },
+    {
+      "source": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "observed": [
+        "OPUS55_DOCUMENTED_DIRECT_INPUT_OUTPUT_IS_TEXT_AND_IMAGES_TO_TEXT",
+        "CONTEXT_WINDOW_1M",
+        "NORMAL_MAX_OUTPUT_128K"
+      ]
+    }
+  ],
+  "recomputed_logic": {
+    "documented_client_tool_trajectory_factorization": [
+      "MODEL_POLICY_RECEIVES_STATE_AND_TOOL_SCHEMA",
+      "MODEL_POLICY_EMITS_TOOL_USE_NAME_AND_ARGUMENTS",
+      "EXTERNAL_EXECUTOR_PERFORMS_OPERATION",
+      "EXTERNAL_EXECUTOR_RESULT_RETURNS_AS_TOOL_RESULT",
+      "MODEL_POLICY_CONDITIONS_ON_UPDATED_HISTORY"
+    ],
+    "documented_server_tool_trajectory_factorization": [
+      "MODEL_POLICY_OR_SERVER_AGENT_LOOP_SELECTS_TOOL_ACTION",
+      "ANTHROPIC_INFRASTRUCTURE_EXECUTES_DISTINCT_SERVER_TOOL_OPERATION",
+      "RESULT_IS_RETURNED_IN_STRUCTURED_SERVER_TOOL_RESULT_BLOCK",
+      "MODEL_CONTINUES_FROM_RESULT"
+    ],
+    "arbitrary_client_tool_internal_computation_is_intrinsic_model_capability": false,
+    "tool_selection_parameterization_sequencing_interpretation_recovery_are_model_policy_capabilities": true,
+    "new_external_tool_name_alone_entails_new_intrinsic_opus_capability": false,
+    "factorization_passes_for_documented_tool_contract": true
+  },
+  "scope_boundary": {
+    "proved": "DOCUMENTED_CLAUDE_API_AND_DOCUMENTED_TOOL_USE_TRAJECTORIES_FACTOR_AS_MODEL_POLICY_PLUS_EXTERNAL_EXECUTION_TRANSITIONS.",
+    "not_proved": [
+      "EVERY_CLAUDE_AI_OR_MOBILE_PRODUCT_SURFACE_USES_AN_IDENTICAL_API_HARNESS",
+      "THE_DOCUMENTED_INTERFACE_IS_A_COMPLETE_SEMANTIC_SUPERSET_OF_ALL_USEFUL_OPUS55_BEHAVIORS",
+      "THE_EXISTING_EIGHT_POLICY_BASIS_FAMILIES_ARE_EXHAUSTIVE",
+      "BRAIN_DOMINATES_THE_MODEL_POLICY_CLASS"
+    ],
+    "consequence": "THE_FACTORISATION_IS_SAFE_FOR_CAUSAL_CREDIT_AND_SCHEDULING__NOT_YET_A_LITERAL_TARGET_COVERAGE_CERTIFICATE"
+  },
+  "verified_scheduler_consequence": [
+    "DO_NOT_CREATE_A_NEW_INTRINSIC_CAPABILITY_REQUIREMENT_SOLELY_BECAUSE_A_NEW_EXTERNAL_CLIENT_TOOL_IMPLEMENTATION_EXISTS",
+    "DO_NOT_COUNT_EXTERNAL_TOOL_BACKEND_COMPUTATION_AS_OPUS_MODEL_POLICY_CAPABILITY_WITHOUT_CAUSAL_EVIDENCE",
+    "PRESERVE_TOOL_ORCHESTRATION_SELECTION_ARGUMENT_FORMATION_RESULT_INTEGRATION_RECOVERY_AND_LONG_HORIZON_CONTROL_AS_MODEL_POLICY_TARGETS",
+    "CONTINUE_SEARCH_FOR_ANY_FIRST_PARTY_INTRINSIC_ACTION_OR_MODALITY_CHANNEL_NOT_REPRESENTABLE_BY_THE_DOCUMENTED_POLICY_INTERFACE"
+  ],
+  "hard_nonclaims": [
+    "NO_TARGET_COMPLETENESS_CERTIFICATE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_DELETION_OF_EXISTING_PUBLIC_PERFORMANCE_BARS",
+    "NO_LITERAL_TERMINAL_FINALITY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "verification_result": "PASS_WITH_SCOPE_BOUNDARY",
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
