@@ -86,7 +86,7 @@
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "GLOBAL_TERMINAL_PROOF_OBLIGATIONS_CLOSED_PER_NEW_REALITY_INFORMATION__THEN_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "TERMINAL_FALSE__5_OF_19_ACCEPTED__14_OF_19_FAMILIES_OPEN__14_OF_38_ATOMIC_PROVED__24_OF_38_ATOMIC_UNRESOLVED__8_META_OPEN__32_TOTAL_OPEN_TRUTH_OBLIGATIONS__ROOT1_POSITIVE_GAP_ZERO__V22_THREE_ACTIVE_CAUSAL_INTERFACES",
+    "exact_blocker": "TERMINAL_FALSE__14_OF_19_FAMILIES_OPEN__24_OF_38_ATOMIC_PREDICATES_UNRESOLVED__SEE_CURRENT_TERMINAL_AUTHORITY_NEXT_FOR_EXACT_ACTIVE_ROUTE",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -185,7 +185,7 @@
       "status": "SOURCE_READ_AFTER_REVOCATION__ZERO_CREDIT__NO_EXECUTION",
       "evidence_path": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json"
     },
-    "next_progress_event_target": "FIRST_VERIFIED_CERTIFICATE_COUNTEREXAMPLE_OR_WAKE_DELTA_ON_CURRENT_V22_INTERFACES__THEN_IMMEDIATE_FIXED_POINT_RECOMPUTE",
+    "next_progress_event_target": "CURRENT_TERMINAL_AUTHORITY_NEXT_PASS_OR_FALSIFICATION__OR_ANOTHER_CAUSALLY_BOUND_ZERO_REALITY_DELTA__NO_TERMINAL_PROMOTION_WITHOUT_SEPARATE_INDEPENDENT_REDUCTION",
     "open_mechanism_residual_count": 0,
     "open_mechanism_residuals": [],
     "m0b_closure": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json",
