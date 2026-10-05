@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CONDITION_RESTRICTION_CELL_COMPILER_LOCAL_CORROBORATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "LOCAL_CORROBORATION_PASS__10_OF_10_ADVERSARIAL_TESTS__CURRENT_MATRIX_37_CELLS__ZERO_CREDIT__NOT_INDEPENDENT_VERIFICATION",
+  "subject": {
+    "runtime_path": "canonical/runtime/terminal_condition_restriction_cell_compiler_v1.py",
+    "tests_path": "canonical/tests/test_terminal_condition_restriction_cell_compiler_v1.py",
+    "governance_path": "canonical/governance/TERMINAL_CONDITION_RESTRICTION_CELL_COMPILER_V1.json"
+  },
+  "current_matrix": {
+    "path": "canonical/governance/TERMINAL_CONDITION_RESTRICTION_TRANSFER_MATRIX_20261005_V1.json",
+    "git_blob_sha": "c3ba5ef92057607d6b072867eb31d0c6a21aafb1",
+    "condition_count": 7,
+    "condition_family_cell_count": 37
+  },
+  "checks": {
+    "exact_condition_family_pointwise_closes": true,
+    "missing_condition_scope_stays_open": true,
+    "aggregate_mean_stays_open": true,
+    "scope_incomplete_stays_open": true,
+    "non_independent_stays_open": true,
+    "malformed_sha_stays_open": true,
+    "objective_ceiling_closes": true,
+    "exhaustive_per_case_closes": true,
+    "wrong_family_stays_open": true,
+    "missing_matrix_fails_closed": true
+  },
+  "current_live_consequence": "LEGACY_ACCEPTANCE_ROWS_LACK_EXPLICIT_FAMILY_PLUS_COVERED_CONDITIONS_METADATA__SO_THIS_COMPILER_GRANTS_ZERO_CURRENT_CELL_CREDIT_BY_INFERENCE",
+  "hard_nonclaims": [
+    "NOT_INDEPENDENT_VERIFICATION",
+    "NO_CONDITION_PARITY_CREDIT",
+    "NO_ATOMIC_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_PROMOTION",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
