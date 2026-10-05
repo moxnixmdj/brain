@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ACCEPTANCE_SEMANTICS_BINDING_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__STRUCTURAL_SOUNDNESS_REPAIR__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "observed_gap": "ACCEPTANCE_QUOTIENT_SIMULATION_V4 makes acceptance_semantics_class load-bearing but accepts that class from the candidate certificate itself without an independent binding to the exact acceptance obligation and behavioral contract.",
+  "counterexample_shape": {
+    "true_obligation": "STOCHASTIC_MATCHED_NONINFERIORITY",
+    "candidate_declares": "UNIVERSAL_TOP_SUPPORT",
+    "v4_structural_effect": "The stochastic policy-distribution bridge is not requested; a distribution-free receipt is checked instead.",
+    "why_blocking": "A self-declared class cannot decide which proof burden applies to itself."
+  },
+  "repair": {
+    "runtime": "canonical/runtime/acceptance_quotient_simulation_v5.py",
+    "rule": "Before V4, require an independently verifiable receipt binding the exact acceptance obligation id and behavioral contract id to the declared semantics class, proving the class assignment sound and complete on the claimed scope and deciding distribution dependence.",
+    "stochastic_rule": "The binding must explicitly prove that distributional comparison is required.",
+    "distribution_free_rule": "The binding must explicitly prove the obligation belongs to the claimed distribution-free class.",
+    "mismatch_rule": "Any divergence between the bound class and candidate-declared class fails closed."
+  },
+  "leverage": {
+    "closes": [
+      "STOCHASTIC_TO_DISTRIBUTION_FREE_RELABEL_BYPASS",
+      "SELF_CERTIFIED_ACCEPTANCE_CLASSIFICATION",
+      "PROOF_BURDEN_SELECTION_BY_THE_CANDIDATE_BEING_PROVED"
+    ],
+    "preserves": [
+      "V4_DISTRIBUTION_BRIDGE_REQUIREMENT",
+      "V3_SINGLE_OWNED_CAUSAL_POLICY_REQUIREMENT",
+      "V2_SEMANTIC_AND_GRAPH_REQUIREMENTS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CREDIT",
+    "NO_CAPABILITY_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CLAIM",
+    "NO_CLAIM_RECEIPT_BYTES_HAVE_BEEN_INDEPENDENTLY_VERIFIED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}
