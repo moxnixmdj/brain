@@ -1,0 +1,192 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FIRST_PARTY_OBSERVABLE_SURFACE_COVERAGE_AUDIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FIRST_PARTY_OBSERVABLE_SURFACE_BOUND__NO_POSITIVE_NEW_FAMILY_GAP_PROVED__LOSSLESS_MAPPING_STILL_OPEN__ZERO_CREDIT",
+  "objective": "Bind currently public first-party Claude Opus 5.5 useful-behavior surfaces to candidate existing Brain families, while making every nontrivial domain/modality mapping an explicit proof obligation before the 19-family envelope may be called exhaustive.",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "first_party_sources": [
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "observed": [
+        "TEXT_INCLUDING_VOICE_DICTATION_INPUT",
+        "IMAGE_INPUT",
+        "CONVERSATION",
+        "ANALYSIS",
+        "CODING",
+        "CREATIVE_TASKS",
+        "TEXT_BASED_ARTIFACT_OUTPUT",
+        "DIAGRAM_OUTPUT",
+        "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT_CAPABILITY_EVALUATION",
+        "CHEMICAL_AND_BIOLOGICAL_CAPABILITY_EVALUATION"
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/claude/opus",
+      "observed": [
+        "SERIOUS_CODING",
+        "AI_AGENTS",
+        "KNOWLEDGE_WORK",
+        "CYBERSECURITY_BENCHMARK_TASKS",
+        "BIOLOGY_BENCHMARK_TASKS",
+        "FRONTIER_LLM_DEVELOPMENT_TASKS"
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "observed": [
+        "CLEARER_NATURAL_COMMUNICATION",
+        "LONG_SESSION_WORK_PARTNER",
+        "CYBERSECURITY_CAPABILITIES",
+        "BIOLOGY_RESEARCH_AND_DEVELOPMENT_CAPABILITIES"
+      ]
+    }
+  ],
+  "candidate_mappings": [
+    {
+      "surface": "SERIOUS_CODING",
+      "candidate_families": [
+        "ADVANCED_AGENTIC_CODING"
+      ],
+      "mapping_state": "DIRECT_FAMILY_SEMANTIC_MATCH__FORMAL_LOSSLESS_COVERAGE_STILL_SEPARATE"
+    },
+    {
+      "surface": "AI_AGENTS",
+      "candidate_families": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "mapping_state": "MULTI_FAMILY_CANDIDATE__FORMAL_UNION_COVERAGE_REQUIRED"
+    },
+    {
+      "surface": "KNOWLEDGE_WORK",
+      "candidate_families": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "ARTIFACT_CREATION"
+      ],
+      "mapping_state": "MULTI_FAMILY_CANDIDATE__FORMAL_UNION_COVERAGE_REQUIRED"
+    },
+    {
+      "surface": "IMAGE_INPUT",
+      "candidate_families": [
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "COMPUTER_AND_BROWSER_USE"
+      ],
+      "mapping_state": "CANDIDATE__IMAGE_MODALITY_AND_BEHAVIOR_SCOPE_RELATION_REQUIRED"
+    },
+    {
+      "surface": "CREATIVE_TASKS",
+      "candidate_families": [
+        "COMMUNICATION_AND_SYNTHESIS",
+        "ARTIFACT_CREATION"
+      ],
+      "mapping_state": "CANDIDATE__CREATIVE_SCOPE_BOUNDARY_NOT_YET_FORMALLY_EXHAUSTIVE"
+    },
+    {
+      "surface": "TEXT_BASED_ARTIFACT_OUTPUT_AND_DIAGRAMS",
+      "candidate_families": [
+        "ARTIFACT_CREATION",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+      ],
+      "mapping_state": "CANDIDATE__DIAGRAM_GENERATION_SCOPE_BINDING_REQUIRED"
+    },
+    {
+      "surface": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+      "candidate_families": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+      ],
+      "mapping_state": "CANDIDATE__CROSS_FAMILY_LOSSLESS_UNION_PROOF_REQUIRED"
+    },
+    {
+      "surface": "CYBERSECURITY",
+      "candidate_families": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "COMPUTER_AND_BROWSER_USE",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "mapping_state": "CANDIDATE_DOMAIN_INSTANCE__NO_NEW_FAMILY_GAP_INFERRED__LOSSLESS_DOMAIN_MAPPING_REQUIRED"
+    },
+    {
+      "surface": "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+      "candidate_families": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "mapping_state": "CANDIDATE_DOMAIN_INSTANCE__NO_NEW_FAMILY_GAP_INFERRED__LOSSLESS_DOMAIN_MAPPING_REQUIRED"
+    },
+    {
+      "surface": "VOICE_DICTATION_INPUT",
+      "candidate_families": [
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "mapping_state": "UNRESOLVED_MODALITY_BOUNDARY__MUST_DETERMINE_WHETHER_MODEL_CAPABILITY_OR_CLIENT_TEXT_TRANSCRIPTION_SURFACE_BEFORE_ENVELOPE_SEAL"
+    },
+    {
+      "surface": "CLEAR_NATURAL_COMMUNICATION_AND_LONG_SESSION_COLLABORATION",
+      "candidate_families": [
+        "COMMUNICATION_AND_SYNTHESIS",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+        "PROFESSIONAL_KNOWLEDGE_WORK"
+      ],
+      "mapping_state": "CANDIDATE__FORMAL_SCOPE_COVERAGE_REQUIRED"
+    }
+  ],
+  "unresolved_envelope_obligations": [
+    "PROVE_LOSSLESS_EXISTING_FAMILY_UNION_COVERAGE_FOR_CYBERSECURITY_USEFUL_BEHAVIORS_OR_OPEN_NEW_FAMILY",
+    "PROVE_LOSSLESS_EXISTING_FAMILY_UNION_COVERAGE_FOR_BIOLOGY_R_AND_D_USEFUL_BEHAVIORS_OR_OPEN_NEW_FAMILY",
+    "PROVE_LOSSLESS_EXISTING_FAMILY_UNION_COVERAGE_FOR_AUTOMATED_AI_R_AND_D_USEFUL_BEHAVIORS_OR_OPEN_NEW_FAMILY",
+    "PROVE_CREATIVE_TASK_AND_DIAGRAM_OUTPUT_SCOPE_IS_COVERED_BY_EXISTING_SYNTHESIS_ARTIFACT_VISION_FAMILIES_OR_OPEN_NEW_FAMILY",
+    "PROVE_IMAGE_INPUT_MODALITY_SCOPE_IS_COVERED_BY_CURRENT_VISION_COMPUTER_FAMILIES",
+    "CLASSIFY_VOICE_DICTATION_AS_MODEL_CAPABILITY_VS_CLIENT_TRANSCRIPTION_AND_BIND_REQUIRED_CAPABILITY_IF_MODEL_LOAD_BEARING",
+    "CONTINUE_FIRST_PARTY_SYSTEM_CARD_BENCHMARK_DIMENSION_ENUMERATION_WITHOUT_TREATING_SAFETY_EVALUATION_CATEGORIES_AS_AUTOMATIC_NEW_FAMILIES"
+  ],
+  "root1_effect": {
+    "positive_new_gap_count_delta": 0,
+    "reason": "PUBLIC_SURFACE_DISCOVERY_ALONE_DOES_NOT_PROVE_EXISTING_19_FAMILY_ENVELOPE_LACKS_A_REQUIRED_CAPABILITY;CANDIDATE_MAPPINGS_REMAIN_UNVERIFIED",
+    "envelope_sealed": false
+  },
+  "scheduler_delta": {
+    "delete": [
+      "DECLARE_19_FAMILY_ENVELOPE_EXHAUSTIVE_FROM_HEADLINE_PRODUCT_PAGE_ALONE",
+      "OPEN_NEW_CYBER_OR_BIOLOGY_FAMILY_BY_DOMAIN_NAME_ONLY",
+      "ASSUME_CREATIVE_DIAGRAM_OR_VOICE_MODALITY_IS_ALREADY_COVERED_WITHOUT_SCOPE_BINDING"
+    ],
+    "preserve": [
+      "FIRST_PARTY_SYSTEM_CARD_AND_TRANSPARENCY_SURFACE_ENUMERATION",
+      "FORMAL_LOSSLESS_MAPPING_CERTIFICATES_TO_EXISTING_FAMILIES",
+      "OPEN_NEW_FAMILY_ONLY_IF_A_FIRST_PARTY_USEFUL_BEHAVIOR_REMAINS_UNMAPPED_AFTER_EXACT_SCOPE_ANALYSIS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FIRST_PARTY_SOURCE_SET_IS_ALL_POSSIBLE_PUBLIC_OR_PRIVATE_OPUS55_BEHAVIOR_EVIDENCE",
+    "NO_CLAIM_CYBERSECURITY_OR_BIOLOGY_IS_MERELY_CODING_OR_RESEARCH",
+    "NO_CLAIM_VOICE_DICTATION_IS_NATIVE_MODEL_AUDIO_PROCESSING",
+    "NO_ENVELOPE_EXHAUSTIVENESS_CLAIM",
+    "NO_ROOT1_POSITIVE_GAP_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
