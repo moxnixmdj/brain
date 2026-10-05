@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_DESCRIPTION_INVERTER_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SOURCE_DERIVED_REVERSE_GRAMMAR_COMPILER__ZERO_TERMINAL_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Replace hand-written per-checker prompt recognizers with a generic static compiler that derives visible description templates and rendered parameters from the frozen public checker source without executing it.",
+  "frozen_public_sources": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "modern_instructions_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+    "modern_registry_blob": "adfed4832877566e62970257b50c6fa32c302fb2",
+    "legacy_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "legacy_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891"
+  },
+  "connector_static_recomputation": {
+    "modern_instruction_classes": 58,
+    "modern_classes_with_description_pattern": 58,
+    "legacy_instruction_classes_in_source": 29,
+    "legacy_active_registry_instruction_types": 25,
+    "legacy_inactive_source_classes": [
+      "KeySentenceChecker",
+      "RephraseParagraph",
+      "RephraseChecker",
+      "ConstrainedStartChecker"
+    ],
+    "legacy_active_classes_with_description_pattern": 25,
+    "terminal_rows_read": 0
+  },
+  "breakthrough": {
+    "old_scaling_problem": "EACH_PUBLIC_CHECKER_DESCRIPTION_REQUIRED_A_SEPARATE_HAND_WRITTEN_PROMPT_RECOGNIZER_AND_PARAMETER_EXTRACTOR",
+    "new_capability": "AST_PARSE_THE_FROZEN_PUBLIC_BUILD_DESCRIPTION_METHODS__EXTRACT_LITERAL_DESCRIPTION_TEMPLATES__COMPILE_FORMAT_FIELDS_TO_CAPTURE_GROUPS__REPORT_NONRENDERED_PARAMETERS_EXPLICITLY",
+    "asymptotic_delta": "MANUAL_RECOGNIZER_IMPLEMENTATION_COUNT_REDUCED_FROM_O(CHECKER_TYPES)_TO_ONE_GENERIC_COMPILER_PLUS_TRUE_NONRENDERED_PARAMETER_RESIDUALS",
+    "source_execution": false,
+    "model_dependency_count": 0,
+    "network_dependency_at_runtime": false
+  },
+  "runtime": {
+    "path": "canonical/runtime/public_description_template_inverter_v1.py",
+    "test_path": "canonical/tests/test_public_description_template_inverter_v1.py",
+    "behavior": "FAIL_CLOSED_ON_SOURCE_SYNTAX_OR_UNSUPPORTED_FORMAT_FIELDS__NEVER_GUESS_NONRENDERED_PARAMETERS"
+  },
+  "composition_target": [
+    "PRECOMPILE_PINNED_PUBLIC_MODERN_AND_LEGACY_MANIFESTS",
+    "BIND_VISIBLE_PROMPT_DESCRIPTION_MATCHES_TO_CHECKER_IDENTITY_AND_RENDERED_PARAMETERS",
+    "ROUTE_NONRENDERED_PARAMETER_RESIDUALS_TO_ALREADY_VERIFIED_PUBLIC_KWARGS_OR_REFERENCE_INDEPENDENT_CONSTRUCTORS",
+    "SYNTHESIZE_CHECKER_WITNESSES_AND_POSTVALIDATE_WITH_FROZEN_EXACT_CHECKERS"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_BY_ITSELF_PROVE_FROZEN_TERMINAL_DATASET_EQUIVALENCE",
+    "DOES_NOT_BY_ITSELF_SYNTHESIZE_WITNESSES_FOR_ALL_83_CHECKERS",
+    "DOES_NOT_CLOSE_LIVEBENCH_IF_GE_65_7",
+    "DOES_NOT_GRANT_ACCEPTANCE_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "contamination_firewall": [
+    "ZERO_UNEXPOSED_TERMINAL_CASE_CONTENT",
+    "PUBLIC_PINNED_SOURCE_ONLY",
+    "NO_CASE_SPECIFIC_RULES",
+    "NO_HIDDEN_KWARGS_GUESSED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
