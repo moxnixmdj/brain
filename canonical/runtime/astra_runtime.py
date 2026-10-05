@@ -4271,11 +4271,38 @@ def _run_model_independent_goal(step, mission, goal):
     checkpoint_path,checkpoint,resumed=_load_controller_checkpoint(step,mission,actions)
     trace=list(checkpoint.get("completed_actions") or [])
     start_cycle=len(trace)
+    capsule_config=step.get("_composition_state_capsule_v1")
+    capsule_module=None
+    composition_capsule=None
+    if capsule_config is not None:
+        if not isinstance(capsule_config,dict):
+            raise Blocker("COMPOSITION_STATE_CAPSULE_CONFIG_INVALID")
+        capsule_module=_load_composition_state_capsule()
+        composition_capsule=_composition_capsule_from_trace(
+            capsule_module,
+            list(capsule_config.get("initial_facts") or []),
+            trace,
+        )
     for cycle in range(start_cycle,len(actions)):
         raw_action=actions[cycle]
         if not isinstance(raw_action,dict):
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_NOT_OBJECT")
-        action=_resolve_result_refs(dict(raw_action),trace)
+        if capsule_module is not None and raw_action.get("type")!="finish":
+            _composition_contract(raw_action)
+            try:
+                capsule_module.project_context(
+                    composition_capsule,
+                    raw_action["_capability_contract"]["requires"],
+                )
+            except Exception as exc:
+                raise Blocker(
+                    "COMPOSITION_REQUIRED_STATE_UNAVAILABLE:"+str(cycle)
+                ) from exc
+            action=_resolve_result_refs_via_capsule(
+                dict(raw_action),capsule_module,composition_capsule
+            )
+        else:
+            action=_resolve_result_refs(dict(raw_action),trace)
         typ=action.get("type")
         if typ not in allowed_types:
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_REJECTED:"+str(typ))
@@ -4286,7 +4313,14 @@ def _run_model_independent_goal(step, mission, goal):
         if isinstance(result,dict) and result.get("error"):
             raise Blocker("MODEL_INDEPENDENT_ACTION_ERROR:"+str(result.get("error")))
         _verify_action_expectation(action,result)
-        trace.append({"cycle":cycle,"plan":action,"result":result})
+        if capsule_module is not None and typ!="finish":
+            composition_capsule=_composition_capsule_commit(
+                capsule_module,composition_capsule,action,result,cycle
+            )
+        trace_entry={"cycle":cycle,"plan":action,"result":result}
+        if capsule_module is not None:
+            trace_entry["composition_capsule_head_hash"]=composition_capsule["head_hash"]
+        trace.append(trace_entry)
         checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace)
         interrupt_after=step.get("interrupt_after_controller_actions_once")
         if interrupt_after is not None:
@@ -4311,6 +4345,15 @@ def _run_model_independent_goal(step, mission, goal):
               "planner_model_last":None,
               "cycles":len(trace),"trace":trace,
               "final_summary":summary,
+              "composition_state_capsule":(
+                {
+                  "status":capsule_module.verify_capsule(composition_capsule).get("status"),
+                  "head_hash":composition_capsule.get("head_hash"),
+                  "record_count":len(composition_capsule.get("records") or []),
+                  "enforcement":"REQUIRED_FOR_ALL_NON_FINISH_CAPABILITY_ACTIONS",
+                }
+                if capsule_module is not None else None
+              ),
               "controller_checkpoint":{
                 "path":str(checkpoint_path.relative_to(ROOT)),
                 "plan_sha256":checkpoint.get("plan_sha256"),
@@ -4842,6 +4885,175 @@ def _run_verified_capability_proposal(step,mission,goal):
         result["proposal_generation"]=problem["_proposal_generation"]
     return result
 
+def _load_composition_state_capsule():
+    path=pathlib.Path(__file__).resolve().with_name("composition_state_capsule_v1.py")
+    spec=importlib.util.spec_from_file_location("project_brain_composition_state_capsule_v1",path)
+    if spec is None or spec.loader is None:
+        raise Blocker("COMPOSITION_STATE_CAPSULE_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _composition_contract(action):
+    contract=action.get("_capability_contract")
+    if not isinstance(contract,dict):
+        raise Blocker("COMPOSITION_CAPABILITY_CONTRACT_MISSING")
+    allowed={"requires","provides","result_fields"}
+    if set(contract)!=allowed:
+        raise Blocker("COMPOSITION_CAPABILITY_CONTRACT_FIELDS_INVALID")
+    out={}
+    for key in ("requires","provides","result_fields"):
+        value=contract.get(key)
+        if (
+            not isinstance(value,list)
+            or any(not isinstance(x,str) or not x.strip() for x in value)
+            or len(value)!=len(set(value))
+        ):
+            raise Blocker("COMPOSITION_CAPABILITY_CONTRACT_INVALID:"+key)
+        out[key]=[str(x).strip() for x in value]
+    if not out["provides"]:
+        raise Blocker("COMPOSITION_CAPABILITY_PROVIDES_EMPTY")
+    return out
+
+
+def _composition_result_field(result,field):
+    current=result
+    for part in str(field).split("."):
+        if not isinstance(current,dict) or part not in current:
+            raise Blocker("COMPOSITION_DECLARED_RESULT_FIELD_MISSING:"+str(field))
+        current=current[part]
+    return current
+
+
+def _composition_seed_capsule(module,initial_facts):
+    if (
+        not isinstance(initial_facts,list)
+        or any(not isinstance(x,str) or not x.strip() for x in initial_facts)
+        or len(initial_facts)!=len(set(initial_facts))
+    ):
+        raise Blocker("COMPOSITION_INITIAL_FACTS_INVALID")
+    capsule=module.empty_capsule()
+    facts=sorted(str(x).strip() for x in initial_facts)
+    if not facts:
+        return capsule
+    action_ref="verified_initial_facts:bootstrap"
+    return module.append_macrostep(
+        capsule,
+        producer="verified_initial_facts",
+        action_ref=action_ref,
+        requires=[],
+        provides=facts,
+        values={fact:{"verified_initial_fact":True} for fact in facts},
+        evidence_refs=[],
+        lineage={fact:["action:"+action_ref] for fact in facts},
+    )
+
+
+def _composition_capsule_commit(module,capsule,action,result,cycle):
+    contract=_composition_contract(action)
+    module.project_context(capsule,contract["requires"])
+    if not isinstance(result,dict):
+        raise Blocker("COMPOSITION_ACTION_RESULT_NOT_OBJECT")
+    fields={
+        field:_composition_result_field(result,field)
+        for field in contract["result_fields"]
+    }
+    capability_id=str(action.get("capability_id") or "").strip()
+    if not capability_id:
+        raise Blocker("COMPOSITION_CAPABILITY_ID_MISSING")
+    action_ref="capability:"+capability_id+":cycle:"+str(int(cycle))
+    state_lineage=["state:"+key for key in contract["requires"]]
+    lineage_refs=state_lineage+["action:"+action_ref]
+    values={
+        effect:{
+            "provider_cycle":int(cycle),
+            "capability_id":capability_id,
+            "fields":fields,
+            "effect_satisfied":True,
+        }
+        for effect in contract["provides"]
+    }
+    return module.append_macrostep(
+        capsule,
+        producer=capability_id,
+        action_ref=action_ref,
+        requires=contract["requires"],
+        provides=contract["provides"],
+        values=values,
+        evidence_refs=[],
+        lineage={effect:list(lineage_refs) for effect in contract["provides"]},
+    )
+
+
+def _composition_capsule_from_trace(module,initial_facts,trace):
+    capsule=_composition_seed_capsule(module,initial_facts)
+    if not isinstance(trace,list):
+        raise Blocker("COMPOSITION_TRACE_INVALID")
+    for index,item in enumerate(trace):
+        if not isinstance(item,dict):
+            raise Blocker("COMPOSITION_TRACE_ITEM_INVALID:"+str(index))
+        plan=item.get("plan")
+        if not isinstance(plan,dict):
+            raise Blocker("COMPOSITION_TRACE_PLAN_INVALID:"+str(index))
+        if plan.get("type")=="finish":
+            continue
+        if "_capability_contract" not in plan:
+            raise Blocker("COMPOSITION_TRACE_BYPASS:"+str(index))
+        capsule=_composition_capsule_commit(
+            module,capsule,plan,item.get("result"),item.get("cycle",index)
+        )
+        expected=item.get("composition_capsule_head_hash")
+        if expected is not None and expected!=capsule.get("head_hash"):
+            raise Blocker("COMPOSITION_CHECKPOINT_CAPSULE_HEAD_MISMATCH:"+str(index))
+    return capsule
+
+
+def _resolve_result_refs_via_capsule(value,module,capsule):
+    if isinstance(value,dict):
+        if set(value.keys())=={"$result"}:
+            spec=value["$result"]
+            if not isinstance(spec,dict):
+                raise Blocker("COMPOSITION_RESULT_REFERENCE_INVALID")
+            allowed={"cycle","field","effect"}
+            if set(spec)!=allowed:
+                raise Blocker("COMPOSITION_RESULT_REFERENCE_NOT_EFFECT_BOUND")
+            effect=str(spec.get("effect") or "").strip()
+            field=str(spec.get("field") or "").strip()
+            try:
+                cycle=int(spec.get("cycle",-1))
+            except Exception as exc:
+                raise Blocker("COMPOSITION_RESULT_REFERENCE_CYCLE_INVALID") from exc
+            if cycle<0 or not effect or not field:
+                raise Blocker("COMPOSITION_RESULT_REFERENCE_INVALID")
+            try:
+                ctx=module.project_context(capsule,[effect])
+            except Exception as exc:
+                raise Blocker(
+                    "COMPOSITION_RESULT_REFERENCE_STATE_MISSING:"+effect
+                ) from exc
+            state=ctx["values"][effect]
+            if (
+                not isinstance(state,dict)
+                or int(state.get("provider_cycle",-1))!=cycle
+                or not isinstance(state.get("fields"),dict)
+                or field not in state["fields"]
+            ):
+                raise Blocker(
+                    "COMPOSITION_RESULT_REFERENCE_BINDING_MISMATCH:"
+                    +effect+":"+str(cycle)+":"+field
+                )
+            return state["fields"][field]
+        return {
+            k:_resolve_result_refs_via_capsule(v,module,capsule)
+            for k,v in value.items()
+        }
+    if isinstance(value,list):
+        return [_resolve_result_refs_via_capsule(v,module,capsule) for v in value]
+    return value
+
+
 def _load_capability_planner():
     path=pathlib.Path(__file__).resolve().with_name("capability_planner.py")
     spec=importlib.util.spec_from_file_location("project_brain_capability_planner",path)
@@ -5304,6 +5516,10 @@ def _run_capability_planned_goal(step, mission, goal):
     derived.pop("capability_problem",None)
     derived.pop("capability_problem_ref",None)
     derived["controller_actions"]=planned["actions"]
+    derived["_composition_state_capsule_v1"]={
+        "initial_facts":list(planned["planning"].get("initial_facts") or []),
+        "enforcement":"REQUIRED_FOR_ALL_NON_FINISH_CAPABILITY_ACTIONS",
+    }
     derived["max_controller_actions"]=max(
         int(step.get("max_controller_actions",16)),
         len(planned["actions"])
