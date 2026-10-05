@@ -3,7 +3,7 @@
   "date": "2026-10-05",
   "status": "CANDIDATE_BREAKTHROUGH__OPAQUE_VENDOR_STATE_ALPHA_QUOTIENT__INDEPENDENT_SEMANTIC_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "objective": "Compress the repaired Opus 5.5 interface-completeness and dominance problem by proving that vendor-specific opaque state-carrier bytes are not distinct capability values when all load-bearing acceptance and future behavior are invariant under alpha-renaming that preserves carrier kind actor identity order lineage and state-transition effects.",
+  "objective": "Compress the repaired Opus 5.5 interface-completeness and dominance problem by proving that vendor-specific opaque state-carrier bytes are not distinct capability values when all load-bearing acceptance and future behavior are invariant under alpha-renaming that preserves carrier kind actor identity order emit/echo linkage and state-transition effects.",
   "authorities": {
     "profile_aware_interface_v2": {
       "path": "canonical/governance/OPUS55_PROFILE_AWARE_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE_20261005_V2.json",
@@ -37,8 +37,8 @@
   ],
   "definitions": {
     "RAW_TRACE": "A finite actor-attributed Opus55 interaction trace including semantic events and opaque state-carrier values.",
-    "OPAQUE_CARRIER": "A documented carrier whose raw bytes or identifier are not themselves assigned task utility but whose identity ordering and round-trip lineage can influence later transitions.",
-    "ALPHA_RENAMING": "Any bijection over opaque carrier values within each actor and carrier kind that preserves equality inequality emission order echo links and lineage while leaving every semantic payload unchanged.",
+    "OPAQUE_CARRIER": "A documented carrier whose raw bytes or identifier are not themselves assigned task utility but whose identity ordering and round-trip linkage can influence later transitions.",
+    "ALPHA_RENAMING": "Any bijection over opaque carrier values within each actor and carrier kind that preserves equality inequality emission order echo links while leaving every semantic payload unchanged.",
     "Q_TRACE": "The equivalence class of a raw trace under all admissible alpha-renamings of opaque carriers.",
     "CAPABILITY_ACCEPTANCE": "Any terminal capability scorer or proof predicate whose value is invariant under admissible opaque-carrier alpha-renaming.",
     "BRAIN_SUBSTITUTE_STATE": "A Brain-owned state representation that need not reproduce Opus vendor bytes but must preserve the quotient trace and every load-bearing future transition used by the claimed capability."
@@ -47,7 +47,7 @@
     "id": "OPAQUE_STATE_ALPHA_QUOTIENT_PRESERVES_CAPABILITY_DOMINANCE",
     "premises": [
       "THE_CARRIER_CLASSIFICATION_IS_SOUND__NO_USER_OR_TASK_UTILITY_DEPENDS_ON_THE_RAW_OPAQUE_BYTES_OR_VENDOR_IDENTIFIER",
-      "EVERY_LOAD_BEARING_CAUSAL_DEPENDENCY_OF_THE_CARRIER_IS_PRESERVED_BY_KIND_IDENTITY_ORDER_LINEAGE_AND_RESULTING_STATE_TRANSITIONS",
+      "EVERY_LOAD_BEARING_CAUSAL_DEPENDENCY_OF_THE_CARRIER_IS_PRESERVED_BY_KIND_IDENTITY_ORDER_LINKAGE_AND_RESULTING_STATE_TRANSITIONS",
       "CAPABILITY_ACCEPTANCE_IS_INVARIANT_UNDER_ADMISSIBLE_ALPHA_RENAMING",
       "BRAIN_PROVES_EQUAL_OR_BETTER_CAPABILITY_ACCEPTANCE_OVER_THE_QUOTIENT_TRACE_DOMAIN_USING_BRAIN_OWNED_STATE"
     ],
@@ -55,7 +55,7 @@
     "proof": [
       "PARTITION_RAW_TRACES_INTO_EQUIVALENCE_CLASSES_UNDER_ADMISSIBLE_ALPHA_RENAMING.",
       "BY_ACCEPTANCE_INVARIANCE_EVERY_RAW_TRACE_IN_ONE_CLASS_HAS_THE_SAME_CAPABILITY_RELEVANT_VALUE.",
-      "PRESERVING_KIND_IDENTITY_ORDER_LINEAGE_AND_FUTURE_TRANSITION_BEHAVIOR_PRESERVES_ALL_DECLARED_LOAD_BEARING_CAUSAL_USE_OF_THE_CARRIER.",
+      "PRESERVING_KIND_IDENTITY_ORDER_LINKAGE_AND_FUTURE_TRANSITION_BEHAVIOR_PRESERVES_ALL_DECLARED_LOAD_BEARING_CAUSAL_USE_OF_THE_CARRIER.",
       "THEREFORE_COMPARING_BRAIN_AND_TARGET_ON_ONE QUOTIENT REPRESENTATIVE OR DIRECTLY ON_THE_QUOTIENT_CLASS_LOSES_NO_CAPABILITY_RELEVANT_INFORMATION.",
       "EXACT_VENDOR_BYTES_ARE_IMPLEMENTATION_STATE_NOT_AN_ADDITIONAL_CAPABILITY_OBLIGATION_UNLESS_A_FALSIFIER_SHOWS_RAW_BYTE_DEPENDENCE."
     ]
@@ -75,7 +75,7 @@
     ],
     "replace_with": [
       "FINITE_CARRIER_KIND_ENUMERATION",
-      "ALPHA_EQUIVALENCE_LINEAGE_VERIFICATION",
+      "ALPHA_EQUIVALENCE_LINKAGE_VERIFICATION",
       "STATE_TRANSITION_BEHAVIOR_EQUIVALENCE_OR_DOMINANCE",
       "FAIL_CLOSED_TEST_FOR_ANY_ACCEPTANCE_DEPENDENCE_ON_RAW_CARRIER_BYTES"
     ],
