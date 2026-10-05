@@ -1,0 +1,34 @@
+{
+  "schema":"PROJECT_BRAIN_ROOT3_COW_TRANSACTION_CANDIDATE_20261005_V1",
+  "date":"2026-10-05",
+  "status":"CANDIDATE__LEGACY_STEP_WRITES_COLLAPSED_TO_EPHEMERAL_COW_DIFF__LIVE_CANARY_PASS__ZERO_CREDIT",
+  "subject":{"path":"canonical/tests/root3_cow_transaction_canary_v1.py"},
+  "live_result":{
+    "status":"PASS",
+    "exact_diff":{"added":["b.txt"],"deleted":["c.txt"],"modified":["a.txt"]},
+    "host_lower_unchanged":true,
+    "outer_network_unreachable":true,
+    "worker_exit_zero":true,
+    "supervisor_exit_zero":true
+  },
+  "deduction":"CURRENT_LEGACY_STEP_CODE_NEED_NOT_BE_REWRITTEN_TO_MEDIATE_DIRECT_FILE_MUTATIONS_IF_EXECUTED_AGAINST_A_PRIVATE_OVERLAY_COPY_ON_WRITE_VIEW__A_TRUSTED_NAMESPACE_SUPERVISOR_CAN_COMPUTE_THE_COMPLETE_POST_STEP_DIFF_AND_PARENT_AUTHORIZATION_CAN_DECIDE_WHICH_DIFF_MEMBERS_BECOME_DURABLE.",
+  "critical_path_deletion":[
+    "PER_ACTION_FILE_WRITE_BROKER_REWRITE_NOT_REQUIRED",
+    "DIRECT_CHILD_DURABLE_REPOSITORY_WRITE_AUTHORITY_NOT_REQUIRED",
+    "SEVEN_EFFECT_CLASSES_DO_NOT_NEED_SEPARATE_FILESYSTEM_COMMIT_IMPLEMENTATIONS"
+  ],
+  "remaining":[
+    "GENERALIZE_CANARY_TO_REUSABLE_STEP_TRANSACTION_RUNTIME",
+    "CONTENT_BIND_DIFF_PAYLOADS_NOT_ONLY_PATHS",
+    "BIND_DIFF_MEMBERS_TO_CANONICAL_FINAL_EFFECT_AUTHORIZATION",
+    "DEFINE_DELETION_AND_SYMLINK_POLICY",
+    "MEDIATE_NETWORK_INFORMATION_READS_THROUGH_PARENT_OR_TRUSTED_SUPERVISOR",
+    "INDEPENDENT_REPLAY_AND_C3_REDUCTION"
+  ],
+  "hard_nonclaims":[
+    "NO_CLAIM_NETWORK_READ_MEDIATION_IS_COMPLETE",
+    "NO_CLAIM_PARENT_COMMIT_AUTHORIZATION_IS_COMPLETE",
+    "NO_C1_C2_C3_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0}
+}
