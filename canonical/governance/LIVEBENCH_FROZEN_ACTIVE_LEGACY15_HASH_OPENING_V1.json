@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_FROZEN_ACTIVE_LEGACY15_HASH_OPENING_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__EXISTING_TERMINAL_SET_DIGEST_OPENED_TO_EXACT_15_LEGACY_IDS__ZERO_NEW_TERMINAL_CASES__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "VERIFIED__PREEXISTING_TERMINAL_COMMITMENT_OPENS_TO_EXACT_ACTIVE15__SCHEDULING_ACTIVE__ZERO_ACCEPTANCE_CREDIT",
   "target_predicate": "LIVEBENCH_IF_GE_65_7",
   "objective": "Resolve the public-paper 16-versus-15 inconsistency and reduce the exact frozen legacy scorer identity surface without reading any new terminal row content.",
   "frozen_population": {
@@ -63,9 +63,10 @@
     "cryptographic_assumption": "SHA256_COLLISION_RESISTANCE"
   },
   "scheduler_delta": [
-    "REDUCE_FROZEN_LIVEBENCH_LEGACY_CONSTRUCTIVE_IDENTITY_SURFACE_FROM_25_TO_15",
-    "DO_NOT_IMPLEMENT_THE_10_LEGACY_IDS_EXCLUDED_BY_THE_COMMITMENT_FOR_THIS_EXACT_FROZEN_PREDICATE",
-    "KEEP_PARAPHRASE_TOLERANT_VISIBLE_PARAMETER_RECOVERY_AND_MULTI_CONSTRAINT_COMPOSITION_AS_THE_ACTIVE_CONSTRUCTIVE_CUT",
+    "ACTIVATE_EXACT_FROZEN_LIVEBENCH_LEGACY_IDENTITY_SURFACE_AS_THE_15_COMMITTED_IDS",
+    "DELETE_THE_OTHER_10_LEGACY25_IDS_FROM_THIS_EXACT_FROZEN_PREDICATE_CRITICAL_PATH",
+    "DEMOTE_UNION25_SCHEMA19_AND_OTHER_EXTRA_FAMILY_CONSTRUCTION_WORK_TO_NON_LOAD_BEARING_REUSE_ONLY_FOR_THIS_PREDICATE",
+    "REUSE_EXISTING_ACTIVE15_CONSTRUCTIVE_POINTWISE_AND_COMPOSITION_PROOFS",
     "PRESERVE_SCORE_MASS_STOP_RULE_AT_EXACT_OPUS_RAW_MEAN_65_73775"
   ],
   "excluded_for_this_exact_frozen_predicate": [
@@ -97,10 +98,28 @@
     "ownership_credit_delta": 0
   },
   "authority": {
-    "scheduling_candidate": true,
+    "scheduling_candidate": false,
+    "scheduling_active": true,
     "execution": false,
     "fresh_reality": false,
-    "promotion": false,
+    "scope_promotion": true,
     "acceptance_credit": false
+  },
+  "independent_verification": {
+    "receipt_path": "canonical/verification/LIVEBENCH_FROZEN_ACTIVE_LEGACY15_HASH_OPENING_INDEPENDENT_VERIFICATION_20261005_V1.json",
+    "verification_commit": "3c0c4eb15d2795b0f1f51e343c0d22cb5adbffa2",
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1993,
+    "head_sha": "a3b9fa88c67427c200b396cd291839176fb2867f",
+    "workflow_run_id": 37200499676,
+    "workflow_job_id": 111431026378,
+    "conclusion": "success",
+    "temporal_precommit": {
+      "terminal_commitment_commit": "68a74270a688d40386797c92a9bdc6d97191f94f",
+      "terminal_commitment_time_utc": "2026-10-04T08:18:38Z",
+      "opening_candidate_commit": "09d742d83f6f2878ad07bff2454cef554c9589e4",
+      "opening_candidate_time_utc": "2026-10-04T11:56:54Z",
+      "commitment_precedes_opening": true
+    }
   }
 }
