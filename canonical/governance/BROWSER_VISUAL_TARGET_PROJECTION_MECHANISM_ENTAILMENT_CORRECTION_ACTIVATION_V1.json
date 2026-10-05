@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_BROWSER_VISUAL_TARGET_PROJECTION_MECHANISM_ENTAILMENT_CORRECTION_ACTIVATION_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE__CONNECTOR_RECOMPUTATION_PASS__OBSERVABLE_TARGET_PRESERVED__EXACT_MECHANISM_IDENTITY_DELETED_FROM_MANDATORY_SCOPE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/BROWSER_VISUAL_TARGET_PROJECTION_MECHANISM_ENTAILMENT_CORRECTION_20261005_V1.json",
+    "git_blob_sha": "e2c2ff211b2762e4c7f07ba492281c70981de9aa"
+  },
+  "verification": {
+    "path": "canonical/verification/BROWSER_VISUAL_TARGET_PROJECTION_MECHANISM_ENTAILMENT_CORRECTION_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "2e2cd067b261d46ccdfa6caddf0fe395ed43cef1"
+  },
+  "scheduler_effect": [
+    "DELETE_BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001_AS_MANDATORY_EXACT_MECHANISM_IDENTITY_FOR_COMPUTER_AND_BROWSER_USE",
+    "PRESERVE_OSWORLD_2_1_PARTIAL_GE_81_8_AND_COMPUTER_BROWSER_VISUALLY_GROUNDED_WORKFLOW_OUTCOME",
+    "PRESERVE_ARBITRARY_APPLICATION_SCOPE_PLANNING_VISUAL_GROUNDING_JUDGMENT_AND_GLOBAL_INTERNALIZED_OWNERSHIP_POSTCONDITIONS",
+    "KEEP_BROWSER_CONTRACT_AS_OPTIONAL_SUFFICIENT_EVIDENCE_AND_DIAGNOSTIC"
+  ],
+  "hard_rules": [
+    "NO_TARGET_WEAKENING",
+    "NO_OSWORLD_SCORE_CREDIT",
+    "NO_SCOPE_CLOSURE",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
