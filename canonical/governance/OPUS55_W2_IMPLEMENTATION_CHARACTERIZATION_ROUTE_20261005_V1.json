@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_W2_IMPLEMENTATION_CHARACTERIZATION_ROUTE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__CURRENT_PUBLIC_ROUTE_NOT_BOUND__OWNER_QUERY_SENT__EVENT_DRIVEN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "route": "W2_IMPLEMENTATION_LEVEL_COMPLETE_CHARACTERIZATION",
+  "authorities": {
+    "minimum_information_cut": {
+      "path": "canonical/governance/OPUS55_TARGET_DISCOVERY_MINIMUM_INFORMATION_CUT_20261005_V1.json",
+      "git_blob_sha": "644550da2fe9637fc760ea82bf4f34f6892a8c5a"
+    },
+    "finite_black_box_lower_bound": {
+      "path": "canonical/governance/FINITE_BLACK_BOX_TARGET_UNIVERSAL_CERTIFICATION_LOWER_BOUND_20261005_V2.json",
+      "git_blob_sha": "1361bc41d48d3ba843a9ae3e3c91f09ee41e512d"
+    },
+    "w3_domain_premise_collapse": {
+      "path": "canonical/governance/OPUS55_W3_DOMAIN_PREMISE_COLLAPSE_THEOREM_20261005_V1.json",
+      "git_blob_sha": "2ce89c5ad58fee1837c4e43f409af084c12af57e"
+    }
+  },
+  "current_public_distribution_observation": {
+    "observed_utc": "2026-10-05",
+    "official_sources": [
+      "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "https://www.anthropic.com/claude/opus",
+      "https://www.anthropic.com/system-cards"
+    ],
+    "observed": [
+      "OPUS55_IS_PUBLISHED_AS_A_HOSTED_MODEL_ID_ACROSS_CLAUDE_API_AMAZON_BEDROCK_GOOGLE_CLOUD_MICROSOFT_FOUNDRY_AND_CLAUDE_PLATFORM_ON_AWS",
+      "PUBLIC_MODEL_OVERVIEW_EXPOSES_INTERFACE_SPECIFICATIONS_RUNTIME_CONTROLS_PRICING_AND_AVAILABILITY",
+      "CURRENT_BOUND_PUBLIC_SOURCE_SET_DOES_NOT_SUPPLY_AN_EXACT_DOWNLOADABLE_EXECUTABLE_OR_MODEL_ARTIFACT_PLUS_COMPLETE_SERVING_SEMANTICS_SUFFICIENT_FOR_W2"
+    ],
+    "boundary": "CURRENT_PUBLIC_SCAN_NOT_GLOBAL_NONEXISTENCE_PROOF"
+  },
+  "black_box_boundary": {
+    "exact_api_or_platform_access_is_w2": false,
+    "reason": "FINITE_BLACK_BOX_TARGET_ACCESS_DOES_NOT_DEFINE_AN_EXACT_INTERNAL_SIMULATOR_OVER_THE_COMPLETE_ADMISSIBLE_INTERFACE_DOMAIN",
+    "allowed_use": "SCOPED_ROOT2_COMPARISON_COUNTEREXAMPLE_SEARCH_AND_FROZEN_STATISTICAL_ACCEPTANCE_ONLY"
+  },
+  "owner_outreach": {
+    "provider": "Gmail",
+    "destination": "eval-initiative@anthropic.com",
+    "message_id": "1a109cb4791a1e6e",
+    "thread_id": "1a109cb4791a1e6e",
+    "subject": "Opus 5.5 reproducibility question: exact implementation-level characterization",
+    "sent": true,
+    "asks_for": [
+      "OFFICIAL_PUBLIC_OR_SHAREABLE_EXACT_IMPLEMENTATION_ARTIFACT_OR_SPECIFICATION_IF_ONE_EXISTS",
+      "OR_CONFIRMATION_NO_SUCH_SHAREABLE_ARTIFACT_EXISTS"
+    ],
+    "explicitly_excludes": [
+      "CONFIDENTIAL_INFORMATION",
+      "PROPRIETARY_NON_SHAREABLE_INFORMATION",
+      "SAFETY_SENSITIVE_INFORMATION",
+      "HIDDEN_EVALUATION_DATA"
+    ],
+    "reply_received": false
+  },
+  "current_result": {
+    "w2_complete_characterization_bound": false,
+    "public_shareable_exact_implementation_asset_bound": false,
+    "owner_reply_pending_event_driven": true,
+    "literal_all_completeness_delta": 0
+  },
+  "scheduler_effect": {
+    "sleep": [
+      "REPEAT_GENERIC_SEARCH_FOR_OPUS55_WEIGHTS_EXECUTABLE_OR_COMPLETE_SERVING_SPEC_WITH_UNCHANGED_CURRENT_OFFICIAL_SOURCE_SET",
+      "TREAT_API_OR_HOSTED_MODEL_ACCESS_AS_W2",
+      "BUILD_W3_DOMINANCE_BEFORE_COMPLETE_TARGET_DOMAIN_PREMISE_EXISTS"
+    ],
+    "wake_on": [
+      "INBOUND_REPLY_ON_THREAD_1a109cb4791a1e6e",
+      "NEW_OFFICIAL_PUBLIC_OR_SHAREABLE_OPUS55_EXACT_IMPLEMENTATION_ARTIFACT",
+      "NEW_IMPLEMENTATION_LEVEL_CHARACTERIZATION_WITH_COMPLETE_SERVING_AND_TOOL_INTERFACE_SEMANTICS",
+      "NEW_COMPLETE_TARGET_DOMAIN_WITNESS_FROM_ANY_SOUND_ROUTE"
+    ],
+    "preserve": [
+      "W1_EVENT_DRIVEN_OWNER_ATTESTATION_THREAD",
+      "OBSERVED_EPOCH_ACCEPTANCE_CLOSURE",
+      "SCOPED_ZERO_INCREMENTAL_EXACT_COMPARATOR_USE_WHERE_SEPARATELY_AUTHORIZED"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_NO_PRIVATE_OR_FUTURE_SHAREABLE_IMPLEMENTATION_ARTIFACT_EXISTS",
+    "NO_CLAIM_HOSTED_API_ACCESS_IS_USELESS",
+    "NO_LITERAL_COMPLETENESS_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
