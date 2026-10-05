@@ -1,0 +1,30 @@
+name: Verify Root3 child process census V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/root3_child_process_census_v1.py'
+      - 'canonical/tests/test_root3_child_process_census_v1.py'
+      - 'canonical/governance/ROOT3_CHILD_PROCESS_CENSUS_C1_CANDIDATE_V1.json'
+      - '.github/workflows/verify-root3-child-process-census-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pytest canonical/tests/test_root3_child_process_census_v1.py -q
+      - run: python canonical/runtime/root3_child_process_census_v1.py > root3_child_process_census_v1.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: root3-child-process-census-v1
+          path: root3_child_process_census_v1.json
+          if-no-files-found: error
