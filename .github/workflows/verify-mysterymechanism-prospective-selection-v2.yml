@@ -23,4 +23,23 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12.10'
-      - run: python -m pytest -q canonical/tests/test_mysterymechanism_separable_transform_v2.py
+      - name: Run targeted tests with durable diagnostic
+        id: targeted
+        shell: bash
+        run: |
+          set +e
+          python -m pytest -q canonical/tests/test_mysterymechanism_separable_transform_v2.py > prospective-selection-v2-pytest.log 2>&1
+          code=$?
+          cat prospective-selection-v2-pytest.log
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mysterymechanism-prospective-selection-v2-diagnostic
+          path: prospective-selection-v2-pytest.log
+          if-no-files-found: error
+      - name: Enforce targeted result
+        if: steps.targeted.outputs.exit_code != '0'
+        run: exit 1
