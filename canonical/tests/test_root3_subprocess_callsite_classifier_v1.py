@@ -34,19 +34,19 @@ class _FakePopen:
 
 
 class RuntimeCallsiteClassifierTests(unittest.TestCase):
-    def test_registry_is_exact_29_site_universe(self):
-        self.assertEqual(len(EXPECTED), 29)
+    def test_registry_is_exact_22_site_universe(self):
+        self.assertEqual(len(EXPECTED), 22)
         self.assertEqual(
-            sum(1 for k in EXPECTED if k[2] == "subprocess.run"), 27
+            sum(1 for k in EXPECTED if k[2] == "subprocess.run"), 21
         )
         self.assertEqual(
-            sum(1 for k in EXPECTED if k[2] == "subprocess.Popen"), 2
+            sum(1 for k in EXPECTED if k[2] == "subprocess.Popen"), 1
         )
 
     def test_direct_unregistered_test_call_fails_closed(self):
         with self.assertRaises(
             RuntimeCallsiteClassificationError,
-            msg="a caller outside the frozen 29-site map must never inherit a class",
+            msg="a caller outside the frozen 22-site map must never inherit a class",
         ):
             detect_effect_class("subprocess.run")
 
@@ -87,38 +87,15 @@ class RuntimeCallsiteClassifierTests(unittest.TestCase):
                 "process_api": "subprocess.run",
                 "function": "run",
                 "effect_class": "READ_ONLY_DECLARED_QUERY",
-                "registry_site_count": 29,
+                "registry_site_count": 22,
                 "runtime_join": "EXACT_PATH_LINE_API",
             },
         )
 
-    def test_real_apt_helper_popen_site_runtime_joins_read_only_class(self):
-        seen = {}
-        old_cache = discovery._APT_EXECUTABLE_OWNERS_CACHE
-        discovery._APT_EXECUTABLE_OWNERS_CACHE = None
-        def fake_run(*args, **kwargs):
-            return subprocess.CompletedProcess(
-                args=args[0] if args else [],
-                returncode=0,
-                stdout="Contents-deb\t/tmp/Contents\n",
-                stderr="",
-            )
-        def fake_popen(*args, **kwargs):
-            seen.update(detect_effect_class("subprocess.Popen"))
-            return _FakePopen("usr/bin/tool pkg\n")
-        try:
-            with patch.object(discovery.pathlib.Path, "exists", return_value=True), \
-                 patch.object(discovery.shutil, "which", return_value="/usr/bin/apt-get"), \
-                 patch.object(discovery.subprocess, "run", side_effect=fake_run), \
-                 patch.object(discovery.subprocess, "Popen", side_effect=fake_popen):
-                owners = discovery._apt_contents_executable_owners()
-            self.assertEqual(owners["pkg"], ["/usr/bin/tool"])
-        finally:
-            discovery._APT_EXECUTABLE_OWNERS_CACHE = old_cache
-        self.assertEqual(seen["module_path"], "canonical/runtime/capability_discovery.py")
-        self.assertEqual(seen["lineno"], 605)
-        self.assertEqual(seen["process_api"], "subprocess.Popen")
-        self.assertEqual(seen["effect_class"], "READ_ONLY_DECLARED_QUERY")
+    def test_deleted_apt_helper_popen_path_is_process_free(self):
+        import inspect
+        source = inspect.getsource(discovery._apt_contents_executable_owners)
+        self.assertNotIn("subprocess.", source)
 
     def test_real_chromedriver_popen_site_runtime_joins_loopback_class(self):
         seen = {}
