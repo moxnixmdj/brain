@@ -92,6 +92,22 @@ class Tests(unittest.TestCase):
                 "PASS",
             )
             self.assertNotIn("composition_capsule_head_hash", out["trace"][2])
+
+            drifted = json.loads(checkpoint.read_text(encoding="utf-8"))
+            drifted["completed_actions"][0]["composition_capsule_head_hash"] = "0" * 64
+            runtime.writej(checkpoint, drifted)
+            with self.assertRaisesRegex(
+                runtime.Blocker,
+                "COMPOSITION_C1_STRICT_CAPSULE_PREFIX_INVALID",
+            ):
+                runtime._run_capability_planned_goal(
+                    step, mission, "verify strict fail-closed resume"
+                )
+            preserved = json.loads(checkpoint.read_text(encoding="utf-8"))
+            self.assertEqual(
+                len(preserved["completed_actions"]),
+                len(drifted["completed_actions"]),
+            )
         finally:
             checkpoint.unlink(missing_ok=True)
             evidence.unlink(missing_ok=True)
