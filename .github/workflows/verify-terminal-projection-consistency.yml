@@ -5,7 +5,6 @@ on:
     paths:
       - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
       - "canonical/CANONICAL_POINTER.json"
-      - "canonical/CANONICAL_POINTER.json"
       - "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
       - "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
       - "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json"
@@ -20,6 +19,7 @@ on:
   pull_request:
     paths:
       - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+      - "canonical/CANONICAL_POINTER.json"
       - "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
       - "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
       - "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json"
