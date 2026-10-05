@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_SHARED_CHANNEL_DOMINATOR_KERNEL_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_IMPLEMENTATION__C3_FINITE_DOMINATOR_KERNEL__C1_C2_C4_C5_REMAIN_OPEN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "parent_reduction": {
+    "path": "canonical/governance/ROOT3_SHARED_NO_BYPASS_CHANNEL_MINCUT_20261005_V1.json",
+    "commit": "5161a1f177e3ca491f719ad24d80193242c327b9"
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/shared_channel_dominator_v1.py",
+    "tests": "canonical/tests/test_shared_channel_dominator_v1.py"
+  },
+  "discharged_if_independently_verified": [
+    "C3_DOMINATOR_VERIFIER_MECHANICS_FOR_A_DECLARED_FINITE_GRAPH"
+  ],
+  "still_open": [
+    "C1_SCOPE_COMPLETE_CHANNEL_REGISTRY_FOR_EXACT_CREDITED_RUNTIME",
+    "C2_CORRECT_MEDIATOR_BINDING_FOR_EVERY_LOAD_BEARING_EDGE",
+    "C4_CONTENT_ADDRESSED_RUNTIME_AND_DYNAMIC_REGISTRY_BINDING",
+    "C5_INDEPENDENT_SCOPE_COMPLETE_RECEIPT",
+    "PREDICATE_SPECIFIC_GUARD_SOUNDNESS"
+  ],
+  "semantics": [
+    "FOR_EACH_BOUND_LOAD_BEARING_EDGE_U_TO_V_WITH_REQUIRED_MEDIATOR_M__REMOVE_M_AND_TEST_IF_U_REMAINS_REACHABLE_FROM_ANY_ENTRYPOINT",
+    "IF_U_REMAINS_REACHABLE__A_MEDIATOR_BYPASS_PATH_EXISTS_AND_VERIFICATION_FAILS",
+    "IF_U_EQUALS_M__THE_BOUND_COMMIT_EDGE_ORIGINATES_AT_THE_MEDIATOR_AND_PASSES_THIS_GRAPH_PROPERTY",
+    "DYNAMIC_EDGE_REGISTRY_COMPLETE_MUST_BE_TRUE_OR_THE_KERNEL_FAILS_CLOSED",
+    "THE_KERNEL_NEVER_INFERS_GRAPH_SCOPE_COMPLETENESS_FROM_STATIC_INPUT_ALONE"
+  ],
+  "intended_reuse": [
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS_NON_BYPASSABILITY_PREMISE",
+    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES_NON_BYPASSABILITY_PREMISE",
+    "COMPOSITION_CROSS_ROLE_STATE_AND_EVIDENCE_MEDIATION_NON_BYPASSABILITY_PREMISES"
+  ],
+  "hard_nonclaims": [
+    "NO_CURRENT_ROOT3_PREDICATE_CLOSED",
+    "NO_CLAIM_CURRENT_RUNTIME_GRAPH_IS_COMPLETE",
+    "NO_GUARD_SOUNDNESS_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
