@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_AA_RELATIVE_BAR_SOURCE_DRIFT_GUARD_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PUBLIC_PRIMARY_SOURCE_DRIFT_RECONCILIATION__PRESERVE_FROZEN_TARGETS__ZERO_CREDIT",
+  "targets": [
+    "PROWORK_GDPVAL_GE_1846",
+    "PROWORK_AA_BRIEFCASE_GE_1822",
+    "ARTIFACT_AA_BRIEFCASE_GE_1822"
+  ],
+  "objective": "Prevent live Artificial Analysis leaderboard recalculation from silently rebasing the predeclared Opus 5.5 relative-score acceptance targets after Brain results or protocol freeze.",
+  "frozen_reference_surface": {
+    "model": "Claude Opus 5.5 (Adaptive Reasoning, Max Effort, Default Fallback)",
+    "sources": [
+      "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-sonnet-5-5",
+      "https://artificialanalysis.ai/models/comparisons/minimax-m3-vs-claude-opus-5-5"
+    ],
+    "values": {
+      "AA-Briefcase v1.1": 1822,
+      "GDPval-AA v2.1": 1846
+    }
+  },
+  "current_live_evaluation_surface": {
+    "observed_date": "2026-10-05",
+    "sources": [
+      "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "https://artificialanalysis.ai/evaluations/gdpval-aa"
+    ],
+    "observed_values": {
+      "AA-Briefcase v1.1 Opus 5.5 Max": 1808,
+      "GDPval-AA v2.1 Opus 5.5 Max": 1837
+    }
+  },
+  "reconciliation": {
+    "rule": "PRESERVE_PREDECLARED_FROZEN_1822_AND_1846_TARGETS_UNLESS_A_SEPARATE_PREEXPOSURE_AUTHORITY_EXPLICITLY_REBASES_THE_TERMINAL_SPEC",
+    "rationale": [
+      "CURRENT_OFFICIAL_ARTIFICIAL_ANALYSIS_SURFACES_DISAGREE_FOR_THE_SAME_MODEL_AND_BENCHMARK_LABELS",
+      "POST_FREEZE_LIVE_LEADERBOARD_MOVEMENT_IS_NOT_PERMISSION_TO_LOWER_AN_ACCEPTANCE_BAR",
+      "KEEPING_THE_STRICTER_PREDECLARED_VALUES_PREVENTS_RESULT_CONDITIONED_TARGET_DRIFT"
+    ]
+  },
+  "scheduler_delta": {
+    "delete": [
+      "TREAT_CURRENT_LIVE_AA_LEADERBOARD_VALUE_AS_AUTOMATIC_TERMINAL_REBASE",
+      "SEARCH_FOR_A_LOWER_POST_FREEZE_AA_BAR_AS_A_CLOSURE_ROUTE"
+    ],
+    "preserve": [
+      "EXACT_COMPARABLE_BRAIN_RELATIVE_SCORE_RECEIPT_OR_VERIFIED_RELATIVE_SCORE_BRIDGE",
+      "FROZEN_AA_BRIEFCASE_TARGET_1822",
+      "FROZEN_GDPVAL_TARGET_1846"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_LIVE_1808_OR_1837_VALUES_ARE_ERRONEOUS",
+    "NO_CLAIM_THE_COMPARISON_SURFACE_IS_MORE_CURRENT_THAN_THE_EVALUATION_SURFACE",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_TARGET_WEAKENING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
