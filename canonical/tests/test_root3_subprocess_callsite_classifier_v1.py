@@ -92,7 +92,12 @@ class RuntimeCallsiteClassifierTests(unittest.TestCase):
             },
         )
 
-    def test_deleted_apt_helper_popen_path_is_process_free(self):\n        import inspect\n        source = inspect.getsource(discovery._apt_contents_executable_owners)\n        self.assertNotIn("subprocess.", source)\n\n    def test_real_chromedriver_popen_site_runtime_joins_loopback_class(self):
+    def test_deleted_apt_helper_popen_path_is_process_free(self):
+        import inspect
+        source = inspect.getsource(discovery._apt_contents_executable_owners)
+        self.assertNotIn("subprocess.", source)
+
+    def test_real_chromedriver_popen_site_runtime_joins_loopback_class(self):
         seen = {}
         png = b"\x89PNG\r\n\x1a\n" + (b"x" * 200)
         def fake_popen(*args, **kwargs):
