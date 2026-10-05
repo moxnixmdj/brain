@@ -31,6 +31,8 @@ def test_exact_enumeration_and_file_size():
     assert out["nonfloating_stored_elements"]==2
     assert out["tensor_payload_bytes"]==40
     assert out["dtype_elements"]=={"F32":6,"I64":2}
+    assert [x["name"] for x in out["tensors"]]==["a","b","empty"]
+    assert len(out["tensor_manifest_sha256"])==64
     assert out["h100_credit_delta"]==0
 
 
