@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_EXPLICIT_EVALUATOR_ROUTE_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__SYNTHESIS_MATCHED_QUALITY_IS_EXPLICIT_MIN_EVALUATOR_NOT_HIDDEN_WEIGHT_AGGREGATOR__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "objective": "Delete the newly introduced but dominated hidden-evaluator-weight route for synthesis. The canonical matched-quality evaluator is already frozen and explicit, so the minimum proof path is deterministic component scoring plus either matched scalar noninferiority or an absolute ceiling proof.",
+  "authorities": {
+    "metric_contract": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json",
+      "git_blob_sha": "0886f7592875a5b750cdd401aa783351ab2f0854"
+    },
+    "metric_activation": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_ACTIVATION_V1.json",
+      "git_blob_sha": "1ca2de029b02ca8518e59e0d66a973e3e26e251b"
+    },
+    "required_claim_coverage_ceiling": {
+      "path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
+      "git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f"
+    },
+    "scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "predicate_evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "hidden_evaluator_route": {
+      "path": "canonical/governance/HIDDEN_EVALUATOR_MONOTONE_COUPLING_DOMINANCE_V1.json",
+      "git_blob_sha": "678f728089a8df815153af6dd58a88894dd0671f"
+    },
+    "routing_candidate_being_repaired": {
+      "path": "canonical/governance/MATCHED_NONINFERIORITY_MONOTONE_ROUTE_CLASSIFICATION_20261005_V1.json",
+      "git_blob_sha": "36072fd038bd52b62d7e355a055753bbf1e9c61b"
+    },
+    "predeclared_synthesis_behavior_binding": {
+      "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+    }
+  },
+  "recomputed_truth": {
+    "matched_quality_evaluator_visibility": "EXPLICIT_AND_DETERMINISTIC",
+    "matched_quality_formula": "q = 0 IF unsupported_material_claims>0 ELSE min(c1,c2,c3,c4,c5)",
+    "components": [
+      "claim_to_source_fidelity",
+      "uncertainty_and_disagreement_preservation",
+      "audience_adaptation",
+      "format_and_style_constraints",
+      "compression_without_decision_relevant_loss"
+    ],
+    "component_domain": "[0,1]",
+    "required_claim_coverage": "SEPARATE_METRIC_ALREADY_DISCHARGED_BY_ABSOLUTE_CEILING_PLUS_INDEPENDENT_SUPERSET_SCOPE",
+    "unsupported_material_claims": "SEPARATE_ATOMIC_INVARIANT_ALREADY_PROVED",
+    "remaining_synthesis_root2_information": [
+      "FREEZE_AND_VERIFY_THE_FIVE_CASE_SPECIFIC_COMPONENT_SCORERS",
+      "ESTABLISH_MATCHED_QUALITY_NONINFERIORITY_USING_THE_EXPLICIT_SCALAR_q_OR_ESTABLISH_q_BRAIN=1_OVER_COMPLETE_SCOPE",
+      "NO_HIDDEN_WEIGHT_IDENTIFICATION_REQUIRED"
+    ]
+  },
+  "theorem": {
+    "id": "SYNTHESIS_EXPLICIT_MINIMUM_EVALUATOR_CEILING_DOMINANCE",
+    "premises": [
+      "FOR_EACH_i_IN_1_TO_5__0<=c_i<=1",
+      "q_B=min(c_1,...,c_5)_WHEN_UNSUPPORTED_MATERIAL_CLAIMS_ARE_ZERO",
+      "ANY_ADMISSIBLE_TARGET_MATCHED_QUALITY_q_T_IS_IN_[0,1]",
+      "IF_A_SCOPE_COMPLETE_OWNED_BRAIN_PROOF_ESTABLISHES_c_i=1_FOR_ALL_FIVE_COMPONENTS__THEN_q_B=1"
+    ],
+    "conclusion": "q_B=1_IMPLIES_q_B>=q_T_FOR_EVERY_ADMISSIBLE_OPUS55_MATCHED_QUALITY_RESULT__THEREFORE_NO_OPUS_COMPARATOR_IS_NEEDED_ON_THIS_METRIC_IF_THE_FIVE_COMPONENT_CEILINGS_ARE_PROVED",
+    "wolfram_recomputation": {
+      "result": true,
+      "formula": "0<=c_i,tq<=1 AND ALL_c_i=1 => Min[c1..c5]=1 AND Min[c1..c5]>=tq"
+    }
+  },
+  "route_comparison": {
+    "hidden_monotone_coupling_route": {
+      "sound_in_general": true,
+      "load_bearing_for_this_predicate": false,
+      "reason": "THE_CANONICAL_SYNTHESIS_AGGREGATOR_IS_NOT_HIDDEN; ITS_EXACT_FUNCTION_IS_ALREADY_FROZEN_AS_MIN_OF_FIVE_COMPONENTS. UNKNOWN_WEIGHT_DISCOVERY_DOES_NOT_EXIST_AT_THIS_LAYER."
+    },
+    "explicit_evaluator_route": {
+      "preferred": true,
+      "minimum_actions": [
+        "BIND_THE_FIVE_RAW_DIMENSION_SCORERS_WITH_PREDECLARED_SEMANTICS",
+        "CHECK_WHETHER_EXISTING_PREDECLARED_P3_CHECKS_CAN_PROVE_ANY_COMPONENT_AT_CEILING_WITHOUT_RETROACTIVE_RESULT_REINTERPRETATION",
+        "FOR_REMAINING_COMPONENTS_PROVE_CEILING_OR_USE_THE_FROZEN_MATCHED_SCALAR_REDUCER",
+        "IF_ALL_FIVE_COMPONENTS_REACH_SCOPE_COMPLETE_CEILING_1__DELETE_EXACT_OPUS_COMPARATOR_FOR_SYNTHESIS_MATCHED_QUALITY"
+      ]
+    }
+  },
+  "contamination_guard": {
+    "rule": "DO_NOT_REINTERPRET_THE_2026_10_02_TERMINAL_WAVE_AS_A_MATCHED_QUALITY_SCORE_AFTER_THE_FACT",
+    "allowed_reuse": "ONLY_PREDECLARED_SEMANTIC_CHECKS_OR_FORMAL_INVARIANTS_MAY_BE_REUSED_IF_AN_INDEPENDENT_IMPLICATION_PROOF_ESTABLISHES_THE_NEW_COMPONENT_REQUIREMENT_WITHOUT_POST_HOC_SCORER_SELECTION",
+    "reason": "THE_ACTIVE_METRIC_CONTRACT_EXPLICITLY_FORBIDS_REINTERPRETING_EXISTING_BRAIN_RESULTS_AS_MATCHED_QUALITY."
+  },
+  "scheduler_effect_if_verified": {
+    "delete": [
+      "SYNTHESIS_UNKNOWN_AGGREGATOR_WEIGHT_DISCOVERY",
+      "SYNTHESIS_MONOTONE_COUPLING_AS_PRIMARY_ROUTE_FOR_MATCHED_QUALITY",
+      "EXACT_OPUS_COMPARATOR_AS_A_LOGICAL_REQUIREMENT_IF_ALL_FIVE_COMPONENT_CEILINGS_ARE_INDEPENDENTLY_PROVED"
+    ],
+    "activate": [
+      "FIVE_COMPONENT_SCORER_BINDING_MINIMUM_CUT",
+      "PREDECLARED_P3_CHECK_TO_COMPONENT_SEMANTIC_IMPLICATION_AUDIT",
+      "ABSOLUTE_CEILING_ROUTE_BEFORE_MATCHED_OPUS_EXECUTION"
+    ],
+    "preserve": [
+      "NO_EXISTING_RESULT_REINTERPRETATION",
+      "PORTFOLIO_LEVEL_STATISTICAL_NONINFERIORITY_IF_ANY_COMPONENT_CEILING_REMAINS_UNPROVED",
+      "ALL_SCOPE_AND_CONTAMINATION_GATES"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FIVE_COMPONENT_CEILINGS_ARE_ALREADY_PROVED",
+    "NO_CLAIM_MATCHED_QUALITY_NONINFERIORITY_IS_CLOSED",
+    "NO_CLAIM_EXISTING_T1_T3_PASS_ROWS_EQUAL_MATCHED_QUALITY_1",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
