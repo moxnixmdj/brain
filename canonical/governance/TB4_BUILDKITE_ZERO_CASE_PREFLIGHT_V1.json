@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_BUILDKITE_ZERO_CASE_PREFLIGHT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ZERO_TERMINAL_CASE_HOSTED_AGENT_PREFLIGHT__ZERO_CREDIT__ACCOUNT_EXECUTION_PENDING",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "authority_epoch_start_sha256": "62c3abf5c9382fd04fbd1d79f84399832e5a429ce6647187c5a51f625e854183",
+  "provider_confirmation": {
+    "path": "canonical/governance/BUILDKITE_TRIAL_OWNER_CONFIRMATION_20261005_V1.json",
+    "meaning": "BUILDKITE_STAFF_SUPPORT_CONFIRMED_ALL_ACCESS_TRIAL_SUPPORTS_REQUESTED_8VCPU_32GB_DOCKER_ZERO_COST_PREFLIGHT_USE_CASE"
+  },
+  "official_provider_contract": {
+    "hosted_agent_shape": "LINUX_AMD64_8X32",
+    "documented_vcpu": 8,
+    "documented_memory_gb": 32,
+    "documented_disk_gb": 158,
+    "queue_key_to_create": "tb4-large",
+    "sources": [
+      "https://buildkite.com/docs/agent/buildkite-hosted/linux",
+      "https://buildkite.com/docs/agent/queues/managing"
+    ]
+  },
+  "runtime": {
+    "path": "canonical/runtime/tb4_buildkite_zero_case_preflight_v1.py",
+    "checks": [
+      "BUILDKITE_ENVIRONMENT",
+      "CPU_GE_8",
+      "RAM_GE_16_GIB",
+      "FREE_DISK_GE_50_GIB",
+      "DOCKER_DAEMON",
+      "DOCKER_CONTAINER_RUNTIME",
+      "DOCKER_COMPOSE_CLI",
+      "DOCKER_COMPOSE_RUNTIME"
+    ]
+  },
+  "pipeline": {
+    "path": ".buildkite/pipeline.tb4-zero-case-preflight.yml",
+    "queue": "tb4-large",
+    "required_queue_shape": "LINUX_AMD64_8X32",
+    "terminal_case_execution": false
+  },
+  "remaining_account_gated_fact": [
+    "CREATE_OR_ACCESS_TRIAL_ORGANIZATION",
+    "CREATE_HOSTED_QUEUE_TB4_LARGE_WITH_LINUX_AMD64_8X32",
+    "BIND_ACCOUNT_LEVEL_HARD_ZERO_SPEND_STOP_OR_NO_PAYMENT_METHOD_RECEIPT",
+    "RUN_THIS_ZERO_CASE_PREFLIGHT"
+  ],
+  "success_effect": [
+    "DELETE_OBSERVED_CPU_RAM_DISK_DOCKER_COMPOSE_CARRIER_UNCERTAINTY",
+    "PRESERVE_BILLING_HARD_STOP_RECEIPT_UNTIL_ACCOUNT_LEVEL_EVIDENCE_EXISTS",
+    "PRESERVE_TB4_THRESHOLD_CERTIFICATE_AND_TERMINAL_CASES_FOR_LATER_EXPLICIT_REALITY_AUTHORITY"
+  ],
+  "hard_rules": [
+    "NO_TB4_TASK_DATASET_IMPORT",
+    "NO_TERMINAL_CASE_ENUMERATION",
+    "NO_TERMINAL_CASE_EXECUTION",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_PAID_PROVISIONING",
+    "NO_INFERENCE_OF_BILLING_STATE_FROM_RUNTIME_TELEMETRY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
