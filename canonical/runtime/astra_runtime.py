@@ -4293,12 +4293,18 @@ def _run_model_independent_goal(step, mission, goal):
 
     if composition_guard is not None:
         try:
-            composition_capsule=composition_guard.rebuild_from_trace(
-                actions,composition_contract,composition_initial_facts,trace
+            composition_capsule=composition_guard.bind_checkpoint(
+                actions,
+                composition_contract,
+                composition_initial_facts,
+                checkpoint,
+                trace,
             )
+            checkpoint["composition_state_capsule"]=composition_capsule
+            writej(checkpoint_path,checkpoint)
         except Exception as exc:
             raise Blocker(
-                "COMPOSITION_STATE_REBUILD_FAILED:"
+                "COMPOSITION_STATE_CHECKPOINT_BINDING_FAILED:"
                 +type(exc).__name__+":"+str(exc)
             ) from exc
 
@@ -4323,7 +4329,20 @@ def _run_model_independent_goal(step, mission, goal):
             elif cycle!=len(composition_contract) or raw_action.get("type")!="finish":
                 raise Blocker("COMPOSITION_STATE_UNDECLARED_ACTION_BYPASS:"+str(cycle))
 
-        action=_resolve_result_refs(dict(raw_action),trace)
+        if composition_guard is not None and composition_row is not None:
+            try:
+                action=composition_guard.resolve_action_from_capsule(
+                    composition_capsule,composition_row,dict(raw_action)
+                )
+            except Exception as exc:
+                raise Blocker(
+                    "COMPOSITION_STATE_RESOLUTION_FAILED:"
+                    +type(exc).__name__+":"+str(exc)
+                ) from exc
+        elif composition_guard is not None:
+            action=dict(raw_action)
+        else:
+            action=_resolve_result_refs(dict(raw_action),trace)
         typ=action.get("type")
         if typ not in allowed_types:
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_REJECTED:"+str(typ))
@@ -4362,6 +4381,8 @@ def _run_model_independent_goal(step, mission, goal):
         if composition_head is not None:
             record["composition_capsule_head_hash"]=composition_head
         trace.append(record)
+        if composition_guard is not None:
+            checkpoint["composition_state_capsule"]=composition_capsule
         checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace)
         interrupt_after=step.get("interrupt_after_controller_actions_once")
         if interrupt_after is not None:
