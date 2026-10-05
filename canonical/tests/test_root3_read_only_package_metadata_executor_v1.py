@@ -1,7 +1,5 @@
 from __future__ import annotations
 import pathlib, subprocess, unittest
-ROOT=pathlib.Path("/home/sprite/root3-package-v1")
-sys.path.insert(0,str(ROOT))
 from canonical.runtime import root3_read_only_package_metadata_executor_v1 as pkg
 
 class PackageMetadataExecutorTests(unittest.TestCase):
