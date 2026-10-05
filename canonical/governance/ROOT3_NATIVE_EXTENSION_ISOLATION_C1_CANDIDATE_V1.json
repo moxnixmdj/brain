@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_NATIVE_EXTENSION_ISOLATION_C1_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FOUR_NATIVE_RISK_ADAPTERS_EXECUTE_IN_CHILD_PROCESS__RESULT_SCHEMA_PRESERVED__ZERO_CREDIT",
+  "objective": "Remove the four classified native-extension-risk adapter imports from the parent ASTRA process by executing those adapters in a dedicated child process, thereby reducing their unknown native internals to the separately tracked child-process effect residual.",
+  "parent_surface": {
+    "path": "canonical/governance/ROOT3_NATIVE_EXTENSION_SURFACE_C1_CANDIDATE_V1.json"
+  },
+  "exact_subject": {
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "791f5aa072dd2a1c72eaf5957529516b9d8e023b"
+    },
+    "isolated_runner": {
+      "path": "canonical/runtime/bound_capability_isolated_runner_v1.py",
+      "git_blob_sha": "e1f1252eea4039496b3279c351d54451404c6b49"
+    },
+    "tests": {
+      "path": "canonical/tests/test_bound_capability_native_isolation_v1.py",
+      "git_blob_sha": "5f76871a96b345440d7943703b0ff9a498da6b72"
+    },
+    "classifier": {
+      "path": "canonical/runtime/root3_native_extension_surface_v1.py",
+      "git_blob_sha": "4d42e6e5674f8ba7df3adc96e2a04461b613356b"
+    }
+  },
+  "isolated_adapter_modules": [
+    "python_library_codec",
+    "docx_report_from_json",
+    "python_document_builder",
+    "xlsx_verify_openpyxl"
+  ],
+  "execution_contract": [
+    "DEPENDENCY_ACQUISITION_OR_VERSION_VERIFICATION_OCCURS_BEFORE_ADAPTER_DISPATCH_AND_DOES_NOT_IMPORT_THE_ADAPTER_NATIVE_MODULE_INTO_PARENT",
+    "PARENT_DISPATCHES_THE_FOUR_RISKY_ADAPTER_MODULES_TO_BOUND_CAPABILITY_ISOLATED_RUNNER_V1",
+    "RUNNER_ALLOWLIST_IS_EXACTLY_THE_FOUR_RISKY_ADAPTER_MODULES",
+    "INPUT_IS_BOUNDED_CANONICAL_JSON_OBJECT_WITH_ARGS_ONLY",
+    "CHILD_LOADS_AND_EXECUTES_THE_ADAPTER",
+    "RESULT_MUST_BE_A_BOUNDED_JSON_OBJECT_WRITTEN_TO_A_DEDICATED_TEMP_DIRECTORY",
+    "PARENT_RETURNS_THE_ADAPTER_RESULT_WITHOUT_ADDING_ISOLATION_FIELDS_OR_MUTATING_LEGACY_RESULT_SCHEMA"
+  ],
+  "reduction": {
+    "closes_if_verified": [
+      "THE_FOUR_CLASSIFIED_NATIVE_RISK_ADAPTERS_NO_LONGER_IMPORT_NATIVE_EXTENSION_DEPENDENCIES_IN_THE_PARENT_ASTRA_PROCESS"
+    ],
+    "reclassifies": [
+      "THEIR_INTERNAL_NATIVE_EFFECTS_BECOME_SUBSET_OF_CHILD_PROCESS_INTERNAL_EFFECTS"
+    ],
+    "remains_open": [
+      "CHILD_PROCESS_INTERNAL_EFFECT_TOTALITY_AND_MEDIATION",
+      "PACKAGING_PURE_DEPENDENCY_SOURCE_AUDIT_FOR_CTYPES_CFFI_OR_OTHER_DYNAMIC_NATIVE_LOADERS",
+      "ANY_NONREGISTRY_NATIVE_EXTENSION_ROUTE_IN_OTHER_REGISTERED_RUNTIME_HELPERS",
+      "FULL_C1_SCOPE_COMPLETENESS"
+    ]
+  },
+  "hard_nonclaims": [
+    "CHILD_PROCESS_IS_NOT_A_SANDBOX",
+    "ISOLATION_DOES_NOT_AUTHORIZE_OR_PROVE_SAFE_ANY_CHILD_EFFECT",
+    "NO_CLAIM_THE_CHILD_CANNOT_MUTATE_FILES_NETWORK_OR_PROCESS_STATE",
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
