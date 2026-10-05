@@ -7,6 +7,7 @@
     "ROOT2_AND_ROOT3_TOUCHING_SETS_ARE_DERIVED_FROM_CURRENT_RESIDUAL_ROOT_PARTITION_EVERY_RUN_NOT_HARDCODED_VERSION_COUNTS",
     "ACTIVE_ROOT1_META_ENVELOPE_IS_DISCOVERED_BY_HIGHEST_ACTIVE_VERSION_AND_ITS_SUBJECT_BLOB_IS_VERIFIED",
     "ACTIVE_ZERO_REALITY_MINIMUM_CUT_IS_DISCOVERED_BY_HIGHEST_ACTIVE_VERSION_AND_ITS_SUBJECT_BLOB_IS_VERIFIED",
+    "GIT_BLOB_IDENTITY_IS_RECOMPUTED_WITH_THE_REAL_GIT_NUL_OBJECT_HEADER_SEPARATOR",
     "TERMINAL_FINALITY_EQUALS_ACCEPTANCE_CLOSED_AND_ROOT1_POSITIVE_ZERO_AND_META_ENVELOPE_CLOSED",
     "FRONTIER_EPOCH_HASHES_ROOT_STATE_ACCEPTANCE_EVIDENCE_META_ACTIVATION_META_SUBJECT_ZERO_REALITY_ACTIVATION_AND_ZERO_REALITY_SUBJECT"
   ],
@@ -18,13 +19,16 @@
     "root1_positive_gap_count": 0,
     "active_root1_meta_envelope_min_version": 5,
     "terminal": false,
-    "note": "Meta-envelope obligations are not added arithmetically to the 24 atomic residuals because overlap is not yet proven disjoint."
+    "note": "Meta-envelope obligations are not added arithmetically to the 24 atomic residuals because overlap is not yet proven disjoint.",
+    "active_zero_reality_cut_min_version": 12
   },
   "current_failure_modes_deleted": [
     "STATIC_ROOT2_19_TO_18_REBIND_AS_A_REQUIRED_CONTROL_PLANE_STEP",
     "STATIC_ROOT3_10_TO_9_REBIND_AS_A_REQUIRED_CONTROL_PLANE_STEP",
     "TERMINAL_38_OF_38_FINALITY_WITHOUT_CURRENT_META_ENVELOPE_CLOSURE",
-    "SILENT_USE_OF_AN_ACTIVE_META_ENVELOPE_ACTIVATION_WHOSE_SUBJECT_BLOB_DRIFTED"
+    "SILENT_USE_OF_AN_ACTIVE_META_ENVELOPE_ACTIVATION_WHOSE_SUBJECT_BLOB_DRIFTED",
+    "ESCAPED_REGEX_THAT_COULD_NOT_DISCOVER_NUMERIC_VERSIONED_ACTIVATIONS",
+    "NON_GIT_BLOB_HASH_ENCODING_USING_LITERAL_BACKSLASH_ZERO_INSTEAD_OF_NUL"
   ],
   "files": {
     "runtime": "canonical/runtime/terminal_frontier_compiler_v1.py",
@@ -51,5 +55,6 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "repair_note": "FIRST_VERIFIER_FAILURE_LOCALIZED_TO_DOUBLE_ESCAPED_VERSION_REGEX_AND_GIT_BLOB_NUL_ENCODING__BOTH_REPAIRED_WITH_REGRESSION_COVERAGE__CURRENT_V12_ZERO_REALITY_ACTIVATION_DISCOVERABLE"
 }
