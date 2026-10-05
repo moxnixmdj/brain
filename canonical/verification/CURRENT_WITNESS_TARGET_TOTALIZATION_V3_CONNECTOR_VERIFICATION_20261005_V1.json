@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_WITNESS_TARGET_TOTALIZATION_V3_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "SEPARATE_CONNECTOR_RECOMPUTATION_PASS__CURRENT_8X14_SURFACE__112_PAIRS__ZERO_DIRECT_REUSE_CLOSURES__ZERO_CREDIT",
+  "objective": "Recompute the current matched-target x proved-witness surface from exact connector reads while public-runner verification is queued; scheduling truth only.",
+  "exact_subject_blobs": {
+    "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json": "72a5cd689f55df84de73693371264f02ef4e7226",
+    "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json": "b5192b1903dc603e75efe92b9a00ced0b2722f8c",
+    "canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V3.json": "892678035303d753b714bd4c0870d0972ec1a7ad",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+    "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V5.json": "8397c1341b48947727c070f37a184580ca32c844",
+    "canonical/runtime/current_witness_target_totalization_v3.py": "58772362e702852c12f5e06245097e352ce8bb88",
+    "canonical/tests/test_current_witness_target_totalization_v3.py": "d671c27818b6d083585ce3afadbfdc9855e9bf79"
+  },
+  "recomputation": {
+    "target_normalization_independent_pass": true,
+    "target_normalization_exact_live_set": true,
+    "target_count": 8,
+    "witness_count": 14,
+    "pair_count": 112,
+    "target_atom_occurrence_count": 37,
+    "target_metric_occurrence_count": 7,
+    "target_missing": [],
+    "target_extra": [],
+    "target_already_proved": [],
+    "witness_ids_exact_all_and_only_current_proved_claims": true,
+    "positive_atom_binding_count": 0,
+    "positive_metric_binding_count": 0,
+    "positive_semantic_edge_count": 0,
+    "direct_reuse_closed_target_count": 0,
+    "residual_target_count": 8
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_LIVEBENCH_OR_UNKNOWN_DOMAIN_V8_HAVE_NO_PARTIAL_SEMANTIC_RELATION_TO_ANY_MATCHED_TARGET",
+    "NO_CLAIM_THAT_NO_NEW_SCOPE_COMPLETE_THEOREM_EXISTS_OR_CAN_BE_INVENTED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY",
+    "PUBLIC_RUNNER_VERIFICATION_OF_THE_14_WITNESS_NORMALIZATION_REMAINS_PENDING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
