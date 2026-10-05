@@ -2031,6 +2031,21 @@
       "rule": "NO_SPECIFIC_MECHANISM_IS_MANDATORY_WITHOUT_VERIFIED_TARGET_ENTAILMENT__PRESERVE_ALL_OBSERVABLE_TARGETS_AND_THRESHOLDS",
       "acceptance_credit_delta": 0,
       "fresh_reality_authority": false
+    },
+    "public_bar_target_conditioned_scope_overlay": {
+      "status": "ACTIVE__ZERO_CURRENTLY_MANDATORY_NEW_BEHAVIORAL_RESIDUALS__ONE_HLE_CONFIGURATION_IDENTITY_CHECK__ZERO_CREDIT",
+      "activation_path": "canonical/governance/PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_ACTIVATION_20261005_V1.json",
+      "activation_commit": "dcd9ac5191842903a9181283df064dee72711dd9",
+      "verification_path": "canonical/verification/PUBLIC_BAR_TASK_UNION_TARGET_CONDITIONED_RESIDUAL_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "conditional_candidate_only": [
+        "SCIENTIFIC_HYPOTHESIS_AND_QUESTION_FORMATION_001"
+      ],
+      "open_configuration_identity_checks": [
+        "HLE_WITH_TOOLS_MULTIMODAL_OR_NON_TEXT_SCOPE_IDENTITY"
+      ],
+      "rule": "NEW_SCOPE_RESIDUAL_MUST_BE_INSIDE_FROZEN_TARGET_SET_BEFORE_BECOMING_MANDATORY",
+      "acceptance_credit_delta": 0,
+      "fresh_reality_authority": false
     }
   },
   "promotion_accounting_invariant": {
