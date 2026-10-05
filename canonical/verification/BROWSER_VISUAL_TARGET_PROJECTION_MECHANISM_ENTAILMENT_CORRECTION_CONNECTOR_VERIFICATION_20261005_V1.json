@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_BROWSER_VISUAL_TARGET_PROJECTION_MECHANISM_ENTAILMENT_CORRECTION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_MECHANISM_IDENTITY_NOT_TARGET_ENTAILED__OBSERVABLE_BROWSER_VISUAL_OUTCOME_PRESERVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/BROWSER_VISUAL_TARGET_PROJECTION_MECHANISM_ENTAILMENT_CORRECTION_20261005_V1.json",
+    "git_blob_sha": "e2c2ff211b2762e4c7f07ba492281c70981de9aa"
+  },
+  "sources": {
+    "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json": {
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_ACTIVATION_V1.json": {
+      "git_blob_sha": "f9fff2497d9a27da64ecffcd12f4cca78dc2e4ea"
+    },
+    "canonical/governance/BENCHMARK_PROXY_MECHANISM_TO_OBSERVABLE_TARGET_RECONCILIATION_20261005_V1.json": {
+      "git_blob_sha": "4622ba6529c25b4d070ed334c80b2288783a7423"
+    },
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": {
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "canonical/governance/OSWORLD_OPUS55_EXACT_METHODOLOGY_RECONCILIATION_20261004_V1.json": {
+      "git_blob_sha": "f4bc47440829387db14e37c900a269d11f77fdc1"
+    }
+  },
+  "checks": {
+    "frozen_target_is_observable_behavior_not_internal_implementation": true,
+    "computer_browser_target_wording_exact": true,
+    "public_osworld_threshold_preserved": true,
+    "global_internalized_ownership_preserved": true,
+    "exact_composite_mechanism_not_logically_entailed_by_target_projection": true,
+    "admissible_alternative_internal_realizations_exist_by_countermodel": true,
+    "no_acceptance_or_score_credit": true
+  },
+  "consequence": [
+    "DELETE_BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001_AS_MANDATORY_EXACT_MECHANISM_IDENTITY_FOR_COMPUTER_AND_BROWSER_USE",
+    "PRESERVE_COMPUTER_BROWSER_VISUALLY_GROUNDED_WORKFLOW_OUTCOME",
+    "PRESERVE_OSWORLD_2_1_PARTIAL_GE_81_8",
+    "PRESERVE_ARBITRARY_APPLICATION_SCOPE_PLANNING_VISUAL_GROUNDING_JUDGMENT_AND_GLOBAL_OWNERSHIP",
+    "KEEP_BROWSER_CONTRACT_AS_OPTIONAL_SUFFICIENT_STRENGTHENER_OR_DIAGNOSTIC"
+  ],
+  "errors": [],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
