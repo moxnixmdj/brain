@@ -53,6 +53,15 @@
         "THINKING_BLOCKS_ARE_TIED_TO_MODEL_AND_CONVERSATION",
         "TEXT_BETWEEN_TOOL_CALLS_IS_RETURNED_IN_THINKING_BLOCKS_AT_THIS_MODEL_GENERATION"
       ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/api/messages/create",
+      "observed_2026_10_05": [
+        "EVERY_SUCCESSFUL_RESPONSE_HAS_STOP_REASON_STATE",
+        "STOP_REASON_CAN_BE_END_TURN_MAX_TOKENS_STOP_SEQUENCE_TOOL_USE_PAUSE_TURN_REFUSAL_OR_MODEL_CONTEXT_WINDOW_EXCEEDED",
+        "REFUSAL_CAN_CARRY_STRUCTURED_STOP_DETAILS_CATEGORY_AND_EXPLANATION",
+        "PAUSE_TURN_REQUIRES_RETURNING_THE_ASSISTANT_CONTENT_TO_CONTINUE"
+      ]
     }
   ],
   "v1_constructive_falsifier": {
@@ -73,7 +82,8 @@
       "THE_V1_INTERFACE_COMPLETENESS_PREMISE_IS_FALSE_AS_WRITTEN_FOR_THE_DOCUMENTED_OPUS55_API",
       "U_STAR_SUBSET_OR_EQUAL_A_V1_IS_NOT_ESTABLISHED",
       "THE_V1_FIXED_INTERFACE_CERTIFICATE_CANNOT_DISCHARGE_LITERAL_TARGET_DISCOVERY_COMPLETENESS"
-    ]
+    ],
+    "additional_counterexample": "V1 also omits response-level stop_reason/stop_details control state. On Opus 5.5 a refusal is a normal successful response with stop_reason=refusal and structured stop_details; pause_turn is also a continuation-relevant response state. These are load-bearing for safeguard/reliability and long-horizon control."
   },
   "repaired_profile_aware_interface": {
     "profile_key": [
@@ -110,7 +120,14 @@
       "PAUSE_AND_CONTINUE",
       "STATE_CARRY_FORWARD"
     ],
-    "external_effect_rule": "Effects outside model-generated content occur through external execution transitions. Thinking and redacted-thinking are model-generated/state-carry blocks, not external executor computations."
+    "external_effect_rule": "Effects outside model-generated content occur through external execution transitions. Thinking and redacted-thinking are model-generated/state-carry blocks, not external executor computations.",
+    "response_control_and_metadata": [
+      "STOP_REASON",
+      "STOP_DETAILS_WHEN_PRESENT_INCLUDING_REFUSAL_CATEGORY",
+      "STOP_SEQUENCE_WHEN_PRESENT",
+      "CITATION_OR_CONTENT_BLOCK_METADATA_WHEN_LOAD_BEARING",
+      "CONTAINER_OR_SERVER_TOOL_EXECUTION_STATE_WHEN_LOAD_BEARING"
+    ]
   },
   "role_factorization": {
     "new_primitive_family_required": false,
@@ -125,7 +142,15 @@
       "B8_SELF_VERIFICATION_FAILURE_LOCALIZATION_AND_RECOVERY",
       "B9_MULTI_ROLE_COMPOSITION"
     ],
-    "reason": "The discovered blocks add a missing documented channel/state type to the trace alphabet but do not by themselves exhibit a new causal role outside the existing B0-B9 basis."
+    "reason": "The discovered blocks add a missing documented channel/state type to the trace alphabet but do not by themselves exhibit a new causal role outside the existing B0-B9 basis.",
+    "response_termination_and_refusal_state": [
+      "B1_GOAL_CONSTRAINT_SCOPE_AND_JUDGMENT",
+      "B8_SELF_VERIFICATION_FAILURE_LOCALIZATION_AND_RECOVERY"
+    ],
+    "pause_turn_and_resume_state": [
+      "B3_TEMPORAL_STATE_MEMORY_AND_CONTINUITY",
+      "B9_MULTI_ROLE_COMPOSITION"
+    ]
   },
   "repaired_coverage_theorem": {
     "definitions": {
@@ -151,7 +176,8 @@
       "DO_NOT_REOPEN_20TH_FAMILY_SEARCH_FOR_THINKING_BLOCKS",
       "DO_NOT_ENUMERATE_DOMAIN_LABELS_TO_REPAIR_THIS_GAP",
       "REUSE_THE_EXISTING_POLICY_NORMAL_FORM_AND_ROLE_BASIS",
-      "REVERIFY_ONLY_INTERFACE_TOTALITY_AND_EXTENSIONAL_ROLE_COVERAGE_BEFORE_RETURNING_TO_DOMAIN_DOMINANCE"
+      "REVERIFY_ONLY_INTERFACE_TOTALITY_AND_EXTENSIONAL_ROLE_COVERAGE_BEFORE_RETURNING_TO_DOMAIN_DOMINANCE",
+      "REPRESENT_RESPONSE_CONTROL_STATE_EXPLICITLY_SO_SECURITY_REFUSALS_AND_PAUSE_RESUME_BEHAVIOR_ARE_NOT_LOST_BY_CONTENT_BLOCK_ONLY_ABSTRACTION"
     ]
   },
   "scheduler_effect_if_verified": {
@@ -183,7 +209,7 @@
   ],
   "accounting": {
     "incremental_spend_usd": 0,
-    "new_reality_units_consumed": 3,
+    "new_reality_units_consumed": 4,
     "terminal_cases_consumed": 0,
     "acceptance_credit_delta": 0,
     "family_credit_delta": 0,
