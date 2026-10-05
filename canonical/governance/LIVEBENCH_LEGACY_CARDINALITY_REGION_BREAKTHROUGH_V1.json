@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_CARDINALITY_REGION_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "PUBLIC_CORPUS_DERIVED_CANDIDATE__SEMANTIC_FEASIBLE_REGION_REPLACES_BLIND_CHECKER_ID_DEDUP__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "scope": "LEGACY_IFEVAL_VISIBLE_CARDINALITY_CONSTRAINT_COMPILATION",
+  "triggering_truth_repair": {
+    "problem_1": "SOURCE_TEMPLATE_REGEXES_ARE_NOT_A_UNIVERSAL_PROMPT_INVERTER_BECAUSE_PUBLIC_LEGACY_IFEVAL_PROMPTS_SEMANTICALLY_PARAPHRASE_THRESHOLDS",
+    "examples_of_surface_to_checker_parameter_rewrites": [
+      "AT_MOST_N_SURFACE_CAN_BE_STORED_AS_LESS_THAN_N_PLUS_1",
+      "MORE_THAN_N_SURFACE_CAN_BE_STORED_AS_AT_LEAST_N_PLUS_1",
+      "NUMBER_WORDS_AND_ONCE_TWICE_FORMS_NEED_NOT_LITERALLY_MATCH_HIDDEN_INTEGER_KWARGS"
+    ],
+    "problem_2": "BLIND_DEDUPLICATION_BY_INSTRUCTION_ID_IS_UNSOUND_BECAUSE_MULTIPLE_INSTANCES_OF_THE_SAME_CHECKER_FAMILY_CAN_OCCUR_IN_ONE_PROMPT_WITH_DIFFERENT_PARAMETERS_OR_DIFFERENT_SELECTORS"
+  },
+  "public_audit": {
+    "repository": "google-research/google-research",
+    "commit": "e49bbfe381c9c0e564b937f1c4e163a2273c65cc",
+    "path": "instruction_following_eval/data/input_data.jsonl",
+    "git_blob_sha": "cbe52f6eecf3986fdac745b4acba4da1408eb146",
+    "row_count": 541,
+    "registered_legacy_type_count_observed": 25,
+    "rows_with_duplicate_instruction_id_instances": 17,
+    "extra_duplicate_instances": 17,
+    "duplicate_family_row_counts": {
+      "change_case:capital_word_frequency": 5,
+      "keywords:frequency": 3,
+      "length_constraints:number_sentences": 6,
+      "length_constraints:number_words": 2,
+      "startend:quotation": 1
+    },
+    "structural_examples": [
+      "A_WORD_OR_SENTENCE_RANGE_IS_ENCODED_AS_LOWER_AND_UPPER_INSTANCES_OF_THE_SAME_FAMILY",
+      "TWO_DIFFERENT_KEYWORDS_CAN_CREATE_TWO_KEYWORD_FREQUENCY_INSTANCES_WITH_DIFFERENT_SELECTOR_VALUES",
+      "CAPITAL_WORD_PROMPTS_CAN_CREATE_A_POSITIVE_EXISTENCE_LOWER_BOUND_PLUS_A_SEPARATE_UPPER_BOUND"
+    ],
+    "use": "PUBLIC_NONTERMINAL_FALSIFICATION_AND_DESIGN_ONLY__NO_TERMINAL_DISTRIBUTION_EQUIVALENCE_CLAIM"
+  },
+  "breakthrough": {
+    "old_representation": "ONE_OPTIONAL_CONSTRAINT_PER_INSTRUCTION_ID",
+    "new_representation": "SEMANTIC_FEASIBLE_REGION_KEYED_BY_FAMILY_AND_SELECTOR",
+    "region_form": {
+      "key": "(instruction_family, selector)",
+      "value": "INCLUSIVE_INTEGER_INTERVAL_[LOWER,UPPER]_WITH_OPEN_SIDE_ALLOWED"
+    },
+    "composition_rule": "CONJOIN_MULTIPLE_VISIBLE_CONSTRAINT_ATOMS_BY_INTERSECTING_REGIONS_FOR_THE_SAME_FAMILY_AND_SELECTOR__NEVER_DROP_AN_INSTANCE_SOLELY_BECAUSE_ITS_INSTRUCTION_ID_REPEATS",
+    "selector_examples": {
+      "keywords:frequency": "NORMALIZED_KEYWORD",
+      "length_constraints:number_words": "response_words",
+      "length_constraints:number_sentences": "response_sentences",
+      "change_case:capital_word_frequency": "all_capital_words"
+    },
+    "parameterization_independence": "COMPILE_THE_VISIBLE_SEMANTIC_CONTRACT_DIRECTLY_TO_THE_ACCEPTED_INTEGER_REGION__DO_NOT_REQUIRE_RECONSTRUCTING_THE_EVALUATOR_INTERNAL_OFF_BY_ONE_KWARG_ENCODING"
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/livebench_legacy_cardinality_region_v1.py",
+    "tests": "canonical/tests/test_livebench_legacy_cardinality_region_v1.py",
+    "model_dependency_count": 0,
+    "network_dependency_count": 0,
+    "hidden_kwargs_runtime_dependency": false,
+    "terminal_metadata_runtime_dependency": false
+  },
+  "scheduler_effect_if_verified": [
+    "SUPERSEDE_BLIND_SAME_FAMILY_DEDUPLICATION_FOR_CARDINALITY_CONSTRAINTS",
+    "COMPOSE_LEGACY_CONSTRAINTS_IN_SEMANTIC_REGION_SPACE_BEFORE_WITNESS_CONSTRUCTION",
+    "USE_EXACT_HIDDEN_CHECKER_PARAMETER_RECOVERY_ONLY_WHERE_SEMANTIC_REGION_COMPILATION_CANNOT_PROVE_AN_EQUIVALENT_VISIBLE_CONTRACT",
+    "INDEPENDENTLY_AUDIT_PUBLIC_541_ROW_CORPUS_AND_THEN_FREEZE_BEFORE_ANY_FRESH_TERMINAL_EXECUTION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_541_PUBLIC_ROWS_ARE_ALREADY_COMPILED",
+    "NO_CLAIM_PUBLIC_GOOGLE_IFEVAL_EQUALS_THE_FROZEN_TERMINAL_200",
+    "NO_CLAIM_TERMINAL_SCORE_INCREASE",
+    "NO_TERMINAL_PROMPT_OR_KWARG_CONTENT_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
