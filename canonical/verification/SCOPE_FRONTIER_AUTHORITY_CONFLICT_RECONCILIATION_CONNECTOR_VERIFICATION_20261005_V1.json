@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_SCOPE_FRONTIER_AUTHORITY_CONFLICT_RECONCILIATION_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_7_EQUALS_5_OPEN_PLUS_2_SCOPE_CLOSED_PERFORMANCE_OPEN__FINITE_RECEIPT_SCOPE_OVERCLAIM_BLOCKED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SCOPE_FRONTIER_AUTHORITY_CONFLICT_RECONCILIATION_20261005_V1.json",
+    "git_blob_sha": "09ed9417e40cb520d0cdfd4c634aaa7367713cd5"
+  },
+  "bound_inputs": {
+    "five_leaf_frontier": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2.json",
+      "git_blob_sha": "629fb370b6da7296685e9e79c2e2a76c25fd9106"
+    },
+    "five_leaf_activation": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2_ACTIVATION_V1.json",
+      "git_blob_sha": "f348efc0129e0d464c6fd47d66e316e0a90287b3"
+    },
+    "seven_receipt_verification": {
+      "path": "canonical/verification/SEVEN_SURVIVING_LEAF_ZERO_REALITY_RECEIPT_SATURATION_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "643c7ed80ca9fba9ed989a60d769e91d16730a49"
+    },
+    "synthesis_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "structured_method_scope_audit": {
+      "path": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json",
+      "git_blob_sha": "1db04e3c2c523dfe5f2ebe719b7c63dc9ccd808e"
+    },
+    "open_world_boundary": {
+      "path": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+      "git_blob_sha": "2476ab2d8220994d7858c80409b563e1582c88e6"
+    }
+  },
+  "recomputed": {
+    "prior_seven_unique_receipt_saturated": true,
+    "active_scope_open_count": 5,
+    "active_scope_open_unique_count": 5,
+    "scope_closed_performance_open_count": 2,
+    "scope_closed_performance_open_unique_count": 2,
+    "sets_disjoint": true,
+    "exact_union_count": 7,
+    "exact_union_matches_prior_seven": true,
+    "synthesis_independent_scope_complete": true,
+    "synthesis_coverage_relation": "EXACT_UNION",
+    "synthesis_scope_relation": "PROVEN_STRONGER",
+    "structured_method_scope_closed": true,
+    "structured_method_unresolved_scope_dimensions": 0,
+    "structured_method_scope_gate": "ADMISSIBLE_SUBSTITUTION",
+    "finite_terminal_receipt_is_not_universal_scope_proof": true,
+    "p3_v3_universal_scope_route_is_not_required_for_synthesis_scope_certificate": true,
+    "performance_acceptance_unchanged": true
+  },
+  "exact_active_scope_open": [
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+    "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+  ],
+  "exact_scope_closed_performance_open": [
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+  ],
+  "consequence": [
+    "USE_FIVE_LEAF_SET_FOR_SCOPE_REPAIR_SCHEDULING",
+    "USE_SEVEN_LEAF_RESULT_ONLY_AS_FINITE_RECEIPT_SATURATION_INVENTORY",
+    "DO_NOT_PROMOTE_ZERO_NEW_SCOPE_LEAVES_FROM_TERMINAL_V3_FINITE_PASSES",
+    "DO_NOT_REOPEN_SYNTHESIS_OR_STRUCTURED_METHOD_SCOPE_WORK",
+    "PRESERVE_ALL_PERFORMANCE_ACCEPTANCE_OBLIGATIONS"
+  ],
+  "verification_class": "CONNECTED_CANONICAL_RECOMPUTATION__NOT_INDEPENDENT_PUBLIC_RUNNER",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_PROMOTION",
+    "NO_FAMILY_ACCEPTANCE_CLOSURE",
+    "NO_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
