@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_CLASS_BOUND_SUBPROCESS_MEDIATOR_V2_20261005_V2",
+  "date": "2026-10-05",
+  "status": "CURRENT__CLASS_BOUND_GLOBAL_PROCESS_ENFORCEMENT__CURRENT_29_SITE_REGISTRY_REBOUND__DEFAULT_DENY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "supersedes": "canonical/governance/ROOT3_CLASS_BOUND_SUBPROCESS_MEDIATOR_V2_20261005.json",
+  "objective": "Keep the verified V2 mediator/adapter bytes unchanged while rebinding their exact callsite classifier dependency to the repaired current 29-site effect-class registry.",
+  "authorities": {
+    "mediator_v1": {
+      "path": "canonical/runtime/root3_subprocess_mediator_v1.py",
+      "git_blob_sha": "8443b61b15cb2bc597c4fa292650f2a0aae899b5"
+    },
+    "mediator_v2": {
+      "path": "canonical/runtime/root3_subprocess_mediator_v2.py",
+      "git_blob_sha": "9ca4dfee3d986327850bd3de9ff6f10101769ac7"
+    },
+    "final_authorizer_adapter_v2": {
+      "path": "canonical/runtime/root3_subprocess_final_authorizer_adapter_v2.py",
+      "git_blob_sha": "a04ae12df99504d46aeb6ea8f4f74ce1a567331e"
+    },
+    "runtime_class_join": {
+      "path": "canonical/runtime/root3_subprocess_callsite_classifier_v1.py",
+      "git_blob_sha": "43c3bef371eea0868cdc6c45be8e6bd95c2bb22b"
+    },
+    "current_effect_class_registry": {
+      "path": "canonical/runtime/root3_subprocess_effect_class_registry_v1.py",
+      "git_blob_sha": "771ea8c30eb25b23e22eaba3474ea65f879f912f"
+    },
+    "current_effect_class_registry_governance": {
+      "path": "canonical/governance/ROOT3_SUBPROCESS_EFFECT_CLASS_REGISTRY_20261005_V2.json",
+      "git_blob_sha": "b660f758bc336146f030e301dffa1c54022632ba"
+    },
+    "drift_repair_verification": {
+      "path": "canonical/verification/ROOT3_ASTRA_CALLSITE_DRIFT_REPAIR_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "c7bd351f5f6c1812c3584b5801376a29c5a10053"
+    }
+  },
+  "inherited_verification": {
+    "path": "canonical/verification/ROOT3_CLASS_BOUND_SUBPROCESS_MEDIATOR_V2_SPRITE_VERIFICATION_20261005_V1.json",
+    "git_blob_sha": "6a96adf77e2d63fb006198f457345a8a995a7997",
+    "reuse_basis": "MEDIATOR_ADAPTER_AND_CLASSIFIER_BYTES_UNCHANGED__ONLY_REGISTRY_DATA_KEYS_REBOUND__GENERIC_FAIL_CLOSED_ROUTING_AND_TAMPER_TESTS_REMAIN_APPLICABLE"
+  },
+  "semantics": {
+    "sequence": [
+      "EXACT_RUNTIME_CALLSITE_CLASSIFICATION",
+      "CONTENT_BOUND_V2_REQUEST_WITH_CLASS",
+      "FINAL_AUTHORIZATION_ADAPTER",
+      "EXACT_CLASS_EXECUTOR_LOOKUP",
+      "EXECUTE_OR_FAIL_CLOSED"
+    ],
+    "no_executor": "DENY",
+    "unknown_caller": "DENY_BEFORE_AUTHORIZER",
+    "direct_original_process_fallback": "NONE_IN_V2_MEDIATOR"
+  },
+  "repaired_delta": [
+    "EIGHT_CURRENT_ASTRA_PROCESS_SITES_ARE_CLASSIFIABLE_AGAIN",
+    "NO_NEW_EFFECT_CLASS_OR_EXECUTION_AUTHORITY_ADDED",
+    "ALL_29_CURRENT_PROCESS_SITES_NOW_HAVE_EXACT_PATH_LINE_API_KEYS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLASS_EXECUTOR_PROVED",
+    "NO_CHILD_CONFINEMENT_CREDIT",
+    "NO_ROOT3_C1_C2_C3_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
