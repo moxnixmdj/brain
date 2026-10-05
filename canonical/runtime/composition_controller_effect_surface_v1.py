@@ -23,7 +23,7 @@ DEFAULT_RUNTIME = ROOT / "canonical" / "runtime" / "astra_runtime.py"
 
 LOCAL_MUTATOR_ATTRS = {
     "write_text", "write_bytes", "mkdir", "unlink", "rename",
-    "replace", "rmdir", "touch",
+    "rmdir", "touch",
 }
 DELEGATE_NAMES = {"_invoke_bound_capability"}
 PROCESS_NAMES = {"subprocess.run", "subprocess.Popen", "os.system"}
