@@ -11,6 +11,13 @@ from __future__ import annotations
 from collections.abc import Callable, Mapping
 from typing import Any
 
+from canonical.runtime.declared_artifact_semantic_policy_v1 import (
+    AUTHORITY_RECEIPT_SCHEMA as DECLARED_ARTIFACT_AUTHORITY_RECEIPT_SCHEMA,
+    COMPOSITION_RECEIPT_SCHEMA as DECLARED_ARTIFACT_COMPOSITION_RECEIPT_SCHEMA,
+    verify_authority_receipt as verify_declared_artifact_authority_receipt,
+    verify_composition_receipt as verify_declared_artifact_composition_receipt,
+)
+
 SCHEMA_VERDICT = "PROJECT_BRAIN_EFFECT_SEMANTIC_GATE_VERDICT_V1"
 ROLES = {"authority", "composition"}
 
@@ -24,7 +31,10 @@ Verifier = Callable[[Mapping[str, Any], Mapping[str, Any]], Mapping[str, Any]]
 # Security boundary: production authorization uses this immutable module-level
 # table only. There is deliberately no runtime registration API. Concrete
 # schemas must be added by code review together with deterministic tests.
-BUILTIN_VERIFIERS: dict[tuple[str, str], Verifier] = {}
+BUILTIN_VERIFIERS: dict[tuple[str, str], Verifier] = {
+    ("authority", DECLARED_ARTIFACT_AUTHORITY_RECEIPT_SCHEMA): verify_declared_artifact_authority_receipt,
+    ("composition", DECLARED_ARTIFACT_COMPOSITION_RECEIPT_SCHEMA): verify_declared_artifact_composition_receipt,
+}
 
 
 def _deny(reason: str) -> dict[str, Any]:
@@ -79,7 +89,8 @@ def _verify_one(
         raise SemanticGateError(role.upper() + "_SCHEMA_UNVERIFIED:" + schema)
 
     binding = _request_binding(request)
-    verdict = verifier(document, binding)
+    verifier_context = {**binding, "__request__": dict(request)}
+    verdict = verifier(document, verifier_context)
     if not isinstance(verdict, Mapping):
         raise SemanticGateError(role.upper() + "_VERIFIER_OUTPUT_INVALID")
 
@@ -93,9 +104,11 @@ def _verify_one(
         if verdict.get(key) != expected:
             raise SemanticGateError(role.upper() + "_VERIFIER_BINDING_MISMATCH:" + key)
 
-    allowed_keys = set(required) | {"verifier_id", "proof_digest"}
+    allowed_keys = set(required) | {"verifier_id", "proof_digest", "__request__"}
     if set(verdict) != allowed_keys:
         raise SemanticGateError(role.upper() + "_VERIFIER_OUTPUT_UNBOUND_FIELDS")
+    if verdict.get("__request__") != dict(request):
+        raise SemanticGateError(role.upper() + "_VERIFIER_REQUEST_CONTEXT_MISMATCH")
     _token(verdict.get("verifier_id"), role.upper() + "_VERIFIER_ID")
     _token(verdict.get("proof_digest"), role.upper() + "_PROOF_DIGEST")
     return dict(verdict)
