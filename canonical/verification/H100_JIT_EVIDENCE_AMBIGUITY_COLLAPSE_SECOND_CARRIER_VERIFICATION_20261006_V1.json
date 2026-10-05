@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_H100_JIT_EVIDENCE_AMBIGUITY_COLLAPSE_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__5_OF_5__JIT_EVIDENCE_SUBSTITUTES_FOR_PERSISTENT_WORLD_BIT_IN_TWO_WORLD_CASE__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_JIT_EVIDENCE_AMBIGUITY_COLLAPSE_PRECOMMIT_V1.json",
+    "test": "canonical/tests/test_h100_jit_evidence_ambiguity_collapse_v1.py",
+    "information_bound_runtime": "canonical/runtime/h100_conditional_information_state_bound_v1.py",
+    "lexical_runtime": "canonical/runtime/h100_jit_lexical_role_v1.py"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "independence_scope": "DISTINCT_ISOLATED_CARRIER_FROM_PRIMARY_RESEARCH_WORKER__SAME_PROVIDER"
+  },
+  "observed": {
+    "no_evidence_partition": [
+      2
+    ],
+    "no_evidence_zero_bit_success_upper_bound": 0.5,
+    "jit_evidence_partition": [
+      1,
+      1
+    ],
+    "jit_evidence_zero_bit_success_upper_bound": 1,
+    "world_input_exact_role_recovery": true,
+    "world_target_exact_role_recovery": true,
+    "exact_worlds_recovered": "2_OF_2",
+    "persistent_learned_bytes": 0
+  },
+  "deduction": "IN_THIS_FROZEN_TWO_WORLD_LEXICAL_CASE__THE MISSING_ONE_BIT_OF_WORLD DISTINGUISHING_INFORMATION_CAN_BE_SUPPLIED_AT_RUNTIME_BY_JIT_RELATION_EVIDENCE_INSTEAD_OF_PERSISTENT_LEARNED_STATE__THE_INFORMATION_BOUND_MOVES_FROM_0_5_TO_1_0_WITHOUT_ADDING_LEARNED_BYTES",
+  "hard_nonclaims": [
+    "SYNTHETIC_TWO_WORLD_CASE_DOES_NOT_PROVE_OPEN_WORLD_SOURCE_AVAILABILITY",
+    "DOES_NOT_PROVE_ALL_FRONTIER_CAPABILITIES_CAN_EXTERNALIZE_THEIR_REQUIRED_DISTINGUISHING_INFORMATION",
+    "DOES_NOT_PROVE_ZERO_LEARNED_STATE_IS UNIVERSALLY SUFFICIENT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
