@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_SUPERSET_COVERAGE_DOMINANCE_NORMAL_FORM_WOLFRAM_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_SYMBOLIC_KERNEL_PASS__SET_COVERAGE_PLUS_DOMAIN_DOMINANCE_ENTAILS_TARGET_DOMINANCE__STRICT_SUPERSET_ALLOWED__NEGATIVE_CANARIES_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TARGET_SUPERSET_COVERAGE_DOMINANCE_NORMAL_FORM_20261005_V1.json",
+    "git_blob_sha": "55a027d50e6f9d1c4d70a75b39d6a536e26a4277",
+    "bound_commit": "30df288405196fa3b40f15b0dd8fdde3f2c2adbd"
+  },
+  "verifier": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "method": "FINITE_BOOLEAN_SCHEMA_RECOMPUTATION_OF_SET_MEMBERSHIP_AND_DOMINANCE_IMPLICATION_WITH_POSITIVE_AND_NEGATIVE_CANARIES",
+    "exact_kernel_result": {
+      "CoreImplicationTautology": true,
+      "StrictSupersetWitness": [
+        [
+          false,
+          true,
+          false,
+          true,
+          true,
+          false,
+          true,
+          true,
+          false
+        ]
+      ],
+      "MissingCoverageCounterexample": [
+        [
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      ],
+      "MissingDominanceCounterexample": [
+        [
+          false,
+          true,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false
+        ]
+      ]
+    }
+  },
+  "recomputation": {
+    "symbolic_schema": {
+      "coverage": "FOR_EACH_CELL_i__U_i_IMPLIES_D_i",
+      "dominance_domain": "FOR_EACH_CELL_i__D_i_IMPLIES_BRAIN_DOMINATES_i",
+      "dominance_target": "FOR_EACH_CELL_i__U_i_IMPLIES_BRAIN_DOMINATES_i"
+    },
+    "core_implication_tautology": true,
+    "exact_target_domain_equality_required": false,
+    "strict_superset_witness_exists": true,
+    "dominance_without_coverage_sufficient": false,
+    "coverage_without_domain_dominance_sufficient": false,
+    "configurable_system_compatibility": "PASS__THE_SUBJECT_DOMINANCE_PREDICATE_IS_SYSTEM_LEVEL_AND_DOES_NOT_REQUIRE_ONE_FIXED_POLICY_FOR_ALL_TASKS__TASK_CONDITIONED_OWNED_CONFIGURATIONS_MAY_SATISFY_DOMAIN_DOMINANCE_WHEN_ADMISSIBLE",
+    "actual_opus55_target_coverage_proved": false,
+    "actual_brain_domain_dominance_proved": false
+  },
+  "verified_consequence": [
+    "EXACT_ENUMERATION_OR_EQUALITY_D_EQUALS_U_IS_NOT_LOGICALLY_NECESSARY_FOR_LITERAL_TARGET_COVERAGE",
+    "A_SOUND_SUPERSET_CERTIFICATE_U_SUBSET_OR_EQUAL_D_IS_SUFFICIENT_ON_THE_COVERAGE_SIDE_IF_BRAIN_DOMINANCE_OVER_D_IS_SEPARATELY_PROVED",
+    "ANY_DOMAIN_LIMITED_DOMINANCE_ARGUMENT_WITHOUT_A_SOUND_U_SUBSET_OR_EQUAL_D_OR_STRONGER_COVERAGE_PREMISE_FAILS_CLOSED",
+    "W3_UNIVERSAL_DOMINANCE_DOES_NOT_BY_ITSELF_PROVE_TARGET_COMPLETENESS_UNLESS_ITS_QUANTIFIED_DOMAIN_SOUNDLY_COVERS_U"
+  ],
+  "relationship_to_configurable_quantifier_correction": {
+    "authority": "canonical/verification/OPUS55_CONFIGURABLE_CAPABILITY_QUANTIFIER_CORRECTION_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "compatible": true,
+    "clarification": "DOMINANCE_OVER_D_MAY_BE_FORALL_TASK_EXISTS_ADMISSIBLE_OWNED_TASK_CONDITIONED_CONFIGURATION__THE_NORMAL_FORM_DOES_NOT_REQUIRE_EXISTS_ONE_FIXED_CONFIGURATION_FORALL_TASKS"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_19_FAMILIES_OR_ANY_CURRENT_DOMAIN_D_SOUNDLY_COVERS_ALL_USEFUL_OPUS55_BEHAVIORS",
+    "NO_CLAIM_BRAIN_CURRENTLY_DOMINATES_ANY_COMPLETE_OPUS55_SUPERDOMAIN",
+    "NO_LITERAL_TERMINAL_FINALITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "verification_result": "PASS",
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
