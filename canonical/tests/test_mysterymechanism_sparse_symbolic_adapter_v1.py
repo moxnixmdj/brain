@@ -26,6 +26,8 @@ class MysteryMechanismSparseSymbolicAdapterTests(unittest.TestCase):
                 for x in (-4.0, -2.0, -0.5, 0.25, 1.0, 2.5, 5.0)]
         out = mm.sparse_discover(rows, target="out", max_depth=2)
         self.assertEqual(out["status"], "SPARSE_CANDIDATES_FOUND", out)
+        self.assertTrue(out["candidate_frontier"], out)
+        self.assertEqual(out["candidate_frontier"][0], out["best_candidate"])
         best = out["best_candidate"]
         self.assertIsNotNone(best)
         self.assertLess(best["loo_nrmse"], 1e-7, best)
@@ -77,9 +79,75 @@ class MysteryMechanismSparseSymbolicAdapterTests(unittest.TestCase):
             {"x":5.0,"out":25.1},
         ]
         out = mm.choose_final_experiment(rows, bounds={"x":[1.0,9.0]}, target="out")
-        self.assertIn(out["status"], {"BOUND_CONSTRAINED_DISCRIMINATOR","RESERVED_CENTER"})
+        self.assertIn(
+            out["status"],
+            {"BOUND_CONSTRAINED_INFORMATION_DISCRIMINATOR_V2", "MAXIMIN_NOVEL_EXPLORATION_V2"},
+        )
         self.assertGreaterEqual(out["point"]["x"], 1.0)
         self.assertLessEqual(out["point"]["x"], 9.0)
+
+    def test_reserved_experiment_never_repeats_an_observed_point(self):
+        rows = [
+            {"x":1.0,"out":1.0},
+            {"x":2.0,"out":4.0},
+            {"x":4.0,"out":16.0},
+            {"x":8.0,"out":64.0},
+        ]
+        out = mm.choose_final_experiment(
+            rows,
+            bounds={"x":[1.0,16.0]},
+            target="out",
+            grid_levels=5,
+        )
+        self.assertIsNotNone(out["point"], out)
+        chosen = out["point"]["x"]
+        self.assertTrue(all(abs(chosen - row["x"]) > 1e-10 for row in rows), out)
+        self.assertFalse(out["repeated_existing_point"])
+        self.assertGreater(out["normalized_novelty"], 0.0)
+
+    def test_no_disagreement_uses_novel_maximin_instead_of_duplicate_center(self):
+        from unittest.mock import patch
+
+        rows = [
+            {"x":1.0,"out":1.0},
+            {"x":2.0,"out":4.0},
+            {"x":3.0,"out":9.0},
+            {"x":4.0,"out":16.0},
+            {"x":5.0,"out":25.0},
+        ]
+        with patch.object(mm.base, "discover", return_value={"candidates": []}), patch.object(
+            mm,
+            "sparse_discover",
+            return_value={"best_candidate": None, "candidate_frontier": []},
+        ):
+            out = mm.choose_final_experiment(
+                rows,
+                bounds={"x":[1.0,9.0]},
+                target="out",
+                grid_levels=5,
+            )
+        self.assertEqual(out["status"], "MAXIMIN_NOVEL_EXPLORATION_V2", out)
+        self.assertNotIn(round(out["point"]["x"], 12), {1.0, 2.0, 3.0, 4.0, 5.0})
+        self.assertGreater(out["normalized_novelty"], 0.0)
+        self.assertFalse(out["repeated_existing_point"])
+
+    def test_reserved_selector_sees_sparse_symbolic_candidate_frontier(self):
+        rows = [
+            {"x":x, "out":2.0*x + 3.0*(x/(1.0+abs(x)))}
+            for x in (-4.0, -2.0, -0.5, 0.25, 1.0, 2.5)
+        ]
+        out = mm.choose_final_experiment(
+            rows,
+            bounds={"x":[-5.0,5.0]},
+            target="out",
+            grid_levels=5,
+        )
+        self.assertGreaterEqual(
+            out["route_candidate_counts"].get("SPARSE_LOO_EXPRESSION", 0),
+            1,
+            out,
+        )
+        self.assertFalse(out["repeated_existing_point"])
 
     def test_out_of_grammar_is_fail_closed_at_strict_threshold(self):
         rows = [{"x": x, "out": math.sin(x)}
