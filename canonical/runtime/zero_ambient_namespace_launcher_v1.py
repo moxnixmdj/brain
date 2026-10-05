@@ -93,8 +93,10 @@ ulimit -t "$CPU_S"; ulimit -v "$MEM_KB"; ulimit -f "$FILE_KB"; ulimit -n "$NOFIL
 exec "$CHROOT_BIN" "$ROOT" /usr/bin/env -i PATH=/usr/bin:/bin HOME=/tmp PROJECT_BRAIN_BROKER_FD="$BROKER" "$@"
 '''
 
-def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
+def run_confined(policy:Mapping[str,Any], *, popen_impl=None)->dict[str,Any]:
     p=canonical_policy(policy); lim=p['limits']
+    spawn = subprocess.Popen if popen_impl is None else popen_impl
+    if not callable(spawn): raise NamespaceConfinementError('POPEN_IMPL_NOT_CALLABLE')
     required_names=['unshare','mount','chroot','setpriv','ip','bash','env']
     resolved={name:shutil.which(name) for name in required_names}
     missing=[name for name,path in resolved.items() if not path]
@@ -125,7 +127,7 @@ def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     if os.geteuid()==0: popen_kw.update(user=p['host_uid'],group=p['host_gid'],extra_groups=[])
     started=time.monotonic(); timed_out=False
     try:
-        proc=subprocess.Popen(cmd,**popen_kw); child.close()
+        proc=spawn(cmd,**popen_kw); child.close()
         try: rc=proc.wait(timeout=lim['wallclock_s'])
         except subprocess.TimeoutExpired:
             timed_out=True
