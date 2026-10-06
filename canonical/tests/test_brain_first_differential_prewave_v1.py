@@ -26,6 +26,7 @@ def base():
             "case_generation_outcome_independent": True,
             "post_freeze_generation": True,
             "contamination_clean": True,
+            "case_outcomes_isolated_or_reset_equivalent": True,
             "receipt": receipt("canonical/scope.json"),
         },
         "freeze": {
@@ -133,6 +134,14 @@ def test_outcome_dependent_case_generation_fails_closed():
     assert "CASE_GENERATION_OUTCOME_INDEPENDENT_NOT_TRUE" in out["errors"][0]
 
 
+def test_stateful_cross_case_dependency_fails_closed():
+    x = base()
+    x["scope"]["case_outcomes_isolated_or_reset_equivalent"] = False
+    out = compile_brain_first_prewave(x)
+    assert out["status"] == "FAIL_CLOSED"
+    assert "CASE_OUTCOMES_ISOLATED_OR_RESET_EQUIVALENT_NOT_TRUE" in out["errors"][0]
+
+
 def test_brain_repair_after_exposure_is_forbidden():
     x = base()
     x["freeze"]["no_brain_repair_after_exposure"] = False
@@ -178,6 +187,7 @@ if __name__ == "__main__":
     test_opus_success_on_brain_failure_is_direct_counterexample()
     test_nonmonotone_reducer_fails_closed()
     test_outcome_dependent_case_generation_fails_closed()
+    test_stateful_cross_case_dependency_fails_closed()
     test_brain_repair_after_exposure_is_forbidden()
     test_proxy_comparator_on_residual_fails_closed()
     test_nonconformant_future_comparator_fails_closed()
