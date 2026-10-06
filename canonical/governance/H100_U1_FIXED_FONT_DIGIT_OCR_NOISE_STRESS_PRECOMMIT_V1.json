@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_FIXED_FONT_DIGIT_OCR_NOISE_STRESS_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_UNCHANGED_PROGRAM_STRESS_OUTCOMES",
+  "unchanged_program": "canonical/governance/H100_U1_FIXED_FONT_DIGIT_OCR_PROGRAM_PRECOMMIT_V1.json",
+  "perturbation": "EXACTLY_ONE_PIXEL_BIT_FLIPPED_IN_EACH_DIGIT_GLYPH",
+  "cases": [
+    {
+      "digit": 0,
+      "input": [
+        15,
+        17,
+        17,
+        17,
+        17,
+        17,
+        14
+      ]
+    },
+    {
+      "digit": 1,
+      "input": [
+        4,
+        14,
+        4,
+        4,
+        4,
+        4,
+        14
+      ]
+    },
+    {
+      "digit": 2,
+      "input": [
+        14,
+        17,
+        5,
+        2,
+        4,
+        8,
+        31
+      ]
+    },
+    {
+      "digit": 3,
+      "input": [
+        30,
+        1,
+        1,
+        6,
+        1,
+        1,
+        30
+      ]
+    },
+    {
+      "digit": 4,
+      "input": [
+        2,
+        6,
+        10,
+        18,
+        15,
+        2,
+        2
+      ]
+    },
+    {
+      "digit": 5,
+      "input": [
+        31,
+        16,
+        16,
+        30,
+        1,
+        0,
+        30
+      ]
+    },
+    {
+      "digit": 6,
+      "input": [
+        14,
+        16,
+        16,
+        30,
+        17,
+        17,
+        12
+      ]
+    },
+    {
+      "digit": 7,
+      "input": [
+        27,
+        1,
+        2,
+        4,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "digit": 8,
+      "input": [
+        14,
+        25,
+        17,
+        14,
+        17,
+        17,
+        14
+      ]
+    },
+    {
+      "digit": 9,
+      "input": [
+        14,
+        17,
+        1,
+        15,
+        1,
+        1,
+        14
+      ]
+    }
+  ],
+  "expected_causal_class_if_fail": "ALGORITHM_ROBUSTNESS_GAP",
+  "target_adapted_bits_added_before_stress": 0,
+  "promotion_authority": false
+}
