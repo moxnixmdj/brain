@@ -1,0 +1,154 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_AXIS_SCALE_FRESH_HOLDOUT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_PROGRAM_PRECOMMIT_BEFORE_EXECUTION",
+  "program_precommit": "canonical/governance/H100_U1_AXIS_SCALE_PROGRAM_PRECOMMIT_V1.json",
+  "cases": [
+    {
+      "input": [
+        100,
+        0,
+        0,
+        100,
+        40
+      ],
+      "gold": [
+        60
+      ]
+    },
+    {
+      "input": [
+        10,
+        20,
+        50,
+        100,
+        30
+      ],
+      "gold": [
+        60
+      ]
+    },
+    {
+      "input": [
+        0,
+        100,
+        100,
+        0,
+        25
+      ],
+      "gold": [
+        75
+      ]
+    },
+    {
+      "input": [
+        200,
+        -50,
+        100,
+        50,
+        150
+      ],
+      "gold": [
+        0
+      ]
+    },
+    {
+      "input": [
+        -20,
+        0,
+        20,
+        80,
+        0
+      ],
+      "gold": [
+        40
+      ]
+    },
+    {
+      "input": [
+        5,
+        100,
+        25,
+        200,
+        15
+      ],
+      "gold": [
+        150
+      ]
+    },
+    {
+      "input": [
+        300,
+        1000,
+        100,
+        0,
+        250
+      ],
+      "gold": [
+        750
+      ]
+    },
+    {
+      "input": [
+        0,
+        -100,
+        50,
+        100,
+        25
+      ],
+      "gold": [
+        0
+      ]
+    },
+    {
+      "input": [
+        64,
+        0,
+        0,
+        64,
+        16
+      ],
+      "gold": [
+        48
+      ]
+    },
+    {
+      "input": [
+        100,
+        500,
+        0,
+        0,
+        75
+      ],
+      "gold": [
+        375
+      ]
+    },
+    {
+      "input": [
+        10,
+        -20,
+        70,
+        100,
+        40
+      ],
+      "gold": [
+        40
+      ]
+    },
+    {
+      "input": [
+        -100,
+        100,
+        100,
+        500,
+        50
+      ],
+      "gold": [
+        400
+      ]
+    }
+  ],
+  "required_pass": "12_OF_12_EXACT",
+  "promotion_authority": false
+}
