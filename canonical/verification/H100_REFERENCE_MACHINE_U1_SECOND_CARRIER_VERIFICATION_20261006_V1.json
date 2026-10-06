@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REFERENCE_MACHINE_U1_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__8_OF_8__REFERENCE_MACHINE_FROZEN",
+  "machine_id": "H100_U1_STACK_VM",
+  "subject": {
+    "precommit_blob_sha": "16f6ada04de250dda6cf7f7ecee0e75c93778b3d",
+    "semantics_blob_sha": "6e4ed5d361c87554f6a76b3967b1d1387cc7e824",
+    "runtime_blob_sha": "3c289d90023682e135e6fe3f3f42b3049da3c247",
+    "tests_blob_sha": "e5bdd1a006f5613ca28bad1fd34b71212d5e4db6",
+    "runtime_source_bytes": 5058,
+    "runtime_source_sha256": "c9c5dea378038d46d90bafc1f3cb12a16b19dc20217beb90f7d725986bb4c700"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "verified": {
+    "tests_passed": 8,
+    "tests_total": 8,
+    "arithmetic": true,
+    "input_io": true,
+    "heap": true,
+    "branch": true,
+    "canonical_sleb": true,
+    "bad_jump_fail_closed": true,
+    "divide_zero_fail_closed": true,
+    "step_limit_fail_closed": true
+  },
+  "accounting_rule": "U1_REPORTED_ONCE_AS_SHARED_REFERENCE_MACHINE__FUTURE_CAPABILITY_UPPER_BOUNDS_COUNT_RAW_U1_PROGRAM_BYTES_PLUS_TARGET_ADAPTED_PERSISTENT_DATA",
+  "hard_nonclaims": [
+    "U1_SELECTION_AFTER_EARLIER_TASKS_MEANS_RETROSPECTIVE_U1_RESULTS_ARE_NOT_FRESH_GENERALIZATION_EVIDENCE",
+    "U1_SOURCE_BYTES_ARE_NOT_CAPABILITY_PROGRAM_BYTES",
+    "NO_EXACT_KOLMOGOROV_COMPLEXITY_CLAIM"
+  ],
+  "promotion_authority": false
+}
