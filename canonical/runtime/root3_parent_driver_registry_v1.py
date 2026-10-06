@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -21,6 +22,9 @@ REGISTRY = {
         "implementation_git_blob_sha": "b49e03915f05599831f3eedf047341c3f24f3bad",
     }
 }
+
+_MISSION_ID = re.compile(r"^[A-Za-z0-9_.-]{1,200}$")
+_SHA256 = re.compile(r"^[0-9a-f]{64}$")
 
 
 class ParentDriverRegistryError(RuntimeError):
@@ -52,7 +56,70 @@ def _verify_spec(repo_root: Path, spec: Mapping[str, str]) -> None:
             )
 
 
-def dispatch(repo_root: str | Path, raw_request: Mapping[str, Any]) -> dict[str, Any]:
+def _mission_context(raw: Mapping[str, Any] | None) -> dict[str, str]:
+    if not isinstance(raw, Mapping) or set(raw) != {
+        "mission_id",
+        "mission_sha256",
+        "mission_rel",
+    }:
+        raise ParentDriverRegistryError("MISSION_AUTHORITY_CONTEXT_REQUIRED")
+    mission_id = str(raw.get("mission_id") or "")
+    mission_sha256 = str(raw.get("mission_sha256") or "")
+    mission_rel = str(raw.get("mission_rel") or "").replace("\\", "/")
+    if _MISSION_ID.fullmatch(mission_id) is None:
+        raise ParentDriverRegistryError("MISSION_ID_INVALID")
+    if _SHA256.fullmatch(mission_sha256) is None:
+        raise ParentDriverRegistryError("MISSION_SHA256_INVALID")
+    if (
+        not mission_rel.startswith("canonical/astra_runtime/missions/")
+        or not mission_rel.endswith(".json")
+        or ".." in Path(mission_rel).parts
+    ):
+        raise ParentDriverRegistryError("MISSION_REL_INVALID")
+    return {
+        "mission_id": mission_id,
+        "mission_sha256": mission_sha256,
+        "mission_rel": mission_rel,
+    }
+
+
+def _authorize_admin_path(
+    typed_args: Mapping[str, Any],
+    authority_context: Mapping[str, Any] | None,
+) -> dict[str, str]:
+    ctx = _mission_context(authority_context)
+    if not isinstance(typed_args, Mapping):
+        raise ParentDriverRegistryError("TYPED_ARGS_NOT_OBJECT")
+    destination_class = str(typed_args.get("destination_class") or "")
+    path = str(typed_args.get("path") or "").replace("\\", "/")
+    mid = ctx["mission_id"]
+
+    state_exact = f"canonical/astra_runtime/state/{mid}.json"
+    state_prefix = f"canonical/astra_runtime/state/{mid}__"
+    evidence_prefix = f"canonical/astra_runtime/evidence/{mid}__"
+
+    allowed = False
+    if destination_class == "ASTRA_STATE_JSON":
+        allowed = (
+            path == state_exact
+            or (path.startswith(state_prefix) and path.endswith(".json"))
+        )
+    elif destination_class == "ASTRA_EVIDENCE_JSON":
+        allowed = path.startswith(evidence_prefix) and path.endswith(".json")
+    elif destination_class == "ASTRA_EVIDENCE_JSONL":
+        allowed = path.startswith(evidence_prefix) and path.endswith(".jsonl")
+
+    if not allowed:
+        raise ParentDriverRegistryError("MISSION_SCOPED_ADMIN_PATH_DENY")
+    return ctx
+
+
+def dispatch(
+    repo_root: str | Path,
+    raw_request: Mapping[str, Any],
+    *,
+    authority_context: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     request = verify_request(raw_request)
     spec = REGISTRY.get(request["driver_id"])
     if spec is None:
@@ -70,6 +137,7 @@ def dispatch(repo_root: str | Path, raw_request: Mapping[str, Any]) -> dict[str,
     _verify_spec(root, spec)
 
     if request["driver_id"] == ADMIN_DRIVER_ID:
+        ctx = _authorize_admin_path(request["typed_args"], authority_context)
         expected_impl = (root / spec["implementation_path"]).resolve()
         actual_impl = Path(str(admin_driver.__file__ or "")).resolve()
         if actual_impl != expected_impl:
@@ -90,5 +158,8 @@ def dispatch(repo_root: str | Path, raw_request: Mapping[str, Any]) -> dict[str,
         "result": result,
         "closed_registry": True,
         "generic_fallback": False,
+        "mission_scoped_authority": True,
+        "mission_id": ctx["mission_id"],
+        "mission_sha256": ctx["mission_sha256"],
         "terminal_credit_delta": 0,
     }
