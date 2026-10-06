@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_THEOREM_MINIMALITY_FALSIFIER_INDEPENDENT_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_EXACT_BYTE_VERIFICATION_PASS__TRUTH_REPAIR_ONLY__SUCCESSOR_THEOREM_UNPROVED__ZERO_TERMINAL_CREDIT",
+  "brain_source": {
+    "pull_request": 2441,
+    "head_sha": "12474d734cf93573682683485e30a5cc5a1c286d",
+    "exact_blobs": {
+      "canonical/governance/TERMINAL_FIRST_PRINCIPLES_THEORY_TOURNAMENT_20261006_V1.json": "7102f0d0fef813c209a54246bcf7e221d060572f",
+      "canonical/runtime/terminal_theorem_minimality_falsifier_v1.py": "b5f016bfd8e2c49f0ba4e399b549b268556ffdd6",
+      "canonical/tests/test_terminal_theorem_minimality_falsifier_v1.py": "014a4c5c0e16ab0ee88a37dd1f1a86373c1e600e",
+      "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V2.json": "da8803584bc1e2bea672bcd1833e526ec489ac81",
+      "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json": "333bdc8306a19f005a600a47b415a4bd9cf9868c"
+    }
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2335,
+    "head_sha": "f0d84146fd4b61478ad08a1c3b380a7fda002679",
+    "merge_commit": "36b4de166ece0e61b09e82474e9e7f87c8d2ac50",
+    "workflow_run_id": 37439847168,
+    "workflow_job_id": 112190629677,
+    "conclusion": "success"
+  },
+  "verified": [
+    "CURRENT_USEFULNESS_DEFINITION_IS_TOO_BROAD_IF_OBSERVABLE_TRACE_CHANGE_ALONE_IS_TREATED_AS_SUFFICIENT",
+    "LITERAL_FULL_REPRESENTATIONAL_SUPERSET_DOMINANCE_IS_NOT_NECESSARY",
+    "TARGET_RELATIVE_DOMINANCE_REQUIRES_TARGET_COMPLETENESS_OR_STRONGER_COMPLETE_QUOTIENT",
+    "REPAIRED_TERMINAL_THEOREM_REMAINS_UNPROVED",
+    "ZERO_TERMINAL_CREDIT"
+  ],
+  "consequence": [
+    "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1_MUST_NOT_BE_TREATED_AS_AN_UNQUESTIONED_NECESSARY_TERMINAL_THEOREM",
+    "GLOBAL_CONTROL_PLANE_RECOMPUTATION_REQUIRED_BEFORE_MORE_BROAD_LEAF_WORK_IS_CALLED_NECESSARY",
+    "THE_32_OPEN_OBLIGATIONS_REMAIN_TRUTH_OBLIGATIONS_UNTIL_INDIVIDUALLY_REBOUND_OR_DELETED_BY_PROOF"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_SUCCESSOR_UTILITY_QUOTIENT_THEOREM_IS_PROVED",
+    "NO_CLAIM_ANY_OF_THE_32_OPEN_TRUTH_OBLIGATIONS_IS_DELETED_YET",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
