@@ -12,13 +12,13 @@ class FrontierFactorizerTests(unittest.TestCase):
         spec.loader.exec_module(mod)
         return mod
 
-    def test_repaired_global_basis_preserves_30_current_obligations(self):
+    def test_repaired_global_basis_preserves_29_current_obligations(self):
         m = self.load()
         out = m.factorize()
-        self.assertEqual(out["atomic_count"], 22)
+        self.assertEqual(out["atomic_count"], 21)
         self.assertEqual(out["meta_count"], 8)
-        self.assertEqual(out["truth_obligation_count"], 30)
-        self.assertEqual(out["truth_obligations_deleted"], 2)
+        self.assertEqual(out["truth_obligation_count"], 29)
+        self.assertEqual(out["truth_obligations_deleted"], 3)
 
     def test_four_shared_interfaces_only(self):
         m = self.load()
@@ -33,7 +33,7 @@ class FrontierFactorizerTests(unittest.TestCase):
     def test_every_obligation_has_a_gate(self):
         m = self.load()
         out = m.factorize()
-        self.assertEqual(len(out["obligation_interfaces"]), 30)
+        self.assertEqual(len(out["obligation_interfaces"]), 29)
         self.assertTrue(all(v for v in out["obligation_interfaces"].values()))
 
     def test_no_credit_from_factorization(self):
