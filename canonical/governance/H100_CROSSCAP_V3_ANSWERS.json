@@ -1,0 +1,271 @@
+{
+  "answers": [
+    {
+      "compare_fields": [
+        "status",
+        "solutions"
+      ],
+      "expected": {
+        "solutions": [
+          {
+            "a": 1,
+            "b": 2
+          }
+        ],
+        "status": "UNIQUE"
+      },
+      "id": "R3_1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "solutions"
+      ],
+      "expected": {
+        "solutions": [
+          {
+            "a": 2,
+            "b": 1
+          }
+        ],
+        "status": "UNIQUE"
+      },
+      "id": "R3_2"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "predictions"
+      ],
+      "expected": {
+        "predictions": [
+          35,
+          -101
+        ],
+        "status": "PROGRAM_FOUND"
+      },
+      "id": "C3_1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "predictions"
+      ],
+      "expected": {
+        "predictions": [
+          168,
+          -104
+        ],
+        "status": "PROGRAM_FOUND"
+      },
+      "id": "C3_2"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "inputs",
+        "target"
+      ],
+      "expected": {
+        "inputs": [
+          "feature"
+        ],
+        "status": "ROLES_IDENTIFIED",
+        "target": "label"
+      },
+      "id": "L3_1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "inputs",
+        "target"
+      ],
+      "expected": {
+        "inputs": [
+          "feature"
+        ],
+        "status": "ROLES_IDENTIFIED",
+        "target": "label"
+      },
+      "id": "L3_2"
+    },
+    {
+      "compare_fields": [
+        "component_count",
+        "areas",
+        "bboxes"
+      ],
+      "expected": {
+        "areas": [
+          10,
+          10,
+          12
+        ],
+        "bboxes": [
+          [
+            1,
+            1,
+            3,
+            4
+          ],
+          [
+            4,
+            1,
+            5,
+            5
+          ],
+          [
+            6,
+            2,
+            7,
+            6
+          ]
+        ],
+        "component_count": 3
+      },
+      "id": "V3_1"
+    },
+    {
+      "compare_fields": [
+        "component_count",
+        "areas",
+        "bboxes"
+      ],
+      "expected": {
+        "areas": [
+          8,
+          8,
+          15
+        ],
+        "bboxes": [
+          [
+            1,
+            1,
+            2,
+            4
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            5,
+            2,
+            7,
+            6
+          ]
+        ],
+        "component_count": 3
+      },
+      "id": "V3_2"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "tool_ids"
+      ],
+      "expected": {
+        "status": "UNIQUE",
+        "tool_ids": [
+          "A1"
+        ]
+      },
+      "id": "T3_1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "tool_ids"
+      ],
+      "expected": {
+        "status": "UNIQUE",
+        "tool_ids": [
+          "A2"
+        ]
+      },
+      "id": "T3_2"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "plan"
+      ],
+      "expected": {
+        "plan": [
+          "0a_get",
+          "0b_copy",
+          "0c_open",
+          "0d_restore"
+        ],
+        "status": "PLAN_FOUND"
+      },
+      "id": "P3_1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "plan"
+      ],
+      "expected": {
+        "plan": [
+          "1a_get",
+          "1b_copy",
+          "1c_open",
+          "1d_restore"
+        ],
+        "status": "PLAN_FOUND"
+      },
+      "id": "P3_2"
+    },
+    {
+      "compare_fields": [
+        "history_min"
+      ],
+      "expected": {
+        "history_min": 17
+      },
+      "id": "M3_1"
+    },
+    {
+      "compare_fields": [
+        "history_count"
+      ],
+      "expected": {
+        "history_count": 6
+      },
+      "id": "M3_2"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "predictions"
+      ],
+      "expected": {
+        "predictions": [
+          -1.9177732294111498,
+          0.8098152821377033
+        ],
+        "status": "CAPABILITY_HIT__VERIFY_BEFORE_USE"
+      },
+      "id": "N3_1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "predictions"
+      ],
+      "expected": {
+        "predictions": [
+          -1.6720199636123732,
+          0.08432905905734234
+        ],
+        "status": "CAPABILITY_HIT__VERIFY_BEFORE_USE"
+      },
+      "id": "N3_2"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_H100_CROSSCAP_V3_ANSWERS"
+}
