@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_SUCCESS_SEMANTIC_TOKEN_ADAPTER_V1_SPRITE_REPLAY_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BRANCH_BYTE_REPLAY_PASS_5_OF_5__ALL_ELEVEN_COMPONENT_KINDS_AND_FOUR_NATIVE_FORMATS__ZERO_SCOPE_CREDIT",
+  "source_brain": {
+    "pull_request": 2435,
+    "branch": "feature/matched-success-component-bound-v4-20261006",
+    "exact_blobs": {
+      "canonical/runtime/matched_success_semantic_token_adapter_v1.py": "50a59d06b7346b1c20200495c32e46537cb200b5",
+      "canonical/tests/test_matched_success_semantic_token_adapter_v1.py": "31fac6955822b9a517a726c309e303448c9a77e3"
+    }
+  },
+  "independent_runner": {
+    "provider": "Sprites",
+    "sprite": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "isolated_workdir": "/home/sprite/tokenreplay",
+    "python_version": "3.14.4",
+    "dependency_environment": "ISOLATED_UV_VENV"
+  },
+  "pinned_native_dependencies": {
+    "python-docx": "1.2.0",
+    "openpyxl": "3.1.5",
+    "python-pptx": "1.0.2",
+    "pypdf": "6.19.0",
+    "pillow": "12.3.0"
+  },
+  "verified": [
+    "EXACT_RUNTIME_AND_TEST_GIT_BLOBS_REPLAYED",
+    "ALL_ELEVEN_COMPONENT_KINDS_TRANSPORT_A_LOAD_BEARING_TRUE_TOKEN_UNDER_THEIR_REAL_FROZEN_SCORER",
+    "ALL_ELEVEN_COMPONENT_KINDS_TRANSPORT_A_SAME_SHAPE_DECOY_TOKEN_TO_A_DISTINCT_REAL_SCORED_OUTPUT_OR_STATE",
+    "DELEGATION_V3_TOKEN_IS_BOUND_TO_EVERY_VALID_FINAL_PRODUCER_SO_THE_SELECTED_OPTIMAL_ROUTE_CARRIES_THE_TOKEN",
+    "DOCX_XLSX_PPTX_PDF_NATIVE_FORMATS_ALL_TRANSPORT_THE_TOKEN_UNDER_THE_REAL_NATIVE_SCORER",
+    "WRONG_EXPECTED_TOKEN_IS_NOT_SILENTLY_ACCEPTED",
+    "ZERO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "component_kinds": [
+    "browser",
+    "tool",
+    "delegation_v2",
+    "delegation_v3",
+    "m0",
+    "m0_change",
+    "structured",
+    "p1",
+    "p2",
+    "p3",
+    "native"
+  ],
+  "native_formats": ["docx", "xlsx", "pptx", "pdf"],
+  "falsification_history": {
+    "initial_non_native_defect": "DELEGATION_V3_TOKEN_WAS_APPENDED_ONLY_TO_THE_LAST_FINAL_PRODUCER_WHICH_WAS_THE_EXPENSIVE_DECOY",
+    "repair": "APPEND_TOKEN_TO_EVERY_VALID_FINAL_PRODUCER",
+    "post_repair_non_native_result": "PASS_ALL_10_NON_NATIVE_KINDS_FOR_TRUE_AND_DECOY",
+    "native_initial_blocker": "RUNNER_MISSING_PINNED_FORMAT_LIBRARIES",
+    "native_repair": "INSTALL_EXACT_HISTORICALLY_VERIFIED_DEPENDENCY_VERSIONS_IN_ISOLATED_UV_VENV",
+    "post_repair_full_result": "PASS_5_OF_5_TESTS"
+  },
+  "verified_claim": "THE_SAME_LOAD_BEARING_SEMANTIC_TOKEN_CAN_BE_INJECTED_INTO_EACH_REAL_FROZEN_COMPONENT_CASE_AND_RECOVERED_FROM_THAT_COMPONENTS_REAL_SCORED_OUTPUT_OR_STATE_WHILE_THE_REAL_COMPONENT_SCORER_PASSES__AND_SAME_SHAPE_TOKEN_SUBSTITUTION_CHANGES_THE_RECOVERED_SEMANTICS.",
+  "hard_nonclaims": [
+    "NO_CLASS_LEVEL_MATCHED_SUCCESS_ATOM_IS_CLOSED_BY_TOKEN_TRANSPORT_ALONE",
+    "NO_CURRENT_COMPONENT_CHAIN_PROVES_THE_REPAIRED_CAUSAL_TASK_KERNEL_ATOM_SEMANTICS",
+    "NO_REAL_TERMINAL_CASES_EXECUTED",
+    "NO_SCOPE_COMPILER_CLOSURE",
+    "NO_REAL_HARNESS_CASE_ISOLATION_RECEIPTS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
