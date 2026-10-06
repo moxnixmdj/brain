@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_29_OBLIGATION_AUTHORITY_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__CURRENT_AUTHORITY_REBOUND_TO_29__ZERO_TERMINAL_CREDIT",
+  "exact_blobs": {
+    "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json": "233bb31c1bf0800d229dee82165afa93bac38dce",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "7fed8ddf606cd8b3b4406500b5ae7ab3a5e9be78",
+    "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V4.json": "cf6fcc059181625eae7208282b59aac45d7de62a",
+    "canonical/verification/TERMINAL_29_OBLIGATION_BASIS_SPRITE_VERIFICATION_20261006_V1.json": "8285bf293a9a93b583a1db0ef44895d3921d0fcd",
+    "canonical/runtime/terminal_frontier_factorizer_v1.py": "491230183ed7eb796513ca74c967fe346bd8105c",
+    "canonical/runtime/terminal_coverage_partition_compiler_v1.py": "b03b748f38269cd5e8c10a037521172a7048d904",
+    "canonical/runtime/current_29_obligation_pointer_verifier.py": "a9d82188803e0024a3680fb2e71ea3f1995fd1a1"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/tmp/terminal29_authority",
+    "verifier_result": "PASS__CURRENT_AUTHORITY_REBOUND_TO_VERIFIED_29_OBLIGATION_BASIS"
+  },
+  "verified": {
+    "load_bearing_atomic_open": 21,
+    "meta_open": 8,
+    "open_truth_obligations": 29,
+    "route_counts": {
+      "J": 0,
+      "G": 0,
+      "T": 0,
+      "D": 15,
+      "U": 14
+    },
+    "root2_touching": 17,
+    "root3_touching": 7,
+    "deleted_obligations": [
+      "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+    ],
+    "terminal": false,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_ATOMIC_ACCEPTANCE_PREDICATE_WAS_MARKED_PROVED_BY_THIS_REBIND",
+    "NO_CLAIM_CURRENT_BRAIN_COMPOSITION_IS_NONINFERIOR",
+    "NO_CLAIM_ALL_COMPOSITION_INVARIANTS_ARE_DISPENSABLE",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
