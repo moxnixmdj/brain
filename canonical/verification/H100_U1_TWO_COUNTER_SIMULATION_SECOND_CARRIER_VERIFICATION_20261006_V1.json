@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_TWO_COUNTER_SIMULATION_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__6_OF_6",
+  "reference_machine": "H100_U1_STACK_VM",
+  "precommit": "canonical/governance/H100_U1_TWO_COUNTER_SIMULATION_PRECOMMIT_V1.json",
+  "runtime": "canonical/runtime/h100_u1_two_counter_compiler_v1.py",
+  "observed": {
+    "increment_machine_matches": true,
+    "transfer_loop_matches": true,
+    "nested_control_matches": true,
+    "deterministic_compilation": true,
+    "invalid_target_rejected": true,
+    "emitted_program_decodes_under_u1": true
+  },
+  "external_theory_basis": [
+    "https://link.springer.com/chapter/10.1007/978-3-032-22730-0_10",
+    "https://link.springer.com/chapter/10.1007/978-3-031-30823-9_3"
+  ],
+  "deduction": "U1_CAN_COMPILE_AND_EXECUTE_THE_INC_DECJZ_HALT_TWO_COUNTER_INSTRUCTION_FORMS_WITH_DIRECT_SOURCE_MACHINE_AGREEMENT__COMBINED_WITH_THE_STANDARD_UNIVERSALITY_OF_TWO_COUNTER_MINSKY_MACHINES_THIS_SUPPORTS_U1_AS_A_UNIVERSAL_REFERENCE_MACHINE_IN_THE_UNBOUNDED_RESOURCE_LIMIT",
+  "hard_nonclaims": [
+    "NO_EFFICIENCY_OR_SMALL_OVERHEAD_CLAIM",
+    "FINITE_T_AND_M_EXPERIMENTS_REMAIN_RESOURCE_BOUNDED",
+    "NO_EXACT_KOLMOGOROV_COMPLEXITY_CLAIM"
+  ],
+  "promotion_authority": false
+}
