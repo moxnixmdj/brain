@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TEXT_CHART_PARSER_STRESS_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_STRESS_OUTCOMES__PARSER_MUST_REMAIN_UNCHANGED",
+  "parser": "canonical/runtime/h100_text_axis_legend_parser_v1.py",
+  "font": "canonical/runtime/h100_text_axis_legend_font_v1.py",
+  "base_chart": {
+    "categories": [
+      "B",
+      "D",
+      "C"
+    ],
+    "series": {
+      "R": [
+        6,
+        4,
+        9
+      ],
+      "S": [
+        3,
+        7,
+        5
+      ]
+    },
+    "pixels_per_unit": 1,
+    "legend_order": [
+      "S",
+      "R"
+    ],
+    "canvas": {
+      "width": 72,
+      "height": 34,
+      "xaxis_y": 25,
+      "yaxis_x": 12
+    }
+  },
+  "deterministic_renderer": {
+    "background": ".",
+    "axis": "k",
+    "series_pixels": {
+      "R": "r",
+      "S": "s"
+    },
+    "bar_width": 3,
+    "series_gap": 2,
+    "category_centers": [
+      24,
+      38,
+      52
+    ],
+    "tick_values": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "glyph_source": "FROZEN_FONT",
+    "glyph_spacing_columns": 1
+  },
+  "tasks": [
+    {
+      "id": "SYMBOL_PERMUTE",
+      "transform": {
+        "kind": "CHAR_MAP",
+        "map": {
+          ".": "_",
+          "k": "z",
+          "r": "a",
+          "s": "b"
+        }
+      },
+      "gold": "BASE_TABLE"
+    },
+    {
+      "id": "PADDING_TRANSLATE",
+      "transform": {
+        "kind": "PAD",
+        "top": 3,
+        "bottom": 2,
+        "left": 5,
+        "right": 4
+      },
+      "gold": "BASE_TABLE"
+    },
+    {
+      "id": "SCALE_2X",
+      "transform": {
+        "kind": "NEAREST_NEIGHBOR_INTEGER_SCALE",
+        "factor": 2
+      },
+      "gold": "BASE_TABLE"
+    }
+  ],
+  "causal_expectation": "ANY_FAILURE_WITH_IDENTICAL_UNDERLYING_CHART_INFORMATION_IS_ALGORITHM_OR_REPRESENTATION_GAP_NOT_INFORMATION_GAP",
+  "promotion_authority": false
+}
