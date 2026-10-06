@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_SUCCESS_INTEGRATED_EXTENSION_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__PREEXPOSURE_64_CASE_GENERATOR__6_LEGACY_SUBSTRATE_PLUS_10_INTEGRATED_DIMENSIONS__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "reuse_audit": "canonical/governance/MATCHED_SUCCESS_LEGACY_T2_REUSE_AUDIT_V1.json",
+    "scope_compiler": "canonical/governance/MATCHED_SUCCESS_SCOPE_COMPILER_V1.json",
+    "case_isolation_contract": "canonical/governance/MATCHED_CASE_ISOLATION_RESET_CONTRACT_V1.json",
+    "brain_first_prewave": "canonical/governance/BRAIN_FIRST_DIFFERENTIAL_PREWAVE_V1.json"
+  },
+  "generator": {
+    "runtime": "canonical/runtime/matched_success_integrated_extension_v1.py",
+    "version": "MATCHED_SUCCESS_INTEGRATED_EXTENSION_V1",
+    "repetitions_per_normalized_atom": 4,
+    "normalized_atom_count": 16,
+    "future_case_count": 64,
+    "seed_rule": "uint64_be(first_8_bytes(SHA256('PROJECT_BRAIN_MATCHED_SUCCESS_INTEGRATED_EXTENSION_V1\\0'||COMMITMENT||'\\0'||POST_FREEZE_BEACON||'\\0'||CASE_ID)))",
+    "post_freeze_beacon_required": true,
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "result_dependent_generation": false
+  },
+  "direct_legacy_substrate_atoms": [
+    "dimension:state_change_after_actions_requiring_replanning",
+    "dimension:tool_failure_and_recovery",
+    "dimension:subtask_dependency_and_fan_in",
+    "dimension:authorization_and_scope_boundaries",
+    "dimension:routine_ambiguity",
+    "dimension:explicit_abstention_and_fail_closed_cases"
+  ],
+  "integrated_extension_atoms": [
+    "dimension:multi_step_planning_with_at_least_three_distinct_tool_or_action_types",
+    "dimension:long_horizon_state_retention",
+    "dimension:minimal_oversight_completion",
+    "dimension:multi_constraint_instruction_compliance",
+    "dimension:requirement_change",
+    "dimension:research_plus_tool_use_plus_artifact_creation",
+    "dimension:browser_or_computer_action_plus_memory_plus_recovery",
+    "dimension:coding_plus_debugging_plus_tool_discovery",
+    "dimension:delegation_plus_evidence_synthesis_plus_artifact_production",
+    "dimension:cross_capability_state_handoff_and_rollback"
+  ],
+  "integrated_case_classes": {
+    "AGENCY_THREE_TOOL_LONG_HORIZON": [
+      "dimension:multi_step_planning_with_at_least_three_distinct_tool_or_action_types",
+      "dimension:long_horizon_state_retention",
+      "dimension:minimal_oversight_completion"
+    ],
+    "INSTRUCTION_CHANGE_CONTROL": [
+      "dimension:multi_constraint_instruction_compliance",
+      "dimension:requirement_change"
+    ],
+    "RESEARCH_TOOL_ARTIFACT": [
+      "dimension:research_plus_tool_use_plus_artifact_creation"
+    ],
+    "BROWSER_MEMORY_RECOVERY": [
+      "dimension:browser_or_computer_action_plus_memory_plus_recovery"
+    ],
+    "CODING_DEBUG_TOOL_DISCOVERY": [
+      "dimension:coding_plus_debugging_plus_tool_discovery"
+    ],
+    "DELEGATION_SYNTHESIS_ARTIFACT": [
+      "dimension:delegation_plus_evidence_synthesis_plus_artifact_production"
+    ],
+    "CROSS_CAPABILITY_HANDOFF_ROLLBACK": [
+      "dimension:cross_capability_state_handoff_and_rollback"
+    ]
+  },
+  "reuse_rule": "REUSE_ONLY_GENERATOR_ORACLE_MECHANICS_AND_FROZEN_INFORMATION_BOUNDARIES__NEVER_REUSE_CONSUMED_TERMINAL_RESULTS",
+  "scope_rule": "EVERY_FUTURE_CASE_HAS_ONE_PRIMARY_NORMALIZED_ATOM__FOUR_VARIANTS_PER_ATOM__THE_UNION_IS_EXACTLY_THE_16_FROZEN_MATCHED_SUCCESS_DIMENSIONS__INTEGRATED_CASE_PAYLOADS_COMPOSE_EXISTING_VERIFIED_COMPONENT_GENERATORS_WITH_EXPLICIT_STATE_HANDOFF_CONTRACTS",
+  "hard_nonclaims": [
+    "NO_TERMINAL_CASES_GENERATED_NOW",
+    "NO_POST_FREEZE_BEACON_KNOWN_NOW",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CURRENT_REAL_CASE_MANIFEST",
+    "NO_CLAIM_GENERATOR_VERIFICATION_ALONE_CLOSES_CASE_ISOLATION_WITHOUT_REAL_EXECUTION_RECEIPTS_OR_A_STRONGER_STRUCTURAL_HARNESS_PROOF",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
