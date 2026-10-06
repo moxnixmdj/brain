@@ -18,7 +18,7 @@ def load(path):
 
 def test_matrix_summary_is_derived_from_current_rows():
     d=load(MATRIX)
-    rows=d["families"]
+    rows=d.get("families") or d.get("rows") or d.get("capabilities") or []
     verified={x["family"] for x in rows if x["status"]=="VERIFIED_OWNED_EQUAL_OR_BETTER"}
     components={x["family"] for x in rows if x["status"]=="OWNED_COMPONENT_NOT_FULL_FAMILY"}
     assert verified==EXPECTED_GENERATOR_FAMILIES
