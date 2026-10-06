@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_31_NECESSITY_RECONCILIATION_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BYTE_REPLAY_PASS__31_NECESSARY_TRUTHS__24_OPEN_REGISTRY_PREDICATES_PRESERVED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "truth-repair/current-authority-31-necessary-cut-v1-20261006-sol",
+    "exact_blobs": {
+      "canonical/runtime/current_terminal_31_necessity_reconciliation_v1.py": "3b390dad9078a76a01a6ea17d8f62d530f870cf0",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "e0b2b5d0645080094bef50a60ae10807745156ad",
+      "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json": "38cc7ed6f4889ea0ca8641502a1ed3e4df62b859",
+      "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V2.json": "436af64fcbf233c38f85eb4815526f52e847c1f9",
+      "canonical/runtime/terminal_frontier_factorizer_v1.py": "44ed719acb37c56b5d0577742922a2618b6cec53",
+      "canonical/governance/COMPOSITION_COMPONENT_SCOPED_PROOF_NECESSITY_COUNTERMODEL_20261006_V1.json": "a5efa89a97f43b10538ff48551354e2db21d3a47",
+      "canonical/verification/COMPOSITION_COMPONENT_SCOPED_PROOF_NECESSITY_SPRITE_VERIFICATION_20261006_V1.json": "e6ee585884de051accd13e3904411533d4ef71ea",
+      "canonical/verification/TERMINAL_31_OBLIGATION_BASIS_SPRITE_VERIFICATION_20261006_V1.json": "19a793e37b58f6aaf5f6cedfedd7538a2de53e92"
+    }
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/terminal31authority",
+    "command": "/usr/bin/python3 canonical/runtime/current_terminal_31_necessity_reconciliation_v1.py",
+    "exit_code": 0
+  },
+  "verified_result": {
+    "registry_atomic_proved": 14,
+    "registry_atomic_unresolved": 24,
+    "necessary_atomic_open": 23,
+    "meta_open": 8,
+    "necessary_open_total": 31,
+    "deleted_from_necessity_only": "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+    "deleted_predicate_proved": false,
+    "terminal": false,
+    "terminal_credit_delta": 0
+  },
+  "verified_semantics": [
+    "THE_38_PREDICATE_REGISTRY_TRUTH_IS_NOT_REWRITTEN",
+    "COMPOSITION_COMPONENT_SCOPED_PROOFS_REMAINS_UNPROVED_AS_A_REGISTRY_PREDICATE",
+    "THE_INDEPENDENT_NECESSITY_COUNTERMODEL_REMOVES_ONLY_ITS_PARENT_COMPOSITION_NECESSITY",
+    "CURRENT_NECESSARY_TERMINAL_TRUTH_SET_IS_23_ATOMIC_PLUS_8_META_EQUALS_31",
+    "COVERAGE_ROUTING_ITSELF_CLAIMS_ZERO_DELETION_OR_TERMINAL_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_NEW_ACCEPTANCE_PREDICATE_PROVED",
+    "NO_CAPABILITY_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_J_G_OR_T_CERTIFICATE_EXISTS_FROM_THIS_RECONCILIATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
