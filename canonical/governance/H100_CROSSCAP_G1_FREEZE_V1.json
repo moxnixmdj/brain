@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CROSSCAP_G1_FREEZE_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_V2_FAILURES__BEFORE_V3_TASK_GENERATION",
+  "files": {
+    "canonical/runtime/h100_crosscap_g1_v1.py": {
+      "git_blob_sha": "43c74e42988751feec3a3cfe411252ffdd24b24a",
+      "ascii_bytes": 8738
+    },
+    "canonical/runtime/h100_crosscap_g1_runner_v1.py": {
+      "git_blob_sha": "f67b6f8037af6f080016a522a1bbc58e12160ea5",
+      "ascii_bytes": 2136
+    }
+  },
+  "target_adapted_deterministic_code_bytes_relative_to_v2": 10874,
+  "learned_target_bytes": 0,
+  "internal_tests": "6_OF_6_PASS",
+  "rule": "ANY_G1_MUTATION_AFTER_V3_FREEZE_COUNTS_AS_TARGET_ADAPTED_STATE_FOR_V3",
+  "promotion_authority": false
+}
