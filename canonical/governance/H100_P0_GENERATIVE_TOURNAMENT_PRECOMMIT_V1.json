@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_H100_P0_GENERATIVE_TOURNAMENT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__450_GENERATED_CASES",
+  "substrate": "canonical/runtime/h100_p0_generic_declarative_substrate_v1.py",
+  "case_counts": {
+    "LOGIC": 50,
+    "STRING": 50,
+    "NUMERIC": 50,
+    "VISION": 50,
+    "TOOL": 50,
+    "PLAN": 50,
+    "MEMORY": 50,
+    "LEXICAL": 50,
+    "INFORMATION": 50
+  },
+  "seeds": {
+    "LOGIC": 1101,
+    "STRING": 1102,
+    "NUMERIC": 1103,
+    "VISION": 1104,
+    "TOOL": 1105,
+    "PLAN": 1106,
+    "MEMORY": 1107,
+    "LEXICAL": 1108,
+    "INFORMATION": 1109
+  },
+  "rule": "GENERATORS_AND_SEEDS_FROZEN_BEFORE_EXECUTION__NO_CASE_EDITS_AFTER_OUTPUTS",
+  "pass_rule": "ALL_NON_INFORMATION_CASES_EXACT__ALL_INFORMATION_CONTROLS_ABSTAIN__ZERO_TARGET_ADAPTED_PERSISTENT_BITS",
+  "hard_nonclaims": [
+    "DECLARED_DOMAIN_ONLY",
+    "SYNTHETIC_GENERATORS_NOT_FRONTIER_EQUIVALENCE",
+    "PASS_DOES_NOT_PROVE_UNIVERSAL_P0"
+  ],
+  "promotion_authority": false
+}
