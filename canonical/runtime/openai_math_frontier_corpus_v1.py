@@ -8,12 +8,16 @@ This module grants zero terminal, acceptance, family, capability, or ownership c
 """
 from __future__ import annotations
 
+import json
 import re
+from pathlib import Path
 from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_OPENAI_MATH_FRONTIER_CORPUS_ADAPTER_V1"
 SOURCE_SNAPSHOT_SCHEMA = "PROJECT_BRAIN_OPENAI_MATH_FRONTIER_CORPUS_SNAPSHOT_V1"
 SHA40 = re.compile(r"^[0-9a-f]{40}$")
+ROOT = Path(__file__).resolve().parents[2]
+LIVE_SNAPSHOT = ROOT / "canonical/governance/OPENAI_MATH_FRONTIER_CORPUS_FREEZE_20261007_V1.json"
 
 REQUIRED_SOURCE_PATHS = {
     "README.md",
@@ -204,3 +208,18 @@ def _fail(errors: list[str]) -> dict[str, Any]:
         "promotion_authority": False,
         "errors": errors,
     }
+
+
+def evaluate_live() -> dict[str, Any]:
+    snapshot = json.loads(LIVE_SNAPSHOT.read_text(encoding="utf-8"))
+    return compile_snapshot(snapshot)
+
+
+def main() -> int:
+    out = evaluate_live()
+    print(json.dumps(out, indent=2, sort_keys=True))
+    return 0 if out["status"].startswith("PASS__") else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
