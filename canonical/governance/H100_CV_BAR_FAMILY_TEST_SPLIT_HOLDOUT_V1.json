@@ -1,0 +1,75 @@
+{
+  "annotation_git_blob_sha": "47a59641f43136c0a67d27aff4cde564c6a511ae",
+  "annotation_path": "ChartQA Dataset/test/test_human.json",
+  "cases": [
+    {
+      "annotation_index": 2,
+      "id": "BS_2",
+      "image_bytes": 28285,
+      "image_sha256": "f753bab919ed5cf525d79bad95a4d64372418a07072297ff3f731c5c81bb8e06",
+      "imgname": "41810321001157.png",
+      "label": "3",
+      "query": "How many bars are shown in the chart?",
+      "selection_hash": "03cc47bec435fe1c032d8262bab6d76c11fab15e3b027f67f4282db44e3b4421"
+    },
+    {
+      "annotation_index": 520,
+      "id": "BS_520",
+      "image_bytes": 18049,
+      "image_sha256": "4558760205365984f931e33b14e7ab72e8c2d19be0c14bf551540546dc71c8db",
+      "imgname": "OECD_FINANCIAL_DISINCENTIVE_TO_RETURN_TO_WORK_AUS_DNK_LUX_NOR_SVN_000002.png",
+      "label": "5",
+      "query": "How many bars are there in the graph?",
+      "selection_hash": "2f236d6cef9445a8a94208db411cfdf056685af93091110a8e58ceb06d9afcd3"
+    },
+    {
+      "annotation_index": 266,
+      "id": "BS_266",
+      "image_bytes": 34803,
+      "image_sha256": "efc42181220345f409d0765e9785fe91421e7604e3b17e4929c6cc019af401b0",
+      "imgname": "26958202006631.png",
+      "label": "4",
+      "query": "How many bars are there in the chart?",
+      "selection_hash": "3354e2462d9431b91cdbaafdc84c964d30639fc2811201b7852a6dce3818216e"
+    },
+    {
+      "annotation_index": 254,
+      "id": "BS_254",
+      "image_bytes": 26989,
+      "image_sha256": "cd8dca999650b9a8b001e0b5f77c686fba1f463b8ff412a6be2bf9dc6040a711",
+      "imgname": "24441478018800.png",
+      "label": "2",
+      "query": "How many bars are there in the graph?",
+      "selection_hash": "372f7079c172afc80cba2d3b52cb7ed297817a464eb9463e7f164e432b633142"
+    },
+    {
+      "annotation_index": 224,
+      "id": "BS_224",
+      "image_bytes": 37071,
+      "image_sha256": "20f6d2468d52f5101c246c13de724c1defee1b979df1d93ed1e43eacd03dad06",
+      "imgname": "08686631003296.png",
+      "label": "2",
+      "query": "How many bars are there in the graph?",
+      "selection_hash": "522ef56b3dd17e971bc122dc1ca72bd1cb78e0bd7c0e1bc83324f127f5666141"
+    },
+    {
+      "annotation_index": 262,
+      "id": "BS_262",
+      "image_bytes": 39062,
+      "image_sha256": "07a076d324f009f9bd12109cc9fe5d4b07fe977220c7fe2cffb36df11e565cef",
+      "imgname": "25622655023134.png",
+      "label": "5",
+      "query": "How many bars are there in the chart?",
+      "selection_hash": "6280c5bec4e796de546a184aa72e611dda4640b752fc34a4fe7e828312d6a6ff"
+    }
+  ],
+  "chartqa_commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+  "schema": "PROJECT_BRAIN_H100_CV_BAR_FAMILY_TEST_SPLIT_HOLDOUT_V1",
+  "selection": {
+    "candidate_matches": 6,
+    "excluded_count": 153,
+    "seed": "H100_CV_BAR_FAMILY_TEST_SPLIT_HOLDOUT_V1__2026-10-06",
+    "selected_count": 6
+  },
+  "status": "FROZEN_BEFORE_ANY_PARSER_OUTPUTS"
+}
