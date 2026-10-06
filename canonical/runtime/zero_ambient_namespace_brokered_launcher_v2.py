@@ -109,6 +109,50 @@ def _required_primitives()->dict[str,str]:
         raise BrokeredNamespaceError("HOST_PRIMITIVE_MISSING:"+",".join(missing))
     return out
 
+def _broker_binding(repo_root:pathlib.Path,policy:Mapping[str,Any])->dict[str,Any]:
+    argv=list(policy.get("argv") or [])
+    if len(argv)<1:
+        raise BrokeredNamespaceError("MISSION_ARG_MISSING")
+    raw=str(argv[-1] or "")
+    if not raw.startswith("/input/"):
+        raise BrokeredNamespaceError("MISSION_ARG_NOT_INPUT_BOUND")
+    rel=raw[len("/input/"):]
+    mission_path=(repo_root/rel).resolve(strict=True)
+    if repo_root!=mission_path and repo_root not in mission_path.parents:
+        raise BrokeredNamespaceError("MISSION_OUTSIDE_REPOSITORY")
+    try:
+        mission=json.loads(mission_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise BrokeredNamespaceError("MISSION_JSON_INVALID") from exc
+    if not isinstance(mission,dict):
+        raise BrokeredNamespaceError("MISSION_OBJECT_REQUIRED")
+    mission_id=str(mission.get("mission_id") or "").strip()
+    if re.fullmatch(r"[A-Za-z0-9_.-]{1,160}",mission_id) is None:
+        raise BrokeredNamespaceError("MISSION_ID_INVALID")
+    agent=str(
+        os.environ.get("PROJECT_BRAIN_AGENT_ID")
+        or mission.get("agent_id")
+        or "ASTRA-PARENT-MEMBRANE-V1"
+    ).strip()
+    task=str(
+        os.environ.get("PROJECT_BRAIN_TASK_ID")
+        or mission.get("task_id")
+        or mission_id
+    ).strip()
+    for label,value in (("AGENT_ID",agent),("TASK_ID",task)):
+        if re.fullmatch(r"[A-Za-z0-9_.-]{1,160}",value) is None:
+            raise BrokeredNamespaceError(label+"_INVALID")
+    context=mission.get("continuous_obs")
+    if not isinstance(context,dict):
+        context={}
+    return {
+        "mission_id":mission_id,
+        "agent_id":agent,
+        "task_id":task,
+        "information_context":context,
+        "mission_rel":rel,
+    }
+
 def run_brokered(
     policy:Mapping[str,Any],
     *,
@@ -125,9 +169,14 @@ def run_brokered(
     ns_root=tempfile.mkdtemp(prefix="brain-parent-membrane-v2-")
     os.chown(ns_root,p["host_uid"],p["host_gid"])
 
+    binding=_broker_binding(root_repo,p)
     parent,child=socket.socketpair()
     broker=parent_broker.ParentBroker(
         repo_root=root_repo,
+        expected_agent_id=binding["agent_id"],
+        expected_task_id=binding["task_id"],
+        mission_id=binding["mission_id"],
+        information_context=binding["information_context"],
         external_bridge_dir=external_bridge_dir,
         external_wait_seconds=external_wait_seconds,
     )
