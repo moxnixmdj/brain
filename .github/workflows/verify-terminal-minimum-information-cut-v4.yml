@@ -1,0 +1,23 @@
+name: Verify terminal minimum information cut V4
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/terminal_minimum_information_cut_v4.py"
+      - "canonical/tests/test_terminal_minimum_information_cut_v4.py"
+      - "canonical/governance/TERMINAL_MINIMUM_INFORMATION_CUT_20261007_V4.json"
+      - ".github/workflows/verify-terminal-minimum-information-cut-v4.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m pytest -q canonical/tests/test_terminal_minimum_information_cut_v4.py
+      - run: python canonical/runtime/terminal_minimum_information_cut_v4.py
