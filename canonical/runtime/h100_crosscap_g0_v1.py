@@ -12,10 +12,6 @@ import json
 from collections import deque
 from typing import Any, Iterable, Mapping, Sequence
 
-from canonical.runtime import h100_jit_lexical_role_v1 as lexical
-from canonical.runtime import h100_verified_capability_registry_v8 as registry
-from canonical.runtime import h100_zero_learned_event_memory_v1 as eventmem
-
 SCHEMA="PROJECT_BRAIN_H100_CROSSCAP_G0_V1"
 
 
@@ -142,6 +138,7 @@ def synthesize_unary_integer_program(examples: Sequence[Mapping[str,int]], max_d
 # ---------- language ----------
 
 def resolve_lexical_roles(clauses:Any, knowledge:Mapping[str,Any])->dict[str,Any]:
+    from canonical.runtime import h100_jit_lexical_role_v1 as lexical
     return lexical.induce_roles(clauses,knowledge)
 
 
@@ -232,12 +229,14 @@ def plan_resources(initial_resources:Sequence[str], goal_resource:str, operators
 # ---------- memory ----------
 
 def replay_events(events:Iterable[Mapping[str,Any]], snapshot:Mapping[str,Any]|None=None)->dict[str,Any]:
+    from canonical.runtime import h100_zero_learned_event_memory_v1 as eventmem
     return eventmem.replay(events,snapshot)
 
 
 # ---------- novel-domain adaptation ----------
 
 def resolve_numeric_capability(rows:Sequence[Mapping[str,Any]])->dict[str,Any]:
+    from canonical.runtime import h100_verified_capability_registry_v8 as registry
     return registry.resolve_verified_capability(rows,target="y",input_name="x")
 
 
