@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U0_V2_VISION_BAR_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__4_OF_4_FRESH_HOLDOUT__UNCHANGED_TARGET_PROGRAM",
+  "reference_machine": "H100_U0_PYCORE_3137_V2",
+  "subject_blobs": {
+    "program": "33e21290831db29938846a5b4bbfc68762dcda06",
+    "holdout": "12950bdb5e163732afe61c0e98f272232016d8c9",
+    "machine": "7a6f2f7c636449ce413b2521645377e171d49b44"
+  },
+  "observed": {
+    "passed": 4,
+    "total": 4,
+    "target_program_source_bytes": 1961,
+    "executable_source_upper_bound_bits": 15688,
+    "canonical_ast_bytes": 14739,
+    "canonical_ast_diagnostic_bits": 117912,
+    "learned_target_bytes": 0
+  },
+  "conclusion": "FOR_THIS_NARROW_SYNTHETIC_BAR_GEOMETRY_SCOPE__K_U_UPPER_BOUND_LE_15688_BITS_UNDER_U0_V2_AND_THE_FROZEN_RUNTIME_INFORMATION",
+  "hard_nonclaims": [
+    "NOT_GENERAL_CHART_UNDERSTANDING",
+    "NO_OCR",
+    "NO_AXIS_OR_LEGEND_SEMANTICS",
+    "SOURCE_UPPER_BOUND_NOT_MINIMUM_DESCRIPTION"
+  ],
+  "promotion_authority": false
+}
