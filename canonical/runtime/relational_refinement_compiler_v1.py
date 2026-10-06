@@ -14,10 +14,16 @@ No acceptance, capability, family, ownership, or terminal credit is granted.
 
 from __future__ import annotations
 
+import hashlib
+import json
 import re
+from pathlib import Path
 from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_RELATIONAL_REFINEMENT_COMPILER_V1"
+ROW_BINDING_SCHEMA = "PROJECT_BRAIN_RELATIONAL_REFINEMENT_CONTRACT_BINDING_V1"
+GLOBAL_BINDING_SCHEMA = "PROJECT_BRAIN_RELATIONAL_REFINEMENT_GLOBAL_BINDING_V1"
+ROOT = Path(__file__).resolve().parents[2]
 SHA40 = re.compile(r"^[0-9a-f]{40}$")
 
 EVALUATOR_MODES = {
