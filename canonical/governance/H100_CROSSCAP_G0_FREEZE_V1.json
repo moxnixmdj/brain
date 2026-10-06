@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CROSSCAP_G0_FREEZE_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_FRESH_CROSS_CAPABILITY_SUITE",
+  "runtime": {
+    "path": "canonical/runtime/h100_crosscap_g0_v1.py",
+    "git_blob_sha": "61463dee20b4c4d2ae44942c5266af6af12738bd"
+  },
+  "tests": {
+    "path": "canonical/tests/test_h100_crosscap_g0_v1.py",
+    "git_blob_sha": "b31e7701913b6750623fc308867d949f33b4ce12"
+  },
+  "inherited_generic_components": {
+    "registry_v8_blob": "a4f952fbf054dbfe4f9617da837b3bf5c3c2e3ab",
+    "typed_planner_blob": "88dc27c45c985105485519d158ecee4b9a8ad7b4",
+    "effect_tool_registry_blob": "1e711b2d0c826227c313763d3b710ce06d11537e",
+    "event_memory_blob": "5d8653e1965c0d721ba2ec036aacae0f3e322bb4",
+    "jit_lexical_blob": "d751354ae8ef8dfbe720f4837d4ac6c0849f7a9a"
+  },
+  "second_carrier_verification": {
+    "tests_passed": 5,
+    "tests_total": 5
+  },
+  "future_suite_target_adapted_persistent_bits": 0,
+  "rule": "NO_G0_MUTATION_AFTER_FRESH_SUITE_FREEZE_COUNTS_AS_ZERO_TARGET_STATE",
+  "promotion_authority": false
+}
