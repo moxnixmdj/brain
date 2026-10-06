@@ -1,0 +1,112 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TEXT_CHART_SCALE_REPAIR_FRESH_HOLDOUT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_SCALE_NORMALIZER_IMPLEMENTATION_AND_OUTCOMES",
+  "base_charts": [
+    {
+      "id": "SCALE_FRESH_A",
+      "categories": [
+        "A",
+        "D",
+        "C"
+      ],
+      "series": {
+        "R": [
+          8,
+          3,
+          6
+        ],
+        "S": [
+          5,
+          9,
+          4
+        ]
+      },
+      "pixels_per_unit": 1,
+      "legend_order": [
+        "R",
+        "S"
+      ],
+      "transform": {
+        "scale": 2,
+        "pad": {
+          "top": 0,
+          "left": 0
+        }
+      }
+    },
+    {
+      "id": "SCALE_FRESH_B",
+      "categories": [
+        "C",
+        "B",
+        "D"
+      ],
+      "series": {
+        "R": [
+          4,
+          8,
+          2
+        ],
+        "S": [
+          7,
+          3,
+          9
+        ]
+      },
+      "pixels_per_unit": 1,
+      "legend_order": [
+        "S",
+        "R"
+      ],
+      "transform": {
+        "scale": 3,
+        "pad": {
+          "top": 0,
+          "left": 0
+        },
+        "char_map": {
+          ".": "~",
+          "k": "q",
+          "r": "m",
+          "s": "n"
+        }
+      }
+    },
+    {
+      "id": "SCALE_FRESH_C",
+      "categories": [
+        "D",
+        "A",
+        "B"
+      ],
+      "series": {
+        "R": [
+          5,
+          10,
+          3
+        ],
+        "S": [
+          8,
+          4,
+          6
+        ]
+      },
+      "pixels_per_unit": 0.5,
+      "legend_order": [
+        "R",
+        "S"
+      ],
+      "transform": {
+        "scale": 2,
+        "pad": {
+          "top": 3,
+          "left": 5
+        }
+      }
+    }
+  ],
+  "required_pass": "3_OF_3",
+  "evaluator_gold": "BASE_CHART_TABLE",
+  "promotion_authority": false
+}
