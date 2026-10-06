@@ -205,8 +205,10 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
         new_fn = _function_source(new_registry, "classify_rows")
         old_fn = old_fn.replace("!= 19", "!= N").replace("== 19", "== N").replace("19 - len(CLASSES)", "N - len(CLASSES)")
         old_fn = old_fn.replace("19_PROCESS", "N_PROCESS").replace("19,", "N,")
+        old_fn = old_fn.replace("CLASSIFICATION_COUNT_NOT_19", "CLASSIFICATION_COUNT_NOT_N").replace("/ 19 * 100.0", "/ N * 100.0")
         new_fn = new_fn.replace("!= 18", "!= N").replace("== 18", "== N").replace("18 - len(CLASSES)", "N - len(CLASSES)")
         new_fn = new_fn.replace("18_PROCESS", "N_PROCESS").replace("18,", "N,")
+        new_fn = new_fn.replace("CLASSIFICATION_COUNT_NOT_18", "CLASSIFICATION_COUNT_NOT_N").replace("/ 18 * 100.0", "/ N * 100.0")
         if old_fn != new_fn:
             raise TransportError("REGISTRY_CLASSIFIER_LOGIC_DRIFT_BEYOND_COUNT")
 
