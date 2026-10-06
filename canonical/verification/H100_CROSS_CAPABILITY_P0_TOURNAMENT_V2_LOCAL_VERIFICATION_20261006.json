@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CROSS_CAPABILITY_P0_TOURNAMENT_V2_LOCAL_VERIFICATION_20261006",
+  "date": "2026-10-06",
+  "status": "PASS__LOCAL_SEPARATE_RUNTIME__STRICT_PUBLIC_PRIVATE_BOUNDARY",
+  "invalidates_v1_clean_credit": "canonical/verification/H100_CROSS_CAPABILITY_P0_TOURNAMENT_V1_INVALIDATION_20261006.json",
+  "observed": {
+    "nonsealed_passed": 8,
+    "nonsealed_total": 8,
+    "sealed_control_status": "ABSTAIN_IRREDUCIBLE_INFORMATION_GAP",
+    "sealed_hidden_world_count": 4,
+    "sealed_information_lower_bound_bits": 2,
+    "target_adapted_persistent_bits": 0
+  },
+  "verified_families": [
+    "ARITHMETIC_REASONING",
+    "CODE_REPAIR",
+    "LEXICAL_LANGUAGE",
+    "RASTER_VISION",
+    "TYPED_TOOL_SELECTION",
+    "RESOURCE_PLANNING",
+    "EVENT_MEMORY",
+    "NOVEL_STRUCTURE_TRANSFER"
+  ],
+  "hard_nonclaims": [
+    "LOCAL_NOT_INDEPENDENT_PROVIDER_VERIFICATION",
+    "SYNTHETIC_SUITE_NOT_FRONTIER_EQUIVALENCE",
+    "FINITE_PASS_NOT_GENERALIZATION_PROOF"
+  ],
+  "promotion_authority": false
+}
