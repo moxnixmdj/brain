@@ -1,0 +1,15 @@
+{
+  "schema":"PROJECT_BRAIN_CREATIVE_OUTPUT_BASIS_ACTIVATION_V2",
+  "date":"2026-10-06",
+  "status":"ACTIVE_IF_MERGED__THREE_STRATA__PERFORMANCE_OPEN__ZERO_CREDIT",
+  "basis":{"path":"canonical/governance/CREATIVE_DIAGRAM_TERMINAL_ACCEPTANCE_BASIS_20261006_V2.json","git_blob_sha":"12aca6a8822353d6aee6c0b948b95696d12a7b35"},
+  "source_gap":{"path":"canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_VISUAL_POLISH_ACCEPTANCE_ESCAPE_20261006_V1.json","git_blob_sha":"9e7ed2bdeefdf71b9d1b960850b878e5b8d10664"},
+  "strata":["CREATIVE_TEXT","DIAGRAM_OUTPUT","INTERACTIVE_CODED_VISUAL_ARTIFACT"],
+  "meta_open_count_delta":0,
+  "total_open_truth_obligation_count_delta":0,
+  "performance_open":true,
+  "acceptance_credit_delta":0,
+  "family_credit_delta":0,
+  "capability_credit_delta":0,
+  "ownership_credit_delta":0
+}
