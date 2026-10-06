@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import importlib.util
 import json
 import sys
 from pathlib import Path
@@ -11,8 +10,6 @@ POINTER = ROOT / "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_P
 AUTHORITY = ROOT / "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
 COVERAGE = ROOT / "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V4.json"
 RECEIPT = ROOT / "canonical/verification/TERMINAL_29_OBLIGATION_BASIS_SPRITE_VERIFICATION_20261006_V1.json"
-FACTOR = ROOT / "canonical/runtime/terminal_frontier_factorizer_v1.py"
-COMPILER = ROOT / "canonical/runtime/terminal_coverage_partition_compiler_v1.py"
 
 DELETED = {
     "COMPOSITION_COMPONENT_SCOPED_PROOFS",
@@ -26,21 +23,14 @@ def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def load_module(name: str, path: Path):
-    spec = importlib.util.spec_from_file_location(name, path)
-    mod = importlib.util.module_from_spec(spec)
-    assert spec.loader is not None
-    spec.loader.exec_module(mod)
-    return mod
-
 
 def verify() -> dict:
     p = load(POINTER)
     a = load(AUTHORITY)
     c = load(COVERAGE)
     r = load(RECEIPT)
-    f = load_module("factorizer29", FACTOR)
-    cp = load_module("coverage29", COMPILER)
+    from canonical.runtime import terminal_frontier_factorizer_v1 as f
+    from canonical.runtime import terminal_coverage_partition_compiler_v1 as cp
 
     fact = f.factorize()
     part = cp.compile_partition()
