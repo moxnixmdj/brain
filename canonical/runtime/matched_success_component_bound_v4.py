@@ -141,7 +141,14 @@ def _edge(cid: str, i: int, raw: Any, left: Mapping[str, Any], right: Mapping[st
             "transported_semantic_sha256": _sha(rr.get("transported_semantic_sha256"), p + "_SEM"),
             "transported_shape_sha256": _sha(rr.get("transported_shape_sha256"), p + "_SHAPE"),
             "downstream_terminal_semantic_sha256": _sha(rr.get("downstream_terminal_semantic_sha256"), p + "_TERM"),
-            "downstream_case_payload_sha256": right["case_payload_sha256"],
+            "downstream_case_payload_sha256": _sha(
+                rr.get("downstream_case_payload_sha256"),
+                p + "_CASE",
+            ),
+            "downstream_case_template_sha256": _sha(
+                rr.get("downstream_case_template_sha256"),
+                p + "_CASE_TEMPLATE",
+            ),
             "downstream_scorer_path": right["scorer_path"],
             "downstream_scorer_git_blob_sha": right["scorer_git_blob_sha"],
             "base_scorer_pass": rr.get("base_scorer_pass"),
@@ -160,6 +167,18 @@ def _edge(cid: str, i: int, raw: Any, left: Mapping[str, Any], right: Mapping[st
         raise V4Error(p + "_ABLATION_NOT_DISTINCT")
     if not (t["transported_shape_sha256"] == a["transported_shape_sha256"] == r["transported_shape_sha256"]):
         raise V4Error(p + "_SHAPE_MISMATCH")
+    if not (
+        t["downstream_case_template_sha256"]
+        == a["downstream_case_template_sha256"]
+        == r["downstream_case_template_sha256"]
+    ):
+        raise V4Error(p + "_CASE_TEMPLATE_MISMATCH")
+    if t["downstream_case_payload_sha256"] != right["case_payload_sha256"]:
+        raise V4Error(p + "_TRUE_CASE_NOT_COMPONENT_CASE")
+    if r["downstream_case_payload_sha256"] != t["downstream_case_payload_sha256"]:
+        raise V4Error(p + "_RESCUE_CASE_NOT_RESTORED")
+    if a["downstream_case_payload_sha256"] == t["downstream_case_payload_sha256"]:
+        raise V4Error(p + "_ABLATION_CASE_NOT_DISTINCT")
     if not all(x["base_scorer_pass"] is True for x in (t, a, r)):
         raise V4Error(p + "_BASE_SCORER_NOT_RUN_OR_NOT_PASS")
     if (t["bridge_check_pass"], a["bridge_check_pass"], r["bridge_check_pass"]) != (True, False, True):
