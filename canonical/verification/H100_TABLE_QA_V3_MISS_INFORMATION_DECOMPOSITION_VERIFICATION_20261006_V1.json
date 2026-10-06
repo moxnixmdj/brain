@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TABLE_QA_V3_MISS_INFORMATION_DECOMPOSITION_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "POSTHOC_INFORMATION_DECOMPOSITION_COMPLETE__FROZEN_RULES__SOLVER_UNCHANGED",
+  "source": {
+    "score": "canonical/verification/H100_TABLE_QA_SOLVER_V1_V3_FRESH_VERIFICATION_20261006_V1.json",
+    "diagnostic_precommit": "canonical/governance/H100_TABLE_QA_V3_MISS_INFORMATION_DECOMPOSITION_PRECOMMIT_V1.json",
+    "result_sha256": "039ca5b15cdb949cdb03867d3dd0dca8b998ba64501890518b0ac2a972be7b6f"
+  },
+  "observed": {
+    "all": {
+      "n": 100,
+      "recoverable": 83,
+      "recoverable_fraction": 0.83
+    },
+    "solver_correct": {
+      "n": 38,
+      "recoverable": 38,
+      "recoverable_fraction": 1
+    },
+    "solver_miss": {
+      "n": 62,
+      "recoverable": 45,
+      "recoverable_fraction": 0.7258064516129032
+    },
+    "human": {
+      "n": 50,
+      "recoverable": 33,
+      "recoverable_fraction": 0.66,
+      "solver_correct": 9
+    },
+    "augmented": {
+      "n": 50,
+      "recoverable": 50,
+      "recoverable_fraction": 1,
+      "solver_correct": 29
+    },
+    "human_solver_miss": {
+      "n": 41,
+      "recoverable": 24
+    },
+    "augmented_solver_miss": {
+      "n": 21,
+      "recoverable": 21
+    }
+  },
+  "deduction": [
+    "CURRENT_TABLE_SOLVER_FAILURE_IS_DOMINATED_BY_QUESTION_TO_TABLE_GROUNDING_OR_REASONING_ON_CASES_WHERE_ANSWER_INFORMATION_IS_ALREADY_AVAILABLE",
+    "AUGMENTED_V3_HAS_FULL_TABLE_INFORMATION_RECOVERABILITY_UNDER_THE_FROZEN_DIAGNOSTIC_BUT_ONLY_58_PERCENT_SOLVER_ACCURACY",
+    "SEVENTEEN_HUMAN_CASES_REMAIN_UNRECOVERED_BY_THE_CRUDE_TABLE_DIAGNOSTIC_AND_REQUIRE_FURTHER_CAUSAL_CLASSIFICATION"
+  ],
+  "hard_nonclaims": [
+    "RECOVERABLE_DOES_NOT_MEAN_CURRENT_SOLVER_CAN_IDENTIFY_THE_RIGHT_CELLS",
+    "PAIRWISE_MATCHES_CAN_BE_ACCIDENTAL",
+    "POSTHOC_DIAGNOSTIC_USES_GOLD_LABELS_ONLY_FOR_INFORMATION_AVAILABILITY_CLASSIFICATION",
+    "NO_ZERO_LEARNED_RASTER_VISION_CLAIM"
+  ],
+  "promotion_authority": false
+}
