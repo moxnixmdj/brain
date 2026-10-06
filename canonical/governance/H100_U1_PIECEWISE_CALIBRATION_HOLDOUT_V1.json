@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_PIECEWISE_CALIBRATION_HOLDOUT_V1",
+  "date": "2026-10-06",
+  "status": "DERIVED_AFTER_PROGRAM_FREEZE",
+  "program_freeze_commit": "59bfedc8dae8dd1bf0ae44821ef6ede33f48946e",
+  "derivation": "PARSE_COMMIT_SHA_AS_20_BYTES__MAP_EACH_BYTE_TO_BYTE_MOD_101_MINUS_50__KEEP_FIRST_12_UNIQUE_VALUES",
+  "cases": [
+    {
+      "x": 39,
+      "y": 106
+    },
+    {
+      "x": 40,
+      "y": 109
+    },
+    {
+      "x": -15,
+      "y": -27
+    },
+    {
+      "x": 49,
+      "y": 136
+    },
+    {
+      "x": -34,
+      "y": -65
+    },
+    {
+      "x": -20,
+      "y": -37
+    },
+    {
+      "x": -31,
+      "y": -59
+    },
+    {
+      "x": -23,
+      "y": -43
+    },
+    {
+      "x": -12,
+      "y": -21
+    },
+    {
+      "x": 23,
+      "y": 58
+    },
+    {
+      "x": 18,
+      "y": 43
+    },
+    {
+      "x": -21,
+      "y": -39
+    }
+  ],
+  "branch_coverage": {
+    "below_minus7": 7,
+    "minus7_to12": 0,
+    "at_least13": 5
+  },
+  "note": "THIS_DERIVATION_HAPPENED_TO_PRODUCE_NO_MIDDLE_BRANCH_CASES__RESULT_MUST_NOT_BE_TREATED_AS_THREE_BRANCH_COVERAGE_WITHOUT_A_SECOND_PREDECLARED_AUDIT",
+  "promotion_authority": false
+}
