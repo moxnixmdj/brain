@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_NEQ_CAPABILITY_SUBJECT_V1",
+  "date": "2026-10-06",
+  "reference_machine": "H100_U1_STACK_VM",
+  "precommit": "canonical/governance/H100_U1_NEQ_CAPABILITY_PRECOMMIT_V1.json",
+  "program_hex": "01000f01010f090100091000",
+  "program_bytes": 12,
+  "program_bits": 96,
+  "persistent_data_bytes": 0,
+  "instruction_intent": [
+    "PUSH_0",
+    "READ_X",
+    "PUSH_1",
+    "READ_T",
+    "EQ",
+    "PUSH_0",
+    "EQ",
+    "WRITE",
+    "HALT"
+  ],
+  "promotion_authority": false
+}
