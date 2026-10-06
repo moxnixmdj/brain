@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_PIECEWISE_CALIBRATION_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__12_OF_12_COMMIT_DERIVED_PLUS_6_OF_6_COVERAGE_AUDIT",
+  "reference_machine": "H100_U1_STACK_VM",
+  "frozen_program": "canonical/governance/H100_U1_PIECEWISE_CALIBRATION_PROGRAM_PRECOMMIT_V1.json",
+  "program_freeze_commit": "59bfedc8dae8dd1bf0ae44821ef6ede33f48946e",
+  "random_holdout": "canonical/governance/H100_U1_PIECEWISE_CALIBRATION_HOLDOUT_V1.json",
+  "middle_branch_audit": "canonical/governance/H100_U1_PIECEWISE_CALIBRATION_MIDDLE_BRANCH_AUDIT_V1.json",
+  "observed": {
+    "program_bytes": 54,
+    "program_bits": 432,
+    "random_holdout_passed": 12,
+    "random_holdout_total": 12,
+    "coverage_audit_passed": 6,
+    "coverage_audit_total": 6,
+    "max_steps_observed": 22,
+    "learned_bits": 0
+  },
+  "resource_envelope": {
+    "max_steps": 1000,
+    "max_stack_depth": 100,
+    "max_heap_cells": 10,
+    "max_output_values": 2,
+    "runtime_information": "ONE_INTEGER_X"
+  },
+  "complexity_interval": {
+    "lower_bound_bits": 0,
+    "upper_bound_bits": 432,
+    "exact_claim": false
+  },
+  "hard_nonclaims": [
+    "LOWER_BOUND_ZERO_IS_NOT_A_PROOF_OF_MINIMALITY",
+    "MIDDLE_BRANCH_AUDIT_WAS_ADDED_AFTER_RANDOM_HOLDOUT_COVERAGE_INSPECTION_BUT_BEFORE_EXECUTION",
+    "THIS_IS_PROTOCOL_CALIBRATION_NOT_FRONTIER_EQUIVALENCE"
+  ],
+  "promotion_authority": false
+}
