@@ -2145,7 +2145,7 @@
     "fresh_reality_authority": false,
     "active_pointer": {
       "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-      "git_blob_sha": null
+      "git_blob_sha": "fa58d3048eaabf6b3dceccd1466ae2db6c2f6bcf"
     },
     "active_shared_causal_interfaces": [
       "EXTERNAL_RESULT_OR_ACCESS",
@@ -2158,7 +2158,7 @@
   "v22_scheduler_projection": {
     "status": "ACTIVE__CURRENT_29_LOAD_BEARING_TRUTH_FROM_AUTHORITY__SCHEDULING_ROUTE_FROM_ACTIVE_POINTER__ZERO_CREDIT",
     "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "git_blob_sha": null,
+    "git_blob_sha": "fa58d3048eaabf6b3dceccd1466ae2db6c2f6bcf",
     "exact_state": {
       "accepted_families": 5,
       "open_families": 14,
