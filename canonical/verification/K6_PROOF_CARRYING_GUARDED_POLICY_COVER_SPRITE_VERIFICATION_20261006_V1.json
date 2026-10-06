@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_K6_PROOF_CARRYING_GUARDED_POLICY_COVER_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_SOURCE_REPLAY_PASS__SOURCE_BOUND_PLUS_3_OF_3_FINITE_FALSIFIERS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "k6-proof-carrying-guarded-policy-cover-20261006-v1",
+    "exact_blobs": {
+      "canonical/governance/K6_PROOF_CARRYING_GUARDED_POLICY_COVER_THEOREM_20261006_V1.json": "c67d44ab0d2143fcf84a62b7e9d0b54b9a4aac17",
+      "canonical/runtime/k6_proof_carrying_guarded_policy_cover_v1.py": "21f0ca3f68745dba2f80aaf0258a0e01368d3eda",
+      "canonical/runtime/k6_proof_carrying_guarded_policy_cover_verifier_v1.py": "3f064e58fd5227a25a0206873f6014b0f9ac0b81",
+      "canonical/tests/test_k6_proof_carrying_guarded_policy_cover_v1.py": "767e8b2b759d85ed375c299194c7a1b8cc6f0fcc"
+    },
+    "exact_sources": {
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V3.json": "142cb46ac1bf0b5c570e6d2dc121dfca6f6e1544",
+      "canonical/governance/K6_POSITIVE_COVER_SEMANTIC_RESIDUAL_PROJECTION_20261006_V4.json": "3e021b353dfe3dd6e9c5ea9843968e7fe75a02eb",
+      "canonical/verification/K6_POSITIVE_COVER_SEMANTIC_RESIDUAL_V4_SPRITE_VERIFICATION_20261006_V1.json": "59fcbc1244879e5f3516ba900cf7167a0679b59e",
+      "canonical/governance/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_THEOREM_20261006_V1.json": "8a235f91ad3064714fab3ea73b324487d9b7f8e5",
+      "canonical/verification/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_SPRITE_VERIFICATION_20261006_V1.json": "de91c37808fe53bc133b399ebc7630f2b82bb0e3"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/k6guards",
+    "runner": "SOURCE_VERIFIER_PLUS_ZERO_DEPENDENCY_DIRECT_TEST_FUNCTION_RUNNER",
+    "source_verifier_passed": true,
+    "finite_tests_passed": 3,
+    "finite_tests_total": 3,
+    "result": "PASS_ZERO_EXIT"
+  },
+  "verified": [
+    "GUARD_SOUNDNESS_PLUS_GUARD_COVERAGE_IS_SUFFICIENT_FOR_POLICY_ADEQUACY_OVER_THE_BOUND_CONTEXT_DOMAIN",
+    "OVERLAPPING_SOUND_GUARDS_ARE_ALLOWED__DISJOINT_WORLD_PARTITION_NOT_REQUIRED",
+    "FALSE_POSITIVE_GUARD_IS_DETECTED_AS_A_SOUNDNESS_COUNTEREXAMPLE",
+    "UNCOVERED_DECLARED_CONTEXT_IS_DETECTED",
+    "FINITE_DECLARED_REPLAY_DOES_NOT_CLAIM_UNIVERSAL_EXTERNAL_CONTEXT_COVERAGE",
+    "FULL_WORLD_IDENTITIES_AND_UNUSED_DISCRIMINATOR_OUTCOME_MODELS_ARE_NOT_GENERICALLY_REQUIRED_WHEN_GUARD_SOUNDNESS_AND_COVERAGE_ARE_PROVED",
+    "ALL_CREDIT_DELTAS_REMAIN_ZERO"
+  ],
+  "consequence": {
+    "predecessor_residual": "K6_SOUND_POLICY_COVER_WITNESS_AND_SELECTED_DISCRIMINATOR_BINDING",
+    "candidate_successor": "K6_PROOF_CARRYING_POLICY_GUARD_SOUNDNESS_AND_COVERAGE",
+    "remaining_load_bearing_information": "TARGET_SCOPED_GUARD_SOUNDNESS__BOUND_CONTEXT_GUARD_COVERAGE__PRECOMMITMENT_GUARD_AVAILABILITY"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_COMPLETE_GUARD_COVER_EXISTS_FOR_ALL_29_TRUTHS",
+    "NO_CLAIM_SAMPLED_CONTEXT_COVERAGE_IS_UNIVERSAL_PROOF",
+    "NO_CLAIM_TARGET_SEMANTIC_AUTHORITY_IS_ELIMINATED",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
