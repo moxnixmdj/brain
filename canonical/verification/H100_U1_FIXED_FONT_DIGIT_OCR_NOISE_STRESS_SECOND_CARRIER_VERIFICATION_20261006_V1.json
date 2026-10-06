@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_FIXED_FONT_DIGIT_OCR_NOISE_STRESS_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "FAIL__SECOND_ISOLATED_CARRIER__0_OF_10_ONE_PIXEL_NOISE",
+  "unchanged_program": "canonical/governance/H100_U1_FIXED_FONT_DIGIT_OCR_PROGRAM_PRECOMMIT_V1.json",
+  "stress_precommit": "canonical/governance/H100_U1_FIXED_FONT_DIGIT_OCR_NOISE_STRESS_PRECOMMIT_V1.json",
+  "program": {
+    "bytes": 192,
+    "bits": 1536,
+    "sha256": "542f679d1a005e708863db723169f0292dc371c263bb304c547fef512fbbb782"
+  },
+  "observed": {
+    "passed": 0,
+    "total": 10,
+    "all_outputs_fail_closed_minus_one": true
+  },
+  "causal_class": "ALGORITHM_ROBUSTNESS_GAP",
+  "target_adapted_bits_added_before_stress": 0,
+  "deduction": "EXACT_TEMPLATE_OCR_DOES_NOT_GENERALIZE_TO_ONE_PIXEL_PERTURBATIONS__THIS_FAILURE_DOES_NOT_ESTABLISH_POSITIVE_LEARNED_STATE_NECESSITY",
+  "promotion_authority": false
+}
