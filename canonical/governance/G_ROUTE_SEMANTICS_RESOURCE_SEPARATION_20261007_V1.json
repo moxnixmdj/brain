@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_G_ROUTE_SEMANTICS_RESOURCE_SEPARATION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_LOGICAL_TRUTH_REPAIR__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "claim_under_test": "K6_TASK_SUFFICIENT_MODEL_AND_SEPARATOR_ACQUISITION_PLUS_THE_FIVE_CURRENTLY_OWNED_GENERATORS_IS_LOGICALLY_SUFFICIENT_FOR_RESOURCE_BOUNDED_TARGET_PARITY",
+  "countermodel": {
+    "fixed_owned_suffix": "A correct generic enumerator/verifier that tries candidates in a fixed order.",
+    "complete_task_model": "The full candidate domain, verifier semantics, hard constraints and terminal objective are explicitly known; no semantic ambiguity remains.",
+    "resource_bound": "The terminal deadline permits fewer candidate evaluations than the position of the first adequate candidate under the fixed generic route.",
+    "target_route": "A reusable specialized procedure/advice maps the same complete model to an adequate candidate within the deadline.",
+    "result": [
+      "K6 semantic/model acquisition is complete.",
+      "The generic Brain suffix is correct in the unbounded limit.",
+      "Brain misses the target resource bound.",
+      "Target succeeds within the same resource envelope.",
+      "Therefore semantic completeness alone does not imply resource-bounded capability parity."
+    ]
+  },
+  "repaired_G_normal_form": {
+    "owned_generators": [
+      "G1_PERSISTENT_STATE_AND_CONTINUITY",
+      "G2_DELEGATION_AND_COORDINATION",
+      "G3_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "G4_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "G5_EXACT_DETERMINISTIC_COMPUTATION"
+    ],
+    "semantic_residual": "K6_TASK_SUFFICIENT_MODEL_AND_SEPARATOR_ACQUISITION",
+    "procedural_resource_residual": "A_STAR_R__MINIMUM_REUSABLE_PROCEDURAL_ADVICE_NEEDED_RELATIVE_TO_THE_FROZEN_OWNED_SUBSTRATE_PLUS_ADMISSIBLE_JIT_INFORMATION",
+    "closure_residuals": [
+      "TARGET_GENERATED_BY_BASIS_AND_TRANSFORMS",
+      "DOMINANCE_PRESERVING_TRANSFER",
+      "CONDITION_AND_COMPOSITION_CLOSURE",
+      "RESOURCE_SAFETY_AUTHORITY_NONREGRESSION",
+      "DONOR_INDEPENDENT_OWNERSHIP"
+    ]
+  },
+  "scheduler_consequence": [
+    "ATTACK A_STAR_R_EQUALS_ZERO AFTER K6 MODEL COMPLETENESS; DO NOT CALL EVERY RESOURCE FAILURE A SEMANTIC FAILURE.",
+    "IF A REPEATABLE RESOURCE_BOUNDED FAILURE SURVIVES ALL ZERO_ADVICE OWNED ROUTES, INTERNALIZE ONLY THE MINIMUM REUSABLE PROCEDURAL ADVICE THAT CAUSALLY REMOVES IT.",
+    "DO NOT REOPEN G6/G7 AS TWO MONOLITHIC GENERATORS UNLESS A COUNTEREXAMPLE REQUIRES IT."
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM CURRENT A_STAR_R IS POSITIVE.",
+    "NO CLAIM CURRENT BRAIN GENERIC SUFFIX IS THE SIMPLE ENUMERATOR OF THE COUNTERMODEL.",
+    "NO CLAIM K6 IS COMPLETE.",
+    "NO TERMINAL ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
