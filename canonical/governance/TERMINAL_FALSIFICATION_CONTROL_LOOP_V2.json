@@ -1,0 +1,441 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FALSIFICATION_CONTROL_LOOP_V2",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__OBSERVABLE_SCOPE_PROVED__UNIVERSAL_DOMINANCE_ACTIVE__PROOF_CARRYING_LEVERAGE_AND_FRONTIER_BOUND__ZERO_TERMINAL_CREDIT",
+  "canonical_base_commit": "c8c91ddd100dca4c4800245fee0b2577f22ee6c1",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "current_truth_state": {
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "meta_open": 8,
+    "known_open_truth_obligations": 32,
+    "terminal": false
+  },
+  "authoritative_inputs": [
+    {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V22.json",
+      "git_blob_sha": "8359e6171cfab301ad9909364558a313fa7c4cae"
+    },
+    {
+      "path": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_CURRENT_INPUT_V1.json",
+      "git_blob_sha": "e35096d20a2a1b2c9bf03ab1624916feef46b058"
+    },
+    {
+      "path": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
+      "git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c"
+    },
+    {
+      "path": "canonical/verification/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_FALSIFICATION_20261006_V1.json",
+      "git_blob_sha": "f308c0bce3cdff8b8c523e231d337c68f1ed976f"
+    },
+    {
+      "path": "canonical/verification/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_SPRITE_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "954ed383aa79fd8838249e58b0c848e338ea44de"
+    },
+    {
+      "path": "canonical/verification/OPUS55_OBSERVABLE_TRACE_HONESTY_SOURCE_DELTA_CHALLENGE_20261006_V1.json",
+      "git_blob_sha": "2f8701bbebc80c55b728e1cce69d48fdaaf3e04b"
+    },
+    {
+      "path": "canonical/governance/OPUS55_HONESTY_COMPLETION_INTEGRITY_UNIVERSE_DELTA_20261006_V1.json",
+      "git_blob_sha": "dd485f0b9f4f4253456421624c0b31f22bef2697"
+    },
+    {
+      "path": "canonical/governance/ROOT3_CLASS_BOUND_SUBPROCESS_MEDIATOR_V2_CURRENT_REBIND_20261005_V1.json",
+      "git_blob_sha": "5df37d62d26c39bc84830e2933ba1f0c62cdc857"
+    },
+    {
+      "path": "canonical/governance/BENCHMARK_WITNESS_ALL_PREMISES_V3_ACTIVATION_20261006_V1.json",
+      "git_blob_sha": "b1877fb4e78e701b43be6c35abe7ee51a46b3ad8"
+    },
+    {
+      "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V6.json",
+      "git_blob_sha": "4d1043029425bf94573d806148697759cc0d7915"
+    },
+    {
+      "path": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+      "git_blob_sha": "2476ab2d8220994d7858c80409b563e1582c88e6"
+    },
+    {
+      "path": "canonical/governance/TERMINAL_CONTROL_LOOP_UNIVERSE_EXPANSION_STABILITY_BINDING_20261006_V1.json",
+      "git_blob_sha": "4de10bbb7c4cfbb83812bc8107407dba2156b5f4"
+    },
+    {
+      "path": "canonical/governance/BENCHMARK_WITNESS_ELIMINATION_TARGET_RERANK_20261006_V2.json",
+      "git_blob_sha": "69d292996bc29d43e785f8db86c5ee10a861c1a4"
+    },
+    {
+      "path": "canonical/governance/CURRENT_BENCHMARK_WITNESS_ELIMINATION_RUNTIME_OVERLAY_V2.json",
+      "git_blob_sha": "1a5b33e6720b6b0b33186fcda36d7837501083ac"
+    },
+    {
+      "path": "canonical/governance/AUTOMATIONBENCH_PRIVATE_TASK_CONTRACT_SCOPE_FALSIFICATION_20261006_V1.json",
+      "git_blob_sha": "d87eaf579f93a7829c33aa7ee07ddcde3e59a0a6"
+    },
+    {
+      "path": "canonical/verification/AUTOMATIONBENCH_PRIVATE_TASK_CONTRACT_SCOPE_FALSIFICATION_SPRITE_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "7fea44be50afc3b1e4357b064bdeefdbdef58263"
+    }
+  ],
+  "controller": {
+    "runtime": {
+      "path": "canonical/runtime/terminal_falsification_control_loop_v2.py",
+      "git_blob_sha": "7289bc3df632833d016c840b2fd11a03f1673256"
+    },
+    "tests": {
+      "path": "canonical/tests/test_terminal_falsification_control_loop_v2.py",
+      "git_blob_sha": "884670bb395a080d2c6a929523f8a1617e73f099"
+    }
+  },
+  "control_invariants": [
+    "FALSIFIED_ROUTE_HAS_ZERO_SCHEDULING_VALUE_UNTIL_A_REPAIRED_SUCCESSOR_EXISTS",
+    "UNREPAIRED_FALSIFIED_NECESSITY_REMAINS_A_TERMINAL_BLOCKER",
+    "FALSIFIER_SURVIVAL_HAS_ZERO_PROOF_CREDIT_UNTIL_SEPARATE_CONTENT_ADDRESSED_PROOF_PROMOTION",
+    "PROVED_LABEL_WITHOUT_VALID_PATH_PLUS_GIT_BLOB_SHA_RECEIPTS_HAS_ZERO_PROOF_CREDIT",
+    "TERMINAL_FINALITY_REMAINS_FALSE_UNTIL_TARGET_UNIVERSE_COMPLETENESS_OR_A_STRONGER_SCOPE_SUPERSET_THEOREM_IS_PROVED",
+    "DEPENDENCIES_ON_FALSIFIED_OR_MISSING_CLAIMS_FAIL_CLOSED",
+    "UNIVERSE_AUTHORITY_PRECEDES_NONUNIVERSE_LEVERAGE_SCORING",
+    "NONUNIVERSE_PRIORITY_USES_DETERMINISTIC_TARGET_REACHABILITY_PER_COST_NOT_UNCALIBRATED_SUCCESS_PROBABILITIES",
+    "RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA_OR_WAKE",
+    "CONTROL_LOOP_INSTALLATION_GRANTS_ZERO_TERMINAL_CREDIT",
+    "ALL_NONFALSIFIED_UNIVERSE_AUTHORITY_CLAIMS_MUST_BE_CONTENT_ADDRESSED_PROVED_BEFORE_UNIVERSE_AUTHORITY_IS_COMPLETE",
+    "OBSERVABLE_TRACE_SCOPE_SUPERSET_PROOF_DOES_NOT_IMPLY_UNIVERSAL_BRAIN_DOMINANCE",
+    "TARGET_TRUTH_LEVERAGE_COUNT_REQUIRES_EXACT_CONTENT_ADDRESSED_AGGREGATE_EXPANSION",
+    "NONUNIVERSE_WORK_DURING_OPEN_UNIVERSAL_DOMINANCE_REQUIRES_CONTENT_ADDRESSED_SCOPED_OUTPUT_STABILITY",
+    "AUTHORITATIVE_FRONTIER_INPUT_SET_REQUIRES_SHA256_FINGERPRINT_MATCH",
+    "TOP_LEVEL_AND_NESTED_OPEN_TRUTH_COUNTS_MUST_MATCH_IF_BOTH_ARE_PRESENT",
+    "STRICT_DEPENDENCY_MODE_REQUIRES_PROVED_CONTENT_ADDRESSED_DEPENDENCY"
+  ],
+  "claims": [
+    {
+      "id": "C_TERMINAL_BASIS_CURRENT32",
+      "lane": "UNIVERSE_AUTHORITY",
+      "status": "FALSIFIED",
+      "cost_units": 1,
+      "target_truth_obligations": [
+        "TERMINAL_FINALITY_BASIS__32_OPEN_TRUTH_OBLIGATIONS"
+      ],
+      "target_truth_obligation_count": 1,
+      "falsification_receipt": {
+        "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_TERMINAL_SUFFICIENCY_COUNTERMODEL_20261005_V1.json",
+        "git_blob_sha": "77e5a893b65d3509b563f024a427d492d45e1489"
+      }
+    },
+    {
+      "id": "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2",
+      "lane": "UNIVERSE_AUTHORITY",
+      "status": "PROVED",
+      "successor_of": "C_TERMINAL_BASIS_CURRENT32",
+      "cost_units": 1,
+      "target_truth_obligations": [
+        "TARGET_UNIVERSE_SCOPE_SUPERSET"
+      ],
+      "target_truth_obligation_count": 1,
+      "falsifiers": [
+        "UNREPRESENTED_USEFUL_BEHAVIOR",
+        "SOURCE_SURFACE_ESCAPE",
+        "COMPOSITION_ESCAPE"
+      ],
+      "proof_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
+          "git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c"
+        },
+        {
+          "path": "canonical/verification/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_FALSIFICATION_20261006_V1.json",
+          "git_blob_sha": "f308c0bce3cdff8b8c523e231d337c68f1ed976f"
+        },
+        {
+          "path": "canonical/verification/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_SPRITE_VERIFICATION_20261006_V1.json",
+          "git_blob_sha": "954ed383aa79fd8838249e58b0c848e338ea44de"
+        }
+      ],
+      "claim": "Every externally useful Opus 5.5 behavior is representable inside the source-agnostic observable-trace scope superset. This proves scope representation only, not Brain dominance."
+    },
+    {
+      "id": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+      "lane": "UNIVERSE_AUTHORITY",
+      "status": "ACTIVE",
+      "depends_on": [
+        "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2"
+      ],
+      "dependency_mode": "REQUIRE_PROVED",
+      "cost_units": 1,
+      "target_truth_obligations": [
+        "LITERAL_ALL_USEFUL_OPUS55_FINALITY"
+      ],
+      "target_truth_obligation_count": 1,
+      "claim": "Bind Brain equal-or-better behavior and owned execution over the full observable-trace scope, or localize the minimal uncovered behavior class without weakening the target.",
+      "falsifiers": [
+        "TASK_WITHIN_TRACE_SCOPE_NOT_COVERED_BY_ANY_SOUND_ACCEPTANCE_OR_META_CERTIFICATE",
+        "CONDITION_OR_COMPOSITION_INTERACTION_NOT_PRESERVED",
+        "RESOURCE_OR_SAFETY_OUTCOME_NOT_DOMINATED",
+        "DONOR_OR_EXTERNAL_RUNTIME_DEPENDENCY"
+      ],
+      "proof_requirement": "A content-addressed proof must cover every externally useful trace property, including performance, safety, resource semantics, composition, condition transfer, and ownership. Finite acceptance rows alone are insufficient."
+    },
+    {
+      "id": "C_ROOT3_SHARED_UNIVERSAL",
+      "lane": "EFFECT_CLOSURE",
+      "status": "FALSIFIED",
+      "cost_units": 1,
+      "target_truth_obligations": [
+        "ROOT3_SHARED_SCOPE_COMPOSITION"
+      ],
+      "target_truth_obligation_count": 7,
+      "falsification_receipt": {
+        "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_ROOT3_BYPASS_SEARCH_20261005_V1.json",
+        "git_blob_sha": "8007c90fba7197de6dd9886eeecf592a55cd336e"
+      },
+      "target_expansion": {
+        "aggregate_id": "ROOT3_SHARED_SCOPE_COMPOSITION",
+        "members": [
+          "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+          "VISION_DENSE_NONCHART_SCOPE",
+          "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+          "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+          "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+          "IF_SCOPE_BOUNDARY_NONINFERIOR",
+          "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+        ],
+        "receipt": {
+          "path": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_CURRENT_INPUT_V1.json",
+          "git_blob_sha": "e35096d20a2a1b2c9bf03ab1624916feef46b058"
+        }
+      }
+    },
+    {
+      "id": "C_EFFECT_BOUNDARY_CLOSURE_V2",
+      "lane": "EFFECT_CLOSURE",
+      "status": "ACTIVE",
+      "successor_of": "C_ROOT3_SHARED_UNIVERSAL",
+      "cost_units": 2,
+      "target_truth_obligations": [
+        "ROOT3_SHARED_SCOPE_COMPOSITION"
+      ],
+      "target_truth_obligation_count": 7,
+      "falsifiers": [
+        "UNMEDIATED_EFFECT_ESCAPE",
+        "BOOTSTRAP_ORDER_COUNTERMODEL",
+        "CLASS_EXECUTOR_SOUNDNESS_COUNTERMODEL"
+      ],
+      "target_expansion": {
+        "aggregate_id": "ROOT3_SHARED_SCOPE_COMPOSITION",
+        "members": [
+          "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+          "VISION_DENSE_NONCHART_SCOPE",
+          "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+          "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+          "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+          "IF_SCOPE_BOUNDARY_NONINFERIOR",
+          "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+        ],
+        "receipt": {
+          "path": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_CURRENT_INPUT_V1.json",
+          "git_blob_sha": "e35096d20a2a1b2c9bf03ab1624916feef46b058"
+        }
+      },
+      "stable_under_universe_expansion": true,
+      "expansion_stability_receipt": {
+        "path": "canonical/governance/TERMINAL_CONTROL_LOOP_UNIVERSE_EXPANSION_STABILITY_BINDING_20261006_V1.json",
+        "git_blob_sha": "4de10bbb7c4cfbb83812bc8107407dba2156b5f4"
+      }
+    },
+    {
+      "id": "C_META_BEHAVIORAL_QUOTIENT",
+      "lane": "CONDITION_TRANSFER",
+      "status": "FALSIFIED",
+      "cost_units": 1,
+      "target_truth_obligations": [
+        "META_BEHAVIORAL_TRANSFER"
+      ],
+      "target_truth_obligation_count": 7,
+      "falsification_receipt": {
+        "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_UNMAPPED_TRANSFORM_SEARCH_20261005_V1.json",
+        "git_blob_sha": "f303a29fa9de86e95cdf62ea0af85f22e52d7271"
+      },
+      "target_expansion": {
+        "aggregate_id": "META_BEHAVIORAL_TRANSFER",
+        "members": [
+          "CYBERSECURITY",
+          "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+          "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+          "HEALTHCARE",
+          "MATHEMATICAL_REASONING_ARXIVMATH",
+          "MULTILINGUAL_PERFORMANCE",
+          "LONG_CONTEXT"
+        ],
+        "receipt": {
+          "path": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_CURRENT_INPUT_V1.json",
+          "git_blob_sha": "e35096d20a2a1b2c9bf03ab1624916feef46b058"
+        }
+      }
+    },
+    {
+      "id": "C_CONDITION_RESTRICTION_AND_INTERACTION_CLOSURE_V2",
+      "lane": "CONDITION_TRANSFER",
+      "status": "ACTIVE",
+      "successor_of": "C_META_BEHAVIORAL_QUOTIENT",
+      "cost_units": 2,
+      "target_truth_obligations": [
+        "META_BEHAVIORAL_TRANSFER"
+      ],
+      "target_truth_obligation_count": 7,
+      "falsifiers": [
+        "UNMAPPED_TRANSFORM",
+        "NONSEPARABLE_INTERACTION",
+        "OUTCOME_TRANSFER_COUNTERMODEL"
+      ],
+      "target_expansion": {
+        "aggregate_id": "META_BEHAVIORAL_TRANSFER",
+        "members": [
+          "CYBERSECURITY",
+          "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+          "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+          "HEALTHCARE",
+          "MATHEMATICAL_REASONING_ARXIVMATH",
+          "MULTILINGUAL_PERFORMANCE",
+          "LONG_CONTEXT"
+        ],
+        "receipt": {
+          "path": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_CURRENT_INPUT_V1.json",
+          "git_blob_sha": "e35096d20a2a1b2c9bf03ab1624916feef46b058"
+        }
+      },
+      "stable_under_universe_expansion": true,
+      "expansion_stability_receipt": {
+        "path": "canonical/governance/TERMINAL_CONTROL_LOOP_UNIVERSE_EXPANSION_STABILITY_BINDING_20261006_V1.json",
+        "git_blob_sha": "4de10bbb7c4cfbb83812bc8107407dba2156b5f4"
+      }
+    },
+    {
+      "id": "C_BENCHMARK_WITNESS_ELIMINATION_V3",
+      "lane": "PERFORMANCE_WITNESS",
+      "status": "ACTIVE",
+      "cost_units": 3,
+      "target_truth_obligations": [
+        "EXTERNAL_SCORE_ATOMS_ACTIVE11"
+      ],
+      "target_truth_obligation_count": 11,
+      "depends_on": [
+        "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2"
+      ],
+      "falsifiers": [
+        "TARGET_IDENTITY_MISMATCH",
+        "PREMISE_PROOF_UNSOUNDNESS",
+        "EVALUATOR_RELATION_UNSOUNDNESS",
+        "SCOPE_COUNTERMODEL"
+      ],
+      "claim": "For each score atom, synthesize the cheapest sound certificate before exact external evaluation, while every load-bearing premise is target-scoped, content-addressed, and proof-carrying under the active V3 witness compiler.",
+      "target_expansion": {
+        "aggregate_id": "EXTERNAL_SCORE_ATOMS_ACTIVE11",
+        "members": [
+          "CODING_TB4_GE_66_4",
+          "CHARTOGRAPHY_TOOLS_GE_89",
+          "HLE_TOOLS_GE_67_7",
+          "OSWORLD_2_1_PARTIAL_GE_81_8",
+          "FINANCE_AGENT_V2_GE_58_59",
+          "CODING_FRONTIERCODE_GE_54_4",
+          "PROWORK_GDPVAL_GE_1846",
+          "PROWORK_AA_BRIEFCASE_GE_1822",
+          "ARTIFACT_AA_BRIEFCASE_GE_1822",
+          "AUTOMATIONBENCH_GE_40",
+          "MYSTERYMECHANISM_GE_49_55"
+        ],
+        "receipt": {
+          "path": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_CURRENT_INPUT_V1.json",
+          "git_blob_sha": "e35096d20a2a1b2c9bf03ab1624916feef46b058"
+        }
+      },
+      "dependency_mode": "REQUIRE_PROVED",
+      "stable_under_universe_expansion": true,
+      "expansion_stability_receipt": {
+        "path": "canonical/governance/TERMINAL_CONTROL_LOOP_UNIVERSE_EXPANSION_STABILITY_BINDING_20261006_V1.json",
+        "git_blob_sha": "4de10bbb7c4cfbb83812bc8107407dba2156b5f4"
+      }
+    },
+    {
+      "id": "C_CAPABILITY_OWNERSHIP_DONOR_INDEPENDENCE_V1",
+      "lane": "OWNERSHIP",
+      "status": "ACTIVE",
+      "cost_units": 2,
+      "target_truth_obligations": [
+        "TERMINAL_OWNERSHIP_DONOR_INDEPENDENCE"
+      ],
+      "target_truth_obligation_count": 1,
+      "depends_on": [
+        "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2"
+      ],
+      "falsifiers": [
+        "DONOR_INDEPENDENCE_COUNTERMODEL",
+        "CLEAN_ROOM_RECONSTRUCTION_FAILURE",
+        "HIDDEN_EXTERNAL_DEPENDENCY"
+      ],
+      "dependency_mode": "REQUIRE_PROVED",
+      "stable_under_universe_expansion": true,
+      "expansion_stability_receipt": {
+        "path": "canonical/governance/TERMINAL_CONTROL_LOOP_UNIVERSE_EXPANSION_STABILITY_BINDING_20261006_V1.json",
+        "git_blob_sha": "4de10bbb7c4cfbb83812bc8107407dba2156b5f4"
+      }
+    }
+  ],
+  "expected_current_schedule": [
+    "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+    "C_BENCHMARK_WITNESS_ELIMINATION_V3",
+    "C_EFFECT_BOUNDARY_CLOSURE_V2",
+    "C_CONDITION_RESTRICTION_AND_INTERACTION_CLOSURE_V2",
+    "C_CAPABILITY_OWNERSHIP_DONOR_INDEPENDENCE_V1"
+  ],
+  "scheduler_rule": "RUN_ALL_LIVE_UNIVERSE_AUTHORITY_CLAIMS_TO PROOF IN LOGICAL ORDER; CURRENT FIRST CLAIM IS UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING; ALLOW ONLY PROOF_CARRYING SCOPED-STABLE NONUNIVERSE WORK IN PARALLEL; RANK THOSE LANES BY EXACT CONTENT_ADDRESSED TARGET_TRUTH_REACHABILITY PER COST; RECOMPUTE AFTER EVERY VERIFIED DELTA.",
+  "provider_control_plane": {
+    "direct_main_prewrite_enforced": false,
+    "terminal_critical_path": false,
+    "reason": "Preserve existing process guards, but terminal truth must be verified against an exact immutable tree rather than waiting for provider-level repository controls."
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "known_open_truth_obligations": 32,
+  "frontier_fingerprint": "35851b39612d5663762add88892c1df4c1b994ea6ec0d763d0e5a37c5b5f28e8",
+  "v2_hardening": {
+    "multi_authority_finality": "UNIVERSE_AUTHORITY_IS_COMPLETE_ONLY_WHEN_EVERY_NONFALSIFIED_UNIVERSE_AUTHORITY_CLAIM_HAS_CONTENT_ADDRESSED_PROOF",
+    "scope_dominance_split": "OBSERVABLE_TRACE_SCOPE_SUPERSET_IS_PROVED_AS_SCOPE; UNIVERSAL_BRAIN_DOMINANCE_AND_OWNERSHIP_REMAIN_ACTIVE",
+    "leverage_accounting": "AGGREGATE_TARGET_COUNTS_ARE_INVALID_UNLESS_EXACT_UNIQUE_MEMBERS_AND_A_CONTENT_ADDRESSED_EXPANSION_RECEIPT_ARE_BOUND",
+    "frontier_binding": "AUTHORITATIVE_INPUT_PATH_SHA_SET_IS_BOUND_BY_SHA256_FINGERPRINT",
+    "parallelism": "NONUNIVERSE_WORK_MAY_CONTINUE_ONLY_WITH_CONTENT_ADDRESSED_SCOPED_OUTPUT_STABILITY",
+    "truth_count_interface": "DIRECT_GOVERNANCE_COMPILATION_ACCEPTS_CURRENT_TRUTH_STATE_NESTED_COUNT_AND_FAILS_ON_CONFLICTING_TOP_LEVEL_BINDING",
+    "independent_replay": "PENDING_EXACT_BRANCH_BYTES",
+    "benchmark_child_lane_currentness": "CURRENT_WITNESS_OVERLAY_AND_RERANK_ARE_INCLUDED_IN_THE_FRONTIER_FINGERPRINT__CHILD_FALSIFICATION_DOES_NOT_SILENTLY_DRIFT_TOP_LEVEL_LEVERAGE"
+  },
+  "benchmark_internal_currentness": {
+    "status": "CURRENT__AUTOMATIONBENCH_FINITE_GRAMMAR_SHORTCUT_FALSIFIED__FINANCE_AGENT_V2_PROMOTED_WITHIN_ACTIVE11__ZERO_CREDIT",
+    "rerank": {
+      "path": "canonical/governance/BENCHMARK_WITNESS_ELIMINATION_TARGET_RERANK_20261006_V2.json",
+      "git_blob_sha": "69d292996bc29d43e785f8db86c5ee10a861c1a4"
+    },
+    "overlay": {
+      "path": "canonical/governance/CURRENT_BENCHMARK_WITNESS_ELIMINATION_RUNTIME_OVERLAY_V2.json",
+      "git_blob_sha": "1a5b33e6720b6b0b33186fcda36d7837501083ac"
+    },
+    "falsification": {
+      "path": "canonical/governance/AUTOMATIONBENCH_PRIVATE_TASK_CONTRACT_SCOPE_FALSIFICATION_20261006_V1.json",
+      "git_blob_sha": "d87eaf579f93a7829c33aa7ee07ddcde3e59a0a6"
+    },
+    "verification": {
+      "path": "canonical/verification/AUTOMATIONBENCH_PRIVATE_TASK_CONTRACT_SCOPE_FALSIFICATION_SPRITE_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "7fea44be50afc3b1e4357b064bdeefdbdef58263"
+    },
+    "active_internal_certificate_target": "FINANCE_AGENT_V2_GE_58_59",
+    "top_level_performance_claim_membership_unchanged": true
+  }
+}
