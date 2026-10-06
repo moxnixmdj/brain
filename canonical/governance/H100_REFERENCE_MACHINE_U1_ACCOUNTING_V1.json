@@ -1,0 +1,14 @@
+{
+  "s": "H100_U1_ACCOUNTING_V1",
+  "d": "2026-10-06",
+  "snapshot": "2754b446b86afa668763474c4f57f1159e664ff2",
+  "files": 129,
+  "total_bytes": 723601,
+  "u1": [
+    "canonical/runtime/h100_reference_machine_u1_v1.py",
+    "a86dd60a677c9c41f63f4beff594955846fc03e3",
+    4483
+  ],
+  "legacy_ex_u1_bytes": 719118,
+  "rule": "ONLY_U1_IS_FREE_CONDITIONING__OTHER_PERSISTENT_CAPABILITY_BEARING_CODE_OR_DATA_COUNTS__RUNTIME_INPUT_DOES_NOT"
+}
