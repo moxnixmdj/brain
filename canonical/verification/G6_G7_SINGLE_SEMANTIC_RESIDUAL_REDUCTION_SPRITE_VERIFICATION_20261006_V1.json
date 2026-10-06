@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_G6_G7_SINGLE_SEMANTIC_RESIDUAL_REDUCTION_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__5_OF_5__REPRESENTATION_LEVEL_7_TO_6_GENERATOR_COMPRESSION__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/G6_G7_SINGLE_SEMANTIC_RESIDUAL_REDUCTION_20261006_V1.json",
+      "git_blob_sha": "fe9c5a159fef01d13169c82426f9bacf15d1b0ef"
+    },
+    "runtime": {
+      "path": "canonical/runtime/unified_trace_policy_generator_v1.py",
+      "git_blob_sha": "5f829fd309b78b3c7b4fb8d0219c9c35bf254d34"
+    },
+    "tests": {
+      "path": "canonical/tests/test_unified_trace_policy_generator_v1.py",
+      "git_blob_sha": "b5e532f4ae0d2e91be27f12b9e617313c1669383"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/tmp/g6g7single",
+    "tests_passed": 5,
+    "tests_total": 5,
+    "result": "PASS"
+  },
+  "verified": [
+    "TEXT_IMAGE_AND_UI_EXAMPLES_SHARE_ONE_TASK_CONDITIONED_TRACE_POLICY_INTERFACE_WITH_EXACT_OUTPUTS",
+    "MODALITY_REMAINS_BOUND_IN_LOSSLESS_POLICY_INPUT_BYTES_WITHOUT_REQUIRING_A_DISTINCT_SEMANTIC_POLICY_API",
+    "PERSISTENT_STATE_IS_LOAD_BEARING",
+    "UNBOUND_POLICY_STATE_FAILS_CLOSED",
+    "NONFUNCTIONAL_DUPLICATE_POLICY_BINDINGS_ARE_REJECTED",
+    "CANDIDATE_GENERATOR_COUNT_COMPRESSES_7_TO_6_AT_REPRESENTATION_LEVEL",
+    "UNBOUND_SEMANTIC_GENERATOR_COUNT_COMPRESSES_2_TO_1_WHILE_FIVE_VERIFIED_OWNED_GENERATORS_ARE_PRESERVED"
+  ],
+  "deduction": "G6_TASK_CONDITIONED_JUDGMENT_PLANNING_REASONING_AND_SYNTHESIS_AND_G7_MULTIMODAL_PERCEPTION_ACTION_AND_ARTIFACT_INTERFACE_DO_NOT_REQUIRE_TWO_DISTINCT_SEMANTIC_GENERATOR_INTERFACES_AS_A_MATTER_OF_REPRESENTATION__BOTH_CAN_BE_EXPRESSED_AS_ONE_TASK_CONDITIONED_TRACE_POLICY_OVER_LOSSLESS_OBSERVATION_STATE_AND_ACTION_PAYLOADS",
+  "hard_nonclaims": [
+    "NO_CLAIM_G6U_TASK_CONDITIONED_TRACE_POLICY_INFERENCE_AND_PROPOSAL_IS_IMPLEMENTED_OR_BRAIN_OWNED",
+    "NO_CLAIM_OPUS55_PARITY",
+    "NO_CLAIM_RESOURCE_BOUNDED_SUFFICIENCY",
+    "NO_CLAIM_INPUT_OUTPUT_CODEC_OR_EFFECT_TRANSPORT_IS_LOSSLESS_FOR_ALL_TERMINAL_SCOPE",
+    "NO_CLAIM_19_TO_6_TRANSFER_CLOSURE_PRESERVES_DISTRIBUTIONAL_DOMINANCE",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
