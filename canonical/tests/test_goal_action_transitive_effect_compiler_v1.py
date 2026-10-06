@@ -58,7 +58,7 @@ def _goal_action(action):
         return a()
 """
         row = c.compile_effects(src)["rows"][0]
-        self.assertEqual(row["status"], "LOCAL_TRANSITIVE_CLOSED")
+        self.assertEqual(row["status"], "LOCAL_CALLGRAPH_RESOLVED_UNDER_ALLOWLIST")
         self.assertEqual(set(row["traversed_local_functions"]), {"a","b"})
 
     def test_path_reads_and_writes(self):
