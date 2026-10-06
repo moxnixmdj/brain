@@ -1,0 +1,434 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_PIXEL_HAMMING_OCR_FRESH_NOISE_HOLDOUT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_PROGRAM_PRECOMMIT_BEFORE_EXECUTION",
+  "unchanged_program": "canonical/governance/H100_U1_PIXEL_HAMMING_OCR_PROGRAM_PRECOMMIT_V1.json",
+  "cases": [
+    {
+      "id": "D0_1P",
+      "digit": 0,
+      "noise_pixels": 1,
+      "input": [
+        12,
+        17,
+        17,
+        17,
+        17,
+        17,
+        14
+      ]
+    },
+    {
+      "id": "D0_2P",
+      "digit": 0,
+      "noise_pixels": 2,
+      "input": [
+        12,
+        25,
+        17,
+        17,
+        17,
+        17,
+        14
+      ]
+    },
+    {
+      "id": "D0_3P",
+      "digit": 0,
+      "noise_pixels": 3,
+      "input": [
+        12,
+        25,
+        17,
+        16,
+        17,
+        17,
+        14
+      ]
+    },
+    {
+      "id": "D1_1P",
+      "digit": 1,
+      "noise_pixels": 1,
+      "input": [
+        12,
+        12,
+        4,
+        4,
+        4,
+        4,
+        14
+      ]
+    },
+    {
+      "id": "D1_2P",
+      "digit": 1,
+      "noise_pixels": 2,
+      "input": [
+        12,
+        12,
+        6,
+        4,
+        4,
+        4,
+        14
+      ]
+    },
+    {
+      "id": "D1_3P",
+      "digit": 1,
+      "noise_pixels": 3,
+      "input": [
+        12,
+        12,
+        6,
+        12,
+        4,
+        4,
+        14
+      ]
+    },
+    {
+      "id": "D2_1P",
+      "digit": 2,
+      "noise_pixels": 1,
+      "input": [
+        14,
+        21,
+        1,
+        2,
+        4,
+        8,
+        31
+      ]
+    },
+    {
+      "id": "D2_2P",
+      "digit": 2,
+      "noise_pixels": 2,
+      "input": [
+        14,
+        21,
+        1,
+        3,
+        4,
+        8,
+        31
+      ]
+    },
+    {
+      "id": "D2_3P",
+      "digit": 2,
+      "noise_pixels": 3,
+      "input": [
+        14,
+        21,
+        1,
+        3,
+        0,
+        8,
+        31
+      ]
+    },
+    {
+      "id": "D3_1P",
+      "digit": 3,
+      "noise_pixels": 1,
+      "input": [
+        30,
+        1,
+        0,
+        14,
+        1,
+        1,
+        30
+      ]
+    },
+    {
+      "id": "D3_2P",
+      "digit": 3,
+      "noise_pixels": 2,
+      "input": [
+        30,
+        1,
+        0,
+        10,
+        1,
+        1,
+        30
+      ]
+    },
+    {
+      "id": "D3_3P",
+      "digit": 3,
+      "noise_pixels": 3,
+      "input": [
+        30,
+        1,
+        0,
+        10,
+        1,
+        0,
+        30
+      ]
+    },
+    {
+      "id": "D4_1P",
+      "digit": 4,
+      "noise_pixels": 1,
+      "input": [
+        2,
+        6,
+        26,
+        18,
+        31,
+        2,
+        2
+      ]
+    },
+    {
+      "id": "D4_2P",
+      "digit": 4,
+      "noise_pixels": 2,
+      "input": [
+        2,
+        6,
+        26,
+        18,
+        29,
+        2,
+        2
+      ]
+    },
+    {
+      "id": "D4_3P",
+      "digit": 4,
+      "noise_pixels": 3,
+      "input": [
+        2,
+        6,
+        26,
+        18,
+        29,
+        18,
+        2
+      ]
+    },
+    {
+      "id": "D5_1P",
+      "digit": 5,
+      "noise_pixels": 1,
+      "input": [
+        31,
+        16,
+        16,
+        28,
+        1,
+        1,
+        30
+      ]
+    },
+    {
+      "id": "D5_2P",
+      "digit": 5,
+      "noise_pixels": 2,
+      "input": [
+        31,
+        16,
+        16,
+        28,
+        17,
+        1,
+        30
+      ]
+    },
+    {
+      "id": "D5_3P",
+      "digit": 5,
+      "noise_pixels": 3,
+      "input": [
+        31,
+        16,
+        16,
+        28,
+        17,
+        1,
+        26
+      ]
+    },
+    {
+      "id": "D6_1P",
+      "digit": 6,
+      "noise_pixels": 1,
+      "input": [
+        14,
+        16,
+        16,
+        14,
+        17,
+        17,
+        14
+      ]
+    },
+    {
+      "id": "D6_2P",
+      "digit": 6,
+      "noise_pixels": 2,
+      "input": [
+        14,
+        16,
+        16,
+        14,
+        17,
+        21,
+        14
+      ]
+    },
+    {
+      "id": "D6_3P",
+      "digit": 6,
+      "noise_pixels": 3,
+      "input": [
+        15,
+        16,
+        16,
+        14,
+        17,
+        21,
+        14
+      ]
+    },
+    {
+      "id": "D7_1P",
+      "digit": 7,
+      "noise_pixels": 1,
+      "input": [
+        31,
+        1,
+        2,
+        4,
+        0,
+        8,
+        8
+      ]
+    },
+    {
+      "id": "D7_2P",
+      "digit": 7,
+      "noise_pixels": 2,
+      "input": [
+        31,
+        1,
+        2,
+        4,
+        0,
+        8,
+        10
+      ]
+    },
+    {
+      "id": "D7_3P",
+      "digit": 7,
+      "noise_pixels": 3,
+      "input": [
+        15,
+        1,
+        2,
+        4,
+        0,
+        8,
+        10
+      ]
+    },
+    {
+      "id": "D8_1P",
+      "digit": 8,
+      "noise_pixels": 1,
+      "input": [
+        14,
+        17,
+        17,
+        14,
+        17,
+        19,
+        14
+      ]
+    },
+    {
+      "id": "D8_2P",
+      "digit": 8,
+      "noise_pixels": 2,
+      "input": [
+        14,
+        17,
+        17,
+        14,
+        17,
+        19,
+        30
+      ]
+    },
+    {
+      "id": "D8_3P",
+      "digit": 8,
+      "noise_pixels": 3,
+      "input": [
+        14,
+        19,
+        17,
+        14,
+        17,
+        19,
+        30
+      ]
+    },
+    {
+      "id": "D9_1P",
+      "digit": 9,
+      "noise_pixels": 1,
+      "input": [
+        14,
+        17,
+        17,
+        15,
+        1,
+        1,
+        15
+      ]
+    },
+    {
+      "id": "D9_2P",
+      "digit": 9,
+      "noise_pixels": 2,
+      "input": [
+        10,
+        17,
+        17,
+        15,
+        1,
+        1,
+        15
+      ]
+    },
+    {
+      "id": "D9_3P",
+      "digit": 9,
+      "noise_pixels": 3,
+      "input": [
+        10,
+        17,
+        16,
+        15,
+        1,
+        1,
+        15
+      ]
+    }
+  ],
+  "gates": {
+    "one_pixel_required": "10_OF_10",
+    "two_pixel_required": "10_OF_10",
+    "three_pixel_report_only": true
+  },
+  "promotion_authority": false
+}
