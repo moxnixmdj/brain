@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CHARTQA_QUERY_DECOMPOSITION_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT",
+  "objective": "Decompose frozen ChartQA V2 holdout questions into deterministic post-extraction operations and likely visual information channels without using model correctness outcomes.",
+  "rules": {
+    "ARITHMETIC": [
+      "sum",
+      "total",
+      "difference",
+      "average",
+      "how many years",
+      "how many"
+    ],
+    "EXTREMUM": [
+      "highest",
+      "lowest",
+      "maximum",
+      "minimum",
+      "longest",
+      "shortest",
+      "biggest",
+      "least",
+      "most"
+    ],
+    "LEGEND_BINDING": [
+      "blue",
+      "red",
+      "green",
+      "dark blue",
+      "line represent",
+      "represented by"
+    ],
+    "SPATIAL_BINDING": [
+      "rightmost",
+      "leftmost",
+      "from the bottom",
+      "from the top"
+    ],
+    "NAMED_VALUE_LOOKUP": [
+      "value of",
+      "percentage of",
+      "rate",
+      "share",
+      "in 20",
+      "in aug",
+      "in feb",
+      "in which period",
+      "which year"
+    ],
+    "CATEGORY_IDENTIFICATION": [
+      "which country",
+      "which animal",
+      "which opinion",
+      "which response",
+      "who says",
+      "which repsone"
+    ]
+  },
+  "reporting": "MULTILABEL_COUNTS_ONLY__NO_CLAIM_IMAGE_INFORMATION_CHANNEL_IS_FULLY_DETERMINED_BY_QUERY_TEXT",
+  "promotion_authority": false
+}
