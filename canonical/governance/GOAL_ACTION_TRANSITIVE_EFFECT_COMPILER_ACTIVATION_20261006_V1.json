@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_GOAL_ACTION_TRANSITIVE_EFFECT_COMPILER_ACTIVATION_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__LOCAL_TRANSITIVE_CALL_GRAPH_EFFECT_COMPILER_INSTALLED__EXACT_BRANCH_REPLAY_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_claims": [
+    "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+    "C_EFFECT_BOUNDARY_CLOSURE_V2"
+  ],
+  "objective": "Replace blanket transitive-helper uncertainty with an exact source-bound recursive local call-graph effect surface for every Astra model-independent goal action, while failing closed on unresolved dynamic calls.",
+  "implementation": {
+    "compiler": {
+      "path": "canonical/runtime/goal_action_transitive_effect_compiler_v1.py"
+    },
+    "tests": {
+      "path": "canonical/tests/test_goal_action_transitive_effect_compiler_v1.py"
+    },
+    "bound_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "b7efc08e64a483e9a759c181a4f9a1cf29e47a9a"
+    }
+  },
+  "candidate_effect_classes": [
+    "HOST_READ",
+    "HOST_WRITE",
+    "HOST_ENV",
+    "PROCESS",
+    "NETWORK_OR_EXTERNAL",
+    "BOUND_CAPABILITY_DYNAMIC",
+    "PACKAGE_INSTALL"
+  ],
+  "proof_strategy": [
+    "RECURSIVELY_TRAVERSE_TOP_LEVEL_LOCAL_FUNCTIONS_REACHABLE_FROM_EACH_GOAL_ACTION_BRANCH",
+    "CLASSIFY_RECOGNIZED_AMBIENT_EFFECT_SINKS",
+    "MARK_UNKNOWN_OR_DYNAMIC_CALL_TARGETS_OPEN_INSTEAD_OF_ASSUMING_PURITY",
+    "USE_RESULT_TO_FACTOR_BLOCKED_ACTIONS_BY_SHARED_GATEWAY_CLASS",
+    "ONLY_AFTER_GATEWAY_ENFORCEMENT_AND_INDEPENDENT_REPLAY_ATTEMPT_NO_BYPASS_DOMINATOR_PROOF"
+  ],
+  "local_validation": {
+    "local_unit_tests_run": 7,
+    "local_unit_tests_passed": 7,
+    "exact_branch_runtime_test_authored": true,
+    "exact_branch_runtime_replay": "PENDING"
+  },
+  "hard_nonclaims": [
+    "NO_THIRD_PARTY_OR_STDLIB_SEMANTIC_PURITY_PROOF",
+    "NO_RECEIVER_TYPE_PROOF_FOR_SAFE_METHOD_ALLOWLIST",
+    "NO_RUNTIME_GATEWAY_ENFORCEMENT_PROOF",
+    "NO_DYNAMIC_DISPATCH_TOTALITY_PROOF",
+    "NO_TRANSITIVE_EFFECT_COMPLETENESS_CREDIT",
+    "NO_UNIVERSAL_NO_BYPASS_CREDIT",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}

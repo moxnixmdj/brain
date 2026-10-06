@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_GOAL_ACTION_TRANSITIVE_EFFECT_INDEPENDENT_REPLAY_20261006_V1",
+  "date": "2026-10-06",
+  "subject_branch": "breakthrough/transitive-gateway-surface-v1-20261006-sol",
+  "subject_head_before_receipt": "0d7d20ae1c5311083588d765469a081305980ed2",
+  "status": "INDEPENDENT_SPRITE_REPLAY_PASS__48_ACTION_SURFACE_COMPILED__19_BLOCKED_ACTIONS_COLLAPSED_TO_7_TRANSITIVE_SIGNATURES__ZERO_CREDIT",
+  "carrier": {
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "mode": "EXACT_CONTENT_MATERIALIZATION_WITHOUT_PRIVATE_GITHUB_CREDENTIALS"
+  },
+  "exact_subject_blobs": {
+    "canonical/runtime/astra_runtime.py": "b7efc08e64a483e9a759c181a4f9a1cf29e47a9a",
+    "canonical/runtime/goal_action_transitive_effect_compiler_v1.py": "687d0a0e188afd46124128a889061a1e2dcb33b7",
+    "canonical/tests/test_goal_action_transitive_effect_compiler_v1.py": "d676628a1c6fb43f4692236815aaf64cf08649b3",
+    "canonical/runtime/goal_action_resource_contract_compiler_v1.py": "58aeca17caea12592115dcff7867e730a066a631"
+  },
+  "replay": {
+    "tests_run": 8,
+    "tests_passed": 8,
+    "action_count": 48,
+    "local_callgraph_resolved_under_allowlist_count": 1,
+    "open_unresolved_call_count": 47,
+    "channel_counts": {
+      "HOST_READ": 42,
+      "HOST_WRITE": 24,
+      "PROCESS": 11,
+      "NETWORK_OR_EXTERNAL": 16,
+      "BOUND_CAPABILITY_DYNAMIC": 10,
+      "PACKAGE_INSTALL": 10
+    }
+  },
+  "blocked_action_intersection": {
+    "direct_blocked_action_count": 19,
+    "transitive_signature_count": 7,
+    "signature_histogram": [
+      {
+        "count": 9,
+        "channels": [
+          "BOUND_CAPABILITY_DYNAMIC",
+          "HOST_READ",
+          "HOST_WRITE",
+          "NETWORK_OR_EXTERNAL",
+          "PACKAGE_INSTALL",
+          "PROCESS"
+        ]
+      },
+      {
+        "count": 3,
+        "channels": []
+      },
+      {
+        "count": 2,
+        "channels": [
+          "HOST_READ",
+          "NETWORK_OR_EXTERNAL"
+        ]
+      },
+      {
+        "count": 2,
+        "channels": [
+          "HOST_WRITE",
+          "NETWORK_OR_EXTERNAL"
+        ]
+      },
+      {
+        "count": 1,
+        "channels": [
+          "HOST_READ"
+        ]
+      },
+      {
+        "count": 1,
+        "channels": [
+          "HOST_READ",
+          "HOST_WRITE",
+          "PROCESS"
+        ]
+      },
+      {
+        "count": 1,
+        "channels": [
+          "HOST_READ",
+          "HOST_WRITE"
+        ]
+      }
+    ],
+    "dominant_shared_signature": {
+      "count": 9,
+      "actions": [
+        "invoke_capability_until",
+        "invoke_capability_fallback",
+        "invoke_capability_fanout",
+        "assert_runtime_per_item_fallback_decodes",
+        "assert_runtime_fanout_artifacts_decode",
+        "assert_runtime_fanout_decodes",
+        "assert_runtime_selected_code_decodes",
+        "invoke_capability_by_runtime_value",
+        "invoke_capability"
+      ],
+      "channels": [
+        "BOUND_CAPABILITY_DYNAMIC",
+        "HOST_READ",
+        "HOST_WRITE",
+        "NETWORK_OR_EXTERNAL",
+        "PACKAGE_INSTALL",
+        "PROCESS"
+      ]
+    }
+  },
+  "falsification_result": {
+    "candidate_overclaim_rejected": "LOCAL_CALLGRAPH_RESOLUTION_IS_NOT_SEMANTIC_PURITY",
+    "reason": "47_OF_48_ACTIONS_RETAIN_UNRESOLVED_CALLS_UNDER_CURRENT_SYNTACTIC_ALLOWLIST",
+    "preserved_result": "THE_COMPILER_RELIABLY_SURFACES_RECOGNIZED_TRANSITIVE_CHANNELS_AND_FACTORS_BLOCKED_ACTIONS_BY_SHARED_SIGNATURE",
+    "next_cut": "PROVE_OR_ENFORCE_ONE_SHARED_BOUND_CAPABILITY_EXECUTION_GATEWAY_FOR_THE_DOMINANT_9_ACTION_SIGNATURE_BEFORE_PER_ACTION_REPAIRS"
+  },
+  "hard_nonclaims": [
+    "NO_TRANSITIVE_EFFECT_COMPLETENESS_PROOF",
+    "NO_RECEIVER_TYPE_OR_LIBRARY_PURITY_PROOF",
+    "NO_RUNTIME_GATEWAY_ENFORCEMENT_PROOF",
+    "NO_UNIVERSAL_NO_BYPASS_PROOF",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
