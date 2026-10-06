@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_BINARY_CHART_VARIABLE_SIZE_STRESS_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_UNCHANGED_PROGRAM_STRESS",
+  "unchanged_program": {
+    "path": "canonical/governance/H100_U1_BINARY_CHART_PROGRAM_PRECOMMIT_V1.json",
+    "sha256": "9ef2b98f48565de67e09864d8997c3a459f64538eb1574aef76623d3c64d4eed",
+    "bytes": 1512
+  },
+  "source_holdout": {
+    "path": "canonical/governance/H100_U1_BINARY_CHART_FRESH_HOLDOUT_V1.json",
+    "commit": "fd730c4e06a22b2e0e2029c6929022bcbab41cee"
+  },
+  "transform": "PAD_BINARY_RASTER_WITH_BACKGROUND_ZERO_ROWS_AND_COLUMNS__CONTENT_UNCHANGED",
+  "per_task_padding": [
+    {
+      "id": "BINARY_CHART_FRESH_1",
+      "left": 2,
+      "right": 3,
+      "top": 1,
+      "bottom": 2
+    },
+    {
+      "id": "BINARY_CHART_FRESH_2",
+      "left": 1,
+      "right": 5,
+      "top": 2,
+      "bottom": 1
+    },
+    {
+      "id": "BINARY_CHART_FRESH_3",
+      "left": 4,
+      "right": 2,
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "id": "BINARY_CHART_FRESH_4",
+      "left": 3,
+      "right": 1,
+      "top": 2,
+      "bottom": 2
+    },
+    {
+      "id": "BINARY_CHART_FRESH_5",
+      "left": 1,
+      "right": 2,
+      "top": 3,
+      "bottom": 1
+    },
+    {
+      "id": "BINARY_CHART_FRESH_6",
+      "left": 5,
+      "right": 1,
+      "top": 1,
+      "bottom": 2
+    }
+  ],
+  "gold": "UNCHANGED",
+  "target_adapted_bits_added_before_stress": 0,
+  "expected_causal_class_if_fail": "ALGORITHM_OR_REPRESENTATION_GAP",
+  "promotion_authority": false
+}
