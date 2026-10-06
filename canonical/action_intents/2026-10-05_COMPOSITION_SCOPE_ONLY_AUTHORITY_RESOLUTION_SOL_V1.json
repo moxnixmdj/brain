@@ -1,0 +1,13 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-05",
+  "intent_id": "COMPOSITION_SCOPE_ONLY_AUTHORITY_RESOLUTION_20261005_SOL_V1",
+  "status": "PREMUTATION_INTENT__ZERO_CREDIT",
+  "base_commit": "257c56c4ab36425e1418eb7ea92f16aaa694340a",
+  "objective": "Resolve whether scope-complete but acceptance-open receipts can grant Composition component credit under the current pinned authority, without changing the frozen protocol or consuming fresh reality.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0
+  }
+}
