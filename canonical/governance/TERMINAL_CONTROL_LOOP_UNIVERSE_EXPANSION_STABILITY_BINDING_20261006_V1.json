@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CONTROL_LOOP_UNIVERSE_EXPANSION_STABILITY_BINDING_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__SCOPED_OUTPUT_VALIDITY_UNDER_POSSIBLE_TARGET_UNIVERSE_EXPANSION__ZERO_CREDIT",
+  "meaning": "A stable claim may continue while literal target-universe completeness is open only because its scoped proof output remains locally valid if new target obligations are later discovered. Stability never means the claim covers newly discovered obligations and never grants terminal credit.",
+  "basis": [
+    {
+      "path": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V1.json",
+      "git_blob_sha": "f68c6ad22d1d907dc4348712b182660d710f7055"
+    },
+    {
+      "path": "canonical/governance/OPUS55_HONESTY_COMPLETION_INTEGRITY_UNIVERSE_DELTA_20261006_V1.json",
+      "git_blob_sha": "dd485f0b9f4f4253456421624c0b31f22bef2697"
+    },
+    {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V22.json",
+      "git_blob_sha": "8359e6171cfab301ad9909364558a313fa7c4cae"
+    }
+  ],
+  "stable_claims": [
+    {
+      "id": "C_BENCHMARK_WITNESS_ELIMINATION_V3",
+      "reason": "Each admitted witness certificate is target-scoped and content-addressed; discovery of additional useful target behaviors cannot invalidate an already sound certificate for an existing frozen score atom."
+    },
+    {
+      "id": "C_EFFECT_BOUNDARY_CLOSURE_V2",
+      "reason": "A sound effect-boundary proof for the current scoped Root3 obligations remains valid for those obligations even if later universe expansion adds new obligations; it does not imply closure of the additions."
+    },
+    {
+      "id": "C_CONDITION_RESTRICTION_AND_INTERACTION_CLOSURE_V2",
+      "reason": "A sound condition/interaction proof remains valid only for its exact mapped conditions and is not promoted to unknown future conditions."
+    },
+    {
+      "id": "C_CAPABILITY_OWNERSHIP_DONOR_INDEPENDENCE_V1",
+      "reason": "A clean-room donor-independence proof remains valid for the exact owned package it proves; future capability additions would require separate ownership proof."
+    }
+  ],
+  "hard_nonclaims": [
+    "NO_LITERAL_TARGET_UNIVERSE_COMPLETENESS",
+    "NO_NEW_TARGET_OBLIGATION_CLOSED",
+    "NO_STABILITY_CLAIM_COUNTS_AS_SCOPE_SUPERSET",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
