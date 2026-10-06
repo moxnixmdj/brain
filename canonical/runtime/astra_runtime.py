@@ -373,14 +373,33 @@ def run_shell(step, prior_results=None):
         out["cross_step_bindings"]=cross_step_bindings
     return out
 
+def _validated_external_tool_bridge_dir(raw_dir):
+    task_id=str(os.environ.get("PROJECT_BRAIN_TASK_ID") or "").strip()
+    if not re.fullmatch(r"[A-Za-z0-9_.-]{1,160}",task_id):
+        raise Blocker("EXTERNAL_TOOL_BRIDGE_TASK_ID_INVALID")
+    root=ROOT.resolve()
+    base=(root/"canonical"/"same_identity_worker"/"external_tool_bridge")
+    base_resolved=base.resolve()
+    if base_resolved!=root and root not in base_resolved.parents:
+        raise Blocker("EXTERNAL_TOOL_BRIDGE_BASE_ESCAPES_REPOSITORY")
+    bridge=pathlib.Path(str(raw_dir or "").strip())
+    if not bridge.is_absolute():
+        bridge=(root/bridge)
+    if bridge.exists() and bridge.is_symlink():
+        raise Blocker("EXTERNAL_TOOL_BRIDGE_TASK_DIR_SYMLINK_FORBIDDEN")
+    bridge_resolved=bridge.resolve()
+    expected=(base_resolved/task_id).resolve()
+    if bridge_resolved!=expected or bridge_resolved.parent!=base_resolved:
+        raise Blocker("EXTERNAL_TOOL_BRIDGE_DIR_IDENTITY_MISMATCH")
+    return bridge_resolved
+
+
 def _external_tool_bridge(kind,payload):
     _authorize_external_information(kind,payload)
     raw_dir=os.environ.get("PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR","").strip()
     if not raw_dir:
         return None
-    bridge=pathlib.Path(raw_dir)
-    if not bridge.is_absolute():
-        bridge=(ROOT/bridge).resolve()
+    bridge=_validated_external_tool_bridge_dir(raw_dir)
     bridge.mkdir(parents=True,exist_ok=True)
     request={
       "schema":"PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1",
