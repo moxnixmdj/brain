@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_H100_LEARNED_STATE_RELABELING_INVARIANCE_LOCAL_RUNTIME_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__LOCAL_SEPARATE_RUNTIME__4_OF_4__ZERO_TERMINAL_CREDIT",
+  "subject_blobs": {
+    "canonical/runtime/h100_learned_state_relabeling_invariance_v1.py": "33e90ec37bdcb56d6ebe0d00022bd9d55123f19f",
+    "canonical/tests/test_h100_learned_state_relabeling_invariance_v1.py": "d94c8edf97506a7d287fca36b45dec9991208789",
+    "canonical/governance/H100_LEARNED_STATE_RELABELING_INVARIANCE_PRECOMMIT_V1.json": "218070c539c96d559ee3bb54d76188584894539c"
+  },
+  "verified": {
+    "behavior_state_roundtrip_identical": true,
+    "payload_hash_preserved": true,
+    "learned_to_deterministic_category_swap_changes_accounted_learned_bytes_but_not_total_capability_bits": true,
+    "invalid_empty_payload_rejected": true
+  },
+  "deduction": "LEARNED_BYTE_COUNT_ALONE_IS_NOT_REPRESENTATION_INVARIANT_IF_CAPABILITY_BEARING_CONSTANTS_CAN_MOVE_INTO_UNCHARGED_DETERMINISTIC_CODE_OR_DATA",
+  "hard_nonclaims": [
+    "NOT_INDEPENDENT_PROVIDER_VERIFICATION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
