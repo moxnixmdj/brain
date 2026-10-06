@@ -1,0 +1,111 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_FIXED_FONT_DIGIT_OCR_PROGRAM_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "RAW_U1_PROGRAM_FROZEN_BEFORE_GLYPH_EVALUATION",
+  "reference_machine": "H100_U1_STACK_VM",
+  "scope": "EXACT_RECOGNITION_OF_ONE_FIXED_5X7_DIGIT_FONT__INPUT_IS_SEVEN_5_BIT_ROW_MASK_INTEGERS__OUTPUT_ONE_DIGIT_OR_MINUS_ONE",
+  "raw_program_hex": "01000f01200601010f0401200601020f0401200601030f0401200601040f0401200601050f0401200601060f040d01ae8ce3983a090b04010010000d018ea188c211090b04010110000d019fa2c4903a090b04010210000d01be88dc90f800090b04010310000d01c2f8a5e508090b04010410000d01be88bc88fe00090b04010510000d01ae8cbd883a090b04010610000d0188c28891fc00090b04010710000d01ae8cdd983a090b04010810000d01ae88de983a090b0401091000017f1000",
+  "raw_program_bytes": 192,
+  "raw_program_bits": 1536,
+  "target_adapted_persistent_data_bytes": 0,
+  "font_templates": {
+    "0": [
+      14,
+      17,
+      17,
+      17,
+      17,
+      17,
+      14
+    ],
+    "1": [
+      4,
+      12,
+      4,
+      4,
+      4,
+      4,
+      14
+    ],
+    "2": [
+      14,
+      17,
+      1,
+      2,
+      4,
+      8,
+      31
+    ],
+    "3": [
+      30,
+      1,
+      1,
+      14,
+      1,
+      1,
+      30
+    ],
+    "4": [
+      2,
+      6,
+      10,
+      18,
+      31,
+      2,
+      2
+    ],
+    "5": [
+      31,
+      16,
+      16,
+      30,
+      1,
+      1,
+      30
+    ],
+    "6": [
+      14,
+      16,
+      16,
+      30,
+      17,
+      17,
+      14
+    ],
+    "7": [
+      31,
+      1,
+      2,
+      4,
+      8,
+      8,
+      8
+    ],
+    "8": [
+      14,
+      17,
+      17,
+      14,
+      17,
+      17,
+      14
+    ],
+    "9": [
+      14,
+      17,
+      17,
+      15,
+      1,
+      1,
+      14
+    ]
+  },
+  "evaluation_rule": "EXHAUSTIVE_10_OF_10_EXACT_SCOPE",
+  "hard_nonclaims": [
+    "FIXED_FONT_ONLY",
+    "NO_TRANSLATION_SCALE_ROTATION_OR_NOISE_ROBUSTNESS",
+    "NO_NATURAL_FONT_GENERALIZATION",
+    "NO_FULL_OCR_CLAIM"
+  ],
+  "promotion_authority": false
+}
