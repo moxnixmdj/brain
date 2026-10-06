@@ -56,7 +56,7 @@ async def run_bounded_harbor_goal(goal:str,environment:BaseEnvironment,*,max_cyc
         observed={"returncode":receipt.returncode,"stdout":receipt.stdout[-MAX_OUTPUT_CHARS:],"stderr":receipt.stderr[-MAX_OUTPUT_CHARS:]}
         trace.append({"cycle":cycle,"action":{"type":typ,"args":{"command":command,"timeout_s":timeout_s}},"result":observed})
         observations.append({"action":action,"result":observed})
-    return {"schema":SCHEMA,"status":"BLOCKED_MAX_CYCLES_NO_BRAIN_AUTHORIZED_FINISH","controller_mode":"BRAIN_OWNED_CONTROL__OPTIONAL_MODEL_PROPOSAL","model_dependency_count":1,"model_role":"GENERAL_COGNITION_SUBSTRATE_CANDIDATE","model_has_terminal_authority":False,"brain_configuration_sha256":config_sha,"cycles":max_cycles,"trace":trace,"summary":""}
+    return {"schema":SCHEMA,"status":"BLOCKED_MAX_CYCLES_NO_BRAIN_AUTHORIZED_FINISH","controller_mode":"BRAIN_OWNED_CONTROL__OWNED_LOCAL_MODEL_PROPOSAL","model_dependency_count":1,"owned_model_dependency_count":1,"unowned_model_dependency_count":0,"model_role":"BRAIN_OWNED_GENERAL_COGNITION_SUBSTRATE_CANDIDATE","model_has_terminal_authority":False,"brain_configuration_sha256":config_sha,"cycles":max_cycles,"trace":trace,"summary":""}
 
 class HarborBrainAgent(BaseAgent):
     capabilities=AgentCapabilities()
