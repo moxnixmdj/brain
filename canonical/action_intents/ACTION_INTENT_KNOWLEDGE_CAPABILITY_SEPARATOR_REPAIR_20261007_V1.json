@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11_INSTANCE",
+  "action_id": "KNOWLEDGE_CAPABILITY_SEPARATOR_REPAIR_20261007_V1",
+  "status": "ACTIVE_PROOF_ONLY__NO_FRESH_REALITY__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "2270b194e9d79a746cf5d0f7aa0f01e8e81995b0",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "TRUTH_REPAIR__SEPARATE_INFORMATION_LOWER_BOUND_FROM_PERSISTENT_CAPABILITY_LOWER_BOUND",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::PERSISTENT_CAPABILITY_INFORMATION_NECESSITY_OVERREACH",
+  "expected_parent_frontier_change": "RETAIN_PRECOMMITMENT_SEPARATOR_INFORMATION_LOWER_BOUND__DELETE_UNPROVED_INFERENCE_THAT_SEPARATOR_MUST_RESIDE_IN_PERSISTENT_CAPABILITY_STATE",
+  "theory_invariants": {
+    "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+    "only_terminal_goal_fixed": true,
+    "survival_is_not_proof": true,
+    "knowledge_external_jit_boundary": true,
+    "incremental_spend_usd": 0,
+    "underlying_capability_invention_forbidden": true
+  },
+  "reasoning_durability": {
+    "real_objective": "Find the true minimum Brain-owned capability information rather than confusing task/world information with reusable capability mechanism.",
+    "governing_invariants": [
+      "KNOWLEDGE_MAY_REMAIN_EXTERNAL_JIT",
+      "CAPABILITY_MECHANISMS_MUST_BE_BRAIN_OWNED",
+      "INFORMATION_CANNOT_BE_CREATED_FROM_IDENTICAL_PRECOMMITMENT_OBSERVATIONS",
+      "STORAGE_LOCATION_IS_NOT_IDENTIFIED_BY_BEHAVIORAL_SUCCESS_ALONE"
+    ],
+    "evidence_refs": [
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
+      "canonical/governance/MINIMUM_CAPABILITY_KERNEL_INFORMATION_CUT_20261006_V1.json",
+      "canonical/verification/MINIMUM_CAPABILITY_KERNEL_INFORMATION_CUT_SPRITE_VERIFICATION_20261006_V1.json",
+      "canonical/governance/K6_TARGET_RELATIVE_DECISION_QUOTIENT_THEOREM_20261006_V1.json",
+      "canonical/governance/TARGET_RELATIVE_SELECTED_SEMANTIC_DISCRIMINATOR_COALESCENCE_20261007_V1.json"
+    ],
+    "conclusion": "PENDING_INDEPENDENT_LOGIC_BINDING",
+    "selected_route": "FINITE_COUNTERMODEL_STORAGE_SUBSTITUTION_PLUS_MISSION_BOUNDARY_AUDIT",
+    "rejected_material_alternatives": [
+      "ASSUME_PERSISTENT_PRIOR_REQUIRED_FROM_INDISTINGUISHABILITY_ALONE",
+      "BUILD_NEW_SEMANTIC_ENGINE",
+      "RUN_FRESH_BENCHMARK"
+    ],
+    "uncertainties": [
+      "Whether any surviving Opus target requires reusable procedural separator structure that cannot be supplied by admissible JIT knowledge, absolute verification, or existing Brain-owned mechanisms within resource/deadline bounds."
+    ],
+    "next_action": "FALSIFY_ZERO_OPUS_SPECIFIC_PERSISTENT_PROCEDURAL_STATE_WITH_EQUALIZED_KNOWLEDGE_COUNTEREXAMPLE",
+    "supersession_conditions": [
+      "A_CONTENT_ADDRESSED_COUNTEREXAMPLE_EQUALIZES_ALL_ADMISSIBLE_TASK_KNOWLEDGE_YET_PROVES_A_NONZERO_REUSABLE_PROCEDURAL_CAPABILITY_BITSTRING_IS NECESSARY",
+      "MISSION_LOCK_REDEFINES_TASK_WORLD_INFORMATION_AS_CAPABILITY"
+    ]
+  },
+  "recursive_obs": {
+    "goal": "Delete only the unsupported storage-class inference while preserving the valid separator-information lower bound.",
+    "capability": "Reuse existing K6 decision partition refinement and JIT knowledge boundary.",
+    "blocker": "Current information-cut artifact labels zero persistent capability information universally insufficient even though its witness supplies Opus a world-identifying bit.",
+    "solution": "DELETE_OVERREACH__PRESERVE_INFORMATION_LOWER_BOUND",
+    "verification": "Finite binary world model with persistent-vs-JIT separator substitution plus exact mission-lock source binding.",
+    "inherited_system": "Preserve K6 separator/refinement theorem and all donor-independence/resource constraints.",
+    "obs": "No fresh reality required; this is a logical classification repair.",
+    "canonical_base_commit": "2270b194e9d79a746cf5d0f7aa0f01e8e81995b0",
+    "fresh_reality_required": false
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "DOES_THE_BINARY_INDISTINGUISHABLE_WORLD_COUNTERMODEL_PROVE_NONZERO_PERSISTENT_CAPABILITY_INFORMATION_OR_ONLY_NONZERO_PRECOMMITMENT_DISCRIMINATING_INFORMATION",
+    "hole_type": "NECESSITY_AND_STORAGE_CLASS_IDENTIFIABILITY",
+    "expected_certificate_or_receipt": "CONSTRUCTIVE_STORAGE_SUBSTITUTION_COUNTERMODEL_AND_WOLFRAM_FINITE_REPLAY",
+    "validator": "WOLFRAM_LANGUAGE_PLUS_EXACT_CONTENT_BINDINGS",
+    "maximum_cheap_test_cost": 0,
+    "prerequisites": "EXISTING_BOUND_EVIDENCE_ONLY",
+    "contamination_risk": "NONE_NEW",
+    "reversibility": "FULL",
+    "critical_path_relation": "MAY_DELETE_FALSE_LOWER_BOUND_ON_PERSISTENT_CAPABILITY_STATE"
+  },
+  "global_terminal_proof_cut": {
+    "new_terminal_observation": false,
+    "task_execution": false,
+    "terminal_verification": false
+  }
+}
