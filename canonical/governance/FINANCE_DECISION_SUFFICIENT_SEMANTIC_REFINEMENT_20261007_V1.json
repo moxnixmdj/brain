@@ -1,0 +1,57 @@
+{
+  "schema":"PROJECT_BRAIN_FINANCE_DECISION_SUFFICIENT_SEMANTIC_REFINEMENT_V1",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_ZERO_CREDIT",
+  "target_predicate":"FINANCE_UNCOVERED_SCOPE_AUDIT",
+  "reduction":{
+    "old_requirement":"RAW_AUTHORITATIVE_TEXT_OR_DOCUMENT_TO_COMPLETE_SEMANTIC_MODEL",
+    "new_requirement":"RAW_SOURCE_PLUS_TASK_TO_ONLY_THE_SEMANTIC_DISTINCTIONS_NEEDED_TO_SELECT_A_TERMINALLY_ADEQUATE_BRAIN_OWNED_POLICY",
+    "reason":"A complete semantic model is stronger than necessary when all interpretations remaining in the current decision cell share a common adequate policy."
+  },
+  "reused_owned_suffix":[
+    "TYPED_HYPOTHESIS_COMPILER_001 for explicit typed facts/templates",
+    "STRUCTURED_METHOD_NORMALIZED_RULE_GRAPH_V3 after rule normalization",
+    "K6 target-relative decision partition refinement and finite discriminator selection"
+  ],
+  "finance_projection":{
+    "compliance":{
+      "delete_if_superset_theorem_holds":"hidden materiality subset classification",
+      "stronger_goal":"preserve every applicable exception consequence disclosure and escalation clause in the bounded authoritative rule universe",
+      "decision_discriminators":[
+        "entity and transaction class",
+        "jurisdiction or authority scope",
+        "effective date",
+        "threshold predicates",
+        "exception predicates",
+        "mandatory prohibited conditional consequence predicates"
+      ]
+    },
+    "document_analysis":{
+      "delete_if_superset_theorem_holds":"hidden decision-relevance subset classification",
+      "stronger_goal":"preserve every grounded fact cross-reference contradiction exception and required quantitative reconciliation in the bounded document package",
+      "decision_discriminators":[
+        "entity and reference identity",
+        "scope and period",
+        "unit and dimension",
+        "cross-reference target",
+        "contradiction relation",
+        "required reconciliation relation"
+      ]
+    }
+  },
+  "runtime_rule":"Maintain the set of source-consistent semantic interpretations. If every remaining interpretation admits a common adequate Brain-owned policy, act without further semantic acquisition. Otherwise acquire the cheapest truthful discriminator that splits the decision cell, then repeat.",
+  "falsifiers":[
+    "A claimed common policy is inadequate for one source-consistent interpretation.",
+    "A load-bearing finance dimension cannot be represented by the declared discriminator set or stronger superset goal.",
+    "The authoritative rule or document universe is not actually bounded and complete for the task.",
+    "A reused owned suffix requires semantic information that this refinement does not supply.",
+    "A JIT semantic answer supplies reusable procedural competence rather than task-specific knowledge."
+  ],
+  "hard_nonclaims":[
+    "No finance predicate closed.",
+    "No claim the discriminator list is complete.",
+    "No claim raw natural-language semantic acquisition is solved.",
+    "No terminal acceptance family capability or ownership credit."
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
