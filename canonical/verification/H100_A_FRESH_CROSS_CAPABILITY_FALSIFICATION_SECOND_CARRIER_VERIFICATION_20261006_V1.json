@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_H100_A_FRESH_CROSS_CAPABILITY_FALSIFICATION_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__P0_SURVIVES_7_OF_7_FRESH_ORDINARY_TASKS__INFORMATION_GAP_CONTROL_CORRECT",
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "frozen_subjects": {
+    "g0": "canonical/governance/H100_A_G0_FROZEN_GENERIC_SUBSTRATE_V2.json",
+    "suite": "canonical/governance/H100_A_FRESH_CROSS_CAPABILITY_FALSIFICATION_SUITE_V1.json",
+    "runner": "canonical/runtime/h100_a_fresh_cross_capability_falsification_runner_v1.py"
+  },
+  "observed": {
+    "ordinary_tasks_passed": 7,
+    "ordinary_tasks_total": 7,
+    "failure_classes": [],
+    "registry_reuse": {
+      "pass": true,
+      "holdout_nrmse": 2.719499671019307e-13
+    },
+    "unknown_structure_search": {
+      "pass": true,
+      "sequences_evaluated": 1554,
+      "first_exact_depth": 4,
+      "holdout_nrmse": 6.291949832518769e-13,
+      "selected_sequence": [
+        "log1p_abs",
+        "square",
+        "sat",
+        "sqrt_abs"
+      ]
+    },
+    "typed_planning": {
+      "pass": true,
+      "plan": [
+        "OP_LEXICAL_SOURCE_FALLBACK"
+      ],
+      "plan_length": 1,
+      "expanded_states": 2
+    },
+    "jit_lexical": {
+      "pass": true,
+      "cases": 2
+    },
+    "effect_tools": {
+      "pass": true,
+      "receipt_sha256": "f04e2238d93d2ab23a6a7cc803ecb45ca7a4d2250e02ed713ae08fb6c3ecc0b1",
+      "ledger_sha256": "83d4d84ce74b0f770643ff7842eedf0021e914d5884cdc20c155d8009ea93485"
+    },
+    "event_memory": {
+      "pass": true,
+      "event_count": 1736,
+      "restart_boundaries": [
+        578,
+        1157
+      ],
+      "final_state_key_count": 243
+    },
+    "synthetic_bar_geometry": {
+      "pass": true,
+      "cases": 4
+    },
+    "information_gap_positive_control": {
+      "pass": true,
+      "residual_equivalence_class": 2,
+      "target_adapted_bit_lower_bound": 1
+    }
+  },
+  "deduction": [
+    "ZERO_TARGET_ADAPTED_PERSISTENT_BITS_SURVIVED_THIS_BOUNDED_FRESH_CROSS_CAPABILITY_SUITE",
+    "THE_TOURNAMENT_DISTINGUISHED_A_TRUE_INFORMATION_GAP_FROM_ALGORITHM_FAILURE",
+    "THIS_RESULT_SHIFTS_PRIORITY_TOWARD_CAPABILITY_CLASSES_WITH_THE_LARGEST_REMAINING_LOWER_UPPER_BOUND_GAP_RATHER_THAN_RETESTING_SETTLED_SIMPLE_CASES"
+  ],
+  "hard_nonclaims": [
+    "BOUNDED_SUITE_IS_NOT_FRONTIER_CAPABILITY_PROOF",
+    "SYNTHETIC_BAR_GEOMETRY_IS_NOT_GENERAL_VISION",
+    "EXPLICIT_JIT_RELATIONS_MADE_LEXICAL_CASES_INFORMATION_COMPLETE",
+    "P0_SURVIVAL_DOES_NOT_PROVE_UNIVERSAL_ZERO_TARGET_ADAPTED_STATE"
+  ],
+  "promotion_authority": false
+}
