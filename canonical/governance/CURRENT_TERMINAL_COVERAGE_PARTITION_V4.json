@@ -8,8 +8,8 @@
     "git_blob_sha": "bd5a7986b2c52d0998135d777901c19dfb6a4c41"
   },
   "independent_verification": {
-    "path": "canonical/verification/TERMINAL_29_OBLIGATION_BASIS_SPRITE_VERIFICATION_20261006_V1.json",
-    "status": "PENDING"
+    "path": "canonical/verification/TERMINAL_29_OBLIGATION_BASIS_WOLFRAM_VERIFICATION_20261006_V1.json",
+    "status": "INDEPENDENT_WOLFRAM_EXACT_SET_AND_ROUTING_RECOMPUTATION_PASS__HOSTED_GITHUB_CHECKS_ZERO_STEP_NON_EVIDENCE"
   },
   "projection": {
     "truth_obligations": 29,
