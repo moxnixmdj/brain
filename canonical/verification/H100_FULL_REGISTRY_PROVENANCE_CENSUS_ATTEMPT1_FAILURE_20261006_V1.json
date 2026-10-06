@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_H100_FULL_REGISTRY_PROVENANCE_CENSUS_ATTEMPT1_FAILURE_20261006_V1",
+  "date": "2026-10-06",
+  "status": "FAIL__PREDECLARED_UNIQUE_CAPABILITY_ID_ASSUMPTION_FALSE__ONE_CROSS_GENERATION_ID_COLLISION_DISCOVERED__NO_SCIENTIFIC_CENSUS_RESULT_YET",
+  "subject": {
+    "precommit": "canonical/governance/H100_FULL_REGISTRY_PROVENANCE_CENSUS_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_full_registry_provenance_census_v1.py",
+    "tests": "canonical/tests/test_h100_full_registry_provenance_census_v1.py"
+  },
+  "observed": {
+    "registry_record_count_expected": 21,
+    "unique_stable_capability_ids_observed": 20,
+    "colliding_capability_id": "CAP_AFFINE_TANH_V1",
+    "first_definition": {
+      "generation": 3,
+      "source": "canonical/runtime/h100_verified_capability_registry_v3.py",
+      "source_git_blob_sha": "81b3cdebdbcfeb89eacd2cd4a247e3cb12a9d21a",
+      "family_id": "TANH",
+      "route": "GENERIC_PATCH_SEARCH_TRANSFER_V1",
+      "provenance_class_under_frozen_census": "STRICT_OUTCOME_SELECTED"
+    },
+    "second_definition": {
+      "generation": 6,
+      "source": "canonical/runtime/h100_verified_capability_registry_v6.py",
+      "source_git_blob_sha": "248c3390ce9554c0dedbdbbca37467b46477fcb9",
+      "family": "AFFINE_TANH",
+      "route": "VERIFIED_SAFE_STDLIB_OPERATOR_REFIT",
+      "provenance_class_under_frozen_census": "EXTERNAL_CAPABILITY_DEFINITION_PREOUTCOME_FIXED"
+    },
+    "prior_v6_test_gap": "REGISTRY_V6_TEST_ASSERTS_CAPABILITY_ID_BUT_NOT_MATCH_ROUTE_OR_ACQUISITION_PROVENANCE",
+    "test_outcome": "7_OF_7_CENSUS_TESTS_ERROR_BEFORE_RESULT_DUE_REGISTRY_ENTRY_CENSUS_NOT_21_UNIQUE"
+  },
+  "interpretation": "THE_CENSUS_UNIQUENESS_ASSUMPTION_WAS_FALSE__THE_STABLE_ID_COLLISION_DOES_NOT_BY_ITSELF_SHOW_THE_V6_TANH_ROUTE_FAILED__IT_SHOWS_STABLE_ID_ALONE_IS_NOT_A_SUFFICIENT_PROVENANCE_KEY",
+  "repair_rule": "PRESERVE_THE_FROZEN_CATEGORY_RULES__KEY_CENSUS_RECORDS_BY_REGISTRY_GENERATION_PLUS_CAPABILITY_ID__REPORT_STABLE_ID_COLLISIONS_EXPLICITLY__DO_NOT_DELETE_OR_RENAME_EXISTING_RECORDS_INSIDE_THIS_MEASUREMENT",
+  "hard_nonclaims": [
+    "NO_FULL_CENSUS_PASS_CLAIM_FROM_ATTEMPT1",
+    "NO_CLAIM_V6_TANH_ROUTE_IS_SHADOWED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
