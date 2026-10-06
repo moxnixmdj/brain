@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_ACTIVE_QUERY_CORE_V8_FREEZE",
+  "date": "2026-10-07",
+  "status": "FROZEN_BEFORE_ACTIVE_QUERY_CAMPAIGN__ZERO_TERMINAL_CREDIT",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "kernel": {
+    "path": "canonical/runtime/bytes_active_query_core_v8.py",
+    "raw_source_bytes": 4504,
+    "sha256": "49a937ddd1844b8c7bff967f4e1e6fe795de1cd90a4cb286835000bd334a38f8",
+    "git_blob_sha": "dc9df5f5f6fa1e15cdd09eed61e74f45f8590a16",
+    "fixed_decoder_payload_bytes": 1747,
+    "fixed_decoder_payload_sha256": "c60601f2a12453bc3d83af474759a0b3c82649c94e6471058548534ae0f1e830"
+  },
+  "active_acquisition": {
+    "version_space_function": "vp",
+    "query_selector_function": "aq",
+    "policy": "MINIMIZE_WORST_CASE_REMAINING_VERSION_SPACE__THEN_MAXIMIZE_OUTPUT_PARTITIONS__THEN_DETERMINISTIC_REPR_TIEBREAK",
+    "candidate_pool": "SUPPLIED_AT_RUNTIME_AS_TRANSIENT_ALLOWED_QUERY_SPACE",
+    "oracle_output": "TRANSIENT_TASK_INFORMATION_ONLY"
+  },
+  "prefreeze_regression": {
+    "expression_v3": "PASS_6_OF_6",
+    "discrete_sequence_v1": "PASS_8_OF_8",
+    "scalar_exact_v1": "PASS_9_OF_9"
+  },
+  "one_time_cost": {
+    "v7_payload_bytes": 1576,
+    "v8_payload_bytes": 1747,
+    "active_acquisition_premium_bytes": 171
+  },
+  "next_rule": "ONLY_AFTER_THIS_KERNEL_IS_FROZEN_MAY_AMBIGUOUS_ACTIVE_QUERY_TASKS_AND_THEIR_ALLOWED_QUERY_POOL_BE_DEFINED",
+  "hard_nonclaims": [
+    "NO_ACTIVE_QUERY_CAMPAIGN_CREDIT_YET",
+    "THE_RUNTIME_QUERY_POOL_IS_EXTERNAL_TASK_INTERFACE_DATA_AND_NOT_AN_INTERNALIZED_POOL_GENERATOR",
+    "NO_UNIVERSALITY_MINIMALITY_SELF_CONTAINED_RUNTIME_OR_TERMINAL_CREDIT"
+  ]
+}
