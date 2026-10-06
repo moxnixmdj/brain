@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_ZERO_SLACK_ARITHMETIC_SPRITE_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_ARITHMETIC_PASS__ZERO_CREDIT",
+  "carrier": {
+    "name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "input": {
+    "required_successes": 220,
+    "creditable_tasks": 44,
+    "trials_per_task": 5
+  },
+  "observed": {
+    "ceiling": 220,
+    "one_failure": 219,
+    "zero_slack": true,
+    "one_failure_impossible": true
+  },
+  "implication": "44*5=220_AND_219<220__ANY_FAILED_OR_UNPROVED_SUCCESS_SLOT_PREVENTS_A_SLOTWISE_THRESHOLD_LOWER_BOUND_FROM_REACHING_220",
+  "hard_nonclaims": [
+    "ARITHMETIC_PASS_IS_NOT_TB4_TASK_SUCCESS",
+    "NO_TERMINAL_CASE_EXECUTED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
