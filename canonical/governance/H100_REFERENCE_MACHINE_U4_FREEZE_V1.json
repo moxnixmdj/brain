@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REFERENCE_MACHINE_U4_FREEZE_V1",
+  "date": "2026-10-06",
+  "status": "ACTIVE_FINITE_M_REFERENCE__U1_PROGRAM_LANGUAGE_PLUS_LIVE_BIT_BUDGET",
+  "machine_id": "H100_U4_BIT_BOUNDED_U1",
+  "base_program_language": {
+    "machine_id": "H100_U1_STACK_VM",
+    "runtime_blob_sha": "3c289d90023682e135e6fe3f3f42b3049da3c247"
+  },
+  "content_address": {
+    "precommit_blob_sha": "38925c0adc9292e8273545bc1bf51aef6c9e41b3",
+    "runtime_blob_sha": "d55e8c3b1c8d56946fa27b4fef32f185cd993247",
+    "tests_blob_sha": "9146cfaa41244c26eeb7c0df55104f556a25a69d"
+  },
+  "metric": {
+    "integer_cost": "8_TIMES_CANONICAL_SLEB128_BYTES",
+    "live_state": "STACK+HEAP_KEYS+HEAP_VALUES+OUTPUT+LENGTH_FIELDS+PC+STEPS+INPUT_LENGTH",
+    "max_live_bits_enforced": true
+  },
+  "accounting": {
+    "target_program_encoding_identical_to_u1": true,
+    "target_program_bytes_count": true,
+    "runtime_input_R_separate": true,
+    "finite_M_is_bits": true
+  },
+  "promotion_authority": false
+}
