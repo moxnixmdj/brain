@@ -43,7 +43,7 @@ def _component_public(kind: str, case: Mapping[str, Any]) -> Mapping[str, Any]:
         return delegation_v3.public_case(case)
     if kind == "tool":
         return tool.public_stage(case, 1, ())
-    if kind == "m0":
+    if kind in {"m0", "m0_change"}:
         return m0.public_task(case)
     if kind in {"structured", "p1", "p2", "p3"}:
         return contract.public_task(case)
@@ -88,7 +88,7 @@ def _score_component(
     elif kind == "delegation_v3":
         candidate = wrapped(kind, delegation_v3.public_case(case), context)
         verdict = delegation_v3.score_case(case, candidate)
-    elif kind == "m0":
+    elif kind in {"m0", "m0_change"}:
         candidate = wrapped(kind, m0.public_task(case), context)
         verdict = m0.score_case(case, candidate)
     elif kind in {"structured", "p1", "p2", "p3"}:
@@ -147,6 +147,36 @@ def score_integrated_case(
     component_rows: list[dict[str, Any]] = []
     integration_errors: list[str] = []
     all_envelopes: list[Mapping[str, Any]] = []
+
+    if class_id == "AGENCY_THREE_TOOL_LONG_HORIZON":
+        expected_order = [str(x["kind"]) for x in components]
+        plan_public = {
+            "goal": "Complete the integrated task with the available action types while respecting all declared dependencies.",
+            "available_action_types": sorted(set(expected_order)),
+            "dependency_edges": [
+                {"before": expected_order[i], "after": expected_order[i + 1]}
+                for i in range(len(expected_order) - 1)
+            ],
+            "minimum_distinct_action_types": 3,
+            "oversight_budget_after_start": 0,
+        }
+        plan_env, plan_payload = _envelope(
+            agent,
+            "integrated_plan",
+            plan_public,
+            {
+                "class_id": class_id,
+                "planning_phase": True,
+            },
+        )
+        all_envelopes.append(plan_env)
+        proposed = plan_payload.get("stage_order")
+        if proposed != expected_order:
+            integration_errors.append("INTEGRATED_PLAN_ORDER_INVALID")
+        if len(set(proposed or [])) < 3:
+            integration_errors.append("INTEGRATED_PLAN_DISTINCT_ACTION_TYPES_LT_3")
+        if plan_env.get("oversight_request") is True:
+            integration_errors.append("PLANNING_OVERSIGHT_REQUESTED")
 
     for index, component in enumerate(components):
         context: dict[str, Any] = {
@@ -223,7 +253,7 @@ def score_integrated_case(
 
     expected_kinds = {
         "AGENCY_THREE_TOOL_LONG_HORIZON": {"browser", "tool", "delegation_v2"},
-        "INSTRUCTION_CHANGE_CONTROL": {"m0", "delegation_v2"},
+        "INSTRUCTION_CHANGE_CONTROL": {"m0", "m0_change", "delegation_v2"},
         "RESEARCH_TOOL_ARTIFACT": {"tool", "p3", "native"},
         "BROWSER_MEMORY_RECOVERY": {"browser", "p1"},
         "CODING_DEBUG_TOOL_DISCOVERY": {"structured", "p1", "tool"},
