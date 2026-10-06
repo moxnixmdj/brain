@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CV_BAR_FAMILY_TEST_SPLIT_HOLDOUT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__FROZEN_AFTER_DEV14_BEFORE_TEST_SPLIT_OUTPUTS",
+  "parser": "canonical/runtime/h100_deterministic_cv_bar_family_v1.py",
+  "development_result": {
+    "cases": 14,
+    "correct": 10,
+    "accuracy": 0.7142857142857143,
+    "source_holdout_sha256": "6d3b1f3128924bf4dae36dad808d2d7c2a671dc6ec4064a053308f9b9b7b4bb6"
+  },
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "target_adapted_deterministic_code_bytes_upper_bound": 3305,
+    "generic_dependency": "opencv-python-headless==4.10.0.84",
+    "generic_dependency_counted_separately": true
+  },
+  "holdout": {
+    "chartqa_commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+    "annotation_path": "ChartQA Dataset/test/test_human.json",
+    "image_path_prefix": "ChartQA Dataset/test/png/",
+    "query_filter": "SAME_PURE_TOTAL_BAR_COUNT_PATTERNS_AS_V1",
+    "selection": "LOWEST_SHA256_OF_SEED_INDEX_IMAGE_AMONG_UNSEEN_MATCHES",
+    "seed": "H100_CV_BAR_FAMILY_TEST_SPLIT_HOLDOUT_V1__2026-10-06",
+    "target_cases": 20
+  },
+  "pass_gate": {
+    "minimum_exact_accuracy": 0.7
+  },
+  "parser_mutation_after_holdout_freeze": false,
+  "hard_nonclaims": [
+    "PURE_TOTAL_BAR_COUNT_ONLY",
+    "NO_GENERAL_VISION_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
