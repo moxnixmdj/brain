@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_H100_RESOURCE_BOUNDED_CAPABILITY_BOUND_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__4_OF_4__ZERO_TERMINAL_CREDIT",
+  "carrier": "brain-h100-independent-replay-v1",
+  "verified": {
+    "total_bits_lower_bound": "CEIL_LOG2_FUNCTION_CLASS_SIZE",
+    "learned_bits_with_code_budget": "MAX_0_TOTAL_BITS_MINUS_CODE_BITS",
+    "boolean_function_class_n3_total_bits": 8,
+    "boolean_function_class_n4_total_bits": 16
+  },
+  "deduction": "POSITIVE_LEARNED_BIT_LOWER_BOUND_CAN_APPEAR_ONLY_AFTER_DETERMINISTIC_CAPABILITY_CODE_IS_ALSO_BOUNDED",
+  "h100_terminal_credit_delta": 0,
+  "promotion_authority": false
+}
