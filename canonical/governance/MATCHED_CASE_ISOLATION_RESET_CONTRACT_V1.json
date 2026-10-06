@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_CASE_ISOLATION_RESET_CONTRACT_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__CONDITIONAL_CASE_ISOLATION_THEOREM__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem": "BRAIN_FIRST_DIFFERENTIAL_PREWAVE_REQUIRES_CASE_OUTCOMES_TO_BE_INDEPENDENT_ACROSS_CASES_OR_THE_HARNESS_TO_RESET_TO_AN_EQUIVALENT_PRECASE_STATE_SO_RESIDUAL_ONLY_OPUS_EXECUTION_PRESERVES_THE_FULL_PORTFOLIO_COUNTERFACTUAL",
+  "applies_to": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+  ],
+  "contract": {
+    "common_immutable_base_state": true,
+    "unique_mutable_namespace_per_case": true,
+    "brain_and_opus_identical_case_initial_state": true,
+    "no_prior_case_inputs": true,
+    "cross_case_persistent_memory_disabled": true,
+    "cross_case_mutable_cache_disabled": true,
+    "shared_dependencies_read_only": true,
+    "all_mutable_sinks_namespaced_or_restored": true,
+    "post_case_namespace_destroyed": true,
+    "external_mutable_state_restored": true,
+    "post_reset_base_state_equals_pre_case_base_state": true,
+    "no_result_dependent_case_generation": true,
+    "no_result_dependent_runtime_mutation": true,
+    "future_opus_execution_uses_same_namespace_and_reset_semantics": true
+  },
+  "theorem": "IF_EVERY_CASE_STARTS_FROM_AN_IDENTICAL_CONTENT_BOUND_BASE_PLUS_ITS_OWN_CASE_PAYLOAD__HAS_A_UNIQUE_MUTABLE_NAMESPACE__CONSUMES_NO_PRIOR_CASE_RESULTS_OR_MUTABLE_STATE__ALL_MUTABLE_EFFECTS_ARE_NAMESPACED_OR_RESTORED__AND_POST_CASE_RESET_RETURNS_TO_THE_IDENTICAL_BASE__THEN_CASE_OUTCOME_SEMANTICS_ARE_ORDER_INDEPENDENT_WITH_RESPECT_TO_CROSS_CASE_MUTABLE_STATE_AND_RUNNING_OPUS_ONLY_ON_THE_BRAIN_FAILURE_RESIDUAL_PRESERVES_THE_FULL_PORTFOLIO_CASE_COUNTERFACTUAL.",
+  "falsifiers": [
+    "A_CASE_READS_PRIOR_CASE_OUTPUT_OR_MUTABLE_MEMORY",
+    "A_MUTABLE_CACHE_OR_EXTERNAL_SERVICE_STATE_SURVIVES_AND_CAN_AFFECT_LATER_CASES",
+    "BRAIN_AND_OPUS_RECEIVE_DIFFERENT_INITIAL_CASE_STATE",
+    "A_CASE_SIDE_EFFECT_ESCAPES_THE_CASE_NAMESPACE_WITHOUT_VERIFIED_RESTORE",
+    "POST_CASE_RESET_DOES_NOT_RETURN_TO_THE_BOUND_BASE_STATE",
+    "CASE_GENERATION_OR_RUNTIME_CONFIGURATION_CHANGES_FROM_PRIOR_RESULTS"
+  ],
+  "runtime": "canonical/runtime/matched_case_isolation_reset_v1.py",
+  "tests": "canonical/tests/test_matched_case_isolation_reset_v1.py",
+  "hard_nonclaims": [
+    "NO_CURRENT_T2_CASE_UNIVERSE_BOUND",
+    "NO_CURRENT_REAL_HARNESS_RECEIPTS_SATISFYING_THIS_CONTRACT",
+    "NO_CLAIM_EXTERNAL_WEB_OR_ACCOUNT_STATE_IS_RESETTABLE_UNTIL_THE_ACTUAL_HARNESS_PROVES_IT",
+    "NO_FRESH_REALITY_OR_CASE_GENERATION_AUTHORITY",
+    "NO_TERMINAL_PREDICATE_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
