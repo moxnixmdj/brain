@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TEXT_CHART_SCALE_REPAIR_SECOND_CARRIER_RESULT_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS_2_OF_3__THIRD_CASE_OBSERVATION_INFORMATION_LOSS_PROVED",
+  "observed": {
+    "SCALE_FRESH_A": "PASS",
+    "SCALE_FRESH_B": "PASS",
+    "SCALE_FRESH_C": {
+      "status": "FAIL_EXACT_GOLD",
+      "parser_output": {
+        "categories": [
+          "D",
+          "A",
+          "B"
+        ],
+        "series": {
+          "R": [
+            4,
+            10,
+            4
+          ],
+          "S": [
+            8,
+            4,
+            6
+          ]
+        }
+      },
+      "private_gold": {
+        "categories": [
+          "D",
+          "A",
+          "B"
+        ],
+        "series": {
+          "R": [
+            5,
+            10,
+            3
+          ],
+          "S": [
+            8,
+            4,
+            6
+          ]
+        }
+      },
+      "pixels_per_unit": 0.5,
+      "integer_domain": [
+        0,
+        30
+      ],
+      "preimage_class_sizes_per_bar": [
+        3,
+        1,
+        3,
+        3,
+        1,
+        3
+      ],
+      "joint_observation_equivalence_class_size": 81,
+      "missing_instance_information_lower_bound_bits": 7
+    }
+  },
+  "causal_class": "LOSSY_OBSERVATION_CHANNEL__INSTANCE_INFORMATION_GAP",
+  "deduction": [
+    "EXACT_HIDDEN_DATA_RECOVERY_IS_NOT_GUARANTEED_WHEN_MULTIPLE_SOURCE_TABLES_MAP_TO_THE_SAME_RASTER",
+    "MISSING_INSTANCE_BITS_ARE_NOT_PERSISTENT_CAPABILITY_BITS",
+    "LEARNED_PRIORS_CAN_CHANGE_GUESS_PROBABILITY_BUT_CANNOT_GUARANTEE_ARBITRARY_HIDDEN_VALUES"
+  ],
+  "promotion_authority": false
+}
