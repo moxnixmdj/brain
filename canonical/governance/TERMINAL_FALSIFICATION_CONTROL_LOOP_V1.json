@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_TERMINAL_FALSIFICATION_CONTROL_LOOP_V1",
   "date": "2026-10-06",
   "status": "CANDIDATE__AUTHORITATIVE_TERMINAL_SEARCH_CONTROL_GRAPH__ZERO_TERMINAL_CREDIT",
-  "canonical_base_commit": "cd1a8618211f9f67aa9caf74e47150467c6048ca",
+  "canonical_base_commit": "c8c91ddd100dca4c4800245fee0b2577f22ee6c1",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_truth_state": {
     "proved_atomic": 14,
@@ -39,16 +39,28 @@
     {
       "path": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_ROOT3_PRODUCTION_BOOTSTRAP_REPAIR_ACTIVATION_20261006_V1.json",
       "git_blob_sha": "e561ac602b49d2579a7fd3d39811a5453067c1e1"
+    },
+    {
+      "path": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
+      "git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c"
+    },
+    {
+      "path": "canonical/verification/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_SPRITE_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "954ed383aa79fd8838249e58b0c848e338ea44de"
+    },
+    {
+      "path": "canonical/verification/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_FALSIFICATION_20261006_V1.json",
+      "git_blob_sha": "f308c0bce3cdff8b8c523e231d337c68f1ed976f"
     }
   ],
   "controller": {
     "runtime": {
       "path": "canonical/runtime/terminal_falsification_control_loop_v1.py",
-      "git_blob_sha": "fba9344e75e669bb1c5cefcb50d3b489ae8dbd56"
+      "git_blob_sha": "ffcb66fccb1db5ce6e2d4f30ae13e0e6746b8db7"
     },
     "tests": {
       "path": "canonical/tests/test_terminal_falsification_control_loop_v1.py",
-      "git_blob_sha": "3b6fa5170594d191740fd154262455da0b57395c"
+      "git_blob_sha": "b7dd1d89c9318a0864a018ed9684ed5e8b29bd5a"
     }
   },
   "control_invariants": [
@@ -81,7 +93,7 @@
     {
       "id": "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2",
       "lane": "UNIVERSE_AUTHORITY",
-      "status": "ACTIVE",
+      "status": "PROVED",
       "successor_of": "C_TERMINAL_BASIS_CURRENT32",
       "cost_units": 1,
       "target_truth_obligations": [
@@ -93,7 +105,38 @@
         "SOURCE_SURFACE_ESCAPE",
         "COMPOSITION_ESCAPE",
         "TWO_WORLDS_TERMINAL_COUNTERMODEL"
-      ]
+      ],
+      "proof_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
+          "git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c"
+        },
+        {
+          "path": "canonical/verification/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_SPRITE_VERIFICATION_20261006_V1.json",
+          "git_blob_sha": "954ed383aa79fd8838249e58b0c848e338ea44de"
+        }
+      ],
+      "claim": "STRUCTURAL_SCOPE_SUPERSET_ONLY__EVERY_EXTERNALLY_USEFUL_OPUS55_CAPABILITY_IS_REPRESENTABLE_IN_THE_OBSERVABLE_TRACE_SUPERSET__UNIVERSAL_BRAIN_DOMINANCE_REMAINS_OPEN"
+    },
+    {
+      "id": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+      "lane": "UNIVERSE_AUTHORITY",
+      "status": "ACTIVE",
+      "cost_units": 1,
+      "target_truth_obligations": [
+        "LITERAL_ALL_USEFUL_OPUS55_OBSERVABLE_BEHAVIOR_DOMINANCE"
+      ],
+      "target_truth_obligation_count": 1,
+      "depends_on": [
+        "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2"
+      ],
+      "falsifiers": [
+        "TASK_WITHIN_TRACE_SCOPE_NOT_COVERED_BY_ANY_SOUND_ACCEPTANCE_OR_META_CERTIFICATE",
+        "CONDITION_OR_COMPOSITION_INTERACTION_NOT_PRESERVED",
+        "RESOURCE_OR_SAFETY_OUTCOME_NOT_DOMINATED",
+        "DONOR_OR_EXTERNAL_RUNTIME_DEPENDENCY"
+      ],
+      "claim": "PROVE_CURRENT_ACCEPTANCE_META_CONDITION_RESOURCE_SAFETY_AND_OWNERSHIP_MACHINERY_SOUNDLY_ESTABLISHES_BRAIN_EQUAL_OR_BETTER_THAN_OPUS55_OVER_THE_STRUCTURALLY_COVERED_OBSERVABLE_TRACE_SUPERSET_OR_LOCALIZE_THE_MINIMAL_UNCOVERED_BEHAVIOR_CLASS"
     },
     {
       "id": "C_ROOT3_SHARED_UNIVERSAL",
@@ -219,7 +262,7 @@
     }
   ],
   "expected_current_schedule": [
-    "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2",
+    "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
     "C_BENCHMARK_WITNESS_ELIMINATION_V3",
     "C_EFFECT_BOUNDARY_PRODUCTION_BOOTSTRAP_REPAIR_V3",
     "C_CONDITION_RESTRICTION_AND_INTERACTION_CLOSURE_V2",
