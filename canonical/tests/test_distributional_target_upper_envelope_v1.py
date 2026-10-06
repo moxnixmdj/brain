@@ -3,7 +3,8 @@ import unittest
 from canonical.runtime.distributional_target_upper_envelope_v1 import (
     support,
     weakly_dominates,
-    target_upper_envelope_covered,
+    portfolio_upper_envelope_covered,
+    deployed_kernel_dominates,
 )
 
 
@@ -29,11 +30,7 @@ class DistributionalTargetUpperEnvelopeTests(unittest.TestCase):
         target_b = {"b": 1.0}
         brain_a = {"a": 1.0}
         self.assertFalse(
-            weakly_dominates(
-                brain_a,
-                target_b,
-                evaluators=[QUALITY_A, QUALITY_B],
-            )
+            weakly_dominates(brain_a, target_b, evaluators=[QUALITY_A, QUALITY_B])
         )
 
     def test_hard_constraint_nonregression_is_load_bearing(self):
@@ -52,26 +49,92 @@ class DistributionalTargetUpperEnvelopeTests(unittest.TestCase):
         target = {"success": 1.0}
         candidates = [{"brain_owned": False, "law": {"success": 1.0}}]
         self.assertFalse(
-            target_upper_envelope_covered(
+            portfolio_upper_envelope_covered(
                 candidates,
                 [target],
                 evaluators=[SUCCESS],
             )
         )
 
-    def test_every_target_law_requires_owned_cover(self):
+    def test_strictly_better_owned_law_can_cover_weaker_targets(self):
         targets = [
             {"failure": 0.01, "success": 0.99},
             {"success": 1.0},
         ]
-        candidates = [
-            {"brain_owned": True, "law": {"success": 1.0}},
-        ]
+        candidates = [{"brain_owned": True, "law": {"success": 1.0}}]
         self.assertTrue(
-            target_upper_envelope_covered(
+            portfolio_upper_envelope_covered(
                 candidates,
                 targets,
                 evaluators=[SUCCESS],
+            )
+        )
+
+    def test_existential_portfolio_can_hide_deployed_router_failure(self):
+        target_a = {"a": 1.0}
+        target_b = {"b": 1.0}
+        candidates = [
+            {"brain_owned": True, "law": target_a},
+            {"brain_owned": True, "law": target_b},
+        ]
+        self.assertTrue(
+            portfolio_upper_envelope_covered(
+                candidates,
+                [target_a, target_b],
+                evaluators=[{"a": 1.0, "b": 1.0}],
+            )
+        )
+
+        target_by_context = {"request_a": target_a, "request_b": target_b}
+        brain_by_context = {
+            "request_a": {"brain_owned": True, "law": target_a},
+            "request_b": {"brain_owned": True, "law": target_a},
+        }
+        evaluators_by_context = {
+            "request_a": [QUALITY_A],
+            "request_b": [QUALITY_B],
+        }
+        self.assertFalse(
+            deployed_kernel_dominates(
+                brain_by_context,
+                target_by_context,
+                evaluators_by_context=evaluators_by_context,
+            )
+        )
+
+    def test_correct_deployed_context_router_passes(self):
+        target_by_context = {
+            "request_a": {"a": 1.0},
+            "request_b": {"b": 1.0},
+        }
+        brain_by_context = {
+            "request_a": {"brain_owned": True, "law": {"a": 1.0}},
+            "request_b": {"brain_owned": True, "law": {"b": 1.0}},
+        }
+        evaluators_by_context = {
+            "request_a": [QUALITY_A],
+            "request_b": [QUALITY_B],
+        }
+        self.assertTrue(
+            deployed_kernel_dominates(
+                brain_by_context,
+                target_by_context,
+                evaluators_by_context=evaluators_by_context,
+            )
+        )
+
+    def test_missing_context_fails_closed(self):
+        self.assertFalse(
+            deployed_kernel_dominates(
+                {"request_a": {"brain_owned": True, "law": {"a": 1.0}}},
+                {
+                    "request_a": {"a": 1.0},
+                    "request_b": {"b": 1.0},
+                },
+                evaluators_by_context={
+                    "request_a": [QUALITY_A],
+                    "request_b": [QUALITY_B],
+                },
             )
         )
 
