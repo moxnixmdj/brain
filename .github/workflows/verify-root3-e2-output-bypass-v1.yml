@@ -1,0 +1,26 @@
+name: Verify Root3 E2 output bypass V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/root3_e2_output_bypass_falsifier_v1.py"
+      - "canonical/tests/test_root3_e2_output_bypass_falsifier_v1.py"
+      - "canonical/governance/ROOT3_E2_OUTPUT_BYPASS_COUNTEREXAMPLE_20261006_V1.json"
+      - ".github/workflows/verify-root3-e2-output-bypass-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m py_compile canonical/runtime/root3_e2_output_bypass_falsifier_v1.py
+      - run: python -m pytest -q canonical/tests/test_root3_e2_output_bypass_falsifier_v1.py
