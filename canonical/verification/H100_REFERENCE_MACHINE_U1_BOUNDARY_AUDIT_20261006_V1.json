@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REFERENCE_MACHINE_U1_BOUNDARY_AUDIT_20261006_V1",
+  "date": "2026-10-06",
+  "status": "U1_NOT_ADMISSIBLE_AS_K_U_T_M_REFERENCE_MACHINE__WORKING_MEMORY_UNBOUNDED",
+  "subject": {
+    "precommit": "canonical/governance/H100_REFERENCE_MACHINE_U1_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_reference_machine_u1_v1.py"
+  },
+  "defect": [
+    "EXECUTE_HAS_STEP_LIMIT_BUT_NO_MEMORY_CELL_LIMIT",
+    "STACK_HAS_NO_DEPTH_LIMIT",
+    "PYTHON_INTEGERS_ARE_UNBOUNDED_WIDTH",
+    "OUTPUT_VECTOR_HAS_NO_LENGTH_LIMIT"
+  ],
+  "consequence": "U1_MAY_BE_USED_FOR_PROTOTYPING_BUT_NOT_FOR_RESOURCE_BOUNDED_K_U_T_M_CLAIMS",
+  "required_repair": [
+    "FIXED_VALUE_WIDTH",
+    "FIXED_MEMORY_CELLS",
+    "STACK_LIMIT",
+    "OUTPUT_LIMIT",
+    "STEP_LIMIT"
+  ],
+  "promotion_authority": false
+}
