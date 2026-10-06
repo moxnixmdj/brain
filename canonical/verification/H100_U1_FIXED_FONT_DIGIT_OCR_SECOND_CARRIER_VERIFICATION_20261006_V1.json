@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_FIXED_FONT_DIGIT_OCR_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__10_OF_10_EXACT_SCOPE",
+  "reference_machine": "H100_U1_STACK_VM",
+  "program_precommit": "canonical/governance/H100_U1_FIXED_FONT_DIGIT_OCR_PROGRAM_PRECOMMIT_V1.json",
+  "observed": {
+    "raw_program_bytes": 192,
+    "raw_program_bits": 1536,
+    "exact_glyphs_passed": 10,
+    "exact_glyphs_total": 10,
+    "unknown_glyph_fail_closed": true,
+    "learned_target_bytes": 0
+  },
+  "conclusion": "EXACT_ONE_FIXED_5X7_DIGIT_FONT_SCOPE_HAS_EXPLICIT_U1_UPPER_BOUND_1536_BITS",
+  "hard_nonclaims": [
+    "NO_NOISE_ROBUSTNESS",
+    "NO_FONT_GENERALIZATION",
+    "NO_FULL_OCR"
+  ],
+  "promotion_authority": false
+}
