@@ -1,0 +1,174 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ISSUE_JIT_OEWN_QUERY_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_SOURCE_ACQUISITION_BEFORE_RESOLVER_OUTCOME",
+  "source_url": "https://en-word.net/api/lemma/issue",
+  "source_observation_date": "2026-10-06",
+  "cue": "issue",
+  "context": "a phenomenon that follows from a previous event",
+  "expected_role": "TARGET",
+  "expected_synset": "11430739-n",
+  "records": [
+    {
+      "id": "01062158-n",
+      "members": [
+        "issue",
+        "issuing",
+        "issuance"
+      ],
+      "definition": "the act of providing an item for general use or for official purposes (usually in quantity)",
+      "examples": [
+        "a new issue of stamps",
+        "the last issue of penicillin was over a month ago"
+      ],
+      "lexname": "noun.act"
+    },
+    {
+      "id": "01105519-n",
+      "members": [
+        "issue",
+        "publication"
+      ],
+      "definition": "the act of issuing printed materials",
+      "examples": [],
+      "lexname": "noun.act"
+    },
+    {
+      "id": "03308910-n",
+      "members": [
+        "exit",
+        "issue",
+        "outlet",
+        "way out"
+      ],
+      "definition": "an opening that permits escape or release",
+      "examples": [
+        "he blocked the way out",
+        "the canyon had only one issue"
+      ],
+      "lexname": "noun.artifact"
+    },
+    {
+      "id": "05822417-n",
+      "members": [
+        "topic",
+        "subject",
+        "issue",
+        "matter"
+      ],
+      "definition": "some situation or event that is thought about",
+      "examples": [
+        "he kept drifting off the topic",
+        "he had been thinking about the subject for several years",
+        "it is a matter for the police"
+      ],
+      "lexname": "noun.cognition"
+    },
+    {
+      "id": "05822776-n",
+      "members": [
+        "issue"
+      ],
+      "definition": "an important question that is in dispute and must be settled",
+      "examples": [
+        "the issue could be settled by requiring public education for everyone",
+        "politicians never discuss the real issues"
+      ],
+      "lexname": "noun.cognition"
+    },
+    {
+      "id": "06609182-n",
+      "members": [
+        "issue",
+        "number"
+      ],
+      "definition": "one of a series published periodically",
+      "examples": [
+        "she found an old issue of the magazine in her dentist's waiting room"
+      ],
+      "lexname": "noun.communication"
+    },
+    {
+      "id": "07334509-n",
+      "members": [
+        "emergence",
+        "egress",
+        "issue"
+      ],
+      "definition": "the becoming visible",
+      "examples": [
+        "not a day's difference between the emergence of the andrenas and the opening of the willow catkins"
+      ],
+      "lexname": "noun.event"
+    },
+    {
+      "id": "10393697-n",
+      "members": [
+        "offspring",
+        "progeny",
+        "issue"
+      ],
+      "definition": "the immediate descendants of a person",
+      "examples": [
+        "she was the mother of many offspring",
+        "he died without issue"
+      ],
+      "lexname": "noun.person"
+    },
+    {
+      "id": "11430739-n",
+      "members": [
+        "consequence",
+        "effect",
+        "outcome",
+        "result",
+        "event",
+        "issue",
+        "upshot"
+      ],
+      "definition": "a phenomenon that follows and is caused by some previous phenomenon",
+      "examples": [
+        "the magnetic effect was greater when the rod was lengthwise",
+        "his decision had depressing consequences for business",
+        "he acted very wise after the event"
+      ],
+      "lexname": "noun.phenomenon"
+    },
+    {
+      "id": "13281089-n",
+      "members": [
+        "return",
+        "issue",
+        "take",
+        "takings",
+        "proceeds",
+        "yield",
+        "payoff"
+      ],
+      "definition": "the income or profit arising from such transactions as the sale of land or other property",
+      "examples": [
+        "the average return was about 5%"
+      ],
+      "lexname": "noun.possession"
+    },
+    {
+      "id": "13388766-n",
+      "members": [
+        "issue",
+        "military issue",
+        "government issue"
+      ],
+      "definition": "supplies (as food or clothing or ammunition) issued by the government",
+      "examples": [],
+      "lexname": "noun.possession"
+    }
+  ],
+  "runtime": "canonical/runtime/h100_oewn_lexical_acquisition_v1.py",
+  "anchors_source": "canonical/governance/H100_OEWN_REAL_LEXICAL_KNOWLEDGE_V1.json",
+  "target_adapted_persistent_bits_added": 0,
+  "hard_nonclaims": [
+    "PUBLIC_SOURCE_QUERY_IS_RUNTIME_KNOWLEDGE_NOT_PERSISTENT_SEMANTIC_STATE",
+    "ONE_LEMMA_DOES_NOT_PROVE_OPEN_WORLD_LEXICAL_COMPLETENESS"
+  ],
+  "promotion_authority": false
+}
