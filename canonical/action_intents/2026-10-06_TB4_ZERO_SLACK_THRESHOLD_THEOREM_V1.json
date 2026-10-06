@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "TB4-ZERO-SLACK-THRESHOLD-THEOREM-20261006-SOL",
+  "status": "CANDIDATE__CURRENT_BASE_BOUND__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "15b9b78a4708e49260e241f50cbfc13da42aac9d",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "CODING_TB4_GE_66_4__PARTIAL_THRESHOLD_LOWER_BOUND_FALSE_ECONOMY",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::CODING_TB4_GE_66_4__PARTIAL_THRESHOLD_LOWER_BOUND_FALSE_ECONOMY",
+  "expected_parent_frontier_change": "Prove that the current reopened TB4 creditable set has zero score slack: 44 tasks x 5 trials = 220 successes exactly, so any single failed or unproved success slot prevents a >=220 threshold certificate. Demote partial lower-bound synthesis and require either all 220 success slots or a sound stronger universal certificate.",
+  "highest_leverage_now": true,
+  "stop_condition": "The zero-slack theorem is content-addressed and independently arithmetic-replayed; TB4 partial lower-bound work is deleted while threshold truth remains open and zero terminal credit is granted.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "4b53c382945552583a6279550594a1f0f890c11f",
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "proof_state_reachability": "FALSIFIES_PARTIAL_THRESHOLD_LOWER_BOUND_AS_A_CHEAP_CLOSURE_ROUTE_UNDER_THE_CURRENT_REOPENED_44_TASK_ZERO_SLACK_CEILING",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 24,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 18,
+      "root3_touching_count": 9,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 32,
+      "terminal": false
+    },
+    "tournament": {
+      "proposal_id": "P_TB4_PARTIAL_THRESHOLD_LOWER_BOUND_CAN_CLOSE",
+      "falsifier_id": "F_TB4_ZERO_SLACK_ARITHMETIC",
+      "decisive_question": "After the exact eight-task attainability reopen, can fewer than all 220 creditable success slots soundly prove CODING_TB4_GE_66_4?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+          "git_blob_sha": "fc5bb61b1b97e6aae46222b9de84e16797510bcc"
+        }
+      ]
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
