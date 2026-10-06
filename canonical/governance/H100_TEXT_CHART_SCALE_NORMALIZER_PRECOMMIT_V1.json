@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TEXT_CHART_SCALE_NORMALIZER_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_REPAIR_IMPLEMENTATION_AND_FRESH_POST_REPAIR_OUTCOMES",
+  "base_parser": "canonical/runtime/h100_text_axis_legend_parser_v1.py",
+  "strategy": {
+    "integer_scale_candidates": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "phase_search": "ALL_X_Y_PHASES_FOR_EACH_SCALE",
+    "downsample": "TAKE_ONE_PIXEL_PER_SCALE_BLOCK_BY_PHASE",
+    "acceptance": "RETURN_ONLY_IF_AT_LEAST_ONE_PARSE_SUCCEEDS_AND_ALL_SUCCESSFUL_PARSES_ARE_IDENTICAL",
+    "ambiguity": "FAIL_CLOSED"
+  },
+  "target_adapted_learned_bytes": 0,
+  "promotion_authority": false
+}
