@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_H100_INDEPENDENT_A_RESEARCH_FRONTIER_20261006_V2",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_FRONTIER__ZERO_LEARNED_SPLIT_INTO_SYNTACTIC_AND_PROVENANCE_LEDGER__PROVENANCE_ZERO_FALSIFIED",
+  "objective": "Determine the minimum genuinely learned persistent state required for frontier-level capability while making the accounting invariant to representation changes.",
+  "established": [
+    "MISSING_INFORMATION_CANNOT_BE_CREATED_BY_SEARCH_OR_COMPUTE",
+    "JIT_RUNTIME_EVIDENCE_CAN_REPLACE_PERSISTENT_WORLD_DEPENDENT_BITS_BY_SPLITTING_RESIDUAL_AMBIGUITY",
+    "INPUT_COMPLETE_TOTAL_COMPUTABLE_TASKS_HAVE_ZERO_LOGICAL_LEARNED_STATE_NECESSITY_IF_WORLD_INDEPENDENT_DETERMINISTIC_PROGRAM_STATE_IS_ACCOUNTED_SEPARATELY",
+    "LOSSLESS_REENCODING_CANNOT_ERASE_DATA_DEPENDENT_INFORMATION",
+    "AT_LEAST_FOUR_CURRENT_COMPILED_SYMBOLIC_CAPABILITIES_ARE_PERSISTENT_DATA_SELECTED_STATE"
+  ],
+  "ledger_truth": {
+    "SYNTACTIC_V0": {
+      "current_zero_learned_hypothesis_survives": true,
+      "interpretation": "DETERMINISTIC_PROGRAM_CONTAINER_IS_EXEMPT_REGARDLESS_OF_PROVENANCE"
+    },
+    "PROVENANCE_V1": {
+      "current_zero_learned_hypothesis_survives": false,
+      "exact_learned_origin_bytes": null,
+      "interpretation": "PERSISTENT_DATA_DEPENDENT_CAPABILITY_VALUES_COUNT_REGARDLESS_OF_CONTAINER"
+    }
+  },
+  "next_experiments_ranked": [
+    {
+      "rank": 1,
+      "experiment": "FULL_REGISTRY_PROVENANCE_CENSUS_AND_MINIMAL_ENCODING",
+      "goal": "Classify every persisted Registry V1-V8 capability entry by provenance and construct a conservative compact encoding for all data-selected persistent structures."
+    },
+    {
+      "rank": 2,
+      "experiment": "VISION_PROVENANCE_AND_ALGORITHMIC_DECOMPOSITION",
+      "goal": "Separate UniChart's learned-origin visual knowledge from world-independent inference machinery and measure what can be externalized or replaced by deterministic/JIT structure without benchmark leakage."
+    },
+    {
+      "rank": 3,
+      "experiment": "RESOURCE_PARETO_CENSUS",
+      "goal": "Measure B learned-origin bits, L deterministic capability bits, T runtime, E external information, and S task state for representative capability classes."
+    }
+  ],
+  "escalation_policy": "DO_NOT_CALL_THE_RUNG_ZERO_WITHOUT_NAMING_THE_LEDGER__UNDER_PROVENANCE_V1_MOVE_TO_THE_SMALLEST_NONZERO_RUNG_ONLY_AFTER_COMPACTING_AND_MEASURING_ALL_DATA_DEPENDENT_PERSISTENT_CAPABILITY_STATE",
+  "hard_nonclaims": [
+    "PROVENANCE_V1_TOTAL_BYTES_NOT_YET_MEASURED",
+    "NO_CLAIM_CURRENT_STATE_EXCEEDS_1_MB",
+    "NO_OPUS55_EQUIVALENCE_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
