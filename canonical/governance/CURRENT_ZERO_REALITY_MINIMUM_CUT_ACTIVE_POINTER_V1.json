@@ -304,7 +304,7 @@
   "terminal_falsification_control_loop": {
     "status": "ACTIVE_IF_THIS_POINTER_IS_MERGED__HIGHER_ORDER_SCHEDULING_CONTROL__ZERO_TERMINAL_CREDIT",
     "governance": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V1.json",
-    "governance_git_blob_sha": "14b76bc0196f06b4b5e37ebb13b81f32b0053790",
+    "governance_git_blob_sha": "25cb782f570e6a66ce673c6fb751c4114b64dd93",
     "activation": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_ACTIVATION_20261006_V1.json",
     "activation_git_blob_sha": "40d3717dd3825ede7d49a8ee0bf126051f18bf99",
     "runtime": "canonical/runtime/terminal_falsification_control_loop_v1.py",
@@ -341,7 +341,7 @@
     },
     "root3_production_bootstrap_repair_activation": {
       "path": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_ROOT3_PRODUCTION_BOOTSTRAP_REPAIR_ACTIVATION_20261006_V1.json",
-      "git_blob_sha": "a6b3510de8111ed77c345743aaf975997719279c"
+      "git_blob_sha": "e561ac602b49d2579a7fd3d39811a5453067c1e1"
     }
   }
 }
