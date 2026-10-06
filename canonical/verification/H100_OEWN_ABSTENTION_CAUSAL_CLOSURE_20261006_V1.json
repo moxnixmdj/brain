@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_H100_OEWN_ABSTENTION_CAUSAL_CLOSURE_20261006_V1",
+  "date": "2026-10-06",
+  "status": "THREE_PRIOR_ABSTENTIONS_CAUSALLY_CLASSIFIED__NONE_JUSTIFIES_MORE_PERSISTENT_LEARNED_STATE",
+  "cases": [
+    {
+      "id": "COMMENT_BOOK_NOTE",
+      "cause": "CONTEXT_SELECTS_UNSUPPORTED_NONROLE_SENSE",
+      "resolution": "RETURN_NONE_OR_UNSUPPORTED",
+      "persistent_bits_help": false
+    },
+    {
+      "id": "COMMENT_NO_CONTEXT",
+      "cause": "PER_INSTANCE_SENSE_LATENT_MISSING_FROM_RUNTIME_INPUT",
+      "resolution": "GET_CONTEXT_OR_ABSTAIN",
+      "persistent_bits_help": false
+    },
+    {
+      "id": "MISSING_QUERY",
+      "cause": "DIRECT_QUERY_NOT_PREVIOUSLY_ACQUIRED",
+      "resolution": "JIT_QUERY",
+      "resolved_now": true,
+      "selected_synset": "11430739-n",
+      "role": "TARGET",
+      "persistent_bits_help": false
+    }
+  ],
+  "learned_byte_rung_effect": "NONE__REMAINS_ZERO",
+  "promotion_authority": false
+}
