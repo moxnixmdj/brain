@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CHARTQA_TABLE_INFORMATION_DIAGNOSTIC_RECEIPT_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__100_OF_100_TABLES_FETCHED__INFORMATION_DIAGNOSTIC_COMPLETE",
+  "source_precommit": "canonical/governance/H100_CHARTQA_TABLE_INFORMATION_DIAGNOSTIC_PRECOMMIT_V1.json",
+  "chartqa_commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+  "result_sha256": "dd3b1b4137ca0902946188e5c0e87fa30ea114b4e62e0b1853a6637ac34365a0",
+  "observed": {
+    "direct_numeric": 62,
+    "direct_string": 18,
+    "pairwise_sum": 5,
+    "pairwise_diff": 4,
+    "pairwise_ratio": 1,
+    "unrecovered_numeric": 9,
+    "unrecovered_text": 1,
+    "direct_present": 80,
+    "simple_derived": 10,
+    "information_recoverable_under_frozen_diagnostic": 90,
+    "case_count": 100,
+    "augmented_recoverable": 50,
+    "augmented_total": 50,
+    "human_recoverable": 40,
+    "human_total": 50
+  },
+  "interpretation": "MOST_FROZEN_CHARTQA_ANSWER_INFORMATION_IS_PRESENT_IN_OR_SIMPLY_DERIVABLE_FROM_THE_PUBLIC_UNDERLYING_TABLE__THIS_LOCALIZES_MUCH_OF_THE_LEARNED_VISION_BURDEN_TO_RASTER_TO_STRUCTURE_AND_GROUNDING",
+  "hard_nonclaims": [
+    "NOT_A_QA_SOLVER_SCORE",
+    "PAIRWISE_MATCHES_CAN_BE_ACCIDENTAL",
+    "QUESTION_TO_CELL_GROUNDING_NOT_PROVED",
+    "NO_ZERO_LEARNED_RASTER_VISION_CLAIM"
+  ],
+  "promotion_authority": false
+}
