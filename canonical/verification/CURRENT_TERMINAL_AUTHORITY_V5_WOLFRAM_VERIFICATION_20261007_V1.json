@@ -1,0 +1,20 @@
+{
+  "schema":"PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_V5_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_WOLFRAM_ACCOUNTING_PASS__21_OPEN__D15_U6__ZERO_CREDIT",
+  "subject":{
+    "authority":{"path":"canonical/governance/CURRENT_TERMINAL_AUTHORITY_V5.json","git_blob_sha":"c2b2354bbfb9ff3243be90bf875880e746abe134"},
+    "coverage":{"path":"canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V6.json","git_blob_sha":"93d69abcfd15bbf46ee3b279cff08700501921f8"}
+  },
+  "recomputation":{
+    "families":19,
+    "open_truths":21,
+    "route_total":21,
+    "basis_contraction_from_32":21,
+    "current_load_bearing_atomic_total":34,
+    "all_consistent":true
+  },
+  "terminal":false,
+  "terminal_credit_delta":0,
+  "ownership_credit_delta":0
+}
