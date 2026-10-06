@@ -1,23 +1,40 @@
 from __future__ import annotations
 
+from math import isfinite
 from typing import Mapping
+
+EPS=1e-12
+
+
+class BehavioralLawError(ValueError):
+    pass
+
+
+def _validate_probability_law(law: Mapping[str,float]) -> None:
+    if not law:
+        raise BehavioralLawError("NONEMPTY_PROBABILITY_LAW_REQUIRED")
+    vals=[float(v) for v in law.values()]
+    if any((not isfinite(v)) or v < -EPS for v in vals):
+        raise BehavioralLawError("INVALID_PROBABILITY")
+    if abs(sum(vals)-1.0) > 1e-9:
+        raise BehavioralLawError("PROBABILITY_MASS_MUST_SUM_TO_ONE")
 
 
 def separating_event(
     brain: Mapping[str, float],
     opus: Mapping[str, float],
     *,
-    eps: float = 1e-12,
+    eps: float = EPS,
 ) -> frozenset[str] | None:
+    _validate_probability_law(brain)
+    _validate_probability_law(opus)
     keys = set(brain) | set(opus)
-    # If laws differ, the positive part of opus-brain has positive mass.
+    # If normalized laws differ, the positive part of opus-brain has positive mass.
     event = frozenset(
         k for k in keys
         if float(opus.get(k, 0.0)) > float(brain.get(k, 0.0)) + eps
     )
-    if not event:
-        return None
-    return event
+    return event or None
 
 
 def event_mass(law: Mapping[str, float], event: frozenset[str]) -> float:
@@ -28,8 +45,10 @@ def utility_free_dominance_requires_equality(
     brain: Mapping[str, float],
     opus: Mapping[str, float],
 ) -> dict[str, object]:
+    _validate_probability_law(brain)
+    _validate_probability_law(opus)
     keys = set(brain) | set(opus)
-    equal = all(abs(float(brain.get(k, 0.0)) - float(opus.get(k, 0.0))) <= 1e-12 for k in keys)
+    equal = all(abs(float(brain.get(k, 0.0)) - float(opus.get(k, 0.0))) <= EPS for k in keys)
     event = separating_event(brain, opus)
     if equal:
         return {
@@ -39,10 +58,8 @@ def utility_free_dominance_requires_equality(
             "utility_authority_required_for_nonidentical_dominance": False,
         }
     if event is None:
-        # If Brain has more mass somewhere, normalization forces Opus to have
-        # more mass elsewhere for valid probability laws. Fail closed if callers
-        # supplied malformed laws.
-        raise ValueError("NONIDENTICAL_LAWS_WITHOUT_OPUS_POSITIVE_PART__CHECK_NORMALIZATION")
+        # This cannot occur for distinct normalized probability laws.
+        raise BehavioralLawError("NORMALIZED_NONIDENTICAL_LAWS_LACK_POSITIVE_OPUS_PART")
     return {
         "laws_equal": False,
         "separating_event": tuple(sorted(event)),
