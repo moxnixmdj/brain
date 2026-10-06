@@ -33,7 +33,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 TASK_SCHEMA = "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1"
 STATE_SCHEMA = "PROJECT_BRAIN_SAME_IDENTITY_STATE_V1"
 RECEIPT_SCHEMA = "PROJECT_BRAIN_SAME_IDENTITY_EXECUTION_RECEIPT_V1"
-DEFAULT_AGENT_ID = "SUPERWORKER-UNIFIED-1"
+DEFAULT_AGENT_ID = "SUPERWORKER-UNIFIED-1"\nPRODUCTION_ASTRA_LAUNCHER = "canonical/runtime/root3_production_astra_launcher_v1.py"
 
 
 class SupervisorError(RuntimeError):
@@ -429,7 +429,7 @@ def execute_claimed_task(
     )
     bridge_dir.mkdir(parents=True, exist_ok=True)
     env["PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR"] = str(bridge_dir)
-    argv = [sys.executable, "canonical/runtime/astra_runtime.py", task["mission_path"]]
+    argv = [sys.executable, PRODUCTION_ASTRA_LAUNCHER, task["mission_path"]]
     result = executor(argv, root, env)
 
     receipt = {
