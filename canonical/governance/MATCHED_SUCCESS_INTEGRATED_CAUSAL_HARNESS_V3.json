@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_SUCCESS_INTEGRATED_CAUSAL_HARNESS_V3",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__PUBLIC_INFORMATION_ONLY__CONTENT_BOUND_INTERVENTIONAL_SEMANTIC_RECEIPT_BUNDLE__ZERO_CREDIT_PENDING_INDEPENDENT_EXACT_BYTE_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "proof_contract": "canonical/governance/MATCHED_SUCCESS_SEMANTIC_COUPLING_CONTRACT_V3.json",
+  "generator": "canonical/runtime/matched_success_integrated_extension_v1.py",
+  "public_projection": "canonical/runtime/matched_success_public_projection_v1.py",
+  "harness": "canonical/runtime/matched_success_integrated_causal_harness_v3.py",
+  "tests": "canonical/tests/test_matched_success_integrated_causal_harness_v3.py",
+  "repairs": [
+    "V1_RECEIPT_ACKNOWLEDGEMENT_FALSE_POSITIVE",
+    "V2_UNBOUND_RUN_RECEIPT_SUBSTITUTION",
+    "V2_UNBOUND_CLASS_DETAILS_SELF_ASSERTION",
+    "RAW_GENERATED_CASE_SEMANTIC_SOURCE_COULD_CROSS_THE_VISIBLE_INFORMATION_BOUNDARY"
+  ],
+  "causal_rule": [
+    "SELECT_THE_LOAD_BEARING_SEMANTIC_SOURCE_ONLY_FROM_THE_PUBLIC_PROJECTION_OF_THE_FIRST_COMPONENT",
+    "TRUE_RUN_USES_THE_PUBLIC_SOURCE",
+    "ABLATION_RUN_REPLACES_ONLY_THE_SEMANTIC_VALUE_WITH_A_SAME_SHAPE_DECOY",
+    "RESCUE_RUN_RESTORES_THE_TRUE_SEMANTIC_VALUE",
+    "TRUE_MUST_PASS__ABLATION_MUST_FAIL__RESCUE_MUST_PASS",
+    "TRUE_AND_RESCUE_TERMINAL_SEMANTICS_MUST_MATCH",
+    "ABLATION_TERMINAL_SEMANTICS_MUST_DIFFER",
+    "RUN_SEMANTICS_DIGEST_BINDS_CLASS_ROLE_UPSTREAM_SHAPE_UPSTREAM_SEMANTICS_TERMINAL_SEMANTICS_AND_SUCCESS",
+    "DETAILS_DIGEST_BINDS_CLASS_SPECIFIC_CAUSAL_EVIDENCE",
+    "EVERY_RUN_AND_DETAILS_RECEIPT_IS_EMITTED_AS_CANONICAL_BYTES_WITH_A_REAL_GIT_BLOB_SHA",
+    "AN_INDEPENDENT_VERIFIER_MUST_RECOMPUTE_THE_RECEIPT_BYTES_AND_BINDINGS_BEFORE_ANY_SCOPE_CREDIT"
+  ],
+  "integrated_classes": [
+    "AGENCY_THREE_TOOL_LONG_HORIZON",
+    "INSTRUCTION_CHANGE_CONTROL",
+    "RESEARCH_TOOL_ARTIFACT",
+    "BROWSER_MEMORY_RECOVERY",
+    "CODING_DEBUG_TOOL_DISCOVERY",
+    "DELEGATION_SYNTHESIS_ARTIFACT",
+    "CROSS_CAPABILITY_HANDOFF_ROLLBACK"
+  ],
+  "coverage_role": "PREEXPOSURE_SEMANTIC_RULE_FOR_THE_TEN_NONLEGACY_MATCHED_SUCCESS_DIMENSIONS__NOT_A_TERMINAL_RESULT",
+  "information_boundary": {
+    "raw_hidden_case_fields_allowed_as_semantic_source": false,
+    "public_component_projection_required": true,
+    "terminal_case_generation_now": false,
+    "post_freeze_beacon_known_now": false,
+    "terminal_results_observed": 0,
+    "fresh_reality_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_BRAIN_RUNTIME_PASSES_FUTURE_TERMINAL_CASES",
+    "NO_CLAIM_REFERENCE_CONNECTED_AGENT_IS_A_BRAIN_CAPABILITY",
+    "NO_REAL_TERMINAL_CASE_RECEIPTS",
+    "NO_SCOPE_COMPILER_CLOSURE_YET",
+    "NO_CASE_ISOLATION_REAL_RECEIPTS_YET",
+    "NO_INDEPENDENT_EXACT_RECEIPT_BYTE_VERIFICATION_YET",
+    "NO_FRESH_REALITY_OR_CASE_GENERATION_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
