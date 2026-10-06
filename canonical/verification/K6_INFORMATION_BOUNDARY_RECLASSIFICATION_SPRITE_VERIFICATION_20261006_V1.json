@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_K6_INFORMATION_BOUNDARY_RECLASSIFICATION_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_SOURCE_REPLAY_PASS__K6_NOT_CURRENT_PREPROOF_IMPLEMENTATION_GENERATOR__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "candidate": {
+      "path": "canonical/governance/K6_INFORMATION_BOUNDARY_RECLASSIFICATION_20261006_V1.json",
+      "git_blob_sha": "c31138b5a290005b6b89dce461d540780f36ad4b"
+    },
+    "verifier": {
+      "path": "canonical/runtime/k6_information_boundary_reclassification_v1.py",
+      "git_blob_sha": "f38ec177c40db0903036de74da849103e4459638"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/k6_reclass_verify",
+    "execution": "EXACT_BOUND_SOURCE_BYTES_PLUS_DIRECT_VERIFIER_EXECUTION"
+  },
+  "result": {
+    "pass": true,
+    "current_unbound_implementation_generator_count": 0,
+    "latent_diagnostic_class_count": 3,
+    "k6_information_interface_preserved": true
+  },
+  "verified": [
+    "CURRENT_CANONICAL_S0_G0_AUTHORITY_REPORTS_ZERO_PREPROOF_IMPLEMENTATION_RESIDUALS",
+    "THE_THREE_SURVIVING_SEMANTIC_CLASSES_ARE_LATENT_DIAGNOSTICS_WITH_IMPLEMENTATION_AUTHORITY_FALSE",
+    "K6_INFORMATION_CUT_REMAINS_LOAD_BEARING_AS_A_SEPARATOR_INFORMATION_INTERFACE",
+    "GENERIC_K6_IMPLEMENTATION_OR_DONOR_HARVEST_IS_NOT_CURRENTLY_AUTHORIZED_WITHOUT_CAUSALLY_LOCALIZED_TERMINAL_FAILURE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_FIVE_OWNED_GENERATORS_ALREADY_DOMINATE_OPUS55",
+    "NO_CLAIM_K6_INFORMATION_IS_ALWAYS_AVAILABLE",
+    "NO_CLAIM_TERMINAL_PARITY_RESOURCE_TRANSFER_OR_DONOR_INDEPENDENCE_IS_CLOSED",
+    "NO_TERMINAL_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
