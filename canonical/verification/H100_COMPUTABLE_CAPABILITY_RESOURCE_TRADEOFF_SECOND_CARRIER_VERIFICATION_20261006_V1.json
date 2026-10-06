@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_H100_COMPUTABLE_CAPABILITY_RESOURCE_TRADEOFF_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__9_OF_9_TESTS__INDEPENDENT_A_RESEARCH__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_COMPUTABLE_CAPABILITY_RESOURCE_TRADEOFF_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_computable_capability_resource_tradeoff_v1.py",
+    "tests": "canonical/tests/test_h100_computable_capability_resource_tradeoff_v1.py"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "verified": {
+    "tests_passed": 9,
+    "tests_total": 9,
+    "zero_learned_logical_bound_under_input_complete_total_computable_assumptions": true,
+    "finite_lookup_moves_cost_into_deterministic_bits": true,
+    "heldout_lookup_rejected_as_general_capability": true,
+    "learned_only_metric_can_hide_large_code_runtime_cost": true,
+    "pareto_resource_accounting_required": true
+  },
+  "deduction": "FOR_INPUT_COMPLETE_TOTAL_COMPUTABLE_TASKS__POSITIVE_PERSISTENT_LEARNED_STATE_IS_NOT_LOGICALLY_NECESSARY_IF_WORLD_INDEPENDENT_DETERMINISTIC_PROGRAM_STATE_IS_ALLOWED_AND_ACCOUNTED_SEPARATELY__PRACTICAL_NECESSITY_CAN_ONLY_EMERGE_FROM_RESOURCE_BOUNDS_OR_MISSING_INFORMATION",
+  "resource_vector": [
+    "B_LEARNED_BITS",
+    "L_DETERMINISTIC_CAPABILITY_BITS",
+    "T_RUNTIME_STEPS_OR_TIME",
+    "E_EXTERNAL_INFORMATION_BITS",
+    "S_NONLEARNED_TASK_STATE_BITS"
+  ],
+  "hard_nonclaims": [
+    "ZERO_LOGICAL_BOUND_IS_NOT_A_SMALL_PROGRAM_CLAIM",
+    "ZERO_LOGICAL_BOUND_IS_NOT_A_FAST_RUNTIME_CLAIM",
+    "NO_PERMISSION_TO_MEMORIZE_HELDOUT_CASES",
+    "NO_PRACTICAL_FRONTIER_EQUIVALENCE_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
