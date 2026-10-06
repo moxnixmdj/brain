@@ -319,7 +319,7 @@
   "terminal_falsification_control_loop": {
     "status": "CURRENT__COVERAGE_PARTITION_V3_ROUTING__30_OPEN__ZERO_CREDIT",
     "governance": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V3.json",
-    "governance_git_blob_sha": "PENDING_THIS_BRANCH",
+    "governance_git_blob_sha": "f282c807330955ef72f17a565d940815e0497017",
     "current_schedule": [
       "CONTINUE_J_AND_G_FALSIFICATION_ON_30_CURRENT_OBLIGATIONS",
       "COMPLETE_ROOT3_PARENT_EXTERNAL_AND_NONREPO_EFFECT_TOTALITY_OR_LOCALIZE_RESIDUALS",
@@ -443,7 +443,7 @@
     "status": "CURRENT__30_LOAD_BEARING_OPEN_TRUTHS__TWO_INDEPENDENTLY_VERIFIED_TRUTH_COMPRESSIONS__ZERO_CREDIT",
     "coverage_partition": {
       "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V3.json",
-      "git_blob_sha": "PENDING_THIS_BRANCH"
+      "git_blob_sha": "f282c807330955ef72f17a565d940815e0497017"
     },
     "deleted_truths": [
       {
