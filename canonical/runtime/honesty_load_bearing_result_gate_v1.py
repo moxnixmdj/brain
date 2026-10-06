@@ -56,6 +56,9 @@ def certify_result(
     verdict = honesty.adjudicate(honesty_record)
     if verdict.get("status") != "PASS":
         raise LoadBearingHonestyError("HONESTY_ENVELOPE_DENIED")
+    expected_task_id = mission_id + "::step::" + step_id
+    if verdict.get("task_id") != expected_task_id:
+        raise LoadBearingHonestyError("HONESTY_RECORD_STEP_CONTRACT_MISMATCH")
 
     result_sha = sha256_json(dict(result))
     record_sha = sha256_json(dict(honesty_record))
@@ -123,6 +126,8 @@ def certify_terminal_completion(
     verdict = honesty.adjudicate(honesty_record)
     if verdict.get("status") != "PASS":
         raise LoadBearingHonestyError("TERMINAL_HONESTY_ENVELOPE_DENIED")
+    if verdict.get("task_id") != mission_id:
+        raise LoadBearingHonestyError("TERMINAL_HONESTY_RECORD_MISSION_MISMATCH")
     if verdict.get("completion_claim") != "COMPLETE":
         raise LoadBearingHonestyError("TERMINAL_COMPLETION_NOT_COMPLETE")
     return {
