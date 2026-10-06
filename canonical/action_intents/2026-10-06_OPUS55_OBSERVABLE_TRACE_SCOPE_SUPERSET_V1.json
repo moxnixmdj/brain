@@ -3,14 +3,14 @@
   "action_id": "OPUS55-OBSERVABLE-TRACE-SCOPE-SUPERSET-20261006-SOL",
   "status": "CANDIDATE__CURRENT_BASE_BOUND__ZERO_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "cd1a8618211f9f67aa9caf74e47150467c6048ca",
+  "canonical_base_commit": "30e3aabc78fd889b6a74e1559c5f7ba356c93638",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "causal_blocker": "LITERAL_ALL_USEFUL_OPUS55_FINALITY__TARGET_UNIVERSE_NOT_STRUCTURALLY_CLOSED",
   "action_kind": "RECONCILE_FRONTIER",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::LITERAL_ALL_USEFUL_OPUS55_FINALITY__TARGET_UNIVERSE_NOT_STRUCTURALLY_CLOSED",
-  "expected_parent_frontier_change": "Replace open-ended domain enumeration with an observable-interaction-trace scope superset, falsify source/composition escapes, and reclassify the surviving two-worlds countermodel as a universal dominance gap inside the now-explicit scope.",
+  "expected_parent_frontier_change": "Replace open-ended domain enumeration with an observable-interaction-trace scope superset, including the newly discovered honesty/completion-integrity source surface as an adversarial challenge; preserve the surviving universal-dominance gap.",
   "highest_leverage_now": true,
   "stop_condition": "The scope-superset theorem and falsification receipt are content-addressed, grant zero terminal credit, delete domain enumeration as a completeness route, and localize the remaining terminal-finality blocker to universal observable-behavior dominance/ownership.",
   "governance_change": false,
@@ -47,13 +47,17 @@
         {
           "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_TERMINAL_SUFFICIENCY_COUNTERMODEL_20261005_V1.json",
           "git_blob_sha": "77e5a893b65d3509b563f024a427d492d45e1489"
+        },
+        {
+          "path": "canonical/governance/OPUS55_HONESTY_COMPLETION_INTEGRITY_UNIVERSE_DELTA_20261006_V1.json",
+          "git_blob_sha": "dd485f0b9f4f4253456421624c0b31f22bef2697"
         }
       ]
     }
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "cd1a8618211f9f67aa9caf74e47150467c6048ca",
+    "canonical_base_commit": "30e3aabc78fd889b6a74e1559c5f7ba356c93638",
     "real_outcome": "Make literal target-universe scope complete without pretending a finite public benchmark/domain list is exhaustive.",
     "required_capability": "STRUCTURAL_SCOPE_SUPERSET_AND_COUNTERMODEL_RECLASSIFICATION",
     "obs_goal": {
