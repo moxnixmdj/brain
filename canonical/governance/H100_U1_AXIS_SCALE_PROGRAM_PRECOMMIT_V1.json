@@ -1,0 +1,13 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_AXIS_SCALE_PROGRAM_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "RAW_U1_PROGRAM_FROZEN_BEFORE_FRESH_AXIS_HOLDOUT",
+  "reference_machine": "H100_U1_STACK_VM",
+  "capability_contract": "INPUT_[P0,V0,P1,V1,PB]__OUTPUT_[V0_PLUS_(PB_MINUS_P0)*(V1_MINUS_V0)_FDIV_(P1_MINUS_P0)]",
+  "raw_program_hex": "01040f01000f0501030f01010f050601020f01000f050701010f041000",
+  "raw_program_bytes": 29,
+  "raw_program_bits": 232,
+  "target_adapted_persistent_data_bytes": 0,
+  "holdout_state": "NOT_YET_FROZEN_AT_THIS_COMMIT",
+  "promotion_authority": false
+}
