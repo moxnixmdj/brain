@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_CHART_FRESH_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__6_OF_6_FRESH_CHARTS__HASH_BOUND",
+  "reference_machine": "H100_U1_STACK_VM",
+  "frozen_program": "canonical/governance/H100_U1_CHART_AXES_TEXT_LEGEND_PROGRAM_PRECOMMIT_V1.json",
+  "fresh_world_manifest": "canonical/governance/H100_U1_CHART_FRESH_WORLD_MANIFEST_V1.json",
+  "observed": {
+    "program_bytes": 1250,
+    "program_bits": 10000,
+    "program_sha256": "2baf3fa772b75730cd4aa6ffbf13f960a1a79e7139f83f3ace956f6ca7bba847",
+    "world_sha256": "e9f28e6d9b369a161c804ea4413ec8289fc9b522b8a5a3b2447e0a23412af5b6",
+    "passed": 6,
+    "total": 6,
+    "max_steps": 58543,
+    "learned_bits": 0
+  },
+  "resource_envelope": {
+    "max_steps": 200000,
+    "max_stack_depth": 500,
+    "max_heap_cells": 500,
+    "max_output_values": 20,
+    "runtime_information": "32X20_SYMBOL_RASTER_PLUS_10_ENTRY_GLYPH_ATLAS"
+  },
+  "capability_scope": [
+    "INFER_HORIZONTAL_AND_VERTICAL_AXES",
+    "EXTRACT_RECTANGULAR_BAR_COUNT_AND_HEIGHTS",
+    "PACK_ONE_3X5_TICK_GLYPH",
+    "PACK_ONE_3X5_LEGEND_GLYPH",
+    "DECODE_GLYPHS_WITH_RUNTIME_ATLAS"
+  ],
+  "complexity_interval": {
+    "lower_bound_bits": 0,
+    "upper_bound_bits": 10000,
+    "exact_claim": false
+  },
+  "hard_nonclaims": [
+    "SYMBOL_VALUES_EXPLICITLY_SEPARATE_AXES_BARS_TEXT_AND_SWATCH",
+    "NO_NATURAL_FONT_OCR",
+    "NO_NOISE_ROTATION_SCALE",
+    "NO_MULTI_DIGIT_LABELS",
+    "NO_GENERAL_CHARTQA"
+  ],
+  "promotion_authority": false
+}
