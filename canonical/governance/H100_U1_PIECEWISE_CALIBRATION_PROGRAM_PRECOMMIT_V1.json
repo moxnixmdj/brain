@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_PIECEWISE_CALIBRATION_PROGRAM_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_HOLDOUT_DERIVATION_AND_OUTCOMES",
+  "reference_machine": "H100_U1_STACK_VM",
+  "machine_manifest": "canonical/governance/H100_REFERENCE_MACHINE_U1_MANIFEST_V1.json",
+  "capability_scope": "INTEGER_X_TO_Y__IF_X_LT_MINUS7_Y_2X_PLUS3__ELSE_IF_X_LT_13_Y_X_SQUARED_MINUS5__ELSE_Y_3X_MINUS11",
+  "runtime_information": "ONE_INTEGER_X_ONLY",
+  "raw_program_hex": "010001000f0301000201790a0b0b0100020102060103041000010002010d0a0b0a0100020d060105051000010002010306010b051000",
+  "raw_program_bytes": 54,
+  "raw_program_bits": 432,
+  "persistent_learned_bits": 0,
+  "target_adapted_persistent_bits_upper_bound": 432,
+  "holdout_derivation_rule": "DERIVE_INTEGER_INPUTS_ONLY_AFTER_THIS_FILE_COMMIT_FROM_THE_RESULTING_GIT_COMMIT_SHA__NO_PROGRAM_CHANGES_AFTER_HOLDOUT_EXISTS",
+  "promotion_authority": false
+}
