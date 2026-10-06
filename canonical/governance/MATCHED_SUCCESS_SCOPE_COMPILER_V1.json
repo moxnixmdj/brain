@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_SUCCESS_SCOPE_COMPILER_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__PREEXPOSURE_SCOPE_COMPILER__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Convert the Brain-first finite-complete-content-addressed-scope premise into exact predeclared coverage obligations over the current frozen matched-success target atoms.",
+  "authority": {
+    "matched_target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json",
+      "git_blob_sha": "72a5cd689f55df84de73693371264f02ef4e7226"
+    },
+    "matched_target_normalization_verification": {
+      "path": "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "b5192b1903dc603e75efe92b9a00ced0b2722f8c"
+    },
+    "brain_first_prewave": {
+      "path": "canonical/governance/BRAIN_FIRST_DIFFERENTIAL_PREWAVE_V1.json",
+      "git_blob_sha": "43b5c74b5caf3b3065feaf98a87f798e7c14aead"
+    }
+  },
+  "targets": {
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR": 6,
+    "IF_SCOPE_BOUNDARY_NONINFERIOR": 5,
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR": 5
+  },
+  "required_normalized_dimension_atom_count": 16,
+  "freeze_requirements": [
+    "CONTENT_ADDRESSED_CASE_GENERATOR",
+    "GENERATOR_FROZEN_BEFORE_CASE_EXPOSURE",
+    "POST_FREEZE_BEACON_OR_EQUIVALENT_PRECOMMITTED_RANDOMNESS",
+    "FIXED_CASE_COUNT_BEFORE_FIRST_RESULT",
+    "CONTENT_ADDRESSED_SCORER",
+    "CONTENT_ADDRESSED_BRAIN_RUNTIME",
+    "CONTENT_ADDRESSED_TOOL_AUTHORITY",
+    "CONTENT_ADDRESSED_TARGET_INTERFACE",
+    "NO_CASE_REPLACEMENT_AFTER_EXPOSURE",
+    "NO_ADAPTIVE_CASE_SELECTION",
+    "NO_RESULT_DEPENDENT_SCOPE_EDIT"
+  ],
+  "case_requirements": [
+    "UNIQUE_CASE_ID",
+    "CONTENT_ADDRESSED_CASE_PAYLOAD",
+    "CONTENT_ADDRESSED_INITIAL_STATE",
+    "INDEPENDENT_OR_OBJECTIVE_COVERAGE_RECEIPT",
+    "COVERAGE_LABELS_MAY_REFERENCE_ONLY_FROZEN_NORMALIZED_TARGET_ATOMS"
+  ],
+  "pass_condition": "UNION_OF_INDEPENDENTLY_VERIFIED_CASE_COVERAGE_LABELS_COVERS_ALL_16_FROZEN_DIMENSION_ATOMS_AND_THE_EXACT_CASE_MANIFEST_IS_CONTENT_ADDRESSED.",
+  "hard_boundary": "THIS_PROVES_COMPLETENESS_ONLY_RELATIVE_TO_THE_CURRENT_FROZEN_NORMALIZED_MATCHED_SUCCESS_DIMENSION_BASIS__IT_DOES_NOT_BY_ITSELF_PROVE_A_BROADER_POPULATION_GENERALIZATION_OR_UNSTATED_SEMANTIC_DIMENSION.",
+  "runtime": "canonical/runtime/matched_success_scope_compiler_v1.py",
+  "tests": "canonical/tests/test_matched_success_scope_compiler_v1.py",
+  "hard_nonclaims": [
+    "NO_CURRENT_CASE_MANIFEST_EXISTS",
+    "NO_CASES_GENERATED_OR_EXPOSED",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CLAIM_ONE_CASE_COVERING_ALL_ATOMS_WOULD_BE_A_GOOD_OR_SUFFICIENT_REAL_GENERATOR_DESIGN__THE_TEST_ONLY_EXERCISES_COMPILER_LOGIC",
+    "NO_TERMINAL_PREDICATE_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
