@@ -1,0 +1,313 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CROSS_CAPABILITY_P0_STRESS_PRECOMMIT_V3",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_STRESS_OUTCOMES__UNCHANGED_V2_SUBSTRATE",
+  "substrate": "canonical/runtime/h100_cross_capability_p0_tournament_v2.py",
+  "no_substrate_changes_allowed": true,
+  "tasks": [
+    {
+      "id": "ARITH_STRESS",
+      "family": "ARITHMETIC_REASONING",
+      "public_input": {
+        "expression": "(73%11)*9+4"
+      },
+      "gold": 67,
+      "expected_failure_class": "ALGORITHM_GAP"
+    },
+    {
+      "id": "CODE_STRESS",
+      "family": "CODE_REPAIR",
+      "public_input": {
+        "threshold": 5,
+        "examples": [
+          [
+            4,
+            true
+          ],
+          [
+            5,
+            false
+          ],
+          [
+            6,
+            true
+          ]
+        ],
+        "holdout": [
+          3,
+          8
+        ]
+      },
+      "gold": {
+        "operator": "!=",
+        "holdout": [
+          true,
+          true
+        ]
+      },
+      "expected_failure_class": "SEARCH_GAP"
+    },
+    {
+      "id": "LANG_STRESS",
+      "family": "LEXICAL_LANGUAGE",
+      "public_input": {
+        "anchors": {
+          "input": "input",
+          "target": "output"
+        },
+        "edges": [
+          [
+            "dualcue",
+            "input"
+          ],
+          [
+            "dualcue",
+            "output"
+          ],
+          [
+            "known",
+            "input"
+          ]
+        ],
+        "clauses": [
+          {
+            "cue": "known",
+            "fields": [
+              "x"
+            ]
+          },
+          {
+            "cue": "dualcue",
+            "fields": [
+              "y"
+            ]
+          }
+        ]
+      },
+      "gold": {
+        "status": "ABSTAIN_LEXICAL",
+        "role_count": 2
+      }
+    },
+    {
+      "id": "VISION_STRESS",
+      "family": "RASTER_VISION",
+      "public_input": {
+        "background": "0",
+        "foreground": "7",
+        "rows": [
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00777770000000000000000000000000",
+          "00777770000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00777777777777000000000000000000",
+          "00777777777777000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00777777770000000000000000000000",
+          "00777777770000000000000000000000",
+          "00777777770000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000"
+        ]
+      },
+      "gold": {
+        "orientation": "horizontal",
+        "bar_count": 3,
+        "lengths": [
+          5,
+          12,
+          8
+        ]
+      },
+      "expected_failure_class": "ALGORITHM_GAP"
+    },
+    {
+      "id": "TOOL_STRESS",
+      "family": "TYPED_TOOL_SELECTION",
+      "public_input": {
+        "request": {
+          "effect": "READ_JSON",
+          "path": "state.json",
+          "payload": {
+            "path": "state.json"
+          }
+        },
+        "contracts": [
+          {
+            "id": "R1",
+            "effect": "READ_JSON",
+            "path": "state.json",
+            "required": [
+              "path"
+            ]
+          },
+          {
+            "id": "R2",
+            "effect": "READ_JSON",
+            "path": "state.json",
+            "required": [
+              "path"
+            ]
+          }
+        ]
+      },
+      "gold": "ABSTAIN_TOOL_AMBIGUOUS"
+    },
+    {
+      "id": "PLAN_STRESS",
+      "family": "RESOURCE_PLANNING",
+      "public_input": {
+        "initial": [
+          "A"
+        ],
+        "goal": "F",
+        "operators": [
+          {
+            "id": "A_TO_B",
+            "requires": [
+              "A"
+            ],
+            "provides": [
+              "B"
+            ]
+          },
+          {
+            "id": "B_TO_C",
+            "requires": [
+              "B"
+            ],
+            "provides": [
+              "C"
+            ]
+          },
+          {
+            "id": "C_TO_D",
+            "requires": [
+              "C"
+            ],
+            "provides": [
+              "D"
+            ]
+          },
+          {
+            "id": "D_TO_E",
+            "requires": [
+              "D"
+            ],
+            "provides": [
+              "E"
+            ]
+          },
+          {
+            "id": "E_TO_F",
+            "requires": [
+              "E"
+            ],
+            "provides": [
+              "F"
+            ]
+          }
+        ]
+      },
+      "gold": [
+        "A_TO_B",
+        "B_TO_C",
+        "C_TO_D",
+        "D_TO_E",
+        "E_TO_F"
+      ]
+    },
+    {
+      "id": "MEMORY_STRESS",
+      "family": "EVENT_MEMORY",
+      "public_input": {
+        "events": [
+          [
+            "SET",
+            "count",
+            1
+          ],
+          [
+            "INCREMENT",
+            "count",
+            2
+          ]
+        ],
+        "query": "count"
+      },
+      "gold": 3,
+      "expected_failure_class": "ALGORITHM_GAP"
+    },
+    {
+      "id": "TRANSFER_STRESS",
+      "family": "NOVEL_STRUCTURE_TRANSFER",
+      "public_input": {
+        "primitives": [
+          "plus1",
+          "times2",
+          "square",
+          "neg"
+        ],
+        "depth": 3,
+        "examples": [
+          [
+            -2,
+            25
+          ],
+          [
+            -1,
+            4
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            25
+          ]
+        ],
+        "holdout": [
+          3,
+          -3
+        ]
+      },
+      "gold": {
+        "sequence": [
+          "square",
+          "plus1",
+          "square"
+        ],
+        "holdout": [
+          100,
+          100
+        ]
+      },
+      "expected_failure_class": "SEARCH_GAP"
+    },
+    {
+      "id": "HIDDEN_STRESS",
+      "family": "SEALED_INFORMATION_CONTROL",
+      "public_input": {
+        "observable": "sealed-octet",
+        "hidden_world_count": 8
+      },
+      "gold": 6,
+      "expected_failure_class": "INFORMATION_GAP"
+    }
+  ],
+  "goal": "IDENTIFY_WHICH_CAUSAL_RESOURCE_FAILS_FIRST_UNDER_DISTRIBUTION_SHIFT_WITHOUT_EDITING_G0",
+  "promotion_authority": false
+}
