@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_BENCHMARK_WITNESS_IDENTIFIABILITY_RERANK_ACTIVATION_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_V22_ADMISSION_PASS__ZERO_ERRORS__BOTH_CURRENT_SCHEDULING_SURFACES_BOUND__ZERO_CREDIT",
+  "subjects": {
+    "action_intent": {
+      "path": "canonical/action_intents/2026-10-06_ACTIVATE_BENCHMARK_WITNESS_IDENTIFIABILITY_RERANK_V1.json",
+      "git_blob_sha": "6946c342c50024b380d1f96c9d88194bc134110a"
+    },
+    "activation": {
+      "path": "canonical/governance/BENCHMARK_WITNESS_IDENTIFIABILITY_RERANK_ACTIVATION_20261006_V1.json",
+      "git_blob_sha": "397a28c147dd22fec16aee200869586da5d699f5"
+    },
+    "active_pointer_candidate": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+      "git_blob_sha": "03adb09f2008de4f812b748707a2a2f24b1df5d6"
+    },
+    "runtime_overlay_candidate": {
+      "path": "canonical/governance/CURRENT_BENCHMARK_WITNESS_ELIMINATION_RUNTIME_OVERLAY_V1.json",
+      "git_blob_sha": "1ad15eb6bcc8ebd2c3cbde7741464ee765493df0"
+    },
+    "base_pointer": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+      "git_blob_sha": "4b53c382945552583a6279550594a1f0f890c11f"
+    }
+  },
+  "base_commit": "15b9b78a4708e49260e241f50cbfc13da42aac9d",
+  "independent_replay": {
+    "carrier": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "trusted_validator": "execution_guard/v22_prewrite_admission.py",
+    "v22_admission_error_count": 0,
+    "v22_admission_errors": []
+  },
+  "resulting_order": [
+    "AUTOMATIONBENCH_PRIVATE_GRAMMAR_SCOPE_FALSIFICATION",
+    "FINANCE_AGENT_CONTRACT_SUPERSET_FALSIFICATION",
+    "MYSTERYMECHANISM_DORMANT_UNTIL_RESTRICTED_CLASS"
+  ],
+  "truth_state_unchanged": {
+    "proved_atomic": 14,
+    "unresolved_atomic": 24,
+    "meta_open": 8,
+    "total_open_truth_obligations": 32,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_PRIVATE_SCOPE_CERTIFICATE_PROVED",
+    "NO_PRIVATE_SCORE_ATOM_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
