@@ -1,0 +1,315 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_TARGET_UNIVERSE_SURFACE_MANIFEST_20261006_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__FINITE_PRIMARY_SOURCE_DELTA_CLASSIFIED__ONE_ACCEPTANCE_BASIS_GAP__LITERAL_COMPLETENESS_FALSE__ZERO_CREDIT",
+  "target_model": "Claude Opus 5.5",
+  "literal_target_universe_complete": false,
+  "target_universe_completeness_proof_receipts": [],
+  "surfaces": [
+    {
+      "id": "LONG_RUNNING_LARGE_CODEBASE_CODING_AND_SELF_CHECKING",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "ADVANCED_AGENTIC_CODING",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+      ]
+    },
+    {
+      "id": "COMPLEX_MULTI_TOOL_AGENT_WORK",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ]
+    },
+    {
+      "id": "SUBAGENT_COORDINATION",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "SUBAGENT_DELEGATION_AND_COORDINATION"
+      ]
+    },
+    {
+      "id": "CROSS_SESSION_MEMORY_AND_LEARNING",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      ]
+    },
+    {
+      "id": "PROFESSIONAL_SPREADSHEET_SLIDE_DOCUMENT_ARTIFACTS",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "ARTIFACT_CREATION"
+      ]
+    },
+    {
+      "id": "FINANCIAL_ANALYSIS_WITH_DENSE_FILINGS_MODELS_CHARTS_AND_COMPLIANCE_NUANCE",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "FINANCIAL_ANALYSIS",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ]
+    },
+    {
+      "id": "DENSE_DOCUMENT_CHART_SCREENSHOT_DIAGRAM_AND_REAL_WORLD_IMAGE_UNDERSTANDING",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+      ]
+    },
+    {
+      "id": "MULTI_APPLICATION_COMPUTER_USE_WITH_PLANNING_AND_JUDGMENT",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "COMPUTER_AND_BROWSER_USE",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "COMPLEX_MULTI_TOOL_AGENCY"
+      ]
+    },
+    {
+      "id": "CLEAR_NATURAL_COMMUNICATION_AND_LONG_SESSION_COLLABORATION",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "COMMUNICATION_AND_SYNTHESIS",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      ]
+    },
+    {
+      "id": "MODEL_INTRINSIC_SECURITY_RESISTANCE",
+      "classification": "MODEL_INTRINSIC_SECURITY_DIMENSION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "security_dimension_id": "MODEL_INTRINSIC_SECURITY_RESISTANCE"
+    },
+    {
+      "id": "LONG_HORIZON_ENGINEERING_AND_LARGE_MIGRATION_WORK",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "ADVANCED_AGENTIC_CODING",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+      ]
+    },
+    {
+      "id": "CREATIVE_CODED_GAME_GRAPHICS_AND_POLISH",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_GAP",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "ADVANCED_AGENTIC_CODING",
+        "ARTIFACT_CREATION",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+      ],
+      "gap_reason": "CURRENT_CREATIVE_COMPOSITE_COVERS_CREATIVE_TEXT_AND_DIAGRAMS; FROZEN_ARTIFACT_SCOPE_DOES_NOT AUTOMATICALLY COVER GENERAL_CODE_ARTIFACT_VISUAL_QUALITY"
+    },
+    {
+      "id": "BOUNDARY_AND_REVERSIBILITY_JUDGMENT",
+      "classification": "MODEL_INTRINSIC_SECURITY_DIMENSION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "security_dimension_id": "SCOPE_AUTHORIZATION_AND_BOUNDARY_JUDGMENT"
+    },
+    {
+      "id": "IMPOSSIBLE_TASK_AND_LONGER_TASK_CALIBRATION",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+      ]
+    },
+    {
+      "id": "TEXT_INPUT_INCLUDING_VOICE_DICTATION",
+      "classification": "DEPLOYMENT_OR_INTERFACE_ONLY",
+      "acceptance_state": "NOT_APPLICABLE",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "exclusion_reason": "CURRENT_INTRINSIC_TARGET_BOUNDARY_TREATS_DIRECT_MODEL_INPUT_AS_TEXT_AND_IMAGE; THIS LABEL_ALONE_DOES_NOT ESTABLISH_NATIVE_AUDIO_PROCESSING"
+    },
+    {
+      "id": "IMAGE_INPUT",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "COMPUTER_AND_BROWSER_USE"
+      ]
+    },
+    {
+      "id": "CONVERSATION_ANALYSIS_CODING_AND_CREATIVE_TASKS",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "COMMUNICATION_AND_SYNTHESIS",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "ADVANCED_AGENTIC_CODING",
+        "ARTIFACT_CREATION"
+      ]
+    },
+    {
+      "id": "TEXT_BASED_ARTIFACT_AND_DIAGRAM_OUTPUT",
+      "classification": "INTRINSIC_FAMILY_UNION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "families": [
+        "ARTIFACT_CREATION",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+      ]
+    },
+    {
+      "id": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT_CAPABILITY_SURFACE",
+      "classification": "CROSS_CUTTING_CONDITION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "condition_id": "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT"
+    },
+    {
+      "id": "BIOLOGY_AND_CHEMICAL_CAPABILITY_SURFACES",
+      "classification": "CROSS_CUTTING_CONDITION",
+      "acceptance_state": "BASIS_BOUND_PARITY_OPEN",
+      "source_receipts": [
+        {
+          "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+          "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+        }
+      ],
+      "condition_id": "BIOLOGY_RESEARCH_AND_DEVELOPMENT"
+    }
+  ],
+  "expected_compilation": {
+    "surface_count": 20,
+    "invalid_surface_count": 0,
+    "acceptance_basis_gap_count": 1,
+    "finite_source_accounting_complete": true,
+    "finite_manifest_acceptance_basis_complete": false,
+    "literal_target_universe_complete": false,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "FINITE_SOURCE_ACCOUNTING_IS_NOT_LITERAL_TARGET_UNIVERSE_COMPLETENESS",
+    "NO_NEW_PRIMITIVE_FAMILY_FROM_THE_VISUAL_POLISH_GAP",
+    "NO_PARITY_OR_OWNERSHIP_CREDIT"
+  ]
+}
