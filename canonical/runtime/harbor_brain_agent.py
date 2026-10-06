@@ -39,7 +39,7 @@ async def run_bounded_harbor_goal(goal:str,environment:BaseEnvironment,*,max_cyc
     for cycle in range(max_cycles):
         obs=astra_runtime._pack_observations_for_model(observations,max_chars=12000)
         prompt=("You are an OPTIONAL proposal source inside Project Brain, not the authority. Return JSON text only. The task environment is isolated and terminal evidence must not be used to discover new external solutions.\n"+block+"\nGoal: "+goal+"\nAllowed actions: environment_exec(command, timeout_s), finish(...). environment_exec may inspect or modify ONLY the supplied task environment. No network acquisition, no package installation, no git fetch/clone/pull, no secrets. Prefer the smallest falsifiable action. "+finish_schema_prompt()+' Schema: {"actions":[{"type":"...","args":{},"why":"..."}]}. Observations envelope: '+obs)
-        planned=astra_runtime._planner_post(prompt,timeout_s=20)
+        planned=astra_runtime._terminal_owned_planner_post(prompt,timeout_s=20)
         raw=astra_runtime._extract_json_object(planned.get("text","")); action=_planner_action(raw); typ=action["type"]
         if typ=="finish":
             gate=validate_finish(action["args"],trace)
@@ -48,7 +48,7 @@ async def run_bounded_harbor_goal(goal:str,environment:BaseEnvironment,*,max_cyc
                 trace.append({"cycle":cycle,"action":{"type":"finish","args":action["args"]},"result":rejected,"brain_control_gate":gate})
                 observations.append({"action":action,"result":rejected,"brain_control_gate":gate})
                 continue
-            return {"schema":SCHEMA,"status":"FINISHED","controller_mode":"BRAIN_OWNED_CONTROL__OPTIONAL_MODEL_PROPOSAL","model_dependency_count":1,"model_role":"GENERAL_COGNITION_SUBSTRATE_CANDIDATE","model_has_terminal_authority":False,"brain_configuration_sha256":config_sha,"planner_model_last":planned.get("model"),"cycles":cycle+1,"trace":trace,"terminal_gate":gate,"summary":str(action["args"]["summary"]).strip()}
+            return {"schema":SCHEMA,"status":"FINISHED","controller_mode":"BRAIN_OWNED_CONTROL__OWNED_LOCAL_MODEL_PROPOSAL","model_dependency_count":1,"owned_model_dependency_count":1,"unowned_model_dependency_count":0,"model_role":"BRAIN_OWNED_GENERAL_COGNITION_SUBSTRATE_CANDIDATE","model_has_terminal_authority":False,"brain_configuration_sha256":config_sha,"planner_model_last":planned.get("model"),"cycles":cycle+1,"trace":trace,"terminal_gate":gate,"summary":str(action["args"]["summary"]).strip()}
         command=validate_environment_command(action["args"].get("command"))
         try: timeout_s=max(1,min(int(action["args"].get("timeout_s",60)),180))
         except (TypeError,ValueError): raise RuntimeError("HARBOR_TIMEOUT_INVALID")
