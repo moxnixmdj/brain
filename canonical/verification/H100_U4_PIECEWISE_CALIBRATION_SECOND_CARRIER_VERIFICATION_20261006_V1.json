@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U4_PIECEWISE_CALIBRATION_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__U1_BYTECODE_UNCHANGED_UNDER_U4__12_OF_12_RANDOM_PLUS_6_OF_6_COVERAGE",
+  "reference_machine": {
+    "finite_resource": "H100_U4_BIT_BOUNDED_U1",
+    "program_language": "H100_U1_STACK_VM"
+  },
+  "frozen_program": {
+    "path": "canonical/governance/H100_U1_PIECEWISE_CALIBRATION_PROGRAM_PRECOMMIT_V1.json",
+    "bytes": 54,
+    "bits": 432
+  },
+  "evidence": {
+    "random_holdout_passed": 12,
+    "random_holdout_total": 12,
+    "coverage_audit_passed": 6,
+    "coverage_audit_total": 6,
+    "max_steps": 22,
+    "max_peak_live_bits": 88
+  },
+  "complexity_interval": {
+    "lower_bits": 0,
+    "upper_bits": 432,
+    "T_steps": 22,
+    "M_live_bits": 88,
+    "runtime_information": "ONE_INTEGER_X",
+    "exact_claim": false
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "hard_nonclaims": [
+    "PROTOCOL_CALIBRATION_NOT_FRONTIER_EQUIVALENCE",
+    "LOWER_BOUND_ZERO_NOT_MINIMALITY_PROOF"
+  ],
+  "promotion_authority": false
+}
