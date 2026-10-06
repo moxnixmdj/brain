@@ -4,11 +4,11 @@
   "status": "CANDIDATE__FINITE_PRIMARY_SOURCE_DELTA_CLASSIFIED__ACCEPTANCE_BASIS_GAP_REPAIRED__PARITY_OPEN__LITERAL_COMPLETENESS_FALSE__ZERO_CREDIT",
   "supersedes": {
     "path": "canonical/governance/OPUS55_TARGET_UNIVERSE_SURFACE_MANIFEST_20261006_V1.json",
-    "git_blob_sha": "1af9019069a3760b2144accfc22b63f188891cb9"
+    "git_blob_sha": "fb762bb85e23fdaccf0ab8e3d0f5ab10b7d45aac"
   },
   "repair_receipt": {
     "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_VISUAL_POLISH_ACCEPTANCE_ESCAPE_20261006_V1.json",
-    "git_blob_sha": "0dae5a2f0af67ea237f999ad73392e8efebb98f8"
+    "git_blob_sha": "9e7ed2bdeefdf71b9d1b960850b878e5b8d10664"
   },
   "literal_target_universe_complete": false,
   "target_universe_completeness_proof_receipts": [],
@@ -255,7 +255,7 @@
       "acceptance_basis_receipts": [
         {
           "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_ACCEPTANCE_BASIS_20261006_V2.json",
-          "git_blob_sha": "52a0f9b1f2ee2be817fdedd486f4ce2dcc68e332"
+          "git_blob_sha": "12aca6a8822353d6aee6c0b948b95696d12a7b35"
         }
       ],
       "families": [
@@ -372,7 +372,7 @@
       "acceptance_basis_receipts": [
         {
           "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_ACCEPTANCE_BASIS_20261006_V2.json",
-          "git_blob_sha": "52a0f9b1f2ee2be817fdedd486f4ce2dcc68e332"
+          "git_blob_sha": "12aca6a8822353d6aee6c0b948b95696d12a7b35"
         }
       ],
       "families": [
