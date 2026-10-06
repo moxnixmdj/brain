@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_RECOVERY_EXISTING_CONTRACT_FACTORIZATION_AND_CONSERVATIVE_EXTENSION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__RECOVERY_LITERAL_ALL_GAP_FACTORED_THROUGH_EXISTING_ACTIVE_CONTRACT__HISTORICAL_NARROW_MECHANISM_CARRIED_FORWARD_ONLY_OVER_OLD_DOMAIN_BY_CONSERVATIVE_EXTENSION__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Replace the vague pre-failure self-critique residual in SELF_VERIFICATION_DEBUGGING_AND_RECOVERY with the already-canonical measurable contract that operationalizes independent pre-failure checking/counterexample generation, and separate its historically verified narrow mechanism from the still-unowned whole-contract residual.",
+  "authorities": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "recovery_acceptance_verification": {
+      "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+    },
+    "scoped_owned_recovery_package": {
+      "path": "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json",
+      "git_blob_sha": "4f5348949c1c2d8784a056c637f05c865ff389b6"
+    },
+    "historical_independent_acceptance_evidence": {
+      "path": "canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MODEL_EVIDENCE_V1.json",
+      "git_blob_sha": "800ea1db458ff585431c2efb5dd7b503647b3d28",
+      "verified_candidate_commit": "267f2e37f0d6951cfd6e56328ddc3178d162abff",
+      "verified_runtime_blob": "c420b8be1f79a0b06afa98f461f443f53d7fc77a"
+    },
+    "current_independent_acceptance_runtime": {
+      "path": "canonical/runtime/independent_acceptance_model.py",
+      "git_blob_sha": "710298c5d7154b5a3c2a4a1700420c40cb2fa55a"
+    }
+  },
+  "target_family_literal": {
+    "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "useful_behavior": "Check work creatively, falsify conclusions, diagnose failures and recover without losing the goal."
+  },
+  "current_registry_fact": {
+    "recovery_family_mapping": [
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    ],
+    "mapped_contract_scope": "Failed agent trajectory to causal repair target",
+    "material_pre_failure_contract_already_active": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "pre_failure_contract_required_output": "derive acceptance consequences independently of the builder and generate discriminating counterexamples/edge cases",
+    "pre_failure_contract_scope": "consequential open-ended tasks with specification ambiguity or multiple plausible interpretations",
+    "pre_failure_contract_currently_mapped_to_recovery_family": false,
+    "interpretation": "The canonical registry already contains a measurable pre-failure independent-check/counterexample contract, but the recovery accounting mapping currently includes only the failed-trajectory contract."
+  },
+  "historical_mechanism_fact": {
+    "heldout_receipt": "bun-sourcemap-leak",
+    "heldout_result": "BLOCKED_TERMINAL_SUBMISSION_AS_REQUIRED__ALL_SEMANTIC_SELF_TESTS_BUILDER_DERIVED__POLICY_OR_SEMANTIC_VARIANT_UNCOVERED",
+    "owned_narrow_behavior": [
+      "DETECT_BUILDER_CORRELATED_ACCEPTANCE_CHECKS_FROM_EXPLICIT_DEPENDENCY_AND_PROVENANCE_LABELS",
+      "DETECT_UNCOVERED_FAILURE_MODE_OBLIGATIONS_IN_AN_EXPLICIT_TYPED_ACCEPTANCE_PLAN",
+      "EMIT_FAIL_CLOSED_COUNTEREXAMPLE_CLASSES_FOR_UNCOVERED_OBLIGATIONS"
+    ],
+    "explicit_not_owned": [
+      "ARBITRARY_NATURAL_LANGUAGE_SPECIFICATION_TO_TYPED_ACCEPTANCE_PLAN",
+      "DOMAIN_GOLD_VALUE_SYNTHESIS",
+      "PROOF_THAT_A_PASSING_ACCEPTANCE_PLAN_IS_SUFFICIENT_FOR_TASK_CORRECTNESS",
+      "WHOLE_SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+    ],
+    "integration_rule": "MAY_BE_USED_AS_A_NECESSARY_FAIL_CLOSED_TERMINAL_GATE_ONLY__MUST_NOT_BE_TREATED_AS_SUFFICIENT_TERMINAL_AUTHORITY"
+  },
+  "current_runtime_conservative_extension_candidate": {
+    "historical_blob": "c420b8be1f79a0b06afa98f461f443f53d7fc77a",
+    "current_blob": "710298c5d7154b5a3c2a4a1700420c40cb2fa55a",
+    "historical_and_current_blobs_equal": false,
+    "structural_claim_to_verify": [
+      "ALL_EXECUTABLE_AST_OUTSIDE_OBLIGATIONS_AND_COUNTEREXAMPLE_TEMPLATES_IS_IDENTICAL",
+      "CURRENT_OBLIGATIONS_PRESERVE_EVERY_HISTORICAL_KEY_AND_VALUE_EXACTLY",
+      "CURRENT_COUNTEREXAMPLE_TEMPLATES_PRESERVE_EVERY_HISTORICAL_KEY_AND_VALUE_EXACTLY",
+      "ONLY_NEW_DISJOINT_OBLIGATION_AND_TEMPLATE_KEYS_ARE_ADDED"
+    ],
+    "consequence_if_verified": "The historical held-out receipt remains applicable to the same historical input/transform domain of the current runtime; it grants no evidence for newly added transform kinds and no whole-contract ownership."
+  },
+  "factorization": {
+    "already_closed_or_owned": [
+      "FAILED_TRAJECTORY_RECOVERY_PARITY_INSIDE_THE_CURRENT_P1_DOMAIN",
+      "NARROW_FAIL_CLOSED_INDEPENDENT_ACCEPTANCE_GATE_BEHAVIOR_ON_THE_HISTORICALLY_VERIFIED_DOMAIN_IF_THE_CONSERVATIVE_EXTENSION_CHECK_PASSES"
+    ],
+    "remaining_questions": [
+      "INDEPENDENTLY_VERIFY_THAT_SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001_IS_A_LOAD_BEARING_RECOVERY_FAMILY_CONTRACT_FOR_THE_PRE_FAILURE_CHECK_AND_FALSIFY_LITERAL",
+      "CLOSE_OR_SOUNDLY_BYPASS_THE_HISTORICAL_MECHANISM_NOT_OWNED_BOUNDARIES_NEEDED_FOR_WHOLE_CONTRACT_PARITY",
+      "PROVE_THE_UNION_OF_FAILED_TRAJECTORY_AND_PRE_FAILURE_CONTRACTED_SUBDOMAINS_IS_COMPLETE_FOR_THE_LITERAL_RECOVERY_FAMILY_OR_IDENTIFY_ANY_ADDITIONAL_MATERIAL_SUBDOMAIN"
+    ],
+    "important_nonclaim": "This factorization does not assert that SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001 alone exhausts every pre-failure meaning of check work creatively or falsify conclusions."
+  },
+  "scheduler_effect": {
+    "delete": [
+      "RERUN_ALREADY_SCOPE_COMPLETE_P1_RECOVERY_PERFORMANCE",
+      "SEARCH_FOR_AN_UNNAMED_GENERIC_SELF_CRITIQUE_CAPABILITY_BEFORE_USING_THE_EXISTING_CONTRACT",
+      "INVENT_A_NEW_RECOVERY_BENCHMARK_BEFORE_EXHAUSTING_THE_EXISTING_CONTRACT_AND_RECEIPT"
+    ],
+    "priority_order": [
+      "VERIFY_EXISTING_CONTRACT_TO_RECOVERY_FAMILY_MAPPING",
+      "VERIFY_CURRENT_RUNTIME_CONSERVATIVE_EXTENSION_OF_HISTORICALLY_RECEIPTED_NARROW_DOMAIN",
+      "CLOSE_ONLY_THE_EXPLICIT_WHOLE_CONTRACT_RESIDUALS_OR_PROVE_A_STRONGER_SCOPE_COMPLETE_ROUTE",
+      "PROVE_FINAL_RECOVERY_FAMILY_DOMAIN_COVERAGE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_NEW_RECOVERY_FAMILY_ACCEPTANCE",
+    "NO_NEW_COMPONENT_OR_ATOMIC_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_CURRENT_RUNTIME_NEW_TRANSFORM_KINDS_HAVE_HELDOUT_VERIFICATION",
+    "NO_CLAIM_THE_EXISTING_NARROW_GATE_IS_SUFFICIENT_TERMINAL_AUTHORITY",
+    "NO_CLAIM_TWO_CURRENT_SUBDOMAINS_EXHAUST_THE_LITERAL_FAMILY",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
