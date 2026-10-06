@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FALSIFICATION_TOURNAMENT_ROOT3_PRODUCTION_BOOTSTRAP_BYPASS_20261006_V1",
+  "date": "2026-10-06",
+  "status": "COUNTEREXAMPLE_FOUND__CREDITED_PRODUCTION_WORKFLOW_CAN_ENTER_RAW_ASTRA_RUNTIME_WITHOUT_INSTALLING_ROOT3_SUBPROCESS_CHOKEPOINTS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "canonical_base_commit": "cd1a8618211f9f67aa9caf74e47150467c6048ca",
+  "proposal_id": "C_EFFECT_BOUNDARY_CLOSURE_V2",
+  "falsifier_id": "F_ROOT3_PRODUCTION_BOOTSTRAP_BYPASS_SEARCH",
+  "subjects": {
+    "production_workflow": {
+      "path": ".github/workflows/astra-shared-runtime.yml",
+      "git_blob_sha": "34a3ae974aa1bb0dd089beaa61d02ed2dbb905eb"
+    },
+    "raw_astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "15dd59ad644c5c73a9218dba4fcc17f880d725f0"
+    },
+    "strict_root3_bootstrap": {
+      "path": "canonical/runtime/root3_strict_current_bootstrap_v2.py",
+      "git_blob_sha": "7d6e4f4e00fda4eae6ff1974f68f970ceee69c2e"
+    },
+    "existing_material_effect_launcher": {
+      "path": "canonical/runtime/astra_mediated_runtime_v1.py",
+      "git_blob_sha": "eec2aaf7076e3bd2374ee581e498554d08a8dcce"
+    }
+  },
+  "constructive_counterexample": {
+    "production_entry": ".github/workflows/astra-shared-runtime.yml",
+    "production_step": "Execute shared runtime mission",
+    "production_command": "python canonical/runtime/astra_runtime.py <resolved mission>",
+    "raw_runtime_entry": "canonical/runtime/astra_runtime.py::__main__ -> main()",
+    "effectful_route": "main() -> execute_step(...) -> run_shell(...) -> subprocess.run(...)",
+    "missing_precondition": "NO_CALL_TO_root3_strict_current_bootstrap_v2.install_current_IS_PRESENT_ON_THIS_PRODUCTION_ENTRY_PATH_BEFORE_EFFECTFUL_EXECUTION",
+    "root3_chokepoints_required": [
+      "subprocess.run",
+      "subprocess.Popen"
+    ],
+    "conclusion": "THERE_EXISTS_A_CREDITED_PRODUCTION_ENTRY_PATH_THAT_CAN_REACH_EFFECTFUL_RUNTIME_WITHOUT_THE_TWO_ROOT3_GLOBAL_PROCESS_CHOKEPOINTS_BEING_INSTALLED"
+  },
+  "why_decisive": [
+    "THE_ACTIVE_TOURNAMENT_REPAIR_EXPLICITLY_NAMES_PRODUCTION_BOOTSTRAP_BYPASS_AS_THE_NEXT_DECISIVE_FALSIFIER",
+    "THE_PRODUCTION_WORKFLOW_INVOKES_THE_RAW_RUNTIME_DIRECTLY",
+    "THE_RAW_RUNTIME_IMPORTS_AND_USES_subprocess.run",
+    "THE_STRICT_ROOT3_BOOTSTRAP_IS_A_SEPARATE_MODULE_AND_IS_NOT_SELF_INSTALLING",
+    "THEREFORE_REGISTRY_TOTALITY_DOES_NOT_ESTABLISH_NO_BYPASS_ON_THE_PRODUCTION_LAUNCH_PATH"
+  ],
+  "minimum_repair_requirements": [
+    "REPLACE_OR_DOMINATE_THE_RAW_PRODUCTION_ENTRY_WITH_A_FAIL_CLOSED_PRODUCTION_LAUNCHER",
+    "INSTALL_THE_ROOT3_GLOBAL_PROCESS_CHOKEPOINTS_BEFORE_ANY_EFFECTFUL_ASTRA_EXECUTION",
+    "PROVE_IMPORT_ORDER_CANNOT_TRIGGER_A_MATERIAL_EFFECT_BEFORE_INSTALLATION_OR_MOVE_INSTALLATION_BEFORE_IMPORT",
+    "MAKE_RAW_ASTRA_DIRECT_EXECUTION_FAIL_CLOSED_WHEN_THE_PRODUCTION_MEDIATION_PRECONDITION_IS_ABSENT",
+    "PRESERVE_DEFAULT_DENY_FOR_UNPROVED_EFFECT_CLASSES",
+    "ADD_AN_INDEPENDENT_OR_OBJECTIVE_BOOTSTRAP_BYPASS_REGRESSION_RECEIPT_ON_EXACT_BYTES"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_AN_UNAUTHORIZED_EFFECT_WAS_ACTUALLY_COMMITTED",
+    "NO_CLAIM_THE_EXISTING_MATERIAL_EFFECT_REFERENCE_MONITOR_IS UNSOUND",
+    "NO_CLAIM_REGISTRY_TOTALITY_REPAIR_IS INVALID",
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
