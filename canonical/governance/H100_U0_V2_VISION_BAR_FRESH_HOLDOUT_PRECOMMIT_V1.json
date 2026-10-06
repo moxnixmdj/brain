@@ -1,0 +1,171 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U0_V2_VISION_BAR_FRESH_HOLDOUT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_U0_V2_TARGET_PROGRAM_OUTCOME",
+  "reference_machine": "H100_U0_PYCORE_3137_V2",
+  "target_program_path": "canonical/capabilities/h100/u0_programs/vision_bar_geometry_v1.py",
+  "target_program_must_remain_unchanged": true,
+  "tasks": [
+    {
+      "id": "U0V2_V1",
+      "public_input": {
+        "rows": [
+          "----------------------------------------",
+          "----------------------------------------",
+          "----------------------------------------",
+          "----------------------------------------",
+          "----------------------------------------",
+          "----------------------------------------",
+          "----------------------------------------",
+          "----------------------------------------",
+          "----------------------------------------",
+          "----------------------------------------",
+          "-----------bbb--------------------------",
+          "-----------bbb--------------------------",
+          "-----------bbb--------------------------",
+          "-----------bbb-----------------ddddd----",
+          "-----------bbb-----------------ddddd----",
+          "-----------bbb-----------------ddddd----",
+          "--aaaa-----bbb-----------------ddddd----",
+          "--aaaa-----bbb-----------------ddddd----",
+          "--aaaa-----bbb-----cccccc------ddddd----",
+          "--aaaa-----bbb-----cccccc------ddddd----",
+          "--aaaa-----bbb-----cccccc------ddddd----",
+          "--aaaa-----bbb-----cccccc------ddddd----",
+          "--aaaa-----bbb-----cccccc------ddddd----",
+          "----------------------------------------"
+        ]
+      },
+      "gold": {
+        "orientation": "vertical",
+        "bar_count": 4,
+        "values": [
+          7,
+          13,
+          5,
+          10
+        ]
+      }
+    },
+    {
+      "id": "U0V2_H1",
+      "public_input": {
+        "rows": [
+          "............................................",
+          "............................................",
+          "...XXXXXXX..................................",
+          "...XXXXXXX..................................",
+          "...XXXXXXX..................................",
+          "............................................",
+          "............................................",
+          "............................................",
+          "...YYYYYYYYYYYYYYY..........................",
+          "...YYYYYYYYYYYYYYY..........................",
+          "............................................",
+          "............................................",
+          "............................................",
+          "...ZZZZZZZZZZ...............................",
+          "...ZZZZZZZZZZ...............................",
+          "...ZZZZZZZZZZ...............................",
+          "............................................",
+          "............................................",
+          "............................................",
+          "...WWWWWWWWWWWWWWWWWWWW.....................",
+          "...WWWWWWWWWWWWWWWWWWWW.....................",
+          "............................................",
+          "............................................",
+          "............................................",
+          "............................................"
+        ]
+      },
+      "gold": {
+        "orientation": "horizontal",
+        "bar_count": 4,
+        "values": [
+          7,
+          15,
+          10,
+          20
+        ]
+      }
+    },
+    {
+      "id": "U0V2_V2",
+      "public_input": {
+        "rows": [
+          "000000000000000000000000000000000",
+          "000000000000000000000000000000000",
+          "000000000000000000000000000000000",
+          "000000000000000000000000000000000",
+          "000000000000000000000000000000000",
+          "000000000000000000000000000000000",
+          "000000000000000003330000000000000",
+          "000000000000000003330000000000000",
+          "000000000000000003330000000000000",
+          "000000000000000003330000000000000",
+          "000000000000000003330000000000000",
+          "000000022222000003330000000000000",
+          "000000022222000003330000000000000",
+          "000000022222000003330000000000000",
+          "000000022222000003330000000000000",
+          "000000022222000003330000000000000",
+          "011000022222000003330000000000000",
+          "011000022222000003330000000000000",
+          "011000022222000003330000000000000",
+          "011000022222000003330000000000000",
+          "000000000000000000000000000000000"
+        ]
+      },
+      "gold": {
+        "orientation": "vertical",
+        "bar_count": 3,
+        "values": [
+          4,
+          9,
+          14
+        ]
+      }
+    },
+    {
+      "id": "U0V2_H2",
+      "public_input": {
+        "rows": [
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxpppppppppppppxxxxxxxxxxxxxxxxxxxx",
+          "xxxpppppppppppppxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxqqqqqqxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxqqqqqqxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxqqqqqqxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxrrrrrrrrrrrrrrrrrrxxxxxxxxxxxxxxx",
+          "xxxrrrrrrrrrrrrrrrrrrxxxxxxxxxxxxxxx",
+          "xxxrrrrrrrrrrrrrrrrrrxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        ]
+      },
+      "gold": {
+        "orientation": "horizontal",
+        "bar_count": 3,
+        "values": [
+          13,
+          6,
+          18
+        ]
+      }
+    }
+  ],
+  "gate": "4_OF_4_EXACT",
+  "target_program_measure": "CANONICAL_AST_DUMP_UTF8_BITS",
+  "promotion_authority": false
+}
