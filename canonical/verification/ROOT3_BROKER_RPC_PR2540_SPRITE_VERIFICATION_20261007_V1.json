@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_BROKER_RPC_PR2540_SPRITE_VERIFICATION_20261007_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_PASS__10_OF_10__BROKER_RPC_ONLY__ZERO_CREDIT",
+  "subject": {
+    "pull_request": 2540,
+    "head_sha": "ca95a1109de4bb5cd5996e3f2fae064a86e0cfd0",
+    "runtime": {
+      "path": "canonical/runtime/root3_broker_rpc_v1.py",
+      "git_blob_sha": "229c4ac87a4cdb2938391a0386da80f204ac7f25"
+    },
+    "tests": {
+      "path": "canonical/tests/test_root3_broker_rpc_v1.py",
+      "git_blob_sha": "a3341e989e2dcfecb78e9dbf49d8b6e9c6e1bae4"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/root3_parent_broker_v1",
+    "command": "python3 -m unittest -v canonical.tests.test_root3_broker_rpc_v1",
+    "result": "PASS_10_OF_10"
+  },
+  "verified": [
+    "BIDIRECTIONAL_SOCKETPAIR_ROUNDTRIP",
+    "DRIVER_IDENTITY_TAMPER_FAIL_CLOSED",
+    "MULTI_REQUEST_LOOP_TO_CLEAN_EOF",
+    "OVERSIZE_SEND_AND_DECLARED_RECEIVE_FAIL_CLOSED",
+    "PARENT_HANDLER_FAILURE_RETURNED_AS_DENIAL",
+    "REQUEST_AND_RESPONSE_HASH_BINDING",
+    "REQUEST_TAMPER_FAIL_CLOSED",
+    "RESPONSE_REQUEST_MISMATCH_FAIL_CLOSED",
+    "REQUEST_LIMIT_ENFORCED"
+  ],
+  "github_ci_boundary": {
+    "workflow_run_id": 37542536107,
+    "exact_head_triggered": true,
+    "job_steps_recorded": 0,
+    "artifacts_recorded": 0,
+    "job_log_fetch": "BLOB_NOT_FOUND",
+    "interpretation": "NO_USABLE_GITHUB_RUNNER_EXECUTION_EVIDENCE__DO_NOT_CLASSIFY_AS_ROOT3_SEMANTIC_FAILURE"
+  },
+  "remaining": [
+    "INDEPENDENT_EXACT_REPLAY_OF_PARENT_DRIVER_REGISTRY",
+    "INDEPENDENT_EXACT_REPLAY_OF_PARENT_BROKER_SERVER",
+    "INDEPENDENT_EXACT_REPLAY_OF_ADMIN_PERSISTENCE_DRIVER_AND_PRODUCTION_BINDING",
+    "INDEPENDENT_EXACT_REPLAY_OF_BROKERED_NAMESPACE_V2",
+    "PROVE_DRIVER_REGISTRY_TOTAL_FOR_CREDITED_PRODUCTION_EFFECT_SET",
+    "BIND_INFORMATION_READ_FINAL_OUTPUT_AND_ANY_TERMINALLY_REQUIRED_EXTERNAL_MUTATION_CLASSES",
+    "WHOLE_PRODUCTION_RUNTIME_REPLAY",
+    "RECOMPUTE_ROOT3_AND_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM PR2540 WHOLE STACK VERIFIED",
+    "NO CLAIM ROOT3 CLOSED",
+    "NO CLAIM DRIVER TOTALITY",
+    "NO TERMINAL ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
