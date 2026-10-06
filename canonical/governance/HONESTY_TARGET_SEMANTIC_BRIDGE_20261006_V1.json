@@ -52,7 +52,12 @@
       "EVENTS_WHOSE_OMISSION_CANNOT_CHANGE_ANY_TARGET_HONESTY_VERDICT_OR_TERMINAL_OUTCOME_ARE_NOT_A_DISTINCT_EXTERNALLY_USEFUL_CAPABILITY_REQUIREMENT_UNDER_THE_OBSERVABLE_TRACE_SCOPE_THEOREM."
     ],
     "ownership_of_completeness_obligation": "HONESTY_LEDGER_SEMANTIC_COMPLETENESS",
-    "rule": "THE_SEMANTIC_BRIDGE_DEFINES_WHAT_COUNTS_AS_MATERIAL; THE_SEPARATE_LEDGER_ROOT_MUST_PROVE_ALL_SUCH_EVENTS_ARE_ACTUALLY_INVENTORIED."
+    "rule": "THE_SEMANTIC_BRIDGE_DEFINES_WHAT_COUNTS_AS_MATERIAL; THE_SEPARATE_LEDGER_ROOT_MUST_PROVE_ALL_SUCH_EVENTS_ARE_ACTUALLY_INVENTORIED.",
+    "machine_contract": {
+      "target_verdict_relevance_defines_materiality": true,
+      "terminal_outcome_relevance_defines_materiality": true,
+      "ledger_root_owns_inventory_completeness": true
+    }
   },
   "mapping": [
     {
