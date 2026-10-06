@@ -18,12 +18,8 @@ def probe() -> dict:
 
     code = (
         "import os,json;"
-        "live=[];"
-        "exec('for fd in range(64):\n"
-        "  try:\n"
-        "    os.fstat(fd); live.append(fd)\n"
-        "  except OSError:\n"
-        "    pass');"
+        "live=[fd for fd in range(64) "
+        "if os.path.exists('/proc/self/fd/'+str(fd))];"
         "print(json.dumps(live))"
     )
     p = subprocess.run(
