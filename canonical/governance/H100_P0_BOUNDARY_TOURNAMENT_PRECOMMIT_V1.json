@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_H100_P0_BOUNDARY_TOURNAMENT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__ATTACK_CURRENT_GENERIC_SUBSTRATE",
+  "substrate": "canonical/runtime/h100_p0_cross_capability_falsification_suite_v1.py",
+  "probes": [
+    {
+      "id": "PROGRAM_OUTSIDE_GRAMMAR",
+      "gold": "ijk",
+      "causal_hypothesis": "SEARCH_OR_ALGORITHM"
+    },
+    {
+      "id": "UNKNOWN_MECHANISM_OUTSIDE_GRAMMAR",
+      "gold": 51,
+      "causal_hypothesis": "SEARCH_OR_ALGORITHM"
+    },
+    {
+      "id": "VISION_TOUCHING_BARS",
+      "gold_count": 2,
+      "causal_hypothesis": "ALGORITHM_OR_REPRESENTATION"
+    },
+    {
+      "id": "TOOL_DOMINANCE_OBJECTIVE",
+      "gold_tool": "FAST",
+      "causal_hypothesis": "ALGORITHM_OR_REPRESENTATION"
+    },
+    {
+      "id": "PLANNING_WITH_DELETE_EFFECT",
+      "gold_plan": [
+        "TAKE",
+        "USE"
+      ],
+      "causal_hypothesis": "ALGORITHM_OR_REPRESENTATION"
+    },
+    {
+      "id": "MEMORY_MULTIPLY_EVENT",
+      "gold": 18,
+      "causal_hypothesis": "ALGORITHM"
+    },
+    {
+      "id": "LEXICAL_CONTEXT_DISAMBIGUATION",
+      "gold_role": "TARGET",
+      "causal_hypothesis": "ALGORITHM_OR_REPRESENTATION"
+    },
+    {
+      "id": "SYMBOLIC_CONJUNCTION",
+      "gold": true,
+      "causal_hypothesis": "ALGORITHM_OR_REPRESENTATION"
+    },
+    {
+      "id": "MISSING_INFORMATION_CONTROL",
+      "gold_status": "ABSTAIN_INFORMATION",
+      "causal_hypothesis": "INFORMATION"
+    }
+  ],
+  "rule": "DO_NOT_REPAIR_SUBSTRATE_BEFORE_OBSERVING_ALL_PROBES__CLASSIFY_FAILURE_CAUSE_BEFORE_ANY_NEW_PRIMITIVE",
+  "promotion_authority": false
+}
