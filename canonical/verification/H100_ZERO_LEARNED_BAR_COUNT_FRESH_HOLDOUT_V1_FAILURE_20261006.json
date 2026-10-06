@@ -1,0 +1,170 @@
+{
+  "accuracy": 0.3333333333333333,
+  "case_count": 3,
+  "correct": 1,
+  "ocr_models": 0,
+  "persistent_learned_bytes": 0,
+  "precommit_commit": "a6561fa43ae83f6b7f4faf431daf91f72199a515",
+  "pretrained_vision_models": 0,
+  "rows": [
+    {
+      "annotation_index": 52,
+      "bands": [
+        [
+          157,
+          158
+        ],
+        [
+          251,
+          252
+        ],
+        [
+          345,
+          346
+        ],
+        [
+          439,
+          440
+        ]
+      ],
+      "correct": false,
+      "elapsed_seconds": 0.5705407740024384,
+      "id": "0d8f4235c0ff",
+      "image_bytes": 35433,
+      "image_sha256": "38d9c6be57083abf685e86b4bd5b455fbdd5d931ae1d6ac5e37c1843ccafa4e0",
+      "imgname": "04301786022389.png",
+      "label": "2",
+      "ocr_models": 0,
+      "orientation": "VERTICAL",
+      "persistent_learned_bytes": 0,
+      "prediction": "4",
+      "pretrained_vision_models": 0,
+      "query": "How many bars are there in the graph?",
+      "runtime_status": "BAR_COUNT_IDENTIFIED",
+      "selected_colors": [
+        [
+          32,
+          144,
+          128
+        ]
+      ],
+      "split": "human"
+    },
+    {
+      "annotation_index": 42,
+      "bands": null,
+      "correct": false,
+      "elapsed_seconds": 0.5818673210014822,
+      "id": "17f78e5aff3f",
+      "image_bytes": 33275,
+      "image_sha256": "20b0207ecdeefccc281e7b6fe862407a43e58d62e1d20d90ae131f5603288ef3",
+      "imgname": "00108924006058.png",
+      "label": "2",
+      "ocr_models": null,
+      "orientation": null,
+      "persistent_learned_bytes": 0,
+      "prediction": null,
+      "pretrained_vision_models": null,
+      "query": "How many bars are there in the graph?",
+      "runtime_status": "ABSTAIN_BAR_GEOMETRY_WEAK",
+      "selected_colors": null,
+      "split": "human"
+    },
+    {
+      "annotation_index": 934,
+      "bands": [
+        [
+          43,
+          72
+        ],
+        [
+          84,
+          113
+        ],
+        [
+          125,
+          154
+        ],
+        [
+          165,
+          194
+        ],
+        [
+          206,
+          235
+        ],
+        [
+          247,
+          276
+        ],
+        [
+          288,
+          317
+        ],
+        [
+          329,
+          358
+        ],
+        [
+          370,
+          399
+        ],
+        [
+          411,
+          440
+        ],
+        [
+          452,
+          481
+        ],
+        [
+          493,
+          522
+        ]
+      ],
+      "correct": true,
+      "elapsed_seconds": 0.7080657589976909,
+      "id": "822d3c2c675c",
+      "image_bytes": 79496,
+      "image_sha256": "758519ad771140b1cf8d56787f3b7c2275b57784ab1bf482746cd4fd21d5b3a9",
+      "imgname": "multi_col_100304.png",
+      "label": "12",
+      "ocr_models": 0,
+      "orientation": "HORIZONTAL",
+      "persistent_learned_bytes": 0,
+      "prediction": "12",
+      "pretrained_vision_models": 0,
+      "query": "How many bars ( combined) in the chart ?",
+      "runtime_status": "BAR_COUNT_IDENTIFIED",
+      "selected_colors": [
+        [
+          32,
+          112,
+          208
+        ],
+        [
+          0,
+          32,
+          48
+        ]
+      ],
+      "split": "human"
+    }
+  ],
+  "runtime_git_blob_sha": "2a6fc75efbb1068303beced39e4d7fddc5718c7b",
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_BAR_COUNT_FRESH_HOLDOUT_RESULT_V1",
+  "status": "FAIL__FRESH_HOLDOUT",
+  "interpretation": {
+    "gate": "FAIL__1_OF_3_EXACT",
+    "failure_modes": [
+      "CASE_52_FALSE_POSITIVE_4_VS_2__TWO_PIXEL_GRIDLINE_STRIPES_INSIDE_COLORED_BAR_WERE_MISCLASSIFIED_AS_VERTICAL_BARS",
+      "CASE_42_ABSTENTION_0_VS_2__EACH_REAL_BAR_HAD_A_DIFFERENT_COLOR_AND_V1_REQUIRED_AT_LEAST_TWO_BANDS_PER_COLOR"
+    ],
+    "positive_control": "CASE_934_EXACT_12_OF_12_VISIBLE_BARS"
+  },
+  "hard_nonclaims": [
+    "V1_FAILURE_IS_DEVELOPMENT_EVIDENCE_FOR_V2_ONLY",
+    "NO_GENERAL_VISION_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
