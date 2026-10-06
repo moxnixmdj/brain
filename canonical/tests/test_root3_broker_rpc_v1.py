@@ -3,6 +3,7 @@ from __future__ import annotations
 import socket
 import struct
 import threading
+import unittest
 
 from canonical.runtime.root3_broker_rpc_v1 import (
     BrokerRPCError,
@@ -17,125 +18,107 @@ from canonical.runtime.root3_broker_rpc_v1 import (
 )
 
 
-def test_request_and_response_hash_binding():
-    req = make_request(driver_id="ADMIN_DURABLE_WRITE_V1", typed_args={"x": 1})
-    assert verify_request(req) == req
-    resp = make_response(
-        request_sha256=req["request_sha256"],
-        ok=True,
-        result={"status": "ok"},
-    )
-    assert verify_response(
-        resp,
-        expected_request_sha256=req["request_sha256"],
-    ) == resp
+class Root3BrokerRPCV1Tests(unittest.TestCase):
+    def test_request_and_response_hash_binding(self):
+        req = make_request(driver_id="ADMIN_DURABLE_WRITE_V1", typed_args={"x": 1})
+        self.assertEqual(verify_request(req), req)
+        resp = make_response(
+            request_sha256=req["request_sha256"],
+            ok=True,
+            result={"status": "ok"},
+        )
+        self.assertEqual(
+            verify_response(resp, expected_request_sha256=req["request_sha256"]),
+            resp,
+        )
 
+    def test_request_tamper_fails_closed(self):
+        req = make_request(driver_id="D", typed_args={"x": 1})
+        req["typed_args"]["x"] = 2
+        with self.assertRaisesRegex(BrokerRPCError, "REQUEST_CONTENT_OR_HASH_MISMATCH"):
+            verify_request(req)
 
-def test_request_tamper_fails_closed():
-    req = make_request(driver_id="D", typed_args={"x": 1})
-    req["typed_args"]["x"] = 2
-    try:
-        verify_request(req)
-    except BrokerRPCError as exc:
-        assert "REQUEST_CONTENT_OR_HASH_MISMATCH" in str(exc)
-    else:
-        raise AssertionError("tampered request accepted")
+    def test_response_request_mismatch_fails_closed(self):
+        req = make_request(driver_id="D", typed_args={})
+        resp = make_response(
+            request_sha256="a" * 64,
+            ok=True,
+            result={"x": 1},
+        )
+        with self.assertRaisesRegex(BrokerRPCError, "RESPONSE_REQUEST_MISMATCH"):
+            verify_response(resp, expected_request_sha256=req["request_sha256"])
 
+    def test_bidirectional_roundtrip_over_single_socketpair(self):
+        parent, child = socket.socketpair()
+        result = {}
 
-def test_response_request_mismatch_fails_closed():
-    req = make_request(driver_id="D", typed_args={})
-    resp = make_response(
-        request_sha256="a" * 64,
-        ok=True,
-        result={"x": 1},
-    )
-    try:
-        verify_response(resp, expected_request_sha256=req["request_sha256"])
-    except BrokerRPCError as exc:
-        assert "RESPONSE_REQUEST_MISMATCH" in str(exc)
-    else:
-        raise AssertionError("mismatched response accepted")
+        def parent_thread():
+            result["response"] = serve_once(
+                parent,
+                lambda request: {
+                    "driver_id": request["driver_id"],
+                    "echo": request["typed_args"],
+                },
+            )
 
+        th = threading.Thread(target=parent_thread)
+        th.start()
+        try:
+            out = child_roundtrip(
+                child.fileno(),
+                driver_id="INFORMATION_READ_V1",
+                typed_args={"url": "https://example.invalid/"},
+            )
+        finally:
+            child.close()
+            th.join(timeout=2)
+            parent.close()
 
-def test_bidirectional_roundtrip_over_single_socketpair():
-    parent, child = socket.socketpair()
-    result = {}
-
-    def parent_thread():
-        result["response"] = serve_once(
-            parent,
-            lambda request: {
-                "driver_id": request["driver_id"],
-                "echo": request["typed_args"],
+        self.assertEqual(
+            out,
+            {
+                "driver_id": "INFORMATION_READ_V1",
+                "echo": {"url": "https://example.invalid/"},
             },
         )
+        self.assertTrue(result["response"]["ok"])
+        self.assertFalse(th.is_alive())
 
-    th = threading.Thread(target=parent_thread)
-    th.start()
-    try:
-        out = child_roundtrip(
-            child.fileno(),
-            driver_id="INFORMATION_READ_V1",
-            typed_args={"url": "https://example.invalid/"},
-        )
-    finally:
-        child.close()
-        th.join(timeout=2)
-        parent.close()
+    def test_parent_handler_failure_is_returned_as_denial(self):
+        parent, child = socket.socketpair()
 
-    assert out == {
-        "driver_id": "INFORMATION_READ_V1",
-        "echo": {"url": "https://example.invalid/"},
-    }
-    assert result["response"]["ok"] is True
-    assert not th.is_alive()
+        def fail(_request):
+            raise RuntimeError("no")
 
-
-def test_parent_handler_failure_is_returned_as_denial():
-    parent, child = socket.socketpair()
-
-    def fail(_request):
-        raise RuntimeError("no")
-
-    th = threading.Thread(target=lambda: serve_once(parent, fail))
-    th.start()
-    try:
+        th = threading.Thread(target=lambda: serve_once(parent, fail))
+        th.start()
         try:
-            child_roundtrip(child.fileno(), driver_id="D", typed_args={})
-        except BrokerRPCError as exc:
-            assert "PARENT_DENIED:RuntimeError:no" in str(exc)
-        else:
-            raise AssertionError("handler failure was not denied")
-    finally:
-        child.close()
-        th.join(timeout=2)
-        parent.close()
+            with self.assertRaisesRegex(BrokerRPCError, "PARENT_DENIED:RuntimeError:no"):
+                child_roundtrip(child.fileno(), driver_id="D", typed_args={})
+        finally:
+            child.close()
+            th.join(timeout=2)
+            parent.close()
 
-
-def test_oversize_send_fails_closed():
-    parent, child = socket.socketpair()
-    try:
+    def test_oversize_send_fails_closed(self):
+        parent, child = socket.socketpair()
         try:
-            send_frame(child, {"x": "123456"}, max_frame_bytes=4)
-        except BrokerRPCError as exc:
-            assert "FRAME_TOO_LARGE" in str(exc)
-        else:
-            raise AssertionError("oversize frame accepted")
-    finally:
-        parent.close()
-        child.close()
+            with self.assertRaisesRegex(BrokerRPCError, "FRAME_TOO_LARGE"):
+                send_frame(child, {"x": "123456"}, max_frame_bytes=4)
+        finally:
+            parent.close()
+            child.close()
 
-
-def test_oversize_declared_receive_fails_before_payload_read():
-    parent, child = socket.socketpair()
-    try:
-        child.sendall(struct.pack("!I", 999))
+    def test_oversize_declared_receive_fails_before_payload_read(self):
+        parent, child = socket.socketpair()
         try:
-            recv_frame(parent, max_frame_bytes=10)
-        except BrokerRPCError as exc:
-            assert "FRAME_LENGTH_INVALID" in str(exc)
-        else:
-            raise AssertionError("oversize declared frame accepted")
-    finally:
-        parent.close()
-        child.close()
+            child.sendall(struct.pack("!I", 999))
+            with self.assertRaisesRegex(BrokerRPCError, "FRAME_LENGTH_INVALID"):
+                recv_frame(parent, max_frame_bytes=10)
+        finally:
+            parent.close()
+            child.close()
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
