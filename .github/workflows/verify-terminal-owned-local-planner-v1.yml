@@ -1,0 +1,31 @@
+name: Verify terminal owned local planner V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/astra_runtime.py"
+      - "canonical/runtime/harbor_brain_agent.py"
+      - "canonical/tests/test_terminal_owned_local_planner_v1.py"
+      - "canonical/governance/TERMINAL_LOCAL_PLANNER_EXECUTION_CLOSURE_20261006_V1.json"
+      - ".github/workflows/verify-terminal-owned-local-planner-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate governance
+        run: python -m json.tool canonical/governance/TERMINAL_LOCAL_PLANNER_EXECUTION_CLOSURE_20261006_V1.json > /dev/null
+      - name: Compile changed runtime
+        run: python -m py_compile canonical/runtime/astra_runtime.py canonical/runtime/harbor_brain_agent.py canonical/tests/test_terminal_owned_local_planner_v1.py
+      - name: Run adversarial closure tests
+        run: python -m unittest canonical.tests.test_terminal_owned_local_planner_v1 -v
