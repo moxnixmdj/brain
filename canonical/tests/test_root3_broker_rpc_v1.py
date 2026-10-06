@@ -18,9 +18,13 @@ from canonical.runtime.root3_broker_rpc_v1 import (
 )
 
 
+CONTRACT_SHA = "a" * 40
+IMPLEMENTATION_SHA = "b" * 40
+
+
 class Root3BrokerRPCV1Tests(unittest.TestCase):
     def test_request_and_response_hash_binding(self):
-        req = make_request(driver_id="ADMIN_DURABLE_WRITE_V1", typed_args={"x": 1})
+        req = make_request(driver_id="ADMIN_DURABLE_WRITE_V1", driver_contract_git_blob_sha=CONTRACT_SHA, driver_implementation_git_blob_sha=IMPLEMENTATION_SHA, typed_args={"x": 1})
         self.assertEqual(verify_request(req), req)
         resp = make_response(
             request_sha256=req["request_sha256"],
@@ -33,13 +37,13 @@ class Root3BrokerRPCV1Tests(unittest.TestCase):
         )
 
     def test_request_tamper_fails_closed(self):
-        req = make_request(driver_id="D", typed_args={"x": 1})
+        req = make_request(driver_id="D", driver_contract_git_blob_sha=CONTRACT_SHA, driver_implementation_git_blob_sha=IMPLEMENTATION_SHA, typed_args={"x": 1})
         req["typed_args"]["x"] = 2
         with self.assertRaisesRegex(BrokerRPCError, "REQUEST_CONTENT_OR_HASH_MISMATCH"):
             verify_request(req)
 
     def test_response_request_mismatch_fails_closed(self):
-        req = make_request(driver_id="D", typed_args={})
+        req = make_request(driver_id="D", driver_contract_git_blob_sha=CONTRACT_SHA, driver_implementation_git_blob_sha=IMPLEMENTATION_SHA, typed_args={})
         resp = make_response(
             request_sha256="a" * 64,
             ok=True,
@@ -67,6 +71,8 @@ class Root3BrokerRPCV1Tests(unittest.TestCase):
             out = child_roundtrip(
                 child.fileno(),
                 driver_id="INFORMATION_READ_V1",
+                driver_contract_git_blob_sha=CONTRACT_SHA,
+                driver_implementation_git_blob_sha=IMPLEMENTATION_SHA,
                 typed_args={"url": "https://example.invalid/"},
             )
         finally:
@@ -84,6 +90,17 @@ class Root3BrokerRPCV1Tests(unittest.TestCase):
         self.assertTrue(result["response"]["ok"])
         self.assertFalse(th.is_alive())
 
+    def test_driver_identity_tamper_fails_closed(self):
+        req = make_request(
+            driver_id="D",
+            driver_contract_git_blob_sha=CONTRACT_SHA,
+            driver_implementation_git_blob_sha=IMPLEMENTATION_SHA,
+            typed_args={},
+        )
+        req["driver_implementation_git_blob_sha"] = "c" * 40
+        with self.assertRaisesRegex(BrokerRPCError, "REQUEST_CONTENT_OR_HASH_MISMATCH"):
+            verify_request(req)
+
     def test_parent_handler_failure_is_returned_as_denial(self):
         parent, child = socket.socketpair()
 
@@ -94,7 +111,13 @@ class Root3BrokerRPCV1Tests(unittest.TestCase):
         th.start()
         try:
             with self.assertRaisesRegex(BrokerRPCError, "PARENT_DENIED:RuntimeError:no"):
-                child_roundtrip(child.fileno(), driver_id="D", typed_args={})
+                child_roundtrip(
+                    child.fileno(),
+                    driver_id="D",
+                    driver_contract_git_blob_sha=CONTRACT_SHA,
+                    driver_implementation_git_blob_sha=IMPLEMENTATION_SHA,
+                    typed_args={},
+                )
         finally:
             child.close()
             th.join(timeout=2)
