@@ -19,6 +19,9 @@ def test_exact_source_hashes_are_frozen():
       "k6_decision_compiler_verification":"e7a98cd6c9f80c2120f1f53562338cd63e9d1581",
       "decision_quotient":"03baddc27d5ee9dd73656fdd801251e1f4fd8cc6",
       "outcome_order":"d9e732eb7fb17de51f0d92dd72da96977f6e183f",
+      "k6_semantic_binding_v3":"21d9f8551326f9741a5b13e6cc5d1494c23d9e34",
+      "k6_policy_index_persistence_compiler":"df1a557bc37eac67ad6446fbcca8f891128f9c94",
+      "k6_policy_index_persistence_verification":"d1849b94c6a9119cc789a5e920c3687f18d81ff5",
     }
 
 def test_reclassification_is_not_truth_deletion():
@@ -37,7 +40,7 @@ def test_zero_positive_missing_generator_but_one_unresolved_role():
 def test_operator_is_not_marked_open():
     d=load()
     op=d["load_split"]["decision_refinement_operator"]
-    assert op["classification"]=="VERIFIED_BRAIN_OWNED_BOUNDED_OPERATOR"
+    assert op["classification"]=="VERIFIED_BRAIN_OWNED_FINITE_DECISION_REFINEMENT_POLICY_INDEX_AND_PERSISTENCE_OPERATORS"
     assert op["open_implementation_gap"] is False
 
 def test_capability_reopen_requires_positive_causal_witness():
