@@ -15,11 +15,15 @@ from typing import Any
 
 from canonical.runtime import root3_subprocess_mediator_v2 as mediator
 from canonical.runtime import root3_read_only_local_file_query_executor_v1 as read_only
+from canonical.runtime import root3_pandoc_declared_artifact_executor_v1 as artifact
 from canonical.runtime.root3_subprocess_effect_class_registry_v1 import CLASSES, EXPECTED
 
 SCHEMA = "PROJECT_BRAIN_ROOT3_STRICT_CURRENT_BOOTSTRAP_V1"
 CURRENT_PROCESS_SITE_COUNT = 18
-BOUND_EFFECT_CLASSES = frozenset({"READ_ONLY_DECLARED_QUERY"})
+BOUND_EFFECT_CLASSES = frozenset({
+    "READ_ONLY_DECLARED_QUERY",
+    "DECLARED_ARTIFACT_PRODUCTION",
+})
 DENIED_EFFECT_CLASSES = frozenset(CLASSES - BOUND_EFFECT_CLASSES)
 
 
@@ -39,11 +43,19 @@ def install_current(
             + "!="
             + str(CURRENT_PROCESS_SITE_COUNT)
         )
-    executor = read_only.make_executor(popen_impl=mediator._ORIGINAL_POPEN)
+    read_only_executor = read_only.make_executor(
+        popen_impl=mediator._ORIGINAL_POPEN
+    )
+    artifact_executor = artifact.make_executor(
+        popen_impl=mediator._ORIGINAL_POPEN
+    )
     status = mediator.install(
         authorizer,
         authority_id=authority_id,
-        class_executors={"READ_ONLY_DECLARED_QUERY": executor},
+        class_executors={
+            "READ_ONLY_DECLARED_QUERY": read_only_executor,
+            "DECLARED_ARTIFACT_PRODUCTION": artifact_executor,
+        },
     )
     bound = frozenset(status.get("bound_effect_class_executors") or [])
     unbound = frozenset(status.get("unbound_effect_classes") or [])
@@ -62,6 +74,8 @@ def install_current(
         "run_guard_active": True,
         "popen_guard_active": True,
         "read_only_executor": "canonical/runtime/root3_read_only_local_file_query_executor_v1.py",
+        "declared_artifact_executor": "canonical/runtime/root3_pandoc_declared_artifact_executor_v1.py",
+        "declared_artifact_finalizer": "canonical/runtime/root3_declared_artifact_finalizer_v1.py",
         "namespace_backend": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
         "acceptance_credit_delta": 0,
         "capability_credit_delta": 0,
