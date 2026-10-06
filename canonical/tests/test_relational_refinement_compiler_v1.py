@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 from canonical.runtime.relational_refinement_compiler_v1 import (
     SCHEMA,
@@ -31,6 +32,47 @@ def base_row():
         "scope_authority_receipt": receipt("SCOPE"),
         "state_carry_receipt": receipt("STATE"),
         "ownership_receipt": receipt("OWNERSHIP"),
+    }
+
+
+def row_binding(row):
+    return {
+        "schema": "PROJECT_BRAIN_RELATIONAL_REFINEMENT_CONTRACT_BINDING_V1",
+        "row_id": row["id"],
+        "relation_id": "R_EVAL_AWARE_V1",
+        "precondition_spec": row["precondition_spec"],
+        "target_transition_class": row["target_transition_class"],
+        "brain_macrostep_contract": row["brain_macrostep_contract"],
+        "postcondition_spec": row["postcondition_spec"],
+        "evaluator_binding": row["evaluator_binding"],
+        "evidence_receipts": {
+            field: row[field]
+            for field in (
+                "relation_soundness_receipt",
+                "local_refinement_receipt",
+                "scope_authority_receipt",
+                "state_carry_receipt",
+                "ownership_receipt",
+            )
+        },
+    }
+
+
+def global_binding(doc):
+    return {
+        "schema": "PROJECT_BRAIN_RELATIONAL_REFINEMENT_GLOBAL_BINDING_V1",
+        "target_claim": doc["target_claim"],
+        "relation_id": doc["relation_id"],
+        "global_receipts": {
+            field: doc[field]
+            for field in (
+                "trace_scope_receipt",
+                "initialization_receipt",
+                "constructor_preservation_receipt",
+                "terminal_preservation_receipt",
+                "acceptance_order_soundness_receipt",
+            )
+        },
     }
 
 
@@ -72,7 +114,7 @@ class RelationalRefinementCompilerTests(unittest.TestCase):
                 return global_binding(self._current_doc)
             return None
 
-        self._current_doc = self.fresh_doc()
+        self._current_doc = base_doc()
         self._json_patch = patch(
             "canonical.runtime.relational_refinement_compiler_v1._load_json_receipt",
             side_effect=load_binding,
@@ -84,7 +126,7 @@ class RelationalRefinementCompilerTests(unittest.TestCase):
         self._blob_patch.stop()
 
     def fresh_doc(self):
-        self._current_doc = self.fresh_doc()
+        self._current_doc = base_doc()
         return self._current_doc
 
     def test_complete_row_and_globals_ready(self):
