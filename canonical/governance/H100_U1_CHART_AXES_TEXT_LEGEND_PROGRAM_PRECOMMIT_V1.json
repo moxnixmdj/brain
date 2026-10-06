@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_CHART_AXES_TEXT_LEGEND_PROGRAM_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_FRESH_CHART_WORLD_DERIVATION_AND_OUTCOMES",
+  "reference_machine": "H100_U1_STACK_VM",
+  "capability_scope": "32X20_SYMBOL_RASTER__INFER_AXES__EXTRACT_RECTANGULAR_BARS__PACK_TICK_AND_LEGEND_3X5_GLYPHS__DECODE_WITH_RUNTIME_ATLAS__OUTPUT_TICK_LEGEND_BARCOUNT_VALUES",
+  "generated_program_bytes": 1250,
+  "generated_program_bits": 10000,
+  "generated_program_sha256": "2baf3fa772b75730cd4aa6ffbf13f960a1a79e7139f83f3ace956f6ca7bba847",
+  "content_addressed_dependencies": {
+    "u1_runtime_blob_sha": "3c289d90023682e135e6fe3f3f42b3049da3c247",
+    "assembler_blob_sha": "5155402a38c1718e0548f7d10bb0521600d07593",
+    "chart_compiler_blob_sha": "d94c5ef555202ed78526be3f5b5c39e4f056efdb"
+  },
+  "fresh_world_derivation_rule": "DERIVE_NEW_RUNTIME_ATLAS_AND_NEW_CHART_PARAMETERS_ONLY_AFTER_THIS_FILE_COMMIT_FROM_RESULTING_GIT_COMMIT_SHA",
+  "learned_bits": 0,
+  "promotion_authority": false
+}
