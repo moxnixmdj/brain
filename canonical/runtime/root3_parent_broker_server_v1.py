@@ -19,6 +19,7 @@ def serve_fd(
     fd: int,
     *,
     repo_root: str | Path,
+    authority_context: dict[str, str] | None = None,
     max_requests: int = 1024,
 ) -> dict[str, Any]:
     if not isinstance(fd, int) or isinstance(fd, bool) or fd < 0:
@@ -32,7 +33,11 @@ def serve_fd(
     try:
         loop = serve_loop(
             sock,
-            lambda request: dispatch(root, request),
+            lambda request: dispatch(
+                root,
+                request,
+                authority_context=authority_context,
+            ),
             max_requests=max_requests,
         )
     finally:
