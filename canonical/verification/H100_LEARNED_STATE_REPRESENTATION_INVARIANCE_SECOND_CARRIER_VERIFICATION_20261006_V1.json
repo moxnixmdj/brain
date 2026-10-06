@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_H100_LEARNED_STATE_REPRESENTATION_INVARIANCE_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__3_OF_3__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_LEARNED_STATE_REPRESENTATION_INVARIANCE_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_learned_state_representation_invariance_v1.py",
+    "tests": "canonical/tests/test_h100_learned_state_representation_invariance_v1.py"
+  },
+  "verified": {
+    "capability_preserved_when_training_derived_constants_embedded_in_source": true,
+    "naive_filetype_learned_bytes_can_drop_to_zero": true,
+    "provenance_accounting_still_counts_training_derived_constants": true,
+    "nonfinite_constants_rejected": true
+  },
+  "deduction": "LEARNED_STATE_ACCOUNTING_MUST_FOLLOW_CAUSAL_PROVENANCE_AND_CAPABILITY_ROLE__NOT_FILE_TYPE_OR_CONTAINER",
+  "hard_nonclaims": [
+    "TOY_LINEAR_EXAMPLE_DOES_NOT_ESTABLISH_FRONTIER_CAPABILITY",
+    "DOES_NOT_PROVE_ZERO_TRAINING_DERIVED_BITS_ARE_SUFFICIENT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
