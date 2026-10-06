@@ -17,6 +17,52 @@ def sha_bytes(b:bytes)->str:return hashlib.sha256(b).hexdigest()
 def sha_file(p:pathlib.Path)->str:return sha_bytes(p.read_bytes())
 def canonical_json_sha(v:Any)->str:return sha_bytes(json.dumps(v,sort_keys=True,separators=(",",":")).encode())
 
+def _write_json(path:pathlib.Path,obj:Any)->str:
+    path.parent.mkdir(parents=True,exist_ok=True)
+    path.write_text(json.dumps(obj,sort_keys=True)+"\n",encoding="utf-8")
+    return sha_file(path)
+
+def install_synthetic_continuous_obs(root:pathlib.Path)->dict[str,Any]:
+    generation="matched-agency-stateful-synthetic-v1"
+    required={
+      "canonical/CANONICAL_POINTER.json":{"canonical_generation":generation},
+      "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json":{"status":"SYNTHETIC_PREEXPOSURE_BOUND"},
+      "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json":{"status":"SYNTHETIC_PREEXPOSURE_BOUND"},
+    }
+    hashes={rel:_write_json(root/rel,obj) for rel,obj in required.items()}
+    return {
+      "schema":"PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1",
+      "status":"CURRENT",
+      "canonical_generation":generation,
+      "dependency_inventory_complete":True,
+      "material_world_state_dependencies_complete":True,
+      "information_boundary_complete":True,
+      "information_policy":{
+        "mode":"NO_EXTERNAL_INFORMATION",
+        "allowed_exact_sources":[],
+        "allowed_external_tool_kinds":[],
+      },
+      "unknown_material_dependencies":[],
+      "stale_authority_absent":True,
+      "valid_proof_action_priority":True,
+      "obs_layers_current":{k:True for k in (
+        "goal","capability","blocker","solution","verification",
+        "inherited_system","obs_process",
+      )},
+      "canonical_state_dependencies":[
+        {"path":rel,"sha256":digest} for rel,digest in sorted(hashes.items())
+      ],
+      "dependencies":[{
+        "dependency_id":"local_preexposure_python_runtime",
+        "class":"EXECUTION_SURFACE",
+        "material":True,
+        "volatility":"STATIC",
+        "scope":"TASK_SPECIFIC",
+        "status":"READY",
+        "evidence":["authenticated local synthetic preexposure harness"],
+      }],
+    }
+
 def child_code(root,task_path,state_dir,evidence_dir,expect_checkpoint,ordinal):
     # Deliberately does not embed the mission case token. Process B must reacquire
     # it from the durable mission file after the forced process boundary.
@@ -112,7 +158,12 @@ def run_case(case_token:str,ordinal:int=0)->dict[str,Any]:
         (root/"canonical/tasks").mkdir(parents=True)
         state=root/"canonical/state";evidence=root/"canonical/evidence"
         mission=root/"canonical/missions/agency.json"
-        mission_doc={"mission":"matched-agency-stateful","case_token":case_token}
+        obs=install_synthetic_continuous_obs(root)
+        mission_doc={
+          "mission":"matched-agency-stateful",
+          "case_token":case_token,
+          "continuous_obs":obs,
+        }
         mission.write_text(json.dumps(mission_doc,sort_keys=True)+"\n")
         task_id=f"MATCHED-AGENCY-STATEFUL-{ordinal}"
         task_path=root/"canonical/tasks/task.json"

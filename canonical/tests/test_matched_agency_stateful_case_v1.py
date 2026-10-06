@@ -1,5 +1,15 @@
 import hashlib
-from canonical.runtime.matched_agency_stateful_case_v1 import child_code,run_case
+import pathlib
+import tempfile
+from canonical.runtime import continuous_obs_runtime
+from canonical.runtime.matched_agency_stateful_case_v1 import child_code,run_case,install_synthetic_continuous_obs
+
+def test_synthetic_obs_context_passes_current_admission_validator():
+    with tempfile.TemporaryDirectory() as td:
+        root=pathlib.Path(td)
+        context=install_synthetic_continuous_obs(root)
+        out=continuous_obs_runtime.validate_context(context,root=root)
+        assert out["pass"] is True,out
 
 def test_stateful_agency_case_passes():
     token="STATEFUL-AGENCY-TEST-TOKEN"
