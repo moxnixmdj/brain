@@ -1,0 +1,20 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_28_BASIS_PROMOTION_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_WOLFRAM_RECOMPUTATION_PASS__28_TOTAL__D15_U13__ZERO_CREDIT",
+  "sources":{
+    "factorizer_candidate":"7fa597adec3df75145a501fb3090ffb3bca3026c",
+    "factorizer_v3":"aa0d0bd2cf715faae342d30f3f913856c12fed40",
+    "compiler_v3":"2545949fd7493c4d76ac42dad28cf9ed1f84ee86",
+    "tests_v2":"58cd2e8f60081a11ebaa28427292d24d504a733c"
+  },
+  "recomputation":{
+    "atomic":20,"meta":8,"total":28,"unique":28,
+    "deleted_absent":true,"scope_preserved":true,
+    "D":15,"U":13,"unmapped_external":[]
+  },
+  "deleted_count":4,
+  "terminal":false,
+  "terminal_credit_delta":0,
+  "ownership_credit_delta":0
+}
