@@ -385,8 +385,21 @@ def verify_case_coverage(case: Mapping[str, Any]) -> dict[str, Any]:
         payload = case.get("case_payload")
         if not isinstance(payload, Mapping):
             raise CoverageError("PAYLOAD_INVALID")
+        if case.get("case_payload_sha256") != _sha(payload):
+            raise CoverageError("CASE_PAYLOAD_SHA256_MISMATCH")
+        initial_state = case.get("case_initial_state")
+        if not isinstance(initial_state, Mapping):
+            raise CoverageError("INITIAL_STATE_INVALID")
+        if case.get("case_initial_state_sha256") != _sha(initial_state):
+            raise CoverageError("CASE_INITIAL_STATE_SHA256_MISMATCH")
+        if case.get("case_id") != payload.get("case_id"):
+            raise CoverageError("CASE_ID_MISMATCH")
         atom = payload.get("primary_atom")
         class_id = payload.get("class_id")
+        if case.get("primary_atom") != atom:
+            raise CoverageError("PRIMARY_ATOM_MISMATCH")
+        if case.get("class_id") != class_id:
+            raise CoverageError("CLASS_ID_MISMATCH")
         if atom not in ATOM_CLASS:
             raise CoverageError("ATOM_INVALID")
         if ATOM_CLASS[atom] != class_id:
