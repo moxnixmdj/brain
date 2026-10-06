@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_H100_DEPTH4_TRANSFER_DESCRIPTION_BITS_LOCAL_RECOMPUTE_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__LOCAL_RECOMPUTE__FROZEN_ENCODING",
+  "rows": [
+    {
+      "task": "A",
+      "fractional_bits": 24,
+      "nrmse": 9.340927743080204e-9,
+      "target_adapted_description_bits": 89
+    },
+    {
+      "task": "B",
+      "fractional_bits": 27,
+      "nrmse": 6.181466453688682e-9,
+      "target_adapted_description_bits": 98
+    },
+    {
+      "task": "C",
+      "fractional_bits": 29,
+      "nrmse": 3.481972472925015e-9,
+      "target_adapted_description_bits": 104
+    }
+  ],
+  "max_target_adapted_description_bits": 104,
+  "mean_target_adapted_description_bits": 97,
+  "structure_selector_bits": 11,
+  "hard_nonclaim": "RETROSPECTIVE_MEASUREMENT_ON_ALREADY_VERIFIED_TRANSFER_TASKS__NOT_OPEN_WORLD_COMPLEXITY",
+  "promotion_authority": false
+}
