@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_POSET_STOCHASTIC_LIFT_WOLFRAM_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_WOLFRAM_DIFFERENTIAL_PASS__500_RANDOM_CASES__CORE_MATHEMATICAL_LIFT_ONLY__ZERO_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/TERMINAL_POSET_STOCHASTIC_LIFT_20261006_V1.json",
+      "git_blob_sha": "4c83f9d29b15ff76fdf825bf284c1cf8da7b2a0e"
+    },
+    "runtime": {
+      "path": "canonical/runtime/terminal_poset_stochastic_lift_v1.py",
+      "git_blob_sha": "98a535fb755aac643f2f9b620cc941a71b5377ef"
+    }
+  },
+  "independent_provider": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "seed": 20261006,
+    "random_finite_poset_distribution_cases": 500,
+    "domain_size_range": [2,5],
+    "comparison": "MONOTONE_COUPLING_FEASIBILITY_VS_ALL_UPWARD_CLOSED_SET_INEQUALITIES",
+    "random_disagreements": 0
+  },
+  "decisive_controls": {
+    "binary_reliability_gap_brain_0_51_vs_target_0_99": {
+      "coupling_dominance": false,
+      "upper_set_dominance": false
+    },
+    "perfect_brain_vs_target_0_99": {
+      "coupling_dominance": true,
+      "upper_set_dominance": true
+    },
+    "equal_mean_crossing_tails_chain3": {
+      "brain_over_target": false,
+      "target_over_brain": false
+    },
+    "incomparable_tradeoff": {
+      "coupling_dominance": false,
+      "upper_set_dominance": false
+    }
+  },
+  "deduction": "THE_FINITE_POSET_STOCHASTIC_LIFT_CORE_IS_INDEPENDENTLY_CORROBORATED_ON_500_RANDOM_CASES_AND_ALL_DECISIVE_CONTROLS__HAND_ENUMERATION_OF_MONOTONE_EXPECTATION_EVALUATORS_IS_NOT_REQUIRED_ONCE_A_SOUND_TERMINAL_OUTCOME_POSET_IS_GIVEN",
+  "hard_nonclaims": [
+    "NO_FORMAL_PROOF_OF_THE_GENERAL_INFINITE_DOMAIN_CASE",
+    "NO_CLAIM_TERMINAL_OUTCOME_PREORDER_COMPLETENESS",
+    "NO_CLAIM_EXTERNAL_CONTEXT_DOMAIN_COMPLETENESS",
+    "NO_CLAIM_BRAIN_DOMINATES_OPUS55",
+    "NO_OPEN_TRUTH_OBLIGATION_DELETED",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "classification": "INDEPENDENT_MATHEMATICAL_CORROBORATION",
+    "terminal_progress_credit": false,
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0
+  }
+}
