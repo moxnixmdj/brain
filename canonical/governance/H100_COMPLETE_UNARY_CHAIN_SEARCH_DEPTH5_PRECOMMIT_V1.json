@@ -1,0 +1,136 @@
+{
+  "schema": "PROJECT_BRAIN_H100_COMPLETE_UNARY_CHAIN_SEARCH_DEPTH5_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_DEPTH5_IMPLEMENTATION_AND_OUTCOMES__INDEPENDENT_A_RESEARCH",
+  "operator_order": [
+    "neg",
+    "abs",
+    "square",
+    "sqrt_abs",
+    "log1p_abs",
+    "sat"
+  ],
+  "max_depth": 5,
+  "expected_counts": {
+    "1": 6,
+    "2": 36,
+    "3": 216,
+    "4": 1296,
+    "5": 7776
+  },
+  "expected_cumulative_count": 9330,
+  "training_x": [
+    -4,
+    -3.5,
+    -3,
+    -2.5,
+    -2,
+    -1.5,
+    -1,
+    -0.6,
+    -0.2,
+    0,
+    0.4,
+    0.8,
+    1,
+    1.5,
+    2,
+    2.5,
+    3,
+    3.5,
+    4
+  ],
+  "holdout_x": [
+    -3.8,
+    -3.2,
+    -2.8,
+    -2.2,
+    -1.8,
+    -1.2,
+    -0.8,
+    -0.4,
+    0.2,
+    0.6,
+    1.2,
+    1.8,
+    2.2,
+    2.8,
+    3.2,
+    3.8
+  ],
+  "fresh_tasks": [
+    {
+      "id": "D5_A",
+      "sequence": [
+        "sat",
+        "log1p_abs",
+        "square",
+        "sat",
+        "log1p_abs"
+      ],
+      "seed": [
+        0.31,
+        -0.17,
+        1.08
+      ],
+      "transfer": [
+        -0.62,
+        0.27,
+        -0.91
+      ]
+    },
+    {
+      "id": "D5_B",
+      "sequence": [
+        "log1p_abs",
+        "square",
+        "sat",
+        "sqrt_abs",
+        "sat"
+      ],
+      "seed": [
+        -0.14,
+        0.09,
+        0.87
+      ],
+      "transfer": [
+        0.73,
+        -0.21,
+        1.19
+      ]
+    },
+    {
+      "id": "D5_C",
+      "sequence": [
+        "square",
+        "sat",
+        "sqrt_abs",
+        "log1p_abs",
+        "sat"
+      ],
+      "seed": [
+        0.22,
+        0.19,
+        -1.03
+      ],
+      "transfer": [
+        -0.41,
+        -0.11,
+        0.76
+      ]
+    }
+  ],
+  "pass_gate": [
+    "NO_DEPTH_1_TO_4_EXACT_CANDIDATE_FOR_ANY_TASK",
+    "FIRST_EXACT_DEPTH_IS_5_FOR_ALL_THREE_TASKS",
+    "SELECTED_DEPTH5_STRUCTURE_TRANSFER_HOLDOUT_NRMSE_LE_1E-8",
+    "CUMULATIVE_ENUMERATION_COUNT_9330_PER_TASK",
+    "PERSISTENT_LEARNED_BYTES_ZERO"
+  ],
+  "hard_nonclaims": [
+    "DEPTH5_UNARY_CHAINS_ARE_STILL_A_BOUNDED_SYNTHETIC_FAMILY",
+    "THIS_DOES_NOT_PROVE_GENERAL_PROGRAM_SEARCH",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
