@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_HONESTY_PRIMARY_SOURCE_SNAPSHOT_BINDING_20261006_V1",
+  "date": "2026-10-06",
+  "status": "TWO_INDEPENDENT_PRIMARY_SOURCE_FETCHES__SEMANTIC_MARKERS_STABLE__RAW_BYTES_DRIFTED__ZERO_CREDIT",
+  "source": {
+    "authority": "ANTHROPIC_PRIMARY",
+    "url": "https://www.anthropic.com/transparency",
+    "model": "Claude Opus 5.5"
+  },
+  "snapshots": [
+    {
+      "carrier": "AUTHORIZED_WINDOWS_DEVICE",
+      "byte_count": 926074,
+      "sha256": "6a4e59d9f9b6f436e51eca1b70ea3cfb05929da0c11e1c492f38c6a44a7d0f31",
+      "marker_results": {
+        "FALSE_COMPLETION": true,
+        "PREEXISTING_ANSWER_DISCLOSURE": true,
+        "HIDDEN_CHANGE_DISCLOSURE": true,
+        "HONESTY_UNDER_PRESSURE": true,
+        "OPUS55_RELATIVE_MISLEADING_BEHAVIOR": true
+      }
+    },
+    {
+      "carrier": "INDEPENDENT_SPRITE",
+      "carrier_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+      "byte_count": 926137,
+      "sha256": "d550237cc97e7af7e7856b73dd715726ce387e137665ddade9f99c8795d4415f",
+      "marker_results": {
+        "FALSE_COMPLETION": true,
+        "PREEXISTING_ANSWER_DISCLOSURE": true,
+        "HIDDEN_CHANGE_DISCLOSURE": true,
+        "HONESTY_UNDER_PRESSURE": true,
+        "OPUS55_RELATIVE_MISLEADING_BEHAVIOR": true
+      }
+    }
+  ],
+  "dynamic_source_adjudication": {
+    "byte_identical": false,
+    "semantic_marker_intersection_count": 5,
+    "semantic_marker_count": 5,
+    "conclusion": "DO_NOT_TREAT_DYNAMIC_PAGE_BYTES_AS_IMMUTABLE__PRESERVE_ONLY_THE_FIVE_CROSS_SNAPSHOT_PRIMARY_SOURCE_OBSERVATIONS"
+  },
+  "static_system_card_identity": {
+    "url": "https://www.anthropic.com/claude-opus-5-5-system-card",
+    "observed_response_bytes": 17795106,
+    "sha256": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378",
+    "role": "DOCUMENT_IDENTITY_ONLY__NO_CONTENT_CLAIM_DERIVED_HERE_BECAUSE_THE_WEB_PDF_RENDERER_COULD_NOT_OPEN_THE_LARGE_DOCUMENT"
+  },
+  "observed_semantic_facts": [
+    "ANTHROPIC_EVALUATES_FALSE_OR_UNEARNED_TASK_COMPLETION_AS_MISLEADING_BEHAVIOR",
+    "ANTHROPIC_EVALUATES_DISCLOSURE_OF_PREEXISTING_ANSWER_USE",
+    "ANTHROPIC_EVALUATES_DISCLOSURE_OF_HIDDEN_CHANGES",
+    "ANTHROPIC_EVALUATES_HONESTY_UNDER_PRESSURE",
+    "ANTHROPIC_REPORTS_OPUS55_RELATIVE_PERFORMANCE_ON_THE_MISLEADING_BEHAVIOR_SUITE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_DYNAMIC_WEBPAGE_BYTES_ARE_STABLE",
+    "NO_CLAIM_SYSTEM_CARD_PDF_CONTENT_WAS_PARSED_IN_THIS_RECEIPT",
+    "NO_HONESTY_PARITY_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
