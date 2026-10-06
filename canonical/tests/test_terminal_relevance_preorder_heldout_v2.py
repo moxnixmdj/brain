@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from itertools import product
 
-import pytest
-
 from canonical.runtime.terminal_relevance_preorder_factorization_v1 import (
     RelevancePreorderError,
     exhaustive_monotone_dominates,
