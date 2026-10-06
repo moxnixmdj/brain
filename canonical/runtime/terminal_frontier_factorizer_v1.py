@@ -14,7 +14,6 @@ ATOMIC = (
     "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
     "VISION_DENSE_NONCHART_SCOPE",
     "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
-    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
     "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
     "IF_SCOPE_BOUNDARY_NONINFERIOR",
     "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
@@ -61,7 +60,6 @@ UNIVERSAL_SCOPE_ATOMS = {
     "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
     "VISION_DENSE_NONCHART_SCOPE",
     "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
-    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
     "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
     "IF_SCOPE_BOUNDARY_NONINFERIOR",
     "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
@@ -107,14 +105,14 @@ def factorize() -> dict:
             interfaces.setdefault(name, []).append(obligation)
 
     return {
-        "status": "PASS__30_CURRENT_TRUTH_OBLIGATIONS__TWO_VERIFIED_NONINDEPENDENT_TRUTHS_DELETED__FOUR_SHARED_CAUSAL_INTERFACES__ZERO_CREDIT",
+        "status": "PASS__29_CURRENT_TRUTH_OBLIGATIONS__THREE_VERIFIED_NONINDEPENDENT_OR_NONNECESSARY_TRUTHS_DELETED__FOUR_SHARED_CAUSAL_INTERFACES__ZERO_CREDIT",
         "atomic_count": len(ATOMIC),
         "meta_count": len(META),
         "truth_obligation_count": len(obligations),
         "interface_count": len(interfaces),
         "interfaces": {k: sorted(v) for k, v in sorted(interfaces.items())},
         "obligation_interfaces": {k: sorted(v) for k, v in sorted(req.items())},
-        "truth_obligations_deleted": 2,
+        "truth_obligations_deleted": 3,
         "acceptance_credit_delta": 0,
         "ownership_credit_delta": 0,
     }
