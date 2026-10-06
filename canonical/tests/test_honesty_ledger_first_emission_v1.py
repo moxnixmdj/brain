@@ -23,7 +23,7 @@ def base():
             {"id": "o1", "state": "VERIFIED", "receipts": [h("o1")]},
         ],
         "declared_inputs": [
-            {"input_id": "source", "sha256": h("source"), "material": True},
+            {"input_id": "source", "sha256": h("source")},
         ],
         "content_items": [
             {
@@ -91,7 +91,7 @@ def test_uncertain_content_may_render_without_evidence_but_is_marked_uncertain()
     assert claim["explicit_uncertainty"] is True
 
 
-def test_material_declared_input_becomes_disclosed_provenance():
+def test_all_declared_inputs_become_material_disclosed_provenance():
     out = compile_emission(base())
     event = out["honesty_record"]["provenance_events"][0]
     assert event["event_id"] == "input::source"
@@ -149,3 +149,11 @@ def test_unknown_content_field_cannot_smuggle_dynamic_text():
     # V1 must reject fields it does not semantically bind rather than silently
     # dropping them from the rendered/ledger relation.
     assert out["status"] == "FAIL_CLOSED"
+
+
+def test_caller_cannot_mark_input_nonmaterial():
+    x = base()
+    x["declared_inputs"][0]["material"] = False
+    out = compile_emission(x)
+    assert out["status"] == "FAIL_CLOSED"
+    assert "INPUT_0_FIELDS_INVALID" in out["errors"][0]
