@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_K6_POLICY_COVER_INFORMATION_BOUNDARY_CURRENT_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_SOURCE_REPLAY_PASS__4_OF_4__ZERO_PREPROOF_K6_IMPLEMENTATION_RESIDUAL__ONE_POLICY_INDEX_INFORMATION_BOUNDARY__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "k6-policy-cover-information-boundary-20261006-v1",
+    "exact_blobs": {
+      "canonical/governance/K6_POLICY_COVER_INFORMATION_BOUNDARY_CURRENT_20261006_V1.json": "ab4fcebfe0412b4b6ba15039ed6f8049c3aec095",
+      "canonical/runtime/k6_policy_cover_information_boundary_current_v1.py": "36d7dcb7de037a99dc80c3cf78ba76fdb30253cd",
+      "canonical/tests/test_k6_policy_cover_information_boundary_current_v1.py": "5fbe124659249fbe434d190516d5716307127072"
+    },
+    "exact_sources": {
+      "canonical/governance/K6_MINIMUM_ADEQUATE_POLICY_COVER_THEOREM_20261006_V1.json": "9bc8e53c8e5a59d540dd77ddb69e9f4100812668",
+      "canonical/verification/K6_MINIMUM_ADEQUATE_POLICY_COVER_SPRITE_VERIFICATION_20261006_V1.json": "84cc156f7067a6eb2be284727ac1a76f37343f1f",
+      "canonical/governance/K6_TARGET_RELATIVE_DECISION_QUOTIENT_THEOREM_20261006_V1.json": "03baddc27d5ee9dd73656fdd801251e1f4fd8cc6",
+      "canonical/verification/K6_TARGET_RELATIVE_DECISION_QUOTIENT_SPRITE_VERIFICATION_20261006_V1.json": "51a449b74550894a04519ec8e17f008e468506c4",
+      "canonical/runtime/k6_decision_refinement_compiler_v1.py": "11bd42f006f761670f602d5445da79a5a10683bc",
+      "canonical/governance/K6_INFORMATION_RESOURCE_CUT_20261006_V1.json": "b5b99aa056011139396ab5358dfe8763ff4d7d7f",
+      "canonical/verification/K6_INFORMATION_RESOURCE_CUT_SPRITE_VERIFICATION_20261006_V1.json": "0e9ca08804e75fb48f96f9cbeae99dd0f7a0304f",
+      "canonical/governance/ATOMIC_SURVIVOR_EXECUTION_AUTHORITY_RECONCILIATION_V1.json": "19b363f3f6be080b73ba144f82ef5f0a481217b1",
+      "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json": "eebdeb6de3b3cfaed30a3bc991dae0548d25e7f5",
+      "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json": "ca28ce910e0d946bc7f78d556d47d0ac109a36f2"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/k6boundary",
+    "materialization": "EXACT_GITHUB_BLOB_CONTENT_FOR_CANDIDATE_AND_ALL_TEN_BOUND_SOURCES",
+    "runner": "ZERO_DEPENDENCY_DIRECT_TEST_FUNCTION_RUNNER",
+    "tests_passed": 4,
+    "tests_total": 4,
+    "result": "PASS_ZERO_EXIT"
+  },
+  "verified": [
+    "CURRENT_CANONICAL_AUTHORITY_HAS_ZERO_PREPROOF_IMPLEMENTATION_RESIDUALS_AND_THREE_LATENT_DIAGNOSTIC_CLASSES",
+    "K6P_IS_BOUND_AS_ONE_CONDITIONAL_INFORMATION_INTERFACE_NOT_A_CAPABILITY_BOX",
+    "THE_FINITE_INFORMATION_TARGET_IS_POLICY_COVER_NUMBER_tau_WITH_FIXED_LENGTH_BOUND_CEIL_LOG2_tau",
+    "THE_FIREWALL_DISTINGUISHES_EMPTY_ADEQUATE_POLICY_SET_CAPABILITY_GAP_FROM_NONEMPTY_BUT_UNIDENTIFIABLE_POLICY_INDEX_INFORMATION_GAP",
+    "FIVE_OWNED_IMPLEMENTATION_GENERATORS_ARE_PRESERVED",
+    "GENERIC_K6_IMPLEMENTATION_PREPROOF_IS_FORBIDDEN_BY_THE_CURRENT_NORMAL_FORM",
+    "ALL_CREDIT_DELTAS_REMAIN_ZERO"
+  ],
+  "consequence": {
+    "current_normal_form": "G1_G5_OWNED_IMPLEMENTATION__K6P_CONDITIONAL_POLICY_INDEX_INFORMATION_BOUNDARY",
+    "capability_gap_rule": "EMPTY_F(w)_REOPENS_ONLY_A_CAUSALLY_LOCALIZED_MINIMUM_CAPABILITY_OR_OWNERSHIP_RESIDUAL",
+    "information_gap_rule": "NONEMPTY_F(w)_FOR_ALL_RELEVANT_WORLDS_BUT_NO_IDENTIFIABLE_COMMON_OR_COVER_POLICY_REMAINS_AN_INFORMATION_BOUNDARY_NOT_A_CAPABILITY_FAILURE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_FIVE_OWNED_GENERATORS_ALREADY_DOMINATE_OPUS55",
+    "NO_CLAIM_REAL_OPUS55_POLICY_ADEQUACY_RELATION_OR_tau_IS_KNOWN",
+    "NO_CLAIM_POLICY_INDEX_INFORMATION_IS_ALWAYS_AVAILABLE",
+    "NO_CLAIM_NO_NEW_MECHANISM_CAN_EVER_REOPEN_AFTER_LOCALIZED_FAILURE",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
