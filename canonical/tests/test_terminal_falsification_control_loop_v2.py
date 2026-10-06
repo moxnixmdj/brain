@@ -206,6 +206,33 @@ def test_aggregate_leverage_ranking_uses_resolved_members_not_declared_metadata(
     out = compile_control_loop(s)
     assert out.ordered_claim_ids == ("U", "E", "P")
 
+def test_accepts_nested_current_truth_state_open_count():
+    inputs = [dict(BIND)]
+    state = {
+        "authoritative_inputs": inputs,
+        "frontier_fingerprint": _fingerprint(inputs),
+        "current_truth_state": {"known_open_truth_obligations": 1},
+        "claims": [_claim("U", "UNIVERSE_AUTHORITY")],
+    }
+    out = compile_control_loop(state)
+    assert out.terminal_ready is False
+
+def test_rejects_conflicting_open_count_bindings():
+    inputs = [dict(BIND)]
+    state = {
+        "authoritative_inputs": inputs,
+        "frontier_fingerprint": _fingerprint(inputs),
+        "known_open_truth_obligations": 1,
+        "current_truth_state": {"known_open_truth_obligations": 2},
+        "claims": [_claim("U", "UNIVERSE_AUTHORITY")],
+    }
+    try:
+        compile_control_loop(state)
+    except ValueError as e:
+        assert "conflicting known_open_truth_obligations" in str(e)
+    else:
+        raise AssertionError("conflicting open-count bindings accepted")
+
 def run_all():
     tests = [
         test_rejects_inflated_unbound_leverage_count,
@@ -222,10 +249,12 @@ def run_all():
         test_survival_is_zero_credit,
         test_proved_universe_with_receipt_can_close_authority_lane,
         test_aggregate_leverage_ranking_uses_resolved_members_not_declared_metadata,
+        test_accepts_nested_current_truth_state_open_count,
+        test_rejects_conflicting_open_count_bindings,
     ]
     for test in tests:
         test()
     return len(tests)
 
 if __name__ == "__main__":
-    print(f"PASS {run_all()}/14")
+    print(f"PASS {run_all()}/16")
