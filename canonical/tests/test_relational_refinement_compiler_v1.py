@@ -8,8 +8,8 @@ from canonical.runtime.relational_refinement_compiler_v1 import (
 SHA = "a" * 40
 
 
-def receipt(kind=None):
-    out = {"path": "canonical/proof.json", "git_blob_sha": SHA}
+def receipt(kind=None, path="canonical/proof.json"):
+    out = {"path": path, "git_blob_sha": SHA}
     if kind is not None:
         out["proof_kind"] = kind
     return out
@@ -35,7 +35,11 @@ def base_row():
 
 
 def base_doc():
-    return {
+    row = base_row()
+    row["contract_binding_receipt"] = receipt(
+        "ROW_BINDING", "canonical/row_binding.json"
+    )
+    doc = {
         "schema": SCHEMA,
         "target_claim": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
         "relation_id": "R_EVAL_AWARE_V1",
@@ -44,8 +48,12 @@ def base_doc():
         "constructor_preservation_receipt": receipt("CONSTRUCTOR"),
         "terminal_preservation_receipt": receipt("TERMINAL"),
         "acceptance_order_soundness_receipt": receipt("ORDER"),
-        "rows": [base_row()],
+        "global_contract_binding_receipt": receipt(
+            "GLOBAL_BINDING", "canonical/global_binding.json"
+        ),
+        "rows": [row],
     }
+    return doc
 
 
 class RelationalRefinementCompilerTests(unittest.TestCase):
@@ -56,18 +64,38 @@ class RelationalRefinementCompilerTests(unittest.TestCase):
         )
         self._blob_patch.start()
 
+        def load_binding(value):
+            path = value.get("path") if isinstance(value, dict) else None
+            if path == "canonical/row_binding.json":
+                return row_binding(self._current_doc["rows"][0])
+            if path == "canonical/global_binding.json":
+                return global_binding(self._current_doc)
+            return None
+
+        self._current_doc = self.fresh_doc()
+        self._json_patch = patch(
+            "canonical.runtime.relational_refinement_compiler_v1._load_json_receipt",
+            side_effect=load_binding,
+        )
+        self._json_patch.start()
+
     def tearDown(self):
+        self._json_patch.stop()
         self._blob_patch.stop()
 
+    def fresh_doc(self):
+        self._current_doc = self.fresh_doc()
+        return self._current_doc
+
     def test_complete_row_and_globals_ready(self):
-        out = compile_relational_refinement(base_doc())
+        out = compile_relational_refinement(self.fresh_doc())
         self.assertTrue(out["whole_trace_candidate_ready"])
         self.assertEqual(out["closed_row_count"], 1)
         self.assertEqual(out["open_row_count"], 0)
         self.assertEqual(out["terminal_credit_delta"], 0)
 
     def test_missing_local_receipt_remains_open(self):
-        doc = base_doc()
+        doc = self.fresh_doc()
         doc["rows"][0]["local_refinement_receipt"] = None
         out = compile_relational_refinement(doc)
         self.assertFalse(out["whole_trace_candidate_ready"])
@@ -75,7 +103,7 @@ class RelationalRefinementCompilerTests(unittest.TestCase):
         self.assertIn("local_refinement_receipt", out["rows"][0]["missing_receipts"])
 
     def test_benchmark_score_cannot_substitute_for_local_refinement(self):
-        doc = base_doc()
+        doc = self.fresh_doc()
         doc["rows"][0]["local_refinement_receipt"] = receipt("BENCHMARK_SCORE")
         out = compile_relational_refinement(doc)
         self.assertEqual(out["status"], "FAIL_CLOSED")
@@ -84,7 +112,7 @@ class RelationalRefinementCompilerTests(unittest.TestCase):
         )
 
     def test_unrestricted_hidden_requires_observational_equivalence(self):
-        doc = base_doc()
+        doc = self.fresh_doc()
         doc["rows"][0]["evaluator_binding"] = {
             "mode": "UNRESTRICTED_HIDDEN",
             "equivalence_receipt": receipt("NOT_EQUIVALENCE"),
@@ -94,7 +122,7 @@ class RelationalRefinementCompilerTests(unittest.TestCase):
         self.assertIn("R1:equivalence_receipt:PROOF_KIND_INVALID", out["errors"])
 
     def test_restricted_hidden_requires_order_and_utility_class(self):
-        doc = base_doc()
+        doc = self.fresh_doc()
         doc["rows"][0]["evaluator_binding"] = {
             "mode": "RESTRICTED_HIDDEN",
             "utility_class_receipt": receipt("UTILITY_CLASS"),
@@ -107,7 +135,7 @@ class RelationalRefinementCompilerTests(unittest.TestCase):
         )
 
     def test_missing_global_receipt_blocks_whole_trace_not_row(self):
-        doc = base_doc()
+        doc = self.fresh_doc()
         doc["constructor_preservation_receipt"] = None
         out = compile_relational_refinement(doc)
         self.assertFalse(out["whole_trace_candidate_ready"])
@@ -115,14 +143,14 @@ class RelationalRefinementCompilerTests(unittest.TestCase):
         self.assertEqual(out["global_missing_receipts"], ["constructor_preservation_receipt"])
 
     def test_duplicate_row_id_fails_closed(self):
-        doc = base_doc()
+        doc = self.fresh_doc()
         doc["rows"].append(dict(base_row()))
         out = compile_relational_refinement(doc)
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertIn("R1:DUPLICATE_ID", out["errors"])
 
     def test_invalid_content_address_does_not_close(self):
-        doc = base_doc()
+        doc = self.fresh_doc()
         doc["rows"][0]["ownership_receipt"] = {
             "path": "canonical/x.json",
             "git_blob_sha": "bad",
@@ -132,7 +160,7 @@ class RelationalRefinementCompilerTests(unittest.TestCase):
         self.assertIn("ownership_receipt", out["rows"][0]["missing_receipts"])
 
     def test_existing_shape_with_mismatched_actual_blob_fails_closed(self):
-        doc = base_doc()
+        doc = self.fresh_doc()
         with patch(
             "canonical.runtime.relational_refinement_compiler_v1._git_blob_sha",
             return_value="b" * 40,
@@ -144,8 +172,56 @@ class RelationalRefinementCompilerTests(unittest.TestCase):
             out["global_missing_receipts"],
         )
 
+    def test_row_contract_binding_mismatch_fails_closed(self):
+        doc = self.fresh_doc()
+
+        def bad_load(value):
+            path = value.get("path") if isinstance(value, dict) else None
+            if path == "canonical/row_binding.json":
+                obj = row_binding(doc["rows"][0])
+                obj["postcondition_spec"] = "WRONG"
+                return obj
+            if path == "canonical/global_binding.json":
+                return global_binding(doc)
+            return None
+
+        with patch(
+            "canonical.runtime.relational_refinement_compiler_v1._load_json_receipt",
+            side_effect=bad_load,
+        ):
+            out = compile_relational_refinement(doc)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn(
+            "R1:contract_binding_receipt:MISMATCH:postcondition_spec",
+            out["errors"],
+        )
+
+    def test_global_contract_binding_mismatch_fails_closed(self):
+        doc = self.fresh_doc()
+
+        def bad_load(value):
+            path = value.get("path") if isinstance(value, dict) else None
+            if path == "canonical/row_binding.json":
+                return row_binding(doc["rows"][0])
+            if path == "canonical/global_binding.json":
+                obj = global_binding(doc)
+                obj["relation_id"] = "WRONG"
+                return obj
+            return None
+
+        with patch(
+            "canonical.runtime.relational_refinement_compiler_v1._load_json_receipt",
+            side_effect=bad_load,
+        ):
+            out = compile_relational_refinement(doc)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn(
+            "GLOBAL_CONTRACT_BINDING_RELATION_ID_MISMATCH",
+            out["errors"],
+        )
+
     def test_empty_rows_fail_closed(self):
-        doc = base_doc()
+        doc = self.fresh_doc()
         doc["rows"] = []
         out = compile_relational_refinement(doc)
         self.assertEqual(out["status"], "FAIL_CLOSED")
