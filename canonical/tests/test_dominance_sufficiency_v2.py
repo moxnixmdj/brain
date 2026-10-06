@@ -112,7 +112,7 @@ def test_wrong_live_set_receipt_is_rejected():
     x["hypothesis_coverage_receipt"]["live_hypothesis_set_sha256"] = "c" * 64
     out = compile_dominance_sufficiency_v2(x)
     assert out["status"] == "FAIL_CLOSED"
-    assert "LIVE_HYPOTHESIS_SET_MISMATCH" in out["errors"][0]
+    assert "LIVE_HYPOTHESIS_SET_SHA256_MISMATCH" in out["errors"][0]
 
 
 def test_unrelated_ownership_receipt_is_rejected():
