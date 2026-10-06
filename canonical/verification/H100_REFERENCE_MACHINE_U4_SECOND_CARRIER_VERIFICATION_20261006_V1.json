@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REFERENCE_MACHINE_U4_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__6_OF_6",
+  "verified": [
+    "U1_ARITHMETIC_BEHAVIOR_MATCH",
+    "HEAP_AND_INPUT_BEHAVIOR",
+    "INTEGER_BIT_COST_MONOTONIC",
+    "GIANT_INTEGER_BLOCKED_BY_LOW_M",
+    "SAME_PROGRAM_PASSES_WITH_HIGHER_M",
+    "PEAK_LIVE_BITS_REPORTED"
+  ],
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "promotion_authority": false
+}
