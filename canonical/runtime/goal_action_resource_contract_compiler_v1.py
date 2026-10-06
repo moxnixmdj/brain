@@ -18,7 +18,7 @@ from typing import Any
 SCHEMA = "PROJECT_BRAIN_GOAL_ACTION_RESOURCE_CONTRACT_COMPILER_V1"
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 RUNTIME_REL = "canonical/runtime/astra_runtime.py"
-EXPECTED_RUNTIME_BLOB = "15dd59ad644c5c73a9218dba4fcc17f880d725f0"
+EXPECTED_RUNTIME_BLOB = "b7efc08e64a483e9a759c181a4f9a1cf29e47a9a"
 
 
 def _git_blob_sha(raw: bytes) -> str:
