@@ -175,3 +175,29 @@ def test_agency_requires_actual_three_type_plan():
     assert result["pass"] is False
     assert "INTEGRATED_PLAN_ORDER_INVALID" in result["integration_errors"]
     assert "INTEGRATED_PLAN_DISTINCT_ACTION_TYPES_LT_3" in result["integration_errors"]
+
+
+def test_requirement_change_rejects_stale_prechange_semantic_model():
+    atom = "dimension:requirement_change"
+    case = _case(atom)
+    base = RehearsalAgent()
+    first_m0_payload = None
+
+    def stale(kind, public, context):
+        nonlocal first_m0_payload
+        out = dict(base(kind, public, context))
+        if kind == "m0":
+            first_m0_payload = dict(out["payload"])
+        elif kind == "m0_change":
+            assert first_m0_payload is not None
+            out["payload"] = dict(first_m0_payload)
+        return out
+
+    result = score_integrated_case(case, stale)
+    assert result["pass"] is False
+    changed = [
+        row for row in result["component_results"]
+        if row["kind"] == "m0_change"
+    ]
+    assert len(changed) == 1
+    assert changed[0]["pass"] is False
