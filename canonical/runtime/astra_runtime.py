@@ -128,15 +128,55 @@ def readj(p): return json.loads(pathlib.Path(p).read_text(encoding="utf-8"))
 
 DECLARED_CROSS_STEP_CONTEXT_MODE="DECLARED_CONTENT_BOUND_V1"
 
+def _honesty_result_gate():
+    return _load_runtime_helper("honesty_load_bearing_result_gate_v1")
+
+def _certify_step_result_if_present(result,mission_id,mission_sha256,step_index,step_id):
+    if not isinstance(result,dict):
+        raise Blocker("LOAD_BEARING_RESULT_OBJECT_REQUIRED")
+    record=result.get("honesty_record")
+    if record is None:
+        return None
+    if not isinstance(record,dict):
+        raise Blocker("LOAD_BEARING_HONESTY_RECORD_INVALID")
+    try:
+        return _honesty_result_gate().certify_result(
+            mission_id=mission_id,
+            mission_sha256=mission_sha256,
+            step_index=step_index,
+            step_id=step_id,
+            result=result,
+            honesty_record=record,
+        )
+    except Exception as exc:
+        raise Blocker("LOAD_BEARING_HONESTY_CERTIFICATION_FAILED:"+type(exc).__name__+":"+str(exc)) from exc
+
+def _validate_load_bearing_record(state,rec):
+    cert=rec.get("load_bearing_honesty_certificate")
+    if not isinstance(cert,dict):
+        raise Blocker("LOAD_BEARING_RESULT_HONESTY_CERTIFICATE_REQUIRED:"+str(rec.get("step_index")))
+    try:
+        _honesty_result_gate().validate_result_certificate(
+            certificate=cert,
+            mission_id=str(state.get("mission_id") or ""),
+            mission_sha256=str(state.get("mission_sha256") or ""),
+            step_index=rec.get("step_index"),
+            step_id=str(rec.get("step_id") or ""),
+            result=rec.get("result"),
+        )
+    except Exception as exc:
+        raise Blocker("LOAD_BEARING_RESULT_HONESTY_CERTIFICATE_INVALID:"+type(exc).__name__+":"+str(exc)) from exc
+    return rec["result"]
+
 def _context_result_map(state):
     latest={}
     for rec in state.get("history",[]):
         if rec.get("ok"):
-            latest[rec["step_index"]]=rec["result"]
+            latest[rec["step_index"]]=_validate_load_bearing_record(state,rec)
     for batch in state.get("rehydrations",[]):
         for rec in batch.get("steps",[]):
             if rec.get("ok"):
-                latest[rec["step_index"]]=rec["result"]
+                latest[rec["step_index"]]=_validate_load_bearing_record(state,rec)
     return latest
 
 def context_results(state):
@@ -6555,6 +6595,13 @@ def main():
                 print(json.dumps(blocker)); return 3
             rec={"step_index":j,"step_id":prior["id"],"ok":bool(ok),"result":result,
                  "rehydration":True,"completed_at_utc":utc()}
+            cert=_certify_step_result_if_present(
+                result,mid,mission_sha256,j,prior["id"]
+            )
+            if cert is None:
+                rec["quarantined_untrusted_audit_data"]=True
+            else:
+                rec["load_bearing_honesty_certificate"]=cert
             rehydrated.append(rec)
             if not ok:
                 blocker={
@@ -6594,6 +6641,13 @@ def main():
             write_statej(state_path,state)
             print(json.dumps(blocker)); return 3
         rec={"step_index":i,"step_id":step["id"],"ok":bool(ok),"result":result,"completed_at_utc":utc()}
+        cert=_certify_step_result_if_present(
+            result,mid,mission_sha256,i,step["id"]
+        )
+        if cert is None:
+            rec["quarantined_untrusted_audit_data"]=True
+        else:
+            rec["load_bearing_honesty_certificate"]=cert
         state["history"].append(rec)
         if not ok:
             blocker={
@@ -6616,6 +6670,35 @@ def main():
         write_statej(state_path,state)
     _continuous_obs_revalidate("BEFORE_TERMINAL_RECEIPT")
     state.pop("blocker",None)
+    state["status"]="COMPLETE_PENDING_HONESTY"
+    state["updated_at_utc"]=utc()
+    write_statej(state_path,state)
+    preterminal_state_sha256=sha_file(state_path)
+    terminal_honesty_record=mission.get("terminal_honesty_record")
+    if terminal_honesty_record is None and state.get("history"):
+        last_result=state["history"][-1].get("result")
+        if isinstance(last_result,dict):
+            terminal_honesty_record=last_result.get("terminal_honesty_record")
+    try:
+        terminal_honesty_certificate=_honesty_result_gate().certify_terminal_completion(
+            mission_id=mid,
+            mission_sha256=mission_sha256,
+            state_sha256=preterminal_state_sha256,
+            honesty_record=terminal_honesty_record,
+        )
+    except Exception as exc:
+        blocker={
+          "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+          "mission_id":mid,
+          "phase":"TERMINAL_HONESTY",
+          "error":"TERMINAL_HONESTY_CERTIFICATION_FAILED:"+type(exc).__name__+":"+str(exc),
+          "observed_at_utc":utc()
+        }
+        write_evidencej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
+        state["status"]="BLOCKED"; state["blocker"]=blocker; state["updated_at_utc"]=utc()
+        write_statej(state_path,state)
+        print(json.dumps(blocker)); return 6
+    state["terminal_honesty_certificate"]=terminal_honesty_certificate
     state["status"]="COMPLETE"; state["completed_at_utc"]=utc()
     write_statej(state_path,state)
     receipt={
