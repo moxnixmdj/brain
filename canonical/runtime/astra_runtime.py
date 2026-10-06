@@ -1169,6 +1169,13 @@ def _goal_action(action):
         return {"type":typ,"query":q,"hits":hits,"truncated":len(hits)>=80}
     if typ=="write_json_records":
         output=_safe_repo_mutation_path(args.get("output_path",""))
+        tmp_root=(ROOT/"canonical"/"astra_runtime"/"tmp").resolve()
+        if (
+            output==tmp_root
+            or tmp_root not in output.parents
+            or output.suffix.lower()!=".json"
+        ):
+            raise Blocker("JSON_RECORD_OUTPUT_PATH_NOT_EPHEMERAL_JSON")
         fields=args.get("fields")
         records=args.get("records")
         if (
