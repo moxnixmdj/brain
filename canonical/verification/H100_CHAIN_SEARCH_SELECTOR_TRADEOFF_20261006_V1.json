@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CHAIN_SEARCH_SELECTOR_TRADEOFF_20261006_V1",
+  "date": "2026-10-06",
+  "status": "OBSERVED_DEPTH4_PLUS_LINEAR_EXTRAPOLATION__INDEPENDENT_A_RESEARCH",
+  "source_verification": "canonical/verification/H100_COMPLETE_UNARY_CHAIN_SEARCH_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+  "operator_count": 6,
+  "observed": {
+    "max_depth": 4,
+    "cumulative_candidates": 1554,
+    "selector_bits": 11,
+    "median_search_seconds": 0.1789749740055413,
+    "median_seconds_per_candidate": 0.00011517051094307677
+  },
+  "extrapolation": [
+    {
+      "depth": 6,
+      "candidates": 55986,
+      "selector_bits": 16,
+      "seconds_at_depth4_rate": 6.447936225659096
+    },
+    {
+      "depth": 8,
+      "candidates": 2015538,
+      "selector_bits": 21,
+      "seconds_at_depth4_rate": 232.13054128518706
+    },
+    {
+      "depth": 10,
+      "candidates": 72559410,
+      "selector_bits": 27,
+      "seconds_at_depth4_rate": 8356.704323428194
+    }
+  ],
+  "deduction": "SMALL_PERSISTENT_STRUCTURE_SELECTORS_CAN_REPLACE_EXPONENTIALLY_GROWING_REPEATED_COMPLETE_SEARCH_IN_THIS_FROZEN_GRAMMAR",
+  "hard_nonclaims": [
+    "DEPTH6_TO_10_TIMES_ARE_LINEAR_EXTRAPOLATIONS_NOT_MEASUREMENTS",
+    "THIS_IS_NOT_A_GENERAL_PROGRAM_SEARCH_LOWER_BOUND",
+    "11_BITS_IS_CONDITIONAL_ON_THE_FROZEN_CHAIN_GRAMMAR_AND_DECODER"
+  ],
+  "promotion_authority": false
+}
