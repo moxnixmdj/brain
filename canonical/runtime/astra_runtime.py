@@ -535,6 +535,9 @@ def _safe_repo_path(raw):
 
 def _safe_repo_mutation_path(raw):
     p=_safe_repo_path(raw)
+    tmp_root=(ROOT/"canonical"/"astra_runtime"/"tmp").resolve()
+    if p==tmp_root or tmp_root not in p.parents:
+        raise Blocker("RUNTIME_MUTATION_OUTSIDE_EPHEMERAL_TMP")
     for reserved in (STATE_DIR.resolve(),EVID_DIR.resolve()):
         if p==reserved or reserved in p.parents:
             raise Blocker("ADMIN_RUNTIME_PATH_RESERVED_FOR_TYPED_DRIVER")
