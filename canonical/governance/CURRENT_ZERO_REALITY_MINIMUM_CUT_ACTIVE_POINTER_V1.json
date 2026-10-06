@@ -307,7 +307,7 @@
   "terminal_falsification_control_loop": {
     "status": "ACTIVE_IF_THIS_POINTER_IS_MERGED__HIGHER_ORDER_SCHEDULING_CONTROL__ZERO_TERMINAL_CREDIT",
     "governance": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V1.json",
-    "governance_git_blob_sha": "5847af0bff472162338f4cd26daf2ffd1849956f",
+    "governance_git_blob_sha": "a273fe7ceb19c5f99457278a35ee599999aa7a26",
     "activation": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_ACTIVATION_20261006_V1.json",
     "activation_git_blob_sha": "40d3717dd3825ede7d49a8ee0bf126051f18bf99",
     "runtime": "canonical/runtime/terminal_falsification_control_loop_v1.py",
@@ -316,8 +316,8 @@
     "tests_git_blob_sha": "b7dd1d89c9318a0864a018ed9684ed5e8b29bd5a",
     "local_verification": "canonical/verification/TERMINAL_FALSIFICATION_CONTROL_LOOP_LOCAL_VERIFICATION_20261006_V1.json",
     "local_verification_git_blob_sha": "bff494be53d365d939660f5b176e7b2755059517",
-    "local_tests": "PENDING_EXACT_REPLAY__13_TEST_SUITE_AFTER_UNIVERSE_AND_TRANSITIVE_LINEAGE_REPAIR",
-    "independent_replay": "OPEN",
+    "local_tests": "LOCAL_EXACT_BLOB_REPLAY_PASS__13_OF_13_CONTROLLER_TESTS__NOT_INDEPENDENT",
+    "independent_replay": "OPEN__PRIVATE_GITHUB_RUNNERS_FAILED_BEFORE_STEPS__COLD_SPRITE_NOT_WOKEN_WITHOUT_VERIFIED_ZERO_INCREMENTAL_COST",
     "current_schedule": [
       "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
       "C_BENCHMARK_WITNESS_ELIMINATION_V3",
@@ -344,7 +344,12 @@
     },
     "root3_production_bootstrap_repair_activation": {
       "path": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_ROOT3_PRODUCTION_BOOTSTRAP_REPAIR_ACTIVATION_20261006_V1.json",
-      "git_blob_sha": "655c3f2493c6660eef3d3cae439acf695607c686"
+      "git_blob_sha": "11bdf62cd4272e09e75fdefd528cf2c55bce5328"
+    },
+    "root3_production_bootstrap_local_execution": {
+      "path": "canonical/verification/ROOT3_PRODUCTION_BOOTSTRAP_REPAIR_LOCAL_EXECUTION_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "a25a641a1c8ea659e84be4041af1868dbc3edd9f",
+      "result": "LOCAL_EXACT_BLOB_REPLAY_PASS__17_OF_17_TOTAL__INDEPENDENT_COMPOSED_REPLAY_OPEN"
     }
   },
   "observable_trace_scope_superset": {
