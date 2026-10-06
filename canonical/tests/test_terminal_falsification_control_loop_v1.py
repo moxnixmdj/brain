@@ -130,6 +130,40 @@ def test_live_successor_unblocks_dependency_without_resurrecting_old_route():
     assert "NEW_EFFECT" in out.ordered_claim_ids
     assert "CHILD" in out.ordered_claim_ids
 
+
+def test_transitive_live_successor_repairs_entire_lineage():
+    state = {
+        "known_open_truth_obligations": 1,
+        "claims": [
+            _base_claim("OLD", "UNIVERSE_AUTHORITY", "FALSIFIED"),
+            _base_claim("MID", "UNIVERSE_AUTHORITY", "FALSIFIED", successor_of="OLD"),
+            _base_claim("NEW", "UNIVERSE_AUTHORITY", "ACTIVE", successor_of="MID"),
+        ],
+    }
+    out = compile_control_loop(state)
+    assert "OLD" in out.dead_claim_ids
+    assert "MID" in out.dead_claim_ids
+    assert out.unrepaired_dead_claim_ids == ()
+    assert out.ordered_claim_ids == ("NEW",)
+
+def test_dependency_on_ancestor_unblocks_through_transitive_successor():
+    state = {
+        "known_open_truth_obligations": 2,
+        "claims": [
+            _base_claim("U", "UNIVERSE_AUTHORITY", "ACTIVE"),
+            _base_claim("OLD_EFFECT", "EFFECT_CLOSURE", "FALSIFIED"),
+            _base_claim("MID_EFFECT", "EFFECT_CLOSURE", "FALSIFIED", successor_of="OLD_EFFECT"),
+            _base_claim("NEW_EFFECT", "EFFECT_CLOSURE", "ACTIVE", successor_of="MID_EFFECT"),
+            _base_claim("CHILD", "OWNERSHIP", "ACTIVE", depends_on=["OLD_EFFECT"]),
+        ],
+    }
+    out = compile_control_loop(state)
+    assert "OLD_EFFECT" not in out.unrepaired_dead_claim_ids
+    assert "MID_EFFECT" not in out.unrepaired_dead_claim_ids
+    assert "CHILD" not in out.blocked_claim_ids
+    assert "NEW_EFFECT" in out.ordered_claim_ids
+    assert "CHILD" in out.ordered_claim_ids
+
 def test_unrepaired_dead_claim_prevents_terminal_readiness():
     state = {
         "known_open_truth_obligations": 0,
@@ -159,6 +193,8 @@ def run_all():
         test_nonuniverse_lanes_rank_by_reachability_per_cost,
         test_dependency_on_falsified_claim_blocks_without_successor,
         test_live_successor_unblocks_dependency_without_resurrecting_old_route,
+        test_transitive_live_successor_repairs_entire_lineage,
+        test_dependency_on_ancestor_unblocks_through_transitive_successor,
         test_unrepaired_dead_claim_prevents_terminal_readiness,
     ]
     for test in tests:
@@ -166,4 +202,4 @@ def run_all():
     return len(tests)
 
 if __name__ == "__main__":
-    print(f"PASS {run_all()}/10")
+    print(f"PASS {run_all()}/12")
