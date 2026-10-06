@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_TWO_COUNTER_SIMULATION_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_COMPILER_IMPLEMENTATION_AND_TEST_OUTCOMES",
+  "reference_machine": "H100_U1_STACK_VM",
+  "source_model": {
+    "name": "TWO_COUNTER_MINSKY_MACHINE",
+    "counters": 2,
+    "instructions": [
+      "INC(counter,next_label)",
+      "DECJZ(counter,nonzero_label,zero_label)",
+      "HALT"
+    ],
+    "external_support": [
+      "https://link.springer.com/chapter/10.1007/978-3-032-22730-0_10",
+      "https://link.springer.com/chapter/10.1007/978-3-031-30823-9_3"
+    ]
+  },
+  "compiler_contract": [
+    "COUNTERS_MAP_TO_U1_HEAP_ADDRESSES_0_AND_1",
+    "INITIAL_COUNTERS_READ_FROM_RUNTIME_INPUT_INDICES_0_AND_1",
+    "INC_COMPILES_TO_LOAD_ADD_ONE_store_AND_JUMP",
+    "DECJZ_COMPILES_TO_LOAD_JZ_ZERO_ELSE_DECREMENT_AND_JUMP",
+    "HALT_WRITES_COUNTER_0_COUNTER_1_THEN_HALTS",
+    "NO_TASK_SPECIFIC_U1_OPCODE_CHANGES"
+  ],
+  "gate": "MULTIPLE_FROZEN_TWO_COUNTER_PROGRAMS_AND_INPUTS_MUST_MATCH_DIRECT_SOURCE_MACHINE_SIMULATION",
+  "promotion_authority": false
+}
