@@ -76,6 +76,24 @@ def test_content_addressed_proved_universe_can_close_authority_lane():
     assert out.universe_complete is True
     assert out.terminal_ready is True
 
+def test_all_live_universe_claims_must_be_proved():
+    state = {
+        "known_open_truth_obligations": 1,
+        "claims": [
+            _base_claim(
+                "COVERAGE",
+                "UNIVERSE_AUTHORITY",
+                "PROVED",
+                proof_receipts=[{"path":"coverage","git_blob_sha":"2"*40}],
+            ),
+            _base_claim("DOMINANCE", "UNIVERSE_AUTHORITY", "ACTIVE"),
+        ],
+    }
+    out = compile_control_loop(state)
+    assert out.universe_complete is False
+    assert out.terminal_ready is False
+    assert out.ordered_claim_ids == ("DOMINANCE",)
+
 def test_universe_lane_has_strict_precedence():
     state = {
         "known_open_truth_obligations": 2,
@@ -189,6 +207,7 @@ def run_all():
         test_proved_label_without_receipts_is_zero_credit,
         test_invalid_receipt_is_zero_credit,
         test_content_addressed_proved_universe_can_close_authority_lane,
+        test_all_live_universe_claims_must_be_proved,
         test_universe_lane_has_strict_precedence,
         test_nonuniverse_lanes_rank_by_reachability_per_cost,
         test_dependency_on_falsified_claim_blocks_without_successor,
@@ -202,4 +221,4 @@ def run_all():
     return len(tests)
 
 if __name__ == "__main__":
-    print(f"PASS {run_all()}/12")
+    print(f"PASS {run_all()}/13")
