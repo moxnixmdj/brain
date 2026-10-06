@@ -53,7 +53,7 @@
       "counterexample_receipts": [
         {
           "path": "canonical/verification/TERMINAL_PROGRESS_DELTA_GATE_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
-          "git_blob_sha": "56006d85e3edc0c187519404de4508f51f9a2f7e"
+          "git_blob_sha": "8c2daaf4bfe7a1971248de24541c99627db7e0ec"
         }
       ]
     },
