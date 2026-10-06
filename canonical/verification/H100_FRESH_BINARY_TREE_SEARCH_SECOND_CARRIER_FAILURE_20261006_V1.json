@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_H100_FRESH_BINARY_TREE_SEARCH_SECOND_CARRIER_FAILURE_20261006_V1",
+  "date": "2026-10-06",
+  "status": "FAIL__SECOND_ISOLATED_CARRIER__SEARCH_REACHABILITY_NOT_GRAMMAR",
+  "subject": {
+    "precommit": "canonical/governance/H100_FRESH_BINARY_TREE_SEARCH_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_fresh_binary_tree_search_v1.py",
+    "existing_search": "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py"
+  },
+  "observed": {
+    "tasks": [
+      {
+        "id": "BT_A",
+        "search_best_validation_nrmse": 0.026429266762906935,
+        "direct_hidden_tree_holdout_nrmse": 1.1273562089743726e-13,
+        "hidden_tree_complexity": 7
+      },
+      {
+        "id": "BT_B",
+        "search_best_validation_nrmse": 0.059413458290147984,
+        "direct_hidden_tree_holdout_nrmse": 3.772945192410928e-13,
+        "hidden_tree_complexity": 8
+      },
+      {
+        "id": "BT_C",
+        "search_best_validation_nrmse": 0.020810386707806463,
+        "direct_hidden_tree_holdout_nrmse": 1.3017603224328158e-12,
+        "hidden_tree_complexity": 7
+      }
+    ],
+    "all_registry_v8_miss": true,
+    "grammar_contains_hidden_operators": true,
+    "hidden_trees_exact_when_directly_fit": true,
+    "persistent_learned_bytes": 0
+  },
+  "diagnosis": "SCORE_PRUNED_BEAM_SEARCH_FAILS_TO_PRESERVE_REQUIRED_BRANCH_PREFIXES__TARGET_STRUCTURES_EXIST_INSIDE_THE_FROZEN_GRAMMAR",
+  "hard_nonclaims": [
+    "FAILURE_DOES_NOT_IMPLY_LEARNED_STATE_IS_NECESSARY",
+    "DIRECT_HIDDEN_TREE_DIAGNOSTIC_WAS_RUN_ONLY_AFTER_THE_FROZEN_SEARCH_FAILURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
