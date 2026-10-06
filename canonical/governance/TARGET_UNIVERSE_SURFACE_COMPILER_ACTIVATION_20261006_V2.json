@@ -1,0 +1,16 @@
+{
+  "schema":"PROJECT_BRAIN_TARGET_UNIVERSE_SURFACE_COMPILER_ACTIVATION_V2",
+  "date":"2026-10-06",
+  "status":"ACTIVE_IF_MERGED__FINITE_SOURCE_GUARD__LITERAL_COMPLETENESS_FALSE__ZERO_CREDIT",
+  "runtime":{"path":"canonical/runtime/target_universe_surface_compiler_v1.py","git_blob_sha":"5b7d4ed9b8e51c8291c86b192d0357e241a4c64c"},
+  "tests":{"path":"canonical/tests/test_target_universe_surface_compiler_v1.py","git_blob_sha":"ae6abe36776dc828eb2caf0420e69fddd8e1736d"},
+  "pre_repair_manifest":{"path":"canonical/governance/OPUS55_TARGET_UNIVERSE_SURFACE_MANIFEST_20261006_V1.json","git_blob_sha":"fb762bb85e23fdaccf0ab8e3d0f5ab10b7d45aac"},
+  "post_repair_manifest":{"path":"canonical/governance/OPUS55_TARGET_UNIVERSE_SURFACE_MANIFEST_20261006_V2.json","git_blob_sha":"460775ac3b25b5a2699cf5801035bfce88afbfa4"},
+  "local_semantic_check":{"unit_tests":"9_OF_9_PASS","pre_repair_basis_gaps":1,"post_repair_basis_gaps":0,"post_repair_valid_surfaces":"20_OF_20","literal_target_universe_complete":false},
+  "independent_check_completed":false,
+  "rules":["EACH_SURFACE_REQUIRES_TYPED_CLASSIFICATION","BOUND_ACCEPTANCE_STATE_REQUIRES_CONTENT_ADDRESSED_BASIS","FINITE_MANIFEST_CANNOT_PROVE_OPEN_WORLD_COMPLETENESS_WITHOUT_SEPARATE_PROOF"],
+  "acceptance_credit_delta":0,
+  "family_credit_delta":0,
+  "capability_credit_delta":0,
+  "ownership_credit_delta":0
+}
