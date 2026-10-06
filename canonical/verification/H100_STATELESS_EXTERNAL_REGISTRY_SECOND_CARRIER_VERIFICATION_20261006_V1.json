@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_H100_STATELESS_EXTERNAL_REGISTRY_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__3_OF_3",
+  "observed": {
+    "verified_recipes_hit": "3_OF_3",
+    "unverified_recipe_miss": true,
+    "internal_persistent_causal_learned_bits": 0,
+    "external_manifest_bytes": 223,
+    "external_manifest_bits": 1784
+  },
+  "interpretation": "OUTCOME_DEPENDENT_RECIPE_INFORMATION_CAN_BE_MOVED_OUT_OF_INTERNAL_PERSISTENT_STATE_INTO_RUNTIME_EXTERNAL_KNOWLEDGE_WITHOUT_LOSS_OF_THE_TESTED_BEHAVIOR",
+  "hard_nonclaims": [
+    "INFORMATION_WAS_RELOCATED_NOT_DELETED",
+    "EXTERNAL_MANIFEST_IS_CAPABILITY_SPECIFIC_INFORMATION",
+    "THIS_MAY_VIOLATE_A_STRICT_CAPABILITY_INTERNALIZATION_POLICY",
+    "NO_OPEN_WORLD_OR_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
