@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_OUTCOME_FRONTIER_STOCHASTIC_RELIABILITY_COUNTERMODEL_V1",
+  "date": "2026-10-06",
+  "status": "TRUTH_REPAIR_CANDIDATE__POINT_SUPPORT_FRONTIER_IS_INSUFFICIENT_FOR_STOCHASTIC_RELIABILITY__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_candidate": {
+    "pull_request": 2441,
+    "head_observed": "4383ea34c1249aa209a1db8f9a233194bc136e10",
+    "theorem_path": "canonical/governance/OWNED_TARGET_OUTCOME_FRONTIER_SIMULATION_THEOREM_20261006_V1.json",
+    "theorem_git_blob_sha": "41052a99fde4980393adbd76344b9c228453a0a1",
+    "kernel_path": "canonical/runtime/owned_target_outcome_frontier_simulation_v1.py",
+    "kernel_git_blob_sha": "f697d7a8280d416010b67a49a852b61b05fb15b9"
+  },
+  "countermodel": {
+    "context": "ONE_BINARY_SUCCESS_TASK_WITH_RELIABILITY_AS_TERMINAL_RELEVANT",
+    "outcome_support": [0, 1],
+    "opus55": {
+      "success_probability": 0.99,
+      "failure_probability": 0.01,
+      "support": [0, 1],
+      "point_pareto_frontier": [1]
+    },
+    "brain": {
+      "success_probability": 0.51,
+      "failure_probability": 0.49,
+      "support": [0, 1],
+      "point_pareto_frontier": [1]
+    },
+    "point_frontier_simulation": true,
+    "terminal_reliability_noninferiority": false,
+    "reason": "THE_EXISTENCE_OF_THE_SAME_BEST_OUTCOME_IN_BOTH_SUPPORTS_DOES_NOT_ESTABLISH_EQUAL_OR_BETTER_PROBABILITY_OF_REACHING_IT"
+  },
+  "falsified_reading": "A_S(c)_AS_A_SET_OF_REACHABLE_OUTCOME_EQUIVALENCE_CLASSES_PLUS_POINTWISE_PARETO_FRONTIER_IS_SUFFICIENT_TO_CHARACTERIZE_EQUAL_OR_BETTER_CAPABILITY_FOR_STOCHASTIC_SYSTEMS",
+  "minimum_repair": [
+    "LIFT_ACHIEVABLE_SET_FROM_POINT_SUPPORT_TO_POLICY_INDUCED_OUTCOME_DISTRIBUTIONS_OR_AN_EQUIVALENT_PROBABILISTIC_OBJECT",
+    "INCLUDE_RELIABILITY_AND_OTHER_STOCHASTIC_TERMINAL_FUNCTIONALS_IN_THE_CONTEXT_SPECIFIC_ORDER",
+    "REQUIRE_BRAIN_OWNED_POLICY_DISTRIBUTION_TO_WEAKLY_DOMINATE_THE_RELEVANT_OPUS55_DISTRIBUTION_UNDER_EVERY_ADMISSIBLE_TERMINAL_EVALUATOR_OR_HARD_CONSTRAINT",
+    "PRESERVE_PARETO_NONSCALAR_TRADEOFFS_WITHOUT_COLLAPSING_PROBABILITIES_TO_SUPPORT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_GENERAL_OUTCOME_FRONTIER_DIRECTION_IS_WRONG",
+    "NO_CLAIM_A_DISTRIBUTION_LEVEL_SUCCESSOR_THEOREM_IS_PROVED",
+    "NO_CLAIM_ANY_CURRENT_32_TRUTH_OBLIGATION_IS_DELETED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "classification": "TRUTH_REPAIR",
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
