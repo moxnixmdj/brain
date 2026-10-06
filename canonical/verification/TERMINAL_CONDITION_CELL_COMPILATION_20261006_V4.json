@@ -1,0 +1,32 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_CONDITION_CELL_COMPILATION_20261006_V4",
+  "date":"2026-10-06",
+  "status":"CONNECTOR_RECOMPUTATION_PASS__5_OF_40_CELLS_CLOSED__35_OPEN__ZERO_TERMINAL_CREDIT",
+  "predecessor":{"path":"canonical/verification/TERMINAL_CONDITION_CELL_COMPILATION_20261005_V3.json","git_blob_sha":"c237b6f14d1084e992d6e39131be7611c4f41d1f"},
+  "matrix":{"path":"canonical/governance/TERMINAL_CONDITION_RESTRICTION_TRANSFER_MATRIX_20261006_V2.json","git_blob_sha":"c22da0160ff15e83aeb4e57c0b8facea31f52dc6"},
+  "recomputation":{
+    "prior_condition_rows":7,
+    "current_condition_rows":8,
+    "prior_cells":37,
+    "current_cells":40,
+    "prior_rows_preserved_exactly":true,
+    "new_condition":"HONESTY_AND_COMPLETION_INTEGRITY",
+    "new_cells":3,
+    "prior_closed_cells_preserved":5,
+    "new_cells_closed":0,
+    "closed_cells":5,
+    "open_cells":35
+  },
+  "verification":{
+    "manifest":{"path":"canonical/governance/OPUS55_TARGET_UNIVERSE_SURFACE_MANIFEST_20261006_V3.json","git_blob_sha":"817dfbe44c4e1122fee2b6fbd36f430a2bfd1b22"},
+    "manifest_surface_count":21,
+    "manifest_unique_surface_count":21,
+    "unknown_family_reference_count":0,
+    "literal_target_universe_complete":false
+  },
+  "hard_nonclaims":["NO_HONESTY_CONDITION_PARITY","NO_LITERAL_TARGET_UNIVERSE_COMPLETENESS","NO_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT"],
+  "acceptance_credit_delta":0,
+  "family_credit_delta":0,
+  "capability_credit_delta":0,
+  "ownership_credit_delta":0
+}
