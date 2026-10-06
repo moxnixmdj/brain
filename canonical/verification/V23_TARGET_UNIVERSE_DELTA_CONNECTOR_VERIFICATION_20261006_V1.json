@@ -1,0 +1,22 @@
+{
+  "schema":"PROJECT_BRAIN_V23_TARGET_UNIVERSE_DELTA_CONNECTOR_VERIFICATION_20261006_V1",
+  "date":"2026-10-06",
+  "status":"CONNECTOR_STRUCTURAL_RECOMPUTATION_PASS__8_OF_8__33_OPEN__ZERO_CREDIT",
+  "subject":{"path":"canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V23.json","git_blob_sha":"9782a14852b16e16035308a266b0370dd2f0729c"},
+  "checks":{
+    "24_PLUS_9_EQUALS_33":true,
+    "14_OF_38_ATOMIC_PROVED_PRESERVED":true,
+    "5_OF_19_ACCEPTED_FAMILIES_PRESERVED":true,
+    "EXACTLY_ONE_TRUTH_OBLIGATION_ADDED":true,
+    "ZERO_TRUTH_OBLIGATIONS_DELETED":true,
+    "FOUR_SHARED_CAUSAL_INTERFACES_PRESERVED":true,
+    "TERMINAL_FALSE":true,
+    "ZERO_CREDIT":true
+  },
+  "independent_evidence":{
+    "new_condition_semantics":{"path":"canonical/verification/OPUS55_HONESTY_UNIVERSE_DELTA_SPRITE_VERIFICATION_20261006_V1.json","git_blob_sha":"dd0c914a1cecedd6a12b5fc46a7c6c7b7a5bc8b1"},
+    "v22_base":{"path":"canonical/verification/V22_TARGET_TRUTH_FACTORIZATION_SPRITE_VERIFICATION_20261005_V1.json","git_blob_sha":"69bb826fd51523d984ffa626d51c7a647466f36e"}
+  },
+  "hard_nonclaims":["NO_INDEPENDENT_REPLAY_OF_THE_COMPOSED_V23_FILE","NO_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT","NO_LITERAL_TARGET_UNIVERSE_COMPLETENESS"],
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0}
+}
