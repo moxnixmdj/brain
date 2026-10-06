@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_H100_DETERMINISTIC_BAR_GEOMETRY_SOLVER_PREOUTPUT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_TRAINING_ONLY_DEVELOPMENT__BEFORE_FINAL_12_HOLDOUT_IMAGES_DOWNLOADED",
+  "final_holdout": "canonical/governance/H100_DETERMINISTIC_BAR_COUNT_FINAL_HOLDOUT_V1.json",
+  "runtime": "canonical/runtime/h100_deterministic_bar_geometry_solver_v1.py",
+  "development": {
+    "training_cases": 59,
+    "projection_correct": 43,
+    "component_correct": 46,
+    "union_correct": 52,
+    "frozen_hybrid_training_correct": 52,
+    "frozen_hybrid_training_accuracy": 0.8813559322033898,
+    "component_selective_accuracy": 0.8214285714285714,
+    "component_coverage": 0.9491525423728814
+  },
+  "applicability": {
+    "component_family_area_ratio_minimum": 0.02,
+    "final_abstentions_count_as_incorrect_for_exact_accuracy": true
+  },
+  "selector": [
+    "IF_COMPONENT_ABSTAINS__ABSTAIN",
+    "ELSE_IF_PROJECTION_ABSTAINS__USE_COMPONENT",
+    "ELSE_IF_ORIENTATIONS_DISAGREE__USE_PROJECTION",
+    "ELSE_IF_COMPONENT_PREDICTION_EQUALS_PROJECTION_PREDICTION_PLUS_ONE__USE_COMPONENT",
+    "ELSE_USE_PROJECTION"
+  ],
+  "final_gate": {
+    "case_count": 12,
+    "minimum_correct": 10,
+    "minimum_exact_integer_accuracy": 0.8
+  },
+  "forbidden": [
+    "OCR",
+    "GOLD_ANSWERS_AS_SOLVER_INPUT",
+    "LEARNED_VISION_MODEL",
+    "EXTERNAL_VISUAL_CAPABILITY_MODEL",
+    "POST_HOLDOUT_TUNING"
+  ],
+  "persistent_learned_bytes": 0,
+  "promotion_authority": false
+}
