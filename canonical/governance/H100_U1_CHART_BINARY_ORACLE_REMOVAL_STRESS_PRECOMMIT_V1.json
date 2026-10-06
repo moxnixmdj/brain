@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_CHART_BINARY_ORACLE_REMOVAL_STRESS_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_UNCHANGED_PROGRAM_STRESS",
+  "unchanged_program": "canonical/runtime/h100_u1_chart_axes_text_legend_compiler_v1.py",
+  "source_holdout": {
+    "path": "canonical/governance/H100_U1_CHART_POSTPROGRAM_FRESH_HOLDOUT_V1.json",
+    "blob_sha": "54744c12c52591711ac7234cdd86ac58f8dd6c3c"
+  },
+  "transform": "EACH_RASTER_CHARACTER_0_STAYS_0__1_2_3_4_ALL_MAP_TO_1__RUNTIME_DIGIT_ATLAS_UNCHANGED",
+  "gold": "UNCHANGED_FROM_SOURCE_HOLDOUT",
+  "expected_causal_class_if_fail": "ALGORITHM_OR_REPRESENTATION_GAP",
+  "target_adapted_bits_added_before_stress": 0,
+  "promotion_authority": false
+}
