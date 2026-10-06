@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_GCD_PROGRAM_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_FRESH_HOLDOUT_CREATION",
+  "machine_id": "H100_U1_STACK_VM",
+  "capability": "EUCLIDEAN_GCD_TWO_NONNEGATIVE_INTEGERS",
+  "raw_program_hex": "010001000f03010101010f030101020100090b050100021000010201000201010208030100010102030101010202030c5b",
+  "raw_program_bytes": 49,
+  "target_program_bits": 392,
+  "program_sha256": "064949cab0d5222f83dd4e48191ccfc6565f902bf6bb359d68d896924847b154",
+  "input_contract": "INTEGER_VECTOR_[A,B]__A_GE_0__B_GE_0__NOT_BOTH_ZERO",
+  "output_contract": "ONE_INTEGER_GCD",
+  "development_only_examples": [
+    [
+      48,
+      18,
+      6
+    ],
+    [
+      270,
+      192,
+      6
+    ],
+    [
+      17,
+      13,
+      1
+    ],
+    [
+      100,
+      25,
+      25
+    ],
+    [
+      21,
+      14,
+      7
+    ]
+  ],
+  "fresh_holdout_created": false,
+  "promotion_authority": false
+}
