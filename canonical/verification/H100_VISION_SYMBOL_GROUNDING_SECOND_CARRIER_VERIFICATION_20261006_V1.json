@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_H100_VISION_SYMBOL_GROUNDING_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__5_OF_5",
+  "observed": {
+    "glyph_count": 4,
+    "hidden_bijection_worlds": 24,
+    "persistent_bits_lower_bound_without_runtime_legend": 5,
+    "zero_bit_universal_success_upper_bound_without_legend": "1/24",
+    "persistent_target_bits_required_with_complete_runtime_legend": 0,
+    "incomplete_legend_fail_closed": true
+  },
+  "deduction": "VISION_GEOMETRY_AND_SYMBOL_SEMANTICS_ARE_DISTINCT_RESOURCES__RUNTIME_LEGENDS_CAN_SUBSTITUTE_FOR_PERSISTENT_SYMBOL_GROUNDING_INFORMATION",
+  "hard_nonclaims": [
+    "ADVERSARIAL_GLYPH_PERMUTATION_NOT_NATURAL_FONT_LOWER_BOUND",
+    "NO_GENERAL_OCR_CLAIM"
+  ],
+  "promotion_authority": false
+}
