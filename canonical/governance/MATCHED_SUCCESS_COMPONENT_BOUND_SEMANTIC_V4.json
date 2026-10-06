@@ -1,17 +1,22 @@
 {
   "schema": "PROJECT_BRAIN_MATCHED_SUCCESS_COMPONENT_BOUND_SEMANTIC_V4",
   "date": "2026-10-06",
-  "status": "CANDIDATE__COMPONENT_BOUND_INTERVENTIONAL_SEMANTIC_BRIDGE__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "status": "INDEPENDENT_SPRITE_EXACT_BYTE_REPLAY_PASS__COMPILER_MECHANICS_VERIFIED__ZERO_SCOPE_CREDIT_PENDING_REAL_COMPONENT_AND_ATOM_RECEIPTS",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "supersedes_for_future_integration": "PROJECT_BRAIN_MATCHED_SUCCESS_SEMANTIC_COUPLING_CONTRACT_V3",
   "falsified_predecessors": [
     "V1_COMPONENT_PASS_PLUS_RECEIPT_ACKNOWLEDGEMENT_DID_NOT_PROVE_CAUSAL_SEMANTIC_DATAFLOW",
-    "V3_CONTENT_BOUND_ABLATION_RESCUE_DID_NOT_BY_ITSELF_PROVE_THE_UNDERLYING_COMPONENT_CAPABILITIES_OR_TEN_NORMALIZED_ATOM_SEMANTICS"
+    "V3_CONTENT_BOUND_ABLATION_RESCUE_DID_NOT_BY_ITSELF_PROVE_THE_UNDERLYING_COMPONENT_CAPABILITIES_OR_TEN_NORMALIZED_ATOM_SEMANTICS",
+    "EARLY_V4_REQUIRED_A_SYNTHETIC_V3_BINDING_THAT_THE_COMPILER_DID_NOT_REEXECUTE__THIS_REDUNDANT_TRUST_SURFACE_WAS_REMOVED__ACTUAL_COMPONENT_EDGE_INTERVENTIONS_ARE_THE_SEMANTIC_AUTHORITY"
   ],
-  "repair_theorem": "A_NONLEGACY_MATCHED_SUCCESS_ATOM_MAY_RECEIVE_PREEXPOSURE_COVERAGE_CANDIDACY_ONLY_IF_EVERY_REQUIRED_COMPONENT_EXECUTES_ITS_EXACT_FROZEN_OBJECTIVE_SCORER__EVERY_CROSS_COMPONENT_HANDOFF_IS_CAUSALLY_LOAD_BEARING_UNDER_SAME_SHAPE_TRUE_ABLATION_RESCUE__THE_V3_END_TO_END_SEMANTIC_COUPLING_IS_BOUND_TO_THE_FIRST_AND_LAST_ACTUAL_COMPONENT_PROJECTIONS__AND_AN_ATOM_SPECIFIC_CONTENT_ADDRESSED_IMPLICATION_RECEIPT_BINDS_THE_RESULT.",
+  "repair_theorem": "A_NONLEGACY_MATCHED_SUCCESS_ATOM_MAY_RECEIVE_PREEXPOSURE_COVERAGE_CANDIDACY_ONLY_IF_EVERY_REQUIRED_COMPONENT_EXECUTES_ITS_EXACT_FROZEN_OBJECTIVE_SCORER__EVERY_ADJACENT_CROSS_COMPONENT_HANDOFF_IS_CAUSALLY_LOAD_BEARING_UNDER_SAME_SHAPE_TRUE_ABLATION_RESCUE__AND_AN_ATOM_SPECIFIC_CONTENT_ADDRESSED_IMPLICATION_RECEIPT_BINDS_THE_ACTUAL_COMPONENT_CHAIN_RESULT.",
   "required_classes": {
     "AGENCY_THREE_TOOL_LONG_HORIZON": {
-      "components": ["browser", "tool", "delegation_v2"],
+      "components": [
+        "browser",
+        "tool",
+        "delegation_v2"
+      ],
       "atoms": [
         "dimension:multi_step_planning_with_at_least_three_distinct_tool_or_action_types",
         "dimension:long_horizon_state_retention",
@@ -19,31 +24,65 @@
       ]
     },
     "INSTRUCTION_CHANGE_CONTROL": {
-      "components": ["m0", "m0_change", "delegation_v2"],
+      "components": [
+        "m0",
+        "m0_change",
+        "delegation_v2"
+      ],
       "atoms": [
         "dimension:multi_constraint_instruction_compliance",
         "dimension:requirement_change"
       ]
     },
     "RESEARCH_TOOL_ARTIFACT": {
-      "components": ["tool", "p3", "native"],
-      "atoms": ["dimension:research_plus_tool_use_plus_artifact_creation"]
+      "components": [
+        "tool",
+        "p3",
+        "native"
+      ],
+      "atoms": [
+        "dimension:research_plus_tool_use_plus_artifact_creation"
+      ]
     },
     "BROWSER_MEMORY_RECOVERY": {
-      "components": ["browser", "p1"],
-      "atoms": ["dimension:browser_or_computer_action_plus_memory_plus_recovery"]
+      "components": [
+        "browser",
+        "p1"
+      ],
+      "atoms": [
+        "dimension:browser_or_computer_action_plus_memory_plus_recovery"
+      ]
     },
     "CODING_DEBUG_TOOL_DISCOVERY": {
-      "components": ["structured", "p1", "tool"],
-      "atoms": ["dimension:coding_plus_debugging_plus_tool_discovery"]
+      "components": [
+        "structured",
+        "p1",
+        "tool"
+      ],
+      "atoms": [
+        "dimension:coding_plus_debugging_plus_tool_discovery"
+      ]
     },
     "DELEGATION_SYNTHESIS_ARTIFACT": {
-      "components": ["delegation_v3", "p3", "native"],
-      "atoms": ["dimension:delegation_plus_evidence_synthesis_plus_artifact_production"]
+      "components": [
+        "delegation_v3",
+        "p3",
+        "native"
+      ],
+      "atoms": [
+        "dimension:delegation_plus_evidence_synthesis_plus_artifact_production"
+      ]
     },
     "CROSS_CAPABILITY_HANDOFF_ROLLBACK": {
-      "components": ["delegation_v2", "tool", "p1", "p2"],
-      "atoms": ["dimension:cross_capability_state_handoff_and_rollback"]
+      "components": [
+        "delegation_v2",
+        "tool",
+        "p1",
+        "p2"
+      ],
+      "atoms": [
+        "dimension:cross_capability_state_handoff_and_rollback"
+      ]
     }
   },
   "component_requirements": [
@@ -72,10 +111,11 @@
     "NO_CLAIM_CURRENT_BRAIN_RUNTIME_PASSES_THE_FUTURE_MATCHED_CASES",
     "NO_SCOPE_COMPILER_CLOSURE",
     "NO_CASE_ISOLATION_REAL_HARNESS_RECEIPTS",
-    "NO_INDEPENDENT_EXACT_RECEIPT_BYTE_VERIFICATION_YET",
     "NO_FRESH_REALITY_OR_CASE_GENERATION_AUTHORITY",
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
-    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_CLAIM_ATOM_SPECIFIC_SEMANTIC_IMPLICATION_IS_PROVED_UNTIL_THE_BRIDGE_IS_INDEPENDENTLY_VERIFIED",
+    "NO_REAL_COMPONENT_EDGE_OR_ATOM_RECEIPT_BUNDLE_HAS_BEEN_INDEPENDENTLY_VERIFIED"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -89,5 +129,11 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "independent_verification_required": true
+  "independent_verification_required": false,
+  "semantic_authority": {
+    "synthetic_v3_binding_required": false,
+    "actual_component_chain_is_semantic_authority": true,
+    "reason": "EVERY_ADJACENT_EDGE_IS_BOUND_TO_REAL_COMPONENT_SCORER_OUTPUT_OR_STATE_AND_TRUE_ABLATION_RESCUE_COMPOSITE_BEHAVIOR__A_SEPARATE_SYNTHETIC_CAUSAL_TRANSCRIPT_ADDS_NO_SOUNDNESS"
+  },
+  "independent_verification": "canonical/verification/MATCHED_SUCCESS_COMPONENT_BOUND_V4_SPRITE_REPLAY_20261006_V1.json"
 }
