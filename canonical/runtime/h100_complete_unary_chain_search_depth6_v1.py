@@ -92,12 +92,13 @@ def run():
           "wall_clock_seconds":s["wall_clock_seconds"]
         })
     expected={str(k):int(v) for k,v in pre["expected_counts"].items()}
+    max_depth=int(pre["max_depth"])
     passed=all(
       r["baseline_registry_v8_miss"]
       and r["counts"]==expected
       and r["cumulative"]==int(pre["expected_cumulative_count"])
-      and r["first_exact_depth"]==5
-      and all(int(r["exact_counts"][str(d)])==0 for d in (1,2,3,4))
+      and r["first_exact_depth"]==max_depth
+      and all(int(r["exact_counts"][str(d)])==0 for d in range(1,max_depth))
       and r["selected"] is not None
       and r["selected"]["train_nrmse"]<=1e-10
       and r["selected"]["holdout_nrmse"]<=1e-8
@@ -106,7 +107,7 @@ def run():
       for r in rows
     )
     return {
-      "status":"PASS__DEPTH5_COMPLETE_SEARCH_AND_TRANSFER__ZERO_LEARNED" if passed else "FAIL__DEPTH5_RESIDUAL",
+      "status":f"PASS__DEPTH{max_depth}_COMPLETE_SEARCH_AND_TRANSFER__ZERO_LEARNED" if passed else f"FAIL__DEPTH{max_depth}_RESIDUAL",
       "tasks":rows,
       "task_count":len(rows),
       "persistent_learned_bytes":0,
