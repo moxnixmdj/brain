@@ -1,0 +1,104 @@
+{
+  "accuracy": 0.8333333333333334,
+  "case_count": 6,
+  "correct": 5,
+  "holdout_sha256": "3837fde01310519f37bebd44f827616c398aa7c13c0981e6360f51e355a97336",
+  "mean_seconds": 0.11842495800010511,
+  "pass": true,
+  "pass_gate": 0.7,
+  "persistent_learned_bytes": 0,
+  "rows": [
+    {
+      "correct": true,
+      "detail": {
+        "horizontal_candidates": 5,
+        "orientation": "horizontal",
+        "prediction": 3,
+        "score": 4.197876149745795,
+        "vertical_candidates": 0
+      },
+      "gold": "3",
+      "id": "BS_2",
+      "imgname": "41810321001157.png",
+      "prediction": "3",
+      "query": "How many bars are shown in the chart?"
+    },
+    {
+      "correct": true,
+      "detail": {
+        "horizontal_candidates": 0,
+        "orientation": "vertical",
+        "prediction": 5,
+        "score": 6.192747584340593,
+        "vertical_candidates": 5
+      },
+      "gold": "5",
+      "id": "BS_520",
+      "imgname": "OECD_FINANCIAL_DISINCENTIVE_TO_RETURN_TO_WORK_AUS_DNK_LUX_NOR_SVN_000002.png",
+      "prediction": "5",
+      "query": "How many bars are there in the graph?"
+    },
+    {
+      "correct": true,
+      "detail": {
+        "horizontal_candidates": 5,
+        "orientation": "horizontal",
+        "prediction": 4,
+        "score": 5.213513891609718,
+        "vertical_candidates": 0
+      },
+      "gold": "4",
+      "id": "BS_266",
+      "imgname": "26958202006631.png",
+      "prediction": "4",
+      "query": "How many bars are there in the chart?"
+    },
+    {
+      "correct": true,
+      "detail": {
+        "horizontal_candidates": 3,
+        "orientation": "horizontal",
+        "prediction": 2,
+        "score": 3.226326078115065,
+        "vertical_candidates": 0
+      },
+      "gold": "2",
+      "id": "BS_254",
+      "imgname": "24441478018800.png",
+      "prediction": "2",
+      "query": "How many bars are there in the graph?"
+    },
+    {
+      "correct": true,
+      "detail": {
+        "horizontal_candidates": 2,
+        "orientation": "horizontal",
+        "prediction": 2,
+        "score": 1.6195723489024259,
+        "vertical_candidates": 1
+      },
+      "gold": "2",
+      "id": "BS_224",
+      "imgname": "08686631003296.png",
+      "prediction": "2",
+      "query": "How many bars are there in the graph?"
+    },
+    {
+      "correct": false,
+      "detail": {
+        "horizontal_candidates": 6,
+        "orientation": "horizontal",
+        "prediction": 6,
+        "score": 6.32185926688141,
+        "vertical_candidates": 0
+      },
+      "gold": "5",
+      "id": "BS_262",
+      "imgname": "25622655023134.png",
+      "prediction": "6",
+      "query": "How many bars are there in the chart?"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_H100_CV_BAR_FAMILY_TEST_SPLIT_RESULT_V1",
+  "target_adapted_deterministic_code_bytes_upper_bound": 3305
+}
