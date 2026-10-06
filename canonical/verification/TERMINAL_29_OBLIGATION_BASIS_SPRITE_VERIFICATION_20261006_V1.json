@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_29_OBLIGATION_BASIS_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__12_OF_12__THREE_VERIFIED_TRUTH_BASIS_DELETIONS__ZERO_TERMINAL_CREDIT",
+  "deletion_authorities": [
+    {
+      "id": "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "kind": "NONNECESSARY_COMPOSITION_SPECIFIC_PREMISE",
+      "authority": "canonical/governance/COMPOSITION_COMPONENT_SCOPED_PROOF_NECESSITY_COUNTERMODEL_20261006_V1.json"
+    },
+    {
+      "id": "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "kind": "DUPLICATE_TRUTH_ALIAS",
+      "authority": "canonical/governance/AA_BRIEFCASE_DUPLICATE_TRUTH_NECESSITY_COUNTERMODEL_20261006_V1.json",
+      "representative": "PROWORK_AA_BRIEFCASE_GE_1822"
+    },
+    {
+      "id": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "kind": "NONNECESSARY_BARE_INTERNAL_ZERO_FAILURE_TRUTH",
+      "authority": "canonical/governance/COMPOSITION_CRITICAL_INVARIANT_NECESSITY_COUNTERMODEL_20261006_V1.json",
+      "authority_git_blob_sha": "ebab7563680731d9ab9c6b70b15a2a87087c81ff",
+      "binding_audit": "canonical/governance/COMPOSITION_INVARIANT_TERMINAL_BINDING_AUDIT_20261006_V1.json",
+      "binding_audit_git_blob_sha": "eb4f054156c62a0cc2866829fde45734a72e463d",
+      "preserves": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR_AND_ALL_SEPARATELY_PROVED_TERMINALLY_NONCOMPENSABLE_INVARIANTS"
+    }
+  ],
+  "exact_blobs": {
+    "canonical/runtime/terminal_frontier_factorizer_v1.py": "491230183ed7eb796513ca74c967fe346bd8105c",
+    "canonical/runtime/terminal_coverage_partition_compiler_v1.py": "b03b748f38269cd5e8c10a037521172a7048d904",
+    "canonical/tests/test_terminal_frontier_factorizer_v1.py": "506c2310c5af5004315e60a3fac2b9505780d9ef",
+    "canonical/tests/test_terminal_coverage_partition_compiler_v1.py": "61cd8a6e7bc3d414c4d6ee18af1f6e8198952f19",
+    "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V4.json": "cf6fcc059181625eae7208282b59aac45d7de62a"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/tmp/terminal29",
+    "tests_passed": 12,
+    "tests_total": 12,
+    "failures": 0,
+    "errors": 0,
+    "result": "OK"
+  },
+  "recomputed_partition": {
+    "load_bearing_atomic_open": 21,
+    "meta_open": 8,
+    "truth_obligation_count": 29,
+    "truth_obligations_deleted": 3,
+    "route_counts": {
+      "J": 0,
+      "G": 0,
+      "T": 0,
+      "D": 15,
+      "U": 14
+    },
+    "root2_touching": 17,
+    "root3_touching": 7,
+    "terminal": false,
+    "terminal_credit_delta": 0
+  },
+  "verified": [
+    "21_LOAD_BEARING_ATOMIC_PLUS_8_META_EQUALS_29_CURRENT_OPEN_TRUTHS",
+    "THIRD_DELETION_IS_SUPPORTED_BY_INDEPENDENT_TRANSIENT_REPAIR_COUNTERMODEL_AND_CURRENT_AUTHORITY_BINDING_AUDIT",
+    "COMPOSITION_TERMINAL_SUCCESS_AND_ALL_TERMINALLY_NONCOMPENSABLE_COMPOSITION_CONSTRAINTS_REMAIN_LOAD_BEARING",
+    "COVERAGE_ROUTE_COUNTS_ARE_D15_U14_WITH_J0_G0_T0",
+    "NO_ROUTING_OR_TRUTH_BASIS_COMPRESSION_GRANTS_TERMINAL_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_BRAIN_COMPOSITION_IS_NONINFERIOR",
+    "NO_CLAIM_ALL_COMPOSITION_INVARIANTS_ARE_DISPENSABLE",
+    "NO_J_G_OR_T_ROUTE_PROMOTED",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "astra_access_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
