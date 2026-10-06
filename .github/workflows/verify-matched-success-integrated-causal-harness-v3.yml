@@ -1,0 +1,31 @@
+name: Verify matched success integrated causal harness V3
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/matched_success_integrated_extension_v1.py"
+      - "canonical/runtime/matched_success_public_projection_v1.py"
+      - "canonical/runtime/matched_success_integrated_causal_harness_v3.py"
+      - "canonical/runtime/matched_success_semantic_coupling_contract_v3.py"
+      - "canonical/tests/test_matched_success_integrated_causal_harness_v3.py"
+      - "canonical/tests/test_matched_success_semantic_coupling_contract_v3.py"
+      - "canonical/governance/MATCHED_SUCCESS_INTEGRATED_CAUSAL_HARNESS_V3.json"
+      - "canonical/governance/MATCHED_SUCCESS_SEMANTIC_COUPLING_CONTRACT_V3.json"
+      - ".github/workflows/verify-matched-success-integrated-causal-harness-v3.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m py_compile canonical/runtime/matched_success_public_projection_v1.py canonical/runtime/matched_success_integrated_causal_harness_v3.py canonical/runtime/matched_success_semantic_coupling_contract_v3.py
+      - run: python -m pytest -q canonical/tests/test_matched_success_semantic_coupling_contract_v3.py canonical/tests/test_matched_success_integrated_causal_harness_v3.py
