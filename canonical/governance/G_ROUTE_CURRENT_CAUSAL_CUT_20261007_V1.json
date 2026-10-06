@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_G_ROUTE_CURRENT_CAUSAL_CUT_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SHARED_CAUSAL_COMPRESSION__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "multiroute": "canonical/governance/TERMINAL_UTILITY_QUOTIENT_CONTROL_REPAIR_V3.json",
+    "generator_basis": "canonical/governance/G6_G7_SHARED_SEPARATOR_PROJECTION_20261006_V1.json",
+    "k6_positive_cover": "canonical/governance/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_THEOREM_20261006_V1.json",
+    "schema_trace": "canonical/governance/OPUS55_SCHEMA_CLOSED_COMPOSITIONAL_TRACE_REFINEMENT_THEOREM_20261005_V1.json",
+    "acceptance_quotient": "canonical/governance/ACCEPTANCE_QUOTIENT_TRACE_REFINEMENT_ACTIVATION_20261005_V1.json",
+    "composition_capsule": "canonical/governance/COMPOSITION_ACCEPTANCE_QUOTIENT_CAPSULE_MINIMUM_CUT_20261005_V1.json",
+    "v7_layers": "canonical/governance/V7_LAYERED_DISTRIBUTIONAL_EQUAL_OR_BETTER_ORDER_20261006_V1.json"
+  },
+  "compressed_cut": [
+    {
+      "id": "C_SCOPE_AND_EVALUATOR_COMPLETENESS",
+      "absorbs": [
+        "P1_SCHEMA_COVERAGE",
+        "P7_ACCEPTANCE_MONOTONICITY",
+        "TARGET_OR_SUPERSET_UTILITY_COMPLETENESS"
+      ],
+      "requirement": "Prove exact target scope OR a sound utility-relevant superdomain/generator closure, and bind every load-bearing evaluator/hard constraint needed for the claimed terminal order."
+    },
+    {
+      "id": "C_K6_POSITIVE_POLICY_AND_DISCRIMINATOR_BINDING",
+      "absorbs": [
+        "P2_SEMANTIC_PORTION",
+        "P4_LOAD_BEARING_LOCAL_OR_MACROSTEP_ADEQUACY",
+        "G6_G7_SHARED_SEMANTIC_RESIDUAL"
+      ],
+      "requirement": "For every bound decision cell used by the deployed route, bind at least one sound Brain-owned adequate policy plus only the truthful discriminators needed to select among certified policies."
+    },
+    {
+      "id": "C_DEPLOYED_QUOTIENT_COMPOSITION_CLOSURE",
+      "absorbs": [
+        "P3_INITIAL_REFINEMENT",
+        "P5_CONSTRUCTOR_PRESERVATION",
+        "INTERNAL_MICROSTEP_REFINEMENT"
+      ],
+      "requirement": "Prove the actual deployed Brain route starts in the bound relation and every acceptance-relevant cross-role state/effect passes through the complete quotient/capsule boundary so load-bearing macrostep refinement composes end to end."
+    },
+    {
+      "id": "C_OWNERSHIP_EFFECT_TOTALITY",
+      "absorbs": [
+        "ROOT3_EFFECT_TOTALITY",
+        "DONOR_INDEPENDENCE",
+        "OPAQUE_CAPABILITY_ESCAPE"
+      ],
+      "requirement": "Every capability-bearing deployed action is Brain-owned; externally material effects and persistence are completely mediated by the proved authority boundary; donor removal/cleanroom finality passes."
+    },
+    {
+      "id": "C_LOAD_BEARING_RESOURCE_EXCEPTIONS",
+      "absorbs": [
+        "A_L1_STAR",
+        "A_L2_STAR"
+      ],
+      "requirement": "Only where a target capability contract or absolute project gate makes deadline/cost/resource load-bearing, prove the selected route satisfies it. L3-only efficiency debt is not capability debt."
+    }
+  ],
+  "deleted_as_independent_research_lanes": [
+    "COMPLETE_ENUMERATION_OF_ALL_POLICIES",
+    "STANDALONE_G6_AND_G7_IMPLEMENTATION_GENERATORS",
+    "TRANSITION_BY_TRANSITION_REFINEMENT_OF_ACCEPTANCE_IRRELEVANT_INTERNAL_STEPS",
+    "GLOBAL_MINIMUM_POLICY_COVER_UNLESS_RESOURCE_MINIMALITY_IS_LOAD_BEARING",
+    "OPUS_RESOURCE_EFFICIENCY_AS_A_UNIVERSAL_CAPABILITY_REQUIREMENT",
+    "PUBLIC_BENCHMARK_LEAVES_AS_AXIOMATIC_TERMINAL_TRUTHS"
+  ],
+  "scheduler": "Run falsification over the five cuts. Stop reopening compressed leaves unless a constructive counterexample proves the compression unsound. Prefer a single witness that discharges multiple cuts; external target reality remains last-resort residual information.",
+  "hard_nonclaims": [
+    "NO CLAIM ANY OF THE FIVE CUTS IS CLOSED",
+    "NO CLAIM THE G ROUTE IS TERMINALLY SUFFICIENT YET",
+    "NO CLAIM CURRENT PUBLIC BENCHMARK PROTOCOLS ARE SATISFIED",
+    "NO TERMINAL ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
