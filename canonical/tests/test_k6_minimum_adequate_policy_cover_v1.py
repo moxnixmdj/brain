@@ -89,3 +89,14 @@ def test_governance_generalizes_current_k6_information_cut_without_deleting_it()
     assert "tau_CAN_BE_STRICTLY_LESS_THAN_N" in rel["strictness"]
     assert d["candidate_compression"]["new_information_object"] == "K6P_RESOURCE_BOUNDED_ADEQUATE_POLICY_INDEX_ACQUISITION"
     assert d["accounting"]["terminal_credit_delta"] == 0
+
+
+def test_governance_refines_current_decision_quotient_as_special_case():
+    root = Path(__file__).resolve().parents[2]
+    p = root / "canonical/governance/K6_MINIMUM_ADEQUATE_POLICY_COVER_THEOREM_20261006_V1.json"
+    d = json.loads(p.read_text(encoding="utf-8"))
+    assert d["source_bindings"]["current_decision_quotient"]["git_blob_sha"] == "03baddc27d5ee9dd73656fdd801251e1f4fd8cc6"
+    rel = d["relation_to_current_decision_quotient"]
+    assert "ONE_STEP_POLICY_ELEMENT" in rel["deterministic_action_special_case"]
+    assert "MINIMUM_ADEQUATE_POLICY_COVER_NUMBER_tau" in rel["exact_finite_refinement"]
+    assert "STOCHASTIC_BRAIN_OWNED_POLICIES" in rel["policy_generalization"]
