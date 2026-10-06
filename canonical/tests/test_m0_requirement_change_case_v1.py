@@ -1,4 +1,12 @@
-from canonical.runtime.m0_requirement_change_case_v1 import generate_case,execute_case,run_batch
+from canonical.runtime.m0_requirement_change_case_v1 import _canon,generate_case,execute_case,run_batch
+
+def test_semantic_projection_ignores_derived_transform_kinds_alias():
+    base={
+        "subject":"Analyst","predicate":"preserve","object":"audit lineage",
+        "polarity":"required","transform_kind":"artifact",
+    }
+    enriched={**base,"transform_kinds":["artifact"]}
+    assert _canon([base])==_canon([enriched])
 
 def test_requirement_change_batch_passes_fresh_synthetic_cases():
     out=run_batch(20261007,16)
