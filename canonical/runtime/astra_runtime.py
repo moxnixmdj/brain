@@ -6631,6 +6631,8 @@ def main():
     print(json.dumps(receipt)); return 0
 
 if __name__=="__main__":
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0,str(ROOT))
     from canonical.runtime import root3_subprocess_mediator_v2 as _root3_process_mediator
     _root3_process_status=_root3_process_mediator.status()
     if (
