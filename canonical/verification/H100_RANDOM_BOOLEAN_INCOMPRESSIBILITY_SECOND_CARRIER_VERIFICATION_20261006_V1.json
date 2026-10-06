@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_H100_RANDOM_BOOLEAN_INCOMPRESSIBILITY_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__5_OF_5__TOTAL_CAPABILITY_BOUND__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_RANDOM_BOOLEAN_INCOMPRESSIBILITY_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_random_boolean_incompressibility_v1.py",
+    "tests": "canonical/tests/test_h100_random_boolean_incompressibility_v1.py"
+  },
+  "observed": {
+    "input_bits": 30,
+    "total_boolean_functions_log2": 1073741824,
+    "budget_bytes": 100000000,
+    "budget_bits": 800000000,
+    "log2_fraction_describable_within_budget_upper_bound": -273741824,
+    "universal_exact_coverage_minimum_bytes": 134217728
+  },
+  "deduction": "A_100MB_TOTAL_PERSISTENT_CAPABILITY_BUDGET_CANNOT_REPRESENT_ALL_30_BIT_BOOLEAN_FUNCTIONS__AND_CAN_COVER_AT_MOST_A_2^-273741824_FRACTION_UNDER_PREFIX_FREE_DESCRIPTION_COUNTING",
+  "hard_nonclaims": [
+    "RANDOM_BOOLEAN_FUNCTIONS_ARE_NOT_A_REALISTIC_FRONTIER_TASK_DISTRIBUTION",
+    "THIS_BOUNDS_TOTAL_CAPABILITY_DESCRIPTION_NOT_LEARNED_BYTES_ALONE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
