@@ -71,14 +71,35 @@ def underbinding_countermodel() -> dict[str, object]:
 def compile_falsification() -> dict[str, object]:
     over = overreach_countermodel()
     under = underbinding_countermodel()
+    utility = utility_semantics_countermodel()
     if over["falsifies_necessity_of_full_superset_dominance"] is not True:
         return {"status": "FAIL_CLOSED", "error": "OVERREACH_COUNTERMODEL_NOT_CONSTRUCTED"}
     if under["proves_target_completeness_binding_is_necessary"] is not True:
         return {"status": "FAIL_CLOSED", "error": "UNDERBINDING_COUNTERMODEL_NOT_CONSTRUCTED"}
+    if utility["observable_difference_not_sufficient_for_useful_capability"] is not True:
+        return {"status": "FAIL_CLOSED", "error": "UTILITY_SEMANTICS_COUNTERMODEL_NOT_CONSTRUCTED"}
     return {
         "status": "PASS__CURRENT_THEOREM_MUST_BE_TARGET_RELATIVE_AND_TARGET_COMPLETE",
         "literal_full_superset_reading_falsified": True,
         "target_completeness_binding_required": True,
+        "utility_relevance_and_outcome_ordering_required": True,
         "terminal_credit": False,
         "classification": "TRUTH_REPAIR",
+    }
+
+
+def utility_semantics_countermodel() -> dict[str, object]:
+    opus_trace = {"emission": "4.", "correct": True, "latency": 1, "cost": 0, "safety": True}
+    brain_trace = {"emission": "4", "correct": True, "latency": 1, "cost": 0, "safety": True}
+    observable_difference = opus_trace["emission"] != brain_trace["emission"]
+    terminal_utility_equal = all(
+        opus_trace[k] == brain_trace[k]
+        for k in ("correct", "latency", "cost", "safety")
+    )
+    return {
+        "observable_difference": observable_difference,
+        "terminal_utility_equal": terminal_utility_equal,
+        "observable_difference_not_sufficient_for_useful_capability": (
+            observable_difference and terminal_utility_equal
+        ),
     }
