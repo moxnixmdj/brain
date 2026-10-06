@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_H100_COMPLETE_UNARY_CHAIN_DEPTH5_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__3_OF_3_DEPTH5_EXACT_AND_TRANSFER__ZERO_LEARNED",
+  "subject": {
+    "precommit": "canonical/governance/H100_COMPLETE_UNARY_CHAIN_SEARCH_DEPTH5_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_complete_unary_chain_search_depth5_v1.py",
+    "tests": "canonical/tests/test_h100_complete_unary_chain_search_depth5_v1.py"
+  },
+  "observed": {
+    "task_count": 3,
+    "enumeration_count_per_task": 9330,
+    "first_exact_depth_all": 5,
+    "exact_depth5_count_each": 1,
+    "depth1_to_4_exact_count_each": 0,
+    "search_wall_clock_seconds": [
+      1.1732050170030561,
+      1.1460231460005161,
+      1.1462145850018715
+    ],
+    "seed_holdout_nrmse": [
+      1.7459796343529055e-12,
+      1.3623253587849066e-12,
+      8.764116618779348e-13
+    ],
+    "transfer_holdout_nrmse": [
+      8.807261753132883e-13,
+      6.285264670176332e-13,
+      1.21378180922441e-12
+    ],
+    "persistent_learned_bytes": 0
+  },
+  "deduction": "COMPLETE_TARGET_INDEPENDENT_UNARY_CHAIN_ENUMERATION_SCALES_FROM_DEPTH4_TO_DEPTH5_WITH_NO_LEARNED_STATE_GROWTH__MEASURED_COST_GROWTH_IS_PRIMARILY_RUNTIME_ENUMERATION",
+  "hard_nonclaims": [
+    "DEPTH5_UNARY_CHAINS_REMAIN_A_BOUNDED_SYNTHETIC_CLASS",
+    "DOES_NOT_PROVE_GENERAL_PROGRAM_SEARCH",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
