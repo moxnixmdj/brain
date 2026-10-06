@@ -392,6 +392,19 @@ def verify_case_coverage(case: Mapping[str, Any]) -> dict[str, Any]:
             raise CoverageError("INITIAL_STATE_INVALID")
         if case.get("case_initial_state_sha256") != _sha(initial_state):
             raise CoverageError("CASE_INITIAL_STATE_SHA256_MISMATCH")
+        expected_namespace = _sha(
+            {
+                "version": VERSION,
+                "case_id": case.get("case_id"),
+                "payload": case.get("case_payload_sha256"),
+            }
+        )
+        if initial_state.get("mutable_namespace") != expected_namespace:
+            raise CoverageError("INITIAL_STATE_NAMESPACE_PAYLOAD_BINDING_MISMATCH")
+        if initial_state.get("cross_case_memory") is not None:
+            raise CoverageError("INITIAL_STATE_CROSS_CASE_MEMORY_NOT_EMPTY")
+        if initial_state.get("result_history") != []:
+            raise CoverageError("INITIAL_STATE_RESULT_HISTORY_NOT_EMPTY")
         if case.get("case_id") != payload.get("case_id"):
             raise CoverageError("CASE_ID_MISMATCH")
         atom = payload.get("primary_atom")
