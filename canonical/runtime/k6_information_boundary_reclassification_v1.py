@@ -83,7 +83,8 @@ def verify() -> dict[str, Any]:
     comp = basis.get("compression_result") or {}
     if comp.get("true_remaining_implementation_classes") != []:
         errors.append("TRUE_IMPLEMENTATION_CLASSES_REOPENED")
-    if set(comp.get("latent_diagnostic_classes") or []) != LATENT:
+    sched = basis.get("scheduling_supersession") or {}
+    if set(sched.get("latent_diagnostic_classes") or []) != LATENT:
         errors.append("SHARED_BASIS_LATENT_SET_DRIFT")
 
     if (cut.get("scheduler_consequence") or {}).get("new_primary_object") != "MINIMUM_INFORMATION_AND_OPERATOR_SEPARATOR_KERNEL":
