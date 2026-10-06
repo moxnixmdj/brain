@@ -1,0 +1,14 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REFERENCE_MACHINE_U1_MANIFEST_V1",
+  "date": "2026-10-06",
+  "machine_id": "H100_U1_STACK_VM",
+  "immutable": true,
+  "precommit": "canonical/governance/H100_REFERENCE_MACHINE_U1_PRECOMMIT_V1.json",
+  "semantics": "canonical/governance/H100_REFERENCE_MACHINE_U1_SEMANTICS_V1.json",
+  "runtime": "canonical/runtime/h100_reference_machine_u1.py",
+  "verification": "canonical/verification/H100_REFERENCE_MACHINE_U1_SECOND_CARRIER_VERIFICATION_20261006_V1.json",
+  "runtime_source_bytes": 5058,
+  "runtime_source_sha256": "c9c5dea378038d46d90bafc1f3cb12a16b19dc20217beb90f7d725986bb4c700",
+  "future_measurement_rule": "FREEZE_RAW_U1_PROGRAM_BEFORE_FRESH_HOLDOUT__COUNT_PROGRAM_BYTES_AND_ANY_TARGET_ADAPTED_PERSISTENT_DATA__REPORT_TIME_MEMORY_AND_RUNTIME_INFORMATION_SEPARATELY",
+  "versioning_rule": "ANY_OPCODE_OR_SEMANTIC_CHANGE_CREATES_NEW_MACHINE_ID"
+}
