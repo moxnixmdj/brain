@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_PRODUCTION_BOOTSTRAP_CURRENT_BINDING_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__CURRENT_PRODUCTION_SUBPROCESS_BOOTSTRAP_SEAM_CLOSED__NATIVE_AND_NONPROCESS_EFFECT_TOTALITY_OPEN__ZERO_TERMINAL_CREDIT",
+  "target": "ROOT3_ZERO_VIOLATION_EXECUTABLE_EFFECT_MEMBRANE_20261005_V1::E3_CHILD_PROCESS_AND_NATIVE_SEMANTICS",
+  "exact_blobs": {
+    ".github/workflows/astra-shared-runtime.yml": "56c1b0ca2a1521e7ab6708dbaeb27e0fb0245374",
+    "canonical/runtime/astra_runtime.py": "d1de2b890cd497d51479358e6285d59e8fb0d338",
+    "canonical/runtime/root3_production_astra_launcher_v1.py": "3ac42e7be5a391cfda738131ecb0d3d600fa2147",
+    "canonical/tests/test_root3_production_astra_launcher_v1.py": "ea693e4bc399ebe8f8a834a874a7411d1a4d159e",
+    "canonical/runtime/root3_strict_current_bootstrap_v2.py": "7d6e4f4e00fda4eae6ff1974f68f970ceee69c2e",
+    "canonical/runtime/root3_two_class_attempt_authorizer_v1.py": "5aac8664433115c47d24e0fbbca15b81126753ee",
+    "canonical/runtime/root3_subprocess_mediator_v2.py": "80560cdfa91c11a4b47b9ee2161af726b2f9bccf",
+    "canonical/runtime/root3_read_only_local_file_query_executor_v1.py": "74166a80c47ed8ddce7bae7b61a3a3610ac2ef8a",
+    "canonical/runtime/root3_pdf_raster_temp_executor_v1.py": "c07c632ac43e591bdde139f3440bdbe288ea930c",
+    "canonical/runtime/zero_ambient_namespace_launcher_v1.py": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+  },
+  "proved": [
+    "PRODUCTION_GITHUB_WORKFLOW_INVOKES_ROOT3_LAUNCHER_NOT_RAW_ASTRA",
+    "ROOT3_LAUNCHER_INSTALLS_STRICT_CURRENT_BOOTSTRAP_BEFORE_IMPORTING_ASTRA",
+    "LAUNCHER_FAILS_CLOSED_IF_RUN_OR_POPEN_GUARD_IS_MISSING_BEFORE_OR_AFTER_ASTRA_IMPORT",
+    "RAW_ASTRA_DIRECT_ENTRY_FAILS_CLOSED_WITHOUT_ACTIVE_ROOT3_RUN_AND_POPEN_GUARDS",
+    "CURRENT_STRICT_BOOTSTRAP_BINDS_ONLY_READ_ONLY_DECLARED_QUERY_AND_TEMPORARY_FILESYSTEM_TRANSFORM",
+    "OTHER_FIVE_SUBPROCESS_EFFECT_CLASSES_REMAIN_DEFAULT_DENY",
+    "THE_TWO_ENABLED_CLASSES_USE_PREVIOUSLY_INDEPENDENTLY_VERIFIED_NAMESPACE_CONFINED_EXECUTORS"
+  ],
+  "e3_partition": {
+    "child_process_production_bootstrap": "CLOSED_FOR_BOUND_PRODUCTION_ENTRY_AND_CURRENT_TWO_CLASS_EXECUTABLE_SUBSET",
+    "child_internal_effect_semantics": "CLOSED_ONLY_FOR_THE_TWO_BOUND_CLASS_EXECUTORS_BY_EXISTING_INDEPENDENT_RECEIPTS",
+    "other_five_process_classes": "DENIED_NOT_CAPABILITY_CREDITED",
+    "native_extension_effect_totality": "OPEN",
+    "nonprocess_external_bridge_totality": "OPEN"
+  },
+  "hard_nonclaims": [
+    "NO_NATIVE_EFFECT_TOTALITY_CLAIM",
+    "NO_NONPROCESS_EXTERNAL_BRIDGE_TOTALITY_CLAIM",
+    "NO_CLAIM_ALL_ASTRA_CAPABILITIES_REMAIN_AVAILABLE_UNDER_DEFAULT_DENY",
+    "NO_IF_OR_COMPOSITION_ZERO_VIOLATION_PREDICATE_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
