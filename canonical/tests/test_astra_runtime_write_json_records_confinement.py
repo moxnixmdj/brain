@@ -31,7 +31,7 @@ class WriteJsonRecordsConfinementTests(unittest.TestCase):
         self.assertFalse(path.exists())
         with self.assertRaisesRegex(
             runtime.Blocker,
-            "JSON_RECORD_OUTPUT_PATH_NOT_EPHEMERAL_JSON",
+            "RUNTIME_MUTATION_OUTSIDE_EPHEMERAL_TMP",
         ):
             runtime._goal_action({
                 "type": "write_json_records",
@@ -49,7 +49,7 @@ class WriteJsonRecordsConfinementTests(unittest.TestCase):
         self.assertFalse(path.exists())
         with self.assertRaisesRegex(
             runtime.Blocker,
-            "JSON_RECORD_OUTPUT_PATH_NOT_EPHEMERAL_JSON",
+            "RUNTIME_MUTATION_OUTSIDE_EPHEMERAL_TMP",
         ):
             runtime._goal_action({
                 "type": "write_json_records",
@@ -60,6 +60,23 @@ class WriteJsonRecordsConfinementTests(unittest.TestCase):
                 },
             })
         self.assertFalse(path.exists())
+
+
+    def test_shared_mutation_helper_allows_nested_tmp_artifact(self):
+        rel = "canonical/astra_runtime/tmp/nested/artifact.png"
+        observed = runtime._safe_repo_mutation_path(rel)
+        self.assertEqual(
+            observed,
+            (runtime.ROOT / rel).resolve(),
+        )
+
+    def test_shared_mutation_helper_denies_canonical_runtime(self):
+        with self.assertRaisesRegex(
+            runtime.Blocker,
+            "RUNTIME_MUTATION_OUTSIDE_EPHEMERAL_TMP",
+        ):
+            runtime._safe_repo_mutation_path("canonical/runtime/overwrite.py")
+
 
 
 if __name__ == "__main__":
