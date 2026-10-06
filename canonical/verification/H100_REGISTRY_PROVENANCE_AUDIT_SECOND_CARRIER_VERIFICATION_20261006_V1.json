@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REGISTRY_PROVENANCE_AUDIT_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__5_OF_5_TESTS__DUAL_LEDGER_DIVERGENCE_ESTABLISHED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_REGISTRY_PROVENANCE_AUDIT_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_registry_provenance_audit_v1.py",
+    "tests": "canonical/tests/test_h100_registry_provenance_audit_v1.py"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "observed": {
+    "cubic_v2": {
+      "candidate_count": 3,
+      "selected_structure": "AFFINE_PLUS_X3",
+      "fixed_length_selection_capacity_bits": 2,
+      "persisted_after_data_dependent_selection": true
+    },
+    "depth4_v8": {
+      "candidate_count_per_task": 1554,
+      "persisted_structure_count": 3,
+      "fixed_length_selection_capacity_bits_per_structure": 11,
+      "aggregate_fixed_length_selection_capacity_bits": 33,
+      "all_persisted_after_data_dependent_selection": true
+    },
+    "persistent_data_selected_structure_witness_count": 4,
+    "syntactic_v0_zero_learned_survives": true,
+    "provenance_v1_zero_learned_survives": false,
+    "exact_provenance_v1_learned_bytes": null
+  },
+  "deduction": "THE_CURRENT_COMPILED_RATCHET_CONTAINS_PERSISTENT_CAPABILITY_VALUES_SELECTED_FROM_DEVELOPMENT_EVIDENCE__LOSSLESSLY_STORING_THOSE_VALUES_AS_DETERMINISTIC_CODE_DOES_NOT_REMOVE_THEIR_LEARNED_ORIGIN__THEREFORE_ZERO_LEARNED_STATE_IS_NOT_REPRESENTATION_INVARIANT",
+  "hard_nonclaims": [
+    "SELECTION_CAPACITY_BITS_ARE_NOT_EXACT_SHANNON_MUTUAL_INFORMATION",
+    "EXACT_TOTAL_PROVENANCE_V1_BYTES_REMAIN_UNQUANTIFIED",
+    "ONLY_FOUR_CONTENT_BOUND_WITNESSES_ARE_AUDITED_HERE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
