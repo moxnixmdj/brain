@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1",
   "date": "2026-10-06",
-  "status": "ACTIVE__POST_V7_ROUTING_REPAIR__30_OPEN__COVERAGE_PARTITION_V3_CURRENT__J0_G0_T0_D15_U15__ZERO_CREDIT",
+  "status": "ACTIVE__POST_V7_ROUTING_REPAIR__29_OPEN__COVERAGE_PARTITION_V4_CURRENT__V2_FACTORIZER_COMPILER__J0_G0_T0_D15_U14__ZERO_CREDIT",
   "active_cut": {
     "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V22.json",
     "git_blob_sha": "8359e6171cfab301ad9909364558a313fa7c4cae"
@@ -31,18 +31,18 @@
     "accepted_families": 5,
     "open_families": 14,
     "proved_atomic": 14,
-    "unresolved_atomic": 22,
+    "unresolved_atomic": 21,
     "total_families": 19,
     "total_atomic": 38,
     "terminal": false,
     "root1_positive_gap_count": 0,
     "root2_touching_count": 17,
-    "root3_touching_count": 8,
+    "root3_touching_count": 7,
     "meta_envelope_open_count": 8,
-    "total_open_truth_obligations": 30,
+    "total_open_truth_obligations": 29,
     "historical_atomic_registry_count": 38,
-    "deleted_nonnecessary_atomic_count": 2,
-    "current_load_bearing_atomic_count": 36
+    "deleted_nonnecessary_atomic_count": 3,
+    "current_load_bearing_atomic_count": 35
   },
   "current_information_positive_action_groups": [
     "EXTERNAL_RESULT_OR_ACCESS",
@@ -116,7 +116,7 @@
     "J0_G0_T0_MEANS_ZERO_BOUND_CURRENT_CERTIFICATES_IN_THE_DECLARED_EVIDENCE_UNIVERSE__NOT_ROUTE_IMPOSSIBILITY",
     "COMPOSITION_COMPONENT_SCOPED_PROOFS_MUST_NOT_REENTER_THE_COMPOSITION_SPECIFIC_TERMINAL_CUT_WITHOUT_A_NEW_VALID_NECESSITY_PROOF"
   ],
-  "next": "RUN_CURRENT_TERMINAL_COVERAGE_PARTITION_V3__CONTINUE_J_AND_G_FALSIFICATION_ON_30_CURRENT_OBLIGATIONS__COMPLETE_ROOT3_PARENT_EXTERNAL_AND_NONREPO_EFFECT_TOTALITY__USE_ASTRA_ONLY_FOR_RESIDUAL_ASTRA_EXCLUSIVE_BEHAVIOR__USE_DIRECT_EXTERNAL_EVIDENCE_ONLY_FOR_IRREDUCIBLE_D_RESIDUALS__DONOR_REMOVAL_CLEAN_ROOM_TERMINAL_REPLAY",
+  "next": "RUN_CURRENT_TERMINAL_COVERAGE_PARTITION_V4_WITH_V2_FACTORIZER_COMPILER__CONTINUE_J_AND_G_FALSIFICATION_ON_29_CURRENT_OBLIGATIONS__ATTACK_K6_SEPARATOR_FIXED_POINT__COMPLETE_ROOT3_EFFECT_TOTALITY__USE_EXTERNAL_REALITY_ONLY_FOR_IRREDUCIBLE_RESIDUALS__DONOR_REMOVAL_CLEAN_ROOM_REPLAY",
   "new_reality_units_consumed": 0,
   "terminal_cases_consumed": 0,
   "incremental_spend_usd": 0,
@@ -133,16 +133,16 @@
     "CREATIVE_DIAGRAM_SURFACE_NONINFERIOR"
   ],
   "global_compression": {
-    "atomic_open_predicates": 22,
+    "atomic_open_predicates": 21,
     "meta_open_obligations": 8,
-    "total_open_truth_obligations": 30,
+    "total_open_truth_obligations": 29,
     "atomic_live_action_groups": 5,
     "meta_active_shared_programs": 2,
     "meta_dormant_obligations": 1,
     "global_live_program_count": 7,
     "creative_basis_gap_closed": true,
     "creative_performance_open": true,
-    "truth_obligations_deleted": 2,
+    "truth_obligations_deleted": 3,
     "condition_strategy": "GENERIC_PARITY_TO_TWO_EXACT_INTERFACE_CERTIFICATE_SUBLANES",
     "family_times_language_cartesian_default_deleted": true,
     "identical_internal_context_window_requirement_deleted": true,
@@ -154,7 +154,7 @@
     "target_tuple_binding_complete": true,
     "target_tuple_binding_predicates": 14,
     "target_tuple_unique_count": 13,
-    "terminal_control_loop": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V3.json"
+    "terminal_control_loop": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V4.json"
   },
   "scheduling_policy": {
     "objective": "MINIMIZE_EXPECTED_TERMINAL_CRITICAL_PATH_SECONDS_SUBJECT_TO_EXACT_TARGET_IDENTITY_AND_TRUTH_TOTALITY",
@@ -173,7 +173,7 @@
     ],
     "shared_kernel_rule": "PROVE_GENERIC_PREMISE_ONCE__PRESERVE_TARGET_SPECIFIC_BINDING_CERTIFICATE_PER_OBLIGATION",
     "fixed_point_rule": "AFTER_EVERY_VERIFIED_DELTA_OR_WAKE_EVENT__RECOMPUTE_ALL_FOUR_PARTITIONS_AND_DELETE_INFORMATION_FIXED_POINT_WORK",
-    "v22_totality_invariant": "ALL_30_CURRENT_OPEN_TRUTH_OBLIGATIONS_MUST_REMAIN_ACCOUNTED_FOR__THE_TWO_VERIFIED_DELETED_NONINDEPENDENT_TRUTHS_MUST_NOT_REENTER_WITHOUT_NEW_VALID_NECESSITY_OR_INDEPENDENCE_PROOF",
+    "v22_totality_invariant": "ALL_29_CURRENT_OPEN_TRUTH_OBLIGATIONS_MUST_REMAIN_ACCOUNTED_FOR__THE_THREE_VERIFIED_DELETED_NONINDEPENDENT_OR_NONNECESSARY_TRUTHS_MUST_NOT_REENTER_WITHOUT_NEW_VALID_NECESSITY_OR_INDEPENDENCE_PROOF",
     "target_identity_rule": "SCORE_BASED_ATOM_MUST_BIND_BENCHMARK_VERSION_MODEL_EFFORT_EVALUATOR_HARNESS_FALLBACK_POLICY_AND_UNIT_BEFORE_EXECUTION_OR_COMPARISON",
     "completed_interfaces": [
       "TARGET_TUPLE_BINDING"
@@ -184,7 +184,7 @@
       "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
     ],
     "proof_synthesis_rule": "IF_NO_EXISTING_STRONGER_RECEIPT_EXISTS__DO_NOT_JUMP_DIRECTLY_TO_EXTERNAL_WAIT__FIRST_SYNTHESIZE_AND_FALSIFY_THRESHOLD_LOWER_BOUND_TASK_CONDITIONED_DOMINANCE_AND_SCOPE_SUPERSET_CERTIFICATES",
-    "terminal_control_loop": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V2.json",
+    "terminal_control_loop": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V4.json",
     "route_death_rule": "ONLY_AN_EXPLICIT_COUNTERMODEL_OR_FAILED_LOAD_BEARING_PREMISE_CAN_KILL_A_ROUTE__ZERO_BOUND_CERTIFICATES_IN_A_SCAN_DOES_NOT_PROVE_FUTURE_THEOREM_IMPOSSIBILITY",
     "universe_authority_rule": "OBSERVABLE_TRACE_SCOPE_IS_REPRESENTATION_ONLY__CAPABILITY_PARITY_USES_V7_LAYERED_DISTRIBUTIONAL_SEMANTICS_AND_FAIL_CLOSED_E_M_U_CERTIFICATION__LITERAL_FINALITY_STILL_REQUIRES_COMPLETE_TARGET_CONTEXT_OR_STRONGER_STRUCTURAL_AUTHORITY",
     "nonuniverse_ranking_rule": "EXACT_CONTENT_ADDRESSED_TARGET_TRUTH_REACHABILITY_PER_COST__AGGREGATE_COUNTS_REQUIRE_BOUND_MEMBER_EXPANSION__CHILD_LANE_CURRENTNESS_IS_FINGERPRINTED"
@@ -314,15 +314,15 @@
     "all_premises_v3_verification_git_blob_sha": "6640c0aaea69132694aecd270abed8a0dc50bd48"
   },
   "terminal_falsification_control_loop": {
-    "status": "CURRENT__COVERAGE_PARTITION_V3_ROUTING__30_OPEN__ZERO_CREDIT",
-    "governance": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V3.json",
-    "governance_git_blob_sha": "bd5a7986b2c52d0998135d777901c19dfb6a4c41",
-    "independent_replay": "canonical/verification/TERMINAL_30_OBLIGATION_BASIS_SPRITE_VERIFICATION_20261006_V1.json",
-    "independent_replay_git_blob_sha": "bc8bcbaf2f28ca0734aca7f5e35522b60c9d8673",
+    "status": "CURRENT__COVERAGE_PARTITION_V4_ROUTING__29_OPEN__V2_FACTORIZER_COMPILER__ZERO_CREDIT",
+    "governance": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V4.json",
+    "governance_git_blob_sha": "a878bd9b658e4db295dce49bc5b3aa2ba580c59e",
+    "independent_replay": "canonical/verification/TERMINAL_29_OBLIGATION_BASIS_WOLFRAM_VERIFICATION_20261006_V1.json",
+    "independent_replay_git_blob_sha": "2a7545e109abf5dbb39398952e0823501cfd9b03",
     "current_schedule": [
-      "CONTINUE_J_AND_G_FALSIFICATION_ON_30_CURRENT_OBLIGATIONS",
+      "CONTINUE_J_AND_G_FALSIFICATION_ON_29_CURRENT_OBLIGATIONS",
       "COMPLETE_ROOT3_PARENT_EXTERNAL_AND_NONREPO_EFFECT_TOTALITY_OR_LOCALIZE_RESIDUALS",
-      "CLOSE_REMAINING_COMPOSITION_TERMINAL_SUCCESS_AND_INVARIANT_PREMISES",
+      "CLOSE_COMPOSITION_TERMINAL_SUCCESS_AND_ONLY_TERMINALLY_LOAD_BEARING_COMPOSITION_PREMISES",
       "REPAIR_MATCHED_BRAIN_CALIBRATION_EXECUTION_CARRIER_WITHOUT_REPEATING_DEAD_GITHUB_RUNNER",
       "USE_SCARCE_ASTRA_ONLY_FOR_RESIDUAL_ASTRA_EXCLUSIVE_BEHAVIOR",
       "BIND_T_TRANSITIVITY_ONLY_WITH_SAME_SEMANTICS_BRAIN_GE_ASTRA_AND_ASTRA_GE_OPUS55",
@@ -334,16 +334,16 @@
       "G": 0,
       "T": 0,
       "D": 15,
-      "U": 15
+      "U": 14
     },
     "route_count_interpretation": "ZERO_BOUND_CURRENT_CERTIFICATES_IN_THE_DECLARED_CURRENT_EVIDENCE_UNIVERSE__NOT_PROOF_OF_ROUTE_IMPOSSIBILITY",
-    "deleted_obligation_count": 2,
-    "open_truth_obligation_count": 30,
+    "deleted_obligation_count": 3,
+    "open_truth_obligation_count": 29,
     "root2_touching_count": 17,
-    "root3_touching_count": 8,
-    "first_open_authority_problem": "FIND_OR_FALSIFY_NEW_PROOF_CARRYING_J_OR_G_CERTIFICATES_ON_THE_30_CURRENT_BASIS__THEN_CLOSE_SHARED_EFFECT_AND_SCOPE_RESIDUALS_BEFORE_SCARCE_EXTERNAL_EVIDENCE",
+    "root3_touching_count": 7,
+    "first_open_authority_problem": "FIND_OR_FALSIFY_PROOF_CARRYING_J_OR_G_CERTIFICATES_ON_THE_29_CURRENT_BASIS__WITH_K6_AS_THE_SINGLE_UNBOUND_GENERATOR_RESIDUAL__THEN_CLOSE_SHARED_EFFECT_SCOPE_AND_OWNERSHIP_RESIDUALS",
     "accounting": {
-      "truth_obligations_deleted": 2,
+      "truth_obligations_deleted": 3,
       "truth_obligations_closed_by_routing_alone": 0,
       "terminal_credit_delta": 0
     }
@@ -439,15 +439,23 @@
     }
   },
   "current_truth_basis_repair": {
-    "status": "CURRENT__30_LOAD_BEARING_OPEN_TRUTHS__TWO_INDEPENDENTLY_VERIFIED_TRUTH_BASIS_DELETIONS__ZERO_CREDIT",
+    "status": "CURRENT__29_LOAD_BEARING_OPEN_TRUTHS__THREE_VERIFIED_TRUTH_BASIS_DELETIONS__ZERO_CREDIT",
     "coverage_partition": {
-      "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V3.json",
-      "git_blob_sha": "bd5a7986b2c52d0998135d777901c19dfb6a4c41"
+      "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V4.json",
+      "git_blob_sha": "a878bd9b658e4db295dce49bc5b3aa2ba580c59e"
+    },
+    "factorizer": {
+      "path": "canonical/runtime/terminal_frontier_factorizer_v2.py",
+      "git_blob_sha": "7bf57811d1b745cc2b92596f6c1c87ff5693aa1c"
+    },
+    "compiler": {
+      "path": "canonical/runtime/terminal_coverage_partition_compiler_v2.py",
+      "git_blob_sha": "a0f202d76b7b85b7f60c97bf54a39f4b27d87d91"
     },
     "independent_verification": {
-      "path": "canonical/verification/TERMINAL_30_OBLIGATION_BASIS_SPRITE_VERIFICATION_20261006_V1.json",
-      "git_blob_sha": "bc8bcbaf2f28ca0734aca7f5e35522b60c9d8673",
-      "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__12_OF_12"
+      "path": "canonical/verification/TERMINAL_29_OBLIGATION_BASIS_WOLFRAM_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "2a7545e109abf5dbb39398952e0823501cfd9b03",
+      "status": "INDEPENDENT_WOLFRAM_EXACT_SET_AND_ROUTING_RECOMPUTATION_PASS__29_TOTAL__D15_U14__ZERO_TERMINAL_CREDIT"
     },
     "deleted_obligations": [
       {
@@ -466,21 +474,42 @@
           "ARTIFACT_CREATION": "PROWORK_AA_BRIEFCASE_GE_1822"
         },
         "preserves": "BOTH_FAMILIES_STILL_REQUIRE_THE_SAME_FROZEN_AA_BRIEFCASE_GE_1822_TRUTH"
+      },
+      {
+        "id": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+        "scope": "BARE_INDEPENDENT_TERMINAL_TRUTH_VARIABLE_ONLY",
+        "reason": "INDEPENDENTLY_VERIFIED_COUNTERMODEL_SHOWS_A_TRANSIENT_INTERNAL_INVARIANT_FAILURE_CAN_BE_FULLY_REPAIRED_BEFORE_ANY_TERMINALLY_RELEVANT_BOUNDARY__AND_CURRENT_LOAD_BEARING_AUTHORITY_LACKS_A_COMPLETE_MAPPING_FROM_EVERY_COUNTED_INVARIANT_TO_A_TERMINALLY_NONCOMPENSABLE_OUTCOME_OR_HARD_CONSTRAINT",
+        "evidence": {
+          "countermodel": "canonical/governance/COMPOSITION_CRITICAL_INVARIANT_NECESSITY_COUNTERMODEL_20261006_V1.json",
+          "countermodel_git_blob_sha": "ebab7563680731d9ab9c6b70b15a2a87087c81ff",
+          "independent_countermodel_verification": "canonical/verification/COMPOSITION_CRITICAL_INVARIANT_NECESSITY_SPRITE_VERIFICATION_20261006_V1.json",
+          "audit": "canonical/governance/COMPOSITION_INVARIANT_TERMINAL_BINDING_AUDIT_20261006_V1.json",
+          "audit_git_blob_sha": "eb4f054156c62a0cc2866829fde45734a72e463d",
+          "audit_verification": "canonical/verification/COMPOSITION_INVARIANT_TERMINAL_BINDING_AUDIT_CONNECTOR_VERIFICATION_20261006_V1.json",
+          "audit_verification_git_blob_sha": "c9763c10a639fd675ec9c8d74515e2cfbe12a950"
+        },
+        "preserves": [
+          "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+          "EVERY_INVARIANT_INDEPENDENTLY_PROVED_TO_AFFECT_A_TERMINALLY_RELEVANT_OUTCOME_OR_HARD_NONCOMPENSABLE_CONSTRAINT",
+          "END_TO_END_SCOPE_AUTHORITY_SAFETY_CONTINUATION_RESOURCE_NONREGRESSION",
+          "RELATIONAL_FORWARD_SIMULATION_OR_END_TO_END_DISTRIBUTIONAL_PROOF"
+        ],
+        "reopen_rule": "REOPEN_IF_NEW_CONTENT_ADDRESSED_AUTHORITY_PROVES_COMPLETE_TERMINAL_NONCOMPENSABILITY_MAPPING_FOR_EVERY_COUNTED_CRITICAL_INVARIANT"
       }
     ],
     "historical_registry": {
       "atomic_predicates": 38,
       "historical_open_ids": 24,
-      "current_load_bearing_atomic_open": 22,
-      "deleted_nonindependent_or_nonnecessary_atomic_count": 2
+      "current_load_bearing_atomic_open": 21,
+      "deleted_nonindependent_or_nonnecessary_atomic_count": 3
     },
     "root_transport": {
-      "prior_root2_touching": 18,
+      "prior_root2_touching": 17,
       "current_root2_touching": 17,
       "prior_root3_touching": 8,
-      "current_root3_touching": 8
+      "current_root3_touching": 7
     },
-    "truth_obligations_deleted": 2,
+    "truth_obligations_deleted": 3,
     "truth_obligations_closed_by_this_repair": 0,
     "terminal_credit_delta": 0
   }
