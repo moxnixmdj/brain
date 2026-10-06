@@ -237,3 +237,41 @@ def serve_once(
         raise
     send_frame(sock, response, max_frame_bytes=max_frame_bytes)
     return response
+
+
+def serve_loop(
+    sock: socket.socket,
+    handler: Callable[[dict[str, Any]], Any],
+    *,
+    max_requests: int = 1024,
+    max_frame_bytes: int = DEFAULT_MAX_FRAME_BYTES,
+) -> dict[str, Any]:
+    if (
+        not isinstance(max_requests, int)
+        or isinstance(max_requests, bool)
+        or max_requests < 1
+        or max_requests > 100_000
+    ):
+        raise BrokerRPCError("MAX_REQUESTS_INVALID")
+
+    served = 0
+    while served < max_requests:
+        try:
+            serve_once(
+                sock,
+                handler,
+                max_frame_bytes=max_frame_bytes,
+            )
+        except BrokerRPCError as exc:
+            if str(exc) == "BROKER_EOF":
+                return {
+                    "status": "CLEAN_EOF",
+                    "requests_served": served,
+                }
+            raise
+        served += 1
+
+    return {
+        "status": "REQUEST_LIMIT_REACHED",
+        "requests_served": served,
+    }
