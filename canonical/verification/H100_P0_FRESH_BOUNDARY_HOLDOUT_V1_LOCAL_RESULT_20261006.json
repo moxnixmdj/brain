@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_H100_P0_FRESH_BOUNDARY_HOLDOUT_V1_LOCAL_RESULT",
+  "date": "2026-10-06",
+  "status": "PASS__9_OF_9__LOCAL_SEPARATE_RUNTIME",
+  "frozen_holdout": "canonical/governance/H100_P0_FRESH_BOUNDARY_HOLDOUT_V1.json",
+  "substrate": "canonical/runtime/h100_p0_generic_declarative_substrate_v1.py",
+  "result": {
+    "passed": 9,
+    "total": 9,
+    "target_adapted_persistent_bits": 0,
+    "information_control_residual_worlds": 3
+  },
+  "hard_nonclaims": [
+    "NOT_INDEPENDENT_PROVIDER_VERIFICATION",
+    "BOUNDED_SYNTHETIC_HOLDOUT",
+    "NO_FRONTIER_EQUIVALENCE_CLAIM"
+  ],
+  "promotion_authority": false
+}
