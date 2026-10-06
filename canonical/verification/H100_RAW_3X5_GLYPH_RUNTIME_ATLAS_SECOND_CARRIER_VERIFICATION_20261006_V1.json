@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_H100_RAW_3X5_GLYPH_RUNTIME_ATLAS_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__10_OF_10_RAW_PIXEL_GLYPHS",
+  "reference_machine": "H100_U1_STACK_VM",
+  "frozen_program": "canonical/governance/H100_U1_RAW_3X5_GLYPH_ATLAS_PROGRAM_PRECOMMIT_V1.json",
+  "world": "canonical/governance/H100_RAW_3X5_GLYPH_RUNTIME_ATLAS_WORLD_V1.json",
+  "observed": {
+    "program_bytes": 99,
+    "program_bits": 792,
+    "raw_pixels_per_glyph": 15,
+    "atlas_entries": 10,
+    "passed": 10,
+    "total": 10,
+    "max_steps": 576,
+    "learned_bits": 0,
+    "world_specific_persistent_mapping_bits_with_atlas": 0,
+    "no_atlas_uniform_exact_success_upper_bound_zero_world_bits": 0.1,
+    "no_atlas_fixed_length_world_specific_bits_for_all_worlds": 4
+  },
+  "deduction": [
+    "RAW_BITMAP_EXTRACTION_PLUS_RUNTIME_SYMBOL_SEMANTICS_CAN_BE_IMPLEMENTED_WITH_A_SMALL_EXPLICIT_U1_PROGRAM",
+    "WORLD_SPECIFIC_GLYPH_SEMANTICS_CAN_MOVE_FROM_PERSISTENT_STATE_TO_RUNTIME_INFORMATION_WITHOUT CHANGING THE GENERIC ALGORITHM"
+  ],
+  "hard_nonclaims": [
+    "NO_SEGMENTATION_NOISE_SCALE_ROTATION_OR_NATURAL_FONT_OCR",
+    "NO_GENERAL_CHARTQA",
+    "RUNTIME_ATLAS_INFORMATION_COST_IS_NONZERO"
+  ],
+  "promotion_authority": false
+}
