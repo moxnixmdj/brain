@@ -11,7 +11,7 @@
     },
     "matched_target_normalization_verification": {
       "path": "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_V3_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-      "git_blob_sha": "b28de70fde1f902329d5dc679dc52c3f8c085a3e"
+      "git_blob_sha": "b5192b1903dc603e75efe92b9a00ced0b2722f8c"
     },
     "brain_first_prewave": {
       "path": "canonical/governance/BRAIN_FIRST_DIFFERENTIAL_PREWAVE_V1.json",
