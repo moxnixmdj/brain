@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_ADMIN_PERSISTENCE_DRIVER_CONTRACT_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_TYPED_DRIVER_CONTRACT__ZERO_ROOT3_CREDIT",
+  "driver_id": "ASTRA_ADMIN_PERSISTENCE_V1",
+  "objective": "Move ASTRA runtime durable state and evidence commits to the trusted parent without granting arbitrary repository write authority.",
+  "typed_args": {
+    "required_exact_fields": [
+      "destination_class",
+      "operation",
+      "path",
+      "expected_pre_sha256",
+      "payload_b64"
+    ],
+    "destination_classes": [
+      "ASTRA_STATE_JSON",
+      "ASTRA_EVIDENCE_JSON",
+      "ASTRA_EVIDENCE_JSONL"
+    ],
+    "operations": {
+      "ASTRA_STATE_JSON": "REPLACE",
+      "ASTRA_EVIDENCE_JSON": "REPLACE",
+      "ASTRA_EVIDENCE_JSONL": "APPEND_JSONL"
+    },
+    "payload_encoding": "RFC4648_BASE64_OF_EXACT_UTF8_JSON_OR_ONE_JSONL_RECORD_BYTES",
+    "path_semantics": "EXACTLY_THE_EXISTING_ROOT3_TYPED_DURABLE_ADMIN_WRITE_V1_PATH_GRAMMARS",
+    "prestate_semantics": "ABSENT_OR_EXACT_SHA256_OF_CURRENT_TARGET_BYTES"
+  },
+  "execution": {
+    "trusted_parent_builds_plan": true,
+    "child_supplied_plan_is_forbidden": true,
+    "implementation_delegate": "canonical/runtime/root3_typed_durable_admin_write_v1.py",
+    "commit_semantics": "BUILD_PLAN_THEN_COMPARE_PRESTATE_THEN_ATOMIC_REPLACE_OR_COMPARE_AND_APPEND_THEN_REREAD_VERIFY",
+    "generic_shell": false,
+    "dynamic_import": false,
+    "provider_fallback": false,
+    "arbitrary_repo_write": false
+  },
+  "fail_closed_on": [
+    "UNKNOWN_OR_EXTRA_TYPED_ARG_FIELD",
+    "DESTINATION_CLASS_OR_OPERATION_MISMATCH",
+    "PATH_OUTSIDE_EXACT_TYPED_ADMIN_GRAMMAR",
+    "INVALID_BASE64",
+    "PAYLOAD_SCHEMA_OR_SIZE_FAILURE",
+    "PRESTATE_MISMATCH",
+    "SYMLINK_PARENT_OR_TARGET",
+    "WRITE_LOCK_CONFLICT",
+    "POSTSTATE_BYTE_MISMATCH",
+    "DRIVER_CONTRACT_OR_IMPLEMENTATION_BLOB_DRIFT"
+  ],
+  "hard_nonclaims": [
+    "NO_INFORMATION_READ_DRIVER",
+    "NO_EXTERNAL_MUTATION_DRIVER",
+    "NO_FINAL_OUTPUT_DRIVER",
+    "NO_CLAIM_BROKER_CLASS_TOTALITY",
+    "NO_CLAIM_PRODUCTION_ASTRA_ALREADY_USES_THIS_DRIVER",
+    "NO_ROOT3_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
