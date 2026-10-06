@@ -1,0 +1,26 @@
+name: Verify terminal poset stochastic lift V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/TERMINAL_POSET_STOCHASTIC_LIFT_20261006_V1.json"
+      - "canonical/runtime/terminal_poset_stochastic_lift_v1.py"
+      - ".github/workflows/verify-terminal-poset-stochastic-lift-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m json.tool canonical/governance/TERMINAL_POSET_STOCHASTIC_LIFT_20261006_V1.json > /dev/null
+      - run: python -m py_compile canonical/runtime/terminal_poset_stochastic_lift_v1.py
+      - run: python -c "from canonical.runtime.terminal_poset_stochastic_lift_v1 import compile_finite_falsifier as f; x=f(); print(x); assert x['status']=='PASS__FINITE_POSET_STOCHASTIC_LIFT_FALSIFIERS'; assert x['terminal_credit'] is False"
