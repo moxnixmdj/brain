@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_POLICY_VERSION_SPACE_MINCUT_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_FINITE_COUNTERMODEL_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TARGET_POLICY_VERSION_SPACE_MINCUT_20261007_V1.json",
+    "branch": "truth-repair/target-version-space-mincut-20261007-v1",
+    "commit_sha": "6190301bf4a83f938ae9c56be337f7c06b3c1317"
+  },
+  "verification_provider": "WOLFRAM_LANGUAGE",
+  "finite_model": {
+    "candidates": [
+      "O0",
+      "O1"
+    ],
+    "current_evidence_same_for_both": true,
+    "brain_dominates_O0": true,
+    "brain_dominates_O1": false,
+    "terminal_if_actual_O0": true,
+    "terminal_if_actual_O1": false,
+    "both_actual_target_assignments_consistent_before_discriminator": true,
+    "current_evidence_entails_terminal": false,
+    "one_bit_selector_suffices_in_this_finite_witness": true
+  },
+  "verified": [
+    "CURRENT EVIDENCE CANNOT ENTAIL TERMINAL DOMINANCE WHEN TWO TARGET KERNELS REMAIN CONSISTENT AND THE DOMINANCE TRUTH DIFFERS BETWEEN THEM.",
+    "FULL TARGET POLICY RECONSTRUCTION IS NOT REQUIRED IN THE FINITE WITNESS; EXCLUDING THE BAD CANDIDATE IS SUFFICIENT.",
+    "A ROBUST BRAIN POLICY THAT DOMINATES EVERY TARGET CANDIDATE IN THE SOUND VERSION SPACE ELIMINATES THE NEED FOR FURTHER TARGET INFORMATION."
+  ],
+  "boundary": [
+    "THIS FINITE MODEL DOES NOT PROVE THE REAL OPUS55 VERSION SPACE HAS TWO ELEMENTS OR ONE_BIT COMPLEXITY.",
+    "NO CLAIM THE CURRENT REAL BAD_SET IS EMPTY OR FINITE.",
+    "NO TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
