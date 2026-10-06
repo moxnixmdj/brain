@@ -1,0 +1,454 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_ROBUST_DIGIT_OCR_FRESH_NOISE_HOLDOUT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_ROBUST_PROGRAM_PRECOMMIT_BEFORE_FRESH_EXECUTION",
+  "unchanged_program": "canonical/governance/H100_U1_ROBUST_DIGIT_OCR_PROGRAM_PRECOMMIT_V1.json",
+  "cases": [
+    {
+      "id": "D0_ONE",
+      "digit": 0,
+      "noise_pixels": 1,
+      "input": [
+        14,
+        17,
+        17,
+        21,
+        17,
+        17,
+        14
+      ],
+      "positions": [
+        [
+          3,
+          2
+        ]
+      ]
+    },
+    {
+      "id": "D0_TWO",
+      "digit": 0,
+      "noise_pixels": 2,
+      "input": [
+        14,
+        17,
+        17,
+        21,
+        17,
+        1,
+        14
+      ],
+      "positions": [
+        [
+          3,
+          2
+        ],
+        [
+          5,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "D1_ONE",
+      "digit": 1,
+      "noise_pixels": 1,
+      "input": [
+        4,
+        12,
+        4,
+        4,
+        12,
+        4,
+        14
+      ],
+      "positions": [
+        [
+          4,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "D1_TWO",
+      "digit": 1,
+      "noise_pixels": 2,
+      "input": [
+        4,
+        12,
+        4,
+        4,
+        12,
+        4,
+        15
+      ],
+      "positions": [
+        [
+          4,
+          3
+        ],
+        [
+          6,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "D2_ONE",
+      "digit": 2,
+      "noise_pixels": 1,
+      "input": [
+        14,
+        17,
+        1,
+        2,
+        4,
+        24,
+        31
+      ],
+      "positions": [
+        [
+          5,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "D2_TWO",
+      "digit": 2,
+      "noise_pixels": 2,
+      "input": [
+        12,
+        17,
+        1,
+        2,
+        4,
+        24,
+        31
+      ],
+      "positions": [
+        [
+          5,
+          4
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "D3_ONE",
+      "digit": 3,
+      "noise_pixels": 1,
+      "input": [
+        30,
+        1,
+        1,
+        14,
+        1,
+        1,
+        31
+      ],
+      "positions": [
+        [
+          6,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "D3_TWO",
+      "digit": 3,
+      "noise_pixels": 2,
+      "input": [
+        30,
+        5,
+        1,
+        14,
+        1,
+        1,
+        31
+      ],
+      "positions": [
+        [
+          6,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    {
+      "id": "D4_ONE",
+      "digit": 4,
+      "noise_pixels": 1,
+      "input": [
+        0,
+        6,
+        10,
+        18,
+        31,
+        2,
+        2
+      ],
+      "positions": [
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "D4_TWO",
+      "digit": 4,
+      "noise_pixels": 2,
+      "input": [
+        0,
+        6,
+        2,
+        18,
+        31,
+        2,
+        2
+      ],
+      "positions": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "D5_ONE",
+      "digit": 5,
+      "noise_pixels": 1,
+      "input": [
+        31,
+        20,
+        16,
+        30,
+        1,
+        1,
+        30
+      ],
+      "positions": [
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    {
+      "id": "D5_TWO",
+      "digit": 5,
+      "noise_pixels": 2,
+      "input": [
+        31,
+        20,
+        16,
+        14,
+        1,
+        1,
+        30
+      ],
+      "positions": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "D6_ONE",
+      "digit": 6,
+      "noise_pixels": 1,
+      "input": [
+        14,
+        16,
+        24,
+        30,
+        17,
+        17,
+        14
+      ],
+      "positions": [
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "D6_TWO",
+      "digit": 6,
+      "noise_pixels": 2,
+      "input": [
+        14,
+        16,
+        24,
+        30,
+        16,
+        17,
+        14
+      ],
+      "positions": [
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "D7_ONE",
+      "digit": 7,
+      "noise_pixels": 1,
+      "input": [
+        31,
+        1,
+        2,
+        20,
+        8,
+        8,
+        8
+      ],
+      "positions": [
+        [
+          3,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "D7_TWO",
+      "digit": 7,
+      "noise_pixels": 2,
+      "input": [
+        31,
+        1,
+        2,
+        20,
+        8,
+        10,
+        8
+      ],
+      "positions": [
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "D8_ONE",
+      "digit": 8,
+      "noise_pixels": 1,
+      "input": [
+        14,
+        17,
+        17,
+        14,
+        16,
+        17,
+        14
+      ],
+      "positions": [
+        [
+          4,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "D8_TWO",
+      "digit": 8,
+      "noise_pixels": 2,
+      "input": [
+        14,
+        17,
+        17,
+        14,
+        16,
+        17,
+        10
+      ],
+      "positions": [
+        [
+          4,
+          0
+        ],
+        [
+          6,
+          2
+        ]
+      ]
+    },
+    {
+      "id": "D9_ONE",
+      "digit": 9,
+      "noise_pixels": 1,
+      "input": [
+        14,
+        17,
+        17,
+        15,
+        1,
+        3,
+        14
+      ],
+      "positions": [
+        [
+          5,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "D9_TWO",
+      "digit": 9,
+      "noise_pixels": 2,
+      "input": [
+        6,
+        17,
+        17,
+        15,
+        1,
+        3,
+        14
+      ],
+      "positions": [
+        [
+          5,
+          1
+        ],
+        [
+          0,
+          3
+        ]
+      ]
+    }
+  ],
+  "gates": {
+    "one_pixel_required": "10_OF_10",
+    "two_pixel_report_only": true,
+    "program_bytes_unchanged": 971
+  },
+  "promotion_authority": false
+}
