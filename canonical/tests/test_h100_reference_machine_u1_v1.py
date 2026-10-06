@@ -8,7 +8,7 @@ class T(unittest.TestCase):
   p=[("PUSH",17),("PUSH",23),("MUL",),("PUSH",125),("SUB",),("PUSH",84),("PUSH",7),("FDIV",),("ADD",),("WRITE",),("HALT",)]
   self.assertEqual(u.execute(u.encode(p))["output"],[278])
  def test_branch(self):
-  p=[("READ",),("PUSH",5),("LT",),("JZ",6),("PUSH",1),("WRITE",),("JMP",8),("PUSH",0),("WRITE",),("HALT",)]
+  p=[("READ",),("PUSH",5),("LT",),("JZ",7),("PUSH",1),("WRITE",),("JMP",9),("PUSH",0),("WRITE",),("HALT",)]
   self.assertEqual(u.execute(u.encode(p),[3])["output"],[1])
   self.assertEqual(u.execute(u.encode(p),[8])["output"],[0])
  def test_loop(self):
