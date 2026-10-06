@@ -286,6 +286,21 @@
     "all_premises_v3_activation": "canonical/governance/BENCHMARK_WITNESS_ALL_PREMISES_V3_ACTIVATION_20261006_V1.json",
     "all_premises_v3_activation_git_blob_sha": "b1877fb4e78e701b43be6c35abe7ee51a46b3ad8",
     "all_premises_v3_verification": "canonical/verification/BENCHMARK_WITNESS_ALL_PREMISES_V3_SPRITE_VERIFICATION_20261006_V1.json",
-    "all_premises_v3_verification_git_blob_sha": "6640c0aaea69132694aecd270abed8a0dc50bd48"
+    "all_premises_v3_verification_git_blob_sha": "6640c0aaea69132694aecd270abed8a0dc50bd48",
+    "identifiability_rerank": {
+      "status": "ACTIVE__V3_ADMITTED__ZERO_CREDIT",
+      "activation": "canonical/governance/BENCHMARK_WITNESS_IDENTIFIABILITY_RERANK_ACTIVATION_20261006_V1.json",
+      "activation_git_blob_sha": "397a28c147dd22fec16aee200869586da5d699f5",
+      "rerank": "canonical/governance/BENCHMARK_WITNESS_ELIMINATION_TARGET_RERANK_20261006_V1.json",
+      "rerank_git_blob_sha": "03c53ddfd81655f41a2d9e4a082c970e981b4dbb",
+      "verification": "canonical/verification/BENCHMARK_WITNESS_IDENTIFIABILITY_RERANK_V3_ADMISSION_VERIFICATION_20261006_V1.json",
+      "verification_git_blob_sha": "ae4718d39924320c702afaabddc49c02713b5edb",
+      "current_order": [
+        "AUTOMATIONBENCH_PRIVATE_GRAMMAR_SCOPE_FALSIFICATION",
+        "FINANCE_AGENT_CONTRACT_SUPERSET_FALSIFICATION",
+        "MYSTERYMECHANISM_DORMANT_UNTIL_RESTRICTED_CLASS"
+      ]
+    },
+    "next_targeted_action": "AUTOMATIONBENCH__FALSIFY_PRIVATE_GRAMMAR_SCOPE_SUPERSET_BEFORE_ANY_PRIVATE_SCORE_EXECUTION"
   }
 }
