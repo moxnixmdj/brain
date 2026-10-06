@@ -87,11 +87,19 @@ def _authorize_admin_path(
     typed_args: Mapping[str, Any],
     authority_context: Mapping[str, Any] | None,
 ) -> dict[str, str]:
-    ctx = _mission_context(authority_context)
     if not isinstance(typed_args, Mapping):
         raise ParentDriverRegistryError("TYPED_ARGS_NOT_OBJECT")
     destination_class = str(typed_args.get("destination_class") or "")
     path = str(typed_args.get("path") or "").replace("\\", "/")
+    if destination_class == "ASTRA_STATE_JSON":
+        if not path.startswith("canonical/astra_runtime/state/"):
+            raise ParentDriverRegistryError("PATH_NOT_ALLOWED")
+    elif destination_class in {"ASTRA_EVIDENCE_JSON", "ASTRA_EVIDENCE_JSONL"}:
+        if not path.startswith("canonical/astra_runtime/evidence/"):
+            raise ParentDriverRegistryError("PATH_NOT_ALLOWED")
+    else:
+        raise ParentDriverRegistryError("PATH_NOT_ALLOWED")
+    ctx = _mission_context(authority_context)
     mid = ctx["mission_id"]
 
     state_exact = f"canonical/astra_runtime/state/{mid}.json"
