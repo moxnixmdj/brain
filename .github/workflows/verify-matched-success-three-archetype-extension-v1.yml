@@ -1,0 +1,24 @@
+name: Verify matched success three-archetype extension V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/MATCHED_SUCCESS_THREE_ARCHETYPE_EXTENSION_V1.json"
+      - "canonical/runtime/matched_success_three_archetype_extension_v1.py"
+      - "canonical/tests/test_matched_success_three_archetype_extension_v1.py"
+      - ".github/workflows/verify-matched-success-three-archetype-extension-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m pytest -q canonical/tests/test_matched_success_three_archetype_extension_v1.py
