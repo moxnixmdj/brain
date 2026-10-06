@@ -1,0 +1,85 @@
+{
+  "schema":"PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11_INSTANCE",
+  "action_id":"SAME_IDENTITY_ROOT3_PRODUCTION_ENTRY_20261007_V1",
+  "status":"ACTIVE_INTEGRATION_REPAIR__NO_FRESH_TERMINAL_REALITY__ZERO_CREDIT",
+  "canonical_generation":"2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit":"f7de29f7fe3ed6cd5e2b0826eee18799222e48f8",
+  "capability_target":"OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind":"INTEGRATION_GLUE__ROOT3_PRODUCTION_ENTRY_REPAIR",
+  "blocker_lease_key":"2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::SAME_IDENTITY_RAW_ASTRA_ENTRY_FAIL_CLOSED_SEAM",
+  "expected_parent_frontier_change":"ROUTE_ACTIVE_SAME_IDENTITY_SUPERVISOR_THROUGH_THE_ALREADY_VERIFIED_ROOT3_PRODUCTION_ASTRA_LAUNCHER_AND_USE_THE_REAL_UBJSON_MISSION_AS_A_NEGATIVE_CONTROL_FOR_THE_NEXT_MINIMUM_EFFECT_CLASS",
+  "theory_invariants":{
+    "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+    "underlying_capability_invention_forbidden":true,
+    "integration_glue_build_allowed":true,
+    "authority_widening_forbidden_without_causal_evidence":true,
+    "incremental_spend_usd":0
+  },
+  "reasoning_durability":{
+    "real_objective":"Make the active same-identity production path enter Astra only through the verified ROOT3 bootstrap seam, then let the real mission expose the smallest still-required denied effect class.",
+    "governing_invariants":["FAIL_CLOSED","MINIMUM_AUTHORITY","REAL_MISSION_NEGATIVE_CONTROL","NO_GENERIC_EFFECT_CLASS_WIDENING"],
+    "material_premises":[
+      "same_identity_supervisor currently launches canonical/runtime/astra_runtime.py directly in a fresh child interpreter",
+      "raw astra_runtime.py exits with ROOT3_PRODUCTION_BOOTSTRAP_REQUIRED unless run and Popen guards are already active",
+      "root3_production_astra_launcher_v1 installs the strict ROOT3 bootstrap before importing Astra and is independently verified",
+      "the active real-same-identity workflow invokes same_identity_supervisor, not the older astra-shared-runtime production path"
+    ],
+    "evidence_refs":[
+      "canonical/runtime/same_identity_supervisor.py",
+      "canonical/runtime/astra_runtime.py",
+      "canonical/runtime/root3_production_astra_launcher_v1.py",
+      "canonical/verification/ROOT3_PRODUCTION_BOOTSTRAP_CURRENT_SPRITE_REPLAY_20261006_V1.json",
+      ".github/workflows/real-same-identity-ubjson.yml"
+    ],
+    "conclusion":"DIRECT_RAW_ASTRA_CHILD_ENTRY_IS_A_FAIL_CLOSED_AVAILABILITY_SEAM__NOT_AN_AUTHORITY_ESCAPE",
+    "selected_route":"REUSE_VERIFIED_ROOT3_PRODUCTION_LAUNCHER__ADD_REGRESSION_ASSERTION__RUN_REAL_MISSION",
+    "rejected_material_alternatives":["REMOVE_RAW_ASTRA_ROOT3_GUARD","WIDEN_ALL_ROOT3_EFFECT_CLASSES","BUILD_NEW_LAUNCHER"],
+    "uncertainties":["Which denied ROOT3 effect class the real UBJSON mission first requires after the production-entry repair."],
+    "assumptions":["The existing ROOT3 production launcher and strict bootstrap receipts remain valid at their bound blobs."],
+    "non_goals":["NO_ROOT3_TOTALITY_CLAIM","NO_CAPABILITY_CREDIT","NO_AUTHORITY_WIDENING_IN_THIS_PATCH"],
+    "next_action":"PATCH_SUPERVISOR_TEST_AND_REAL_WORKFLOW__THEN_RUN_REAL_UBJSON_MISSION",
+    "supersession_conditions":["NEWER_PRODUCTION_ENTRY_ALREADY_ROUTES_SAME_IDENTITY_THROUGH_ROOT3","ROOT3_LAUNCHER_VERIFICATION_INVALIDATED"],
+    "supersedes":null
+  },
+  "recursive_obs":{
+    "goal":"Repair the active production entry without adding authority.",
+    "capability":"Reuse verified ROOT3 production launcher.",
+    "blocker":"Fresh same-identity child invokes raw Astra, which correctly rejects missing ROOT3 bootstrap.",
+    "solution":"SUBSTITUTE_VERIFIED_ENTRYPOINT_ONLY",
+    "verification":"Unit regression plus actual real-same-identity UBJSON workflow.",
+    "inherited_system":"All existing same-identity task/lease/checkpoint/provenance semantics are preserved.",
+    "obs":"Current main bound at f7de29f7fe3ed6cd5e2b0826eee18799222e48f8.",
+    "canonical_base_commit":"f7de29f7fe3ed6cd5e2b0826eee18799222e48f8",
+    "fresh_reality_required":false
+  },
+  "behavioral_contract":{
+    "behavior_id":"SAME_IDENTITY_ROOT3_PRODUCTION_ENTRY_001",
+    "inputs":"SAME_IDENTITY_TASK_MANIFEST",
+    "environment_state":"FRESH_CHILD_PYTHON_PROCESS",
+    "allowed_information":"UNCHANGED_TASK_AND_ENV_BINDINGS",
+    "required_output_or_action":"INVOKE_ROOT3_PRODUCTION_ASTRA_LAUNCHER_WITH_THE_EXACT_MISSION_PATH",
+    "success_condition":"ASTRA_IMPORT_OCCURS_ONLY_AFTER_ROOT3_RUN_AND_POPEN_GUARDS_ARE_ACTIVE",
+    "failure_condition":"RAW_ASTRA_ENTRY_OR_AUTHORITY_WIDENING",
+    "terminal_consequence":"WITHOUT_THIS_SEAM_THE_ACTIVE_RUNTIME_IS_UNAVAILABLE_OR_UNCREDITABLE_FOR_ROOT3_OWNERSHIP",
+    "verification_route":"UNIT_ASSERTION_PLUS_REAL_WORKFLOW",
+    "dependency_boundary":"DOES_NOT_PROVE_NATIVE_OR_NONPROCESS_EFFECT_TOTALITY",
+    "scope":"ACTIVE_SAME_IDENTITY_PRODUCTION_ENTRY_ONLY"
+  },
+  "prequalification_controls":{"applies":false,"reason":"NO_NEW_TERMINAL_CASES_OR_TARGET_MODEL_COMPARISON"},
+  "qualification_stage":"PRODUCTION_INTEGRATION_PREFLIGHT",
+  "terminal_proof_control":{
+    "proof_obligation":"ACTIVE_SAME_IDENTITY_PARENT_ENTRY_USES_VERIFIED_ROOT3_BOOTSTRAP",
+    "hole_type":"PRODUCTION_BINDING",
+    "expected_certificate_or_receipt":"REAL_WORKFLOW_PASS_OR_CAUSALLY_LOCALIZED_DENIAL",
+    "validator":"GITHUB_ACTIONS_REAL_UBJSON_MISSION",
+    "maximum_cheap_test_cost":0,
+    "prerequisites":"EXISTING_RUNTIME_AND_MISSION_ONLY",
+    "contamination_risk":"NONE_TERMINAL",
+    "reversibility":"FULL",
+    "falsification_condition":"REAL_MISSION_FAILS_BEFORE_OR_INSIDE_ROOT3_WITH_A_CAUSALLY_LOCALIZED_EFFECT_DENIAL",
+    "critical_path_relation":"ROOT3_PARENT_ENTRY_AND_EFFECT_TOTALITY"
+  },
+  "continuous_obs":{"dependency_inventory_complete_for_this_action":true,"unknown_material_dependencies":[],"information_policy":"EXISTING_CANONICAL_AND_REAL_NONTERMINAL_MISSION_ONLY"},
+  "reality_query_admission":{"verdict":"NO_FRESH_TERMINAL_REALITY","reason":"REAL_UBJSON_MISSION_IS_EXISTING_NONTERMINAL_PRODUCTION_PREFLIGHT"},
+  "global_terminal_proof_cut":{"new_terminal_observation":false,"task_execution":true,"terminal_verification":false}
+}
