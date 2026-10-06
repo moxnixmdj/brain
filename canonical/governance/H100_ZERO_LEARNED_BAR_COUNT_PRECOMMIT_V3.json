@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_BAR_COUNT_PRECOMMIT_V3",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__POST_V2_FAILURE_REPAIR__NEW_FRESH_HOLDOUT_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "predecessor": {
+    "v1_failure": "canonical/verification/H100_ZERO_LEARNED_BAR_COUNT_FRESH_HOLDOUT_V1_FAILURE_20261006.json",
+    "v2_failure": "canonical/verification/H100_ZERO_LEARNED_BAR_COUNT_TEST_HOLDOUT_V2_FAILURE_20261006.json"
+  },
+  "justified_repairs": [
+    {
+      "failure": "SAME_COLOR_AXIS_LABEL_PIXELS_EXTENDED_BAR_BASELINES",
+      "repair": "DERIVE_ORTHOGONAL_BAR_EXTENT_FROM_LONGEST_DENSE_FILLED_RUN_WITH_GAP_CLOSING_INSTEAD_OF_ALL_SAME_COLOR_PIXELS"
+    },
+    {
+      "failure": "SHORT_REAL_BAR_BELOW_8_PERCENT_SPAN",
+      "repair": "LOWER_MINIMUM_ORTHOGONAL_SPAN_TO_5_PERCENT"
+    },
+    {
+      "failure": "STACKED_BARS_DO_NOT_SHARE_ONE_GLOBAL_LEFT_BASELINE",
+      "repair": "SELECT_LARGEST_CONSISTENT_BAR_THICKNESS_SERIES_INSTEAD_OF_GLOBAL_BASELINE_CLUSTER"
+    },
+    {
+      "failure": "LARGE_PASTEL_BACKGROUND_BANDS_CAN_LOOK_RECTANGULAR",
+      "repair": "REJECT_DENSE_CORE_SPANS_GREATER_THAN_95_PERCENT_OF_ORTHOGONAL_DIMENSION"
+    }
+  ],
+  "frozen_algorithm": {
+    "rgb_quantization_step": 16,
+    "minimum_color_chroma": 20,
+    "maximum_candidate_mean_brightness": 240,
+    "minimum_candidate_pixel_fraction": 0.0005,
+    "occupancy_threshold_fraction": 0.02,
+    "occupancy_threshold_min_pixels": 8,
+    "minimum_band_thickness": "MAX_4_PIXELS_OR_CEIL_0_008_TIMES_AXIS_DIMENSION",
+    "maximum_band_thickness_fraction": 0.4,
+    "dense_core_fill_threshold_fraction": 0.55,
+    "dense_core_max_gap_pixels": 3,
+    "minimum_dense_core_span_fraction": 0.05,
+    "maximum_dense_core_span_fraction": 0.95,
+    "minimum_dense_core_density": 0.45,
+    "duplicate_band_overlap_fraction": 0.55,
+    "thickness_cluster_tolerance": "MAX_2_PIXELS_OR_25_PERCENT_OF_ANCHOR_THICKNESS",
+    "orientation_score": "COUNT_TIMES_MEDIAN_SPAN_FRACTION_TIMES_MEDIAN_DENSITY_DIV_1_PLUS_THICKNESS_CV",
+    "minimum_orientation_score": 0.12,
+    "output": "COUNT_OF_BARS_IN_BEST_CONSISTENT_THICKNESS_SERIES_OR_ABSTAIN"
+  },
+  "consumed_development_regression": {
+    "case_count": 10,
+    "exact_correct": 10,
+    "includes": [
+      "V2H_640",
+      "V1_HOLDOUT_3_CASES",
+      "V2_TEST_HOLDOUT_6_CASES"
+    ]
+  },
+  "learned_state": {
+    "persistent_learned_bytes": 0,
+    "pretrained_vision_models": 0,
+    "ocr_models": 0,
+    "external_learned_capability_calls": 0
+  },
+  "fresh_holdout_rule": "AFTER_RUNTIME_FREEZE_SELECT_ONLY_PREVIOUSLY_UNOPENED_CHARTQA_CASES_BY_QUERY_TEXT_AND_CONTENT_HASH__LABELS_AND_PIXELS_MUST_REMAIN_UNSEEN_UNTIL_PRECOMMIT",
+  "hard_nonclaims": [
+    "TEN_CONSUMED_CASES_ARE_DEVELOPMENT_ONLY",
+    "BAR_COUNT_ONLY_NOT_GENERAL_CHART_QA",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
