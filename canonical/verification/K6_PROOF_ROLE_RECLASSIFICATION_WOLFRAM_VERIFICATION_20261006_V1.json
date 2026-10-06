@@ -1,66 +1,69 @@
 {
-  "schema":"PROJECT_BRAIN_K6_PROOF_ROLE_RECLASSIFICATION_WOLFRAM_VERIFICATION_V1",
-  "date":"2026-10-06",
-  "status":"INDEPENDENT_WOLFRAM_LOGIC_PASS__GITHUB_EXACT_SOURCE_CURRENTNESS_PASS__TRUTH_RECLASSIFICATION_ONLY__ZERO_TERMINAL_CREDIT",
-  "subject":{
-    "branch":"k6-proof-role-reclassification-v1",
-    "governance_path":"canonical/governance/K6_PROOF_ROLE_RECLASSIFICATION_20261006_V1.json",
-    "governance_git_blob_sha":"e50606fd266f47e402cd6579da9799fc8f383156"
+  "schema": "PROJECT_BRAIN_K6_PROOF_ROLE_RECLASSIFICATION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_WOLFRAM_LOGIC_PASS__GITHUB_EXACT_SOURCE_CURRENTNESS_PASS__TRUTH_RECLASSIFICATION_ONLY__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "k6-proof-role-reclassification-v1",
+    "governance_path": "canonical/governance/K6_PROOF_ROLE_RECLASSIFICATION_20261006_V1.json",
+    "governance_git_blob_sha": "f39740e273ce9acfc947c224d81a7c93c3afd7c9"
   },
-  "source_currentness":{
-    "method":"GITHUB_CONNECTOR_EXACT_BLOB_FETCH_ON_CURRENT_MAIN",
-    "result":"PASS",
-    "exact_blobs":{
-      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V2.json":"f17f2f83e7ac8173b0bf54a5cde65646125a15fd",
-      "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json":"7c1ed0adf243b92abab2cbdb6ebced921dcbb860",
-      "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json":"eebdeb6de3b3cfaed30a3bc991dae0548d25e7f5",
-      "canonical/governance/ATOMIC_SURVIVOR_EXECUTION_AUTHORITY_RECONCILIATION_V1.json":"19b363f3f6be080b73ba144f82ef5f0a481217b1",
-      "canonical/governance/S0_G0_ZERO_REALITY_SATURATION_V1.json":"31effb16940e6d5c0c95259871b2e3c00cb5e400",
-      "canonical/governance/K6_SHARED_SEPARATOR_KERNEL_PROJECTION_20261006_V1.json":"6de21878be3f45b318c8715487f03909a6f89e88",
-      "canonical/governance/K6_DECISION_REFINEMENT_COMPILER_20261006_V1.json":"93cf697300efc0a34ca534f2ce0d8ffa0b6c9616",
-      "canonical/verification/K6_DECISION_REFINEMENT_COMPILER_SPRITE_VERIFICATION_20261006_V1.json":"e7a98cd6c9f80c2120f1f53562338cd63e9d1581",
-      "canonical/governance/K6_TARGET_RELATIVE_DECISION_QUOTIENT_THEOREM_20261006_V1.json":"03baddc27d5ee9dd73656fdd801251e1f4fd8cc6",
-      "canonical/governance/TERMINAL_DISTRIBUTION_AWARE_OUTCOME_ORDER_V1.json":"d9e732eb7fb17de51f0d92dd72da96977f6e183f"
+  "source_currentness": {
+    "method": "GITHUB_CONNECTOR_EXACT_BLOB_FETCH_ON_CURRENT_MAIN",
+    "result": "PASS",
+    "exact_blobs": {
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V2.json": "f17f2f83e7ac8173b0bf54a5cde65646125a15fd",
+      "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860",
+      "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json": "eebdeb6de3b3cfaed30a3bc991dae0548d25e7f5",
+      "canonical/governance/ATOMIC_SURVIVOR_EXECUTION_AUTHORITY_RECONCILIATION_V1.json": "19b363f3f6be080b73ba144f82ef5f0a481217b1",
+      "canonical/governance/S0_G0_ZERO_REALITY_SATURATION_V1.json": "31effb16940e6d5c0c95259871b2e3c00cb5e400",
+      "canonical/governance/K6_SHARED_SEPARATOR_KERNEL_PROJECTION_20261006_V1.json": "6de21878be3f45b318c8715487f03909a6f89e88",
+      "canonical/governance/K6_DECISION_REFINEMENT_COMPILER_20261006_V1.json": "93cf697300efc0a34ca534f2ce0d8ffa0b6c9616",
+      "canonical/verification/K6_DECISION_REFINEMENT_COMPILER_SPRITE_VERIFICATION_20261006_V1.json": "e7a98cd6c9f80c2120f1f53562338cd63e9d1581",
+      "canonical/governance/K6_TARGET_RELATIVE_DECISION_QUOTIENT_THEOREM_20261006_V1.json": "03baddc27d5ee9dd73656fdd801251e1f4fd8cc6",
+      "canonical/governance/TERMINAL_DISTRIBUTION_AWARE_OUTCOME_ORDER_V1.json": "d9e732eb7fb17de51f0d92dd72da96977f6e183f",
+      "canonical/governance/K6_SEMANTIC_BINDING_RESIDUAL_PROJECTION_20261006_V3.json": "21d9f8551326f9741a5b13e6cc5d1494c23d9e34",
+      "canonical/governance/K6_POLICY_INDEX_REFINEMENT_AND_PERSISTENCE_COMPILER_20261006_V1.json": "df1a557bc37eac67ad6446fbcca8f891128f9c94",
+      "canonical/verification/K6_POLICY_INDEX_REFINEMENT_PERSISTENCE_SPRITE_VERIFICATION_20261006_V1.json": "d1849b94c6a9119cc789a5e920c3687f18d81ff5"
     }
   },
-  "wolfram_logic":{
-    "variables":{
-      "p":"positive_missing_capability",
-      "z":"zero_preproof_implementation_residual",
-      "o":"k6_refinement_operator_owned",
-      "u":"k6_binding_unresolved",
-      "i":"implementation_authority",
-      "requirementPreserved":"underlying_k6_terminal_requirement_preserved"
+  "wolfram_logic": {
+    "variables": {
+      "p": "positive_missing_capability",
+      "z": "zero_preproof_implementation_residual",
+      "o": "k6_refinement_operator_owned",
+      "u": "k6_binding_unresolved",
+      "i": "implementation_authority",
+      "requirementPreserved": "underlying_k6_terminal_requirement_preserved"
     },
-    "results":{
-      "reclassification_implication":true,
-      "unresolved_without_missing_is_consistent":true,
-      "reclassification_does_not_imply_solved":false,
-      "reclassification_does_not_imply_truth_deletion":false,
-      "positive_gap_is_not_implied_by_unresolved":false
+    "results": {
+      "reclassification_implication": true,
+      "unresolved_without_missing_is_consistent": true,
+      "reclassification_does_not_imply_solved": false,
+      "reclassification_does_not_imply_truth_deletion": false,
+      "positive_gap_is_not_implied_by_unresolved": false
     },
-    "interpretation":"GIVEN_ZERO_POSITIVE_GAP_ZERO_PREPROOF_IMPLEMENTATION_RESIDUAL_AND_OWNED_BOUNDED_REFINEMENT_OPERATOR__AN_UNRESOLVED_K6_BINDING_ROLE_IS_LOGICALLY_CONSISTENT_WITH_NO_CURRENT_MISSING_IMPLEMENTATION_CAPABILITY. THE_RECLASSIFICATION_NEITHER_SOLVES_K6_NOR_DELETES_THE_UNDERLYING_TERMINAL_REQUIREMENT."
+    "interpretation": "GIVEN_ZERO_POSITIVE_GAP_ZERO_PREPROOF_IMPLEMENTATION_RESIDUAL_AND_OWNED_BOUNDED_REFINEMENT_OPERATOR__AN_UNRESOLVED_K6_BINDING_ROLE_IS_LOGICALLY_CONSISTENT_WITH_NO_CURRENT_MISSING_IMPLEMENTATION_CAPABILITY. THE_RECLASSIFICATION_NEITHER_SOLVES_K6_NOR_DELETES_THE_UNDERLYING_TERMINAL_REQUIREMENT."
   },
-  "verified_consequence":[
-    "K6_MAY_NOT_BE_SCHEDULED_AS_GENERIC_IMPLEMENTATION_WORK_MERELY_BECAUSE_ITS_BINDING_IS_UNRESOLVED",
+  "verified_consequence": [
+    "K6_V3_SEMANTIC_BINDING_MAY_NOT_BE_SCHEDULED_AS_GENERIC_IMPLEMENTATION_WORK_MERELY_BECAUSE_THE_BINDING_IS_UNRESOLVED",
     "CURRENT_POSITIVE_MISSING_SEMANTIC_GENERATOR_COUNT_REMAINS_ZERO_UNLESS_THE_ROOT1_REOPEN_TEST_IS_SATISFIED",
     "ONE_UNRESOLVED_K6_PROOF_AND_INPUT_BINDING_ROLE_REMAINS",
     "ALL_29_LOAD_BEARING_TRUTHS_REMAIN_OPEN_OR_PROVED_EXACTLY_AS_BEFORE_THIS_RECLASSIFICATION"
   ],
-  "hard_nonclaims":[
+  "hard_nonclaims": [
     "NO_CLAIM_K6_REQUIREMENT_DELETED",
     "NO_CLAIM_K6_TERMINAL_BINDING_COMPLETE",
     "NO_CLAIM_ALL_PRECOMMITMENT_INFORMATION_IS_AVAILABLE",
     "NO_CLAIM_NO_FUTURE_ROOT1_GAP_CAN_BE_PROVED",
     "NO_CLAIM_TERMINAL_GOAL_ACHIEVED"
   ],
-  "accounting":{
-    "incremental_spend_usd":0,
-    "astra_access_consumed":0,
-    "terminal_credit_delta":0,
-    "acceptance_credit_delta":0,
-    "family_credit_delta":0,
-    "capability_credit_delta":0,
-    "ownership_credit_delta":0
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "astra_access_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
   }
 }
