@@ -1,0 +1,23 @@
+name: Verify matched Agency stateful V1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/matched_agency_stateful_case_v1.py"
+      - "canonical/tests/test_matched_agency_stateful_case_v1.py"
+      - "canonical/governance/MATCHED_AGENCY_STATEFUL_CASE_20261007_V1.json"
+      - ".github/workflows/verify-matched-agency-stateful-v1.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m pytest -q canonical/tests/test_matched_agency_stateful_case_v1.py
+      - run: python canonical/runtime/matched_agency_stateful_case_v1.py
