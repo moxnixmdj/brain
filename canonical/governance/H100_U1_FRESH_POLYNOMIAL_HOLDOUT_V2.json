@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_FRESH_POLYNOMIAL_HOLDOUT_V2",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_V2_PROGRAM_PRECOMMIT_BEFORE_V2_EXECUTION",
+  "program_precommit": "canonical/governance/H100_U1_FRESH_POLYNOMIAL_PROGRAM_PRECOMMIT_V2.json",
+  "cases": [
+    {
+      "x": -41,
+      "y": 1565
+    },
+    {
+      "x": -19,
+      "y": 311
+    },
+    {
+      "x": -7,
+      "y": 35
+    },
+    {
+      "x": -1,
+      "y": 5
+    },
+    {
+      "x": 1,
+      "y": 11
+    },
+    {
+      "x": 3,
+      "y": 25
+    },
+    {
+      "x": 8,
+      "y": 95
+    },
+    {
+      "x": 17,
+      "y": 347
+    },
+    {
+      "x": 37,
+      "y": 1487
+    },
+    {
+      "x": 73,
+      "y": 5555
+    },
+    {
+      "x": 144,
+      "y": 21175
+    },
+    {
+      "x": -512,
+      "y": 260615
+    }
+  ],
+  "gate": "12_OF_12_EXACT",
+  "promotion_authority": false
+}
