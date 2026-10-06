@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_OWNER_UPPER_ENVELOPE_PUBLIC_SOURCE_AUDIT_V1",
+  "date": "2026-10-07",
+  "status": "CURRENT_FIRST_PARTY_PUBLIC_SOURCE_AUDIT__INTERFACE_BOUND_FOUND__EXTENSIONAL_BEHAVIOR_UPPER_ENVELOPE_NOT_ESTABLISHED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "canonical_base_commit": "11f9e5dca5ccbea7eed15f87626de9e555054dad",
+  "purpose": "Test the cheapest target-superset closure route after extensional target-completeness was reopened: determine whether current first-party Anthropic public materials provide a sound authoritative behavioral upper envelope D with U subset-or-equal D, rather than merely interface specifications or sampled capability evaluations.",
+  "source_bindings": [
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "source_class": "FIRST_PARTY_MODEL_SPECIFICATION",
+      "observed": [
+        "CONTEXT_WINDOW_1M_TOKENS",
+        "MAX_OUTPUT_128K_TOKENS_NORMAL_MODE",
+        "INPUT_TO_OUTPUT_TEXT_AND_IMAGES_TO_TEXT",
+        "ADAPTIVE_THINKING_ALWAYS_ON",
+        "ACTIVE_LATEST_MODEL"
+      ],
+      "load_bearing_interpretation": "SOUND_INTERFACE_AND_RESOURCE_BOUNDARY_EVIDENCE__NOT_AN_EXTENSIONAL_ENUMERATION_OR_UPPER_BOUND_OF_ALL_USEFUL_BEHAVIOR_TRANSFORMS"
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5",
+      "source_class": "FIRST_PARTY_FEATURE_SUPPORT",
+      "observed": [
+        "FILES_PDF_VISION_SERVER_AND_CLIENT_TOOLS_SUPPORTED",
+        "COMPUTER_USE_TOOLSET_SUPPORT",
+        "MID_CONVERSATION_SYSTEM_MESSAGES_AND_INLINE_TOOL_DEFINITIONS",
+        "COMPACTION_AND_OTHER_EXECUTION_FEATURES"
+      ],
+      "load_bearing_interpretation": "FEATURE_AND_INTERFACE_EVIDENCE__NOT_A_CLAIM_THAT_THE_LIST_IS_AN_EXHAUSTIVE_USEFUL_BEHAVIOR_ONTOLOGY"
+    },
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "source_class": "FIRST_PARTY_TRANSPARENCY_MODEL_REPORT",
+      "observed": [
+        "OPUS55_MODALITIES_TEXT_INCLUDING_VOICE_DICTATION_AND_IMAGE_INPUTS",
+        "OUTPUT_TEXT_INCLUDING_TEXT_BASED_ARTIFACTS_AND_DIAGRAMS",
+        "MODEL_DESCRIPTION_GENERAL_LEADING_MODEL_COMPLEX_WORK",
+        "BENCHMARKED_CAPABILITIES_REFER_TO_SYSTEM_CARD_SECTION_8",
+        "ADDITIONAL_EVALUATIONS_WERE_CONDUCTED_BEYOND_SUMMARIZED_RESULTS",
+        "PUBLIC_TRAINING_AND_ARCHITECTURE_DESCRIPTION_IS_HIGH_LEVEL_NOT_WHITE_BOX"
+      ],
+      "load_bearing_interpretation": "SUPPORTS_TOP_LEVEL_MODALITY_INTERFACE_BOUNDARY_AND_SAMPLED_CAPABILITY_EVIDENCE__DOES_NOT_SUPPLY_A_SOUND PUBLIC U_SUBSET_OR_EQUAL_D WITNESS FOR ALL USEFUL OPUS55 BEHAVIORS"
+    },
+    {
+      "url": "https://www.anthropic.com/system-cards",
+      "source_class": "FIRST_PARTY_SYSTEM_CARD_INDEX",
+      "observed": [
+        "SYSTEM_CARDS_DOCUMENT_CAPABILITIES_SAFETY_EVALUATIONS_AND_DEPLOYMENT_DECISIONS",
+        "OPUS55_SYSTEM_CARD_PUBLICLY_LISTED"
+      ],
+      "load_bearing_interpretation": "SYSTEM_CARD_IS_AN_EVALUATION_AND_DEPLOYMENT_DOCUMENT__INDEX_DOES_NOT_ASSERT_EXHAUSTIVE_BEHAVIORAL_COVERAGE"
+    }
+  ],
+  "current_findings": {
+    "authoritative_interface_upper_bound_found": true,
+    "explicit_extensional_useful_behavior_upper_envelope_found": false,
+    "exact_exhaustive_capability_ontology_found": false,
+    "public_white_box_implementation_characterization_found": false,
+    "public_source_proves_U_subset_or_equal_D": false
+  },
+  "distinction": {
+    "interface_envelope": "BOUNDS_MODALITIES_MESSAGE_TOOL_CHANNELS_AND_RESOURCE_LIMITS_THROUGH_WHICH_TARGET_BEHAVIOR_IS_EXPRESSED",
+    "behavioral_upper_envelope": "BOUNDS_WHICH USEFUL CONTEXT_CONDITIONED TRANSFORMS POLICIES OR TRAJECTORY LAWS THE TARGET CAN ACTUALLY REALIZE",
+    "rule": "INTERFACE_ENVELOPE_DOES_NOT_BY_ITSELF_ENTAIL_BEHAVIORAL_UPPER_ENVELOPE_TIGHT_ENOUGH_FOR_TERMINAL_DOMINANCE"
+  },
+  "consequence": [
+    "DO_NOT_PROMOTE_CURRENT_FIRST_PARTY_INTERFACE_SPECS_OR_SYSTEM_CARD_EVALUATION_CATALOGUE_AS U_SUBSET_OR_EQUAL_D AUTHORITY",
+    "PRESERVE_INTERFACE_BOUNDARY_AS_A_VALID CONSTRAINT FOR ANY FUTURE UPPER_ENVELOPE",
+    "PUBLIC_OWNER_ATTESTATION_ROUTE_REMAINS_OPEN_NOT_CLOSED",
+    "PUBLIC_IMPLEMENTATION_CHARACTERIZATION_ROUTE_REMAINS OPEN NOT CLOSED",
+    "NEXT_ZERO_REALITY_ROUTE_SHOULD_ATTACK_IMPLEMENTATION_INDEPENDENT_TARGET_UPPER_ENVELOPE_OR COMPLETE_OWNED_POLICY_COVER__NOT_ACCUMULATE_MORE BENCHMARK NAMES"
+  ],
+  "falsifiers": [
+    "A_FIRST_PARTY_ANTHROPIC_SOURCE_EXPLICITLY_ATTESTS_A_SOUND_EXHAUSTIVE_OR_SUPERSET_BEHAVIORAL_ENVELOPE_FOR_OPUS55",
+    "A_PUBLIC_IMPLEMENTATION_CHARACTERIZATION_IS_FOUND_FROM_WHICH_A_SOUND_BEHAVIORAL_UPPER_ENVELOPE_CAN_BE_DERIVED",
+    "A_STRONGER_FIRST_PARTY_EXCLUSION_SET_PROVES_U_SUBSET_OR_EQUAL_D_FOR_A_TRACTABLE_D"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ANTHROPIC_HAS_NEVER_PUBLISHED_OTHER_RELEVANT_MATERIAL",
+    "NO_CLAIM_THE_FULL_17MB_SYSTEM_CARD_WAS_EXHAUSTIVELY_MACHINE_PARSED_IN_THIS_AUDIT",
+    "NO_CLAIM_CURRENT_19_FAMILIES_ARE_INCOMPLETE",
+    "NO_CLAIM_A_NEW_OPUS55_BEHAVIOR_EXISTS_OUTSIDE_CURRENT_CERTIFIED_DOMAINS",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
