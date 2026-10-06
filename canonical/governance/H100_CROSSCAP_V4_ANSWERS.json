@@ -1,0 +1,101 @@
+{
+  "answers": [
+    {
+      "compare_fields": [
+        "status",
+        "solutions"
+      ],
+      "expected": {
+        "solutions": [
+          {
+            "a": 1,
+            "b": 2
+          }
+        ],
+        "status": "UNIQUE"
+      },
+      "id": "R4"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "predictions"
+      ],
+      "expected": {
+        "predictions": [
+          7,
+          7
+        ],
+        "status": "PROGRAM_FOUND"
+      },
+      "id": "C4"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "inputs",
+        "target"
+      ],
+      "expected": {
+        "inputs": [
+          "x"
+        ],
+        "status": "ROLES_IDENTIFIED",
+        "target": "y"
+      },
+      "id": "L4"
+    },
+    {
+      "compare_fields": [
+        "component_count"
+      ],
+      "expected": {
+        "component_count": 2
+      },
+      "id": "V4"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "tool_ids"
+      ],
+      "expected": {
+        "status": "UNIQUE",
+        "tool_ids": [
+          "fast"
+        ]
+      },
+      "id": "T4"
+    },
+    {
+      "id": "P4",
+      "semantic_plan": {
+        "max_cost": 3
+      }
+    },
+    {
+      "compare_fields": [
+        "history_unique_count"
+      ],
+      "expected": {
+        "history_unique_count": 4
+      },
+      "id": "M4"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "predictions"
+      ],
+      "expected": {
+        "predictions": [
+          0.09093648028851317,
+          0.5223943155573775
+        ],
+        "status": "CAPABILITY_HIT__VERIFY_BEFORE_USE"
+      },
+      "id": "N4"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_H100_CROSSCAP_V4_ANSWERS"
+}
