@@ -1,0 +1,46 @@
+{
+  "schema":"PROJECT_BRAIN_SEMANTIC_COMPRESSION_CERTIFICATION_LATTICE_V1",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_ZERO_CREDIT",
+  "objective":"Delete target-specific observations by using the weakest sound semantic witness that still certifies Brain noninferiority.",
+  "routes":[
+    {
+      "id":"UNKNOWN_ARBITRARY",
+      "premise":"No sound restriction on the load-bearing evaluator class.",
+      "certificate":"Exact Brain-target trajectory-law equality or an equally strong structural theorem.",
+      "target_information":"HIGH"
+    },
+    {
+      "id":"HIDDEN_SUBSET_SUPERSET_CEILING",
+      "premise":"The hidden evaluator can only penalize failures on an unknown subset of a proved complete explicit requirement universe.",
+      "certificate":"Brain has zero failures on the entire explicit superset.",
+      "target_information":"ZERO"
+    },
+    {
+      "id":"EVALUATOR_CONE_BASIS",
+      "premise":"Every admissible evaluator is a constant plus a nonnegative combination of proved generators.",
+      "certificate":"Brain noninferiority on every generator.",
+      "target_information":"ONLY_TARGET_GAPS_NEEDED_FOR_GENERATORS_UNLESS_GENERATOR_CEILINGS_ARE_ABSOLUTE"
+    },
+    {
+      "id":"MONOTONE_ORDER",
+      "premise":"Every admissible hidden evaluator is monotone in a proved material outcome order.",
+      "certificate":"Dominance-preserving coupling or maximal-outcome proof.",
+      "target_information":"ZERO_IF_MAXIMAL_OUTCOME_OTHERWISE_TARGET_LAW_FOR_COUPLING"
+    },
+    {
+      "id":"EXPLICIT_COMPLETE",
+      "premise":"Complete load-bearing evaluator and hard-constraint semantics are proved.",
+      "certificate":"Global optimum or direct distributional noninferiority.",
+      "target_information":"ZERO_IF_BRAIN_ATTAINS_PROVED_GLOBAL_OPTIMUM"
+    }
+  ],
+  "scheduler_rule":"For each live terminal obligation, search routes in order of minimum total semantic acquisition plus proof cost, not by benchmark/family identity. Never acquire target behavior that a stronger semantic certificate can delete.",
+  "astra_rule":"Use scarce Astra only when it can supply a residual semantic discriminator or evaluator-class restriction that survives independent falsification and deletes more target information than the call costs.",
+  "hard_nonclaims":[
+    "No current terminal obligation is closed by this lattice.",
+    "Route classes are not assumed attainable for every obligation.",
+    "No terminal acceptance family capability or ownership credit."
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
