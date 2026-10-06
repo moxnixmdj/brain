@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_H100_DETERMINISTIC_BAR_COUNT_HOLDOUT_SELECTION_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__BEFORE_WIDER_CHARTQA_VALIDATION_ANSWERS",
+  "source": {
+    "repo": "vis-nlp/ChartQA",
+    "commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+    "splits": [
+      "val_human",
+      "val_augmented"
+    ]
+  },
+  "selection": {
+    "casefold": true,
+    "require_regex": "(?:^|\\\\b)(?:how many|number of|count of).*\\\\bbars?\\\\b",
+    "reject_regex": "\\\\bbarrel(?:s)?\\\\b|longest|shortest|highest|lowest|value|which|what color|percentage|percent",
+    "dedupe_by": "IMAGE_PLUS_NORMALIZED_QUESTION"
+  },
+  "allowed_solver_inputs": [
+    "RGB_PIXELS",
+    "IMAGE_WIDTH_HEIGHT",
+    "QUESTION_ONLY_FOR_COUNT_INTENT_CONFIRMATION"
+  ],
+  "forbidden_solver_inputs": [
+    "GOLD_ANSWER",
+    "OCR_TEXT",
+    "TICK_LABELS_AS_TEXT",
+    "LEARNED_VISION_MODEL",
+    "EXTERNAL_VISUAL_CAPABILITY_MODEL"
+  ],
+  "pass_gate": {
+    "minimum_cases": 5,
+    "exact_integer_accuracy": 0.8,
+    "persistent_learned_bytes": 0
+  },
+  "purpose": "TEST_WHETHER_GENERIC_DETERMINISTIC_PIXEL_GEOMETRY_CAN_REPLACE_LEARNED_VISUAL_STATE_FOR_BAR_COUNTING_ON_FRESHLY_SELECTED_PUBLIC_VALIDATION_CASES",
+  "promotion_authority": false
+}
