@@ -1,0 +1,224 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FIRST_PRINCIPLES_THEORY_TOURNAMENT_V1",
+  "date": "2026-10-06",
+  "status": "TRUTH_REPAIR_CANDIDATE__UTILITY_SEMANTICS_AND_LITERAL_FULL_SUPERSET_READING_FALSIFIED__TARGET_RELATIVE_UTILITY_ORDERED_SUCCESSOR_PROPOSED__ZERO_TERMINAL_CREDIT",
+  "canonical_base_commit": "21171608e919d129e3cd49fb798760ef2e167368",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "first_principles_rule": "NO_EXISTING_ATOM_FAMILY_INTERFACE_BENCHMARK_OR_THEOREM_IS_SACRED__ONLY_LOGICAL_NECESSITY_FOR_THE_TERMINAL_OBJECTIVE_SURVIVES",
+  "source_claim_under_test": {
+    "id": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+    "source": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V2.json",
+    "claim": "Bind Brain equal-or-better behavior and owned execution over the full observable-trace scope, or localize the minimal uncovered behavior class without weakening the target.",
+    "proof_requirement": "A content-addressed proof must cover every externally useful trace property, including performance, safety, resource semantics, composition, condition transfer, and ownership. Finite acceptance rows alone are insufficient."
+  },
+  "semantic_distinction": {
+    "U_trace": "SOURCE_AGNOSTIC_OBSERVABLE_TRACE_REPRESENTATION_SUPERSET",
+    "T_opus55": "EXACT_SUBSET_OF_TRACE_PROPERTIES_INDUCED_BY_USEFUL_OPUS_5_5_CAPABILITIES_UNDER_THE_FROZEN_TARGET_CONFIGURATION_AND_ADMISSIBLE_CONDITIONS",
+    "invariant": "T_opus55_SUBSET_OR_EQUAL_U_trace",
+    "forbidden_inference": "REPRESENTABILITY_SUPERSET_DOES_NOT_IMPLY_EVERY_MEMBER_OF_THE_SUPERSET_IS_A_TARGET_REQUIREMENT"
+  },
+  "falsifier_1_overstrength_countermodel": {
+    "kind": "NECESSITY_COUNTERMODEL",
+    "finite_model": {
+      "U_trace": [
+        "a",
+        "b"
+      ],
+      "T_opus55": [
+        "a"
+      ],
+      "brain_equal_or_better": {
+        "a": true,
+        "b": false
+      },
+      "brain_owned": {
+        "a": true
+      },
+      "terminal_goal_true": true,
+      "literal_full_U_trace_dominance": false
+    },
+    "derivation": [
+      "THE_TERMINAL_OBJECTIVE_REQUIRES_EQUAL_OR_BETTER_OWNED_BEHAVIOR_FOR_TARGET_PROPERTIES_IN_T_opus55",
+      "PROPERTY_b_IS_IN_THE_REPRESENTATIONAL_SUPERSET_BUT_NOT_IN_THE_USEFUL_OPUS55_TARGET_SET",
+      "BRAIN_MAY_LOSE_ON_b_WITHOUT_LOSING_ANY_USEFUL_OPUS55_CAPABILITY",
+      "THEREFORE_DOMINANCE_OVER_ALL_OF_U_trace_IS_NOT_NECESSARY_FOR_THE_TERMINAL_OBJECTIVE"
+    ],
+    "scope_of_falsification": "DECISIVE_ONLY_AGAINST_A_LITERAL_REQUIREMENT_TO_DOMINATE_THE_ENTIRE_REPRESENTATIONAL_SUPERSET"
+  },
+  "falsifier_2_underbinding_countermodel": {
+    "kind": "SUFFICIENCY_COUNTERMODEL",
+    "worlds": {
+      "W1": {
+        "declared_target": [
+          "a"
+        ],
+        "actual_useful_opus55_target": [
+          "a"
+        ],
+        "brain_dominates_declared": true,
+        "terminal": true
+      },
+      "W2": {
+        "declared_target": [
+          "a"
+        ],
+        "actual_useful_opus55_target": [
+          "a",
+          "b"
+        ],
+        "hidden_target_property": "b",
+        "brain_dominates_declared": true,
+        "brain_dominates_b": false,
+        "terminal": false
+      }
+    },
+    "indistinguishability": "ANY_PROOF_THAT_BINDS_ONLY_TO_THE_DECLARED_OR_OBSERVED_TARGET_SET_AND_NOT_TO_A_TARGET_COMPLETENESS_CERTIFICATE_CAN_ACCEPT_W1_AND_W2_IDENTICALLY",
+    "conclusion": "TARGET_RELATIVE_DOMINANCE_IS_INSUFFICIENT_UNLESS_TARGET_MEMBERSHIP_OR_A_STRONGER_TARGET_COMPLETE_QUOTIENT_IS_ITSELF_PROVED"
+  },
+  "theorem_repair": {
+    "id": "C_TARGET_RELATIVE_UTILITY_QUOTIENT_DOMINANCE_AND_OWNERSHIP_V3",
+    "statement": "THE_TERMINAL_OBJECTIVE_HOLDS_IFF_A_TARGET_COMPLETE_UTILITY_RELEVANT_BEHAVIORAL_QUOTIENT_COVERS_EVERY_USEFUL_OPUS55_CAPABILITY_AND_BRAIN_WEAKLY_DOMINATES_OPUS55_UNDER_THE_DECLARED_TERMINAL_OUTCOME_PARTIAL_ORDER_FOR_EVERY_ADMISSIBLE_TARGET_CONDITION_AND_COMPOSITION_WITH_DONOR_INDEPENDENT_BRAIN_OWNED_EXECUTION",
+    "does_not_require": "DOMINANCE_ON_U_trace_MINUS_T_opus55",
+    "quotient": {
+      "name": "Q_target_utility",
+      "purpose": "MINIMUM_EQUIVALENCE_CLASSES_OF_BEHAVIOR_DISTINGUISHED_BY_AT_LEAST_ONE_ADMISSIBLE_TERMINAL_RELEVANT_OUTCOME_FUNCTIONAL",
+      "completeness_requirement": "FOR_EVERY_t_IN_T_opus55_THERE_EXISTS_q_IN_Q_target_SUCH_THAT_q_LOSSLESSLY_PRESERVES_ALL_TERMINAL_RELEVANT_OUTCOME_DIFFERENCES_FOR_t",
+      "minimality_requirement": "MERGE_ANY_TWO_CLASSES_IF_NO_ADMISSIBLE_TARGET_CONDITION_CAN_DISTINGUISH_THEIR_TERMINAL_RELEVANT_OUTCOMES",
+      "refinement_rule": "ADD_ONLY_THE_MINIMUM_DISCRIMINATOR_EXPOSED_BY_A_CONSTRUCTIVE_COUNTEREXAMPLE"
+    },
+    "required_lemmas": [
+      "UTILITY_AND_EQUAL_OR_BETTER_ORDERING_WELL_FORMED",
+      "TARGET_UTILITY_QUOTIENT_COMPLETENESS",
+      "TARGET_CLASS_WEAK_DOMINANCE",
+      "CONDITION_AND_COMPOSITION_CLOSURE",
+      "RESOURCE_SAFETY_AND_AUTHORITY_NONREGRESSION",
+      "DONOR_INDEPENDENT_BRAIN_OWNERSHIP"
+    ]
+  },
+  "tournament": {
+    "objective": "MINIMIZE_TERMINAL_CRITICAL_PATH_BY_FALSIFYING_THE_THEOREM_AND_ITS_BASIS_BEFORE_PROVING_LEAF_OBLIGATIONS",
+    "falsifiers": [
+      {
+        "id": "F_OBSERVABLE_BUT_UTILITY_IRRELEVANT_DIFFERENCE",
+        "decisive": true,
+        "question": "CAN_TWO_TRACES_DIFFER_WHILE_EVERY_ADMISSIBLE_TERMINAL_OUTCOME_FUNCTIONAL_RATES_THEM_EQUIVALENT?",
+        "kill_condition": "YES__RAW_TRACE_DIFFERENCE_MUST_BE_QUOTIENTED_OUT_AND_CANNOT_CREATE_A_TARGET_CAPABILITY_REQUIREMENT"
+      },
+      {
+        "id": "F_EQUAL_OR_BETTER_ORDER_AMBIGUITY",
+        "decisive": true,
+        "question": "CAN_BRAIN_AND_OPUS55_TRADE_OFF_TWO_TERMINAL_RELEVANT_OUTCOMES_WITHOUT_A_DECLARED_ORDER_DECIDING_WEAK_DOMINANCE?",
+        "kill_condition": "YES__TERMINAL_DOMINANCE_PREDICATE_IS_UNDERDEFINED"
+      },
+      {
+        "id": "F_SUPERSET_OVERREACH",
+        "decisive": true,
+        "question": "CAN_A_NON_TARGET_TRACE_PROPERTY_IN_U_trace_BE_REQUIRED_BY_THE_CURRENT_THEOREM?",
+        "kill_condition": "YES__CURRENT_LITERAL_FULL_SUPERSET_READING_IS_OVERSTRONG"
+      },
+      {
+        "id": "F_TARGET_OMISSION",
+        "decisive": true,
+        "question": "CAN_A_USEFUL_OPUS55_BEHAVIOR_CHANGE_TERMINAL_OUTCOME_WHILE_ALL_CURRENT_TARGET_QUOTIENT_CERTIFICATES_REMAIN_UNCHANGED?",
+        "kill_condition": "YES__TARGET_QUOTIENT_IS_INCOMPLETE"
+      },
+      {
+        "id": "F_NONSEPARABLE_INTERACTION",
+        "decisive": true,
+        "question": "CAN_EACH_QUOTIENT_CLASS_PASS_ALONE_WHILE_AN_ADMISSIBLE_COMPOSITION_OR_CONDITION_FAILS?",
+        "kill_condition": "YES__ADD_ONLY_THE_MINIMUM_INTERACTION_DISCRIMINATOR_OR_COMPOSITION_GENERATOR"
+      },
+      {
+        "id": "F_RESOURCE_OR_SAFETY_ESCAPE",
+        "decisive": true,
+        "question": "CAN_TASK_OUTPUT_MATCH_WHILE_TERMINAL_RELEVANT_RESOURCE_OR_SAFETY_OUTCOME_IS_WORSE?",
+        "kill_condition": "YES__DOMINANCE_RELATION_IS_INCOMPLETE"
+      },
+      {
+        "id": "F_OWNERSHIP_ESCAPE",
+        "decisive": true,
+        "question": "CAN_A_PASSING_CLASS_DISAPPEAR_AFTER_DELETING_OPAQUE_DONOR_OR_EXTERNAL_CAPABILITY_EXECUTION?",
+        "kill_condition": "YES__CAPABILITY_IS_NOT_BRAIN_OWNED"
+      }
+    ],
+    "refinement_loop": [
+      "START_FROM_THE_SMALLEST_CURRENT_TARGET_BEHAVIOR_BASIS",
+      "SEARCH_FOR_THE_CHEAPEST_DECISIVE_COUNTEREXAMPLE",
+      "IF_FOUND_ADD_OR_SPLIT_ONLY_THE_MINIMUM_CAUSAL_DISCRIMINATOR",
+      "IF_TWO_CLASSES_ARE_TERMINAL_INTERCHANGEABLE_MERGE_THEM",
+      "RERUN_ALL_HIGHER_PRIORITY_FALSIFIERS",
+      "STOP_ONLY_WHEN_THE_TARGET_QUOTIENT_IS_COMPLETE_AND_THE_REPAIRED_TERMINAL_THEOREM_SURVIVES"
+    ]
+  },
+  "effect_on_existing_32": {
+    "policy": "THE_32_CURRENT_OPEN_TRUTH_OBLIGATIONS_ARE_EVIDENCE_CANDIDATES_NOT_AXIOMS",
+    "action": "REBIND_EACH_TO_A_NECESSARY_LEMMA_OF_THE_REPAIRED_THEOREM_OR_DELETE_AS_LOGICALLY_REDUNDANT_ONLY_WITH_CONTENT_ADDRESSED_PROOF",
+    "no_bulk_credit": true
+  },
+  "immediate_execution_order": [
+    "FALSIFY_AND_REPAIR_USEFULNESS_AND_EQUAL_OR_BETTER_SEMANTICS",
+    "INDEPENDENTLY_VERIFY_F_SUPERSET_OVERREACH_AGAINST_THE_EXACT_CURRENT_THEOREM_SEMANTICS",
+    "CONSTRUCT_MINIMUM_Q_target_FROM_CURRENT_PROVED_AND_OPEN_BEHAVIORAL_EVIDENCE",
+    "RUN_F_TARGET_OMISSION_AND_F_NONSEPARABLE_INTERACTION_BEFORE_ANY_NEW_BROAD_BENCHMARK_WORK",
+    "REBIND_OR_DELETE_EXISTING_OPEN_OBLIGATIONS_ONLY_AFTER_THE_REPAIRED_THEOREM_SURVIVES",
+    "USE_EXTERNAL_SCORE_BEARING_REALITY_ONLY_FOR_IRREDUCIBLE_SURVIVORS"
+  ],
+  "accounting": {
+    "classification": "TRUTH_REPAIR",
+    "terminal_progress_credit": false,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "global_recompute_required_if_verified": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TERMINAL_GOAL_IS_ACHIEVED",
+    "NO_CLAIM_THE_REPAIRED_THEOREM_IS_PROVED",
+    "NO_CLAIM_THE_CURRENT_32_OBLIGATIONS_ARE_REDUNDANT",
+    "NO_CLAIM_ANY_CAPABILITY_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "source_definition_under_test": {
+    "source": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
+    "externally_useful_capability": "A task-conditioned property of Claude Opus 5.5 that changes the distribution of at least one externally observable trace or an externally measurable outcome such as correctness, quality, safety, latency, cost, reliability, or successful continuation.",
+    "defect": "OBSERVABLE_DIFFERENCE_IS_NECESSARY_FOR_EXTERNAL_USEFULNESS_BUT_NOT_SUFFICIENT_FOR_USEFULNESS_OR_EQUAL_OR_BETTER_ORDERING"
+  },
+  "falsifier_0_utility_semantics_countermodel": {
+    "kind": "DEFINITION_COUNTERMODEL",
+    "task": "RETURN_THE_CORRECT_INTEGER_RESULT_FOR_2_PLUS_2",
+    "opus_trace": {
+      "emission": "4.",
+      "correct": true,
+      "latency_class": "same",
+      "cost_class": "same",
+      "safety": "same"
+    },
+    "brain_trace": {
+      "emission": "4",
+      "correct": true,
+      "latency_class": "same",
+      "cost_class": "same",
+      "safety": "same"
+    },
+    "facts": [
+      "THE_TRACES_DIFFER_OBSERVABLY_BY_PUNCTUATION",
+      "ALL_DECLARED_TASK_UTILITY_AND_TERMINAL_RELEVANT_OUTCOME_DIMENSIONS_ARE_EQUAL",
+      "THEREFORE_OBSERVABLE_DIFFERENCE_ALONE_CANNOT_DEFINE_A_DISTINCT_USEFUL_CAPABILITY"
+    ],
+    "conclusion": "UTILITY_RELEVANCE_OR_AN_EXPLICIT_TERMINAL_OUTCOME_ORDER_IS_REQUIRED_BEFORE_TRACE_DIFFERENCE_CAN_BECOME_A_TARGET_CAPABILITY_REQUIREMENT"
+  },
+  "equal_or_better_ordering_requirement": {
+    "problem": "CORRECTNESS_QUALITY_SAFETY_LATENCY_COST_RELIABILITY_AND_CONTINUATION_CAN_TRADE_OFF__WITHOUT_A_DECLARED_PARTIAL_ORDER_OR_ADMISSIBLE_EVALUATOR_SET_THE_PHRASE_EQUAL_OR_BETTER_IS_NOT_DECIDABLE",
+    "minimum_repair": [
+      "DEFINE_TERMINAL_RELEVANT_OUTCOME_FUNCTIONALS_OR_A_PARTIAL_ORDER",
+      "DEFINE_WHICH_TASK_ENVIRONMENT_CONDITIONS_ARE_ADMISSIBLE",
+      "QUOTIENT_TRACE_DIFFERENCES_THAT_NO_ADMISSIBLE_TERMINAL_EVALUATOR_CAN_DISTINGUISH",
+      "REQUIRE_BRAIN_WEAK_DOMINANCE_OVER_OPUS55_ONLY_ON_THE_TARGET_UTILITY_QUOTIENT",
+      "PRESERVE_EXPLICIT_NONREGRESSION_CONSTRAINTS_FOR_SAFETY_AUTHORITY_AND_RESOURCE_BOUNDS"
+    ]
+  }
+}
