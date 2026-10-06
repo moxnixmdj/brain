@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_H100_VISION_ORIENTATION_INVARIANT_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__4_OF_4_FRESH_HOLDOUT",
+  "precommit": "canonical/governance/H100_VISION_ORIENTATION_INVARIANT_FRESH_HOLDOUT_PRECOMMIT_V1.json",
+  "runtime": "canonical/runtime/h100_vision_orientation_invariant_parser_v1.py",
+  "observed": {
+    "passed": 4,
+    "total": 4,
+    "parser_source_bytes": 3584,
+    "learned_bytes": 0
+  },
+  "accounting_correction": "PARSER_CODE_IS_CAPABILITY_BEARING_DETERMINISTIC_STATE_AND_MUST_NOT_BE_COUNTED_AS_ZERO_CAPABILITY_INFORMATION",
+  "valid_upper_bound": "TARGET_SCOPE_EXPLICIT_IMPLEMENTATION_LE_3584_SOURCE_BYTES_UNDER_THIS_ENCODING",
+  "hard_nonclaims": [
+    "SYNTHETIC_RECTANGULAR_BAR_RASTERS_ONLY",
+    "NO_OCR",
+    "NO_FREEFORM_CHARTQA",
+    "SOURCE_BYTES_NOT_MINIMUM_DESCRIPTION_LENGTH"
+  ],
+  "promotion_authority": false
+}
