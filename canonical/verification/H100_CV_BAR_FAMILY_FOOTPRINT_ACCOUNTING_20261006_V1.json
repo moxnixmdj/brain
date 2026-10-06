@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CV_BAR_FAMILY_FOOTPRINT_ACCOUNTING_20261006_V1",
+  "date": "2026-10-06",
+  "status": "BOUNDED_VISION_SLICE_ACCOUNTING_ONLY",
+  "learned_subject_reference": {
+    "complete_bundle_bytes": 99999997,
+    "prior_result": "canonical/verification/H100_CV_BAR_FAMILY_TEST_SPLIT_FRESH_RESULT_20261006_V1.json"
+  },
+  "deterministic_route": {
+    "persistent_learned_bytes": 0,
+    "target_adapted_deterministic_code_bytes_upper_bound": 3305,
+    "generic_opencv_package_bytes": 76098288,
+    "generic_opencv_package_mib": 72.57298278808594,
+    "generic_opencv_files": 89,
+    "combined_opencv_plus_target_code_bytes": 76101593
+  },
+  "arithmetic": {
+    "raw_difference_vs_99999997_bundle_bytes": 23898404,
+    "ratio_vs_99999997_bundle": 0.7610159528304786
+  },
+  "interpretation": "FOR_THE_NARROW_PURE_TOTAL_BAR_COUNT_SLICE_ONLY__A_ZERO_LEARNED_ROUTE_USING_GENERIC_OPENCV_PLUS_3305_BYTES_OF_TARGET_ADAPTED_SOURCE_FITS_BELOW_THE_PRIOR_99999997_BYTE_LEARNED_BUNDLE_FOOTPRINT__THIS_IS_NOT_A_GENERAL_VISION_REPLACEMENT",
+  "hard_nonclaims": [
+    "PYTHON_NUMPY_OS_AND_OTHER_GENERIC_RUNTIME_DEPENDENCIES_NOT_INCLUDED",
+    "ONLY_6_FRESH_HUMAN_TEST_CASES",
+    "NO_GENERAL_CHARTQA_EQUIVALENCE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
