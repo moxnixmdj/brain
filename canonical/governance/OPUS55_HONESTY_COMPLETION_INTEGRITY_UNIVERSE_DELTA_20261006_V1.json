@@ -58,5 +58,18 @@
     "NO_LITERAL_TARGET_UNIVERSE_COMPLETENESS",
     "NO_TERMINAL_CREDIT",
     "NO_CLAIM_DYNAMIC_WEBPAGE_BYTES_ARE_CONTENT_ADDRESSED"
-  ]
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
 }
