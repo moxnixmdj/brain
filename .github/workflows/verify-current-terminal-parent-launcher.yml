@@ -6,6 +6,21 @@ on:
       - canonical/runtime/terminal_parent_portfolio_launcher_v1.py
       - canonical/tests/test_terminal_parent_portfolio_launcher_v1.py
       - canonical/runtime/saccr_route_specific_terminal_executor_v1.py
+      - canonical/runtime/root3_broker_rpc_v1.py
+      - canonical/tests/test_root3_broker_rpc_v1.py
+      - canonical/runtime/root3_admin_persistence_driver_v1.py
+      - canonical/runtime/root3_parent_driver_registry_v1.py
+      - canonical/tests/test_root3_parent_driver_registry_v1.py
+      - canonical/runtime/root3_parent_broker_server_v1.py
+      - canonical/tests/test_root3_parent_broker_server_v1.py
+      - canonical/runtime/zero_ambient_namespace_brokered_launcher_v2.py
+      - canonical/tests/test_zero_ambient_namespace_brokered_launcher_v2.py
+      - canonical/runtime/root3_production_astra_brokered_launcher_v2.py
+      - canonical/tests/test_root3_production_astra_brokered_launcher_v2.py
+      - canonical/runtime/astra_runtime.py
+      - canonical/tests/test_astra_runtime_root3_admin_broker_v1.py
+      - canonical/governance/ROOT3_ADMIN_PERSISTENCE_DRIVER_CONTRACT_20261007_V1.json
+      - canonical/governance/ROOT3_PARENT_BROKER_CUT_20261007_V1.json
       - .github/workflows/verify-current-terminal-parent-launcher.yml
   pull_request:
     branches: [main]
@@ -26,3 +41,30 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m unittest -v canonical.tests.test_terminal_parent_portfolio_launcher_v1
+      - name: Verify Root3 parent broker stack
+        id: root3
+        shell: bash
+        run: |
+          set +e
+          python -m unittest -v \
+            canonical.tests.test_root3_broker_rpc_v1 \
+            canonical.tests.test_root3_parent_driver_registry_v1 \
+            canonical.tests.test_root3_parent_broker_server_v1 \
+            canonical.tests.test_zero_ambient_namespace_brokered_launcher_v2 \
+            canonical.tests.test_astra_runtime_root3_admin_broker_v1 \
+            canonical.tests.test_root3_production_astra_brokered_launcher_v2 \
+            > root3-parent-verification.log 2>&1
+          status=$?
+          cat root3-parent-verification.log
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload Root3 verification log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: root3-parent-verification-log
+          path: root3-parent-verification.log
+          if-no-files-found: error
+      - name: Enforce Root3 verification result
+        if: always() && steps.root3.outputs.status != '0'
+        run: exit 1
