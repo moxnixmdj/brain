@@ -1,0 +1,41 @@
+{
+  "schema":"PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id":"INSTALL-TARGET-UNIVERSE-SURFACE-COMPILER-V1-20261006-SOL",
+  "date":"2026-10-06",
+  "status":"CANDIDATE__CURRENT_MAIN_CD1A861_BOUND__ZERO_TERMINAL_CREDIT",
+  "canonical_base_commit":"cd1a8618211f9f67aa9caf74e47150467c6048ca",
+  "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "causal_blocker":"TARGET_UNIVERSE_DISCOVERY_IS_FAIL_CLOSED_IN_PROSE_BUT_NEW_FIRST_PARTY_SURFACES_ARE_NOT_YET_MECHANICALLY_REQUIRED_TO_REACH_ONE_EXPLICIT_TYPED_CLASSIFICATION",
+  "action_kind":"RECONCILE_FRONTIER",
+  "highest_leverage_now":true,
+  "v22_prewrite_admission":{
+    "active_pointer_path":"canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha":"de8fe0b66a214bad3596fd92b10460d0bcf2afca",
+    "mode":"ACTIVE_HIGHER_ORDER_AUTHORITY_LANE",
+    "interface":"UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations":["LITERAL_ALL_USEFUL_OPUS55_FINALITY"],
+    "proof_state_reachability":"THE_ACTIVE_TERMINAL_CONTROL_LOOP_SCHEDULES_C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2_FIRST. A FAIL_CLOSED_SURFACE_COMPILER_IS_A_MINIMAL_PREREQUISITE FOR TURNING_PRIMARY_SOURCE_DISCOVERY INTO MECHANICAL ESCAPE DETECTION WITHOUT CLAIMING COMPLETENESS.",
+    "fresh_reality_authority":false,
+    "terminal_credit_delta":0
+  },
+  "real_outcome":"Make every admitted first-party useful-behavior surface mechanically classifiable as an existing intrinsic family union, a cross-cutting condition, a model-intrinsic security dimension, a deployment/interface-only non-target, or an unresolved constructive escape. Any missing or invalid classification fails closed.",
+  "stop_condition":"Compiler rejects unclassified surfaces, invalid family references, contradictory classifications, and unsupported closure claims; current manifest compiles with every surface explicit and literal target-universe completeness remaining false.",
+  "hard_nonclaims":[
+    "NO_TARGET_UNIVERSE_COMPLETENESS_PROVED",
+    "NO_NEW_CAPABILITY_FAMILY_PROVED",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_CONSUMED"
+  ],
+  "accounting":{
+    "incremental_spend_usd":0,
+    "new_reality_units_consumed":0,
+    "terminal_cases_consumed":0,
+    "acceptance_credit_delta":0,
+    "family_credit_delta":0,
+    "capability_credit_delta":0,
+    "ownership_credit_delta":0
+  },
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false
+}
