@@ -1,0 +1,28 @@
+{
+  "schema":"PROJECT_BRAIN_HIDDEN_SUBSET_SUPERSET_CEILING_V1",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_ZERO_CREDIT",
+  "theorem":{
+    "setup":"Let F be an explicit complete finite requirement universe and let S be any hidden load-bearing subset of F. Assume the evaluator only penalizes misses or violations on S with nonnegative penalties.",
+    "statement":"If the Brain proves zero misses and zero violations on every element of F, then it attains the evaluator ceiling for every admissible hidden subset S and every nonnegative weighting over S.",
+    "consequence":"The hidden relevance or materiality classifier is unnecessary once a stronger complete-superset ceiling is proved."
+  },
+  "requirements":[
+    "F is independently proved complete for the claimed task instance or scope.",
+    "All hidden load-bearing requirements are subsets of F.",
+    "The evaluator is monotone nonincreasing in misses or violations and has no reward for omitting elements of F.",
+    "Brain actually proves zero misses or violations over F under the same hard constraints."
+  ],
+  "falsifiers":[
+    "A load-bearing evaluator dimension is not represented in F.",
+    "The evaluator rewards selective omission or penalizes preserving a nonrelevant element.",
+    "F completeness is only sampled or heuristic.",
+    "Brain coverage of F is incomplete."
+  ],
+  "hard_nonclaims":[
+    "No current terminal predicate is closed.",
+    "No claim a complete F has yet been proved for finance.",
+    "No terminal acceptance family capability or ownership credit."
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
