@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_H100_A_TOURNAMENT_WAVE1_RESULT_V1",
+  "date": "2026-10-06",
+  "status": "WAVE1_COMPLETE__7_DIRECT_PASS__1_SETUP_INVALIDATED__1_GENUINE_REPRESENTATION_FAILURE",
+  "bindings": {
+    "g0_commit": "ff8cfc9269119f2a4395eaf339a6cf7cf2cd9a7b",
+    "tasks_commit": "6f7b9d59e57dc1b375991234122c120304a40099",
+    "harness_commit": "8a08467c13a73e42834fd1751f6cc77d451374cf",
+    "oracle_commit": "5297d279ad787cb8d6de84a1e430e727fd6d16d2",
+    "harness_blob": "a8c47981e56978741c745b439775c4ff44f0ce20",
+    "tasks_blob": "0adc6b8c1ff3f95a44193060810de178f1a89b8e"
+  },
+  "anticheat": {
+    "task_id_literals_in_harness": 0,
+    "seed_leak": false,
+    "frozen_import_set_exact": true
+  },
+  "raw_outcome": {
+    "task_count": 9,
+    "direct_pass": [
+      "W1_PARAMETRIC_TRANSFER",
+      "W1_TYPED_PLAN",
+      "W1_EFFECT_TOOL",
+      "W1_EVENT_MEMORY",
+      "W1_JIT_LEXICAL",
+      "W1_COMPOSITIONAL_LANGUAGE",
+      "W1_TOOL_TRACE"
+    ],
+    "raw_fail": [
+      {
+        "id": "W1_SYMBOLIC_SYNTHESIS",
+        "status": "GRAMMAR_NOT_EXACT__EXPAND_OR_EXPERIMENT"
+      },
+      {
+        "id": "W1_VISION_PBM",
+        "status": "G0_UNSUPPORTED_REPRESENTATION"
+      }
+    ],
+    "target_adapted_persistent_bits": 0,
+    "external_frontier_model_calls": 0
+  },
+  "recursive_falsification": {
+    "W1_SYMBOLIC_SYNTHESIS": {
+      "disposition": "INVALID_AS_P0_FAILURE__PREEXISTING_COMPLETE_SEARCH_WAS_OMITTED_FROM_G0_MANIFEST",
+      "preexisting_runtime": "canonical/runtime/h100_complete_unary_chain_search_v1.py",
+      "preexisting_blob": "e30773177ee1c374acbe5fdfcacdf25004e6cc81",
+      "preexisting_commit": "dfb3992d68fbdc2ea4dcc8fb7efc9471a09306e8",
+      "preexisting_commit_time": "2026-10-05T23:51:28+02:00",
+      "generating_sequence": [
+        "log1p_abs",
+        "sqrt_abs",
+        "log1p_abs"
+      ],
+      "sequence_is_in_frozen_unary_grammar": true,
+      "local_exact_fit_train_nrmse": 6.982295334462021e-14,
+      "local_exact_fit_holdout_nrmse": 1.0039520595714305e-13,
+      "causal_class": "TOURNAMENT_SETUP_GAP"
+    },
+    "W1_VISION_PBM": {
+      "disposition": "SURVIVING_G0_FAILURE",
+      "causal_class": "REPRESENTATION_GAP",
+      "reason": "NO_FROZEN_G0_VISION_COMPONENT"
+    }
+  },
+  "tournament_update": {
+    "information_gap_failures": 0,
+    "valid_search_gap_failures": 0,
+    "valid_representation_gap_failures": 1,
+    "positive_persistent_information_lower_bound_from_wave1": false,
+    "next_move": "FREEZE_STRONGEST_PREEXISTING_ZERO_TARGET_G0_V2__THEN_ATTACK_VISION_WITH_FRESH_POST_G0_V2_HOLDOUT"
+  },
+  "hard_nonclaims": [
+    "WAVE1_DOES_NOT_PROVE_ZERO_TARGET_STATE_SUFFICIENCY",
+    "VISION_FAILURE_DOES_NOT_IMPLY_LEARNED_STATE_NECESSITY",
+    "SYMBOLIC_FAILURE_IS_NOT_COUNTED_AGAINST_P0"
+  ],
+  "promotion_authority": false
+}
