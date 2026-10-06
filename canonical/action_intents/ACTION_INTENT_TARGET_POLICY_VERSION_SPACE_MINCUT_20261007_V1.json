@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TARGET_POLICY_VERSION_SPACE_MINCUT_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_PROOF_ONLY__ZERO_CREDIT",
+  "canonical_base_commit": "f125156159aff04b31761dfee91b07b63991425d",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "action_kind": "TRUTH_REPAIR__TARGET_INFORMATION_MINIMIZATION",
+  "real_objective": "Reduce target-specific information acquisition to excluding only target policies under which the deployed Brain would lose.",
+  "selected_route": "TARGET_POLICY_VERSION_SPACE_AND_BAD_SET_EXCLUSION",
+  "evidence_refs": [
+    "canonical/governance/TARGET_DISCOVERY_EXTENSIONAL_GAP_INVALIDATION_20261007_V1.json",
+    "canonical/governance/OPUS55_FIXED_INTERFACE_INTERACTIVE_TRANSDUCER_SUPERDOMAIN_20261005_V2.json",
+    "canonical/governance/DISTRIBUTIONAL_TARGET_UPPER_ENVELOPE_THEOREM_20261006_V1.json",
+    "canonical/governance/TARGET_POLICY_VERSION_SPACE_MINCUT_20261007_V1.json",
+    "canonical/verification/TARGET_POLICY_VERSION_SPACE_MINCUT_WOLFRAM_VERIFICATION_20261007_V1.json"
+  ],
+  "next_falsifier": "CONSTRUCT_THE_CHEAPEST_TARGET_POLICY_KERNEL CONSISTENT_WITH_ALL_CURRENT_BOUND_EVIDENCE THAT BEATS THE DEPLOYED_BRAIN_ON_ONE ADMISSIBLE_CONTEXT; IF NONE CAN BE CONSTRUCTED, PROVE BAD_SET_EMPTY BY A SOUND VERSION_SPACE COVER.",
+  "hard_nonclaims": [
+    "NO TERMINAL CREDIT",
+    "NO CLAIM BAD_SET EMPTY",
+    "NO CLAIM TARGET VERSION SPACE COMPLETE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
