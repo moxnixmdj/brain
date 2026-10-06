@@ -1,0 +1,20 @@
+{
+  "schema":"PROJECT_BRAIN_K6_ADAPTIVE_DECISION_REFINEMENT_V2_SPRITE_VERIFICATION",
+  "date":"2026-10-06",
+  "status":"INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__5_OF_5__STATIC_3_ADAPTIVE_2__ZERO_TERMINAL_CREDIT",
+  "subject":{
+    "governance":{"path":"canonical/governance/K6_ADAPTIVE_DECISION_REFINEMENT_V2.json","git_blob_sha":"49b8798f10f9bd7bfeb3703e02668a488cc6172b"},
+    "runtime":{"path":"canonical/runtime/k6_adaptive_decision_refinement_v2.py","git_blob_sha":"9e517c879c561d57d74393dc1243b0f3fe4c235f"},
+    "countermodel":{"path":"canonical/governance/K6_STATIC_REFINEMENT_SUBOPTIMALITY_COUNTERMODEL_20261006_V1.json","git_blob_sha":"3431474c6e24a5966b92b68699284ee11f58f4f1"}
+  },
+  "carrier":{"provider":"SPRITES","sprite_name":"brain-h100-independent-replay-v1","sprite_id":"sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"},
+  "verified":[
+    "COMMON_ADEQUATE_POLICY_STOPS_WITH_ZERO_PROBE_COST",
+    "FOUR_WORLD_COUNTERMODEL_HAS_ADAPTIVE_WORST_CASE_COST_2",
+    "CURRENT_STATIC_SUBSET_COUNTERMODEL_REQUIRES_COST_3",
+    "LATE_DISCRIMINATOR_REMAINS_INADMISSIBLE_UNDER_V1_DEADLINE_SEMANTICS",
+    "UNOWNED_DISCRIMINATOR_REMAINS_INADMISSIBLE"
+  ],
+  "hard_nonclaims":["NO_K6_SEMANTIC_BINDING_CLOSURE","NO_OPEN_WORLD_COMPLETENESS","NO_TERMINAL_CREDIT"],
+  "accounting":{"incremental_spend_usd":0,"fresh_reality_units_consumed":0,"terminal_credit_delta":0}
+}
