@@ -54,6 +54,8 @@ def edge(cid, left, right, i):
     eid = left["component_id"] + "->" + right["component_id"]
     shape = h(f"{cid}:{i}:shape")
 
+    template = h(f"{cid}:{i}:case-template")
+
     def run(role, sem, terminal, bridge, composite):
         row = {
             "edge_id": eid,
@@ -61,7 +63,12 @@ def edge(cid, left, right, i):
             "transported_semantic_sha256": sem,
             "transported_shape_sha256": shape,
             "downstream_terminal_semantic_sha256": terminal,
-            "downstream_case_payload_sha256": right["case_payload_sha256"],
+            "downstream_case_payload_sha256": (
+                h(f"{cid}:{i}:ablated-case")
+                if role == "ablated"
+                else right["case_payload_sha256"]
+            ),
+            "downstream_case_template_sha256": template,
             "downstream_scorer_path": right["scorer_path"],
             "downstream_scorer_git_blob_sha": right["scorer_git_blob_sha"],
             "base_scorer_pass": True,
@@ -250,3 +257,27 @@ def test_base_component_scorer_must_actually_pass():
     out = compile_v4(x)
     assert out["status"] == "FAIL_CLOSED"
     assert "BASE_SCORER_NOT_PASS" in out["errors"][0]
+
+
+def test_ablated_case_must_be_distinct_from_true_case():
+    x = base()
+    e = cls(x, "BROWSER_MEMORY_RECOVERY")["edges"][0]
+    e["ablated_run"]["downstream_case_payload_sha256"] = (
+        e["true_run"]["downstream_case_payload_sha256"]
+    )
+    rebind(e["ablated_run"], "browser_same_case_ablated_rebound")
+    out = compile_v4(x)
+    assert out["status"] == "FAIL_CLOSED"
+    assert "ABLATION_CASE_NOT_DISTINCT" in out["errors"][0]
+
+
+def test_true_ablated_rescue_must_share_case_template():
+    x = base()
+    e = cls(x, "RESEARCH_TOOL_ARTIFACT")["edges"][0]
+    e["ablated_run"]["downstream_case_template_sha256"] = h(
+        "different-template"
+    )
+    rebind(e["ablated_run"], "research_template_rebound")
+    out = compile_v4(x)
+    assert out["status"] == "FAIL_CLOSED"
+    assert "CASE_TEMPLATE_MISMATCH" in out["errors"][0]
