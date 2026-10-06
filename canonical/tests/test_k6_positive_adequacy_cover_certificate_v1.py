@@ -100,3 +100,10 @@ def test_complete_relation_allows_exact_declared_tau_claim():
     assert out["hat_tau_semantics"] == "EXACT_FOR_DECLARED_COMPLETE_RELATION"
     assert out["true_minimum_tau_claimed"] is True
     assert out["terminal_credit_delta"] == 0
+
+
+def test_theorem_source_bindings_fail_closed_and_pass_current_branch():
+    from canonical.runtime.k6_positive_adequacy_cover_theorem_verifier_v1 import verify
+    out = verify()
+    assert out["pass"] is True, out
+    assert out["terminal_credit_delta"] == 0
