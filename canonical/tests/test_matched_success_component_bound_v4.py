@@ -161,6 +161,11 @@ def cls(doc, cid):
     return next(x for x in doc["classes"] if x["class_id"] == cid)
 
 
+def rebind(raw, label):
+    binding = {k: v for k, v in raw.items() if k != "receipt"}
+    raw["receipt"] = receipt(label, binding)
+
+
 def test_valid_component_bound_bundle_passes_candidate_compiler():
     out = compile_v4(base())
     assert out["status"].startswith(
@@ -192,6 +197,7 @@ def test_standalone_component_success_without_causal_flip_fails():
     x = base()
     e = cls(x, "RESEARCH_TOOL_ARTIFACT")["edges"][0]
     e["ablated_run"]["bridge_check_pass"] = True
+    rebind(e["ablated_run"], "research_edge_ablated_rebound")
     out = compile_v4(x)
     assert out["status"] == "FAIL_CLOSED"
     assert "BRIDGE_INTERVENTION_PATTERN_INVALID" in out["errors"][0]
@@ -203,6 +209,7 @@ def test_same_semantic_ablation_fails_closed():
     e["ablated_run"]["transported_semantic_sha256"] = (
         e["true_run"]["transported_semantic_sha256"]
     )
+    rebind(e["ablated_run"], "coding_edge_ablated_rebound")
     out = compile_v4(x)
     assert out["status"] == "FAIL_CLOSED"
     assert "ABLATION_NOT_DISTINCT" in out["errors"][0]
@@ -212,6 +219,7 @@ def test_v3_must_bind_actual_first_component_projection():
     x = base()
     row = cls(x, "AGENCY_THREE_TOOL_LONG_HORIZON")
     row["v3_binding"]["true_upstream_semantic_sha256"] = h("unrelated")
+    rebind(row["v3_binding"], "agency_v3_rebound")
     out = compile_v4(x)
     assert out["status"] == "FAIL_CLOSED"
     assert "V3_UPSTREAM_NOT_FIRST_COMPONENT" in out["errors"][0]
