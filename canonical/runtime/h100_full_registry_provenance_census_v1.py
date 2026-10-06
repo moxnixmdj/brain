@@ -182,7 +182,7 @@ def v4_rows()->tuple[list[dict[str,Any]],dict[str,Any]]:
     n=int(obs["seed_candidate_count"])
     if n!=2822:
         raise FullRegistryProvenanceCensusError("V4_CANDIDATE_COUNT_CHANGED")
-    _require_all(src,["CAP_AFFINE_RATIONAL_SAT_SQUARE_V1","sat","arg":{"op":"square"],"V4_SOURCE")
+    _require_all(src,["CAP_AFFINE_RATIONAL_SAT_SQUARE_V1","\"op\":\"sat\"","\"op\":\"square\""],"V4_SOURCE")
     bits=_ceil_log2(n)
     return ([{
         "capability_id":"CAP_AFFINE_RATIONAL_SAT_SQUARE_V1",
