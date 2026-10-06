@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import base64
 import hashlib
 import json
 import os
@@ -10,7 +9,10 @@ import time
 from collections.abc import Mapping
 from typing import Any
 
-from canonical.runtime import root3_typed_durable_admin_write_v1 as admin
+from canonical.runtime import continuous_obs_runtime as continuous_obs
+from canonical.runtime import root3_admin_persistence_driver_v1 as admin_driver
+from canonical.runtime import root3_parent_driver_registry_v1 as driver_registry
+from canonical.runtime import root3_typed_durable_admin_write_v1 as admin_plan
 
 EXTERNAL_REQUEST_SCHEMA="PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1"
 EXTERNAL_RESPONSE_SCHEMA="PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1"
@@ -31,6 +33,11 @@ def _token(v:Any,label:str,max_len:int=160)->str:
         raise ParentBrokerDenied(label+"_INVALID")
     return s
 
+def _expected_prestate(path:pathlib.Path)->str:
+    if path.is_symlink() or path.parent.is_symlink() or not path.exists():
+        return "ABSENT"
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
 def _validated_bridge_dir(repo_root:pathlib.Path,raw_dir:str,task_id:str)->pathlib.Path:
     root=repo_root.resolve(strict=True)
     task=_token(task_id,"TASK_ID")
@@ -50,6 +57,27 @@ def _validated_bridge_dir(repo_root:pathlib.Path,raw_dir:str,task_id:str)->pathl
         raise ParentBrokerDenied("BRIDGE_DIR_IDENTITY_MISMATCH")
     observed.mkdir(parents=True,exist_ok=True)
     return observed
+
+def _information_action(tool_kind:str,tool_payload:Mapping[str,Any])->dict[str,str]:
+    raw_kind=str(tool_kind or "")
+    if raw_kind in {"http_get","urlopen"}:
+        action_kind="EXACT_FETCH"
+        source=str(tool_payload.get("url") or "")
+    elif raw_kind in {"package_name_search","python_source_tree","pypi_wheel_closure"}:
+        action_kind="DISCOVERY_SEARCH"
+        source=str(
+            tool_payload.get("goal")
+            or tool_payload.get("effect")
+            or tool_payload.get("project")
+            or raw_kind
+        )
+    elif raw_kind=="planner":
+        action_kind="PLANNER"
+        source="planner"
+    else:
+        action_kind="EXTERNAL_TOOL"
+        source=raw_kind
+    return {"kind":action_kind,"source":source,"tool_kind":raw_kind}
 
 def relay_external_tool(
     *,
@@ -118,53 +146,96 @@ def relay_external_tool(
         raise ParentBrokerDenied("EXTERNAL_RESPONSE_FAILED")
     return dict(response["result"])
 
-def durable_admin_write(
-    *,
-    repo_root:pathlib.Path,
-    plan:Mapping[str,Any],
-    payload_b64:str,
-)->dict[str,Any]:
-    try:
-        out=admin_driver.execute(
-            repo_root=repo_root,
-            plan=plan,
-            payload_b64=payload_b64,
-        )
-    except Exception as exc:
-        raise ParentBrokerDenied(
-            type(exc).__name__+":"+str(exc)
-        ) from exc
-    receipt=out.get("receipt")
-    if not isinstance(receipt,dict) or receipt.get("status")!="COMMITTED":
-        raise ParentBrokerDenied("ADMIN_DRIVER_RECEIPT_INVALID")
-    return receipt
-
 class ParentBroker:
     def __init__(
         self,
         *,
         repo_root:str|os.PathLike[str],
+        expected_agent_id:str,
+        expected_task_id:str,
+        mission_id:str,
+        information_context:Mapping[str,Any],
         external_bridge_dir:str|None=None,
         external_wait_seconds:float=0.0,
     ):
         self.repo_root=pathlib.Path(repo_root).resolve(strict=True)
+        self.expected_agent_id=_token(expected_agent_id,"EXPECTED_AGENT_ID")
+        self.expected_task_id=_token(expected_task_id,"EXPECTED_TASK_ID")
+        self.mission_id=_token(mission_id,"MISSION_ID")
+        if not isinstance(information_context,Mapping):
+            raise ParentBrokerDenied("INFORMATION_CONTEXT_REQUIRED")
+        self.information_context=dict(information_context)
         self.external_bridge_dir=external_bridge_dir
         self.external_wait_seconds=float(external_wait_seconds)
         self.receipts:list[dict[str,Any]]=[]
 
+    def _check_identity(self,agent:str,task:str)->None:
+        if agent!=self.expected_agent_id:
+            raise ParentBrokerDenied("BROKER_AGENT_IDENTITY_MISMATCH")
+        if task!=self.expected_task_id:
+            raise ParentBrokerDenied("BROKER_TASK_IDENTITY_MISMATCH")
+
+    def _append_information_admission(self,verdict:Mapping[str,Any])->dict[str,Any]:
+        path=(
+            self.repo_root/"canonical/astra_runtime/evidence"/
+            (self.mission_id+"__ROOT3_PARENT_INFORMATION_ADMISSION.jsonl")
+        )
+        payload=(
+            json.dumps(dict(verdict),sort_keys=True,separators=(",",":"))+"\n"
+        ).encode("utf-8")
+        rel=path.relative_to(self.repo_root).as_posix()
+        plan=admin_plan.build_plan(
+            operation="APPEND_JSONL",
+            destination_class="ASTRA_EVIDENCE_JSONL",
+            path=rel,
+            payload=payload,
+            expected_pre_sha256=_expected_prestate(path),
+        )
+        return admin_driver.execute(
+            repo_root=self.repo_root,
+            mission_id=self.mission_id,
+            plan=plan,
+            payload_b64=__import__("base64").b64encode(payload).decode("ascii"),
+        )
+
+    def _authorize_external(self,tool_kind:str,tool_payload:Mapping[str,Any])->dict[str,Any]:
+        action=_information_action(tool_kind,tool_payload)
+        verdict=continuous_obs.authorize_information_action(
+            self.information_context,
+            action,
+            root=self.repo_root,
+        )
+        receipt={
+            **dict(verdict),
+            "mission_id":self.mission_id,
+            "broker_authority":"PARENT_INDEPENDENT_CONTINUOUS_OBS",
+        }
+        self._append_information_admission(receipt)
+        if verdict.get("pass") is not True:
+            raise ParentBrokerDenied(
+                "PARENT_INFORMATION_AUTHORIZATION_DENIED:"
+                +"|".join(verdict.get("errors") or ["UNKNOWN"])
+            )
+        return receipt
+
     def handle(self,request:Mapping[str,Any])->dict[str,Any]:
         kind=str(request.get("kind") or "")
-        if kind not in ALLOWED_KINDS:
-            raise ParentBrokerDenied("BROKER_KIND_DENIED:"+kind)
         agent=_token(request.get("agent_id"),"AGENT_ID")
         task=_token(request.get("task_id"),"TASK_ID")
+        self._check_identity(agent,task)
         payload=request.get("payload")
         if not isinstance(payload,Mapping):
             raise ParentBrokerDenied("BROKER_PAYLOAD_INVALID")
+
         def ping_driver(_payload):
             return {"pong":True}
 
         def external_driver(driver_payload):
+            tool_kind=_token(driver_payload.get("tool_kind"),"TOOL_KIND")
+            tool_payload=driver_payload.get("tool_payload") or {}
+            if not isinstance(tool_payload,Mapping):
+                raise ParentBrokerDenied("TOOL_PAYLOAD_INVALID")
+            self._authorize_external(tool_kind,tool_payload)
             if not self.external_bridge_dir:
                 raise ParentBrokerDenied("EXTERNAL_BRIDGE_NOT_CONFIGURED")
             return relay_external_tool(
@@ -172,17 +243,27 @@ class ParentBroker:
                 bridge_dir=self.external_bridge_dir,
                 agent_id=agent,
                 task_id=task,
-                tool_kind=driver_payload.get("tool_kind"),
-                tool_payload=driver_payload.get("tool_payload") or {},
+                tool_kind=tool_kind,
+                tool_payload=tool_payload,
                 wait_seconds=self.external_wait_seconds,
             )
 
         def admin_persistence_driver(driver_payload):
-            return durable_admin_write(
-                repo_root=self.repo_root,
-                plan=driver_payload.get("plan") or {},
-                payload_b64=driver_payload.get("payload_b64"),
-            )
+            try:
+                out=admin_driver.execute(
+                    repo_root=self.repo_root,
+                    mission_id=self.mission_id,
+                    plan=driver_payload.get("plan") or {},
+                    payload_b64=driver_payload.get("payload_b64"),
+                )
+            except Exception as exc:
+                raise ParentBrokerDenied(
+                    type(exc).__name__+":"+str(exc)
+                ) from exc
+            receipt=out.get("receipt")
+            if not isinstance(receipt,dict) or receipt.get("status")!="COMMITTED":
+                raise ParentBrokerDenied("ADMIN_DRIVER_RECEIPT_INVALID")
+            return receipt
 
         drivers={
             "PING":ping_driver,
@@ -208,4 +289,7 @@ class ParentBroker:
             "request_count":len(self.receipts),
             "kinds":sorted({x["kind"] for x in self.receipts}),
             "receipts":list(self.receipts),
+            "expected_agent_id":self.expected_agent_id,
+            "expected_task_id":self.expected_task_id,
+            "mission_id":self.mission_id,
         }
