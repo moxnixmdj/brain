@@ -5,12 +5,21 @@ class H100FullRegistryProvenanceCensusTests(unittest.TestCase):
     def test_full_count_and_categories(self):
         out=c.run()
         self.assertEqual(out["entry_count"],21)
+        self.assertEqual(out["unique_stable_capability_id_count"],20)
         self.assertEqual(out["category_counts"],{
             c.STRICT:9,
             c.DEV_FIXED:3,
             c.EXTERNAL_FIXED:5,
             c.UNRESOLVED:4,
         })
+
+    def test_cross_generation_tanh_id_collision_is_explicit(self):
+        out=c.run()
+        self.assertEqual(set(out["stable_id_collisions"]),{"CAP_AFFINE_TANH_V1"})
+        rows=out["stable_id_collisions"]["CAP_AFFINE_TANH_V1"]
+        self.assertEqual(sorted(x["registry_generation"] for x in rows),[3,6])
+        self.assertEqual({x["category"] for x in rows},{c.STRICT,c.EXTERNAL_FIXED})
+        self.assertEqual(out["census_identity_rule"],"REGISTRY_GENERATION_PLUS_CAPABILITY_ID")
 
     def test_strict_compact_selection_code_is_54_bits(self):
         out=c.run()
