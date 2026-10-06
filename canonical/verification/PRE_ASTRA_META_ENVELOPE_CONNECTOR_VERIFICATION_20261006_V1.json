@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_PRE_ASTRA_META_ENVELOPE_CONNECTOR_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_ACTIVE7_PLUS_DORMANT1_META_FRONTIER_BOUND_INTO_ASTRA_V4__ZERO_ASTRA_ACCESS__ZERO_CREDIT",
+  "subjects": {
+    "meta_prefilter": {
+      "path": "canonical/governance/PRE_ASTRA_META_ENVELOPE_SEMANTIC_PREFILTER_20261006_V1.json",
+      "git_blob_sha": "a1af8e57265bef692ac649b6f9659f6ea9f638c7"
+    },
+    "astra_packet_v4": {
+      "path": "canonical/governance/ASTRA_SCARCE_ACCESS_TARGET_SEMANTICS_CLASSIFICATION_PACKET_20261006_V4.json",
+      "git_blob_sha": "f2419d322afaca1c6eb605122a5d2ae728ea60e7"
+    }
+  },
+  "authority_blobs": {
+    "tournament_input": "e35096d20a2a1b2c9bf03ab1624916feef46b058",
+    "active_pointer": "ffa7904d862ef23c597f57e6f2b3dd7440758e63",
+    "w4_target_discovery": "7e9c93c13836a3735bdbdad61c1038252d555ae2",
+    "biology_counterexample": "f303a29fa9de86e95cdf62ea0af85f22e52d7271",
+    "multilingual_long_context_boundary": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2",
+    "creative_diagram_repair": "02ee9918fc38f3bdee96f847d04e7fd1337b9e46"
+  },
+  "checks": {
+    "exact_tournament_active_meta_set_bound": true,
+    "active_meta_count": 7,
+    "exact_pointer_dormant_meta_set_bound": true,
+    "dormant_meta_count": 1,
+    "total_meta_open_count": 8,
+    "w4_top_level_family_discovery_complete": true,
+    "w4_terminal_finality_not_claimed": true,
+    "known_biology_counterexample_bound": true,
+    "known_biology_counterexample_requires_no_new_family": true,
+    "multilingual_and_long_context_remain_condition_transfer_open": true,
+    "creative_diagram_has_no_positive_root1_family_gap": true,
+    "astra_v4_binds_exact_meta_prefilter": true,
+    "astra_v4_requires_meta_output": true,
+    "family_only_astra_result_forbidden_as_terminally_sufficient": true,
+    "astra_access_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "deduction": "THE_ONE_SHOT_ASTRA_PACKET_MUST_COVER_THE_EIGHT_META_OBLIGATIONS_AS_WELL_AS_THE_FOURTEEN_OPEN_FAMILY_CONTEXT_SEMANTIC_QUESTIONS__OTHERWISE_A_COMPLETE_FAMILY_ONLY_RESULT_CAN_LEAVE_LITERAL_TERMINAL_FINALITY_FALSE.",
+  "hard_nonclaims": [
+    "NO_META_OBLIGATION_CLOSED",
+    "NO_CLAIM_ANY_DOMAIN_MAPPING_IS_SEMANTICALLY_LOSSLESS",
+    "NO_MULTILINGUAL_OR_LONG_CONTEXT_TRANSFER_CREDIT",
+    "NO_CREATIVE_DIAGRAM_ACCEPTANCE_CREDIT",
+    "NO_ASTRA_INTERACTION_CONSUMED",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "THIS_IS_CONNECTOR_RECOMPUTATION_NOT_AN_INDEPENDENT_EXECUTION_CARRIER"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "astra_access_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
