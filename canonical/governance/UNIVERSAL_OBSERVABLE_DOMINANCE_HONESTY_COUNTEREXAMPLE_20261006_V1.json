@@ -8,7 +8,7 @@
     "git_blob_sha": "da8803584bc1e2bea672bcd1833e526ec489ac81"
   },
   "scope_authority": {
-    "path": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1",
+    "path": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
     "git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c"
   },
   "prior_honesty_delta": {
