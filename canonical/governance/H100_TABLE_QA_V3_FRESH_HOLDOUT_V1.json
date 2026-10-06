@@ -1,0 +1,1028 @@
+{
+  "augmented_count": 50,
+  "case_count": 100,
+  "cases": [
+    {
+      "id": "V3H_53",
+      "imgname": "04301786022389.png",
+      "label": "59",
+      "query": "What is the total add up value of Both the bars?",
+      "selection_rank": 1,
+      "selection_sha256": "0044430ca3aa5581e22583250e4d4cecb84d0c74dc6c4734c109494eedc0ad4b",
+      "source_index": 53,
+      "split": "human"
+    },
+    {
+      "id": "V3H_814",
+      "imgname": "multi_col_20676.png",
+      "label": "Smart home controllers",
+      "query": "Which has the least wholesale unit sales in the U.S overall?",
+      "selection_rank": 2,
+      "selection_sha256": "00784495d72f68cfac0666d18354936bdb4b46515f071d75f8136e677424c213",
+      "source_index": 814,
+      "split": "human"
+    },
+    {
+      "id": "V3H_397",
+      "imgname": "OECD_RUNNING_A_BUSINESS_BGD_SGP_TUR_ZAF_ZMB_000008.png",
+      "label": "No",
+      "query": "Is the median value of all the bars greater than 50.2?",
+      "selection_rank": 3,
+      "selection_sha256": "00b94a87c05c343d815710adf13b41520bd66d2eea3dc70983bfbacdc4959b5c",
+      "source_index": 397,
+      "split": "human"
+    },
+    {
+      "id": "V3H_274",
+      "imgname": "1914.png",
+      "label": "37",
+      "query": "How many consumers feel A lot confident about what they are buying?",
+      "selection_rank": 4,
+      "selection_sha256": "00bafe4fa5e38d8b456a2e92e5db1514172e04c87522abf4fa103a08087eecbb",
+      "source_index": 274,
+      "split": "human"
+    },
+    {
+      "id": "V3H_714",
+      "imgname": "multi_col_100758.png",
+      "label": "3",
+      "query": "How many years are represented in the data?",
+      "selection_rank": 5,
+      "selection_sha256": "00e1ca7c3fd7bedb2c58de31d316fefcdde912d22b367136fa06ef26efe8101a",
+      "source_index": 714,
+      "split": "human"
+    },
+    {
+      "id": "V3H_474",
+      "imgname": "two_col_62140.png",
+      "label": "181",
+      "query": "Pizza Hut : 765 ,  KFC : ?    ?",
+      "selection_rank": 6,
+      "selection_sha256": "016903d487371b062c17af647042bd6ba97eec5d0a7616ec53cb924572b46500",
+      "source_index": 474,
+      "split": "human"
+    },
+    {
+      "id": "V3H_549",
+      "imgname": "two_col_101211.png",
+      "label": "27",
+      "query": "What is the percentage of rheumatologists in the U.S. who either worked at a Hospital  or an Office-based solo practice as of 2019?",
+      "selection_rank": 7,
+      "selection_sha256": "017f7a596c01075f475d3a0423f6982973264ada4e98c94d799dde5c2b8cd28d",
+      "source_index": 549,
+      "split": "human"
+    },
+    {
+      "id": "V3H_875",
+      "imgname": "multi_col_60462.png",
+      "label": "42",
+      "query": "What is the value of the highest bar?",
+      "selection_rank": 8,
+      "selection_sha256": "019adfc9b31c46366c9c33bf28bd27b31853a8093ef6c4195e5392866c3e400e",
+      "source_index": 875,
+      "split": "human"
+    },
+    {
+      "id": "V3H_643",
+      "imgname": "two_col_23298.png",
+      "label": "1347066",
+      "query": "What si the difference between the highest and lowest projected surgical cosmetic procedures?",
+      "selection_rank": 9,
+      "selection_sha256": "01bed64f19795d4efbec14ebe2c765d05da114475e089e74a0973b8b831e901c",
+      "source_index": 643,
+      "split": "human"
+    },
+    {
+      "id": "V3H_186",
+      "imgname": "20279636023514.png",
+      "label": "9",
+      "query": "How many years shows the Unemployment rate in the graph?",
+      "selection_rank": 10,
+      "selection_sha256": "02a2e06fcd3d708f33f807842bb4edf2cfb7cba2c926b77be672b16138410835",
+      "source_index": 186,
+      "split": "human"
+    },
+    {
+      "id": "V3H_812",
+      "imgname": "multi_col_20648.png",
+      "label": "2014",
+      "query": "In which year the sales of dietary supplements was  minimum?",
+      "selection_rank": 11,
+      "selection_sha256": "02e9ce1c40d397edfe93fe743346a16b8e6dee5cd9277c42e881ff7b633afdbc",
+      "source_index": 812,
+      "split": "human"
+    },
+    {
+      "id": "V3H_880",
+      "imgname": "multi_col_60563.png",
+      "label": "Ruth Bader Ginsburg",
+      "query": "which justice has highest very favorable percentage?",
+      "selection_rank": 12,
+      "selection_sha256": "0333623362515e66fe87dab2643296998f5b25a4d0e99d774e417ccb8f15364f",
+      "source_index": 880,
+      "split": "human"
+    },
+    {
+      "id": "V3H_212",
+      "imgname": "46398321002034.png",
+      "label": "United States Virgin Islands",
+      "query": "Which country is represented by the red color line?",
+      "selection_rank": 13,
+      "selection_sha256": "035f40c764a13edbdf9c617d3f4acc9781d55e808be039d4f9dc563e10825ab0",
+      "source_index": 212,
+      "split": "human"
+    },
+    {
+      "id": "V3H_548",
+      "imgname": "two_col_101211.png",
+      "label": "15",
+      "query": "What is the percentage of rheumatologists in the U.S. who worked at a Hospital as of 2019?",
+      "selection_rank": 14,
+      "selection_sha256": "03c07e100ea1556bacffb31d7ab58c3dff52e98cc6c2851e3d11df4280cc4ca1",
+      "source_index": 548,
+      "split": "human"
+    },
+    {
+      "id": "V3H_938",
+      "imgname": "multi_col_80501.png",
+      "label": "2019",
+      "query": "Which year does the purple color indicate?",
+      "selection_rank": 15,
+      "selection_sha256": "04470426f298eb9e14747302523994ef2ea26c5f0393b83b2d95fecd38b85cbe",
+      "source_index": 938,
+      "split": "human"
+    },
+    {
+      "id": "V3H_572",
+      "imgname": "two_col_3197.png",
+      "label": "Yes",
+      "query": "What did the majority of people respond with?",
+      "selection_rank": 16,
+      "selection_sha256": "04859410afcdc89592c58b7dfa0749726dcbfe1e49365451683a4830ebe71c59",
+      "source_index": 572,
+      "split": "human"
+    },
+    {
+      "id": "V3H_836",
+      "imgname": "multi_col_40651.png",
+      "label": "75.9",
+      "query": "What is the highest share in 2013?",
+      "selection_rank": 17,
+      "selection_sha256": "049aa56ba0a2151ed08cdd069d905124bbfb26e724be50bd8591c9a46b0722a7",
+      "source_index": 836,
+      "split": "human"
+    },
+    {
+      "id": "V3H_711",
+      "imgname": "multi_col_100488.png",
+      "label": "3.16",
+      "query": "What is the ratio between concerned and not concerned in Atlantic ?",
+      "selection_rank": 18,
+      "selection_sha256": "04acad8065a54a2353342c8cf017b2d9809334a6a2c04a692827a83eabf263f5",
+      "source_index": 711,
+      "split": "human"
+    },
+    {
+      "id": "V3H_947",
+      "imgname": "multi_col_80751.png",
+      "label": "46.75",
+      "query": "What is the average for general merchandisers?",
+      "selection_rank": 19,
+      "selection_sha256": "04b574e7508117da2a57e59242c2c0b53cd1ef408a1dadfb13fcbd91d09ce777",
+      "source_index": 947,
+      "split": "human"
+    },
+    {
+      "id": "V3H_443",
+      "imgname": "OECD_LABOUR_PRODUCTIVITY_FORECAST_AUT_JPN_NOR_NZL_SVN_000076.png",
+      "label": "Slovenia",
+      "query": "Which country recorded smallest labour productivity value over the years?",
+      "selection_rank": 20,
+      "selection_sha256": "04f4f6f3013b74a09334b24bc7d12a7a42e32dd692ea856d2a4a843f7fb09b8f",
+      "source_index": 443,
+      "split": "human"
+    },
+    {
+      "id": "V3H_798",
+      "imgname": "multi_col_20335.png",
+      "label": "No",
+      "query": "Are all the grey bars below 30%?",
+      "selection_rank": 21,
+      "selection_sha256": "054da8828a8a90b4ff3fe3eda1f329a77e93a95d361def2b0d561691d8df8588",
+      "source_index": 798,
+      "split": "human"
+    },
+    {
+      "id": "V3H_40",
+      "imgname": "8165.png",
+      "label": "Kenya",
+      "query": "Which country has the highest percentage value of \"a lot\"?",
+      "selection_rank": 22,
+      "selection_sha256": "059040d98f3815bd0198f562e24481dde4c7c8c89e584392587200c6e670326c",
+      "source_index": 40,
+      "split": "human"
+    },
+    {
+      "id": "V3H_233",
+      "imgname": "65782494001329.png",
+      "label": "Yes",
+      "query": "Is the Myanmar graph value in 1997 is the median value of this graph?",
+      "selection_rank": 23,
+      "selection_sha256": "0645433601c215c0bf38920c9fea2e112c3e2ddc63c77974c6d4470233d9af7c",
+      "source_index": 233,
+      "split": "human"
+    },
+    {
+      "id": "V3H_116",
+      "imgname": "35427442000920.png",
+      "label": "Libya",
+      "query": "What country is represented by the Red bar?",
+      "selection_rank": 24,
+      "selection_sha256": "0656c6b5fcdf00c3b5d3cbe9f3385b90cd87bab5f3021b257c5f84649f70c4e7",
+      "source_index": 116,
+      "split": "human"
+    },
+    {
+      "id": "V3H_324",
+      "imgname": "5321.png",
+      "label": "Protect water quality of lakes, rivers, streams",
+      "query": "In the chart, Too little 69 percentage refers to?",
+      "selection_rank": 25,
+      "selection_sha256": "067c647dcc8bc6f2e4f5edd56df8ddf3809240b475f176134b1c8f41d6744289",
+      "source_index": 324,
+      "split": "human"
+    },
+    {
+      "id": "V3H_650",
+      "imgname": "two_col_24100.png",
+      "label": "30",
+      "query": "What is the value of highest blue bar?",
+      "selection_rank": 26,
+      "selection_sha256": "069ea9d8ab473c3f72f3a29492f679fc0b6ce275fb2e48279721b5dc538402f2",
+      "source_index": 650,
+      "split": "human"
+    },
+    {
+      "id": "V3H_663",
+      "imgname": "two_col_41275.png",
+      "label": "5",
+      "query": "How many quarters the exchange rate is above 4.5 value?",
+      "selection_rank": 27,
+      "selection_sha256": "06c563f227cdb16392e61ac26e22f2f4451477d085ff84e1819d0188caae394f",
+      "source_index": 663,
+      "split": "human"
+    },
+    {
+      "id": "V3H_230",
+      "imgname": "59896688006025.png",
+      "label": "Low income",
+      "query": "Which line has an all-time 'high share of the population with severe food insecurity than other lines?",
+      "selection_rank": 28,
+      "selection_sha256": "06e3e91ebf5fe689ff19e036d263fc6317a25dea74fdada18ff45c6065d45357",
+      "source_index": 230,
+      "split": "human"
+    },
+    {
+      "id": "V3H_29",
+      "imgname": "16968.png",
+      "label": "[4, 9]",
+      "query": "What is the percentage of both and don't know?",
+      "selection_rank": 29,
+      "selection_sha256": "0721984a6d08ec640a3db7aaed42cb3e86af8c1aaef88d35c9bd4df68d70bf3b",
+      "source_index": 29,
+      "split": "human"
+    },
+    {
+      "id": "V3H_917",
+      "imgname": "multi_col_80249.png",
+      "label": "12.4",
+      "query": "What is the average all grey bar (2 to 5 hours data)?",
+      "selection_rank": 30,
+      "selection_sha256": "07457e80e3dccea5dfafd7695a462278e3a0908449292d0c07825e5361b38a11",
+      "source_index": 917,
+      "split": "human"
+    },
+    {
+      "id": "V3H_691",
+      "imgname": "two_col_60141.png",
+      "label": "24.6",
+      "query": "What does the sum of Agricultural and fuesl and mining products amount to?",
+      "selection_rank": 31,
+      "selection_sha256": "07eb9ef568c650db30a398702f4eaed5c6919495fa3f99ab904ddbd4bbb667c4",
+      "source_index": 691,
+      "split": "human"
+    },
+    {
+      "id": "V3H_620",
+      "imgname": "two_col_21413.png",
+      "label": "Footwear",
+      "query": "What's the highest Share of Puma's net sales worldwide in 2020, by segment?",
+      "selection_rank": 32,
+      "selection_sha256": "081d32ff3e2fc759a925881aae971387acfac5957b80b332b613e59b8bb48c96",
+      "source_index": 620,
+      "split": "human"
+    },
+    {
+      "id": "V3H_803",
+      "imgname": "multi_col_20485.png",
+      "label": "43.5",
+      "query": "What is the average percentage of art buyers who bought art online from 2018 to 2019?",
+      "selection_rank": 33,
+      "selection_sha256": "0889800d9252e60340868090fafde9dc4c73842089ece177e52bafc2619a6259",
+      "source_index": 803,
+      "split": "human"
+    },
+    {
+      "id": "V3H_317",
+      "imgname": "4183.png",
+      "label": "No",
+      "query": "Is the Very value in All voters more than Somewhat in All voters?",
+      "selection_rank": 34,
+      "selection_sha256": "089d856eb960de699cb54af3719383f21eae54493906bd352b076a9063fe2f92",
+      "source_index": 317,
+      "split": "human"
+    },
+    {
+      "id": "V3H_67",
+      "imgname": "10187447002633.png",
+      "label": "5",
+      "query": "How many bars have value less then 1?",
+      "selection_rank": 35,
+      "selection_sha256": "08b97e68616adbc234bbcfeea13a8c39576100ec7a4bb00cbdb098881e6a80f8",
+      "source_index": 67,
+      "split": "human"
+    },
+    {
+      "id": "V3H_329",
+      "imgname": "5453.png",
+      "label": "30.4",
+      "query": "What is the average of everyone who is winning more than they are losing?",
+      "selection_rank": 36,
+      "selection_sha256": "08d05c7dc6076c48f580c7e765bc9c6bac5e4074c7abe8dc80c37e14ee157d98",
+      "source_index": 329,
+      "split": "human"
+    },
+    {
+      "id": "V3H_505",
+      "imgname": "two_col_83211.png",
+      "label": "No",
+      "query": "Is the sum value  of country Germany and Ireland more then Costa Rica ?",
+      "selection_rank": 37,
+      "selection_sha256": "08d0c0e91ada90ddc08c4a62531c653f15d8cf8e0854262e68c1c92ba195a30e",
+      "source_index": 505,
+      "split": "human"
+    },
+    {
+      "id": "V3H_110",
+      "imgname": "30999827006737.png",
+      "label": "23",
+      "query": "What is the highest value in the bar graph?",
+      "selection_rank": 38,
+      "selection_sha256": "0960753257b1d6b92868d2fb7a81e512e6996d8ccc58bd9cb9410949a44558f3",
+      "source_index": 110,
+      "split": "human"
+    },
+    {
+      "id": "V3H_123",
+      "imgname": "40465131005314.png",
+      "label": "Yes",
+      "query": "Is the average value of Andean Latin America and Cambodia more than the value of Thailand?",
+      "selection_rank": 39,
+      "selection_sha256": "09c1196c4fe9904493636e4a81d0a6483eaa679e29d857be2f2eb1557b195f62",
+      "source_index": 123,
+      "split": "human"
+    },
+    {
+      "id": "V3H_809",
+      "imgname": "multi_col_20578.png",
+      "label": "6896",
+      "query": "Is the sum of all the  WarnerMedia's global revenue for advertising from 2018 to 2019?",
+      "selection_rank": 40,
+      "selection_sha256": "0a3ea743046ea72b39d3f566dec0c92cd9ad74c79e2e36b14f970dce95094ad1",
+      "source_index": 809,
+      "split": "human"
+    },
+    {
+      "id": "V3H_735",
+      "imgname": "multi_col_101202.png",
+      "label": "25",
+      "query": "What is the difference betweeen respondents of Non-hazardous waste between 2017 and 2008?",
+      "selection_rank": 41,
+      "selection_sha256": "0ac23ff0e7627cedda6b682b1d07cac74a4f71fa70dd895c7847a2d2c9ab35d8",
+      "source_index": 735,
+      "split": "human"
+    },
+    {
+      "id": "V3H_697",
+      "imgname": "two_col_60649.png",
+      "label": "71.5",
+      "query": "What is the average of values above 70? (in million U.S. dollars)?",
+      "selection_rank": 42,
+      "selection_sha256": "0b63e69d4a00ce86b013bbd990f8a8596592c3caccd2c26e2b5c636074b948b3",
+      "source_index": 697,
+      "split": "human"
+    },
+    {
+      "id": "V3H_174",
+      "imgname": "11056428023649.png",
+      "label": "Urban",
+      "query": "What does Orange line represents?",
+      "selection_rank": 43,
+      "selection_sha256": "0bfb3b6d436dea167f7a71dac225f7a8ca04a621382861f058f96e5928313d3e",
+      "source_index": 174,
+      "split": "human"
+    },
+    {
+      "id": "V3H_318",
+      "imgname": "4211.png",
+      "label": "Green",
+      "query": "What's the color of the Rightmost bar?",
+      "selection_rank": 44,
+      "selection_sha256": "0c4d5851269edec1018a72e2fd1ad3dec1e2a12eecec4a8c6ab8539daf8f5e82",
+      "source_index": 318,
+      "split": "human"
+    },
+    {
+      "id": "V3H_296",
+      "imgname": "3404.png",
+      "label": "34",
+      "query": "What's the percentage of white who oppose the death penalty for persons convicted of murder?",
+      "selection_rank": 45,
+      "selection_sha256": "0cfefeed1ac74d724f019a9acf4ea6f7ebf9692794b314cf07dca7525bc34556",
+      "source_index": 296,
+      "split": "human"
+    },
+    {
+      "id": "V3H_545",
+      "imgname": "two_col_83575.png",
+      "label": "24.3",
+      "query": "What is the difference between Carex and Palmolive?",
+      "selection_rank": 46,
+      "selection_sha256": "0d2824dd1fe97b1f0c559c81de6b2927de1b3255b4fd6a56c26beb3b1e6093d0",
+      "source_index": 545,
+      "split": "human"
+    },
+    {
+      "id": "V3H_639",
+      "imgname": "two_col_22726.png",
+      "label": "2.95",
+      "query": "What is the difference between the first and last year's results?",
+      "selection_rank": 47,
+      "selection_sha256": "0d341521b8e560f78a484b2c67a02e9ba64b1cd45810725a23a98dec49c46d62",
+      "source_index": 639,
+      "split": "human"
+    },
+    {
+      "id": "V3H_26",
+      "imgname": "13629.png",
+      "label": "No",
+      "query": "Is the color of 53% segment light green?",
+      "selection_rank": 48,
+      "selection_sha256": "0e1cf28c5a558f51455acc8b1b4822240c2d2e413fe18693d29247a233abd023",
+      "source_index": 26,
+      "split": "human"
+    },
+    {
+      "id": "V3H_235",
+      "imgname": "70101677022779.png",
+      "label": "2006",
+      "query": "Which year it is in peak?",
+      "selection_rank": 49,
+      "selection_sha256": "0eed804252cae22de06f7badc7e6248c445bf1398820a1c0429b0c3bf2644824",
+      "source_index": 235,
+      "split": "human"
+    },
+    {
+      "id": "V3H_904",
+      "imgname": "multi_col_60963.png",
+      "label": "44",
+      "query": "What is the prevelance of dietary supplements in men of age group 31-50 between 2003 and 2006 in the US?",
+      "selection_rank": 50,
+      "selection_sha256": "0fabec38ca61cd5f9884e07041751afd15bd55d29cccaba26656d047c0248d7f",
+      "source_index": 904,
+      "split": "human"
+    },
+    {
+      "id": "V3A_250",
+      "imgname": "two_col_42714.png",
+      "label": "90",
+      "query": "What was the market value of Sergej Milinkovic-Savic?",
+      "selection_rank": 1,
+      "selection_sha256": "0066609a98fd46e8f2f8be59c7d57f477bec8e843d63630d259fc3c8141db94f",
+      "source_index": 250,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_810",
+      "imgname": "multi_col_388.png",
+      "label": "745",
+      "query": "How much ad-supported revenue did Spotify generate in the most recent fiscal year?",
+      "selection_rank": 2,
+      "selection_sha256": "00937c17cc700263b256b87b7d56d22e9be05038fd2e31ccebba60fe4043c0e3",
+      "source_index": 810,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_691",
+      "imgname": "two_col_1327.png",
+      "label": "8636",
+      "query": "What was eBay's net revenue in the prior year?",
+      "selection_rank": 3,
+      "selection_sha256": "00a4da5447e04eecc4285bcba3f20f2db984cd4fc1b8231e7a12e44d62b6bf96",
+      "source_index": 691,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_213",
+      "imgname": "two_col_43799.png",
+      "label": "Andalusia",
+      "query": "Which autonomous community in Spain had the highest number of deaths due to homicide?",
+      "selection_rank": 4,
+      "selection_sha256": "00f4f48b5c0a4a0db5acd3741935f29ce6f78aaef5001405297088fb84735011",
+      "source_index": 213,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_383",
+      "imgname": "two_col_40104.png",
+      "label": "8246",
+      "query": "What was Maxis Bhd's mobile revenue in 2015?",
+      "selection_rank": 5,
+      "selection_sha256": "013c21845a7512f85f771cc07210faed12b2c663f55a2ff414298eb34cfb54d0",
+      "source_index": 383,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_135",
+      "imgname": "multi_col_988.png",
+      "label": "25.2",
+      "query": "What percentage of women aged between 40 and 64 were shown in what is described as'sexy attire'?",
+      "selection_rank": 6,
+      "selection_sha256": "01d6505ca0c40113e858ba0e94e0d0cbf65951d4923e8e1ee4c87886abae9c6e",
+      "source_index": 135,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_906",
+      "imgname": "two_col_43717.png",
+      "label": "Instagram",
+      "query": "What was the most frequently used social network in Canada?",
+      "selection_rank": 7,
+      "selection_sha256": "01e50a4957e5138d285e668fa1cf684e10e42017cbf4520ad02b53d8a0c2247c",
+      "source_index": 906,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_907",
+      "imgname": "two_col_43717.png",
+      "label": "Facebook",
+      "query": "What was the most frequently used social network in Canada?",
+      "selection_rank": 8,
+      "selection_sha256": "01e50a4957e5138d285e668fa1cf684e10e42017cbf4520ad02b53d8a0c2247c",
+      "source_index": 907,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_540",
+      "imgname": "two_col_24011.png",
+      "label": "Donald Trump",
+      "query": "Who was the most searched politician worldwide in 2020?",
+      "selection_rank": 9,
+      "selection_sha256": "0210f264316422ae01ce41326213ecd62c464859eeff8e0629791472d8a7b949",
+      "source_index": 540,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_166",
+      "imgname": "two_col_20108.png",
+      "label": "20908",
+      "query": "How much revenue did Nutrien report in 2020?",
+      "selection_rank": 10,
+      "selection_sha256": "021e5be9a86d274f328658ccd3128bee934f98a874b5270cbcdaabeb6e50230f",
+      "source_index": 166,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_133",
+      "imgname": "multi_col_20648.png",
+      "label": "62.1",
+      "query": "According to the source, global consumer dietary supplement sales in 2020 are expected to be around how many U.S. dollars?",
+      "selection_rank": 11,
+      "selection_sha256": "0270f7caf4378a1ebff466c3709c0e274c1358a4128202b6f22558258372705c",
+      "source_index": 133,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_356",
+      "imgname": "two_col_2126.png",
+      "label": "49",
+      "query": "How many homicides were reported in Denmark in 2020?",
+      "selection_rank": 12,
+      "selection_sha256": "034712d6a28901f2f6d76bb543ad2d1c11b825e6efb7562823376dedb5bb416e",
+      "source_index": 356,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_820",
+      "imgname": "two_col_100430.png",
+      "label": "81.92",
+      "query": "How many daily active users did Douyin have in comparison to the period prior to the epidemic?",
+      "selection_rank": 13,
+      "selection_sha256": "03991a2bd1c283a81dcfe811df2a495623aca0cb7a2e7d0f18b93f69ca146152",
+      "source_index": 820,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_388",
+      "imgname": "two_col_81454.png",
+      "label": "14",
+      "query": "How much did travel and tourism contribute to the Greek economy in 2017?",
+      "selection_rank": 14,
+      "selection_sha256": "03b6a6073243e150ad31cc734343fcb43719c5a1320d071c889db1738445e3db",
+      "source_index": 388,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_687",
+      "imgname": "two_col_6232.png",
+      "label": "207630",
+      "query": "How many passenger cars were sold in Pakistan between July 2018 and June 2019?",
+      "selection_rank": 15,
+      "selection_sha256": "042bd874b4d6ad567b81780039736a7337c8810d14740920a8388682dda5fcfe",
+      "source_index": 687,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_319",
+      "imgname": "two_col_62599.png",
+      "label": "7443160",
+      "query": "What was the revenue for the chemical industry in the second quarter of 2020?",
+      "selection_rank": 16,
+      "selection_sha256": "0436eb4e79e4d9f99d2dc50207fe5a33a09ec78fbe280fa75f93f53dc20f01df",
+      "source_index": 319,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_323",
+      "imgname": "two_col_80484.png",
+      "label": "11",
+      "query": "How many days of rainfall did Paris have in January?",
+      "selection_rank": 17,
+      "selection_sha256": "04d988a398b197663fd95e99c1edfc1ac6dd42942894560ee4e9de2ec297e586",
+      "source_index": 323,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_616",
+      "imgname": "two_col_43537.png",
+      "label": "23",
+      "query": "How many players did Juventus FC have as of October 2020?",
+      "selection_rank": 18,
+      "selection_sha256": "05104269a0231eae79d2320533d1b682cdf63a50f0cbe50a6194655fbd70178d",
+      "source_index": 616,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_696",
+      "imgname": "two_col_104500.png",
+      "label": "China",
+      "query": "What country had the second largest share of the global blood plasma market?",
+      "selection_rank": 19,
+      "selection_sha256": "05340b63f3648739d5e9d32f3035aa20914222cf72011b48584e9a3907dd6d96",
+      "source_index": 696,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_564",
+      "imgname": "two_col_23770.png",
+      "label": "41.17",
+      "query": "What was the youth unemployment rate in Namibia in 2020?",
+      "selection_rank": 20,
+      "selection_sha256": "0538c2abe5b04a6b3f8e4dfcf7b4ff7313f36a6fd799108cadf6dc99d8243a8f",
+      "source_index": 564,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_937",
+      "imgname": "multi_col_674.png",
+      "label": "645.88",
+      "query": "How much did Manchester United's operating expenses in 2020 amount to?",
+      "selection_rank": 21,
+      "selection_sha256": "05dae1a280b28eac40ed4e750d7cc91e16bb481c814b84958211726f9c668930",
+      "source_index": 937,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_695",
+      "imgname": "two_col_24139.png",
+      "label": "604",
+      "query": "How much did Zygmunt Wilf pay for the Minnesota Vikings in 2005?",
+      "selection_rank": 22,
+      "selection_sha256": "061363fd27f3ab82196c173f4e429264bc0c3d6e260fd076a33fdc457e19a6fc",
+      "source_index": 695,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_264",
+      "imgname": "two_col_40432.png",
+      "label": "4961.4",
+      "query": "What was the global net sales of Tapestry Incorporated in 2020?",
+      "selection_rank": 23,
+      "selection_sha256": "069f262d001995a24d57a6ad23f675105059344f8bba50d71d42c36b16583a7b",
+      "source_index": 264,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_883",
+      "imgname": "two_col_20207.png",
+      "label": "48.5",
+      "query": "What was Lloyds Banking Group's cost to income ratio in 2019?",
+      "selection_rank": 24,
+      "selection_sha256": "06a38d27266e24057d018987caeb4ca97528ace2831234564f0a5bb4d7f4577a",
+      "source_index": 883,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_772",
+      "imgname": "two_col_23969.png",
+      "label": "72.5",
+      "query": "How many followers did Charli D'Amelio have on the TikTok app?",
+      "selection_rank": 25,
+      "selection_sha256": "0704f336d93563eaeb8f5213766bc5564f0234ec97f7a266e117b7e2589959f1",
+      "source_index": 772,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_575",
+      "imgname": "two_col_101101.png",
+      "label": "242105",
+      "query": "What was the number of JBS employees worldwide in 2019?",
+      "selection_rank": 26,
+      "selection_sha256": "07347519dbf786892190cf792aca74150665f110d445fe154b138ed774973698",
+      "source_index": 575,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_31",
+      "imgname": "multi_col_20676.png",
+      "label": "20.7",
+      "query": "How many smart home devices were sold to dealers in the United States in 2014?",
+      "selection_rank": 27,
+      "selection_sha256": "076182dc31724ea6a9829c2c91e88b44d2fc54c45ab286094d9a9905fb611d27",
+      "source_index": 31,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_754",
+      "imgname": "two_col_22694.png",
+      "label": "4170",
+      "query": "What was the Barclays Premier League's brand value in 2012?",
+      "selection_rank": 28,
+      "selection_sha256": "082e080c329943bf71bf5be50bf3011f1c701f845be8718669e85c9bb906f4ad",
+      "source_index": 754,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_266",
+      "imgname": "two_col_22121.png",
+      "label": "5.79",
+      "query": "How many Instagram users were there in South Africa as of April 2021?",
+      "selection_rank": 29,
+      "selection_sha256": "08b3f92ae3c7a8d27efdb33f3b8644b07fa4010e039b18cd6070c430f5b9328c",
+      "source_index": 266,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_507",
+      "imgname": "two_col_42412.png",
+      "label": "British Columbia",
+      "query": "In what province were there two roasted nut and peanut butter manufacturing establishments?",
+      "selection_rank": 30,
+      "selection_sha256": "08d2c2dcbef9f9d16a1b0d8a9b46523b21542e1e4757ae0e38646e5fff50d2a2",
+      "source_index": 507,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_423",
+      "imgname": "two_col_20917.png",
+      "label": "22",
+      "query": "What percentage of PV inverter market shipments did Huawei account for in 2018?",
+      "selection_rank": 31,
+      "selection_sha256": "094a1d4ea63c5e9f44b38e89c756033d29ad2c600d6cfb0c6916e0504ad1d9bc",
+      "source_index": 423,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_589",
+      "imgname": "two_col_21080.png",
+      "label": "3.3",
+      "query": "What percentage of U.S. users had their mobile payment charges added to their phone bill?",
+      "selection_rank": 32,
+      "selection_sha256": "0a27e90511df63458be405a98e5267b5bae15fd11f2f96e8430b1867dbf736cb",
+      "source_index": 589,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_822",
+      "imgname": "two_col_61530.png",
+      "label": "48",
+      "query": "How many road fatalities occurred in Luxembourg in 2009?",
+      "selection_rank": 33,
+      "selection_sha256": "0a2cd4437fca70656d88a23a8b8a25b054c6d93c9121eb4d2347bfaad89be0aa",
+      "source_index": 822,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_528",
+      "imgname": "two_col_81914.png",
+      "label": "12",
+      "query": "How much did Slovakia's domestic banks' assets amount to in 2016?",
+      "selection_rank": 34,
+      "selection_sha256": "0ad717ab7c22e184b5e512392af58a7e1715360edafb472aaed791a0fa6eca96",
+      "source_index": 528,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_748",
+      "imgname": "two_col_3102.png",
+      "label": "1714353",
+      "query": "How many fans did Blackview have in Hong Kong as of March 2021?",
+      "selection_rank": 35,
+      "selection_sha256": "0afeb20fd286a65adfcb198b4e01a05b577b7a19a78adb92635afe453269c553",
+      "source_index": 748,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_928",
+      "imgname": "two_col_22436.png",
+      "label": "Facebook",
+      "query": "Which social media site accounted for 57.52 percent of all social media site visits in Canada in May 2021?",
+      "selection_rank": 36,
+      "selection_sha256": "0b18f1dadcd070d281612ccc8d88e7fb41cdd8b34af165a40a065933704ea0fe",
+      "source_index": 928,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_418",
+      "imgname": "two_col_62354.png",
+      "label": "92.75",
+      "query": "What is Spain's health grade?",
+      "selection_rank": 37,
+      "selection_sha256": "0b91c8032fb2ff60e2aacca6a1a549654c1d0d56a3025cda557970c293ccc913",
+      "source_index": 418,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_331",
+      "imgname": "two_col_80649.png",
+      "label": "Seville",
+      "query": "What is the third largest city on this list?",
+      "selection_rank": 38,
+      "selection_sha256": "0b92a360ff48dda674937cfc54ac8735f33c68e6eca2dcb80b021b5352078b6a",
+      "source_index": 331,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_197",
+      "imgname": "two_col_101412.png",
+      "label": "1.4",
+      "query": "How much did private sector employment in Alberta grow in 2018?",
+      "selection_rank": 39,
+      "selection_sha256": "0beda5889424a8d06a4de7bf84a5376d6ac2c3573dc12451754b720ef29fcd02",
+      "source_index": 197,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_113",
+      "imgname": "multi_col_101221.png",
+      "label": "38.6",
+      "query": "What percentage of the global microprocessor market did processor sales account for in the year to end June 2019?",
+      "selection_rank": 40,
+      "selection_sha256": "0c3b95e3a304eaff4d9b8d18692e8ca60e704fdd7a64e7dd96de4e8212ef03bb",
+      "source_index": 113,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_903",
+      "imgname": "two_col_61966.png",
+      "label": "11519",
+      "query": "How many ducks were euthanized due to the H5N8 virus?",
+      "selection_rank": 41,
+      "selection_sha256": "0c485785fb018ab547b1b14d61bfd91510bb81da5afb38182172b0a7d7cdd264",
+      "source_index": 903,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_117",
+      "imgname": "multi_col_60854.png",
+      "label": "196.2",
+      "query": "How much money did businesses with 1000+ employees generate in e-commerce sales in 2019?",
+      "selection_rank": 42,
+      "selection_sha256": "0c6321f57bc29f596cef335112a5388173c358acd127889831a631ac84bb629a",
+      "source_index": 117,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_926",
+      "imgname": "two_col_22677.png",
+      "label": "453",
+      "query": "How many UCI beds were there in Mexico City in April of 2020?",
+      "selection_rank": 43,
+      "selection_sha256": "0c7f4c8d8034399f2399d48d33a46d4e6e1fba316f5dc66e02360a7067605bbe",
+      "source_index": 926,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_581",
+      "imgname": "two_col_1755.png",
+      "label": "5.03",
+      "query": "How many people visited Yosemite National Park in 2016?",
+      "selection_rank": 44,
+      "selection_sha256": "0d1eb64a093f6569bd68bcba525be3572ca1c2a660bb005124d15c189d6b0aae",
+      "source_index": 581,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_782",
+      "imgname": "two_col_40092.png",
+      "label": "8.94",
+      "query": "What was the youth unemployment rate in the United States in 2020?",
+      "selection_rank": 45,
+      "selection_sha256": "0d2f198ba936168237e73ffddfb6063c46f793f8705b0199095a54bb9a14b0ce",
+      "source_index": 782,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_741",
+      "imgname": "two_col_1673.png",
+      "label": "286",
+      "query": "How many fire-related deaths occurred in Great Britain in 2019/20?",
+      "selection_rank": 46,
+      "selection_sha256": "0d3c80a15bedf167af20228a72a0a173824eb1dd0ba0a91abcede56beb7ad82c",
+      "source_index": 741,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_526",
+      "imgname": "two_col_21865.png",
+      "label": "14933",
+      "query": "What was the average R&D expenditure for all manufacturing industries between 2003 and 2017?",
+      "selection_rank": 47,
+      "selection_sha256": "0d666668d1236af3da33ff8e1f4699c5c1ff24d9eaa209903725556e3854600a",
+      "source_index": 526,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_653",
+      "imgname": "two_col_102096.png",
+      "label": "9.4",
+      "query": "How much of the EU budget came from VAT resources in 2013?",
+      "selection_rank": 48,
+      "selection_sha256": "0e99b8e222bb286c643bce61a2205476178dc14364f69950db0dbed2dcfc609d",
+      "source_index": 653,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_208",
+      "imgname": "two_col_100608.png",
+      "label": "591",
+      "query": "How many children were adopted in Norway in 2009?",
+      "selection_rank": 49,
+      "selection_sha256": "0f01c006b379e5ef5b0d12920c75e829737eb6c209b95a253ec4c5c309f61592",
+      "source_index": 208,
+      "split": "augmented"
+    },
+    {
+      "id": "V3A_816",
+      "imgname": "two_col_23122.png",
+      "label": "49.26",
+      "query": "What was the value of money market funds as of December 2020?",
+      "selection_rank": 50,
+      "selection_sha256": "0f569b1a0d46cd5a0bcdc5b86887dddf5a04d90c80a0ecee55c38ec4863274a1",
+      "source_index": 816,
+      "split": "augmented"
+    }
+  ],
+  "chartqa_commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+  "date": "2026-10-06",
+  "excluded_prior_case_pairs": 140,
+  "hard_nonclaims": [
+    "TABLE_INPUT_BYPASSES_RASTER_PERCEPTION",
+    "FRESHNESS_IS_RELATIVE_TO_PRIOR_CHART_CASES_AND_SOLVER_V1"
+  ],
+  "human_count": 50,
+  "schema": "PROJECT_BRAIN_H100_TABLE_QA_V3_FRESH_HOLDOUT_V1",
+  "selection_seed": "H100_TABLE_QA_V3_20261006",
+  "solver_subject": "canonical/runtime/h100_table_qa_solver_v1.py",
+  "source_meta": {
+    "augmented": {
+      "count": 960,
+      "path": "ChartQA Dataset/val/val_augmented.json"
+    },
+    "human": {
+      "count": 960,
+      "path": "ChartQA Dataset/val/val_human.json"
+    }
+  },
+  "status": "FROZEN_BEFORE_FIRST_V3_SOLVER_OUTPUT"
+}
