@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REGISTRY_PESSIMISTIC_CAUSAL_UPPER_BOUND_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PESSIMISTIC_SOURCE_LEVEL_UPPER_BOUND",
+  "registry_source_bytes": {
+    "v1": 6299,
+    "v2": 4140,
+    "v3": 6778,
+    "v4": 4833,
+    "v5": 3846,
+    "v6": 5349,
+    "v7": 6275,
+    "v8": 7084
+  },
+  "total_v1_to_v8_source_bytes": 44604,
+  "active_v8_source_bytes": 7084,
+  "percent_of_100mb_if_all_v1_to_v8_counted_as_learned": 0.044604,
+  "interpretation": "COUNTING_EVERY_REGISTRY_SOURCE_BYTE_AS_CAUSALLY_LEARNED_GROSSLY_OVERSTATES_THE_TRUE_PROVENANCE_DEPENDENT_PAYLOAD_BUT_STILL_STAYS_FAR_BELOW_100MB",
+  "hard_nonclaims": [
+    "DOES_NOT_INCLUDE_ALL_GENERIC_CAPABILITY_RUNTIME_DEPENDENCIES",
+    "NOT_A_LOWER_BOUND",
+    "NOT_KOLMOGOROV_COMPLEXITY"
+  ],
+  "promotion_authority": false
+}
