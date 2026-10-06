@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_AXIS_SCALE_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__12_OF_12__PROGRAM_FROZEN_BEFORE_HOLDOUT",
+  "reference_machine": "H100_U1_STACK_VM",
+  "observed": {
+    "raw_program_bytes": 29,
+    "raw_program_bits": 232,
+    "passed": 12,
+    "total": 12
+  },
+  "conclusion": "LINEAR_AXIS_SCALE_INFERENCE_AFTER_TEXT_GROUNDING_HAS_EXPLICIT_U1_UPPER_BOUND_232_BITS",
+  "hard_nonclaims": [
+    "INTEGER_EXACT_LINEAR_SCALE_SCOPE_ONLY",
+    "NO_OCR_OR_AXIS_DETECTION"
+  ],
+  "promotion_authority": false
+}
