@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_H100_PORTFOLIO_CAPABILITY_ACCOUNTING_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__6_OF_6",
+  "reference_machine": "H100_U1_STACK_VM",
+  "verified": {
+    "shared_content_counts_once_globally": true,
+    "shared_content_counts_in_standalone_cost": true,
+    "marginal_reuse_counts_only_new_content": true,
+    "content_alias_does_not_erase_bytes": true,
+    "learned_deterministic_category_labels_do_not_change_target_adapted_total": true,
+    "unknown_refs_fail_closed": true
+  },
+  "promotion_authority": false
+}
