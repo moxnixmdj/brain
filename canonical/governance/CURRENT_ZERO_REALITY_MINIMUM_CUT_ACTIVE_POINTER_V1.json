@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1",
   "date": "2026-10-06",
-  "status": "ACTIVE_IF_MERGED__V22__32_OPEN__OBSERVABLE_TRACE_SCOPE_PROVED__UNIVERSAL_DOMINANCE_FRONTIER__TERMINAL_CONTROL_LOOP_V2_CURRENT__ZERO_CREDIT",
+  "status": "ACTIVE__POST_V7_ROUTING_REPAIR__32_OPEN__COVERAGE_PARTITION_CURRENT__J0_G0_T0_D16_U16__ZERO_CREDIT",
   "active_cut": {
     "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V22.json",
     "git_blob_sha": "8359e6171cfab301ad9909364558a313fa7c4cae"
@@ -105,9 +105,12 @@
     "ALL_NONFALSIFIED_UNIVERSE_AUTHORITY_CLAIMS_REQUIRE_CONTENT_ADDRESSED_PROOF_BEFORE_AUTHORITY_COMPLETION",
     "AGGREGATE_SCHEDULER_LEVERAGE_REQUIRES_EXACT_CONTENT_ADDRESSED_MEMBER_EXPANSION",
     "SCOPED_PARALLEL_WORK_DURING_OPEN_UNIVERSAL_DOMINANCE_REQUIRES_CONTENT_ADDRESSED_STABILITY",
-    "CONTROLLER_FRONTIER_INPUT_SET_MUST_MATCH_BOUND_SHA256_FINGERPRINT"
+    "CONTROLLER_FRONTIER_INPUT_SET_MUST_MATCH_BOUND_SHA256_FINGERPRINT",
+    "CURRENT_LIVE_SCHEDULE_MUST_NOT_NAME_C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+    "POST_V7_E_M_U_SEMANTIC_CLASSIFICATION_DOES_NOT_DELETE_ANY_TRUTH_OBLIGATION_BY_ITSELF",
+    "ASTRA_CALIBRATION_HAS_ZERO_TERMINAL_CREDIT_WITHOUT_MATCHED_AND_INDEPENDENTLY_VERIFIED_SEMANTICALLY_IDENTICAL_EVIDENCE"
   ],
-  "next": "RUN_TERMINAL_CONTROL_LOOP_V2__FIRST_C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1__PARALLELIZE_ONLY_CONTENT_ADDRESSED_SCOPED_STABLE_BENCHMARK_WITNESS_EFFECT_BOUNDARY_CONDITION_TRANSFER_AND_OWNERSHIP__WITHIN_BENCHMARK_WITNESS_CURRENT_ACTIVE_TARGET_IS_FINANCE_AGENT_V2_GE_58_59__RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA",
+  "next": "RUN_CURRENT_TERMINAL_COVERAGE_PARTITION__FIRST_FALSIFY_J_ON_ALL_32__THEN_FALSIFY_G_ON_CONTEXT_OR_TRANSFER_SHAPED_RESIDUALS__USE_MATCHED_ASTRA_ONLY_FOR_RESIDUAL_CALIBRATION__USE_D_ONLY_FOR_IRREDUCIBLE_RESIDUALS__PRESERVE_ALL_32_UNTIL_SEPARATE_PROOF_CLOSURE_OR_REDUNDANCY_CERTIFICATE",
   "new_reality_units_consumed": 0,
   "terminal_cases_consumed": 0,
   "incremental_spend_usd": 0,
@@ -174,9 +177,9 @@
       "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
     ],
     "proof_synthesis_rule": "IF_NO_EXISTING_STRONGER_RECEIPT_EXISTS__DO_NOT_JUMP_DIRECTLY_TO_EXTERNAL_WAIT__FIRST_SYNTHESIZE_AND_FALSIFY_THRESHOLD_LOWER_BOUND_TASK_CONDITIONED_DOMINANCE_AND_SCOPE_SUPERSET_CERTIFICATES",
-    "terminal_control_loop": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V2.json",
-    "route_death_rule": "FALSIFIED_ROUTE_IS_DEAD_UNTIL_LIVE_REPAIRED_SUCCESSOR_EXISTS",
-    "universe_authority_rule": "OBSERVABLE_TRACE_SCOPE_SUPERSET_IS_PROVED_FOR_REPRESENTATION__LITERAL_FINALITY_REQUIRES_CONTENT_ADDRESSED_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_AND_OWNERSHIP__ALL_LIVE_UNIVERSE_AUTHORITY_CLAIMS_MUST_BE_PROVED",
+    "terminal_control_loop": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V1.json",
+    "route_death_rule": "FALSIFIED_ROUTE_HAS_ZERO_SCHEDULING_VALUE__CURRENT_ROUTING_MUST_BIND_TO_POST_V7_COVERAGE_PARTITION_OR_A_LATER_CONTENT_ADDRESSED_SUCCESSOR",
+    "universe_authority_rule": "OBSERVABLE_TRACE_SCOPE_IS_REPRESENTATION_ONLY__CAPABILITY_PARITY_USES_V7_LAYERED_DISTRIBUTIONAL_SEMANTICS_AND_FAIL_CLOSED_E_M_U_CERTIFICATION__LITERAL_FINALITY_STILL_REQUIRES_COMPLETE_TARGET_CONTEXT_OR_STRONGER_STRUCTURAL_AUTHORITY",
     "nonuniverse_ranking_rule": "EXACT_CONTENT_ADDRESSED_TARGET_TRUTH_REACHABILITY_PER_COST__AGGREGATE_COUNTS_REQUIRE_BOUND_MEMBER_EXPANSION__CHILD_LANE_CURRENTNESS_IS_FINGERPRINTED"
   },
   "current_shared_causal_interfaces": [
@@ -304,6 +307,92 @@
     "all_premises_v3_verification_git_blob_sha": "6640c0aaea69132694aecd270abed8a0dc50bd48"
   },
   "terminal_falsification_control_loop": {
+    "status": "CURRENT__COVERAGE_PARTITION_ROUTING__ZERO_CREDIT",
+    "governance": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V1.json",
+    "governance_git_blob_sha": "80289ef618b90fc5d77c5a011b75a37b8a019696",
+    "independent_replay": "canonical/verification/TERMINAL_COVERAGE_PARTITION_COMPILER_INDEPENDENT_VERIFICATION_20261006_V1.json",
+    "independent_replay_git_blob_sha": "9d15959af999c17282cf67e13b14ffc3d90a52eb",
+    "current_schedule": [
+      "FALSIFY_J_ON_ALL_32_BEFORE_SPENDING_EXTERNAL_RESULT_ACCESS",
+      "FALSIFY_G_ON_REMAINING_CONTEXT_OR_TRANSFER_SHAPED_OBLIGATIONS",
+      "BUILD_MATCHED_ASTRA_CALIBRATION_ONLY_FOR_RESIDUAL_CLASSES",
+      "LOCALIZE_AND_INTERNALIZE_BRAIN_VS_ASTRA_CAUSAL_GAPS",
+      "BIND_ASTRA_GE_OPUS55_ONLY_WHERE_INDEPENDENT_SAME_SEMANTICS_EVIDENCE_EXISTS",
+      "USE_D_ONLY_FOR_IRREDUCIBLE_RESIDUALS",
+      "RUN_COMPOSITION_RESOURCE_AUTHORITY_AND_DONOR_REMOVAL_TOURNAMENT",
+      "CLEAN_ROOM_REPLAY_AND_TERMINAL_CERTIFICATE"
+    ],
+    "route_counts": {
+      "J": 0,
+      "G": 0,
+      "T": 0,
+      "D": 16,
+      "U": 16
+    },
+    "first_open_authority_problem": "MOVE_SOUND_CONTEXT_CLASSES_FROM_U_OR_D_INTO_PROOF_CARRYING_J_G_OR_T_WITHOUT_WEAKENING_TERMINAL_SEMANTICS",
+    "old_falsified_claim_scheduling_value": 0,
+    "accounting": {
+      "truth_obligations_deleted": 0,
+      "truth_obligations_closed": 0,
+      "terminal_credit_delta": 0
+    }
+  },
+  "observable_trace_scope_superset": {
+    "status": "PROVED_FOR_SCOPE_REPRESENTATION_ONLY__DOMINANCE_OPEN__ZERO_TERMINAL_CREDIT",
+    "theorem": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
+    "theorem_git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c",
+    "falsification": "canonical/verification/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_FALSIFICATION_20261006_V1.json",
+    "falsification_git_blob_sha": "f308c0bce3cdff8b8c523e231d337c68f1ed976f",
+    "independent_replay": "canonical/verification/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_SPRITE_VERIFICATION_20261006_V1.json",
+    "independent_replay_git_blob_sha": "954ed383aa79fd8838249e58b0c848e338ea44de",
+    "deleted_critical_path": "ENDLESS_TARGET_DOMAIN_OR_PROVIDER_SURFACE_ENUMERATION_AS_LITERAL_COMPLETENESS",
+    "remaining_authority_claim": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1"
+  },
+  "post_v22_routing_repair": {
+    "status": "CURRENT__TRUTH_STATE_PRESERVED__ROUTING_ONLY",
+    "canonical_base_commit": "8935199c0d299e1ea353cb507356865de02d8522",
+    "falsified_live_route_removed": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+    "current_coverage_partition": {
+      "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V1.json",
+      "git_blob_sha": "80289ef618b90fc5d77c5a011b75a37b8a019696",
+      "route_counts": {
+        "J": 0,
+        "G": 0,
+        "T": 0,
+        "D": 16,
+        "U": 16
+      },
+      "truth_obligations": 32
+    },
+    "v7_layered_order": {
+      "path": "canonical/governance/V7_LAYERED_DISTRIBUTIONAL_EQUAL_OR_BETTER_ORDER_20261006_V1.json",
+      "git_blob_sha": "af58fd7c48fcd18a86c6b93d8cd58f3fbce0cc74",
+      "independent_verification": {
+        "path": "canonical/verification/V7_LAYERED_DISTRIBUTIONAL_ORDER_SPRITE_VERIFICATION_20261006_V1.json",
+        "git_blob_sha": "fc8bf7ae3a2c11541ae3686d8446c7ea73b7779b"
+      }
+    },
+    "evaluator_certification_trichotomy": {
+      "path": "canonical/governance/V7_CAPABILITY_EVALUATOR_CERTIFICATION_TRICHOTOMY_20261006_V1.json",
+      "git_blob_sha": "dce8d6838de486862d205436ed96cda6376e28ba",
+      "independent_verification": {
+        "path": "canonical/verification/V7_EVALUATOR_CERTIFICATION_TRICHOTOMY_SPRITE_VERIFICATION_20261006_V1.json",
+        "git_blob_sha": "9aade7d67c4180b9ca4aa6c0609c1275e3e5c739"
+      }
+    },
+    "coverage_compiler_independent_verification": {
+      "path": "canonical/verification/TERMINAL_COVERAGE_PARTITION_COMPILER_INDEPENDENT_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "9d15959af999c17282cf67e13b14ffc3d90a52eb"
+    },
+    "truth_obligations_deleted": 0,
+    "truth_obligations_closed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "legacy_terminal_falsification_control_loop": {
     "status": "ACTIVE_IF_THIS_POINTER_IS_MERGED__V2_CURRENT_HIGHER_ORDER_SCHEDULING_CONTROL__INDEPENDENT_SPRITE_PASS__ZERO_TERMINAL_CREDIT",
     "governance": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V2.json",
     "governance_git_blob_sha": "da8803584bc1e2bea672bcd1833e526ec489ac81",
@@ -337,16 +426,5 @@
       "ownership_credit_delta": 0,
       "terminal_credit_delta": 0
     }
-  },
-  "observable_trace_scope_superset": {
-    "status": "PROVED_FOR_SCOPE_REPRESENTATION_ONLY__DOMINANCE_OPEN__ZERO_TERMINAL_CREDIT",
-    "theorem": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
-    "theorem_git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c",
-    "falsification": "canonical/verification/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_FALSIFICATION_20261006_V1.json",
-    "falsification_git_blob_sha": "f308c0bce3cdff8b8c523e231d337c68f1ed976f",
-    "independent_replay": "canonical/verification/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_SPRITE_VERIFICATION_20261006_V1.json",
-    "independent_replay_git_blob_sha": "954ed383aa79fd8838249e58b0c848e338ea44de",
-    "deleted_critical_path": "ENDLESS_TARGET_DOMAIN_OR_PROVIDER_SURFACE_ENUMERATION_AS_LITERAL_COMPLETENESS",
-    "remaining_authority_claim": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1"
   }
 }
