@@ -1,0 +1,25 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_21_TRUTH_BASIS_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_WOLFRAM_RECOMPUTATION_PASS__20_ATOMIC_PLUS_1_GLOBAL_COMPLETENESS_META__21_TOTAL__D15_U6__ZERO_CREDIT",
+  "subject":{
+    "necessity_falsifier":"canonical/governance/META8_INDEPENDENT_TRUTH_NECESSITY_FALSIFIER_20261007_V1.json",
+    "factorizer":"canonical/runtime/terminal_frontier_factorizer_v4.py",
+    "tests":"canonical/tests/test_terminal_21_truth_basis_candidate_v1.py"
+  },
+  "recomputation":{
+    "atomic":20,
+    "meta":1,
+    "total":21,
+    "unique":21,
+    "old_meta_labels_absent":true,
+    "replacement_meta_present":true,
+    "D":15,
+    "U":6
+  },
+  "replacement_meta":"TARGET_COMPLETE_TERMINAL_COVERAGE_CERTIFICATE",
+  "meaning":"ONE_SOUND_E_S_OR_G_ROUTE_MUST_COVER_EVERY_USEFUL_OPUS55_TARGET_BEHAVIOR_AND_TERMINALLY_RELEVANT_CONDITION__THE_EIGHT_OLD_META_LABELS_REMAIN_COUNTEREXAMPLE_WITNESSES",
+  "terminal":false,
+  "terminal_credit_delta":0,
+  "ownership_credit_delta":0
+}
