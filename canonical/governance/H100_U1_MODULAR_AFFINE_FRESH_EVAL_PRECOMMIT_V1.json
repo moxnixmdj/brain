@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_MODULAR_AFFINE_FRESH_EVAL_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_PROGRAM_BEFORE_FRESH_OUTCOMES",
+  "program_precommit": "canonical/governance/H100_U1_MODULAR_AFFINE_PROGRAM_PRECOMMIT_V1.json",
+  "tasks": [
+    {
+      "id": "M1",
+      "input": [
+        73,
+        11,
+        9,
+        4
+      ],
+      "gold": [
+        67
+      ]
+    },
+    {
+      "id": "M2",
+      "input": [
+        -17,
+        5,
+        4,
+        -3
+      ],
+      "gold": [
+        9
+      ]
+    },
+    {
+      "id": "M3",
+      "input": [
+        144,
+        13,
+        -2,
+        8
+      ],
+      "gold": [
+        6
+      ]
+    },
+    {
+      "id": "M4",
+      "input": [
+        0,
+        7,
+        99,
+        5
+      ],
+      "gold": [
+        5
+      ]
+    },
+    {
+      "id": "M5",
+      "input": [
+        1001,
+        37,
+        3,
+        -11
+      ],
+      "gold": [
+        -5
+      ]
+    },
+    {
+      "id": "M6",
+      "input": [
+        -100,
+        9,
+        -4,
+        12
+      ],
+      "gold": [
+        -20
+      ]
+    }
+  ],
+  "gate": "6_OF_6",
+  "promotion_authority": false
+}
