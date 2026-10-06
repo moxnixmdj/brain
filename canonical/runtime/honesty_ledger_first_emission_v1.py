@@ -65,6 +65,8 @@ def _obligations(raw: Any) -> tuple[list[str], list[dict[str, Any]], str]:
     for i, item in enumerate(raw):
         if not isinstance(item, Mapping):
             raise LedgerFirstError(f"OBLIGATION_{i}_INVALID")
+        if set(item) != {"id", "state", "receipts"}:
+            raise LedgerFirstError(f"OBLIGATION_{i}_FIELDS_INVALID")
         oid = _token(item.get("id"), f"OBLIGATION_{i}_ID")
         if oid in ids:
             raise LedgerFirstError("OBLIGATION_ID_DUPLICATE")
@@ -95,6 +97,10 @@ def _declared_inputs(raw: Any) -> tuple[list[dict[str, Any]], list[dict[str, Any
     for i, item in enumerate(raw):
         if not isinstance(item, Mapping):
             raise LedgerFirstError(f"INPUT_{i}_INVALID")
+        if set(item) != {"input_id", "sha256", "material"}:
+            raise LedgerFirstError(f"INPUT_{i}_FIELDS_INVALID")
+        if not isinstance(item.get("material"), bool):
+            raise LedgerFirstError(f"INPUT_{i}_MATERIAL_INVALID")
         iid = _token(item.get("input_id"), f"INPUT_{i}_ID")
         if iid in seen:
             raise LedgerFirstError("INPUT_ID_DUPLICATE")
@@ -125,6 +131,8 @@ def _content(raw: Any) -> tuple[list[dict[str, Any]], list[dict[str, Any]], str]
     for i, item in enumerate(raw):
         if not isinstance(item, Mapping):
             raise LedgerFirstError(f"CONTENT_{i}_INVALID")
+        if set(item) != {"claim_id", "text", "stance", "evidence_receipts"}:
+            raise LedgerFirstError(f"CONTENT_{i}_FIELDS_INVALID")
         cid = _token(item.get("claim_id"), f"CONTENT_{i}_CLAIM_ID")
         if cid in seen:
             raise LedgerFirstError("CLAIM_ID_DUPLICATE")
@@ -167,6 +175,11 @@ def _beliefs(raw: Any) -> list[dict[str, Any]]:
     for i, item in enumerate(raw):
         if not isinstance(item, Mapping):
             raise LedgerFirstError(f"BELIEF_{i}_INVALID")
+        if set(item) != {
+            "assertion_id", "registered_state", "asserted_state",
+            "evidence_update_receipts"
+        }:
+            raise LedgerFirstError(f"BELIEF_{i}_FIELDS_INVALID")
         aid = _token(item.get("assertion_id"), f"BELIEF_{i}_ID")
         if aid in seen:
             raise LedgerFirstError("BELIEF_ID_DUPLICATE")
