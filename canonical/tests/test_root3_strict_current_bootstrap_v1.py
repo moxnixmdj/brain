@@ -24,19 +24,28 @@ class StrictBootstrapTests(unittest.TestCase):
     def allow(_request):
         return {"allowed": True, "authorization_sha256": "a" * 64}
 
-    def test_installs_only_current_verified_read_only_class(self):
-        fake_executor = lambda context: context
+    def test_installs_exact_current_read_only_and_artifact_classes(self):
+        fake_read = lambda context: context
+        fake_artifact = lambda context: context
         with patch.object(
             bootstrap.read_only,
             "make_executor",
-            return_value=fake_executor,
+            return_value=fake_read,
+        ), patch.object(
+            bootstrap.artifact,
+            "make_executor",
+            return_value=fake_artifact,
         ):
             out = bootstrap.install_current(self.allow, authority_id="TEST")
         self.assertEqual(out["process_site_count"], 18)
-        self.assertEqual(out["bound_effect_classes"], ["READ_ONLY_DECLARED_QUERY"])
+        self.assertEqual(
+            out["bound_effect_classes"],
+            ["DECLARED_ARTIFACT_PRODUCTION", "READ_ONLY_DECLARED_QUERY"],
+        )
         self.assertEqual(
             set(out["denied_effect_classes"]),
-            set(bootstrap.CLASSES) - {"READ_ONLY_DECLARED_QUERY"},
+            set(bootstrap.CLASSES)
+            - {"READ_ONLY_DECLARED_QUERY", "DECLARED_ARTIFACT_PRODUCTION"},
         )
         self.assertTrue(out["run_guard_active"])
         self.assertTrue(out["popen_guard_active"])
@@ -52,6 +61,10 @@ class StrictBootstrapTests(unittest.TestCase):
             bootstrap.read_only,
             "make_executor",
             return_value=lambda context: context,
+        ), patch.object(
+            bootstrap.artifact,
+            "make_executor",
+            return_value=lambda context: context,
         ):
             bootstrap.install_current(auth, authority_id="TEST")
             with self.assertRaisesRegex(
@@ -64,6 +77,10 @@ class StrictBootstrapTests(unittest.TestCase):
     def test_non_read_only_class_remains_fail_closed(self):
         with patch.object(
             bootstrap.read_only,
+            "make_executor",
+            return_value=lambda context: context,
+        ), patch.object(
+            bootstrap.artifact,
             "make_executor",
             return_value=lambda context: context,
         ):
@@ -85,7 +102,7 @@ class StrictBootstrapTests(unittest.TestCase):
                     subprocess.run(["python", "-V"])
         self.assertEqual(
             mediator.status()["bound_effect_class_executors"],
-            ["READ_ONLY_DECLARED_QUERY"],
+            ["DECLARED_ARTIFACT_PRODUCTION", "READ_ONLY_DECLARED_QUERY"],
         )
 
     def test_process_universe_drift_fails_before_install(self):
