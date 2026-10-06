@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_H100_STATELESS_EXTERNAL_REGISTRY_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT",
+  "objective": "Replace outcome-dependent persistent registry membership with a fixed generic interpreter plus runtime external manifest, preserving behavior while reporting manifest bytes separately.",
+  "subject_scope": "REGISTRY_V8_THREE_DEPTH4_CHAIN_RECIPES",
+  "internal_subject_rule": "NO_CHAIN_SEQUENCE_OR_PASS_FAIL_MEMBERSHIP_MAY_BE_HARDCODED_IN_RUNTIME_MODULE",
+  "external_manifest_fields": [
+    "capability_id",
+    "sequence"
+  ],
+  "accounting": {
+    "internal_persistent_causal_learned_bits_target": 0,
+    "external_manifest_bytes_reported": true,
+    "runtime_fit_parameters_ephemeral": true
+  },
+  "hard_nonclaims": [
+    "DOES_NOT_DELETE_INFORMATION",
+    "MOVES_OUTCOME_DEPENDENT_RECIPE_INFORMATION_TO_EXTERNAL_KNOWLEDGE",
+    "NO_OPEN_WORLD_CAPABILITY_CLAIM"
+  ],
+  "promotion_authority": false
+}
