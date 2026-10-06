@@ -1,0 +1,25 @@
+name: Verify Composition P2 ingress-only reduction
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/COMPOSITION_P2_INGRESS_ONLY_PROVENANCE_BREAKTHROUGH_20261005_V1.json"
+      - "canonical/verification/composition_p2_ingress_only_reducer_v1.py"
+      - "canonical/tests/test_composition_p2_ingress_only_reducer_v1.py"
+      - ".github/workflows/verify-composition-p2-ingress-only-v1.yml"
+  push:
+    paths:
+      - "canonical/governance/COMPOSITION_P2_INGRESS_ONLY_PROVENANCE_BREAKTHROUGH_20261005_V1.json"
+      - "canonical/verification/composition_p2_ingress_only_reducer_v1.py"
+      - "canonical/tests/test_composition_p2_ingress_only_reducer_v1.py"
+      - ".github/workflows/verify-composition-p2-ingress-only-v1.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_composition_p2_ingress_only_reducer_v1
