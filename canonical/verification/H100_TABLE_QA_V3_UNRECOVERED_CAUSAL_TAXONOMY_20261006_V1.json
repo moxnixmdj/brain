@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TABLE_QA_V3_UNRECOVERED_CAUSAL_TAXONOMY_20261006_V1",
+  "date": "2026-10-06",
+  "status": "POSTHOC_DEVELOPMENT_DIAGNOSIS__NOT_FRESH_EVIDENCE",
+  "categories": {
+    "richer_table_reasoning": [
+      "V3H_397",
+      "V3H_711",
+      "V3H_947",
+      "V3H_663",
+      "V3H_917",
+      "V3H_803",
+      "V3H_67",
+      "V3H_123",
+      "V3H_697"
+    ],
+    "visual_color_information_absent_from_csv": [
+      "V3H_798",
+      "V3H_318",
+      "V3H_26"
+    ],
+    "table_or_gold_mismatch_or_corruption": [
+      "V3H_233",
+      "V3H_29",
+      "V3H_317",
+      "V3H_329",
+      "V3H_505"
+    ]
+  },
+  "counts": {
+    "richer_table_reasoning": 9,
+    "visual_color_information_absent_from_csv": 3,
+    "mismatch_or_corruption": 5,
+    "total": 17
+  },
+  "interpretation": "ONLY_THREE_OF_THE_SEVENTEEN_CRUDE_DIAGNOSTIC_FAILURES_CLEANLY_REQUIRE_VISUAL_COLOR_INFORMATION_FROM_THE_IMAGE__NINE_ARE_TABLE_REASONING_GAPS__FIVE_ARE_NOISY_OR_INCONSISTENT",
+  "hard_nonclaims": [
+    "POSTHOC_TAXONOMY",
+    "DOES_NOT_PROVE_ONLY_THREE_V3_CASES_REQUIRE_PIXELS",
+    "NO_NEW_SOLVER_SCORE"
+  ],
+  "promotion_authority": false
+}
