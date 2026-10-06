@@ -51,63 +51,95 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  legacy_parent_launcher:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Verify legacy terminal parent launcher
-        id: legacy
-        shell: bash
-        run: |
-          set +e
-          python -m unittest -v canonical.tests.test_terminal_parent_portfolio_launcher_v1 \
-            > legacy-parent-verification.log 2>&1
-          status=$?
-          cat legacy-parent-verification.log
-          echo "status=$status" >> "$GITHUB_OUTPUT"
-          exit 0
-      - name: Upload legacy parent verification log
-        if: always() && hashFiles('legacy-parent-verification.log') != ''
-        uses: actions/upload-artifact@v4
+      - run: python -m unittest -v canonical.tests.test_terminal_parent_portfolio_launcher_v1
+
+  root3_broker_rpc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          name: legacy-parent-verification-log
-          path: legacy-parent-verification.log
-          if-no-files-found: error
-      - name: Verify Root3 parent broker stack when present
-        id: root3
-        shell: bash
-        run: |
-          if [ ! -f canonical/tests/test_root3_broker_rpc_v1.py ]; then
-            echo "Root3 candidate files absent on this ref; skipping candidate-only suite."
-            echo "status=0" >> "$GITHUB_OUTPUT"
-            exit 0
+          python-version: "3.11"
+      - run: |
+          if [ -f canonical/tests/test_root3_broker_rpc_v1.py ]; then
+            python -m unittest -v canonical.tests.test_root3_broker_rpc_v1
+          else
+            echo "Root3 candidate absent; skipped."
           fi
-          set +e
-          python -m unittest -v \
-            canonical.tests.test_root3_broker_rpc_v1 \
-            canonical.tests.test_root3_parent_driver_registry_v1 \
-            canonical.tests.test_root3_parent_broker_server_v1 \
-            canonical.tests.test_zero_ambient_namespace_brokered_launcher_v2 \
-            canonical.tests.test_astra_runtime_root3_admin_broker_v1 \
-            canonical.tests.test_root3_production_astra_brokered_launcher_v2 \
-            > root3-parent-verification.log 2>&1
-          status=$?
-          cat root3-parent-verification.log
-          echo "status=$status" >> "$GITHUB_OUTPUT"
-          exit 0
-      - name: Upload Root3 verification log
-        if: always() && hashFiles('root3-parent-verification.log') != ''
-        uses: actions/upload-artifact@v4
+
+  root3_driver_registry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          name: root3-parent-verification-log
-          path: root3-parent-verification.log
-          if-no-files-found: error
-      - name: Enforce parent launcher verification results
-        if: always() && (steps.legacy.outputs.status != '0' || steps.root3.outputs.status != '0')
-        run: |
-          echo "legacy_status=${{ steps.legacy.outputs.status }}"
-          echo "root3_status=${{ steps.root3.outputs.status }}"
-          exit 1
+          python-version: "3.11"
+      - run: |
+          if [ -f canonical/tests/test_root3_parent_driver_registry_v1.py ]; then
+            python -m unittest -v canonical.tests.test_root3_parent_driver_registry_v1
+          else
+            echo "Root3 candidate absent; skipped."
+          fi
+
+  root3_parent_server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: |
+          if [ -f canonical/tests/test_root3_parent_broker_server_v1.py ]; then
+            python -m unittest -v canonical.tests.test_root3_parent_broker_server_v1
+          else
+            echo "Root3 candidate absent; skipped."
+          fi
+
+  root3_namespace_v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: |
+          if [ -f canonical/tests/test_zero_ambient_namespace_brokered_launcher_v2.py ]; then
+            python -m unittest -v canonical.tests.test_zero_ambient_namespace_brokered_launcher_v2
+          else
+            echo "Root3 candidate absent; skipped."
+          fi
+
+  root3_astra_admin_bind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: |
+          if [ -f canonical/tests/test_astra_runtime_root3_admin_broker_v1.py ]; then
+            python -m unittest -v canonical.tests.test_astra_runtime_root3_admin_broker_v1
+          else
+            echo "Root3 candidate absent; skipped."
+          fi
+
+  root3_production_v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: |
+          if [ -f canonical/tests/test_root3_production_astra_brokered_launcher_v2.py ]; then
+            python -m unittest -v canonical.tests.test_root3_production_astra_brokered_launcher_v2
+          else
+            echo "Root3 candidate absent; skipped."
+          fi
