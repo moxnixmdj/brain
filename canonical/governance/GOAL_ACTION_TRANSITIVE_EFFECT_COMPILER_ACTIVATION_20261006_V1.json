@@ -37,12 +37,14 @@
     "ONLY_AFTER_GATEWAY_ENFORCEMENT_AND_INDEPENDENT_REPLAY_ATTEMPT_NO_BYPASS_DOMINATOR_PROOF"
   ],
   "local_validation": {
-    "synthetic_adversarial_tests_run": 7,
-    "synthetic_adversarial_tests_passed": 7,
+    "local_unit_tests_run": 7,
+    "local_unit_tests_passed": 7,
+    "exact_branch_runtime_test_authored": true,
     "exact_branch_runtime_replay": "PENDING"
   },
   "hard_nonclaims": [
     "NO_THIRD_PARTY_OR_STDLIB_SEMANTIC_PURITY_PROOF",
+    "NO_RECEIVER_TYPE_PROOF_FOR_SAFE_METHOD_ALLOWLIST",
     "NO_RUNTIME_GATEWAY_ENFORCEMENT_PROOF",
     "NO_DYNAMIC_DISPATCH_TOTALITY_PROOF",
     "NO_TRANSITIVE_EFFECT_COMPLETENESS_CREDIT",
