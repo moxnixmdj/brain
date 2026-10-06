@@ -17,6 +17,10 @@ def surface(sid, classification, acceptance_state, **extra):
         "acceptance_state": acceptance_state,
         "source_receipts": SRC,
     }
+    if acceptance_state in {"BASIS_BOUND_PARITY_OPEN", "BASIS_BOUND_PROVED"}:
+        x["acceptance_basis_receipts"] = [{"path":"basis.json","git_blob_sha":"2"*40}]
+    elif acceptance_state == "BASIS_GAP":
+        x["acceptance_gap_receipts"] = [{"path":"gap.json","git_blob_sha":"3"*40}]
     x.update(extra)
     return x
 
@@ -69,6 +73,12 @@ def test_missing_source_receipt_fails_closed():
     out = compile_surface_manifest({"literal_target_universe_complete":False,"surfaces":[x]}, ENVELOPE)
     assert out.invalid_surface_ids == ("S",)
 
+def test_bound_state_without_basis_receipt_fails_closed():
+    x = surface("S","INTRINSIC_FAMILY_UNION","BASIS_BOUND_PARITY_OPEN",families=["ARTIFACT_CREATION"])
+    x["acceptance_basis_receipts"] = []
+    out = compile_surface_manifest({"literal_target_universe_complete":False,"surfaces":[x]}, ENVELOPE)
+    assert out.invalid_surface_ids == ("S",)
+
 def test_literal_complete_without_separate_completeness_proof_is_rejected():
     try:
         compile_surface_manifest({
@@ -97,6 +107,7 @@ def run_all():
         test_deployment_only_requires_not_applicable,
         test_unresolved_escape_keeps_manifest_acceptance_open,
         test_missing_source_receipt_fails_closed,
+        test_bound_state_without_basis_receipt_fails_closed,
         test_literal_complete_without_separate_completeness_proof_is_rejected,
         test_literal_complete_with_separate_content_addressed_proof_can_compile,
     ]
@@ -105,4 +116,4 @@ def run_all():
     return len(tests)
 
 if __name__ == "__main__":
-    print(f"PASS {run_all()}/8")
+    print(f"PASS {run_all()}/9")
