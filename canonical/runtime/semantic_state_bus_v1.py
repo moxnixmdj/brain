@@ -3,9 +3,11 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import re
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_SEMANTIC_STATE_BUS_V1"
+HEX64 = re.compile(r"^[0-9a-f]{64}$")
 
 
 class StateBusError(ValueError):
@@ -32,6 +34,12 @@ def _token(value: Any, name: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise StateBusError(name + "_INVALID")
     return value.strip()
+
+
+def _sha64(value: Any, name: str) -> str:
+    if not isinstance(value, str) or not HEX64.fullmatch(value):
+        raise StateBusError(name + "_INVALID")
+    return value
 
 
 def _shape(value: Any) -> Any:
@@ -86,7 +94,7 @@ def _validate_state(state: Any) -> dict[str, Any]:
     if state.get("schema") != SCHEMA:
         raise StateBusError("STATE_SCHEMA_INVALID")
     _token(state.get("case_id"), "CASE_ID")
-    _token(state.get("base_context_sha256"), "BASE_CONTEXT_SHA256")
+    _sha64(state.get("base_context_sha256"), "BASE_CONTEXT_SHA256")
     revision = state.get("revision")
     if not isinstance(revision, int) or isinstance(revision, bool) or revision < 0:
         raise StateBusError("STATE_REVISION_INVALID")
@@ -110,7 +118,7 @@ def _validate_state(state: Any) -> dict[str, Any]:
             raise StateBusError("ENTRY_SHAPE_SHA256_MISMATCH:" + str(key))
         _token(entry.get("semantic_type"), "ENTRY_SEMANTIC_TYPE")
         _token(entry.get("producer_stage"), "ENTRY_PRODUCER_STAGE")
-        _token(entry.get("provenance_sha256"), "ENTRY_PROVENANCE_SHA256")
+        _sha64(entry.get("provenance_sha256"), "ENTRY_PROVENANCE_SHA256")
         version = entry.get("version")
         if not isinstance(version, int) or isinstance(version, bool) or version < 1:
             raise StateBusError("ENTRY_VERSION_INVALID:" + str(key))
@@ -131,7 +139,7 @@ def _validate_state(state: Any) -> dict[str, Any]:
 
 def empty_state(*, case_id: str, base_context_sha256: str) -> dict[str, Any]:
     case_id = _token(case_id, "CASE_ID")
-    base = _token(base_context_sha256, "BASE_CONTEXT_SHA256")
+    base = _sha64(base_context_sha256, "BASE_CONTEXT_SHA256")
     state = {
         "schema": SCHEMA,
         "case_id": case_id,
@@ -160,7 +168,7 @@ def write(
     key = _token(key, "KEY")
     semantic_type = _token(semantic_type, "SEMANTIC_TYPE")
     producer_stage = _token(producer_stage, "PRODUCER_STAGE")
-    provenance = _token(provenance_sha256, "PROVENANCE_SHA256")
+    provenance = _sha64(provenance_sha256, "PROVENANCE_SHA256")
 
     existing = current["entries"].get(key)
     if existing is not None and not allow_update:
