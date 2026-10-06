@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_MODULAR_AFFINE_PROGRAM_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_FRESH_TASK_GENERATION",
+  "reference_machine": "H100_U1_STACK_VM",
+  "program": [
+    [
+      "READ"
+    ],
+    [
+      "READ"
+    ],
+    [
+      "MOD"
+    ],
+    [
+      "READ"
+    ],
+    [
+      "MUL"
+    ],
+    [
+      "READ"
+    ],
+    [
+      "ADD"
+    ],
+    [
+      "WRITE"
+    ],
+    [
+      "HALT"
+    ]
+  ],
+  "encoded_program_bytes": 9,
+  "explicit_upper_bound_bits": 72,
+  "learned_bits": 0,
+  "function_contract": "(a mod b)*c+d",
+  "promotion_authority": false
+}
