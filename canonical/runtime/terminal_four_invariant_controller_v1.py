@@ -52,7 +52,8 @@ def project():
     }
     if not required.issubset(ids):
         errors.append("G_ROUTE_REQUIRED_RESIDUAL_DRIFT")
-    if not any("DYNAMICALLY_SOLVING_THE_TARGET_TASK" in x for x in jit["not_admissible_as_mere_knowledge"]):
+    normalized = ["_".join(str(x).split()) for x in jit["not_admissible_as_mere_knowledge"]]
+    if not any("DYNAMICALLY_SOLVING_THE_TARGET_TASK" in x for x in normalized):
         errors.append("JIT_NONSMUGGLING_DRIFT")
     p_req = " ".join(ps["theorem"]["positive_p_requires"])
     if "A_D_V_U_R" not in p_req or "ROUTE_SET_COMPLETE" not in p_req:
