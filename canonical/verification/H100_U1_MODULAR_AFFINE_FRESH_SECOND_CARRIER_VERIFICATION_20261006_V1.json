@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_MODULAR_AFFINE_FRESH_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__6_OF_6_FRESH",
+  "reference_machine": "H100_U1_STACK_VM",
+  "program_precommit_blob_sha": "b6be0dfbd0ee2258bcb0ab044010d7d5e4a7b0ed",
+  "fresh_eval_precommit_blob_sha": "ee04f1432fb514a6d66368afa6305b01bed4a89d",
+  "encoded_program_bytes": 9,
+  "explicit_upper_bound_bits": 72,
+  "learned_bits": 0,
+  "fresh_tasks_passed": 6,
+  "fresh_tasks_total": 6,
+  "function_scope": "(a mod b)*c+d",
+  "hard_nonclaims": [
+    "UPPER_BOUND_NOT_MINIMUM",
+    "NOT_GENERAL_ARITHMETIC_REASONING"
+  ],
+  "promotion_authority": false
+}
