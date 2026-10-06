@@ -184,7 +184,7 @@ def compile_partition(
         "classifications": classifications,
         "astra_calibration_targets": calibration,
         "proved_route_candidates": proved_route_candidates,
-        "truth_obligations_deleted": 2,
+        "truth_obligations_deleted": 3,
         "truth_obligations_closed_by_routing_alone": 0,
         "terminal_credit_delta": 0,
         "ownership_credit_delta": 0,
