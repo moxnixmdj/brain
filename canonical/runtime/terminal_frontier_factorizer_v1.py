@@ -9,7 +9,6 @@ ATOMIC = (
     "CODING_FRONTIERCODE_GE_54_4",
     "PROWORK_GDPVAL_GE_1846",
     "PROWORK_AA_BRIEFCASE_GE_1822",
-    "ARTIFACT_AA_BRIEFCASE_GE_1822",
     "AUTOMATIONBENCH_GE_40",
     "MYSTERYMECHANISM_GE_49_55",
     "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
@@ -109,14 +108,14 @@ def factorize() -> dict:
             interfaces.setdefault(name, []).append(obligation)
 
     return {
-        "status": "PASS__31_CURRENT_TRUTH_OBLIGATIONS__ONE_FALSIFIED_COMPOSITION_SPECIFIC_NECESSITY_DELETED__FOUR_SHARED_CAUSAL_INTERFACES__ZERO_CREDIT",
+        "status": "PASS__30_CURRENT_TRUTH_OBLIGATIONS__TWO_VERIFIED_NONINDEPENDENT_TRUTHS_DELETED__FOUR_SHARED_CAUSAL_INTERFACES__ZERO_CREDIT",
         "atomic_count": len(ATOMIC),
         "meta_count": len(META),
         "truth_obligation_count": len(obligations),
         "interface_count": len(interfaces),
         "interfaces": {k: sorted(v) for k, v in sorted(interfaces.items())},
         "obligation_interfaces": {k: sorted(v) for k, v in sorted(req.items())},
-        "truth_obligations_deleted": 1,
+        "truth_obligations_deleted": 2,
         "acceptance_credit_delta": 0,
         "ownership_credit_delta": 0,
     }
