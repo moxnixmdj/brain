@@ -104,7 +104,7 @@ def compile_surface(source: str) -> dict[str, Any]:
         lines, "_run_model_independent_goal"
     )
     mi_text = "\n".join(mi_body)
-    allowed_match = re.search(r"allowed_types=\\{(.*?)\\}", mi_text, re.S)
+    allowed_match = re.search(r"allowed_types=\{(.*?)\}", mi_text, re.S)
     if allowed_match is None:
         allowed_types: set[str] = set()
     else:
