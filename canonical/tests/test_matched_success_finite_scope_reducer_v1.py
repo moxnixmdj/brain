@@ -35,6 +35,14 @@ def test_exact_fraction_and_inclusion_transport():
     assert out["opus_success_set_subset_of_brain"] is True
     assert out["monotonicity_transport_proved_for_this_input"] is True
     assert out["population_generalization_claimed"] is False
+    assert out["brain_exact_finite_scope_interval"]["lower"]["exact"] == "3/4"
+    assert out["brain_exact_finite_scope_interval"]["upper"]["exact"] == "3/4"
+    assert (
+        out["brain_exact_finite_scope_interval"][
+            "coverage_on_claimed_finite_universe"
+        ]
+        == "1"
+    )
 
 
 def test_more_successes_without_set_inclusion_still_scores_higher():
