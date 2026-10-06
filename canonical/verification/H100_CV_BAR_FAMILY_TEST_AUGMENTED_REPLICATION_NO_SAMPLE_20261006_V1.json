@@ -1,0 +1,13 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CV_BAR_FAMILY_TEST_AUGMENTED_REPLICATION_NO_SAMPLE_20261006_V1",
+  "date": "2026-10-06",
+  "status": "NO_ELIGIBLE_CASES__ZERO_EVIDENCE_DELTA",
+  "precommit": "canonical/governance/H100_CV_BAR_FAMILY_TEST_AUGMENTED_REPLICATION_PRECOMMIT_V1.json",
+  "annotation_git_blob_sha": "3dae5842ea264d60461c0d1f4633b2ca339a65ae",
+  "observed": {
+    "candidate_matches": 0,
+    "selected": 0
+  },
+  "consequence": "NO_PASS_NO_FAIL_NO_REPLICATION_CREDIT",
+  "promotion_authority": false
+}
