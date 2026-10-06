@@ -23,7 +23,13 @@ def test_astra_admin_commit_crosses_fd_and_commits_only_parent_side(tmp_path):
     (tmp_path/"canonical/same_identity_worker/external_tool_bridge/T1").mkdir(parents=True)
 
     parent,child=socket.socketpair()
-    broker=server.ParentBroker(repo_root=tmp_path)
+    broker=server.ParentBroker(
+        repo_root=tmp_path,
+        expected_agent_id="A1",
+        expected_task_id="T1",
+        mission_id="M1",
+        information_context={"test":True},
+    )
     state={}
     def serve():
         try:
@@ -50,7 +56,13 @@ def test_astra_admin_commit_crosses_fd_and_commits_only_parent_side(tmp_path):
         entry.install_effect_transport(
             astra,fd=child.fileno(),agent_id="A1",task_id="T1"
         )
-        payload=b'{"mission":"M1","step":1}\n'
+        payload=(
+            json.dumps({
+                "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+                "mission_id":"M1",
+                "status":"RUNNING",
+            },sort_keys=True)+"\n"
+        ).encode()
         target=tmp_path/"canonical/astra_runtime/state/M1.json"
         receipt=astra._typed_admin_commit(
             target,payload,"ASTRA_STATE_JSON","REPLACE"
