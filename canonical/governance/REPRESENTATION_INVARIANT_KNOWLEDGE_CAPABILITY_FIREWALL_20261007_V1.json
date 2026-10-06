@@ -1,0 +1,29 @@
+{
+  "schema":"PROJECT_BRAIN_REPRESENTATION_INVARIANT_KNOWLEDGE_CAPABILITY_FIREWALL_V1",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_ZERO_CREDIT",
+  "first_principles":{
+    "programs_as_data":"For a fixed interpreter U, an executable procedure p can be encoded as data d such that U(d,x)=p(x). Therefore file type, storage location, serialization, or the label JIT knowledge cannot by themselves make capability non-capability.",
+    "classification_rule":"Classify a dependency by what information/function it causally supplies to task performance, not by how it is stored."
+  },
+  "admissible_jit_knowledge_tests":[
+    "The payload states extensional source-grounded facts, relations, measurements, definitions, or domain rules that are independently truth-assessable.",
+    "The payload does not encode a task policy, reusable search/control procedure, hidden target outputs, or a decoder whose purpose is to produce winning actions.",
+    "A fixed Brain-owned mechanism performs the reasoning, search, planning, selection, and verification using the payload.",
+    "Replacing the external source with another source expressing the same truths does not change the required Brain-owned procedure.",
+    "The payload can be provenance-bound to an authoritative or otherwise admissible source without relying on the donor as an opaque target-capability executor."
+  ],
+  "capability_bearing_signals":[
+    "The same payload acts as a reusable policy or algorithm across multiple task instances.",
+    "The payload contains control flow, search heuristics, executable transformation rules, policy tables, answer maps, or target-output leakage.",
+    "Correctness of the payload can only be established by trusting the same opaque capability that generated it.",
+    "Removing the payload deletes procedural competence rather than only domain facts."
+  ],
+  "consequence":"JIT semantic facts may substitute for stored model knowledge, but an external semantic parser, reasoning policy, or reusable decoder remains capability-bearing even if fetched as data.",
+  "hard_nonclaims":[
+    "No claim every declarative rule set is automatically knowledge.",
+    "No claim every reusable fact is capability.",
+    "No terminal acceptance family capability or ownership credit."
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
