@@ -1,0 +1,313 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ADVERSARIAL_CROSSCAP_PUBLIC_V2",
+  "tasks": [
+    {
+      "id": "AR1",
+      "kind": "REASONING",
+      "question": "return the world selected by the hidden environment bit",
+      "spec": {
+        "constraints": [
+          {
+            "op": "NEQ",
+            "vars": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "domains": {
+          "a": [
+            1,
+            2
+          ],
+          "b": [
+            1,
+            2
+          ]
+        },
+        "variables": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "examples": [
+        {
+          "x": -3,
+          "y": -26
+        },
+        {
+          "x": -2,
+          "y": -7
+        },
+        {
+          "x": -1,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 9
+        },
+        {
+          "x": 3,
+          "y": 28
+        }
+      ],
+      "id": "AC1",
+      "kind": "CODING",
+      "max_depth": 2,
+      "queries": [
+        4,
+        5
+      ]
+    },
+    {
+      "clauses": [
+        {
+          "cue": "nova",
+          "fields": [
+            "x"
+          ]
+        },
+        {
+          "cue": "result",
+          "fields": [
+            "y"
+          ]
+        }
+      ],
+      "id": "AL1",
+      "kind": "LANGUAGE",
+      "knowledge": {
+        "anchors": {
+          "input": "input",
+          "target": "output"
+        },
+        "edges": [
+          [
+            "nova",
+            "predictor"
+          ],
+          [
+            "predictor",
+            "input"
+          ],
+          [
+            "nova",
+            "response"
+          ],
+          [
+            "response",
+            "output"
+          ],
+          [
+            "result",
+            "output"
+          ]
+        ]
+      },
+      "question": "treat nova as predictor in this hidden discourse"
+    },
+    {
+      "component_semantics": "objects are separated by color even when edges touch",
+      "id": "AV1",
+      "kind": "VISION",
+      "ppm": "P3\n10 6\n255\n255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 20 40 180 20 40 180 20 40 180 180 30 60 180 30 60 180 30 60 180 30 60 255 255 255 255 255 255 255 255 255 20 40 180 20 40 180 20 40 180 180 30 60 180 30 60 180 30 60 180 30 60 255 255 255 255 255 255 255 255 255 20 40 180 20 40 180 20 40 180 180 30 60 180 30 60 180 30 60 180 30 60 255 255 255 255 255 255 255 255 255 20 40 180 20 40 180 20 40 180 180 30 60 180 30 60 180 30 60 180 30 60 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255\n"
+    },
+    {
+      "id": "AT1",
+      "kind": "TOOL_USE",
+      "purpose": "audit",
+      "required_effect": "WRITE_JSON",
+      "required_keys": [
+        "name",
+        "value"
+      ],
+      "tool_packs": [
+        {
+          "effects": [
+            [
+              "WRITE_JSON",
+              "out.json"
+            ]
+          ],
+          "input_schema": {
+            "name": "string",
+            "value": "int"
+          },
+          "purpose": "audit",
+          "tool_id": "AUDIT_WRITER"
+        },
+        {
+          "effects": [
+            [
+              "WRITE_JSON",
+              "out.json"
+            ]
+          ],
+          "input_schema": {
+            "name": "string",
+            "value": "int"
+          },
+          "purpose": "cache",
+          "tool_id": "CACHE_WRITER"
+        }
+      ]
+    },
+    {
+      "goal_resource": "gate_open",
+      "id": "AP1",
+      "initial_resources": [
+        "start"
+      ],
+      "kind": "PLANNING",
+      "max_length": 6,
+      "operators": [
+        {
+          "operator_id": "take_key",
+          "provides": [
+            "key"
+          ],
+          "removes": [],
+          "requires": [
+            "start"
+          ]
+        },
+        {
+          "operator_id": "open_gate",
+          "provides": [
+            "gate_open"
+          ],
+          "removes": [
+            "key"
+          ],
+          "requires": [
+            "key"
+          ]
+        },
+        {
+          "operator_id": "duplicate_key",
+          "provides": [
+            "spare_key"
+          ],
+          "removes": [],
+          "requires": [
+            "key"
+          ]
+        },
+        {
+          "operator_id": "restore_key",
+          "provides": [
+            "key"
+          ],
+          "removes": [],
+          "requires": [
+            "spare_key",
+            "gate_open"
+          ]
+        }
+      ],
+      "required_final_resources": [
+        "gate_open",
+        "key"
+      ]
+    },
+    {
+      "events": [
+        {
+          "event_hash": "bdd212149e1efcad2b01510fad9d7c13466239ed9a05e2c5aa6603fb4d3408d9",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "seq": 1,
+          "value": 3
+        },
+        {
+          "event_hash": "03b2d2554ac46144ec408f41320f6033f4d0aad089cdbc6370c6e09c136fc86c",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "bdd212149e1efcad2b01510fad9d7c13466239ed9a05e2c5aa6603fb4d3408d9",
+          "seq": 2,
+          "value": 9
+        },
+        {
+          "event_hash": "9fc1ca0f99b1eeae481de547f1eb5e15e908aa81e0253df2caa5758365d45f2c",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "03b2d2554ac46144ec408f41320f6033f4d0aad089cdbc6370c6e09c136fc86c",
+          "seq": 3,
+          "value": 4
+        },
+        {
+          "event_hash": "bd298940248929182d0c63aeea1264e2abf677cfdfa07128858761fcb24b1eee",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "9fc1ca0f99b1eeae481de547f1eb5e15e908aa81e0253df2caa5758365d45f2c",
+          "seq": 4,
+          "value": 7
+        }
+      ],
+      "id": "AM1",
+      "kind": "MEMORY",
+      "query": {
+        "key": "score",
+        "op": "MAX_SEEN"
+      }
+    },
+    {
+      "id": "AN1",
+      "kind": "NOVEL_DOMAIN",
+      "queries": [
+        -4.5,
+        4.5
+      ],
+      "rows": [
+        {
+          "x": -4,
+          "y": -1.328021233333519
+        },
+        {
+          "x": -3,
+          "y": -0.8902555179585634
+        },
+        {
+          "x": -2,
+          "y": -0.3875976601160648
+        },
+        {
+          "x": -1,
+          "y": 0.29145532940573077
+        },
+        {
+          "x": 0,
+          "y": 1.45
+        },
+        {
+          "x": 1,
+          "y": 1.0914553294057308
+        },
+        {
+          "x": 2,
+          "y": 1.2124023398839352
+        },
+        {
+          "x": 3,
+          "y": 1.509744482041437
+        },
+        {
+          "x": 4,
+          "y": 1.871978766666481
+        }
+      ]
+    }
+  ]
+}
