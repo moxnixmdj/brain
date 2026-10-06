@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 from canonical.runtime.k6_minimum_adequate_policy_cover_v1 import (
     PolicyCoverError,
     assignment_from_cover,
@@ -74,3 +77,15 @@ def test_falsifier_bundle_zero_credit():
     assert out["separator_lower_bound_recovered"] is True
     assert out["pairwise_compatibility_insufficient"] is True
     assert out["terminal_credit"] is False
+
+
+def test_governance_generalizes_current_k6_information_cut_without_deleting_it():
+    root = Path(__file__).resolve().parents[2]
+    p = root / "canonical/governance/K6_MINIMUM_ADEQUATE_POLICY_COVER_THEOREM_20261006_V1.json"
+    d = json.loads(p.read_text(encoding="utf-8"))
+    assert d["source_bindings"]["k6_information_resource_cut"]["git_blob_sha"] == "b5b99aa056011139396ab5358dfe8763ff4d7d7f"
+    rel = d["relation_to_current_k6_information_cut"]
+    assert "tau=N" in rel["special_case"]
+    assert "tau_CAN_BE_STRICTLY_LESS_THAN_N" in rel["strictness"]
+    assert d["candidate_compression"]["new_information_object"] == "K6P_RESOURCE_BOUNDED_ADEQUATE_POLICY_INDEX_ACQUISITION"
+    assert d["accounting"]["terminal_credit_delta"] == 0
