@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_BAR_COUNT_TEST_HOLDOUT_V3",
+  "date": "2026-10-06",
+  "status": "FROZEN_IDENTITIES_ONLY__LABELS_AND_IMAGES_UNOPENED_AT_SELECTION",
+  "source_revision": "044eabfc306abfe9340c5741f0093aefc5973d06",
+  "source": "ChartQA Dataset/test/test_human.json",
+  "selection_rule": "PREVIOUSLY_UNOPENED_TEST_HUMAN_CASES_WHOSE_QUERY_EXPLICITLY_ASKS_NUMBER_OF_COLOR_BARS_SHOWN__EXCLUDES_COLOR_COUNT_CATEGORY_COUNT_VALUE_FILTER_ARITHMETIC_AND_CONDITIONAL_BAR_COUNT",
+  "cases": [
+    {
+      "split": "human",
+      "annotation_index": 100,
+      "imgname": "36995393008758.png",
+      "query": "How many color bars are there in the graph?",
+      "selection_hash": "V3_TEST_HUMAN_100_EXPLICIT_COLOR_BAR_COUNT"
+    },
+    {
+      "split": "human",
+      "annotation_index": 578,
+      "imgname": "OECD_GROSS_DIRECT_INSURANCE_PREMIUMS_AUS_CHL_ISR_PRT_URY_000090.png",
+      "query": "How many color bars are shown in the graph?",
+      "selection_hash": "V3_TEST_HUMAN_578_EXPLICIT_COLOR_BAR_COUNT"
+    }
+  ],
+  "labels_exposed": false,
+  "images_opened": false,
+  "runtime_frozen_before_selection": true,
+  "runtime_path": "canonical/runtime/h100_zero_learned_bar_count_v3.py",
+  "runtime_git_commit": "75c43d6ec5e0d6ce3663d1c70fffe34b6c9d355c",
+  "pass_gate": {
+    "required_exact_count_correct": 2,
+    "total_cases": 2,
+    "abstention_counts_as_incorrect": true,
+    "persistent_learned_bytes_must_equal": 0,
+    "pretrained_vision_models_must_equal": 0,
+    "ocr_models_must_equal": 0
+  },
+  "hard_nonclaims": [
+    "TWO_CASE_HOLDOUT_IS_SMALL",
+    "BAR_COUNT_ONLY_NOT_GENERAL_CHART_QA",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
