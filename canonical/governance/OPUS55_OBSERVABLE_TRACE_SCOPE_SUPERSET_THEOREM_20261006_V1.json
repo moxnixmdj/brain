@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__STRUCTURAL_SCOPE_SUPERSET__UNIVERSE_ENUMERATION_BYPASSED__DOMINANCE_STILL_OPEN__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_claim": "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2",
+  "prior_countermodel": {
+    "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_TERMINAL_SUFFICIENCY_COUNTERMODEL_20261005_V1.json",
+    "git_blob_sha": "77e5a893b65d3509b563f024a427d492d45e1489",
+    "defect": "CURRENT_FINITE_ACCEPTANCE_BASIS_HAS_NO_AXIOM_BINDING_EVERY_USEFUL_OPUS55_BEHAVIOR_TO_ITS_DOMAIN"
+  },
+  "provider_anchor": {
+    "path": "canonical/governance/OPUS55_DOMAIN_BEHAVIOR_UNIVERSE_ANCHOR_20261005_V1.json",
+    "git_blob_sha": "b6c09cd59491903c9c1aa358035e861b2c08bb0f",
+    "role": "PRIMARY_PROVIDER_SURFACE_EVIDENCE_ONLY__NOT_COMPLETENESS"
+  },
+  "first_principles_definition": {
+    "observable_trace": "A possibly long-running sequence of externally observable observations, actions, emissions, resource outcomes, safety outcomes, and environment transitions. Payloads are opaque byte-serializable values, so new domains, file types, APIs, tools, websites, images, documents, or structured values do not require new semantic event kinds.",
+    "externally_useful_capability": "A task-conditioned property of Claude Opus 5.5 that changes the distribution of at least one externally observable trace or an externally measurable outcome such as correctness, quality, safety, latency, cost, reliability, or successful continuation.",
+    "observational_equivalence": "Two internal mechanisms that induce the same externally observable trace/outcome distribution under the same task/environment are the same capability for this terminal objective; an internal latent distinction with no externally observable consequence is not an additional useful capability to own.",
+    "trace_event_basis": [
+      "OBSERVATION__OPAQUE_PAYLOAD_PLUS_MEDIA_PROVENANCE_AND_ENVIRONMENT_METADATA",
+      "ACTION__OPAQUE_TOOL_OR_COMPUTER_OR_API_OR_FILE_OPERATION",
+      "EMISSION__TEXT_ARTIFACT_DIAGRAM_OR_OTHER_SERIALIZABLE_OUTPUT",
+      "RESOURCE__TIME_COST_COMPUTE_CONTEXT_STORAGE_AND_FAILURE_STATUS",
+      "SAFETY_AUTHORITY__ABSTENTION_BOUNDARY_PERMISSION_AND_IRREVERSIBILITY_STATUS",
+      "STATE_TRANSITION__PERSISTENT_OR_EXTERNAL_STATE_CHANGE_VISIBLE_TO_FUTURE_INTERACTION"
+    ],
+    "composition_rule": "Any finite composition is concatenation/branching over traces; indefinitely long behavior is represented by its finite observable prefixes plus continuation semantics.",
+    "source_rule": "Knowledge sources and tools are not new capability-domain atoms. They enter as observation/action payloads; source-specific knowledge remains external/JIT under the terminal objective."
+  },
+  "theorem": {
+    "statement": "EVERY_EXTERNALLY_USEFUL_OPUS55_CAPABILITY_IS_REPRESENTABLE_AS_A_PROPERTY_OF_THE_OBSERVABLE_TRACE_SUPERSET",
+    "proof_sketch": [
+      "ASSUME_A_USEFUL_CAPABILITY_C_ESCAPES_THE_TRACE_SUPERSET",
+      "BY_DEFINITION_C_IS_USEFUL_ONLY_IF_IT_CHANGES_AN_EXTERNALLY_MEASURABLE_TASK_OR_INTERACTION_OUTCOME",
+      "ANY_SUCH_CHANGE_APPEARS_AS_AN_OBSERVATION_ACTION_EMISSION_RESOURCE_SAFETY_OR_STATE_TRANSITION_DIFFERENCE_OR_AS_A_DIFFERENCE_IN_THEIR_DISTRIBUTION",
+      "EVERY_SUCH_EVENT_IS_IN_THE_TRACE_EVENT_BASIS_WITH_OPAQUE_PAYLOADS",
+      "THEREFORE_C_HAS_A_TRACE_REPRESENTATION__CONTRADICTION",
+      "IF_C_HAS_NO_EXTERNALLY_OBSERVABLE_OR_MEASURABLE_EFFECT_THEN_C_IS_NOT_A_DISTINCT_USEFUL_CAPABILITY_FOR_THE TERMINAL OBJECTIVE"
+    ],
+    "scope_superset_not_domain_enumeration": true,
+    "unknown_future_domain_requires_new_universe_atom": false,
+    "unknown_future_tool_requires_new_universe_atom": false,
+    "arbitrary_cross_domain_composition_requires_new_universe_atom": false
+  },
+  "decisive_falsifiers": [
+    {
+      "id": "UNREPRESENTED_USEFUL_BEHAVIOR",
+      "attack": "Construct a useful Opus 5.5 capability whose success can differ while every observable trace/outcome/resource/safety/state-transition measure remains identical.",
+      "current_result": "NO_CONSTRUCTIVE_COUNTEREXAMPLE_BY_DEFINITION__SUCH_A_DIFFERENCE_HAS_NO_EXTERNAL_UTILITY_SIGNAL"
+    },
+    {
+      "id": "SOURCE_SURFACE_ESCAPE",
+      "attack": "Construct a new source, modality, tool, API, file type, or website whose interaction cannot be encoded as opaque observation/action/emission payloads.",
+      "current_result": "NO_STRUCTURAL_ESCAPE__OPAQUE_PAYLOAD_EVENT_TYPES_ARE_SOURCE_AGNOSTIC"
+    },
+    {
+      "id": "COMPOSITION_ESCAPE",
+      "attack": "Construct a useful multi-step capability not representable by trace sequencing, branching, external-state transition, or continuation.",
+      "current_result": "NO_STRUCTURAL_ESCAPE__COMPOSITION_IS_TRACE_STRUCTURE"
+    },
+    {
+      "id": "TWO_WORLDS_TERMINAL_COUNTERMODEL",
+      "attack": "Hold all current finite acceptance rows fixed while changing an unverified useful behavior.",
+      "current_result": "COUNTERMODEL_STILL_EXISTS_INSIDE_THE_TRACE_SUPERSET__THIS_FALSIFIES_CURRENT_FINITE_BASIS_DOMINANCE_NOT_SCOPE_COMPLETENESS"
+    }
+  ],
+  "critical_split": {
+    "target_universe_scope_state": "STRUCTURALLY_SUPERSET_BY_OBSERVABLE_TRACE_DEFINITION",
+    "current_acceptance_basis_universal_dominance_state": "OPEN",
+    "implication": "STOP_ENUMERATING_DOMAIN_LABELS_AS_A_ROUTE_TO_LITERAL_COMPLETENESS__THE_NEXT_LOGICAL_BLOCKER_IS_BINDING_BRAIN_EQUAL_OR_BETTER_PERFORMANCE_AND_OWNERSHIP_OVER_THE_UNIVERSAL_OBSERVABLE_SCOPE",
+    "repaired_two_worlds_interpretation": "WORLD_A_AND_WORLD_B_NO_LONGER_DIFFER_ON_WHETHER_U_EXISTS_IN_THE_TARGET_UNIVERSE__U_IS_IN_SCOPE_IN_BOTH__THEY_DIFFER_ON_AN_UNPROVED_DOMINANCE_FACT_INSIDE_SCOPE"
+  },
+  "provider_consistency": [
+    "ANTHROPIC_TRANSPARENCY_IDENTIFIES_TEXT_AND_IMAGE_INPUTS_AND_TEXT_ARTIFACT_AND_DIAGRAM_OUTPUTS_FOR_OPUS55",
+    "ANTHROPIC_LAUNCH_DESCRIBES_AGENTIC_CODING_COMPLEX_WORK_AND_BEHAVIORAL_SAFETY_OUTCOMES",
+    "THE_TRACE_SUPERSET_IS_INTENTIONALLY_WIDER_THAN_THOSE_ENUMERATED_SURFACES_SO_PROVIDER_DISCLOSURE_INCOMPLETENESS_CANNOT_CREATE_A_SCOPE_ESCAPE"
+  ],
+  "scheduler_effect": {
+    "delete": [
+      "ENDLESS_PRIMARY_SOURCE_DOMAIN_ENUMERATION_AS_A_COMPLETENESS_PROOF",
+      "DOMAIN_LABEL_COUNT_AS_TERMINAL_UNIVERSE_AUTHORITY",
+      "BENCHMARK_LIST_COMPLETENESS_AS_LITERAL_CAPABILITY_COMPLETENESS"
+    ],
+    "preserve": [
+      "DOMAIN_SPECIFIC_EVIDENCE_FOR_PERFORMANCE_AND_TRANSFER",
+      "BENCHMARK_WITNESSES_FOR_LOWER_BOUNDS",
+      "NEGATIVE_CANARIES_AND_SAFETY_BOUNDARIES"
+    ],
+    "next": "FALSIFY_AND_CONSTRUCT_C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1__PROVE_CURRENT_ACCEPTANCE_AND_OWNERSHIP_MACHINERY_SOUNDLY_COVERS_THE_TRACE_SUPERSET_OR_LOCALIZE_THE_MINIMAL_UNCOVERED_BEHAVIOR_CLASS"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_32_OPEN_TRUTH_OBLIGATIONS_ARE_SUFFICIENT_FOR_LITERAL_FINALITY",
+    "NO_CLAIM_BRAIN_DOMINATES_OPUS55_ON_ALL_OBSERVABLE_TRACES",
+    "NO_CLAIM_ANY_ATOMIC_OR_META_ACCEPTANCE_OBLIGATION_IS_CLOSED",
+    "NO_CLAIM_SOURCE_ENUMERATION_IS_UNNECESSARY_FOR_TARGET_SPECIFIC_PERFORMANCE_EVIDENCE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
