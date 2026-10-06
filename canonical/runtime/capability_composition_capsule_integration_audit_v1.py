@@ -17,7 +17,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 SOURCES = {
     "astra_runtime": (
         "canonical/runtime/astra_runtime.py",
-        "15dd59ad644c5c73a9218dba4fcc17f880d725f0",
+        "b7efc08e64a483e9a759c181a4f9a1cf29e47a9a",
     ),
     "guard_v2": (
         "canonical/runtime/composition_state_capsule_guard_v2.py",
