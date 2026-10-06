@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_H100_P0_CROSS_CAPABILITY_FALSIFICATION_SUITE_V1_RESULT",
+  "date": "2026-10-06",
+  "status": "FAIL__8_OF_9__FAILURE_LOCALIZED_TO_INVALID_UNKNOWN_DOMAIN_TASK_DATA",
+  "observed": {
+    "passed": 8,
+    "total": 9,
+    "failed_task": "UNKNOWN_DOMAIN_ADAPTATION",
+    "failure_output": {
+      "status": "ABSTAIN",
+      "survivors": []
+    },
+    "missing_information_control": {
+      "status": "ABSTAIN",
+      "reason": "INFORMATION",
+      "residual_worlds": 2
+    }
+  },
+  "causal_classification": {
+    "primary": "REPRESENTATION",
+    "detail": "FROZEN_EXAMPLES_MATCH_NO_MECHANISM_IN_THE_FROZEN_GRAMMAR_WHILE_EXPECTED_QUERY_ANSWER_CORRESPONDS_TO_X3_PLUS_X",
+    "p0_falsified": false
+  },
+  "repair_rule": "DO_NOT_EDIT_V1__CREATE_V2_WITH_ONLY_THE_MALFORMED_TASK_DATA_CORRECTED__KEEP_GENERIC_PRIMITIVES_AND_ALL_OTHER_TASKS_UNCHANGED",
+  "promotion_authority": false
+}
