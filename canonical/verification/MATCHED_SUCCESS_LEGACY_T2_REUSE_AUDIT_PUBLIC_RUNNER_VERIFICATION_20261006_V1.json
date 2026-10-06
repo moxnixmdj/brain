@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_SUCCESS_LEGACY_T2_REUSE_AUDIT_PUBLIC_RUNNER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__6_DIRECT_REUSABLE_DIMENSIONS__10_INTEGRATED_GAPS__CONCRETE_PARENT_RUNNER_SEPARATION_VERIFIED__ZERO_CREDIT",
+  "source_brain": {
+    "pull_request": 2424,
+    "exact_blobs": {
+      "canonical/governance/MATCHED_SUCCESS_LEGACY_T2_REUSE_AUDIT_V1.json": "43d2b820ac1389c7e1e76f907acf2f6f11311607",
+      "canonical/runtime/matched_success_legacy_t2_reuse_audit_v1.py": "6051f2fef40bbcc7f5971128e4fb5eb87f09f7e4"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2327,
+    "verified_head_sha": "c36a8a239313a4ad8b18c8a1d7b87ee799809719",
+    "merge_commit": "e4899fb022ca5aec0445ba1b4a4ddc6c896b2af0",
+    "workflow_run_id": 37419140275,
+    "workflow_job_id": 112124339989,
+    "conclusion": "success"
+  },
+  "verified_result": {
+    "normalized_dimension_count": 16,
+    "direct_reusable_substrate_dimension_count": 6,
+    "integrated_extension_dimension_count": 10,
+    "composition_missing_count": 5,
+    "legacy_t2_unchanged_is_scope_superset": false,
+    "parent_runner_component_and_semantics_verified": true
+  },
+  "direct_reusable_dimensions": [
+    "dimension:authorization_and_scope_boundaries",
+    "dimension:explicit_abstention_and_fail_closed_cases",
+    "dimension:routine_ambiguity",
+    "dimension:state_change_after_actions_requiring_replanning",
+    "dimension:subtask_dependency_and_fan_in",
+    "dimension:tool_failure_and_recovery"
+  ],
+  "integrated_extension_dimensions": [
+    "dimension:browser_or_computer_action_plus_memory_plus_recovery",
+    "dimension:coding_plus_debugging_plus_tool_discovery",
+    "dimension:cross_capability_state_handoff_and_rollback",
+    "dimension:delegation_plus_evidence_synthesis_plus_artifact_production",
+    "dimension:long_horizon_state_retention",
+    "dimension:minimal_oversight_completion",
+    "dimension:multi_constraint_instruction_compliance",
+    "dimension:multi_step_planning_with_at_least_three_distinct_tool_or_action_types",
+    "dimension:requirement_change",
+    "dimension:research_plus_tool_use_plus_artifact_creation"
+  ],
+  "meaning": "REUSE_LEGACY_T2_GENERATOR_ORACLE_AND_BEACON_MECHANICS_WHERE_DIRECTLY_BOUND__DO_NOT_REUSE_CONSUMED_RESULTS__DO_NOT_CLAIM_UNCHANGED_T2_IS_COMPLETE__BUILD_ONLY_THE_INTEGRATED_10_DIMENSION_EXTENSION.",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_LEGACY_RESULT_INHERITANCE",
+    "NO_FRESH_REALITY_OR_CASE_GENERATION_AUTHORITY",
+    "NO_EXECUTION_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

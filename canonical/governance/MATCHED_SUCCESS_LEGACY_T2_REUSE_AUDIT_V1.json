@@ -1,0 +1,169 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_SUCCESS_LEGACY_T2_REUSE_AUDIT_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__6_OF_16_NORMALIZED_DIMENSIONS_HAVE_DIRECT_LEGACY_T2_SUBSTRATE_WITNESSES__10_REQUIRE_NEW_INTEGRATED_SCOPE__ZERO_CREDIT_PENDING_INDEPENDENT_SEMANTIC_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json",
+      "git_blob_sha": "72a5cd689f55df84de73693371264f02ef4e7226"
+    },
+    "scope_compiler": {
+      "path": "canonical/governance/MATCHED_SUCCESS_SCOPE_COMPILER_V1.json",
+      "git_blob_sha": "2e344ccaa611cda7764d4d70557f1e5bdec9cf3c"
+    },
+    "browser_t2": {
+      "path": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "28e955d5d593d1de9cfab0f9cdcdae732fd315f1"
+    },
+    "delegation_t2": {
+      "path": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "a1e441567b132d71713ed55dfc51f01d8de112d1"
+    },
+    "tool_t2": {
+      "path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+    },
+    "m0_t2": {
+      "path": "canonical/governance/M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "d34a284f7c1f99fd93d420f3a5aba93851b29ef6"
+    },
+    "p1_t2": {
+      "path": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39"
+    },
+    "parent_runner_binding": {
+      "path": "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json",
+      "git_blob_sha": "a1630299d29ea9c07e55b4314c07ddb3228c3287"
+    },
+    "parent_runner": {
+      "path": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
+      "git_blob_sha": "431b62e503a6a179f19339ae5e0ab6948424a650"
+    }
+  },
+  "reuse_semantics": "A_DIRECT_LEGACY_SUBSTRATE_WITNESS_MEANS_EXISTING_FROZEN_T2_CASE_CLASSES_AND_OBJECTIVE_CHECKS_EXPLICITLY_EXERCISE_THE_NORMALIZED_DIMENSION_STRONGLY_ENOUGH_TO_REUSE_THE_GENERATOR_OR_ORACLE_MECHANICS_IN_A_NEW_PREEXPOSURE_MATCHED_SCOPE__IT_IS_NOT_ACCEPTANCE_CREDIT_AND_DOES_NOT_PERMIT_REUSE_OF_CONSUMED_TERMINAL_RESULTS.",
+  "direct_legacy_substrate_witnesses": {
+    "dimension:state_change_after_actions_requiring_replanning": {
+      "routes": [
+        "BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1",
+        "DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1",
+        "TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1"
+      ],
+      "evidence": [
+        "STALE_REBIND",
+        "FRESH_STATE_CONDITIONING",
+        "V2_WORKER_CAPABILITY_REMOVED",
+        "V2_RESOURCE_CAPACITY_CHANGED",
+        "SELECTED_TOOL_LOSES_CAPABILITY",
+        "CHEAPER_TOOL_GAINS_CAPABILITY"
+      ]
+    },
+    "dimension:tool_failure_and_recovery": {
+      "routes": [
+        "BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1",
+        "TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1",
+        "P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1"
+      ],
+      "evidence": [
+        "OBSERVABLE_MISMATCH_RECOVERY",
+        "SELECTED_TOOL_LOSES_CAPABILITY",
+        "CHEAPER_TOOL_UNAVAILABLE",
+        "NOMINATED_REPAIR_RESCUES_TERMINAL_OUTCOME_WHEN_CAUSE_IS_IDENTIFIABLE"
+      ]
+    },
+    "dimension:subtask_dependency_and_fan_in": {
+      "routes": [
+        "DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1"
+      ],
+      "evidence": [
+        "DEPENDENCY_RESPECTING_FANOUT_FANIN",
+        "V3_FORK_JOIN",
+        "V3_FANOUT_JOIN",
+        "V3_DUAL_ROOT_FANIN"
+      ]
+    },
+    "dimension:authorization_and_scope_boundaries": {
+      "routes": [
+        "TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1",
+        "P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1"
+      ],
+      "evidence": [
+        "ACTIVE_CONSTRAINT_ADMISSIBILITY",
+        "CHEAPER_TOOL_UNAUTHORIZED",
+        "AUTHORITY_SCOPE_TOOL_STATE_PROVENANCE_AND_DEPENDENCY_FAILURE_CLASSES_ARE_LOAD_BEARING_WHEN_PRESENT"
+      ]
+    },
+    "dimension:routine_ambiguity": {
+      "routes": [
+        "BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1",
+        "M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1"
+      ],
+      "evidence": [
+        "AMBIGUOUS",
+        "AMBIGUITY_IS_PRESERVED_RATHER_THAN_GUESSED"
+      ]
+    },
+    "dimension:explicit_abstention_and_fail_closed_cases": {
+      "routes": [
+        "TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1",
+        "M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1"
+      ],
+      "evidence": [
+        "NO_SUFFICIENT_ROUTE",
+        "CORRECT_NO_ROUTE_ESCALATION",
+        "AMBIGUITY_IS_PRESERVED_RATHER_THAN_GUESSED"
+      ]
+    }
+  },
+  "missing_from_unchanged_legacy_t2": [
+    "dimension:multi_step_planning_with_at_least_three_distinct_tool_or_action_types",
+    "dimension:long_horizon_state_retention",
+    "dimension:minimal_oversight_completion",
+    "dimension:multi_constraint_instruction_compliance",
+    "dimension:requirement_change",
+    "dimension:research_plus_tool_use_plus_artifact_creation",
+    "dimension:browser_or_computer_action_plus_memory_plus_recovery",
+    "dimension:coding_plus_debugging_plus_tool_discovery",
+    "dimension:delegation_plus_evidence_synthesis_plus_artifact_production",
+    "dimension:cross_capability_state_handoff_and_rollback"
+  ],
+  "why_missing": {
+    "agency_three_atoms": "LEGACY_T2_COMPONENT_ROUTES_DO_NOT_BIND_ONE_WHOLE_AGENCY_CASE_TO_AT_LEAST_THREE_DISTINCT_ACTION_TYPES__LONG_HORIZON_STATE_RETENTION__AND_MINIMAL_OVERSIGHT_COMPLETION.",
+    "instruction_two_atoms": "M0_MODELS_REQUIREMENTS_AND_T2_ROUTES_HANDLE_STATE_OR_RESOURCE_CHANGES__BUT_NO_BOUND_LEGACY_T2_CASE_CLASS_EXPLICITLY_REQUIRES_END_TO_END_MULTI_CONSTRAINT_INSTRUCTION_COMPLIANCE_OR_A_RUNTIME_REQUIREMENT_CHANGE.",
+    "composition_five_atoms": "THE_CONCRETE_LEGACY_PARENT_RUNNER_GENERATES_EACH_BOUND_COMPONENT_BEHAVIOR_ON_ITS_OWN_ROUTE_SPECIFIC_CASES_AND_COMPUTES_PARENT_PASS_AS_AND_OF_COMPONENT_RESULTS__IT_DOES_NOT_CREATE_A_SHARED_STATE_CASE_IN_WHICH_THE_FROZEN_COMPOSITION_CAPABILITY_COMBINATIONS_HAND_OFF_STATE_OR_ROLL_BACK_ACROSS_COMPONENTS."
+  },
+  "reuse_result": {
+    "normalized_dimension_count": 16,
+    "direct_reusable_substrate_dimension_count": 6,
+    "new_integrated_scope_dimension_count": 10,
+    "legacy_t2_unchanged_is_scope_superset": false,
+    "legacy_t2_may_be_reused_as_partial_generator_or_oracle_substrate": true,
+    "consumed_terminal_v3_results_reused_for_new_acceptance": false
+  },
+  "tournament_effect": {
+    "delete": [
+      "BUILD_A_COMPLETELY_NEW_MATCHED_HARNESS_FROM_SCRATCH",
+      "CLAIM_UNCHANGED_LEGACY_T2_IS_A_SCOPE_SUPERSET",
+      "REUSE_CONSUMED_TERMINAL_V3_RESULTS_AS_NEW_MATCHED_SUCCESS_EVIDENCE"
+    ],
+    "next": "BUILD_ONLY_THE_10_DIMENSION_INTEGRATED_EXTENSION_AROUND_THE_VERIFIED_LEGACY_T2_GENERATOR_ORACLE_AND_BEACON_SUBSTRATE__THEN_BIND_ALL_16_THROUGH_THE_VERIFIED_SCOPE_COMPILER."
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_CLAIM_ANY_LEGACY_T2_RESULT_COUNTS_FOR_THE_NEW_MATCHED_SUCCESS_PORTFOLIO",
+    "NO_FRESH_REALITY_OR_CASE_GENERATION_AUTHORITY",
+    "NO_CLAIM_THE_6_REUSED_DIMENSIONS_ALONE_FORM_A_REPRESENTATIVE_PORTFOLIO",
+    "NO_EXECUTION_PROMOTION_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_semantic_verification_required": true
+}
