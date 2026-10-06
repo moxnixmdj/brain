@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_BAR_GEOMETRY_PROGRAM_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_FRESH_RASTER_GENERATION_AND_OUTCOMES",
+  "reference_machine": "H100_U1_STACK_VM",
+  "generator_path": "canonical/runtime/h100_u1_bar_geometry_program_v1.py",
+  "generator_blob_sha": "d9e1e8d7398beb1275c2ac1c503c9c908021ec01",
+  "scope": {
+    "grid_height": 12,
+    "grid_width": 20,
+    "pixel_domain": [
+      0,
+      1
+    ],
+    "bars": "DISCONNECTED_FILLED_RECTANGLES",
+    "vertical_condition": "COMMON_BOTTOM_BASELINE",
+    "horizontal_condition": "COMMON_LEFT_BASELINE",
+    "output": "[orientation_code,bar_count,value_1,...]"
+  },
+  "encoded_program_bytes": 5263,
+  "explicit_upper_bound_bits": 42104,
+  "encoded_program_sha256": "567be36a04611c2314b24e5a9681eb10dc6cde9970c18932aa880c0633ea859f",
+  "learned_bits": 0,
+  "development_checks": "ONE_VERTICAL_AND_ONE_HORIZONTAL_DEVELOPMENT_MASK_ONLY",
+  "hard_nonclaims": [
+    "NO_TEXT_OR_OCR",
+    "NO_AXES_OR_LEGENDS",
+    "NO_GENERAL_CHART_UNDERSTANDING",
+    "5263_BYTES_IS_AN_EXPLICIT_UPPER_BOUND_NOT_MINIMUM"
+  ],
+  "promotion_authority": false
+}
