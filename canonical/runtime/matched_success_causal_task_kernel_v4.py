@@ -344,6 +344,14 @@ def generate_case(
         "class_atoms": list(CLASS_ATOMS[class_id]),
         "definition": definition,
     }
+    initial_state = {
+        "case_id": cid,
+        "mutable_namespace": _sha(
+            {"version": VERSION, "case_id": cid, "payload": _sha(payload)}
+        ),
+        "cross_case_memory": None,
+        "result_history": [],
+    }
     return {
         "case_id": cid,
         "seed": seed,
@@ -351,14 +359,8 @@ def generate_case(
         "class_id": class_id,
         "case_payload": payload,
         "case_payload_sha256": _sha(payload),
-        "case_initial_state": {
-            "case_id": cid,
-            "mutable_namespace": _sha(
-                {"version": VERSION, "case_id": cid, "payload": _sha(payload)}
-            ),
-            "cross_case_memory": None,
-            "result_history": [],
-        },
+        "case_initial_state": initial_state,
+        "case_initial_state_sha256": _sha(initial_state),
     }
 
 
