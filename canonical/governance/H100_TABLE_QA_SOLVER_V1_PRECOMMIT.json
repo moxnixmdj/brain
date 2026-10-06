@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TABLE_QA_SOLVER_V1_PRECOMMIT",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_V2_DEVELOPMENT_68_OF_100__BEFORE_V3_HOLDOUT_SELECTION",
+  "objective": "Evaluate deterministic zero-learned question+CSV reasoning on a fresh ChartQA holdout, isolating downstream table reasoning from raster perception.",
+  "development_only": {
+    "holdout": "H100_UNICHART_FRESH_CAPABILITY_HOLDOUT_V2",
+    "correct": 68,
+    "total": 100
+  },
+  "scored_input": [
+    "QUESTION_TEXT",
+    "PUBLIC_UNDERLYING_CSV_TABLE"
+  ],
+  "prohibited_scored_input": [
+    "CHART_IMAGE",
+    "GOLD_LABEL",
+    "LEARNED_MODEL",
+    "OCR_MODEL"
+  ],
+  "learned_state_bytes": 0,
+  "hard_nonclaims": [
+    "STRUCTURED_TABLE_INPUT_BYPASSES_RASTER_PERCEPTION",
+    "V2_SCORE_IS_DEVELOPMENT_ONLY",
+    "FRESH_V3_REQUIRED_FOR_EVIDENCE"
+  ],
+  "promotion_authority": false
+}
