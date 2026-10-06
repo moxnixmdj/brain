@@ -1,0 +1,149 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_CAUSAL_CEILING_FACTORIZATION_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__ROOT2_MATCHED_QUALITY_CEILING_FACTORED_THROUGH_EXISTING_ROOT3_C0_C1_C2_CAUSAL_INTERFACES__EXECUTABLE_FAIL_CLOSED_REDUCER_ADDED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Collapse the synthesis Root2 comparator-free ceiling problem onto the same C0/C1/C2 semantic interfaces already on the synthesis Root3 critical path, so semantic work is proved once rather than duplicated as an independent matched-quality proof.",
+  "authorities": {
+    "matched_quality_metric_contract": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json",
+      "git_blob_sha": "0886f7592875a5b750cdd401aa783351ab2f0854"
+    },
+    "dimension_scorers_and_reducer": {
+      "path": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json",
+      "git_blob_sha": "8206cb013b5cd0d653ffa70d1e867f8c4d4630b8"
+    },
+    "scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "causal_basis": {
+      "path": "canonical/governance/SYNTHESIS_TYPED_DOMAIN_CAUSAL_BASIS_COMPRESSION_20261005_V1.json",
+      "git_blob_sha": "2e6432cc122ce5b8a575fff11813a7be3734833c"
+    },
+    "prior_stronger_proof_falsification": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_STRONGER_PROOF_FALSIFICATION_20261005_V1.json",
+      "git_blob_sha": "5ed80b01e5d4b6ad768931e72d5a8edf22a86c63",
+      "preserved_truth": "EXISTING_TERMINAL_PASSES_AND_SCOPE_SUPERSET_DO_NOT_IMPLY_MATCHED_QUALITY_1__THE_CURRENT_UNIVERSAL_PERFORMANCE_PREMISE_REMAINS_UNPROVED"
+    },
+    "reducer": {
+      "path": "canonical/runtime/synthesis_causal_ceiling_reducer_v1.py",
+      "git_blob_sha": "2d7a01dc76af5dd775d6c96c00356f113ce47e99"
+    },
+    "tests": {
+      "path": "canonical/tests/test_synthesis_causal_ceiling_reducer_v1.py",
+      "git_blob_sha": "b31bc242ecea65eae0fbcb958f8df7a6738a7f1b"
+    }
+  },
+  "factorization": {
+    "claim_to_source_fidelity": {
+      "scorer": "MIN(SUPPORTED_MATERIAL_CLAIMS/TOTAL_MATERIAL_CLAIMS, CORRECTLY_PROVENANCED_MATERIAL_CLAIMS/TOTAL_MATERIAL_CLAIMS), EMPTY_TOTAL=1",
+      "sufficient_postconditions": [
+        "C0_ALL_MATERIAL_CLAIMS_HAVE_VALID_SUPPORT",
+        "C0_ALL_MATERIAL_CLAIMS_HAVE_NONEMPTY_PROVENANCE",
+        "C2_NO_NEW_MATERIAL_CLAIMS",
+        "C2_PROVENANCE_SURVIVES_TO_REALIZED_MATERIAL_CLAIMS"
+      ],
+      "derived_ceiling_if_scope_complete": 1
+    },
+    "uncertainty_and_disagreement_preservation": {
+      "scorer": "PRESERVED_REQUIRED_UNCERTAINTY_OR_DISAGREEMENT_UNITS/TOTAL_REQUIRED_UNCERTAINTY_OR_DISAGREEMENT_UNITS, EMPTY_TOTAL=1",
+      "sufficient_postconditions": [
+        "C0_ALL_REQUIRED_UNCERTAINTY_AND_DISAGREEMENT_UNITS_IDENTIFIED",
+        "C2_ALL_REQUIRED_UNCERTAINTY_AND_DISAGREEMENT_UNITS_REALIZED"
+      ],
+      "derived_ceiling_if_scope_complete": 1
+    },
+    "audience_adaptation": {
+      "scorer": "SATISFIED_EXPLICIT_AUDIENCE_REQUIREMENTS/TOTAL_EXPLICIT_AUDIENCE_REQUIREMENTS, EMPTY_TOTAL=1",
+      "sufficient_postconditions": [
+        "C1_ALL_EXPLICIT_AUDIENCE_REQUIREMENTS_ADMITTED_OR_SATISFIED",
+        "C2_ALL_EXPLICIT_AUDIENCE_REQUIREMENTS_REALIZED"
+      ],
+      "derived_ceiling_if_scope_complete": 1
+    },
+    "format_and_style_constraints": {
+      "scorer": "SATISFIED_EXPLICIT_FORMAT_STYLE_CONSTRAINTS/TOTAL_EXPLICIT_FORMAT_STYLE_CONSTRAINTS, EMPTY_TOTAL=1",
+      "sufficient_postconditions": [
+        "C2_ALL_EXPLICIT_FORMAT_STYLE_CONSTRAINTS_REALIZED"
+      ],
+      "derived_ceiling_if_scope_complete": 1
+    },
+    "compression_without_decision_relevant_loss": {
+      "scorer": "IF_OUTPUT_BUDGET_PASS_THEN_RETAINED_DECISION_RELEVANT_UNITS/TOTAL_REQUIRED_DECISION_RELEVANT_UNITS_ELSE_0, EMPTY_TOTAL=1_IF_BUDGET_PASS",
+      "sufficient_postconditions": [
+        "C1_ALL_REQUIRED_DECISION_RELEVANT_UNITS_SELECTED",
+        "C2_NO_SELECTED_DECISION_RELEVANT_UNIT_DROPPED",
+        "C2_OUTPUT_BUDGET_PASS"
+      ],
+      "derived_ceiling_if_scope_complete": 1
+    },
+    "unsupported_material_claim_hard_zero_guard": {
+      "sufficient_postconditions": [
+        "C0_ALL_MATERIAL_CLAIMS_HAVE_VALID_SUPPORT",
+        "C2_NO_NEW_MATERIAL_CLAIMS"
+      ],
+      "derived_unsupported_material_claim_count_if_scope_complete": 0
+    }
+  },
+  "theorem": {
+    "id": "C0_C1_C2_POSTCONDITION_CEILING_LIFT",
+    "premises": [
+      "THE_FROZEN_FIVE_DIMENSION_SCORERS_AND_MIN_AGGREGATOR_REMAIN_UNCHANGED",
+      "THE_CERTIFICATE_SCOPE_IS_COMPLETE_FOR_ALL_ADMISSIBLE_TARGET_INPUTS",
+      "THE_CERTIFICATE_IS_INDEPENDENT_OR_OBJECTIVE",
+      "EVERY_LISTED_C0_C1_C2_POSTCONDITION_IS_PROVED_ON_THE_ACTUAL_CREDITED_BRAIN_ROUTE"
+    ],
+    "proof": [
+      "FOR_CLAIM_TO_SOURCE_FIDELITY__C0_SUPPORT_AND_PROVENANCE_PLUS_C2_NO_NEW_CLAIMS_AND_PROVENANCE_PRESERVATION_FORCE_BOTH_NORMALIZED_RATIOS_TO_1.",
+      "FOR_UNCERTAINTY_DISAGREEMENT__C0_COMPLETE_IDENTIFICATION_PLUS_C2_COMPLETE_REALIZATION_FORCE_PRESERVED_REQUIRED_UNITS_OVER_TOTAL_REQUIRED_UNITS_TO_1.",
+      "FOR_AUDIENCE_ADAPTATION__C1_COMPLETE_AUDIENCE_REQUIREMENT_ADMISSION_OR_SATISFACTION_PLUS_C2_REALIZATION_FORCE_SATISFIED_EXPLICIT_REQUIREMENTS_OVER_TOTAL_EXPLICIT_REQUIREMENTS_TO_1.",
+      "FOR_FORMAT_STYLE__C2_COMPLETE_REALIZATION_FORCES_SATISFIED_EXPLICIT_CONSTRAINTS_OVER_TOTAL_EXPLICIT_CONSTRAINTS_TO_1.",
+      "FOR_COMPRESSION__C1_COMPLETE_DECISION_RELEVANT_SELECTION_PLUS_C2_NO_DROP_AND_BUDGET_PASS_FORCE_RETAINED_REQUIRED_DECISION_RELEVANT_UNITS_OVER_TOTAL_REQUIRED_UNITS_TO_1.",
+      "C0_COMPLETE_SUPPORT_PLUS_C2_NO_NEW_MATERIAL_CLAIMS_FORCE_UNSUPPORTED_MATERIAL_CLAIM_COUNT_TO_0.",
+      "THE_FROZEN_CASE_LEVEL_AGGREGATOR_IS_MIN_OF_THE_FIVE_COMPONENTS_UNLESS_UNSUPPORTED_CLAIMS_EXIST__THEREFORE_MATCHED_QUALITY_EQUALS_1.",
+      "THE_FROZEN_MATCHED_QUALITY_DOMAIN_IS_CLOSED_INTERVAL_0_1__THEREFORE_ANY_ADMISSIBLE_OPUS55_MATCHED_QUALITY_IS_LESS_THAN_OR_EQUAL_TO_1__SO_BRAIN_MATCHED_QUALITY_1_IS_NONINFERIOR_WITHOUT_EXECUTING_THE_COMPARATOR."
+    ],
+    "conclusion": "SCOPE_COMPLETE_INDEPENDENT_PROOF_OF_THE_LISTED_C0_C1_C2_POSTCONDITIONS_IS_SUFFICIENT_TO_CLOSE_metric:matched_quality_AND_matched_quality_noninferiority_AT_THE_GLOBAL_CEILING_1_WITH_ZERO_OPUS_COMPARATOR_EXECUTION."
+  },
+  "critical_path_breakthrough": {
+    "old_shape": "ROOT2_REQUIRES_A_SEPARATE_WHOLE_DOMAIN_QUALITY_PROOF_OR_OPUS_COMPARATOR_WHILE_ROOT3_SEPARATELY_WORKS_C0_C1_C2",
+    "new_shape": "THE_STRONGER_ROOT2_PROOF_IS_A_DETERMINISTIC_LIFT_OF_THE_SAME_C0_C1_C2_POSTCONDITIONS_NEEDED_BY_ROOT3",
+    "dedupe_effect": [
+      "DO_NOT_BUILD_A_SEPARATE_SYNTHESIS_QUALITY_SEMANTIC_ORACLE_FOR_THE_CEILING_ROUTE",
+      "DO_NOT_ACQUIRE_OPUS_COMPARATOR_CAPACITY_BEFORE_THE_SHARED_C0_C1_C2_POSTCONDITION_ROUTE_IS_FALSIFIED",
+      "WHEN_A_C0_C1_OR_C2_SUBDOMAIN_IS INDEPENDENTLY CLOSED__REUSE_THE_SAME_RECEIPT_IN_BOTH_ROOT3_SCOPE_COMPLETENESS_AND_ROOT2_QUALITY_CEILING_ACCOUNTING"
+    ],
+    "remaining_semantic_bottleneck": "PROVE_THE_LISTED_C0_C1_C2_POSTCONDITIONS_SCOPE_COMPLETELY_ON_THE_ACTUAL_BRAIN_ROUTE__CURRENT_PARTIAL_C0_C1_C2_IMPLEMENTATIONS_DO_NOT_YET_DO_THIS"
+  },
+  "reducer_contract": {
+    "role": "PURE_LOGICAL_COMPOSITION_ONLY__NO_SEMANTIC_PREMISE_DISCOVERY",
+    "full_cut_result": "CEILING_PROVED_WITH_ALL_FIVE_COMPONENTS_1_UNSUPPORTED_COUNT_0_MATCHED_QUALITY_1",
+    "single_missing_premise_result": "OPEN",
+    "invalid_unknown_DUPLICATE_UNSCOPED_OR_NONINDEPENDENT_CERTIFICATE_RESULT": "FAIL_CLOSED",
+    "credit": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_REQUIRED_C0_C1_C2_POSTCONDITIONS_ARE_CURRENTLY_PROVED_SCOPE_COMPLETELY",
+    "NO_CLAIM_SYNTHESIS_MATCHED_QUALITY_IS_CURRENTLY_CLOSED",
+    "NO_CLAIM_OPUS_MATCHED_QUALITY_IS_KNOWN",
+    "NO_RETROACTIVE_REINTERPRETATION_OF_EXISTING_TERMINAL_SYNTHESIS_RESULTS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

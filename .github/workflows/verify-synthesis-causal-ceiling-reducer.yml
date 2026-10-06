@@ -1,0 +1,37 @@
+name: Verify synthesis causal ceiling reducer
+
+on:
+  push:
+    branches:
+      - "breakthrough/synthesis-causal-ceiling-factorization-20261005-sol"
+    paths:
+      - "canonical/runtime/synthesis_causal_ceiling_reducer_v1.py"
+      - "canonical/tests/test_synthesis_causal_ceiling_reducer_v1.py"
+      - "canonical/governance/SYNTHESIS_CAUSAL_CEILING_FACTORIZATION_BREAKTHROUGH_20261005_V1.json"
+      - "canonical/verification/SYNTHESIS_CAUSAL_CEILING_FACTORIZATION_WOLFRAM_VERIFICATION_20261005_V1.json"
+      - ".github/workflows/verify-synthesis-causal-ceiling-reducer.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/synthesis_causal_ceiling_reducer_v1.py"
+      - "canonical/tests/test_synthesis_causal_ceiling_reducer_v1.py"
+      - "canonical/governance/SYNTHESIS_CAUSAL_CEILING_FACTORIZATION_BREAKTHROUGH_20261005_V1.json"
+      - "canonical/verification/SYNTHESIS_CAUSAL_CEILING_FACTORIZATION_WOLFRAM_VERIFICATION_20261005_V1.json"
+      - ".github/workflows/verify-synthesis-causal-ceiling-reducer.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile reducer
+        run: python -m py_compile canonical/runtime/synthesis_causal_ceiling_reducer_v1.py canonical/tests/test_synthesis_causal_ceiling_reducer_v1.py
+      - name: Run fail-closed regressions
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_synthesis_causal_ceiling_reducer_v1
