@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_SUCCESS_COMPONENT_BOUND_V4_SPRITE_REPLAY_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BRANCH_BYTE_REPLAY_PASS_9_OF_9__COMPILER_MECHANICS_ONLY__ZERO_SCOPE_CREDIT",
+  "source_brain": {
+    "pull_request": 2435,
+    "branch": "feature/matched-success-component-bound-v4-20261006",
+    "exact_blobs": {
+      "canonical/runtime/matched_success_component_bound_v4.py": "0977b01f585b343b74125926fe0d40e1fb6c2323",
+      "canonical/tests/test_matched_success_component_bound_v4.py": "e7eab26b2387d9383dc5876e96ba9daf8295cebc"
+    }
+  },
+  "independent_runner": {
+    "provider": "Sprites",
+    "sprite": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "isolated_workdir": "/tmp/v4",
+    "execution": "DIRECT_PYTHON_TEST_FUNCTION_REPLAY_BECAUSE_PYTEST_MODULE_NOT_INSTALLED",
+    "result": "PASS_9_OF_9"
+  },
+  "verified": [
+    "EXACT_BRANCH_RUNTIME_BYTES_REPLAYED",
+    "EXACT_BRANCH_TEST_BYTES_REPLAYED",
+    "VALID_COMPONENT_BOUND_BUNDLE_PASSES_CANDIDATE_COMPILER",
+    "MISSING_ACTUAL_COMPONENT_FAILS_CLOSED",
+    "FAKE_FROZEN_COMPONENT_SCORER_IDENTITY_FAILS_CLOSED",
+    "STANDALONE_COMPONENT_SUCCESS_WITHOUT_CAUSAL_BRIDGE_FLIP_FAILS_CLOSED",
+    "SAME_SEMANTIC_ABLATION_FAILS_CLOSED",
+    "V3_ENDPOINT_MUST_BIND_ACTUAL_FIRST_COMPONENT_PROJECTION",
+    "MISSING_ATOM_SPECIFIC_BRIDGE_FAILS_CLOSED",
+    "COMPONENT_RECEIPT_SUBSTITUTION_FAILS_CLOSED",
+    "BASE_COMPONENT_SCORER_FAILURE_FAILS_CLOSED"
+  ],
+  "github_actions_note": "PR_2435_HOSTED_ACTION_RUN_37432707848_FAILED_WITH_NO_RETRIEVABLE_JOB_LOG_BLOB_AND_IS_TREATED_AS_INFRASTRUCTURE_NON_EVIDENCE",
+  "hard_nonclaims": [
+    "NO_REAL_MATCHED_TERMINAL_CASES_EXECUTED",
+    "NO_CURRENT_COMPONENT_RECEIPT_BUNDLE_PROVES_THE_TEN_NONLEGACY_ATOMS",
+    "NO_SCOPE_COMPILER_CLOSURE",
+    "NO_REAL_HARNESS_ISOLATION_RECEIPTS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
