@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REFERENCE_MACHINE_U1_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_CAPABILITY_MEASUREMENT",
+  "machine_id": "H100_U1_STACK_VM",
+  "opcodes": [
+    "HALT",
+    "PUSH",
+    "LOAD",
+    "STORE",
+    "ADD",
+    "SUB",
+    "MUL",
+    "FDIV",
+    "MOD",
+    "EQ",
+    "LT",
+    "JZ",
+    "JMP",
+    "DUP",
+    "SWAP",
+    "READ",
+    "WRITE"
+  ],
+  "encoding": "OPCODE_BYTE_PLUS_SLEB128_IMMEDIATE_WHERE_REQUIRED",
+  "input": "INTEGER_VECTOR",
+  "output": "INTEGER_VECTOR",
+  "memory": "INTEGER_MAP",
+  "rule": "TARGET_ADAPTED_PROGRAM_BYTES_COUNT__U1_IMPLEMENTATION_REPORTED_SEPARATELY",
+  "promotion_authority": false
+}
