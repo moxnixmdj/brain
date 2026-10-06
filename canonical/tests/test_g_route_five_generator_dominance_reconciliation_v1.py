@@ -34,6 +34,7 @@ def test_g_reconciliation_binds_exact_five_structural_generators():
     assert all(x["state"]=="VERIFIED_OWNED_EQUAL_OR_BETTER" for x in rows)
     assert d["k6_role"]["preproof_generic_implementation_generator"] is False
     assert d["k6_role"]["owned_operator"] is True
+    assert d["k6_role"]["certificate_form_logically_mandatory"] is False
 
 def test_g_route_remains_fail_closed_on_transfer_and_generation():
     d=load(GOV)
@@ -41,7 +42,7 @@ def test_g_route_remains_fail_closed_on_transfer_and_generation():
     assert residual=={
         "G_TARGET_GENERATION_COMPLETENESS",
         "G_DOMINANCE_PRESERVING_TRANSFER",
-        "G_K6_SELECTED_SEMANTIC_BINDINGS",
+        "G_SEMANTIC_CERTIFICATE_CLOSURE",
         "G_RESOURCE_SAFETY_AUTHORITY_TRANSFER",
         "G_L2_DONOR_INDEPENDENT_EFFECT_TOTALITY",
     }
@@ -49,6 +50,8 @@ def test_g_route_remains_fail_closed_on_transfer_and_generation():
     assert d["promotion_authority"] is False
     assert d["execution_authority"] is False
     assert d["fresh_reality_authority"] is False
+    assert any("ROOT3_EFFECT_TOTALITY_FALSIFICATION" in x for x in d["next_tournament"])
+    assert any("K6_ONLY_IF_NONDOMINATED" in x for x in d["next_tournament"])
 
 def test_zero_credit_from_reconciliation():
     d=load(GOV)
