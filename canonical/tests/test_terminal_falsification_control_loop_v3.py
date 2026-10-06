@@ -73,6 +73,14 @@ def overlay():
             "path": "canonical/verification/TERMINAL_THEOREM_MINIMALITY_FALSIFIER_INDEPENDENT_VERIFICATION_20261006_V1.json",
             "git_blob_sha": "38486f2002c0d025fac73c36c43f86cdd2fee24d",
         },
+        "stochastic_truth_repair": {
+            "path": "canonical/governance/OUTCOME_FRONTIER_STOCHASTIC_RELIABILITY_COUNTERMODEL_V1.json",
+            "git_blob_sha": "14b4fad10884538ad2b5d73a9c1a6787aae965d5",
+        },
+        "stochastic_independent_verification": {
+            "path": "canonical/verification/OUTCOME_FRONTIER_STOCHASTIC_COUNTERMODEL_INDEPENDENT_VERIFICATION_20261006_V1.json",
+            "git_blob_sha": "3b4c5e7bc9d1fc2b7f7a3aca22c5de6ff7ea65de",
+        },
         "falsified_claim": {
             "id": OLD,
             "replacement_status": "FALSIFIED",
@@ -98,6 +106,12 @@ def overlay():
                 "DONOR_INDEPENDENT_BRAIN_OWNERSHIP",
             ],
             "first_unresolved_lemma": LEMMA,
+            "first_lemma_refinements": [
+                "TERMINAL_OUTCOME_SEMANTICS_MUST_BE_DISTRIBUTION_OR_RELIABILITY_BEARING_WHERE_STOCHASTIC_OUTCOMES_ARE_TERMINAL_RELEVANT",
+                "POINT_SUPPORT_OR_BEST_REACHABLE_OUTCOME_IS_INSUFFICIENT",
+                "ADMISSIBLE_TERMINAL_EVALUATOR_SET_OR_PARTIAL_ORDER_MUST_DECIDE_RELEVANT_TRADEOFFS",
+                "PARETO_NONSCALAR_TRADEOFFS_MUST_NOT_COLLAPSE_PROBABILITY_MASS_TO_SUPPORT",
+            ],
         },
     }
 
@@ -107,6 +121,7 @@ def test_verified_truth_repair_replaces_old_first_claim():
     assert out["status"].startswith("PASS__")
     assert out["first_universe_claim"] == NEW
     assert out["first_unresolved_lemma"] == LEMMA
+    assert out["first_subproblem"] == "DISTRIBUTION_AWARE_EQUAL_OR_BETTER_ORDERING"
     assert out["ordered_claim_ids"][0] == NEW
     assert OLD in out["dead_claim_ids"]
     assert OLD not in out["unrepaired_dead_claim_ids"]
@@ -166,3 +181,27 @@ def test_stable_parallel_lane_remains_after_rerank():
     assert out["ordered_claim_ids"].index(NEW) < out["ordered_claim_ids"].index(
         "STABLE_SIDE_LANE"
     )
+
+
+def test_missing_stochastic_truth_repair_fails_closed():
+    x = overlay()
+    x["stochastic_truth_repair"]["git_blob_sha"] = "e" * 40
+    try:
+        compile_control_loop_v3(state(), x)
+    except ValueError as exc:
+        assert "stochastic_truth_repair_BINDING_MISMATCH" in str(exc)
+    else:
+        raise AssertionError("stochastic truth repair drift accepted")
+
+
+def test_point_support_only_first_lemma_fails_closed():
+    x = overlay()
+    x["successor_claim"]["first_lemma_refinements"] = [
+        "POINT_SUPPORT_OR_BEST_REACHABLE_OUTCOME_IS_INSUFFICIENT"
+    ]
+    try:
+        compile_control_loop_v3(state(), x)
+    except ValueError as exc:
+        assert "FIRST_LEMMA_REFINEMENTS_MISMATCH" in str(exc)
+    else:
+        raise AssertionError("underbound first lemma accepted")
