@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_H100_NO_STANDALONE_LEARNED_BIT_LOWER_BOUND_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__3_OF_3__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_NO_STANDALONE_LEARNED_BIT_LOWER_BOUND_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_no_standalone_learned_bit_lower_bound_v1.py",
+    "tests": "canonical/tests/test_h100_no_standalone_learned_bit_lower_bound_v1.py"
+  },
+  "verified": {
+    "no_positive_learned_only_cardinality_bound_without_code_budget": true,
+    "positive_learned_bound_reappears_under_fixed_code_budget": true,
+    "total_capability_bits_remain_nonzero": true
+  },
+  "deduction": "A_MEANINGFUL_LOWER_BOUND_MUST_APPLY_TO_TOTAL_PERSISTENT_CAPABILITY_DESCRIPTION_OR_CONDITION_ON_A_DETERMINISTIC_CODE_BUDGET__LEARNED_BITS_ALONE_ARE_NOT_IDENTIFIABLE_FROM_CLASS_CARDINALITY",
+  "promotion_authority": false
+}
