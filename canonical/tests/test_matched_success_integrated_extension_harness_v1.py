@@ -13,6 +13,7 @@ from canonical.runtime.matched_success_integrated_extension_harness_v1 import sc
 class RehearsalAgent:
     def __init__(self):
         self.memory = None
+        self.last_delegation_initial = None
 
     def __call__(self, kind, public, context):
         if "remember_token_sha256" in context:
@@ -24,17 +25,12 @@ class RehearsalAgent:
             payload = tool_candidate.next_action(public)
         elif kind == "delegation_v2_initial":
             payload = delegation_candidate.solve_initial(public)
+            self.last_delegation_initial = payload
         elif kind == "delegation_v2_revised":
+            assert self.last_delegation_initial is not None
             payload = delegation_candidate.solve_after_receipt(
                 public,
-                context["previous_candidate_sha256"]
-                and {},
-            )
-            # solve_after_receipt requires the previous plan, not its digest.
-            # Recompute the deterministic initial plan from the case-visible task.
-            payload = delegation_candidate.solve_after_receipt(
-                public,
-                delegation_candidate.solve_initial({"task": public["task"]}),
+                self.last_delegation_initial,
             )
         elif kind == "delegation_v3":
             payload = delegation_candidate._solve(public["task"])
@@ -122,3 +118,24 @@ def test_rollback_class_requires_checkpoint_restore():
     result = score_integrated_case(case, broken)
     assert result["pass"] is False
     assert "ROLLBACK_CHECKPOINT_MISMATCH" in result["integration_errors"]
+
+
+def test_all_ten_integrated_atoms_have_a_valid_rehearsal_path():
+    atoms = [
+        "dimension:multi_step_planning_with_at_least_three_distinct_tool_or_action_types",
+        "dimension:long_horizon_state_retention",
+        "dimension:minimal_oversight_completion",
+        "dimension:multi_constraint_instruction_compliance",
+        "dimension:requirement_change",
+        "dimension:research_plus_tool_use_plus_artifact_creation",
+        "dimension:browser_or_computer_action_plus_memory_plus_recovery",
+        "dimension:coding_plus_debugging_plus_tool_discovery",
+        "dimension:delegation_plus_evidence_synthesis_plus_artifact_production",
+        "dimension:cross_capability_state_handoff_and_rollback",
+    ]
+    failures = {}
+    for atom in atoms:
+        result = score_integrated_case(_case(atom), RehearsalAgent())
+        if result["pass"] is not True:
+            failures[atom] = result
+    assert failures == {}
