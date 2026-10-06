@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_H100_A_G0_FROZEN_GENERIC_SUBSTRATE_V2",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_FRESH_CROSS_CAPABILITY_SUITE_GENERATION__SUPERSEDES_V1",
+  "supersedes": "canonical/governance/H100_A_G0_FROZEN_GENERIC_SUBSTRATE_V1.json",
+  "target_adapted_persistent_bits": 0,
+  "components": {
+    "registry": {
+      "path": "canonical/runtime/h100_verified_capability_registry_v8.py",
+      "git_blob_sha": "a4f952fbf054dbfe4f9617da837b3bf5c3c2e3ab"
+    },
+    "planner": {
+      "path": "canonical/runtime/h100_typed_capability_planner_v1.py",
+      "git_blob_sha": "88dc27c45c985105485519d158ecee4b9a8ad7b4"
+    },
+    "tools": {
+      "path": "canonical/runtime/h100_verified_effect_tool_registry_v1.py",
+      "git_blob_sha": "1e711b2d0c826227c313763d3b710ce06d11537e"
+    },
+    "memory": {
+      "path": "canonical/runtime/h100_zero_learned_event_memory_v1.py",
+      "git_blob_sha": "5d8653e1965c0d721ba2ec036aacae0f3e322bb4"
+    },
+    "lexical": {
+      "path": "canonical/runtime/h100_jit_lexical_orchestrator_v1.py",
+      "git_blob_sha": "6744e50a14ed3aeedb81ea8a25da0d0cba0c0145"
+    },
+    "vision": {
+      "path": "canonical/runtime/h100_generic_bar_geometry_v0.py",
+      "git_blob_sha": "ae8a3e5309bf18fc366f63d256f2f5e5cd038380"
+    },
+    "complete_unary_search": {
+      "path": "canonical/runtime/h100_complete_unary_chain_search_v1.py",
+      "git_blob_sha": "e30773177ee1c374acbe5fdfcacdf25004e6cc81"
+    },
+    "zero_learned_transfer": {
+      "path": "canonical/runtime/h100_zero_learned_transfer_v1.py",
+      "git_blob_sha": "1bf0ebd74e9d413a9301031d33e619b397484e3c"
+    },
+    "expression_search": {
+      "path": "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py",
+      "git_blob_sha": "14e8f11c73e5fc0439016dbcd5b5a5a8d2c46490"
+    }
+  },
+  "allowed_runtime_information": [
+    "TASK_INPUT",
+    "TASK_CONTEXT",
+    "DECLARED_TYPED_TOOL_CONTRACTS",
+    "JIT_LEXICAL_SOURCE_RECORDS_WHEN_SUPPLIED_BY_TASK",
+    "NONLEARNED_EVENT_LOGS_AND_SNAPSHOTS",
+    "RAW_IMAGE_PIXELS"
+  ],
+  "allowed_generic_search": [
+    "VERIFIED_REGISTRY_LOOKUP",
+    "COMPLETE_UNARY_CHAIN_SEARCH_DEPTH_LE_4",
+    "EXPRESSION_TREE_SEARCH_FROZEN_BOUNDS"
+  ],
+  "forbidden_after_freeze": [
+    "EDIT_G0_COMPONENT_CODE_BEFORE_SCORING_FRESH_SUITE",
+    "ADD_SUITE_SPECIFIC_CONSTANTS_TO_G0",
+    "USE_FRESH_SUITE_LABELS_TO_SELECT_G0_PARAMETERS",
+    "CALL_EXTERNAL_LEARNED_MODELS"
+  ],
+  "purpose": "STRONGEST_PRE_SUITE_ZERO_TARGET_ADAPTED_SUBSTRATE_FOR_FALSIFICATION_TOURNAMENT",
+  "promotion_authority": false
+}
