@@ -33,8 +33,34 @@ def test_false_completion_is_denied():
 def test_gateway_does_not_return_raw_broker():
     raw=encode_capsule(cap())
     def runner(_):
-        return {"status":"CHILD_EXITED","returncode":0,"policy_sha256":"p","broker_payload":raw,"broker_bytes":len(raw),"broker_sha256":"b"*64}
+        return {"status":"CHILD_EXITED","returncode":0,"policy_sha256":"p","broker_payload":raw,"broker_bytes":len(raw),"broker_sha256":"b"*64,"material_effects_committed":0}
     out=run({},confined_runner=runner)
     assert out["emission_count"]==1
     assert out["raw_broker_exposed"] is False
     assert "broker_payload" not in out
+
+
+def test_timeout_drops_even_valid_complete_capsule():
+    raw=encode_capsule(cap())
+    def runner(_):
+        return {"status":"WALLCLOCK_LIMIT_EXCEEDED","returncode":9,"broker_payload":raw,"material_effects_committed":0}
+    out=run({},confined_runner=runner)
+    assert out["status"]=="FAIL_CLOSED"
+    assert out["emissions"]==[]
+    assert out["raw_broker_exposed"] is False
+
+def test_nonzero_exit_drops_even_valid_complete_capsule():
+    raw=encode_capsule(cap())
+    def runner(_):
+        return {"status":"CHILD_EXITED","returncode":7,"broker_payload":raw,"material_effects_committed":0}
+    out=run({},confined_runner=runner)
+    assert out["status"]=="FAIL_CLOSED"
+    assert out["emissions"]==[]
+
+def test_nonzero_material_effect_state_drops_capsules():
+    raw=encode_capsule(cap())
+    def runner(_):
+        return {"status":"CHILD_EXITED","returncode":0,"broker_payload":raw,"material_effects_committed":1}
+    out=run({},confined_runner=runner)
+    assert out["status"]=="FAIL_CLOSED"
+    assert out["emissions"]==[]
