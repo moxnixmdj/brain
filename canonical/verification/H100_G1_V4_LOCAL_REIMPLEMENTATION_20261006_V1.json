@@ -1,0 +1,20 @@
+{
+  "s": "H100_G1_V4_LOCAL_V1",
+  "status": "0_OF_8__LOCAL_REIMPLEMENTATION",
+  "freeze": "canonical/governance/H100_CROSSCAP_G1_FREEZE_V1.json",
+  "suite": "canonical/governance/H100_ADVERSARIAL_CROSSCAP_SUITE_V4_PRECOMMIT.json",
+  "failures": {
+    "R4": "ALGORITHM_PRIMITIVE_PRODUCT_EQ",
+    "C4": "SEARCH_GRAMMAR_PIECEWISE",
+    "L4": "BOUNDED_GRAPH_DEPTH",
+    "V4": "PIXEL_ONLY_LATENT_WORLD_AMBIGUITY_K2",
+    "T4": "TOOL_OBJECTIVE_SELECTION",
+    "P4": "COST_OPTIMIZATION",
+    "M4": "HISTORY_REDUCER",
+    "N4": "MULTI_BASIS_NUMERIC"
+  },
+  "n4_best_single_basis_nrmse": 0.24524145535598513,
+  "p4_g1_cost": 20,
+  "v4_visible_components": 1,
+  "independent_carrier": false
+}
