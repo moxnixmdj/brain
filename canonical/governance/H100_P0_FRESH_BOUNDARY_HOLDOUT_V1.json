@@ -1,0 +1,229 @@
+{
+  "schema": "PROJECT_BRAIN_H100_P0_FRESH_BOUNDARY_HOLDOUT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_SUBSTRATE_HOLDOUT_EXECUTION",
+  "tasks": {
+    "LOGIC": {
+      "facts": [
+        "P",
+        "Q",
+        "S"
+      ],
+      "rules": [
+        {
+          "all": [
+            "P",
+            "Q"
+          ],
+          "then": "R"
+        },
+        {
+          "all": [
+            "R",
+            "S"
+          ],
+          "then": "GOAL"
+        }
+      ],
+      "goal": "GOAL",
+      "gold": true
+    },
+    "STRING": {
+      "examples": [
+        [
+          "cde",
+          "abc"
+        ],
+        [
+          "mno",
+          "klm"
+        ],
+        [
+          "xyz",
+          "vwx"
+        ]
+      ],
+      "query": "hij",
+      "gold": "fgh"
+    },
+    "NUMERIC": {
+      "examples": [
+        [
+          -2,
+          -5
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          2,
+          -5
+        ]
+      ],
+      "query": 4,
+      "gold": -29
+    },
+    "VISION": {
+      "grid": [
+        "...............",
+        "..##...##...##.",
+        "..##...##...##.",
+        "..###..###..##.",
+        "..##...##...##.",
+        "..##...##...##."
+      ],
+      "min_height": 2,
+      "gold_count": 3
+    },
+    "TOOL": {
+      "required_effect": "SEND",
+      "required_fields": [
+        "body"
+      ],
+      "objective": {
+        "field": "reliability",
+        "direction": "MAX"
+      },
+      "tools": [
+        {
+          "id": "A",
+          "effects": [
+            "SEND"
+          ],
+          "fields": [
+            "body"
+          ],
+          "reliability": 7
+        },
+        {
+          "id": "B",
+          "effects": [
+            "SEND"
+          ],
+          "fields": [
+            "body"
+          ],
+          "reliability": 9
+        },
+        {
+          "id": "C",
+          "effects": [
+            "STORE"
+          ],
+          "fields": [
+            "body"
+          ],
+          "reliability": 10
+        }
+      ],
+      "gold": "B"
+    },
+    "PLAN": {
+      "initial": [
+        "RAW"
+      ],
+      "goal": "DONE",
+      "operators": [
+        {
+          "id": "CHEAP_PREP",
+          "preconditions": [
+            "RAW"
+          ],
+          "add": [
+            "READY"
+          ],
+          "delete": [
+            "RAW"
+          ],
+          "cost": 1
+        },
+        {
+          "id": "EXPENSIVE_DIRECT",
+          "preconditions": [
+            "RAW"
+          ],
+          "add": [
+            "DONE"
+          ],
+          "delete": [
+            "RAW"
+          ],
+          "cost": 9
+        },
+        {
+          "id": "FINISH",
+          "preconditions": [
+            "READY"
+          ],
+          "add": [
+            "DONE"
+          ],
+          "delete": [
+            "READY"
+          ],
+          "cost": 2
+        }
+      ],
+      "gold": [
+        "CHEAP_PREP",
+        "FINISH"
+      ]
+    },
+    "MEMORY": {
+      "events": [
+        {
+          "op": "SET",
+          "key": "x",
+          "value": 4
+        },
+        {
+          "op": "MUL",
+          "key": "x",
+          "value": 5
+        },
+        {
+          "op": "ADD",
+          "key": "x",
+          "value": -3
+        }
+      ],
+      "query_key": "x",
+      "gold": 17
+    },
+    "LEXICAL": {
+      "cue": "zeta",
+      "relations": [
+        [
+          "zeta",
+          "INPUT"
+        ],
+        [
+          "zeta",
+          "TARGET"
+        ]
+      ],
+      "context": "USED_AS_INPUT",
+      "gold": "INPUT"
+    },
+    "INFORMATION": {
+      "observations": [
+        "same",
+        "same",
+        "same"
+      ],
+      "answers": [
+        "L",
+        "M",
+        "R"
+      ],
+      "gold_status": "ABSTAIN",
+      "residual_worlds": 3
+    }
+  },
+  "promotion_authority": false
+}
