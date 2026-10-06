@@ -243,3 +243,28 @@ def test_provenance_and_value_are_both_load_bearing_in_entry_binding():
         "provenance_sha256": "f" * 64,
     }
     assert sha256(altered) != old
+
+
+def test_content_address_identity_fields_require_sha256_hex():
+    try:
+        empty_state(case_id="CASE-X", base_context_sha256="not-a-sha")
+    except StateBusError as exc:
+        assert str(exc) == "BASE_CONTEXT_SHA256_INVALID"
+    else:
+        raise AssertionError("invalid base context accepted")
+
+    s0 = base()
+    try:
+        write(
+            s0,
+            key="x",
+            value={"x": 1},
+            semantic_type="X",
+            producer_stage="stage",
+            provenance_sha256="not-a-sha",
+            expected_state_sha256=s0["state_sha256"],
+        )
+    except StateBusError as exc:
+        assert str(exc) == "PROVENANCE_SHA256_INVALID"
+    else:
+        raise AssertionError("invalid provenance accepted")
