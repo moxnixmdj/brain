@@ -84,8 +84,28 @@ def _successors(claims: Sequence[Mapping[str, Any]]) -> Dict[str, List[Mapping[s
 def _live_successor_exists(
     predecessor: str,
     successor_map: Mapping[str, Sequence[Mapping[str, Any]]],
+    *,
+    _seen: set[str] | None = None,
 ) -> bool:
-    return any(c.get("status") in LIVE_STATUSES for c in successor_map.get(predecessor, ()))
+    # Repair lineage is transitive. If OLD is falsified, MID repairs OLD, and
+    # MID is later falsified but NEW repairs MID, OLD must remain repaired by
+    # the live descendant. Otherwise every iterative repair would resurrect
+    # all prior dead routes as terminal blockers.
+    seen = set(_seen or ())
+    if predecessor in seen:
+        return False
+    seen.add(predecessor)
+    for claim in successor_map.get(predecessor, ()):
+        status = claim.get("status")
+        if status in LIVE_STATUSES:
+            return True
+        if status == "FALSIFIED":
+            cid = claim.get("id")
+            if isinstance(cid, str) and cid and _live_successor_exists(
+                cid, successor_map, _seen=seen
+            ):
+                return True
+    return False
 
 def _dependency_blockers(
     claim: Mapping[str, Any],
