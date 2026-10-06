@@ -22,8 +22,9 @@ class V7EvaluatorCertificationTrichotomyTests(unittest.TestCase):
             "brain_law": {"success": 1.0},
             "evaluators": [SUCCESS],
         })
-        self.assertTrue(result["certified"])
+        self.assertTrue(result["conditional_noninferiority"])
         self.assertEqual(result["route"], "E_EXPLICIT_COMPLETE")
+        self.assertFalse(result["semantic_premise_verified_by_this_runtime"])
 
     def test_explicit_route_rejects_inferior_law(self):
         result = certify({
@@ -33,7 +34,7 @@ class V7EvaluatorCertificationTrichotomyTests(unittest.TestCase):
             "brain_law": {"failure": 0.4, "success": 0.6},
             "evaluators": [SUCCESS],
         })
-        self.assertFalse(result["certified"])
+        self.assertFalse(result["conditional_noninferiority"])
 
     def test_explicit_route_requires_content_addressed_semantic_receipt(self):
         with self.assertRaises(EvaluatorCertificationError):
@@ -63,8 +64,9 @@ class V7EvaluatorCertificationTrichotomyTests(unittest.TestCase):
                 ],
             },
         })
-        self.assertTrue(result["certified"])
+        self.assertTrue(result["conditional_noninferiority"])
         self.assertEqual(result["route"], "M_HIDDEN_RESTRICTED_MONOTONE")
+        self.assertFalse(result["semantic_premise_verified_by_this_runtime"])
 
     def test_monotone_route_without_proof_receipt_fails_closed(self):
         with self.assertRaises(EvaluatorCertificationError):
@@ -80,8 +82,9 @@ class V7EvaluatorCertificationTrichotomyTests(unittest.TestCase):
             "target_distribution_exact": {"a": "1/3", "b": "2/3"},
             "brain_distribution_exact": {"a": "1/3", "b": "2/3"},
         })
-        self.assertTrue(result["certified"])
+        self.assertTrue(result["conditional_noninferiority"])
         self.assertEqual(result["route"], "U_ARBITRARY_OR_UNCLASSIFIED_HIDDEN")
+        self.assertTrue(result["semantic_premise_verified_by_this_runtime"])
 
     def test_arbitrary_hidden_mass_shift_is_rejected(self):
         result = certify({
@@ -89,7 +92,7 @@ class V7EvaluatorCertificationTrichotomyTests(unittest.TestCase):
             "target_distribution_exact": {"a": "1/2", "b": "1/2"},
             "brain_distribution_exact": {"a": "3/4", "b": "1/4"},
         })
-        self.assertFalse(result["certified"])
+        self.assertFalse(result["conditional_noninferiority"])
 
     def test_auto_mode_is_conservative_equality_fallback(self):
         result = certify({
@@ -97,7 +100,7 @@ class V7EvaluatorCertificationTrichotomyTests(unittest.TestCase):
             "target_distribution_exact": {"a": 1},
             "brain_distribution_exact": {"a": 1},
         })
-        self.assertTrue(result["certified"])
+        self.assertTrue(result["conditional_noninferiority"])
         self.assertEqual(result["route"], "U_ARBITRARY_OR_UNCLASSIFIED_HIDDEN")
 
     def test_auto_mode_does_not_guess_easier_route(self):
