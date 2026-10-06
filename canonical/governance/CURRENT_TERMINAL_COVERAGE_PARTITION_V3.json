@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_COVERAGE_PARTITION_V3",
+  "date": "2026-10-06",
+  "status": "ACTIVE_CANDIDATE_PROJECTION__30_CURRENT__TWO_VERIFIED_NONINDEPENDENT_TRUTHS_DELETED__D15_U15__J0_G0_T0__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predecessor": {
+    "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V2.json",
+    "git_blob_sha": "436af64fcbf233c38f85eb4815526f52e847c1f9"
+  },
+  "independent_verification": {
+    "factorizer": {
+      "path": "canonical/runtime/terminal_frontier_factorizer_v1.py",
+      "git_blob_sha": "287a5b0698736ebaff67b735215f53308cc50c0e"
+    },
+    "coverage_compiler": {
+      "path": "canonical/runtime/terminal_coverage_partition_compiler_v1.py",
+      "git_blob_sha": "729baa0d1261c137beae0b3ad817f2a4b471cda0"
+    },
+    "composition_deletion": {
+      "path": "canonical/verification/COMPOSITION_COMPONENT_SCOPED_PROOF_NECESSITY_SPRITE_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "e6ee585884de051accd13e3904411533d4ef71ea"
+    },
+    "aa_briefcase_dedup": {
+      "path": "canonical/verification/AA_BRIEFCASE_DUPLICATE_TRUTH_SPRITE_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "6f57945ed73cba770b00c05c638a8fa39cc2dea9"
+    }
+  },
+  "projection": {
+    "truth_obligations": 30,
+    "route_counts": {
+      "J": 0,
+      "G": 0,
+      "T": 0,
+      "D": 15,
+      "U": 15
+    },
+    "astra_calibration_targets": 8,
+    "truth_obligations_deleted": 2,
+    "truth_obligations_closed": 0,
+    "terminal": false
+  },
+  "deleted_obligations": [
+    {
+      "id": "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "type": "NONNECESSARY_COMPOSITION_SPECIFIC_TRUTH",
+      "authority": {
+        "path": "canonical/governance/COMPOSITION_COMPONENT_SCOPED_PROOF_NECESSITY_COUNTERMODEL_20261006_V1.json",
+        "git_blob_sha": "a5efa89a97f43b10538ff48551354e2db21d3a47"
+      },
+      "preservation": "SEPARATE_COMPONENT_CAPABILITY_OBLIGATIONS_AND_END_TO_END_COMPOSITION_SUCCESS_INVARIANTS_REMAIN"
+    },
+    {
+      "id": "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "type": "DUPLICATE_ALIAS_OF_SHARED_FROZEN_TRUTH",
+      "representative": "PROWORK_AA_BRIEFCASE_GE_1822",
+      "authority": {
+        "path": "canonical/governance/AA_BRIEFCASE_DUPLICATE_TRUTH_NECESSITY_COUNTERMODEL_20261006_V1.json",
+        "git_blob_sha": "2c29c933caedffc5d8f44859e903459449e9bfb4"
+      },
+      "preservation": "ARTIFACT_CREATION_AND_PROFESSIONAL_KNOWLEDGE_WORK_BOTH_REMAIN_BOUND_TO_THE_SHARED_FROZEN_AA_BRIEFCASE_GE_1822_TRUTH"
+    }
+  ],
+  "critical_path": [
+    "CONTINUE_J_AND_G_FALSIFICATION_ON_30_CURRENT_OBLIGATIONS",
+    "COMPLETE_ROOT3_PARENT_EXTERNAL_AND_NONREPO_EFFECT_TOTALITY_OR_LOCALIZE_RESIDUALS",
+    "CLOSE_REMAINING_COMPOSITION_TERMINAL_SUCCESS_AND_INVARIANT_PREMISES",
+    "REPAIR_MATCHED_BRAIN_CALIBRATION_EXECUTION_CARRIER_WITHOUT_REPEATING_DEAD_GITHUB_RUNNER",
+    "USE_SCARCE_ASTRA_ONLY_FOR_RESIDUAL_ASTRA_EXCLUSIVE_BEHAVIOR",
+    "BIND_T_TRANSITIVITY_ONLY_WITH_SAME_SEMANTICS_BRAIN_GE_ASTRA_AND_ASTRA_GE_OPUS55",
+    "USE_DIRECT_EXTERNAL_EVIDENCE_ONLY_FOR_IRREDUCIBLE_D_RESIDUALS",
+    "DONOR_REMOVAL_CLEAN_ROOM_TERMINAL_REPLAY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "astra_access_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "route_count_interpretation": "J0_G0_T0_MEANS_ZERO_BOUND_CURRENT_CERTIFICATES_IN_THE_DECLARED_CURRENT_EVIDENCE_UNIVERSE__NOT_ROUTE_IMPOSSIBILITY"
+}
