@@ -72,6 +72,26 @@ class Tests(unittest.TestCase):
         self.assertEqual(rebuilt["valid_count"], 0)
         self.assertIn("CAPSULE_HEAD_MISMATCH", rebuilt["reason"])
 
+    def test_rejected_second_record_does_not_mutate_returned_valid_prefix(self):
+        p, cap1, action1, result1 = self._first_step()
+        row2 = p["composition_contract"][1]
+        action2 = guard.resolve_action_from_capsule(cap1, row2, p["actions"][1])
+        result2 = {"verified": True}
+        cap2 = guard.append_action_result(cap1, row2, action2, result2)
+        trace = [
+            {"cycle": 0, "plan": action1, "result": result1, "composition_capsule_head_hash": cap1["head_hash"]},
+            {"cycle": 1, "plan": action2, "result": result2, "composition_capsule_head_hash": cap2["head_hash"]},
+        ]
+        bad = copy.deepcopy(trace)
+        bad[1]["result"]["verified"] = False
+        rebuilt = guard.rebuild_valid_prefix(
+            p["actions"], p["composition_contract"], p["planning"]["initial_facts"], bad
+        )
+        self.assertEqual(rebuilt["valid_count"], 1)
+        self.assertIn("CAPSULE_HEAD_MISMATCH", rebuilt["reason"])
+        self.assertEqual(rebuilt["capsule"]["head_hash"], cap1["head_hash"])
+        self.assertEqual(guard.verify_capsule(rebuilt["capsule"])["status"], "PASS")
+
     def test_recorded_plan_drift_fails_prefix(self):
         p, cap, action, result = self._first_step()
         trace = [{"cycle": 0, "plan": action, "result": result, "composition_capsule_head_hash": cap["head_hash"]}]

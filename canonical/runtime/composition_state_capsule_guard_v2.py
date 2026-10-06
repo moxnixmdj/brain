@@ -418,10 +418,13 @@ def rebuild_valid_prefix(
             expected_action = resolve_action_from_capsule(cap, row, actions[cycle])
             if _canon(record.get("plan")) != _canon(expected_action):
                 raise CompositionGuardError(f"TRACE_{cycle}_RESOLVED_ACTION_DRIFT")
-            cap = append_action_result(cap, row, expected_action, record.get("result"))
-            expected_head = cap.get("head_hash")
+            candidate_cap = append_action_result(
+                cap, row, expected_action, record.get("result")
+            )
+            expected_head = candidate_cap.get("head_hash")
             if record.get("composition_capsule_head_hash") != expected_head:
                 raise CompositionGuardError(f"TRACE_{cycle}_CAPSULE_HEAD_MISMATCH")
+            cap = candidate_cap
             valid_count += 1
         except Exception as exc:
             reason = type(exc).__name__ + ":" + str(exc)
