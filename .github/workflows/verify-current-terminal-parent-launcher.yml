@@ -59,7 +59,23 @@ jobs:
         with:
           python-version: "3.11"
       - name: Verify legacy terminal parent launcher
-        run: python -m unittest -v canonical.tests.test_terminal_parent_portfolio_launcher_v1
+        id: legacy
+        shell: bash
+        run: |
+          set +e
+          python -m unittest -v canonical.tests.test_terminal_parent_portfolio_launcher_v1 \
+            > legacy-parent-verification.log 2>&1
+          status=$?
+          cat legacy-parent-verification.log
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload legacy parent verification log
+        if: always() && hashFiles('legacy-parent-verification.log') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: legacy-parent-verification-log
+          path: legacy-parent-verification.log
+          if-no-files-found: error
       - name: Verify Root3 parent broker stack when present
         id: root3
         shell: bash
@@ -89,6 +105,9 @@ jobs:
           name: root3-parent-verification-log
           path: root3-parent-verification.log
           if-no-files-found: error
-      - name: Enforce Root3 verification result
-        if: always() && steps.root3.outputs.status != '0'
-        run: exit 1
+      - name: Enforce parent launcher verification results
+        if: always() && (steps.legacy.outputs.status != '0' || steps.root3.outputs.status != '0')
+        run: |
+          echo "legacy_status=${{ steps.legacy.outputs.status }}"
+          echo "root3_status=${{ steps.root3.outputs.status }}"
+          exit 1
