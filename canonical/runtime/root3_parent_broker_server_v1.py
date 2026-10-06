@@ -14,7 +14,7 @@ from canonical.runtime import root3_typed_durable_admin_write_v1 as admin
 
 EXTERNAL_REQUEST_SCHEMA="PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1"
 EXTERNAL_RESPONSE_SCHEMA="PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1"
-ALLOWED_KINDS={"PING","EXTERNAL_TOOL","DURABLE_ADMIN_WRITE"}
+ALLOWED_KINDS=set(driver_registry.KINDS)
 
 class ParentBrokerDenied(RuntimeError):
     pass
@@ -124,20 +124,20 @@ def durable_admin_write(
     plan:Mapping[str,Any],
     payload_b64:str,
 )->dict[str,Any]:
-    if not isinstance(plan,Mapping):
-        raise ParentBrokerDenied("ADMIN_PLAN_INVALID")
-    if not isinstance(payload_b64,str) or len(payload_b64)>12_000_000:
-        raise ParentBrokerDenied("ADMIN_PAYLOAD_INVALID")
     try:
-        payload=base64.b64decode(payload_b64,validate=True)
-    except Exception as exc:
-        raise ParentBrokerDenied("ADMIN_PAYLOAD_B64_INVALID") from exc
-    try:
-        return admin.commit(repo_root,plan,payload)
+        out=admin_driver.execute(
+            repo_root=repo_root,
+            plan=plan,
+            payload_b64=payload_b64,
+        )
     except Exception as exc:
         raise ParentBrokerDenied(
-            "ADMIN_COMMIT_DENIED:"+type(exc).__name__+":"+str(exc)
+            type(exc).__name__+":"+str(exc)
         ) from exc
+    receipt=out.get("receipt")
+    if not isinstance(receipt,dict) or receipt.get("status")!="COMMITTED":
+        raise ParentBrokerDenied("ADMIN_DRIVER_RECEIPT_INVALID")
+    return receipt
 
 class ParentBroker:
     def __init__(
@@ -161,26 +161,38 @@ class ParentBroker:
         payload=request.get("payload")
         if not isinstance(payload,Mapping):
             raise ParentBrokerDenied("BROKER_PAYLOAD_INVALID")
-        if kind=="PING":
-            result={"pong":True}
-        elif kind=="EXTERNAL_TOOL":
+        def ping_driver(_payload):
+            return {"pong":True}
+
+        def external_driver(driver_payload):
             if not self.external_bridge_dir:
                 raise ParentBrokerDenied("EXTERNAL_BRIDGE_NOT_CONFIGURED")
-            result=relay_external_tool(
+            return relay_external_tool(
                 repo_root=self.repo_root,
                 bridge_dir=self.external_bridge_dir,
                 agent_id=agent,
                 task_id=task,
-                tool_kind=payload.get("tool_kind"),
-                tool_payload=payload.get("tool_payload") or {},
+                tool_kind=driver_payload.get("tool_kind"),
+                tool_payload=driver_payload.get("tool_payload") or {},
                 wait_seconds=self.external_wait_seconds,
             )
-        else:
-            result=durable_admin_write(
+
+        def admin_persistence_driver(driver_payload):
+            return durable_admin_write(
                 repo_root=self.repo_root,
-                plan=payload.get("plan") or {},
-                payload_b64=payload.get("payload_b64"),
+                plan=driver_payload.get("plan") or {},
+                payload_b64=driver_payload.get("payload_b64"),
             )
+
+        drivers={
+            "PING":ping_driver,
+            "EXTERNAL_TOOL":external_driver,
+            "DURABLE_ADMIN_WRITE":admin_persistence_driver,
+        }
+        try:
+            result=driver_registry.dispatch(drivers,kind,payload)
+        except Exception as exc:
+            raise ParentBrokerDenied(type(exc).__name__+":"+str(exc)) from exc
         receipt={
             "request_sha256":request.get("request_sha256"),
             "kind":kind,
