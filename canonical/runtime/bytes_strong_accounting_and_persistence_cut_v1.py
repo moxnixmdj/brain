@@ -31,6 +31,8 @@ class Artifact:
     capability_bearing: bool
     learned: bool
     category: str
+    noncapability_role_verified: bool
+    noncapability_role_receipt_sha256: str | None
 
 
 def _is_sha256(value: str) -> bool:
@@ -47,6 +49,8 @@ def artifact(row: Mapping[str, Any]) -> Artifact:
     capability_bearing = row.get("capability_bearing")
     learned = row.get("learned")
     category = row.get("category")
+    noncapability_role_verified = row.get("noncapability_role_verified", False)
+    noncapability_role_receipt_sha256 = row.get("noncapability_role_receipt_sha256")
     if not isinstance(path, str) or not path:
         raise BytesResearchError("ARTIFACT_PATH_INVALID")
     if not _is_sha256(digest):
@@ -63,6 +67,13 @@ def artifact(row: Mapping[str, Any]) -> Artifact:
         raise BytesResearchError("LEARNED_ARTIFACT_MUST_BE_CAPABILITY_BEARING")
     if not isinstance(category, str) or not category:
         raise BytesResearchError("ARTIFACT_CATEGORY_INVALID")
+    if persistent and not capability_bearing:
+        if noncapability_role_verified is not True:
+            raise BytesResearchError("PERSISTENT_NONCAPABILITY_ROLE_NOT_INDEPENDENTLY_VERIFIED")
+        if not _is_sha256(noncapability_role_receipt_sha256):
+            raise BytesResearchError("PERSISTENT_NONCAPABILITY_ROLE_RECEIPT_INVALID")
+    elif not isinstance(noncapability_role_verified, bool):
+        raise BytesResearchError("NONCAPABILITY_ROLE_VERIFICATION_FLAG_INVALID")
     return Artifact(
         path=path,
         sha256=digest.lower(),
@@ -71,6 +82,12 @@ def artifact(row: Mapping[str, Any]) -> Artifact:
         capability_bearing=capability_bearing,
         learned=learned,
         category=category,
+        noncapability_role_verified=bool(noncapability_role_verified),
+        noncapability_role_receipt_sha256=(
+            str(noncapability_role_receipt_sha256).lower()
+            if isinstance(noncapability_role_receipt_sha256, str)
+            else None
+        ),
     )
 
 
@@ -214,6 +231,8 @@ def verify_reference_cases() -> dict[str, Any]:
             "capability_bearing": False,
             "learned": False,
             "category": "RAW_TASK_KNOWLEDGE",
+            "noncapability_role_verified": True,
+            "noncapability_role_receipt_sha256": "f" * 64,
         }
     ]
     b = strong_bytes_accounting(frozen, raw_knowledge_growth)
