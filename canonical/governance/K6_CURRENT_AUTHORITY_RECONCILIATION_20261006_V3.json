@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_K6_CURRENT_AUTHORITY_RECONCILIATION_V3",
+  "date": "2026-10-06",
+  "status": "CANDIDATE_CURRENT__ZERO_PREPROOF_IMPLEMENTATION_GENERATORS__ONE_POSITIVE_COVER_SEMANTIC_INFORMATION_INTERFACE__29_TRUTH_AUTHORITY_PRESERVED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V2.json",
+      "git_blob_sha": "dc79f409fd486d9ca0fe52eea4422169f1b61403"
+    },
+    "prior_k6_authority": {
+      "path": "canonical/governance/K6_CURRENT_AUTHORITY_RECONCILIATION_20261006_V2.json",
+      "git_blob_sha": "cf391fad7a1af7238cd247b3b39b41bf2d7c5684"
+    },
+    "v4_residual": {
+      "path": "canonical/governance/K6_POSITIVE_COVER_SEMANTIC_RESIDUAL_PROJECTION_20261006_V4.json",
+      "git_blob_sha": "3e021b353dfe3dd6e9c5ea9843968e7fe75a02eb"
+    },
+    "v4_verification": {
+      "path": "canonical/verification/K6_POSITIVE_COVER_SEMANTIC_RESIDUAL_V4_SPRITE_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "59fcbc1244879e5f3516ba900cf7167a0679b59e"
+    },
+    "positive_cover_theorem": {
+      "path": "canonical/governance/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_THEOREM_20261006_V1.json",
+      "git_blob_sha": "8a235f91ad3064714fab3ea73b324487d9b7f8e5"
+    },
+    "positive_cover_verification": {
+      "path": "canonical/verification/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_SPRITE_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "de91c37808fe53bc133b399ebc7630f2b82bb0e3"
+    }
+  },
+  "correction": {
+    "prior_open_interface": "K6_TARGET_ACCEPTABILITY_AND_DISCRIMINATOR_SEMANTIC_BINDING",
+    "current_open_interface": "K6_SOUND_POLICY_COVER_WITNESS_AND_SELECTED_DISCRIMINATOR_BINDING",
+    "current_unbound_preproof_implementation_generator_count": 0,
+    "current_open_semantic_information_interface_count": 1,
+    "current_terminal_truth_count": 29,
+    "truth_obligations_deleted_by_this_reconciliation": 0
+  },
+  "authority": {
+    "generic_k6_implementation": "DENIED_PREPROOF",
+    "positive_adequacy_binding": "AUTHORIZED_AS_PROOF_INPUT_WORK_WHEN_TARGET_SCOPED_AND_CONTENT_ADDRESSED",
+    "selected_discriminator_semantic_binding": "AUTHORIZED_AS_PROOF_INPUT_WORK_WHEN_REQUIRED_BY_THE_SELECTED_COVER",
+    "unused_policy_adequacy_enumeration": "NOT_ON_CRITICAL_PATH_UNLESS_NEEDED_FOR_LOAD_BEARING_MINIMALITY_OR_IMPOSSIBILITY",
+    "mechanism_reopen": "ONLY_AFTER_REPEATABLE_SOLVABLE_CAUSALLY_LOCALIZED_FAILURE_DISTINGUISHES_MISSING_CAPABILITY_FROM_MISSING_KNOWLEDGE_PROOF_OR_INFORMATION"
+  },
+  "fixed_point": [
+    "SEARCH_THE_CHEAPEST_SOUND_POSITIVE_ADEQUACY_WITNESS_FOR_EXISTING_BRAIN_OWNED_POLICIES.",
+    "STOP_WHEN_A_RESOURCE_ADMISSIBLE_SELECTABLE_POSITIVE_POLICY_COVER_IS_CERTIFIED.",
+    "BIND_ONLY_THE_DISCRIMINATOR_OBSERVATION_SEMANTICS_USED_BY_THAT_COVER.",
+    "IF_NO_COVER_IS_FOUND_WITH_PARTIAL_ADEQUACY__REMAIN_UNKNOWN.",
+    "REOPEN_CAPABILITY_ONLY_AFTER_COMPLETE_OR_CAUSALLY_LOCALIZED_EVIDENCE_PROVES_NO_ADEQUATE_CURRENT_BRAIN_OWNED_ROUTE.",
+    "THEN_CONTINUE_ROOT3_DISTRIBUTIONAL_COMPOSITION_RESOURCE_OWNERSHIP_AND_FINALITY_PROOFS."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_A_POSITIVE_POLICY_COVER_EXISTS_FOR_ALL_OPUS55_CONTEXTS",
+    "NO_CLAIM_TRUE_MINIMUM_tau_IS_KNOWN",
+    "NO_CLAIM_K6_INFORMATION_IS_ALWAYS_AVAILABLE",
+    "NO_CLAIM_FIVE_OWNED_GENERATORS_ALREADY_DOMINATE_OPUS55",
+    "NO_LOAD_BEARING_TRUTH_DELETION_FROM_THIS_AUTHORITY_REBIND",
+    "NO_TERMINAL_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "truth_obligations_deleted": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
