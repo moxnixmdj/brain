@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CV_BAR_FAMILY_TEST_AUGMENTED_REPLICATION_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__PARSER_IMMUTABLE_AFTER_HUMAN_TEST_PASS",
+  "parser": "canonical/runtime/h100_deterministic_cv_bar_family_v1.py",
+  "parser_mutation_allowed": false,
+  "prior_fresh_result": "canonical/verification/H100_CV_BAR_FAMILY_TEST_SPLIT_FRESH_RESULT_20261006_V1.json",
+  "holdout": {
+    "chartqa_commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+    "annotation_path": "ChartQA Dataset/test/test_augmented.json",
+    "image_path_prefix": "ChartQA Dataset/test/png/",
+    "query_filter": "SAME_PURE_TOTAL_BAR_COUNT_PATTERNS",
+    "selection": "LOWEST_SHA256_OF_SEED_INDEX_IMAGE_AMONG_UNSEEN_MATCHES",
+    "seed": "H100_CV_BAR_FAMILY_TEST_AUGMENTED_REPLICATION_V1__2026-10-06",
+    "target_cases": 30
+  },
+  "pass_gate": {
+    "minimum_exact_accuracy": 0.7
+  },
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "target_adapted_deterministic_code_bytes_upper_bound": 3305
+  },
+  "hard_nonclaims": [
+    "PURE_TOTAL_BAR_COUNT_ONLY",
+    "NO_GENERAL_VISION_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
