@@ -21,6 +21,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from canonical.runtime import root3_strict_current_bootstrap_v2 as bootstrap
 from canonical.runtime import root3_two_class_attempt_authorizer_v1 as attempt_authorizer
+from canonical.runtime import root3_external_information_http_guard_v1 as http_guard
 
 SCHEMA = "PROJECT_BRAIN_ROOT3_PRODUCTION_ASTRA_LAUNCHER_V1"
 ASTRA_MODULE = "canonical.runtime.astra_runtime"
@@ -45,6 +46,9 @@ def install_root3_before_astra_import() -> dict[str, Any]:
 def load_astra_after_root3_install() -> Any:
     install_root3_before_astra_import()
     astra = importlib.import_module(ASTRA_MODULE)
+    http_status = http_guard.install(astra)
+    if http_status.get("status") not in {"PASS__PRODUCTION_INFORMATION_HTTP_GUARD_ACTIVE", "ALREADY_INSTALLED"}:
+        raise ProductionBootstrapError("ROOT3_INFORMATION_HTTP_GUARD_NOT_ACTIVE")
     status = bootstrap.mediator.status()
     if status.get("run_guard_active") is not True:
         raise ProductionBootstrapError("ROOT3_RUN_GUARD_LOST_AFTER_ASTRA_IMPORT")
