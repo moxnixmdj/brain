@@ -3,6 +3,7 @@ from __future__ import annotations
 from canonical.runtime.openai_math_frontier_corpus_v1 import (
     SOURCE_SNAPSHOT_SCHEMA,
     compile_snapshot,
+    evaluate_live,
 )
 
 SHA = "1" * 40
@@ -81,3 +82,13 @@ def test_bad_commit_sha_fails_closed():
     out = compile_snapshot(s)
     assert out["status"] == "FAIL_CLOSED"
     assert "SOURCE_COMMIT_SHA_MUST_BE_SHA40" in out["errors"]
+
+
+def test_live_pinned_snapshot_compiles_zero_credit():
+    out = evaluate_live()
+    assert out["status"] == "PASS__PINNED_PUBLIC_CORPUS_COMPILED_TO_ZERO_CREDIT_EVALUATOR_FACTORY"
+    assert out["source"]["commit_sha"] == "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
+    assert out["reported_facts"]["manuscripts"] == 722
+    assert out["artifact_census"]["comparator_challenge_pairs"] == 405
+    assert out["terminal_credit_delta"] == 0
+    assert out["capability_credit_delta"] == 0
