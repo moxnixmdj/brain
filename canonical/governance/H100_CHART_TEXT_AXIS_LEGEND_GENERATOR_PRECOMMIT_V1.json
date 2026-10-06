@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CHART_TEXT_AXIS_LEGEND_GENERATOR_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_PARSER_IMPLEMENTATION_AND_BEFORE_EVALUATION_SEED",
+  "generator_path": "canonical/runtime/h100_chart_text_axis_legend_generator_v1.py",
+  "generator_blob_sha": "6631466979f54263332b9b8c61201c7dcf50906c",
+  "distribution": {
+    "grid": [
+      32,
+      48
+    ],
+    "pixel_codes": {
+      "background": 0,
+      "ink": 1,
+      "series_color_1": 2,
+      "series_color_2": 3
+    },
+    "font": "FROZEN_3X5_BITMAP",
+    "axis_scale_modes": [
+      1,
+      2
+    ],
+    "categories": "RANDOM_PERMUTATION_ABC",
+    "legend_labels": "RANDOM_2_OF_PQRS_WITH_RANDOM_ORDER",
+    "bar_heights": "INDEPENDENT_UNIFORM_1_TO_15",
+    "groups": 3
+  },
+  "evaluation_protocol": "PARSER_FREEZE_FIRST__THEN_SECOND_CARRIER_SAMPLES_FRESH_OS_RANDOM_SEED_AND_GENERATES_CASES",
+  "target_output": [
+    "axis_ticks",
+    "categories",
+    "legend",
+    "values"
+  ],
+  "promotion_authority": false
+}
