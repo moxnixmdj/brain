@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CROSS_CAPABILITY_P0_STRESS_V3_LOCAL_VERIFICATION_20261006",
+  "status": "P0_FALSIFIED_UNDER_SHIFT__LOCAL_RUNTIME",
+  "pass_nonsealed": "3/8",
+  "algorithm_gaps": [
+    "ARITH_STRESS",
+    "VISION_STRESS",
+    "MEMORY_STRESS"
+  ],
+  "search_gaps": [
+    "CODE_STRESS",
+    "TRANSFER_STRESS"
+  ],
+  "correct_abstentions": [
+    "LANG_STRESS",
+    "TOOL_STRESS"
+  ],
+  "planning_pass": "PLAN_STRESS",
+  "sealed_info_lower_bound_bits": 3,
+  "target_bits_added": 0,
+  "promotion_authority": false
+}
