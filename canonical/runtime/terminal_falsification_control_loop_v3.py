@@ -26,7 +26,22 @@ EXPECTED = {
         "canonical/verification/TERMINAL_THEOREM_MINIMALITY_FALSIFIER_INDEPENDENT_VERIFICATION_20261006_V1.json",
         "38486f2002c0d025fac73c36c43f86cdd2fee24d",
     ),
+    "stochastic_truth_repair": (
+        "canonical/governance/OUTCOME_FRONTIER_STOCHASTIC_RELIABILITY_COUNTERMODEL_V1.json",
+        "14b4fad10884538ad2b5d73a9c1a6787aae965d5",
+    ),
+    "stochastic_independent_verification": (
+        "canonical/verification/OUTCOME_FRONTIER_STOCHASTIC_COUNTERMODEL_INDEPENDENT_VERIFICATION_20261006_V1.json",
+        "3b4c5e7bc9d1fc2b7f7a3aca22c5de6ff7ea65de",
+    ),
 }
+REQUIRED_REFINEMENTS = [
+    "TERMINAL_OUTCOME_SEMANTICS_MUST_BE_DISTRIBUTION_OR_RELIABILITY_BEARING_WHERE_STOCHASTIC_OUTCOMES_ARE_TERMINAL_RELEVANT",
+    "POINT_SUPPORT_OR_BEST_REACHABLE_OUTCOME_IS_INSUFFICIENT",
+    "ADMISSIBLE_TERMINAL_EVALUATOR_SET_OR_PARTIAL_ORDER_MUST_DECIDE_RELEVANT_TRADEOFFS",
+    "PARETO_NONSCALAR_TRADEOFFS_MUST_NOT_COLLAPSE_PROBABILITY_MASS_TO_SUPPORT",
+]
+
 REQUIRED_LEMMAS = [
     "UTILITY_AND_EQUAL_OR_BETTER_ORDERING_WELL_FORMED",
     "TARGET_UTILITY_QUOTIENT_COMPLETENESS",
@@ -71,6 +86,13 @@ def apply_repair(
     verify = _binding(
         overlay.get("independent_verification"), "independent_verification"
     )
+    stochastic = _binding(
+        overlay.get("stochastic_truth_repair"), "stochastic_truth_repair"
+    )
+    stochastic_verify = _binding(
+        overlay.get("stochastic_independent_verification"),
+        "stochastic_independent_verification",
+    )
 
     falsified = overlay.get("falsified_claim")
     successor = overlay.get("successor_claim")
@@ -104,6 +126,8 @@ def apply_repair(
         raise V3RepairError("SUCCESSOR_LEMMA_SET_OR_ORDER_MISMATCH")
     if successor.get("first_unresolved_lemma") != LEMMA:
         raise V3RepairError("SUCCESSOR_FIRST_LEMMA_MISMATCH")
+    if successor.get("first_lemma_refinements") != REQUIRED_REFINEMENTS:
+        raise V3RepairError("SUCCESSOR_FIRST_LEMMA_REFINEMENTS_MISMATCH")
 
     out = copy.deepcopy(dict(state))
     claims = out.get("claims")
@@ -130,7 +154,7 @@ def apply_repair(
         raise V3RepairError("AUTHORITATIVE_INPUTS_INVALID")
     bound_rows = [dict(x) for x in inputs]
     existing_paths = {x.get("path") for x in bound_rows}
-    for binding in (truth, verify):
+    for binding in (truth, verify, stochastic, stochastic_verify):
         if binding["path"] in existing_paths:
             raise V3RepairError("REPAIR_SOURCE_ALREADY_PRESENT:" + binding["path"])
         bound_rows.append(binding)
@@ -166,6 +190,7 @@ def compile_control_loop_v3(
         "frontier_fingerprint": result.frontier_fingerprint,
         "first_universe_claim": NEW,
         "first_unresolved_lemma": LEMMA,
+        "first_subproblem": "DISTRIBUTION_AWARE_EQUAL_OR_BETTER_ORDERING",
         "proof_credit_delta": 0,
         "acceptance_credit_delta": 0,
         "family_credit_delta": 0,
