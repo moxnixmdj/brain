@@ -4,7 +4,7 @@
   "status":"CANDIDATE_TRUTH_REPAIR__K6_RECLASSIFIED_FROM_UNBOUND_IMPLEMENTATION_GENERATOR_TO_UNRESOLVED_PROOF_AND_INPUT_BINDING_ROLE__ZERO_TERMINAL_CREDIT",
   "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "source_bindings":{
-    "current_authority":{"path":"canonical/governance/CURRENT_TERMINAL_AUTHORITY_V2.json","git_blob_sha":"5f71b906ad3bbab87507442652be4298fcb98a10"},
+    "current_authority":{"path":"canonical/governance/CURRENT_TERMINAL_AUTHORITY_V2.json","git_blob_sha":"f17f2f83e7ac8173b0bf54a5cde65646125a15fd"},
     "root_cause_state":{"path":"canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json","git_blob_sha":"7c1ed0adf243b92abab2cbdb6ebced921dcbb860"},
     "global_obligation_graph":{"path":"canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json","git_blob_sha":"eebdeb6de3b3cfaed30a3bc991dae0548d25e7f5"},
     "execution_authority_reconciliation":{"path":"canonical/governance/ATOMIC_SURVIVOR_EXECUTION_AUTHORITY_RECONCILIATION_V1.json","git_blob_sha":"19b363f3f6be080b73ba144f82ef5f0a481217b1"},
