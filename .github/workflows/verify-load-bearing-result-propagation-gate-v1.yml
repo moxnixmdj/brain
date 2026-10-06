@@ -1,0 +1,28 @@
+name: Verify load bearing result propagation gate V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/load_bearing_result_propagation_gate_v1.py"
+      - "canonical/runtime/astra_load_bearing_guarded_launcher_v1.py"
+      - "canonical/tests/test_load_bearing_result_propagation_gate_v1.py"
+      - "canonical/tests/test_astra_load_bearing_guarded_launcher_v1.py"
+      - "canonical/governance/LOAD_BEARING_RESULT_PROPAGATION_GATE_V1.json"
+      - ".github/workflows/verify-load-bearing-result-propagation-gate-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m py_compile canonical/runtime/load_bearing_result_propagation_gate_v1.py canonical/runtime/astra_load_bearing_guarded_launcher_v1.py
+      - run: python -m pytest -q canonical/tests/test_load_bearing_result_propagation_gate_v1.py canonical/tests/test_astra_load_bearing_guarded_launcher_v1.py
