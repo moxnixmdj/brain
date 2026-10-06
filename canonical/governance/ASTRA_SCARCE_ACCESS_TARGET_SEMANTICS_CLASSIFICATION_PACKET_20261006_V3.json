@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_SCARCE_ACCESS_TARGET_SEMANTICS_CLASSIFICATION_PACKET_V3",
+  "date": "2026-10-06",
+  "status": "READY_FOR_SINGLE_SCARCE_ASTRA_INTERACTION__ATOMIC_SEMANTICS_PREFILTER_APPLIED__FAMILY_CONTEXT_RESIDUAL_ONLY__ZERO_ASTRA_ACCESS_CONSUMED",
+  "supersedes": "canonical/governance/ASTRA_SCARCE_ACCESS_TARGET_SEMANTICS_CLASSIFICATION_PACKET_20261006_V2.json",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "bound_prefilter": {
+    "path": "canonical/governance/PRE_ASTRA_ATOMIC_FAMILY_SEMANTIC_PREFILTER_20261006_V1.json",
+    "git_blob_sha": "0fc92ab6c0612b901b7eee608ddf6b1324f87f02",
+    "conclusion": "THE_24_CURRENT_UNRESOLVED_ATOMIC_ACCEPTANCE_CONTRACTS_ARE_ALREADY_EXPLICITLY_PARTITIONED__THE_14_PUBLIC_FIXED_BAR_TARGET_TUPLES_ARE_EXACTLY_BOUND__NONE_OF_THIS_BY_ITSELF_PROVES_FAMILY_WIDE_E_OR_M."
+  },
+  "pre_astra_theorem": {
+    "path": "canonical/governance/PRE_ASTRA_TARGET_INFORMATION_MINCUT_THEOREM_20261006_V1.json",
+    "git_blob_sha": "6622a34c2de805523ac2c87808c13fb6cba1f3fe",
+    "conclusion": "ARBITRARY_MEASURE_SEPARATING_HIDDEN_UTILITY_REQUIRES_EXACT_TRAJECTORY_LAW_EQUALITY__REAL_COMPRESSION_REQUIRES_E_COMPLETE_EXPLICIT_SEMANTICS__M_PROVED_MONOTONICITY__OR_A_SOUND_CONTEXT_QUOTIENT."
+  },
+  "current_known_atomic_semantics": {
+    "unresolved_atomic_count": 24,
+    "public_fixed_bar_count": 14,
+    "matched_noninferiority_count": 4,
+    "matched_scope_audit_count": 4,
+    "direct_scope_audit_count": 1,
+    "dependency_proof_count": 1,
+    "exact_score_target_tuple_count": 14,
+    "instruction": "DO_NOT_SPEND_THIS_ASTRA_INTERACTION_REDISCOVERING_THESE_ATOMIC_CONTRACTS_OR_SCORE_TARGET_IDENTITIES."
+  },
+  "family_context_residual": {
+    "count": 14,
+    "families": [
+      "ADVANCED_AGENTIC_CODING",
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "COMPUTER_AND_BROWSER_USE",
+      "FINANCIAL_ANALYSIS",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "ARTIFACT_CREATION",
+      "COMMUNICATION_AND_SYNTHESIS",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "MULTI_CAPABILITY_COMPOSITION"
+    ],
+    "current_default": "UNRESOLVED_FOR_FAMILY_WIDE_E_OR_M__RETAIN_U_UNLESS_PROVED_OTHERWISE",
+    "current_family_level_M_proofs_bound_by_prefilter_authorities": 0
+  },
+  "scarce_access_policy": {
+    "astra_interaction_budget": 1,
+    "no_followup_questions": true,
+    "no_atomic_threshold_lookup": true,
+    "no_generic_U_statistic_search": true,
+    "no_unverified_score_guessing": true,
+    "objective": "MAXIMIZE_NUMBER_OR_BREADTH_OF_REAL_FAMILY_OR_CONTEXT_CLASSES_SOUNDLY_MOVED_FROM_U_TO_E_OR_M_OR_A_PROVED_CONTEXT_GENERATOR_PER_SINGLE_ASTRA_INTERACTION.",
+    "postcondition": "ASTRA_OUTPUT_HAS_ZERO_TRUTH_CREDIT_UNTIL_INDEPENDENT_RECONSTRUCTION_SOURCE_BINDING_AND_CONTENT_ADDRESSING."
+  },
+  "astra_prompt": [
+    "This is one scarce interaction. Do not ask follow-up questions. Do not spend output on motivational prose, benchmark score restatement, or generic capability descriptions.",
+    "The terminal goal is literal: Brain must permanently internalize, configure, verify, and own every useful Opus 5.5 capability at equal-or-better level. External knowledge may remain JIT; opaque external capability execution does not count as ownership.",
+    "A Brain-side theorem has already reduced L1 evaluator certification to three routes per context: E = complete explicit load-bearing capability evaluators and hard constraints; M = every admissible hidden L1 utility is independently proved monotone in a sound material outcome order plus dominance-preserving coupling; U = otherwise exact equality of full deployed Brain and target trajectory laws under the same context.",
+    "For arbitrary measure-separating hidden U, exact trajectory-law equality is information-theoretically necessary. Do not try to compress U with generic moments, means, finite summaries, or non-measure-determining statistics.",
+    "The current 24 unresolved atomic acceptance predicates are already frozen and partitioned. Fourteen are public fixed bars with exact target tuples already bound; four are matched noninferiority relations; four are matched invariant audits; one is a direct scope audit; one is a dependency proof. Do not spend this interaction rediscovering their thresholds or atomic definitions.",
+    "CRITICAL FIREWALL: an atomic benchmark, matched predicate, or invariant contract is NOT evidence that a whole capability family has complete E semantics. Family-wide E requires a proof that no other load-bearing L1 quality, correctness, reliability, safety, scope, continuation, interaction, or task-contract dimension can alter useful-capability noninferiority.",
+    "Likewise, family-wide M requires a proof that EVERY admissible hidden L1 utility is monotone in a specified material partial order. Attack every M proposal with the smallest preference-reversal or nonmonotone utility counterexample. Desirable-sounding dimensions are not a monotonicity proof.",
+    "Your ONLY primary task is the family/context semantic residual across these fourteen families: ADVANCED_AGENTIC_CODING; COMPLEX_MULTI_TOOL_AGENCY; PROFESSIONAL_KNOWLEDGE_WORK; BUSINESS_WORKFLOW_AUTOMATION; MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING; AGENTIC_SCIENTIFIC_RESEARCH; VISION_AND_DENSE_DOCUMENT_UNDERSTANDING; COMPUTER_AND_BROWSER_USE; FINANCIAL_ANALYSIS; INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT; ARTIFACT_CREATION; COMMUNICATION_AND_SYNTHESIS; UNKNOWN_DOMAIN_ADAPTATION; MULTI_CAPABILITY_COMPOSITION.",
+    "For each family, search for the broadest defensible context subclasses that can be moved from U to E or M. Prefer a partition of a family into sound E/M/U subclasses over a false whole-family classification.",
+    "For E candidates: enumerate the claimed COMPLETE evaluator/hard-constraint basis; identify why it is complete for that exact context class; provide the cheapest omitted-dimension counterexample test. If completeness cannot be defended, mark UNRESOLVED or U.",
+    "For M candidates: define the exact material outcome space and partial order, the admissible hidden utility class, why ALL such utilities are monotone, and the cheapest preference-reversal falsifier. If the restriction is merely plausible rather than proved, reject M.",
+    "Search aggressively for context generators, symmetries, contract refinements, bisimulations, trace equivalences, invariances, or other transfer theorems that allow one semantic proof to cover many contexts. State the exact invariance premises and a boundary counterexample.",
+    "Use public primary sources for factual claims about Opus 5.5, benchmarks, task contracts, or evaluator semantics. Map every factual premise to its source. Separate sourced facts from your theorem reasoning. Do not invent hidden Opus internals, private results, or unavailable target distributions.",
+    "Anthropic itself publicly distinguishes benchmark scores from broader open-ended capability requiring sustained judgment. Treat that as a warning against benchmark-to-family completeness, not as proof of any specific missing evaluator.",
+    "Rank discoveries by how much exact target-law information they eliminate. A proof covering a context generator or an entire sound subclass dominates many individual facts.",
+    "Return the minimum remaining information cut: STRUCTURAL_ONCE | PER_FAMILY | PER_CONTEXT | EXACT_TARGET_LAW_IRREDUCIBLE. Residual U must state exactly why no E/M/quotient proof succeeded and what target-law information would still be necessary.",
+    "Every positive classification or generator theorem must include a decisive falsifier. Counterexamples outrank supportive prose.",
+    "End with exactly one highest-leverage post-verification action that maximizes expected terminal truth-obligation contraction per unit scarce evidence cost."
+  ],
+  "required_output": {
+    "family_context_partition": "For each of 14 families: E_SUBCLASSES | M_SUBCLASSES | U_OR_UNRESOLVED_SUBCLASSES, with exact semantic premises and breadth.",
+    "E_completeness_basis": "For each E subclass: complete evaluator/hard-constraint basis, completeness argument, primary sources, omission falsifier.",
+    "M_monotonicity_basis": "For each M subclass: outcome order, admissible utility class, monotonicity proof premise, preference-reversal falsifier.",
+    "context_generators": "Any sound quotient/generator theorem, exact invariance premises, coverage breadth, and boundary counterexample.",
+    "residual_U": "Exact residual classes, why E/M/generator routes fail, and minimum exact target-law information still required.",
+    "information_cut": "STRUCTURAL_ONCE | PER_FAMILY | PER_CONTEXT | EXACT_TARGET_LAW_IRREDUCIBLE.",
+    "top_counterexamples": "At least 10 minimal counterexamples against the strongest proposed E/M/generator shortcuts.",
+    "sourced_evidence": "Primary-source claim-to-source mapping only.",
+    "next_single_action": "Exactly one action after independent verification."
+  },
+  "truth_boundary": [
+    "ASTRA_OUTPUT_ZERO_CREDIT_UNTIL_INDEPENDENT_VERIFICATION",
+    "ATOMIC_E_SHAPE_DOES_NOT_IMPLY_FAMILY_E",
+    "NO_FAMILY_M_WITHOUT_PROVED_ALL_UTILITY_MONOTONICITY",
+    "UNKNOWN_REMAINS_U_OR_UNRESOLVED",
+    "SOURCE_CITATIONS_DO_NOT_PROVE_THEOREM_STEPS",
+    "NO_WEAKENING_OF_TERMINAL_OBJECTIVE"
+  ],
+  "accounting": {
+    "astra_access_consumed_by_packet_creation": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
