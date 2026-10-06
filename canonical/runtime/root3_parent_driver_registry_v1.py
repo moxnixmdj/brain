@@ -70,6 +70,15 @@ def dispatch(repo_root: str | Path, raw_request: Mapping[str, Any]) -> dict[str,
     _verify_spec(root, spec)
 
     if request["driver_id"] == ADMIN_DRIVER_ID:
+        expected_impl = (root / spec["implementation_path"]).resolve()
+        actual_impl = Path(str(admin_driver.__file__ or "")).resolve()
+        if actual_impl != expected_impl:
+            raise ParentDriverRegistryError(
+                "EXECUTED_DRIVER_MODULE_PATH_MISMATCH:"
+                + str(actual_impl)
+                + ":"
+                + str(expected_impl)
+            )
         result = admin_driver.execute(str(root), request["typed_args"])
     else:
         raise ParentDriverRegistryError("UNKNOWN_DRIVER_DENY")
