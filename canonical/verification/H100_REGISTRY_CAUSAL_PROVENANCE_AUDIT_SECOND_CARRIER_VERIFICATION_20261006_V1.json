@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REGISTRY_CAUSAL_PROVENANCE_AUDIT_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__4_OF_4__ZERO_CAUSAL_LEARNED_STATE_FALSIFIED_FOR_REGISTRY_V8_EXTENSION",
+  "verified": {
+    "possible_persistent_extension_states": 8,
+    "outcome_dependent_persistent_capacity_bits": 3,
+    "all_pass_vs_all_fail_behaviorally_distinct": true,
+    "exact_zero_causal_learned_bits_survives": false,
+    "conservative_positive_lower_bound_bits": 1
+  },
+  "distinction": {
+    "storage_format_accounting": "STILL_REPORTS_ZERO_LEARNED_BYTES",
+    "causal_provenance_accounting": "NONZERO_OUTCOME_DEPENDENT_PERSISTENT_INFORMATION"
+  },
+  "hard_nonclaims": [
+    "THREE_BIT_CAPACITY_IS_NOT_A_SHANNON_INFORMATION_ESTIMATE_OF_THE_REALIZED_OUTCOME",
+    "DOES_NOT_IMPLY_NEURAL_WEIGHTS_ARE_NEEDED",
+    "DOES_NOT_EXCEED_ONE_BYTE_WHEN_PACKED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
