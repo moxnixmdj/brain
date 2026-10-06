@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CHARTQA_TABLE_INFORMATION_DIAGNOSTIC_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT_AFTER_ONE_PILOT_TABLE_BEFORE_BULK_100_CASE_AUDIT",
+  "objective": "Measure whether frozen ChartQA V2 answers are already contained in or simply derivable from the public underlying CSV tables, separating answer-information availability from raster perception.",
+  "pilot_seen": {
+    "case_id": "V2H_334",
+    "table": "6114.csv"
+  },
+  "frozen_diagnostic": [
+    "CASE_INSENSITIVE_TRIMMED_DIRECT_STRING_CELL_MATCH",
+    "NUMERIC_DIRECT_CELL_MATCH_WITH_1E-6_RELATIVE_OR_ABSOLUTE_TOLERANCE",
+    "PAIRWISE_NUMERIC_SUM_DIFFERENCE_RATIO_PRODUCT_MATCH",
+    "FULL_NUMERIC_ROW_SUM_MATCH",
+    "FULL_NUMERIC_COLUMN_SUM_MATCH"
+  ],
+  "interpretation": "THIS_IS_AN_INFORMATION_AVAILABILITY_UPPER_BOUND_NOT_A_LANGUAGE_GROUNDED_QA_SOLVER",
+  "hard_nonclaims": [
+    "DOES_NOT_PROVE_A_DETERMINISTIC_SOLVER_CAN_SELECT_THE_CORRECT_CELLS_FROM_THE_QUESTION",
+    "DOES_NOT_USE_IMAGE_ANNOTATIONS_OR_OCR",
+    "DOES_NOT_PROVE_ZERO_LEARNED_OPEN_WORLD_VISION"
+  ],
+  "promotion_authority": false
+}
