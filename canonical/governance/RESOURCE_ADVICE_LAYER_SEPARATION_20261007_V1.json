@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_RESOURCE_ADVICE_LAYER_SEPARATION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_REPAIR_OF_RESOURCE_BOUNDED_CAPABILITY_ADVICE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": "canonical/governance/V7_LAYERED_DISTRIBUTIONAL_EQUAL_OR_BETTER_ORDER_20261006_V1.json",
+  "falsified_overstrength": "A SINGLE A_STAR_R USING OPUS_RESOURCE_EFFICIENCY_AS_A_UNIVERSAL_CAPABILITY_REQUIREMENT",
+  "repaired_quantities": {
+    "A_L1_star": "Minimum reusable procedural advice required to satisfy capability-level correctness/quality/reliability and only those latency/cost/resource constraints explicitly load-bearing in the target capability contract.",
+    "A_L2_star": "Minimum reusable procedural advice, if any, required to satisfy absolute project feasibility, ownership, authority/safety, and hard-zero-spend gates.",
+    "A_L3_star": "Reusable procedural information that improves Brain route wall-clock/resource footprint/complexity after L1 and L2 already pass. This is optimization value, not capability-equivalence necessity."
+  },
+  "consequence": [
+    "A speedup heuristic is not automatically a missing Opus capability.",
+    "If a Brain-owned zero-advice route eventually achieves the same load-bearing outcome and no task contract imposes the slower resource dimension, failure to match Opus speed does not falsify L1 capability parity.",
+    "The user's minimum-wall-clock project objective can still make A_L3 advice highly valuable, but it must not be counted as terminal capability debt.",
+    "Only contexts with explicit load-bearing resource/deadline constraints can force resource-speedup advice into A_L1."
+  ],
+  "scheduler": [
+    "FIRST classify every alleged resource deficit as L1, L2, or L3.",
+    "DELETE L3-only deficits from capability-internalization debt.",
+    "For L1/L2 deficits, attack zero-advice sufficiency before admitting positive reusable procedural advice.",
+    "Optimize L3 aggressively only after preserving truth about whether it is terminally necessary."
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM ZERO_ADVICE IS FAST ENOUGH FOR THE USER'S DESIRED WALL_CLOCK.",
+    "NO CLAIM ALL TARGET CAPABILITIES LACK RESOURCE BARS.",
+    "NO TERMINAL ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
