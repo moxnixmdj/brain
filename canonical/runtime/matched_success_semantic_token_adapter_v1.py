@@ -103,7 +103,8 @@ def inject_token(kind: str, raw_case: Mapping[str, Any], token: str) -> dict[str
         ]
         if not finals:
             raise TokenAdapterError("DELEGATION_FINAL_STEP_NOT_FOUND")
-        finals[-1]["evidence_outputs"] = list(finals[-1]["evidence_outputs"]) + [token]
+        for final in finals:
+            final["evidence_outputs"] = list(final["evidence_outputs"]) + [token]
         return case
 
     if kind in {"m0", "m0_change"}:
