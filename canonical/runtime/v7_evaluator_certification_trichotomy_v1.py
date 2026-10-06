@@ -1,7 +1,7 @@
 """Fail-closed V7 capability evaluator certification router.
 
 This router does not discover evaluator semantics. It only applies a sound
-certificate route after the relevant semantic premise is proof-carrying.
+conditional route after the relevant semantic premise has been independently proved.
 Unknown or unproved hidden semantics fall back to exact trajectory-law equality.
 """
 from __future__ import annotations
@@ -65,8 +65,9 @@ def certify(task: Mapping[str, Any]) -> dict[str, Any]:
         )
         return {
             "route": "E_EXPLICIT_COMPLETE",
-            "certified": bool(passed),
+            "conditional_noninferiority": bool(passed),
             "proof_receipts": receipts,
+            "semantic_premise_verified_by_this_runtime": False,
             "terminal_authority": False,
         }
 
@@ -81,8 +82,9 @@ def certify(task: Mapping[str, Any]) -> dict[str, Any]:
         result = monotone_coupling_solve(bound)
         return {
             "route": "M_HIDDEN_RESTRICTED_MONOTONE",
-            "certified": bool(result["universal_monotone_utility_noninferiority"]),
+            "conditional_noninferiority": bool(result["universal_monotone_utility_noninferiority"]),
             "proof_receipts": receipts,
+            "semantic_premise_verified_by_this_runtime": False,
             "coupling_result": result,
             "terminal_authority": False,
         }
@@ -96,8 +98,9 @@ def certify(task: Mapping[str, Any]) -> dict[str, Any]:
         passed = hidden_evaluator_universal_noninferiority(target, brain)
         return {
             "route": "U_ARBITRARY_OR_UNCLASSIFIED_HIDDEN",
-            "certified": bool(passed),
+            "conditional_noninferiority": bool(passed),
             "proof_receipts": [],
+            "semantic_premise_verified_by_this_runtime": True,
             "terminal_authority": False,
         }
 
