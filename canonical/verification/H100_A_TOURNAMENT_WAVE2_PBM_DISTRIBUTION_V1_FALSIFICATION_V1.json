@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_H100_A_TOURNAMENT_WAVE2_PBM_DISTRIBUTION_V1_FALSIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "FAIL__GENERATOR_LAYOUT_OVERFLOW_BEFORE_PARSER_FREEZE",
+  "binds": {
+    "precommit_blob": "4b30ad6c7674fe8b3bd9a94203426b46800f383f",
+    "generator_blob": "a8840437c087a5df9e9dc4139b062342478bb036"
+  },
+  "witness": {
+    "seed": 34,
+    "orientation": "HORIZONTAL",
+    "bar_count": 7,
+    "bar_thickness": 5,
+    "gap_after_fallback": 2,
+    "start_y": 6,
+    "last_written_y": 52,
+    "canvas_last_y": 49
+  },
+  "consequence": "V1_DISTRIBUTION_INVALIDATED__NO_PARSER_OR_HOLDOUT_CREDIT_CONSUMED",
+  "promotion_authority": false
+}
