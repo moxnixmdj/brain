@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_H100_DETERMINISTIC_BAR_COUNT_HOLDOUT_REFINEMENT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_QUERY_SELECTION__BEFORE_ANY_DETERMINISTIC_PARSER_OUTPUTS",
+  "parent_precommit": "canonical/governance/H100_DETERMINISTIC_BAR_COUNT_HOLDOUT_SELECTION_PRECOMMIT_V1.json",
+  "refinement_basis": "QUESTION_TEXT_ONLY__GOLD_LABELS_NOT_USED_FOR_EXCLUSION_OR_INTENT_CLASSIFICATION",
+  "excluded_query_patterns": [
+    "how many times",
+    "crossed 50 mark"
+  ],
+  "intents": {
+    "BAR_INSTANCE_COUNT": "count visible bar rectangles across the chart",
+    "DISTINCT_BAR_COLOR_COUNT": "count visually distinct bar colors or shades"
+  },
+  "intent_rule": "IF_NORMALIZED_QUERY_CONTAINS_COLOR_OR_COLORS_OR_SHADE_OR_SHADES_OR_COLOR_BAR_OR_COLOR_BARS__DISTINCT_BAR_COLOR_COUNT__ELSE_BAR_INSTANCE_COUNT",
+  "selected_case_count": 13,
+  "exact_selected": [
+    "val_human:42",
+    "val_human:52",
+    "val_human:94",
+    "val_human:98",
+    "val_human:323",
+    "val_human:338",
+    "val_human:358",
+    "val_human:370",
+    "val_human:380",
+    "val_human:422",
+    "val_human:640",
+    "val_human:886",
+    "val_human:934"
+  ],
+  "pass_gate": {
+    "minimum_cases": 5,
+    "exact_integer_accuracy": 0.8,
+    "persistent_learned_bytes": 0
+  },
+  "promotion_authority": false
+}
