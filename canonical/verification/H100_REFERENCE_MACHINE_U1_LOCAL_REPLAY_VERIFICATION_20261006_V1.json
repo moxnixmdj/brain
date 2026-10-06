@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REFERENCE_MACHINE_U1_LOCAL_REPLAY_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__CLEAN_LOCAL_REPLAY__5_OF_5",
+  "subject": {
+    "precommit": "canonical/governance/H100_REFERENCE_MACHINE_U1_PRECOMMIT_V1.json",
+    "runtime_blob": "a86dd60a677c9c41f63f4beff594955846fc03e3",
+    "tests_blob": "01db42d0985e3be610dc6910fc46be45f9d995b0"
+  },
+  "observed": {
+    "tests_passed": 5,
+    "tests_total": 5,
+    "u1_implementation_source_bytes": 4483,
+    "opcode_count": 17
+  },
+  "verified": [
+    "ENCODE_DECODE_ROUNDTRIP",
+    "INTEGER_ARITHMETIC",
+    "BRANCHING",
+    "LOOPING",
+    "STEP_LIMIT_FAIL_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "LOCAL_REPLAY_NOT_PROVIDER_INDEPENDENT",
+    "NO_CAPABILITY_UPPER_BOUND_YET_TRANSLATED_TO_U1"
+  ],
+  "promotion_authority": false
+}
