@@ -6,10 +6,16 @@ on:
     branches: [main]
     paths:
       - 'canonical/runtime/astra_runtime.py'
+      - 'canonical/runtime/same_identity_supervisor.py'
+      - 'canonical/runtime/root3_production_astra_launcher_v1.py'
+      - 'canonical/runtime/root3_strict_current_bootstrap_v2.py'
+      - 'canonical/runtime/root3_subprocess_mediator_v2.py'
       - 'canonical/runtime/external_tool_relay.py'
       - 'canonical/runtime/independent_npm_codec_verifier.py'
       - 'canonical/runtime/node_codec_runner.js'
       - 'canonical/runtime/goal_compiler.py'
+      - 'canonical/tests/test_same_identity_supervisor.py'
+      - 'canonical/tests/test_root3_production_astra_launcher_v1.py'
       - 'canonical/tests/test_external_tool_relay.py'
       - 'canonical/tests/test_external_tool_bridge_wait.py'
       - 'canonical/tests/test_independent_npm_codec_verifier_bridge.py'
@@ -41,6 +47,8 @@ jobs:
         run: |
           set -euo pipefail
           python -m unittest \
+            canonical.tests.test_same_identity_supervisor \
+            canonical.tests.test_root3_production_astra_launcher_v1 \
             canonical.tests.test_external_tool_relay \
             canonical.tests.test_external_tool_bridge_wait \
             canonical.tests.test_bound_git_source_tree_dependency \
