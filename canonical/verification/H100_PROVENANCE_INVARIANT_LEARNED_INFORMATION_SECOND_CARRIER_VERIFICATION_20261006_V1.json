@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_H100_PROVENANCE_INVARIANT_LEARNED_INFORMATION_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__9_OF_9_TESTS__REPRESENTATION_INVARIANCE_ESTABLISHED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_PROVENANCE_INVARIANT_LEARNED_INFORMATION_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_provenance_invariant_learned_information_v1.py",
+    "tests": "canonical/tests/test_h100_provenance_invariant_learned_information_v1.py"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "verified": {
+    "tests_passed": 9,
+    "tests_total": 9,
+    "bijective_reencoding_preserves_explicit_ensemble_entropy": true,
+    "noninjective_mapping_rejected_as_not_lossless": true,
+    "losslessly_embedded_weight_bytes_remain_learned_origin": true,
+    "fixed_world_independent_algorithm_not_learned_origin": true,
+    "data_selected_symbolic_structure_is_learned_origin": true,
+    "cubic_three_way_selection_capacity_fixed_index_bits": 2,
+    "depth4_1554_way_selection_capacity_fixed_index_bits": 11
+  },
+  "deduction": "LEARNED_INFORMATION_ACCOUNTING_MUST_BE_INVARIANT_TO_LOSSLESS_REPRESENTATION_CHANGE__PERSISTED_DATA_DEPENDENT_SYMBOLIC_STRUCTURES_DO_NOT_BECOME_NONLEARNED_MERELY_BECAUSE_THEY_ARE_STORED_AS_DETERMINISTIC_CODE",
+  "hard_nonclaims": [
+    "NO_EXACT_REAL_WORLD_MUTUAL_INFORMATION_WITHOUT_A_DISTRIBUTION_OVER_DEVELOPMENT_DATA",
+    "SELECTION_INDEX_CAPACITY_IS_NOT_AN_EXACT_MUTUAL_INFORMATION_LOWER_BOUND",
+    "NO_CLAIM_ALL_POSTEXPOSURE_CODE_IS_DATA_DEPENDENT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
