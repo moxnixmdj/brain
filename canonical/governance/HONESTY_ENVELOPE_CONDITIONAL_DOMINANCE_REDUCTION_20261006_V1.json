@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_HONESTY_ENVELOPE_CONDITIONAL_DOMINANCE_REDUCTION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__FIVE_HONESTY_LEAVES_DETERMINISTICALLY_GATED_UNDER_COMPLETE_LEDGER__THREE_ROOTS_REMAIN__ZERO_CREDIT",
+  "target_claim": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+  "implementation": {
+    "runtime": {
+      "path": "canonical/runtime/honesty_envelope_v1.py",
+      "git_blob_sha": "1ff02d62322b76068933498e869b1ee22949b991"
+    },
+    "tests": {
+      "path": "canonical/tests/test_honesty_envelope_v1.py",
+      "git_blob_sha": "6f252e327b91c634b890137c2a2dcd09966fef46"
+    },
+    "independent_replay": "PASS_13_OF_13_ON_BRAIN_H100_INDEPENDENT_REPLAY_V1"
+  },
+  "reused_owned_or_verified_substrate": [
+    {
+      "path": "canonical/runtime/evidence_state.py",
+      "git_blob_sha": "8a461b6ed06129ef778efc77db20df50928d27b1",
+      "role": "TAMPER_EVIDENT_EPISTEMIC_RECEIPT_STATE_MACHINE"
+    },
+    {
+      "path": "canonical/governance/SYNTHESIS_P3_CONTRACT_SEMANTIC_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "f6b83872bf1288693e4e5250a561599f1cc6fa75",
+      "role": "EXISTING_TYPED_SCOPE_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_PROVENANCE_AND_UNCERTAINTY_SEMANTICS"
+    },
+    {
+      "path": "canonical/governance/ROOT3_CLASS_BOUND_SUBPROCESS_MEDIATOR_V2_CURRENT_REBIND_20261005_V1.json",
+      "git_blob_sha": "5df37d62d26c39bc84830e2933ba1f0c62cdc857",
+      "role": "PARTIAL_EFFECT_MEDIATION_SUBSTRATE_ONLY__NOT_UNIVERSAL_EMISSION_COVERAGE"
+    }
+  ],
+  "conditional_theorem": {
+    "premise": [
+      "TASK_OBLIGATION_INVENTORY_IS_COMPLETE",
+      "MATERIAL_PROVENANCE_EVENT_INVENTORY_IS_COMPLETE",
+      "MATERIAL_CLAIM_INVENTORY_IS_COMPLETE",
+      "REGISTERED_EPISTEMIC_STATE_IS_COMPLETE_FOR_PRESSURE_SENSITIVE_BELIEF_ASSERTIONS",
+      "EVERY_EXTERNAL_HONESTY_RELEVANT_EMISSION_PASSES_THE_ENVELOPE"
+    ],
+    "consequence": [
+      "A_COMPLETE_CLAIM_IS_ADMITTED_ONLY_IF_ALL_REQUIRED_OBLIGATIONS_HAVE_VERIFIED_OR_PROMOTED_RECEIPTS",
+      "UNFINISHED_OR_FAILED_WORK_MUST_BE_EXPLICITLY_LABELED",
+      "MATERIAL_PREEXISTING_ANSWER_OR_HIDDEN_CHANGE_EVENTS_REQUIRE_DISCLOSURE",
+      "BELIEF_ASSERTION_CHANGES_REQUIRE_A_CONTENT_ADDRESSED_EVIDENCE_UPDATE",
+      "UNSUPPORTED_MATERIAL_FACTUAL_CLAIMS_REQUIRE_EXPLICIT_UNCERTAINTY_OR_DECLINE"
+    ],
+    "five_leaf_gate_count": 5,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "remaining_roots": [
+    {
+      "id": "HONESTY_UNIVERSAL_EMISSION_MEDIATION_TOTALITY",
+      "statement": "PROVE_EVERY_EXTERNALLY_VISIBLE_HONESTY_RELEVANT_EMISSION_AND_LOAD_BEARING_STATE_CHANGE_CANNOT_BYPASS_THE_ENVELOPE",
+      "current_state": "OPEN__ROOT3_SUBPROCESS_MEDIATOR_IS_ONLY_A_PARTIAL_EFFECT_SUBSET"
+    },
+    {
+      "id": "HONESTY_LEDGER_SEMANTIC_COMPLETENESS",
+      "statement": "PROVE_TASK_OBLIGATION_MATERIAL_CLAIM_PROVENANCE_EVENT_AND_EPISTEMIC_STATE_INVENTORIES_ARE_COMPLETE_OR_FAIL_CLOSED_WITHOUT_HIDING_REQUIRED_DISCLOSURE",
+      "current_state": "OPEN"
+    },
+    {
+      "id": "HONESTY_TARGET_SEMANTIC_BRIDGE",
+      "statement": "PROVE_THE_FIVE_ENVELOPE_LEAVES_ARE_EQUAL_OR_STRONGER_THAN_THE_LOAD_BEARING_OPUS55_HONESTY_BEHAVIOR_SEMANTICS_BOUND_BY_THE_PRIMARY_SOURCE",
+      "current_state": "OPEN"
+    }
+  ],
+  "compression_result": {
+    "primitive_family_count_delta": 0,
+    "new_model_capability_required": false,
+    "new_large_compute_required": false,
+    "blocker_shape": "THREE_FORMAL_MEDIATION_AND_SEMANTIC_PROOF_ROOTS__NOT_A_NEW_GENERAL_INTELLIGENCE_FAMILY"
+  },
+  "scheduler_effect": {
+    "activate_first": "HONESTY_UNIVERSAL_EMISSION_MEDIATION_TOTALITY",
+    "parallel_stable": [
+      "HONESTY_LEDGER_SEMANTIC_COMPLETENESS",
+      "HONESTY_TARGET_SEMANTIC_BRIDGE"
+    ],
+    "do_not_promote": [
+      "HONESTY_PARITY",
+      "UNIVERSAL_OBSERVABLE_DOMINANCE",
+      "TERMINAL_FINALITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "13_OF_13_TESTS_PROVE_ONLY_THE_CONDITIONAL_ENVELOPE_LOGIC",
+    "NO_UNIVERSAL_EMISSION_MEDIATION_PROVED",
+    "NO_LEDGER_SEMANTIC_COMPLETENESS_PROVED",
+    "NO_OPUS55_HONESTY_PARITY_PROVED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
