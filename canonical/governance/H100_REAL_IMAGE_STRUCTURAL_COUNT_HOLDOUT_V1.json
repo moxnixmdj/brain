@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REAL_IMAGE_STRUCTURAL_COUNT_HOLDOUT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_GENERIC_MARK_DETECTOR_EXECUTION",
+  "parser": "canonical/runtime/h100_generic_repeated_mark_detector_v1.py",
+  "excluded_tuning_image": "two_col_23297.png",
+  "cases": [
+    {
+      "id": "V2H_246",
+      "imgname": "95543699002420.png",
+      "query": "How many regions are represented?",
+      "label": "5"
+    },
+    {
+      "id": "V2H_214",
+      "imgname": "47413894001985.png",
+      "query": "How many countries are represented on the graph?",
+      "label": "2"
+    },
+    {
+      "id": "V2H_500",
+      "imgname": "two_col_82083.png",
+      "query": "The bar chart covers how many years?",
+      "label": "6"
+    }
+  ],
+  "evaluation_rule": "USE_DETECTED_REPEAT_MARK_COUNT_AS_STRUCTURAL_COUNT_ANSWER__NO_IMAGE_SPECIFIC_TUNING_AFTER_FREEZE",
+  "hard_nonclaims": [
+    "QUESTIONS_ARE_ONLY_APPROXIMATE_STRUCTURAL_COUNT_PROXIES",
+    "THREE_CASES_ARE_NOT_GENERAL_VISION"
+  ],
+  "promotion_authority": false
+}
