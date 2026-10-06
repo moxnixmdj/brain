@@ -1,0 +1,131 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_ROBUST_FIXED_FONT_DIGIT_OCR_FRESH_HOLDOUT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_ROBUST_PROGRAM_PRECOMMIT_BEFORE_EXECUTION",
+  "program_precommit": "canonical/governance/H100_U1_ROBUST_FIXED_FONT_DIGIT_OCR_PROGRAM_PRECOMMIT_V1.json",
+  "perturbation": "ONE_NEW_PIXEL_BIT_FLIP_PER_DIGIT__DIFFERENT_FROM_DEVELOPMENT_STRESS",
+  "cases": [
+    {
+      "digit": 0,
+      "input": [
+        14,
+        17,
+        17,
+        17,
+        17,
+        17,
+        30
+      ]
+    },
+    {
+      "digit": 1,
+      "input": [
+        5,
+        12,
+        4,
+        4,
+        4,
+        4,
+        14
+      ]
+    },
+    {
+      "digit": 2,
+      "input": [
+        14,
+        17,
+        1,
+        2,
+        4,
+        10,
+        31
+      ]
+    },
+    {
+      "digit": 3,
+      "input": [
+        30,
+        1,
+        9,
+        14,
+        1,
+        1,
+        30
+      ]
+    },
+    {
+      "digit": 4,
+      "input": [
+        2,
+        22,
+        10,
+        18,
+        31,
+        2,
+        2
+      ]
+    },
+    {
+      "digit": 5,
+      "input": [
+        31,
+        16,
+        16,
+        30,
+        5,
+        1,
+        30
+      ]
+    },
+    {
+      "digit": 6,
+      "input": [
+        14,
+        16,
+        16,
+        31,
+        17,
+        17,
+        14
+      ]
+    },
+    {
+      "digit": 7,
+      "input": [
+        31,
+        1,
+        2,
+        4,
+        8,
+        8,
+        12
+      ]
+    },
+    {
+      "digit": 8,
+      "input": [
+        14,
+        17,
+        1,
+        14,
+        17,
+        17,
+        14
+      ]
+    },
+    {
+      "digit": 9,
+      "input": [
+        14,
+        17,
+        17,
+        15,
+        1,
+        9,
+        14
+      ]
+    }
+  ],
+  "required_pass": "10_OF_10_EXACT",
+  "promotion_authority": false
+}
