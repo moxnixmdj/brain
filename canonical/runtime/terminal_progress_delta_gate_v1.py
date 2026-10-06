@@ -103,7 +103,34 @@ def potential(state: Mapping[str, Any]) -> tuple[int, int, int, int, int]:
         s["open_proof_node_count"],
     )
 
-def _receipts(value: Any, name: str, *, required: bool) -> tuple[Mapping[str, Any], ...]:
+def _target_digest(targets: Sequence[str]) -> str:
+    return sha256_json(sorted(targets))
+
+def _dominant_effect(before_p: tuple[int, int, int, int, int], after_p: tuple[int, int, int, int, int]) -> str:
+    labels = (
+        "TRUTH_CLOSURE",
+        "INTERFACE_CONTRACTION",
+        "DEPTH_CONTRACTION",
+        "PREREQUISITE_CONTRACTION",
+        "PROOF_NODE_CONTRACTION",
+    )
+    for index, (before_value, after_value) in enumerate(zip(before_p, after_p)):
+        if after_value < before_value:
+            return labels[index]
+        if after_value > before_value:
+            raise ProgressGateError("POTENTIAL_NOT_LEXICOGRAPHICALLY_CONTRACTING")
+    raise ProgressGateError("POTENTIAL_UNCHANGED")
+
+def _receipts(
+    value: Any,
+    name: str,
+    *,
+    required: bool,
+    before: Mapping[str, Any],
+    after: Mapping[str, Any],
+    targets: Sequence[str],
+    effect_kind: str,
+) -> tuple[Mapping[str, Any], ...]:
     if not isinstance(value, list):
         raise ProgressGateError(name + "_NOT_LIST")
     if required and not value:
@@ -113,6 +140,16 @@ def _receipts(value: Any, name: str, *, required: bool) -> tuple[Mapping[str, An
     paths = [x["path"] for x in value]
     if len(paths) != len(set(paths)):
         raise ProgressGateError(name + "_DUPLICATE_PATH")
+    target_sha = _target_digest(targets)
+    for row in value:
+        if row.get("before_state_sha256") != before["state_sha256"]:
+            raise ProgressGateError(name + "_BEFORE_STATE_BINDING_MISMATCH")
+        if row.get("after_state_sha256") != after["state_sha256"]:
+            raise ProgressGateError(name + "_AFTER_STATE_BINDING_MISMATCH")
+        if row.get("target_truth_obligations_sha256") != target_sha:
+            raise ProgressGateError(name + "_TARGET_BINDING_MISMATCH")
+        if row.get("effect_kind") != effect_kind:
+            raise ProgressGateError(name + "_EFFECT_KIND_MISMATCH")
     return tuple(value)
 
 def evaluate(doc: Mapping[str, Any]) -> GateResult:
@@ -136,7 +173,15 @@ def evaluate(doc: Mapping[str, Any]) -> GateResult:
     introduced = tuple(sorted(after_truth - before_truth))
 
     if kind == "TRUTH_REPAIR":
-        _receipts(doc.get("countermodel_receipts"), "COUNTERMODEL_RECEIPTS", required=True)
+        _receipts(
+            doc.get("countermodel_receipts"),
+            "COUNTERMODEL_RECEIPTS",
+            required=True,
+            before=before,
+            after=after,
+            targets=tuple(sorted(targets)),
+            effect_kind="TRUTH_REPAIR",
+        )
         return GateResult(
             status="ADMIT_TRUTH_REPAIR_NOT_PROGRESS",
             admitted=True,
@@ -149,7 +194,6 @@ def evaluate(doc: Mapping[str, Any]) -> GateResult:
             reason="CONSTRUCTIVE_COUNTERMODEL_ADMITTED_FOR_CORRECTNESS__ZERO_PROGRESS_CREDIT__GLOBAL_RECOMPUTE_REQUIRED",
         )
 
-    _receipts(doc.get("evidence_receipts"), "EVIDENCE_RECEIPTS", required=True)
     if introduced:
         return GateResult(
             status="REJECT_NONCONTRACTING_PROGRESS",
@@ -176,6 +220,16 @@ def evaluate(doc: Mapping[str, Any]) -> GateResult:
             introduced_truth_obligations=introduced,
             reason="LEXICOGRAPHIC_TERMINAL_PROGRESS_POTENTIAL_DID_NOT_STRICTLY_DECREASE",
         )
+    effect_kind = _dominant_effect(before_p, after_p)
+    _receipts(
+        doc.get("evidence_receipts"),
+        "EVIDENCE_RECEIPTS",
+        required=True,
+        before=before,
+        after=after,
+        targets=tuple(sorted(targets)),
+        effect_kind=effect_kind,
+    )
     return GateResult(
         status="ADMIT_TERMINAL_CONTRACTING_PROGRESS",
         admitted=True,
