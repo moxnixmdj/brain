@@ -1,0 +1,78 @@
+{
+  "schema":"PROJECT_BRAIN_MATCHED_SEVEN_CLASS_SCOPE_BASIS_V1",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_STRUCTURAL_SCOPE_COMPRESSION__7_CLASSES_COVER_16_MATCHED_ATOMS__ZERO_CREDIT",
+  "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem":"THE VERIFIED V4 INTEGRATED SEMANTIC BASIS HAS 7 CASE CLASSES COVERING 10 NONLEGACY MATCHED DIMENSIONS, WHILE A LEGACY REUSE AUDIT IDENTIFIED 6 ADDITIONAL DIRECTLY REUSABLE DIMENSIONS. A NAIVE PLAN WOULD KEEP SEPARATE LEGACY CASE CLASSES. THIS FILE TESTS WHETHER THOSE SIX CAN BE ABSORBED INTO THE EXISTING SEVEN-CLASS BASIS WITHOUT WEAKENING SCOPE.",
+  "sources":{
+    "v4_component_basis":{"path":"canonical/governance/MATCHED_SUCCESS_COMPONENT_BOUND_SEMANTIC_V4.json","git_blob_sha":"d2f8f80666cc64aead91f9adee88a1eda0c17ced"},
+    "scope_compiler":{"path":"canonical/governance/MATCHED_SUCCESS_SCOPE_COMPILER_V1.json","git_blob_sha":"2e344ccaa611cda7764d4d70557f1e5bdec9cf3c"},
+    "legacy_reuse_audit":{"path":"canonical/governance/MATCHED_SUCCESS_LEGACY_T2_REUSE_AUDIT_V1.json","git_blob_sha":"43d2b820ac1389c7e1e76f907acf2f6f11311607"}
+  },
+  "basis":{
+    "AGENCY_THREE_TOOL_LONG_HORIZON":[
+      "dimension:multi_step_planning_with_at_least_three_distinct_tool_or_action_types",
+      "dimension:long_horizon_state_retention",
+      "dimension:minimal_oversight_completion",
+      "dimension:state_change_after_actions_requiring_replanning",
+      "dimension:tool_failure_and_recovery",
+      "dimension:subtask_dependency_and_fan_in"
+    ],
+    "INSTRUCTION_CHANGE_CONTROL":[
+      "dimension:multi_constraint_instruction_compliance",
+      "dimension:requirement_change",
+      "dimension:authorization_and_scope_boundaries",
+      "dimension:routine_ambiguity",
+      "dimension:explicit_abstention_and_fail_closed_cases"
+    ],
+    "RESEARCH_TOOL_ARTIFACT":[
+      "dimension:research_plus_tool_use_plus_artifact_creation"
+    ],
+    "BROWSER_MEMORY_RECOVERY":[
+      "dimension:browser_or_computer_action_plus_memory_plus_recovery"
+    ],
+    "CODING_DEBUG_TOOL_DISCOVERY":[
+      "dimension:coding_plus_debugging_plus_tool_discovery"
+    ],
+    "DELEGATION_SYNTHESIS_ARTIFACT":[
+      "dimension:delegation_plus_evidence_synthesis_plus_artifact_production"
+    ],
+    "CROSS_CAPABILITY_HANDOFF_ROLLBACK":[
+      "dimension:cross_capability_state_handoff_and_rollback"
+    ]
+  },
+  "theorem":{
+    "statement":"THE EXACT SEVEN V4 CASE CLASSES CAN FORM AN EXACT BASIS FOR ALL 16 CURRENT MATCHED-SUCCESS DIMENSION ATOMS IF THE AGENCY CLASS IS STRENGTHENED TO EXERCISE THE THREE VERIFIED LEGACY AGENCY DIMENSIONS AND THE INSTRUCTION CLASS IS STRENGTHENED TO EXERCISE THE THREE VERIFIED LEGACY INSTRUCTION/SCOPE DIMENSIONS.",
+    "counts":{"case_classes":7,"v4_nonlegacy_atoms":10,"legacy_extension_atoms":6,"total_scope_atoms":16},
+    "effect":"DELETE ANY REQUIREMENT FOR A SEPARATE LEGACY MATCHED CASE CLASS OR SECOND LEGACY MATCHED CASE WAVE. LEGACY GENERATOR/ORACLE SUBSTRATE MAY BE REUSED INSIDE THE TWO STRENGTHENED CLASSES, BUT CONSUMED HISTORICAL RESULTS MAY NOT BE REUSED AS NEW TERMINAL EVIDENCE."
+  },
+  "required_realization_conditions":[
+    "THE STRENGTHENED AGENCY CLASS MUST OBJECTIVELY RECEIPT ALL SIX AGENCY DIMENSIONS ON THE SAME FROZEN CLASS SEMANTICS.",
+    "THE STRENGTHENED INSTRUCTION CLASS MUST OBJECTIVELY RECEIPT ALL FIVE INSTRUCTION/SCOPE DIMENSIONS ON THE SAME FROZEN CLASS SEMANTICS.",
+    "THE FIVE COMPOSITION CLASSES MUST EACH SATISFY THEIR V4 COMPONENT-BOUND INTERVENTIONAL CONTRACT.",
+    "THE REAL FROZEN CASE MANIFEST MUST PASS MATCHED_SUCCESS_SCOPE_COMPILER_V1.",
+    "NO LEGACY TERMINAL RESULT IS INHERITED AS NEW MATCHED ACCEPTANCE EVIDENCE."
+  ],
+  "falsifiers":[
+    "A LEGACY DIMENSION CANNOT BE EXERCISED WITHOUT CHANGING THE CLASS SEMANTICS SO MUCH THAT ITS V4 INTEGRATED CONTRACT NO LONGER HOLDS.",
+    "THE STRENGTHENED AGENCY OR INSTRUCTION CLASS CANNOT PRODUCE OBJECTIVE COVERAGE RECEIPTS FOR ALL ASSIGNED ATOMS.",
+    "THE REAL MANIFEST FAILS THE VERIFIED SCOPE COMPILER.",
+    "ANY EXTRA CASE CLASS IS PROVED NECESSARY BY A DIMENSION THAT CANNOT SHARE ONE OF THE SEVEN CLASS SEMANTICS."
+  ],
+  "runtime":"canonical/runtime/matched_seven_class_scope_basis_v1.py",
+  "tests":"canonical/tests/test_matched_seven_class_scope_basis_v1.py",
+  "hard_nonclaims":[
+    "NO REAL CASE MANIFEST EXISTS FROM THIS THEOREM ALONE",
+    "NO CLAIM THE SEVEN CLASSES HAVE YET BEEN GENERATED OR EXECUTED",
+    "NO FRESH REALITY EXECUTION PROMOTION ACCEPTANCE FAMILY CAPABILITY OWNERSHIP OR TERMINAL CREDIT"
+  ],
+  "accounting":{
+    "incremental_spend_usd":0,
+    "new_reality_units_consumed":0,
+    "terminal_credit_delta":0,
+    "acceptance_credit_delta":0,
+    "family_credit_delta":0,
+    "capability_credit_delta":0,
+    "ownership_credit_delta":0
+  }
+}
