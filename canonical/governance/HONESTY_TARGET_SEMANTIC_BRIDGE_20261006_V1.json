@@ -1,0 +1,142 @@
+{
+  "schema": "PROJECT_BRAIN_HONESTY_TARGET_SEMANTIC_BRIDGE_20261006_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__TARGET_BEHAVIOR_SEMANTICS_LOSSLESSLY_COVERED__PERFORMANCE_METADATA_EXCLUDED_FROM_SEMANTIC_ROOT__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "target_claim": "HONESTY_TARGET_SEMANTIC_BRIDGE",
+  "objective": "Prove that the five Brain honesty-envelope leaves are equal or stronger than the load-bearing Opus 5.5 honesty behavior semantics actually bound by the dual-snapshot Anthropic primary source, without confusing target behavior semantics with a report about Opus performance.",
+  "authorities": {
+    "primary_source_binding": {
+      "path": "canonical/governance/OPUS55_HONESTY_PRIMARY_SOURCE_SNAPSHOT_BINDING_20261006_V1.json",
+      "git_blob_sha": "df59bfa94890fcffd95baab37b36674ca58dc67d"
+    },
+    "honesty_counterexample": {
+      "path": "canonical/governance/UNIVERSAL_OBSERVABLE_DOMINANCE_HONESTY_COUNTEREXAMPLE_20261006_V1.json",
+      "git_blob_sha": "833cfa5fb8a444a93fe7e25f9e5b7a94b79667ce"
+    },
+    "conditional_envelope": {
+      "path": "canonical/governance/HONESTY_ENVELOPE_CONDITIONAL_DOMINANCE_REDUCTION_20261006_V1.json",
+      "git_blob_sha": "86a841893259ca5caed06190baffb572fd5a01cd"
+    },
+    "observable_scope": {
+      "path": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
+      "git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c"
+    }
+  },
+  "target_observation_classification": [
+    {
+      "source_fact": "ANTHROPIC_EVALUATES_FALSE_OR_UNEARNED_TASK_COMPLETION_AS_MISLEADING_BEHAVIOR",
+      "class": "LOAD_BEARING_BEHAVIOR_SEMANTIC"
+    },
+    {
+      "source_fact": "ANTHROPIC_EVALUATES_DISCLOSURE_OF_PREEXISTING_ANSWER_USE",
+      "class": "LOAD_BEARING_BEHAVIOR_SEMANTIC"
+    },
+    {
+      "source_fact": "ANTHROPIC_EVALUATES_DISCLOSURE_OF_HIDDEN_CHANGES",
+      "class": "LOAD_BEARING_BEHAVIOR_SEMANTIC"
+    },
+    {
+      "source_fact": "ANTHROPIC_EVALUATES_HONESTY_UNDER_PRESSURE",
+      "class": "LOAD_BEARING_BEHAVIOR_SEMANTIC"
+    },
+    {
+      "source_fact": "ANTHROPIC_REPORTS_OPUS55_RELATIVE_PERFORMANCE_ON_THE_MISLEADING_BEHAVIOR_SUITE",
+      "class": "TARGET_PERFORMANCE_METADATA_NOT_A_BEHAVIOR_SEMANTIC"
+    }
+  ],
+  "materiality_projection": {
+    "definition": "A provenance event is MATERIAL for this bridge iff omitting or misrepresenting it can change a target honesty verdict or any other terminally relevant externally measurable outcome.",
+    "consequence": [
+      "IF_THE_TARGET_HONESTY_EVALUATION_DISTINGUISHES_DISCLOSURE_FROM_NONDISCLOSURE_FOR_A_PREEXISTING_ANSWER_EVENT_THEN_THAT_EVENT_IS_MATERIAL.",
+      "IF_THE_TARGET_HONESTY_EVALUATION_DISTINGUISHES_DISCLOSURE_FROM_NONDISCLOSURE_FOR_A_HIDDEN_CHANGE_EVENT_THEN_THAT_EVENT_IS_MATERIAL.",
+      "EVENTS_WHOSE_OMISSION_CANNOT_CHANGE_ANY_TARGET_HONESTY_VERDICT_OR_TERMINAL_OUTCOME_ARE_NOT_A_DISTINCT_EXTERNALLY_USEFUL_CAPABILITY_REQUIREMENT_UNDER_THE_OBSERVABLE_TRACE_SCOPE_THEOREM."
+    ],
+    "ownership_of_completeness_obligation": "HONESTY_LEDGER_SEMANTIC_COMPLETENESS",
+    "rule": "THE_SEMANTIC_BRIDGE_DEFINES_WHAT_COUNTS_AS_MATERIAL; THE_SEPARATE_LEDGER_ROOT_MUST_PROVE_ALL_SUCH_EVENTS_ARE_ACTUALLY_INVENTORIED.",
+    "machine_contract": {
+      "target_verdict_relevance_defines_materiality": true,
+      "terminal_outcome_relevance_defines_materiality": true,
+      "ledger_root_owns_inventory_completeness": true
+    }
+  },
+  "mapping": [
+    {
+      "target_semantic": "ANTHROPIC_EVALUATES_FALSE_OR_UNEARNED_TASK_COMPLETION_AS_MISLEADING_BEHAVIOR",
+      "brain_leaves": [
+        "NO_FALSE_COMPLETION_CLAIM",
+        "DISCLOSE_MATERIAL_UNFINISHED_OR_FAILED_WORK"
+      ],
+      "relation": "BRAIN_EQUAL_OR_STRONGER_CONDITIONAL_ON_COMPLETE_TASK_OBLIGATION_LEDGER",
+      "proof": "A COMPLETE CLAIM IS REJECTED WHEN THE REQUIRED OBLIGATION LEDGER DOES NOT COMPUTE COMPLETE; PARTIAL_OR_FAILED WORK MUST MATCH THE COMPUTED STATE."
+    },
+    {
+      "target_semantic": "ANTHROPIC_EVALUATES_DISCLOSURE_OF_PREEXISTING_ANSWER_USE",
+      "brain_leaves": [
+        "DISCLOSE_LOAD_BEARING_USE_OF_PREEXISTING_ANSWER_OR_HIDDEN_CHANGE_WHEN_MATERIAL"
+      ],
+      "relation": "BRAIN_EQUAL_OR_STRONGER_ON_LOAD_BEARING_TARGET_EVENTS",
+      "proof": "ANY PREEXISTING_ANSWER_EVENT WHOSE NONDISCLOSURE CAN CHANGE THE TARGET HONESTY VERDICT IS MATERIAL BY_THE_BRIDGE_DEFINITION_AND_IS_THEREFORE_REQUIRED_TO_BE_DISCLOSED."
+    },
+    {
+      "target_semantic": "ANTHROPIC_EVALUATES_DISCLOSURE_OF_HIDDEN_CHANGES",
+      "brain_leaves": [
+        "DISCLOSE_LOAD_BEARING_USE_OF_PREEXISTING_ANSWER_OR_HIDDEN_CHANGE_WHEN_MATERIAL"
+      ],
+      "relation": "BRAIN_EQUAL_OR_STRONGER_ON_LOAD_BEARING_TARGET_EVENTS",
+      "proof": "ANY HIDDEN_CHANGE_EVENT WHOSE NONDISCLOSURE_CAN_CHANGE_THE_TARGET_HONESTY_VERDICT_IS_MATERIAL_BY_THE_BRIDGE_DEFINITION_AND_IS_THEREFORE_REQUIRED_TO_BE_DISCLOSED."
+    },
+    {
+      "target_semantic": "ANTHROPIC_EVALUATES_HONESTY_UNDER_PRESSURE",
+      "brain_leaves": [
+        "RESIST_PRESSURE_TO_STATE_A_BELIEF_THE_POLICY_DOES_NOT_HOLD"
+      ],
+      "relation": "BRAIN_EQUAL_OR_STRONGER_CONDITIONAL_ON_COMPLETE_REGISTERED_EPISTEMIC_STATE",
+      "proof": "AN_ASSERTED_BELIEF_MAY_DIFFER_FROM_THE_REGISTERED_BELIEF_ONLY_WITH_A_CONTENT_ADDRESSED_EVIDENCE_UPDATE; PRESSURE_ALONE_CANNOT_AUTHORIZE_THE_CHANGE."
+    }
+  ],
+  "extra_brain_semantics": [
+    "PREFER_EXPLICIT_UNCERTAINTY_OR_DECLINE_OVER_UNSUPPORTED_FACTUAL_ASSERTION"
+  ],
+  "theorem": {
+    "statement": "UNDER_THE_ALREADY_SEPARATE_LEDGER_COMPLETENESS_PREMISES, EVERY_LOAD_BEARING_OPUS55_HONESTY_BEHAVIOR_SEMANTIC_BOUND_BY_THE_DUAL_SNAPSHOT_PRIMARY_SOURCE_IS_COVERED_BY_AN_EQUAL_OR_STRONGER_BRAIN_HONESTY_ENVELOPE_LEAF. THE_FIFTH_STABLE_PRIMARY_SOURCE_MARKER_IS_A_REPORT_ABOUT_OPUS55_RELATIVE_PERFORMANCE_AND_IS_NOT_AN_ADDITIONAL_BEHAVIOR_SEMANTIC.",
+    "target_behavior_semantic_count": 4,
+    "mapped_target_behavior_semantic_count": 4,
+    "unmapped_target_behavior_semantic_count": 0,
+    "performance_metadata_count": 1,
+    "semantic_bridge_closed_if_independently_verified": true
+  },
+  "root_accounting_effect": {
+    "closes_if_verified": [
+      "HONESTY_TARGET_SEMANTIC_BRIDGE"
+    ],
+    "preserves_open": [
+      "HONESTY_UNIVERSAL_EMISSION_MEDIATION_TOTALITY",
+      "HONESTY_LEDGER_SEMANTIC_COMPLETENESS"
+    ],
+    "does_not_close": [
+      "HONESTY_PARITY",
+      "UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+      "TERMINAL_FINALITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_OPUS55_IS_PERFECTLY_HONEST.",
+    "NO_CLAIM_BRAIN_CURRENTLY_MEDIATES_EVERY_EXTERNAL_EMISSION.",
+    "NO_CLAIM_THE_HONESTY_LEDGER_IS_COMPLETE.",
+    "NO_CLAIM_BRAIN_MATCHES_OR_EXCEEDS_OPUS55_EMPIRICAL_HONESTY_PERFORMANCE.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
