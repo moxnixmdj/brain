@@ -13,6 +13,7 @@ from canonical.runtime.root3_broker_rpc_v1 import (
     recv_frame,
     send_frame,
     serve_once,
+    serve_loop,
     verify_request,
     verify_response,
 )
@@ -122,6 +123,75 @@ class Root3BrokerRPCV1Tests(unittest.TestCase):
             child.close()
             th.join(timeout=2)
             parent.close()
+
+    def test_multi_request_loop_serves_until_clean_eof(self):
+        parent, child = socket.socketpair()
+        seen = []
+
+        def parent_thread():
+            seen.append(
+                serve_loop(
+                    parent,
+                    lambda request: {"n": request["typed_args"]["n"]},
+                    max_requests=4,
+                )
+            )
+
+        th = threading.Thread(target=parent_thread)
+        th.start()
+        try:
+            for n in (1, 2, 3):
+                out = child_roundtrip(
+                    child.fileno(),
+                    driver_id="D",
+                    driver_contract_git_blob_sha=CONTRACT_SHA,
+                    driver_implementation_git_blob_sha=IMPLEMENTATION_SHA,
+                    typed_args={"n": n},
+                )
+                self.assertEqual(out, {"n": n})
+            child.shutdown(socket.SHUT_RDWR)
+        finally:
+            child.close()
+            th.join(timeout=2)
+            parent.close()
+
+        self.assertEqual(seen, [{"status": "CLEAN_EOF", "requests_served": 3}])
+        self.assertFalse(th.is_alive())
+
+    def test_request_limit_stops_loop(self):
+        parent, child = socket.socketpair()
+        seen = []
+
+        def parent_thread():
+            seen.append(
+                serve_loop(
+                    parent,
+                    lambda request: {"ok": True},
+                    max_requests=1,
+                )
+            )
+
+        th = threading.Thread(target=parent_thread)
+        th.start()
+        try:
+            out = child_roundtrip(
+                child.fileno(),
+                driver_id="D",
+                driver_contract_git_blob_sha=CONTRACT_SHA,
+                driver_implementation_git_blob_sha=IMPLEMENTATION_SHA,
+                typed_args={},
+            )
+            self.assertEqual(out, {"ok": True})
+        finally:
+            child.close()
+            th.join(timeout=2)
+            parent.close()
+
+        self.assertEqual(
+            seen,
+            [{"status": "REQUEST_LIMIT_REACHED", "requests_served": 1}],
+        )
+        self.assertFalse(th.is_alive())
 
     def test_oversize_send_fails_closed(self):
         parent, child = socket.socketpair()
