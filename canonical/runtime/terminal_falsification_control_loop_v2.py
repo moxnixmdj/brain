@@ -290,7 +290,16 @@ def compile_control_loop(state: Mapping[str, Any]) -> ControlLoopResult:
 
     schedulable.sort(key=_priority_key)
 
-    known_open = state.get("known_open_truth_obligations")
+    top_known_open = state.get("known_open_truth_obligations")
+    nested_truth = state.get("current_truth_state")
+    nested_known_open = (
+        nested_truth.get("known_open_truth_obligations")
+        if isinstance(nested_truth, Mapping)
+        else None
+    )
+    if top_known_open is not None and nested_known_open is not None and top_known_open != nested_known_open:
+        raise ValueError("conflicting known_open_truth_obligations bindings")
+    known_open = top_known_open if top_known_open is not None else nested_known_open
     if not isinstance(known_open, int) or known_open < 0:
         raise ValueError("known_open_truth_obligations must be a nonnegative integer")
 
