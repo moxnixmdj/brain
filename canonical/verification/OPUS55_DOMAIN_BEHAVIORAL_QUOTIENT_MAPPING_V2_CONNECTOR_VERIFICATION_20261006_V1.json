@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_DOMAIN_BEHAVIORAL_QUOTIENT_MAPPING_V2_CONNECTOR_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__BIOLOGY_V1_COUNTEREXAMPLE_MINIMALLY_REPAIRED__SEMANTIC_LOSSLESSNESS_OPEN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_DOMAIN_BEHAVIORAL_QUOTIENT_MAPPING_V2.json",
+    "git_blob_sha": "c5f23ed71909da371b2e8541a9364aae4b23c582"
+  },
+  "authorities": {
+    "counterexample": {
+      "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_UNMAPPED_TRANSFORM_SEARCH_20261005_V1.json",
+      "git_blob_sha": "f303a29fa9de86e95cdf62ea0af85f22e52d7271"
+    },
+    "family_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    }
+  },
+  "checks": {
+    "exact_five_surface_set_preserved": true,
+    "counterexample_requires_no_new_primitive_family": true,
+    "biology_vision_family_present": true,
+    "biology_biomedical_visual_transform_present": true,
+    "all_referenced_families_exist_in_19_family_envelope": true,
+    "no_row_creates_new_family": true,
+    "repair_flag_true": true,
+    "new_family_added_false": true,
+    "zero_credit_preserved": true,
+    "semantic_losslessness_not_claimed": true
+  },
+  "deduction": "THE_KNOWN_BIOLOGY_V1_SEMANTIC_OMISSION_IS_STRUCTURALLY_REPAIRED_BY_ADDING_THE_EXISTING_VISION_AND_DENSE_DOCUMENT_UNDERSTANDING_FAMILY_AND_THE_EXACT_BIOMEDICAL_VISUAL_ANALYSIS_TRANSFORM__THIS_REMOVES_THE_KNOWN_COUNTEREXAMPLE_BUT_DOES_NOT_PROVE_BIOLOGY_MAPPING_COMPLETENESS_OR_PARITY",
+  "hard_nonclaims": [
+    "NO_CLAIM_SEMANTIC_LOSSLESSNESS_OF_THE_BIOLOGY_ROW",
+    "NO_CLAIM_ALL_BIOLOGY_BEHAVIORS_ARE_ENUMERATED",
+    "NO_CLAIM_BIOLOGY_PARITY",
+    "NO_META_OBLIGATION_CLOSED",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "THIS_IS_CONNECTOR_RECOMPUTATION_NOT_AN_INDEPENDENT_EXECUTION_CARRIER"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
