@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_H100_A_TOURNAMENT_WAVE2_RESULT_V1",
+  "date": "2026-10-06",
+  "status": "LOCAL_RECOMPUTE__31_OF_32_CORRECT__ONE_ALGORITHM_GAP__NO_LEARNED_STATE_NECESSITY",
+  "bindings": {
+    "parser_commit": "bf123d43215012a06bd43acebaac4572cb7838fe",
+    "parser_blob": "3c38a3d9b7ae36f4a49f6bab19dd29e87f9688b4",
+    "parser_source_bytes": 2204,
+    "seed_binding_commit": "9287b5c2c26b95223975a3b03016d1ad7484ea77",
+    "generator_blob": "a8840437c087a5df9e9dc4139b062342478bb036"
+  },
+  "holdout": {
+    "case_count": 32,
+    "scanned_seed_count": 36,
+    "invalid_generator_seeds_skipped": 4
+  },
+  "observed": {
+    "correct": 31,
+    "wrong": 1,
+    "ambiguous_abstain": 0,
+    "other_abstain": 0,
+    "orientation_mismatch": 0,
+    "target_adapted_deterministic_bits": 17632,
+    "learned_target_bits": 0
+  },
+  "failure": {
+    "seed": "7394230641557963668",
+    "question": "COUNT_BARS",
+    "expected": 7,
+    "observed": 6,
+    "orientation": "HORIZONTAL",
+    "cause": "LAST_BAR_INTERSECTS_LONG_HORIZONTAL_AXIS_AND_MERGES_INTO_NONRECTANGULAR_COMPONENT",
+    "causal_class": "ALGORITHM_GAP",
+    "information_gap": false
+  },
+  "tournament_update": {
+    "persistent_information_lower_bound_delta_bits": 0,
+    "repair_allowed": "GENERIC_AXIS_REMOVAL_BEFORE_COMPONENT_SEGMENTATION",
+    "promotion_rule": "REPAIR_MUST_PASS_NEW_PARSER_COMMIT_DERIVED_HOLDOUT"
+  },
+  "hard_nonclaims": [
+    "LOCAL_RECOMPUTE_NOT_INDEPENDENT_CARRIER",
+    "BOUNDED_PBM_FAMILY_NOT_GENERAL_VISION"
+  ],
+  "promotion_authority": false
+}
