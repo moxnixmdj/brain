@@ -1,0 +1,29 @@
+name: Verify synthesis current-candidate ceiling counterexample V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/SYNTHESIS_CURRENT_CANDIDATE_CEILING_COUNTEREXAMPLE_20261005_V1.json
+      - canonical/tests/test_synthesis_current_candidate_ceiling_counterexample_20261005_v1.py
+      - canonical/runtime/p3_information_safe_candidate_v3.py
+      - canonical/governance/SYNTHESIS_P3_TYPED_INPUT_DOMAIN_COUNTERMODEL_PARTITION_20261005_V1.json
+      - canonical/runtime/synthesis_matched_quality_metric_v1.py
+      - canonical/governance/SYNTHESIS_HIDDEN_EVALUATOR_ROUTE_TRUTH_REPAIR_ACTIVATION_V1.json
+      - .github/workflows/verify-synthesis-current-candidate-ceiling-counterexample-20261005-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Run constructive ceiling falsification
+        run: python -m pytest -q canonical/tests/test_synthesis_current_candidate_ceiling_counterexample_20261005_v1.py

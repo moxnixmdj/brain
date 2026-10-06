@@ -1,0 +1,13 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-05",
+  "intent_id": "SYNTHESIS_CURRENT_CANDIDATE_CEILING_COUNTEREXAMPLE_20261005_SOL_V1",
+  "status": "PREMUTATION_INTENT__ZERO_CREDIT",
+  "base_commit": "bad8622692789f3760fbf4884da32a77ad0704e7",
+  "objective": "Test the active V16 comparator-free universal matched-quality ceiling route against the current content-addressed P3 v3 candidate using an already-admitted R6 provenance/source-authority residual, without terminal cases or fresh reality.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0
+  }
+}
