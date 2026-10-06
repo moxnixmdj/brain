@@ -636,7 +636,10 @@
     "full_opus_5_5_envelope_obsoleted": false,
     "verified_owned_equal_or_better_capabilities": [
       "EXACT_SYMBOLIC_COMPUTATION",
-      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
     ],
     "external_specimen_backed_families": [
       "COMPLEX_MULTI_TOOL_AGENCY",
@@ -651,11 +654,8 @@
       "UNKNOWN_DOMAIN_ADAPTATION"
     ],
     "owned_components_not_full_family": [
-      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-      "MULTI_CAPABILITY_COMPOSITION",
-      "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "ARTIFACT_CREATION"
+      "ARTIFACT_CREATION",
+      "MULTI_CAPABILITY_COMPOSITION"
     ],
     "revoked_false_ownership_packages": [
       "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
@@ -663,7 +663,7 @@
       "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
     ],
     "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
-    "next_optimization_target": "COMPLETE_BEHAVIORAL_SEMANTIC_PURGE_AND_VALIDATE_INDEPENDENT_ACCEPTANCE_MODEL_ON_SPENT_HELDOUTS__THEN_RESUME_MATCHED_OPUS_VERIFICATION",
+    "next_optimization_target": "G_ROUTE_TARGET_GENERATION_AND_TRANSFER_CLOSURE__K6_SELECTED_SEMANTIC_BINDINGS__ROOT3_L2_FINALITY",
     "brain_configured_verification_pending": [
       "ADVANCED_AGENTIC_CODING",
       "PROFESSIONAL_KNOWLEDGE_WORK"
@@ -739,7 +739,7 @@
   },
   "postwave_acceptance_summary": {
     "calibrated_family_count": 5,
-    "verified_owned_family_count": 2,
+    "verified_owned_family_count": 5,
     "pending_acceptance_family_count": 14,
     "calibrated_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
