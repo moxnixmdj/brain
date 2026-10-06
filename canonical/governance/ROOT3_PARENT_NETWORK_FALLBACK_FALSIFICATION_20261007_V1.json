@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_PARENT_NETWORK_FALLBACK_FALSIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "VERIFIED_COUNTERMODEL_CANDIDATE__PRODUCTION_PARENT_NETWORK_BYPASSES_ROOT3_EFFECT_BROKER_AND_NAMESPACE_MEMBRANE__REOPEN_ROOT3_EFFECT_TOTALITY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "production_launcher": {
+      "path": "canonical/runtime/root3_production_astra_launcher_v1.py",
+      "git_blob_sha": "3ac42e7be5a391cfda738131ecb0d3d600fa2147"
+    },
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py"
+    },
+    "namespace_membrane": {
+      "path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+      "git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+    },
+    "broker_bridge": {
+      "path": "canonical/runtime/root3_effect_broker_bridge_v1.py",
+      "git_blob_sha": "6995a178350976d2b349c0917dff46ba9464623d"
+    },
+    "closed_driver_theorem": {
+      "path": "canonical/governance/ROOT3_CLOSED_TYPED_EFFECT_DRIVER_ALGEBRA_BREAKTHROUGH_20261005_V1.json",
+      "git_blob_sha": "a9cdbcf8d6650fd9e86b61e9ab301881e128b2c0"
+    },
+    "confinement_theorem": {
+      "path": "canonical/governance/ROOT3_CONFINED_EFFECT_BROKER_MEDIATION_BREAKTHROUGH_20261005_V1.json",
+      "git_blob_sha": "43090fbe55507044686b6b9521860655fae25033"
+    }
+  },
+  "countermodel": {
+    "test": "canonical/tests/test_root3_parent_network_fallback_countermodel_v1.py",
+    "direct_authenticated_replay": "3_OF_3_PASS_ON_EXACT_BRANCH_BYTES",
+    "construction": [
+      "BUILD_A_VALID_CURRENT_CONTINUOUS_OBS_OPEN_DISCOVERY_CONTEXT_BOUND_TO_CURRENT_CANONICAL_STATE",
+      "LEAVE_PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR_UNSET",
+      "REPLACE_ONLY_THE_FINAL_HOST_URLOPEN_SINK_WITH_A_FAKE_TO_AVOID_REAL_NETWORK",
+      "EXECUTE_ASTRA__bridge_aware_urlopen",
+      "OBS_INFORMATION_ADMISSION_PASSES",
+      "ASTRA_FALLS_BACK_TO__direct_authorized_urlopen",
+      "THE_HOST_URLOPEN_SINK_IS_REACHED",
+      "ATTEMPT_AND_OPENED_RECEIPTS_ARE_EMITTED",
+      "root3_effect_broker_bridge_v1_IS_NOT_LOADED_OR_CALLED"
+    ],
+    "result": "A_MATERIAL_PARENT_NETWORK_EFFECT_IS_REACHABLE_WITHOUT_THE_NAMESPACE_MEMBRANE_OR_ROOT3_BROKER_PRECOMMIT_PATH"
+  },
+  "violated_root3_premises": [
+    "CREDITED_RUNTIME_HAS_NO_DIRECT_EXTERNAL_NETWORK_CHANNEL",
+    "BROKER_IS_THE_ONLY_MATERIAL_HOST_EFFECT_CHANNEL",
+    "INFORMATION_READ_WITH_LOAD_BEARING_PARENT_SCOPE_USES_A_SOURCE_SPECIFIC_TYPED_DRIVER_OR_EQUIVALENT_SOUND_PRECOMMIT_ROUTE",
+    "EXACT_PRODUCTION_LAUNCHER_BINDS_THE_CONFINEMENT_OR_BROKER_ARCHITECTURE"
+  ],
+  "important_distinction": {
+    "continuous_obs_information_authorization": "PRESENT",
+    "direct_network_attempt_receipt": "PRESENT",
+    "root3_material_effect_precommit_authorization": "ABSENT_ON_FALLBACK_PATH",
+    "namespace_confinement": "ABSENT_ON_PRODUCTION_PARENT",
+    "conclusion": "INFORMATION_POLICY_AUTHORIZATION_AND_POST_ATTEMPT_RECEIPTING_DO_NOT_IMPLY_ROOT3_EFFECT_TOTALITY"
+  },
+  "scope_repair": {
+    "old_root3_state": "ZERO_REALITY_SATURATED__WAITING_ON_NEW_CERTIFICATE_OR_UPSTREAM_SCOPE_RECEIPT_OR_GLOBAL_FRESH_REALITY_AUTHORIZATION",
+    "resume_condition_triggered": "NEW_CONTENT_ADDRESSED_COUNTEREVIDENCE_ON_CURRENT_PRODUCTION_BYTES",
+    "new_first_causal_blocker": "PARENT_NETWORK_FALLBACK_OUTSIDE_ROOT3_BROKER_OR_CONFINEMENT",
+    "next": "DELETE_OR_BROKER_THE_PARENT_DIRECT_NETWORK_FALLBACK_AT_THE_SHARED_URLLIB_SEAM__THEN_RERUN_EFFECT_CHANNEL_TOTALITY_FALSIFICATION"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CONTINUOUS_OBS_INFORMATION_AUTHORIZATION_IS_USELESS",
+    "NO_CLAIM_EXTERNAL_TOOL_RELAY_IS_ALREADY_A_ROOT3_COMPLETE_TYPED_DRIVER",
+    "NO_CLAIM_NETWORK_IS_THE_ONLY_REMAINING_PARENT_EFFECT_CHANNEL",
+    "NO_CLAIM_ROOT3_PREDICATE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "scheduling_authority": true
+}
