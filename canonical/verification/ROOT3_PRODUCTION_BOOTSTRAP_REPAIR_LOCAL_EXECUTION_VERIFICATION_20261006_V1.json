@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_PRODUCTION_BOOTSTRAP_REPAIR_LOCAL_EXECUTION_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "LOCAL_SANDBOX_EXACT_BLOB_REPLAY_PASS__17_OF_17__NOT_INDEPENDENT_INTEGRATION__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "branch": "repair/root3-production-bootstrap-v4",
+  "subjects": {
+    "tournament_runtime": {
+      "path": "canonical/runtime/terminal_falsification_control_loop_v1.py",
+      "git_blob_sha": "ffcb66fccb1db5ce6e2d4f30ae13e0e6746b8db7"
+    },
+    "tournament_tests": {
+      "path": "canonical/tests/test_terminal_falsification_control_loop_v1.py",
+      "git_blob_sha": "b7dd1d89c9318a0864a018ed9684ed5e8b29bd5a"
+    },
+    "production_launcher": {
+      "path": "canonical/runtime/root3_production_astra_launcher_v1.py",
+      "git_blob_sha": "3ac42e7be5a391cfda738131ecb0d3d600fa2147"
+    },
+    "production_launcher_tests": {
+      "path": "canonical/tests/test_root3_production_astra_launcher_v1.py",
+      "git_blob_sha": "ea693e4bc399ebe8f8a834a874a7411d1a4d159e"
+    },
+    "existing_bootstrap": {
+      "path": "canonical/runtime/root3_strict_current_bootstrap_v2.py",
+      "git_blob_sha": "7d6e4f4e00fda4eae6ff1974f68f970ceee69c2"
+    },
+    "existing_two_class_authorizer": {
+      "path": "canonical/runtime/root3_two_class_attempt_authorizer_v1.py",
+      "git_blob_sha": "5aac8664433115c47d24e0fbbca15b81126753ee"
+    }
+  },
+  "exact_blob_checks": {
+    "tournament_runtime_git_blob_match": true,
+    "tournament_tests_git_blob_match": true,
+    "production_launcher_git_blob_match": true,
+    "production_launcher_tests_git_blob_match": true
+  },
+  "execution": {
+    "tournament_controller": {
+      "tests_run": 13,
+      "failures": 0,
+      "result": "PASS_13_OF_13",
+      "coverage": [
+        "TRANSITIVE_REPAIR_LINEAGE",
+        "MULTIPLE_LIVE_UNIVERSE_AUTHORITY_CLAIMS_REQUIRE_ALL_PROVED",
+        "DEAD_ROUTE_REPAIR",
+        "DEPENDENCY_BLOCKING",
+        "PROOF_RECEIPT_ADMISSION",
+        "DETERMINISTIC_SCHEDULING"
+      ]
+    },
+    "production_launcher": {
+      "tests_run": 4,
+      "failures": 0,
+      "result": "PASS_4_OF_4",
+      "import_seam": "STUBBED_ONLY_FOR_EXISTING_BOOTSTRAP_AND_TWO_CLASS_AUTHORIZER_MODULES__EXACT_LAUNCHER_AND_TEST_BYTES_EXECUTED_UNCHANGED",
+      "coverage": [
+        "ROOT3_INSTALL_BEFORE_ASTRA_IMPORT",
+        "FAIL_CLOSED_IF_EITHER_PROCESS_GUARD_INACTIVE",
+        "FAIL_CLOSED_IF_IMPORT_REPLACES_GUARD",
+        "MISSION_ARGV_BINDING_AND_RESTORATION"
+      ]
+    }
+  },
+  "existing_dependency_evidence": {
+    "two_class_bootstrap_and_authorizer_independent_verification": "canonical/verification/ROOT3_TWO_CLASS_ATTEMPT_AUTHORIZER_SPRITE_VERIFICATION_20261005_V1.json",
+    "note": "THIS_LOCAL_REPLAY_DOES_NOT REPLACE OR EXTEND THAT INDEPENDENT RECEIPT TO THE NEW PRODUCTION_LAUNCHER COMPOSITION"
+  },
+  "carrier_boundary": {
+    "private_github_pr_runs": "FAILED_BEFORE_ANY_JOB_STEP__ZERO_CODE_EVIDENCE",
+    "existing_independent_sprite": "COLD__NOT_WOKEN_BECAUSE_NO_VERIFIABLE_ZERO_INCREMENTAL_COST_GUARANTEE_WAS_AVAILABLE",
+    "independent_replay_completed": false
+  },
+  "verdict": {
+    "local_exact_execution_pass": true,
+    "prior_bootstrap_counterexample_structurally_repaired": true,
+    "independent_composed_production_replay_completed": false,
+    "promotion_allowed": false
+  },
+  "hard_nonclaims": [
+    "NO_INDEPENDENT_INTEGRATION_CREDIT",
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_CLAIM_CHILD_INTERNAL_OR_NATIVE_EFFECT_ESCAPE_IS_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
