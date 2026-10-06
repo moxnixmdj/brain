@@ -1,0 +1,141 @@
+{
+  "schema": "PROJECT_BRAIN_CREATIVE_DIAGRAM_TERMINAL_ACCEPTANCE_BASIS_20261006_V2",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__ONE_FOR_ONE_SCOPE_EXTENSION__THREE_INDEPENDENT_STRATA__ZERO_CASES__ZERO_CREDIT",
+  "objective": "Repair the newly falsified creative-output acceptance scope without creating a new primitive capability family or a new global meta obligation.",
+  "supersedes": {
+    "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_ACCEPTANCE_BASIS_20261005_V1.json",
+    "git_blob_sha": "5778f0982f6658e3aa5af41e4d33a4ace5121e76"
+  },
+  "falsification_receipt": {
+    "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_VISUAL_POLISH_ACCEPTANCE_ESCAPE_20261006_V1.json",
+    "git_blob_sha": "0dae5a2f0af67ea237f999ad73392e8efebb98f8"
+  },
+  "primary_surface_delta": {
+    "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
+    "git_blob_sha": "19798d04758aff521149ac07fbe1f03a90733660"
+  },
+  "composite_obligation_id": "CREATIVE_DIAGRAM_SURFACE_NONINFERIOR__META",
+  "accounting_identity_rule": "LEGACY_COMPOSITE_ID_RETAINED_ONE_FOR_ONE_FOR_TRUTH_COUNT_STABILITY__SEMANTIC_SCOPE_STRENGTHENED",
+  "candidate_existing_family_union": [
+    "COMMUNICATION_AND_SYNTHESIS",
+    "ARTIFACT_CREATION",
+    "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+    "ADVANCED_AGENTIC_CODING"
+  ],
+  "strata": [
+    {
+      "id": "CREATIVE_TEXT",
+      "preserved_from_v1": true,
+      "input_scope": "OPEN_ENDED_CREATIVE_WRITING_AND_IDEATION_WITH_EXPLICIT_USER_CONSTRAINTS_AND_AUDIENCE_STYLE_REQUIREMENTS",
+      "required_dimensions": [
+        "INSTRUCTION_AND_CONSTRAINT_SATISFACTION",
+        "COHERENCE_AND_INTERNAL_CONSISTENCY",
+        "SPECIFICITY_AND_USEFULNESS",
+        "STYLE_AND_AUDIENCE_FIT",
+        "NONTRIVIAL_IDEA_OR_LANGUAGE_QUALITY"
+      ],
+      "critical_failures": [
+        "MATERIAL_CONSTRAINT_VIOLATION",
+        "INCOHERENCE_OR_SELF_CONTRADICTION",
+        "UNSUPPORTED_FACTUAL_ASSERTION_WHEN_FACTUAL_GROUNDING_IS_REQUIRED"
+      ],
+      "comparison": "BLINDED_MATCHED_PAIR_OR_SCOPE_SAFE_STRONGER_PROOF"
+    },
+    {
+      "id": "DIAGRAM_OUTPUT",
+      "preserved_from_v1": true,
+      "input_scope": "TEXT_OR_STRUCTURED_SPECIFICATION_TO_DIAGRAM_WITH_EXPLICIT_ENTITIES_RELATIONSHIPS_LABELS_AND_PRESENTATION_REQUIREMENTS",
+      "required_dimensions": [
+        "SEMANTIC_ENTITY_AND_RELATIONSHIP_CORRECTNESS",
+        "REQUIRED_LABEL_AND_CONTENT_COVERAGE",
+        "STRUCTURAL_READABILITY",
+        "LAYOUT_AND_PRESENTATION_QUALITY"
+      ],
+      "deterministic_checks_first": [
+        "REQUIRED_ENTITY_COVERAGE",
+        "REQUIRED_RELATIONSHIP_COVERAGE",
+        "LABEL_PRESENCE",
+        "NO_FORBIDDEN_OR_CONTRADICTORY_EDGE"
+      ],
+      "critical_failures": [
+        "MATERIAL_ENTITY_OR_RELATIONSHIP_ERROR",
+        "OMITTED_REQUIRED_COMPONENT",
+        "MISLEADING_STRUCTURE"
+      ],
+      "comparison": "DETERMINISTIC_CORRECTNESS_GATES_PLUS_BLINDED_MATCHED_PRESENTATION_OR_SCOPE_SAFE_STRONGER_PROOF"
+    },
+    {
+      "id": "INTERACTIVE_CODED_VISUAL_ARTIFACT",
+      "preserved_from_v1": false,
+      "input_scope": "TEXT_OR_STRUCTURED_SPECIFICATION_TO_AN_EXECUTABLE_INTERACTIVE_CODED_ARTIFACT_WHERE_VISUAL_QUALITY_POLISH_OR_PRESENTATION_IS_A_LOAD_BEARING_PART_OF_THE_REQUEST",
+      "required_dimensions": [
+        "FUNCTIONAL_REQUIREMENT_SATISFACTION",
+        "VISUAL_COHERENCE_AND_POLISH",
+        "LAYOUT_AND_COMPOSITION_QUALITY",
+        "INTERACTION_FEEDBACK_AND_USABILITY",
+        "STYLE_AND_ASSET_CONSISTENCY",
+        "NO_MATERIAL_VISUAL_REGRESSION_FROM_REQUIRED_BEHAVIOR"
+      ],
+      "deterministic_checks_first": [
+        "ARTIFACT_EXECUTES_OR_RENDERS",
+        "REQUIRED_INTERACTIONS_EXIST",
+        "REQUIRED_VISIBLE_ELEMENTS_EXIST",
+        "NO_DECLARED_FORBIDDEN_BEHAVIOR"
+      ],
+      "critical_failures": [
+        "BROKEN_OR_NONRENDERING_ARTIFACT",
+        "MATERIAL_REQUIRED_INTERACTION_FAILURE",
+        "MATERIAL_VISUAL_REQUIREMENT_OMISSION",
+        "VISUAL_OR_LAYOUT_FAILURE_THAT_DEFEATS_THE_REQUEST"
+      ],
+      "comparison": "DETERMINISTIC_FUNCTIONAL_GATES_PLUS_BLINDED_MATCHED_VISUAL_POLISH_OR_SCOPE_SAFE_STRONGER_PROOF"
+    }
+  ],
+  "acceptance_rule": {
+    "comparator": "EXACT_CLAUDE_OPUS_5_5",
+    "per_stratum": "BRAIN_CONSERVATIVE_QUALITY_BOUND_GE_OPUS55_MATCHED_BOUND_AND_ZERO_CRITICAL_FAILURES",
+    "composite": "ALL_THREE_STRATA_MUST_PASS_INDEPENDENTLY__NO_AVERAGING_FAILURES_ACROSS_STRATA",
+    "case_population": "FROZEN_HIDDEN_POST_FREEZE_POPULATION_WITH_IDENTICAL_PAYLOADS_AND_TOOL_BOUNDARIES",
+    "target_and_scorer_freeze": "ALL_SCOPE_DIMENSIONS_CRITICAL_FAILURES_AND_REDUCERS_FROZEN_BEFORE_ANY_BRAIN_OR_OPUS_RESULT"
+  },
+  "case_generation": {
+    "generated_now": false,
+    "exposed_now": false,
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "tuning_replay": false
+  },
+  "closure_semantics": {
+    "proof_basis_gap": "CLOSES_ONLY_THE_UNDEFINED_BASIS_ESCAPE_FOR_THE_CURRENT_PRIMARY_SURFACE_DELTA",
+    "performance_result": "REMAINS_OPEN_UNTIL_ALL_THREE_STRATA_PASS_OR_A_STRONGER_SCOPE_COMPLETE_PROOF_EXISTS",
+    "new_family": "NOT_REQUIRED_BY_THIS_REPAIR__OPEN_ONLY_ON_A_CONSTRUCTIVE_UNMAPPED_TRANSFORM"
+  },
+  "truth_accounting": {
+    "prior_meta_obligation_count_delta": 0,
+    "new_meta_obligation_count_delta": 0,
+    "current_known_open_truth_obligation_count_delta": 0,
+    "reason": "ONE_EXISTING_META_OBLIGATION_IS_SCOPE_STRENGTHENED_ONE_FOR_ONE"
+  },
+  "hard_nonclaims": [
+    "NO_CREATIVE_PARITY_CLAIM",
+    "NO_DIAGRAM_PARITY_CLAIM",
+    "NO_INTERACTIVE_VISUAL_POLISH_PARITY_CLAIM",
+    "NO_COMPARATOR_ACCESS_CLAIM",
+    "NO_NEW_FAMILY_CLAIM",
+    "NO_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
