@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_K6_CURRENT_AUTHORITY_RECONCILIATION_V3_SPRITE_VERIFICATION",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_SOURCE_REPLAY_PASS__29_TRUTHS__ZERO_PREPROOF_IMPLEMENTATION_GENERATORS__ONE_POSITIVE_COVER_SEMANTIC_INTERFACE__ZERO_CREDIT",
+  "subject": {
+    "branch": "k6-current-authority-positive-cover-v3-20261006",
+    "exact_blobs": {
+      "canonical/governance/K6_CURRENT_AUTHORITY_RECONCILIATION_20261006_V3.json": "e3fb105ef3713b3ff104061a9c1dec8eed6fd53d",
+      "canonical/runtime/k6_current_authority_reconciliation_v3.py": "a9accd08a6b31760604a9f01eec33b7759378fab",
+      "canonical/tests/test_k6_current_authority_reconciliation_v3.py": "a96c7d622760993ec42aa1b2490def5d7800e44a",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V2.json": "dc79f409fd486d9ca0fe52eea4422169f1b61403"
+    },
+    "exact_sources": {
+      "canonical/governance/K6_CURRENT_AUTHORITY_RECONCILIATION_20261006_V2.json": "cf391fad7a1af7238cd247b3b39b41bf2d7c5684",
+      "canonical/governance/K6_POSITIVE_COVER_SEMANTIC_RESIDUAL_PROJECTION_20261006_V4.json": "3e021b353dfe3dd6e9c5ea9843968e7fe75a02eb",
+      "canonical/verification/K6_POSITIVE_COVER_SEMANTIC_RESIDUAL_V4_SPRITE_VERIFICATION_20261006_V1.json": "59fcbc1244879e5f3516ba900cf7167a0679b59e",
+      "canonical/governance/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_THEOREM_20261006_V1.json": "8a235f91ad3064714fab3ea73b324487d9b7f8e5",
+      "canonical/verification/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_SPRITE_VERIFICATION_20261006_V1.json": "de91c37808fe53bc133b399ebc7630f2b82bb0e3"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/k6authorityv3",
+    "runner": "ZERO_DEPENDENCY_DIRECT_TEST_FUNCTION_RUNNER",
+    "tests_passed": 1,
+    "tests_total": 1,
+    "result": "PASS_ZERO_EXIT"
+  },
+  "verified": [
+    "CURRENT_TERMINAL_AUTHORITY_REMAINS_29_LOAD_BEARING_TRUTHS_AND_TERMINAL_FALSE",
+    "CURRENT_NEXT_REBINDS_K6_TO_POSITIVE_COVER_WITNESS_FIXED_POINT",
+    "ZERO_GENERIC_K6_PREPROOF_IMPLEMENTATION_GENERATORS",
+    "ONE_OPEN_K6_SEMANTIC_INFORMATION_INTERFACE",
+    "OPEN_INTERFACE_IS_K6_SOUND_POLICY_COVER_WITNESS_AND_SELECTED_DISCRIMINATOR_BINDING",
+    "ZERO_TRUTH_DELETION_FROM_AUTHORITY_RECONCILIATION",
+    "ZERO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "truth_obligations_deleted": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
