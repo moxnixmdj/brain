@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_H100_INDEPENDENT_A_RESEARCH_FRONTIER_20261006_V11",
+  "date": "2026-10-06",
+  "status": "FRESH_10000_BIT_CHART_BOUND_ESTABLISHED__STRESS_FAILURES_CLASSIFIED_AS_ALGORITHM_ROBUSTNESS",
+  "metric": "K_U1^(T,M)(C|R)_INTERVAL",
+  "current_best_clean_chart_upper_bound_bits": 10000,
+  "current_best_clean_chart_scope": "32X20_AXES_RECTANGULAR_BARS_SINGLE_3X5_TICK_SINGLE_3X5_LEGEND_RUNTIME_ATLAS",
+  "stress_result": {
+    "unchanged_program_passed": "0/4",
+    "post_failure_generic_prototype_passed": "4/4",
+    "causal_interpretation": "ALGORITHM_OR_ROBUSTNESS_GAP",
+    "positive_persistent_information_lower_bound_from_real_stress": false
+  },
+  "next_ranked": [
+    "COMPILE_ROBUST_ROLE_INVARIANT_AND_NOISE_TOLERANT_CHART_ALGORITHM_TO_U1",
+    "FREEZE_PROGRAM_BYTES_BEFORE_NEW_STRESS_WORLD",
+    "DERIVE_NEW_MONOCHROME_PALETTE_LAYOUT_AND_PIXEL_DAMAGE_WORLD_AFTER_PROGRAM_FREEZE",
+    "MEASURE_NEW_U1_PROGRAM_BITS_T_M_AND_FRESH_PASS_RATE",
+    "CONTINUE_SEARCH_FOR_REALISTIC_NONSEALED_K_GT_1_INFORMATION_RESIDUAL"
+  ],
+  "learned_byte_rung": 0,
+  "hard_nonclaims": [
+    "POST_FAILURE_PROTOTYPE_HAS_ZERO_GENERALIZATION_CREDIT",
+    "NO_GENERAL_OCR",
+    "NO_GENERAL_CHARTQA",
+    "NO_UNIVERSAL_ZERO_LEARNED_SUFFICIENCY"
+  ]
+}
