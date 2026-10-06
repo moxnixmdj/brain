@@ -95,6 +95,41 @@ class ExternalToolBridgeTests(unittest.TestCase):
                 runtime._external_tool_bridge("planner",payload)
 
 
+    def test_direct_urlopen_fallback_is_mediated_and_receipted(self):
+        fake=runtime._ExternalBridgeHTTPResponse(b"ok",200,"https://example.com/final",{})
+        with mock.patch.object(runtime,"_external_tool_bridge",return_value=None), \
+             mock.patch.object(runtime,"_ACTIVE_CONTINUOUS_OBS_CONTEXT",{"bound":True}), \
+             mock.patch.object(runtime,"_ACTIVE_CONTINUOUS_OBS_MODULE",object()), \
+             mock.patch.object(runtime,"_ACTIVE_CONTINUOUS_OBS_MISSION_ID","MISSION-1"), \
+             mock.patch.object(runtime,"_ORIGINAL_URLOPEN",return_value=fake) as raw, \
+             mock.patch.object(runtime,"_append_admin_jsonl") as append:
+            out=runtime._bridge_aware_urlopen("https://example.com/data")
+            self.assertIs(out,fake)
+            raw.assert_called_once()
+            self.assertEqual(append.call_count,2)
+            self.assertEqual(append.call_args_list[0].args[1]["phase"],"ATTEMPT")
+            self.assertEqual(append.call_args_list[1].args[1]["phase"],"OPENED")
+
+    def test_direct_urlopen_fallback_requires_bound_mission_context(self):
+        with mock.patch.object(runtime,"_external_tool_bridge",return_value=None), \
+             mock.patch.object(runtime,"_ACTIVE_CONTINUOUS_OBS_CONTEXT",None), \
+             mock.patch.object(runtime,"_ACTIVE_CONTINUOUS_OBS_MODULE",None), \
+             mock.patch.object(runtime,"_ACTIVE_CONTINUOUS_OBS_MISSION_ID",None), \
+             mock.patch.object(runtime,"_ORIGINAL_URLOPEN") as raw:
+            with self.assertRaisesRegex(runtime.Blocker,"DIRECT_NETWORK_EFFECT_CONTEXT_NOT_BOUND"):
+                runtime._bridge_aware_urlopen("https://example.com/data")
+            raw.assert_not_called()
+
+    def test_direct_urlopen_fallback_rejects_non_http_effects(self):
+        with mock.patch.object(runtime,"_external_tool_bridge",return_value=None), \
+             mock.patch.object(runtime,"_ACTIVE_CONTINUOUS_OBS_CONTEXT",{"bound":True}), \
+             mock.patch.object(runtime,"_ACTIVE_CONTINUOUS_OBS_MODULE",object()), \
+             mock.patch.object(runtime,"_ACTIVE_CONTINUOUS_OBS_MISSION_ID","MISSION-1"), \
+             mock.patch.object(runtime,"_ORIGINAL_URLOPEN") as raw:
+            with self.assertRaisesRegex(runtime.Blocker,"DIRECT_NETWORK_EFFECT_URL_NOT_HTTP_S"):
+                runtime._bridge_aware_urlopen("file:///etc/passwd")
+            raw.assert_not_called()
+
     def test_arbitrary_bridge_directory_is_rejected(self):
         with tempfile.TemporaryDirectory() as td, \
              mock.patch.object(runtime,"ROOT",pathlib.Path(td)), \
