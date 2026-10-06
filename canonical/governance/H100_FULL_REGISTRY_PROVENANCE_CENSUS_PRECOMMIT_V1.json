@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_H100_FULL_REGISTRY_PROVENANCE_CENSUS_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__FULL_REGISTRY_V1_TO_V8_PROVENANCE_CENSUS__ZERO_TERMINAL_CREDIT",
+  "objective": "Classify all 21 Registry V8 capability entries by causal provenance and quantify only content-bound selection-code capacity where a frozen finite candidate universe is established.",
+  "classification_rules": {
+    "STRICT_OUTCOME_SELECTED": "THE_PERSISTED_CAPABILITY_VALUE_OR_STRUCTURE_WAS_SELECTED_AS_A_FUNCTION_OF_OBSERVED_DEVELOPMENT_OR_TRANSFER_OUTCOMES_FROM_A_FROZEN_MULTI_CANDIDATE_UNIVERSE",
+    "DEVELOPMENT_CONDITIONED_PREOUTCOME_FIXED": "THE_CAPABILITY_FAMILY_OR_IMPLEMENTATION_WAS_FIXED_BEFORE_THE_RELEVANT_OUTCOMES_BUT_WAS_CREATED_OR_INTRODUCED_FOR_A_PREDECLARED_DEVELOPMENT_FAMILY__NO_OUTCOME_SELECTION_CLAIM",
+    "EXTERNAL_CAPABILITY_DEFINITION_PREOUTCOME_FIXED": "THE_EXECUTABLE_CAPABILITY_DEFINITION_CAME_FROM_A_PREEXISTING_EXTERNAL_OR_CONTENT_ADDRESSED_SOURCE_AND_WAS_FROZEN_BEFORE_TASK_OUTCOMES__TASK_VALIDATION_MAY_CONDITION_PERSISTENCE_BUT_DOES_NOT_MAKE_THE_DEFINITION_OUTCOME_SELECTED",
+    "PROVENANCE_UNRESOLVED": "AVAILABLE_CONTENT_BOUND_ARTIFACTS_DO_NOT_ESTABLISH_WHETHER_THE_PERSISTED_CAPABILITY_IMPLEMENTATION_WAS_FIXED_INDEPENDENTLY_OF_DEVELOPMENT_EVIDENCE"
+  },
+  "registry_generations": [
+    {
+      "version": 1,
+      "entry_count": 7,
+      "expected_categories": {
+        "DEVELOPMENT_CONDITIONED_PREOUTCOME_FIXED": [
+          "CAP_LINEAR_TREND_SINUSOID_V1",
+          "CAP_EXP_ABS_V1",
+          "CAP_THRESHOLD_STEP_V1"
+        ],
+        "PROVENANCE_UNRESOLVED": [
+          "CAP_OEWN_REAL_LEXICAL_V1",
+          "CAP_LEXICAL_SOURCE_FALLBACK_V1",
+          "CAP_COMPOSITIONAL_LANGUAGE_V1",
+          "CAP_TOOL_TRACE_NORMALIZER_V1"
+        ]
+      }
+    },
+    {
+      "version": 2,
+      "additions": [
+        "CAP_AFFINE_CUBIC_V1"
+      ],
+      "expected_category": "STRICT_OUTCOME_SELECTED"
+    },
+    {
+      "version": 3,
+      "additions": [
+        "CAP_AFFINE_POWER5_V1",
+        "CAP_AFFINE_HINGE_V1",
+        "CAP_AFFINE_GAUSSIAN_V1",
+        "CAP_AFFINE_TANH_V1"
+      ],
+      "expected_category": "STRICT_OUTCOME_SELECTED"
+    },
+    {
+      "version": 4,
+      "additions": [
+        "CAP_AFFINE_RATIONAL_SAT_SQUARE_V1"
+      ],
+      "expected_category": "STRICT_OUTCOME_SELECTED"
+    },
+    {
+      "version": 5,
+      "additions": [
+        "CAP_AFFINE_ERF_V1"
+      ],
+      "expected_category": "EXTERNAL_CAPABILITY_DEFINITION_PREOUTCOME_FIXED"
+    },
+    {
+      "version": 6,
+      "additions": [
+        "CAP_AFFINE_ATAN_V1",
+        "CAP_AFFINE_TANH_V1"
+      ],
+      "expected_category": "EXTERNAL_CAPABILITY_DEFINITION_PREOUTCOME_FIXED"
+    },
+    {
+      "version": 7,
+      "additions": [
+        "CAP_AFFINE_ASYM_CLAMP_V1",
+        "CAP_AFFINE_TRIANGLE_V1"
+      ],
+      "expected_category": "EXTERNAL_CAPABILITY_DEFINITION_PREOUTCOME_FIXED"
+    },
+    {
+      "version": 8,
+      "additions": [
+        "CAP_AFFINE_CHAIN_SQUARE_LOG_SQRT_SAT_V1",
+        "CAP_AFFINE_CHAIN_SAT_SQUARE_LOG_SQRT_V1",
+        "CAP_AFFINE_CHAIN_LOG_SAT_SQRT_LOG_V1"
+      ],
+      "expected_category": "STRICT_OUTCOME_SELECTED"
+    }
+  ],
+  "strict_selection_code_contract": {
+    "cubic_v2": {
+      "frozen_candidate_count": 3,
+      "encoding": "INDEX_SELECTED_PATCH",
+      "fixed_length_bits": 2
+    },
+    "v3_support": {
+      "frozen_family_count": 6,
+      "selected_family_count": 4,
+      "encoding": "LEXICOGRAPHIC_INDEX_OF_SELECTED_4_OF_6_SUPPORT_SET_PLUS_POWER_EXPONENT_INDEX",
+      "support_set_count": 15,
+      "support_set_bits": 4,
+      "power_exponent_count": 5,
+      "power_exponent_bits": 3,
+      "total_bits": 7
+    },
+    "rational_v4": {
+      "frozen_observed_candidate_count": 2822,
+      "encoding": "INDEX_SELECTED_SEED_CANDIDATE",
+      "fixed_length_bits": 12
+    },
+    "depth4_v8": {
+      "frozen_candidate_count_per_task": 1554,
+      "selected_task_count": 3,
+      "encoding": "ONE_SELECTED_CHAIN_INDEX_PER_FIXED_TASK",
+      "fixed_length_bits_per_task": 11,
+      "aggregate_bits": 33
+    },
+    "aggregate_strict_selection_code_bits": 54,
+    "aggregate_strict_selection_code_ceil_bytes": 7,
+    "interpretation": "AN_UPPER_BOUND_ON_A_COMPACT_INDEX_CODE_RELATIVE_TO_THE_FROZEN_SEARCH_UNIVERSES__NOT_AN_EXACT_MUTUAL_INFORMATION_VALUE_AND_NOT_A_COMPLETE_PROVENANCE_V1_STATE_SIZE"
+  },
+  "expected_counts_if_content_bindings_hold": {
+    "STRICT_OUTCOME_SELECTED": 9,
+    "DEVELOPMENT_CONDITIONED_PREOUTCOME_FIXED": 3,
+    "EXTERNAL_CAPABILITY_DEFINITION_PREOUTCOME_FIXED": 5,
+    "PROVENANCE_UNRESOLVED": 4,
+    "TOTAL": 21
+  },
+  "hard_rules": [
+    "DO_NOT_CALL_SELECTION_CAPACITY_AN_INFORMATION_LOWER_BOUND",
+    "DO_NOT_CLASSIFY_EXTERNAL_STDLIB_OR_DECLARATIVE_PACK_CONTENT_AS_LEARNED_MERELY_BECAUSE_IT_WAS_LATER_PERSISTED",
+    "DO_NOT_CLASSIFY_UNRESOLVED_V1_DIRECT_CAPABILITIES_AS_ZERO_PROVENANCE_WITHOUT_BINDING_EVIDENCE",
+    "REPORT_SYNTACTIC_V0_AND_PROVENANCE_V1_SEPARATELY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
