@@ -43,3 +43,13 @@ def test_case_token_is_not_embedded_in_child_program():
     code_b=child_code("/tmp/a","/tmp/b","/tmp/c","/tmp/d",False,0)
     assert token not in code_a
     assert token not in code_b
+
+
+def test_fresh_case_token_changes_component_payload_ids_without_changing_predeclared_classes():
+    a=run_case("STATEFUL-AGENCY-FRESH-A-0123456789",2)
+    b=run_case("STATEFUL-AGENCY-FRESH-B-9876543210",2)
+    assert a["pass"] is True,a
+    assert b["pass"] is True,b
+    for key in ("browser","tool","delegation"):
+        assert a["component_results"][key]["case_id"] != b["component_results"][key]["case_id"]
+        assert a["component_results"][key]["case_class"] == b["component_results"][key]["case_class"]
