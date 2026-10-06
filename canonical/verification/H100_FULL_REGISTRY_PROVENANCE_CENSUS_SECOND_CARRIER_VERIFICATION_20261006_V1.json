@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_H100_FULL_REGISTRY_PROVENANCE_CENSUS_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__8_OF_8_TESTS__21_RECORDS__20_STABLE_IDS__ONE_TANH_COLLISION__STRICT_SELECTION_CODE_54_BITS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_FULL_REGISTRY_PROVENANCE_CENSUS_PRECOMMIT_V1.json",
+    "attempt1_failure": "canonical/verification/H100_FULL_REGISTRY_PROVENANCE_CENSUS_ATTEMPT1_FAILURE_20261006_V1.json",
+    "runtime": "canonical/runtime/h100_full_registry_provenance_census_v1.py",
+    "tests": "canonical/tests/test_h100_full_registry_provenance_census_v1.py"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "independence_scope": "DISTINCT_ISOLATED_CARRIER_FROM_PRIMARY_RESEARCH_WORKER__SAME_PROVIDER"
+  },
+  "observed": {
+    "tests_passed": 8,
+    "tests_total": 8,
+    "registry_record_count": 21,
+    "unique_stable_capability_id_count": 20,
+    "stable_id_collision": {
+      "capability_id": "CAP_AFFINE_TANH_V1",
+      "generations": [
+        3,
+        6
+      ],
+      "provenance_categories": [
+        "STRICT_OUTCOME_SELECTED",
+        "EXTERNAL_CAPABILITY_DEFINITION_PREOUTCOME_FIXED"
+      ]
+    },
+    "category_counts": {
+      "STRICT_OUTCOME_SELECTED": 9,
+      "DEVELOPMENT_CONDITIONED_PREOUTCOME_FIXED": 3,
+      "EXTERNAL_CAPABILITY_DEFINITION_PREOUTCOME_FIXED": 5,
+      "PROVENANCE_UNRESOLVED": 4
+    },
+    "strict_selection_code": {
+      "cubic_v2_bits": 2,
+      "v3_support_plus_power_identity_bits": 7,
+      "rational_v4_bits": 12,
+      "depth4_v8_bits": 33,
+      "aggregate_bits": 54,
+      "ceil_bytes": 7
+    },
+    "syntactic_v0_zero_learned_claim_for_registry": true,
+    "provenance_v1_zero_learned_claim_for_registry": false,
+    "exact_total_provenance_v1_learned_bits": null
+  },
+  "deduction": "THE_REGISTRY_IS_NOT_ZERO_LEARNED_UNDER_REPRESENTATION_INVARIANT_PROVENANCE_ACCOUNTING__YET_THE_CONTENT_BOUND_STRICT_OUTCOME_SELECTED_STRUCTURE_IDENTITIES_ARE_COMPACT_ENOUGH_TO_INDEX_IN_54_BITS_RELATIVE_TO_THEIR_FROZEN_SEARCH_UNIVERSES__THE_REMAINING_TOTAL_IS_DOMINATED_BY_UNRESOLVED_AND_DEVELOPMENT_CONDITIONED_PROVENANCE_NOT_BY_THESE_NINE_STRICT_SELECTION_IDENTITIES",
+  "hard_nonclaims": [
+    "54_BITS_IS_AN_UPPER_BOUND_COMPACT_INDEX_CODE_RELATIVE_TO_FROZEN_SEARCH_UNIVERSES_NOT_AN_EXACT_MUTUAL_INFORMATION_VALUE",
+    "54_BITS_EXCLUDES_DEVELOPMENT_CONDITIONED_PREOUTCOME_FIXED_ENTRIES_EXTERNAL_CAPABILITY_DEFINITION_MEMBERSHIP_AND_UNRESOLVED_PROVENANCE",
+    "ONE_STABLE_ID_COLLISION_MEANS_CAPABILITY_ID_ALONE_IS_NOT_A_UNIQUE_PROVENANCE_KEY",
+    "NO_CLAIM_TOTAL_PROVENANCE_V1_STATE_IS_SEVEN_BYTES",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
