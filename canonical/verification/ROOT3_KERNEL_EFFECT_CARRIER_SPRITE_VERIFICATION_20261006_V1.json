@@ -9,7 +9,7 @@
     },
     "governance": {
       "path": "canonical/governance/ROOT3_KERNEL_EFFECT_CARRIER_V1.json",
-      "git_blob_sha": "88f6b5fce25353802311219a907665614d6e1ce4"
+      "git_blob_sha": "4f0403075b6b488a48b1fe52060ebdadeab65887"
     }
   },
   "independent_carrier": {
