@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FALSIFICATION_UNIVERSE_REPAIR_OVERLAY_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__UNIVERSE_ROUTE_DEATH_AND_LIVE_SUCCESSOR_REPAIR__ZERO_CREDIT",
+  "base_control_loop": {
+    "path": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V1.json",
+    "git_blob_sha": "f68c6ad22d1d907dc4348712b182660d710f7055"
+  },
+  "falsified_claim": {
+    "id": "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2",
+    "falsification_receipt": {
+      "path": "canonical/verification/TERMINAL_TARGET_UNIVERSE_UNREPRESENTED_BEHAVIOR_FALSIFICATION_20261006_V1.json",
+      "git_blob_sha": "110854a903370d17965370adee3e81c4e8c72e2d"
+    },
+    "effective_status": "FALSIFIED"
+  },
+  "live_successor": {
+    "id": "C_TARGET_UNIVERSE_PRIMARY_SOURCE_LEAF_CLOSURE_V3",
+    "lane": "UNIVERSE_AUTHORITY",
+    "status": "ACTIVE",
+    "successor_of": "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2",
+    "cost_units": 1,
+    "target_truth_obligations": [
+      "LITERAL_ALL_USEFUL_OPUS55_FINALITY"
+    ],
+    "target_truth_obligation_count": 1,
+    "repair_contract": {
+      "path": "canonical/governance/OPUS55_UNTRUSTED_INSTRUCTION_RESISTANCE_BEHAVIOR_CONTRACT_20261006_V1.json",
+      "git_blob_sha": "ea184b4cb7f8f7834b39ce31af8b2921247d2e92"
+    },
+    "required_repairs": [
+      "INTEGRATE_OR_FORMALLY_SUBSUME_THE_NEW_BEHAVIORAL_LEAF",
+      "RECOMPUTE_PRIMARY_PROVIDER_SOURCE_SURFACE_TO_EXPLICIT_CONTRACT_LEAF_COVERAGE",
+      "FAIL_CLOSED_ON_ANY_ADDITIONAL_PRIMARY_PROVIDER_BEHAVIOR_WITHOUT_AN_EXPLICIT_CONTRACT",
+      "RERUN_SOURCE_SURFACE_COMPOSITION_AND_TWO_WORLD_COUNTERMODELS",
+      "SEPARATELY_PROMOTE_A_CONTENT_ADDRESSED_COMPLETENESS_PROOF_ONLY_AFTER_FALSIFICATION_SURVIVES"
+    ],
+    "falsifiers": [
+      "UNREPRESENTED_USEFUL_BEHAVIOR",
+      "SOURCE_SURFACE_ESCAPE",
+      "COMPOSITION_ESCAPE",
+      "TWO_WORLDS_TERMINAL_COUNTERMODEL"
+    ]
+  },
+  "dependency_rebind": {
+    "from": "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2",
+    "to": "C_TARGET_UNIVERSE_PRIMARY_SOURCE_LEAF_CLOSURE_V3"
+  },
+  "scheduling_effect": {
+    "universe_authority_first": "C_TARGET_UNIVERSE_PRIMARY_SOURCE_LEAF_CLOSURE_V3",
+    "preserve_nonuniverse_claims_from_base": true,
+    "preserve_known_open_truth_obligation_count": 32,
+    "terminal_ready": false,
+    "proof_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_TARGET_UNIVERSE_COMPLETENESS_PROVED",
+    "NO_NEW_ATOMIC_OR_META_COUNT_ASSERTED_YET",
+    "NO_FAMILY_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
