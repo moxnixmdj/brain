@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REAL_TASK_RESIDUAL_AMBIGUITY_CENSUS_DIRECT_RECOMPUTE_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__DIRECT_RECOMPUTE__UNRESOLVED_CASES_PRESERVED__ZERO_TERMINAL_CREDIT",
+  "source_blobs": {
+    "chain": "27a28301fe77758fb3d62881a0d5975ff3a03bca",
+    "planner_pre": "5f5a8d83e293123a8622abc3dbde28ec8d4cbfdc",
+    "planner_ver": "9472a1a59f1fd3963b1e56191666fa637330c0ab",
+    "lexical_pre": "e98dc723dd9ff5cdc75a45e90efc0ba1ccac8412",
+    "lexical_ver": "7542e7b67774b9ac2d6e603424e748cee4ff42a1",
+    "memory_ver": "044cdd181396d58023f2e42fec3694a45cb21915"
+  },
+  "observed": {
+    "chain": {
+      "hypotheses": 1554,
+      "residual": 1,
+      "lower_bound_bits": 0
+    },
+    "planner": {
+      "examined": 85,
+      "shortest_valid_plans": 1,
+      "residual": 1,
+      "lower_bound_bits": 0
+    },
+    "lexical": {
+      "tasks": 9,
+      "resolved": 6,
+      "abstain": 3,
+      "resolved_residual": 1,
+      "resolved_lower_bound_bits": 0
+    },
+    "memory": {
+      "events": 10000,
+      "residual": 1,
+      "lower_bound_bits": 0
+    }
+  },
+  "deductions": [
+    "NO_POSITIVE_LEARNED_BIT_LOWER_BOUND_OBSERVED_IN_EVIDENCE_COMPLETE_CASES",
+    "LEXICAL_ABSTENTIONS_REMAIN_INFORMATION_GAPS"
+  ],
+  "h100_terminal_credit_delta": 0,
+  "promotion_authority": false
+}
