@@ -6451,6 +6451,78 @@ def verify(step,result):
         return result.get("status")==v["value"]
     raise Blocker("UNKNOWN_VERIFIER:"+typ)
 
+
+def _honesty_stdout(payload, mission, state):
+    from canonical.runtime import honesty_envelope_v1 as honesty
+
+    def _digest(value):
+        raw=json.dumps(
+            value,sort_keys=True,separators=(",",":"),ensure_ascii=False,default=str
+        ).encode("utf-8")
+        return hashlib.sha256(raw).hexdigest()
+
+    if not isinstance(payload,dict) or not isinstance(mission,dict) or not isinstance(state,dict):
+        raise Blocker("HONESTY_EMISSION_INPUT_INVALID")
+    is_blocker=payload.get("schema")=="PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1"
+    mission_sha=str(state.get("mission_sha256") or "")
+    if not re.fullmatch(r"[0-9a-f]{64}",mission_sha):
+        mission_sha=_digest(mission)
+
+    synthetic_identity="__ASTRA_MISSION_IDENTITY__"
+    synthetic_runtime="__ASTRA_RUNTIME_HEALTH__"
+    step_ids=[str(step.get("id") or "").strip() for step in mission.get("steps",[])]
+    if not step_ids or any(not x for x in step_ids) or len(step_ids)!=len(set(step_ids)):
+        raise Blocker("HONESTY_MISSION_STEP_IDENTITY_INVALID")
+    required=[synthetic_identity,synthetic_runtime,*step_ids]
+    history={}
+    for row in state.get("history",[]):
+        if isinstance(row,dict) and str(row.get("step_id") or "") in step_ids:
+            history[str(row["step_id"])]=row
+
+    mission_identity_failed=(
+        is_blocker
+        and payload.get("error")=="COMPLETE_MISSION_HASH_DRIFT_REQUIRES_NEW_MISSION_ID"
+    )
+    obligations=[
+        {
+          "id":synthetic_identity,
+          "state":"FAILED" if mission_identity_failed else "VERIFIED",
+          "receipts":[] if mission_identity_failed else [mission_sha],
+        },
+        {
+          "id":synthetic_runtime,
+          "state":"FAILED" if is_blocker else "VERIFIED",
+          "receipts":[] if is_blocker else [_digest(state)],
+        },
+    ]
+    failed_step=str(payload.get("step_id") or "") if is_blocker else ""
+    for sid in step_ids:
+        row=history.get(sid)
+        if sid==failed_step:
+            obligations.append({"id":sid,"state":"FAILED","receipts":[]})
+        elif isinstance(row,dict) and row.get("ok") is True:
+            obligations.append({"id":sid,"state":"VERIFIED","receipts":[_digest(row)]})
+        elif isinstance(row,dict) and row.get("ok") is False:
+            obligations.append({"id":sid,"state":"FAILED","receipts":[]})
+        else:
+            obligations.append({"id":sid,"state":"OPEN","receipts":[]})
+
+    record={
+      "schema":"PROJECT_BRAIN_HONESTY_ENVELOPE_INPUT_V1",
+      "task_contract":{"task_id":str(state.get("mission_id") or payload.get("mission_id") or "ASTRA"),"required_obligations":required},
+      "obligations":obligations,
+      "completion_claim":"FAILED" if is_blocker else "COMPLETE",
+      "provenance_events":[],
+      "material_claims":[],
+      "belief_assertions":[],
+    }
+    verdict=honesty.adjudicate(record)
+    if verdict.get("status")!="PASS":
+        raise Blocker("HONESTY_ENVELOPE_DENIED_STDOUT:"+json.dumps(verdict,sort_keys=True))
+    print(json.dumps(payload))
+    return verdict
+
+
 def main():
     STATE_DIR.mkdir(parents=True,exist_ok=True)
     EVID_DIR.mkdir(parents=True,exist_ok=True)
@@ -6523,7 +6595,7 @@ def main():
           "observed_at_utc":utc()
         }
         write_evidencej(EVID_DIR/f"{mid}__MISSION_DRIFT_BLOCKER.json",blocker)
-        print(json.dumps(blocker))
+        _honesty_stdout(blocker,mission,state)
         return 5
     state["mission_path"]=mission_rel
     state["mission_sha256"]=mission_sha256
@@ -6552,7 +6624,7 @@ def main():
                 write_evidencej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
                 state["status"]="BLOCKED"; state["blocker"]=blocker; state["updated_at_utc"]=utc()
                 write_statej(state_path,state)
-                print(json.dumps(blocker)); return 3
+                _honesty_stdout(blocker,mission,state); return 3
             rec={"step_index":j,"step_id":prior["id"],"ok":bool(ok),"result":result,
                  "rehydration":True,"completed_at_utc":utc()}
             rehydrated.append(rec)
@@ -6566,7 +6638,7 @@ def main():
                 write_evidencej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
                 state["status"]="BLOCKED"; state["blocker"]=blocker; state["updated_at_utc"]=utc()
                 write_statej(state_path,state)
-                print(json.dumps(blocker)); return 4
+                _honesty_stdout(blocker,mission,state); return 4
         if rehydrated:
             state.setdefault("rehydrations",[]).append({
               "at_utc":utc(),"before_step":state["next_step"],"steps":rehydrated
@@ -6592,7 +6664,7 @@ def main():
             write_evidencej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
             state["status"]="BLOCKED"; state["blocker"]=blocker; state["updated_at_utc"]=utc()
             write_statej(state_path,state)
-            print(json.dumps(blocker)); return 3
+            _honesty_stdout(blocker,mission,state); return 3
         rec={"step_index":i,"step_id":step["id"],"ok":bool(ok),"result":result,"completed_at_utc":utc()}
         state["history"].append(rec)
         if not ok:
@@ -6605,7 +6677,7 @@ def main():
             write_evidencej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
             state["status"]="BLOCKED"; state["blocker"]=blocker; state["updated_at_utc"]=utc()
             write_statej(state_path,state)
-            print(json.dumps(blocker)); return 4
+            _honesty_stdout(blocker,mission,state); return 4
         state["next_step"]=i+1
         # A previously blocked mission may later succeed after a verified
         # repair/replay. Do not leave the obsolete blocker looking like live
@@ -6628,7 +6700,7 @@ def main():
       "state_sha256":sha_file(state_path),"completed_at_utc":utc()
     }
     write_evidencej(EVID_DIR/f"{mid}__RECEIPT.json",receipt)
-    print(json.dumps(receipt)); return 0
+    _honesty_stdout(receipt,mission,state); return 0
 
 if __name__=="__main__":
     raise SystemExit(main())
