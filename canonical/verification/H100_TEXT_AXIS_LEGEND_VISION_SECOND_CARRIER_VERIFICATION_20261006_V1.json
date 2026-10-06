@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TEXT_AXIS_LEGEND_VISION_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__3_OF_3_FRESH_TEXT_RICH_HOLDOUT",
+  "subjects": {
+    "font": "canonical/runtime/h100_text_axis_legend_font_v1.py",
+    "parser": "canonical/runtime/h100_text_axis_legend_parser_v1.py",
+    "holdout": "canonical/governance/H100_TEXT_AXIS_LEGEND_VISION_HOLDOUT_PRECOMMIT_V1.json"
+  },
+  "observed": {
+    "passed": 3,
+    "total": 3,
+    "font_source_bytes": 703,
+    "parser_source_bytes": 6397,
+    "deterministic_capability_bytes_upper_bound": 7100,
+    "deterministic_capability_bits_upper_bound": 56800,
+    "learned_target_bytes": 0
+  },
+  "scope": [
+    "MONOSPACED_3X5_OCR",
+    "NUMERIC_Y_SCALE",
+    "CATEGORY_LABELS",
+    "R_S_LEGEND",
+    "GROUPED_VERTICAL_BARS"
+  ],
+  "hard_nonclaims": [
+    "SOURCE_BYTES_ARE_NOT_MINIMUM_DESCRIPTION",
+    "NO_ARBITRARY_FONTS",
+    "NO_NATURAL_LANGUAGE_QA",
+    "NO_GENERAL_CHARTQA"
+  ],
+  "promotion_authority": false
+}
