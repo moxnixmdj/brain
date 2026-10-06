@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REFERENCE_MACHINE_U0_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__6_OF_6",
+  "reference_machine_id": "H100_U0_PYCORE_3137_V1",
+  "host_semantics_observed": "CPYTHON_3_13_7",
+  "subject_blobs": {
+    "runtime": "3ab91eb8d22d464c590809f12bd9ef0b5be8f183",
+    "tests": "5c59eda26ae961ea58dab3b61b6308d391403368"
+  },
+  "verified": {
+    "pure_program_execution": true,
+    "imports_rejected": true,
+    "attribute_access_rejected": true,
+    "open_rejected": true,
+    "whitespace_invariant_canonical_measure": true,
+    "no_import_contract": true
+  },
+  "accounting_rule": "TARGET_CAPABILITY_PROGRAM_BITS_ARE_CANONICAL_AST_DUMP_UTF8_BITS_RELATIVE_TO_THIS_FROZEN_U0",
+  "promotion_authority": false
+}
