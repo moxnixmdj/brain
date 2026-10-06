@@ -93,6 +93,7 @@ else:
         mission=json.loads(mission_path.read_text())
         token=mission["case_token"]
         token_sha=hashlib.sha256(token.encode()).hexdigest()
+        seed_base=int(token_sha[:16],16)
         problem={{
           "initial_facts":["mission_loaded"],
           "target_effects":["agency_complete"],
@@ -109,19 +110,19 @@ else:
         for action in nonfinish:
             typ=action["type"]
             if typ=="browser_step":
-                case=bp.generate_case(0xA110+{ordinal},1)
+                case=bp.generate_case(seed_base ^ 0xA110 ^ {ordinal},1)
                 v=bp.run_episode(case,bc.next_action)
-                component["browser"]={{"pass":v.get("pass") is True,"case_class":case["case_class"]}}
+                component["browser"]={{"pass":v.get("pass") is True,"case_class":case["case_class"],"case_id":case["case_id"]}}
             elif typ=="tool_step":
-                case=tp.generate_case(0xA220+{ordinal},0)
+                case=tp.generate_case(seed_base ^ 0xA220 ^ {ordinal},0)
                 v=tp.score_episode(case,tc.next_action)
-                component["tool"]={{"pass":v.get("pass") is True,"case_class":case["case_class"]}}
+                component["tool"]={{"pass":v.get("pass") is True,"case_class":case["case_class"],"case_id":case["case_id"]}}
             elif typ=="delegation_step":
-                case=dp.generate_case(0xA330+{ordinal},0)
+                case=dp.generate_case(seed_base ^ 0xA330 ^ {ordinal},0)
                 first=dc.solve_initial(dp.public_initial(case))
                 second=dc.solve_after_receipt(dp.public_after_receipt(case),first)
                 v=dp.score_episode(case,first,second)
-                component["delegation"]={{"pass":v.get("pass") is True,"case_class":case["case_class"]}}
+                component["delegation"]={{"pass":v.get("pass") is True,"case_class":case["case_class"],"case_id":case["case_id"]}}
             else:
                 raise AssertionError("unknown_planned_action:"+str(typ))
         ok=(len(nonfinish)==3 and len({{a["type"] for a in nonfinish}})==3 and all(x["pass"] for x in component.values()))
