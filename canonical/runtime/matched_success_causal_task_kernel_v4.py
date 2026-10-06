@@ -35,6 +35,23 @@ for _atom, _class in ATOM_CLASS.items():
     CLASS_ATOMS.setdefault(_class, tuple())
     CLASS_ATOMS[_class] = CLASS_ATOMS[_class] + (_atom,)
 
+EXPECTED_LOAD_SOURCE = {
+    "AGENCY_THREE_TOOL_LONG_HORIZON":
+        "oracle.stage_1_source_token",
+    "INSTRUCTION_CHANGE_CONTROL":
+        "public.change_event.replace",
+    "RESEARCH_TOOL_ARTIFACT":
+        "oracle.source_a_result.fact",
+    "BROWSER_MEMORY_RECOVERY":
+        "oracle.one_time_token",
+    "CODING_DEBUG_TOOL_DISCOVERY":
+        "oracle.tests",
+    "DELEGATION_SYNTHESIS_ARTIFACT":
+        "oracle.worker_results.worker_b",
+    "CROSS_CAPABILITY_HANDOFF_ROLLBACK":
+        "oracle.pre_mutation_state.semantic_value",
+}
+
 
 class CoverageError(ValueError):
     pass
@@ -394,6 +411,21 @@ def verify_case_coverage(case: Mapping[str, Any]) -> dict[str, Any]:
             raise CoverageError("CASE_INITIAL_STATE_SHA256_MISMATCH")
         if case.get("case_id") != payload.get("case_id"):
             raise CoverageError("CASE_ID_MISMATCH")
+        expected_namespace = _sha(
+            {
+                "version": VERSION,
+                "case_id": case.get("case_id"),
+                "payload": _sha(payload),
+            }
+        )
+        if initial_state.get("case_id") != case.get("case_id"):
+            raise CoverageError("INITIAL_STATE_CASE_ID_MISMATCH")
+        if initial_state.get("mutable_namespace") != expected_namespace:
+            raise CoverageError("INITIAL_NAMESPACE_PAYLOAD_BINDING_MISMATCH")
+        if initial_state.get("cross_case_memory") is not None:
+            raise CoverageError("INITIAL_CROSS_CASE_MEMORY_NOT_EMPTY")
+        if initial_state.get("result_history") != []:
+            raise CoverageError("INITIAL_RESULT_HISTORY_NOT_EMPTY")
         atom = payload.get("primary_atom")
         class_id = payload.get("class_id")
         if case.get("primary_atom") != atom:
@@ -609,8 +641,7 @@ def verify_case_coverage(case: Mapping[str, Any]) -> dict[str, Any]:
         )
         load_source = intervention.get("load_bearing_source")
         _require(
-            isinstance(load_source, str)
-            and load_source.startswith("oracle."),
+            load_source == EXPECTED_LOAD_SOURCE[str(class_id)],
             "INTERVENTION_LOAD_BEARING_SOURCE_INVALID",
         )
 
