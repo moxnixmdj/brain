@@ -1,0 +1,31 @@
+{
+  "schema":"PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id":"TARGET-UNIVERSE-V23-20261006-SOL",
+  "date":"2026-10-06",
+  "status":"CANDIDATE__ZERO_CREDIT",
+  "canonical_base_commit":"30e3aabc78fd889b6a74e1559c5f7ba356c93638",
+  "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "action_kind":"RECONCILE_FRONTIER",
+  "highest_leverage_now":true,
+  "v22_prewrite_admission":{
+    "active_pointer_path":"canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha":"de8fe0b66a214bad3596fd92b10460d0bcf2afca",
+    "mode":"ACTIVE_INTERFACE",
+    "interface":"UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations":["LITERAL_ALL_USEFUL_OPUS55_FINALITY"],
+    "fresh_reality_authority":false,
+    "terminal_credit_delta":0
+  },
+  "expected_state":{
+    "proved_atomic":14,
+    "unresolved_atomic":24,
+    "meta_open_before":8,
+    "meta_open_after":9,
+    "total_open_after":33,
+    "terminal":false
+  },
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0},
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false
+}
