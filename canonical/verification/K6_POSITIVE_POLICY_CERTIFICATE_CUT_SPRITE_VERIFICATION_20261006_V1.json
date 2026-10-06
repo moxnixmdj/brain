@@ -1,0 +1,17 @@
+{
+ "schema":"PROJECT_BRAIN_K6_POSITIVE_POLICY_CERTIFICATE_CUT_SPRITE_VERIFICATION_V1",
+ "date":"2026-10-06",
+ "status":"INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__POSITIVE_EXISTENTIAL_BYPASS__ZERO_TERMINAL_CREDIT",
+ "subject":{
+  "governance":{"path":"canonical/governance/K6_POSITIVE_POLICY_CERTIFICATE_CUT_20261006_V1.json","git_blob_sha":"05b564245e6c1f5ed6c50cc91ac69ca1d68b8f68"},
+  "runtime":{"path":"canonical/runtime/k6_positive_policy_certificate_cut_v1.py","git_blob_sha":"2824efdfc6ebc668de8cb83097ec0fdb47066d8d"}
+ },
+ "carrier":{"provider":"SPRITES","sprite_name":"brain-h100-independent-replay-v1","sprite_id":"sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"},
+ "verified":[
+  "ONE_COMMON_ADEQUATE_POLICY_IS_SUFFICIENT_WITHOUT_ENUMERATING_OTHER_POLICIES",
+  "EMPTY_INTERSECTION_OF_INCOMPLETE_LOWER_BOUND_SUPPORTS_DOES_NOT_PROVE_TRUE_EMPTY_INTERSECTION",
+  "NEGATIVE_NONIDENTIFIABILITY_NEEDS_STRONGER_COMPLETENESS_THAN_POSITIVE_SUCCESS"
+ ],
+ "hard_nonclaims":["NO_REAL_CONTEXT_COMMON_POLICY_CERTIFICATE_PROVED","NO_K6_PARITY_OR_TERMINAL_CREDIT"],
+ "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
