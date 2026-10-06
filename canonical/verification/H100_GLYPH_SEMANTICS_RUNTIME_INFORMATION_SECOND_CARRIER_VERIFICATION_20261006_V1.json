@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_H100_GLYPH_SEMANTICS_RUNTIME_INFORMATION_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__10_OF_10_WITH_RUNTIME_ATLAS",
+  "reference_machine": "H100_U1_STACK_VM",
+  "frozen_program": "canonical/governance/H100_U1_RUNTIME_GLYPH_ATLAS_LOOKUP_PROGRAM_PRECOMMIT_V1.json",
+  "world": "canonical/governance/H100_GLYPH_SEMANTICS_RUNTIME_INFORMATION_WORLD_V1.json",
+  "observed": {
+    "program_bytes": 62,
+    "program_bits": 496,
+    "atlas_entries": 10,
+    "atlas_runtime_integer_values": 20,
+    "with_atlas_passed": 10,
+    "with_atlas_total": 10,
+    "with_atlas_max_steps": 239,
+    "with_atlas_world_specific_persistent_bits": 0,
+    "without_atlas_hidden_worlds": 10,
+    "without_atlas_uniform_exact_success_upper_bound_zero_world_bits": 0.1,
+    "without_atlas_fixed_length_world_specific_bits_for_all_worlds": 4
+  },
+  "deduction": [
+    "VISUAL_SYMBOL_SEMANTICS_CAN_REQUIRE_PERSISTENT_WORLD_SPECIFIC_INFORMATION_WHEN_THE_GLYPH_MAPPING_IS_RUNTIME_UNOBSERVABLE",
+    "THE_SAME_INFORMATION_REQUIREMENT_CAN_BE_REMOVED_BY_SUPPLYING_THE_GLYPH_TO_DIGIT_MAPPING_AS_RUNTIME_JIT_KNOWLEDGE",
+    "ALGORITHM_DESCRIPTION_AND_WORLD_SEMANTIC_INFORMATION_ARE_DISTINCT_RESOURCES"
+  ],
+  "hard_nonclaims": [
+    "SYNTHETIC_ARBITRARY_GLYPH_MAPPING_IS_NOT_GENERAL_OCR",
+    "FOUR_BIT_BOUND_IS_CLASS_LEVEL_FIXED_LENGTH_DISTINGUISHABILITY_NOT_PER_WORLD_KOLMOGOROV_COMPLEXITY",
+    "RUNTIME_ATLAS_COST_IS_NOT_ZERO_AND_IS_REPORTED_SEPARATELY"
+  ],
+  "promotion_authority": false
+}
