@@ -1,0 +1,15 @@
+{
+  "schema": "A_WAVE2_SEED_BINDING_V1",
+  "parser_commit": "bf123d43215012a06bd43acebaac4572cb7838fe",
+  "parser_blob": "3c38a3d9b7ae36f4a49f6bab19dd29e87f9688b4",
+  "generator_blob": "a8840437c087a5df9e9dc4139b062342478bb036",
+  "derivation_sha256": "669d9597995f037a0a1bf8cd1e5e2d867c4095ad242ded2df984007cfe58701b",
+  "scan_count": 36,
+  "skip_offsets": [
+    4,
+    9,
+    16,
+    20
+  ],
+  "take_valid": 32
+}
