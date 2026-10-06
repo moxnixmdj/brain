@@ -79,7 +79,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python canonical/runtime/astra_runtime.py "${{ steps.mission.outputs.path }}"
+          python canonical/runtime/root3_production_astra_launcher_v1.py "${{ steps.mission.outputs.path }}"
 
       - name: Persist runtime state, evidence, and continuation missions
         if: always()
