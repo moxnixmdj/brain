@@ -21,6 +21,13 @@ def recv_exact(s,n):
     return out
 
 r={}
+private_tmp=pathlib.Path("/input/canonical/astra_runtime/tmp/PRIVATE_ONLY.txt")
+try:
+    private_tmp.write_text("private")
+    r["private_repo_tmp_write_succeeded"]=private_tmp.read_text()=="private"
+except Exception:
+    r["private_repo_tmp_write_succeeded"]=False
+
 try:
     direct=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     direct.settimeout(0.2)
@@ -58,6 +65,7 @@ ok=(
     and (response.get("result") or {}).get("echo")==r
     and r["direct_network_blocked"]
     and r["input_write_blocked"]
+    and r["private_repo_tmp_write_succeeded"]
 )
 raise SystemExit(0 if ok else 9)
 '''
@@ -70,6 +78,10 @@ class ZeroAmbientNamespaceBrokeredLauncherV2Tests(unittest.TestCase):
         ) as td:
             root=pathlib.Path(td)
             (root/"client.py").write_text(PAYLOAD,encoding="utf-8")
+            host_tmp=root/"canonical"/"astra_runtime"/"tmp"
+            host_tmp.mkdir(parents=True,exist_ok=True)
+            sentinel=host_tmp/"HOST_SENTINEL.txt"
+            sentinel.write_text("host",encoding="utf-8")
             result=ns.run_confined_brokered(
                 {
                     "argv":["/usr/bin/python3","/input/client.py"],
@@ -97,6 +109,8 @@ class ZeroAmbientNamespaceBrokeredLauncherV2Tests(unittest.TestCase):
         self.assertEqual(result["material_effects_committed_by_launcher"],0)
         self.assertFalse(result["execution_authority"])
         self.assertFalse(result["promotion_authority"])
+        self.assertEqual(sentinel.read_text(encoding="utf-8"),"host")
+        self.assertFalse((host_tmp/"PRIVATE_ONLY.txt").exists())
 
 
 if __name__=="__main__":
