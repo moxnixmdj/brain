@@ -15,6 +15,8 @@ SOURCE_BLOBS = {
     "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43",
     "canonical/governance/M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json": "d34a284f7c1f99fd93d420f3a5aba93851b29ef6",
     "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json": "a1630299d29ea9c07e55b4314c07ddb3228c3287",
+    "canonical/runtime/terminal_parent_portfolio_runner_v1.py": "431b62e503a6a179f19339ae5e0ab6948424a650",
 }
 
 EVIDENCE_SOURCE = {
@@ -90,6 +92,13 @@ def evaluate() -> dict:
                 errors.append("UNBOUND_EVIDENCE_TOKEN:" + token)
             elif token not in source_text[source]:
                 errors.append("EVIDENCE_TOKEN_NOT_IN_BOUND_SOURCE:" + token)
+
+    runner = (ROOT / "canonical/runtime/terminal_parent_portfolio_runner_v1.py").read_text()
+    runner_binding = json.loads((ROOT / "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json").read_text())
+    if "component_results = {" not in runner or "parent_pass = bool(component_results) and all(" not in runner:
+        errors.append("PARENT_RUNNER_COMPONENT_AND_STRUCTURE_DRIFT")
+    if "FOR_EACH_PORTFOLIO__RUN_EACH_BOUND_MULTIPLEX_BEHAVIOR_ON_ITS_FROZEN_ROUTE_SPECIFIC_SCHEDULE__COMPUTE_PARENT_TERMINAL_ACCEPTANCE_AS_AND_OF_ALL_LOAD_BEARING_MULTIPLEX_COMPONENTS" not in runner_binding.get("parent_portfolio_rule", ""):
+        errors.append("PARENT_RUNNER_BINDING_RULE_DRIFT")
 
     result = gov["reuse_result"]
     if result["legacy_t2_unchanged_is_scope_superset"] is not False:
