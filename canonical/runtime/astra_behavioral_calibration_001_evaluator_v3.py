@@ -238,14 +238,12 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         x in joined
         for x in ("caused by", "root cause was", "probably", "likely because", "due to")
     )
-    consistent = True
-    if "503" in joined:
-        consistent = consistent and "10:02" in joined and "10:11" in joined
-    if "rollback" in joined:
-        consistent = consistent and "10:07" in joined
-    if "baseline" in joined:
-        consistent = consistent and "10:11" in joined
-    checks["case4_fact_consistency"] = bool(consistent)
+    bullet_texts = [str(x).lower() for x in (bullets or [])]
+    checks["case4_fact_consistency"] = (
+        any("503" in x and "10:02" in x and "10:11" in x for x in bullet_texts)
+        and any("rollback" in x and "10:07" in x for x in bullet_texts)
+        and any("baseline" in x and "10:11" in x for x in bullet_texts)
+    )
 
     c5 = payload["case5"]
     if isinstance(c5, Mapping):
