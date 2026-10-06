@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import dominance_semantic_binding_v3 as sem
+from canonical.runtime import dominance_binding_v2 as bind2
 from canonical.runtime.dominance_sufficiency_v3 import (
     compile_dominance_sufficiency_v3,
 )
@@ -37,7 +38,7 @@ def route(
         try:
             current_rows = sem.live_worlds(list(hypotheses))
             current_world_sha = sem.live_world_digest(current_rows)
-        except sem.SemanticBindingError as exc:
+        except (sem.SemanticBindingError, bind2.BindingError) as exc:
             return {
                 **common,
                 "route": "FAIL_CLOSED__CURRENT_HYPOTHESIS_SEMANTICS_UNBOUND",
