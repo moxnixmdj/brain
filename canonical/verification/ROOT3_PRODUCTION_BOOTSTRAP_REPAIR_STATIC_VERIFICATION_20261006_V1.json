@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_PRODUCTION_BOOTSTRAP_REPAIR_STATIC_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "CONNECTOR_STATIC_RECOMPUTATION_PASS__10_OF_10_STRUCTURAL_CHECKS__EXACT_EXECUTION_REPLAY_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "branch": "repair/root3-production-bootstrap-v3",
+  "subjects": {
+    "workflow": {
+      "path": ".github/workflows/astra-shared-runtime.yml",
+      "git_blob_sha": "56c1b0ca2a1521e7ab6708dbaeb27e0fb0245374"
+    },
+    "production_launcher": {
+      "path": "canonical/runtime/root3_production_astra_launcher_v1.py",
+      "git_blob_sha": "3ac42e7be5a391cfda738131ecb0d3d600fa2147"
+    },
+    "launcher_tests": {
+      "path": "canonical/tests/test_root3_production_astra_launcher_v1.py",
+      "git_blob_sha": "ea693e4bc399ebe8f8a834a874a7411d1a4d159e"
+    },
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "0e67e417338145061205764cfd82affaeaa07cdc"
+    },
+    "strict_bootstrap": {
+      "path": "canonical/runtime/root3_strict_current_bootstrap_v2.py",
+      "git_blob_sha": "7d6e4f4e00fda4eae6ff1974f68f970ceee69c2e"
+    },
+    "two_class_authorizer": {
+      "path": "canonical/runtime/root3_two_class_attempt_authorizer_v1.py",
+      "git_blob_sha": "5aac8664433115c47d24e0fbbca15b81126753ee"
+    }
+  },
+  "checks": {
+    "workflow_uses_production_launcher": true,
+    "workflow_no_raw_astra_command": true,
+    "launcher_installs_before_astra_import": true,
+    "launcher_checks_subprocess_run_guard_active": true,
+    "launcher_checks_subprocess_popen_guard_active": true,
+    "launcher_rechecks_guards_after_astra_import": true,
+    "launcher_uses_independently_verified_two_class_authorizer": true,
+    "raw_astra_direct_entry_fails_closed_without_active_guards": true,
+    "bootstrap_binds_only_read_only_and_temporary_transform_classes": true,
+    "all_other_effect_classes_remain_default_deny": true
+  },
+  "verdict": {
+    "prior_production_bootstrap_counterexample_path_removed_on_branch": true,
+    "authority_widened": false,
+    "root3_predicate_closed": false,
+    "execution_replay_completed": false,
+    "independent_replay_completed": false
+  },
+  "next_falsifiers_after_exact_execution_replay": [
+    "F_ROOT3_CHILD_INTERNAL_EFFECT_ESCAPE",
+    "F_ROOT3_NATIVE_EFFECT_ESCAPE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_NEW_LAUNCHER_HAS_EXECUTED_ON_AN_INDEPENDENT_CARRIER",
+    "NO_CLAIM_ALL_ASTREA_MISSIONS_REMAIN_FUNCTIONALLY_AVAILABLE_UNDER_DEFAULT_DENY",
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
