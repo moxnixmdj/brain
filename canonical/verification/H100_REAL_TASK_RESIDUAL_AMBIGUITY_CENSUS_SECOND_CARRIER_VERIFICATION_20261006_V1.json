@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REAL_TASK_RESIDUAL_AMBIGUITY_CENSUS_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__5_OF_5_TESTS__FOUR_CLASS_CENSUS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_REAL_TASK_RESIDUAL_AMBIGUITY_CENSUS_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_real_task_residual_ambiguity_census_v1.py",
+    "tests": "canonical/tests/test_h100_real_task_residual_ambiguity_census_v1.py"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "observed": {
+    "complete_unary_chain": {
+      "raw_hypothesis_count": 1554,
+      "raw_identity_bits": 11,
+      "measured_tasks": 3,
+      "largest_residual_equivalence_class": 1,
+      "learned_information_lower_bound_bits": 0
+    },
+    "typed_planner": {
+      "candidate_sequences_examined_until_shortest_depth": 85,
+      "shortest_plan_length": 3,
+      "shortest_valid_plan_count": 1,
+      "learned_information_lower_bound_bits": 0
+    },
+    "real_oewn_lexical": {
+      "frozen_tasks": 9,
+      "uniquely_resolved": 6,
+      "abstentions": 3,
+      "resolved_task_learned_information_lower_bound_bits": 0,
+      "abstentions_receive_zero_bit_credit": false
+    },
+    "event_memory": {
+      "event_count": 10000,
+      "restart_count": 3,
+      "final_state_key_count": 243,
+      "largest_residual_equivalence_class_given_authenticated_history": 1,
+      "learned_information_lower_bound_bits": 0
+    }
+  },
+  "deduction": "ACROSS_THREE_FULLY_RESOLVED_CAPABILITY_CLASSES_AND_SIX_REAL_SOURCE_LEXICAL_TASKS__COMPLETE_RUNTIME_EVIDENCE_COLLAPSES_ANSWER_RELEVANT_AMBIGUITY_TO_SINGLETONS__THE_INFORMATION_THEORETIC_LOWER_BOUND_ON_WORLD_DEPENDENT_PERSISTENT_LEARNED_BITS_IS_ZERO__THE_THREE_REAL_LEXICAL_ABSTENTIONS_CORRECTLY_REMAIN_INFORMATION_INCOMPLETE",
+  "hard_nonclaims": [
+    "ZERO_INFORMATION_LOWER_BOUND_IS_NOT_ZERO_ALGORITHMIC_COMPLEXITY",
+    "RETROSPECTIVE_FINITE_CENSUS_IS_NOT_OPEN_WORLD_PROOF",
+    "SYNTHETIC_CHAIN_AND_PLANNER_CLASSES_ARE_BOUNDED",
+    "DOES_NOT_PROVE_ZERO_LEARNED_STATE_IS_UNIVERSALLY_SUFFICIENT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_terminal_credit_delta": 0
+  },
+  "promotion_authority": false
+}
