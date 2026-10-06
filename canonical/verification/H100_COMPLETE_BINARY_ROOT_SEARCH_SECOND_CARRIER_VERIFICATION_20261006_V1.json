@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_H100_COMPLETE_BINARY_ROOT_SEARCH_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__3_OF_3_COMPLETE_BINARY_ROOT_EXACT_AND_TRANSFER__ZERO_LEARNED",
+  "subject": {
+    "failure": "canonical/verification/H100_FRESH_BINARY_TREE_SEARCH_SECOND_CARRIER_FAILURE_20261006_V1.json",
+    "precommit": "canonical/governance/H100_COMPLETE_BINARY_ROOT_SEARCH_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_complete_binary_root_search_v1.py",
+    "tests": "canonical/tests/test_h100_complete_binary_root_search_v1.py"
+  },
+  "observed": {
+    "candidate_count_per_task": 201502,
+    "tasks": [
+      {
+        "id": "BT_A",
+        "exact_count": 49,
+        "wall_clock_seconds": 0.13532020099955844,
+        "seed_holdout_nrmse": 2.2337114954927673e-14,
+        "transfer_holdout_nrmse": 4.6746004505415605e-14
+      },
+      {
+        "id": "BT_B",
+        "exact_count": 7,
+        "wall_clock_seconds": 0.11996303100022487,
+        "seed_holdout_nrmse": 2.3889331617659532e-14,
+        "transfer_holdout_nrmse": 6.904431817212588e-14
+      },
+      {
+        "id": "BT_C",
+        "exact_count": 49,
+        "wall_clock_seconds": 0.12121633399510756,
+        "seed_holdout_nrmse": 3.131471698687655e-14,
+        "transfer_holdout_nrmse": 7.959847223713094e-14
+      }
+    ],
+    "persistent_learned_bytes": 0
+  },
+  "deduction": "THE_FROZEN_BINARY_FAILURE_WAS_CAUSED_BY_SCORE_PRUNED_SEARCH_REACHABILITY__A_STRUCTURALLY_COMPLETE_BINARY_ROOT_ENUMERATION_RECOVERS_AND_TRANSFERS_ALL_THREE_WITH_ZERO_LEARNED_STATE",
+  "hard_nonclaims": [
+    "COMPLETE_ONLY_FOR_ONE_BINARY_ROOT_WITH_UNARY_BRANCHES_DEPTH_LE_3",
+    "FINITE_SYNTHETIC_FAMILY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
