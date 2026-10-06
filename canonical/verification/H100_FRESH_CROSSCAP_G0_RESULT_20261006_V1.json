@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_H100_FRESH_CROSSCAP_G0_RESULT_V1",
+  "date": "2026-10-06",
+  "status": "PASS__16_OF_16__ZERO_TARGET_ADAPTED_STATE__SUITE_FAILED_TO_FALSIFY_A0",
+  "g0_freeze": "canonical/governance/H100_CROSSCAP_G0_EXECUTION_FREEZE_V1.json",
+  "suite_precommit": "canonical/governance/H100_FRESH_CROSSCAP_SUITE_PRECOMMIT_V1.json",
+  "hashes": {
+    "public_tasks_sha256": "dd83931f94526d9221cc6b16dde7784d8859660a7176f081b881a727a4284c64",
+    "answers_sha256": "a812fdf087a328c775f57b4561225f48703689991909e9b6a508cfb8012f5436",
+    "outputs_sha256": "7cd3fd2f0cbc195ab63b69b03a3320b2907300aaeaf6fc1d63448b76f3857f28"
+  },
+  "result": {
+    "passed": 16,
+    "total": 16,
+    "by_kind": {
+      "REASONING": "2/2",
+      "CODING": "2/2",
+      "LANGUAGE": "2/2",
+      "VISION": "2/2",
+      "TOOL_USE": "2/2",
+      "PLANNING": "2/2",
+      "MEMORY": "2/2",
+      "NOVEL_DOMAIN": "2/2"
+    },
+    "target_adapted_persistent_bits_added_after_task_freeze": 0
+  },
+  "interpretation": "THIS_SUITE_DID_NOT_FALSIFY_P0__IT_IS_NOT_EVIDENCE_OF_UNIVERSAL_ZERO_STATE_SUFFICIENCY",
+  "next_tournament_move": "GENERATE_A_SECOND_ADVERSARIAL_SUITE_TARGETING_THE_BOUNDARIES_OF_G0_WITHOUT_MUTATING_G0",
+  "promotion_authority": false
+}
