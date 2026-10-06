@@ -22,6 +22,13 @@ SPEC = REGISTRY[ADMIN_DRIVER_ID]
 
 
 class Root3ParentDriverRegistryV1Tests(unittest.TestCase):
+    def _authority(self, mission_id):
+        return {
+            "mission_id": mission_id,
+            "mission_sha256": "a" * 64,
+            "mission_rel": "canonical/astra_runtime/missions/" + mission_id + ".json",
+        }
+
     def _request(self, typed_args, **overrides):
         return make_request(
             driver_id=overrides.get("driver_id", ADMIN_DRIVER_ID),
@@ -36,8 +43,8 @@ class Root3ParentDriverRegistryV1Tests(unittest.TestCase):
 
     def test_exact_admin_state_replace_commits_on_checked_out_bytes(self):
         payload = (json.dumps({"status": "RUNNING"}, sort_keys=True) + "\n").encode()
-        name = "ROOT3-DRIVER-TEST-" + uuid.uuid4().hex + ".json"
-        path = "canonical/astra_runtime/state/" + name
+        mission_id = "ROOT3-DRIVER-TEST-" + uuid.uuid4().hex
+        path = "canonical/astra_runtime/state/" + mission_id + ".json"
         target = ROOT / path
         self.addCleanup(lambda: target.unlink(missing_ok=True))
         req = self._request({
@@ -47,7 +54,11 @@ class Root3ParentDriverRegistryV1Tests(unittest.TestCase):
             "expected_pre_sha256": "ABSENT",
             "payload_b64": base64.b64encode(payload).decode("ascii"),
         })
-        out = dispatch(ROOT, req)
+        out = dispatch(
+            ROOT,
+            req,
+            authority_context=self._authority(mission_id),
+        )
         self.assertEqual(out["driver_id"], ADMIN_DRIVER_ID)
         self.assertTrue(out["closed_registry"])
         self.assertFalse(out["generic_fallback"])
@@ -103,18 +114,57 @@ class Root3ParentDriverRegistryV1Tests(unittest.TestCase):
         with self.assertRaisesRegex(Exception, "PATH_NOT_ALLOWED"):
             dispatch(ROOT, req)
 
-    def test_extra_typed_arg_denies(self):
+    def test_cross_mission_state_write_denies_before_driver(self):
         payload = b'{"x":1}\n'
         req = self._request({
             "destination_class": "ASTRA_STATE_JSON",
             "operation": "REPLACE",
-            "path": "canonical/astra_runtime/state/ROOT3-EXTRA-FIELD-TEST.json",
+            "path": "canonical/astra_runtime/state/MISSION-B.json",
+            "expected_pre_sha256": "ABSENT",
+            "payload_b64": base64.b64encode(payload).decode("ascii"),
+        })
+        with self.assertRaisesRegex(
+            ParentDriverRegistryError,
+            "MISSION_SCOPED_ADMIN_PATH_DENY",
+        ):
+            dispatch(
+                ROOT,
+                req,
+                authority_context=self._authority("MISSION-A"),
+            )
+
+    def test_missing_mission_context_denies_admin_driver(self):
+        payload = b'{"x":1}\n'
+        req = self._request({
+            "destination_class": "ASTRA_STATE_JSON",
+            "operation": "REPLACE",
+            "path": "canonical/astra_runtime/state/MISSION-A.json",
+            "expected_pre_sha256": "ABSENT",
+            "payload_b64": base64.b64encode(payload).decode("ascii"),
+        })
+        with self.assertRaisesRegex(
+            ParentDriverRegistryError,
+            "MISSION_AUTHORITY_CONTEXT_REQUIRED",
+        ):
+            dispatch(ROOT, req)
+
+    def test_extra_typed_arg_denies(self):
+        payload = b'{"x":1}\n'
+        mission_id = "ROOT3-EXTRA-FIELD-TEST"
+        req = self._request({
+            "destination_class": "ASTRA_STATE_JSON",
+            "operation": "REPLACE",
+            "path": "canonical/astra_runtime/state/" + mission_id + ".json",
             "expected_pre_sha256": "ABSENT",
             "payload_b64": base64.b64encode(payload).decode("ascii"),
             "extra": "no",
         })
         with self.assertRaisesRegex(Exception, "TYPED_ARGS_FIELDS_INVALID"):
-            dispatch(ROOT, req)
+            dispatch(
+                ROOT,
+                req,
+                authority_context=self._authority(mission_id),
+            )
 
 
 if __name__ == "__main__":
