@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REGISTRY_PROVENANCE_CHRONOLOGY_20261006_V1",
+  "date": "2026-10-06",
+  "status": "CONTENT_BOUND_CHRONOLOGY__V1_PROVENANCE_UNRESOLVED_SET_REDUCED_TO_ZERO__ZERO_TERMINAL_CREDIT",
+  "events": [
+    {
+      "time": "2026-10-04T09:20:43+02:00",
+      "commit": "1dc8ab672f4950339b41b11d3fb48d48755683b0",
+      "event": "FREEZE_H100_ZERO_LEARNED_NOVELTY_STRESS_POPULATION_BEFORE_OUTCOMES"
+    },
+    {
+      "time": "2026-10-04T09:32:46+02:00",
+      "external_repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1742,
+      "merge_commit": "b6c6988f63fda667700abb3057a366157e02ce01",
+      "event": "INDEPENDENT_PHASE1_RESULT_AVAILABLE__9_OF_9_WITHIN_OPERATOR__0_OF_3_OUTSIDE_OPERATOR",
+      "result_path": "canonical/verification/H100_ZERO_LEARNED_NOVELTY_STRESS_PUBLIC_RUNNER_RESULT_20261004_V1.json",
+      "result_git_blob_sha": "be35be11b9f2228904f1b1a1582675aa79454c65",
+      "next_action": "ADD_SMALLEST_ZERO_LEARNED_GENERAL_PRIMITIVE_FAMILY_FOR_PERIODIC_EXPONENTIAL_AND_DISCONTINUOUS_STEP"
+    },
+    {
+      "time": "2026-10-04T09:35:09+02:00",
+      "commit": "940d9f4b9e99234104777796a21de32b807dceaa",
+      "event": "ADD_PARAMETRIC_UNARY_SYNTHESIZER",
+      "source_git_blob_sha": "6a77f80e2cf01b079fcf7b688689d08a11b47c32",
+      "families": [
+        "LINEAR_TREND_PLUS_SINUSOID",
+        "EXP_ABS",
+        "THRESHOLD_STEP"
+      ],
+      "classification": "DEVELOPMENT_CONDITIONED_POSTOUTCOME_IMPLEMENTATION"
+    },
+    {
+      "time": "2026-10-04T10:59:19+02:00",
+      "commit": "21b6e473daf0983376b991b02f8bdacdd7541c47",
+      "event": "FREEZE_OEWN_TASK_PREEXPOSURE_BEFORE_RUNTIME_IMPLEMENTATION_AND_OUTCOMES"
+    },
+    {
+      "time": "2026-10-04T11:00:14+02:00",
+      "commit": "5ed7713a2a3e43e6d22ac01bc93b0e08c7be60e1",
+      "event": "ADD_OEWN_LEXICAL_RUNTIME",
+      "classification": "DEVELOPMENT_CONDITIONED_PREOUTCOME_FIXED"
+    },
+    {
+      "time": "2026-10-04T11:09:50+02:00",
+      "commit": "aade10f7436c3e08f0721f5d0bbbe4c69b7742fe",
+      "event": "MERGE_VERIFIED_OEWN_RESULT_WITH_OBSERVED_MISSING_DOMAIN_TERM_COVERAGE"
+    },
+    {
+      "time": "2026-10-04T11:11:24+02:00",
+      "commit": "b243cf89ba2a2dc726237fa7bdfbec8385cbf610",
+      "event": "ADD_LEXICAL_SOURCE_FALLBACK_BRIDGE_AFTER_OBSERVED_OEWN_GAPS",
+      "source_git_blob_sha": "3980b1066058c77e515bd3b82b31a0f1298415f2",
+      "classification": "DEVELOPMENT_CONDITIONED_POSTOUTCOME_IMPLEMENTATION"
+    },
+    {
+      "time": "2026-10-04T11:44:00+02:00",
+      "commit": "c3783c4c1e253d1e96a4b7473cf8583a3cc54431",
+      "event": "FREEZE_COMPOSITIONAL_LANGUAGE_PREEXPOSURE"
+    },
+    {
+      "time": "2026-10-04T11:44:09+02:00",
+      "commit": "5405719f2b1505702243ab3506f23e35088376cd",
+      "event": "ADD_COMPOSITIONAL_LANGUAGE_RUNTIME",
+      "classification": "DEVELOPMENT_CONDITIONED_PREOUTCOME_FIXED"
+    },
+    {
+      "time": "2026-10-04T11:47:24+02:00",
+      "commit": "c9384081f1b9fb7d6384c3dc52b6159ee9907226",
+      "event": "FREEZE_TOOL_TRACE_PREEXPOSURE_BEFORE_NORMALIZER_IMPLEMENTATION_AND_OUTCOMES"
+    },
+    {
+      "time": "2026-10-04T11:48:44+02:00",
+      "commit": "e8b22c90490fd60172716a83024311173e68bc6f",
+      "event": "ADD_TOOL_TRACE_NORMALIZER",
+      "classification": "DEVELOPMENT_CONDITIONED_PREOUTCOME_FIXED"
+    }
+  ],
+  "source_size_upper_bounds": {
+    "parametric_unary_runtime_utf8_bytes": 11178,
+    "lexical_source_fallback_runtime_utf8_bytes": 4018,
+    "aggregate_postoutcome_runtime_utf8_bytes": 15196
+  },
+  "consequence": {
+    "v1_parametric_entries": [
+      "CAP_LINEAR_TREND_SINUSOID_V1",
+      "CAP_EXP_ABS_V1",
+      "CAP_THRESHOLD_STEP_V1"
+    ],
+    "v1_postoutcome_entries": [
+      "CAP_LINEAR_TREND_SINUSOID_V1",
+      "CAP_EXP_ABS_V1",
+      "CAP_THRESHOLD_STEP_V1",
+      "CAP_LEXICAL_SOURCE_FALLBACK_V1"
+    ],
+    "v1_preoutcome_fixed_entries": [
+      "CAP_OEWN_REAL_LEXICAL_V1",
+      "CAP_COMPOSITIONAL_LANGUAGE_V1",
+      "CAP_TOOL_TRACE_NORMALIZER_V1"
+    ],
+    "v1_unresolved_entries": []
+  },
+  "hard_nonclaims": [
+    "POSTOUTCOME_SOURCE_BYTE_SIZE_IS_A_CONSERVATIVE_REPRESENTATION_CEILING_NOT_MINIMAL_LEARNED_INFORMATION",
+    "PREOUTCOME_FIXED_DOES_NOT_PROVE_WORLD_INDEPENDENT_ORIGIN_BEFORE_TASK_SPECIFICATION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
