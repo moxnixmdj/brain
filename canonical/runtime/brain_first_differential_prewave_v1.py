@@ -46,6 +46,7 @@ def compile_brain_first_prewave(doc: Mapping[str, Any]) -> dict[str, Any]:
             "case_generation_outcome_independent",
             "post_freeze_generation",
             "contamination_clean",
+            "case_outcomes_isolated_or_reset_equivalent",
         ):
             _true(scope, key, "SCOPE")
         scope_receipt = _receipt(scope.get("receipt"), "SCOPE_RECEIPT")
