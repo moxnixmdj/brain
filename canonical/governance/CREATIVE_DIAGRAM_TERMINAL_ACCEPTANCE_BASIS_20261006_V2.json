@@ -9,7 +9,7 @@
   },
   "falsification_receipt": {
     "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_VISUAL_POLISH_ACCEPTANCE_ESCAPE_20261006_V1.json",
-    "git_blob_sha": "0dae5a2f0af67ea237f999ad73392e8efebb98f8"
+    "git_blob_sha": "9e7ed2bdeefdf71b9d1b960850b878e5b8d10664"
   },
   "primary_surface_delta": {
     "path": "canonical/governance/OPUS55_PRIMARY_SURFACE_DELTA_20261006_V1.json",
