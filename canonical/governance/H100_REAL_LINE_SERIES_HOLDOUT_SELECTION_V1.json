@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REAL_LINE_SERIES_HOLDOUT_SELECTION_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_IMAGES_VIEWED_OR_DETECTOR_EXECUTED",
+  "detector": "canonical/runtime/h100_generic_line_series_detector_v1.py",
+  "excluded_development_images": [
+    "95543699002420.png",
+    "47413894001985.png"
+  ],
+  "cases": [
+    {
+      "id": "V2H_452",
+      "imgname": "OECD_SELF-EMPLOYMENT_BY_ACTIVITY_CAN_DNK_POL_000033.png",
+      "query": "Which country does the blue line represent?"
+    },
+    {
+      "id": "V2H_238",
+      "imgname": "75903579005297.png",
+      "query": "Which country is represented by the given line graph?"
+    },
+    {
+      "id": "V2H_692",
+      "imgname": "two_col_60280.png",
+      "query": "Which date the line chart have vertical rise?"
+    }
+  ],
+  "next_step": "ANNOTATE_VISIBLE_SERIES_COUNT_AFTER_SELECTION_FREEZE__FREEZE_ANNOTATION__THEN_EXECUTE_DETECTOR",
+  "promotion_authority": false
+}
