@@ -1,0 +1,77 @@
+{
+  "case_count": 6,
+  "cases": [
+    {
+      "annotation_index": 262,
+      "imgname": "25622655023134.png",
+      "query": "How many bars are there in the chart?",
+      "selection_hash": "041f3435b8e8e70f4628fdb980c7073768b992427faf806c5afe18ea99819c27",
+      "split": "human"
+    },
+    {
+      "annotation_index": 520,
+      "imgname": "OECD_FINANCIAL_DISINCENTIVE_TO_RETURN_TO_WORK_AUS_DNK_LUX_NOR_SVN_000002.png",
+      "query": "How many bars are there in the graph?",
+      "selection_hash": "2ec1e1d0933efaafdbbdd6a54e4a289477e4222930f11378aeee15082d71f201",
+      "split": "human"
+    },
+    {
+      "annotation_index": 254,
+      "imgname": "24441478018800.png",
+      "query": "How many bars are there in the graph?",
+      "selection_hash": "6a4afd2ea5fca31b0b8884a895fc1ada4646cc774567f9192ef32fc88021b27a",
+      "split": "human"
+    },
+    {
+      "annotation_index": 2,
+      "imgname": "41810321001157.png",
+      "query": "How many bars are shown in the chart?",
+      "selection_hash": "7f94bc48acc47f02fcade0e2cfb590749ff4eac4ba5c959f5ca51210f89fa146",
+      "split": "human"
+    },
+    {
+      "annotation_index": 266,
+      "imgname": "26958202006631.png",
+      "query": "How many bars are there in the chart?",
+      "selection_hash": "91cc5c2dba1d7ce8df74bea2272b215f572467fc8312b39aa40637aba3ff0dd1",
+      "split": "human"
+    },
+    {
+      "annotation_index": 224,
+      "imgname": "08686631003296.png",
+      "query": "How many bars are there in the graph?",
+      "selection_hash": "c8f3c13976ee5e572c4a1c100704a42a04be6288df8c0df5aa1c6a4023014717",
+      "split": "human"
+    }
+  ],
+  "date": "2026-10-06",
+  "eligible_count": 6,
+  "images_opened": false,
+  "labels_exposed": false,
+  "runtime_branch": "research/h100-independent-information-lower-bound-v1",
+  "runtime_frozen_before_selection": true,
+  "runtime_path": "canonical/runtime/h100_zero_learned_bar_count_v2.py",
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_BAR_COUNT_TEST_HOLDOUT_V2",
+  "selection_rule": "CHARTQA_TEST_HUMAN_OR_AUGMENTED__QUERY_ASKS_TOTAL_VISIBLE_BAR_COUNT_ONLY__EXCLUDES_THRESHOLD_EQUALITY_ARITHMETIC_COMPARISON_CONDITIONS__SORT_BY_SHA256_SALT",
+  "selection_salt": "H100_ZERO_LEARNED_BAR_COUNT_TEST_HOLDOUT_V2",
+  "source_annotation_sha256": {
+    "augmented": "9df43a15e93ecb8496c3e5dc23f6a733cfeccac838ab41126ab56576b9305de1",
+    "human": "5fba61b508a96b85cd5906bb14adfc1ba552bdcf88ac568ed6e2f79dcf0460b7"
+  },
+  "source_revision": "044eabfc306abfe9340c5741f0093aefc5973d06",
+  "status": "FROZEN_IDENTITIES_ONLY__LABELS_AND_IMAGES_UNOPENED_AT_SELECTION",
+  "pass_gate": {
+    "required_exact_count_correct": 6,
+    "total_cases": 6,
+    "abstention_counts_as_incorrect": true,
+    "runtime_must_match_frozen_v2": true,
+    "persistent_learned_bytes_must_equal": 0,
+    "pretrained_vision_models_must_equal": 0,
+    "ocr_models_must_equal": 0
+  },
+  "hard_nonclaims": [
+    "BAR_COUNT_ONLY_NOT_GENERAL_CHART_QA",
+    "SMALL_SIX_CASE_HOLDOUT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
