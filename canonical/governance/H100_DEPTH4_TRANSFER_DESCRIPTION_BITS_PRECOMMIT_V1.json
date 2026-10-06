@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_H100_DEPTH4_TRANSFER_DESCRIPTION_BITS_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__RETROSPECTIVE_DESCRIPTION_MEASUREMENT",
+  "subjects": [
+    "CAP_AFFINE_CHAIN_SQUARE_LOG_SQRT_SAT_V1",
+    "CAP_AFFINE_CHAIN_SAT_SQUARE_LOG_SQRT_V1",
+    "CAP_AFFINE_CHAIN_LOG_SAT_SQRT_LOG_V1"
+  ],
+  "encoding": {
+    "structure_universe_size": 1554,
+    "structure_selector_bits": 11,
+    "coefficient_count": 3,
+    "coefficient_range": "[-2,2)",
+    "signed_fixed_point_bits_per_coefficient": "fractional_bits+2",
+    "search_fractional_bits": "0..40"
+  },
+  "gate": "HOLDOUT_NRMSE_LE_1E-8_ON_THE_ALREADY_FROZEN_TRANSFER_FUNCTION_OVER_THE_19_FROZEN_X_VALUES",
+  "purpose": "MEASURE_TARGET_ADAPTED_DESCRIPTION_UPPER_BOUND_UNDER_FIXED_GENERIC_CHAIN_INTERPRETER",
+  "promotion_authority": false
+}
