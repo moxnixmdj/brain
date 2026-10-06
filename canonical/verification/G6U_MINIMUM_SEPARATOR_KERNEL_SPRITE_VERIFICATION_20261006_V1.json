@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_G6U_MINIMUM_SEPARATOR_KERNEL_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__6_OF_6__SEPARATOR_NORMAL_FORM_CANDIDATE_ONLY__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/G6U_MINIMUM_SEPARATOR_KERNEL_REDUCTION_20261006_V1.json",
+      "git_blob_sha": "1263b84a071b9d97cbdfdecfbd6b06f5c8016983"
+    },
+    "runtime": {
+      "path": "canonical/runtime/g6u_minimum_separator_kernel_v1.py",
+      "git_blob_sha": "220d64a3b92a89df1261da13c11a9a5cb19415db"
+    },
+    "tests": {
+      "path": "canonical/tests/test_g6u_minimum_separator_kernel_v1.py",
+      "git_blob_sha": "909002cee4309a3577b949192b613f5c1f653527"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/tmp/g6u_separator_v1",
+    "tests_passed": 6,
+    "tests_total": 6,
+    "result": "PASS"
+  },
+  "verified": [
+    "COMPLETE_PRECOMMITMENT_VERIFIER_IS_A_VALID_SEPARATOR_ROUTE",
+    "AUTHORIZED_DISCRIMINATOR_REQUIRES_AVAILABILITY_BEFORE_DEADLINE_AND_WITHIN_RESOURCE_BOUND",
+    "OWNED_TASK_RELEVANT_PRIOR_IS_A_VALID_SEPARATOR_ROUTE",
+    "UNCERTAINTY_PRESERVATION_IS_VALID_ONLY_WHEN_ABSTENTION_OR_AMBIGUITY_HAS_NO_TERMINAL_UTILITY_LOSS",
+    "INFORMATION_BLIND_BINARY_OPPOSITE_WORLDS_HAVE_WORST_CASE_SUCCESS_AT_MOST_ONE_HALF",
+    "NO_SEPARATOR_AND_NO_LOSSLESS_ABSTENTION_FAILS_CLOSED_AS_AN_IRREDUCIBLE_SEPARATOR_GAP"
+  ],
+  "deduction": "THE_SINGLE_G6U_RESIDUAL_CAN_BE_ATTACKED_AS_A_PRECOMMITMENT_SEPARATOR_INFORMATION_AND_OPERATOR_PROBLEM_AFTER_SUBTRACTING_ALREADY_OWNED_EXPLICIT_MODEL_DECISION_AND_BOUNDED_PROPOSAL_SUFFIXES__THIS_IS_A_RESIDUAL_LOCALIZATION_NOT_A_PROOF_OF_TARGET_COVERAGE_OR_OPUS55_DOMINANCE",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_MINIMUM_SEPARATOR_KERNEL_IS_IMPLEMENTED",
+    "NO_CLAIM_ALL_OPUS55_RELEVANT_PRIORS_OR_DISCRIMINATORS_ARE_OWNED",
+    "NO_CLAIM_THE_OWNED_SUFFIXES_HAVE_UNIVERSAL_SCOPE",
+    "NO_CLAIM_TARGET_GENERATION_CLOSURE_OR_DISTRIBUTIONAL_DOMINANCE",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
