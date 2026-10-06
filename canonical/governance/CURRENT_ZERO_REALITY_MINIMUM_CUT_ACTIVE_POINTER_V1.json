@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1",
   "date": "2026-10-06",
-  "status": "ACTIVE__POST_V7_ROUTING_REPAIR__32_OPEN__COVERAGE_PARTITION_CURRENT__J0_G0_T0_D16_U16__ZERO_CREDIT",
+  "status": "ACTIVE__POST_V7_ROUTING_REPAIR__31_NECESSARY_OPEN__COVERAGE_PARTITION_V2_CURRENT__J0_G0_T0_D16_U15__ZERO_CREDIT",
   "active_cut": {
     "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V22.json",
     "git_blob_sha": "8359e6171cfab301ad9909364558a313fa7c4cae"
@@ -39,7 +39,10 @@
     "root2_touching_count": 18,
     "root3_touching_count": 9,
     "meta_envelope_open_count": 8,
-    "total_open_truth_obligations": 32
+    "total_open_truth_obligations": 31,
+    "registry_unresolved_atomic": 24,
+    "necessary_unresolved_atomic": 23,
+    "nonnecessary_unproved_atomic_count": 1
   },
   "current_information_positive_action_groups": [
     "EXTERNAL_RESULT_OR_ACCESS",
@@ -110,7 +113,7 @@
     "POST_V7_E_M_U_SEMANTIC_CLASSIFICATION_DOES_NOT_DELETE_ANY_TRUTH_OBLIGATION_BY_ITSELF",
     "ASTRA_CALIBRATION_HAS_ZERO_TERMINAL_CREDIT_WITHOUT_MATCHED_AND_INDEPENDENTLY_VERIFIED_SEMANTICALLY_IDENTICAL_EVIDENCE"
   ],
-  "next": "RUN_CURRENT_TERMINAL_COVERAGE_PARTITION__FIRST_FALSIFY_J_ON_ALL_32__THEN_FALSIFY_G_ON_CONTEXT_OR_TRANSFER_SHAPED_RESIDUALS__USE_MATCHED_ASTRA_ONLY_FOR_RESIDUAL_CALIBRATION__USE_D_ONLY_FOR_IRREDUCIBLE_RESIDUALS__PRESERVE_ALL_32_UNTIL_SEPARATE_PROOF_CLOSURE_OR_REDUNDANCY_CERTIFICATE",
+  "next": "RUN_CURRENT_TERMINAL_COVERAGE_PARTITION_V2__FIRST_SATURATE_CURRENT_EVIDENCE_FOR_J_AND_G_OVER_ALL_31_NECESSARY_TRUTHS__THEN_FALSIFY_UNSATISFIED_J_AND_G_ROUTES__USE_MATCHED_ASTRA_ONLY_FOR_RESIDUAL_CALIBRATION__USE_D_ONLY_FOR_IRREDUCIBLE_RESIDUALS__PRESERVE_31_UNTIL_SEPARATE_PROOF_CLOSURE_OR_REDUNDANCY_CERTIFICATE",
   "new_reality_units_consumed": 0,
   "terminal_cases_consumed": 0,
   "incremental_spend_usd": 0,
@@ -127,16 +130,16 @@
     "CREATIVE_DIAGRAM_SURFACE_NONINFERIOR"
   ],
   "global_compression": {
-    "atomic_open_predicates": 24,
+    "atomic_open_predicates": 23,
     "meta_open_obligations": 8,
-    "total_open_truth_obligations": 32,
+    "total_open_truth_obligations": 31,
     "atomic_live_action_groups": 5,
     "meta_active_shared_programs": 2,
     "meta_dormant_obligations": 1,
     "global_live_program_count": 7,
     "creative_basis_gap_closed": true,
     "creative_performance_open": true,
-    "truth_obligations_deleted": 0,
+    "truth_obligations_deleted": 1,
     "condition_strategy": "GENERIC_PARITY_TO_TWO_EXACT_INTERFACE_CERTIFICATE_SUBLANES",
     "family_times_language_cartesian_default_deleted": true,
     "identical_internal_context_window_requirement_deleted": true,
@@ -147,7 +150,9 @@
     "active_remaining_interface_count": 3,
     "target_tuple_binding_complete": true,
     "target_tuple_binding_predicates": 14,
-    "target_tuple_unique_count": 13
+    "target_tuple_unique_count": 13,
+    "registry_atomic_unresolved": 24,
+    "nonnecessary_unproved_atomic_count": 1
   },
   "scheduling_policy": {
     "objective": "MINIMIZE_EXPECTED_TERMINAL_CRITICAL_PATH_SECONDS_SUBJECT_TO_EXACT_TARGET_IDENTITY_AND_TRUTH_TOTALITY",
@@ -166,7 +171,7 @@
     ],
     "shared_kernel_rule": "PROVE_GENERIC_PREMISE_ONCE__PRESERVE_TARGET_SPECIFIC_BINDING_CERTIFICATE_PER_OBLIGATION",
     "fixed_point_rule": "AFTER_EVERY_VERIFIED_DELTA_OR_WAKE_EVENT__RECOMPUTE_ALL_FOUR_PARTITIONS_AND_DELETE_INFORMATION_FIXED_POINT_WORK",
-    "v22_totality_invariant": "ALL_32_OPEN_TRUTH_OBLIGATIONS_MUST_APPEAR_IN_AT_LEAST_ONE_OF_FOUR_SHARED_CAUSAL_INTERFACES__ZERO_DELETION",
+    "v22_totality_invariant": "ALL_31_NECESSARY_OPEN_TRUTH_OBLIGATIONS_MUST_APPEAR_IN_AT_LEAST_ONE_SHARED_CAUSAL_INTERFACE__COMPOSITION_COMPONENT_SCOPED_PROOFS_IS_EXCLUDED_ONLY_BY_INDEPENDENT_NECESSITY_COUNTERMODEL__ZERO_ROUTING_CREDIT",
     "target_identity_rule": "SCORE_BASED_ATOM_MUST_BIND_BENCHMARK_VERSION_MODEL_EFFORT_EVALUATOR_HARNESS_FALLBACK_POLICY_AND_UNIT_BEFORE_EXECUTION_OR_COMPARISON",
     "completed_interfaces": [
       "TARGET_TUPLE_BINDING"
@@ -177,7 +182,7 @@
       "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
     ],
     "proof_synthesis_rule": "IF_NO_EXISTING_STRONGER_RECEIPT_EXISTS__DO_NOT_JUMP_DIRECTLY_TO_EXTERNAL_WAIT__FIRST_SYNTHESIZE_AND_FALSIFY_THRESHOLD_LOWER_BOUND_TASK_CONDITIONED_DOMINANCE_AND_SCOPE_SUPERSET_CERTIFICATES",
-    "terminal_control_loop": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V1.json",
+    "terminal_control_loop": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V2.json",
     "route_death_rule": "FALSIFIED_ROUTE_HAS_ZERO_SCHEDULING_VALUE__CURRENT_ROUTING_MUST_BIND_TO_POST_V7_COVERAGE_PARTITION_OR_A_LATER_CONTENT_ADDRESSED_SUCCESSOR",
     "universe_authority_rule": "OBSERVABLE_TRACE_SCOPE_IS_REPRESENTATION_ONLY__CAPABILITY_PARITY_USES_V7_LAYERED_DISTRIBUTIONAL_SEMANTICS_AND_FAIL_CLOSED_E_M_U_CERTIFICATION__LITERAL_FINALITY_STILL_REQUIRES_COMPLETE_TARGET_CONTEXT_OR_STRONGER_STRUCTURAL_AUTHORITY",
     "nonuniverse_ranking_rule": "EXACT_CONTENT_ADDRESSED_TARGET_TRUTH_REACHABILITY_PER_COST__AGGREGATE_COUNTS_REQUIRE_BOUND_MEMBER_EXPANSION__CHILD_LANE_CURRENTNESS_IS_FINGERPRINTED"
@@ -308,12 +313,12 @@
   },
   "terminal_falsification_control_loop": {
     "status": "CURRENT__COVERAGE_PARTITION_ROUTING__ZERO_CREDIT",
-    "governance": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V1.json",
+    "governance": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V2.json",
     "governance_git_blob_sha": "80289ef618b90fc5d77c5a011b75a37b8a019696",
     "independent_replay": "canonical/verification/TERMINAL_COVERAGE_PARTITION_COMPILER_INDEPENDENT_VERIFICATION_20261006_V1.json",
     "independent_replay_git_blob_sha": "9d15959af999c17282cf67e13b14ffc3d90a52eb",
     "current_schedule": [
-      "FALSIFY_J_ON_ALL_32_BEFORE_SPENDING_EXTERNAL_RESULT_ACCESS",
+      "SATURATE_J_AND_G_EVIDENCE_ON_ALL_31_NECESSARY_TRUTHS_BEFORE_SPENDING_EXTERNAL_RESULT_ACCESS",
       "FALSIFY_G_ON_REMAINING_CONTEXT_OR_TRANSFER_SHAPED_OBLIGATIONS",
       "BUILD_MATCHED_ASTRA_CALIBRATION_ONLY_FOR_RESIDUAL_CLASSES",
       "LOCALIZE_AND_INTERNALIZE_BRAIN_VS_ASTRA_CAUSAL_GAPS",
@@ -353,7 +358,7 @@
     "canonical_base_commit": "8935199c0d299e1ea353cb507356865de02d8522",
     "falsified_live_route_removed": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
     "current_coverage_partition": {
-      "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V1.json",
+      "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V2.json",
       "git_blob_sha": "80289ef618b90fc5d77c5a011b75a37b8a019696",
       "route_counts": {
         "J": 0,
@@ -362,7 +367,9 @@
         "D": 16,
         "U": 16
       },
-      "truth_obligations": 32
+      "truth_obligations": 31,
+      "registry_atomic_unresolved": 24,
+      "necessary_atomic_open": 23
     },
     "v7_layered_order": {
       "path": "canonical/governance/V7_LAYERED_DISTRIBUTIONAL_EQUAL_OR_BETTER_ORDER_20261006_V1.json",
@@ -426,5 +433,16 @@
       "ownership_credit_delta": 0,
       "terminal_credit_delta": 0
     }
+  },
+  "current_necessity_basis": {
+    "status": "INDEPENDENTLY_VERIFIED_31_NECESSARY_TRUTH_BASIS",
+    "verification": "canonical/verification/TERMINAL_31_OBLIGATION_BASIS_SPRITE_VERIFICATION_20261006_V1.json",
+    "coverage": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V2.json",
+    "deleted_from_necessity_only": [
+      "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+    ],
+    "registry_truth_preserved": true,
+    "routing_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
 }
