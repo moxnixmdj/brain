@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_H100_A_TOURNAMENT_WAVE1_ORACLE_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_G0_HARNESS_AND_ANTICHEAT",
+  "binds": {
+    "g0_commit": "ff8cfc9269119f2a4395eaf339a6cf7cf2cd9a7b",
+    "public_tasks_commit": "6f7b9d59e57dc1b375991234122c120304a40099",
+    "harness_commit": "8a08467c13a73e42834fd1751f6cc77d451374cf",
+    "harness_blob": "a8c47981e56978741c745b439775c4ff44f0ce20",
+    "public_tasks_blob": "0adc6b8c1ff3f95a44193060810de178f1a89b8e",
+    "anticheat_pass": true
+  },
+  "oracle": {
+    "W1_PARAMETRIC_TRANSFER": {
+      "expect_status": "LIBRARY_HIT__VERIFY_BEFORE_USE",
+      "expect_capability_id": "CAP_AFFINE_CHAIN_SQUARE_LOG_SQRT_SAT_V1",
+      "expect_prediction": -2.1189365040615114,
+      "tolerance": 1e-8,
+      "failure_class": "ALGORITHM_GAP"
+    },
+    "W1_SYMBOLIC_SYNTHESIS": {
+      "expect_status": "EXACT_CANDIDATE_FOUND",
+      "expect_prediction": 1.270449593131907,
+      "tolerance": 1e-8,
+      "failure_class": "SEARCH_GAP"
+    },
+    "W1_TYPED_PLAN": {
+      "expect_status": "PLAN_FOUND",
+      "expect_plan": [
+        "OP_LEXICAL_SOURCE_FALLBACK"
+      ],
+      "expect_plan_length": 1,
+      "failure_class": "SEARCH_GAP"
+    },
+    "W1_EFFECT_TOOL": {
+      "expect_status": "VERIFIED_EFFECT_TOOL_INVOKED",
+      "expect_file": "receipts/result.json",
+      "expect_json": {
+        "name": "wave1_6120",
+        "score": 4.3992,
+        "passed": false,
+        "schema": "H100_TOOL_RECEIPT_V1"
+      },
+      "failure_class": "ALGORITHM_GAP"
+    },
+    "W1_EVENT_MEMORY": {
+      "expect_status": "REPLAY_OK",
+      "expect_state": {
+        "delta": -805,
+        "alpha": -322,
+        "gamma": -13,
+        "beta": 239
+      },
+      "expect_last_seq": 7,
+      "failure_class": "ALGORITHM_GAP"
+    },
+    "W1_JIT_LEXICAL": {
+      "expect_status": "ROLES_IDENTIFIED",
+      "expect_inputs": [
+        "x"
+      ],
+      "expect_target": "y",
+      "failure_class": "ALGORITHM_GAP"
+    },
+    "W1_COMPOSITIONAL_LANGUAGE": {
+      "expect_status": "ROLES_IDENTIFIED",
+      "expect_inputs": [
+        "v0a5b27"
+      ],
+      "expect_target": "vb0ce18",
+      "failure_class": "REPRESENTATION_GAP"
+    },
+    "W1_TOOL_TRACE": {
+      "expect_status": "TYPED_NUMERIC_SCHEMA_COMPILED",
+      "expect_rows": [
+        {
+          "x": 3.786,
+          "z": 2.984,
+          "y": 7.541
+        },
+        {
+          "x": 0.437,
+          "z": -1.349,
+          "y": 3.148
+        },
+        {
+          "x": -0.588,
+          "z": 1.179,
+          "y": 0.647
+        }
+      ],
+      "failure_class": "REPRESENTATION_GAP"
+    },
+    "W1_VISION_PBM": {
+      "expect_answer": 1,
+      "failure_class": "REPRESENTATION_GAP"
+    }
+  },
+  "scoring_rule": "PASS_ONLY_IF_EXPECTED_LOAD_BEARING_FIELDS_MATCH__NO_AVERAGING_ACROSS_TASKS",
+  "promotion_authority": false
+}
