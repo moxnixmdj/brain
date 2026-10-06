@@ -24,6 +24,7 @@ class Root3ParentBrokerServerV1Tests(unittest.TestCase):
         parent, child = socket.socketpair()
         server = []
         name = "ROOT3-BROKER-E2E-" + uuid.uuid4().hex + ".json"
+        mission_id = name[:-5]
         rel = "canonical/astra_runtime/state/" + name
         target = ROOT / rel
         self.addCleanup(lambda: target.unlink(missing_ok=True))
@@ -34,6 +35,15 @@ class Root3ParentBrokerServerV1Tests(unittest.TestCase):
                 serve_fd(
                     parent.fileno(),
                     repo_root=ROOT,
+                    authority_context={
+                        "mission_id": mission_id,
+                        "mission_sha256": "a" * 64,
+                        "mission_rel": (
+                            "canonical/astra_runtime/missions/"
+                            + mission_id
+                            + ".json"
+                        ),
+                    },
                     max_requests=4,
                 )
             )
