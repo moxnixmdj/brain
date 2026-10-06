@@ -1,0 +1,9 @@
+{
+  "schema": "PROJECT_BRAIN_H100_A_TOURNAMENT_G0_V2",
+  "date": "2026-10-06",
+  "status": "FROZEN_PRE_WAVE2",
+  "base_commit": "ce85fb9a2c8f4641e4c6290bed341f3868d7a062",
+  "scope": "ALL_CANONICAL_RUNTIME_CODE_AT_BASE_COMMIT",
+  "holdout_target_bits": 0,
+  "rule": "POST_HOLDOUT_CODE_HAS_NO_G0_V2_CREDIT"
+}
