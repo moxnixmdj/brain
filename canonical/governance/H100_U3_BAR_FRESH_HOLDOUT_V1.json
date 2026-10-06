@@ -1,0 +1,32 @@
+{
+  "schema": "H100_U3_BAR_FRESH_HOLDOUT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_FRESH_RUN",
+  "program_commit": "41a2795778fc249093dd9683ef62e649d4f0bddb",
+  "program_sha256": "76d1de3f481d5a634a3e9a4204a3efc146b5f4bc79cf99ad0ca80415c83dff78",
+  "prng": "xorshift32",
+  "seed_u32": 2667241387,
+  "cases": 10,
+  "rules": {
+    "orientation": "case_index_even_vertical_else_horizontal",
+    "backgrounds": [
+      46,
+      48,
+      120,
+      32,
+      126
+    ],
+    "vertical": "count2..6,width2..4,gap2..5,value3..14,xstart2,baseline=h-2",
+    "horizontal": "count2..6,height2..3,gap2..4,value4..18,ystart2,xstart2",
+    "input": "[h,w]+row_major_codepoints",
+    "gold": "[orientation,count]+values"
+  },
+  "gate": "10_OF_10_EXACT",
+  "limits": [
+    50000,
+    2048,
+    128,
+    64
+  ],
+  "promotion_authority": false
+}
