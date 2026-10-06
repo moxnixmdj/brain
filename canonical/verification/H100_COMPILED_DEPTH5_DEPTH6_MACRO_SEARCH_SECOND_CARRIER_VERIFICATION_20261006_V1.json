@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_H100_COMPILED_DEPTH5_DEPTH6_MACRO_SEARCH_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__DEPTH10_11_12_MACRO_TRANSFER__ZERO_LEARNED",
+  "subject": {
+    "precommit": "canonical/governance/H100_COMPILED_DEPTH5_DEPTH6_MACRO_SEARCH_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_compiled_depth5_depth6_macro_search_v1.py",
+    "tests": "canonical/tests/test_h100_compiled_depth5_depth6_macro_search_v1.py"
+  },
+  "observed": {
+    "macro_candidates_per_task": 42,
+    "tasks": [
+      {
+        "id": "M10_A",
+        "primitive_depth": 10,
+        "primitive_complete_count": 72559410,
+        "cardinality_ratio": 1727605,
+        "wall_clock_seconds": 0.00788123499660287,
+        "seed_holdout_nrmse": 7.404658037113352e-12,
+        "transfer_holdout_nrmse": 3.3482050121517455e-12
+      },
+      {
+        "id": "M11_B",
+        "primitive_depth": 11,
+        "primitive_complete_count": 435356466,
+        "cardinality_ratio": 10365630.142857144,
+        "wall_clock_seconds": 0.007614915004523937,
+        "seed_holdout_nrmse": 1.8012403714850742e-12,
+        "transfer_holdout_nrmse": 1.1893469918157099e-12
+      },
+      {
+        "id": "M12_C",
+        "primitive_depth": 12,
+        "primitive_complete_count": 2612138802,
+        "cardinality_ratio": 62193781,
+        "wall_clock_seconds": 0.007809049006027635,
+        "seed_holdout_nrmse": 6.075255177851478e-12,
+        "transfer_holdout_nrmse": 1.1020750873149132e-11
+      }
+    ],
+    "all_registry_v8_miss": true,
+    "all_single_macro_exact_count_zero": true,
+    "all_first_exact_macro_depth": 2,
+    "persistent_learned_bytes": 0
+  },
+  "deduction": "COMPILED_VERIFIED_DEPTH5_AND_DEPTH6_STRUCTURES_COLLAPSE_FRESH_DEPTH10_TO12_PRIMITIVE_SEARCH_SPACES_BY_1_7M_TO62_2M_X_CARDINALITY_WITHOUT_LEARNED_STATE_GROWTH",
+  "hard_nonclaims": [
+    "CARDINALITY_RATIO_IS_NOT_MEASURED_PRIMITIVE_WALL_CLOCK_SPEEDUP",
+    "FRESH_TASKS_ARE_SYNTHETIC_MACRO_COMPOSITIONS",
+    "NO_GENERAL_PROGRAM_SEARCH_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
