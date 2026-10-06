@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_30_OBLIGATION_POINTER_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__30_CURRENT_TRUTHS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "repair-current-30-obligation-routing-20261006-v1",
+    "exact_blobs": {
+      "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json": "5247f4efe73b3ae4f7a79e2e0fe4460c83b951b8",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "f2deb0f5bcfee76eb95d378ed9ae4f83851c2038",
+      "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V3.json": "f282c807330955ef72f17a565d940815e0497017",
+      "canonical/runtime/terminal_frontier_factorizer_v1.py": "287a5b0698736ebaff67b735215f53308cc50c0e",
+      "canonical/runtime/current_30_obligation_pointer_verifier.py": "298a0626b7983b478d6a2cde66d78cbe80af0e1c"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/current30",
+    "execution": "EXACT_GITHUB_BLOB_MATERIALIZATION_THEN_PYTHON3_CURRENT_30_OBLIGATION_POINTER_VERIFIER",
+    "result": "PASS_ZERO_EXIT"
+  },
+  "verified": [
+    "22_LOAD_BEARING_ATOMIC_PLUS_8_META_EQUALS_30_OPEN_TRUTHS",
+    "HISTORICAL_ATOMIC_REGISTRY_REMAINS_38",
+    "COMPOSITION_COMPONENT_SCOPED_PROOFS_REMOVED_AS_NONNECESSARY_COMPOSITION_SPECIFIC_TRUTH",
+    "ARTIFACT_AA_BRIEFCASE_GE_1822_REMOVED_ONLY_AS_DUPLICATE_ALIAS_OF_THE_SHARED_PROWORK_AA_BRIEFCASE_GE_1822_TRUTH",
+    "ARTIFACT_CREATION_STILL_REQUIRES_THE_SHARED_FROZEN_AA_BRIEFCASE_TRUTH",
+    "ROUTE_COUNTS_EQUAL_J0_G0_T0_D15_U15",
+    "ROOT2_TOUCHING_EQUALS_17",
+    "ROOT3_TOUCHING_EQUALS_8",
+    "J0_G0_T0_DOES_NOT_CLAIM_ROUTE_IMPOSSIBILITY",
+    "TERMINAL_REMAINS_FALSE",
+    "ZERO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
