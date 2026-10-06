@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_ROBUST_FIXED_FONT_DIGIT_OCR_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__10_OF_10_NEW_ONE_PIXEL_CORRUPTIONS",
+  "reference_machine": "H100_U1_STACK_VM",
+  "observed": {
+    "raw_program_bytes": 971,
+    "raw_program_bits": 7768,
+    "passed": 10,
+    "total": 10,
+    "learned_target_bytes": 0
+  },
+  "development_stress": "OLD_ONE_PIXEL_SET_USED_ONLY_BEFORE_PROGRAM_PRECOMMIT__NO_FRESH_CREDIT",
+  "conclusion": "ONE_FIXED_FONT_ONE_PIXEL_ROBUST_SCOPE_HAS_EXPLICIT_U1_UPPER_BOUND_7768_BITS",
+  "hard_nonclaims": [
+    "NO_NATURAL_FONT_GENERALIZATION",
+    "NO_MULTIROW_CORRUPTION_ROBUSTNESS",
+    "NO_SCALE_ROTATION_OR_TRANSLATION_INVARIANCE"
+  ],
+  "promotion_authority": false
+}
