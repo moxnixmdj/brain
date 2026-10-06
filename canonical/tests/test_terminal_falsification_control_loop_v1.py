@@ -130,6 +130,37 @@ def test_live_successor_unblocks_dependency_without_resurrecting_old_route():
     assert "NEW_EFFECT" in out.ordered_claim_ids
     assert "CHILD" in out.ordered_claim_ids
 
+def test_transitive_successor_chain_repairs_all_dead_ancestors():
+    state = {
+        "known_open_truth_obligations": 3,
+        "claims": [
+            _base_claim("A", "UNIVERSE_AUTHORITY", "FALSIFIED"),
+            _base_claim("B", "UNIVERSE_AUTHORITY", "FALSIFIED", successor_of="A"),
+            _base_claim("C", "UNIVERSE_AUTHORITY", "ACTIVE", successor_of="B"),
+            _base_claim("CHILD", "OWNERSHIP", "ACTIVE", depends_on=["A"]),
+        ],
+    }
+    out = compile_control_loop(state)
+    assert "A" in out.dead_claim_ids and "B" in out.dead_claim_ids
+    assert "A" not in out.unrepaired_dead_claim_ids
+    assert "B" not in out.unrepaired_dead_claim_ids
+    assert "CHILD" not in out.blocked_claim_ids
+    assert out.ordered_claim_ids[0] == "C"
+
+
+def test_successor_cycle_without_live_endpoint_fails_closed():
+    state = {
+        "known_open_truth_obligations": 2,
+        "claims": [
+            _base_claim("A", "UNIVERSE_AUTHORITY", "FALSIFIED", successor_of="B"),
+            _base_claim("B", "UNIVERSE_AUTHORITY", "FALSIFIED", successor_of="A"),
+        ],
+    }
+    out = compile_control_loop(state)
+    assert set(out.unrepaired_dead_claim_ids) == {"A", "B"}
+    assert out.terminal_ready is False
+
+
 def test_unrepaired_dead_claim_prevents_terminal_readiness():
     state = {
         "known_open_truth_obligations": 0,
@@ -159,6 +190,8 @@ def run_all():
         test_nonuniverse_lanes_rank_by_reachability_per_cost,
         test_dependency_on_falsified_claim_blocks_without_successor,
         test_live_successor_unblocks_dependency_without_resurrecting_old_route,
+        test_transitive_successor_chain_repairs_all_dead_ancestors,
+        test_successor_cycle_without_live_endpoint_fails_closed,
         test_unrepaired_dead_claim_prevents_terminal_readiness,
     ]
     for test in tests:
@@ -166,4 +199,4 @@ def run_all():
     return len(tests)
 
 if __name__ == "__main__":
-    print(f"PASS {run_all()}/10")
+    print(f"PASS {run_all()}/12")
