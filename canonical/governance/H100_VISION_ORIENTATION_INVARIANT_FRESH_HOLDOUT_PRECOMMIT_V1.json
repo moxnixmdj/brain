@@ -1,0 +1,166 @@
+{
+  "schema": "PROJECT_BRAIN_H100_VISION_ORIENTATION_INVARIANT_FRESH_HOLDOUT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_PARSER_IMPLEMENTATION_AND_OUTCOMES",
+  "research_branch": "research/h100-independent-information-lower-bound-v1",
+  "public_solver_input": "ROWS_ONLY",
+  "evaluator_private": [
+    "gold"
+  ],
+  "tasks": [
+    {
+      "id": "VISION_FRESH_VA",
+      "public_input": {
+        "rows": [
+          "..............................",
+          "..............................",
+          "..............................",
+          "..............................",
+          "..............................",
+          "..............................",
+          "..............................",
+          "..............................",
+          "..............................",
+          ".........AAAA.................",
+          ".........AAAA.................",
+          ".........AAAA.....AA..........",
+          ".........AAAA.....AA..........",
+          "..AAA....AAAA.....AA..........",
+          "..AAA....AAAA.....AA..........",
+          "..AAA....AAAA.....AA..........",
+          "..AAA....AAAA.....AA..........",
+          ".............................."
+        ]
+      },
+      "gold": {
+        "orientation": "vertical",
+        "bar_count": 3,
+        "values": [
+          4,
+          8,
+          6
+        ]
+      }
+    },
+    {
+      "id": "VISION_FRESH_HA",
+      "public_input": {
+        "rows": [
+          "000000000000000000000000000000",
+          "000000000000000000000000000000",
+          "007777700000000000000000000000",
+          "007777700000000000000000000000",
+          "000000000000000000000000000000",
+          "000000000000000000000000000000",
+          "000000000000000000000000000000",
+          "007777777777700000000000000000",
+          "007777777777700000000000000000",
+          "007777777777700000000000000000",
+          "000000000000000000000000000000",
+          "000000000000000000000000000000",
+          "000000000000000000000000000000",
+          "007777777000000000000000000000",
+          "007777777000000000000000000000",
+          "000000000000000000000000000000",
+          "000000000000000000000000000000",
+          "000000000000000000000000000000"
+        ]
+      },
+      "gold": {
+        "orientation": "horizontal",
+        "bar_count": 3,
+        "values": [
+          5,
+          11,
+          7
+        ]
+      }
+    },
+    {
+      "id": "VISION_FRESH_VB",
+      "public_input": {
+        "rows": [
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xx11xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xx11xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xx11xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xx11xxxxxxxxxxxx3333xxxxxxxxxxxxxx",
+          "xx11xxxxxxxxxxxx3333xxxxxxxxxxxxxx",
+          "xx11xxxxxxxxxxxx3333xxxxxxx44xxxxx",
+          "xx11xxxxxxxxxxxx3333xxxxxxx44xxxxx",
+          "xx11xxxx222xxxxx3333xxxxxxx44xxxxx",
+          "xx11xxxx222xxxxx3333xxxxxxx44xxxxx",
+          "xx11xxxx222xxxxx3333xxxxxxx44xxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        ]
+      },
+      "gold": {
+        "orientation": "vertical",
+        "bar_count": 4,
+        "values": [
+          10,
+          3,
+          7,
+          5
+        ]
+      }
+    },
+    {
+      "id": "VISION_FRESH_HB",
+      "public_input": {
+        "rows": [
+          "                                  ",
+          "                                  ",
+          "  AAAA                            ",
+          "  AAAA                            ",
+          "                                  ",
+          "                                  ",
+          "                                  ",
+          "  BBBBBBBB                        ",
+          "  BBBBBBBB                        ",
+          "  BBBBBBBB                        ",
+          "                                  ",
+          "                                  ",
+          "                                  ",
+          "  CCCCCCCCCCCC                    ",
+          "  CCCCCCCCCCCC                    ",
+          "                                  ",
+          "                                  ",
+          "                                  ",
+          "  DDDDDD                          ",
+          "  DDDDDD                          ",
+          "                                  ",
+          "                                  "
+        ]
+      },
+      "gold": {
+        "orientation": "horizontal",
+        "bar_count": 4,
+        "values": [
+          4,
+          8,
+          12,
+          6
+        ]
+      }
+    }
+  ],
+  "gates": {
+    "required_pass": "4_OF_4",
+    "target_adapted_persistent_bits": 0
+  },
+  "hard_nonclaims": [
+    "SYNTHETIC_RASTER_HOLDOUT_NOT_GENERAL_CHARTQA",
+    "NO_OCR_TEXT_LABEL_REASONING",
+    "NO_LEARNED_VISION_MODEL_EQUIVALENCE"
+  ],
+  "promotion_authority": false
+}
