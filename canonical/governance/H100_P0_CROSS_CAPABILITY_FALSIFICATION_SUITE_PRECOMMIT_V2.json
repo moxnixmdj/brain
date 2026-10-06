@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_H100_P0_CROSS_CAPABILITY_FALSIFICATION_SUITE_PRECOMMIT_V2",
+  "date": "2026-10-06",
+  "status": "V1_TASK_DATA_REPAIR_ONLY",
+  "preserved": [
+    "ALL_GENERIC_PRIMITIVES",
+    "ALL_OTHER_TASKS",
+    "MISSING_INFORMATION_CONTROL",
+    "PASS_RULE"
+  ],
+  "corrected_unknown_domain_task": {
+    "examples": [
+      [
+        -3,
+        -30
+      ],
+      [
+        -1,
+        -2
+      ],
+      [
+        2,
+        10
+      ],
+      [
+        4,
+        68
+      ]
+    ],
+    "query": 5,
+    "expected": 130
+  },
+  "promotion_authority": false
+}
