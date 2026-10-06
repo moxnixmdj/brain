@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REGISTRY_PROVENANCE_AUDIT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__DUAL_LEDGER_REGISTRY_AUDIT__ZERO_TERMINAL_CREDIT",
+  "objective": "Audit whether compiled symbolic capabilities currently labeled zero-learned remain zero under provenance-invariant accounting.",
+  "accounting_ledgers": {
+    "SYNTACTIC_V0": "DETERMINISTIC_REGISTRY_CODE_IS_EXEMPT_FROM_LEARNED_STATE_BY_CONTAINER_TYPE",
+    "PROVENANCE_V1": "PERSISTENT_CAPABILITY_VALUES_SELECTED_AS_A_FUNCTION_OF_DEVELOPMENT_OR_TRAINING_EVIDENCE_ARE_LEARNED_ORIGIN_REGARDLESS_OF_CONTAINER"
+  },
+  "frozen_witnesses": [
+    {
+      "id": "CUBIC_V2",
+      "discovery_precommit": "canonical/governance/H100_MINIMAL_PATCH_SEARCH_PRECOMMIT_V1.json",
+      "discovery_verification": "canonical/verification/H100_MINIMAL_PATCH_SEARCH_SEPARATE_RUNTIME_VERIFICATION_20261005_V1.json",
+      "persisted_registry": "canonical/runtime/h100_verified_capability_registry_v2.py",
+      "candidate_count": 3,
+      "expected_selected_structure": "AFFINE_PLUS_X3",
+      "fixed_length_selection_capacity_bits": 2
+    },
+    {
+      "id": "DEPTH4_V8",
+      "discovery_precommit": "canonical/governance/H100_COMPLETE_UNARY_CHAIN_SEARCH_PRECOMMIT_V1.json",
+      "discovery_verification": "canonical/verification/H100_COMPLETE_UNARY_CHAIN_SEARCH_SECOND_CARRIER_VERIFICATION_20261005_V1.json",
+      "persisted_registry": "canonical/runtime/h100_verified_capability_registry_v8.py",
+      "candidate_count_per_task": 1554,
+      "persisted_structure_count": 3,
+      "fixed_length_selection_capacity_bits_per_structure": 11
+    }
+  ],
+  "pass_gate": [
+    "DISCOVERY_PRECOMMITS_ESTABLISH_SELECTION_WAS_NOT_A_PREEXISTING_SINGLE_FIXED_STRUCTURE",
+    "VERIFICATION_RECEIPTS_ESTABLISH_DATA_DEPENDENT_SELECTION_OUTCOME",
+    "REGISTRY_SOURCE_ESTABLISHES_SELECTED_STRUCTURE_PERSISTS_FOR_FUTURE_REUSE",
+    "SYNTACTIC_V0_AND_PROVENANCE_V1_VERDICTS_ARE_REPORTED_SEPARATELY",
+    "NO_EXACT_MUTUAL_INFORMATION_IS_CLAIMED_FROM_SELECTION_CAPACITY_ALONE"
+  ],
+  "expected_consequence_if_pass": "SYNTACTIC_V0_MAY_REMAIN_ZERO_BUT_PROVENANCE_V1_ZERO_LEARNED_RUNG_IS_FALSIFIED_BY_AT_LEAST_ONE_PERSISTED_DATA_DEPENDENT_SYMBOLIC_STRUCTURE",
+  "hard_nonclaims": [
+    "SELECTION_CAPACITY_BITS_ARE_NOT_EXACT_SHANNON_MUTUAL_INFORMATION",
+    "DOES_NOT_YET_QUANTIFY_TOTAL_PROVENANCE_V1_LEARNED_BYTES",
+    "DOES_NOT_CLASSIFY_ALL_REGISTRY_ENTRIES",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
