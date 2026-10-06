@@ -1,0 +1,176 @@
+{
+  "schema": "PROJECT_BRAIN_H100_FRESH_BINARY_TREE_SEARCH_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_BINARY_TREE_OUTCOMES__EXISTING_SEARCH_RUNTIME_UNCHANGED",
+  "runtime": "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py",
+  "search_contract": {
+    "max_depth": 4,
+    "beam_width": 32,
+    "pair_feature_pool": 24,
+    "exact_nrmse": 1e-8
+  },
+  "training_x": [
+    -4,
+    -3.5,
+    -3,
+    -2.5,
+    -2,
+    -1.5,
+    -1,
+    -0.6,
+    -0.2,
+    0,
+    0.4,
+    0.8,
+    1,
+    1.5,
+    2,
+    2.5,
+    3,
+    3.5,
+    4
+  ],
+  "holdout_x": [
+    -3.8,
+    -3.2,
+    -2.8,
+    -2.2,
+    -1.8,
+    -1.2,
+    -0.8,
+    -0.4,
+    0.2,
+    0.6,
+    1.2,
+    1.8,
+    2.2,
+    2.8,
+    3.2,
+    3.8
+  ],
+  "tasks": [
+    {
+      "id": "BT_A",
+      "tree": {
+        "op": "stable_div",
+        "left": {
+          "op": "log1p_abs",
+          "arg": {
+            "op": "square",
+            "arg": {
+              "op": "var",
+              "name": "x"
+            }
+          }
+        },
+        "right": {
+          "op": "sat",
+          "arg": {
+            "op": "sqrt_abs",
+            "arg": {
+              "op": "var",
+              "name": "x"
+            }
+          }
+        }
+      },
+      "seed": [
+        0.27,
+        -0.13,
+        1.09
+      ],
+      "transfer": [
+        -0.63,
+        0.24,
+        -0.86
+      ]
+    },
+    {
+      "id": "BT_B",
+      "tree": {
+        "op": "mul",
+        "left": {
+          "op": "sat",
+          "arg": {
+            "op": "log1p_abs",
+            "arg": {
+              "op": "var",
+              "name": "x"
+            }
+          }
+        },
+        "right": {
+          "op": "sqrt_abs",
+          "arg": {
+            "op": "log1p_abs",
+            "arg": {
+              "op": "square",
+              "arg": {
+                "op": "var",
+                "name": "x"
+              }
+            }
+          }
+        }
+      },
+      "seed": [
+        -0.16,
+        0.1,
+        0.88
+      ],
+      "transfer": [
+        0.74,
+        -0.18,
+        1.21
+      ]
+    },
+    {
+      "id": "BT_C",
+      "tree": {
+        "op": "stable_div",
+        "left": {
+          "op": "square",
+          "arg": {
+            "op": "sat",
+            "arg": {
+              "op": "var",
+              "name": "x"
+            }
+          }
+        },
+        "right": {
+          "op": "log1p_abs",
+          "arg": {
+            "op": "sqrt_abs",
+            "arg": {
+              "op": "var",
+              "name": "x"
+            }
+          }
+        }
+      },
+      "seed": [
+        0.23,
+        0.17,
+        -1.02
+      ],
+      "transfer": [
+        -0.43,
+        -0.12,
+        0.78
+      ]
+    }
+  ],
+  "pass_gate": [
+    "ALL_THREE_TASKS_MISS_REGISTRY_V8",
+    "EXISTING_EXPRESSION_TREE_DISCOVER_FINDS_EXACT_SEED_CANDIDATE_OR_FAILURE_IS_RECORDED_WITHOUT_TASK_MUTATION",
+    "ANY_DISCOVERED_EXACT_STRUCTURE_MUST_TRANSFER_AFTER_REFITTING_ONLY_LINEAR_COEFFICIENTS",
+    "PERSISTENT_LEARNED_BYTES_ZERO"
+  ],
+  "hard_nonclaims": [
+    "THREE_SYNTHETIC_BINARY_TREES_DO_NOT_PROVE_OPEN_WORLD_REASONING",
+    "FAILURE_DOES_NOT_IMPLY_LEARNED_STATE_IS_NECESSARY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
