@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_H100_DETERMINISTIC_BAR_COUNT_FRESH_HOLDOUT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__FRESH_UNSEEN_BAR_COUNT",
+  "objective": "Test whether a generic deterministic raw-pixel geometry parser can replace learned vision state for bar-count questions on unseen ChartQA images.",
+  "chartqa_commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+  "query_filter": {
+    "normalized_regex": "\\bhow many\\s+(?:bars?|columns?)\\b|\\bhow many\\s+.*\\s+(?:bars?|columns?)\\b",
+    "selection": "LOWEST_SHA256_OF_SEED_SPLIT_INDEX_IMAGE_AMONG_UNSEEN_MATCHES",
+    "seed": "H100_DETERMINISTIC_BAR_COUNT_FRESH_HOLDOUT_V1__2026-10-06",
+    "target_cases": 20
+  },
+  "parser": {
+    "color_quantization_step": 16,
+    "minimum_chroma": 32,
+    "maximum_mean_brightness": 235,
+    "minimum_color_fraction": 0.001,
+    "row_or_column_interval_threshold": "MAX_8_OR_2_PERCENT_OF_ORTHOGONAL_DIMENSION",
+    "interval_width_range": "2_TO_MAX_80_OR_20_PERCENT_OF_AXIS_DIMENSION",
+    "valid_interval_count": "2_TO_50",
+    "candidate_score": "INTERVAL_COUNT_TIMES_1_OVER_1_PLUS_WIDTH_CV_TIMES_OCCUPANCY_FRACTION",
+    "answer": "INTERVAL_COUNT_OF_HIGHEST_SCORE_COLOR_AXIS_CANDIDATE"
+  },
+  "forbidden": [
+    "LEARNED_MODELS",
+    "OCR",
+    "LABEL_USE_IN_PARSER",
+    "CASE_SPECIFIC_COLORS",
+    "POST_HOLDOUT_THRESHOLD_TUNING"
+  ],
+  "pass_gate": {
+    "minimum_exact_accuracy": 0.7,
+    "persistent_learned_bytes": 0,
+    "target_adapted_parser_parameters_bytes": 0
+  },
+  "hard_nonclaims": [
+    "BAR_COUNT_ONLY",
+    "PUBLIC_CHARTQA_ONLY",
+    "NO_GENERAL_VISION_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
