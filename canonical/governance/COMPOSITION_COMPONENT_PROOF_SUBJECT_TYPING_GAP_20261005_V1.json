@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_COMPONENT_PROOF_SUBJECT_TYPING_GAP_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__EIGHT_OPEN_COMPONENTS_LACK_EXPLICIT_PROOF_SUBJECT_CONTRACTS__ZERO_CREDIT",
+  "objective": "Make the remaining Composition component-proof problem mechanically well-typed: a scoped proof cannot be admitted unless the component obligation it must prove is explicitly bound, rather than inferred from a broad English token or neighboring family name.",
+  "authorities": {
+    "manifest": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+    "slice_input": "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V6.json",
+    "current_authority": "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json",
+    "source_protocol": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
+  },
+  "observed_fact": {
+    "interface_count": 12,
+    "manifest_required_property": "SCOPED_ACCEPTANCE_PROOF",
+    "manifest_has_explicit_component_proof_subject_contract": false,
+    "manifest_family_bindings_complete": false,
+    "manifest_receipt_bindings_complete": false,
+    "current_scoped_proved_count": 4,
+    "current_open_count": 8,
+    "current_scoped_proved_components": [
+      "memory",
+      "recovery",
+      "delegation",
+      "tool discovery"
+    ],
+    "current_open_components": [
+      "research",
+      "tool use",
+      "artifact creation",
+      "browser/computer action",
+      "coding",
+      "debugging",
+      "evidence synthesis",
+      "artifact production"
+    ]
+  },
+  "counterexample": {
+    "component": "debugging",
+    "tempting_but_invalid_bridge": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY family acceptance therefore proves Composition debugging",
+    "falsifier": [
+      "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json explicitly says NO claim of root-cause debugging intelligence or arbitrary software recovery",
+      "canonical/verification/COMPOSITION_COMPONENT_PROOF_SLICE_PUBLIC_RUNNER_VERIFICATION_20261003_V6.json explicitly says NO general debugging component credit",
+      "the accepted Recovery stronger proof is bound to the frozen causal failure/recovery contract; token-name overlap alone does not prove arbitrary coding-debugging semantics"
+    ],
+    "conclusion": "NAME_OVERLAP_IS_NOT_SUBJECT_ENTAILMENT"
+  },
+  "minimum_sound_repair": {
+    "required_component_subject_contract_fields": [
+      "component_id",
+      "interface_id",
+      "proof_subject_id",
+      "required_transform_or_behavior",
+      "input_and_state_domain",
+      "success_or_noninferiority_condition",
+      "scope_boundary",
+      "load_bearing_preconditions",
+      "source_literal_or_explicit_authority"
+    ],
+    "admission_rule": "NO_NEW_COMPONENT_RECEIPT_MAY_SET subject_entails_component_obligation=true UNTIL_AN_EXPLICIT_CURRENT_COMPONENT_SUBJECT_CONTRACT_IS_BOUND_AND_THE_RECEIPT_PROVES_OR_SOUNDLY_ENTAILS_THAT_CONTRACT_OVER_THE_USED_INTERFACE_SCOPE",
+    "existing_four_rule": "PRESERVE_THE_CURRENT_INDEPENDENTLY_VERIFIED_4_OF_12_AS_CURRENT_AUTHORITY; DO_NOT_RETROACTIVELY_REVOKE_THEM_FROM_THIS_DIAGNOSTIC_ALONE",
+    "open_eight_rule": "FAIL_CLOSED_ON_SEMANTIC_NAME_MAPPING; FIRST_BIND_THE_MINIMAL_COMPONENT_SUBJECT_CONTRACT_THEN_SEARCH_FOR_THE_CHEAPEST_DIRECT_PROOF"
+  },
+  "scheduler_effect_if_independently_verified": {
+    "delete": [
+      "NAME_BASED_FAMILY_TO_COMPONENT_BRIDGING",
+      "ASSUMING_A_BROAD_ACCEPTED_FAMILY_PROVES_EVERY_HOMONYMOUS_COMPONENT_TOKEN",
+      "SEARCHING_FOR_RECEIPTS_BEFORE_THE_REQUIRED_PROOF_SUBJECT_IS_DEFINED"
+    ],
+    "activate": "TYPE_THE_EIGHT_OPEN_COMPONENT_PROOF_SUBJECTS_FROM_THE_FROZEN_COMPOSITION_CLAIM_WITHOUT_ADDING_NEW_BEHAVIOR; THEN_RUN_DIRECT_RECEIPT_ENTAILMENT_AGAINST_THOSE_TYPED_SUBJECTS",
+    "expected_leverage": "ONE_SEMANTIC_TYPING_PASS_PREVENTS_EIGHT_SEPARATE_FALSE_BRIDGES_AND_TURNS_FUTURE_COMPONENT_CLOSURE_INTO_DECIDABLE_SUBJECT_PLUS_SCOPE_CHECKS"
+  },
+  "hard_nonclaims": [
+    "NO_REVOCATION_OF_THE_FOUR_CURRENT_INDEPENDENTLY_VERIFIED_COMPONENT_RECEIPTS",
+    "NO_NEW_COMPONENT_CREDIT",
+    "NO_CLAIM_THE_EIGHT_COMPONENT_SUBJECTS_CAN_BE_INVENTED_OR_WIDENED_BEYOND_THE_FROZEN_SOURCE_CLAIM",
+    "NO_PARENT_COMPOSITION_ACCEPTANCE_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
