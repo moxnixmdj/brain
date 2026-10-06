@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RELATIONAL_REFINEMENT_COMPILER_V1_ACTIVATION",
   "date": "2026-10-06",
-  "status": "CANDIDATE__FAIL_CLOSED_RELATIONAL_REFINEMENT_COMPILER_INSTALLED__LOCAL_TESTS_9_OF_9_PASS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__FAIL_CLOSED_RELATIONAL_REFINEMENT_COMPILER_INSTALLED__LOCAL_TESTS_10_OF_10_PASS__CONTENT_ADDRESSES_RECOMPUTED_FROM_REPOSITORY_BYTES__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_claim": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
   "objective": "Materialize the missing machine-checked layer between existing content-addressed receipts and the independently verified finite-trace forward-simulation theorem. Compile exact state-conditioned local-refinement residuals without treating benchmark or matched-score parity as semantic refinement.",
@@ -15,11 +15,11 @@
   "implementation": {
     "runtime": {
       "path": "canonical/runtime/relational_refinement_compiler_v1.py",
-      "git_blob_sha": "ea94dd89981920a674db55c056102bab876a0b25"
+      "git_blob_sha": "6db5a5e1ca63475e1f325eada276f80ace6138b5"
     },
     "tests": {
       "path": "canonical/tests/test_relational_refinement_compiler_v1.py",
-      "git_blob_sha": "497e1ac0a8f019b3beee40fd03ecc845ea89a0f4"
+      "git_blob_sha": "1123c264938f8817008c7cfd60c52e3ed509879c"
     }
   },
   "semantic_contract": {
@@ -31,10 +31,11 @@
       "UNRESTRICTED_HIDDEN"
     ],
     "hidden_unrestricted_rule": "UNRESTRICTED_HIDDEN requires a content-addressed observational-equivalence receipt; absence or weaker evidence fails closed.",
-    "forbidden_shortcut": "BENCHMARK_SCORE MATCHED_SCORE AGGREGATE_PARITY POINT_ESTIMATE ASSERTION_ONLY may not satisfy LOCAL_REFINEMENT."
+    "forbidden_shortcut": "BENCHMARK_SCORE MATCHED_SCORE AGGREGATE_PARITY POINT_ESTIMATE ASSERTION_ONLY may not satisfy LOCAL_REFINEMENT.",
+    "content_address_rule": "Every receipt path must resolve under the repository root and its actual Git blob SHA-1 is recomputed from bytes; claimed SHA text alone never counts."
   },
   "local_verification": {
-    "result": "PASS_9_OF_9",
+    "result": "PASS_10_OF_10",
     "environment": "LOCAL_PYTHON_UNITTEST_REPLAY",
     "tests": [
       "complete row plus global receipts reaches candidate-ready with zero credit",
@@ -45,7 +46,8 @@
       "missing constructor preservation blocks whole-trace readiness",
       "duplicate row ids fail closed",
       "invalid content address does not close a row",
-      "empty row universe fails closed"
+      "empty row universe fails closed",
+      "forged or mismatched claimed Git blob SHA fails closed against recomputed repository bytes"
     ]
   },
   "truth_effect": {
