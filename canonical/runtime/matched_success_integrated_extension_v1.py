@@ -116,8 +116,11 @@ def _component(kind: str, seed: int, ordinal: int) -> dict[str, Any]:
         return {"kind": kind, "case": delegation_v3.generate_case(s, ordinal)}
     if kind == "tool":
         return {"kind": kind, "case": tool.generate_case(s, ordinal)}
-    if kind == "m0":
-        return {"kind": kind, "case": m0.generate_case(s, ordinal)}
+    if kind in {"m0", "m0_change"}:
+        # Force FLAT_COMPOUND for every variant so each instruction stage
+        # contains at least two independently scored constraints.
+        m0_ordinal = 3 + 8 * ordinal
+        return {"kind": kind, "case": m0.generate_case(s, m0_ordinal)}
     if kind == "structured":
         return {"kind": kind, "case": contract.generate_case(STRUCTURED, s, 1 + ordinal % 5)}
     if kind == "p1":
@@ -141,9 +144,10 @@ def _integrated_payload(class_id: str, seed: int, ordinal: int) -> dict[str, Any
             "oversight_budget_after_start": 0,
         }
     elif class_id == "INSTRUCTION_CHANGE_CONTROL":
-        kinds = ("m0", "delegation_v2")
+        kinds = ("m0", "m0_change", "delegation_v2")
         contract_row = {
             "multi_constraint_instruction_set_required": True,
+            "initial_and_changed_instruction_each_multi_constraint": True,
             "mid_trajectory_requirement_change_required": True,
             "stale_prechange_plan_must_be_rejected": True,
         }
