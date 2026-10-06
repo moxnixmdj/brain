@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_CHART_ROBUST_FRESH_WORLD_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_ROBUST_PROGRAM_COMMIT_BEFORE_FRESH_EXECUTION",
+  "program_commit": "3d129f132ef82a35220dc07a6a4cd1077c89ef8c",
+  "program_sha256": "1426228978ad772c4041996374cb3655eb4ac53b0c255d3c35ecee5f1ee63a11",
+  "generator": "canonical/runtime/h100_u1_chart_robust_fresh_world_v1.py",
+  "transforms": [
+    "MONOCHROME",
+    "NONZERO_BACKGROUND_PALETTE",
+    "TICK_TWO_PIXEL_DAMAGE",
+    "LEGEND_SHIFT_DAMAGE",
+    "MONOCHROME_NONZERO_BG",
+    "SPARSE_PIXEL_NOISE"
+  ],
+  "gate": "6_OF_6_EXACT",
+  "promotion_authority": false
+}
