@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REAL_LINE_SERIES_HOLDOUT_ANNOTATION_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_SELECTION_AND_DETECTOR_FREEZE__BEFORE_DETECTOR_EXECUTION",
+  "cases": [
+    {
+      "id": "V2H_452",
+      "imgname": "OECD_SELF-EMPLOYMENT_BY_ACTIVITY_CAN_DNK_POL_000033.png",
+      "visible_line_series": 3
+    },
+    {
+      "id": "V2H_238",
+      "imgname": "75903579005297.png",
+      "visible_line_series": 1
+    },
+    {
+      "id": "V2H_692",
+      "imgname": "two_col_60280.png",
+      "visible_line_series": 1
+    }
+  ],
+  "annotation_basis": "VISIBLE_DISTINCT_PLOTTED_SERIES__HUMAN_READABLE_IMAGE_INSPECTION",
+  "promotion_authority": false
+}
