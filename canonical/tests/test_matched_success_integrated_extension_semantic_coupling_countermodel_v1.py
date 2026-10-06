@@ -26,22 +26,22 @@ def disconnected_case(atom):
     )
 
 
-def test_disconnected_component_solver_must_not_certify_integrated_dimensions():
+def test_v1_receipt_ack_harness_exhibits_semantic_false_positive():
     """
-    RehearsalAgent solves each component using the standalone component candidate.
-    It does not use upstream semantic outputs to construct downstream answers; it
-    only acknowledges handoff/memory/change/rollback hashes supplied by context.
+    This is a countermodel test, not a desired-behavior test.
 
-    Therefore a sound integrated harness must reject at least one such integrated
-    case rather than certify all ten dimensions.
+    RehearsalAgent solves standalone components independently and merely echoes
+    receipt/memory/change/rollback acknowledgements. If V1 passes those cases,
+    the result proves V1 acknowledgement mechanics are insufficient evidence
+    for integrated semantic coupling. V2 is the candidate repair route.
     """
     false_positive_atoms = []
     for atom in INTEGRATED_ATOMS:
-        result = score_integrated_case(disconnected_case(atom), RehearsalAgent())
+        result = score_integrated_case(
+            disconnected_case(atom),
+            RehearsalAgent(),
+        )
         if result["pass"] is True:
             false_positive_atoms.append(atom)
 
-    assert false_positive_atoms == [], (
-        "SEMANTIC_INTEGRATION_FALSE_POSITIVE:"
-        + ",".join(false_positive_atoms)
-    )
+    assert false_positive_atoms, "EXPECTED_V1_SEMANTIC_FALSE_POSITIVE_NOT_REPRODUCED"
