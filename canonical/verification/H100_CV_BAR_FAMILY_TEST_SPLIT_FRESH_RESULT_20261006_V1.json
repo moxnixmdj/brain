@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CV_BAR_FAMILY_TEST_SPLIT_FRESH_RESULT_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__FRESH_TEST_SPLIT__5_OF_6__83_33_PERCENT__UNDERPOWERED_BOUNDED_PASS",
+  "precommit": "canonical/governance/H100_CV_BAR_FAMILY_TEST_SPLIT_HOLDOUT_PRECOMMIT_V1.json",
+  "holdout_sha256": "3837fde01310519f37bebd44f827616c398aa7c13c0981e6360f51e355a97336",
+  "annotation_git_blob_sha": "47a59641f43136c0a67d27aff4cde564c6a511ae",
+  "observed": {
+    "cases": 6,
+    "correct": 5,
+    "accuracy": 0.8333333333333334,
+    "gate": 0.7,
+    "mean_seconds": 0.19445273566573937
+  },
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "target_adapted_deterministic_code_bytes_upper_bound": 3305,
+    "generic_dependency": "opencv-python-headless==4.10.0.84"
+  },
+  "deduction": "A_SMALL_FROZEN_GENERIC_CV_BAR_FAMILY_PARSER_CAN_REPLACE_THE_LARGE_LEARNED_UNICHART_SUBJECT_FOR_THIS_NARROW_PURE_TOTAL_BAR_COUNT_SLICE_ON_A_FRESH_TEST_SPLIT",
+  "hard_nonclaims": [
+    "ONLY_6_FRESH_CASES",
+    "PURE_TOTAL_BAR_COUNT_ONLY",
+    "GENERIC_OPENCV_FOOTPRINT_NOT_ZERO_AND_REPORTED_SEPARATELY",
+    "NO_GENERAL_CHARTQA_OR_VISION_EQUIVALENCE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
