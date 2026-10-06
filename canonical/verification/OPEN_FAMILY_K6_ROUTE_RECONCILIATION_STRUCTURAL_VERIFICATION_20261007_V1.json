@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_OPEN_FAMILY_K6_ROUTE_RECONCILIATION_STRUCTURAL_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "STRUCTURAL_EXACT_CURRENT_MANIFEST_PASS__14_OF_14__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPEN_FAMILY_K6_OWNED_GENERATOR_ROUTE_RECONCILIATION_20261007_V1.json",
+    "git_blob_sha": "6d3fa90b3175c26727e516d3a8ceb80370a3c531"
+  },
+  "current_manifest": {
+    "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+    "git_blob_sha": "bcf12c8845e90e6bfdd689458586bdebd59824a3"
+  },
+  "verified": {
+    "current_open_family_count": 14,
+    "projected_open_family_count": 14,
+    "missing_families": [],
+    "extra_families": [],
+    "route_generator_outside_five_owned_plus_k6": [],
+    "families_without_k6": [],
+    "zero_terminal_credit": true
+  },
+  "consequence": "SCHEDULER_MAY_TREAT_OWNED_GENERATOR_PLUS_K6_PROJECTION_AS_THE_FIRST_FALSIFICATION_ROUTE_FOR_ALL_14_OPEN_FAMILIES__THIS_DOES_NOT_PROVE_SEMANTIC_SUFFICIENCY_OR_ACCEPTANCE.",
+  "hard_nonclaims": [
+    "NO SEMANTIC PROOF THE PROJECTED GENERATORS SUFFICE FOR ANY OPEN FAMILY",
+    "NO POSITIVE ADEQUACY WITNESS CREATED",
+    "NO ACCEPTANCE OR OWNERSHIP PROMOTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
