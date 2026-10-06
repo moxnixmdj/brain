@@ -1,0 +1,261 @@
+{
+  "schema": "PROJECT_BRAIN_H100_A_FRESH_CROSS_CAPABILITY_FALSIFICATION_SUITE_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_G0_V2__BEFORE_SUITE_RUNNER_IMPLEMENTATION_AND_OUTCOMES",
+  "g0": {
+    "path": "canonical/governance/H100_A_G0_FROZEN_GENERIC_SUBSTRATE_V2.json",
+    "freeze_commit": "4c53706e0e079658ec4924f8763bfe9331354bf1"
+  },
+  "generation": {
+    "seed_derivation": "SHA256_UTF8_OF_G0_V2_FREEZE_COMMIT",
+    "seed_sha256": "b74b63d4eb850978af6d5782631d978a02cb4826c88a3f23efe4744f4fdf9457"
+  },
+  "shared_numeric_population": {
+    "training_x": [
+      -4.225099,
+      -3.707699,
+      -3.243503,
+      -2.644663,
+      -2.157462,
+      -1.678729,
+      -1.266128,
+      -0.694016,
+      -0.198837,
+      0.246854,
+      0.760816,
+      1.328923,
+      1.763558,
+      2.358989,
+      2.839132,
+      3.246015,
+      3.829637
+    ],
+    "holdout_x": [
+      -3.908357,
+      -3.227616,
+      -2.509417,
+      -1.742588,
+      -1.022185,
+      -0.330133,
+      0.433071,
+      1.182564,
+      1.919202,
+      2.655952,
+      3.335665
+    ]
+  },
+  "tasks": [
+    {
+      "id": "FRESH_REGISTRY_REUSE",
+      "class": "CAPABILITY_REUSE",
+      "sequence": [
+        "square",
+        "log1p_abs",
+        "sqrt_abs",
+        "sat"
+      ],
+      "coefficients": [
+        0.736199,
+        -0.722108,
+        -0.812345
+      ],
+      "pass_gate": "REGISTRY_V8_HIT_AND_HOLDOUT_NRMSE_LE_1E-8"
+    },
+    {
+      "id": "FRESH_UNKNOWN_STRUCTURE",
+      "class": "UNKNOWN_DOMAIN_PROGRAM_SEARCH",
+      "sequence": [
+        "log1p_abs",
+        "square",
+        "sat",
+        "sqrt_abs"
+      ],
+      "coefficients": [
+        0.974646,
+        -0.257106,
+        -0.752346
+      ],
+      "pass_gate": "GENERIC_COMPLETE_DEPTH_LE_4_SEARCH_FINDS_A_CANDIDATE_WITH_HOLDOUT_NRMSE_LE_1E-8"
+    },
+    {
+      "id": "FRESH_TYPED_PLAN",
+      "class": "PLANNING",
+      "initial_resources": [
+        "TERM",
+        "SOURCE_RELATIONS"
+      ],
+      "goal_resource": "LEXICAL_ROLE",
+      "pass_gate": "SHORTEST_TYPED_PLAN_FOUND_WITHOUT_TASK_VALUES_OR_LABELS"
+    },
+    {
+      "id": "FRESH_JIT_LEXICAL_INPUT",
+      "class": "LANGUAGE_JIT_SEMANTICS",
+      "term": "zorvex_b74b63d4",
+      "source_records": [
+        {
+          "term": "zorvex_b74b63d4",
+          "source_id": "fresh_source_a",
+          "relation_phrases": [
+            "feature variable"
+          ]
+        }
+      ],
+      "expected_role": "INPUT"
+    },
+    {
+      "id": "FRESH_JIT_LEXICAL_TARGET",
+      "class": "LANGUAGE_JIT_SEMANTICS",
+      "term": "melqor_eb850978",
+      "source_records": [
+        {
+          "term": "melqor_eb850978",
+          "source_id": "fresh_source_b",
+          "relation_phrases": [
+            "response variable"
+          ]
+        }
+      ],
+      "expected_role": "TARGET"
+    },
+    {
+      "id": "FRESH_EFFECT_TOOLS",
+      "class": "TOOL_USE",
+      "receipt_payload": {
+        "name": "fresh_af6d57",
+        "score": -0.326099,
+        "passed": false
+      },
+      "ledger_payload": {
+        "event": "evt_82631d",
+        "value": 333
+      },
+      "pass_gate": "BOTH_VERIFIED_EFFECT_TOOLS_EXECUTE_IN_FRESH_SANDBOX_AND_RETURN_CONTENT_HASHES"
+    },
+    {
+      "id": "FRESH_EVENT_MEMORY",
+      "class": "LONG_HORIZON_STATE",
+      "event_count": 1736,
+      "restart_boundaries": [
+        578,
+        1157
+      ],
+      "pass_gate": "FULL_REPLAY_EQUALS_TWO_RESTART_REPLAY"
+    },
+    {
+      "id": "FRESH_BAR_GEOMETRY",
+      "class": "VISION",
+      "images": [
+        {
+          "orientation": "VERTICAL",
+          "bar_count": 4,
+          "color": [
+            167,
+            221,
+            109
+          ],
+          "sizes": [
+            57,
+            103,
+            65,
+            54
+          ]
+        },
+        {
+          "orientation": "HORIZONTAL",
+          "bar_count": 7,
+          "color": [
+            42,
+            183,
+            125
+          ],
+          "sizes": [
+            102,
+            149,
+            52,
+            103,
+            105,
+            119,
+            81
+          ]
+        },
+        {
+          "orientation": "VERTICAL",
+          "bar_count": 7,
+          "color": [
+            186,
+            151,
+            95
+          ],
+          "sizes": [
+            140,
+            59,
+            48,
+            52,
+            116,
+            121,
+            116
+          ]
+        },
+        {
+          "orientation": "HORIZONTAL",
+          "bar_count": 4,
+          "color": [
+            214,
+            185,
+            89
+          ],
+          "sizes": [
+            141,
+            84,
+            116,
+            68
+          ]
+        }
+      ],
+      "generator_contract": "WHITE_360x280_CANVAS__18PX_BARS__24PX_GAPS__NO_TEXT__NO_AXES__RAW_PIXELS_ONLY_TO_G0",
+      "pass_gate": "4_OF_4_ORIENTATION_AND_BAR_COUNT_EXACT"
+    },
+    {
+      "id": "FRESH_HIDDEN_INFORMATION_CONTROL",
+      "class": "INFORMATION_GAP_POSITIVE_CONTROL",
+      "runtime_input": {
+        "token": "same-visible-input"
+      },
+      "hidden_worlds": [
+        {
+          "world": "A",
+          "correct_output": 0
+        },
+        {
+          "world": "B",
+          "correct_output": 1
+        }
+      ],
+      "runtime_evidence_identical": true,
+      "expected_residual_equivalence_class": 2,
+      "lower_bound_target_adapted_bits_if_no_target_code": 1,
+      "pass_gate": "TOURNAMENT_CLASSIFIES_AS_INFORMATION_GAP_NOT_ALGORITHM_FAILURE"
+    }
+  ],
+  "scoring": {
+    "no_partial_credit_within_task": true,
+    "classify_every_failure_as_one_of": [
+      "INFORMATION_GAP",
+      "ALGORITHM_GAP",
+      "SEARCH_GAP",
+      "VERIFICATION_GAP",
+      "COMPUTE_GAP",
+      "MEMORY_GAP",
+      "REPRESENTATION_GAP"
+    ],
+    "target_adapted_persistent_bits_g0": 0,
+    "external_learned_calls_allowed": 0
+  },
+  "hard_nonclaims": [
+    "BOUNDED_SUITE_IS_NOT_FRONTIER_CAPABILITY_PROOF",
+    "SYNTHETIC_VISION_IS_NOT_GENERAL_CHART_UNDERSTANDING",
+    "EXPLICIT_SOURCE_RELATIONS_MAKE_LEXICAL_TASKS_INFORMATION_COMPLETE",
+    "HIDDEN_INFORMATION_CONTROL_IS_A_DESIGNED_POSITIVE_CONTROL_NOT_A_REALISTIC_FRONTIER_TASK"
+  ],
+  "promotion_authority": false
+}
