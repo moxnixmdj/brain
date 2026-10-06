@@ -1,11 +1,13 @@
-"""Finite falsifier kernel for distributional target upper-envelope semantics.
+"""Finite falsifier kernel for deployed distributional dominance semantics.
 
-This is not a proof of the general theorem. It only makes the repaired
-semantic distinction executable on finite outcome spaces:
+This is not a proof of the general theorem. It makes several failure modes
+executable on finite outcome spaces:
 - probability mass matters, not just support;
-- all declared terminal evaluators must weakly improve;
+- declared terminal evaluators must weakly improve;
 - hard constraints must not regress;
-- only Brain-owned candidate laws are admissible.
+- opaque external capability execution is not ownership;
+- a library portfolio is not enough if the deployed context-conditioned router
+  cannot reach the required behavior.
 """
 from __future__ import annotations
 
@@ -51,15 +53,7 @@ def weakly_dominates(
     evaluators: Sequence[Mapping[str, float]],
     hard_constraints: Sequence[Mapping[str, Any]] = (),
 ) -> bool:
-    """Return whether one finite law weakly dominates another.
-
-    Evaluators are terminal-relevant score maps, all interpreted as higher
-    is better. Each hard constraint contains:
-      evaluator: score map
-      threshold: lower bound
-    A constraint is load-bearing only when the target law satisfies it. If so,
-    the Brain law must also satisfy it.
-    """
+    """Return whether one finite law weakly dominates another."""
     b = normalize_distribution(brain)
     o = normalize_distribution(target)
     if not evaluators:
@@ -83,14 +77,19 @@ def weakly_dominates(
     return True
 
 
-def target_upper_envelope_covered(
+def portfolio_upper_envelope_covered(
     brain_candidates: Sequence[Mapping[str, Any]],
     target_laws: Sequence[Mapping[str, float]],
     *,
     evaluators: Sequence[Mapping[str, float]],
     hard_constraints: Sequence[Mapping[str, Any]] = (),
 ) -> bool:
-    """Every target law must have at least one Brain-owned dominating law."""
+    """Legacy existential-portfolio check.
+
+    This is intentionally retained as a falsification control. A pass here is
+    insufficient for terminal capability because it does not prove that the
+    deployed router reaches the right policy from the actual external context.
+    """
     if not target_laws:
         raise DistributionalEnvelopeError("TARGET_LAWS_REQUIRED")
 
@@ -114,3 +113,48 @@ def target_upper_envelope_covered(
         ):
             return False
     return True
+
+
+def deployed_kernel_dominates(
+    brain_by_context: Mapping[str, Mapping[str, Any]],
+    target_by_context: Mapping[str, Mapping[str, float]],
+    *,
+    evaluators_by_context: Mapping[str, Sequence[Mapping[str, float]]],
+    hard_constraints_by_context: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+) -> bool:
+    """Compare actual deployed Brain and target laws under the same contexts.
+
+    Each Brain row must be marked brain_owned=True and carry the law that the
+    deployed router actually induces for that context. Merely having a better
+    law somewhere else in the library is insufficient.
+    """
+    if not target_by_context:
+        raise DistributionalEnvelopeError("TARGET_CONTEXTS_REQUIRED")
+    constraints = hard_constraints_by_context or {}
+
+    for context, target_law in target_by_context.items():
+        brain_row = brain_by_context.get(context)
+        if not isinstance(brain_row, Mapping):
+            return False
+        if brain_row.get("brain_owned") is not True:
+            return False
+        brain_law = brain_row.get("law")
+        if not isinstance(brain_law, Mapping):
+            return False
+        evaluators = evaluators_by_context.get(context)
+        if not evaluators:
+            raise DistributionalEnvelopeError(
+                f"MISSING_EVALUATORS_FOR_CONTEXT:{context}"
+            )
+        if not weakly_dominates(
+            brain_law,
+            target_law,
+            evaluators=evaluators,
+            hard_constraints=constraints.get(context, ()),
+        ):
+            return False
+
+    return True
+
+
+target_upper_envelope_covered = portfolio_upper_envelope_covered
