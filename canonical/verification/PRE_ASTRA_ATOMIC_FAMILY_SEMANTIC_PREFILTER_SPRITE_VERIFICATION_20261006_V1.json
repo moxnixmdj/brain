@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_PRE_ASTRA_ATOMIC_FAMILY_SEMANTIC_PREFILTER_SPRITE_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_PASS__EXACT_AUTHORITY_BYTES__ZERO_ASTRA_ACCESS__ZERO_CREDIT",
+  "runner": {
+    "provider": "Sprites",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "workspace": "/home/sprite/preastra_prefilter_replay2"
+  },
+  "exact_candidate_blobs": {
+    "runtime": {
+      "path": "canonical/runtime/pre_astra_atomic_family_semantic_prefilter_v1.py",
+      "git_blob_sha": "6b3224515a9368c90689fbdf3bbb554f78cde20d"
+    },
+    "prefilter": {
+      "path": "canonical/governance/PRE_ASTRA_ATOMIC_FAMILY_SEMANTIC_PREFILTER_20261006_V1.json",
+      "git_blob_sha": "0fc92ab6c0612b901b7eee608ddf6b1324f87f02"
+    },
+    "test": {
+      "path": "canonical/tests/test_pre_astra_atomic_family_semantic_prefilter_v1.py",
+      "git_blob_sha": "de229092b1d2bf5022a6004630d6a1588482a628"
+    },
+    "packet_v3": {
+      "path": "canonical/governance/ASTRA_SCARCE_ACCESS_TARGET_SEMANTICS_CLASSIFICATION_PACKET_20261006_V3.json",
+      "git_blob_sha": "79fd2683424a7cfec5ff6495d92d80c3751fb955"
+    }
+  },
+  "exact_authority_blobs": {
+    "acceptance_registry": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "acceptance_evidence": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+    "score_target_tuples": "9bbd45f066ab94fa3f5110b9cc5efcd4118d1367",
+    "v7_evaluator_trichotomy": "dce8d6838de486862d205436ed96cda6376e28ba",
+    "pre_astra_mincut": "6622a34c2de805523ac2c87808c13fb6cba1f3fe",
+    "astra_packet_v2": "2d2062ecccd37aa745f836bdae059836f50fa84e"
+  },
+  "replay_result": {
+    "pass": true,
+    "errors": [],
+    "unresolved_atomic_count": 24,
+    "kind_counts": {
+      "PUBLIC_FIXED_BAR": 14,
+      "MATCHED_NONINFERIORITY": 4,
+      "MATCHED_SCOPE_AUDIT": 4,
+      "DIRECT_SCOPE_AUDIT": 1,
+      "DEPENDENCY_PROOF": 1
+    },
+    "fixed_bar_target_tuple_count": 14,
+    "family_count": 14,
+    "family_E_or_M_credit": 0,
+    "astra_access_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "verified_claim": "THE_CURRENT_24_UNRESOLVED_ATOMIC_ACCEPTANCE_CONTRACTS_ARE_LOSSLESSLY_PARTITIONED_AND_DISTINCT_FROM_THE_14_FAMILY_WIDE_SEMANTIC_E_OR_M_QUESTIONS__THE_14_FIXED_BAR_TARGET_IDENTITIES_ARE_ALREADY_BOUND__SCARCE_ASTRA_NEED_NOT_REDISCOVER_ATOMIC_THRESHOLD_OR_TARGET_TUPLE_SEMANTICS.",
+  "hard_nonclaims": [
+    "NO_ATOMIC_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_FAMILY_CLASSIFIED_E_OR_M",
+    "NO_LITERAL_TARGET_CONTEXT_UNIVERSE_COMPLETENESS_PROVED",
+    "NO_ASTRA_INTERACTION_CONSUMED",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "astra_access_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
