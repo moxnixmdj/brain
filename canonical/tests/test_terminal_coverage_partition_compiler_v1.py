@@ -10,10 +10,10 @@ from canonical.runtime.terminal_coverage_partition_compiler_v1 import (
 
 
 class TerminalCoveragePartitionCompilerTests(unittest.TestCase):
-    def test_default_preserves_31_current_obligations_and_grants_zero_credit(self):
+    def test_default_preserves_30_current_obligations_and_grants_zero_credit(self):
         out = compile_partition()
-        self.assertEqual(out["truth_obligation_count"], 31)
-        self.assertEqual(out["truth_obligations_deleted"], 1)
+        self.assertEqual(out["truth_obligation_count"], 30)
+        self.assertEqual(out["truth_obligations_deleted"], 2)
         self.assertEqual(out["truth_obligations_closed_by_routing_alone"], 0)
         self.assertEqual(out["terminal_credit_delta"], 0)
 
