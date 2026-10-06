@@ -12,7 +12,12 @@ from __future__ import annotations
 import argparse
 import importlib
 import sys
+from pathlib import Path
 from typing import Any
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from canonical.runtime import root3_strict_current_bootstrap_v2 as bootstrap
 from canonical.runtime import root3_two_class_attempt_authorizer_v1 as attempt_authorizer
