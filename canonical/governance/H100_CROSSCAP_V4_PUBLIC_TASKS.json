@@ -1,0 +1,400 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CROSSCAP_V4_PUBLIC",
+  "tasks": [
+    {
+      "id": "R4",
+      "kind": "REASONING",
+      "spec": {
+        "constraints": [
+          {
+            "op": "LT",
+            "vars": [
+              "a",
+              "b"
+            ]
+          },
+          {
+            "op": "PRODUCT_EQ",
+            "value": 2,
+            "vars": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "domains": {
+          "a": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "b": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "variables": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "examples": [
+        {
+          "x": -4,
+          "y": 6
+        },
+        {
+          "x": -3,
+          "y": 5
+        },
+        {
+          "x": -2,
+          "y": 4
+        },
+        {
+          "x": -1,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 6
+        }
+      ],
+      "id": "C4",
+      "kind": "CODING",
+      "queries": [
+        -5,
+        5
+      ]
+    },
+    {
+      "clauses": [
+        {
+          "cue": "cue_long",
+          "fields": [
+            "x"
+          ]
+        },
+        {
+          "cue": "cue_out",
+          "fields": [
+            "y"
+          ]
+        }
+      ],
+      "id": "L4",
+      "kind": "LANGUAGE",
+      "knowledge": {
+        "anchors": {
+          "input": "input",
+          "target": "output"
+        },
+        "edges": [
+          [
+            "cue_long",
+            "n0"
+          ],
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ],
+          [
+            "n3",
+            "n4"
+          ],
+          [
+            "n4",
+            "n5"
+          ],
+          [
+            "n5",
+            "n6"
+          ],
+          [
+            "n6",
+            "n7"
+          ],
+          [
+            "n7",
+            "n8"
+          ],
+          [
+            "n8",
+            "n9"
+          ],
+          [
+            "n9",
+            "n10"
+          ],
+          [
+            "n10",
+            "n11"
+          ],
+          [
+            "n11",
+            "n12"
+          ],
+          [
+            "n12",
+            "n13"
+          ],
+          [
+            "n13",
+            "n14"
+          ],
+          [
+            "n14",
+            "n15"
+          ],
+          [
+            "n15",
+            "n16"
+          ],
+          [
+            "n16",
+            "input"
+          ],
+          [
+            "cue_out",
+            "output"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "V4",
+      "kind": "VISION",
+      "ppm": "P3\n6 4\n255\n255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 20 40 180 20 40 180 20 40 180 20 40 180 255 255 255 255 255 255 20 40 180 20 40 180 20 40 180 20 40 180 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255\n",
+      "source_semantics": "two_same_color_rectangles_touch_edge_without_visible_boundary"
+    },
+    {
+      "id": "T4",
+      "kind": "TOOL_USE",
+      "required_effect": "WRITE_JSON",
+      "required_keys": [
+        "x"
+      ],
+      "selection_policy": "MIN_PRIORITY",
+      "tool_packs": [
+        {
+          "effects": [
+            "WRITE_JSON"
+          ],
+          "input_schema": {
+            "x": "int"
+          },
+          "priority": 9,
+          "tool_id": "slow"
+        },
+        {
+          "effects": [
+            "WRITE_JSON"
+          ],
+          "input_schema": {
+            "x": "int"
+          },
+          "priority": 1,
+          "tool_id": "fast"
+        }
+      ]
+    },
+    {
+      "goal_resource": "goal",
+      "id": "P4",
+      "initial_resources": [
+        "start"
+      ],
+      "kind": "PLANNING",
+      "max_length": 5,
+      "objective": "MIN_TOTAL_COST",
+      "operators": [
+        {
+          "cost": 10,
+          "operator_id": "a_exp1",
+          "provides": [
+            "mid"
+          ],
+          "requires": [
+            "start"
+          ]
+        },
+        {
+          "cost": 10,
+          "operator_id": "b_exp2",
+          "provides": [
+            "goal"
+          ],
+          "requires": [
+            "mid"
+          ]
+        },
+        {
+          "cost": 1,
+          "operator_id": "c_cheap1",
+          "provides": [
+            "u"
+          ],
+          "requires": [
+            "start"
+          ]
+        },
+        {
+          "cost": 1,
+          "operator_id": "d_cheap2",
+          "provides": [
+            "v"
+          ],
+          "requires": [
+            "u"
+          ]
+        },
+        {
+          "cost": 1,
+          "operator_id": "e_cheap3",
+          "provides": [
+            "goal"
+          ],
+          "requires": [
+            "v"
+          ]
+        }
+      ],
+      "required_final_resources": [
+        "goal"
+      ]
+    },
+    {
+      "events": [
+        {
+          "event_hash": "d4ec1555f2b549e2709ae5caf65dba665f2219c3274c21e8ee29a2cd0ac4af06",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "seq": 1,
+          "value": 4
+        },
+        {
+          "event_hash": "79e619003e5449b373717c233a36c33ab89e9525dbd36253c51bd00534cd08e9",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "d4ec1555f2b549e2709ae5caf65dba665f2219c3274c21e8ee29a2cd0ac4af06",
+          "seq": 2,
+          "value": 7
+        },
+        {
+          "event_hash": "f63b10d09b89a767cbdb813c96d3e595f1cb437343e71031090ed85edef16cee",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "79e619003e5449b373717c233a36c33ab89e9525dbd36253c51bd00534cd08e9",
+          "seq": 3,
+          "value": 4
+        },
+        {
+          "event_hash": "dc1fb09f88131a122895100b826b2aea1f9da2a185325c94cde5af63cf694776",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "f63b10d09b89a767cbdb813c96d3e595f1cb437343e71031090ed85edef16cee",
+          "seq": 4,
+          "value": 9
+        },
+        {
+          "event_hash": "ddd86c9b544f1daebf627cdd522430d70edc30af0f6ecb21adbf080a52a5cf2a",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "dc1fb09f88131a122895100b826b2aea1f9da2a185325c94cde5af63cf694776",
+          "seq": 5,
+          "value": 7
+        },
+        {
+          "event_hash": "2a6d00c7b7f81640a5407d5b6672e423394a0877ebcd5cfab69915cc7462c276",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "ddd86c9b544f1daebf627cdd522430d70edc30af0f6ecb21adbf080a52a5cf2a",
+          "seq": 6,
+          "value": 11
+        }
+      ],
+      "id": "M4",
+      "kind": "MEMORY",
+      "query": {
+        "key": "score",
+        "op": "COUNT_UNIQUE"
+      }
+    },
+    {
+      "id": "N4",
+      "kind": "NOVEL_DOMAIN",
+      "queries": [
+        -4.5,
+        4.5
+      ],
+      "rows": [
+        {
+          "x": -4,
+          "y": 0.04075113004879016
+        },
+        {
+          "x": -3,
+          "y": -0.3689117646211888
+        },
+        {
+          "x": -2,
+          "y": -0.6553070288360096
+        },
+        {
+          "x": -1,
+          "y": -0.26830202466266206
+        },
+        {
+          "x": 0,
+          "y": 0.8999999999999999
+        },
+        {
+          "x": 1,
+          "y": 1.3097573540683927
+        },
+        {
+          "x": 2,
+          "y": 1.4177093687199447
+        },
+        {
+          "x": 3,
+          "y": 1.0286562466626255
+        },
+        {
+          "x": 4,
+          "y": 0.581227636617691
+        }
+      ]
+    }
+  ]
+}
