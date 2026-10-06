@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_H100_TABLE_QA_V3_HOLDOUT_SELECTION_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_V3_CASE_SELECTION_AND_BEFORE_ANY_V3_SOLVER_OUTPUT",
+  "source": {
+    "chartqa_repo": "vis-nlp/ChartQA",
+    "commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+    "human": "ChartQA Dataset/val/val_human.json",
+    "augmented": "ChartQA Dataset/val/val_augmented.json"
+  },
+  "exclusions": [
+    "canonical/governance/H100_UNICHART_CHARTQA_PRESERVATION_PREEXPOSURE_V1.json",
+    "canonical/governance/H100_UNICHART_FRESH_CAPABILITY_HOLDOUT_V1.json",
+    "canonical/governance/H100_UNICHART_FRESH_CAPABILITY_HOLDOUT_V2.json"
+  ],
+  "selection": {
+    "seed": "H100_TABLE_QA_V3_20261006",
+    "key": "SHA256(seed + '|' + split + '|' + imgname + '|' + query)",
+    "take_lowest_per_split": 50
+  },
+  "scored_subject": "canonical/runtime/h100_table_qa_solver_v1.py",
+  "prohibited": [
+    "NO_V3_SOLVER_OUTPUT_BEFORE_HOLDOUT_COMMIT",
+    "NO_POST_SELECTION_SOLVER_EDIT_BEFORE_FIRST_V3_RUN"
+  ],
+  "promotion_authority": false
+}
