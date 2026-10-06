@@ -5,6 +5,7 @@ import os
 import pathlib
 import tempfile
 import unittest
+from unittest import mock
 
 CANONICAL_ROOT=pathlib.Path(__file__).resolve().parents[1]
 RUNTIME_PATH=CANONICAL_ROOT/"runtime"/"astra_runtime.py"
@@ -29,18 +30,26 @@ class ExternalToolBridgeTests(unittest.TestCase):
             if v is None: os.environ.pop(k,None)
             else: os.environ[k]=v
 
-    def bind(self,td):
+    def bind(self,root):
         os.environ["PROJECT_BRAIN_AGENT_ID"]="SUPERWORKER-UNIFIED-1"
         os.environ["PROJECT_BRAIN_TASK_ID"]="SI-REAL-MISSION-001"
-        os.environ["PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR"]=td
+        bridge=(
+            pathlib.Path(root)
+            /"canonical"/"same_identity_worker"/"external_tool_bridge"/"SI-REAL-MISSION-001"
+        )
+        bridge.mkdir(parents=True,exist_ok=True)
+        os.environ["PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR"]=str(bridge)
+        return bridge
 
     def test_request_blocks_then_exact_response_is_accepted(self):
-        with tempfile.TemporaryDirectory() as td:
-            self.bind(td)
+        with tempfile.TemporaryDirectory() as td, \
+             mock.patch.object(runtime,"ROOT",pathlib.Path(td)), \
+             mock.patch.object(runtime,"_authorize_external_information",return_value={"pass":True}):
+            bridge=self.bind(td)
             payload={"url":"https://example.com/data.json","timeout_s":7,"max_bytes":1234}
             with self.assertRaisesRegex(runtime.Blocker,"EXTERNAL_TOOL_REQUEST_PENDING"):
                 runtime._external_tool_bridge("http_get",payload)
-            req_path=next(pathlib.Path(td).glob("*.request.json"))
+            req_path=next(bridge.glob("*.request.json"))
             req=json.loads(req_path.read_text(encoding="utf-8"))
             self.assertEqual(req["agent_id"],"SUPERWORKER-UNIFIED-1")
             self.assertEqual(req["task_id"],"SI-REAL-MISSION-001")
@@ -54,19 +63,21 @@ class ExternalToolBridgeTests(unittest.TestCase):
                 "result":{"url":"https://example.com/data.json","status":200,
                           "body_sha256":"a"*64,"body_excerpt":"ok"},
             }
-            pathlib.Path(td,req["request_sha256"]+".response.json").write_text(
+            pathlib.Path(bridge,req["request_sha256"]+".response.json").write_text(
                 json.dumps(response),encoding="utf-8"
             )
             out=runtime._external_tool_bridge("http_get",payload)
             self.assertEqual(out["status"],200)
 
     def test_identity_mismatch_is_rejected(self):
-        with tempfile.TemporaryDirectory() as td:
-            self.bind(td)
+        with tempfile.TemporaryDirectory() as td, \
+             mock.patch.object(runtime,"ROOT",pathlib.Path(td)), \
+             mock.patch.object(runtime,"_authorize_external_information",return_value={"pass":True}):
+            bridge=self.bind(td)
             payload={"prompt":"inspect current evidence"}
             with self.assertRaisesRegex(runtime.Blocker,"EXTERNAL_TOOL_REQUEST_PENDING"):
                 runtime._external_tool_bridge("planner",payload)
-            req_path=next(pathlib.Path(td).glob("*.request.json"))
+            req_path=next(bridge.glob("*.request.json"))
             req=json.loads(req_path.read_text(encoding="utf-8"))
             response={
                 "schema":"PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1",
@@ -77,11 +88,41 @@ class ExternalToolBridgeTests(unittest.TestCase):
                 "status":"ok",
                 "result":{"text":"{}"},
             }
-            pathlib.Path(td,req["request_sha256"]+".response.json").write_text(
+            pathlib.Path(bridge,req["request_sha256"]+".response.json").write_text(
                 json.dumps(response),encoding="utf-8"
             )
             with self.assertRaisesRegex(runtime.Blocker,"EXTERNAL_TOOL_RESPONSE_IDENTITY_MISMATCH"):
                 runtime._external_tool_bridge("planner",payload)
+
+
+    def test_arbitrary_bridge_directory_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td, \
+             mock.patch.object(runtime,"ROOT",pathlib.Path(td)), \
+             mock.patch.object(runtime,"_authorize_external_information",return_value={"pass":True}):
+            os.environ["PROJECT_BRAIN_AGENT_ID"]="SUPERWORKER-UNIFIED-1"
+            os.environ["PROJECT_BRAIN_TASK_ID"]="SI-REAL-MISSION-001"
+            bad=pathlib.Path(td)/"arbitrary-bridge"
+            os.environ["PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR"]=str(bad)
+            with self.assertRaisesRegex(runtime.Blocker,"EXTERNAL_TOOL_BRIDGE_DIR_IDENTITY_MISMATCH"):
+                runtime._external_tool_bridge("http_get",{"url":"https://example.com/"})
+            self.assertFalse(bad.exists())
+
+    def test_task_scoped_bridge_symlink_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td, tempfile.TemporaryDirectory() as outside, \
+             mock.patch.object(runtime,"ROOT",pathlib.Path(td)), \
+             mock.patch.object(runtime,"_authorize_external_information",return_value={"pass":True}):
+            os.environ["PROJECT_BRAIN_AGENT_ID"]="SUPERWORKER-UNIFIED-1"
+            os.environ["PROJECT_BRAIN_TASK_ID"]="SI-REAL-MISSION-001"
+            bridge=pathlib.Path(td)/"canonical"/"same_identity_worker"/"external_tool_bridge"/"SI-REAL-MISSION-001"
+            bridge.parent.mkdir(parents=True,exist_ok=True)
+            try:
+                bridge.symlink_to(pathlib.Path(outside),target_is_directory=True)
+            except (OSError,NotImplementedError):
+                self.skipTest("symlink unavailable")
+            os.environ["PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR"]=str(bridge)
+            with self.assertRaisesRegex(runtime.Blocker,"EXTERNAL_TOOL_BRIDGE_TASK_DIR_SYMLINK_FORBIDDEN"):
+                runtime._external_tool_bridge("http_get",{"url":"https://example.com/"})
+
 
 
 if __name__=="__main__":
