@@ -12,7 +12,7 @@ class UtilityQuotientControlV2Tests(unittest.TestCase):
     def test_ordering_schema_is_exactly_verified(self):
         o=self.d["ordering_schema"]
         self.assertEqual(o["verification_git_blob_sha"],"a50dcf132d33e2d8f306ea18608ec2852b95b65a")
-        self.assertIn("PASS_9_OF_9",self.r["status"])
+        self.assertIn("PASS__9_OF_9",self.r["status"])
         self.assertIn("PROVED_AS_ORDER_SCHEMA",o["status"])
         self.assertIn("DOES_NOT_PROVE",o["boundary"])
     def test_next_unresolved_is_target_completeness(self):
