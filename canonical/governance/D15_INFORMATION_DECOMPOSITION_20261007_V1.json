@@ -1,0 +1,35 @@
+{
+  "schema":"PROJECT_BRAIN_D15_INFORMATION_DECOMPOSITION_V1",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_ZERO_CREDIT",
+  "current_route_count":{"D":15},
+  "decomposition":{
+    "PUBLIC_BAR_BRAIN_MEASUREMENT_13":[
+      "CODING_TB4_GE_66_4",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "HLE_TOOLS_GE_67_7",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "AUTOMATIONBENCH_GE_40",
+      "MYSTERYMECHANISM_GE_49_55",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "CODING_CURSORBENCH_GE_57_8",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "DIRECT_RESIDUAL_2":[
+      "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+    ]
+  },
+  "interpretation":"For the 13 public-bar atoms, target tuple information is already frozen and no fresh Opus or Astra observation is required merely to know the bar. Remaining work is Brain-side comparable measurement or a stronger proof. Finance uncovered and synthesis matched quality retain direct residual evidence or stronger-proof needs.",
+  "scheduler_consequence":"Do not spend scarce target-model access on the 13 public-bar atoms. Share one reproducible Brain execution carrier across all compatible harnesses. Reserve semantic-compression and comparator work for the two direct residuals and for U/meta obligations.",
+  "hard_nonclaims":[
+    "No public-bar predicate is closed.",
+    "Comparable harness access and Brain execution remain load-bearing.",
+    "No terminal acceptance family capability or ownership credit."
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
