@@ -1,0 +1,14 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_FRESH_POLYNOMIAL_V1_FAILURE_20261006",
+  "date": "2026-10-06",
+  "status": "FAIL__FROZEN_PROGRAM_OPCODE_BUG__NO_CREDIT",
+  "program_precommit": "canonical/governance/H100_U1_FRESH_POLYNOMIAL_PROGRAM_PRECOMMIT_V1.json",
+  "observed_error": "U1Error:READ_RANGE",
+  "root_cause": {
+    "intended_terminal_opcode": "WRITE_0x10",
+    "frozen_terminal_opcode_before_halt": "READ_0x0f",
+    "consequence": "COMPUTED_RESULT_WAS_MISINTERPRETED_AS_INPUT_INDEX"
+  },
+  "rule": "DO_NOT_PATCH_V1__CREATE_NEW_PROGRAM_AND_NEW_POST_PROGRAM_FRESH_HOLDOUT",
+  "promotion_authority": false
+}
