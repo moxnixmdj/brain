@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REFERENCE_MACHINE_U2_FREEZE_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN__SECOND_CARRIER_9_OF_9_VERIFIED__REFERENCE_MACHINE_ACTIVE_FOR_INDEPENDENT_A_RESEARCH",
+  "machine_id": "H100_U2_BOUNDED_STACK_VM",
+  "content_address": {
+    "precommit": {
+      "path": "canonical/governance/H100_REFERENCE_MACHINE_U2_PRECOMMIT_V1.json",
+      "git_blob_sha": "ce92f0cc80a021efb51c69b2c2ca0a72655d2650",
+      "bytes": 1201
+    },
+    "runtime": {
+      "path": "canonical/runtime/h100_reference_machine_u2_v1.py",
+      "git_blob_sha": "11bb28bb9b7822cfe979b9e957a6c886ebeecd1c",
+      "bytes": 5157
+    },
+    "tests": {
+      "path": "canonical/tests/test_h100_reference_machine_u2_v1.py",
+      "git_blob_sha": "213f74b1ccba35beec2065d95eab2666d448db0f",
+      "bytes": 1862
+    }
+  },
+  "verified_resources": [
+    "STEP_LIMIT",
+    "MEMORY_CELL_LIMIT",
+    "STACK_DEPTH_LIMIT",
+    "OUTPUT_LENGTH_LIMIT",
+    "SIGNED_64_BIT_VALUE_WIDTH"
+  ],
+  "accounting": {
+    "generic_reference_machine_implementation_bytes": 5157,
+    "generic_reference_machine_bytes_are_not_target_adapted_program_bits": true,
+    "target_adapted_program_bytes_must_be_counted": true,
+    "runtime_input_is_conditioning_information_R": true
+  },
+  "use_rule": "ALL_FUTURE_K_U_T_M_CAPABILITY_INTERVALS_ON_THIS_RESEARCH_BRANCH_MUST_NAME_THIS_EXACT_MACHINE_ID_AND_RUNTIME_BLOB_OR_DECLARE_A_NEW_REFERENCE_MACHINE",
+  "hard_nonclaims": [
+    "PYTHON_IMPLEMENTATION_SIZE_IS_NOT_KOLMOGOROV_COMPLEXITY_OF_THE_ABSTRACT_MACHINE",
+    "U2_IS_A_REFERENCE_CONVENTION_NOT_A_CLAIM_OF_OPTIMAL_UNIVERSAL_MACHINE",
+    "CHANGING_U_CHANGES_DESCRIPTION_LENGTH_BY_AN_ADDITIVE_COMPILER_CONSTANT_AND_REQUIRES_NEW_BOUNDS"
+  ],
+  "promotion_authority": false
+}
