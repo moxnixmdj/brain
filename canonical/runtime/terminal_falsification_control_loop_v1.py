@@ -84,8 +84,26 @@ def _successors(claims: Sequence[Mapping[str, Any]]) -> Dict[str, List[Mapping[s
 def _live_successor_exists(
     predecessor: str,
     successor_map: Mapping[str, Sequence[Mapping[str, Any]]],
+    seen: set[str] | None = None,
 ) -> bool:
-    return any(c.get("status") in LIVE_STATUSES for c in successor_map.get(predecessor, ()))
+    # Route repair is transitive. If A was replaced by B and B was later
+    # falsified and replaced by live C, A remains repaired by the live chain.
+    # Cycles without a live endpoint fail closed.
+    visited = set() if seen is None else set(seen)
+    if predecessor in visited:
+        return False
+    visited.add(predecessor)
+    for successor in successor_map.get(predecessor, ()):
+        if successor.get("status") in LIVE_STATUSES:
+            return True
+        successor_id = successor.get("id")
+        if (
+            successor.get("status") == "FALSIFIED"
+            and isinstance(successor_id, str)
+            and _live_successor_exists(successor_id, successor_map, visited)
+        ):
+            return True
+    return False
 
 def _dependency_blockers(
     claim: Mapping[str, Any],
