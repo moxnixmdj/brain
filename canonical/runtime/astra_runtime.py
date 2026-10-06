@@ -462,6 +462,64 @@ class _ExternalBridgeHTTPResponse:
 
 _ORIGINAL_URLOPEN=urllib.request.urlopen
 
+def _direct_authorized_urlopen(request, timeout=20, *args, **kwargs):
+    if _ACTIVE_CONTINUOUS_OBS_CONTEXT is None or _ACTIVE_CONTINUOUS_OBS_MODULE is None or not _ACTIVE_CONTINUOUS_OBS_MISSION_ID:
+        raise Blocker("DIRECT_NETWORK_EFFECT_CONTEXT_NOT_BOUND")
+    if isinstance(request, urllib.request.Request):
+        url=request.full_url
+        method=request.get_method()
+    else:
+        url=str(request)
+        method="GET"
+    parsed=urllib.parse.urlsplit(url)
+    scheme=(parsed.scheme or "").lower()
+    host=(parsed.hostname or "").lower()
+    if scheme not in {"http","https"} or not host:
+        raise Blocker("DIRECT_NETWORK_EFFECT_URL_NOT_HTTP_S")
+    effect_id=hashlib.sha256(json.dumps({
+        "mission_id":_ACTIVE_CONTINUOUS_OBS_MISSION_ID,
+        "method":str(method),
+        "scheme":scheme,
+        "host":host,
+        "path_sha256":hashlib.sha256((parsed.path or "/").encode("utf-8")).hexdigest(),
+    },sort_keys=True,separators=(",",":")).encode("utf-8")).hexdigest()
+    evidence_path=EVID_DIR/f"{_ACTIVE_CONTINUOUS_OBS_MISSION_ID}__DIRECT_NETWORK_EFFECT.jsonl"
+    _append_admin_jsonl(evidence_path,{
+        "schema":"PROJECT_BRAIN_DIRECT_NETWORK_EFFECT_RECEIPT_V1",
+        "phase":"ATTEMPT",
+        "effect_id":effect_id,
+        "mission_id":_ACTIVE_CONTINUOUS_OBS_MISSION_ID,
+        "method":str(method),
+        "scheme":scheme,
+        "host":host,
+    })
+    try:
+        response=_ORIGINAL_URLOPEN(request, timeout=timeout, *args, **kwargs)
+    except Exception as exc:
+        _append_admin_jsonl(evidence_path,{
+            "schema":"PROJECT_BRAIN_DIRECT_NETWORK_EFFECT_RECEIPT_V1",
+            "phase":"ERROR",
+            "effect_id":effect_id,
+            "mission_id":_ACTIVE_CONTINUOUS_OBS_MISSION_ID,
+            "error_type":type(exc).__name__,
+        })
+        raise
+    try:
+        final_url=str(response.geturl())
+    except Exception:
+        final_url=url
+    final=urllib.parse.urlsplit(final_url)
+    _append_admin_jsonl(evidence_path,{
+        "schema":"PROJECT_BRAIN_DIRECT_NETWORK_EFFECT_RECEIPT_V1",
+        "phase":"OPENED",
+        "effect_id":effect_id,
+        "mission_id":_ACTIVE_CONTINUOUS_OBS_MISSION_ID,
+        "status":int(getattr(response,"status",0) or 0),
+        "final_scheme":(final.scheme or "").lower(),
+        "final_host":(final.hostname or "").lower(),
+    })
+    return response
+
 def _bridge_aware_urlopen(request, timeout=20, *args, **kwargs):
     if isinstance(request, urllib.request.Request):
         url=request.full_url
@@ -479,7 +537,7 @@ def _bridge_aware_urlopen(request, timeout=20, *args, **kwargs):
       'data_b64':base64.b64encode(data).decode('ascii') if data is not None else None,
     })
     if bridged is None:
-        return _ORIGINAL_URLOPEN(request, timeout=timeout, *args, **kwargs)
+        return _direct_authorized_urlopen(request, timeout=timeout, *args, **kwargs)
     for key in ('status','final_url','body_b64'):
         if key not in bridged:
             raise Blocker('EXTERNAL_URLOPEN_RESPONSE_INCOMPLETE:'+key)
