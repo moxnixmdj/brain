@@ -3,7 +3,7 @@
   "date": "2026-10-06",
   "status": "CANDIDATE_REPAIR_IMPLEMENTED__STATIC_10_OF_10_PASS__EXACT_EXECUTION_AND_INDEPENDENT_REPLAY_PENDING__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "canonical_base_commit": "cd1a8618211f9f67aa9caf74e47150467c6048ca",
+  "canonical_base_commit": "c8c91ddd100dca4c4800245fee0b2577f22ee6c1",
   "dead_route": {
     "claim_id": "C_EFFECT_BOUNDARY_CLOSURE_V2",
     "reason": "F_ROOT3_PRODUCTION_BOOTSTRAP_BYPASS_SEARCH_COUNTEREXAMPLE_FOUND",
@@ -95,7 +95,7 @@
     },
     "static_verification": {
       "path": "canonical/verification/ROOT3_PRODUCTION_BOOTSTRAP_REPAIR_STATIC_VERIFICATION_20261006_V1.json",
-      "git_blob_sha": "ae84afd743727e7d1dfbad1c068786ef86173563"
+      "git_blob_sha": "ad5a4c8bc168b319565c6bd4c6a9892850dfd1df"
     }
   },
   "repair_state": {
