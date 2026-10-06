@@ -1,0 +1,14 @@
+{
+  "schema": "PROJECT_BRAIN_H100_BEHAVIORAL_LEARNED_PROVENANCE_IMPOSSIBILITY_LOCAL_RUNTIME_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__LOCAL_SEPARATE_RUNTIME__4_OF_4",
+  "verified": {
+    "linear_state_compilation_equivalent": true,
+    "symbolic_state_compilation_equivalent": true,
+    "compiled_state_frozen": true,
+    "invalid_interpreter_rejected": true
+  },
+  "deduction": "BLACK_BOX_BEHAVIOR_CANNOT_PROVE_THAT_PERSISTENT_CAPABILITY_BITS_MUST_HAVE_LEARNED_PROVENANCE_IF_ARBITRARY_TARGET_ADAPTED_CONSTANTS_MAY_BE_COMPILED_INTO_DETERMINISTIC_PROGRAMS",
+  "hard_nonclaim": "NOT_INDEPENDENT_PROVIDER_VERIFICATION",
+  "promotion_authority": false
+}
