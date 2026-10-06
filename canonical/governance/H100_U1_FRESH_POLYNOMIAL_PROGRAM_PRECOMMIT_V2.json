@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_FRESH_POLYNOMIAL_PROGRAM_PRECOMMIT_V2",
+  "date": "2026-10-06",
+  "status": "RAW_U1_PROGRAM_FROZEN_BEFORE_V2_FRESH_HOLDOUT_INPUTS",
+  "reference_machine": "H100_U1_STACK_VM",
+  "capability_scope": "INTEGER_FUNCTION_F_X_EQUALS_X_SQUARED_PLUS_3X_PLUS_7",
+  "program_hex": "01000f0d0601000f010306040107041000",
+  "raw_program_bytes": 17,
+  "target_adapted_auxiliary_bytes": 0,
+  "learned_target_bytes": 0,
+  "input_contract": "ONE_INTEGER_AT_RUNTIME_INDEX_0",
+  "output_contract": "ONE_INTEGER",
+  "resource_limits": {
+    "max_steps": 100,
+    "max_stack_depth": 32,
+    "max_heap_cells": 4,
+    "max_output_values": 1
+  },
+  "supersedes_failed_program_only": "canonical/governance/H100_U1_FRESH_POLYNOMIAL_PROGRAM_PRECOMMIT_V1.json",
+  "promotion_authority": false
+}
