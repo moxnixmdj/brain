@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_FALSIFICATION_TOURNAMENT_ROOT3_PRODUCTION_BOOTSTRAP_REPAIR_ACTIVATION_20261006_V1",
   "date": "2026-10-06",
-  "status": "CANDIDATE_REPAIR__PRODUCTION_BOOTSTRAP_BYPASS_COUNTEREXAMPLE_BOUND__SUCCESSOR_ROUTE_ACTIVE_IF_MERGED__ZERO_CREDIT",
+  "status": "CANDIDATE_REPAIR_IMPLEMENTED__STATIC_10_OF_10_PASS__EXACT_EXECUTION_AND_INDEPENDENT_REPLAY_PENDING__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "canonical_base_commit": "cd1a8618211f9f67aa9caf74e47150467c6048ca",
   "dead_route": {
@@ -12,7 +12,9 @@
   "successor": {
     "claim_id": "C_EFFECT_BOUNDARY_PRODUCTION_BOOTSTRAP_REPAIR_V3",
     "lane": "EFFECT_CLOSURE",
-    "target_truth_obligations": ["ROOT3_SHARED_SCOPE_COMPOSITION"],
+    "target_truth_obligations": [
+      "ROOT3_SHARED_SCOPE_COMPOSITION"
+    ],
     "target_truth_obligation_count": 7,
     "cost_units": 1,
     "objective": "CLOSE_THE_PRODUCTION_LAUNCH_ORDER_GAP_WITHOUT_WIDENING_SEMANTIC_AUTHORITY",
@@ -73,5 +75,36 @@
   "scheduling_authority": false,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "implementation": {
+    "production_workflow": {
+      "path": ".github/workflows/astra-shared-runtime.yml",
+      "git_blob_sha": "56c1b0ca2a1521e7ab6708dbaeb27e0fb0245374"
+    },
+    "production_launcher": {
+      "path": "canonical/runtime/root3_production_astra_launcher_v1.py",
+      "git_blob_sha": "3ac42e7be5a391cfda738131ecb0d3d600fa2147"
+    },
+    "launcher_tests": {
+      "path": "canonical/tests/test_root3_production_astra_launcher_v1.py",
+      "git_blob_sha": "ea693e4bc399ebe8f8a834a874a7411d1a4d159e"
+    },
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "0e67e417338145061205764cfd82affaeaa07cdc"
+    },
+    "static_verification": {
+      "path": "canonical/verification/ROOT3_PRODUCTION_BOOTSTRAP_REPAIR_STATIC_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "ae84afd743727e7d1dfbad1c068786ef86173563"
+    }
+  },
+  "repair_state": {
+    "P1_PRODUCTION_ENTRY_DOMINANCE": "STATIC_PASS",
+    "P2_PRE_EFFECT_INSTALL_ORDER": "STATIC_PASS",
+    "P3_RAW_ENTRY_FAIL_CLOSED": "STATIC_PASS",
+    "P4_NO_AUTHORITY_WIDENING": "STATIC_PASS",
+    "P5_EXACT_BYTE_FALSIFICATION": "TESTS_WRITTEN__EXECUTION_PENDING",
+    "P6_INDEPENDENT_REPLAY": "OPEN"
+  },
+  "next": "EXECUTE_EXACT_BRANCH_REGRESSION_TESTS__THEN_INDEPENDENT_REPLAY__ONLY_IF_BOTH_PASS_REINSTATE_EFFECT_CLOSURE_AND_ADVANCE_TO_CHILD_INTERNAL_AND_NATIVE_EFFECT_ESCAPE_FALSIFIERS"
 }
