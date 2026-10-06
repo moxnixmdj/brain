@@ -1,0 +1,111 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_MINIMUM_INFORMATION_CUT_V4",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_CURRENT_28_TRUTH_INFORMATION_CLASSIFICATION__ZERO_CREDIT",
+  "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective":"Partition every current 28-truth obligation by the minimum form of information or proof that can settle it, instead of scheduling all open truths as generic benchmark/comparator work.",
+  "authorities":{
+    "current_28_truth_factorizer":{
+      "path":"canonical/runtime/terminal_frontier_factorizer_v3_candidate.py",
+      "git_blob_sha":"7fa597adec3df75145a501fb3090ffb3bca3026c"
+    },
+    "decision_only_threshold":{
+      "path":"canonical/governance/ROOT2_DECISION_ONLY_EVALUATION_ACTIVATION_V1.json",
+      "git_blob_sha":"4086abe4559e30ade7bb7fa5be5571eaf40e94ee"
+    },
+    "brain_first_matched":{
+      "path":"canonical/governance/BRAIN_FIRST_DIFFERENTIAL_PREWAVE_V1.json",
+      "git_blob_sha":"43b5c74b5caf3b3065feaf98a87f798e7c14aead"
+    },
+    "finite_matched_reducer":{
+      "path":"canonical/governance/MATCHED_SUCCESS_FINITE_SCOPE_REDUCER_V1.json",
+      "git_blob_sha":"6b2696d70f9d4a9d9768dbd7bd097d62e7d4fd67"
+    },
+    "matched_scope_compiler":{
+      "path":"canonical/governance/MATCHED_SUCCESS_SCOPE_COMPILER_V1.json",
+      "git_blob_sha":"2e344ccaa611cda7764d4d70557f1e5bdec9cf3c"
+    },
+    "configurable_route_c":{
+      "path":"canonical/governance/OPUS55_CONFIGURABLE_CAPABILITY_QUANTIFIER_CORRECTION_20261005_V1.json",
+      "git_blob_sha":"f019b28366b985dec2d6e3dec527e54482d9af3b"
+    },
+    "jit_nonsmuggling":{
+      "path":"canonical/governance/JIT_KNOWLEDGE_CAPABILITY_NONSMUGGLING_BOUNDARY_20261007_V1.json",
+      "git_blob_sha":"dad1fdb93f102e01b38193da546721ab611bb83f"
+    },
+    "finance_direct_oracle_protocol":{
+      "path":"canonical/governance/FINANCE_UNCOVERED_SCOPE_DIRECT_PROOF_PROTOCOL_V1.json",
+      "git_blob_sha":"84973ca473cbb8f6160b45c025567c56f8a3d4ba"
+    }
+  },
+  "classes":{
+    "FIXED_THRESHOLD_DECISION":{
+      "count":13,
+      "settlement":"AN AUTHENTICATED PLATFORM_OR_BENCHMARK-OWNER PASS_FAIL VERDICT ON THE EXACT FROZEN PREDICATE IS SEMANTICALLY SUFFICIENT; AN EXACT SCORE OR PRIVATE DATASET IS NOT REQUIRED ONCE THE PREDICATE IS SETTLED.",
+      "opus_execution_required":false,
+      "important_boundary":"RELATIVE ELO MAY NOT BE INFERRED FROM ABSOLUTE BEHAVIOR. THE BOOLEAN VERDICT MUST COME FROM THE EXACT RELATIVE-RATING PREDICATE OR A SOUND STRONGER BRIDGE."
+    },
+    "DIRECT_HIDDEN_ORACLE":{
+      "count":1,
+      "predicate":"FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "settlement":"THE TWO PREDECLARED HIDDEN FINANCE ORACLE LEAVES MUST BE EXECUTED AND INDEPENDENTLY VERIFIED. THIS DOES NOT REQUIRE OPUS EXECUTION, BUT IT IS NOT ROUTE-C E-EXACT OPTIMIZATION BECAUSE THE ORACLE IS HIDDEN FROM THE ACTING BRAIN."
+    },
+    "BRAIN_FIRST_BINARY_MATCHED":{
+      "count":3,
+      "settlement":"FREEZE A COMPLETE FINITE CONTENT-ADDRESSED BINARY CASE UNIVERSE, RUN BRAIN ONCE, AND REQUIRE OPUS ONLY ON THE BRAIN-FAILURE RESIDUAL. ZERO OPUS CASE OUTPUTS ARE REQUIRED IF BRAIN PASSES THE COMPLETE CASE UNIVERSE.",
+      "best_case_opus_cases":0
+    },
+    "RELATIVE_SCOPE_OR_QUALITY":{
+      "count":3,
+      "settlement":"NO CURRENT INFORMATION-COLLAPSING THEOREM IS PROVED. REQUIRE EITHER A STRONGER SCOPE-COMPLETE ABSOLUTE/FORMAL CERTIFICATE OR GENUINE TARGET-RELATIVE EVIDENCE."
+    },
+    "META_TRANSFER":{
+      "count":8,
+      "settlement":"THESE ARE COVERAGE/QUOTIENT/TRANSFER THEOREM OBLIGATIONS. BENCHMARK EXECUTION IS NOT IMPLIED BY THEIR CLASSIFICATION; A SOUND EXTENSIONAL COVERAGE AND DOMINANCE-PRESERVING TRANSFER THEOREM IS THE PRIMARY ROUTE."
+    }
+  },
+  "exact_counts":{
+    "current_truths":28,
+    "fixed_threshold_decision":13,
+    "direct_hidden_oracle":1,
+    "brain_first_binary_matched":3,
+    "relative_scope_or_quality":3,
+    "meta_transfer":8
+  },
+  "first_principles_consequence":[
+    "THE PROJECT DOES NOT CURRENTLY HAVE 28 HOMOGENEOUS EVIDENCE PROBLEMS.",
+    "FOURTEEN TRUTHS CAN IN PRINCIPLE BE SETTLED WITHOUT ANY OPUS EXECUTION BY DIRECT PREDICATE OR ORACLE VERDICTS, UNLESS A STRONGER INTERNAL PROOF CLOSES THEM FIRST.",
+    "THREE BINARY MATCHED TRUTHS REQUIRE OPUS OUTPUT ONLY ON BRAIN FAILURES, WITH A ZERO-OPUS BEST CASE.",
+    "THE THREE RELATIVE SCOPE/QUALITY TRUTHS AND EIGHT META TRANSFER TRUTHS ARE THE HIGHEST-LEVERAGE INTERNAL-THEOREM TARGETS BEFORE SPENDING SCARCE TARGET-RELATIVE EVIDENCE.",
+    "JIT KNOWLEDGE MAY SUPPLY FACTS OR EXOGENOUS DISCRIMINATORS BUT MAY NOT SUPPLY AN OPAQUE TARGET POLICY, ACTION SELECTOR, OR HIDDEN GRADER LEAK."
+  ],
+  "scheduler":{
+    "priority_1":"ATTACK_META_TRANSFER_AND_EXTENSIONAL_TARGET_COVERAGE BECAUSE A SHARED THEOREM CAN DELETE OR RECLASSIFY MULTIPLE OPEN TRUTHS.",
+    "priority_2":"ATTACK_THE_THREE_RELATIVE_SCOPE_OR_QUALITY_TRUTHS FOR ABSOLUTE/SCOPE-COMPLETE STRONGER CERTIFICATES.",
+    "priority_3":"FINALIZE_THE_THREE_BRAIN_FIRST_BINARY_MATCHED PREEXPOSURE MANIFESTS; COMPARATOR REMAINS DOWNSTREAM OF BRAIN FAILURES ONLY.",
+    "priority_4":"DEFER_13_FIXED_THRESHOLD_AND_FINANCE_DIRECT_ORACLE REALITY CONSUMPTION UNTIL INTERNAL IMPLICATION ROUTES ARE EXHAUSTED.",
+    "rule":"AFTER_EVERY_VERIFIED_DELTA_RECOMPUTE_THIS_PARTITION; DO_NOT PRESERVE A ROUTE CLASS AFTER ITS PREMISES ARE DELETED."
+  },
+  "runtime":"canonical/runtime/terminal_minimum_information_cut_v4.py",
+  "tests":"canonical/tests/test_terminal_minimum_information_cut_v4.py",
+  "hard_nonclaims":[
+    "NO CLAIM ANY OF THE 28 TRUTHS IS CLOSED BY THIS PARTITION.",
+    "NO CLAIM AUTHENTICATED THRESHOLD VERDICTS ARE CURRENTLY AVAILABLE.",
+    "NO CLAIM THE TWO FINANCE HIDDEN ORACLE LEAVES HAVE BEEN EXECUTED.",
+    "NO CLAIM THE THREE MATCHED CASE UNIVERSES ARE CURRENTLY FINAL COMPLETE TERMINAL MANIFESTS.",
+    "NO CLAIM THE THREE RELATIVE SCOPE/QUALITY TRUTHS CAN BE CLOSED WITHOUT TARGET-RELATIVE INFORMATION.",
+    "NO TERMINAL ACCEPTANCE FAMILY CAPABILITY OWNERSHIP OR EXECUTION CREDIT."
+  ],
+  "accounting":{
+    "incremental_spend_usd":0,
+    "fresh_reality_units_consumed":0,
+    "terminal_credit_delta":0,
+    "acceptance_credit_delta":0,
+    "family_credit_delta":0,
+    "capability_credit_delta":0,
+    "ownership_credit_delta":0
+  },
+  "execution_authority":false,
+  "fresh_reality_authority":false,
+  "promotion_authority":false
+}
