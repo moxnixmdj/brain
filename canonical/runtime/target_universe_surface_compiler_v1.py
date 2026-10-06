@@ -79,6 +79,15 @@ def _validate_surface(
     if classification != "DEPLOYMENT_OR_INTERFACE_ONLY" and acceptance_state == "NOT_APPLICABLE":
         return SurfaceVerdict(sid, classification, False, "INTRINSIC_OR_CONDITION_SURFACE_REQUIRES_ACCEPTANCE_BASIS_STATE")
 
+    if acceptance_state in {"BASIS_BOUND_PARITY_OPEN", "BASIS_BOUND_PROVED"}:
+        basis_receipts = surface.get("acceptance_basis_receipts")
+        if not isinstance(basis_receipts, list) or not basis_receipts or not all(_binding(x) for x in basis_receipts):
+            return SurfaceVerdict(sid, classification, False, "CONTENT_ADDRESSED_ACCEPTANCE_BASIS_RECEIPTS_REQUIRED")
+    if acceptance_state == "BASIS_GAP":
+        gap_receipts = surface.get("acceptance_gap_receipts")
+        if not isinstance(gap_receipts, list) or not gap_receipts or not all(_binding(x) for x in gap_receipts):
+            return SurfaceVerdict(sid, classification, False, "CONTENT_ADDRESSED_ACCEPTANCE_GAP_RECEIPTS_REQUIRED")
+
     if classification == "INTRINSIC_FAMILY_UNION":
         families = surface.get("families")
         if not isinstance(families, list) or not families:
