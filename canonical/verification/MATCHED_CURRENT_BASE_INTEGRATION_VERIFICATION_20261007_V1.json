@@ -3,7 +3,8 @@
   "date": "2026-10-07",
   "status": "DIRECT_AUTHENTICATED_CURRENT_BASE_REPLAY_PASS__32_OF_32__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "tested_base_commit": "8323590becf8de2b8aeaea4c4028f2800a175bae",
+  "tested_base_commit": "2270b194e9d79a746cf5d0f7aa0f01e8e81995b0",
+  "replay_merge_commit": "99d7e9c802453782e2cb15692286f1a97eefc155",
   "shared_rollback_fix_ancestor": "9e78705d434613267b5e35e5906cafbf21cd6fd4",
   "carrier": {
     "class": "AUTHORIZED_REMOTE_DESKTOP_VERIFIER",
