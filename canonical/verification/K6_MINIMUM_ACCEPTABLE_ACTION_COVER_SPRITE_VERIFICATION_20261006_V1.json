@@ -1,0 +1,30 @@
+{
+  "schema":"PROJECT_BRAIN_K6_MINIMUM_ACCEPTABLE_ACTION_COVER_SPRITE_VERIFICATION_V1",
+  "date":"2026-10-06",
+  "status":"INDEPENDENT_SPRITE_EXACT_BLOB_PLUS_EXHAUSTIVE_FINITE_EQUIVALENCE_PASS__57164_MODELS__ZERO_TERMINAL_CREDIT",
+  "subject":{
+    "governance":{"path":"canonical/governance/K6_MINIMUM_ACCEPTABLE_ACTION_COVER_THEOREM_20261006_V1.json","git_blob_sha":"367b421c44b6f1ba6e6b7d865c836f5d8d7bddc8"},
+    "runtime":{"path":"canonical/runtime/k6_minimum_action_cover_v1.py","git_blob_sha":"9a8c0f6ec2778338188af027719379a918c87538"},
+    "predecessor":{"path":"canonical/governance/K6_TARGET_RELATIVE_DECISION_QUOTIENT_THEOREM_20261006_V1.json","git_blob_sha":"03baddc27d5ee9dd73656fdd801251e1f4fd8cc6"}
+  },
+  "independent_carrier":{
+    "provider":"SPRITES",
+    "sprite_name":"brain-h100-independent-replay-v1",
+    "sprite_id":"sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory":"/home/sprite/k6_action_cover_verify"
+  },
+  "verification":[
+    "EXACT_BRANCH_RUNTIME_SELF_CHECK_PASS",
+    "INDEPENDENT_PARTITION_ENUMERATOR_IMPLEMENTED_SEPARATELY_FROM_ACTION_COVER_ORACLE",
+    "ALL_NONEMPTY_ACCEPTABLE_ACTION_INCIDENCE_MODELS_FOR_ONE_TO_FOUR_WORLDS_AND_ONE_TO_FOUR_ACTIONS_CHECKED",
+    "57164_MODELS_CONFIRMED_MINIMUM_SUFFICIENT_PARTITION_CELL_COUNT_EQUALS_MINIMUM_ACCEPTABLE_ACTION_COVER_CARDINALITY"
+  ],
+  "consequence":"K6_FIXED_LENGTH_SEPARATOR_INFORMATION_NEED_ONLY_DISTINGUISH_MINIMUM_ACCEPTABLE_ACTION_COVER_MEMBERS__FULL_WORLD_IDENTIFICATION_IS_NOT_REQUIRED.",
+  "hard_nonclaims":[
+    "NO_CLAIM_ACCEPTABLE_ACTION_SETS_ARE_CURRENTLY_COMPLETE_FOR_ALL_TARGET_CONTEXTS",
+    "NO_CLAIM_EXACT_SET_COVER_IS_RESOURCE_EFFICIENT_AT_TERMINAL_SCALE",
+    "NO_CLAIM_K6_IS_SOLVED",
+    "NO_TERMINAL_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"fresh_reality_units_consumed":0,"terminal_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0}
+}
