@@ -1,0 +1,114 @@
+{
+  "case_count": 12,
+  "cases": [
+    {
+      "annotation_index": 3056,
+      "imgname": "OECD_GENERAL_GOVERNMENT_DEBT_BEL_ESP_ISR_PRT_USA_000022.png",
+      "query": "How many bar are there in the graph?",
+      "selection_hash": "10712898b74cd32a2f1339ff01d41d7eb3d2123e8436af3419b4c5c1a2a7ca72",
+      "split": "train_human"
+    },
+    {
+      "annotation_index": 3178,
+      "imgname": "OECD_TRUST_IN_GOVERNMENT_CZE_ISR_000010.png",
+      "query": "How many bars are in the chart?",
+      "selection_hash": "18014145252d2334ad0ac4e24a1df21cdd6d7f05a5ca7d5e8bead2bce0fd27ff",
+      "split": "train_human"
+    },
+    {
+      "annotation_index": 1496,
+      "imgname": "61762978006740.png",
+      "query": "How many bars are there in the chart?",
+      "selection_hash": "24e981b2ac7bd806ff2ffe9b193c725a8303a7aa321851f80d25fe92fbc86c1f",
+      "split": "train_human"
+    },
+    {
+      "annotation_index": 1022,
+      "imgname": "00309421021808.png",
+      "query": "How many color bar are shown in the graph?",
+      "selection_hash": "25fbafc7abfdec3c7ec08f58e67f9acb74b82b56d0aed52a4ac9db2e50bd8e32",
+      "split": "train_human"
+    },
+    {
+      "annotation_index": 1576,
+      "imgname": "82432236004935.png",
+      "query": "How many color bar are shown in the chart?",
+      "selection_hash": "2a156c765192d9cc8beeda4edba5198a3f1c62dcb7237492633e8aebd2301fc3",
+      "split": "train_human"
+    },
+    {
+      "annotation_index": 1016,
+      "imgname": "00035547003867.png",
+      "query": "How many bars are there in the graph?",
+      "selection_hash": "2efad883dc505e6ca1498e2be7330a49076d668c1ae3a8c504646cd9e229ec59",
+      "split": "train_human"
+    },
+    {
+      "annotation_index": 1506,
+      "imgname": "65032629000853.png",
+      "query": "How many color bars are used in the graph?",
+      "selection_hash": "31f56cc9903f017c8f8b3239d0a2fc6bd6b63b0762463a12d7492fd0a8de74f2",
+      "split": "train_human"
+    },
+    {
+      "annotation_index": 1296,
+      "imgname": "27162063002465.png",
+      "query": "How many bars are there in the graph?",
+      "selection_hash": "32c6641bcc32e1244a543e367faab20b3053cbf68715f072412b7358483431bc",
+      "split": "train_human"
+    },
+    {
+      "annotation_index": 3188,
+      "imgname": "OECD_WATER_WITHDRAWALS_BEL_KOR_LVA_NOR_ZAF_000023.png",
+      "query": "How many bars are there in the graph?",
+      "selection_hash": "3825f74de4690863622945a1e65b3b93276a6cceb75ca04f4660021d0a083353",
+      "split": "train_human"
+    },
+    {
+      "annotation_index": 3040,
+      "imgname": "OECD_EMPLOYMENT_RATE_BY_AGE_GROUP_AUT_CZE_DNK_EST_ITA_000018.png",
+      "query": "How many color bars are there in the graph?",
+      "selection_hash": "5efbd08b65532c63503a434a009b11cf3347353b3f074c2e91139a6d009cdb01",
+      "split": "train_human"
+    },
+    {
+      "annotation_index": 1084,
+      "imgname": "06424007002454.png",
+      "query": "How many bars are there in the chart?",
+      "selection_hash": "68be2e797b33544984643bd56d36fc261978c2c2ad0a2af1955421926a6ccc84",
+      "split": "train_human"
+    },
+    {
+      "annotation_index": 1384,
+      "imgname": "39504367003251.png",
+      "query": "How many bars are there in the graph?",
+      "selection_hash": "8466354a65eae0179b33776a216c320f571efa30593e2aa9bdb7b7d1e8334d5b",
+      "split": "train_human"
+    }
+  ],
+  "date": "2026-10-06",
+  "eligible_count": 26,
+  "images_opened": false,
+  "labels_exposed": false,
+  "runtime_frozen_before_selection": true,
+  "runtime_path": "canonical/runtime/h100_zero_learned_bar_count_v4.py",
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_BAR_COUNT_TRAIN_EXTERNAL_HOLDOUT_V4",
+  "selection_rule": "TRAIN_HUMAN_QUERY_ONLY__EXPLICIT_TOTAL_BAR_COUNT_REGEX__EXCLUDES_VALUE_FILTER_ARITHMETIC_CATEGORY_COLOR_COUNT_AND_COMPARISON__SORT_BY_SHA256_SALT",
+  "selection_salt": "H100_ZERO_LEARNED_BAR_COUNT_TRAIN_EXTERNAL_V4",
+  "source_annotation_sha256": "4eaaa03e406dbbbe43caff925dbec9930b87fadba960f1c2ab30a5def287c384",
+  "source_revision": "044eabfc306abfe9340c5741f0093aefc5973d06",
+  "status": "FROZEN_IDENTITIES_ONLY__LABELS_AND_IMAGES_UNOPENED_AT_SELECTION",
+  "pass_gate": {
+    "required_exact_count_correct": 12,
+    "total_cases": 12,
+    "abstention_counts_as_incorrect": true,
+    "persistent_learned_bytes_must_equal": 0,
+    "pretrained_vision_models_must_equal": 0,
+    "ocr_models_must_equal": 0
+  },
+  "hard_nonclaims": [
+    "DATASET_SPLIT_IS_NAMED_TRAIN_BUT_IS_FRESH_EXTERNAL_VALIDATION_RELATIVE_TO_THIS_DECODER",
+    "BAR_COUNT_ONLY_NOT_GENERAL_CHART_QA",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
