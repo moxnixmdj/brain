@@ -12,7 +12,7 @@ H2 = "2" * 64
 
 
 def row(path, sha, size, *, persistent=True, capability=True, learned=False, category="X"):
-    return {
+    out = {
         "path": path,
         "sha256": sha,
         "byte_count": size,
@@ -21,6 +21,10 @@ def row(path, sha, size, *, persistent=True, capability=True, learned=False, cat
         "learned": learned,
         "category": category,
     }
+    if persistent and not capability:
+        out["noncapability_role_verified"] = True
+        out["noncapability_role_receipt_sha256"] = "f" * 64
+    return out
 
 
 def test_nonreacquirable_restart_cut_requires_persistent_bits():
@@ -112,6 +116,25 @@ def test_learned_artifact_must_be_capability_bearing():
         assert str(exc) == "LEARNED_ARTIFACT_MUST_BE_CAPABILITY_BEARING"
     else:
         raise AssertionError("expected fail-closed artifact classification")
+
+
+def test_persistent_noncapability_without_role_receipt_fails_closed():
+    before = [row("kernel.py", H0, 4096, category="FROZEN_KERNEL")]
+    bad = [{
+        "path": "claimed_facts.json",
+        "sha256": H2,
+        "byte_count": 1000,
+        "persistent": True,
+        "capability_bearing": False,
+        "learned": False,
+        "category": "RAW_TASK_KNOWLEDGE",
+    }]
+    try:
+        strong_bytes_accounting(before, before + bad)
+    except BytesResearchError as exc:
+        assert str(exc) == "PERSISTENT_NONCAPABILITY_ROLE_NOT_INDEPENDENTLY_VERIFIED"
+    else:
+        raise AssertionError("expected fail-closed role-classification guard")
 
 
 def test_reference_cases_pass():
