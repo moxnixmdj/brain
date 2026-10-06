@@ -44,7 +44,14 @@ def test_scope_compiler_rejects_self_certified_rehearsal_manifest():
     assert "COVERAGE_NOT_VERIFIED" in out["errors"][0]
 
 
-def test_scope_compiler_accepts_only_explicit_external_coverage_binding():
+def test_no_cross_case_history_is_embedded_in_initial_state():
+    rows = generate_cases("REHEARSAL_COMMITMENT", "REHEARSAL_BEACON")
+    assert all(row["case_initial_state"]["cross_case_memory"] is None for row in rows)
+    assert all(row["case_initial_state"]["result_history"] == [] for row in rows)
+    assert len({row["case_initial_state"]["mutable_namespace"] for row in rows}) == 64
+
+
+def test_scope_input_has_no_caller_authority_to_mark_coverage_verified():
     doc = scope_input(
         "REHEARSAL_COMMITMENT",
         "REHEARSAL_BEACON",
@@ -53,17 +60,12 @@ def test_scope_compiler_accepts_only_explicit_external_coverage_binding():
         brain_commit_sha=A40,
         tool_authority_sha256=A64,
         target_interface_sha256=B64,
-        coverage_rule_verified=True,
-        coverage_rule_verification_sha256=A64,
     )
-    out = compile_scope(doc)
-    assert out["status"] == "PASS__FINITE_COMPLETE_CONTENT_ADDRESSED_MATCHED_SUCCESS_SCOPE"
-    assert out["case_count"] == 64
-    assert out["required_atom_count"] == 16
-    assert out["coverage_complete"] is True
-
-def test_no_cross_case_history_is_embedded_in_initial_state():
-    rows = generate_cases("REHEARSAL_COMMITMENT", "REHEARSAL_BEACON")
-    assert all(row["case_initial_state"]["cross_case_memory"] is None for row in rows)
-    assert all(row["case_initial_state"]["result_history"] == [] for row in rows)
-    assert len({row["case_initial_state"]["mutable_namespace"] for row in rows}) == 64
+    assert all(
+        case["coverage"]["independently_verified"] is False
+        for case in doc["cases"]
+    )
+    assert all(
+        case["coverage"]["receipt_sha256"] == "0" * 64
+        for case in doc["cases"]
+    )
