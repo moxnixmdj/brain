@@ -99,17 +99,47 @@ def compile_surface(source: str) -> dict[str, Any]:
     duplicate_types = sorted({
         x for x in action_types if action_types.count(x) > 1
     })
+
+    _mi_start, _mi_end, mi_body = _function_slice(
+        lines, "_run_model_independent_goal"
+    )
+    mi_text = "\n".join(mi_body)
+    allowed_match = re.search(r"allowed_types=\\{(.*?)\\}", mi_text, re.S)
+    if allowed_match is None:
+        allowed_types: set[str] = set()
+    else:
+        allowed_types = set(re.findall(r'"([^"]+)"', allowed_match.group(1)))
+
+    branch_set = set(action_types)
+    missing_handlers = sorted(allowed_types - branch_set)
+    handlers_not_allowed = sorted(branch_set - allowed_types)
+
     status = "PASS__DIRECT_SYNTACTIC_CHANNEL_SURFACE_COMPILED"
     errors: list[str] = []
     if duplicate_types:
-        status = "FAIL_CLOSED"
         errors.append("DUPLICATE_ACTION_TYPES:" + ",".join(duplicate_types))
+    if not allowed_types:
+        errors.append("ALLOWED_TYPE_SET_NOT_FOUND")
+    if missing_handlers:
+        errors.append("ALLOWED_TYPE_WITHOUT_HANDLER:" + ",".join(missing_handlers))
+    if handlers_not_allowed:
+        errors.append("HANDLER_NOT_IN_ALLOWED_SET:" + ",".join(handlers_not_allowed))
+    if errors:
+        status = "FAIL_CLOSED"
 
     return {
         "schema": SCHEMA,
         "status": status,
         "errors": errors,
         "action_count": len(rows),
+        "allowed_type_count": len(allowed_types),
+        "allowed_types_match_handlers": (
+            bool(allowed_types)
+            and not missing_handlers
+            and not handlers_not_allowed
+        ),
+        "missing_handlers": missing_handlers,
+        "handlers_not_allowed": handlers_not_allowed,
         "rows": rows,
         "channel_counts": counts,
         "scope": "DIRECT_SYNTACTIC_PRIMITIVES_IN_TOP_LEVEL_GOAL_ACTION_BRANCHES",
