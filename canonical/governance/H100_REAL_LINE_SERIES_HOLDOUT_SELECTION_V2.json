@@ -1,0 +1,24 @@
+{
+  "schema": "H100_REAL_LINE_SERIES_HOLDOUT_SELECTION_V2",
+  "date": "2026-10-06",
+  "cases": [
+    [
+      "V2H_255",
+      "OECD_CRUDE_OIL_IMPORT_PRICES_PRT_000090.png"
+    ],
+    [
+      "V2H_429",
+      "OECD_DAILY_SMOKERS_CZE_IRL_LUX_LVA_SVN_000004.png"
+    ],
+    [
+      "V2H_457",
+      "OECD_SOCIAL_SPENDING_ISR_NZL_000089.png"
+    ],
+    [
+      "V2H_449",
+      "OECD_NET_CHILDCARE_COSTS_CAN_000005.png"
+    ]
+  ],
+  "detector_spec": "canonical/governance/H100_GENERIC_LINE_SERIES_DETECTOR_V2_PRECOMMIT.json",
+  "promotion_authority": false
+}
