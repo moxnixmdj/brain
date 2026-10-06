@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_BAR_COUNT_PRECOMMIT_V2",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__POST_V1_FAILURE_REPAIR__NEW_FRESH_HOLDOUT_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "predecessor": {
+    "runtime": "canonical/runtime/h100_zero_learned_bar_count_v1.py",
+    "failure_receipt": "canonical/verification/H100_ZERO_LEARNED_BAR_COUNT_FRESH_HOLDOUT_V1_FAILURE_20261006.json",
+    "result": "1_OF_3_EXACT"
+  },
+  "justified_repairs": [
+    {
+      "failure": "TWO_PIXEL_GRIDLINE_STRIPES_MISCLASSIFIED_AS_VERTICAL_BARS",
+      "repair": "DYNAMIC_MINIMUM_BAND_THICKNESS_MAX_4_PIXELS_OR_0_8_PERCENT_OF_AXIS_DIMENSION"
+    },
+    {
+      "failure": "TWO_REAL_BARS_OF_DIFFERENT_COLORS_FAILED_PER_COLOR_MINIMUM_COUNT",
+      "repair": "ALLOW_SINGLE_RECTANGLE_PER_COLOR_THEN_AGGREGATE_ACROSS_COLORS_BY_COMMON_BASELINE"
+    },
+    {
+      "failure": "REAL_BARS_OCCUPIED_ABOUT_28_PERCENT_OF_IMAGE_HEIGHT_AND_WERE_FILTERED_BY_25_PERCENT_CAP",
+      "repair": "RAISE_MAXIMUM_BAND_THICKNESS_TO_40_PERCENT_OF_AXIS_DIMENSION"
+    }
+  ],
+  "frozen_algorithm": {
+    "rgb_quantization_step": 16,
+    "minimum_color_chroma": 20,
+    "maximum_candidate_mean_brightness": 240,
+    "minimum_candidate_pixel_fraction": 0.0005,
+    "occupancy_threshold_fraction": 0.02,
+    "occupancy_threshold_min_pixels": 8,
+    "minimum_band_thickness": "MAX_4_PIXELS_OR_CEIL_0_008_TIMES_AXIS_DIMENSION",
+    "maximum_band_thickness_fraction": 0.4,
+    "minimum_orthogonal_span_fraction": 0.08,
+    "minimum_rectangle_density": 0.5,
+    "merge_duplicate_band_overlap_fraction": 0.55,
+    "common_baseline_tolerance_fraction": 0.035,
+    "horizontal_baseline": "LEFT_ENDPOINT",
+    "vertical_baseline": "BOTTOM_ENDPOINT",
+    "orientation_score": "GROUP_COUNT_TIMES_MEDIAN_SPAN_FRACTION_TIMES_MEDIAN_DENSITY",
+    "minimum_orientation_score": 0.15,
+    "output": "COUNT_OF_MERGED_RECTANGLES_IN_BEST_COMMON_BASELINE_GROUP_OR_ABSTAIN"
+  },
+  "development_cases": [
+    {
+      "id": "V2H_640",
+      "expected": 10,
+      "status": "EXACT"
+    },
+    {
+      "id": "V1_HOLDOUT_52",
+      "expected": 2,
+      "status": "NOW_DEVELOPMENT_EXACT"
+    },
+    {
+      "id": "V1_HOLDOUT_42",
+      "expected": 2,
+      "status": "NOW_DEVELOPMENT_EXACT"
+    },
+    {
+      "id": "V1_HOLDOUT_934",
+      "expected": 12,
+      "status": "NOW_DEVELOPMENT_EXACT"
+    }
+  ],
+  "learned_state": {
+    "persistent_learned_bytes": 0,
+    "pretrained_vision_models": 0,
+    "ocr_models": 0,
+    "external_learned_capability_calls": 0
+  },
+  "fresh_holdout_rule": "SELECT_NEW_PUBLIC_CHARTQA_TEST_SPLIT_CASES_BY_QUERY_TEXT_AND_CONTENT_HASH_ONLY_AFTER_RUNTIME_FREEZE__DO_NOT_READ_LABELS_OR_IMAGES_BEFORE_PRECOMMIT",
+  "hard_nonclaims": [
+    "FOUR_CONSUMED_DEVELOPMENT_CASES_ARE_NOT_CAPABILITY_EVIDENCE",
+    "BAR_COUNT_ONLY_NOT_GENERAL_CHART_QA",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
