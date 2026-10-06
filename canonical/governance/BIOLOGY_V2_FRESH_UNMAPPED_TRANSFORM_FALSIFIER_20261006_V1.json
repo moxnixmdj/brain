@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_BIOLOGY_V2_FRESH_UNMAPPED_TRANSFORM_FALSIFIER_V1",
+  "date": "2026-10-06",
+  "status": "TRUTH_REPAIR_CANDIDATE__BIOLOGY_V2_SEMANTIC_LOSSLESSNESS_FALSIFIED_BY_PUBLIC_OPUS55_BEHAVIOR_SHAPES__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "path": "canonical/governance/OPUS55_DOMAIN_BEHAVIORAL_QUOTIENT_MAPPING_V2.json",
+    "git_blob_sha": "7c46556425286166867d402a906c24ccf1b1e772",
+    "row": "BIOLOGY_RESEARCH_AND_DEVELOPMENT"
+  },
+  "current_v2_biology_decomposition": [
+    "scientific_hypothesis_and_evidence_work",
+    "multidisciplinary_reasoning",
+    "unfamiliar_ontology_or_mechanism_inference",
+    "grounded_synthesis",
+    "scope_and_safety_judgment",
+    "biomedical_image_perception_segmentation_detection_measurement_classification_registration_reconstruction_and_tracking"
+  ],
+  "fresh_public_behavior_evidence": [
+    {
+      "behavior": "PROTEIN_SEQUENCE_GENERATION_UNDER_FUNCTION_SHAPE_COMPACTNESS_AND_STRUCTURAL_MOTIF_CONSTRAINTS",
+      "source": "https://benchlm.ai/benchmarks/proteindesign",
+      "source_authority": "SECONDARY_PUBLIC_INDEX_ATTRIBUTING_PROVIDER_RESULT_TO_ANTHROPIC_OPUS55_SYSTEM_CARD__NOT_INDEPENDENT_TERMINAL_RESULT_AUTHORITY",
+      "support": "EXPLICIT_OPUS55_PROVIDER_REPORTED_PROTEIN_DESIGN_BEHAVIOR_SHAPE"
+    },
+    {
+      "behavior": "PROJECT_SPECIFIC_PROTEIN_LIBRARY_RANKING_FROM_WET_LAB_MEASUREMENTS_AND_SELECTION_OBJECTIVE",
+      "source": "https://benchlm.ai/benchmarks/proteindesignlibraryranking",
+      "source_authority": "SECONDARY_PUBLIC_INDEX_ATTRIBUTING_PROVIDER_RESULT_TO_ANTHROPIC_OPUS55_SYSTEM_CARD__NOT_INDEPENDENT_TERMINAL_RESULT_AUTHORITY",
+      "support": "EXPLICIT_OPUS55_PROVIDER_REPORTED_LIBRARY_RANKING_BEHAVIOR_SHAPE"
+    },
+    {
+      "behavior": "LONG_HORIZON_DE_NOVO_PROTEIN_BINDER_DESIGN_WITH_GPU_BASH_FILE_EDITOR_AND_SPECIALIZED_STRUCTURE_TOOLS",
+      "source": "https://benchlm.ai/benchmarks/proteinbinderdesign",
+      "source_authority": "SECONDARY_PUBLIC_INDEX_ATTRIBUTING_PROVIDER_RESULT_TO_ANTHROPIC_OPUS55_SYSTEM_CARD__NOT_INDEPENDENT_TERMINAL_RESULT_AUTHORITY",
+      "support": "EXPLICIT_OPUS55_PROVIDER_REPORTED_LONG_HORIZON_TOOL_USING_BIOMOLECULAR_DESIGN_BEHAVIOR_SHAPE"
+    },
+    {
+      "behavior": "MOLECULAR_BIOLOGY_PROTOCOL_TROUBLESHOOTING_WITH_DOCUMENT_CODE_AND_SEARCH_TOOLS",
+      "source": "https://benchlm.ai/benchmarks/protocolstroubleshooting",
+      "source_authority": "SECONDARY_PUBLIC_INDEX_ATTRIBUTING_PROVIDER_RESULT_TO_ANTHROPIC_OPUS55_SYSTEM_CARD__NOT_INDEPENDENT_TERMINAL_RESULT_AUTHORITY",
+      "support": "EXPLICIT_OPUS55_PROVIDER_REPORTED_PROTOCOL_TROUBLESHOOTING_BEHAVIOR_SHAPE"
+    },
+    {
+      "behavior": "DUAL_USE_RESEARCH_BIOLOGY_CAPABILITIES_ARE_A_REAL_OPUS55_DEPLOYMENT_SURFACE",
+      "source": "https://www.anthropic.com/transparency",
+      "source_authority": "PRIMARY_ANTHROPIC_PUBLIC_SOURCE",
+      "support": "ANTHROPIC_STATES_OPUS55_USES_EXPANDED_BIOLOGY_SAFEGUARDS_THAT_RESTRICT_DUAL_USE_RESEARCH_BIOLOGY_CAPABILITIES"
+    }
+  ],
+  "countermodel": {
+    "world_A": "SYSTEM_MATCHES_V2_LISTED_BIOLOGY_TRANSFORMS_BUT_CANNOT_GENERATE_A_PROTEIN_SEQUENCE_UNDER_EXPLICIT_STRUCTURAL_AND_FUNCTIONAL_CONSTRAINTS",
+    "world_B": "SYSTEM_MATCHES_THE_SAME_V2_LISTED_BIOLOGY_TRANSFORMS_AND_CAN_GENERATE_SUCH_A_SEQUENCE",
+    "indistinguishability_under_v2": "THE_TWO_SYSTEMS_CAN_BE_EQUAL_ON_EVERY_EXPLICIT_V2_BIOLOGY_DECOMPOSITION_LABEL",
+    "useful_behavior_difference": "THEY_DIFFER_ON_A_PUBLICLY_REPORTED_OPUS55_BIOLOGY_BEHAVIOR_SHAPE",
+    "conclusion": "THE_EXPLICIT_V2_BIOLOGY_DECOMPOSITION_IS_NOT_SEMANTICALLY_LOSSLESS"
+  },
+  "minimal_repair_candidate": {
+    "add_behavioral_transforms": [
+      "protein_sequence_generation_under_function_structure_topology_novelty_and_stability_constraints",
+      "protein_library_ranking_from_project_specific_experimental_measurements_and_selection_objectives",
+      "long_horizon_biomolecular_design_tool_orchestration_with_iterative_generation_prediction_scoring_and_filtering",
+      "molecular_biology_protocol_understanding_debugging_and_troubleshooting"
+    ],
+    "add_existing_family_candidates": [
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+    ],
+    "no_new_primitive_family_claimed": true,
+    "reason": "THE_NEW_BEHAVIOR_SHAPES_APPEAR_COMPOSABLE_FROM_EXISTING_SCIENTIFIC_REASONING_MULTI_TOOL_DISCOVERY_AND_RECOVERY_FAMILIES__BUT_LOSSLESSNESS_MUST_BE_RECHECKED_AFTER_REPAIR"
+  },
+  "G_route_effect": {
+    "biology_G_promotion": "REJECT_PENDING_REPAIR_AND_FRESH_RECHECK",
+    "reason": "CURRENT_V2_MAPPING_OMITS_OBSERVABLY_DISTINCT_TARGET_BEHAVIOR_SHAPES",
+    "after_repair_requirement": "RERUN_FRESH_UNMAPPED_TRANSFORM_SEARCH_AND_PROVE_CONTEXT_SAFE_TRANSFER_OR_KEEP_BIOLOGY_IN_U_OR_UNRESOLVED"
+  },
+  "source_boundary": {
+    "primary_source_facts": "ANTHROPIC_CONFIRMS_OPUS55_RESEARCH_BIOLOGY_CAPABILITY_SURFACE_AND_EXPANDED_BIOLOGY_SAFEGUARDS",
+    "secondary_source_facts": "SPECIFIC_OPUS55_BENCHMARK_BEHAVIOR_SHAPES_AND_PROVIDER_REPORTED_RESULTS",
+    "hard_rule": "SECONDARY_PROVIDER_INDEX_EVIDENCE_MAY_FALSIFY_AN_UNDERCOMPLETE_BEHAVIOR_DECOMPOSITION_BUT_MUST_NOT_BY_ITSELF_GRANT_TERMINAL_PARITY_OR_SCORE_CREDIT"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "astra_access_consumed": 0,
+    "truth_obligations_deleted": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_SECONDARY_PROVIDER_REPORTED_SCORES_ARE_INDEPENDENTLY_VERIFIED",
+    "NO_CLAIM_A_NEW_PRIMITIVE_CAPABILITY_FAMILY_IS_REQUIRED",
+    "NO_CLAIM_THE_MINIMAL_REPAIR_IS_SEMANTICALLY_LOSSLESS",
+    "NO_G_ROUTE_PROMOTION",
+    "NO_TERMINAL_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ]
+}
