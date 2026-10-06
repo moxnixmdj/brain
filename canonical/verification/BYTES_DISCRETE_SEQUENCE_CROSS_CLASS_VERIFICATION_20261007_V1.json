@@ -41,6 +41,32 @@
     "FINITE_FROZEN_DSL_ONLY",
     "NO_CLAIM_1267_SOURCE_BYTES_OR_657_PAYLOAD_BYTES_IS_MINIMAL",
     "NO_SELF_CONTAINED_RUNTIME_CLAIM",
-    "NO_OPEN_WORLD_K6R_OPUS55_OR_TERMINAL_CREDIT"
-  ]
+    "NO_OPEN_WORLD_K6R_OPUS55_OR_TERMINAL_CREDIT",
+    "TWO_CLASSES_DO_NOT_ESTABLISH_UNIVERSAL_CAPABILITY_COMPRESSION"
+  ],
+  "depth_separator_control": {
+    "depth_2_all_pass": false,
+    "failing_tasks": [
+      "SEQ_V1_T5",
+      "SEQ_V1_T7"
+    ],
+    "interpretation": "THE_FROZEN_SUITE_IS_NOT_FULLY_SOLVABLE_BY_THE_SHALLOWER_DEPTH2_SEARCH_CLASS"
+  },
+  "representation_frontier": {
+    "bz2_9_bytes": 657,
+    "tested_lzma1_configurations": 15000,
+    "best_fixed_decoder_payload_bytes": 571,
+    "best_filter": {
+      "dict_size": 4096,
+      "lc": 0,
+      "lp": 0,
+      "pb": 0,
+      "mode": "NORMAL",
+      "match_finder": "HC3",
+      "nice_len": 16
+    },
+    "exact_roundtrip": true,
+    "decoder_boundary": "FIXED_EXTERNAL_LZMA1_DECODER_AND_FILTER_CONFIGURATION__SELF_CONTAINED_ACCOUNTING_MUST_ADD_DECODER_AND_CONFIGURATION_BYTES"
+  },
+  "cross_class_conclusion": "ZERO_INCREMENTAL_DURABLE_CAPABILITY_BYTES_AND_TINY_FROZEN_KERNELS_HAVE_NOW_BEEN_PROSPECTIVELY_DEMONSTRATED_IN_TWO_STRUCTURALLY_DIFFERENT_CLASSES__CONTINUOUS_NUMERIC_EXPRESSION_SYNTHESIS_AND_DISCRETE_VARIABLE_LENGTH_SEQUENCE_PROGRAM_SYNTHESIS"
 }
