@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_TARGET_UNIVERSE_UNREPRESENTED_BEHAVIOR_FALSIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "COUNTEREXAMPLE_FOUND__CURRENT_LITERAL_UNIVERSE_COMPLETENESS_ROUTE_FALSIFIED__REPAIRED_SUCCESSOR_REQUIRED__ZERO_CREDIT",
+  "target_claim_id": "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2",
+  "falsifier_class": "UNREPRESENTED_USEFUL_BEHAVIOR",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authoritative_primary_source": {
+    "provider": "Anthropic",
+    "url": "https://www.anthropic.com/claude-opus-5-5",
+    "publication_date": "2026-09-22",
+    "observed_on": "2026-10-06",
+    "observed_fact": "Anthropic describes Opus 5.5 as more resistant than Opus 5 to prompt injection and less likely to act outside given boundaries or take hard-to-reverse actions.",
+    "role": "PRIMARY_PROVIDER_EVIDENCE_OF_A_USEFUL_CROSS_CUTTING_OPUS55_BEHAVIOR"
+  },
+  "canonical_inputs": {
+    "semantic_law": {
+      "path": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+      "git_blob_sha": "5b70ed776f13194ea02d7df1d878a88386a48b61",
+      "operative_rule": "FAMILY_LABELS_ARE_ACCOUNTING_ONLY__MATERIAL_CAPABILITY_REQUIRES_EXPLICIT_OBSERVABLE_BEHAVIOR_CONTRACT"
+    },
+    "current_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+      "active_contract_count": 12
+    },
+    "prior_completeness_receipt": {
+      "path": "canonical/verification/BEHAVIOR_CONTRACT_COMPLETENESS_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "2df68d42925a3504aaca1d0ad63358d13ec9cf45",
+      "scope": "STRUCTURAL_MAPPING_COMPLETENESS_FOR_THE_THEN_CURRENT_17_OPEN_FAMILY_ENVELOPE"
+    },
+    "family_manifest": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "bcf12c8845e90e6bfdd689458586bdebd59824a3",
+      "relevant_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "family_target_behavior": "Follow complex instructions, stay within authorization/scope, resolve routine ambiguity and adapt when requirements change.",
+      "semantic_class_boundary": "THE_FAMILY_IS_AN_ACCOUNTING_SURFACE__ITS_LABEL_OR_BROAD_TARGET_TEXT_CANNOT_SUBSTITUTE_FOR_A_MEASURABLE_BEHAVIORAL_LEAF"
+    },
+    "current_control_loop": {
+      "path": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V1.json",
+      "git_blob_sha": "f68c6ad22d1d907dc4348712b182660d710f7055"
+    },
+    "repaired_leaf_candidate": {
+      "path": "canonical/governance/OPUS55_UNTRUSTED_INSTRUCTION_RESISTANCE_BEHAVIOR_CONTRACT_20261006_V1.json",
+      "git_blob_sha": "ea184b4cb7f8f7834b39ce31af8b2921247d2e92"
+    }
+  },
+  "falsification_argument": [
+    "THE_PRIMARY_PROVIDER_IDENTIFIES_ADVERSARIAL_UNTRUSTED_INSTRUCTION_RESISTANCE_AND_BOUNDARY_PRESERVATION_AS_A_MATERIAL_OPUS55_BEHAVIOR.",
+    "THE_ACTIVE_12_CONTRACT_REGISTRY_HAS_NO_EXPLICIT_BEHAVIORAL_LEAF_WHOSE_INPUTS_AND_REQUIRED_ACTION COVER_LOWER_AUTHORITY_EMBEDDED_INSTRUCTIONS_AND_AUTHORITY_PRESERVING_CONTINUATION.",
+    "THE_EXISTING_INSTRUCTION_FOLLOWING_FAMILY_NAME_AND_BROAD_TARGET_TEXT_CANNOT_FILL_THAT_GAP_BECAUSE_THE_CANONICAL_SEMANTIC_LAW_CLASSIFIES_FAMILY_LABELS_AS_ACCOUNTING_ONLY.",
+    "THEREFORE_THE_PRIOR_STRUCTURAL_CONTRACT_COMPLETENESS_RECEIPT_CANNOT_ESTABLISH_LITERAL_ALL_USEFUL_OPUS55_TARGET_UNIVERSE_COMPLETENESS.",
+    "A_SINGLE_UNREPRESENTED_USEFUL_BEHAVIOR_IS_A_COUNTEREXAMPLE_TO_THE_CURRENT_COMPLETENESS_ROUTE."
+  ],
+  "adjudication": {
+    "current_route_status": "FALSIFIED",
+    "route_scheduling_value_until_repair": 0,
+    "terminal_ready": false,
+    "prior_known_open_truth_obligation_count_preserved": 32,
+    "count_note": "THIS_IS_A_TARGET_UNIVERSE_SPECIFICATION_COUNTEREXAMPLE__IT_DOES_NOT_YET_ASSERT_A_NEW_ATOMIC_OR_META_ACCEPTANCE_PREDICATE__THE_REPAIRED_SUCCESSOR_MUST_MAP_THE_LEAF_AND_RECOMPUTE.",
+    "repaired_successor_required": true,
+    "proposed_successor_id": "C_TARGET_UNIVERSE_PRIMARY_SOURCE_LEAF_CLOSURE_V3"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_BRAIN_HAS_ZERO_PROMPT_INJECTION_RESISTANCE",
+    "NO_CLAIM_THE_NEW_CONTRACT_IS_PROVED_OR_OWNED",
+    "NO_CLAIM_THIS_IS_THE_ONLY_MISSING_USEFUL_OPUS55_BEHAVIOR",
+    "NO_ATOMIC_META_FAMILY_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_TERMINAL_CASES_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
