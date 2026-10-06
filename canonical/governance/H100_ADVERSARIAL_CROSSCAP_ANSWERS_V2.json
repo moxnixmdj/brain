@@ -1,0 +1,111 @@
+{
+  "answers": [
+    {
+      "compare_fields": [
+        "status",
+        "solutions"
+      ],
+      "expected": {
+        "solutions": [
+          {
+            "a": 1,
+            "b": 2
+          }
+        ],
+        "status": "UNIQUE"
+      },
+      "id": "AR1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "predictions"
+      ],
+      "expected": {
+        "predictions": [
+          65,
+          126
+        ],
+        "status": "PROGRAM_FOUND"
+      },
+      "id": "AC1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "inputs",
+        "target"
+      ],
+      "expected": {
+        "inputs": [
+          "x"
+        ],
+        "status": "ROLES_IDENTIFIED",
+        "target": "y"
+      },
+      "id": "AL1"
+    },
+    {
+      "compare_fields": [
+        "component_count"
+      ],
+      "expected": {
+        "component_count": 2
+      },
+      "id": "AV1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "tool_ids"
+      ],
+      "expected": {
+        "status": "UNIQUE",
+        "tool_ids": [
+          "AUDIT_WRITER"
+        ]
+      },
+      "id": "AT1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "plan"
+      ],
+      "expected": {
+        "plan": [
+          "take_key",
+          "duplicate_key",
+          "open_gate",
+          "restore_key"
+        ],
+        "status": "PLAN_FOUND"
+      },
+      "id": "AP1"
+    },
+    {
+      "compare_fields": [
+        "history_max"
+      ],
+      "expected": {
+        "history_max": 9
+      },
+      "id": "AM1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "predictions"
+      ],
+      "expected": {
+        "predictions": [
+          -1.5366692041541092,
+          2.0633307958458906
+        ],
+        "status": "LIBRARY_HIT__VERIFY_BEFORE_USE"
+      },
+      "id": "AN1"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_H100_ADVERSARIAL_CROSSCAP_ANSWERS_V2"
+}
