@@ -8,6 +8,7 @@ from canonical.runtime.matched_success_integrated_extension_v1 import generate_c
 from canonical.runtime.matched_success_semantic_coupling_contract_v3 import (
     INPUT_SCHEMA as V3_INPUT_SCHEMA,
 )
+from canonical.runtime.matched_success_public_projection_v1 import public_component
 
 Agent = Callable[[str, Mapping[str, Any], Mapping[str, Any]], Mapping[str, Any]]
 
@@ -111,7 +112,7 @@ def _scalar_leaves(value: Any, path: str = "$") -> list[tuple[str, Any]]:
 def _semantic_source(generated_case: Mapping[str, Any]) -> Any:
     body = generated_case["case_payload"]["payload"]
     first_component = body["components"][0]
-    public = first_component["case"]
+    public = public_component(first_component)
     leaves = _scalar_leaves(public)
     if not leaves:
         raise ValueError("NO_SCALAR_SEMANTIC_SOURCE")
