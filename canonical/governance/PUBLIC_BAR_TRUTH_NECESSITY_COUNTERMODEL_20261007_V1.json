@@ -1,0 +1,44 @@
+{
+  "schema":"PROJECT_BRAIN_PUBLIC_BAR_TRUTH_NECESSITY_COUNTERMODEL_V1",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_TRUTH_BASIS_REPAIR__ZERO_CREDIT",
+  "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority":{
+    "transmutation_compiler":"canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_COMPILER_V1.json",
+    "runtime":"canonical/runtime/acceptance_proof_transmuter_v1.py"
+  },
+  "claim_under_test":"A_PUBLIC_FIXED_BAR_THRESHOLD_PASS_IS_AN_INDEPENDENTLY_NECESSARY_TERMINAL_TRUTH_WHEN_THE_FROZEN_FAMILY_PROTOCOL_NAMES_THAT_BAR",
+  "countermodel":{
+    "family_protocol":"PUBLIC_FIXED_BAR",
+    "bar_execution_performed":false,
+    "bar_threshold_pass_truth_unestablished":true,
+    "alternative_witness":{
+      "mode":"UNIVERSAL",
+      "verified":true,
+      "independent":true,
+      "contamination_clean":true,
+      "binds_frozen_protocol":true,
+      "scope_relation":"PROVEN_STRONGER",
+      "closes_entire_protocol":true,
+      "result":{"all_admissible_inputs_proved":true,"formal_completeness":true}
+    },
+    "compiler_rule":"UNIVERSAL full-scope witness closes the unchanged protocol before PUBLIC_FIXED_BAR in proof priority.",
+    "result":"FAMILY_PROTOCOL_CAN_BE_CLOSED_WITHOUT_PUBLIC_BAR_EXECUTION_OR_THRESHOLD_PASS_AS_THE_CLOSING_WITNESS"
+  },
+  "logical_conclusion":"PUBLIC_FIXED_BAR_LEAVES_ARE_PROOF_ROUTE_WITNESSES_NOT_INDEPENDENT_TERMINAL_TRUTHS. THE LOAD_BEARING TERMINAL TRUTH IS FULL_FROZEN_PROTOCOL_CLOSURE_BY_ANY_ADMISSIBLE_STRONG_ENOUGH WITNESS.",
+  "preserves":[
+    "THE_FROZEN_FAMILY_ACCEPTANCE_PROTOCOL",
+    "SCOPE_EXACT_OR_PROVEN_STRONGER",
+    "INDEPENDENT_VERIFICATION",
+    "CONTAMINATION_CLEANLINESS",
+    "BRAIN_OWNED_EXECUTION",
+    "ALL_LOAD_BEARING_CAPABILITY_SEMANTICS"
+  ],
+  "reopen_rule":"A_BAR_BECOMES_AN_INDEPENDENT_TERMINAL_TRUTH_ONLY_IF CURRENT AUTHORITY PROVES THE NUMERIC BAR ITSELF IS A NONSUBSTITUTABLE TERMINAL PROPERTY RATHER THAN AN ACCEPTANCE WITNESS.",
+  "hard_nonclaims":[
+    "NO CURRENT PUBLIC_BAR FAMILY IS CLOSED BY THIS COUNTERMODEL",
+    "NO CLAIM A UNIVERSAL WITNESS EXISTS FOR ANY CURRENT OPEN FAMILY",
+    "NO TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
