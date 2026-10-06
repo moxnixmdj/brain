@@ -29,7 +29,7 @@ def test_different_beacon_changes_case_payloads():
     assert [x["case_id"] for x in a] == [x["case_id"] for x in b]
     assert [x["case_payload_sha256"] for x in a] != [x["case_payload_sha256"] for x in b]
 
-def test_scope_compiler_accepts_rehearsal_manifest_shape():
+def test_scope_compiler_rejects_self_certified_rehearsal_manifest():
     doc = scope_input(
         "REHEARSAL_COMMITMENT",
         "REHEARSAL_BEACON",
@@ -38,6 +38,23 @@ def test_scope_compiler_accepts_rehearsal_manifest_shape():
         brain_commit_sha=A40,
         tool_authority_sha256=A64,
         target_interface_sha256=B64,
+    )
+    out = compile_scope(doc)
+    assert out["status"] == "FAIL_CLOSED"
+    assert "COVERAGE_NOT_VERIFIED" in out["errors"][0]
+
+
+def test_scope_compiler_accepts_only_explicit_external_coverage_binding():
+    doc = scope_input(
+        "REHEARSAL_COMMITMENT",
+        "REHEARSAL_BEACON",
+        generator_git_blob_sha=A40,
+        scorer_git_blob_sha=B40,
+        brain_commit_sha=A40,
+        tool_authority_sha256=A64,
+        target_interface_sha256=B64,
+        coverage_rule_verified=True,
+        coverage_rule_verification_sha256=A64,
     )
     out = compile_scope(doc)
     assert out["status"] == "PASS__FINITE_COMPLETE_CONTENT_ADDRESSED_MATCHED_SUCCESS_SCOPE"
