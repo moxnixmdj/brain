@@ -58,9 +58,9 @@ def probe() -> dict:
             d = Path(td)
             (d / "a").write_text("x", encoding="utf-8")
             shell = (
-                "mount --bind "$1" "$1" && "
-                "mount -o remount,bind,ro "$1" && "
-                "touch "$1/b""
+                'mount --bind "$1" "$1" && '
+                'mount -o remount,bind,ro "$1" && '
+                'touch "$1/b"'
             )
             p = run([unshare, "-Urm", "sh", "-c", shell, "sh", str(d)])
             checks["readonly_bind_blocks_write"] = p.returncode != 0
