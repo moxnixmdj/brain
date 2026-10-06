@@ -1,0 +1,168 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U0_VISION_BAR_FRESH_HOLDOUT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_U0_TARGET_PROGRAM_IMPLEMENTATION_AND_OUTCOMES",
+  "reference_machine": "H100_U0_PYCORE_3137_V1",
+  "public_solver_input": "ROWS_ONLY",
+  "evaluator_private": [
+    "gold"
+  ],
+  "tasks": [
+    {
+      "id": "U0_VISION_VC1",
+      "public_input": {
+        "rows": [
+          ".....................................",
+          ".....................................",
+          ".....................................",
+          ".....................................",
+          ".....................................",
+          ".....................................",
+          ".....................................",
+          ".....................................",
+          ".....................................",
+          ".....................................",
+          "..........BBBBB......................",
+          "..........BBBBB......................",
+          "..........BBBBB......................",
+          "..........BBBBB..............DDDDDD..",
+          "..........BBBBB..............DDDDDD..",
+          "..........BBBBB..............DDDDDD..",
+          "..AAA.....BBBBB..............DDDDDD..",
+          "..AAA.....BBBBB..............DDDDDD..",
+          "..AAA.....BBBBB......CCC.....DDDDDD..",
+          "..AAA.....BBBBB......CCC.....DDDDDD..",
+          "..AAA.....BBBBB......CCC.....DDDDDD..",
+          "..AAA.....BBBBB......CCC.....DDDDDD..",
+          "....................................."
+        ]
+      },
+      "gold": {
+        "orientation": "vertical",
+        "bar_count": 4,
+        "values": [
+          6,
+          12,
+          4,
+          9
+        ]
+      }
+    },
+    {
+      "id": "U0_VISION_HC1",
+      "public_input": {
+        "rows": [
+          "000000000000000000000000000000000000000",
+          "000000000000000000000000000000000000000",
+          "007777770000000000000000000000000000000",
+          "007777770000000000000000000000000000000",
+          "000000000000000000000000000000000000000",
+          "000000000000000000000000000000000000000",
+          "000000000000000000000000000000000000000",
+          "008888888888888800000000000000000000000",
+          "008888888888888800000000000000000000000",
+          "008888888888888800000000000000000000000",
+          "000000000000000000000000000000000000000",
+          "000000000000000000000000000000000000000",
+          "000000000000000000000000000000000000000",
+          "009999999990000000000000000000000000000",
+          "009999999990000000000000000000000000000",
+          "000000000000000000000000000000000000000",
+          "000000000000000000000000000000000000000",
+          "000000000000000000000000000000000000000",
+          "006666666666666666600000000000000000000",
+          "006666666666666666600000000000000000000",
+          "006666666666666666600000000000000000000",
+          "000000000000000000000000000000000000000",
+          "000000000000000000000000000000000000000",
+          "000000000000000000000000000000000000000"
+        ]
+      },
+      "gold": {
+        "orientation": "horizontal",
+        "bar_count": 4,
+        "values": [
+          6,
+          14,
+          9,
+          17
+        ]
+      }
+    },
+    {
+      "id": "U0_VISION_VC2",
+      "public_input": {
+        "rows": [
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxx33333xxxxxxxxxxxx",
+          "xxxxxxxxxxxxxx33333xxxxxxxxxxxx",
+          "xxxxxxxxxxxxxx33333xxxxxxxxxxxx",
+          "x111xxxxxxxxxx33333xxxxxxxxxxxx",
+          "x111xxxxxxxxxx33333xxxxxxxxxxxx",
+          "x111xxxxxxxxxx33333xxxxxxxxxxxx",
+          "x111xxxxxxxxxx33333xxxxxxxxxxxx",
+          "x111xxxxxxxxxx33333xxxxxxxxxxxx",
+          "x111xxxx22xxxx33333xxxxxxxxxxxx",
+          "x111xxxx22xxxx33333xxxxxxxxxxxx",
+          "x111xxxx22xxxx33333xxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        ]
+      },
+      "gold": {
+        "orientation": "vertical",
+        "bar_count": 3,
+        "values": [
+          8,
+          3,
+          11
+        ]
+      }
+    },
+    {
+      "id": "U0_VISION_HC2",
+      "public_input": {
+        "rows": [
+          "                                          ",
+          "                                          ",
+          "                                          ",
+          "  QQQQQQQQQQ                              ",
+          "  QQQQQQQQQQ                              ",
+          "                                          ",
+          "                                          ",
+          "                                          ",
+          "  RRRRR                                   ",
+          "  RRRRR                                   ",
+          "  RRRRR                                   ",
+          "                                          ",
+          "                                          ",
+          "                                          ",
+          "  SSSSSSSSSSSSSSSS                        ",
+          "  SSSSSSSSSSSSSSSS                        ",
+          "                                          ",
+          "                                          ",
+          "                                          ",
+          "                                          ",
+          "                                          "
+        ]
+      },
+      "gold": {
+        "orientation": "horizontal",
+        "bar_count": 3,
+        "values": [
+          10,
+          5,
+          16
+        ]
+      }
+    }
+  ],
+  "gate": "4_OF_4_EXACT",
+  "target_program_measure": "CANONICAL_AST_DUMP_UTF8_BITS",
+  "promotion_authority": false
+}
