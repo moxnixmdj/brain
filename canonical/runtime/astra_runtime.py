@@ -6631,4 +6631,11 @@ def main():
     print(json.dumps(receipt)); return 0
 
 if __name__=="__main__":
+    from canonical.runtime import root3_subprocess_mediator_v2 as _root3_process_mediator
+    _root3_process_status=_root3_process_mediator.status()
+    if (
+        _root3_process_status.get("run_guard_active") is not True
+        or _root3_process_status.get("popen_guard_active") is not True
+    ):
+        raise SystemExit("ROOT3_PRODUCTION_BOOTSTRAP_REQUIRED")
     raise SystemExit(main())
