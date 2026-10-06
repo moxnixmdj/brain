@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_CALIBRATION_FRESH_HOLDOUT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_PROGRAM_PRECOMMIT_BEFORE_EXECUTION_OUTCOMES",
+  "program_precommit": "canonical/governance/H100_U1_CALIBRATION_PROGRAM_PRECOMMIT_V1.json",
+  "cases": [
+    {
+      "input": [
+        2,
+        3,
+        4
+      ],
+      "gold": [
+        10
+      ]
+    },
+    {
+      "input": [
+        10,
+        11,
+        12
+      ],
+      "gold": [
+        25
+      ]
+    },
+    {
+      "input": [
+        -5,
+        7,
+        3
+      ],
+      "gold": [
+        65
+      ]
+    },
+    {
+      "input": [
+        123,
+        456,
+        789
+      ],
+      "gold": [
+        35
+      ]
+    },
+    {
+      "input": [
+        0,
+        999,
+        -1
+      ],
+      "gold": [
+        96
+      ]
+    },
+    {
+      "input": [
+        -20,
+        -30,
+        40
+      ],
+      "gold": [
+        58
+      ]
+    },
+    {
+      "input": [
+        97,
+        97,
+        97
+      ],
+      "gold": [
+        0
+      ]
+    },
+    {
+      "input": [
+        1,
+        -1,
+        1
+      ],
+      "gold": [
+        0
+      ]
+    },
+    {
+      "input": [
+        31415,
+        2718,
+        1618
+      ],
+      "gold": [
+        40
+      ]
+    },
+    {
+      "input": [
+        -999,
+        333,
+        -777
+      ],
+      "gold": [
+        42
+      ]
+    }
+  ],
+  "required_pass": "10_OF_10_EXACT",
+  "promotion_authority": false
+}
