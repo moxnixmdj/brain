@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_H100_P0_CROSS_CAPABILITY_FALSIFICATION_SUITE_V2_RESULT_20261006",
+  "date": "2026-10-06",
+  "status": "PASS__9_OF_9__LOCAL_RECOMPUTE_FROM_FROZEN_V1_PLUS_V2_DATA_REPAIR",
+  "derivation": {
+    "v1_unchanged_cases_passed": 8,
+    "corrected_unknown_domain_survivors": [
+      "X3_PLUS_X"
+    ],
+    "corrected_unknown_domain_query_5": 130,
+    "missing_information_control_preserved": {
+      "status": "ABSTAIN",
+      "reason": "INFORMATION",
+      "residual_worlds": 2
+    }
+  },
+  "result": {
+    "solved_capability_tasks": 8,
+    "information_control_correctly_abstained": true,
+    "target_adapted_persistent_bits": 0
+  },
+  "interpretation": "P0_SURVIVES_THIS_BOUNDED_CROSS_CAPABILITY_SUITE__AND_THE_INFORMATION_CONTROL_CONFIRMS_THE_CLASSIFIER_DOES_NOT_CONFUSE_MISSING_INFORMATION_WITH_AN_ALGORITHM_FAILURE",
+  "hard_nonclaims": [
+    "LOCAL_RECOMPUTE_IS_NOT_INDEPENDENT_PROVIDER_VERIFICATION",
+    "BOUNDED_SYNTHETIC_SUITE_DOES_NOT_PROVE_UNIVERSAL_P0",
+    "PASS_DOES_NOT_ESTABLISH_FRONTIER_LEVEL_CAPABILITY"
+  ],
+  "promotion_authority": false
+}
