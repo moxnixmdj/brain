@@ -135,21 +135,22 @@ def run(
         if not isinstance(raw_result, Mapping):
             raise EmissionGatewayError("CONFINED_RESULT_INVALID")
         status = str(raw_result.get("status") or "")
-        if status == "BROKER_OUTPUT_LIMIT_EXCEEDED":
-            raise EmissionGatewayError("BROKER_OUTPUT_LIMIT_EXCEEDED")
+        returncode = raw_result.get("returncode")
+        if status != "CHILD_EXITED":
+            raise EmissionGatewayError("CHILD_DID_NOT_EXIT_NORMALLY:" + (status or "MISSING"))
+        if returncode != 0:
+            raise EmissionGatewayError("CHILD_EXIT_NONZERO")
+        if raw_result.get("material_effects_committed") != 0:
+            raise EmissionGatewayError("MATERIAL_EFFECT_STATE_NOT_ZERO")
         broker = raw_result.get("broker_payload", b"")
         if not isinstance(broker, bytes):
             raise EmissionGatewayError("CONFINED_BROKER_BYTES_INVALID")
         emissions = adjudicate_broker_payload(broker)
         return {
             "schema": RESULT_SCHEMA,
-            "status": (
-                "PASS__ALL_EXTERNAL_EMISSIONS_HONESTY_ADJUDICATED"
-                if status == "CHILD_EXITED"
-                else "CHILD_NONSTANDARD_EXIT__EMISSIONS_STILL_ADJUDICATED"
-            ),
+            "status": "PASS__ALL_EXTERNAL_EMISSIONS_HONESTY_ADJUDICATED",
             "child_status": status,
-            "child_returncode": raw_result.get("returncode"),
+            "child_returncode": returncode,
             "policy_sha256": raw_result.get("policy_sha256"),
             "broker_bytes": raw_result.get("broker_bytes", len(broker)),
             "broker_sha256": raw_result.get(
