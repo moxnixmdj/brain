@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_COMPOSITION_AMBIENT_FILE_BYPASS_COUNTERMODEL_V1",
   "date": "2026-10-06",
-  "status": "CANDIDATE_COUNTERMODEL__CAPSULE_GUARD_V2_DOES_NOT_MEDIATE_PERSISTENT_REPOSITORY_FILE_STATE__ZERO_CREDIT__INDEPENDENT_REPLAY_REQUIRED",
+  "status": "COUNTERMODEL_REPAIRED_ON_CURRENT_PR_BRANCH_FOR_DIRECT_DECLARED_REPOSITORY_EDGE_CLASS__PRESERVED_AS_REGRESSION_CANARY__BROADER_NO_BYPASS_STILL_OPEN__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_claims": [
     "C_EFFECT_BOUNDARY_CLOSURE_V2",
@@ -15,7 +15,7 @@
     },
     "astra_runtime": {
       "path": "canonical/runtime/astra_runtime.py",
-      "git_blob_sha": "15dd59ad644c5c73a9218dba4fcc17f880d725f0"
+      "git_blob_sha": "b7efc08e64a483e9a759c181a4f9a1cf29e47a9a"
     },
     "counterexample_test": {
       "path": "canonical/tests/test_composition_ambient_file_bypass_counterexample_v1.py",
@@ -73,5 +73,19 @@
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
   },
-  "independent_verification_required": true
+  "independent_verification_required": true,
+  "repair_status": {
+    "branch": "relational-refinement-compiler-v1",
+    "runtime_git_blob_sha": "b7efc08e64a483e9a759c181a4f9a1cf29e47a9a",
+    "mechanism": "COMPOSITION_RESOURCE_DEPENDENCY_GUARD_V1_CALLED_BEFORE_CYCLE_ZERO",
+    "direct_countermodel_disposition": "EXPECTED_REJECT__UNDECLARED_AMBIENT_RESOURCE_DEPENDENCY",
+    "broader_residuals": [
+      "RESOURCE_CONTENT_HASH_AND_TYPE_BINDING",
+      "INITIAL_RESOURCE_SNAPSHOT_BINDING",
+      "TRANSITIVE_HELPER_EFFECT_COMPLETENESS",
+      "DYNAMIC_CAPABILITY_AND_PROCESS_CONFINEMENT",
+      "EXTERNAL_INFORMATION_BROKER_ENFORCEMENT",
+      "INDEPENDENT_EXACT_BYTE_REPLAY"
+    ]
+  }
 }
