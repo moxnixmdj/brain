@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_SUCCESS_CAUSAL_TASK_KERNEL_V4_SPRITE_REPLAY_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BRANCH_BYTE_REPLAY_PASS_13_OF_13__STRUCTURAL_PREEXPOSURE_KERNEL_ONLY__ZERO_SCOPE_CREDIT",
+  "source_brain": {
+    "pull_request": 2435,
+    "branch": "feature/matched-success-component-bound-v4-20261006",
+    "exact_blobs": {
+      "canonical/runtime/matched_success_causal_task_kernel_v4.py": "99666aa37c272f14013c6556b3db9fde2aca8b5b",
+      "canonical/tests/test_matched_success_causal_task_kernel_v4.py": "8058c71e47e210a0c54f91d2e5d8a8b028e9c993"
+    }
+  },
+  "independent_runner": {
+    "provider": "Sprites",
+    "sprite": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "isolated_workdir": "/home/sprite/v4replay",
+    "python_version": "3.14.4",
+    "execution": "DIRECT_PYTHON_TEST_FUNCTION_REPLAY_BECAUSE_PYTEST_MODULE_NOT_INSTALLED",
+    "result": "PASS_13_OF_13"
+  },
+  "verified": [
+    "EXACT_BRANCH_RUNTIME_BYTES_REPLAYED",
+    "EXACT_BRANCH_TEST_BYTES_REPLAYED",
+    "FORTY_UNIQUE_PREEXPOSURE_STRUCTURAL_CASES",
+    "ALL_TEN_NONLEGACY_DIMENSIONS_HAVE_STRUCTURALLY_VERIFIED_CASE_DEFINITIONS",
+    "PUBLIC_ORACLE_INFORMATION_BOUNDARY_TESTED",
+    "AGENCY_THREE_ACTION_REQUIREMENT_FAILS_CLOSED",
+    "INSTRUCTION_MULTI_CONSTRAINT_REQUIREMENT_FAILS_CLOSED",
+    "RESEARCH_MULTI_SOURCE_REQUIREMENT_FAILS_CLOSED",
+    "BROWSER_MEMORY_REQUIREMENT_FAILS_CLOSED",
+    "CODING_REAL_BUG_REQUIREMENT_FAILS_CLOSED",
+    "DELEGATION_FANIN_REQUIREMENT_FAILS_CLOSED",
+    "ROLLBACK_STATE_CHANGE_REQUIREMENT_FAILS_CLOSED",
+    "INTERVENTION_RESCUE_REQUIREMENT_FAILS_CLOSED",
+    "PAYLOAD_TO_MUTABLE_NAMESPACE_BINDING_FAILS_CLOSED",
+    "GENERATOR_DETERMINISTIC_AND_BEACON_SENSITIVE"
+  ],
+  "repair_history": {
+    "pre_repair_replay": "PASS_3_OF_12",
+    "defects_found": [
+      "INSTRUCTION_PUBLIC_LOAD_BEARING_SOURCE_WAS_REJECTED_BY_ORACLE_ONLY_GENERIC_RULE",
+      "MUTATION_TESTS_DID_NOT_REBIND_CONTENT_HASHES_AND_THEREFORE_FAILED_FOR_THE_WRONG_REASON",
+      "INITIAL_MUTABLE_NAMESPACE_WAS_NOT_RECOMPUTED_FROM_THE_CONTENT_BOUND_PAYLOAD"
+    ],
+    "post_repair_replay": "PASS_13_OF_13"
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_CASES_GENERATED",
+    "NO_BRAIN_PERFORMANCE_RESULT",
+    "NO_ACTUAL_COMPONENT_SCORER_RECEIPT_BUNDLE",
+    "NO_SCOPE_COMPILER_CLOSURE",
+    "NO_REAL_HARNESS_ISOLATION_RECEIPTS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
