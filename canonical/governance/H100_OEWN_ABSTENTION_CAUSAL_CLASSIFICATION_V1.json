@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_H100_OEWN_ABSTENTION_CAUSAL_CLASSIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_EXTERNAL_ISSUE_SOURCE_LOOKUP",
+  "cases": [
+    {
+      "id": "COMMENT_BOOK_NOTE",
+      "cause": "SUPPORTED_SENSE_OUTSIDE_ROLE_ONTOLOGY",
+      "answer_relevant_ambiguity": false,
+      "persistent_bits_justified": false,
+      "next": "KEEP_NONE_OR_UNSUPPORTED"
+    },
+    {
+      "id": "COMMENT_NO_CONTEXT",
+      "cause": "PER_INSTANCE_SENSE_AMBIGUITY_WITH_IDENTICAL_VISIBLE_INPUT",
+      "answer_relevant_outputs": [
+        "INPUT",
+        "NONE"
+      ],
+      "persistent_bits_justified": false,
+      "next": "REQUEST_CONTEXT_OR_ABSTAIN"
+    },
+    {
+      "id": "MISSING_QUERY",
+      "cue": "issue",
+      "cause": "SOURCE_NOT_PINNED",
+      "persistent_bits_justified": false,
+      "next": "JIT_INDEPENDENT_SOURCE_LOOKUP"
+    }
+  ],
+  "rule": "DO_NOT_ALLOCATE_PERSISTENT_BITS_BEFORE_RUNTIME_SOURCE_OR_CONTEXT_CHANNELS_ARE_EXHAUSTED",
+  "promotion_authority": false
+}
