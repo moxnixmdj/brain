@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_H100_FRESH_CROSSCAP_G1_TRANSFER_RESULT_V3",
+  "date": "2026-10-06",
+  "status": "RAW_EXACT_SCORE_14_OF_16__SEMANTIC_TASK_SUCCESS_16_OF_16__PLANNING_SCORER_FALSE_NEGATIVE_IDENTIFIED",
+  "g1_freeze": "canonical/governance/H100_CROSSCAP_G1_FREEZE_V1.json",
+  "suite_precommit": "canonical/governance/H100_FRESH_CROSSCAP_TRANSFER_SUITE_V3_PRECOMMIT.json",
+  "hashes": {
+    "public_tasks_sha256": "157f75b083447c830342e4ccfa094e200d6d7324afc6315a16a625898baa6f92",
+    "answers_sha256": "cd01538c74445d875be366b614c422e7f716dbb929114c4c397a46c93c7c514a",
+    "outputs_sha256": "da8eafe40fac91f5b9c5ada3c843ce40231faaeec4857b61b286b92fdab620e3"
+  },
+  "accounting": {
+    "learned_target_bytes": 0,
+    "target_adapted_deterministic_code_bytes_relative_to_v2": 10874,
+    "target_adapted_persistent_bits_for_v3_after_freeze": 0
+  },
+  "raw_score": {
+    "passed": 14,
+    "total": 16
+  },
+  "semantic_recheck": {
+    "planning_cases": [
+      "P3_1",
+      "P3_2"
+    ],
+    "both_plans_valid_under_frozen_add_remove_transition_semantics": true,
+    "both_final_states_include": [
+      "gate",
+      "key",
+      "start"
+    ],
+    "semantic_passed": 16,
+    "semantic_total": 16
+  },
+  "deduction": [
+    "THE_10874_BYTE_GENERIC_REPAIR_LAYER_TRANSFERRED_TO_FRESH_INSTANCES_ACROSS_ALL_EIGHT_CLASSES",
+    "NO_LEARNED_TARGET_STATE_WAS_REQUIRED_FOR_V3",
+    "EXACT_PLAN_IDENTITY_WAS_AN_INVALID_SCORING_REQUIREMENT_BECAUSE_MULTIPLE_VALID_PLANS_EXISTED",
+    "THIS_IS_AN_UPPER_BOUND_AND_TRANSFER_RESULT_NOT_A_UNIVERSAL_ZERO_STATE_PROOF"
+  ],
+  "next_tournament_move": "FREEZE_SEMANTIC_SCORERS_BEFORE_V4_AND_ATTACK_G1_WITH_NEW_FAILURE_MODES_NOT_PRESENT_IN_V2_OR_V3",
+  "promotion_authority": false
+}
