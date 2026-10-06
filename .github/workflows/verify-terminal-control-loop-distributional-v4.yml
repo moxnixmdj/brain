@@ -1,0 +1,27 @@
+name: Verify terminal control loop distributional utility V4
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/TERMINAL_CONTROL_LOOP_TRUTH_REPAIR_V4_CURRENT_20261006.json"
+      - "canonical/runtime/terminal_control_loop_truth_repair_v4_verifier.py"
+      - ".github/workflows/verify-terminal-control-loop-distributional-v4.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Compile verifier
+        run: python -m py_compile canonical/runtime/terminal_control_loop_truth_repair_v4_verifier.py
+      - name: Verify stale route and V4 successor
+        run: python canonical/runtime/terminal_control_loop_truth_repair_v4_verifier.py
