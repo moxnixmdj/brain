@@ -225,9 +225,17 @@ def compile_control_loop(state: Mapping[str, Any]) -> ControlLoopResult:
 
     schedulable.sort(key=_priority_key)
 
-    universe_complete = any(
-        by_id[cid].get("status") == "PROVED" and _proof_credit(by_id[cid]) == 1
+    live_universe_claims = [
+        by_id[cid]
         for cid in universe_ids
+        if by_id[cid].get("status") != "FALSIFIED"
+    ]
+    universe_complete = (
+        bool(live_universe_claims)
+        and all(
+            claim.get("status") == "PROVED" and _proof_credit(claim) == 1
+            for claim in live_universe_claims
+        )
     )
 
     known_open = state.get("known_open_truth_obligations")
