@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_SHARED_BEHAVIOR_CORE_V2",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_TWO_CLASS_PORTFOLIO_REFACTOR__NOT_PROSPECTIVE_NEW_CLASS__ZERO_TERMINAL_CREDIT",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "objective": "REDUCE_VERIFIED_CROSS_CLASS_MARGINAL_BYTES_BY_REBUILDING_BOTH_EXISTING_CAPABILITY_CLASSES_AROUND_ONE_SHARED_BEHAVIORAL_SEARCH_AND_TYPED_EVALUATION_CORE",
+  "source": {
+    "path": "canonical/runtime/bytes_shared_behavior_core_v2.py",
+    "raw_bytes": 4205,
+    "sha256": "5182be475bf874f56109de7e76c74f6b3655495bd0f8f7783d99752a1123cdb7"
+  },
+  "preserved_frozen_suites": [
+    "EXPRESSION_V3_6_OF_6",
+    "DISCRETE_SEQUENCE_V1_8_OF_8_AND_48_OF_48_HOLDOUTS"
+  ],
+  "canonical_fixed_decoder": {
+    "codec": "PYTHON_STDLIB_RAW_LZMA1",
+    "dict_size": 4096,
+    "lc": 0,
+    "lp": 0,
+    "pb": 0,
+    "mode": "NORMAL",
+    "match_finder": "BT3",
+    "nice_len": 32
+  },
+  "measured": {
+    "shared_core_payload_bytes": 1621,
+    "verified_old_two_file_portfolio_payload_bytes": 1899,
+    "old_expression_payload_bytes": 1488,
+    "old_verified_sequence_class_marginal_given_expression_bytes": 411,
+    "new_measured_shared_core_marginal_given_old_expression_bytes": 133,
+    "portfolio_payload_reduction_bytes": 278,
+    "portfolio_payload_reduction_fraction": 0.1463928383359663
+  },
+  "secondary_codec_probe": {
+    "best_tested_payload_bytes": 1620,
+    "tested_configurations": 15000,
+    "note": "NOT_USED_FOR_CANONICAL_MARGINAL_COMPARISON_BECAUSE_CANONICAL_COMPARISON_HOLDS_DECODER_CONFIGURATION_FIXED"
+  },
+  "hard_nonclaims": [
+    "THIS_REFACTOR_WAS_DESIGNED_WITH_BOTH_EXISTING_SUITES_IN_VIEW_AND_IS_NOT_PROSPECTIVE_NEW_CLASS_EVIDENCE",
+    "133_BYTES_IS_NOT_AN_INFORMATION_THEORETIC_LOWER_BOUND",
+    "NO_CLAIM_THE_SHARED_CORE_GENERALIZES_TO_A_THIRD_CLASS_YET",
+    "NO_SELF_CONTAINED_RUNTIME_OR_TERMINAL_CREDIT"
+  ]
+}
