@@ -1,0 +1,32 @@
+name: Verify Opus55 general-analysis B2 minimum cut
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/OPUS55_GENERAL_ANALYSIS_B2_MINIMUM_CUT_20261005_V1.json
+      - canonical/runtime/verify_opus55_general_analysis_b2_minimum_cut_v1.py
+      - canonical/tests/test_opus55_general_analysis_b2_minimum_cut_v1.py
+      - canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json
+      - canonical/governance/OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_CHARACTERIZATION_20261005_V1.json
+      - .github/workflows/verify-opus55-general-analysis-b2-minimum-cut.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Compile verifier and tests
+        run: python -m py_compile canonical/runtime/verify_opus55_general_analysis_b2_minimum_cut_v1.py canonical/tests/test_opus55_general_analysis_b2_minimum_cut_v1.py
+      - name: Verify minimum cut
+        run: python canonical/runtime/verify_opus55_general_analysis_b2_minimum_cut_v1.py
+      - name: Run mutation tests
+        run: python -m unittest -v canonical.tests.test_opus55_general_analysis_b2_minimum_cut_v1
