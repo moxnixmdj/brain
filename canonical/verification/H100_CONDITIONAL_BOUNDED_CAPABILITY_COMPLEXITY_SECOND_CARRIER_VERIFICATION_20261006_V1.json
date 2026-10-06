@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CONDITIONAL_BOUNDED_CAPABILITY_COMPLEXITY_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__6_OF_6",
+  "verified": {
+    "interval_ledger": true,
+    "monotone_tightening": true,
+    "representation_invariance": true,
+    "explicit_program_upper_bound": true,
+    "invalid_interval_rejected": true,
+    "exact_complexity_never_claimed": true
+  },
+  "example": {
+    "scope": "synthetic_orientation_invariant_bar_geometry",
+    "lower_bits": 0,
+    "upper_bits": 28672
+  },
+  "deduction": "A_SHOULD_TRACK_LOWER_AND_UPPER_BOUNDS_ON_RESOURCE_BOUNDED_CONDITIONAL_CAPABILITY_DESCRIPTION_LENGTH_RELATIVE_TO_A_FROZEN_REFERENCE_MACHINE",
+  "promotion_authority": false
+}
