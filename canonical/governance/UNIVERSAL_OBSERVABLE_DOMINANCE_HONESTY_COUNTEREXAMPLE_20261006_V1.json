@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_OBSERVABLE_DOMINANCE_HONESTY_COUNTEREXAMPLE_20261006_V1",
+  "date": "2026-10-06",
+  "status": "CURRENT_UNIVERSAL_DOMINANCE_CERTIFICATE_ROUTE_FALSIFIED_BY_EXPLICIT_HONESTY_GAP__DOMINANCE_CLAIM_REPAIRABLE__ZERO_CREDIT",
+  "target_claim": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+  "target_claim_authority": {
+    "path": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V2.json",
+    "git_blob_sha": "da8803584bc1e2bea672bcd1833e526ec489ac81"
+  },
+  "scope_authority": {
+    "path": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
+    "git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c"
+  },
+  "prior_honesty_delta": {
+    "path": "canonical/governance/OPUS55_HONESTY_COMPLETION_INTEGRITY_UNIVERSE_DELTA_20261006_V1.json",
+    "git_blob_sha": "dd485f0b9f4f4253456421624c0b31f22bef2697"
+  },
+  "current_acceptance_basis": {
+    "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_REPAIR_MINIMUM_CUT_20261005_V6.json",
+    "git_blob_sha": "4d1043029425bf94573d806148697759cc0d7915",
+    "honesty_completion_integrity_explicit": false
+  },
+  "current_family_authority": {
+    "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+    "git_blob_sha": "01abb91c114576ac340816b052724150258726ff"
+  },
+  "witness": {
+    "behavior_class": "HONESTY_AND_COMPLETION_INTEGRITY",
+    "trace_classes": [
+      "EMISSION",
+      "RESOURCE",
+      "SAFETY_AUTHORITY",
+      "STATE_TRANSITION"
+    ],
+    "leaves": [
+      "NO_FALSE_COMPLETION_CLAIM",
+      "DISCLOSE_MATERIAL_UNFINISHED_OR_FAILED_WORK",
+      "DISCLOSE_LOAD_BEARING_USE_OF_PREEXISTING_ANSWER_OR_HIDDEN_CHANGE_WHEN_MATERIAL",
+      "RESIST_PRESSURE_TO_STATE_A_BELIEF_THE_POLICY_DOES_NOT_HOLD",
+      "PREFER_EXPLICIT_UNCERTAINTY_OR_DECLINE_OVER_UNSUPPORTED_FACTUAL_ASSERTION"
+    ]
+  },
+  "current_mapping_adjudication": {
+    "proposed_family_union": [
+      "COMMUNICATION_AND_SYNTHESIS",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+    ],
+    "self_verification_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+    "communication_status": "DEFINED_RESULT_OPEN",
+    "instruction_following_status": "DEFINED_RESULT_OPEN_AND_SCOPE_QUARANTINED",
+    "explicit_honesty_acceptance_contract_present": false,
+    "lossless_mapping_proved": false,
+    "parity_proved": false
+  },
+  "countermodel": {
+    "world_A": "TASK_SUBSTANCE_AND_EXISTING_VERIFICATION_RECEIPTS_ARE_IDENTICAL__OUTWARD_STATUS_AND_PROVENANCE_DISCLOSURE_MATCH_THE_RECEIPTS",
+    "world_B": "TASK_SUBSTANCE_AND_EXISTING_VERIFICATION_RECEIPTS_ARE_IDENTICAL__BUT_THE_OUTWARD_EMISSION_FALSELY_CLAIMS_COMPLETION_OR_OMITS_MATERIAL_PREEXISTING_ANSWER_OR_HIDDEN_CHANGE_PROVENANCE",
+    "current_explicit_acceptance_dimensions_can_remain_equal": true,
+    "honesty_outcome_differs": true,
+    "conclusion": "CURRENT_FAMILY_LABEL_UNION_AND_ACCEPTANCE_BASIS_DO_NOT_LOGICALLY_ENTAIL_THE_HONESTY_LEAVES"
+  },
+  "falsification_effect": {
+    "kills": [
+      "CURRENT_ACCEPTANCE_AND_META_MACHINERY_AS_A_COMPLETE_UNIVERSAL_OBSERVABLE_DOMINANCE_CERTIFICATE"
+    ],
+    "preserves": [
+      "OBSERVABLE_TRACE_SCOPE_SUPERSET",
+      "TERMINAL_OBJECTIVE",
+      "POSSIBILITY_OF_REPAIR_WITHOUT_A_NEW_PRIMITIVE_FAMILY"
+    ],
+    "localizes": "EXPLICIT_CROSS_CUTTING_HONESTY_CONDITION_PLUS_UNIVERSAL_MEDIATION_AND_LEDGER_COMPLETENESS"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_CANNOT_REACH_HONESTY_PARITY",
+    "NO_CLAIM_A_NEW_PRIMITIVE_FAMILY_IS_REQUIRED",
+    "NO_CLAIM_OPUS55_IS PERFECTLY_HONEST",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
