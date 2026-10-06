@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TWO_INVARIANT_TERMINAL_COLLAPSE_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_PROOF_ONLY__ZERO_CREDIT",
+  "canonical_base_commit": "4e7487a91c963df6b0799af3c5fec32f8e0941be",
+  "action_kind": "TRUTH_REPAIR__TERMINAL_SEMANTIC_MINIMIZATION",
+  "goal": "DISTINGUISH MINIMAL TERMINAL SEMANTICS FROM V4 SCHEDULER DECOMPOSITION WITHOUT WEAKENING ANY LOAD_BEARING TRUTH.",
+  "next_falsifier": "CONSTRUCT A TERMINAL WORLD WHERE L1_AND_L2 HOLD BUT TERMINAL OBJECTIVE FAILS__OR A TERMINAL WORLD WHERE TERMINAL OBJECTIVE HOLDS BUT L1_OR_L2 FAILS.",
+  "evidence_refs": [
+    "canonical/governance/V7_LAYERED_DISTRIBUTIONAL_EQUAL_OR_BETTER_ORDER_20261006_V1.json",
+    "canonical/governance/DISTRIBUTIONAL_TARGET_UPPER_ENVELOPE_THEOREM_20261006_V1.json",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V4.json",
+    "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
