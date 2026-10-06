@@ -1,0 +1,298 @@
+{
+  "answers": [
+    {
+      "compare_fields": [
+        "status",
+        "solutions"
+      ],
+      "expected": {
+        "solutions": [
+          {
+            "a": 4,
+            "b": 1,
+            "c": 2,
+            "d": 3
+          }
+        ],
+        "status": "UNIQUE"
+      },
+      "id": "R1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "solutions"
+      ],
+      "expected": {
+        "solutions": [
+          {
+            "a": 1,
+            "b": 2,
+            "c": 4,
+            "d": 3
+          }
+        ],
+        "status": "UNIQUE"
+      },
+      "id": "R2"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "predictions"
+      ],
+      "expected": {
+        "predictions": [
+          13,
+          22
+        ],
+        "status": "PROGRAM_FOUND"
+      },
+      "id": "C1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "predictions"
+      ],
+      "expected": {
+        "predictions": [
+          13,
+          22
+        ],
+        "status": "PROGRAM_FOUND"
+      },
+      "id": "C2"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "inputs",
+        "target"
+      ],
+      "expected": {
+        "inputs": [
+          "feature"
+        ],
+        "status": "ROLES_IDENTIFIED",
+        "target": "label"
+      },
+      "id": "L1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "inputs",
+        "target"
+      ],
+      "expected": {
+        "inputs": [
+          "feature"
+        ],
+        "status": "ROLES_IDENTIFIED",
+        "target": "label"
+      },
+      "id": "L2"
+    },
+    {
+      "compare_fields": [
+        "component_count",
+        "areas",
+        "bboxes"
+      ],
+      "expected": {
+        "areas": [
+          6,
+          12,
+          15
+        ],
+        "bboxes": [
+          [
+            1,
+            3,
+            3,
+            4
+          ],
+          [
+            5,
+            12,
+            7,
+            15
+          ],
+          [
+            16,
+            1,
+            18,
+            5
+          ]
+        ],
+        "component_count": 3
+      },
+      "id": "V1"
+    },
+    {
+      "compare_fields": [
+        "component_count",
+        "areas",
+        "bboxes"
+      ],
+      "expected": {
+        "areas": [
+          12,
+          12,
+          15,
+          24
+        ],
+        "bboxes": [
+          [
+            3,
+            2,
+            8,
+            5
+          ],
+          [
+            3,
+            14,
+            8,
+            15
+          ],
+          [
+            15,
+            12,
+            19,
+            14
+          ],
+          [
+            16,
+            3,
+            21,
+            4
+          ]
+        ],
+        "component_count": 4
+      },
+      "id": "V2"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "tool_ids"
+      ],
+      "expected": {
+        "status": "UNIQUE",
+        "tool_ids": [
+          "JSON_RECEIPT_WRITER_V1"
+        ]
+      },
+      "id": "T1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "tool_ids"
+      ],
+      "expected": {
+        "status": "UNIQUE",
+        "tool_ids": [
+          "JSONL_LEDGER_APPEND_V1"
+        ]
+      },
+      "id": "T2"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "plan"
+      ],
+      "expected": {
+        "plan": [
+          "op0_1",
+          "op0_2",
+          "op0_3"
+        ],
+        "status": "PLAN_FOUND"
+      },
+      "id": "P1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "plan"
+      ],
+      "expected": {
+        "plan": [
+          "op1_1",
+          "op1_2",
+          "op1_3"
+        ],
+        "status": "PLAN_FOUND"
+      },
+      "id": "P2"
+    },
+    {
+      "compare_fields": [
+        "state",
+        "last_seq",
+        "last_event_hash"
+      ],
+      "expected": {
+        "last_event_hash": "82eeb20590bd34e79645c9177d4f068e465958d4e02544bc5d54413a400c25d4",
+        "last_seq": 8,
+        "state": {
+          "alpha": 237,
+          "beta": 540,
+          "gamma": 883
+        }
+      },
+      "id": "M1"
+    },
+    {
+      "compare_fields": [
+        "state",
+        "last_seq",
+        "last_event_hash"
+      ],
+      "expected": {
+        "last_event_hash": "1c0c998686578321484f288bcdc32878d3aab924ccd09de5603957b72806de85",
+        "last_seq": 8,
+        "state": {
+          "gamma": 942
+        }
+      },
+      "id": "M2"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "capability_id",
+        "predictions"
+      ],
+      "expected": {
+        "capability_id": "CAP_AFFINE_CHAIN_SQUARE_LOG_SQRT_SAT_V1",
+        "predictions": [
+          0.16081143232107886,
+          2.7302858354485537
+        ],
+        "status": "LIBRARY_HIT__VERIFY_BEFORE_USE"
+      },
+      "id": "N1"
+    },
+    {
+      "compare_fields": [
+        "status",
+        "capability_id",
+        "predictions"
+      ],
+      "expected": {
+        "capability_id": "CAP_AFFINE_CHAIN_SQUARE_LOG_SQRT_SAT_V1",
+        "predictions": [
+          -0.49501302407048986,
+          1.5425431060665669
+        ],
+        "status": "LIBRARY_HIT__VERIFY_BEFORE_USE"
+      },
+      "id": "N2"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_H100_FRESH_CROSSCAP_ANSWERS_V1"
+}
