@@ -6,7 +6,7 @@
   "truth_repair":{
     "path":"canonical/governance/K6_PROOF_ROUTE_NECESSITY_FALSIFICATION_20261007_V1.json",
     "git_blob_sha":"bd8faec07728d40424a5a4b968f81d0faf11aa87",
-    "verification":{"path":"canonical/verification/K6_PROOF_ROUTE_NECESSITY_WOLFRAM_VERIFICATION_20261007_V1.json"}
+    "verification":{"path":"canonical/verification/K6_PROOF_ROUTE_NECESSITY_WOLFRAM_VERIFICATION_20261007_V1.json","git_blob_sha":"54dc6bfb945f37e80c34a460df2701b6b6433c82"}
   },
   "current_state":{
     "preproof_generic_implementation_generator_count":0,
