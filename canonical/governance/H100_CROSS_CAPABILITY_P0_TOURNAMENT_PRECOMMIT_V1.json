@@ -1,0 +1,341 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CROSS_CAPABILITY_P0_TOURNAMENT_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_P0_RUNTIME_OUTCOMES__INDEPENDENT_A_RESEARCH",
+  "target_adapted_persistent_bits": 0,
+  "allowed_runtime_information": "TASK_INPUT_ONLY",
+  "generic_substrate_rule": "ONE_FROZEN_WORLD_INDEPENDENT_DETERMINISTIC_RUNTIME__NO_TASK_ID_BRANCHES__NO_EXPECTED_OUTPUTS_VISIBLE_TO_SOLVER",
+  "tasks": [
+    {
+      "id": "ARITH_1",
+      "family": "ARITHMETIC_REASONING",
+      "input": {
+        "expression": "(17*23)-(5**3)+84//7"
+      },
+      "gold": 278
+    },
+    {
+      "id": "CODE_1",
+      "family": "CODE_REPAIR",
+      "input": {
+        "threshold": 7,
+        "examples": [
+          [
+            5,
+            false
+          ],
+          [
+            7,
+            true
+          ],
+          [
+            9,
+            true
+          ]
+        ],
+        "holdout": [
+          6,
+          8
+        ]
+      },
+      "gold": {
+        "operator": ">=",
+        "holdout": [
+          false,
+          true
+        ]
+      }
+    },
+    {
+      "id": "LANG_1",
+      "family": "LEXICAL_LANGUAGE",
+      "input": {
+        "anchors": {
+          "input": "input",
+          "target": "output"
+        },
+        "edges": [
+          [
+            "antecedent",
+            "predictor"
+          ],
+          [
+            "predictor",
+            "input"
+          ],
+          [
+            "criterion",
+            "response"
+          ],
+          [
+            "response",
+            "output"
+          ]
+        ],
+        "clauses": [
+          {
+            "cue": "antecedent",
+            "fields": [
+              "feature_a",
+              "feature_b"
+            ]
+          },
+          {
+            "cue": "criterion",
+            "fields": [
+              "score"
+            ]
+          }
+        ]
+      },
+      "gold": {
+        "inputs": [
+          "feature_a",
+          "feature_b"
+        ],
+        "target": "score"
+      }
+    },
+    {
+      "id": "VISION_1",
+      "family": "RASTER_VISION",
+      "input": {
+        "width": 41,
+        "height": 31,
+        "background": 0,
+        "foreground": 7,
+        "bars": [
+          {
+            "x0": 3,
+            "x1": 7,
+            "height": 5
+          },
+          {
+            "x0": 15,
+            "x1": 19,
+            "height": 11
+          },
+          {
+            "x0": 28,
+            "x1": 34,
+            "height": 8
+          }
+        ]
+      },
+      "gold": {
+        "bar_count": 3,
+        "heights": [
+          5,
+          11,
+          8
+        ]
+      }
+    },
+    {
+      "id": "TOOL_1",
+      "family": "TYPED_TOOL_SELECTION",
+      "input": {
+        "request": {
+          "effect": "APPEND_JSONL",
+          "path": "ledger/events.jsonl",
+          "payload": {
+            "event": "alpha",
+            "value": 7
+          }
+        },
+        "contracts": [
+          {
+            "id": "WRITE_RECEIPT",
+            "effect": "WRITE_JSON",
+            "path": "receipts/result.json",
+            "required": [
+              "name",
+              "score",
+              "passed"
+            ]
+          },
+          {
+            "id": "APPEND_LEDGER",
+            "effect": "APPEND_JSONL",
+            "path": "ledger/events.jsonl",
+            "required": [
+              "event",
+              "value"
+            ]
+          }
+        ]
+      },
+      "gold": "APPEND_LEDGER"
+    },
+    {
+      "id": "PLAN_1",
+      "family": "RESOURCE_PLANNING",
+      "input": {
+        "initial": [
+          "RAW"
+        ],
+        "goal": "DONE",
+        "operators": [
+          {
+            "id": "NORMALIZE",
+            "requires": [
+              "RAW"
+            ],
+            "provides": [
+              "TYPED"
+            ]
+          },
+          {
+            "id": "VERIFY",
+            "requires": [
+              "TYPED"
+            ],
+            "provides": [
+              "CHECKED"
+            ]
+          },
+          {
+            "id": "FINALIZE",
+            "requires": [
+              "CHECKED"
+            ],
+            "provides": [
+              "DONE"
+            ]
+          },
+          {
+            "id": "DECOY",
+            "requires": [
+              "MISSING"
+            ],
+            "provides": [
+              "DONE"
+            ]
+          }
+        ]
+      },
+      "gold": [
+        "NORMALIZE",
+        "VERIFY",
+        "FINALIZE"
+      ]
+    },
+    {
+      "id": "MEMORY_1",
+      "family": "EVENT_MEMORY",
+      "input": {
+        "events": [
+          [
+            "SET",
+            "mission",
+            "alpha"
+          ],
+          [
+            "SET",
+            "counter",
+            1
+          ],
+          [
+            "SET",
+            "counter",
+            2
+          ],
+          [
+            "DELETE",
+            "mission",
+            null
+          ],
+          [
+            "SET",
+            "mission",
+            "beta"
+          ]
+        ],
+        "query": "mission"
+      },
+      "gold": "beta"
+    },
+    {
+      "id": "TRANSFER_1",
+      "family": "NOVEL_STRUCTURE_TRANSFER",
+      "input": {
+        "primitives": [
+          "plus1",
+          "times2",
+          "square",
+          "neg"
+        ],
+        "depth": 3,
+        "examples": [
+          [
+            -3,
+            -4
+          ],
+          [
+            -2,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            1,
+            -4
+          ],
+          [
+            2,
+            -9
+          ]
+        ],
+        "holdout": [
+          3,
+          -4
+        ]
+      },
+      "gold": {
+        "sequence": [
+          "plus1",
+          "square",
+          "neg"
+        ],
+        "holdout": [
+          -16,
+          -9
+        ]
+      }
+    },
+    {
+      "id": "HIDDEN_1",
+      "family": "SEALED_INFORMATION_CONTROL",
+      "input": {
+        "observable": "sealed-box"
+      },
+      "gold": 1,
+      "hidden_world_count": 2
+    }
+  ],
+  "failure_classification_priority": [
+    "INFORMATION_GAP",
+    "ALGORITHM_GAP",
+    "SEARCH_GAP",
+    "VERIFICATION_GAP",
+    "COMPUTE_GAP",
+    "MEMORY_GAP"
+  ],
+  "gates": {
+    "nonsealed_tasks_required_pass": 8,
+    "sealed_control_required_status": "ABSTAIN_IRREDUCIBLE_INFORMATION_GAP",
+    "sealed_control_lower_bound_bits": 1
+  },
+  "hard_nonclaims": [
+    "SYNTHETIC_CROSS_CAPABILITY_SUITE_IS_NOT_FRONTIER_EQUIVALENCE",
+    "SEALED_CONTROL_IS_ADVERSARIAL_NOT_REALISTIC_FRONTIER_EVIDENCE",
+    "PASSING_FINITE_SUITE_IS_NOT_GENERALIZATION_PROOF"
+  ],
+  "promotion_authority": false
+}
