@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ALGORITHM_VS_INFORMATION_NECESSITY_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__8_OF_8__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_ALGORITHM_VS_INFORMATION_NECESSITY_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_algorithm_vs_information_necessity_v1.py",
+    "tests": "canonical/tests/test_h100_algorithm_vs_information_necessity_v1.py"
+  },
+  "verified": {
+    "tests_passed": 8,
+    "complete_computable_mapping_has_zero_information_theoretic_learned_bit_requirement": true,
+    "incomplete_information_does_not_claim_zero_bit_sufficiency": true,
+    "finite_explicit_zero_learned_solver_constructed": true,
+    "nonfunctional_and_out_of_domain_fail_closed": true
+  },
+  "deduction": "WHEN_ALLOWED_RUNTIME_INFORMATION_FULLY_DETERMINES_OUTPUT_AND_MAPPING_IS_COMPUTABLE__POSITIVE_LEARNED_STATE_IS_NOT_INFORMATION_THEORETICALLY_REQUIRED__THE_REMAINING_BARRIERS_ARE_DESCRIPTION_LENGTH_COMPUTE_WORKING_MEMORY_SEARCH_AND_INFORMATION_AVAILABILITY",
+  "hard_nonclaims": [
+    "DOES_NOT_PROVE_AN_EFFICIENT_ZERO_LEARNED_SOLVER_EXISTS",
+    "DOES_NOT_PROVE_SMALL_DETERMINISTIC_PROGRAM_SIZE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
