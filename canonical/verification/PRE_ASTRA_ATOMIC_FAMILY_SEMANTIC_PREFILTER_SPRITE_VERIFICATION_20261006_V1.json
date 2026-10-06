@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PRE_ASTRA_ATOMIC_FAMILY_SEMANTIC_PREFILTER_SPRITE_VERIFICATION_20261006_V1",
   "date": "2026-10-06",
-  "status": "INDEPENDENT_SPRITE_PASS__EXACT_AUTHORITY_BYTES__ZERO_ASTRA_ACCESS__ZERO_CREDIT",
+  "status": "INDEPENDENT_SPRITE_PASS__PROMOTED_PREFILTER_BYTES_REPLAYED__ZERO_ASTRA_ACCESS__ZERO_CREDIT",
   "runner": {
     "provider": "Sprites",
     "sprite_name": "brain-h100-independent-replay-v1",
@@ -15,7 +15,7 @@
     },
     "prefilter": {
       "path": "canonical/governance/PRE_ASTRA_ATOMIC_FAMILY_SEMANTIC_PREFILTER_20261006_V1.json",
-      "git_blob_sha": "0fc92ab6c0612b901b7eee608ddf6b1324f87f02"
+      "git_blob_sha": "f16536e2a7b89686457e004fa63d1ee723a6b42e"
     },
     "test": {
       "path": "canonical/tests/test_pre_astra_atomic_family_semantic_prefilter_v1.py",
@@ -23,7 +23,7 @@
     },
     "packet_v3": {
       "path": "canonical/governance/ASTRA_SCARCE_ACCESS_TARGET_SEMANTICS_CLASSIFICATION_PACKET_20261006_V3.json",
-      "git_blob_sha": "79fd2683424a7cfec5ff6495d92d80c3751fb955"
+      "git_blob_sha": "dd694ed6273298bef05e7290cb46dd8aa66eb5df"
     }
   },
   "exact_authority_blobs": {
@@ -49,7 +49,8 @@
     "family_count": 14,
     "family_E_or_M_credit": 0,
     "astra_access_consumed": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "promoted_prefilter_replay_pass": true
   },
   "verified_claim": "THE_CURRENT_24_UNRESOLVED_ATOMIC_ACCEPTANCE_CONTRACTS_ARE_LOSSLESSLY_PARTITIONED_AND_DISTINCT_FROM_THE_14_FAMILY_WIDE_SEMANTIC_E_OR_M_QUESTIONS__THE_14_FIXED_BAR_TARGET_IDENTITIES_ARE_ALREADY_BOUND__SCARCE_ASTRA_NEED_NOT_REDISCOVER_ATOMIC_THRESHOLD_OR_TARGET_TUPLE_SEMANTICS.",
   "hard_nonclaims": [
