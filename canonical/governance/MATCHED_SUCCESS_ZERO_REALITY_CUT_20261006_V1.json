@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_SUCCESS_ZERO_REALITY_CUT_20261006_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__CURRENT_ZERO_REALITY_ROUTES_DO_NOT_CLOSE_THREE_MATCHED_SUCCESS_PREDICATES__ONE_SHARED_EMPIRICAL_FALLBACK_PRESERVED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "superportfolio": {
+      "path": "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json",
+      "git_blob_sha": "d9ac894594ebcd2883520f7b7977a3548420541c"
+    },
+    "root3_superportfolio_binding": {
+      "path": "canonical/governance/ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_V1.json",
+      "git_blob_sha": "0fa75e451bba19754a4296283c0095e4182ca97d"
+    },
+    "differential_compiler": {
+      "path": "canonical/governance/DIFFERENTIAL_DOMINANCE_COMPILER_V1.json",
+      "git_blob_sha": "1b7007fb469bf5c666c43bfb2fe871e1e10b16c6"
+    },
+    "ownership_matrix": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "git_blob_sha": "01abb91c114576ac340816b052724150258726ff"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    }
+  },
+  "target_predicates": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+  ],
+  "current_route_falsification": {
+    "absolute_top_route": {
+      "state": "OPEN_NOT_PROVED",
+      "reason": "CURRENT_CANONICAL_EVIDENCE_DOES_NOT_PROVE_A_SCOPE_COMPLETE_CONSERVATIVE_BRAIN_SUCCESS_LOWER_BOUND_AT_THE_OBJECTIVE_TOP_FOR_ANY_OF_THE_THREE_TARGETS",
+      "nonclaim": "THIS_DOES_NOT_CLAIM_BRAIN_WOULD_FAIL_THE_PORTFOLIO"
+    },
+    "finite_differential_route": {
+      "state": "VALID_THEOREM_BUT_CURRENT_INPUTS_UNAVAILABLE",
+      "reason": "THE_INSTALLED_DIFFERENTIAL_DOMINANCE_COMPILER_REQUIRES_A_FROZEN_COMPLETE_FINITE CASE UNIVERSE WITH CASE IDS AND CASE-LEVEL ELIMINATION EVIDENCE__THE_FROZEN_SHARED SUPERPORTFOLIO CURRENTLY HAS GENERATED_NOW_FALSE_EXPOSED_NOW_FALSE_AND_BEACON_KNOWN_NOW_FALSE",
+      "nonclaim": "THIS_DOES_NOT INVALIDATE_DIFFERENTIAL_DOMINANCE AFTER AN ADMISSIBLE FINITE SCOPE EXISTS"
+    },
+    "existing_end_to_end_theorem_route": {
+      "state": "NO_CURRENT_SCOPE_COMPLETE_CLOSURE_RECEIPT_BOUND",
+      "reason": "CURRENT_OWNERSHIP_MATRIX DOES_NOT MARK THE THREE WHOLE FAMILIES VERIFIED OWNED EQUAL_OR_BETTER AND THE BEHAVIORAL CONTRACT REGISTRY STILL EXPOSES MULTIPLE CAUSAL RESIDUALS SHARED ACROSS AGENCY INSTRUCTION_SCOPE_AND_COMPOSITION",
+      "nonclaim": "SEARCH_FAILURE_OR_OPEN_COMPONENTS_ARE_NOT_A PROOF_THAT_NO_FUTURE_STRONGER_THEOREM_CAN_EXIST"
+    }
+  },
+  "shared_causal_residual_examples": [
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+    "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+    "TASK_TO_DELEGATION_GRAPH_001",
+    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+  ],
+  "preserved_fallback": {
+    "route": "ROOT3_MATCHED_SUPERPORTFOLIO_WAVE",
+    "matched_scope_target_count": 8,
+    "shared_future_superportfolio_wave_count": 1,
+    "includes_all_three_target_predicates": true,
+    "current_state": "BLOCKED_BEFORE_GENERATION__EXACT_OPUS55_COMPARATOR_ADMISSIBILITY_OPEN",
+    "case_generation_now": false,
+    "fresh_reality_authorized": false
+  },
+  "tournament_result": {
+    "delete_now": [
+      "REPEAT_SEARCH_FOR_A_CURRENTLY_NONEXISTENT_SCOPE_COMPLETE_LB1_RECEIPT_WITHOUT_NEW_EVIDENCE",
+      "TRY_TO_INSTANTIATE_DIFFERENTIAL_DOMINANCE_BEFORE_A_FINITE_CONTENT_ADDRESSED_CASE_UNIVERSE_EXISTS",
+      "RUN_THREE_SEPARATE_MATCHED_COMPARATOR_CAMPAIGNS"
+    ],
+    "preserve": [
+      "NEW_CONTENT_ADDRESSED_SCOPE_COMPLETE_END_TO_END_STRONGER_THEOREM_IF_ONE_IS ACTUALLY_DERIVED",
+      "NEW_SOUND_TARGET_UPPER_BOUND_OR_EQUIVALENT_STRONGER_CERTIFICATE_IF ONE_BECOMES_AVAILABLE",
+      "ONE_SHARED_MATCHED_SUPERPORTFOLIO_WAVE_AFTER ITS_EXISTING_ADMISSION_GATES_PASS"
+    ],
+    "scheduler_rule": "WORK_ONLY_A_NEW_VERDICT_CHANGING_STRONGER_CERTIFICATE__OTHERWISE_PRESERVE_THE_SINGLE_SHARED_EMPIRICAL_FALLBACK"
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_PREDICATE_CLOSED",
+    "NO_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_THE_THREE_PREDICATES_ARE_INFORMATION_THEORETICALLY_IMPOSSIBLE_WITHOUT_OPUS",
+    "NO_CLAIM_A_FUTURE_SCOPE_COMPLETE_STRONGER_THEOREM_CANNOT_EXIST",
+    "NO_CASE_GENERATION",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
