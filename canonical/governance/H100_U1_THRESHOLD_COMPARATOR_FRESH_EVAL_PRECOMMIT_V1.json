@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_THRESHOLD_COMPARATOR_FRESH_EVAL_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_PROGRAM_BEFORE_FRESH_OUTCOMES",
+  "reference_machine": "H100_U1_STACK_VM",
+  "program_path": "canonical/runtime/h100_u1_threshold_comparator_program_v1.py",
+  "program_blob_sha": "b3e41799eb8cc229f8a85205f4dfa4d96b58a74a",
+  "encoded_program_bytes": 73,
+  "target_adapted_persistent_bits": 584,
+  "learned_bits": 0,
+  "tasks": [
+    {
+      "id": "LT_FRESH",
+      "input": [
+        17,
+        1,
+        0,
+        0,
+        16,
+        17
+      ],
+      "gold": [
+        1,
+        0
+      ]
+    },
+    {
+      "id": "LE_FRESH",
+      "input": [
+        -3,
+        1,
+        1,
+        0,
+        -3,
+        4
+      ],
+      "gold": [
+        1,
+        0
+      ]
+    },
+    {
+      "id": "EQ_FRESH",
+      "input": [
+        9,
+        0,
+        1,
+        0,
+        9,
+        8
+      ],
+      "gold": [
+        1,
+        0
+      ]
+    },
+    {
+      "id": "GE_FRESH",
+      "input": [
+        0,
+        0,
+        1,
+        1,
+        -1,
+        0
+      ],
+      "gold": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "GT_FRESH",
+      "input": [
+        101,
+        0,
+        0,
+        1,
+        102,
+        101
+      ],
+      "gold": [
+        1,
+        0
+      ]
+    },
+    {
+      "id": "NE_FRESH",
+      "input": [
+        5,
+        1,
+        0,
+        1,
+        5,
+        6
+      ],
+      "gold": [
+        0,
+        1
+      ]
+    }
+  ],
+  "gate": "6_OF_6",
+  "hard_nonclaims": [
+    "FIXED_CANONICAL_WITNESS_TRIPLE_CONTRACT_ONLY",
+    "NOT_GENERAL_PROGRAM_REPAIR",
+    "73_BYTES_IS_AN_EXPLICIT_UPPER_BOUND_NOT_MINIMUM_DESCRIPTION"
+  ],
+  "promotion_authority": false
+}
