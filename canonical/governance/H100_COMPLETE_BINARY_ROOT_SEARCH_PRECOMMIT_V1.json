@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_H100_COMPLETE_BINARY_ROOT_SEARCH_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_BINARY_BEAM_FAILURE__BEFORE_COMPLETE_BINARY_ROOT_OUTCOMES",
+  "prior_failure": "canonical/verification/H100_FRESH_BINARY_TREE_SEARCH_SECOND_CARRIER_FAILURE_20261006_V1.json",
+  "frozen_task_source": "canonical/governance/H100_FRESH_BINARY_TREE_SEARCH_PRECOMMIT_V1.json",
+  "unary_operator_order": [
+    "neg",
+    "abs",
+    "square",
+    "sqrt_abs",
+    "log1p_abs",
+    "sat"
+  ],
+  "branch_max_unary_depth": 3,
+  "branch_count": 259,
+  "binary_operator_order": [
+    "add",
+    "sub",
+    "mul",
+    "stable_div"
+  ],
+  "candidate_count_per_task": 201502,
+  "enumeration_contract": [
+    "BRANCH_SET_IS_IDENTITY_PLUS_EVERY_UNARY_SEQUENCE_DEPTH_1_TO_3",
+    "ADD_AND_MUL_ENUMERATE_UNORDERED_BRANCH_PAIRS_WITH_REPLACEMENT",
+    "SUB_AND_STABLE_DIV_ENUMERATE_ALL_ORDERED_BRANCH_PAIRS",
+    "NO_TARGET_SCORE_PREFIX_PRUNING",
+    "FIT_ONLY_INTERCEPT_PLUS_X_PLUS_ONE_BINARY_ROOT_FEATURE",
+    "SELECT_EXACT_CANDIDATE_BY_LOWEST_TREE_COMPLEXITY_THEN_LEXICOGRAPHIC_SIGNATURE"
+  ],
+  "exact_gate": {
+    "train_nrmse": 1e-10,
+    "holdout_nrmse": 1e-8,
+    "transfer_holdout_nrmse": 1e-8
+  },
+  "pass_gate": [
+    "ALL_THREE_ORIGINAL_FROZEN_BINARY_TASKS_HAVE_AN_EXACT_CANDIDATE",
+    "ALL_SELECTED_STRUCTURES_TRANSFER_AFTER_REFITTING_ONLY_LINEAR_COEFFICIENTS",
+    "CANDIDATE_COUNT_PER_TASK_EQUALS_201502",
+    "PERSISTENT_LEARNED_BYTES_ZERO"
+  ],
+  "hard_nonclaims": [
+    "THIS_IS_COMPLETE_ONLY_FOR_ONE_BINARY_ROOT_WITH_UNARY_BRANCHES_DEPTH_LE_3",
+    "201502_CANDIDATES_IS_FINITE",
+    "NO_GENERAL_PROGRAM_SEARCH_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
