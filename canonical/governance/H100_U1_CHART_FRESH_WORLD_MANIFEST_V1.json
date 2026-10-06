@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_CHART_FRESH_WORLD_MANIFEST_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_FRESH_PARSER_EXECUTION",
+  "frozen_program": "canonical/governance/H100_U1_CHART_AXES_TEXT_LEGEND_PROGRAM_PRECOMMIT_V1.json",
+  "program_sha256": "2baf3fa772b75730cd4aa6ffbf13f960a1a79e7139f83f3ace956f6ca7bba847",
+  "seed_commit": "35ebf135e63459d413aae8b843e875b081463069",
+  "generator": {
+    "path": "canonical/runtime/h100_u1_chart_fresh_world_generator_v1.py",
+    "blob_sha": "221dae79a1d861506501510e4ecb9e230e9a4872"
+  },
+  "generated_world_sha256": "e9f28e6d9b369a161c804ea4413ec8289fc9b522b8a5a3b2447e0a23412af5b6",
+  "generated_task_count": 6,
+  "fresh_variation": [
+    "NEW_GLYPH_ATLAS",
+    "AXIS_X_5_6_7",
+    "BASELINE_15_16_17",
+    "VARIABLE_BAR_WIDTHS",
+    "VARIABLE_GAPS",
+    "NEW_TICK_AND_LEGEND_IDENTITIES",
+    "NEW_BAR_VALUES"
+  ],
+  "promotion_authority": false
+}
