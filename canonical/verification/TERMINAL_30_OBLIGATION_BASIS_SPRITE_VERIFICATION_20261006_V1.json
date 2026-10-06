@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_30_OBLIGATION_BASIS_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__30_CURRENT_TRUTHS__22_ATOMIC_PLUS_8_META__D15_U15__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "activate-current-30-obligation-basis-v1",
+    "exact_blobs": {
+      "canonical/runtime/terminal_frontier_factorizer_v2.py": "7d0d60d8349a550b76f132e8a7545fe841440235",
+      "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V3.json": "39fa98a483b4d528d971421c157d6350dbde72d6",
+      "canonical/runtime/current_30_obligation_pointer_verifier.py": "c24e5650aa31a7fff6c94a0d41307ea153539efd",
+      "canonical/tests/test_current_30_obligation_pointer_verifier.py": "604a2e67e9ae741b8f7df3defe30b81f2ed99dc0",
+      "canonical/governance/AA_BRIEFCASE_DUPLICATE_TRUTH_NECESSITY_COUNTERMODEL_20261006_V1.json": "2c29c933caedffc5d8f44859e903459449e9bfb4",
+      "canonical/verification/AA_BRIEFCASE_DUPLICATE_TRUTH_SPRITE_VERIFICATION_20261006_V1.json": "6f57945ed73cba770b00c05c638a8fa39cc2dea9"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/current30",
+    "execution": "PYTHONPATH_BOUND_EXACT_BLOB_UNIT_REPLAY",
+    "result": "PASS_6_OF_6"
+  },
+  "verified": [
+    "22_LOAD_BEARING_ATOMIC_PLUS_8_META_EQUALS_30_CURRENT_OPEN_TRUTHS",
+    "HISTORICAL_38_PREDICATE_REGISTRY_REMAINS_PRESERVED",
+    "TWO_NONNECESSARY_TRUTH_COUNTS_ARE_DELETED_FROM_CURRENT_BASIS_ONLY",
+    "ARTIFACT_CREATION_AND_PROFESSIONAL_KNOWLEDGE_WORK_BOTH_RETAIN_THE_SHARED_FROZEN_AA_BRIEFCASE_GE_1822_TRUTH",
+    "ROUTE_COUNTS_EQUAL_J0_G0_T0_D15_U15_AND_SUM_TO_30",
+    "ROOT2_TOUCHING_REDUCES_TO_17_AND_ROOT3_REMAINS_8",
+    "DELETED_AA_ALIAS_REENTRY_FAILS_CLOSED",
+    "TERMINAL_PROMOTION_AND_CREDIT_INFLATION_FAIL_CLOSED",
+    "TERMINAL_REMAINS_FALSE",
+    "ZERO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
