@@ -1,0 +1,28 @@
+name: Verify matched success integrated causal harness V2
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/matched_success_integrated_causal_harness_v2.py"
+      - "canonical/tests/test_matched_success_integrated_causal_harness_v2.py"
+      - "canonical/governance/MATCHED_SUCCESS_INTEGRATED_CAUSAL_HARNESS_V2.json"
+      - "canonical/runtime/matched_success_semantic_coupling_contract_v2.py"
+      - "canonical/governance/MATCHED_SUCCESS_SEMANTIC_COUPLING_CONTRACT_V2.json"
+      - ".github/workflows/verify-matched-success-integrated-causal-harness-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m py_compile canonical/runtime/matched_success_semantic_coupling_contract_v2.py canonical/runtime/matched_success_integrated_causal_harness_v2.py
+      - run: python -m pytest -q canonical/tests/test_matched_success_semantic_coupling_contract_v2.py canonical/tests/test_matched_success_integrated_causal_harness_v2.py
