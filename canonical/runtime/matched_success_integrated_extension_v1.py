@@ -270,6 +270,8 @@ def scope_input(
     brain_commit_sha: str,
     tool_authority_sha256: str,
     target_interface_sha256: str,
+    coverage_rule_verified: bool = False,
+    coverage_rule_verification_sha256: str | None = None,
 ) -> dict[str, Any]:
     cases = generate_cases(commitment, beacon)
     scope_cases = []
@@ -282,13 +284,33 @@ def scope_input(
             "primary_atom": row["primary_atom"],
             "target_predicate": row["target_predicate"],
         }
+        if coverage_rule_verified:
+            if (
+                not isinstance(coverage_rule_verification_sha256, str)
+                or len(coverage_rule_verification_sha256) != 64
+                or any(ch not in "0123456789abcdef" for ch in coverage_rule_verification_sha256)
+            ):
+                raise ValueError("COVERAGE_RULE_VERIFICATION_SHA256_REQUIRED")
+            coverage_receipt_sha = hashlib.sha256(
+                (
+                    coverage_rule_verification_sha256
+                    + "\0"
+                    + row["case_id"]
+                    + "\0"
+                    + row["primary_atom"]
+                    + "\0"
+                    + _sha256(coverage_basis)
+                ).encode()
+            ).hexdigest()
+        else:
+            coverage_receipt_sha = "0" * 64
         scope_cases.append({
             "case_id": row["case_id"],
             "case_payload_sha256": row["case_payload_sha256"],
             "case_initial_state_sha256": row["case_initial_state_sha256"],
             "coverage": {
-                "independently_verified": True,
-                "receipt_sha256": _sha256(coverage_basis),
+                "independently_verified": coverage_rule_verified,
+                "receipt_sha256": coverage_receipt_sha,
                 "target_atoms": target_atoms,
             },
         })
