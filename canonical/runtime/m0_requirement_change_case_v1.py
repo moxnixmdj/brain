@@ -8,9 +8,17 @@ from canonical.runtime import m0a_raw_source_brain_candidate_v2 as candidate
 from canonical.runtime import m0a_raw_source_terminal_suite_v2 as suite
 
 SCHEMA="PROJECT_BRAIN_M0_REQUIREMENT_CHANGE_CASE_V1"
+SEMANTIC_FIELDS=("subject","predicate","object","polarity","transform_kind")
+
+def _semantic_requirement(row:Mapping[str,Any])->dict[str,Any]:
+    return {k:row.get(k) for k in SEMANTIC_FIELDS}
 
 def _canon(rows):
-    return tuple(sorted(json.dumps(x,sort_keys=True,separators=(",",":")) for x in (rows or [])))
+    return tuple(sorted(
+        json.dumps(_semantic_requirement(x),sort_keys=True,separators=(",",":"))
+        for x in (rows or [])
+        if isinstance(x,Mapping)
+    ))
 
 def _sha(x:Any)->str:
     return hashlib.sha256(json.dumps(x,sort_keys=True,separators=(",",":"),default=str).encode()).hexdigest()
@@ -18,11 +26,8 @@ def _sha(x:Any)->str:
 def generate_case(seed:int,ordinal:int=0)->dict[str,Any]:
     if not isinstance(seed,int) or isinstance(seed,bool) or not isinstance(ordinal,int) or ordinal<0:
         raise ValueError("INPUT")
-    # FLAT_COMPOUND is ordinal 3 in the frozen M0 suite. Use two independently
-    # generated compound instructions and declare phase 2 to supersede phase 1.
     p1=suite.generate_case(seed,3)
     p2=suite.generate_case(seed ^ 0x5A17C0DE ^ ordinal,3)
-    # Deterministically perturb if the extremely unlikely semantic collision occurs.
     bump=1
     while _canon(p1["_oracle"]["requirements"])==_canon(p2["_oracle"]["requirements"]):
         p2=suite.generate_case((seed ^ 0x5A17C0DE ^ ordinal)+bump,3)
