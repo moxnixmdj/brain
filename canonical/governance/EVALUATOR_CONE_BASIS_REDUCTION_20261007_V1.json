@@ -1,0 +1,19 @@
+{
+  "schema":"PROJECT_BRAIN_EVALUATOR_CONE_BASIS_REDUCTION_V1",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_ZERO_CREDIT",
+  "claim":"If every admissible evaluator is a constant plus a nonnegative combination of proved generators g_j, then Brain noninferiority on every generator implies noninferiority for the whole evaluator class.",
+  "proof":"For u=c+sum_j alpha_j g_j with alpha_j>=0, expectation gap equals sum_j alpha_j*(E_B[g_j]-E_O[g_j]); if every generator gap is nonnegative the total gap is nonnegative. If one generator gap is negative, choosing that generator falsifies universal noninferiority.",
+  "terminal_use":"Compress a hidden evaluator family to a proved finite or compact generating boundary before falling back to exact Brain-Opus trajectory-law equality.",
+  "falsifiers":[
+    "An admissible load-bearing evaluator lies outside the proved generated cone.",
+    "A generator gap is negative.",
+    "A hard constraint is omitted from the evaluator-class proof.",
+    "The generator family is only approximate without a proved error bound."
+  ],
+  "hard_nonclaims":[
+    "No claim current Opus55 evaluator families have a finite cone basis.",
+    "No terminal acceptance family capability or ownership credit."
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
