@@ -3,7 +3,7 @@
   "date": "2026-10-06",
   "status": "CONNECTOR_STATIC_RECOMPUTATION_PASS__10_OF_10_STRUCTURAL_CHECKS__EXACT_EXECUTION_REPLAY_PENDING__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "branch": "repair/root3-production-bootstrap-v3",
+  "branch": "repair/root3-production-bootstrap-v4",
   "subjects": {
     "workflow": {
       "path": ".github/workflows/astra-shared-runtime.yml",
