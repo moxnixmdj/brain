@@ -1,0 +1,177 @@
+{
+  "schema": "PROJECT_BRAIN_H100_DETERMINISTIC_BAR_GEOMETRY_CLEAN_TEST_HOLDOUT_PREOUTPUT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_AFTER_SOLVER_FREEZE__BEFORE_ANY_SOLVER_OUTPUT_ON_THESE_IMAGES__GOLD_VALUES_HIDDEN",
+  "source_commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+  "solver_runtime": "canonical/runtime/h100_deterministic_bar_geometry_solver_v1.py",
+  "solver_preoutput": "canonical/governance/H100_DETERMINISTIC_BAR_GEOMETRY_SOLVER_PREOUTPUT_V1.json",
+  "case_count": 16,
+  "gold_vector_sha256": "b3cd373306c6daf21edf1d5f6bac4485a0b87933b859db0a7422b59d98d2054d",
+  "cases": [
+    {
+      "image_bytes": 43928,
+      "image_sha256": "b3e669137984fe0dbcec29355262e1c39286466f771d4689cf42c73126507950",
+      "imgname": "41699051005347.png",
+      "index": 0,
+      "intent": "BAR_INSTANCE_COUNT",
+      "query": "How many food item is shown in the bar graph?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 28285,
+      "image_sha256": "f753bab919ed5cf525d79bad95a4d64372418a07072297ff3f731c5c81bb8e06",
+      "imgname": "41810321001157.png",
+      "index": 2,
+      "intent": "BAR_INSTANCE_COUNT",
+      "query": "How many bars are shown in the chart?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 29833,
+      "image_sha256": "a1429ec2a1fe2d5eece24d819bed15e8f79fd715fc486411ca77750ef8d0e9e2",
+      "imgname": "36995393008758.png",
+      "index": 100,
+      "intent": "DISTINCT_BAR_COLOR_COUNT",
+      "query": "How many color bars are there in the graph?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 51580,
+      "image_sha256": "b1ad6ea0dbdf21c360a22b2e8ce12171f233d73166f8f78ecac56a63fa36807b",
+      "imgname": "1304.png",
+      "index": 108,
+      "intent": "DISTINCT_BAR_COLOR_COUNT",
+      "query": "How many colors are used to represent the bar graph?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 30072,
+      "image_sha256": "e168eeeb918d4a8dee73405678a398785ef60726fc1d71e5704e5d80403032b8",
+      "imgname": "04675954001679.png",
+      "index": 210,
+      "intent": "DISTINCT_BAR_COLOR_COUNT",
+      "query": "How many colors are represented in the bar?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 49589,
+      "image_sha256": "126c4d36b509bd7fe23eb82cd362ce64a904256b5ff85e475d3206528f7dba69",
+      "imgname": "08263936005626.png",
+      "index": 222,
+      "intent": "BAR_INSTANCE_COUNT",
+      "query": "How many products are shown in the bar graph?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 37071,
+      "image_sha256": "20f6d2468d52f5101c246c13de724c1defee1b979df1d93ed1e43eacd03dad06",
+      "imgname": "08686631003296.png",
+      "index": 224,
+      "intent": "BAR_INSTANCE_COUNT",
+      "query": "How many bars are there in the graph?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 26989,
+      "image_sha256": "cd8dca999650b9a8b001e0b5f77c686fba1f463b8ff412a6be2bf9dc6040a711",
+      "imgname": "24441478018800.png",
+      "index": 254,
+      "intent": "BAR_INSTANCE_COUNT",
+      "query": "How many bars are there in the graph?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 39062,
+      "image_sha256": "07a076d324f009f9bd12109cc9fe5d4b07fe977220c7fe2cffb36df11e565cef",
+      "imgname": "25622655023134.png",
+      "index": 262,
+      "intent": "BAR_INSTANCE_COUNT",
+      "query": "How many bars are there in the chart?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 34803,
+      "image_sha256": "efc42181220345f409d0765e9785fe91421e7604e3b17e4929c6cc019af401b0",
+      "imgname": "26958202006631.png",
+      "index": 266,
+      "intent": "BAR_INSTANCE_COUNT",
+      "query": "How many bars are there in the chart?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 50281,
+      "image_sha256": "885e7b786c660d48d3a7019e7885ed91614f893c887adf9cf96317bba7d620eb",
+      "imgname": "47203618002668.png",
+      "index": 306,
+      "intent": "BAR_INSTANCE_COUNT",
+      "query": "How many death by risk factors are shown in the bar graph?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 46664,
+      "image_sha256": "49cda1197e7d274c4731f40a0ee24e96c6b0caa0ecadd75da526d74e8f1c04ad",
+      "imgname": "47613048005879.png",
+      "index": 308,
+      "intent": "DISTINCT_BAR_COLOR_COUNT",
+      "query": "How many colors are used in the bar?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 342350,
+      "image_sha256": "450d8e8f53aa26816d1c6ec848e1a4f2047aaa67849e9be68483fbb8ed730967",
+      "imgname": "1325.png",
+      "index": 438,
+      "intent": "DISTINCT_BAR_COLOR_COUNT",
+      "query": "How many colors are used to represent all the bars?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 18049,
+      "image_sha256": "4558760205365984f931e33b14e7ab72e8c2d19be0c14bf551540546dc71c8db",
+      "imgname": "OECD_FINANCIAL_DISINCENTIVE_TO_RETURN_TO_WORK_AUS_DNK_LUX_NOR_SVN_000002.png",
+      "index": 520,
+      "intent": "BAR_INSTANCE_COUNT",
+      "query": "How many bars are there in the graph?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 12313,
+      "image_sha256": "ee8ff79b0325f5667a9f021e87266d2568044ce6a1ea85d467d1c7843eedd254",
+      "imgname": "OECD_VIOLENCE_AGAINST_WOMEN_JAM_ZWE_000001.png",
+      "index": 546,
+      "intent": "DISTINCT_BAR_COLOR_COUNT",
+      "query": "How many color are shown in the bar graph?",
+      "split": "test_human"
+    },
+    {
+      "image_bytes": 50832,
+      "image_sha256": "8afa19db732e35c37b281a14a83a02d9895c5109b19289a41924cff1eed9d9f5",
+      "imgname": "OECD_GROSS_DIRECT_INSURANCE_PREMIUMS_AUS_CHL_ISR_PRT_URY_000090.png",
+      "index": 578,
+      "intent": "DISTINCT_BAR_COLOR_COUNT",
+      "query": "How many color bars are shown in the graph?",
+      "split": "test_human"
+    }
+  ],
+  "selection_basis": "QUESTION_TEXT_ONLY_BEFORE_SOLVER_OUTPUT",
+  "excluded_semantics": [
+    "SPECIFIC_COLOR_SUBSET",
+    "NUMERIC_THRESHOLD_SUBSET",
+    "NAMED_SERIES_SUBSET"
+  ],
+  "pass_gate": {
+    "minimum_exact_integer_accuracy": 0.8,
+    "minimum_correct": 13,
+    "abstentions_count_as_incorrect": true,
+    "persistent_learned_bytes": 0,
+    "external_visual_capability_calls": 0
+  },
+  "hard_rules": [
+    "NO_POST_OUTPUT_SOLVER_TUNING_FOR_THIS_HOLDOUT",
+    "NO_OCR",
+    "NO_GOLD_AS_SOLVER_INPUT",
+    "NO_LEARNED_VISION_MODEL",
+    "NO_EXTERNAL_VISUAL_CAPABILITY_MODEL"
+  ],
+  "promotion_authority": false
+}
