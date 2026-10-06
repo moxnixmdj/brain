@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_CALIBRATION_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__10_OF_10__PROGRAM_FROZEN_BEFORE_HOLDOUT",
+  "reference_machine": "H100_U1_STACK_VM",
+  "program_precommit": "canonical/governance/H100_U1_CALIBRATION_PROGRAM_PRECOMMIT_V1.json",
+  "holdout": "canonical/governance/H100_U1_CALIBRATION_FRESH_HOLDOUT_V1.json",
+  "observed": {
+    "raw_program_bytes": 17,
+    "raw_program_bits": 136,
+    "passed": 10,
+    "total": 10,
+    "target_adapted_persistent_data_bytes": 0
+  },
+  "conclusion": "FIRST_CLEAN_POST_U1_CAPABILITY_UPPER_BOUND_IS_136_BITS_FOR_THE_FROZEN_ARITHMETIC_SCOPE",
+  "promotion_authority": false
+}
