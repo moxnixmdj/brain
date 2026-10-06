@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_TERMINAL_FALSIFICATION_CONTROL_LOOP_V1",
   "date": "2026-10-06",
   "status": "CANDIDATE__AUTHORITATIVE_TERMINAL_SEARCH_CONTROL_GRAPH__ZERO_TERMINAL_CREDIT",
-  "canonical_base_commit": "40cc13174ac15131d59134a5bb869af602b40358",
+  "canonical_base_commit": "cd1a8618211f9f67aa9caf74e47150467c6048ca",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_truth_state": {
     "proved_atomic": 14,
@@ -31,16 +31,24 @@
     {
       "path": "canonical/governance/BENCHMARK_WITNESS_ALL_PREMISES_V3_ACTIVATION_20261006_V1.json",
       "git_blob_sha": "b1877fb4e78e701b43be6c35abe7ee51a46b3ad8"
+    },
+    {
+      "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_ROOT3_PRODUCTION_BOOTSTRAP_BYPASS_20261006_V1.json",
+      "git_blob_sha": "2118e07b2b2dc4774c1b7cc55e75186338f6259d"
+    },
+    {
+      "path": "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_ROOT3_PRODUCTION_BOOTSTRAP_REPAIR_ACTIVATION_20261006_V1.json",
+      "git_blob_sha": "e561ac602b49d2579a7fd3d39811a5453067c1e1"
     }
   ],
   "controller": {
     "runtime": {
       "path": "canonical/runtime/terminal_falsification_control_loop_v1.py",
-      "git_blob_sha": "32645e84a2ff9261883fce8a33f221898242d0c4"
+      "git_blob_sha": "fba9344e75e669bb1c5cefcb50d3b489ae8dbd56"
     },
     "tests": {
       "path": "canonical/tests/test_terminal_falsification_control_loop_v1.py",
-      "git_blob_sha": "c88c6af47798de823c1ff0a8351afa026d1ccd2d"
+      "git_blob_sha": "3b6fa5170594d191740fd154262455da0b57395c"
     }
   },
   "control_invariants": [
@@ -104,7 +112,7 @@
     {
       "id": "C_EFFECT_BOUNDARY_CLOSURE_V2",
       "lane": "EFFECT_CLOSURE",
-      "status": "ACTIVE",
+      "status": "FALSIFIED",
       "successor_of": "C_ROOT3_SHARED_UNIVERSAL",
       "cost_units": 2,
       "target_truth_obligations": [
@@ -115,7 +123,31 @@
         "UNMEDIATED_EFFECT_ESCAPE",
         "BOOTSTRAP_ORDER_COUNTERMODEL",
         "CLASS_EXECUTOR_SOUNDNESS_COUNTERMODEL"
-      ]
+      ],
+      "falsification_receipt": {
+        "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_ROOT3_PRODUCTION_BOOTSTRAP_BYPASS_20261006_V1.json",
+        "git_blob_sha": "2118e07b2b2dc4774c1b7cc55e75186338f6259d"
+      }
+    },
+    {
+      "id": "C_EFFECT_BOUNDARY_PRODUCTION_BOOTSTRAP_REPAIR_V3",
+      "lane": "EFFECT_CLOSURE",
+      "status": "ACTIVE",
+      "successor_of": "C_EFFECT_BOUNDARY_CLOSURE_V2",
+      "cost_units": 1,
+      "target_truth_obligations": [
+        "ROOT3_SHARED_SCOPE_COMPOSITION"
+      ],
+      "target_truth_obligation_count": 7,
+      "falsifiers": [
+        "RAW_PRODUCTION_ENTRY_REMAINS_REACHABLE",
+        "IMPORT_TIME_MATERIAL_EFFECT_BEFORE_MEDIATOR_INSTALL",
+        "DIRECT_ASTRA_MAIN_INVOCATION_WITHOUT_MEDIATION_PRECONDITION",
+        "SUBPROCESS_RUN_OR_POPEN_REACHABLE_BEFORE_ROOT3_INSTALL",
+        "UNPROVED_EFFECT_CLASS_GAINS_POSITIVE_AUTHORITY",
+        "WORKFLOW_OR_RUNTIME_BLOB_DRIFT_INVALIDATES_BOOTSTRAP_RECEIPT"
+      ],
+      "claim": "Repair the proven production bootstrap bypass without widening authority; then resume child-internal and native effect escape falsification."
     },
     {
       "id": "C_META_BEHAVIORAL_QUOTIENT",
@@ -189,7 +221,7 @@
   "expected_current_schedule": [
     "C_TARGET_UNIVERSE_COMPLETENESS_OR_SCOPE_SUPERSET_V2",
     "C_BENCHMARK_WITNESS_ELIMINATION_V3",
-    "C_EFFECT_BOUNDARY_CLOSURE_V2",
+    "C_EFFECT_BOUNDARY_PRODUCTION_BOOTSTRAP_REPAIR_V3",
     "C_CONDITION_RESTRICTION_AND_INTERACTION_CLOSURE_V2",
     "C_CAPABILITY_OWNERSHIP_DONOR_INDEPENDENCE_V1"
   ],
