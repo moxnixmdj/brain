@@ -13,6 +13,9 @@ PROTOCOLS = "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
 SUPER = "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json"
 R3 = "canonical/governance/ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_V1.json"
 DIFF = "canonical/governance/DIFFERENTIAL_DOMINANCE_COMPILER_V1.json"
+PREWAVE = "canonical/governance/BRAIN_FIRST_DIFFERENTIAL_PREWAVE_V1.json"
+PREWAVE_VERIFY = "canonical/verification/BRAIN_FIRST_DIFFERENTIAL_PREWAVE_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json"
+MONO_COUNTERMODEL = "canonical/governance/MATCHED_SUCCESS_REDUCER_MONOTONICITY_COUNTERMODEL_V1.json"
 OWN = "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
 CONTRACTS = "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
 
@@ -21,6 +24,9 @@ EXPECTED = {
     SUPER: "d9ac894594ebcd2883520f7b7977a3548420541c",
     R3: "0fa75e451bba19754a4296283c0095e4182ca97d",
     DIFF: "1b7007fb469bf5c666c43bfb2fe871e1e10b16c6",
+    PREWAVE: "43b5c74b5caf3b3065feaf98a87f798e7c14aead",
+    PREWAVE_VERIFY: "9a9437a07f7dad464800a6eddb9776e63916317a",
+    MONO_COUNTERMODEL: "c9fd8dac4de690c860455bd449d226fe20b7ec11",
     OWN: "01abb91c114576ac340816b052724150258726ff",
     CONTRACTS: "ee187f611a0e82b2de495ee377682f39bc31dd31",
 }
@@ -37,13 +43,10 @@ FAMILIES = {
     "MULTI_CAPABILITY_COMPOSITION",
 }
 
-RESIDUAL_EXAMPLES = {
-    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
-    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
-    "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
-    "TASK_TO_DELEGATION_GRAPH_001",
-    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
-    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+REQUIRED_PREMISE_IDS = {
+    "MATCHED_SUCCESS_REDUCER_MONOTONICITY_AND_IDENTITY",
+    "MATCHED_CASE_ISOLATION_OR_RESET_EQUIVALENCE",
+    "FINITE_COMPLETE_CONTENT_ADDRESSED_MATCHED_SCOPE",
 }
 
 
@@ -61,7 +64,6 @@ def load(path: str) -> dict[str, Any]:
 
 def evaluate() -> dict[str, Any]:
     errors: list[str] = []
-
     for path, expected in EXPECTED.items():
         actual = blob(path)
         if actual != expected:
@@ -69,14 +71,59 @@ def evaluate() -> dict[str, Any]:
 
     cut = load(CUT)
     protocols = load(PROTOCOLS)
-    superp = load(SUPER)
     r3 = load(R3)
-    diff = load(DIFF)
+    prewave = load(PREWAVE)
+    verify = load(PREWAVE_VERIFY)
+    countermodel = load(MONO_COUNTERMODEL)
     own = load(OWN)
-    contracts = load(CONTRACTS)
 
     if set(cut.get("target_predicates") or []) != TARGETS:
         errors.append("CUT_TARGET_SET_DRIFT")
+
+    directly = set(
+        ((prewave.get("scope_boundary") or {}).get("directly_applicable_to") or [])
+    )
+    if not TARGETS.issubset(directly):
+        errors.append("PREWAVE_NOT_DIRECTLY_APPLICABLE_TO_ALL_THREE")
+
+    if not str(verify.get("status") or "").startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"):
+        errors.append("PREWAVE_INDEPENDENT_VERIFICATION_NOT_PASS")
+
+    verified = set(verify.get("verified") or [])
+    for required in {
+        "ALL_BRAIN_SUCCESS_IMPLIES_ZERO_COMPARATOR_RESIDUAL",
+        "ONLY_BRAIN_FAILURE_CASES_REMAIN_COMPARATOR_RELEVANT",
+        "NONMONOTONE_REDUCER_OUTCOME_DEPENDENT_GENERATION_AND_CROSS_CASE_STATE_DEPENDENCE_FAIL_CLOSED",
+    }:
+        if required not in verified:
+            errors.append("PREWAVE_VERIFIED_PROPERTY_MISSING:" + required)
+
+    nonclaims = set(verify.get("hard_nonclaims") or [])
+    for required in {
+        "NO_CURRENT_MATCHED_REDUCER_MONOTONICITY_PROOF",
+        "NO_CURRENT_COMPLETE_FINITE_MATCHED_CASE_UNIVERSE",
+        "NO_TERMINAL_CASE_GENERATION_OR_EXECUTION",
+    }:
+        if required not in nonclaims:
+            errors.append("PREWAVE_NONCLAIM_DRIFT:" + required)
+
+    if "CONSERVATIVE_BOUND_ALONE_DOES_NOT_IMPLY_MONOTONICITY" not in str(
+        countermodel.get("status") or ""
+    ):
+        errors.append("MONOTONICITY_COUNTERMODEL_STATUS_DRIFT")
+
+    premises = cut.get("current_zero_reality_premises_open")
+    if not isinstance(premises, list):
+        errors.append("CUT_PREMISES_INVALID")
+        premise_ids = set()
+    else:
+        premise_ids = {
+            row.get("id")
+            for row in premises
+            if isinstance(row, Mapping) and row.get("state") == "OPEN"
+        }
+    if premise_ids != REQUIRED_PREMISE_IDS:
+        errors.append("CUT_PREMISE_IDENTITY_DRIFT")
 
     protocol_families = {
         row.get("family")
@@ -88,31 +135,6 @@ def evaluate() -> dict[str, Any]:
     if protocol_families != FAMILIES:
         errors.append("TARGET_PROTOCOLS_NOT_ALL_OPEN")
 
-    cg = superp.get("case_generation") or {}
-    if not (
-        cg.get("generated_now") is False
-        and cg.get("exposed_now") is False
-        and cg.get("beacon_known_now") is False
-    ):
-        errors.append("SUPERPORTFOLIO_CASE_GENERATION_STATE_CHANGED")
-
-    ca = superp.get("comparator_admissibility") or {}
-    if ca.get("current_state") != "BLOCKED":
-        errors.append("COMPARATOR_ADMISSIBILITY_STATE_CHANGED")
-
-    diff_props = set(diff.get("required_scope_properties") or [])
-    for required in {
-        "FROZEN",
-        "COMPLETE",
-        "FINITE",
-        "INDEPENDENTLY_VERIFIED",
-        "SHARED_SUCCESS_CRITERION",
-        "SHARED_AUTHORITY_BOUNDARY",
-        "CONTAMINATION_CLEAN",
-    }:
-        if required not in diff_props:
-            errors.append("DIFFERENTIAL_SCOPE_REQUIREMENT_DRIFT:" + required)
-
     r3_rows = {
         row.get("predicate_id")
         for row in r3.get("matched_scope_targets") or []
@@ -120,12 +142,6 @@ def evaluate() -> dict[str, Any]:
     }
     if not TARGETS.issubset(r3_rows):
         errors.append("THREE_TARGETS_NOT_ALL_IN_SHARED_SUPERPORTFOLIO")
-
-    compression = r3.get("execution_compression") or {}
-    if compression.get("shared_future_superportfolio_wave_count") != 1:
-        errors.append("SHARED_WAVE_COUNT_DRIFT")
-    if compression.get("per_family_verdicts_remain_independent") is not True:
-        errors.append("PER_FAMILY_VERDICT_INDEPENDENCE_DRIFT")
 
     own_rows = {
         row.get("family"): row
@@ -138,14 +154,6 @@ def evaluate() -> dict[str, Any]:
         if str(row.get("postwave_opus55_acceptance_status")) != "DEFINED_RESULT_OPEN":
             errors.append("OWNERSHIP_ACCEPTANCE_STATE_CHANGED:" + family)
 
-    contract_ids = {
-        row.get("behavior_id")
-        for row in contracts.get("active_contracted_residuals") or []
-        if isinstance(row, Mapping)
-    }
-    if not RESIDUAL_EXAMPLES.issubset(contract_ids):
-        errors.append("SHARED_CAUSAL_RESIDUAL_SET_DRIFT")
-
     if cut.get("fresh_reality_authority") is not False:
         errors.append("FRESH_REALITY_OVERCLAIM")
     if cut.get("execution_authority") is not False:
@@ -157,22 +165,22 @@ def evaluate() -> dict[str, Any]:
     return {
         "schema": SCHEMA,
         "status": (
-            "PASS__CURRENT_ZERO_REALITY_ROUTES_DO_NOT_CLOSE_THREE_MATCHED_SUCCESS_TARGETS__ONE_SHARED_FALLBACK_PRESERVED__ZERO_CREDIT"
+            "PASS__BRAIN_FIRST_DIFFERENTIAL_ROUTE_VERIFIED_CONDITIONALLY__THREE_ZERO_REALITY_PREMISES_OPEN__ZERO_CREDIT"
             if ok
             else "FAIL_CLOSED"
         ),
         "pass": ok,
         "errors": sorted(errors),
         "target_predicates": sorted(TARGETS) if ok else [],
-        "shared_empirical_wave_count": 1 if ok else None,
-        "superportfolio_cases_generated_now": False if ok else None,
-        "comparator_currently_admissible": False if ok else None,
+        "open_zero_reality_premise_count": 3 if ok else None,
+        "brain_first_can_reduce_opus_cases": True if ok else None,
+        "best_case_opus_case_count": 0 if ok else None,
+        "fresh_reality_authorized": False,
         "acceptance_credit_delta": 0,
         "capability_credit_delta": 0,
         "ownership_credit_delta": 0,
         "execution_authority": False,
         "promotion_authority": False,
-        "fresh_reality_authority": False,
     }
 
 
