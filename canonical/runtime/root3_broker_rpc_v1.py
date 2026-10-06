@@ -31,12 +31,34 @@ def _sha(value: Any) -> str:
     return hashlib.sha256(_canon(value)).hexdigest()
 
 
-def make_request(*, driver_id: str, typed_args: Any) -> dict[str, Any]:
+def _git_blob(value: Any, label: str) -> str:
+    if (
+        not isinstance(value, str)
+        or len(value) != 40
+        or any(ch not in "0123456789abcdef" for ch in value)
+    ):
+        raise BrokerRPCError(label + "_INVALID")
+    return value
+
+
+def make_request(
+    *,
+    driver_id: str,
+    driver_contract_git_blob_sha: str,
+    driver_implementation_git_blob_sha: str,
+    typed_args: Any,
+) -> dict[str, Any]:
     if not isinstance(driver_id, str) or not driver_id.strip() or "\x00" in driver_id:
         raise BrokerRPCError("DRIVER_ID_INVALID")
     core = {
         "schema": SCHEMA_REQUEST,
         "driver_id": driver_id.strip(),
+        "driver_contract_git_blob_sha": _git_blob(
+            driver_contract_git_blob_sha, "DRIVER_CONTRACT_GIT_BLOB_SHA"
+        ),
+        "driver_implementation_git_blob_sha": _git_blob(
+            driver_implementation_git_blob_sha, "DRIVER_IMPLEMENTATION_GIT_BLOB_SHA"
+        ),
         "typed_args": typed_args,
     }
     return {**core, "request_sha256": _sha(core)}
@@ -45,10 +67,19 @@ def make_request(*, driver_id: str, typed_args: Any) -> dict[str, Any]:
 def verify_request(value: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(value, Mapping):
         raise BrokerRPCError("REQUEST_NOT_OBJECT")
-    if set(value) != {"schema", "driver_id", "typed_args", "request_sha256"}:
+    if set(value) != {
+        "schema",
+        "driver_id",
+        "driver_contract_git_blob_sha",
+        "driver_implementation_git_blob_sha",
+        "typed_args",
+        "request_sha256",
+    }:
         raise BrokerRPCError("REQUEST_FIELDS_INVALID")
     expected = make_request(
         driver_id=value.get("driver_id"),
+        driver_contract_git_blob_sha=value.get("driver_contract_git_blob_sha"),
+        driver_implementation_git_blob_sha=value.get("driver_implementation_git_blob_sha"),
         typed_args=value.get("typed_args"),
     )
     if dict(value) != expected:
@@ -151,12 +182,19 @@ def child_roundtrip(
     fd: int,
     *,
     driver_id: str,
+    driver_contract_git_blob_sha: str,
+    driver_implementation_git_blob_sha: str,
     typed_args: Any,
     max_frame_bytes: int = DEFAULT_MAX_FRAME_BYTES,
 ) -> Any:
     if not isinstance(fd, int) or isinstance(fd, bool) or fd < 0:
         raise BrokerRPCError("BROKER_FD_INVALID")
-    request = make_request(driver_id=driver_id, typed_args=typed_args)
+    request = make_request(
+        driver_id=driver_id,
+        driver_contract_git_blob_sha=driver_contract_git_blob_sha,
+        driver_implementation_git_blob_sha=driver_implementation_git_blob_sha,
+        typed_args=typed_args,
+    )
     dup = os.dup(fd)
     sock = socket.socket(fileno=dup)
     try:
