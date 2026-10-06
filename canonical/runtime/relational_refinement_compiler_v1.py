@@ -79,17 +79,32 @@ def _nonempty(value: Any) -> bool:
     return isinstance(value, str) and bool(value.strip())
 
 
+def _git_blob_sha(path: str) -> str | None:
+    if not isinstance(path, str) or not path.startswith("canonical/"):
+        return None
+    candidate = ROOT / path
+    try:
+        raw = candidate.read_bytes()
+    except (OSError, ValueError):
+        return None
+    return hashlib.sha1(
+        b"blob " + str(len(raw)).encode("ascii") + b"\\0" + raw
+    ).hexdigest()
+
+
 def _receipt_valid(value: Any) -> bool:
     if not isinstance(value, Mapping):
         return False
     path = value.get("path")
     sha = value.get("git_blob_sha")
-    return (
-        isinstance(path, str)
-        and path.startswith("canonical/")
-        and isinstance(sha, str)
-        and SHA40.fullmatch(sha) is not None
-    )
+    if (
+        not isinstance(path, str)
+        or not path.startswith("canonical/")
+        or not isinstance(sha, str)
+        or SHA40.fullmatch(sha) is None
+    ):
+        return False
+    return _git_blob_sha(path) == sha
 
 
 def _missing_receipt(prefix: str, field: str) -> str:
