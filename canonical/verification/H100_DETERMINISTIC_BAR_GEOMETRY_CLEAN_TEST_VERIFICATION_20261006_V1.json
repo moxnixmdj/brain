@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_H100_DETERMINISTIC_BAR_GEOMETRY_CLEAN_TEST_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "FAIL__11_OF_16__CONSTRUCTIVE_FALSIFICATION__HOLDOUT_RETIRED",
+  "solver": {
+    "path": "canonical/runtime/h100_deterministic_bar_geometry_solver_v1.py",
+    "git_blob_sha": "1ca6f86170f46f336a3fe6e2551a7b1a758ffb5e",
+    "persistent_learned_bytes": 0,
+    "external_visual_capability_calls": 0
+  },
+  "holdout": {
+    "preoutput": "canonical/governance/H100_DETERMINISTIC_BAR_GEOMETRY_CLEAN_TEST_HOLDOUT_PREOUTPUT_V1.json",
+    "case_count": 16,
+    "gold_vector_sha256": "b3cd373306c6daf21edf1d5f6bac4485a0b87933b859db0a7422b59d98d2054d",
+    "answer_blind_until_scoring": true,
+    "retired_for_future_promotion": true
+  },
+  "observed": {
+    "correct": 11,
+    "accuracy": 0.6875,
+    "required_correct": 13,
+    "required_accuracy": 0.8,
+    "abstentions": 1,
+    "elapsed_seconds": 21.56821419500193,
+    "failures": [
+      {
+        "index": 0,
+        "imgname": "41699051005347.png",
+        "gold": 14,
+        "prediction": 15,
+        "kind": "BAR_INSTANCE_COUNT"
+      },
+      {
+        "index": 222,
+        "imgname": "08263936005626.png",
+        "gold": 16,
+        "prediction": 15,
+        "kind": "BAR_INSTANCE_COUNT"
+      },
+      {
+        "index": 306,
+        "imgname": "47203618002668.png",
+        "gold": 13,
+        "prediction": 11,
+        "kind": "BAR_INSTANCE_COUNT"
+      },
+      {
+        "index": 308,
+        "imgname": "47613048005879.png",
+        "gold": 11,
+        "prediction": 12,
+        "kind": "DISTINCT_BAR_COLOR_COUNT"
+      },
+      {
+        "index": 578,
+        "imgname": "OECD_GROSS_DIRECT_INSURANCE_PREMIUMS_AUS_CHL_ISR_PRT_URY_000090.png",
+        "gold": 5,
+        "prediction": null,
+        "kind": "DISTINCT_BAR_COLOR_COUNT"
+      }
+    ]
+  },
+  "deduction": "GENERIC_DETERMINISTIC_PIXEL_GEOMETRY_REPLACES_A_SUBSTANTIAL_SLICE_OF_BAR_CHART_VISION_BUT_V1_DOES_NOT_MEET_THE_PREDECLARED_FRESH_TEST_GATE",
+  "hard_rules": [
+    "DO_NOT_REEVALUATE_A_REPAIRED_SOLVER_ON_THIS_HOLDOUT_FOR_PROMOTION",
+    "USE_THESE_CASES_ONLY_AS_POST_FALSIFICATION_DEVELOPMENT_EVIDENCE",
+    "ANY_REPAIR_REQUIRES_A_NEW_FRESH_HOLDOUT"
+  ],
+  "h100_terminal_credit_delta": 0,
+  "promotion_authority": false
+}
