@@ -183,7 +183,7 @@ def _summarize_nodes(nodes: list[ast.stmt], local_functions: dict[str, ast.AST])
         "channels": sorted(channels),
         "unresolved_calls": sorted(unresolved),
         "traversed_local_functions": sorted(traversed),
-        "transitively_closed_over_local_functions": not unresolved,
+        "local_callgraph_resolved_under_syntactic_allowlist": not unresolved,
     }
 
 def compile_effects(source: str) -> dict[str, Any]:
@@ -197,8 +197,8 @@ def compile_effects(source: str) -> dict[str, Any]:
             "action_type": action_type,
             **summary,
             "status": (
-                "LOCAL_TRANSITIVE_CLOSED"
-                if summary["transitively_closed_over_local_functions"]
+                "LOCAL_CALLGRAPH_RESOLVED_UNDER_ALLOWLIST"
+                if summary["local_callgraph_resolved_under_syntactic_allowlist"]
                 else "OPEN_UNRESOLVED_CALLS"
             ),
         })
@@ -206,19 +206,20 @@ def compile_effects(source: str) -> dict[str, Any]:
     for row in rows:
         for channel in row["channels"]:
             counts[channel] = counts.get(channel, 0) + 1
-    closed = [r for r in rows if r["status"] == "LOCAL_TRANSITIVE_CLOSED"]
-    open_rows = [r for r in rows if r["status"] != "LOCAL_TRANSITIVE_CLOSED"]
+    closed = [r for r in rows if r["status"] == "LOCAL_CALLGRAPH_RESOLVED_UNDER_ALLOWLIST"]
+    open_rows = [r for r in rows if r["status"] != "LOCAL_CALLGRAPH_RESOLVED_UNDER_ALLOWLIST"]
     return {
         "schema": SCHEMA,
         "status": "PASS__LOCAL_TRANSITIVE_EFFECT_SURFACE_COMPILED",
         "action_count": len(rows),
-        "local_transitive_closed_count": len(closed),
+        "local_callgraph_resolved_under_allowlist_count": len(closed),
         "open_unresolved_call_count": len(open_rows),
         "channel_counts": counts,
         "rows": rows,
-        "scope": "LOCAL_TOP_LEVEL_FUNCTION_CALL_GRAPH_ONLY",
+        "scope": "LOCAL_TOP_LEVEL_FUNCTION_CALL_GRAPH_PLUS_DECLARED_SYNTACTIC_SAFE_ALLOWLIST",
         "hard_nonclaims": [
             "NO_THIRD_PARTY_OR_STDLIB_SEMANTIC_PURITY_PROOF",
+            "NO_RECEIVER_TYPE_PROOF_FOR_SAFE_METHOD_ALLOWLIST",
             "NO_RUNTIME_GATEWAY_ENFORCEMENT_PROOF",
             "NO_DYNAMIC_DISPATCH_TOTALITY_PROOF",
             "NO_UNIVERSAL_NO_BYPASS_CREDIT",
