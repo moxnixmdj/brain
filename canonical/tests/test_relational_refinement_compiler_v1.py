@@ -49,6 +49,16 @@ def base_doc():
 
 
 class RelationalRefinementCompilerTests(unittest.TestCase):
+    def setUp(self):
+        self._blob_patch = patch(
+            "canonical.runtime.relational_refinement_compiler_v1._git_blob_sha",
+            return_value=SHA,
+        )
+        self._blob_patch.start()
+
+    def tearDown(self):
+        self._blob_patch.stop()
+
     def test_complete_row_and_globals_ready(self):
         out = compile_relational_refinement(base_doc())
         self.assertTrue(out["whole_trace_candidate_ready"])
@@ -120,6 +130,19 @@ class RelationalRefinementCompilerTests(unittest.TestCase):
         out = compile_relational_refinement(doc)
         self.assertFalse(out["whole_trace_candidate_ready"])
         self.assertIn("ownership_receipt", out["rows"][0]["missing_receipts"])
+
+    def test_existing_shape_with_mismatched_actual_blob_fails_closed(self):
+        doc = base_doc()
+        with patch(
+            "canonical.runtime.relational_refinement_compiler_v1._git_blob_sha",
+            return_value="b" * 40,
+        ):
+            out = compile_relational_refinement(doc)
+        self.assertFalse(out["whole_trace_candidate_ready"])
+        self.assertIn(
+            "trace_scope_receipt",
+            out["global_missing_receipts"],
+        )
 
     def test_empty_rows_fail_closed(self):
         doc = base_doc()
