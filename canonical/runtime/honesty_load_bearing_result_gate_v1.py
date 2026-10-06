@@ -70,6 +70,7 @@ def certify_result(
         "step_index": step_index,
         "step_id": step_id,
         "result_sha256": result_sha,
+        "honesty_record": dict(honesty_record),
         "honesty_record_sha256": record_sha,
         "honesty_verdict_sha256": verdict_sha,
         "honesty_status": "PASS",
@@ -104,10 +105,19 @@ def validate_result_certificate(
     for key, value in expected.items():
         if certificate.get(key) != value:
             raise LoadBearingHonestyError("CERTIFICATE_" + key.upper() + "_MISMATCH")
-    for key in ("honesty_record_sha256", "honesty_verdict_sha256"):
-        raw = certificate.get(key)
-        if not isinstance(raw, str) or len(raw) != 64:
-            raise LoadBearingHonestyError("CERTIFICATE_" + key.upper() + "_INVALID")
+    record = certificate.get("honesty_record")
+    if not isinstance(record, Mapping):
+        raise LoadBearingHonestyError("CERTIFICATE_HONESTY_RECORD_REQUIRED")
+    if certificate.get("honesty_record_sha256") != sha256_json(dict(record)):
+        raise LoadBearingHonestyError("CERTIFICATE_HONESTY_RECORD_HASH_MISMATCH")
+    verdict = honesty.adjudicate(record)
+    if verdict.get("status") != "PASS":
+        raise LoadBearingHonestyError("CERTIFICATE_HONESTY_RECORD_NOW_DENIED")
+    expected_task_id = expected["mission_id"] + "::step::" + expected["step_id"]
+    if verdict.get("task_id") != expected_task_id:
+        raise LoadBearingHonestyError("CERTIFICATE_HONESTY_RECORD_STEP_CONTRACT_MISMATCH")
+    if certificate.get("honesty_verdict_sha256") != sha256_json(verdict):
+        raise LoadBearingHonestyError("CERTIFICATE_HONESTY_VERDICT_HASH_MISMATCH")
     return dict(certificate)
 
 
@@ -135,6 +145,7 @@ def certify_terminal_completion(
         "mission_id": mission_id,
         "mission_sha256": mission_sha256,
         "state_sha256": state_sha256,
+        "honesty_record": dict(honesty_record),
         "honesty_record_sha256": sha256_json(dict(honesty_record)),
         "honesty_verdict_sha256": sha256_json(verdict),
         "completion_claim": "COMPLETE",
