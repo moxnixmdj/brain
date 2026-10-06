@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_BINARY_CHART_PROGRAM_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_NEW_FRESH_BINARY_CHART_HOLDOUT",
+  "reference_machine": {
+    "path": "canonical/runtime/h100_reference_machine_u1.py",
+    "blob_sha": "3c289d90023682e135e6fe3f3f42b3049da3c247"
+  },
+  "assembler": {
+    "path": "canonical/runtime/h100_u1_two_counter_compiler_v1.py",
+    "blob_sha": "5155402a38c1718e0548f7d10bb0521600d07593"
+  },
+  "compiler": {
+    "path": "canonical/runtime/h100_u1_binary_chart_compiler_v1.py",
+    "blob_sha": "a0acb93bd5b61b6f62a4e355a640948ccdae5251"
+  },
+  "regenerated_program": {
+    "bytes": 1512,
+    "bits": 12096,
+    "sha256": "9ef2b98f48565de67e09864d8997c3a459f64538eb1574aef76623d3c64d4eed"
+  },
+  "runtime_information": "BINARY_32X20_RASTER_PLUS_RUNTIME_10_DIGIT_ATLAS",
+  "learned_bytes": 0,
+  "promotion_authority": false
+}
