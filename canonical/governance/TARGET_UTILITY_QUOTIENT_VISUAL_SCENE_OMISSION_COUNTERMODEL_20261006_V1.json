@@ -1,0 +1,147 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_UTILITY_QUOTIENT_VISUAL_SCENE_OMISSION_COUNTERMODEL_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE_COUNTEREXAMPLE__CURRENT_13_CONTRACT_QUOTIENT_OMITS_GENERAL_IMAGE_TO_GROUNDED_SCENE_FACTS_TRANSFORM__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_lemma": "TARGET_UTILITY_QUOTIENT_COMPLETENESS",
+  "source_bindings": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "image_surface_mapping": {
+      "path": "canonical/governance/OPUS55_IMAGE_INPUT_EXISTING_FAMILY_MAPPING_20261005_V1.json",
+      "git_blob_sha": "fceb02c70aa49b5e07ba7dc49fa092dad2570fc8"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V2.json",
+      "git_blob_sha": "ae250d5bc5da73b23600670be354ffba31e65e53"
+    },
+    "utility_quotient_control": {
+      "path": "canonical/governance/TERMINAL_UTILITY_QUOTIENT_CONTROL_REPAIR_V2.json",
+      "git_blob_sha": "5bea428e21b39257b8e4fee47606fd09d9907d7d"
+    }
+  },
+  "target_behavior": {
+    "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+    "bound_family_scope_literal": "Read and reason over dense documents, charts, screenshots, diagrams and complex real-world imagery.",
+    "image_surface_class": "UNDERSTAND_OR_REASON_ABOUT_IMAGE_CONTENT",
+    "minimal_transform": "STATIC_IMAGE_PLUS_VISUAL_QUERY_TO_GROUNDED_VISUAL_FACTS_RELATIONS_ATTRIBUTES_COUNTS_OR_ANSWER",
+    "why_terminally_relevant": "A system that cannot correctly extract query-relevant objects, attributes, counts or spatial/semantic relations from complex real-world imagery is missing a useful target behavior even if all nonvisual contracts remain perfect."
+  },
+  "constructive_countermodel": {
+    "task": "A static real-world photograph contains several ordinary objects with visible attributes and spatial relations. The user asks a question whose correct answer depends only on image content, for example which object is immediately left of a specified object, how many objects satisfy a visible attribute, or which visible relation holds.",
+    "conditions": [
+      "NO_BROWSER_OR_APPLICATION_ACTION_IS_REQUESTED",
+      "NO_CAD_SOLID_RECONSTRUCTION_IS_REQUESTED",
+      "NO_NATIVE_DOCUMENT_EDIT_IS_REQUESTED",
+      "NO_PROFESSIONAL_ARTIFACT_PLAN_OR_REVISION_IS_REQUESTED",
+      "NO_RESEARCH_QUERY_OR_EXTERNAL_EVIDENCE_GATHERING_IS_REQUIRED",
+      "NO_FAILED_AGENT_TRAJECTORY_EXISTS",
+      "NO_DELEGATION_OR_TOOL_ROUTE_SELECTION_IS_REQUIRED",
+      "NO_STRUCTURED_SCIENTIFIC_DESIGN_SEARCH_IS_REQUIRED",
+      "NO_STRUCTURED_QUANTITATIVE_METHOD_OR_REGULATORY_CALCULATION_IS_REQUIRED"
+    ],
+    "world_A": "ALL_13_CURRENT_ACTIVE_BEHAVIORAL_CONTRACTS_CAN_REMAIN_SATISFIED_ON_THEIR_DECLARED_SCOPES_WHILE_THE_SYSTEM_CORRECTLY_INTERPRETS_THE_IMAGE.",
+    "world_B": "ALL_13_CURRENT_ACTIVE_BEHAVIORAL_CONTRACTS_CAN_REMAIN_SATISFIED_ON_THEIR_DECLARED_SCOPES_WHILE_THE_SYSTEM_FAILS_TO_INTERPRET_THE_IMAGE_AND_RETURNS_THE_WRONG_VISUAL_ANSWER.",
+    "same_current_quotient_certificates": true,
+    "different_terminal_outcome": true,
+    "conclusion": "THE_CURRENT_13_CONTRACT_QUOTIENT_DOES_NOT_SEPARATE_TWO_TERMINALLY_DIFFERENT_WORLDS__THEREFORE_TARGET_UTILITY_QUOTIENT_COMPLETENESS_IS_FALSE_FOR_THE_CURRENT_BASIS."
+  },
+  "current_contract_noncoverage": [
+    {
+      "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "reason": "REQUIRES_ENGINEERING_DRAWING_TO_3D_SOLID_RECONSTRUCTION__GENERAL_SCENE_INTERPRETATION_CAN_FAIL_WHILE_CAD_RECONSTRUCTION_SCOPE_REMAINS_PERFECT."
+    },
+    {
+      "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "reason": "DERIVES_ACCEPTANCE_CONSEQUENCES_FROM_SPECIFICATIONS_AND_VISIBLE_EVIDENCE__DOES_NOT_REQUIRE_PERCEIVING_ARBITRARY_REAL_WORLD_IMAGE_CONTENT."
+    },
+    {
+      "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+      "reason": "FINANCIAL_CALCULATION_TRANSFORM_IS_DISJOINT_FROM_GENERAL_IMAGE_PERCEPTION."
+    },
+    {
+      "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "reason": "STRUCTURED_REQUIREMENT_TO_CALCULATION_GRAPH_DOES_NOT_REQUIRE_GENERAL_VISUAL_SCENE INTERPRETATION."
+    },
+    {
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "reason": "REQUIRES_STATE_CONDITIONED_ACTION_SELECTION_IN_AN_INTERACTIVE_BROWSER_OR_DESKTOP__A_STATIC_IMAGE_QUESTION_REQUIRES_CORRECT_PERCEPTION_WITHOUT_ANY_ACTION."
+    },
+    {
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "reason": "RESEARCH_QUERY_SOURCE_AND_STOP_CONTROL_CAN_PASS_WHILE_DIRECT_IMAGE_CONTENT_INTERPRETATION_FAILS."
+    },
+    {
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "reason": "FAILED_TRAJECTORY_CAUSAL_LOCALIZATION_DOES_NOT_REQUIRE_STATIC_SCENE_PERCEPTION."
+    },
+    {
+      "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "reason": "NATIVE_DOCUMENT_EDIT_PRESERVATION_DOES_NOT_REQUIRE_ARBITRARY_PHOTOGRAPH_OR_SCENE_INTERPRETATION."
+    },
+    {
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "reason": "DELIVERABLE_PLANNING_AND_REVISION_JUDGMENT_CAN_PASS_WHILE_GENERAL_IMAGE_PERCEPTION_FAILS."
+    },
+    {
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "reason": "TASK_PARTITION_AND_ASSIGNMENT_DOES_NOT_REQUIRE_DIRECT_STATIC_IMAGE_CONTENT_INTERPRETATION."
+    },
+    {
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "reason": "TOOL_ROUTE_SELECTION CAN_PASS WHILE THE OPERATIVE SYSTEM LACKS THE_IMAGE_TO_SCENE_FACTS_TRANSFORM."
+    },
+    {
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "reason": "STARTS_FROM_VERIFIED_EVIDENCE_UNITS__IT_DOES_NOT_REQUIRE_EXTRACTING_THE_VISUAL_EVIDENCE_UNITS_FROM_AN_ARBITRARY_IMAGE."
+    },
+    {
+      "behavior_id": "SCIENTIFIC_DESIGN_SEARCH_AND_CONSTRAINT_OPTIMIZATION_001",
+      "reason": "SCIENTIFIC_DESIGN_GENERATION_AND_SEARCH_DOES_NOT_REQUIRE_GENERAL_REAL_WORLD_SCENE_PERCEPTION."
+    }
+  ],
+  "minimum_repair": {
+    "new_family_required": false,
+    "candidate_behavior_id": "IMAGE_TO_GROUNDED_VISUAL_FACTS_AND_RELATIONS_001",
+    "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+    "inputs": "Static image or image region plus an explicit visual question or required fact schema.",
+    "environment_state": "Visual input may contain photographs, screenshots, diagrams, charts, dense imagery or mixed visual/text content; interactive action is not required.",
+    "allowed_information": "The visible image, task-visible text and JIT general knowledge where allowed; no hidden target answer.",
+    "required_output_or_action": "Extract and return the query-relevant visible entities, attributes, counts, text, geometry or relations with grounding sufficient to support the requested answer.",
+    "success_condition": "On fresh images, independently checked query-relevant visual facts and relations are correct at or above the target acceptance bound, including non-document complex real-world imagery.",
+    "failure_condition": "Material visible entity, attribute, count, text or relation is hallucinated, missed or mislocalized such that the requested answer changes.",
+    "verification_route": "Predeclared held-out image tasks with objective labels where possible and matched independent scoring for open-ended visual reasoning; separate browser-action scoring remains outside this contract.",
+    "dependency_boundary": "Image decoding, cropping and deterministic OCR may be tools; perceptual grounding and image-conditioned relation inference remain the capability residual unless separately proved.",
+    "scope": "Static image content to grounded facts, relations and answer; excludes action execution itself."
+  },
+  "interaction_with_existing_acceptance": {
+    "existing_image_family_mapping_remains_valid": true,
+    "existing_family_acceptance_is_not_proved_by_this_countermodel": true,
+    "existing_predicate_warning": "VISION_DENSE_NONCHART_SCOPE_MAY_BE_A_POSSIBLE_EVIDENCE_ROUTE_ONLY_IF_ITS_FROZEN_SCOPE_IS_PROVED_TO_INCLUDE_THIS_GENERAL_IMAGE_TRANSFORM__NAME_SIMILARITY_IS_NOT_SUFFICIENT.",
+    "no_new_acceptance_atom_claim_yet": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_NEW_CONTRACT_IS_IMPLEMENTED_OR_OWNED",
+    "NO_CLAIM_GENERAL_IMAGE_PARITY",
+    "NO_CLAIM_A_NEW_TWENTIETH_FAMILY_IS_REQUIRED",
+    "NO_CLAIM_TARGET_UTILITY_QUOTIENT_COMPLETENESS_AFTER_THIS_SINGLE_REPAIR",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_EXTERNAL_REALITY_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
