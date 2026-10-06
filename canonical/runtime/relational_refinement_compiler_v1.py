@@ -111,6 +111,80 @@ def _missing_receipt(prefix: str, field: str) -> str:
     return f"{prefix}:{field}:MISSING_OR_INVALID_CONTENT_ADDRESS"
 
 
+def _receipt_ref(value: Any) -> dict[str, str] | None:
+    if not isinstance(value, Mapping):
+        return None
+    path = value.get("path")
+    sha = value.get("git_blob_sha")
+    if not isinstance(path, str) or not isinstance(sha, str):
+        return None
+    return {"path": path, "git_blob_sha": sha}
+
+
+def _load_json_receipt(value: Any) -> dict[str, Any] | None:
+    if not _receipt_valid(value):
+        return None
+    try:
+        obj = json.loads((ROOT / value["path"]).read_text(encoding="utf-8"))
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        return None
+    return obj if isinstance(obj, dict) else None
+
+
+def _validate_row_binding(
+    relation_id: str, row_id: str, row: Mapping[str, Any]
+) -> list[str]:
+    obj = _load_json_receipt(row.get("contract_binding_receipt"))
+    if obj is None:
+        return [f"{row_id}:contract_binding_receipt:MISSING_INVALID_OR_UNREADABLE"]
+    errors: list[str] = []
+    if obj.get("schema") != ROW_BINDING_SCHEMA:
+        errors.append(f"{row_id}:contract_binding_receipt:SCHEMA_INVALID")
+    expected = {
+        "row_id": row_id,
+        "relation_id": relation_id,
+        "precondition_spec": row.get("precondition_spec"),
+        "target_transition_class": row.get("target_transition_class"),
+        "brain_macrostep_contract": row.get("brain_macrostep_contract"),
+        "postcondition_spec": row.get("postcondition_spec"),
+        "evaluator_binding": row.get("evaluator_binding"),
+    }
+    for key, value in expected.items():
+        if obj.get(key) != value:
+            errors.append(f"{row_id}:contract_binding_receipt:MISMATCH:{key}")
+    evidence = obj.get("evidence_receipts")
+    if not isinstance(evidence, Mapping):
+        errors.append(f"{row_id}:contract_binding_receipt:EVIDENCE_RECEIPTS_INVALID")
+    else:
+        for field in ROW_RECEIPTS:
+            if _receipt_ref(evidence.get(field)) != _receipt_ref(row.get(field)):
+                errors.append(
+                    f"{row_id}:contract_binding_receipt:EVIDENCE_MISMATCH:{field}"
+                )
+    return errors
+
+
+def _validate_global_binding(doc: Mapping[str, Any]) -> list[str]:
+    obj = _load_json_receipt(doc.get("global_contract_binding_receipt"))
+    if obj is None:
+        return ["GLOBAL_CONTRACT_BINDING_MISSING_INVALID_OR_UNREADABLE"]
+    errors: list[str] = []
+    if obj.get("schema") != GLOBAL_BINDING_SCHEMA:
+        errors.append("GLOBAL_CONTRACT_BINDING_SCHEMA_INVALID")
+    if obj.get("target_claim") != doc.get("target_claim"):
+        errors.append("GLOBAL_CONTRACT_BINDING_TARGET_CLAIM_MISMATCH")
+    if obj.get("relation_id") != doc.get("relation_id"):
+        errors.append("GLOBAL_CONTRACT_BINDING_RELATION_ID_MISMATCH")
+    evidence = obj.get("global_receipts")
+    if not isinstance(evidence, Mapping):
+        errors.append("GLOBAL_CONTRACT_BINDING_RECEIPTS_INVALID")
+    else:
+        for field in GLOBAL_RECEIPTS:
+            if _receipt_ref(evidence.get(field)) != _receipt_ref(doc.get(field)):
+                errors.append(f"GLOBAL_CONTRACT_BINDING_RECEIPT_MISMATCH:{field}")
+    return errors
+
+
 def _validate_evaluator_binding(row_id: str, binding: Any) -> list[str]:
     errors: list[str] = []
     if not isinstance(binding, Mapping):
@@ -158,6 +232,7 @@ def compile_relational_refinement(doc: Mapping[str, Any]) -> dict[str, Any]:
     for field in GLOBAL_RECEIPTS:
         if not _receipt_valid(doc.get(field)):
             global_missing.append(field)
+    errors.extend(_validate_global_binding(doc))
 
     seen: set[str] = set()
     row_outputs: list[dict[str, Any]] = []
@@ -204,8 +279,12 @@ def compile_relational_refinement(doc: Mapping[str, Any]) -> dict[str, Any]:
             row_id, row.get("evaluator_binding")
         )
         errors.extend(evaluator_errors)
+        binding_errors = _validate_row_binding(
+            str(doc["relation_id"]), row_id, row
+        )
+        errors.extend(binding_errors)
 
-        complete = not missing and not evaluator_errors
+        complete = not missing and not evaluator_errors and not binding_errors
         if _receipt_valid(local_receipt):
             kind = local_receipt.get("proof_kind")
             complete = complete and kind in LOCAL_REFINEMENT_PROOF_KINDS
