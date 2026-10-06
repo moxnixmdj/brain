@@ -1,0 +1,359 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CROSS_CAPABILITY_P0_TOURNAMENT_PRECOMMIT_V2",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_V2_OUTCOMES__STRICT_PUBLIC_PRIVATE_EVALUATOR_BOUNDARY",
+  "target_adapted_persistent_bits": 0,
+  "solver_api": "solve(family, public_input)",
+  "evaluator_private_fields": [
+    "gold"
+  ],
+  "public_boundary_rule": "GOLD_AND_EXPECTED_OUTPUTS_NEVER_PASSED_TO_SOLVER",
+  "tasks": [
+    {
+      "id": "ARITH_2",
+      "family": "ARITHMETIC_REASONING",
+      "public_input": {
+        "expression": "(31*14)-(9**2)+144//12"
+      },
+      "gold": 365
+    },
+    {
+      "id": "CODE_2",
+      "family": "CODE_REPAIR",
+      "public_input": {
+        "threshold": -2,
+        "examples": [
+          [
+            -5,
+            true
+          ],
+          [
+            -2,
+            false
+          ],
+          [
+            1,
+            false
+          ]
+        ],
+        "holdout": [
+          -3,
+          0
+        ]
+      },
+      "gold": {
+        "operator": "<",
+        "holdout": [
+          true,
+          false
+        ]
+      }
+    },
+    {
+      "id": "LANG_2",
+      "family": "LEXICAL_LANGUAGE",
+      "public_input": {
+        "anchors": {
+          "input": "input",
+          "target": "output"
+        },
+        "edges": [
+          [
+            "covariate",
+            "explanatory"
+          ],
+          [
+            "explanatory",
+            "input"
+          ],
+          [
+            "endpoint",
+            "response"
+          ],
+          [
+            "response",
+            "output"
+          ]
+        ],
+        "clauses": [
+          {
+            "cue": "covariate",
+            "fields": [
+              "u",
+              "v"
+            ]
+          },
+          {
+            "cue": "endpoint",
+            "fields": [
+              "z"
+            ]
+          }
+        ]
+      },
+      "gold": {
+        "inputs": [
+          "u",
+          "v"
+        ],
+        "target": "z"
+      }
+    },
+    {
+      "id": "VISION_2",
+      "family": "RASTER_VISION",
+      "public_input": {
+        "background": "0",
+        "foreground": "7",
+        "rows": [
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000777777000",
+          "00000000000000000000000777777000",
+          "00000000777770000000000777777000",
+          "00000000777770000000000777777000",
+          "00000000777770000000000777777000",
+          "00000000777770000770000777777000",
+          "00000000777770000770000777777000",
+          "00777000777770000770000777777000",
+          "00777000777770000770000777777000",
+          "00777000777770000770000777777000",
+          "00000000000000000000000000000000"
+        ]
+      },
+      "gold": {
+        "bar_count": 4,
+        "heights": [
+          3,
+          8,
+          5,
+          10
+        ]
+      }
+    },
+    {
+      "id": "TOOL_2",
+      "family": "TYPED_TOOL_SELECTION",
+      "public_input": {
+        "request": {
+          "effect": "READ_JSON",
+          "path": "config/state.json",
+          "payload": {
+            "path": "config/state.json"
+          }
+        },
+        "contracts": [
+          {
+            "id": "WRITE_JSON",
+            "effect": "WRITE_JSON",
+            "path": "out/result.json",
+            "required": [
+              "value"
+            ]
+          },
+          {
+            "id": "READ_STATE",
+            "effect": "READ_JSON",
+            "path": "config/state.json",
+            "required": [
+              "path"
+            ]
+          },
+          {
+            "id": "APPEND_LOG",
+            "effect": "APPEND_JSONL",
+            "path": "logs/events.jsonl",
+            "required": [
+              "event"
+            ]
+          }
+        ]
+      },
+      "gold": "READ_STATE"
+    },
+    {
+      "id": "PLAN_2",
+      "family": "RESOURCE_PLANNING",
+      "public_input": {
+        "initial": [
+          "RAW"
+        ],
+        "goal": "PUBLISHED",
+        "operators": [
+          {
+            "id": "PARSE",
+            "requires": [
+              "RAW"
+            ],
+            "provides": [
+              "PARSED"
+            ]
+          },
+          {
+            "id": "CHECK",
+            "requires": [
+              "PARSED"
+            ],
+            "provides": [
+              "VERIFIED"
+            ]
+          },
+          {
+            "id": "PACKAGE",
+            "requires": [
+              "VERIFIED"
+            ],
+            "provides": [
+              "PACKED"
+            ]
+          },
+          {
+            "id": "PUBLISH",
+            "requires": [
+              "PACKED"
+            ],
+            "provides": [
+              "PUBLISHED"
+            ]
+          },
+          {
+            "id": "DECOY",
+            "requires": [
+              "UNKNOWN"
+            ],
+            "provides": [
+              "PUBLISHED"
+            ]
+          }
+        ]
+      },
+      "gold": [
+        "PARSE",
+        "CHECK",
+        "PACKAGE",
+        "PUBLISH"
+      ]
+    },
+    {
+      "id": "MEMORY_2",
+      "family": "EVENT_MEMORY",
+      "public_input": {
+        "events": [
+          [
+            "SET",
+            "phase",
+            "draft"
+          ],
+          [
+            "SET",
+            "owner",
+            "alice"
+          ],
+          [
+            "SET",
+            "phase",
+            "review"
+          ],
+          [
+            "DELETE",
+            "owner",
+            null
+          ],
+          [
+            "SET",
+            "phase",
+            "final"
+          ],
+          [
+            "SET",
+            "owner",
+            "bob"
+          ]
+        ],
+        "query": "owner"
+      },
+      "gold": "bob"
+    },
+    {
+      "id": "TRANSFER_2",
+      "family": "NOVEL_STRUCTURE_TRANSFER",
+      "public_input": {
+        "primitives": [
+          "plus1",
+          "times2",
+          "square",
+          "neg"
+        ],
+        "depth": 3,
+        "examples": [
+          [
+            -3,
+            25
+          ],
+          [
+            -2,
+            9
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            25
+          ]
+        ],
+        "holdout": [
+          3,
+          -4
+        ]
+      },
+      "gold": {
+        "sequence": [
+          "times2",
+          "plus1",
+          "square"
+        ],
+        "holdout": [
+          49,
+          49
+        ]
+      }
+    },
+    {
+      "id": "HIDDEN_2",
+      "family": "SEALED_INFORMATION_CONTROL",
+      "public_input": {
+        "observable": "sealed-box",
+        "hidden_world_count": 4
+      },
+      "gold": 3
+    }
+  ],
+  "gates": {
+    "nonsealed_required_pass": 8,
+    "sealed_required_status": "ABSTAIN_IRREDUCIBLE_INFORMATION_GAP",
+    "sealed_lower_bound_bits": 2
+  },
+  "hard_nonclaims": [
+    "SYNTHETIC_SUITE_NOT_FRONTIER_EQUIVALENCE",
+    "FINITE_PASS_NOT_GENERALIZATION_PROOF",
+    "SEALED_CONTROL_NOT_REALISTIC_FRONTIER_EVIDENCE"
+  ],
+  "promotion_authority": false
+}
