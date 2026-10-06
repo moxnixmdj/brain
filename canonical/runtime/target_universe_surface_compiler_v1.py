@@ -11,6 +11,13 @@ CLASSIFICATIONS = {
     "UNRESOLVED_ESCAPE",
 }
 
+ACCEPTANCE_STATES = {
+    "BASIS_BOUND_PARITY_OPEN",
+    "BASIS_BOUND_PROVED",
+    "BASIS_GAP",
+    "NOT_APPLICABLE",
+}
+
 @dataclass(frozen=True)
 class SurfaceVerdict:
     surface_id: str
@@ -24,7 +31,9 @@ class SurfaceCompilation:
     valid_surface_count: int
     invalid_surface_count: int
     unresolved_escape_count: int
+    acceptance_basis_gap_count: int
     finite_source_accounting_complete: bool
+    finite_manifest_acceptance_basis_complete: bool
     literal_target_universe_complete: bool
     terminal_credit_delta: int
     invalid_surface_ids: Sequence[str]
@@ -61,6 +70,14 @@ def _validate_surface(
     source_receipts = surface.get("source_receipts")
     if not isinstance(source_receipts, list) or not source_receipts or not all(_binding(x) for x in source_receipts):
         return SurfaceVerdict(sid, classification, False, "CONTENT_ADDRESSED_SOURCE_RECEIPTS_REQUIRED")
+
+    acceptance_state = surface.get("acceptance_state")
+    if acceptance_state not in ACCEPTANCE_STATES:
+        return SurfaceVerdict(sid, classification, False, "VALID_ACCEPTANCE_STATE_REQUIRED")
+    if classification == "DEPLOYMENT_OR_INTERFACE_ONLY" and acceptance_state != "NOT_APPLICABLE":
+        return SurfaceVerdict(sid, classification, False, "DEPLOYMENT_OR_INTERFACE_ONLY_REQUIRES_NOT_APPLICABLE_ACCEPTANCE")
+    if classification != "DEPLOYMENT_OR_INTERFACE_ONLY" and acceptance_state == "NOT_APPLICABLE":
+        return SurfaceVerdict(sid, classification, False, "INTRINSIC_OR_CONDITION_SURFACE_REQUIRES_ACCEPTANCE_BASIS_STATE")
 
     if classification == "INTRINSIC_FAMILY_UNION":
         families = surface.get("families")
@@ -138,7 +155,16 @@ def compile_surface_manifest(
         v.surface_id for v in verdicts
         if v.valid and v.classification == "UNRESOLVED_ESCAPE"
     ]
+    acceptance_gaps = [
+        surface["id"] for surface, verdict in zip(surfaces, verdicts)
+        if verdict.valid and surface.get("acceptance_state") == "BASIS_GAP"
+    ]
     finite_source_accounting_complete = len(invalid) == 0
+    finite_manifest_acceptance_basis_complete = (
+        finite_source_accounting_complete
+        and not acceptance_gaps
+        and not unresolved
+    )
 
     literal_claim = manifest.get("literal_target_universe_complete", False)
     if not isinstance(literal_claim, bool):
@@ -156,8 +182,7 @@ def compile_surface_manifest(
     # content-addressed theorem/attestation and zero unresolved escapes.
     literal_target_universe_complete = (
         literal_claim
-        and finite_source_accounting_complete
-        and not unresolved
+        and finite_manifest_acceptance_basis_complete
         and receipts_valid
     )
 
@@ -172,7 +197,9 @@ def compile_surface_manifest(
         valid_surface_count=len(surfaces) - len(invalid),
         invalid_surface_count=len(invalid),
         unresolved_escape_count=len(unresolved),
+        acceptance_basis_gap_count=len(acceptance_gaps),
         finite_source_accounting_complete=finite_source_accounting_complete,
+        finite_manifest_acceptance_basis_complete=finite_manifest_acceptance_basis_complete,
         literal_target_universe_complete=literal_target_universe_complete,
         terminal_credit_delta=0,
         invalid_surface_ids=tuple(invalid),
