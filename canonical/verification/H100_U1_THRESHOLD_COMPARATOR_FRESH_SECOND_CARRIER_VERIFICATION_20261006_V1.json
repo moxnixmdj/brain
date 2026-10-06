@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_THRESHOLD_COMPARATOR_FRESH_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__6_OF_6_FRESH",
+  "reference_machine": "H100_U1_STACK_VM",
+  "program_path": "canonical/runtime/h100_u1_threshold_comparator_program_v1.py",
+  "precommit": "canonical/governance/H100_U1_THRESHOLD_COMPARATOR_FRESH_EVAL_PRECOMMIT_V1.json",
+  "encoded_program_bytes": 73,
+  "explicit_upper_bound_bits": 584,
+  "lower_bound_bits": 0,
+  "learned_bits": 0,
+  "scope": "CANONICAL_THRESHOLD_RELATION_WITNESS_TRIPLE_TO_TWO_HOLDOUT_PREDICTIONS",
+  "hard_nonclaims": [
+    "UPPER_BOUND_NOT_MINIMUM",
+    "NOT_GENERAL_PROGRAM_REPAIR"
+  ],
+  "promotion_authority": false
+}
