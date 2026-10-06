@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_H100_A_TOURNAMENT_G0_SUBSTRATE_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_WAVE1_TASKS",
+  "target_adapted_persistent_bits": 0,
+  "components": {
+    "registry_v8": "a4f952fbf054dbfe4f9617da837b3bf5c3c2e3ab",
+    "symbolic_regression": "14e8f11c73e5fc0439016dbcd5b5a5a8d2c46490",
+    "planner": "88dc27c45c985105485519d158ecee4b9a8ad7b4",
+    "effect_tools": "1e711b2d0c826227c313763d3b710ce06d11537e",
+    "event_memory": "5d8653e1965c0d721ba2ec036aacae0f3e322bb4",
+    "lexical_role": "d751354ae8ef8dfbe720f4837d4ac6c0849f7a9a",
+    "compositional_language": "fd5f16e4ac4187a98f7824b68879871a82eece6a",
+    "tool_trace": "c5b8018c9a62fcec85de46b0ace1be0bd0ddbd06"
+  },
+  "rule": "NO_G0_COMPONENT_MUTATION_UNTIL_WAVE1_RESULT_FROZEN",
+  "promotion_authority": false
+}
