@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_DETERMINISTIC_CODE_CENSUS_20261006_V1",
+  "date": "2026-10-06",
+  "status": "DIRECT_CONTENT_ADDRESSED_SUBTOTAL__ZERO_TERMINAL_CREDIT",
+  "scope": {
+    "root_runtime_files": [
+      "canonical/runtime/h100_verified_capability_registry_v8.py",
+      "canonical/runtime/h100_typed_capability_planner_v1.py",
+      "canonical/runtime/h100_zero_learned_event_memory_v1.py",
+      "canonical/runtime/h100_jit_lexical_orchestrator_v1.py",
+      "canonical/runtime/h100_verified_effect_tool_registry_v1.py"
+    ],
+    "recursive_unique_runtime_file_count": 27,
+    "recursive_runtime_source_bytes": 221251,
+    "directly_bound_static_contract_and_tool_pack_bytes": 12437,
+    "measured_subtotal_bytes": 233688,
+    "measured_subtotal_fraction_of_100mb": 0.00233688,
+    "interpreter_baseline": "FIXED_PYTHON_RUNTIME_NOT_INCLUDED"
+  },
+  "bound_static_artifacts": [
+    [
+      "canonical/governance/H100_TYPED_CAPABILITY_PLANNER_PRECOMMIT_V1.json",
+      "5f5a8d83e293123a8622abc3dbde28ec8d4cbfdc",
+      3196
+    ],
+    [
+      "canonical/governance/H100_MULTI_CAPABILITY_COMPOSITION_PRECOMMIT_V1.json",
+      "259544986e501ce3eefa4d779f0ccf4da9c148ff",
+      3255
+    ],
+    [
+      "canonical/governance/H100_ZERO_LEARNED_TRANSFER_PREEXPOSURE_V1.json",
+      "0aedbdff8520e5f1d274b490b274c756532ace4e",
+      3080
+    ],
+    [
+      "canonical/governance/H100_EFFECT_TOOL_REGISTRY_V1_PRECOMMIT.json",
+      "55177d775c6a7d5d78d6fab2980fd26dfb06f751",
+      1438
+    ],
+    [
+      "canonical/capabilities/h100/tool_packs/JSON_RECEIPT_WRITER_V1.json",
+      "2a609877738005bc1bd8e9ad19bca32cb08b8bf1",
+      774
+    ],
+    [
+      "canonical/capabilities/h100/tool_packs/JSONL_LEDGER_APPEND_V1.json",
+      "0e723280a781dd3ab76e34621257c06113769629",
+      694
+    ]
+  ],
+  "deduction": "THE_MEASURED_ZERO_LEARNED_CAPABILITY_SOURCE_SUBTOTAL_IS_FAR_BELOW_100MB__SO_THE_CURRENT_BOUNDED_SUCCESSES_ARE_NOT_EXPLAINED_BY_A_NEAR_100MB_HAND_CODED_RUNTIME",
+  "hard_nonclaims": [
+    "THIS_IS_A_SUBTOTAL_NOT_A_COMPLETE_TRANSITIVE_ACCOUNTING_OF_PYTHON_OS_STDLIB_OR_ALL_EXTERNAL_CONFIG",
+    "SOURCE_BYTES_ARE_NOT_MINIMUM_DESCRIPTION_LENGTH",
+    "DOES_NOT_PROVE_FRONTIER_LEVEL_ZERO_LEARNED_SUFFICIENCY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
