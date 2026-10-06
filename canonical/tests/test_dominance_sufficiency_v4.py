@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-import copy
-
+from canonical.runtime import dominance_binding_v2 as bind
 from canonical.runtime import dominance_semantic_binding_v4 as sem
 from canonical.runtime.dominance_first_learning_router_v4 import route
 from canonical.runtime.dominance_sufficiency_v4 import (
@@ -67,6 +66,7 @@ def dominance_doc(brain_h2="0.9"):
             "target_contract_sha256": TARGET,
             "metric_id": METRIC,
             "live_world_set_sha256": sem.live_world_digest(rows),
+            "live_hypothesis_set_sha256": bind.live_digest(["h1", "h2"]),
             "scope_complete": True,
             "independent_or_objective": True,
         },
@@ -222,7 +222,6 @@ def test_certificate_world_definition_substitution_fails_closed():
 
 def test_configuration_semantic_substitution_fails_ownership_binding():
     x = dominance_doc()
-    x["configuration_sha256"] = CONFIG
     x["configurations"][0]["configuration_sha256"] = "5" * 64
     out = compile_dominance_sufficiency_v4(x)
     assert out["status"] == "FAIL_CLOSED"
@@ -237,6 +236,24 @@ def test_bound_receipt_must_bind_exact_configuration_semantics():
     out = compile_dominance_sufficiency_v4(x)
     assert out["status"] == "FAIL_CLOSED"
     assert "CONFIGURATION_SHA256_MISMATCH" in out["errors"][0]
+
+
+def test_bound_receipt_must_bind_exact_world_semantics():
+    x = dominance_doc()
+    x["configurations"][0]["bounds"]["h1"]["bound_receipt"][
+        "hypothesis_semantic_sha256"
+    ] = H2
+    out = compile_dominance_sufficiency_v4(x)
+    assert out["status"] == "FAIL_CLOSED"
+    assert "HYPOTHESIS_SEMANTIC_SHA256_MISMATCH" in out["errors"][0]
+
+
+def test_legacy_live_hypothesis_digest_is_not_rewritten_in_memory():
+    x = dominance_doc()
+    x["hypothesis_coverage_receipt"]["live_hypothesis_set_sha256"] = "f" * 64
+    out = compile_dominance_sufficiency_v4(x)
+    assert out["status"] == "FAIL_CLOSED"
+    assert "LIVE_HYPOTHESIS_SET_SHA256_MISMATCH" in " ".join(out["errors"])
 
 
 def test_router_shortcut_requires_content_bound_current_worlds():
