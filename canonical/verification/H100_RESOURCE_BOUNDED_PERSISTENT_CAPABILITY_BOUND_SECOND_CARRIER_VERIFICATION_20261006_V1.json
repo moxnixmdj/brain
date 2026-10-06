@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_H100_RESOURCE_BOUNDED_PERSISTENT_CAPABILITY_BOUND_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__4_OF_4__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "precommit": "canonical/governance/H100_RESOURCE_BOUNDED_PERSISTENT_CAPABILITY_BOUND_PRECOMMIT_V1.json",
+    "runtime": "canonical/runtime/h100_resource_bounded_persistent_capability_bound_v1.py",
+    "tests": "canonical/tests/test_h100_resource_bounded_persistent_capability_bound_v1.py"
+  },
+  "verified": {
+    "tests_passed": 4,
+    "tests_total": 4,
+    "code_learned_tradeoff": true,
+    "boolean_function_class_bound": true,
+    "invalid_inputs_fail_closed": true
+  },
+  "deduction": "FOR_EXACT_IDENTIFICATION_OF_ONE_FUNCTION_FROM_A_CLASS_OF_F__TOTAL_PERSISTENT_CAPABILITY_BITS_CODE_PLUS_LEARNED_MUST_BE_AT_LEAST_CEIL_LOG2_F__SO_WITH_CODE_BUDGET_C_THE_LEARNED_BIT_LOWER_BOUND_IS_MAX_0_CEIL_LOG2_F_MINUS_C",
+  "hard_nonclaims": [
+    "DOES_NOT_PROVE_REAL_FRONTIER_CAPABILITY_CLASS_SIZE",
+    "DOES_NOT_PROVE_THE_BOUND_IS_TIGHT_UNDER_COMPUTE_LIMITS",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
