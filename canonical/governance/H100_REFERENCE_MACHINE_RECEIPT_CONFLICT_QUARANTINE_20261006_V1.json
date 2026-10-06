@@ -1,0 +1,14 @@
+{
+  "schema": "PROJECT_BRAIN_H100_REFERENCE_MACHINE_RECEIPT_CONFLICT_QUARANTINE_20261006_V1",
+  "date": "2026-10-06",
+  "status": "OLDER_U1_8_OF_8_RECEIPT_UNBOUND_TO_CURRENT_BRANCH_SUBJECT__CURRENT_EXACT_BINDING_SUPERSEDES_FOR_THIS_BRANCH",
+  "older_receipt": "canonical/verification/H100_REFERENCE_MACHINE_U1_SECOND_CARRIER_VERIFICATION_20261006_V1.json",
+  "mismatch": {
+    "older_claimed_runtime_blob": "3c289d90023682e135e6fe3f3f42b3049da3c247",
+    "current_runtime_blob": "a86dd60a677c9c41f63f4beff594955846fc03e3",
+    "older_claimed_tests_blob": "e5bdd1a006f5613ca28bad1fd34b71212d5e4db6",
+    "current_binding_tests_blob": "14cb3173929630f4294d13f52d40eaa40cc9082f"
+  },
+  "rule": "DO_NOT_USE_OLDER_RECEIPT_TO_AUTHORIZE_CURRENT_U1_MEASUREMENTS",
+  "promotion_authority": false
+}
