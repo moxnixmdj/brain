@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_FRESH_POLYNOMIAL_SECOND_CARRIER_VERIFICATION_20261006_V2",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__12_OF_12_EXACT__FIRST_CLEAN_U1_CAPABILITY_MEASUREMENT",
+  "program": "canonical/governance/H100_U1_FRESH_POLYNOMIAL_PROGRAM_PRECOMMIT_V2.json",
+  "holdout": "canonical/governance/H100_U1_FRESH_POLYNOMIAL_HOLDOUT_V2.json",
+  "observed": {
+    "raw_u1_program_bytes": 17,
+    "raw_u1_program_bits": 136,
+    "target_adapted_auxiliary_bytes": 0,
+    "learned_target_bytes": 0,
+    "max_steps_observed": 13,
+    "exact_cases": "12_OF_12"
+  },
+  "failed_predecessor": "canonical/verification/H100_U1_FRESH_POLYNOMIAL_V1_FAILURE_20261006.json",
+  "deduction": "UNDER_FROZEN_U1_AND_RUNTIME_INTEGER_INPUT__THIS_CAPABILITY_HAS_AN_EXPLICIT_RESOURCE_BOUNDED_UPPER_BOUND_OF_136_TARGET_ADAPTED_PERSISTENT_BITS",
+  "hard_nonclaims": [
+    "NOT_A_LOWER_BOUND",
+    "NOT_FRONTIER_CAPABILITY",
+    "NO_CLAIM_136_BITS_IS_MINIMAL"
+  ],
+  "promotion_authority": false
+}
