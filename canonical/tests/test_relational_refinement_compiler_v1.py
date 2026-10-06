@@ -1,6 +1,10 @@
+import hashlib
+import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
+import canonical.runtime.relational_refinement_compiler_v1 as rr
 from canonical.runtime.relational_refinement_compiler_v1 import (
     SCHEMA,
     compile_relational_refinement,
@@ -268,6 +272,18 @@ class RelationalRefinementCompilerTests(unittest.TestCase):
         out = compile_relational_refinement(doc)
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertIn("ROWS_INVALID_OR_EMPTY", out["errors"])
+
+
+class GitBlobHashTests(unittest.TestCase):
+    def test_git_blob_sha_uses_nul_separator_and_actual_bytes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            path = root / "canonical" / "x.txt"
+            path.parent.mkdir(parents=True)
+            path.write_bytes(b"abc")
+            expected = hashlib.sha1(b"blob 3\0abc").hexdigest()
+            with patch.object(rr, "ROOT", root):
+                self.assertEqual(rr._git_blob_sha("canonical/x.txt"), expected)
 
 
 if __name__ == "__main__":
