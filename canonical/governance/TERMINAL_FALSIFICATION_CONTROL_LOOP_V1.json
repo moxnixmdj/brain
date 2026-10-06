@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_FALSIFICATION_CONTROL_LOOP_V1",
   "date": "2026-10-06",
-  "status": "CANDIDATE__AUTHORITATIVE_TERMINAL_SEARCH_CONTROL_GRAPH__ZERO_TERMINAL_CREDIT",
+  "status": "CANDIDATE__AUTHORITATIVE_TERMINAL_SEARCH_CONTROL_GRAPH__PRIMARY_SOURCE_DELTA_REPAIRED__LITERAL_COMPLETENESS_OPEN__ZERO_TERMINAL_CREDIT",
   "canonical_base_commit": "40cc13174ac15131d59134a5bb869af602b40358",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "current_truth_state": {
@@ -85,7 +85,14 @@
         "SOURCE_SURFACE_ESCAPE",
         "COMPOSITION_ESCAPE",
         "TWO_WORLDS_TERMINAL_COUNTERMODEL"
-      ]
+      ],
+      "current_progress": {
+        "finite_primary_source_delta": "PASS_AFTER_REPAIR__NONEXHAUSTIVE__ZERO_PROOF_CREDIT",
+        "literal_completeness": false,
+        "source_surface_escape_receipt": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_VISUAL_POLISH_ACCEPTANCE_ESCAPE_20261006_V1.json",
+        "repaired_manifest": "canonical/governance/OPUS55_TARGET_UNIVERSE_SURFACE_MANIFEST_20261006_V2.json",
+        "next_falsifier": "SCOPE_SUPERSET_CHARACTERIZATION_THEOREM_SYNTHESIS_AND_FALSIFICATION"
+      }
     },
     {
       "id": "C_ROOT3_SHARED_UNIVERSAL",
@@ -193,7 +200,7 @@
     "C_CONDITION_RESTRICTION_AND_INTERACTION_CLOSURE_V2",
     "C_CAPABILITY_OWNERSHIP_DONOR_INDEPENDENCE_V1"
   ],
-  "scheduler_rule": "RUN_UNIVERSE_AUTHORITY_BY_LOGICAL_PRECEDENCE; THEN_RANK_OTHER_LANES_BY_TARGET_TRUTH_REACHABILITY_PER_COST_WITH_LANE_ORDER_ONLY_AS_TIE_BREAKER; RUN_ONLY_WORK_WHOSE_OUTPUT_REMAINS_VALID_UNDER_POSSIBLE_UNIVERSE_EXPANSION; RECOMPUTE_AFTER_EVERY_VERIFIED_DELTA.",
+  "scheduler_rule": "KEEP_UNIVERSE_AUTHORITY_FIRST. CURRENT_FINITE_PRIMARY_SOURCE_DELTA_IS_AT_A_NONEXHAUSTIVE_FIXED_POINT AFTER REPAIR, SO DO_NOT_REPEAT THE SAME SOURCE PASS WITHOUT A SOURCE DELTA. NEXT ATTACK THE SCOPE-SUPERSET CHARACTERIZATION OR A STRONGER COUNTERMODEL; KEEP OTHER LANES ACTIVE ONLY WHEN THEIR OUTPUT SURVIVES POSSIBLE UNIVERSE EXPANSION.",
   "provider_control_plane": {
     "direct_main_prewrite_enforced": false,
     "terminal_critical_path": false,
@@ -211,5 +218,29 @@
   "scheduling_authority": true,
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false
+  "fresh_reality_authority": false,
+  "universe_authority_progress": {
+    "status": "CURRENT_PRIMARY_SOURCE_DELTA_SURVIVES_AFTER_ONE_COUNTEREXAMPLE_REPAIR__NONEXHAUSTIVE__ZERO_PROOF_CREDIT",
+    "source_compiler_activation": {
+      "path": "canonical/governance/TARGET_UNIVERSE_SURFACE_COMPILER_ACTIVATION_20261006_V1.json",
+      "git_blob_sha": "b2060df501b33dee864b973b9d7a63e3d9acffd0"
+    },
+    "primary_delta_pass": {
+      "path": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_PRIMARY_SURFACE_DELTA_PASS_20261006_V1.json",
+      "git_blob_sha": "81d7fd68713ea23fb6fcddfac0410368542b45ab"
+    },
+    "repaired_creative_basis_activation": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_ACCEPTANCE_BASIS_V2_ACTIVATION_20261006_V1.json",
+      "git_blob_sha": "980ca8d882296fa2175100ac54b331d736dc884d"
+    },
+    "current_surface_count": 20,
+    "current_unclassified_surface_count": 0,
+    "current_acceptance_basis_gap_count": 0,
+    "literal_target_universe_complete": false,
+    "next": [
+      "SCOPE_SUPERSET_CHARACTERIZATION_THEOREM_SYNTHESIS_AND_FALSIFICATION",
+      "COMPOSITION_AND_INTERACTION_ESCAPE_SEARCH",
+      "TWO_WORLDS_SAME_CURRENT_EVIDENCE_DIFFERENT_LITERAL_TERMINAL_TRUTH_COUNTERMODEL"
+    ]
+  }
 }
