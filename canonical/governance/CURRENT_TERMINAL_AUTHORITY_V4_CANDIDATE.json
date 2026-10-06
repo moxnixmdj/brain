@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_V4_CANDIDATE",
+  "date": "2026-10-07",
+  "status": "CANDIDATE__28_LOAD_BEARING_WITNESSES__D15_U13__FOUR_VERIFIED_TRUTH_BASIS_DELETIONS__TERMINAL_FALSE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predecessor": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V3.json",
+    "git_blob_sha": "142cb46ac1bf0b5c570e6d2dc121dfca6f6e1544"
+  },
+  "truth_repair": {
+    "deleted_predicate": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "countermodel": {
+      "path": "canonical/governance/IF_ZERO_CRITICAL_AUTHORITY_NECESSITY_COUNTERMODEL_20261007_V1.json",
+      "git_blob_sha": "359bf94a129961a3899e7d7c485ffc29ff015880"
+    },
+    "authority_audit": {
+      "path": "canonical/governance/IF_ZERO_CRITICAL_AUTHORITY_TERMINAL_BINDING_AUDIT_20261007_V1.json",
+      "git_blob_sha": "8135c0ada40254b13cd18a22dec44b8d81281f3b"
+    },
+    "independent_basis_verification": {
+      "path": "canonical/verification/TERMINAL_28_OBLIGATION_BASIS_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "cb997726ba43ea44cc322df8d77ecaf3af3b30ff",
+      "status": "INDEPENDENT_WOLFRAM_EXACT_SET_AND_ROUTING_RECOMPUTATION_PASS__28_TOTAL__D15_U13__ZERO_TERMINAL_CREDIT"
+    },
+    "factorizer": {
+      "path": "canonical/runtime/terminal_frontier_factorizer_v3_candidate.py",
+      "git_blob_sha": "7fa597adec3df75145a501fb3090ffb3bca3026c"
+    }
+  },
+  "current_truth_projection": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "proved_atomic_historical": 14,
+    "current_load_bearing_atomic_open": 20,
+    "meta_open": 8,
+    "current_open_witness_obligations": 28,
+    "verified_truth_basis_deletions": 4,
+    "route_counts": {
+      "J": 0,
+      "G": 0,
+      "T": 0,
+      "D": 15,
+      "U": 13
+    },
+    "terminal": false
+  },
+  "preserved_semantics": [
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "AUTHORITY_RISK_OR_HARD_CONSTRAINT_NONREGRESSION_UNDER_COMPLETE_TERMINAL_SEMANTICS",
+    "ANY_SEPARATELY_PROVED_ABSOLUTE_ZERO_AUTHORITY_GATE",
+    "ALL_PROJECT_LEVEL_L2_SAFETY_AUTHORITY_FEASIBILITY_GATES"
+  ],
+  "evidence_role": {
+    "current_28": "EVIDENCE_WITNESSES_AND_COUNTEREXAMPLE_SOURCES__NOT_AXIOMATIC_TERMINAL_BASIS",
+    "terminal_theorem_control": "canonical/governance/TERMINAL_UTILITY_QUOTIENT_CONTROL_REPAIR_V3.json",
+    "routes": [
+      "E_EXACT_TARGET_QUOTIENT",
+      "S_UTILITY_RELEVANT_SUPERSET",
+      "G_GENERATOR_CLOSURE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO CLAIM THE 28 WITNESSES ARE A MINIMAL LOGICAL TERMINAL BASIS",
+    "NO CLAIM ANY OPEN FAMILY IS CLOSED",
+    "NO CLAIM TERMINAL GOAL ACHIEVED",
+    "NO ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
