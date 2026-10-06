@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U1_CHART_STRESS_CAUSAL_CLASSIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "UNCHANGED_PROGRAM_FAILED_0_OF_4__POST_FAILURE_GENERIC_ROBUSTNESS_PROTOTYPE_REPAIRED_4_OF_4__ALGORITHM_GAP_SUPPORTED",
+  "frozen_program_sha256": "2baf3fa772b75730cd4aa6ffbf13f960a1a79e7139f83f3ace956f6ca7bba847",
+  "unchanged_program_stress": {
+    "passed": 0,
+    "total": 4,
+    "failures": [
+      "PALETTE_PERMUTE",
+      "MONOCHROME",
+      "LEGEND_SHIFT",
+      "TICK_ONE_PIXEL_ERASURE"
+    ]
+  },
+  "post_failure_prototype": {
+    "path": "canonical/runtime/h100_chart_stress_robustness_prototype_v1.py",
+    "passed": 4,
+    "total": 4,
+    "evidence_credit": "ZERO__DEVELOPED_AFTER_STRESS_OUTCOMES"
+  },
+  "deduction": [
+    "THE_OBSERVED_STRESS_FAILURES_DO_NOT_REQUIRE_WORLD_SPECIFIC_PERSISTENT_INFORMATION",
+    "A_SINGLE_GENERIC_GEOMETRY_AND_NEAREST_MATCH_REPAIR_CAN_HANDLE_ALL_FOUR_OBSERVED_FAILURE_MODES",
+    "CURRENT_LOAD_BEARING_CAUSE_IS_ALGORITHM_ROBUSTNESS_NOT_LEARNED_STATE_NECESSITY"
+  ],
+  "next_clean_test": "COMPILE_ROBUST_ALGORITHM_TO_U1__FREEZE_RAW_PROGRAM__DERIVE_NEW_STRESS_WORLD_AFTER_PROGRAM_FREEZE__THEN_EVALUATE",
+  "promotion_authority": false
+}
