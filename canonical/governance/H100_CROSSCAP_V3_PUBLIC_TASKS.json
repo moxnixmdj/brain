@@ -1,0 +1,695 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CROSSCAP_V3_PUBLIC",
+  "tasks": [
+    {
+      "id": "R3_1",
+      "kind": "REASONING",
+      "side_constraints": [
+        {
+          "op": "LT",
+          "vars": [
+            "a",
+            "b"
+          ]
+        }
+      ],
+      "spec": {
+        "constraints": [
+          {
+            "op": "NEQ",
+            "vars": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "domains": {
+          "a": [
+            1,
+            2
+          ],
+          "b": [
+            1,
+            2
+          ]
+        },
+        "variables": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "R3_2",
+      "kind": "REASONING",
+      "side_constraints": [
+        {
+          "op": "GT",
+          "vars": [
+            "a",
+            "b"
+          ]
+        }
+      ],
+      "spec": {
+        "constraints": [
+          {
+            "op": "NEQ",
+            "vars": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "domains": {
+          "a": [
+            1,
+            2
+          ],
+          "b": [
+            1,
+            2
+          ]
+        },
+        "variables": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "examples": [
+        {
+          "x": -3,
+          "y": 11
+        },
+        {
+          "x": -2,
+          "y": 1
+        },
+        {
+          "x": -1,
+          "y": -1
+        },
+        {
+          "x": 0,
+          "y": -1
+        },
+        {
+          "x": 1,
+          "y": -5
+        },
+        {
+          "x": 2,
+          "y": -19
+        },
+        {
+          "x": 3,
+          "y": -49
+        }
+      ],
+      "id": "C3_1",
+      "kind": "CODING",
+      "queries": [
+        -4,
+        4
+      ]
+    },
+    {
+      "examples": [
+        {
+          "x": -3,
+          "y": 78
+        },
+        {
+          "x": -2,
+          "y": 28
+        },
+        {
+          "x": -1,
+          "y": 6
+        },
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": -2
+        },
+        {
+          "x": 2,
+          "y": -12
+        },
+        {
+          "x": 3,
+          "y": -42
+        }
+      ],
+      "id": "C3_2",
+      "kind": "CODING",
+      "queries": [
+        -4,
+        4
+      ]
+    },
+    {
+      "clauses": [
+        {
+          "cue": "kavo0",
+          "fields": [
+            "feature"
+          ]
+        },
+        {
+          "cue": "vosha5",
+          "fields": [
+            "label"
+          ]
+        }
+      ],
+      "id": "L3_1",
+      "kind": "LANGUAGE",
+      "knowledge": {
+        "anchors": {
+          "input": "input",
+          "target": "output"
+        },
+        "edges": []
+      },
+      "side_knowledge_edges": [
+        [
+          "kavo0",
+          "predictor"
+        ],
+        [
+          "predictor",
+          "input"
+        ],
+        [
+          "vosha5",
+          "response"
+        ],
+        [
+          "response",
+          "output"
+        ]
+      ]
+    },
+    {
+      "clauses": [
+        {
+          "cue": "kavo1",
+          "fields": [
+            "feature"
+          ]
+        },
+        {
+          "cue": "lunze6",
+          "fields": [
+            "label"
+          ]
+        }
+      ],
+      "id": "L3_2",
+      "kind": "LANGUAGE",
+      "knowledge": {
+        "anchors": {
+          "input": "input",
+          "target": "output"
+        },
+        "edges": []
+      },
+      "side_knowledge_edges": [
+        [
+          "kavo1",
+          "predictor"
+        ],
+        [
+          "predictor",
+          "input"
+        ],
+        [
+          "lunze6",
+          "response"
+        ],
+        [
+          "response",
+          "output"
+        ]
+      ]
+    },
+    {
+      "id": "V3_1",
+      "kind": "VISION",
+      "ppm": "P3\n14 8\n255\n255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 15 80 180 15 80 180 15 80 180 180 50 40 180 50 40 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 15 80 180 15 80 180 15 80 180 180 50 40 180 50 40 30 160 90 30 160 90 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 15 80 180 15 80 180 15 80 180 180 50 40 180 50 40 30 160 90 30 160 90 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 15 80 180 15 80 180 15 80 180 180 50 40 180 50 40 30 160 90 30 160 90 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 180 50 40 180 50 40 30 160 90 30 160 90 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 30 160 90 30 160 90 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255\n"
+    },
+    {
+      "id": "V3_2",
+      "kind": "VISION",
+      "ppm": "P3\n14 8\n255\n255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 180 50 40 180 50 40 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 180 50 40 180 50 40 30 160 90 30 160 90 140 60 170 140 60 170 140 60 170 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 180 50 40 180 50 40 30 160 90 30 160 90 140 60 170 140 60 170 140 60 170 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 180 50 40 180 50 40 30 160 90 30 160 90 140 60 170 140 60 170 140 60 170 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 30 160 90 30 160 90 140 60 170 140 60 170 140 60 170 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 140 60 170 140 60 170 140 60 170 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255\n"
+    },
+    {
+      "id": "T3_1",
+      "kind": "TOOL_USE",
+      "purpose": "archive",
+      "required_effect": "WRITE_JSON",
+      "required_keys": [
+        "name",
+        "value"
+      ],
+      "tool_packs": [
+        {
+          "effects": [
+            [
+              "WRITE_JSON",
+              "out.json"
+            ]
+          ],
+          "input_schema": {
+            "name": "string",
+            "value": "int"
+          },
+          "purpose": "archive",
+          "tool_id": "A1"
+        },
+        {
+          "effects": [
+            [
+              "WRITE_JSON",
+              "out.json"
+            ]
+          ],
+          "input_schema": {
+            "name": "string",
+            "value": "int"
+          },
+          "purpose": "other",
+          "tool_id": "B1"
+        },
+        {
+          "effects": [
+            [
+              "APPEND_JSONL",
+              "log.jsonl"
+            ]
+          ],
+          "input_schema": {
+            "event": "string"
+          },
+          "purpose": "archive",
+          "tool_id": "C1"
+        }
+      ]
+    },
+    {
+      "id": "T3_2",
+      "kind": "TOOL_USE",
+      "purpose": "publish",
+      "required_effect": "WRITE_JSON",
+      "required_keys": [
+        "name",
+        "value"
+      ],
+      "tool_packs": [
+        {
+          "effects": [
+            [
+              "WRITE_JSON",
+              "out.json"
+            ]
+          ],
+          "input_schema": {
+            "name": "string",
+            "value": "int"
+          },
+          "purpose": "publish",
+          "tool_id": "A2"
+        },
+        {
+          "effects": [
+            [
+              "WRITE_JSON",
+              "out.json"
+            ]
+          ],
+          "input_schema": {
+            "name": "string",
+            "value": "int"
+          },
+          "purpose": "other",
+          "tool_id": "B2"
+        },
+        {
+          "effects": [
+            [
+              "APPEND_JSONL",
+              "log.jsonl"
+            ]
+          ],
+          "input_schema": {
+            "event": "string"
+          },
+          "purpose": "publish",
+          "tool_id": "C2"
+        }
+      ]
+    },
+    {
+      "goal_resource": "gate",
+      "id": "P3_1",
+      "initial_resources": [
+        "start"
+      ],
+      "kind": "PLANNING",
+      "max_length": 6,
+      "operators": [
+        {
+          "operator_id": "0a_get",
+          "provides": [
+            "key"
+          ],
+          "requires": [
+            "start"
+          ]
+        },
+        {
+          "operator_id": "0b_copy",
+          "provides": [
+            "backup"
+          ],
+          "requires": [
+            "key"
+          ]
+        },
+        {
+          "operator_id": "0c_open",
+          "provides": [
+            "gate"
+          ],
+          "removes": [
+            "key"
+          ],
+          "requires": [
+            "key"
+          ]
+        },
+        {
+          "operator_id": "0d_restore",
+          "provides": [
+            "key"
+          ],
+          "requires": [
+            "backup",
+            "gate"
+          ]
+        },
+        {
+          "operator_id": "0z_decoy",
+          "provides": [
+            "noise"
+          ],
+          "requires": [
+            "start"
+          ]
+        }
+      ],
+      "required_final_resources": [
+        "gate",
+        "key"
+      ]
+    },
+    {
+      "goal_resource": "gate",
+      "id": "P3_2",
+      "initial_resources": [
+        "start"
+      ],
+      "kind": "PLANNING",
+      "max_length": 6,
+      "operators": [
+        {
+          "operator_id": "1a_get",
+          "provides": [
+            "key"
+          ],
+          "requires": [
+            "start"
+          ]
+        },
+        {
+          "operator_id": "1b_copy",
+          "provides": [
+            "backup"
+          ],
+          "requires": [
+            "key"
+          ]
+        },
+        {
+          "operator_id": "1c_open",
+          "provides": [
+            "gate"
+          ],
+          "removes": [
+            "key"
+          ],
+          "requires": [
+            "key"
+          ]
+        },
+        {
+          "operator_id": "1d_restore",
+          "provides": [
+            "key"
+          ],
+          "requires": [
+            "backup",
+            "gate"
+          ]
+        },
+        {
+          "operator_id": "1z_decoy",
+          "provides": [
+            "noise"
+          ],
+          "requires": [
+            "start"
+          ]
+        }
+      ],
+      "required_final_resources": [
+        "gate",
+        "key"
+      ]
+    },
+    {
+      "events": [
+        {
+          "event_hash": "bcc716d49d0e3dffd7cc4d6c38db9c8001e09d38bdef9a007d32b4482f8e8082",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "seq": 1,
+          "value": 17
+        },
+        {
+          "event_hash": "33fee4cd195dc617e08ebe4ecf409c03895e1abc50cc9a520d7fc2c5c6fc1dc5",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "bcc716d49d0e3dffd7cc4d6c38db9c8001e09d38bdef9a007d32b4482f8e8082",
+          "seq": 2,
+          "value": 66
+        },
+        {
+          "event_hash": "5231a899b76ca333fc99a5271caf201e38a7e9aeae7a0263ede9d790b9e480ba",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "33fee4cd195dc617e08ebe4ecf409c03895e1abc50cc9a520d7fc2c5c6fc1dc5",
+          "seq": 3,
+          "value": 76
+        },
+        {
+          "event_hash": "7297795b6cd8e71041f34fd35fc95c0ecce21007c5d4775d47774d3ceb36474f",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "5231a899b76ca333fc99a5271caf201e38a7e9aeae7a0263ede9d790b9e480ba",
+          "seq": 4,
+          "value": 65
+        },
+        {
+          "event_hash": "32885a7b68b214db5d09a9d0bea05de4cb949d015b9ab79d0d98f6a6af4ac81f",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "7297795b6cd8e71041f34fd35fc95c0ecce21007c5d4775d47774d3ceb36474f",
+          "seq": 5,
+          "value": 77
+        },
+        {
+          "event_hash": "618a2772530ef73e30c190ddd7cff7b0d691ff060ac979b9e0e5e060b8c92839",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "32885a7b68b214db5d09a9d0bea05de4cb949d015b9ab79d0d98f6a6af4ac81f",
+          "seq": 6,
+          "value": 67
+        }
+      ],
+      "id": "M3_1",
+      "kind": "MEMORY",
+      "query": {
+        "key": "score",
+        "op": "MIN_SEEN"
+      }
+    },
+    {
+      "events": [
+        {
+          "event_hash": "b11b3d7d5b66f5f69e732ee586d496d07a9f85aa2220e7684f415f1e550153a4",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "seq": 1,
+          "value": 34
+        },
+        {
+          "event_hash": "05ae10fd40cd27597033f60cf9d2cd454352bf051898300bdd5337f4353819dd",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "b11b3d7d5b66f5f69e732ee586d496d07a9f85aa2220e7684f415f1e550153a4",
+          "seq": 2,
+          "value": 24
+        },
+        {
+          "event_hash": "1b9a76a1878dc7818d0cec301bb3f5ecf7c70f2dd9778666a3ae1c034e9614e7",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "05ae10fd40cd27597033f60cf9d2cd454352bf051898300bdd5337f4353819dd",
+          "seq": 3,
+          "value": 10
+        },
+        {
+          "event_hash": "16d63c7e7dbe25cc59eeb475d73e7b19c096a8f576a02746e9d58db0084c44ef",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "1b9a76a1878dc7818d0cec301bb3f5ecf7c70f2dd9778666a3ae1c034e9614e7",
+          "seq": 4,
+          "value": 54
+        },
+        {
+          "event_hash": "9267dc98ad576e2dd6d2299ee3bfa23a77370a2e0daac408e0359a3f29c7e6a3",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "16d63c7e7dbe25cc59eeb475d73e7b19c096a8f576a02746e9d58db0084c44ef",
+          "seq": 5,
+          "value": 49
+        },
+        {
+          "event_hash": "7e5c580aaf7f52bf1032c8057ae0196a72622ed4727b5e69a208703f40746427",
+          "key": "score",
+          "op": "SET",
+          "prev_hash": "9267dc98ad576e2dd6d2299ee3bfa23a77370a2e0daac408e0359a3f29c7e6a3",
+          "seq": 6,
+          "value": 88
+        }
+      ],
+      "id": "M3_2",
+      "kind": "MEMORY",
+      "query": {
+        "key": "score",
+        "op": "COUNT_SET"
+      }
+    },
+    {
+      "id": "N3_1",
+      "kind": "NOVEL_DOMAIN",
+      "queries": [
+        -4.5,
+        4.5
+      ],
+      "rows": [
+        {
+          "x": -4,
+          "y": -1.7662404173309798
+        },
+        {
+          "x": -3,
+          "y": -1.4630449896330915
+        },
+        {
+          "x": -2,
+          "y": -1.1407928609410496
+        },
+        {
+          "x": -1,
+          "y": -0.4690541631039308
+        },
+        {
+          "x": 0,
+          "y": 0.5006877414685674
+        },
+        {
+          "x": 1,
+          "y": 0.13707661724025877
+        },
+        {
+          "x": 2,
+          "y": 0.0714686997473297
+        },
+        {
+          "x": 3,
+          "y": 0.35534735139947726
+        },
+        {
+          "x": 4,
+          "y": 0.6582827040457785
+        }
+      ]
+    },
+    {
+      "id": "N3_2",
+      "kind": "NOVEL_DOMAIN",
+      "queries": [
+        -4.5,
+        4.5
+      ],
+      "rows": [
+        {
+          "x": -4,
+          "y": -1.5053791765005595
+        },
+        {
+          "x": -3,
+          "y": -1.1742363157920586
+        },
+        {
+          "x": -2,
+          "y": -0.8597905129409782
+        },
+        {
+          "x": -1,
+          "y": -0.6523241114817095
+        },
+        {
+          "x": 0,
+          "y": -0.7938454522775154
+        },
+        {
+          "x": 1,
+          "y": -0.9353667930733212
+        },
+        {
+          "x": 2,
+          "y": -0.7279003916140525
+        },
+        {
+          "x": 3,
+          "y": -0.41345458876297214
+        },
+        {
+          "x": 4,
+          "y": -0.08231172805447085
+        }
+      ]
+    }
+  ]
+}
