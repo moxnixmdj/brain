@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_LEGACY_REUSE_OBJECTIVE_TRACE_ADAPTER_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_PREEXPOSURE_OBJECTIVE_TRACE_PROVENANCE_ADAPTER__7_REUSE_ATOMS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Turn the seven existing fresh-reuse matched atoms into the exact HARNESS_OBJECTIVE event vocabulary consumed by MATCHED_EXECUTABLE_ATOM_SEMANTICS_V1 without trusting candidate-authored semantic labels.",
+  "sources": [
+    "canonical/runtime/browser_state_information_safe_proof.py",
+    "canonical/runtime/browser_state_information_safe_candidate.py",
+    "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+    "canonical/runtime/tool_discovery_information_safe_candidate.py",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py",
+    "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+    "canonical/runtime/m0a_raw_source_terminal_suite_v2.py",
+    "canonical/runtime/m0a_raw_source_brain_candidate_v2.py",
+    "canonical/runtime/matched_executable_atom_semantics_v1.py"
+  ],
+  "frozen_mapping": {
+    "BROWSER_STALE_REBIND": "dimension:state_change_after_actions_requiring_replanning",
+    "TOOL_SELECTED_LOSES_CAPABILITY": "dimension:tool_failure_and_recovery",
+    "DELEGATION_DUAL_ROOT_FANIN": "dimension:subtask_dependency_and_fan_in",
+    "TOOL_CHEAPER_UNAUTHORIZED": "dimension:authorization_and_scope_boundaries",
+    "TOOL_NO_SUFFICIENT_ROUTE": "dimension:explicit_abstention_and_fail_closed_cases",
+    "M0_FLAT_COMPOUND": "dimension:multi_constraint_instruction_compliance",
+    "M0_PRONOUN_AMBIGUOUS": "dimension:routine_ambiguity"
+  },
+  "provenance_rule": [
+    "EVERY TRACE IS BUILT BY THE HARNESS AFTER THE UNDERLYING EXISTING SCORER PASSES.",
+    "EVENT FIELDS ARE DERIVED FROM SUITE CASE STATE SCORER OUTPUT ACTION HISTORY DEPENDENCIES OR HIDDEN ORACLE FIELDS ALREADY OWNED BY THE HARNESS.",
+    "THE CANDIDATE DOES NOT SUPPLY TRACE_SOURCE EVENT TYPE SEQUENCE OR COVERED_ATOM.",
+    "TRACE HASH IS COMPUTED AFTER HARNESS CONSTRUCTION.",
+    "FINAL TERMINAL USE MUST ALSO BIND EXACT HARNESS_CANDIDATE_SCORER_AND_ADAPTER_BLOBS."
+  ],
+  "contamination_rule": [
+    "UNIT_TEST_SEEDS_ARE DEVELOPMENT_ONLY.",
+    "FINAL CASE SEEDS MUST BE DERIVED_AFTER_SCOPE_FREEZE_FROM_THE_FUTURE_BEACON.",
+    "NO HISTORICAL CASE RESULT MAY BE PROMOTED."
+  ],
+  "hard_nonclaims": [
+    "NO TERMINAL CASE GENERATED",
+    "NO CLAIM THESE SEVEN CASES ALONE CLOSE THE FULL_MATCHED_SCOPE",
+    "NO MATCHED_PREDICATE CLOSED",
+    "NO ACCEPTANCE FAMILY CAPABILITY OWNERSHIP OR TERMINAL CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
