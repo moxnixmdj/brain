@@ -19,7 +19,26 @@ class RehearsalAgent:
         if "remember_token_sha256" in context:
             self.memory = context["remember_token_sha256"]
 
-        if kind == "browser":
+        if kind == "integrated_plan":
+            nodes = list(public["available_action_types"])
+            edges = list(public["dependency_edges"])
+            order = []
+            remaining = set(nodes)
+            while remaining:
+                ready = sorted(
+                    node for node in remaining
+                    if all(
+                        edge["before"] not in remaining
+                        for edge in edges
+                        if edge["after"] == node
+                    )
+                )
+                assert ready
+                node = ready[0]
+                order.append(node)
+                remaining.remove(node)
+            payload = {"stage_order": order}
+        elif kind == "browser":
             payload = browser_candidate.next_action(public)
         elif kind == "tool":
             payload = tool_candidate.next_action(public)
@@ -34,7 +53,7 @@ class RehearsalAgent:
             )
         elif kind == "delegation_v3":
             payload = delegation_candidate._solve(public["task"])
-        elif kind == "m0":
+        elif kind in {"m0", "m0_change"}:
             payload = m0_candidate.solve(public)
         elif kind in {"structured", "p1", "p2", "p3"}:
             payload = contract_candidate.solve(public)
@@ -139,3 +158,20 @@ def test_all_ten_integrated_atoms_have_a_valid_rehearsal_path():
         if result["pass"] is not True:
             failures[atom] = result
     assert failures == {}
+
+
+def test_agency_requires_actual_three_type_plan():
+    atom = "dimension:multi_step_planning_with_at_least_three_distinct_tool_or_action_types"
+    case = _case(atom)
+    base = RehearsalAgent()
+
+    def broken(kind, public, context):
+        out = dict(base(kind, public, context))
+        if kind == "integrated_plan":
+            out["payload"] = {"stage_order": ["browser", "tool"]}
+        return out
+
+    result = score_integrated_case(case, broken)
+    assert result["pass"] is False
+    assert "INTEGRATED_PLAN_ORDER_INVALID" in result["integration_errors"]
+    assert "INTEGRATED_PLAN_DISTINCT_ACTION_TYPES_LT_3" in result["integration_errors"]
