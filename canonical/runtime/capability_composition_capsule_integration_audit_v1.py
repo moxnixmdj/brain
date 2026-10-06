@@ -56,11 +56,26 @@ def _load_bound_sources(root: pathlib.Path) -> tuple[dict[str, str], list[str]]:
     return texts, errors
 
 
+def _between(text: str, start: str, end: str) -> str:
+    i = text.find(start)
+    if i < 0:
+        return ""
+    j = text.find(end, i + len(start))
+    if j < 0:
+        return ""
+    return text[i:j]
+
+
 def evaluate_texts(
     astra: str,
     guard: str,
     capsule: str,
 ) -> dict[str, Any]:
+    cycle_block = _between(
+        astra,
+        "for cycle in range(start_cycle,len(actions)):",
+        "interrupt_after=step.get(\"interrupt_after_controller_actions_once\")",
+    )
     checks = {
         # planner -> guarded runtime activation
         "planner_forces_capsule_enforcement":
@@ -126,29 +141,30 @@ def evaluate_texts(
     }
 
     order_checks = {
+        "per_cycle_block_located": bool(cycle_block),
         "resolve_before_goal_action":
-            astra.find("composition_guard.resolve_action_from_capsule(")
-            < astra.find("result=_goal_action(action)")
+            cycle_block.find("composition_guard.resolve_action_from_capsule(")
+            < cycle_block.find("result=_goal_action(action)")
             if both_present(
-                astra,
+                cycle_block,
                 "composition_guard.resolve_action_from_capsule(",
                 "result=_goal_action(action)",
             )
             else False,
         "commit_before_trace_append":
-            astra.find("composition_guard.append_action_result(")
-            < astra.find('trace.append(record)')
+            cycle_block.find("composition_guard.append_action_result(")
+            < cycle_block.find('trace.append(record)')
             if both_present(
-                astra,
+                cycle_block,
                 "composition_guard.append_action_result(",
                 "trace.append(record)",
             )
             else False,
         "commit_before_checkpoint":
-            astra.find("composition_guard.append_action_result(")
-            < astra.find("_write_controller_checkpoint(checkpoint_path,checkpoint,trace)")
+            cycle_block.find("composition_guard.append_action_result(")
+            < cycle_block.find("_write_controller_checkpoint(checkpoint_path,checkpoint,trace)")
             if both_present(
-                astra,
+                cycle_block,
                 "composition_guard.append_action_result(",
                 "_write_controller_checkpoint(checkpoint_path,checkpoint,trace)",
             )
