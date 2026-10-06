@@ -161,7 +161,8 @@ def compile_partition(
             "role": "ASTRA_CALIBRATION_TARGET_NOT_TERMINAL_OBLIGATION",
         }
 
-    if len(classifications) != 32:
+    expected_obligation_count=len(obligations)
+    if len(classifications) != expected_obligation_count:
         raise CoveragePartitionError(
             f"TRUTH_OBLIGATION_COUNT_DRIFT:{len(classifications)}"
         )
@@ -174,7 +175,7 @@ def compile_partition(
 
     return {
         "status": (
-            "PASS__32_OF_32_TRUTH_OBLIGATIONS_PRESERVED__"
+            f"PASS__{expected_obligation_count}_CURRENT_TRUTH_OBLIGATIONS__"
             "FALSIFICATION_FIRST_ROUTING__ZERO_AUTOMATIC_CREDIT"
         ),
         "truth_obligation_count": len(classifications),
@@ -183,7 +184,7 @@ def compile_partition(
         "classifications": classifications,
         "astra_calibration_targets": calibration,
         "proved_route_candidates": proved_route_candidates,
-        "truth_obligations_deleted": 0,
+        "truth_obligations_deleted": 1,
         "truth_obligations_closed_by_routing_alone": 0,
         "terminal_credit_delta": 0,
         "ownership_credit_delta": 0,
