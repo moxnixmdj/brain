@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_H100_GLYPH_SEMANTICS_RUNTIME_INFORMATION_WORLD_V1",
+  "date": "2026-10-06",
+  "status": "DERIVED_AFTER_U1_LOOKUP_PROGRAM_FREEZE__BEFORE_OUTCOMES",
+  "program_freeze_commit": "81e05c03b711bffab0abfe2c06d61629d49b9f4e",
+  "derivation": {
+    "patterns": "REPEATED_SHA256(SEED_COMMIT_BYTES||COUNTER_BE32)__TAKE_DISTINCT_NONZERO_15_BIT_VALUES",
+    "digit_permutation": "SORT_DIGITS_0_TO_9_BY_SHA256(SEED||'digit'||DIGIT_BYTE)",
+    "target_index": "FIRST_16_BITS_SHA256(SEED||'target')_MOD_10"
+  },
+  "patterns": [
+    30640,
+    17952,
+    2873,
+    29071,
+    16306,
+    28010,
+    3482,
+    2144,
+    8854,
+    29035
+  ],
+  "digits": [
+    7,
+    1,
+    6,
+    2,
+    4,
+    5,
+    3,
+    0,
+    8,
+    9
+  ],
+  "target_index": 5,
+  "target_pattern": 28010,
+  "target_digit": 5,
+  "no_atlas_condition": {
+    "runtime_information": [
+      "TARGET_PATTERN_ONLY"
+    ],
+    "hidden_worlds_for_target_semantics": 10,
+    "uniform_exact_success_upper_bound_with_zero_world_specific_bits": 0.1,
+    "fixed_length_world_specific_bits_for_all_10_semantics": 4
+  },
+  "atlas_condition": {
+    "runtime_information_layout": "[TARGET_PATTERN,PATTERN_0,DIGIT_0,...,PATTERN_9,DIGIT_9]",
+    "runtime_atlas_entries": 10,
+    "target_adapted_world_mapping_bits_persisted": 0
+  },
+  "hard_nonclaims": [
+    "ARBITRARY_GLYPH_TO_DIGIT_MAPPING_IS_A_SYNTHETIC_INFORMATION_PROBE",
+    "FOUR_BIT_BOUND_IS_A_CLASS_LEVEL_WORST_CASE_FIXED_LENGTH_DISTINGUISHABILITY_BOUND_NOT_A_PER_WORLD_KOLMOGOROV_COMPLEXITY_CLAIM",
+    "THIS_DOES_NOT_PROVE_GENERAL_OCR"
+  ],
+  "promotion_authority": false
+}
