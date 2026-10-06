@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_BAR_COUNT_PRECOMMIT_V4",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_A_RESEARCH_PRECOMMIT__POST_V3_GENUINE_GEOMETRY_REPAIR__NEW_FRESH_HOLDOUT_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "predecessor": {
+    "v3_failure": "canonical/verification/H100_ZERO_LEARNED_BAR_COUNT_TEST_HOLDOUT_V3_FAILURE_20261006.json",
+    "strict_gate": "0_OF_2",
+    "interpretation": "ONE_REAL_BAR_CHART_GEOMETRY_MISS_PLUS_ONE_QUERY_IMAGE_TYPE_MISMATCH"
+  },
+  "justified_repair": {
+    "genuine_case": "36995393008758.png",
+    "failure": "SHORTEST_REAL_HORIZONTAL_BAR_SPAN_APPROX_3_6_PERCENT_OF_IMAGE_WIDTH_WAS_EXCLUDED_BY_V3_5_PERCENT_MINIMUM",
+    "repair": "LOWER_MINIMUM_DENSE_CORE_SPAN_FRACTION_FROM_0_05_TO_0_03",
+    "all_other_v3_rules_unchanged": true
+  },
+  "consumed_regression": {
+    "genuine_bar_chart_count": 11,
+    "exact_correct": 11,
+    "excluded_noise_case": {
+      "imgname": "OECD_GROSS_DIRECT_INSURANCE_PREMIUMS_AUS_CHL_ISR_PRT_URY_000090.png",
+      "reason": "IMAGE_IS_LINE_CHART_DESPITE_QUERY_SAYING_COLOR_BARS"
+    }
+  },
+  "runtime": "canonical/runtime/h100_zero_learned_bar_count_v4.py",
+  "learned_state": {
+    "persistent_learned_bytes": 0,
+    "pretrained_vision_models": 0,
+    "ocr_models": 0,
+    "external_learned_capability_calls": 0
+  },
+  "fresh_holdout_rule": "AFTER_RUNTIME_FREEZE_SELECT_ONLY_PREVIOUSLY_UNOPENED_CHARTQA_CASES_BY_QUERY_TEXT_AND_CONTENT_HASH__PREFER_A_DISJOINT_DATASET_SPLIT__DO_NOT_REVEAL_LABELS_OR_PIXELS_BEFORE_PRECOMMIT",
+  "hard_nonclaims": [
+    "ELEVEN_CONSUMED_BAR_CHARTS_ARE_DEVELOPMENT_ONLY",
+    "QUERY_IMAGE_MISMATCH_IS_DATASET_NOISE_NOT_A_PASS",
+    "BAR_COUNT_ONLY_NOT_GENERAL_CHART_QA",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false
+}
