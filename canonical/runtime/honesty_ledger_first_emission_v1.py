@@ -97,26 +97,23 @@ def _declared_inputs(raw: Any) -> tuple[list[dict[str, Any]], list[dict[str, Any
     for i, item in enumerate(raw):
         if not isinstance(item, Mapping):
             raise LedgerFirstError(f"INPUT_{i}_INVALID")
-        if set(item) != {"input_id", "sha256", "material"}:
+        if set(item) != {"input_id", "sha256"}:
             raise LedgerFirstError(f"INPUT_{i}_FIELDS_INVALID")
-        if not isinstance(item.get("material"), bool):
-            raise LedgerFirstError(f"INPUT_{i}_MATERIAL_INVALID")
         iid = _token(item.get("input_id"), f"INPUT_{i}_ID")
         if iid in seen:
             raise LedgerFirstError("INPUT_ID_DUPLICATE")
         seen.add(iid)
         digest = _sha256(item.get("sha256"), f"INPUT_{i}_SHA256")
-        material = item.get("material") is True
         normalized.append({
             "input_id": iid,
             "sha256": digest,
-            "material": material,
+            "material": True,
         })
         provenance.append({
             "event_id": "input::" + iid,
-            "material": material,
+            "material": True,
             "disclosed": True,
-            "receipts": [digest] if material else [],
+            "receipts": [digest],
         })
     return normalized, provenance
 
