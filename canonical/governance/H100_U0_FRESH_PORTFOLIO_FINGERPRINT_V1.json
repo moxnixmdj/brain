@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U0_FRESH_PORTFOLIO_FINGERPRINT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_OUTCOMES__FULL_HOLDOUT_UPLOAD_BLOCKED_BY_CONNECTOR",
+  "candidate_source_sha256": "d56121bc530caf1011a91dda827de54d8889092a56c7885e239a90bbf8321d2e",
+  "candidate_canonical_ast_bits": 366264,
+  "holdout_sha256": "b9bbcd4b3c0d334a9c5736cd7174b015d7facec5933c999b9c0e68ac4137cdca",
+  "holdout_canonical_json_bytes": 6107,
+  "task_count": 9,
+  "nonsealed_task_count": 8,
+  "sealed_hidden_world_count": 16,
+  "time_budget_seconds_per_case": 1,
+  "working_memory_budget_bytes": 67108864,
+  "evidence_limitation": "FULL_HOLDOUT_BYTES_BOUND_IN_EXECUTION_TRANSCRIPT_BUT_CONNECTOR_BLOCKED_DURABLE_GITHUB_UPLOAD",
+  "promotion_authority": false
+}
