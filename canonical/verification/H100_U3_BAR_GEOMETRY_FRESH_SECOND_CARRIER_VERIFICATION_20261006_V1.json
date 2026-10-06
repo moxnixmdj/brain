@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_H100_U3_BAR_GEOMETRY_FRESH_SECOND_CARRIER_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "PASS__SECOND_ISOLATED_CARRIER__10_OF_10_FRESH__MACHINE_RELATIVE_UPPER_BOUND",
+  "reference_machine": {
+    "machine_id": "H100_U3_BOUNDED_INDIRECT_STACK_VM",
+    "runtime_git_blob_sha": "0135ece01738cab567066a40fd9577135fcd44dd"
+  },
+  "program": {
+    "precommit_commit": "41a2795778fc249093dd9683ef62e649d4f0bddb",
+    "sha256": "76d1de3f481d5a634a3e9a4204a3efc146b5f4bc79cf99ad0ca80415c83dff78",
+    "bytes": 379,
+    "bits": 3032
+  },
+  "fresh_holdout": {
+    "materialization_commit": "19d601c3aa92a7a47884c2bd33fea4ba0aa59c25",
+    "cases": 10,
+    "passed": 10,
+    "failed": 0
+  },
+  "resources": {
+    "max_steps": 24595,
+    "mean_steps": 16141.7,
+    "memory_cells": 2048,
+    "memory_cell_bits": 64,
+    "stack_limit": 128,
+    "output_limit": 64,
+    "runtime_input_class": "RAW_RASTER_VECTOR_R"
+  },
+  "bound": {
+    "lower_bits": 0,
+    "upper_bits": 3032,
+    "exact_complexity_claimed": false
+  },
+  "capability_scope": [
+    "SYNTHETIC_AXIS_ALIGNED_FILLED_RECTANGULAR_BARS",
+    "VERTICAL_OR_HORIZONTAL",
+    "VARIABLE_BACKGROUNDS_SYMBOLS_DIMENSIONS_COUNTS_AND_VALUES",
+    "NO_AXES_TEXT_LEGENDS_OCR_OR_OVERLAYS"
+  ],
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "hard_nonclaims": [
+    "NOT_GENERAL_CHART_UNDERSTANDING",
+    "3032_BITS_IS_AN_UPPER_BOUND_NOT_A_MINIMUM",
+    "NO_CLAIM_UNICHART_EQUIVALENCE"
+  ],
+  "promotion_authority": false
+}
