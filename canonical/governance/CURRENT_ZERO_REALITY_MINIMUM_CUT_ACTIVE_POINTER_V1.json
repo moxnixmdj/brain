@@ -106,7 +106,7 @@
     "DO_NOT_REPEAT_UNCHANGED_PRIMARY_SOURCE_DELTA_SCAN_AFTER_NONEXHAUSTIVE_FIXED_POINT",
     "NEW_MATERIAL_PRIMARY_SURFACE_DELTA_REOPENS_TYPED_CLASSIFICATION_AND_ACCEPTANCE_BASIS_CHECK"
   ],
-  "next": "UNIVERSE_AUTHORITY_FIRST__CURRENT_PRIMARY_SOURCE_DELTA_AT_NONEXHAUSTIVE_FIXED_POINT_AFTER_REPAIR__NEXT_SYNTHESIZE_AND_FALSIFY_SCOPE_SUPERSET_CHARACTERIZATION_OR_FIND_A_STRONGER_COUNTERMODEL__DO_NOT_REPEAT_UNCHANGED_SOURCE_SCAN__KEEP_V3_WITNESS_EFFECT_BOUNDARY_CONDITION_TRANSFER_AND_OWNERSHIP_LANES_ACTIVE_ONLY_WHEN_UNIVERSE_EXPANSION_STABLE__NO_FRESH_REALITY_WITHOUT_EXPLICIT_AUTHORITY",
+  "next": "UNIVERSE_AUTHORITY_FIRST__CURRENT_PRIMARY_SOURCE_SLICE_IS_AT_A_NONEXHAUSTIVE_FIXED_POINT_AFTER_ONE_ACCEPTANCE_BASIS_REPAIR__NEXT_SYNTHESIZE_AND_FALSIFY_SCOPE_SUPERSET_CHARACTERIZATION_OR_FIND_A_STRONGER_COUNTERMODEL__DO_NOT_REPEAT_UNCHANGED_SOURCE_SLICE__KEEP_OTHER_LANES_ACTIVE_ONLY_WHEN_UNIVERSE_EXPANSION_STABLE__NO_FRESH_REALITY_WITHOUT_EXPLICIT_AUTHORITY",
   "new_reality_units_consumed": 0,
   "terminal_cases_consumed": 0,
   "incremental_spend_usd": 0,
@@ -305,7 +305,7 @@
   "terminal_falsification_control_loop": {
     "status": "ACTIVE_IF_THIS_POINTER_IS_MERGED__HIGHER_ORDER_SCHEDULING_CONTROL__ZERO_TERMINAL_CREDIT",
     "governance": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V1.json",
-    "governance_git_blob_sha": "9b33f603ff90870796a762d97449962baf14432d",
+    "governance_git_blob_sha": "415022881f83c99a56d6a2d2ad6b68eee7d93b53",
     "activation": "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_ACTIVATION_20261006_V1.json",
     "activation_git_blob_sha": "40d3717dd3825ede7d49a8ee0bf126051f18bf99",
     "runtime": "canonical/runtime/terminal_falsification_control_loop_v1.py",
@@ -337,19 +337,17 @@
     }
   },
   "target_universe_surface_compiler": {
-    "status": "ACTIVE_IF_THIS_POINTER_IS_MERGED__CURRENT_PRIMARY_SOURCE_DELTA_20_OF_20_CLASSIFIED__ZERO_OPEN_BASIS_GAPS__LITERAL_COMPLETENESS_FALSE__ZERO_CREDIT",
-    "activation": "canonical/governance/TARGET_UNIVERSE_SURFACE_COMPILER_ACTIVATION_20261006_V1.json",
-    "activation_git_blob_sha": "b2060df501b33dee864b973b9d7a63e3d9acffd0",
+    "status": "ACTIVE_IF_MERGED__20_OF_20_CURRENT_SOURCE_SURFACES_CLASSIFIED__ZERO_BASIS_GAPS__LITERAL_COMPLETENESS_FALSE__ZERO_CREDIT",
+    "activation": "canonical/governance/TARGET_UNIVERSE_SURFACE_COMPILER_ACTIVATION_20261006_V2.json",
+    "activation_git_blob_sha": "bb533bf30b30b9ca3040307047db685477602fce",
     "runtime": "canonical/runtime/target_universe_surface_compiler_v1.py",
     "runtime_git_blob_sha": "5b7d4ed9b8e51c8291c86b192d0357e241a4c64c",
     "tests": "canonical/tests/test_target_universe_surface_compiler_v1.py",
     "tests_git_blob_sha": "ae6abe36776dc828eb2caf0420e69fddd8e1736d",
     "current_manifest": "canonical/governance/OPUS55_TARGET_UNIVERSE_SURFACE_MANIFEST_20261006_V2.json",
-    "current_manifest_git_blob_sha": "5ac48a8089476435b7d53df66fe71b3711e8783e",
-    "current_source_delta_pass": "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_PRIMARY_SURFACE_DELTA_PASS_20261006_V1.json",
-    "current_source_delta_pass_git_blob_sha": "81d7fd68713ea23fb6fcddfac0410368542b45ab",
-    "local_check": "canonical/verification/TARGET_UNIVERSE_SURFACE_COMPILER_CHECK_20261006_V1.json",
-    "local_check_git_blob_sha": "481e2fa8802c3cfd1e03ddd0946e27de3b8c8cab",
+    "current_manifest_git_blob_sha": "460775ac3b25b5a2699cf5801035bfce88afbfa4",
+    "current_source_slice": "canonical/verification/TERMINAL_TOURNAMENT_PRIMARY_SOURCE_SLICE_20261006_V2.json",
+    "current_source_slice_git_blob_sha": "0ca30833785b2ea2592d2cbdff29a9ec524c8105",
     "source_surfaces": 20,
     "invalid_surfaces": 0,
     "acceptance_basis_gaps": 0,
@@ -357,9 +355,9 @@
     "proof_credit_delta": 0
   },
   "creative_diagram_basis_v2": {
-    "status": "ACTIVE_IF_THIS_POINTER_IS_MERGED__ONE_FOR_ONE_THREE_STRATUM_SCOPE_STRENGTHENING__PERFORMANCE_OPEN__ZERO_CREDIT",
-    "activation": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_ACCEPTANCE_BASIS_V2_ACTIVATION_20261006_V1.json",
-    "activation_git_blob_sha": "980ca8d882296fa2175100ac54b331d736dc884d",
+    "status": "ACTIVE_IF_MERGED__THREE_STRATA__PERFORMANCE_OPEN__ZERO_CREDIT",
+    "activation": "canonical/governance/CREATIVE_OUTPUT_BASIS_ACTIVATION_20261006_V2.json",
+    "activation_git_blob_sha": "2c258dacc6fbc112bcc85e6f6e4a687ebbb33262",
     "strata": [
       "CREATIVE_TEXT",
       "DIAGRAM_OUTPUT",
