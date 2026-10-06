@@ -20,6 +20,19 @@ class BrokeredNamespaceError(RuntimeError):
     pass
 
 
+_SETUP_INPUT_ANCHOR = 'mount -o remount,bind,ro,nosuid,nodev "$ROOT/input"\n'
+if base._SETUP.count(_SETUP_INPUT_ANCHOR) != 1:
+    raise BrokeredNamespaceError("BASE_SETUP_INPUT_ANCHOR_DRIFT")
+_SETUP_BROKERED = base._SETUP.replace(
+    _SETUP_INPUT_ANCHOR,
+    _SETUP_INPUT_ANCHOR
+    + 'if [ -d "$ROOT/input/canonical/astra_runtime/tmp" ]; then\n'
+    + '  mount -t tmpfs -o size="${SCRATCH_MB}m",nosuid,nodev '
+    + 'tmpfs "$ROOT/input/canonical/astra_runtime/tmp"\n'
+    + 'fi\n',
+)
+
+
 def run_confined_brokered(
     policy: Mapping[str, Any],
     handler: Callable[[dict[str, Any]], Any],
@@ -78,7 +91,7 @@ def run_confined_brokered(
         "--uts",
         resolved["bash"],
         "-c",
-        base._SETUP,
+        _SETUP_BROKERED,
         "_",
         root,
         p["input_dir"],
