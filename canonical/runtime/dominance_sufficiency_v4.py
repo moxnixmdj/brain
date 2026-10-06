@@ -4,11 +4,10 @@ import copy
 from typing import Any, Mapping
 
 from canonical.runtime import dominance_binding_v2 as bind
-from canonical.runtime import dominance_semantic_binding_v3 as sem3
 from canonical.runtime import dominance_semantic_binding_v4 as sem4
-from canonical.runtime.dominance_sufficiency_v3 import (
-    INPUT_SCHEMA as V3_INPUT_SCHEMA,
-    compile_dominance_sufficiency_v3 as compile_v3,
+from canonical.runtime.dominance_sufficiency_v2 import (
+    INPUT_SCHEMA as V2_INPUT_SCHEMA,
+    compile_dominance_sufficiency_v2 as compile_v2,
 )
 
 INPUT_SCHEMA = "PROJECT_BRAIN_DOMINANCE_SUFFICIENCY_INPUT_V4"
@@ -23,7 +22,8 @@ def _validate_configuration_identity(
     if not isinstance(configs, list) or not configs:
         raise sem4.SemanticBindingV4Error("CONFIGURATIONS_INVALID")
 
-    live_ids = {str(row["id"]) for row in rows}
+    worlds = sem4.world_by_id(rows)
+    live_ids = set(worlds)
     identity_by_id: dict[str, str] = {}
     seen: set[str] = set()
 
@@ -114,6 +114,12 @@ def _validate_configuration_identity(
                 config_sha,
                 f"CONFIGURATION_{index}_{hid}_BOUND_RECEIPT",
             )
+            bind.same_sha256(
+                proof,
+                "hypothesis_semantic_sha256",
+                worlds[hid]["semantic_sha256"],
+                f"CONFIGURATION_{index}_{hid}_BOUND_RECEIPT",
+            )
 
         identity_by_id[cid] = config_sha
 
@@ -144,18 +150,15 @@ def compile_dominance_sufficiency_v4(doc: Mapping[str, Any]) -> dict[str, Any]:
         config_identity = _validate_configuration_identity(doc, rows)
 
         shadow = copy.deepcopy(dict(doc))
-        shadow["schema"] = V3_INPUT_SCHEMA
-        shadow["hypothesis_coverage_receipt"]["live_world_set_sha256"] = (
-            sem3.live_world_digest(sem4.v3_semantic_rows(rows))
-        )
+        shadow["schema"] = V2_INPUT_SCHEMA
 
-        v3 = compile_v3(shadow)
-        if v3.get("status") == "FAIL_CLOSED":
+        v2 = compile_v2(shadow)
+        if v2.get("status") == "FAIL_CLOSED":
             return {
                 "schema": OUTPUT_SCHEMA,
                 "status": "FAIL_CLOSED",
-                "errors": ["V3_SEMANTIC_BINDING_CORE_FAILED"]
-                + list(v3.get("errors") or []),
+                "errors": ["V2_EXACT_BINDING_CORE_FAILED"]
+                + list(v2.get("errors") or []),
                 "execution_authority": False,
                 "promotion_authority": False,
                 "fresh_reality_authority": False,
@@ -164,11 +167,8 @@ def compile_dominance_sufficiency_v4(doc: Mapping[str, Any]) -> dict[str, Any]:
                 "ownership_credit_delta": 0,
             }
 
-        passed = (
-            v3.get("status")
-            == "PASS__SEMANTICALLY_BOUND_DOMINANCE_SUFFICIENT"
-        )
-        selected = v3.get("selected_configuration") if passed else None
+        passed = v2.get("status") == "PASS__EXACTLY_BOUND_DOMINANCE_SUFFICIENT"
+        selected = v2.get("selected_configuration") if passed else None
         selected_sha = (
             config_identity.get(str(selected))
             if selected is not None
@@ -191,9 +191,9 @@ def compile_dominance_sufficiency_v4(doc: Mapping[str, Any]) -> dict[str, Any]:
             "selected_configuration": selected,
             "selected_configuration_sha256": selected_sha,
             "worst_case_margin": (
-                v3.get("worst_case_margin") if passed else None
+                v2.get("worst_case_margin") if passed else None
             ),
-            "v3": v3,
+            "v2": v2,
             "certificate_only": True,
             "execution_authority": False,
             "promotion_authority": False,
