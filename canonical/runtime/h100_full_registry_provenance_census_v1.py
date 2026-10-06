@@ -284,8 +284,23 @@ def run()->dict[str,Any]:
     x,v8code=v8_rows(); rows.extend(x)
 
     ids=[x["capability_id"] for x in rows]
-    if len(ids)!=21 or len(ids)!=len(set(ids)):
-        raise FullRegistryProvenanceCensusError("REGISTRY_ENTRY_CENSUS_NOT_21_UNIQUE")
+    if len(ids)!=21:
+        raise FullRegistryProvenanceCensusError("REGISTRY_RECORD_CENSUS_NOT_21")
+    by_id={}
+    for row in rows:
+        by_id.setdefault(row["capability_id"],[]).append(row)
+    collisions={
+        cid:[
+            {"registry_generation":r["registry_generation"],"category":r["category"]}
+            for r in rs
+        ]
+        for cid,rs in by_id.items() if len(rs)>1
+    }
+    if set(collisions)!={"CAP_AFFINE_TANH_V1"}:
+        raise FullRegistryProvenanceCensusError("UNEXPECTED_STABLE_ID_COLLISION_SET")
+    tanh=collisions["CAP_AFFINE_TANH_V1"]
+    if sorted(x["registry_generation"] for x in tanh)!=[3,6]:
+        raise FullRegistryProvenanceCensusError("TANH_COLLISION_GENERATIONS_CHANGED")
 
     counts={k:sum(1 for x in rows if x["category"]==k) for k in (STRICT,DEV_FIXED,EXTERNAL_FIXED,UNRESOLVED)}
     strict_bits=ccode["fixed_length_bits"]+v3code["aggregate_fixed_length_bits"]+v4code["fixed_length_bits"]+v8code["aggregate_fixed_length_bits"]
@@ -293,8 +308,11 @@ def run()->dict[str,Any]:
 
     return {
         "schema":SCHEMA,
-        "status":"PASS__FULL_21_ENTRY_DUAL_LEDGER_PROVENANCE_CENSUS__STRICT_OUTCOME_SELECTED_CODE_CAPACITY_54_BITS__ZERO_TERMINAL_CREDIT",
+        "status":"PASS__FULL_21_RECORD_DUAL_LEDGER_PROVENANCE_CENSUS__20_STABLE_IDS__ONE_TANH_ID_COLLISION__STRICT_OUTCOME_SELECTED_CODE_CAPACITY_54_BITS__ZERO_TERMINAL_CREDIT",
         "entry_count":len(rows),
+        "unique_stable_capability_id_count":len(by_id),
+        "stable_id_collisions":collisions,
+        "census_identity_rule":"REGISTRY_GENERATION_PLUS_CAPABILITY_ID",
         "rows":rows,
         "category_counts":counts,
         "strict_selection_codes":[ccode,v3code,v4code,v8code],
@@ -310,6 +328,7 @@ def run()->dict[str,Any]:
             "development_conditioned_preoutcome_fixed_entry_count":counts[DEV_FIXED],
             "external_capability_definition_preoutcome_fixed_entry_count":counts[EXTERNAL_FIXED],
             "provenance_unresolved_entry_count":counts[UNRESOLVED],
+            "stable_capability_id_collision_count":len(collisions),
             "exact_total_provenance_v1_learned_bits":None,
         },
         "hard_nonclaims":[
@@ -317,6 +336,7 @@ def run()->dict[str,Any]:
             "54_BITS_DOES_NOT_INCLUDE_DEVELOPMENT_CONDITIONED_PREOUTCOME_FIXED_OR_EXTERNAL_ACQUISITION_MEMBERSHIP_DECISIONS",
             "UNRESOLVED_ENTRIES_ARE_NOT_ASSUMED_ZERO",
             "EXTERNAL_CAPABILITY_DEFINITIONS_ARE_NOT_RELABELED_LEARNED_MERELY_BY_PERSISTENCE",
+            "STABLE_CAPABILITY_ID_IS_NOT_USED_AS_A_UNIQUE_PROVENANCE_KEY_WHEN_GENERATIONS_COLLIDE",
             "NO_TERMINAL_CREDIT",
         ],
         "h100_terminal_credit_delta":0,
