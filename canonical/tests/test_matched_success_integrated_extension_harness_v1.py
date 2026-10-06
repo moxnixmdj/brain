@@ -1,0 +1,124 @@
+from __future__ import annotations
+
+from canonical.runtime import browser_state_information_safe_candidate as browser_candidate
+from canonical.runtime import delegation_whole_scope_candidate_v2 as delegation_candidate
+from canonical.runtime import tool_discovery_information_safe_candidate as tool_candidate
+from canonical.runtime import contract_native_brain_candidate as contract_candidate
+from canonical.runtime import m0a_raw_source_brain_candidate_v2 as m0_candidate
+from canonical.runtime import native_artifact_cross_format_candidate_v1 as native_candidate
+from canonical.runtime.matched_success_integrated_extension_v1 import generate_case
+from canonical.runtime.matched_success_integrated_extension_harness_v1 import score_integrated_case
+
+
+class RehearsalAgent:
+    def __init__(self):
+        self.memory = None
+
+    def __call__(self, kind, public, context):
+        if "remember_token_sha256" in context:
+            self.memory = context["remember_token_sha256"]
+
+        if kind == "browser":
+            payload = browser_candidate.next_action(public)
+        elif kind == "tool":
+            payload = tool_candidate.next_action(public)
+        elif kind == "delegation_v2_initial":
+            payload = delegation_candidate.solve_initial(public)
+        elif kind == "delegation_v2_revised":
+            payload = delegation_candidate.solve_after_receipt(
+                public,
+                context["previous_candidate_sha256"]
+                and {},
+            )
+            # solve_after_receipt requires the previous plan, not its digest.
+            # Recompute the deterministic initial plan from the case-visible task.
+            payload = delegation_candidate.solve_after_receipt(
+                public,
+                delegation_candidate.solve_initial({"task": public["task"]}),
+            )
+        elif kind == "delegation_v3":
+            payload = delegation_candidate._solve(public["task"])
+        elif kind == "m0":
+            payload = m0_candidate.solve(public)
+        elif kind in {"structured", "p1", "p2", "p3"}:
+            payload = contract_candidate.solve(public)
+        elif kind == "native":
+            payload = native_candidate.solve(public)
+        else:
+            raise AssertionError(kind)
+
+        out = {"payload": payload, "oversight_request": False}
+        if "previous_stage_receipt_sha256" in context:
+            out["handoff_ack_sha256"] = context["previous_stage_receipt_sha256"]
+        if "requirement_change_sha256" in context:
+            out["requirement_change_ack_sha256"] = context["requirement_change_sha256"]
+        if context.get("rollback_required") is True:
+            out["rollback_to_sha256"] = context["rollback_checkpoint_sha256"]
+        if self.memory is not None:
+            out["memory_echo_sha256"] = self.memory
+        return out
+
+
+def _case(atom):
+    return generate_case(atom, 0, "REHEARSAL_COMMITMENT", "REHEARSAL_BEACON")
+
+
+def test_integration_harness_rejects_missing_handoff_ack():
+    atom = "dimension:research_plus_tool_use_plus_artifact_creation"
+    case = _case(atom)
+    base = RehearsalAgent()
+
+    def broken(kind, public, context):
+        out = dict(base(kind, public, context))
+        out.pop("handoff_ack_sha256", None)
+        return out
+
+    result = score_integrated_case(case, broken)
+    assert result["pass"] is False
+    assert any("HANDOFF_ACK_MISMATCH" in x for x in result["integration_errors"])
+
+
+def test_requirement_change_requires_explicit_ack():
+    atom = "dimension:requirement_change"
+    case = _case(atom)
+    base = RehearsalAgent()
+
+    def broken(kind, public, context):
+        out = dict(base(kind, public, context))
+        out.pop("requirement_change_ack_sha256", None)
+        return out
+
+    result = score_integrated_case(case, broken)
+    assert result["pass"] is False
+    assert "REQUIREMENT_CHANGE_NOT_ACKNOWLEDGED" in result["integration_errors"]
+
+
+def test_long_horizon_memory_token_cannot_disappear():
+    atom = "dimension:long_horizon_state_retention"
+    case = _case(atom)
+    base = RehearsalAgent()
+
+    def broken(kind, public, context):
+        out = dict(base(kind, public, context))
+        out.pop("memory_echo_sha256", None)
+        return out
+
+    result = score_integrated_case(case, broken)
+    assert result["pass"] is False
+    assert "LONG_HORIZON_MEMORY_TOKEN_LOST" in result["integration_errors"]
+
+
+def test_rollback_class_requires_checkpoint_restore():
+    atom = "dimension:cross_capability_state_handoff_and_rollback"
+    case = _case(atom)
+    base = RehearsalAgent()
+
+    def broken(kind, public, context):
+        out = dict(base(kind, public, context))
+        if context.get("rollback_required") is True:
+            out["rollback_to_sha256"] = "0" * 64
+        return out
+
+    result = score_integrated_case(case, broken)
+    assert result["pass"] is False
+    assert "ROLLBACK_CHECKPOINT_MISMATCH" in result["integration_errors"]
