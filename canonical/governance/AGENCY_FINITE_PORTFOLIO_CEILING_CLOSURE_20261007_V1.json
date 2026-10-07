@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_AGENCY_FINITE_PORTFOLIO_CEILING_CLOSURE_V1",
   "date": "2026-10-07",
-  "status": "FROZEN_RESULT_BLIND_CEILING_CLOSURE_CANDIDATE__INDEPENDENT_CI_REPLAY_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "status": "FROZEN_RESULT_BLIND_CEILING_CLOSURE_CANDIDATE__VERIFIER_SCHEMA_REPAIRED__INDEPENDENT_REPLAY_REQUIRED__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "freeze": {
     "post_freeze_beacon_commit_sha": "14663624afbf93aa86bb28265f4a647b79bc31d9",
@@ -14,7 +14,7 @@
     },
     "ceiling_verifier": {
       "path": "canonical/runtime/agency_finite_portfolio_ceiling_v1.py",
-      "git_blob_sha": "19d75fe177ff04da196024bcb44ea6087c695507"
+      "git_blob_sha": "bac821c309bb4e8f1dcdbe576da143fc47f3ff55"
     },
     "tests": {
       "path": "canonical/tests/test_agency_finite_portfolio_ceiling_v1.py",
@@ -90,5 +90,12 @@
     "NO_CLAIM_U_IS_EMPTY",
     "NO_D_FINALITY",
     "NO_TERMINAL_CREDIT"
-  ]
+  ],
+  "verifier_schema_repair": {
+    "previous_blob_sha": "19d75fe177ff04da196024bcb44ea6087c695507",
+    "repaired_blob_sha": "bac821c309bb4e8f1dcdbe576da143fc47f3ff55",
+    "defect": "BOUND_RECOVERY_VERIFICATION_RECEIPT_STORES_SCOPE_COMPLETE_AND_UNIVERSAL_ACHIEVED_BOUNDS_UNDER_verified__OLD_VERIFIER_READ theorem",
+    "repair": "READ_THE_EXACT_BOUND_RECEIPT_verified_OBJECT",
+    "semantic_effect": "RESTORES_INTENDED_CHECK_AGAINST_THE_CONTENT_ADDRESSED_RECOVERY_RECEIPT__NO_ACCEPTANCE_CREDIT_BY_PATCH_ALONE"
+  }
 }
