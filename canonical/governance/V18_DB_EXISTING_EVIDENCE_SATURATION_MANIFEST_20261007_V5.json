@@ -1,0 +1,141 @@
+{
+  "schema": "PROJECT_BRAIN_V18_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_V5",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ZERO_REALITY_DB_SATURATION__TWELVE_KNOWN_DOMINATED_REGIONS__NOT_EXHAUSTIVE__TERMINAL_FALSE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "canonical_base_commit": "8c113e2d3ce6562b09f5de6cfcc4ec568d2daed2",
+  "predecessor": {
+    "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V4.json",
+    "git_blob_sha": "d86bbf7a1cc8968b3f48fbe1d13c390ab1310b9a",
+    "known_D_B_region_count": 11
+  },
+  "source_bindings": {
+    "predecessor_verification": {
+      "path": "canonical/verification/V16_DB_EXISTING_EVIDENCE_SATURATION_WOLFRAM_VERIFICATION_20261007_V4.json",
+      "git_blob_sha": "4da6582ce15716d759e3e1edd94c69c9b73b6f91"
+    },
+    "professional_unsupported_content_cell": {
+      "path": "canonical/governance/V14_PROFESSIONAL_ARTIFACT_UNSUPPORTED_CONTENT_SELECTED_PROPERTY_CELL_20261007_V1.json",
+      "git_blob_sha": "28692768a21e95b51e847417cf5ba2343587e4aa"
+    },
+    "professional_unsupported_content_verification": {
+      "path": "canonical/verification/V14_PROFESSIONAL_ARTIFACT_UNSUPPORTED_CONTENT_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "aefee446782989518c9794db1e73909bd3c4f55c"
+    }
+  },
+  "known_D_B_regions": [
+    {
+      "id": "ACCEPTED_LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "kind": "ACCEPTED_OWNED_SCOPE",
+      "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "scope": "DURABLE_CROSS_SESSION_PROJECT_STATE_AND_SAME_MISSION_CHECKPOINT_RELAUNCH_CONTINUITY"
+    },
+    {
+      "id": "ACCEPTED_SUBAGENT_DELEGATION_AND_COORDINATION",
+      "kind": "ACCEPTED_OWNED_SCOPE",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION"
+    },
+    {
+      "id": "ACCEPTED_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "kind": "ACCEPTED_OWNED_SCOPE",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+    },
+    {
+      "id": "ACCEPTED_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "kind": "ACCEPTED_OWNED_SCOPE",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+    },
+    {
+      "id": "ACCEPTED_EXACT_SYMBOLIC_COMPUTATION",
+      "kind": "ACCEPTED_OWNED_BOUNDED_SCOPE",
+      "family": "EXACT_SYMBOLIC_COMPUTATION"
+    },
+    {
+      "id": "LIVEBENCH_IF_ACTIVE15_FROZEN_200",
+      "kind": "SELECTED_CONTEXT_TOP_LAW_CELL",
+      "source": "canonical/governance/LIVEBENCH_IF_V9_SELECTED_CONTEXT_ABC_BUNDLE_20261007_V1.json"
+    },
+    {
+      "id": "NATIVE_ARTIFACT_T1_FROZEN_8_MECHANICAL",
+      "kind": "SELECTED_CONTEXT_OBJECTIVE_CEILING_CELL",
+      "source": "canonical/governance/V13_NATIVE_ARTIFACT_MECHANICAL_SELECTED_CELL_20261007_V1.json"
+    },
+    {
+      "id": "UNKNOWN_DOMAIN_V7_EXACT_REACHABLE_FROZEN_PRODUCTION_DOMAIN",
+      "kind": "SELECTED_CONTEXT_DIRECT_E2E_UNIVERSAL_CELL",
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "source": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_SELECTED_CONTEXT_ABC_E2E_BUNDLE_20261007_V1.json"
+    },
+    {
+      "id": "SYNTHESIS_T1_T3_FROZEN_60_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "kind": "SELECTED_PROPERTY_BOOLEAN_TOP_LAW_CELL",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "source": "canonical/governance/V14_SYNTHESIS_UNSUPPORTED_CLAIM_SELECTED_PROPERTY_CELL_20261007_V1.json"
+    },
+    {
+      "id": "P2_PROFESSIONAL_T1_FROZEN_30_HIDDEN_OPTIMUM",
+      "kind": "SELECTED_CONTEXT_OBJECTIVE_TOP_LAW_CELL",
+      "family": "ARTIFACT_CREATION",
+      "source": "canonical/governance/V14_P2_PROFESSIONAL_TOP_LAW_SELECTED_CELL_20261007_V1.json"
+    },
+    {
+      "id": "BROWSER_STATE_INFORMATION_SAFE_ALL_SEEDS_ALL_ORDINALS_V1",
+      "kind": "SELECTED_CONTEXT_UNIVERSAL_OBJECTIVE_TOP_LAW_CELL",
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "source": "canonical/governance/BROWSER_STATE_GENERATOR_UNIVERSAL_TOP_LAW_CELL_20261007_V1.json",
+      "scope": "ONLY_THE_EXACT_BROWSER_STATE_INFORMATION_SAFE_GENERATOR_DOMAIN__NOT_ARBITRARY_BROWSER_OR_OSWORLD"
+    },
+    {
+      "id": "PROFESSIONAL_ARTIFACT_T1_FROZEN_30_ZERO_UNSUPPORTED_MATERIAL_CONTENT",
+      "kind": "SELECTED_PROPERTY_BOOLEAN_TOP_LAW_CELL",
+      "family": "ARTIFACT_CREATION",
+      "source": "canonical/governance/V14_PROFESSIONAL_ARTIFACT_UNSUPPORTED_CONTENT_SELECTED_PROPERTY_CELL_20261007_V1.json",
+      "scope": "EXACT_FROZEN_T1_PROFESSIONAL_ARTIFACT_PARENT_POPULATION__AGGREGATE_30_CASES__ONLY_NO_UNSUPPORTED_MATERIAL_CONTENT_GATE"
+    }
+  ],
+  "reconciliation_proof": {
+    "predecessor_region_count": 11,
+    "predecessor_duplicate_free": true,
+    "added_region_id": "PROFESSIONAL_ARTIFACT_T1_FROZEN_30_ZERO_UNSUPPORTED_MATERIAL_CONTENT",
+    "added_region_absent_from_predecessor": true,
+    "professional_cell_add_to_D_B": "ONLY_THIS_EXACT_FROZEN_T1_PROFESSIONAL_UNSUPPORTED_CONTENT_PROPERTY_CELL",
+    "professional_boolean_top_verified": true,
+    "wolfram_set_delta_output": "{11, True, False, 12, True, {{True, True, True, True, True, True, True, True, True, True, True, True, False}}}",
+    "all_twelve_true_while_global_abc_false_satisfiable": true
+  },
+  "saturation_result": {
+    "known_D_B_region_count": 12,
+    "fresh_target_reality_consumed": 0,
+    "new_family_acceptance_credit": 0,
+    "regions_may_overlap": true,
+    "coverage_measure_not_claimed": true,
+    "E_definition": "OBSERVABLE_TRACE_SUPERDOMAIN_MINUS_THE_UNION_OF_ALL_SOUND_CURRENT_AND_FUTURE_D_B_REGIONS",
+    "next_rule": "SEARCH_ONLY_E_AFTER_SUBTRACTING_ALL_TWELVE_CACHED_SOUND_D_B_REGIONS__DO_NOT_REOPEN_WITHOUT_CONTENT_ADDRESSED_COUNTEREVIDENCE"
+  },
+  "terminal_now_truth": {
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false,
+    "can_truthfully_set_terminal_true_from_current_bound_evidence": false
+  },
+  "scheduler_effect": [
+    "TREAT_ALL_TWELVE_REGIONS_AS_CACHED_DOMINATED_TERRITORY.",
+    "SUBTRACT_ALL_TWELVE_FROM_THE_RESIDUAL_E_BEFORE_ANY_NEW_TARGET_QUERY_OR_IMPLEMENTATION_WORK.",
+    "DO_NOT_REOPEN_THE_PROFESSIONAL_UNSUPPORTED_CONTENT_PROPERTY_CELL_OR_BROWSER_GENERATOR_CELL_WITHOUT_CONTENT_ADDRESSED_COUNTEREVIDENCE.",
+    "SATURATE_ADDITIONAL_EXISTING_SCOPE_COMPLETE_TOP_OR_DIRECT_E2E_CERTIFICATES_BEFORE_TARGET_QUERYING.",
+    "KEEP_TERMINAL_FAIL_CLOSED_UNTIL_COMPLETE_SELECTED_CONTEXT_ABC_AND_D_FINAL_ROUTE_OWNERSHIP_EFFECT_DONOR_INDEPENDENCE_FINALITY_BOTH_CLOSE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TWELVE_REGIONS_ARE_DISJOINT.",
+    "NO_CLAIM_THE_TWELVE_REGIONS_EXHAUST_D_B_OR_THE_TARGET_RELEVANT_CONTEXT_UNIVERSE.",
+    "NO_CLAIM_PROFESSIONAL_ARTIFACT_QUALITY_IS_GLOBALLY_CLOSED.",
+    "NO_CLAIM_BROWSER_OR_DESKTOP_USE_IS_GLOBALLY_CLOSED.",
+    "NO_CLAIM_ABC_OR_D_FINALITY_IS_CLOSED.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
