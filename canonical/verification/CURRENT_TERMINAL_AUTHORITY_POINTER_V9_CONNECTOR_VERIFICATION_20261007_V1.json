@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V9_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_SOURCE_BINDING_AND_GATE_REPLAY_PASS__13_OPEN_6_CLOSED__TERMINAL_FALSE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "dc5e4bbee47dcc069b4e83eea827633baf53356d"
+  },
+  "verified": {
+    "abc_zero_reality_fixed_point_v2_exact": true,
+    "if_scope_complete_protocol_closure_exact": true,
+    "finance_proof_carrying_source_semantic_gate_exact": true,
+    "open_ABC_refinement_family_count": 13,
+    "closed_ABC_refinement_family_count": 6,
+    "instruction_following_frozen_protocol_closed": true,
+    "finance_structural_source_omission_path_closed": true,
+    "finance_direct_semantic_tail": "SOUND_SOURCE_GROUNDED_SEMANTIC_INTERPRETATION_OR_EQUIVALENT_DIRECT_END_TO_END_ADEQUACY",
+    "current_U_empty_proved": false,
+    "router_registry_real_selected_cover_complete": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "gate_replay": {
+    "terminal_real": false,
+    "declared_terminal": false,
+    "blockers": [
+      "U_NOT_PROVED_EMPTY",
+      "ROUTER_REGISTRY_SELECTED_COVER_INCOMPLETE",
+      "COMPLETE_SELECTED_CONTEXT_ABC_OPEN",
+      "D_FINALITY_OPEN"
+    ]
+  },
+  "source_bindings": {
+    "abc_zero_reality_fixed_point_v2": "4794c5a7d578258e8cf5d08866ee8b7946b6d1c9",
+    "abc_zero_reality_fixed_point_v2_verification": "36370480cc14ed4eceb976a3778a0203a5421250",
+    "if_scope_complete_protocol_closure": "307ea91b0150db9d6cca9580e1b7a399035929c1",
+    "if_scope_complete_protocol_closure_verification": "aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f",
+    "finance_proof_carrying_source_semantic_gate": "f43ddf33a63659ce6a853b9f3d75de0b7b1e5d66"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_CLAIM_ROUTER_SELECTED_COVER_IS_COMPLETE",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
