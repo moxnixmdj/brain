@@ -178,3 +178,5 @@ jobs:
             canonical/astra_runtime/artifacts/TERMINAL_*_RACE_RESULT_20261007_V1.json
             canonical/same_identity_worker/state/SI-TERMINAL-*-RACE-20261007-V1.json
             canonical/same_identity_worker/evidence/SI-TERMINAL-*-RACE-20261007-V1__*.json
+
+# retrigger_after_obs_hydration: 2026-10-07
