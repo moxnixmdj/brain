@@ -40,6 +40,11 @@ from canonical.runtime.universal_verified_effect_executor_v1 import (
     EXECUTOR_ID as VERIFIED_EFFECT_EXECUTOR_ID,
 )
 from canonical.runtime.typed_acceptance_finite_search_v1 import search as search_typed_acceptance
+from canonical.runtime.universal_solver_state_capsule_v1 import (
+    initialize as initialize_state_capsule,
+    append_verified_transition as append_state_transition,
+    verify_targets as verify_state_targets,
+)
 
 SCHEMA = "PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V1"
 
@@ -400,6 +405,7 @@ def run(
         if set(target) & set(current):
             raise UniversalSolverError("TARGET_EFFECT_MAY_NOT_BE_SELF_ASSERTED_AS_INITIAL_FACT")
         proposals = proposal_packets if isinstance(proposal_packets, Mapping) else {}
+        state_capsule = initialize_state_capsule(problem)
 
         trace: list[dict[str, Any]] = []
         rejected: list[dict[str, Any]] = []
@@ -412,6 +418,18 @@ def run(
 
         for cycle in range(max_cycles):
             if set(target).issubset(current):
+                target_lineage = verify_state_targets(state_capsule, target)
+                if target_lineage.get("pass") is not True:
+                    return {
+                        "schema": SCHEMA,
+                        "status": "FAIL_CLOSED__TARGET_FACTS_WITHOUT_VALID_STATE_LINEAGE",
+                        "pass": False,
+                        "verified_facts": current,
+                        "trace": trace,
+                        "state_capsule": state_capsule,
+                        "state_target_verdict": target_lineage,
+                        "terminal_authority": False,
+                    }
                 return {
                     "schema": SCHEMA,
                     "status": "SOLVED__ALL_TARGET_EFFECTS_VERIFIED",
@@ -420,6 +438,9 @@ def run(
                     "trace": trace,
                     "rejected_proposals": rejected,
                     "proposal_searches": proposal_searches,
+                    "state_capsule": state_capsule,
+                    "state_capsule_head_hash": state_capsule.get("head_hash"),
+                    "state_target_verdict": target_lineage,
                     "cycles": cycle,
                     "terminal_authority": False,
                     "capability_ownership_credit_delta": 0,
@@ -637,15 +658,35 @@ def run(
                 raise UniversalSolverError("CAPABILITY_PROVIDES_INVALID:" + cid)
             if any(not isinstance(x, str) or not x for x in new_facts):
                 raise UniversalSolverError("CAPABILITY_PROVIDES_INVALID:" + cid)
-            current = sorted(set(current) | set(new_facts))
-            trace.append({
+
+            completed_record = {
                 **record,
                 "action_type": action_type,
                 "verified_output": verdict.get("verified_output"),
                 "effect_outcome": effect_result.get("outcome") if isinstance(effect_result, Mapping) else None,
                 "effect_outcome_sha256": effect_result.get("effect_outcome_sha256") if isinstance(effect_result, Mapping) else None,
                 "new_verified_facts": sorted(set(new_facts)),
-            })
+            }
+            try:
+                state_capsule = append_state_transition(
+                    state_capsule,
+                    capability=cap,
+                    trace_row=completed_record,
+                )
+            except Exception as exc:
+                return {
+                    "schema": SCHEMA,
+                    "status": "FAIL_CLOSED__STATE_LINEAGE_APPEND_FAILED",
+                    "pass": False,
+                    "reason": type(exc).__name__ + ":" + str(exc),
+                    "verified_facts": current,
+                    "trace": trace,
+                    "state_capsule": state_capsule,
+                    "terminal_authority": False,
+                }
+
+            current = sorted(set(current) | set(new_facts))
+            trace.append(completed_record)
 
         return {
             "schema": SCHEMA,
