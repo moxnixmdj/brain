@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V3_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_SET_COVER_PASS__15_POSITIVE_CLASSES__9_LANES__GDPVAL_STRUCTURAL_RECLASSIFICATION_PRESERVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V3.json",
+    "git_blob_sha": "e4c2bd799c31a78b8d26fbecdeeea988aedc4a43"
+  },
+  "solver": {
+    "path": "canonical/runtime/minimum_reality_cut_v2.py",
+    "git_blob_sha": "5697e9c7ee148ae6188ad170d777e7553c79ee3d"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/abc_reality_cut_v3"
+  },
+  "result": {
+    "exact_minimum": true,
+    "positive_reality_class_count": 15,
+    "candidate_lane_count": 9,
+    "selected_lane_count": 9,
+    "total_lane_cost": 9,
+    "selected_lanes": [
+      "L1_BUILDKITE_TB4_CHARTOGRAPHY",
+      "L2_HUGGINGFACE_HLE_OSWORLD",
+      "L3_VALS_FINANCE_MYSTERY",
+      "L4_ARTIFICIAL_ANALYSIS_PROFESSIONAL",
+      "L5_COGNITION_FRONTIERCODE",
+      "L6_ZAPIER_AUTOMATIONBENCH",
+      "L7_CURSORBENCH_UNBOUND",
+      "L8_TB_SCIENCE_HARBOR",
+      "L9_SHARED_MATCHED_TARGET_RELATIVE"
+    ]
+  },
+  "truth_boundary": {
+    "gdpval_resolved": false,
+    "gdpval_removed_from_U": false,
+    "gdpval_removed_only_from_current_positive_reality_cut": true,
+    "reason": "COMPLETE_PUBLIC_220_CONTEXT_POPULATION_ALREADY_ACQUIRED_AND_STRUCTURAL_MEMBERSHIP_COMPLEMENT_REMAINS_UNEXHAUSTED",
+    "global_information_lower_bound_claimed": false
+  },
+  "hard_nonclaims": [
+    "NO_GDPVAL_CLOSURE",
+    "NO_U_EMPTY",
+    "NO_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
