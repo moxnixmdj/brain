@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_MONOTONE_SEMANTIC_DECISION_LOOP_INDEPENDENT_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_REPLAY_PASS__37_OF_37__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority_binding": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+    "git_blob_sha": "1016e752ea931483e887800b8dd6dc23c1521e7e"
+  },
+  "executable_binding": {
+    "path": "canonical/governance/MONOTONE_SEMANTIC_DECISION_LOOP_EXECUTABLE_BINDING_20261007_V1.json",
+    "git_blob_sha": "81387706a78b6d9d5440ce36e0f1b26aa9bffc40"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/v16_semantic_replay"
+  },
+  "replay": {
+    "exact_test_modules": [
+      "canonical/tests/test_monotone_semantic_constraint_kernel_v1.py",
+      "canonical/tests/test_source_aligned_semantic_proof_v1.py",
+      "canonical/tests/test_certified_scope_fragment_v1.py",
+      "canonical/tests/test_source_aligned_semantic_proof_v2.py",
+      "canonical/tests/test_proof_carrying_semantic_refinement_v2.py",
+      "canonical/tests/test_finite_minimax_decision_region_v1.py",
+      "canonical/tests/test_monotone_semantic_drd_bridge_v1.py"
+    ],
+    "tests_run": 37,
+    "tests_passed": 37,
+    "failures": 0,
+    "errors": 0,
+    "successful": true
+  },
+  "verified": [
+    "MISSING_SEMANTIC_FACT_REMAINS_BROAD_AND_CANNOT_CREATE_FALSE_POSITIVE_POLICY_CERTIFICATE",
+    "UNPROVED_SEMANTIC_CONSTRAINTS_ARE_REJECTED",
+    "ZERO_MODEL_CONTRADICTION_FAILS_CLOSED",
+    "RELATIONAL_CORRELATIONS_ARE_PRESERVED_IN_THE_CONSTRAINT_STATE",
+    "EXACT_SOURCE_OPERATOR_AND_BOUND_FACTS_ARE_RECOMPUTED",
+    "UNPROVED_HIGH_LEVEL_MEANING_CANNOT_MINT_TRUSTED_CONSTRAINTS",
+    "CONTROLLED_SCOPE_RELATIONS_ARE_PROVED_ONLY_ON_EXACT_SUPPORTED_FORMS",
+    "OMITTED_SCOPE_FACTS_REMAIN_UNRESOLVED",
+    "COMMON_POLICY_SELECTION_STOPS_WITHOUT_UNNECESSARY_QUERY",
+    "MINIMAX_DECISION_REGION_SELECTS_THE_CHEAPEST_SOUND_DISCRIMINATOR_IN_BOUND_FINITE_CASES",
+    "INDISTINGUISHABLE_INCOMPATIBLE_POLICY_REGIONS_FAIL_CLOSED",
+    "MISSING_TRUTHFULNESS_CERTIFICATE_FOR_AN_OBSERVATION_FAILS_CLOSED"
+  ],
+  "consequence": {
+    "prior_verification_gap": "INDEPENDENT_EXECUTION_OF_THE_COMMITTED_MONOTONE_SEMANTIC_DECISION_LOOP",
+    "prior_gap_closed": true,
+    "reusable_semantic_admission_substrate_independently_executed": true,
+    "U_empty_proved": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_NATURAL_LANGUAGE_SEMANTICS_IS_SOLVED",
+    "NO_CLAIM_CURRENT_LIVE_RESIDUAL_CONTEXTS_HAVE_SCOPE_COMPLETE_POLICY_ADEQUACY_FORMULAS",
+    "NO_CLAIM_ALL_REQUIRED_TRUTHFUL_DISCRIMINATORS_ARE_BOUND",
+    "NO_U_EMPTY_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
