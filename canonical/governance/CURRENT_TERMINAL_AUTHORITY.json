@@ -257,7 +257,8 @@
       "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V2.json",
       "git_blob_sha": "7aaffdb0c7d22f59700a8bc5d997f3bcc4800519",
       "independent_verification": {
-        "path": "canonical/verification/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V2_VERIFY_20261007_V1.json"
+        "path": "canonical/verification/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V2_VERIFY_20261007_V1.json",
+        "git_blob_sha": "0a241a4023106b624b084bab055cdb0891d2670b"
       }
     }
   },
