@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_META_EIGHT_AB_ABSORPTION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_POINTWISE_QUANTIFIER_LOGIC_PASS__SOURCE_CLASSIFICATION_PREMISES_NOT_INDEPENDENTLY_REVERIFIED_HERE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/META_EIGHT_AB_ABSORPTION_TRUTH_REPAIR_20261007_V1.json",
+    "governance_commit_sha": "ba7788fb1b55ff0bac4b004740b876fc53ecae13",
+    "branch": "obs/meta-eight-ab-absorption-20261007-v1"
+  },
+  "verification_provider": "WOLFRAM_LANGUAGE",
+  "formula": "((m1=>u)&...&(m8=>u)&(u=>d)) => ((m1=>d)&...&(m8=>d))",
+  "wolfram_result": true,
+  "verified": [
+    "IF_EACH_NAMED_META_SLICE_IS_INSIDE_THE_TARGET_UNIVERSE_AND_DOMINANCE_HOLDS_ON_THE_TARGET_UNIVERSE__DOMINANCE_ON_EACH_META_SLICE_FOLLOWS",
+    "UNDER_THAT_PREMISE__SEPARATE_TOP_LEVEL_META_CONJUNCTS_ARE_LOGICALLY_REDUNDANT_AS_TERMINAL_SEMANTICS"
+  ],
+  "not_verified": [
+    "WHETHER_EACH_BOUND_META_SOURCE_CLASSIFICATION_IS_SEMANTICALLY_LOSSLESS",
+    "WHETHER_CURRENT_A_IS_TARGET_COMPLETE",
+    "WHETHER_CURRENT_B_DOMINANCE_IS_PROVED",
+    "WHETHER_FACTORZER_PROMOTION_SHOULD_DELETE_ALL_EIGHT_ROWS_NOW"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
