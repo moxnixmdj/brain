@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V8_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_SOURCE_BINDING_AND_GATE_REPLAY_PASS__TERMINAL_FALSE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "cf227090b8f85e46f09280f4152dc782a5ebeb59"
+  },
+  "verified": {
+    "all_new_authoritative_source_bindings_exact": true,
+    "if_scope_boundary_refinement_closed_under_declared_finite_protocol": true,
+    "if_scope_population_inference_required": false,
+    "private_exact_opus_capacity_state": "UNKNOWN__GITHUB_ACTIONS_PRE_STEP_INFRASTRUCTURE_BLOCK",
+    "current_U_empty_proved": false,
+    "router_registry_real_selected_cover_complete": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "gate_replay": {
+    "terminal_real": false,
+    "declared_terminal": false,
+    "blockers": [
+      "U_NOT_PROVED_EMPTY",
+      "ROUTER_REGISTRY_SELECTED_COVER_INCOMPLETE",
+      "COMPLETE_SELECTED_CONTEXT_ABC_OPEN",
+      "D_FINALITY_OPEN"
+    ]
+  },
+  "source_bindings": {
+    "if_scope_finite_protocol_binding": "15c5e607e9f5c921d62bf75492e26021980e75fa",
+    "if_scope_finite_protocol_binding_verification": "b7bfc865267554f0c7005c0835f09107b2dec998",
+    "aa_briefcase_shared_residual": "2ec5e65558f7f622d8ab486068a8ebf4ce39bd3e",
+    "aa_briefcase_shared_residual_verification": "f4e08f38d23b3fe45dd95b07459f27ef7bc5be92",
+    "synthesis_single_residual": "a8825ddd105c6200f96ebf7435ba4de60f677be7",
+    "synthesis_single_residual_verification": "44d3ba256aef4eb92edee4d6c186ed35dc559141",
+    "unknown_domain_single_residual": "6477b9d6d926d2810e347040c94c265961aae39e",
+    "unknown_domain_single_residual_verification": "54dee66e4a1a9fca7c7e87c19439db941e2d6697",
+    "private_opus_capacity_probe_classification": "996d1bbce134538b7acfd3cf81c5868d9525cfce",
+    "false_terminal_real_revocation": "b6d6db2c4923764d2f31c6797124f8ebd912e0ce"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_CLAIM_ROUTER_SELECTED_COVER_IS_COMPLETE",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
