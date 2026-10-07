@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_CONTINUITY_ADMIN_FILESYSTEM_AUTHORITY_CLOSURE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ROUTE_LOCAL_D_CLOSURE__FOUR_ADMIN_FILESYSTEM_EFFECT_CLASSES_AUTHORITY_BOUND__DOWNSTREAM_EFFECTS_SEPARATE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "selected_route": "canonical/governance/CONTINUITY_SELECTED_DEPLOYMENT_ROUTE_20261007_V2.json",
+  "exact_subject": {
+    "entry": {
+      "path": "canonical/runtime/continuity_root3_fixed_entry_v2.py",
+      "git_blob_sha": "0aec0038af9babbe6d7786c8e5869546ebd688dd"
+    },
+    "supervisor": {
+      "path": "canonical/runtime/same_identity_supervisor_credited_v1.py",
+      "git_blob_sha": "47c461f502e840def0c38728e1bfd7c6401cb804"
+    },
+    "verifier": "canonical/runtime/continuity_admin_filesystem_authority_v1.py",
+    "tests": "canonical/tests/test_continuity_admin_filesystem_authority_v1.py"
+  },
+  "authority_model": {
+    "task_authority": "ONLY JSON MANIFESTS INSIDE canonical/same_identity_worker/tasks MAY BE SELECTED; TASK SCHEMA AGENT ID ZERO_SPEND MISSION PATH/SHA AND PREREQUISITES ARE VALIDATED BEFORE CLAIM.",
+    "state_authority": "EXISTING STATE MUST MATCH AGENT TASK TASK_SHA MISSION_SHA AND LEASE OWNER BEFORE RESUME OR EXECUTION.",
+    "namespace_authority": [
+      "canonical/same_identity_worker/state",
+      "canonical/same_identity_worker/evidence",
+      "canonical/same_identity_worker/external_tool_bridge"
+    ],
+    "path_escape": "SAFE TASK IDS PLUS FIXED PREFIXES PREVENT DYNAMIC FILENAME ESCAPE.",
+    "mutation_semantics": {
+      "file.directory_mutation": "CREATE FIXED ADMINISTRATIVE STATE/EVIDENCE/BRIDGE DIRECTORIES OR THE STATE LOCK DIRECTORY.",
+      "file.open_write": "ATOMIC TEMP STATE/EVIDENCE WRITE OR FIXED CLAIM LOCK CREATION/CONTENT.",
+      "file.rename": "ATOMIC os.replace(temp,path) WITHIN THE SAME AUTHORIZED ADMINISTRATIVE TARGET PATH.",
+      "file.remove": "REMOVE ONLY THE FIXED .claim.lock INSIDE THE AUTHORIZED STATE DIRECTORY."
+    },
+    "no_self_promotion": "SUPERVISOR RECEIPTS AND STATE SET promotion_claim=false AND p_real_claim=0.",
+    "downstream_rule": "SEMANTIC MISSION EFFECTS AFTER CONTINUITY HANDOFF ARE NOT AUTHORIZED BY THIS ADMINISTRATIVE CERTIFICATE; THEY REMAIN SEPARATE SELECTED_ROUTE D LEAVES."
+  },
+  "theorem": {
+    "statement": "FOR THE EXACT V2 SELECTED ENTRY AND CREDITED SUPERVISOR BYTES, EVERY DIRECT CONTINUITY_LEAF FILESYSTEM MUTATION IS AN ADMINISTRATIVE STATE TRANSITION INSIDE A FIXED BRAIN_OWNED PREFIX AND IS REACHED ONLY UNDER THE BOUND TASK/IDENTITY/MISSION/LEASE AUTHORITY CHECKS.",
+    "consequence": "THE FOUR CONTINUITY_LEAF FILESYSTEM EFFECT CLASSES NEED NO BROADER AMBIENT EFFECT AUTHORITY; THEY MAY BE TREATED AS ROUTE_LOCAL D CLOSED IF THE STATIC VERIFIER AND INDEPENDENT REPLAY PASS ON EXACT BYTES.",
+    "scope": "CONTINUITY ADMINISTRATIVE LEAF ONLY"
+  },
+  "remaining_D": [
+    "INDEPENDENTLY REPLAY THE EXACT V2 ENTRY AND ADMIN_AUTHORITY VERIFIER.",
+    "BIND DOWNSTREAM MISSION EFFECTS FOR ACTUAL SELECTED COMPOSED ROUTES.",
+    "ADD/RECOMPUTE EFFECT RECEIPTS WHEN A NEW ROUTE BECOMES CREDITED OR EXACT BYTES DRIFT.",
+    "FINAL DONOR_REMOVAL/CLEAN_ROOM REPLAY FOR THE COMPLETE CREDITED ROUTE SET."
+  ],
+  "hard_nonclaims": [
+    "NO GLOBAL D CLOSURE.",
+    "NO AUTHORITY FOR DOWNSTREAM MISSION EFFECTS.",
+    "NO TERMINAL FAMILY CAPABILITY ACCEPTANCE OR OWNERSHIP CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
