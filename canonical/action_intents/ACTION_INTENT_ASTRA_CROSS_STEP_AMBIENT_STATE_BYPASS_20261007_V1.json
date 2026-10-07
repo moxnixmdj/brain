@@ -1,0 +1,166 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "ASTRA-CROSS-STEP-AMBIENT-STATE-BYPASS-20261007-SOL",
+  "date": "2026-10-07",
+  "status": "CANDIDATE__CURRENT_BASE_BOUND__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "336bc00599f0a6672a25ea6cd558842f4ae890bc",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "ASTRA_CROSS_STEP_AMBIENT_STATE_BYPASS",
+  "action_kind": "INTEGRATION_GLUE_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::ASTRA_CROSS_STEP_AMBIENT_STATE_BYPASS",
+  "expected_parent_frontier_change": "Eliminate undeclared ambient ASTRA_STEP_* inheritance as a reachable cross-step state channel; require declared content-bound projection for any prior-step shell input; preserve explicit UNVERIFIED status for semantic completeness and whole-runtime external-evidence completeness.",
+  "highest_leverage_now": true,
+  "stop_condition": "No mission lacking DECLARED_CONTENT_BOUND_V1 can receive prior-step result payloads through shell environment projection; declared missions retain exact content-bound channel projection; regression tests prove legacy ambient inheritance is fail-closed; no composition acceptance credit is claimed solely from this repair.",
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "explicit_user_authorization": "Join the brain and make the goal real now, not after 30 minutes or 40 minutes, but now.",
+  "weakens_existing_guard": false,
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "MULTI_CAPABILITY_COMPOSITION_NO_BYPASS_AND_STATE_HANDOFF",
+      "COMPOSITION_TERMINAL_SUCCESS_AND_INVARIANT_PREMISES"
+    ],
+    "proof_state_reachability": "Removes a concrete reachable undeclared cross-step state channel that prevents whole-runtime no-bypass closure for the composition acceptance route.",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "tournament": {
+      "proposal_id": "P_ASTRE_RUNTIME_DECLARED_CONTENT_BOUND_CROSS_STEP_ONLY",
+      "falsifier_id": "F_ANY_UNDECLARED_PRIOR_RESULT_REACHES_SHELL_ENVIRONMENT",
+      "decisive_question": "Can any Astra mission omit declared cross-step mode yet still receive any prior-step result through ASTRA_STEP_* or equivalent runtime projection?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py",
+          "git_blob_sha": "7503705b5b2479b34e59ee78e427eb706318c054"
+        },
+        {
+          "path": "canonical/tests/test_astra_declared_cross_step_boundary_v1.py",
+          "git_blob_sha": "5db93487c72ba4afdd5a680dcdf103f972acfed4"
+        }
+      ]
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "336bc00599f0a6672a25ea6cd558842f4ae890bc",
+    "real_outcome": "Whole-runtime shell cross-step result transport is fail-closed by default and content-bound only when explicitly declared.",
+    "required_capability": "DECLARED_CONTENT_BOUND_CROSS_STEP_STATE_MEDIATION",
+    "obs_goal": {
+      "real_outcome": "Close the concrete ambient state bypass blocking composition no-bypass proof.",
+      "proxy_goals_deleted": [
+        "MORE_COMPOSITION_PROOF_TEXT_WITHOUT_RUNTIME_CHOKEPOINT_REPAIR",
+        "REPROVE_ALREADY_FIXED_V2_CAPSULE_BINDING"
+      ],
+      "surviving_necessity": "Delete the legacy ambient prior-result projection at the runtime choke point."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "composition_state_capsule_guard_v2",
+        "DECLARED_CONTENT_BOUND_V1 cross-step projection",
+        "composition_cross_step_no_bypass_audit_v1"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "NEW_COMPOSITION_FRAMEWORK",
+        "NEW_CAPSULE_VERSION"
+      ],
+      "surviving_gap": "Mission mode None still routes context_results(state) into shell execution, which exports all prior results."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_RUNTIME_BYPASS",
+      "delete_bypass_substitute_options": [
+        "delete legacy ambient projection",
+        "reuse declared content-bound projection"
+      ],
+      "surviving_causal_blocker": "ASTRA_CROSS_STEP_AMBIENT_STATE_BYPASS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "DELETE_AMBIENT_FALLBACK_AND_REUSE_DECLARED_BOUNDARY",
+        "MIGRATE_EACH_MISSION_WITHOUT_RUNTIME_DEFAULT_CHANGE",
+        "BUILD_NEW_COMPOSITION_TRANSPORT"
+      ],
+      "losing_routes_reason": "Per-mission-only repair cannot prove absence of future undeclared bypass; a new transport duplicates the already-working declared boundary.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Pure runtime mediation property is decidable with deterministic unit tests and static no-bypass audit; no fresh terminal evidence is required."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "legacy assumption that mode=None may expose all prior results"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "declared cross-step projection",
+        "result content hashing"
+      ],
+      "fresh_reuse_plan": "Run existing strict-boundary tests plus new negative test proving mode=None receives no prior-step shell variables."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current V22 authority",
+        "reused open issue #2231 evidence",
+        "reused existing strict boundary implementation"
+      ],
+      "search_stop_decision": "Stop because the defect and the existing sufficient mechanism are both directly present in current main; no external route is relevant.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "DELETE_LEGACY_AMBIENT_FALLBACK",
+      "PER_MISSION_PATCH_ONLY",
+      "NEW_TRANSPORT"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PER_MISSION_PATCH_ONLY_AS_WHOLE_RUNTIME_PROOF",
+      "NEW_TRANSPORT"
+    ],
+    "selected_surviving_route": "DELETE_LEGACY_AMBIENT_FALLBACK_AND_REUSE_DECLARED_CONTENT_BOUND_BOUNDARY",
+    "why_selected_route_is_fastest_sufficient": "One runtime choke-point change makes undeclared prior-result flow impossible by construction and reuses the already-tested strict projection.",
+    "expected_parent_level_state_change": "One composition no-bypass residual becomes structurally smaller without fresh reality or acceptance-credit inflation.",
+    "stop_condition": "Deterministic tests prove undeclared cross-step payload flow is empty while declared exact-channel flow still passes.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This is internal integration-glue truth repair at an existing runtime choke point using an already-existing mechanism; no external target-capability provider or fresh reality is involved."
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
