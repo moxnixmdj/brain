@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_EXPLICIT_UNCERTAINTY_V3_INDEPENDENT_REPLAY_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_DIRECT_TEST_REPLAY_PASS__7_OF_7__ZERO_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/SYNTHESIS_EXPLICIT_UNCERTAINTY_TOP_LAW_CELL_20261007_V3.json",
+      "git_blob_sha": "55326f8dab733c111f02badf1f5e86e5b2e70b28"
+    },
+    "runtime": {
+      "path": "canonical/runtime/synthesis_certified_visible_support_policy_v3.py",
+      "git_blob_sha": "cd81b812f30b46b9889826adbc39df8690bdb40d"
+    },
+    "tests": {
+      "path": "canonical/tests/test_synthesis_certified_visible_support_policy_v3.py",
+      "git_blob_sha": "f433982a8f5c10eab6ccef43f340d2793bcc6781"
+    },
+    "dependencies": [
+      {
+        "path": "canonical/runtime/synthesis_certified_visible_support_policy_v2.py",
+        "git_blob_sha": "14c7b3f99b6c28b3f28b5356e13907f843f5ee91"
+      },
+      {
+        "path": "canonical/runtime/bounded_claim_support.py",
+        "git_blob_sha": "197246a50ace8c16b945def9edb1357fb317c393"
+      },
+      {
+        "path": "canonical/runtime/synthesis_grounded_expression_ir_v1.py",
+        "git_blob_sha": "0709b7d43a069eaa9eb3240df28789a9107a36db"
+      }
+    ]
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "working_directory": "/home/sprite/synthesis_v3_replay_20261007"
+  },
+  "replay": {
+    "initial_unittest_harness": {
+      "tests_run": 0,
+      "status": "INVALID_AS_TEST_EVIDENCE__NO_TESTS_RAN",
+      "preserved_for_audit": true
+    },
+    "direct_function_replay": {
+      "tests_run": 7,
+      "tests_passed": 7,
+      "failures": 0,
+      "results": [
+        "test_explicit_zero_uncertainty_passes",
+        "test_item_budget_cannot_drop_uncertainty",
+        "test_missing_uncertainty_binding_fails_closed",
+        "test_multiple_uncertainties_preserve_explicit_input_order",
+        "test_required_uncertainty_is_rendered_with_provenance",
+        "test_required_uncertainty_without_provenance_fails_closed",
+        "test_unresolved_claim_evidence_relation_still_fails_closed"
+      ]
+    },
+    "exact_blob_identity_pass": true
+  },
+  "verified": [
+    "MISSING_REQUIRED_UNCERTAINTY_BINDING_FAILS_CLOSED",
+    "EXPLICIT_ZERO_UNCERTAINTY_PASSES",
+    "REQUIRED_UNCERTAINTY_IS_RENDERED_WITH_PROVENANCE",
+    "REQUIRED_UNCERTAINTY_WITHOUT_PROVENANCE_FAILS_CLOSED",
+    "ITEM_BUDGET_CANNOT_DROP_REQUIRED_UNCERTAINTY",
+    "MULTIPLE_UNCERTAINTIES_PRESERVE_EXPLICIT_INPUT_ORDER",
+    "UNRESOLVED_CLAIM_EVIDENCE_RELATION_STILL_FAILS_CLOSED"
+  ],
+  "consequence": [
+    "THE_EXACT_V3_RUNTIME_AND_TEST_BLOBS_HAVE_EXECUTED_SUCCESSFULLY_ON_AN_INDEPENDENT_CARRIER",
+    "THE_V3_RUNTIME_REPAIRS_THE_V2_UNCERTAINTY_PRESERVATION_MECHANISM_FOR_CONTEXTS_WITH_A_SOUND_COMPLETE_UPSTREAM_REQUIRED_UNCERTAINTY_BINDING",
+    "REAL_CONTEXT_ADMISSION_STILL_REQUIRES_A_SEPARATE_SOUND_PROOF_THAT_THE_SUPPLIED_REQUIRED_UNCERTAINTY_SET_IS COMPLETE"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_SYNTHESIS_CLOSURE",
+    "NO_CLAIM_THE_RUNTIME_DISCOVERS_HIDDEN_UNCERTAINTY",
+    "NO_CLAIM_ANY_CURRENT_REAL_SYNTHESIS_CONTEXT_HAS_PROVED_COMPLETE_REQUIRED_UNCERTAINTY_MEMBERSHIP",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
