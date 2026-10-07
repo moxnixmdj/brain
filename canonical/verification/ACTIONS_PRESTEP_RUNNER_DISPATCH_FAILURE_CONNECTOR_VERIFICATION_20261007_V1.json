@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_ACTIONS_PRESTEP_RUNNER_DISPATCH_FAILURE_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__DIRECT_GITHUB_API_RUN_AND_JOB_METADATA_REPLAY",
+  "subject": {
+    "path": "canonical/governance/ACTIONS_PRESTEP_RUNNER_DISPATCH_FAILURE_20261007_V1.json",
+    "branch": "truth/actions-prestep-dispatch-proof-20261007-v1",
+    "evidence_commit_sha": "468c2edd102982a68a67f417f6b526544879a0af"
+  },
+  "verified": {
+    "run_id": 37575711482,
+    "run_conclusion": "failure",
+    "job_count": 2,
+    "all_jobs_runner_id_zero": true,
+    "all_jobs_runner_name_empty": true,
+    "all_jobs_steps_empty": true,
+    "workflow_code_fault_excluded_for_this_failure_signature": true,
+    "root_cause_specific_cause_not_claimed": true,
+    "terminal_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
