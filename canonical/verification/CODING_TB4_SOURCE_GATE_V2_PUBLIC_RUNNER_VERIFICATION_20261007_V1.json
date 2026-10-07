@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_TB4_SOURCE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ADMISSIBLE_FOR_CLEAN_ACCEPTANCE_EXECUTION__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "path": "canonical/governance/CODING_TB4_SOURCE_GATE_V2_ADMISSION_V1.json",
+    "git_blob_sha": "b3c1fe5d379c47d0731c4a32b94c4c2f47660bac"
+  },
+  "gate": {
+    "path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2361,
+    "head_sha": "18081e85973f8684dc8e8c8c05271962379cc991",
+    "checked_out_merge_sha": "9270aa0304f6e1ef51c16b355fc84c8db79c1fd2",
+    "workflow_name": "Verify coding TB4 source gate V2 admission",
+    "workflow_run_id": 37607589389,
+    "workflow_job_id": 112746776542,
+    "conclusion": "success"
+  },
+  "observed_gate_result": {
+    "schema": "PROJECT_BRAIN_ACCEPTANCE_CAPABILITY_SOURCE_GATE_V2",
+    "status": "ADMISSIBLE_FOR_CLEAN_ACCEPTANCE_EXECUTION",
+    "pass": true,
+    "clean_case_execution_authority": true,
+    "errors": [],
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0
+  },
+  "effect": {
+    "tb4_source_admissibility_blocker_closed": true,
+    "clean_acceptance_execution_admissible": true,
+    "tb4_threshold_proved": false,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_TB4_THRESHOLD_PASS_CLAIM",
+    "NO_FRESH_TB4_CASE_EXECUTED_BY_THIS_VERIFICATION",
+    "NO_FRONTIERCODE_OR_CURSORBENCH_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_acceptance_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
