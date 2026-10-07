@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WORLD_INFORMED_TARGET_ASSUMPTION_FALSIFIER_V1",
+  "date": "2026-10-07",
+  "status": "PASS__TARGET_RELATIVE_TRUTH_REPAIR__WORLD_INFORMED_ORACLE_ASSUMPTION_NOT_BOUND__PROFESSIONAL_INFORMATION_NECESSITY_CLAIM_REVOKED__PARITY_STILL_OPEN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "path": "canonical/governance/TERMINAL_NOW_PROFESSIONAL_QUALITY_INFORMATION_BOUNDARY_20261007_V1.json",
+    "git_blob_sha": "79b48e0096a017a679d3e49a8f69b4212e89f896"
+  },
+  "source_bindings": {
+    "layered_target_relative_order": {
+      "path": "canonical/governance/V7_LAYERED_DISTRIBUTIONAL_EQUAL_OR_BETTER_ORDER_20261006_V1.json",
+      "git_blob_sha": "af58fd7c48fcd18a86c6b93d8cd58f3fbce0cc74",
+      "load_bearing_rule": "L1_COMPARES_DEPLOYED_BRAIN_AND_OPUS55_FULL_TRAJECTORY_LAWS_UNDER_THE_SAME_ADMISSIBLE_EXTERNAL_CONTEXT"
+    },
+    "professional_terminal_binding": {
+      "path": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d"
+    },
+    "global_information_boundary": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
+      "git_blob_sha": "d1dc7f28738ba24a3ca5919755e03190fbf30939"
+    },
+    "terminal_prewave_protocol": {
+      "path": "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
+      "git_blob_sha": "46cce2be4e277485b7c83233630d0e2fe57d06d1"
+    }
+  },
+  "falsified_inference": {
+    "prior_countermodel_shape": {
+      "visible_observation_same": true,
+      "brain_policy": "CHOOSE_a_WITH_PROBABILITY_p_AND_b_WITH_PROBABILITY_1_MINUS_p",
+      "brain_success": {
+        "w0": "p",
+        "w1": "1-p"
+      },
+      "assumed_target_success": {
+        "w0": 1,
+        "w1": 1
+      },
+      "prior_constraints": [
+        "p>=1",
+        "1-p>=1"
+      ],
+      "prior_conclusion": "VISIBLE_ONLY_BRAIN_CANNOT_BE_UNIVERSALLY_NONINFERIOR_TO_WORLD_INFORMED_OPTIMAL_TARGET"
+    },
+    "missing_premise": "THE_TARGET_OPUS55_POLICY_IS_ALLOWED_TO_CONDITION_ON_THE_HIDDEN_WORLD_OR_HIDDEN_EVALUATOR_STATE_WHILE_THE_BRAIN_POLICY_IS_NOT",
+    "source_audit_result": "NO_BOUND_SOURCE_GRANTS_OPUS55_A_PRIVILEGED_HIDDEN_EVALUATOR_CHANNEL_IN_THIS_COUNTERMODEL__THE_TERMINAL_CAPABILITY_ORDER_IS TARGET_RELATIVE_UNDER_THE_SAME_ADMISSIBLE_EXTERNAL_CONTEXT",
+    "consequence": "THE_PRIOR_TWO_WORLD_MATH_IS_VALID_AGAINST_AN_INFORMATION_ADVANTAGED_ORACLE_BUT_DOES_NOT_ESTABLISH_AN_IMPOSSIBILITY_OR_INFORMATION_LOWER_BOUND_AGAINST_OPUS55"
+  },
+  "matched_information_countermodel_repair": {
+    "worlds": [
+      "w0",
+      "w1"
+    ],
+    "same_visible_observation": true,
+    "actions": [
+      "a",
+      "b"
+    ],
+    "world_scoring": {
+      "w0": {
+        "a": 1,
+        "b": 0
+      },
+      "w1": {
+        "a": 0,
+        "b": 1
+      }
+    },
+    "target_policy": "CHOOSE_a_WITH_PROBABILITY_q_AND_b_WITH_PROBABILITY_1_MINUS_q_FOR_THE_COMMON_OBSERVATION",
+    "brain_policy": "CHOOSE_a_WITH_PROBABILITY_p_AND_b_WITH_PROBABILITY_1_MINUS_p_FOR_THE_COMMON_OBSERVATION",
+    "target_success": {
+      "w0": "q",
+      "w1": "1-q"
+    },
+    "brain_success": {
+      "w0": "p",
+      "w1": "1-p"
+    },
+    "noninferiority_constraints": [
+      "0<=p<=1",
+      "0<=q<=1",
+      "p>=q",
+      "1-p>=1-q"
+    ],
+    "exact_solution": "p=q",
+    "universal_existence": "FOR_EVERY_q_IN_[0,1]_THERE_EXISTS_p_IN_[0,1]_SATISFYING_BOTH_WORLD_NONINFERIORITY_CONSTRAINTS",
+    "implication": "IDENTICAL_PRECOMMITMENT_OBSERVATION_DOES_NOT_BY_ITSELF_FORCE_A_NEW_DISCRIMINATOR_FOR_TARGET_RELATIVE_PARITY__A_COMMON_POLICY_LAW_CAN_BE SUFFICIENT"
+  },
+  "independent_wolfram": {
+    "code": "{FullSimplify[ForAll[q,0<=q<=1,Exists[p,0<=p<=1&&p>=q&&1-p>=1-q]]],Reduce[0<=p<=1&&0<=q<=1&&p>=q&&1-p>=1-q,{p,q},Reals],Reduce[0<=p<=1&&p>=1&&1-p>=1,p,Reals]}",
+    "result": [
+      "True",
+      "0<=p<=1 && q==p",
+      "False"
+    ],
+    "interpretation": [
+      "MATCHED_INFORMATION_TARGET_RELATIVE_NONINFERIORITY_IS_FEASIBLE_FOR_EVERY_TARGET_POLICY_PROBABILITY_q.",
+      "THE_ONLY_MATCHED_TWO_ACTION_SOLUTION_IS_p_EQUALS_q.",
+      "THE_WORLD_INFORMED_ORACLE_SUCCESS_VECTOR_ONE_ONE_IS_INFEASIBLE_FOR_ANY_SINGLE_VISIBLE_ONLY_POLICY_p."
+    ]
+  },
+  "truth_repair": {
+    "revoke": [
+      "THE_PROFESSIONAL_TWO_WORLD_COUNTERMODEL_AS_PROOF_THAT_FRESH_DISCRIMINATING_EVALUATOR_INFORMATION_IS_NECESSARY_FOR_OPUS55_PARITY",
+      "THE_PROFESSIONAL_TWO_WORLD_COUNTERMODEL_AS_PROOF_OF_A_TARGET_RELATIVE_INFORMATION_THEORETIC_IMPOSSIBILITY"
+    ],
+    "preserve": [
+      "THE_REALISTIC_PROFESSIONAL_QUALITY_CONTEXT_REMAINS_UNCOVERED_UNTIL_A_SOUND_TARGET_RELATIVE_BRAIN_ROUTE_CERTIFICATE_EXISTS",
+      "THE_SYNTHETIC_P2_INFORMATION_SAFE_UNIVERSAL_SELECTED_CELL_REMAINS_VALID_ONLY_FOR_ITS_EXACT_GENERATOR_DOMAIN",
+      "HIDDEN_ORACLE_INFORMATION_REMAINS_FORBIDDEN_TO_THE_BRAIN_CANDIDATE",
+      "FAIL_CLOSED_U_MEMBERSHIP_WHEN_NO_SOUND_TARGET_RELATIVE_ADEQUACY_CERTIFICATE_EXISTS"
+    ],
+    "next_legal_zero_reality_action": "SEARCH_FOR_ONE_BRAIN_OWNED_POLICY_OR_POLICY_LAW_CERTIFIED_NONINFERIOR_TO_OPUS55_UNDER_THE_MATCHED_VISIBLE_CONTEXT__DO_NOT_REQUIRE_A_HIDDEN_WORLD_DISCRIMINATOR_UNLESS_A_BOUND_TARGET_RELATIVE_COUNTEREXAMPLE_PROVES_THE_TARGET_CAN_EXPLOIT_A_DISTINCTION_THE_BRAIN_CANNOT",
+    "fresh_target_information_is_proved_necessary": false,
+    "professional_parity_closed": false,
+    "U_empty": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_ALREADY_MATCHES_THE_OPUS55_PROFESSIONAL_POLICY_LAW.",
+    "NO_CLAIM_THE_TARGET_POLICY_DISTRIBUTION_q_IS_KNOWN.",
+    "NO_CLAIM_PROFESSIONAL_QUALITY_IS_CLOSED.",
+    "NO_CLAIM_U_IS_EMPTY.",
+    "NO_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
