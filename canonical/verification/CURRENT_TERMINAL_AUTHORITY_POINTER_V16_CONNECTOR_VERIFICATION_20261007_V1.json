@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V16_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_CURRENT_SOURCE_BINDINGS__CONSERVATIVE_COUNTS_AND_TERMINAL_FALSE_PRESERVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "792221b898adc20dc75bbaa9a168141a44dadb6d"
+  },
+  "verified": {
+    "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V16",
+    "known_sound_D_B_certificate_record_count": 17,
+    "open_ABC_refinement_family_count": 13,
+    "current_U_empty_proved": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false,
+    "candidate_policy_set_completeness_required_for_positive_cover": false,
+    "policy_condition_entailment_is_policy_adequacy": false,
+    "policy_adequacy_self_certification_blocked_v3": true,
+    "policy_adequacy_self_certification_blocked_v4": true,
+    "structural_adequacy_basis_field_omission_fail_closed": true,
+    "creditable_router_context_and_payload_binding_required": true,
+    "router_v2_independent_replay_passed": true,
+    "bounded_predicate_argument_source_proof_available": true,
+    "bounded_synthesis_disagreement_completeness_compiler_available": true
+  },
+  "exact_new_bindings": {
+    "db_cache_union_current": "2499d6cbcc806d4466a4788a31606174fbc54551",
+    "semantic_soundness_vs_precision": "b7a16fd9904a0155c6853e928a710a5f7518fb9a",
+    "adequacy_basis_structural_completeness": "082f520ae50ba648fe78167e59542fd8d1dc7316",
+    "positive_cover_policy_set_completeness_truth_repair": "682fa681e46c48ce2b426ff27d9ba09f572c57d5",
+    "policy_adequacy_authentication_v3": "6b964aa22190940beeb52bd21c6810e5b2c57be5",
+    "policy_adequacy_authentication_v4": "a5305cb9c8bea8d5a73721ff8036b06be8ee37bd",
+    "policy_adequacy_authentication_v4_runtime": "8d81e85ac426e544c3d899973e491100b07901c3",
+    "creditable_router_v2_runtime": "ba260cd997adb8df97417e5f03eaf547b5365379",
+    "creditable_router_v2_verification": "e3b02317645d9ca508b2fb9d6cec8d7276eac083",
+    "predicate_argument_source_proof": "1fbff970fb3f417a3a0f98a1379008482cd884d1",
+    "predicate_argument_source_proof_verification": "fe6416cca6badc6a235c92b82fda8522c253915d",
+    "source_aligned_semantic_proof_v4": "c2dcbbd127c435b765fa872acf27984f96d49f3c",
+    "synthesis_bounded_disagreement": "ac8c039c75049de512a60300bcfb63064ef4d107",
+    "synthesis_bounded_disagreement_verification": "5c22d87b0c1f61b14cd255a92e87978f48d6db96"
+  },
+  "boundary": [
+    "POINTER_RECONCILIATION_DOES_NOT_REDUCE_13_OPEN_REFINEMENTS_WITHOUT_SCOPE_COMPLETE_EVIDENCE",
+    "POINTER_RECONCILIATION_DOES_NOT_INCREASE_17_SOUND_CACHE_RECORDS_WITHOUT_PROMOTION_EVIDENCE",
+    "NO_U_EMPTY_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
