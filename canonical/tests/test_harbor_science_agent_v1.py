@@ -38,6 +38,29 @@ class ScienceAgentTests(unittest.TestCase):
             result=asyncio.run(s.run_science_goal("synthetic science goal", env, max_cycles=len(outputs)))
         return env,result
 
+    def test_controller_uses_repaired_planner_timeout_without_task_exposure(self):
+        env=Env()
+        seen=[]
+        def capture(prompt, timeout_s=20):
+            seen.append(timeout_s)
+            return {
+                "text":json.dumps({
+                    "material_requirements":["R1"],
+                    "candidates":[{
+                        "action_id":"a",
+                        "covers":["R1"],
+                        "command":"echo work",
+                        "verify_command":"echo verify"
+                    }]
+                }),
+                "model":"synthetic-fixed-substrate",
+            }
+        with patch.object(s.science_planner, "plan", capture):
+            result=asyncio.run(s.run_science_goal("synthetic science goal",env,max_cycles=1))
+        self.assertEqual(seen,[s.PLANNER_TIMEOUT_S])
+        self.assertEqual(s.PLANNER_TIMEOUT_S,300)
+        self.assertEqual(result["status"],"SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER")
+
     def test_brain_selects_max_verified_requirement_coverage(self):
         env,result=self.run_goal([
             {
