@@ -466,3 +466,45 @@ def test_effect_that_passes_precheck_still_cannot_run_without_effect_root():
     assert out["pass"] is False
     assert out["status"] == "BLOCKED__EFFECT_ROOT_REQUIRED"
     assert "RECEIPT_WRITTEN_AND_VERIFIED" not in out["verified_facts"]
+
+
+def test_builtin_finite_search_generates_then_solver_reverifies_candidate():
+    problem = {
+        "initial_facts": [],
+        "target_effects": ["VALUE_VERIFIED"],
+        "capabilities": [{
+            "id": "choose-value",
+            "requires": [],
+            "provides": ["VALUE_VERIFIED"],
+            "cost": 1,
+            "result_fields": [],
+            "action": {
+                "type": "verified_policy",
+                "verifier_id": "TYPED_ACCEPTANCE_PROGRAM_V1",
+                "verifier_payload": {
+                    "program": {
+                        "schema": "PROJECT_BRAIN_TYPED_ACCEPTANCE_PROGRAM_SPEC_V1",
+                        "fields": [
+                            {"id": "x", "type": "integer", "dimension": "score", "source": "candidate"},
+                        ],
+                        "accept_when": {
+                            "op": "ge",
+                            "left": {"op": "ref", "id": "x"},
+                            "right": {"op": "const", "type": "number", "dimension": "score", "value": 2},
+                        },
+                    },
+                    "trusted_values": {},
+                },
+                "proposal_generator_id": "TYPED_ACCEPTANCE_FINITE_SEARCH_V1",
+                "proposal_generator_payload": {
+                    "candidate_domains": {"x": [0, 1, 2, 3]},
+                    "max_candidates": 10,
+                },
+            },
+        }],
+    }
+    out = run(problem, proposal_packets={})
+    assert out["pass"] is True, out
+    assert out["trace"][0]["proposal_source"] == "BUILTIN_FINITE_COMPLETE_SEARCH"
+    assert out["trace"][0]["accepted_proposal"] == {"candidate_values": {"x": 2}}
+    assert out["proposal_searches"][0]["complete_over_declared_domains"] is True
