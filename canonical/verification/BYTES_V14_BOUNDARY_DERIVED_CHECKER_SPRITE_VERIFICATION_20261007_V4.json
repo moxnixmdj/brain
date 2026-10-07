@@ -1,0 +1,10 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_BOUNDARY_DERIVED_CHECKER_V4_SPRITE_VERIFICATION",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_SPRITE_EXACT_BLOB_PASS__ZERO_TERMINAL_CREDIT",
+  "carrier":{"provider":"SPRITES","sprite_name":"h100-real-image-v1","sprite_id":"sprite-68a466f6-88d5-493d-93f3-2b85377836a3"},
+  "exact_blobs":{"runtime":"f5d140ca78b1512efd3ad248e5991909480331d5","checker":"0eec5fc33bdab4706df899f030dc12010f78f576","certificate":"f4f55eba84a33ba918a37087a88e76ccebcf98e4"},
+  "replay":{"expected_structural_rules":84,"generated_structural_rules":84,"missing":0,"extra":0,"congruence_classes":809,"witness_classes":809,"witness_inputs":105,"cross_component_collision":false},
+  "joint_encoding":{"raw_bytes":8953,"payload_bytes":3353,"payload_sha256":"9fb217b1c9fd6e06f98639fc85296160da77ba3f47dcfaecd3e1417df8759745","tested_lzma1_configurations":15000,"match_finder":"BT2","python_lzma_constant":18,"roundtrip_exact":true},
+  "hard_nonclaims":["FOUR_GENERIC_LIST_LAW_FAMILIES_REMAIN_TRUSTED","BOUNDARY_SMALL_MODEL_COMPLETENESS_REMAINS_META_LEVEL","NO_TERMINAL_CREDIT"]
+}
