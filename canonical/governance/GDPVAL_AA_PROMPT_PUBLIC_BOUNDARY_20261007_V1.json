@@ -1,0 +1,23 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_AA_PROMPT_PUBLIC_BOUNDARY_V1",
+  "date":"2026-10-07",
+  "status":"ZERO_CREDIT",
+  "publicly_bound":{
+    "pairwise_anonymized":true,
+    "judge_panel":"GPT_5_6_SOL_MEDIUM__GEMINI_3_8_FLASH_HIGH__CLAUDE_OPUS_5_HIGH",
+    "task_reference_and_submission_context_supplied":true,
+    "prompt_public_description":"CHOOSE_WHICH_OF_SUBMISSION_A_OR_B_BETTER_RESPONDS_TO_TASK",
+    "crowd_bt_fit":true
+  },
+  "not_recovered":{
+    "exact_current_pairwise_prompt":true,
+    "complete_equivalent_owner_preference_relation":true
+  },
+  "sources":[
+    "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "https://arxiv.org/abs/2510.04374",
+    "ArtificialAnalysis_public_GitHub_org_search"
+  ],
+  "consequence":"PUBLIC_EVIDENCE_DOES_NOT_YET_DETERMINE_THE_CURRENT_OWNER_PAIRWISE_LABEL_RELATION",
+  "hard_nonclaims":["NO_U_DELETION","NO_TERMINAL_CREDIT"]
+}
