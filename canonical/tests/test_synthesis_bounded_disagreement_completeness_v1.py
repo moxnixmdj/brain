@@ -16,8 +16,8 @@ def test_one_conflict_yields_one_complete_unit():
     u=out["required_uncertainty_units"][0]
     assert u["entity"]=="revenue"
     assert u["field"]=="growth"
-    assert u["values"]==["9","12"]
-    assert u["evidence_ids"]==["E2","E1"]
+    assert u["values"]==["12","9"]
+    assert u["evidence_ids"]==["E1","E2"]
 
 def test_distinct_keys_do_not_create_false_conflict():
     out=compile_required_uncertainty([ev("E1","Revenue growth is 12."),ev("E2","Revenue margin is 9.")])
