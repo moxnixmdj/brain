@@ -1,0 +1,1357 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_220_RUBRIC_ACCEPTANCE_MANIFEST_V1",
+  "date": "2026-10-07",
+  "status": "EXECUTED_COMPLETE_PUBLIC_220_EXPLICIT_RUBRIC_ACCEPTANCE_COMPILATION__RUNTIME_COMPATIBLE_HASHES__ZERO_MODEL_INFERENCE__ZERO_TERMINAL_CREDIT",
+  "source_revision": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+  "runtime": "canonical/runtime/gdpval_rubric_acceptance_index_v1.py",
+  "runtime_semantics_reproduced": true,
+  "population_contract_sha256": "f00d818e5513ed9ba6241bfc3a2c50d0083553f76d3613dc4a63daca78ccb3ea",
+  "aggregate": {
+    "task_count": 220,
+    "criterion_count": 10453,
+    "human_authored_criterion_count": 10453,
+    "required_true_count": 0,
+    "required_false_count": 0,
+    "required_null_count": 10453,
+    "numeric_score_sum": 16000,
+    "criteria_without_numeric_score": 0
+  },
+  "tasks": [
+    {
+      "row_idx": 0,
+      "task_id": "83d10b06-26d1-4636-a32c-23f92c57f30b",
+      "criterion_count": 38,
+      "contract_sha256": "fca0a33e30a374a4dbcd6b395629506beb55e73013200654b7f67aa52f0d2a9e"
+    },
+    {
+      "row_idx": 1,
+      "task_id": "7b08cd4d-df60-41ae-9102-8aaa49306ba2",
+      "criterion_count": 59,
+      "contract_sha256": "d6d1d3c476232353b8e7c533aba1185a6d7284fef3213fe275641e8d804f9aa5"
+    },
+    {
+      "row_idx": 2,
+      "task_id": "7d7fc9a7-21a7-4b83-906f-416dea5ad04f",
+      "criterion_count": 56,
+      "contract_sha256": "c6277434f51453a639a51355457a7bf40b89cdcbcac7da19f7f19be46c0b737e"
+    },
+    {
+      "row_idx": 3,
+      "task_id": "43dc9778-450b-4b46-b77e-b6d82b202035",
+      "criterion_count": 67,
+      "contract_sha256": "085c83e5192e6e88878272911b164abd64a6b2ab3f0ba4c0baf9576f44982991"
+    },
+    {
+      "row_idx": 4,
+      "task_id": "ee09d943-5a11-430a-b7a2-971b4e9b01b5",
+      "criterion_count": 44,
+      "contract_sha256": "10d22fd4aa8b1276ed2adf90a9b66f5892e685db6b1f5582636ff9d2af295814"
+    },
+    {
+      "row_idx": 5,
+      "task_id": "f84ea6ac-8f9f-428c-b96c-d0884e30f7c7",
+      "criterion_count": 30,
+      "contract_sha256": "e279bdfee359d6c8195650244ba97c097fa91bdac4a8df0be05d3e1bf49991ba"
+    },
+    {
+      "row_idx": 6,
+      "task_id": "a328feea-47db-4856-b4be-2bdc63dd88fb",
+      "criterion_count": 16,
+      "contract_sha256": "7a027cfcb7cca91e1f103a29a39f1efb5ec7fe97c0b059951c345f557a2e94f8"
+    },
+    {
+      "row_idx": 7,
+      "task_id": "27e8912c-8bd5-44ba-ad87-64066ea05264",
+      "criterion_count": 37,
+      "contract_sha256": "e31b67bfeb86a2b3c56caec56e34e9f7dbdbaf6f85e4fdd05f93a49fec07e19c"
+    },
+    {
+      "row_idx": 8,
+      "task_id": "17111c03-aac7-45c2-857d-c06d8223d6ad",
+      "criterion_count": 44,
+      "contract_sha256": "c8344462be13bf74b8a78764d5267f20ae320c59d0db27929a0713eef46571fc"
+    },
+    {
+      "row_idx": 9,
+      "task_id": "c44e9b62-7cd8-4f72-8ad9-f8fbddb94083",
+      "criterion_count": 44,
+      "contract_sha256": "dc46ed4bdd4c3139064ec32023f5adaf874be76508bf0f037b612c6f9f0784fd"
+    },
+    {
+      "row_idx": 10,
+      "task_id": "99ac6944-4ec6-4848-959c-a460ac705c6f",
+      "criterion_count": 52,
+      "contract_sha256": "76a3800760a683ba33eb1dd56cf23022b9e7b3fe7cb993aab14d8884e66e4e6a"
+    },
+    {
+      "row_idx": 11,
+      "task_id": "f9a1c16c-53fd-4c8f-88cc-5c325ec2f0bb",
+      "criterion_count": 51,
+      "contract_sha256": "d92272e5b27a3895b27e1f22070a39d308c079118bfdcf466f17ddac2c7c29fa"
+    },
+    {
+      "row_idx": 12,
+      "task_id": "38889c3b-e3d4-49c8-816a-3cc8e5313aba",
+      "criterion_count": 35,
+      "contract_sha256": "ec7f13f2f7766b7f60508f0972398942cdb6eb8c472aa86e7cc3f5e3bf06c958"
+    },
+    {
+      "row_idx": 13,
+      "task_id": "ff85ee58-bc9f-4aa2-806d-87edeabb1b81",
+      "criterion_count": 36,
+      "contract_sha256": "0613fbf29b0a7ae84c814d2eac6aa49b094405b7be0aa46b3798158e90c9bb2a"
+    },
+    {
+      "row_idx": 14,
+      "task_id": "4b894ae3-1f23-4560-b13d-07ed1132074e",
+      "criterion_count": 17,
+      "contract_sha256": "adacc32ce38e65c3d7630cb1a8e5d38e7451e1328f8795d43afebf0ff0be7156"
+    },
+    {
+      "row_idx": 15,
+      "task_id": "1b1ade2d-f9f6-4a04-baa5-aa15012b53be",
+      "criterion_count": 51,
+      "contract_sha256": "06751533366bd59ba98638c787826e432d84ba6afd17b1cb16d38d0e3ed6229d"
+    },
+    {
+      "row_idx": 16,
+      "task_id": "93b336f3-61f3-4287-86d2-87445e1e0f90",
+      "criterion_count": 53,
+      "contract_sha256": "d0163402739d478f90e5ba7683f3fba2124cd7eb06863733b0068000a71914ce"
+    },
+    {
+      "row_idx": 17,
+      "task_id": "15ddd28d-8445-4baa-ac7f-f41372e1344e",
+      "criterion_count": 46,
+      "contract_sha256": "46a43166c1e5db90670beb89d914f909728f77be562135681fc04b92a95c9adc"
+    },
+    {
+      "row_idx": 18,
+      "task_id": "24d1e93f-9018-45d4-b522-ad89dfd78079",
+      "criterion_count": 52,
+      "contract_sha256": "caa9ecc5a81ffcccc38dc3d044f1cad163a381d9dd308e8b25ff2bf96ee88d39"
+    },
+    {
+      "row_idx": 19,
+      "task_id": "05389f78-589a-473c-a4ae-67c61050bfca",
+      "criterion_count": 66,
+      "contract_sha256": "27f32268477e8d1c7bb8a5f0191d77b8e00d18fdfb784fe4776a70dedfdf490b"
+    },
+    {
+      "row_idx": 20,
+      "task_id": "575f8679-b4c1-47a2-8e96-d570d4ed9269",
+      "criterion_count": 50,
+      "contract_sha256": "3650a5a575e3d9475e4411cfda5f1173d838c2f6aff6938ec339afb7116a7e41"
+    },
+    {
+      "row_idx": 21,
+      "task_id": "a74ead3b-f67d-4b1c-9116-f6bb81b29d4f",
+      "criterion_count": 57,
+      "contract_sha256": "515ace61f68cf941b61a1ccd11b0824487a634cde63c4f5530b5c65736689760"
+    },
+    {
+      "row_idx": 22,
+      "task_id": "bbe0a93b-ebf0-40b0-98dc-8d9243099034",
+      "criterion_count": 61,
+      "contract_sha256": "1772534b0957e08ee3cf34a006752f82627cc092200b3d5261697f9e1bb29dff"
+    },
+    {
+      "row_idx": 23,
+      "task_id": "85d95ce5-b20c-41e2-834e-e788ce9622b6",
+      "criterion_count": 62,
+      "contract_sha256": "5c2d023278726bf23378d2baf59cc98934c3c018dbcb25194ba50f43f4842e88"
+    },
+    {
+      "row_idx": 24,
+      "task_id": "76d10872-9ffa-4ede-83ee-e0f1ec5e2b8d",
+      "criterion_count": 74,
+      "contract_sha256": "ac3d0af748ecd38cfc6e52d052bd8c9874d6f8a8f52937d000ec372b7d8275cc"
+    },
+    {
+      "row_idx": 25,
+      "task_id": "36d567ba-e205-4313-9756-931c6e4691fe",
+      "criterion_count": 27,
+      "contract_sha256": "d6ac5207c10cc28a2ead4f5c58e00cc45d59d416123aeb6026a76a967cdccc58"
+    },
+    {
+      "row_idx": 26,
+      "task_id": "7bbfcfe9-132d-4194-82bb-d6f29d001b01",
+      "criterion_count": 40,
+      "contract_sha256": "b8250ab769605f86dc390106b7e113df61a0183a5e1e0719470de33748a4bd14"
+    },
+    {
+      "row_idx": 27,
+      "task_id": "2696757c-1f8a-4959-8f0d-f5597b9e70fc",
+      "criterion_count": 25,
+      "contract_sha256": "e13222c6f071ee5e868b62ec91beb3550c372fa336da8c158f954698553bf474"
+    },
+    {
+      "row_idx": 28,
+      "task_id": "dfb4e0cd-a0b7-454e-b943-0dd586c2764c",
+      "criterion_count": 26,
+      "contract_sha256": "8e357000c4c42db4f14d2cb230841a16e6ba26f758a7b0acb4114fa51d9cf860"
+    },
+    {
+      "row_idx": 29,
+      "task_id": "4c18ebae-dfaa-4b76-b10c-61fcdf26734c",
+      "criterion_count": 50,
+      "contract_sha256": "81736d673e6fd09eaffc2710a3a4e56514844c437148e4d76ed647a0b0aa21b9"
+    },
+    {
+      "row_idx": 30,
+      "task_id": "cebf301e-5ea7-41ae-b117-ad8f43e7ac22",
+      "criterion_count": 35,
+      "contract_sha256": "78e7f2b9ae420a8003612f673d1d65cd4ae0d3a9bae9ea26e99f2b93a0a1e3f0"
+    },
+    {
+      "row_idx": 31,
+      "task_id": "c2e8f271-7858-412f-b460-472463ad81d9",
+      "criterion_count": 67,
+      "contract_sha256": "1c4cbe6d8ca81c2dc13bd6b2fbffa7e05c83793fded56f27233ac3c6e96f7c08"
+    },
+    {
+      "row_idx": 32,
+      "task_id": "2ea2e5b5-257f-42e6-a7dc-93763f28b19d",
+      "criterion_count": 60,
+      "contract_sha256": "12cf39e2b7bf392eb4f9a309c55b2ca35e9d09b2e20557b6ccd878e45770337c"
+    },
+    {
+      "row_idx": 33,
+      "task_id": "c357f0e2-963d-4eb7-a6fa-3078fe55b3ba",
+      "criterion_count": 70,
+      "contract_sha256": "f83fb3953ed631fc0bde9b1ca6c49b6ff6616ba29ffa2ac3a4774245f2a19661"
+    },
+    {
+      "row_idx": 34,
+      "task_id": "a45bc83b-22f9-4def-8d89-9c5661b2b86f",
+      "criterion_count": 72,
+      "contract_sha256": "f05072a8fc26bb61ab25510e581053ba1598eeeab0cde108d9d3f8c3f65d8d62"
+    },
+    {
+      "row_idx": 35,
+      "task_id": "a10ec48c-168e-476c-8fe3-23b2a5f616ac",
+      "criterion_count": 22,
+      "contract_sha256": "2c5c8c640d58568fdf52be9fab87eb23c005e58754008f72add8f538c8f80ab7"
+    },
+    {
+      "row_idx": 36,
+      "task_id": "fccaa4a1-1c39-49ac-b701-55361a19966b",
+      "criterion_count": 40,
+      "contract_sha256": "f4333cd24ee97abd50d2b2c1cf7aee4f9245a8f0ce988a71c874d0961807b172"
+    },
+    {
+      "row_idx": 37,
+      "task_id": "f5d428fd-b38e-41f0-8783-35423dab80f6",
+      "criterion_count": 39,
+      "contract_sha256": "6622d504ede10722433bd87dd193f3a72514c870aacadf8d22ceb1eb4ba72121"
+    },
+    {
+      "row_idx": 38,
+      "task_id": "2fa8e956-7b35-4c13-95dc-027f02be318b",
+      "criterion_count": 28,
+      "contract_sha256": "baffb7eb7645dd7e2b01d0bfb25a12fd28f15dadf612b99914df52a193156cb9"
+    },
+    {
+      "row_idx": 39,
+      "task_id": "0e4fe8cd-16d0-4f41-8247-6385b4762582",
+      "criterion_count": 50,
+      "contract_sha256": "2cdc7d6cd3aeadd694fa07af39700a78e0d75cf387422138d3e1ac1b17de40e8"
+    },
+    {
+      "row_idx": 40,
+      "task_id": "a0ef404e-82a6-4507-bff1-633d7c8e0004",
+      "criterion_count": 41,
+      "contract_sha256": "749e98ae91b299ed1edd817cb55727943ed92e57e28ef9f416d7349463f57d9b"
+    },
+    {
+      "row_idx": 41,
+      "task_id": "b7a5912e-0e63-41f5-8c22-9cdb8f46ab01",
+      "criterion_count": 59,
+      "contract_sha256": "301daec74e0847190de47f47d7467e4de5d6bc4ab42b5ee4d90701c510cfdbcc"
+    },
+    {
+      "row_idx": 42,
+      "task_id": "aa071045-bcb0-4164-bb85-97245d56287e",
+      "criterion_count": 63,
+      "contract_sha256": "c95c70184785ae2119d0301e0ca85a02946bd9ff61792c34d84b22b7d62dfa65"
+    },
+    {
+      "row_idx": 43,
+      "task_id": "476db143-163a-4537-9e21-fe46adad703b",
+      "criterion_count": 28,
+      "contract_sha256": "d7aedd01f42f00e296d2fc0ac7b6498eaab47d9d9efb27afb0cb2667f9827eeb"
+    },
+    {
+      "row_idx": 44,
+      "task_id": "61f546a8-c374-467f-95cc-d0d9b5656eb6",
+      "criterion_count": 79,
+      "contract_sha256": "8a7b0d0ae419cafabefe51ac029b6503e60b9670180d12ac6f37a887d6a9a80f"
+    },
+    {
+      "row_idx": 45,
+      "task_id": "f3351922-dbdd-45da-85c5-e7110696bbe5",
+      "criterion_count": 74,
+      "contract_sha256": "568a40910d3642a2baba9fb52d39801bbc5b3b83d5afaf3eee7b4ce0b39ac6c4"
+    },
+    {
+      "row_idx": 46,
+      "task_id": "61717508-4df7-41be-bf97-318dfb2475c0",
+      "criterion_count": 42,
+      "contract_sha256": "536cab54a10def04000ac24bc8029de4d885dbf3f6c72cded0c1a7a6330bbcc6"
+    },
+    {
+      "row_idx": 47,
+      "task_id": "0ed38524-a4ad-405f-9dee-7b2252659aad",
+      "criterion_count": 28,
+      "contract_sha256": "9fba8417c5f069d08739884f4895150ee98c8c140f2b246cf62d1289a0276cec"
+    },
+    {
+      "row_idx": 48,
+      "task_id": "87da214f-fd92-4c58-9854-f4d0d10adce0",
+      "criterion_count": 59,
+      "contract_sha256": "f4fb7e73a44ad07f7f087eff408bdf001f36e7e6836846837eb7989808002f65"
+    },
+    {
+      "row_idx": 49,
+      "task_id": "d025a41c-c439-4ee1-bc79-dd5c94b27a2d",
+      "criterion_count": 60,
+      "contract_sha256": "5113b736ef4fa63bc4f7a1b48b469e090ec616e18e3e264f3766297d9d5b0e76"
+    },
+    {
+      "row_idx": 50,
+      "task_id": "401a07f1-d57e-4bb0-889b-22de8c900f0e",
+      "criterion_count": 21,
+      "contract_sha256": "fed73a7c1e20b08a671f2a556bca6118e70348eb05738d27a3261b82ed2f377b"
+    },
+    {
+      "row_idx": 51,
+      "task_id": "afe56d05-dac8-47d7-a233-ad1d035ca5bd",
+      "criterion_count": 83,
+      "contract_sha256": "8a9a9477fe4bd8e902afee9794a7d51c60100841eb69444fc07e929741dbbe07"
+    },
+    {
+      "row_idx": 52,
+      "task_id": "9a8c8e28-ce76-408b-83c3-488422892e58",
+      "criterion_count": 67,
+      "contract_sha256": "02fc7802d6e3fd563ab5f96abc290ec572a3ee7695682bf3a028f3f584f27207"
+    },
+    {
+      "row_idx": 53,
+      "task_id": "3a4c347c-4aec-43c7-9a54-eb1f816ab1f9",
+      "criterion_count": 54,
+      "contract_sha256": "11ba437cd78b8688ecc172792e4ae76375c77ebce99c9b142d253de9e2f240ab"
+    },
+    {
+      "row_idx": 54,
+      "task_id": "ec2fccc9-b7f6-4c73-bf51-896fdb433cec",
+      "criterion_count": 31,
+      "contract_sha256": "a2dfc28d89f723d64067e171ac4845ec1e8c7875dbd6c1b76b83ff03123f0ca8"
+    },
+    {
+      "row_idx": 55,
+      "task_id": "8c8fc328-69fc-4559-a13f-82087baef0a1",
+      "criterion_count": 30,
+      "contract_sha256": "92dd36472ef89db7c5d19e49d9f565b43bf5b53991a01250a005239b6aad7ccc"
+    },
+    {
+      "row_idx": 56,
+      "task_id": "e222075d-5d62-4757-ae3c-e34b0846583b",
+      "criterion_count": 33,
+      "contract_sha256": "04af0506eaa4eb102893185b50dbcb795f27d0ff165e8fdd9f884ecef104fd8e"
+    },
+    {
+      "row_idx": 57,
+      "task_id": "c94452e4-39cd-4846-b73a-ab75933d1ad7",
+      "criterion_count": 28,
+      "contract_sha256": "a6b28d6a3b03531eb39399b4c8a1c368855144f3028ffb564f1cf1852789ee57"
+    },
+    {
+      "row_idx": 58,
+      "task_id": "75401f7c-396d-406d-b08e-938874ad1045",
+      "criterion_count": 40,
+      "contract_sha256": "e04f7597b192a62f2f82c54ab6d1210c8c65c209c5a940eec28159b994ca451a"
+    },
+    {
+      "row_idx": 59,
+      "task_id": "a941b6d8-4289-4500-b45a-f8e4fc94a724",
+      "criterion_count": 49,
+      "contract_sha256": "53a436f7e8abba5826019c38d46256d4cb7096810027f22659bbfcfd3324326c"
+    },
+    {
+      "row_idx": 60,
+      "task_id": "8079e27d-b6f3-4f75-a9b5-db27903c798d",
+      "criterion_count": 40,
+      "contract_sha256": "0f94bb3cba3ad9ec203f2ff413ee1187e89153c788965eea6bb43dae11b2c0f9"
+    },
+    {
+      "row_idx": 61,
+      "task_id": "e21cd746-404d-4602-b9d2-01d2812c5b87",
+      "criterion_count": 28,
+      "contract_sha256": "6b7422710a9838a1b035d58138e6753789a66122f6dbd86f8c979742ba746986"
+    },
+    {
+      "row_idx": 62,
+      "task_id": "9e8607e7-a38a-491f-ace1-e5ea7dc477cb",
+      "criterion_count": 14,
+      "contract_sha256": "105b092c5cb3f474cbc4f6db77beef3db74b63591fa8158a729d94c2be222527"
+    },
+    {
+      "row_idx": 63,
+      "task_id": "c7d83f01-2874-4876-b7fd-52582ec99e1a",
+      "criterion_count": 43,
+      "contract_sha256": "3ff363deca977a86e140be1059eedbdc806de08d5577d2e3d254a095e478a14e"
+    },
+    {
+      "row_idx": 64,
+      "task_id": "46b34f78-6c06-4416-87e2-77b6d8b20ce9",
+      "criterion_count": 53,
+      "contract_sha256": "84f21b8556fa414aa80a5a9f81137d8fb5c2db309ee0c28da6b50ff8d846d6f8"
+    },
+    {
+      "row_idx": 65,
+      "task_id": "a1963a68-1bea-4bb1-b7e0-145c92a57449",
+      "criterion_count": 48,
+      "contract_sha256": "2f93de92ca2944b91278da0fbec6399758c31569bf3a9d0f3715a4890dce331f"
+    },
+    {
+      "row_idx": 66,
+      "task_id": "5f6c57dd-feb6-4e70-b152-4969d92d1608",
+      "criterion_count": 137,
+      "contract_sha256": "7a41e1383d99a42ae280229dc158e56ea484d4d96f2de4ab22eb0cffff2bbaaf"
+    },
+    {
+      "row_idx": 67,
+      "task_id": "b39a5aa7-cd1b-47ad-b249-90afd22f8f21",
+      "criterion_count": 32,
+      "contract_sha256": "5e45ac08b0292a0506f182e6f13796a2ad750e1c63948d0bfbd42814f57b387c"
+    },
+    {
+      "row_idx": 68,
+      "task_id": "b78fd844-db76-448e-a783-5e9877cb74c2",
+      "criterion_count": 51,
+      "contract_sha256": "8209e2044c35572e334de38433c3199947d25b2f5f0b210d4435153167d7e1e0"
+    },
+    {
+      "row_idx": 69,
+      "task_id": "4520f882-715a-482d-8e87-1cb3cbdfe975",
+      "criterion_count": 88,
+      "contract_sha256": "629ad2b75b91771113707579ce16c4f0a9e889ff1022f8af6e053297b92c0bc8"
+    },
+    {
+      "row_idx": 70,
+      "task_id": "ec591973-04d5-48c0-981c-1ab2fcec2dc1",
+      "criterion_count": 68,
+      "contract_sha256": "9b4f62162c9b9717004be873b8a9676b8697067837fe3806f9dabee06797e8c2"
+    },
+    {
+      "row_idx": 71,
+      "task_id": "62f04c2f-e0f7-4710-876c-54ee9c2e8256",
+      "criterion_count": 53,
+      "contract_sha256": "b51003df2e9d7485da123f37ee8641388e919c7b3a9316a098ca7e7bd309a125"
+    },
+    {
+      "row_idx": 72,
+      "task_id": "3f821c2d-ab97-46ec-a0fb-b8f73c2682bc",
+      "criterion_count": 46,
+      "contract_sha256": "6811eeba97071d75172637c3ce1facd811a18095ba9e16a23165e4e5126a809b"
+    },
+    {
+      "row_idx": 73,
+      "task_id": "e996036e-8287-4e7f-8d0a-90a57cb53c45",
+      "criterion_count": 50,
+      "contract_sha256": "b10644c2e324057a7db7eb58344056615ef3007f8be9beb069e137b9c6b3b40b"
+    },
+    {
+      "row_idx": 74,
+      "task_id": "327fbc21-7d26-4964-bf7c-f4f41e55c54d",
+      "criterion_count": 66,
+      "contract_sha256": "cb381135355f77b834791e2a09ebd334e91b206de3d79d8db1f1ecf4608592b9"
+    },
+    {
+      "row_idx": 75,
+      "task_id": "6dcae3f5-bf1c-48e0-8b4b-23e6486a934c",
+      "criterion_count": 43,
+      "contract_sha256": "bdcf78fdc213366023baec83daa58d729dbc5d3e03ec05c60d4f9cd60d54b8ff"
+    },
+    {
+      "row_idx": 76,
+      "task_id": "1aecc095-4d76-4b89-b752-1a0f870502cd",
+      "criterion_count": 52,
+      "contract_sha256": "556fcaf0309245b1d187ec98b3969b1cd178d402e994404f78e386af34c6beca"
+    },
+    {
+      "row_idx": 77,
+      "task_id": "0353ee0c-18b5-4ad3-88e8-e001d223e1d7",
+      "criterion_count": 69,
+      "contract_sha256": "4406a7ef7373e216b8594c938571e4f3b5d8a706a34bb45cd69366f46df97a34"
+    },
+    {
+      "row_idx": 78,
+      "task_id": "40a8c4b1-b169-4f92-a38b-7f79685037ec",
+      "criterion_count": 72,
+      "contract_sha256": "3ba129855a7f220ed07138c3e4cf2f12e2825d1a1e7b1371966a5f956a98d571"
+    },
+    {
+      "row_idx": 79,
+      "task_id": "4d1a8410-e9c5-4be5-ab43-cc55563c594c",
+      "criterion_count": 64,
+      "contract_sha256": "ce1a524b46ca5ac930194fd57bb1f563dbe182a4bf0fa637173b17e52a357b36"
+    },
+    {
+      "row_idx": 80,
+      "task_id": "8c823e32-537c-42b2-84ba-635d63c2853a",
+      "criterion_count": 32,
+      "contract_sha256": "bceea13c81cbc9d8c5b76ac1f241d017fba80388d531850ef76993721b8193ab"
+    },
+    {
+      "row_idx": 81,
+      "task_id": "eb54f575-93f9-408b-b9e0-f1208a0b6759",
+      "criterion_count": 53,
+      "contract_sha256": "aedfd483715b6547bbabc4618968106ded1eb8b806acb92f614f41b3f71f4a0c"
+    },
+    {
+      "row_idx": 82,
+      "task_id": "11e1b169-5fb6-4d79-8a83-82ddf4987a85",
+      "criterion_count": 60,
+      "contract_sha256": "8908c6b9eadd88653259a13060e7c0f2e43d1103ba00a61e9597703f03d0831f"
+    },
+    {
+      "row_idx": 83,
+      "task_id": "a95a5829-34bb-40f3-993b-558aed6dcdef",
+      "criterion_count": 29,
+      "contract_sha256": "8344821b0e51c4b7f983f2546a67ee0bcf9c7807de8cdf46b0e6a3ffa87a6bec"
+    },
+    {
+      "row_idx": 84,
+      "task_id": "22c0809b-f8db-489e-93b3-b4da225e3e0e",
+      "criterion_count": 58,
+      "contract_sha256": "9ada2552d2627c63d835a2f0000cc3288786848dee1f04dba0b8978e6f196042"
+    },
+    {
+      "row_idx": 85,
+      "task_id": "bf68f2ad-eac5-490a-adec-d847eb45bd6f",
+      "criterion_count": 40,
+      "contract_sha256": "d5d28591a924f00dee8e0ee06fba138d6cfaeeecb11fb0d4d2dae86a9aa531d6"
+    },
+    {
+      "row_idx": 86,
+      "task_id": "efca245f-c24f-4f75-a9d5-59201330ab7a",
+      "criterion_count": 59,
+      "contract_sha256": "838191c4fa5bcb6e1804ea18cf8ac2e58ddac1764472b970da8e44ad7f15b3e9"
+    },
+    {
+      "row_idx": 87,
+      "task_id": "9e39df84-ac57-4c9b-a2e3-12b8abf2c797",
+      "criterion_count": 57,
+      "contract_sha256": "f32c5452fac32ad3e4a095019ce48e08bd55f422ced44acc6bb52b8bec04f759"
+    },
+    {
+      "row_idx": 88,
+      "task_id": "68d8d901-dd0b-4a7e-bf9a-1074fddf1a96",
+      "criterion_count": 61,
+      "contract_sha256": "848b1c17e12ef734b35b7fe18610c6041145760472fc606f2104a0a1e537f69d"
+    },
+    {
+      "row_idx": 89,
+      "task_id": "1752cb53-5983-46b6-92ee-58ac85a11283",
+      "criterion_count": 46,
+      "contract_sha256": "93538633b5e5085c013c72443068ca2c6ba059a2e67a4f07dfd50c6d907fa7fe"
+    },
+    {
+      "row_idx": 90,
+      "task_id": "bd72994f-5659-4084-9fab-fc547d1efe3b",
+      "criterion_count": 19,
+      "contract_sha256": "ed97084e5c3751f5cf1cbcea5d80ce5552095c95def61ecb53c1aaa257179eb3"
+    },
+    {
+      "row_idx": 91,
+      "task_id": "211d0093-2c64-4bd0-828c-0201f18924e7",
+      "criterion_count": 40,
+      "contract_sha256": "ce03fb972d804f2e8e056ba866459aa7e9fa0c6fadd1a0fb2dc5c76dfa43b92b"
+    },
+    {
+      "row_idx": 92,
+      "task_id": "d4525420-a427-4ef2-b4e9-2dcc2d31b3b6",
+      "criterion_count": 18,
+      "contract_sha256": "fae99c08dc10fd7ad3098c07ace89e48f7c5b43e0cfdc31f7551405d7171e011"
+    },
+    {
+      "row_idx": 93,
+      "task_id": "45c6237b-f9c9-4526-9a8d-6a5c404624ec",
+      "criterion_count": 33,
+      "contract_sha256": "53b273e29f269a5edae8400f8679c890daa86d48690d79c6fcc636c5fa1eccb7"
+    },
+    {
+      "row_idx": 94,
+      "task_id": "cecac8f9-8203-4ebd-ad49-54436a8c4171",
+      "criterion_count": 55,
+      "contract_sha256": "403f4c0cc10cec43504f12e69ca0b1b5c03f7713eebcc6e094d6b076153c279e"
+    },
+    {
+      "row_idx": 95,
+      "task_id": "8f9e8bcd-6102-40da-ab76-23f51d8b21fa",
+      "criterion_count": 33,
+      "contract_sha256": "bacd0e42758cb5ea6d0d5bbb4d792d6107dae6b01b1cd669d164b9fa122e85be"
+    },
+    {
+      "row_idx": 96,
+      "task_id": "0fad6023-767b-42c1-a1b3-027cd4f583cb",
+      "criterion_count": 44,
+      "contract_sha256": "270543178d06726bc9b6ec049c86d098e903aeb5bd756916036e5aa46cf4d853"
+    },
+    {
+      "row_idx": 97,
+      "task_id": "02314fc6-a24e-42f4-a8cd-362cae0f0ec1",
+      "criterion_count": 28,
+      "contract_sha256": "5401a1fa709971e09bc4e99043c62db6a81a476ee1166f3c3633c878a88fc159"
+    },
+    {
+      "row_idx": 98,
+      "task_id": "4d61a19a-8438-4d4c-9fc2-cf167e36dcd6",
+      "criterion_count": 43,
+      "contract_sha256": "ed253a74b052e1e96b2aa6ed145137ea8674853623694e59719705304ceb1f73"
+    },
+    {
+      "row_idx": 99,
+      "task_id": "6436ff9e-c5f2-47ba-9aaa-49d89b0594ab",
+      "criterion_count": 51,
+      "contract_sha256": "7c91965df05305448ea0247d8d0d319316dd95d9b00d488ca9e85833a123a1b0"
+    },
+    {
+      "row_idx": 100,
+      "task_id": "8a7b6fca-60cc-4ae3-b649-971753cbf8b9",
+      "criterion_count": 31,
+      "contract_sha256": "7346cfe04f1c3d7145f75bbfb395628554f5f46ac12a054261809a314a0549d7"
+    },
+    {
+      "row_idx": 101,
+      "task_id": "40a99a31-42d6-4f23-b3ec-8f591afe25b6",
+      "criterion_count": 64,
+      "contract_sha256": "69e0cda41e17f3e49b28a5b338dc9e0e07cc87223a4e3446c116b651d1fede12"
+    },
+    {
+      "row_idx": 102,
+      "task_id": "b9665ca1-4da4-4ff9-86f2-40b9a8683048",
+      "criterion_count": 59,
+      "contract_sha256": "d8999890a262a55ae14649d8c0b36da25124b20322e89b1c12b68aa5e3bacae3"
+    },
+    {
+      "row_idx": 103,
+      "task_id": "c6269101-fdc8-4602-b345-eac7597c0c81",
+      "criterion_count": 31,
+      "contract_sha256": "df944669d886864f829b0d0e8ae01318e281d0d58db479d3aba54801240b7f11"
+    },
+    {
+      "row_idx": 104,
+      "task_id": "be830ca0-b352-4658-a5bd-57139d6780ba",
+      "criterion_count": 55,
+      "contract_sha256": "bc3e8a1c5090e7166a7f245a62b944ad637c59f6e070e66144b9dadae05f1709"
+    },
+    {
+      "row_idx": 105,
+      "task_id": "cd9efc18-d14a-4f69-8531-5d178a08084d",
+      "criterion_count": 67,
+      "contract_sha256": "0b04740077469e2099cbc8520dcdc1cd0fa68a2a10b52010a6c07996431db3a9"
+    },
+    {
+      "row_idx": 106,
+      "task_id": "a97369c7-e5cf-40ca-99e8-d06f81c57d53",
+      "criterion_count": 44,
+      "contract_sha256": "e7014625009a10a0296ce04562a09f3fa40c2498b1004e44f50d67c372117c22"
+    },
+    {
+      "row_idx": 107,
+      "task_id": "3f625cb2-f40e-4ead-8a97-6924356d5989",
+      "criterion_count": 64,
+      "contract_sha256": "bcdc999c30740dd0562bb81741bc90fc9649a708ec8446dc2182345293b629d8"
+    },
+    {
+      "row_idx": 108,
+      "task_id": "aad21e4c-1d43-45fc-899a-97754a1b1b63",
+      "criterion_count": 84,
+      "contract_sha256": "e6c90245535f0efb6ea3f7599874eb14d8d77a9140f31b916b5981a26e44492f"
+    },
+    {
+      "row_idx": 109,
+      "task_id": "8314d1b1-5b0f-42a4-b5d5-91c0867b0913",
+      "criterion_count": 43,
+      "contract_sha256": "1d11874d415d415461c6680b20942dab20b665d38b0dbfb1c07b8e3a6f763990"
+    },
+    {
+      "row_idx": 110,
+      "task_id": "5e2b6aab-f9fb-4dd6-a1a5-874ef1743909",
+      "criterion_count": 38,
+      "contract_sha256": "dd3266c9f24be185722f60b2180791da6596bd60c8235fb1aa8808cf2ea30337"
+    },
+    {
+      "row_idx": 111,
+      "task_id": "46fc494e-a24f-45ce-b099-851d5c181fd4",
+      "criterion_count": 81,
+      "contract_sha256": "5d6209c8c1599f45b7581ffdb7c7b7ffcc792b3aca1711016b97b2890df504cc"
+    },
+    {
+      "row_idx": 112,
+      "task_id": "3940b7e7-ec4f-4cea-8097-3ab4cfdcaaa6",
+      "criterion_count": 55,
+      "contract_sha256": "ccaf9552f4376a88878ce97b76cd0650e859ba32c0611bbcb7d50a6c62ffa7fa"
+    },
+    {
+      "row_idx": 113,
+      "task_id": "8077e700-2b31-402d-bd09-df4d33c39653",
+      "criterion_count": 44,
+      "contract_sha256": "f215735bf15d14ae56c56c4a66f12cfecb810509739502f7c6d3f10aec62eead"
+    },
+    {
+      "row_idx": 114,
+      "task_id": "5a2d70da-0a42-4a6b-a3ca-763e03f070a5",
+      "criterion_count": 64,
+      "contract_sha256": "27e9071930db4dcff80c71ee166e0b0dbca99385d8c3c00b258473cfdc261920"
+    },
+    {
+      "row_idx": 115,
+      "task_id": "74d6e8b0-f334-4e7e-af55-c095d5d4d1a6",
+      "criterion_count": 54,
+      "contract_sha256": "9fee0b6a01d8d7109e39470ea74c9d6850ad446b978d9ed3851f8587fec2bc25"
+    },
+    {
+      "row_idx": 116,
+      "task_id": "81db15ff-ceea-4f63-a1cd-06dc88114709",
+      "criterion_count": 58,
+      "contract_sha256": "bf1459df1517cf04d46f3819523aa3f75b07c478ccc88b0ccc3938f78f9e83c7"
+    },
+    {
+      "row_idx": 117,
+      "task_id": "61b0946a-5c1c-4bf6-8607-84d7c7e0dfe0",
+      "criterion_count": 50,
+      "contract_sha256": "63eabf2e40ce3bd326fdae5c61e650b6cf79cf330cd376666b3275967e29499c"
+    },
+    {
+      "row_idx": 118,
+      "task_id": "61e7b9c6-0051-429f-a341-fda9b6578a84",
+      "criterion_count": 19,
+      "contract_sha256": "9349ac5be0316922e9c3b6587076f672793b8c3658c91ef452d9b971b53d2a11"
+    },
+    {
+      "row_idx": 119,
+      "task_id": "c9bf9801-9640-45fa-8166-1ab01f2d98e4",
+      "criterion_count": 47,
+      "contract_sha256": "c908d68a531baf8916f11181e1d6e08379fdc5f1d1d9b54ab6082a798abad630"
+    },
+    {
+      "row_idx": 120,
+      "task_id": "f1be6436-ffff-4fee-9e66-d550291a1735",
+      "criterion_count": 47,
+      "contract_sha256": "aefaee0c89fb268476b94d6e56cd9dc00dcb092f6ff00f746f8bdb3ab41bb35a"
+    },
+    {
+      "row_idx": 121,
+      "task_id": "41f6ef59-88c9-4b2c-bcc7-9ceb88422f48",
+      "criterion_count": 39,
+      "contract_sha256": "3bed6426cbe8389b0d66001f1471b6ec0c3853d3493b5dc3b550fa97728ba743"
+    },
+    {
+      "row_idx": 122,
+      "task_id": "a0552909-bc66-4a3a-8970-ee0d17b49718",
+      "criterion_count": 50,
+      "contract_sha256": "7175b7cb2c0f8a7eba550a1fbdd244d1afb529104d1fdd61c58c78cd1f2be512"
+    },
+    {
+      "row_idx": 123,
+      "task_id": "6d2c8e55-fe20-45c6-bdaf-93e676868503",
+      "criterion_count": 50,
+      "contract_sha256": "b2b3e770ca08a5130682dd3fbb3cdbe404aeb79a54701b2faaa81aa4a9aaf582"
+    },
+    {
+      "row_idx": 124,
+      "task_id": "4b98ccce-9e42-44e9-9115-6fc3e79de288",
+      "criterion_count": 31,
+      "contract_sha256": "8276a4f0c25a376d2fc2625ab51013a9f4933898f3f07a7073d3595fc4370632"
+    },
+    {
+      "row_idx": 125,
+      "task_id": "60221cd0-686e-4a08-985e-d9bb2fa18501",
+      "criterion_count": 20,
+      "contract_sha256": "f107f0a44d1428b5f005e9f397184795f84823f55283f3af6920fb6b8c33eec6"
+    },
+    {
+      "row_idx": 126,
+      "task_id": "ef8719da-18e5-4bfe-b986-399652d77376",
+      "criterion_count": 40,
+      "contract_sha256": "5d433cbb31e58a34d7ec86f38a638965ab132a321b56783380aca0e3a69afa01"
+    },
+    {
+      "row_idx": 127,
+      "task_id": "3baa0009-5a60-4ae8-ae99-4955cb328ff3",
+      "criterion_count": 49,
+      "contract_sha256": "ae918431e81c7c1fe1913ea65a0ad1671dcf23bfc5db948b4cd44a3ffc0a7409"
+    },
+    {
+      "row_idx": 128,
+      "task_id": "5d0feb24-e8b6-4ace-b64f-d5cd1a8b563d",
+      "criterion_count": 46,
+      "contract_sha256": "57ee5b97db40e4a0f78b01a9a39543b365b9789b0223d4739d63eb78151ab1e0"
+    },
+    {
+      "row_idx": 129,
+      "task_id": "6974adea-8326-43fa-8187-2724b15d9546",
+      "criterion_count": 69,
+      "contract_sha256": "bdfa276d82e9545bbde3a8e37177705d84cb21afcf45afd5c91216451b7de19f"
+    },
+    {
+      "row_idx": 130,
+      "task_id": "1a78e076-445e-4c5d-b8ce-387d2fe5e715",
+      "criterion_count": 63,
+      "contract_sha256": "c3ca376b40872a111ba486db73c75470080e1e0072ee8b0d2303d7899d235b09"
+    },
+    {
+      "row_idx": 131,
+      "task_id": "1b9ec237-bf9c-41f9-8fa9-0e685fcd93c6",
+      "criterion_count": 47,
+      "contract_sha256": "75c527bf1c9fbc710d1743a9cce58c131bc302f5f3d3b8e594605746021238de"
+    },
+    {
+      "row_idx": 132,
+      "task_id": "0112fc9b-c3b2-4084-8993-5a4abb1f54f1",
+      "criterion_count": 55,
+      "contract_sha256": "d76058f8354dbf5fdc52e9568fad3bc3c3f2a079c308d905ef4bbe349b8c885e"
+    },
+    {
+      "row_idx": 133,
+      "task_id": "772e7524-174e-4c88-957e-6e510b61ea69",
+      "criterion_count": 65,
+      "contract_sha256": "d7b203a471d60302a0c8607726786cd1cb9cb1d5bf290b2c16cd04ed1a2022f5"
+    },
+    {
+      "row_idx": 134,
+      "task_id": "e6429658-4de1-42dd-a9e0-2d2b9b02fb10",
+      "criterion_count": 63,
+      "contract_sha256": "5eaf45ce0d594dd3e4eefebaf8d09d61c57f7de19ff94777f018751d99e3f987"
+    },
+    {
+      "row_idx": 135,
+      "task_id": "b5d2e6f1-62a2-433a-bcdd-95b260cdd860",
+      "criterion_count": 32,
+      "contract_sha256": "012fb3704552aec4b61cc3b44cf28dc3d3eb65934c0f80776cfab0c288cd4ca2"
+    },
+    {
+      "row_idx": 136,
+      "task_id": "f841ddcf-2a28-4f6d-bac3-61b607219d3e",
+      "criterion_count": 59,
+      "contract_sha256": "4bad20e15266f98756424774d35e876ddb4de630c89f82bd16742bee4b6ad95e"
+    },
+    {
+      "row_idx": 137,
+      "task_id": "47ef842d-8eac-4b90-bda8-dd934c228c96",
+      "criterion_count": 58,
+      "contract_sha256": "0cd233f138ce3559d55b13c7f646c8db790bf066e7555ffe5572294c296b5142"
+    },
+    {
+      "row_idx": 138,
+      "task_id": "1137e2bb-bdf9-4876-b572-f29b7de5e595",
+      "criterion_count": 62,
+      "contract_sha256": "c845920cd4f848ccb61730c77083ecbe1f3b3cf8eba6e99019f8195854b1ac02"
+    },
+    {
+      "row_idx": 139,
+      "task_id": "c3525d4d-2012-45df-853e-2d2a0e902991",
+      "criterion_count": 52,
+      "contract_sha256": "c536c06ec40b5a9a87903cd4b307139840f1cc0094d37634f9e0d5a359f2327b"
+    },
+    {
+      "row_idx": 140,
+      "task_id": "9a0d8d36-6233-4c76-9107-0d1f783c7340",
+      "criterion_count": 40,
+      "contract_sha256": "c1ffc111d642778e950e130afab7b66c3aba7dc17c288360c6418edbb1c026d1"
+    },
+    {
+      "row_idx": 141,
+      "task_id": "664a42e5-3240-413a-9a57-ea93c6303269",
+      "criterion_count": 42,
+      "contract_sha256": "551bda053ee3fcfd6b34fea849c83beee7bb0c6f08909a7e8b9f477929333f0d"
+    },
+    {
+      "row_idx": 142,
+      "task_id": "feb5eefc-39f1-4451-9ef9-bffe011b71dd",
+      "criterion_count": 83,
+      "contract_sha256": "deefcde44f5c3f6822826282aab2fe4c103abe6761d5e9039ff5d1b8b0c935e0"
+    },
+    {
+      "row_idx": 143,
+      "task_id": "3600de06-3f71-4e48-9480-e4828c579924",
+      "criterion_count": 42,
+      "contract_sha256": "0856d4715499f8366a916d58bf8e3d79b865dbc384345c3c22c75ba3d0270940"
+    },
+    {
+      "row_idx": 144,
+      "task_id": "c657103b-b348-4496-a848-b2b7165d28b2",
+      "criterion_count": 36,
+      "contract_sha256": "3a46418f0747d95c34b72cfaae720e91ee9f7930df035551f5714704eb535899"
+    },
+    {
+      "row_idx": 145,
+      "task_id": "ae0c1093-5ea8-4b84-a81e-53ebf7a4321d",
+      "criterion_count": 14,
+      "contract_sha256": "1dc0b537dfc56b02ed242283858d0ac4d02e697e3855db9c34642244f3677db4"
+    },
+    {
+      "row_idx": 146,
+      "task_id": "f9f82549-fdde-4462-aff8-e70fba5b8c66",
+      "criterion_count": 26,
+      "contract_sha256": "11332d685272906563aa2a0fcd76953adcd43d78ecddf28f93f7fe3c8f45085f"
+    },
+    {
+      "row_idx": 147,
+      "task_id": "57b2cdf2-ad62-4591-aa91-aad489740320",
+      "criterion_count": 45,
+      "contract_sha256": "73ab7b645350dfb4f7a8803816d9f0957d93030aa4e26b7be927919b1eb993a8"
+    },
+    {
+      "row_idx": 148,
+      "task_id": "84322284-5c2c-4873-b507-b147449d209d",
+      "criterion_count": 51,
+      "contract_sha256": "bc47cb13f733626a828be16d444e7a5af9722e0f43256b003dc5e05f1f40f240"
+    },
+    {
+      "row_idx": 149,
+      "task_id": "a46d5cd2-55fe-48fa-a4c6-6aaf6b9991b5",
+      "criterion_count": 56,
+      "contract_sha256": "07e39c6b8518be239aa71de9f6129983d3f308fbb3580c513d29c7041d23a4f8"
+    },
+    {
+      "row_idx": 150,
+      "task_id": "6241e678-4ba3-4831-b3c7-78412697febc",
+      "criterion_count": 60,
+      "contract_sha256": "8b8683ad165220528373a47394bc4ea7b45c052cbeb5dd105f7ccf6cde1d26a9"
+    },
+    {
+      "row_idx": 151,
+      "task_id": "e14e32ba-d310-4d45-9b8a-6d73d0ece1ae",
+      "criterion_count": 15,
+      "contract_sha256": "ce17df31cb3182656a5f2adf9d27ae668233aaa0dc35d5a2bfc375f5041f751e"
+    },
+    {
+      "row_idx": 152,
+      "task_id": "b1a79ce1-86b0-41fb-97dc-9206dfd7b044",
+      "criterion_count": 35,
+      "contract_sha256": "07506d5a41ae7101c55a910721679b7cd268f1a8be15d906a19b8fa39d367c34"
+    },
+    {
+      "row_idx": 153,
+      "task_id": "e4f664ea-0e5c-4e4e-a0d3-a87a33da947a",
+      "criterion_count": 50,
+      "contract_sha256": "c76dbff5d8ccced9a7ba5da34d37853ee5409c2b2e86e215cc178d83ace3d49b"
+    },
+    {
+      "row_idx": 154,
+      "task_id": "a079d38f-c529-436a-beca-3e291f9e62a3",
+      "criterion_count": 34,
+      "contract_sha256": "6779a73313f38f7b63c75466d6f1fc4b5468fb2bbd26cd5c6176584ba9bebf7d"
+    },
+    {
+      "row_idx": 155,
+      "task_id": "02aa1805-c658-4069-8a6a-02dec146063a",
+      "criterion_count": 71,
+      "contract_sha256": "568a3ca2b6fc573f598832a8b59d9651a3697e4e7efab46e8a7009d38b1e3509"
+    },
+    {
+      "row_idx": 156,
+      "task_id": "fd6129bd-f095-429b-873c-dcc3137be2c3",
+      "criterion_count": 64,
+      "contract_sha256": "5254297f2195ad8dfb8063882202eec8e0f56bf71c27be0a4165463b221ed12c"
+    },
+    {
+      "row_idx": 157,
+      "task_id": "ce864f41-8584-49ba-b24f-9c9104b47bf0",
+      "criterion_count": 39,
+      "contract_sha256": "dcc197c51b99f10082e05419d3188ba321fd449fc44b44f0aef328f01b80a7bc"
+    },
+    {
+      "row_idx": 158,
+      "task_id": "58ac1cc5-5754-4580-8c9c-8c67e1a9d619",
+      "criterion_count": 41,
+      "contract_sha256": "c915869e956b98fee1a6891895bceadd1653494eba3be79a42f25cfec54c4b45"
+    },
+    {
+      "row_idx": 159,
+      "task_id": "3c19c6d1-672c-467a-8437-6fe21afb8eae",
+      "criterion_count": 41,
+      "contract_sha256": "3dce3b4a6e2ef82b8205fcb378e9a8df1c8bc851efde155cdc8a1445b09d6922"
+    },
+    {
+      "row_idx": 160,
+      "task_id": "a99d85fc-eff8-48d2-a7d4-42a75d62f18d",
+      "criterion_count": 52,
+      "contract_sha256": "c2ad160b4dc30144622fcd0d5ebb298d4a78c5db3a7cb981144cf153c1b019e2"
+    },
+    {
+      "row_idx": 161,
+      "task_id": "55ddb773-23a4-454c-8704-d432fe1b99d9",
+      "criterion_count": 41,
+      "contract_sha256": "752788e3d5062b37b46db55b5a258a6941d858f09d6aa63177f516218c06c236"
+    },
+    {
+      "row_idx": 162,
+      "task_id": "1e5a1d7f-12c1-48c6-afd9-82257b3f2409",
+      "criterion_count": 18,
+      "contract_sha256": "6c27f3b609de4a268e32ca1a6af37e38f0b0a2ea1cf7fd45ce228ab33d1b1494"
+    },
+    {
+      "row_idx": 163,
+      "task_id": "0419f1c3-d669-45d0-81cd-f4d5923b06a5",
+      "criterion_count": 52,
+      "contract_sha256": "2f9dbc4e4748723b91cfd3e31d6d640f98efd202e67d6f4668471c31085b26bf"
+    },
+    {
+      "row_idx": 164,
+      "task_id": "ed2bc14c-99ac-4a2a-8467-482a1a5d67f3",
+      "criterion_count": 36,
+      "contract_sha256": "fbd0099af57ecdf2f94fce1107036e88dd2237c3bd1a191ccc4c89ea043e6196"
+    },
+    {
+      "row_idx": 165,
+      "task_id": "46bc7238-3501-4839-b989-e2bd47853676",
+      "criterion_count": 46,
+      "contract_sha256": "b02e769b96efc4a7c89fabfc708e355e43e1d4864262769b94a122db15a95c4d"
+    },
+    {
+      "row_idx": 166,
+      "task_id": "2d06bc0a-89c6-4e89-9417-5ffe725c1bc6",
+      "criterion_count": 34,
+      "contract_sha256": "67eb427e17ef27d0046e6740361f587aa4c436179ad34daaa6914fe3d4426d0b"
+    },
+    {
+      "row_idx": 167,
+      "task_id": "fd3ad420-6f7d-43b1-a990-c0c5c047d071",
+      "criterion_count": 21,
+      "contract_sha256": "7df4348a7fc44e38ac02e7ef409637537ab1ab3c3f78cc5e9895f86bce9638dc"
+    },
+    {
+      "row_idx": 168,
+      "task_id": "0818571f-5ff7-4d39-9d2c-ced5ae44299e",
+      "criterion_count": 32,
+      "contract_sha256": "7efe366e1045d079a3a95a9fabd28bf2125690e38f8b79d02d0a03b75c0a3665"
+    },
+    {
+      "row_idx": 169,
+      "task_id": "6074bba3-7e3a-4b1c-b8c6-a15bb6695c3b",
+      "criterion_count": 48,
+      "contract_sha256": "d02ff39bbde2e784b080cc241ddb8fee6095138341046061b164811d80b4bc24"
+    },
+    {
+      "row_idx": 170,
+      "task_id": "5ad0c554-a7a2-48cd-b41a-ebc1bff4a9de",
+      "criterion_count": 60,
+      "contract_sha256": "4dab0c993f4352dba54ff79a658736906bec7e3db2f402b1c5f09e4defab33d0"
+    },
+    {
+      "row_idx": 171,
+      "task_id": "11593a50-734d-4449-b5b4-f8986a133fd8",
+      "criterion_count": 29,
+      "contract_sha256": "e265dee75f79aa46c77790760f94726e0e7a4c476541b4e5bfc03ddf7b8d5dc2"
+    },
+    {
+      "row_idx": 172,
+      "task_id": "94925f49-36bc-42da-b45b-61078d329300",
+      "criterion_count": 56,
+      "contract_sha256": "65c781c5deb99921a16a12ae128a271fb2873827ce870b5de27041837fad7d76"
+    },
+    {
+      "row_idx": 173,
+      "task_id": "90f37ff3-e4ed-4a0b-94bb-bed0f7def1ef",
+      "criterion_count": 30,
+      "contract_sha256": "1cffee4b177cb9f9a1667efb55a25270c8ba524f36f30c789c8da5ae6a0ffc75"
+    },
+    {
+      "row_idx": 174,
+      "task_id": "d3d255b2-f5f2-4841-9f62-2083ec9ef3da",
+      "criterion_count": 29,
+      "contract_sha256": "455d40ea75a3c95473e325c1a299e8d1579ca5a200a26ea729f8302a48c0368f"
+    },
+    {
+      "row_idx": 175,
+      "task_id": "403b9234-6299-4b5f-a106-70c1bc11ec4c",
+      "criterion_count": 17,
+      "contract_sha256": "a577fa567bf00ba5ff0eb9114eb9f814d2b06abe2cb406df07a806ba55e25bc7"
+    },
+    {
+      "row_idx": 176,
+      "task_id": "1bff4551-1d54-4e37-b2e0-d5c3f2ea4a45",
+      "criterion_count": 29,
+      "contract_sha256": "ac8218b70a6d6b2b6012a46fca3c822f2f4278a57dd977435361b243b21ee835"
+    },
+    {
+      "row_idx": 177,
+      "task_id": "650adcb1-ed19-4f88-8117-77640f7b94b6",
+      "criterion_count": 48,
+      "contract_sha256": "3a2c6ca5fb0db162497938ef831f082980dd1687fe94336cf089dda9af905639"
+    },
+    {
+      "row_idx": 178,
+      "task_id": "01d7e53e-0513-4109-a242-8ccaf442cd21",
+      "criterion_count": 65,
+      "contract_sha256": "f0b5c5a2647cb646662032df0286b973d9999335e88a8e78c4ab5682c81857b7"
+    },
+    {
+      "row_idx": 179,
+      "task_id": "a73fbc98-90d4-4134-a54f-2b1d0c838791",
+      "criterion_count": 63,
+      "contract_sha256": "932f3ae208871b557c65b6510008c53ea479de370793cdae499fe6565c8d9fd2"
+    },
+    {
+      "row_idx": 180,
+      "task_id": "0ec25916-1b5c-4bfe-93d3-4e103d860f3a",
+      "criterion_count": 42,
+      "contract_sha256": "39885876286e55ea2b6bf0390983d32f244266713a0a41a53aa8686d0c8f7e14"
+    },
+    {
+      "row_idx": 181,
+      "task_id": "116e791e-890c-42b1-ba90-1db02e8bfd45",
+      "criterion_count": 46,
+      "contract_sha256": "1263fd78b7f418bb4838b03d7c0704d856efb8be19eabc6b2f1789055a52035d"
+    },
+    {
+      "row_idx": 182,
+      "task_id": "dd724c67-8118-4b99-ab50-4761af705c3b",
+      "criterion_count": 31,
+      "contract_sha256": "49b3a1fb68093c590712c8ce8dff52c27efb4bdc8ad30f5bb69fabd915a32ae2"
+    },
+    {
+      "row_idx": 183,
+      "task_id": "7151c60a-d4cb-4fc4-8169-3d4cb446e6b9",
+      "criterion_count": 33,
+      "contract_sha256": "c8e788e9b59dbe00bef2ce9e3c9e317f434b549cb76757835288ddc32972d305"
+    },
+    {
+      "row_idx": 184,
+      "task_id": "90edba97-74f0-425a-8ff6-8b93182eb7cb",
+      "criterion_count": 71,
+      "contract_sha256": "ec9cc1f56d30cc52acfd80ed46fd62907447e29cd17dbb5e8501170b88930605"
+    },
+    {
+      "row_idx": 185,
+      "task_id": "91060ff0-3eb5-4ddf-9edb-f6758b95499e",
+      "criterion_count": 37,
+      "contract_sha256": "2209e740b1d7aad46da4a8d643835b6d275fd36cc37e78383a1acc5d58e7b5b9"
+    },
+    {
+      "row_idx": 186,
+      "task_id": "8384083a-c31b-4194-80ba-4d335a444918",
+      "criterion_count": 47,
+      "contract_sha256": "6da7203ded0cd680f45f45274825e44be9cc063ad0a274acbeb2d7eed67b39b5"
+    },
+    {
+      "row_idx": 187,
+      "task_id": "045aba2e-4093-42aa-ab7f-159cc538278c",
+      "criterion_count": 34,
+      "contract_sha256": "8853082fb50e497e116ed04fb81e8345e7a661daf9e1e448738b5587e2bea4c3"
+    },
+    {
+      "row_idx": 188,
+      "task_id": "f2986c1f-2bbf-4b83-bc93-624a9d617f45",
+      "criterion_count": 77,
+      "contract_sha256": "e79d8361849719627a21d9fc7ee87f50c581e2af9fe8f4f19d9487fb354dc08d"
+    },
+    {
+      "row_idx": 189,
+      "task_id": "ffed32d8-d192-4e3f-8cd4-eda5a730aec3",
+      "criterion_count": 46,
+      "contract_sha256": "d5e294a792cd7779e743a41f78a369ee3309865f513f6b0df3a969a8d68fa53c"
+    },
+    {
+      "row_idx": 190,
+      "task_id": "b3573f20-5d3e-4954-948f-9461fda693d2",
+      "criterion_count": 17,
+      "contract_sha256": "15494115efd10756175c9441d76abbe26d3a4a9dce0714a494dce8f0c13e1b6d"
+    },
+    {
+      "row_idx": 191,
+      "task_id": "a69be28f-9a84-47c9-992e-b90446cdca9d",
+      "criterion_count": 54,
+      "contract_sha256": "494a4cd98392cffd262e4814f322813d913bdd8558f8b52ac57159bd7f9c55c9"
+    },
+    {
+      "row_idx": 192,
+      "task_id": "788d2bc6-82df-4dc7-8467-a0f31405dc14",
+      "criterion_count": 48,
+      "contract_sha256": "0c6d9dcfc8c154f98c55d7d67258ca02701754570656fa8afc3a460fddda57ab"
+    },
+    {
+      "row_idx": 193,
+      "task_id": "74ed1dc7-1468-48a8-9071-58775c0d667a",
+      "criterion_count": 35,
+      "contract_sha256": "bb20a7cd9199439b33c4333008aa3c96243f228f788a613bd5ff53be1348a8ca"
+    },
+    {
+      "row_idx": 194,
+      "task_id": "69a8ef86-4e69-4fe2-9168-080f1e978e67",
+      "criterion_count": 47,
+      "contract_sha256": "5e3ed5994b5311fadb70c0d6f5aff1315a06587b001ac0baf29f9c659f1f6b83"
+    },
+    {
+      "row_idx": 195,
+      "task_id": "ab81b076-e5d8-473a-9bdb-7ea7c38f6ebc",
+      "criterion_count": 39,
+      "contract_sha256": "2aeaf96f4f091810cd0537760c2c86ad24030f4b6534eede74fbfdd848b58337"
+    },
+    {
+      "row_idx": 196,
+      "task_id": "d7cfae6f-4a82-4289-955e-c799dfe1e0f4",
+      "criterion_count": 63,
+      "contract_sha256": "ace193857ac62ac395810db8c95bde3a892ed66cd4bdf21b8e3a3f23430a52a0"
+    },
+    {
+      "row_idx": 197,
+      "task_id": "19403010-3e5c-494e-a6d3-13594e99f6af",
+      "criterion_count": 63,
+      "contract_sha256": "f1f0aafe9448468de953e8574d389a5b343f4952ac1f7ac3631810f556e6de80"
+    },
+    {
+      "row_idx": 198,
+      "task_id": "7ed932dd-244f-4d61-bf02-1bc3bab1af14",
+      "criterion_count": 55,
+      "contract_sha256": "ebfe1a3812b8ab0c2e9f331c74b0f31f04edc6532cdeb624c847c77589086bd2"
+    },
+    {
+      "row_idx": 199,
+      "task_id": "105f8ad0-8dd2-422f-9e88-2be5fbd2b215",
+      "criterion_count": 46,
+      "contract_sha256": "3fa073c18cd4156ef2b04e06c079aaeaef9f98cfb30ff43106cf7647f4196de5"
+    },
+    {
+      "row_idx": 200,
+      "task_id": "b57efde3-26d6-4742-bbff-2b63c43b4baa",
+      "criterion_count": 62,
+      "contract_sha256": "2b19733f05b8a5716414a66f22a2418d9f70e245b900953c3714623dbc663489"
+    },
+    {
+      "row_idx": 201,
+      "task_id": "15d37511-75c5-4c7f-81f1-16e00c0d95f3",
+      "criterion_count": 56,
+      "contract_sha256": "3d34524a539e37f31107a6ec6da57ec52b896574031cfa0f18a2f46845229c6a"
+    },
+    {
+      "row_idx": 202,
+      "task_id": "bb863dd9-31c2-4f64-911a-ce11f457143b",
+      "criterion_count": 53,
+      "contract_sha256": "4d4c425fa1114a890fd9783e19e8fe9c8b0991d92aca508136406437a7bd7b69"
+    },
+    {
+      "row_idx": 203,
+      "task_id": "fe0d3941-e32c-4bf1-a643-b566d2b4cb3c",
+      "criterion_count": 27,
+      "contract_sha256": "69dc0d249a9eec7499831f160204f177e3535f5f272d8acb74b2dee35520719e"
+    },
+    {
+      "row_idx": 204,
+      "task_id": "6a900a40-8d2b-4064-a5b1-13a60bc173d8",
+      "criterion_count": 32,
+      "contract_sha256": "9c8cb666a2dcc264957dcfefe8ad7688ff6681f4546be443757e18d032fedd03"
+    },
+    {
+      "row_idx": 205,
+      "task_id": "9efbcd35-186d-49b6-ac24-28ee2bc9a263",
+      "criterion_count": 46,
+      "contract_sha256": "c01f0c9b4d60ea6aba062a0509733ea7c3e96ac46f009ef75d11677732728363"
+    },
+    {
+      "row_idx": 206,
+      "task_id": "1d4672c8-b0a7-488f-905f-9ab4e25a19f7",
+      "criterion_count": 43,
+      "contract_sha256": "6924a2e450c1394a467bf73e539b93601cffff46d8d8527184c739f2d26101a9"
+    },
+    {
+      "row_idx": 207,
+      "task_id": "4de6a529-4f61-41a1-b2dc-64951ba03457",
+      "criterion_count": 44,
+      "contract_sha256": "1210702f4b69cd497aaefbbf0e1f0e7d44168c040a7863c2f1085732c615c651"
+    },
+    {
+      "row_idx": 208,
+      "task_id": "4c4dc603-c21c-4284-8fb1-1b827c1fddf4",
+      "criterion_count": 37,
+      "contract_sha256": "5aa3c3711d3c90054198c8363b1be020ca5f94aac2e5732f4d8fccabeeb3fde2"
+    },
+    {
+      "row_idx": 209,
+      "task_id": "bb499d9c-0263-4684-9238-75e8e86077b1",
+      "criterion_count": 61,
+      "contract_sha256": "29dc770467ed0cf8054e98ecfaf5f454a55ce48a7ef698118c0130d6f0fd0d54"
+    },
+    {
+      "row_idx": 210,
+      "task_id": "5349dd7b-bf0a-4544-9a17-75b7013767e6",
+      "criterion_count": 94,
+      "contract_sha256": "a8c5f59c523035c8a4ff01947fe60f9bbd7e257acbc4f983e2a22e885a92b361"
+    },
+    {
+      "row_idx": 211,
+      "task_id": "a4a9195c-5ebe-4b8d-a0c2-4a6b7a49da8b",
+      "criterion_count": 55,
+      "contract_sha256": "54480c1c9c19ffdb235c692edb7a55c4bf08eadef1a70021523590746fe464ae"
+    },
+    {
+      "row_idx": 212,
+      "task_id": "552b7dd0-96f4-437c-a749-0691e0e4b381",
+      "criterion_count": 63,
+      "contract_sha256": "57c1e4da4c7e37896ee9f55973787a6e293d53c751a666311a2ce1dbc2d1c9fe"
+    },
+    {
+      "row_idx": 213,
+      "task_id": "11dcc268-cb07-4d3a-a184-c6d7a19349bc",
+      "criterion_count": 27,
+      "contract_sha256": "e2cf3caeb502f2cdb99e8263203c4275aee32e80aba92854df3ec230dfaa879a"
+    },
+    {
+      "row_idx": 214,
+      "task_id": "76418a2c-a3c0-4894-b89d-2493369135d9",
+      "criterion_count": 56,
+      "contract_sha256": "c9243da26a8bcc3d894d7ea2518d4cbc56a7f781cd39cdbbc1667a48331f16d8"
+    },
+    {
+      "row_idx": 215,
+      "task_id": "0e386e32-df20-4d1f-b536-7159bc409ad5",
+      "criterion_count": 55,
+      "contract_sha256": "db41d3738f807102735fe6a34d5b1364229a709a95d9dcccd50e1b9eacab81f4"
+    },
+    {
+      "row_idx": 216,
+      "task_id": "7de33b48-5163-4f50-b5f3-8deea8185e57",
+      "criterion_count": 39,
+      "contract_sha256": "5d6df0920723af7457b1c44d81c8d7f078130b9babfb69ad230d6b5821d1e4d0"
+    },
+    {
+      "row_idx": 217,
+      "task_id": "854f3814-681c-4950-91ac-55b0db0e3781",
+      "criterion_count": 23,
+      "contract_sha256": "90b97684441290da19d416239c3f32ac70a315ee776b68b103abd55f6d5fb41e"
+    },
+    {
+      "row_idx": 218,
+      "task_id": "4122f866-01fa-400b-904d-fa171cdab7c7",
+      "criterion_count": 65,
+      "contract_sha256": "eab0e71648fb5e06ace6ad5faa3ffcf21a96afa551f04d8d2133dd894fa5ccbd"
+    },
+    {
+      "row_idx": 219,
+      "task_id": "2c249e0f-4a8c-4f8e-b4f4-6508ba29b34f",
+      "criterion_count": 50,
+      "contract_sha256": "56a059b48e57ea8c60db9cb9d3f50e9a4b3f6f74d6d9aef064c1c32ab83645e3"
+    }
+  ],
+  "soundness": {
+    "every_public_task_compiled": true,
+    "every_explicit_rubric_criterion_included_in_population_root": true,
+    "whole_task_semantic_completeness_claim": false,
+    "pairwise_human_preference_adequacy_claim": false,
+    "target_model_equivalence_claim": false,
+    "u_deletion_authority": false,
+    "terminal_authority": false
+  },
+  "next_required_action": "MATCH_EACH_TASK_CONTRACT_TO_EXISTING_BRAIN_OWNED_ADEQUACY_OR_DOMINANCE_ROUTES__RECOMPUTE_FIRST_LOAD_BEARING_RESIDUAL_PER_TASK",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_inference_requests": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
