@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V2",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_TRUTH_REPAIR__SIX_CONSUMED_SLOTS__RANK6_FINAL_ZERO_FROM_PLANNER_TRANSPORT_EXCEPTION__NEXT_SLOT_RANK7__REPAIRED_PLANNER_PENDING_INDEPENDENT_LIVE_VERIFICATION__EXECUTION_FALSE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V1.json",
+    "git_blob_sha": "5267498adecc8ec7c4dc2d1ed8ae813d28aedc0c"
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "rank6_execution": {
+    "slot_id": "terminal-bench-science/koopman-mfg-id::trial-0",
+    "task_digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f",
+    "authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK6_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1.json",
+      "git_blob_sha": "3c0193eb50c55d72eaf19dcc0b6f084e84b12ff2"
+    },
+    "authority_verification": {
+      "path": "canonical/verification/TB_SCIENCE_RANK6_ONE_SLOT_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "1aff0bc47f34c6cd93c1252a0659e48712a22bef"
+    },
+    "public_runner": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "workflow_run_id": 37582791067,
+      "workflow_job_id": 112666216959,
+      "artifact_id": 11465892379,
+      "artifact_digest": "sha256:1c572b22f68a246ae0489da4e8234c14b5d9bafc64b08a76aa3970a7e32ea1b3",
+      "github_run_attempt": 1,
+      "workflow_conclusion": "success"
+    },
+    "irreversible_receipt": {
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "errors": [
+        "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD"
+      ],
+      "execution_authority_consumed": true,
+      "rerun_credit": false,
+      "incremental_spend_usd": 0
+    },
+    "failure_localization": {
+      "harbor_trials_completed": 0,
+      "harbor_exception_count": 1,
+      "exception_class": "SciencePlannerError",
+      "exact_planner_error": "SCIENCE_PLANNER_TOOL_ARGUMENTS_JSON_INVALID",
+      "root_parse_error": "JSONDecodeError__UNTERMINATED_STRING",
+      "observed_generation_boundary": "LOCAL_QWEN_TOOL_ARGUMENTS_TRUNCATED_AT_PRIOR_MAX_TOKENS_384",
+      "verifier_result_present": false,
+      "task_capability_negative_evidence": false,
+      "reason": "THE_AGENT_FAILED_BEFORE_A_VERIFIER_REWARD_EXISTED__THE_FROZEN_PROTOCOL_STILL_COUNTS_THE_SLOT_AS_FINAL_ZERO_BUT_THIS_OUTCOME_DOES_NOT_IDENTIFY_SCIENCE_TASK_INADEQUACY"
+    }
+  },
+  "planner_transport_repair": {
+    "old_planner_git_blob_sha": "fe7c0ce885197217774638df382aeb6f68ff38dd",
+    "repaired_planner": {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "3d6f50be86cc61a9b907a04d8f3fb161c2d40e99",
+      "creating_commit": "e77e5aa202b1504164eb1ffff12d0fea46b61260"
+    },
+    "repaired_tests": {
+      "path": "canonical/tests/test_harbor_science_planner_v1.py",
+      "git_blob_sha": "619af1b6e081f4d3f9a520cffb7f518fd23f807a",
+      "creating_commit": "3c5e95f0ec5978baf5ca17ef33c0812ad6391abd"
+    },
+    "changes": [
+      "BOUND_TOOL_COMPLETION_LIMIT_RAISED_FROM_384_TO_1024",
+      "TOOL_SCHEMA_STRING_LENGTHS_BOUNDED",
+      "FINISH_REASON_LENGTH_FAILS_CLOSED_AS_SCIENCE_PLANNER_OUTPUT_TRUNCATED",
+      "NO_CHANGE_TO_BRAIN_COMMAND_POLICY_VERIFICATION_OR_FINISH_AUTHORITY"
+    ],
+    "independent_live_verification_state": "IN_PROGRESS_ON_PUBLIC_ZERO_COST_RUNNER__NO_NEXT_SLOT_AUTHORITY_FROM_REPAIR_ALONE"
+  },
+  "truth_repair": {
+    "consumed_slots": [
+      "terminal-bench-science/genomic-model-ranking::trial-0",
+      "terminal-bench-science/mri-harmonization::trial-0",
+      "terminal-bench-science/navigation-sensor-calibration::trial-0",
+      "terminal-bench-science/baseline-free-localization::trial-0",
+      "terminal-bench-science/virtual-baseline-localization::trial-0",
+      "terminal-bench-science/koopman-mfg-id::trial-0"
+    ],
+    "consumed_successes": 0,
+    "consumed_final_failures": 6,
+    "next_untouched_slot": {
+      "schedule_rank": 7,
+      "slot_id": "terminal-bench-science/reactor-safety-control::trial-0",
+      "task_digest": "sha256:96c8c5764042dca01ba0b7bd127cf2587f8df538a335f36abf6b4c200f0bb669"
+    },
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 81,
+    "maximum_possible_successes_remaining": 204,
+    "pass_still_mathematically_reachable": true
+  },
+  "scheduler": [
+    "NEVER_REPLAY_RANK6__ITS_ONE_USE_AUTHORITY_IS_CONSUMED.",
+    "DO_NOT_TREAT_RANK6_FINAL_ZERO_AS_TASK_CAPABILITY_FALSIFICATION__THE_VERIFIER_WAS_NEVER_REACHED.",
+    "INDEPENDENTLY_VERIFY_THE_REPAIRED_PLANNER_WITH_SYNTHETIC_NONTERMINAL_LIVE_QWEN_PROPOSALS.",
+    "ONLY_AFTER_REPAIRED_PLANNER_VERIFICATION__BIND_NEW_EXACT_ROUTE_BYTES_AND_SEPARATE_ONE_USE_AUTHORITY_FOR_RANK7.",
+    "NO_NEXT_SLOT_EXECUTION_WITH_STALE_RANK6_PLANNER_BLOB."
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_REPAIRED_PLANNER_IS_VERIFIED_UNTIL_PUBLIC_LIVE_VERIFICATION_COMPLETES",
+    "NO_RANK7_EXECUTION_AUTHORITY",
+    "NO_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 1,
+    "terminal_credit_delta": 0
+  }
+}
