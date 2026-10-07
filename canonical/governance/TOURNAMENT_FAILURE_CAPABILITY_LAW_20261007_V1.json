@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_TOURNAMENT_FAILURE_CAPABILITY_LAW_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_FAIL_CLOSED_EXECUTION_LAW__NO_TERMINAL_CREDIT_FROM_LAW_ALONE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "core_law": {
+    "common_policy": "For an uncertainty cell W with adequate-action sets A(w), if the intersection of all A(w) is nonempty, compile and verify one common Brain-owned adequate policy.",
+    "tournament_failure": "If the intersection is empty, no single policy is adequate for every world in the cell. A sound route must obtain a pre-commitment discriminator or use independently justified persistent distinguishing state.",
+    "minimum_persistent_information": "If k distinct adequate policy classes are minimally required, the declared selector model needs at least ceil(log2(k)) persistent bits."
+  },
+  "execution_rules": [
+    "Freeze only the terminal objective and hard constraints; all intermediate decompositions remain falsifiable.",
+    "Treat benchmarks and family labels as evidence sources, not capability ontology.",
+    "Try a common adequate policy before acquiring new target-relative information.",
+    "When no common policy exists, seek the minimum pre-commitment JIT discriminator.",
+    "Admit persistent distinguishing state only with content-addressed necessity evidence and independent verification.",
+    "Schedule concrete counterexample cells, not historical taxonomy labels.",
+    "Prefer reusable repairs that discharge multiple terminal obligations.",
+    "Unknown or incomparable remains not proved."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
