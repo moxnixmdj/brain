@@ -49,7 +49,118 @@
         "path": "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json",
         "git_blob_sha": "92446c0ea1eb6801db58bd757ab62a24710d3b6b"
       },
-      "certificate": null,
+      "certificate": {
+        "transform_law": "DETERMINISTIC",
+        "source_state_complete": true,
+        "target_state_complete": true,
+        "external_controls_accounted": true,
+        "randomness_accounted": true,
+        "target_evaluator_set_complete": true,
+        "target_hard_constraint_set_complete": true,
+        "interactive_state_accounted": true,
+        "independent_verification_bound": true,
+        "source_state_ids": [
+          "FINITE_EXPLICIT_TASK_REQUIREMENT_AND_DEPENDENCY_GRAPH",
+          "FINITE_DECLARED_WORKER_OR_TOOL_CAPABILITIES",
+          "DECLARED_CURRENT_STATE",
+          "DECLARED_CONCURRENCY_AND_RESOURCE_CONSTRAINTS",
+          "DECLARED_EVIDENCE_OWNERSHIP_RULES",
+          "IMMUTABLE_BASE_TASK",
+          "ARBITRARY_FINITE_ORDERED_HISTORY_OF_SUPPORTED_LIVE_RECEIPTS_OVER_DECLARED_ENTITIES"
+        ],
+        "target_state_ids": [
+          "MINIMUM_COST_SCHEDULABLE_REQUIRED_WORK",
+          "CAPABILITY_COMPATIBLE_OWNER_ASSIGNMENT",
+          "DEPENDENCY_AND_FANIN_GRAPH",
+          "MINIMUM_FEASIBLE_WAVE_SCHEDULE",
+          "TERMINAL_EVIDENCE_FANIN",
+          "RECEIPT_DRIVEN_REASSIGNMENT_WITHOUT_PRIOR_STATE_RESURRECTION",
+          "TERMINAL_SUCCESS_OR_PROVED_INFEASIBILITY"
+        ],
+        "target_evaluator_ids": [
+          "DELEGATION_TERMINAL_SUCCESS",
+          "MINIMUM_SCHEDULABLE_PLAN_COST",
+          "MINIMUM_FEASIBLE_WAVE_COUNT"
+        ],
+        "evaluator_pullbacks": [
+          {
+            "target_evaluator_id": "DELEGATION_TERMINAL_SUCCESS",
+            "source_evaluator_id": "EXACT_FEASIBILITY_AND_REQUIRED_OUTPUT_COMPLETION",
+            "proof_ref": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json"
+          },
+          {
+            "target_evaluator_id": "MINIMUM_SCHEDULABLE_PLAN_COST",
+            "source_evaluator_id": "FINITE_NONNEGATIVE_COST_EXHAUSTIVE_PLAN_ORDER",
+            "proof_ref": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json"
+          },
+          {
+            "target_evaluator_id": "MINIMUM_FEASIBLE_WAVE_COUNT",
+            "source_evaluator_id": "BREADTH_FIRST_FEASIBLE_COMPLETED_TASK_SET_SEARCH",
+            "proof_ref": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json"
+          }
+        ],
+        "target_hard_constraint_ids": [
+          "NO_DUPLICATE_WORK",
+          "NO_CONFLICTING_WRITES",
+          "NO_LOST_PROVENANCE",
+          "NO_DEPENDENCY_VIOLATION",
+          "CAPABILITY_COMPATIBLE_ASSIGNMENT",
+          "RESOURCE_CAPACITY_RESPECTED",
+          "COMPLETE_FANIN_EVIDENCE",
+          "NO_PRIOR_RECEIPT_STATE_RESURRECTION",
+          "UNKNOWN_ENTITY_OR_RECEIPT_KIND_FAIL_CLOSED"
+        ],
+        "hard_constraint_preimages": [
+          {
+            "target_hard_constraint_id": "NO_DUPLICATE_WORK",
+            "source_preimage_or_invariant_id": "SIMPLE_FACT_ADDING_SEQUENCE_EACH_DECLARED_STEP_AT_MOST_ONCE",
+            "proof_ref": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json"
+          },
+          {
+            "target_hard_constraint_id": "NO_CONFLICTING_WRITES",
+            "source_preimage_or_invariant_id": "DECLARED_EVIDENCE_OWNERSHIP_AND_WORKER_RESOURCE_MATCHING",
+            "proof_ref": "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V2.json"
+          },
+          {
+            "target_hard_constraint_id": "NO_LOST_PROVENANCE",
+            "source_preimage_or_invariant_id": "EVIDENCE_OWNER_AND_TERMINAL_FANIN_LINEAGE",
+            "proof_ref": "canonical/runtime/delegation_whole_scope_candidate_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "NO_DEPENDENCY_VIOLATION",
+            "source_preimage_or_invariant_id": "TOPOLOGICAL_REQUIREMENT_AND_DEPENDENCY_CLOSURE",
+            "proof_ref": "canonical/runtime/delegation_whole_scope_candidate_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "CAPABILITY_COMPATIBLE_ASSIGNMENT",
+            "source_preimage_or_invariant_id": "DECLARED_WORKER_CAPABILITY_MATCHING",
+            "proof_ref": "canonical/runtime/delegation_whole_scope_candidate_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "RESOURCE_CAPACITY_RESPECTED",
+            "source_preimage_or_invariant_id": "PER_WAVE_DECLARED_RESOURCE_CAPACITY_MATCHING",
+            "proof_ref": "canonical/runtime/delegation_whole_scope_candidate_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "COMPLETE_FANIN_EVIDENCE",
+            "source_preimage_or_invariant_id": "SINK_AND_COMPLETED_EVIDENCE_UNION",
+            "proof_ref": "canonical/runtime/delegation_whole_scope_candidate_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "NO_PRIOR_RECEIPT_STATE_RESURRECTION",
+            "source_preimage_or_invariant_id": "FULL_ORDERED_HISTORY_REPLAY_WITH_IDEMPOTENT_DISABLE_REMOVAL_SET_UNION",
+            "proof_ref": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json"
+          },
+          {
+            "target_hard_constraint_id": "UNKNOWN_ENTITY_OR_RECEIPT_KIND_FAIL_CLOSED",
+            "source_preimage_or_invariant_id": "DECLARED_RECEIPT_DOMAIN_VALIDATION",
+            "proof_ref": "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V2.json"
+          }
+        ],
+        "acceptance_semantics_completeness_ref": "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V2.json",
+        "independent_verification_ref": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "scope_note": "ALL_FINITE_VALID_EXPLICIT_MONOTONIC_FACT_DELEGATION_CONTRACTS_WITH_DECLARED_CAPABILITIES_RESOURCES_EVIDENCE_RULES_AND_FINITE_SUPPORTED_RECEIPT_HISTORIES__NO_IMPLICIT_TASK_DISCOVERY_OR_UNDECLARED_ENTITIES"
+      },
       "implementation_artifacts": [
         {
           "path": "canonical/runtime/delegation_receipt_history_candidate_v4.py",
@@ -170,9 +281,9 @@
   "current_result": {
     "exact_credited_family_registry_bound": true,
     "route_count": 5,
-    "transform_certificates_complete": 1,
+    "transform_certificates_complete": 2,
     "c_closed": false,
-    "next": "CERTIFY_CONTINUITY_DELEGATION_RECOVERY_AND_TOOL_DISCOVERY_TRANSFORMS__FAIL_CLOSED_ON_ANY_UNBOUND_STATE_EVALUATOR_CONSTRAINT_OR_CONTROL"
+    "next": "CERTIFY_CONTINUITY_RECOVERY_AND_TOOL_DISCOVERY_TRANSFORMS__FAIL_CLOSED_ON_ANY_UNBOUND_STATE_EVALUATOR_CONSTRAINT_OR_CONTROL"
   },
   "hard_nonclaims": [
     "NO_CLAIM_ANY_CURRENT_ROUTE_TRANSFORM_CERTIFICATE_IS_COMPLETE",
