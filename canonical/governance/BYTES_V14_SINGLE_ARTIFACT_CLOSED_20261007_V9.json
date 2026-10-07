@@ -1,0 +1,35 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_SINGLE_ARTIFACT_CLOSED_V9",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_PARETO_IMPROVEMENT__ZERO_TERMINAL_CREDIT",
+  "scope_lock":"BYTES_RESEARCH_ONLY",
+  "artifact":{
+    "path":"canonical/runtime/bytes_v14_single_artifact_closed_v9.py",
+    "git_blob_sha":"b933a6511f3dd81e32edc4b7e73f1166f3822f21",
+    "raw_bytes":7615
+  },
+  "changes":[
+    "INLINE_POSITIVE_DEFINITE_RIDGE_NORMAL_SOLVER_WITHOUT_REDUNDANT_PIVOT_SEARCH_OR_SINGULAR_REJECTION",
+    "ONE_PASS_UNION_FIND_OVER_STATIC_REWRITE_EDGES_INSTEAD_OF_REDUNDANT_FIXED_POINT_RESCANS",
+    "ONE_SHARED_GENERIC_LAW_GENERATOR_USED_BY_EQUATION_CONSTRUCTION_AND_PROOF_CHECK",
+    "ONE_EXACT_PIECEWISE_SCALAR_SEMANTICS_PATH_USED_DIRECTLY_FOR_SIGNATURES_INSTEAD_OF_PARALLEL_SP_ST_AND_P_T_MODELS"
+  ],
+  "proof_reasoning":{
+    "solver":"NORMAL_MATRIX_IS_X_TRANSPOSE_X_PLUS_1E_MINUS_12_I_AND_THEREFORE_POSITIVE_DEFINITE_FOR_FINITE_FEATURES",
+    "closure":"UNION_FIND_TRANSITIVE_CONNECTIVITY_REQUIRES_EACH_STATIC_REWRITE_EDGE_ONLY_ONCE",
+    "scalar":"SIGNATURE_IS_NOW_COMPUTED_FROM_THE_EXACT_PIECEWISE_TRANSDUCER_MODEL_ITSELF"
+  },
+  "regression":{
+    "closed_809_class_check":"PASS",
+    "prospective_expression_v3":"PASS_6_OF_6",
+    "prospective_sequence_v1":"PASS_8_OF_8"
+  },
+  "encoding":{
+    "tested_lzma1_configurations":2880,
+    "best_fixed_decoder_payload_bytes":2951,
+    "best_filter":{"dict_size":8192,"lc":0,"lp":0,"pb":0,"mode":"NORMAL","match_finder":"BT2","nice_len":64},
+    "payload_sha256":"de805c16cb3a098fa27a4b2c02f286f6ca4a4eb384711a1e5d5edb737874ebd0"
+  },
+  "comparison":{"v8_payload_bytes":3263,"v9_payload_bytes":2951,"bytes_saved":312,"reduction_fraction":0.09561737664725713},
+  "hard_nonclaims":["NO_GLOBAL_MINIMUM_DESCRIPTION_PROOF","PYTHON_AND_FIXED_DECODER_SUBSTRATE_STILL_EXTERNAL","NO_TERMINAL_CREDIT"]
+}
