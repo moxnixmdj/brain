@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_V10_COMPOSITION_DERIVED_19_CONJUNCT_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_EQUIVALENCE_PASS__CONDITIONAL_ON_EXISTING_VERIFIED_ABC_IMPLIES_COMPOSITION_SEMANTICS__ZERO_CREDIT",
+  "subject": {
+    "governance_path": "canonical/governance/V10_COMPOSITION_INDEPENDENT_CONJUNCT_NECESSITY_FALSIFICATION_20261007_V1.json",
+    "runtime_path": "canonical/runtime/terminal_frontier_factorizer_v6_candidate.py",
+    "test_path": "canonical/tests/test_terminal_frontier_factorizer_v6_candidate.py",
+    "branch": "obs/v10-composition-derived-19-conjunct-20261007-v1"
+  },
+  "independent_provider": "WOLFRAM_LANGUAGE",
+  "logic": {
+    "premise": "A_IMPLIES_M",
+    "A": "COMPLETE_ABC_SELECTED_CONTEXT_COVER",
+    "M": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+    "query": "(A=>M) => ((A AND M) <=> A)",
+    "result": true,
+    "negative_control": {
+      "query": "SAT(A AND NOT M)",
+      "result_exists": true,
+      "witness": {
+        "A": true,
+        "M": false
+      },
+      "interpretation": "THE_EQUIVALENCE_REQUIRES_THE_A_IMPLIES_M_SEMANTIC_THEOREM__IT_IS_NOT_A_TAUTOLOGY_WITHOUT_THE_BOUND_B9_DERIVATIVE_PREMISES"
+    }
+  },
+  "semantic_premise_authority": {
+    "path": "canonical/verification/B9_COMPOSITION_DERIVATIVE_WOLFRAM_VERIFICATION_20261007_V1.json",
+    "git_blob_sha": "2cba848dbd30c12da17451b947227a7ee10070f0",
+    "verified": "primitive_dominance_and_C_implies_B9"
+  },
+  "v9_binding_authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V9.json",
+    "git_blob_sha": "1ec7f2c86534d046e51ddda00001ed287039fc0a",
+    "required": [
+      "ABC_PER_SELECTED_CELL_PRIMITIVE_ADEQUACY_OR_DISTRIBUTIONAL_DOMINANCE",
+      "ABC_PER_SELECTED_CELL_LOCAL_TRANSFORM_CLOSURE",
+      "B9_DERIVATIVE_PER_SELECTED_CELL",
+      "GLOBAL_CLOSURE_COVERS_EVERY_ACTUAL_TARGET_CONTEXT"
+    ]
+  },
+  "verified": [
+    "GIVEN_THE_ALREADY_VERIFIED_B9_DERIVATIVE_IMPLICATION_AND_V9_ABC_BINDING__ADDING_COMPOSITION_TERMINAL_SUCCESS_AS_AN_EXTRA_INDEPENDENT_CONJUNCT_IS_LOGICALLY_REDUNDANT",
+    "COMPOSITION_TERMINAL_SUCCESS_REMAINS_MANDATORY_AS_A_DERIVED_ABC_ASSERTION"
+  ],
+  "not_verified": [
+    "NO_CLAIM_ABC_CURRENTLY_PASSES",
+    "NO_CLAIM_COMPOSITION_CURRENTLY_PASSES",
+    "NO_DIRECT15_CLOSURE",
+    "NO_D_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
