@@ -214,6 +214,8 @@ def resolve_dispatch(
             "CERTIFIED_ROUTE_TOP_LEVEL_FIELD_REJECTED:" + ",".join(unknown)
         )
 
+    if "context" not in args or args.get("context") is None:
+        raise CertifiedRouteBindingError("ACTUAL_CONTEXT_REQUIRED")
     actual_context = args.get("context")
     digest = context_digest(actual_context)
 
