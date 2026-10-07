@@ -1,0 +1,30 @@
+name: Verify Agency superportfolio unrecovered-failure truth repair
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json"
+      - "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V2.json"
+      - "canonical/governance/AGENCY_SUPERPORTFOLIO_UNRECOVERED_FAILURE_TRUTH_REPAIR_20261005_V1.json"
+      - "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
+      - "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json"
+      - "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json"
+      - "canonical/tests/test_agency_superportfolio_unrecovered_failure_truth_repair_v1.py"
+      - ".github/workflows/verify-agency-superportfolio-unrecovered-failure-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m json.tool canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V2.json > /dev/null
+      - run: python -m json.tool canonical/governance/AGENCY_SUPERPORTFOLIO_UNRECOVERED_FAILURE_TRUTH_REPAIR_20261005_V1.json > /dev/null
+      - run: python -m unittest canonical.tests.test_agency_superportfolio_unrecovered_failure_truth_repair_v1 -v
