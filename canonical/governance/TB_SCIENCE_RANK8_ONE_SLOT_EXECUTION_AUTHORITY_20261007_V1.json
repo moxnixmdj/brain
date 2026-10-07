@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK8_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1",
   "date": "2026-10-07",
-  "status": "ACTIVE_ONE_USE_AUTHORITY__PREEXPOSURE_INDEPENDENT_GATE_REQUIRED_IN_SAME_PUBLIC_RUN",
+  "status": "SUSPENDED_BEFORE_EXPOSURE__RANK7_REVEALED_UNSOUND_COVERAGE_PROMOTION",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "target_predicate": "TB_SCIENCE_GE_58_7",
@@ -101,12 +101,13 @@
     "any_final_non_success_including_infra_timeout_resource_failure_planner_failure_or_missing_verifier_result": "FINAL_ZERO"
   },
   "fresh_reality_authority": {
-    "authorized": true,
-    "units": 1,
-    "basis": "EXPLICIT_CURRENT_USER_INSTRUCTION",
+    "authorized": false,
+    "units": 0,
+    "basis": "SUSPENDED_AFTER_RANK7_FALSIFICATION",
     "zero_incremental_spend_hard_stop": true
   },
   "hard_rules": [
+    "DO_NOT_EXPOSE_RANK8_WHILE_THIS_AUTHORITY_IS_SUSPENDED",
     "PREEXPOSURE_GATE_MUST_VERIFY_EXACT_AUTHORITY_ACTION_INTENT_LEDGER_RANK7_RESULT_MANIFEST_REPAIRED_PLANNER_AND_REPAIR_VERIFICATION_BLOBS",
     "AUTHORIZED_SLOT_MUST_EQUAL_LEDGER_RANK8_AND_MUST_NOT_APPEAR_IN_CONSUMED_LIST",
     "NO_TASK_CONTENT_EXPOSURE_BEFORE_PREEXPOSURE_GATE_PASS",
@@ -118,13 +119,31 @@
     "EXECUTE_EXACTLY_ONE_SLOT_THEN_AUTO_REVOKE",
     "NO_PROMOTION_FROM_AUTHORITY_OR_PREFLIGHT_ALONE"
   ],
-  "execution_authority": true,
-  "fresh_reality_authority_granted": true,
+  "execution_authority": false,
+  "fresh_reality_authority_granted": false,
   "promotion_authority": false,
   "accounting": {
     "incremental_spend_usd": 0,
-    "fresh_target_reality_units_authorized": 1,
+    "fresh_target_reality_units_authorized": 0,
     "fresh_target_reality_units_consumed": 0,
     "terminal_credit_delta": 0
+  },
+  "suspension": {
+    "reason": "RANK7_CONTROLLER_PROMOTED_ALL_DECLARED_REQUIREMENTS_FROM_A_SINGLE_PLANNER_AUTHORED_VERIFY_COMMAND_EVEN_THOUGH_THE_FINAL_SUBMISSION_LACKED_DESIGN_REPORT_JSON_AND_CONTROLLER_PY_EXITED_ON_RESET",
+    "rank7_consumed_run_id": 37606898246,
+    "rank7_artifact_id": 11474839915,
+    "rank7_artifact_digest": "sha256:8866fd656285ede4081fecc99bd952680c59f63028a3ceb58c48013e3594fe5d",
+    "rank7_slot_receipt_sha256": "e40ff1f6ac0556bcbd2c4a19ac11cd63e8300e31ed039cd26b7dbacf55777e3f",
+    "rank7_reward": 0,
+    "rank7_status": "FINAL_ZERO",
+    "revealed_controller_defect": "PLANNER_DECLARED_COVERS_PLUS_PLANNER_AUTHORED_VERIFY_COMMAND_RETURN_CODE_WAS_SUFFICIENT_TO_PROMOTE_SEMANTIC_REQUIREMENTS",
+    "required_before_reactivation": [
+      "BRAIN_OWNED_OUTPUT_CONTRACT_AUDIT_MUST_BE_IMPLEMENTED",
+      "RANK7_FAILURE_REPLAY_MUST_FAIL_CLOSED_BEFORE_BENCHMARK_VERIFIER",
+      "INDEPENDENT_PUBLIC_ZERO_SPEND_REPLAY_MUST_PASS",
+      "RANK8_AUTHORITY_MUST_BE_REISSUED_WITH_THE_VERIFIED_CONTROLLER_BLOB"
+    ],
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_by_this_suspension": 0
   }
 }
