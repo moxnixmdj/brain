@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_TRAJECTORY_RESIDUAL_LEAF_TRANSPORT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_BEHAVIOR_ID_FULL_SCOPE_LEAF_TRANSPORT__THREE_ROOT3_FAMILY_INCIDENCES__ZERO_ACCEPTANCE_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Transport the independently verified whole-scope proof of TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001 to exact identical residual-leaf incidences in the current behavioral-contract registry, deleting duplicate proof work without inferring whole-target acceptance.",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "authorities": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "p1_scope_restoration_candidate": {
+      "path": "canonical/governance/P1_UNIVERSAL_SCOPE_RESTORATION_V9_CANDIDATE.json",
+      "git_blob_sha": "6ebaed1262bed76f003c2a337e3a80b3b099e9e0"
+    },
+    "p1_independent_verification": {
+      "path": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "2c6bb594d353e4c6a169821da5f84a91be212ca7",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS"
+    }
+  },
+  "theorem": {
+    "name": "EXACT_BEHAVIOR_ID_FULL_SCOPE_LEAF_TRANSPORT",
+    "rule": "If an independently verified proof establishes the whole scope of behavior_id B, and target family T contains the exact same B exactly once in the same content-addressed behavioral-contract registry, then that B leaf need not be reproved for T. This is proposition identity, not cross-family semantic inference.",
+    "gates": [
+      "SOURCE_PROOF_BINDS_EXACT_BEHAVIOR_ID",
+      "SOURCE_PROOF_IS_INDEPENDENTLY_VERIFIED_WHOLE_SCOPE",
+      "SAME_BEHAVIOR_ID_IN_SAME_REGISTRY_BLOB",
+      "TARGET_FAMILY_CONTAINS_EXACT_BEHAVIOR_ONCE",
+      "NO_WHOLE_PREDICATE_OR_FAMILY_CREDIT_FROM_LEAF_TRANSPORT"
+    ]
+  },
+  "applications": [
+    {
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "root3_targets": [
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR"
+      ],
+      "leaf_discharge": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    },
+    {
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "root3_targets": [
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR"
+      ],
+      "leaf_discharge": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    },
+    {
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "root3_targets": [
+        "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "leaf_discharge": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    }
+  ],
+  "reduction": {
+    "exact_target_leaf_incidences_discharged": 3,
+    "distinct_behavior_proofs_reused": 1,
+    "fresh_reality_units_consumed": 0,
+    "target_specific_lossless_scope_decomposition_still_required": true,
+    "root2_matched_performance_still_required_where_applicable": true
+  },
+  "hard_nonclaims": [
+    "NO_OPUS55_ATOMIC_PREDICATE_CREDIT",
+    "NO_WHOLE_FAMILY_ACCEPTANCE",
+    "NO_CLAIM_BEHAVIORAL_REGISTRY_MAPPING_ALONE_IS_A_LOSSLESS_OPUS55_TARGET_DECOMPOSITION",
+    "NO_ROOT2_PERFORMANCE_CREDIT",
+    "NO_NEW_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "runtime": "canonical/runtime/trajectory_residual_leaf_transport_v1.py",
+  "tests": "canonical/tests/test_trajectory_residual_leaf_transport_v1.py",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "atomic_predicate_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
