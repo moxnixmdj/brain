@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_V13_LIVEBENCH_ACTIVE15_TOPLAW_CELL_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_ORDER_LOGIC_PASS__EMPIRICAL_INPUTS_ALREADY_BOUND_BY_PRIOR_INDEPENDENT_SPRITE_REPLAY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/V13_LIVEBENCH_ACTIVE15_TOPLAW_CELL_CERTIFICATE_20261007_V1.json",
+    "governance_commit_sha": "ac2bfb11e06713d247d6a107f91286ef3fe8ca4d",
+    "branch": "abc/v13-livebench-toplaw-cell-20261007-v1"
+  },
+  "verified_logic": {
+    "statement": "FOR_ALL_REAL_SCORES_b_t__b_GREATER_EQUAL_t_IMPLIES_NOT_t_GREATER_b",
+    "wolfram_result": true,
+    "consequence": "POINTWISE_TOP_BRAIN_SCORE_EXCLUDES_ANY_POINTWISE_STRICTLY_BETTER_TARGET_SCORE__SO_UNDOMINATED_TARGET_LAW_SET_IS_EMPTY_WHEN_THE_BOUND_CELL_EVALUATOR_IS_COMPLETE"
+  },
+  "empirical_dependencies_reused": [
+    "canonical/verification/LIVEBENCH_IF_V9_SELECTED_CONTEXT_ABC_SPRITE_VERIFICATION_20261007_V1.json",
+    "canonical/verification/LIVEBENCH_POINTWISE_ENVELOPE_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+    "canonical/verification/LIVEBENCH_FROZEN_ACTIVE_LEGACY15_HASH_OPENING_INDEPENDENT_VERIFICATION_20261005_V1.json"
+  ],
+  "not_reverified_here": [
+    "EXACT_ROUTE_BLOB_IDENTITY",
+    "ACTIVE15_SCOPE_OPENING",
+    "POINTWISE_12489_OF_12489_OPTIMUM",
+    "VISIBLE_GRAMMAR_AND_PUNKT_EXHAUSTION"
+  ],
+  "hard_nonclaims": [
+    "NO_WHOLE_IF_FAMILY_CLOSURE",
+    "NO_GLOBAL_ABC_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
