@@ -1,0 +1,17 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_ONE_SHOT_ATTACK_PLANNER_PUBLIC_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"PASS__INDEPENDENT_PUBLIC_EXACT_BYTE_REPLAY__ZERO_CREDIT",
+  "planner_git_blob_sha":"3ebdcdac161d818f88d2a864f9cfce061190f846",
+  "tests_git_blob_sha":"94dd8ce92561cc15061c20891beab6df281a23da",
+  "verifier_repository":"moxnixmdj/verification-capsule-runner",
+  "verifier_pull_request":2409,
+  "verifier_head_sha":"b270b58ef2a69428e0b2de898bc6ab3ecff81cca",
+  "workflow_run_id":37632172302,
+  "workflow_job_id":112828967607,
+  "conclusion":"success",
+  "independent_verified":true,
+  "exact_byte_bound":true,
+  "acceptance_credit_delta":0,
+  "terminal_credit_delta":0
+}
