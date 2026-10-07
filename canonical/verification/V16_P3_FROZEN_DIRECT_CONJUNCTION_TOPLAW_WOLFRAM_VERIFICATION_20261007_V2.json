@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_V16_P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_WOLFRAM_VERIFICATION_V2",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_FINITE_ORDER_PASS__CURRENT_V16_SOURCE_BINDINGS_AUDITED__BOUNDED_SELECTED_CELL_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/V16_P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_20261007_V2.json",
+    "git_blob_sha": "1b3add6c488e7205981da391044fd7631e068aa8"
+  },
+  "exact_source_bindings": {
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json": "c1bc4543860be08f9014f69a212ba2222d8dba7c",
+    "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json": "6637b23cd90f3df20ec87f817ef38d1eb233ea79",
+    "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+    "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+    "canonical/governance/V14_SYNTHESIS_UNSUPPORTED_CLAIM_SELECTED_PROPERTY_CELL_20261007_V1.json": "eece175e4aae05e34cdc7f44a25c12af94853228"
+  },
+  "source_audit": {
+    "binding_behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "required_check_count": 7,
+    "exact_required_checks": [
+      "ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "ALL_REQUIRED_CLAIMS_OR_DECISION_REQUIREMENTS_COVERED",
+      "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS",
+      "MATERIAL_CONFLICT_AND_UNCERTAINTY_PRESERVED",
+      "NO_DECISION_RELEVANT_EVIDENCE_DROPPED_UNDER_COMPRESSION",
+      "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS",
+      "IRRELEVANT_EVIDENCE_EXCLUDED_WITHOUT_DELETING_REQUIRED_SUPPORT"
+    ],
+    "t1_wave_row": {
+      "case_id": "T1::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+      "binding_blob": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+      "direct_instrumentation_pass": true,
+      "load_bearing": true,
+      "parent_terminal_acceptance_pass": true,
+      "case_replaced": false,
+      "result_to_runtime_feedback": false,
+      "tuning_replay": false
+    },
+    "t3_wave_row": {
+      "case_id": "T3::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+      "binding_blob": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+      "direct_instrumentation_pass": true,
+      "load_bearing": true,
+      "parent_terminal_acceptance_pass": true,
+      "case_replaced": false,
+      "result_to_runtime_feedback": false,
+      "tuning_replay": false
+    }
+  },
+  "wolfram": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "result": {
+      "P3AllTargetsLEBrain": true,
+      "P3AnyStrictDominator": false,
+      "P3TargetCount": 128
+    },
+    "conclusion": "THE_ALL_PASS_SEVEN_CHECK_P3_VECTOR_IS_THE_COMPONENTWISE_TOP_ELEMENT_AND_HAS_ZERO_STRICT_BOOLEAN_DOMINATORS"
+  },
+  "verified_consequence": [
+    "THE_EXACT_FROZEN_T1_T3_P3_DIRECT_INSTRUMENTATION_CELL_ATTAINS_THE_COMPLETE_BOUND_BOOLEAN_TOP_VECTOR",
+    "NO_TARGET_VECTOR_IN_THE_BOUND_SEVEN_CHECK_SPACE_CAN_STRICTLY_DOMINATE_BRAIN",
+    "THE_EXACT_P3_CELL_IS_ADMISSIBLE_AS_A_SOUND_BOUNDED_D_B_CERTIFICATE_REGION",
+    "ZERO_FRESH_TARGET_INFORMATION_IS_REQUIRED_FOR_THIS_EXACT_CELL"
+  ],
+  "hard_nonclaims": [
+    "NO_SCOPE_EQUIVALENCE_BEYOND_THE_EXACT_FROZEN_T1_T3_SELECTED_CELLS",
+    "NO_SYNTHESIS_FAMILY_CLOSURE",
+    "NO_GLOBAL_ABC_OR_D_FINALITY_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
