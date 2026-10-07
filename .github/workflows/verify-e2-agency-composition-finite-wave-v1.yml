@@ -1,5 +1,14 @@
 name: verify-e2-agency-composition-finite-wave-v1
 on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'canonical/runtime/agency_scope_finite_wave_v1.py'
+      - 'canonical/runtime/composition_scope_finite_wave_v1.py'
+      - 'canonical/governance/AGENCY_SCOPE_FINITE_WAVE_PRECOMMIT_20261007_V1.json'
+      - 'canonical/governance/COMPOSITION_SCOPE_FINITE_WAVE_PRECOMMIT_20261007_V1.json'
+      - '.github/workflows/verify-e2-agency-composition-finite-wave-v1.yml'
   push:
     branches:
       - exec/e2-agency-composition-finite-wave-20261007-v1
