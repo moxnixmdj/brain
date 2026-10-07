@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK8_ONE_SLOT_AUTHORITY_V2",
+  "date": "2026-10-07",
+  "status": "ACTIVE_PRECHECK_REQUIRED__ONE_SLOT_ONLY__ZERO_SPEND",
+  "objective": "Obtain one frozen Terminal-Bench-Science rank8 scorer result using the verified current Brain route.",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/linked-cell-suppression::trial-0",
+    "schedule_rank": 8,
+    "task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0"
+  },
+  "source_bindings": {
+    "intent": {
+      "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK8_ONE_SHOT_20261007_V2.json",
+      "git_blob_sha": "380082ed75296638480104683472e9296f1e142b"
+    },
+    "reactivation_replay": {
+      "path": "canonical/verification/TB_SCIENCE_RANK8_REACTIVATION_PUBLIC_REPLAY_20261007_V1.json",
+      "git_blob_sha": "be73ef34aece4d1f9e5622a006568653ab2f5c5d"
+    },
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V3.json",
+      "git_blob_sha": "32a57737b09fd6b38758814a6e3f843afd13ca16"
+    },
+    "manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    }
+  },
+  "exact_route": {
+    "agent": {
+      "path": "canonical/runtime/harbor_science_agent_v1.py",
+      "git_blob_sha": "5bc8ebac26bb7c809d4698f535eff43b667b30df"
+    },
+    "planner": {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "c3e36eba57c450f325c8a9476ee048c841bbdbc8"
+    },
+    "raw_task_contract": {
+      "path": "canonical/runtime/lossless_raw_task_contract_v1.py",
+      "git_blob_sha": "d54d5a2f7efa76b653d288f4f53da4883644baa6"
+    },
+    "raw_task_localizer": {
+      "path": "canonical/runtime/raw_task_acceptance_residual_localizer_v1.py",
+      "git_blob_sha": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76"
+    }
+  },
+  "controls": {
+    "exact_slot_count": 1,
+    "attempts": 1,
+    "retries": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "task_start_requires_all_prechecks": true,
+    "precheck_failure_consumes_slot": false,
+    "after_task_start_result_is_irreversible": true,
+    "after_task_start_missing_or_zero_verifier_result_counts_as_final_zero": true
+  },
+  "current_truth": {
+    "slot_is_next_untouched": true,
+    "prior_consumed_slots": 7,
+    "prior_successes": 0,
+    "prior_final_failures": 7,
+    "task_started": false,
+    "result_present": false,
+    "acceptance_credit": false,
+    "terminal_credit": false
+  }
+}
