@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANSITIVE_CARRIER_CLOSURE_PUBLIC_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_14_FILE_CLOSURE__AGENT_AND_PLANNER_IMPORT_PASS__ZERO_BENCHMARK_EXPOSURE__ZERO_CREDIT",
+  "subject": {
+    "compiler": {"path":"canonical/runtime/python_transitive_runtime_closure_v1.py","git_blob_sha":"43d502c621c219632fa0f9a19632dfc0228e4847"},
+    "tests": {"path":"canonical/tests/test_python_transitive_runtime_closure_v1.py","git_blob_sha":"7f71c5ac0d0dfd64a9ca64861422546d9fec9bb7"},
+    "manifest": {"path":"canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261007_V1.json","git_blob_sha":"4b2a4fb3bd85b066e642a0253d4c325dbb431237"},
+    "governance": {"path":"canonical/governance/TB_SCIENCE_TRANSITIVE_CARRIER_CLOSURE_REPAIR_20261007_V1.json","git_blob_sha":"a2162c41f7b40bd41d4c53ca608557e9ebe2e8f2"}
+  },
+  "current_main_route_crosscheck": {
+    "all_14_manifested_runtime_blobs_still_exact_on_current_main": true,
+    "main_head_at_crosscheck": "bee12793f57ccb7c2931ca062a22c8d04158b99a"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2386,
+    "verification_branch_head": "aa62fc8e072ca90dcbd585aec550f2db3ac542ed",
+    "preservation_merge_commit": "493ef9a155933e78e316767390422b5a5deb43e3",
+    "workflow_name": "Verify Science transitive closure v1",
+    "workflow_run_id": 37617744100,
+    "workflow_job_id": 112780098743,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_candidate_and_governance_blobs": true,
+    "exact_science_runtime_closure_file_count": 14,
+    "rank8_top_level_overlay_file_count": 4,
+    "rank8_omitted_transitive_dependency_count": 10,
+    "rank8_observed_missing_module_is_in_exact_closure": true,
+    "complete_exact_carrier_closure_gate_pass": true,
+    "four_file_rank8_style_overlay_fails_closed": true,
+    "mutated_dependency_fails_closed": true,
+    "unresolved_dynamic_local_import_fails_closed": true,
+    "path_escape_fails_closed": true,
+    "harbor_science_agent_import_pass": true,
+    "harbor_science_planner_import_pass": true,
+    "direct_adversarial_test_function_count": 6,
+    "benchmark_task_exposure": 0,
+    "incremental_spend_usd": 0
+  },
+  "causal_effect": {
+    "rank8_failure_class_closed_as_preexposure_infrastructure_prerequisite": true,
+    "task_capability_negative_evidence_from_rank8": false,
+    "new_science_capability_primitive_justified": false,
+    "rank9_may_be_considered_only_under_fresh_one_use_authority_after_recomputing_exact_current_closure": true
+  },
+  "hard_nonclaims": [
+    "NO_RANK9_EXECUTION_AUTHORITY_FROM_THIS_RECEIPT",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_SCIENCE_CAPABILITY_PARITY_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
