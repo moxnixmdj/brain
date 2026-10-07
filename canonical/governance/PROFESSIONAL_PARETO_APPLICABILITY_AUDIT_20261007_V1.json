@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_PARETO_APPLICABILITY_AUDIT_V1",
+  "date": "2026-10-07",
+  "status": "CURRENT_PUBLIC_SURFACE_AND_SCOPE_AUDIT__GENERIC_PARETO_VALID_BUT_GLOBAL_GDPVAL_AND_PRIVATE_AA_BRIEFCASE_APPLICATION_NOT_CURRENTLY_BOUND__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "comparator": {
+      "path": "canonical/runtime/authenticated_complete_pareto_comparator_v1.py",
+      "git_blob_sha": "0121a7e1b18ed33945ac4bb48e523359da14f66c"
+    },
+    "aa_briefcase_lite_manifest": {
+      "path": "canonical/evidence/AA_BRIEFCASE_LITE_PRESENTATION_PAIRWISE_CONTRACT_MANIFEST_20261007_V1.json",
+      "git_blob_sha": "42920315a5ecb9a1c8fe96a1a441dfd4a2f3b4e8"
+    },
+    "gdpval_direct_scheduler": {
+      "path": "canonical/governance/GDPVAL_DIRECT_DOMINANCE_SCHEDULER_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "0f9138b1c57503d8dda6a2b826e1da92ca25024d"
+    },
+    "gdpval_target_cut": {
+      "path": "canonical/governance/GDPVAL_TARGET_RELATIVE_INFORMATION_CUT_20261007_V2.json",
+      "git_blob_sha": "fc132105663b17b23a38a5f30579657746960349"
+    }
+  },
+  "current_public_source_audit": {
+    "artificial_analysis_methodology_url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "stirrup_issue_url": "https://github.com/ArtificialAnalysis/Stirrup/issues/8",
+    "openai_gdpval_paper_url": "https://arxiv.org/abs/2510.04374",
+    "observed": [
+      "GDPVAL_AA_V2_1_USES_BLIND_PAIRWISE_RANKING_OF_TWO_TASK_SUBMISSIONS_BY_ONE_JUDGE_SAMPLED_FROM_A_THREE_JUDGE_PANEL",
+      "GDPVAL_AA_V2_1_FITS_PAIRWISE_RESULTS_WITH_CROWD_BT",
+      "CURRENT_PUBLIC_METHODOLOGY_DOES_NOT_DECLARE_A_FINITE_COMPLETE_GDPVAL_QUALITY_DIMENSION_VECTOR_WHOSE_COMPONENTWISE_ORDER_IS_PROVED_EQUIVALENT_TO_THE_PAIRWISE_JUDGE_RELATION",
+      "PUBLIC_STIRRUP_REPOSITORY_HAS_AN_OPEN_REQUEST_FOR_GDPVAL_EVALUATION_SCRIPTS_AS_AN_EXAMPLE_RATHER_THAN_A_CURRENT_PUBLIC_GDPVAL_JUDGE_IMPLEMENTATION",
+      "ORIGINAL_GDPVAL_GOLD_GRADING_IS_BLINDED_HUMAN_EXPERT_PAIRWISE_PREFERENCE__OBSERVED_ACCURACY_AND_AESTHETICS_DIFFERENCES_ARE_DESCRIPTIVE_NOT_A_DECLARED_COMPLETE_FACTOR_BASIS"
+    ],
+    "audit_boundary": "CURRENT_PUBLIC_SURFACE_ONLY__DOES_NOT_PROVE_NO_PRIVATE_OR_FUTURE_COMPLETE_FACTOR_BASIS_EXISTS"
+  },
+  "applicability_truth": {
+    "generic_pareto_math_sound_if_premises_hold": true,
+    "gdpval_global_complete_dimension_basis_currently_bound": false,
+    "aa_briefcase_lite_public_example_dimension_sets_bound": true,
+    "aa_briefcase_lite_official_private_scope_equivalence_bound": false,
+    "consequence": [
+      "DO_NOT_USE_GENERIC_PARETO_COMPARATOR_TO_CLOSE_GDPVAL_WITH_AN_INVENTED_OR_UNVERIFIED_DIMENSION_SET",
+      "DO_NOT_LIFT_AA_BRIEFCASE_LITE_PUBLIC_EXAMPLE_PRESENTATION_DIMENSIONS_TO_OFFICIAL_PRIVATE_AA_BRIEFCASE_SCOPE_WITHOUT_SCOPE_EQUIVALENCE_OR_SUPERSET_PROOF",
+      "USE_PARETO_ONLY_FOR_EXACT_SELECTED_SCOPES_WITH_CONTENT_ADDRESSED_INDEPENDENT_DIMENSION_COMPLETENESS_AND_TARGET_RELATION_BINDINGS",
+      "KEEP_GDPVAL_DIRECT_OWNER_PAIRWISE_DOMINANCE_AS_THE_CURRENT_TARGET_RELATIVE_ROUTE_UNLESS_A_STRONGER_SCOPE_COMPLETE_TARGET_RELATION_BRIDGE_IS_PROVED"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GDPVAL_PAIRWISE_PREFERENCE_IS_NONFACTORIZABLE_IN_PRINCIPLE",
+    "NO_CLAIM_A_COMPLETE_PROFESSIONAL_QUALITY_BASIS_CAN_NEVER_BE_PROVED",
+    "NO_CLAIM_AA_BRIEFCASE_LITE_IS_USELESS",
+    "NO_GDPVAL_OR_AA_BRIEFCASE_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
