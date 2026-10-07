@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-TERMINAL-ONE-SHOT-20261007-V1",
+  "purpose": "One-shot terminalization of the live Project Brain terminal objective using all already-owned Brain capability, all admissible canonical evidence, first-principles reasoning, and Tournament Failure as a falsification/minimum-repair theorem. This is not a planning-only mission.",
+  "goal": "Starting from the exact checked-out repository state, make the frozen terminal objective real if it is truthfully possible without new paid spend or unauthorized irreversible reality exposure. Read and obey the live mission lock, CURRENT_TERMINAL_AUTHORITY.json, FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json, the current acceptance evidence ledger, TERMINAL_CLOSURE_MANIFEST_V1.json, terminal_closure_reducer.py, terminal_root_decision_gate_v1.py, and every content-addressed source they reference. Use all existing Brain-owned mechanisms before inventing anything. Treat the current 13 independent acceptance obligations only as evidence surfaces, not sacred architecture. Run a falsification tournament over stronger shared closure routes, beginning with a scope-complete universal Brain-owned cover, then shared professional-quality/AA-GDPval closure, coding-scope closure, generic objective fixed-bar closure, and finance/unknown-domain semantic closure. Tournament Failure rule: an open acceptance item is NOT a capability deficit. Build or internalize a new persistent capability only if you produce a concrete policy-divergence witness: two states indistinguishable under permitted pre-action information for which all adequate action sets are disjoint, and prove no existing Brain/JIT discriminator can separate them before commitment. For every unresolved cell first attempt, in order: existing bound proof/evidence; robust common policy; objective optimum/ceiling/floor; stronger scope-complete dominance; minimum truthful policy-changing discriminator; only then direct acceptance. No unrelated bytes/minimum-description research, no generic solver/router/world-model work unless a concrete terminal witness proves it necessary, no benchmark tourism, no self-certified success, no cross-epoch score comparison, no fresh paid calls, and no irreversible benchmark exposure unless BOTH the live Brain execution authority and the external/public epoch authority already permit that exact attempt. Any repair must maximize shared terminal impact, be reusable across every affected residual, be independently tested, and be discarded if a smaller existing/JIT mechanism suffices. After every proof or repair immediately recompute the terminal closure. If a sound stronger universal cover is found, bind exact proof bytes plus an independent verifier receipt and use the real terminal root gate/reducer. If the frozen-family route closes first, use it instead. When acceptance closes, immediately freeze exact credited routes, verify ownership/effects/donor independence, run clean-room replay, freeze the proof bundle, and run the real terminal_closure_reducer.py. Success means and ONLY means the real reducer returns achieved=true on exact repository bytes. If terminal cannot truthfully be made real in this run, do not stop at a vague blocker: prove the smallest irreducible external-information/control obstruction, identify exactly which terminal predicates it prevents, and prove why every target-free/common-policy/owned-capability route available in this repository fails to remove it. Always write canonical/astra_runtime/artifacts/TERMINAL_ONE_SHOT_RESULT_20261007_V1.json containing base commit, all attempted high-leverage routes, counterexamples, repairs, exact changed files, final reducer verdict, terminal_real boolean, and either TERMINAL_REAL or IRREDUCIBLE_EXTERNAL_BLOCKER. Print TERMINAL_ONE_SHOT_COMPLETE only after that artifact is written.",
+  "steps": [
+    {
+      "id": "terminalize-live-brain-one-shot",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 96,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "TERMINAL_ONE_SHOT_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "fresh_mission_identity": true,
+    "manual_supplier": false,
+    "manual_package_name": false,
+    "manual_capability_id": false,
+    "required_target_effects_supplied_by_mission": false,
+    "semantic_goal_proposals_supplied_by_mission": false,
+    "capability_problem_proposal_supplied_by_mission": false,
+    "controller_actions_supplied_by_mission": false,
+    "originating_mission_must_remain_byte_identical": true,
+    "verified_acquisition_required_before_replan": true,
+    "implementation_independent_verifier_required": true,
+    "current_platform_capability_required": true,
+    "terminal_verifier_must_use_distinct_implementation": true,
+    "user_device_required": false,
+    "val_town_forbidden": true,
+    "unauthorized_irreversible_benchmark_exposure_forbidden": true,
+    "terminal_success_requires_real_reducer_achieved_true": true,
+    "open_acceptance_does_not_imply_capability_deficit": true,
+    "capability_build_requires_policy_divergence_witness": true
+  }
+}
