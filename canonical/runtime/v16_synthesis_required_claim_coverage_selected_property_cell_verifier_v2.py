@@ -5,7 +5,8 @@ from pathlib import Path
 R=Path(__file__).resolve().parents[2]
 CELL="canonical/governance/V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_SELECTED_PROPERTY_CELL_20261007_V2.json"
 EXP={
- "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json":"c1bc4543860be08f9014f69a212ba2222d8dba7c",
+ "canonical/governance/V12_TARGET_LAW_UNCERTAINTY_RESIDUAL_THEOREM_20261007_V1.json":"014d7d5102093251789673dff0a191203663a90d",
+ "canonical/governance/ABC_OBSERVABLE_TRACE_SCOPE_REBIND_20261007_V1.json":"c93145d33d0db802f301f987cf196be1bb479197",
  "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json":"f2ef80facb39264b1e12b81e451eb4499a3b987f",
  "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json":"dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
  "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json":"ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
@@ -45,7 +46,8 @@ def verify():
   elif blob(p)!=h: e.append("DRIFT:"+p)
 
  c=load(CELL)
- auth=load("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json")
+ targetlaw=load("canonical/governance/V12_TARGET_LAW_UNCERTAINTY_RESIDUAL_THEOREM_20261007_V1.json")
+ trace=load("canonical/governance/ABC_OBSERVABLE_TRACE_SCOPE_REBIND_20261007_V1.json")
  proof=load("canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json")
  scope=load("canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json")
  bind=load("canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json")
@@ -53,10 +55,10 @@ def verify():
  clean=load("canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json")
  own=load("canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json")
 
- if auth.get("truth_repair",{}).get("fixed_authorized_opus55_target_interface_scope_superset_closed") is not True:
-  e.append("AUTH_SCOPE")
- if auth.get("truth_repair",{}).get("terminal") is not False:
-  e.append("AUTH_TERMINAL")
+ if targetlaw.get("theorem",{}).get("context_law_certificate") is None:
+  e.append("TARGET_LAW_SEMANTICS")
+ if trace.get("theorem",{}).get("statement")!="EVERY_EXTERNALLY_USEFUL_OPUS55_CAPABILITY_IS_REPRESENTABLE_AS_A_PROPERTY_OF_THE_OBSERVABLE_TRACE_SUPERSET":
+  e.append("TRACE_SCOPE_SEMANTICS")
 
  pc=proof.get("proof_composition",{})
  if not (pc.get("brain_required_claim_coverage_lower_bound")==1 and pc.get("admissible_metric_upper_bound")==1 and pc.get("verified_source_to_target_relation")=="SUPERSET" and pc.get("relation_independent") is True):
