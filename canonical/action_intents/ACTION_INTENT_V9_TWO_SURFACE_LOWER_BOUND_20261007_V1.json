@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-07",
+  "status": "PROOF_ONLY__ZERO_CREDIT",
+  "canonical_base_commit": "eb04e1b08961e27bace7bc72a03c2f4e31e4f48e",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "question": "ARE_BOTH_V9_PRIMITIVE_SURFACES_LOGICALLY_NECESSARY_AND_INDEPENDENT_UNDER_THE_TERMINAL_OBJECTIVE",
+  "method": "OBJECTIVE_LEVEL_NECESSITY_AND_INDEPENDENCE_COUNTERMODELS",
+  "source_bindings": {
+    "v9": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V9.json",
+      "git_blob_sha": "1ec7f2c86534d046e51ddda00001ed287039fc0a"
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
