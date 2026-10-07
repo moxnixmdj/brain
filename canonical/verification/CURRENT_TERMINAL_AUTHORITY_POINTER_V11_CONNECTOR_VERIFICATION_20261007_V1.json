@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V11_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_BINDING_PASS__17_SOUND_REGIONS__TERMINAL_FALSE",
+  "subject": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "0ad355e68bdf5f32dd58fc9d6955b467d21214e8"
+  },
+  "verified": {
+    "db_v10_exact": true,
+    "db_v10_verification_exact": true,
+    "synthesis_independent_replay_exact": true,
+    "known_sound_D_B_certificate_record_count": 17,
+    "synthesis_typed_visible_support_common_policy_cell_cached": true,
+    "current_U_empty_proved": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
