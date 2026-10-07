@@ -68,7 +68,13 @@ def check(K,C):
  X=[()]
  for n in range(1,4):X+=list(product(range(-4,5),repeat=n))
  X += [(-4,-4,-4,-3),(-4,-3,-4,-2),(-4,-3,-2,-3)]
- sig={w:tuple(tuple(K.rp(tuple(w),list(x))) for x in X) for w in U}
+ sig={w:[] for w in U}
+ bylen=[[w for w in U if len(w)==n] for n in range(D+1)]
+ for x in X:
+  out={"":list(x)};sig[""].append(tuple(x))
+  for n in range(1,D+1):
+   for w in bylen[n]:out[w]=K.f(w[-1],out[w[:-1]]);sig[w].append(tuple(out[w]))
+ sig={w:tuple(v) for w,v in sig.items()}
  assert len(set(sig.values()))==N
  d={}
  for w in U:d.setdefault(f(ix[w]),set()).add(sig[w])
