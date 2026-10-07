@@ -1,6 +1,12 @@
 name: Verify symbolic creditable payload binding V4
 
 on:
+  pull_request:
+    paths:
+      - '.github/workflows/verify-symbolic-creditable-payload-binding-v4.yml'
+      - 'canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v4.py'
+      - 'canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v4.py'
+      - 'canonical/governance/SYMBOLIC_CREDITABLE_PAYLOAD_BINDING_REPAIR_20261007_V1.json'
   push:
     branches: [main]
     paths:
