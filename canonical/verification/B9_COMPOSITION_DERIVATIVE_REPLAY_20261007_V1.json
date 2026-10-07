@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_B9_COMPOSITION_DERIVATIVE_REPLAY_V1",
   "date": "2026-10-07",
-  "status": "EXACT_REBASED_BRANCH_REPLAY_PASS__4_OF_4__DIFF_CLEAN__ZERO_CREDIT",
-  "subject_head": "ae5abca33a09c721d01d8b91d98542240519f3f8",
+  "status": "EXACT_POST_AB_REBASED_REPLAY_PASS__4_OF_4__DIFF_CLEAN__ZERO_CREDIT",
+  "subject_head": "d74c76d9d8ace4886dcf863c0cf4a4d9cd58d1e1",
   "tests": [
     "canonical/tests/test_b9_composition_derivative_reduction_v1.py"
   ],
