@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROOF_ROUTE_DISJUNCTION_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_FAIL_CLOSED_PROOF_ROUTE_DISJUNCTION__NO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem": "THE_LEGACY_TERMINAL_CLOSURE_REDUCER_ACCEPTS_ONLY_THE_FROZEN_19_FAMILY_PROTOCOL_CONJUNCTION_EVEN_THOUGH_THE_CANONICAL_TERMINAL_EXECUTION_ROOT_DEFINES_A_STRONGER_SCOPE_COMPLETE_UNIVERSAL_COVER_ROUTE.",
+  "source_bindings": {
+    "terminal_execution_root": {
+      "path": "canonical/governance/TERMINAL_EXECUTION_ROOT_20261007_V1.json",
+      "git_blob_sha": "1dad167f92faaefc8026586c1078cdbe37c82575"
+    },
+    "observable_trace_scope": {
+      "path": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
+      "git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c"
+    },
+    "selected_cover_complement_gate": {
+      "path": "canonical/runtime/predicate_selected_cover_complement_gate_v1.py",
+      "git_blob_sha": "48408fad6ec30abc28e4136dcbb1696f015e7bd7"
+    },
+    "legacy_reducer": {
+      "path": "canonical/runtime/terminal_closure_reducer.py"
+    }
+  },
+  "theorem": {
+    "statement": "TERMINAL_ACCEPTANCE_MAY_BE_PROVED_BY_EITHER_THE_FROZEN_FAMILY_PROTOCOL_CONJUNCTION_OR_A_STRONGER_SCOPE_COMPLETE_UNIVERSAL_COVER_PROOF__PROVIDED_COMMON_OWNERSHIP_SAFETY_RESOURCE_DONOR_INDEPENDENCE_CLEAN_ROOM_AND_PROOF_FREEZE_PREDICATES_ALL_HOLD.",
+    "family_route": "EVERY_FROZEN_FAMILY_IS_TERMINALLY_CLOSED_AND_ALL_FROZEN_OPUS_ACCEPTANCE_PREDICATES_PASS.",
+    "universal_route": [
+      "THE_OBSERVABLE_TRACE_SCOPE_IS_SCOPE_COMPLETE_FOR_EVERY_EXTERNALLY_USEFUL_TARGET_BEHAVIOR.",
+      "EVERY_CREDITED_SYMBOLIC_ADMISSION_PREDICATE_IN_THE_EXACT_SELECTED_COVER_IS_INDEPENDENTLY_PROVED_TO_IMPLY_A_BRAIN_OWNED_ADEQUATE_ROUTE.",
+      "THE_RESIDUAL_COMPLEMENT_S_TRACE_AND_NOT_ANY_SOUND_ADMISSION_PREDICATE_IS_INDEPENDENTLY_PROVED_UNSAT_FOR_THE_EXACT_PREDICATE_SET.",
+      "THEREFORE_EVERY_EXTERNALLY_USEFUL_TARGET_BEHAVIOR_HAS_A_SOUND_BRAIN_OWNED_ADEQUATE_ROUTE__SO_U_IS_EMPTY_AND_SELECTED_CONTEXT_ABC_IS_CLOSED.",
+      "EXACT_CREDITED_ROUTES_ARE_BRAIN_OWNED__DONOR_INDEPENDENCE_IS_CLOSED__AND_AN_INDEPENDENT_CLEAN_ROOM_REPLAY_PASSES."
+    ],
+    "logical_relation": "THE_UNIVERSAL_ROUTE_IS_A_STRONGER_SCOPE_LEVEL_SUFFICIENCY_PROOF__IT_MAY_DISCHARGE_FAMILY_ACCEPTANCE_WITHOUT_REPLAYING_REDUNDANT_FAMILY_BENCHMARK_WITNESSES__BUT_IT CANNOT BYPASS COMMON SAFETY_OWNERSHIP_RESOURCE_DONOR_OR_PROOF_FREEZE_PREDICATES."
+  },
+  "reducer_contract": {
+    "universal_cover_proof_required_fields": [
+      "proof_kind",
+      "scope_id",
+      "independent_verified",
+      "exact_byte_bound",
+      "conclusion",
+      "observable_trace_scope_complete",
+      "all_useful_target_behaviors_in_scope",
+      "every_admission_sound",
+      "residual_complement_unsat",
+      "selected_cover_complete",
+      "u_empty",
+      "abc_closed",
+      "all_credited_routes_brain_owned",
+      "donor_independence_closed",
+      "clean_room_replay_pass",
+      "proof_artifact",
+      "verifier_receipt_artifact"
+    ],
+    "accepted_proof_kinds": [
+      "FULL_SCOPE_DB_COVER",
+      "TARGET_ESCAPE_NONOCCUPANCY",
+      "GENERATOR_CLOSURE_SCOPE_COMPLETE",
+      "SELECTED_COVER_COMPLEMENT_UNSAT"
+    ],
+    "fail_closed": "ANY_MISSING_FALSE_UNBOUND_OR_SELF_CERTIFIED_FIELD_REJECTS_THE_UNIVERSAL_ROUTE."
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_A_VALID_UNIVERSAL_COVER_PROOF_CURRENTLY_EXISTS.",
+    "NO_CLAIM_RESIDUAL_COMPLEMENT_IS_CURRENTLY_UNSAT.",
+    "NO_CLAIM_U_IS_EMPTY.",
+    "NO_TERMINAL_CREDIT_FROM_THIS_TRUTH_REPAIR."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
