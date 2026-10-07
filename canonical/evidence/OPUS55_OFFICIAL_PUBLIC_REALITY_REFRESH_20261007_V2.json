@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_OFFICIAL_PUBLIC_REALITY_REFRESH_V2",
+  "date": "2026-10-07",
+  "status": "FRESH_BENCHMARK_OWNER_TARGET_REALITY__GDPVAL_DYNAMIC_ELO_DRIFT_BOUND__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predecessor": {
+    "path": "canonical/evidence/OPUS55_OFFICIAL_PUBLIC_REALITY_REFRESH_20261007_V1.json",
+    "git_blob_sha": "4b308f6e8ebb4bab0b3d6049c9638f297de2f9ee"
+  },
+  "target": {
+    "model": "Claude Opus 5.5",
+    "release_date": "2026-09-22",
+    "vendor_source": "https://www.anthropic.com/claude-opus-5-5",
+    "benchmark_owner_source": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "benchmark_methodology_source": "https://artificialanalysis.ai/evaluations/gdpval-aa/methodology"
+  },
+  "gdpval_aa_v2_1_reality": {
+    "launch_vendor_reported_elo": 1846,
+    "current_benchmark_owner_observed_elo": 1866,
+    "observed_date": "2026-10-07",
+    "delta_from_launch_report": 20,
+    "interpretation": "GDPVAL_AA_IS_A_DYNAMIC_PAIRWISE_ELO_STYLE_LEADERBOARD__THE_CURRENT_BENCHMARK_OWNER_VALUE_SUPERSEDES_THE_LAUNCH_VALUE_FOR_CURRENT_TARGET_REALITY_WHILE_THE_LAUNCH_VALUE_REMAINS_HISTORICAL_EVIDENCE",
+    "task_count": 220,
+    "evaluation_shape": "BLIND_PAIRWISE_COMPARISONS_OF_TASK_SUBMISSIONS_WITH_LLM_JUDGES_AND_CROWD_BT_OR_EQUIVALENT_ELO_AGGREGATION",
+    "aggregate_score_is_not_per_context_acceptance_relation": true
+  },
+  "terminal_effect": {
+    "fresh_target_reality_acquired": true,
+    "target_score_drift_bound": true,
+    "complete_pairwise_target_relation_publicly_bound": false,
+    "per_context_target_acceptance_complete": false,
+    "proves_not_X": false,
+    "U_empty_proved": false,
+    "terminal": false,
+    "reason": "A_CURRENT_AGGREGATE_PAIRWISE_ELO_ANCHOR_DOES_NOT_IDENTIFY_THE_COMPLETE_CONTEXT_LOCAL_TARGET_PREFERENCE_RELATION_REQUIRED_TO_EXCLUDE_TARGET_OCCUPANCY_FROM_THE_SURVIVING_ESCAPE_REGION"
+  },
+  "scheduler_effect": [
+    "USE_1866_AS_THE_CURRENT_PUBLIC_GDPVAL_AA_V2_1_TARGET_REALITY_ANCHOR_UNLESS_A_NEWER_BENCHMARK_OWNER_VALUE_IS_BOUND.",
+    "DO_NOT_USE_THE_HISTORICAL_1846_LAUNCH_VALUE_AS_CURRENT_GDPVAL_TARGET_REALITY.",
+    "DO_NOT_INFER_PER_CONTEXT_OPUS_ACCEPTANCE_OR_TARGET_NONOCCUPANCY_FROM_AGGREGATE_ELO.",
+    "ACQUIRE_NO_MORE_GDPVAL_METADATA_UNLESS_IT_BINDS_THE_MINIMUM_PAIRWISE_OR_SCOPE_COMPLETE_ACCEPTANCE_FACT_NEEDED_TO_DECIDE_CURRENT_ESCAPE_OCCUPANCY."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_PUBLIC_LEADERBOARD_EXPOSES_THE_COMPLETE_PAIRWISE_OUTCOME_MATRIX.",
+    "NO_CLAIM_AGGREGATE_ELO_PROVES_BRAIN_NONINFERIORITY_ON_EVERY_TASK.",
+    "NO_CLAIM_GDPVAL_ALONE_EXHAUSTS_THE_TERMINAL_TARGET.",
+    "NO_U_EMPTY_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_public_target_reality_units_consumed": 1,
+    "terminal_credit_delta": 0
+  }
+}
