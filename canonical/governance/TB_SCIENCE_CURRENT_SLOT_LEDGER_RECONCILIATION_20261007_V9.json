@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V9",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH__TEN_CONSUMED_SLOTS__RANK10_FINAL_ZERO_PLANNER_TIMEOUT__RANK11_LOCKED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V8.json",
+    "git_blob_sha": "eb869db71db99a77912c0051ff12f162d616b1a1"
+  },
+  "rank10_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK10_RESULT_TRUTH_20261007_V1.json",
+    "status": "FINAL_ZERO__PLANNER_LOCAL_ROUTE_TIMEOUT__NO_VERIFIER_RESULT__NO_TASK_CAPABILITY_INFERENCE",
+    "workflow_run_id": 37630721044,
+    "artifact_id": 11486926689,
+    "artifact_digest": "sha256:13aa4516e57f83b9a9d989e4a6ee038b66c50dd90f6abef34695c81d12c4b052"
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "current_counts": {
+    "consumed_slots": 10,
+    "consumed_successes": 0,
+    "consumed_final_failures": 10,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 77,
+    "maximum_possible_successes_remaining": 200,
+    "minimum_required_success_rate_over_remaining_slots": 0.62,
+    "pass_still_mathematically_reachable": true,
+    "next_untouched_slot": {
+      "ledger_schedule_rank": 11,
+      "frozen_manifest_schedule_order": 10,
+      "slot_id": "terminal-bench-science/supraglacial-lake-classification::trial-0",
+      "task_digest": "sha256:4a57227f84340ff6e245c3f2efeb8dfb6fb44a89713223d8742433dd569f9e3a"
+    }
+  },
+  "rank10_causal_truth": {
+    "task_started": true,
+    "result_present": true,
+    "reward": 0.0,
+    "verifier_result_present": false,
+    "execution_authority_consumed": true,
+    "rerun_forbidden": true,
+    "task_capability_negative_evidence": false,
+    "failure_class": "PLANNER_LOCAL_ROUTE_TIMEOUT",
+    "failure_message": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out"
+  },
+  "rank11": {
+    "authority_active": false,
+    "action_intent_active": false,
+    "task_started": false,
+    "result_present": false,
+    "rule": "DO_NOT_AUTHORIZE_OR_EXPOSE_RANK11_UNTIL_THE_RANK10_TIMEOUT_CAUSAL_CLASS_IS_REPAIRED_AND_INDEPENDENTLY_VERIFIED__OR_A_STRONGER_NON_BENCHMARK_ROUTE_PREEMPTS_THIS_LANE"
+  },
+  "scheduler": [
+    "NEVER_REPLAY_RANK8_RANK9_OR_RANK10.",
+    "RANK10_TIMEOUT_IS_NOT_TASK_CAPABILITY_NEGATIVE_EVIDENCE.",
+    "DO_NOT_BURN_RANK11_ON_THE_UNCHANGED_PLANNER_LATENCY_CLASS.",
+    "KEEP_TB_SCIENCE_AS_A_SHADOW_ACCEPTANCE_ROUTE_WHILE_THE_SCOPE_COMPLETE_UNIVERSAL_COVER_RACE_REMAINS_HIGHER_LEVERAGE.",
+    "ANY_FUTURE_SCIENCE_SLOT_REQUIRES_A_NEW_CONTENT_ADDRESSED_CAUSAL_REPAIR_AND_INDEPENDENT_PREFLIGHT."
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_RANK11_EXECUTION_AUTHORITY",
+    "NO_TASK_CAPABILITY_FAILURE_INFERENCE_FROM_RANK10",
+    "NO_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_delta_from_v8": 1,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
