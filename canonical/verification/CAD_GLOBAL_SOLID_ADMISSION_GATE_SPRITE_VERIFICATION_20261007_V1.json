@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_GLOBAL_SOLID_ADMISSION_GATE_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__6_OF_6__ZERO_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/CAD_GLOBAL_SOLID_ADMISSION_GATE_20261007_V1.json",
+      "git_blob_sha": "a788ad96e0f557a991ffb29c2f76df85ae22cef1"
+    },
+    "runtime": {
+      "path": "canonical/runtime/cad_global_solid_admission_gate_v1.py",
+      "git_blob_sha": "394a14dcba3821cb0b211c23613374ec66681ad9"
+    },
+    "tests": {
+      "path": "canonical/tests/test_cad_global_solid_admission_gate_v1.py",
+      "git_blob_sha": "6e9777a850dd1e2548391ff251d46b4c9ad2c578"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "working_directory": "/tmp/cad_global_guard_v1",
+    "tests_passed": 6,
+    "tests_total": 6,
+    "recomputed_governance_blob": "a788ad96e0f557a991ffb29c2f76df85ae22cef1",
+    "recomputed_runtime_blob": "394a14dcba3821cb0b211c23613374ec66681ad9",
+    "recomputed_tests_blob": "6e9777a850dd1e2548391ff251d46b4c9ad2c578"
+  },
+  "verified": [
+    "COMPLETE_GLOBAL_CERTIFICATE_PASSES",
+    "LOCAL_ONLY_CERTIFICATE_FAILS_CLOSED",
+    "SPENT_EXTRA_HANDLE_TOPOLOGY_REGRESSION_FAILS_CLOSED",
+    "MISSING_LOAD_BEARING_VIEW_FAILS_CLOSED",
+    "MISSING_GLOBAL_GEOMETRY_CATEGORY_FAILS_CLOSED",
+    "UNPROVED_DERIVATIVE_GLOBAL_CLAIM_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CAD_CAPABILITY_CLOSURE",
+    "NO_SPENT_TASK_SOLUTION_CLAIM",
+    "NO_HIDDEN_VERIFIER_VALUES_USED_AS_FUTURE_CONSTRUCTION_INPUT",
+    "NO_U_OR_FAMILY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
