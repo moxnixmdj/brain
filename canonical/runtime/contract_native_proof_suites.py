@@ -237,7 +237,8 @@ def _synthesis_case(seed: int, difficulty: int) -> dict[str, Any]:
 def _score_synthesis(case: Mapping[str, Any], candidate: Mapping[str, Any]) -> dict[str, Any]:
     selected=candidate.get("selected_claims")
     uncertainty=candidate.get("uncertainty_claims")
-    if not isinstance(selected,list) or not isinstance(uncertainty,list):
+    provenance=candidate.get("claim_provenance")
+    if not isinstance(selected,list) or not isinstance(uncertainty,list) or not isinstance(provenance,Mapping):
         return {"pass":False,"reasons":["OUTPUT_SCHEMA_INVALID"]}
     selected=[str(x) for x in selected]
     uncertainty=[str(x) for x in uncertainty]
@@ -252,6 +253,29 @@ def _score_synthesis(case: Mapping[str, Any], candidate: Mapping[str, Any]) -> d
     if unknown: reasons.append("UNKNOWN_CLAIMS:"+",".join(unknown))
     if missing_uncertainty: reasons.append("UNCERTAINTY_DROPPED:"+",".join(missing_uncertainty))
     if extra_uncertainty: reasons.append("UNCERTAINTY_WITHOUT_CLAIM:"+",".join(extra_uncertainty))
+
+    source_by_claim={
+        str(row["claim_id"]):list(row["provenance"])
+        for row in case["task"]["evidence"]
+    }
+    provenance_keys={str(x) for x in provenance}
+    missing_provenance=sorted(set(selected)-provenance_keys)
+    extra_provenance=sorted(provenance_keys-set(selected))
+    wrong_provenance=[]
+    for cid in sorted(set(selected)&provenance_keys):
+        got=provenance.get(cid)
+        expected=source_by_claim.get(cid)
+        if (
+            not isinstance(got,list)
+            or not got
+            or any(not isinstance(x,str) or not x for x in got)
+            or got != expected
+        ):
+            wrong_provenance.append(cid)
+    if missing_provenance: reasons.append("PROVENANCE_MISSING:"+",".join(missing_provenance))
+    if extra_provenance: reasons.append("PROVENANCE_FOR_UNSELECTED_CLAIM:"+",".join(extra_provenance))
+    if wrong_provenance: reasons.append("PROVENANCE_MISMATCH:"+",".join(wrong_provenance))
+
     max_claims=case["task"]["format_constraints"]["max_claims"]
     if len(selected)>max_claims: reasons.append("FORMAT_MAX_CLAIMS_EXCEEDED")
     if case["task"]["format_constraints"]["ordered_required_first"]:
@@ -378,7 +402,15 @@ def oracle_candidate(case: Mapping[str, Any]) -> dict[str, Any]:
         req=list(case["_oracle"]["required"])
         opts=list(case["_oracle"]["allowed_optional"])
         selected=req+opts
-        return {"selected_claims":selected,"uncertainty_claims":[x for x in case["_oracle"]["uncertainty"] if x in selected]}
+        provenance_by_claim={
+            str(row["claim_id"]):list(row["provenance"])
+            for row in case["task"]["evidence"]
+        }
+        return {
+            "selected_claims":selected,
+            "uncertainty_claims":[x for x in case["_oracle"]["uncertainty"] if x in selected],
+            "claim_provenance":{cid:list(provenance_by_claim[cid]) for cid in selected},
+        }
     if contract=="PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001":
         gold,_,_=_plan_gold(case)
         return {"selected_edits":list(gold)}
