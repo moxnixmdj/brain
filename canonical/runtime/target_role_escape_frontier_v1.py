@@ -1,5 +1,6 @@
 from __future__ import annotations
 import json
+import subprocess
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -9,17 +10,21 @@ OWN=ROOT/"canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.
 EXPECTED_BASIS_BLOB="62c0e207ce935a02611700a69e0917f938792b11"
 EXPECTED_OWN_BLOB="cf736088c1ff460283f9b62d873b8e0710374e79"
 
-
-def _blob(path:Path)->str:
-    import hashlib
-    b=path.read_bytes()
-    return hashlib.sha1(b"blob "+str(len(b)).encode()+b"\0"+b).hexdigest()
-
+def _git_blob(path:Path)->str:
+    try:
+        rel=path.relative_to(ROOT).as_posix()
+    except ValueError:
+        return ""
+    cp=subprocess.run(
+        ["git","-C",str(ROOT),"rev-parse",f"HEAD:{rel}"],
+        text=True,capture_output=True,check=False,
+    )
+    return cp.stdout.strip() if cp.returncode==0 else ""
 
 def project()->dict:
     errors=[]
-    if _blob(BASIS)!=EXPECTED_BASIS_BLOB: errors.append("FUNCTIONAL_BASIS_DRIFT")
-    if _blob(OWN)!=EXPECTED_OWN_BLOB: errors.append("OWNERSHIP_MATRIX_DRIFT")
+    if _git_blob(BASIS)!=EXPECTED_BASIS_BLOB: errors.append("FUNCTIONAL_BASIS_DRIFT")
+    if _git_blob(OWN)!=EXPECTED_OWN_BLOB: errors.append("OWNERSHIP_MATRIX_DRIFT")
     basis=json.loads(BASIS.read_text(encoding="utf-8"))
     own=json.loads(OWN.read_text(encoding="utf-8"))
     accepted=set(own["postwave_acceptance_summary"]["calibrated_families"])
@@ -60,7 +65,6 @@ def project()->dict:
         "boundary":"ROLE_PARTITION_ONLY__WITHIN_ROLE_TARGET_LAW_AND_UTILITY_DISTINCTIONS_REMAIN_LOAD_BEARING",
         "terminal_credit_delta":0,
     }
-
 
 if __name__=="__main__":
     print(json.dumps(project(),indent=2,sort_keys=True))
