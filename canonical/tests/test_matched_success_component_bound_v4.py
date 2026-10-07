@@ -54,6 +54,8 @@ def edge(cid, left, right, i):
     eid = left["component_id"] + "->" + right["component_id"]
     shape = h(f"{cid}:{i}:shape")
 
+    template = h(f"{cid}:{i}:case-template")
+
     def run(role, sem, terminal, bridge, composite):
         row = {
             "edge_id": eid,
@@ -61,7 +63,12 @@ def edge(cid, left, right, i):
             "transported_semantic_sha256": sem,
             "transported_shape_sha256": shape,
             "downstream_terminal_semantic_sha256": terminal,
-            "downstream_case_payload_sha256": right["case_payload_sha256"],
+            "downstream_case_payload_sha256": (
+                h(f"{cid}:{i}:ablated-case")
+                if role == "ablated"
+                else right["case_payload_sha256"]
+            ),
+            "downstream_case_template_sha256": template,
             "downstream_scorer_path": right["scorer_path"],
             "downstream_scorer_git_blob_sha": right["scorer_git_blob_sha"],
             "base_scorer_pass": True,
@@ -109,26 +116,36 @@ def base():
             edge(cid, comps[i], comps[i + 1], i)
             for i in range(len(comps) - 1)
         ]
-        v3 = {
-            "class_id": cid,
-            "true_upstream_semantic_sha256": sems[0],
-            "true_terminal_semantic_sha256": sems[-1],
-            "true_run_semantics_sha256": h(cid + ":v3:true"),
-            "ablated_run_semantics_sha256": h(cid + ":v3:ablated"),
-            "rescue_run_semantics_sha256": h(cid + ":v3:rescue"),
-        }
-        v3["receipt"] = receipt(cid + "_v3", v3)
-
         class_digest = digest({
-            "components": [c["semantic_projection_sha256"] for c in comps],
-            "edges": [e["edge_id"] for e in edges],
-            "v3": v3 | {"receipt": v3["receipt"]},
-        })
-        # Runtime hashes v3_binding without the receipt.
-        class_digest = digest({
-            "components": [c["semantic_projection_sha256"] for c in comps],
-            "edges": [e["edge_id"] for e in edges],
-            "v3": {k: v for k, v in v3.items() if k != "receipt"},
+            "components": [
+                {
+                    "component_id": c["component_id"],
+                    "kind": c["kind"],
+                    "semantic_projection_sha256":
+                        c["semantic_projection_sha256"],
+                    "scorer_result_sha256":
+                        c["scorer_result_sha256"],
+                }
+                for c in comps
+            ],
+            "edges": [
+                {
+                    "edge_id": e["edge_id"],
+                    "true_transport": e["true_run"][
+                        "transported_semantic_sha256"
+                    ],
+                    "ablated_transport": e["ablated_run"][
+                        "transported_semantic_sha256"
+                    ],
+                    "true_terminal": e["true_run"][
+                        "downstream_terminal_semantic_sha256"
+                    ],
+                    "ablated_terminal": e["ablated_run"][
+                        "downstream_terminal_semantic_sha256"
+                    ],
+                }
+                for e in edges
+            ],
         })
 
         bridges = []
@@ -151,7 +168,6 @@ def base():
             "class_id": cid,
             "components": comps,
             "edges": edges,
-            "v3_binding": v3,
             "atom_bridges": bridges,
         })
     return {"schema": INPUT_SCHEMA, "classes": classes}
@@ -173,6 +189,8 @@ def test_valid_component_bound_bundle_passes_candidate_compiler():
     )
     assert out["atom_count"] == 10
     assert out["kills_v3_scalar_transducer_countermodel"] is True
+    assert out["synthetic_v3_binding_required"] is False
+    assert out["actual_component_chain_is_semantic_authority"] is True
     assert out["scope_credit_authorized"] is False
 
 
@@ -215,16 +233,6 @@ def test_same_semantic_ablation_fails_closed():
     assert "ABLATION_NOT_DISTINCT" in out["errors"][0]
 
 
-def test_v3_must_bind_actual_first_component_projection():
-    x = base()
-    row = cls(x, "AGENCY_THREE_TOOL_LONG_HORIZON")
-    row["v3_binding"]["true_upstream_semantic_sha256"] = h("unrelated")
-    rebind(row["v3_binding"], "agency_v3_rebound")
-    out = compile_v4(x)
-    assert out["status"] == "FAIL_CLOSED"
-    assert "V3_UPSTREAM_NOT_FIRST_COMPONENT" in out["errors"][0]
-
-
 def test_missing_atom_specific_bridge_fails_closed():
     x = base()
     cls(x, "INSTRUCTION_CHANGE_CONTROL")["atom_bridges"].pop()
@@ -249,3 +257,27 @@ def test_base_component_scorer_must_actually_pass():
     out = compile_v4(x)
     assert out["status"] == "FAIL_CLOSED"
     assert "BASE_SCORER_NOT_PASS" in out["errors"][0]
+
+
+def test_ablated_case_must_be_distinct_from_true_case():
+    x = base()
+    e = cls(x, "BROWSER_MEMORY_RECOVERY")["edges"][0]
+    e["ablated_run"]["downstream_case_payload_sha256"] = (
+        e["true_run"]["downstream_case_payload_sha256"]
+    )
+    rebind(e["ablated_run"], "browser_same_case_ablated_rebound")
+    out = compile_v4(x)
+    assert out["status"] == "FAIL_CLOSED"
+    assert "ABLATION_CASE_NOT_DISTINCT" in out["errors"][0]
+
+
+def test_true_ablated_rescue_must_share_case_template():
+    x = base()
+    e = cls(x, "RESEARCH_TOOL_ARTIFACT")["edges"][0]
+    e["ablated_run"]["downstream_case_template_sha256"] = h(
+        "different-template"
+    )
+    rebind(e["ablated_run"], "research_template_rebound")
+    out = compile_v4(x)
+    assert out["status"] == "FAIL_CLOSED"
+    assert "CASE_TEMPLATE_MISMATCH" in out["errors"][0]
