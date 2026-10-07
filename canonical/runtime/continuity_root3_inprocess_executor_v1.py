@@ -14,6 +14,20 @@ from canonical.runtime import root3_production_astra_launcher_v1 as root3_launch
 
 SCHEMA = "PROJECT_BRAIN_CONTINUITY_ROOT3_INPROCESS_EXECUTOR_V1"
 EXPECTED_REQUESTED_RUNTIME = "canonical/runtime/astra_runtime.py"
+CONTINUITY_BASE_RELS = (
+    "canonical/same_identity_worker/tasks",
+    "canonical/same_identity_worker/state",
+    "canonical/same_identity_worker/evidence",
+    "canonical/same_identity_worker/external_tool_bridge",
+)
+
+def _assert_continuity_bases_unredirected(root: pathlib.Path) -> None:
+    root=pathlib.Path(root).resolve()
+    for rel in CONTINUITY_BASE_RELS:
+        resolved=supervisor._repo_path(root, rel)
+        expected=root/pathlib.PurePosixPath(rel)
+        if resolved != expected:
+            raise ContinuityRoot3Error("CONTINUITY_BASE_REDIRECTED:"+rel)
 
 class ContinuityRoot3Error(RuntimeError):
     pass
@@ -47,11 +61,14 @@ def execute(
     if not env.get("PROJECT_BRAIN_AGENT_ID") or not env.get("PROJECT_BRAIN_TASK_ID"):
         raise ContinuityRoot3Error("CONTINUITY_IDENTITY_ENV_MISSING")
 
+    root=pathlib.Path(cwd).resolve()
+    _assert_continuity_bases_unredirected(root)
     stdout = io.StringIO()
     stderr = io.StringIO()
-    with _bound_process_context(pathlib.Path(cwd), env):
+    with _bound_process_context(root, env):
         with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
             code = int(root3_launcher.main([mission]) or 0)
+    _assert_continuity_bases_unredirected(root)
     return supervisor.RuntimeResult(code, stdout.getvalue(), stderr.getvalue())
 
 def run_once(
