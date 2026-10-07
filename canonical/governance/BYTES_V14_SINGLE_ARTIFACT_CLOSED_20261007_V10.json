@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V14_SINGLE_ARTIFACT_CLOSED_V10",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_BLOB_REPLAY_PASS__2751_BYTE_FRONTIER__ZERO_TERMINAL_CREDIT",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "artifact": {
+    "path": "canonical/runtime/bytes_v14_single_artifact_closed_v10.py",
+    "git_blob_sha": "124bee2bd7ff1d63c40cb8e4ca763e8b6e7de7da",
+    "raw_sha256": "d3b52efccdbe052afe97818efc4b359fb605186196eb8bd83dc25451803448bf",
+    "raw_bytes": 6632
+  },
+  "changes": [
+    "REMOVE_REDUNDANT_NUMERIC_CANDIDATE_KIND_FLAG_AND_INFER_BASE_ARITY_FROM_TREE",
+    "EVALUATE_NUMERIC_FEATURES_ONCE_THEN_SLICE_TRAIN_VALIDATION",
+    "REMOVE_REDUNDANT_STORED_REPR_CANDIDATE_KEY_AND_FUSE_CANDIDATE_SCORING_LOOPS",
+    "SHARE_EXACT_PIECEWISE_SEGMENT_LOOKUP_BETWEEN_CENTRAL_AND_TAIL_SIGNATURES",
+    "USE_DETERMINISTIC_SCALAR_ALPHABET_ORDER_INSTEAD_OF_SET_ITERATION",
+    "FOLD_LAW_COUNT_AND_COMPONENT_SIGNATURE_CONSISTENCY_CHECKS",
+    "REPLACE_PRIMITIVE_SUBSTRING_WHITELIST_WITH_EXACT_SHA256_SOURCE_BINDING",
+    "GENERATE_DEPTH_BOUNDED_CONGRUENCE_CONTEXTS_DIRECTLY_INSTEAD_OF_SCANNING_EVERY_PROGRAM"
+  ],
+  "soundness": {
+    "closed_809_class_check": "PASS",
+    "repaired_structural_edges_expected": 170,
+    "repaired_structural_edges_present": 170,
+    "missing_structural_edges": 0,
+    "extra_structural_edges": 0,
+    "note": "SCALAR_EQUIVALENCE_STAR_EDGES_USE_A_DETERMINISTIC_REPRESENTATIVE_ORDER_AND_NEED_NOT_MATCH_THE_OLDER_UNORDERED_SET_REPRESENTATIVES_BYTE_FOR_BYTE"
+  },
+  "regression": {
+    "expression": "PASS_6_OF_6",
+    "scalar": "PASS_9_OF_9",
+    "sequence": "PASS_12_OF_12",
+    "total": "PASS_27_OF_27",
+    "parity_with_merged_v9": "EXACT_RETURN_OBJECT_EQUALITY_ON_FROZEN_CAMPAIGNS"
+  },
+  "encoding": {
+    "tested_lzma1_configurations": 2880,
+    "best_fixed_decoder_payload_bytes": 2751,
+    "best_filter": {
+      "dict_size": 8192,
+      "lc": 0,
+      "lp": 0,
+      "pb": 0,
+      "mode": "NORMAL",
+      "match_finder": "BT3",
+      "nice_len": 32
+    },
+    "payload_sha256": "b75b3f4f4546b8914edeb00512ebcbe8ca32a0bfd5b56c0e2a57dd3c93fdc370",
+    "roundtrip_exact": true
+  },
+  "comparison": {
+    "v9_raw_bytes": 7615,
+    "v10_raw_bytes": 6632,
+    "raw_bytes_saved": 983,
+    "v9_payload_bytes": 2951,
+    "v10_payload_bytes": 2751,
+    "payload_bytes_saved": 200,
+    "payload_reduction_fraction": 0.06777363605557438
+  },
+  "substrate_delta": {
+    "added_generic_python_dependency": "hashlib.sha256",
+    "removed_source_fragment_whitelist": true,
+    "interpretation": "EXACT_SOURCE_IDENTITY_BINDING_IS_SMALLER_BUT_HASHLIB_REMAINS_EXTERNAL_PYTHON_SUBSTRATE"
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_MINIMUM_DESCRIPTION_PROOF",
+    "PYTHON_HASHLIB_AND_FIXED_DECODER_SUBSTRATE_STILL_EXTERNAL",
+    "NO_GENERAL_PROGRAM_EQUIVALENCE_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
