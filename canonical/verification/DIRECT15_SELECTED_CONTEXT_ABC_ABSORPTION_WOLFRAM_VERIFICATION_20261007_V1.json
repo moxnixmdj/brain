@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_DIRECT15_SELECTED_CONTEXT_ABC_ABSORPTION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_SUBDOMAIN_IMPLICATION_PASS__ONE_GLOBAL_ACCEPTANCE_SEMANTIC__ZERO_CREDIT",
+  "subject": {
+    "governance": "canonical/governance/DIRECT15_SELECTED_CONTEXT_ABC_ABSORPTION_20261007_V1.json",
+    "factorizer": "canonical/runtime/terminal_frontier_factorizer_v8_candidate.py",
+    "tests": "canonical/tests/test_terminal_one_abc_acceptance_normal_form_candidate_v1.py",
+    "branch": "truth-repair/direct15-into-selected-context-abc-20261007-v1",
+    "current_candidate_commit": "14d1ea18b7d9ea6a69fff702198079e4def3134c"
+  },
+  "source_bindings": {
+    "fixed_bar_falsification": "e9cd80eca9b5e22d79dc1df9840924e12e01c366",
+    "v9": "1ec7f2c86534d046e51ddda00001ed287039fc0a",
+    "registry": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "synthesis_metric_reduction": "e4f0b3222ab5bb356576ae37c90971509fa0f11c",
+    "factorizer_v6": "325113ade6a21cd271c9a279f1cdad4a4f7697f7"
+  },
+  "wolfram_results": {
+    "complete_cover_implies_included_subdomain_conditions": true,
+    "counterexample_with_complete_cover_bound_subdomain_and_missing_condition_exists": false,
+    "stronger_scope_certificate_preserves_scope_noninferiority": true,
+    "local_direct_route_count": 15
+  },
+  "verified": [
+    "THE THIRTEEN PUBLIC FIXED_SCORE IDENTITIES ARE NOT REQUIRED TERMINAL AXIOMS WHEN A SOUND SCOPE_EQUIVALENT OR STRONGER CERTIFICATE PROVES THE SAME UNDERLYING TARGET SCOPE.",
+    "A COMPLETE ABC COVER WITH THE EXACT BENCHMARK/AUDIT CONTEXTS AND LOAD_BEARING SEMANTICS ENTAILS EACH INCLUDED DIRECT15 UNDERLYING SCOPE OBLIGATION.",
+    "FINANCE_UNCOVERED_SCOPE AND SYNTHESIS QUALITY/COVERAGE ARE ORDINARY TARGET CONTEXT/EVALUATOR SUBDOMAINS AND DO NOT REQUIRE A SECOND TOP_LEVEL CONJUNCTION ON TOP OF COMPLETE ABC.",
+    "THE FIFTEEN ROWS REMAIN AVAILABLE AS LOCAL EVIDENCE ROUTES AND FAIL_CLOSED CELL BURDENS; NO SCOPE IS DELETED.",
+    "THE CANDIDATE ACCEPTANCE NORMAL FORM HAS ONE GLOBAL SEMANTIC: COMPLETE SELECTED_CONTEXT ABC."
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM ABC IS CLOSED.",
+    "NO CLAIM ANY DIRECT15 UNDERLYING SCOPE IS CURRENTLY PROVED.",
+    "NO CLAIM ALL PUBLIC SCORE RESULTS CAN BE IGNORED IN PRACTICE.",
+    "NO TERMINAL FAMILY CAPABILITY ACCEPTANCE OR OWNERSHIP CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
