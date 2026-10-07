@@ -41,9 +41,9 @@
   "execution_capsule": {
     "repository": "moxnixmdj/verification-capsule-runner",
     "branch": "execute/tb-science-tranche2-current-route-20261007",
-    "unarmed_branch_head": "0de7b00b79443444ffc171baa14cb43ed50f8238",
+    "unarmed_branch_head": "2dfa4480e41fa156cbeaa42e8966dc38c86f7502",
     "workflow_path": ".github/workflows/execute-tb-science-canary-v4.yml",
-    "workflow_git_blob_sha": "f836ffebefe1453f305e4a917f4de0f1e20ab64b",
+    "workflow_git_blob_sha": "df46014b58e9ede1c97b6603eceee2dd9b9103b9",
     "arm_path": "capsules/tb_science_execution_v2/ARM_CANARY_V4.json",
     "trigger": "PUSH_TO_EXACT_EXECUTION_BRANCH_TOUCHING_ONLY_ARM_PATH",
     "current_arm_present": false
