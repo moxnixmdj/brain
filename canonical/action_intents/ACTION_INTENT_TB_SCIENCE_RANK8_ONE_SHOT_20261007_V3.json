@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK8_ACTION_INTENT_V3",
+  "date": "2026-10-07",
+  "status": "READY_AFTER_PUBLIC_REPLAY_AND_LIVE_EPOCH_BINDING",
+  "slot": {
+    "id": "terminal-bench-science/linked-cell-suppression::trial-0",
+    "digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0",
+    "rank": 8
+  },
+  "exact_route": {
+    "agent": "5bc8ebac26bb7c809d4698f535eff43b667b30df",
+    "planner": "c3e36eba57c450f325c8a9476ee048c841bbdbc8",
+    "raw_task_contract": "d54d5a2f7efa76b653d288f4f53da4883644baa6",
+    "raw_task_localizer": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76"
+  },
+  "current_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V5.json",
+    "git_blob_sha": "651a800d1e9f43f15be3447546b2807e1365b42d"
+  },
+  "public_replay": {
+    "path": "canonical/verification/TB_SCIENCE_RANK8_REACTIVATION_PUBLIC_REPLAY_20261007_V1.json",
+    "git_blob_sha": "be73ef34aece4d1f9e5622a006568653ab2f5c5d"
+  },
+  "public_epoch": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "path": "capsules/tb_science_rank8_20261007_v1/RANK8_EPOCH_V3.json",
+    "git_blob_sha": "f95f513b0ad57b8b3398fcabba44beae6fd805f4",
+    "epoch_id": "TBSCI-RANK8-20261007-E3"
+  },
+  "controls": {
+    "attempts": 1,
+    "retries": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "current_public_epoch_must_match_immediately_before_task_start": true,
+    "precheck_failure_consumes_slot": false,
+    "after_task_start_result_is_final": true
+  },
+  "credit": false
+}
