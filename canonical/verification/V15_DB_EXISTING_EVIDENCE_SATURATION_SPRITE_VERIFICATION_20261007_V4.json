@@ -1,0 +1,34 @@
+{
+  "schema":"PROJECT_BRAIN_V15_DB_EXISTING_EVIDENCE_SATURATION_SPRITE_VERIFICATION_V4",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__ELEVEN_UNIQUE_CERTIFIED_CELLS__OVERLAP_GUARD_PRESERVED__ZERO_CREDIT",
+  "subject":{
+    "path":"canonical/governance/V15_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V4.json",
+    "git_blob_sha":"6bf647d7b8cb0517d241fd97ab67bc51042248a5"
+  },
+  "carrier":{
+    "provider":"SPRITES",
+    "sprite_name":"brain-h100-independent-replay-v1",
+    "sprite_id":"sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "workspace":"/home/sprite/terminal_now_db_v4"
+  },
+  "verified":{
+    "exact_git_blob_match":true,
+    "unique_named_certificate_cell_count":11,
+    "predecessor_named_certificate_cell_count":10,
+    "new_cell_present":"PROFESSIONAL_ARTIFACT_T1_FROZEN_30_ZERO_UNSUPPORTED_MATERIAL_CONTENT",
+    "regions_may_overlap":true,
+    "union_expansion_from_eleventh_cell_claimed":false,
+    "coverage_measure_claimed":false,
+    "abc_closed":false,
+    "d_finality_closed":false,
+    "terminal":false,
+    "terminal_credit_delta":0
+  },
+  "external_algebra_check":{
+    "provider":"WOLFRAM_LANGUAGE",
+    "unique_count_check":true,
+    "new_identifier_not_in_old_set":true
+  },
+  "accounting":{"incremental_spend_usd":0,"fresh_reality_units_consumed":0,"terminal_credit_delta":0}
+}
