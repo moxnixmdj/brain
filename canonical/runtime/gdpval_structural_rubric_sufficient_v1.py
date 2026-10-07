@@ -223,13 +223,13 @@ def compile_criterion(criterion: str) -> dict[str, Any]:
                 {"kind": "PDF_PAGE_COUNT_EQ", "value": n},
             ], "EXACT_UNIQUE_PDF_PAGE_COUNT")
 
-    m = re.fullmatch(r"The zip archive contains a top-level file named ([A-Za-z0-9_.+-]+)\.?", t, re.I)
+    m = re.fullmatch(r"The zip archive contains a top-level file named ([A-Za-z0-9_+-]+(?:\.[A-Za-z0-9_+-]+)+)\.?", t, re.I)
     if m:
         return _compiled(criterion, [
             {"kind": "UNIQUE_ZIP_TOP_LEVEL_FILE_EXISTS", "basename": m.group(1)},
         ], "EXACT_ZIP_TOP_LEVEL_FILE")
 
-    m = re.fullmatch(r"Deliverable includes a Terraform file named ([A-Za-z0-9_.+-]+)\.?", t, re.I)
+    m = re.fullmatch(r"Deliverable includes a Terraform file named ([A-Za-z0-9_+-]+\.tf)\.?", t, re.I)
     if m:
         return _compiled(criterion, [
             {"kind": "OUTPUT_FILE_BASENAME_EXISTS", "basename": m.group(1)},
