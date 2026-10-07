@@ -113,7 +113,7 @@ jobs:
           doc = {
               "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_GITHUB_REPLAY_V1",
               "date": dt.datetime.now(dt.timezone.utc).date().isoformat(),
-              "status": "PASS__EXACT_MAIN_GITHUB_RUNNER_REPLAY__DEPLOYED_EXECUTION_SEAM_OBSERVED__ZERO_TERMINAL_CREDIT",
+              "status": "PASS__EXACT_MAIN_GITHUB_RUNNER_ROUTER_CORE_REPLAY__DEPLOYED_EXECUTION_SEAM_NOT_OBSERVED__ZERO_TERMINAL_CREDIT",
               "github": {
                   "run_id": os.environ["RUN_ID"],
                   "run_attempt": os.environ["RUN_ATTEMPT"],
@@ -131,7 +131,7 @@ jobs:
                   "uncovered_context_fail_closed": True,
               },
               "truth_effect": {
-                  "deployed_runtime_execution_observed": True,
+                  "deployed_runtime_execution_observed": False,
                   "per_cell_admission_semantics_closed": False,
                   "per_cell_adequacy_closed": False,
                   "selected_cover_complete": False,
