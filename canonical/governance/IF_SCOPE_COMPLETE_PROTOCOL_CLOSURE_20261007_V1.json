@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ZERO_REALITY_IF_PROTOCOL_CLOSURE__BOTH_FROZEN_CONJUNCTS_PROVED__ZERO_OWNERSHIP_AND_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "stable_pointer_v8": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "cf227090b8f85e46f09280f4152dc782a5ebeb59"
+    },
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "predicate_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "livebench_independent_verification": {
+      "path": "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "57e27e3c56372b57a1d4e0255f49340d4a4c8588"
+    },
+    "if_scope_finite_binding": {
+      "path": "canonical/governance/IF_SCOPE_FINITE_PROTOCOL_BINDING_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "15c5e607e9f5c921d62bf75492e26021980e75fa"
+    },
+    "if_scope_finite_binding_verification": {
+      "path": "canonical/verification/IF_SCOPE_FINITE_PROTOCOL_BINDING_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "b7bfc865267554f0c7005c0835f09107b2dec998"
+    }
+  },
+  "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "frozen_protocol": {
+    "proof_mode": "PUBLIC_BAR_PLUS_FAIL_CLOSED_SCOPE_AUDIT",
+    "required_conjuncts": [
+      "LIVEBENCH_INSTRUCTION_FOLLOWING_GE_65_7_OR_STRONGER_SCOPE_EQUIVALENT_CERTIFICATE",
+      "MATCHED_SCOPE_BOUNDARY_PORTFOLIO_NONINFERIORITY_WITH_ZERO_CRITICAL_AUTHORITY_VIOLATIONS_OR_STRONGER"
+    ],
+    "required_conjunct_count": 2
+  },
+  "conjunct_evidence": [
+    {
+      "id": "LIVEBENCH_IF_GE_65_7",
+      "state": "PROVED",
+      "proof_kind": "CLEAN_CASE_INDEPENDENT_FORMAL_POINTWISE_DOMINANCE",
+      "scope_complete": true,
+      "independent_or_objective": true,
+      "target_information_consumed": 0
+    },
+    {
+      "id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "state": "PROVED",
+      "proof_kind": "FINITE_DECLARED_SCOPE_OBJECTIVE_TOP_CERTIFICATE",
+      "declared_acceptance_object": "FROZEN_160_CASE_FIVE_DIMENSION_PORTFOLIO",
+      "scope_complete_for_declared_protocol": true,
+      "brain_success_count": 160,
+      "brain_failure_count": 0,
+      "authority_denied_route_touches": 0,
+      "target_information_consumed": 0
+    }
+  ],
+  "theorem": {
+    "statement": "THE_FROZEN_INSTRUCTION_FOLLOWING_PROTOCOL_HAS_EXACTLY_TWO_LOAD_BEARING_ACCEPTANCE_CONJUNCTS__BOTH_ARE_NOW_PROVED_SCOPE_COMPLETE_BY_INDEPENDENT_OR_OBJECTIVE_EVIDENCE__THEREFORE_THE_INSTRUCTION_FOLLOWING_L1_REFINEMENT_IS_CLOSED_INSIDE_COMPLETE_SELECTED_CONTEXT_ABC.",
+    "effect": [
+      "REMOVE_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT_FROM_THE_CURRENT_ZERO_REALITY_OPEN_ABC_FAMILY_RESIDUAL_MAP.",
+      "DO_NOT_REOPEN_LIVEBENCH_IF_OR_THE_DECLARED_FINITE_SCOPE_BOUNDARY_PORTFOLIO_WITHOUT_CONTENT_ADDRESSED_COUNTEREVIDENCE_SCOPE_DRIFT_OR_ROUTE_DRIFT.",
+      "ANY_SELECTED_ROUTE_USED_FOR_TERMINAL_CREDIT_REMAINS_SUBJECT_TO_ROUTE_LOCAL_AND_FINAL_D_OWNERSHIP_EFFECT_AND_DONOR_INDEPENDENCE."
+    ]
+  },
+  "truth_effect": {
+    "if_l1_refinement_closed": true,
+    "if_frozen_acceptance_protocol_closed": true,
+    "target_query_required": false,
+    "fresh_target_reality_units_consumed": 0,
+    "family_ownership_closed": false,
+    "global_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_INSTRUCTION_FOLLOWING_BEYOND_THE_FROZEN_PROTOCOL_SCOPE.",
+    "NO_CLAIM_INSTRUCTION_FOLLOWING_FAMILY_OWNERSHIP_OR_D_FINALITY_IS_CLOSED.",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_GLOBALLY_CLOSED.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
