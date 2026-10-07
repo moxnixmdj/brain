@@ -651,8 +651,8 @@
     },
     "frozen_19_acceptance_proof_shape_quotient": {
       "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
-      "git_blob_sha": "4d2b042153dbe367ab29f5f054f4b7353dfd663f",
-      "note": "14_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__AGENCY_TWO_ATOMS_CLOSED_BY_INDEPENDENTLY_VERIFIED_ABSOLUTE_TOP_LAW"
+      "git_blob_sha": "1334dd95c42d52907cf22b082cdf25ade765b3a6",
+      "note": "13_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__CURRENT_AA_BRIEFCASE_MATCHED_EPOCH_TARGET_BOUND_AT_1807__HISTORICAL_1822_PREDICATE_IDS_PRESERVED"
     },
     "load_bearing_acceptance_truth_basis_reconciliation": {
       "path": "canonical/governance/FROZEN_19_LOAD_BEARING_ACCEPTANCE_TRUTH_BASIS_RECONCILIATION_20261007_V1.json",
@@ -696,6 +696,11 @@
       "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
       "git_blob_sha": "f19488744db2a2b0d69d8b099f912e5d2b5bae84",
       "note": "CURRENT_13_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS_AFTER_AGENCY_DENSE_NONCHART_AND_FINANCE_DIRECT_SCOPE_DEPENDENCY_COLLAPSES"
+    },
+    "aa_briefcase_opus55_current_owner_target": {
+      "path": "canonical/evidence/AA_BRIEFCASE_OPUS55_CURRENT_OWNER_TARGET_20261007_V1.json",
+      "git_blob_sha": "5433034b59cbc0ee9494accc9f5bf59a348b027d",
+      "note": "CURRENT_OWNER_AA_BRIEFCASE_V1_1_OPUS55_MAX_REFERENCE_1807__MATCHED_EPOCH_ONLY__ZERO_BRAIN_CREDIT"
     }
   },
   "live_truth": {
@@ -774,7 +779,7 @@
     "if_scope_population_inference_required": false,
     "private_exact_opus_capacity_state": "UNKNOWN__GITHUB_ACTIONS_PRE_STEP_INFRASTRUCTURE_BLOCK",
     "current_scheduler_residuals": {
-      "professional_deliverable_quality": "AA_BRIEFCASE_V1_1_GE_1822_OR_STRONGER__OUTSIDE_CACHED_P2_EXPLICIT_SEMANTIC_CONTRACT_REGION__FIRST_ATTEMPT_AUTHENTICATED_P2_STRONG_VISIBLE_QUALITY_SUBREGION_ADMISSION__SHARED_WITH_PROFESSIONAL_KNOWLEDGE_WORK",
+      "professional_deliverable_quality": "AA_BRIEFCASE_V1_1_CURRENT_MATCHED_EPOCH_GE_1807_OR_HISTORICAL_EXACT_EPOCH_GE_1822_OR_STRONGER__OUTSIDE_CACHED_P2_EXPLICIT_SEMANTIC_CONTRACT_REGION__FIRST_ATTEMPT_AUTHENTICATED_P2_STRONG_VISIBLE_QUALITY_SUBREGION_ADMISSION__SHARED_WITH_PROFESSIONAL_KNOWLEDGE_WORK",
       "synthesis": "RAW_OR_UNBOUND_SYNTHESIS_SEMANTIC_ADMISSION_ON_SHARED_ABC_FRONTIER__NO_DISTINCT_MATCHED_QUALITY_METRIC_WAKE",
       "unknown_domain": "INTRINSIC_OPUS55_UNKNOWN_MECHANISM_NONINFERIORITY_OR_STRONGER"
     },
@@ -1061,9 +1066,12 @@
     "agency_frozen_acceptance_protocol_closed": true,
     "agency_opus_case_execution_required": false,
     "dense_nonchart_independent_scheduler_variable": false,
-    "dense_nonchart_shared_dependency": "AA_BRIEFCASE_V1_1_GE_1822_OR_STRONGER_SHARED_PROFESSIONAL_QUALITY_RESIDUAL",
+    "dense_nonchart_shared_dependency": "AA_BRIEFCASE_V1_1_CURRENT_MATCHED_EPOCH_GE_1807_OR_HISTORICAL_EXACT_EPOCH_GE_1822_OR_STRONGER_SHARED_PROFESSIONAL_QUALITY_RESIDUAL",
     "finance_uncovered_scope_independent_scheduler_variable": false,
-    "finance_uncovered_scope_shared_dependency": "SHARED_POLICY_RELEVANT_SEMANTIC_COMPLETENESS_OR_DIRECT_END_TO_END_ADEQUACY"
+    "finance_uncovered_scope_shared_dependency": "SHARED_POLICY_RELEVANT_SEMANTIC_COMPLETENESS_OR_DIRECT_END_TO_END_ADEQUACY",
+    "aa_briefcase_current_owner_reference_elo": 1807,
+    "aa_briefcase_historical_frozen_reference_elo": 1822,
+    "aa_briefcase_current_epoch_reference_bound": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
