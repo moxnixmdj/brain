@@ -1,13 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_CONTINUITY_SELECTED_DEPLOYMENT_ROUTE_V1",
   "date": "2026-10-07",
-  "status": "CANDIDATE_CONTENT_ADDRESSED_FIXED_SELECTED_ROUTE__ZERO_CREDIT",
+  "status": "CANDIDATE_CONTENT_ADDRESSED_SYMLINK_HARDENED_FIXED_SELECTED_ROUTE__ZERO_CREDIT",
   "route_id": "CONTINUITY_ROOT3_SELECTED_ROUTE_V1",
   "entry": {
     "path": "canonical/runtime/continuity_root3_fixed_entry_v1.py",
-    "git_blob_sha": "76f32060b085c61e5a7820e87cbaa31152951e83",
+    "git_blob_sha": "72cae0e1a2ff115289673a4f4952fd23c83d7277",
     "selected_entry": "run",
-    "invocation_mode": "FIXED_CANONICAL_ROOT_TASKS_STATE_AND_EVIDENCE_DIRECTORIES__OPTIONAL_REPO_CONFINED_TASK_PATH_ONLY"
+    "invocation_mode": "FIXED_REPO_CONFINED_CANONICAL_ROOT_TASKS_STATE_EVIDENCE_AND_BRIDGE_BASES__OPTIONAL_REPO_CONFINED_TASK_PATH_ONLY"
   },
   "credited_algorithm": {
     "path": "canonical/runtime/same_identity_supervisor_credited_v1.py",
@@ -33,7 +33,8 @@
   "route_rules": [
     "DEPLOYMENT_ENTRY_EXPOSES_ONLY_OPTIONAL_TASK_SELECTION",
     "ROOT_IS_FIXED_TO_CANONICAL_REPOSITORY",
-    "TASKS_STATE_AND_EVIDENCE_DIRECTORIES_ARE_FIXED_TO_CANONICAL_SUBTREES",
+    "TASKS_STATE_EVIDENCE_AND_BRIDGE_BASES_ARE_RESOLVED_THROUGH_SUPERVISOR_REPO_CONFINEMENT_BEFORE_ANY_CONTINUITY_MUTATION",
+    "PREEXISTING_BASE_SYMLINK_RESOLVING_OUTSIDE_REPOSITORY_FAILS_CLOSED",
     "OPTIONAL_TASK_MUST_RESOLVE_INSIDE_CANONICAL_REPOSITORY_AND_PASS_SUPERVISOR_TASK_SCHEMA_HASH_AND_AGENT_BINDING",
     "TASK_ID_IS_SAFE_COMPONENT_WITH_NO_PATH_SEPARATOR",
     "MISSION_IS_HASH_BOUND_BEFORE_CLAIM_AND_BEFORE_EXECUTION",
@@ -65,12 +66,12 @@
     "private_sprite": "brain-h100-independent-replay-v1",
     "fixed_entry_verification": "canonical/verification/CONTINUITY_ROOT3_FIXED_ENTRY_SPRITE_VERIFICATION_20261007_V1.json",
     "fixed_entry_verifier": "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py",
-    "fixed_entry_verifier_git_blob_sha": "0c7bbce54cb5688638ba92bfb6b5b4ff43c83b52",
+    "fixed_entry_verifier_git_blob_sha": "295ed31c0283b35b14876e6b1c170e8392146df8",
     "reachability_checker": "canonical/runtime/continuity_root3_selected_route_reachability_v1.py",
-    "reachability_checker_git_blob_sha": "5f3934e77827154c18936fa5c63eec773c26e481",
+    "reachability_checker_git_blob_sha": "f79440a578b627d3bde7d6eddf7e25ef44bd931c",
     "filesystem_checker": "canonical/runtime/continuity_filesystem_confinement_v1.py",
-    "filesystem_checker_git_blob_sha": "55ff380d44a4c29bcb122fe901b86a82cb7c2e2c",
-    "execution_exit_status": "PASS_EXIT_0_FIXED_ENTRY_REACHABILITY_AND_FILESYSTEM_CHECKERS"
+    "filesystem_checker_git_blob_sha": "7bab94f6d3acc5f3976cd3194f2a1d215f22d85e",
+    "execution_exit_status": "PASS_PENDING_REPLAY_ON_SYMLINK_HARDENED_BYTES"
   },
   "adapter": {
     "path": "canonical/runtime/continuity_root3_inprocess_executor_v1.py",
