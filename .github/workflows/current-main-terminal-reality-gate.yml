@@ -8,6 +8,8 @@ on:
       - 'canonical/runtime/terminal_reality_gate_v1.py'
       - 'canonical/tests/test_terminal_reality_gate_v1.py'
       - 'canonical/governance/CURRENT_TERMINAL_AUTHORITY.json'
+      - 'canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json'
+      - 'canonical/runtime/terminal_closure_reducer.py'
   workflow_dispatch:
 
 permissions:
