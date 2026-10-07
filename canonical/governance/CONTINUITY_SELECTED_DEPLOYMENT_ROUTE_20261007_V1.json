@@ -17,7 +17,12 @@
     "path": "canonical/runtime/root3_production_astra_launcher_v1.py",
     "git_blob_sha": "3ac42e7be5a391cfda738131ecb0d3d600fa2147",
     "current_astra_runtime_git_blob_sha": "3567cfd77eae06e2d384c5e0b18972b2d3a62c3b",
-    "current_byte_replay_status": "CURRENT_ASTRA_AND_LAUNCHER_BLOBS_EXACTLY_MATCH_PRIVATE_REPLAY_INPUTS__FRESH_BRANCH_RECEIPT_BOUND_SEPARATELY"
+    "current_byte_replay_status": "CURRENT_ASTRA_AND_LAUNCHER_BLOBS_EXACTLY_MATCH_PRIVATE_REPLAY_INPUTS__FRESH_BRANCH_RECEIPT_BOUND_SEPARATELY",
+    "current_byte_replay": {
+      "path": "canonical/verification/ROOT3_PRODUCTION_BOOTSTRAP_CURRENT_ASTRA_REPLAY_20261007_V2.json",
+      "git_blob_sha": "7092db6c3c4430b8f16e4cfe8d86f657e3a472ff",
+      "status": "PASS_4_OF_4_PLUS_REAL_COMPOSED_IMPORT__RUN_AND_POPEN_GUARDS_ACTIVE__TWO_CLASSES_BOUND__FIVE_DEFAULT_DENY"
+    }
   },
   "fixed_continuity_subtrees": {
     "tasks": "canonical/same_identity_worker/tasks",
