@@ -33,6 +33,7 @@ from canonical.runtime.proof_carrying_semantic_refinement_v6 import resolve_from
 from canonical.runtime.typed_acceptance_program_v1 import verify as verify_typed_acceptance_program
 from canonical.runtime.instruction_constraint_compiler_v1 import compile_constraints, validate_response
 from canonical.runtime.structured_method_expression_ast_candidate_v2 import compile_graph as compile_structured_method
+from canonical.runtime.source_aligned_acceptance_program_v1 import compile_program as compile_source_acceptance_program
 
 SCHEMA = "PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V1"
 
@@ -225,6 +226,48 @@ def _verify_structured_method(payload: Mapping[str, Any], proposal: Mapping[str,
     }
 
 
+
+
+def _verify_source_aligned_acceptance_program(payload: Mapping[str, Any], proposal: Mapping[str, Any]) -> dict[str, Any]:
+    source_text = payload.get("source_text")
+    source_id = payload.get("source_id")
+    field_schema = payload.get("field_schema")
+    candidate_values = proposal.get("candidate_values") if isinstance(proposal, Mapping) else None
+    if not isinstance(source_text, str) or not isinstance(source_id, str) or not isinstance(field_schema, Mapping):
+        return {"pass": False, "status": "FAIL_CLOSED", "reason": "SOURCE_ALIGNED_ACCEPTANCE_PAYLOAD_INVALID"}
+    if not isinstance(candidate_values, Mapping):
+        return {"pass": False, "status": "REJECTED", "reason": "CANDIDATE_VALUES_REQUIRED"}
+    compiled = compile_source_acceptance_program(
+        source_text,
+        source_id=source_id,
+        field_schema=field_schema,
+    )
+    if compiled.get("status") != "COMPILED":
+        return {
+            "pass": False,
+            "status": "NEED_MORE_INFORMATION" if compiled.get("status") == "UNRESOLVED" else "FAIL_CLOSED",
+            "reason": str(compiled.get("status") or "SOURCE_ACCEPTANCE_COMPILATION_FAILED"),
+            "proof_digest": _digest(compiled),
+            "detail": compiled,
+        }
+    out = verify_typed_acceptance_program(
+        compiled["acceptance_program"],
+        trusted_values={},
+        candidate_values=candidate_values,
+    )
+    ok = out.get("pass") is True
+    return {
+        "pass": ok,
+        "status": "VERIFIED" if ok else (
+            "FALSIFIED" if str(out.get("status") or "").startswith("FALSIFIED") else "FAIL_CLOSED"
+        ),
+        "reason": None if ok else str(out.get("status") or "SOURCE_ALIGNED_ACCEPTANCE_REJECTED"),
+        "proof_digest": _digest({"compiled": compiled, "verdict": out}),
+        "verified_output": dict(candidate_values) if ok else None,
+        "detail": {"compiled": compiled, "verdict": out},
+    }
+
+
 Verifier = Callable[[Mapping[str, Any], Mapping[str, Any]], dict[str, Any]]
 
 BUILTIN_VERIFIERS: dict[str, Verifier] = {
@@ -236,6 +279,7 @@ BUILTIN_VERIFIERS: dict[str, Verifier] = {
     "TYPED_ACCEPTANCE_PROGRAM_V1": _verify_typed_acceptance_program,
     "INSTRUCTION_CONSTRAINTS_V1": _verify_instruction_constraints,
     "STRUCTURED_METHOD_EXPRESSION_AST_V2": _verify_structured_method,
+    "SOURCE_ALIGNED_ACCEPTANCE_PROGRAM_V1": _verify_source_aligned_acceptance_program,
 }
 
 PROPOSAL_FREE_VERIFIERS = {
