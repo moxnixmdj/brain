@@ -714,18 +714,20 @@
       },
       "runtime": {
         "path": "canonical/runtime/tournament_failure_capability_compiler_v1.py",
-        "git_blob_sha": "dd0e0920ee45bb6d10eb77d9f13866b3f379a11c"
+        "git_blob_sha": "999f075b9d888d35f6e10564aeaf45e0791c4a52"
       },
       "tests": {
         "path": "canonical/tests/test_tournament_failure_capability_compiler_v1.py",
-        "git_blob_sha": "ebfa71dbbc6d504e0e71a4733f92b7e279287185"
+        "git_blob_sha": "9833fbb633d04613c98f26193f84a340c9a83da0"
       },
-      "clean_replay": "6_OF_6_PASS",
-      "note": "ACTIVE_FAIL_CLOSED_MINIMUM_REPAIR_SHAPE_COMPILER__COMMON_POLICY_FIRST__THEN_PRECOMMITMENT_JIT_DISCRIMINATOR__THEN_ONLY_PROVED_MINIMUM_PERSISTENT_SEPARATOR__ZERO_TERMINAL_CREDIT_FROM_COMPILER_ALONE"
+      "clean_replay": "8_OF_8_PASS",
+      "soundness_repair": {"path":"canonical/governance/TOURNAMENT_FAILURE_COMPILER_SOUNDNESS_REPAIR_20261007_V1.json","git_blob_sha":"b5be3f82ece88fa6d909553e3798519e4afbe7c7"},
+      "verification": {"path":"canonical/verification/TOURNAMENT_FAILURE_CAPABILITY_COMPILER_LOCAL_VERIFICATION_20261007_V1.json","git_blob_sha":"88dee6478b940bf777de6e1fd4eea36c8ea1cf4e"},
+      "note": "ACTIVE_HARDENED_FAIL_CLOSED_MINIMUM_REPAIR_SHAPE_COMPILER__EXACT_BYTES_AND_CELL_SEMANTICS_BOUND__COMMON_POLICY_FIRST__THEN_PRECOMMITMENT_JIT_DISCRIMINATOR__THEN_ONLY_PROVED_MINIMUM_PERSISTENT_SEPARATOR__ZERO_TERMINAL_CREDIT_FROM_COMPILER_ALONE"
     },
     "tournament_failure_current_open_obligation_reconciliation": {
-      "path": "canonical/governance/TOURNAMENT_FAILURE_CURRENT_13_OBLIGATION_RECONCILIATION_20261007_V1.json",
-      "git_blob_sha": "9f1f9d4525fe43f7eab8df75143fe6d14b3de356",
+      "path": "canonical/governance/TOURNAMENT_FAILURE_CURRENT_13_OBLIGATION_RECONCILIATION_20261007_V2.json",
+      "git_blob_sha": "d841f3feb5dc6594974af955ef71f0e7c2659325",
       "note": "13_CURRENT_INDEPENDENT_OPEN_ACCEPTANCE_OBLIGATIONS_REMAIN_FAIL_CLOSED__ZERO_CAPABILITY_DEFICIT_ADMITTED_FROM_LABEL_ALONE__CAPABILITY_BUILD_REQUIRES_BOUND_POLICY_DIVERGENCE_COUNTEREXAMPLE"
     },
     "tb_science_current_slot_ledger_reconciliation": {
