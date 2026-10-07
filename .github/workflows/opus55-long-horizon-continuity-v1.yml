@@ -6,6 +6,12 @@ on:
     paths:
       - 'canonical/action_intents/2026-09-30_PROMOTE_OPUS55_LONG_HORIZON_CONTINUITY_V1.json'
       - 'canonical/verification/run_long_horizon_continuity_v1.py'
+      - 'canonical/runtime/same_identity_supervisor_credited_v2.py'
+      - 'canonical/verification/run_long_horizon_continuity_v2.py'
+      - 'canonical/governance/CONTINUITY_CURRENT_CHILD_SEAM_BLOCKER_20261007_V1.json'
+      - 'canonical/governance/CREDITED_TRANSFORM_CERTIFICATE_REGISTRY_20261007_V1.json'
+      - 'canonical/runtime/credited_transform_certificate_compiler_v1.py'
+      - 'canonical/tests/test_credited_transform_certificate_compiler_v1.py'
       - '.github/workflows/opus55-long-horizon-continuity-v1.yml'
   workflow_dispatch:
 
@@ -20,16 +26,30 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
-          python-version: '3.12'
-      - name: Verify current exact supervisor across forced process boundary
+          python-version: '3.13'
+      - name: Verify historical supervisor-only forced-process invariant
         shell: bash
         run: |
           set -euo pipefail
-          python canonical/verification/run_long_horizon_continuity_v1.py /tmp/LONG_HORIZON_CONTINUITY_REPORT.json
-      - name: Upload verification report
+          python canonical/verification/run_long_horizon_continuity_v1.py /tmp/LONG_HORIZON_CONTINUITY_REPORT_V1.json
+      - name: Verify V7 credited-transform registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m canonical.runtime.credited_transform_certificate_compiler_v1 | tee /tmp/C_REGISTRY.json
+          python -m unittest canonical.tests.test_credited_transform_certificate_compiler_v1 -v
+      - name: Verify real current default-child continuity seam
+        shell: bash
+        run: |
+          set -euo pipefail
+          python canonical/verification/run_long_horizon_continuity_v2.py /tmp/LONG_HORIZON_CONTINUITY_REPORT_V2.json
+      - name: Upload verification reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: opus55-long-horizon-continuity-v1
-          path: /tmp/LONG_HORIZON_CONTINUITY_REPORT.json
-          if-no-files-found: error
+          name: opus55-long-horizon-continuity-v7-seam
+          path: |
+            /tmp/LONG_HORIZON_CONTINUITY_REPORT_V1.json
+            /tmp/LONG_HORIZON_CONTINUITY_REPORT_V2.json
+            /tmp/C_REGISTRY.json
+          if-no-files-found: warn

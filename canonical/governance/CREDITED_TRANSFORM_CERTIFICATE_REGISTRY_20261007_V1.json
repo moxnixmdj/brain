@@ -1,0 +1,689 @@
+{
+  "schema": "PROJECT_BRAIN_CREDITED_TRANSFORM_CERTIFICATE_REGISTRY_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_V7_C_ROUTE_REGISTRY__EXACT_CREDITED_FAMILY_SET_BOUND__CERTIFICATES_OPEN__ZERO_CREDIT",
+  "authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V7.json",
+    "git_blob_sha": "5ad4fd7600fe6db3cf7e28c925600d22470f5757"
+  },
+  "ownership_matrix": {
+    "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+    "git_blob_sha": "cf736088c1ff460283f9b62d873b8e0710374e79",
+    "credited_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+    "expected_credited_family_count": 5
+  },
+  "certificate_rule": {
+    "c_closed_iff": "EVERY_CURRENT_VERIFIED_OWNED_EQUAL_OR_BETTER_FAMILY_HAS_AT_LEAST_ONE_EXACT_OPERATIVE_TRANSFORM_CERTIFICATE_AND_EVERY_CERTIFICATE_PASSES_ALL_V7_C_FIELDS",
+    "required_fields": [
+      "CONTENT_ADDRESSED_COMPLETE_OPERATIVE_IMPLEMENTATION_ARTIFACT_SET",
+      "COMPLETE_LOAD_BEARING_SOURCE_STATE_BOUNDARY",
+      "COMPLETE_LOAD_BEARING_TARGET_STATE_BOUNDARY",
+      "EXTERNAL_CONTROLS_AND_RANDOMNESS_ACCOUNTED",
+      "TARGET_EVALUATOR_SET_COMPLETE",
+      "EVERY_TARGET_EVALUATOR_HAS_CERTIFIED_SOURCE_PULLBACK",
+      "TARGET_HARD_CONSTRAINT_SET_COMPLETE",
+      "EVERY_TARGET_HARD_CONSTRAINT_HAS_SOURCE_PREIMAGE_OR_FAIL_CLOSED_INVARIANT",
+      "INTERACTIVE_INTERMEDIATE_STATE_ACCOUNTED",
+      "INDEPENDENT_VERIFICATION_BOUND"
+    ],
+    "no_empty_semantics_shortcut": "EMPTY_EVALUATOR_OR_CONSTRAINT_SETS_ARE_ALLOWED_ONLY_WHEN_EXPLICITLY_DECLARED_COMPLETE_AND_JUSTIFIED_BY_A_BOUND_ACCEPTANCE_SEMANTICS_RECEIPT"
+  },
+  "routes": [
+    {
+      "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "acceptance_anchor": {
+        "path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+        "git_blob_sha": "2d912cf8df64bd806fffb6a1070d95644d005470"
+      },
+      "certificate": {
+        "transform_law": "DETERMINISTIC",
+        "source_state_complete": true,
+        "target_state_complete": true,
+        "external_controls_accounted": true,
+        "randomness_accounted": true,
+        "target_evaluator_set_complete": true,
+        "target_hard_constraint_set_complete": true,
+        "interactive_state_accounted": true,
+        "independent_verification_bound": true,
+        "source_state_ids": [
+          "EXACT_TASK_MANIFEST_BYTES_AND_CANONICAL_JSON_HASH",
+          "EXACT_MISSION_BYTES_AND_SHA256",
+          "BOUND_AGENT_ID",
+          "BOUND_TASK_ID",
+          "PRIOR_SUPERVISOR_DURABLE_STATE_OR_ABSENT",
+          "PRIOR_CHECKPOINT_AND_ATTEMPT_RECEIPTS_OR_ABSENT",
+          "CHECKPOINT_BEFORE_RUNTIME_ONCE_FLAG",
+          "CURRENT_CANONICAL_STATE_CONTENT_ADDRESSED_BY_CONTINUOUS_OBS",
+          "CONTENT_ADDRESSED_17_FILE_OPERATIVE_RUNTIME_DEPENDENCY_SET",
+          "DEFAULT_CHILD_PROCESS_RETURN_CODE_STDOUT_STDERR_TRACE"
+        ],
+        "target_state_ids": [
+          "DURABLE_SUPERVISOR_STATE_AFTER_RESTART",
+          "SAME_AGENT_ID",
+          "SAME_TASK_ID",
+          "SAME_TASK_MANIFEST_HASH",
+          "SAME_MISSION_PATH_AND_HASH",
+          "CHECKPOINT_COUNT",
+          "CLAIM_COUNT",
+          "RUNTIME_ATTEMPT_COUNT",
+          "ORDERED_CONTINUITY_EVENT_LEDGER",
+          "CHILD_RUNTIME_COMMAND",
+          "CHILD_RUNTIME_RESULT_HASHES",
+          "TERMINAL_OR_BLOCKED_STATE",
+          "ASTRA_CHILD_STATE_AND_TERMINAL_RECEIPT_WHEN_CHILD_SUCCEEDS"
+        ],
+        "target_evaluator_ids": [
+          "DURABLE_STATE_SURVIVES_FORCED_PROCESS_BOUNDARY",
+          "EXACT_IDENTITY_TASK_AND_MISSION_PRESERVATION",
+          "NO_REEXECUTION_BEFORE_CHECKPOINT_AND_EXACTLY_ONE_POST_RESUME_CHILD_ATTEMPT",
+          "CURRENT_DEFAULT_CHILD_SEAM_TERMINAL_CONTINUATION"
+        ],
+        "evaluator_pullbacks": [
+          {
+            "target_evaluator_id": "DURABLE_STATE_SURVIVES_FORCED_PROCESS_BOUNDARY",
+            "source_evaluator_id": "PROCESS_A_CHECKPOINT_RECEIPT_PLUS_PROCESS_B_REHYDRATED_STATE_AND_EVENT_LEDGER",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_evaluator_id": "EXACT_IDENTITY_TASK_AND_MISSION_PRESERVATION",
+            "source_evaluator_id": "SUPERVISOR_CLAIM_RESUME_HASH_EQUALITY_AND_ASTRA_SAME_IDENTITY_BINDING",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_evaluator_id": "NO_REEXECUTION_BEFORE_CHECKPOINT_AND_EXACTLY_ONE_POST_RESUME_CHILD_ATTEMPT",
+            "source_evaluator_id": "CHECKPOINT_BEFORE_RUNTIME_ONCE_PLUS_RUNTIME_ATTEMPT_COUNTER_AND_EVENT_ORDER",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_evaluator_id": "CURRENT_DEFAULT_CHILD_SEAM_TERMINAL_CONTINUATION",
+            "source_evaluator_id": "PROCESS_B_DEFAULT_EXECUTOR_RETURN_ZERO_PLUS_ASTRA_STATE_AND_RECEIPT_COMPLETE",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          }
+        ],
+        "target_hard_constraint_ids": [
+          "WRONG_AGENT_CANNOT_RESUME",
+          "TASK_MANIFEST_OR_MISSION_DRIFT_CANNOT_REUSE_CONTINUITY_STATE",
+          "CHECKPOINT_PRECEDES_RUNTIME_WHEN_REQUESTED",
+          "DEFAULT_CHILD_USES_CANONICAL_ROOT3_PRODUCTION_ENTRY",
+          "PRIVATE_CANONICAL_STATE_BYTES_NOT_REQUIRED_BY_PUBLIC_VERIFIER",
+          "MODEL_DEPENDENCY_COUNT_ZERO_FOR_QUALIFICATION",
+          "INCREMENTAL_SPEND_USD_ZERO",
+          "CLAIM_SCOPE_EXCLUDES_AUTONOMOUS_WAKE_AND_GENERAL_SEMANTIC_MEMORY"
+        ],
+        "hard_constraint_preimages": [
+          {
+            "target_hard_constraint_id": "WRONG_AGENT_CANNOT_RESUME",
+            "source_preimage_or_invariant_id": "CLAIM_AND_STATE_AGENT_ID_EQUALITY_FAIL_CLOSED",
+            "proof_ref": "canonical/runtime/same_identity_supervisor_credited_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "TASK_MANIFEST_OR_MISSION_DRIFT_CANNOT_REUSE_CONTINUITY_STATE",
+            "source_preimage_or_invariant_id": "TASK_MANIFEST_AND_MISSION_HASH_BINDING_FAIL_CLOSED",
+            "proof_ref": "canonical/runtime/same_identity_supervisor_credited_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "CHECKPOINT_PRECEDES_RUNTIME_WHEN_REQUESTED",
+            "source_preimage_or_invariant_id": "CHECKPOINT_EVENT_AND_EXIT_75_BEFORE_EXECUTOR",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "DEFAULT_CHILD_USES_CANONICAL_ROOT3_PRODUCTION_ENTRY",
+            "source_preimage_or_invariant_id": "CANDIDATE_RUNTIME_COMMAND_LITERAL_AND_ATTEMPT_RECEIPT",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "PRIVATE_CANONICAL_STATE_BYTES_NOT_REQUIRED_BY_PUBLIC_VERIFIER",
+            "source_preimage_or_invariant_id": "PARAMETERIZED_CONTENT_ADDRESS_BINDING_WITH_SYNTHETIC_PUBLIC_FIXTURE_AND_SEPARATE_PRIVATE_GIT_BLOB_BINDINGS",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "MODEL_DEPENDENCY_COUNT_ZERO_FOR_QUALIFICATION",
+            "source_preimage_or_invariant_id": "MODEL_INDEPENDENT_FINISH_CONTROLLER_PLAN",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "INCREMENTAL_SPEND_USD_ZERO",
+            "source_preimage_or_invariant_id": "TASK_CONSTRAINT_AND_TWO_PROCESS_RECEIPTS_ZERO",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "CLAIM_SCOPE_EXCLUDES_AUTONOMOUS_WAKE_AND_GENERAL_SEMANTIC_MEMORY",
+            "source_preimage_or_invariant_id": "ACCEPTED_FAMILY_PACKAGE_EXPLICIT_SCOPE_BOUNDARY",
+            "proof_ref": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json"
+          }
+        ],
+        "acceptance_semantics_completeness_ref": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+        "independent_verification_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json",
+        "scope_note": "ACCEPTED_SCOPED_CONTINUITY_BEHAVIOR_ONLY__DURABLE_CROSS_SESSION_STATE_SAME_IDENTITY_CHECKPOINT_RELAUNCH_NO_COMPLETED_WORK_REEXECUTION_AND_TERMINAL_CONTINUATION__NO_AUTONOMOUS_WAKE_OR_GENERAL_SEMANTIC_MEMORY_QUALITY"
+      },
+      "implementation_artifacts": [
+        {
+          "path": "canonical/runtime/same_identity_supervisor_credited_v2.py",
+          "git_blob_sha": "45d48c23ec4ae429550c264c07f530b0347430cb"
+        },
+        {
+          "path": "canonical/runtime/root3_production_astra_launcher_v1.py",
+          "git_blob_sha": "3ac42e7be5a391cfda738131ecb0d3d600fa2147"
+        },
+        {
+          "path": "canonical/runtime/root3_strict_current_bootstrap_v2.py",
+          "git_blob_sha": "7d6e4f4e00fda4eae6ff1974f68f970ceee69c2e"
+        },
+        {
+          "path": "canonical/runtime/root3_subprocess_mediator_v2.py",
+          "git_blob_sha": "80560cdfa91c11a4b47b9ee2161af726b2f9bccf"
+        },
+        {
+          "path": "canonical/runtime/root3_subprocess_mediator_v1.py",
+          "git_blob_sha": "8443b61b15cb2bc597c4fa292650f2a0aae899b5"
+        },
+        {
+          "path": "canonical/runtime/root3_subprocess_callsite_classifier_v1.py",
+          "git_blob_sha": "e654b264096dba724d82f04e5adef0dc6d6c90f7"
+        },
+        {
+          "path": "canonical/runtime/root3_subprocess_effect_class_registry_v1.py",
+          "git_blob_sha": "24e00a3e6b70d0879cab664a8512f243973c6196"
+        },
+        {
+          "path": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+          "git_blob_sha": "fc737c1ff5d767d590a5ac52b604890f5d22b1c5"
+        },
+        {
+          "path": "canonical/runtime/root3_two_class_attempt_authorizer_v1.py",
+          "git_blob_sha": "5aac8664433115c47d24e0fbbca15b81126753ee"
+        },
+        {
+          "path": "canonical/runtime/root3_read_only_local_file_query_executor_v1.py",
+          "git_blob_sha": "74166a80c47ed8ddce7bae7b61a3a3610ac2ef8a"
+        },
+        {
+          "path": "canonical/runtime/root3_pdf_raster_temp_executor_v1.py",
+          "git_blob_sha": "c07c632ac43e591bdde139f3440bdbe288ea930c"
+        },
+        {
+          "path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+          "git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+        },
+        {
+          "path": "canonical/runtime/astra_runtime.py",
+          "git_blob_sha": "3567cfd77eae06e2d384c5e0b18972b2d3a62c3b"
+        },
+        {
+          "path": "canonical/runtime/continuous_obs_runtime.py",
+          "git_blob_sha": "e2533a0335c4f6824b9542944d4682aeefb36b2b"
+        },
+        {
+          "path": "canonical/runtime/honesty_load_bearing_result_gate_v1.py",
+          "git_blob_sha": "6506690507854f3f28ff0c6161e34b79e9687c0b"
+        },
+        {
+          "path": "canonical/runtime/honesty_envelope_v1.py",
+          "git_blob_sha": "1ff02d62322b76068933498e869b1ee22949b991"
+        },
+        {
+          "path": "canonical/runtime/root3_typed_durable_admin_write_v1.py",
+          "git_blob_sha": "6c488b10b8afbaf61781703775cfd9a79710de52"
+        }
+      ]
+    },
+    {
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "acceptance_anchor": {
+        "path": "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json",
+        "git_blob_sha": "92446c0ea1eb6801db58bd757ab62a24710d3b6b"
+      },
+      "certificate": {
+        "transform_law": "DETERMINISTIC",
+        "source_state_complete": true,
+        "target_state_complete": true,
+        "external_controls_accounted": true,
+        "randomness_accounted": true,
+        "target_evaluator_set_complete": true,
+        "target_hard_constraint_set_complete": true,
+        "interactive_state_accounted": true,
+        "independent_verification_bound": true,
+        "source_state_ids": [
+          "FINITE_EXPLICIT_TASK_REQUIREMENT_AND_DEPENDENCY_GRAPH",
+          "FINITE_DECLARED_WORKER_OR_TOOL_CAPABILITIES",
+          "DECLARED_CURRENT_STATE",
+          "DECLARED_CONCURRENCY_AND_RESOURCE_CONSTRAINTS",
+          "DECLARED_EVIDENCE_OWNERSHIP_RULES",
+          "IMMUTABLE_BASE_TASK",
+          "ARBITRARY_FINITE_ORDERED_HISTORY_OF_SUPPORTED_LIVE_RECEIPTS_OVER_DECLARED_ENTITIES"
+        ],
+        "target_state_ids": [
+          "MINIMUM_COST_SCHEDULABLE_REQUIRED_WORK",
+          "CAPABILITY_COMPATIBLE_OWNER_ASSIGNMENT",
+          "DEPENDENCY_AND_FANIN_GRAPH",
+          "MINIMUM_FEASIBLE_WAVE_SCHEDULE",
+          "TERMINAL_EVIDENCE_FANIN",
+          "RECEIPT_DRIVEN_REASSIGNMENT_WITHOUT_PRIOR_STATE_RESURRECTION",
+          "TERMINAL_SUCCESS_OR_PROVED_INFEASIBILITY"
+        ],
+        "target_evaluator_ids": [
+          "DELEGATION_TERMINAL_SUCCESS",
+          "MINIMUM_SCHEDULABLE_PLAN_COST",
+          "MINIMUM_FEASIBLE_WAVE_COUNT"
+        ],
+        "evaluator_pullbacks": [
+          {
+            "target_evaluator_id": "DELEGATION_TERMINAL_SUCCESS",
+            "source_evaluator_id": "EXACT_FEASIBILITY_AND_REQUIRED_OUTPUT_COMPLETION",
+            "proof_ref": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json"
+          },
+          {
+            "target_evaluator_id": "MINIMUM_SCHEDULABLE_PLAN_COST",
+            "source_evaluator_id": "FINITE_NONNEGATIVE_COST_EXHAUSTIVE_PLAN_ORDER",
+            "proof_ref": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json"
+          },
+          {
+            "target_evaluator_id": "MINIMUM_FEASIBLE_WAVE_COUNT",
+            "source_evaluator_id": "BREADTH_FIRST_FEASIBLE_COMPLETED_TASK_SET_SEARCH",
+            "proof_ref": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json"
+          }
+        ],
+        "target_hard_constraint_ids": [
+          "NO_DUPLICATE_WORK",
+          "NO_CONFLICTING_WRITES",
+          "NO_LOST_PROVENANCE",
+          "NO_DEPENDENCY_VIOLATION",
+          "CAPABILITY_COMPATIBLE_ASSIGNMENT",
+          "RESOURCE_CAPACITY_RESPECTED",
+          "COMPLETE_FANIN_EVIDENCE",
+          "NO_PRIOR_RECEIPT_STATE_RESURRECTION",
+          "UNKNOWN_ENTITY_OR_RECEIPT_KIND_FAIL_CLOSED"
+        ],
+        "hard_constraint_preimages": [
+          {
+            "target_hard_constraint_id": "NO_DUPLICATE_WORK",
+            "source_preimage_or_invariant_id": "SIMPLE_FACT_ADDING_SEQUENCE_EACH_DECLARED_STEP_AT_MOST_ONCE",
+            "proof_ref": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json"
+          },
+          {
+            "target_hard_constraint_id": "NO_CONFLICTING_WRITES",
+            "source_preimage_or_invariant_id": "DECLARED_EVIDENCE_OWNERSHIP_AND_WORKER_RESOURCE_MATCHING",
+            "proof_ref": "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V2.json"
+          },
+          {
+            "target_hard_constraint_id": "NO_LOST_PROVENANCE",
+            "source_preimage_or_invariant_id": "EVIDENCE_OWNER_AND_TERMINAL_FANIN_LINEAGE",
+            "proof_ref": "canonical/runtime/delegation_whole_scope_candidate_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "NO_DEPENDENCY_VIOLATION",
+            "source_preimage_or_invariant_id": "TOPOLOGICAL_REQUIREMENT_AND_DEPENDENCY_CLOSURE",
+            "proof_ref": "canonical/runtime/delegation_whole_scope_candidate_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "CAPABILITY_COMPATIBLE_ASSIGNMENT",
+            "source_preimage_or_invariant_id": "DECLARED_WORKER_CAPABILITY_MATCHING",
+            "proof_ref": "canonical/runtime/delegation_whole_scope_candidate_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "RESOURCE_CAPACITY_RESPECTED",
+            "source_preimage_or_invariant_id": "PER_WAVE_DECLARED_RESOURCE_CAPACITY_MATCHING",
+            "proof_ref": "canonical/runtime/delegation_whole_scope_candidate_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "COMPLETE_FANIN_EVIDENCE",
+            "source_preimage_or_invariant_id": "SINK_AND_COMPLETED_EVIDENCE_UNION",
+            "proof_ref": "canonical/runtime/delegation_whole_scope_candidate_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "NO_PRIOR_RECEIPT_STATE_RESURRECTION",
+            "source_preimage_or_invariant_id": "FULL_ORDERED_HISTORY_REPLAY_WITH_IDEMPOTENT_DISABLE_REMOVAL_SET_UNION",
+            "proof_ref": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json"
+          },
+          {
+            "target_hard_constraint_id": "UNKNOWN_ENTITY_OR_RECEIPT_KIND_FAIL_CLOSED",
+            "source_preimage_or_invariant_id": "DECLARED_RECEIPT_DOMAIN_VALIDATION",
+            "proof_ref": "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V2.json"
+          }
+        ],
+        "acceptance_semantics_completeness_ref": "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V2.json",
+        "independent_verification_ref": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "scope_note": "ALL_FINITE_VALID_EXPLICIT_MONOTONIC_FACT_DELEGATION_CONTRACTS_WITH_DECLARED_CAPABILITIES_RESOURCES_EVIDENCE_RULES_AND_FINITE_SUPPORTED_RECEIPT_HISTORIES__NO_IMPLICIT_TASK_DISCOVERY_OR_UNDECLARED_ENTITIES"
+      },
+      "implementation_artifacts": [
+        {
+          "path": "canonical/runtime/delegation_receipt_history_candidate_v4.py",
+          "git_blob_sha": "e4faa96bacb3d948e960899ba44ec75485703991"
+        },
+        {
+          "path": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+          "git_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522"
+        }
+      ]
+    },
+    {
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "acceptance_anchor": {
+        "path": "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json",
+        "git_blob_sha": "4f5348949c1c2d8784a056c637f05c865ff389b6"
+      },
+      "certificate": {
+        "transform_law": "DETERMINISTIC",
+        "source_state_complete": true,
+        "target_state_complete": true,
+        "external_controls_accounted": true,
+        "randomness_accounted": true,
+        "target_evaluator_set_complete": true,
+        "target_hard_constraint_set_complete": true,
+        "interactive_state_accounted": true,
+        "independent_verification_bound": true,
+        "source_state_ids": [
+          "PUBLIC_TASK_TRAJECTORY_ROWS",
+          "ACTION_IDS_AND_TOPOLOGICAL_DEPENDENCIES",
+          "READ_AND_WRITE_RESOURCE_SETS",
+          "DEPENDENCY_COMPOSITION_SEMANTICS",
+          "CHECK_IDS_KINDS_PASS_BITS_AND_CONTENT_ADDRESSED_EVIDENCE",
+          "EXPLICIT_FAILURE_SEMANTICS_DIRECT_CONTRACT_OR_DERIVED_UPSTREAM",
+          "TERMINAL_FAILED_RESOURCE_SET",
+          "EXOGENOUS_HIDDEN_CAUSAL_TRUTH_FOR_POST_OUTPUT_INDEPENDENT_SCORING_ONLY"
+        ],
+        "target_state_ids": [
+          "STATUS_IDENTIFIED_INTERACTION_AMBIGUOUS_ESCALATE_OR_FAIL_CLOSED",
+          "CAUSE_ACTION_ID_OR_IDS",
+          "CRITICAL_ACTION_ID_OR_NULL",
+          "MECHANISM_CLASSES",
+          "SUPPORTING_RECEIPTS",
+          "REPAIR_TARGETS",
+          "INTERACTION_WITNESS_ACTION_IDS_WHEN_APPLICABLE",
+          "INFORMATION_REQUEST_WHEN_NONIDENTIFIABLE"
+        ],
+        "target_evaluator_ids": [
+          "RECOVERY_CAUSAL_LOCALIZATION",
+          "RECOVERY_TERMINAL_RESCUE",
+          "RECOVERY_CRITICAL_FAIL_CLOSED_MISSES"
+        ],
+        "evaluator_pullbacks": [
+          {
+            "target_evaluator_id": "RECOVERY_CAUSAL_LOCALIZATION",
+            "source_evaluator_id": "V7_INTERVENTION_CAUSAL_ROOT_AND_MECHANISM_SCORER",
+            "proof_ref": "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+          },
+          {
+            "target_evaluator_id": "RECOVERY_TERMINAL_RESCUE",
+            "source_evaluator_id": "SOURCE_NATIVE_HIDDEN_CAUSE_REPAIR_RESCUE_SCORER",
+            "proof_ref": "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+          },
+          {
+            "target_evaluator_id": "RECOVERY_CRITICAL_FAIL_CLOSED_MISSES",
+            "source_evaluator_id": "UNIDENTIFIABLE_INVALID_OR_ONLY_DERIVED_CASE_FAIL_CLOSED_CHECK",
+            "proof_ref": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json"
+          }
+        ],
+        "target_hard_constraint_ids": [
+          "HIDDEN_ORACLE_NOT_VISIBLE_TO_CANDIDATE",
+          "FAILED_CHECKS_REQUIRE_NONEMPTY_CAUSALLY_RELEVANT_EVIDENCE",
+          "FAILURE_SEMANTICS_MUST_BE_EXPLICIT_AND_VALID",
+          "NON_TOPOLOGICAL_DEPENDENCIES_FAIL_CLOSED",
+          "ONLY_DERIVED_UPSTREAM_FAILURES_DO_NOT_CREATE_FAKE_ROOT",
+          "ALTERNATIVE_MULTI_ROOT_NONIDENTIFIABILITY_RETURNS_AMBIGUOUS",
+          "INVALID_TASK_OR_STEP_SCHEMA_FAILS_CLOSED"
+        ],
+        "hard_constraint_preimages": [
+          {
+            "target_hard_constraint_id": "HIDDEN_ORACLE_NOT_VISIBLE_TO_CANDIDATE",
+            "source_preimage_or_invariant_id": "PUBLIC_SOURCE_CASE_ORACLE_REMOVAL_AND_NONINTERFERENCE",
+            "proof_ref": "canonical/governance/P1_SHARED_FAILURE_SEMANTICS_BATCH_FREEZE_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "FAILED_CHECKS_REQUIRE_NONEMPTY_CAUSALLY_RELEVANT_EVIDENCE",
+            "source_preimage_or_invariant_id": "FAILED_CHECK_EVIDENCE_NONEMPTY_VALIDATION",
+            "proof_ref": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+          },
+          {
+            "target_hard_constraint_id": "FAILURE_SEMANTICS_MUST_BE_EXPLICIT_AND_VALID",
+            "source_preimage_or_invariant_id": "ALLOWED_FAILURE_SEMANTICS_VALIDATION",
+            "proof_ref": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+          },
+          {
+            "target_hard_constraint_id": "NON_TOPOLOGICAL_DEPENDENCIES_FAIL_CLOSED",
+            "source_preimage_or_invariant_id": "DEPENDENCY_PREDECESSOR_MUST_ALREADY_EXIST",
+            "proof_ref": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+          },
+          {
+            "target_hard_constraint_id": "ONLY_DERIVED_UPSTREAM_FAILURES_DO_NOT_CREATE_FAKE_ROOT",
+            "source_preimage_or_invariant_id": "DIRECT_FAILED_EMPTY_WITH_DERIVED_FAILED_RETURNS_ESCALATE",
+            "proof_ref": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+          },
+          {
+            "target_hard_constraint_id": "ALTERNATIVE_MULTI_ROOT_NONIDENTIFIABILITY_RETURNS_AMBIGUOUS",
+            "source_preimage_or_invariant_id": "ALTERNATIVE_WITNESS_BRANCH_RETURNS_AMBIGUOUS_AND_REQUESTS_DISCRIMINATOR",
+            "proof_ref": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+          },
+          {
+            "target_hard_constraint_id": "INVALID_TASK_OR_STEP_SCHEMA_FAILS_CLOSED",
+            "source_preimage_or_invariant_id": "TASK_TRAJECTORY_AND_STEP_SCHEMA_VALIDATION",
+            "proof_ref": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+          }
+        ],
+        "acceptance_semantics_completeness_ref": "canonical/governance/RECOVERY_OPUS55_ZERO_REALITY_ACCEPTANCE_CANDIDATE_V1.json",
+        "independent_verification_ref": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+        "scope_note": "POST_QUARANTINE_ZERO_REALITY_UNIVERSAL_GENERATOR_TRANSPORT_AND_SCOPE_RESTORATION__HIDDEN_CAUSAL_TRUTH_USED_ONLY_AFTER_CANDIDATE_OUTPUT_FOR_INDEPENDENT_SCORING"
+      },
+      "implementation_artifacts": [
+        {
+          "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+          "git_blob_sha": "28940387bd6c11671035ad9201e37bba13fd9bc9"
+        }
+      ]
+    },
+    {
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "acceptance_anchor": {
+        "path": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "913d171b3c855000d322e183b142b3200eeaf0a9"
+      },
+      "certificate": {
+        "transform_law": "DETERMINISTIC",
+        "source_state_complete": true,
+        "target_state_complete": true,
+        "external_controls_accounted": true,
+        "randomness_accounted": true,
+        "target_evaluator_set_complete": true,
+        "target_hard_constraint_set_complete": true,
+        "interactive_state_accounted": true,
+        "independent_verification_bound": true,
+        "source_state_ids": [
+          "CURRENT_REQUIRED_CAPABILITIES",
+          "FINITE_CURRENT_TOOL_SET",
+          "TOOL_IDS_AND_VISIBLE_COSTS",
+          "CURRENT_AVAILABILITY_AND_AUTHORIZATION",
+          "CURRENT_TOOL_VERSION_EPOCHS",
+          "EARNED_CURRENT_EPOCH_SAFE_PROBE_RECEIPTS",
+          "PUBLIC_VERSION_CHANGE_EVENTS",
+          "EXOGENOUS_HIDDEN_ACTUAL_TOOL_CAPABILITY_MATRIX",
+          "TRUTHFUL_SAFE_PROBE_TRANSITION_SEMANTICS"
+        ],
+        "target_state_ids": [
+          "NEXT_ACTION_PROBE_SELECT_OR_ESCALATE",
+          "SELECTED_TOOL_ID_OR_NULL",
+          "PROBE_TOOL_AND_CAPABILITY_OR_NULL",
+          "CURRENT_EPOCH_EVIDENCE_STATE",
+          "TERMINAL_ROUTE_SUCCESS",
+          "NO_ROUTE_ESCALATION_CORRECTNESS"
+        ],
+        "target_evaluator_ids": [
+          "TERMINAL_ROUTE_CORRECTNESS",
+          "LEAST_COST_SUFFICIENT_ROUTE_OPTIMALITY",
+          "CORRECT_NO_ROUTE_ESCALATION"
+        ],
+        "evaluator_pullbacks": [
+          {
+            "target_evaluator_id": "TERMINAL_ROUTE_CORRECTNESS",
+            "source_evaluator_id": "FINITE_UNKNOWN_PAIR_ELIMINATION_AND_SUFFICIENCY_CHECK",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V1.json"
+          },
+          {
+            "target_evaluator_id": "LEAST_COST_SUFFICIENT_ROUTE_OPTIMALITY",
+            "source_evaluator_id": "VISIBLE_COST_THEN_TOOL_ID_TOTAL_ORDER_WITH_EARLIER_ROUTE_DISPROOF",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json"
+          },
+          {
+            "target_evaluator_id": "CORRECT_NO_ROUTE_ESCALATION",
+            "source_evaluator_id": "ALL_ELIGIBLE_TOOLS_EVIDENCE_DISPROVED",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json"
+          }
+        ],
+        "target_hard_constraint_ids": [
+          "SELECT_ONLY_AVAILABLE_TOOLS",
+          "SELECT_ONLY_AUTHORIZED_TOOLS",
+          "SELECT_ONLY_AFTER_ALL_REQUIRED_CAPABILITIES_HAVE_CURRENT_POSITIVE_EVIDENCE",
+          "STALE_RECEIPTS_INVALIDATED_ON_TOOL_VERSION_CHANGE",
+          "UNCHANGED_CURRENT_EPOCH_RECEIPTS_REUSED_WITHOUT_REPROBE",
+          "NO_INTERNET_WIDE_TOOL_IDENTITY_COMPLETENESS_CLAIM",
+          "UNTRUTHFUL_OR_FORBIDDEN_PROBE_ENVIRONMENTS_OUT_OF_SCOPE_FAIL_CLOSED"
+        ],
+        "hard_constraint_preimages": [
+          {
+            "target_hard_constraint_id": "SELECT_ONLY_AVAILABLE_TOOLS",
+            "source_preimage_or_invariant_id": "TOOLS_FILTER_AVAILABLE_TRUE",
+            "proof_ref": "canonical/runtime/tool_discovery_information_safe_candidate.py"
+          },
+          {
+            "target_hard_constraint_id": "SELECT_ONLY_AUTHORIZED_TOOLS",
+            "source_preimage_or_invariant_id": "TOOLS_FILTER_AUTHORIZED_TRUE",
+            "proof_ref": "canonical/runtime/tool_discovery_information_safe_candidate.py"
+          },
+          {
+            "target_hard_constraint_id": "SELECT_ONLY_AFTER_ALL_REQUIRED_CAPABILITIES_HAVE_CURRENT_POSITIVE_EVIDENCE",
+            "source_preimage_or_invariant_id": "UNKNOWN_REQUIRED_PAIR_FORCES_PROBE_AND_NEGATIVE_PAIR_DISPROVES_TOOL",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "STALE_RECEIPTS_INVALIDATED_ON_TOOL_VERSION_CHANGE",
+            "source_preimage_or_invariant_id": "TOOL_EPOCH_MATCH_REQUIRED_FOR_RECEIPT_USE",
+            "proof_ref": "canonical/runtime/tool_discovery_information_safe_candidate.py"
+          },
+          {
+            "target_hard_constraint_id": "UNCHANGED_CURRENT_EPOCH_RECEIPTS_REUSED_WITHOUT_REPROBE",
+            "source_preimage_or_invariant_id": "CURRENT_EPOCH_RECEIPT_EVIDENCE_MAP_PERSISTS",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "NO_INTERNET_WIDE_TOOL_IDENTITY_COMPLETENESS_CLAIM",
+            "source_preimage_or_invariant_id": "FROZEN_PROTOCOL_EXPOSES_TOOL_IDS_AND_ONLY_HIDES_CAPABILITY_TRUTH",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "UNTRUTHFUL_OR_FORBIDDEN_PROBE_ENVIRONMENTS_OUT_OF_SCOPE_FAIL_CLOSED",
+            "source_preimage_or_invariant_id": "FORMAL_PREMISE_TRUTHFUL_BOUNDED_SAFE_PROBES_REQUIRED",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V1.json"
+          }
+        ],
+        "acceptance_semantics_completeness_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json",
+        "independent_verification_ref": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "scope_note": "FROZEN_HIDDEN_TOOL_PROTOCOL_ONLY__FINITE_VISIBLE_TOOL_IDENTITIES_AND_REQUIREMENTS__HIDDEN_CAPABILITY_TRUTH_WITH_TRUTHFUL_SAFE_PROBES__NO_OPEN_INTERNET_IDENTITY_DISCOVERY"
+      },
+      "implementation_artifacts": [
+        {
+          "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+          "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+        }
+      ]
+    },
+    {
+      "family": "EXACT_SYMBOLIC_COMPUTATION",
+      "acceptance_anchor": {
+        "path": "canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json",
+        "git_blob_sha": "1a0154d44963ce08ed78920978fb64ba054334cb"
+      },
+      "certificate": {
+        "transform_law": "DETERMINISTIC",
+        "source_state_complete": true,
+        "target_state_complete": true,
+        "external_controls_accounted": true,
+        "randomness_accounted": true,
+        "target_evaluator_set_complete": true,
+        "target_hard_constraint_set_complete": true,
+        "interactive_state_accounted": true,
+        "independent_verification_bound": true,
+        "source_state_ids": [
+          "FROZEN_SUITE_EXACT_BYTES",
+          "FROZEN_TASK_ROW_OPERATION_AND_ARGS",
+          "RUNNER_EXACT_BYTES",
+          "SYMPY_1_14_0_PRODUCER_VERSION",
+          "PYTHON_3_13_15_EXECUTION_VERSION",
+          "SYMBOL_AND_ALLOWED_FUNCTION_PARSE_ENVIRONMENT"
+        ],
+        "target_state_ids": [
+          "EXACT_SYMBOLIC_OUTPUT",
+          "TASK_PASS_BOOLEAN",
+          "TASK_ERROR_OR_NULL",
+          "PER_TASK_ELAPSED_S",
+          "SUITE_PASS_FAIL_COUNTS",
+          "SUITE_EXACT_CORRECTNESS",
+          "TOTAL_EVAL_S",
+          "INCREMENTAL_SPEND_USD"
+        ],
+        "target_evaluator_ids": [
+          "EXACT_CORRECTNESS_ON_FROZEN_OBS_EXACT_SYMBOLIC_001"
+        ],
+        "evaluator_pullbacks": [
+          {
+            "target_evaluator_id": "EXACT_CORRECTNESS_ON_FROZEN_OBS_EXACT_SYMBOLIC_001",
+            "source_evaluator_id": "RUN_TASK_EXACT_EQUAL_OR_EXACT_STRUCTURAL_ACCEPTANCE",
+            "proof_ref": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json"
+          }
+        ],
+        "target_hard_constraint_ids": [
+          "FROZEN_SUITE_SCOPE_ONLY",
+          "NUMERICAL_TOLERANCE_FORBIDDEN",
+          "INCREMENTAL_SPEND_USD_EQ_0"
+        ],
+        "hard_constraint_preimages": [
+          {
+            "target_hard_constraint_id": "FROZEN_SUITE_SCOPE_ONLY",
+            "source_preimage_or_invariant_id": "SUITE_SHA256_AND_TASK_OPERATION_DISPATCH_BOUNDARY",
+            "proof_ref": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json"
+          },
+          {
+            "target_hard_constraint_id": "NUMERICAL_TOLERANCE_FORBIDDEN",
+            "source_preimage_or_invariant_id": "SYMPY_EXACT_EQUAL_AND_EXACT_STRUCTURAL_COMPARISON_ONLY",
+            "proof_ref": "canonical/obsolescence/run_exact_symbolic_v1.py"
+          },
+          {
+            "target_hard_constraint_id": "INCREMENTAL_SPEND_USD_EQ_0",
+            "source_preimage_or_invariant_id": "FROZEN_EXECUTION_RECEIPT_INCREMENTAL_SPEND_ZERO",
+            "proof_ref": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json"
+          }
+        ],
+        "acceptance_semantics_completeness_ref": "canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json",
+        "independent_verification_ref": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+        "scope_note": "ONLY_THE_BOUNDED_FROZEN_OPERATION_CLASSES_ALREADY_CREDITED_BY_THE_ACCEPTED_FAMILY__NO_GENERAL_MATH_CLAIM"
+      },
+      "implementation_artifacts": [
+        {
+          "path": "canonical/obsolescence/run_exact_symbolic_v1.py",
+          "git_blob_sha": "8f6f04fee00664b26ddf1a45a65698399c7ca6c3"
+        }
+      ]
+    }
+  ],
+  "current_result": {
+    "exact_credited_family_registry_bound": true,
+    "route_count": 5,
+    "transform_certificates_complete": 5,
+    "c_closed": false,
+    "next": "RECOMPUTE_FAIL_CLOSED_COMPILER_AGAINST_EXACT_CURRENT_OWNERSHIP_MATRIX_AND_ALL_BOUND_ARTIFACTS__ONLY_THEN_PROMOTE_C_CLOSED",
+    "c_closed_candidate": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_CURRENT_ROUTE_TRANSFORM_CERTIFICATE_IS_COMPLETE",
+    "NO_CLAIM_C_IS_CLOSED",
+    "NO_CLAIM_ACCEPTANCE_ANCHOR_ALONE_PROVES_STATE_BOUNDARY_COMPLETENESS",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

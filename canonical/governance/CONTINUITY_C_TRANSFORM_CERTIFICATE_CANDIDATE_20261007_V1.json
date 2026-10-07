@@ -1,0 +1,172 @@
+{
+  "schema": "PROJECT_BRAIN_CONTINUITY_C_TRANSFORM_CERTIFICATE_CANDIDATE_V1",
+  "date": "2026-10-07",
+  "status": "REFROZEN_AFTER_HARNESS_PATH_ONLY_REPAIR__PENDING_REAL_DEFAULT_CHILD_SEAM_QUALIFICATION__ZERO_CREDIT",
+  "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+  "authority": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V7.json",
+      "git_blob_sha": "5ad4fd7600fe6db3cf7e28c925600d22470f5757"
+    },
+    "accepted_family_package": {
+      "path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+      "git_blob_sha": "2d912cf8df64bd806fffb6a1070d95644d005470"
+    },
+    "localized_blocker": {
+      "path": "canonical/governance/CONTINUITY_CURRENT_CHILD_SEAM_BLOCKER_20261007_V1.json"
+    }
+  },
+  "candidate_route": {
+    "supervisor": {
+      "path": "canonical/runtime/same_identity_supervisor_credited_v2.py",
+      "git_blob_sha": "45d48c23ec4ae429550c264c07f530b0347430cb"
+    },
+    "production_launcher": {
+      "path": "canonical/runtime/root3_production_astra_launcher_v1.py",
+      "git_blob_sha": "3ac42e7be5a391cfda738131ecb0d3d600fa2147"
+    },
+    "root3_bootstrap": {
+      "path": "canonical/runtime/root3_strict_current_bootstrap_v2.py",
+      "git_blob_sha": "7d6e4f4e00fda4eae6ff1974f68f970ceee69c2e"
+    },
+    "current_child": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "3567cfd77eae06e2d384c5e0b18972b2d3a62c3b"
+    },
+    "qualification_runner": {
+      "path": "canonical/verification/run_long_horizon_continuity_v2.py",
+      "git_blob_sha": "b861f1710261de5d973ce6f2c34489ac38de65c8"
+    }
+  },
+  "transform_law": "DETERMINISTIC_GIVEN_BOUND_TASK_MISSION_CURRENT_CANONICAL_STATE_AND_CHILD_RETURN_TRACE",
+  "source_state_boundary": {
+    "complete_claim": true,
+    "ids": [
+      "EXACT_TASK_MANIFEST_BYTES_AND_CANONICAL_JSON_HASH",
+      "EXACT_MISSION_BYTES_AND_SHA256",
+      "BOUND_AGENT_ID",
+      "BOUND_TASK_ID",
+      "PRIOR_SUPERVISOR_DURABLE_STATE_OR_ABSENT",
+      "PRIOR_CHECKPOINT_AND_ATTEMPT_RECEIPTS_OR_ABSENT",
+      "CHECKPOINT_BEFORE_RUNTIME_ONCE_FLAG",
+      "CURRENT_CANONICAL_STATE_BOUND_BY_CONTINUOUS_OBS",
+      "CONTENT_ADDRESSED_SUPERVISOR_PRODUCTION_LAUNCHER_BOOTSTRAP_AND_CHILD_BYTES",
+      "DEFAULT_CHILD_PROCESS_RETURN_CODE_STDOUT_STDERR_TRACE"
+    ],
+    "external_control_rule": "THE_CHILD_RUNTIME_RESULT_IS_AN_EXPLICIT_SOURCE_CONTROL__THE_CONTINUITY_TRANSFORM_DOES_NOT CLAIM_CHILD_SEMANTIC_COGNITION__IT CLAIMS_IDENTITY_STATE_AND_EXACTLY_ONCE_RESUME AROUND THE BOUND CHILD INVOCATION"
+  },
+  "target_state_boundary": {
+    "complete_claim": true,
+    "ids": [
+      "SAME_AGENT_ID",
+      "SAME_TASK_ID",
+      "SAME_TASK_MANIFEST_HASH",
+      "SAME_MISSION_PATH_AND_HASH",
+      "CHECKPOINT_COUNT",
+      "CLAIM_COUNT",
+      "RUNTIME_ATTEMPT_COUNT",
+      "ORDERED_CONTINUITY_EVENT_LEDGER",
+      "CHILD_RUNTIME_COMMAND",
+      "CHILD_RUNTIME_RESULT_HASHES",
+      "TERMINAL_OR_BLOCKED_STATE",
+      "ASTRA_CHILD_STATE_AND_TERMINAL_RECEIPT_WHEN_CHILD_SUCCEEDS"
+    ]
+  },
+  "target_evaluators": [
+    {
+      "id": "EXACT_IDENTITY_TASK_AND_MISSION_PRESERVATION",
+      "source_pullback": "SUPERVISOR_CLAIM_AND_RESUME_HASH_EQUALITY_CHECKS_PLUS_INDEPENDENT_LEDGER_RECOMPUTATION"
+    },
+    {
+      "id": "NO_REEXECUTION_BEFORE_CHECKPOINT_AND_EXACTLY_ONE_POST_RESUME_CHILD_ATTEMPT",
+      "source_pullback": "CHECKPOINT_BEFORE_RUNTIME_ONCE_PLUS_RUNTIME_ATTEMPT_COUNTER_AND_EVENT_ORDER"
+    },
+    {
+      "id": "CURRENT_DEFAULT_CHILD_SEAM_REACHES_TERMINAL_COMPLETION_FOR_THE_FROZEN_MODEL_INDEPENDENT_QUALIFICATION_MISSION",
+      "source_pullback": "PROCESS_B_DEFAULT_EXECUTOR_RETURN_ZERO_PLUS_ASTRA_STATE_AND_RECEIPT_COMPLETE"
+    }
+  ],
+  "target_hard_constraints": [
+    {
+      "id": "WRONG_AGENT_CANNOT_RESUME",
+      "source_preimage_or_invariant": "CLAIM_AND_STATE_AGENT_ID_EQUALITY_FAIL_CLOSED"
+    },
+    {
+      "id": "TASK_OR_MISSION_DRIFT_CANNOT_REUSE_COMPLETED_CONTINUITY_STATE",
+      "source_preimage_or_invariant": "TASK_MANIFEST_AND_MISSION_HASH_BINDING_FAIL_CLOSED"
+    },
+    {
+      "id": "CHECKPOINT_PRECEDES_RUNTIME_WHEN_REQUESTED",
+      "source_preimage_or_invariant": "CHECKPOINT_EVENT_AND_EXIT_75_BEFORE_EXECUTOR"
+    },
+    {
+      "id": "DEFAULT_CHILD_USES_CANONICAL_ROOT3_PRODUCTION_ENTRY",
+      "source_preimage_or_invariant": "CANDIDATE_RUNTIME_COMMAND_LITERAL_AND_ATTEMPT_RECEIPT"
+    },
+    {
+      "id": "MODEL_DEPENDENCY_COUNT_ZERO_FOR_QUALIFICATION",
+      "source_preimage_or_invariant": "MODEL_INDEPENDENT_FINISH_CONTROLLER_PLAN"
+    },
+    {
+      "id": "INCREMENTAL_SPEND_USD_ZERO",
+      "source_preimage_or_invariant": "TASK_AND_QUALIFICATION_CONSTRAINT_PLUS_RECEIPT_CHECK"
+    },
+    {
+      "id": "CLAIM_SCOPE_EXCLUDES_AUTONOMOUS_WAKE_AND_GENERAL_SEMANTIC_MEMORY",
+      "source_preimage_or_invariant": "ACCEPTED_FAMILY_PACKAGE_SCOPE_BOUNDARY"
+    }
+  ],
+  "precommitted_qualification": {
+    "workflow_pr": 2631,
+    "runner": "canonical/verification/run_long_horizon_continuity_v2.py",
+    "process_a": "FRESH_INTERPRETER__DEFAULT_SUPERVISOR__CHECKPOINT_BEFORE_RUNTIME__EXPECT_CODE_75",
+    "process_b": "FRESH_INTERPRETER__DEFAULT_SUPERVISOR_EXECUTOR__ROOT3_PRODUCTION_LAUNCHER__REAL_CURRENT_ASTRA__MODEL_INDEPENDENT_FINISH_MISSION__EXPECT_CODE_0",
+    "process_c": "RUNNER_RECOMPUTES_SUPERVISOR_AND_ASTRA_STATE_RECEIPTS_HASHES_COUNTERS_AND_EVENT_ORDER",
+    "fake_executor_allowed": false,
+    "external_information_allowed": false,
+    "model_dependency_allowed": false,
+    "incremental_spend_usd": 0,
+    "pass_requires_all_boolean_checks": true,
+    "harness_repairs": [
+      {
+        "failed_public_run_id": 37556543582,
+        "failed_public_job_id": 112584013405,
+        "failure_class": "VERIFIER_TEMP_EVIDENCE_PATH_OUTSIDE_REPOSITORY__SUPERVISOR_RELATIVE_EVIDENCE_PATH_ASSERTION",
+        "semantic_seam_failure": false,
+        "changed_semantics": false,
+        "repair": "MOVE_EPHEMERAL_SUPERVISOR_STATE_AND_EVIDENCE_DIRECTORY_UNDER_REPOSITORY_ROOT",
+        "preserved": [
+          "PROCESS_A_CHECKPOINT_RULE",
+          "PROCESS_B_DEFAULT_EXECUTOR_RULE",
+          "ROOT3_PRODUCTION_LAUNCHER",
+          "REAL_CURRENT_ASTRA",
+          "MODEL_INDEPENDENT_FINISH_MISSION",
+          "ALL_BOOLEAN_PASS_CRITERIA"
+        ]
+      }
+    ]
+  },
+  "promotion_rule": "ONLY_A_SUCCESSFUL_EXACT_POST_REPAIR_HEAD_QUALIFICATION_RECEIPT_PLUS_INDEPENDENT_BINDING_OF_THAT_RECEIPT_MAY_POPULATE_THE_CONTINUITY_CERTIFICATE_IN_THE_V7_REGISTRY__THE_PATH_ONLY_HARNESS_REPAIR_DOES_NOT_CHANGE_THE_PRECOMMITTED_SEMANTIC_PASS_RULE",
+  "current_effect": {
+    "c_certificate_credit": false,
+    "c_current_credited_routes": "4_OF_5_COMPLETE__1_PENDING",
+    "c_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_ASTRA_MISSIONS_ARE_EFFECT_SAFE",
+    "NO_CLAIM_ROOT3_D_EFFECT_CLOSURE",
+    "NO_CLAIM_GENERAL_CHILD_SEMANTIC_CORRECTNESS",
+    "NO_CLAIM_CONTINUITY_FAMILY_REPROMOTED_BY_THIS_CANDIDATE",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
