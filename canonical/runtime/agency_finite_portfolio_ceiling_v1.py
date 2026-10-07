@@ -94,10 +94,10 @@ def verify(beacon:str,docs:Mapping[str,Mapping[str,Any]]|None=None)->dict[str,An
     errors.append("DELEGATION_INTERACTION_MISSING:"+token)
 
   rv=d["recovery_verify"]
-  rtheorem=rv.get("theorem") or {}
-  if rtheorem.get("scope_complete") is not True:
+  rverified=rv.get("verified") or {}
+  if rverified.get("scope_complete") is not True:
    errors.append("RECOVERY_NOT_SCOPE_COMPLETE")
-  bounds=rtheorem.get("universal_achieved_bounds") or {}
+  bounds=rverified.get("universal_achieved_bounds") or {}
   if bounds.get("causal_localization")!=1 or bounds.get("terminal_recovery")!=1 or bounds.get("critical_fail_closed_misses")!=0:
    errors.append("RECOVERY_CEILING_MISSING")
 
