@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_COUNTEREXAMPLE_GUIDED_CAUSAL_ARCHITECTURE_SYNTHESIZER_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXISTING_SPRITE_REPLAY_PASS__8_OF_8__EXACT_BRANCH_BYTES__ZERO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {"path": "canonical/runtime/counterexample_guided_causal_architecture_synthesizer_v1.py", "git_blob_sha": "43bb7d4488c537e2f78112e13c58c5d0585c3e99"},
+    "tests": {"path": "canonical/tests/test_counterexample_guided_causal_architecture_synthesizer_v1.py", "git_blob_sha": "e1055d20be155aca398ad76905554a1e3316312c"},
+    "governance": {"path": "canonical/governance/COUNTEREXAMPLE_GUIDED_CAUSAL_ARCHITECTURE_SYNTHESIS_20261007_V1.json", "git_blob_sha": "813e249ddac12d7e024820bf8dd63be364e7cca9"}
+  },
+  "independent_carrier": {
+    "kind": "EXISTING_SPRITE",
+    "name": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "incremental_spend_usd": 0
+  },
+  "execution": {
+    "command": "python3 -m unittest -v canonical.tests.test_counterexample_guided_causal_architecture_synthesizer_v1",
+    "tests_run": 8,
+    "failures": 0,
+    "errors": 0,
+    "conclusion": "success"
+  },
+  "verified_properties": [
+    "MINIMUM_VERIFIED_HYBRID_CAN_DOMINATE_A_SLOWER_MONOLITH",
+    "COUNTEREXAMPLE_CAN_FORCE_THE_SMALLEST_DECLARED_REPAIR_GATE",
+    "MISSING_CAUSAL_EFFECT_IS_EMITTED_AS_NEW_PRIMITIVE_REQUIRED",
+    "OPAQUE_DONOR_BOUND_COMPONENT_IS_REJECTED",
+    "UNVERIFIED_CANDIDATE_REMAINS_VERIFICATION_REQUIRED",
+    "POSITIVE_INCREMENTAL_SPEND_COMPONENT_IS_REJECTED",
+    "UNREACHABLE_DEPENDENCY_DOES_NOT_COUNT_AS_AN_ARCHITECTURE",
+    "TIEBREAK_IS_DETERMINISTIC"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_DECLARED_FRONTIER_IS_GLOBALLY_COMPLETE",
+    "NO_CLAIM_ANY_OF_THE_13_ACCEPTANCE_OBLIGATIONS_IS_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {"incremental_spend_usd": 0, "terminal_credit_delta": 0, "acceptance_credit_delta": 0}
+}
