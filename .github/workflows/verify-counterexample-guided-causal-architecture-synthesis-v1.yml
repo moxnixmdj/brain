@@ -24,18 +24,27 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Compile
+      - name: Verify and preserve diagnostics
+        id: verify
+        shell: bash
         run: |
-          python -m py_compile canonical/runtime/counterexample_guided_causal_architecture_synthesizer_v1.py
-          python -m py_compile canonical/tests/test_counterexample_guided_causal_architecture_synthesizer_v1.py
-      - name: Test
-        run: |
-          set -o pipefail
-          python -m unittest -v canonical.tests.test_counterexample_guided_causal_architecture_synthesizer_v1 2>&1 | tee /tmp/architecture-synthesis-test.log
+          set +e
+          {
+            python -m py_compile canonical/runtime/counterexample_guided_causal_architecture_synthesizer_v1.py
+            python -m py_compile canonical/tests/test_counterexample_guided_causal_architecture_synthesizer_v1.py
+            python -m unittest -v canonical.tests.test_counterexample_guided_causal_architecture_synthesizer_v1
+          } > /tmp/architecture-synthesis-test.log 2>&1
+          code=$?
+          cat /tmp/architecture-synthesis-test.log
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
       - name: Upload test log
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: architecture-synthesis-test-log
           path: /tmp/architecture-synthesis-test.log
-          if-no-files-found: ignore
+          if-no-files-found: error
+      - name: Enforce verification result
+        shell: bash
+        run: test "${{ steps.verify.outputs.exit_code }}" = "0"
