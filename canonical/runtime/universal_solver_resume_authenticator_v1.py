@@ -64,6 +64,39 @@ def _digest(value: Any) -> str:
     return sha256(_canon(value).encode("utf-8")).hexdigest()
 
 
+def _effect_outcome_digest(value: Mapping[str, Any]) -> str:
+    # Must exactly match universal_verified_effect_executor_v1.execute.
+    return sha256(
+        json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+
+
+def make_resume_state(
+    problem: Mapping[str, Any],
+    solver_result: Mapping[str, Any],
+) -> dict[str, Any]:
+    if not isinstance(problem, Mapping) or not isinstance(solver_result, Mapping):
+        raise ResumeAuthenticationError("PROBLEM_AND_SOLVER_RESULT_REQUIRED")
+    trace = solver_result.get("trace")
+    capsule = solver_result.get("state_capsule")
+    verified = solver_result.get("verified_facts")
+    if not isinstance(trace, list) or not isinstance(capsule, Mapping) or not isinstance(verified, list):
+        raise ResumeAuthenticationError("SOLVER_RESULT_HAS_NO_RESUMABLE_STATE")
+    head = capsule.get("head_hash")
+    if not isinstance(head, str) or not head:
+        raise ResumeAuthenticationError("SOLVER_RESULT_CAPSULE_HEAD_MISSING")
+    return {
+        "schema": RESUME_SCHEMA,
+        "problem_sha256": v1._digest(problem),
+        "task_contract_sha256": v4.task_contract_sha256(problem),
+        "verified_facts": list(verified),
+        "trace": deepcopy(trace),
+        "state_capsule": deepcopy(dict(capsule)),
+        "state_capsule_head_hash": head,
+        "source_solver_status": solver_result.get("status"),
+    }
+
+
 def _tokens(value: Any, label: str) -> list[str]:
     if not isinstance(value, Sequence) or isinstance(value, (str, bytes, bytearray)):
         raise ResumeAuthenticationError(label + "_INVALID")
@@ -117,7 +150,7 @@ def _revalidate_effect(
     digest = trace_row.get("effect_outcome_sha256")
     if not isinstance(outcome, Mapping) or not isinstance(digest, str) or len(digest) != 64:
         raise ResumeAuthenticationError("EFFECT_OUTCOME_MISSING_OR_INVALID")
-    if _digest(outcome) != digest:
+    if _effect_outcome_digest(outcome) != digest:
         raise ResumeAuthenticationError("EFFECT_OUTCOME_DIGEST_MISMATCH")
 
     executor_payload = action.get("executor_payload")
