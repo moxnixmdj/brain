@@ -1,0 +1,46 @@
+name: Verify agency finite acceptance closure v1
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-agency-finite-acceptance-closure-v1.yml'
+      - 'canonical/governance/AGENCY_FINITE_PORTFOLIO_FREEZE_20261007_V1.json'
+      - 'canonical/runtime/agency_finite_acceptance_closure_v1.py'
+      - 'canonical/runtime/matched_agency_stateful_case_v1.py'
+      - 'canonical/runtime/delegation_whole_scope_candidate_v2.py'
+      - 'canonical/runtime/delegation_whole_scope_proof_v2.py'
+      - 'canonical/runtime/matched_exact_finite_success_reducer_v1.py'
+      - 'canonical/tests/test_agency_finite_acceptance_closure_v1.py'
+  pull_request:
+    paths:
+      - '.github/workflows/verify-agency-finite-acceptance-closure-v1.yml'
+      - 'canonical/governance/AGENCY_FINITE_PORTFOLIO_FREEZE_20261007_V1.json'
+      - 'canonical/runtime/agency_finite_acceptance_closure_v1.py'
+      - 'canonical/runtime/matched_agency_stateful_case_v1.py'
+      - 'canonical/runtime/delegation_whole_scope_candidate_v2.py'
+      - 'canonical/runtime/delegation_whole_scope_proof_v2.py'
+      - 'canonical/runtime/matched_exact_finite_success_reducer_v1.py'
+      - 'canonical/tests/test_agency_finite_acceptance_closure_v1.py'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run frozen two-case qualification and emit receipt
+        run: |
+          python -m pytest canonical/tests/test_agency_finite_acceptance_closure_v1.py -q
+          python - <<'PY'
+          import json
+          from canonical.runtime.agency_finite_acceptance_closure_v1 import run_portfolio
+          out = run_portfolio()
+          assert out["pass"] is True, out
+          assert out["case_count"] == 2, out
+          assert out["dimension_coverage_complete"] is True, out
+          assert out["metrics_at_objective_ceiling"] is True, out
+          assert out["brain_success_fraction"] == 1.0, out
+          assert all(row["success"] and row["verified"] for row in out["cases"]), out
+          print("AGENCY_FINITE_ACCEPTANCE_RECEIPT="+json.dumps(out,sort_keys=True,separators=(",",":")))
+          PY
