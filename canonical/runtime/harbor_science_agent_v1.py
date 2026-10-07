@@ -35,6 +35,7 @@ MAX_CYCLES = 12
 MAX_REQUIREMENTS = 16
 MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
+PLANNER_TIMEOUT_S = 300
 
 _FATAL_ACTION_STDERR_MARKERS = (
     "here-document at line",
@@ -338,7 +339,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "A candidate claiming one of them must actually create that exact nonempty file; Brain validates it independently.\n"
             "Recent observations: " + json.dumps(observations[-8:], sort_keys=True)[:30000]
         )
-        planned = science_planner.plan(prompt, timeout_s=180)
+        planned = science_planner.plan(prompt, timeout_s=PLANNER_TIMEOUT_S)
         raw = science_planner.normalize_proposal_object(
             science_planner.extract_json_object(planned.get("text", ""))
         )
