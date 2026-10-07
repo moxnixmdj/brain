@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_INSTRUCTION_SCOPE_SHARED_SEMANTIC_RESIDUAL_RECONCILIATION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SCHEDULER_TRUTH_REDUCTION__DISTINCT_INSTRUCTION_SPECIFIC_GENERIC_MECHANISM_NOT_PROVED_NECESSARY__SHARED_SELECTED_CONTEXT_SEMANTIC_TAIL_PRESERVED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "terminal_now_v16": {
+      "path": "canonical/governance/TERMINAL_NOW_V16_RESIDUAL_NORMALIZATION_20261007_V1.json",
+      "git_blob_sha": "3ee3e56b6b235d60edba0b4666de891bf54dcbd3"
+    },
+    "pstar_instruction": {
+      "path": "canonical/governance/PSTAR_INSTRUCTION_FOLLOWING_SCOPE_FIRST_APPLICATION_20261007_V1.json",
+      "git_blob_sha": "cbbfe0c588156d575763135c3decc5773a029bba"
+    },
+    "shared_semantic_frontier": {
+      "path": "canonical/governance/FIVE_PRIMITIVE_ROLE_SINGLE_SEMANTIC_FRONTIER_20261007_V1.json",
+      "git_blob_sha": "eb316b0a674a3542280c71706fffe850d22e44fa"
+    },
+    "global_m0_necessity_falsifier": {
+      "path": "canonical/governance/M0_GLOBAL_SEMANTIC_DECOMPOSITION_NECESSITY_FALSIFIER_20261007_V1.json",
+      "git_blob_sha": "0c02f1c3a2b4eacf9d84b1cb81c09643305c6f8a"
+    },
+    "bounded_instruction_compiler": {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+    }
+  },
+  "current_fact_pattern": {
+    "current_residual_id": "INSTRUCTION_SCOPE_BOUNDARY",
+    "current_residual_state": "OPEN_ACCEPTANCE_PROOF_GAP_NOT_A_PROVED_PERSISTENT_CAPABILITY_GAP",
+    "pstar_positive_P_forced": false,
+    "B1_projection": "TASK_CONTRACT_CONSTRAINT_AND_TERMINAL_RELEVANCE_SEMANTICS",
+    "shared_generic_new_implementation_generator_required": false,
+    "global_M0_required_for_ABC": false,
+    "bounded_structural_instruction_route_exists": true
+  },
+  "necessity_claim_falsified": "CURRENT_INSTRUCTION_SCOPE_BOUNDARY_REQUIRES_A_DISTINCT_INSTRUCTION_SPECIFIC_GENERAL_LEARNED_MECHANISM_OR_ONE_GLOBAL_GENERAL_SEMANTIC_PARSER_BEFORE_SELECTED_CONTEXT_ABC_CAN_ADVANCE",
+  "countermodel": {
+    "selected_context_cover": [
+      "CACHED_LIVEBENCH_ACTIVE15_CELL",
+      "BOUNDED_STRUCTURAL_INSTRUCTION_COMPILER_SLICES",
+      "OTHER_CONTEXTS_CLOSED_ROUTE_LOCALLY_BY_SCOPE_COMPLETE_DIRECT_E2E_TOP_LAW_OR_SHARED_SEMANTIC_CERTIFICATES"
+    ],
+    "distinct_instruction_specific_generic_mechanism": false,
+    "one_global_general_M0": false,
+    "route_local_semantic_soundness_required": true,
+    "selected_context_ABC_can_be_true_in_this_model": true,
+    "why_consistent": [
+      "PSTAR_DOES_NOT_FORCE_POSITIVE_P_AND_REQUIRES_A_STRONG_SAME_INFORMATION_COUNTEREXAMPLE_BEFORE_PERSISTENT_CAPABILITY_GAP",
+      "B1_IS_ALREADY_PROJECTED_INTO_THE_SHARED_FIVE_ROLE_SEMANTIC_FRONTIER",
+      "GLOBAL_M0_NECESSITY_HAS_A_SEPARATE_VALID_COUNTERMODEL",
+      "BOUNDED_FORMAL_INSTRUCTION_CONSTRAINTS_HAVE_AN_OWNED_DETERMINISTIC_COMPILER_WHILE_OPEN_SEMANTIC_CONTENT_EXPLICITLY_REMAINS_OUTSIDE_ITS_SCOPE"
+    ]
+  },
+  "surviving_load_bearing_residual": {
+    "name": "INSTRUCTION_SELECTED_CONTEXT_SHARED_SEMANTIC_OR_DIRECT_E2E_COVERAGE_TAIL",
+    "obligations": [
+      "COVER_EVERY_TARGET_RELEVANT_INSTRUCTION_SCOPE_CONTEXT_NOT_ALREADY_CACHED",
+      "FOR_EACH_SELECTED_ROUTE_BIND_TASK_SUFFICIENT_SEMANTICS_WHEN_THAT_ROUTE_DEPENDS_ON_SEMANTIC_EXTRACTION",
+      "OR_USE_A_SCOPE_COMPLETE_DIRECT_END_TO_END_OR_TOP_LAW_CERTIFICATE_THAT_MAKES_SEPARATE_EXTRACTION_UNNECESSARY",
+      "PROVE_BRAIN_ROUTE_ADEQUACY_OR_NONINFERIORITY_FOR_THE_SELECTED_CONTEXT",
+      "PRESERVE_FAIL_CLOSED_AMBIGUITY_CLARIFICATION_AUTHORITY_AND_RESOURCE_BOUNDS",
+      "IF_A_SAME_INFORMATION_COUNTEREXAMPLE_SURVIVES_ALL_OWNED_ROUTES_LOCALIZE_ONLY_THE_MINIMUM_POSITIVE_P_MECHANISM"
+    ],
+    "current_state": "OPEN__NOT_FAMILY_CLOSED"
+  },
+  "scheduler_reduction": {
+    "delete": [
+      "DISTINCT_INSTRUCTION_SPECIFIC_GENERIC_CAPABILITY_HUNT_AS_A_DEFAULT_ROOT",
+      "GLOBAL_ARBITRARY_LANGUAGE_M0_AS_AN_INSTRUCTION_PREREQUISITE",
+      "FRESH_OPUS_QUERY_MERELY_TO_ESTABLISH_THAT_THE_CURRENT_PROOF_GAP_EXISTS"
+    ],
+    "reuse": [
+      "SHARED_FIVE_ROLE_SEMANTIC_FRONTIER",
+      "BOUNDED_INSTRUCTION_CONSTRAINT_COMPILER",
+      "EXISTING_REQUIREMENT_CHANGE_AND_SCOPE_GUARD_ROUTES",
+      "DIRECT_E2E_AND_TOP_LAW_SELECTED_CELL_CERTIFICATE_ROUTES"
+    ],
+    "reopen_distinct_mechanism_only_if": "A_CAUSALLY_LOCALIZED_LOAD_BEARING_SAME_INFORMATION_COUNTEREXAMPLE_SURVIVES_SHARED_SEMANTIC_DIRECT_E2E_TOP_LAW_CLARIFICATION_FAIL_CLOSED_AND_EXISTING_R_ROUTES"
+  },
+  "terminal_effect": {
+    "instruction_family_closed": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false,
+    "progress_kind": "CRITICAL_PATH_DELETION_AND_RESIDUAL_COMPRESSION_ONLY"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_NATURAL_LANGUAGE_SEMANTICS_IS_SOLVED",
+    "NO_CLAIM_ALL_INSTRUCTION_CONTEXTS_ARE_COVERED",
+    "NO_CLAIM_INSTRUCTION_SCOPE_NONINFERIORITY_IS_PROVED",
+    "NO_CLAIM_POSITIVE_P_IS_IMPOSSIBLE",
+    "NO_CLAIM_ROUTE_LOCAL_SEMANTIC_EXTRACTION_IS_NEVER_REQUIRED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
