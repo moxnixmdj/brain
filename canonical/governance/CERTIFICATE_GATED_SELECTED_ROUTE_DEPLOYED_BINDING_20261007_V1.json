@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_DEPLOYED_BINDING_V1",
+  "date": "2026-10-07",
+  "status": "DEPLOYED_RUNTIME_BINDING_CLOSED__FAIL_CLOSED_CONTENT_ADDRESSED_ENTRYPOINT__CANARY_ONLY__ZERO_ABC_D_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "exact_bindings": {
+    "router": {
+      "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+      "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
+    },
+    "runtime_entrypoint": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v1.py",
+      "git_blob_sha": "4c923a53861c8dc29e5a69bf0bd8678f669d2702"
+    },
+    "runtime_registry": {
+      "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
+      "git_blob_sha": "78ef7174fd7cdebb24f97882e8c325a5164f18cb"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_ENTRYPOINT_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "66f5078fbb40fec8cd41ba5be8db11752db59f9d"
+    },
+    "canary_route": {
+      "path": "canonical/runtime/router_deployment_canary_v1.py",
+      "git_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2"
+    },
+    "canary_adequacy": {
+      "path": "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADEQUACY_CERTIFICATE_20261007_V1.json",
+      "git_blob_sha": "e521f7b75123bca5cc9704340283a727bb45e957"
+    },
+    "canary_admission": {
+      "path": "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADMISSION_CERTIFICATE_20261007_V1.json",
+      "git_blob_sha": "1b2f97e7d46877b8782ea211fd15f679e6bfb5b0"
+    },
+    "test_contract": {
+      "path": "canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v1.py",
+      "git_blob_sha": "4275dd6ec200f5e38a36589d2c7b10b37ebb14bb"
+    }
+  },
+  "deployment_property": {
+    "deployed_runtime_binding_closed": true,
+    "selected_route_execution_authority": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v1.py",
+    "any_route_execution_bypassing_entrypoint_creditable": false,
+    "context_digest_computed_by_entrypoint": true,
+    "route_and_certificates_content_address_verified_before_import": true,
+    "route_selection_uses_existing_fail_closed_router": true,
+    "uncovered_context_behavior": "FAIL_CLOSED",
+    "exact_replay_verified": true,
+    "route_blob_mutation_rejected": true
+  },
+  "truth_boundary": {
+    "registry_initial_scope": "NON_CREDITABLE_DEPLOYMENT_CANARY_ONLY",
+    "selected_cover_complete": false,
+    "per_cell_positive_admission_complete": false,
+    "per_cell_adequacy_or_dominance_complete": false,
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false,
+    "reason": "THIS_CLOSES_ONLY_THE_MECHANICAL_DEPLOYED_BINDING_PREDICATE__REAL_CONTEXTS_REMAIN_NONEXECUTABLE_UNTIL_CONTENT_ADDRESSED_POSITIVE_ADMISSION_AND_ADEQUACY_RECEIPTS_ARE_PROMOTED"
+  },
+  "invariant": [
+    "NO_SELECTED_ROUTE_MAY_RECEIVE_ABC_OR_TERMINAL_CREDIT_IF_EXECUTED_OUTSIDE_THE_CONTENT_ADDRESSED_ENTRYPOINT.",
+    "NO_UNREGISTERED_CONTEXT_EXECUTES.",
+    "NO_ROUTE_OR_CERTIFICATE_BLOB_DRIFT_EXECUTES.",
+    "CANARY_ROUTE_IS_NON_CREDITABLE_AND_CANNOT_CLOSE_SELECTED_COVER.",
+    "DEPLOYED_BINDING_CLOSURE_IS_DISTINCT_FROM_SELECTED_COVER_COMPLETENESS."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

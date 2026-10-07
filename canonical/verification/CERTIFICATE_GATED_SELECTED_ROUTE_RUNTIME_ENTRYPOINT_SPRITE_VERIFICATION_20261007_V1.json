@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_ENTRYPOINT_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PASS__CONTENT_ADDRESSED_RUNTIME_ENTRYPOINT__EXACT_REPLAY__FAIL_CLOSED_MUTATION_AND_UNCOVERED_CONTEXT",
+  "branch": "terminal/router-deployed-entrypoint-20261007-v1",
+  "verified_branch_head_commit": "d949c8503989f5dc4e11c7e98abec23c86f9d17f",
+  "verifier": {
+    "carrier": "brain-h100-independent-replay-v1",
+    "method": "DEPENDENCY_FREE_INDEPENDENT_PYTHON_REPLAY",
+    "pytest_available": false
+  },
+  "exact_bindings": {
+    "router": {
+      "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+      "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
+    },
+    "entrypoint": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v1.py",
+      "git_blob_sha": "4c923a53861c8dc29e5a69bf0bd8678f669d2702"
+    },
+    "registry": {
+      "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
+      "git_blob_sha": "78ef7174fd7cdebb24f97882e8c325a5164f18cb"
+    },
+    "canary_route": {
+      "path": "canonical/runtime/router_deployment_canary_v1.py",
+      "git_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2"
+    },
+    "canary_adequacy": {
+      "path": "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADEQUACY_CERTIFICATE_20261007_V1.json",
+      "git_blob_sha": "e521f7b75123bca5cc9704340283a727bb45e957"
+    },
+    "canary_admission": {
+      "path": "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADMISSION_CERTIFICATE_20261007_V1.json",
+      "git_blob_sha": "1b2f97e7d46877b8782ea211fd15f679e6bfb5b0"
+    },
+    "test_contract": {
+      "path": "canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v1.py",
+      "git_blob_sha": "4275dd6ec200f5e38a36589d2c7b10b37ebb14bb"
+    }
+  },
+  "observations": {
+    "preflight_pass": true,
+    "registered_route_count": 1,
+    "exact_canary_replay_same_result": true,
+    "actual_context_digest_sha256": "c1a047876bb0bd9e8d51044832957721099bbfaa9b59c1234dbefb890351a256",
+    "selected_route_id": "router-deployment-canary",
+    "selected_cell_id": "ROUTER_DEPLOYMENT_CANARY_ONLY",
+    "uncovered_context_fail_closed": true,
+    "uncovered_context_reason": "NO_CERTIFIED_ROUTE_FOR_ACTUAL_CONTEXT",
+    "noncanonical_nan_context_rejected": true,
+    "route_blob_mutation_fail_closed": true,
+    "route_blob_mutation_reason": "ROUTE_BLOB_DRIFT:0"
+  },
+  "scope": {
+    "deployed_runtime_mechanics_verified": true,
+    "real_selected_cover_complete": false,
+    "canary_creditable": false,
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

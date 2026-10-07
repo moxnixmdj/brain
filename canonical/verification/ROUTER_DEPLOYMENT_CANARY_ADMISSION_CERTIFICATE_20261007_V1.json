@@ -1,0 +1,12 @@
+{
+  "schema": "PROJECT_BRAIN_ROUTER_DEPLOYMENT_CANARY_ADMISSION_CERTIFICATE_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_CONTEXT_ADMISSION_ONLY__NON_CREDITABLE",
+  "context_digest_sha256": "c1a047876bb0bd9e8d51044832957721099bbfaa9b59c1234dbefb890351a256",
+  "cell_id": "ROUTER_DEPLOYMENT_CANARY_ONLY",
+  "route_id": "router-deployment-canary",
+  "admitted": true,
+  "creditable": false,
+  "scope": "ROUTER_DEPLOYMENT_MECHANICS_ONLY",
+  "terminal_credit_delta": 0
+}
