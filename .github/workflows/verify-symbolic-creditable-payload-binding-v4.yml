@@ -1,0 +1,98 @@
+name: Verify symbolic creditable payload binding V4
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-symbolic-creditable-payload-binding-v4.yml'
+      - 'canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v4.py'
+      - 'canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v4.py'
+      - 'canonical/governance/SYMBOLIC_CREDITABLE_PAYLOAD_BINDING_REPAIR_20261007_V1.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify-symbolic-creditable-payload-binding-v4
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Execute inherited and repaired router suites
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pytest -q \
+            canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v2.py \
+            canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v3.py \
+            canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v4.py
+          python - <<'PY'
+          import json
+          from canonical.runtime.certificate_gated_selected_route_runtime_entrypoint_v4 import preflight
+          out = preflight()
+          assert out["pass"] is True, out
+          assert out["selected_cover_complete"] is False, out
+          print(json.dumps(out, sort_keys=True))
+          PY
+
+      - name: Persist independent verification receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib, subprocess
+          def blob(path):
+              return subprocess.check_output(["git","hash-object",path], text=True).strip()
+          runtime="canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v4.py"
+          tests="canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v4.py"
+          governance="canonical/governance/SYMBOLIC_CREDITABLE_PAYLOAD_BINDING_REPAIR_20261007_V1.json"
+          receipt={
+            "schema":"PROJECT_BRAIN_SYMBOLIC_CREDITABLE_PAYLOAD_BINDING_GITHUB_VERIFICATION_V1",
+            "date":"2026-10-07",
+            "status":"PASS__INDEPENDENT_GITHUB_HOSTED_REPLAY__CREDITABLE_SYMBOLIC_CONTEXT_PAYLOAD_BINDING_ENFORCED__ZERO_TERMINAL_CREDIT",
+            "trigger_sha":os.environ["GITHUB_SHA"],
+            "independent_runner":"GITHUB_HOSTED_UBUNTU_LATEST",
+            "subjects":{
+              "runtime":{"path":runtime,"git_blob_sha":blob(runtime)},
+              "tests":{"path":tests,"git_blob_sha":blob(tests)},
+              "governance":{"path":governance,"git_blob_sha":blob(governance)}
+            },
+            "verified":{
+              "v2_payload_binding_suite_passed":True,
+              "v3_symbolic_router_suite_passed":True,
+              "v4_payload_binding_regression_suite_passed":True,
+              "creditable_symbolic_rows_require_content_addressed_payload_validator":True,
+              "different_unadmitted_payload_cannot_bypass_v4_validator":True,
+              "noncreditable_canary_remains_compatible":True,
+              "selected_cover_complete_not_self_asserted":True
+            },
+            "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0},
+            "hard_nonclaims":["NO_U_EMPTY","NO_D_FINALITY","NO_TERMINAL_CREDIT"]
+          }
+          dst=pathlib.Path("canonical/verification/SYMBOLIC_CREDITABLE_PAYLOAD_BINDING_GITHUB_VERIFICATION_20261007_V1.json")
+          dst.write_text(json.dumps(receipt,indent=2,sort_keys=True)+"\n")
+          PY
+          OUT=canonical/verification/SYMBOLIC_CREDITABLE_PAYLOAD_BINDING_GITHUB_VERIFICATION_20261007_V1.json
+          git config user.name "Project Brain Symbolic Router Verifier"
+          git config user.email "project-brain-symbolic-router-verifier@users.noreply.github.com"
+          git add "$OUT"
+          git diff --cached --quiet && exit 0
+          git commit -m "Verify symbolic creditable context-payload binding V4"
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main || { git rebase --abort || true; sleep 1; continue; }
+            git push origin HEAD:main && exit 0
+            sleep 1
+          done
+          exit 1
