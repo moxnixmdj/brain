@@ -42,23 +42,22 @@ jobs:
             echo "BRIDGE_PROBE pipeline=$slug http_status=$code"
             if [ "$code" = '200' ]; then
               python - "$tmp" <<'PY'
-import json, re, sys
-p=sys.argv[1]
-o=json.load(open(p, encoding='utf-8'))
-safe={k:o.get(k) for k in ('id','slug','name','default_branch','created_at') if k in o}
-print('BRIDGE_PROBE pipeline_metadata='+json.dumps(safe, sort_keys=True))
-cfg=o.get('configuration')
-if isinstance(cfg,str):
-    lines=[]
-    for line in cfg.splitlines():
-        if re.match(r'^\s*(?:command|commands|label|key|plugins|agents|artifact_paths)\s*:', line):
-            # Never emit obvious credential-bearing text even if configuration contains it.
-            if re.search(r'(?i)(token|secret|password|api[_-]?key)', line):
-                lines.append(re.sub(r':.*', ': <redacted>', line))
-            else:
-                lines.append(line[:400])
-    print('BRIDGE_PROBE configuration_selected_lines='+json.dumps(lines[:80]))
-PY
+          import json, re, sys
+          p=sys.argv[1]
+          o=json.load(open(p, encoding='utf-8'))
+          safe={k:o.get(k) for k in ('id','slug','name','default_branch','created_at') if k in o}
+          print('BRIDGE_PROBE pipeline_metadata='+json.dumps(safe, sort_keys=True))
+          cfg=o.get('configuration')
+          if isinstance(cfg,str):
+              lines=[]
+              for line in cfg.splitlines():
+                  if re.match(r'^\s*(?:command|commands|label|key|plugins|agents|artifact_paths)\s*:', line):
+                      if re.search(r'(?i)(token|secret|password|api[_-]?key)', line):
+                          lines.append(re.sub(r':.*', ': <redacted>', line))
+                      else:
+                          lines.append(line[:400])
+              print('BRIDGE_PROBE configuration_selected_lines='+json.dumps(lines[:80]))
+          PY
             fi
             rm -f "$tmp"
           done
