@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_SCOPE_FINITE_WAVE_V1_FAILURE_RECONCILIATION",
+  "date": "2026-10-07",
+  "status": "FROZEN_WAVE_EXECUTION_FAILURE__CHILD_IMPORT_TRANSPORT_BUG__ZERO_SEMANTIC_CREDIT__NO_OPUS_CASES",
+  "precommit": {
+    "path": "canonical/governance/AGENCY_SCOPE_FINITE_WAVE_PRECOMMIT_20261007_V2.json",
+    "beacon_commit": "745475f3f4b1280fc91496423f52f913f0e1f852"
+  },
+  "frozen_harness": {
+    "path": "canonical/runtime/agency_scope_finite_wave_v1.py",
+    "git_blob_sha": "8d646969bcbb2ac74e633f55e163958da4ba1291"
+  },
+  "observed_wave": {
+    "fixed_case_count": 192,
+    "brain_success_count": 0,
+    "brain_failure_count": 192,
+    "coverage_complete": false,
+    "all_cases_joint_safety_top": false,
+    "case_isolation_or_reset_equivalent": true,
+    "opus_residual_case_count": 192,
+    "by_kind_parseable_result_counts": 0
+  },
+  "causal_diagnosis": {
+    "child_returncode": 1,
+    "stderr_class": "ModuleNotFoundError",
+    "exact_message": "No module named 'canonical'",
+    "failure_location": "TOP_LEVEL_IMPORT_IN_CHILD_PROCESS_BEFORE_CASE_EXECUTION",
+    "direct_same_descriptor_diagnosis": [
+      "PLANNING_3_TOOL_PASS",
+      "STATE_CHANGE_REPLAN_PASS",
+      "TOOL_FAILURE_RECOVERY_PASS",
+      "SUBTASK_DEPENDENCY_FANIN_PASS"
+    ],
+    "interpretation": "THE_0_OF_192_WAVE_DOES_NOT_ESTABLISH_192_CAPABILITY_FAILURES__THE_CHILD_PROCESS_NEVER_IMPORTED_THE_FROZEN_HARNESS_DEPENDENCIES"
+  },
+  "successor_rule": {
+    "case_descriptor_beacon_must_remain": "745475f3f4b1280fc91496423f52f913f0e1f852",
+    "case_count_must_remain": 192,
+    "kinds_must_remain_unchanged": true,
+    "semantic_routes_must_remain_unchanged": true,
+    "only_permitted_repair": "BIND_REPOSITORY_ROOT_IN_CHILD_PYTHON_IMPORT_PATH"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "opus_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_AGENCY_NONINFERIORITY_CREDIT",
+    "NO_CASE_REPLACEMENT",
+    "NO_SEMANTIC_FAILURE_INFERRED_FROM_IMPORT_FAILURE",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
