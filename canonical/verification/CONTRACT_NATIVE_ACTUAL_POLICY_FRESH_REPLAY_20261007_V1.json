@@ -1,0 +1,17 @@
+{
+  "schema":"PROJECT_BRAIN_CONTRACT_NATIVE_ACTUAL_POLICY_FRESH_REPLAY_V1",
+  "date":"2026-10-07",
+  "status":"PASS_2000_OF_2000_ZERO_GLOBAL_CREDIT",
+  "candidate_commit":"25ab7aac02704ed8e90d346b206109d72e320e25",
+  "candidate_blob":"25c7912e2b217cd84686fe8f901fb87ff1e6b728",
+  "suite_blob":"b72cec9a928000df5ef4ce7fcb807f69c3943c01",
+  "post_freeze_seed":496747046,
+  "carrier":"brain-root3-current-byte-replay-20261007-v1",
+  "contracts":4,
+  "difficulty_levels":5,
+  "cases_per_contract_per_difficulty":100,
+  "passed":2000,
+  "failed":0,
+  "remaining_boundary":"REAL_OPUS55_SCOPE_EQUIVALENCE_NOT_PROVED",
+  "hard_nonclaims":["NO_U_DELETION","NO_TERMINAL_CREDIT"]
+}
