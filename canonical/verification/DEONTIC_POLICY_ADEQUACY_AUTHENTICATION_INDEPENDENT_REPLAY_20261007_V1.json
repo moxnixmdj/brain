@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_DEONTIC_POLICY_ADEQUACY_AUTHENTICATION_INDEPENDENT_REPLAY_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_BOUNDARY_REPLAY_PASS__EXACT_REPAIRED_RUNTIME_BLOB__3_OF_3__ZERO_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/DEONTIC_POLICY_ADEQUACY_AUTHENTICATION_REPAIR_20261007_V1.json",
+      "git_blob_sha": "03438958b9568a9554f2dd377b836bde1ab62a19"
+    },
+    "runtime": {
+      "path": "canonical/runtime/proof_carrying_deontic_refinement_v1.py",
+      "git_blob_sha": "1cd910928aa6abfc9a6651941cd23105ed17b63a"
+    },
+    "regression_tests": {
+      "path": "canonical/tests/test_proof_carrying_deontic_refinement_v2.py",
+      "git_blob_sha": "4f037623c6c56cbda5f27426d47a4538db7f9a7a"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/deontic_auth_bridge_repair",
+    "exact_runtime_blob_recomputed": "1cd910928aa6abfc9a6651941cd23105ed17b63a",
+    "checks_passed": 3,
+    "checks_total": 3
+  },
+  "verified": [
+    "UNAUTHENTICATED_ENTAILED_POLICY_IS_BLOCKED",
+    "AUTHENTICATED_ADEQUACY_PATH_REMAINS_AVAILABLE",
+    "NO_POLICY_ENTAILMENT_RETURNS_UNRESOLVED"
+  ],
+  "hard_nonclaims": [
+    "NO_FINANCE_OR_OTHER_CELL_CLOSURE",
+    "NO_NEW_POLICY_ADEQUACY_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
