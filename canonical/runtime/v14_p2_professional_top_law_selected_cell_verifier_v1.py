@@ -36,7 +36,7 @@ def verify():
   if not all(q.get(k) is True for k in ("direct_instrumentation_pass","load_bearing","parent_terminal_acceptance_pass")):e.append("ROW_PASS")
   if not all(q.get(k) is False for k in ("case_replaced","tuning_replay","result_to_runtime_feedback")):e.append("ROW_CONTAMINATION")
  pre=load("canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json")
- if (pre.get("adjudication") or {}).get(BEH)!="PREQUALIFICATION_INFORMATION_BOUNDARY_PASS":e.append("INFO_BOUNDARY")
+ if (pre.get("adjudication") or {}).get("P2_"+BEH)!="PREQUALIFICATION_INFORMATION_BOUNDARY_PASS":e.append("INFO_BOUNDARY")
  src=(R/"canonical/runtime/p2_p3_information_safe_proof_suites_v2.py").read_text()
  for token in ("for subset in combinations(edits,n)",'"selected_edits":list(best[1])','tuple(sorted(selected))==tuple(sorted(oracle["selected_edits"]))'):
   if token not in src:e.append("SEMANTIC:"+token)
