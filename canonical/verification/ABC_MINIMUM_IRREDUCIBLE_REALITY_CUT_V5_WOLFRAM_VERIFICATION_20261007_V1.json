@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V5_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_EXACT_SET_COVER_REPLAY_PASS__14_CLASSES__9_OF_9_LANES__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V5.json",
+    "git_blob_sha": "c572bac44169890417e209e81254469ce6a1004b"
+  },
+  "synthesis_subsumption": {
+    "theorem_blob_sha": "84c3c238b31e49f9fabfcf39e7670546dc61cf66",
+    "sprite_verification_blob_sha": "7eaf9cd77c25a846fe664d47a642b55e94cbebc6",
+    "consequence_checked": "DELETE_DISTINCT_SYNTHESIS_TARGET_REALITY_WAKE_ONLY__KEEP_SEMANTIC_ADMISSION_OPEN"
+  },
+  "wolfram": {
+    "surviving_positive_reality_class_count": 14,
+    "minimum_lane_count": 9,
+    "minimum_cover": [
+      [
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6",
+        "L7",
+        "L8",
+        "L9"
+      ]
+    ],
+    "result": "PASS"
+  },
+  "verified": [
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_IS_ABSENT_FROM_THE_V5_POSITIVE_REALITY_CLASS_SET",
+    "DENSE_NONCHART_REMAINS_IN_L9",
+    "ALL_FOURTEEN_SURVIVING_CLASSES_ARE_COVERED",
+    "NO_SUBSET_OF_FEWER_THAN_NINE_DECLARED_LANES_COVERS_ALL_FOURTEEN_SURVIVING_CLASSES"
+  ],
+  "hard_nonclaims": [
+    "NO_U_EMPTY",
+    "NO_ABC_CLOSURE",
+    "NO_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
