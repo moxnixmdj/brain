@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_SOLVER_V5_EFFECT_SEMANTICS_INDEPENDENCE_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SOUNDNESS_REPAIR__CONTENT_ADDRESSING_IS_NOT_INDEPENDENCE__V6_PINNED_TRUST_ROOT_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "current_boundary": {
+    "v5_path": "canonical/runtime/universal_verified_adaptive_solver_v5.py",
+    "v5_fresh_path": "DELEGATES_TO_V4",
+    "v5_resume_path": "USES_V4_EFFECT_SEMANTICS_AUTHENTICATION",
+    "defect": "Effect-semantics verification documents are content-addressed and field-checked but their independent authority is not anchored outside caller-selected repo_root."
+  },
+  "counterexample": {
+    "regression": "canonical/tests/test_universal_verified_adaptive_solver_v6.py",
+    "witness": "A locally authored binding plus a second locally authored document declaring independent_verified=true can satisfy the current V5 fresh-run semantics checks for an arbitrary provided effect label when the ordinary built-in verifier passes.",
+    "root_cause": "CONTENT_ADDRESSING_PROVES_EXACT_BYTE_IDENTITY__NOT_WHO_AUTHORIZED_OR_INDEPENDENTLY_VERIFIED_THE_SEMANTIC_IMPLICATION."
+  },
+  "repair": {
+    "runtime": "canonical/runtime/universal_verified_adaptive_solver_v6.py",
+    "trust_root": {
+      "path": "canonical/governance/UNIVERSAL_SOLVER_EFFECT_SEMANTICS_TRUST_ROOT_V1.json",
+      "git_blob_sha": "14fac3d35be101b8c05a19af912623838d59c6ce",
+      "currently_trusted_effect_semantics_verification_blob_count": 0
+    },
+    "rule": "Before delegating to current V5, every capability's exact effect-semantics verification blob must be admitted by the exact runtime-pinned trust root."
+  },
+  "scheduler_effect": [
+    "DO_NOT_TREAT_CURRENT_V5_AS_AUTHORITY_TO_MINT_NEW_GLOBAL_VERIFIED_EFFECT_FACTS_FROM_REPOSITORY_LOCAL_SELF_ATTESTED_EFFECT_SEMANTICS.",
+    "USE_V6_OR_STRONGER_FOR_FUTURE_EFFECT_MINTING_AFTER_EXACT_TRUSTED_SEMANTICS_BLOBS_ARE_SEPARATELY_PROMOTED.",
+    "PROMOTE_EFFECT_SEMANTICS_VERIFICATION_BLOBS_ONLY_AFTER_AN_EXTERNAL_OR_OTHERWISE_IMMUTABLY_TRUSTED_INDEPENDENT_VERIFICATION_EVENT.",
+    "NO_TERMINAL_OR_CAPABILITY_CREDIT_FROM_THIS_CONTROL_PLANE_REPAIR."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_V5_RESUME_STATE_REVALIDATION_OR_EFFECT_READBACK_LOGIC_IS_WRONG.",
+    "NO_CLAIM_ANY_TERMINAL_CAPABILITY_IS_CLOSED_BY_V6.",
+    "NO_EFFECT_SEMANTICS_VERIFICATION_BLOB_IS_PROMOTED_BY_THE_INITIAL_EMPTY_ROOT.",
+    "NO_U_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
