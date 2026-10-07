@@ -22,31 +22,65 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Verify exact blobs and run focused integration tests
+      - name: Run diagnostic verification
         shell: bash
         run: |
-          set -euo pipefail
-          test "$(git hash-object canonical/runtime/raw_task_acceptance_residual_localizer_v1.py)" = "f29616cf7726959aa28db4ed6541a9fc0bc2ac76"
-          test "$(git hash-object canonical/tests/test_raw_task_acceptance_residual_localizer_v1.py)" = "1f643c93ec5f6ed59280036de71ad861eea2d65b"
-          test "$(git hash-object canonical/governance/RAW_TASK_ACCEPTANCE_RESIDUAL_LOCALIZER_20261007_V1.json)" = "ba1084bd8599bbe8196adcad2c5cb73c77ba2684"
-          test "$(git hash-object canonical/runtime/lossless_raw_task_contract_v1.py)" = "d54d5a2f7efa76b653d288f4f53da4883644baa6"
-          test "$(git hash-object canonical/runtime/lossless_raw_task_acceptance_gate_v1.py)" = "1cc72c7075d2e113dfbb2c0f790a3e0bd2a1e7dd"
-          python -m pytest -q             canonical/tests/test_raw_task_acceptance_residual_localizer_v1.py             canonical/tests/test_lossless_raw_task_contract_v1.py             canonical/tests/test_lossless_raw_task_acceptance_gate_v1.py             canonical/tests/test_lossless_raw_task_universal_mission_v1.py             | tee /tmp/pytest.txt
+          set -u
+          python3 - <<'PY'
+          import json, pathlib, subprocess
+          expected={
+            "canonical/runtime/raw_task_acceptance_residual_localizer_v1.py":"f29616cf7726959aa28db4ed6541a9fc0bc2ac76",
+            "canonical/tests/test_raw_task_acceptance_residual_localizer_v1.py":"1f643c93ec5f6ed59280036de71ad861eea2d65b",
+            "canonical/governance/RAW_TASK_ACCEPTANCE_RESIDUAL_LOCALIZER_20261007_V1.json":"ba1084bd8599bbe8196adcad2c5cb73c77ba2684",
+            "canonical/runtime/lossless_raw_task_contract_v1.py":"d54d5a2f7efa76b653d288f4f53da4883644baa6",
+            "canonical/runtime/lossless_raw_task_acceptance_gate_v1.py":"1cc72c7075d2e113dfbb2c0f790a3e0bd2a1e7dd"
+          }
+          rows=[]
+          ok=True
+          for path,want in expected.items():
+              try:
+                  got=subprocess.check_output(["git","hash-object",path],text=True).strip()
+              except Exception as exc:
+                  got="ERROR:"+type(exc).__name__
+              passed=(got==want)
+              ok=ok and passed
+              rows.append({"path":path,"expected":want,"actual":got,"pass":passed})
+          pathlib.Path("/tmp/blob_checks.json").write_text(json.dumps(rows,indent=2),encoding="utf-8")
+          pathlib.Path("/tmp/blob_rc").write_text("0" if ok else "1",encoding="utf-8")
+          PY
 
-      - name: Record independent runner receipt
+          pytest_rc=0
+          python -m pytest -q             canonical/tests/test_raw_task_acceptance_residual_localizer_v1.py             canonical/tests/test_lossless_raw_task_contract_v1.py             canonical/tests/test_lossless_raw_task_acceptance_gate_v1.py             canonical/tests/test_lossless_raw_task_universal_mission_v1.py             > /tmp/pytest.txt 2>&1 || pytest_rc=$?
+          printf '%s' "$pytest_rc" > /tmp/pytest_rc
+          cat /tmp/pytest.txt
+
+      - name: Record pass or falsification receipt
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p canonical/verification
           python3 - <<'PY'
           import json, os, pathlib, subprocess
+          blob_rc=int(pathlib.Path("/tmp/blob_rc").read_text())
+          pytest_rc=int(pathlib.Path("/tmp/pytest_rc").read_text())
+          blob_checks=json.loads(pathlib.Path("/tmp/blob_checks.json").read_text())
+          pytest_text=pathlib.Path("/tmp/pytest.txt").read_text(errors="replace")
+          ok=(blob_rc==0 and pytest_rc==0)
           def blob(path):
               return subprocess.check_output(["git","hash-object",path], text=True).strip()
           receipt={
             "schema":"PROJECT_BRAIN_RAW_TASK_ACCEPTANCE_RESIDUAL_LOCALIZER_INDEPENDENT_VERIFICATION_V1",
             "date":"2026-10-07",
-            "status":"INDEPENDENT_GITHUB_RUNNER_PASS__LOSSLESS_PARTITION_AND_PIPELINE_INTEGRATION__ZERO_ACCEPTANCE_AND_TERMINAL_CREDIT",
+            "status":(
+              "INDEPENDENT_GITHUB_RUNNER_PASS__LOSSLESS_PARTITION_AND_PIPELINE_INTEGRATION__ZERO_ACCEPTANCE_AND_TERMINAL_CREDIT"
+              if ok else
+              "INDEPENDENT_GITHUB_RUNNER_FALSIFICATION__NO_CREDIT"
+            ),
+            "pass":ok,
             "trigger_sha":os.environ.get("GITHUB_SHA"),
+            "blob_checks":blob_checks,
+            "pytest_returncode":pytest_rc,
+            "pytest_tail":pytest_text[-6000:],
             "subject":{
               "governance":{"path":"canonical/governance/RAW_TASK_ACCEPTANCE_RESIDUAL_LOCALIZER_20261007_V1.json","git_blob_sha":blob("canonical/governance/RAW_TASK_ACCEPTANCE_RESIDUAL_LOCALIZER_20261007_V1.json")},
               "runtime":{"path":"canonical/runtime/raw_task_acceptance_residual_localizer_v1.py","git_blob_sha":blob("canonical/runtime/raw_task_acceptance_residual_localizer_v1.py")},
@@ -58,14 +92,14 @@ jobs:
               "canonical/tests/test_lossless_raw_task_acceptance_gate_v1.py",
               "canonical/tests/test_lossless_raw_task_universal_mission_v1.py"
             ],
-            "verified":[
+            "verified":([
               "EVERY_REQUIRED_RAW_OBLIGATION_IS_PARTITIONED_EXACTLY_ONCE.",
               "IMPERATIVE_OR_MODAL_RECOGNITION_ALONE_DOES_NOT_COUNT_AS_CANDIDATE_ACCEPTANCE.",
               "OUT_OF_GRAMMAR_NORMATIVE_REQUIREMENTS_REMAIN_SEMANTIC_RESIDUALS.",
               "OBJECTIVE_ROUTE_AVAILABILITY_DOES_NOT_GRANT_ACCEPTANCE.",
               "SEGMENT_OR_REQUIRED_SET_DRIFT_FAILS_CLOSED.",
               "LOSSLESS_RAW_CONTRACT_ACCEPTANCE_GATE_AND_UNIVERSAL_MISSION_INTEGRATION_TESTS_PASS_TOGETHER."
-            ],
+            ] if ok else []),
             "hard_nonclaims":[
               "NO_ARBITRARY_LANGUAGE_SEMANTIC_ADEQUACY_PROVED.",
               "NO_RAW_OBLIGATION_ACCEPTANCE_RECEIPTS_PRODUCED.",
@@ -78,14 +112,21 @@ jobs:
           )
           print(json.dumps(receipt, sort_keys=True))
           PY
+
           git config user.name "Project Brain Raw Task Verifier"
           git config user.email "project-brain-raw-task-verifier@users.noreply.github.com"
           git add canonical/verification/RAW_TASK_ACCEPTANCE_RESIDUAL_LOCALIZER_GITHUB_VERIFICATION_20261007_V1.json
-          git diff --cached --quiet && exit 0
-          git commit -m "Verify raw-task acceptance residual localizer"
-          for attempt in 1 2 3; do
-            git pull --rebase origin main || { git rebase --abort || true; sleep 2; continue; }
-            git push origin HEAD:main && exit 0
-            sleep 2
-          done
-          exit 1
+          if ! git diff --cached --quiet; then
+            git commit -m "Record raw-task acceptance localizer verification"
+            for attempt in 1 2 3; do
+              git pull --rebase origin main || { git rebase --abort || true; sleep 2; continue; }
+              git push origin HEAD:main && break
+              sleep 2
+            done
+          fi
+
+      - name: Enforce verification result
+        shell: bash
+        run: |
+          test "$(cat /tmp/blob_rc)" = "0"
+          test "$(cat /tmp/pytest_rc)" = "0"
