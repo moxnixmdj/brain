@@ -51,6 +51,9 @@ from canonical.runtime.general_cognition_proposal_packet_v1 import (
     unwrap as unwrap_proposal_packet,
 )
 from canonical.runtime.bound_goal_plan_adapter_v1 import compile_bound_goal
+from canonical.runtime.bound_capability_execution_verifier_v1 import (
+    verify as verify_bound_capability_execution,
+)
 
 SCHEMA = "PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V1"
 
@@ -376,6 +379,7 @@ BUILTIN_VERIFIERS: dict[str, Verifier] = {
     "STRUCTURED_METHOD_EXPRESSION_AST_V2": _verify_structured_method,
     "SOURCE_ALIGNED_ACCEPTANCE_PROGRAM_V1": _verify_source_aligned_acceptance_program,
     "BOUND_GOAL_PLAN_V1": _verify_bound_goal_plan,
+    "BOUND_CAPABILITY_EXECUTION_V1": verify_bound_capability_execution,
 }
 
 PROPOSAL_FREE_VERIFIERS = {
