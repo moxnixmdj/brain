@@ -55,9 +55,9 @@ def verify():
  clean=load("canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json")
  own=load("canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json")
 
- if targetlaw.get("theorem",{}).get("context_law_certificate") is None:
+ if targetlaw.get("theorem",{}).get("comparator_free_positive_certificate_iff")!="K_c_minus_IS_EMPTY":
   e.append("TARGET_LAW_SEMANTICS")
- if trace.get("theorem",{}).get("statement")!="EVERY_EXTERNALLY_USEFUL_OPUS55_CAPABILITY_IS_REPRESENTABLE_AS_A_PROPERTY_OF_THE_OBSERVABLE_TRACE_SUPERSET":
+ if trace.get("rebind",{}).get("target_universe_scope_coverage")!="CLOSED_STRUCTURALLY_FOR_THE_TERMINAL_DEFINITION" or trace.get("rebind",{}).get("coverage_statement")!="U_SUBSET_OR_EQUAL_S_TRACE":
   e.append("TRACE_SCOPE_SEMANTICS")
 
  pc=proof.get("proof_composition",{})
