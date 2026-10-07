@@ -1,0 +1,127 @@
+{
+  "schema": "PROJECT_BRAIN_CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REAL_DEFAULT_CHILD_SEAM__SYNTHETIC_OBS_FIXTURE__PRIVATE_STATE_BYTES_SEPARATELY_BOUND__ZERO_CREDIT",
+  "subject": {
+    "brain_pull_request": 2631,
+    "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "supervisor": {
+      "path": "canonical/runtime/same_identity_supervisor_credited_v2.py",
+      "git_blob_sha": "45d48c23ec4ae429550c264c07f530b0347430cb"
+    },
+    "qualification_runner": {
+      "path": "canonical/verification/run_long_horizon_continuity_v2.py",
+      "git_blob_sha": "b861f1710261de5d973ce6f2c34489ac38de65c8"
+    },
+    "astra": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "3567cfd77eae06e2d384c5e0b18972b2d3a62c3b"
+    },
+    "production_launcher": {
+      "path": "canonical/runtime/root3_production_astra_launcher_v1.py",
+      "git_blob_sha": "3ac42e7be5a391cfda738131ecb0d3d600fa2147"
+    }
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2339,
+    "head_sha": "444c2a6f9fe37b3c7c9cd3c28801d4ba02d6dfce",
+    "merge_sha": "05fc5bf1ede94039559d2f01907e7037bc9b2efd",
+    "workflow": "Isolated verification dispatcher",
+    "workflow_run_id": 37556664032,
+    "workflow_run_number": 30,
+    "workflow_job_id": 112584386080,
+    "conclusion": "success",
+    "python": "3.13.15",
+    "artifact_id": 11455037073,
+    "artifact_name": "isolated-verification-result",
+    "artifact_zip_sha256": "830efcdccbcab289fd7ef393b31320707ba1664a325e0bb1907e7c3b3339624f"
+  },
+  "mirror_integrity": {
+    "exact_brain_blob_mirror_count": 18,
+    "exact_brain_blob_mirror_pass": true,
+    "live_private_canonical_state_mirrored": false,
+    "privacy_rule": "NO_LIVE_BRAIN_CANONICAL_STATE_BYTES_EXPORTED_TO_PUBLIC_VERIFIER"
+  },
+  "private_state_binding": {
+    "canonical_pointer": {
+      "path": "canonical/CANONICAL_POINTER.json",
+      "git_blob_sha": "9a9debe3466d25e743feff44c083b2b75ba2f839",
+      "canonical_generation_present": true
+    },
+    "active_goal_hierarchy": {
+      "path": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+      "git_blob_sha": "9d8e0ecc9e96183fa3910ad5ead761c5ae10ef1e"
+    },
+    "real_output_scoreboard": {
+      "path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+      "git_blob_sha": "cf8e56dd8e620a8802a8c72aca93785fe9b20915"
+    },
+    "binding_semantics": "QUALIFICATION_RUNNER_CONTENT_ADDRESSES_THE_THREE_FILES_AT_RUNTIME_AND_CONTINUOUS_OBS_RECOMPUTES_THOSE_BINDINGS__PUBLIC_CAPSULE_USED_SYNTHETIC_NONAUTHORITATIVE_BYTES_ONLY_TO_VERIFY_THE_PARAMETERIZED_MECHANISM_WITHOUT_DISCLOSING_PRIVATE_STATE"
+  },
+  "result": {
+    "all_boolean_checks_pass": true,
+    "forced_process_boundary": true,
+    "process_a_checkpoint_code": 75,
+    "process_b_default_executor_code": 0,
+    "process_b_runtime_returncode": 0,
+    "supervisor_terminal_complete": true,
+    "astra_terminal_complete": true,
+    "same_agent_identity_preserved": true,
+    "same_task_identity_preserved": true,
+    "mission_hash_preserved": true,
+    "checkpoint_exactly_once": true,
+    "runtime_attempt_exactly_once": true,
+    "claim_count_two_fresh_processes": true,
+    "runtime_command_uses_root3_production_launcher": true,
+    "astra_same_identity_bound": true,
+    "event_order_exact": true,
+    "event_types": [
+      "TASK_ACQUIRED",
+      "CHECKPOINT_CREATED",
+      "TASK_RESUMED",
+      "ASTRA_RUNTIME_STARTED",
+      "TASK_COMPLETE"
+    ],
+    "model_dependency_zero": true,
+    "incremental_spend_zero": true,
+    "mission_sha256": "dc5fb965fd693ad7cc522ac20e8fbbd055e8f93476759ed75446d7983fd898d8",
+    "candidate_supervisor_sha256": "84075fc29375eedca986f11979c4c8d7f8ed6f61676fb640c5a24c59b6c2ebf7",
+    "current_astra_sha256": "b329ad17871dc50f0f9cad38507012376443e17db91406275ed21bf28119ccbf",
+    "production_launcher_sha256": "e0b5418f670e4d95d96f209f7b8378d96889be678bc3e977c8897404422c32a9"
+  },
+  "first_failed_attempt": {
+    "workflow_run_id": 37556543582,
+    "workflow_job_id": 112584013405,
+    "failure": "VERIFIER_TEMP_EVIDENCE_PATH_OUTSIDE_REPOSITORY",
+    "semantic_seam_failure": false,
+    "repair": "REPO_LOCAL_EPHEMERAL_TEMP_ONLY",
+    "pass_rule_changed": false
+  },
+  "adjudication": {
+    "continuity_state_machine_requalified_on_current_default_child_seam": true,
+    "current_child_seam_no_longer_open_for_c": true,
+    "arbitrary_astra_mission_effect_safety_claim": false,
+    "root3_d_effect_closure_claim": false,
+    "family_acceptance_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_CAPSULE_EXECUTED_PRIVATE_LIVE_CANONICAL_STATE_BYTES",
+    "NO_CLAIM_ARBITRARY_ASTRA_MISSIONS_ARE_EFFECT_SAFE",
+    "NO_CLAIM_ROOT3_D_IS_CLOSED",
+    "NO_NEW_FAMILY_OR_CAPABILITY_CREDIT",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
