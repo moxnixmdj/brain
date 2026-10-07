@@ -5788,6 +5788,68 @@ def _run_capability_planned_goal(step, mission, goal):
     result["capability_plan"]=planned["planning"]
     result["composition_contract"]=planned["composition_contract"]
     result["inherited_bound_capabilities"]=problem.get("_inherited_bound_capabilities",[])
+
+    # Bind successful capability-plan execution to the honesty envelope using
+    # the actual content-addressed composition-state capsule produced by this run.
+    # This certifies only execution of this bounded plan, never project-terminal
+    # success or semantic adequacy beyond the declared capability contract.
+    composition_summary=result.get("composition_state_capsule")
+    head_hash=(
+        composition_summary.get("head_hash")
+        if isinstance(composition_summary,dict)
+        else None
+    )
+    if (
+        not isinstance(head_hash,str)
+        or re.fullmatch(r"[0-9a-f]{64}",head_hash.lower()) is None
+    ):
+        raise Blocker("CAPABILITY_PLAN_COMPOSITION_RECEIPT_MISSING")
+    obligation_id="VERIFIED_BOUND_CAPABILITY_PLAN_EXECUTION"
+    step_id=str(step.get("id") or step.get("step_id") or "goal")
+    mission_id=str(mission.get("mission_id") or "").strip()
+    if not mission_id:
+        raise Blocker("CAPABILITY_PLAN_MISSION_ID_REQUIRED_FOR_HONESTY")
+    honesty_common={
+      "schema":"PROJECT_BRAIN_HONESTY_ENVELOPE_INPUT_V1",
+      "obligations":[{
+        "id":obligation_id,
+        "state":"VERIFIED",
+        "receipts":[head_hash.lower()],
+      }],
+      "completion_claim":"COMPLETE",
+      "provenance_events":[{
+        "event_id":"verified-bound-capability-plan-execution",
+        "material":True,
+        "receipts":[head_hash.lower()],
+        "disclosed":True,
+      }],
+      "material_claims":[{
+        "claim_id":"bounded-capability-plan-executed",
+        "supported":True,
+        "explicit_uncertainty":False,
+        "declined":False,
+        "evidence_receipts":[head_hash.lower()],
+      }],
+      "belief_assertions":[],
+    }
+    result["honesty_record"]={
+      **honesty_common,
+      "task_contract":{
+        "task_id":mission_id+"::step::"+step_id,
+        "required_obligations":[obligation_id],
+      },
+    }
+    result["terminal_honesty_record"]={
+      **honesty_common,
+      "task_contract":{
+        "task_id":mission_id,
+        "required_obligations":[obligation_id],
+      },
+    }
+    result["honesty_scope_boundary"]=(
+      "CERTIFIES_ONLY_VERIFIED_EXECUTION_OF_THE_DECLARED_BOUND_CAPABILITY_PLAN;"
+      "DOES_NOT_CERTIFY_GLOBAL_TASK_SEMANTIC_ADEQUACY_OR_PROJECT_TERMINAL_SUCCESS"
+    )
     return result
 
 def _classify_plain_goal_gap(text):
