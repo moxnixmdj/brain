@@ -1,0 +1,89 @@
+name: Zero-spend private Opus capacity probe
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/zero-spend-private-opus-capacity-probe.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      OPENROUTER_MANAGEMENT_API_KEY: ${{ secrets.OPENROUTER_MANAGEMENT_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - name: Probe secret presence and nonspending OpenRouter capacity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, urllib.request, urllib.error
+
+          or_key = os.environ.get("OPENROUTER_API_KEY", "")
+          mgmt_key = os.environ.get("OPENROUTER_MANAGEMENT_API_KEY", "")
+          anthropic_key = os.environ.get("ANTHROPIC_API_KEY", "")
+
+          out = {
+              "schema": "PROJECT_BRAIN_PRIVATE_OPUS_ZERO_SPEND_CAPACITY_PROBE_V1",
+              "openrouter_api_key_present": bool(or_key),
+              "openrouter_management_api_key_present": bool(mgmt_key),
+              "anthropic_api_key_present": bool(anthropic_key),
+              "model_inference_requests": 0,
+              "purchases_or_topups": 0,
+              "secret_values_emitted": False,
+              "openrouter_authenticated_key_probe": False,
+              "openrouter_authenticated_credit_probe": False,
+              "positive_preexisting_capacity_observed": False,
+          }
+
+          def get_json(url, key):
+              req = urllib.request.Request(
+                  url,
+                  headers={"Authorization": "Bearer " + key, "User-Agent": "project-brain-zero-spend-capacity-probe/1"},
+                  method="GET",
+              )
+              with urllib.request.urlopen(req, timeout=15) as resp:
+                  return json.loads(resp.read().decode("utf-8"))
+
+          if or_key:
+              try:
+                  data = get_json("https://openrouter.ai/api/v1/key", or_key)
+                  out["openrouter_authenticated_key_probe"] = True
+                  d = data.get("data") if isinstance(data, dict) else None
+                  if isinstance(d, dict):
+                      limit_remaining = d.get("limit_remaining")
+                      limit = d.get("limit")
+                      usage = d.get("usage")
+                      if isinstance(limit_remaining, (int, float)):
+                          out["positive_preexisting_capacity_observed"] = limit_remaining > 0
+                      elif isinstance(limit, (int, float)) and isinstance(usage, (int, float)):
+                          out["positive_preexisting_capacity_observed"] = (limit - usage) > 0
+              except Exception as exc:
+                  out["openrouter_key_probe_error_class"] = type(exc).__name__
+
+              try:
+                  data = get_json("https://openrouter.ai/api/v1/credits", or_key)
+                  out["openrouter_authenticated_credit_probe"] = True
+                  d = data.get("data") if isinstance(data, dict) else None
+                  if isinstance(d, dict):
+                      total_credits = d.get("total_credits")
+                      total_usage = d.get("total_usage")
+                      if isinstance(total_credits, (int, float)) and isinstance(total_usage, (int, float)):
+                          out["positive_preexisting_capacity_observed"] = (
+                              out["positive_preexisting_capacity_observed"]
+                              or total_credits > total_usage
+                          )
+              except Exception as exc:
+                  out["openrouter_credit_probe_error_class"] = type(exc).__name__
+
+          # No Anthropic request is made. Presence alone is recorded because the
+          # public carrier receipt already established that inference must not be
+          # attempted until zero-spend capacity/admissibility is independently bound.
+          print(json.dumps(out, sort_keys=True))
+          PY
