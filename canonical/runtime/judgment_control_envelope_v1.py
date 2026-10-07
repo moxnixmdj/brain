@@ -371,6 +371,17 @@ def evaluate_materiality_counterfactual() -> dict[str, Any]:
     finance_text = "Every applicable rule must not omit a material exception before execution."
     finance_good_bundle = _base_bundle(finance_text, "synthetic-finance", ["rule", "exception"], "APPLY_RULE")
     finance_bad_bundle = _base_bundle(finance_text, "synthetic-finance", ["rule"], "APPLY_RULE")
+    finance_unit_count = len(derive_finance_source_units(finance_text))
+    finance_good_bundle["source_coverage_manifest"] = build_finance_source_coverage_manifest(
+        finance_text,
+        [["rule", "exception"] for _ in range(finance_unit_count)],
+        source_id="synthetic-finance",
+    )
+    finance_bad_bundle["source_coverage_manifest"] = build_finance_source_coverage_manifest(
+        finance_text,
+        [["rule"] for _ in range(finance_unit_count)],
+        source_id="synthetic-finance",
+    )
     finance_proposal = {
         "decision": "CONCLUDE", "leaf_id": FINANCE_SUPERVISORY,
         "selected_alternative": "APPLY_RULE",
