@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_KERNEL_PRIVATE_MOUNT_VIEW_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__6_OF_6__PRIVATE_MOUNT_VIEW_PRIMITIVES_ONLY__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/root3_kernel_private_mount_view_probe_v1.py",
+    "git_blob_sha": "fdf1bddeee8b819946e25ca5c861f825ec6a889b"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "execution": "EXACT_GITHUB_BLOB_MATERIALIZATION_THEN_PYTHON3"
+  },
+  "verified": [
+    "FILESYSTEM_NAMED_AF_UNIX_ENDPOINT_HIDDEN_BY_PRIVATE_PARENT_MOUNT",
+    "ABSTRACT_AF_UNIX_ENDPOINT_ISOLATED_BY_NETWORK_NAMESPACE",
+    "PROC_TREE_HIDDEN_BY_PRIVATE_TMPFS_MOUNT",
+    "SYS_TREE_HIDDEN_BY_PRIVATE_TMPFS_MOUNT",
+    "DEV_TREE_REDUCED_TO_NULL_AND_URANDOM",
+    "DESCENDANT_PYTHON_PROCESS_RUNS_WITH_THE_MINIMAL_DEV_VIEW"
+  ],
+  "result": {
+    "checks_passed": 6,
+    "checks_total": 6,
+    "e2_closed": false,
+    "e3_closed": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_PTRACE_IOCTL_NAMESPACE_ESCAPE_OR_RESOURCE_EXHAUSTION_CLOSURE",
+    "NO_CLAIM_BROKER_SOUNDNESS",
+    "NO_CLAIM_FULL_BRAIN_RUNTIME_COMPATIBILITY_INSIDE_THIS_VIEW",
+    "NO_ROOT3_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
