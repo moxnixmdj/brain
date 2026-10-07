@@ -44,9 +44,9 @@
     },
     "agency_absolute_top_law": {
       "path": "canonical/governance/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_CLOSURE_20261007_V1.json",
-      "git_blob_sha": "2f9e64f52b973900703046b2f54d02a6b8745909",
+      "git_blob_sha": "b86f5e2996984060cac587be9f57a22b16052714",
       "independent_verification_path": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
-      "independent_verification_git_blob_sha": "476216765aac1203f79c1905e0cfaaf162905a99"
+      "independent_verification_git_blob_sha": "aed863f21788f429b18812bbd1b95ce297a7ea81"
     }
   },
   "exact_current_counts": {
