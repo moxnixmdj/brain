@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V3",
   "date": "2026-10-07",
-  "status": "ACTIVE_V16_ZERO_REALITY_EXECUTION_AUTHORITY__TWELVE_REGION_CURRENT_MAIN_REBIND__ZERO_CREDIT",
+  "status": "ACTIVE_V16_ZERO_REALITY_EXECUTION_AUTHORITY__THIRTEEN_REGION_CURRENT_MAIN_REBIND__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "supersedes": {
     "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V2.json",
@@ -10,7 +10,7 @@
   },
   "pointer": {
     "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V4.json",
-    "git_blob_sha": "f8af278bb4374db5126445cd018821a8fb12602d"
+    "git_blob_sha": "2300f6bb49d0f4016fb3e3d5438366d37d9a17bb"
   },
   "current_terminal_authority": {
     "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
@@ -18,8 +18,8 @@
   },
   "db_saturation": {
     "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json",
-    "git_blob_sha": "6b389699903b63f1350dd922064888e74201f687",
-    "known_sound_region_certificate_count": 12
+    "git_blob_sha": "6637b23cd90f3df20ec87f817ef38d1eb233ea79",
+    "known_sound_region_certificate_count": 13
   },
   "live_world": {
     "independent_top_level_terminal_predicates": [
@@ -28,7 +28,7 @@
     ],
     "fixed_authorized_target_trace_scope_closed": true,
     "literal_all_capability_enumeration_is_separate_open_task": false,
-    "known_sound_D_B_region_certificate_count": 12,
+    "known_sound_D_B_region_certificate_count": 13,
     "certificate_gated_router_mechanical_core_present": true,
     "complete_selected_context_ABC_closed": false,
     "D_finality_closed": false,
@@ -49,7 +49,7 @@
     "NO_GENERAL_GLOBAL_ROUTER_INTELLIGENCE_PROGRAM",
     "NO_SECOND_ROUTER_WHILE_THE_CERTIFICATE_GATED_ROUTER_IS_BOUND",
     "NO_GENERIC_NEW_SEMANTIC_MECHANISM_WITHOUT_CAUSALLY_LOCALIZED_FAILURE",
-    "SUBTRACT_THE_TWELVE_SOUND_REGION_CERTIFICATES_BEFORE_NEW_WORK",
+    "SUBTRACT_THE_THIRTEEN_SOUND_REGION_CERTIFICATES_BEFORE_NEW_WORK",
     "D_CHECK_ONLY_NEWLY_CREDITED_ROUTE_DELTAS_UNTIL_ABC_CLOSES",
     "RECOMPUTE_FIXED_POINT_AFTER_EVERY_VERIFIED_D_B_EXPANSION_OR_RESIDUAL_ELIMINATION"
   ],
