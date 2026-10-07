@@ -137,6 +137,111 @@ def compile_criterion(criterion: str, *, criterion_id: str | None = None) -> dic
                 checks.append(Check("AT_LEAST_ONE_VALID_FILE_BY_EXTENSION", {"extension": ext}))
                 break
 
+    # Additional exact whole-criterion mechanical forms observed in the frozen
+    # public-220 rubric. These are intentionally lexical and conservative:
+    # semantic role labels or mixed content requirements are not admitted.
+    if not checks:
+        exact_single_ext_patterns = (
+            (
+                r"Delivers\s+a\s+single\s+Excel\s+workbook\s+file\s+in\s+\.xlsx\s+format[.]?",
+                ".xlsx",
+            ),
+            (
+                r"Output\s+is\s+a\s+single\s+Excel\s+workbook\s+file\s+with\s+the\s+\.xlsx\s+extension[.]?",
+                ".xlsx",
+            ),
+            (
+                r"The\s+submitted\s+file\s+is\s+an\s+\.xlsx\s+Excel\s+workbook\s+"
+                r"\(not\s+\.xlsm\s+or\s+other\s+formats\)[.]?",
+                ".xlsx",
+            ),
+            (
+                r"The\s+deliverable\s+is\s+a\s+single\s+Word\s+document\s*\(\.docx\)\s+"
+                r"rather\s+than\s+multiple\s+files\s+or\s+a\s+PDF[.]?",
+                ".docx",
+            ),
+            (
+                r"Exactly\s+one\s+Microsoft\s+Word\s+file\s+is\s+delivered\s+and\s+it\s+opens\s+"
+                r"as\s+a\s+valid\s+DOCX\s+package\s+\(ZIP\s+with\s+\[Content_Types\]\.xml\s+"
+                r"and\s+word/document\.xml\)[.]?",
+                ".docx",
+            ),
+            (
+                r"Submission\s+consists\s+of\s+exactly\s+one\s+file\s+in\s+PDF\s+format\s*"
+                r"\(\.pdf\)[.]?",
+                ".pdf",
+            ),
+            (
+                r"(?:The\s+)?(?:final\s+)?(?:deliverable|submission)\s+(?:is|is\s+provided\s+as|"
+                r"is\s+provided\s+as\s+a|is\s+provided\s+as\s+a\s+single|"
+                r"is\s+a|is\s+a\s+single|is\s+provided\s+as\s+single)\s+"
+                r"(?:single\s+)?PDF\s+(?:file|document)[.]?",
+                ".pdf",
+            ),
+        )
+        for pat, ext in exact_single_ext_patterns:
+            if re.fullmatch(pat, text, re.I):
+                checks.append(
+                    Check(
+                        "EXACT_TOP_LEVEL_FILE_COUNT_BY_EXTENSION",
+                        {
+                            "count": 1,
+                            "extension": ext,
+                            "total_files_must_equal_count": True,
+                        },
+                    )
+                )
+                break
+
+    # Simple role-free artifact-format statements. Requiring a natively
+    # reopenable matching file is a sound one-sided check; extra files do not
+    # falsify these criteria unless the criterion explicitly says "single".
+    if not checks:
+        simple_ext_patterns = (
+            (r"(?:The\s+)?(?:final\s+)?deliverable\s+is\s+(?:provided\s+as\s+)?a\s+PDF(?:\s+file|\s+document)?[.]?", ".pdf"),
+            (r"The\s+deliverable\s+is\s+provided\s+as\s+a\s+Microsoft\s+Word\s+document\s+with\s+a\s+\.docx\s+file\s+extension[.]?", ".docx"),
+            (r"The\s+deliverable\s+is\s+provided\s+as\s+a\s+\.pptx\s+PowerPoint\s+file[.]?", ".pptx"),
+        )
+        for pat, ext in simple_ext_patterns:
+            if re.fullmatch(pat, text, re.I):
+                checks.append(Check("AT_LEAST_ONE_VALID_FILE_BY_EXTENSION", {"extension": ext}))
+                break
+
+    # Exact single-page PDF submission.
+    if not checks and re.fullmatch(
+        r"(?:The\s+)?Submission\s+is\s+a\s+single-page\s+PDF[.]?",
+        text,
+        re.I,
+    ):
+        checks.append(
+            Check(
+                "SINGLE_PDF_PAGE_COUNT",
+                {"page_count": 1, "total_files_must_equal_count": True},
+            )
+        )
+
+    # Exact workbook sheet count, with no semantic sheet-role inference.
+    if not checks:
+        m = re.fullmatch(
+            r"Provides\s+an\s+Excel\s+\.xlsx\s+workbook\s+with\s+exactly\s+(\d+)\s+"
+            r"worksheets\s*\(tabs\)[.]?",
+            text,
+            re.I,
+        )
+        if m:
+            checks.append(Check("SINGLE_XLSX_SHEET_COUNT", {"sheet_count": int(m.group(1))}))
+
+    # Exact uncompressed WAV fact. We deliberately require one top-level file,
+    # which is stricter than merely accepting an arbitrary matching WAV among
+    # unrelated files and therefore cannot create a false positive.
+    if not checks and re.fullmatch(
+        r"The\s+delivered\s+file\s+is\s+a\s+WAV\s+file\s+and\s+not\s+a\s+compressed\s+"
+        r"format\s*\(e\.g\.,\s*MP3/AAC\)[.]?",
+        text,
+        re.I,
+    ):
+        checks.append(Check("SINGLE_WAV_UNCOMPRESSED", {"total_files_must_equal_count": True}))
+
     # Single Word or PDF document.
     if not checks and re.fullmatch(
         r"The\s+deliverable\s+is\s+provided\s+as\s+a\s+single\s+Word\s*\(\.docx\)\s+or\s+"
@@ -372,6 +477,42 @@ def verify_compiled(compiled: Mapping[str, Any], artifact_dir: str | Path) -> di
                 if names is not None and any(n.strip().casefold() == target for n in names):
                     ok = True
                     break
+
+        elif kind == "SINGLE_PDF_PAGE_COUNT":
+            cand = [p for p in files if p.suffix.lower() == ".pdf"]
+            target_count = int(args.get("page_count", -1))
+            ok = False
+            if len(cand) == 1 and (
+                not args.get("total_files_must_equal_count") or len(files) == 1
+            ):
+                try:
+                    from pypdf import PdfReader
+
+                    reader = PdfReader(str(cand[0]), strict=True)
+                    ok = len(reader.pages) == target_count
+                except Exception:
+                    ok = False
+
+        elif kind == "SINGLE_XLSX_SHEET_COUNT":
+            cand = [p for p in files if p.suffix.lower() == ".xlsx"]
+            target_count = int(args.get("sheet_count", -1))
+            if len(cand) != 1:
+                ok = False
+            else:
+                names = _xlsx_sheet_names(cand[0])
+                ok = names is not None and len(names) == target_count
+
+        elif kind == "SINGLE_WAV_UNCOMPRESSED":
+            cand = [p for p in files if p.suffix.lower() == ".wav"]
+            ok = False
+            if len(cand) == 1 and (
+                not args.get("total_files_must_equal_count") or len(files) == 1
+            ):
+                try:
+                    with wave.open(str(cand[0]), "rb") as w:
+                        ok = w.getcomptype() == "NONE"
+                except Exception:
+                    ok = False
 
         elif kind == "SINGLE_WAV_SAMPLE_RATE":
             cand = [p for p in files if p.suffix.lower() == ".wav"]
