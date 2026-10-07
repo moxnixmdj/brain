@@ -214,6 +214,8 @@ def _synthesis_case(seed: int, difficulty: int) -> dict[str, Any]:
     # Guarantee at least one required claim so omission is meaningful.
     if not required:
         evidence[0]["role"]="required"; required.append("C0")
+        if evidence[0]["support"]=="unsupported":
+            evidence[0]["support"]="supported"
         if "C0" in optional: optional.remove("C0")
         if "C0" in forbidden: forbidden.remove("C0")
     return {
