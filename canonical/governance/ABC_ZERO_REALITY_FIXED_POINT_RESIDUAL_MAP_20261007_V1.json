@@ -1,0 +1,230 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_FIXED_POINT_PROJECTION__14_OPEN_FAMILIES__CURRENT_PROVED_RECEIPTS_SATURATED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V11.json",
+      "git_blob_sha": "97412c8b7b107789c01906012163d3088991f1a4"
+    },
+    "closure_manifest": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "bcf12c8845e90e6bfdd689458586bdebd59824a3"
+    },
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "predicates": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "direct_score_readiness": {
+      "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+      "git_blob_sha": "4e59e30461c9ff1bee1a9474627d5fb4074844b2"
+    },
+    "synthesis_repair": {
+      "path": "canonical/governance/SYNTHESIS_SINGLE_RESIDUAL_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "a8825ddd105c6200f96ebf7435ba4de60f677be7"
+    },
+    "aa_shared_repair": {
+      "path": "canonical/governance/AA_BRIEFCASE_SHARED_RESIDUAL_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "2ec5e65558f7f622d8ab486068a8ebf4ce39bd3e"
+    },
+    "unknown_domain_repair": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_SINGLE_RESIDUAL_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "6477b9d6d926d2810e347040c94c265961aae39e"
+    }
+  },
+  "current_truth_boundary": {
+    "accepted_families": 5,
+    "open_families": 14,
+    "top_level_terminal_predicates": [
+      "COMPLETE_SELECTED_CONTEXT_ABC",
+      "D_FINAL_ROUTE_OWNERSHIP_EFFECT_DONOR_INDEPENDENCE_FINALITY"
+    ],
+    "positive_frontier": "COMPLETE_SELECTED_CONTEXT_ABC",
+    "current_accepted_family_effect_mediator_residual_count": 0,
+    "terminal": false
+  },
+  "saturation_rules": [
+    "SUBTRACT_ONLY_PREDICATES_THAT_ARE_PROVED_SCOPE_COMPLETE_AND_INDEPENDENT_OR_OBJECTIVE_OR_A_NEWER_AUTHORITY_EXPLICITLY_SUBSUMES.",
+    "PUBLIC_SCORE_IDENTITIES_ARE_WITNESS_ROUTES_NOT_AXIOMATIC_TOP_LEVEL_TERMINAL_TRUTHS__A_STRONGER_FULL_SCOPE_CERTIFICATE_MAY_CLOSE_THE_SAME_RESIDUAL.",
+    "DIRECT_SCORE_READINESS_MATRIX_DESCRIBES_EXECUTION_ROUTE_READINESS_ONLY__IT_CANNOT_REOPEN_A_RESIDUAL_ALREADY_CLOSED_BY_A_STRONGER_PROOF.",
+    "NO_NEW_TARGET_REALITY_BEFORE_THIS_ZERO_REALITY_RESIDUAL_MAP_REACHES_FIXED_POINT.",
+    "NEWLY_CREDITED_ROUTES_RECEIVE_INCREMENTAL_ROUTE_LOCAL_D_ONLY__DO_NOT_REOPEN_CURRENT_ACCEPTED_FIVE."
+  ],
+  "residuals": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "residuals": [
+        "TB4_GE_66_4_OR_STRONGER",
+        "FRONTIERCODE_GE_54_4_OR_STRONGER",
+        "CURSORBENCH_GE_57_8_OR_STRONGER"
+      ],
+      "mode": "PUBLIC_BAR_WITNESSES_OR_STRONGER",
+      "direct_score_ready": false
+    },
+    {
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "residuals": [
+        "MATCHED_MULTI_TOOL_AGENCY_NONINFERIORITY_OR_STRONGER_SELECTED_CONTEXT_ABC"
+      ],
+      "mode": "MATCHED_OR_STRONGER",
+      "direct_score_ready": null
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "residuals": [
+        "GDPVAL_AA_GE_1846_OR_STRONGER",
+        "AA_BRIEFCASE_GE_1822_OR_STRONGER_SHARED"
+      ],
+      "mode": "PUBLIC_BAR_WITNESSES_OR_STRONGER",
+      "direct_score_ready": false
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "residuals": [
+        "AUTOMATIONBENCH_GE_40_OR_STRONGER"
+      ],
+      "mode": "PUBLIC_BAR_WITNESS_OR_STRONGER",
+      "direct_score_ready": false
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "residuals": [
+        "HLE_WITH_TOOLS_GE_67_7_OR_STRONGER"
+      ],
+      "mode": "PUBLIC_BAR_WITNESS_OR_STRONGER",
+      "direct_score_ready": false
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "residuals": [
+        "TB_SCIENCE_GE_58_7_OR_STRONGER"
+      ],
+      "mode": "PUBLIC_BAR_WITNESS_OR_STRONGER",
+      "direct_score_ready": false
+    },
+    {
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "residuals": [
+        "CHARTOGRAPHY_WITH_TOOLS_GE_89_OR_STRONGER",
+        "DENSE_DOCUMENT_NONCHART_SELECTED_CONTEXT_SCOPE_AND_DOMINANCE"
+      ],
+      "mode": "BAR_PLUS_SCOPE_SELECTED_CONTEXT",
+      "direct_score_ready": false
+    },
+    {
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "residuals": [
+        "OSWORLD_2_1_PARTIAL_GE_81_8_SAME_HARNESS_OR_MATCHED_STRONGER"
+      ],
+      "mode": "SAME_HARNESS_BAR_OR_MATCHED_STRONGER",
+      "direct_score_ready": false
+    },
+    {
+      "family": "FINANCIAL_ANALYSIS",
+      "residuals": [
+        "FINANCE_ACCOUNTING_INDEX_GE_61_OR_STRONGER",
+        "FINANCE_AGENT_V2_GE_58_59_OR_STRONGER",
+        "FINANCE_UNCOVERED_SCOPE_AUDIT"
+      ],
+      "mode": "TWO_BARS_PLUS_DIRECT_SCOPE",
+      "direct_score_ready": false
+    },
+    {
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "already_closed": [
+        "LIVEBENCH_IF_GE_65_7"
+      ],
+      "residuals": [
+        "MATCHED_SCOPE_BOUNDARY_NONINFERIORITY_WITH_BOUND_AUTHORITY_AND_HARD_CONSTRAINTS_OR_STRONGER"
+      ],
+      "mode": "MATCHED_SELECTED_CONTEXT_OR_STRONGER",
+      "direct_score_ready": null
+    },
+    {
+      "family": "ARTIFACT_CREATION",
+      "already_closed": [
+        "ARTIFACT_MECHANICAL_GATES_CEILING",
+        "ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT"
+      ],
+      "residuals": [
+        "AA_BRIEFCASE_GE_1822_OR_STRONGER_SHARED"
+      ],
+      "mode": "SHARED_PROFESSIONAL_QUALITY_RESIDUAL",
+      "direct_score_ready": false
+    },
+    {
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "already_closed": [
+        "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS"
+      ],
+      "residuals": [
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_OR_STRONGER"
+      ],
+      "mode": "MATCHED_QUALITY_COVERAGE_OR_STRONGER",
+      "direct_score_ready": null
+    },
+    {
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "already_closed": [
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+      ],
+      "residuals": [
+        "MYSTERYMECHANISM_GE_49_55_OR_STRONGER"
+      ],
+      "mode": "SINGLE_PUBLIC_BAR_OR_STRONGER",
+      "direct_score_ready": false
+    },
+    {
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "residuals": [
+        "SELECTED_CONTEXT_LOCAL_C_FOR_ALL_REACHED_MIXED_CAPABILITY_TRANSFORMS"
+      ],
+      "mode": "V11_LOCAL_C_REFINEMENT__NOT_SEPARATE_TOP_LEVEL_DIRECT_RESULT_QUEUE",
+      "direct_score_ready": null
+    }
+  ],
+  "shared_leverage": [
+    {
+      "id": "AA_BRIEFCASE_GE_1822_OR_STRONGER_SHARED",
+      "touches": [
+        "ARTIFACT_CREATION",
+        "PROFESSIONAL_KNOWLEDGE_WORK"
+      ],
+      "current_direct_score_ready": false,
+      "priority_reason": "ONE_CERTIFICATE_CAN_DISCHARGE_TWO_FAMILY_RESIDUALS"
+    }
+  ],
+  "direct_score_route_state": {
+    "matrix_date": "2026-10-02",
+    "interpretation": "DIRECT_SCORE_ROUTE_READINESS_ONLY__LATER_STRONGER_PROOFS_SUCH_AS_LIVEBENCH_POINTWISE_DOMINANCE_SUPERSEDE_THE_NEED_FOR_A_DIRECT_SCORE_ROUTE_WHERE_APPLICABLE",
+    "all_listed_open_public_bar_score_routes_ready": false,
+    "tb4_current_frozen_route": "UNATTAINABLE__MAXIMUM_ATTAINABLE_SUCCESSES_180_LT_220_REQUIRED",
+    "consequence": "DO_NOT_DEFAULT_TO_BENCHMARK_EXECUTION__SEARCH_FORMAL_IMPLICATION_OBJECTIVE_CEILING_EXHAUSTIVE_OR_SOUND_SUPERDOMAIN_CERTIFICATES_FIRST"
+  },
+  "scheduling_order": [
+    "SATURATE_EXISTING_ZERO_REALITY_EVIDENCE_AND_SELECTED_CONTEXT_ABC_CELLS_TO_FIXED_POINT",
+    "PRIORITIZE_SHARED_OR_MULTI_FAMILY_RESIDUALS__AA_BRIEFCASE_FIRST_AMONG_CURRENT_EXPLICIT_SHARED_CUTS",
+    "FOR_EACH_SINGLE_RESIDUAL_SEARCH_STRONGER_ZERO_REALITY_CERTIFICATE_BEFORE_DIRECT_TARGET_OR_BENCHMARK_REALITY",
+    "ONLY_AFTER_ZERO_REALITY_FIXED_POINT_COMPUTE_THE_EXACT_UNCOVERED_OR_UNDOMINATED_SELECTED_CONTEXT_RESIDUAL",
+    "THEN_ACQUIRE_THE_MINIMUM_INFORMATION_NEEDED_TO_ELIMINATE_THAT_RESIDUAL",
+    "D_RECOMPUTES_INCREMENTALLY_ONLY_FOR_NEWLY_CREDITED_ROUTES"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_LISTED_WITNESS_RESIDUALS_ARE_LOGICALLY_INDEPENDENT_TOP_LEVEL_TERMINAL_TRUTHS",
+    "NO_CLAIM_ANY_OPEN_FAMILY_IS_NOW_ACCEPTED",
+    "NO_CLAIM_DIRECT_SCORE_EXECUTION_IS_REQUIRED_WHEN_A_STRONGER_CERTIFICATE_EXISTS",
+    "NO_GLOBAL_ABC_CLOSURE",
+    "NO_GLOBAL_D_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
