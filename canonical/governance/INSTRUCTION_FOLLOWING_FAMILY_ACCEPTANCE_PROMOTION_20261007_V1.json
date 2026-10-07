@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_INSTRUCTION_FOLLOWING_FAMILY_ACCEPTANCE_PROMOTION_V1",
+  "date": "2026-10-07",
+  "status": "ACCEPTANCE_PROMOTION_PASS__SIXTH_FROZEN_FAMILY_ACCEPTANCE_CLOSED__OWNERSHIP_STILL_OPEN__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "source_bindings": {
+    "frozen_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "current_predicate_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3.json",
+      "git_blob_sha": "3942d876e13c8a039f06c2e856434f44a9f50781"
+    },
+    "ledger_independent_verification": {
+      "path": "canonical/verification/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3_RECONCILIATION_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "475fac62458fac9bf6f4a47cc029a28ad4465270"
+    },
+    "family_protocol_independent_verification": {
+      "path": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f"
+    },
+    "current_terminal_authority_before": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "f436ceae07ed3075ce9af6d75ec62a5ae89e0304"
+    }
+  },
+  "frozen_family_predicates": [
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "LIVEBENCH_IF_GE_65_7"
+  ],
+  "predicate_results": [
+    {
+      "id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "state": "PROVED",
+      "source_path": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "source_sha": "aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f"
+    },
+    {
+      "id": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "state": "PROVED",
+      "source_path": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "source_sha": "aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f"
+    },
+    {
+      "id": "LIVEBENCH_IF_GE_65_7",
+      "state": "PROVED",
+      "source_path": "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "source_sha": "57e27e3c56372b57a1d4e0255f49340d4a4c8588"
+    }
+  ],
+  "proof": {
+    "registry_rule": "ALL_PREDICATES_FOR_A_FAMILY_MUST_BE_PROVED_BEFORE_FAMILY_PROMOTION",
+    "all_family_predicates_proved": true,
+    "frozen_predicate_count": 3,
+    "proved_predicate_count": 3,
+    "independent_family_protocol_closure": true,
+    "conclusion": "THE_FROZEN_INSTRUCTION_FOLLOWING_ACCEPTANCE_FAMILY_IS_CLOSED__THIS_CHANGES_ACCEPTANCE_ACCOUNTING_ONLY__OWNERSHIP_REMAINS_A_SEPARATE_GATE"
+  },
+  "truth_effect": {
+    "prior_acceptance_family_pass_count": 5,
+    "new_acceptance_family_pass_count": 6,
+    "prior_acceptance_family_open_count": 14,
+    "new_acceptance_family_open_count": 13,
+    "atomic_predicates_proved": 16,
+    "atomic_predicates_unresolved": 22,
+    "family_ownership_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_INSTRUCTION_FOLLOWING_FAMILY_OWNERSHIP_IS_CLOSED.",
+    "NO_CLAIM_ALL_FROZEN_ACCEPTANCE_FAMILIES_PASS.",
+    "NO_CLAIM_PROOF_BUNDLE_FINALITY_OR_TERMINAL_CLOSURE.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_family_delta": 1,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
