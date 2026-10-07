@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_VERIFICATION_V2",
+  "date": "2026-10-07",
+  "status": "VERIFIED_SIX_FINAL_ZERO_SLOTS__RANK7_NEXT_UNTOUCHED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V2.json",
+    "git_blob_sha": "687d0c81cfc3318f49a5daefd68d6acb4454175b"
+  },
+  "evidence": {
+    "rank6_result": {
+      "path": "canonical/verification/TB_SCIENCE_RANK6_RESULT_20261007_V1.json",
+      "git_blob_sha": "8e237e1c4082956db4836488c6c7370a77e3f173",
+      "artifact_digest": "sha256:3c7e6847ef0348ad1b35f6ed3dd62263b3681be89d0077a2b3c2d7033faba61f",
+      "receipt_sha256": "7a4d5bc9532a27d60b3af4a69077300e08037497a5bc697026be363d2071fdbb"
+    },
+    "frozen_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    }
+  },
+  "replay": {
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87,
+    "consumed_successes": 0,
+    "consumed_final_failures": 6,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 81,
+    "consumed_slot_count": 6,
+    "next_manifest_schedule_order_zero_based": 6,
+    "next_schedule_rank_one_based": 7,
+    "next_slot_id": "terminal-bench-science/reactor-safety-control::trial-0",
+    "next_task_digest": "sha256:96c8c5764042dca01ba0b7bd127cf2587f8df538a335f36abf6b4c200f0bb669",
+    "equations": [
+      "124-0=124",
+      "87-6=81",
+      "210-6=204"
+    ]
+  },
+  "verified": [
+    "RANK6_IS_PERMANENTLY_CONSUMED_FINAL_ZERO",
+    "RANK6_HAS_NO_RETRY_OR_REPLACEMENT_CREDIT",
+    "FIRST_SIX_MANIFEST_SLOTS_ARE_CONSUMED",
+    "RANK7_IS_THE_NEXT_UNTOUCHED_FROZEN_SLOT",
+    "RANK7_HAS_NO_EXECUTION_AUTHORITY",
+    "PLANNER_SERIALIZATION_REPAIR_IS_REQUIRED_BEFORE_ANY_NEW_SLOT"
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_PASS_CLAIM",
+    "NO_RANK7_EXECUTION_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 1,
+    "terminal_credit_delta": 0
+  }
+}
