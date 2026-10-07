@@ -16,7 +16,35 @@ def test_unbound_escape_membership_fails_before_any_planning():
     planner.assert_not_called()
 
 
-def test_existing_admission_short_circuits_learning():
+def test_source_positive_admission_short_circuits_learning():
+    with patch("canonical.runtime.universal_escape_resolver_v1.source_db.evaluate") as gate, patch(
+        "canonical.runtime.universal_escape_resolver_v1.ul.route"
+    ) as planner:
+        gate.return_value = {
+            "pass": True,
+            "db_admission_authorized": True,
+            "status": "PASS__SOURCE_PROVED_POSITIVE_ADEQUACY_CELL_ADMISSIBLE_TO_D_B",
+            "cell_id": "e1",
+            "selected_policy_id": "p1",
+        }
+        out = resolve(
+            escape_cell_id="e1",
+            escape_membership_bound=True,
+            admission_candidates={
+                "D_SOURCE_POSITIVE_ADEQUACY": {
+                    "route": "D_SOURCE_POSITIVE_ADEQUACY",
+                    "payload": {"cell_id": "e1"},
+                }
+            },
+            v9_args={},
+        )
+    assert out["pass"] is True
+    assert out["selected_admission_route"] == "D_SOURCE_POSITIVE_ADEQUACY"
+    assert out["universal_learning_invoked"] is False
+    planner.assert_not_called()
+
+
+def test_existing_semantic_elision_admission_short_circuits_learning():
     with patch("canonical.runtime.universal_escape_resolver_v1.db.evaluate") as gate, patch(
         "canonical.runtime.universal_escape_resolver_v1.ul.route"
     ) as planner:
