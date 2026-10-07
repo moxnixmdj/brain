@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WORLD_INFORMED_TARGET_ASSUMPTION_FALSIFIER_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__INDEPENDENT_WOLFRAM_MATCHED_INFORMATION_COUNTERMODEL_RECOMPUTATION__ORACLE_ASSUMPTION_SEPARATED_FROM_OPUS_RELATIVE_PARITY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_WORLD_INFORMED_TARGET_ASSUMPTION_FALSIFIER_20261007_V1.json",
+    "git_blob_sha": "b640ddc18508ecf4abe7ec9f472dc7ac00cd20fa"
+  },
+  "source_audit": {
+    "layered_target_relative_order": {
+      "path": "canonical/governance/V7_LAYERED_DISTRIBUTIONAL_EQUAL_OR_BETTER_ORDER_20261006_V1.json",
+      "git_blob_sha": "af58fd7c48fcd18a86c6b93d8cd58f3fbce0cc74",
+      "matched_context_rule_present": true
+    },
+    "professional_terminal_binding": {
+      "path": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d",
+      "hidden_evaluator_fields_candidate_visible": false
+    },
+    "global_information_boundary": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
+      "git_blob_sha": "d1dc7f28738ba24a3ca5919755e03190fbf30939",
+      "hidden_oracle_separated_from_candidate": true
+    }
+  },
+  "wolfram": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "code": "{FullSimplify[ForAll[q,0<=q<=1,Exists[p,0<=p<=1&&p>=q&&1-p>=1-q]]],Reduce[0<=p<=1&&0<=q<=1&&p>=q&&1-p>=1-q,{p,q},Reals],Reduce[0<=p<=1&&p>=1&&1-p>=1,p,Reals]}",
+    "output": "{True, Inequality[0, LessEqual, p, LessEqual, 1] && q == p, False}",
+    "verified": [
+      "FOR_EVERY_MATCHED_INFORMATION_TARGET_POLICY_PROBABILITY_q_IN_[0,1]_A_BRAIN_POLICY_p_EXISTS_THAT_IS_NONINFERIOR_IN_BOTH_OPPOSED_WORLDS.",
+      "THE_MATCHED_TWO_ACTION_NONINFERIORITY_CONSTRAINTS_FORCE_p_EQUALS_q__THEY_DO_NOT_FORCE_A_WORLD_DISCRIMINATOR.",
+      "THE_ONE_ONE_WORLD_INFORMED_ORACLE_TARGET_VECTOR_IS_INFEASIBLE_FOR_A_SINGLE_VISIBLE_ONLY_POLICY."
+    ]
+  },
+  "adjudication": {
+    "old_professional_two_world_math_is_algebraically_correct_for_world_informed_oracle": true,
+    "old_professional_two_world_math_proves_opus55_target_relative_information_lower_bound": false,
+    "reason": "THE_TARGET_SUCCESS_VECTOR_ONE_ONE_REQUIRES_A_WORLD_DEPENDENT_TARGET_POLICY_NOT_BOUND_BY_THE_MATCHED_EXTERNAL_CONTEXT_TERMINAL ORDER_OR_THE_PROFESSIONAL_PROTOCOL.",
+    "fresh_discriminator_proved_necessary": false,
+    "professional_parity_closed": false,
+    "U_empty": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "scheduler_effect": [
+    "DO_NOT_USE_THE_WORLD_INFORMED_ONE_ONE_TARGET_VECTOR_TO_WAKE_TARGET_OR_EVALUATOR_INFORMATION.",
+    "FIRST_SEARCH_FOR_A_COMMON_BRAIN_OWNED_POLICY_LAW_NONINFERIOR_TO_THE_ACTUAL_OPUS55_POLICY_LAW_UNDER_MATCHED_VISIBLE_CONTEXT.",
+    "WAKE_A_SELECTED_DISCRIMINATOR_ONLY_AFTER_A_TARGET_RELATIVE_COUNTEREXAMPLE_PROVES_DIFFERENT_CERTIFIED_POLICIES_ARE_REQUIRED_AND_THE_RELEVANT_DISTINCTION_IS_TRUTHFULLY_OBSERVABLE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_ACTUAL_OPUS55_POLICY_q_IS_KNOWN.",
+    "NO_CLAIM_A_COMMON_BRAIN_POLICY_HAS_ALREADY_BEEN_CERTIFIED.",
+    "NO_PROFESSIONAL_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
