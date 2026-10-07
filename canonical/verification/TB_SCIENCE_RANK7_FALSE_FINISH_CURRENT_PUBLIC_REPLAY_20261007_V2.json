@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK7_FALSE_FINISH_CURRENT_PUBLIC_REPLAY_BINDING_V2",
+  "date": "2026-10-07",
+  "status": "PASS__INDEPENDENT_PUBLIC_RUNNER_EXACT_BYTES__RANK7_FALSE_FINISH_AND_TRUNCATION_LAUNDERING_FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "candidate_blobs": {
+    "canonical/runtime/harbor_science_agent_v1.py": "39cc756bafba817dfd697e65769da5ca0a316837",
+    "canonical/runtime/harbor_science_planner_v1.py": "c3e36eba57c450f325c8a9476ee048c841bbdbc8",
+    "canonical/tests/test_harbor_science_agent_v1.py": "ce55b9df05119c544f03abca9c5c96f72254712f",
+    "canonical/tests/test_harbor_science_planner_v1.py": "dd8a77c097ab1a7773f6575c5676d5d17e6f657f"
+  },
+  "independent_public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_path": ".github/workflows/verify-tb-science-rank7-false-finish-current-v2.yml",
+    "workflow_head_sha": "693ba17e1c47b3086ab0772d711a09c8056ec031",
+    "workflow_run_id": 37609928888,
+    "workflow_job_id": 112754450877,
+    "workflow_conclusion": "success",
+    "runner": "GitHub Actions 1000140746",
+    "artifact_id": 11478105005,
+    "artifact_name": "tb-science-rank7-false-finish-current-replay-v2",
+    "artifact_digest": "sha256:841b458ab9987a7fa1e12d7af46b380f505eb46a06155d70138a038c02a46b54"
+  },
+  "independently_observed_checks": {
+    "exact_candidate_byte_gate": true,
+    "current_unit_suite_pass": true,
+    "missing_declared_output_blocks_finish": true,
+    "exact_rank7_zero_exit_here_doc_warning_blocks_proposal_verification": true,
+    "proposal_verify_not_reached_on_transport_warning": true,
+    "benchmark_task_exposure": 0,
+    "benchmark_verifier_invocations": 0,
+    "incremental_spend_usd": 0
+  },
+  "source_failure": {
+    "rank7_workflow_run_id": 37606898246,
+    "rank7_artifact_id": 11474839915,
+    "rank7_artifact_digest": "sha256:8866fd656285ede4081fecc99bd952680c59f63028a3ceb58c48013e3594fe5d",
+    "observed_old_false_finish": true,
+    "observed_missing_output": "/app/submission/design_report.json",
+    "observed_zero_exit_here_doc_warning": true
+  },
+  "consequence": [
+    "THE_FROZEN_CANDIDATE_BYTES_FAIL_CLOSED_ON_BOTH_KNOWN_RANK7_CONTROLLER_UNSOUNDNESS_SHAPES.",
+    "THIS_VERIFIES_THE_REPAIR_CANDIDATE_ONLY; IT DOES_NOT GRANT TB_SCIENCE ACCEPTANCE CREDIT.",
+    "RANK8_REMAINS_CONSUMED_BY_ITS_FROZEN_POST_GATE_FINAL_ZERO; THIS_RECEIPT DOES_NOT AUTHORIZE_REPLAY.",
+    "ANY_FUTURE_TB_SCIENCE_SLOT_REQUIRES_SEPARATE_CURRENT_CRITICAL_PATH_JUSTIFICATION_AND_NEW_EXACT_ONE_USE_AUTHORITY."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
