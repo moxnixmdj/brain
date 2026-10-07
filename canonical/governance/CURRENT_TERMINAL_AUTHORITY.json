@@ -934,7 +934,7 @@
     "single_escape_frontier_definition": "E_EQUALS_S_TRACE_MINUS_D_B",
     "current_primary_u_primitive_count": 1,
     "current_primary_u_primitives": [
-      "EXACT_SOUND_DB_ADMISSION_COMPLEMENT"
+      "ESCAPE_POLICY_ADEQUACY"
     ],
     "historical_13_open_refinement_families_are_primary_jobs": false,
     "historical_13_open_refinement_families_are_falsification_partitions": true,
@@ -1259,7 +1259,7 @@
   },
   "terminal_execution_root": {
     "path": "canonical/governance/TERMINAL_EXECUTION_ROOT_20261007_V1.json",
-    "git_blob_sha": "9c23b1623d306d7cde921f2b4bba64d8aac728b6",
+    "git_blob_sha": "e70f662d27e0b917eaf6ef8ba9da3bebc5ab7ee0",
     "runtime_gate": {
       "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
       "git_blob_sha": "7c7e0c34cc599c7114fb83421307db2433e2b269"
@@ -1268,7 +1268,7 @@
       "path": "canonical/tests/test_terminal_root_decision_gate_v1.py",
       "git_blob_sha": "7f51131ad6ee5f26cf752fde853e69cb2abdbf6c"
     },
-    "rule": "COEQUAL_SCOPE_COMPLETE_UNIVERSAL_COVER_ROUTE__CURRENT_ROOT_BINDS_EXACT_DB_ADMISSION_CONVERGENCE_GATE__FROZEN_19_REMAINS_DIRECT_WITNESS_ROUTE",
+    "rule": "COEQUAL_SCOPE_COMPLETE_UNIVERSAL_COVER_ROUTE__ONE_LIVE_PRE_ABC_PRIMITIVE_ESCAPE_POLICY_ADEQUACY__NONEXHAUSTIVE_SEVENTEEN_REGION_DB_BINDING_COMPILATION_DEMOTED_FROM_SERIAL_PREREQUISITE__FROZEN_19_REMAINS_DIRECT_WITNESS_ROUTE",
     "exact_sound_db_admission_convergence_gate": {
       "path": "canonical/runtime/exact_sound_db_admission_convergence_v1.py",
       "git_blob_sha": "4cb8e472dd4f8a8f65abd278cada8508d4ba47d0",
@@ -1318,5 +1318,20 @@
       "DONOR_INDEPENDENCE_CLOSED",
       "CLEAN_ROOM_REPLAY_PASS"
     ]
+  },
+  "zero_bureaucracy_truth_reconciliation_20261007_v2": {
+    "status": "ACTIVE_SCHEDULER_REPAIR__NONEXHAUSTIVE_DB_BINDING_SERIALIZATION_REMOVED__ZERO_TERMINAL_CREDIT",
+    "execution_root": {
+      "path": "canonical/governance/TERMINAL_EXECUTION_ROOT_20261007_V1.json",
+      "git_blob_sha": "e70f662d27e0b917eaf6ef8ba9da3bebc5ab7ee0",
+      "commit_sha": "1753013de1228237e70a56a7df2a9502e27d9fcc"
+    },
+    "theorem_source": {
+      "path": "canonical/governance/ABOVE_EXPONENTIAL_U_SINGLE_PRIMITIVE_RECONCILIATION_20261007_V2.json",
+      "git_blob_sha": "f0776f0f900962228e8924aaf602d98973f5eddb"
+    },
+    "rule": "WORK_ESCAPE_POLICY_ADEQUACY_DIRECTLY__USE_17_REGION_CONVERGENCE_ONLY_WHEN_IT_DIRECTLY_ADVANCES_A_SCOPE_COMPLETE_ROOT_RECEIPT_OR_LOCALIZES_ONE_POLICY_CHANGING_COUNTEREXAMPLE",
+    "reason": "THE_17_REGION_D_B_CACHE_EXPLICITLY_DOES_NOT_CLAIM_SCOPE_EXHAUSTIVENESS__COMPLETING_ITS_BINDINGS_IS_NOT_LOGICALLY_SUFFICIENT_FOR_NOT_X_AND_THEREFORE_MUST_NOT_BE_A_SERIAL_TERMINAL_PREREQUISITE",
+    "terminal_credit_delta": 0
   }
 }
