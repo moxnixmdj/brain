@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_SYMBOLIC_ADMISSION_PREDICATE_ROUTER_SUCCESSOR_DEPLOYMENT_V1",
+  "date": "2026-10-07",
+  "status": "DEPLOYED__FAIL_CLOSED_SYMBOLIC_REGION_ROUTING__NO_GLOBAL_COVER_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "replaces_limitation": "EXACT_CONTEXT_DIGEST_ONLY_ROUTE_MATCHING",
+  "runtime": {
+    "path": "canonical/runtime/symbolic_admission_predicate_router_v1.py",
+    "git_blob_sha": "82152ed192c1066ccac628da4673474db08556a4"
+  },
+  "tests": {
+    "path": "canonical/tests/test_symbolic_admission_predicate_router_v1.py",
+    "git_blob_sha": "c93dd3d7480e93c8fbfffd6a944e4f45e56ceb87"
+  },
+  "semantics": {
+    "predicate_language": [
+      "TRUE",
+      "FALSE",
+      "AND",
+      "OR",
+      "NOT",
+      "EQ",
+      "IN",
+      "EXISTS"
+    ],
+    "content_addressing": "SHA256_CANONICAL_JSON",
+    "admission_rule": "EVERY_MATCHING_SYMBOLIC_PREDICATE_REQUIRES_AN_INDEPENDENT_EXACT_BYTE_BOUND_RECEIPT_THAT_THE_PREDICATE_IMPLIES_ROUTE_ADEQUACY",
+    "fail_closed": "INVALID_PREDICATE_DIGEST_RECEIPT_SCOPE_OR_DUPLICATE_ID_REJECTS_THE_REGISTRY_EVALUATION",
+    "nonclaim": "A_TRUE_OR_WIDE_PREDICATE_DOES_NOT_AUTHORIZE_GLOBAL_COVER_BY_ITSELF"
+  },
+  "consequence": [
+    "SYMBOLIC_CONTEXT_REGIONS_CAN_NOW_BE_EXECUTED_WITHOUT_ENUMERATING_EXACT_CONTEXT_DIGESTS",
+    "THE_SELECTED_COVER_COMPLEMENT_NORMAL_FORM_CAN_BIND_EXECUTABLE_SYMBOLIC_ADMISSION_PREDICATES",
+    "THE_ONLY_GLOBAL_ABC_ROOT_REMAINS_RESIDUAL_COMPLEMENT_UNSAT_OR_EQUIVALENT_TOTAL_ADAPTIVE_COVER"
+  ],
+  "verification": {
+    "connector_exact_blob_binding": true,
+    "runtime_blob_sha": "82152ed192c1066ccac628da4673474db08556a4",
+    "test_blob_sha": "c93dd3d7480e93c8fbfffd6a944e4f45e56ceb87",
+    "independent_external_replay": false,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_CURRENT_PREDICATE_SET_COVERS_S_TRACE",
+    "NO_CLAIM_RESIDUAL_COMPLEMENT_R_IS_UNSAT",
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
