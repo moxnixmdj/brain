@@ -78,7 +78,7 @@ def verify() -> dict:
     }:
         errors.append("REGIME_PARTITION")
 
-    if sum(partition.values()) if partition else -1 != 15:
+    if (sum(partition.values()) if partition else -1) != 15:
         errors.append("REGIME_SUM")
 
     if quotient.get("universe_count") != 15:
