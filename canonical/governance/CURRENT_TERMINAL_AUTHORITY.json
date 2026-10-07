@@ -648,6 +648,9 @@
       "path": "canonical/governance/FROZEN_TERMINAL_SCHEDULER_ALIGNMENT_REPAIR_20261007_V1.json",
       "git_blob_sha": "21866cb28e0f1fe58686440227cb1f0cb4aaf005",
       "note": "ACTIVE__OLD_NOT_X_ONLY_PRIMARY_MOVE_SET_REVOKED__SCHEDULE_DIRECT_FROZEN_ATOM_CLOSURE_OR_STRONGER_MULTI_ATOM_DISCHARGE__ZERO_CREDIT"
+    },
+    "frozen_19_acceptance_proof_shape_quotient": {
+      "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json"
     }
   },
   "live_truth": {
@@ -969,7 +972,17 @@
     "if_scope_boundary_noninferior_proved": true,
     "if_zero_critical_authority_violations_proved": true,
     "scheduler_aligned_to_frozen_19_family_root": true,
-    "primary_scheduler_targets_open_frozen_atoms": true
+    "primary_scheduler_targets_open_frozen_atoms": true,
+    "open_atomic_acceptance_predicates": 24,
+    "primary_acceptance_proof_engine_count": 3,
+    "primary_acceptance_proof_engines": [
+      "E1_PUBLIC_FIXED_BAR_AGGREGATE",
+      "E2_MATCHED_PORTFOLIO_NONINFERIORITY_AND_INVARIANTS",
+      "E3_DIRECT_SCOPE_AND_DEPENDENCY_CLOSURE"
+    ],
+    "open_atoms_are_independent_primary_research_jobs": false,
+    "aa_briefcase_shared_measurement_fact_count": 1,
+    "composition_component_scope_dependency_is_independent_reality_job": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -1166,7 +1179,8 @@
       "ISSUE_TERMINAL_CERTIFICATE_IFF_ALL_FINALITY_GATES_PASS"
     ],
     "optional_stronger_route_rule": "PROVE_NOT_X_IS_NONPREEMPTIVE__RUN_IT_ONLY_WHEN_IT_IS_THE_HIGHEST_LEVERAGE_SOUND_WAY_TO_DISCHARGE_ONE_OR_MORE_OPEN_FROZEN_ATOMS",
-    "scheduler_precedence": "FROZEN_19_FAMILY_PROTOCOL_ATOMS_AND_OWNERSHIP_FINALITY_CONTROL_NECESSITY__UNIVERSAL_TRACE_NOT_X_IS_OPTIONAL_STRONGER_SUFFICIENCY_ONLY"
+    "scheduler_precedence": "FROZEN_19_FAMILY_PROTOCOL_ATOMS_AND_OWNERSHIP_FINALITY_CONTROL_NECESSITY__UNIVERSAL_TRACE_NOT_X_IS_OPTIONAL_STRONGER_SUFFICIENCY_ONLY",
+    "acceptance_scheduler_rule": "KEEP_38_ATOMIC_TRUTHS_FOR_FINAL_REDUCTION__EXECUTE_ONLY_THE_THREE_REUSABLE_PROOF_ENGINES__STRONGER_SCOPE_COMPLETE_PROOFS_PREEMPT_WEAKER_SURFACE_RUNS"
   },
   "terminal_execution_root": {
     "path": "canonical/governance/TERMINAL_EXECUTION_ROOT_20261007_V1.json",
