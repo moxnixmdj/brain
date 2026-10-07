@@ -28,6 +28,20 @@ ROOT_MODULES = (
     "contract_native_brain_candidate",
     "m0a_raw_source_brain_candidate_v2",
     "native_artifact_cross_format_candidate_v1",
+
+    # Frozen instruction-following acceptance kernels.
+    # LiveBench IF exact selected route:
+    "livebench_legacy15_composition_archetypes_v1",
+    "livebench_legacy15_slot_feasibility_v1",
+    "livebench_legacy15_contract_composer_v2",
+    "livebench_legacy15_pointwise_optimal_v1",
+    "livebench_legacy_visible_constraint_compiler_v1",
+    "livebench_legacy_visible_constraint_compiler_v4",
+    # Finite five-dimension scope-boundary route:
+    "m0a_raw_source_terminal_suite_v2",
+    "m0_requirement_change_case_v1",
+    "tool_discovery_information_safe_proof_v2",
+    "matched_executable_atom_semantics_v1",
 )
 
 # General-purpose substrates used by the exact frozen terminal route.
