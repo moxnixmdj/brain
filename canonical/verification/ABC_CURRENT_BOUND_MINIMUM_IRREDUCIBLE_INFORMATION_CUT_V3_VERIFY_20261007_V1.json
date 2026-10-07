@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_CURRENT_BOUND_MINIMUM_IRREDUCIBLE_INFORMATION_CUT_V3_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "EXACT_DELTA_REPLAY_PASS__16_TO_15_INFORMATION_WAKES__SYNTHESIS_DISTINCT_WAKE_ONLY_DELETED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ABC_CURRENT_BOUND_MINIMUM_IRREDUCIBLE_INFORMATION_CUT_20261007_V3.json",
+    "git_blob_sha": "9ecc58416c24222747e1ba2a9ad86140bceddc62"
+  },
+  "predecessor": {
+    "path": "canonical/governance/ABC_CURRENT_BOUND_MINIMUM_IRREDUCIBLE_INFORMATION_CUT_20261007_V2.json",
+    "git_blob_sha": "d13a6580b8d02112438cfb48e6c4bc72d5cbb858"
+  },
+  "theorem": {
+    "path": "canonical/governance/SYNTHESIS_QUALITY_WAKE_SUBSUMPTION_THEOREM_20261007_V1.json",
+    "git_blob_sha": "84c3c238b31e49f9fabfcf39e7670546dc61cf66",
+    "independent_verification": {
+      "path": "canonical/verification/SYNTHESIS_QUALITY_WAKE_SUBSUMPTION_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "7eaf9cd77c25a846fe664d47a642b55e94cbebc6"
+    }
+  },
+  "verified": {
+    "predecessor_information_wake_count": 16,
+    "deleted_information_wake": "SYNTHESIS_QUALITY_OUTSIDE_CACHED_CELL",
+    "current_information_wake_count": 15,
+    "all_other_predecessor_wake_classes_preserved": true,
+    "deferred_local_c_preserved": true,
+    "synthesis_family_closed": false,
+    "synthesis_removed_from_U": false,
+    "raw_or_unbound_synthesis_semantics_remain_open": true
+  },
+  "hard_nonclaims": [
+    "NO_U_EMPTY",
+    "NO_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
