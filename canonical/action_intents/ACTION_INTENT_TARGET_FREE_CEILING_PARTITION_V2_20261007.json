@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-07",
+  "status": "PROOF_ONLY__ZERO_CREDIT",
+  "canonical_base_commit": "911b9e41a004fcfd0c9ea098abfc7f25a7dd4a07",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "claim_under_test": "V4_A_TARGET_COVERAGE_AND_B_TARGET_RELATIVE_DISTRIBUTIONAL_DOMINANCE_REMAIN_TARGET_SPECIFIC_IN_CONTEXTS_WITH_SCOPE_COMPLETE_TARGET_FREE_UNIVERSAL_TOP_SUPPORT",
+  "method": "FIRST_PRINCIPLES_PARTITION_REDUCTION_PLUS_INDEPENDENT_WOLFRAM_PROPOSITIONAL_VERIFICATION",
+  "sources": {
+    "authority_v4": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V4.json",
+      "git_blob_sha": "4f9e7adefafd23268f590614b4a0b821fe0d6472"
+    },
+    "top_support": {
+      "path": "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json",
+      "git_blob_sha": "69e3ac04f0158bd2309c926d606d798449633f25"
+    },
+    "target_cut": {
+      "path": "canonical/governance/TARGET_COMPLETENESS_INFORMATION_CUT_20261007_V1.json",
+      "git_blob_sha": "305b16f88c19ee5046ad0eb7ba0d57da6fab740b"
+    }
+  },
+  "fresh_reality_units_consumed": 0,
+  "incremental_spend_usd": 0
+}
