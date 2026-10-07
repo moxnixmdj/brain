@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V3_WOLFRAM_VERIFY_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_SET_COVER_COUNT_PASS__EXACT_SOURCE_BINDINGS_RECONCILED__GDPVAL_DIRECT_REALITY_DEMOTION_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V3.json",
+    "git_blob_sha": "5b321a95f1fb39e46bb56bf23f57819e408c7c0e"
+  },
+  "exact_sources": {
+    "predecessor": {
+      "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V2.json",
+      "git_blob_sha": "7aaffdb0c7d22f59700a8bc5d997f3bcc4800519"
+    },
+    "predecessor_verification": {
+      "path": "canonical/verification/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V2_VERIFY_20261007_V1.json",
+      "git_blob_sha": "0a241a4023106b624b084bab055cdb0891d2670b"
+    },
+    "gdpval_localization": {
+      "path": "canonical/governance/GDPVAL_PUBLIC_220_SEMANTIC_COMPLEMENT_LOCALIZATION_20261007_V1.json",
+      "git_blob_sha": "9f5fd6f89de1107adeb0e4eb95c1c16cd6d1392c"
+    },
+    "gdpval_independent_verification": {
+      "path": "canonical/verification/GDPVAL_PUBLIC_220_SEMANTIC_LOCALIZATION_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "0e7b98a1d79cfa8538095ab6a11ea0da85cad6ed"
+    }
+  },
+  "wolfram": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "expression": "classes={TB4,FRONTIERCODE,CURSORBENCH,AA_BRIEFCASE,AUTOMATIONBENCH,HLE_TOOLS,TB_SCIENCE,CHARTOGRAPHY,DENSE_NONCHART,OSWORLD,FINANCE_INDEX,FINANCE_AGENT_V2,FINANCE_SEMANTIC_ADEQUACY_TAIL,SYNTHESIS_MATCHED_QUALITY_COVERAGE,MYSTERYMECHANISM_INTRINSIC};lanes={{TB4,CHARTOGRAPHY},{HLE_TOOLS,OSWORLD},{FINANCE_INDEX,FINANCE_AGENT_V2,FINANCE_SEMANTIC_ADEQUACY_TAIL,MYSTERYMECHANISM_INTRINSIC},{AA_BRIEFCASE},{FRONTIERCODE},{AUTOMATIONBENCH},{CURSORBENCH},{TB_SCIENCE},{DENSE_NONCHART,SYNTHESIS_MATCHED_QUALITY_COVERAGE}};{Length[classes],Length[lanes],Union@@lanes===Sort[classes],And@@(Length[#]>0& /@ lanes)}",
+    "result": [
+      15,
+      9,
+      true,
+      true
+    ],
+    "note": "UNDEFINED_SYMBOL_WARNINGS_ARE_EXPECTED_BECAUSE_SYMBOLS_ARE_USED_AS_SET_LABELS_ONLY__THE_RETURNED_SET_CARDINALITY_AND_COVER_EQUALITY_ARE_LOAD_BEARING"
+  },
+  "verified": {
+    "predecessor_positive_reality_class_count": 16,
+    "gdpval_complete_public_population_already_bound": true,
+    "gdpval_structural_localization_still_open": true,
+    "gdpval_whole_task_membership_proved_count": 0,
+    "gdpval_target_query_currently_irreducible": false,
+    "gdpval_scope_closed": false,
+    "gdpval_removed_from_positive_reality_cut": true,
+    "current_positive_reality_class_count": 15,
+    "current_lane_count": 9,
+    "artificial_analysis_lane_still_required_for_aa_briefcase": true,
+    "U_empty_proved": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GDPVAL_SCOPE_IS_CLOSED.",
+    "NO_CLAIM_GDPVAL_WILL_NEVER_REQUIRE_TARGET_RELATIVE_REALITY.",
+    "NO_CLAIM_FIFTEEN_IS_A_GLOBAL_INFORMATION_THEORETIC_LOWER_BOUND.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
