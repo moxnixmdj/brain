@@ -1,10 +1,10 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V9",
+  "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V10",
   "status": "CURRENT_MAIN_TERMINAL_NOT_REAL",
-  "checked_by": "CHATGPT_DIRECT_POST_FINANCE_DEPENDENCY_COLLAPSE_TRUTH_RECONCILIATION",
+  "checked_by": "CHATGPT_DIRECT_POST_TOURNAMENT_COMPILER_SOUNDNESS_REBIND",
   "source_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-  "source_authority_blob_sha": "187430a10f736df49dd1c7cee3b792974397fbee",
-  "source_authority_commit_sha": "120e2e1f75d4085da0c60070f82539fa1a8570f0",
+  "source_authority_blob_sha": "b7b1f4a12c32bea1d979fb6b921d19eb37ef620a",
+  "source_authority_commit_sha": "c4ed72952a325f6f7bd4470c06f851c028fd2bcb",
   "phase": "FROZEN_PROTOCOL_CLOSURE_WITH_COEQUAL_UNIVERSAL_COVER_ROUTE",
   "live_research_root_count": 1,
   "live_research_root": "PROVE_NOT_X_OR_CLOSE_THE_13_INDEPENDENT_ACCEPTANCE_EVIDENCE_OBLIGATIONS",
@@ -49,10 +49,13 @@
     "duplicate_aa_briefcase_measurement_is_one_fact": true,
     "dense_nonchart_is_shared_aa_quality_dependency": true,
     "finance_uncovered_scope_is_shared_escape_dependency": true,
-    "no_work_counts_unless_it_closes_an_independent_open_obligation_or_soundly_discharges_one_or_more_by_stronger_scope_complete_proof": true
+    "no_work_counts_unless_it_closes_an_independent_open_obligation_or_soundly_discharges_one_or_more_by_stronger_scope_complete_proof": true,
+    "tournament_failure_compiler_hardened": true,
+    "tournament_failure_scheduler_bound_to_exact_current_compiler_bytes": true,
+    "tournament_failure_soundness_repair_changes_terminal_credit": false
   },
   "source_manifest_path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
   "source_manifest_blob_sha": "b2aae1b51c445ae466e04737e06806801cdc711e",
   "source_proof_shape_quotient_path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
-  "source_proof_shape_quotient_blob_sha": "f19488744db2a2b0d69d8b099f912e5d2b5bae84"
+  "source_proof_shape_quotient_blob_sha": "8a644570e5f02852da253abf1c0e8012b87af34e"
 }
