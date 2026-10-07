@@ -1,0 +1,12 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_SINGLE_ARTIFACT_CLOSED_V8",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_EXACT_BLOB_REPLAY_PASS__3263_BYTE_SINGLE_ARTIFACT_CLOSED_PACKAGE__ZERO_TERMINAL_CREDIT",
+  "scope_lock":"BYTES_RESEARCH_ONLY",
+  "artifact":{"path":"canonical/runtime/bytes_v14_single_artifact_closed_v8.py","git_blob_sha":"246f31ac5fd90a29ca550dff742dedf29be01da5","raw_bytes":8902},
+  "proof_closed":{"generic_list_law_families":4,"scalar_small_model_completeness":true,"pointwise_words":820,"pointwise_classes":200,"sequence_classes":809},
+  "encoding":{"payload_bytes":3263,"payload_sha256":"6b2c275c4d0482f81e9dfd8e5116623f2b6eb33a01c89af26046f3abf2b08de1","decoder":"RAW_LZMA1_8192_LC0_LP0_PB0_NORMAL_BT2_NICE32","roundtrip_exact":true},
+  "comparison":{"previous_closed_package_bytes":3307,"bytes_saved":44,"previous_lower_trust_frontier_bytes":3353,"saved_vs_previous_lower_trust":90},
+  "remaining":["PYTHON_RUNTIME_SUBSTRATE","FIXED_DECODER_SUBSTRATE","NO_GLOBAL_MINIMUM_DESCRIPTION_PROOF"],
+  "terminal_credit_delta":0
+}
