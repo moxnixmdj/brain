@@ -12,6 +12,10 @@
       "path": "canonical/governance/GDPVAL_PUBLIC_220_SEMANTIC_COMPLEMENT_LOCALIZATION_20261007_V1.json",
       "git_blob_sha": "9f5fd6f89de1107adeb0e4eb95c1c16cd6d1392c"
     },
+    "buildkite_owner_trial_support": {
+      "path": "canonical/governance/BUILDKITE_OWNER_TRIAL_SUPPORT_BINDING_20261007_V1.json",
+      "git_commit_sha": "16c9ee4eb6de135a694f9ff7021483d47d661e30"
+    },
     "gdpval_semantic_localization_verification": {
       "path": "canonical/verification/GDPVAL_PUBLIC_220_SEMANTIC_LOCALIZATION_SPRITE_VERIFICATION_20261007_V1.json",
       "git_blob_sha": "0e7b98a1d79cfa8538095ab6a11ea0da85cad6ed"
@@ -67,7 +71,7 @@
         "TB4",
         "CHARTOGRAPHY"
       ],
-      "state": "ZERO_SPEND_CARRIER_READY__CURRENT_CHAT_DIRECT_TRIGGER_UNAVAILABLE"
+      "state": "ZERO_SPEND_CARRIER_READY__DIRECT_PROVIDER_SUPPORT_CONFIRMS_OUTLINED_TRIAL_USE_CASE__CURRENT_CHAT_DIRECT_TRIGGER_UNAVAILABLE"
     },
     {
       "id": "L2_HUGGINGFACE_HLE_OSWORLD",
