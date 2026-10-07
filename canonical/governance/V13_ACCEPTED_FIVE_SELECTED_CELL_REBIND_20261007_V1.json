@@ -1,0 +1,138 @@
+{
+  "schema": "PROJECT_BRAIN_V13_ACCEPTED_FIVE_SELECTED_CELL_REBIND_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ZERO_REALITY_DB_SATURATION__FIVE_ALREADY_ACCEPTED_SCOPES_REBOUND_AS_SELECTED_ABC_CELLS__ZERO_NEW_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V13.json",
+    "git_blob_sha": "0d18488b51a222e5da414329ccd9d33cbc1fc31c"
+  },
+  "certificate_theorem": {
+    "path": "canonical/governance/DIRECT_END_TO_END_SELECTED_CELL_CERTIFICATE_THEOREM_20261007_V1.json",
+    "git_blob_sha": "ecb52ca25fa14a60b7c34206fea25d8d3cfdcf0d"
+  },
+  "cells": [
+    {
+      "id": "ACCEPTED_CONTINUITY_SCOPED_CELL",
+      "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "exact_scope": "DURABLE_CROSS_SESSION_PROJECT_STATE_AND_SAME_MISSION_CHECKPOINT_RELAUNCH_CONTINUITY",
+      "complete_semantics": {
+        "path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+        "git_blob_sha": "2d912cf8df64bd806fffb6a1070d95644d005470"
+      },
+      "selected_route": {
+        "path": "canonical/runtime/same_identity_supervisor_credited_v1.py",
+        "git_blob_sha": "47c461f502e840def0c38728e1bfd7c6401cb804"
+      },
+      "route_rebind": {
+        "path": "canonical/governance/CONTINUITY_CREDITED_REBIND_20261007_V1.json",
+        "git_blob_sha": "839af46fd8ef214251b44bd1398fa2d1543f00c5"
+      },
+      "e2e_kind": "OBJECTIVE_BEHAVIORAL_CEILING_WITH_FRESH_FORCED_PROCESS_BOUNDARY_AND_INDEPENDENT_CLEANROOM_CORROBORATION",
+      "add_to_D_B": true
+    },
+    {
+      "id": "ACCEPTED_DELEGATION_SCOPED_CELL",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "exact_scope": "FROZEN_UNIVERSAL_FORMAL_DELEGATION_SCOPE_BOUND_TO_CURRENT_ACCEPTED_ROUTE",
+      "acceptance_receipt": {
+        "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23"
+      },
+      "selected_route": {
+        "path": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+        "git_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522"
+      },
+      "promotion_receipt": {
+        "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+        "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+      },
+      "e2e_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+      "add_to_D_B": true
+    },
+    {
+      "id": "ACCEPTED_RECOVERY_SCOPED_CELL",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "exact_scope": "FROZEN_SCOPE_COMPLETE_RECOVERY_CAUSAL_LOCALIZATION_TERMINAL_RECOVERY_AND_FAIL_CLOSED_SCOPE",
+      "acceptance_receipt": {
+        "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+        "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+      },
+      "selected_route": {
+        "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+        "git_blob_sha": "28940387bd6c11671035ad9201e37bba13fd9bc9"
+      },
+      "promotion_receipt": {
+        "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+        "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+      },
+      "e2e_kind": "SCOPE_COMPLETE_STRONGER_END_TO_END_PROOF",
+      "add_to_D_B": true
+    },
+    {
+      "id": "ACCEPTED_TOOL_DISCOVERY_SCOPED_CELL",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "exact_scope": "FROZEN_HIDDEN_TOOL_PROTOCOL_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+      "acceptance_receipt": {
+        "path": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "913d171b3c855000d322e183b142b3200eeaf0a9"
+      },
+      "selected_route": {
+        "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+        "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+      },
+      "promotion_receipt": {
+        "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+        "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+      },
+      "e2e_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+      "add_to_D_B": true
+    },
+    {
+      "id": "ACCEPTED_EXACT_SYMBOLIC_SCOPED_CELL",
+      "family": "EXACT_SYMBOLIC_COMPUTATION",
+      "exact_scope": "OBS_EXACT_SYMBOLIC_001_FROZEN_12_TASK_OPERATION_CLASSES_ONLY",
+      "complete_semantics": {
+        "path": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+        "git_blob_sha": "a691d49ef377fa216bbbeff70183112d65445463"
+      },
+      "selected_route": {
+        "path": "canonical/obsolescence/run_exact_symbolic_v1.py",
+        "git_blob_sha": "8f6f04fee00664b26ddf1a45a65698399c7ca6c3"
+      },
+      "deterministic_dependency": "SymPy 1.14.0",
+      "e2e_kind": "THEORETICAL_CORRECTNESS_CEILING_12_OF_12_WITH_INDEPENDENT_WOLFRAM_ADJUDICATION",
+      "add_to_D_B": true
+    }
+  ],
+  "v13_effect": {
+    "add_exact_selected_cells_to_D_B": 5,
+    "remove_only_same_exact_cells_from_E": true,
+    "new_family_credit": 0,
+    "new_acceptance_credit": 0,
+    "new_target_reality_consumed": 0,
+    "global_ABC_closed": false,
+    "global_D_finality": "OPEN"
+  },
+  "boundaries": [
+    "EACH CELL IS LIMITED TO ITS EXISTING ACCEPTED OR ADJUDICATED SCOPE.",
+    "NO INHERITANCE TO EXCLUDED OR BROADER SEMANTIC SURFACES.",
+    "THE REBIND ONLY SATURATES D_B WITH ALREADY_PROVED END_TO_END CELLS.",
+    "ANY ROUTE BYTE DRIFT REOPENS THE AFFECTED CELL.",
+    "GLOBAL D FINALITY REMAINS OPEN UNTIL THE FINAL CREDITED ROUTE SET IS FROZEN AND CLEAN_ROOM REPLAYED."
+  ],
+  "hard_nonclaims": [
+    "NO_NEW_FAMILY_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_WHOLE_TARGET_ABC_CLOSURE",
+    "NO_GLOBAL_D_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
