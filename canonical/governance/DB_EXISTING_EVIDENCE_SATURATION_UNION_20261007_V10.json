@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_DB_EXISTING_EVIDENCE_SATURATION_UNION_V10",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_TRUTH_REPAIR__V9_RECORD16_SCOPE_EQUIVALENCE_LIFT__IF_SCOPE_BOUNDARY_REFINEMENT_CLOSED__SIXTEEN_RECORDS_UNCHANGED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predecessor": {
+    "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V9.json",
+    "git_blob_sha": "73fbe58346dd2ff94feccfa0cbea7d00a9dcd1d0",
+    "sound_certificate_record_count": 16
+  },
+  "semantic_scope_repair": {
+    "record_id": "IF_SCOPE_BOUNDARY_FROZEN_160_FINITE_MANIFEST",
+    "prior_source": {
+      "path": "canonical/governance/IF_SCOPE_FINITE_MANIFEST_TOP_CERTIFICATE_20261007_V1.json",
+      "git_blob_sha": "40be3493b6786f2a0349d82f0b6219784d682d22"
+    },
+    "protocol_binding_truth_repair": {
+      "path": "canonical/governance/IF_SCOPE_FINITE_PROTOCOL_BINDING_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "15c5e607e9f5c921d62bf75492e26021980e75fa"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/IF_SCOPE_FINITE_PROTOCOL_BINDING_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "b7bfc865267554f0c7005c0835f09107b2dec998"
+    },
+    "prior_v9_interpretation": "FROZEN_160_CASE_MANIFEST_ONLY__NO_POPULATION_GENERALIZATION",
+    "repaired_terminal_interpretation": "THE_FROZEN_160_CASE_MANIFEST_IS_THE_COMPLETE_DECLARED_FINITE_ACCEPTANCE_OBJECT_FOR_IF_SCOPE_BOUNDARY_NONINFERIOR__NO_LARGER_POPULATION_IS_DECLARED",
+    "population_generalization_required": false,
+    "larger_population_claimed": false
+  },
+  "proof": {
+    "predicate": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "declared_scope_mode": "FINITE_DECLARED_SCOPE",
+    "declared_dimension_count": 5,
+    "bound_case_count": 160,
+    "brain_success_count": 160,
+    "brain_failure_count": 0,
+    "objective_binary_success_ceiling": 1,
+    "comparator_residual_case_count": 0,
+    "authority_denied_route_touches": 0,
+    "source_bindings_independently_verified": true,
+    "theorem": "ON_THE_COMPLETE_DECLARED_FINITE_ACCEPTANCE_OBJECT__BRAIN_SUCCESS_EQUALS_THE_GLOBAL_BINARY_SUCCESS_CEILING_1__THEREFORE_NO_ADMISSIBLE_OPUS55_RESULT_ON_THE_IDENTICAL_OBJECT_CAN_EXCEED_BRAIN",
+    "conclusion": "IF_SCOPE_BOUNDARY_NONINFERIOR_IS_CLOSED_AND_ITS_EXACT_DECLARED_SCOPE_IS_SOUNDLY_SUBTRACTABLE_FROM_U_WITH_ZERO_OPUS_QUERY"
+  },
+  "saturation_result": {
+    "predecessor_sound_certificate_record_count": 16,
+    "added_sound_certificate_record_count": 0,
+    "known_sound_D_B_certificate_record_count": 16,
+    "record_count_changed": false,
+    "semantic_scope_of_record16_strengthened": true,
+    "closed_refinement": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "sound_subtraction_from_U": true,
+    "U_monotonicity": "U_V10_SUBSET_OR_EQUAL_U_V9",
+    "U_empty_proved": false,
+    "fresh_target_reality_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduler_effect": [
+    "REMOVE_IF_SCOPE_BOUNDARY_NONINFERIOR_FROM_THE_SURVIVING_U_REFINEMENT_QUEUE.",
+    "DO_NOT_REOPEN_UNDECLARED_IF_POPULATION_INFERENCE.",
+    "DO_NOT_GENERALIZE_THIS_CERTIFICATE_BEYOND_THE_FIVE_DECLARED_IF_SCOPE_DIMENSIONS.",
+    "KEEP_LIVEBENCH_OR_OTHER_TEXT_QUALITY_ONLY_IF_SEPARATELY_LOAD_BEARING_UNDER_CURRENT_ABC_REFINEMENT_SEMANTICS.",
+    "CONTINUE_ONLY_ON_THE_REMAINING_SCOPE_COMPLETE_U_RESIDUAL_CLASSES."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_INSTRUCTION_FOLLOWING_OUTSIDE_THE_DECLARED_FINITE_SCOPE_BOUNDARY_PORTFOLIO.",
+    "NO_CLAIM_THE_SIXTEEN_SOUND_RECORDS_EXHAUST_D_B_OR_THE_CLOSED_TRACE_SCOPE.",
+    "NO_CLAIM_U_IS_EMPTY.",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED.",
+    "NO_CLAIM_D_FINALITY_OR_TERMINAL_IS_CLOSED.",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "opus_cases_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
