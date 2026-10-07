@@ -1,0 +1,32 @@
+name: Verify agency finite portfolio ceiling
+on:
+  push:
+    paths:
+      - 'canonical/governance/AGENCY_FINITE_PORTFOLIO_CEILING_CLOSURE_20261007_V1.json'
+      - 'canonical/runtime/agency_finite_portfolio_generator_v1.py'
+      - 'canonical/runtime/agency_finite_portfolio_ceiling_v1.py'
+      - 'canonical/tests/test_agency_finite_portfolio_ceiling_v1.py'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run exact byte-bound agency ceiling proof
+        run: |
+          python -m pytest canonical/tests/test_agency_finite_portfolio_ceiling_v1.py -q
+          python - <<'PY'
+          import json, pathlib
+          from canonical.runtime.agency_finite_portfolio_ceiling_v1 import verify
+          p=pathlib.Path("canonical/governance/AGENCY_FINITE_PORTFOLIO_CEILING_CLOSURE_20261007_V1.json")
+          if p.exists():
+              doc=json.loads(p.read_text())
+              out=verify(doc["freeze"]["post_freeze_beacon_commit_sha"])
+              assert out["pass"] is True, out
+              assert out["portfolio_manifest_sha256"]==doc["portfolio"]["manifest_sha256"], (out,doc)
+              print(json.dumps(out,sort_keys=True))
+          PY
