@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "GDPVAL-PUBLIC-220-RUBRIC-ACCEPTANCE-INDEX-20261007-SOL",
+  "date": "2026-10-07",
+  "status": "CANDIDATE__CURRENT_BASE_BOUND__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "4cd86d61954465a153231099a54034ff2f5efcde",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "GDPVAL_PUBLIC_220_RUBRIC_ACCEPTANCE_INDEX_NOT_DURABLY_BOUND",
+  "action_kind": "STRUCTURAL_ACCEPTANCE_LOCALIZATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::GDPVAL_PUBLIC_220_RUBRIC_ACCEPTANCE_INDEX_NOT_DURABLY_BOUND",
+  "expected_parent_frontier_change": "Durably compile the already-acquired GDPval public 220 population into a content-addressed 10,453-criterion acceptance index, revision-bound and independently hash-verified, so subsequent top-law joining can operate on explicit acceptance contracts rather than re-parsing prompts.",
+  "highest_leverage_now": true,
+  "stop_condition": "Exact bound revision is confirmed; all 220 tasks and 10,453 rubric criteria are indexed; every criterion/task/population hash verifies independently; evidence preserves no-U-deletion/no-semantic-completeness/no-pairwise-preference nonclaims.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "current_scheduler_binding": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "419ec8a40d52351665935f4f765fc46abb95febe",
+    "closure_condition": "U_IS_EMPTY",
+    "open_ABC_refinement_count": 13,
+    "live_refinement": "PROFESSIONAL_KNOWLEDGE_WORK__GDPVAL_AA_SCOPE_NONINFERIOR_OR_STRONGER",
+    "current_rule": "KEEP_GDPVAL_DIRECT_TARGET_MODEL_OR_PROVIDER_EVALUATION_ASLEEP_WHILE_THE_ALREADY_ACQUIRED_220_CONTEXT_STRUCTURAL_MEMBERSHIP_LANE_REMAINS_UNEXHAUSTED",
+    "terminal": false
+  },
+  "tournament": {
+    "proposal_id": "P_GDPVAL_EXPLICIT_RUBRIC_ACCEPTANCE_INDEX",
+    "falsifier_id": "F_DATASET_REVISION_OR_POPULATION_OR_CONTENT_HASH_DRIFT",
+    "decisive_question": "Can the complete already-acquired public GDPval population be converted losslessly into explicit content-addressed rubric acceptance contracts without target-model inference and without silently accepting source drift?",
+    "known_counterexamples_checked": true
+  },
+  "recursive_obs": {
+    "real_outcome": "Advance GDPval structural saturation by materializing the explicit acceptance-contract layer already present in the acquired 220-task population.",
+    "selected_route": "REVISION_GATED_COMPLETE_RUBRIC_INDEX_PLUS_INDEPENDENT_HASH_VERIFIER",
+    "deleted_routes": [
+      "NEW_TARGET_MODEL_QUERY",
+      "GENERAL_FREE_FORM_SEMANTIC_ENGINE",
+      "UNPINNED_ROWS_REPLAY",
+      "RUBRIC_EXTRACTION_AS_WHOLE_TASK_OR_PAIRWISE_PREFERENCE_CREDIT"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The compiler already exists on main; only a revision-gated replay, deterministic verification, and durable evidence binding are missing.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Current scheduler explicitly orders structural GDPval saturation before any new target/provider reality; the required public population and compiler are already bound."
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_target_model_queries": 0,
+    "new_provider_evaluation_queries": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_target_reality_authority": false
+}
