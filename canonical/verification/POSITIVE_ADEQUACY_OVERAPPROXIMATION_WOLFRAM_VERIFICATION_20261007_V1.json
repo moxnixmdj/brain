@@ -1,0 +1,12 @@
+{
+  "schema":"PROJECT_BRAIN_POSITIVE_ADEQUACY_OVERAPPROXIMATION_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "verification_provider":"WOLFRAM_LANGUAGE",
+  "finite_exhaustive_universe_size":5,
+  "subset_triples_checked":32768,
+  "failures":0,
+  "pass":true,
+  "verified_rule":"W_TRUE_SUBSET_M_OVER_AND_M_OVER_SUBSET_PHI_IMPLIES_W_TRUE_SUBSET_PHI",
+  "boundary":"FINITE_EXHAUSTIVE_INSTANCE_CHECKS_SET_INCLUSION_TRANSITIVITY__GENERAL_RULE_IS_STANDARD_SET_TRANSITIVITY",
+  "terminal_credit_delta":0
+}
