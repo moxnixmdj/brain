@@ -14,7 +14,7 @@ ENTRY="canonical/runtime/continuity_root3_fixed_entry_v1.py"
 SUPERVISOR="canonical/runtime/same_identity_supervisor_credited_v1.py"
 
 EXPECTED={
-    ENTRY:"76f32060b085c61e5a7820e87cbaa31152951e83",
+    ENTRY:"72cae0e1a2ff115289673a4f4952fd23c83d7277",
     SUPERVISOR:"47c461f502e840def0c38728e1bfd7c6401cb804",
 }
 ALLOWED_PREFIXES=(
