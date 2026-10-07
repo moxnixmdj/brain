@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_RESEARCH_CONTROL_V2_CURRENT_HEAD_COMPATIBILITY_V1",
+  "date": "2026-10-07",
+  "status": "CURRENT_HEAD_MATERIAL_AUTHORITY_COMPATIBLE__PARAMETERIZED_CLASS_PROOF_REMAINS_LEGAL__ZERO_CREDIT",
+  "current_main_commit": "598df90fdd41c8e356194c52f8edf15e9b10ad99",
+  "current_authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+    "git_blob_sha": "1016e752ea931483e887800b8dd6dc23c1521e7e"
+  },
+  "independent_replay": {
+    "path": "canonical/verification/RESEARCH_CONTROL_V2_UNIVERSAL_SELECTED_CELL_SPRITE_VERIFICATION_20261007_V1.json",
+    "git_blob_sha": "e195b5c3b6058029a8cbb7977fc4e7682f6f54de"
+  },
+  "material_authority_checks": {
+    "terminal_false": true,
+    "complete_selected_context_ABC_normal_form": "U_IS_EMPTY",
+    "current_U_empty_proved": false,
+    "common_policy_first_rule_preserved": true,
+    "minimum_selected_discriminator_fallback_preserved": true,
+    "new_scope_complete_parameterized_class_proofs_legal": true
+  },
+  "theorem_compatibility": {
+    "region": "RESEARCH_CONTROL_INFO_SAFE_V2_ALL_GENERATED_CASES",
+    "proof_shape": "ONE_COMMON_BRAIN_POLICY_PROVED_ADEQUATE_FOR_THE_ENTIRE_EXACT_PARAMETERIZED_V2_GENERATOR_CLASS",
+    "point_or_small_population_record": false,
+    "reusable_parameterized_law": true,
+    "open_world_research_scope_closed": false,
+    "effect_on_U": "DELETE_ONLY_THE_EXACT_V2_GENERATOR_CLASS_FROM_U_IF_IT_IS_TARGET_RELEVANT__DO_NOT_INFER_GLOBAL_RESEARCH_COVER"
+  },
+  "drift_classification": "CURRENT_AUTHORITY_CHANGED_CACHED_REGION_AND_ROUTER_EXECUTION_BOOKKEEPING__THE_COMMON_POLICY_OR_MINIMUM_DISCRIMINATOR_RULE_AND_U_EMPTY_CLOSURE_CONDITION_REMAIN_UNCHANGED",
+  "hard_nonclaims": [
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_CLAIM_OPEN_WORLD_RESEARCH_CONTROL_IS_CLOSED",
+    "NO_UNKNOWN_DOMAIN_FAMILY_CLOSURE",
+    "NO_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
