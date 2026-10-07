@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_SOLVER_EFFECT_SEMANTICS_TRUST_ROOT_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_FAIL_CLOSED_EMPTY_TRUST_ROOT__NO_EFFECT_SEMANTICS_VERIFICATION_BLOBS_PROMOTED__ZERO_CREDIT",
+  "purpose": "Prevent repository-local self-authored independent-verification documents from minting trusted solver effects. Only exact verification blobs explicitly admitted by this pinned manifest may authorize verifier-success-to-effect implications.",
+  "trusted_effect_semantics_verification_blobs": [],
+  "admission_rule": [
+    "THE_VERIFICATION_DOCUMENT_GIT_BLOB_SHA_MUST_APPEAR_EXACTLY_IN_trusted_effect_semantics_verification_blobs.",
+    "THE_RUNTIME_MUST_PIN_THIS_MANIFESTS_EXACT_GIT_BLOB_SHA.",
+    "THE_UNDERLYING_SOLVER_MUST_STILL_VALIDATE_TASK_CONTRACT_CAPABILITY_REQUIRES_VERIFIER_PAYLOAD_SUCCESS_CONDITION_AND_PROVIDED_EFFECT_BINDINGS.",
+    "ADDING_A_TRUSTED_BLOB_REQUIRES_A_SEPARATE_EXACT_BYTE_INDEPENDENT_VERIFICATION_EVENT_AND_A_NEW_PINNED_TRUST_ROOT_VERSION."
+  ],
+  "current_truth": {
+    "canonical_promoted_effect_semantics_verification_blob_count": 0,
+    "current_v5_effect_semantics_bindings_are_not_independently_trusted_by_runtime_identity_alone": true,
+    "self_authored_repo_root_verification_documents_must_not_authorize_effects": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_V5_VERIFIER_EXECUTION_OR_RESUME_LOGIC_IS_INCORRECT.",
+    "NO_CLAIM_ANY_CURRENT_TERMINAL_CAPABILITY_IS_CLOSED_BY_THIS_TRUST_ROOT.",
+    "NO_EFFECT_SEMANTICS_BLOB_IS_PROMOTED_BY_THIS_INITIAL_ROOT.",
+    "NO_TERMINAL_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
