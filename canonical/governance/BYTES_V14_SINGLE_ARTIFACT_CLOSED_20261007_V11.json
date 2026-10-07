@@ -1,0 +1,16 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_SINGLE_ARTIFACT_CLOSED_V11",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_EXACT_BLOB_REPLAY_PASS__2738_BYTE_FRONTIER__ZERO_TERMINAL_CREDIT",
+  "scope_lock":"BYTES_RESEARCH_ONLY",
+  "artifact":{"path":"canonical/runtime/bytes_v14_single_artifact_closed_v11.py","git_blob_sha":"5dae01005784d1285ab79118557d65dc22406e24","raw_bytes":6338},
+  "changes":[
+    "REINTRODUCE_COMPACT_SAFE_PRIMITIVE_DISPATCH_WITHOUT_REINTRODUCING_THE_OLD_CONGRUENCE_CONTEXT_BUG",
+    "FUSE_R_ROTATIONS_SORT_AND_UNIQUE_FOR_EXACT_INTEGER_LIST_DOMAIN",
+    "SPECIALIZE_GENERIC_LIST_SUBCLASS_CHECKS_TO_THE_DECLARED_EXACT_PYTHON_LIST_DOMAIN"
+  ],
+  "soundness":{"closed_check":"PASS","proof_basis_vs_v10":{"candidate":931,"v10":931,"missing":0,"extra":0},"frozen_regression":{"expression":6,"scalar":9,"sequence":12,"total":27,"status":"PASS"}},
+  "encoding":{"tested_lzma1_configurations":2700,"best_fixed_decoder_payload_bytes":2738,"best_filter":{"dict_size":8192,"lc":0,"lp":0,"pb":0,"mode":"NORMAL","match_finder":"BT2","nice_len":32},"payload_sha256":"28490ac14ff5af335b43ac50b0187a55ed42fa9931a226b4df533d424f6bb8b9","roundtrip_exact":true},
+  "comparison":{"v10_payload_bytes":2751,"v11_payload_bytes":2738,"payload_bytes_saved":13,"v10_raw_bytes":6632,"v11_raw_bytes":6338,"raw_bytes_saved":294},
+  "hard_nonclaims":["NO_GLOBAL_MINIMUM_DESCRIPTION_PROOF","EXACT_LIST_SPECIALIZATION_DOES_NOT_CLAIM_ARBITRARY_LIST_SUBCLASS_SUPPORT","PYTHON_HASHLIB_AND_FIXED_DECODER_SUBSTRATE_STILL_EXTERNAL","NO_TERMINAL_CREDIT"]
+}
