@@ -6,11 +6,11 @@
   "authority":{
     "zero_reality_saturation":{
       "path":"canonical/governance/ABC_CURRENT_BOUND_ZERO_REALITY_SATURATION_20261007_V1.json",
-      "git_blob_sha":"cfc7dfaa4a88a9c770375e5cc4b9876247e6615b"
+      "git_blob_sha":"bfe6e36cf09abb6f0740dba77b273d5300c582a5"
     },
     "zero_reality_saturation_verification":{
       "path":"canonical/verification/ABC_CURRENT_BOUND_ZERO_REALITY_SATURATION_CONNECTOR_VERIFICATION_20261007_V1.json",
-      "git_blob_sha":"3f0e5d7482d76261cfd67cefe84d058c614a20f9"
+      "git_blob_sha":"88a469071458db281a9926efd2d3d091c2a388fb"
     },
     "fixed_point_map":{
       "path":"canonical/governance/ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_20261007_V3.json",
