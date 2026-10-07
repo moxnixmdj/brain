@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_COMMON_POLICY_C2_INDEPENDENT_REPLAY_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_BLOB_REPLAY_PASS__7_OF_7__ZERO_TERMINAL_CREDIT",
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-c2-independent-replay-v3",
+    "sprite_id": "sprite-b5cc7147-1e70-4905-8176-d3fa129aac58",
+    "python": "3.14.4"
+  },
+  "exact_blobs": {
+    "policy": {
+      "path": "canonical/runtime/synthesis_certified_visible_support_policy_v1.py",
+      "git_blob_sha": "dcef050165201d506f66c86854cb30bcb7637b42"
+    },
+    "tests": {
+      "path": "canonical/tests/test_synthesis_certified_visible_support_policy_v1.py",
+      "git_blob_sha": "1a0e01a3de260d0f43549c0b15df4d5f2668ad1b"
+    },
+    "bounded_support": {
+      "path": "canonical/runtime/bounded_claim_support.py",
+      "git_blob_sha": "197246a50ace8c16b945def9edb1357fb317c393"
+    },
+    "grounded_realizer": {
+      "path": "canonical/runtime/synthesis_grounded_expression_ir_v1.py",
+      "git_blob_sha": "0709b7d43a069eaa9eb3240df28789a9107a36db"
+    },
+    "top_law": {
+      "path": "canonical/governance/SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_TOP_LAW_CELL_20261007_V1.json",
+      "git_blob_sha": "042d89d354a6d10f97a4ac45d45825d1673247ec"
+    },
+    "common_policy_cover": {
+      "path": "canonical/governance/SYNTHESIS_COMMON_POLICY_COVER_20261007_V1.json",
+      "git_blob_sha": "bca081880b4f90fc98b6be41c5f6b9a18192b39b"
+    }
+  },
+  "replay": {
+    "test_count": 7,
+    "pass_count": 7,
+    "fail_count": 0,
+    "passed_tests": [
+      "test_claim_without_certified_support_fails_closed",
+      "test_explicit_audience_profile_is_causal_to_output",
+      "test_optional_salience_is_not_smuggled_into_the_cell",
+      "test_semantic_reordering_request_stays_outside_cell",
+      "test_unresolved_general_semantics_fail_closed",
+      "test_unverified_evidence_rejected",
+      "test_visible_support_and_conflict_are_derived_without_hidden_labels"
+    ]
+  },
+  "verified_consequence": [
+    "THE_EXACT_BOUND_POLICY_AND_DEPENDENCIES_EXECUTE_SUCCESSFULLY_ON_AN_INDEPENDENT_CARRIER",
+    "THE_COMMON_POLICY_CELL_DECLARED_IN_SYNTHESIS_COMMON_POLICY_COVER_HAS_PASSED_ITS_ONLY_DECLARED_REPLAY_BLOCKER",
+    "THE_PARAMETERIZED_TYPED_SYNTHESIS_CELL_IS_ELIGIBLE_FOR_U_SUBTRACTION_SUBJECT_TO_THE_EXISTING_TOP_LAW_PRECONDITIONS"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_SYNTHESIS_CLOSURE",
+    "NO_CLAIM_ARBITRARY_PARAPHRASE_ENTAILMENT_OR_OPTIONAL_SALIENCE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
