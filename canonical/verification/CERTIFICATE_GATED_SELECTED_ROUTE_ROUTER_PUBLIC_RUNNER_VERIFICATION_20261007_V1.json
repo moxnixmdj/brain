@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_BLOBS__MECHANICAL_ROUTER_EXECUTION_CONFIRMED__ZERO_TERMINAL_CREDIT",
+  "brain_repository": "moxnixmdj/brain",
+  "runner_repository": "moxnixmdj/verification-capsule-runner",
+  "runner_pr": 2342,
+  "runner_head_commit": "231565708fc266c29bcef2345dd5d6273059550a",
+  "workflow": "Isolated verification dispatcher",
+  "workflow_run_id": 37563465780,
+  "job_id": 112605765650,
+  "run_conclusion": "success",
+  "exact_brain_blobs": {
+    "canonical/runtime/certificate_gated_selected_route_router_v1.py": "4b99ef1e95e033badfb21ab7af7355122933224a",
+    "canonical/tests/test_certificate_gated_selected_route_router_v1.py": "b33717611b21f01f11d570d894aeee7f010231fc",
+    "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_RUNTIME_20261007_V1.json": "4bb599a386ee23908155069235b4f754c0f1cb90"
+  },
+  "checks": [
+    "EXACT_GIT_BLOB_IDENTITIES_MATCH",
+    "PYTHON_COMPILE_PASS",
+    "POSITIVE_CONTEXT_BOUND_SELECTION_PASS",
+    "DETERMINISTIC_CONTENT_ADDRESSED_TIE_BREAK_PASS",
+    "UNCOVERED_CONTEXT_FAIL_CLOSED_PASS",
+    "MALFORMED_SHA_FAIL_CLOSED_PASS",
+    "DUPLICATE_RECEIPT_FAIL_CLOSED_PASS",
+    "NON_BOOLEAN_ADMISSION_FAIL_CLOSED_PASS",
+    "GOVERNANCE_TERMINAL_FALSE_BOUNDARY_PRESERVED"
+  ],
+  "truth_effect": {
+    "exact_router_bytes_executed_on_independent_zero_spend_public_carrier": true,
+    "mechanical_router_execution_seam_closed_for_exact_bound_blobs": true,
+    "private_brain_repo_actions_carrier_execution_observed": false,
+    "per_cell_admission_semantics_closed": false,
+    "per_cell_adequacy_closed": false,
+    "selected_cover_complete": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "private_runner_observation": {
+    "brain_workflow": "Certificate-gated router live binding",
+    "latest_observed_run_id": 37563497219,
+    "conclusion": "failure",
+    "interpretation": "PRE_STEP_RUNNER_OR_CARRIER_FAILURE__NOT_ROUTER_CODE_FAILURE__PUBLIC_EXACT_BYTE_REPLAY_SUPPLIES_EXECUTION_EVIDENCE_BUT_DOES_NOT_CLAIM_PRIVATE_CARRIER_BINDING"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
