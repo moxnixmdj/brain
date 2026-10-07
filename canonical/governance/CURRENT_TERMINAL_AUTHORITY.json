@@ -1,7 +1,7 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34",
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V35",
   "date": "2026-10-07",
-  "status": "ACTIVE_FAIL_CLOSED_SINGLE_BIT_TERMINAL_EXECUTION_ROOT_V34__TERMINAL_FALSE",
+  "status": "ACTIVE_FAIL_CLOSED_ONE_LIVE_RESEARCH_ROOT__RESIDUAL_COMPLEMENT_UNSAT__D_FINALITY_DEFERRED_MECHANICAL_FREEZE_REPLAY__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -579,6 +579,18 @@
       "path": "canonical/governance/DYNAMIC_ADEQUACY_EXTENSION_BASIS_TRUTH_REPAIR_20261007_V1.json",
       "git_blob_sha": "602014867b9947b2579831400ad868f1de94e8d3",
       "note": "PRESERVE_NONSCHEMA_LOAD_BEARING_REQUIREMENTS_AS_OPAQUE_EXTENSION_ATOMS__NO_SILENT_OMISSION"
+    },
+    "root3_current_credited_zero_effect_reconciliation": {
+      "path": "canonical/governance/ROOT3_CURRENT_CREDITED_ZERO_EFFECT_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "3d5f34260bac0d8ed7bb053dc3a8c08bcbdaf852"
+    },
+    "exact_accepted_route_ownership_theorem": {
+      "path": "canonical/governance/EXACT_ACCEPTED_ROUTE_OWNERSHIP_THEOREM_V1.json",
+      "git_blob_sha": "09ee0097bc785d11e7f7bfdd6f1b39cafa13d5fa"
+    },
+    "terminal_candidate_donor_independence_audit": {
+      "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+      "git_blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26"
     }
   },
   "live_truth": {
@@ -859,7 +871,19 @@
     "symbolic_admission_predicate_successor_deployed": false,
     "terminal_execution_root_v1_bound": true,
     "primary_terminal_scheduler_object_count": 1,
-    "primary_terminal_scheduler_object": "PROVE_NOT_X"
+    "primary_terminal_scheduler_object": "PROVE_NOT_X",
+    "D_finality_is_independent_parallel_research_blocker": false,
+    "D_finality_post_ABC_sequence": [
+      "FREEZE_FINAL_CREDITED_ROUTE_BYTES",
+      "COMPILE_CONSERVATIVE_FINAL_EFFECT_FOOTPRINT",
+      "CLOSE_ONLY_REACHABLE_EFFECTS_OR_PROVE_ZERO_EFFECT",
+      "RUN_EXACT_ROUTE_OWNERSHIP_AND_DONOR_INDEPENDENCE_AUDIT",
+      "RUN_CLEAN_ROOM_REPLAY"
+    ],
+    "current_live_research_root_count": 1,
+    "current_live_research_roots": [
+      "PROVE_RESIDUAL_COMPLEMENT_UNSAT_OVER_EXACT_SOUND_ADMISSION_PREDICATE_SET"
+    ]
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -896,6 +920,7 @@
     "current_single_boundary": "CONSTRUCT_AND_AUTHENTICATE_TOTAL_SOUND_alpha_gamma_PLUS_TERMINAL_OR_COMPLETE_OUTCOME_STRICTLY_WELL_FOUNDED_SAFE_RESOURCE_BOUNDED_PROGRESS_COVER__OR_PROVE_THE_EXACT_SOUND_ADMISSION_COMPLEMENT_UNSAT"
   },
   "scheduling_lock": [
+    "DO_NOT_SCHEDULE_D_FINALITY_AS_PARALLEL_RESEARCH__AFTER_ABC_CLOSES_FREEZE_FINAL_ROUTE_BYTES__COMPILE_EXACT_EFFECT_FOOTPRINT__RUN_OWNERSHIP_DONOR_INDEPENDENCE_AND_CLEAN_ROOM_REPLAY.",
     "AFTER_U_EMPTY_ONLY__FREEZE_SELECTED_ROUTES_AND_EXECUTE_D_FINALITY__NO_OTHER_TOP_LEVEL_TERMINAL JOB EXISTS.",
     "NO_MANUAL_SELECTED_COVER_COMPLETE_FLAG__ONLY_EXACT_PREDICATE_SET_PLUS_INDEPENDENT_CONTENT_BOUND_RESIDUAL_UNSAT_PROOF_MAY_AUTHORIZE_U_EMPTY.",
     "GENERAL_RAW_SEMANTIC_PARSING_IS_NOT_A_SERIAL_PREREQUISITE__INITIALIZE_AT_PSI_TOP_AND_ACQUIRE_ONLY_POLICY_CHANGING_FACTS.",
