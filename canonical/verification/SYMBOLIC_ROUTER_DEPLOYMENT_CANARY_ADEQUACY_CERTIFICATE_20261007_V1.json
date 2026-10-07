@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_SYMBOLIC_ROUTER_DEPLOYMENT_CANARY_ADEQUACY_CERTIFICATE_V1",
+  "date": "2026-10-07",
+  "status": "MECHANICAL_DEPLOYMENT_CANARY_ONLY__NONCREDITABLE",
+  "scope_id": "scope://opus55/observable-trace",
+  "cell_id": "SYMBOLIC_ROUTER_DEPLOYMENT_CANARY_ONLY",
+  "route_id": "router-deployment-canary",
+  "route_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2",
+  "admission_predicate_id": "SYMBOLIC_CANARY_KIND_V1",
+  "admission_predicate_blob_sha": "b8a9ba97dc4a2e11cfbcf03fb36dcaa5ca0e45e6",
+  "adequate_for_declared_symbolic_canary_region": true,
+  "independent_verified": false,
+  "exact_byte_bound": true,
+  "creditable": false,
+  "abc_credit": false,
+  "d_credit": false,
+  "terminal": false,
+  "terminal_credit_delta": 0
+}
