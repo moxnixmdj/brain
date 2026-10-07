@@ -169,7 +169,7 @@ def evaluate(root:Path=ROOT):
     # Bind current executable authority semantics: task effects must stay inside
     # allowed actions; blocked cases must abstain before further effects.
     auth_text=texts[FILES["authority_semantics"]]
-    if "e.get("action_id") not in allowed" not in auth_text:
+    if 'e.get("action_id") not in allowed' not in auth_text:
         errors.append("AUTHORITY_SEMANTIC_DRIFT")
     if 'x.get("decision")=="ABSTAIN"' not in auth_text or 'for e in _rows(events,"EFFECT")' not in auth_text:
         errors.append("FAIL_CLOSED_SEMANTIC_DRIFT")
