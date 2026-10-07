@@ -1,0 +1,149 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V5",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_CURRENT_BOUND_MINIMUM_ACCESS_EXECUTION_LANE_COVER__14_POSITIVE_REALITY_CLASSES__9_LANES__SYNTHESIS_DISTINCT_REALITY_WAKE_SUBSUMED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predecessor": {
+    "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V4.json",
+    "git_blob_sha": "d0675d4f0eb6a78b663984ca731c7386835695ba"
+  },
+  "source_bindings": {
+    "synthesis_wake_subsumption": {
+      "path": "canonical/governance/SYNTHESIS_QUALITY_WAKE_SUBSUMPTION_THEOREM_20261007_V1.json",
+      "git_blob_sha": "84c3c238b31e49f9fabfcf39e7670546dc61cf66"
+    },
+    "synthesis_wake_subsumption_verification": {
+      "path": "canonical/verification/SYNTHESIS_QUALITY_WAKE_SUBSUMPTION_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "7eaf9cd77c25a846fe664d47a642b55e94cbebc6"
+    },
+    "current_information_cut_candidate": {
+      "path": "canonical/governance/ABC_CURRENT_BOUND_MINIMUM_IRREDUCIBLE_INFORMATION_CUT_20261007_V3.json"
+    }
+  },
+  "truth_repair": {
+    "prior_positive_reality_class_count": 15,
+    "deleted_from_current_positive_reality_cut": "SYNTHESIS_MATCHED_QUALITY_COVERAGE",
+    "deletion_semantics": "NOT_RESOLVED__RECLASSIFIED_AS_SHARED_SEMANTIC_ADMISSION_BECAUSE_THE_VERIFIED_SIX_DIMENSION_SYNTHESIS_TOP_LAW_SUBSUMES_DISTINCT_QUALITY_REALITY_WAKE_ON_SOUNDLY_BOUND_CONTEXTS.",
+    "synthesis_family_closed": false,
+    "synthesis_U_removed": false,
+    "current_positive_reality_class_count": 14
+  },
+  "positive_reality_classes": [
+    "TB4",
+    "FRONTIERCODE",
+    "CURSORBENCH",
+    "AA_BRIEFCASE_SHARED",
+    "AUTOMATIONBENCH",
+    "HLE_TOOLS",
+    "TB_SCIENCE",
+    "CHARTOGRAPHY",
+    "DENSE_NONCHART",
+    "OSWORLD",
+    "FINANCE_INDEX",
+    "FINANCE_AGENT_V2",
+    "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "MYSTERYMECHANISM_INTRINSIC"
+  ],
+  "non_positive_reality_open_classes": [
+    {
+      "id": "AGENCY_RAW_SEMANTIC_ADMISSION",
+      "rule": "SHARED_AUTHENTICATED_POSITIVE_COVER_OR_MINIMUM_POLICY_CHANGING_DISCRIMINATOR__NO_SEPARATE_INTERACTION_TARGET_RESULT"
+    },
+    {
+      "id": "GDPVAL_PUBLIC_220_SEMANTIC_MEMBERSHIP_COMPLEMENT",
+      "rule": "ALREADY_ACQUIRED_COMPLETE_PUBLIC_CONTEXT_POPULATION__CONTINUE_STRUCTURAL_MEMBERSHIP_AND_QUALITY_COMPLEMENT_LOCALIZATION_BEFORE_ANY_NEW_TARGET_MODEL_QUERY"
+    },
+    {
+      "id": "SYNTHESIS_RAW_SEMANTIC_ADMISSION",
+      "rule": "VERIFIED_SIX_DIMENSION_SYNTHESIS_TOP_LAW_PLUS_AUTHENTICATED_POSITIVE_ADMISSION__NO_DISTINCT_MATCHED_QUALITY_TARGET_REALITY_BY_DEFAULT"
+    },
+    {
+      "id": "MULTI_CAPABILITY_COMPOSITION_LOCAL_C",
+      "rule": "DEFER_UNTIL_FINAL_SELECTED_ROUTE_SET__TARGET_REALITY_NOT_REQUIRED_BY_DEFAULT"
+    }
+  ],
+  "lanes": [
+    {
+      "id": "L1_BUILDKITE_TB4_CHARTOGRAPHY",
+      "covers": [
+        "TB4",
+        "CHARTOGRAPHY"
+      ]
+    },
+    {
+      "id": "L2_HUGGINGFACE_HLE_OSWORLD",
+      "covers": [
+        "HLE_TOOLS",
+        "OSWORLD"
+      ]
+    },
+    {
+      "id": "L3_VALS_FINANCE_MYSTERY",
+      "covers": [
+        "FINANCE_INDEX",
+        "FINANCE_AGENT_V2",
+        "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+        "MYSTERYMECHANISM_INTRINSIC"
+      ]
+    },
+    {
+      "id": "L4_ARTIFICIAL_ANALYSIS_PROFESSIONAL",
+      "covers": [
+        "AA_BRIEFCASE_SHARED"
+      ]
+    },
+    {
+      "id": "L5_COGNITION_FRONTIERCODE",
+      "covers": [
+        "FRONTIERCODE"
+      ]
+    },
+    {
+      "id": "L6_ZAPIER_AUTOMATIONBENCH",
+      "covers": [
+        "AUTOMATIONBENCH"
+      ]
+    },
+    {
+      "id": "L7_CURSORBENCH_UNBOUND",
+      "covers": [
+        "CURSORBENCH"
+      ]
+    },
+    {
+      "id": "L8_TB_SCIENCE_HARBOR",
+      "covers": [
+        "TB_SCIENCE"
+      ]
+    },
+    {
+      "id": "L9_SHARED_MATCHED_TARGET_RELATIVE",
+      "covers": [
+        "DENSE_NONCHART"
+      ]
+    }
+  ],
+  "set_cover": {
+    "positive_reality_class_count": 14,
+    "lane_count": 9,
+    "minimum_lane_count_under_current_bound_lane_graph": 9,
+    "independent_wolfram_result": "EXACT_MINIMUM__9_OF_9_LANES__SYNTHESIS_REMOVAL_DOES_NOT_DELETE_L9_BECAUSE_DENSE_NONCHART_REMAINS_UNIQUELY_COVERED_THERE"
+  },
+  "scheduler": [
+    "DO_NOT_WAKE_MATCHED_SYNTHESIS_QUALITY_TARGET_REALITY_WHILE_THE_SHARED_SEMANTIC_ADMISSION_ROUTE_REMAINS_LEGAL.",
+    "L9_REMAINS_CURRENTLY_REQUIRED_ONLY_FOR_DENSE_NONCHART_UNDER_THE_BOUND_LANE_GRAPH.",
+    "RACE_ALL_FOURTEEN_POSITIVE_REALITY_CLASSES_AGAINST_STRONGER_SCOPE_COMPLETE_OR_TOP_LAW_CERTIFICATES_BEFORE EXECUTION.",
+    "AFTER_NONCOMPOSITION_U_CLOSES__FREEZE_FINAL_ROUTES__RUN_LOCAL_C__RECOMPUTE_D__DONOR_DELETE__INDEPENDENT_CLEAN_ROOM_REPLAY."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_SYNTHESIS_IS_CLOSED_OR_REMOVED_FROM_U.",
+    "NO_CLAIM_14_PROVIDER_RESULTS_OR_TARGET_CALLS_ARE_REQUIRED.",
+    "NO_CLAIM_9_LANES_ARE_A_GLOBAL_INFORMATION_THEORETIC_LOWER_BOUND.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
