@@ -234,7 +234,10 @@ class ScienceAgentTests(unittest.TestCase):
         goal="Treat /app/spec/plant_model.md as authoritative."
         with patch.object(s.science_planner, "plan", capture):
             result=asyncio.run(s.run_science_goal(goal,env,max_cycles=1))
-        self.assertEqual(result["status"],"FINISHED",result)
+        self.assertEqual(result["status"],"SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER",result)
+        self.assertFalse(result["task_completion_claimed"])
+        self.assertEqual(result["finish_authority"],"RAW_TASK_ACCEPTANCE_V1_REQUIRED")
+        self.assertFalse(result["raw_task_acceptance_receipts_present"])
         self.assertTrue(
             any(cmd.startswith("test -f /app/spec/plant_model.md && sha256sum") for cmd in env.commands),
             env.commands,
