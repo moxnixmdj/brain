@@ -1,0 +1,37 @@
+{
+  "schema": "GDPVAL_ZERO_POSITIVE_BUCKET_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE__ZERO_POSITIVE_BUCKET_EXHAUSTED__GDPVAL_STILL_OPEN__ZERO_CREDIT",
+  "sources": {
+    "runtime": [
+      "canonical/runtime/explicit_positive_complement_semantics_v1.py",
+      "cc9c63aa5aec45750be84a7e2e6857e9a1a52a9e"
+    ],
+    "verification": [
+      "canonical/verification/GDPVAL_PUBLIC_26_POSITIVE_COMPLEMENT_REPLAY_20261007_V1.json",
+      "PENDING_BRANCH_BLOB"
+    ],
+    "prior": [
+      "canonical/evidence/GDPVAL_PUBLIC_220_EXPLICIT_OBLIGATION_LOCALIZATION_20261007_V1.json",
+      "7a2d726adb155bee0f1e6f4af71ee90cc547bbbc"
+    ]
+  },
+  "proved": {
+    "prior_zero_positive_rows": 26,
+    "canonical_task_id_matches": 26,
+    "canonical_prompt_hash_matches": 26,
+    "rows_with_new_bounded_positive_unit": 26,
+    "zero_positive_rows_remaining": 0
+  },
+  "scheduler": {
+    "delete": "GDPVAL_REMAINING_26_TASKS_WITH_NO_EXPLICIT_POSITIVE_SEMANTIC_UNIT",
+    "keep_open": [
+      "ARGUMENT_AND_RELATION_SEMANTICS",
+      "WHOLE_TASK_SEMANTIC_COMPLETENESS",
+      "QUALITY_AND_POLICY_ADEQUACY",
+      "TARGET_RELATIVE_OWNER_SCORING"
+    ]
+  },
+  "terminal": false,
+  "terminal_credit_delta": 0
+}
