@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_CROSS_STEP_NO_BYPASS_PUBLIC_VERIFICATION_V2",
+  "date": "2026-10-07",
+  "status": "PASS__INDEPENDENT_PUBLIC_EXACT_BYTE_REPLAY__11_OF_11_TESTS",
+  "subject": {
+    "candidate_branch": "repair/composition-remove-legacy-cross-step-fallback-20261007-sol",
+    "astra_runtime_git_blob_sha": "e00962ec64d96dad475cdf20cdac85315cc9d689",
+    "boundary_tests_git_blob_sha": "9d9bbd7bed432f126fd55fcb3392aff78a21076b",
+    "audit_v2_git_blob_sha": "0a00ad8acd29321b4b39eed27d633c91792a2405",
+    "audit_tests_git_blob_sha": "ef33572bc636cbff07b7e029724897a920ec233a",
+    "known_mission_git_blob_sha": "3624b85f88a5f19138916680d6e5c188924bd7b5"
+  },
+  "independent_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 2399,
+    "head_sha": "68c3aa2ea87927911fa41a314c2dcb58cb0ceaae",
+    "workflow_run_id": 37625849236,
+    "workflow_job_id": 112807262969,
+    "artifact_id": 11483309548,
+    "artifact_digest": "sha256:ca3ce0d937245f03842200e58d16a4b4b9230f4a220a6cb2e7c14d197bf11c5c",
+    "conclusion": "success",
+    "exact_byte_check": "success",
+    "tests_run": 11,
+    "test_failures": 0,
+    "test_errors": 0
+  },
+  "verified": {
+    "explicit_astra_step_projection_site_count": 1,
+    "legacy_all_prior_loop_count": 0,
+    "legacy_context_results_fallback_count": 0,
+    "legacy_list_guard_present": true,
+    "missing_mode_defaults_to_declared_content_bound_boundary": true,
+    "step_context_raw_context_results_calls": 0,
+    "step_context_declared_projection_calls": 1,
+    "known_research_artifact_handoff_still_declared_and_content_bound": true
+  },
+  "proved_scope": "ALL_EXPLICIT_PRIOR_STEP_RESULT_PROJECTION_INTO_ASTRA_SHELL_ASTRA_STEP_ENVIRONMENT_CHANNELS_IN_CURRENT_RUNTIME_BYTES",
+  "remaining": [
+    "EXHAUSTIVE_ACCOUNTING_OF_NON_RESULT_MUTABLE_CROSS_STEP_CHANNELS",
+    "SEMANTIC_COMPLETENESS_OF_DECLARED_STATE_AND_EVIDENCE_INPUTS",
+    "EXTERNAL_EVIDENCE_CHANNEL_COMPLETENESS",
+    "P3_CRITICAL_INVARIANT_AGGREGATION_AFTER_P1_P2"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_FILESYSTEM_STATE_IS_CONTENT_BOUND_BY_THIS_AUDIT",
+    "NO_CLAIM_ARBITRARY_PROCESS_OR_EXTERNAL_SERVICE_STATE_IS_CLOSED",
+    "NO_CLAIM_WHOLE_RUNTIME_P1_OR_P2_IS_PROVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
