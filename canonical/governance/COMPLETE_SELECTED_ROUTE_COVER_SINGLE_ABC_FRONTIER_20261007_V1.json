@@ -1,20 +1,20 @@
 {
   "schema": "PROJECT_BRAIN_COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_V1",
   "date": "2026-10-07",
-  "status": "CANDIDATE_ZERO_REALITY_CRITICAL_PATH_COMPRESSION__ALL_NAMED_ABC_RESIDUALS_PROJECT_TO_ONE_UNCOVERED_CONTEXT_SET__ZERO_TERMINAL_CREDIT",
+  "status": "CANDIDATE_ZERO_REALITY_CRITICAL_PATH_COMPRESSION__ALL_NAMED_ABC_RESIDUALS_PROJECT_TO_ONE_UNCOVERED_CONTEXT_SET__FOURTEEN_RECORD_CACHE_BOUND__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "source_bindings": {
     "current_authority": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
-      "git_blob_sha": "c1bc4543860be08f9014f69a212ba2222d8dba7c"
+      "git_blob_sha": "e61f0544ed4b97ffe3c53d77b70b3cf067846188"
     },
-    "live_head": {
-      "path": "canonical/governance/TERMINAL_NOW_V19_CONCURRENT_HEAD_RECONCILIATION_20261007_V1.json",
-      "git_blob_sha": "695ee235cf8e7ec783888e5728bacaf5e1645206"
+    "cached_db_union": {
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V6.json",
+      "git_blob_sha": "3b438f63dfdcd208c984251d1addd1334ca4b44e"
     },
-    "cached_db": {
-      "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json",
-      "git_blob_sha": "6b389699903b63f1350dd922064888e74201f687"
+    "cached_db_union_verification": {
+      "path": "canonical/verification/DB_EXISTING_EVIDENCE_SATURATION_UNION_WOLFRAM_VERIFY_20261007_V6.json",
+      "git_blob_sha": "6ae2c27a911c5acd9e81314a6ea363fedaee6dff"
     },
     "positive_cover_theorem": {
       "path": "canonical/governance/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_THEOREM_20261006_V1.json",
@@ -66,7 +66,9 @@
     ]
   },
   "current_reconciliation": {
-    "known_cached_certificate_region_count": 12,
+    "known_cached_certificate_record_count": 14,
+    "cached_records_may_overlap_semantically": true,
+    "coverage_measure_inferred_from_record_count": false,
     "unknown_domain_separate_new_mechanism_build_obligations": 0,
     "generic_router_build_obligations": 0,
     "generic_global_semantic_parser_obligations": 0,
@@ -78,7 +80,7 @@
   "scheduler_effect": [
     "REPLACE_PARALLEL_FAMILY_ROOT_SCHEDULING_WITH_ONE_U_SET_DEPLETION_LEDGER.",
     "FOR_EACH_CANDIDATE_ACTION_REQUIRE_IT_TO_REMOVE_AT_LEAST_ONE_PROVED_ELEMENT_OR_SCOPE_COMPLETE_CLASS_FROM_U_OR_DELETE_A_FALSE_PREREQUISITE__OTHERWISE_DEMOTE_IT.",
-    "SUBTRACT_ALL_TWELVE_CURRENT_CACHED_CERTIFICATE_REGIONS_BEFORE_NEW_WORK.",
+    "SUBTRACT_ALL_FOURTEEN_CURRENT_SOUND_CACHED_CERTIFICATE_RECORDS_BEFORE_NEW_WORK__OVERLAP_ALLOWED__NO_COVERAGE_PERCENTAGE_INFERRED.",
     "TRY_DIRECT_E2E_OR_TOP_LAW_FIRST_FOR_EACH_SURVIVING_CLASS.",
     "USE_SHARED_SEMANTIC_BINDING_ONLY_WHEN_CAUSALLY_REQUIRED_BY_THE_CHEAPEST_SURVIVING_ROUTE.",
     "BIND_EACH_NEWLY_CLOSED_CELL_TO_THE_EXISTING_ROUTER_AND_RUN_D_DELTA.",
@@ -91,7 +93,8 @@
   },
   "hard_nonclaims": [
     "NO_CLAIM_U_IS_CURRENTLY_EMPTY.",
-    "NO_CLAIM_THE_TWELVE_CACHED_REGIONS_EXHAUST_S_TRACE.",
+    "NO_CLAIM_THE_FOURTEEN_CACHED_CERTIFICATE_RECORDS_EXHAUST_D_B_OR_S_TRACE.",
+    "NO_CLAIM_THE_FOURTEEN_CACHED_CERTIFICATE_RECORDS_ARE_SEMANTICALLY_DISJOINT.",
     "NO_CLAIM_ANY_NAMED_FAMILY_IS_GLOBALLY_CLOSED_BY_THIS_COMPRESSION.",
     "NO_CLAIM_SHARED_SEMANTIC_TAIL_IS_GLOBALLY_SOLVED.",
     "NO_CLAIM_D_FINALITY_IS_CLOSED.",
