@@ -55,6 +55,34 @@ class ContractNativeProofSuitesTests(unittest.TestCase):
         candidate["uncertainty_claims"]=[x for x in candidate["uncertainty_claims"] if x!=victim]
         self.assertFalse(score_case(case,candidate)["pass"])
 
+    def test_synthesis_missing_provenance_fails(self):
+        case=generate_case("EVIDENCE_TO_AUDIENCE_SYNTHESIS_001", 505, 5)
+        candidate=oracle_candidate(case)
+        victim=candidate["selected_claims"][0]
+        del candidate["provenance_by_claim"][victim]
+        out=score_case(case,candidate)
+        self.assertFalse(out["pass"])
+        self.assertTrue(any(x.startswith("PROVENANCE_MISSING:") for x in out["reasons"]), out)
+
+    def test_synthesis_swapped_provenance_fails(self):
+        case=generate_case("EVIDENCE_TO_AUDIENCE_SYNTHESIS_001", 506, 5)
+        candidate=oracle_candidate(case)
+        victim=candidate["selected_claims"][0]
+        candidate["provenance_by_claim"][victim]=["FORGED-SOURCE"]
+        out=score_case(case,candidate)
+        self.assertFalse(out["pass"])
+        self.assertTrue(any(x.startswith("PROVENANCE_MISMATCH:") for x in out["reasons"]), out)
+
+    def test_synthesis_orphan_provenance_fails(self):
+        case=generate_case("EVIDENCE_TO_AUDIENCE_SYNTHESIS_001", 507, 5)
+        candidate=oracle_candidate(case)
+        victim=candidate["selected_claims"][-1]
+        candidate["selected_claims"]=[x for x in candidate["selected_claims"] if x!=victim]
+        candidate["uncertainty_claims"]=[x for x in candidate["uncertainty_claims"] if x!=victim]
+        out=score_case(case,candidate)
+        self.assertFalse(out["pass"])
+        self.assertTrue(any(x.startswith("PROVENANCE_WITHOUT_SELECTED_CLAIM:") for x in out["reasons"]), out)
+
     def test_professional_suboptimal_plan_fails(self):
         case=generate_case("PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001", 404, 5)
         gold=oracle_candidate(case)
