@@ -5,7 +5,11 @@ on:
     paths:
       - canonical/runtime/coding_control_kernel_v1.py
       - canonical/runtime/harbor_brain_agent.py
+      - canonical/runtime/harbor_science_planner_v1.py
+      - canonical/runtime/harbor_science_agent_v1.py
       - canonical/tests/test_harbor_brain_agent.py
+      - canonical/tests/test_harbor_science_planner_v1.py
+      - canonical/tests/test_harbor_science_agent_v1.py
       - .github/workflows/verify-harbor-brain-adapter.yml
   workflow_dispatch:
 permissions:
@@ -30,8 +34,14 @@ jobs:
             command: python -c "import canonical.runtime.harbor_command_policy"
           - name: agent
             command: python -c "import canonical.runtime.harbor_brain_agent"
+          - name: science-planner
+            command: python -c "import canonical.runtime.harbor_science_planner_v1"
+          - name: science-agent
+            command: python -c "import canonical.runtime.harbor_science_agent_v1"
           - name: tests
             command: python -c "import canonical.tests.test_harbor_brain_agent"
+          - name: science-tests
+            command: python -c "import canonical.tests.test_harbor_science_agent_v1; import canonical.tests.test_harbor_science_planner_v1"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -46,4 +56,4 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m unittest -v canonical.tests.test_harbor_brain_agent
+      - run: python -m unittest -v canonical.tests.test_harbor_brain_agent canonical.tests.test_harbor_science_planner_v1 canonical.tests.test_harbor_science_agent_v1
