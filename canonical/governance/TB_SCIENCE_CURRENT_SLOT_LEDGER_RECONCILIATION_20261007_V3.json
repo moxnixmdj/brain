@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V3",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH__SEVEN_CONSUMED_SLOTS__RANK7_VERIFIER_ZERO__NEXT_UNTOUCHED_RANK8__NO_REPLAY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V2.json",
+    "git_blob_sha": "9fb958da1d7272a3133ef4f31ac39282e42a2ca5"
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "planner_transport_repair": {
+    "repaired_planner": {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "3d6f50be86cc61a9b907a04d8f3fb161c2d40e99"
+    },
+    "independent_live_verification": {
+      "path": "canonical/verification/TB_SCIENCE_PLANNER_TRUNCATION_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "dcada0f538ace33e13bf716bdca5fdd02aae2561",
+      "result": "PASS_6_OF_6_LIVE_STRUCTURED_PROPOSALS__ZERO_TRUNCATIONS"
+    }
+  },
+  "rank7_execution": {
+    "slot_id": "terminal-bench-science/reactor-safety-control::trial-0",
+    "task_digest": "sha256:96c8c5764042dca01ba0b7bd127cf2587f8df538a335f36abf6b4c200f0bb669",
+    "authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK7_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1.json",
+      "git_blob_sha": "544cc48f21f6f0736ffdb1c3288761bff6553b56"
+    },
+    "irreversible_result": {
+      "path": "canonical/verification/TB_SCIENCE_RANK7_IRREVERSIBLE_RESULT_TRUTH_20261007_V1.json",
+      "git_blob_sha": "b6da8ab77554096032901ca69f72ea82497f6921"
+    },
+    "public_runner": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "workflow_run_id": 37606898246,
+      "workflow_job_id": 112744475576,
+      "artifact_id": 11474839915,
+      "artifact_digest": "sha256:8866fd656285ede4081fecc99bd952680c59f63028a3ceb58c48013e3594fe5d",
+      "workflow_conclusion": "success"
+    },
+    "irreversible_receipt": {
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "verifier_result_present": true,
+      "errors": [],
+      "execution_authority_consumed": true,
+      "rerun_credit": false,
+      "incremental_spend_usd": 0
+    },
+    "interpretation": {
+      "task_capability_negative_evidence": true,
+      "infrastructure_or_transport_failure": false
+    }
+  },
+  "truth_repair": {
+    "consumed_slots": [
+      "terminal-bench-science/genomic-model-ranking::trial-0",
+      "terminal-bench-science/mri-harmonization::trial-0",
+      "terminal-bench-science/navigation-sensor-calibration::trial-0",
+      "terminal-bench-science/baseline-free-localization::trial-0",
+      "terminal-bench-science/virtual-baseline-localization::trial-0",
+      "terminal-bench-science/koopman-mfg-id::trial-0",
+      "terminal-bench-science/reactor-safety-control::trial-0"
+    ],
+    "consumed_successes": 0,
+    "consumed_final_failures": 7,
+    "next_untouched_slot": {
+      "schedule_rank": 8,
+      "slot_id": "terminal-bench-science/linked-cell-suppression::trial-0",
+      "task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0"
+    },
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 80,
+    "maximum_possible_successes_remaining": 203,
+    "pass_still_mathematically_reachable": true
+  },
+  "scheduler": [
+    "NEVER_REPLAY_RANK6_OR_RANK7__BOTH_ONE_USE_AUTHORITIES_ARE_CONSUMED.",
+    "RANK7_IS_A_GENUINE_VERIFIER_ZERO__DO_NOT_RELABEL_AS_INFRASTRUCTURE_FAILURE.",
+    "DO_NOT_SERIALIZE_TERMINAL_PROGRESS_ON_SLOT_BY_SLOT_TB_SCIENCE_EXECUTION_WHEN_A_STRONGER_SCOPE_COMPLETE_ESCAPE_POLICY_OR_ACCEPTANCE_PROOF_CAN DISCHARGE THE SAME OBLIGATION.",
+    "RANK8_REQUIRES_A_NEW_EXACT_ONE_USE_AUTHORITY_IF_AND_ONLY_IF_EMPIRICAL_TB_SCIENCE_REMAINS_ON_THE_CURRENT_CRITICAL_PATH."
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_RANK8_EXECUTION_AUTHORITY",
+    "NO_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 2,
+    "terminal_credit_delta": 0
+  }
+}
