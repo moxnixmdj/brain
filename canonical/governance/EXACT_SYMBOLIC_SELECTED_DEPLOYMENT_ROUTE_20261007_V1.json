@@ -1,0 +1,23 @@
+{
+  "schema":"PROJECT_BRAIN_EXACT_SYMBOLIC_SELECTED_DEPLOYMENT_ROUTE_V1",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_EFFECT_FREE_SELECTED_LEAF__ZERO_CREDIT",
+  "family":"EXACT_SYMBOLIC_COMPUTATION",
+  "accepted_runner":{
+    "path":"canonical/obsolescence/run_exact_symbolic_v1.py",
+    "git_blob_sha":"8f6f04fee00664b26ddf1a45a65698399c7ca6c3"
+  },
+  "selected_entry":"run_task",
+  "accepted_adjudication":"canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+  "frozen_suite":"canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json",
+  "route_claim":"THE_SELECTED_DEPLOYMENT_LEAF_IS_THE_EXACT_RUN_TASK_FUNCTION_ALREADY_CALLED_BY_THE_ACCEPTED_12_OF_12_RUNNER__REPORT_TIMING_AND_FILE_OUTPUT_ARE_NOT_PART_OF_THE_SELECTED_CAPABILITY_LEAF",
+  "material_external_effect_classes":[],
+  "general_substrate":"SYMPY_1_14_0_IN_PROCESS_DETERMINISTIC_EXACT_COMPUTATION",
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0},
+  "hard_nonclaims":[
+    "NO_NEW_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_GENERAL_MATHEMATICAL_REASONING",
+    "NO_CLAIM_OUTSIDE_FROZEN_OPERATION_CLASSES",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
