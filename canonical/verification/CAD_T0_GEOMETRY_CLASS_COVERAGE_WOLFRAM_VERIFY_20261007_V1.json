@@ -1,0 +1,15 @@
+{
+  "schema":"PROJECT_BRAIN_CAD_T0_GEOMETRY_CLASS_COVERAGE_WOLFRAM_VERIFY_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_WOLFRAM_SET_EQUALITY_PASS__ZERO_TERMINAL_CREDIT",
+  "subject":"canonical/governance/CAD_T0_GEOMETRY_CLASS_COVERAGE_TRUTH_REPAIR_20261007_V1.json",
+  "result":{
+    "declared_family_count":8,
+    "unique_family_count":8,
+    "candidate_route_family_set_equals_generator_family_set":true,
+    "generator_minus_candidate":[],
+    "candidate_minus_generator":[]
+  },
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0},
+  "hard_nonclaims":["NO_WHOLE_CAD_CLOSURE","NO_T0_TERMINAL_RESULT","NO_TERMINAL_CREDIT"]
+}
