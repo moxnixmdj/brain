@@ -1,0 +1,26 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_SINGLE_ARTIFACT_CLOSED_V9_VERIFICATION",
+  "date":"2026-10-07",
+  "status":"EXACT_BLOB_IDENTITY_BOUND__CLOSED_PROOF_REPLAY_PASS__ZERO_TERMINAL_CREDIT",
+  "scope_lock":"BYTES_RESEARCH_ONLY",
+  "exact_blob":"b933a6511f3dd81e32edc4b7e73f1166f3822f21",
+  "independent_carrier":{
+    "provider":"SPRITES",
+    "name":"h100-real-image-v1",
+    "id":"sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+    "git_hash_object":"b933a6511f3dd81e32edc4b7e73f1166f3822f21",
+    "closed_proof_selfrun":"PASS"
+  },
+  "clean_room_regression":{
+    "prospective_expression_v3":{"tasks_passed":6,"tasks_total":6},
+    "prospective_sequence_v1":{"tasks_passed":8,"tasks_total":8},
+    "sequence_holdouts_exact":true
+  },
+  "encoding":{
+    "raw_bytes":7615,
+    "best_tested_fixed_decoder_payload_bytes":2951,
+    "tested_lzma1_configurations":2880,
+    "payload_sha256":"de805c16cb3a098fa27a4b2c02f286f6ca4a4eb384711a1e5d5edb737874ebd0"
+  },
+  "hard_nonclaims":["NUMERIC_AND_SEQUENCE_REGRESSIONS_WERE_CLEAN_ROOM_LOCAL_NOT_SECOND_EXTERNAL_CARRIER","NO_GLOBAL_MINIMUM_DESCRIPTION_PROOF","NO_TERMINAL_CREDIT"]
+}
