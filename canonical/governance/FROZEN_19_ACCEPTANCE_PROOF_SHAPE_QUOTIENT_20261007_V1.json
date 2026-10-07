@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_V3",
   "date": "2026-10-07",
-  "status": "ACTIVE_SCHEDULING_COMPRESSION__22_RAW_UNRESOLVED_REGISTRY_ATOMS__17_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__SYNTHESIS_METRIC_IDENTITY_DEMOTED__THREE_REUSABLE_PROOF_ENGINES__ZERO_TERMINAL_CREDIT",
+  "status": "ACTIVE_SCHEDULING_COMPRESSION__20_RAW_UNRESOLVED_REGISTRY_ATOMS__15_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__AGENCY_ABSOLUTE_TOP_LAW_PROMOTED__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "source_bindings": {
     "registry": {
@@ -41,16 +41,22 @@
       "git_blob_sha": "688d78a0b39f519a279d9d248c07f31db5292609",
       "independent_verification_path": "canonical/verification/SYNTHESIS_MATCHED_QUALITY_NECESSITY_WOLFRAM_VERIFICATION_20261007_V1.json",
       "independent_verification_git_blob_sha": "9d9f0f6e068ebc63a8ae6d21d369f38301e36291"
+    },
+    "agency_absolute_top_law": {
+      "path": "canonical/governance/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_CLOSURE_20261007_V1.json",
+      "git_blob_sha": "2f9e64f52b973900703046b2f54d02a6b8745909",
+      "independent_verification_path": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "independent_verification_git_blob_sha": "476216765aac1203f79c1905e0cfaaf162905a99"
     }
   },
   "exact_current_counts": {
     "registry_atoms_total": 38,
-    "registry_atoms_proved": 16,
-    "registry_atoms_raw_unresolved": 22,
-    "independent_open_evidence_obligations": 17,
+    "registry_atoms_proved": 18,
+    "registry_atoms_raw_unresolved": 20,
+    "independent_open_evidence_obligations": 15,
     "raw_unresolved_labels_removed_as_independent_work": 5,
-    "accepted_family_count": 6,
-    "acceptance_open_family_count": 13,
+    "accepted_family_count": 7,
+    "acceptance_open_family_count": 12,
     "verified_owned_family_count": 6
   },
   "proof_engines": [
@@ -70,20 +76,13 @@
       "semantics": "ONE_GENERIC_FROZEN_PORTFOLIO_COMPARATOR_OR_STRONGER_SCOPE_COMPLETE_PROOF_CAN_CLOSE_SUCCESS_AND_INVARIANT OBLIGATIONS_TOGETHER",
       "independent_open_packages": [
         {
-          "id": "AGENCY",
-          "obligations": [
-            "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
-            "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
-          ]
-        },
-        {
           "id": "VISION_NONCHART",
           "obligations": [
             "VISION_DENSE_NONCHART_SCOPE"
           ]
         }
       ],
-      "independent_open_obligation_count": 3,
+      "independent_open_obligation_count": 1,
       "derived_non_primary": [
         {
           "id": "COMPOSITION",
@@ -109,6 +108,14 @@
             "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
           ],
           "closure": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json"
+        },
+        {
+          "id": "AGENCY",
+          "labels": [
+            "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+            "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+          ],
+          "closure": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json"
         }
       ]
     },
@@ -129,7 +136,7 @@
   ],
   "scheduler": [
     "DO_NOT_SCHEDULE_22_RAW_UNRESOLVED_REGISTRY_LABELS_AS_22_RESEARCH_PROGRAMS.",
-    "SCHEDULE_ONLY_THE_17_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS_OR_A_STRONGER_SCOPE_COMPLETE_PROOF_THAT_DISCHARGES_MULTIPLE_OF_THEM.",
+    "SCHEDULE_ONLY_THE_15_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS_OR_A_STRONGER_SCOPE_COMPLETE_PROOF_THAT_DISCHARGES_MULTIPLE_OF_THEM.",
     "FOR_E1_REUSE_ONE_GENERIC_FIXED_BAR_AGGREGATE_PIPELINE_AND_ACQUIRE_ONLY_MISSING_SCOPE_RESULTS__AA_BRIEFCASE_IS_ONE_SHARED_MEASUREMENT_FACT.",
     "FOR_E2_RACE_EACH OF THE TWO INDEPENDENT MATCHED PACKAGES AGAINST_A_SCOPE_COMPLETE_ABSOLUTE_OR_UNIVERSAL_PROOF.",
     "DO_NOT_SCHEDULE_COMPOSITION_SUCCESS__COMPOSITION_CRITICAL_INVARIANT__OR_COMPOSITION_COMPONENT_SCOPED_PROOFS_AS_INDEPENDENT ACCEPTANCE RESEARCH__PRESERVE THEIR LOAD_BEARING_SEMANTICS_THROUGH_DERIVED_ABC_AND_SEPARATE_COMPONENT_CAPABILITY_OBLIGATIONS.",
@@ -150,9 +157,9 @@
     "terminal_credit_delta": 0
   },
   "reconciliation_20261007": {
-    "live_ledger_proved": 16,
-    "live_ledger_raw_open": 22,
-    "independent_open_evidence_obligations": 17,
+    "live_ledger_proved": 18,
+    "live_ledger_raw_open": 20,
+    "independent_open_evidence_obligations": 15,
     "instruction_scope_closed": true,
     "aa_briefcase_duplicate_measurement_removed": true,
     "composition_terminal_success_primary_job_removed": true,
@@ -163,14 +170,13 @@
     "terminal_credit_delta": 0,
     "synthesis_matched_quality_metric_identity_primary_job_removed": true,
     "synthesis_useful_quality_dimensions_preserved": true,
-    "synthesis_raw_semantic_admission_still_open": true
+    "synthesis_raw_semantic_admission_still_open": true,
+    "agency_absolute_top_law_closed": true
   },
   "independent_open_obligations": [
     "CODING_TB4_GE_66_4",
     "CODING_FRONTIERCODE_GE_54_4",
     "CODING_CURSORBENCH_GE_57_8",
-    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
-    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
     "PROWORK_GDPVAL_GE_1846",
     "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
     "AUTOMATIONBENCH_GE_40",
