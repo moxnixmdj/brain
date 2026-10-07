@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_LITERAL_ALL_ABSORBED_BY_UNIVERSAL_ABC_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_SET_INCLUSION_TRANSITIVITY_PASS__EXACT_CANDIDATE_BLOB_BOUND__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/LITERAL_ALL_ABSORBED_BY_UNIVERSAL_ABC_TRUTH_REPAIR_20261007_V1.json",
+    "git_blob_sha": "c793be0652ebb69e0d74943b28b51ae778daa3d1",
+    "branch": "literal-all-absorbed-by-universal-abc-v1"
+  },
+  "verified": {
+    "pointwise_transitivity": "FOR_EACH_ELEMENT__U_IMPLIES_S_AND_S_IMPLIES_B__THEREFORE_U_IMPLIES_B",
+    "finite_arbitrary_membership_check": true,
+    "literal_all_not_independent_from_universal_abc_under_bound_superdomain": true
+  },
+  "wolfram_result": true,
+  "consequence": "LITERAL_ALL_CAPABILITY_COVERAGE_IS_LOGICALLY_DISCHARGED_BY_COMPLETE_SELECTED_CONTEXT_ABC_OVER_A_SOUND_SUPERDOMAIN__IT_MUST_NOT_BE_SCHEDULED_AS_A_THIRD_TOP_LEVEL_TERMINAL_PREDICATE.",
+  "hard_nonclaims": [
+    "NO_ABC_CLOSURE",
+    "NO_TERMINAL_CREDIT",
+    "NO_D_CLOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
