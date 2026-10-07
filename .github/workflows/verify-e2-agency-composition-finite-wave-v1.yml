@@ -1,0 +1,54 @@
+name: verify-e2-agency-composition-finite-wave-v1
+on:
+  push:
+    branches:
+      - exec/e2-agency-composition-finite-wave-20261007-v1
+    paths:
+      - 'canonical/runtime/agency_scope_finite_wave_v1.py'
+      - 'canonical/runtime/composition_scope_finite_wave_v1.py'
+      - 'canonical/governance/AGENCY_SCOPE_FINITE_WAVE_PRECOMMIT_20261007_V1.json'
+      - 'canonical/governance/COMPOSITION_SCOPE_FINITE_WAVE_PRECOMMIT_20261007_V1.json'
+      - '.github/workflows/verify-e2-agency-composition-finite-wave-v1.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Agency finite wave
+        run: python canonical/runtime/agency_scope_finite_wave_v1.py --beacon 20779ead1095e0b52bef7c8f32692ca8d9c4c26d --report agency_report.json
+      - name: Composition finite wave
+        run: python canonical/runtime/composition_scope_finite_wave_v1.py --beacon 57d7013a85c0ce5b2f56edd44b44efb94342110f --report composition_report.json
+      - name: Summaries
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          for name in ("agency_report.json","composition_report.json"):
+              p=pathlib.Path(name)
+              if not p.exists():
+                  print(name, "MISSING")
+                  continue
+              j=json.loads(p.read_text())
+              print(name, json.dumps({
+                  "brain_success_count":j.get("brain_success_count"),
+                  "brain_failure_count":j.get("brain_failure_count"),
+                  "coverage_complete":j.get("coverage_complete"),
+                  "case_isolation_or_reset_equivalent":j.get("case_isolation_or_reset_equivalent"),
+                  "opus_residual_case_count":j.get("opus_residual_case_count"),
+                  "case_manifest_sha256":j.get("case_manifest_sha256"),
+                  "by_kind":j.get("by_kind"),
+              }, sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e2-finite-wave-reports
+          path: |
+            agency_report.json
+            composition_report.json
+          if-no-files-found: warn
