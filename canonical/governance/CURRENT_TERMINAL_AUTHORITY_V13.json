@@ -1,0 +1,70 @@
+{
+  "schema":"PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_V13",
+  "date":"2026-10-07",
+  "status":"ACTIVE_CANDIDATE__SCOPE_CLOSED__ABC_CONTEXT_CERTIFICATE_SATURATION_FRONTIER__NO_GENERIC_K6_OR_PRIOR_BUILD__D_FINALITY_SEPARATE__TERMINAL_FALSE__ZERO_CREDIT",
+  "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predecessor":{"path":"canonical/governance/CURRENT_TERMINAL_AUTHORITY_V12.json","git_blob_sha":"3ab55ad2e9df6a7f94acb2e1950569bdc18c8136"},
+  "sources":{
+    "separator_frontier":{"path":"canonical/governance/ABC_SELECTED_CONTEXT_SEPARATOR_FRONTIER_REBIND_20261007_V1.json"},
+    "k6_current":{"path":"canonical/governance/K6_CURRENT_AUTHORITY_RECONCILIATION_V3.json","git_blob_sha":"d03edf08098059811d91f26b174e8e76858bc23d"},
+    "decision_quotient":{"path":"canonical/governance/K6_TARGET_RELATIVE_DECISION_QUOTIENT_THEOREM_20261006_V1.json","git_blob_sha":"03baddc27d5ee9dd73656fdd801251e1f4fd8cc6"},
+    "minimum_information_cut":{"path":"canonical/governance/MINIMUM_CAPABILITY_KERNEL_INFORMATION_CUT_20261006_V1.json","git_blob_sha":"2b6c8150db5c635eb34c35c4041b99c7fc9c5dd5"}
+  },
+  "current_truth":{
+    "independent_top_level_terminal_predicates":["COMPLETE_SELECTED_CONTEXT_ABC","D_FINAL_ROUTE_OWNERSHIP_EFFECT_DONOR_INDEPENDENCE_FINALITY"],
+    "target_scope_superset_closed":true,
+    "abc_closed":false,
+    "global_D_closed":false,
+    "generic_preproof_semantic_implementation_residual_count":0,
+    "active_context_specific_k6_work_item":null,
+    "active_authority_bound_p_only_witness":null,
+    "persistent_prior_gap_active":false,
+    "persistent_prior_gap_reopen_rule":"ONLY_AN_EXACT_SELECTED_CONTEXT_P_ONLY_WITNESS_MAY_ACTIVATE_IT",
+    "terminal":false
+  },
+  "abc_current_frontier":{
+    "object":"CONTEXT_CELL_CERTIFICATE_SATURATION_AND_UNDOMINATED_ESCAPE_ELIMINATION",
+    "not_object":[
+      "TARGET_UNIVERSE_ENUMERATION",
+      "GENERIC_K6_IMPLEMENTATION",
+      "GENERIC_WORLD_MODEL",
+      "GENERIC_PRIOR_MODEL",
+      "NINETEEN_INDEPENDENT_BENCHMARK_JOBS"
+    ],
+    "per_cell_order":[
+      "DIRECT_STRONGER_OR_ABSOLUTE_CERTIFICATE",
+      "SCOPE_COMPLETE_TRANSFER_OR_TARGET_NONOCCUPANCY",
+      "K6_DECISION_PARTITION_ROUTE_ONLY_IF_SELECTED",
+      "IF_K6_SELECTED__COMMON_ACCEPTABLE_ACTION_STOP",
+      "IF_EMPTY__V_ABSOLUTE_VERIFIER_OR_EXPERIMENT",
+      "IF_STILL_EMPTY__D_AUTHORIZED_DISCRIMINATOR",
+      "IF_STILL_EMPTY__ACCEPTABLE_ABSTENTION_OR_UNCERTAINTY_ACTION",
+      "ONLY_IF_STILL_EMPTY_AND_OPUS_HAS_THE_SEPARATOR__P_MINIMUM_OWNED_PRIOR"
+    ]
+  },
+  "irreducible_information_boundary":{
+    "theorem":"NO_INFORMATION_BLIND_GENERIC_POLICY_CAN_UNIVERSALLY_DOMINATE_A_TARGET_THAT_HAS_A_LOAD_BEARING_PRECOMMITMENT_SEPARATOR_IN_AN_IRREVERSIBLE_TWO_WORLD_CELL.",
+    "current_actual_target_occupancy_of_p_only_class":"UNPROVED",
+    "consequence":"DO_NOT_BUILD_P_BEFORE_TARGET_OCCUPANCY_AND_ALL_OTHER_GATE_PREMISES_ARE_BOUND__DO_NOT_CLAIM_P_CAN_NEVER_BE_REQUIRED."
+  },
+  "D_current":{
+    "current_accepted_family_effect_mediator_residual_count":0,
+    "state":"OPEN_ONLY_FOR_NEWLY_CREDITED_ROUTE_DELTAS_AND_FINAL_DONOR_REMOVAL_CLEAN_ROOM_REPLAY"
+  },
+  "scheduler":[
+    "SATURATE_EXISTING_EVIDENCE_INTO_SELECTED_CONTEXT_ABC_BUNDLES.",
+    "COMPUTE_THE_SMALLEST_UNDOMINATED_ESCAPE_CUT_AFTER_EACH_SATURATION.",
+    "FOR_EACH_ESCAPE_CELL_USE_THE_CHEAPEST_SOUND_CERTIFICATE_ROUTE__NO_CERTIFICATE_SYNTAX_PRIVILEGE.",
+    "ACTIVATE_K6_ONLY_FOR_A_CONTEXT_THAT_SELECTS_IT.",
+    "ACTIVATE_PERSISTENT_PRIOR_WORK_ONLY_AFTER_AN_EXACT_P_ONLY_WITNESS.",
+    "RUN_D_ONLY_ON_NEWLY_CREDITED_ROUTE_DELTAS.",
+    "AFTER_ABC_CLOSES_FREEZE_ROUTE_SET_AND_RUN_FINAL_DONOR_REMOVAL_CLEAN_ROOM_FINALITY."
+  ],
+  "hard_nonclaims":[
+    "NO ABC CLOSURE.",
+    "NO PROOF ACTUAL OPUS55 HAS OR DOES NOT HAVE A P_ONLY CONTEXT.",
+    "NO GLOBAL D CLOSURE.",
+    "NO TERMINAL CREDIT."
+  ],
+  "accounting":{"incremental_spend_usd":0,"fresh_reality_units_consumed":0,"terminal_credit_delta":0}
+}
