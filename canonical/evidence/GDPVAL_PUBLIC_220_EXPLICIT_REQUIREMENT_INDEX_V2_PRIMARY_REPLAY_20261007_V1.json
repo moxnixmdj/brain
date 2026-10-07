@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_220_EXPLICIT_REQUIREMENT_INDEX_V2_PRIMARY_REPLAY_V1",
+  "date": "2026-10-07",
+  "status": "PRIMARY_WARM_SPRITE_FULL_POPULATION_REPLAY_PASS__INDEPENDENT_SECOND_REPLAY_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source": {
+    "dataset_revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "public_population_task_count": 220,
+    "raw_population_file_sha256": "0d770552b1f18e973effe7ed13eed87157c62a1874961a4356cac64920dc34d7",
+    "population_receipt": "canonical/evidence/GDPVAL_PUBLIC_220_POPULATION_REALITY_RECEIPT_20261007_V1.json"
+  },
+  "runtime": {
+    "path": "canonical/runtime/explicit_requirement_index_v2.py",
+    "canonical_git_blob_sha": "30629b10fdbf3c337eb3252c043ec13123ca66a1",
+    "local_file_sha256": "78c9cfaf5e2c31b7abd41c1d7e367a7a7c34ed86057228867743ba6c383090e",
+    "imperative_runtime_path": "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+    "imperative_runtime_local_sha256": "ded96f6125c84072d199237cfc5f4f3975872bd33aad0f9fa992a669db2a5ca7"
+  },
+  "execution": {
+    "carrier_provider": "SPRITES",
+    "carrier_name": "brain-root3-current-byte-replay-20261007-v1",
+    "carrier_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "complete_population_processed": true,
+    "result_file_sha256": "e603be1fc61fca07624f16d06442d347fd08016b7328d433eba97914638e25b5",
+    "population_manifest_sha256": "994f9fa07b04ea2bd39e9fd0115e75151b2b3f7a6555cf00b0fd5b93c947beb8"
+  },
+  "aggregate": {
+    "segment_count": 5235,
+    "modal_obligation_count": 154,
+    "imperative_directive_count": 424,
+    "positive_requirement_count": 578,
+    "unique_requirement_id_count": 578,
+    "duplicate_requirement_id_count": 0,
+    "unresolved_segment_count": 4657,
+    "ignored_segment_count": 0,
+    "tasks_with_modal_obligations": 93,
+    "tasks_with_imperative_directives": 173,
+    "tasks_with_positive_requirements": 194,
+    "tasks_with_unresolved_segments": 220,
+    "tasks_newly_reached_by_imperative_channel_only": 101
+  },
+  "delta_from_v1_prompt_localization": {
+    "v1_modal_obligation_count": 154,
+    "v1_unresolved_segment_count": 5081,
+    "v2_positive_requirement_count": 578,
+    "new_imperative_directives": 424,
+    "unresolved_segment_delta": -424,
+    "interpretation": "THE_VERIFIED_V2_IMPERATIVE_CHANNEL_CONVERTS_424_FORMERLY_UNRESOLVED_PROMPT_SEGMENTS_INTO_SOURCE_BOUND_POSITIVE_REQUIREMENTS_WITHOUT_CHANGING_THE_154_V1_MODAL_OBLIGATIONS"
+  },
+  "most_frequent_imperative_predicates": {
+    "include": 91,
+    "create": 61,
+    "use": 55,
+    "ensure": 28,
+    "add": 14,
+    "provide": 14,
+    "prepare": 13,
+    "draft": 12,
+    "write": 12
+  },
+  "scheduler_consequence": [
+    "DELETE_GDPVAL_V2_PUBLIC_220_POPULATION_REEXECUTION_AS_UNDONE_PRIMARY_EXECUTION_WORK.",
+    "USE_578_SOURCE_BOUND_POSITIVE_REQUIREMENTS_AS_THE_CURRENT_PRIMARY_PROMPT_SIDE_REQUIREMENT_SURFACE.",
+    "FOCUS_NEXT_SEMANTIC_WORK_ON_ARGUMENT_MEANING_AND_THE_4657_SURVIVING_UNRESOLVED_SEGMENTS_ONLY_WHERE_POLICY_CHANGING.",
+    "DO_NOT_DELETE_ANY_GDPVAL_SCOPE_FROM_U_FROM_THIS_REPLAY_ALONE.",
+    "REQUIRE_AN_INDEPENDENT_SECOND_REPLAY_BEFORE_PROMOTING_THIS PRIMARY OBSERVATION AS FINAL CANONICAL VERIFICATION."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_IMPERATIVE_ARGUMENT_SEMANTICS_ARE_RESOLVED.",
+    "NO_CLAIM_THE_4657_UNRESOLVED_SEGMENTS_ARE_ALL_LOAD_BEARING.",
+    "NO_CLAIM_WHOLE_TASK_SEMANTIC_COMPLETENESS.",
+    "NO_POLICY_ADEQUACY_OR_HUMAN_PAIRWISE_PREFERENCE_CLAIM.",
+    "NO_GDPVAL_U_DELETION.",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
