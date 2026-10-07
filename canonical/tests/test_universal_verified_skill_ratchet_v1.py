@@ -44,6 +44,20 @@ def write_json(root, rel, doc):
     }
 
 
+
+def runner():
+    return {
+        "repository": "moxnixmdj/verification-capsule-runner",
+        "workflow_run_id": 1,
+        "workflow_job_id": 2,
+        "execution_head_sha": "1" * 40,
+        "artifact_id": 3,
+        "artifact_digest": "sha256:" + "2" * 64,
+        "conclusion": "success",
+        "verifier_path": "verification/skill_verifier.py",
+        "verifier_git_blob_sha": "3" * 40,
+    }
+
 def episode_refs(root, ep):
     subject_doc = {
         "schema": EPISODE_SCHEMA,
@@ -62,6 +76,7 @@ def episode_refs(root, ep):
         "program_sha256": ep["program_sha256"],
         "pass": True,
         "verifier_id": "independent-test-verifier",
+        "public_runner": runner(),
     })
     return {"receipt": subject, "verification": verify}
 
@@ -84,6 +99,7 @@ def candidate_refs(root, cand):
         "scope_relation": "EXACT",
         "pass": True,
         "verifier_id": "independent-test-verifier",
+        "public_runner": runner(),
     })
     return {"receipt": subject, "verification": verify}
 
@@ -127,6 +143,7 @@ def test_two_independently_bound_episodes_can_induce_candidate(tmp_path):
         "program_sha256": ep2["program_sha256"],
         "pass": True,
         "verifier_id": "independent-test-verifier",
+        "public_runner": runner(),
     })
     v2 = bind_verified_episode(ep2, refs2, repo_root=str(tmp_path))
     cand = induce_skill_candidate([v1, v2])
@@ -155,6 +172,7 @@ def test_skill_candidate_requires_second_independent_receipt(tmp_path):
         "episode_id": "e2", "scope_id": "scope",
         "program_sha256": ep2["program_sha256"],
         "pass": True, "verifier_id": "independent-test-verifier",
+        "public_runner": runner(),
     })
     v2 = bind_verified_episode(ep2, {"receipt": r2_subject, "verification": r2_verify}, repo_root=str(tmp_path))
     cand = induce_skill_candidate([v1, v2])
