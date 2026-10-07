@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_ROUTER_REMOTE_SPRITE_LIVE_BINDING_RECEIPT_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_ROUTER_GITHUB_BLOB_EXECUTED_ON_EXISTING_ISOLATED_REMOTE_SPRITE__POSITIVE_AND_FAIL_CLOSED_CANARIES_PASS__MECHANICAL_BINDING_ONLY__ZERO_ABC_D_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source": {
+    "repository": "moxnixmdj/brain",
+    "pr": 2750,
+    "pr_head_commit": "9d9030e6422feb052e9c8f9a94bc1e54d40f5e6f",
+    "router": {
+      "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+      "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
+    },
+    "test_file": {
+      "path": "canonical/tests/test_certificate_gated_selected_route_router_v1.py",
+      "git_blob_sha": "737e71a386df77ec2d9bc3152a7d3ff161db4876"
+    }
+  },
+  "github_actions_attempt": {
+    "live_binding_run_id": 37563704554,
+    "live_binding_job_id": 112606535482,
+    "status": "COMPLETED_FAILURE_WITH_NO_REPORTED_EXECUTED_STEPS",
+    "semantic_router_failure_established": false,
+    "terminal_now_replay_run_id": 37563704580,
+    "terminal_now_replay_job_id": 112606535906,
+    "terminal_now_replay_reported_steps": []
+  },
+  "remote_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "existing_carrier_reused": true,
+    "new_sprite_created": false
+  },
+  "content_address_verification": {
+    "method": "GIT_BLOB_SHA1_RECOMPUTED_FROM_MATERIALIZED_BYTES_BEFORE_IMPORT",
+    "router_blob_match": true,
+    "test_blob_match": true
+  },
+  "execution": {
+    "router_module_imported_from_exact_materialized_blob": true,
+    "positive_route_selection_pass": true,
+    "selected_route_id": "route-a",
+    "deterministic_under_receipt_input_permutation": true,
+    "fail_closed_wrong_context": "NO_CERTIFIED_ROUTE_FOR_ACTUAL_CONTEXT",
+    "fail_closed_empty_actual_context": "ACTUAL_CONTEXT_DIGEST_MISSING",
+    "fail_closed_non_boolean_admission": "ADMISSION_MUST_BE_LITERAL_BOOL",
+    "direct_replay_pass": true
+  },
+  "test_runner_boundary": {
+    "pytest_available_on_sprite": false,
+    "pytest_suite_executed_on_sprite": false,
+    "consequence": "NO_CLAIM_THE_PYTEST_FILE_WAS_EXECUTED_BY_PYTEST_ON_THIS_CARRIER__THE_LOAD_BEARING_ROUTER_INVARIANTS_LISTED_ABOVE_WERE_EXECUTED_DIRECTLY_AGAINST_THE_EXACT_ROUTER_BLOB"
+  },
+  "truth_effect": {
+    "mechanical_remote_router_execution_observed": true,
+    "exact_router_blob_replay_observed": true,
+    "per_cell_admission_semantics_closed": false,
+    "per_cell_adequacy_closed": false,
+    "selected_cover_complete": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_GITHUB_ACTIONS_RUN_EXECUTED_A_RUNNER_STEP.",
+    "NO_CLAIM_PYTEST_EXECUTED_ON_THE_SPRITE.",
+    "NO_CLAIM_REMOTE_MECHANICAL_EXECUTION_SUPPLIES_ANY_MISSING_PER_CONTEXT_ADEQUACY_OR_SELECTED_DISCRIMINATOR.",
+    "NO_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
