@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_OWNER_PUBLIC_SURFACE_EXHAUSTION_V2",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_FIRST_PARTY_PUBLIC_SURFACE_EXHAUSTION__ARTIFICIAL_ANALYSIS_PUBLIC_GITHUB_AND_DOCUMENTED_DATA_API_DO_NOT_EXPOSE_REPRODUCIBLE_GDPVAL_OWNER_PAIRWISE_STATE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "current_authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "87a48c1c4adc90fd00be7f5e0395a1a2df8270d0",
+    "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V27"
+  },
+  "predecessor": {
+    "path": "canonical/governance/GDPVAL_OWNER_PUBLIC_STIRRUP_PROTOCOL_BOUNDARY_20261007_V1.json",
+    "commit": "65d45e127a4dd8ac24c8ce433734569c9076326b"
+  },
+  "public_github_surface": {
+    "organization": "ArtificialAnalysis",
+    "observed_public_repository_count": 2,
+    "repositories": [
+      {
+        "name": "Stirrup",
+        "main_commit_sha": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
+        "tree_entry_count": 177,
+        "tree_truncated": false,
+        "evaluation_named_path_count": 0
+      },
+      {
+        "name": "StirrupJS",
+        "main_tree_sha": "516208963f0a6255bbae5eb8894651a53bd535da",
+        "tree_entry_count": 234,
+        "tree_truncated": false,
+        "evaluation_named_path_count": 0
+      }
+    ],
+    "evaluated_path_classes": [
+      "GDPVAL",
+      "JUDGE",
+      "GRADER",
+      "GRADING",
+      "PAIRWISE",
+      "CROWD_BT",
+      "BRADLEY_TERRY",
+      "RATING",
+      "RATINGS",
+      "ELO"
+    ],
+    "result": "NO_CURRENT_PUBLIC_ARTIFICIALANALYSIS_GITHUB_REPOSITORY_EXPOSES_A_GDPVAL_SPECIFIC_PAIRWISE_GRADER_OR_RATING_IMPLEMENTATION_BY_PATH_OR_REPOSITORY_SEARCH"
+  },
+  "documented_data_api_surface": {
+    "authority_url": "https://artificialanalysis.ai/data-api/docs",
+    "retrieved_date": "2026-10-07",
+    "documented_language_model_scope": [
+      "MODEL_METADATA",
+      "BENCHMARK_SCORES",
+      "PRICING",
+      "PERFORMANCE_PERCENTILES_AND_PROVIDER_MEASUREMENTS"
+    ],
+    "gdpval_pairwise_or_raw_graph_endpoint_documented": false,
+    "page_search_pairwise_match": false,
+    "page_search_comparison_match": false,
+    "raw_measurement_endpoint_scope": "PROVIDER_LATENCY_THROUGHPUT_AND_REQUEST_PERFORMANCE_MEASUREMENTS__NOT_GDPVAL_PAIRWISE_JUDGMENTS",
+    "raw_measurement_access": "COMMERCIAL_ONLY_WITH_PROVIDER_LEVEL_GRANTS",
+    "conclusion": "DOCUMENTED_DATA_API_DOES_NOT_CURRENTLY_SUPPLY_THE_GDPVAL_AA_PAIRWISE_COMPARISON_GRAPH_JUDGE_ASSIGNMENTS_JUDGE_PROMPT_OR_CROWD_BT_FIT_STATE"
+  },
+  "owner_route_reduction": {
+    "publicly_bound": [
+      "GDPVAL_AA_V2_1_220_TASK_POPULATION",
+      "STIRRUP_AS_AGENT_HARNESS",
+      "GENERIC_STIRRUP_FILE_OUTPUT_COLLECTION_MECHANICS",
+      "BLIND_PAIRWISE_GRADING_STAGE",
+      "THREE_MODEL_PAIRWISE_JUDGE_PANEL_IDENTITIES_AND_REASONING_LEVELS",
+      "ONE_JUDGE_PER_COMPARISON_WITH_BALANCED_COARSE_SAMPLING_RULE",
+      "CROWD_BT_MAXIMUM_LIKELIHOOD_RATING_FAMILY",
+      "DEEPSEEK_V4_1_FLASH_MAX_ANCHOR_1600",
+      "CURRENT_BOUND_OPUS55_REFERENCE_ELO_1866"
+    ],
+    "not_publicly_recovered_from_current_first_party_github_or_documented_api": [
+      "EXACT_CURRENT_PAIRWISE_JUDGE_PROMPT_OR_SOUND_EQUIVALENT",
+      "EXACT_GDPVAL_SPECIFIC_SUBMISSION_PRESENTATION_RECIPE_BEYOND_GENERIC_FILE_COLLECTION_IF_LOAD_BEARING",
+      "REALIZED_CURRENT_EPOCH_JUDGE_ASSIGNMENTS_AND_PAIRWISE_COMPARISON_GRAPH",
+      "SUFFICIENT_REPRODUCIBLE_CROWD_BT_FIT_STATE",
+      "ZERO_SPEND_CALLABLE_FULL_CURRENT_JUDGE_PANEL",
+      "BRAIN_COMPLETE_220_SUBMISSION_MANIFEST"
+    ]
+  },
+  "scheduler_effect": [
+    "DELETE_GENERIC_SEARCH_OF_ARTIFICIALANALYSIS_PUBLIC_GITHUB_FOR_A_HIDDEN_GDPVAL_GRADER_UNLESS_THE_PUBLIC_REPOSITORY_SET_OR_TREE_CHANGES.",
+    "DELETE_DOCUMENTED_ARTIFICIAL_ANALYSIS_DATA_API_AS_A_CURRENT_ROUTE_TO_RAW_GDPVAL_PAIRWISE_JUDGMENTS_OR_FIT_STATE_UNLESS_THE_API_SPEC_CHANGES.",
+    "OWNER_ROUTE_NEXT_INFORMATION_MUST_COME_FROM_A_NEW_FIRST_PARTY_OWNER_SURFACE_DIRECT_OWNER_ACCESS_OR_A_SOUND_EQUIVALENT_TARGET_RELATION_PROOF__NOT_MORE_STIRRUP_OR_DATA_API_SEARCH.",
+    "CONTINUE_GDPVAL_STRUCTURAL_ROUTE_A_IN_PARALLEL_FROM_THE_VERIFIED_220_TASK_10453_CRITERION_ACCEPTANCE_MANIFEST."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_MISSING_OWNER_OBJECTS_ARE_SECRET_OR_NONPUBLIC_OUTSIDE_THE_CURRENTLY_OBSERVED_FIRST_PARTY_SURFACES.",
+    "NO_CLAIM_A_FUTURE_ARTIFICIAL_ANALYSIS_API_OR_REPOSITORY_CANNOT_EXPOSE_THEM.",
+    "NO_CLAIM_THE_OWNER_SCORING_ROUTE_IS_IMPOSSIBLE.",
+    "NO_GDPVAL_U_SUBTRACTION.",
+    "NO_BRAIN_GDPVAL_OWNER_ELO.",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
