@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_ACCOUNTING_INDEX_COMPONENTWISE_DERIVATION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "WOLFRAM_EXACT_WEIGHTED_AVERAGE_MONOTONICITY_PASS__DIRECT_INDEX_NOT_LOGICALLY_NECESSARY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/FINANCE_ACCOUNTING_INDEX_COMPONENTWISE_DERIVATION_20261007_V1.json",
+    "git_blob_sha": "ecc47ace4a9a33e4d117bbfe197784ecfd5d0327"
+  },
+  "exact_weights": [
+    "3/10",
+    "3/10",
+    "1/5",
+    "1/10",
+    "1/20",
+    "1/20"
+  ],
+  "weight_sum": "1",
+  "verified_formula": "B_i_GE_O_i_FOR_ALL_6_IMPLIES_WEIGHTED_SUM_B_GE_WEIGHTED_SUM_O",
+  "result": true,
+  "scheduler_boundary": "RACE_DIRECT_OWNER_INDEX_ROUTE_AGAINST_COMPONENTWISE_STRONGER_CERTIFICATE__DO_NOT_DELETE_CURRENT_REALITY_LANE_UNTIL_COMPONENT_RELATIONS_ARE_SHOWN_NOT_TO_INTRODUCE_EQUAL_OR_GREATER_IRREDUCIBLE_REALITY",
+  "hard_nonclaims": [
+    "NO_COMPONENT_RELATION_PROVED",
+    "NO_FINANCE_INDEX_CREDIT",
+    "NO_REALITY_CUT_SUBTRACTION_YET",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
