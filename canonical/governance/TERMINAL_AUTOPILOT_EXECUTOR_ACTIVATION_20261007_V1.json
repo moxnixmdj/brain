@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_AUTOPILOT_EXECUTOR_ACTIVATION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE__INDEPENDENT_EXACT_BYTE_VERIFICATION_REQUIRED_BEFORE_MERGE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "components": {
+    "planner": "canonical/runtime/terminal_autopilot_v1.py",
+    "planner_tests": "canonical/tests/test_terminal_autopilot_v1.py",
+    "executor": "canonical/runtime/terminal_autopilot_executor_v1.py",
+    "executor_tests": "canonical/tests/test_terminal_autopilot_executor_v1.py",
+    "durable_worker": "canonical/runtime/same_identity_supervisor.py"
+  },
+  "intended_effect": [
+    "RECONCILE_STALE_ACTION_INTENTS_AGAINST_CURRENT_TERMINAL_AUTHORITY_BEFORE_DISPATCH",
+    "FAN_OUT_EXACT_PLANNER_ACTIONS_CONCURRENTLY_ACROSS_DISTINCT_DURABLE_WORKER_IDENTITIES",
+    "PROJECT_COMPLETED_EXECUTION_TO_RESULT_PRESENT_AND_COMPLETED_INDEPENDENT_VERIFICATION_TO_VERIFIED",
+    "AUTOEXECUTE_PROMOTION_ONLY_WHEN_TASK_BINDS_EXACT_CONTENT_ADDRESSED_PROMOTION_AUTHORITY",
+    "RECOMPUTE_AFTER_EACH_EXECUTION_WAVE_UNTIL_QUIESCENT"
+  ],
+  "hard_denials": [
+    "IRREVERSIBLE_BENCHMARK_AUTOEXECUTION_FORBIDDEN",
+    "NONZERO_INCREMENTAL_SPEND_FORBIDDEN",
+    "NO_ACTION_ID_HEURISTICS__TASK_MUST_BIND_EXACT_PLANNER_ACTION_ID",
+    "NO_PROMOTION_FROM_EXECUTOR_STATE_ALONE",
+    "NO_TERMINAL_CREDIT_FROM_AUTOPILOT_EXECUTION"
+  ],
+  "authority": {
+    "planning": "CANDIDATE",
+    "reversible_zero_reality_execution": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION",
+    "independent_zero_spend_verification": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION",
+    "content_bound_promotion": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION_AND_EXPLICIT_PER_TASK_AUTHORITY",
+    "irreversible_benchmark_execution": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
