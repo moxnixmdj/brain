@@ -46,18 +46,16 @@
     },
     {
       "id": "COMPLEX_MULTI_TOOL_AGENCY",
-      "closure_state": "WHOLE_SCOPE_BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_OPEN",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "closure_state": "PASS",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Plan and execute complex multi-tool work, coordinate subagents, maintain state and drive long-running work with minimal oversight.",
-      "acceptance_basis": null,
-      "proof_bundle": "Astra is designed for complex end-to-end multi-step work and Work provides agentic execution, but no direct whole-family Opus 5.5 comparison establishes parity.",
-      "unresolved": [
-        "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
-      ],
+      "acceptance_basis": "SCOPE_COMPLETE_ABSOLUTE_TOP_LAW__THEORETICAL_OPTIMUM_OVER_FROZEN_SIX_DIMENSION_AGENCY_PROTOCOL",
+      "proof_bundle": "canonical/governance/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_CLOSURE_20261007_V1.json",
+      "unresolved": [],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "opus55_acceptance_calibrated": false,
-      "opus55_acceptance_state": "OPEN",
+      "acceptance_calibration_evidence": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "opus55_acceptance_calibrated": true,
+      "opus55_acceptance_state": "PASS",
       "behavioral_scope_quarantine_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "current_behavioral_scope_state": "P1_SCOPE_RESTORED__WHOLE_SCOPE_PASS",
       "scope_restoration_evidence": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
@@ -455,7 +453,7 @@
   },
   "current_machine_verdict": {
     "achieved": false,
-    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_BEHAVIORAL_FAMILIES_PASS__6_OF_19_STRICT_OPUS55_ACCEPTANCE_PASS__6_OF_19_VERIFIED_OWNERSHIP_PASS__13_ACCEPTANCE_FAMILIES_OPEN__16_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__22_RAW_UNRESOLVED__18_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__ALL_NON_ACCEPTANCE_COUNTERS_ZERO__FINAL_DONOR_DELETION_CLEANROOM_PASS_TRUE__PROOF_BUNDLE_WAITING_ON_ACCEPTANCE",
+    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_BEHAVIORAL_FAMILIES_PASS__7_OF_19_STRICT_OPUS55_ACCEPTANCE_PASS__7_OF_19_VERIFIED_OWNERSHIP_PASS__12_ACCEPTANCE_FAMILIES_OPEN__18_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__20_RAW_UNRESOLVED__ALL_NON_ACCEPTANCE_COUNTERS_ZERO__FINAL_DONOR_DELETION_CLEANROOM_PASS_TRUE__PROOF_BUNDLE_WAITING_ON_ACCEPTANCE",
     "override_allowed": false
   },
   "specification_closure": {
@@ -494,7 +492,7 @@
   "next": "SATURATE_ONLY_CURRENT_SOUND_RECEIPTS_AGAINST_22_OPEN_ATOMS__PRESERVE_IF_TERMINAL_CLOSURE__NO_FRESH_REALITY_UNLESS_REQUIRED_BY_FROZEN_PREDICATE",
   "postwave_global_ownership_reconciliation": "canonical/governance/POSTWAVE_GLOBAL_OWNERSHIP_RECONCILIATION_V1.json",
   "postwave_remaining_exact_gates": [
-    "CLOSE_22_UNRESOLVED_ATOMIC_OPUS55_ACCEPTANCE_PREDICATES_FOR_13_PENDING_ACCEPTANCE_FAMILIES__OR_DISCHARGE_BY_SCOPE_COMPLETE_STRONGER_PROOF",
+    "CLOSE_20_UNRESOLVED_ATOMIC_OPUS55_ACCEPTANCE_PREDICATES_FOR_12_PENDING_ACCEPTANCE_FAMILIES__OR_DISCHARGE_BY_SCOPE_COMPLETE_STRONGER_PROOF",
     "PROMOTE_FAMILY_OWNERSHIP_ONLY_AFTER_CURRENT_ACCEPTANCE_PASS_AND_EXACT_BRAIN_OWNED_ROUTE_BINDING",
     "REBUILD_FINAL_PROOF_BUNDLE_ONLY_AFTER_ALL_CURRENT_ACCEPTANCE_AND_OWNERSHIP_GATES_CLOSE",
     "RUN_FINAL_CLOSURE_REDUCER_AND_INDEPENDENT_FINALITY_VERIFICATION"
@@ -530,9 +528,10 @@
     "invalidation_blob_sha": "9dfda8e533e0d51985b2b32f709b1b238db1ef19"
   },
   "opus55_acceptance_summary": {
-    "calibrated_family_count": 6,
-    "pending_family_count": 13,
+    "calibrated_family_count": 7,
+    "pending_family_count": 12,
     "calibrated_families": [
+      "COMPLEX_MULTI_TOOL_AGENCY",
       "EXACT_SYMBOLIC_COMPUTATION",
       "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
       "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -542,7 +541,6 @@
     ],
     "pending_families": [
       "ADVANCED_AGENTIC_CODING",
-      "COMPLEX_MULTI_TOOL_AGENCY",
       "PROFESSIONAL_KNOWLEDGE_WORK",
       "BUSINESS_WORKFLOW_AUTOMATION",
       "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
@@ -557,8 +555,8 @@
     ],
     "authority": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3.json",
     "atomic_predicates": {
-      "proved": 16,
-      "unresolved": 22,
+      "proved": 18,
+      "unresolved": 20,
       "total": 38
     },
     "ownership_promotion_authority": false,
@@ -617,12 +615,11 @@
     },
     "latest_atomic_reconciliation": {
       "ledger_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3.json",
-      "ledger_git_blob_sha": "3942d876e13c8a039f06c2e856434f44a9f50781",
-      "if_protocol_closure": "canonical/governance/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_20261007_V1.json",
-      "if_independent_verification": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
-      "status": "CURRENT__16_PROVED__22_UNRESOLVED__6_OF_19_ACCEPTANCE_PASS__IF_OWNERSHIP_OPEN__TERMINAL_FALSE"
+      "agency_protocol_closure": "canonical/governance/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_CLOSURE_20261007_V1.json",
+      "agency_independent_verification": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "status": "CURRENT__18_PROVED__20_UNRESOLVED__7_OF_19_ACCEPTANCE_PASS__7_OF_19_VERIFIED_OWNED__TERMINAL_FALSE"
     },
-    "verified_owned_family_count": 6
+    "verified_owned_family_count": 7
   },
   "behavioral_quarantined_family_count": 0,
   "ownership_summary": {
