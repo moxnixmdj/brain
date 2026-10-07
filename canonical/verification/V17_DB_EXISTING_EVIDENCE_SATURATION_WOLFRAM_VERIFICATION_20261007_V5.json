@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_V17_DB_EXISTING_EVIDENCE_SATURATION_WOLFRAM_VERIFICATION_V5",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_CONCURRENT_FORK_UNION_PASS__TWELVE_DISTINCT_CACHED_CERTIFICATES__ZERO_GLOBAL_CREDIT",
+  "subject": "canonical/governance/V17_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json",
+  "provider": "WOLFRAM_LANGUAGE",
+  "model": {
+    "common_base": "TEN_DISTINCT_IDS",
+    "p2_added": "PROFESSIONAL_ARTIFACT_P2_INFO_SAFE_V2_ALL_GENERATED_CASES",
+    "browser_added": "BROWSER_STATE_INFORMATION_SAFE_ALL_SEEDS_ALL_ORDINALS_V1"
+  },
+  "exact_check": "base=Table[d_i,{i,10}]; mBrowser=Union[base,{browser}]; mP2=Union[base,{p2}]; u=Union[mBrowser,mP2]; {Length[mBrowser],Length[mP2],Length[u],DuplicateFreeQ[u],SubsetQ[u,mBrowser],SubsetQ[u,mP2],SubsetQ[u,base],MemberQ[u,browser],MemberQ[u,p2]}",
+  "exact_output": "{11, 11, 12, True, True, True, True, True, True}",
+  "verified": [
+    "THE_TWO_ELEVEN_REGION_FORKS_HAVE_DISTINCT_ADDITIONS_OVER_THE_SAME_TEN_REGION_BASE.",
+    "THE_SOUND_UNION_CONTAINS_TWELVE_DISTINCT_REGION_CERTIFICATES.",
+    "NEITHER_CONCURRENT_FORK_MAY_OVERWRITE_OR_HIDE_THE_OTHER_SOUND_ADDITION.",
+    "THE_UNION_ONLY_SHRINKS_OR_PRESERVES_THE_RESIDUAL_ESCAPE_SET."
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_D_B_EXHAUSTIVENESS_CLAIM.",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CLOSURE.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {"incremental_spend_usd": 0, "fresh_reality_units_consumed": 0, "terminal_credit_delta": 0}
+}
