@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_CURRENT_BOUND_MINIMUM_INFORMATION_CUT_V3_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "SOURCE_BOUND_STRUCTURAL_REPLAY_PASS__15_NONCOMPOSITION_WAKE_CLASSES_PLUS_1_DEFERRED_LOCAL_C__UPSTREAM_SYNTHESIS_THEOREM_HAS_INDEPENDENT_SPRITE_REPLAY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ABC_CURRENT_BOUND_MINIMUM_IRREDUCIBLE_INFORMATION_CUT_20261007_V3.json",
+    "git_blob_sha": "861b19d662bb6f936fe3c8437f6daa5084c04475"
+  },
+  "bound_evidence": {
+    "predecessor": [
+      "d13a6580b8d02112438cfb48e6c4bc72d5cbb858",
+      16
+    ],
+    "synthesis_subsumption_theorem": "84c3c238b31e49f9fabfcf39e7670546dc61cf66",
+    "synthesis_subsumption_independent_sprite": "7eaf9cd77c25a846fe664d47a642b55e94cbebc6"
+  },
+  "replay": {
+    "predecessor_wake_count": 16,
+    "exact_deleted_wake": "SYNTHESIS_QUALITY_OUTSIDE_CACHED_CELL",
+    "current_wake_count": 15,
+    "deferred_local_count": 1,
+    "synthesis_raw_semantic_admission_preserved": true
+  },
+  "verified": [
+    "EXACTLY_ONE_V2_WAKE_CLASS_IS_DELETED",
+    "DELETED_CLASS_IS_SYNTHESIS_QUALITY_OUTSIDE_CACHED_CELL",
+    "RAW_OR_UNBOUND_SYNTHESIS_SEMANTIC_ADMISSION_REMAINS_EXPLICITLY_OPEN",
+    "NO_OTHER_WAKE_CLASS_IS_REMOVED",
+    "DEFERRED_LOCAL_C_IS_UNCHANGED"
+  ],
+  "hard_nonclaims": [
+    "NO_U_EMPTY",
+    "NO_ABC_CLOSURE",
+    "NO_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
