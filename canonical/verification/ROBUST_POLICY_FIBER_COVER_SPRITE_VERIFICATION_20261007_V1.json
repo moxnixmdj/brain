@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ROBUST_POLICY_FIBER_COVER_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_RUNTIME_BLOB_REPLAY_PASS__5_LOGICAL_ASSERTIONS__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/robust_policy_fiber_cover_v1.py",
+      "git_blob_sha": "e5846a626db51a6208c65b76cae40d9db2d83960"
+    },
+    "governance": {
+      "path": "canonical/governance/ROBUST_POLICY_FIBER_COVER_THEOREM_20261007_V1.json"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/robust_policy_fiber_cover_v1",
+    "exact_runtime_blob_recomputed": "e5846a626db51a6208c65b76cae40d9db2d83960",
+    "result": "PASS_5_LOGICAL_ASSERTIONS"
+  },
+  "verified": [
+    "ONE_COMMON_ADEQUATE_POLICY_OVER_AN_UNCERTAINTY_CELL_DELETES_SEMANTIC_DISCRIMINATION",
+    "WHEN_NO_COMMON_ADEQUATE_POLICY_EXISTS_A_COARSER_FIBER_FAILS_CLOSED",
+    "SPLITTING_ONLY_ON_THE_POLICY_RELEVANT_DIMENSION_RESTORES_A_SOUND_COVER",
+    "A_SOUND_SCOPE_COMPLETE_VERIFIER_WITH_GUARANTEED_OWNED_RESOURCE_SAFE_PASS_CANDIDATE_CAN_BYPASS_SEMANTIC_DISCRIMINATION",
+    "ZERO_TERMINAL_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_A_COMMON_POLICY_EXISTS_FOR_ALL_CURRENT_CONTEXTS",
+    "NO_CLAIM_A_SCOPE_COMPLETE_VERIFIER_EXISTS_FOR_ALL_CURRENT_CONTEXTS",
+    "NO_CLAIM_K6_OR_TERMINAL_GOAL_IS_CLOSED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
