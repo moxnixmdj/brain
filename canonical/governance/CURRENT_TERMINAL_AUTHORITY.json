@@ -988,8 +988,8 @@
     "public_fixed_bar_scope_can_be_admitted_from_valid_scope_complete_aggregate_pass": true,
     "terminal_root_semantics": "FROZEN_19_FAMILY_ACCEPTANCE_AND_OWNERSHIP_FINALITY",
     "frozen_terminal_family_count": 19,
-    "frozen_terminal_family_pass_count": 6,
-    "frozen_terminal_family_open_count": 13,
+    "frozen_terminal_family_pass_count": 7,
+    "frozen_terminal_family_open_count": 12,
     "frozen_atomic_predicates_proved": 18,
     "frozen_atomic_predicates_unresolved": 20,
     "frozen_atomic_predicates_total": 38,
@@ -1003,7 +1003,7 @@
     "if_zero_critical_authority_violations_proved": true,
     "scheduler_aligned_to_frozen_19_family_root": false,
     "primary_scheduler_targets_open_frozen_atoms": false,
-    "open_atomic_acceptance_predicates": 22,
+    "open_atomic_acceptance_predicates": 20,
     "primary_acceptance_proof_engine_count": 3,
     "primary_acceptance_proof_engines": [
       "E1_PUBLIC_FIXED_BAR_AGGREGATE",
@@ -1292,7 +1292,7 @@
     },
     "mandatory_terminal_predicate": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
     "optional_stronger_route": "PROVE_NOT_X_OVER_SOUND_OBSERVABLE_TRACE_ESCAPE_MODEL",
-    "current_truth": "6_OF_19_FULLY_TERMINALLY_CLOSED__7_OF_19_ACCEPTANCE_PASS__6_OF_19_VERIFIED_OWNED__12_ACCEPTANCE_FAMILIES_OPEN__18_OF_38_REGISTRY_ATOMS_PROVED__20_RAW_UNRESOLVED__15_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__ALL_NON_ACCEPTANCE_COUNTERS_ZERO__FINAL_DONOR_DELETION_CLEANROOM_PASS_TRUE__TERMINAL_FALSE",
+    "current_truth": "7_OF_19_FULLY_TERMINALLY_CLOSED__7_OF_19_ACCEPTANCE_PASS__7_OF_19_VERIFIED_OWNED__12_ACCEPTANCE_FAMILIES_OPEN__18_OF_38_REGISTRY_ATOMS_PROVED__20_RAW_UNRESOLVED__15_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__ALL_NON_ACCEPTANCE_COUNTERS_ZERO__FINAL_DONOR_DELETION_CLEANROOM_PASS_TRUE__TERMINAL_FALSE",
     "accepted_terminal_acceptance_routes": [
       "FROZEN_19_FAMILY_PROTOCOLS",
       "UNIVERSAL_SCOPE_COMPLETE_COVER"
