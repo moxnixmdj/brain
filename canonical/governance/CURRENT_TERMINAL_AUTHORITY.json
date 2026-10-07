@@ -651,8 +651,8 @@
     },
     "frozen_19_acceptance_proof_shape_quotient": {
       "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
-      "git_blob_sha": "4cfda3442031f705b280dd10135704d04aa9a24c",
-      "note": "ACTIVE_TRUTH_RECONCILED_SCHEDULER_QUOTIENT__22_RAW_UNRESOLVED_REGISTRY_LABELS__18_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__NO_TERMINAL_CREDIT"
+      "git_blob_sha": "329979e5ae89d62dbffad8ddf4d562c2580aa4ff",
+      "note": "17_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__SYNTHESIS_MATCHED_QUALITY_METRIC_IDENTITY_DEMOTED_BY_INDEPENDENT_COUNTERMODEL"
     },
     "load_bearing_acceptance_truth_basis_reconciliation": {
       "path": "canonical/governance/FROZEN_19_LOAD_BEARING_ACCEPTANCE_TRUTH_BASIS_RECONCILIATION_20261007_V1.json",
@@ -676,6 +676,11 @@
       "tests_path": "canonical/tests/test_terminal_closure_reducer_v2.py",
       "tests_git_blob_sha": "d6c1f0ce6626f137c5c024c05657bb10ddd5c30f",
       "note": "FROZEN_19_PROTOCOL_CONJUNCTION_AND_SCOPE_COMPLETE_UNIVERSAL_COVER_ARE_COEQUAL_SOUND_TERMINAL_PROOF_ROUTES__COMMON_FINALITY_GATES_REMAIN_MANDATORY"
+    },
+    "frozen_acceptance_regime_classification": {
+      "path": "canonical/governance/FROZEN_18_ACCEPTANCE_REGIME_EXHAUSTIVE_CLASSIFICATION_20261007_V1.json",
+      "git_blob_sha": "2c88520f0e79ff076892455054e9de71e71878aa",
+      "note": "CURRENT_17_OBLIGATIONS_CLASSIFIED_AS_15_OBJECTIVE_PLUS_2_QUALITATIVE__RAW_SYNTHESIS_SEMANTICS_REMAIN_SHARED_ABC_FRONTIER"
     }
   },
   "live_truth": {
@@ -755,7 +760,7 @@
     "private_exact_opus_capacity_state": "UNKNOWN__GITHUB_ACTIONS_PRE_STEP_INFRASTRUCTURE_BLOCK",
     "current_scheduler_residuals": {
       "professional_deliverable_quality": "AA_BRIEFCASE_V1_1_GE_1822_OR_STRONGER__OUTSIDE_CACHED_P2_EXPLICIT_SEMANTIC_CONTRACT_REGION__FIRST_ATTEMPT_AUTHENTICATED_P2_STRONG_VISIBLE_QUALITY_SUBREGION_ADMISSION__SHARED_WITH_PROFESSIONAL_KNOWLEDGE_WORK",
-      "synthesis": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_OR_STRONGER__OUTSIDE_CACHED_TYPED_VISIBLE_SUPPORT_TOP_LAW_CELL",
+      "synthesis": "RAW_OR_UNBOUND_SYNTHESIS_SEMANTIC_ADMISSION_ON_SHARED_ABC_FRONTIER__NO_DISTINCT_MATCHED_QUALITY_METRIC_WAKE",
       "unknown_domain": "INTRINSIC_OPUS55_UNKNOWN_MECHANISM_NONINFERIORITY_OR_STRONGER"
     },
     "closed_ABC_refinement_family_count": 6,
@@ -1011,17 +1016,18 @@
     "instruction_scope_E2_package_active": false,
     "instruction_scope_E2_package_closed": true,
     "frozen_atomic_predicates_unresolved_raw": 22,
-    "verified_nonindependent_acceptance_truth_variables": 4,
-    "independent_load_bearing_acceptance_truths_open": 18,
+    "verified_nonindependent_acceptance_truth_variables": 5,
+    "independent_load_bearing_acceptance_truths_open": 17,
     "raw_open_registry_rows_are_independent_primary_research_jobs": false,
     "load_bearing_basis_reconciliation_active": false,
     "deleted_independent_scheduler_variables": [
       "COMPOSITION_COMPONENT_SCOPED_PROOFS",
       "ARTIFACT_AA_BRIEFCASE_GE_1822",
       "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
-      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_METRIC_IDENTITY"
     ],
-    "independent_open_acceptance_obligations": 18,
+    "independent_open_acceptance_obligations": 17,
     "raw_unresolved_registry_labels_are_independent_primary_jobs": false,
     "composition_terminal_success_is_independent_primary_job": false,
     "composition_critical_invariant_is_independent_primary_job": false,
@@ -1031,7 +1037,9 @@
     "composition_terminal_success_preserved_as_derived_abc_obligation": true,
     "terminal_proof_route_disjunction_bound": true,
     "universal_scope_complete_cover_is_coequal_terminal_proof_route": true,
-    "universal_trace_not_x_coequal_terminal_proof_route": true
+    "universal_trace_not_x_coequal_terminal_proof_route": true,
+    "synthesis_matched_quality_metric_independent_primary_job": false,
+    "synthesis_terminally_useful_quality_dimensions_preserved": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
