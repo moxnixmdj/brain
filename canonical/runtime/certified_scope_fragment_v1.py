@@ -15,7 +15,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass, asdict
 from hashlib import sha256
-import re
 from typing import Any
 
 from canonical.runtime.semantic_operator_counterfactuals import extract_semantic_operators
@@ -74,6 +73,16 @@ def _reject_nested_family(text: str, source: str, family: set[str], chosen_id: s
     return None
 
 
+def _unresolved(reason: str, **extra: Any) -> dict[str, Any]:
+    return {
+        "schema": SCHEMA,
+        "status": "UNRESOLVED",
+        "reason": reason,
+        "terminal_authority": False,
+        **extra,
+    }
+
+
 def parse_scope(text: str, *, source: str = "source") -> dict[str, Any]:
     if not isinstance(text, str) or not text.strip():
         return {"schema": SCHEMA, "status": "FAIL_CLOSED", "reason": "SOURCE_TEXT_MISSING", "terminal_authority": False}
@@ -83,86 +92,60 @@ def parse_scope(text: str, *, source: str = "source") -> dict[str, Any]:
     ops = extract_semantic_operators(text, source=source)
     scope_ops = [op for op in ops if op.semantic_class in (_CONDITIONAL | _TEMPORAL)]
     if len(scope_ops) != 1:
-        return {
-            "schema": SCHEMA,
-            "status": "UNRESOLVED",
-            "reason": "EXACTLY_ONE_SUPPORTED_SCOPE_OPERATOR_REQUIRED",
-            "candidate_scope_operator_count": len(scope_ops),
-            "terminal_authority": False,
-        }
+        return _unresolved(
+            "EXACTLY_ONE_SUPPORTED_SCOPE_OPERATOR_REQUIRED",
+            candidate_scope_operator_count=len(scope_ops),
+        )
 
     op = scope_ops[0]
-    if op.semantic_class in _CONDITIONAL:
-        nested = _reject_nested_family(text, source, _CONDITIONAL, op.operator_id)
-    else:
-        nested = _reject_nested_family(text, source, _TEMPORAL, op.operator_id)
+    family = _CONDITIONAL if op.semantic_class in _CONDITIONAL else _TEMPORAL
+    nested = _reject_nested_family(text, source, family, op.operator_id)
     if nested:
-        return {"schema": SCHEMA, "status": "UNRESOLVED", "reason": nested, "terminal_authority": False}
-
-    left = _trim_span(text, 0, op.start)
-    right = _trim_span(text, op.end, len(text))
-    if left[0] >= left[1] or right[0] >= right[1]:
-        return {
-            "schema": SCHEMA,
-            "status": "UNRESOLVED",
-            "reason": "EMPTY_SCOPE_OPERAND",
-            "terminal_authority": False,
-        }
+        return _unresolved(nested)
 
     relation = ""
     left_role = ""
     right_role = ""
+    left: tuple[int, int]
+    right: tuple[int, int]
 
-    if op.semantic_class == "CONDITIONAL_UNLESS":
-        relation = "UNLESS"
-        left_role, right_role = "ORDINARY_BRANCH", "EXCEPTION_BRANCH"
-
-    elif op.semantic_class == "CONDITIONAL_IF":
-        prefix = text[:op.start]
-        # Prefix IF is supported only in the controlled comma form: If A, B.
-        if not prefix.strip():
-            comma = text.find(",", op.end)
-            if comma < 0:
-                return {
-                    "schema": SCHEMA,
-                    "status": "UNRESOLVED",
-                    "reason": "PREFIX_IF_REQUIRES_COMMA_CONTROLLED_FORM",
-                    "terminal_authority": False,
-                }
-            antecedent = _trim_span(text, op.end, comma)
-            consequent = _trim_span(text, comma + 1, len(text))
-            if antecedent[0] >= antecedent[1] or consequent[0] >= consequent[1]:
-                return {"schema": SCHEMA, "status": "UNRESOLVED", "reason": "EMPTY_IF_OPERAND", "terminal_authority": False}
-            left, right = antecedent, consequent
-            relation = "IF_THEN"
-            left_role, right_role = "ANTECEDENT", "CONSEQUENT"
-        else:
-            relation = "IF_THEN"
-            # In postfix form: CONSEQUENT if ANTECEDENT.
-            left_role, right_role = "CONSEQUENT", "ANTECEDENT"
-
-    elif op.semantic_class == "CONDITIONAL_WHEN":
-        # Only postfix controlled form is admitted in v1.
-        if not text[:op.start].strip():
-            return {
-                "schema": SCHEMA,
-                "status": "UNRESOLVED",
-                "reason": "PREFIX_WHEN_NOT_IN_V1_FRAGMENT",
-                "terminal_authority": False,
-            }
-        relation = "WHEN"
-        left_role, right_role = "CONSEQUENT", "TRIGGER"
-
-    elif op.semantic_class == "TEMPORAL_BEFORE":
-        relation = "BEFORE"
-        left_role, right_role = "EARLIER_EVENT", "LATER_EVENT"
-
-    elif op.semantic_class == "TEMPORAL_AFTER":
-        relation = "AFTER"
-        left_role, right_role = "LATER_EVENT", "EARLIER_EVENT"
+    if op.semantic_class == "CONDITIONAL_IF" and not text[:op.start].strip():
+        # Prefix IF is admitted only in the exact controlled shape: If A, B.
+        commas = [i for i, ch in enumerate(text[op.end:], start=op.end) if ch == ","]
+        if len(commas) != 1:
+            return _unresolved("PREFIX_IF_REQUIRES_EXACTLY_ONE_COMMA_CONTROLLED_FORM")
+        comma = commas[0]
+        left = _trim_span(text, op.end, comma)
+        right = _trim_span(text, comma + 1, len(text))
+        relation = "IF_THEN"
+        left_role, right_role = "ANTECEDENT", "CONSEQUENT"
 
     else:
-        return {"schema": SCHEMA, "status": "UNRESOLVED", "reason": "UNSUPPORTED_OPERATOR", "terminal_authority": False}
+        left = _trim_span(text, 0, op.start)
+        right = _trim_span(text, op.end, len(text))
+
+        if op.semantic_class == "CONDITIONAL_UNLESS":
+            relation = "UNLESS"
+            left_role, right_role = "ORDINARY_BRANCH", "EXCEPTION_BRANCH"
+        elif op.semantic_class == "CONDITIONAL_IF":
+            relation = "IF_THEN"
+            left_role, right_role = "CONSEQUENT", "ANTECEDENT"
+        elif op.semantic_class == "CONDITIONAL_WHEN":
+            if not text[:op.start].strip():
+                return _unresolved("PREFIX_WHEN_NOT_IN_V1_FRAGMENT")
+            relation = "WHEN"
+            left_role, right_role = "CONSEQUENT", "TRIGGER"
+        elif op.semantic_class == "TEMPORAL_BEFORE":
+            relation = "BEFORE"
+            left_role, right_role = "EARLIER_EVENT", "LATER_EVENT"
+        elif op.semantic_class == "TEMPORAL_AFTER":
+            relation = "AFTER"
+            left_role, right_role = "LATER_EVENT", "EARLIER_EVENT"
+        else:
+            return _unresolved("UNSUPPORTED_OPERATOR")
+
+    if left[0] >= left[1] or right[0] >= right[1]:
+        return _unresolved("EMPTY_SCOPE_OPERAND")
 
     left_text = text[left[0]:left[1]]
     right_text = text[right[0]:right[1]]
