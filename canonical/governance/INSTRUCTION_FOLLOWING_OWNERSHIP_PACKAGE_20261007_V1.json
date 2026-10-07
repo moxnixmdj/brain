@@ -1,0 +1,133 @@
+{
+  "schema": "PROJECT_BRAIN_INSTRUCTION_FOLLOWING_OWNERSHIP_PACKAGE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_EXACT_MULTI_ARTIFACT_ROUTE_PACKAGE__STRICT_ACCEPTANCE_PASS__INDEPENDENT_OWNERSHIP_SCAN_REQUIRED__ZERO_OWNERSHIP_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "ownership_theorem": {
+    "path": "canonical/governance/EXACT_ACCEPTED_ROUTE_OWNERSHIP_THEOREM_V1.json",
+    "git_blob_sha": "09ee0097bc785d11e7f7bfdd6f1b39cafa13d5fa"
+  },
+  "acceptance": {
+    "state": "PASS",
+    "scope_complete": true,
+    "closure_receipt": {
+      "path": "canonical/governance/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_20261007_V1.json",
+      "git_blob_sha": "307ea91b0150db9d6cca9580e1b7a399035929c1"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f"
+    },
+    "livebench_receipt": {
+      "path": "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "57e27e3c56372b57a1d4e0255f49340d4a4c8588"
+    },
+    "finite_scope_receipt": {
+      "path": "canonical/verification/IF_SCOPE_FINITE_WAVE_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "f2736590ad5fb3161f4e65bdc137cea836996658"
+    }
+  },
+  "route_package": {
+    "files": [
+      {
+        "path": "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py",
+        "git_blob_sha": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34"
+      },
+      {
+        "path": "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+        "git_blob_sha": "d73ec366b32252996258eae6d10d67d4d6a5e042"
+      },
+      {
+        "path": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py",
+        "git_blob_sha": "09a5d7810fd46713aaf06cf1d204fe140d1d8045"
+      },
+      {
+        "path": "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py",
+        "git_blob_sha": "71e637c70edf1c582e28ea38b3b798965c803a06"
+      },
+      {
+        "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+        "git_blob_sha": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0"
+      },
+      {
+        "path": "canonical/runtime/livebench_pointwise_minimum_cut_v1.py",
+        "git_blob_sha": "3552ceb0c9bdf80e8666460931f20f06f580a0f2"
+      },
+      {
+        "path": "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py",
+        "git_blob_sha": "fd1ad043fb9fe461b6593f5b8130093be0028c22"
+      },
+      {
+        "path": "canonical/runtime/if_scope_finite_wave_v1.py",
+        "git_blob_sha": "9f31421b9d62f11bf99f6dbeafb104d8621ca5ee"
+      },
+      {
+        "path": "canonical/runtime/m0a_raw_source_brain_candidate_v2.py",
+        "git_blob_sha": "0aac96d27068bdad379703c1b0b8a7a32cacb2e2"
+      },
+      {
+        "path": "canonical/runtime/m0a_raw_source_terminal_suite_v2.py",
+        "git_blob_sha": "63b5daacfa5623c38228d41f6a84e548890d252d"
+      },
+      {
+        "path": "canonical/runtime/m0_requirement_change_case_v1.py",
+        "git_blob_sha": "d77ea422ab8d432e51ecb39a9396f5c126d6c23c"
+      },
+      {
+        "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+        "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+      },
+      {
+        "path": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+        "git_blob_sha": "5e8a953864e13ec76768c3e8920644107c65a644"
+      },
+      {
+        "path": "canonical/runtime/matched_executable_atom_semantics_v1.py",
+        "git_blob_sha": "47a0e828847a57fb206490a866a1041d83c42bde"
+      },
+      {
+        "path": "canonical/runtime/bounded_predicate_argument_semantics.py",
+        "git_blob_sha": "8303231779d6fe8c7fb740e3bbaa492914d4eba9"
+      },
+      {
+        "path": "canonical/runtime/explicit_compound_requirement_decomposer.py",
+        "git_blob_sha": "06da82ccd7cf5ba37b78d1d664b5638caa4e1956"
+      },
+      {
+        "path": "canonical/runtime/source_grounded_coreference.py",
+        "git_blob_sha": "3734d79c4d4db5fa78798d8421130090d15fe358"
+      },
+      {
+        "path": "canonical/runtime/requirement_acceptance_compiler.py",
+        "git_blob_sha": "c306ac6191e2d6f6d84445d7a698eeec8676a0ef"
+      },
+      {
+        "path": "canonical/runtime/independent_acceptance_model.py",
+        "git_blob_sha": "710298c5d7154b5a3c2a4a1700420c40cb2fa55a"
+      },
+      {
+        "path": "canonical/runtime/tool_discovery_information_safe_proof.py",
+        "git_blob_sha": "2450a9644119c9fdf9c43307a1d115098d6ba592"
+      }
+    ],
+    "file_count": 20,
+    "runtime_provider_class": "CANONICAL_BRAIN_CONTROLLED_DETERMINISTIC_PYTHON_PLUS_STDLIB",
+    "process_boundary": "IF_SCOPE_FINITE_WAVE_SUBPROCESS_IS_ONLY_FRESH_LOCAL_SELF_REEXECUTION_OF_THE_EXACT_CONTENT_ADDRESSED_HARNESS",
+    "expected_external_target_capability_provider": false
+  },
+  "promotion_requirements": [
+    "RECOMPUTE_EVERY_LISTED_GIT_BLOB_SHA",
+    "CLOSE_ALL_LOAD_BEARING_CANONICAL_RUNTIME_IMPORTS",
+    "NO_NETWORK_PROVIDER_DYNAMIC_IMPORT_OPAQUE_MODEL_OR_UNDECLARED_CAPABILITY_RUNTIME",
+    "SUBPROCESS_ONLY_EXACT_LOCAL_SELF_REEXECUTION",
+    "STRICT_SCOPE_COMPLETE_ACCEPTANCE_RECEIPTS_REMAIN_BOUND"
+  ],
+  "ownership_credit_delta": 0,
+  "promotion_authority": false,
+  "hard_nonclaims": [
+    "NO_OWNERSHIP_CREDIT_BEFORE_INDEPENDENT_PACKAGE_SCAN",
+    "NO_NEW_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CLAIM"
+  ]
+}
