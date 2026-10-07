@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_P2_ACTUAL_BASELINE_ADMISSION_V3_INDEPENDENT_REPLAY",
+  "date": "2026-10-07",
+  "status": "TWO_CARRIER_BYTE_IDENTICAL_REPLAY_PASS__11_OF_11_EACH__WOLFRAM_COUNTERMODEL_PASS__ZERO_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/p2_strong_quality_visible_certifier_v3.py",
+    "sha256": "4de1ba0468ab721015d535942f2a2c375505eea202609cf3983f691243657398",
+    "size": 10092
+  },
+  "tests": {
+    "path": "canonical/tests/test_p2_strong_quality_visible_certifier_v3.py",
+    "sha256": "7f2e43d379cff6c11384a37043d1eb2287b41cd497208323586ff2d9a1ac0a8f",
+    "size": 4034
+  },
+  "carriers": [
+    {
+      "sprite": "brain-root3-current-byte-replay-20261007-v1",
+      "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "tests_passed": 11,
+      "tests_total": 11
+    },
+    {
+      "sprite": "brain-heldout003-one-shot",
+      "sprite_id": "sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589",
+      "tests_passed": 11,
+      "tests_total": 11
+    }
+  ],
+  "wolfram": {
+    "selected_gt_actual_mechanics_baseline": true,
+    "actual_mechanics_baseline_ne_empty_plan": true,
+    "selected_gt_ablation": true,
+    "terminal_quality_gate_can_hold": true
+  },
+  "verified": [
+    "LEGACY_EMPTY_P2_PLAN_PLUS_FULL_RUBRIC_MODE_PASSES.",
+    "EMPTY_P2_PLAN_PLUS_COMPARISON_ORDER_MODE_PASSES.",
+    "BOUND_ACTUAL_MECHANICS_BASELINE_PLUS_COMPARISON_ORDER_MODE_PASSES_WITHOUT_EMPTY_PLAN_EQUIVALENCE.",
+    "BOUND_BASELINE_RECEIPT_AND_ID_ARE_REQUIRED.",
+    "COMPARISON_BASELINE_ID_MUST_MATCH_THE_BOUND_ACTUAL_BASELINE.",
+    "FULL_RUBRIC_MODE_CANNOT_USE_AN_OPAQUE_BOUND_BASELINE_WITHOUT_EMPTY_PLAN_EQUIVALENCE.",
+    "SELECTED_GT_BASELINE_REMAINS_REQUIRED.",
+    "AUDIENCE_AND_MEMBERSHIP_GATES_REMAIN_FAIL_CLOSED."
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_AA_BRIEFCASE_OR_GDPVAL_BASELINE_BINDING_CREATED.",
+    "NO_U_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
