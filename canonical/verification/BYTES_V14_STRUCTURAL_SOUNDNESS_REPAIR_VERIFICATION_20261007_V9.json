@@ -1,0 +1,27 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_STRUCTURAL_SOUNDNESS_REPAIR_V9_VERIFICATION",
+  "date":"2026-10-07",
+  "carrier":{"provider":"SPRITES","name":"h100-real-image-v1","id":"sprite-68a466f6-88d5-493d-93f3-2b85377836a3"},
+  "canonical_v8_audit":{
+    "exact_blob":"246f31ac5fd90a29ca550dff742dedf29be01da5",
+    "structural_edges":170,
+    "covered_by_old_mechanizer":138,
+    "uncovered":32,
+    "classes_without_uncovered_edges":933
+  },
+  "repair_v9":{
+    "exact_blob":"e3959105b87096c1296cadf6ec6fe3105484eaf0",
+    "source_sha256":"2c5a68c4cb0f27ce3b904d91a72a89e9ffee777331adfe08fefcffd01d92feb1",
+    "raw_bytes":8056,
+    "payload_bytes":3105,
+    "payload_sha256":"65e4401231dc349058aceec5bfb2d28790a077257eec5ed8f8cff0eee634f1ce",
+    "generated_law_equations":312,
+    "structural_edges":170,
+    "missing_structural":0,
+    "extra_structural":0,
+    "closed_checker":"PASS",
+    "regression":{"expression":6,"scalar":9,"sequence":12,"total":27,"status":"PASS"}
+  },
+  "status":"PASS_WITH_EXPLICIT_META_LEVEL_SCHEMA_SOUNDNESS_BOUNDARY",
+  "terminal_credit_delta":0
+}
