@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_INDEPENDENT_WOLFRAM_VERIFICATION_V2",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_CEILING_PASS__EXACT_SOURCE_BINDINGS_AUDITED__SCOPE_SUPERSET_PRESERVED__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_SELECTED_PROPERTY_CELL_20261007_V1.json",
+    "git_blob_sha": "7b2cb008f34082ae0aa4be78f2444287cf6022b2"
+  },
+  "exact_source_bindings": {
+    "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json": "f2ef80facb39264b1e12b81e451eb4499a3b987f",
+    "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
+    "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+    "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+    "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "d3144bf0aa618b15ef594d24de54d55cbdb329fd",
+    "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "e0dbd996c18bdb818693ab0d217d751594a03d0f",
+    "canonical/runtime/v16_synthesis_required_claim_coverage_selected_property_cell_verifier_v1.py": "0ae99fc4e09126f2018e54fc38e4cbfa9c28f2e7",
+    "canonical/tests/test_v16_synthesis_required_claim_coverage_selected_property_cell_v1.py": "12ccbc9851d3e4dea00c14a8984b19cda0fd2ddf"
+  },
+  "independent_recomputation": {
+    "verified_source_to_target_relation": "SUPERSET",
+    "relation_independent": true,
+    "brain_required_claim_coverage_lower_bound": 1,
+    "admissible_metric_upper_bound": 1,
+    "wolfram_formula": "FOR_ALL_REAL_t_WITH_0_LE_t_LE_1__1_GE_t",
+    "wolfram_result": true,
+    "K_c_minus": "EMPTY_FOR_THIS_PROPERTY_ON_THE_FROZEN_TARGET_SCOPE"
+  },
+  "ownership_binding": {
+    "exact_same_package_cleanroom": true,
+    "undeclared_dependency_count": 0,
+    "behavior_preserved": true,
+    "byte_identical_terminal_result": true,
+    "global_ownership_postconditions_zero": true,
+    "boundary": "BOUNDED_SELECTED_ROUTE_EVIDENCE_ONLY__FINAL_GLOBAL_D_REPLAY_STILL_REQUIRED_AFTER_ABC"
+  },
+  "verified_consequence": [
+    "REQUIRED_CLAIM_COVERAGE_IS_AT_THE_GLOBAL_CEILING_ONE_ON_A_VERIFIED_SUPERSET_OF_THE_FROZEN_TARGET_SCOPE",
+    "NO_ADMISSIBLE_OPUS_OR_OTHER_TARGET_CAN_STRICTLY_EXCEED_BRAIN_ON_REQUIRED_CLAIM_COVERAGE_FOR_THIS_TARGET_SCOPE",
+    "SYNTHESIS_TARGET_SCOPE_REQUIRED_CLAIM_COVERAGE_TOP_LAW_IS_ADMISSIBLE_AS_A_SOUND_BOUNDED_D_B_CERTIFICATE_REGION",
+    "MATCHED_QUALITY_AND_OTHER_SYNTHESIS_QUALITY_DIMENSIONS_REMAIN_SEPARATE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_USEFUL_SYNTHESIS_QUALITY_DIMENSIONS_ARE_NONINFERIOR",
+    "NO_CLAIM_SYNTHESIS_FAMILY_CLOSED",
+    "NO_MATCHED_QUALITY_CREDIT",
+    "NO_GLOBAL_ABC_OR_D_FINALITY_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
