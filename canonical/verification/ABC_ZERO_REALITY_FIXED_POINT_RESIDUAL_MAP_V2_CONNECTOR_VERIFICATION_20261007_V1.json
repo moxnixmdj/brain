@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V2_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_SOURCE_AND_PARTITION_REPLAY_PASS__13_OPEN__6_CLOSED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_20261007_V2.json",
+    "git_blob_sha": "4794c5a7d578258e8cf5d08866ee8b7946b6d1c9"
+  },
+  "verified": {
+    "all_source_blob_bindings_exact": true,
+    "open_ABC_refinement_family_count": 13,
+    "closed_ABC_refinement_family_count": 6,
+    "open_refinements_unique": true,
+    "closed_refinements_unique": true,
+    "open_closed_overlap_count": 0,
+    "total_partition_count": 19,
+    "instruction_following_removed_from_open_set_after_scope_complete_protocol_closure": true,
+    "finance_two_route_local_semantic_residual_ids_exact": true,
+    "shared_semantic_primitive_role_count": 5,
+    "generic_new_semantic_generator_required": false,
+    "noncomposition_open_family_count": 12,
+    "multi_capability_composition_remains_route_local_transform_closure": true,
+    "private_exact_opus_capacity_state": "UNKNOWN__GITHUB_ACTIONS_PRE_STEP_INFRASTRUCTURE_BLOCK",
+    "terminal": false
+  },
+  "open_families": [
+    "ADVANCED_AGENTIC_CODING",
+    "COMPLEX_MULTI_TOOL_AGENCY",
+    "PROFESSIONAL_KNOWLEDGE_WORK",
+    "BUSINESS_WORKFLOW_AUTOMATION",
+    "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+    "AGENTIC_SCIENTIFIC_RESEARCH",
+    "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+    "COMPUTER_AND_BROWSER_USE",
+    "FINANCIAL_ANALYSIS",
+    "ARTIFACT_CREATION",
+    "COMMUNICATION_AND_SYNTHESIS",
+    "UNKNOWN_DOMAIN_ADAPTATION",
+    "MULTI_CAPABILITY_COMPOSITION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_13_OPEN_REFINEMENTS_ARE_INDEPENDENT_TOP_LEVEL_TERMINAL_TRUTHS",
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
