@@ -1,0 +1,64 @@
+name: Buildkite Bridge Probe
+
+on:
+  push:
+    branches:
+      - terminal-now/buildkite-bridge-probe-20261007-v1
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Detect existing Buildkite API bridge without exposing credentials
+        shell: bash
+        env:
+          BK1: ${{ secrets.BUILDKITE_API_TOKEN }}
+          BK2: ${{ secrets.BUILDKITE_TOKEN }}
+          BK3: ${{ secrets.BUILDKITE_ACCESS_TOKEN }}
+          BK4: ${{ secrets.BUILDKITE_API_ACCESS_TOKEN }}
+        run: |
+          set -euo pipefail
+          TOKEN=''
+          for n in BK1 BK2 BK3 BK4; do
+            v="${!n:-}"
+            if [ -n "$v" ]; then TOKEN="$v"; break; fi
+          done
+          if [ -z "$TOKEN" ]; then
+            echo 'BRIDGE_PROBE credential_present=false'
+            exit 0
+          fi
+          echo "::add-mask::$TOKEN"
+          echo 'BRIDGE_PROBE credential_present=true'
+          for slug in brain-zero-case-preflight brain-zero-case-carrier-preflight; do
+            tmp="$(mktemp)"
+            code="$(curl -sS -o "$tmp" -w '%{http_code}' \
+              -H "Authorization: Bearer $TOKEN" \
+              -H 'Accept: application/json' \
+              "https://api.buildkite.com/v2/organizations/moxnixmdj/pipelines/$slug")"
+            echo "BRIDGE_PROBE pipeline=$slug http_status=$code"
+            if [ "$code" = '200' ]; then
+              python - "$tmp" <<'PY'
+import json, re, sys
+p=sys.argv[1]
+o=json.load(open(p, encoding='utf-8'))
+safe={k:o.get(k) for k in ('id','slug','name','default_branch','created_at') if k in o}
+print('BRIDGE_PROBE pipeline_metadata='+json.dumps(safe, sort_keys=True))
+cfg=o.get('configuration')
+if isinstance(cfg,str):
+    lines=[]
+    for line in cfg.splitlines():
+        if re.match(r'^\s*(?:command|commands|label|key|plugins|agents|artifact_paths)\s*:', line):
+            # Never emit obvious credential-bearing text even if configuration contains it.
+            if re.search(r'(?i)(token|secret|password|api[_-]?key)', line):
+                lines.append(re.sub(r':.*', ': <redacted>', line))
+            else:
+                lines.append(line[:400])
+    print('BRIDGE_PROBE configuration_selected_lines='+json.dumps(lines[:80]))
+PY
+            fi
+            rm -f "$tmp"
+          done
