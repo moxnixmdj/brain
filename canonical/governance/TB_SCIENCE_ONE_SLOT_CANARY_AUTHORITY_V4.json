@@ -1,0 +1,122 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ONE_SLOT_CANARY_AUTHORITY_V4",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ACTIVE_ONE_USE_AUTHORITY__BECOMES_ACTIVE_ONLY_WHEN_THIS_EXACT_BLOB_IS_ON_BRAIN_MAIN_AFTER_INDEPENDENT_VERIFICATION__ZERO_CREDIT_BEFORE_RESULT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "fresh_reality_basis": {
+    "saturation_governance": {
+      "path": "canonical/governance/ABC_CURRENT_BOUND_ZERO_REALITY_SATURATION_20261007_V1.json",
+      "git_blob_sha": "bfe6e36cf09abb6f0740dba77b273d5300c582a5"
+    },
+    "saturation_verification": {
+      "path": "canonical/verification/ABC_CURRENT_BOUND_ZERO_REALITY_SATURATION_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "88a469071458db281a9926efd2d3d091c2a388fb"
+    },
+    "consequence": "CURRENT_BOUND_GENERIC_WHOLE_REFINEMENT_ZERO_REALITY_SEARCH_IS_SATURATED__TB_SCIENCE_SCOPE_OR_STRONGER_REMAINS_OPEN__ONE_MINIMUM_UNTOUCHED_REALITY_SLOT_IS_ADMISSIBLE"
+  },
+  "candidate_basis": {
+    "candidate": {
+      "path": "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_CANDIDATE_V4.json",
+      "git_blob_sha": "dba3ff2c53765f8423d4161e079b663c76959fc1"
+    },
+    "exact_byte_verification": {
+      "path": "canonical/verification/TB_SCIENCE_V4_CANDIDATE_EXACT_BYTE_VERIFICATION_BINDING_20261003_V1.json",
+      "git_blob_sha": "12df1cbd2278c63fd39036063e2fcd575b16ab2b"
+    },
+    "closed_dependency_verification": {
+      "path": "canonical/verification/TB_SCIENCE_V4_CLOSED_DEPENDENCIES_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "1c94aeee31cd20ca2cfa7330d8aa9dc1df2f4cb9"
+    },
+    "current_overlay": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_TARGET_EXECUTION_OVERLAY_V3.json",
+      "git_blob_sha": "7081b77ba6c16c7c10050e1608e212cba8691be3"
+    },
+    "stable_terminal_pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "d9c41440ec78886b5ba44c7eeda6f0c2680839ae"
+    }
+  },
+  "execution_capsule": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "execute/tb-science-tranche2-current-route-20261007",
+    "unarmed_branch_head": "0de7b00b79443444ffc171baa14cb43ed50f8238",
+    "workflow_path": ".github/workflows/execute-tb-science-canary-v4.yml",
+    "workflow_git_blob_sha": "f836ffebefe1453f305e4a917f4de0f1e20ab64b",
+    "arm_path": "capsules/tb_science_execution_v2/ARM_CANARY_V4.json",
+    "trigger": "PUSH_TO_EXACT_EXECUTION_BRANCH_TOUCHING_ONLY_ARM_PATH",
+    "current_arm_present": false
+  },
+  "exact_route": {
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "source_commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "manifest_path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "harbor_version": "0.23.0",
+    "controller_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "controller_blob": "5557efd21f1a433ad16766def3775a79c459784b",
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_blob": "fe7c0ce885197217774638df382aeb6f68ff38dd",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "environment_transport_blob": "ec46f648214a37bb16025d5ef2593efdf59f0d79",
+    "source_gate_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "reducer_blob": "3b48ea534d606cf47a8321b56427353066393577",
+    "compiled_llama_cpp_cache_allowed": false,
+    "pinned_llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c"
+  },
+  "authorized_slot": {
+    "slot_id": "terminal-bench-science/koopman-mfg-id::trial-0",
+    "task_name": "terminal-bench-science/koopman-mfg-id",
+    "task_digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f"
+  },
+  "permanently_consumed_slots": [
+    "terminal-bench-science/genomic-model-ranking::trial-0",
+    "terminal-bench-science/mri-harmonization::trial-0",
+    "terminal-bench-science/navigation-sensor-calibration::trial-0",
+    "terminal-bench-science/baseline-free-localization::trial-0",
+    "terminal-bench-science/virtual-baseline-localization::trial-0"
+  ],
+  "current_reduction": {
+    "finalized_slots": 5,
+    "successes": 0,
+    "finalized_failures": 5,
+    "fixed_denominator": 210,
+    "required_successes": 133,
+    "fail_lock_failures": 78,
+    "remaining_failures_before_fail_lock": 73
+  },
+  "execution_semantics": {
+    "slots_authorized": 1,
+    "retries_per_slot": 0,
+    "slot_replacement": false,
+    "denominator_shrink": false,
+    "duplicate_slot_credit": false,
+    "exact_success_rule": "EXACT_HARBOR_VERIFIER_REWARD_GE_1_0",
+    "every_other_final_state": "ZERO",
+    "first_attempt_only": true,
+    "auto_revoke_after_slot_finalization": true,
+    "result_must_be_content_addressed": true,
+    "incremental_spend_usd": 0
+  },
+  "activation_rule": "MERGE_THIS_EXACT_FILE_TO_BRAIN_MAIN_ONLY_AFTER_SEPARATE_INDEPENDENT_VERIFICATION__THEN_COPY_EXACT_AUTHORITY_AND_VERIFICATION_TO_PUBLIC_CAPSULE__CREATE_ARM_LAST__ARM_PUSH_CONSUMES_ONE_USE_AUTHORITY",
+  "hard_rules": [
+    "NO_CONSUMED_SLOT_REPLAY",
+    "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
+    "NO_EXECUTION_BEFORE_INDEPENDENT_AUTHORITY_VERIFICATION",
+    "NO_EXECUTION_BEFORE_EXACT_AUTHORITY_BLOB_IS_ON_BRAIN_MAIN",
+    "PUBLIC_EXECUTION_CAPSULE_MUST_HASH_BIND_AUTHORITY_AND_ITS_VERIFICATION",
+    "ARM_FILE_MUST_BE_CREATED_LAST_AND_EXACTLY_ONCE",
+    "GITHUB_RUN_ATTEMPT_MUST_EQUAL_ONE",
+    "COMPILED_LLAMA_CPP_CACHE_FORBIDDEN",
+    "ANY_INFRA_TIMEOUT_RESOURCE_INVALID_OR_MISSING_VERIFIER_RESULT_FINALIZES_SLOT_AS_ZERO"
+  ],
+  "execution_authority": true,
+  "fresh_reality_authority": true,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
