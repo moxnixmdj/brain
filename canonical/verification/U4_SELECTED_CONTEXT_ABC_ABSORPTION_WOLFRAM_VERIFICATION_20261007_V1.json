@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_U4_SELECTED_CONTEXT_ABC_ABSORPTION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_SUBSET_AND_IMPLICATION_PASS__15_INDEPENDENT_ACCEPTANCE_CONJUNCTS__ZERO_CREDIT",
+  "subject": {
+    "governance": "canonical/governance/U4_SELECTED_CONTEXT_ABC_ABSORPTION_20261007_V1.json",
+    "factorizer": "canonical/runtime/terminal_frontier_factorizer_v7_candidate.py",
+    "tests": "canonical/tests/test_terminal_15_conjunct_normal_form_candidate_v1.py",
+    "branch": "truth-repair/u4-into-selected-context-abc-20261007-v1",
+    "current_candidate_commit": "ba6a73d3584365990d09dd779f958b48d38a1cff"
+  },
+  "source_bindings": {
+    "registry": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "v9": "1ec7f2c86534d046e51ddda00001ed287039fc0a",
+    "meta8_absorption": "1eb85b2b58ee53942716e70dbc7f523f08b3f302",
+    "composition_repair": "fb52ecf6e0ba703bbad9b0b626ba85057c438215",
+    "factorizer_v6": "325113ade6a21cd271c9a279f1cdad4a4f7697f7"
+  },
+  "wolfram_results": {
+    "complete_abc_plus_bound_u4_cell_semantics_implies_all_four_u4_conditions": true,
+    "counterexample_with_complete_abc_bound_semantics_and_missing_u4_condition_exists": false,
+    "candidate_independent_direct_count": 15
+  },
+  "verified": [
+    "WHEN A U4 SCOPE IS REPRESENTED IN THE COMPLETE ABC CONTEXT UNIVERSE AND ITS EXACT LOAD_BEARING EVALUATORS/HARD_CONSTRAINTS ARE INCLUDED IN THE CELL PREORDER, THE U4 RESULT IS A CONSEQUENCE OF ABC RATHER THAN A SECOND INDEPENDENT CONJUNCT.",
+    "MISSING A U4 CONTEXT OR SEMANTIC INVALIDATES ABC COMPLETENESS; ABSORPTION DOES NOT WAIVE THE BURDEN.",
+    "THE FOUR U4 ROWS CAN BE REMOVED FROM THE INDEPENDENT ACCEPTANCE NORMAL FORM WHILE REMAINING FAIL_CLOSED ABC OBLIGATIONS.",
+    "TOGETHER WITH THE ALREADY DERIVED COMPOSITION ROW, THE CANDIDATE INDEPENDENT ACCEPTANCE NORMAL FORM HAS 15 DIRECT RESULT CONJUNCTS AND ZERO SEPARATE U ROWS."
+  ],
+  "hard_nonclaims": [
+    "NO U4 PARITY RESULT PROVED.",
+    "NO CLAIM ABC IS CLOSED.",
+    "NO ACCEPTANCE FAMILY CAPABILITY OWNERSHIP OR TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
