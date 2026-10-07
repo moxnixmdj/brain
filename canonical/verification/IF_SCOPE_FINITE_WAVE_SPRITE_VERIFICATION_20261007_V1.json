@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_IF_SCOPE_FINITE_WAVE_SPRITE_VERIFICATION_20261007_V1",
+  "date": "2026-10-07",
+  "status": "PRIVATE_INDEPENDENT_CARRIER_EXECUTION_PASS__160_OF_160__5_OF_5_ATOMS__ZERO_OPUS_RESIDUAL__BOUNDED_SCOPE_ONLY",
+  "carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107"
+  },
+  "frozen_subject": {
+    "beacon_commit": "799ba5bc359a5935eadaf93f8bba437bc79e5e98",
+    "harness_git_blob_sha": "9f31421b9d62f11bf99f6dbeafb104d8621ca5ee",
+    "precommit_git_blob_sha": "bdae02fc05339fb9a8709c26a8e448c475a4006f"
+  },
+  "execution": {
+    "case_count": 160,
+    "brain_success_count": 160,
+    "brain_failure_count": 0,
+    "opus_residual_case_count": 0,
+    "coverage_complete": true,
+    "covered_atom_count": 5,
+    "case_isolation_or_reset_equivalent": true,
+    "unique_case_count": 160,
+    "unique_namespace_count": 160,
+    "by_kind": {
+      "AUTHORIZATION_BOUNDARY": {
+        "passed": 32,
+        "total": 32
+      },
+      "EXPLICIT_ABSTENTION": {
+        "passed": 32,
+        "total": 32
+      },
+      "MULTI_CONSTRAINT": {
+        "passed": 32,
+        "total": 32
+      },
+      "REQUIREMENT_CHANGE": {
+        "passed": 32,
+        "total": 32
+      },
+      "ROUTINE_AMBIGUITY": {
+        "passed": 32,
+        "total": 32
+      }
+    },
+    "case_manifest_sha256": "4c46526bec00b8f4f31f4ac21400d74e6d4a0c3be54bcab8fe535bb7efba5d0b",
+    "report_sha256": "8c6dfeec5c9665beb1df8fa59c85a5289069e491cae7cc78726d7cc95bc5bf73",
+    "audit_errors": []
+  },
+  "interpretation": {
+    "finite_manifest_top_support": true,
+    "comparator_required_for_this_exact_manifest": false,
+    "population_generalization": false,
+    "whole_predicate_closed": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "opus_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
