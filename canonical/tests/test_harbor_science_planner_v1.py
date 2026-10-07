@@ -103,6 +103,25 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(body["tools"][0]["function"]["name"],p.TOOL_NAME)
         self.assertEqual(body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["maxItems"],1)
 
+    def test_length_finish_reason_fails_closed_before_parsing_partial_arguments(self):
+        response=json.dumps({
+            "model":p.MODEL,
+            "choices":[{
+                "finish_reason":"length",
+                "message":{
+                    "tool_calls":[{
+                        "function":{
+                            "name":p.TOOL_NAME,
+                            "arguments":"{\\\"material_requirements\\\":[\\\"R1\\\"],\\\"candidates\\\":[{"
+                        }
+                    }]
+                }
+            }],
+        })
+        with patch.object(p.urllib.request,"urlopen",return_value=Response(response)):
+            with self.assertRaisesRegex(Exception,"OUTPUT_TRUNCATED"):
+                p.plan("synthetic")
+
     def test_missing_tool_call_fails_closed(self):
         response=json.dumps({
             "model":p.MODEL,
