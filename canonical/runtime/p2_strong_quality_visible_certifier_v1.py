@@ -10,6 +10,7 @@ def _fail(errors):
       "schema":SCHEMA,"status":"FAIL_CLOSED","pass":False,
       "errors":sorted(set(errors)),"terminal_authority":False,
       "terminal_credit_delta":0,
+      "binding_authentication_self_certified":False,
     }
 
 def _facts(task):
@@ -169,5 +170,12 @@ def certify(bundle:Any)->dict[str,Any]:
       "native_mechanical_gate_required":native_required,
       "native_mechanical_gate_pass":qb.get("native_mechanical_gate_pass") is True if native_required else None,
       "terminal_authority":False,
+      "binding_authentication_self_certified":False,
+      "upstream_proof_obligations":[
+        "CONTENT_ADDRESSED_LOSSLESS_P2_MEMBERSHIP_PROOF",
+        "CONTENT_ADDRESSED_EXPLICIT_RUBRIC_EQUIVALENCE_PROOF",
+        "CONTENT_ADDRESSED_BASELINE_LAYOUT_NONOBSCURING_PROOF",
+        "CONTENT_ADDRESSED_NATIVE_MECHANICAL_GATE_PROOF_IF_REQUIRED",
+      ],
       "terminal_credit_delta":0,
     }
