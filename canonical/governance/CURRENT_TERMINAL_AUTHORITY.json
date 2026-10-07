@@ -1,12 +1,12 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V4",
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V5",
   "date": "2026-10-07",
-  "status": "ACTIVE_FAIL_CLOSED_SCHEDULING_POINTER__TARGET_SCOPE_CLOSED__FOURTEEN_SOUND_DB_RECORDS__TWO_TOP_LEVEL_PREDICATES__NINETEEN_ABC_REFINEMENTS__SINGLE_U_FRONTIER__TERMINAL_FALSE",
+  "status": "ACTIVE_FAIL_CLOSED_SCHEDULING_POINTER__TARGET_SCOPE_CLOSED__FIFTEEN_SOUND_DB_RECORDS__TWO_TOP_LEVEL_PREDICATES__NINETEEN_ABC_REFINEMENTS__SINGLE_U_FRONTIER__U_CARDINALITY_NOT_INFERRED__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authoritative_sources": {
     "terminal_authority": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
-      "git_blob_sha": "f9f095de0d64ff11ff2e176728123ea54875e316"
+      "git_blob_sha": "ecc4fe225cef9e16e01aec2052219a7834780196"
     },
     "terminal_coverage_partition": {
       "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V7.json",
@@ -21,16 +21,18 @@
       }
     },
     "db_cache_union_truth_repair": {
-      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V7.json",
-      "git_blob_sha": "04345ae31cb96695d60912127c9d69541919e2bd",
-      "sound_predecessor": {
-        "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V6.json",
-        "git_blob_sha": "3b438f63dfdcd208c984251d1addd1334ca4b44e"
-      }
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V8.json",
+      "git_blob_sha": "7d34b15d71a2bb59178c774a1805cd398c2daa86",
+      "independent_verification": {
+        "path": "canonical/verification/DB_EXISTING_EVIDENCE_SATURATION_UNION_WOLFRAM_VERIFY_20261007_V8.json",
+        "git_blob_sha": "26f05f12ca695a524be0f67e5318527123cffbc7",
+        "result": "PASS"
+      },
+      "revoked_P3_whole_cell_restored": false
     },
     "single_abc_frontier": {
-      "path": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V3.json",
-      "git_blob_sha": "097676da717e5ff53b073f957de2dbd6736ae20b"
+      "path": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V4.json",
+      "git_blob_sha": "083c89c8cf1ff671b33fc82f5d66d8e183b864be"
     },
     "semantic_minimum_information": {
       "path": "canonical/governance/TERMINAL_SHARED_SEMANTIC_MINIMUM_INFORMATION_LOWER_BOUND_20261007_V1.json",
@@ -47,11 +49,19 @@
     "router_runtime": {
       "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
       "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
+    },
+    "terminal_frontier_factorizer": {
+      "path": "canonical/runtime/terminal_frontier_factorizer_v7.py",
+      "git_blob_sha": "f8558aa8161524f78b9ed344b5fbd44995211f2c",
+      "test": {
+        "path": "canonical/tests/test_terminal_frontier_factorizer_v7.py",
+        "git_blob_sha": "e2c737994ac803f3f46812f004771dc967be1a06"
+      }
     }
   },
   "live_truth": {
     "fixed_authorized_target_trace_scope_closed": true,
-    "known_sound_D_B_certificate_record_count": 14,
+    "known_sound_D_B_certificate_record_count": 15,
     "revoked_unsound_D_B_record": "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
     "cache_record_count_is_not_semantic_coverage_measure": true,
     "independent_top_level_terminal_predicate_count": 2,
@@ -70,7 +80,11 @@
     "router_mechanical_core_implemented": true,
     "complete_selected_context_ABC_closed": false,
     "D_finality_closed": false,
-    "terminal": false
+    "terminal": false,
+    "U_cardinality_known": false,
+    "structural_abc_refinement_count": 4,
+    "structural_abc_refinement_count_is_U_cardinality": false,
+    "replacement_sound_D_B_record": "MATCHED_AGENCY_STATEFUL_ALL_VALID_CASE_TOKENS_AND_ORDINALS_V1"
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -83,9 +97,10 @@
   },
   "scheduling_lock": [
     "THIS_FILE_IS_THE_STABLE_ENTRY_POINTER_FOR_TERMINAL_SCHEDULING.",
-    "SUBTRACT_ONLY_THE_FOURTEEN_CURRENT_SOUND_D_B_CERTIFICATE_RECORDS__DO_NOT_COUNT_THE_REVOKED_P3_WHOLE_CELL.",
+    "SUBTRACT_ONLY_THE_FIFTEEN_CURRENT_SOUND_V8_D_B_CERTIFICATE_RECORDS__THE_REVOKED_P3_WHOLE_CELL_REMAINS_EXCLUDED__THE_FIFTEENTH_RECORD_IS_THE_SEPARATELY_VERIFIED_STATEFUL_AGENCY_CELL.",
     "WORK_ONLY_ON_DEPLETING_U.",
     "USE_THE_NINETEEN_L1_ROWS_AS_FALSIFICATION_AND_COVERAGE_REFINEMENT_PARTITIONS_INSIDE_ABC.",
+    "DO_NOT_INFER_U_CARDINALITY_FROM_THE_FOUR_STRUCTURAL_ABC_REFINEMENTS_OR_FROM_D_B_RECORD_COUNT.",
     "DO_NOT_RUN_A_BENCHMARK_MERELY_TO_MATCH_A_FIXED_PUBLIC_SCORE_IDENTITY__ONLY_USE_IT_IF_IT_IS_THE_CHEAPEST_IRREDUCIBLE_WITNESS_FOR_AN_UNCOVERED_ABC_REFINEMENT.",
     "FOR_EACH_SURVIVING_COARSE_CELL_FIRST_SEARCH_FOR_ONE_COMMON_CERTIFIED_ADEQUATE_BRAIN_POLICY.",
     "ONLY_IF_NO_COMMON_POLICY_CERTIFICATE_EXISTS_BIND_THE_MINIMUM_TRUTHFUL_SELECTED_DISCRIMINATOR_NEEDED_TO_SEPARATE_POLICY_ADEQUACY_CLASSES.",
@@ -100,12 +115,15 @@
     "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION_AS_SOUND_DB",
     "FIFTEEN_DIRECT_RESULT_ROWS_AS_A_SEPARATE_TOP_LEVEL_TERMINAL_QUEUE",
     "GENERAL_SEMANTIC_WORLD_MODEL_AS_GLOBAL_PREREQUISITE",
-    "GENERAL_INTELLIGENT_ROUTER_AS_GLOBAL_PREREQUISITE"
+    "GENERAL_INTELLIGENT_ROUTER_AS_GLOBAL_PREREQUISITE",
+    "CURRENT_TERMINAL_AUTHORITY_POINTER_V4_FOURTEEN_RECORD_CACHE",
+    "TERMINAL_FRONTIER_FACTORIZER_V6_D15_U4_CARDINALITY_PROJECTION"
   ],
   "hard_nonclaims": [
     "NO_CLAIM_U_IS_EMPTY.",
+    "NO_CLAIM_U_HAS_FOUR_ELEMENTS.",
     "NO_CLAIM_THE_NINETEEN_REFINEMENT_PARTITIONS_ARE_CURRENTLY_COVERED.",
-    "NO_CLAIM_FOURTEEN_SOUND_RECORDS_EXHAUST_D_B_OR_THE_CLOSED_TRACE_SCOPE.",
+    "NO_CLAIM_FIFTEEN_SOUND_RECORDS_EXHAUST_D_B_OR_THE_CLOSED_TRACE_SCOPE.",
     "NO_CLAIM_D_FINALITY_IS_CLOSED.",
     "NO_TERMINAL_CREDIT."
   ],
