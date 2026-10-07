@@ -3,7 +3,7 @@ from __future__ import annotations
 import copy
 import hashlib
 
-from canonical.runtime.finance_proof_carrying_source_gate_v1 import verify_source_semantic_coverage
+from canonical.runtime.finance_proof_carrying_source_gate_v1 import (\n    configured_finance_terminal_decision,\n    verify_source_semantic_coverage,\n)
 from canonical.runtime.source_contract_compiler import atomize_source, semantic_unit_id
 
 
@@ -100,3 +100,12 @@ def test_requirement_evidence_not_in_source_manifest_fails_closed():
     out = verify_source_semantic_coverage(b)
     assert out["pass"] is False
     assert any(x.startswith("REQUIREMENT_EVIDENCE_NOT_IN_SOURCE_MANIFEST:R1:") for x in out["errors"])
+
+
+def test_invalid_source_blocks_before_downstream_judgment():
+    b = bundle()
+    b["source_semantic_coverage"]["extractor_units"]["extractor-b"][0]["semantic_fingerprint"] = "different"
+    out = configured_finance_terminal_decision({"decision": "CONCLUDE"}, b)
+    assert out["accepted"] is False
+    assert out["status"] == "TERMINAL_BLOCKED"
+    assert "FINANCE_SOURCE_SEMANTIC_COVERAGE_FAIL_CLOSED" in out["errors"]
