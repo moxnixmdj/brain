@@ -142,3 +142,33 @@ def test_unknown_policy_atom_is_rejected():
     out = verify_policy_manifest(CONTRACT, SCHEMA, m)
     assert out["pass"] is False
     assert "POLICY_BASIS_UNKNOWN_ATOM:P:CONTRACT::FAKE" in out["errors"]
+
+
+def test_policy_condition_atom_cannot_live_outside_declared_basis():
+    a = _atoms()
+    m = _manifest()
+    m["policies"][0]["basis_atom_ids"].remove(a["allowed_information"])
+    out = verify_policy_manifest(CONTRACT, SCHEMA, m)
+    assert out["pass"] is False
+    assert (
+        "POLICY_CONDITION_ATOM_OUTSIDE_BASIS:P:" + a["allowed_information"]
+        in out["errors"]
+    )
+
+
+def test_all_canonical_registry_contracts_compile_required_base_fields():
+    import json
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[2]
+    schema = json.loads(
+        (root / "canonical/governance/BEHAVIORAL_CONTRACT_SCHEMA_V1.json").read_text()
+    )
+    registry = json.loads(
+        (root / "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V2.json").read_text()
+    )
+    rows = registry["active_contracted_residuals"]
+    assert len(rows) == 13
+    for row in rows:
+        out = compile_contract_basis(row, schema)
+        assert out["pass"] is True, (row["behavior_id"], out)
+        assert len(out["obligations"]) == len(schema["required_behavior_fields"])
