@@ -73,7 +73,8 @@
       "git_blob_sha": "28692768a21e95b51e847417cf5ba2343587e4aa"
     },
     "db_saturation_v4_verification": {
-      "path": "canonical/verification/V16_DB_EXISTING_EVIDENCE_SATURATION_INDEPENDENT_VERIFICATION_20261007_V4.json"
+      "path": "canonical/verification/V16_DB_EXISTING_EVIDENCE_SATURATION_INDEPENDENT_VERIFICATION_20261007_V4.json",
+      "git_blob_sha": "7e3ef2678d4e3b5cf08f8a122a5c2dbed36f1be4"
     }
   },
   "current_truth": {
