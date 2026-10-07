@@ -63,8 +63,17 @@ def solve(public:Mapping[str,Any])->dict[str,Any]:
             return _fail("NORMALIZED_LISTS_REQUIRED")
         if not isinstance(constraints,Mapping):
             return _fail("CONSTRAINTS_REQUIRED")
-        if task.get("audience_semantics_compiled_into_constraints") is not True:
-            return _fail("AUDIENCE_SEMANTICS_MUST_BE_PRECOMPILED")
+        audience_requirements=task.get("audience_requirements")
+        if not isinstance(audience_requirements,list) or not audience_requirements:
+            return _fail("EXPLICIT_AUDIENCE_REQUIREMENTS_REQUIRED")
+        for row in audience_requirements:
+            if not isinstance(row,Mapping):
+                return _fail("AUDIENCE_REQUIREMENT_ROW_INVALID")
+            key=row.get("constraint_key")
+            if not isinstance(key,str) or key not in constraints:
+                return _fail("AUDIENCE_REQUIREMENT_CONSTRAINT_MISSING")
+            if constraints.get(key)!=row.get("required_value"):
+                return _fail("AUDIENCE_REQUIREMENT_NOT_COMPILED_INTO_CONSTRAINT")
         by_id=_claim_index(claims)
 
         guard_input={
@@ -117,8 +126,8 @@ def solve(public:Mapping[str,Any])->dict[str,Any]:
             "correctly_provenanced_material_claims":n,
             "preserved_required_uncertainty_units":u,
             "total_required_uncertainty_units":u,
-            "satisfied_audience_requirements":1,
-            "total_audience_requirements":1,
+            "satisfied_audience_requirements":len(audience_requirements),
+            "total_audience_requirements":len(audience_requirements),
             "satisfied_format_style_constraints":format_constraint_count,
             "total_format_style_constraints":format_constraint_count,
             "output_budget_pass":True,
@@ -153,7 +162,7 @@ def solve(public:Mapping[str,Any])->dict[str,Any]:
             "evaluator_facts":facts,
             "selected_claim_ids":list(by_id),
             "uncertainty_claim_ids":sorted(uncertainty),
-            "scope":"EXPLICIT_BOUND_SUPPORT__ALL_MATERIAL_CLAIMS_REQUIRED_AND_DECISION_RELEVANT__FINAL_VERBATIM_TEXT__SUPPORTED_C2_CONSTRAINT_LANGUAGE__FEASIBLE_BUDGET",
+            "scope":"EXPLICIT_BOUND_SUPPORT__ALL_MATERIAL_CLAIMS_REQUIRED_AND_DECISION_RELEVANT__FINAL_VERBATIM_TEXT__EXPLICIT_AUDIENCE_REQUIREMENTS_MECHANICALLY_BOUND_TO_SUPPORTED_C2_CONSTRAINTS__FEASIBLE_BUDGET",
             "terminal_authority":False,
             "promotion_authority":False,
             "fresh_reality_authority":False,
@@ -181,7 +190,10 @@ if __name__=="__main__":
           {"claim_id":"C1","status":"SUPPORTED","evidence_ids":["E1"]},
           {"claim_id":"C2","status":"CONFLICTED","evidence_ids":["E2"]},
         ],
-        "audience_semantics_compiled_into_constraints":True,
+        "audience_requirements":[
+          {"constraint_key":"output_format","required_value":"SECTIONED_MARKDOWN"},
+          {"constraint_key":"require_title","required_value":True}
+        ],
         "constraints":{
           "output_format":"SECTIONED_MARKDOWN",
           "citation_mode":"INLINE_SOURCE_IDS",
