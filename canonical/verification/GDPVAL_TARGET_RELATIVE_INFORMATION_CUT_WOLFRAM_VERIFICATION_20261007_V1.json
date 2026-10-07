@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_TARGET_RELATIVE_INFORMATION_CUT_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_PASS__TWO_WORLD_INFORMATION_CUT__15_CLASS_9_LANE_SET_COVER__ZERO_CREDIT",
+  "subjects": {
+    "information_cut": {
+      "path": "canonical/governance/GDPVAL_TARGET_RELATIVE_INFORMATION_CUT_20261007_V1.json",
+      "git_blob_sha": "f4083785161f33b6e36761cc50688827ddd33b41"
+    },
+    "reality_cut": {
+      "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V7.json",
+      "git_blob_sha": "222b98db2d2b762e95fdfca1a02ede9973230fee"
+    }
+  },
+  "wolfram": {
+    "expression_summary": "SAT_IDENTICAL_OBSERVATION_OPPOSITE_HIDDEN_TARGETS__UNSAT_ONE_DECISION_MATCHES_BOTH__EXACT_SET_COVER",
+    "two_world_counterexamples": [
+      {
+        "o1": true,
+        "o2": true,
+        "h1": true,
+        "h2": false
+      },
+      {
+        "o1": true,
+        "o2": true,
+        "h1": false,
+        "h2": true
+      }
+    ],
+    "same_decision_matches_opposite_targets_satisfiability_count": 0,
+    "set_cover_minimum_lane_count": 9,
+    "set_cover_unique_minimum": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5",
+      "L6",
+      "L7",
+      "L8",
+      "L9"
+    ],
+    "result": "PASS"
+  },
+  "verified": [
+    "IDENTICAL_BOUND_PUBLIC_OBSERVATION_CAN_HAVE_TWO_EXTENSIONS_WITH_OPPOSITE_PREVIOUSLY_UNOBSERVED_BRAIN_VS_OPUS_TARGET_OUTCOMES.",
+    "NO_SINGLE_DETERMINISTIC_DECISION_FROM_THAT_IDENTICAL_OBSERVATION_MATCHES_BOTH_OPPOSITE_TARGET_TRUTHS.",
+    "RESTORING_GDPVAL_AA_OWNER_LAYER_INSIDE_EXISTING_L4_PRODUCES_15_CURRENT_POSITIVE_REALITY_CLASSES_WITH_MINIMUM_CURRENT_BOUND_LANE_COUNT_9.",
+    "ALL_PREDECESSOR_REALITY_REPAIRS_REMAIN_PRESERVED_BY_CLONING_THE_CURRENT_CUT."
+  ],
+  "hard_nonclaims": [
+    "NO_GDPVAL_CLOSURE.",
+    "NO_BRAIN_OWNER_ELO.",
+    "NO_U_EMPTY_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
