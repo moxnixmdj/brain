@@ -6536,9 +6536,21 @@ def run_goal(step, mission):
     return _stamp_cognition_provenance(_run_goal_unstamped(step, mission))
 
 
+def _authorize_certificate_gated_step(step, mission):
+    from canonical.runtime.certificate_gated_route_execution_binding_v1 import (
+        RouteExecutionBindingError,
+        authorize_step,
+    )
+    try:
+        return authorize_step(root=ROOT, mission=mission, step=step)
+    except RouteExecutionBindingError as exc:
+        raise Blocker("CERTIFICATE_GATED_ROUTE_BINDING_BLOCKED:"+str(exc)) from exc
+
+
 def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
     mission=mission or {}
+    route_binding=_authorize_certificate_gated_step(step, mission)
     mode=mission.get("cross_step_context_mode")
     if mode not in (None,DECLARED_CROSS_STEP_CONTEXT_MODE):
         raise Blocker("CROSS_STEP_CONTEXT_MODE_UNKNOWN:"+str(mode))
@@ -6548,12 +6560,19 @@ def execute_step(step, prior_results=None, mission=None):
             or prior_results.get("mode")!=DECLARED_CROSS_STEP_CONTEXT_MODE
         ):
             raise Blocker("DECLARED_CROSS_STEP_CONTEXT_REQUIRED")
-        return run_shell(step, prior_results)
-    if adapter=="http":
-        return run_http(step)
-    if adapter=="goal":
-        return run_goal(step, mission or {})
-    raise Blocker("MISSING_ADAPTER:"+adapter)
+        result=run_shell(step, prior_results)
+    elif adapter=="http":
+        result=run_http(step)
+    elif adapter=="goal":
+        result=run_goal(step, mission or {})
+    else:
+        raise Blocker("MISSING_ADAPTER:"+adapter)
+    if route_binding is not None:
+        if not isinstance(result,dict):
+            raise Blocker("CERTIFICATE_GATED_ROUTE_RESULT_OBJECT_REQUIRED")
+        result=dict(result)
+        result["certificate_gated_route_binding"]=route_binding
+    return result
 
 def verify(step,result):
     v=step.get("verify",{})
