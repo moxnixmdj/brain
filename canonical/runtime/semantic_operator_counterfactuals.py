@@ -201,6 +201,43 @@ def _obligation_id(operator_id: str, kind: str) -> str:
     return "CF-" + hashlib.sha256(f"{operator_id}\0{kind}".encode("utf-8")).hexdigest()[:20]
 
 
+_ACCEPT_KINDS = frozenset({
+    "BOUNDARY_VALUE_MUST_BE_ACCEPTED",
+    "EXACT_VALUE_MUST_BE_ACCEPTED",
+})
+_DISAMBIGUATE_KINDS = frozenset({
+    "ANY_SEMANTICS_MUST_BE_DISAMBIGUATED",
+    "UNLESS_EXCEPTION_BRANCH_MUST_BE_DISTINGUISHED",
+})
+_REJECT_KINDS = frozenset({
+    "BELOW_BOUND_MUST_BE_REJECTED",
+    "ABOVE_BOUND_MUST_BE_REJECTED",
+    "BELOW_EXACT_MUST_BE_REJECTED",
+    "ABOVE_EXACT_MUST_BE_REJECTED",
+    "PROHIBITED_ACTION_MUST_BE_REJECTED",
+    "REVERSED_TEMPORAL_ORDER_MUST_BE_REJECTED",
+    "SINGLE_COUNTEREXAMPLE_ITEM_MUST_FAIL_UNIVERSAL",
+    "OUTSIDE_ALLOWED_SET_MUST_BE_REJECTED",
+    "ANTECEDENT_TRUE_CONSEQUENT_FALSE_MUST_FAIL",
+    "SINGLE_EXCEPTION_MUST_FAIL_ALWAYS",
+})
+
+
+def expected_disposition_for_counterfactual_kind(kind: str) -> str | None:
+    """Return the only disposition compatible with a generated obligation kind.
+
+    Unknown kinds intentionally have no default. A future obligation must bind its
+    disposition semantics explicitly before coverage can pass.
+    """
+    if kind in _ACCEPT_KINDS:
+        return "ACCEPT"
+    if kind in _DISAMBIGUATE_KINDS:
+        return "DISAMBIGUATE"
+    if kind in _REJECT_KINDS:
+        return "REJECT"
+    return None
+
+
 def generate_counterfactual_obligations(
     text: str,
     *,
@@ -308,10 +345,20 @@ def validate_counterfactual_coverage(
             errors.append(f"DUPLICATE_COUNTERFACTUAL_SCENARIO:{oid}:{kind}")
         observed.add(key)
 
-        # A scenario must have an independently observable expected disposition.
+        # Presence alone is insufficient: the claimed disposition must match
+        # the semantics implied by the Brain-generated counterfactual obligation.
         disposition = str(scenario.get("expected_disposition", ""))
         if disposition not in {"ACCEPT", "REJECT", "DISAMBIGUATE"}:
             errors.append(f"COUNTERFACTUAL_DISPOSITION_INVALID:{oid}:{kind}")
+        else:
+            required_disposition = expected_disposition_for_counterfactual_kind(kind)
+            if required_disposition is None:
+                errors.append(f"COUNTERFACTUAL_KIND_WITHOUT_DISPOSITION_RULE:{oid}:{kind}")
+            elif disposition != required_disposition:
+                errors.append(
+                    f"COUNTERFACTUAL_DISPOSITION_MISMATCH:{oid}:{kind}:"
+                    f"{disposition}!={required_disposition}"
+                )
 
     for key, obligation in required.items():
         if key not in observed:
