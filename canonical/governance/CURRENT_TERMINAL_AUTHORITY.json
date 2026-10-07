@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34",
   "date": "2026-10-07",
-  "status": "ACTIVE_FAIL_CLOSED_FROZEN_19_FAMILY_TERMINAL_ROOT__OPTIONAL_STRONGER_ROUTES_NONPREEMPTIVE__TERMINAL_FALSE",
+  "status": "ACTIVE_FAIL_CLOSED_FROZEN_19_FAMILY_TERMINAL_ROOT__6_ACCEPTANCE_PASS__5_VERIFIED_OWNED__16_OF_38_ATOMS_PROVED__22_OPEN__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -943,13 +943,16 @@
     "frozen_terminal_family_count": 19,
     "frozen_terminal_family_pass_count": 5,
     "frozen_terminal_family_open_count": 14,
-    "frozen_atomic_predicates_proved": 14,
-    "frozen_atomic_predicates_unresolved": 24,
+    "frozen_atomic_predicates_proved": 16,
+    "frozen_atomic_predicates_unresolved": 22,
     "frozen_atomic_predicates_total": 38,
     "universal_trace_not_x_required_for_terminal": false,
     "universal_trace_not_x_optional_stronger_route": true,
     "bureaucracy_scheduler_truth_reconciled": true,
-    "optional_not_x_is_mandatory_terminal_root": false
+    "optional_not_x_is_mandatory_terminal_root": false,
+    "frozen_terminal_family_acceptance_pass_count": 6,
+    "frozen_terminal_family_acceptance_open_count": 13,
+    "frozen_terminal_family_verified_owned_count": 5
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -1171,5 +1174,43 @@
     "mandatory_terminal_predicate": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
     "optional_stronger_route": "PROVE_NOT_X_OVER_SOUND_OBSERVABLE_TRACE_ESCAPE_MODEL",
     "current_truth": "5_OF_19_PASS__14_OF_19_OPEN__TERMINAL_FALSE"
+  },
+  "instruction_following_acceptance_reconciliation_20261007_v1": {
+    "status": "PROMOTED_EXISTING_INDEPENDENT_PROOF__ZERO_FRESH_REALITY__NO_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+    "promoted_predicates": [
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+    ],
+    "acceptance_state": "PASS",
+    "ownership_state": "OPEN",
+    "prior_atomic_state": "14_OF_38_PROVED__24_OPEN",
+    "current_atomic_state": "16_OF_38_PROVED__22_OPEN",
+    "evidence": [
+      {
+        "path": "canonical/governance/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_20261007_V1.json",
+        "git_blob_sha": "307ea91b0150db9d6cca9580e1b7a399035929c1"
+      },
+      {
+        "path": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f"
+      }
+    ],
+    "acceptance_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "d6f6c4d5f86116073f3ecab08208051dc593f332"
+    },
+    "terminal_closure_manifest": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "e197927a5d976409ca38190b2977b2bc78936da5"
+    },
+    "accounting": {
+      "incremental_spend_usd": 0,
+      "fresh_target_reality_units_consumed": 0,
+      "acceptance_predicate_credit_delta": 2,
+      "family_acceptance_credit_delta": 1,
+      "ownership_credit_delta": 0,
+      "terminal_credit_delta": 0
+    }
   }
 }
