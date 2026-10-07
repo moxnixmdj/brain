@@ -68,3 +68,45 @@ def test_nearby_unproved_language_fails_closed():
         "The document is a Word file.",
     ]:
         assert compile_criterion(text)["status"]=="UNRESOLVED"
+
+
+def test_generic_structural_forms_are_bounded_and_not_role_inference():
+    samples={
+        "The final deliverable is provided as an Excel workbook in .xlsx format.":"SINGLE_XLSX_FORMAT",
+        "A single PDF file is delivered.":"SINGLE_PDF_FORMAT",
+        "Submission is a single-page PDF":"EXACT_SINGLE_PAGE_PDF",
+        "The workbook contains a worksheet named exactly 'Sample Size Calculation' (case-insensitive, ignoring surrounding spaces).":"EXACT_XLSX_SHEET_NAME",
+        "The zip archive contains a top-level file named README.md.":"EXACT_ZIP_TOP_LEVEL_FILE",
+        "Deliverable includes a Terraform file named main.tf":"EXACT_DELIVERABLE_FILE_EXISTS",
+    }
+    for text,rule in samples.items():
+        out=compile_criterion(text)
+        assert out["status"]=="COMPILED_SUFFICIENT_CONDITION",(text,out)
+        assert out["rule"]==rule,(text,out)
+    for text in [
+        "A memo file in PDF format ('.pdf') is submitted.",
+        "The checklist PDF is no more than five pages in total, including any appendices.",
+        "The PDF looks polished and client-ready.",
+    ]:
+        assert compile_criterion(text)["status"]=="UNRESOLVED"
+
+def test_xlsx_sheet_and_zip_top_level_verifiers_are_byte_structural():
+    with tempfile.TemporaryDirectory() as td:
+        td=Path(td)
+        x=td/"book.xlsx"
+        with zipfile.ZipFile(x,"w") as z:
+            z.writestr("[Content_Types].xml","<Types/>")
+            z.writestr("xl/workbook.xml","""<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheets><sheet name="Sample Size Calculation" sheetId="1"/></sheets></workbook>""")
+        c=compile_criterion("The workbook contains a worksheet named exactly 'Sample Size Calculation' (case-insensitive, ignoring surrounding spaces).")
+        assert verify_compiled(c,output_paths=[str(x)])["satisfied"] is True
+
+        zpath=td/"submission.zip"
+        with zipfile.ZipFile(zpath,"w") as z:
+            z.writestr("README.md","ok")
+            z.writestr("nested/README.md","not-top-level")
+        c=compile_criterion("The zip archive contains a top-level file named README.md.")
+        assert verify_compiled(c,output_paths=[str(zpath)])["satisfied"] is True
+
+def test_filename_capture_does_not_swallow_sentence_period():
+    c=compile_criterion("The zip archive contains a top-level file named README.md.")
+    assert c["predicates"][0]["basename"]=="README.md"
