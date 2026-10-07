@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_V16_SEMANTIC_QUOTIENT_INFORMATION_POLICY_INDEPENDENT_REPLAY_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_CROSS_SPRITE_BYTE_IDENTICAL_REPLAY_PASS__ZERO_CREDIT",
+  "subject": "canonical/governance/V16_TERMINAL_SEMANTIC_QUOTIENT_INFORMATION_POLICY_20261007_V1.json",
+  "primary_carrier": {
+    "sprite": "brain-c2-independent-replay-v3",
+    "sprite_id": "sprite-b5cc7147-1e70-4905-8176-d3fa129aac58"
+  },
+  "independent_carrier": {
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e"
+  },
+  "byte_identity": {
+    "canonical/runtime/terminal_semantic_quotient_v1.py": {
+      "sha256": "14f69f2154d823b8131ae5c71f17a736fde73fe1e00d108163992ef89be2a690",
+      "size": 4803
+    },
+    "canonical/tests/test_terminal_semantic_quotient_v1.py": {
+      "sha256": "e31db2b916d25120f4d15c7f341eb75aef46a162d4720275bbf069a5fdcc4ae9",
+      "size": 1784
+    },
+    "canonical/runtime/semantic_information_frontier_v1.py": {
+      "sha256": "7f03cc445bbd610970dfe34c386a814d012747c2659db29a6f4555297d0d90ec",
+      "size": 5781
+    },
+    "canonical/tests/test_semantic_information_frontier_v1.py": {
+      "sha256": "5362785832afb5a0a31a5c03d7a15cfaa6c42a02e3f6b91182d59f63e4523378",
+      "size": 3319
+    }
+  },
+  "primary_results": {
+    "terminal_semantic_quotient": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "successful": true
+    },
+    "semantic_information_frontier": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "successful": true
+    }
+  },
+  "independent_results": {
+    "terminal_semantic_quotient": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "successful": true
+    },
+    "semantic_information_frontier": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "successful": true
+    }
+  },
+  "negative_canaries_verified": [
+    "FALSE_MERGE_OF_TERMINALLY_DISTINGUISHABLE_STATES_FAILS_CLOSED",
+    "INCOMPLETE_TERMINAL_SIGNATURE_FAILS_CLOSED",
+    "INCOMPLETE_HYPOTHESIS_SET_FAILS_CLOSED",
+    "INCOMPLETE_OBSERVATION_OUTCOME_MAP_FAILS_CLOSED",
+    "TERMINALLY_DISTINCT_BUT_OBSERVATIONALLY_INSEPARABLE_WORLDS_FAIL_CLOSED",
+    "REDUNDANT_SEMANTIC_SPLITS_ARE_RECOGNIZED_AS_SAFE_BUT_NONMINIMAL"
+  ],
+  "positive_properties_verified": [
+    "TERMINALLY_EQUIVALENT_WORLDS_NEED_NOT_BE_DISTINGUISHED",
+    "CHEAPEST_TERMINALLY_SUFFICIENT_DISCRIMINATOR_BEATS_EXPENSIVE_FULL_WORLD_IDENTIFICATION",
+    "MULTISTEP_FINITE_POLICY_RETURNS_EXACT_MINIMUM_WORST_CASE_COST_ON_DECLARED_MODEL"
+  ],
+  "hard_nonclaims": [
+    "NO_CELL_SPECIFIC_V16_ADEQUACY_CERTIFICATE_CREATED_BY_THESE_GENERIC_TESTS.",
+    "NO_U_CLOSURE.",
+    "NO_D_FINALITY.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
