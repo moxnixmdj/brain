@@ -651,7 +651,7 @@
     },
     "frozen_19_acceptance_proof_shape_quotient": {
       "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
-      "git_blob_sha": "329979e5ae89d62dbffad8ddf4d562c2580aa4ff",
+      "git_blob_sha": "e31382ec9bc54127d3579a5277091cfdc54cca66",
       "note": "17_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__SYNTHESIS_MATCHED_QUALITY_METRIC_IDENTITY_DEMOTED_BY_INDEPENDENT_COUNTERMODEL"
     },
     "load_bearing_acceptance_truth_basis_reconciliation": {
@@ -679,7 +679,7 @@
     },
     "frozen_acceptance_regime_classification": {
       "path": "canonical/governance/FROZEN_18_ACCEPTANCE_REGIME_EXHAUSTIVE_CLASSIFICATION_20261007_V1.json",
-      "git_blob_sha": "2c88520f0e79ff076892455054e9de71e71878aa",
+      "git_blob_sha": "35be46d0d6013486480693e818b8e8a473a6aa04",
       "note": "CURRENT_17_OBLIGATIONS_CLASSIFIED_AS_15_OBJECTIVE_PLUS_2_QUALITATIVE__RAW_SYNTHESIS_SEMANTICS_REMAIN_SHARED_ABC_FRONTIER"
     }
   },
