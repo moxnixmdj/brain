@@ -82,3 +82,20 @@ def test_terminal_without_adequacy_fails_closed():
     out=evaluate(p)
     assert out["pass"] is False
     assert out["reason"]=="TERMINAL_ADEQUACY_UNPROVED"
+
+def test_singleton_nonterminal_is_solvability_gap_not_observability_gap():
+    p=base()
+    p["states"][0]["policy_region_ids"]=["r0"]
+    p["states"][0]["discriminators"]=[]
+    out=evaluate(p)
+    assert out["pass"] is False
+    assert out["solvability_gap_state_ids"]==["s0"]
+    assert out["observability_gap_state_ids"]==[]
+
+def test_multi_region_without_separator_is_observability_gap():
+    p=base()
+    p["states"][0]["discriminators"]=[]
+    out=evaluate(p)
+    assert out["pass"] is False
+    assert out["observability_gap_state_ids"]==["s0"]
+    assert out["solvability_gap_state_ids"]==[]
