@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_SYMBOLIC_ADMISSION_PREDICATE_SUCCESSOR_DEPLOYMENT_V1",
+  "date": "2026-10-07",
+  "status": "DEPLOYED_RUNTIME__LOCAL_DETERMINISTIC_REPLAY_4_OF_4_PASS__INDEPENDENT_PUBLIC_REPLAY_NOT_CLAIMED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "purpose": "CLOSE_THE_LIVE_IMPLEMENTATION_SEAM_BETWEEN_EXACT_CONTEXT_DIGEST_ADMISSION_AND_EXECUTABLE_CONTENT_ADDRESSED_SYMBOLIC_ADMISSION_REGIONS_USED_BY_THE_RESIDUAL_COMPLEMENT_UNSAT_NORMAL_FORM",
+  "runtime": {
+    "path": "canonical/runtime/symbolic_admission_predicate_successor_v1.py",
+    "git_blob_sha": "c2f23feb71c233d265344337f3e588fee161f169"
+  },
+  "tests": {
+    "path": "canonical/tests/test_symbolic_admission_predicate_successor_v1.py",
+    "git_blob_sha": "fd235348907956240156b23947c7fd9e4d3bd7db",
+    "local_replay": "4 passed in 0.05s"
+  },
+  "properties": [
+    "RESTRICTED_DETERMINISTIC_PREDICATE_DSL_ONLY__NO_DYNAMIC_CODE_EVAL",
+    "EXACT_EXPRESSION_SHA256_BINDING",
+    "EXACT_SCOPE_ROUTE_AND_ADEQUACY_CERTIFICATE_BINDING",
+    "INDEPENDENT_VERIFIED_SOUNDNESS_RECEIPT_REQUIRED_BEFORE_A_PREDICATE_IS_DEPLOYABLE",
+    "EXECUTABLE_SYMBOLIC_REGION_SELECTION_AVAILABLE",
+    "NO_SELECTED_COVER_COMPLETENESS_OR_U_EMPTY_AUTHORITY"
+  ],
+  "terminal_effect": {
+    "symbolic_admission_predicate_successor_deployed": true,
+    "residual_complement_unsat_proved": false,
+    "U_empty": false,
+    "terminal": false
+  },
+  "remaining_single_root": "FORM_THE_EXACT_SOUND_ADMISSION_PREDICATE_SET_OVER_S_TRACE_AND_PROVE_S_TRACE_AND_NOT_ANY_SOUND_ADMISSION_PREDICATE_IS_UNSAT__OR_RETURN_ONE_CONSTRUCTIVE_COUNTEREXAMPLE",
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_NEW_PREDICATE_IS_SOUND_WITHOUT_ITS_INDEPENDENT_RECEIPT",
+    "NO_CLAIM_CURRENT_SOUND_PREDICATE_SET_COVERS_S_TRACE",
+    "NO_CLAIM_RESIDUAL_COMPLEMENT_IS_UNSAT",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
