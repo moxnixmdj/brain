@@ -107,3 +107,92 @@ def test_verified_facts_may_resume_persistent_state_without_reproposal():
     )
     assert out["pass"] is True
     assert out["trace"] == []
+
+
+def test_typed_acceptance_program_verifier_extends_solver_without_new_task_python():
+    problem = {
+        "initial_facts": [],
+        "target_effects": ["QUALITY_VERIFIED"],
+        "capabilities": [{
+            "id": "quality",
+            "requires": [],
+            "provides": ["QUALITY_VERIFIED"],
+            "cost": 1,
+            "result_fields": [],
+            "action": {
+                "type": "verified_policy",
+                "verifier_id": "TYPED_ACCEPTANCE_PROGRAM_V1",
+                "verifier_payload": {
+                    "program": {
+                        "schema": "PROJECT_BRAIN_TYPED_ACCEPTANCE_PROGRAM_SPEC_V1",
+                        "fields": [
+                            {"id": "minimum", "type": "number", "dimension": "score", "source": "trusted"},
+                            {"id": "score", "type": "number", "dimension": "score", "source": "candidate"},
+                            {"id": "safe", "type": "boolean", "dimension": "dimensionless", "source": "candidate"},
+                        ],
+                        "accept_when": {
+                            "op": "and",
+                            "args": [
+                                {
+                                    "op": "ge",
+                                    "left": {"op": "ref", "id": "score"},
+                                    "right": {"op": "ref", "id": "minimum"},
+                                },
+                                {"op": "ref", "id": "safe"},
+                            ],
+                        },
+                    },
+                    "trusted_values": {"minimum": 10.0},
+                },
+            },
+        }],
+    }
+    out = run(
+        problem,
+        proposal_packets={
+            "quality": [{"candidate_values": {"score": 12.0, "safe": True}}],
+        },
+    )
+    assert out["pass"] is True, out
+    assert "QUALITY_VERIFIED" in out["verified_facts"]
+
+
+def test_typed_acceptance_program_falsifies_bad_candidate():
+    problem = {
+        "initial_facts": [],
+        "target_effects": ["QUALITY_VERIFIED"],
+        "capabilities": [{
+            "id": "quality",
+            "requires": [],
+            "provides": ["QUALITY_VERIFIED"],
+            "cost": 1,
+            "result_fields": [],
+            "action": {
+                "type": "verified_policy",
+                "verifier_id": "TYPED_ACCEPTANCE_PROGRAM_V1",
+                "verifier_payload": {
+                    "program": {
+                        "schema": "PROJECT_BRAIN_TYPED_ACCEPTANCE_PROGRAM_SPEC_V1",
+                        "fields": [
+                            {"id": "minimum", "type": "number", "dimension": "score", "source": "trusted"},
+                            {"id": "score", "type": "number", "dimension": "score", "source": "candidate"},
+                        ],
+                        "accept_when": {
+                            "op": "ge",
+                            "left": {"op": "ref", "id": "score"},
+                            "right": {"op": "ref", "id": "minimum"},
+                        },
+                    },
+                    "trusted_values": {"minimum": 10.0},
+                },
+            },
+        }],
+    }
+    out = run(
+        problem,
+        proposal_packets={
+            "quality": [{"candidate_values": {"score": 9.0}}],
+        },
+    )
+    assert out["pass"] is False
+    assert out["status"] == "ALL_AVAILABLE_PROPOSALS_FALSIFIED"
