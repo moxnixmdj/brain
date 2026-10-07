@@ -8,7 +8,7 @@
     "current_route":{"path":"canonical/governance/TB_SCIENCE_CURRENT_ROUTE_REBIND_20261005_V1.json","git_blob_sha":"dae0296799b44d8d97a4bea402754ebfbf43cdc8"},
     "manifest":{"path":"canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json","git_blob_sha":"6dfa880b1f68881531afbba6ca211681801fd19b"},
     "target_tuple":{"path":"canonical/governance/OPUS55_SCORE_TARGET_TUPLE_BINDINGS_20261005_V1.json","git_blob_sha":"9bbd45f066ab94fa3f5110b9cc5efcd4118d1367"},
-    "historical_five_zero_ledger":{"path":"canonical/governance/TB_SCIENCE_CURRENT_TARGET_EXECUTION_OVERLAY_V3.json","git_blob_sha":"ca0c72ad78aae4bff6adb8eb6a08e1a3b035e37d"},
+    "historical_five_zero_ledger":{"path":"canonical/governance/TB_SCIENCE_CURRENT_TARGET_EXECUTION_OVERLAY_V3.json","git_blob_sha":"7081b77ba6c16c7c10050e1608e212cba8691be3"},
     "invalid_tranche2_revocation_commit":"a59e1beb356e12eaf5dee00c812fbabdcc4356ad",
     "integration_verification":{"path":"canonical/verification/TB_SCIENCE_PATCHED_REAL_HARBOR_INTEGRATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json","git_blob_sha":"4512996a6698463be367052b13a891bd0f647f73"}
   },
