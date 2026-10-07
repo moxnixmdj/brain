@@ -1,0 +1,10 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_FUSED_GENERIC_CERTIFICATE_CHECKER_V2_SPRITE_VERIFICATION",
+  "date":"2026-10-07",
+  "status":"PASS",
+  "carrier":{"provider":"SPRITES","sprite_name":"h100-real-image-v1","sprite_id":"sprite-68a466f6-88d5-493d-93f3-2b85377836a3"},
+  "exact_blobs":{"fused_checker":"fee363cc8aaf038b6d083621de805299cc5b8901","v10":"91bdde7a88e90bb6a2e411072a1dadb715ff7052","certificate":"f4f55eba84a33ba918a37087a88e76ccebcf98e4"},
+  "replay":{"scalar_equations":65,"structural_equations":84,"congruence_classes":809,"witness_classes":809,"witness_inputs":823,"cross_component_collision":false},
+  "bytes":{"fused_checker_payload":1572,"checker_certificate_joint":1974,"full_joint":3590,"full_joint_sha256":"99ecbdae988ef54c22d5071c5d538d59ae781d7d457d315de0cde4c5935373c4"},
+  "hard_nonclaims":["SAME_FIVE_GENERIC_LAW_TRUST_BOUNDARY","ZERO_TERMINAL_CREDIT"]
+}
