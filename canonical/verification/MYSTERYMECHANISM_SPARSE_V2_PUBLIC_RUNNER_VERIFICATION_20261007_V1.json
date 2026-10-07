@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_SPARSE_V2_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__6_OF_6_EXACT_V2_TESTS__ZERO_BENCHMARK_AND_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "brain_commit_sha": "8b8944bd3e71752e8b87d03950d1e4f99c09135e",
+    "runtime_path": "canonical/runtime/mysterymechanism_sparse_symbolic_adapter_v2.py",
+    "runtime_git_blob_sha": "54f3caa918087b4c2bcd609424f5e440d855b991",
+    "tests_path": "canonical/tests/test_mysterymechanism_sparse_symbolic_adapter_v2.py",
+    "tests_git_blob_sha": "ad81af042e38ecce823c54525bcc509fe6a404a9"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2362,
+    "pull_request_title": "Verify MysteryMechanism sparse V2 operator repair",
+    "head_sha": "1e5d58414e8edc403fad51c95ad5190b8df882e6",
+    "merge_sha": "a91bb5f51a60ea587a79afd0dd0f35109234d4de",
+    "workflow_name": "Verify MysteryMechanism sparse V2 8b8944b",
+    "workflow_run_id": 37607131794,
+    "workflow_conclusion": "success",
+    "job_id": 112745243373,
+    "job_name": "verify",
+    "job_conclusion": "success",
+    "python_version": "3.12.14",
+    "command": "python -m unittest canonical.tests.test_mysterymechanism_sparse_symbolic_adapter_v2 -v"
+  },
+  "observed_tests": [
+    "test_exact_safe_division_feature",
+    "test_exp_domain_guard_fails_feature_not_runtime",
+    "test_fresh_exponential_feature",
+    "test_fresh_trigonometric_feature",
+    "test_reciprocal_feature",
+    "test_v1_budget_and_zero_credit_invariants_preserved"
+  ],
+  "result": {
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "runtime_operator_repair_independently_replayed": true,
+    "zero_credit_invariants_independently_replayed": true
+  },
+  "consequence": [
+    "THE_V2_PUBLIC_OPERATOR_REPAIR_IS_NO_LONGER_SELF_CERTIFIED.",
+    "THE_REPAIRED_SPARSE_SYMBOLIC_ROUTE_MAY_BE_USED_AS VERIFIED_BRAIN_OWNED_EVIDENCE_INSIDE_A_STRONGER_SCOPE_COMPLETE_MYSTERYMECHANISM_OR_ESCAPE_POLICY_ADEQUACY_PROOF.",
+    "THIS_RECEIPT_DOES_NOT_ESTABLISH_A_VALS_MYSTERYMECHANISM_SCORE_OR_OPUS55_NONINFERIORITY."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_SCORES_49_10_OR_HIGHER_ON_THE_VALS_MYSTERYMECHANISM_HARNESS.",
+    "NO_CLAIM_UNKNOWN_DOMAIN_FAMILY_IS_CLOSED.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT.",
+    "NO_PRIVATE_BENCHMARK_CASES_WERE_EXECUTED."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
