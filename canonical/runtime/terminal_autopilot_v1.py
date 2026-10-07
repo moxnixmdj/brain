@@ -13,6 +13,63 @@ ACTION_INTENT_DIR = "canonical/action_intents"
 CURRENT_AUTHORITY = "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
 SCIENCE_OBLIGATION = "TB_SCIENCE_GE_58_7"
 
+ONE_SHOT_ROUTE_RACES = (
+    {
+        "id": "SCOPE_COMPLETE_UNIVERSAL_COVER",
+        "can_discharge": "__ALL_OPEN__",
+        "estimated_wall_clock_units": 1.0,
+        "proof_class": "SCOPE_COMPLETE_UNIVERSAL_COVER",
+    },
+    {
+        "id": "OBJECTIVE_ACCEPTANCE_COMMON_LAW",
+        "can_discharge": (
+            "CODING_TB4_GE_66_4",
+            "AUTOMATIONBENCH_GE_40",
+            "HLE_TOOLS_GE_67_7",
+            "TB_SCIENCE_GE_58_7",
+            "CHARTOGRAPHY_TOOLS_GE_89",
+            "OSWORLD_2_1_PARTIAL_GE_81_8",
+        ),
+        "estimated_wall_clock_units": 1.0,
+        "proof_class": "O_OBJECTIVE_ACCEPTANCE",
+    },
+    {
+        "id": "PROFESSIONAL_QUALITATIVE_ROBUST_DOMINANCE",
+        "can_discharge": (
+            "PROWORK_GDPVAL_GE_1846",
+            "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+        ),
+        "estimated_wall_clock_units": 1.0,
+        "proof_class": "Q_QUALITATIVE_RELATIVE_ORDER",
+    },
+    {
+        "id": "CODING_TRIAD_SCOPE_COMPLETE_COVER",
+        "can_discharge": (
+            "CODING_TB4_GE_66_4",
+            "CODING_FRONTIERCODE_GE_54_4",
+            "CODING_CURSORBENCH_GE_57_8",
+        ),
+        "estimated_wall_clock_units": 1.0,
+        "proof_class": "CODING_SCOPE_UNION",
+    },
+    {
+        "id": "FINANCE_MYSTERY_COMMON_POLICY_COVER",
+        "can_discharge": (
+            "FINANCE_ACCOUNTING_INDEX_GE_61",
+            "FINANCE_AGENT_V2_GE_58_59",
+            "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+        ),
+        "estimated_wall_clock_units": 1.0,
+        "proof_class": "COMMON_POLICY_AND_MINIMUM_DISCRIMINATOR",
+    },
+    {
+        "id": "GDPVAL_FINITE_PUBLIC_ACCEPTANCE_COVER",
+        "can_discharge": ("PROWORK_GDPVAL_GE_1846",),
+        "estimated_wall_clock_units": 1.0,
+        "proof_class": "FINITE_PUBLIC_ACCEPTANCE_COVER",
+    },
+)
+
 
 def _closed_dependencies(dependencies: list[str], closed: set[str]) -> bool:
     return set(dependencies).issubset(closed)
@@ -67,7 +124,7 @@ def _science_repair_action(live_truth: dict[str, Any]) -> str:
     return "repair::TB_SCIENCE_CURRENT_AUTHORITY_PREFLIGHT"
 
 
-def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 16) -> dict[str, Any]:
+def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 32) -> dict[str, Any]:
     root = Path(repo_root).resolve()
     quotient_path = root / DEFAULT_QUOTIENT
     quotient = json.loads(quotient_path.read_text(encoding="utf-8"))
@@ -127,19 +184,33 @@ def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 16
         })
 
     obligations = [{"id": oid, "status": statuses[oid]} for oid in open_rows]
+    routes = []
+    for spec in ONE_SHOT_ROUTE_RACES:
+        declared = spec["can_discharge"]
+        if declared == "__ALL_OPEN__":
+            discharges = list(open_rows)
+        else:
+            discharges = [oid for oid in declared if oid in open_ids]
+        routes.append({
+            "id": spec["id"],
+            "status": "OPEN" if discharges else "CLOSED",
+            "can_discharge": discharges,
+            "estimated_wall_clock_units": spec["estimated_wall_clock_units"],
+            "proof_class": spec["proof_class"],
+            "candidate_only": True,
+            "promotion_authority": False,
+            "terminal_credit": False,
+        })
     return {
         "terminal": len(open_rows) == 0,
         "zero_incremental_spend_hard_stop": True,
         "max_concurrency": max_concurrency,
         "obligations": obligations,
         "blockers": blockers,
-        "routes": [{
-            "id": "SCOPE_COMPLETE_UNIVERSAL_COVER",
-            "status": "OPEN" if open_rows else "CLOSED",
-            "can_discharge": list(open_rows),
-        }],
+        "routes": routes,
         "active_jobs": active_jobs,
         "source_quotient": DEFAULT_QUOTIENT,
+        "one_shot_attack_graph": True,
     }
 
 
@@ -276,7 +347,7 @@ def plan(manifest: dict[str, Any]) -> dict[str, Any]:
         wall = max(float(item["estimated_wall_clock_units"]), 1e-9)
         leverage = (item.get("discharge_count", 0) + item.get("unlock_count", 0)) / wall
         repair_bias = 1 if item["kind"] == "REPAIR" else 0
-        return (-leverage, -item.get("discharge_count", 0), -repair_bias, wall, item["action_id"])
+        return (-leverage, -repair_bias, -item.get("discharge_count", 0), wall, item["action_id"])
 
     candidates.sort(key=score)
     dispatch = candidates[:max_concurrency]
@@ -303,7 +374,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("manifest", nargs="?", type=Path)
     parser.add_argument("--repo-root", type=Path)
-    parser.add_argument("--max-concurrency", type=int, default=16)
+    parser.add_argument("--max-concurrency", type=int, default=32)
     args = parser.parse_args()
     if (args.manifest is None) == (args.repo_root is None):
         parser.error("provide exactly one of manifest or --repo-root")
