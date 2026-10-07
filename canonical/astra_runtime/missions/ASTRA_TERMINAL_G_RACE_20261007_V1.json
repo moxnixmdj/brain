@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-TERMINAL-G-RACE-20261007-V1",
+  "purpose": "One-shot terminal proof race GDPVAL_FINITE_PUBLIC_ACCEPTANCE_COVER. Zero-spend, fail-closed, reuse-first.",
+  "goal": "Exploit the fully bound public 220-task GDPval context/rubric population to construct the strongest finite public acceptance cover possible without new target queries. Reuse the existing 10,453-criterion manifest, imperative/semantic localization, artifact grammar, presentation calculus, and owner-method bindings. Try to prove scope-complete robust dominance or a target-relation bridge. If impossible, return the mathematically minimum unresolved quality/discriminator set, not another broad localization pass. Write only canonical/astra_runtime/artifacts/TERMINAL_G_RACE_RESULT_20261007_V1.json as the route result, with exact source bindings, falsification attempts, covered obligations, residual counterexamples, and one truthful outcome. Never self-promote or edit terminal authority.",
+  "steps": [
+    {
+      "id": "terminal-g-race",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 128,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "fresh_mission_identity": true,
+    "manual_supplier": false,
+    "manual_package_name": false,
+    "manual_capability_id": false,
+    "required_target_effects_supplied_by_mission": false,
+    "semantic_goal_proposals_supplied_by_mission": false,
+    "capability_problem_proposal_supplied_by_mission": false,
+    "controller_actions_supplied_by_mission": false,
+    "originating_mission_must_remain_byte_identical": true,
+    "verified_acquisition_required_before_replan": true,
+    "implementation_independent_verifier_required": true,
+    "current_platform_capability_required": true,
+    "terminal_verifier_must_use_distinct_implementation": true,
+    "user_device_required": false,
+    "val_town_forbidden": true
+  }
+}
