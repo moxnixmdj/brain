@@ -1,0 +1,111 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ARCHITECTURE_SELF_TOURNAMENT_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_CURRENT_HEAD_ARCHITECTURE_NECESSITY_COLLAPSE__ONE_PRIMARY_RESEARCH_ROOT__TERMINAL_FALSE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "0cab18a7c3c2b10221cb0a269671f4d374010534"
+    },
+    "primitive_u_frontier": {
+      "path": "canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json",
+      "git_blob_sha": "add5479dc360fb9a57edb045ae22df6cf5d40b86"
+    },
+    "one_shot_attack_manifest": {
+      "path": "canonical/governance/TERMINAL_ONE_SHOT_ATTACK_CURRENT_MANIFEST_20261007_V1.json",
+      "git_blob_sha": "84925971a61f10fdb461af80a8d016bfddad1821"
+    },
+    "terminal_closure_reducer": {
+      "path": "canonical/runtime/terminal_closure_reducer.py",
+      "git_blob_sha": "27b51e53db5063756ff3046f978c0087fd4a9256"
+    },
+    "sound_db_union_v13": {
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V13.json",
+      "git_blob_sha": "2499d6cbcc806d4466a4788a31606174fbc54551"
+    }
+  },
+  "formal_terminal_acceptance_shape": {
+    "formula": "T = F AND (U OR (r1 AND r2 AND ... AND r13))",
+    "F": "COMMON_NON_ACCEPTANCE_FINALITY_OWNERSHIP_SAFETY_AND_PROOF_FREEZE_CONDITIONS",
+    "U": "SCOPE_COMPLETE_UNIVERSAL_COVER_ROUTE_PASS",
+    "ri": "THE_THIRTEEN_INDEPENDENT_DIRECT_FROZEN_PROTOCOL_ACCEPTANCE_OBLIGATIONS",
+    "wolfram_exact_result": {
+      "each_ri_logically_necessary": false,
+      "U_logically_necessary": false,
+      "F_logically_necessary": true,
+      "F_and_U_sufficient_for_acceptance_branch": true,
+      "F_and_all_ri_sufficient_for_direct_branch": true
+    }
+  },
+  "route_tournament": {
+    "declared_routes": [
+      "SCOPE_COMPLETE_UNIVERSAL_COVER",
+      "OBJECTIVE_ACCEPTANCE_COMMON_LAW",
+      "PROFESSIONAL_QUALITATIVE_ROBUST_DOMINANCE",
+      "CODING_TRIAD_SCOPE_COMPLETE_COVER",
+      "FINANCE_MYSTERY_COMMON_POLICY_COVER",
+      "GDPVAL_FINITE_PUBLIC_ACCEPTANCE_COVER"
+    ],
+    "exact_set_cover_result": {
+      "minimum_route_set": ["SCOPE_COMPLETE_UNIVERSAL_COVER"],
+      "minimum_route_count": 1,
+      "universal_route_covers_all_13_open_obligations": true,
+      "every_other_declared_route_coverage_is_subset_of_universal": true,
+      "all_declared_estimated_wall_clock_units_equal": true
+    },
+    "scheduler_consequence": [
+      "SCOPE_COMPLETE_UNIVERSAL_COVER_IS_THE_ONLY_PRIMARY_RESEARCH_RACE.",
+      "O_Q_C_F_G_ARE_SUBORDINATE_FALSIFIERS_OR_LEMMA_PRODUCERS_ONLY.",
+      "NO_DIRECT_ACCEPTANCE_OBLIGATION_IS_AN_INDEPENDENT_TERMINAL_NECESSITY.",
+      "DO_NOT_CONSUME_SCARCE_OR_IRREVERSIBLE_DIRECT_BENCHMARK_SLOTS_WHILE_A_STRONGER_UNIVERSAL_PROOF_CAN_DISCHARGE_THE_SAME_OBLIGATION_UNLESS_THE_UNIVERSAL_ROUTE_RETURNS_A_PROVED_IRREDUCIBLE_NEED_FOR_THAT_RESULT."
+    ]
+  },
+  "current_u_reduction": {
+    "current_sound_db_record_count": 17,
+    "single_live_primitive": "SCOPE_COMPLETE_OBSERVATIONAL_QUOTIENT_WITH_NO_TARGET_SUPPORTED_UNSPLITTABLE_POLICY_CONFLICT_CLASS",
+    "research_root": "U_EMPTY",
+    "research_root_count": 1,
+    "equivalent_question": "DOES_EVERY_TARGET_RELEVANT_CONTEXT_OUTSIDE_SOUND_D_B_HAVE_A_SOUND_BRAIN_OWNED_COMMON_ADEQUATE_POLICY_OR_A_TRUTHFUL_PRECOMMITMENT_DISCRIMINATOR_LEADING_ONLY_TO_ADEQUATE_POLICIES",
+    "current_truth": {
+      "U_empty_proved": false,
+      "complete_declared_discriminator_quotient_scope_proved": false,
+      "reachable_target_supported_unsplittable_policy_conflict_empty_proved": false,
+      "terminal": false
+    }
+  },
+  "architecture_necessity_tournament": {
+    "direct_13_obligations": "DEMOTED_FROM_INDIVIDUAL_TERMINAL_NECESSITIES__PRESERVED_AS_FALSIFICATION_PARTITIONS_AND_DIRECT_FALLBACK_EVIDENCE_ROUTES",
+    "five_subordinate_races": "DEMOTED_FROM_PRIMARY_RACES__PRESERVED_AS_PARALLEL_LEMMA_GENERATORS_ONLY_IF_THEY_FEED_U_WITH_CONTENT_ADDRESSED_EVIDENCE",
+    "D_finality": "POST_U_MECHANICAL_FINALIZATION_TAIL__NOT_AN_INDEPENDENT_RESEARCH_ROOT__STILL_MANDATORY_BEFORE_TERMINAL_TRUE",
+    "irreducible_research_cut": ["U_EMPTY"],
+    "irreducible_research_cut_size": 1
+  },
+  "next_executable_transition": {
+    "only_primary_action": "ATTACK_U_EMPTY_DIRECTLY",
+    "legal_success_routes": [
+      "PROVE_SELECTED_COVER_COMPLEMENT_UNSAT",
+      "PROVE_FULL_SCOPE_DB_COVER",
+      "PROVE_TARGET_ESCAPE_NONOCCUPANCY",
+      "PROVE_GENERATOR_CLOSURE_SCOPE_COMPLETE"
+    ],
+    "cell_rule": [
+      "FOR_EACH_SURVIVING_ESCAPE_CELL_SEARCH_ONE_COMMON_CERTIFIED_ADEQUATE_BRAIN_OWNED_POLICY_FIRST.",
+      "IF_COMMON_POLICY_FAILS_ONLY_ACCEPT_A_MINIMUM_TRUTHFUL_POLICY_CHANGING_DISCRIMINATOR.",
+      "IF_NEITHER IS PROVED_RETURN_A_CONSTRUCTIVE_UNRESOLVED_WITNESS__DO_NOT INVENT_CAPABILITY_FAILURE.",
+      "EVERY_POSITIVE_CELL_ADMISSION_MUST BE CONTENT_ADDRESSED_AND INDEPENDENTLY VERIFIED BEFORE D_B PROMOTION."
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_U_EMPTY_IS_PROVED.",
+    "NO_CLAIM_THE_UNIVERSAL_SCOPE_COMPLETE_COVER_CURRENTLY_PASSES.",
+    "NO_CLAIM_TERMINAL_TRUE.",
+    "NO_DELETION_OF_DIRECT_ACCEPTANCE_TRUTH_FROM_PROVENANCE.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_THIS_ARCHITECTURE_REDUCTION."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

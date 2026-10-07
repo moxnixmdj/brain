@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ARCHITECTURE_SELF_TOURNAMENT_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_SOURCE_REPLAY_PASS__5_OF_5__ONE_PRIMARY_RESEARCH_ROOT__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TERMINAL_ARCHITECTURE_SELF_TOURNAMENT_20261007_V1.json",
+    "git_blob_sha": "70999148eeb9b7f7c1ad3eabbffb7002cb58e52e"
+  },
+  "test": {
+    "path": "canonical/tests/test_terminal_architecture_self_tournament_20261007_v1.py",
+    "git_blob_sha": "07e4ff8201bf64b4535560f9c9a244f6f08dfeb1"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "working_directory": "/home/sprite/terminal_arch_self_tournament_v1",
+    "result": "PASS_5_OF_5"
+  },
+  "exact_source_blobs": {
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "0cab18a7c3c2b10221cb0a269671f4d374010534",
+    "canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json": "add5479dc360fb9a57edb045ae22df6cf5d40b86",
+    "canonical/governance/TERMINAL_ONE_SHOT_ATTACK_CURRENT_MANIFEST_20261007_V1.json": "84925971a61f10fdb461af80a8d016bfddad1821",
+    "canonical/runtime/terminal_closure_reducer.py": "27b51e53db5063756ff3046f978c0087fd4a9256",
+    "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V13.json": "2499d6cbcc806d4466a4788a31606174fbc54551"
+  },
+  "verified": [
+    "UNIVERSAL_ROUTE_IS_EXACT_MINIMUM_CARDINALITY_DECLARED_ACCEPTANCE_COVER",
+    "ALL_THIRTEEN_DIRECT_ACCEPTANCE_OBLIGATIONS_ARE_NOT_INDIVIDUALLY_LOGICALLY_NECESSARY_TO_TERMINAL_TRUTH",
+    "COMMON_FINALITY_F_REMAINS_LOGICALLY_NECESSARY",
+    "CURRENT_SOUND_DB_RECORD_COUNT_IS_SEVENTEEN",
+    "CURRENT_PRIMARY_RESEARCH_CUT_HAS_SIZE_ONE_AND_IS_U_EMPTY",
+    "D_FINALITY_REMAINS_MANDATORY_AFTER_U_EMPTY",
+    "TERMINAL_REMAINS_FALSE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_U_EMPTY_IS_PROVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
