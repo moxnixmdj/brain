@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V21_CURSORBENCH_INTEGRATION_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "CONNECTOR_REPLAY_PASS__CURSORBENCH_V6_BOUND__ALL_NEWER_V20_STATE_PRESERVED__TERMINAL_FALSE",
+  "subject": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "b9668f764d81e214223029171affdeb98c7a9ab5",
+    "commit_sha": "d1d6b586911fc9af49527c7ef0b9e8d588cbbdcb"
+  },
+  "bound_reality_cut": {
+    "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V6.json",
+    "git_blob_sha": "4a69f526218524f29146444e00c54c6990f1421e",
+    "verification_path": "canonical/verification/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V6_VERIFY_20261007_V1.json",
+    "verification_git_blob_sha": "e0070eca79edc33bf1cd797357c1fca207d7c5c4"
+  },
+  "verified": {
+    "pointer_schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V21",
+    "current_positive_reality_class_count": 14,
+    "current_access_execution_lane_count": 9,
+    "cursorbench_generic_public_self_run_search_closed": true,
+    "cursorbench_owner_external_evaluation_available": false,
+    "cursorbench_public_third_party_submission_interface_available": false,
+    "cursorbench_acceptance_predicate_closed": false,
+    "terminal": false
+  },
+  "consequence": "DELETE_STALE_CURSORBENCH_ACCESS_SCORER_WORK_FROM_SCHEDULER__PRESERVE_ONLY_STRONGER_SCOPE_COMPLETE_PROOF_OR_FUTURE_MATERIAL_OWNER_POLICY_INTERFACE_CHANGE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
