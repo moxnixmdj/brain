@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34",
   "date": "2026-10-07",
-  "status": "ACTIVE_FAIL_CLOSED_SINGLE_RESIDUAL_COMPLEMENT_UNSAT_ROOT__LATEST_V33_GENERIC_U_CLOSURE_BOUND__TERMINAL_FALSE",
+  "status": "ACTIVE_FAIL_CLOSED_SINGLE_BIT_TERMINAL_EXECUTION_ROOT_V34__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -851,7 +851,10 @@
     "zero_bureaucracy_execution_lock_active": true,
     "latest_v33_generic_u_closure_bound_into_terminal_authority": true,
     "residual_complement_unsat_proved": false,
-    "symbolic_admission_predicate_successor_deployed": false
+    "symbolic_admission_predicate_successor_deployed": false,
+    "terminal_execution_root_v1_bound": true,
+    "primary_terminal_scheduler_object_count": 1,
+    "primary_terminal_scheduler_object": "PROVE_NOT_X"
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -1022,5 +1025,18 @@
       "ISSUE_TERMINAL_CERTIFICATE_IFF_ALL_FINALITY_GATES_PASS"
     ],
     "fail_closed_rule": "NEVER_SET_TERMINAL_TRUE_FROM GOVERNANCE_COMPRESSION_OR ABSENCE_OF_A_COUNTEREXAMPLE"
+  },
+  "terminal_execution_root": {
+    "path": "canonical/governance/TERMINAL_EXECUTION_ROOT_20261007_V1.json",
+    "git_blob_sha": "0f3ca4bbe761fe3071da5dfab5f593b184d8273d",
+    "runtime_gate": {
+      "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
+      "git_blob_sha": "7c7e0c34cc599c7114fb83421307db2433e2b269"
+    },
+    "tests": {
+      "path": "canonical/tests/test_terminal_root_decision_gate_v1.py",
+      "git_blob_sha": "7f51131ad6ee5f26cf752fde853e69cb2abdbf6c"
+    },
+    "rule": "THIS_IS_THE_ONLY_PRIMARY_SCHEDULING_ROOT__ALL_LONG_FORM_SCHEDULING_LOCK_ENTRIES_REMAIN_PROVENANCE_AND_FALSIFICATION_CONTEXT_ONLY"
   }
 }
