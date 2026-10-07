@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V4",
   "date": "2026-10-07",
-  "status": "ACTIVE_V16_CURRENT_MAIN_RESIDUAL_POINTER__TWO_TOP_LEVEL_PREDICATES__TWELVE_SOUND_DB_REGION_CERTIFICATES__TARGET_SCOPE_CLOSED__ZERO_CREDIT",
+  "status": "ACTIVE_V16_CURRENT_MAIN_RESIDUAL_POINTER__TWO_TOP_LEVEL_PREDICATES__THIRTEEN_SOUND_DB_REGION_CERTIFICATES__TARGET_SCOPE_CLOSED__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "supersedes": {
     "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V3.json",
@@ -19,8 +19,8 @@
   },
   "db_saturation": {
     "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json",
-    "git_blob_sha": "6b389699903b63f1350dd922064888e74201f687",
-    "known_sound_region_certificate_count": 12,
+    "git_blob_sha": "6637b23cd90f3df20ec87f817ef38d1eb233ea79",
+    "known_sound_region_certificate_count": 13,
     "coverage_measure_claimed": false
   },
   "exact_state": {
@@ -31,7 +31,7 @@
     ],
     "fixed_authorized_target_trace_scope_closed": true,
     "literal_all_capability_enumeration_is_separate_open_task": false,
-    "known_sound_D_B_region_certificate_count": 12,
+    "known_sound_D_B_region_certificate_count": 13,
     "certificate_gated_router_mechanical_core_present": true,
     "complete_selected_context_ABC_closed": false,
     "D_finality_closed": false,
@@ -40,7 +40,7 @@
   "active_zero_reality_programs": [
     {
       "id": "ABC_DB_SATURATION_FIXED_POINT",
-      "start": "SUBTRACT_THE_TWELVE_SOUND_CACHED_REGION_CERTIFICATES_FIRST",
+      "start": "SUBTRACT_THE_THIRTEEN_SOUND_CACHED_REGION_CERTIFICATES_FIRST",
       "objective": "SATURATE_ONLY_NEW_SCOPE_COMPLETE_TOP_LAW_DIRECT_E2E_TRANSFER_OR_STRONGER_ROUTE_CERTIFICATES_FROM_EXISTING_EVIDENCE",
       "target_information_allowed": false
     },
@@ -61,7 +61,7 @@
     }
   ],
   "invalidated_as_top_level_scheduler_work": [
-    "V15_NINE_REGION_CACHE_AS_CURRENT",
+    "V15_NINE_REGION_AND_INTERMEDIATE_TEN_TO_TWELVE_REGION_CACHES_AS_CURRENT",
     "LITERAL_ALL_CAPABILITY_ENUMERATION_OR_EXHAUSTIVENESS_AS_A_SEPARATE_TASK",
     "MORE_BENCHMARK_OR_WEB_ENUMERATION_FOR_TARGET_SCOPE_COMPLETENESS",
     "GENERAL_GLOBAL_ROUTER_INTELLIGENCE_RESEARCH",
@@ -69,13 +69,13 @@
     "GENERIC_NEW_SEMANTIC_MECHANISM_WITHOUT_CAUSALLY_LOCALIZED_FAILURE"
   ],
   "next": [
-    "SATURATE_CURRENT_REPOSITORY_EVIDENCE_AGAINST_THE_TWELVE_REGION_CERTIFICATE_UNION.",
+    "SATURATE_CURRENT_REPOSITORY_EVIDENCE_AGAINST_THE_THIRTEEN_REGION_CERTIFICATE_UNION.",
     "ATTACK_ONLY_TRUE_WITHIN_SCOPE_ADEQUACY_DOMINANCE_AND_LOAD_BEARING_CONDITION_GAPS.",
     "BIND_EACH_NEWLY_CLOSED_CELL_TO_THE_EXISTING_CERTIFICATE_GATED_ROUTER.",
     "WHEN_ABC_CLOSES_FREEZE_FINAL_CREDITED_ROUTE_SET_RECOMPUTE_D_DELETE_DONORS_AND_RUN_INDEPENDENT_CLEAN_ROOM_REPLAY."
   ],
   "hard_nonclaims": [
-    "NO_CLAIM_TWELVE_REGION_CERTIFICATES_EXHAUST_D_B_OR_THE_TARGET_TRACE_SCOPE",
+    "NO_CLAIM_THIRTEEN_REGION_CERTIFICATES_EXHAUST_D_B_OR_THE_TARGET_TRACE_SCOPE",
     "NO_CLAIM_ABC_CLOSED",
     "NO_CLAIM_D_FINALITY_CLOSED",
     "NO_CLAIM_TERMINAL_TRUE",
@@ -85,5 +85,6 @@
     "incremental_spend_usd": 0,
     "fresh_reality_units_consumed": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "execution_snapshot_note": "REBIND_TO_CURRENT_MAIN_V5_THIRTEEN_REGION_SATURATION_AFTER_CONCURRENT_LEDGER_UNIFICATION"
 }
