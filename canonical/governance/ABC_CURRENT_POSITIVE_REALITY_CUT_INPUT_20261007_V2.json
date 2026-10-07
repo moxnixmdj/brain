@@ -1,0 +1,261 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_CURRENT_POSITIVE_REALITY_CUT_INPUT_V2",
+  "date": "2026-10-07",
+  "status": "FROZEN_CURRENT_BOUND_ACTIONABLE_POSITIVE_REALITY_CUT_INPUT__POST_ATTRIBUTION_AND_ACCESS_REPAIR_RECOMPUTE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "d9c41440ec78886b5ba44c7eeda6f0c2680839ae"
+    },
+    "canonical/governance/ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_20261007_V3.json": {
+      "path": "canonical/governance/ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_20261007_V3.json",
+      "git_blob_sha": "c73391693f4cbae6efc9fc11f396c3a3be25875a"
+    },
+    "canonical/governance/ABC_CURRENT_BOUND_ZERO_REALITY_SATURATION_20261007_V1.json": {
+      "path": "canonical/governance/ABC_CURRENT_BOUND_ZERO_REALITY_SATURATION_20261007_V1.json",
+      "git_blob_sha": "bfe6e36cf09abb6f0740dba77b273d5300c582a5"
+    },
+    "canonical/governance/AA_BRIEFCASE_SHARED_RESIDUAL_RECONCILIATION_20261007_V1.json": {
+      "path": "canonical/governance/AA_BRIEFCASE_SHARED_RESIDUAL_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "2ec5e65558f7f622d8ab486068a8ebf4ce39bd3e"
+    },
+    "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json": {
+      "path": "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json",
+      "git_blob_sha": "d9ac894594ebcd2883520f7b7977a3548420541c"
+    },
+    "canonical/governance/PRIVATE_OPUS_ZERO_SPEND_CAPACITY_INFRASTRUCTURE_CLASSIFICATION_20261007_V1.json": {
+      "path": "canonical/governance/PRIVATE_OPUS_ZERO_SPEND_CAPACITY_INFRASTRUCTURE_CLASSIFICATION_20261007_V1.json",
+      "git_blob_sha": "996d1bbce134538b7acfd3cf81c5868d9525cfce"
+    },
+    "canonical/governance/MYSTERYMECHANISM_FALLBACK_ATTRIBUTION_TRUTH_REPAIR_20261007_V1.json": {
+      "path": "canonical/governance/MYSTERYMECHANISM_FALLBACK_ATTRIBUTION_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "40b4f0deadf1d8f3e392cbb026cdd791005c0e47"
+    },
+    "canonical/governance/CURRENT_EXTERNAL_RESULT_ACCESS_OVERLAY_V6.json": {
+      "path": "canonical/governance/CURRENT_EXTERNAL_RESULT_ACCESS_OVERLAY_V6.json",
+      "git_blob_sha": "77cf0717a1adcc91022563dc9bd3768d6bc05f16"
+    },
+    "canonical/governance/P2_AUTHENTICATED_STRONG_QUALITY_BINDING_GATE_20261007_V1.json": {
+      "path": "canonical/governance/P2_AUTHENTICATED_STRONG_QUALITY_BINDING_GATE_20261007_V1.json",
+      "git_blob_sha": "4a9b3e1b021b25caa13e19f4e07d240d7b50bac4"
+    },
+    "canonical/governance/DEONTIC_POLICY_ADEQUACY_AUTH_TRUTH_REPAIR_20261007_V1.json": {
+      "path": "canonical/governance/DEONTIC_POLICY_ADEQUACY_AUTH_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "4b6aca4f1e628ff8630014146bc117128e54d6d3"
+    },
+    "canonical/runtime/minimum_reality_cut_v2.py": {
+      "path": "canonical/runtime/minimum_reality_cut_v2.py",
+      "git_blob_sha": "5697e9c7ee148ae6188ad170d777e7553c79ee3d"
+    }
+  },
+  "evidence_horizon": {
+    "branch_base_commit": "6a2e52d3bd071bef29094d0c6eff5ae4e0d96c35",
+    "zero_reality_current_bound_saturated": true
+  },
+  "requirements": [
+    "CODING_TB4_SCOPE",
+    "CODING_FRONTIERCODE_SCOPE",
+    "CODING_CURSORBENCH_SCOPE",
+    "AGENCY_MATCHED_SCOPE",
+    "PROFESSIONAL_GDPVAL_AA_SCOPE",
+    "AA_BRIEFCASE_SHARED_SCOPE",
+    "AUTOMATIONBENCH_SCOPE",
+    "HLE_TOOLS_SCOPE",
+    "TB_SCIENCE_SCOPE",
+    "VISION_CHARTOGRAPHY_SCOPE",
+    "VISION_DENSE_NONCHART_SCOPE",
+    "COMPUTER_OSWORLD_SCOPE",
+    "FINANCE_ACCOUNTING_INDEX_SCOPE",
+    "FINANCE_AGENT_V2_SCOPE",
+    "FINANCE_SEMANTIC_ADEQUACY",
+    "SYNTHESIS_MATCHED_QUALITY_SCOPE",
+    "UNKNOWN_MYSTERYMECHANISM_INTRINSIC_NONINFERIORITY"
+  ],
+  "already_resolved": [],
+  "observations": [
+    {
+      "id": "Q_CODING_PUBLIC_TRIPLE",
+      "covers": [
+        "CODING_TB4_SCOPE",
+        "CODING_FRONTIERCODE_SCOPE",
+        "CODING_CURSORBENCH_SCOPE"
+      ],
+      "cost": 3
+    },
+    {
+      "id": "Q_CODING_TB4",
+      "covers": [
+        "CODING_TB4_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_CODING_FRONTIERCODE",
+      "covers": [
+        "CODING_FRONTIERCODE_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_CODING_CURSORBENCH",
+      "covers": [
+        "CODING_CURSORBENCH_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_MATCHED_OPEN_SUPERPORTFOLIO",
+      "covers": [
+        "AGENCY_MATCHED_SCOPE",
+        "SYNTHESIS_MATCHED_QUALITY_SCOPE",
+        "VISION_DENSE_NONCHART_SCOPE",
+        "COMPUTER_OSWORLD_SCOPE"
+      ],
+      "cost": 4
+    },
+    {
+      "id": "Q_AGENCY_MATCHED",
+      "covers": [
+        "AGENCY_MATCHED_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_SYNTHESIS_MATCHED",
+      "covers": [
+        "SYNTHESIS_MATCHED_QUALITY_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_VISION_DENSE_MATCHED",
+      "covers": [
+        "VISION_DENSE_NONCHART_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_COMPUTER_OSWORLD_MATCHED",
+      "covers": [
+        "COMPUTER_OSWORLD_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_PROFESSIONAL_GDPVAL_AA_SHARED",
+      "covers": [
+        "PROFESSIONAL_GDPVAL_AA_SCOPE",
+        "AA_BRIEFCASE_SHARED_SCOPE"
+      ],
+      "cost": 2
+    },
+    {
+      "id": "Q_PROFESSIONAL_GDPVAL",
+      "covers": [
+        "PROFESSIONAL_GDPVAL_AA_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_AA_BRIEFCASE_SHARED",
+      "covers": [
+        "AA_BRIEFCASE_SHARED_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_AUTOMATIONBENCH",
+      "covers": [
+        "AUTOMATIONBENCH_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_HLE_TOOLS",
+      "covers": [
+        "HLE_TOOLS_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_TB_SCIENCE",
+      "covers": [
+        "TB_SCIENCE_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_CHARTOGRAPHY",
+      "covers": [
+        "VISION_CHARTOGRAPHY_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_FINANCE_PUBLIC_DUAL",
+      "covers": [
+        "FINANCE_ACCOUNTING_INDEX_SCOPE",
+        "FINANCE_AGENT_V2_SCOPE"
+      ],
+      "cost": 2
+    },
+    {
+      "id": "Q_FINANCE_ACCOUNTING_INDEX",
+      "covers": [
+        "FINANCE_ACCOUNTING_INDEX_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_FINANCE_AGENT_V2",
+      "covers": [
+        "FINANCE_AGENT_V2_SCOPE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_FINANCE_SEMANTIC_CONTEXT",
+      "covers": [
+        "FINANCE_SEMANTIC_ADEQUACY"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_UNKNOWN_MYSTERYMECHANISM_INTRINSIC_MATCHED",
+      "covers": [
+        "UNKNOWN_MYSTERYMECHANISM_INTRINSIC_NONINFERIORITY"
+      ],
+      "cost": 1
+    }
+  ],
+  "cost_model": {
+    "unit": "INDEPENDENTLY_SCORED_POSITIVE_QUALIFICATION_SURFACE",
+    "objective": "MINIMIZE_SURFACE_COST__THEN_EXECUTION_BUNDLE_COUNT__THEN_LEXICOGRAPHIC_ID",
+    "bundled_execution_rule": "DISTINCT_SURFACES_RETAIN_ADDITIVE_COST_EVEN_WHEN_ONE_PREDECLARED_EXECUTION_BUNDLE_CARRIES_MULTIPLE_FAMILY_VERDICTS",
+    "aa_shared_rule": "AA_BRIEFCASE_IS_ONE_IDENTICAL_SHARED_RESIDUAL_ACROSS_PROFESSIONAL_KNOWLEDGE_WORK_AND_ARTIFACT_CREATION",
+    "composition": "EXCLUDED_FROM_POSITIVE_REALITY_REQUIREMENTS__CURRENT_RESIDUAL_IS_ZERO_REALITY_ROUTE_LOCAL_LOCAL_C_AFTER_FINAL_SELECTED_ROUTE_FREEZE"
+  },
+  "current_repairs": {
+    "mysterymechanism": "49_55_DEPLOYED_SCORE_NOT_INTRINSIC_OPUS_BAR__REQUIRE_CAUSALLY_MATCHED_INTRINSIC_NONINFERIORITY_OR_STRONGER",
+    "p2": "AUTHENTICATED_QUALITY_BINDINGS_EXIST_BUT_REAL_AA_GDPVAL_CONTEXT_ADMISSION_REMAINS_ZERO",
+    "deontic": "SOURCE_ENTAILMENT_NO_LONGER_SELF_CERTIFIES_POLICY_ADEQUACY",
+    "buildkite": "READY_ZERO_SPEND_CARRIER_FOR_TB4_CHARTOGRAPHY_PREREQUISITES__NO_THRESHOLD_CREDIT_YET"
+  },
+  "observation_authority": {
+    "Q_MATCHED_OPEN_SUPERPORTFOLIO": "CONDITIONAL_ON_EXACT_OPUS_COMPARATOR_ADMISSIBILITY_OR_VERIFIED_STRONGER_FAMILY_SPECIFIC_CLOSURE__CURRENT_PRIVATE_CAPACITY_UNKNOWN",
+    "Q_FINANCE_SEMANTIC_CONTEXT": "ONE_NEW_SOUND_TARGET_CONTEXT_MEMBERSHIP_OR_EQUIVALENT_DIRECT_E2E_ADEQUACY_REALITY_UNIT",
+    "Q_UNKNOWN_MYSTERYMECHANISM_INTRINSIC_MATCHED": "CAUSALLY_MATCHED_INTRINSIC_OPUS55_CONFIGURATION_OR_STRONGER_TARGET_FREE_SCOPE_CERTIFICATE"
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_MINIMUM_OVER_UNDISCOVERED_FUTURE_STRONGER_CERTIFICATES",
+    "NO_CLAIM_ALL_DECLARED_BUNDLES_ARE_CURRENTLY_EXECUTABLE",
+    "NO_CLAIM_PRIVATE_EXACT_OPUS_CAPACITY_EXISTS_OR_IS_ABSENT",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
