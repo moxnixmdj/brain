@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_COVERAGE_PARTITION_V6",
+  "date": "2026-10-07",
+  "status": "ACTIVE_CANDIDATE_PROJECTION__19_INDEPENDENT_CONJUNCTS__COMPOSITION_SUCCESS_DERIVED_INSIDE_ABC__META8_ABSORBED__D15_U4__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predecessor": {
+    "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V5.json",
+    "git_blob_sha": "b63d57dfc7d4e67df9cf91f8c3f4f1b3950ce9bc"
+  },
+  "truth_repair": {
+    "path": "canonical/governance/COMPOSITION_TERMINAL_SUCCESS_DERIVATION_TRUTH_REPAIR_20261007_V1.json",
+    "git_blob_sha": "fb52ecf6e0ba703bbad9b0b626ba85057c438215",
+    "independent_verification": {
+      "path": "canonical/verification/COMPOSITION_TERMINAL_SUCCESS_DERIVATION_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "10cfac5af04bee690478360c0c04f6b2f10cc501"
+    }
+  },
+  "factorizer": {
+    "path": "canonical/runtime/terminal_frontier_factorizer_v6.py",
+    "git_blob_sha": "30cf4fc9ff3eac685edb9fe170aa8429fa1202b1"
+  },
+  "projection": {
+    "independent_terminal_conjuncts": 19,
+    "direct_result_conjuncts": 15,
+    "structural_independent_conjuncts": 4,
+    "derived_inside_ABC_conjuncts": 1,
+    "meta_context_refinements_absorbed_into_abc": 8,
+    "verified_independent_truth_deletions": 5,
+    "route_counts": {
+      "J": 0,
+      "G": 0,
+      "T": 0,
+      "D": 15,
+      "U": 4
+    },
+    "terminal": false
+  },
+  "derived_inside_ABC": {
+    "predicate": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+    "derivation": "COMPLETE_SELECTED_CONTEXT_ABC_AND_PER_SELECTED_COMPOSITION_CELL_PRIMITIVE_DOMINANCE_OR_ADEQUACY_AND_LOCAL_C_IMPLIES_COMPOSED_B9_TERMINAL_SUCCESS_NONINFERIORITY",
+    "burden_preserved": true,
+    "reopen_if": [
+      "A_LOAD_BEARING_COMPOSITION_CONTEXT_ESCAPES_COMPLETE_ABC",
+      "A_SELECTED_COMPOSITION_ROUTE_LACKS_PRIMITIVE_DOMINANCE_OR_ADEQUACY",
+      "A_REACHED_LOAD_BEARING_TRANSFORM_LACKS_LOCAL_C",
+      "A_TARGET_RELEVANT_EVALUATOR_HARD_CONSTRAINT_OR_STATE_DISTINCTION_IS_OMITTED"
+    ]
+  },
+  "critical_path": [
+    "15_DIRECT_RESULT_CONJUNCTS__CLOSE_BY_DIRECT_RESULT_OR_STRONGER_SOUND_CERTIFICATE",
+    "4_STRUCTURAL_INDEPENDENT_CONJUNCTS__CLOSE_INSIDE_SELECTED_CONTEXT_ABC_WITH_META8_REFINEMENTS",
+    "COMPOSITION_TERMINAL_SUCCESS__DERIVE_PER_LOAD_BEARING_COMPOSITION_CELL_FROM_ABC_PRIMITIVE_ADEQUACY_AND_LOCAL_C",
+    "D_CREDITED_ROUTE_OWNERSHIP_AND_EFFECT_CLOSURE",
+    "FINAL_DONOR_REMOVAL_CLEAN_ROOM_TERMINAL_REPLAY"
+  ],
+  "hard_nonclaims": [
+    "NO_COMPOSITION_SEMANTIC_BURDEN_DELETED",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED",
+    "NO_DIRECT_RESULT_CONJUNCT_CLOSED_BY_THIS_REDUCTION",
+    "NO_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
