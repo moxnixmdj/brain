@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_SCOPE_FINITE_WAVE_PRECOMMIT_V1",
+  "date": "2026-10-07",
+  "status": "FROZEN_PREEXPOSURE__ZERO_CASES_GENERATED__BRAIN_FIRST_FINITE_SCOPE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicates": [
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+  ],
+  "frozen_protocol": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "acceptance": "Every isolated component used in the claim has its own scoped proof; on the frozen mixed-capability portfolio Brain conservative terminal-success bound >= Opus matched bound and no critical composition invariant fails."
+  },
+  "frozen_harness": {
+    "path": "canonical/runtime/composition_scope_finite_wave_v1.py",
+    "git_blob_sha": "d45e002f184f155e87e2672787aba2697c755c9e"
+  },
+  "fixed_universe": {
+    "case_count": 160,
+    "cases_per_kind": 32,
+    "kinds": [
+      "RESEARCH_TOOL_ARTIFACT",
+      "BROWSER_MEMORY_RECOVERY",
+      "CODING_DEBUG_TOOL_DISCOVERY",
+      "DELEGATION_SYNTHESIS_ARTIFACT",
+      "CROSS_CAPABILITY_HANDOFF_ROLLBACK"
+    ],
+    "normalized_dimensions": [
+      "dimension:research_plus_tool_use_plus_artifact_creation",
+      "dimension:browser_or_computer_action_plus_memory_plus_recovery",
+      "dimension:coding_plus_debugging_plus_tool_discovery",
+      "dimension:delegation_plus_evidence_synthesis_plus_artifact_production",
+      "dimension:cross_capability_state_handoff_and_rollback"
+    ],
+    "completeness_claim": "COMPLETE_RELATIVE_TO_THE_FROZEN_MIXED_CAPABILITY_REPRESENTATIVE_PORTFOLIO_DIMENSION_BASIS_ONLY__COMPONENT_SCOPED_PROOF_CONJUNCT_REMAINS_SEPARATE__NO_POPULATION_GENERALIZATION"
+  },
+  "beacon": {
+    "rule": "USE_THE_GIT_COMMIT_SHA_CREATED_BY_THE_COMMIT_THAT_FIRST_ADDS_THIS_PRECOMMIT_MANIFEST_WHILE_THE_FROZEN_HARNESS_BLOB_REMAINS_d45e002f184f155e87e2672787aba2697c755c9e",
+    "known_before_freeze": false,
+    "outcome_dependent": false,
+    "case_generation_before_beacon_forbidden": true
+  },
+  "exact_routes": {
+    "research": [
+      "canonical/runtime/matched_research_tool_artifact_direct_v1.py",
+      "a556813a3d736cbef7371a5b880f1652a3543adc"
+    ],
+    "browser": [
+      "canonical/runtime/matched_browser_memory_recovery_direct_v1.py",
+      "b0422001ccc38554cf5d326865224b5c60192ae1"
+    ],
+    "coding": [
+      "canonical/runtime/matched_coding_debug_tool_discovery_fresh_v1.py",
+      "d401dd3add197505ab21be92e1925cf92d371a74"
+    ],
+    "delegation": [
+      "canonical/runtime/matched_delegation_synthesis_artifact_direct_v1.py",
+      "7141a7559879139371746811a6e57ecd4c734855"
+    ],
+    "handoff": [
+      "canonical/runtime/matched_cross_capability_handoff_rollback_direct_v1.py",
+      "3946bc0f2ab96a8c9711c6d3736391df7f43ccb5"
+    ],
+    "atom_semantics": [
+      "canonical/runtime/matched_executable_atom_semantics_v1.py",
+      "47a0e828847a57fb206490a866a1041d83c42bde"
+    ]
+  },
+  "inherited_verified_logic": [
+    "canonical/verification/BRAIN_FIRST_DIFFERENTIAL_PREWAVE_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
+    "canonical/verification/MATCHED_SUCCESS_FINITE_SCOPE_REDUCER_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
+    "canonical/verification/MATCHED_CASE_ISOLATION_RESET_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json"
+  ],
+  "execution_freeze": {
+    "brain_runtime_content_addressed": true,
+    "scorer_content_addressed": true,
+    "generator_content_addressed": true,
+    "target_interface_content_addressed": true,
+    "fixed_case_count_before_first_result": true,
+    "no_case_replacement_after_exposure": true,
+    "no_adaptive_case_selection": true,
+    "no_result_dependent_scope_edit": true,
+    "no_brain_repair_or_replay_from_case_results": true,
+    "each_case_fresh_python_process": true,
+    "python_hash_seed": "0",
+    "python_bytecode_write": false,
+    "cross_case_memory": false
+  },
+  "comparator_neutral_interface": {
+    "identity": "EXACT_CLAUDE_OPUS_5_5",
+    "success_metric": "BINARY_SHARED_CASE_SUCCESS_WITH_COMPOSITION_INVARIANTS_LOAD_BEARING",
+    "comparator_execution_rule": "ONLY_BRAIN_FAILURE_RESIDUAL__ZERO_OPUS_CASES_IF_BRAIN_PASSES_ALL_160",
+    "no_proxy_substitution": true
+  },
+  "component_scope_boundary": "PORTFOLIO_TOP_SUPPORT_CANNOT_CLOSE_COMPOSITION_COMPONENT_SCOPED_PROOFS__THAT_DERIVED_CONJUNCT_REMAINS_SEPARATE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "cases_generated": 0,
+    "opus_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CASE_RESULT_EXISTS_AT_FREEZE",
+    "NO_CLAIM_BRAIN_WILL_PASS_THE_160_CASES",
+    "NO_COMPONENT_SCOPED_PROOF_CONJUNCT_CLOSURE_FROM_THIS_WAVE",
+    "NO_FAMILY_CLOSURE_BEFORE_RESULT_AND_COMPONENT_CONJUNCT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
