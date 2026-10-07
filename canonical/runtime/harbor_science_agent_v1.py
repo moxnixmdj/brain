@@ -40,10 +40,10 @@ _FATAL_ACTION_STDERR_MARKERS = (
     "syntax error near unexpected token",
 )
 
-def _action_transport_clean(returncode: int, stderr: Any) -> bool:
+def _action_transport_clean(returncode: int, stdout: Any, stderr: Any) -> bool:
     if int(returncode) != 0:
         return False
-    text = str(stderr or "").lower()
+    text = (str(stdout or "") + "\n" + str(stderr or "")).lower()
     return not any(marker in text for marker in _FATAL_ACTION_STDERR_MARKERS)
 MAX_BRAIN_DELIVERABLES = 16
 _EXPLICIT_SUBMISSION_PATH_RE = re.compile(
@@ -286,7 +286,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         verified_covers: list[str] = []
         deliverable_checks: list[dict[str, Any]] = []
         action_transport_clean = _action_transport_clean(
-            action_receipt.returncode, action_receipt.stderr
+            action_receipt.returncode, action_receipt.stdout, action_receipt.stderr
         )
         if action_transport_clean:
             verify_receipt = await transport.exec(chosen["verify_command"], timeout_sec=180)
