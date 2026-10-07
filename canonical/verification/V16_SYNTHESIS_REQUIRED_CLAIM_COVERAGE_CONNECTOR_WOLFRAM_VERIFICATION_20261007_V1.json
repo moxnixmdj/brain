@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CONNECTOR_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_SOURCE_AUDIT_AND_WOLFRAM_CEILING_CHECK__SELECTED_PROPERTY_ONLY__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_SELECTED_PROPERTY_CELL_20261007_V1.json",
+    "git_blob_sha": "7b2cb008f34082ae0aa4be78f2444287cf6022b2"
+  },
+  "exact_source_audit": {
+    "coverage_proof": "f2ef80facb39264b1e12b81e451eb4499a3b987f",
+    "scope_certificate": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6",
+    "p3_binding": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+    "terminal_wave": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+    "donor_cleanroom": "d3144bf0aa618b15ef594d24de54d55cbdb329fd",
+    "global_ownership": "e0dbd996c18bdb818693ab0d217d751594a03d0f"
+  },
+  "connector_checks": {
+    "brain_required_claim_coverage_lower_bound_is_one": true,
+    "admissible_metric_upper_bound_is_one": true,
+    "verified_source_to_target_relation_is_SUPERSET": true,
+    "scope_relation_independent": true,
+    "scope_certificate_verified_independent_proven_stronger_and_complete": true,
+    "exact_p3_binding_present": true,
+    "terminal_rows_found": 2,
+    "terminal_rows_direct_instrumentation_and_parent_acceptance_pass": true,
+    "terminal_rows_no_replacement_tuning_or_feedback": true,
+    "terminal_wave_identity_exact": true,
+    "donor_cleanroom_identity_exact": true,
+    "donor_cleanroom_behavior_preserved_and_byte_identical": true,
+    "undeclared_dependency_count_zero": true,
+    "ownership_postcondition_counters_zero": true
+  },
+  "wolfram": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "expression": "FullSimplify[x <= 1, Assumptions -> 0 <= x <= 1]",
+    "result": true,
+    "interpretation": "FOR_A_FRACTION_METRIC_BOUNDED_TO_THE_UNIT_INTERVAL__A_VERIFIED_BRAIN_LOWER_BOUND_OF_ONE_ATTAINS_THE_GLOBAL_CEILING"
+  },
+  "verified_consequence": {
+    "selected_property": "SYNTHESIS_TARGET_SCOPE_REQUIRED_CLAIM_COVERAGE_TOP_LAW",
+    "K_c_minus_empty_for_selected_property": true,
+    "target_identity_required": false,
+    "target_score_required": false,
+    "target_information_consumed": 0,
+    "same_package_donor_deleted_ownership_evidence_bound": true,
+    "remove_from_synthesis_residual": "REQUIRED_CLAIM_COVERAGE",
+    "synthesis_family_closed": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_USEFUL_SYNTHESIS_QUALITY_DIMENSIONS_ARE_NONINFERIOR.",
+    "NO_CLAIM_SYNTHESIS_FAMILY_IS_CLOSED.",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED.",
+    "NO_CLAIM_D_FINALITY_OR_TERMINAL_IS_CLOSED.",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
