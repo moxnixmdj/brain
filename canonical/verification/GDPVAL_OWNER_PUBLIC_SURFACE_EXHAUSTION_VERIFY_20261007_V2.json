@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_OWNER_PUBLIC_SURFACE_EXHAUSTION_VERIFICATION_V2",
+  "date": "2026-10-07",
+  "status": "PASS__TWO_COMPLETE_PUBLIC_GITHUB_TREES_PLUS_CURRENT_DATA_API_DOCUMENTATION_BOUNDARY_REPLAY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/GDPVAL_OWNER_PUBLIC_SURFACE_EXHAUSTION_20261007_V2.json",
+    "branch": "truth/gdpval-owner-public-surface-exhaustion-20261007-v2"
+  },
+  "checks": {
+    "stirrup_tree": {
+      "commit_sha": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
+      "entry_count": 177,
+      "truncated": false,
+      "evaluation_named_path_count": 0
+    },
+    "stirrup_js_tree": {
+      "tree_sha": "516208963f0a6255bbae5eb8894651a53bd535da",
+      "entry_count": 234,
+      "truncated": false,
+      "evaluation_named_path_count": 0
+    },
+    "organization_public_surface": {
+      "observed_public_repository_count": 2,
+      "repositories": [
+        "Stirrup",
+        "StirrupJS"
+      ]
+    },
+    "data_api_docs": {
+      "retrieved_date": "2026-10-07",
+      "pairwise_text_match": false,
+      "comparison_text_match": false,
+      "gdpval_named_only_as_model_benchmark_score": true,
+      "raw_measurements_documented_scope": "LANGUAGE_PROVIDER_PER_REQUEST_PERFORMANCE_MEASUREMENTS",
+      "raw_gdpval_judgment_endpoint_found": false
+    }
+  },
+  "verified_conclusion": [
+    "CURRENT_FIRST_PARTY_PUBLIC_GITHUB_SURFACE_DOES_NOT_CONTAIN_A_GDPVAL_SPECIFIC_GRADER_OR_RATING_IMPLEMENTATION.",
+    "CURRENT_DOCUMENTED_ARTIFICIAL_ANALYSIS_DATA_API_DOES_NOT_EXPOSE_GDPVAL_PAIRWISE_JUDGMENTS_OR_CROWD_BT_FIT_STATE.",
+    "REPEATING_SEARCHES_OF_THESE_UNCHANGED_SURFACES_CANNOT_RESOLVE_THE_CURRENT_OWNER_ROUTE_MISSING_OBJECTS."
+  ],
+  "fail_closed_boundaries": [
+    "THIS_IS_A_CURRENT_PUBLIC_SURFACE_EXHAUSTION_CLAIM_NOT_A_GLOBAL_NONEXISTENCE_CLAIM.",
+    "REOPEN_ON_REPOSITORY_SET_TREE_API_SPEC_OR_FIRST_PARTY_METHOD_SURFACE_CHANGE.",
+    "NO_OWNER_ELO_NO_GDPVAL_CLOSURE_NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
