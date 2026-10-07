@@ -304,3 +304,69 @@ def test_structured_method_route_compiles_requirement_to_verified_output_without
     assert row["outputs"][0]["id"] == "y"
     assert row["outputs"][0]["value"] == 3.0
     assert row["requirement_lineage"][0]["requirement_id"] == "R1"
+
+
+def test_source_aligned_requirements_compile_and_verify_inside_universal_loop():
+    problem = {
+        "initial_facts": [],
+        "target_effects": ["STRUCTURED_OUTPUT_VERIFIED"],
+        "capabilities": [{
+            "id": "structured-output",
+            "requires": [],
+            "provides": ["STRUCTURED_OUTPUT_VERIFIED"],
+            "cost": 1,
+            "result_fields": [],
+            "action": {
+                "type": "verified_policy",
+                "verifier_id": "SOURCE_ALIGNED_ACCEPTANCE_PROGRAM_V1",
+                "verifier_payload": {
+                    "source_text": "score must be at least 10. safe must be true.",
+                    "source_id": "task",
+                    "field_schema": {
+                        "score": {"type": "number", "dimension": "score"},
+                        "safe": {"type": "boolean", "dimension": "dimensionless"},
+                    },
+                },
+            },
+        }],
+    }
+    out = run(
+        problem,
+        proposal_packets={
+            "structured-output": [{"candidate_values": {"score": 12.0, "safe": True}}],
+        },
+    )
+    assert out["pass"] is True, out
+
+
+def test_unparsed_normative_requirement_requests_more_information_not_false_success():
+    problem = {
+        "initial_facts": [],
+        "target_effects": ["STRUCTURED_OUTPUT_VERIFIED"],
+        "capabilities": [{
+            "id": "structured-output",
+            "requires": [],
+            "provides": ["STRUCTURED_OUTPUT_VERIFIED"],
+            "cost": 1,
+            "result_fields": [],
+            "action": {
+                "type": "verified_policy",
+                "verifier_id": "SOURCE_ALIGNED_ACCEPTANCE_PROGRAM_V1",
+                "verifier_payload": {
+                    "source_text": "score must be at least 10. report must explain strategic implications.",
+                    "source_id": "task",
+                    "field_schema": {
+                        "score": {"type": "number", "dimension": "score"},
+                    },
+                },
+            },
+        }],
+    }
+    out = run(
+        problem,
+        proposal_packets={
+            "structured-output": [{"candidate_values": {"score": 12.0}}],
+        },
+    )
+    assert out["status"] == "NEED_MORE_INFORMATION"
+    assert "STRUCTURED_OUTPUT_VERIFIED" not in out["verified_facts"]
