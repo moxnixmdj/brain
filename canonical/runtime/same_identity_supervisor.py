@@ -429,7 +429,11 @@ def execute_claimed_task(
     )
     bridge_dir.mkdir(parents=True, exist_ok=True)
     env["PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR"] = str(bridge_dir)
-    argv = [sys.executable, "canonical/runtime/astra_runtime.py", task["mission_path"]]
+    argv = [
+        sys.executable,
+        "canonical/runtime/root3_production_astra_launcher_v1.py",
+        task["mission_path"],
+    ]
     result = executor(argv, root, env)
 
     receipt = {
