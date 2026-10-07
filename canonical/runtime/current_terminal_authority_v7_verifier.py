@@ -15,6 +15,10 @@ SOURCES={
 "pullback_verify":("canonical/verification/EVALUATOR_PULLBACK_DOMINANCE_VERIFICATION_20261007_V1.json","05d66cf13843578c9a34c929ba1c32509f075c44"),
 "kernel":("canonical/governance/STOCHASTIC_KERNEL_TRANSFORM_UNIVERSALITY_20261007_V1.json","658f12eba91a85dbf67dac82b8fb1f6650cc3934"),
 "kernel_verify":("canonical/verification/STOCHASTIC_KERNEL_TRANSFORM_UNIVERSALITY_WOLFRAM_VERIFICATION_20261007_V1.json","c55afa5aaae1587a6973908faf8b0e051cceb31a"),
+"escape":("canonical/governance/TARGET_UNDOMINATED_ESCAPE_REDUCTION_20261007_V1.json","c6757e71f862dd592402199ac12afb8bca45c256"),
+"escape_replay":("canonical/verification/TARGET_UNDOMINATED_ESCAPE_REPLAY_20261007_V1.json","5cc55a400b81db8aa356de811f46d24d8b26c83f"),
+"escape_wolfram":("canonical/verification/TARGET_UNDOMINATED_ESCAPE_WOLFRAM_VERIFICATION_20261007_V1.json","54d1f2184548dba880adcd9006df31e6c4dc3f65"),
+"escape_roles":("canonical/governance/TARGET_ROLE_ESCAPE_FRONTIER_20261007_V1.json","388dd2cb544b7b7bd7ded5779f51a06d3acb3ee3"),
 }
 def blob(p):
     b=(ROOT/p).read_bytes()
@@ -34,6 +38,9 @@ def verify():
     ifc=load(SOURCES["if_countermodel"][0])
     ifa=load(SOURCES["if_audit"][0])
     kv=load(SOURCES["kernel_verify"][0])
+    ew=load(SOURCES["escape_wolfram"][0])
+    er=load(SOURCES["escape_replay"][0])
+    roles=load(SOURCES["escape_roles"][0])
     if v6["preserved_truth"]["open_truth_obligations"]!=29: errors.append("V6_NOT_29")
     if "ONLY_C_SCHEDULING_REPRESENTATION" not in v6a["audit_conclusion"]: errors.append("V6_AUDIT_SCOPE")
     recompute=v28["independent_provider"]["recomputation"]
@@ -45,6 +52,10 @@ def verify():
     if ifa["audit_conclusion"]["necessity_status"]!="NOT_ESTABLISHED_AS_LITERAL_ZERO": errors.append("IF_AUDIT_NOT_SUPPORTIVE")
     if kv["independent_provider"]["verified"]["two_by_two_row_stochastic_kernel_composition_remains_row_stochastic"] is not True: errors.append("KERNEL_COMPOSITION_NOT_VERIFIED")
     if kv["independent_provider"]["verified"]["pullback_of_evaluator_through_composed_kernel_equals_iterated_pullback"] is not True: errors.append("KERNEL_PULLBACK_NOT_VERIFIED")
+    if ew["verified"]["u_subset_s_implies_target_dominance_iff_no_target_member_lies_in_s_minus_d_b"] is not True: errors.append("ESCAPE_EQUIVALENCE_NOT_VERIFIED")
+    if ew["verified"]["full_superdomain_dominance_not_necessary"] is not True: errors.append("ESCAPE_FULL_SUPERDOMAIN_NECESSITY_NOT_FALSIFIED")
+    if not er["status"].startswith("EXACT_REBASED_BRANCH_REPLAY_PASS__5_OF_5"): errors.append("ESCAPE_REPLAY_NOT_PASS")
+    if len(roles["fully_accepted_roles"])!=4 or len(roles["structural_escape_roles"])!=6: errors.append("ESCAPE_ROLE_COUNTS")
     ct=a["current_truth"]
     if ct["open_truth_obligations"]!=28: errors.append("AUTH_TRUTH_COUNT")
     if ct["atomic_open"]!=20 or ct["meta_open"]!=8: errors.append("AUTH_ATOMIC_META")
