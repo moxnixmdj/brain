@@ -168,7 +168,7 @@ class PlainGoalGroundingRuntimePrecedenceTests(unittest.TestCase):
         evidence_path=CANONICAL_ROOT/"astra_runtime"/"evidence"/"GROUNDING-CONTROL-FLOW-FALLTHROUGH__BOUND_CAPABILITY_GROUNDING.json"
         composition_path=CANONICAL_ROOT/"astra_runtime"/"evidence"/"GROUNDING-CONTROL-FLOW-FALLTHROUGH__COMPOSITION.json"
         composition={"problem":{"target_effects":["grounded.clause.0.satisfied"],"capabilities":[]}}
-        expected={"status":"UNRESOLVED","output_verified":True}
+        expected={"status":"UNRESOLVED","output_verified":True,"controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN"}
         with mock.patch.object(runtime,"_compile_plain_goal",side_effect=compile_error), \
              mock.patch.object(runtime,"_ground_plain_goal_to_bound_capabilities",return_value=(evidence_path,grounding)), \
              mock.patch.object(runtime,"_compose_grounding_to_capability_problem",return_value=(composition_path,composition)), \
@@ -200,6 +200,51 @@ class PlainGoalGroundingRuntimePrecedenceTests(unittest.TestCase):
              mock.patch.object(runtime,"_load_auto_capability_acquisition",side_effect=AssertionError("must not acquire")):
             with self.assertRaisesRegex(runtime.Blocker,"GOAL_ARCHITECTURAL_GAP"):
                 runtime.run_goal(step,mission)
+
+
+    def test_whole_goal_bound_capability_executes_once_without_planner(self):
+        goal="Compile terminal Kstar. Prove scope complete cover."
+        mission={"mission_id":"WHOLE-GOAL-KSTAR-TEST","goal":goal}
+        step={"adapter":"goal","goal_ref":"goal","allow_optional_model_planner":False}
+        compile_error=runtime.Blocker(
+            "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+        )
+        grounding={
+            "schema":"PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+            "grounded_clause_count":2,
+            "unresolved_clause_indexes":[],
+            "candidate_capability_ids":["terminal.kstar.root.assess.stdlib"],
+            "clauses":[
+                {"index":0,"text":"Compile terminal Kstar","status":"GROUNDED","candidates":[{"capability_id":"terminal.kstar.root.assess.stdlib"}]},
+                {"index":1,"text":"Prove scope complete cover","status":"GROUNDED","candidates":[{"capability_id":"terminal.kstar.root.assess.stdlib"}]},
+            ],
+            "model_dependency_count":0,
+        }
+        evidence_path=CANONICAL_ROOT/"astra_runtime"/"evidence"/"WHOLE-GOAL-KSTAR-TEST__BOUND_CAPABILITY_GROUNDING.json"
+        registry={"terminal.kstar.root.assess.stdlib":{
+            "status":"VERIFIED_BOUND_CAPABILITY",
+            "whole_goal_capability":True,
+            "incremental_spend_usd":0,
+            "action_template":{
+                "type":"invoke_capability",
+                "args":{"capability_id":"terminal.kstar.root.assess.stdlib"},
+                "expect":{"type":"field_equals","field":"output_verified","value":True},
+            },
+        }}
+        calls=[]
+        def invoke(args):
+            calls.append(dict(args))
+            return {"status":"UNRESOLVED","output_verified":True,"model_dependency_count":0}
+        with mock.patch.object(runtime,"_compile_plain_goal",side_effect=compile_error), \
+             mock.patch.object(runtime,"_ground_plain_goal_to_bound_capabilities",return_value=(evidence_path,grounding)), \
+             mock.patch.object(runtime,"_load_bound_capability_registry",return_value=registry), \
+             mock.patch.object(runtime,"_invoke_bound_capability",side_effect=invoke), \
+             mock.patch.object(runtime,"_compose_grounding_to_capability_problem",side_effect=AssertionError("planner composition must not run")):
+            got=runtime.run_goal(step,mission)
+        self.assertEqual(len(calls),1)
+        self.assertEqual(got["status"],"UNRESOLVED")
+        self.assertEqual(got["composition_mode"],"MODEL_INDEPENDENT_WHOLE_GOAL_BOUND_CAPABILITY")
+        self.assertEqual(got["cognition_dependency_class"],"MODEL_INDEPENDENT")
 
 
 if __name__=="__main__":

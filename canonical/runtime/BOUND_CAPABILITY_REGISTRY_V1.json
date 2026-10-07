@@ -3400,7 +3400,8 @@
         "independent_verification_required_for_any_scope_complete_promotion": true,
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
-      }
+      },
+      "whole_goal_capability": true
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

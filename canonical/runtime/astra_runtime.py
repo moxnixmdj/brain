@@ -6172,6 +6172,46 @@ def _run_goal_unstamped(step, mission):
             unresolved_indexes=[
                 int(x) for x in (grounding.get("unresolved_clause_indexes") or [])
             ]
+
+            # Execute an explicitly verified whole-goal capability once when
+            # every clause grounds uniquely to the same capability. This keeps
+            # a one-root proof check as one action instead of exponential
+            # duplicate planner instances.
+            clauses=grounding.get("clauses") or []
+            if grounded_count>0 and not unresolved_indexes and grounded_count==len(clauses):
+                whole_ids=[]
+                whole_ready=True
+                for clause in clauses:
+                    candidates=(clause or {}).get("candidates") or []
+                    if (clause or {}).get("status")!="GROUNDED" or len(candidates)!=1:
+                        whole_ready=False
+                        break
+                    cid=str((candidates[0] or {}).get("capability_id") or "").strip()
+                    if not cid:
+                        whole_ready=False
+                        break
+                    whole_ids.append(cid)
+                if whole_ready and whole_ids and len(set(whole_ids))==1:
+                    cid=whole_ids[0]
+                    entry=_load_bound_capability_registry().get(cid)
+                    action=(entry or {}).get("action_template") if isinstance(entry,dict) else None
+                    if (
+                        isinstance(entry,dict)
+                        and entry.get("status")=="VERIFIED_BOUND_CAPABILITY"
+                        and entry.get("whole_goal_capability") is True
+                        and isinstance(action,dict)
+                        and action.get("type")=="invoke_capability"
+                        and isinstance(action.get("args"),dict)
+                        and "${input." not in json.dumps(action,sort_keys=True)
+                    ):
+                        result=_invoke_bound_capability(action.get("args") or {})
+                        _verify_action_expectation(action,result)
+                        result["grounding_evidence_path"]=str(
+                            grounding_path.relative_to(ROOT)
+                        )
+                        result["composition_mode"]="MODEL_INDEPENDENT_WHOLE_GOAL_BOUND_CAPABILITY"
+                        result["controller_mode"]="MODEL_INDEPENDENT_ACTION_PLAN"
+                        return result
             if grounded_count>0 and unresolved_indexes:
                 # Partial grounding must not suppress acquisition for unresolved
                 # clauses. Preserve the bound grounding as evidence, but route
