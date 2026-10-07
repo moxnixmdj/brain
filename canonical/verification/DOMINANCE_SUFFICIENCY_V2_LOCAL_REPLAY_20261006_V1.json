@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_DOMINANCE_SUFFICIENCY_V2_LOCAL_REPLAY_20261006_V1",
+  "date": "2026-10-06",
+  "status": "LOCAL_ZERO_COST_REPLAY_PASS__NOT_INDEPENDENT_PROMOTION_AUTHORITY__ZERO_CREDIT",
+  "branch": "feature/dominance-sufficiency-v1-20261006",
+  "base_commit_sha": "b11851ec07c12272f24e81dde583daea85e1cbf9",
+  "exact_branch_blobs": {
+    "canonical/runtime/dominance_binding_v2.py": "29a9df51aee925e16804c24ef5e11655c9b78430",
+    "canonical/runtime/dominance_sufficiency_v2.py": "2b3d69f7734f4c03ba662b917820ebe56d63c738",
+    "canonical/runtime/dominance_first_learning_router_v2.py": "91ffbbe21df745a02ee0888160e1162e8bd03e03",
+    "canonical/tests/test_dominance_sufficiency_v2.py": "19019f3bf584819fc44c341ff17694c07701b7dd",
+    "canonical/tests/test_dominance_first_learning_router_v2.py": "753046ea81c0e20b2aeeffb8f1b014287fc05729",
+    "canonical/governance/DOMINANCE_SUFFICIENCY_V2.json": "2730a7ae949e644f42dd9be4da3f7e0c509aaa8b"
+  },
+  "local_test_replay": {
+    "tests_passed": 15,
+    "tests_total": 15,
+    "result": "PASS",
+    "scope": [
+      "ROBUST_WITNESS_PASS",
+      "NEGATIVE_MARGIN_OPEN",
+      "LIVE_SET_BINDING_REJECTION",
+      "OWNERSHIP_RECEIPT_SUBSTITUTION_REJECTION",
+      "BOUND_VALUE_SUBSTITUTION_REJECTION",
+      "METRIC_SUBSTITUTION_REJECTION",
+      "EVALUATOR_RELATION_REQUIRED",
+      "LOAD_BEARING_TARGET_COMPLETENESS_REQUIRED",
+      "DONOR_INDEPENDENCE_REQUIRED",
+      "TARGET_CONTRACT_SUBSTITUTION_REJECTION",
+      "DOMINANCE_FIRST_SHORT_CIRCUIT",
+      "OPEN_FALLBACK_TO_V3",
+      "INVALID_CERTIFICATE_FAIL_CLOSED",
+      "NO_CERTIFICATE_PRESERVES_V3",
+      "CERTIFICATE_DOES_NOT_GRANT_EXECUTION_AUTHORITY"
+    ],
+    "integration_boundary": "THE_LOCAL_ROUTER_REPLAY_USED_DOCUMENTED_INTERFACE_STUBS_FOR_PREEXISTING_V3_DEPENDENCIES__IT_IS_NOT_AN_EXACT_FULL_REPOSITORY_INDEPENDENT_REPLAY."
+  },
+  "separate_finite_model_falsification": {
+    "two_configuration_worlds_checked": 81,
+    "theorem_mismatches": 0,
+    "criterion": "PASS_IFF_AT_LEAST_ONE_BRAIN_OWNED_CONFIGURATION_HAS_NONNEGATIVE_MARGIN_IN_EVERY_LIVE_WORLD"
+  },
+  "receipt_substitution_falsification": {
+    "mutations_checked": 15,
+    "mutations_rejected_fail_closed": 15,
+    "categories": [
+      "LIVE_SET",
+      "TARGET_CONTRACT",
+      "METRIC",
+      "LOAD_BEARING_COMPLETENESS",
+      "OWNERSHIP_CONFIGURATION",
+      "OWNERSHIP_TARGET",
+      "DONOR_INDEPENDENCE",
+      "BOUND_CONFIGURATION",
+      "BOUND_HYPOTHESIS",
+      "BOUND_TARGET",
+      "BOUND_METRIC",
+      "BOUND_LOWER_VALUE",
+      "BOUND_UPPER_VALUE",
+      "EVALUATOR_RELATION",
+      "BOUND_SCOPE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_INDEPENDENT_EXTERNAL_VERIFICATION.",
+    "NO_SCHEDULING_AUTHORITY.",
+    "NO_EXECUTION_AUTHORITY.",
+    "NO_PROMOTION_AUTHORITY.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT.",
+    "NO_TERMINAL_PREDICATE_CLOSURE."
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0
+}

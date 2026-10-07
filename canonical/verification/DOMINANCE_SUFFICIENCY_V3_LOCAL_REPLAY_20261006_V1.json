@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_DOMINANCE_SUFFICIENCY_V3_LOCAL_REPLAY_20261006_V1",
+  "date": "2026-10-06",
+  "status": "LOCAL_ZERO_COST_REPLAY_PASS__SEMANTIC_SUBSTITUTION_FALSIFICATION_PASS__NOT_INDEPENDENT__ZERO_CREDIT",
+  "branch": "feature/dominance-sufficiency-v1-20261006",
+  "exact_v3_blobs": {
+    "canonical/runtime/dominance_semantic_binding_v3.py": "e5f96a40346ba6aeb2fa7431e4935cc4e3699383",
+    "canonical/runtime/dominance_sufficiency_v3.py": "bdfac38cbbe5e104baaddceb5cf62c24d9c80009",
+    "canonical/runtime/dominance_first_learning_router_v3.py": "05f4889d83394e7505e8eabe3f8a7c69198dc6ef",
+    "canonical/tests/test_dominance_sufficiency_v3.py": "4e5ff56825de585b22af51ebda2e9cd3a6b85c89",
+    "canonical/governance/DOMINANCE_SUFFICIENCY_V3.json": "27de949aaf1bca462cccc6a4a026f9456a3e3efe"
+  },
+  "combined_local_replay": {
+    "tests_passed": 24,
+    "tests_total": 24,
+    "result": "PASS",
+    "includes_v2_regressions": true,
+    "v3_specific_checks": [
+      "SEMANTICALLY_BOUND_ROBUST_WITNESS_PASS",
+      "BOUND_WORLD_SEMANTIC_SUBSTITUTION_FAIL_CLOSED",
+      "WORLD_DEFINITION_RECEIPT_SUBSTITUTION_FAIL_CLOSED",
+      "LIVE_WORLD_SET_RECEIPT_SUBSTITUTION_FAIL_CLOSED",
+      "CERTIFICATE_WORLD_SET_MUST_EQUAL_ROUTER_CURRENT_WORLD_SET",
+      "CURRENT_ROUTER_SEMANTIC_FINGERPRINT_REQUIRED_WHEN_SHORTCUT_REQUESTED",
+      "VALID_SHORTCUT_STOPS_PROBE_WITHOUT_EXECUTION_AUTHORITY",
+      "OPEN_CERTIFICATE_FALLS_BACK_TO_EXISTING_V3",
+      "NO_CERTIFICATE_PRESERVES_EXISTING_V3_WITHOUT_NEW_SEMANTIC_REQUIREMENT"
+    ]
+  },
+  "prior_v2_finite_model_falsification_preserved": {
+    "two_configuration_worlds_checked": 81,
+    "theorem_mismatches": 0,
+    "receipt_substitution_mutations_checked": 15,
+    "receipt_substitution_mutations_rejected": 15
+  },
+  "integration_boundary": "LOCAL_ROUTER_REPLAY_USES_DOCUMENTED_INTERFACE_STUBS_FOR_PREEXISTING_V3_DEPENDENCIES__FULL_REPOSITORY_EXACT_BYTE_INDEPENDENT_REPLAY_REMAINS_REQUIRED.",
+  "hard_nonclaims": [
+    "NO_INDEPENDENT_EXTERNAL_VERIFICATION.",
+    "NO_SCHEDULING_AUTHORITY.",
+    "NO_EXECUTION_AUTHORITY.",
+    "NO_PROMOTION_AUTHORITY.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT.",
+    "NO_TERMINAL_PREDICATE_CLOSURE."
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0
+}

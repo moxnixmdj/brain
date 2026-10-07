@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "DOMINANCE-SUFFICIENCY-V1-20261006",
+  "status": "ZERO_REALITY_STRUCTURAL_CONTROLLER_HARDENING__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "causal_problem": "CURRENT_DECISION_SUFFICIENCY_CAN_REQUEST_INFORMATION_WHEN_LIVE_HYPOTHESES_DISAGREE_ON_THE_BEST_ACTION_EVEN_THOUGH_ONE_BRAIN_OWNED_CONFIGURATION_IS_ALREADY_NONINFERIOR_IN_EVERY_LIVE_WORLD.",
+  "selected_route": "ADD_FAIL_CLOSED_DOMINANCE_SUFFICIENCY_VERIFIER_BEFORE_ANY_FUTURE_INTEGRATION_INTO_ACTIVE_ROUTING.",
+  "expected_terminal_delta": "IF_INDEPENDENTLY_VERIFIED_AND_LATER_INTEGRATED__DELETE_INFORMATION_ACQUISITION_WHEN_A_SCOPE_COMPLETE_ROBUST_NONINFERIOR_INTERSECTION_ALREADY_EXISTS__ZERO_DIRECT_PREDICATE_CLOSURE_FROM_CONTROLLER_CHANGE_ALONE.",
+  "branch": "feature/dominance-sufficiency-v1-20261006",
+  "base_commit_sha": "b11851ec07c12272f24e81dde583daea85e1cbf9",
+  "files": [
+    "canonical/runtime/dominance_sufficiency_v1.py",
+    "canonical/tests/test_dominance_sufficiency_v1.py",
+    "canonical/governance/DOMINANCE_SUFFICIENCY_V1.json"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
