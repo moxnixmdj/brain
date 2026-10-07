@@ -31,6 +31,8 @@ from canonical.runtime.p2_authenticated_top_law_route_v1 import execute as p2_ex
 from canonical.runtime.judgment_control_envelope_v1 import configured_terminal_decision
 from canonical.runtime.proof_carrying_semantic_refinement_v6 import resolve_from_source_proof
 from canonical.runtime.typed_acceptance_program_v1 import verify as verify_typed_acceptance_program
+from canonical.runtime.instruction_constraint_compiler_v1 import compile_constraints, validate_response
+from canonical.runtime.structured_method_expression_ast_candidate_v2 import compile_graph as compile_structured_method
 
 SCHEMA = "PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V1"
 
@@ -168,6 +170,61 @@ def _verify_typed_acceptance_program(payload: Mapping[str, Any], proposal: Mappi
     }
 
 
+
+
+def _verify_instruction_constraints(payload: Mapping[str, Any], proposal: Mapping[str, Any]) -> dict[str, Any]:
+    instruction = payload.get("instruction")
+    response = proposal.get("response") if isinstance(proposal, Mapping) else None
+    if not isinstance(instruction, str) or not instruction.strip():
+        return {"pass": False, "status": "FAIL_CLOSED", "reason": "INSTRUCTION_REQUIRED"}
+    if not isinstance(response, str):
+        return {"pass": False, "status": "REJECTED", "reason": "RESPONSE_REQUIRED"}
+    try:
+        constraints = compile_constraints(instruction)
+        ok, errors = validate_response(response, constraints)
+    except Exception as exc:
+        return {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": type(exc).__name__ + ":" + str(exc),
+        }
+    detail = {
+        "instruction": instruction,
+        "response": response,
+        "errors": errors,
+    }
+    return {
+        "pass": ok,
+        "status": "VERIFIED" if ok else "FALSIFIED",
+        "reason": None if ok else ";".join(errors or ["INSTRUCTION_CONSTRAINT_FAILURE"]),
+        "proof_digest": _digest(detail),
+        "verified_output": response if ok else None,
+        "detail": detail,
+    }
+
+
+def _verify_structured_method(payload: Mapping[str, Any], proposal: Mapping[str, Any]) -> dict[str, Any]:
+    if proposal:
+        return {"pass": False, "status": "REJECTED", "reason": "STRUCTURED_METHOD_ROUTE_TAKES_NO_UNTRUSTED_PROPOSAL"}
+    public = payload.get("public")
+    if not isinstance(public, Mapping):
+        return {"pass": False, "status": "FAIL_CLOSED", "reason": "STRUCTURED_METHOD_PUBLIC_CONTRACT_REQUIRED"}
+    out = compile_structured_method(public)
+    ok = out.get("status") == "COMPILED"
+    return {
+        "pass": ok,
+        "status": "VERIFIED" if ok else "FAIL_CLOSED",
+        "reason": None if ok else str(out.get("reason") or "STRUCTURED_METHOD_COMPILE_FAILED"),
+        "proof_digest": _digest(out),
+        "verified_output": {
+            "outputs": out.get("outputs", []),
+            "selected_branch_id": out.get("selected_branch_id"),
+            "requirement_lineage": out.get("requirement_lineage", []),
+        } if ok else None,
+        "detail": out,
+    }
+
+
 Verifier = Callable[[Mapping[str, Any], Mapping[str, Any]], dict[str, Any]]
 
 BUILTIN_VERIFIERS: dict[str, Verifier] = {
@@ -177,6 +234,13 @@ BUILTIN_VERIFIERS: dict[str, Verifier] = {
     "UNKNOWN_DOMAIN_JUDGMENT_CONTROL_V1": lambda p, q: _verify_judgment("UNKNOWN_DOMAIN", p, q),
     "SOURCE_ALIGNED_SEMANTIC_POLICY_V6": _verify_semantic_policy_v6,
     "TYPED_ACCEPTANCE_PROGRAM_V1": _verify_typed_acceptance_program,
+    "INSTRUCTION_CONSTRAINTS_V1": _verify_instruction_constraints,
+    "STRUCTURED_METHOD_EXPRESSION_AST_V2": _verify_structured_method,
+}
+
+PROPOSAL_FREE_VERIFIERS = {
+    "P2_AUTHENTICATED_TOP_LAW_V1",
+    "STRUCTURED_METHOD_EXPRESSION_AST_V2",
 }
 
 
@@ -283,7 +347,7 @@ def run(
             payload = action["verifier_payload"]
 
             packets = proposals.get(cid)
-            if verifier_id == "P2_AUTHENTICATED_TOP_LAW_V1":
+            if verifier_id in PROPOSAL_FREE_VERIFIERS:
                 packets = [{}]
             if not isinstance(packets, Sequence) or isinstance(packets, (str, bytes)) or not packets:
                 return {
