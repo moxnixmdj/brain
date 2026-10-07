@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK9_ONE_SLOT_AUTHORITY_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE__TRANSITIVE_CARRIER_PREFLIGHT_REQUIRED__LIVE_PUBLIC_EPOCH_PRECHECK_REQUIRED__ONE_SLOT_ONLY__ZERO_SPEND",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/neo-orbit-determination::trial-0",
+    "rank": 9,
+    "digest": "sha256:b0038fd39395b57f2036b2c0271f37b508e1250fc97d12c899590b61e997cada"
+  },
+  "source_bindings": {
+    "intent": {
+      "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK9_ONE_SHOT_20261007_V1.json",
+      "git_blob_sha": "54dfd6dbdf858b386b8a6fa303b55e6ea5803f04"
+    },
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V6.json",
+      "git_blob_sha": "b82cffd09260c6792f473c952d2f0644bb2ca1fa"
+    },
+    "carrier_closure_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261007_V1.json",
+      "git_blob_sha": "4b2a4fb3bd85b066e642a0253d4c325dbb431237"
+    },
+    "carrier_closure_verification": {
+      "path": "canonical/verification/TB_SCIENCE_TRANSITIVE_CARRIER_CLOSURE_PUBLIC_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "cb8c4e36ee47dc2542b120a4a631de6ebdd4e8c5"
+    },
+    "manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    }
+  },
+  "exact_route": {
+    "agent": "5bc8ebac26bb7c809d4698f535eff43b667b30df",
+    "planner": "c3e36eba57c450f325c8a9476ee048c841bbdbc8",
+    "raw_task_contract": "d54d5a2f7efa76b653d288f4f53da4883644baa6",
+    "raw_task_localizer": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76",
+    "transitive_runtime_file_count": 14
+  },
+  "live_epoch": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "path": "capsules/tb_science_rank9_20261007_v1/RANK9_EPOCH_V1.json",
+    "git_blob_sha": "a172896454ef0faf405dc371ac06a01acc866c76",
+    "epoch_id": "TBSCI-RANK9-20261007-E1",
+    "required_immediately_before_task_start": true
+  },
+  "controls": {
+    "exact_slot_count": 1,
+    "attempts": 1,
+    "retries": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "recompute_current_transitive_closure_before_task_start": true,
+    "exact_carrier_blob_identity_required": true,
+    "agent_and_planner_import_required_before_task_start": true,
+    "precheck_failure_consumes_slot": false,
+    "after_task_start_result_is_irreversible": true,
+    "after_task_start_missing_or_zero_verifier_result_counts_as_final_zero": true
+  },
+  "current_truth": {
+    "slot_is_next_untouched": true,
+    "prior_consumed_slots": 8,
+    "prior_successes": 0,
+    "prior_final_failures": 8,
+    "rank8_infrastructure_failure_class_closed": true,
+    "task_started": false,
+    "result_present": false,
+    "acceptance_credit": false,
+    "terminal_credit": false
+  }
+}
