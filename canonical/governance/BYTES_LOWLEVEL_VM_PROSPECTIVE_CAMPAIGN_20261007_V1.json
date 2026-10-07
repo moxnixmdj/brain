@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_LOWLEVEL_VM_PROSPECTIVE_CAMPAIGN_V1",
+  "date": "2026-10-07",
+  "status": "FROZEN_BEFORE_EXECUTION__ZERO_TERMINAL_CREDIT",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "exact_blobs": {
+    "kernel": "a50d0bf92ee14f7cb1db5658bf31f3a8a68b5189",
+    "task_generator": "9ec782ad1b2bba5f1a443f7dd47a97ceb4f108a8",
+    "tasks_precommit": "76431ddafa742b5e1ae8669f41d12f9b02766883"
+  },
+  "execution": {
+    "synthesizer": "KERNEL_FUNCTION_d",
+    "target_program_visible_to_synthesizer": false,
+    "train_examples_per_task": 5,
+    "max_program_length": 6,
+    "step_limit": 512,
+    "success": "ALL_8_TASKS_AND_ALL_32_HOLDOUTS_EXACT"
+  },
+  "task_property": {
+    "strict_loop_required": true,
+    "meaning": "NO_LOOP_FREE_PROGRAM_IN_THE_ENTIRE_VALID_LENGTH_LTE_6_CLOSURE_MATCHES_THE_TASK_TRAIN_BEHAVIOR",
+    "holdout_determinate": true
+  },
+  "persistence": {
+    "kernel_mutation_forbidden": true,
+    "discovered_programs_ephemeral_only": true,
+    "compiled_registry_growth_forbidden": true,
+    "persistent_learned_state_forbidden": true
+  },
+  "hard_nonclaims": [
+    "NO_TURING_COMPLETENESS_OR_UNIVERSALITY_CLAIM",
+    "BOUND_ONLY_TO_LENGTH_LTE_6_AND_512_STEPS",
+    "NO_OPEN_WORLD_OR_TERMINAL_CREDIT"
+  ]
+}
