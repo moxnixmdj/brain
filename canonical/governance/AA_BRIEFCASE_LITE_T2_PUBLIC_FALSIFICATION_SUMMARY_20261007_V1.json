@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_LITE_T2_PUBLIC_FALSIFICATION_SUMMARY_V1",
+  "date": "2026-10-07",
+  "status": "PUBLIC_NONOFFICIAL_POSTFREEZE_FALSIFICATION_SUMMARY__ZERO_CREDIT",
+  "objective": "Preserve the causal lesson from a public AA-Briefcase-Lite task without treating it as official AA-Briefcase acceptance evidence.",
+  "provenance": {
+    "source_branch": "aa-briefcase-lite-t2-falsification-v1",
+    "precommit": {
+      "path": "canonical/governance/AA_BRIEFCASE_LITE_T2_FALSIFICATION_PRECOMMIT_20261007_V1.json",
+      "git_blob_sha": "e451bb7c7c59b755b86b53237eb3953c3e0ee849"
+    },
+    "workbook_freeze": {
+      "path": "canonical/verification/AA_BRIEFCASE_LITE_T2_WORKBOOK_FREEZE_20261007_V1.json",
+      "git_blob_sha": "73d40685a080c8dba89458895a0e2ead793fb16f",
+      "frozen_output_sha256": "68e4f1c566a79b148a721e80269bceda2a94cbe3862b9656627dbff182efca76"
+    },
+    "postfreeze_diagnostic": {
+      "path": "canonical/verification/AA_BRIEFCASE_LITE_T2_POSTFREEZE_DIAGNOSTIC_20261007_V1.json",
+      "git_blob_sha": "434f12607e3c87384f7e12ec6dc75ff3151fc57e"
+    }
+  },
+  "contamination_boundary": {
+    "output_frozen_before_grading_checks": true,
+    "reference_model_submissions_opened_before_freeze": false,
+    "judge_outputs_opened_before_freeze": false,
+    "posthoc_task_specific_repair_counted_as_fresh": false
+  },
+  "observed_result": {
+    "public_absolute_binary_checks": 12,
+    "conservative_pass_count": 2,
+    "conservative_fail_count": 10,
+    "pairwise_checks_not_adjudicated": 2,
+    "official_AA_briefcase_credit": false
+  },
+  "causal_localization": [
+    {
+      "id": "DECLARED_REQUIRED_SOURCE_INGESTION_FAILURE",
+      "evidence": "Two task-relevant XLSX sources were retrieved but not parsed before model construction.",
+      "repair_class": "FAIL_CLOSED_DECLARED_SOURCE_INGESTION_GATE"
+    },
+    {
+      "id": "DECLARED_LOAD_BEARING_DIMENSION_COVERAGE_FAILURE",
+      "evidence": "Producer roster, multi-channel pricing, tier elasticity, reconciliation, scenario differentiation, and other requested model dimensions lacked complete pre-execution source coverage.",
+      "repair_class": "FAIL_CLOSED_REQUIRED_DIMENSION_COVERAGE_GATE"
+    },
+    {
+      "id": "DECLARED_PROFESSIONAL_CONVENTION_BINDING_FAILURE",
+      "evidence": "Currency/FX, source vintage, formatting categories, legend, and related conventions were not all mechanically bound.",
+      "repair_class": "FAIL_CLOSED_DECLARED_CONVENTION_BINDING_GATE"
+    },
+    {
+      "id": "AUTHORITY_DISCOVERY_OR_UNDECLARED_SOURCE_GAP",
+      "evidence": "Firm standards/current overrides/full authority hierarchy were not completely bound before execution.",
+      "repair_class": "REMAINS_SEMANTIC_OR_DISCOVERY_TAIL"
+    },
+    {
+      "id": "MODEL_SCHEMA_UNDERDECOMPOSITION",
+      "evidence": "The model omitted load-bearing structural dimensions not represented in the initial schema.",
+      "repair_class": "REMAINS_SEMANTIC_OR_DISCOVERY_TAIL"
+    }
+  ],
+  "theorem_effect": {
+    "statement": "THE_PUBLIC_FALSIFICATION_PROVES_THE_CURRENT_ROUTE_CAN_FAIL_BEFORE_ANY_OPUS_RELATIVE_QUALITY_QUESTION_WHEN_TASK_VISIBLE_REQUIRED_SOURCES_DIMENSIONS_OR_CONVENTIONS_ARE_OMITTED__THEREFORE_P2_LOSSLESS_MEMBERSHIP_MUST_FAIL_CLOSED_ON_THOSE_DECLARED_STRUCTURAL_OMISSIONS.",
+    "does_not_prove": [
+      "AA_BRIEFCASE_ELO_LT_1822",
+      "OPUS55_SUPERIORITY",
+      "GENERAL_PROFESSIONAL_CAPABILITY_FAILURE",
+      "SEMANTIC_COMPLETENESS_OF_ANY_SOURCE_MANIFEST"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_terminal_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
