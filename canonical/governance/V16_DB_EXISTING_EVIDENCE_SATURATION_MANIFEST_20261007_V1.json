@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_SOURCE_BOUND_ZERO_REALITY_SATURATION__ELEVEN_KNOWN_SOUND_DOMINATED_REGIONS__NOT_EXHAUSTIVE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "prior_ten_region_manifest": {
+      "path": "canonical/governance/V14_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V3.json",
+      "git_blob_sha": "8f64a698645e9ba0fe433560cbee3f084700b6e7",
+      "known_region_count": 10
+    },
+    "professional_unsupported_content_cell": {
+      "path": "canonical/governance/V14_PROFESSIONAL_ARTIFACT_UNSUPPORTED_CONTENT_SELECTED_PROPERTY_CELL_20261007_V1.json",
+      "git_blob_sha": "28692768a21e95b51e847417cf5ba2343587e4aa",
+      "region_id": "PROFESSIONAL_ARTIFACT_T1_FROZEN_30_ZERO_UNSUPPORTED_MATERIAL_CONTENT"
+    },
+    "professional_unsupported_content_independent_verification": {
+      "path": "canonical/verification/V14_PROFESSIONAL_ARTIFACT_UNSUPPORTED_CONTENT_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "aefee446782989518c9794db1e73909bd3c4f55c",
+      "result": "PASS"
+    }
+  },
+  "promotion": {
+    "inherited_known_sound_region_count": 10,
+    "new_region_count": 1,
+    "new_region": {
+      "id": "PROFESSIONAL_ARTIFACT_T1_FROZEN_30_ZERO_UNSUPPORTED_MATERIAL_CONTENT",
+      "kind": "SELECTED_PROPERTY_BOOLEAN_TOP_LAW_CELL",
+      "family": "ARTIFACT_CREATION",
+      "scope": "EXACT_FROZEN_T1_PROFESSIONAL_ARTIFACT_PARENT_POPULATION__AGGREGATE_30_CASES__ONLY_NO_UNSUPPORTED_MATERIAL_CONTENT_GATE",
+      "K_c_minus": "EMPTY_FOR_THIS_EXACT_PROPERTY_CELL",
+      "target_information_required": false
+    },
+    "new_region_distinct_from_prior_ten_by_id": true,
+    "known_sound_D_B_region_count": 11
+  },
+  "scheduler_effect": [
+    "SUBTRACT_ALL_ELEVEN_KNOWN_SOUND_D_B_REGIONS_BEFORE_ANY_NEW_TARGET_QUERY_OR_IMPLEMENTATION_WORK.",
+    "DO_NOT_REOPEN_ANY_OF_THE_ELEVEN_WITHOUT_CONTENT_ADDRESSED_COUNTEREVIDENCE.",
+    "SATURATE_ADDITIONAL_EXISTING_SCOPE_COMPLETE_TOP_OR_DIRECT_E2E_CERTIFICATES_BEFORE_FRESH_REALITY.",
+    "TREAT_ELEVEN_AS_A_LOWER_BOUND_ON_SOUND_DOMINATED_REGIONS__NOT_AS_EXHAUSTIVE_COVERAGE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_ELEVEN_REGIONS_ARE_DISJOINT.",
+    "NO_CLAIM_THE_ELEVEN_REGIONS_EXHAUST_D_B.",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED.",
+    "NO_NEW_FAMILY_ACCEPTANCE_CREDIT.",
+    "NO_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
