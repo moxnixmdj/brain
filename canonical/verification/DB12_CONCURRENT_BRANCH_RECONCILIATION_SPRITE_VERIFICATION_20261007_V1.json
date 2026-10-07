@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_DB12_CONCURRENT_BRANCH_RECONCILIATION_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "SPRITE_EXACT_SET_RECONCILIATION_PASS__TWELVE_DISTINCT_CACHED_CERTIFICATES__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/DB12_CONCURRENT_BRANCH_RECONCILIATION_20261007_V1.json",
+    "git_blob_sha": "3de6cf24d3164df31a4249f34118dbd3dacd66f0"
+  },
+  "inputs": {
+    "base": {
+      "path": "canonical/governance/V14_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V3.json",
+      "git_blob_sha": "8f64a698645e9ba0fe433560cbee3f084700b6e7",
+      "region_count": 10
+    },
+    "p2_delta": {
+      "path": "canonical/governance/V14_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V4.json",
+      "git_blob_sha": "e658e3c8359c97c994afb31c38d3ccb82931e97e",
+      "added_region": "PROFESSIONAL_ARTIFACT_P2_INFO_SAFE_V2_ALL_GENERATED_CASES"
+    },
+    "browser_delta": {
+      "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V4.json",
+      "git_blob_sha": "d86bbf7a1cc8968b3f48fbe1d13c390ab1310b9a",
+      "added_region": "BROWSER_STATE_INFORMATION_SAFE_ALL_SEEDS_ALL_ORDINALS_V1"
+    }
+  },
+  "replay": {
+    "provider": "SPRITES",
+    "sprite": "brain-h100-independent-replay-v1",
+    "verifier_sha256": "f908f5dfe41933c4dc44a238afc5b67c3b92761e11ab6455145df96d35bc1765",
+    "result_sha256": "b57703734ed66a670f0fb5b079df67cd983aa8de0697a96b6ff5488d8ab8fa5a",
+    "checks": {
+      "base_count_is_10": true,
+      "each_delta_adds_exactly_one_region": true,
+      "delta_ids_are_distinct": true,
+      "combined_certificate_count_is_12": true,
+      "combined_certificate_ids_duplicate_free": true
+    },
+    "pass": true
+  },
+  "verified_consequence": [
+    "THE_TWO_CONCURRENT_VERIFIED_DELTAS_ARE_NOT_ALTERNATIVES; THEY_ACCUMULATE_MONOTONICALLY_ON_THE_SAME_TEN_REGION_BASE.",
+    "THE_CURRENT_SOUND_CACHED_D_B_CERTIFICATE_UNION_CONTAINS_AT_LEAST_TWELVE_DISTINCT_CERTIFICATES.",
+    "ANY_LIVE_FRONTIER_STILL_SUBTRACTING_ONLY_TEN_OR_ELEVEN_CACHED_CERTIFICATES_IS_STALE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TWELVE_CONTEXT_REGIONS_ARE_DISJOINT.",
+    "NO_CLAIM_D_B_IS_EXHAUSTED.",
+    "NO_CLAIM_SELECTED_CONTEXT_ABC_IS_CLOSED.",
+    "NO_CLAIM_D_FINALITY_OR_TERMINAL_IS_CLOSED."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
