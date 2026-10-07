@@ -39,6 +39,7 @@ from canonical.runtime.universal_verified_effect_executor_v1 import (
     execute as execute_verified_effect,
     EXECUTOR_ID as VERIFIED_EFFECT_EXECUTOR_ID,
 )
+from canonical.runtime.typed_acceptance_finite_search_v1 import search as search_typed_acceptance
 
 SCHEMA = "PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V1"
 
@@ -339,6 +340,31 @@ def _normalize_caps(problem: Mapping[str, Any]) -> dict[str, Mapping[str, Any]]:
                 raise UniversalSolverError("VERIFIER_NOT_BUILTIN:" + cid + ":" + str(verifier_id))
             if not isinstance(action.get("verifier_payload"), Mapping):
                 raise UniversalSolverError("VERIFIER_PAYLOAD_INVALID:" + cid)
+        generator_id = action.get("proposal_generator_id")
+        if generator_id is not None:
+            if generator_id != "TYPED_ACCEPTANCE_FINITE_SEARCH_V1":
+                raise UniversalSolverError("PROPOSAL_GENERATOR_NOT_BUILTIN:" + cid + ":" + str(generator_id))
+            gp = action.get("proposal_generator_payload")
+            if not isinstance(gp, Mapping):
+                raise UniversalSolverError("PROPOSAL_GENERATOR_PAYLOAD_INVALID:" + cid)
+            active_verifier = (
+                action.get("pre_verifier_id")
+                if action_type == "verified_effect_tool"
+                else action.get("verifier_id")
+            )
+            active_payload = (
+                action.get("pre_verifier_payload")
+                if action_type == "verified_effect_tool"
+                else action.get("verifier_payload")
+            )
+            if active_verifier != "TYPED_ACCEPTANCE_PROGRAM_V1":
+                raise UniversalSolverError("FINITE_TYPED_SEARCH_REQUIRES_TYPED_ACCEPTANCE_VERIFIER:" + cid)
+            if not isinstance(active_payload, Mapping):
+                raise UniversalSolverError("FINITE_TYPED_SEARCH_VERIFIER_PAYLOAD_INVALID:" + cid)
+            if set(gp) - {"candidate_domains", "max_candidates"}:
+                raise UniversalSolverError("PROPOSAL_GENERATOR_PAYLOAD_FIELDS_INVALID:" + cid)
+            if not isinstance(gp.get("candidate_domains"), Mapping):
+                raise UniversalSolverError("PROPOSAL_GENERATOR_DOMAINS_INVALID:" + cid)
         out[cid] = row
     return out
 
@@ -370,6 +396,7 @@ def run(
 
         trace: list[dict[str, Any]] = []
         rejected: list[dict[str, Any]] = []
+        proposal_searches: list[dict[str, Any]] = []
         used_packets: set[tuple[str, int]] = set()
 
         max_cycles = int(problem.get("max_solver_cycles", 256))
@@ -385,6 +412,7 @@ def run(
                     "verified_facts": current,
                     "trace": trace,
                     "rejected_proposals": rejected,
+                    "proposal_searches": proposal_searches,
                     "cycles": cycle,
                     "terminal_authority": False,
                     "capability_ownership_credit_delta": 0,
@@ -431,8 +459,61 @@ def run(
                 payload = action["verifier_payload"]
 
             packets = proposals.get(cid)
+            proposal_source = "EXTERNAL_OR_GENERAL_SUBSTRATE"
             if verifier_id in PROPOSAL_FREE_VERIFIERS:
                 packets = [{}]
+                proposal_source = "DETERMINISTIC_PROPOSAL_FREE_ROUTE"
+            if (
+                (not isinstance(packets, Sequence) or isinstance(packets, (str, bytes)) or not packets)
+                and action.get("proposal_generator_id") == "TYPED_ACCEPTANCE_FINITE_SEARCH_V1"
+            ):
+                gp = action["proposal_generator_payload"]
+                generated = search_typed_acceptance(
+                    payload["program"],
+                    trusted_values=payload["trusted_values"],
+                    candidate_domains=gp["candidate_domains"],
+                    max_candidates=int(gp.get("max_candidates", 100000)),
+                )
+                proposal_searches.append({
+                    "cycle": cycle,
+                    "capability_id": cid,
+                    "generator_id": "TYPED_ACCEPTANCE_FINITE_SEARCH_V1",
+                    "generator_result_sha256": _digest(generated),
+                    "status": generated.get("status"),
+                    "examined": generated.get("examined"),
+                    "complete_over_declared_domains": generated.get("complete_over_declared_domains"),
+                })
+                if generated.get("pass") is True:
+                    packets = [{"candidate_values": generated["selected_candidate"]}]
+                    proposal_source = "BUILTIN_FINITE_COMPLETE_SEARCH"
+                elif generated.get("status") == "NO_ACCEPTED_CANDIDATE_IN_DECLARED_DOMAINS":
+                    return {
+                        "schema": SCHEMA,
+                        "status": "NO_PROPOSAL_IN_DECLARED_FINITE_SEARCH_DOMAIN",
+                        "pass": False,
+                        "next_capability_id": cid,
+                        "verifier_id": verifier_id,
+                        "proposal_search": generated,
+                        "verified_facts": current,
+                        "trace": trace,
+                        "rejected_proposals": rejected,
+                        "proposal_searches": proposal_searches,
+                        "terminal_authority": False,
+                    }
+                else:
+                    return {
+                        "schema": SCHEMA,
+                        "status": "FAIL_CLOSED__PROPOSAL_SEARCH_FAILED",
+                        "pass": False,
+                        "next_capability_id": cid,
+                        "verifier_id": verifier_id,
+                        "proposal_search": generated,
+                        "verified_facts": current,
+                        "trace": trace,
+                        "rejected_proposals": rejected,
+                        "proposal_searches": proposal_searches,
+                        "terminal_authority": False,
+                    }
             if not isinstance(packets, Sequence) or isinstance(packets, (str, bytes)) or not packets:
                 return {
                     "schema": SCHEMA,
@@ -444,6 +525,7 @@ def run(
                     "trace": trace,
                     "rejected_proposals": rejected,
                     "proposal_has_authority": False,
+                    "proposal_searches": proposal_searches,
                     "terminal_authority": False,
                 }
 
@@ -465,6 +547,7 @@ def run(
                     "action_contract_sha256": _digest(action),
                     "packet_index": i,
                     "proposal_sha256": _digest(packet),
+                    "proposal_source": proposal_source,
                     "verdict_status": verdict.get("status"),
                     "proof_digest": verdict.get("proof_digest"),
                 }
