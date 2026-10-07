@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_SOURCE_BINDING_AND_PROTOCOL_CONJUNCTION_PASS__ZERO_OWNERSHIP_AND_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_20261007_V1.json",
+    "git_blob_sha": "307ea91b0150db9d6cca9580e1b7a399035929c1"
+  },
+  "verified": {
+    "frozen_if_protocol_conjunct_count": 2,
+    "livebench_if_conjunct_proved_scope_complete": true,
+    "livebench_if_conjunct_independent_or_objective": true,
+    "scope_boundary_conjunct_proved_for_declared_finite_protocol": true,
+    "scope_boundary_brain_success_count": 160,
+    "scope_boundary_brain_failure_count": 0,
+    "scope_boundary_authority_denied_route_touches": 0,
+    "if_l1_refinement_closed": true,
+    "if_frozen_acceptance_protocol_closed": true,
+    "target_query_required": false,
+    "family_ownership_closed": false,
+    "global_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "source_bindings": {
+    "stable_pointer_v8": "cf227090b8f85e46f09280f4152dc782a5ebeb59",
+    "terminal_protocols": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "predicate_ledger": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+    "livebench_independent_verification": "57e27e3c56372b57a1d4e0255f49340d4a4c8588",
+    "if_scope_finite_binding": "15c5e607e9f5c921d62bf75492e26021980e75fa",
+    "if_scope_finite_binding_verification": "b7bfc865267554f0c7005c0835f09107b2dec998"
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_INSTRUCTION_FOLLOWING_CLAIM_BEYOND_THE_FROZEN_PROTOCOL_SCOPE",
+    "NO_FAMILY_OWNERSHIP_OR_D_FINALITY_CREDIT",
+    "NO_GLOBAL_ABC_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
