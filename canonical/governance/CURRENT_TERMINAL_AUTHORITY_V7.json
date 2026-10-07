@@ -1,114 +1,159 @@
 {
-  "schema":"PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_V7",
-  "date":"2026-10-07",
-  "status":"ACTIVE_CANDIDATE__V6_PLUS_VERIFIED_28_TRUTH_RECONCILIATION_PLUS_STOCHASTIC_KERNEL_C_COMPRESSION__TERMINAL_FALSE__ZERO_CREDIT",
-  "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "predecessor":{
-    "path":"canonical/governance/CURRENT_TERMINAL_AUTHORITY_V6.json",
-    "git_blob_sha":"fafde6e942a423798c8cadd0d2a2ccfe140a9f53"
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_V7",
+  "date": "2026-10-07",
+  "status": "ACTIVE_CANDIDATE__V6_PLUS_VERIFIED_28_TRUTH_RECONCILIATION_PLUS_STOCHASTIC_KERNEL_C_COMPRESSION__TERMINAL_FALSE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predecessor": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V6.json",
+    "git_blob_sha": "fafde6e942a423798c8cadd0d2a2ccfe140a9f53"
   },
-  "reconciliation_sources":{
-    "v6_source_audit":{
-      "path":"canonical/verification/CURRENT_TERMINAL_AUTHORITY_V6_SOURCE_AUDIT_20261007_V1.json",
-      "git_blob_sha":"86d9d058864e18916dc6c42226b3f27ce8f912c4"
+  "reconciliation_sources": {
+    "v6_source_audit": {
+      "path": "canonical/verification/CURRENT_TERMINAL_AUTHORITY_V6_SOURCE_AUDIT_20261007_V1.json",
+      "git_blob_sha": "86d9d058864e18916dc6c42226b3f27ce8f912c4"
     },
-    "truth_factorizer_28":{
-      "path":"canonical/runtime/terminal_frontier_factorizer_v3_candidate.py",
-      "git_blob_sha":"7fa597adec3df75145a501fb3090ffb3bca3026c"
+    "truth_factorizer_28": {
+      "path": "canonical/runtime/terminal_frontier_factorizer_v3_candidate.py",
+      "git_blob_sha": "7fa597adec3df75145a501fb3090ffb3bca3026c"
     },
-    "truth_basis_28_verification":{
-      "path":"canonical/verification/TERMINAL_28_OBLIGATION_BASIS_WOLFRAM_VERIFICATION_20261007_V1.json",
-      "git_blob_sha":"cb997726ba43ea44cc322df8d77ecaf3af3b30ff"
+    "truth_basis_28_verification": {
+      "path": "canonical/verification/TERMINAL_28_OBLIGATION_BASIS_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "cb997726ba43ea44cc322df8d77ecaf3af3b30ff"
     },
-    "if_zero_countermodel":{
-      "path":"canonical/governance/IF_ZERO_CRITICAL_AUTHORITY_NECESSITY_COUNTERMODEL_20261007_V1.json",
-      "git_blob_sha":"359bf94a129961a3899e7d7c485ffc29ff015880"
+    "if_zero_countermodel": {
+      "path": "canonical/governance/IF_ZERO_CRITICAL_AUTHORITY_NECESSITY_COUNTERMODEL_20261007_V1.json",
+      "git_blob_sha": "359bf94a129961a3899e7d7c485ffc29ff015880"
     },
-    "if_zero_binding_audit":{
-      "path":"canonical/governance/IF_ZERO_CRITICAL_AUTHORITY_TERMINAL_BINDING_AUDIT_20261007_V1.json",
-      "git_blob_sha":"8135c0ada40254b13cd18a22dec44b8d81281f3b"
+    "if_zero_binding_audit": {
+      "path": "canonical/governance/IF_ZERO_CRITICAL_AUTHORITY_TERMINAL_BINDING_AUDIT_20261007_V1.json",
+      "git_blob_sha": "8135c0ada40254b13cd18a22dec44b8d81281f3b"
     },
-    "pullback_theorem":{
-      "path":"canonical/governance/EVALUATOR_PULLBACK_DOMINANCE_THEOREM_20261007_V1.json",
-      "git_blob_sha":"5febbf7c34368dcce354da44201436a49f87c108"
+    "pullback_theorem": {
+      "path": "canonical/governance/EVALUATOR_PULLBACK_DOMINANCE_THEOREM_20261007_V1.json",
+      "git_blob_sha": "5febbf7c34368dcce354da44201436a49f87c108"
     },
-    "pullback_verification":{
-      "path":"canonical/verification/EVALUATOR_PULLBACK_DOMINANCE_VERIFICATION_20261007_V1.json",
-      "git_blob_sha":"05d66cf13843578c9a34c929ba1c32509f075c44"
+    "pullback_verification": {
+      "path": "canonical/verification/EVALUATOR_PULLBACK_DOMINANCE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "05d66cf13843578c9a34c929ba1c32509f075c44"
     },
-    "stochastic_kernel_transform":{
-      "path":"canonical/governance/STOCHASTIC_KERNEL_TRANSFORM_UNIVERSALITY_20261007_V1.json",
-      "git_blob_sha":"658f12eba91a85dbf67dac82b8fb1f6650cc3934"
+    "stochastic_kernel_transform": {
+      "path": "canonical/governance/STOCHASTIC_KERNEL_TRANSFORM_UNIVERSALITY_20261007_V1.json",
+      "git_blob_sha": "658f12eba91a85dbf67dac82b8fb1f6650cc3934"
     },
-    "stochastic_kernel_verification":{
-      "path":"canonical/verification/STOCHASTIC_KERNEL_TRANSFORM_UNIVERSALITY_WOLFRAM_VERIFICATION_20261007_V1.json",
-      "git_blob_sha":"c55afa5aaae1587a6973908faf8b0e051cceb31a"
+    "stochastic_kernel_verification": {
+      "path": "canonical/verification/STOCHASTIC_KERNEL_TRANSFORM_UNIVERSALITY_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "c55afa5aaae1587a6973908faf8b0e051cceb31a"
+    },
+    "target_escape_reduction": {
+      "path": "canonical/governance/TARGET_UNDOMINATED_ESCAPE_REDUCTION_20261007_V1.json",
+      "git_blob_sha": "c6757e71f862dd592402199ac12afb8bca45c256",
+      "exact_replay": {
+        "path": "canonical/verification/TARGET_UNDOMINATED_ESCAPE_REPLAY_20261007_V1.json",
+        "git_blob_sha": "5cc55a400b81db8aa356de811f46d24d8b26c83f"
+      },
+      "independent_verification": {
+        "path": "canonical/verification/TARGET_UNDOMINATED_ESCAPE_WOLFRAM_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "54d1f2184548dba880adcd9006df31e6c4dc3f65"
+      }
+    },
+    "target_role_escape_frontier": {
+      "path": "canonical/governance/TARGET_ROLE_ESCAPE_FRONTIER_20261007_V1.json",
+      "git_blob_sha": "388dd2cb544b7b7bd7ded5779f51a06d3acb3ee3"
     }
   },
-  "composition_repair":{
-    "problem":"V6_INHERITED_29_FROM_V5_AND_DID_NOT_REFERENCE_THE_LATER_INDEPENDENTLY_VERIFIED_IF_ZERO_TRUTH_DELETION.",
-    "finding":"NO_V6_SOURCE_OR_VERIFIER_REFUTES_OR_EVALUATES_THE_28_TRUTH_BASIS. V6_SOURCE_AUDIT_EXPLICITLY_STATES_V6_ONLY_CHANGES_C_SCHEDULING_REPRESENTATION_AND_PRESERVES_PREDECESSOR_TRUTH_COUNT.",
-    "repair":"COMPOSE_THE_INDEPENDENTLY_VERIFIED_28_TRUTH_BASIS_WITH_V6_C_PULLBACK_COMPRESSION_AND_THE_LATER_STOCHASTIC_KERNEL_TAXONOMY_DELETION.",
-    "deleted_truth_variable":"IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
-    "preserved_semantics":[
+  "composition_repair": {
+    "problem": "V6_INHERITED_29_FROM_V5_AND_DID_NOT_REFERENCE_THE_LATER_INDEPENDENTLY_VERIFIED_IF_ZERO_TRUTH_DELETION.",
+    "finding": "NO_V6_SOURCE_OR_VERIFIER_REFUTES_OR_EVALUATES_THE_28_TRUTH_BASIS. V6_SOURCE_AUDIT_EXPLICITLY_STATES_V6_ONLY_CHANGES_C_SCHEDULING_REPRESENTATION_AND_PRESERVES_PREDECESSOR_TRUTH_COUNT.",
+    "repair": "COMPOSE_THE_INDEPENDENTLY_VERIFIED_28_TRUTH_BASIS_WITH_V6_C_PULLBACK_COMPRESSION_AND_THE_LATER_STOCHASTIC_KERNEL_TAXONOMY_DELETION.",
+    "deleted_truth_variable": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "preserved_semantics": [
       "IF_SCOPE_BOUNDARY_NONINFERIOR",
       "AUTHORITY_RISK_NONREGRESSION_WHERE_TERMINALLY_RELEVANT",
       "ANY_SEPARATELY_PROVED_ABSOLUTE_ZERO_AUTHORITY_GATE",
       "ALL_PROJECT_LEVEL_L2_SAFETY_AUTHORITY_FEASIBILITY_GATES"
     ]
   },
-  "current_truth":{
-    "open_truth_obligations":28,
-    "atomic_open":20,
-    "meta_open":8,
-    "accepted_families":5,
-    "open_families":14,
-    "direct_external_result_atoms":15,
-    "unresolved_zero_evidence_atoms_or_meta":13,
-    "truth_variables_deleted_total":4,
-    "terminal":false
+  "current_truth": {
+    "open_truth_obligations": 28,
+    "atomic_open": 20,
+    "meta_open": 8,
+    "accepted_families": 5,
+    "open_families": 14,
+    "direct_external_result_atoms": 15,
+    "unresolved_zero_evidence_atoms_or_meta": 13,
+    "truth_variables_deleted_total": 4,
+    "terminal": false
   },
-  "C_refinement":{
-    "deleted_requirements":[
+  "C_refinement": {
+    "deleted_requirements": [
       "ARBITRARY_FINITE_COMPOSITION_ENUMERATION",
       "FINITE_HUMAN_NAMED_PRIMITIVE_TRANSFORM_TAXONOMY_COMPLETENESS"
     ],
-    "remaining":[
+    "remaining": [
       "BIND_COMPLETE_LOAD_BEARING_SOURCE_AND_TARGET_STATE_BOUNDARIES_FOR_EVERY_CREDITED_DEPLOYED_TRANSFORM",
       "CONTENT_ADDRESS_THE_ACTUAL_TRANSFORM_IMPLEMENTATION_OR_STOCHASTIC_LAW_BOUNDARY",
       "FOR_EACH_LOAD_BEARING_TARGET_EVALUATOR_BIND_ITS_KERNEL_PULLBACK_TO_A_CERTIFIED_SOURCE_EVALUATOR_OR_FAIL_CLOSED",
       "FOR_EACH_TARGET_HARD_CONSTRAINT_BIND_A_SOURCE_PREIMAGE_OR_FAIL_CLOSED_INVARIANT_WITNESS"
     ],
-    "counterexample":"ONE_CREDITED_TRANSFORM_WITH_INCOMPLETE_STATE_BOUNDARY_OR_ONE_LOAD_BEARING_TARGET_EVALUATOR_WITHOUT_A_SOUND_PULLBACK_OR_ONE_HARD_CONSTRAINT_WITHOUT_A_PREIMAGE_OR_INVARIANT_WITNESS"
+    "counterexample": "ONE_CREDITED_TRANSFORM_WITH_INCOMPLETE_STATE_BOUNDARY_OR_ONE_LOAD_BEARING_TARGET_EVALUATOR_WITHOUT_A_SOUND_PULLBACK_OR_ONE_HARD_CONSTRAINT_WITHOUT_A_PREIMAGE_OR_INVARIANT_WITNESS"
   },
-  "scheduler":[
-    "A__STRUCTURAL_IDENTIFIABILITY_OR_SOUND_SUPERDOMAIN",
+  "scheduler": [
+    "A_B__SEARCH_ONLY_THE_UNDOMINATED_TARGET_ESCAPE_REGION_OF_THE_SMALLEST_SOUND_SUPERDOMAIN",
     "B__STRONGER_PROOFS_AND_CEILINGS_THEN_ONLY_IRREDUCIBLE_TARGET_INFORMATION",
     "C__BIND_ACTUAL_CREDITED_TRANSFORM_STATE_BOUNDARIES_PULLBACKS_AND_HARD_CONSTRAINT_PREIMAGES_ONLY",
     "D__BIND_REAL_CREDITED_ROUTES_AND_COMPILE_EFFECT_FOOTPRINT",
     "MATCHED__BRAIN_FIRST_AFTER_COMPLETE_SCOPE_AND_OBJECTIVE_SEMANTIC_BINDING__COMPARATOR_ONLY_ON_BRAIN_FAILURE_RESIDUAL",
     "FINAL__DONOR_REMOVAL_AND_CLEAN_ROOM_RECONSTRUCTION"
   ],
-  "anti_drift":[
+  "anti_drift": [
     "DO_NOT_RESTORE_IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS_AS_AN_INDEPENDENT_TRUTH_UNLESS_A_NEW_CONTENT_ADDRESSED_ABSOLUTE_GATE_BINDING_IS_PROVED",
     "DO_NOT_RESTORE_HUMAN_NAMED_TRANSFORM_TAXONOMY_COMPLETENESS",
     "DO_NOT_INFER_TERMINAL_CREDIT_FROM_TRUTH_BASIS_COMPRESSION",
     "DO_NOT_TREAT_UNKNOWN_PARITY_AS_CAPABILITY_FAILURE"
   ],
-  "accounting":{
-    "incremental_spend_usd":0,
-    "fresh_reality_units_consumed":0,
-    "terminal_credit_delta":0,
-    "acceptance_credit_delta":0,
-    "family_credit_delta":0,
-    "capability_credit_delta":0,
-    "ownership_credit_delta":0
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
   },
-  "hard_nonclaims":[
+  "hard_nonclaims": [
     "NO_TRUTH_OBLIGATION_CLOSED_BY_THIS_COMPOSITION",
     "NO_NEW_FAMILY_ACCEPTANCE",
     "NO_NEW_CAPABILITY_OR_OWNERSHIP_CREDIT",
     "NO_CLOSURE_OF_A_B_C_OR_D",
     "NO_TERMINAL_GOAL_ACHIEVED"
-  ]
+  ],
+  "A_B_refinement": {
+    "theorem": "GIVEN_A_SOUND_TARGET_SUPERDOMAIN_S_AND_CURRENT_BRAIN_DOMINATED_REGION_D_B__ONLY_OPUS_OCCUPANCY_OF_E=S_MINUS_D_B_CAN_CHANGE_TARGET_RELATIVE_DOMINANCE_TRUTH.",
+    "current_coarse_role_projection": {
+      "fully_accepted_roles": 4,
+      "structural_escape_roles": 6,
+      "fully_accepted": [
+        "B3_TEMPORAL_STATE_MEMORY_AND_CONTINUITY",
+        "B5_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "B6_DELEGATION_AND_COORDINATION",
+        "B8_SELF_VERIFICATION_FAILURE_LOCALIZATION_AND_RECOVERY"
+      ],
+      "escape": [
+        "B0_INPUT_PERCEPTION_AND_GROUNDING",
+        "B1_GOAL_CONSTRAINT_SCOPE_AND_JUDGMENT",
+        "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING",
+        "B4_EXTERNAL_ACTION_PLANNING_AND_ENVIRONMENT_CONTROL",
+        "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION",
+        "B9_MULTI_ROLE_COMPOSITION"
+      ],
+      "boundary": "ROLE_PARTITION_IS_COARSE_AND_NOT_A_TERMINAL_QUOTIENT"
+    },
+    "scheduler_rule": [
+      "DO_NOT_ACQUIRE_TARGET_INFORMATION_INSIDE_CURRENTLY_CERTIFIED_BRAIN_DOMINATED_REGION.",
+      "COMPUTE_OR_OVERAPPROXIMATE_THE_UNDOMINATED_ESCAPE_REGION.",
+      "SEARCH_ONLY_FOR_POSSIBLE_OPUS_OCCUPANCY_OF_THE_ESCAPE_REGION.",
+      "USE_CEILINGS_FLOORS_STRUCTURAL_EXCLUSION_AND_SUPERDOMAIN_PROOFS_BEFORE_DIRECT_COMPARATOR_ACCESS.",
+      "IF_ESCAPE_REGION_IS_PROVED_EMPTY_FOR_A_SOUND_SCOPE__A_AND_B_CLOSE_FOR_THAT_SCOPE_WITHOUT_EXACT_TARGET_IDENTITY."
+    ]
+  }
 }
