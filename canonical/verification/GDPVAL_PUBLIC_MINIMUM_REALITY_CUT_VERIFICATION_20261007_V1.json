@@ -1,0 +1,40 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_PUBLIC_MINIMUM_REALITY_CUT_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_PUBLIC_SOURCE_AND_EXACT_RUNTIME_BOUNDARY_PASS__ZERO_CREDIT",
+  "subjects":{
+    "population_receipt_sha":"55214960a5a3a383fe17aa5489c64ecd26a5c1a9",
+    "minimum_cut_sha":"ecd6120d03f3112ef6582e572be34b3ea82b542a",
+    "p2_membership_runtime_sha":"a6f357d952434692a809382d1cbd41f3c78a2af0"
+  },
+  "public_crosscheck":{
+    "huggingface_readme":"https://huggingface.co/datasets/openai/gdpval/blob/main/README.md",
+    "huggingface_dataset":"https://huggingface.co/datasets/openai/gdpval",
+    "openai_gdpval":"https://openai.com/index/gdpval/",
+    "openai_grading":"https://evals.openai.com/gdpval/grading",
+    "verified":[
+      "PUBLIC_GOLD_SUBSET_HAS_220_TASKS",
+      "PUBLIC_GOLD_SUBSET_SPANS_44_OCCUPATIONS",
+      "CURRENT_README_REVISION_IS_11e7900",
+      "GDPVAL_STANDARD_GRADING_IS_PAIRWISE_HUMAN_EXPERT_PREFERENCE",
+      "LLM_RUBRIC_GRADING_IS_APPROXIMATE_NOT_THE_STANDARD"
+    ]
+  },
+  "connector_population_scan":{
+    "all_220_rows_observed":true,
+    "strict_p2_prompt_direct_membership_count":0,
+    "reason":"EVERY_OBSERVED_PROMPT_IS_OUTSIDE_THE_EXACT_P2_JSON_SOURCE_SHAPE_REQUIRED_BY_THE_BOUND_RUNTIME"
+  },
+  "verified_consequence":[
+    "THE_PUBLIC_220_TASK_POPULATION_IS_A_SOUND_ZERO_MODEL_INFERENCE_CONTEXT_POPULATION_FOR_SCOPE_MEMBERSHIP_FALSIFICATION",
+    "DIRECT_STRICT_P2_MEMBERSHIP_IS_NOT_ALREADY SATISFIED_BY_RAW_GDPVAL_PROMPTS",
+    "THE_PUBLIC_LLM_GRADER_CANNOT_BE_PROMOTED_AS_AN_EXACT_REPLACEMENT_FOR_HUMAN_PAIRWISE_OR_FROZEN_GDPVAL_AA_WITHOUT_A_SEPARATE SOUND RELATION PROOF"
+  ],
+  "hard_nonclaims":[
+    "NO_CLAIM_NO_GDPVAL_TASK_CAN_BE_LOSSLESSLY_COMPILED_TO_P2",
+    "NO_CLAIM_220_TASKS_REQUIRE_220_TARGET_QUERIES",
+    "NO_CLAIM_GDPVAL_SCOPE_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"model_inference_requests":0,"terminal_credit_delta":0}
+}
