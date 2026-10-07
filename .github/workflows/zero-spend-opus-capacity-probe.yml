@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/zero-spend-opus-capacity-probe.yml'
-  workflow_dispatch:
+  pull_request:\n    paths:\n      - '.github/workflows/zero-spend-opus-capacity-probe.yml'\n  workflow_dispatch:
 
 permissions:
   contents: read
