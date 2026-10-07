@@ -25,6 +25,7 @@ _EPS = 1e-12
 _UNARY = (
     "neg", "abs", "square", "sqrt_abs", "pow_abs_1_3", "pow_abs_2_3",
     "pow_abs_1_4", "pow_abs_5_8", "pow_abs_4_5", "log1p_abs", "sat",
+    "reciprocal", "exp", "sin", "cos",
 )
 _BINARY = ("add", "sub", "mul", "stable_div", "safe_div")
 _COMMUTATIVE = {"add", "mul"}
@@ -205,6 +206,18 @@ def _unary(op: str, x: float) -> float | None:
             y = math.log1p(abs(x))
         elif op == "sat":
             y = x / (1.0 + abs(x))
+        elif op == "reciprocal":
+            if abs(x) <= _EPS:
+                return None
+            y = 1.0 / x
+        elif op == "exp":
+            if x > 700.0:
+                return None
+            y = math.exp(x)
+        elif op == "sin":
+            y = math.sin(x)
+        elif op == "cos":
+            y = math.cos(x)
         else:
             return None
     except (OverflowError, ValueError, ZeroDivisionError):
@@ -222,6 +235,10 @@ def _binary(op: str, left: float, right: float) -> float | None:
             y = left * right
         elif op == "stable_div":
             y = left / (1.0 + abs(right))
+        elif op == "safe_div":
+            if abs(right) <= _EPS:
+                return None
+            y = left / right
         else:
             return None
     except (OverflowError, ValueError, ZeroDivisionError):
@@ -455,6 +472,14 @@ def _tree_expr(tree: Mapping[str, Any]) -> str:
         return f"log1p(abs({a}))"
     if op == "sat":
         return f"(({a})/(1+abs({a})))"
+    if op == "reciprocal":
+        return f"(1.0/({a}))"
+    if op == "exp":
+        return f"exp({a})"
+    if op == "sin":
+        return f"sin({a})"
+    if op == "cos":
+        return f"cos({a})"
     if op in _BINARY:
         left, right = _tree_expr(tree["left"]), _tree_expr(tree["right"])
         if op == "add":
@@ -465,6 +490,8 @@ def _tree_expr(tree: Mapping[str, Any]) -> str:
             return f"(({left})*({right}))"
         if op == "stable_div":
             return f"(({left})/(1+abs({right})))"
+        if op == "safe_div":
+            return f"(({left})/({right}))"
     raise SparseSymbolicError("TREE_SERIALIZATION_INVALID")
 
 
