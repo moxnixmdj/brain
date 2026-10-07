@@ -83,6 +83,14 @@ class ContractNativeProofSuitesTests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertTrue(any(x.startswith("PROVENANCE_WITHOUT_SELECTED_CLAIM:") for x in out["reasons"]), out)
 
+    def test_synthesis_required_fallback_is_supported_seed_80(self):
+        case=generate_case("EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",80,1)
+        required=set(case["_oracle"]["required"])
+        rows={row["claim_id"]:row for row in case["task"]["evidence"]}
+        self.assertTrue(required)
+        self.assertTrue(all(rows[cid]["support"]!="unsupported" for cid in required))
+        self.assertTrue(score_case(case,oracle_candidate(case))["pass"])
+
     def test_professional_suboptimal_plan_fails(self):
         case=generate_case("PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001", 404, 5)
         gold=oracle_candidate(case)
