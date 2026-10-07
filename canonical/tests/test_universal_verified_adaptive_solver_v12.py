@@ -99,3 +99,48 @@ def test_zero_graph_can_expand_and_solve(tmp_path):
     assert out["verified_facts"] == ["GOAL"]
     assert out["expanded_capability_ids"] == ["new-route"]
     assert out["capability_expansion_attempts"][0]["status"] == "EXPANSION_ADMITTED"
+
+
+
+def test_unauthenticated_expansion_is_not_admitted(tmp_path):
+    problem = make_problem()
+    cap = make_capability(tmp_path, problem)
+    cap.pop("effect_semantics_binding")
+
+    def expander(request, index, current_problem):
+        return {"capabilities": [cap]}
+
+    out = run(
+        problem,
+        repo_root=tmp_path,
+        capability_expander=expander,
+        max_capability_expansions=1,
+    )
+    assert out["pass"] is False
+    assert out["expanded_capability_ids"] == []
+    attempt = out["capability_expansion_attempts"][0]
+    assert attempt["status"] == "NO_AUTHENTICATED_CAPABILITY_ADMITTED"
+    assert attempt["rejected"]
+
+
+def test_value_dependent_dynamic_expansion_waits_for_bound_semantics(tmp_path):
+    problem = make_problem()
+    cap = make_capability(tmp_path, problem)
+    cap["result_fields"] = ["answer"]
+
+    def expander(request, index, current_problem):
+        return {"capabilities": [cap]}
+
+    out = run(
+        problem,
+        repo_root=tmp_path,
+        capability_expander=expander,
+        max_capability_expansions=1,
+    )
+    assert out["pass"] is False
+    assert out["expanded_capability_ids"] == []
+    reasons = [
+        row["reason"]
+        for row in out["capability_expansion_attempts"][0]["rejected"]
+    ]
+    assert any("EXPANDED_DYNAMIC_VALUE_SEMANTICS_NOT_ADMITTED_V1" in x for x in reasons)
