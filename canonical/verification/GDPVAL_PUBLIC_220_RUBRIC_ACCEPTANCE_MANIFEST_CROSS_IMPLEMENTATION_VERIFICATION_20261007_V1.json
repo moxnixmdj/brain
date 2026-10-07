@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_220_RUBRIC_ACCEPTANCE_MANIFEST_CROSS_IMPLEMENTATION_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__PUBLIC_220_FULL_REPLAY__10453_CRITERIA__ZERO_TASK_CONTRACT_HASH_MISMATCH__POPULATION_ROOT_EXACT_MATCH__ZERO_TERMINAL_CREDIT",
+  "candidate": {
+    "path": "canonical/evidence/GDPVAL_PUBLIC_220_RUBRIC_ACCEPTANCE_MANIFEST_20261007_V1.json",
+    "git_blob_sha": "99d62d7302f0be4a0f50ba976634042dbddc9972"
+  },
+  "source": {
+    "dataset": "openai/gdpval",
+    "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "split": "train",
+    "public_row_count": 220
+  },
+  "method": [
+    "FETCH_ALL_220_PUBLIC_ROWS_IN_THREE_PAGES",
+    "REIMPLEMENT_CANONICAL_SORTED_JSON_SERIALIZATION_AND_SHA256_INDEPENDENTLY_FROM_THE_COMMITTED_PYTHON_RUNTIME",
+    "RECOMPUTE_EVERY_NORMALIZED_RUBRIC_CRITERION_AND_EVERY_TASK_CONTRACT",
+    "COMPARE_ALL_220_TASK_IDS_CRITERION_COUNTS_AND_TASK_CONTRACT_SHA256_VALUES",
+    "RECOMPUTE_THE_COMPLETE_POPULATION_CONTRACT_ROOT",
+    "COMPARE_AGGREGATES_AND_ROOT_HASH_EXACTLY"
+  ],
+  "observed": {
+    "task_count": 220,
+    "criterion_count": 10453,
+    "human_authored_criterion_count": 10453,
+    "required_true_count": 0,
+    "required_false_count": 0,
+    "required_null_count": 10453,
+    "numeric_score_sum": 16000,
+    "criteria_without_numeric_score": 0,
+    "task_contract_hash_mismatch_count": 0,
+    "population_contract_sha256": "f00d818e5513ed9ba6241bfc3a2c50d0083553f76d3613dc4a63daca78ccb3ea",
+    "population_root_exact_match": true
+  },
+  "verified": [
+    "EVERY_PUBLIC_GDPVAL_TASK_HAS_BEEN_COMPILED_INTO_THE_DECLARED_EXPLICIT_RUBRIC_ACCEPTANCE_CONTRACT",
+    "ALL_10453_HUMAN_AUTHORED_CRITERIA_ARE_INCLUDED_IN_THE_CONTENT_ADDRESSED_POPULATION_ROOT",
+    "THE_MANIFEST_IS_REPRODUCIBLE_FROM_THE_BOUND_PUBLIC_DATASET_WITHOUT_MODEL_INFERENCE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_RUBRIC_CRITERIA_EXHAUST_ALL_PROMPT_REFERENCE_OR_HOLISTIC_PREFERENCE_MEANING",
+    "NO_CLAIM_THE_RUBRIC_CONTRACT_IS_EQUIVALENT_TO_THE_HIDDEN_PAIRWISE_HUMAN_PREFERENCE_RELATION",
+    "NO_CLAIM_ANY_BRAIN_ROUTE_IS_ADEQUATE_FOR_ANY_TASK_FROM_EXTRACTION_ALONE",
+    "NO_GDPVAL_SCOPE_CLOSURE",
+    "NO_U_SUBTRACTION",
+    "NO_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_inference_requests": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
