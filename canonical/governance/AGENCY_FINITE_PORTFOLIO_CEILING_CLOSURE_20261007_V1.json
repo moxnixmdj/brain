@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_FINITE_PORTFOLIO_CEILING_CLOSURE_V1",
+  "date": "2026-10-07",
+  "status": "FROZEN_RESULT_BLIND_CEILING_CLOSURE_CANDIDATE__INDEPENDENT_CI_REPLAY_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "freeze": {
+    "post_freeze_beacon_commit_sha": "14663624afbf93aa86bb28265f4a647b79bc31d9",
+    "rule": "THE_BEACON_IS_AN_EXISTING_MAIN_COMMIT_AFTER_THE_GENERATOR_VERIFIER_AND_TEST_BYTES_WERE_FROZEN__CASE_GENERATION_IS_DETERMINISTIC_FROM_THIS_BEACON_AND_CANNOT_ADAPT_TO_RESULTS"
+  },
+  "bound_execution": {
+    "generator": {
+      "path": "canonical/runtime/agency_finite_portfolio_generator_v1.py",
+      "git_blob_sha": "89e73e7fc7aa276f4228e5023c1a21b692fe176a"
+    },
+    "ceiling_verifier": {
+      "path": "canonical/runtime/agency_finite_portfolio_ceiling_v1.py",
+      "git_blob_sha": "19d75fe177ff04da196024bcb44ea6087c695507"
+    },
+    "tests": {
+      "path": "canonical/tests/test_agency_finite_portfolio_ceiling_v1.py",
+      "git_blob_sha": "102163094dbaa7f7ea6ec99de77a772671a14a41"
+    },
+    "independent_ci": {
+      "path": ".github/workflows/verify-agency-finite-portfolio-ceiling-v1.yml",
+      "git_blob_sha": "4de1c3dc8f88587f93cd86f661c9e766b78ce1c1"
+    }
+  },
+  "portfolio": {
+    "generator_schema": "PROJECT_BRAIN_AGENCY_FINITE_PORTFOLIO_GENERATOR_V1",
+    "case_count": 6,
+    "dimension_cover_complete": true,
+    "result_blind": true,
+    "adaptive_case_selection": false,
+    "manifest_sha256": "6e7ab77e5a858ebbf9ba1d26b5cad30b4cc44b851c2d49150ed309537eeeb07d",
+    "cases": [
+      {
+        "case_id": "AGENCY-FINITE-V1-01",
+        "dimension": "multi-step planning with at least three distinct tool/action types",
+        "payload_sha256": "fcb2dbb71ef6c0295f0d31d2a843d85f7e41d1123e544699adc0557c23c7c6eb",
+        "initial_state_sha256": "fe444f4e602f9c2d0903ef807d83c849a65b23f3795e5f35dd8574e64e418c99"
+      },
+      {
+        "case_id": "AGENCY-FINITE-V1-02",
+        "dimension": "state change after actions requiring replanning",
+        "payload_sha256": "4b91ea7d606c4d8496b6227f6977af39978724591b08f5dbe1dce0feae83896a",
+        "initial_state_sha256": "8784388916fb662a0b0fb1303cebdf39ea2708204ef513c9e171a7be0ef5d089"
+      },
+      {
+        "case_id": "AGENCY-FINITE-V1-03",
+        "dimension": "long-horizon state retention",
+        "payload_sha256": "a47db6ed572da834ddf3463737d5439fa5eb17d1cbc29b820db0d8cc969ef39c",
+        "initial_state_sha256": "6d3c5ff44d9ae7c68ff27c655ea9641a9c206077def383936ea2c720e242a01b"
+      },
+      {
+        "case_id": "AGENCY-FINITE-V1-04",
+        "dimension": "tool failure/recovery",
+        "payload_sha256": "d361cd2d598d2341adf1f71107c8c3327473ea7ef33807b4831e84566171829c",
+        "initial_state_sha256": "c44a1f6525dde8a4d77eb2a8a2c3a9a21402aa79d5799871e65d203380ca995a"
+      },
+      {
+        "case_id": "AGENCY-FINITE-V1-05",
+        "dimension": "subtask dependency and fan-in",
+        "payload_sha256": "280862394a9ff5a55f979f9b2cefd0b7e2867961eb30f4da39d0b24c12ffe0a8",
+        "initial_state_sha256": "fe343a340829565b988b51ea947fe5ec437cab491d730ce7aaf9c148427909ea"
+      },
+      {
+        "case_id": "AGENCY-FINITE-V1-06",
+        "dimension": "minimal-oversight completion",
+        "payload_sha256": "6424c51ec0fc506fb33819aa77140deb205377c2619e26e0990fee7937ac0fc6",
+        "initial_state_sha256": "2c5391825e84b1f22ceb92f932afb95010c777fb69414190dadfedb235992c86"
+      }
+    ]
+  },
+  "candidate_conclusion": {
+    "logic": "IF_THE_EXACT_BOUND_VERIFIER_REPLAYS_PASS__THE_FROZEN_COMPLETE_FINITE_DECLARED_AGENCY_PORTFOLIO_IS_AT_THE_OBJECTIVE_CEILING_ON_TERMINAL_SUCCESS_AND_AT_THE_FLOOR_ON_INVALID_ACTION_UNRECOVERED_FAILURE_AND_DUPLICATE_OR_CONFLICTING_WORK__THEREFORE_NO_COMPARATOR_CAN_BE_STRICTLY_BETTER_ON_ANY_LOAD_BEARING_METRIC",
+    "target_predicates_if_independent_replay_passes": {
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR": true,
+      "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION": true
+    },
+    "opus_case_execution_required_if_replay_passes": false
+  },
+  "promotion_rule": "NO_ACCEPTANCE_CREDIT_FROM_THIS_FREEZE_ALONE__PROMOTE_THE_TWO_AGENCY_PREDICATES_ONLY_AFTER_AN_INDEPENDENT_RUN_REPLAYS_THE_EXACT_BOUND_BYTES_AND_THE_PORTFOLIO_MANIFEST_DIGEST_MATCHES",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_INDEPENDENT_CI_HAS_PASSED_AT_FILE_CREATION_TIME",
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
