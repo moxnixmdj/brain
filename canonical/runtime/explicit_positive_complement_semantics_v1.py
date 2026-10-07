@@ -11,6 +11,7 @@ from typing import Any
 
 SCHEMA="BRAIN_EXPLICIT_POSITIVE_COMPLEMENT_V1"
 WORD=r"[A-Za-z][A-Za-z-]*"
+ALLOWED=frozenset("""account add address analyze apply assess be build calculate capture cite compare compile complete conduct contact copy create define deliver describe design determine develop discuss document draft edit ensure estimate evaluate examine explain extract fill focus forecast format generate have highlight identify include incorporate investigate keep label let list make mix model note optimize organize outline perform prepare present produce provide put read recommend refer reflect report research review save select show source submit summarize track update use validate verify write""".split())
 PATS=(
  ("PASSIVE_ASK",re.compile(r"\byou(?:'|’)ve\s+been\s+asked\s+to\s+(?P<v>"+WORD+r")\b",re.I)),
  ("ASKED_YOU",re.compile(r"\b(?:has\s+|have\s+)?asked\s+you\s+to\s+(?P<v>"+WORD+r")\b",re.I)),
@@ -19,7 +20,7 @@ PATS=(
  ("YOU_DEONTIC",re.compile(r"\byou\s+(?:(?:will\s+(?:first\s+|then\s+|also\s+)?)?need\s+to|are\s+required\s+to|should|will(?:\s+also)?)\s+(?P<v>"+WORD+r")\b",re.I)),
  ("ROLE_TO",re.compile(r"\byour\s+(?:responsibility|job|role|goal)\s+(?:is|are)\s+to\s+(?P<v>"+WORD+r")\b",re.I)),
  ("GOAL_TO",re.compile(r"\b(?:the\s+(?:overall\s+)?goal|the\s+goal\s+of\s+this\s+project)\s+is\s+to\s+(?P<v>"+WORD+r")\b",re.I)),
- ("TASKED_TO",re.compile(r"\byou\s+(?:are|have\s+been)\s+tasked(?:\s+as\s+[^,.]+)?\s+to\s+(?P<v>"+WORD+r")\b",re.I)),
+ ("TASKED_TO",re.compile(r"\byou\s+(?:are|have\s+been)\s+tasked(?:\s+as\s+[^,.]+?)?\s+to\s+(?P<v>"+WORD+r")\b",re.I)),
  ("TASKED_WITH",re.compile(r"\byou\s+(?:are|have\s+been)\s+tasked(?:\s+as\s+[^,.]+)?\s+with\s+(?P<v>"+WORD+r")\b",re.I)),
  ("PLEASE",re.compile(r"\bplease\s+(?:\d+\)\s*)?(?P<v>"+WORD+r")\b",re.I)),
  ("CONTEXT_IMPERATIVE",re.compile(r"^(?:Accordingly|To this end|Based on (?:the )?findings|Leveraging [^,]+),\s*(?:please\s+)?(?P<v>"+WORD+r")\b",re.I)),
@@ -47,6 +48,7 @@ def extract(text:str)->dict[str,Any]:
             m=rx.search(seg)
             if not m: continue
             verb=m.group("v").lower()
+            if verb not in ALLOWED: continue
             s,e=m.span("v")
             # Bind only the matched source construction and verb. Everything
             # after the head remains opaque, so coordination cannot be invented.
