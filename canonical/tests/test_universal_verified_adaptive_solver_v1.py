@@ -196,3 +196,111 @@ def test_typed_acceptance_program_falsifies_bad_candidate():
     )
     assert out["pass"] is False
     assert out["status"] == "ALL_AVAILABLE_PROPOSALS_FALSIFIED"
+
+
+def test_instruction_constraint_verifier_is_generic_over_explicit_text_rules():
+    problem = {
+        "initial_facts": [],
+        "target_effects": ["FORMAT_VERIFIED"],
+        "capabilities": [{
+            "id": "format",
+            "requires": [],
+            "provides": ["FORMAT_VERIFIED"],
+            "cost": 1,
+            "result_fields": [],
+            "action": {
+                "type": "verified_policy",
+                "verifier_id": "INSTRUCTION_CONSTRAINTS_V1",
+                "verifier_payload": {
+                    "instruction": 'Response must start with "OK" and contain the word "done".'
+                },
+            },
+        }],
+    }
+    out = run(
+        problem,
+        proposal_packets={"format": [{"response": "OK done"}]},
+    )
+    assert out["pass"] is True, out
+
+
+def test_instruction_constraint_verifier_falsifies_violation():
+    problem = {
+        "initial_facts": [],
+        "target_effects": ["FORMAT_VERIFIED"],
+        "capabilities": [{
+            "id": "format",
+            "requires": [],
+            "provides": ["FORMAT_VERIFIED"],
+            "cost": 1,
+            "result_fields": [],
+            "action": {
+                "type": "verified_policy",
+                "verifier_id": "INSTRUCTION_CONSTRAINTS_V1",
+                "verifier_payload": {
+                    "instruction": 'Response must start with "OK".'
+                },
+            },
+        }],
+    }
+    out = run(
+        problem,
+        proposal_packets={"format": [{"response": "NO"}]},
+    )
+    assert out["status"] == "ALL_AVAILABLE_PROPOSALS_FALSIFIED"
+
+
+def test_structured_method_route_compiles_requirement_to_verified_output_without_proposal():
+    public = {
+        "schema_fields": [
+            {"id": "x", "type": "number", "dimension": "score", "value": 2.0},
+        ],
+        "requirements": [
+            {"id": "R1", "source_kind": "constraint"},
+        ],
+        "common_rules": [
+            {
+                "id": "RULE1",
+                "expr": {
+                    "op": "add",
+                    "left": {"op": "ref", "id": "x"},
+                    "right": {"op": "const", "type": "number", "dimension": "score", "value": 1.0},
+                },
+                "output": "y",
+                "output_type": "number",
+                "output_dimension": "score",
+                "consumes_requirements": ["R1"],
+                "invariants": [],
+            },
+        ],
+        "branches": [
+            {
+                "id": "ONLY",
+                "when": {"op": "const", "type": "boolean", "dimension": "dimensionless", "value": True},
+                "rules": [],
+            },
+        ],
+        "required_outputs": ["y"],
+    }
+    problem = {
+        "initial_facts": [],
+        "target_effects": ["METHOD_VERIFIED"],
+        "capabilities": [{
+            "id": "method",
+            "requires": [],
+            "provides": ["METHOD_VERIFIED"],
+            "cost": 1,
+            "result_fields": [],
+            "action": {
+                "type": "verified_policy",
+                "verifier_id": "STRUCTURED_METHOD_EXPRESSION_AST_V2",
+                "verifier_payload": {"public": public},
+            },
+        }],
+    }
+    out = run(problem, proposal_packets={})
+    assert out["pass"] is True, out
+    row = out["trace"][0]["verified_output"]
+    assert row["outputs"][0]["id"] == "y"
+    assert row["outputs"][0]["value"] == 3.0
+    assert row["requirement_lineage"][0]["requirement_id"] == "R1"
