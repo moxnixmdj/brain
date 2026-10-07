@@ -19,6 +19,8 @@ class Env:
         self.commands.append(command)
         if command == "verify-bad":
             return Receipt(1, "", "bad")
+        if command == "warning-action":
+            return Receipt(0, "", "bash: line 22: warning: here-document at line 1 delimited by end-of-file")
         if command.startswith("test -s /app/submission/"):
             return Receipt(1, "", "missing")
         return Receipt(0, "ok", "")
@@ -143,6 +145,18 @@ class ScienceAgentTests(unittest.TestCase):
         selected=[x for x in result["trace"] if x.get("kind")=="BRAIN_SELECTED_RESEARCH_ACTION"][0]
         self.assertFalse(selected["coverage_promoted"],selected)
         self.assertFalse(selected["brain_deliverable_checks"][0]["verified"],selected)
+
+    def test_shell_truncation_warning_blocks_false_coverage(self):
+        env,result=self.run_goal([{
+            "material_requirements":["R1"],
+            "candidates":[
+                {"action_id":"a","covers":["R1"],"command":"warning-action","verify_command":"echo verify"}
+            ]
+        }])
+        self.assertNotEqual(result["status"],"FINISHED")
+        self.assertEqual(result["resolved_requirements"],[])
+        self.assertTrue(result["trace"][0]["action_integrity_errors"])
+        self.assertFalse(result["trace"][0]["coverage_promoted"])
 
     def test_failed_verify_does_not_promote_coverage_or_finish(self):
         env,result=self.run_goal([
