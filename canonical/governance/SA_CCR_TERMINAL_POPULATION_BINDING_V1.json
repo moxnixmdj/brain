@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_SA_CCR_TERMINAL_POPULATION_BINDING_V1",
   "date": "2026-10-02",
-  "status": "PRE_BEACON_FROZEN__REGISTRY_TERMINAL_ACCEPTANCE_MODE_BOUND__ZERO_TERMINAL_RESULTS",
+  "status": "TRANSITIVE_CANDIDATE_DEPENDENCY_CHANGED__PRE_BEACON_FREEZE_INVALIDATED__REPLAY_AND_REFREEZE_REQUIRED__ZERO_TERMINAL_RESULTS",
   "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
   "proof_mode": "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
   "exact_blobs": {
@@ -52,7 +52,7 @@
   },
   "dependency_mode": "ZERO_INCREMENTAL_SPEND__OWNED_CANDIDATE__INDEPENDENT_ORACLE",
   "commitment_components_sha256": "86ac5eb685e17113b5c58614d5591afddcc0d57c3a4ec23dde404a35a53db5a3",
-  "pre_beacon_frozen": true,
+  "pre_beacon_frozen": false,
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "execution_authority": false,
@@ -60,5 +60,34 @@
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
   "proof_mode_basis": "THEORETICAL_CEILING",
-  "terminal_acceptance_mode_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json::terminal_acceptance_proof_modes"
+  "terminal_acceptance_mode_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json::terminal_acceptance_proof_modes",
+  "candidate_brain_local_import_closure": {
+    "schema": "PROJECT_BRAIN_PYTHON_LOCAL_IMPORT_CLOSURE_V1",
+    "entrypoint": "canonical/runtime/saccr_credit_information_safe_candidate.py",
+    "dependency_count": 2,
+    "dependencies": [
+      {
+        "path": "canonical/runtime/saccr_credit_information_safe_candidate.py",
+        "git_blob_sha": "ff2fa256738ffbe5b15bb813a11c82046692b5e8",
+        "size": 2192
+      },
+      {
+        "path": "canonical/runtime/saccr_credit_kernel.py",
+        "git_blob_sha": "8432f67fa81de5a22d38584aeaf98ab3c0431452",
+        "size": 3929
+      }
+    ],
+    "closure_sha256": "e2a82c3d6b4d0fba25f20f52faa0b621202d69f4bb05d4723d7d6744b9604d3d",
+    "closure_runtime": "canonical/runtime/python_local_import_closure_v1.py",
+    "independent_replay_passed": false
+  },
+  "transitive_runtime_closure_bound": true,
+  "recommit_required": true,
+  "truth_repair": {
+    "reason": "THE_FROZEN_CANDIDATE_WRAPPER_IMPORTS_saccr_credit_kernel__THE_KERNEL_BLOB_CHANGED_WITHOUT_CHANGING_THE_WRAPPER_BLOB__ENTRYPOINT_ONLY_HASHING_WAS_NOT_A_COMPLETE_EXECUTABLE_BINDING",
+    "changed_kernel_commit": "1622c1defdeed5ae82f594420eee6c2b502b36ed",
+    "prior_kernel_blob": "4a9536a391e21ec9895c1abdf45a673c0451ba3a",
+    "current_kernel_blob": "8432f67fa81de5a22d38584aeaf98ab3c0431452",
+    "rule": "NO_TERMINAL_FREEZE_CREDIT_UNTIL_THE_CURRENT_TRANSITIVE_BRAIN_LOCAL_IMPORT_CLOSURE_IS_INDEPENDENTLY_REPLAYED_AND_REFROZEN"
+  }
 }
