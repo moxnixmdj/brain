@@ -6,11 +6,13 @@ A policy manifest is structurally complete only when:
 - all context-membership obligations are bound by admission;
 - every candidate policy either conditions on or independently discharges every
   adequacy/hard-constraint obligation;
-- evidence-authority and terminal-accounting obligations are bound; and
-- a separate certificate reference asserts completeness of the candidate policy set.
+- evidence-authority and terminal-accounting obligations are bound.
 
-Certificate IDs are references, never self-verification. This closes silent
-contract-field omission, not semantic truth or policy adequacy.
+Candidate-policy-set completeness is deliberately NOT required for positive
+adequacy: one sound resource-admissible positive policy cover is sufficient.
+Policy-set completeness remains relevant only to negative absence/global
+minimality claims. Certificate IDs are references, never self-verification.
+This closes silent contract-field omission, not semantic truth or policy adequacy.
 """
 from __future__ import annotations
 
