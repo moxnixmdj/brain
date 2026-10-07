@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_DB_EXISTING_EVIDENCE_SATURATION_UNION_VERIFY_V8",
+  "date": "2026-10-07",
+  "status": "PASS__TRUTH_REPAIRED_FOURTEEN_RECORD_BASE_PLUS_SOUND_STATEFUL_AGENCY_CELL__FIFTEEN_SOUND_CERTIFICATE_RECORDS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V8.json",
+    "git_blob_sha": "7d34b15d71a2bb59178c774a1805cd398c2daa86"
+  },
+  "exact_source_audit": {
+    "truth_repaired_v7": "04345ae31cb96695d60912127c9d69541919e2bd",
+    "agency_stateful_cell": "d0f65c08d84777f4fdb24e5dfa74bdd1acbcfc22",
+    "agency_stateful_independent_verification": "2f1efbc385c8d37d89c43c699981f8c235d93249",
+    "predecessor_sound_count": 14,
+    "added_sound_count": 1,
+    "reconciled_sound_count": 15
+  },
+  "formal_check": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "expression": "TautologyQ[Implies[Implies[a,d] && Implies[b,d], Implies[a || b,d]], {a,b,d}]",
+    "result": true,
+    "interpretation": "UNION_OF_AN_ALREADY_SOUND_CACHED_REGION_AND_ONE_ADDITIONAL_SOUND_REGION_REMAINS_SOUND__DISJOINTNESS_NOT_REQUIRED"
+  },
+  "truth_checks": {
+    "revoked_whole_P3_record_restored": false,
+    "stateful_agency_cell_exact_scope_only": true,
+    "whole_agency_family_closed": false,
+    "certificate_count_is_semantic_coverage_measure": false,
+    "U_empty_proved": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
