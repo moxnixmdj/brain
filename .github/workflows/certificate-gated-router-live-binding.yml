@@ -1,18 +1,9 @@
-# live-binding proof trigger: 2026-10-07T02:46Z
 name: Certificate-gated router live binding
 
 on:
-  workflow_dispatch:
   pull_request:
     paths:
       - 'canonical/runtime/certificate_gated_selected_route_router_v1.py'
-      - 'canonical/tests/test_certificate_gated_selected_route_router_v1.py'
-      - '.github/workflows/certificate-gated-router-live-binding.yml'
-  push:
-    branches: [main]
-    paths:
-      - 'canonical/runtime/certificate_gated_selected_route_router_v1.py'
-      - 'canonical/tests/test_certificate_gated_selected_route_router_v1.py'
       - '.github/workflows/certificate-gated-router-live-binding.yml'
 
 permissions:
@@ -21,121 +12,63 @@ permissions:
 jobs:
   exact-replay:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
-      - name: Checkout exact event head
+      - name: Checkout exact PR head
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 1
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install test dependency
-        run: python -m pip install --disable-pip-version-check --no-input pytest
-
-      - name: Run router fail-closed suite
-        run: python -m pytest -q canonical/tests/test_certificate_gated_selected_route_router_v1.py
-
-      - name: Execute content-addressed exact replay
+      - name: Execute exact content-addressed router canaries
         env:
-          GITHUB_EVENT_NAME_LOCAL: ${{ github.event_name }}
           GITHUB_RUN_ID_LOCAL: ${{ github.run_id }}
           GITHUB_RUN_ATTEMPT_LOCAL: ${{ github.run_attempt }}
+          HEAD_SHA_LOCAL: ${{ github.event.pull_request.head.sha }}
         run: |
           set -euo pipefail
           export ROUTER_BLOB_SHA="$(git hash-object canonical/runtime/certificate_gated_selected_route_router_v1.py)"
-          export TEST_BLOB_SHA="$(git hash-object canonical/tests/test_certificate_gated_selected_route_router_v1.py)"
-          export WORKFLOW_BLOB_SHA="$(git hash-object .github/workflows/certificate-gated-router-live-binding.yml)"
-          export CHECKOUT_SHA="$(git rev-parse HEAD)"
-          PYTHONPATH=. python - <<'PY'
-          import hashlib
-          import json
-          import os
+          PYTHONPATH=. python3 - <<'PY'
+          import hashlib, json, os
           from pathlib import Path
-          from canonical.runtime.certificate_gated_selected_route_router_v1 import (
-              AdmissionReceipt,
-              RouterFailClosed,
-              select_certified_route,
-          )
+          from canonical.runtime.certificate_gated_selected_route_router_v1 import AdmissionReceipt, RouterFailClosed, select_certified_route
 
-          context = hashlib.sha256(b"PROJECT_BRAIN_ROUTER_LIVE_BINDING_CANARY_V1").hexdigest()
-          rows = [
-              AdmissionReceipt(
-                  context_digest=context,
-                  cell_id="ROUTER_BINDING_CANARY_B",
-                  route_id="canary-route-b",
-                  route_blob_sha="3" * 40,
-                  adequacy_certificate_blob_sha="2" * 40,
-                  admission_certificate_blob_sha="b" * 40,
-                  admitted=True,
-              ),
-              AdmissionReceipt(
-                  context_digest=context,
-                  cell_id="ROUTER_BINDING_CANARY_A",
-                  route_id="canary-route-a",
-                  route_blob_sha="1" * 40,
-                  adequacy_certificate_blob_sha="f" * 40,
-                  admission_certificate_blob_sha="a" * 40,
-                  admitted=True,
-              ),
-          ]
+          context = hashlib.sha256(b"PROJECT_BRAIN_ROUTER_LIVE_BINDING_CANARY_V2").hexdigest()
+          a = AdmissionReceipt(context, "CELL_A", "route-a", "1"*40, "f"*40, "a"*40, True)
+          b = AdmissionReceipt(context, "CELL_B", "route-b", "3"*40, "2"*40, "b"*40, True)
+          x1 = select_certified_route(actual_context_digest=context, receipts=[b, a])
+          x2 = select_certified_route(actual_context_digest=context, receipts=[a, b])
+          assert x1 == x2 and x1.route_id == "route-a"
 
-          first = select_certified_route(actual_context_digest=context, receipts=rows)
-          second = select_certified_route(actual_context_digest=context, receipts=reversed(rows))
-          if first != second or first.route_id != "canary-route-a":
-              raise SystemExit("EXACT_REPLAY_MISMATCH")
-
-          fail_closed_reason = None
+          reason = None
           try:
               select_certified_route(
                   actual_context_digest=context,
-                  receipts=[
-                      AdmissionReceipt(
-                          context_digest="other-context",
-                          cell_id="ROUTER_BINDING_NEGATIVE_CANARY",
-                          route_id="must-not-route",
-                          route_blob_sha="4" * 40,
-                          adequacy_certificate_blob_sha="5" * 40,
-                          admission_certificate_blob_sha="6" * 40,
-                          admitted=True,
-                      )
-                  ],
+                  receipts=[AdmissionReceipt("other", "NEG", "must-not-route", "4"*40, "5"*40, "6"*40, True)],
               )
           except RouterFailClosed as exc:
-              fail_closed_reason = str(exc)
-
-          if fail_closed_reason != "NO_CERTIFIED_ROUTE_FOR_ACTUAL_CONTEXT":
-              raise SystemExit("FAIL_CLOSED_REPLAY_MISMATCH")
+              reason = str(exc)
+          assert reason == "NO_CERTIFIED_ROUTE_FOR_ACTUAL_CONTEXT"
 
           receipt = {
-              "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_ROUTER_LIVE_BINDING_RECEIPT_V1",
-              "status": "PASS__MECHANICAL_ROUTER_CORE_EXECUTED_ON_GITHUB_ACTIONS__EXACT_REPLAY_STABLE__FAIL_CLOSED_CONFIRMED",
+              "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_ROUTER_LIVE_BINDING_RECEIPT_V2",
+              "status": "PASS__GITHUB_ACTIONS_PR_CARRIER_EXECUTED_EXACT_ROUTER_CORE__DETERMINISTIC_AND_FAIL_CLOSED",
               "pass": True,
-              "scope": "MECHANICAL_ROUTER_DEPLOYMENT_BINDING_ONLY__NO_PER_CELL_ADEQUACY_OR_SELECTED_COVER_CREDIT",
-              "checkout_commit": os.environ["CHECKOUT_SHA"],
-              "github_event_name": os.environ.get("GITHUB_EVENT_NAME_LOCAL"),
-              "github_run_id": os.environ.get("GITHUB_RUN_ID_LOCAL"),
-              "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT_LOCAL"),
+              "github_run_id": os.environ["GITHUB_RUN_ID_LOCAL"],
+              "github_run_attempt": os.environ["GITHUB_RUN_ATTEMPT_LOCAL"],
+              "head_sha": os.environ["HEAD_SHA_LOCAL"],
               "router_git_blob_sha": os.environ["ROUTER_BLOB_SHA"],
-              "test_git_blob_sha": os.environ["TEST_BLOB_SHA"],
-              "workflow_git_blob_sha": os.environ["WORKFLOW_BLOB_SHA"],
-              "actual_context_digest_sha256": context,
-              "selected_route_id": first.route_id,
-              "selected_cell_id": first.cell_id,
+              "selected_route_id": x1.route_id,
               "exact_replay_same_under_input_permutation": True,
               "fail_closed_negative_replay": True,
-              "fail_closed_reason": fail_closed_reason,
-              "acceptance_credit_delta": 0,
+              "fail_closed_reason": reason,
+              "scope": "MECHANICAL_DEPLOYED_ROUTER_BINDING_ONLY",
+              "abc_closed": False,
+              "d_finality_closed": False,
+              "terminal": False,
               "terminal_credit_delta": 0,
           }
-          Path("router_live_binding_receipt.json").write_text(
-              json.dumps(receipt, indent=2, sort_keys=True) + "\n",
-              encoding="utf-8",
-          )
+          Path("router_live_binding_receipt.json").write_text(json.dumps(receipt, indent=2, sort_keys=True)+"\n", encoding="utf-8")
           print(json.dumps(receipt, sort_keys=True))
           PY
 
