@@ -34,6 +34,14 @@ MAX_REQUIREMENTS = 16
 MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
 MAX_BRAIN_DELIVERABLES = 16
+_INTERACTIVE_CONTROLLER_CUES = (
+    "stdin",
+    "standard input",
+    "json line",
+    "jsonl",
+    "one json",
+    "controller process",
+)
 _EXPLICIT_SUBMISSION_PATH_RE = re.compile(
     r"(?<![A-Za-z0-9_./-])((?:/app/)?submission/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)"
 )
@@ -51,10 +59,23 @@ def _brain_mandated_deliverables(goal: str) -> dict[str, str]:
             break
     return {f"BRAIN_DELIVERABLE_{i + 1:02d}": path for i, path in enumerate(paths)}
 
+def _interactive_controller_paths(goal: str, deliverables: dict[str, str]) -> set[str]:
+    lower = str(goal or "").lower()
+    if not any(cue in lower for cue in _INTERACTIVE_CONTROLLER_CUES):
+        return set()
+    return {
+        path
+        for path in deliverables.values()
+        if path.lower().endswith(".py")
+        and "controller" in path.rsplit("/", 1)[-1].lower()
+    }
+
 async def _validate_brain_deliverable(
     requirement_id: str,
     path: str,
     environment: BaseEnvironment,
+    *,
+    require_interactive_liveness: bool = False,
 ) -> dict[str, Any]:
     transport = HarborEnvironmentTransport(environment)
     quoted = shlex.quote(path)
@@ -63,6 +84,30 @@ async def _validate_brain_deliverable(
         checks.append(f"python -m json.tool {quoted} >/dev/null")
     elif path.lower().endswith(".py"):
         checks.append(f"python -m py_compile {quoted}")
+        if require_interactive_liveness:
+            checks.append(
+                "python - <<'PY'\n"
+                "# PROJECT_BRAIN_CONTROLLER_LIVENESS_V1\n"
+                "import subprocess, sys, time\n"
+                f"path={path!r}\n"
+                "proc=None\n"
+                "try:\n"
+                "    proc=subprocess.Popen([sys.executable,path],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)\n"
+                "    time.sleep(0.35)\n"
+                "    alive=proc.poll() is None\n"
+                "    if not alive:\n"
+                "        err=(proc.stderr.read() if proc.stderr else '')[-4000:]\n"
+                "        print('CONTROLLER_EXITED_BEFORE_INPUT',err,file=sys.stderr)\n"
+                "    raise SystemExit(0 if alive else 42)\n"
+                "finally:\n"
+                "    if proc is not None and proc.poll() is None:\n"
+                "        proc.terminate()\n"
+                "        try:\n"
+                "            proc.communicate(timeout=1)\n"
+                "        except Exception:\n"
+                "            proc.kill(); proc.communicate()\n"
+                "PY"
+            )
     observed: list[dict[str, Any]] = []
     for command in checks:
         receipt = await transport.exec(command, timeout_sec=60)
@@ -174,6 +219,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         raise ValueError("SCIENCE_GOAL_REQUIRED")
     max_cycles = max(1, min(int(max_cycles), MAX_CYCLES))
     brain_deliverables = _brain_mandated_deliverables(goal)
+    interactive_controller_paths = _interactive_controller_paths(goal, brain_deliverables)
     mandatory_requirement_ids = list(brain_deliverables)
     requirements: list[str] | None = None
     resolved: set[str] = set()
@@ -230,6 +276,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                     "finish_authority": "BRAIN_VERIFIED_STATE",
                     "material_requirements": requirements,
                     "brain_mandated_deliverables": brain_deliverables,
+                    "interactive_controller_paths": sorted(interactive_controller_paths),
                     "resolved_requirements": sorted(resolved),
                     "cycles": cycle + 1,
                     "trace": trace,
@@ -286,7 +333,12 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                     if path is None:
                         verified_covers.append(requirement_id)
                         continue
-                    check = await _validate_brain_deliverable(requirement_id, path, environment)
+                    check = await _validate_brain_deliverable(
+                        requirement_id,
+                        path,
+                        environment,
+                        require_interactive_liveness=path in interactive_controller_paths,
+                    )
                     deliverable_checks.append(check)
                     if check["verified"] is True:
                         verified_covers.append(requirement_id)
@@ -319,6 +371,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                 "finish_authority": "BRAIN_VERIFIED_STATE",
                 "material_requirements": requirements,
                 "brain_mandated_deliverables": brain_deliverables,
+                "interactive_controller_paths": sorted(interactive_controller_paths),
                 "resolved_requirements": sorted(resolved),
                 "cycles": cycle + 1,
                 "trace": trace,
@@ -333,6 +386,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         "model_has_terminal_authority": False,
         "material_requirements": requirements or [],
         "brain_mandated_deliverables": brain_deliverables,
+        "interactive_controller_paths": sorted(interactive_controller_paths),
         "resolved_requirements": sorted(resolved),
         "cycles": max_cycles,
         "trace": trace,
@@ -347,7 +401,7 @@ class HarborScienceAgent(BaseAgent):
         return "project-brain-science"
 
     def version(self) -> str:
-        return "1.2.0"
+        return "1.3.0"
 
     async def setup(self, environment: BaseEnvironment) -> None:
         return None
