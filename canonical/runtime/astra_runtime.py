@@ -6536,6 +6536,84 @@ def run_goal(step, mission):
     return _stamp_cognition_provenance(_run_goal_unstamped(step, mission))
 
 
+
+_CERTIFICATE_GATED_ROUTE_RECEIPT_FIELDS=frozenset({
+    "context_digest",
+    "cell_id",
+    "route_id",
+    "route_blob_sha",
+    "adequacy_certificate_blob_sha",
+    "admission_certificate_blob_sha",
+    "admitted",
+})
+
+def run_certificate_gated_route_select(step):
+    """Production selection seam: select a certified route, but do not execute it."""
+    if not isinstance(step,dict):
+        raise Blocker("CERTIFICATE_GATED_ROUTE_STEP_INVALID")
+    actual_context_digest=step.get("actual_context_digest")
+    if not isinstance(actual_context_digest,str) or not actual_context_digest:
+        raise Blocker("CERTIFICATE_GATED_ROUTE_CONTEXT_DIGEST_INVALID")
+    raw_receipts=step.get("admission_receipts")
+    if not isinstance(raw_receipts,list) or not raw_receipts:
+        raise Blocker("CERTIFICATE_GATED_ROUTE_RECEIPTS_REQUIRED")
+
+    router=_load_runtime_helper("certificate_gated_selected_route_router_v1")
+    receipts=[]
+    string_fields=(
+        "context_digest",
+        "cell_id",
+        "route_id",
+        "route_blob_sha",
+        "adequacy_certificate_blob_sha",
+        "admission_certificate_blob_sha",
+    )
+    for index,item in enumerate(raw_receipts):
+        if not isinstance(item,dict):
+            raise Blocker("CERTIFICATE_GATED_ROUTE_RECEIPT_NOT_OBJECT:"+str(index))
+        if set(item)!=_CERTIFICATE_GATED_ROUTE_RECEIPT_FIELDS:
+            raise Blocker("CERTIFICATE_GATED_ROUTE_RECEIPT_FIELDS_INVALID:"+str(index))
+        if any(not isinstance(item.get(key),str) or not item.get(key) for key in string_fields):
+            raise Blocker("CERTIFICATE_GATED_ROUTE_RECEIPT_STRING_FIELD_INVALID:"+str(index))
+        if type(item.get("admitted")) is not bool:
+            raise Blocker("CERTIFICATE_GATED_ROUTE_RECEIPT_ADMISSION_NOT_LITERAL_BOOL:"+str(index))
+        receipts.append(router.AdmissionReceipt(
+            context_digest=item["context_digest"],
+            cell_id=item["cell_id"],
+            route_id=item["route_id"],
+            route_blob_sha=item["route_blob_sha"],
+            adequacy_certificate_blob_sha=item["adequacy_certificate_blob_sha"],
+            admission_certificate_blob_sha=item["admission_certificate_blob_sha"],
+            admitted=item["admitted"],
+        ))
+
+    try:
+        selected=router.select_certified_route(
+            actual_context_digest=actual_context_digest,
+            receipts=receipts,
+        )
+    except router.RouterFailClosed as exc:
+        raise Blocker("CERTIFICATE_GATED_ROUTE_SELECT_BLOCKED:"+str(exc)) from exc
+
+    return {
+        "schema":"PROJECT_BRAIN_CERTIFICATE_GATED_DEPLOYED_ROUTE_SELECTION_V1",
+        "status":"SELECTED_CERTIFIED_ROUTE",
+        "context_digest":selected.context_digest,
+        "cell_id":selected.cell_id,
+        "route_id":selected.route_id,
+        "route_blob_sha":selected.route_blob_sha,
+        "adequacy_certificate_blob_sha":selected.adequacy_certificate_blob_sha,
+        "admission_certificate_blob_sha":selected.admission_certificate_blob_sha,
+        "admitted":True,
+        "selection_only":True,
+        "downstream_route_execution_performed":False,
+        "execution_authority":False,
+        "promotion_authority":False,
+        "terminal_results_observed":0,
+        "fresh_terminal_evidence_consumed":0,
+        "terminal_credit_delta":0,
+    }
+
 def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
     mission=mission or {}
@@ -6553,6 +6631,8 @@ def execute_step(step, prior_results=None, mission=None):
         return run_http(step)
     if adapter=="goal":
         return run_goal(step, mission or {})
+    if adapter=="certificate_gated_route_select":
+        return run_certificate_gated_route_select(step)
     raise Blocker("MISSING_ADAPTER:"+adapter)
 
 def verify(step,result):
