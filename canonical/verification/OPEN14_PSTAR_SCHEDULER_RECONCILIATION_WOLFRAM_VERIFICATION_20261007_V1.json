@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_OPEN14_PSTAR_SCHEDULER_RECONCILIATION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_LOGIC_AND_EXACT_MATRIX_CENSUS_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPEN14_PSTAR_SCHEDULER_RECONCILIATION_20261007_V1.json",
+    "branch": "truth-repair/open14-pstar-scheduler-reconcile-20261007-v1"
+  },
+  "exact_matrix_blob": "cf736088c1ff460283f9b62d873b8e0710374e79",
+  "census": {
+    "open": 14,
+    "configured_verification_pending": 2,
+    "external_specimen": 10,
+    "owned_component_not_full_family": 2,
+    "sum": 14
+  },
+  "wolfram_results": {
+    "open_and_not_positive_p_satisfiable": true,
+    "open_implies_positive_p_tautology": false
+  },
+  "verified": [
+    "THE THREE CURRENT OPEN STATUS CLASSES DO NOT LOGICALLY ENTAIL PSTAR POSITIVE NECESSITY.",
+    "V4 MISSING_PROOF STOP RULE AND ACCEPTANCE_VS_CAPABILITY REPAIR ARE CONSISTENT WITH FREEZING SPECULATIVE NEW MECHANISM WORK.",
+    "A POSITIVE SAME_CONTEXT TARGET_RELATIVE CAUSAL FAILURE MAY REOPEN MECHANISM ACQUISITION."
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM PSTAR ZERO",
+    "NO CLAIM OPEN FAMILIES PASS",
+    "NO TERMINAL CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
