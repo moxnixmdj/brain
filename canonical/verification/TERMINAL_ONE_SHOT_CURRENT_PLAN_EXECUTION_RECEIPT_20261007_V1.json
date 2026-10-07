@@ -1,0 +1,13 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_ONE_SHOT_CURRENT_PLAN_EXECUTION_RECEIPT_V1",
+  "date":"2026-10-07",
+  "status":"PASS__INDEPENDENT_PUBLIC_EXACT_MANIFEST_PLANNER_EXECUTION__ZERO_CREDIT",
+  "planner":{"path":"canonical/runtime/terminal_autopilot_v1.py","git_blob_sha":"3ebdcdac161d818f88d2a864f9cfce061190f846"},
+  "manifest":{"path":"canonical/governance/TERMINAL_ONE_SHOT_ATTACK_CURRENT_MANIFEST_20261007_V1.json","git_blob_sha":"c2c221799a28c7f2c60d178445091c0a6e413041"},
+  "independent_execution":{"repository":"moxnixmdj/verification-capsule-runner","pull_request":2409,"head_sha":"541a875c5f9f71dbf83b7a73ac64cbb9df840a1c","workflow_run_id":37633126123,"workflow_job_id":112832284090,"conclusion":"success"},
+  "observed_plan":{"open_obligation_count":13,"active_target_count":1,"route_race_count":6,"direct_evidence_count":12,"dispatch_count":18,"first_route":"SCOPE_COMPLETE_UNIVERSAL_COVER","tb_science_direct_duplicate":false},
+  "hard_nonclaims":["NO_ACCEPTANCE_CLOSED_BY_PLANNING","NO_U_EMPTY","NO_TERMINAL_CREDIT"],
+  "incremental_spend_usd":0,
+  "acceptance_credit_delta":0,
+  "terminal_credit_delta":0
+}
