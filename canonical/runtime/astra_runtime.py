@@ -531,10 +531,15 @@ def _bridge_aware_urlopen(request, timeout=20, *args, **kwargs):
         method='GET'
         headers={}
         data=None
+    # This bridge is an information-admission surface, not a generic HTTP
+    # mutation transport.  Reject any request that could carry a body or use a
+    # non-GET method before either bridged or raw network execution occurs.
+    if method != "GET" or data is not None:
+        raise Blocker("EXTERNAL_URLOPEN_INFORMATION_ONLY_METHOD_FORBIDDEN:"+str(method))
     bridged=_external_tool_bridge('urlopen',{
       'url':url,'method':method,'headers':headers,
       'timeout_s':timeout,
-      'data_b64':base64.b64encode(data).decode('ascii') if data is not None else None,
+      'data_b64':None,
     })
     if bridged is None:
         return _direct_authorized_urlopen(request, timeout=timeout, *args, **kwargs)
