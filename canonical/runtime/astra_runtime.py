@@ -6161,6 +6161,23 @@ def _run_goal_unstamped(step, mission):
                 mission,grounding_goal
             )
             grounded_count=int(grounding.get("grounded_clause_count") or 0)
+            unresolved_indexes=[
+                int(x) for x in (grounding.get("unresolved_clause_indexes") or [])
+            ]
+            if grounded_count>0 and unresolved_indexes:
+                # Partial grounding must not suppress acquisition for unresolved
+                # clauses. Preserve the bound grounding as evidence, but route
+                # only the unresolved semantic remainder to acquisition.
+                clauses=grounding.get("clauses") or []
+                unresolved_text=[
+                    str(clauses[i].get("text") or "").strip()
+                    for i in unresolved_indexes
+                    if 0 <= i < len(clauses) and isinstance(clauses[i],dict)
+                    and str(clauses[i].get("text") or "").strip()
+                ]
+                if unresolved_text:
+                    acquisition_goal=". ".join(unresolved_text)
+                grounded_count=0
             if grounded_count>0:
                 try:
                     composition_path,composition=_compose_grounding_to_capability_problem(

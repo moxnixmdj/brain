@@ -110,5 +110,45 @@ class PlainGoalGroundingRuntimePrecedenceTests(unittest.TestCase):
         self.assertEqual(result["candidate_capability_ids"],[])
 
 
+    def test_partial_grounding_allows_acquisition_for_unresolved_remainder(self):
+        goal="Use the known route. Prove the scope-complete terminal cover."
+        mission={"mission_id":"GROUNDING-PARTIAL-ACQUISITION-TEST","goal":goal}
+        step={"adapter":"goal","goal_ref":"goal","allow_optional_model_planner":False}
+        compile_error=runtime.Blocker(
+            "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+        )
+        grounding={
+            "schema":"PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+            "grounded_clause_count":1,
+            "unresolved_clause_indexes":[1],
+            "candidate_capability_ids":["known.bound.route"],
+            "clauses":[
+                {"index":0,"text":"Use the known route","status":"GROUNDED"},
+                {"index":1,"text":"Prove the scope-complete terminal cover","status":"UNRESOLVED"},
+            ],
+            "broad_objective_decomposition":None,
+            "model_dependency_count":0,
+        }
+        calls=[]
+        class Auto:
+            def dispatch(self, acquisition_goal, *args, **kwargs):
+                calls.append(acquisition_goal)
+                raise RuntimeError("expected-test-stop")
+        class Discovery:
+            def search_all(self, acquisition_goal, limit_per_source=30):
+                calls.append("DISCOVERY:"+acquisition_goal)
+                return {"candidates":[]}
+        evidence_path=CANONICAL_ROOT/"astra_runtime"/"evidence"/"GROUNDING-PARTIAL-ACQUISITION-TEST__BOUND_CAPABILITY_GROUNDING.json"
+        with mock.patch.object(runtime,"_compile_plain_goal",side_effect=compile_error), \
+             mock.patch.object(runtime,"_ground_plain_goal_to_bound_capabilities",return_value=(evidence_path,grounding)), \
+             mock.patch.object(runtime,"_load_auto_capability_acquisition",return_value=Auto()), \
+             mock.patch.object(runtime,"_load_capability_discovery",return_value=Discovery()):
+            with self.assertRaisesRegex(runtime.Blocker,"CAPABILITY_ACQUISITION_REQUIRED"):
+                runtime.run_goal(step,mission)
+        expected="Prove the scope-complete terminal cover"
+        self.assertEqual(calls[0],expected)
+        self.assertEqual(calls[1],"DISCOVERY:"+expected)
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
