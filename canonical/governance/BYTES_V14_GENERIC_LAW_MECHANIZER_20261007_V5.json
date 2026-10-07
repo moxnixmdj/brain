@@ -1,0 +1,23 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_GENERIC_LAW_MECHANIZER_V5",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_REPLAY_PASS__2872_BYTE_PACKAGE",
+  "scope_lock":"BYTES_RESEARCH_ONLY",
+  "components":{
+    "runtime_blob":"f5d140ca78b1512efd3ad248e5991909480331d5",
+    "self_checker_blob":"cca5d79b15499bd263e84112feedc46228be05a4",
+    "law_mechanizer_blob":"b1cbd41d27a5db23c3069ff2f5aff1de9d7dcec7"
+  },
+  "mechanized":{
+    "permutation_naturality":19,
+    "sort_canonicality":11,
+    "unique_first_occurrence":18,
+    "scalar_range_empty_annihilation":232,
+    "union_unique_equations":280
+  },
+  "package":{"raw_bytes":7531,"payload_bytes":2872,"payload_sha256":"12f030b7fcd7d7899b8a87fcbad55cef17678453ce74c54b1aa96c3ce400e8f0","roundtrip_exact":true},
+  "comparison":{"previous_lower_trust_bytes":3353,"current_bytes":2872,"saved_bytes":481},
+  "remaining_boundary":["BOUNDARY_SMALL_MODEL_COMPLETENESS","PYTHON_FIXED_DECODER_SUBSTRATE"],
+  "next":"MECHANIZE_BOUNDARY_SMALL_MODEL_COMPLETENESS",
+  "terminal_credit_delta":0
+}
