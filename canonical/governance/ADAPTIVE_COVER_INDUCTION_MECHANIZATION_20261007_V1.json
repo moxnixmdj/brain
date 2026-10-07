@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_ADAPTIVE_COVER_INDUCTION_MECHANIZATION_V1",
+  "date": "2026-10-07",
+  "status": "EXECUTABLE_STRUCTURAL_REDUCTION__THREE_ADAPTIVE_COVER_PREMISES_DERIVED_FROM_ONE_AUTHENTICATED_REACHED_STATE_MANIFEST__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "adaptive_fixed_point_theorem": {
+      "path": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V1.json",
+      "git_blob_sha": "2d1cbc9022455ec980892c025e86580a0b38852d"
+    },
+    "top_semantic_initialization": {
+      "path": "canonical/governance/TOP_SEMANTIC_OVERAPPROXIMATION_SOUNDNESS_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "2e37860a0fb9d8212aa854c0d8c8749919c76204"
+    },
+    "runtime": {
+      "path": "canonical/runtime/adaptive_cover_induction_gate_v1.py"
+    },
+    "tests": {
+      "path": "canonical/tests/test_adaptive_cover_induction_gate_v1.py",
+      "local_replay": "4_passed"
+    }
+  },
+  "first_principles_reduction": {
+    "alpha_gamma": "USE_CONSTANT_INITIAL_ABSTRACTION_alpha(c)=TOP__THE_EXISTING_TOP_OVERAPPROXIMATION_RECEIPT_SUPPLIES_TOTALITY_AND_c_IN_gamma(TOP)",
+    "well_founded_rank": "FOR_A_FINITE_REACHED_PROGRESS_GRAPH__ACYCLICITY_CONSTRUCTS_A_NATURAL_NUMBER_RANK_STRICTLY_DECREASING_ON_EVERY_EDGE__rank(s)=0_FOR_TERMINAL_AND_1+max(rank(child))_OTHERWISE",
+    "resource_potential": "ON_THE_SAME_ACYCLIC_GRAPH__THE_RUNTIME_CONSTRUCTS_B(s)=terminal_cost_OR_max(edge_cost+B(child))",
+    "cover": "EVERY_REACHED_STATE_MUST_BE_EITHER_AUTHENTICATED_TERMINAL_ADEQUATE_AND_SAFE_OR_HAVE_AN_AUTHENTICATED_SAFE_TRUE_WORLD_PRESERVING_COMPLETE_OUTCOME_REFINEMENT"
+  },
+  "bureaucracy_deleted": [
+    "MANUALLY_ASSERTED_GLOBAL_WELL_FOUNDED_RANK",
+    "MANUALLY_ASSERTED_GLOBAL_RESOURCE_POTENTIAL",
+    "SEPARATE_REACHED_STATE_TERMINAL_OR_PROGRESS_BOOKKEEPING"
+  ],
+  "remaining_single_semantic_boundary": "PROVE_A_SCOPE_COMPLETE_PARAMETERIZED_BINDING_THAT_EVERY_REACHED_ABSTRACT_STATE_FOR_EVERY_c_IN_S_TRACE_INSTANTIATES_THE_GATE_WITH_INDEPENDENTLY_AUTHENTICATED_TERMINAL_OR_REFINEMENT_RECEIPTS__OR_RETURN_ONE_CONSTRUCTIVE_STATE_CLASS_WITH_NEITHER",
+  "current_truth": {
+    "top_alpha_gamma_route_available": true,
+    "rank_mechanizer_implemented": true,
+    "resource_potential_mechanizer_implemented": true,
+    "reached_cover_mechanizer_implemented": true,
+    "scope_complete_parameterized_terminal_or_refinement_binding_proved": false,
+    "U_empty": false,
+    "ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_SELF_CERTIFICATION_OF_SEMANTIC_TRUTH",
+    "NO_CLAIM_EVERY_UNRESOLVED_EXTENSION_ATOM_HAS_AN_ADMISSIBLE_REFINEMENT",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
