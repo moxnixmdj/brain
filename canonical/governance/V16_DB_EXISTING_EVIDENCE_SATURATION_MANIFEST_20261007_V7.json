@@ -1,0 +1,111 @@
+{
+  "schema": "PROJECT_BRAIN_V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_V7",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ZERO_REALITY_CONCURRENT_FORK_RECONCILIATION__FIFTEEN_SOUND_CACHED_CERTIFICATE_REGIONS__LIVE_13_UNION_SYNTHESIS_CEILING_UNION_P3_WHOLE_CELL__NOT_EXHAUSTIVE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+    "git_blob_sha": "c1bc4543860be08f9014f69a212ba2222d8dba7c"
+  },
+  "live_thirteen_base": {
+    "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json",
+    "git_blob_sha": "6637b23cd90f3df20ec87f817ef38d1eb233ea79",
+    "known_sound_region_certificate_count": 13
+  },
+  "parallel_synthesis_ceiling_delta": {
+    "manifest": {
+      "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V6.json",
+      "git_blob_sha": "cdb8f76d8ee158989a51f2ebcf108c4d1847ebd3"
+    },
+    "exact_added_region": "SYNTHESIS_TARGET_SCOPE_REQUIRED_CLAIM_COVERAGE_TOP_LAW",
+    "cell": {
+      "path": "canonical/governance/V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_SELECTED_PROPERTY_CELL_20261007_V1.json",
+      "git_blob_sha": "7b2cb008f34082ae0aa4be78f2444287cf6022b2"
+    },
+    "verification": {
+      "path": "canonical/verification/V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_SELECTED_PROPERTY_INDEPENDENT_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "200576296c16e3c5231e6a873a83129d8ea06545"
+    }
+  },
+  "p3_whole_cell_delta": {
+    "exact_added_region": "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
+    "cell": {
+      "path": "canonical/governance/V16_P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_20261007_V2.json",
+      "git_blob_sha": "1b3add6c488e7205981da391044fd7631e068aa8"
+    },
+    "verification": {
+      "path": "canonical/verification/V16_P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_WOLFRAM_VERIFICATION_20261007_V2.json",
+      "git_blob_sha": "6e87e01fb58e9b728645f6d01baca1d3cd1598a1"
+    }
+  },
+  "reconciliation": {
+    "live_base_certificate_count": 13,
+    "added_distinct_certificate_ids": [
+      "SYNTHESIS_TARGET_SCOPE_REQUIRED_CLAIM_COVERAGE_TOP_LAW",
+      "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION"
+    ],
+    "added_distinct_certificate_count": 2,
+    "known_sound_region_certificate_count": 15,
+    "all_certificate_ids_distinct": true,
+    "regions_may_overlap_semantically": true,
+    "coverage_measure_not_claimed": true,
+    "E_definition": "CLOSED_AUTHORIZED_OPUS55_OBSERVABLE_TRACE_SUPERSET_MINUS_THE_UNION_OF_ALL_SOUND_CURRENT_AND_FUTURE_D_B_CERTIFICATE_REGIONS",
+    "monotonicity": "E_V7_SUBSET_OR_EQUAL_E_LIVE13",
+    "fresh_target_reality_consumed": 0
+  },
+  "known_certificate_region_ids": [
+    "ACCEPTED_LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "ACCEPTED_SUBAGENT_DELEGATION_AND_COORDINATION",
+    "ACCEPTED_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "ACCEPTED_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "ACCEPTED_EXACT_SYMBOLIC_COMPUTATION",
+    "LIVEBENCH_IF_ACTIVE15_FROZEN_200",
+    "NATIVE_ARTIFACT_T1_FROZEN_8_MECHANICAL",
+    "UNKNOWN_DOMAIN_V7_EXACT_REACHABLE_FROZEN_PRODUCTION_DOMAIN",
+    "SYNTHESIS_T1_T3_FROZEN_60_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+    "P2_PROFESSIONAL_T1_FROZEN_30_HIDDEN_OPTIMUM",
+    "PROFESSIONAL_ARTIFACT_P2_INFO_SAFE_V2_ALL_GENERATED_CASES",
+    "PROFESSIONAL_ARTIFACT_T1_FROZEN_30_ZERO_UNSUPPORTED_MATERIAL_CONTENT",
+    "BROWSER_STATE_INFORMATION_SAFE_ALL_SEEDS_ALL_ORDINALS_V1",
+    "SYNTHESIS_TARGET_SCOPE_REQUIRED_CLAIM_COVERAGE_TOP_LAW",
+    "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION"
+  ],
+  "synthesis_residual_effect": {
+    "deleted": [
+      "REQUIRED_CLAIM_COVERAGE_NONINFERIORITY_ON_THE_VERIFIED_TARGET_SCOPE",
+      "THE_EXACT_FROZEN_P3_T1_T3_SEVEN_CHECK_DIRECT_CONJUNCTION"
+    ],
+    "surviving": "LOAD_BEARING_USEFUL_SYNTHESIS_QUALITY_DIMENSION_PERFORMANCE_NOT_ALREADY_SOUNDLY_CERTIFIED",
+    "synthesis_family_closed": false
+  },
+  "independent_math_recomputation": {
+    "p3_boolean_target_count": 128,
+    "p3_all_targets_componentwise_le_brain": true,
+    "p3_any_strict_dominator": false,
+    "required_claim_coverage_ceiling_dominance": true,
+    "two_added_ids_distinct": true,
+    "live13_plus_two_distinct_ids_count": 15
+  },
+  "scheduler_effect": [
+    "TREAT_ALL_FIFTEEN_REGION_CERTIFICATES_AS_CACHED_DOMINATED_TERRITORY.",
+    "DO_NOT_REOPEN_REQUIRED_CLAIM_COVERAGE_FOR_THE_BOUND_SYNTHESIS_TARGET_SCOPE_WITHOUT_CONTENT_ADDRESSED_COUNTEREVIDENCE.",
+    "DO_NOT_RESCHEDULE_THE_EXACT_FROZEN_P3_T1_T3_SEVEN_CHECK_DIRECT_CONJUNCTION.",
+    "SUBTRACT_THE_FIFTEEN_CERTIFICATE_REGION_UNION_BEFORE_ANY_NEW_TARGET_QUERY_OR_IMPLEMENTATION_WORK.",
+    "CONTINUE_SYNTHESIS_ONLY_ON_LOAD_BEARING_USEFUL_QUALITY_DIMENSIONS_NOT_ALREADY_SOUNDLY_CERTIFIED.",
+    "BIND_CLOSED_CELLS_TO_THE_CERTIFICATE_GATED_ROUTER_WITH_EXACT_ADMISSION_ADEQUACY_AND_ROUTE_RECEIPTS_BEFORE_ROUTER_OR_ABC_CREDIT."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FIFTEEN_REGIONS_ARE_SEMANTICALLY_DISJOINT.",
+    "NO_CLAIM_THE_FIFTEEN_REGIONS_EXHAUST_THE_CLOSED_TARGET_TRACE_SUPERSET.",
+    "NO_CLAIM_SYNTHESIS_FAMILY_CLOSED.",
+    "NO_CLAIM_MATCHED_QUALITY_OR_ALL_OTHER_SYNTHESIS_QUALITY_DIMENSIONS_ARE CLOSED.",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_CLOSED.",
+    "NO_CLAIM_D_FINALITY_CLOSED.",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
