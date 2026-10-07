@@ -8,6 +8,8 @@ verification before reuse is authorized.
 """
 from __future__ import annotations
 
+import base64
+import json
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import executable_skill_program_v7 as skill
@@ -45,15 +47,32 @@ def episode_candidate_from_solver(
         cid = row.get("capability_id")
         verifier = row.get("verifier_id")
         outputs = row.get("new_verified_facts")
+        action_contract_sha256 = row.get("action_contract_sha256")
+        accepted_proposal = row.get("accepted_proposal")
         if not isinstance(cid, str) or not cid:
             raise ValueError("TRACE_CAPABILITY_ID_INVALID")
         if not isinstance(verifier, str) or not verifier:
             raise ValueError("TRACE_VERIFIER_ID_INVALID")
         if not isinstance(outputs, list) or not outputs:
             raise ValueError("TRACE_OUTPUTS_INVALID")
+        if not isinstance(action_contract_sha256, str) or len(action_contract_sha256) != 64:
+            raise ValueError("TRACE_ACTION_CONTRACT_SHA256_INVALID")
+        if not isinstance(accepted_proposal, Mapping):
+            raise ValueError("TRACE_ACCEPTED_PROPOSAL_MISSING")
+        proposal_bytes = json.dumps(
+            accepted_proposal,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=False,
+        ).encode("utf-8")
+        proposal_b64 = base64.b64encode(proposal_bytes).decode("ascii")
         steps.append({
             "op": cid,
-            "inputs": ["VERIFIER::" + verifier],
+            "inputs": [
+                "VERIFIER::" + verifier,
+                "ACTION_CONTRACT_SHA256::" + action_contract_sha256,
+                "ACCEPTED_PROPOSAL_BASE64::" + proposal_b64,
+            ],
             "outputs": [str(x) for x in outputs],
         })
 
@@ -76,6 +95,8 @@ def episode_candidate_from_solver(
         "solver_trace_proof_digests": [
             str(row.get("proof_digest") or "") for row in trace
         ],
+        "exact_action_semantics_preserved": True,
+        "parameterization_claimed": False,
         "verified_episode": False,
         "reuse_authorized": False,
         "terminal_authority": False,
