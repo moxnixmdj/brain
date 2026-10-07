@@ -1,0 +1,154 @@
+{
+  "schema": "PROJECT_BRAIN_NATIVE_ARTIFACT_V12_SELECTED_CONTEXT_ABC_BUNDLE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_V12_SELECTED_CELL__SCOPE_COMPLETE_OBJECTIVE_CEILING__K_C_MINUS_EMPTY__ROUTE_OWNED__ZERO_GLOBAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V12.json",
+    "git_blob_sha": "3ab55ad2e9df6a7f94acb2e1950569bdc18c8136"
+  },
+  "sources": {
+    "target_law_residual": {
+      "path": "canonical/governance/V12_TARGET_LAW_UNCERTAINTY_RESIDUAL_THEOREM_20261007_V1.json",
+      "git_blob_sha": "014d7d5102093251789673dff0a191203663a90d"
+    },
+    "exact_leaf": {
+      "path": "canonical/governance/NATIVE_ARTIFACT_EXACT_LEAF_GLOBAL_REUSE_CANDIDATE_20261005_V1.json",
+      "git_blob_sha": "1e0adb8bfaf24adde27455e13e55fe102088bbf5"
+    },
+    "exact_leaf_verification": {
+      "path": "canonical/verification/NATIVE_ARTIFACT_EXACT_LEAF_GLOBAL_REUSE_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "61e8b61e9b48d869c1623251b4ce1a780f6c737b"
+    },
+    "d0_closure": {
+      "path": "canonical/governance/D0_NATIVE_STRUCTURED_ARTIFACT_EDIT_CLOSURE_V1.json",
+      "git_blob_sha": "82977b79a0284a2ac51b1075146d528dbba2d6aa"
+    },
+    "structural_verification": {
+      "path": "canonical/verification/NATIVE_ARTIFACT_CROSS_FORMAT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "34d8a3b7a99363902d6212759125ac71fa54a986"
+    },
+    "render_verification": {
+      "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+    }
+  },
+  "selected_cell": {
+    "id": "B7_NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_EXACT_LEAF",
+    "role": "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION",
+    "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+    "scope": "EXPLICIT_LOW_LEVEL_NATIVE_EDIT_PRESERVATION_FOR_DOCX_XLSX_PPTX_PDF_ONLY",
+    "input_contract": [
+      "NATIVE_ARTIFACT_BYTES",
+      "EXPLICIT_LOW_LEVEL_EDIT_SPECIFICATION",
+      "DECLARED_FORMAT"
+    ],
+    "excluded": [
+      "HIGH_LEVEL_SEMANTIC_TARGET_SELECTION",
+      "PROFESSIONAL_QUALITY_JUDGMENT",
+      "GENERAL_VISUAL_UNDERSTANDING",
+      "UNDECLARED_FORMAT_OR_EDIT_CLASSES"
+    ]
+  },
+  "complete_terminal_semantics": {
+    "evaluator": "ARTIFACT_MECHANICAL_GATES_CEILING",
+    "dimensions": [
+      "NATIVE_FORMAT_REOPEN_OR_PARSE_SUCCESS",
+      "DECLARED_EDIT_APPLIED",
+      "UNRELATED_NATIVE_STRUCTURE_PRESERVED",
+      "BOUNDED_RENDER_GEOMETRY_OR_LOCALIZATION_PRESERVED_WHERE_APPLICABLE",
+      "FAIL_CLOSED_ON_UNSUPPORTED_OR_UNDECLARED_MUTATION_CLASS"
+    ],
+    "source_state": "PROVED_SCOPE_COMPLETE",
+    "objective_order": "BINARY_ALL_GATES_PASS",
+    "brain_value": 1,
+    "theoretical_ceiling": 1,
+    "hidden_target_weights_required": false
+  },
+  "dominance": {
+    "route": "ABSOLUTE_TOP_ELEMENT",
+    "proof": "BRAIN_ATTAINS_THE_THEORETICAL_MAXIMUM_1_ON_THE_COMPLETE_EXACT_LEAF_SEMANTICS__NO_TARGET_LAW_CAN_SCORE_ABOVE_1",
+    "K_c_minus": "EMPTY",
+    "target_identity_or_score_required": false
+  },
+  "selected_brain_route": {
+    "operative_files": [
+      {
+        "path": "canonical/runtime/native_artifact_cross_format_candidate_v1.py",
+        "git_blob_sha": "f3e5090647dd9029ab9f46efd06dc0c0d0addbc3"
+      },
+      {
+        "path": "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+        "git_blob_sha": "904eb61171f5ee775ff7824c1be7778d7acc4a23"
+      },
+      {
+        "path": "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+        "git_blob_sha": "39374e775d54cdc58315d7a1f877d834282a64f7"
+      },
+      {
+        "path": "canonical/runtime/ooxml_package_transaction.py",
+        "git_blob_sha": "970be62854c918b306ae3f62989009bfbd0e8fc7"
+      },
+      {
+        "path": "canonical/runtime/pdf_native_edit_transaction.py",
+        "git_blob_sha": "b9f673ffe0474d00a598089077ad93db40c00dd8"
+      }
+    ],
+    "brain_transaction_logic_owned": true,
+    "external_hidden_model_required": false,
+    "paid_service_required": false,
+    "unsupported_scope_behavior": "FAIL_CLOSED_OR_ROUTE_TO_SEPARATE_DECLARED_MECHANISM"
+  },
+  "local_C": {
+    "transform": "DETERMINISTIC_KERNEL_FROM_BOUND_ARTIFACT_BYTES_EXPLICIT_PATCH_AND_FORMAT_TO_NATIVE_OUTPUT_BYTES",
+    "source_quotient": "ARTIFACT_BYTES_PLUS_EXPLICIT_LOW_LEVEL_EDIT_SPEC_PLUS_DECLARED_FORMAT",
+    "target_quotient": "THE_COMPLETE_MECHANICAL_GATE_VECTOR_AND_BINARY_ALL_GATES_PASS",
+    "evaluator_pullback": "DIRECT_EVALUATION_OF_THE_DETERMINISTIC_OUTPUT_UNDER_THE_COMPLETE_GATE_VECTOR",
+    "hard_constraint_preimages": [
+      "UNSUPPORTED_OR_UNDECLARED_FORMAT_EDIT_KIND_FAILS_CLOSED",
+      "UNRELATED_STRUCTURE_PRESERVATION",
+      "BOUNDED_RENDER_LOCALIZATION"
+    ],
+    "non_load_bearing_internal_state_ignored": true
+  },
+  "route_local_ownership": {
+    "state": "BOUND_FOR_ABC_ROUTE_SELECTION__NOT_GLOBAL_D_FINALITY",
+    "basis": [
+      "BRAIN_TRANSACTION_LOGIC_OWNED",
+      "NO_EXTERNAL_MODEL_OR_API_REQUIRED",
+      "NO_PAID_SERVICE_REQUIRED",
+      "PINNED_OPEN_SOURCE_FORMAT_DEPENDENCIES_ONLY"
+    ]
+  },
+  "consequence": {
+    "expands_D_B": true,
+    "primitive_role": "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION",
+    "closes_only_exact_leaf": true,
+    "B7_role_closed": false,
+    "professional_quality_closed": false,
+    "semantic_target_selection_closed": false,
+    "target_information_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "falsifiers": [
+    "THE_EXACT_LEAF_OBJECTIVE_CEILING_OR_SCOPE_COMPLETENESS_RECEIPT_IS_INVALID",
+    "THE_SELECTED_ROUTE_CAN_EMIT_AN_OUTPUT_OUTSIDE_THE_COMPLETE_MECHANICAL_GATE_SEMANTICS_WITHOUT_FAILING_CLOSED",
+    "A_LOAD_BEARING_HARD_CONSTRAINT_EXISTS_INSIDE_THIS_EXACT_LEAF_BUT_IS_ABSENT_FROM_THE_BOUND_GATE_VECTOR",
+    "THE_OPERATIVE_ROUTE_DEPENDS_ON_AN_OPAQUE_EXTERNAL_CAPABILITY_PROVIDER",
+    "THE_BOUND_OPERATIVE_BYTES_DRIFT"
+  ],
+  "hard_nonclaims": [
+    "NO_WHOLE_B7_ROLE_CLOSURE",
+    "NO_ARTIFACT_CREATION_FAMILY_CLOSURE",
+    "NO_PROFESSIONAL_KNOWLEDGE_WORK_CLOSURE",
+    "NO_VISION_FAMILY_CLOSURE",
+    "NO_HIGH_LEVEL_ARTIFACT_TARGET_SELECTION_OR_QUALITY_CREDIT",
+    "NO_GLOBAL_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
