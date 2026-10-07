@@ -1,0 +1,9 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_SINGLE_ARTIFACT_CLOSED_V8_VERIFICATION",
+  "date":"2026-10-07",
+  "carrier":{"provider":"SPRITES","name":"h100-real-image-v1","id":"sprite-68a466f6-88d5-493d-93f3-2b85377836a3"},
+  "exact_blob":"246f31ac5fd90a29ca550dff742dedf29be01da5",
+  "replay":{"status":"PASS","closed_proof_check":"PASS"},
+  "encoding":{"raw_bytes":8902,"payload_bytes":3263,"sha256":"6b2c275c4d0482f81e9dfd8e5116623f2b6eb33a01c89af26046f3abf2b08de1","roundtrip_exact":true},
+  "terminal_credit_delta":0
+}
