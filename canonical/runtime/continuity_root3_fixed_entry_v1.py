@@ -16,7 +16,11 @@ EVIDENCE_REL="canonical/same_identity_worker/evidence"
 BRIDGE_REL="canonical/same_identity_worker/external_tool_bridge"
 
 def _fixed_repo_dir(rel: str) -> pathlib.Path:
-    return supervisor._repo_path(ROOT, rel)
+    resolved=supervisor._repo_path(ROOT, rel)
+    expected=ROOT/pathlib.PurePosixPath(rel)
+    if resolved != expected:
+        raise supervisor.SupervisorError("FIXED_BASE_REDIRECTED:"+rel)
+    return resolved
 
 def _task_path(raw: str | None) -> pathlib.Path | None:
     if raw is None:
