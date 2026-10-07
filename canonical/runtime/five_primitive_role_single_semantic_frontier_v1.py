@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import hashlib
 import json
+import subprocess
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -33,14 +33,21 @@ ROLE_TO_SEMANTIC_RESPONSIBILITY={
     "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION":"TASK_CONDITIONED_SYNTHESIS_OUTPUT_SELECTION_AND_UTILITY_SEMANTICS",
 }
 
-def blob(path:Path)->str:
-    b=path.read_bytes()
-    return hashlib.sha1(b"blob "+str(len(b)).encode()+b"\0"+b).hexdigest()
+def git_blob(path:Path)->str:
+    try:
+        rel=path.relative_to(ROOT).as_posix()
+    except ValueError:
+        return ""
+    cp=subprocess.run(
+        ["git","-C",str(ROOT),"rev-parse",f"HEAD:{rel}"],
+        text=True,capture_output=True,check=False,
+    )
+    return cp.stdout.strip() if cp.returncode==0 else ""
 
 def project()->dict:
     errors=[]
     for p,h in EXPECTED.items():
-        if blob(p)!=h:
+        if git_blob(p)!=h:
             errors.append("SOURCE_DRIFT:"+p.name)
 
     basis=json.loads(ROLE_BASIS.read_text(encoding="utf-8"))
