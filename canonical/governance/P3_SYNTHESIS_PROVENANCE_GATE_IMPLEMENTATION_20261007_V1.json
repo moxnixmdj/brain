@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_P3_SYNTHESIS_PROVENANCE_GATE_IMPLEMENTATION_V1",
+  "date": "2026-10-07",
+  "status": "IMPLEMENTED_AND_INDEPENDENTLY_REPLAYED__PROVENANCE_NOW_EXPLICIT_AND_ENFORCED__OLD_FROZEN_RECEIPT_NOT_RECREDITED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "falsifier": {
+    "path": "canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_EXECUTED_SCORER_FALSIFIER_20261007_V1.json",
+    "git_blob_sha": "d4339cca92dabd058ae4675bcb3fa9e6d25bf391",
+    "causal_gap": "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS_WAS_ABSENT_FROM_CANDIDATE_OUTPUT_AND_SCORER"
+  },
+  "implementation": {
+    "candidate": {
+      "path": "canonical/runtime/contract_native_brain_candidate.py",
+      "git_blob_sha": "1171ff86ec0beed43e6d79b2253c1a92804194cf",
+      "effect": "EVERY_SELECTED_SYNTHESIS_CLAIM_CARRIES_THE_EXACT_SOURCE_PROVENANCE_LIST_FROM_PUBLIC_EVIDENCE"
+    },
+    "scorer": {
+      "path": "canonical/runtime/contract_native_proof_suites.py",
+      "git_blob_sha": "b72cec9a928000df5ef4ce7fcb807f69c3943c01",
+      "effect": "MISSING_EXTRA_EMPTY_OR_MISMATCHED_SELECTED_CLAIM_PROVENANCE_FAILS"
+    },
+    "tests": {
+      "path": "canonical/tests/test_contract_native_proof_suites.py",
+      "git_blob_sha": "47898fd9f813cca9708136ab00079489521d8bbc"
+    }
+  },
+  "additional_truth_repair": {
+    "bug": "WHEN_THE_GENERATOR_HAD_NO_REQUIRED_CLAIM_IT_COULD_RELABEL_AN_UNSUPPORTED_FORBIDDEN_CLAIM_AS_REQUIRED_WITHOUT_REPAIRING_SUPPORT_STATUS",
+    "witness_seed": 80,
+    "repair": "FORCED_REQUIRED_FALLBACK_CLAIM_IS_SET_TO_SUPPORTED_IF_IT_WAS_UNSUPPORTED",
+    "reason": "REQUIRED_AND_UNSUPPORTED_WOULD_CREATE_AN_INCONSISTENT_CONTRACT_WHERE_THE_BRAIN_CANDIDATE_MUST_BOTH_INCLUDE_AND_EXCLUDE_THE_SAME_CLAIM"
+  },
+  "independent_replay": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "exact_git_blob_match": true,
+    "real_brain_synthesis_worlds_passed": 1000,
+    "provenance_negative_canaries_passed": 2,
+    "unit_tests_passed": 11,
+    "unit_tests_failed": 0
+  },
+  "promotion_boundary": {
+    "old_execution_snapshot_reusable_for_new_provenance_gate": false,
+    "frozen_T1_T3_population_replay_required_before_whole_cell_credit": true,
+    "whole_P3_seven_gate_cell_recredited": false,
+    "ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_OLD_P3_EXECUTION_SNAPSHOT_PROVES_THE_NEW_PROVENANCE_GATE.",
+    "NO_CLAIM_ONE_THOUSAND_CANARY_WORLDS_ARE_AN_EXHAUSTIVE_OPEN_WORLD_PROOF.",
+    "NO_CLAIM_THE_WHOLE_SYNTHESIS_CONTEXT_IS_CLOSED.",
+    "NO_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
