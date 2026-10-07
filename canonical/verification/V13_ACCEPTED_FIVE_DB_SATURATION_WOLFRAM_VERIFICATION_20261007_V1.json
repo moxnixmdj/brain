@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_V13_ACCEPTED_FIVE_DB_SATURATION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_LOGIC_PASS__EXACT_SOURCE_BINDINGS_AUDITED__CANDIDATE_RUNTIME_REPLAY_PENDING__ZERO_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/V13_ACCEPTED_FIVE_DB_SATURATION_20261007_V1.json",
+      "git_blob_sha": "914e2335701b63e16fbb93ca5f1035790173f7f5"
+    },
+    "verifier": {
+      "path": "canonical/runtime/v13_accepted_five_db_saturation_verifier_v1.py",
+      "git_blob_sha": "49116df7d1428393efae904d34ab0c5fc3a99c33"
+    },
+    "tests": {
+      "path": "canonical/tests/test_v13_accepted_five_db_saturation_v1.py",
+      "git_blob_sha": "5d0960cd1920fdbeeac66ff039af22b5fb456a40"
+    }
+  },
+  "independent_provider": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "abstract_implication_result": true,
+    "statement": "FOR_EACH_BOUND_REGION__SCOPE_COMPLETE_AND_DIRECT_E2E_AND_EXACT_ROUTE_AND_OWNED_AND_ROUTE_LOCAL_D__IMPLIES_D_B_MEMBERSHIP__THEREFORE_ALL_FIVE_BOUND_REGIONS_MAY_BE_ADDED_TO_D_B."
+  },
+  "countermodel_guard": {
+    "exists": true,
+    "assignment": "ALL_FIVE_D_B_REGIONS_TRUE__ABC_COMPLETE_FALSE__D_FINAL_FALSE__TERMINAL_FALSE",
+    "meaning": "THE_FIVE_REGION_SATURATION_DOES_NOT_LOGICALLY_IMPLY_GLOBAL_ABC_OR_TERMINAL_CLOSURE."
+  },
+  "exact_source_audit": {
+    "authority_v13_blob": "0d18488b51a222e5da414329ccd9d33cbc1fc31c",
+    "direct_e2e_theorem_blob": "ecb52ca25fa14a60b7c34206fea25d8d3cfdcf0d",
+    "accepted_three_ownership_blob": "4711fb5eed330990edea369725de6eaedfd3bc70",
+    "current_accepted_five_D_blob": "a1d2dac1ab98462c3505543f8047442a60017d19",
+    "delegation_acceptance_blob": "d04f2a8c5594d261158835db1cae3822411b6b23",
+    "delegation_scope_blob": "955ac8f4bd0db2527bfbb465fc8252df6d916156",
+    "recovery_acceptance_blob": "981c8ac9b66ee7fccf5b531525849e29df9be483",
+    "tool_discovery_acceptance_blob": "913d171b3c855000d322e183b142b3200eeaf0a9",
+    "tool_discovery_scope_blob": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4",
+    "exact_symbolic_adjudication_blob": "a691d49ef377fa216bbbeff70183112d65445463",
+    "continuity_package_blob": "2d912cf8df64bd806fffb6a1070d95644d005470"
+  },
+  "boundary": [
+    "NO_CLAIM_RUNTIME_VERIFIER_HAS_BEEN_INDEPENDENTLY_EXECUTED_YET",
+    "NO_CLAIM_THE_FIVE_REGIONS_COVER_ALL_OPUS55_USEFUL_CONTEXTS",
+    "NO_GLOBAL_ABC_CLOSURE",
+    "NO_GLOBAL_D_FINALITY_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
