@@ -1,0 +1,175 @@
+{
+  "schema": "PROJECT_BRAIN_FROZEN_19_LOAD_BEARING_ACCEPTANCE_TRUTH_BASIS_RECONCILIATION_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_CANDIDATE_TRUTH_REPAIR__16_OF_38_RAW_ATOMS_PROVED__22_RAW_OPEN__THREE_INDEPENDENT_TRUTH_VARIABLE_DELETIONS_PRESERVED__19_LOAD_BEARING_ACCEPTANCE_TRUTHS_OPEN__THREE_PROOF_ENGINES__TERMINAL_FALSE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "purpose": "Reconcile the restored frozen 19-family terminal semantics and the independently verified 16-of-38 acceptance ledger with the already-activated Oct-6 load-bearing truth-basis deletions, so duplicate or non-independent registry rows cannot re-enter the terminal critical path.",
+  "exact_source_bindings": {
+    "frozen_terminal_semantics": {
+      "path": "canonical/governance/TERMINAL_SEMANTICS_OVERSTRENGTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "aa210ea6faa62d4622bd3cb72aa9f0d1be6e387a"
+    },
+    "frozen_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "current_acceptance_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3.json",
+      "git_blob_sha": "3942d876e13c8a039f06c2e856434f44a9f50781",
+      "independent_verification": {
+        "path": "canonical/verification/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3_RECONCILIATION_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "475fac62458fac9bf6f4a47cc029a28ad4465270"
+      }
+    },
+    "verified_29_truth_basis": {
+      "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V4.json",
+      "git_blob_sha": "a878bd9b658e4db295dce49bc5b3aa2ba580c59e",
+      "independent_verification": {
+        "path": "canonical/verification/TERMINAL_29_OBLIGATION_BASIS_WOLFRAM_VERIFICATION_20261006_V1.json",
+        "git_blob_sha": "2a7545e109abf5dbb39398952e0823501cfd9b03"
+      }
+    },
+    "instruction_following_closure": {
+      "path": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f"
+    }
+  },
+  "reconciliation": {
+    "historical_registry_atom_count": 38,
+    "proved_registry_atoms": 16,
+    "raw_open_registry_atoms": 22,
+    "independently_verified_nonindependent_truth_variables": [
+      {
+        "id": "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+        "reason": "END_TO_END_COMPOSITION_PARITY_DOES_NOT_REQUIRE_STANDALONE_INTERNAL_COMPONENT_PARITY_AS_AN_INDEPENDENT_TERMINAL_TRUTH_VARIABLE",
+        "preserved_requirements": [
+          "SEPARATE_COMPONENT_FAMILY_ACCEPTANCE_OBLIGATIONS",
+          "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+        ]
+      },
+      {
+        "id": "ARTIFACT_AA_BRIEFCASE_GE_1822",
+        "reason": "EXACT_DUPLICATE_TRUTH_VARIABLE_OF_PROWORK_AA_BRIEFCASE_GE_1822_ON_THE_SAME_FROZEN_TARGET_TUPLE",
+        "representative_predicate": "PROWORK_AA_BRIEFCASE_GE_1822",
+        "family_aliases_preserved": [
+          "PROFESSIONAL_KNOWLEDGE_WORK",
+          "ARTIFACT_CREATION"
+        ]
+      },
+      {
+        "id": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+        "reason": "TRANSIENT_INTERNAL_INVARIANT_FAILURE_CAN_BE_FULLY_REPAIRED_BEFORE_ANY_TERMINALLY_RELEVANT_BOUNDARY__ONLY_TERMINALLY_NONCOMPENSABLE_CONSTRAINTS_REMAIN_LOAD_BEARING",
+        "preserved_requirements": [
+          "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+          "END_TO_END_SCOPE_AUTHORITY_SAFETY_CONTINUATION_RESOURCE_NONREGRESSION"
+        ]
+      }
+    ],
+    "load_bearing_open_acceptance_truth_count": 19,
+    "terminal": false,
+    "rule": "THE_HISTORICAL_38_ROW_REGISTRY_REMAINS_A_PROVENANCE_DECOMPOSITION__BUT_ONLY_INDEPENDENT_LOAD_BEARING_TRUTHS_MAY_SCHEDULE_WORK__DELETING_A_DUPLICATE_OR_NONNECESSARY_TRUTH_VARIABLE_DOES_NOT_WEAKEN_ANY_FROZEN_FAMILY_ACCEPTANCE_REQUIREMENT"
+  },
+  "exact_load_bearing_open_truths": [
+    "CODING_TB4_GE_66_4",
+    "CODING_FRONTIERCODE_GE_54_4",
+    "CODING_CURSORBENCH_GE_57_8",
+    "PROWORK_GDPVAL_GE_1846",
+    "PROWORK_AA_BRIEFCASE_GE_1822",
+    "AUTOMATIONBENCH_GE_40",
+    "HLE_TOOLS_GE_67_7",
+    "TB_SCIENCE_GE_58_7",
+    "CHARTOGRAPHY_TOOLS_GE_89",
+    "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "FINANCE_ACCOUNTING_INDEX_GE_61",
+    "FINANCE_AGENT_V2_GE_58_59",
+    "MYSTERYMECHANISM_GE_49_55",
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+    "VISION_DENSE_NONCHART_SCOPE",
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+    "FINANCE_UNCOVERED_SCOPE_AUDIT"
+  ],
+  "proof_engine_quotient": [
+    {
+      "id": "E1_PUBLIC_FIXED_BAR_AGGREGATE",
+      "load_bearing_truth_count": 13,
+      "truths": [
+        "CODING_TB4_GE_66_4",
+        "CODING_FRONTIERCODE_GE_54_4",
+        "CODING_CURSORBENCH_GE_57_8",
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "AUTOMATIONBENCH_GE_40",
+        "HLE_TOOLS_GE_67_7",
+        "TB_SCIENCE_GE_58_7",
+        "CHARTOGRAPHY_TOOLS_GE_89",
+        "OSWORLD_2_1_PARTIAL_GE_81_8",
+        "FINANCE_ACCOUNTING_INDEX_GE_61",
+        "FINANCE_AGENT_V2_GE_58_59",
+        "MYSTERYMECHANISM_GE_49_55"
+      ],
+      "rule": "ONE_GENERIC_CONTAMINATION_SAFE_SCOPE_AGGREGATE_PIPELINE__ACQUIRE_ONLY_THE_MISSING_RESULT_BEARING_FACT_PER_SURFACE__AA_BRIEFCASE_RESULT_FANS_OUT_TO_BOTH_FAMILY_ALIASES"
+    },
+    {
+      "id": "E2_MATCHED_OR_STRONGER_SCOPE_COMPLETE",
+      "load_bearing_truth_count": 5,
+      "packages": {
+        "AGENCY": [
+          "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+          "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+        ],
+        "VISION_NONCHART": [
+          "VISION_DENSE_NONCHART_SCOPE"
+        ],
+        "SYNTHESIS": [
+          "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+        ],
+        "COMPOSITION": [
+          "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+        ]
+      },
+      "rule": "RACE_EACH_PACKAGE_AGAINST_A_TARGET_FREE_OBJECTIVE_CEILING_OR_UNIVERSAL_SCOPE_COMPLETE_PROOF__DO_NOT_REOPEN_THE_ALREADY_PROVED_INSTRUCTION_FOLLOWING_PACKAGE"
+    },
+    {
+      "id": "E3_DIRECT_SCOPE_CLOSURE",
+      "load_bearing_truth_count": 1,
+      "truths": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT"
+      ],
+      "rule": "RUN_OR_PROVE_ONLY_THE_TWO_ALREADY_LOCALIZED_FROZEN_FINANCE_DIRECT_SEMANTIC_LEAVES__NO_NEW_SOURCE_ADMISSION_PROGRAM"
+    }
+  ],
+  "scheduling": {
+    "primary_execution_program_count": 3,
+    "rule": "SCHEDULE_THE_THREE_PROOF_ENGINES_ONLY__NEVER_SCHEDULE_22_RAW_ROWS_OR_19_LOAD_BEARING_TRUTHS_AS_INDEPENDENT_PROJECTS",
+    "precedence": [
+      "EXISTING_CONTENT_ADDRESSED_PROOF_OR_RESULT",
+      "SCOPE_COMPLETE_OBJECTIVE_CEILING_OR_UNIVERSAL_PROOF",
+      "MINIMUM_RESULT_BEARING_EXTERNAL_FACT",
+      "FULL_BENCHMARK_OR_MATCHED_EXECUTION_LAST"
+    ],
+    "forbidden": [
+      "REOPEN_IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "REOPEN_IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "SCHEDULE_ARTIFACT_AA_BRIEFCASE_AS_A_SECOND_INDEPENDENT_MEASUREMENT",
+      "SCHEDULE_COMPOSITION_COMPONENT_SCOPED_PROOFS_AS_AN_INDEPENDENT_TERMINAL_TRUTH",
+      "SCHEDULE_COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES_AS_AN_INDEPENDENT_TERMINAL_TRUTH",
+      "REINTRODUCE_UNIVERSAL_TRACE_NOT_X_AS_MANDATORY_TERMINAL_ROOT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_19_LOAD_BEARING_OPEN_ACCEPTANCE_TRUTHS_ARE_PROVED",
+    "NO_CLAIM_ANY_ADDITIONAL_FAMILY_IS_VERIFIED_OWNED_EQUAL_OR_BETTER",
+    "NO_CLAIM_TERMINAL_IS_TRUE",
+    "NO_CREDIT_FROM_BASIS_COMPRESSION_ALONE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
