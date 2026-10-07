@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_SOLVER_PROOF_TO_EFFECT_BINDING_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "V1_EFFECT_LAUNDERING_PATH_REVOKED__V2_FAIL_CLOSED_BINDING_CANDIDATE__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "v1_runtime": {
+      "path": "canonical/runtime/universal_verified_adaptive_solver_v1.py",
+      "git_blob_sha": "30b3027f0c7a78f0a6350cd31e570e743837ed61"
+    },
+    "v2_runtime": {
+      "path": "canonical/runtime/universal_verified_adaptive_solver_v2.py",
+      "git_blob_sha": "be0857bbe1e506a3ff94e8e6b71c7796dea8ba22"
+    },
+    "v2_tests": {
+      "path": "canonical/tests/test_universal_verified_adaptive_solver_v2.py",
+      "git_blob_sha": "e8ba32cb3bcc68ff73b219ae939d521bdb57fad5"
+    }
+  },
+  "falsification": {
+    "v1_counterexample_class": "A_BUILTIN_VERIFIER_CAN_PASS_ON_ITS_OWN_PAYLOAD_WHILE_CAPABILITY_PROVIDES_CONTAINS_AN_UNRELATED_TARGET_EFFECT__V1_THEN_ADDS_PROVIDES_TO_VERIFIED_FACTS_WITHOUT_A_PROOF_TO_EFFECT_BINDING",
+    "v1_preloaded_target_counterexample_class": "A_TARGET_EFFECT_PRESENT_IN_problem.initial_facts_OR_CALLER_verified_facts_CAN_CAUSE_SOLVED_WITHOUT_A_NEW_TARGET_EFFECT_VERIFICATION_TRACE",
+    "consequence": "V1_SOLVED_STATUS_IS_NOT_BY_ITSELF_SUFFICIENT_EVIDENCE_THAT_EVERY_TARGET_EFFECT_IS_BOUND_TO_THE_VERIFIER_PREDICATE_THAT_MINTED_IT"
+  },
+  "v2_law": {
+    "effect_contract_required": true,
+    "provides_must_equal_effect_contract_effects_exactly": true,
+    "verifier_success_condition_must_match_immutable_builtin_condition": true,
+    "target_effect_must_be_minted_by_a_successful_builtin_verifier_in_this_invocation": true,
+    "preloaded_target_effects_fail_closed": true,
+    "effect_contract_digest_bound_into_trace": true
+  },
+  "scope_boundary": {
+    "proved_by_v2": "MECHANICAL_PROOF_TO_EFFECT_BINDING_INSIDE_THE_SOLVER_CONTROL_LOOP",
+    "not_proved_by_v2": [
+      "SEMANTIC_CORRECTNESS_OR_SCOPE_COMPLETENESS_OF_THE_UPSTREAM_TASK_EFFECT_LABELS",
+      "COMPLETE_VERIFIER_COVERAGE",
+      "INDEPENDENT_EXECUTION_OF_THE_NEW_V2_TESTS",
+      "GENERAL_EXTERNAL_EFFECT_CARRIER_CLOSURE",
+      "OPUS55_PARITY"
+    ]
+  },
+  "scheduler": [
+    "DO_NOT_USE_V1_SOLVED_STATUS_FOR_NEW_CAPABILITY_OR_TERMINAL_PROMOTION.",
+    "USE_V2_OR_A_STRONGER_PROOF_TO_EFFECT_BOUND_SOLVER_FOR_NEW_ADAPTIVE_SOLVER_EPISODES.",
+    "KEEP_TASK_CONTRACT_SCOPE_COMPLETENESS_AS_A_SEPARATE_UPSTREAM_GATE.",
+    "KEEP_INDEPENDENT_PUBLIC_RUNNER_PROMOTION_FAIL_CLOSED_WHILE_THE_CURRENT_RUNNER_DISPATCH_LAYER_IS_UNAVAILABLE."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_V2_TESTS_HAVE_AN_INDEPENDENT_PUBLIC_RUNNER_RECEIPT.",
+    "NO_CLAIM_V2_CLOSES_SCOPE_COMPLETE_TASK_CONTRACT_COMPILATION.",
+    "NO_CLAIM_V2_CLOSES_THE_OPEN_ABC_FRONTIER.",
+    "NO_U_EMPTY_D_FINALITY_OR_TERMINAL_CREDIT."
+  ]
+}
