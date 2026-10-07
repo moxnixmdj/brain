@@ -75,7 +75,7 @@
     },
     "acceptance_reduction": {
       "path": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json",
-      "git_blob_sha": "6f6675e8c76a76052e3c029f43995c126b67079c"
+      "git_blob_sha": "ebe8edcda3e0aa7dcffab6032834532a6f06c5f7"
     },
     "proof_kind": "UNIVERSAL_FORMAL_SCOPE_COMPLETE_FINAL_ROUTE_PROOF",
     "scope_complete": true,
