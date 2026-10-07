@@ -139,6 +139,16 @@ def evaluate(data: Mapping[str, Any]) -> dict[str, Any]:
     if scope_count == 0:
         return _fail(["NO_VALID_REQUIRED_SCOPES"])
 
+    sample_counts = {len(scope["pairs"]) for scope in normalized}
+    if len(sample_counts) != 1:
+        return _fail(["UNBALANCED_SCOPE_ROUND_COUNTS"])
+    round_count = next(iter(sample_counts))
+    if round_count <= 0:
+        return _fail(["NO_MATCHED_ROUNDS"])
+
+    if data.get("balanced_scope_rounds") is not True:
+        return _fail(["BALANCED_SCOPE_ROUNDS_NOT_TRUE"])
+
     alpha_scope = FAMILY_ALPHA / scope_count
     scope_results: list[dict[str, Any]] = []
     all_pass = True
@@ -182,6 +192,21 @@ def evaluate(data: Mapping[str, Any]) -> dict[str, Any]:
             "paired_case_ids": [cid for cid, _b, _o in pairs],
         })
 
+    global_first_pass_n = None
+    for n in range(1, round_count + 1):
+        if all(row["anytime_trace"][n - 1]["pass"] for row in scope_results):
+            global_first_pass_n = n
+            break
+
+    stop_rule_ok = (
+        global_first_pass_n is None
+        or global_first_pass_n == round_count
+    )
+    if not stop_rule_ok:
+        return _fail([
+            f"GLOBAL_STOP_RULE_VIOLATED:FIRST_ALL_SCOPE_PASS_N={global_first_pass_n}:FINAL_N={round_count}"
+        ])
+
     return {
         "schema": SCHEMA,
         "status": "PASS" if all_pass else "FAIL_BOUND_NOT_MET",
@@ -190,7 +215,9 @@ def evaluate(data: Mapping[str, Any]) -> dict[str, Any]:
         "exact_comparator": EXPECTED_COMPARATOR,
         "family_alpha": FAMILY_ALPHA,
         "required_scope_count": scope_count,
+        "balanced_round_count": round_count,
         "alpha_scope": alpha_scope,
+        "global_first_all_scope_pass_n": global_first_pass_n,
         "scope_results": scope_results,
         "rule": (
             "PASS_IFF_EVERY_REQUIRED_SCOPE_FINAL_ANYTIME_HOEFFDING_PAIRED_DIFFERENCE_"
