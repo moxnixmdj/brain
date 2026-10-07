@@ -46,7 +46,7 @@
     },
     "single_abc_frontier_v2": {
       "path": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V2.json",
-      "git_blob_sha": "57e44bd056429e167fe5bbaac9855b7988baebe5"
+      "git_blob_sha": "39c9e5a35bac39acd515f1e3d7734d03b8a4307c"
     },
     "minimum_information_lower_bound": {
       "path": "canonical/governance/TERMINAL_SHARED_SEMANTIC_MINIMUM_INFORMATION_LOWER_BOUND_20261007_V1.json",
