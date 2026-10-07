@@ -280,10 +280,12 @@
       "note": "UNIQUE_INTERPRETATION_OVERCONSTRAINT_CLOSED_WHEN_ALL_SOUND_SURVIVING_INTERPRETATIONS_RECOMPUTE_TO_ONE_POLICY__SURVIVOR_SET_COMPLETENESS_REMAINS_SEPARATE"
     },
     "gdpval_target_relative_irreducibility_cut": {
-      "path": "canonical/governance/GDPVAL_TARGET_RELATIVE_IRREDUCIBILITY_CUT_20261007_V1.json"
+      "path": "canonical/governance/GDPVAL_TARGET_RELATIVE_IRREDUCIBILITY_CUT_20261007_V1.json",
+      "git_blob_sha": "d1f4899d0041062c34c40f08e13bcbcae2df296f"
     },
     "current_reality_cut_v5": {
-      "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V5.json"
+      "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V5.json",
+      "git_blob_sha": "415af210e001342de319662155e5f7382f70c660"
     }
   },
   "live_truth": {
