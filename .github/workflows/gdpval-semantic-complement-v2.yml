@@ -7,12 +7,20 @@ on:
       - "canonical/runtime/gdpval_semantic_complement_localizer_v2.py"
       - "canonical/tests/test_gdpval_semantic_complement_localizer_v2.py"
       - ".github/workflows/gdpval-semantic-complement-v2.yml"
+      - "canonical/runtime/gdpval_rubric_acceptance_index_v1.py"
+      - "canonical/runtime/gdpval_rubric_acceptance_replay_v1.py"
+      - "canonical/runtime/gdpval_rubric_acceptance_evidence_verifier_v1.py"
+      - "canonical/tests/test_gdpval_rubric_acceptance_replay_v1.py"
   pull_request:
     branches: [main]
     paths:
       - "canonical/runtime/gdpval_semantic_complement_localizer_v2.py"
       - "canonical/tests/test_gdpval_semantic_complement_localizer_v2.py"
       - ".github/workflows/gdpval-semantic-complement-v2.yml"
+      - "canonical/runtime/gdpval_rubric_acceptance_index_v1.py"
+      - "canonical/runtime/gdpval_rubric_acceptance_replay_v1.py"
+      - "canonical/runtime/gdpval_rubric_acceptance_evidence_verifier_v1.py"
+      - "canonical/tests/test_gdpval_rubric_acceptance_replay_v1.py"
   workflow_dispatch:
 
 permissions:
@@ -42,6 +50,11 @@ jobs:
           set -o pipefail
           mkdir -p canonical/evidence
           python -m unittest -v canonical.tests.test_gdpval_semantic_complement_localizer_v2             2>&1 | tee canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_20261007_V2_UNITTEST.log
+
+      - name: Verify fail-closed rubric replay and evidence verifier
+        run: |
+          set -euo pipefail
+          python -m unittest -v canonical.tests.test_gdpval_rubric_acceptance_replay_v1
 
       - name: Execute complete public 220 structural localization
         id: population
@@ -87,7 +100,10 @@ jobs:
           set -euo pipefail
           git config user.name "Project Brain GDPval Localizer"
           git config user.email "project-brain-gdpval-localizer@users.noreply.github.com"
-          git add canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_20261007_V2.json
+          git add \
+            canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_20261007_V2.json \
+            canonical/evidence/GDPVAL_PUBLIC_220_RUBRIC_ACCEPTANCE_INDEX_20261007_V1.json \
+            canonical/verification/GDPVAL_PUBLIC_220_RUBRIC_ACCEPTANCE_INDEX_VERIFICATION_20261007_V1.json
           git diff --cached --quiet && exit 0
           git commit -m "Bind GDPval public 220 composed semantic localization v2"
           for attempt in 1 2 3; do
