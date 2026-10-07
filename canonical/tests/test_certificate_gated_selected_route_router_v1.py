@@ -66,3 +66,8 @@ def test_non_boolean_admission_fails_closed():
     bad = receipt(admitted="false")
     with pytest.raises(RouterFailClosed, match="ADMISSION_MUST_BE_LITERAL_BOOL"):
         select_certified_route(actual_context_digest="ctx", receipts=[bad])
+
+
+def test_missing_actual_context_digest_fails_closed():
+    with pytest.raises(RouterFailClosed, match="ACTUAL_CONTEXT_DIGEST_MISSING"):
+        select_certified_route(actual_context_digest="", receipts=[receipt()])
