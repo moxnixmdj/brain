@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_V18_DB_EXISTING_EVIDENCE_SATURATION_WOLFRAM_VERIFICATION_V5",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_SET_DELTA_AND_NONCLOSURE_PASS__TWELVE_SOUND_CACHED_REGIONS__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/V18_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json",
+    "git_blob_sha": "d0c324c0aff2e77cfd8e6dfd9b2e2cfd4224573d",
+    "branch": "terminal-now-v18-db12-head-sync-20261007-v1"
+  },
+  "predecessor": {
+    "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V4.json",
+    "git_blob_sha": "d86bbf7a1cc8968b3f48fbe1d13c390ab1310b9a",
+    "region_count": 11
+  },
+  "added_region": {
+    "id": "PROFESSIONAL_ARTIFACT_T1_FROZEN_30_ZERO_UNSUPPORTED_MATERIAL_CONTENT",
+    "cell_path": "canonical/governance/V14_PROFESSIONAL_ARTIFACT_UNSUPPORTED_CONTENT_SELECTED_PROPERTY_CELL_20261007_V1.json",
+    "cell_git_blob_sha": "28692768a21e95b51e847417cf5ba2343587e4aa",
+    "prior_independent_verification_path": "canonical/verification/V14_PROFESSIONAL_ARTIFACT_UNSUPPORTED_CONTENT_WOLFRAM_VERIFICATION_20261007_V1.json",
+    "prior_independent_verification_git_blob_sha": "aefee446782989518c9794db1e73909bd3c4f55c"
+  },
+  "independent_provider": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "evaluated_code_summary": "CHECK_PREDECESSOR_LENGTH_11__DUPLICATE_FREE__NEW_ID_ABSENT__APPEND_GIVES_12_DUPLICATE_FREE__SATISFIABLE_ALL_12_TRUE_WITH_ABC_FALSE",
+    "exact_output": "{11, True, False, 12, True, {{True, True, True, True, True, True, True, True, True, True, True, True, False}}}",
+    "result": {
+      "predecessor_region_count": 11,
+      "predecessor_duplicate_free": true,
+      "added_region_absent_from_predecessor": true,
+      "new_region_count": 12,
+      "new_manifest_duplicate_free": true,
+      "all_twelve_regions_true_while_abc_false_satisfiable": true
+    }
+  },
+  "verified": [
+    "THE_PREDECESSOR_ELEVEN_REGION_ID_SET_IS_DUPLICATE_FREE.",
+    "THE_PROFESSIONAL_UNSUPPORTED_CONTENT_REGION_ID_IS_NOT_IN_THE_PREDECESSOR_SET.",
+    "ADJOINING_THE_SEPARATELY_VERIFIED_PROFESSIONAL_UNSUPPORTED_CONTENT_REGION_PRODUCES_EXACTLY_TWELVE_UNIQUE_CACHED_REGION_IDS.",
+    "ALL_TWELVE_CACHED_REGION_PREDICATES_CAN_BE_TRUE_WHILE_GLOBAL_ABC_IS_FALSE__SO_THE_CACHE_GROWTH_DOES_NOT_LOGICALLY_CLOSE_ABC."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_TWELVE_REGIONS_EXHAUST_D_B.",
+    "NO_CLAIM_GLOBAL_SELECTED_CONTEXT_COVER_IS_COMPLETE.",
+    "NO_CLAIM_D_FINALITY_OR_TERMINAL_IS_CLOSED."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
