@@ -152,6 +152,55 @@ EMI=EIM
 2MI=2IM'''
 def parse(s):return [tuple(z.split('=')) for z in s.splitlines()]
 PE,TE=parse(PAIR),parse(TRIPLE)
+MAP=set("NADI2")
+FIL=set("PMEO")
+def scalar_step(state,o):
+ alive,a,b,side,par=state
+ if not alive:return state
+ if o=="N":return (True,-a,-b,side,par)
+ if o=="D":return (True,a,b-1,side,par)
+ if o=="I":return (True,a,b+1,side,par)
+ if o=="2":return (True,2*a,2*b,side,par)
+ sign=(1 if a*side>0 else -1)
+ if o=="A":return (True,a,b,side,par) if sign>0 else (True,-a,-b,side,par)
+ if o=="P":return (sign>0,a,b,side,par)
+ if o=="M":return (sign<0,a,b,side,par)
+ yp=(a*par+b)&1
+ if o=="E":return (yp==0,a,b,side,par)
+ if o=="O":return (yp==1,a,b,side,par)
+ raise ValueError(o)
+def scalar_tail_descriptor(w,side,par):
+ st=(True,1,0,side,par)
+ for o in w:st=scalar_step(st,o)
+ return st[:3] if st[0] else (False,None,None)
+def scalar_point(w,x):
+ y=x
+ for o in w:
+  if o=="N":y=-y
+  elif o=="A":y=abs(y)
+  elif o=="D":y-=1
+  elif o=="I":y+=1
+  elif o=="2":y*=2
+  elif o=="P":
+   if not y>0:return None
+  elif o=="M":
+   if not y<0:return None
+  elif o=="E":
+   if not y%2==0:return None
+  elif o=="O":
+   if not y%2!=0:return None
+ return y
+def scalar_equal(a,b):
+ if any(scalar_point(a,x)!=scalar_point(b,x) for x in range(-3,3)):return False
+ for side in (-1,1):
+  for par in (0,1):
+   if scalar_tail_descriptor(a,side,par)!=scalar_tail_descriptor(b,side,par):return False
+ return True
+def verify_scalar_equations():
+ eq=[e for e in PE+TE if set(e[0]+e[1])<=SCALAR]
+ bad=[e for e in eq if not scalar_equal(*e)]
+ assert not bad,bad
+ return len(eq)
 GROUPS={
  'DIHEDRAL': {'<>=','><=','RR=','R<=>R','R>=<R'},
  'MAP_PERMUTE': {'<2=2<','>2=2>','A<=<A','A>=>A','D<=<D','D>=>D','I<=<I','I>=>I','N<=<N','N>=>N','R2=2R','RA=AR','RD=DR','RI=IR','RN=NR'},
@@ -227,13 +276,14 @@ def finite_witness_partition(U):
  sig={w:tuple(run(w,x) for x in X) for w in U}
  return len(set(sig.values())),sig,len(X)
 def verify():
+ scalar_count=verify_scalar_equations()
  structural,missing,extra=classify();assert not missing and not extra,(missing,extra)
  U,F,idx=closure();cc=len({F(i) for i in range(len(U))});assert cc==809,cc
  wc,sig,nx=finite_witness_partition(U);assert wc==809,wc
  comp={}
  for w in U:comp.setdefault(F(idx[w]),set()).add(sig[w])
  assert all(len(v)==1 for v in comp.values())
- return {'status':'PASS','programs':len(U),'pair_equations':len(PE),'triple_equations':len(TE),'structural_equations':len(structural),'schema_count':len(GROUPS),'congruence_classes':cc,'witness_classes':wc,'witness_inputs':nx}
+ return {'status':'PASS','programs':len(U),'pair_equations':len(PE),'triple_equations':len(TE),'scalar_equations':scalar_count,'structural_equations':len(structural),'schema_count':len(GROUPS),'congruence_classes':cc,'witness_classes':wc,'witness_inputs':nx}
 
 if __name__=='__main__':
  print(verify())
