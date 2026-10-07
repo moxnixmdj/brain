@@ -9,6 +9,7 @@ or otherwise unresolved state always reduces to NOT ACHIEVED.
 from __future__ import annotations
 
 import argparse
+from hashlib import sha1
 import json
 from pathlib import Path
 from typing import Any
@@ -77,10 +78,55 @@ def _content_binding(value: Any) -> bool:
     )
 
 
-def _evaluate_universal_cover_proof(manifest: dict[str, Any]) -> dict[str, Any]:
-    """Validate the stronger scope-complete proof route without self-certification."""
-    proof = manifest.get("universal_cover_proof")
-    if not isinstance(proof, dict):
+def _git_blob_sha(path: Path) -> str:
+    data = path.read_bytes()
+    digest = sha1()
+    digest.update(f"blob {len(data)}".encode("ascii") + bytes([0]))
+    digest.update(data)
+    return digest.hexdigest()
+
+
+def _load_bound_json(
+    binding: Any,
+    repo_root: Path | None,
+) -> tuple[dict[str, Any] | None, str | None]:
+    """Load one repository JSON artifact only when its declared Git blob is exact."""
+    if not _content_binding(binding):
+        return None, "BINDING_SHAPE_INVALID"
+    if repo_root is None:
+        return None, "REPOSITORY_ROOT_REQUIRED"
+
+    relative = Path(binding["path"])
+    if relative.is_absolute():
+        return None, "ABSOLUTE_PATH_FORBIDDEN"
+
+    root = repo_root.resolve()
+    candidate = (root / relative).resolve()
+    try:
+        candidate.relative_to(root)
+    except ValueError:
+        return None, "PATH_ESCAPES_REPOSITORY"
+    if not candidate.is_file():
+        return None, "BOUND_FILE_MISSING"
+    if _git_blob_sha(candidate) != binding["git_blob_sha"]:
+        return None, "GIT_BLOB_SHA_MISMATCH"
+
+    try:
+        payload = json.loads(candidate.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return None, "BOUND_JSON_UNREADABLE"
+    if not isinstance(payload, dict):
+        return None, "BOUND_JSON_NOT_OBJECT"
+    return payload, None
+
+
+def _evaluate_universal_cover_proof(
+    manifest: dict[str, Any],
+    repo_root: Path | None = None,
+) -> dict[str, Any]:
+    """Validate the stronger route from exact proof bytes plus an exact verifier receipt."""
+    declaration = manifest.get("universal_cover_proof")
+    if not isinstance(declaration, dict):
         return {
             "pass": False,
             "reason": "UNIVERSAL_COVER_PROOF_ABSENT",
@@ -88,18 +134,50 @@ def _evaluate_universal_cover_proof(manifest: dict[str, Any]) -> dict[str, Any]:
         }
 
     failures: list[str] = []
+    proof_binding = declaration.get("proof_artifact")
+    verifier_binding = declaration.get("verifier_receipt_artifact")
+
+    proof, proof_error = _load_bound_json(proof_binding, repo_root)
+    verifier, verifier_error = _load_bound_json(verifier_binding, repo_root)
+    if proof_error is not None:
+        failures.append(f"UNIVERSAL_PROOF_ARTIFACT_UNBOUND:{proof_error}")
+    if verifier_error is not None:
+        failures.append(f"UNIVERSAL_VERIFIER_RECEIPT_UNBOUND:{verifier_error}")
+
+    proof = proof or {}
+    verifier = verifier or {}
+
     if proof.get("proof_kind") not in UNIVERSAL_PROOF_KINDS:
         failures.append("UNIVERSAL_PROOF_KIND_INVALID")
     if proof.get("scope_id") != "scope://opus55/observable-trace":
         failures.append("UNIVERSAL_SCOPE_ID_INVALID")
     if proof.get("conclusion") != "success":
         failures.append("UNIVERSAL_SUCCESS_CONCLUSION_REQUIRED")
+
+    # These semantic claims must come from the content-addressed proof artifact,
+    # never from handwritten booleans in the terminal manifest.
     for name in UNIVERSAL_REQUIRED_TRUE:
+        if name in {"independent_verified", "exact_byte_bound"}:
+            continue
         if proof.get(name) is not True:
             failures.append(f"UNIVERSAL_PREDICATE_NOT_TRUE:{name}")
-    for name in ("proof_artifact", "verifier_receipt_artifact"):
-        if not _content_binding(proof.get(name)):
-            failures.append(f"UNIVERSAL_CONTENT_BINDING_INVALID:{name}")
+
+    # Independence and exact-byte verification must come from a separately
+    # content-addressed verifier receipt bound to the exact proof artifact.
+    if verifier.get("independent_verified") is not True:
+        failures.append("UNIVERSAL_INDEPENDENT_VERIFICATION_REQUIRED")
+    if verifier.get("exact_byte_bound") is not True:
+        failures.append("UNIVERSAL_EXACT_BYTE_VERIFICATION_REQUIRED")
+    if verifier.get("conclusion") != "success":
+        failures.append("UNIVERSAL_VERIFIER_SUCCESS_REQUIRED")
+    if verifier.get("proof_artifact") != proof_binding:
+        failures.append("UNIVERSAL_VERIFIER_PROOF_BINDING_MISMATCH")
+
+    # A manifest may repeat identity fields for readability, but disagreement
+    # with the bound proof bytes is a hard failure.
+    for name in ("proof_kind", "scope_id", "conclusion"):
+        if name in declaration and declaration.get(name) != proof.get(name):
+            failures.append(f"UNIVERSAL_DECLARATION_MISMATCH:{name}")
 
     unique = sorted(set(failures))
     return {
@@ -134,7 +212,10 @@ def _family_terminally_closed(family: dict[str, Any]) -> bool:
     )
 
 
-def evaluate_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
+def evaluate_manifest(
+    manifest: dict[str, Any],
+    repo_root: Path | None = None,
+) -> dict[str, Any]:
     failures: list[str] = []
 
     if manifest.get("expected_family_count") != REQUIRED_FAMILY_COUNT:
@@ -198,7 +279,7 @@ def evaluate_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
             failures.append(f"COUNTER_PREDICATE_CONTRADICTION:{counter}:{predicate}")
 
     legacy_failures = sorted(set(failures))
-    universal = _evaluate_universal_cover_proof(manifest)
+    universal = _evaluate_universal_cover_proof(manifest, repo_root)
 
     # The 19-family protocol conjunction is one sound proof route, not the only
     # logically sufficient route. A scope-complete universal cover may bypass
@@ -417,7 +498,8 @@ def main() -> int:
 
     if args.manifest is None:
         parser.error("provide manifest or --frontier")
-    verdict = evaluate_manifest(_load_json(args.manifest))
+    repo_root = Path(__file__).resolve().parents[2]
+    verdict = evaluate_manifest(_load_json(args.manifest), repo_root=repo_root)
     print(json.dumps(verdict, indent=2, sort_keys=True))
     return 0 if verdict["achieved"] else 1
 
