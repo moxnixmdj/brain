@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_V16_P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_V2",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ZERO_REALITY_SELECTED_CONTEXT_TOPLAW_REDUCTION__CURRENT_V16_REBASE__WHOLE_FROZEN_P3_DIRECT_INSTRUMENTATION_CELL__ZERO_GLOBAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "authority_v16": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+      "git_blob_sha": "c1bc4543860be08f9014f69a212ba2222d8dba7c"
+    },
+    "live_db_13": {
+      "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json",
+      "git_blob_sha": "6637b23cd90f3df20ec87f817ef38d1eb233ea79"
+    },
+    "p3_binding": {
+      "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+    },
+    "terminal_wave": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    },
+    "narrower_cached_property": {
+      "path": "canonical/governance/V14_SYNTHESIS_UNSUPPORTED_CLAIM_SELECTED_PROPERTY_CELL_20261007_V1.json",
+      "git_blob_sha": "eece175e4aae05e34cdc7f44a25c12af94853228"
+    }
+  },
+  "selected_cell": {
+    "id": "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
+    "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "exact_population": [
+      "T1::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+      "T3::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30"
+    ],
+    "complete_bound_required_check_vector": [
+      "ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "ALL_REQUIRED_CLAIMS_OR_DECISION_REQUIREMENTS_COVERED",
+      "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS",
+      "MATERIAL_CONFLICT_AND_UNCERTAINTY_PRESERVED",
+      "NO_DECISION_RELEVANT_EVIDENCE_DROPPED_UNDER_COMPRESSION",
+      "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS",
+      "IRRELEVANT_EVIDENCE_EXCLUDED_WITHOUT_DELETING_REQUIRED_SUPPORT"
+    ],
+    "direct_binding_rule": "ALL_APPLICABLE_LOAD_BEARING_P3_MUTATIONS_MUST_BE_DETECTED_OR_CAUSE_PARENT_TERMINAL_ACCEPTANCE_FAILURE",
+    "frozen_wave_receipts": [
+      {
+        "case_id": "T1::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+        "binding_blob": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+        "direct_instrumentation_pass": true,
+        "load_bearing": true,
+        "parent_terminal_acceptance_pass": true,
+        "case_replaced": false,
+        "result_to_runtime_feedback": false,
+        "tuning_replay": false
+      },
+      {
+        "case_id": "T3::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+        "binding_blob": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+        "direct_instrumentation_pass": true,
+        "load_bearing": true,
+        "parent_terminal_acceptance_pass": true,
+        "case_replaced": false,
+        "result_to_runtime_feedback": false,
+        "tuning_replay": false
+      }
+    ],
+    "brain_required_check_vector": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "componentwise_top_vector": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "theorem": {
+    "premises": [
+      "THE_BOUND_P3_DIRECT_INSTRUMENTATION_SEMANTICS_ARE_EXACTLY_THE_SEVEN_DECLARED_LOAD_BEARING_BOOLEAN_REQUIRED_CHECKS_FOR_THE_EXACT_FROZEN_T1_AND_T3_AGGREGATE_CELLS",
+      "BOTH_FROZEN_TERMINAL_WAVE_ROWS_BIND_THE_EXACT_P3_BINDING_BLOB_AND_HAVE_DIRECT_INSTRUMENTATION_PASS_TRUE_LOAD_BEARING_TRUE_PARENT_ACCEPTANCE_TRUE_WITHOUT_CASE_REPLACEMENT_TUNING_REPLAY_OR_RESULT_FEEDBACK"
+    ],
+    "finite_order_result": "THE_ALL_ONES_VECTOR_IS_THE_COMPONENTWISE_TOP_ELEMENT_OF_BOOLEAN_7_SPACE__ALL_128_TARGET_VECTORS_ARE_COMPONENTWISE_LESS_THAN_OR_EQUAL_TO_BRAIN__ZERO_STRICT_DOMINATORS",
+    "conclusion": "NO_OPUS_OR_OTHER_ADMISSIBLE_TARGET_RESULT_CAN_STRICTLY_EXCEED_BRAIN_ON_THE_COMPLETE_BOUND_SEVEN_CHECK_SEMANTICS_OF_THESE_EXACT_FROZEN_P3_SELECTED_CELLS",
+    "target_information_required": false,
+    "fresh_reality_required": false
+  },
+  "v16_effect": {
+    "add_to_D_B": "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
+    "subsumes_for_same_exact_population": "SYNTHESIS_T1_T3_FROZEN_60_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_AS_A_NARROWER_OVERLAPPING_PROPERTY_CELL",
+    "new_target_reality_consumed": 0,
+    "family_closed": false,
+    "abc_closed": false,
+    "remaining_synthesis_escape": "ANY_LOAD_BEARING_SYNTHESIS_CONTEXT_NOT_SOUNDLY_SUBSUMED_BY_THIS_EXACT_FROZEN_CELL_OR_ANOTHER_SOUND_CERTIFICATE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FROZEN_T1_T3_60_CASE_CELL_EXHAUSTS_ALL_SYNTHESIS_CONTEXTS",
+    "NO_SCOPE_INHERITANCE_BEYOND_THE_EXACT_BOUND_DIRECT_INSTRUMENTATION_SEMANTICS",
+    "NO_COMMUNICATION_AND_SYNTHESIS_FAMILY_CLOSURE",
+    "NO_GLOBAL_ABC_OR_D_FINALITY_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
