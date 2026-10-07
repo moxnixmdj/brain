@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFIED_NORMATIVE_RULE_FRAGMENT_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__9_OF_9__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/certified_normative_rule_fragment_v1.py",
+      "git_blob_sha": "b1865e283176d9a3e9b928f1dfde54ca0d98f714"
+    },
+    "tests": {
+      "path": "canonical/tests/test_certified_normative_rule_fragment_v1.py",
+      "git_blob_sha": "c794808b0e1b4e37d6b7d77ce0c836e94b203bd3"
+    },
+    "governance": {
+      "path": "canonical/governance/CERTIFIED_NORMATIVE_RULE_FRAGMENT_20261007_V1.json",
+      "git_blob_sha": "fcaed9092a947f513d957c70961453ccb38e28b2"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "working_directory": "/home/sprite/certified_normative_fragment_v1",
+    "tests_passed": 9,
+    "tests_total": 9,
+    "recomputed_runtime_blob": "b1865e283176d9a3e9b928f1dfde54ca0d98f714",
+    "recomputed_tests_blob": "c794808b0e1b4e37d6b7d77ce0c836e94b203bd3",
+    "recomputed_governance_blob": "fcaed9092a947f513d957c70961453ccb38e28b2"
+  },
+  "verified": [
+    "POSITIVE_MUST_OR_SHALL_OBLIGATION_DISPOSITION",
+    "MUST_NOT_OR_SHALL_NOT_PROHIBITION_DISPOSITION",
+    "EXPLICIT_UNLESS_EXCEPTION_BRANCH",
+    "INAPPLICABLE_SUBJECT_BRANCH",
+    "MISSING_EXCEPTION_FACT_FAILS_CLOSED",
+    "UNDECLARED_EXCEPTION_FACT_FAILS_CLOSED",
+    "NESTED_SEMANTIC_OPERATORS_FAIL_CLOSED",
+    "SOURCE_MUTATION_CHANGES_CONTENT_BINDINGS",
+    "ZERO_MODEL_OR_EXTERNAL_CAPABILITY_DEPENDENCY"
+  ],
+  "hard_nonclaims": [
+    "NO_REFERENCE_RESOLUTION",
+    "NO_IMPLICIT_EXCEPTION_DISCOVERY",
+    "NO_ARBITRARY_NATURAL_LANGUAGE_SEMANTICS",
+    "NO_FINANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
