@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_SYMBOLIC_CREDITABLE_PAYLOAD_BINDING_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__INDEPENDENT_EXISTING_SPRITE_EXACT_BYTE_REPLAY__GITHUB_HOSTED_RUNNER_UNAVAILABLE_BEFORE_STEP_ASSIGNMENT__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v4.py",
+    "git_blob_sha": "375f415f2e0b7348d88fb23b0efca433791ea581"
+  },
+  "declared_tests": {
+    "path": "canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v4.py",
+    "git_blob_sha": "1ecdf4e19888b043ff3393f57109d21bc6dbfb98"
+  },
+  "verification_carrier": {
+    "provider": "SPRITES",
+    "existing_sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "python_version": "3.14.4",
+    "new_environment_created": false,
+    "incremental_spend_usd": 0
+  },
+  "exact_byte_check": {
+    "expected_git_blob_sha": "375f415f2e0b7348d88fb23b0efca433791ea581",
+    "observed_git_blob_sha": "375f415f2e0b7348d88fb23b0efca433791ea581",
+    "match": true
+  },
+  "checks": {
+    "python_compile_pass": true,
+    "missing_payload_validator_binding_fails_closed": true,
+    "payload_validator_blob_drift_fails_closed": true,
+    "admission_certificate_validator_binding_mismatch_fails_closed": true,
+    "rejected_creditable_payload_stops_before_route_execution": true,
+    "accepted_creditable_payload_validates_before_route_execution": true,
+    "noncreditable_canary_path_remains_compatible": true
+  },
+  "github_actions_infrastructure_observation": {
+    "dedicated_run_id": 37607863238,
+    "dedicated_job_id": 112747663139,
+    "dedicated_conclusion": "failure",
+    "dedicated_steps_started": 0,
+    "drift_guard_run_id": 37607859612,
+    "drift_guard_job_ids": [112747651901,112747652334],
+    "drift_guard_steps_started": 0,
+    "classification": "RUNNER_ASSIGNMENT_OR_ACTIONS_INFRASTRUCTURE_FAILURE__NOT_A_CODE_TEST_FAILURE"
+  },
+  "verified_consequence": "THE_V4_SUCCESSOR_RESTORES_THE_LOAD_BEARING_CONTEXT_PAYLOAD_MEMBERSHIP_GATE_FOR_CREDITABLE_SYMBOLIC_ROUTES_AND_FAILS_CLOSED_BEFORE_ROUTE_EXECUTION_ON_REJECTED_PAYLOADS.",
+  "hard_nonclaims": [
+    "NO_CLAIM_SELECTED_COVER_COMPLETE.",
+    "NO_CLAIM_RESIDUAL_COMPLEMENT_UNSAT.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
