@@ -89,6 +89,16 @@ class MonotoneSemanticConstraintKernelTests(unittest.TestCase):
         )
         self.assertEqual(out["status"], "FAIL_CLOSED")
 
+    def test_contradictory_semantic_state_fails_closed_not_vacuously_true(self):
+        out = resolve_common_policy(
+            ["A"],
+            {"p": atom("A")},
+            formal_source_constraints=[atom("A"), neg("A")],
+            proposed_refinements=[atom("A"), neg("A")],
+        )
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("SEMANTIC_STATE_INCONSISTENT__NO_MODELS", out["errors"])
+
 
 if __name__ == "__main__":
     unittest.main()
