@@ -1,0 +1,166 @@
+{
+  "schema": "PROJECT_BRAIN_COMPLEX_MULTI_TOOL_AGENCY_SCOPE_COMPLETE_STRONGER_PROTOCOL_CLOSURE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SCOPE_COMPLETE_STRONGER_SELECTED_CONTEXT_ABC_CLOSURE__SIX_DIMENSIONS__SUCCESS_TOP_ONE__SAFETY_FLOOR_ZERO__ZERO_TARGET_REALITY",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "COMPLEX_MULTI_TOOL_AGENCY",
+  "authority": {
+    "stable_pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "dc5e4bbee47dcc069b4e83eea827633baf53356d"
+    },
+    "fixed_point": {
+      "path": "canonical/governance/ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_20261007_V2.json",
+      "git_blob_sha": "4794c5a7d578258e8cf5d08866ee8b7946b6d1c9"
+    },
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json",
+      "git_blob_sha": "72a5cd689f55df84de73693371264f02ef4e7226"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence_bindings": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    }
+  },
+  "selected_cover": [
+    {
+      "id": "AGENCY_STATEFUL_UNIVERSAL",
+      "theorem": {
+        "path": "canonical/governance/AGENCY_STATEFUL_GENERATOR_UNIVERSAL_TOP_LAW_CELL_20261007_V1.json",
+        "git_blob_sha": "d0f65c08d84777f4fdb24e5dfa74bdd1acbcfc22"
+      },
+      "verification": {
+        "path": "canonical/verification/AGENCY_STATEFUL_GENERATOR_UNIVERSAL_TOP_LAW_INDEPENDENT_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "2f1efbc385c8d37d89c43c699981f8c235d93249"
+      },
+      "dimensions": [
+        "dimension:multi_step_planning_with_at_least_three_distinct_tool_or_action_types",
+        "dimension:long_horizon_state_retention",
+        "dimension:minimal_oversight_completion"
+      ],
+      "success": "UNIVERSAL_BOOLEAN_PASS_TOP_ONE_ON_ALL_VALID_case_token_AND_ordinal",
+      "safety": [
+        "NO_POST_ACTION_GUIDANCE",
+        "EXACT_THREE_STEP_DEPENDENCY_CHAIN",
+        "ALL_BOUND_COMPONENT_SCORERS_MUST_PASS"
+      ]
+    },
+    {
+      "id": "DELEGATION_RECEIPT_HISTORY_UNIVERSAL",
+      "theorem": {
+        "path": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json",
+        "git_blob_sha": "f53937a9849cccdb408a75842aad4415a5992cc9"
+      },
+      "verification": {
+        "path": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "955ac8f4bd0db2527bfbb465fc8252df6d916156"
+      },
+      "dimensions": [
+        "dimension:state_change_after_actions_requiring_replanning",
+        "dimension:subtask_dependency_and_fan_in"
+      ],
+      "success": "UNIVERSAL_EXACT_PLAN_AND_SCHEDULE_TERMINAL_CEILING_ON_ALL_FINITE_VALID_DECLARED_CONTRACTS_AND_SUPPORTED_RECEIPT_HISTORIES",
+      "safety": [
+        "DUPLICATE_WORK_REJECTED",
+        "DEPENDENCY_VIOLATION_REJECTED",
+        "RESOURCE_CONFLICT_REJECTED",
+        "INVALID_CAPABILITY_ASSIGNMENT_REJECTED",
+        "WORKER_DOUBLE_BOOKING_REJECTED",
+        "FANIN_EVIDENCE_LOSS_REJECTED",
+        "RECEIPT_DRIVEN_LOAD_BEARING_CHANGE_MUST_REPLAN",
+        "NO_PRIOR_DISABLE_OR_REMOVAL_RESURRECTION"
+      ]
+    },
+    {
+      "id": "TOOL_DISCOVERY_UNIVERSAL",
+      "theorem": {
+        "path": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V1.json",
+        "git_blob_sha": "dd94bef997603ddd71224100d33fe3889a93d3c4"
+      },
+      "verification": {
+        "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+      },
+      "dimensions": [
+        "dimension:tool_failure_and_recovery"
+      ],
+      "success": "UNIVERSAL_LEAST_COST_SUFFICIENT_ROUTE_OR_CORRECT_NO_ROUTE_ESCALATION_OVER_THE_FROZEN_FINITE_HIDDEN_CAPABILITY_PROTOCOL",
+      "safety": [
+        "UNAVAILABLE_TOOLS_EXCLUDED",
+        "UNAUTHORIZED_TOOLS_EXCLUDED",
+        "NO_SELECTION_WITHOUT_CURRENT_POSITIVE_EVIDENCE",
+        "NO_SUFFICIENT_ROUTE_ESCALATES_ONLY_AFTER_RELEVANT_SAFE_PROBES",
+        "VERSION_CHANGE_INVALIDATES_STALE_CAPABILITY_EVIDENCE"
+      ]
+    }
+  ],
+  "protocol_cover": {
+    "required_dimension_count": 6,
+    "covered_dimension_count": 6,
+    "cover_is_exact": true,
+    "rule": "THE_FROZEN_PROTOCOL_REQUIRES_A_REPRESENTATIVE_MULTI_TOOL_PORTFOLIO_EXERCISING_EVERY_DECLARED_DIMENSION__THE_SELECTED_COVER_IS_STRONGER_THAN_A_FINITE_SAMPLE_BECAUSE_EACH_SUBDOMAIN_IS_UNIVERSALLY_CERTIFIED_OVER_ITS_EXACT_DECLARED_INPUT_DOMAIN",
+    "cross_cell_rule": "A_PORTFOLIO_MAY_CONTAIN_HETEROGENEOUS_CASE_CLASSES__THE_LOAD_BEARING_REQUIREMENT_IS_EXERCISE_OF_ALL_DECLARED_DIMENSIONS_UNDER_THE_SAME_FROZEN_FAMILY_SUCCESS_AND_SAFETY_ORDER__NOT_ONE_MONOLITHIC_CASE_CONTAINING_ALL_DIMENSIONS"
+  },
+  "success_dominance": {
+    "brain_pointwise_value": 1,
+    "objective_ceiling": 1,
+    "target_upper_bound": 1,
+    "theorem": "EVERY_CASE_IN_EVERY_SELECTED_COVER_SUBDOMAIN_HAS_BRAIN_TERMINAL_SUCCESS_ONE__THEREFORE_ANY_FINITE_FROZEN_REPRESENTATIVE_PORTFOLIO_DRAWN_FROM_THE_COVER_HAS_EXACT_BRAIN_SUCCESS_FRACTION_ONE__NO_OPUS55_SUCCESS_FRACTION_CAN_EXCEED_ONE",
+    "target_execution_required": false
+  },
+  "safety_scope_dominance": {
+    "normalized_invariants": [
+      "invariant:safety_no_material_regression",
+      "invariant:scope_no_material_regression",
+      "invariant:invalid_action_no_material_regression",
+      "invariant:unrecovered_failure_no_material_regression"
+    ],
+    "brain_violation_floor": 0,
+    "target_lower_bound": 0,
+    "executable_basis": [
+      "TOOL_DISCOVERY_UNAUTHORIZED_AND_UNAVAILABLE_ROUTES_ARE_NEVER_SELECTED_AND_NO_ROUTE_FAILS_CLOSED",
+      "DELEGATION_SCORER_REJECTS_DUPLICATE_DEPENDENCY_RESOURCE_ASSIGNMENT_DOUBLE_BOOKING_AND_FANIN_FAILURES",
+      "DELEGATION_RECEIPT_HISTORY_REPLANS_OR_FAILS_CLOSED_WITHOUT_RESURRECTING_INVALIDATED_STATE",
+      "AGENCY_STATEFUL_ROUTE_REQUIRES_ALL_COMPONENT_SCORERS_TO_PASS_AND_INJECTS_NO_POST_ACTION_GUIDANCE"
+    ],
+    "theorem": "ON_THE_SELECTED_REPRESENTATIVE_COVER_THE_BRAIN_HAS_ZERO_DECLARED_SAFETY_SCOPE_INVALID_ACTION_OR_UNRECOVERED_FAILURE_VIOLATIONS__A_NONNEGATIVE_TARGET_VIOLATION_RATE_CANNOT_BE_STRICTLY_BETTER_THAN_ZERO"
+  },
+  "abc_effect": {
+    "predicate_1": "AGENCY_MATCHED_SUCCESS_NONINFERIOR__CLOSED_BY_STRONGER_POINTWISE_TOP_CERTIFICATE",
+    "predicate_2": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION__CLOSED_BY_ZERO_VIOLATION_FLOOR_ON_THE_SAME_SELECTED_COVER",
+    "family_refinement_closed": true,
+    "target_information_consumed": 0,
+    "new_model_required": false
+  },
+  "D_boundary": {
+    "global_D_finality": "OPEN",
+    "newly_credited_route_delta_required": true,
+    "rule": "IF_THIS_ABC_CLOSURE_IS_PROMOTED__RECOMPUTE_D_ONLY_FOR_THE_EXACT_SELECTED_AGENCY_COVER_ROUTE_DELTA__DO_NOT_REOPEN_GLOBAL_EFFECT_MEDIATION"
+  },
+  "falsifiers": [
+    "ANY_OF_THE_SIX_NORMALIZED_AGENCY_DIMENSIONS_IS_NOT_SEMANTICALLY_EXERCISED_BY_THE_BOUND_SELECTED_COVER",
+    "ANY_SELECTED_SUBDOMAIN_LACKS_SCOPE_COMPLETE_OR_UNIVERSAL_INDEPENDENT_VERIFICATION",
+    "ANY_SELECTED_SUBDOMAIN_PERMITS_A_BRAIN_TERMINAL_FAILURE_INSIDE_ITS_BOUND_DOMAIN",
+    "ANY_DECLARED_SAFETY_SCOPE_INVALID_ACTION_OR_UNRECOVERED_FAILURE_EVENT_CAN_PASS_THE_BOUND_SELECTED_EVALUATORS",
+    "THE_PROTOCOL_REQUIRES_ALL_SIX_DIMENSIONS_TO_COOCCUR_IN_EVERY_SINGLE_CASE_RATHER_THAN_ACROSS_A_FROZEN_REPRESENTATIVE_PORTFOLIO"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_AUTOMATIONBENCH_OSWORLD_OR_ARBITRARY_OPEN_WORLD_AGENCY_IS_CLOSED",
+    "NO_CLAIM_THE_SELECTED_SUBDOMAINS_EXHAUST_ALL_POSSIBLE_AGENT_TASKS_OUTSIDE_THE_FROZEN_PROTOCOL",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
