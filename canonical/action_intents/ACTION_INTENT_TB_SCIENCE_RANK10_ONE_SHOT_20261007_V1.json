@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK10_ACTION_INTENT_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_PREEXPOSURE__INDEPENDENT_AUTHORITY_VERIFICATION_REQUIRED__NO_TASK_EXPOSURE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/rdkit-ic-constraints::trial-0",
+    "digest": "sha256:17e356ab255088712c7dfa9765bf077b33a3da221f4a03d4770576857f9c0b6f",
+    "rank": 10
+  },
+  "exact_route": {
+    "agent": "5bc8ebac26bb7c809d4698f535eff43b667b30df",
+    "planner": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "raw_task_contract": "d54d5a2f7efa76b653d288f4f53da4883644baa6",
+    "raw_task_localizer": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76",
+    "transitive_runtime_file_count": 14
+  },
+  "current_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V7.json",
+    "git_blob_sha": "d3ff32dd833dfb5fcdce58e134185bfaf19e95ae"
+  },
+  "planner_transport_preflight": {
+    "path": "canonical/verification/TB_SCIENCE_PLANNER_TRANSPORT_REPAIR_LIVE_VERIFICATION_20261007_V1.json",
+    "git_blob_sha": "877e5ddf815c1958f4ab41f8462ad54af87f0c87",
+    "required_preexposure": true
+  },
+  "transitive_runtime_closure": {
+    "manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261007_V2.json",
+      "git_blob_sha": "31656d35034338dfcb699672bcd4788b283b83c9"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/TB_SCIENCE_REPAIRED_TRANSITIVE_CARRIER_CLOSURE_PUBLIC_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "61495f5977ea745e63ca14136875b97e3e95cd45"
+    },
+    "exact_file_count": 14,
+    "required_preexposure": true
+  },
+  "public_epoch_requirement": {
+    "state": "UNBOUND_PREEXPOSURE",
+    "must_be_created_and_content_bound_immediately_before_task_start": true,
+    "must_not_expose_task_content": true
+  },
+  "controls": {
+    "attempts": 1,
+    "retries": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "current_public_epoch_must_match_immediately_before_task_start": true,
+    "carrier_closure_must_pass_before_task_start": true,
+    "planner_transport_must_pass_before_task_start": true,
+    "precheck_failure_consumes_slot": false,
+    "after_task_start_result_is_final": true
+  },
+  "tournament_failure_interpretation": {
+    "rank9_failure_class": "PLANNER_TRANSPORT_GRAMMAR",
+    "new_science_capability_deficit_admitted": false,
+    "reason": "RANK9_FAILURE_WAS_INFRASTRUCTURE_OR_TRANSPORT__REPAIRED_AND_INDEPENDENTLY_VERIFIED__DO_NOT_INVENT_A_NEW_SCIENCE_PRIMITIVE"
+  },
+  "credit": false
+}
