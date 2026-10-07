@@ -236,9 +236,7 @@ def _declared_context_results(state,step,current_step_index):
     }
 
 def _step_context_results(state,mission,current_step_index):
-    mode=mission.get("cross_step_context_mode")
-    if mode is None:
-        return context_results(state)
+    mode=mission.get("cross_step_context_mode") or DECLARED_CROSS_STEP_CONTEXT_MODE
     if mode!=DECLARED_CROSS_STEP_CONTEXT_MODE:
         raise Blocker("CROSS_STEP_CONTEXT_MODE_UNKNOWN:"+str(mode))
     steps=mission.get("steps")
@@ -353,14 +351,8 @@ def run_shell(step, prior_results=None):
               "channels":list(binding["channels"]),
               "result_sha256":digest,
             })
-    else:
-        for i, result in enumerate(prior_results or []):
-            prefix=f"ASTRA_STEP_{i}_"
-            env[prefix+"RESULT_JSON"]=json.dumps(result, sort_keys=True)
-            if "body_excerpt" in result:
-                env[prefix+"BODY"]=result["body_excerpt"]
-            if "stdout" in result:
-                env[prefix+"STDOUT"]=result["stdout"]
+    elif prior_results not in (None, []):
+        raise Blocker("LEGACY_CROSS_STEP_CONTEXT_FORBIDDEN")
     t=time.monotonic()
     p=subprocess.run([_resolve_bash_executable(),"-lc",cmd],cwd=ROOT,text=True,capture_output=True,env=env)
     out={
@@ -6746,11 +6738,13 @@ def run_certificate_gated_route_select(step):
 def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
     mission=mission or {}
-    mode=mission.get("cross_step_context_mode")
-    if mode not in (None,DECLARED_CROSS_STEP_CONTEXT_MODE):
+    mode=mission.get("cross_step_context_mode") or DECLARED_CROSS_STEP_CONTEXT_MODE
+    if mode!=DECLARED_CROSS_STEP_CONTEXT_MODE:
         raise Blocker("CROSS_STEP_CONTEXT_MODE_UNKNOWN:"+str(mode))
     if adapter=="shell":
-        if mode==DECLARED_CROSS_STEP_CONTEXT_MODE and (
+        if prior_results is None:
+            prior_results={"mode":DECLARED_CROSS_STEP_CONTEXT_MODE,"bindings":[]}
+        if (
             not isinstance(prior_results,dict)
             or prior_results.get("mode")!=DECLARED_CROSS_STEP_CONTEXT_MODE
         ):

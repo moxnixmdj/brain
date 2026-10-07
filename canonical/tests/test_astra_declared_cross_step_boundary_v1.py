@@ -41,6 +41,28 @@ def state():
     }
 
 
+
+def declared_context(current_state, step, current_step_index):
+    with patch.object(
+        runtime,
+        "_validate_load_bearing_record",
+        side_effect=lambda _state, rec: rec["result"],
+    ):
+        return runtime._declared_context_results(
+            current_state, step, current_step_index
+        )
+
+
+def step_context(current_state, mission, current_step_index):
+    with patch.object(
+        runtime,
+        "_validate_load_bearing_record",
+        side_effect=lambda _state, rec: rec["result"],
+    ):
+        return runtime._step_context_results(
+            current_state, mission, current_step_index
+        )
+
 def strict_step(channels=None):
     return {
         "id": "consumer",
@@ -55,7 +77,7 @@ def strict_step(channels=None):
 class DeclaredCrossStepBoundaryTests(unittest.TestCase):
     def test_declared_body_only_is_projected(self):
         step = strict_step(["BODY"])
-        ctx = runtime._declared_context_results(state(), step, 1)
+        ctx = declared_context(state(), step, 1)
         captured = {}
 
         def fake_run(*args, **kwargs):
@@ -94,18 +116,18 @@ class DeclaredCrossStepBoundaryTests(unittest.TestCase):
             "cross_step_inputs": [{"step_index": 1, "channels": ["BODY"]}]
         }
         with self.assertRaisesRegex(runtime.Blocker, "CROSS_STEP_SOURCE_NOT_PRIOR"):
-            runtime._declared_context_results(state(), step, 1)
+            declared_context(state(), step, 1)
 
     def test_payload_hash_tamper_is_denied(self):
         step = strict_step()
-        ctx = runtime._declared_context_results(state(), step, 1)
+        ctx = declared_context(state(), step, 1)
         ctx["bindings"][0]["result"]["body_excerpt"] = "TAMPERED"
         with self.assertRaisesRegex(runtime.Blocker, "CROSS_STEP_RESULT_HASH_MISMATCH"):
             runtime.run_shell(step, ctx)
 
     def test_extra_undeclared_channel_is_denied(self):
         step = strict_step(["BODY"])
-        ctx = runtime._declared_context_results(state(), step, 1)
+        ctx = declared_context(state(), step, 1)
         ctx["bindings"][0]["channels"] = ["BODY", "STDOUT"]
         with self.assertRaisesRegex(
             runtime.Blocker, "CROSS_STEP_BINDING_DECLARATION_MISMATCH"
@@ -117,7 +139,7 @@ class DeclaredCrossStepBoundaryTests(unittest.TestCase):
             "cross_step_context_mode": runtime.DECLARED_CROSS_STEP_CONTEXT_MODE,
             "steps": [{"id": "consumer", "adapter": "shell", "cross_step_inputs": []}],
         }
-        ctx = runtime._step_context_results(state(), mission, 0)
+        ctx = step_context(state(), mission, 0)
         self.assertEqual(ctx["bindings"], [])
         self.assertEqual(ctx["mode"], runtime.DECLARED_CROSS_STEP_CONTEXT_MODE)
 
@@ -127,7 +149,41 @@ class DeclaredCrossStepBoundaryTests(unittest.TestCase):
             "steps": [{"id": "consumer", "adapter": "shell"}],
         }
         with self.assertRaisesRegex(runtime.Blocker, "CROSS_STEP_CONTEXT_MODE_UNKNOWN"):
-            runtime._step_context_results(state(), mission, 0)
+            step_context(state(), mission, 0)
+
+    def test_missing_mode_defaults_to_strict_empty_projection(self):
+        mission = {
+            "steps": [{"id": "consumer", "adapter": "shell", "cross_step_inputs": []}],
+        }
+        ctx = step_context(state(), mission, 0)
+        self.assertEqual(ctx, {
+            "mode": runtime.DECLARED_CROSS_STEP_CONTEXT_MODE,
+            "bindings": [],
+        })
+
+    def test_missing_mode_still_honors_explicit_declared_projection(self):
+        mission = {
+            "steps": [
+                {"id": "source", "adapter": "http", "cross_step_inputs": []},
+                strict_step(["BODY"]),
+            ],
+        }
+        ctx = step_context(state(), mission, 1)
+        self.assertEqual(ctx["mode"], runtime.DECLARED_CROSS_STEP_CONTEXT_MODE)
+        self.assertEqual(ctx["bindings"][0]["channels"], ["BODY"])
+        self.assertEqual(ctx["bindings"][0]["result"]["body_excerpt"], "BOUND_BODY")
+
+    def test_legacy_prior_result_list_is_forbidden(self):
+        with self.assertRaisesRegex(runtime.Blocker, "LEGACY_CROSS_STEP_CONTEXT_FORBIDDEN"):
+            runtime.run_shell(strict_step(["BODY"]), [state()["history"][0]["result"]])
+
+    def test_execute_step_rejects_legacy_prior_result_list_even_without_mode(self):
+        with self.assertRaisesRegex(runtime.Blocker, "DECLARED_CROSS_STEP_CONTEXT_REQUIRED"):
+            runtime.execute_step(
+                strict_step(["BODY"]),
+                [state()["history"][0]["result"]],
+                {"steps": [strict_step(["BODY"])]},
+            )
 
 
 if __name__ == "__main__":
