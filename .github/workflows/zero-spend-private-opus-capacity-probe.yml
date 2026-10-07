@@ -87,3 +87,5 @@ jobs:
           # attempted until zero-spend capacity/admissibility is independently bound.
           print(json.dumps(out, sort_keys=True))
           PY
+
+# terminal-now pull-request trigger probe 2026-10-07
