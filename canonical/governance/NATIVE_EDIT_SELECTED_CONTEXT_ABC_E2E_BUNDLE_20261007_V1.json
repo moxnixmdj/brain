@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_NATIVE_EDIT_SELECTED_CONTEXT_ABC_E2E_BUNDLE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_DIRECT_E2E_SELECTED_CONTEXT_ABC_CELL__EXACT_FROZEN_T1_SCOPE_ONLY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V13.json",
+    "git_blob_sha": "0d18488b51a222e5da414329ccd9d33cbc1fc31c"
+  },
+  "direct_e2e_theorem": {
+    "path": "canonical/governance/DIRECT_END_TO_END_SELECTED_CELL_CERTIFICATE_THEOREM_20261007_V1.json",
+    "git_blob_sha": "ecb52ca25fa14a60b7c34206fea25d8d3cfdcf0d"
+  },
+  "maximal_law_theorem": {
+    "path": "canonical/governance/MAXIMAL_CONTEXT_LAW_SPACE_COMPLETENESS_THEOREM_20261007_V1.json",
+    "git_blob_sha": "54f5495fc7a6990400bc9195b15be895b75c62d0"
+  },
+  "target_predicate": "ARTIFACT_MECHANICAL_GATES_CEILING",
+  "family": "ARTIFACT_CREATION",
+  "selected_cell": {
+    "id": "T1_NATIVE_ARTIFACT_MECHANICAL_PRESERVATION_FROZEN_8",
+    "scope": "EXACT FROZEN T1 NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001 CELL WITH 8 DIRECTLY INSTRUMENTED TERMINAL CASES__DOCX_XLSX_PPTX_PDF_EXPLICIT_LOW_LEVEL_TEXT_EDIT_PRESERVATION_ONLY",
+    "scope_binding": {
+      "registry": {
+        "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+        "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+      },
+      "binding": {
+        "path": "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+        "git_blob_sha": "977e18ce2c19f7bb8a429a8f1c99407ff3000e92"
+      },
+      "terminal_wave": {
+        "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+        "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+      },
+      "scope_complete": true
+    },
+    "semantics": {
+      "input": "NATIVE_ARTIFACT_BYTES_PLUS_EXPLICIT_LOW_LEVEL_EDIT_SPECIFICATION_PLUS_DECLARED_FORMAT",
+      "evaluator": "FORMAT_REOPEN_PLUS_UNRELATED_STRUCTURE_PRESERVATION_PLUS_RENDER_LOCALIZATION_GATES",
+      "score_domain": [
+        0,
+        1
+      ],
+      "objective_ceiling": 1,
+      "brain_value": 1,
+      "excluded": [
+        "ARBITRARY_SEMANTIC_TARGET_SELECTION",
+        "PROFESSIONAL_QUALITY_JUDGMENT",
+        "FORMATS_OR_EDIT_KINDS_OUTSIDE_THE_FROZEN_T1_CELL"
+      ]
+    }
+  },
+  "selected_brain_route": {
+    "entry": "canonical.runtime.native_artifact_cross_format_candidate_v1::solve",
+    "operative_files": [
+      {
+        "path": "canonical/runtime/native_artifact_cross_format_candidate_v1.py",
+        "git_blob_sha": "f3e5090647dd9029ab9f46efd06dc0c0d0addbc3"
+      },
+      {
+        "path": "canonical/runtime/ooxml_package_transaction.py",
+        "git_blob_sha": "970be62854c918b306ae3f62989009bfbd0e8fc7"
+      },
+      {
+        "path": "canonical/runtime/pdf_native_edit_transaction.py",
+        "git_blob_sha": "b9f673ffe0474d00a598089077ad93db40c00dd8"
+      }
+    ],
+    "model_dependency": "NONE",
+    "opaque_external_capability_provider": false
+  },
+  "E2E": {
+    "predicate_state": "PROVED",
+    "proof_kind": "ABSOLUTE_CEILING",
+    "independent_or_objective": true,
+    "scope_complete": true,
+    "brain_value": 1,
+    "objective_ceiling_value": 1,
+    "structural_verification": {
+      "path": "canonical/verification/NATIVE_ARTIFACT_CROSS_FORMAT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "34d8a3b7a99363902d6212759125ac71fa54a986"
+    },
+    "render_verification": {
+      "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+    },
+    "dominance_statement": "ON_THIS_EXACT_DECLARED_FINITE_CELL_THE_BRAIN_ROUTE_ATTAINS_THE_BINARY_OBJECTIVE_CEILING_1__NO_ADMISSIBLE_TARGET_LAW_CAN_SCORE_ABOVE_1__SO_K_C_MINUS_IS_EMPTY_FOR_THIS_CELL"
+  },
+  "route_local_D": {
+    "direct_effects": [
+      "TEMPORARY_FILESYSTEM_READ_WRITE_WITHIN_EPHEMERAL_TEMP_DIRECTORY"
+    ],
+    "external_network": false,
+    "process_spawn": false,
+    "opaque_model_or_service": false,
+    "status": "OPEN_INCREMENTAL_D_CHECK_REQUIRED_IF_THIS_ROUTE_RECEIVES_NEW_CREDIT"
+  },
+  "consequence": {
+    "selected_cell_ABC_candidate": true,
+    "direct_E2E_used": true,
+    "local_C_separate_certificate_required": false,
+    "K_c_minus_empty_candidate": true,
+    "target_information_required_for_this_cell": false,
+    "family_closed": false,
+    "remaining_family_residuals": [
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_SCOPE",
+      "ANY_LOAD_BEARING_ARTIFACT_CONTEXT_OUTSIDE_THIS_EXACT_NATIVE_MECHANICAL_CELL"
+    ],
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_GENERALIZATION_BEYOND_THE_EXACT_FROZEN_T1_NATIVE_MECHANICAL_CELL",
+    "NO_PROFESSIONAL_QUALITY_OR_SEMANTIC_TARGET_SELECTION_CREDIT",
+    "NO_WHOLE_ARTIFACT_CREATION_FAMILY_CLOSURE",
+    "NO_GLOBAL_ABC_OR_D_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
