@@ -1,8 +1,8 @@
 """Bridge source-aligned semantic proof v3 into monotone policy resolution.
 
-Only constraints independently accepted by the v3 proof checker enter the semantic
-state. Exact typed-field atoms are therefore usable alongside source-aligned scope
-atoms, but neither the typed-context authority nor policy adequacy self-authenticates.
+Only constraints accepted by the v3 source checker enter the monotone state.
+Unsupported or rejected language leaves the state broader and cannot mint a
+policy certificate.
 """
 from __future__ import annotations
 
@@ -21,16 +21,8 @@ def resolve_from_source_proof(
     claims: Sequence[Mapping[str, Any]],
     decision_basis: Sequence[str],
     policy_conditions: Mapping[str, Mapping[str, Any]],
-    typed_context: Mapping[str, Any] | None = None,
-    expected_typed_context_sha256: str | None = None,
 ) -> dict[str, Any]:
-    proof = verify_proof(
-        source_text,
-        source_id=source_id,
-        claims=claims,
-        typed_context=typed_context,
-        expected_typed_context_sha256=expected_typed_context_sha256,
-    )
+    proof = verify_proof(source_text, source_id=source_id, claims=claims)
     if proof.get("status") == "FAIL_CLOSED":
         return {
             "schema": SCHEMA,
@@ -55,7 +47,7 @@ def resolve_from_source_proof(
         "certified_common_policies": refinement.get("certified_common_policies", []),
         "terminal_authority": False,
         "boundary": (
-            "V3_ADDS_CONTENT_ADDRESSED_EXACT_TYPED_VALUES_TO_THE_NARROW_SOURCE_ALIGNED_FRAGMENT;"
-            "EXPECTED_DIGEST_AUTHORITY_FIELD_DENOTATION_AND_POLICY_ADEQUACY_REQUIRE_SEPARATE_SOUND_CERTIFICATES"
+            "SOURCE_ALIGNED_V3_ADMITS_ONLY_CHECKED_EXPLICIT_PRIMITIVES_SCOPE_AND_CONTROLLED_DEONTIC_RULES;"
+            "DOMAIN_CLASSIFICATION_REFERENCE_RESOLUTION_IMPLICIT_APPLICABILITY_MATERIALITY_AND_POLICY_ADEQUACY_REQUIRE_SEPARATE_CERTIFICATES"
         ),
     }
