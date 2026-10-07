@@ -1,23 +1,32 @@
 {
   "schema": "PROJECT_BRAIN_REAL_OUTPUT_SCOREBOARD_CURRENT_ACCEPTANCE_OVERLAY_V1",
-  "date": "2026-10-03",
-  "status": "ACTIVE_CURRENT_ACCEPTANCE_OVERLAY__HISTORICAL_SCOREBOARD_COUNTERS_UNCHANGED",
+  "date": "2026-10-07",
+  "status": "ACTIVE_CURRENT_ACCEPTANCE_OVERLAY__RECONCILED_TO_16_OF_38_ATOMIC_LEDGER__IF_FROZEN_ACCEPTANCE_CLOSED__TERMINAL_FALSE",
   "base_scoreboard": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
   "current_terminal_acceptance": {
-    "accepted_families": 5,
-    "open_families": 14,
-    "proved_atomic": 12,
-    "unresolved_atomic": 26,
+    "accepted_families": 6,
+    "open_families": 13,
+    "proved_atomic": 16,
+    "unresolved_atomic": 22,
     "total_families": 19,
     "total_atomic": 38,
-    "terminal": false
+    "terminal": false,
+    "acceptance_closed_ownership_open_families": [
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+    ]
   },
   "latest_delta": {
-    "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+    "predicates": [
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+    ],
     "state": "PROVED",
-    "proof_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
-    "activation": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_PROMOTION_ACTIVATION_V1.json"
+    "proof_kind": "FINITE_DECLARED_SCOPE_OBJECTIVE_TOP_CERTIFICATE_PLUS_INDEPENDENT_PROTOCOL_CONJUNCTION_VERIFICATION",
+    "activation": "canonical/governance/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_20261007_V1.json",
+    "verification": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
   },
   "next_progress_event_target": "EXISTING_RECEIPT_SATURATION_PASS_OR_FALSIFICATION__THEN_CURRENT_FIXED_POINT_RECOMPILE",
   "accounting": {
@@ -32,8 +41,8 @@
     "NO_FRESH_REALITY_BEFORE_POST_PROMOTION_FIXED_POINT_RECOMPILE"
   ],
   "current_residual_projection": {
-    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__12_OF_38__26_UNRESOLVED",
-    "verification": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V4_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "status": "CURRENT_LEDGER_RECONCILED__16_OF_38_PROVED__22_UNRESOLVED__IF_ACCEPTANCE_CLOSED__TERMINAL_FALSE",
+    "verification": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
     "authorized_actions": [
       "ACTION::SATURATE_EXISTING_RECEIPTS"
     ],
