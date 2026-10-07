@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_A_B_SHARED_DOMAIN_FACTORIZATION_THEOREM_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_LOGIC_FACTORING__SHARED_DOMAIN_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "factorization_candidate": "canonical/governance/A_TARGET_SCOPE_VS_DOMINANCE_FACTORIZATION_20261007_V1.json",
+    "current_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V6.json",
+    "observable_trace_scope": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json"
+  },
+  "definitions": {
+    "Q": "ONE_CONTENT_ADDRESSED_CERTIFICATION_DOMAIN_SHARED_BY_COVERAGE_AND_TARGET_RELATIVE_DOMINANCE",
+    "COVER_Q": "U_OPUS55_SUBSET_Q",
+    "DOM_Q": "BRAIN_WEAKLY_DOMINATES_OPUS55_ON_Q_UNDER_COMPLETE_DISTRIBUTIONAL_EVALUATOR_AND_HARD_CONSTRAINT_SEMANTICS",
+    "OLD_A_Q": "COVER_Q_AND_DOM_Q",
+    "OLD_B_Q": "DOM_Q",
+    "OTHER": "CONJUNCTION_OF_ALL_OTHER_TERMINAL_INVARIANTS_AND_POSTCONDITIONS"
+  },
+  "theorem": {
+    "assumption": "A_AND_B_BIND_THE_SAME_EXACT_Q_AND_THE_SAME_DOM_Q_SEMANTICS",
+    "statement": "(COVER_Q_AND_DOM_Q)_AND_DOM_Q_AND_OTHER_IFF_COVER_Q_AND_DOM_Q_AND_OTHER",
+    "consequence": [
+      "THE_DOMINANCE_CONJUNCT_EMBEDDED_INSIDE_OLD_A_IS_LOGICALLY_DUPLICATE_IF_B_IS_THE_SAME_DOM_Q",
+      "A_CAN_THEN_BE_FACTORED_AS_COVER_Q_ONLY",
+      "B_CAN_THEN_BE_FACTORED_AS_DOM_Q_ONLY",
+      "THIS_CHANGES_PROOF_STRUCTURE_NOT_TERMINAL_TRUTH"
+    ]
+  },
+  "shared_domain_necessity": {
+    "statement": "THE_FACTORING_IS_NOT_VALID_IF_OLD_A_USES_DOM_Q1_AND_B_USES_AN_UNCONSTRAINED_DOM_Q2",
+    "countermodel": {
+      "COVER_Q1": true,
+      "DOM_Q1": false,
+      "DOM_Q2": true,
+      "old_expression": false,
+      "naively_factored_expression": true
+    },
+    "minimal_difference_condition": "COVER_Q1_AND_NOT_DOM_Q1_AND_DOM_Q2",
+    "consequence": "CANONICAL_DOMAIN_IDENTITY_AND_DOMINANCE_SEMANTIC_IDENTITY_MUST_BE_BOUND_BEFORE_REMOVING_ANY_DUPLICATE_TERM"
+  },
+  "relation_to_observable_trace_scope": {
+    "proved_outer_scope": "U_OPUS55_SUBSET_R_TRACE",
+    "remaining_coverage_problem": "FIND_OR_PROVE_Q_WITH_U_OPUS55_SUBSET_Q_SUBSET_R_TRACE",
+    "remaining_dominance_problem": "PROVE_DOM_Q",
+    "do_not_require": "DOMINANCE_OVER_ALL_R_TRACE"
+  },
+  "astra_falsification_role": {
+    "coverage_attack": "SEARCH_FOR_A_FRONTIER_USEFUL_BEHAVIOR_x_IN_R_TRACE_MINUS_Q_THAT_CHANGES_A_LOAD_BEARING_TARGET_UTILITY_HARD_CONSTRAINT_ACCEPTABLE_ACTION_OR_ADMISSIBLE_TRANSFORM",
+    "if_found": "Q_IS_INCOMPLETE__ADD_ONLY_THE_MINIMUM_MISSING_DISCRIMINATOR_OR_GENERATOR",
+    "if_not_found": "NEGATIVE_SEARCH_EVIDENCE_ONLY__NO_COVERAGE_CREDIT",
+    "dominance_attack": "ONCE_x_IS_BOUND_INSIDE_Q__USE_MATCHED_OR_STRONGER_SOUND_EVIDENCE_TO_TEST_DOM_Q_WITHOUT_INFERRING_FAILURE_FROM_MISSING_PROOF"
+  },
+  "scheduler_effect_if_verified": [
+    "BIND_ONE_SHARED_CONTENT_ADDRESSED_Q_FOR_A_AND_B",
+    "RESTATE_A_AS_TARGET_COVERAGE_ONLY__U_SUBSET_Q_OR_EQUIVALENT",
+    "RESTATE_B_AS_TARGET_RELATIVE_DISTRIBUTIONAL_DOMINANCE_ON_THE_SAME_Q",
+    "DO_NOT_COUNT_DOM_Q_TWICE",
+    "KEEP_C_AND_D_UNCHANGED",
+    "KEEP_TERMINAL_FALSE_UNTIL_COVER_Q_DOM_Q_C_D_ALL_PROVED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_SHARED_Q_IS_CURRENTLY_CANONICALLY_BOUND",
+    "NO_CLAIM_COVER_Q_IS_PROVED",
+    "NO_CLAIM_DOM_Q_IS_PROVED",
+    "NO_CLAIM_A_OR_B_IS_CLOSED",
+    "NO_TRUTH_OBLIGATION_DELETED",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
