@@ -1,0 +1,29 @@
+{
+  "schema":"PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V18_CONNECTOR_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"PASS__16_INFORMATION_WAKE_CLASSES__15_POSITIVE_REALITY_CLASSES__9_LANES__TERMINAL_FALSE",
+  "subject":{"path":"canonical/governance/CURRENT_TERMINAL_AUTHORITY.json","git_blob_sha":"7bbe0d020eb8f747d849fa0ee253c2d0851b2e6d","branch":"authority/stable-pointer-v18-current-cut"},
+  "verified":{
+    "current_information_cut_v2_exact":true,
+    "current_reality_cut_v3_exact":true,
+    "current_reality_cut_v3_independent_verification_exact":true,
+    "gdpval_semantic_complement_exact":true,
+    "current_noncomposition_wake_class_count":16,
+    "current_positive_reality_class_count":15,
+    "current_minimum_access_execution_lane_count":9,
+    "agency_cross_component_interaction_target_reality_required":false,
+    "agency_raw_semantic_admission_still_open":true,
+    "gdpval_direct_target_query_currently_irreducible":false,
+    "gdpval_public_220_structural_semantic_quality_complement_open":true,
+    "complete_selected_context_ABC_closed":false,
+    "D_finality_closed":false,
+    "terminal":false
+  },
+  "boundary":[
+    "SIXTEEN_INFORMATION_WAKE_CLASSES_AND_FIFTEEN_POSITIVE_REALITY_CLASSES_ARE_CURRENT_BOUND_ACCOUNTING__FUTURE_SOUND_CERTIFICATES_MAY_COLLAPSE_MORE.",
+    "GDPVAL_IS_NOT_CLOSED__ONLY_ITS_DIRECT_TARGET_QUERY_IS_DEMOTED_WHILE_STRUCTURAL_LOCALIZATION_REMAINS_UNEXHAUSTED.",
+    "AGENCY_IS_NOT_CLOSED__ONLY_ITS_SEPARATE_INTERACTION_TARGET_SURFACE_IS_DELETED_FOR_SOUNDLY_COMPILED_EXPLICIT_COMPONENT_CONTRACTS.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting":{"incremental_spend_usd":0,"fresh_target_reality_units_consumed":0,"terminal_credit_delta":0}
+}
