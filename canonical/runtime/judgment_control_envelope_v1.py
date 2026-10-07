@@ -12,6 +12,11 @@ from decimal import Decimal, InvalidOperation
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.source_traceable_semantic_ir import compile_semantic_ir
+from canonical.runtime.finance_source_coverage_certificate_v1 import (
+    build_manifest as build_finance_source_coverage_manifest,
+    derive_source_units as derive_finance_source_units,
+    verify_finance_source_coverage,
+)
 from canonical.runtime.semantic_identifiability_gate import adjudicate
 from canonical.runtime.finite_identifiability import Experiment, Hypothesis, select_discriminator
 from canonical.runtime.semantic_operator_counterfactuals import (
@@ -201,6 +206,7 @@ def configured_terminal_decision(proposal: Any, proof_bundle: Any, *, mode: str)
     rankings = decision.get("rankings") if isinstance(decision.get("rankings"), list) else []
     selected_row = next((x for x in rankings if isinstance(x, Mapping) and x.get("alternative") == selected), {})
     contributing = set(selected_row.get("contributing_evidence") or [])
+    finance_source_coverage = {"status": "NOT_APPLICABLE", "pass": True, "errors": []}
 
     if decision_kind == "CONCLUDE":
         if semantic_ir.get("status") != "COMPILED":
@@ -214,6 +220,12 @@ def configured_terminal_decision(proposal: Any, proof_bundle: Any, *, mode: str)
             errors.append("PROPOSED_CONCLUSION_DOES_NOT_MATCH_BRAIN_DECISION")
 
         if mode == "FINANCE":
+            finance_source_coverage = verify_finance_source_coverage(
+                proof_bundle, contributing_evidence=contributing, leaf_id=leaf_id
+            )
+            if finance_source_coverage.get("pass") is not True:
+                errors.append("FINANCE_SOURCE_COVERAGE_FAIL_CLOSED")
+                errors.extend(finance_source_coverage.get("errors") or [])
             if leaf_id == FINANCE_SUPERVISORY:
                 _required_ids(proposal, "rule_evidence_ids", contributing, errors)
                 _required_ids(proposal, "exception_evidence_ids", contributing, errors)
@@ -261,6 +273,7 @@ def configured_terminal_decision(proposal: Any, proof_bundle: Any, *, mode: str)
         "leaf_id": leaf_id,
         "decision": decision_kind,
         "recomputed_proof": recomputed,
+        "finance_source_coverage": finance_source_coverage,
         "rule": (
             "GENERAL_COGNITION_MAY_PROPOSE_TYPED_STRUCTURE__"
             "BRAIN_RECOMPUTES_PROVENANCE_EVIDENCE_IDENTIFIABILITY_COUNTERFACTUALS_AND_DECISION__"
@@ -326,6 +339,11 @@ def _base_bundle(text: str, source_id: str, evidence_ids: Sequence[str], alterna
     return {
         "source_id": source_id,
         "source_text": text,
+        "source_coverage_manifest": build_finance_source_coverage_manifest(
+            text,
+            [list(evidence_ids) for _ in derive_finance_source_units(text)],
+            source_id=source_id,
+        ),
         "operator_bindings": bindings,
         "counterfactual_scenarios": scenarios,
         "semantic_contract": {
