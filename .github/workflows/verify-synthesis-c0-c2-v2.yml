@@ -1,0 +1,46 @@
+name: Verify synthesis C0-control and C2 V2
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/synthesis_bound_claim_guard_v2.py"
+      - "canonical/tests/test_synthesis_bound_claim_guard_v2.py"
+      - "canonical/runtime/synthesis_grounded_expression_ir_v1.py"
+      - "canonical/tests/test_synthesis_grounded_expression_ir_v1.py"
+      - ".github/workflows/verify-synthesis-c0-c2-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify exact frozen blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object canonical/runtime/synthesis_bound_claim_guard_v2.py)" = "6d342f37140c1790485366dada18e32d5f7aa8d0"
+          test "$(git hash-object canonical/tests/test_synthesis_bound_claim_guard_v2.py)" = "3e5c4ec8b391388a28554769ef38aa296471db0e"
+          test "$(git hash-object canonical/runtime/synthesis_grounded_expression_ir_v1.py)" = "0709b7d43a069eaa9eb3240df28789a9107a36db"
+          test "$(git hash-object canonical/tests/test_synthesis_grounded_expression_ir_v1.py)" = "f28e5648e7327fdd6cba54c602016485e0eb66c5"
+
+      - name: Run repaired C0-control tests
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_synthesis_bound_claim_guard_v2
+
+      - name: Run repaired C2 realization tests
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_synthesis_grounded_expression_ir_v1
+
+      - name: Emit zero-credit verification summary
+        shell: bash
+        run: |
+          printf '%s\n'             'C0_CONTROL_V2_EXACT_BLOBS_PASS'             'C2_GROUNDED_EXPRESSION_V2_EXACT_BLOBS_PASS'             'TERMINAL_CREDIT_DELTA=0'             'SYNTHESIS_FAMILY_CLOSED=false'
