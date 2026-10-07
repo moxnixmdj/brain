@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_P2_RUBRIC_EQUIVALENCE_NECESSITY_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_COUNTERMODEL_PASS__ZERO_CREDIT",
+  "subject": "canonical/governance/P2_RUBRIC_EQUIVALENCE_NECESSITY_FALSIFIER_20261007_V1.json",
+  "wolfram_result": {
+    "explicit_values": [
+      2,
+      0,
+      1
+    ],
+    "alternative_target_values": [
+      3,
+      0,
+      2
+    ],
+    "functions_not_equal_witness": true,
+    "selected_beats_baseline_under_both": true,
+    "selected_beats_ablation_under_both": true
+  },
+  "conclusion": "FULL_RUBRIC_FUNCTION_EQUALITY_CAN_BE_FALSE_WHILE_BOTH_LOAD_BEARING_QUALITY_ORDER_COMPARISONS_REMAIN_TRUE__SO_GLOBAL_EQUIVALENCE_IS_NOT_LOGICALLY_NECESSARY",
+  "boundary": [
+    "DOES_NOT_PROVE_THE_REAL_TARGET_ORDER_FOR_ANY_CURRENT_AA_BRIEFCASE_OR_GDPVAL_CONTEXT",
+    "DOES_NOT_REMOVE_THE_NEED_FOR_A_SOUND_ORDER_CERTIFICATE_ON_THE_ACTUAL_LOAD_BEARING_COMPARISONS",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
