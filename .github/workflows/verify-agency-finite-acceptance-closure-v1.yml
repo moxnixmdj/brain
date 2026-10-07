@@ -1,0 +1,86 @@
+name: Verify agency finite acceptance closure V1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-agency-finite-acceptance-closure-v1.yml'
+      - 'canonical/governance/AGENCY_FINITE_PORTFOLIO_FREEZE_20261007_V1.json'
+      - 'canonical/runtime/agency_finite_acceptance_closure_v1.py'
+      - 'canonical/tests/test_agency_finite_acceptance_closure_v1.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify-agency-finite-acceptance-closure-v1
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Execute exact frozen agency qualification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pytest -q canonical/tests/test_agency_finite_acceptance_closure_v1.py
+          python canonical/runtime/agency_finite_acceptance_closure_v1.py > /tmp/agency.json
+          python - <<'PY'
+          import json, os, pathlib
+          p=pathlib.Path("/tmp/agency.json")
+          out=json.loads(p.read_text())
+          if out.get("pass") is not True:
+              raise SystemExit("agency qualification did not pass")
+          if out.get("case_count") != 2:
+              raise SystemExit("case count drift")
+          if out.get("dimension_coverage_complete") is not True:
+              raise SystemExit("dimension cover incomplete")
+          if out.get("brain_success_fraction") != 1.0:
+              raise SystemExit("success not at ceiling")
+          if out.get("metrics_at_objective_ceiling") is not True:
+              raise SystemExit("safety metrics not at objective ceiling")
+          receipt={
+            "schema":"PROJECT_BRAIN_AGENCY_FINITE_ACCEPTANCE_CLOSURE_GITHUB_VERIFICATION_V1",
+            "date":"2026-10-07",
+            "status":"PASS__INDEPENDENT_GITHUB_HOSTED_REPLAY__FROZEN_TWO_CASE_AGENCY_SCOPE_AT_OBJECTIVE_CEILING",
+            "trigger_sha":os.environ["GITHUB_SHA"],
+            "independent_runner":"GITHUB_HOSTED_UBUNTU_LATEST",
+            "frozen_candidate_merge_commit":"f36fb5cbbfb120ce07ae0bf7e17e1868456b1a85",
+            "qualification":out,
+            "target_predicates":{
+              "AGENCY_MATCHED_SUCCESS_NONINFERIOR":True,
+              "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION":True
+            },
+            "incremental_spend_usd":0
+          }
+          dst=pathlib.Path("canonical/verification/AGENCY_FINITE_ACCEPTANCE_CLOSURE_GITHUB_VERIFICATION_20261007_V1.json")
+          dst.write_text(json.dumps(receipt,indent=2,sort_keys=True)+"\n")
+          PY
+
+      - name: Persist independent receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT=canonical/verification/AGENCY_FINITE_ACCEPTANCE_CLOSURE_GITHUB_VERIFICATION_20261007_V1.json
+          git config user.name "Project Brain Agency Verifier"
+          git config user.email "project-brain-agency-verifier@users.noreply.github.com"
+          git add "$OUT"
+          git diff --cached --quiet && exit 0
+          git commit -m "Verify finite agency acceptance at objective ceiling"
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main || { git rebase --abort || true; sleep 1; continue; }
+            git push origin HEAD:main && exit 0
+            sleep 1
+          done
+          exit 1
