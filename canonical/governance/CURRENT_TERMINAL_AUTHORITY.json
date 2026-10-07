@@ -658,6 +658,15 @@
       "path": "canonical/governance/FROZEN_19_LOAD_BEARING_ACCEPTANCE_TRUTH_BASIS_RECONCILIATION_20261007_V1.json",
       "git_blob_sha": "595f5ec3d259c88da5ecd60b8687e00fde1dfc19",
       "note": "HISTORICAL_PREDECESSOR__19_LOAD_BEARING_OPEN_TRUTHS_BEFORE_LATER_VERIFIED_COMPOSITION_TERMINAL_SUCCESS_DERIVATION__SUPERSEDED_FOR_PRIMARY_SCHEDULING_BY_FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_V2__PRESERVED_FOR_PROVENANCE"
+    },
+    "instruction_following_ownership_promotion": {
+      "path": "canonical/verification/IF_ACCEPTED_ROUTE_OWNERSHIP_PROMOTION_20261007_V1.json",
+      "note": "DEDUCTIVE_ZERO_REALITY_ACCEPTED_ROUTE_OWNERSHIP_PROMOTION__IF_FAMILY_NOW_TERMINALLY_CLOSED"
+    },
+    "terminal_closure_manifest_current": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "94123f54f122d146b5ceba734ae40e9b30506a11",
+      "note": "6_OF_19_LITERAL_PASS_NORMALIZED_FOR_MANDATORY_TERMINAL_REDUCER"
     }
   },
   "live_truth": {
@@ -965,8 +974,8 @@
     "public_fixed_bar_scope_can_be_admitted_from_valid_scope_complete_aggregate_pass": true,
     "terminal_root_semantics": "FROZEN_19_FAMILY_ACCEPTANCE_AND_OWNERSHIP_FINALITY",
     "frozen_terminal_family_count": 19,
-    "frozen_terminal_family_pass_count": 5,
-    "frozen_terminal_family_open_count": 14,
+    "frozen_terminal_family_pass_count": 6,
+    "frozen_terminal_family_open_count": 13,
     "frozen_atomic_predicates_proved": 16,
     "frozen_atomic_predicates_unresolved": 22,
     "frozen_atomic_predicates_total": 38,
@@ -975,7 +984,7 @@
     "bureaucracy_scheduler_truth_reconciled": true,
     "optional_not_x_is_mandatory_terminal_root": false,
     "instruction_following_frozen_acceptance_protocol_closed": true,
-    "instruction_following_family_ownership_closed": false,
+    "instruction_following_family_ownership_closed": true,
     "if_scope_boundary_noninferior_proved": true,
     "if_zero_critical_authority_violations_proved": true,
     "scheduler_aligned_to_frozen_19_family_root": true,
@@ -1247,6 +1256,6 @@
     },
     "mandatory_terminal_predicate": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
     "optional_stronger_route": "PROVE_NOT_X_OVER_SOUND_OBSERVABLE_TRACE_ESCAPE_MODEL",
-    "current_truth": "5_OF_19_FULLY_TERMINALLY_CLOSED__6_OF_19_ACCEPTANCE_PASS__5_OF_19_VERIFIED_OWNED__13_ACCEPTANCE_FAMILIES_OPEN__16_OF_38_REGISTRY_ATOMS_PROVED__22_RAW_UNRESOLVED__18_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__ALL_NON_ACCEPTANCE_COUNTERS_ZERO__FINAL_DONOR_DELETION_CLEANROOM_PASS_TRUE__TERMINAL_FALSE"
+    "current_truth": "6_OF_19_FULLY_TERMINALLY_CLOSED__6_OF_19_ACCEPTANCE_PASS__6_OF_19_VERIFIED_OWNED__13_ACCEPTANCE_FAMILIES_OPEN__16_OF_38_REGISTRY_ATOMS_PROVED__22_RAW_UNRESOLVED__18_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__ALL_NON_ACCEPTANCE_COUNTERS_ZERO__FINAL_DONOR_DELETION_CLEANROOM_PASS_TRUE__TERMINAL_FALSE"
   }
 }
