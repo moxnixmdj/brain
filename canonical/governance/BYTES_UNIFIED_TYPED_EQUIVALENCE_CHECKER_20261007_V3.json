@@ -1,0 +1,46 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_UNIFIED_TYPED_EQUIVALENCE_CHECKER_V3",
+  "date":"2026-10-07",
+  "status":"TWO_CLASS_PROOF_KERNEL_AMORTIZATION__INDEPENDENT_REPLAY_PASS__ZERO_TERMINAL_CREDIT",
+  "scope_lock":"BYTES_RESEARCH_ONLY",
+  "checker":{
+    "path":"canonical/runtime/bytes_unified_typed_equivalence_checker_v3.py",
+    "git_blob_sha":"d11732a6760fff86700c66364af03a48e017bf1b",
+    "raw_bytes":4286,
+    "fixed_decoder_payload_bytes":1702
+  },
+  "sequence_proof":{
+    "programs":2955,
+    "generated_equations":791,
+    "global_class_target":809,
+    "witnesses":823
+  },
+  "scalar_predicate_proof":{
+    "operator_alphabet":"naid2pmeoq",
+    "programs":1111,
+    "global_classes":203,
+    "characteristic_inputs":[-3,-2,-1,0,1,2,3],
+    "proof_method":"EXACT_CENTRAL_VALUES_PLUS_SYMBOLIC_POLYNOMIAL_TAILS",
+    "root_bound":"EVERY_POLYNOMIAL_STATE_THAT_CAN_FEED_A_BRANCH_AT_DEPTH_LTE_3_SATISFIES_CAUCHY_ROOT_BOUND_ABS_X_LTE_3",
+    "tail_state":"EXACT_INTEGER_POLYNOMIAL_BY_SIDE_AND_INPUT_PARITY"
+  },
+  "strong_package":{
+    "v10_runtime_payload_bytes":1741,
+    "unified_checker_payload_bytes":1702,
+    "joint_payload_bytes":3273,
+    "sequence_only_joint_payload_bytes":2852,
+    "incremental_proof_bytes_for_scalar_predicate_class":421
+  },
+  "interpretation":[
+    "THE_SAME_PROOF_KERNEL_NOW_CERTIFIES_TWO_STRUCTURALLY_DISTINCT_CAPABILITY_CLASSES",
+    "THE_SECOND_CLASS_ADDS_421_STRONG_PACKAGE_BYTES_RATHER_THAN_A_SECOND_FULL_CHECKER",
+    "THE_SCALAR_FINITE_CHARACTERISTIC_SET_IS_DERIVED_FROM_AN_EXACT_SYMBOLIC_TAIL_ARGUMENT_NOT_MERE_RANGE_STABILIZATION"
+  ],
+  "trusted_boundary":"SEQUENCE_STRUCTURAL_LIST_ALGEBRA_RULE_SOUNDNESS_REMAINS_A_TRUSTED_META_LEVEL_KERNEL; THE_SCALAR_POLYNOMIAL_TAIL_AND_CAUCHY_BOUND_CHECK_IS_EXECUTABLE",
+  "next_critical_path":"EXTEND_OR_FACTOR_THE_PROOF_KERNEL_TO_THE_CONTINUOUS_EXPRESSION_SYNTHESIS_CLASS_WITH_MINIMUM_ADDITIONAL_BYTES__OR_REDUCE_THE_TRUSTED_SEQUENCE_RULE_KERNEL",
+  "hard_nonclaims":[
+    "NO_ZERO_PROOF_CLASS_MARGINAL_CLAIM",
+    "NO_UNCONDITIONAL_V10_TOTALITY_REPROMOTION",
+    "NO_GENERAL_PROGRAM_EQUIVALENCE_OR_TERMINAL_CREDIT"
+  ]
+}
