@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_REALITY_GATE_CURRENT_POINTER_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "FAIL_CLOSED_MACHINE_VERDICT__TERMINAL_FALSE__FOUR_EXPLICIT_BLOCKERS__ROOT_CAUSE_U_NOT_PROVED_EMPTY__ZERO_CREDIT",
+  "exact_bindings": {
+    "gate": {
+      "path": "canonical/runtime/terminal_reality_gate_v1.py",
+      "git_blob_sha": "3637bebbbb2707e268b4be9da0cb84ef45575b6d"
+    },
+    "pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "d2a271a1850cc98b735879a6d783f75639249778"
+    }
+  },
+  "wolfram_exact_logic_replay": {
+    "terminal_real": false,
+    "declared_terminal": false,
+    "blockers": [
+      "U_NOT_PROVED_EMPTY",
+      "ROUTER_REGISTRY_SELECTED_COVER_INCOMPLETE",
+      "COMPLETE_SELECTED_CONTEXT_ABC_OPEN",
+      "D_FINALITY_OPEN"
+    ],
+    "known_sound_D_B_certificate_record_count": 16,
+    "abc_normal_form": "U_IS_EMPTY"
+  },
+  "causal_interpretation": {
+    "root_live_abc_condition": "U_IS_EMPTY",
+    "selected_cover_registry_is_downstream_of_sound_real_context_receipts": true,
+    "complete_ABC_is_downstream_of_U_empty": true,
+    "D_finality_runs_after_final_credited_route_set_is_frozen": true,
+    "scheduler_root": "DEPLETE_U_WITH_SCOPE_COMPLETE_SOUND_BRAIN_OWNED_ADEQUACY_OR_DOMINANCE_COVER"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_U_IS_NONEMPTY_AS_A_MATHEMATICAL_FACT_FROM_THIS_GATE_ALONE__ONLY_THAT_U_EMPTY_IS_NOT_PROVED.",
+    "NO_CLAIM_D_CAN_BE_PROMOTED_BEFORE_ABC.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
