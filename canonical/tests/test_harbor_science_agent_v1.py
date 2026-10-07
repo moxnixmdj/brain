@@ -19,6 +19,8 @@ class Env:
         self.commands.append(command)
         if command == "verify-bad":
             return Receipt(1, "", "bad")
+        if command == "work-heredoc-warning":
+            return Receipt(0, "", "bash: line 22: warning: here-document at line 1 delimited by end-of-file wanted PYEOF")
         return Receipt(0, "ok", "")
 
 def planner(outputs):
@@ -92,6 +94,20 @@ class ScienceAgentTests(unittest.TestCase):
         self.assertFalse(result["model_has_terminal_authority"])
         self.assertNotEqual(result["summary"],"premature-substrate-finish")
         self.assertEqual(result["trace"][0]["kind"],"FINISH_REJECTED")
+
+    def test_zero_exit_shell_truncation_warning_blocks_verification_and_coverage(self):
+        env,result=self.run_goal([{
+            "material_requirements":["R1"],
+            "candidates":[
+                {"action_id":"a","covers":["R1"],"command":"work-heredoc-warning","verify_command":"echo verify"}
+            ]
+        }])
+        self.assertEqual(env.commands,["work-heredoc-warning"])
+        self.assertNotEqual(result["status"],"FINISHED")
+        self.assertEqual(result["resolved_requirements"],[])
+        self.assertFalse(result["trace"][0]["action_transport_clean"])
+        self.assertFalse(result["trace"][0]["coverage_promoted"])
+        self.assertIsNone(result["trace"][0]["verify_result"])
 
     def test_failed_verify_does_not_promote_coverage_or_finish(self):
         env,result=self.run_goal([
