@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_SHARED_RESIDUAL_RECONCILIATION_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "STRUCTURAL_SOURCE_BINDING_PASS__SHARED_AA_BRIEFCASE_RESIDUAL_CONFIRMED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/AA_BRIEFCASE_SHARED_RESIDUAL_RECONCILIATION_20261007_V1.json",
+    "git_blob_sha": "2ec5e65558f7f622d8ab486068a8ebf4ce39bd3e",
+    "branch": "aa-briefcase-shared-residual-reconciliation-v1"
+  },
+  "source_blobs": {
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "predicates": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    }
+  },
+  "verified": {
+    "artifact_protocol_contains_aa_briefcase_1822": true,
+    "professional_work_protocol_contains_aa_briefcase_1822": true,
+    "professional_work_protocol_contains_gdpval_1846": true,
+    "artifact_mechanical_ceiling_proved_scope_complete": true,
+    "artifact_uncovered_scope_audit_proved_scope_complete": true,
+    "artifact_scope_audit_explicitly_partitions_remaining_quality_to_aa_briefcase": true,
+    "candidate_zero_credit": true
+  },
+  "consequence": "AA_BRIEFCASE_V1_1_GE_1822_OR_STRONGER_IS_ONE_SHARED_SURVIVING_RESIDUAL_ACROSS_ARTIFACT_CREATION_AND_PROFESSIONAL_KNOWLEDGE_WORK__ARTIFACT_MECHANICAL_OR_UNCOVERED_FORMAT_WORK_MUST_NOT_BE_REOPENED_WITHOUT_COUNTEREVIDENCE_OR_SCOPE_DRIFT.",
+  "hard_nonclaims": [
+    "NO_AA_BRIEFCASE_PASS",
+    "NO_ARTIFACT_FAMILY_CLOSURE",
+    "NO_PROFESSIONAL_WORK_FAMILY_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
