@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_V4_POLICY_ADEQUACY_AUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SOUNDNESS_REPAIR__V4_SOURCE_ENTAILMENT_PRESERVED__UNAUTHENTICATED_POLICY_PROMOTION_REVOKED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "defect": {
+    "runtime": "canonical/runtime/proof_carrying_semantic_refinement_v4.py",
+    "statement": "V4_DIRECTLY_EXPOSED_THE_RAW_MONOTONE_RESOLVER_COMMON_POLICY_CERTIFIED_STATUS_WITHOUT_REUSING_THE_CONTENT_ADDRESSED_POLICY_ADEQUACY_AUTHENTICATION_BOUNDARY_ADDED_TO_V3.",
+    "consequence": "AN_ENTAILED_CALLER_SUPPLIED_FORMULA_COULD_BE_MISREPRESENTED_AS_PROOF_THAT_THE_NAMED_POLICY_IS_ADEQUATE."
+  },
+  "repair": {
+    "source_proof_v4_preserved": true,
+    "controlled_typed_unless_condition_proof_preserved": true,
+    "status_without_adequacy_auth": "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED",
+    "status_with_exact_authenticated_adequacy": "COMMON_POLICY_CERTIFIED",
+    "reused_auth_boundary": "canonical/runtime/proof_carrying_semantic_refinement_v3.py::_authenticate_policy_adequacy"
+  },
+  "revocation": [
+    "REVOKE_ANY_V4_COMMON_POLICY_CERTIFICATION_DERIVED_ONLY_FROM_POLICY_CONDITION_ENTAILMENT_WITHOUT_AN_EXACT_BRAIN_OWNED_ADEQUACY_CERTIFICATE_AND_INDEPENDENT_VERIFICATION_RECEIPT.",
+    "DO_NOT_REVOKE_THE_UNDERLYING_SOURCE_ALIGNED_CONDITION_ATOM_OR_TYPED_CONTEXT_PROOF.",
+    "DO_NOT_PROMOTE_THE_CONTROLLED_TYPED_UNLESS_FINANCE_SUBREGION_TO_D_B_UNTIL_BRANCH_POLICY_ADEQUACY_IS_AUTHENTICATED."
+  ],
+  "current_finance_boundary": {
+    "source_scope_certified": true,
+    "typed_condition_truth_certifiable": true,
+    "source_derived_evidence_roles_available": true,
+    "policy_adequacy_authentication_required": true,
+    "typed_context_digest_authority_required": true,
+    "finance_tail_closed": false
+  },
+  "hard_nonclaims": [
+    "NO_FINANCE_SUBREGION_D_B_CREDIT_FROM_THIS_REPAIR",
+    "NO_CLAIM_POLICY_ADEQUACY_CERTIFICATES_ALREADY_EXIST_FOR_THE_LIVE_FINANCE_BRANCH_POLICIES",
+    "NO_CLAIM_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
