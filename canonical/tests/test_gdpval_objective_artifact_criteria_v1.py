@@ -3,7 +3,7 @@ import wave
 import zipfile
 from pathlib import Path
 
-import gdpval_objective_artifact_criteria_v1 as m
+from canonical.runtime import gdpval_objective_artifact_criteria_v1 as m
 
 
 def test_exact_filename():
@@ -74,6 +74,17 @@ def test_single_docx_validity_required():
         doc.add_paragraph("action items")
         doc.save(p)
         assert m.verify_compiled(c, d)["pass"] is True
+
+
+def test_corrupt_docx_fails_native_reopen():
+    c = m.compile_criterion(
+        "Exactly one action-items document is provided in Word (.docx) format."
+    )
+    with tempfile.TemporaryDirectory() as d:
+        (Path(d) / "x.docx").write_bytes(b"not-a-docx")
+        verdict = m.verify_compiled(c, d)
+        assert verdict["pass"] is False
+        assert "CHECK_FAILED:EXACT_TOP_LEVEL_FILE_COUNT_BY_EXTENSION" in verdict["errors"]
 
 
 def test_wrong_extension_or_extra_conjunct_not_accepted():
