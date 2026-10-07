@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_INTRINSIC_BAR_PROPAGATION_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__STALE_FIXED_DEPLOYED_SCORE_PROXY_REMOVED__INTRINSIC_TARGET_RESIDUAL_PRESERVED__ZERO_CREDIT",
+  "pass": true,
+  "subject": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "87a48c1c4adc90fd00be7f5e0395a1a2df8270d0"
+  },
+  "evidence": [
+    {
+      "path": "canonical/governance/MYSTERYMECHANISM_FALLBACK_ATTRIBUTION_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "40b4f0deadf1d8f3e392cbb026cdd791005c0e47"
+    },
+    {
+      "path": "canonical/verification/MYSTERYMECHANISM_FALLBACK_ATTRIBUTION_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "d6fd272c59188a5296d84a6a10dcacbcc70ef1f1"
+    }
+  ],
+  "checks": {
+    "stale_fixed_bar_token_absent": true,
+    "live_scheduler_residual_repaired": true,
+    "abc_frontier_residual_repaired": true,
+    "deployed_49_55_not_intrinsic": true,
+    "fallback_49_10_not_global": true,
+    "canonical_repair_invalidates_49_55": true,
+    "canonical_repair_rejects_49_10_global": true,
+    "arithmetic_verification_pass": true,
+    "terminal_still_false": true,
+    "u_empty_still_unproved": true
+  },
+  "errors": [],
+  "resulting_residual": "INTRINSIC_OPUS55_UNKNOWN_MECHANISM_NONINFERIORITY_OR_STRONGER",
+  "hard_nonclaims": [
+    "NO_UNKNOWN_DOMAIN_FAMILY_CLOSURE",
+    "NO_MYSTERYMECHANISM_BRAIN_SCORE_CLAIM",
+    "NO_CLAIM_49_10_IS_GLOBAL_INTRINSIC_TARGET",
+    "NO_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
