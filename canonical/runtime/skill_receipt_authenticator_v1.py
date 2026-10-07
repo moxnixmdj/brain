@@ -11,6 +11,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any, Mapping
+import re
 
 from canonical.runtime.effect_broker_receipt_resolver_v2 import resolve_receipt_bytes
 
@@ -20,6 +21,9 @@ EPISODE_VERIFY_SCHEMA = "PROJECT_BRAIN_SKILL_EPISODE_INDEPENDENT_VERIFICATION_V1
 CANDIDATE_SCHEMA = "PROJECT_BRAIN_SKILL_CANDIDATE_RECEIPT_V1"
 CANDIDATE_VERIFY_SCHEMA = "PROJECT_BRAIN_SKILL_CANDIDATE_INDEPENDENT_VERIFICATION_V1"
 RELATIONS = {"EXACT", "PROVEN_SUPERSET"}
+_SHA40 = re.compile(r"^[0-9a-f]{40}$")
+_SHA256 = re.compile(r"^(?:sha256:)?[0-9a-f]{64}$")
+PUBLIC_RUNNER_REPOSITORY = "moxnixmdj/verification-capsule-runner"
 
 
 class SkillReceiptError(ValueError):
@@ -30,6 +34,44 @@ def _token(value: Any, label: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise SkillReceiptError(label + "_INVALID")
     return value.strip()
+
+
+
+
+def _public_runner_provenance(doc: Mapping[str, Any], *, label: str) -> dict[str, Any]:
+    pr = doc.get("public_runner")
+    if not isinstance(pr, Mapping):
+        raise SkillReceiptError(label + "_PUBLIC_RUNNER_PROVENANCE_MISSING")
+    if pr.get("repository") != PUBLIC_RUNNER_REPOSITORY:
+        raise SkillReceiptError(label + "_PUBLIC_RUNNER_REPOSITORY_INVALID")
+    for key in ("workflow_run_id", "workflow_job_id", "artifact_id"):
+        value = pr.get(key)
+        if not isinstance(value, int) or isinstance(value, bool) or value <= 0:
+            raise SkillReceiptError(label + "_PUBLIC_RUNNER_" + key.upper() + "_INVALID")
+    head = pr.get("execution_head_sha")
+    if not isinstance(head, str) or _SHA40.fullmatch(head) is None:
+        raise SkillReceiptError(label + "_PUBLIC_RUNNER_EXECUTION_HEAD_INVALID")
+    digest = pr.get("artifact_digest")
+    if not isinstance(digest, str) or _SHA256.fullmatch(digest) is None:
+        raise SkillReceiptError(label + "_PUBLIC_RUNNER_ARTIFACT_DIGEST_INVALID")
+    if pr.get("conclusion") != "success":
+        raise SkillReceiptError(label + "_PUBLIC_RUNNER_NOT_SUCCESS")
+    verifier_path = pr.get("verifier_path")
+    verifier_blob = pr.get("verifier_git_blob_sha")
+    if not isinstance(verifier_path, str) or not verifier_path.strip():
+        raise SkillReceiptError(label + "_PUBLIC_RUNNER_VERIFIER_PATH_INVALID")
+    if not isinstance(verifier_blob, str) or _SHA40.fullmatch(verifier_blob) is None:
+        raise SkillReceiptError(label + "_PUBLIC_RUNNER_VERIFIER_BLOB_INVALID")
+    return {
+        "repository": PUBLIC_RUNNER_REPOSITORY,
+        "workflow_run_id": pr["workflow_run_id"],
+        "workflow_job_id": pr["workflow_job_id"],
+        "execution_head_sha": head,
+        "artifact_id": pr["artifact_id"],
+        "artifact_digest": digest,
+        "verifier_path": verifier_path.strip(),
+        "verifier_git_blob_sha": verifier_blob,
+    }
 
 
 def authenticate_episode_receipt(
@@ -63,6 +105,7 @@ def authenticate_episode_receipt(
     if vd.get("pass") is not True:
         raise SkillReceiptError("EPISODE_VERIFY_NOT_PASS")
     verifier_id = _token(vd.get("verifier_id"), "EPISODE_VERIFIER_ID")
+    provenance = _public_runner_provenance(vd, label="EPISODE")
 
     return {
         "independent_verified": True,
@@ -78,6 +121,7 @@ def authenticate_episode_receipt(
         "verification_path": verify["path"],
         "verification_git_blob_sha": verify["git_blob_sha"],
         "verifier_id": verifier_id,
+        "public_runner_provenance": provenance,
     }
 
 
@@ -124,6 +168,7 @@ def authenticate_candidate_receipt(
     if vd.get("pass") is not True:
         raise SkillReceiptError("CANDIDATE_VERIFY_NOT_PASS")
     verifier_id = _token(vd.get("verifier_id"), "CANDIDATE_VERIFIER_ID")
+    provenance = _public_runner_provenance(vd, label="CANDIDATE")
 
     return {
         "independent_verified": True,
@@ -139,4 +184,5 @@ def authenticate_candidate_receipt(
         "verification_path": verify["path"],
         "verification_git_blob_sha": verify["git_blob_sha"],
         "verifier_id": verifier_id,
+        "public_runner_provenance": provenance,
     }
