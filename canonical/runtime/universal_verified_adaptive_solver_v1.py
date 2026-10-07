@@ -45,6 +45,11 @@ from canonical.runtime.universal_solver_state_capsule_v1 import (
     append_verified_transition as append_state_transition,
     verify_targets as verify_state_targets,
 )
+from canonical.runtime.general_cognition_proposal_packet_v1 import (
+    SCHEMA as PROPOSAL_PACKET_SCHEMA,
+    make_request as make_proposal_request,
+    unwrap as unwrap_proposal_packet,
+)
 
 SCHEMA = "PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V1"
 
@@ -294,6 +299,41 @@ def _verify_source_aligned_acceptance_program(payload: Mapping[str, Any], propos
     }
 
 
+
+
+def _proposal_context(
+    verifier_id: str,
+    payload: Mapping[str, Any],
+    action: Mapping[str, Any],
+) -> dict[str, Any]:
+    explicit = action.get("proposal_context")
+    if isinstance(explicit, Mapping):
+        return dict(explicit)
+    if verifier_id == "TYPED_ACCEPTANCE_PROGRAM_V1":
+        return {
+            "program": payload.get("program"),
+            "trusted_values": payload.get("trusted_values"),
+        }
+    if verifier_id == "INSTRUCTION_CONSTRAINTS_V1":
+        return {"instruction": payload.get("instruction")}
+    if verifier_id == "SOURCE_ALIGNED_ACCEPTANCE_PROGRAM_V1":
+        return {
+            "source_text": payload.get("source_text"),
+            "source_id": payload.get("source_id"),
+            "field_schema": payload.get("field_schema"),
+        }
+    if verifier_id == "SOURCE_ALIGNED_SEMANTIC_POLICY_V6":
+        return {
+            "source_text": payload.get("source_text"),
+            "source_id": payload.get("source_id"),
+            "decision_basis": payload.get("decision_basis"),
+            "policy_ids": sorted((payload.get("policy_conditions") or {}).keys()),
+        }
+    if verifier_id == "EXACT_JSON_V1":
+        return {"proposal_shape": {"candidate": "UNTRUSTED_VALUE"}}
+    return {"verifier_id": verifier_id}
+
+
 Verifier = Callable[[Mapping[str, Any], Mapping[str, Any]], dict[str, Any]]
 
 BUILTIN_VERIFIERS: dict[str, Verifier] = {
@@ -405,6 +445,7 @@ def run(
         if set(target) & set(current):
             raise UniversalSolverError("TARGET_EFFECT_MAY_NOT_BE_SELF_ASSERTED_AS_INITIAL_FACT")
         proposals = proposal_packets if isinstance(proposal_packets, Mapping) else {}
+        task_contract_sha256 = _digest(problem)
         state_capsule = initialize_state_capsule(problem)
 
         trace: list[dict[str, Any]] = []
@@ -486,8 +527,15 @@ def run(
                 verifier = BUILTIN_VERIFIERS[verifier_id]
                 payload = action["verifier_payload"]
 
+            proposal_request = make_proposal_request(
+                task_contract_sha256=task_contract_sha256,
+                capability_id=cid,
+                action_contract_sha256=_digest(action),
+                verifier_id=verifier_id,
+                proposal_context=_proposal_context(verifier_id, payload, action),
+            )
             packets = proposals.get(cid)
-            proposal_source = "EXTERNAL_OR_GENERAL_SUBSTRATE"
+            proposal_source = "UNBOUND_EXTERNAL_PROPOSAL"
             if verifier_id in PROPOSAL_FREE_VERIFIERS:
                 packets = [{}]
                 proposal_source = "DETERMINISTIC_PROPOSAL_FREE_ROUTE"
@@ -553,6 +601,7 @@ def run(
                     "trace": trace,
                     "rejected_proposals": rejected,
                     "proposal_has_authority": False,
+                    "proposal_request": proposal_request,
                     "proposal_searches": proposal_searches,
                     "terminal_authority": False,
                 }
@@ -567,20 +616,40 @@ def run(
                 if not isinstance(packet, Mapping):
                     rejected.append({"capability_id": cid, "packet_index": i, "reason": "PROPOSAL_NOT_OBJECT"})
                     continue
-                verdict = verifier(payload, packet)
+                actual_packet = packet
+                packet_sha256 = None
+                packet_source_id = None
+                if packet.get("schema") == PROPOSAL_PACKET_SCHEMA:
+                    try:
+                        unwrapped = unwrap_proposal_packet(packet, request=proposal_request)
+                    except Exception as exc:
+                        rejected.append({
+                            "capability_id": cid,
+                            "packet_index": i,
+                            "reason": "PROPOSAL_PACKET_BINDING_FAILED:" + type(exc).__name__ + ":" + str(exc),
+                        })
+                        continue
+                    actual_packet = unwrapped["proposal"]
+                    packet_sha256 = unwrapped["packet_sha256"]
+                    packet_source_id = unwrapped["source_id"]
+                    proposal_source = "GENERAL_COGNITION_SUBSTRATE:" + packet_source_id
+                verdict = verifier(payload, actual_packet)
                 record = {
                     "cycle": cycle,
                     "capability_id": cid,
                     "verifier_id": verifier_id,
                     "action_contract_sha256": _digest(action),
                     "packet_index": i,
-                    "proposal_sha256": _digest(packet),
+                    "proposal_sha256": _digest(actual_packet),
                     "proposal_source": proposal_source,
+                    "proposal_request_sha256": proposal_request.get("request_sha256"),
+                    "proposal_packet_sha256": packet_sha256,
+                    "proposal_source_id": packet_source_id,
                     "verdict_status": verdict.get("status"),
                     "proof_digest": verdict.get("proof_digest"),
                 }
                 if verdict.get("pass") is True:
-                    accepted = (i, packet, verdict, record)
+                    accepted = (i, actual_packet, verdict, record)
                     break
                 rejected.append({
                     **record,
