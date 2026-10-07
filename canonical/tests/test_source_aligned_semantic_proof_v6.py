@@ -19,7 +19,7 @@ def facts(value="130.00"):
     }, separators=(",", ":"))
 
 
-def test_raw_fact_source_selects_exception_policy_without_expected_digest_input():
+def test_raw_fact_source_entailment_is_not_self_certified_as_adequate():
     claim = {
         "claim_id": "raw",
         "kind": "CERTIFIED_DEFINED_TERM_RAW_TYPED_CONDITION",
@@ -51,7 +51,7 @@ def test_raw_fact_source_selects_exception_policy_without_expected_digest_input(
     assert out["certified_common_policies"] == []
 
 
-def test_raw_fact_source_below_threshold_selects_ordinary_policy():
+def test_raw_fact_source_below_threshold_is_not_self_certified_as_adequate():
     claim = {
         "claim_id": "raw",
         "kind": "CERTIFIED_DEFINED_TERM_RAW_TYPED_CONDITION",
