@@ -1,11 +1,12 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34_CONNECTOR_VERIFICATION_V1",
   "date": "2026-10-07",
-  "status": "PASS__EXACT_SOURCE_BINDINGS__ADAPTIVE_TERMINAL_OR_PROGRESS_AND_COMPLEMENT_CLOSURE_BOUND__TERMINAL_FALSE",
+  "status": "PASS__EXACT_SOURCE_BINDINGS_ONLY__ADAPTIVE_TERMINAL_OR_PROGRESS_AND_COMPLEMENT_CLOSURE_MACHINERY_BOUND__TERMINAL_FALSE",
   "subject": {
     "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
     "git_blob_sha": "f41f9b89385e8e60becc5e5bcc6f4e1b891a6799"
   },
+  "verification_scope": "VERIFY_EXACT_SOURCE_BINDINGS_AND_POINTER_STATE_ONLY__DO_NOT_PROMOTE_UNPROVED_CLOSURE_PREMISES",
   "exact_sources": {
     "adaptive_theorem": "2d1cbc9022455ec980892c025e86580a0b38852d",
     "adaptive_wolfram_repair_verification": "74d88fc722dbd10ccab812f0b0e11b514346307a",
@@ -22,16 +23,16 @@
     "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34",
     "adaptive_terminal_or_progress_cover_theorem_bound": true,
     "terminal_policy_safety_premise_bound": true,
-    "total_sound_alpha_gamma_bound": true,
-    "global_well_founded_rank_bound": true,
-    "global_resource_potential_bound": true,
-    "total_terminal_or_progress_cover_bound": true,
-    "selected_cover_complement_unsat_proved": true,
-    "generator_basis_scope_complete_proved": true,
-    "current_U_empty_proved": true,
-    "complete_selected_context_ABC_closed": true,
-    "D_finality_closed": true,
-    "terminal": true
+    "total_sound_alpha_gamma_bound": false,
+    "global_well_founded_rank_bound": false,
+    "global_resource_potential_bound": false,
+    "total_terminal_or_progress_cover_bound": false,
+    "selected_cover_complement_unsat_proved": false,
+    "generator_basis_scope_complete_proved": false,
+    "current_U_empty_proved": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
   },
   "boundary": [
     "THE_THEOREM_AND_GATES_ARE_BOUND_MACHINERY_NOT_CLOSURE_EVIDENCE",
