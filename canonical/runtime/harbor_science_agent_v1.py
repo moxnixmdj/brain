@@ -7,6 +7,7 @@ coverage state, and finish authority. No benchmark-specific task content lives h
 from __future__ import annotations
 
 import json
+import re
 from typing import Any
 
 from canonical.runtime import harbor_science_planner_v1 as science_planner
@@ -31,6 +32,35 @@ MAX_CYCLES = 12
 MAX_REQUIREMENTS = 16
 MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
+
+_TRIVIAL_VERIFY_RE = re.compile(
+    r"^\\s*(?:(?:echo|printf)\\b.*|true|:)\\s*$",
+    re.IGNORECASE | re.DOTALL,
+)
+_MATERIAL_VERIFY_TOKENS = (
+    "test ", "[ ", "[[ ", "python", "pytest", "grep ", "jq ", "cmp ",
+    "diff ", "sha256sum", "stat ", "find ", "cat ",
+)
+_FATAL_OUTPUT_MARKERS = (
+    "warning: here-document",
+    "no such file or directory",
+    "traceback (most recent call last)",
+    "syntaxerror",
+    "command not found",
+)
+
+def _verify_command_is_material(command: str) -> bool:
+    raw = str(command or "").strip()
+    if not raw or _TRIVIAL_VERIFY_RE.fullmatch(raw):
+        return False
+    lower = raw.lower()
+    return any(token in lower for token in _MATERIAL_VERIFY_TOKENS)
+
+def _output_has_fatal_marker(observed: dict[str, Any]) -> bool:
+    combined = (
+        str(observed.get("stdout") or "") + "\\n" + str(observed.get("stderr") or "")
+    ).lower()
+    return any(marker in combined for marker in _FATAL_OUTPUT_MARKERS)
 
 def _nonempty_strings(value: Any, *, maximum: int, field: str) -> list[str]:
     if not isinstance(value, list) or not value or len(value) > maximum:
@@ -121,9 +151,11 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "git fetch/clone/pull, secrets, or host escape. "
             "On the first cycle provide material_requirements (1-16 stable short IDs). "
             "Provide 1-8 candidate actions as {action_id,covers,command,verify_command}. "
-            "covers must name only frozen material_requirements. verify_command must independently test the "
-            "candidate's claimed effect inside the task environment. Brain alone decides completion after "
-            "independent verification resolves every frozen material requirement. finish_summary is optional "
+            "covers must name only frozen material_requirements. verify_command must materially inspect or test the "
+            "candidate's claimed effect inside the task environment; trivial exit-zero checks such as echo/printf/true "
+            "are rejected and action/verification output anomalies fail closed. These controller checks are action-control "
+            "evidence only, never benchmark acceptance evidence. Brain alone decides completion after controller checks "
+            "resolve every frozen material requirement. finish_summary is optional "
             "descriptive metadata only and never execution or finish authority. "
             f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
             "Recent observations: " + json.dumps(observations[-4:], sort_keys=True)[:12000]
@@ -198,14 +230,26 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         }
         verify_observed = None
         verified = False
-        if action_receipt.returncode == 0:
+        verification_block_reason = None
+        if action_receipt.returncode != 0:
+            verification_block_reason = "ACTION_NONZERO"
+        elif _output_has_fatal_marker(action_observed):
+            verification_block_reason = "ACTION_OUTPUT_ANOMALY"
+        elif not _verify_command_is_material(chosen["verify_command"]):
+            verification_block_reason = "TRIVIAL_OR_NONOBSERVING_VERIFY_COMMAND"
+        else:
             verify_receipt = await transport.exec(chosen["verify_command"], timeout_sec=180)
             verify_observed = {
                 "returncode": verify_receipt.returncode,
                 "stdout": verify_receipt.stdout[-MAX_OUTPUT_CHARS:],
                 "stderr": verify_receipt.stderr[-MAX_OUTPUT_CHARS:],
             }
-            verified = verify_receipt.returncode == 0
+            if verify_receipt.returncode != 0:
+                verification_block_reason = "VERIFY_NONZERO"
+            elif _output_has_fatal_marker(verify_observed):
+                verification_block_reason = "VERIFY_OUTPUT_ANOMALY"
+            else:
+                verified = True
         if verified:
             resolved.update(chosen["covers"])
         record = {
@@ -217,6 +261,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "action_result": action_observed,
             "verify_result": verify_observed,
             "coverage_promoted": verified,
+            "verification_block_reason": verification_block_reason,
         }
         trace.append(record)
         observations.append(record)
@@ -235,7 +280,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                 "resolved_requirements": sorted(resolved),
                 "cycles": cycle + 1,
                 "trace": trace,
-                "summary": "Brain independently verified all frozen material requirements.",
+                "summary": "Brain controller checks passed for all frozen material requirements; benchmark acceptance remains external to this controller.",
                 "planner_model_last": planned.get("model"),
             }
 
