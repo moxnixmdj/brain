@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-TERMINAL-KSTAR-ONE-SHOT-20261007-V1",
+  "purpose": "One-shot first-principles terminal compilation: compile, falsify and prove K* from the entire owned Brain before any promotion.",
+  "goal": "Compile and prove the single terminal object K* rather than treating U_EMPTY, the 13 acceptance obligations, or the existing route partition as the mission. K* is one Brain-owned generative capability system K*=(B,T,PI,A,R): B is the minimum reusable owned capability basis already present in the canonical Brain; T is the set of verified adequacy-preserving composition/transformation operators; PI is a total context policy selecting a Brain-owned equal-or-better composition for every terminally useful Opus-5.5 context; A is proof-carrying adequacy for the selected composition; R is the executable runtime binding implementing PI using already-owned Brain mechanisms. Use ALL current canonical Brain capability/evidence data that can materially strengthen or falsify this construction. Search/reuse before invention. Treat CURRENT_PRIMITIVE_U_FRONTIER, the selected-discriminator policy-cover bridge, universal adaptive solver, adaptive induction gate, authenticated positive-cover compiler, certificate-gated runtime entrypoint, all 19 family partitions, all 13 independent acceptance obligations, and O/Q/C/F/G only as proof/falsification machinery. Do not optimize inside their decomposition if a deeper generator theorem subsumes them.\n\nWithin this single execution perform the complete precommit tournament: derive the smallest B/T/PI/A/R candidate; prove scope completeness of the useful observable-trace envelope; prove every transform actually used preserves all load-bearing acceptance/safety/authority semantics; prove PI is total on the useful scope; prove every selected route is Brain-owned or already admissibly internalized; attack the candidate with every currently bound acceptance partition, semantic ambiguity, policy-divergence witness, objective/professional/coding/finance/GDPval falsifier and composition counterexample; repair by reuse/composition only when the repair is sound. A missing benchmark result is not a capability failure. If two surviving worlds need different policies, use only a truthful precommitment discriminator that leads exclusively to certified adequate policies. No self-certification and no inference from failed search to completeness.\n\nThe only successful outcome is a scope-complete universal proof. On success write canonical/astra_runtime/artifacts/TERMINAL_KSTAR_RESULT_20261007_V1.json with EXACT schema PROJECT_BRAIN_TERMINAL_KSTAR_RESULT_V1 and top-level fields: outcome='SCOPE_COMPLETE_PROOF'; proof_kind exactly one of FULL_SCOPE_DB_COVER, TARGET_ESCAPE_NONOCCUPANCY, GENERATOR_CLOSURE_SCOPE_COMPLETE, SELECTED_COVER_COMPLEMENT_UNSAT; scope_id='scope://opus55/observable-trace'; conclusion='success'; observable_trace_scope_complete=true; all_useful_target_behaviors_in_scope=true; every_admission_sound=true; residual_complement_unsat=true; selected_cover_complete=true; u_empty=true; abc_closed=true; all_credited_routes_brain_owned=true; basis_complete=true; transforms_adequacy_preserving=true; universal_policy_total=true; generated_basis as a nonempty array; transforms as an array; policy as a structured object; runtime_binding as {path,git_blob_sha} for the exact Brain-owned executable entrypoint/composition actually selected; source_bindings as a nonempty array of exact {path,git_blob_sha} bindings including canonical/governance/CURRENT_TERMINAL_AUTHORITY.json, canonical/governance/TERMINAL_ARCHITECTURE_SELF_TOURNAMENT_20261007_V1.json, canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json, canonical/governance/SELECTED_DISCRIMINATOR_POLICY_COVER_BRIDGE_20261007_V1.json, and canonical/runtime/terminal_closure_reducer.py; falsification as structured evidence of strongest counterexamples and closure; unresolved=[]; incremental_spend_usd=0; terminal_credit_claim=false. Do not assert donor_independence_closed or clean_room_replay_pass; the promotion bridge derives common finality from canonical evidence.\n\nIf scope-complete proof is not established, write the same result path with schema PROJECT_BRAIN_TERMINAL_KSTAR_RESULT_V1, outcome='UNRESOLVED', conclusion='unresolved', u_empty=false, abc_closed=false, terminal_credit_claim=false, and the mathematically smallest constructive residual witness plus exact missing premise. Never edit terminal authority, terminal closure manifest, or mint promotion/terminal credit. Print COMPOUND_GOAL_COMPLETE only after the result file is durably written.",
+  "steps": [
+    {
+      "id": "terminal-kstar-one-shot",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 256,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "fresh_mission_identity": true,
+    "manual_supplier": false,
+    "manual_package_name": false,
+    "manual_capability_id": false,
+    "required_target_effects_supplied_by_mission": false,
+    "semantic_goal_proposals_supplied_by_mission": false,
+    "capability_problem_proposal_supplied_by_mission": false,
+    "controller_actions_supplied_by_mission": false,
+    "originating_mission_must_remain_byte_identical": true,
+    "verified_acquisition_required_before_replan": true,
+    "implementation_independent_verifier_required": true,
+    "current_platform_capability_required": true,
+    "terminal_verifier_must_use_distinct_implementation": true,
+    "user_device_required": false,
+    "val_town_forbidden": true
+  }
+}

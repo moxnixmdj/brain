@@ -1,0 +1,13 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+  "task_id": "SI-TERMINAL-KSTAR-ONE-SHOT-20261007-V1",
+  "agent_id": "SUPERWORKER-TERMINAL-KSTAR",
+  "priority": 1000000,
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_TERMINAL_KSTAR_ONE_SHOT_20261007_V1.json",
+  "mission_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "prerequisites": [
+    "canonical/governance/TERMINAL_KSTAR_ONE_SHOT_EXECUTION_LOCK_20261007_V1.json"
+  ],
+  "checkpoint_before_runtime_once": false,
+  "incremental_spend_usd": 0
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+  "task_id": "SI-TERMINAL-KSTAR-VERIFY-20261007-V1",
+  "agent_id": "SUPERWORKER-TERMINAL-KSTAR-VERIFY",
+  "priority": 1000000,
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_TERMINAL_KSTAR_VERIFY_20261007_V1.json",
+  "mission_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "prerequisites": [
+    "canonical/astra_runtime/artifacts/TERMINAL_KSTAR_RESULT_20261007_V1.json"
+  ],
+  "checkpoint_before_runtime_once": false,
+  "incremental_spend_usd": 0
+}

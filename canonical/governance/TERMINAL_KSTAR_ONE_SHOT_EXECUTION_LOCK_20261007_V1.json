@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_KSTAR_ONE_SHOT_EXECUTION_LOCK_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_EXECUTION_LOCK__KSTAR_COMPILE_VERIFY_ATOMIC_PROMOTION__ZERO_CREDIT_UNTIL_REDUCER_TRUE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "first_principles_object": {
+    "name": "K_STAR",
+    "definition": "ONE_BRAIN_OWNED_GENERATIVE_CAPABILITY_SYSTEM_COMPRISING_A_MINIMAL_VERIFIED_BASIS_B__ADEQUACY_PRESERVING_TRANSFORMS_T__TOTAL_CONTEXT_POLICY_PI__PROOF_CARRYING_ADEQUACY_A__AND_EXECUTABLE_RUNTIME_BINDING_R",
+    "terminal_condition": "FOR_EVERY_TERMINALLY_USEFUL_OPUS55_CONTEXT_C__PI_C_SELECTS_A_BRAIN_OWNED_EQUAL_OR_BETTER_ROUTE_IN_CLOSURE_B_T_WITH_SOUND_ADEQUACY_PROOF__COMMON_FINALITY_THEN_PASSES",
+    "current_U_empty_role": "VERIFICATION_CONSEQUENCE_NOT_PRIMARY_MISSION"
+  },
+  "one_shot_transaction": [
+    "COMPILE_KSTAR_FROM_ALL_ALREADY_OWNED_BRAIN_CAPABILITIES_AND_CURRENT_CANONICAL_EVIDENCE",
+    "FALSIFY_KSTAR_AGAINST_ALL_CURRENT_ACCEPTANCE_PARTITIONS_AND_THE_O_Q_C_F_G_COUNTEREXAMPLE_FAMILIES_INSIDE_THE_SAME_MISSION",
+    "INDEPENDENTLY_REDERIVE_AND_VERIFY_THE_EXACT_KSTAR_RESULT_WITH_A_DISTINCT_WORKER_IDENTITY",
+    "FAIL_CLOSED_UNLESS_SCOPE_COMPLETENESS__ADEQUACY_PRESERVATION__TOTAL_POLICY__OWNERSHIP__AND_ZERO_RESIDUAL_COMPLEMENT_ARE_ALL_PROVED",
+    "BYTE_BIND_THE_VERIFIED_RESULT_INTO_THE_EXISTING_UNIVERSAL_COVER_INTERFACE",
+    "FREEZE_THE_PROOF_BUNDLE__RUN_THE_EXISTING_TERMINAL_REDUCER__AND_ISSUE_A_TERMINAL_CERTIFICATE_IFF_REDUCER_ACHIEVED_TRUE"
+  ],
+  "source_bindings": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "0cab18a7c3c2b10221cb0a269671f4d374010534"
+    },
+    "terminal_architecture": {
+      "path": "canonical/governance/TERMINAL_ARCHITECTURE_SELF_TOURNAMENT_20261007_V1.json",
+      "git_blob_sha": "70999148eeb9b7f7c1ad3eabbffb7002cb58e52e"
+    },
+    "primitive_u_frontier": {
+      "path": "canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json",
+      "git_blob_sha": "add5479dc360fb9a57edb045ae22df6cf5d40b86"
+    },
+    "selected_discriminator_bridge": {
+      "path": "canonical/governance/SELECTED_DISCRIMINATOR_POLICY_COVER_BRIDGE_20261007_V1.json",
+      "git_blob_sha": "32caf066826ca6ffe37dc7fa2b6b0af2c3fe38be"
+    },
+    "terminal_closure_reducer": {
+      "path": "canonical/runtime/terminal_closure_reducer.py",
+      "git_blob_sha": "27b51e53db5063756ff3046f978c0087fd4a9256"
+    },
+    "terminal_closure_manifest": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "b2aae1b51c445ae466e04737e06806801cdc711e"
+    },
+    "adaptive_solver": {
+      "path": "canonical/runtime/universal_verified_adaptive_solver_v9.py",
+      "git_blob_sha": "659cda15bb956606a023cc9495e4036ce13e19d9"
+    },
+    "adaptive_induction_gate": {
+      "path": "canonical/runtime/adaptive_cover_induction_gate_v1.py",
+      "git_blob_sha": "b6dee2a7f4a123fec6bc999f2be2051adfee2df0"
+    },
+    "positive_cover_compiler": {
+      "path": "canonical/runtime/authenticated_positive_cover_compiler_v1.py",
+      "git_blob_sha": "8f3d1b2990241915083419af468213f38c460bf4"
+    },
+    "runtime_entrypoint": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "git_blob_sha": "ba260cd997adb8df97417e5f03eaf547b5365379"
+    }
+  },
+  "execution": {
+    "generator_mission": "canonical/astra_runtime/missions/ASTRA_TERMINAL_KSTAR_ONE_SHOT_20261007_V1.json",
+    "independent_verifier_mission": "canonical/astra_runtime/missions/ASTRA_TERMINAL_KSTAR_VERIFY_20261007_V1.json",
+    "promotion_bridge": "canonical/runtime/terminal_kstar_promotion_bridge_v1.py",
+    "workflow": ".github/workflows/execute-terminal-kstar-one-shot-v1.yml"
+  },
+  "hard_rules": [
+    "NO_NEW_BROAD_ARCHITECTURE_IF_EXISTING_OWNED_COMPONENTS_COMPOSE_TO_KSTAR",
+    "NO_BENCHMARK_SCORE_HUNT_AS_PRIMARY_WORK",
+    "NO_ACCEPTANCE_OPEN_EQUALS_CAPABILITY_MISSING_INFERENCE",
+    "NO_SELF_CERTIFICATION",
+    "NO_TERMINAL_TRUE_FROM_ABSENCE_OF_COUNTEREXAMPLE",
+    "NO_INCREMENTAL_SPEND",
+    "NO_VAL_TOWN",
+    "NO_USER_DEVICE_DEPENDENCE",
+    "ONLY_THE_TERMINAL_REDUCER_MAY_AUTHORIZE_TERMINAL_CERTIFICATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
