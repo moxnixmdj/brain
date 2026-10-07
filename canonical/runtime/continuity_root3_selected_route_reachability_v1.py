@@ -12,8 +12,8 @@ SUPERVISOR="canonical/runtime/same_identity_supervisor_credited_v1.py"
 LAUNCHER="canonical/runtime/root3_production_astra_launcher_v1.py"
 
 EXPECTED={
-    ENTRY:"72cae0e1a2ff115289673a4f4952fd23c83d7277",
-    ADAPTER:"a5cee8555b79d330e415d71df827c51bd6339644",
+    ENTRY:"af55015eb02f64dfce924b7b0a29cd085ab9de2e",
+    ADAPTER:"e5351b413ce9819da7f8e69589a2ac1547c902fa",
     SUPERVISOR:"47c461f502e840def0c38728e1bfd7c6401cb804",
     LAUNCHER:"3ac42e7be5a391cfda738131ecb0d3d600fa2147",
 }
