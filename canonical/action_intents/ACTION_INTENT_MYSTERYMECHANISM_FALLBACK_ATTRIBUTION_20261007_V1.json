@@ -1,0 +1,13 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_MYSTERYMECHANISM_FALLBACK_ATTRIBUTION_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_PROOF_ONLY__ZERO_CREDIT",
+  "canonical_base_commit": "90792748747546113c229e0aae187290d6fd517f",
+  "action_kind": "TARGET_EVIDENCE_CAUSAL_ATTRIBUTION_REPAIR",
+  "next_falsifier": "FIND PROFILE_SPECIFIC ACTOR_ATTRIBUTED OPUS55 MYSTERYMECHANISM EVIDENCE THAT JUSTIFIES A STRONGER INTRINSIC TARGET BAR OR PROVE A TARGET_FREE FULL_SCOPE UNKNOWN_MECHANISM CERTIFICATE.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
