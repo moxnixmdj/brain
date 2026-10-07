@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_V17_PROFESSIONAL_QUALITY_INFORMATION_CUT_REALITY_WAKE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_INFORMATION_NECESSITY_THEOREM__ZERO_REALITY_FIXED_POINT_REACHED_FOR_CURRENT_BOUND_PROFESSIONAL_QUALITY_PREMISES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "v17_live_frontier": {
+      "path": "canonical/governance/TERMINAL_NOW_V17_LIVE_REBASE_20261007_V1.json",
+      "git_blob_sha": "75b6dd8b7095644f2aeca2c71de4e41d87e0e21b"
+    },
+    "professional_internal_prewave": {
+      "path": "canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json",
+      "git_blob_sha": "89083d0a7039f4e3e9ac0f9fbdd392836eb11f25"
+    },
+    "professional_terminal_binding": {
+      "path": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d"
+    },
+    "artifact_residual_reduction": {
+      "path": "canonical/governance/ARTIFACT_PROFESSIONAL_RESIDUAL_REDUCTION_20261007_V1.json",
+      "git_blob_sha": "afaf6e9c4dfe13873b732d49a468329fc9510ffe"
+    },
+    "bounded_universal_p2_cell": {
+      "path": "canonical/governance/P2_INFORMATION_SAFE_UNIVERSAL_SELECTED_CELL_20261007_V1.json",
+      "git_blob_sha": "0ccc3ecbdbf2636b8f1e7f0daf959a48350cb82e"
+    }
+  },
+  "premises_from_current_bound_truth": {
+    "live_residual": "PROFESSIONAL_QUALITY_OUTSIDE_CACHED_CELLS",
+    "v17_rule": "DIRECT_E2E_OR_TOP_LAW_FIRST__DO_NOT_INFER_OPEN_ENDED_QUALITY_FROM_SYNTHETIC_GENERATOR_OPTIMALITY",
+    "bounded_p2_generator_is_global_scope_equivalent": false,
+    "authoritative_scope_equivalent_now": false,
+    "no_scope_inheritance": true,
+    "unresolved_realistic_dimensions": [
+      "ACTUAL_CURRENT_DRAFT_OR_RENDER_STATE_WITH_CROSS_ARTIFACT_STRUCTURE_AND_LAYOUT",
+      "CONTENT_ANALYSIS_AND_LAYOUT_REVISION_CHOICE_ACROSS_REALISTIC_PROFESSIONAL_DELIVERABLES",
+      "CONCRETE_EDIT_ISSUANCE_AND_NATIVE_FORMAT_PRESERVATION_INTERACTION",
+      "INDEPENDENT_RUBRIC_IMPROVEMENT_VERSUS_MECHANICS_ONLY_BASELINE",
+      "PLAN_ABLATION_AND_RESCUE_ACROSS_FRESH_CROSS_ARTIFACT_TASKS"
+    ],
+    "candidate_visible_information_excludes_gold_quality_outcomes": true,
+    "hidden_evaluator_information_exists_in_terminal_contract": true,
+    "standalone_synthetic_whole_domain_score_forbidden": true
+  },
+  "two_world_information_cut": {
+    "setup": {
+      "visible_observation": "v",
+      "candidate_actions": ["a", "b"],
+      "world_1_hidden_evaluator": "a_STRICTLY_PREFERRED_TO_b",
+      "world_2_hidden_evaluator": "b_STRICTLY_PREFERRED_TO_a",
+      "visible_observation_identical_across_worlds": true,
+      "current_bound_premises_exclude_either_world_for_the_open_realistic_residual": false
+    },
+    "visible_only_policy": "CHOOSE_a_WITH_PROBABILITY_p_AND_b_WITH_PROBABILITY_1_MINUS_p_USING_THE_SAME_p_IN_BOTH_WORLDS",
+    "target_optimal_success": {"world_1": 1, "world_2": 1},
+    "brain_visible_only_success": {"world_1": "p", "world_2": "1-p"},
+    "universal_noninferiority_constraints": [
+      "0_LESS_THAN_OR_EQUAL_p_LESS_THAN_OR_EQUAL_1",
+      "p_GREATER_THAN_OR_EQUAL_1",
+      "1-p_GREATER_THAN_OR_EQUAL_1"
+    ],
+    "feasible": false,
+    "minimax_visible_only_success": "1/2",
+    "minimax_argmax": "p=1/2",
+    "conclusion": "IF_BOTH_WORLDS_REMAIN_ADMISSIBLE_UNDER_THE_BOUND_PREMISES__NO_POLICY_THAT_RECEIVES_ONLY_THE_SHARED_VISIBLE_OBSERVATION_CAN_BE_PROVED_NONINFERIOR_TO_A_WORLD_INFORMED_OPTIMAL_TARGET_IN_BOTH"
+  },
+  "deduction": {
+    "current_zero_reality_bytes_prove_full_professional_quality_universal_dominance": false,
+    "reason": "THE_CURRENT_BOUND_SOURCES_EXPLICITLY_REFUSE_SCOPE_EQUIVALENCE_FROM_THE_SYNTHETIC_P2_CELL_TO_THE_OPEN_REALISTIC_PROFESSIONAL_QUALITY_RESIDUAL__AND_DO_NOT_SUPPLY_A_STRUCTURAL_LAW_EXCLUDING_OPPOSED_HIDDEN_QUALITY_WORLDS_ON_THAT_RESIDUAL",
+    "required_next_information_class": "EITHER_A_NEW_SOUND_SCOPE_RESTRICTION_OR_SCOPE_COMPLETE_DIRECT_E2E_TOP_LAW_CERTIFICATE_THAT_EXCLUDES_THE_COUNTERMODEL__OR_MINIMUM_NEW_EVALUATOR_TARGET_INFORMATION_THAT_DISTINGUISHES_THE_SURVIVING_WORLD_FIBER",
+    "repeating_current_bounded_p2_generator_proofs_can_change_this_deduction": false
+  },
+  "scheduler_effect": {
+    "delete": [
+      "MORE_ZERO_REALITY_REPROOFS_OF_THE_ALREADY_UNIVERSAL_BOUNDED_P2_GENERATOR_AS_A_ROUTE_TO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+      "INFER_REALISTIC_PROFESSIONAL_QUALITY_FROM_SYNTHETIC_GENERATOR_OPTIMALITY"
+    ],
+    "preserve_first": [
+      "ANY_NEW_CONTENT_ADDRESSED_SCOPE_COMPLETE_DIRECT_E2E_OR_TOP_LAW_CERTIFICATE",
+      "ANY_NEW_SOUND_STRUCTURAL_RESTRICTION_THAT_PROVES_THE_OPPOSED_HIDDEN_WORLDS_INADMISSIBLE"
+    ],
+    "wake_if_no_new_structural_certificate_exists": "MINIMUM_INFORMATION_ACQUISITION_FOR_THE_OPEN_PROFESSIONAL_QUALITY_WORLD_FIBER",
+    "wake_scope": "ONLY_THE_SMALLEST_DISCRIMINATOR_OR_FRESH_EVALUATOR_EVIDENCE_NEEDED_TO_SEPARATE_SURVIVING_QUALITY_WORLDS__NOT_GENERIC_BENCHMARK_ACCUMULATION"
+  },
+  "relation_to_terminal": {
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false,
+    "effect": "CONVERTS_ONE_ZERO_REALITY_SEARCH_LOOP_INTO_A_PROVED_INFORMATION_BOUNDARY__IT_DOES_NOT_ITSELF_SUPPLY_THE_MISSING_INFORMATION"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_EITHER_TWO_WORLD_COUNTERMODEL_IS_THE_ACTUAL_OPUS55_EVALUATOR_WORLD",
+    "NO_CLAIM_PROFESSIONAL_QUALITY_IS_IMPOSSIBLE_TO_CLOSE",
+    "NO_CLAIM_TARGET_INFORMATION_IS_REQUIRED_IF_A_NEW_SOUND_STRUCTURAL_OR_DIRECT_E2E_CERTIFICATE_EXCLUDES_THE_COUNTERMODEL",
+    "NO_CLAIM_THE_BOUNDED_P2_UNIVERSAL_CELL_IS_INVALID",
+    "NO_CLAIM_ARTIFACT_FAMILY_ABC_D_OR_TERMINAL_CLOSURE",
+    "NO_FRESH_TARGET_CASE_EXECUTED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {"incremental_spend_usd": 0, "fresh_reality_units_consumed": 0, "terminal_credit_delta": 0}
+}
