@@ -173,6 +173,13 @@ def overlay_worker_progress(
             if status != "COMPLETE":
                 continue
             if meta["phase"] == "EXECUTE":
+                # Route races are proof-search processes, not evidence receipts.
+                # A zero exit / COMPLETE worker state may mean the route emitted
+                # an unresolved counterexample or partial result. Never project
+                # route completion into obligation evidence without a distinct
+                # semantic verification/promotion step.
+                if str(meta.get("action_id") or "").startswith("route::"):
+                    continue
                 projected = "RESULT_PRESENT"
             elif meta["phase"] == "VERIFY":
                 projected = "VERIFIED"

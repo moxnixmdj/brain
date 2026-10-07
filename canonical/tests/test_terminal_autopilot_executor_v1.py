@@ -198,3 +198,43 @@ class TerminalAutopilotExecutorTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+
+def test_route_execute_complete_does_not_project_result_present(tmp_path):
+    manifest = {
+        "obligations": [{"id": "O1", "status": "OPEN"}],
+        "routes": [],
+    }
+    tasks = tmp_path / "canonical/same_identity_worker/tasks"
+    states = tmp_path / "canonical/same_identity_worker/state"
+    tasks.mkdir(parents=True)
+    states.mkdir(parents=True)
+    task = {
+        "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+        "task_id": "U",
+        "agent_id": "A",
+        "mission_path": "canonical/astra_runtime/missions/U.json",
+        "mission_sha256": "a" * 64,
+        "priority": 1,
+        "prerequisites": [],
+        "incremental_spend_usd": 0,
+        "terminal_autopilot": {
+            "enabled": True,
+            "phase": "EXECUTE",
+            "execution_class": "REVERSIBLE_ZERO_REALITY",
+            "irreversible_benchmark": False,
+            "action_id": "route::SCOPE_COMPLETE_UNIVERSAL_COVER",
+            "obligation_ids": ["O1"],
+        },
+    }
+    (tasks / "U.json").write_text(json.dumps(task), encoding="utf-8")
+    state = {
+        "schema": "PROJECT_BRAIN_SAME_IDENTITY_STATE_V1",
+        "task_id": "U",
+        "agent_id": "A",
+        "status": "COMPLETE",
+    }
+    (states / "U.json").write_text(json.dumps(state), encoding="utf-8")
+    terminal_autopilot_executor_v1.overlay_worker_progress(manifest, tmp_path)
+    assert manifest["obligations"][0]["status"] == "OPEN"
