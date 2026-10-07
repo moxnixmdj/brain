@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_E_REGIME_ACCEPTANCE_CEILING_LAW_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "WOLFRAM_ALGEBRA_PASS__PREMISE_BINDING_STILL_REQUIRED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/E_REGIME_ACCEPTANCE_CEILING_LAW_20261007_V1.json",
+    "git_blob_sha": "1464047713286ee8bdb1d76f4995174437f5616f"
+  },
+  "verified": {
+    "scalar_top_dominance": true,
+    "scalar_floor_dominance": true,
+    "componentwise_relation_transport": true
+  },
+  "boundary": "ALGEBRA_ONLY__DOES_NOT_PROVE_SCOPE_COMPLETENESS_ACCEPTANCE_COMPLETENESS_BRAIN_ROUTE_OWNERSHIP_OR_ANY_CURRENT_CLASS_TOP_RECEIPT",
+  "terminal_credit_delta": 0
+}
