@@ -1,3 +1,4 @@
+# current authority rebinding verified via path-scoped CI
 from __future__ import annotations
 import hashlib, json
 from pathlib import Path
@@ -5,7 +6,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 BUNDLE="canonical/governance/SELECTED_DISCRIMINATOR_POLICY_COVER_BRIDGE_20261007_V1.json"
 EXPECTED={
- "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json":"dc5e4bbee47dcc069b4e83eea827633baf53356d",
+ "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json":"0cab18a7c3c2b10221cb0a269671f4d374010534",
  "canonical/governance/SHARED_SEMANTIC_TAIL_SELECTED_DISCRIMINATOR_TRUTH_REPAIR_20261007_V1.json":"15048c3627cb19e7425139c93a0d51e9aeb6850b",
  "canonical/governance/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_THEOREM_20261006_V1.json":"8a235f91ad3064714fab3ea73b324487d9b7f8e5",
  "canonical/governance/K6_MINIMUM_ADEQUATE_POLICY_COVER_THEOREM_20261006_V1.json":"9bc8e53c8e5a59d540dd77ddb69e9f4100812668",
