@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_V9_ABC_OPEN_LEDGER_GOVERNANCE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ZERO_CREDIT_EXECUTABLE_OPEN_LEDGER__14_UNRESOLVED_COARSE_FAMILY_CELLS",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V9.json",
+    "git_blob_sha": "1ec7f2c86534d046e51ddda00001ed287039fc0a"
+  },
+  "sources": [
+    {
+      "path": "canonical/governance/TERMINAL_GENERATOR_BASIS_CANDIDATE_20261006_V1.json",
+      "git_blob_sha": "87909e9defe4ec12627c552c80cabb873c0c5f7c"
+    },
+    {
+      "path": "canonical/governance/G_ROUTE_FIVE_GENERATOR_DOMINANCE_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "2bb66217cf42c737282428e053ad42033c30811b"
+    },
+    {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "git_blob_sha": "cf736088c1ff460283f9b62d873b8e0710374e79"
+    }
+  ],
+  "runtime": "canonical/runtime/current_v9_abc_open_ledger_v1.py",
+  "tests": "canonical/tests/test_current_v9_abc_open_ledger_v1.py",
+  "objective": "Compile the current unresolved family frontier into an exact fail-closed V9 work ledger without granting target-cell completeness, route selection, local-ABC, family, capability, ownership, or terminal credit.",
+  "projection_rules": [
+    "USE_THE_14_CURRENT_UNRESOLVED_FAMILIES_ONLY_AS_COARSE_OPEN_CELLS__NOT_AS_TERMINAL_UTILITY_QUOTIENTS",
+    "PROJECT_ONLY_G1_THROUGH_G5_AS_VERIFIED_OWNED_STRUCTURAL_GENERATORS",
+    "TREAT_LEGACY_G6_NEED_AS_SHARED_TASK_CONDITIONED_SEMANTIC_CERTIFICATE_FRONTIER__NOT_A_MISSING_GENERIC_IMPLEMENTATION_GENERATOR",
+    "TREAT_LEGACY_G7_NEED_AS_INTERFACE_OR_SURFACE_SUFFIX_BINDING__NOT_A_PROVED_NEW_FOUNDATION_CAPABILITY",
+    "NEVER_SELECT_AN_EXTERNAL_SPECIMEN_AS_THE_BRAIN_ROUTE",
+    "AN_INTERNALIZED_CONFIGURATION_PATH_IS_ONLY_A_CANDIDATE_COMPONENT_UNTIL_THE_FULL_CONTENT_ADDRESSED_DEPLOYED_ROUTE_AND_V9_BUNDLE_ARE_BOUND",
+    "EVERY_UNPROVED_V9_PER_CELL_FIELD_REMAINS_FALSE_AND_EXPLICIT"
+  ],
+  "expected_current_output": {
+    "unresolved_family_count": 14,
+    "owned_structural_generator_count": 5,
+    "fully_content_addressed_selected_routes": 0,
+    "selected_external_specimen_routes": 0,
+    "terminal": false,
+    "terminal_credit_delta": 0
+  },
+  "next_actions": [
+    "FOR_EACH_COARSE_CELL_SEARCH_FOR_A_STRONGER_SOUND_SUPERDOMAIN_OR_UTILITY_QUOTIENT_THAT_CAN_MERGE_CELLS_OR_DELETE_TARGET_OCCUPANCY",
+    "SELECT_AN_ACTUAL_BRAIN_ROUTE_ONLY_WHEN_ITS_FULL_EXECUTION_PATH_CAN_BE_CONTENT_ADDRESSED",
+    "CO_CERTIFY_ONLY_THE_V9_FIELDS_REACHED_BY_THE_SELECTED_ROUTE",
+    "REUSE_IDENTICAL_CERTIFICATE_OBJECTS_ACROSS_CELLS",
+    "ATTACH_D_EFFECT_AND_OWNERSHIP_RECEIPTS_ONLY_AFTER_A_ROUTE_IS_SELECTED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_14_FAMILY_CELLS_FORM_A_TARGET_COMPLETE_COVER",
+    "NO_CLAIM_ANY_LOCAL_ABC_BUNDLE_IS_PROVED",
+    "NO_CLAIM_ANY_CANDIDATE_CONFIGURATION_IS_A_COMPLETE_DEPLOYED_ROUTE",
+    "NO_NEW_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
