@@ -36,6 +36,8 @@ def select_certified_route(
     matches = []
     seen = set()
     for r in receipts:
+        if type(r.admitted) is not bool:
+            raise RouterFailClosed("ADMISSION_MUST_BE_LITERAL_BOOL")
         if not all((r.context_digest, r.cell_id, r.route_id, r.route_blob_sha,
                     r.adequacy_certificate_blob_sha, r.admission_certificate_blob_sha)):
             raise RouterFailClosed("RECEIPT_FIELD_MISSING")
