@@ -6,6 +6,11 @@ on:
     paths:
       - 'canonical/action_intents/2026-09-30_PROMOTE_OPUS55_LONG_HORIZON_CONTINUITY_V1.json'
       - 'canonical/verification/run_long_horizon_continuity_v1.py'
+      - 'canonical/runtime/same_identity_supervisor.py'
+      - 'canonical/tests/test_same_identity_supervisor.py'
+      - 'canonical/runtime/root3_production_astra_launcher_v1.py'
+      - 'canonical/runtime/root3_strict_current_bootstrap_v2.py'
+      - 'canonical/runtime/astra_runtime.py'
       - '.github/workflows/opus55-long-horizon-continuity-v1.yml'
   workflow_dispatch:
 
