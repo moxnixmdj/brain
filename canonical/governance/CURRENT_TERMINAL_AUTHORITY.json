@@ -1,7 +1,7 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V3",
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V4",
   "date": "2026-10-07",
-  "status": "ACTIVE_FAIL_CLOSED_SCHEDULING_POINTER__TARGET_SCOPE_CLOSED__FOURTEEN_SOUND_DB_CERTIFICATE_RECORDS__19_INDEPENDENT_CONJUNCTS__SINGLE_U_FRONTIER__ROUTER_EXACT_PUBLIC_EXECUTION_PASS__TERMINAL_FALSE",
+  "status": "ACTIVE_FAIL_CLOSED_SCHEDULING_POINTER__TARGET_SCOPE_CLOSED__FOURTEEN_SOUND_DB_RECORDS__TWO_TOP_LEVEL_PREDICATES__NINETEEN_ABC_REFINEMENTS__SINGLE_U_FRONTIER__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authoritative_sources": {
     "terminal_authority": {
@@ -9,57 +9,65 @@
       "git_blob_sha": "f9f095de0d64ff11ff2e176728123ea54875e316"
     },
     "terminal_coverage_partition": {
-      "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V6.json",
-      "git_blob_sha": "503165019517dca7e0f064736c409cbb7bbcc349"
+      "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V7.json",
+      "git_blob_sha": "9ca2f4b6374422fb6e83e459aa71bfcb715d853f"
     },
-    "db_cache_union": {
+    "L1_normal_form": {
+      "path": "canonical/governance/L1_UNIVERSAL_ABC_NORMAL_FORM_THEOREM_20261007_V1.json",
+      "git_blob_sha": "cff6a95cad0027f3e142a32fd028a27566a00ea5",
+      "independent_verification": {
+        "path": "canonical/verification/L1_UNIVERSAL_ABC_NORMAL_FORM_SPRITE_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "ba3f84a6b9d9cdf520205c633626dbd33bff462c"
+      }
+    },
+    "db_cache_union_truth_repair": {
       "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V7.json",
-      "git_blob_sha": "04345ae31cb96695d60912127c9d69541919e2bd"
+      "git_blob_sha": "04345ae31cb96695d60912127c9d69541919e2bd",
+      "sound_predecessor": {
+        "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V6.json",
+        "git_blob_sha": "3b438f63dfdcd208c984251d1addd1334ca4b44e"
+      }
     },
     "single_abc_frontier": {
-      "path": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V2.json",
-      "git_blob_sha": "57e44bd056429e167fe5bbaac9855b7988baebe5"
+      "path": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V3.json",
+      "git_blob_sha": "097676da717e5ff53b073f957de2dbd6736ae20b"
     },
     "semantic_minimum_information": {
       "path": "canonical/governance/TERMINAL_SHARED_SEMANTIC_MINIMUM_INFORMATION_LOWER_BOUND_20261007_V1.json",
       "git_blob_sha": "0b63405d95009a95ad12e767d9785ceacaf5be12"
     },
-    "semantic_minimum_information_independent_verification": {
-      "path": "canonical/verification/TERMINAL_SHARED_SEMANTIC_MINIMUM_INFORMATION_LOWER_BOUND_WOLFRAM_VERIFICATION_20261007_V1.json",
-      "git_blob_sha": "09cf80ab42fc44ef48190f0b90872dcc5e55f8a6"
-    },
-    "composition_derivation_independent_verification": {
-      "path": "canonical/verification/COMPOSITION_TERMINAL_SUCCESS_DERIVATION_WOLFRAM_VERIFICATION_20261007_V1.json",
-      "git_blob_sha": "10cfac5af04bee690478360c0c04f6b2f10cc501"
+    "positive_cover_sufficiency": {
+      "path": "canonical/governance/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_THEOREM_20261006_V1.json",
+      "git_blob_sha": "8a235f91ad3064714fab3ea73b324487d9b7f8e5",
+      "independent_verification": {
+        "path": "canonical/verification/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_SPRITE_VERIFICATION_20261006_V1.json",
+        "git_blob_sha": "de91c37808fe53bc133b399ebc7630f2b82bb0e3"
+      }
     },
     "router_runtime": {
       "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
       "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
-    },
-    "router_independent_public_execution": {
-      "path": "canonical/verification/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json",
-      "git_blob_sha": "42b8eeac29eafe2f74370d993badb046049391b3"
     }
   },
   "live_truth": {
     "fixed_authorized_target_trace_scope_closed": true,
     "known_sound_D_B_certificate_record_count": 14,
     "revoked_unsound_D_B_record": "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
-    "revocation_reason": "EXACT_EXECUTED_P3_SCORER_DOES_NOT_PROVE_THE_DECLARED_SEVEN_GATE_VECTOR",
     "cache_record_count_is_not_semantic_coverage_measure": true,
-    "independent_terminal_conjunct_count": 19,
-    "direct_result_conjunct_count": 15,
-    "structural_independent_conjunct_count": 4,
-    "composition_terminal_success_is_derived_inside_ABC": true,
+    "independent_top_level_terminal_predicate_count": 2,
+    "independent_top_level_terminal_predicates": [
+      "COMPLETE_SELECTED_CONTEXT_ABC",
+      "D_FINAL_ROUTE_OWNERSHIP_EFFECT_DONOR_INDEPENDENCE_FINALITY"
+    ],
+    "independent_L1_predicate_count": 1,
+    "L1_refinement_partition_count": 19,
+    "nineteen_rows_are_independent_top_level_terminal_conjuncts": false,
+    "nineteen_rows_are_mandatory_ABC_falsification_partitions": true,
     "complete_selected_context_ABC_normal_form": "U_IS_EMPTY",
     "current_U_empty_proved": false,
     "minimum_information_boundary": "COMMON_CERTIFIED_ADEQUATE_POLICY_OR_TRUTHFUL_SELECTED_DISCRIMINATOR",
-    "new_generic_semantic_mechanism_required": false,
     "generic_router_intelligence_required": false,
     "router_mechanical_core_implemented": true,
-    "router_exact_independent_execution_passed": true,
-    "router_mechanical_execution_seam_closed_for_exact_bound_blobs": true,
-    "private_brain_actions_carrier_binding_observed": false,
     "complete_selected_context_ABC_closed": false,
     "D_finality_closed": false,
     "terminal": false
@@ -71,17 +79,14 @@
       "ONE_COMMON_CERTIFIED_ADEQUATE_BRAIN_OWNED_POLICY_OVER_THE_COARSEST_SOUND_CONTEXT_CELL",
       "OR_THE_MINIMUM_TRUTHFUL_SELECTED_DISCRIMINATOR_PLUS_CERTIFIED_ADEQUATE_BRAIN_POLICY_FOR_EACH_RESULTING_CELL"
     ],
-    "preserve": [
-      "LOAD_BEARING_COMPOSITION_RESOURCE_SAFETY_AUTHORITY_AND_HONESTY_CONDITIONS",
-      "EXACT_CONTENT_ADDRESSED_ADMISSION_AND_ADEQUACY_BINDING",
-      "COMPOSITION_TERMINAL_SUCCESS_AS_DERIVED_PER_CELL_OBLIGATION_FROM_PRIMITIVE_ADEQUACY_PLUS_LOCAL_C"
-    ]
+    "nineteen_row_rule": "USE_ALL_NINETEEN_ROWS_AS_ADVERSARIAL_REFINEMENT_TESTS_AGAINST_THE_SINGLE_ABC_COVER__DO_NOT_SCHEDULE_THEM_AS_NINETEEN_INDEPENDENT_TOP_LEVEL_TERMINAL_JOBS"
   },
   "scheduling_lock": [
-    "THIS_FILE_IS_THE_STABLE_ENTRY_POINTER_FOR_TERMINAL_SCHEDULING__VERSIONED_FILES_ARE_EVIDENCE_SOURCES_NOT_IMPLICITLY_NEWER_AUTHORITY.",
-    "SUBTRACT_ALL_FOURTEEN_CURRENT_SOUND_D_B_CERTIFICATE_RECORDS_BEFORE_NEW_WORK__OVERLAP_ALLOWED__DO_NOT_INFER_COVERAGE_PERCENTAGE_FROM_COUNT.",
-    "USE_CURRENT_TERMINAL_COVERAGE_PARTITION_V6__19_INDEPENDENT_CONJUNCTS__DO_NOT_REINTRODUCE_COMPOSITION_TERMINAL_SUCCESS_AS_AN_INDEPENDENT_CONJUNCT.",
+    "THIS_FILE_IS_THE_STABLE_ENTRY_POINTER_FOR_TERMINAL_SCHEDULING.",
+    "SUBTRACT_ONLY_THE_FOURTEEN_CURRENT_SOUND_D_B_CERTIFICATE_RECORDS__DO_NOT_COUNT_THE_REVOKED_P3_WHOLE_CELL.",
     "WORK_ONLY_ON_DEPLETING_U.",
+    "USE_THE_NINETEEN_L1_ROWS_AS_FALSIFICATION_AND_COVERAGE_REFINEMENT_PARTITIONS_INSIDE_ABC.",
+    "DO_NOT_RUN_A_BENCHMARK_MERELY_TO_MATCH_A_FIXED_PUBLIC_SCORE_IDENTITY__ONLY_USE_IT_IF_IT_IS_THE_CHEAPEST_IRREDUCIBLE_WITNESS_FOR_AN_UNCOVERED_ABC_REFINEMENT.",
     "FOR_EACH_SURVIVING_COARSE_CELL_FIRST_SEARCH_FOR_ONE_COMMON_CERTIFIED_ADEQUATE_BRAIN_POLICY.",
     "ONLY_IF_NO_COMMON_POLICY_CERTIFICATE_EXISTS_BIND_THE_MINIMUM_TRUTHFUL_SELECTED_DISCRIMINATOR_NEEDED_TO_SEPARATE_POLICY_ADEQUACY_CLASSES.",
     "DO_NOT_BUILD_A_GENERAL_SEMANTIC_WORLD_MODEL.",
@@ -90,20 +95,19 @@
     "WHEN_U_IS_PROVED_EMPTY_FREEZE_EXACT_CREDITED_ROUTE_SET__RECOMPUTE_D__DELETE_DONORS__RUN_INDEPENDENT_CLEAN_ROOM_REPLAY."
   ],
   "superseded_for_scheduling": [
-    "CURRENT_TERMINAL_AUTHORITY_POINTER_V2_FIFTEEN_RECORD_CACHE",
+    "CURRENT_TERMINAL_AUTHORITY_POINTER_V3_NINETEEN_INDEPENDENT_CONJUNCTS_WORDING",
+    "CURRENT_TERMINAL_COVERAGE_PARTITION_V6_NINETEEN_INDEPENDENT_CONJUNCTS_WORDING",
     "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION_AS_SOUND_DB",
-    "CURRENT_TERMINAL_COVERAGE_PARTITION_V5_20_INDEPENDENT_CONJUNCTS",
-    "HISTORICAL_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2_14_PROVED_24_UNRESOLVED_COUNTS",
-    "ANY_PRE_V16_LITERAL_TARGET_UNIVERSE_EXHAUSTIVENESS_BLOCKER",
+    "FIFTEEN_DIRECT_RESULT_ROWS_AS_A_SEPARATE_TOP_LEVEL_TERMINAL_QUEUE",
     "GENERAL_SEMANTIC_WORLD_MODEL_AS_GLOBAL_PREREQUISITE",
     "GENERAL_INTELLIGENT_ROUTER_AS_GLOBAL_PREREQUISITE"
   ],
   "hard_nonclaims": [
     "NO_CLAIM_U_IS_EMPTY.",
+    "NO_CLAIM_THE_NINETEEN_REFINEMENT_PARTITIONS_ARE_CURRENTLY_COVERED.",
     "NO_CLAIM_FOURTEEN_SOUND_RECORDS_EXHAUST_D_B_OR_THE_CLOSED_TRACE_SCOPE.",
-    "NO_CLAIM_PRIVATE_BRAIN_ACTIONS_CARRIER_BINDING_IS_OBSERVED.",
     "NO_CLAIM_D_FINALITY_IS_CLOSED.",
-    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+    "NO_TERMINAL_CREDIT."
   ],
   "accounting": {
     "incremental_spend_usd": 0,
