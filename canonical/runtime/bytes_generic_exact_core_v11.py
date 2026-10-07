@@ -119,7 +119,8 @@ def ds(ex,d=3):
  return {"status":"MISS","t":None}
 def ps(c,x):return rp(c["t"],x)
 def ci():
- for s in b'GQ4GH966/=6H7BN4A/:5?3C@M5/FD48OKGD/A11=KFNM/@59@8/DI'.split(b"/"):yield[c-65 for c in s]
+ for i in range(14):yield [((6*i+16*j+10*i*j+2*j*j+28*i*i+10)%33)-16 for j in range(10)]
+ yield[-4,-3];yield[1,2]
 def aq(ex,d=3):
  q=[()];v=[]
  for _ in range(d+1):
