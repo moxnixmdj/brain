@@ -87,6 +87,80 @@ async def _validate_brain_deliverable(
         "checks": observed,
     }
 
+MAX_DECLARED_INPUT_TOTAL_CHARS = 24000
+MAX_DECLARED_INPUT_PER_FILE_CHARS = 8000
+_EXPLICIT_SPEC_PATH_RE = re.compile(
+    r"(?<![A-Za-z0-9_./-])(/app/spec/[A-Za-z0-9_./-]+)"
+)
+
+def _declared_task_paths(goal: str) -> tuple[list[str], list[str]]:
+    """Return explicit task-authoritative inputs and mandatory submission outputs."""
+    inputs: list[str] = []
+    for match in _EXPLICIT_SPEC_PATH_RE.finditer(str(goal or "")):
+        path = match.group(1).rstrip(".,;:")
+        if any(part in {".", ".."} for part in path.split("/")):
+            continue
+        if path not in inputs:
+            inputs.append(path)
+    outputs = list(_brain_mandated_deliverables(goal).values())
+    return inputs, outputs
+
+async def _snapshot_declared_inputs(
+    environment: BaseEnvironment,
+    paths: list[str],
+) -> list[dict[str, Any]]:
+    """Brain-owned read of exact declared local source bytes before planning."""
+    if not paths:
+        return []
+    transport = HarborEnvironmentTransport(environment)
+    remaining = MAX_DECLARED_INPUT_TOTAL_CHARS
+    snapshots: list[dict[str, Any]] = []
+    for path in paths:
+        q = shlex.quote(path)
+        take = min(MAX_DECLARED_INPUT_PER_FILE_CHARS, max(0, remaining))
+        command = validate_environment_command(
+            f"test -f {q} && sha256sum {q} && printf '\\n---CONTENT---\\n' && head -c {take} {q}"
+        )
+        receipt = await transport.exec(command, timeout_sec=60)
+        if receipt.returncode != 0:
+            raise RuntimeError("SCIENCE_DECLARED_INPUT_UNREADABLE:" + path)
+        snapshots.append({
+            "kind": "BRAIN_DECLARED_INPUT_SNAPSHOT",
+            "path": path,
+            "returncode": receipt.returncode,
+            "stdout": receipt.stdout[-MAX_OUTPUT_CHARS:],
+            "stderr": receipt.stderr[-2000:],
+        })
+        remaining = max(0, remaining - take)
+    return snapshots
+
+async def _declared_output_gate(
+    environment: BaseEnvironment,
+    paths: list[str],
+) -> list[dict[str, Any]]:
+    """Revalidate exact declared outputs immediately before Brain finish."""
+    if not paths:
+        return []
+    transport = HarborEnvironmentTransport(environment)
+    failures: list[dict[str, Any]] = []
+    for path in paths:
+        q = shlex.quote(path)
+        checks = [f"test -s {q}"]
+        if path.lower().endswith(".json"):
+            checks.append(f"python -m json.tool {q} >/dev/null")
+        elif path.lower().endswith(".py"):
+            checks.append(f"python -m py_compile {q}")
+        command = validate_environment_command(" && ".join(checks))
+        receipt = await transport.exec(command, timeout_sec=60)
+        if receipt.returncode != 0:
+            failures.append({
+                "path": path,
+                "returncode": receipt.returncode,
+                "stdout": receipt.stdout[-2000:],
+                "stderr": receipt.stderr[-2000:],
+            })
+    return failures
+
 def _nonempty_strings(value: Any, *, maximum: int, field: str) -> list[str]:
     if not isinstance(value, list) or not value or len(value) > maximum:
         raise RuntimeError(f"SCIENCE_{field}_INVALID")
@@ -202,11 +276,15 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "independent verification resolves every frozen material requirement. finish_summary is optional "
             "descriptive metadata only and never execution or finish authority. "
             f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
-            "Brain-mandated explicit deliverables (requirement ID -> path): "
+            "Brain-declared authoritative local inputs: "
+            + json.dumps(declared_inputs, sort_keys=True)
+            + "\nBrain-mandated explicit deliverables (requirement ID -> path): "
             + json.dumps(brain_deliverables, sort_keys=True)
-            + "\nThese Brain-mandated requirement IDs are part of the frozen contract and may not be omitted. "
+            + "\nThe BRAIN_DECLARED_INPUT_SNAPSHOT observations below are exact local task-source reads. "
+            "Use those bytes instead of guessing plant parameters, interfaces, scenarios, or other declared source facts. "
+            "These Brain-mandated requirement IDs are part of the frozen contract and may not be omitted. "
             "A candidate claiming one of them must actually create that exact nonempty file; Brain validates it independently.\n"
-            "Recent observations: " + json.dumps(observations[-4:], sort_keys=True)[:12000]
+            "Recent observations: " + json.dumps(observations[-8:], sort_keys=True)[:30000]
         )
         planned = science_planner.plan(prompt, timeout_s=180)
         raw = science_planner.normalize_proposal_object(
