@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_INDEPENDENT_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SOURCE_AUDIT_AND_WOLFRAM_128_VECTOR_TOPLAW_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_20261007_V1.json",
+    "git_blob_sha": "1c450f41e813a21b1a8b876c131c8574a21f5f51"
+  },
+  "exact_source_audit": {
+    "p3_binding": {
+      "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+    },
+    "terminal_wave": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    },
+    "binding_behavior_and_T1_T3_portfolio_match": true,
+    "complete_bound_required_check_count": 7,
+    "required_check_ids_pairwise_distinct": true,
+    "brain_required_check_vector": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "componentwise_top_vector": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "exact_terminal_rows_found": 2,
+    "both_rows_direct_instrumentation_pass": true,
+    "both_rows_load_bearing": true,
+    "both_rows_parent_terminal_acceptance_pass": true,
+    "no_case_replacement_result_feedback_or_tuning_replay": true
+  },
+  "wolfram": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "formula": "And @@ (And@@Thread[ConstantArray[1,7]>=#]& /@ Tuples[{0,1},7])",
+    "enumerated_target_boolean_vectors": 128,
+    "result": true,
+    "interpretation": "THE_ALL_ONES_BRAIN_VECTOR_COMPONENTWISE_DOMINATES_EVERY_BOOLEAN_7_VECTOR_ON_THE_EXACT_BOUND_REQUIRED_CHECK_SEMANTICS"
+  },
+  "conclusion": {
+    "exact_selected_cell_id": "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
+    "K_c_minus_empty_for_exact_bound_cell": true,
+    "target_information_required": false,
+    "fresh_reality_required": false,
+    "synthesis_family_closed": false,
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FROZEN_60_CASE_P3_CELL_EXHAUSTS_ALL_SYNTHESIS_CONTEXTS.",
+    "NO_SCOPE_INHERITANCE_BEYOND_THE_EXACT_SEVEN_BOUND_DIRECT_INSTRUMENTATION_CHECKS.",
+    "NO_GLOBAL_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
