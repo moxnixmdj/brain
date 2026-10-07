@@ -1,0 +1,175 @@
+{
+  "schema": "PROJECT_BRAIN_IF_FAMILY_OWNERSHIP_PROMOTION_PROOF_20261007_V1",
+  "date": "2026-10-07",
+  "status": "PASS__DEDUCTIVE_ZERO_REALITY_OWNERSHIP_PROMOTION__INSTRUCTION_FOLLOWING",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "theorem": {
+    "path": "canonical/governance/EXACT_ACCEPTED_ROUTE_OWNERSHIP_THEOREM_V1.json",
+    "git_blob_sha": "09ee0097bc785d11e7f7bfdd6f1b39cafa13d5fa",
+    "finite_bundle_corollary": "A_FINITE_CONTENT_ADDRESSED_OPERATIVE_ROUTE_BUNDLE_SATISFIES_THE_SAME_THEOREM_WHEN_EVERY_LOAD_BEARING_NODE_AND_TRANSITIVE_CAPABILITY_DEPENDENCY_IS_EXPLICITLY_BOUND_AND_THE_UNION_EXECUTION_CLOSURE_HAS_NO_EXTERNAL_CAPABILITY_PROVIDER_NETWORK_DYNAMIC_IMPORT_PROCESS_ESCAPE_OR_OPAQUE_MODEL_PATH"
+  },
+  "strict_acceptance": {
+    "state": "PASS",
+    "scope_complete": true,
+    "family_closure": {
+      "path": "canonical/governance/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_20261007_V1.json",
+      "git_blob_sha": "307ea91b0150db9d6cca9580e1b7a399035929c1"
+    },
+    "independent_closure_verification": {
+      "path": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f"
+    },
+    "acceptance_conjuncts": [
+      {
+        "predicate": "LIVEBENCH_IF_GE_65_7",
+        "receipt": "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+        "receipt_git_blob_sha": "57e27e3c56372b57a1d4e0255f49340d4a4c8588",
+        "proof_kind": "CLEAN_SCOPE_COMPLETE_POINTWISE_DOMINANCE"
+      },
+      {
+        "predicate": "IF_SCOPE_BOUNDARY_NONINFERIOR_AND_IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "receipt": "canonical/verification/IF_SCOPE_FINITE_PROTOCOL_BINDING_CONNECTOR_VERIFICATION_20261007_V1.json",
+        "receipt_git_blob_sha": "b7bfc865267554f0c7005c0835f09107b2dec998",
+        "execution_receipt": "canonical/verification/IF_SCOPE_FINITE_WAVE_SPRITE_VERIFICATION_20261007_V1.json",
+        "execution_receipt_git_blob_sha": "f2736590ad5fb3161f4e65bdc137cea836996658",
+        "proof_kind": "FINITE_DECLARED_SCOPE_OBJECTIVE_TOP_CERTIFICATE__160_OF_160__ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+      }
+    ]
+  },
+  "operative_route_bundle": {
+    "livebench_pointwise_owned_nodes": [
+      [
+        "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py",
+        "0dbef76a6189a3cdc21ce3dae97ef6921e333b34"
+      ],
+      [
+        "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+        "7477f5ea5bdeac3595ee2784a38d078fe2f385b0"
+      ],
+      [
+        "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+        "d73ec366b32252996258eae6d10d67d4d6a5e042"
+      ],
+      [
+        "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py",
+        "71e637c70edf1c582e28ea38b3b798965c803a06"
+      ],
+      [
+        "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py",
+        "09a5d7810fd46713aaf06cf1d204fe140d1d8045"
+      ],
+      [
+        "canonical/runtime/livebench_pointwise_minimum_cut_v1.py",
+        "3552ceb0c9bdf80e8666460931f20f06f580a0f2"
+      ],
+      [
+        "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py",
+        "fd1ad043fb9fe461b6593f5b8130093be0028c22"
+      ]
+    ],
+    "finite_scope_owned_nodes": [
+      [
+        "canonical/runtime/m0a_raw_source_brain_candidate_v2.py",
+        "0aac96d27068bdad379703c1b0b8a7a32cacb2e2"
+      ],
+      [
+        "canonical/runtime/m0a_raw_source_terminal_suite_v2.py",
+        "63b5daacfa5623c38228d41f6a84e548890d252d"
+      ],
+      [
+        "canonical/runtime/m0_requirement_change_case_v1.py",
+        "d77ea422ab8d432e51ecb39a9396f5c126d6c23c"
+      ],
+      [
+        "canonical/runtime/tool_discovery_information_safe_candidate.py",
+        "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+      ],
+      [
+        "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+        "5e8a953864e13ec76768c3e8920644107c65a644"
+      ],
+      [
+        "canonical/runtime/matched_executable_atom_semantics_v1.py",
+        "47a0e828847a57fb206490a866a1041d83c42bde"
+      ]
+    ],
+    "transitive_capability_dependencies": [
+      [
+        "canonical/runtime/bounded_predicate_argument_semantics.py",
+        "8303231779d6fe8c7fb740e3bbaa492914d4eba9"
+      ],
+      [
+        "canonical/runtime/explicit_compound_requirement_decomposer.py",
+        "06da82ccd7cf5ba37b78d1d664b5638caa4e1956"
+      ],
+      [
+        "canonical/runtime/source_grounded_coreference.py",
+        "3734d79c4d4db5fa78798d8421130090d15fe358"
+      ],
+      [
+        "canonical/runtime/requirement_acceptance_compiler.py",
+        "c306ac6191e2d6f6d84445d7a698eeec8676a0ef"
+      ],
+      [
+        "canonical/runtime/independent_acceptance_model.py",
+        "710298c5d7154b5a3c2a4a1700420c40cb2fa55a"
+      ],
+      [
+        "canonical/runtime/tool_discovery_information_safe_proof.py",
+        "2450a9644119c9fdf9c43307a1d115098d6ba592"
+      ]
+    ],
+    "evaluation_isolation_harness": {
+      "path": "canonical/runtime/if_scope_finite_wave_v1.py",
+      "git_blob_sha": "9f31421b9d62f11bf99f6dbeafb104d8621ca5ee",
+      "classification": "EVALUATION_ONLY__SUBPROCESS_RUN_IS_SELF_INVOCATION_FOR_CASE_ISOLATION__NOT_AN_OPERATIVE_EXTERNAL_CAPABILITY_PROVIDER_OR_FUTURE_USE_DEPENDENCY"
+    }
+  },
+  "provider_escape_audit": {
+    "audit_basis": "EXACT_GITHUB_CONTENT_ADDRESS_FETCH_AND_STATIC_SOURCE_IMPORT_CALL_SCAN_OF_EVERY_LISTED_OPERATIVE_NODE_AND_TRANSITIVE_CAPABILITY_DEPENDENCY",
+    "external_network_calls": 0,
+    "opaque_model_calls": 0,
+    "target_model_calls": 0,
+    "dynamic_import_calls": 0,
+    "os_system_calls": 0,
+    "external_process_calls_in_operative_bundle": 0,
+    "non_brain_capability_runtime_dependencies": 0,
+    "canonical_internal_imports": "ALLOWED_ONLY_WHEN_TRANSITIVE_NODE_IS_EXPLICITLY_CONTENT_BOUND_IN_THIS_PROOF_OR_ALREADY_INCLUDED_BY_AN_EXPLICIT_BOUND_NODE",
+    "evaluation_harness_subprocess": "SELF_ONLY__CASE_ISOLATION__NON_OPERATIVE",
+    "verdict": "CLOSED_SELF_CONTAINED_BRAIN_ROUTE_BUNDLE"
+  },
+  "exact_acceptance_binding": {
+    "livebench_receipt_binds_exact_subject_blobs": true,
+    "finite_scope_precommit_binds_exact_route_blobs": true,
+    "finite_scope_independent_verification_binds_precommit_and_execution": true,
+    "no_result_dependent_route_substitution": true,
+    "no_proxy_substitution": true
+  },
+  "ownership_derivation": [
+    "THE_FROZEN_INSTRUCTION_FOLLOWING_ACCEPTANCE_PROTOCOL_IS_SCOPE_COMPLETE_AND_PASS.",
+    "THE_LIVEBENCH_CONJUNCT_BINDS_ITS_EXACT_LOAD_BEARING_BRAIN_ROUTE_BLOBS_AND_PROVES_POINTWISE_DOMINANCE_WITH_ZERO_TARGET_ROWS.",
+    "THE_FINITE_SCOPE_CONJUNCT_BINDS_THE_EXACT_BRAIN_ROUTE_BLOBS_BEFORE_RESULTS_AND_INDEPENDENTLY_EXECUTES_160_OF_160_AT_THE_OBJECTIVE_TOP_WITH_ZERO_CRITICAL_AUTHORITY_VIOLATIONS.",
+    "EVERY_OPERATIVE_ROUTE_NODE_AND_TRANSITIVE CAPABILITY DEPENDENCY IS DURABLY STORED UNDER CANONICAL BRAIN CONTROL AND CONTENT ADDRESSED.",
+    "THE_UNION_EXECUTION_CLOSURE HAS NO EXTERNAL_NETWORK_PROVIDER_OPAQUE_MODEL_DYNAMIC_IMPORT_EXTERNAL_PROCESS_OR_UNDECLARED_CAPABILITY_PATH.",
+    "FUTURE_USE REQUIRES ONLY THE FROZEN BRAIN-OWNED ROUTE BYTES AND ORDINARY BENIGN RUNTIME MECHANICS; NO TARGET CAPABILITY REDISCOVERY IS REQUIRED.",
+    "THEREFORE THE ACCEPTED INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT CAPABILITY IS VERIFIED BRAIN-OWNED EQUAL OR BETTER ON THE FROZEN TERMINAL TARGET."
+  ],
+  "promotion": {
+    "prior_ownership": "OPEN",
+    "new_ownership": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+    "family_terminal_closure_state": "PASS",
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 1,
+    "fully_terminally_closed_family_delta": 1
+  },
+  "hard_nonclaims": [
+    "NO_GENERALIZATION_BEYOND_THE_FROZEN_INSTRUCTION_FOLLOWING_TERMINAL_PROTOCOL_SCOPE",
+    "NO_GLOBAL_TERMINAL_CREDIT",
+    "NO_CLAIM_ALL_19_FAMILIES_ARE_CLOSED",
+    "NO_GLOBAL_D_FINALITY_CREDIT",
+    "NO_NEW_ACCEPTANCE_ATOMIC_PREDICATE_CREDIT"
+  ]
+}
