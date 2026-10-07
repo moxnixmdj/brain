@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_SOLVER_V2_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__V2_MECHANICAL_PROOF_TO_EFFECT_BINDING_AND_RATCHET_FORGED_PROVENANCE_FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
+  "canonical_base_commit": "79fcac7eb6836cf049398acb85557a419407ba22",
+  "subject": {
+    "proof_to_effect_truth_repair": {
+      "path": "canonical/governance/UNIVERSAL_SOLVER_PROOF_TO_EFFECT_BINDING_TRUTH_REPAIR_20261007_V1.json"
+    },
+    "exact_brain_blobs": {
+      "canonical/runtime/capability_planner.py": "629766f8a1194fd298e0809b64a5e9c5a39fa3ea",
+      "canonical/runtime/universal_verified_adaptive_solver_v1.py": "eac73994d32bc773bbe491eb3bd96e2307e48d45",
+      "canonical/runtime/universal_verified_adaptive_solver_v2.py": "be0857bbe1e506a3ff94e8e6b71c7796dea8ba22",
+      "canonical/tests/test_universal_verified_adaptive_solver_v2.py": "e8ba32cb3bcc68ff73b219ae939d521bdb57fad5",
+      "canonical/runtime/effect_broker_receipt_resolver_v2.py": "7f4eeeb19def420d0014631b99c5e2dc3a30592e",
+      "canonical/runtime/executable_skill_program_v7.py": "3cfd5e48b957c6e91fafbf1b9d69ddc624be4764",
+      "canonical/runtime/skill_receipt_authenticator_v1.py": "d0d7606494db469a33da868bab7e42773caf423a",
+      "canonical/runtime/universal_verified_skill_ratchet_v1.py": "d0b3f35d30b487fd50f5bcc5604342bd8d785615"
+    }
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2346,
+    "base_branch": "verify-base/universal-adaptive-v2-20261007",
+    "head_branch": "verify/universal-adaptive-v2-20261007",
+    "head_sha": "6bb6eb4ddcdfd572dec4c774bb848dfcdc2f8e58",
+    "pull_request_merge_ref_sha": "bb2837ab4429c3d0b1da76729dfc35440f9056d7",
+    "workflow_name": "Isolated verification dispatcher",
+    "workflow_run_id": 37577450872,
+    "workflow_job_id": 112649424216,
+    "conclusion": "success",
+    "runner_image": "ubuntu-24.04",
+    "python_version": "3.11.17",
+    "artifact": {
+      "id": 11462788420,
+      "name": "isolated-verification-result",
+      "size_in_bytes": 1281,
+      "digest": "sha256:1a2df4759b44b32f284b522b7f319d733177e962fda23aa0348fe6fb15e89c2b",
+      "expired": false
+    }
+  },
+  "external_authentication": {
+    "method": "LIVE_GITHUB_CONNECTOR_CROSSCHECK",
+    "checked": [
+      "COMMIT_ASSOCIATED_WORKFLOW_RUN_RECORD",
+      "RUN_JOB_RECORD",
+      "JOB_STEP_CONCLUSIONS",
+      "DECODED_JOB_LOG",
+      "WORKFLOW_ARTIFACT_METADATA_AND_DIGEST"
+    ],
+    "repository_authored_json_alone_trusted": false,
+    "run_exists": true,
+    "job_exists": true,
+    "runner_executed": true,
+    "all_job_steps_success": true,
+    "artifact_exists": true,
+    "artifact_digest_api_matches_job_log": true
+  },
+  "verified": {
+    "exact_brain_blob_count": 8,
+    "exact_v2_test_count": 8,
+    "v2_exact_tests_passed": [
+      "test_caller_verified_target_cannot_self_certify_solve",
+      "test_correct_proposal_mints_exact_bound_effect",
+      "test_forged_success_condition_is_rejected",
+      "test_preloaded_target_cannot_self_certify_solve",
+      "test_provides_must_equal_effect_contract_exactly",
+      "test_two_step_chain_requires_both_verifier_bound_effects",
+      "test_v1_style_unbound_provides_is_rejected",
+      "test_wrong_proposal_cannot_mint_effect"
+    ],
+    "independent_adversarial_checks_passed": [
+      "NON_TARGET_PRELOAD_ALLOWED_BUT_TARGET_MINTED_IN_RUN",
+      "EFFECT_LABEL_LAUNDERING_REJECTED",
+      "PRELOADED_TARGET_SELF_CERTIFICATION_REJECTED"
+    ],
+    "ratchet_fail_closed_checks_passed": [
+      "FORGED_EPISODE_RUNNER_METADATA_REJECTED",
+      "BLOB_DRIFT_REJECTED_BEFORE_INDEPENDENCE",
+      "FORGED_SKILL_RUNNER_METADATA_REJECTED"
+    ]
+  },
+  "consequence": [
+    "THE V2 MECHANICAL PROOF_TO_EFFECT BINDING CLAIM NO LONGER LACKS AN INDEPENDENT PUBLIC_RUNNER EXECUTION RECEIPT ON THE EXACT JSON CONTROL PATH.",
+    "PRELOADED TARGET EFFECT SELF_CERTIFICATION IS INDEPENDENTLY FALSIFIED FOR THE TESTED V2 PATH.",
+    "THE CURRENT SKILL RECEIPT AUTHENTICATOR CORRECTLY REFUSES TO TURN SHAPE_VALID REPOSITORY_AUTHORED PUBLIC_RUNNER METADATA INTO INDEPENDENCE.",
+    "THE NEXT SKILL_RATCHET BLOCKER IS AN EXTERNAL_ATTESTATION OR ADJUDICATION BOUNDARY THAT CAN TURN LIVE PROVIDER VERIFIED RUN FACTS INTO A REUSABLE CONTENT_ADDRESSED PROMOTION RECEIPT WITHOUT SELF_CERTIFICATION."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_UNUSED_SEMANTIC_VERIFIER_ADAPTERS WERE INTEGRATION_TESTED__THE CAPSULE USED EXPLICIT TEST_ONLY STUBS FOR THEM.",
+    "NO_CLAIM_SCOPE_COMPLETE_TASK_CONTRACT_COMPILATION.",
+    "NO_CLAIM_GENERAL_EXTERNAL_EFFECT_CARRIER_CLOSURE.",
+    "NO_CLAIM_A_REUSABLE_SKILL_RECEIPT IS AUTHENTICATED BY THE CURRENT BYTE_ONLY RATCHET AUTHENTICATOR.",
+    "NO_OPUS55_PARITY_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
