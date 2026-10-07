@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_EXECUTED_SCORER_FALSIFIER_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_EXECUTION_BYTES_AUDITED__LOGICAL_NONIMPLICATION_CONFIRMED__WHOLE_CELL_REVOCATION_SOUND",
+  "subject": {
+    "path": "canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_EXECUTED_SCORER_FALSIFIER_20261007_V1.json"
+  },
+  "exact_execution_snapshot": {
+    "commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "canonical/runtime/terminal_parent_portfolio_runner_v1.py": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
+    "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "canonical/runtime/contract_native_brain_candidate.py": "afc18af1d1da6f25166c6cc57dcbc0cd3070bb85"
+  },
+  "byte_audit": {
+    "p3_runner_uses_contract_native_candidate_and_scorer": true,
+    "candidate_output_has_provenance_field": false,
+    "scorer_checks_provenance_preservation": false,
+    "direct_instrumentation_pass_can_be_derived_without_any_provenance_predicate": true
+  },
+  "wolfram": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "code": "{TautologyQ[Implies[required && unsupported && uncertainty && format, provenance], {required,unsupported,uncertainty,format,provenance}], SatisfiableQ[required && unsupported && uncertainty && format && !provenance, {required,unsupported,uncertainty,format,provenance}]}",
+    "result": [
+      false,
+      true
+    ]
+  },
+  "verified": [
+    "THE_OBSERVED_EXECUTED_PASS_CONJUNCTION_DOES_NOT_LOGICALLY_IMPLY_PROVENANCE_PRESERVATION.",
+    "THE_WHOLE_SEVEN_GATE_ALL_ONES_VECTOR_IS_NOT_ESTABLISHED_BY_THE_BOUND_TERMINAL_EXECUTION.",
+    "REVOKING_ONLY_THE_WHOLE_SEVEN_GATE_CELL_PRESERVES_NARROW_INDEPENDENTLY_PROVED_SYNTHESIS_CELLS."
+  ],
+  "terminal_effect": {
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false,
+    "terminal_credit_delta": 0
+  }
+}
