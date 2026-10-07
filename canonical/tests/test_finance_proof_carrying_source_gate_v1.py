@@ -3,7 +3,10 @@ from __future__ import annotations
 import copy
 import hashlib
 
-from canonical.runtime.finance_proof_carrying_source_gate_v1 import (\n    configured_finance_terminal_decision,\n    verify_source_semantic_coverage,\n)
+from canonical.runtime.finance_proof_carrying_source_gate_v1 import (
+    configured_finance_terminal_decision,
+    verify_source_semantic_coverage,
+)
 from canonical.runtime.source_contract_compiler import atomize_source, semantic_unit_id
 
 
