@@ -1,18 +1,30 @@
 {
-  "schema":"PROJECT_BRAIN_P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_V1",
-  "date":"2026-10-07",
-  "status":"ACTIVE_ZERO_REALITY_SELECTED_CONTEXT_TOPLAW_REDUCTION__WHOLE_FROZEN_P3_DIRECT_INSTRUMENTATION_CELL__ZERO_GLOBAL_CREDIT",
-  "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "sources":{
-    "p3_binding":{"path":"canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json","git_blob_sha":"ad790afa864bd8f770c3d8a6e3ac901ed2843d26"},
-    "terminal_wave":{"path":"canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json","git_blob_sha":"bd86b4c53992b47a4a60b64a60ba03db9a442cfc"},
-    "narrower_cached_property":{"path":"canonical/governance/V14_SYNTHESIS_UNSUPPORTED_CLAIM_SELECTED_PROPERTY_CELL_20261007_V1.json","git_blob_sha":"eece175e4aae05e34cdc7f44a25c12af94853228"}
+  "schema": "PROJECT_BRAIN_P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_V1",
+  "date": "2026-10-07",
+  "status": "FALSIFIED_BY_EXACT_EXECUTED_SCORER_SEMANTICS__WHOLE_SEVEN_GATE_TOPLAW_REVOKED__NARROW_INDEPENDENT_CELLS_PRESERVED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "p3_binding": {
+      "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+    },
+    "terminal_wave": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    },
+    "narrower_cached_property": {
+      "path": "canonical/governance/V14_SYNTHESIS_UNSUPPORTED_CLAIM_SELECTED_PROPERTY_CELL_20261007_V1.json",
+      "git_blob_sha": "eece175e4aae05e34cdc7f44a25c12af94853228"
+    }
   },
-  "selected_cell":{
-    "id":"P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
-    "behavior_id":"EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
-    "exact_population":["T1::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30","T3::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30"],
-    "complete_bound_required_check_vector":[
+  "selected_cell": {
+    "id": "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
+    "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "exact_population": [
+      "T1::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+      "T3::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30"
+    ],
+    "complete_bound_required_check_vector": [
       "ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
       "ALL_REQUIRED_CLAIMS_OR_DECISION_REQUIREMENTS_COVERED",
       "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS",
@@ -21,35 +33,83 @@
       "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS",
       "IRRELEVANT_EVIDENCE_EXCLUDED_WITHOUT_DELETING_REQUIRED_SUPPORT"
     ],
-    "direct_binding_rule":"ANY_APPLICABLE_LOAD_BEARING_P3_MUTATION_MUST_BE_DETECTED_OR_CAUSE_PARENT_TERMINAL_ACCEPTANCE_FAILURE__ANY_LOAD_BEARING_P3_FAILURE_BLOCKS_BEHAVIOR_PROOF",
-    "frozen_wave_receipts":[
-      {"case_id":"T1::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30","direct_instrumentation_pass":true,"load_bearing":true,"parent_terminal_acceptance_pass":true,"case_replaced":false,"result_to_runtime_feedback":false,"tuning_replay":false},
-      {"case_id":"T3::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30","direct_instrumentation_pass":true,"load_bearing":true,"parent_terminal_acceptance_pass":true,"case_replaced":false,"result_to_runtime_feedback":false,"tuning_replay":false}
+    "direct_binding_rule": "ANY_APPLICABLE_LOAD_BEARING_P3_MUTATION_MUST_BE_DETECTED_OR_CAUSE_PARENT_TERMINAL_ACCEPTANCE_FAILURE__ANY_LOAD_BEARING_P3_FAILURE_BLOCKS_BEHAVIOR_PROOF",
+    "frozen_wave_receipts": [
+      {
+        "case_id": "T1::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+        "direct_instrumentation_pass": true,
+        "load_bearing": true,
+        "parent_terminal_acceptance_pass": true,
+        "case_replaced": false,
+        "result_to_runtime_feedback": false,
+        "tuning_replay": false
+      },
+      {
+        "case_id": "T3::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+        "direct_instrumentation_pass": true,
+        "load_bearing": true,
+        "parent_terminal_acceptance_pass": true,
+        "case_replaced": false,
+        "result_to_runtime_feedback": false,
+        "tuning_replay": false
+      }
     ],
-    "brain_required_check_vector":[1,1,1,1,1,1,1],
-    "componentwise_top_vector":[1,1,1,1,1,1,1]
+    "brain_required_check_vector": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "componentwise_top_vector": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
   },
-  "theorem":{
-    "premise_1":"THE_BOUND_P3_DIRECT_INSTRUMENTATION_SEMANTICS_ARE_THE_SEVEN_DECLARED_LOAD_BEARING_BOOLEAN_REQUIRED_CHECKS_FOR_THE_EXACT_FROZEN_T1_AND_T3_AGGREGATE_CELLS.",
-    "premise_2":"THE_FROZEN_TERMINAL_WAVE_RECORDS_DIRECT_INSTRUMENTATION_PASS_TRUE_AND_PARENT_TERMINAL_ACCEPTANCE_PASS_TRUE_FOR_BOTH_EXACT_AGGREGATES_WITH_NO_CASE_REPLACEMENT_OR_RESULT_FEEDBACK.",
-    "finite_order_result":"THE_ALL_ONES_VECTOR_IS_THE_COMPONENTWISE_TOP_ELEMENT_OF_{0,1}^7__ALL_128_TARGET_VECTORS_ARE_COMPONENTWISE_LESS_THAN_OR_EQUAL_TO_IT__ZERO_STRICT_DOMINATORS_EXIST.",
-    "conclusion":"NO_TARGET_RESULT_CAN_STRICTLY_EXCEED_THE_BRAIN_ON_THE_COMPLETE_BOUND_SEVEN_CHECK_SEMANTICS_OF_THESE_EXACT_FROZEN_P3_SELECTED_CELLS.",
-    "target_information_required":false,
-    "fresh_reality_required":false
+  "theorem": {
+    "premise_1": "THE_BOUND_P3_DIRECT_INSTRUMENTATION_SEMANTICS_ARE_THE_SEVEN_DECLARED_LOAD_BEARING_BOOLEAN_REQUIRED_CHECKS_FOR_THE_EXACT_FROZEN_T1_AND_T3_AGGREGATE_CELLS.",
+    "premise_2": "THE_FROZEN_TERMINAL_WAVE_RECORDS_DIRECT_INSTRUMENTATION_PASS_TRUE_AND_PARENT_TERMINAL_ACCEPTANCE_PASS_TRUE_FOR_BOTH_EXACT_AGGREGATES_WITH_NO_CASE_REPLACEMENT_OR_RESULT_FEEDBACK.",
+    "finite_order_result": "THE_ALL_ONES_VECTOR_IS_THE_COMPONENTWISE_TOP_ELEMENT_OF_{0,1}^7__ALL_128_TARGET_VECTORS_ARE_COMPONENTWISE_LESS_THAN_OR_EQUAL_TO_IT__ZERO_STRICT_DOMINATORS_EXIST.",
+    "conclusion": "NO_TARGET_RESULT_CAN_STRICTLY_EXCEED_THE_BRAIN_ON_THE_COMPLETE_BOUND_SEVEN_CHECK_SEMANTICS_OF_THESE_EXACT_FROZEN_P3_SELECTED_CELLS.",
+    "target_information_required": false,
+    "fresh_reality_required": false,
+    "valid": false,
+    "premise_1_status": "FALSIFIED_BY_EXECUTED_SCORER_BYTES",
+    "conclusion_status": "NOT_ESTABLISHED"
   },
-  "abc_effect":{
-    "add_to_D_B":"P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
-    "subsumes_for_same_exact_population":"SYNTHESIS_T1_T3_FROZEN_60_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_AS_A_NARROWER_OVERLAPPING_PROPERTY_CELL",
-    "new_target_reality_consumed":0,
-    "family_closed":false,
-    "remaining_synthesis_escape":"ANY_LOAD_BEARING_SYNTHESIS_CONTEXT_NOT_SOUNDLY_SUBSUMED_BY_THIS_EXACT_FROZEN_CELL_OR_ANOTHER_SOUND_CERTIFICATE"
+  "abc_effect": {
+    "add_to_D_B": null,
+    "subsumes_for_same_exact_population": "SYNTHESIS_T1_T3_FROZEN_60_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_AS_A_NARROWER_OVERLAPPING_PROPERTY_CELL",
+    "new_target_reality_consumed": 0,
+    "family_closed": false,
+    "remaining_synthesis_escape": "ANY_LOAD_BEARING_SYNTHESIS_CONTEXT_NOT_SOUNDLY_SUBSUMED_BY_THIS_EXACT_FROZEN_CELL_OR_ANOTHER_SOUND_CERTIFICATE",
+    "revoked": true,
+    "revocation_reason": "WHOLE_SEVEN_GATE_VECTOR_NOT_PROVED_BY_EXECUTED_SCORER"
   },
-  "hard_nonclaims":[
+  "hard_nonclaims": [
     "NO_CLAIM_THE_FROZEN_T1_T3_60_CASE_CELL_EXHAUSTS_ALL_SYNTHESIS_CONTEXTS.",
     "NO_SCOPE_INHERITANCE_BEYOND_THE_EXACT_BOUND_DIRECT_INSTRUMENTATION_SEMANTICS.",
     "NO_COMMUNICATION_AND_SYNTHESIS_FAMILY_CLOSURE.",
     "NO_GLOBAL_ABC_OR_D_FINALITY_CLOSURE.",
     "NO_TERMINAL_CREDIT."
   ],
-  "accounting":{"incremental_spend_usd":0,"fresh_reality_units_consumed":0,"terminal_credit_delta":0}
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "active": false,
+  "truth_repair": {
+    "path": "canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_EXECUTED_SCORER_FALSIFIER_20261007_V1.json",
+    "reason": "EXACT_EXECUTION_SNAPSHOT_SCORER_DOES_NOT_REPRESENT_OR_CHECK_PROVENANCE_PRESERVATION__DIRECT_INSTRUMENTATION_PASS_DOES_NOT_ENTAIL_ALL_SEVEN_DECLARED_GATES",
+    "revoked_whole_cell": true,
+    "preserve_narrow_independent_cells": true
+  }
 }
