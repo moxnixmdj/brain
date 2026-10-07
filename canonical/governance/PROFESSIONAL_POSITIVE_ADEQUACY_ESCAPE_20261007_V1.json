@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_POSITIVE_ADEQUACY_ESCAPE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_FIRST_PRINCIPLES_PROFESSIONAL_ESCAPE_ROUTE__ZERO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem": "PROFESSIONAL_CONTEXTS_OUTSIDE_EXACT_P2_MEMBERSHIP_WERE_BEING_TREATED_AS_IF_FULL_SEMANTIC_COMPLETION_WERE_ALWAYS_THE_NEXT_NECESSARY_STEP.",
+  "first_principles_repair": "FULL_SEMANTIC_COMPLETION_IS_NOT_NECESSARY_FOR_A_SELECTED_CELL_WHEN_ONE_BRAIN_OWNED_POLICY_IS_PROVED_ADEQUATE_ACROSS_EVERY_SOURCE_COMPATIBLE_INTERPRETATION_STILL_ALIVE_IN_A_SOUND_OVERAPPROXIMATION.",
+  "composition": [
+    "RUN_DECLARED_SOURCE_DIMENSION_CONVENTION_STRUCTURAL_PREFLIGHT",
+    "TRY_EXACT_P2_MEMBERSHIP",
+    "IF_P2_FAILS__TRY_SOURCE_POSITIVE_ADEQUACY_DB_ADMISSION_ON_THE_EXACT_SAME_SOURCE",
+    "IF_POSITIVE_ADEQUACY_PASSES__DELETE_FULL_SEMANTIC_MANIFEST_COMPLETION_AS_A_NECESSARY_PRECONDITION_FOR_THAT_CELL",
+    "IF_BOTH_FAIL__LOCALIZE_ONLY_THE_FIRST_POLICY_CHANGING_SOURCE_SEMANTIC_OR_ADEQUACY_GAP"
+  ],
+  "implementation": {
+    "runtime": "canonical/runtime/professional_positive_adequacy_escape_router_v1.py",
+    "tests": "canonical/tests/test_professional_positive_adequacy_escape_router_v1.py"
+  },
+  "reused_mechanisms": [
+    "canonical/runtime/professional_source_authority_coverage_gate_v1.py",
+    "canonical/runtime/p2_membership_residual_localizer_v1.py",
+    "canonical/runtime/source_positive_adequacy_db_admission_v1.py",
+    "canonical/runtime/proof_carrying_semantic_refinement_v6.py"
+  ],
+  "tournament_effect": {
+    "deleted_assumption": "EXACT_FULL_SEMANTIC_MANIFEST_IS_ALWAYS_REQUIRED_BEFORE_A_PROFESSIONAL_POLICY_CAN_BE_ADMITTED",
+    "new_capability_build_justified": false,
+    "surviving_internal_residual": "ONLY_POLICY_CHANGING_UNRESOLVED_SEMANTICS_OR_ADEQUACY_FAILURES",
+    "surviving_external_acceptance_residual": "CURRENT_EPOCH_AA_RESULT_OR_STRONGER_SCOPE_COMPLETE_DOMINANCE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_AA_BRIEFCASE_TASK_OR_SCORE_IS_CLOSED",
+    "NO_CLAIM_GLOBAL_PROFESSIONAL_SCOPE_IS_CLOSED",
+    "NO_CLAIM_UNKNOWN_AUTHORITY_SOURCES_ARE_DISCOVERED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  }
+}
