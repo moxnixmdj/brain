@@ -1,0 +1,142 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V11",
+  "action_id": "INSTRUCTION_SCOPE_SHARED_SEMANTIC_REDUCTION_20261007_V1",
+  "status": "OPEN__ZERO_REALITY_PROOF_REDUCTION__NO_FRESH_EVIDENCE__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "dec11f733418f0bdc001d2032628a4ae572e51a6",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "ZERO_REALITY_PROOF_REDUCTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::INSTRUCTION_SCOPE_BOUNDARY_SHARED_SEMANTIC_FRONTIER::ZERO_REALITY_PROOF_REDUCTION",
+  "causal_blocker": "INSTRUCTION_SCOPE_BOUNDARY_SHARED_SEMANTIC_FRONTIER",
+  "expected_parent_frontier_change": "DELETE_DISTINCT_INSTRUCTION_SPECIFIC_GENERIC_MECHANISM_HUNT__PRESERVE_ROUTE_LOCAL_SHARED_SEMANTIC_AND_SELECTED_CONTEXT_COVERAGE_GAPS__ZERO_CREDIT",
+  "theory_invariants": {
+    "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+    "terminal_must_remain_false_without_complete_ABC_and_D": true,
+    "knowledge_external_jit": true,
+    "capability_invention_forbidden": true,
+    "no_proxy_goal_substitution": true,
+    "deletion_first": true
+  },
+  "ownership_tests": {
+    "applicable_to_promotion": false,
+    "credit_delta": 0
+  },
+  "reasoning_durability": {
+    "real_objective": "REDUCE_ONLY_THE_CURRENT_INSTRUCTION_SCOPE_ACCEPTANCE_PROOF_GAP_TO_ITS_MINIMUM_SOUND_SHARED_SEMANTIC_OR_DIRECT_E2E_RESIDUAL",
+    "governing_invariants": [
+      "TRUTH_FIRST",
+      "NO_DUPLICATE_EXECUTION",
+      "DELETE_BEFORE_BUILD",
+      "FAIL_CLOSED"
+    ],
+    "material_premises": [
+      "CURRENT_V16_MARKS_INSTRUCTION_SCOPE_AS_ACCEPTANCE_PROOF_GAP_NOT_PROVED_PERSISTENT_CAPABILITY_GAP",
+      "PSTAR_FIRST_APPLICATION_DOES_NOT_FORCE_POSITIVE_P",
+      "FIVE_ROLE_FRONTIER_MAPS_B1_SCOPE_AND_JUDGMENT_TO_SHARED_TASK_CONTRACT_SEMANTICS",
+      "GLOBAL_M0_IS_NOT_LOGICALLY_REQUIRED_WHEN_DIRECT_E2E_OR_OTHER_SOUND_CELL_CERTIFICATES_CLOSE_SELECTED_CONTEXTS"
+    ],
+    "evidence_refs": [
+      "canonical/governance/TERMINAL_NOW_V16_RESIDUAL_NORMALIZATION_20261007_V1.json",
+      "canonical/governance/PSTAR_INSTRUCTION_FOLLOWING_SCOPE_FIRST_APPLICATION_20261007_V1.json",
+      "canonical/governance/FIVE_PRIMITIVE_ROLE_SINGLE_SEMANTIC_FRONTIER_20261007_V1.json",
+      "canonical/governance/M0_GLOBAL_SEMANTIC_DECOMPOSITION_NECESSITY_FALSIFIER_20261007_V1.json",
+      "canonical/runtime/instruction_constraint_compiler_v1.py"
+    ],
+    "conclusion": "DISTINCT_INSTRUCTION_SPECIFIC_GENERIC_MECHANISM_IS_NOT_CURRENTLY_A_PROVED_NECESSITY__REMAINING_GAP_IS_SELECTED_CONTEXT_COVER_PLUS_ROUTE_LOCAL_SHARED_SEMANTIC_OR_DIRECT_E2E_CERTIFICATION",
+    "selected_route": "EXISTING_EVIDENCE_ONLY__NECESSITY_COUNTERMODEL_PLUS_FAIL_CLOSED_BINDING",
+    "rejected_material_alternatives": [
+      "NEW_INSTRUCTION_SPECIFIC_FOUNDATION_MODEL_OR_DONOR",
+      "FRESH_OPUS_QUERY_BEFORE_ZERO_REALITY_EXHAUSTION",
+      "GLOBAL_M0_AS_UNCONDITIONAL_PREREQUISITE"
+    ],
+    "uncertainties": [
+      "GENERAL_SEMANTIC_SCOPE_PARITY_REMAINS_UNPROVED",
+      "SELECTED_CONTEXT_COVER_COMPLETENESS_REMAINS_OPEN",
+      "ROUTE_LOCAL_SEMANTIC_EXTRACTION_MAY_STILL_BE_REQUIRED"
+    ],
+    "assumptions": [],
+    "non_goals": [
+      "NO_ACCEPTANCE_PROMOTION",
+      "NO_FAMILY_CREDIT",
+      "NO_TERMINAL_TRUE",
+      "NO_FRESH_REALITY"
+    ],
+    "next_action": "COMMIT_BLOB_BOUND_REDUCTION_VERIFIER_AND_FALSIFICATION_TESTS",
+    "supersession_conditions": [
+      "SOURCE_BLOB_DRIFT",
+      "CURRENT_AUTHORITY_SUPERSEDES_INSTRUCTION_SCOPE_RESIDUAL",
+      "EQUIVALENT_OPEN_PR_APPEARS"
+    ],
+    "supersedes": []
+  },
+  "recursive_obs": {
+    "exact_base_commit": "dec11f733418f0bdc001d2032628a4ae572e51a6",
+    "goal": "PASS__EXACT_TERMINAL_OBJECTIVE",
+    "capability": "PASS__INSTRUCTION_SCOPE_ONLY",
+    "blocker": "PASS__CURRENT_V16_OPEN_RESIDUAL",
+    "solution": "PASS__DELETE_OR_REUSE_BEFORE_BUILD",
+    "verification": "PASS__MECHANICAL_BLOB_BOUND_VERIFIER",
+    "inherited_system": "PASS__NO_RUNTIME_CAPABILITY_MUTATION",
+    "obs": "PASS__LIVE_GITHUB_REFRESHED_IMMEDIATELY_BEFORE_ACTION",
+    "live_challenger_frontier": "CURRENT_REPO_ZERO_REALITY_PROOF_REDUCTIONS",
+    "selected_route_preflight": "READY__NO_FRESH_REALITY_OR_EXTERNAL_CARRIER_REQUIRED",
+    "unresolved_plausible_dominators": []
+  },
+  "behavioral_contract": {
+    "behavior_id": "INSTRUCTION_SCOPE_SHARED_SEMANTIC_RESIDUAL_REDUCTION",
+    "inputs": "CONTENT_ADDRESSED_V16_PSTAR_SHARED_SEMANTIC_M0_AND_BOUNDED_STRUCTURAL_SOURCES",
+    "environment_state": "CANONICAL_GITHUB_AT_BOUND_BASE_COMMIT",
+    "allowed_information": "EXISTING_CANONICAL_EVIDENCE_ONLY",
+    "required_output_or_action": "SOUND_NECESSITY_REDUCTION_OR_FAIL_CLOSED",
+    "success_condition": "DELETE_ONLY_UNPROVED_DISTINCT_MECHANISM_REQUIREMENT_WHILE_PRESERVING_ALL_COVER_SEMANTIC_ADEQUACY_AND_D_OBLIGATIONS",
+    "failure_condition": "SOURCE_DRIFT_FALSE_CLOSURE_OR_UNSUPPORTED_SCOPE_GENERALIZATION",
+    "terminal_consequence": "ZERO_DIRECT_TERMINAL_CREDIT__SCHEDULER_COMPRESSION_ONLY",
+    "verification_route": "BLOB_BOUND_DETERMINISTIC_VERIFIER_PLUS_MUTATION_TESTS",
+    "dependency_boundary": "NO_FRESH_TARGET_OUTPUT_NO_NEW_CAPABILITY_MECHANISM",
+    "scope": "CURRENT_INSTRUCTION_SCOPE_BOUNDARY_RESIDUAL_ONLY"
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "ZERO_REALITY_EXISTING_EVIDENCE_ONLY"
+  },
+  "qualification_stage": "NOT_APPLICABLE__NO_EXPOSURE_OR_EXECUTION",
+  "terminal_proof_control": {
+    "proof_obligation": "IS_A_DISTINCT_INSTRUCTION_SPECIFIC_GENERIC_MECHANISM_LOGICALLY_NECESSARY_FOR_CURRENT_ABC",
+    "hole_type": "NECESSITY_AND_SCOPE_REDUCTION",
+    "expected_certificate_or_receipt": "CONTENT_ADDRESSED_COUNTERMODEL_WITH_PRESERVED_BOUNDARIES",
+    "validator": "canonical/runtime/instruction_scope_shared_semantic_residual_verifier_v1.py",
+    "maximum_cheap_test_cost": "LOCAL_DETERMINISTIC",
+    "prerequisites": [
+      "CURRENT_BOUND_SOURCE_ARTIFACTS"
+    ],
+    "contamination_risk": "NONE__NO_UNTOUCHED_DATA",
+    "reversibility": true,
+    "falsification_condition": "CURRENT_LOAD_BEARING_CONTEXT_PROVES_DISTINCT_INSTRUCTION_SPECIFIC_MECHANISM_NECESSARY_AFTER_SHARED_SEMANTIC_AND_DIRECT_E2E_ROUTES",
+    "critical_path_relation": "DIRECT__NAMED_V16_ABC_RESIDUAL"
+  },
+  "continuous_obs": {
+    "canonical_state_dependencies_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [],
+    "stale_authority_absent": true,
+    "information_policy": "EXISTING_EVIDENCE_ONLY",
+    "post_receipt_revalidation_required": true
+  },
+  "reality_query_admission": {
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "existing_evidence_search": "COMPLETE_FOR_THIS_NECESSITY_REDUCTION",
+    "minimum_reality_cut": [],
+    "fresh_reality_units": 0
+  },
+  "global_terminal_proof_cut": {
+    "required_for_this_action": false,
+    "reason": "NO_UNTOUCHED_TASK_SELECTION_SOURCE_READ_EXECUTION_OR_NEW_TERMINAL_OBSERVATION"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  }
+}
