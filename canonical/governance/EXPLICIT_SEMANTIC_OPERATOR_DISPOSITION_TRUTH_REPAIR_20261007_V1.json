@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_EXPLICIT_SEMANTIC_OPERATOR_DISPOSITION_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SOUNDNESS_REPAIR__OLD_COUNTERFACTUAL_COVERAGE_SEMANTICS_PARTIALLY_REVOKED__PATCHED_DISPOSITION_BINDING_INDEPENDENT_REPLAY_PASS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "falsified_subject": {
+    "capability_artifact": "canonical/capabilities/opus55/EXPLICIT_SEMANTIC_OPERATOR_COUNTERFACTUALS_001.json",
+    "old_runtime": {
+      "path": "canonical/runtime/semantic_operator_counterfactuals.py",
+      "git_blob_sha": "494d72ed2d5d10e0a3b3f421d0f5de81fb1e5730"
+    },
+    "affected_claim": "FAIL_CLOSED_COUNTERFACTUAL_COVERAGE_FOR_EXPLICIT_OPERATOR_SEMANTICS"
+  },
+  "constructive_falsifier": {
+    "source_text": "The transfer must not execute before approval.",
+    "generated_obligations": [
+      "PROHIBITED_ACTION_MUST_BE_REJECTED",
+      "REVERSED_TEMPORAL_ORDER_MUST_BE_REJECTED"
+    ],
+    "adversarial_scenarios": "SET expected_disposition=ACCEPT FOR EVERY GENERATED OBLIGATION",
+    "old_runtime_result": "pass=true__errors=[]",
+    "consequence": "THE OLD VALIDATOR CHECKED SCENARIO PRESENCE AND ENUM_MEMBERSHIP BUT DID NOT CHECK THAT THE DECLARED DISPOSITION MATCHED THE BRAIN_GENERATED OBLIGATION SEMANTICS."
+  },
+  "partial_revocation": {
+    "preserve": [
+      "EXPLICIT_LEXICAL_OPERATOR_EXTRACTION",
+      "OPERATOR_ID_POSITION_SOURCE_BINDING",
+      "SEMANTIC_CLASS_VALIDATION",
+      "NUMERIC_BOUND_VALIDATION",
+      "AMBIGUOUS_ANY_REQUIRES_ALTERNATIVES",
+      "COUNTERFACTUAL_OBLIGATION_GENERATION"
+    ],
+    "revoke_until_patch": [
+      "COUNTERFACTUAL_SCENARIO_SEMANTIC_COVERAGE_SOUNDNESS_FROM_PRESENCE_ALONE",
+      "ANY_DOWNSTREAM_SOUNDNESS_ARGUMENT_THAT_REQUIRES_THE_OLD VALIDATOR TO REJECT A WRONG BUT ENUM_VALID DISPOSITION"
+    ]
+  },
+  "patch": {
+    "semantic_runtime": {
+      "path": "canonical/runtime/semantic_operator_counterfactuals.py",
+      "git_blob_sha": "652155bb3bb46512dc43804e5ec24b22f19e3709"
+    },
+    "semantic_tests": {
+      "path": "canonical/tests/test_semantic_operator_counterfactuals.py",
+      "git_blob_sha": "615c8079e33700d4d409fb64994a851141d7d503"
+    },
+    "judgment_runtime": {
+      "path": "canonical/runtime/judgment_control_envelope_v1.py",
+      "git_blob_sha": "7bcbfc122336a63adc72b57fb0e9077c036a46e1"
+    },
+    "judgment_tests": {
+      "path": "canonical/tests/test_judgment_control_envelope_v1.py",
+      "git_blob_sha": "e712746ecfb0c912779fc6436cbb4f2b51521c3d"
+    },
+    "rule": [
+      "CENTRALIZE THE ONLY ALLOWED DISPOSITION FOR EVERY GENERATED COUNTERFACTUAL KIND.",
+      "UNKNOWN FUTURE COUNTERFACTUAL KINDS HAVE NO DEFAULT AND FAIL CLOSED.",
+      "VALIDATOR REJECTS ENUM_VALID BUT SEMANTICALLY WRONG DISPOSITIONS.",
+      "JUDGMENT SYNTHETIC BUNDLE GENERATION USES THE SAME CANONICAL RULE SO PRODUCTION AND TEST SEMANTICS CANNOT DRIFT."
+    ]
+  },
+  "independent_replay": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "exact_git_blob_recomputation_passed": true,
+    "semantic_operator_suite": "13_OF_13_PASS",
+    "judgment_control_suite": "10_OF_10_PASS",
+    "new_negative_canary": "WRONG_COUNTERFACTUAL_DISPOSITION_IS_REJECTED",
+    "original_falsifier_on_old_blob_reproduced": true
+  },
+  "scheduler_effect": [
+    "DO_NOT USE OLD_BLOB_494D72 COUNTERFACTUAL_COVERAGE PASS AS A SOUND SEMANTIC REFINER.",
+    "AFTER PATCH MERGE REBIND ANY ACTIVE JUDGMENT OR FINANCE ROUTE THAT CONTENT_ADDRESSES THE OLD SEMANTIC OR JUDGMENT DEPENDENCY BYTES.",
+    "PRESERVE NEW SOURCE_ALIGNED_SEMANTIC_PROOF_V1 AS A NARROW SAFE ROUTE; IT DOES NOT DEPEND ON CALLER COUNTERFACTUAL DISPOSITION LABELS.",
+    "CONTINUE SHARED SEMANTIC REFINEMENT ONLY FROM SOUND ONE_SIDED PROOF SOURCES."
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM THE PATCH SOLVES ARBITRARY SEMANTICS.",
+    "NO CLAIM THE OLD EXPLICIT_OPERATOR COMPONENT IS WHOLLY INVALID.",
+    "NO FINANCE UNKNOWN_DOMAIN ABC FAMILY CAPABILITY OWNERSHIP OR TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
