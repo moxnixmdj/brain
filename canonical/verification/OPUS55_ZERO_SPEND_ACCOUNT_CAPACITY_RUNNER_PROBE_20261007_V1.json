@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ZERO_SPEND_ACCOUNT_CAPACITY_RUNNER_PROBE_V1",
+  "date": "2026-10-07",
+  "status": "EXECUTED_ZERO_SPEND_PROBE__VERIFICATION_RUNNER_HAS_NO_CONFIGURED_OPENROUTER_OR_ANTHROPIC_CREDENTIAL_SECRET__EXACT_COMPARATOR_UNAVAILABLE_ON_THIS_CARRIER__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_path": ".github/workflows/zero-spend-opus-capacity-probe.yml",
+    "workflow_commit": "f6dc8f84c09ff4159687582eac291173a238782a",
+    "workflow_run_id": 37564009031,
+    "job_id": 112607480940,
+    "artifact_id": 11457712309,
+    "conclusion": "success"
+  },
+  "probe_contract": {
+    "model_inference_requests": 0,
+    "purchases_or_topups": 0,
+    "secret_values_emitted": false,
+    "allowed_network_operations": [
+      "OPENROUTER_GET_/api/v1/key_IF_KEY_PRESENT",
+      "OPENROUTER_GET_/api/v1/credits_IF_RELEVANT_KEY_PRESENT"
+    ]
+  },
+  "observed": {
+    "openrouter_api_key_present": false,
+    "openrouter_management_api_key_present": false,
+    "anthropic_api_key_present": false,
+    "authenticated_openrouter_capacity_snapshot_observed": false,
+    "positive_preexisting_credit_observed": false,
+    "positive_key_limit_observed": false,
+    "exact_opus_comparator_authorized": false,
+    "incremental_spend_usd": 0
+  },
+  "consequence": {
+    "verification_capsule_runner_exact_opus_comparator_route_presently_available": false,
+    "reason": "THE_PUBLIC_VERIFICATION_RUNNER_HAS_NONE_OF_THE_THREE_RELEVANT_ACTIONS_SECRETS_CONFIGURED__THEREFORE_IT_CANNOT_AUTHENTICATE_EITHER_EXACT_COMPARATOR_ROUTE_FROM_THIS_CARRIER.",
+    "global_account_credit_state_resolved": false,
+    "brain_repository_secret_state_resolved": false,
+    "note": "THIS_IS_A_CARRIER_CONFIGURATION_RECEIPT__NOT_A_CLAIM_THAT_THE_OWNER_HAS_NO_CREDIT_OR_CREDENTIAL_ANYWHERE_ELSE."
+  },
+  "scheduler_effect": [
+    "DO_NOT_SCHEDULE_AN_EXACT_OPUS55_COMPARATOR_CALL_ON_moxnixmdj/verification-capsule-runner_UNTIL_A_NEW_AUTHENTICATED_CREDENTIAL_BINDING_RECEIPT_EXISTS.",
+    "DO_NOT_PURCHASE_OR_TOP_UP_CREDIT.",
+    "CHECK_OTHER_ALREADY_AUTHORIZED_CARRIERS_WITH_NONSPENDING_CAPACITY_PROBES_BEFORE_DECLARING_EXACT_COMPARATOR_ACCESS_GLOBALLY_UNAVAILABLE.",
+    "CONTINUE_SCOPE_COMPLETE_U_DEPLETION_FROM_EXISTING_BYTES_AND_PUBLIC_TARGET_REALITY_IN_PARALLEL."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_OWNER_HAS_NO_OPENROUTER_OR_ANTHROPIC_ACCOUNT.",
+    "NO_CLAIM_ANY_EXTERNAL_ACCOUNT_HAS_ZERO_CREDIT.",
+    "NO_CLAIM_THE_PRIVATE_BRAIN_REPOSITORY_HAS_NO_RELEVANT_SECRET.",
+    "NO_MODEL_REQUEST_WAS_SENT.",
+    "NO_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_inference_requests": 0,
+    "terminal_credit_delta": 0
+  }
+}
