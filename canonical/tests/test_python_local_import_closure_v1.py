@@ -42,3 +42,43 @@ def test_unresolved_canonical_import_fails_closed(tmp_path: Path):
     out = compute("canonical/runtime/a.py", repo_root=root)
     assert out["pass"] is False
     assert "LOCAL_IMPORT_UNRESOLVED:canonical.runtime.missing" in out["errors"]
+
+
+def test_namespace_package_child_import_is_bound(tmp_path: Path):
+    root = tmp_path
+    (root / "canonical/runtime").mkdir(parents=True)
+    (root / "canonical/runtime/a.py").write_text(
+        "from canonical.runtime import b\n", encoding="utf-8"
+    )
+    (root / "canonical/runtime/b.py").write_text("x=1\n", encoding="utf-8")
+    out = compute("canonical/runtime/a.py", repo_root=root)
+    assert out["pass"] is True, out
+    assert [x["path"] for x in out["dependencies"]] == [
+        "canonical/runtime/a.py",
+        "canonical/runtime/b.py",
+    ]
+
+
+def test_namespace_package_missing_child_fails_closed(tmp_path: Path):
+    root = tmp_path
+    (root / "canonical/runtime").mkdir(parents=True)
+    (root / "canonical/runtime/a.py").write_text(
+        "from canonical.runtime import missing\n", encoding="utf-8"
+    )
+    out = compute("canonical/runtime/a.py", repo_root=root)
+    assert out["pass"] is False
+    assert "LOCAL_IMPORT_UNRESOLVED:canonical.runtime.missing" in out["errors"]
+
+
+def test_namespace_package_star_import_fails_closed(tmp_path: Path):
+    root = tmp_path
+    (root / "canonical/runtime").mkdir(parents=True)
+    (root / "canonical/runtime/a.py").write_text(
+        "from canonical.runtime import *\n", encoding="utf-8"
+    )
+    out = compute("canonical/runtime/a.py", repo_root=root)
+    assert out["pass"] is False
+    assert (
+        "LOCAL_IMPORT_STAR_FROM_NAMESPACE_UNSUPPORTED:canonical.runtime"
+        in out["errors"]
+    )
