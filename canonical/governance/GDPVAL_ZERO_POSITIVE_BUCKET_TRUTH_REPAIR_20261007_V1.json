@@ -9,7 +9,7 @@
     ],
     "verification": [
       "canonical/verification/GDPVAL_PUBLIC_26_POSITIVE_COMPLEMENT_REPLAY_20261007_V1.json",
-      "PENDING_BRANCH_BLOB"
+      "72b0ef951e14d886e783e6909f22922f71fc167f"
     ],
     "prior": [
       "canonical/evidence/GDPVAL_PUBLIC_220_EXPLICIT_OBLIGATION_LOCALIZATION_20261007_V1.json",
