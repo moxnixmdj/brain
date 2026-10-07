@@ -8,14 +8,14 @@ def base_problem():
         "generators": [
             {
                 "generator_id": "G0",
-                "coverage_mode": "POSITIVE_COVER",
+                "coverage_mode": "SEMANTIC_ELISION_A_B_C_SCOPE_COVER",
                 "scope_complete": True,
                 "covered": True,
                 "proof_receipts": [R],
             },
             {
                 "generator_id": "G1",
-                "coverage_mode": "COMPLETE_OBJECTIVE",
+                "coverage_mode": "DIRECT_DOMINANCE",
                 "scope_complete": True,
                 "covered": True,
                 "proof_receipts": [R],
@@ -46,6 +46,7 @@ def test_all_premises_close_abc_but_not_d_or_terminal():
     assert out["u_empty"] is True
     assert out["d_finality_required"] is True
     assert out["terminal"] is False
+    assert out["single_semantic_representation_required"] is False
 
 def test_generator_completeness_is_load_bearing():
     p = base_problem()
@@ -82,3 +83,10 @@ def test_generator_receipt_is_mandatory():
     out = evaluate(p)
     assert out["pass"] is False
     assert out["reason"] == "GENERATOR_PROOF_RECEIPTS_INVALID:G1"
+
+def test_old_single_route_label_is_rejected():
+    p = base_problem()
+    p["generators"][0]["coverage_mode"] = "COMPLETE_OBJECTIVE"
+    out = evaluate(p)
+    assert out["pass"] is False
+    assert out["reason"] == "GENERATOR_COVERAGE_MODE_INVALID:G0"
