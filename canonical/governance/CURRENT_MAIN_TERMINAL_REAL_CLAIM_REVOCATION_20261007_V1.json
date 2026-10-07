@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REAL_CLAIM_REVOCATION_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH_REPAIR__CURRENT_MAIN_TERMINAL_REAL_CLAIM_REVOKED__STABLE_POINTER_TERMINAL_FALSE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "observed_main": {
+    "commit": "33b55e317b0890759bd39fb5a6adde9d59d9bb1c",
+    "stable_pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "d2a271a1850cc98b735879a6d783f75639249778"
+    }
+  },
+  "contradiction": {
+    "contradicted_status": {
+      "path": "canonical/verification/CURRENT_MAIN_TERMINAL_REALITY_STATUS.json",
+      "git_blob_sha": "92b28efc59e6bfbdeb8b9c031583e9e2e0cfef39",
+      "claimed_status": "CURRENT_MAIN_TERMINAL_REAL"
+    },
+    "stable_pointer_truth": {
+      "current_U_empty_proved": false,
+      "router_registry_real_selected_cover_complete": false,
+      "complete_selected_context_ABC_closed": false,
+      "D_finality_closed": false,
+      "terminal": false
+    },
+    "conclusion": "CURRENT_MAIN_TERMINAL_REAL_IS_NOT_DERIVABLE_AND_IS_CONTRADICTED_BY_THE_ACTIVE_STABLE_TERMINAL_AUTHORITY_POINTER"
+  },
+  "branch_crosscheck": {
+    "ref": "terminal-now-scope-complete-cut-991ac",
+    "stable_pointer_blob_sha": "d2a271a1850cc98b735879a6d783f75639249778",
+    "pointer_byte_identical_to_main": true,
+    "terminal_now_exact_gate_self_report_present": false,
+    "official_terminal_reality_gate_receipt_present": false
+  },
+  "scheduler_effect": [
+    "TREAT_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V2_AS_REVOKED_FOR_SCHEDULING_AND_ACCEPTANCE.",
+    "PRESERVE_CURRENT_TERMINAL_AUTHORITY_JSON_AS_LIVE_TRUTH_UNTIL_A_NEWER_CONTENT_ADDRESSED_AUTHORITY_PROVES_U_EMPTY_AND_D_FINALITY.",
+    "DO_NOT_PROMOTE_TERMINAL_FROM_STATUS_FILES_WORKFLOW_NAMES_OR_CERTIFICATE_COUNTS."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_U_IS_EMPTY.",
+    "NO_CLAIM_ABC_IS_CLOSED.",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
