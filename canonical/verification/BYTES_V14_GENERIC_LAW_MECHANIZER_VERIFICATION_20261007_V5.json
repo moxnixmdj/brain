@@ -1,0 +1,10 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_GENERIC_LAW_MECHANIZER_V5_VERIFICATION",
+  "date":"2026-10-07",
+  "carrier":{"provider":"SPRITES","name":"h100-real-image-v1","id":"sprite-68a466f6-88d5-493d-93f3-2b85377836a3"},
+  "exact_blobs":{"runtime":"f5d140ca78b1512efd3ad248e5991909480331d5","self_checker":"cca5d79b15499bd263e84112feedc46228be05a4","law_mechanizer":"b1cbd41d27a5db23c3069ff2f5aff1de9d7dcec7"},
+  "replay":{"status":"PASS","derived_equations":280,"closure_809":"PASS"},
+  "encoding":{"raw_bytes":7531,"payload_bytes":2872,"sha256":"12f030b7fcd7d7899b8a87fcbad55cef17678453ce74c54b1aa96c3ce400e8f0","roundtrip_exact":true},
+  "remaining_boundary":"BOUNDARY_SMALL_MODEL_COMPLETENESS",
+  "terminal_credit_delta":0
+}
