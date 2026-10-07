@@ -14,6 +14,7 @@ from hashlib import sha256
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.semantic_operator_counterfactuals import extract_semantic_operators
+from canonical.runtime.certified_scope_fragment_v1 import parse_scope
 
 SCHEMA = "BRAIN_SOURCE_ALIGNED_SEMANTIC_PROOF_V1"
 
@@ -28,6 +29,15 @@ def _operator_bound_atom(operator_id: str, semantic_class: str, bound_value: flo
 
 def _literal_atom(source_id: str, start: int, end: int, digest: str) -> str:
     return f"SOURCE_LITERAL::{source_id}::{start}:{end}::{digest}"
+
+
+def _scope_relation_atom(parsed: Mapping[str, Any]) -> str:
+    return (
+        "SCOPE_RELATION::"
+        f"{parsed['scope_id']}::{parsed['relation']}::"
+        f"{parsed['left_role']}:{parsed['left_text_sha256']}::"
+        f"{parsed['right_role']}:{parsed['right_text_sha256']}"
+    )
 
 
 def verify_proof(
@@ -129,6 +139,46 @@ def verify_proof(
                 },
             })
 
+        elif kind == "SCOPE_RELATION":
+            scoped = parse_scope(source_text, source=source_id)
+            if scoped.get("status") != "PARSED":
+                rejected.append({
+                    "claim_id": cid,
+                    "reason": "SCOPE_NOT_CERTIFIABLY_PARSED",
+                    "scope_status": scoped.get("status"),
+                    "scope_reason": scoped.get("reason"),
+                })
+                continue
+            parsed = scoped["parse"]
+            checks = {
+                "scope_id": str(claim.get("scope_id") or ""),
+                "relation": str(claim.get("relation") or ""),
+                "left_role": str(claim.get("left_role") or ""),
+                "right_role": str(claim.get("right_role") or ""),
+                "left_text_sha256": str(claim.get("left_text_sha256") or ""),
+                "right_text_sha256": str(claim.get("right_text_sha256") or ""),
+            }
+            expected = {k: str(parsed[k]) for k in checks}
+            mismatch = [k for k in checks if checks[k] != expected[k]]
+            if mismatch:
+                rejected.append({
+                    "claim_id": cid,
+                    "reason": "SCOPE_RELATION_MISMATCH",
+                    "mismatch_fields": mismatch,
+                    "expected": expected,
+                    "claimed": checks,
+                })
+                continue
+            accepted.append({
+                "claim_id": cid,
+                "kind": kind,
+                **expected,
+                "left_span": list(parsed["left_span"]),
+                "right_span": list(parsed["right_span"]),
+                "operator_span": list(parsed["operator_span"]),
+                "constraint": {"op": "ATOM", "id": _scope_relation_atom(parsed)},
+            })
+
         elif kind == "SOURCE_LITERAL":
             start = claim.get("start")
             end = claim.get("end")
@@ -182,7 +232,7 @@ def verify_proof(
         "proved_constraint_ids": [c["id"] for c in constraints],
         "terminal_authority": False,
         "soundness_boundary": (
-            "ONLY_EXACT_SOURCE_LITERALS_AND_EXPLICIT_OPERATOR_CLASS_OR_BOUND_FACTS_ARE_PROVED;"
+            "ONLY_EXACT_SOURCE_LITERALS_EXPLICIT_OPERATOR_CLASS_OR_BOUND_FACTS_AND_CERTIFIED_SCOPE_RELATIONS_ARE_PROVED;"
             "ARGUMENT_SCOPE_REFERENCE_RESOLUTION_DOMAIN_MEANING_AND_POLICY_ADEQUACY_ARE_NOT_PROVED"
         ),
     }
