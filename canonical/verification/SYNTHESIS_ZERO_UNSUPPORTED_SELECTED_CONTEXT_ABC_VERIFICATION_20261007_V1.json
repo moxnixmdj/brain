@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_ZERO_UNSUPPORTED_SELECTED_CONTEXT_ABC_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "SOURCE_BOUND_PLUS_WOLFRAM_FLOOR_PASS__STATIC_ROUTE_PURITY_AUDIT__INDEPENDENT_CARRIER_REPLAY_STILL_REQUIRED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_ZERO_UNSUPPORTED_SELECTED_CONTEXT_ABC_BUNDLE_20261007_V1.json",
+    "git_blob_sha": "1f071e1be592a4698771bba96f19fb9cbf85f17d",
+    "branch": "abc-synthesis-zero-unsupported-cell-v1"
+  },
+  "exact_bindings": {
+    "authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V9.json",
+      "git_blob_sha": "1ec7f2c86534d046e51ddda00001ed287039fc0a"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "terminal_wave": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    },
+    "selected_route": {
+      "path": "canonical/runtime/p3_information_safe_candidate_v3.py",
+      "git_blob_sha": "54bfc7e5ee205aa328863a5ea1ca6f47f864d85a"
+    }
+  },
+  "verified_from_bound_authorities": [
+    "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_STATE_PROVED",
+    "PREDICATE_INDEPENDENT_OR_OBJECTIVE_TRUE",
+    "PREDICATE_SCOPE_COMPLETE_TRUE",
+    "T1_AND_T3_LOAD_BEARING_DIRECT_P3_INSTRUMENTATION_IS_PART_OF_BOUND_TERMINAL_WAVE"
+  ],
+  "wolfram": {
+    "statement": "ForAll[t, t>=0 -> 0<=t]",
+    "result": true,
+    "consequence": "ZERO_IS_THE_OBJECTIVE_FLOOR_FOR_A_NONNEGATIVE_UNSUPPORTED_MATERIAL_CLAIM_COUNT"
+  },
+  "static_route_source_audit": {
+    "exact_route_blob": "54bfc7e5ee205aa328863a5ea1ca6f47f864d85a",
+    "imports": [
+      "__future__.annotations",
+      "typing.Any",
+      "typing.Mapping"
+    ],
+    "filesystem_calls": 0,
+    "network_calls": 0,
+    "process_spawn_calls": 0,
+    "opaque_model_or_service_calls": 0,
+    "interpretation": "EXACT_OPERATIVE_MODULE_IS_PURE_IN_MEMORY_BY_DIRECT_SOURCE_INSPECTION",
+    "independent_carrier": false
+  },
+  "candidate_conclusion": "THIS DECLARED ZERO_UNSUPPORTED_CLAIMS CELL HAS A SOUND TARGET_FREE OBJECTIVE_FLOOR ROUTE IF THE EXACT BOUND PREDICATE SCOPE AND ROUTE REMAIN UNCHANGED; LOCAL C IS THE IDENTITY OF THE BOUND DETERMINISTIC ROUTE ON THE DECLARED EVALUATOR/HARD_CONSTRAINT QUOTIENT.",
+  "remaining_before_any_promotion": [
+    "INDEPENDENT_EXACT_BLOB_REPLAY_OF_THE_ROUTE_PURITY_AND_BUNDLE_BINDINGS",
+    "DO_NOT_PROMOTE WHOLE SYNTHESIS FAMILY",
+    "KEEP SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR OPEN"
+  ],
+  "hard_nonclaims": [
+    "NO WHOLE FAMILY CLOSURE",
+    "NO SYNTHESIS QUALITY NONINFERIORITY",
+    "NO GLOBAL ABC CLOSURE",
+    "NO GLOBAL D CLOSURE",
+    "NO TERMINAL ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
