@@ -1,0 +1,128 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V2",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH_REPAIR__SIX_CONSUMED_FINAL_ZERO_SLOTS__RANK7_NEXT_UNTOUCHED__RANK7_EXECUTION_BLOCKED_PENDING_PLANNER_SERIALIZATION_REPAIR__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "source_bindings": {
+    "current_route": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_ROUTE_REBIND_20261005_V1.json",
+      "git_blob_sha": "dae0296799b44d8d97a4bea402754ebfbf43cdc8"
+    },
+    "manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    },
+    "target_tuple": {
+      "path": "canonical/governance/OPUS55_SCORE_TARGET_TUPLE_BINDINGS_20261005_V1.json",
+      "git_blob_sha": "9bbd45f066ab94fa3f5110b9cc5efcd4118d1367"
+    },
+    "historical_five_zero_ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_TARGET_EXECUTION_OVERLAY_V3.json",
+      "git_blob_sha": "7081b77ba6c16c7c10050e1608e212cba8691be3"
+    },
+    "invalid_tranche2_revocation_commit": "a59e1beb356e12eaf5dee00c812fbabdcc4356ad",
+    "integration_verification": {
+      "path": "canonical/verification/TB_SCIENCE_PATCHED_REAL_HARBOR_INTEGRATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "4512996a6698463be367052b13a891bd0f647f73"
+    },
+    "rank6_result": {
+      "path": "canonical/verification/TB_SCIENCE_RANK6_RESULT_20261007_V1.json",
+      "git_blob_sha": "8e237e1c4082956db4836488c6c7370a77e3f173"
+    }
+  },
+  "current_route_bytes": {
+    "planner": {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "fe7c0ce885197217774638df382aeb6f68ff38dd"
+    },
+    "controller": {
+      "path": "canonical/runtime/harbor_science_agent_v1.py",
+      "git_blob_sha": "5557efd21f1a433ad16766def3775a79c459784b"
+    },
+    "command_policy": {
+      "path": "canonical/runtime/harbor_command_policy.py",
+      "git_blob_sha": "a525773417291c7a4841bf35e1baff5370350d0d"
+    },
+    "harbor_transport": {
+      "path": "canonical/runtime/harbor_environment_transport.py",
+      "git_blob_sha": "ec46f648214a37bb16025d5ef2593efdf59f0d79"
+    },
+    "source_gate": {
+      "path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+      "git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+    },
+    "reducer": {
+      "path": "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py",
+      "git_blob_sha": "3b48ea534d606cf47a8321b56427353066393577"
+    }
+  },
+  "truth_repair": {
+    "general_brain_adapter_unbound": false,
+    "reason": "CURRENT_ROUTE_BINDS_BRAIN_OWNED_PLANNER_CONTROLLER_COMMAND_POLICY_HARBOR_TRANSPORT_SOURCE_GATE_AND_REDUCER_AND_REAL_HARBOR_ZERO_CASE_INTEGRATION_ALREADY_PASSED",
+    "historical_overlay_target_percent_is_current_authority": false,
+    "historical_overlay_role": "CONSUMED_SLOT_LEDGER_ONLY",
+    "current_target_percent": 58.7,
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87,
+    "consumed_slots": [
+      "terminal-bench-science/genomic-model-ranking::trial-0",
+      "terminal-bench-science/mri-harmonization::trial-0",
+      "terminal-bench-science/navigation-sensor-calibration::trial-0",
+      "terminal-bench-science/baseline-free-localization::trial-0",
+      "terminal-bench-science/virtual-baseline-localization::trial-0",
+      "terminal-bench-science/koopman-mfg-id::trial-0"
+    ],
+    "consumed_successes": 0,
+    "consumed_final_failures": 6,
+    "invalid_oct5_tranche2_precommit_revoked": true,
+    "next_untouched_slot": {
+      "schedule_rank": 7,
+      "slot_id": "terminal-bench-science/reactor-safety-control::trial-0",
+      "task_digest": "sha256:96c8c5764042dca01ba0b7bd127cf2587f8df538a335f36abf6b4c200f0bb669"
+    },
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 81,
+    "rank6_finalization": {
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "cause": "SCIENCE_PLANNER_TOOL_ARGUMENTS_JSON_INVALID",
+      "execution_authority_consumed": true,
+      "retry_allowed": false,
+      "replacement_allowed": false
+    }
+  },
+  "slot_authority": {
+    "scope": "RANK7_IS_FROZEN_AS_NEXT_UNTOUCHED_SLOT_BUT_MAY_NOT_EXECUTE_UNTIL_THE_SHARED_PLANNER_SERIALIZATION_DEFECT_IS_REPAIRED_AND_INDEPENDENTLY_VERIFIED",
+    "execution_authority": false,
+    "fresh_reality_authority": false,
+    "retries": 0,
+    "replacement": false,
+    "duplicate_credit": false
+  },
+  "remaining_before_any_new_terminal_slot": [
+    "CONTENT_ADDRESSED_REPAIR_OF_SCIENCE_PLANNER_TOOL_ARGUMENT_SERIALIZATION_OR_OUTPUT_BUDGET_BOUNDARY",
+    "INDEPENDENT_ZERO_REALITY_VERIFICATION_THAT_THE_REPAIRED_PLANNER_PRODUCES_COMPLETE_PARSEABLE_TOOL_ARGUMENT_OBJECTS_AND_PRESERVES_FAIL_CLOSED_BEHAVIOR",
+    "CURRENT_ROUTE_EXECUTION_CAPSULE_REBOUND_TO_THE_REPAIRED_PLANNER_BYTES",
+    "INDEPENDENT_VERIFICATION_OF_THE_REBOUND_EXECUTION_CAPSULE",
+    "EXPLICIT_NEW_FRESH_REALITY_AUTHORITY_BOUND_TO_RANK7_ONLY"
+  ],
+  "reality_cut_repair": {
+    "prior_state": "RANK6_FROZEN__EXECUTION_CAPSULE_AND_FRESH_REALITY_AUTHORITY_UNBOUND",
+    "current_state": "RANK6_FINAL_ZERO__SHARED_PLANNER_SERIALIZATION_DEFECT_OBSERVED__RANK7_FROZEN_BUT_EXECUTION_BLOCKED_PENDING_ZERO_REALITY_REPAIR",
+    "next_untouched_rank": 7
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_TB_SCIENCE_THRESHOLD_IS_CLOSED",
+    "NO_CLAIM_RANK7_IS_AUTHORIZED_FOR_EXECUTION",
+    "NO_RETRY_OR_REPLACEMENT_CREDIT_FOR_RANK6",
+    "NO_CLAIM_THE_PLANNER_SERIALIZATION_DEFECT_IS_REPAIRED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 1,
+    "terminal_credit_delta": 0
+  }
+}
