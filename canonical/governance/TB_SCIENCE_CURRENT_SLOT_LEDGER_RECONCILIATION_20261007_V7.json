@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V7",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH__NINE_CONSUMED_SLOTS__RANK9_PLANNER_TRANSPORT_GRAMMAR_FINAL_ZERO__NEXT_UNTOUCHED_RANK10__NO_REPLAY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V6.json",
+    "git_blob_sha": "b82cffd09260c6792f473c952d2f0644bb2ca1fa"
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "truth_repair": {
+    "consumed_slots": [
+      "terminal-bench-science/genomic-model-ranking::trial-0",
+      "terminal-bench-science/mri-harmonization::trial-0",
+      "terminal-bench-science/navigation-sensor-calibration::trial-0",
+      "terminal-bench-science/baseline-free-localization::trial-0",
+      "terminal-bench-science/virtual-baseline-localization::trial-0",
+      "terminal-bench-science/koopman-mfg-id::trial-0",
+      "terminal-bench-science/reactor-safety-control::trial-0",
+      "terminal-bench-science/linked-cell-suppression::trial-0",
+      "terminal-bench-science/neo-orbit-determination::trial-0"
+    ],
+    "consumed_successes": 0,
+    "consumed_final_failures": 9,
+    "next_untouched_slot": {
+      "schedule_rank": 10,
+      "slot_id": "terminal-bench-science/rdkit-ic-constraints::trial-0",
+      "task_digest": "sha256:17e356ab255088712c7dfa9765bf077b33a3da221f4a03d4770576857f9c0b6f"
+    },
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 78,
+    "maximum_possible_successes_remaining": 201,
+    "pass_still_mathematically_reachable": true
+  },
+  "scheduler": [
+    "NEVER_REPLAY_RANK6_RANK7_RANK8_OR_RANK9__THEIR_ONE_USE_AUTHORITIES_ARE_CONSUMED.",
+    "RANK9_IS_A_PLANNER_TRANSPORT_FINAL_ZERO__DO_NOT_RELABEL_AS_TASK_CAPABILITY_NEGATIVE_EVIDENCE.",
+    "DO_NOT_AUTHORIZE_RANK10_UNTIL_THE_REPAIRED_PLANNER_PASSES_AN_INDEPENDENT_LIVE_LLAMA_CPP_TRANSPORT_PROBE_WITHOUT_BENCHMARK_TASK_EXPOSURE.",
+    "FEED_THE_RANK9_GRAMMAR_FAILURE_AS_A_CAUSAL_COUNTEREXAMPLE_TO_THE_ACTIVE_TOURNAMENT_FAILURE_CAPABILITY_LAW__NO_NEW_SCIENCE_PRIMITIVE_IS_ADMISSIBLE.",
+    "AFTER_TRANSPORT_PROBE_PASS__RECOMPUTE_THE_EXACT_ROUTE_CLOSURE_AND_AUTHORIZE_ONLY_THE_NEXT_UNTOUCHED_RANK10_SLOT.",
+    "RACE_EMPIRICAL_SLOTS_AGAINST_ANY_STRONGER_SCOPE_COMPLETE_ACCEPTANCE_ROUTE; DO_NOT_SERIALIZE_TERMINAL_PROGRESS_ON_TB_SCIENCE_BY_DEFAULT."
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_RANK9_RETRY_OR_REPLACEMENT",
+    "NO_RANK10_EXECUTION_AUTHORITY",
+    "NO_TASK_CAPABILITY_NEGATIVE_EVIDENCE_FROM_RANK9",
+    "NO_CLAIM_PLANNER_TRANSPORT_REPAIR_IS_VERIFIED_YET",
+    "NO_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 4,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  },
+  "rank9_execution": {
+    "slot_id": "terminal-bench-science/neo-orbit-determination::trial-0",
+    "task_digest": "sha256:b0038fd39395b57f2036b2c0271f37b508e1250fc97d12c899590b61e997cada",
+    "authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK9_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1.json",
+      "git_blob_sha": "af464670453e432367531edb17e8590959ae5c41"
+    },
+    "irreversible_result": {
+      "path": "canonical/verification/TB_SCIENCE_RANK9_IRREVERSIBLE_RESULT_TRUTH_20261007_V1.json",
+      "git_blob_sha": "7f1c33128be7ec1820a5b008c4d8dab99ae6a3d5"
+    },
+    "public_runner": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "workflow_run_id": 37619396615,
+      "workflow_job_id": 112787673716,
+      "artifact_id": 11481907378,
+      "artifact_digest": "sha256:7c3d8b0a3edadb3cd04f075aa948807abeee4b6db0af0e851f48ff03843422d3",
+      "workflow_conclusion": "success",
+      "run_attempt": 1
+    },
+    "irreversible_receipt": {
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "verifier_result_present": false,
+      "errors": [
+        "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD"
+      ],
+      "execution_authority_consumed": true,
+      "rerun_credit": false,
+      "incremental_spend_usd": 0
+    },
+    "interpretation": {
+      "task_capability_negative_evidence": false,
+      "infrastructure_or_transport_failure": true,
+      "causal_failure": "PLANNER_TOOL_SCHEMA_LLAMA_CPP_GRAMMAR_REPETITION_BOUND_EXCEEDED__command_maxLength_12000",
+      "exact_carrier_closure_passed": true,
+      "live_epoch_gate_passed": true,
+      "model_generation_started": false,
+      "no_rank9_retry": true
+    }
+  }
+}
