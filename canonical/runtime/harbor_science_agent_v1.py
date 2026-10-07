@@ -34,9 +34,23 @@ MAX_REQUIREMENTS = 16
 MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
 MAX_BRAIN_DELIVERABLES = 16
+_SUSPICIOUS_ACTION_DIAGNOSTICS = (
+    "here-document at line",
+    "delimited by end-of-file",
+    "unexpected eof",
+    "syntax error: unexpected end of file",
+)
 _EXPLICIT_SUBMISSION_PATH_RE = re.compile(
     r"(?<![A-Za-z0-9_./-])((?:/app/)?submission/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)"
 )
+
+def _action_integrity_errors(stdout: str, stderr: str) -> list[str]:
+    text = (str(stdout or "") + "\n" + str(stderr or "")).lower()
+    return [
+        "SHELL_OUTPUT_TRUNCATION_OR_HEREDOC_INTEGRITY_WARNING:" + marker
+        for marker in _SUSPICIOUS_ACTION_DIAGNOSTICS
+        if marker in text
+    ]
 
 def _brain_mandated_deliverables(goal: str) -> dict[str, str]:
     paths: list[str] = []
@@ -273,6 +287,9 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         verified = False
         verified_covers: list[str] = []
         deliverable_checks: list[dict[str, Any]] = []
+        action_integrity_errors = _action_integrity_errors(
+            action_observed["stdout"], action_observed["stderr"]
+        )
         if action_receipt.returncode == 0:
             verify_receipt = await transport.exec(chosen["verify_command"], timeout_sec=180)
             verify_observed = {
@@ -280,7 +297,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                 "stdout": verify_receipt.stdout[-MAX_OUTPUT_CHARS:],
                 "stderr": verify_receipt.stderr[-MAX_OUTPUT_CHARS:],
             }
-            if verify_receipt.returncode == 0:
+            if verify_receipt.returncode == 0 and not action_integrity_errors:
                 for requirement_id in chosen["covers"]:
                     path = brain_deliverables.get(requirement_id)
                     if path is None:
@@ -300,6 +317,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "selection_reason": "MAX_DECLARED_UNRESOLVED_COVERAGE_THEN_ACTION_ID__STRUCTURAL_CONTROL_ONLY",
             "action_result": action_observed,
             "verify_result": verify_observed,
+            "action_integrity_errors": action_integrity_errors,
             "verified_covers": verified_covers,
             "brain_deliverable_checks": deliverable_checks,
             "coverage_promoted": verified,
@@ -347,7 +365,7 @@ class HarborScienceAgent(BaseAgent):
         return "project-brain-science"
 
     def version(self) -> str:
-        return "1.2.0"
+        return "1.3.0"
 
     async def setup(self, environment: BaseEnvironment) -> None:
         return None
