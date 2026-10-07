@@ -3313,6 +3313,94 @@
         "inherited_relation_blob": "d66a7eb30774f66160b698d8082947776888293d",
         "independent_full_surface_cross_domain_status": "PASS"
       }
+    },
+    "terminal.kstar.root.assess.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [],
+      "provides": [
+        "terminal.kstar.root.assessment",
+        "terminal.scope_complete.proof_or_minimum_residual",
+        "terminal.tournament.failure.witness"
+      ],
+      "result_fields": [
+        "status",
+        "outcome",
+        "result_path",
+        "output_verified",
+        "u_empty",
+        "abc_closed",
+        "missing_premises",
+        "model_dependency_count"
+      ],
+      "keywords": [
+        "terminal",
+        "kstar",
+        "scope",
+        "complete",
+        "proof",
+        "brain",
+        "opus",
+        "capability",
+        "falsify",
+        "tournament",
+        "policy",
+        "adequacy",
+        "discriminator",
+        "generator",
+        "basis",
+        "transform",
+        "runtime",
+        "ownership",
+        "residual",
+        "counterexample",
+        "evidence",
+        "reuse",
+        "universal",
+        "cover",
+        "context",
+        "semantic",
+        "composition"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "terminal.kstar.root.assess.stdlib"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "terminal_kstar_root_assess",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Thin deterministic adapter over current canonical terminal authority and U frontier; does not invent proof premises.",
+        "Writes SCOPE_COMPLETE_PROOF only when every load-bearing universal predicate is already proved in current canonical truth; otherwise writes UNRESOLVED with exact missing premises.",
+        "Never edits terminal authority, terminal manifest, ownership state, or promotion state."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/terminal_kstar_root_assess.py"
+      },
+      "verification": {
+        "status": "BOUND_WITH_FAIL_CLOSED_REGRESSION_TEST",
+        "independent_verification_required_for_any_scope_complete_promotion": true,
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
