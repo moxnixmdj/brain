@@ -684,7 +684,7 @@
     },
     "dense_nonchart_shared_aa_dependency_reconciliation": {
       "path": "canonical/governance/DENSE_NONCHART_SHARED_AA_DEPENDENCY_RECONCILIATION_20261007_V1.json",
-      "git_blob_sha": "7c6c905f59ba33bc36364dc70bcb1405581110a2",
+      "git_blob_sha": "bb4a62dc65ed7641f639a85a1b55fc58acd01629",
       "note": "SCHEDULER_DEPENDENCY_COLLAPSE_ONLY__RAW_VISION_ATOM_REMAINS_UNRESOLVED__NO_ACCEPTANCE_CREDIT"
     }
   },
