@@ -81,7 +81,7 @@ def _content_binding(value: Any) -> bool:
 def _git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
     digest = sha1()
-    digest.update(f"blob {len(data)}\\0".encode("ascii"))
+    digest.update(f"blob {len(data)}".encode("ascii") + bytes([0]))
     digest.update(data)
     return digest.hexdigest()
 
@@ -212,7 +212,10 @@ def _family_terminally_closed(family: dict[str, Any]) -> bool:
     )
 
 
-def evaluate_manifest(\n    manifest: dict[str, Any],\n    repo_root: Path | None = None,\n) -> dict[str, Any]:
+def evaluate_manifest(
+    manifest: dict[str, Any],
+    repo_root: Path | None = None,
+) -> dict[str, Any]:
     failures: list[str] = []
 
     if manifest.get("expected_family_count") != REQUIRED_FAMILY_COUNT:
@@ -495,7 +498,8 @@ def main() -> int:
 
     if args.manifest is None:
         parser.error("provide manifest or --frontier")
-    repo_root = Path(__file__).resolve().parents[2]\n    verdict = evaluate_manifest(_load_json(args.manifest), repo_root=repo_root)
+    repo_root = Path(__file__).resolve().parents[2]
+    verdict = evaluate_manifest(_load_json(args.manifest), repo_root=repo_root)
     print(json.dumps(verdict, indent=2, sort_keys=True))
     return 0 if verdict["achieved"] else 1
 
