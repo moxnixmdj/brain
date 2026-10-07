@@ -1,0 +1,11 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_SINGLE_ARTIFACT_CLOSED_V12",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_EXACT_BLOB_REPLAY_PASS__2727_BYTE_FRONTIER__ZERO_TERMINAL_CREDIT",
+  "scope_lock":"BYTES_RESEARCH_ONLY",
+  "artifact":{"path":"canonical/runtime/bytes_v14_single_artifact_closed_v12.py","git_blob_sha":"680397157d0544df3083a2876e5c1cd28b5afdd1","raw_bytes":6256},
+  "soundness":{"closed_check":"PASS","proof_basis_vs_v10":{"candidate":931,"v10":931,"missing":0,"extra":0},"frozen_regression":{"expression":6,"scalar":9,"sequence":12,"total":27,"status":"PASS"}},
+  "encoding":{"tested_lzma1_configurations":2700,"best_fixed_decoder_payload_bytes":2727,"best_filter":{"dict_size":8192,"lc":0,"lp":0,"pb":0,"mode":"NORMAL","match_finder":"BT2","nice_len":32},"payload_sha256":"f9b29b2134cdac56be69ceca0ea13c966b1e8b6fa89501caaadda8c93a98db74","roundtrip_exact":true},
+  "comparison":{"v10_payload_bytes":2751,"v11_payload_bytes":2738,"v12_payload_bytes":2727,"saved_vs_v10":24,"saved_vs_v11":11},
+  "hard_nonclaims":["NO_GLOBAL_MINIMUM_DESCRIPTION_PROOF","EXACT_LIST_SPECIALIZATION_ONLY","PYTHON_HASHLIB_AND_FIXED_DECODER_SUBSTRATE_STILL_EXTERNAL","NO_TERMINAL_CREDIT"]
+}
