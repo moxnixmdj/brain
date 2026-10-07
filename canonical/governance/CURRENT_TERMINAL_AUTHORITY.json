@@ -88,8 +88,9 @@
       "git_blob_sha": "909ea27a7ddd3228bc1d5c29ad3ced79a1ccf9cb"
     },
     "official_target_reality": {
-      "path": "canonical/evidence/OPUS55_OFFICIAL_PUBLIC_REALITY_REFRESH_20261007_V1.json",
-      "git_blob_sha": "4b308f6e8ebb4bab0b3d6049c9638f297de2f9ee"
+      "path": "canonical/evidence/OPUS55_OFFICIAL_PUBLIC_REALITY_REFRESH_20261007_V2.json",
+      "git_blob_sha": "1a992901dc833d1195af7be6b5bfa7b8f15d1154",
+      "note": "CURRENT_BENCHMARK_OWNER_REFRESH__GDPVAL_AA_V2_1_OPUS55_ELO_1866__AGGREGATE_ONLY__NO_PER_CONTEXT_OR_TERMINAL_CREDIT"
     },
     "professional_target_relative_truth_repair": {
       "path": "canonical/governance/PROFESSIONAL_QUALITY_TARGET_RELATIVE_INFORMATION_TRUTH_REPAIR_20261007_V1.json",
@@ -883,7 +884,10 @@
     "current_live_research_root_count": 1,
     "current_live_research_roots": [
       "PROVE_RESIDUAL_COMPLEMENT_UNSAT_OVER_EXACT_SOUND_ADMISSION_PREDICATE_SET"
-    ]
+    ],
+    "current_gdpval_aa_opus55_public_elo": 1866,
+    "gdpval_complete_pairwise_target_relation_bound": false,
+    "aggregate_target_score_sufficient_for_not_X": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
