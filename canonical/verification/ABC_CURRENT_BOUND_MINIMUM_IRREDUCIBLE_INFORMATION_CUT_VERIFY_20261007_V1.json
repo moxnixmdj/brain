@@ -1,0 +1,30 @@
+{
+  "schema":"PROJECT_BRAIN_ABC_CURRENT_BOUND_MINIMUM_IRREDUCIBLE_INFORMATION_CUT_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"PASS__EXACT_SOURCE_BINDINGS__WOLFRAM_COUNT_CROSSCHECK__CURRENT_BOUND_ONLY__ZERO_CREDIT",
+  "subject":{"path":"canonical/governance/ABC_CURRENT_BOUND_MINIMUM_IRREDUCIBLE_INFORMATION_CUT_20261007_V1.json","git_blob_sha":"19a3ba3c1188aad39a3d1adb88df820725cb1baf"},
+  "connector_verification":{
+    "all_source_blob_bindings_exact":true,
+    "wake_class_array_count":17,
+    "deferred_local_C_class_count":1,
+    "terminal_credit_delta":0
+  },
+  "wolfram_crosscheck":{
+    "expression":"residuals={TB4,FRONTIERCODE,CURSORBENCH,AGENCY_INTERACTION,GDPVAL,AA_BRIEFCASE,AUTOMATIONBENCH,HLE_TOOLS,TB_SCIENCE,CHARTOGRAPHY,DENSE_NONCHART,OSWORLD,FINANCE_ACCOUNTING,FINANCE_AGENT,FINANCE_SEMANTIC_TAIL,AA_BRIEFCASE,SYNTHESIS_QUALITY,MYSTERY_INTRINSIC,LOCAL_C}; u=DeleteDuplicates[residuals]; {Length[residuals],Length[u],Length[DeleteCases[u,LOCAL_C]],Counts[residuals][AA_BRIEFCASE]}",
+    "result":[19,18,17,2],
+    "meaning":"NINETEEN_FAMILY_RESIDUAL_OCCURRENCES__EIGHTEEN_UNIQUE_AFTER_THE_ONLY_CURRENTLY_BOUND_AA_BRIEFCASE_ALIAS__SEVENTEEN_NONCOMPOSITION_WAKE_CLASSES_AFTER_DEFERRED_LOCAL_C"
+  },
+  "truth_boundary":{
+    "global_information_lower_bound_claimed":false,
+    "future_stronger_certificate_may_collapse_multiple_classes":true,
+    "current_bound_implication_graph_only":true,
+    "composition_local_C_is_fresh_target_reality":false
+  },
+  "hard_nonclaims":[
+    "NO_CLAIM_SEVENTEEN_TARGET_MODEL_CALLS_ARE_REQUIRED.",
+    "NO_CLAIM_SEVENTEEN_PROVIDER_RESULTS_ARE_REQUIRED.",
+    "NO_CLAIM_A_FUTURE_SOUND_CERTIFICATE_CANNOT_REDUCE_THE_CURRENT_CUT.",
+    "NO_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting":{"incremental_spend_usd":0,"fresh_target_reality_units_consumed":0,"terminal_credit_delta":0}
+}
