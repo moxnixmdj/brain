@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V10",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH__TEN_CONSUMED_SLOTS__RANK10_FINAL_ZERO__SOURCE_TIMEOUT_REPAIR_MERGED__INDEPENDENT_LIVE_REPAIRED_BOUNDARY_VERIFICATION_OPEN__RANK11_LOCKED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V9.json",
+    "git_blob_sha": "82edae7eeb3e5ea5e30fc9f239c1d95faf9d089d"
+  },
+  "rank10_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK10_IRREVERSIBLE_RESULT_TRUTH_20261007_V1.json",
+    "git_blob_sha": "82a0e1842331e6f3dacf8272be100343eb0b5166",
+    "status": "FINAL_ZERO__PLANNER_LOCAL_ROUTE_TIMEOUT__NO_VERIFIER_RESULT__NO_TASK_CAPABILITY_INFERENCE",
+    "workflow_run_id": 37630721044,
+    "rerun_forbidden": true
+  },
+  "frozen_counts": {
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "consumed_slots": 10,
+    "consumed_successes": 0,
+    "consumed_final_failures": 10,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 77,
+    "maximum_possible_successes_remaining": 200,
+    "minimum_required_success_rate_over_remaining_slots": 0.62,
+    "pass_still_mathematically_reachable": true
+  },
+  "timeout_repair": {
+    "merged_commit": "be1e106b5ff4add76060c09bddf4593afe61afcd",
+    "controller": {
+      "path": "canonical/runtime/harbor_science_agent_v1.py",
+      "git_blob_sha": "99d6ba6edcfad425e4cb940e5b7b2ccd99f6cdab"
+    },
+    "regression_tests": {
+      "path": "canonical/tests/test_harbor_science_agent_v1.py",
+      "git_blob_sha": "a75d06abb25d2b1e67e94966bf00867647831564"
+    },
+    "planner": {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "01d859c8f27b317893027e693c9aa49e833a256f",
+      "supported_timeout_ceiling_s": 300,
+      "max_tool_completion_tokens": 4096
+    },
+    "prior_live_planner_transport_verification": {
+      "path": "canonical/verification/TB_SCIENCE_PLANNER_TRANSPORT_REPAIR_LIVE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "877e5ddf815c1958f4ab41f8462ad54af87f0c87",
+      "boundary": "VERIFIES_LOCAL_PLANNER_TRANSPORT__DOES_NOT_INDEPENDENTLY_VERIFY_THE_NEW_CONTROLLER_300_SECOND_BOUNDARY"
+    },
+    "old_controller_timeout_s": 180,
+    "repaired_controller_timeout_s": 300,
+    "source_level_180_second_timeout_boundary_removed": true,
+    "independent_live_repaired_boundary_verification": false,
+    "causal_class_fully_requalified_for_irreversible_rank11": false
+  },
+  "rank11": {
+    "authority_active": false,
+    "action_intent_active": false,
+    "task_started": false,
+    "result_present": false,
+    "next_untouched_slot": {
+      "ledger_schedule_rank": 11,
+      "frozen_manifest_schedule_order": 10,
+      "slot_id": "terminal-bench-science/supraglacial-lake-classification::trial-0",
+      "task_digest": "sha256:4a57227f84340ff6e245c3f2efeb8dfb6fb44a89713223d8742433dd569f9e3a"
+    },
+    "rule": "DO_NOT_AUTHORIZE_OR_EXPOSE_RANK11_UNTIL_THE_REPAIRED_CONTROLLER_BOUNDARY_IS_INDEPENDENTLY_LIVE_VERIFIED_WITH_ZERO_BENCHMARK_TASK_EXPOSURE__OR_A_STRONGER_NON_BENCHMARK_ROUTE_PREEMPTS_THIS_LANE"
+  },
+  "scheduler": [
+    "NEVER_REPLAY_ANY_CONSUMED_TB_SCIENCE_SLOT.",
+    "SOURCE_LEVEL_REPAIR_IS_NOT_EQUIVALENT_TO_LIVE_CAUSAL_REQUALIFICATION.",
+    "DO_NOT_BURN_RANK11_BEFORE_INDEPENDENT_ZERO_EXPOSURE_LIVE_VERIFICATION_OF_THE_REPAIRED_300_SECOND_CONTROLLER_BOUNDARY.",
+    "KEEP_TB_SCIENCE_AS_A_SHADOW_ACCEPTANCE_ROUTE_WHILE_THE_SCOPE_COMPLETE_U_EMPTY_ROUTE_REMAINS_PRIMARY.",
+    "A_STRONGER_SOUND_SCOPE_COMPLETE_NON_BENCHMARK_PROOF_PREEMPTS_FURTHER_TB_SCIENCE_SLOT_CONSUMPTION."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_300_SECOND_BOUNDARY_ELIMINATES_ALL_PLANNER_TIMEOUTS",
+    "NO_CLAIM_THE_REPAIR_HAS_INDEPENDENT_LIVE_REQUALIFICATION",
+    "NO_RANK11_EXECUTION_AUTHORITY",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_delta_from_v9": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
