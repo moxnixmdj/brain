@@ -1,0 +1,152 @@
+{
+  "schema": "PROJECT_BRAIN_COMPLEX_AGENCY_CROSS_COMPONENT_RESIDUAL_REDUCTION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ZERO_REALITY_RESIDUAL_COMPRESSION__INDIVIDUAL_DECLARED_DIMENSIONS_HAVE_SOUND_BRAIN_OWNED_WITNESSES__ONLY_CROSS_COMPONENT_INTERACTION_CLOSURE_REMAINS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "COMPLEX_MULTI_TOOL_AGENCY",
+  "frozen_protocol": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "dimensions": [
+      "multi-step planning with at least three distinct tool/action types",
+      "state change after actions requiring replanning",
+      "long-horizon state retention",
+      "tool failure/recovery",
+      "subtask dependency and fan-in",
+      "minimal-oversight completion"
+    ],
+    "metrics": [
+      "terminal_task_success",
+      "invalid_action_rate",
+      "unrecovered_failure_rate",
+      "duplicate_or_conflicting_work_rate"
+    ]
+  },
+  "dimension_witnesses": [
+    {
+      "dimension": "multi-step planning with at least three distinct tool/action types",
+      "source": {
+        "path": "canonical/governance/AGENCY_STATEFUL_GENERATOR_UNIVERSAL_TOP_LAW_CELL_20261007_V1.json",
+        "git_blob_sha": "d0f65c08d84777f4fdb24e5dfa74bdd1acbcfc22"
+      },
+      "witness": "UNIQUE_BROWSER_TOOL_DELEGATION_PLAN__THREE_DISTINCT_ACTION_TYPES__UNIVERSAL_OVER_CASE_TOKEN_AND_ORDINAL_IN_EXACT_CELL"
+    },
+    {
+      "dimension": "state change after actions requiring replanning",
+      "sources": [
+        {
+          "path": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json",
+          "git_blob_sha": "f53937a9849cccdb408a75842aad4415a5992cc9"
+        },
+        {
+          "path": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V1.json",
+          "git_blob_sha": "dd94bef997603ddd71224100d33fe3889a93d3c4"
+        },
+        {
+          "path": "canonical/governance/BROWSER_STATE_GENERATOR_UNIVERSAL_TOP_LAW_CELL_20261007_V1.json",
+          "git_blob_sha": "68e6b4abacb14d92429f34fda54612027b09dfcf"
+        }
+      ],
+      "witness": "RECEIPT_DRIVEN_REPLANNING__TOOL_CAPABILITY_OR_VERSION_CHANGE_RESELECTION__STALE_BROWSER_REBIND"
+    },
+    {
+      "dimension": "long-horizon state retention",
+      "source": {
+        "path": "canonical/governance/AGENCY_STATEFUL_GENERATOR_UNIVERSAL_TOP_LAW_CELL_20261007_V1.json",
+        "git_blob_sha": "d0f65c08d84777f4fdb24e5dfa74bdd1acbcfc22"
+      },
+      "witness": "EXACT_TWO_PROCESS_CHECKPOINT_RELAUNCH_WITH_SAME_AGENT_TASK_AND_MISSION_IDENTITY"
+    },
+    {
+      "dimension": "tool failure/recovery",
+      "sources": [
+        {
+          "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+          "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483"
+        },
+        {
+          "path": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V1.json",
+          "git_blob_sha": "dd94bef997603ddd71224100d33fe3889a93d3c4"
+        },
+        {
+          "path": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json",
+          "git_blob_sha": "f53937a9849cccdb408a75842aad4415a5992cc9"
+        }
+      ],
+      "witness": "SCOPE_COMPLETE_CAUSAL_LOCALIZATION_AND_TERMINAL_RECOVERY__NO_SUFFICIENT_ROUTE_ESCALATION__STEP_WORKER_CAPABILITY_AND_RESOURCE_FAILURE_REPLANNING"
+    },
+    {
+      "dimension": "subtask dependency and fan-in",
+      "source": {
+        "path": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "955ac8f4bd0db2527bfbb465fc8252df6d916156"
+      },
+      "witness": "UNIVERSAL_FINITE_EXPLICIT_DELEGATION_CONTRACTS__DEPENDENCIES__MINIMUM_WAVE_SCHEDULING__OWNERSHIP_AND_TERMINAL_EVIDENCE_FANIN"
+    },
+    {
+      "dimension": "minimal-oversight completion",
+      "sources": [
+        {
+          "path": "canonical/governance/AGENCY_STATEFUL_GENERATOR_UNIVERSAL_TOP_LAW_CELL_20261007_V1.json",
+          "git_blob_sha": "d0f65c08d84777f4fdb24e5dfa74bdd1acbcfc22"
+        },
+        {
+          "path": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json",
+          "git_blob_sha": "f53937a9849cccdb408a75842aad4415a5992cc9"
+        },
+        {
+          "path": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V1.json",
+          "git_blob_sha": "dd94bef997603ddd71224100d33fe3889a93d3c4"
+        }
+      ],
+      "witness": "BRAIN_OWNED_DETERMINISTIC_OR_FAIL_CLOSED_ROUTES_RUN_WITHOUT_HUMAN_INTERVENTION_AFTER_DECLARED_INPUT"
+    }
+  ],
+  "metric_witnesses": [
+    {
+      "metric": "terminal_task_success",
+      "basis": "STATEFUL_AGENCY_BOOLEAN_TOP_LAW_PLUS_SCOPE_COMPLETE_RECOVERY_DELEGATION_AND_TOOL_DISCOVERY_TERMINAL_SUCCESS_CEILINGS"
+    },
+    {
+      "metric": "invalid_action_rate",
+      "basis": "BROWSER_EXACT_ACTION_VALIDITY__TOOL_DISCOVERY_EVIDENCE_SUPPORTED_SELECTION_OR_JUSTIFIED_ESCALATION__DELEGATION_CAPABILITY_RESOURCE_AND_DEPENDENCY_VALIDATION__RECOVERY_FAIL_CLOSED"
+    },
+    {
+      "metric": "unrecovered_failure_rate",
+      "basis": "RECOVERY_TERMINAL_NONINFERIOR_OBJECTIVE_CEILING_PLUS_DELEGATION_AND_TOOL_DISCOVERY_FAILURE_REPLANNING"
+    },
+    {
+      "metric": "duplicate_or_conflicting_work_rate",
+      "basis": "DELEGATION_UNIVERSAL_SCOPE_EXPLICITLY_REJECTS_DUPLICATE_WORK_RESOURCE_CONFLICTS_WORKER_DOUBLE_BOOKING_AND_EVIDENCE_OWNER_CONFLICT"
+    }
+  ],
+  "truth_repair": {
+    "old_residual": "MATCHED_MULTI_TOOL_AGENCY_NONINFERIORITY_OR_STRONGER_SELECTED_CONTEXT_ABC",
+    "individual_dimension_missing_mechanism_count": 0,
+    "remaining_residual": "AGENCY_CROSS_COMPONENT_INTERACTION_CLOSURE_OR_STRONGER",
+    "meaning": "PROVE_THAT_THE_ABOVE_INDIVIDUALLY_SOUND_BRAIN_OWNED_GUARANTEES_REMAIN_TRUE_WHEN_THEIR_LOAD_BEARING_DIMENSIONS_AND_FAILURE_MODES_OCCUR_IN_THE_SAME_AGENCY_CONTEXT__INCLUDING_STATE_HANDOFFS_RECOVERY_REPLANNING_FANIN_AND_NEGATIVE_RATE_METRICS.",
+    "why_not_closed": "INDIVIDUAL_SCOPE_COMPLETE_COMPONENT_THEOREMS_DO_NOT_BY_THEMSELVES_PROVE_ARBITRARY_CROSS_COMPONENT_INTERACTION_PRESERVATION.",
+    "legal_closure_routes": [
+      "ONE_SCOPE_COMPLETE_FORMAL_PRODUCT_OR_RELATIONAL_REFINEMENT_PROOF_OVER_THE_DECLARED_AGENCY_DIMENSION_INTERACTIONS",
+      "OR_A_STRONGER_SELECTED_CONTEXT_COVER_PROVING_TOP_OR_NONINFERIOR_BOUNDS_FOR_EVERY_LOAD_BEARING_INTERACTION_CLASS",
+      "OR_THE_FROZEN_MATCHED_COMPARATOR_ROUTE_IF_STRONGER_ZERO_REALITY_PROOF_FAILS"
+    ]
+  },
+  "scheduler_effect": [
+    "DO_NOT_RESEARCH_NEW_BROWSER_TOOL_DELEGATION_RECOVERY_OR_CONTINUITY_MECHANISMS_FOR_AGENCY_WITHOUT_A_CONSTRUCTIVE_COUNTEREXAMPLE.",
+    "ATTACK_ONLY_CROSS_COMPONENT_INTERACTION_PRESERVATION.",
+    "FIRST_TRY_A_FORMAL_PRODUCT_OR_RELATIONAL_REFINEMENT_OVER_EXISTING_CERTIFIED_COMPONENTS.",
+    "ONLY_IF_INTERACTION_CLOSURE_FAILS_LOCALIZE_THE_EXACT_NEW_MECHANISM_OR_TARGET_INFORMATION_REQUIRED."
+  ],
+  "hard_nonclaims": [
+    "NO_WHOLE_COMPLEX_MULTI_TOOL_AGENCY_FAMILY_CLOSURE",
+    "NO_CLAIM_INDIVIDUAL_COMPONENT_PROOFS_COMPOSE_AUTOMATICALLY",
+    "NO_CLAIM_ALL_MATCHED_PORTFOLIO_CASES_ARE_SUBSUMED",
+    "NO_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
