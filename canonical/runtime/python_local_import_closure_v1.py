@@ -118,18 +118,36 @@ def _imports(root: Path, path: Path) -> tuple[set[Path], list[str]]:
                 continue
 
             resolved = _resolve_module(root, base)
+            base_dir = root.joinpath(*base.split(".")) if base else root
+            namespace_package = resolved is None and base_dir.is_dir()
             if resolved is not None:
                 deps.add(resolved)
-            elif node.module:
-                errors.append("LOCAL_IMPORT_UNRESOLVED:" + base)
 
+            resolved_children = 0
+            unresolved_children: list[str] = []
             for alias in node.names:
                 if alias.name == "*":
+                    if namespace_package:
+                        errors.append(
+                            "LOCAL_IMPORT_STAR_FROM_NAMESPACE_UNSUPPORTED:" + base
+                        )
                     continue
                 child = base + "." + alias.name if base else alias.name
                 child_path = _resolve_module(root, child)
                 if child_path is not None:
                     deps.add(child_path)
+                    resolved_children += 1
+                elif namespace_package:
+                    unresolved_children.append(child)
+
+            if resolved is None:
+                if namespace_package:
+                    errors.extend(
+                        "LOCAL_IMPORT_UNRESOLVED:" + child
+                        for child in unresolved_children
+                    )
+                elif node.module:
+                    errors.append("LOCAL_IMPORT_UNRESOLVED:" + base)
 
     return deps, errors
 
