@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34",
   "date": "2026-10-07",
-  "status": "ACTIVE_FAIL_CLOSED_SINGLE_RESIDUAL_COMPLEMENT_UNSAT_ROOT__SYMBOLIC_ADMISSION_SUCCESSOR_DEPLOYED__TERMINAL_FALSE",
+  "status": "ACTIVE_FAIL_CLOSED_FROZEN_19_FAMILY_TERMINAL_ROOT__V34_UNIVERSAL_TRACE_ROOT_OPTIONAL_STRONGER_ROUTE__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -629,6 +629,11 @@
       "path": "canonical/governance/PUBLIC_FIXED_BAR_AGGREGATE_SCOPE_ADMISSION_TRUTH_REPAIR_20261007_V1.json",
       "git_blob_sha": "02cd9d5b3319c0cd7c051e9e1a335613b81f17ea",
       "note": "FIXED_BAR_COVERED_SCOPES_REQUIRE_THE_PROTOCOL_AGGREGATE_ACCEPTANCE_PREDICATE__NOT_AN_UNDECLARED_CASE_LEVEL_OPUS_PREFERENCE_RELATION__UNCOVERED_AND_MATCHED_DIRECT_LEAVES_REMAIN_SEPARATE"
+    },
+    "terminal_semantics_overstrength_repair": {
+      "path": "canonical/governance/TERMINAL_SEMANTICS_OVERSTRENGTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "aa210ea6faa62d4622bd3cb72aa9f0d1be6e387a",
+      "note": "MANDATORY_TERMINAL_SEMANTICS_RESTORED_TO_FROZEN_19_FAMILY_ACCEPTANCE_PLUS_OWNERSHIP_FINALITY__UNIVERSAL_TRACE_NOT_X_REMAINS_OPTIONAL_STRONGER_DISCHARGE_ROUTE"
     }
   },
   "live_truth": {
@@ -884,7 +889,7 @@
     "total_abstraction_gap_closed_structurally": true,
     "current_escape_policy_adequacy_closed": false,
     "bureaucracy_collapse_active": true,
-    "current_terminal_root_predicate": "PROVE_RESIDUAL_COMPLEMENT_UNSAT_OVER_EXACT_SOUND_ADMISSION_PREDICATE_SET",
+    "current_terminal_root_predicate": "ALL_FROZEN_TERMINAL_PROTOCOLS_PASS_AND_ALL_REQUIRED_OWNERSHIP_FINALITY_PREDICATES_PASS",
     "current_terminal_root_X": "EXISTS_CONTEXT_IN_S_TRACE_WITH_NO_SOUND_BRAIN_OWNED_ADEQUATE_ADMISSION_PREDICATE",
     "current_evidence_proves_X": false,
     "current_evidence_proves_not_X": false,
@@ -909,7 +914,7 @@
     "symbolic_admission_predicate_successor_deployed": true,
     "terminal_execution_root_v1_bound": true,
     "primary_terminal_scheduler_object_count": 1,
-    "primary_terminal_scheduler_object": "PROVE_NOT_X",
+    "primary_terminal_scheduler_object": "CLOSE_AGGREGATE_FROZEN_PROTOCOL_AND_OWNERSHIP_PREDICATE",
     "D_finality_is_independent_parallel_research_blocker": false,
     "D_finality_post_ABC_sequence": [
       "FREEZE_FINAL_CREDITED_ROUTE_BYTES",
@@ -933,7 +938,16 @@
     "symbolic_admission_predicate_successor_independent_public_replay_claimed": false,
     "symbolic_admission_predicate_successor_terminal_authority": false,
     "case_level_opus_relation_required_for_public_fixed_bar_covered_scope": false,
-    "public_fixed_bar_scope_can_be_admitted_from_valid_scope_complete_aggregate_pass": true
+    "public_fixed_bar_scope_can_be_admitted_from_valid_scope_complete_aggregate_pass": true,
+    "terminal_root_semantics": "FROZEN_19_FAMILY_ACCEPTANCE_AND_OWNERSHIP_FINALITY",
+    "frozen_terminal_family_count": 19,
+    "frozen_terminal_family_pass_count": 5,
+    "frozen_terminal_family_open_count": 14,
+    "frozen_atomic_predicates_proved": 14,
+    "frozen_atomic_predicates_unresolved": 24,
+    "frozen_atomic_predicates_total": 38,
+    "universal_trace_not_x_required_for_terminal": false,
+    "universal_trace_not_x_optional_stronger_route": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -967,7 +981,8 @@
       "PROVE_STRUCTURAL_TARGET_NONOCCUPANCY_OF_E",
       "OTHERWISE_BIND_ONLY_THE_MINIMUM_TARGET_INFORMATION_THAT_DECIDES_SURVIVING_ESCAPE_OCCUPANCY"
     ],
-    "current_single_boundary": "PROVE_THE_EXACT_SOUND_ADMISSION_COMPLEMENT_R_UNSAT__OR_EQUIVALENT_ESCAPE_PROGRESS_TOTALITY__TOTAL_ALPHA_GAMMA_IS_ALREADY_BOUND__RANK_RESOURCE_POTENTIAL_AND_COMPLETE_RAW_OUTCOME_MODELS_ARE_NOT_SEPARATE_LIVE_BLOCKERS"
+    "current_single_boundary": "PROVE_THE_EXACT_SOUND_ADMISSION_COMPLEMENT_R_UNSAT__OR_EQUIVALENT_ESCAPE_PROGRESS_TOTALITY__TOTAL_ALPHA_GAMMA_IS_ALREADY_BOUND__RANK_RESOURCE_POTENTIAL_AND_COMPLETE_RAW_OUTCOME_MODELS_ARE_NOT_SEPARATE_LIVE_BLOCKERS",
+    "route_role": "OPTIONAL_STRONGER_MULTI_PREDICATE_DISCHARGE_ROUTE__NOT_MANDATORY_TERMINAL_ROOT"
   },
   "scheduling_lock": [
     "FOR_PUBLIC_FIXED_BAR_COVERED_SCOPES__DO_NOT_REQUIRE_OR_SEARCH_FOR_CASE_LEVEL_OPUS_PREFERENCE_RELATIONS__THE_FROZEN_SCOPE_AGGREGATE_ACCEPTANCE_PREDICATE_IS_LOAD_BEARING.",
@@ -1083,7 +1098,7 @@
     "terminal_credit_delta": 0
   },
   "zero_bureaucracy_execution_lock": {
-    "invariant": "NO_WORK_EARNS_TERMINAL_PROGRESS_UNLESS_IT_PROVES_NOT_X_OR_SOUNDLY_CHANGES_THE_TRUTH_VALUE_DOMAIN_OF_X",
+    "invariant": "NO_WORK_EARNS_TERMINAL_PROGRESS_UNLESS_IT_CLOSES_A_STILL_OPEN_FROZEN_TERMINAL_PREDICATE_OR_SOUNDLY_DISCHARGES_ONE_OR_MORE_BY_A_STRONGER_SCOPE_COMPLETE_PROOF",
     "only_admissible_primary_moves": [
       "BIND_A_SCOPE_COMPLETE_BRAIN_OWNED_TOP_LAW_OR_DOMINANCE_CERTIFICATE_THAT_EXCLUDES_TARGET_OCCUPANCY_FROM_E",
       "PROVE_STRUCTURAL_TARGET_NONOCCUPANCY_OF_E",
@@ -1108,7 +1123,16 @@
       "RUN_INDEPENDENT_CLEAN_ROOM_REPLAY",
       "ISSUE_TERMINAL_CERTIFICATE_IFF_ALL_FINALITY_GATES_PASS"
     ],
-    "fail_closed_rule": "NEVER_SET_TERMINAL_TRUE_FROM GOVERNANCE_COMPRESSION_OR ABSENCE_OF_A_COUNTEREXAMPLE"
+    "fail_closed_rule": "NEVER_SET_TERMINAL_TRUE_FROM GOVERNANCE_COMPRESSION_OR ABSENCE_OF_A_COUNTEREXAMPLE",
+    "mandatory_terminal_transition": [
+      "CLOSE_ALL_FROZEN_ACCEPTANCE_PREDICATES",
+      "VERIFY_EXACT_BRAIN_OWNED_ROUTES_AND_REQUIRED_BEHAVIOR_CONTRACTS",
+      "VERIFY_DONOR_DEPENDENCE_ZERO_AND_REQUIRED_COUNTERS_ZERO",
+      "RUN_FINAL_DONOR_DELETION_AND_INDEPENDENT_CLEAN_ROOM_REPLAY",
+      "FREEZE_PROOF_BUNDLE",
+      "RUN_TERMINAL_CLOSURE_REDUCER",
+      "ISSUE_TERMINAL_CERTIFICATE_IFF_REDUCER_ACHIEVED_TRUE"
+    ]
   },
   "terminal_execution_root": {
     "path": "canonical/governance/TERMINAL_EXECUTION_ROOT_20261007_V1.json",
@@ -1135,5 +1159,16 @@
   "current_truth": {
     "total_sound_alpha_gamma_bound": true,
     "total_abstraction_gap_closed_structurally": true
+  },
+  "terminal_semantics_override": {
+    "status": "ACTIVE__SUPERSEDES_V34_SINGLE_BIT_ROOT_AS_MANDATORY_TERMINAL_SEMANTICS_ONLY",
+    "precedence": "THIS_OBJECT_CONTROLS_TERMINAL_NECESSITY__V34_PROVE_NOT_X_IS_RETAINED_AS_AN_OPTIONAL_STRONGER_SUFFICIENCY_ROUTE",
+    "mandatory_terminal_reducer": {
+      "path": "canonical/runtime/terminal_closure_reducer.py",
+      "git_blob_sha": "2732a577b441e8031ee128629410f792bfe36201"
+    },
+    "mandatory_terminal_predicate": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
+    "optional_stronger_route": "PROVE_NOT_X_OVER_SOUND_OBSERVABLE_TRACE_ESCAPE_MODEL",
+    "current_truth": "5_OF_19_PASS__14_OF_19_OPEN__TERMINAL_FALSE"
   }
 }
