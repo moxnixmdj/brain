@@ -1,0 +1,27 @@
+{
+  "schema":"PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V17_CONNECTOR_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"PASS__POST_AGENCY_REALITY_CUT_BOUND__16_POSITIVE_REALITY_CLASSES__9_LANES__TERMINAL_FALSE",
+  "subject":{"path":"canonical/governance/CURRENT_TERMINAL_AUTHORITY.json","git_blob_sha":"1bfffa0f29ef6c52a08288f6635da8db7f90828c","branch":"authority/stable-pointer-v17-reality-cut"},
+  "verified":{
+    "minimum_information_cut_exact":true,
+    "agency_subsumption_exact":true,
+    "agency_subsumption_independent_verification_exact":true,
+    "reality_cut_v2_exact":true,
+    "reality_cut_v2_verification_exact":true,
+    "positive_reality_class_count":16,
+    "minimum_access_execution_lane_count":9,
+    "agency_cross_component_interaction_target_reality_required":false,
+    "agency_raw_semantic_admission_still_open":true,
+    "complete_selected_context_ABC_closed":false,
+    "D_finality_closed":false,
+    "terminal":false
+  },
+  "boundary":[
+    "SIXTEEN_IS_CURRENT_BOUND_ONLY__FUTURE_STRONGER_CERTIFICATES_MAY_COLLAPSE_CLASSES.",
+    "NINE_IS_CURRENT_BOUND_ACCESS_EXECUTION_LANE_MINIMUM__NOT_GLOBAL_INFORMATION_THEORETIC_LOWER_BOUND.",
+    "AGENCY_FAMILY_REMAINS_OPEN_ON_RAW_OR_IMPLICIT_TASK_SEMANTIC_ADMISSION__ONLY_SEPARATE_INTERACTION_TARGET_REALITY_IS_DELETED.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting":{"incremental_spend_usd":0,"fresh_target_reality_units_consumed":0,"terminal_credit_delta":0}
+}
