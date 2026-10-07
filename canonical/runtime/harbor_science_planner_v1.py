@@ -17,6 +17,7 @@ ENDPOINT = "http://127.0.0.1:8080/v1/chat/completions"
 MODEL = "brain-qwen3.5-9b"
 TOOL_NAME = "submit_science_proposal"
 MAX_RESPONSE_BYTES = 100_000
+MAX_TOOL_COMPLETION_TOKENS = 1024
 
 TOOL = {
     "type": "function",
@@ -51,10 +52,10 @@ TOOL = {
                                 "type": "array",
                                 "minItems": 1,
                                 "maxItems": 16,
-                                "items": {"type": "string", "minLength": 1},
+                                "items": {"type": "string", "minLength": 1, "maxLength": 64},
                             },
-                            "command": {"type": "string", "minLength": 1},
-                            "verify_command": {"type": "string", "minLength": 1},
+                            "command": {"type": "string", "minLength": 1, "maxLength": 512},
+                            "verify_command": {"type": "string", "minLength": 1, "maxLength": 512},
                         },
                         "required": ["action_id", "covers", "command", "verify_command"],
                         "additionalProperties": False,
@@ -67,6 +68,7 @@ TOOL = {
                 "finish_summary": {
                     "type": "string",
                     "minLength": 1,
+                    "maxLength": 512,
                     "description": (
                         "Optional descriptive summary. It never grants finish authority."
                     ),
@@ -116,7 +118,12 @@ def _decode_tool_arguments(data: dict[str, Any]) -> dict[str, Any]:
     choices = data.get("choices")
     if not isinstance(choices, list) or len(choices) != 1:
         raise SciencePlannerError("SCIENCE_PLANNER_ONE_CHOICE_REQUIRED")
-    message = (choices[0] or {}).get("message")
+    choice = choices[0] or {}
+    if not isinstance(choice, dict):
+        raise SciencePlannerError("SCIENCE_PLANNER_CHOICE_REQUIRED")
+    if choice.get("finish_reason") == "length":
+        raise SciencePlannerError("SCIENCE_PLANNER_OUTPUT_TRUNCATED")
+    message = choice.get("message")
     if not isinstance(message, dict):
         raise SciencePlannerError("SCIENCE_PLANNER_MESSAGE_REQUIRED")
     calls = message.get("tool_calls")
@@ -161,7 +168,7 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
                     "You are an optional proposal source inside Project Brain. "
                     "Use the provided submit_science_proposal tool exactly once. "
                     "Return exactly one terse candidate action per proposal. Use short requirement IDs, "
-                    "concise commands, and no explanatory prose. "
+                    "keep command and verify_command under 512 characters each, and use no explanatory prose. "
                     "Never claim execution or finish authority."
                 ),
             },
