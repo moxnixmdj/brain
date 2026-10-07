@@ -1,0 +1,14 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_P2_DECISION_EQUIVALENT_MEMBERSHIP_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_PROOF_ONLY__ZERO_CREDIT",
+  "canonical_base_commit": "d54bca1248e03e110cffcdc051c8f899e705e048",
+  "action_kind": "TRUTH_REPAIR__PROFESSIONAL_U_MEMBERSHIP_MINIMIZATION",
+  "real_objective": "Shrink P2 professional membership from full semantic-evaluator equality to only the semantic information that can change terminal policy adequacy or hard constraints.",
+  "next_falsifier": "FIND A REAL PROFESSIONAL CONTEXT THAT PASSES DECLARED SOURCE/DIMENSION/CONVENTION PREFLIGHT BUT HAS TWO AUTHORITY_CONSISTENT SEMANTIC COMPLETIONS REQUIRING DIFFERENT P2_ADEQUATE POLICIES; IF FOUND, BIND ONLY THE MINIMUM DISCRIMINATING FIELD.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
