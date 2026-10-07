@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+  "task_id": "SI-TERMINAL-Q-RACE-20261007-V1",
+  "agent_id": "SUPERWORKER-TERMINAL-Q",
+  "priority": 999998,
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_TERMINAL_Q_RACE_20261007_V1.json",
+  "mission_sha256": "48ec4be995fcfad24af7596d50f070b113c5a287342ce615e8255edfeb1998da",
+  "prerequisites": [],
+  "checkpoint_before_runtime_once": true,
+  "incremental_spend_usd": 0,
+  "terminal_autopilot": {
+    "enabled": true,
+    "phase": "EXECUTE",
+    "execution_class": "REVERSIBLE_ZERO_REALITY",
+    "irreversible_benchmark": false,
+    "action_id": "route::PROFESSIONAL_QUALITATIVE_ROBUST_DOMINANCE",
+    "obligation_ids": [
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT"
+    ]
+  }
+}
