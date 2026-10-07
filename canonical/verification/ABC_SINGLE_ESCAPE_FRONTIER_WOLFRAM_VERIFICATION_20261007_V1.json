@@ -1,0 +1,19 @@
+{
+  "schema":"PROJECT_BRAIN_ABC_SINGLE_ESCAPE_FRONTIER_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"WOLFRAM_PASS_4_OF_4__ZERO_CREDIT",
+  "subject_commit":"5f188f94247e8210625791b8aa84c3ef8ee09151",
+  "verified":{
+    "U_SUBSET_D_IFF_NO_U_POINT_IN_S_MINUS_D_GIVEN_U_SUBSET_S":true,
+    "R_SUBSET_U_AND_U_SUBSET_D_IMPLIES_R_SUBSET_D":true,
+    "U_POINT_ALREADY_IN_D_IS_NOT_IN_ESCAPE":true,
+    "DOMINANCE_FAILURE_GIVEN_U_SUBSET_S_HAS_WITNESS_IN_ESCAPE":true
+  },
+  "hard_nonclaims":[
+    "NO_NEW_D_B_MEMBERSHIP",
+    "NO_E_EMPTY",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
