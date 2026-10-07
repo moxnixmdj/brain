@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_V7",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ZERO_REALITY_CONCURRENT_LEDGER_RECONCILIATION__FOURTEEN_SOUND_CACHED_CERTIFICATE_REGIONS__NOT_EXHAUSTIVE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+    "git_blob_sha": "c1bc4543860be08f9014f69a212ba2222d8dba7c"
+  },
+  "live_predecessor": {
+    "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json",
+    "git_blob_sha": "6637b23cd90f3df20ec87f817ef38d1eb233ea79",
+    "known_sound_region_certificate_count": 13
+  },
+  "stale_parallel_manifest_reconciled": {
+    "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V6.json",
+    "git_blob_sha": "cdb8f76d8ee158989a51f2ebcf108c4d1847ebd3",
+    "reason": "V6_BOUND_AN_EARLIER_TWELVE_REGION_V5_BLOB_WHILE_CURRENT_V5_ALREADY_CONTAINS_THIRTEEN__ITS_SYNTHESIS_DELTA_IS_SOUND_BUT_ITS_BASE_COUNT_IS_STALE"
+  },
+  "added_certificate": {
+    "id": "SYNTHESIS_TARGET_SCOPE_REQUIRED_CLAIM_COVERAGE_TOP_LAW",
+    "family": "COMMUNICATION_AND_SYNTHESIS",
+    "kind": "SELECTED_PROPERTY_ABSOLUTE_CEILING_CELL",
+    "source": {
+      "path": "canonical/governance/V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_SELECTED_PROPERTY_CELL_20261007_V1.json",
+      "git_blob_sha": "7b2cb008f34082ae0aa4be78f2444287cf6022b2"
+    },
+    "independent_verifications": [
+      {
+        "path": "canonical/verification/V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_SELECTED_PROPERTY_INDEPENDENT_WOLFRAM_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "200576296c16e3c5231e6a873a83129d8ea06545"
+      },
+      {
+        "path": "canonical/verification/V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CONNECTOR_WOLFRAM_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "e4435dd6ffe95ce723159a2222217e8d427c5dd9"
+      }
+    ],
+    "brain_lower_bound": 1,
+    "global_upper_bound": 1,
+    "scope_relation": "VERIFIED_SUPERSET",
+    "K_c_minus": "EMPTY",
+    "target_information_consumed": 0,
+    "same_package_donor_deleted_ownership_evidence_bound": true
+  },
+  "reconciliation": {
+    "predecessor_certificate_count": 13,
+    "distinct_added_certificate_count": 1,
+    "known_sound_region_certificate_count": 14,
+    "added_region_not_present_in_current_v5": true,
+    "regions_may_overlap_semantically": true,
+    "semantic_coverage_measure_not_claimed": true,
+    "fresh_target_reality_consumed": 0,
+    "E_definition": "CLOSED_AUTHORIZED_OPUS55_TRACE_SUPERSET_MINUS_UNION_OF_ALL_SOUND_CACHED_D_B_CERTIFICATE_REGIONS",
+    "monotonicity": "ADDING_THE_VERIFIED_SYNTHESIS_PROPERTY_REGION_CAN_ONLY_SHRINK_OR_PRESERVE_THE_RESIDUAL_ESCAPE_SET"
+  },
+  "synthesis_residual_effect": {
+    "removed": "REQUIRED_CLAIM_COVERAGE",
+    "surviving": "LOAD_BEARING_USEFUL_SYNTHESIS_QUALITY_DIMENSION_PERFORMANCE_NOT_ALREADY_SOUNDLY_CERTIFIED",
+    "synthesis_family_closed": false
+  },
+  "scheduler_effect": [
+    "SUBTRACT_THE_FOURTEEN_SOUND_CACHED_CERTIFICATE_REGIONS_BEFORE_ANY_NEW_TARGET_QUERY_OR_IMPLEMENTATION_WORK.",
+    "DO_NOT_REOPEN_REQUIRED_CLAIM_COVERAGE_FOR_THE_BOUND_SYNTHESIS_TARGET_SCOPE_WITHOUT_CONTENT_ADDRESSED_COUNTEREVIDENCE.",
+    "ATTACK_ONLY_SURVIVING_SYNTHESIS_QUALITY_DIMENSIONS_AND_OTHER_TRUE_WITHIN_SCOPE_ESCAPE CONTEXTS.",
+    "FUTURE_LEDGER_RECONCILIATIONS_MUST_UNION_ALL_INDEPENDENTLY_VERIFIED_PARALLEL_DELTAS_INSTEAD_OF_LAST_WRITER_WINS.",
+    "PRESERVE_DIRECT_E2E_OR_TOP_LAW_FIRST_AND_CERTIFICATE_GATED_FAIL_CLOSED_ROUTING."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FOURTEEN_CERTIFICATE_REGIONS_ARE_SEMANTICALLY_DISJOINT.",
+    "NO_CLAIM_FOURTEEN_REGIONS_EXHAUST_D_B_OR_THE_CLOSED_TARGET_TRACE_SUPERSET.",
+    "NO_CLAIM_ALL_USEFUL_SYNTHESIS_QUALITY_DIMENSIONS_ARE_CLOSED.",
+    "NO_CLAIM_SYNTHESIS_FAMILY_COMPLETE_SELECTED_CONTEXT_ABC_D_FINALITY_OR_TERMINAL_CLOSURE.",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
