@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1",
   "date": "2026-10-02",
-  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__NO_ABORT_PARENT_RUNNER_EXACTLY_BOUND__ZERO_TERMINAL_RESULTS",
+  "status": "P3_PROVENANCE_GATE_REPAIRED__EXACT_RUNTIME_REBOUND__INDEPENDENT_REPLAY_PENDING__ZERO_TERMINAL_RESULTS",
   "objective": "MATERIALIZE_REAL_T0_T1_T2_T3_PARENT_PORTFOLIO_OBSERVATIONS_FOR_ALL_MULTIPLEX_BEHAVIORS_WITHOUT_GLOBAL_SAMPLE_COUNT_SHORTCUT",
   "seed_policy": {
     "prefix": "PROJECT_BRAIN_TERMINAL_V2\\0",
@@ -89,8 +89,8 @@
     "canonical/runtime/m0a_raw_source_brain_candidate_v2.py": "0aac96d27068bdad379703c1b0b8a7a32cacb2e2",
     "canonical/runtime/native_artifact_cross_format_proof_v1.py": "904eb61171f5ee775ff7824c1be7778d7acc4a23",
     "canonical/runtime/native_artifact_cross_format_candidate_v1.py": "f3e5090647dd9029ab9f46efd06dc0c0d0addbc3",
-    "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
-    "canonical/runtime/contract_native_brain_candidate.py": "afc18af1d1da6f25166c6cc57dcbc0cd3070bb85",
+    "canonical/runtime/contract_native_proof_suites.py": "f71f7aab54e259f0a9841646e2401a9e117d6773",
+    "canonical/runtime/contract_native_brain_candidate.py": "74b8e2fda8e097d7e3ca48843e7c578c4be72012",
     "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py": "dd8fba0f27691002babbc7ad1fc6b65d7bb57282"
   },
   "parent_portfolio_rule": "FOR_EACH_PORTFOLIO__RUN_EACH_BOUND_MULTIPLEX_BEHAVIOR_ON_ITS_FROZEN_ROUTE_SPECIFIC_SCHEDULE__COMPUTE_PARENT_TERMINAL_ACCEPTANCE_AS_AND_OF_ALL_LOAD_BEARING_MULTIPLEX_COMPONENTS__EMIT_ONE_AGGREGATE_INFORMATION_SAFE_RECEIPT_PER_BEHAVIOR__CAD_REUSES_ITS_DEDUPLICATED_DIRECT_RESULT",
@@ -116,5 +116,7 @@
     "NO_CASE_REPLACEMENT",
     "NO_TUNING_REPLAY"
   ],
-  "independent_verification": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_RUNNER_NO_ABORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  "independent_verification": null,
+  "superseded_independent_verification": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_RUNNER_NO_ABORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "reverification_reason": "P3_CONTRACT_NATIVE_CANDIDATE_AND_SCORER_BYTES_CHANGED_TO_MAKE_PROVENANCE_PRESERVATION_LOAD_BEARING"
 }
