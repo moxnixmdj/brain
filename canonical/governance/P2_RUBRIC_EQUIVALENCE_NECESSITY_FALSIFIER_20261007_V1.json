@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_P2_RUBRIC_EQUIVALENCE_NECESSITY_FALSIFIER_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_TRUTH_REPAIR__FULL_RUBRIC_EQUIVALENCE_OVERSTRICT__BOUND_COMPARISON_ORDER_SUFFICIENT__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "p2_strong_quality": {
+      "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_SUBREGION_TOP_LAW_20261007_V1.json",
+      "git_blob_sha": "ec0831f086823995b671c33ff24cd76de3b0250e"
+    },
+    "p2_certifier": {
+      "path": "canonical/runtime/p2_strong_quality_visible_certifier_v1.py",
+      "git_blob_sha": "90ae1ce0f413da26dd32562afb2f17a1289b23d7"
+    },
+    "semantic_minimum_information": {
+      "path": "canonical/governance/V16_TERMINAL_SEMANTIC_QUOTIENT_INFORMATION_POLICY_20261007_V1.json"
+    }
+  },
+  "claim_under_attack": "EVERY_P2_STRONG_QUALITY_ADMISSION_MUST_PROVE_THE_INDEPENDENT_TARGET_RUBRIC_IS_FUNCTIONALLY_EQUIVALENT_TO_THE_EXPLICIT_P2_OBJECTIVE_ON_THE_WHOLE_DOMAIN",
+  "constructive_countermodel": {
+    "quality_coordinates": [
+      "q1",
+      "q2"
+    ],
+    "selected": [
+      1,
+      1
+    ],
+    "mechanics_baseline": [
+      0,
+      0
+    ],
+    "selected_minus_max_marginal_edit": [
+      1,
+      0
+    ],
+    "explicit_p2_objective": "R_P2(q)=q1+q2",
+    "alternative_target_rubric": "R_T(q)=2*q1+q2",
+    "functions_equal": false,
+    "explicit_values": {
+      "selected": 2,
+      "baseline": 0,
+      "ablated": 1
+    },
+    "target_values": {
+      "selected": 3,
+      "baseline": 0,
+      "ablated": 2
+    },
+    "selected_strictly_beats_baseline_under_both": true,
+    "selected_strictly_beats_ablation_under_both": true,
+    "rescue_restores_selected_value_under_both": true
+  },
+  "theorem_candidate": {
+    "statement": "FULL_FUNCTIONAL_RUBRIC_EQUIVALENCE_IS_NOT_NECESSARY_FOR_THE_TWO_LOAD_BEARING_P2_QUALITY_COMPARISONS__IT_IS_SUFFICIENT_TO_BIND_THE_TARGET_OR_ADMISSIBLE_RUBRIC_ORDER_ON_THE_FINITE_COMPARISON_SET_ACTUALLY_USED_BY_THE_CERTIFICATE",
+    "minimum_required_order_facts": [
+      "TARGET_OR_ADMISSIBLE_QUALITY_ORDER_RANKS_SELECTED_PLAN_STRICTLY_ABOVE_MECHANICS_ONLY_BASELINE",
+      "TARGET_OR_ADMISSIBLE_QUALITY_ORDER_RANKS_SELECTED_PLAN_STRICTLY_ABOVE_THE_BOUND_ABLATED_PLAN",
+      "RESCUE_RESTORES_THE_ORIGINAL_SELECTED_PLAN_ORIGINAL_QUALITY_STATE"
+    ],
+    "replacement_admission_interface": "CONTENT_ADDRESSED_TARGET_RELATIVE_OR_SCOPE_COMPLETE_COMPARISON_ORDER_CERTIFICATE_FOR_THE_LOAD_BEARING_SELECTED_BASELINE_ABLATION_SET",
+    "information_reduction": "DO_NOT_IDENTIFY_OR_PROVE_THE_FULL_RUBRIC_FUNCTION_WHEN_ONLY_THESE_COMPARISON_RELATIONS_ARE_USED_BY_THE_P2_GATE",
+    "common_policy_relation": "IF_ONE_SELECTED_PLAN_WINS_THE_REQUIRED_COMPARISONS_FOR_EVERY_TARGET_RUBRIC_STILL_ADMISSIBLE_IN_THE_CURRENT_INFORMATION_CELL__NO_RUBRIC_DISCRIMINATOR_IS_REQUIRED"
+  },
+  "certifier_repair_candidate": {
+    "prior_requirement": "explicit_rubric_equivalent_to_p2_objective == true",
+    "weaker_sound_requirement": "bound_quality_order_certificate proves the exact selected>baseline and selected>ablated comparisons under the terminally relevant target/admissible rubric class",
+    "preserve": [
+      "LOSSLESS_P2_MEMBERSHIP",
+      "BASELINE_LAYOUT_NONOBSCURING",
+      "MECHANICS_BASELINE_SEMANTICS",
+      "ABLATION_RESCUE_SEMANTIC_BINDING",
+      "NATIVE_MECHANICAL_GATE_WHEN_LOAD_BEARING",
+      "ALL_VISIBLE_GROUNDING_COVERAGE_AUDIENCE_AND_NONOBSCURING_GATES"
+    ]
+  },
+  "decisive_falsifiers": [
+    "THE_TERMINAL_OBJECTIVE_EXPLICITLY_REQUIRES_GLOBAL_FUNCTIONAL_RUBRIC_IDENTITY",
+    "A_LOAD_BEARING_P2_GATE_USES_RUBRIC_VALUES_OUTSIDE_THE_SELECTED_BASELINE_ABLATION_RESCUE_COMPARISON_SET",
+    "THE_BOUND_TARGET_QUALITY_ORDER_CAN_REVERSE_ONE_REQUIRED_COMPARISON_DESPITE_THE_PROPOSED_CERTIFICATE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_AA_BRIEFCASE_OR_GDPVAL_TARGET_ORDER_IS_ALREADY_BOUND.",
+    "NO_CLAIM_P2_PROFESSIONAL_QUALITY_IS_GLOBALLY_CLOSED.",
+    "NO_CLAIM_HIDDEN_RUBRIC_INFORMATION_IS_NEVER_NEEDED.",
+    "NO_U_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
