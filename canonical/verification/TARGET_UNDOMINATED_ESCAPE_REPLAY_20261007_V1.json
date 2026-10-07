@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_TARGET_UNDOMINATED_ESCAPE_REPLAY_V1",
   "date": "2026-10-07",
-  "status": "EXACT_BRANCH_REPLAY_PASS__5_OF_5__DIFF_CLEAN__ZERO_CREDIT",
-  "subject_head": "6dd9f4211cf17829fe25165af684396906924051",
+  "status": "EXACT_REBASED_BRANCH_REPLAY_PASS__5_OF_5__DIFF_CLEAN__ZERO_CREDIT",
+  "subject_head": "aeec1dc279e5838b1c47777754bacbac1f9b24f6",
   "tests": [
     "canonical/tests/test_target_undominated_escape_reduction_v1.py",
     "canonical/tests/test_target_role_escape_frontier_v1.py"
