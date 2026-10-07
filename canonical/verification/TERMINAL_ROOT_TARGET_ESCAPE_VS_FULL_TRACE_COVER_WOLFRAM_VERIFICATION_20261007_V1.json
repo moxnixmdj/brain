@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ROOT_TARGET_ESCAPE_VS_FULL_TRACE_COVER_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_COMPUTATIONAL_CHECK_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TERMINAL_ROOT_TARGET_ESCAPE_VS_FULL_TRACE_COVER_TRUTH_REPAIR_20261007_V1.json"
+  },
+  "check": {
+    "code": "S={a,b}; U={a}; D={a}; E=Complement[S,D]",
+    "observed": {
+      "U_subset_S": true,
+      "D_subset_S": true,
+      "E": [
+        "b"
+      ],
+      "U_intersection_E": [],
+      "terminal_condition": true,
+      "full_trace_cover": false,
+      "strong_implies_terminal": true,
+      "converse_in_countermodel": false
+    },
+    "wolfram_output": "<|USubsetS -> True, DSubsetS -> True, E -> {b}, UIntersectionE -> {}, TerminalCondition -> True, FullTraceCover -> False, StrongImpliesTerminal -> True, ConverseInCountermodel -> False|>"
+  },
+  "conclusion": [
+    "FULL_S_TRACE_COVER_IS_A_SOUND_SUFFICIENT_ROUTE_TO_TERMINAL_ABC_COVERAGE.",
+    "FULL_S_TRACE_COVER_IS_NOT_A_NECESSARY_ROUTE_WHEN_U_IS_A_PROPER_SUBSET_OF_S_TRACE.",
+    "THE_NECESSARY_TARGET_ROOT_IS_U_INTERSECTION_E_EMPTY__NOT_E_EMPTY."
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_CREDIT",
+    "NO_CLAIM_CURRENT_U_INTERSECTION_E_IS_EMPTY"
+  ]
+}
