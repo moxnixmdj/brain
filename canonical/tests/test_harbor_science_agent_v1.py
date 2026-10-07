@@ -19,6 +19,10 @@ class Env:
         self.commands.append(command)
         if command == "verify-bad":
             return Receipt(1, "", "bad")
+        if command == "warning-action":
+            return Receipt(0, "", "bash: warning: here-document at line 1 delimited by end-of-file")
+        if command == "test -s /app/submission/missing.json":
+            return Receipt(1, "", "missing")
         return Receipt(0, "ok", "")
 
 def planner(outputs):
@@ -125,6 +129,54 @@ class ScienceAgentTests(unittest.TestCase):
         with patch.object(s.science_planner, "plan", planner(outputs)):
             with self.assertRaises(Exception):
                 asyncio.run(s.run_science_goal("goal",env,max_cycles=1))
+
+
+    def test_shell_heredoc_warning_blocks_false_coverage(self):
+        env,result=self.run_goal([{
+            "material_requirements":["R1"],
+            "candidates":[{
+                "action_id":"a","covers":["R1"],"command":"warning-action","verify_command":"echo verify"
+            }]
+        }])
+        self.assertNotEqual(result["status"],"FINISHED")
+        self.assertEqual(result["resolved_requirements"],[])
+        self.assertTrue(result["trace"][0]["brain_postcheck"]["integrity_errors"])
+
+    def test_explicit_submission_artifact_must_be_named_by_final_verify(self):
+        env=Env()
+        outputs=[{
+            "material_requirements":["R1"],
+            "candidates":[{
+                "action_id":"a","covers":["R1"],"command":"echo work",
+                "verify_command":"test -s /app/submission/controller.py"
+            }]
+        }]
+        goal="Create /app/submission/controller.py and /app/submission/design_report.json"
+        with patch.object(s.science_planner,"plan",planner(outputs)):
+            result=asyncio.run(s.run_science_goal(goal,env,max_cycles=1))
+        self.assertNotEqual(result["status"],"FINISHED")
+        self.assertEqual(result["resolved_requirements"],[])
+        errs=result["trace"][0]["brain_postcheck"]["integrity_errors"]
+        self.assertTrue(any("VERIFY_COMMAND_OMITS_EXPLICIT_REQUIRED_ARTIFACTS" in x for x in errs))
+
+    def test_explicit_submission_artifacts_get_brain_owned_final_checks(self):
+        env=Env()
+        outputs=[{
+            "material_requirements":["R1"],
+            "candidates":[{
+                "action_id":"a","covers":["R1"],"command":"echo work",
+                "verify_command":"test -s /app/submission/controller.py && test -s /app/submission/design_report.json"
+            }]
+        }]
+        goal="Create /app/submission/controller.py and /app/submission/design_report.json"
+        with patch.object(s.science_planner,"plan",planner(outputs)):
+            result=asyncio.run(s.run_science_goal(goal,env,max_cycles=1))
+        self.assertEqual(result["status"],"FINISHED")
+        checks=result["trace"][0]["brain_postcheck"]["artifact_checks"]
+        self.assertEqual([x["path"] for x in checks],[
+            "/app/submission/controller.py","/app/submission/design_report.json"
+        ])
+        self.assertTrue(all(x["exists_nonempty"] for x in checks))
 
     def test_source_gate_projection_is_brain_owned_general_substrate(self):
         route={
