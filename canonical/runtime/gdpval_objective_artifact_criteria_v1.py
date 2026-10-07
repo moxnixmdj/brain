@@ -43,94 +43,163 @@ def compile_criterion(criterion: str, *, criterion_id: str | None = None) -> dic
 
     checks: list[Check] = []
 
+    # Exact artifact filename. Admission is intentionally limited to native formats
+    # whose validity this verifier can independently reopen.
     m = re.fullmatch(
-        r"(?:The\s+)?(?:submitted\s+)?(?:workbook|deliverable|audio)?\s*file(?:'s)?\s*(?:name|filename)\s+is\s+exactly\s+(.+?)[.]?",
-        text, re.I,
+        r"(?:The\s+)?(?:submitted\s+)?(?:workbook|deliverable|audio)?\s*file(?:'s)?\s*"
+        r"(?:name|filename)\s+is\s+exactly\s+(.+?)[.]?",
+        text,
+        re.I,
     )
     if m:
         filename = _norm_quote(m.group(1).rstrip("."))
-        if filename and Path(filename).name == filename and "." in filename:
-            checks.append(Check("EXACT_FILENAME", {"filename": filename}))
+        if (
+            filename
+            and Path(filename).name == filename
+            and Path(filename).suffix.lower()
+            in {".xlsx", ".xlsm", ".xls", ".docx", ".pptx", ".pdf", ".zip", ".wav"}
+        ):
+            checks.append(Check("EXACT_FILENAME_NATIVE_VALID", {"filename": filename}))
 
-    if not checks:
-        m = re.fullmatch(r"An\s+audio\s+file\s+named\s+exactly\s+[\"“](.+?)[\"”]\s+is\s+delivered[.]?", text, re.I)
-        if m:
-            checks.append(Check("EXACT_FILENAME", {"filename": m.group(1)}))
-
+    # Exact named audio delivery. Filename alone is insufficient; the matched WAV
+    # must also reopen as a valid WAV artifact.
     if not checks:
         m = re.fullmatch(
-            r"The\s+submitted\s+deliverable\s+is\s+an\s+Excel\s+workbook\s+file\s+whose\s+basename\s+is\s+['\"“](.+?)['\"”]\s*\(accept\s+\.xlsx,\s*\.xls,\s*or\s*\.xlsm\)[.]?",
-            text, re.I,
+            r"An\s+audio\s+file\s+named\s+exactly\s+[\"“](.+?)[\"”]\s+is\s+delivered[.]?",
+            text,
+            re.I,
+        )
+        if m and Path(m.group(1)).suffix.lower() == ".wav":
+            checks.append(Check("EXACT_FILENAME_NATIVE_VALID", {"filename": m.group(1)}))
+
+    # Workbook basename with allowed Excel extensions.
+    if not checks:
+        m = re.fullmatch(
+            r"The\s+submitted\s+deliverable\s+is\s+an\s+Excel\s+workbook\s+file\s+whose\s+"
+            r"basename\s+is\s+['\"“](.+?)['\"”]\s*\(accept\s+\.xlsx,\s*\.xls,\s*or\s*\.xlsm\)[.]?",
+            text,
+            re.I,
         )
         if m:
-            checks.append(Check(
-                "EXACT_STEM_ALLOWED_EXTENSIONS",
-                {"stem": m.group(1), "extensions": [".xls", ".xlsm", ".xlsx"]},
-            ))
+            checks.append(
+                Check(
+                    "EXACT_STEM_ALLOWED_EXTENSIONS",
+                    {"stem": m.group(1), "extensions": [".xls", ".xlsm", ".xlsx"]},
+                )
+            )
 
+    # Only role-free whole criteria are admitted here. Criteria such as
+    # "one checklist PDF" remain unresolved because file type does not prove
+    # semantic role identity.
     if not checks:
         single_patterns = (
-            (r"Exactly\s+one\s+checklist\s+file\s+is\s+provided\s+in\s+PDF\s+format[.]?", ".pdf"),
-            (r"Exactly\s+one\s+action[‑-]?items\s+document\s+is\s+provided\s+in\s+Word\s*\(\.docx\)\s+format[.]?", ".docx"),
-            (r"Exactly\s+one\s+top-level\s+ZIP\s+archive\s+is\s+submitted\s+as\s+the\s+final\s+deliverable\s*\(one\s+and\s+only\s+one\s+\.zip\s+file\)[.]?", ".zip"),
-            (r"Provides\s+the\s+deliverable\s+as\s+a\s+single\s+Microsoft\s+Excel\s+workbook\s+in\s+\.xlsx\s+format[.]?", ".xlsx"),
+            (
+                r"Exactly\s+one\s+top-level\s+ZIP\s+archive\s+is\s+submitted\s+as\s+the\s+"
+                r"final\s+deliverable\s*\(one\s+and\s+only\s+one\s+\.zip\s+file\)[.]?",
+                ".zip",
+            ),
+            (
+                r"Provides\s+the\s+deliverable\s+as\s+a\s+single\s+Microsoft\s+Excel\s+"
+                r"workbook\s+in\s+\.xlsx\s+format[.]?",
+                ".xlsx",
+            ),
         )
         for pat, ext in single_patterns:
             if re.fullmatch(pat, text, re.I):
-                checks.append(Check(
-                    "EXACT_TOP_LEVEL_FILE_COUNT_BY_EXTENSION",
-                    {"count": 1, "extension": ext, "total_files_must_equal_count": ext == ".zip"},
-                ))
+                checks.append(
+                    Check(
+                        "EXACT_TOP_LEVEL_FILE_COUNT_BY_EXTENSION",
+                        {
+                            "count": 1,
+                            "extension": ext,
+                            "total_files_must_equal_count": True,
+                        },
+                    )
+                )
                 break
 
+    # Simple file-format requirements without extra semantic clauses.
     if not checks:
         format_patterns = (
-            (r"The\s+final\s+deliverable\s+is\s+provided\s+as\s+an\s+Excel\s+workbook\s+in\s+\.xlsx\s+format[.]?", ".xlsx"),
-            (r"Deliverable\s+is\s+provided\s+as\s+a\s+Microsoft\s+Word\s+document\s*\(\.docx\)[.]?", ".docx"),
+            (
+                r"The\s+final\s+deliverable\s+is\s+provided\s+as\s+an\s+Excel\s+workbook\s+"
+                r"in\s+\.xlsx\s+format[.]?",
+                ".xlsx",
+            ),
+            (
+                r"Deliverable\s+is\s+provided\s+as\s+a\s+Microsoft\s+Word\s+document\s*"
+                r"\(\.docx\)[.]?",
+                ".docx",
+            ),
         )
         for pat, ext in format_patterns:
             if re.fullmatch(pat, text, re.I):
                 checks.append(Check("AT_LEAST_ONE_VALID_FILE_BY_EXTENSION", {"extension": ext}))
                 break
 
+    # Single Word or PDF document.
     if not checks and re.fullmatch(
-        r"The\s+deliverable\s+is\s+provided\s+as\s+a\s+single\s+Word\s*\(\.docx\)\s+or\s+PDF\s*\(\.pdf\)\s+document[.]?",
-        text, re.I,
+        r"The\s+deliverable\s+is\s+provided\s+as\s+a\s+single\s+Word\s*\(\.docx\)\s+or\s+"
+        r"PDF\s*\(\.pdf\)\s+document[.]?",
+        text,
+        re.I,
     ):
-        checks.append(Check(
-            "EXACT_TOP_LEVEL_FILE_COUNT_ALLOWED_EXTENSIONS",
-            {"count": 1, "extensions": [".docx", ".pdf"], "total_files_must_equal_count": True},
-        ))
+        checks.append(
+            Check(
+                "EXACT_TOP_LEVEL_FILE_COUNT_ALLOWED_EXTENSIONS",
+                {
+                    "count": 1,
+                    "extensions": [".docx", ".pdf"],
+                    "total_files_must_equal_count": True,
+                },
+            )
+        )
 
+    # Worksheet existence/name with exact case-fold + surrounding-space semantics.
     if not checks:
         m = re.fullmatch(
-            r"The\s+workbook\s+contains\s+a\s+worksheet\s+named\s+exactly\s+['\"“](.+?)['\"”]\s*\(case-insensitive,\s*ignoring\s+surrounding\s+spaces\)[.]?",
-            text, re.I,
+            r"The\s+workbook\s+contains\s+a\s+worksheet\s+named\s+exactly\s+['\"“](.+?)['\"”]\s*"
+            r"\(case-insensitive,\s*ignoring\s+surrounding\s+spaces\)[.]?",
+            text,
+            re.I,
         )
         if m:
             checks.append(Check("XLSX_SHEET_NAME_CASEFOLD_TRIM", {"sheet_name": m.group(1)}))
 
+    # Native reopen validity, only when the whole criterion is exactly that fact.
     if not checks:
         m = re.fullmatch(r"The\s+\.(docx|xlsx|pptx)\s+opens\s+without\s+error[.]?", text, re.I)
         if m:
-            checks.append(Check("AT_LEAST_ONE_VALID_FILE_BY_EXTENSION", {"extension": "." + m.group(1).lower()}))
+            checks.append(
+                Check("AT_LEAST_ONE_VALID_FILE_BY_EXTENSION", {"extension": "." + m.group(1).lower()})
+            )
 
+    # WAV header facts. Conditional variants are deliberately unresolved.
     if not checks:
         m = re.fullmatch(
-            r"The\s+delivered\s+audio\s+file\s+has\s+a\s+sampling\s+rate\s+of\s+exactly\s+48,000\s+Hz[.]?",
-            text, re.I,
+            r"The\s+delivered\s+audio\s+file\s+has\s+a\s+sampling\s+rate\s+of\s+exactly\s+"
+            r"48,000\s+Hz[.]?",
+            text,
+            re.I,
         )
         if m:
             checks.append(Check("SINGLE_WAV_SAMPLE_RATE", {"sample_rate_hz": 48000}))
+
         m2 = re.fullmatch(
-            r"The\s+delivered\s+audio\s+file\s+has\s+a\s+bit\s+depth\s+of\s+exactly\s+24\s+bits\s+per\s+sample\s*\(PCM-equivalent\s+on\s+decode\)[.]?",
-            text, re.I,
+            r"The\s+delivered\s+audio\s+file\s+has\s+a\s+bit\s+depth\s+of\s+exactly\s+24\s+"
+            r"bits\s+per\s+sample\s*\(PCM-equivalent\s+on\s+decode\)[.]?",
+            text,
+            re.I,
         )
         if m2:
             checks.append(Check("SINGLE_WAV_SAMPLE_WIDTH_BITS", {"bits": 24}))
 
     if not checks:
-        return {**base, "status": "UNRESOLVED", "reason": "OUTSIDE_EXACT_OBJECTIVE_ARTIFACT_GRAMMAR"}
+        return {
+            **base,
+            "status": "UNRESOLVED",
+            "reason": "OUTSIDE_EXACT_OBJECTIVE_ARTIFACT_GRAMMAR",
+        }
 
     return {
         **base,
@@ -138,6 +207,7 @@ def compile_criterion(criterion: str, *, criterion_id: str | None = None) -> dic
         "checks": [asdict(c) for c in checks],
         "soundness_boundary": (
             "WHOLE_CRITERION_EXACT_MATCH_ONLY__NO_IGNORED_CONJUNCTS__"
+            "ROLE_IDENTITY_NOT_INFERRED_FROM_FILE_TYPE__"
             "NO_QUALITY_OR_SEMANTIC_EQUIVALENCE_INFERENCE"
         ),
     }
@@ -153,10 +223,13 @@ def _valid_package(path: Path) -> bool:
     try:
         if ext == ".docx":
             from docx import Document
+
             Document(str(path))
             return True
+
         if ext in {".xlsx", ".xlsm"}:
             from openpyxl import load_workbook
+
             wb = load_workbook(
                 str(path),
                 read_only=True,
@@ -167,31 +240,42 @@ def _valid_package(path: Path) -> bool:
                 return bool(wb.sheetnames)
             finally:
                 wb.close()
+
         if ext == ".pptx":
             from pptx import Presentation
+
             Presentation(str(path))
             return True
+
         if ext == ".pdf":
             from pypdf import PdfReader
+
             reader = PdfReader(str(path), strict=True)
             _ = len(reader.pages)
             return True
+
         if ext == ".zip":
             with zipfile.ZipFile(path) as z:
                 return z.testzip() is None
+
         if ext == ".wav":
             with wave.open(str(path), "rb") as w:
                 return w.getnchannels() > 0 and w.getframerate() > 0 and w.getsampwidth() > 0
+
         if ext == ".xls":
+            # Legacy binary XLS remains a deliberate false negative until a
+            # Brain-owned native XLS parser is separately bound.
             return False
     except Exception:
         return False
+
     return path.exists() and path.stat().st_size > 0
 
 
 def _xlsx_sheet_names(path: Path) -> list[str] | None:
     try:
         from openpyxl import load_workbook
+
         wb = load_workbook(
             str(path),
             read_only=True,
@@ -234,8 +318,9 @@ def verify_compiled(compiled: Mapping[str, Any], artifact_dir: str | Path) -> di
         kind = row.get("kind")
         args = row.get("args") or {}
 
-        if kind == "EXACT_FILENAME":
-            ok = any(p.name == args.get("filename") for p in files)
+        if kind == "EXACT_FILENAME_NATIVE_VALID":
+            cand = [p for p in files if p.name == args.get("filename")]
+            ok = len(cand) == 1 and _valid_package(cand[0])
 
         elif kind == "EXACT_STEM_ALLOWED_EXTENSIONS":
             exts = set(args.get("extensions") or [])
