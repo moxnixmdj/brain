@@ -608,6 +608,15 @@
         "git_blob_sha": "c93dd3d7480e93c8fbfffd6a944e4f45e56ceb87"
       },
       "note": "DEPLOYED_FAIL_CLOSED_SYMBOLIC_REGION_ROUTING__REMOVES_EXACT_DIGEST_ONLY_REGISTRY_LIMITATION__NO_GLOBAL_COVER_CREDIT"
+    },
+    "symbolic_admission_predicate_successor_deployment": {
+      "path": "canonical/governance/SYMBOLIC_ADMISSION_PREDICATE_SUCCESSOR_DEPLOYMENT_20261007_V1.json",
+      "git_blob_sha": "1b056d357825e522a04b403cd98f025280ac4976",
+      "runtime": {
+        "path": "canonical/runtime/symbolic_admission_predicate_successor_v1.py",
+        "git_blob_sha": "c2f23feb71c233d265344337f3e588fee161f169"
+      },
+      "note": "DEPLOYED_EXECUTABLE_FAIL_CLOSED_SYMBOLIC_ADMISSION_REGIONS__SOUNDNESS_RECEIPT_REQUIRED__NO_U_EMPTY_AUTHORITY"
     }
   },
   "live_truth": {
@@ -907,7 +916,9 @@
     "current_escape_progress_totality_proved": false,
     "global_rank_is_separate_open_problem": false,
     "global_resource_potential_is_separate_open_problem": false,
-    "complete_raw_semantic_outcome_model_is_required": false
+    "complete_raw_semantic_outcome_model_is_required": false,
+    "symbolic_admission_predicate_successor_local_replay_passed": true,
+    "symbolic_admission_predicate_successor_independent_public_replay_claimed": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -944,6 +955,7 @@
     "current_single_boundary": "CONSTRUCT_AND_AUTHENTICATE_TOTAL_SOUND_alpha_gamma_PLUS_TERMINAL_OR_COMPLETE_OUTCOME_STRICTLY_WELL_FOUNDED_SAFE_RESOURCE_BOUNDED_PROGRESS_COVER__OR_PROVE_THE_EXACT_SOUND_ADMISSION_COMPLEMENT_UNSAT"
   },
   "scheduling_lock": [
+    "SYMBOLIC_ADMISSION_PREDICATE_SUCCESSOR_IS_DEPLOYED__DO_NOT_SCHEDULE_REGISTRY_INFRASTRUCTURE_AS_A_BLOCKER__ONLY_PREDICATE_SOUNDNESS_PLUS_RESIDUAL_COMPLEMENT_UNSAT_REMAIN_LOAD_BEARING.",
     "SYMBOLIC_ADMISSION_PREDICATE_SUCCESSOR_IS_DEPLOYED__DO_NOT_SCHEDULE_REGISTRY_REDESIGN__ONLY_PROVE_EXACT_RESIDUAL_COMPLEMENT_R_UNSAT_OR_RETURN_ONE_CONSTRUCTIVE_COUNTEREXAMPLE.",
     "DO_NOT_SCHEDULE_D_FINALITY_AS_PARALLEL_RESEARCH__AFTER_ABC_CLOSES_FREEZE_FINAL_ROUTE_BYTES__COMPILE_EXACT_EFFECT_FOOTPRINT__RUN_OWNERSHIP_DONOR_INDEPENDENCE_AND_CLEAN_ROOM_REPLAY.",
     "AFTER_U_EMPTY_ONLY__FREEZE_SELECTED_ROUTES_AND_EXECUTE_D_FINALITY__NO_OTHER_TOP_LEVEL_TERMINAL JOB EXISTS.",
