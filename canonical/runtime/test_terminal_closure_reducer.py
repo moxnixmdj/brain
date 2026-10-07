@@ -5,7 +5,14 @@ from canonical.runtime.terminal_closure_reducer import evaluate_manifest
 
 def passing_manifest():
     families = [
-        {"id": f"FAMILY_{i:02d}", "closure_state": "PASS"}
+        {
+            "id": f"FAMILY_{i:02d}",
+            "closure_state": "PASS",
+            "opus55_acceptance_state": "PASS",
+            "opus55_acceptance_calibrated": True,
+            "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+            "unresolved": [],
+        }
         for i in range(19)
     ]
     counters = {
