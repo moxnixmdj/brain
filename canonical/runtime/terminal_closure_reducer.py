@@ -198,12 +198,14 @@ def _family_terminally_closed(family: dict[str, Any]) -> bool:
     quarantined, or failing states remain fail-closed.
     """
     state = family.get("closure_state")
-    if state == "PASS":
-        return True
     if not isinstance(state, str) or "PASS" not in state:
         return False
     if any(marker in state for marker in ("OPEN", "FAIL", "QUARANTINED")):
         return False
+
+    # A display label is never proof. Compact PASS and decorated PASS states
+    # obey the same semantic closure gate so a manifest cannot manufacture
+    # terminality by writing closure_state="PASS".
     return (
         family.get("opus55_acceptance_state") == "PASS"
         and family.get("opus55_acceptance_calibrated") is True
