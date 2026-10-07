@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_ESCAPE_RESOLVER_V2_ACTIVATION",
+  "date": "2026-10-07",
+  "status": "ACTIVE_PLANNING_OVERLAY_CANDIDATE__FOUR_ROLE_TWO_REGIME_RECONCILIATION__ZERO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "purpose": "RECONCILE_THE_VERIFIED_UNIVERSAL_ESCAPE_RESOLVER_WITH_THE_CURRENT_FOUR_ROLE_U_FRONTIER_AND_TWO_ACCEPTANCE_REGIME_COMPRESSION_WITHOUT_CHANGING_ANY_D_B_ADMISSION_OR_TERMINAL_AUTHORITY",
+  "verified_resolver": {
+    "runtime_path": "canonical/runtime/universal_escape_resolver_v1.py",
+    "runtime_git_blob_sha": "9043273c97b53a991de8cb418e0c6a58efa0cec3",
+    "governance_path": "canonical/governance/UNIVERSAL_ESCAPE_RESOLVER_V1.json",
+    "governance_git_blob_sha": "1459c9da4e7178ca06a30cf46588bfd5f644b534",
+    "verification_path": "canonical/verification/UNIVERSAL_ESCAPE_RESOLVER_V1_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json",
+    "verification_git_blob_sha": "dc9e16ee542c9c77e1fc35c225e8a7fdc990f5c2",
+    "independent_runner_preservation_commit": "0d09b3c10197a1bd1ad5a103b0f4aa594e9cf0d9",
+    "workflow_run_id": 37595704301,
+    "workflow_job_id": 112707682297
+  },
+  "current_frontier": {
+    "path": "canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json",
+    "git_blob_sha": "8ab5cd358f460ca649ec3b0ac8eea56e87d7f838",
+    "primary_roles": [
+      "B0_INPUT_PERCEPTION_AND_GROUNDING",
+      "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING",
+      "B4_EXTERNAL_ACTION_PLANNING_AND_ENVIRONMENT_CONTROL",
+      "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION"
+    ],
+    "deferred_local_only": [
+      "B9_MULTI_ROLE_COMPOSITION"
+    ],
+    "do_not_schedule_as_primary": [
+      "B1_GOAL_CONSTRAINT_SCOPE_AND_JUDGMENT",
+      "B3_TEMPORAL_STATE_MEMORY_AND_CONTINUITY",
+      "B5_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "B6_DELEGATION_AND_COORDINATION",
+      "B8_SELF_VERIFICATION_FAILURE_LOCALIZATION_AND_RECOVERY"
+    ]
+  },
+  "acceptance_regime_quotient": {
+    "path": "canonical/governance/CURRENT_U_ACCEPTANCE_REGIME_QUOTIENT_20261007_V1.json",
+    "git_blob_sha": "2bf5d4b28fb839028fc7a369eab53f93e8b8605c",
+    "regimes": [
+      "O_OBJECTIVE_ACCEPTANCE",
+      "Q_QUALITATIVE_RELATIVE_ORDER"
+    ],
+    "status_boundary": "CANDIDATE_TWO_REGIME_U_COMPRESSION__ZERO_CREDIT__USE_AS_PLANNING_QUOTIENT_NOT_AS_SCOPE_COMPLETE_CLOSURE_PROOF"
+  },
+  "cross_run_continuity": {
+    "solver_path": "canonical/runtime/universal_verified_adaptive_solver_v7.py",
+    "solver_git_blob_sha": "d65ebac0fdce52c9873af8da4cb69c34ef7e6206",
+    "resume_authenticator_path": "canonical/runtime/universal_solver_authenticated_resume_v1.py",
+    "resume_authenticator_git_blob_sha": "6b9d3f2c9ad2096a294d97b255798cac13262cd1",
+    "use": "WHEN_AN_ESCAPE_RESOLUTION_REQUIRES_MULTI_STEP_VERIFIED_EXECUTION_ACROSS_RUNS__RESUME_ONLY_FROM_INDEPENDENTLY_VERIFIED_CONTENT_ADDRESSED_STATE__NEVER_REPLAY_PRIOR_VERIFIED_EFFECTS",
+    "terminal_authority": false
+  },
+  "planning_normal_form": [
+    "SELECT_ONLY_A_BOUND_SURVIVING_ESCAPE_CELL_IN_ONE_OR_MORE_OF_B0_B2_B4_B7",
+    "CLASSIFY_ITS_LOAD_BEARING_ACCEPTANCE_AS_O_Q_OR_BOTH_WITHOUT_TREATING_THE_QUOTIENT_AS_SCOPE_COMPLETENESS_PROOF",
+    "EXHAUST_SOURCE_PROVED_POSITIVE_ADEQUACY_ROBUST_COMMON_POLICY_COMPLETE_OBJECTIVE_AND_DIRECT_END_TO_END_ADMISSION_WHERE_APPLICABLE",
+    "IF_UNRESOLVED_USE_UNIVERSAL_LEARNING_V9_V8_V7_TO_FIND_ONLY_THE_MINIMUM_DECISION_RELEVANT_MISSING_EVIDENCE_MECHANISM_OR_DISCRIMINATOR",
+    "FOR_O_PRIORITY_TARGET_IS_ONE_GENERAL_OBJECTIVE_VERIFIER_OR_POSITIVE_ADEQUACY_COMPILER_OVER_SOUND_OBJECTIVE_CONTRACTS",
+    "FOR_Q_PRIORITY_TARGET_IS_ONE_COMPLETE_QUALITY_ORDER_OR_ROBUST_DOMINANCE_THEOREM_OVER_THE_SHARED_QUALITY_FRONTIER",
+    "WHEN_EXECUTION_SPANS_RUNS_USE_ONLY_AUTHENTICATED_UNIVERSAL_SOLVER_V7_RESUME_STATE",
+    "RETRY_EXISTING_FAIL_CLOSED_D_B_ADMISSION_AFTER_NEW_INDEPENDENT_EVIDENCE",
+    "RECOMPUTE_E_AND_RECLASSIFY_ONLY_THE_SURVIVING_FRONTIER",
+    "CERTIFY_B9_ONLY_FOR_ACTUALLY_REACHED_LOAD_BEARING_COMPOSITIONS_AFTER_NONCOMPOSITION_COVER"
+  ],
+  "scheduler_effect": [
+    "DO_NOT_SCHEDULE_THE_13_HISTORICAL_REFINEMENT_NAMES_AS_13_PRIMARY_RESEARCH_PROGRAMS",
+    "DO_NOT_SCHEDULE_CLOSED_B1_B3_B5_B6_B8_AS_PRIMARY_U_WORK",
+    "DO_NOT_SCHEDULE_GENERIC_B9_BEFORE_A_REACHED_COMPOSITION_REQUIRES_IT",
+    "DO_NOT_REOPEN_NEW_ENVIRONMENT_LEARNING_AS_A_CAPABILITY_BUILD_PROBLEM",
+    "USE_UNIVERSAL_LEARNING_AS_THE_SHARED_ESCAPE_PLANNER_ACROSS_B0_B2_B4_B7",
+    "SEARCH_FOR_ONE_O_LAW_AND_ONE_Q_LAW_BEFORE_BENCHMARK_SPECIFIC_PATCHES",
+    "USE_VERIFIED_TRANSFER_EQUIVALENCE_AND_CROSS_RUN_RESUME_TO_AVOID_REDISCOVERY"
+  ],
+  "authority_boundary": {
+    "planner_may_authorize_execution": false,
+    "planner_may_authorize_db_admission": false,
+    "planner_may_authorize_u_empty": false,
+    "planner_may_authorize_d_finality": false,
+    "planner_may_authorize_terminal": false,
+    "acceptance_regime_quotient_is_scope_complete_proof": false,
+    "only_existing_fail_closed_db_admission_can_promote_cell": true
+  },
+  "truth_preservation": {
+    "open_abc_refinement_family_count_changed": false,
+    "u_empty_changed": false,
+    "d_finality_changed": false,
+    "terminal_changed": false,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_B0_B2_B4_B7_ARE_INDEPENDENT",
+    "NO_CLAIM_O_OR_Q_IS_SCOPE_COMPLETE_CLOSED",
+    "NO_CLAIM_EVERY_SURVIVING_PROTOCOL_HAS_FINAL_O_Q_CLASSIFICATION",
+    "NO_CLAIM_ANY_CURRENT_ESCAPE_CELL_IS_CLOSED_BY_ACTIVATION_ALONE",
+    "NO_U_EMPTY",
+    "NO_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
