@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CONTINUITY_C_TRANSFORM_CERTIFICATE_CANDIDATE_V1",
   "date": "2026-10-07",
-  "status": "FROZEN_PREEXECUTION__PENDING_REAL_DEFAULT_CHILD_SEAM_QUALIFICATION__ZERO_CREDIT",
+  "status": "REFROZEN_AFTER_HARNESS_PATH_ONLY_REPAIR__PENDING_REAL_DEFAULT_CHILD_SEAM_QUALIFICATION__ZERO_CREDIT",
   "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
   "authority": {
     "current_terminal_authority": {
@@ -35,7 +35,7 @@
     },
     "qualification_runner": {
       "path": "canonical/verification/run_long_horizon_continuity_v2.py",
-      "git_blob_sha": "820f079725b5734b4c89a8ad09d49a740281cb8e"
+      "git_blob_sha": "b861f1710261de5d973ce6f2c34489ac38de65c8"
     }
   },
   "transform_law": "DETERMINISTIC_GIVEN_BOUND_TASK_MISSION_CURRENT_CANONICAL_STATE_AND_CHILD_RETURN_TRACE",
@@ -126,9 +126,27 @@
     "external_information_allowed": false,
     "model_dependency_allowed": false,
     "incremental_spend_usd": 0,
-    "pass_requires_all_boolean_checks": true
+    "pass_requires_all_boolean_checks": true,
+    "harness_repairs": [
+      {
+        "failed_public_run_id": 37556543582,
+        "failed_public_job_id": 112584013405,
+        "failure_class": "VERIFIER_TEMP_EVIDENCE_PATH_OUTSIDE_REPOSITORY__SUPERVISOR_RELATIVE_EVIDENCE_PATH_ASSERTION",
+        "semantic_seam_failure": false,
+        "changed_semantics": false,
+        "repair": "MOVE_EPHEMERAL_SUPERVISOR_STATE_AND_EVIDENCE_DIRECTORY_UNDER_REPOSITORY_ROOT",
+        "preserved": [
+          "PROCESS_A_CHECKPOINT_RULE",
+          "PROCESS_B_DEFAULT_EXECUTOR_RULE",
+          "ROOT3_PRODUCTION_LAUNCHER",
+          "REAL_CURRENT_ASTRA",
+          "MODEL_INDEPENDENT_FINISH_MISSION",
+          "ALL_BOOLEAN_PASS_CRITERIA"
+        ]
+      }
+    ]
   },
-  "promotion_rule": "ONLY_A_SUCCESSFUL_EXACT_HEAD_QUALIFICATION_RECEIPT_PLUS_INDEPENDENT_BINDING_OF_THAT_RECEIPT_MAY_POPULATE_THE_CONTINUITY_CERTIFICATE_IN_THE_V7_REGISTRY__CODE_REVIEW_OR_STATIC_REASONING_ALONE_IS_INSUFFICIENT",
+  "promotion_rule": "ONLY_A_SUCCESSFUL_EXACT_POST_REPAIR_HEAD_QUALIFICATION_RECEIPT_PLUS_INDEPENDENT_BINDING_OF_THAT_RECEIPT_MAY_POPULATE_THE_CONTINUITY_CERTIFICATE_IN_THE_V7_REGISTRY__THE_PATH_ONLY_HARNESS_REPAIR_DOES_NOT_CHANGE_THE_PRECOMMITTED_SEMANTIC_PASS_RULE",
   "current_effect": {
     "c_certificate_credit": false,
     "c_current_credited_routes": "4_OF_5_COMPLETE__1_PENDING",
