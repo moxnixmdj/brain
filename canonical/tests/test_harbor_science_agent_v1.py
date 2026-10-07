@@ -19,6 +19,8 @@ class Env:
         self.commands.append(command)
         if command == "verify-bad":
             return Receipt(1, "", "bad")
+        if command == "warn-action":
+            return Receipt(0, "", "bash: warning: here-document at line 1 delimited by end-of-file")
         if command.startswith("test -s /app/submission/"):
             return Receipt(1, "", "missing")
         return Receipt(0, "ok", "")
@@ -176,6 +178,39 @@ class ScienceAgentTests(unittest.TestCase):
         with patch.object(s.science_planner, "plan", planner(outputs)):
             with self.assertRaises(Exception):
                 asyncio.run(s.run_science_goal("goal",env,max_cycles=1))
+
+    def test_trivial_verify_command_cannot_promote_nonfile_coverage(self):
+        env,result=self.run_goal([
+            {
+                "material_requirements":["R1"],
+                "candidates":[
+                    {"action_id":"a","covers":["R1"],"command":"echo work","verify_command":"echo OK"}
+                ]
+            },
+            {"finish_summary":"premature"}
+        ])
+        self.assertNotEqual(result["status"],"FINISHED")
+        self.assertEqual(result["resolved_requirements"],[])
+        action=[r for r in result["trace"] if r.get("kind")=="BRAIN_SELECTED_RESEARCH_ACTION"][0]
+        self.assertEqual(action["verification_block_reason"],"TRIVIAL_OR_NONOBSERVING_VERIFY_COMMAND")
+        self.assertFalse(action["coverage_promoted"])
+
+    def test_action_output_anomaly_blocks_promotion_before_verify(self):
+        env,result=self.run_goal([
+            {
+                "material_requirements":["R1"],
+                "candidates":[
+                    {"action_id":"a","covers":["R1"],"command":"warn-action","verify_command":"test -d /tmp"}
+                ]
+            },
+            {"finish_summary":"premature"}
+        ])
+        self.assertNotEqual(result["status"],"FINISHED")
+        self.assertEqual(result["resolved_requirements"],[])
+        action=[r for r in result["trace"] if r.get("kind")=="BRAIN_SELECTED_RESEARCH_ACTION"][0]
+        self.assertEqual(action["verification_block_reason"],"ACTION_OUTPUT_ANOMALY")
+        self.assertFalse(action["coverage_promoted"])
+        self.assertNotIn("test -d /tmp",env.commands)
 
     def test_source_gate_projection_is_brain_owned_general_substrate(self):
         route={
