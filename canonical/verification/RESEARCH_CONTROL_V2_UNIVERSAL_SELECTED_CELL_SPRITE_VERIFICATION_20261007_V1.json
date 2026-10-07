@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_RESEARCH_CONTROL_V2_UNIVERSAL_SELECTED_CELL_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BYTES_REPLAY_PASS__6_ASSERTION_TESTS_PASS__WOLFRAM_INVARIANT_PASS__ZERO_CREDIT",
+  "subject": {
+    "action_intent": {
+      "path": "canonical/action_intents/ACTION_INTENT_RESEARCH_CONTROL_V2_TOTALITY_20261007_V1.json",
+      "git_blob_sha": "1c5f7dc19bb1a2f9a04060574b3aaed7fddebfd4"
+    },
+    "governance": {
+      "path": "canonical/governance/RESEARCH_CONTROL_V2_UNIVERSAL_SELECTED_CELL_20261007_V1.json",
+      "git_blob_sha": "8429d97c6befc41c602a91848714f32aeb598d38"
+    },
+    "v2_generator": {
+      "path": "canonical/runtime/research_control_information_safe_proof_v2.py",
+      "git_blob_sha": "a8d41a84b0368d0a9467173856912cc48742dcf1"
+    },
+    "verifier": {
+      "path": "canonical/runtime/research_control_v2_universal_selected_cell_verifier_v1.py",
+      "git_blob_sha": "2973448d3b434e873cfe2c2e28501fa1e2425df5"
+    },
+    "generator_tests": {
+      "path": "canonical/tests/test_research_control_information_safe_v2.py",
+      "git_blob_sha": "f2348d1837f05c950ca1c9293698060d150e9b20"
+    },
+    "verifier_tests": {
+      "path": "canonical/tests/test_research_control_v2_universal_selected_cell_verifier_v1.py",
+      "git_blob_sha": "0002578668d4083d0bc6b7a20d4d9e33df878596"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/research_control_v2_current_replay",
+    "verifier_command": "PYTHONPATH=<workspace> python3 canonical/runtime/research_control_v2_universal_selected_cell_verifier_v1.py",
+    "verifier_result": "PASS__V1_UNIVERSAL_ROUTE_FALSIFIED__V2_COLLISION_TOTAL_SELECTED_CELL_SOUNDLY_BOUND__ZERO_CREDIT",
+    "assertion_test_count": 6,
+    "assertion_tests_passed": 6,
+    "pytest_unavailable": true,
+    "pytest_absence_classification": "CARRIER_TOOLING_ABSENCE__NOT_SEMANTIC_FAILURE"
+  },
+  "verified": {
+    "v1_collision_counterexample_reproduced": true,
+    "v2_exact_counterexample_repaired": true,
+    "v2_structural_source_identity_total": true,
+    "same_candidate_policy_reused": true,
+    "exact_v2_generator_class_scope_complete": true,
+    "direct_e2e_parameterized_invariant_bound": true,
+    "open_world_research_scope_complete": false,
+    "unknown_domain_family_closed": false,
+    "anti_churn_guard_compliance": "SCOPE_COMPLETE_PARAMETERIZED_CLASS__NOT_POINT_RECORD_ACCUMULATION"
+  },
+  "independent_wolfram": {
+    "budget_for_all_integer_n_ge_0": "3*n < 3*n+1 = True",
+    "n_3_4_5": [
+      [
+        3,
+        9,
+        10,
+        true
+      ],
+      [
+        4,
+        12,
+        13,
+        true
+      ],
+      [
+        5,
+        15,
+        16,
+        true
+      ]
+    ],
+    "exactly_one_of_p_and_not_p": "Xor[p,Not[p]] = True"
+  },
+  "source_lease": {
+    "current_authority_v16": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+      "git_blob_sha": "70f22823084f7b99683580656dd5c5c631fbc522"
+    },
+    "u_exhaustion_guard": {
+      "path": "canonical/governance/U_EXHAUSTION_SCOPE_COMPLETE_CERTIFICATE_LEVERAGE_GUARD_20261007_V1.json",
+      "git_blob_sha": "b819801f7f7d19be843e5fdc3b7646bc2b1e749d"
+    },
+    "v1_generator": {
+      "path": "canonical/runtime/research_control_information_safe_proof.py",
+      "git_blob_sha": "16c47efee0e0e38f479163d1285d7079798efdaf"
+    },
+    "unchanged_candidate": {
+      "path": "canonical/runtime/research_control_information_safe_candidate.py",
+      "git_blob_sha": "cd6bf6e4163bbba64878b856766b1af4372d68bc"
+    }
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_RESEARCH_CONTROL_CLOSURE",
+    "NO_HLE_OR_TERMINAL_BENCH_SCORE_CREDIT",
+    "NO_UNKNOWN_DOMAIN_FAMILY_CLOSURE",
+    "NO_COMPLETE_SELECTED_CONTEXT_ABC_CLOSURE",
+    "NO_D_FINALITY_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
