@@ -10,7 +10,7 @@
     },
     "single_escape_normal_form": {
       "path": "canonical/governance/ABC_SINGLE_ESCAPE_FRONTIER_NORMAL_FORM_20261007_V1.json",
-      "git_blob_sha": "1c06ed01f48c7c097ce8c272d496dc6883c026d6"
+      "git_blob_sha": "cfe11a9da96ebd2422fd65a0e3eb035d620f6e0d"
     },
     "abstract_positive_cover": {
       "path": "canonical/governance/ABSTRACT_INTERPRETATION_POSITIVE_COVER_THEOREM_20261007_V1.json",
