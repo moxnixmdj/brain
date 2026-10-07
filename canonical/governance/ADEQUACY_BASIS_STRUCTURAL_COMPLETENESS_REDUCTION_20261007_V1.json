@@ -9,7 +9,7 @@
     "semantic_soundness_repair":{"path":"canonical/governance/SEMANTIC_SOUNDNESS_VS_PRECISION_SCHEDULER_REPAIR_20261007_V1.json","git_blob_sha":"b7a16fd9904a0155c6853e928a710a5f7518fb9a"},
     "backward_abstraction":{"path":"canonical/governance/ADEQUACY_OBLIGATION_BACKWARD_SEMANTIC_ABSTRACTION_20261007_V1.json","git_blob_sha":"ef070a3323c6a42876606cdc0ec79a10d9bf041d"},
     "runtime":{"path":"canonical/runtime/adequacy_basis_structural_completeness_gate_v1.py","git_blob_sha":"456271e5d6eb533eb88543644a4c7a4f4c55fe2c"},
-    "tests":{"path":"canonical/tests/test_adequacy_basis_structural_completeness_gate_v1.py","git_blob_sha":"12a47a9075c05de1bc7206bb717d43c03e88f8b2"}
+    "tests":{"path":"canonical/tests/test_adequacy_basis_structural_completeness_gate_v1.py","git_blob_sha":"f46ce404f6fc96529e25796509e525e90b8c1a8e"}
   },
   "problem":{
     "live_blocker":"ADEQUACY_BASIS_COMPLETENESS",
@@ -50,7 +50,7 @@
   ],
   "verification_boundary":{
     "wolfram_structural_coverage_tautology":true,
-    "sprite_exact_branch_replay":"BLOCKED_BY_EXISTING_SPRITE_FILESYSTEM_IO_ERROR",
+    "sprite_exact_branch_replay":"PASS_10_OF_10_ON_INDEPENDENT_ZERO_COST_SPRITE",
     "promotion_authority":false
   },
   "hard_nonclaims":[
