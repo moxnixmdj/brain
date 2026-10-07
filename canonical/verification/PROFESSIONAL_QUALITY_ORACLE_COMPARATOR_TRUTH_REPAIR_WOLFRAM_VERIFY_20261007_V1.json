@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ORACLE_COMPARATOR_TRUTH_REPAIR_WOLFRAM_VERIFY_V1",
+  "date": "2026-10-07",
+  "status": "PASS__TARGET_RELATIVE_VISIBLE_POLICY_COUNTEREXAMPLE_FORMALLY_VERIFIED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_ORACLE_COMPARATOR_TRUTH_REPAIR_20261007_V1.json",
+    "git_blob_sha": "d7041454d7bb59cc149e36fe63babb7de895b44d"
+  },
+  "wolfram": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "check": "Substitute p=q into Brain expected utility in each of two arbitrary hidden worlds and compare to a target policy using the same q.",
+    "code": "FullSimplify[{(p u1a + (1-p) u1b) /. p -> q,(q u1a + (1-q) u1b),(p u2a + (1-p) u2b) /. p -> q,(q u2a + (1-q) u2b)},Assumptions -> 0 <= q <= 1] // {#[[1]] == #[[2]], #[[3]] == #[[4]]}&",
+    "result": [
+      true,
+      true
+    ]
+  },
+  "verified_consequence": {
+    "same_visible_policy_distribution_matches_target_expected_utility_in_both_worlds_for_arbitrary_utilities": true,
+    "hidden_world_indistinguishability_by_itself_proves_target_relative_impossibility": false,
+    "prior_oracle_comparator_is_stronger_than_authorized_opus55_comparator": true,
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
