@@ -33,6 +33,18 @@ MAX_CYCLES = 12
 MAX_REQUIREMENTS = 16
 MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
+
+_FATAL_ACTION_STDERR_MARKERS = (
+    "here-document at line",
+    "unexpected eof",
+    "syntax error near unexpected token",
+)
+
+def _action_transport_clean(returncode: int, stderr: Any) -> bool:
+    if int(returncode) != 0:
+        return False
+    text = str(stderr or "").lower()
+    return not any(marker in text for marker in _FATAL_ACTION_STDERR_MARKERS)
 MAX_BRAIN_DELIVERABLES = 16
 _EXPLICIT_SUBMISSION_PATH_RE = re.compile(
     r"(?<![A-Za-z0-9_./-])((?:/app/)?submission/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)"
@@ -273,7 +285,10 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         verified = False
         verified_covers: list[str] = []
         deliverable_checks: list[dict[str, Any]] = []
-        if action_receipt.returncode == 0:
+        action_transport_clean = _action_transport_clean(
+            action_receipt.returncode, action_receipt.stderr
+        )
+        if action_transport_clean:
             verify_receipt = await transport.exec(chosen["verify_command"], timeout_sec=180)
             verify_observed = {
                 "returncode": verify_receipt.returncode,
@@ -299,6 +314,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "covers": chosen["covers"],
             "selection_reason": "MAX_DECLARED_UNRESOLVED_COVERAGE_THEN_ACTION_ID__STRUCTURAL_CONTROL_ONLY",
             "action_result": action_observed,
+            "action_transport_clean": action_transport_clean,
             "verify_result": verify_observed,
             "verified_covers": verified_covers,
             "brain_deliverable_checks": deliverable_checks,
