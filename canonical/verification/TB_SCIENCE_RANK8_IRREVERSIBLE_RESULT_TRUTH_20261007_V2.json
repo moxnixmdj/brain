@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK8_IRREVERSIBLE_RESULT_TRUTH_V2",
+  "date": "2026-10-07",
+  "status": "FINAL_ZERO__V3_AUTHORITY__POST_SECOND_EPOCH_GATE_AGENT_IMPORT_FAILURE__NO_RERUN__ZERO_INCREMENTAL_SPEND",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "supersedes_for_current_rank8_truth": {
+    "path": "canonical/verification/TB_SCIENCE_RANK8_IRREVERSIBLE_RESULT_TRUTH_20261007_V1.json",
+    "reason": "V1 described the earlier stale-authority run later revoked by ledger V5; V2 binds the subsequently authorized V3 run."
+  },
+  "slot": {
+    "schedule_rank": 8,
+    "slot_id": "terminal-bench-science/linked-cell-suppression::trial-0",
+    "task_name": "terminal-bench-science/linked-cell-suppression",
+    "task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0"
+  },
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK8_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V3.json",
+    "git_blob_sha": "16698c0125075213387e3cd662082d71a68471e3",
+    "intent_git_blob_sha": "e1c663ccd0090c7d3b3b3e201d1d4e9112496ee1",
+    "predecessor_ledger_git_blob_sha": "651a800d1e9f43f15be3447546b2807e1365b42d",
+    "public_replay_git_blob_sha": "be73ef34aece4d1f9e5622a006568653ab2f5c5d",
+    "public_epoch_git_blob_sha": "f95f513b0ad57b8b3398fcabba44beae6fd805f4"
+  },
+  "exact_route": {
+    "agent": "5bc8ebac26bb7c809d4698f535eff43b667b30df",
+    "planner": "c3e36eba57c450f325c8a9476ee048c841bbdbc8",
+    "raw_task_contract": "d54d5a2f7efa76b653d288f4f53da4883644baa6",
+    "raw_task_localizer": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2383,
+    "workflow_run_id": 37614049003,
+    "workflow_job_id": 112767999838,
+    "workflow_name": "Execute TB-Science rank8 v3 one-shot",
+    "workflow_head_branch": "activate/tb-science-rank8-v3-20261007",
+    "workflow_head_sha": "942f4175d710ad1ac72dee406a4ef7fa1f56c08d",
+    "github_event_sha": "ac1293ef94a21cc000be581023a45944e6d129a4",
+    "workflow_conclusion": "success",
+    "run_attempt": 1,
+    "artifact_id": 11479083901,
+    "artifact_name": "tb-science-linked-cell-suppression-trial-0-rank8-v3",
+    "artifact_digest": "sha256:93e066ab85f6e15072b1ed5f07b0278c410a016ba277f6c2120251fc0020622c",
+    "artifact_size_bytes": 1757
+  },
+  "execution_trace": {
+    "preexposure_exact_v3_authority_gate": "PASS",
+    "harbor_install": "PASS",
+    "llama_cpp_build": "PASS",
+    "qwen_model_integrity": "PASS",
+    "exact_brain_route_overlay": "PASS",
+    "local_cognition_health": "PASS",
+    "immediate_live_epoch_gate_before_irreversible_execution": "PASS",
+    "harbor_command_started": true,
+    "agent_import_succeeded": false,
+    "agent_execution_started": false,
+    "verifier_result_present": false,
+    "import_error": "No module named 'canonical.runtime.explicit_requirement_index_v2'",
+    "import_failure_class": "CARRIER_TRANSITIVE_DEPENDENCY_CLOSURE_MISSING"
+  },
+  "exact_result": {
+    "receipt_schema": "PROJECT_BRAIN_TB_SCIENCE_TERMINAL_SLOT_RECEIPT_RANK8_V1",
+    "status": "FINAL_ZERO",
+    "reward": 0,
+    "errors": [
+      "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD"
+    ],
+    "exception_info": [],
+    "harbor_step_outcome": "failure",
+    "result_hashes": {},
+    "execution_authority_consumed": true,
+    "rerun_credit": false,
+    "incremental_spend_usd": 0,
+    "promotion_authority": false
+  },
+  "interpretation": {
+    "frozen_semantics": "V3 AUTHORITY MAKES THE RESULT IRREVERSIBLE AFTER TASK START; MISSING OR ZERO VERIFIER RESULT COUNTS AS FINAL ZERO.",
+    "benchmark_fixed_denominator_failure": true,
+    "task_capability_negative_evidence": false,
+    "infrastructure_or_transport_failure": true,
+    "causal_counterexample": "EXACT_TOP_LEVEL_ROUTE_BYTES_WITHOUT_TRANSITIVE_RUNTIME_DEPENDENCY_CLOSURE_CANNOT_INSTANTIATE_THE_BRAIN_AGENT",
+    "required_followup": "DO_NOT_RETRY_RANK8. BEFORE ANY NEW TB_SCIENCE SLOT, SYNTHESIZE AND INDEPENDENTLY VERIFY THE MINIMUM CLOSED TRANSITIVE CARRIER DEPENDENCY SET.",
+    "tournament_failure_rule": "A BARE BENCHMARK ZERO DOES NOT AUTHORIZE A NEW SCIENCE CAPABILITY PRIMITIVE; THIS FAILURE AUTHORIZES ONLY THE CAUSAL CARRIER-CLOSURE REPAIR EXPOSED BY THE IMPORT COUNTEREXAMPLE."
+  },
+  "next_untouched_slot": {
+    "schedule_rank": 9,
+    "slot_id": "terminal-bench-science/neo-orbit-determination::trial-0",
+    "task_digest": "sha256:b0038fd39395b57f2036b2c0271f37b508e1250fc97d12c899590b61e997cada",
+    "execution_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TASK_CAPABILITY_FAILURE_INFERENCE_FROM_RANK8",
+    "NO_RANK8_RERUN_OR_REPLACEMENT",
+    "NO_RANK9_EXECUTION_AUTHORITY",
+    "NO_NEW_SCIENCE_CAPABILITY_PRIMITIVE_FROM_THIS_INFRASTRUCTURE_FAILURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 1,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  }
+}
