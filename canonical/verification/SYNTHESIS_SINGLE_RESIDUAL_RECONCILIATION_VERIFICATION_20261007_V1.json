@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_SINGLE_RESIDUAL_RECONCILIATION_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "STRUCTURAL_SOURCE_BINDING_PASS__SYNTHESIS_REDUCED_TO_ONE_SURVIVING_QUALITY_COVERAGE_RESIDUAL__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_SINGLE_RESIDUAL_RECONCILIATION_20261007_V1.json",
+    "git_blob_sha": "a8825ddd105c6200f96ebf7435ba4de60f677be7",
+    "branch": "synthesis-single-residual-reconciliation-v1"
+  },
+  "verified": {
+    "protocol_mode_matched_grounded_synthesis_noninferiority": true,
+    "zero_unsupported_material_claims_explicit": true,
+    "matched_quality_coverage_explicit": true,
+    "zero_unsupported_predicate_proved": true,
+    "zero_unsupported_predicate_scope_complete": true,
+    "zero_unsupported_predicate_independent_or_objective": true,
+    "required_claim_coverage_preserved_in_residual": true,
+    "decision_relevant_omission_preserved_in_residual": true,
+    "independent_quality_preserved_in_residual": true,
+    "candidate_zero_credit": true
+  },
+  "consequence": "COMMUNICATION_AND_SYNTHESIS_HAS_ONE_CURRENT_SURVIVING_FAMILY_RESIDUAL__MATCHED_QUALITY_COVERAGE_NONINFERIOR_OR_STRONGER__WITH_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_RETAINED_AS_AN_ALREADY_BOUND_HARD_CONSTRAINT.",
+  "hard_nonclaims": [
+    "NO_MATCHED_QUALITY_COVERAGE_PASS",
+    "NO_SYNTHESIS_FAMILY_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
