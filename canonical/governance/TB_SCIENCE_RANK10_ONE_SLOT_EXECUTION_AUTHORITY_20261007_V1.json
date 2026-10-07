@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK10_ONE_SLOT_AUTHORITY_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE__LIVE_EPOCH_RECHECK_REQUIRED__EXACT_REPAIRED_CARRIER_PREFLIGHT_REQUIRED__ONE_SLOT_ONLY__ZERO_SPEND",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/rdkit-ic-constraints::trial-0",
+    "rank": 10,
+    "digest": "sha256:17e356ab255088712c7dfa9765bf077b33a3da221f4a03d4770576857f9c0b6f"
+  },
+  "source_bindings": {
+    "intent": {
+      "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK10_ONE_SHOT_20261007_V1.json",
+      "git_blob_sha": "e65720a36d7c09a3be5a33246f3ab54e20612915"
+    },
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V7.json",
+      "git_blob_sha": "d3ff32dd833dfb5fcdce58e134185bfaf19e95ae"
+    },
+    "planner_live_transport_verification": {
+      "path": "canonical/verification/TB_SCIENCE_PLANNER_TRANSPORT_REPAIR_LIVE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "877e5ddf815c1958f4ab41f8462ad54af87f0c87"
+    },
+    "carrier_closure_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261007_V2.json",
+      "git_blob_sha": "31656d35034338dfcb699672bcd4788b283b83c9"
+    },
+    "carrier_closure_verification": {
+      "path": "canonical/verification/TB_SCIENCE_REPAIRED_TRANSITIVE_CARRIER_CLOSURE_PUBLIC_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "61495f5977ea745e63ca14136875b97e3e95cd45"
+    },
+    "terminal_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    }
+  },
+  "exact_route": {
+    "agent": "5bc8ebac26bb7c809d4698f535eff43b667b30df",
+    "planner": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "raw_task_contract": "d54d5a2f7efa76b653d288f4f53da4883644baa6",
+    "raw_task_localizer": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76",
+    "transitive_runtime_file_count": 14
+  },
+  "live_epoch": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "path": "capsules/tb_science_rank10_20261007_v1/RANK10_EPOCH_V1.json",
+    "git_blob_sha": "8d0bc7999769a32147eab08acb31436e7abe743c",
+    "epoch_id": "TBSCI-RANK10-20261007-E1",
+    "required_immediately_before_task_start": true
+  },
+  "controls": {
+    "exact_slot_count": 1,
+    "attempts": 1,
+    "retries": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "current_public_epoch_must_match_immediately_before_task_start": true,
+    "exact_carrier_blob_identity_required": true,
+    "agent_and_planner_import_required_before_task_start": true,
+    "repaired_planner_live_transport_receipt_required": true,
+    "precheck_failure_consumes_slot": false,
+    "after_task_start_result_is_irreversible": true,
+    "after_task_start_missing_or_zero_verifier_result_counts_as_final_zero": true
+  },
+  "current_truth": {
+    "slot_is_next_untouched": true,
+    "prior_consumed_slots": 9,
+    "prior_successes": 0,
+    "prior_final_failures": 9,
+    "planner_transport_failure_class_closed_for_repaired_planner": true,
+    "exact_repaired_carrier_closure_precondition_satisfied": true,
+    "task_started": false,
+    "result_present": false,
+    "acceptance_credit": false,
+    "terminal_credit": false
+  }
+}
