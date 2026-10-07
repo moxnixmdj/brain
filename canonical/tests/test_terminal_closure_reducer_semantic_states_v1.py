@@ -18,8 +18,14 @@ def test_decorated_semantically_closed_state_is_closed():
     assert _family_terminally_closed(closed_decorated()) is True
 
 
-def test_compact_pass_remains_closed():
-    assert _family_terminally_closed({"closure_state": "PASS"}) is True
+def test_bare_compact_pass_is_not_self_certifying():
+    assert _family_terminally_closed({"closure_state": "PASS"}) is False
+
+
+def test_compact_pass_with_semantic_closure_fields_is_closed():
+    row = closed_decorated()
+    row["closure_state"] = "PASS"
+    assert _family_terminally_closed(row) is True
 
 
 def test_open_acceptance_cannot_hide_behind_behavioral_pass_label():
