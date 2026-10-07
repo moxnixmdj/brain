@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_PROOF_CARRYING_SOURCE_GATE_INDEPENDENT_REPLAY_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PRIVATE_SPRITE_REPLAY_PASS__6_OF_6__STRUCTURAL_SOURCE_OMISSION_FAIL_CLOSED__SEMANTIC_TRUTH_OPEN__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/finance_proof_carrying_source_gate_v1.py",
+      "git_blob_sha": "2d2c1f3cf4a8a931168e873b2475b984e980e387"
+    },
+    "tests": {
+      "path": "canonical/tests/test_finance_proof_carrying_source_gate_v1.py",
+      "git_blob_sha": "05becb874bd108b7e4ff5bd63748cde6fffff975"
+    },
+    "source_kernel": {
+      "path": "canonical/runtime/source_contract_compiler.py",
+      "git_blob_sha": "ba53b1f1a3c1d8e63c906eb4952c7e9b6aef1231"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-c2-independent-replay-v3",
+    "sprite_id": "sprite-b5cc7147-1e70-4905-8176-d3fa129aac58",
+    "workspace": "/home/sprite/finance_source_gate_replay"
+  },
+  "result": {
+    "tests_passed": 6,
+    "tests_total": 6,
+    "failures": 0,
+    "canaries": [
+      "MISSING_SOURCE_SEMANTIC_UNIT_REJECTED",
+      "EXTRACTOR_SEMANTIC_DISAGREEMENT_REJECTED",
+      "SOURCE_MANIFEST_ORPHAN_EVIDENCE_REJECTED",
+      "REQUIREMENT_EVIDENCE_OUTSIDE_SOURCE_MANIFEST_REJECTED",
+      "INVALID_SOURCE_BLOCKS_BEFORE_DOWNSTREAM_JUDGMENT_IMPORT"
+    ],
+    "positive_complete_chain_pass": true,
+    "structural_source_omission_closed_for_selected_wrapper": true,
+    "semantic_truth_closed": false
+  },
+  "hard_nonclaims": [
+    "NO_FINANCE_FAMILY_CLOSURE",
+    "NO_GENERAL_SEMANTIC_TRUTH_CLAIM",
+    "NO_U_EMPTY_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
