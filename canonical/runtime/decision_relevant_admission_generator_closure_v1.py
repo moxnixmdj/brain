@@ -1,8 +1,11 @@
 from __future__ import annotations
 from typing import Any, Mapping, Sequence
 
-SCHEMA = "PROJECT_BRAIN_DECISION_RELEVANT_ADMISSION_GENERATOR_CLOSURE_V1"
-COVER_MODES = {"POSITIVE_COVER", "COMPLETE_OBJECTIVE", "DIRECT_DOMINANCE"}
+SCHEMA = "PROJECT_BRAIN_DECISION_RELEVANT_ADMISSION_GENERATOR_CLOSURE_V2"
+COVER_MODES = {
+    "SEMANTIC_ELISION_A_B_C_SCOPE_COVER",
+    "DIRECT_DOMINANCE",
+}
 
 def _sha1(v: Any) -> bool:
     return isinstance(v, str) and len(v) == 40 and all(c in "0123456789abcdef" for c in v)
@@ -45,8 +48,9 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
     This verifier does not discover generators or prove receipts. It checks the
     exact logical seam needed for U-empty promotion:
       * useful target scope is already represented by the observable-trace superset;
-      * every primitive generator region is scope-complete and covered by a sound
-        Brain-owned positive cover, complete-objective optimizer, or direct dominance proof;
+      * every primitive generator region is scope-complete and covered either by
+        a scope-complete union of semantic-elision A/B/C D_B admissions or by a
+        stronger direct-dominance proof;
       * every primitive transform preserves admission and every load-bearing terminal
         property used by ABC;
       * the generator closure reaches every useful context in the trace scope.
@@ -130,7 +134,7 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
     return {
         "schema": SCHEMA,
         "pass": True,
-        "status": "PASS__ABC_CLOSED_BY_DECISION_RELEVANT_GENERATOR_INDUCTION",
+        "status": "PASS__ABC_CLOSED_BY_SCOPE_COMPLETE_ADMISSION_GENERATOR_INDUCTION",
         "trace_scope_superset_proved": True,
         "generator_count": len(gids),
         "transform_count": len(tids),
@@ -139,6 +143,7 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
         "all_declared_generators_covered": True,
         "all_declared_transforms_abc_preserving": True,
         "all_useful_contexts_reachable": True,
+        "single_semantic_representation_required": False,
         "proof_rule": (
             "BASE_GENERATORS_COVERED__ABC_PRESERVED_BY_EVERY_PRIMITIVE_TRANSFORM__"
             "GENERATOR_CLOSURE_EXHAUSTS_USEFUL_TRACE_SCOPE__THEREFORE_ALL_USEFUL_CONTEXTS_COVERED"
