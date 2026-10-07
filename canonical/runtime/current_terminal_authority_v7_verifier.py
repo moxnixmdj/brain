@@ -41,7 +41,7 @@ def verify():
     if recompute["deleted_predicate_present"] is not False: errors.append("VERIFY28_DELETED_PRESENT")
     if v28["deletion_basis"]["deleted_predicate"]!="IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS": errors.append("WRONG_DELETION")
     if "ABSOLUTE_ZERO_IS_NOT_LOGICALLY_NECESSARY" not in ifc["constructive_countermodel"]["logical_conclusion"]: errors.append("COUNTERMODEL_MISSING")
-    if ifa["audit_conclusion"]["l2_binding"] if False else False: pass
+    if ifa["audit_conclusion"]["current_binding_class"]!="FROZEN_FAMILY_ACCEPTANCE_RULE__NOT_INDEPENDENTLY_BOUND_AS_A_SEPARATE_L2_ABSOLUTE_TERMINAL_GATE": errors.append("IF_AUDIT_BINDING_CLASS")
     if ifa["audit_conclusion"]["necessity_status"]!="NOT_ESTABLISHED_AS_LITERAL_ZERO": errors.append("IF_AUDIT_NOT_SUPPORTIVE")
     if kv["independent_provider"]["verified"]["two_by_two_row_stochastic_kernel_composition_remains_row_stochastic"] is not True: errors.append("KERNEL_COMPOSITION_NOT_VERIFIED")
     if kv["independent_provider"]["verified"]["pullback_of_evaluator_through_composed_kernel_equals_iterated_pullback"] is not True: errors.append("KERNEL_PULLBACK_NOT_VERIFIED")
