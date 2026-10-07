@@ -1,0 +1,76 @@
+name: Current main terminal reality gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/current-main-terminal-reality-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+
+      - name: Run official terminal gate on current main
+        shell: bash
+        run: |
+          set -u
+          mkdir -p canonical/verification
+          pytest_rc=0
+          python -m pytest -q canonical/tests/test_terminal_reality_gate_v1.py > /tmp/pytest.txt 2>&1 || pytest_rc=$?
+          printf '%s' "$pytest_rc" > /tmp/pytest_rc
+
+          gate_rc=0
+          python canonical/runtime/terminal_reality_gate_v1.py > /tmp/gate.txt 2>&1 || gate_rc=$?
+          printf '%s' "$gate_rc" > /tmp/gate_rc
+
+          python3 - <<'PY'
+          import json, os, pathlib
+          pytest_rc=int(pathlib.Path("/tmp/pytest_rc").read_text())
+          gate_rc=int(pathlib.Path("/tmp/gate_rc").read_text())
+          pytest_out=pathlib.Path("/tmp/pytest.txt").read_text(errors="replace")
+          gate_out=pathlib.Path("/tmp/gate.txt").read_text(errors="replace")
+          parsed=None
+          terminal=None
+          try:
+              parsed=json.loads(gate_out)
+              if isinstance(parsed,dict):
+                  terminal=parsed.get("terminal_real")
+          except Exception:
+              pass
+          ok=(pytest_rc==0 and gate_rc==0 and terminal is True)
+          receipt={
+            "schema":"PROJECT_BRAIN_CURRENT_MAIN_OFFICIAL_TERMINAL_REALITY_GATE_V1",
+            "trigger_sha":os.environ.get("GITHUB_SHA"),
+            "pytest_returncode":pytest_rc,
+            "pytest_tail":pytest_out[-2000:],
+            "gate_returncode":gate_rc,
+            "gate_output":parsed if isinstance(parsed,dict) else gate_out[-4000:],
+            "official_terminal_real":bool(ok),
+          }
+          with open("canonical/verification/CURRENT_MAIN_OFFICIAL_TERMINAL_REALITY_GATE_LATEST.json","w") as f:
+              json.dump(receipt,f,indent=2,sort_keys=True);f.write("\n")
+          status={"schema":"PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V1","status":"CURRENT_MAIN_TERMINAL_REAL" if ok else "CURRENT_MAIN_TERMINAL_NOT_REAL"}
+          with open("canonical/verification/CURRENT_MAIN_TERMINAL_REALITY_STATUS.json","w") as f:
+              json.dump(status,f,separators=(",",":"),sort_keys=True);f.write("\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+
+          git config user.name "Project Brain Current Main Gate"
+          git config user.email "project-brain-current-main-gate@users.noreply.github.com"
+          git add canonical/verification/CURRENT_MAIN_OFFICIAL_TERMINAL_REALITY_GATE_LATEST.json canonical/verification/CURRENT_MAIN_TERMINAL_REALITY_STATUS.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Record current main official terminal reality gate"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || { git rebase --abort || true; sleep 2; continue; }
+            git push origin HEAD:main && exit 0
+            sleep 2
+          done
+          exit 1
