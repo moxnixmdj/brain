@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_V13_DB_LIVEBENCH_ACTIVE15_SELECTED_CELL_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SELECTED_CELL_ABC_CLOSED_IN_D_B__D_NEW_ROUTE_DELTA_CHECK_REQUIRED__ZERO_NEW_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "v13": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V13.json",
+      "git_blob_sha": "0d18488b51a222e5da414329ccd9d33cbc1fc31c"
+    },
+    "direct_e2e": {
+      "path": "canonical/governance/DIRECT_END_TO_END_SELECTED_CELL_CERTIFICATE_THEOREM_20261007_V1.json",
+      "git_blob_sha": "ecb52ca25fa14a60b7c34206fea25d8d3cfdcf0d"
+    },
+    "maximal_k": {
+      "path": "canonical/governance/MAXIMAL_CONTEXT_LAW_SPACE_COMPLETENESS_THEOREM_20261007_V1.json"
+    }
+  },
+  "cell": {
+    "id": "LIVEBENCH_ACTIVE15_FROZEN_PUBLIC_GRAMMAR_CELL",
+    "parent_refinement": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+    "scope": "EXACT_FROZEN_ACTIVE15_VISIBLE_PUBLIC_GENERATOR_DOMAIN_WITH_PINNED_STRICT_CHECKER_SEMANTICS",
+    "target_predicate": "LIVEBENCH_IF_GE_65_7",
+    "complete_semantics": true,
+    "route_identity_exact": true
+  },
+  "selected_route": {
+    "id": "BRAIN_LIVEBENCH_ACTIVE15_POINTWISE_OPTIMAL_ROUTE_V1",
+    "owner": "PROJECT_BRAIN",
+    "donor_model_dependency": false,
+    "entrypoint": "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py::run",
+    "route_blobs": {
+      "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34",
+      "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+      "canonical/runtime/livebench_legacy15_contract_composer_v2.py": "d73ec366b32252996258eae6d10d67d4d6a5e042",
+      "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py": "71e637c70edf1c582e28ea38b3b798965c803a06"
+    }
+  },
+  "e2e_certificate": {
+    "proof_form": "UNIVERSAL_FORMAL_SCOPE_COMPLETE_FINAL_ROUTE_POINTWISE_TOP_PROOF",
+    "independent_verification": {
+      "path": "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "57e27e3c56372b57a1d4e0255f49340d4a4c8588"
+    },
+    "precommit": {
+      "path": "canonical/governance/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_PRECOMMIT_20261005_V1.json",
+      "git_blob_sha": "e0c84402955425aca64b20562f3400287e8792fc"
+    },
+    "proof_support_blobs": {
+      "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py": "09a5d7810fd46713aaf06cf1d204fe140d1d8045",
+      "canonical/runtime/livebench_pointwise_minimum_cut_v1.py": "3552ceb0c9bdf80e8666460931f20f06f580a0f2",
+      "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py": "fd1ad043fb9fe461b6593f5b8130093be0028c22"
+    },
+    "exact_population_count": 200,
+    "exact_active_instruction_identity_count": 15,
+    "exact_pointwise_matches": 712704,
+    "exact_pointwise_total": 712704,
+    "brain_mean_lower_bound_percent": 65.73775,
+    "opus55_public_mean_percent": 65.73775,
+    "required_threshold_percent": 65.7,
+    "target_rows_consumed": 0,
+    "target_responses_consumed": 0,
+    "target_scores_consumed": 0
+  },
+  "theorem_application": {
+    "route_is_final_selected_route_for_cell": true,
+    "semantics_complete_for_cell": true,
+    "e2e_directly_proves_final_route_law": true,
+    "brain_law_is_top_on_cell": true,
+    "maximal_K_minus_empty": true,
+    "abc_selected_cell_closed": true,
+    "add_cell_to_D_B": true,
+    "local_C_decomposition_required": false
+  },
+  "D_delta": {
+    "state": "REQUIRED_BEFORE_GLOBAL_D_FINALITY",
+    "reason": "NEWLY_CREDITED_ROUTE_FROM_ABC",
+    "current_claim": "NO_D_EFFECT_OR_DONOR_INDEPENDENCE_CREDIT_FROM_THIS_CELL_CERTIFICATE_ALONE"
+  },
+  "hard_nonclaims": [
+    "NO_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE",
+    "NO_CLAIM_SCOPE_BOUNDARY_OR_AUTHORITY_VIOLATION_SUBCELLS_ARE_CLOSED",
+    "NO_NEW_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_GLOBAL_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
