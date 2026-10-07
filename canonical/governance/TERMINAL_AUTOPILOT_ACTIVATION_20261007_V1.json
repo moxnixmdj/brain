@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_AUTOPILOT_ACTIVATION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ACTIVE_PLANNING_LAYER__LOCAL_5_OF_5_PASS__NO_EXECUTION_OR_TERMINAL_AUTHORITY",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "runtime": "canonical/runtime/terminal_autopilot_v1.py",
+  "tests": "canonical/tests/test_terminal_autopilot_v1.py",
+  "current_sources": {
+    "quotient": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
+    "action_intents": "canonical/action_intents/*.json",
+    "existing_carrier_closure_compiler": "canonical/runtime/python_transitive_runtime_closure_v1.py",
+    "tb_rank9_authority": "canonical/governance/TB_SCIENCE_RANK9_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1.json"
+  },
+  "automation": [
+    "READ_CURRENT_13_OBLIGATION_QUOTIENT_DIRECTLY_FROM_REPOSITORY",
+    "DETECT_ACTIVE_OR_READY_ACTION_INTENTS_AND_SUPPRESS_DUPLICATE_TARGET_DISPATCH",
+    "FAN_OUT_ALL_OTHER_RUNNABLE_INDEPENDENT_OBLIGATIONS_UP_TO_DECLARED_CONCURRENCY",
+    "RACE_SCOPE_COMPLETE_UNIVERSAL_COVER_WITH_DIRECT_EVIDENCE_LANES",
+    "EMIT_RESULT_TO_VERIFY_AND_VERIFIED_TO_PROMOTE_HANDOFFS",
+    "CANCEL_ACTIVE_JOBS_AFTER_THEIR_TARGET_SET_IS_CLOSED",
+    "RECOMPUTE_AFTER_EVERY_RESULT_VERIFICATION_PROMOTION_ACTION_INTENT_OR_TERMINAL_RECEIPT"
+  ],
+  "current_effect": {
+    "independent_open_obligations": 13,
+    "tb_science_rank9_already_leased_by_existing_ready_intent": true,
+    "other_direct_evidence_lanes_available_for_parallel_dispatch": 12,
+    "universal_route_race_available": true,
+    "total_new_dispatch_candidates_now": 13,
+    "note": "12_DIRECT_PLUS_1_UNIVERSAL__TB_SCIENCE_NOT_DUPLICATED"
+  },
+  "hard_rules": [
+    "ZERO_INCREMENTAL_SPEND_HARD_STOP",
+    "NO_DUPLICATE_ACTIVE_TARGET",
+    "NO_SELF_VERIFICATION",
+    "NO_SELF_PROMOTION",
+    "NO_TERMINAL_CREDIT_FROM_AUTOPILOT_PLANNING",
+    "EXISTING_TB_TRANSITIVE_CARRIER_PREFLIGHT_REMAINS_MANDATORY"
+  ],
+  "authority": {
+    "planning": true,
+    "execution": false,
+    "verification": false,
+    "promotion": false,
+    "terminal": false
+  },
+  "verification": {
+    "local_tests_run": 5,
+    "failures": 0,
+    "errors": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  }
+}
