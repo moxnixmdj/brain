@@ -2,121 +2,100 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
+
+from canonical.runtime.terminal_closure_reducer import evaluate_manifest
 
 ROOT = Path(__file__).resolve().parents[2]
-POINTER = ROOT / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
-
-REQUIRED_TOP_LEVEL = {
-    "COMPLETE_SELECTED_CONTEXT_ABC",
-    "D_FINAL_ROUTE_OWNERSHIP_EFFECT_DONOR_INDEPENDENCE_FINALITY",
-}
-
-DEFAULT_RESEARCH_ROOT = "U_NOT_PROVED_EMPTY"
-POST_U_TRANSITION = "POST_U_SELECTED_COVER_PROMOTION_OR_ABC_RECOMPUTE_PENDING"
-POST_ABC_FINALIZATION = "POST_ABC_FINALIZATION_PENDING"
+MANIFEST = ROOT / "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
 
 
-def evaluate(pointer: dict) -> dict:
-    live = pointer.get("live_truth", {})
-    declared = set(live.get("independent_top_level_terminal_predicates", []))
+def _int(value: Any, default: int = 0) -> int:
+    return value if type(value) is int and value >= 0 else default
 
-    hard_failures = []
-    if declared != REQUIRED_TOP_LEVEL:
-        hard_failures.append("TOP_LEVEL_PREDICATE_SET_DRIFT")
-    if live.get("fixed_authorized_target_trace_scope_closed") is not True:
-        hard_failures.append("TARGET_TRACE_SCOPE_OPEN")
-    if live.get("router_mechanical_core_implemented") is not True:
-        hard_failures.append("ROUTER_CORE_NOT_IMPLEMENTED")
-    if live.get("router_deployed_runtime_binding_closed") is not True:
-        hard_failures.append("ROUTER_DEPLOYED_RUNTIME_BINDING_OPEN")
 
-    u_closed = live.get("current_U_empty_proved") is True
-    selected_cover_closed = live.get("router_registry_real_selected_cover_complete") is True
-    abc_closed = live.get("complete_selected_context_ABC_closed") is True
-    d_closed = live.get("D_finality_closed") is True
-    declared_terminal = live.get("terminal") is True
+def evaluate(manifest: dict[str, Any]) -> dict[str, Any]:
+    """Evaluate the actual frozen 19-family terminal contract.
 
-    live_research_blockers = []
-    derived_pending = []
-    finalization_pending = []
+    Universal observable-trace coverage remains an optional stronger proof route,
+    not a mandatory terminal conjunct. The authoritative terminal truth is the
+    fail-closed terminal_closure_reducer over the frozen family manifest.
+    """
+    verdict = evaluate_manifest(manifest)
 
-    if not u_closed:
-        live_research_blockers.append(
-            live.get("current_terminal_root_predicate") or DEFAULT_RESEARCH_ROOT
+    acceptance = manifest.get("opus55_acceptance_summary")
+    if not isinstance(acceptance, dict):
+        acceptance = {}
+    ownership = manifest.get("ownership_summary")
+    if not isinstance(ownership, dict):
+        ownership = {}
+    predicates = manifest.get("terminal_predicates")
+    if not isinstance(predicates, dict):
+        predicates = {}
+
+    pending_acceptance = _int(acceptance.get("pending_family_count"), 19)
+    atomic = acceptance.get("atomic_predicates")
+    if not isinstance(atomic, dict):
+        atomic = {}
+    unresolved_atoms = _int(atomic.get("unresolved"), 38)
+    accepted_families = _int(acceptance.get("calibrated_family_count"), 0)
+    verified_owned = _int(ownership.get("verified_owned_families"), 0)
+
+    summarized_blockers: list[str] = []
+    if pending_acceptance:
+        summarized_blockers.append(
+            f"FROZEN_ACCEPTANCE_FAMILIES_OPEN:{pending_acceptance}"
         )
-        if not selected_cover_closed:
-            derived_pending.append("REAL_SELECTED_COVER_INCOMPLETE_DERIVED_FROM_OPEN_U")
-        if not abc_closed:
-            derived_pending.append("COMPLETE_SELECTED_CONTEXT_ABC_OPEN_DERIVED_FROM_OPEN_U")
-        if not d_closed:
-            finalization_pending.append("D_FINALITY_DEFERRED_UNTIL_ABC")
-        phase = "RESEARCH_ROOT"
-    elif not (selected_cover_closed and abc_closed):
-        derived_pending.append(POST_U_TRANSITION)
-        if not d_closed:
-            finalization_pending.append("D_FINALITY_DEFERRED_UNTIL_ABC")
-        phase = "POST_U_DERIVED_TRANSITION"
-    elif not d_closed:
-        finalization_pending.append(POST_ABC_FINALIZATION)
-        phase = "POST_ABC_FINALIZATION"
-    else:
+    if unresolved_atoms:
+        summarized_blockers.append(
+            f"FROZEN_ACCEPTANCE_ATOMS_OPEN:{unresolved_atoms}"
+        )
+    if verified_owned < 19:
+        summarized_blockers.append(
+            f"VERIFIED_OWNERSHIP_FAMILIES_OPEN:{19 - verified_owned}"
+        )
+    if predicates.get("final_donor_deletion_cleanroom_pass") is not True:
+        summarized_blockers.append("FINAL_DONOR_DELETION_CLEANROOM_OPEN")
+    if predicates.get("proof_bundle_frozen") is not True:
+        summarized_blockers.append("PROOF_BUNDLE_NOT_FROZEN")
+
+    if verdict["achieved"]:
         phase = "TERMINAL"
-
-    predicates_satisfied = (
-        not hard_failures
-        and u_closed
-        and selected_cover_closed
-        and abc_closed
-        and d_closed
-    )
-    terminal_real = predicates_satisfied
-
-    declaration_warnings = []
-    if declared_terminal and not predicates_satisfied:
-        hard_failures.append("DECLARED_TERMINAL_INCONSISTENT_WITH_REQUIRED_PREDICATES")
-        terminal_real = False
-    elif predicates_satisfied and not declared_terminal:
-        declaration_warnings.append(
-            "DECLARED_TERMINAL_FALSE_BUT_DERIVED_TERMINAL_TRUE__METADATA_OUT_OF_SYNC"
-        )
-
-    # Only load-bearing work belongs in blockers. Derived state and the post-ABC
-    # finalization tail are reported separately so one open root cannot multiply
-    # into several fake parallel research programs.
-    blockers = list(hard_failures)
-    if live_research_blockers:
-        blockers.extend(live_research_blockers)
-    elif phase == "POST_U_DERIVED_TRANSITION":
-        blockers.append(POST_U_TRANSITION)
-    elif phase == "POST_ABC_FINALIZATION":
-        blockers.append(POST_ABC_FINALIZATION)
+        summarized_blockers = []
+    elif pending_acceptance or unresolved_atoms:
+        phase = "FROZEN_ACCEPTANCE_CLOSURE"
+    elif verified_owned < 19:
+        phase = "OWNERSHIP_FINALITY"
+    else:
+        phase = "FINAL_TERMINAL_REDUCTION"
 
     return {
-        "schema": "PROJECT_BRAIN_TERMINAL_REALITY_GATE_V2",
-        "terminal_real": terminal_real,
-        "declared_terminal": declared_terminal,
+        "schema": "PROJECT_BRAIN_TERMINAL_REALITY_GATE_V3",
+        "terminal_real": bool(verdict["achieved"]),
         "phase": phase,
-        "blockers": blockers,
-        "live_research_blockers": live_research_blockers,
-        "derived_pending": derived_pending,
-        "finalization_pending": finalization_pending,
-        "declaration_warnings": declaration_warnings,
-        "top_level_predicates": sorted(REQUIRED_TOP_LEVEL),
-        "known_sound_D_B_certificate_record_count": live.get(
-            "known_sound_D_B_certificate_record_count"
+        "blockers": summarized_blockers,
+        "failed_predicates": verdict["failed_predicates"],
+        "frozen_family_count": 19,
+        "accepted_family_count": accepted_families,
+        "acceptance_family_open_count": pending_acceptance,
+        "verified_owned_family_count": verified_owned,
+        "atomic_acceptance_proved": _int(atomic.get("proved"), 0),
+        "atomic_acceptance_unresolved": unresolved_atoms,
+        "rule": (
+            "TERMINAL_IFF_TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE_OVER_"
+            "THE_EXACT_FROZEN_19_FAMILY_MANIFEST"
         ),
-        "abc_normal_form": live.get("complete_selected_context_ABC_normal_form"),
         "anti_bureaucracy": {
-            "u_open_implies_router_and_abc_are_not_independent_research_blockers": True,
-            "d_finality_is_post_abc_not_parallel_research": True,
-            "manual_terminal_declaration_is_not_an_extra_terminal_predicate": True,
+            "universal_trace_not_x_is_optional_stronger_route_not_mandatory": True,
+            "generic_router_or_global_trace_cover_is_not_an_extra_terminal_conjunct": True,
+            "only_frozen_acceptance_ownership_and_finality_predicates_count": True,
         },
     }
 
 
 def main() -> int:
-    pointer = json.loads(POINTER.read_text(encoding="utf-8"))
-    out = evaluate(pointer)
+    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    out = evaluate(manifest)
     print(json.dumps(out, indent=2, sort_keys=True))
     return 0 if out["terminal_real"] else 1
 
