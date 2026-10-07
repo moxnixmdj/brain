@@ -23,6 +23,7 @@ semantically authorized; carrier/outcome verification remains separate.
 from __future__ import annotations
 
 from hashlib import sha256
+import base64
 import json
 from typing import Any, Callable, Mapping, Sequence
 
@@ -46,8 +47,23 @@ class UniversalSolverError(ValueError):
     pass
 
 
+def _json_default(value: Any) -> Any:
+    if isinstance(value, bytes):
+        return {
+            "__brain_type__": "bytes",
+            "base64": base64.b64encode(value).decode("ascii"),
+        }
+    raise TypeError("UNSUPPORTED_CANONICAL_JSON_TYPE:" + type(value).__name__)
+
+
 def _canon(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return json.dumps(
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        default=_json_default,
+    )
 
 
 def _digest(value: Any) -> str:
@@ -446,6 +462,7 @@ def run(
                     "cycle": cycle,
                     "capability_id": cid,
                     "verifier_id": verifier_id,
+                    "action_contract_sha256": _digest(action),
                     "packet_index": i,
                     "proposal_sha256": _digest(packet),
                     "verdict_status": verdict.get("status"),
@@ -489,6 +506,7 @@ def run(
                 }
 
             _, accepted_packet, verdict, record = accepted
+            record["accepted_proposal"] = dict(accepted_packet)
 
             effect_result = None
             if is_effect:
