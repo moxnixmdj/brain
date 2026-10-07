@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK7_FINISH_CONTRACT_FALSIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "LOAD_BEARING_ROUTE_FALSIFIED__RANK8_DOMINATED_UNTIL_GENERIC_FINISH_CONTRACT_REPAIRED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "evidence": {
+    "irreversible_rank7_result": {
+      "path": "canonical/verification/TB_SCIENCE_RANK7_IRREVERSIBLE_RESULT_TRUTH_20261007_V1.json",
+      "git_blob_sha": "b6da8ab77554096032901ca69f72ea82497f6921",
+      "result": "FINAL_ZERO"
+    },
+    "exact_route": {
+      "planner": {
+        "path": "canonical/runtime/harbor_science_planner_v1.py",
+        "git_blob_sha": "3d6f50be86cc61a9b907a04d8f3fb161c2d40e99"
+      },
+      "controller": {
+        "path": "canonical/runtime/harbor_science_agent_v1.py",
+        "git_blob_sha": "5557efd21f1a433ad16766def3775a79c459784b"
+      }
+    },
+    "rank7_artifact": {
+      "workflow_run_id": 37606898246,
+      "workflow_job_id": 112744475576,
+      "artifact_id": 11474839915,
+      "artifact_digest": "sha256:8866fd656285ede4081fecc99bd952680c59f63028a3ceb58c48013e3594fe5d"
+    }
+  },
+  "constructive_counterexample": {
+    "observed_material_requirements": [
+      "plant_model",
+      "plant_params",
+      "controller_api",
+      "scenarios_public"
+    ],
+    "observed_resolved_requirements": [
+      "controller_api",
+      "plant_model",
+      "plant_params",
+      "scenarios_public"
+    ],
+    "observed_cycles": 2,
+    "brain_trace_status": "FINISHED",
+    "actual_submission": {
+      "controller_py_present": true,
+      "controller_py_line_count": 21,
+      "design_report_json_present": false,
+      "required_Controller_interface_satisfied": false
+    },
+    "verifier": {
+      "passed_tests": 4,
+      "failed_tests": 25,
+      "reward": 0
+    },
+    "causal_seams": [
+      "MATERIAL_REQUIREMENT_UNIVERSE_IS_SUBSTRATE_PROPOSED_AND_CAN_OMIT_REAL_TASK_ACCEPTANCE_OBLIGATIONS",
+      "CANDIDATE_COVERS_METADATA_IS_SUBSTRATE_PROPOSED",
+      "VERIFY_COMMAND_IS_SUBSTRATE_PROPOSED",
+      "VERIFY_RETURN_CODE_ZERO_PROMOTES_ALL_DECLARED_COVERS",
+      "BRAIN_FINISHES_WHEN_THIS_HEURISTIC_RESOLVED_SET_EQUALS_THE_SUBSTRATE_DEFINED_REQUIREMENT_SET"
+    ],
+    "contradiction": [
+      "ROUTE_GOVERNANCE_SAYS_SUBSTRATE_COVERS_METADATA_IS_NOT_SEMANTIC_ACCEPTANCE_EVIDENCE",
+      "RUNTIME_USES_SUCCESSFUL_SUBSTRATE_DEFINED_VERIFY_COMMAND_TO_PROMOTE_COVERS_INTO_RESOLVED",
+      "RUNTIME_DERIVES_FINISH_FROM_ALL_SUBSTRATE_DEFINED_REQUIREMENTS_RESOLVED"
+    ]
+  },
+  "existing_stronger_brain_machinery": {
+    "lossless_contract": {
+      "path": "canonical/runtime/lossless_raw_task_contract_v1.py",
+      "git_blob_sha": "d54d5a2f7efa76b653d288f4f53da4883644baa6"
+    },
+    "acceptance_gate": {
+      "path": "canonical/runtime/lossless_raw_task_acceptance_gate_v1.py",
+      "git_blob_sha": "1cc72c7075d2e113dfbb2c0f790a3e0bd2a1e7dd"
+    },
+    "truth_repair": {
+      "path": "canonical/governance/RAW_TEXT_TASK_CONTRACT_ENVELOPE_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "61a132b85fbfc012b64539716d4aebb3a92d71d9"
+    },
+    "required_composition_rule": "PLANNER_REQUIREMENTS_COVERS_AND_VERIFY_COMMANDS_MAY_ROUTE_WORK_ONLY__SCIENCE_FINISH_REQUIRES_BRAIN_OWNED_LOSSLESS_TASK_OBLIGATION_SCOPE_PLUS_EXACT_CANDIDATE_BOUND_ACCEPTANCE_RECEIPTS_AND_SEPARATE_INDEPENDENT_ACCEPTANCE_SEMANTICS_VERIFICATION"
+  },
+  "scheduler_effect": [
+    "DO_NOT_EXECUTE_RANK8_WITH_CONTROLLER_BLOB_5557EFD21F1A433AD16766DEF3775A79C459784B",
+    "REPAIR_GENERIC_FINISH_CONTRACT_BEFORE_ANY_FRESH_TB_SCIENCE_SLOT",
+    "PRESERVE_RANK8_UNTOUCHED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_TB_SCIENCE_WOULD_PASS_AFTER_ONLY_THIS_STRUCTURAL_REPAIR",
+    "NO_SCORE_OR_FAMILY_CREDIT",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
