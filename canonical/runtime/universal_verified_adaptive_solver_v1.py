@@ -40,6 +40,7 @@ from canonical.runtime.universal_verified_effect_executor_v1 import (
     EXECUTOR_ID as VERIFIED_EFFECT_EXECUTOR_ID,
 )
 from canonical.runtime.typed_acceptance_finite_search_v1 import search as search_typed_acceptance
+from canonical.runtime.typed_acceptance_constructive_solver_v1 import solve as solve_typed_acceptance_constructive
 from canonical.runtime.universal_solver_state_capsule_v1 import (
     initialize as initialize_state_capsule,
     append_verified_transition as append_state_transition,
@@ -426,7 +427,7 @@ def _normalize_caps(problem: Mapping[str, Any]) -> dict[str, Mapping[str, Any]]:
                 raise UniversalSolverError("VERIFIER_PAYLOAD_INVALID:" + cid)
         generator_id = action.get("proposal_generator_id")
         if generator_id is not None:
-            if generator_id != "TYPED_ACCEPTANCE_FINITE_SEARCH_V1":
+            if generator_id not in {"TYPED_ACCEPTANCE_FINITE_SEARCH_V1", "TYPED_ACCEPTANCE_CONSTRUCTIVE_SOLVER_V1"}:
                 raise UniversalSolverError("PROPOSAL_GENERATOR_NOT_BUILTIN:" + cid + ":" + str(generator_id))
             gp = action.get("proposal_generator_payload")
             if not isinstance(gp, Mapping):
@@ -442,13 +443,17 @@ def _normalize_caps(problem: Mapping[str, Any]) -> dict[str, Mapping[str, Any]]:
                 else action.get("verifier_payload")
             )
             if active_verifier != "TYPED_ACCEPTANCE_PROGRAM_V1":
-                raise UniversalSolverError("FINITE_TYPED_SEARCH_REQUIRES_TYPED_ACCEPTANCE_VERIFIER:" + cid)
+                raise UniversalSolverError("TYPED_PROPOSAL_GENERATOR_REQUIRES_TYPED_ACCEPTANCE_VERIFIER:" + cid)
             if not isinstance(active_payload, Mapping):
-                raise UniversalSolverError("FINITE_TYPED_SEARCH_VERIFIER_PAYLOAD_INVALID:" + cid)
-            if set(gp) - {"candidate_domains", "max_candidates"}:
-                raise UniversalSolverError("PROPOSAL_GENERATOR_PAYLOAD_FIELDS_INVALID:" + cid)
-            if not isinstance(gp.get("candidate_domains"), Mapping):
-                raise UniversalSolverError("PROPOSAL_GENERATOR_DOMAINS_INVALID:" + cid)
+                raise UniversalSolverError("TYPED_PROPOSAL_GENERATOR_VERIFIER_PAYLOAD_INVALID:" + cid)
+            if generator_id == "TYPED_ACCEPTANCE_FINITE_SEARCH_V1":
+                if set(gp) - {"candidate_domains", "max_candidates"}:
+                    raise UniversalSolverError("PROPOSAL_GENERATOR_PAYLOAD_FIELDS_INVALID:" + cid)
+                if not isinstance(gp.get("candidate_domains"), Mapping):
+                    raise UniversalSolverError("PROPOSAL_GENERATOR_DOMAINS_INVALID:" + cid)
+            else:
+                if set(gp):
+                    raise UniversalSolverError("CONSTRUCTIVE_GENERATOR_PAYLOAD_MUST_BE_EMPTY:" + cid)
         out[cid] = row
     return out
 
@@ -578,6 +583,54 @@ def run(
             if verifier_id in PROPOSAL_FREE_VERIFIERS:
                 packets = [{}]
                 proposal_source = "DETERMINISTIC_PROPOSAL_FREE_ROUTE"
+            if (
+                (not isinstance(packets, Sequence) or isinstance(packets, (str, bytes)) or not packets)
+                and action.get("proposal_generator_id") == "TYPED_ACCEPTANCE_CONSTRUCTIVE_SOLVER_V1"
+            ):
+                generated = solve_typed_acceptance_constructive(
+                    payload["program"],
+                    trusted_values=payload["trusted_values"],
+                )
+                proposal_searches.append({
+                    "cycle": cycle,
+                    "capability_id": cid,
+                    "generator_id": "TYPED_ACCEPTANCE_CONSTRUCTIVE_SOLVER_V1",
+                    "generator_result_sha256": _digest(generated),
+                    "status": generated.get("status"),
+                    "complete_for_declared_fragment": generated.get("complete_for_declared_fragment"),
+                    "cartesian_enumeration_used": generated.get("cartesian_enumeration_used"),
+                })
+                if generated.get("pass") is True:
+                    packets = [{"candidate_values": generated["candidate"]}]
+                    proposal_source = "BUILTIN_DIRECT_CONSTRUCTIVE_SOLVER"
+                elif generated.get("status") == "PROVED_UNSAT_IN_DECLARED_FRAGMENT":
+                    return {
+                        "schema": SCHEMA,
+                        "status": "NO_PROPOSAL_IN_DECLARED_CONSTRUCTIVE_FRAGMENT",
+                        "pass": False,
+                        "next_capability_id": cid,
+                        "verifier_id": verifier_id,
+                        "proposal_search": generated,
+                        "verified_facts": current,
+                        "trace": trace,
+                        "rejected_proposals": rejected,
+                        "proposal_searches": proposal_searches,
+                        "terminal_authority": False,
+                    }
+                else:
+                    return {
+                        "schema": SCHEMA,
+                        "status": "FAIL_CLOSED__PROPOSAL_CONSTRUCTION_FAILED",
+                        "pass": False,
+                        "next_capability_id": cid,
+                        "verifier_id": verifier_id,
+                        "proposal_search": generated,
+                        "verified_facts": current,
+                        "trace": trace,
+                        "rejected_proposals": rejected,
+                        "proposal_searches": proposal_searches,
+                        "terminal_authority": False,
+                    }
             if (
                 (not isinstance(packets, Sequence) or isinstance(packets, (str, bytes)) or not packets)
                 and action.get("proposal_generator_id") == "TYPED_ACCEPTANCE_FINITE_SEARCH_V1"
