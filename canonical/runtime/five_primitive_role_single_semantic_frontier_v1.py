@@ -6,12 +6,16 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
 ROLE_BASIS=ROOT/"canonical/governance/OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_CHARACTERIZATION_20261005_V1.json"
+ROLE_FRONTIER=ROOT/"canonical/governance/TARGET_ROLE_ESCAPE_FRONTIER_20261007_V1.json"
+B9_REDUCTION=ROOT/"canonical/governance/B9_COMPOSITION_DERIVATIVE_REDUCTION_20261007_V1.json"
 SEMANTIC_REDUCTION=ROOT/"canonical/governance/G6_G7_SINGLE_SEMANTIC_RESIDUAL_REDUCTION_20261006_V1.json"
 K6=ROOT/"canonical/governance/K6_POSITIVE_COVER_SEMANTIC_RESIDUAL_PROJECTION_20261006_V4.json"
 GREC=ROOT/"canonical/governance/G_ROUTE_FIVE_GENERATOR_DOMINANCE_RECONCILIATION_20261007_V1.json"
 
 EXPECTED={
     ROLE_BASIS:"62c0e207ce935a02611700a69e0917f938792b11",
+    ROLE_FRONTIER:"388dd2cb544b7b7bd7ded5779f51a06d3acb3ee3",
+    B9_REDUCTION:"719ad74545f73f4f3e458892b7cd91005499cebd",
     SEMANTIC_REDUCTION:"fe9c5a159fef01d13169c82426f9bacf15d1b0ef",
     K6:"3e021b353dfe3dd6e9c5ea9843968e7fe75a02eb",
     GREC:"2bb66217cf42c737282428e053ad42033c30811b",
@@ -51,6 +55,8 @@ def project()->dict:
             errors.append("SOURCE_DRIFT:"+p.name)
 
     basis=json.loads(ROLE_BASIS.read_text(encoding="utf-8"))
+    frontier=json.loads(ROLE_FRONTIER.read_text(encoding="utf-8"))
+    b9=json.loads(B9_REDUCTION.read_text(encoding="utf-8"))
     sem=json.loads(SEMANTIC_REDUCTION.read_text(encoding="utf-8"))
     k6=json.loads(K6.read_text(encoding="utf-8"))
     grec=json.loads(GREC.read_text(encoding="utf-8"))
@@ -58,6 +64,15 @@ def project()->dict:
     role_ids={x["id"] for x in basis["functional_basis"]}
     if not set(ESCAPE_PRIMITIVES)<=role_ids:
         errors.append("ROLE_SET_NOT_IN_FUNCTIONAL_BASIS")
+
+    current_six=set(frontier["structural_escape_roles"])
+    expected_six=set(ESCAPE_PRIMITIVES)|{"B9_MULTI_ROLE_COMPOSITION"}
+    if current_six!=expected_six:
+        errors.append("COARSE_ESCAPE_FRONTIER_DRIFT")
+
+    b9_if_c=set(b9["conditional_escape_projection"]["if_C_closes"])
+    if b9_if_c!=set(ESCAPE_PRIMITIVES):
+        errors.append("B9_CONDITIONAL_PROJECTION_DRIFT")
 
     common=sem["reduction"]["common_semantic_object"]
     if "TASK_CONDITIONED_STOCHASTIC_TRACE_POLICY" not in common:
@@ -80,10 +95,13 @@ def project()->dict:
 
     ok=not errors
     return {
-        "schema":"PROJECT_BRAIN_FIVE_PRIMITIVE_ROLE_SINGLE_SEMANTIC_FRONTIER_V1",
-        "status":"PASS__5_PRIMITIVE_ESCAPE_ROLES_PROJECT_TO_ONE_SHARED_SEMANTIC_CERTIFICATE_FRONTIER__ZERO_CREDIT" if ok else "FAIL_CLOSED",
+        "schema":"PROJECT_BRAIN_FIVE_PRIMITIVE_ROLE_SINGLE_SEMANTIC_FRONTIER_V2",
+        "status":"PASS__CONDITIONAL_ON_C__5_PRIMITIVE_ESCAPE_ROLES_PROJECT_TO_ONE_SHARED_SEMANTIC_CERTIFICATE_FRONTIER__ZERO_CREDIT" if ok else "FAIL_CLOSED",
         "pass":ok,
         "errors":errors,
+        "coarse_escape_role_count":6,
+        "b9_is_conditionally_derivative":True,
+        "conditional_on_C":True,
         "primitive_escape_role_count":5,
         "primitive_escape_roles":list(ESCAPE_PRIMITIVES),
         "shared_semantic_frontier":"TASK_CONDITIONED_TRACE_POLICY_SEMANTIC_CERTIFICATE_AND_SELECTED_DISCRIMINATOR_BINDING",
