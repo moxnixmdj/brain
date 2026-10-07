@@ -1,0 +1,26 @@
+{
+  "schema":"PROJECT_BRAIN_TARGET_RELEVANT_Q_INFORMATION_CUT_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_FINITE_BOOLEAN_COUNTERMODEL_PASS__ZERO_CREDIT",
+  "subject":"canonical/governance/TARGET_RELEVANT_Q_INFORMATION_CUT_20261007_V1.json",
+  "finite_model":{
+    "qB":"CANDIDATE_Q_INCLUDES_b",
+    "uB":"b_IS_ACTUALLY_TARGET_USEFUL",
+    "coverage_formula":"NOT_uB_OR_qB",
+    "evaluations":[
+      {"qB":false,"uB":false,"coverage":true},
+      {"qB":false,"uB":true,"coverage":false},
+      {"qB":true,"uB":false,"coverage":true},
+      {"qB":true,"uB":true,"coverage":true}
+    ],
+    "same_Q_different_target_relevance_equivalent":false,
+    "difference_condition":"NOT_qB"
+  },
+  "verified":[
+    "STRICT_Q_EXCLUSION_OF_b_IS_SOUND_IN_WORLD_1_AND_UNSOUND_IN_WORLD_2_UNDER_IDENTICAL_STRUCTURAL_SCOPE_FACTS",
+    "INCLUDING_b_IS_A_SOUND_SUPERSET_MOVE_IN_BOTH_WORLDS_BUT_MAY_INCREASE_DOMINANCE_COST",
+    "STRUCTURAL_OUTER_SCOPE_ALONE_DOES_NOT_IDENTIFY_MINIMAL_TARGET_RELEVANT_Q"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0},
+  "hard_nonclaims":["NO_CLAIM_ACTUAL_OPUS55_HAS_A_HIDDEN_b","NO_TERMINAL_CREDIT"]
+}
