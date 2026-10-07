@@ -6,11 +6,11 @@
   "subject": {
     "v1_runtime": {
       "path": "canonical/runtime/universal_verified_adaptive_solver_v1.py",
-      "git_blob_sha": "5b05f1709b0771bb9e83c9a4a1a8497f6b6e64a7"
+      "git_blob_sha": "30b3027f0c7a78f0a6350cd31e570e743837ed61"
     },
     "v2_runtime": {
       "path": "canonical/runtime/universal_verified_adaptive_solver_v2.py",
-      "git_blob_sha": "99db14ff39b3494cfaef3f63e137595a1330a9b5"
+      "git_blob_sha": "be0857bbe1e506a3ff94e8e6b71c7796dea8ba22"
     },
     "v2_tests": {
       "path": "canonical/tests/test_universal_verified_adaptive_solver_v2.py",
