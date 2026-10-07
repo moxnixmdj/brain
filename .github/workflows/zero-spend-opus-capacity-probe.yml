@@ -75,3 +75,5 @@ jobs:
           path: zero_spend_opus_capacity_probe.json
           if-no-files-found: error
           retention-days: 7
+
+# terminal-now private capacity trigger 2026-10-07
