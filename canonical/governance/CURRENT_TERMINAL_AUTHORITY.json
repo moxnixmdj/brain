@@ -651,8 +651,8 @@
     },
     "frozen_19_acceptance_proof_shape_quotient": {
       "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
-      "git_blob_sha": "1334dd95c42d52907cf22b082cdf25ade765b3a6",
-      "note": "13_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__CURRENT_AA_BRIEFCASE_MATCHED_EPOCH_TARGET_BOUND_AT_1807__HISTORICAL_1822_PREDICATE_IDS_PRESERVED"
+      "git_blob_sha": "8a644570e5f02852da253abf1c0e8012b87af34e",
+      "note": "13_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__CURRENT_AA_BRIEFCASE_1807_AND_GDPVAL_AA_1866_MATCHED_EPOCH_TARGETS_BOUND__HISTORICAL_PREDICATE_IDS_PRESERVED"
     },
     "load_bearing_acceptance_truth_basis_reconciliation": {
       "path": "canonical/governance/FROZEN_19_LOAD_BEARING_ACCEPTANCE_TRUTH_BASIS_RECONCILIATION_20261007_V1.json",
@@ -701,6 +701,11 @@
       "path": "canonical/evidence/AA_BRIEFCASE_OPUS55_CURRENT_OWNER_TARGET_20261007_V1.json",
       "git_blob_sha": "5433034b59cbc0ee9494accc9f5bf59a348b027d",
       "note": "CURRENT_OWNER_AA_BRIEFCASE_V1_1_OPUS55_MAX_REFERENCE_1807__MATCHED_EPOCH_ONLY__ZERO_BRAIN_CREDIT"
+    },
+    "gdpval_opus55_target_reference_drift": {
+      "path": "canonical/governance/GDPVAL_OPUS55_TARGET_REFERENCE_DRIFT_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "59359d91a8e6d30ed5bfd2e33cb1cf84349cb818",
+      "note": "CURRENT_OWNER_GDPVAL_AA_V2_1_OPUS55_MAX_REFERENCE_1866__MATCHED_EPOCH_ONLY__ZERO_BRAIN_CREDIT"
     }
   },
   "live_truth": {
@@ -1071,7 +1076,9 @@
     "finance_uncovered_scope_shared_dependency": "SHARED_POLICY_RELEVANT_SEMANTIC_COMPLETENESS_OR_DIRECT_END_TO_END_ADEQUACY",
     "aa_briefcase_current_owner_reference_elo": 1807,
     "aa_briefcase_historical_frozen_reference_elo": 1822,
-    "aa_briefcase_current_epoch_reference_bound": true
+    "aa_briefcase_current_epoch_reference_bound": true,
+    "gdpval_historical_frozen_reference_elo": 1846,
+    "gdpval_current_epoch_reference_bound": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
