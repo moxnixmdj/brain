@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_ACTIONS_PRESTEP_RUNNER_DISPATCH_FAILURE_V1",
+  "date": "2026-10-07",
+  "status": "PROVED_CURRENT_GITHUB_HOSTED_RUNNER_PRESTEP_DISPATCH_FAILURE__WORKFLOW_CODE_NOT_EXECUTED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "observed_run": {
+    "repository": "moxnixmdj/brain",
+    "workflow": "Drift Immunity Guard",
+    "workflow_path": ".github/workflows/drift-immunity-guard.yml",
+    "run_id": 37575711482,
+    "event": "pull_request_target",
+    "head_branch": "authority/stable-pointer-v18-current-cut",
+    "head_sha": "761a9d4976b57d0b08932ad1a81d4fef52148367",
+    "run_started_at": "2026-10-07T05:19:09Z",
+    "completed_at": "2026-10-07T05:19:12Z",
+    "conclusion": "failure"
+  },
+  "jobs": [
+    {
+      "id": 112644027360,
+      "name": "guard",
+      "labels": ["ubuntu-latest"],
+      "runner_id": 0,
+      "runner_name": "",
+      "steps_count": 0,
+      "started_at": "2026-10-07T05:19:09Z",
+      "completed_at": "2026-10-07T05:19:12Z",
+      "conclusion": "failure"
+    },
+    {
+      "id": 112644027570,
+      "name": "continuous-obs-runtime",
+      "labels": ["ubuntu-24.04"],
+      "runner_id": 0,
+      "runner_name": "",
+      "steps_count": 0,
+      "started_at": "2026-10-07T05:19:09Z",
+      "completed_at": "2026-10-07T05:19:12Z",
+      "conclusion": "failure"
+    }
+  ],
+  "proof": {
+    "runner_assignment_observed": false,
+    "any_workflow_step_executed": false,
+    "checkout_executed": false,
+    "guard_python_executed": false,
+    "continuous_obs_python_executed": false,
+    "current_failure_is_inside_repository_workflow_code": false,
+    "current_failure_is_before_repository_workflow_code": true,
+    "root_cause_below_runner_dispatch_layer_proved": false
+  },
+  "scheduler_consequence": [
+    "DO_NOT_PATCH_GUARD_OR_SEMANTIC_RUNTIME_CODE_TO_EXPLAIN_THIS_FAILURE_SIGNATURE.",
+    "DO_NOT_SPEND_EXECUTION_BUDGET_ON_DUPLICATE_GITHUB_ACTIONS_RERUNS_UNTIL_RUNNER_ASSIGNMENT_STATE_CHANGES.",
+    "CONTINUE_TARGET_FREE_AND_ALREADY_ACQUIRED_STRUCTURAL_CLOSURE_USING_EXISTING_CONTENT_ADDRESSED_EVIDENCE_AND_CONNECTOR_VERIFIABLE_FACTS.",
+    "RECHECK_GITHUB_ACTIONS_ONLY_AFTER_AN_INFRASTRUCTURE_STATE_CHANGE_OR_A_FRESH_RUN_SHOWS_A_NONZERO_RUNNER_ID_OR_NONEMPTY_STEPS."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_BILLING_OR_QUOTA_IS_THE_ROOT_CAUSE.",
+    "NO_CLAIM_GITHUB_ACTIONS_IS_PERMANENTLY_UNAVAILABLE.",
+    "NO_CLAIM_PRIVATE_EXACT_OPUS_CAPACITY_IS_ABSENT.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
