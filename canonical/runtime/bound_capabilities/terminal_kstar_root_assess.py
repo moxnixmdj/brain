@@ -9,6 +9,8 @@ U="canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json"
 ARCH="canonical/governance/TERMINAL_ARCHITECTURE_SELF_TOURNAMENT_20261007_V1.json"
 BRIDGE="canonical/governance/SELECTED_DISCRIMINATOR_POLICY_COVER_BRIDGE_20261007_V1.json"
 REDUCER="canonical/runtime/terminal_closure_reducer.py"
+P3CUT="canonical/governance/P3_SCOPE_COMPLETE_CAUSAL_CUT_20261007_V1.json"
+P3VERIFY="canonical/verification/P3_SCOPE_COMPLETE_CAUSAL_CUT_SPRITE_VERIFICATION_20261008_V1.json"
 
 def _load(root, rel):
     p=root/rel
@@ -31,6 +33,52 @@ def _write(root, value):
     p.write_text(json.dumps(value,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     return p
 
+def _verified_p3_residual(root):
+    cut_path=root/P3CUT
+    verify_path=root/P3VERIFY
+    if not cut_path.is_file() or not verify_path.is_file():
+        return None
+    try:
+        cut=_load(root,P3CUT)
+        verify=_load(root,P3VERIFY)
+    except Exception:
+        return None
+    cut_binding=_binding(root,P3CUT)
+    verify_binding=_binding(root,P3VERIFY)
+    declared=(verify.get("subject") or {}).get("causal_cut")
+    vr=verify.get("verification") or {}
+    collapse=cut.get("first_principles_collapse") or {}
+    causal=cut.get("exact_causal_synthesis_result") or {}
+    effect=collapse.get("unified_effect")
+    ok=(
+        isinstance(declared,dict)
+        and declared==cut_binding
+        and verify.get("status","").startswith("PASS")
+        and vr.get("pass") is True
+        and vr.get("architectures_evaluated")==256
+        and vr.get("all_subsets_exhausted") is True
+        and vr.get("classification")=="NEW_PRIMITIVE_REQUIRED"
+        and vr.get("unified_missing_effect")==effect
+        and causal.get("architectures_evaluated")==256
+        and causal.get("classification")=="NEW_PRIMITIVE_REQUIRED"
+        and collapse.get("build_target_count")==1
+        and isinstance(effect,str) and bool(effect.strip())
+    )
+    if not ok:
+        return None
+    witness=cut.get("concrete_u_witness") or {}
+    return {
+      "classification":"SMALLEST_VERIFIED_CONSTRUCTIVE_RESIDUAL_OVER_EXHAUSTED_CURRENT_P3_FRONTIER",
+      "behavior_id":witness.get("behavior_id"),
+      "unified_missing_effect":effect,
+      "frontier_component_count":causal.get("frontier_component_count"),
+      "architectures_evaluated":causal.get("architectures_evaluated"),
+      "causal_cut":cut_binding,
+      "independent_verification":verify_binding,
+      "scope_boundary":"EXACT_OVER_DECLARED_EIGHT_COMPONENT_VERIFIED_FRONTIER__NOT_GLOBAL_NECESSITY_OVER_ALL_POSSIBLE_BRAIN_MECHANISMS",
+      "next_rule":"TOURNAMENT_COMMON_POLICY_FIRST__ELSE_MINIMUM_TRUTHFUL_POLICY_CHANGING_DISCRIMINATOR__THEN_COUNTEREXAMPLE_GUIDED_SYNTHESIS"
+    }
+
 def run(args, root):
     root=pathlib.Path(root).resolve()
     auth=_load(root,AUTH)
@@ -43,8 +91,18 @@ def run(args, root):
       "scope_complete_parameterized_terminal_or_refinement_binding_proved": bool(truth.get("scope_complete_parameterized_terminal_or_refinement_binding_proved")),
     }
     missing=sorted(k for k,v in required.items() if not v)
-    sources=[_binding(root,x) for x in (AUTH,ARCH,U,BRIDGE,REDUCER) if (root/x).is_file()]
+    source_paths=[AUTH,ARCH,U,BRIDGE,REDUCER,P3CUT,P3VERIFY]
+    sources=[_binding(root,x) for x in source_paths if (root/x).is_file()]
+    p3=_verified_p3_residual(root)
     if missing:
+        witness={
+          "primitive":u.get("single_live_primitive"),
+          "question":u.get("single_live_question"),
+          "tournament_capability_deficit_count":live.get("tournament_failure_current_admitted_capability_deficit_count"),
+          "rule":"DO_NOT_BUILD_CAPABILITY_WITHOUT_POLICY_DIVERGENCE_WITNESS__CLOSE_SCOPE_COMPLETENESS_AND_UNSPLITTABLE_CONFLICT_SUPPORT_FIRST"
+        }
+        if p3 is not None:
+            witness["current_smallest_verified_constructive_residual"]=p3
         out={
           "schema":SCHEMA,
           "outcome":"UNRESOLVED",
@@ -56,12 +114,7 @@ def run(args, root):
           "model_dependency_count":0,
           "missing_premises":missing,
           "unresolved":missing,
-          "smallest_constructive_residual_witness":{
-            "primitive":u.get("single_live_primitive"),
-            "question":u.get("single_live_question"),
-            "tournament_capability_deficit_count":live.get("tournament_failure_current_admitted_capability_deficit_count"),
-            "rule":"DO_NOT_BUILD_CAPABILITY_WITHOUT_POLICY_DIVERGENCE_WITNESS__CLOSE_SCOPE_COMPLETENESS_AND_UNSPLITTABLE_CONFLICT_SUPPORT_FIRST"
-          },
+          "smallest_constructive_residual_witness":witness,
           "source_bindings":sources,
           "terminal":False
         }
@@ -104,5 +157,6 @@ def run(args, root):
       "u_empty":bool(out.get("u_empty")),
       "abc_closed":bool(out.get("abc_closed")),
       "missing_premises":missing,
+      "smallest_verified_constructive_residual":None if p3 is None else p3.get("unified_missing_effect"),
       "model_dependency_count":0
     }

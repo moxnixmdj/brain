@@ -1,0 +1,31 @@
+{
+  "schema":"PROJECT_BRAIN_KSTAR_P3_CAUSAL_ROOT_REFINEMENT_SPRITE_VERIFICATION_V1",
+  "date":"2026-10-08",
+  "status":"PASS__EXACT_CANDIDATE_BYTES__5_OF_5__ZERO_TERMINAL_CREDIT",
+  "subject":{
+    "runtime":{"path":"canonical/runtime/bound_capabilities/terminal_kstar_root_assess.py","git_blob_sha":"c313dfa5f253d0065d56e0c66aae316fea466f03"},
+    "tests":{"path":"canonical/tests/test_terminal_kstar_root_assess.py","git_blob_sha":"e251291c82c7f279d04064671eda152a30fa4433"}
+  },
+  "carrier":{
+    "provider":"SPRITES",
+    "name":"brain-root3-current-byte-replay-20261007-v1",
+    "id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace":"/home/sprite/kstar_p3_refine_v1"
+  },
+  "result":{
+    "pass":true,
+    "passed":5,
+    "total":5,
+    "checks":[
+      "GENERIC_OPEN_ROOT_FAILS_CLOSED",
+      "VERIFIED_P3_CUT_REFINES_TO_ONE_UNIFIED_EFFECT",
+      "DRIFTED_OR_UNVERIFIED_P3_CUT_IS_REJECTED",
+      "ONE_GENERIC_PREMISE_OPEN_NEVER_INVENTS_U_EMPTY",
+      "SCOPE_COMPLETE_CANDIDATE_EMITTED_ONLY_WHEN_ALL_THREE_BOUND_PREMISES_TRUE"
+    ]
+  },
+  "verified_effect":"WHEN_U_REMAINS_OPEN_AND_THE_EXACT_P3_CUT_PLUS_INDEPENDENT_RECEIPT_ARE_BOUND__KSTAR_SURFACES_P3_SCOPE_COMPLETE_GROUNDED_AUDIENCE_CONDITIONED_POLICY_DOMINANCE_AS_THE_SMALLEST_VERIFIED_CONSTRUCTIVE_RESIDUAL_OVER_THE_EXHAUSTED_CURRENT_P3_FRONTIER",
+  "scope_boundary":"THIS_IS_NOT_A_GLOBAL_NECESSITY_PROOF_OVER_ALL_POSSIBLE_FUTURE_BRAIN_MECHANISMS",
+  "hard_nonclaims":["NO_U_EMPTY","NO_ABC_CLOSED","NO_D_FINALITY","NO_TERMINAL_CREDIT"],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
