@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+  "task_id": "SI-TERMINAL-F-RACE-20261007-V1",
+  "agent_id": "SUPERWORKER-TERMINAL-F",
+  "priority": 999997,
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_TERMINAL_F_RACE_20261007_V1.json",
+  "mission_sha256": "d540580abe0ad77f5aec86a03cafc855bb61821586bae1701337a721d8545a08",
+  "prerequisites": [],
+  "checkpoint_before_runtime_once": true,
+  "incremental_spend_usd": 0,
+  "terminal_autopilot": {
+    "enabled": true,
+    "phase": "EXECUTE",
+    "execution_class": "REVERSIBLE_ZERO_REALITY",
+    "irreversible_benchmark": false,
+    "action_id": "route::FINANCE_MYSTERY_COMMON_POLICY_COVER",
+    "obligation_ids": [
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+    ]
+  }
+}
