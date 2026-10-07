@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_CURRENT_MAIN_INFORMATION_WAKE_V1",
+  "date": "2026-10-07",
+  "status": "CURRENT_MAIN_BOUND_INFORMATION_CUT__BOUNDED_PROOFS_PRESERVED__REALISTIC_PROFESSIONAL_QUALITY_NOT_ZERO_REALITY_CLOSED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "active_pointer": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V5.json",
+      "git_blob_sha": "e9c47da572fdc17ba8759476cacc9b7738fabfb7"
+    },
+    "professional_prewave": {
+      "path": "canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json",
+      "git_blob_sha": "89083d0a7039f4e3e9ac0f9fbdd392836eb11f25"
+    },
+    "professional_terminal_binding": {
+      "path": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d"
+    },
+    "bounded_p2_cell": {
+      "path": "canonical/governance/P2_INFORMATION_SAFE_UNIVERSAL_SELECTED_CELL_20261007_V1.json",
+      "git_blob_sha": "0ccc3ecbdbf2636b8f1e7f0daf959a48350cb82e"
+    },
+    "db_union": {
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V6.json",
+      "git_blob_sha": "3b438f63dfdcd208c984251d1addd1334ca4b44e"
+    },
+    "shared_information_lower_bound": {
+      "path": "canonical/governance/TERMINAL_SHARED_SEMANTIC_MINIMUM_INFORMATION_LOWER_BOUND_20261007_V1.json",
+      "git_blob_sha": "0b63405d95009a95ad12e767d9785ceacaf5be12"
+    }
+  },
+  "current_bound_facts": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "authoritative_scope_equivalent_now": false,
+    "no_scope_inheritance": true,
+    "terminal_results_observed": 0,
+    "candidate_receives_hidden_oracle": false,
+    "standalone_synthetic_whole_domain_score_forbidden": true,
+    "whole_artifact_family_closed_by_14_record_cache": false,
+    "unresolved_realistic_dimensions": [
+      "ACTUAL_CURRENT_DRAFT_OR_RENDER_STATE_WITH_CROSS_ARTIFACT_STRUCTURE_AND_LAYOUT",
+      "CONTENT_ANALYSIS_AND_LAYOUT_REVISION_CHOICE_ACROSS_REALISTIC_PROFESSIONAL_DELIVERABLES",
+      "CONCRETE_EDIT_ISSUANCE_AND_NATIVE_FORMAT_PRESERVATION_INTERACTION",
+      "INDEPENDENT_RUBRIC_IMPROVEMENT_VERSUS_MECHANICS_ONLY_BASELINE",
+      "PLAN_ABLATION_AND_RESCUE_ACROSS_FRESH_CROSS_ARTIFACT_TASKS"
+    ]
+  },
+  "information_cut": {
+    "setup": "TWO_ADMISSIBLE_HIDDEN_EVALUATOR_WORLDS_SHARE_THE_SAME_VISIBLE_PRECOMMITMENT_STATE__WORLD_1_REQUIRES_ACTION_A_FOR_NONINFERIORITY__WORLD_2_REQUIRES_ACTION_B",
+    "visible_policy": "CHOOSE_A_WITH_PROBABILITY_p_AND_B_WITH_1_MINUS_p",
+    "universal_noninferiority_constraints": [
+      "0_LESS_THAN_OR_EQUAL_p_LESS_THAN_OR_EQUAL_1",
+      "p_GREATER_THAN_OR_EQUAL_1",
+      "1_MINUS_p_GREATER_THAN_OR_EQUAL_1"
+    ],
+    "independent_wolfram_result": {
+      "dominance_feasible": false,
+      "max_worst_case_success": "1/2",
+      "argmax": "p=1/2"
+    },
+    "conclusion": "CURRENT_BOUND_VISIBLE_ONLY_BYTES_CANNOT_PROVE_UNIVERSAL_NONINFERIORITY_WHILE_BOTH_OPPOSED_HIDDEN_EVALUATOR_WORLDS_REMAIN_ADMISSIBLE"
+  },
+  "preserve": [
+    "THE_BOUNDED_P2_UNIVERSAL_GENERATED_CELL_REMAINS_SOUND_ON_ITS_BOUND_SCOPE",
+    "THE_ZERO_UNSUPPORTED_MATERIAL_CONTENT_TOP_LAW_CELL_REMAINS_SOUND",
+    "DIRECT_E2E_OR_SCOPE_COMPLETE_TOP_LAW_CAN_STILL_CLOSE_THE_REALISTIC_RESIDUAL_WITHOUT_TARGET_QUERY_IF_IT_EXCLUDES_THE_COUNTERMODEL"
+  ],
+  "scheduler_effect": [
+    "DO_NOT_REPEAT_BOUNDED_P2_ZERO_REALITY_PROOFS_AS_IF_THEY_IMPLY_WHOLE_REALISTIC_PROFESSIONAL_QUALITY.",
+    "SEARCH_FIRST_FOR_ONE_CURRENT_MAIN_SCOPE_COMPLETE_STRUCTURAL_DIRECT_E2E_OR_COMMON_POLICY_ADEQUACY_CERTIFICATE_THAT_EXCLUDES_THE_OPPOSED_WORLD_COUNTERMODEL.",
+    "IF_NONE_EXISTS_AND_THE_RESIDUAL_IS_SELECTED_AS_A_TRUE_U_WITNESS__WAKE_ONLY_THE_MINIMUM_TRUTHFUL_EVALUATOR_OR_TARGET_DISCRIMINATOR_NEEDED_TO_SEPARATE_THE_SURVIVING_POLICY_ADEQUACY_CLASSES.",
+    "DO_NOT_ACQUIRE_GENERIC_BENCHMARK_DATA_OR_BUILD_A_NEW_GENERIC_SEMANTIC_MODEL."
+  ],
+  "truth_boundary": {
+    "professional_quality_global_closed": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TWO_WORLDS_DESCRIBE_THE_ACTUAL_TARGET.",
+    "NO_CLAIM_FRESH_TARGET_INFORMATION_IS_REQUIRED_IF_A_SOUND_STRUCTURAL_CERTIFICATE_EXCLUDES_THE_COUNTERMODEL.",
+    "NO_CLAIM_THIS_FILE_ALONE_PROVES_A_SPECIFIC_CONCRETE_CONTEXT_IS_IN_U.",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
