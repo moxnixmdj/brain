@@ -89,9 +89,15 @@ def credit_addon(trades:list[CreditTrade])->float:
     entity_rho={}
     for t in trades:
         key=t.reference
+        sf=supervisory_factor(t)
+        rho=supervisory_correlation(t)
+        if key in entity_sf and entity_sf[key] != sf:
+            raise ValueError("REFERENCE_ENTITY_MIXED_SUPERVISORY_FACTOR")
+        if key in entity_rho and entity_rho[key] != rho:
+            raise ValueError("REFERENCE_ENTITY_MIXED_CORRELATION")
         entity_eff[key]=entity_eff.get(key,0.0)+effective_notional(t)
-        entity_sf[key]=supervisory_factor(t)
-        entity_rho[key]=supervisory_correlation(t)
+        entity_sf[key]=sf
+        entity_rho[key]=rho
     systematic=0.0
     idiosyncratic=0.0
     for key,eff in entity_eff.items():
