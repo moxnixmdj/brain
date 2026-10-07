@@ -82,6 +82,14 @@ def certify(bundle:Any)->dict[str,Any]:
         errors.append("BASELINE_LAYOUT_NOT_CERTIFIED")
     if not str(qb.get("baseline_layout_receipt") or "").strip():
         errors.append("BASELINE_LAYOUT_RECEIPT_MISSING")
+    if qb.get("mechanics_only_baseline_equals_empty_p2_plan") is not True:
+        errors.append("MECHANICS_BASELINE_EQUIVALENCE_NOT_PROVED")
+    if not str(qb.get("mechanics_only_baseline_equivalence_receipt") or "").strip():
+        errors.append("MECHANICS_BASELINE_EQUIVALENCE_RECEIPT_MISSING")
+    if qb.get("ablation_rescue_semantics_bound_to_certifier_policy") is not True:
+        errors.append("ABLATION_RESCUE_SEMANTICS_NOT_BOUND")
+    if not str(qb.get("ablation_rescue_semantics_receipt") or "").strip():
+        errors.append("ABLATION_RESCUE_SEMANTICS_RECEIPT_MISSING")
     native_required=qb.get("native_mechanical_gate_required")
     if type(native_required) is not bool:
         errors.append("NATIVE_GATE_REQUIREMENT_INVALID")
@@ -175,6 +183,8 @@ def certify(bundle:Any)->dict[str,Any]:
         "CONTENT_ADDRESSED_LOSSLESS_P2_MEMBERSHIP_PROOF",
         "CONTENT_ADDRESSED_EXPLICIT_RUBRIC_EQUIVALENCE_PROOF",
         "CONTENT_ADDRESSED_BASELINE_LAYOUT_NONOBSCURING_PROOF",
+        "CONTENT_ADDRESSED_MECHANICS_BASELINE_EQUIVALENCE_PROOF",
+        "CONTENT_ADDRESSED_ABLATION_RESCUE_SEMANTIC_BINDING",
         "CONTENT_ADDRESSED_NATIVE_MECHANICAL_GATE_PROOF_IF_REQUIRED",
       ],
       "terminal_credit_delta":0,
