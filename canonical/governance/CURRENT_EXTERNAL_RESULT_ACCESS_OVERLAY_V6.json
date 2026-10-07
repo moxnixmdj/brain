@@ -1,0 +1,115 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_EXTERNAL_RESULT_ACCESS_OVERLAY_V6",
+  "date": "2026-10-07",
+  "status": "ACTIVE_CANDIDATE__BUILDKITE_AUTH_AND_CARRIER_READY__TB4_THRESHOLD_ONLY_OPEN__CHARTOGRAPHY_MODEL_EVALUATOR_THRESHOLD_OPEN__HF_ACCOUNT_LOGIN_OBSERVED_BUT_NO_SAVED_BROWSER_PROFILE__4_PROVIDER_WAIT__ZERO_CREDIT",
+  "supersedes": {
+    "path": "canonical/governance/CURRENT_EXTERNAL_RESULT_ACCESS_OVERLAY_V5.json",
+    "git_blob_sha": "38852cdf11ae95fd55b283e51cac2e10e4c68247",
+    "reason": "V5_INCORRECTLY_KEEPS_BUILDKITE_IN_INTERACTIVE_AUTH_BLOCKED_STATE_DESPITE_CANONICAL_PROVIDER_EXECUTED_ZERO_CASE_RECEIPTS_PROTOCOL_EQUIVALENCE_ACCOUNT_SPECIFIC_ZERO_SPEND_HARD_STOP_AND_CURRENT_PROVIDER_ONBOARDING_CONFIRMATION"
+  },
+  "buildkite_lane": {
+    "id": "L1_BUILDKITE_TB4_CHARTOGRAPHY",
+    "authentication_state": "NOT_A_CURRENT_BLOCKER",
+    "provider_execution_receipt": {
+      "path": "canonical/verification/BUILDKITE_ZERO_CASE_RUNTIME_RECEIPT_20261006_V1.json",
+      "git_blob_sha": "5a10884bc32d3c003a26306ec67bbc902b7338bb"
+    },
+    "tb4_protocol_binding": {
+      "path": "canonical/governance/TB4_BUILDKITE_PROTOCOL_EQUIVALENCE_BINDING_20261006_V1.json",
+      "git_blob_sha": "7b94ae5bee70406870ab3e43d1e3e61c7eb6b7b9"
+    },
+    "zero_spend_receipt": {
+      "path": "canonical/verification/TB4_BUILDKITE_ACCOUNT_ZERO_SPEND_HARD_STOP_RECEIPT_20261006_V1.json",
+      "git_blob_sha": "75afb4de1594a858b873ec28bbca453ae3c9f40d"
+    },
+    "current_trial_expiry_upper_bound": "2026-11-04T22:15:12.749Z",
+    "hard_stop": "STOP_BEFORE_TRIAL_EXPIRY_OR_INCLUDED_ALLOWANCE_EXHAUSTION_UNLESS_FRESH_ZERO_SPEND_RECEIPT_REPROVES_NEXT_TRANSACTION",
+    "provider_reply_observation": {
+      "source": "CONNECTED_GMAIL_READ_ONLY_OBSERVATION",
+      "message_id": "1a111d478e237133",
+      "subject": "Hey - Ola from Buildkite",
+      "received_at": "2026-10-06T15:28:17",
+      "load_bearing_summary": "BUILDKITE_DSE_STATES_ACCOUNT_HAS_KICKED_OFF_BUILDS_ON_HOSTED_AGENTS_AND_IS_IN_ONBOARDING_TRIAL_FLOW",
+      "privacy_rule": "DO_NOT_COPY_PRIVATE_EMAIL_BODY_INTO_CANONICAL_REPO"
+    },
+    "tb4_remaining": [
+      "TB4_THRESHOLD_CERTIFICATE_GE_66_4_OR_SOUND_STRONGER_TASK_CONDITIONED_DOMINANCE_CERTIFICATE"
+    ],
+    "chartography_remaining": [
+      "EXACT_PINNED_MODEL_MATERIALIZATION_AND_LOAD",
+      "EVALUATOR_RELATION",
+      "THRESHOLD_GE_89_OR_SOUND_STRONGER_CERTIFICATE"
+    ],
+    "generic_access_discovery": "DELETE_FROM_CURRENT_FRONTIER"
+  },
+  "huggingface_lane": {
+    "id": "L2_HUGGINGFACE_HLE_OSWORLD",
+    "account_login_observed": {
+      "source": "CONNECTED_GMAIL_READ_ONLY_OBSERVATION",
+      "message_id": "1a10e215d6836c7c",
+      "load_bearing_summary": "HUGGING_FACE_ACCOUNT_REPORTED_SUCCESSFUL_LOGIN_ON_2026_10_05"
+    },
+    "saved_browser_profile_state": "NO_SIGNED_IN_SITE_STATE_IN_CURRENT_TINYFISH_PROFILES",
+    "execution_state": "ACCOUNT_EXISTS_AND_LOGIN_OCCURRED__CURRENT_AUTOMATION_SESSION_AUTH_NOT_BOUND",
+    "remaining": [
+      "SAFE_ZERO_SPEND_AUTHENTICATED_EXECUTION_PATH_OR_EQUIVALENT_RESULT_RECEIPT",
+      "HLE_SCOPE_NONINFERIOR_OR_STRONGER",
+      "OSWORLD_SCOPE_NONINFERIOR_OR_MATCHED_STRONGER"
+    ]
+  },
+  "provider_wait_lanes": [
+    {
+      "id": "L3_VALS_FINANCE_MYSTERY",
+      "new_provider_reply_observed": false
+    },
+    {
+      "id": "L4_ARTIFICIAL_ANALYSIS_GDPVAL_AA_BRIEFCASE",
+      "new_provider_reply_observed": false
+    },
+    {
+      "id": "L5_COGNITION_FRONTIERCODE",
+      "new_provider_reply_observed": false
+    },
+    {
+      "id": "L6_ZAPIER_AUTOMATIONBENCH",
+      "new_provider_reply_observed": false
+    }
+  ],
+  "execution_capability_boundary": {
+    "buildkite_provider_account_and_carrier_ready": true,
+    "buildkite_direct_connector_available_in_current_chat": false,
+    "huggingface_saved_authenticated_browser_profile_available": false,
+    "wallet_metered_browser_automation_permitted": false,
+    "reason": "HARD_ZERO_INCREMENTAL_SPEND_RULE"
+  },
+  "scheduler_effect": [
+    "DELETE_BUILDKITE_INTERACTIVE_AUTHENTICATION_AND_GENERIC_ACCESS_DISCOVERY_AS_CURRENT_BLOCKERS.",
+    "TREAT_BUILDKITE_AS_A_VERIFIED_ZERO_SPEND_NONTERMINAL_COMPUTE_CARRIER_UNDER_THE_BOUND_TRIAL_HARD_STOP.",
+    "DO_NOT_REPEAT_BUILDKITE_RESOURCE_PROTOCOL_OR_BILLING_PREFLIGHT_UNDER_UNCHANGED_ACCOUNT_AND_PROVIDER_POLICY.",
+    "FOR_TB4_WORK_ONLY_ON_THE_THRESHOLD_OR_STRONGER_DOMINANCE_CERTIFICATE.",
+    "FOR_CHARTOGRAPHY_WORK_ONLY_ON_MODEL_LOAD_EVALUATOR_RELATION_AND_THRESHOLD_OR_STRONGER_CERTIFICATE.",
+    "KEEP_HUGGINGFACE_AS_AUTH_SESSION_BOUNDARY_DESPITE_ACCOUNT_LOGIN_OBSERVED__NO_CURRENT_SAVED_BROWSER_AUTH.",
+    "KEEP_VALS_ARTIFICIAL_ANALYSIS_COGNITION_AND_ZAPIER_PROVIDER_WAIT_UNCHANGED_PENDING_NEW_RECEIPT."
+  ],
+  "recompute_triggers": [
+    "BUILDKITE_TRIAL_ALLOWANCE_OR_PLAN_STATE_CHANGE",
+    "BUILDKITE_THRESHOLD_OR_STRONGER_CERTIFICATE",
+    "CHARTOGRAPHY_MODEL_LOAD_OR_EVALUATOR_RECEIPT",
+    "HUGGINGFACE_AUTHENTICATED_SESSION_RECEIPT",
+    "PROVIDER_REPLY",
+    "NEW_SCOPE_COMPLETE_STRONGER_PROOF"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_TB4_THRESHOLD_OR_SCORE_CREDIT",
+    "NO_CHARTOGRAPHY_THRESHOLD_OR_SCORE_CREDIT",
+    "NO_HLE_OR_OSWORLD_RESULT_CREDIT",
+    "NO_CLAIM_BUILDKITE_DIRECT_API_CREDENTIAL_IS_AVAILABLE_TO_THIS_CHAT",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ]
+}
