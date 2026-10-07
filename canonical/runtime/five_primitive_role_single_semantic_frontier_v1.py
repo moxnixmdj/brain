@@ -33,11 +33,9 @@ ROLE_TO_SEMANTIC_RESPONSIBILITY={
     "B7_OUTPUT_COMMUNICATION_SYNTHESIS_AND_ARTIFACT_CONSTRUCTION":"TASK_CONDITIONED_SYNTHESIS_OUTPUT_SELECTION_AND_UTILITY_SEMANTICS",
 }
 
-
 def blob(path:Path)->str:
     b=path.read_bytes()
     return hashlib.sha1(b"blob "+str(len(b)).encode()+b"\0"+b).hexdigest()
-
 
 def project()->dict:
     errors=[]
@@ -63,10 +61,13 @@ def project()->dict:
         if token not in resp:
             errors.append("SEMANTIC_RESPONSIBILITY_MISSING:"+token)
 
-    if k6["generator_projection"]["current_generic_unbound_preproof_implementation_generator_count"]!=0:
+    comp=k6["candidate_global_compression"]
+    if comp["current_generic_unbound_preproof_implementation_generator_count"]!=0:
         errors.append("GENERIC_IMPLEMENTATION_RESIDUAL_REOPENED")
-    if k6["residual"]["remaining_unbound_semantic_binding_residual_count"]!=1:
+    if comp["remaining_unbound_semantic_binding_residual_count"]!=1:
         errors.append("SEMANTIC_BINDING_RESIDUAL_COUNT_DRIFT")
+    if comp["remaining_unbound_semantic_binding_residual"]!="K6_SOUND_POLICY_COVER_WITNESS_AND_SELECTED_DISCRIMINATOR_BINDING":
+        errors.append("SEMANTIC_BINDING_RESIDUAL_ID_DRIFT")
     if grec["k6_role"]["preproof_generic_implementation_generator"] is not False:
         errors.append("G_ROUTE_GENERIC_K6_REOPENED")
 
@@ -86,7 +87,6 @@ def project()->dict:
         "resource_and_ownership_remain":True,
         "terminal_credit_delta":0,
     }
-
 
 if __name__=="__main__":
     print(json.dumps(project(),indent=2,sort_keys=True))
