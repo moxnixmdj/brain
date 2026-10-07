@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+  "task_id": "SI-TERMINAL-C-RACE-20261007-V1",
+  "agent_id": "SUPERWORKER-TERMINAL-C",
+  "priority": 999997,
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_TERMINAL_C_RACE_20261007_V1.json",
+  "mission_sha256": "9197c5679e2225d74042ac20a286d6e620da1f3cb6b27fd55e62dc88ccd9d97b",
+  "prerequisites": [],
+  "checkpoint_before_runtime_once": true,
+  "incremental_spend_usd": 0,
+  "terminal_autopilot": {
+    "enabled": true,
+    "phase": "EXECUTE",
+    "execution_class": "REVERSIBLE_ZERO_REALITY",
+    "irreversible_benchmark": false,
+    "action_id": "route::CODING_TRIAD_SCOPE_COMPLETE_COVER",
+    "obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8"
+    ]
+  }
+}
