@@ -21,6 +21,10 @@ def base():
         "rubric_equivalence_receipt":"r1",
         "baseline_layout_nonobscuring":True,
         "baseline_layout_receipt":"l1",
+        "mechanics_only_baseline_equals_empty_p2_plan":True,
+        "mechanics_only_baseline_equivalence_receipt":"b1",
+        "ablation_rescue_semantics_bound_to_certifier_policy":True,
+        "ablation_rescue_semantics_receipt":"a1",
         "native_mechanical_gate_required":False,
       }
     }
@@ -80,3 +84,13 @@ def test_native_gate_receipt_is_required_when_native_gate_is_required():
     q["native_mechanical_gate_receipt"]=""
     y=certify(x); assert y["pass"] is False
     assert "NATIVE_MECHANICAL_GATE_RECEIPT_MISSING" in y["errors"]
+
+def test_mechanics_baseline_equivalence_is_required():
+    x=base(); x["quality_binding"]["mechanics_only_baseline_equals_empty_p2_plan"]=False
+    y=certify(x); assert y["pass"] is False
+    assert "MECHANICS_BASELINE_EQUIVALENCE_NOT_PROVED" in y["errors"]
+
+def test_ablation_rescue_semantics_binding_is_required():
+    x=base(); x["quality_binding"]["ablation_rescue_semantics_bound_to_certifier_policy"]=False
+    y=certify(x); assert y["pass"] is False
+    assert "ABLATION_RESCUE_SEMANTICS_NOT_BOUND" in y["errors"]
