@@ -169,8 +169,7 @@ def verify_policy_manifest(contract: Any, contract_schema: Any, manifest: Any) -
         errors.append("TERMINAL_ACCOUNTING_OBLIGATION_UNBOUND:" + missing)
 
     policy_set_cert = manifest.get("candidate_policy_set_complete_certificate_id")
-    if not isinstance(policy_set_cert, str) or not policy_set_cert.strip():
-        errors.append("CANDIDATE_POLICY_SET_COMPLETENESS_CERTIFICATE_MISSING")
+    policy_set_cert_present = isinstance(policy_set_cert, str) and bool(policy_set_cert.strip())
 
     policies = manifest.get("policies")
     if not isinstance(policies, list) or not policies:
@@ -245,7 +244,10 @@ def verify_policy_manifest(contract: Any, contract_schema: Any, manifest: Any) -
         "behavior_id": behavior_id,
         "compiled_contract": compiled,
         "policy_results": policy_results,
+        "candidate_policy_set_completeness_reference_present": policy_set_cert_present,
         "candidate_policy_set_completeness_self_verified": False,
+        "negative_policy_absence_or_global_minimality_authorized": False,
+        "positive_cover_does_not_require_policy_set_completeness": True,
         "certificate_truth_self_verified": False,
         "semantic_truth_self_verified": False,
         "structural_field_omission_closed": not errors,
