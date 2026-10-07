@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_DENSE_NONCHART_SHARED_AA_DEPENDENCY_RECONCILIATION_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_SCHEDULER_DEPENDENCY_COLLAPSE__VISION_DENSE_NONCHART_NOT_AN_INDEPENDENT_REALITY_OBLIGATION__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "exact_sources": {
+    "dense_nonchart": {
+      "path": "canonical/governance/DENSE_NONCHART_ZERO_REALITY_DECOMPOSITION_20261007_V1.json",
+      "git_blob_sha": "a04fcc6ef54acfe414ac73d33eac70ecf92fe1b8"
+    },
+    "terminal_v3": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "exact_fact": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001__128_OF_128_DIRECT_CASES_PASS__TERMINAL_RESULT_TRUE"
+    },
+    "aa_shared_residual": {
+      "path": "canonical/governance/AA_BRIEFCASE_SHARED_RESIDUAL_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "2ec5e65558f7f622d8ab486068a8ebf4ce39bd3e"
+    },
+    "aa_shared_verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_SHARED_RESIDUAL_RECONCILIATION_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "f4e08f38d23b3fe45dd95b07459f27ef7bc5be92"
+    },
+    "frozen_predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    }
+  },
+  "exact_decomposition": {
+    "predicate": "VISION_DENSE_NONCHART_SCOPE",
+    "declared_scope": "DENSE_DOCUMENT_NON_CHART_LEAVES_NOT_EXERCISED_BY_CHARTOGRAPHY_REQUIRE_SCOPE_PROOF",
+    "load_bearing_contracts": [
+      {
+        "contract": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+        "state": "PROVED_AND_GLOBALLY_REUSABLE"
+      },
+      {
+        "contract": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+        "state": "CLOSED_BY_IMMUTABLE_TERMINAL_V3_128_OF_128_PASS"
+      },
+      {
+        "contract": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "state": "ONLY_SURVIVING_NONCHART_RESIDUAL__ALREADY_CARRIED_BY_AA_BRIEFCASE_OR_STRONGER_PROFESSIONAL_QUALITY_ROUTE"
+      }
+    ]
+  },
+  "scheduler_theorem": {
+    "statement": "GIVEN_THE_EXACT_THREE_CONTRACT_DENSE_NONCHART_MAPPING__WITH_NATIVE_ARTIFACT_ALREADY_PROVED_AND_CAD_ALREADY_TERMINALLY_PASSED__VISION_DENSE_NONCHART_SCOPE_HAS_NO_INDEPENDENT_REALITY_VARIABLE_BEYOND_THE_SHARED_PROFESSIONAL_QUALITY_RESIDUAL.",
+    "consequence": "REMOVE_VISION_DENSE_NONCHART_SCOPE_FROM_THE_SET_OF_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__KEEP_THE_RAW_FROZEN_REGISTRY_ATOM_UNRESOLVED_UNTIL_THE_SHARED_PROFESSIONAL_QUALITY_RESIDUAL_IS_ACTUALLY_DISCHARGED.",
+    "shared_dependency": "AA_BRIEFCASE_V1_1_GE_1822_OR_STRONGER_FULL_SCOPE_PROFESSIONAL_DELIVERABLE_QUALITY_CERTIFICATE",
+    "no_duplicate_rule": "DO_NOT_RUN_A_SECOND_DENSE_NONCHART_TARGET_COMPARATOR_OR_CAD_REPAIR__THE_ONLY_SURVIVING_INFORMATION_IS_ALREADY_SCHEDULED_IN_THE_SHARED_PROFESSIONAL_QUALITY_LANE."
+  },
+  "accounting": {
+    "raw_registry_atom_state_change": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "independent_scheduler_obligation_delta": -1,
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_VISION_DENSE_NONCHART_SCOPE_IS_PROVED_YET.",
+    "NO_CLAIM_AA_BRIEFCASE_1822_IS_PASSED.",
+    "NO_CLAIM_CHARTOGRAPHY_89_IS_PASSED.",
+    "NO_CLAIM_VISION_AND_DENSE_DOCUMENT_UNDERSTANDING_FAMILY_IS_CLOSED.",
+    "NO_TERMINAL_CREDIT."
+  ]
+}
