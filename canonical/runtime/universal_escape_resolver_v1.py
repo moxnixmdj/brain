@@ -1,7 +1,7 @@
 """Universal Escape Resolver V1.
 
-This is a fail-closed coordinator between the existing Universal Learning
-planning stack and the existing semantic-elision D_B admission gate.
+Fail-closed coordinator between the existing Universal Learning planning stack
+and the current D_B admission mechanisms.
 
 Key rule: learning/planning never grants D_B, U-empty, or terminal credit.
 Every cell-level promotion must be authorized by an existing independently
@@ -13,10 +13,12 @@ from __future__ import annotations
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import semantic_elision_db_admission_v1 as db
+from canonical.runtime import source_positive_adequacy_db_admission_v1 as source_db
 from canonical.runtime import universal_learning_meta_policy_router_v9 as ul
 
 SCHEMA = "PROJECT_BRAIN_UNIVERSAL_ESCAPE_RESOLVER_V1"
 ROUTES = (
+    "D_SOURCE_POSITIVE_ADEQUACY",
     "B_ROBUST_COMMON_POLICY",
     "A_COMPLETE_OBJECTIVE",
     "C_DIRECT_END_TO_END_ACCEPTANCE",
@@ -39,6 +41,17 @@ def _fail(reason: str, **detail: Any) -> dict[str, Any]:
     return out
 
 
+def _evaluate_candidate(route: str, candidate: Mapping[str, Any]) -> dict[str, Any]:
+    if candidate.get("route") != route:
+        return _fail("CANDIDATE_ROUTE_MISMATCH")
+    body = candidate.get("payload")
+    if not isinstance(body, Mapping):
+        return _fail("CANDIDATE_PAYLOAD_MAPPING_REQUIRED")
+    if route == "D_SOURCE_POSITIVE_ADEQUACY":
+        return source_db.evaluate(body)
+    return db.evaluate(candidate)
+
+
 def resolve(
     *,
     escape_cell_id: str,
@@ -49,9 +62,9 @@ def resolve(
 ) -> dict[str, Any]:
     """Resolve one already-bound escape cell or return its next learning action.
 
-    The function first attempts existing proof routes. Only if none authorize
-    the exact escape cell does it invoke Universal Learning V9 as a planning
-    mechanism. V9 cannot authorize execution or promotion here.
+    Existing proof routes are exhausted first. Only when none authorizes the
+    exact escape cell is Universal Learning V9 invoked as a planning mechanism.
+    V9 cannot authorize execution or promotion here.
     """
     cell = str(escape_cell_id or "").strip()
     if not cell:
@@ -81,13 +94,8 @@ def resolve(
                 {"route": route, "pass": False, "reason": "CANDIDATE_NOT_MAPPING"}
             )
             continue
-        if candidate.get("route") != route:
-            attempts.append(
-                {"route": route, "pass": False, "reason": "CANDIDATE_ROUTE_MISMATCH"}
-            )
-            continue
         try:
-            result = db.evaluate(candidate)
+            result = _evaluate_candidate(route, candidate)
         except Exception as exc:  # fail closed on malformed evidence
             attempts.append(
                 {
