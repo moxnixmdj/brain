@@ -234,3 +234,6 @@ def verify():
  for w in U:comp.setdefault(F(idx[w]),set()).add(sig[w])
  assert all(len(v)==1 for v in comp.values())
  return {'status':'PASS','programs':len(U),'pair_equations':len(PE),'triple_equations':len(TE),'structural_equations':len(structural),'schema_count':len(GROUPS),'congruence_classes':cc,'witness_classes':wc,'witness_inputs':nx}
+
+if __name__=='__main__':
+ print(verify())
