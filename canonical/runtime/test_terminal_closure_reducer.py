@@ -105,3 +105,11 @@ def test_duplicate_family_id_fails():
     out = evaluate_manifest(m)
     assert out["achieved"] is False
     assert "DUPLICATE_FAMILY_ID" in out["failed_predicates"]
+
+
+def test_bare_pass_label_cannot_self_certify_family():
+    m = passing_manifest()
+    m["families"][0] = {"id": "FAMILY_00", "closure_state": "PASS"}
+    out = evaluate_manifest(m)
+    assert out["achieved"] is False
+    assert "FAMILY_OPEN:FAMILY_00" in out["failed_predicates"]
