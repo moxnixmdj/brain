@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_BLACK_BOX_UNIVERSAL_DOMINANCE_BOUNDARY_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__INFORMATION_THEORETIC_BOUNDARY__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "official_public_evidence": [
+    {
+      "url": "https://www.anthropic.com/transparency",
+      "observation": "ANTHROPIC_PUBLISHES_MODEL_REPORT_SUMMARIES_AND_CAPABILITY_SAFETY_EVALUATIONS__TRAINING_DATA_DESCRIBED_AS_A_PROPRIETARY_MIX"
+    },
+    {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "observation": "PUBLIC_ACCESS_IS_VIA_CLAUDE_AND_PLATFORM_API_SURFACES_WITH_PUBLISHED_EVALUATION_RESULTS__NO_COMPLETE_BEHAVIORAL_SPECIFICATION_OR_PUBLIC_MODEL_WEIGHTS_IDENTIFIED_IN_THE_OFFICIAL_PUBLIC_MATERIAL_CHECKED"
+    }
+  ],
+  "hard_nonclaim": "THIS_DOES_NOT_PROVE_NO_PRIVATE_OR_FUTURE_WHITE_BOX_CHANNEL_EXISTS__IT_RECORDS_ONLY_THE_CURRENT_OFFICIAL_PUBLIC_EVIDENCE_CHECKED",
+  "theorem": {
+    "id": "C_FINITE_BLACK_BOX_OBSERVATIONS_DO_NOT_PROVE_UNIVERSAL_FRONTIER_DOMINANCE",
+    "statement": "FOR_AN_OPAQUE_TARGET_WITH_AN_ADMISSIBLE_CONTEXT_SET_CONTAINING_AT_LEAST_ONE_UNOBSERVED_CONTEXT__ANY_FINITE_OBSERVATION_SET_THAT_DOES_NOT_STRUCTURALLY_BIND_THE_UNOBSERVED_CONTEXTS_IS_COMPATIBLE_WITH_TWO_TARGETS_IDENTICAL_ON_ALL_OBSERVED_CONTEXTS_BUT_DIFFERING_ON_AN_UNOBSERVED_FRONTIER_POINT__THEREFORE_FINITE_OBSERVATIONS_ALONE_CANNOT_PROVE_UNIVERSAL_BRAIN_DOMINANCE",
+    "constructive_countermodel": {
+      "observed_contexts": [
+        "c1"
+      ],
+      "world_A": {
+        "opus_c1": [
+          1,
+          1
+        ],
+        "opus_c_star": [
+          1,
+          1
+        ],
+        "brain_c1": [
+          1,
+          1
+        ],
+        "brain_c_star": [
+          1,
+          1
+        ],
+        "universal_dominance": true
+      },
+      "world_B": {
+        "opus_c1": [
+          1,
+          1
+        ],
+        "opus_c_star": [
+          2,
+          2
+        ],
+        "brain_c1": [
+          1,
+          1
+        ],
+        "brain_c_star": [
+          1,
+          1
+        ],
+        "universal_dominance": false
+      },
+      "indistinguishable_on_observed_data": true
+    }
+  },
+  "escape_conditions": [
+    "GENUINELY_EXHAUSTIVE_FINITE_CONTEXT_UNIVERSE",
+    "WHITE_BOX_OR_COMPLETE_BEHAVIORAL_SPECIFICATION_SUFFICIENT_TO_BOUND_ALL_TARGET_CONTEXTS",
+    "SOUND_STRUCTURAL_UPPER_BOUND_ON_OPUS55_FRONTIER_PLUS_BRAIN_MEETING_OR_EXCEEDING_THAT_BOUND",
+    "SOUND_COVERAGE_THEOREM_REDUCING_THE_UNIVERSAL_CONTEXT_SET_TO_A_FINITE_GENERATING_BASIS_WITH_VERIFIED_TRANSFER",
+    "DIRECT_TARGET_ORACLE_ACCESS_PLUS_A_PROVED_QUERY_COMPLETENESS_OR_IDENTIFICATION_THEOREM"
+  ],
+  "implications": {
+    "benchmarks": "FINITE_BENCHMARK_SUCCESS_CAN_ESTABLISH_LOWER_BOUNDS_AND_LOCAL_FRONTIER_WITNESSES_BUT_NOT_LITERAL_ALL_CONTEXT_FINALITY_BY_ITSELF",
+    "current_32": "CLOSING_ALL_CURRENT_FINITE_WITNESSES_DOES_NOT_BY_ITSELF_REMOVE_THE_BLACK_BOX_TWO_WORLD_COUNTERMODEL",
+    "outcome_frontier_theorem": "REMAINS_THE_RIGHT_FUNCTIONAL_TARGET_BUT_REQUIRES_ONE_ESCAPE_CONDITION_TO_BECOME_GLOBALLY_PROVABLE",
+    "highest_leverage_search": "SEARCH_FOR_A_SOUND_STRUCTURAL_COMPLETENESS_BRIDGE_OR_UPPER_BOUND_BEFORE_CONSUMING_MORE_FINITE_BENCHMARKS"
+  },
+  "accounting": {
+    "classification": "TRUTH_REPAIR_CANDIDATE",
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "incremental_spend_usd": 0
+  }
+}
