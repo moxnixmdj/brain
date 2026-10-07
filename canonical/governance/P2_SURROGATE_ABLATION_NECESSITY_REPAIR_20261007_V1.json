@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_P2_SURROGATE_ABLATION_NECESSITY_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "EXECUTABLE_TRUTH_REPAIR__P2_SURROGATE_ABLATION_IDENTITY_NOT_NECESSARY__BOUND_TARGET_ABLATION_SUFFICIENT_WITH_TARGET_ORDER_CERTIFICATE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "canonical_base_commit": "ffec0d134c50fc38623b833d0fc96ad40f488db0",
+  "source_bindings": {
+    "p2_actual_baseline_v3": {
+      "path": "canonical/governance/P2_MECHANICS_BASELINE_EQUIVALENCE_NECESSITY_REPAIR_20261007_V1.json"
+    },
+    "p2_comparison_order_v2": {
+      "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_COMPARISON_ORDER_ADMISSION_V2_20261007_V1.json"
+    },
+    "frozen_quality_binding": {
+      "path": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json"
+    }
+  },
+  "claim_under_attack": "THE_LOAD_BEARING_ABLATION_MUST_EQUAL_THE_EDIT_SELECTED_BY_MAXIMUM_MARGINAL_LOSS_UNDER_THE_EXPLICIT_P2_SURROGATE_OBJECTIVE",
+  "constructive_countermodel": {
+    "selected_edits": [
+      "E1",
+      "E2"
+    ],
+    "p2_surrogate": {
+      "selected_quality": 5,
+      "remove_E1_quality": 2,
+      "remove_E2_quality": 3,
+      "chosen_ablation": "E1"
+    },
+    "target_quality": {
+      "selected_quality": 5,
+      "remove_E1_quality": 4,
+      "remove_E2_quality": 1,
+      "chosen_ablation": "E2"
+    },
+    "p2_and_target_chosen_ablation_ids_differ": true,
+    "target_selected_gt_actual_ablation": true,
+    "target_rescue_restores_selected": true
+  },
+  "repair": {
+    "legacy_mode": "BIND_THE_P2_SURROGATE_MAXIMUM_MARGINAL_LOSS_ABLATION_AND_RECEIPT",
+    "minimum_mode": "BIND_THE_ACTUAL_TARGET_OR_ACCEPTANCE_ABLATION_BY_EXACT_SELECTED_EDIT_ID_AND_CONTENT_ADDRESSED_RECEIPT",
+    "comparison_order_requirement": "THE_TARGET_COMPARISON_ORDER_CERTIFICATE_MUST_NAME_THE_SAME_BOUND_ABLATION_ID_AND_PROVE_SELECTED_GT_ABLATED_AND_RESCUE_EQ_SELECTED"
+  },
+  "executable": {
+    "runtime": "canonical/runtime/p2_strong_quality_visible_certifier_v4.py",
+    "sha256": "414c4788b0fde54d419cf3705a73e132e111806467863440bdf17e77e16899e2",
+    "tests": "canonical/tests/test_p2_strong_quality_visible_certifier_v4.py",
+    "test_sha256": "edac5513fd846c70d672ce9412743cae3ff899e43763249218a28ff050f9531a"
+  },
+  "preserved": [
+    "LOSSLESS_P2_MEMBERSHIP",
+    "BASELINE_LAYOUT_NONOBSCURING",
+    "ACTUAL_OR_LEGACY_MECHANICS_BASELINE_BINDING",
+    "NATIVE_MECHANICAL_GATE_WHEN_LOAD_BEARING",
+    "EXACT_SELECTED_PLAN_BINDING",
+    "EXACT_LOAD_BEARING_ABLATION_BINDING",
+    "SELECTED_GT_BASELINE",
+    "SELECTED_GT_ABLATED",
+    "RESCUE_EQ_SELECTED",
+    "VISIBLE_GROUNDING_REQUIRED_ANALYSIS_AUDIENCE_AND_NONOBSCURING_GATES"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_CURRENT_AA_BRIEFCASE_OR_GDPVAL_TARGET_ABLATION_IDENTITY_IS_ALREADY_BOUND.",
+    "NO_CLAIM_PROFESSIONAL_QUALITY_IS_CLOSED.",
+    "NO_CLAIM_ANY_ARBITRARY_ABLATION_IS_ACCEPTABLE.",
+    "NO_U_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
