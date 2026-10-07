@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_AUTOPILOT_ACTIVATION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ACTIVATION__LOCAL_6_OF_6_PASS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem": "HUMAN_OR_CHAT_LEVEL_REPLANNING_AND_SERIAL_DISPATCH_ADD AVOIDABLE WALL_CLOCK; TB_SCIENCE ALSO LOST AN IRREVERSIBLE SLOT BECAUSE THE CARRIER OVERLAID TOP_LEVEL_ROUTE_BYTES WITHOUT CLOSED TRANSITIVE LOCAL_RUNTIME_DEPENDENCIES.",
+  "mechanisms": {
+    "terminal_autopilot": {
+      "runtime": "canonical/runtime/terminal_autopilot_v1.py",
+      "state": "canonical/governance/TERMINAL_AUTOPILOT_CURRENT_STATE_20261007_V1.json",
+      "effects": [
+        "FAN_OUT_ALL_RUNNABLE_INDEPENDENT_TERMINAL_OBLIGATIONS_UP_TO_AVAILABLE_CONCURRENCY",
+        "RACE_SCOPE_COMPLETE_UNIVERSAL_COVER_AGAINST_DIRECT_EVIDENCE_LANES",
+        "KEEP_BLOCKER_REPAIR_PARALLEL_WITH_UNRELATED_EVIDENCE_WORK",
+        "DEDUPE_ACTIVE_WORK_BY_DETERMINISTIC_LEASE_KEYS",
+        "AUTOMATIC_RESULT_TO_VERIFY_TO_PROMOTE_HANDOFF_PLANNING",
+        "CANCEL_WORK_WHOSE_TARGETS_ARE_ALREADY_CLOSED",
+        "RECOMPUTE_AFTER_EVERY_RESULT_VERIFICATION_PROMOTION_BLOCKER_CLOSURE_OR_TERMINAL_RECEIPT"
+      ]
+    },
+    "carrier_dependency_closure": {
+      "runtime": "canonical/runtime/transitive_runtime_dependency_closure_v1.py",
+      "effects": [
+        "RECURSIVELY_DISCOVER_LOCAL_CANONICAL_PYTHON_IMPORTS",
+        "FAIL_CLOSED_IF_ANY_TRANSITIVE_CANONICAL_MODULE_IS_MISSING",
+        "EMIT_CONTENT_ADDRESSED_EXACT_FILE_SET_FOR_CARRIER_OVERLAY",
+        "REQUIRE_INDEPENDENT_VERIFICATION_BEFORE_IRREVERSIBLE_TASK_EXPOSURE"
+      ],
+      "immediate_target": "TB_SCIENCE_RANK9_PREEXPOSURE_CARRIER_CLOSURE"
+    }
+  },
+  "expected_current_plan": {
+    "repair_lanes": 1,
+    "universal_route_races": 1,
+    "direct_evidence_lanes_runnable_now": 12,
+    "direct_evidence_lanes_blocked_now": 1,
+    "total_parallel_dispatch_candidates_now": 14,
+    "max_concurrency": 16
+  },
+  "hard_rules": [
+    "NO_GENERIC_SOLVER_ROUTER_OR_WORLD_MODEL_WORK",
+    "NO_POSITIVE_INCREMENTAL_SPEND",
+    "NO_DUPLICATE_ACTIVE_LEASE",
+    "NO_IRREVERSIBLE_SLOT_EXPOSURE_BEFORE_EXACT_TRANSITIVE_CARRIER_CLOSURE_IS_INDEPENDENTLY_VERIFIED",
+    "NO_SELF_PROMOTION",
+    "NO_TERMINAL_CREDIT_FROM_PLANNING_OR_AUTOMATION_ALONE"
+  ],
+  "authority": {
+    "planning": true,
+    "execution": false,
+    "verification": false,
+    "promotion": false,
+    "terminal": false
+  },
+  "verification": {
+    "local_unit_tests_run": 6,
+    "local_failures": 0,
+    "local_errors": 0,
+    "independent_replay_required": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  }
+}
