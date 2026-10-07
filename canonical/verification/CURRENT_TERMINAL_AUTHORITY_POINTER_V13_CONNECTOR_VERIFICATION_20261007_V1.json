@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V13_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__P2_STRUCTURAL_MEMBERSHIP_PREFLIGHT_BOUND__COUNTS_UNCHANGED__TERMINAL_FALSE",
+  "subject": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "d7773f5e2333b85b10b93ab51630e16bb93c199a",
+    "predecessor_git_blob_sha": "db337c81e6b7f890f17da7f532c4ca96c8cacadf"
+  },
+  "bindings": {
+    "preflight": {
+      "path": "canonical/governance/P2_PROFESSIONAL_MEMBERSHIP_PREFLIGHT_20261007_V1.json",
+      "git_blob_sha": "7bbd0d288d4c191b090a1fbf417cb30452ca95d5"
+    },
+    "replay": {
+      "path": "canonical/verification/P2_PROFESSIONAL_MEMBERSHIP_PREFLIGHT_C2_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "332995baed4640063a8f558c58854fd9a364faf0"
+    }
+  },
+  "verified": {
+    "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V13",
+    "open_ABC_refinement_family_count": 13,
+    "known_sound_D_B_certificate_record_count": 17,
+    "terminal": false,
+    "p2_professional_structural_membership_preflight_bound": true,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "boundary": [
+    "PREFLIGHT_BLOCKS_ONLY_DECLARED_STRUCTURAL_OMISSIONS",
+    "SEMANTIC_COMPLETENESS_AND_AUTHORITY_DISCOVERY_REMAIN_OPEN",
+    "NO_AA_BRIEFCASE_OR_GDPVAL_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
