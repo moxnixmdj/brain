@@ -1,17 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_GDPVAL_TARGET_RELATIVE_INFORMATION_CUT_V1",
   "date": "2026-10-07",
-  "status": "CURRENT_BOUND_INFORMATION_THEOREM__STRUCTURAL_ACCEPTANCE_AND_OWNER_LAYER_TARGET_RELATIVE_ROUTES_MUST_TOURNAMENT_IN_PARALLEL__ZERO_CREDIT",
+  "status": "CURRENT_BOUND_INFORMATION_THEOREM__V21_V6_BASE__STRUCTURAL_ACCEPTANCE_AND_OWNER_LAYER_TARGET_RELATIVE_ROUTES_MUST_TOURNAMENT_IN_PARALLEL__ZERO_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "exact_bindings": {
-    "current_authority_v19": {
-      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-      "git_blob_sha": "79f6d4eb3a9e18a7ad37dfd674a3ac0a14d36edb"
-    },
-    "current_reality_cut_v5": {
-      "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V5.json",
-      "git_blob_sha": "c572bac44169890417e209e81254469ce6a1004b"
-    },
     "rubric_acceptance_cut": {
       "path": "canonical/governance/GDPVAL_RUBRIC_ACCEPTANCE_COMPLEMENT_CUT_20261007_V1.json",
       "git_blob_sha": "e4811ff17371f6da78e3d2dc6a44cf258789a037"
@@ -39,6 +31,14 @@
     "p2_strong_quality": {
       "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_SUBREGION_TOP_LAW_20261007_V1.json",
       "git_blob_sha": "ec0831f086823995b671c33ff24cd76de3b0250e"
+    },
+    "current_authority_v21": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "b9668f764d81e214223029171affdeb98c7a9ab5"
+    },
+    "current_reality_cut_v6": {
+      "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V6.json",
+      "git_blob_sha": "4a69f526218524f29146444e00c54c6990f1421e"
     }
   },
   "premises": {
@@ -50,7 +50,10 @@
     "current_real_gdpval_p2_strong_quality_admission_count": 0,
     "current_owner_opus55_reference_elo": 1867,
     "brain_owner_layer_elo_score_bound": false,
-    "rubric_acceptance_cut_itself_claims_rubric_extraction_replaces_pairwise_preference": false
+    "rubric_acceptance_cut_itself_claims_rubric_extraction_replaces_pairwise_preference": false,
+    "current_information_wake_class_count": 15,
+    "current_positive_reality_class_count": 14,
+    "current_minimum_lane_count": 9
   },
   "information_theorem": {
     "public_observation_symbol": "O",
