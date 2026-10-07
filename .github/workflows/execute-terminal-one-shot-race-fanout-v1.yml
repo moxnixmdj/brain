@@ -32,6 +32,83 @@ jobs:
           python-version: '3.12'
       - name: Install minimal runtime dependencies
         run: python -m pip install --disable-pip-version-check --no-input "pydantic>=2,<3" pytest
+      - name: Hydrate current continuous OBS context into reversible race missions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, pathlib
+          root=pathlib.Path('.')
+          def sha256(rel):
+              return hashlib.sha256((root/rel).read_bytes()).hexdigest()
+          pointer=json.loads((root/'canonical/CANONICAL_POINTER.json').read_text())
+          generation=pointer['canonical_generation']
+          obs={
+            'schema':'PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1',
+            'status':'CURRENT',
+            'canonical_generation':generation,
+            'canonical_state_dependencies':[
+              {'path':'canonical/CANONICAL_POINTER.json','sha256':sha256('canonical/CANONICAL_POINTER.json')},
+              {'path':'canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json','sha256':sha256('canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json')},
+              {'path':'canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json','sha256':sha256('canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json')},
+            ],
+            'dependency_inventory_complete':True,
+            'material_world_state_dependencies_complete':True,
+            'information_boundary_complete':True,
+            'information_policy':{
+              'mode':'NO_EXTERNAL_INFORMATION',
+              'allowed_exact_sources':[],
+              'allowed_external_tool_kinds':[],
+            },
+            'unknown_material_dependencies':[],
+            'stale_authority_absent':True,
+            'valid_proof_action_priority':True,
+            'obs_layers_current':{
+              'goal':True,'capability':True,'blocker':True,'solution':True,
+              'verification':True,'inherited_system':True,'obs_process':True,
+            },
+            'dependencies':[
+              {
+                'dependency_id':'CURRENT_TERMINAL_AUTHORITY',
+                'class':'EXECUTION_AUTHORITY','material':True,'volatility':'STATIC',
+                'scope':'GLOBAL','status':'READY',
+                'evidence':['canonical/governance/CURRENT_TERMINAL_AUTHORITY.json'],
+              },
+              {
+                'dependency_id':'CURRENT_ACCEPTANCE_QUOTIENT',
+                'class':'CANONICAL_STATE','material':True,'volatility':'STATIC',
+                'scope':'GLOBAL','status':'READY',
+                'evidence':['canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json'],
+              },
+              {
+                'dependency_id':'CURRENT_TERMINAL_EXECUTION_ROOT',
+                'class':'EXECUTION_AUTHORITY','material':True,'volatility':'STATIC',
+                'scope':'GLOBAL','status':'READY',
+                'evidence':['canonical/governance/TERMINAL_EXECUTION_ROOT_20261007_V1.json'],
+              },
+              {
+                'dependency_id':'TERMINAL_AUTOPILOT_EXECUTOR',
+                'class':'EXECUTION_SURFACE','material':True,'volatility':'STATIC',
+                'scope':'GLOBAL','status':'READY',
+                'evidence':['canonical/runtime/terminal_autopilot_executor_v1.py'],
+              },
+            ],
+          }
+          for rid in ('U','O','Q','C','F','G'):
+              mp=root/f'canonical/astra_runtime/missions/ASTRA_TERMINAL_{rid}_RACE_20261007_V1.json'
+              tp=root/f'canonical/same_identity_worker/tasks/SI_TERMINAL_{rid}_RACE_20261007_V1.json'
+              mission=json.loads(mp.read_text())
+              mission['continuous_obs']=obs
+              mp.write_text(json.dumps(mission,indent=2,sort_keys=True)+'\n')
+              task=json.loads(tp.read_text())
+              task['mission_sha256']=hashlib.sha256(mp.read_bytes()).hexdigest()
+              tp.write_text(json.dumps(task,indent=2,sort_keys=True)+'\n')
+          PY
+          for id in U O Q C F G; do
+            PYTHONPATH=. python canonical/runtime/continuous_obs_runtime.py \
+              --root . \
+              --work-file "canonical/astra_runtime/missions/ASTRA_TERMINAL_${id}_RACE_20261007_V1.json" >/dev/null
+          done
       - name: Verify planner and executor before launch
         run: |
           set -euo pipefail
