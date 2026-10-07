@@ -1,5 +1,8 @@
 name: Verify tournament failure capability compiler v1
 on:
+  push:
+    branches:
+      - 'tournament-failure-capability-compiler-v1'
   pull_request:
     paths:
       - 'canonical/governance/TOURNAMENT_FAILURE_CAPABILITY_LAW_20261007_V1.json'
