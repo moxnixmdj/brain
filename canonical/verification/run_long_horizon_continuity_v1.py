@@ -29,13 +29,16 @@ if {expect_checkpoint!r}:
 else:
     seen={{}}
     def ok(argv,cwd,env):
+        seen["argv"]=list(argv)
         seen["agent"]=env.get("PROJECT_BRAIN_AGENT_ID")
         seen["task"]=env.get("PROJECT_BRAIN_TASK_ID")
         return m.RuntimeResult(0,"ok\\n","")
     code,receipt=m.execute_claimed_task(root,task,state,evidence,{AGENT!r},ok)
     assert code==0 and receipt["terminal_state"]=="COMPLETE"
     assert receipt["same_identity_bound"] is True
-    assert seen=={{"agent":{AGENT!r},"task":{TASK_ID!r}}}
+    assert seen["agent"]=={AGENT!r}
+    assert seen["task"]=={TASK_ID!r}
+    assert seen["argv"]==[sys.executable,"canonical/runtime/root3_production_astra_launcher_v1.py","canonical/missions/mission.json"]
 print("PASS")
 """
 
