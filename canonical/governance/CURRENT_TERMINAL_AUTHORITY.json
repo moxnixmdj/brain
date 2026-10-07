@@ -161,7 +161,8 @@
       "path": "canonical/governance/P2_PROFESSIONAL_MEMBERSHIP_PREFLIGHT_20261007_V1.json",
       "git_blob_sha": "7bbd0d288d4c191b090a1fbf417cb30452ca95d5",
       "independent_verification": {
-        "path": "canonical/verification/P2_PROFESSIONAL_MEMBERSHIP_PREFLIGHT_C2_VERIFICATION_20261007_V1.json"
+        "path": "canonical/verification/P2_PROFESSIONAL_MEMBERSHIP_PREFLIGHT_C2_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "332995baed4640063a8f558c58854fd9a364faf0"
       }
     }
   },
