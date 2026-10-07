@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_DEONTIC_POLICY_ADEQUACY_AUTH_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SOUNDNESS_REPAIR__DEONTIC_SOURCE_ENTAILMENT_CANNOT_SELF_CERTIFY_POLICY_ADEQUACY__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "stable_terminal_pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "d9c41440ec78886b5ba44c7eeda6f0c2680839ae"
+    },
+    "deontic_extension": {
+      "path": "canonical/governance/CERTIFIED_DEONTIC_SOURCE_EXTENSION_20261007_V1.json",
+      "git_blob_sha": "d547925b957b937fb34745e5601bc83bc0ff5b37"
+    },
+    "adequacy_auth_kernel": {
+      "path": "canonical/runtime/proof_carrying_semantic_refinement_v3.py",
+      "git_blob_sha": "a26daf2ab5d3c4c5192710a74145e1d937ad6128"
+    },
+    "repaired_bridge": {
+      "path": "canonical/runtime/proof_carrying_deontic_refinement_v1.py",
+      "git_blob_sha": "4a0fadb6e9cc093f49750681692d31cc70935972"
+    },
+    "tests": {
+      "path": "canonical/tests/test_proof_carrying_deontic_refinement_v1.py",
+      "git_blob_sha": "adce6ae65a4daaf3039a4ac7039a7b4a5656e4cd"
+    }
+  },
+  "defect": {
+    "prior_behavior": "THE_DEONTIC_BRIDGE_RETURNED_MONOTONE_KERNEL_CERTIFIED_COMMON_POLICIES_DIRECTLY_AFTER_SOURCE_ENTAILMENT.",
+    "why_unsound": "THE_CURRENT_TERMINAL_POINTER EXPLICITLY FORBIDS TREATING POLICY CONDITION ENTAILMENT AS POLICY ADEQUACY. POSITIVE COVER REQUIRES CONTENT_ADDRESSED BRAIN_OWNED ADEQUACY EVIDENCE PLUS INDEPENDENT VERIFICATION.",
+    "terminal_risk": "A SOURCE_ALIGNED REQUIRED_OR_PROHIBITED CLAUSE COULD OTHERWISE MINT A FALSE COMMON_POLICY_CERTIFIED EDGE AND UNSOUNDLY SHRINK U."
+  },
+  "repair": {
+    "source_entailment_without_adequacy": "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED",
+    "common_policy_certified_requires": [
+      "EXACT_POLICY_CONDITION",
+      "CONTENT_ADDRESSED_POLICY_ADEQUACY_CERTIFICATE",
+      "BRAIN_OWNED_TRUE",
+      "LOAD_BEARING_CONSTRAINTS_PRESERVED_TRUE",
+      "INDEPENDENT_VERIFICATION_RECEIPT_BOUND_TO_THE_EXACT_ADEQUACY_CERTIFICATE"
+    ],
+    "forged_or_drifted_binding": "REJECTED__NO_POLICY_CERTIFICATION",
+    "semantic_kernel_fail_closed": "PROPAGATED_FAIL_CLOSED"
+  },
+  "consequence": {
+    "deontic_source_extension_remains_reusable": true,
+    "deontic_entailment_alone_is_positive_U_cover": false,
+    "positive_U_cover_requires_authenticated_policy_adequacy": true,
+    "finance_family_closed": false,
+    "U_empty": false,
+    "D_finality": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_CLOSURE",
+    "NO_FINANCE_OR_OTHER_FAMILY_CLOSURE_FROM_THIS_REPAIR",
+    "NO_U_EMPTY_CLAIM",
+    "NO_D_FINALITY_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
