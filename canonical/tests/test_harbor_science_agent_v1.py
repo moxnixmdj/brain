@@ -194,6 +194,36 @@ class ScienceAgentTests(unittest.TestCase):
             with self.assertRaises(Exception):
                 asyncio.run(s.run_science_goal("goal",env,max_cycles=1))
 
+    def test_declared_spec_inputs_are_snapshotted_before_planning(self):
+        env=Env()
+        seen_prompts=[]
+        def capture(prompt, timeout_s=20):
+            seen_prompts.append(prompt)
+            return {
+                "text":json.dumps({
+                    "material_requirements":["R1"],
+                    "candidates":[{
+                        "action_id":"a",
+                        "covers":["R1"],
+                        "command":"echo work",
+                        "verify_command":"echo verify"
+                    }]
+                }),
+                "model":"synthetic-fixed-substrate",
+            }
+        goal="Treat /app/spec/plant_model.md as authoritative."
+        with patch.object(s.science_planner, "plan", capture):
+            result=asyncio.run(s.run_science_goal(goal,env,max_cycles=1))
+        self.assertEqual(result["status"],"FINISHED",result)
+        self.assertTrue(
+            any(cmd.startswith("test -f /app/spec/plant_model.md && sha256sum") for cmd in env.commands),
+            env.commands,
+        )
+        self.assertEqual(len(seen_prompts),1)
+        self.assertIn("Brain-declared authoritative local inputs",seen_prompts[0])
+        self.assertIn("/app/spec/plant_model.md",seen_prompts[0])
+        self.assertIn("BRAIN_DECLARED_INPUT_SNAPSHOT",seen_prompts[0])
+
     def test_source_gate_projection_is_brain_owned_general_substrate(self):
         route={
             "benchmark_harness_zero_cost":True,
