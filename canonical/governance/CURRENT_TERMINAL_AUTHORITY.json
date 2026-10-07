@@ -518,6 +518,12 @@
     "db_escape_catchall_total_abstraction": {
       "path": "canonical/governance/DB_ESCAPE_CATCHALL_TOTAL_ABSTRACTION_REDUCTION_20261007_V1.json",
       "git_blob_sha": ""
+    },
+    "escape_occupancy_nonentailment": {
+      "path": "canonical/governance/ESCAPE_OCCUPANCY_NONENTAILMENT_20261007_V1.json"
+    },
+    "above_exponential_no_free_lunch_frontier": {
+      "path": "canonical/governance/ABOVE_EXPONENTIAL_NO_FREE_LUNCH_FRONTIER_20261007_V1.json"
     }
   },
   "live_truth": {
@@ -771,7 +777,13 @@
     "historical_13_open_refinement_families_are_primary_jobs": false,
     "historical_13_open_refinement_families_are_falsification_partitions": true,
     "total_abstraction_gap_closed_structurally": true,
-    "current_escape_policy_adequacy_closed": false
+    "current_escape_policy_adequacy_closed": false,
+    "bureaucracy_collapse_active": true,
+    "current_terminal_root_predicate": "PROVE_NOT_X",
+    "current_terminal_root_X": "AT_LEAST_ONE_ACTUAL_USEFUL_TARGET_LAW_OCCUPIES_CURRENT_UNDOMINATED_ESCAPE_E",
+    "current_evidence_proves_X": false,
+    "current_evidence_proves_not_X": false,
+    "current_terminal_root_single_bit_unresolved": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -798,7 +810,13 @@
     "primary_normal_form": "ONE_LIVE_PRIMITIVE__ESCAPE_POLICY_ADEQUACY",
     "escape_definition": "E=S_TRACE_MINUS_UNION_OF_SOUND_RECOGNIZED_D_B_REGIONS",
     "escape_closure_rule": "PROVE_ONE_BRAIN_OWNED_DEPLOYABLE_POLICY_ADEQUATE_OVER_CURRENT_E__OR_RETURN_ONE_CONSTRUCTIVE_COUNTEREXAMPLE_AND_SPLIT_ONLY_ON_THE_MINIMUM_POLICY_CHANGING_PREDICATE",
-    "historical_13_refinement_rule": "FALSIFICATION_ONLY__NOT_PRIMARY_SCHEDULER_JOBS"
+    "historical_13_refinement_rule": "FALSIFICATION_ONLY__NOT_PRIMARY_SCHEDULER_JOBS",
+    "terminal_root": "PROVE_NOT_X_WHERE_X_MEANS_AN_ACTUAL_USEFUL_TARGET_LAW_OCCUPIES_CURRENT_UNDOMINATED_ESCAPE_E",
+    "only_sound_instant_routes": [
+      "EXPAND_D_B_WITH_A_SCOPE_COMPLETE_TOP_LAW_OR_DOMINANCE_CERTIFICATE_UNTIL_TARGET_OCCUPANCY_OF_E_IS_IMPOSSIBLE",
+      "PROVE_STRUCTURAL_TARGET_NONOCCUPANCY_OF_E",
+      "OTHERWISE_BIND_ONLY_THE_MINIMUM_TARGET_INFORMATION_THAT_DECIDES_SURVIVING_ESCAPE_OCCUPANCY"
+    ]
   },
   "scheduling_lock": [
     "SCHEDULE_ONLY_THE_SINGLE_LIVE_U_PRIMITIVE_ESCAPE_POLICY_ADEQUACY.",
