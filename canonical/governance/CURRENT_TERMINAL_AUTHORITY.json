@@ -22,11 +22,11 @@
       }
     },
     "db_cache_union": {
-      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V12.json",
-      "git_blob_sha": "0c98bea583d35392cbde49e2830b283bdbb09d06",
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V13.json",
+      "git_blob_sha": "2499d6cbcc806d4466a4788a31606174fbc54551",
       "independent_verification": {
-        "path": "canonical/verification/DB_EXISTING_EVIDENCE_SATURATION_UNION_V12_CONNECTOR_VERIFICATION_20261007_V2.json",
-        "git_blob_sha": "006023b2d89a5e6f869a92a013b426409793e420"
+        "path": "canonical/verification/DB_EXISTING_EVIDENCE_SATURATION_UNION_V13_CONNECTOR_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "c3910d9b76a9937bbd5fa9b6a11638dce198b953"
       }
     },
     "single_abc_frontier": {
