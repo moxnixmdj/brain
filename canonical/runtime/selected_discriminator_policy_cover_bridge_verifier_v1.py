@@ -1,3 +1,4 @@
+# retrigger after trusted pytest harness fix
 # current authority rebinding verified via path-scoped CI
 from __future__ import annotations
 import hashlib, json
