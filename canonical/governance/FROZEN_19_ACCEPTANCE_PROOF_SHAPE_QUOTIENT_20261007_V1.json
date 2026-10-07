@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_SCHEDULING_COMPRESSION__24_OPEN_ATOMS_TO_THREE_REUSABLE_PROOF_ENGINES__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "fixed_bar_truth_repair": {
+      "path": "canonical/governance/PUBLIC_FIXED_BAR_AGGREGATE_SCOPE_ADMISSION_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "02cd9d5b3319c0cd7c051e9e1a335613b81f17ea"
+    }
+  },
+  "exact_current_counts": {
+    "atoms_total": 38,
+    "atoms_proved": 14,
+    "atoms_open": 24
+  },
+  "proof_engines": [
+    {
+      "id": "E1_PUBLIC_FIXED_BAR_AGGREGATE",
+      "semantics": "ONE_GENERIC_CONTAMINATION_SAFE_SCOPE_AGGREGATE_EVALUATOR_AND_ADMISSION_COMPILER__NO_CASE_LEVEL_OPUS_RELATION_REQUIRED",
+      "open_atoms": 14,
+      "unique_measurement_facts": 13,
+      "shared_fact": [
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "rule": "ONE_VALID_AA_BRIEFCASE_SCOPE_RESULT_MAY_DISCHARGE_BOTH_ATOMS_WHEN_EACH_FAMILY_SCOPE_BINDING_IS_PROVED"
+    },
+    {
+      "id": "E2_MATCHED_PORTFOLIO_NONINFERIORITY_AND_INVARIANTS",
+      "semantics": "ONE_GENERIC_FROZEN_PORTFOLIO_COMPARATOR_OR_STRONGER_SCOPE_COMPLETE_PROOF_CAN_CLOSE_SUCCESS_AND_INVARIANT_ATOMS_TOGETHER",
+      "packages": [
+        {
+          "id": "AGENCY",
+          "atoms": [
+            "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+            "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+          ]
+        },
+        {
+          "id": "INSTRUCTION_SCOPE",
+          "atoms": [
+            "IF_SCOPE_BOUNDARY_NONINFERIOR",
+            "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+          ]
+        },
+        {
+          "id": "COMPOSITION",
+          "atoms": [
+            "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+            "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+          ]
+        },
+        {
+          "id": "SYNTHESIS",
+          "atoms": [
+            "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+          ]
+        },
+        {
+          "id": "VISION_NONCHART",
+          "atoms": [
+            "VISION_DENSE_NONCHART_SCOPE"
+          ]
+        }
+      ],
+      "open_atoms": 8,
+      "unique_portfolio_or_stronger_proof_packages": 5
+    },
+    {
+      "id": "E3_DIRECT_SCOPE_AND_DEPENDENCY_CLOSURE",
+      "semantics": "TARGET_FREE_STRUCTURAL_SCOPE_PROOF_FIRST__NO_MATCHED_OPUS_CALL_BY_DEFAULT",
+      "primary_open_atoms": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT"
+      ],
+      "derived_open_atoms": [
+        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+      ],
+      "rule": "COMPOSITION_COMPONENT_SCOPED_PROOFS_IS_DEPENDENCY_DERIVED_AFTER_THE_COMPONENT_SCOPES_USED_BY_FINAL_COMPOSITION_ARE_CLOSED__DO_NOT_SCHEDULE_AN_INDEPENDENT_BENCHMARK"
+    }
+  ],
+  "scheduler": [
+    "DO_NOT_SCHEDULE_24_ATOMS_AS_24_RESEARCH_PROGRAMS.",
+    "MAINTAIN_EXACT_ATOMIC_TRUTH_FOR_FINAL_REDUCER_BUT_EXECUTE_ONLY_THE_THREE_REUSABLE_PROOF_ENGINES.",
+    "FOR_E1_REUSE_ONE_GENERIC_FIXED_BAR_AGGREGATE_PIPELINE_AND_ACQUIRE_ONLY_MISSING_SCOPE_RESULTS.",
+    "FOR_E2_RACE_EACH_MATCHED_PACKAGE_AGAINST_A_SCOPE_COMPLETE_ABSOLUTE_OR_UNIVERSAL_PROOF__ONE_PACKAGE_RECEIPT_MAY_CLOSE_MULTIPLE_ATOMS.",
+    "FOR_E3_USE_EXISTING_STRUCTURAL_PROOF_MACHINERY__COMPOSITION_DEPENDENCY_IS_DERIVED_NOT_A_SEPARATE_REALITY_WAKE.",
+    "ANY_STRONGER_SCOPE_COMPLETE_PROOF_THAT_DISCHARGES_MULTIPLE_FAMILIES_PREEMPTS_WEAKER_PER_SURFACE_EXECUTION."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_CURRENT_OPEN_FIXED_BAR_HAS_A_BRAIN_PASS_RESULT.",
+    "NO_CLAIM_THE_FIVE_MATCHED_PACKAGES_ARE_ALREADY_CLOSED.",
+    "NO_CLAIM_FINANCE_UNCOVERED_SCOPE_AUDIT_IS_CLOSED.",
+    "NO_CHANGE_TO_FROZEN_19_FAMILY_TERMINAL_SEMANTICS.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
