@@ -1,0 +1,21 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_UNIFIED_TYPED_EQUIVALENCE_CHECKER_V3_SPRITE_VERIFICATION",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_SPRITE_TWO_CLASS_PASS__ZERO_TERMINAL_CREDIT",
+  "carrier":{"provider":"SPRITES","sprite_name":"brain-root3-current-byte-replay-20261007-v1","sprite_id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e"},
+  "exact_blobs":{"checker":"d11732a6760fff86700c66364af03a48e017bf1b","v10_runtime":"91bdde7a88e90bb6a2e411072a1dadb715ff7052"},
+  "verified":{
+    "status":"PASS",
+    "sequence_programs":2955,
+    "sequence_equations":791,
+    "sequence_classes":809,
+    "sequence_witnesses":823,
+    "scalar_programs":1111,
+    "scalar_classes":203,
+    "scalar_characteristic_inputs":7,
+    "checker_payload_bytes":1702,
+    "joint_v10_checker_payload_bytes":3273,
+    "incremental_joint_bytes_vs_sequence_only_checker":421
+  },
+  "hard_nonclaims":["SEQUENCE_RULE_META_SOUNDNESS_REMAINS_TRUSTED","NO_TERMINAL_CREDIT"]
+}
