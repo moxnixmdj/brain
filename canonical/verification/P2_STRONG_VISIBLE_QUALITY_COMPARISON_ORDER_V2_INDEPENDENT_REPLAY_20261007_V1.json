@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_P2_STRONG_VISIBLE_QUALITY_COMPARISON_ORDER_V2_INDEPENDENT_REPLAY",
+  "date": "2026-10-07",
+  "status": "TWO_CARRIER_BYTE_IDENTICAL_REPLAY_PASS__11_OF_11_EACH__ZERO_GLOBAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/p2_strong_quality_visible_certifier_v2.py",
+    "sha256": "173b017ab3914c1cb6cfcbc8a30c9895c8343525b7ddb856ea524b78a706c19f",
+    "size": 9140
+  },
+  "tests": {
+    "path": "canonical/tests/test_p2_strong_quality_visible_certifier_v2.py",
+    "sha256": "5008993e93d0b1c56421d44e51a7bfafd54491ebb9374887482563daae08090d",
+    "size": 3033
+  },
+  "carriers": [
+    {
+      "provider": "SPRITES",
+      "sprite": "brain-root3-current-byte-replay-20261007-v1",
+      "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "tests_total": 11,
+      "tests_passed": 11,
+      "failures": 0
+    },
+    {
+      "provider": "SPRITES",
+      "sprite": "brain-heldout003-one-shot",
+      "sprite_id": "sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589",
+      "tests_total": 11,
+      "tests_passed": 11,
+      "failures": 0
+    }
+  ],
+  "verified": [
+    "LEGACY_FULL_RUBRIC_EQUIVALENCE_MODE_STILL_PASSES.",
+    "BOUND_COMPARISON_ORDER_MODE_PASSES_WITHOUT_FULL_RUBRIC_EQUIVALENCE.",
+    "MISSING_BOTH_ORDER_CERTIFICATE_MODES_FAILS_CLOSED.",
+    "COMPARISON_ORDER_RECEIPT_REQUIRED.",
+    "SELECTED_PLAN_IDENTITY_MUST_MATCH_RUNTIME_SELECTION.",
+    "ABLATED_EDIT_IDENTITY_MUST_MATCH_RUNTIME_ABLATION.",
+    "SELECTED_GT_BASELINE_REQUIRED.",
+    "SELECTED_GT_ABLATED_REQUIRED.",
+    "RESCUE_EQ_SELECTED_REQUIRED.",
+    "VISIBLE_AUDIENCE_GATE_REMAINS_FAIL_CLOSED.",
+    "LOSSLESS_MEMBERSHIP_GATE_REMAINS_REQUIRED."
+  ],
+  "boundary": [
+    "TESTS_VALIDATE_THE_CERTIFIER_MECHANICS_AND_FAIL_CLOSED_BINDING_ONLY.",
+    "NO_REAL_AA_BRIEFCASE_OR_GDPVAL_COMPARISON_ORDER_RECEIPT_IS_CREATED_BY_THE_TESTS.",
+    "NO_U_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
