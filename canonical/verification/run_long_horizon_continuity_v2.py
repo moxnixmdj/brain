@@ -224,7 +224,9 @@ def main() -> int:
     )
     mission_sha = sha_file(MISSION_PATH)
 
-    with tempfile.TemporaryDirectory(prefix="continuity-c-v7-") as td:
+    temp_parent = ROOT / "canonical" / "same_identity_worker" / "tmp"
+    temp_parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="continuity-c-v7-", dir=temp_parent) as td:
         temp = pathlib.Path(td)
         state = temp / "supervisor-state"
         evidence = temp / "supervisor-evidence"
