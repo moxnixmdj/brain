@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_PRIVATE_OPUS_ZERO_SPEND_CAPACITY_INFRASTRUCTURE_CLASSIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "TRUTH_REPAIR__CAPACITY_UNKNOWN__GITHUB_ACTIONS_PRE_STEP_FAILURE__NO_NEGATIVE_CAPACITY_INFERENCE",
+  "objective": "Classify the existing zero-spend exact-Opus capacity probes without confusing runner failure with absence of preexisting capacity.",
+  "observed_runs": [
+    {
+      "pull_request": 2779,
+      "workflow_run_id": 37564426193,
+      "workflow_job_id": 112608796478,
+      "workflow_conclusion": "failure",
+      "recorded_steps": [],
+      "inference_request_attempted": false
+    },
+    {
+      "pull_request": 2780,
+      "workflow_run_id": 37564450491,
+      "workflow_job_id": 112608873502,
+      "workflow_conclusion": "failure",
+      "recorded_steps": [],
+      "inference_request_attempted": false
+    },
+    {
+      "pull_request": 2782,
+      "workflow_run_id": 37564505034,
+      "workflow_job_id_first_attempt": 112609045320,
+      "workflow_job_id_rerun_attempt": 112614554894,
+      "workflow_conclusion_first_attempt": "failure",
+      "workflow_conclusion_rerun": "failure",
+      "recorded_steps_first_attempt": [],
+      "recorded_steps_rerun": [],
+      "rerun_request_accepted": true,
+      "inference_request_attempted": false
+    }
+  ],
+  "workflow_contract": {
+    "path": ".github/workflows/zero-spend-private-opus-capacity-probe.yml",
+    "model_inference_requests_by_design": 0,
+    "purchases_or_topups_by_design": 0,
+    "capacity_probe_requires_step_execution": true
+  },
+  "classification": {
+    "positive_preexisting_exact_opus_capacity_proved": false,
+    "absence_of_preexisting_exact_opus_capacity_proved": false,
+    "capacity_state": "UNKNOWN",
+    "blocking_layer": "GITHUB_ACTIONS_JOB_FAILED_BEFORE_ANY_RECORDED_STEP",
+    "negative_capacity_inference_forbidden": true
+  },
+  "scheduler_effect": [
+    "DO_NOT_RETRIGGER_DUPLICATE_CAPACITY_PROBES_UNTIL_THE_PRE_STEP_GITHUB_ACTIONS_FAILURE_MODE_CHANGES_OR_ANOTHER_ZERO_SPEND_OBSERVATION_CHANNEL_EXISTS.",
+    "DO_NOT_TREAT_THE_FAILED_RUNS_AS_EVIDENCE_THAT_EXACT_OPUS_CAPACITY_IS_ABSENT.",
+    "CONTINUE_ZERO_REALITY_OR_TARGET_FREE_SCOPE_CLOSURE_WHILE_COMPARATOR_CAPACITY_REMAINS_UNKNOWN."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_inference_requests": 0,
+    "purchases_or_topups": 0,
+    "terminal_credit_delta": 0
+  }
+}
