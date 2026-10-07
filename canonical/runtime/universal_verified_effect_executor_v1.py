@@ -114,9 +114,9 @@ def execute(
         if tool_id not in ALLOWED_TOOL_IDS:
             raise EffectExecutionError("TOOL_ID_NOT_ALLOWED")
         sandbox_rel = _safe_rel(executor_payload.get("sandbox_rel"))
-        if not isinstance(proposal, Mapping) or set(proposal) != {"tool_payload"}:
+        if not isinstance(proposal, Mapping) or set(proposal) != {"candidate_values"}:
             raise EffectExecutionError("EFFECT_PROPOSAL_FIELDS_INVALID")
-        tool_payload = proposal.get("tool_payload")
+        tool_payload = proposal.get("candidate_values")
         if not isinstance(tool_payload, Mapping):
             raise EffectExecutionError("TOOL_PAYLOAD_INVALID")
 
