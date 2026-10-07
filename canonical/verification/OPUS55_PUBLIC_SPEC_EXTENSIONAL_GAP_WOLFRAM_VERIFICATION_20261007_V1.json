@@ -1,0 +1,32 @@
+{
+  "schema":"PROJECT_BRAIN_OPUS55_PUBLIC_SPEC_EXTENSIONAL_GAP_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_WOLFRAM_COUNTERMODEL_PASS__PUBLIC_SPEC_NOT_EXTENSIONALLY_COMPLETE__ZERO_CREDIT",
+  "subject":{
+    "governance":{"path":"canonical/governance/OPUS55_PUBLIC_SPEC_EXTENSIONAL_GAP_FALSIFICATION_20261007_V1.json","git_blob_sha":"3a71c1ee7c6f751abe3e7ee4fb9291e3533fda1b"},
+    "runtime":{"path":"canonical/runtime/opus55_public_spec_extensional_gap_v1.py","git_blob_sha":"c4bb96fbf34ae1ab170b78f9841cc9447838e8fe"},
+    "tests":{"path":"canonical/tests/test_opus55_public_spec_extensional_gap_v1.py","git_blob_sha":"30af43345d80aad6a5b9f5aea02ee6a6994b34bb"}
+  },
+  "independent_provider":{
+    "provider":"WOLFRAM_LANGUAGE",
+    "finite_witness":{
+      "observed_public_values_identical":true,
+      "brain_dominates_world_1":true,
+      "brain_dominates_world_2":false,
+      "same_public_information_different_terminal_truth":true
+    }
+  },
+  "verified_conclusion":"A FIXED PUBLIC INTERFACE AND IDENTICAL FINITE PUBLIC OBSERVATIONS DO NOT BY THEMSELVES IDENTIFY THE TARGET LAW ON AN UNBOUND WITHIN-INTERFACE CONTEXT. THEREFORE THEY CANNOT BY THEMSELVES CLOSE EXTENSIONAL TARGET COVERAGE OR GLOBAL TARGET-RELATIVE DOMINANCE.",
+  "preserved_routes":[
+    "STRUCTURAL_IDENTIFIABILITY",
+    "SOUND_SUPERDOMAIN_DOMINANCE",
+    "GENERATOR_COMPLETENESS_WITH_SOUND_TRANSFER_AND SEMANTIC BINDING",
+    "COMPLETE_TARGET SPECIFICATION OR WHITEBOX BOUND"
+  ],
+  "hard_nonclaims":[
+    "NO CLAIM THE ACTUAL OPUS55 TARGET HAS A SUPERIOR HIDDEN CONTEXT.",
+    "NO CLAIM ALL ZERO-REALITY A ROUTES ARE DEAD.",
+    "NO TERMINAL ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT."
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
