@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_V5_POLICY_ADEQUACY_AUTH_INDEPENDENT_REPLAY_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_REPLAY_PASS__3_OF_3__SELF_CERTIFICATION_REMOVED__ZERO_TERMINAL_CREDIT",
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/semantic_v4_v5_auth_replay_20261007"
+  },
+  "replay": {
+    "tests_run": 3,
+    "tests_passed": 3
+  },
+  "verified": [
+    "V5_SOURCE_ENTAILMENT_WITHOUT_ADEQUACY_BINDING_RETURNS_ADEQUACY_UNAUTHENTICATED",
+    "DEFINED_TERM_RELABELING_REMAINS_REJECTED",
+    "UNSUPPORTED_PARAPHRASE_REMAINS_UNPROVED"
+  ],
+  "hard_nonclaims": [
+    "NO_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
