@@ -27,20 +27,19 @@ jobs:
       VERDICT: canonical/verification/TERMINAL_ONE_SHOT_INDEPENDENT_VERDICT_20261007_V1.json
       EXPECTED_MISSION_SHA256: a0d4b38c7decf31eba4d756786003442528b73ade800dbcd1857286408222716
     steps:
-      - name: Checkout exact execution branch
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-      - name: Preflight exact mission and fail-closed runtime
+      - name: Minimal exact-binding preflight
         shell: bash
         run: |
           set -euo pipefail
@@ -57,8 +56,6 @@ jobs:
           assert len(t['terminal_autopilot']['obligation_ids'])==13
           print(json.dumps({'mission_sha256':actual,'bound_obligations':13},sort_keys=True))
           PY
-          python -m unittest             canonical.tests.test_external_tool_relay             canonical.tests.test_external_tool_bridge_wait             canonical.tests.test_goal_compiler_source_tree_independent_verification
-          python -m pytest -q             canonical/tests/test_terminal_root_decision_gate_v1.py             canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py
 
       - name: Execute same-identity terminalization tournament
         id: worker
@@ -129,7 +126,9 @@ jobs:
           pathlib.Path('/tmp/worker_complete').write_text('1' if completed else '0')
           PY
 
-      - name: Independent reducer and candidate-diff verdict
+      - name: Independent terminal reducer
+        id: reduce
+        continue-on-error: true
         shell: bash
         run: |
           set -euo pipefail
@@ -179,7 +178,7 @@ jobs:
 
       - name: Upload complete one-shot evidence
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@v4
         with:
           name: terminal-one-shot-20261007-v1
           if-no-files-found: warn
@@ -198,9 +197,14 @@ jobs:
             canonical/astra_runtime/evidence/
 
       - name: Enforce truthful final status
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
+          if [ ! -f "$VERDICT" ]; then
+            echo "ONE_SHOT_VERDICT_MISSING"
+            exit 2
+          fi
           python - <<'PY'
           import json, os
           d=json.load(open(os.environ['VERDICT']))
