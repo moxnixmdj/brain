@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_PUBLIC_EXECUTION_RECEIPT_V1",
+  "date": "2026-10-07",
+  "status": "PASS__COMPLETE_PUBLIC_220_STRUCTURAL_RELOCALIZATION__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "brain_source_commit_sha": "faf0e0a2a9034bdb7df85924333f7fc47ae0a2a2",
+    "runtime_path": "canonical/runtime/gdpval_semantic_complement_localizer_v2.py",
+    "runtime_git_blob_sha": "347607991ccd68c9a27b0afcb56a271f45ed0326",
+    "test_git_blob_sha": "8f7f70f5007a9fd3e4cff668559fd9aab6586bf4"
+  },
+  "independent_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 2395,
+    "head_sha": "8ac358498112229ff2f805f6c9f25be45279b4d3",
+    "manifest_git_blob_sha": "c590c578ef08f6d711800d5328d10d9c302de9c8",
+    "workflow_run_id": 37623473395,
+    "workflow_job_id": 112799252406,
+    "conclusion": "success",
+    "unit_tests_run": 4,
+    "unit_test_failures": 0,
+    "exact_brain_bytes_step": "success",
+    "execution_step": "success"
+  },
+  "result": {
+    "raw_result_size_bytes": 249157,
+    "raw_result_sha256": "494730d013e1149ed1b4f0d9cb534cdb2fe35a7dfe35bf50b5ac17115d6e17f4",
+    "artifact_id": 11482837744,
+    "artifact_name": "gdpval-public-220-isolated-v1",
+    "artifact_zip_size_bytes": 23766,
+    "artifact_zip_sha256": "2cf6ae9ae33ee84188b4354d96b064beb672979bee06e26cf32f1954de59ae95",
+    "artifact_expires_at": "2027-01-05T12:46:46Z",
+    "population": {
+      "task_count": 220,
+      "row_indices_contiguous": true,
+      "unique_task_ids": true,
+      "population_manifest_sha256": "b86c134c72f911f7170206b30bc7b31742a92f5f9fb3cbd667320993963d3905"
+    },
+    "aggregate": {
+      "baseline_explicit_obligation_count": 154,
+      "baseline_ignored_segment_count": 0,
+      "baseline_unresolved_segment_count": 5081,
+      "bounded_lexical_consensus_unit_count": 4293,
+      "bounded_lexical_fail_closed_segment_count": 942,
+      "contextual_reference_candidate_claim_count": 1,
+      "contextual_reference_unresolved_count": 7,
+      "explicit_definition_count": 3,
+      "explicit_discourse_relation_count": 239,
+      "high_scope_source_obligation_count": 382,
+      "modal_segment_count": 536,
+      "named_reference_sentence_count": 10,
+      "rubric_item_count_observed": 10453
+    }
+  },
+  "inference": {
+    "fresh_target_model_queries": 0,
+    "provider_evaluation_queries": 0,
+    "new_internal_model_inference": 0,
+    "incremental_spend_usd": 0
+  },
+  "soundness": {
+    "purpose": "STRUCTURAL_COMPLEMENT_LOCALIZATION_ONLY",
+    "candidate_is_credit": false,
+    "gdpval_scope_closed": false,
+    "policy_adequacy_proved": false,
+    "whole_task_semantic_membership_proved": false,
+    "u_deletion_authority": false,
+    "terminal_authority": false,
+    "unparsed_or_unresolved_means_irrelevant": false
+  },
+  "next_rule": "USE_ONLY_CONTENT_ADDRESSED_SOURCE_ALIGNED_RESULTS_TO_DELETE_U__KEEP_SURVIVING_SEMANTIC_OR_QUALITY_COMPLEMENT_OPEN__DO_NOT_WAKE_TARGET_MODEL_WHILE_INTERNAL_STRUCTURAL_LOCALIZATION_REMAINS_AVAILABLE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

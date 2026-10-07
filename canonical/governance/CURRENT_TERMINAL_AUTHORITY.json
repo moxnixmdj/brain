@@ -759,6 +759,31 @@
       "path": "canonical/verification/TB_SCIENCE_RANK9_IRREVERSIBLE_RESULT_TRUTH_20261007_V1.json",
       "git_blob_sha": "7f1c33128be7ec1820a5b008c4d8dab99ae6a3d5",
       "role": "RANK9_FINAL_ZERO_CAUSAL_TRUTH__NOT_TASK_CAPABILITY_NEGATIVE"
+    },
+    "terminal_autopilot_executor_v1": {
+      "path": "canonical/governance/TERMINAL_AUTOPILOT_EXECUTOR_ACTIVATION_20261007_V2.json",
+      "git_blob_sha": "fabc724186056ff5d0f20e313dbfa02a35d567a5",
+      "independent_verification": {
+        "path": "canonical/verification/TERMINAL_AUTOPILOT_EXECUTOR_PUBLIC_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "37df0e04acd3492f2438b43c96223270a6fae9e4",
+        "public_workflow_run_id": 37623025244
+      },
+      "runtime": {
+        "path": "canonical/runtime/terminal_autopilot_executor_v1.py",
+        "git_blob_sha": "657a94d00833ad91403070132ef4e1f0d7337336"
+      },
+      "planner": {
+        "path": "canonical/runtime/terminal_autopilot_v1.py",
+        "git_blob_sha": "bb72c160f3be00efedbd5d111b77d956bed2cb11"
+      },
+      "role": "ACTIVE_GATED_CONCURRENT_EXECUTOR__REVERSIBLE_ZERO_REALITY_AND_INDEPENDENT_VERIFY__PER_TASK_CONTENT_BOUND_PROMOTION__NO_IRREVERSIBLE_BENCHMARK_AUTOEXECUTION"
+    },
+    "gdpval_public_220_composed_semantic_localization_public_execution": {
+      "path": "canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_PUBLIC_EXECUTION_RECEIPT_20261007_V1.json",
+      "git_blob_sha": "fc6e73e7704b86f4206181752bb0b8201fe8f35a",
+      "public_workflow_run_id": 37623473395,
+      "raw_result_sha256": "494730d013e1149ed1b4f0d9cb534cdb2fe35a7dfe35bf50b5ac17115d6e17f4",
+      "role": "COMPLETE_PUBLIC_220_STRUCTURAL_RELOCALIZATION__ZERO_PROMOTION_CREDIT"
     }
   },
   "live_truth": {
@@ -1194,7 +1219,19 @@
     "tb_science_rank10_authority_active": false,
     "tb_science_planner_grammar_repair_candidate_bound": true,
     "tb_science_planner_grammar_repair_candidate_blob": "01d859c8f27b317893027e693c9aa49e833a256f",
-    "tb_science_planner_grammar_repair_live_transport_verified": false
+    "tb_science_planner_grammar_repair_live_transport_verified": false,
+    "terminal_autopilot_executor_active": true,
+    "terminal_autopilot_executor_public_exact_byte_verification_pass": true,
+    "terminal_autopilot_reversible_zero_reality_execution_authorized": true,
+    "terminal_autopilot_independent_zero_spend_verification_authorized": true,
+    "terminal_autopilot_content_bound_promotion_requires_per_task_exact_authority": true,
+    "terminal_autopilot_irreversible_benchmark_autoexecution_authorized": false,
+    "terminal_autopilot_stale_science_intent_suppression_active": true,
+    "gdpval_public_220_composed_semantic_localization_executed": true,
+    "gdpval_public_220_composed_semantic_localization_task_count": 220,
+    "gdpval_public_220_composed_semantic_localization_zero_target_queries": true,
+    "gdpval_public_220_composed_semantic_localization_zero_spend": true,
+    "gdpval_public_220_composed_semantic_localization_credit": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
