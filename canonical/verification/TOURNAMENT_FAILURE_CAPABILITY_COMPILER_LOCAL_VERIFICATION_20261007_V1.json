@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_TOURNAMENT_FAILURE_CAPABILITY_COMPILER_LOCAL_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "AUTHOR_EXACT_BYTE_REPLAY_PASS_8_OF_8__EXTERNAL_INFORMATION_BOUND_CORROBORATED__ZERO_TERMINAL_CREDIT",
+  "exact_bindings": {
+    "governance": {
+      "path": "canonical/governance/TOURNAMENT_FAILURE_CAPABILITY_LAW_20261007_V1.json",
+      "git_blob_sha": "9a630faa9629b2e2c99fcef88fbf3ac88d802794"
+    },
+    "runtime": {
+      "path": "canonical/runtime/tournament_failure_capability_compiler_v1.py",
+      "git_blob_sha": "999f075b9d888d35f6e10564aeaf45e0791c4a52"
+    },
+    "tests": {
+      "path": "canonical/tests/test_tournament_failure_capability_compiler_v1.py",
+      "git_blob_sha": "9833fbb633d04613c98f26193f84a340c9a83da0"
+    }
+  },
+  "replay": {
+    "executor": "CHATGPT_ISOLATED_PYTHON_3",
+    "command": "python -m pytest canonical/tests/test_tournament_failure_capability_compiler_v1.py -q",
+    "passed": 8,
+    "failed": 0,
+    "duration_seconds": 0.07,
+    "cases": [
+      "COMMON_POLICY_ZERO_BITS",
+      "TOURNAMENT_FAILURE_WITHOUT_DISCRIMINATOR_FAILS_CLOSED",
+      "PRECOMMITMENT_JIT_DISCRIMINATOR",
+      "UNSOUND_JIT_BUCKET_REJECTED",
+      "PERSISTENT_SEPARATOR_REQUIRES_EXACT_REPOSITORY_BYTES_AND_SEMANTIC_RECEIPTS",
+      "SEPARATOR_SYMBOL_ALPHABET_MUST_FIT_DECLARED_BITS",
+      "MALFORMED_WORLD_CONTAINER_FAILS_CLOSED",
+      "MANIFEST_NEVER_GRANTS_TERMINAL_CREDIT"
+    ]
+  },
+  "external_semantics_corroboration": {
+    "proposition": "A_FIXED_LENGTH_BINARY_SELECTOR_FOR_K_DISTINCT_SYMBOLS_REQUIRES_CEIL_LOG2_K_BITS__FOUR_SYMBOLS_CANNOT_BE_ENCODED_IN_ONE_BIT.",
+    "sources": [
+      "Princeton ELE201 Information Entropy and Coding chapter",
+      "UC Davis MATH 235B Probability Theory noiseless coding notes"
+    ],
+    "role": "CORROBORATION_ONLY__NOT_CODE_EXECUTION_OR_TERMINAL_EVIDENCE"
+  },
+  "hard_nonclaims": [
+    "NOT_AN_INDEPENDENT_EXECUTION_OF_THE_PYTHON_BYTES.",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT.",
+    "COMPILER_CLASSIFIES_REPAIR_SHAPE_ONLY."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
