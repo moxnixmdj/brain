@@ -40,14 +40,6 @@
         "git_blob_sha": "6ae2c27a911c5acd9e81314a6ea363fedaee6dff"
       }
     },
-    "db_saturation_union_v7": {
-      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V7.json",
-      "git_blob_sha": "04345ae31cb96695d60912127c9d69541919e2bd"
-    },
-    "single_abc_frontier_v2": {
-      "path": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V2.json",
-      "git_blob_sha": "57e44bd056429e167fe5bbaac9855b7988baebe5"
-    },
     "minimum_information_lower_bound": {
       "path": "canonical/governance/TERMINAL_SHARED_SEMANTIC_MINIMUM_INFORMATION_LOWER_BOUND_20261007_V1.json",
       "git_blob_sha": "0b63405d95009a95ad12e767d9785ceacaf5be12"
@@ -55,6 +47,26 @@
     "p3_whole_cell_executed_scorer_falsifier": {
       "path": "canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_EXECUTED_SCORER_FALSIFIER_20261007_V1.json",
       "git_blob_sha": "d4339cca92dabd058ae4675bcb3fa9e6d25bf391"
+    },
+    "db_saturation_manifest_v7": {
+      "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V7.json",
+      "git_blob_sha": "862649b49fe0b94ff2d6e3cea05119ade614cfb3",
+      "independent_verification": {
+        "path": "canonical/verification/V16_DB_EXISTING_EVIDENCE_SATURATION_VERIFY_20261007_V7.json",
+        "git_blob_sha": "60e46a05dac7b37853da42c21c6168b9d0239fa6"
+      }
+    },
+    "single_abc_frontier_v3": {
+      "path": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V3.json",
+      "git_blob_sha": "1cfad0bc541ee6516bd6963da195c5e6e13344af"
+    },
+    "p3_whole_cell_revocation": {
+      "path": "canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_20261007_V1.json",
+      "git_blob_sha": "768953c6f754a911a1483733e84164087e77dd31",
+      "falsifier": {
+        "path": "canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_EXECUTED_SCORER_FALSIFIER_20261007_V1.json",
+        "git_blob_sha": "d4339cca92dabd058ae4675bcb3fa9e6d25bf391"
+      }
     }
   },
   "truth_repair": {
@@ -73,12 +85,13 @@
     "supersedes_v17_meta_finality_scope_exhaustiveness_state": true,
     "supersession_note": "V17_CORRECTLY_PRESERVES_FAIL_CLOSED_DOMINANCE_GAPS_BUT_ITS_LITERAL_ALL_SCOPE_EXHAUSTIVENESS_OPEN_FLAG_IS_STALE_RELATIVE_TO_THE_INDEPENDENT_W4_FIXED_INTERFACE_TRACE_SUPERSET_COMPLETENESS_VERIFICATION.",
     "known_sound_D_B_certificate_record_count": 14,
-    "cached_D_B_union_source": "DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V6",
+    "cached_D_B_union_source": "V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V7",
     "cached_regions_may_overlap": true,
     "complete_selected_context_ABC_normal_form": "U_IS_EMPTY",
     "current_U_empty_proved": false,
     "revoked_certificate_record": "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
-    "revocation_reason": "EXACT_EXECUTED_P3_SCORER_DOES_NOT_PROVE_THE_DECLARED_SEVEN_GATE_VECTOR"
+    "revocation_reason": "EXACT_EXECUTED_P3_SCORER_DOES_NOT_PROVE_THE_DECLARED_SEVEN_GATE_VECTOR",
+    "revoked_p3_whole_cell_excluded": true
   },
   "top_level_terminal_predicates": [
     "COMPLETE_SELECTED_CONTEXT_ABC",
@@ -128,7 +141,8 @@
     "NO_CLAIM_ALL_SURVIVING_CONTEXTS_HAVE_SOUND_ADEQUACY_CERTIFICATES.",
     "NO_CLAIM_ROUTER_DEPLOYED_BINDING_IS CLOSED.",
     "NO_CLAIM_D_FINALITY_IS CLOSED.",
-    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT.",
+    "NO_CLAIM_THE_REVOKED_P3_WHOLE_SEVEN_GATE_CELL_REMAINS_IN_D_B."
   ],
   "accounting": {
     "incremental_spend_usd": 0,
