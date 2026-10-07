@@ -105,7 +105,7 @@ class PlannerTests(unittest.TestCase):
         candidate_schema=body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["items"]["properties"]
         self.assertNotIn("maxLength",candidate_schema["command"])
         self.assertNotIn("maxLength",candidate_schema["verify_command"])
-        self.assertGreaterEqual(p.MAX_TOOL_COMPLETION_TOKENS,4096)
+        self.assertEqual(p.MAX_TOOL_COMPLETION_TOKENS,384)
 
     def test_decoded_command_length_is_enforced_after_transport(self):
         args={
