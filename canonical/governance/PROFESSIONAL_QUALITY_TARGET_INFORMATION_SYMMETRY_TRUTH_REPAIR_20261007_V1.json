@@ -14,7 +14,9 @@
     },
     "current_terminal_pointer": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-      "git_blob_sha_at_analysis": "6746ecfcd7a4254d39404b5ac3df297a8fcd2750"
+      "git_blob_sha_at_analysis": "5e11a5cfdc5f68aa67fdf6f33ecaf5d6fa63a916",
+      "pointer_schema_at_analysis": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V3",
+      "known_sound_D_B_certificate_record_count_at_analysis": 14
     }
   },
   "defect": {
@@ -24,16 +26,30 @@
     "contradiction": "THE_COUNTERMODEL_GIVES_TARGET_A_WORLD_DEPENDENT_ACTION_CHOICE_FROM_HIDDEN_EVALUATOR_STATE_WHILE_DECLARING_THE_PRECOMMITMENT_OBSERVATION_IDENTICAL__THAT_IS_AN_ORACLE_COMPARATOR_UNLESS_THE_HIDDEN_STATE_IS_ACTUALLY_AVAILABLE_TO_OR_CAUSALLY_CHANGES_THE_TARGET_KERNEL."
   },
   "corrected_two_world_model": {
-    "actions": ["a", "b"],
+    "actions": [
+      "a",
+      "b"
+    ],
     "same_target_precommitment_information": true,
     "same_brain_precommitment_information": true,
     "target_action_probability": "q_EQUALS_Pr_TARGET_CHOOSES_a_AND_IS_THE_SAME_IN_BOTH_WORLDS",
     "brain_action_probability": "p_EQUALS_Pr_BRAIN_CHOOSES_a_AND_IS_THE_SAME_IN_BOTH_WORLDS",
     "world_1_evaluator": "u1(a)=1__u1(b)=0",
     "world_2_evaluator": "u2(a)=0__u2(b)=1",
-    "target_expected_utility": {"world_1": "q", "world_2": "1-q"},
-    "brain_expected_utility": {"world_1": "p", "world_2": "1-p"},
-    "brain_weak_dominance_constraints": ["0<=p<=1", "0<=q<=1", "p>=q", "1-p>=1-q"],
+    "target_expected_utility": {
+      "world_1": "q",
+      "world_2": "1-q"
+    },
+    "brain_expected_utility": {
+      "world_1": "p",
+      "world_2": "1-p"
+    },
+    "brain_weak_dominance_constraints": [
+      "0<=p<=1",
+      "0<=q<=1",
+      "p>=q",
+      "1-p>=1-q"
+    ],
     "solution": "p=q"
   },
   "verified_consequence": {
