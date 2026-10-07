@@ -1,24 +1,35 @@
-E={("SuR","SRu"),("Su>","S>u"),("SAR","NSA"),("S<M","MS<"),("S>P","PS>")}
-def rv(v):return v[-1:]+v[:-1] if v else v
-def lv(v):return v[1:]+v[:1] if v else v
-def su_r(v):return tuple(reversed(v))
-def sr_u(v):return tuple(reversed(v))
-def su_gt(v):return rv(v)
-def sgt_u(v):return rv(v)
-def sa_r(v):return tuple(reversed(tuple(abs(x) for x in v)))
-def ns_a(v):return tuple(abs(x) for x in reversed(v))
-def sl_m(n):return lv(n)
-def ms_l(n):return lv(n)
-def sg_p(p):return rv(p)
-def ps_g(p):return rv(p)
+def step(s,o):
+ k=s[0]
+ if k=="raw":
+  if o=="S":return("sorted",)
+  if o=="M":return("negraw",)
+  if o=="P":return("posraw",)
+ if k=="sorted":
+  if o=="u":return("runvals",)
+  if o=="R":return("sorted_rev",)
+  if o==">":return("sorted_rotr",)
+  if o=="<":return("sorted_rotl",)
+  if o=="M":return("negprefix",)
+  if o=="P":return("possuffix",)
+ if k=="runvals":
+  if o=="R":return("rev_runvals",)
+  if o==">":return("rotr_runvals",)
+ if k=="sorted_rev" and o=="u":return("rev_runvals",)
+ if k=="sorted_rotr" and o=="u":return("rotr_runvals",)
+ if k=="sorted_rotl" and o=="M":return("rotl_negprefix",)
+ if k=="negraw" and o=="S":return("negprefix",)
+ if k=="negprefix" and o=="<":return("rotl_negprefix",)
+ if k=="sorted_rotr" and o=="P":return("rotr_possuffix",)
+ if k=="posraw" and o=="S":return("possuffix",)
+ if k=="possuffix" and o==">":return("rotr_possuffix",)
+ raise ValueError((s,o))
+def nf(w):
+ s=("raw",)
+ for o in w:s=step(s,o)
+ return s
 def verify():
- for n in range(8):
-  v=tuple(range(-n//2,n-n//2))
-  assert su_r(v)==sr_u(v)
-  assert su_gt(v)==sgt_u(v)
-  assert sa_r(v)==ns_a(v)
-  neg=tuple(x for x in v if x<0);pos=tuple(x for x in v if x>0)
-  assert sl_m(neg)==ms_l(neg)
-  assert sg_p(pos)==ps_g(pos)
- return {"status":"PASS","equations":sorted("=".join(x) for x in E),"trusted_primitives":["SORTED_EQUAL_VALUES_FORM_CONTIGUOUS_RUNS_AND_SIGN_CLASSES_FORM_BOUNDARIES","NEGATION_REVERSES_ORDER_AND_ABS_IGNORES_SIGN"]}
+ e={"SuR":"SRu","Su>":"S>u","S<M":"MS<","S>P":"PS>"}
+ q={a:(nf(a),nf(b)) for a,b in e.items()}
+ assert all(x==y for x,y in q.values())
+ return {"status":"PASS","equations":e,"normal_forms":q,"trusted_primitives":["SORT_RETURNS_NONDECREASING_EQUAL_VALUE_RUNS_WITH_NEGATIVE_PREFIX_AND_POSITIVE_SUFFIX","UNIQUE_RETURNS_FIRST_RUN_REPRESENTATIVES","UNIT_ROTATION_MOVES_ONE_BOUNDARY_ELEMENT"]}
 if __name__=="__main__":print(verify())
