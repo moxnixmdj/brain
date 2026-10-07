@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V6",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH__EIGHT_CONSUMED_SLOTS__RANK8_V3_POST_EPOCH_AGENT_IMPORT_INFRA_FINAL_ZERO__NEXT_UNTOUCHED_RANK9__NO_REPLAY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V5.json",
+    "git_blob_sha": "651a800d1e9f43f15be3447546b2807e1365b42d"
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "rank8_v3_execution": {
+    "slot_id": "terminal-bench-science/linked-cell-suppression::trial-0",
+    "task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0",
+    "authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK8_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V3.json",
+      "git_blob_sha": "16698c0125075213387e3cd662082d71a68471e3"
+    },
+    "irreversible_result": {
+      "path": "canonical/verification/TB_SCIENCE_RANK8_IRREVERSIBLE_RESULT_TRUTH_20261007_V2.json",
+      "git_blob_sha": "27d2132d61e197f3b1985ad947369c9597a5cef7"
+    },
+    "public_runner": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "workflow_run_id": 37614049003,
+      "workflow_job_id": 112767999838,
+      "artifact_id": 11479083901,
+      "artifact_digest": "sha256:93e066ab85f6e15072b1ed5f07b0278c410a016ba277f6c2120251fc0020622c",
+      "workflow_conclusion": "success",
+      "run_attempt": 1
+    },
+    "irreversible_receipt": {
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "verifier_result_present": false,
+      "errors": [
+        "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD"
+      ],
+      "execution_authority_consumed": true,
+      "rerun_credit": false,
+      "incremental_spend_usd": 0
+    },
+    "interpretation": {
+      "task_capability_negative_evidence": false,
+      "infrastructure_or_transport_failure": true,
+      "causal_failure": "CARRIER_TRANSITIVE_DEPENDENCY_CLOSURE_MISSING__explicit_requirement_index_v2",
+      "second_live_epoch_gate_passed": true,
+      "agent_import_succeeded": false,
+      "no_rank8_retry": true
+    }
+  },
+  "truth_repair": {
+    "consumed_slots": [
+      "terminal-bench-science/genomic-model-ranking::trial-0",
+      "terminal-bench-science/mri-harmonization::trial-0",
+      "terminal-bench-science/navigation-sensor-calibration::trial-0",
+      "terminal-bench-science/baseline-free-localization::trial-0",
+      "terminal-bench-science/virtual-baseline-localization::trial-0",
+      "terminal-bench-science/koopman-mfg-id::trial-0",
+      "terminal-bench-science/reactor-safety-control::trial-0",
+      "terminal-bench-science/linked-cell-suppression::trial-0"
+    ],
+    "consumed_successes": 0,
+    "consumed_final_failures": 8,
+    "next_untouched_slot": {
+      "schedule_rank": 9,
+      "slot_id": "terminal-bench-science/neo-orbit-determination::trial-0",
+      "task_digest": "sha256:b0038fd39395b57f2036b2c0271f37b508e1250fc97d12c899590b61e997cada"
+    },
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 79,
+    "maximum_possible_successes_remaining": 202,
+    "pass_still_mathematically_reachable": true
+  },
+  "scheduler": [
+    "NEVER_REPLAY_RANK6_RANK7_OR_RANK8__THEIR_ONE_USE AUTHORITIES ARE CONSUMED.",
+    "RANK8_V3_IS_AN_INFRASTRUCTURE_FINAL_ZERO_UNDER_THE_FROZEN_POST_TASK_START_RULE__DO_NOT_RELABEL_AS_TASK_CAPABILITY_NEGATIVE_EVIDENCE.",
+    "BEFORE_ANY_RANK9_AUTHORITY__CLOSE_AND_INDEPENDENTLY_VERIFY_THE_TRANSITIVE_RUNTIME_DEPENDENCY_SET_FOR_THE_EXACT_BRAIN_AGENT_ROUTE.",
+    "FEED_THE_RANK8_IMPORT_FAILURE_AS_A_CAUSAL_COUNTEREXAMPLE_TO_THE_ACTIVE COUNTEREXAMPLE_GUIDED ARCHITECTURE SYNTHESIZER.",
+    "DO_NOT_INVENT_A_NEW_SCIENCE_CAPABILITY_FROM_THE_RANK8_ZERO.",
+    "RACE_ANY_FUTURE_EMPIRICAL_SLOT_AGAINST_A_STRONGER_SCOPE_COMPLETE_ACCEPTANCE_ROUTE; DO_NOT SERIALIZE TERMINAL PROGRESS ON TB_SCIENCE SLOTS BY DEFAULT."
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_RANK8_RETRY_OR_REPLACEMENT",
+    "NO_RANK9_EXECUTION_AUTHORITY",
+    "NO_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 3,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  }
+}
