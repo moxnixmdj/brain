@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_RESEARCH_CONTROL_V1_UNIVERSAL_GENERATOR_FALSIFIER_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_COUNTEREXAMPLE_PASS__UNIVERSAL_ALL_SEEDS_GENERATOR_TOP_LAW_CLAIM_FALSE__ZERO_CREDIT",
+  "exact_subject": {
+    "candidate": {
+      "path": "canonical/runtime/research_control_information_safe_candidate.py",
+      "git_blob_sha": "cd6bf6e4163bbba64878b856766b1af4372d68bc"
+    },
+    "generator_oracle": {
+      "path": "canonical/runtime/research_control_information_safe_proof.py",
+      "git_blob_sha": "16c47efee0e0e38f479163d1285d7079798efdaf"
+    }
+  },
+  "counterexample": {
+    "seed": 7647,
+    "ordinal": 2,
+    "observed_pass": false,
+    "observed_reason": "ACTION_BUDGET_EXHAUSTED",
+    "requirement_id": "R3",
+    "duplicated_high_authority_source_id": "S-R3-23592",
+    "duplicate_rows": [
+      {
+        "source_id": "S-R3-23592",
+        "authority": 0.93,
+        "cost": 1.5
+      },
+      {
+        "source_id": "S-R3-23592",
+        "authority": 0.96,
+        "cost": 2
+      }
+    ],
+    "hidden_value_after_dictionary_overwrite": {
+      "source_id": "S-R3-23592",
+      "supports": []
+    },
+    "only_remaining_supporting_source": {
+      "source_id": "S-R3-38552",
+      "authority": 0.7
+    },
+    "minimum_authority": 0.9,
+    "mechanism": "FIRST_AND_SECOND_HIGH_AUTHORITY_OPAQUE_IDS_COLLIDE__SECOND_ASSIGNMENT_OVERWRITES_SUPPORTING_FIRST_SOURCE__LOW_AUTHORITY_SUPPORT_REMAINS_BELOW_ADMISSION_THRESHOLD"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/research_v1_universal_falsifier_20261007",
+    "result": "PASS__COUNTEREXAMPLE_REPRODUCED_ON_EXACT_CURRENT_SOURCE_BYTES"
+  },
+  "consequence": [
+    "FORBID_ALL_SEEDS_ALL_ORDINALS_TOP_LAW_GENERALIZATION_FROM_V1_GENERATOR",
+    "PRESERVE_THE_HISTORICAL_FROZEN_180_TERMINAL_RESULT_AS_VALID_FOR_ITS_EXACT_SELECTED_CASES",
+    "ANY_FUTURE_UNIVERSAL_GENERATOR_CERTIFICATE_REQUIRES_A_REPAIRED_DISTINCT_GENERATOR_OR_A_PROOF_EXCLUDING_COLLISIONS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FROZEN_180_RESULT_IS_INVALID",
+    "NO_CLAIM_OPEN_ENDED_RESEARCH_CONTROL_FAILS",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
