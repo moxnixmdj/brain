@@ -83,8 +83,11 @@ def evaluate(root: Path = ROOT) -> dict:
         if len(smatches)!=1:
             errors.append("SUPERVISOR_RUN_ONCE_DELEGATION_DRIFT")
         else:
-            kws={kw.arg:kw.value for kw in smatches[0].keywords if kw.arg}
+            call=smatches[0]
+            kws={kw.arg:kw.value for kw in call.keywords if kw.arg}
             ex=kws.get("executor")
+            if ex is None and len(call.args) >= 6:
+                ex=call.args[5]
             if not isinstance(ex,ast.Name) or ex.id!="executor":
                 errors.append("SUPERVISOR_DOES_NOT_FORWARD_EXECUTOR_PARAMETER")
 
