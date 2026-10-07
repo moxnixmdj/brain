@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_CREDITABLE_ROUTER_CONTEXT_PAYLOAD_BINDING_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_DIRECT_REPLAY_PASS__9_OF_9__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "git_blob_sha": "ba260cd997adb8df97417e5f03eaf547b5365379"
+    },
+    "tests": {
+      "path": "canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "git_blob_sha": "9acb150390be994dba251f3eb8e1c63eaaade86d"
+    },
+    "truth_repair": {
+      "path": "canonical/governance/CREDITABLE_ROUTER_CONTEXT_PAYLOAD_BINDING_REPAIR_20261007_V1.json",
+      "git_blob_sha": "b93438b0f69b4355b287d19b1b6b0e88a1cc52a2"
+    },
+    "dependencies": [
+      {
+        "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+        "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
+      },
+      {
+        "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
+        "git_blob_sha": "78ef7174fd7cdebb24f97882e8c325a5164f18cb"
+      },
+      {
+        "path": "canonical/runtime/router_deployment_canary_v1.py",
+        "git_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2"
+      },
+      {
+        "path": "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADEQUACY_CERTIFICATE_20261007_V1.json",
+        "git_blob_sha": "e521f7b75123bca5cc9704340283a727bb45e957"
+      },
+      {
+        "path": "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADMISSION_CERTIFICATE_20261007_V1.json",
+        "git_blob_sha": "1b2f97e7d46877b8782ea211fd15f679e6bfb5b0"
+      }
+    ]
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "working_directory": "/home/sprite/synthesis_v3_replay_20261007/router_payload_v2_replay"
+  },
+  "direct_replay": {
+    "tests_run": 9,
+    "tests_passed": 9,
+    "failures": 0,
+    "verified": [
+      "CANARY_REGISTRY_PREFLIGHT_PASSES",
+      "NONCREDITABLE_CANARY_REMAINS_BACKWARD_COMPATIBLE",
+      "EXACT_CONTEXT_PAYLOAD_ATTESTATION_PASSES",
+      "WRONG_PAYLOAD_DIGEST_FAILS_CLOSED",
+      "WRONG_CONTEXT_DIGEST_FAILS_CLOSED",
+      "WRONG_CELL_FAILS_CLOSED",
+      "NOT_ADMITTED_PAYLOAD_FAILS_CLOSED",
+      "PAYLOAD_DIGEST_IS_KEY_ORDER_INVARIANT",
+      "NONCANONICAL_NAN_PAYLOAD_FAILS_CLOSED"
+    ]
+  },
+  "consequence": [
+    "THE_V2_MECHANICAL_CONTEXT_PAYLOAD_BINDING_INVARIANT_IS_INDEPENDENTLY_REPLAYED",
+    "REAL_CREDITABLE_ROWS_MUST_STILL_BIND_A_SOUND_CONTENT_ADDRESSED_PAYLOAD_MEMBERSHIP_VALIDATOR",
+    "NO_REAL_SELECTED_COVER_ROW_IS_CREATED_BY_THIS_REPLAY"
+  ],
+  "hard_nonclaims": [
+    "NO_SELECTED_COVER_COMPLETENESS",
+    "NO_ABC_CLOSURE",
+    "NO_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
