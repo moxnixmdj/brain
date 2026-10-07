@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_220_IMPERATIVE_DIRECTIVE_LOCALIZATION_V2",
+  "date": "2026-10-07",
+  "status": "LIVE_POPULATION_COMPLETE_PROMPT_SHA_BOUND_CROSS_IMPLEMENTATION_REPLAY__421_SOURCE_BOUND_DIRECTIVES__173_TASKS__ZERO_WHOLE_TASK_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "population_receipt": {
+      "path": "canonical/evidence/GDPVAL_PUBLIC_220_POPULATION_REALITY_RECEIPT_20261007_V1.json",
+      "git_blob_sha": "55214960a5a3a383fe17aa5489c64ecd26a5c1a9"
+    },
+    "prior_modal_localization": {
+      "path": "canonical/evidence/GDPVAL_PUBLIC_220_EXPLICIT_OBLIGATION_LOCALIZATION_20261007_V1.json",
+      "git_blob_sha": "7a2d726adb155bee0f1e6f4af71ee90cc547bbbc"
+    },
+    "imperative_runtime": {
+      "path": "canonical/runtime/bounded_imperative_directive_semantics_v2.py",
+      "git_blob_sha": "8afaa0ab30a98276b04076b6c9a9c25b9df8642e"
+    },
+    "regression_tests": {
+      "path": "canonical/tests/test_bounded_imperative_directive_semantics_v2.py",
+      "git_blob_sha": "b7e5117c40c4f1deb216b1dbfb2591ab25a504b7"
+    },
+    "population_replay": {
+      "path": "canonical/runtime/gdpval_public_220_imperative_directive_audit_v1.py",
+      "git_blob_sha": "47ebccb16abc7c38651d79310a482ab3648cfb0c"
+    },
+    "dataset": {
+      "owner": "openai",
+      "name": "gdpval",
+      "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+      "split": "train",
+      "row_count": 220
+    }
+  },
+  "falsification_repairs": [
+    "REJECT_NAIVE_SENTENCE_SPLITTING_AT_EVERY_PERIOD__IT_TRUNCATED_FILENAMES_SUCH_AS_Reimbursement.pdf",
+    "PRESERVE_FILE_EXTENSIONS_AND_DECIMALS_DURING_SOURCE_SEGMENTATION",
+    "FAIL_CLOSED_ON_NOUN_HEADED_DECLARATIVES_SUCH_AS_REFERENCE_MATERIALS_ARE_ATTACHED",
+    "FAIL_CLOSED_ON_SHORT_AMBIGUOUS_HEADINGS_SUCH_AS_REFERENCE_MATERIAL_COLON",
+    "FAIL_CLOSED_ON_SLASH_LABELS_SUCH_AS_DEVELOP_SLASH_INTEGRATE_TOOLING"
+  ],
+  "live_cross_implementation_replay": {
+    "public_rows_fetched": 220,
+    "task_id_mismatch_count": 0,
+    "prompt_sha256_mismatch_count": 0,
+    "resolved_imperative_directive_count": 421,
+    "tasks_with_imperative_directives": 173,
+    "prior_tasks_with_at_least_one_resolved_modal_obligation": 93,
+    "tasks_with_any_prior_modal_or_new_imperative_positive_semantics": 194,
+    "tasks_without_any_prior_modal_or_new_imperative_positive_semantics": 26,
+    "whole_task_semantic_membership_proved_count": 0,
+    "by_verb": {
+      "add": 14,
+      "analyze": 3,
+      "apply": 3,
+      "assess": 2,
+      "build": 8,
+      "calculate": 8,
+      "compare": 3,
+      "compile": 3,
+      "complete": 4,
+      "conduct": 3,
+      "create": 61,
+      "determine": 4,
+      "develop": 5,
+      "draft": 12,
+      "ensure": 28,
+      "explain": 2,
+      "focus": 3,
+      "format": 1,
+      "generate": 1,
+      "highlight": 9,
+      "identify": 8,
+      "include": 91,
+      "indicate": 1,
+      "list": 4,
+      "perform": 1,
+      "prepare": 13,
+      "present": 5,
+      "provide": 14,
+      "recommend": 3,
+      "reference": 3,
+      "research": 2,
+      "review": 8,
+      "save": 9,
+      "select": 4,
+      "submit": 7,
+      "summarize": 4,
+      "use": 55,
+      "write": 12
+    }
+  },
+  "abc_effect": {
+    "shared_semantic_frontier_advanced": true,
+    "gdpval_public_220_structural_semantic_quality_complement_still_open": true,
+    "gdpval_target_model_query_currently_irreducible": false,
+    "U_subtraction_count": 0,
+    "reason_no_U_subtraction": "ONE_SIDED_EXPLICIT_DIRECTIVES_DO_NOT_PROVE_WHOLE_TASK_SEMANTIC_MEMBERSHIP_OR_POLICY_ADEQUACY"
+  },
+  "scheduling": [
+    "REUSE_BOUNDED_IMPERATIVE_DIRECTIVE_SEMANTICS_V2_BEFORE_INVENTING_FAMILY_SPECIFIC_SEMANTIC_PARSERS_WHEN_RAW_CONTEXT_CONTAINS_EXPLICIT_COMMANDS",
+    "KEEP_THE_REMAINING_26_GDPVAL_TASKS_WITH_NO_MODAL_OR_IMPERATIVE_POSITIVE_UNIT_ON_THE_SHARED_SEMANTIC_ADMISSION_FRONTIER",
+    "FOR_ALL_220_TASKS_CONTINUE_ONLY_ON_UNRESOLVED_LOAD_BEARING_SEMANTICS_AND_QUALITY_ADEQUACY__DO_NOT_REQUERY_THE_TARGET_MODEL",
+    "DO_NOT_CONVERT_DIRECTIVE_COUNT_OR_TASKS_WITH_ANY_POSITIVE_UNIT_INTO_WHOLE_TASK_OR_FAMILY_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_421_DIRECTIVES_ARE_421_COMPLETE_TASK_MEANINGS",
+    "NO_CLAIM_194_TASKS_WITH_ANY_POSITIVE_EXPLICIT_SEMANTICS_ARE_WHOLE_TASK_ADMITTED",
+    "NO_CLAIM_COORDINATION_PRONOUNS_IMPLICIT_ARGUMENTS_WORLD_KNOWLEDGE_OR_QUALITY_ADEQUACY_ARE_RESOLVED",
+    "NO_CLAIM_GDPVAL_FAMILY_IS_CLOSED",
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
