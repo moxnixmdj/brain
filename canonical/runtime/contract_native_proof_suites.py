@@ -230,6 +230,11 @@ def _synthesis_case(seed: int, difficulty: int) -> dict[str, Any]:
             "allowed_optional":sorted(optional),
             "forbidden":sorted(forbidden),
             "uncertainty":sorted(uncertainty),
+            "provenance":{
+                row["claim_id"]:list(row["provenance"])
+                for row in evidence
+                if row["role"] in {"required","optional"} and row["support"]!="unsupported"
+            },
         },
     }
 
@@ -237,21 +242,51 @@ def _synthesis_case(seed: int, difficulty: int) -> dict[str, Any]:
 def _score_synthesis(case: Mapping[str, Any], candidate: Mapping[str, Any]) -> dict[str, Any]:
     selected=candidate.get("selected_claims")
     uncertainty=candidate.get("uncertainty_claims")
-    if not isinstance(selected,list) or not isinstance(uncertainty,list):
+    provenance=candidate.get("provenance_by_claim")
+    if not isinstance(selected,list) or not isinstance(uncertainty,list) or not isinstance(provenance,Mapping):
         return {"pass":False,"reasons":["OUTPUT_SCHEMA_INVALID"]}
     selected=[str(x) for x in selected]
     uncertainty=[str(x) for x in uncertainty]
     o=case["_oracle"]; reasons=[]
+    if len(selected)!=len(set(selected)):
+        reasons.append("DUPLICATE_SELECTED_CLAIM")
+    normalized_provenance={}
+    for claim_id, sources in provenance.items():
+        if (
+            not isinstance(claim_id,str)
+            or not isinstance(sources,list)
+            or not sources
+            or any(not isinstance(x,str) or not x for x in sources)
+            or len(sources)!=len(set(sources))
+        ):
+            reasons.append("PROVENANCE_SCHEMA_INVALID:"+str(claim_id))
+            continue
+        normalized_provenance[claim_id]=list(sources)
     missing=sorted(set(o["required"])-set(selected))
     forbidden=sorted(set(o["forbidden"])&set(selected))
     unknown=sorted(set(selected)-set(o["required"])-set(o["allowed_optional"]))
     missing_uncertainty=sorted(set(o["uncertainty"])&set(selected)-set(uncertainty))
     extra_uncertainty=sorted(set(uncertainty)-set(selected))
+    expected_provenance=o["provenance"]
+    missing_provenance=sorted(
+        claim_id for claim_id in selected
+        if claim_id in expected_provenance and claim_id not in normalized_provenance
+    )
+    wrong_provenance=sorted(
+        claim_id for claim_id in selected
+        if claim_id in expected_provenance
+        and claim_id in normalized_provenance
+        and normalized_provenance[claim_id] != expected_provenance[claim_id]
+    )
+    extra_provenance=sorted(set(normalized_provenance)-set(selected))
     if missing: reasons.append("REQUIRED_CLAIMS_MISSING:"+",".join(missing))
     if forbidden: reasons.append("UNSUPPORTED_CLAIMS_SELECTED:"+",".join(forbidden))
     if unknown: reasons.append("UNKNOWN_CLAIMS:"+",".join(unknown))
     if missing_uncertainty: reasons.append("UNCERTAINTY_DROPPED:"+",".join(missing_uncertainty))
     if extra_uncertainty: reasons.append("UNCERTAINTY_WITHOUT_CLAIM:"+",".join(extra_uncertainty))
+    if missing_provenance: reasons.append("PROVENANCE_MISSING:"+",".join(missing_provenance))
+    if wrong_provenance: reasons.append("PROVENANCE_MISMATCH:"+",".join(wrong_provenance))
+    if extra_provenance: reasons.append("PROVENANCE_WITHOUT_SELECTED_CLAIM:"+",".join(extra_provenance))
     max_claims=case["task"]["format_constraints"]["max_claims"]
     if len(selected)>max_claims: reasons.append("FORMAT_MAX_CLAIMS_EXCEEDED")
     if case["task"]["format_constraints"]["ordered_required_first"]:
@@ -378,7 +413,11 @@ def oracle_candidate(case: Mapping[str, Any]) -> dict[str, Any]:
         req=list(case["_oracle"]["required"])
         opts=list(case["_oracle"]["allowed_optional"])
         selected=req+opts
-        return {"selected_claims":selected,"uncertainty_claims":[x for x in case["_oracle"]["uncertainty"] if x in selected]}
+        return {
+            "selected_claims":selected,
+            "uncertainty_claims":[x for x in case["_oracle"]["uncertainty"] if x in selected],
+            "provenance_by_claim":{x:list(case["_oracle"]["provenance"][x]) for x in selected},
+        }
     if contract=="PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001":
         gold,_,_=_plan_gold(case)
         return {"selected_edits":list(gold)}
