@@ -1,0 +1,55 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_PUBLIC_220_EXPLICIT_CONTRACT_SURFACE_MEASUREMENT_V1",
+  "date":"2026-10-07",
+  "status":"FRESH_PUBLIC_COMPLETE_POPULATION_MEASUREMENT__ZERO_MODEL_INFERENCE__ZERO_CREDIT",
+  "dataset":{
+    "owner":"openai",
+    "name":"gdpval",
+    "revision_sha":"11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "split":"train",
+    "row_count":220,
+    "rows_api_pages":[
+      "https://datasets-server.huggingface.co/rows?dataset=openai%2Fgdpval&config=default&split=train&offset=0&length=100",
+      "https://datasets-server.huggingface.co/rows?dataset=openai%2Fgdpval&config=default&split=train&offset=100&length=100",
+      "https://datasets-server.huggingface.co/rows?dataset=openai%2Fgdpval&config=default&split=train&offset=200&length=20"
+    ]
+  },
+  "measurement":{
+    "tasks_with_rubric":220,
+    "rubric_items":10453,
+    "human_authored_rubric_items":10453,
+    "rubric_required_true":0,
+    "rubric_required_false":0,
+    "rubric_required_null":10453,
+    "unique_rubric_criterion_strings":10298,
+    "exact_criterion_strings_repeated_more_than_once":16,
+    "prompt_segments_total":5235,
+    "certified_closed_lexicon_imperative_segments":425,
+    "tasks_with_at_least_one_certified_imperative":173,
+    "most_repeated_exact_criterion":{
+      "text":"Overall formatting and style of the deliverable",
+      "task_occurrence_count":138
+    }
+  },
+  "method":{
+    "rubric":"PARSE rubric_json VERBATIM__COUNT ONLY EXPLICIT DATASET FIELDS",
+    "imperatives":"APPLY THE SAME CLOSED VERB LEXICON AND OPTIONAL CONTEXT PREFIX SHAPE AS canonical/runtime/bounded_imperative_directive_semantics_v1.py__NO ARGUMENT SEMANTIC RESOLUTION OR COORDINATION SPLIT",
+    "model_inference_requests":0,
+    "fresh_target_model_queries":0,
+    "provider_evaluation_queries":0
+  },
+  "consequences":[
+    "EVERY_PUBLIC_TASK_HAS_AN_EXPLICIT_HUMAN_AUTHORED_RUBRIC_SURFACE",
+    "THE rubric_json required FIELD CANNOT PRIORITIZE LOAD_BEARING CRITERIA IN THIS POPULATION BECAUSE ALL 10453 VALUES ARE NULL",
+    "173_OF_220_TASKS_HAVE_AT_LEAST_ONE_SOURCE_BOUND_IMPERATIVE_REQUIREMENT IN THE CURRENT CERTIFIED LEXICON",
+    "THE_EXPLICIT_CONTRACT_COMPILER_CAN_MATERIALIZE_A_LARGE_ONE_SIDED_SOUND_ACCEPTANCE_SURFACE_WITHOUT_MODEL_INFERENCE",
+    "THE_REMAINING_COMPLEMENT STILL INCLUDES UNRESOLVED PROMPT SEMANTICS REFERENCE FILE SEMANTICS GOLD DELIVERABLE QUALITY AND HOLISTIC HUMAN PREFERENCE"
+  ],
+  "hard_nonclaims":[
+    "NO_CLAIM_425_IMPERATIVES_ARE_ALL_PROMPT_REQUIREMENTS",
+    "NO_CLAIM_THE_10453_RUBRIC_ITEMS_ARE_WHOLE_TASK_SEMANTICALLY_COMPLETE",
+    "NO_CLAIM_THE_138_REPEATED_FORMATTING_STYLE_CRITERIA_HAVE_A_CURRENT SOUND OWNED ADEQUACY ROUTE",
+    "NO_GDPVAL_U_OR_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
