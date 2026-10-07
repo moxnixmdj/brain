@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_V14_DB_EXISTING_EVIDENCE_SATURATION_SPRITE_VERIFICATION_V2",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__EIGHT_KNOWN_DB_REGIONS__ZERO_REALITY__ZERO_CREDIT",
+  "subject": {
+    "manifest": {
+      "path": "canonical/governance/V14_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V2.json",
+      "git_blob_sha": "d968003f3d7f60161e0e2f5d7294087361a2e5a8"
+    },
+    "runtime": {
+      "path": "canonical/runtime/v14_db_existing_evidence_saturation_verifier_v2.py",
+      "git_blob_sha": "d574045f63eda99ceef8d90c4ef4d28d4da06163"
+    },
+    "tests": {
+      "path": "canonical/tests/test_v14_db_existing_evidence_saturation_v2.py",
+      "git_blob_sha": "f00bbedafc0bb8175868f0f6b19883f0469aabeb"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/v14_db_sat_v2",
+    "tests_passed": 1,
+    "tests_total": 1,
+    "recomputed_manifest_blob": "d968003f3d7f60161e0e2f5d7294087361a2e5a8",
+    "recomputed_runtime_blob": "d574045f63eda99ceef8d90c4ef4d28d4da06163",
+    "recomputed_tests_blob": "f00bbedafc0bb8175868f0f6b19883f0469aabeb"
+  },
+  "verified": {
+    "known_D_B_region_count": 8,
+    "fresh_target_reality_consumed": 0,
+    "abc_closed": false,
+    "terminal_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
