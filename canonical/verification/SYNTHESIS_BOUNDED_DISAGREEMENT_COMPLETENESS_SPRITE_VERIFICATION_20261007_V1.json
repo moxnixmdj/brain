@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_BOUNDED_DISAGREEMENT_COMPLETENESS_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_DIRECT_REPLAY_PASS__7_OF_7__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/synthesis_bounded_disagreement_completeness_v1.py",
+      "git_blob_sha": "0df08068cc079c90c2bd6b66dab0137b0b0065e6"
+    },
+    "tests": {
+      "path": "canonical/tests/test_synthesis_bounded_disagreement_completeness_v1.py",
+      "git_blob_sha": "32229bdc83daae1919f227cad36e4bd0dab4b214"
+    },
+    "governance": {
+      "path": "canonical/governance/SYNTHESIS_BOUNDED_DISAGREEMENT_COMPLETENESS_CELL_20261007_V1.json",
+      "git_blob_sha": "ac8c039c75049de512a60300bcfb63064ef4d107"
+    },
+    "dependency": {
+      "path": "canonical/runtime/bounded_claim_support.py",
+      "git_blob_sha": "197246a50ace8c16b945def9edb1357fb317c393"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "working_directory": "/home/sprite/synthesis_v3_replay_20261007"
+  },
+  "replay": {
+    "pytest_attempt": "INVALID_AS_EXECUTION_EVIDENCE__PYTEST_NOT_INSTALLED",
+    "direct_function_tests_run": 7,
+    "direct_function_tests_passed": 7,
+    "failures": 0,
+    "tests": [
+      "test_distinct_keys_do_not_create_false_conflict",
+      "test_duplicate_evidence_id_fails_closed",
+      "test_missing_provenance_fails_closed",
+      "test_multiple_conflicts_are_exhaustively_enumerated",
+      "test_no_conflict_yields_empty_complete_set",
+      "test_one_conflict_yields_one_complete_unit",
+      "test_unparsed_evidence_fails_closed"
+    ]
+  },
+  "verified": [
+    "ALL_IN_GRAMMAR_EVIDENCE_IS_EXHAUSTIVELY_GROUPED_BY_NORMALIZED_ENTITY_FIELD_KEY",
+    "SAME_KEY_MULTI_VALUE_GROUPS_GENERATE_REQUIRED_DISAGREEMENT_UNITS",
+    "CONSISTENT_VALUES_DO_NOT_GENERATE_FALSE_UNCERTAINTY",
+    "DISTINCT_KEYS_DO_NOT_GENERATE_FALSE_CONFLICT",
+    "OUT_OF_GRAMMAR_EVIDENCE_FAILS_CLOSED",
+    "MISSING_PROVENANCE_FAILS_CLOSED",
+    "DUPLICATE_EVIDENCE_IDS_FAIL_CLOSED"
+  ],
+  "boundary": [
+    "VERIFIES_COMPILER_MECHANICS_ONLY",
+    "REAL_CONTEXT_ADMISSION_STILL_REQUIRES_A_SOUND_BINDING_THAT_MATERIAL_UNCERTAINTY_SEMANTICS_EQUAL_SAME_KEY_MULTI_VALUE_DISAGREEMENT_INSIDE_THE_BOUNDED_FACT_GRAMMAR",
+    "NO_GENERAL_NATURAL_LANGUAGE_UNCERTAINTY_COMPLETENESS",
+    "NO_SYNTHESIS_FAMILY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
