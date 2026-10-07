@@ -19,6 +19,8 @@ class Env:
         self.commands.append(command)
         if command == "verify-bad":
             return Receipt(1, "", "bad")
+        if command == "warn-action":
+            return Receipt(0, "", "bash: warning: here-document at line 1 delimited by end-of-file")
         return Receipt(0, "ok", "")
 
 def planner(outputs):
@@ -39,8 +41,8 @@ class ScienceAgentTests(unittest.TestCase):
             {
                 "material_requirements":["R1","R2"],
                 "candidates":[
-                    {"action_id":"narrow","covers":["R1"],"command":"echo narrow","verify_command":"echo verify"},
-                    {"action_id":"wide","covers":["R1","R2"],"command":"echo wide","verify_command":"echo verify"}
+                    {"action_id":"narrow","covers":["R1"],"command":"echo narrow","verify_command":"test -d /tmp"},
+                    {"action_id":"wide","covers":["R1","R2"],"command":"echo wide","verify_command":"test -d /tmp"}
                 ]
             },
             {"finish_summary":"done"}
@@ -54,7 +56,7 @@ class ScienceAgentTests(unittest.TestCase):
             {
                 "material_requirements":["R1"],
                 "candidate_actions":[
-                    {"action_id":"a","covers":["R1"],"command":"echo work","verify_command":"echo verify"}
+                    {"action_id":"a","covers":["R1"],"command":"echo work","verify_command":"test -d /tmp"}
                 ]
             },
             {"finish_summary":"done"}
@@ -67,8 +69,8 @@ class ScienceAgentTests(unittest.TestCase):
         env=Env()
         outputs=[{
             "material_requirements":["R1"],
-            "candidates":[{"action_id":"a","covers":["R1"],"command":"echo one","verify_command":"echo verify"}],
-            "candidate_actions":[{"action_id":"b","covers":["R1"],"command":"echo two","verify_command":"echo verify"}],
+            "candidates":[{"action_id":"a","covers":["R1"],"command":"echo one","verify_command":"test -d /tmp"}],
+            "candidate_actions":[{"action_id":"b","covers":["R1"],"command":"echo two","verify_command":"test -d /tmp"}],
         }]
         with patch.object(s.science_planner, "plan", planner(outputs)):
             with self.assertRaisesRegex(RuntimeError,"CANDIDATE_ALIAS_CONFLICT"):
@@ -79,12 +81,12 @@ class ScienceAgentTests(unittest.TestCase):
             {
                 "material_requirements":["R1"],
                 "candidates":[
-                    {"action_id":"a","covers":["R1"],"command":"echo work","verify_command":"echo verify"}
+                    {"action_id":"a","covers":["R1"],"command":"echo work","verify_command":"test -d /tmp"}
                 ],
                 "finish_summary":"premature-substrate-finish"
             }
         ])
-        self.assertEqual(env.commands,["echo work","echo verify"])
+        self.assertEqual(env.commands,["echo work","test -d /tmp"])
         self.assertEqual(result["status"],"FINISHED")
         self.assertEqual(result["finish_authority"],"BRAIN_VERIFIED_STATE")
         self.assertEqual(result["cycles"],1)
@@ -125,6 +127,40 @@ class ScienceAgentTests(unittest.TestCase):
         with patch.object(s.science_planner, "plan", planner(outputs)):
             with self.assertRaises(Exception):
                 asyncio.run(s.run_science_goal("goal",env,max_cycles=1))
+
+    def test_trivial_verify_command_cannot_promote_coverage(self):
+        env,result=self.run_goal([
+            {
+                "material_requirements":["R1"],
+                "candidates":[
+                    {"action_id":"a","covers":["R1"],"command":"echo work","verify_command":"echo OK"}
+                ]
+            },
+            {"finish_summary":"premature"}
+        ])
+        self.assertNotEqual(result["status"],"FINISHED")
+        self.assertEqual(result["resolved_requirements"],[])
+        action=[r for r in result["trace"] if r.get("kind")=="BRAIN_SELECTED_RESEARCH_ACTION"][0]
+        self.assertEqual(action["verification_block_reason"],"TRIVIAL_OR_NONOBSERVING_VERIFY_COMMAND")
+        self.assertFalse(action["coverage_promoted"])
+
+    def test_action_output_anomaly_blocks_promotion_before_verify(self):
+        env,result=self.run_goal([
+            {
+                "material_requirements":["R1"],
+                "candidates":[
+                    {"action_id":"a","covers":["R1"],"command":"warn-action","verify_command":"test -d /tmp"}
+                ]
+            },
+            {"finish_summary":"premature"}
+        ])
+        self.assertNotEqual(result["status"],"FINISHED")
+        self.assertEqual(result["resolved_requirements"],[])
+        action=[r for r in result["trace"] if r.get("kind")=="BRAIN_SELECTED_RESEARCH_ACTION"][0]
+        self.assertEqual(action["verification_block_reason"],"ACTION_OUTPUT_ANOMALY")
+        self.assertFalse(action["coverage_promoted"])
+        self.assertEqual(env.commands[0],"warn-action")
+        self.assertNotIn("test -d /tmp",env.commands)
 
     def test_source_gate_projection_is_brain_owned_general_substrate(self):
         route={
