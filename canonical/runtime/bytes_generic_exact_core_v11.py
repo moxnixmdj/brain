@@ -120,7 +120,7 @@ def ds(ex,d=3):
 def ps(c,x):return rp(c["t"],x)
 def ci():
  for i in range(14):yield[(j*(2*j+10*i+16)+i*(6-5*i)+10)%33-16 for j in range(10)]
- yield[-4,-3];yield[1,2]
+ yield[-2,-1];yield[1,2]
 def aq(ex,d=3):
  q=[()];v=[]
  for _ in range(d+1):
