@@ -1,7 +1,7 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V35",
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34",
   "date": "2026-10-07",
-  "status": "ACTIVE_FAIL_CLOSED_ONE_LIVE_RESEARCH_ROOT__RESIDUAL_COMPLEMENT_UNSAT__D_FINALITY_DEFERRED_MECHANICAL_FREEZE_REPLAY__TERMINAL_FALSE",
+  "status": "ACTIVE_FAIL_CLOSED_ONE_PREMISE_POINTER__ESCAPE_PROGRESS_TOTALITY_ONLY__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -592,6 +592,9 @@
     "terminal_candidate_donor_independence_audit": {
       "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
       "git_blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26"
+    },
+    "adaptive_positive_cover_fixed_point_v2": {
+      "path": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V2.json"
     }
   },
   "live_truth": {
@@ -840,7 +843,7 @@
     "single_escape_frontier_definition": "E_EQUALS_S_TRACE_MINUS_D_B",
     "current_primary_u_primitive_count": 1,
     "current_primary_u_primitives": [
-      "RESIDUAL_COMPLEMENT_UNSAT_OR_CONSTRUCTIVE_COUNTEREXAMPLE"
+      "ESCAPE_PROGRESS_TOTALITY"
     ],
     "historical_13_open_refinement_families_are_primary_jobs": false,
     "historical_13_open_refinement_families_are_falsification_partitions": true,
@@ -887,7 +890,11 @@
     ],
     "current_gdpval_aa_opus55_public_elo": 1866,
     "gdpval_complete_pairwise_target_relation_bound": false,
-    "aggregate_target_score_sufficient_for_not_X": false
+    "aggregate_target_score_sufficient_for_not_X": false,
+    "current_escape_progress_totality_proved": false,
+    "global_rank_is_separate_open_problem": false,
+    "global_resource_potential_is_separate_open_problem": false,
+    "complete_raw_semantic_outcome_model_is_required": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
