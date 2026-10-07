@@ -1,35 +1,41 @@
 {
-  "schema":"PROJECT_BRAIN_BYTES_SEQUENCE_EQUIVALENCE_PRESENTATION_SPRITE_VERIFICATION_V1",
-  "date":"2026-10-07",
-  "status":"INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__809_GLOBAL_CLASSES_FOR_DECLARED_DEPTH3_SEQUENCE_ALGEBRA__ZERO_TERMINAL_CREDIT",
-  "scope_lock":"BYTES_RESEARCH_ONLY",
-  "carrier":{
-    "provider":"SPRITES",
-    "sprite_name":"brain-root3-current-byte-replay-20261007-v1",
-    "sprite_id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e"
+  "schema": "PROJECT_BRAIN_BYTES_SEQUENCE_EQUIVALENCE_PRESENTATION_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_REPLAY_PASS__809_CONGRUENCE_AND_WITNESS_CLASSES__GLOBAL_EQUIVALENCE_CONDITIONAL_ON_21_UNMECHANIZED_STRUCTURAL_SCHEMAS__ZERO_TERMINAL_CREDIT",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e"
   },
-  "exact_blob":"978d597ccaf10160de3985d3a7fc89c8f43a9ac9",
-  "verified":{
-    "programs":2955,
-    "pair_equations":82,
-    "triple_equations":67,
-    "scalar_equations":65,
-    "structural_equations":84,
-    "structural_schema_count":21,
-    "congruence_classes":809,
-    "finite_witness_classes":809,
-    "finite_witness_inputs":823
+  "exact_blob": "978d597ccaf10160de3985d3a7fc89c8f43a9ac9",
+  "verified": {
+    "programs": 2955,
+    "pair_equations": 82,
+    "triple_equations": 67,
+    "scalar_equations": 65,
+    "structural_equations": 84,
+    "structural_schema_count": 21,
+    "congruence_classes": 809,
+    "finite_witness_classes": 809,
+    "finite_witness_inputs": 823
   },
-  "logic":[
+  "logic": [
     "ALL_SCALAR_EQUATIONS_ARE_DECIDED_BY_EXACT_CENTRAL_PLUS_SYMBOLIC_TAIL_DESCRIPTORS",
     "ALL_STRUCTURAL_EQUATIONS_ARE_COVERED_WITH_NO_ORPHANS_BY_21_DECLARED_SEQUENCE_SEMANTIC_SCHEMAS",
-    "THE_PROVED_EQUATIONS_GENERATE_809_BIDIRECTIONAL_CONGRUENCE_COMPONENTS",
+    "THE_ASSERTED_EQUATIONS_GENERATE_809_BIDIRECTIONAL_CONGRUENCE_COMPONENTS",
     "THE_823_INPUT_SET_SEPARATES_THOSE_COMPONENTS_INTO_EXACTLY_809_BEHAVIOR_SIGNATURES",
-    "THEREFORE_THE_823_INPUT_SET_IS_CHARACTERISTIC_FOR_THE_DECLARED_DEPTH_LTE_3_SEQUENCE_PROGRAM_CLOSURE"
+    "CONDITIONALLY__IF_ALL_21_STRUCTURAL_SCHEMA_FAMILIES_ARE_GLOBALLY_SOUND__THE_823_INPUT_SET_IS_CHARACTERISTIC_FOR_THE_DECLARED_CLOSURE"
   ],
-  "hard_nonclaims":[
+  "hard_nonclaims": [
     "NO_EXTENSION_BEYOND_DEPTH_3_OR_THE_DECLARED_OPERATOR_ALGEBRA",
     "NO_GENERAL_PROGRAM_EQUIVALENCE_DECIDABILITY_CLAIM",
-    "NO_TERMINAL_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
-  ]
+    "NO_TERMINAL_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_UNCONDITIONAL_CHARACTERISTIC_SET_PROOF_FROM_THIS_CHECKER_ALONE"
+  ],
+  "mechanized_soundness_boundary": {
+    "scalar_equations": "MECHANIZED",
+    "structural_equation_schema_assignment": "MECHANIZED",
+    "structural_schema_semantic_soundness": "NOT_MECHANIZED"
+  }
 }
