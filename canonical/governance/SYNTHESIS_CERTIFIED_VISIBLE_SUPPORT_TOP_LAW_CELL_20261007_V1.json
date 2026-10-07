@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_TOP_LAW_CELL_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_PARAMETERIZED_TOP_LAW_CELL__LOCAL_COMPOSITION_PASS__INDEPENDENT_REPLAY_PENDING__ZERO_GLOBAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "implementation": {
+    "runtime": {
+      "path": "canonical/runtime/synthesis_certified_visible_support_policy_v1.py",
+      "git_blob_sha": "dcef050165201d506f66c86854cb30bcb7637b42"
+    },
+    "tests": {
+      "path": "canonical/tests/test_synthesis_certified_visible_support_policy_v1.py",
+      "git_blob_sha": "1a0e01a3de260d0f43549c0b15df4d5f2668ad1b"
+    },
+    "bounded_support": {
+      "path": "canonical/runtime/bounded_claim_support.py",
+      "git_blob_sha": "197246a50ace8c16b945def9edb1357fb317c393"
+    },
+    "grounded_realizer": {
+      "path": "canonical/runtime/synthesis_grounded_expression_ir_v1.py",
+      "git_blob_sha": "0709b7d43a069eaa9eb3240df28789a9107a36db"
+    }
+  },
+  "exact_cell": {
+    "all_claims_explicitly_required": true,
+    "all_evidence_units_verified": true,
+    "every_claim_evidence_relation_resolved_by_bounded_fact_grammar": true,
+    "every_required_claim_has_at_least_one_certified_support": true,
+    "all_detected_conflicts_rendered": true,
+    "no_optional_salience_decision": true,
+    "audience_requirements_fully_explicit_in_typed_supported_constraint_profile": true,
+    "semantic_reordering_not_required": true,
+    "unsupported_or_unresolved_dimensions": "FAIL_CLOSED"
+  },
+  "guarantees": [
+    "ALL_REQUIRED_CLAIMS_RENDERED_WITH_CERTIFIED_SUPPORT_PROVENANCE",
+    "ALL_BOUNDED_GRAMMAR_CONFLICTS_RENDERED",
+    "UNRELATED_BOUNDED_GRAMMAR_EVIDENCE_OMITTED",
+    "NO_NEW_MATERIAL_CLAIMS",
+    "NO_MATERIAL_ITEM_DROP",
+    "EXPLICIT_AUDIENCE_AND_FORMAT_PROFILE_CAUSALLY_APPLIED",
+    "UNKNOWN_SEMANTIC_RELATIONS_FAIL_CLOSED"
+  ],
+  "conditional_top_law": {
+    "premise": "THE_EXACT_CELL_PRECONDITIONS_HOLD_AND_THE_BOUND_RUNTIME_PASSES",
+    "component_values": {
+      "claim_to_source_fidelity": 1,
+      "uncertainty_and_disagreement_preservation": 1,
+      "audience_adaptation": 1,
+      "format_and_style_constraints": 1,
+      "compression_without_decision_relevant_loss": 1,
+      "required_claim_coverage": 1,
+      "unsupported_material_claims": 0
+    },
+    "matched_quality": 1,
+    "consequence": "WITHIN_THIS_PARAMETERIZED_CELL_BRAIN_IS_AT_THE_FROZEN_OBJECTIVE_CEILING_AND_NO_OPUS_COMPARATOR_IS_REQUIRED"
+  },
+  "local_checks": {
+    "composition_smoke_pass": true,
+    "support_conflict_unrelated_case_pass": true,
+    "audience_profile_counterfactual_changes_output": true,
+    "unresolved_freeform_relation_fails_closed": true,
+    "independent_carrier_replay": false,
+    "independent_blocker": "GITHUB_ACTIONS_PRE_STEP_RUNNER_FAILURE_AND_EXISTING_REPLAY_SPRITE_EXEC_IO_ERROR"
+  },
+  "symbolic_check": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "result": "TRUE__ALL_FIVE_QUALITY_COMPONENTS_1_AND_COVERAGE_1_AND_UNSUPPORTED_0_IMPLIES_TOP_LAW_CONJUNCTION"
+  },
+  "scheduler_effect": [
+    "SUBTRACT_THIS_PARAMETERIZED_CELL_FROM_SYNTHESIS_U_ONLY_AFTER_INDEPENDENT_EXACT_BLOB_REPLAY.",
+    "REUSE_THE_CELL_ACROSS_ANY_TARGET_CONTEXT_MEETING_THE_EXACT_PRECONDITIONS.",
+    "KEEP_GENERAL_PARAPHRASE_ENTAILMENT_ARBITRARY_AUDIENCE_MEANING_AND_OPTIONAL_SALIENCE_ON_THE_SHARED_SEMANTIC_FRONTIER."
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_SYNTHESIS_CLOSURE.",
+    "NO_GENERAL_SEMANTIC_SUPPORT_OR_PARAPHRASE_CLAIM.",
+    "NO_ARBITRARY_AUDIENCE_INTERPRETATION_CLAIM.",
+    "NO_ABC_D_OR_TERMINAL_CREDIT_BEFORE_INDEPENDENT_REPLAY."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
