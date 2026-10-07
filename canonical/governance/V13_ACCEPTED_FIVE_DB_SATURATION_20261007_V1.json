@@ -1,0 +1,151 @@
+{
+  "schema": "PROJECT_BRAIN_V13_ACCEPTED_FIVE_DB_SATURATION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_EXISTING_EVIDENCE_SATURATION__FIVE_ACCEPTED_CLAIM_SCOPES_ADDED_TO_D_B__ZERO_GLOBAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V13.json",
+    "git_blob_sha": "0d18488b51a222e5da414329ccd9d33cbc1fc31c"
+  },
+  "certificate_theorem": {
+    "path": "canonical/governance/DIRECT_END_TO_END_SELECTED_CELL_CERTIFICATE_THEOREM_20261007_V1.json",
+    "git_blob_sha": "ecb52ca25fa14a60b7c34206fea25d8d3cfdcf0d"
+  },
+  "ownership_and_route_authority": {
+    "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+    "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+  },
+  "current_D_reduction": {
+    "path": "canonical/governance/CURRENT_ACCEPTED_FIVE_D_REDUCTION_20261007_V1.json",
+    "git_blob_sha": "a1d2dac1ab98462c3505543f8047442a60017d19"
+  },
+  "regions": [
+    {
+      "id": "ACCEPTED_DELEGATION_UNIVERSAL_SCOPE",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "scope": "THE_FROZEN_DELEGATION_PROTOCOL_COVERED_BY_THE_UNIVERSAL_FORMAL_SCOPE_CERTIFICATE",
+      "route": {
+        "path": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+        "git_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522"
+      },
+      "semantics": {
+        "path": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "955ac8f4bd0db2527bfbb465fc8252df6d916156"
+      },
+      "e2e": {
+        "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23",
+        "kind": "ABSOLUTE_DOMINANCE_THEORETICAL_CEILING"
+      },
+      "add_to_D_B": true
+    },
+    {
+      "id": "ACCEPTED_RECOVERY_UNIVERSAL_SCOPE",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "scope": "THE_SCOPE_COMPLETE_RECOVERY_PROTOCOL_BOUND_BY_THE_HARDENED_ZERO_REALITY_ACCEPTANCE_CERTIFICATE",
+      "route": {
+        "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+        "git_blob_sha": "28940387bd6c11671035ad9201e37bba13fd9bc9"
+      },
+      "semantics": {
+        "path": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "2c6bb594d353e4c6a169821da5f84a91be212ca7"
+      },
+      "e2e": {
+        "path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+        "git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483",
+        "kind": "SCOPE_COMPLETE_OBJECTIVE_CEILING_OR_FLOOR"
+      },
+      "add_to_D_B": true
+    },
+    {
+      "id": "ACCEPTED_TOOL_DISCOVERY_UNIVERSAL_SCOPE",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "scope": "THE_FROZEN_HIDDEN_TOOL_PROTOCOL_COVERED_BY_THE_UNIVERSAL_FORMAL_SCOPE_CERTIFICATE",
+      "route": {
+        "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+        "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+      },
+      "semantics": {
+        "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+      },
+      "e2e": {
+        "path": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "913d171b3c855000d322e183b142b3200eeaf0a9",
+        "kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE"
+      },
+      "add_to_D_B": true
+    },
+    {
+      "id": "ACCEPTED_EXACT_SYMBOLIC_FROZEN_12",
+      "family": "EXACT_SYMBOLIC_COMPUTATION",
+      "scope": "ONLY_THE_BOUNDED_EXACT_SYMBOLIC_OPERATION_CLASSES_REPRESENTED_BY_FROZEN_SUITE_OBS_EXACT_SYMBOLIC_001",
+      "route": {
+        "path": "canonical/obsolescence/run_exact_symbolic_v1.py",
+        "git_blob_sha": "8f6f04fee00664b26ddf1a45a65698399c7ca6c3",
+        "selected_entry": "run_task"
+      },
+      "semantics": {
+        "path": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+        "git_blob_sha": "a691d49ef377fa216bbbeff70183112d65445463"
+      },
+      "route_rebind": {
+        "path": "canonical/governance/EXACT_SYMBOLIC_SELECTED_LEAF_ROUTE_20261007_V1.json",
+        "git_blob_sha": "ba48f9024787e25308f9ad1dd74a83064f467865"
+      },
+      "e2e": {
+        "kind": "THEORETICAL_CEILING_100_PERCENT_EXACT_CORRECTNESS"
+      },
+      "add_to_D_B": true
+    },
+    {
+      "id": "ACCEPTED_LONG_HORIZON_CONTINUITY_CLAIM_SCOPE",
+      "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "scope": "DURABLE_CROSS_SESSION_PROJECT_STATE_AND_SAME_MISSION_CHECKPOINT_RELAUNCH_CONTINUITY_AS_EXACTLY_BOUNDED_BY_THE_OWNERSHIP_PACKAGE",
+      "route": {
+        "path": "canonical/runtime/same_identity_supervisor_credited_v1.py",
+        "git_blob_sha": "47c461f502e840def0c38728e1bfd7c6401cb804"
+      },
+      "semantics": {
+        "path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+        "git_blob_sha": "2d912cf8df64bd806fffb6a1070d95644d005470"
+      },
+      "route_rebind": {
+        "path": "canonical/governance/CONTINUITY_CREDITED_REBIND_20261007_V1.json",
+        "git_blob_sha": "839af46fd8ef214251b44bd1398fa2d1543f00c5"
+      },
+      "e2e": {
+        "kind": "OBJECTIVE_BEHAVIORAL_CEILING_ON_BOUND_PERSISTENCE_CONTINUITY_PREDICATES"
+      },
+      "add_to_D_B": true
+    }
+  ],
+  "theorem": {
+    "statement": "FOR_EACH_OF_THE_FIVE_ALREADY_ACCEPTED_CLAIM_SCOPES__THE_CURRENT_REPOSITORY_BINDS_COMPLETE_SCOPE_SEMANTICS__AN_EXACT_BRAIN_OWNED_ROUTE__AND_A_DIRECT_SCOPE_COMPLETE_ABSOLUTE_OR_OBJECTIVE_CEILING_NONINFERIORITY_CERTIFICATE__THEREFORE_EACH_EXACT_ACCEPTED_CLAIM_SCOPE_IS_A_SOUND_REGION_OF_V13_D_B.",
+    "direct_e2e_rule": "DIRECT_END_TO_END_SELECTED_CELL_CERTIFICATE_THEOREM_ALLOWS_SCOPE_COMPLETE_FINAL_ROUTE_E2E_DOMINANCE_OR_TOP_LAW_TO_DISCHARGE_THE_CELL_WITHOUT_A_SEPARATE_INTERNAL_LOCAL_C_DECOMPOSITION.",
+    "effect": "ADD_ONLY_THE_FIVE_EXACT_ACCEPTED_CLAIM_SCOPES_TO_D_B__REMOVE_ONLY_THOSE_SAME_REGIONS_FROM_E."
+  },
+  "v13_effect": {
+    "accepted_claim_scope_regions_added_to_D_B": 5,
+    "target_queries_consumed": 0,
+    "new_target_reality_consumed": 0,
+    "abc_global_state": "OPEN",
+    "D_finality_state": "OPEN",
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FIVE_REGIONS_COVER_ALL_OPUS55_USEFUL_CONTEXTS",
+    "NO_CLAIM_EXACT_SYMBOLIC_EXTENDS_BEYOND_THE_FROZEN_OPERATION_CLASSES",
+    "NO_CLAIM_CONTINUITY_EXTENDS_TO_GENERAL_SEMANTIC_MEMORY_QUALITY_OR_ARBITRARY_COGNITION",
+    "NO_NEW_ACCEPTANCE_FAMILY_OR_CAPABILITY_CREDIT",
+    "NO_GLOBAL_ABC_CLOSURE",
+    "NO_GLOBAL_D_FINALITY_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
