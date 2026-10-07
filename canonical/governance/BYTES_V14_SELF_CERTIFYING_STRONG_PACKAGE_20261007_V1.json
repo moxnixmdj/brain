@@ -1,60 +1,71 @@
 {
-  "schema":"PROJECT_BRAIN_BYTES_V14_SELF_CERTIFYING_STRONG_PACKAGE_V1",
-  "date":"2026-10-07",
-  "status":"INDEPENDENT_REPLAY_PASS__NEW_SMALLEST_FULL_RUNTIME_PLUS_SELF_PROOF_PACKAGE__ZERO_TERMINAL_CREDIT",
-  "scope_lock":"BYTES_RESEARCH_ONLY",
-  "components":{
-    "runtime":{
-      "path":"canonical/runtime/bytes_generic_zero_overhead_totality_core_v14.py",
-      "git_blob_sha":"f5d140ca78b1512efd3ad248e5991909480331d5",
-      "raw_bytes":3923,
-      "standalone_fixed_decoder_payload_bytes":1575
+  "schema": "PROJECT_BRAIN_BYTES_V14_SELF_CERTIFYING_STRONG_PACKAGE_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_REPLAY_PASS__NEW_SMALLEST_FULL_RUNTIME_PLUS_SELF_PROOF_PACKAGE__ZERO_TERMINAL_CREDIT",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "components": {
+    "runtime": {
+      "path": "canonical/runtime/bytes_generic_zero_overhead_totality_core_v14.py",
+      "git_blob_sha": "f5d140ca78b1512efd3ad248e5991909480331d5",
+      "raw_bytes": 3923,
+      "standalone_fixed_decoder_payload_bytes": 1575
     },
-    "self_certifying_checker":{
-      "path":"canonical/runtime/bytes_self_certifying_sequence_checker_v2.py",
-      "git_blob_sha":"0ba92a4cbefe42034d39be9e17e9a66034eec784",
-      "raw_bytes":3022,
-      "standalone_fixed_decoder_payload_bytes":1282
+    "self_certifying_checker": {
+      "path": "canonical/runtime/bytes_self_certifying_sequence_checker_v2.py",
+      "git_blob_sha": "0ba92a4cbefe42034d39be9e17e9a66034eec784",
+      "raw_bytes": 3022,
+      "standalone_fixed_decoder_payload_bytes": 1282
     }
   },
-  "independent_replay":{
-    "carrier":"brain-root3-current-byte-replay-20261007-v1",
-    "result":{"status":"PASS","programs":2955,"equations":933,"classes":809,"witnesses":823},
-    "api_adapter_bytes":0
-  },
-  "joint_package":{
-    "framing":"TWO_BYTE_BIG_ENDIAN_RUNTIME_LENGTH_THEN_EXACT_RUNTIME_BYTES_THEN_EXACT_CHECKER_BYTES",
-    "raw_bytes":6947,
-    "fixed_decoder_payload_bytes":2674,
-    "payload_sha256":"4721dfb851dd40bc0a310853993f24581131e4a7210a98382cbe810968b3f067",
-    "decoder":{
-      "codec":"PYTHON_STDLIB_RAW_LZMA1",
-      "dict_size":8192,
-      "lc":0,
-      "lp":0,
-      "pb":0,
-      "mode":"NORMAL",
-      "match_finder":"BT4",
-      "nice_len":64
+  "independent_replay": {
+    "carrier": "brain-root3-current-byte-replay-20261007-v1",
+    "result": {
+      "status": "PASS",
+      "programs": 2955,
+      "equations": 933,
+      "classes": 809,
+      "witnesses": 823
     },
-    "search_configurations_tested":15000,
-    "roundtrip_exact":true
+    "api_adapter_bytes": 0
   },
-  "comparison":{
-    "previous_smallest_full_package_bytes":2852,
-    "previous_runtime":"V10",
-    "new_full_package_bytes":2674,
-    "bytes_saved":178,
-    "fraction_saved":0.06241234221598878,
-    "trust_boundary_changed":false
+  "joint_package": {
+    "framing": "TWO_BYTE_BIG_ENDIAN_RUNTIME_LENGTH_THEN_EXACT_RUNTIME_BYTES_THEN_EXACT_CHECKER_BYTES",
+    "raw_bytes": 6947,
+    "fixed_decoder_payload_bytes": 2674,
+    "payload_sha256": "4721dfb851dd40bc0a310853993f24581131e4a7210a98382cbe810968b3f067",
+    "decoder": {
+      "codec": "PYTHON_STDLIB_RAW_LZMA1",
+      "dict_size": 8192,
+      "lc": 0,
+      "lp": 0,
+      "pb": 0,
+      "mode": "NORMAL",
+      "match_finder": "BT2",
+      "nice_len": 64,
+      "python_lzma_constant": 18
+    },
+    "search_configurations_tested": 15000,
+    "roundtrip_exact": true,
+    "decoder_correction": "PREVIOUS_DRAFT_LABEL_BT4_WAS_WRONG__MEASURED_mf_18_IS_PYTHON_lzma_MF_BT2"
   },
-  "critical_truth":"THIS_IS_A_RUNTIME_SUBSTITUTION_AND_JOINT_RECODING_GAIN__IT_DOES_NOT_REDUCE_THE_SELF_CHECKERS_CLASS_SPECIFIC_RULE_KNOWLEDGE_OR_META_LEVEL_SOUNDNESS_TRUST",
-  "next_critical_path":"REDUCE_OR_DERIVE_THE_SELF_CHECKERS_CLASS_SPECIFIC_LIST_RULE_KERNEL_FROM_PRIMITIVE_RUNTIME_SEMANTICS_WITHOUT_GIVING_BACK_THE_178_BYTE_PACKAGE_GAIN",
-  "hard_nonclaims":[
+  "comparison": {
+    "previous_smallest_full_package_bytes": 2852,
+    "previous_runtime": "V10",
+    "new_full_package_bytes": 2674,
+    "bytes_saved": 178,
+    "fraction_saved": 0.06241234221598878,
+    "trust_boundary_changed": false
+  },
+  "critical_truth": "THIS_IS_A_RUNTIME_SUBSTITUTION_AND_JOINT_RECODING_GAIN__IT_DOES_NOT_REDUCE_THE_SELF_CHECKERS_CLASS_SPECIFIC_RULE_KNOWLEDGE_OR_META_LEVEL_SOUNDNESS_TRUST",
+  "next_critical_path": "REDUCE_OR_DERIVE_THE_SELF_CHECKERS_CLASS_SPECIFIC_LIST_RULE_KERNEL_FROM_PRIMITIVE_RUNTIME_SEMANTICS_WITHOUT_GIVING_BACK_THE_178_BYTE_PACKAGE_GAIN",
+  "hard_nonclaims": [
     "NO_ZERO_TRUST_PROOF",
     "NO_GLOBAL_MINIMUM_DESCRIPTION_LENGTH_CLAIM",
     "NO_GENERAL_PROGRAM_EQUIVALENCE_CLAIM",
     "NO_TERMINAL_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
   ],
-  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
 }
