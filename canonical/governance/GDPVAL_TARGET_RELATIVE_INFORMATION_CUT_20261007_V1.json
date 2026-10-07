@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_TARGET_RELATIVE_INFORMATION_CUT_V1",
+  "date": "2026-10-07",
+  "status": "CURRENT_BOUND_INFORMATION_THEOREM__STRUCTURAL_ACCEPTANCE_AND_OWNER_LAYER_TARGET_RELATIVE_ROUTES_MUST_TOURNAMENT_IN_PARALLEL__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "exact_bindings": {
+    "current_authority_v19": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "79f6d4eb3a9e18a7ad37dfd674a3ac0a14d36edb"
+    },
+    "current_reality_cut_v5": {
+      "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V5.json",
+      "git_blob_sha": "c572bac44169890417e209e81254469ce6a1004b"
+    },
+    "rubric_acceptance_cut": {
+      "path": "canonical/governance/GDPVAL_RUBRIC_ACCEPTANCE_COMPLEMENT_CUT_20261007_V1.json",
+      "git_blob_sha": "e4811ff17371f6da78e3d2dc6a44cf258789a037"
+    },
+    "public_220_population": {
+      "path": "canonical/evidence/GDPVAL_PUBLIC_220_POPULATION_REALITY_RECEIPT_20261007_V1.json",
+      "git_blob_sha": "55214960a5a3a383fe17aa5489c64ecd26a5c1a9"
+    },
+    "public_220_semantic_localization": {
+      "path": "canonical/governance/GDPVAL_PUBLIC_220_SEMANTIC_COMPLEMENT_LOCALIZATION_20261007_V1.json",
+      "git_blob_sha": "9f5fd6f89de1107adeb0e4eb95c1c16cd6d1392c"
+    },
+    "owner_target_freshness": {
+      "path": "canonical/verification/GDPVAL_OPUS55_TARGET_FRESHNESS_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "e2a85be95fc2d1174699ce6b865767dce86c103e"
+    },
+    "owner_route_boundary": {
+      "path": "canonical/verification/GDPVAL_AA_V21_PUBLIC_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "e3d890b0fdfe2c5173cf18efddbc1483b7db6701"
+    },
+    "p2_top_law": {
+      "path": "canonical/governance/P2_EXPLICIT_SEMANTIC_CONTRACT_UNIVERSAL_TOP_LAW_20261007_V1.json",
+      "git_blob_sha": "decd0d46538a213f2e169c00c83fae09191a7ed3"
+    },
+    "p2_strong_quality": {
+      "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_SUBREGION_TOP_LAW_20261007_V1.json",
+      "git_blob_sha": "ec0831f086823995b671c33ff24cd76de3b0250e"
+    }
+  },
+  "premises": {
+    "public_context_population_bound": true,
+    "public_task_count": 220,
+    "public_rubric_item_count": 10453,
+    "exact_pairwise_human_preference_function_publicly_bound": false,
+    "llm_rubric_grader_is_exact_standard_replacement": false,
+    "current_real_gdpval_p2_strong_quality_admission_count": 0,
+    "current_owner_opus55_reference_elo": 1867,
+    "brain_owner_layer_elo_score_bound": false,
+    "rubric_acceptance_cut_itself_claims_rubric_extraction_replaces_pairwise_preference": false
+  },
+  "information_theorem": {
+    "public_observation_symbol": "O",
+    "hidden_target_relation_symbol": "H",
+    "target_truth_symbol": "T",
+    "statement": "IF_TWO_ADMISSIBLE_TARGET_RELATIONS_H1_AND_H2_SHARE_THE_SAME_BOUND_PUBLIC_STRUCTURAL_OBSERVATION_O_BUT_INDUCE_OPPOSITE_BRAIN_VS_OPUS_TARGET_TRUTH__NO_DETERMINISTIC_RULE_USING_O_ALONE_CAN_CERTIFY_THE_CORRECT_TARGET_TRUTH_IN_BOTH_WORLDS.",
+    "wolfram_countermodel": "O1_EQ_O2_AND_H1_XOR_H2_IS_SATISFIABLE__A_SINGLE_DECISION_D_MATCHING_BOTH_OPPOSITE_TARGET_BITS_HAS_SATISFIABILITY_COUNT_ZERO",
+    "gdpval_application": "PUBLIC_PROMPTS_RUBRICS_REFERENCES_AND_GOLD_CAN_LOCALIZE_AND_CERTIFY EXPLICIT ACCEPTANCE DIMENSIONS__BUT_WHILE THE ACTUAL PAIRWISE HUMAN PREFERENCE RELATION IS NOT PROVED EQUIVALENT TO THOSE DIMENSIONS__STRUCTURAL_LOCALIZATION_ALONE CANNOT CERTIFY TARGET_RELATIVE_NONINFERIORITY UNLESS A STRONGER DOMINANCE CERTIFICATE MAKES THE TARGET ORDER INVARIANT.",
+    "escape_clause": "A_SOUND_SCOPE_COMPLETE_DOMINANCE_OR_TARGET_RELATION_BRIDGE_ELIMINATES_THE_NEED_FOR_OWNER_LAYER_SCORING FOR THE COVERED SCOPE.",
+    "current_escape_clause_satisfied": false
+  },
+  "tournament_rule": {
+    "serial_rule_rejected": "KEEP_OWNER_LAYER_TARGET_RELATIVE_EVALUATION_ASLEEP_MERELY_WHILE_ANY_FURTHER_STRUCTURAL_ACCEPTANCE_LOCALIZATION_REMAINS_AVAILABLE",
+    "route_A": {
+      "id": "STRUCTURAL_STRONGER_CERTIFICATE",
+      "action": "COMPILE_RUBRICS_AND_OTHER_SOURCE_SEMANTICS_ONLY_WHERE_THE_RESULT_CAN_TERMINATE_IN_CONTENT_ADDRESSED_REAL_CONTEXT_ADMISSION_PLUS_SCOPE_COMPLETE_ADEQUACY_DOMINANCE_OR_A_SOUND_BRIDGE_TO_THE_TERMINAL_PAIRWISE_RELATION",
+      "current_credit": "ZERO_GDPVAL_SCOPE_CLOSURE"
+    },
+    "route_B": {
+      "id": "MATCHED_OWNER_LAYER_BRAIN_SCORING",
+      "action": "MAKE_THE_BRAIN_OUTPUT_ROUTE_AND_MATCHED_GDPVAL_AA_OWNER_JUDGE_SCORER_RATING_EPOCH_CALLABLE_AND_OBTAIN_THE_BRAIN_TARGET_RELATIVE_RESULT",
+      "direct_opus_task_generation_required": false,
+      "reason": "THE_PUBLIC_CONTEXT_POPULATION_AND_CURRENT_OPUS55_TARGET_REFERENCE_ARE_ALREADY_BOUND"
+    },
+    "scheduling": "RUN_A_AND_B_IN_PARALLEL__FIRST_SOUND_SCOPE_COMPLETE_CLOSURE_WINS__CANCEL_THE_OTHER_ROUTE_FOR_ANY_SCOPE_ALREADY_CLOSED"
+  },
+  "reality_effect": {
+    "positive_reality_class_to_restore": "GDPVAL_AA_OWNER_LAYER",
+    "reason": "NO_CURRENT_SCOPE_COMPLETE_DOMINANCE_OR_PAIRWISE_BRIDGE_IS_BOUND__OWNER_LAYER_INFORMATION_IS_CURRENTLY_REQUIRED_UNLESS_ROUTE_A_WINS_FIRST",
+    "existing_lane": "L4_ARTIFICIAL_ANALYSIS_PROFESSIONAL",
+    "new_lane_required": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GDPVAL_IS_CLOSED.",
+    "NO_CLAIM_THE_HIDDEN_PAIRWISE_PREFERENCE_FUNCTION_IS_KNOWN.",
+    "NO_CLAIM_RUBRIC_EXTRACTION_IS_USELESS.",
+    "NO_CLAIM_OWNER_LAYER_SCORING_IS_INFORMATION_THEORETICALLY_REQUIRED_AFTER_A_SOUND_SCOPE_COMPLETE_DOMINANCE_CERTIFICATE_EXISTS.",
+    "NO_BRAIN_GDPVAL_OWNER_ELO_SCORE.",
+    "NO_U_EMPTY.",
+    "NO_D_FINALITY.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
