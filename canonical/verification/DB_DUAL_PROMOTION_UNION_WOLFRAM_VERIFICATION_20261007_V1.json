@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_DB_DUAL_PROMOTION_UNION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_TWO_PROMOTION_SET_UNION__ZERO_TERMINAL_CREDIT",
+  "purpose": "Reconcile two sound D_B promotions that each started from the same ten-record base without losing either promotion.",
+  "source_bindings": {
+    "browser_manifest": {
+      "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V4.json",
+      "git_blob_sha": "d86bbf7a1cc8968b3f48fbe1d13c390ab1310b9a"
+    },
+    "p2_manifest": {
+      "path": "canonical/governance/V14_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V4.json",
+      "git_blob_sha": "e658e3c8359c97c994afb31c38d3ccb82931e97e"
+    }
+  },
+  "independent_engine": "WOLFRAM_LANGUAGE",
+  "exact_check": {
+    "base_record_count": 10,
+    "promotion_ids": [
+      "BROWSER_STATE_INFORMATION_SAFE_ALL_SEEDS_ALL_ORDINALS_V1",
+      "PROFESSIONAL_ARTIFACT_P2_INFO_SAFE_V2_ALL_GENERATED_CASES"
+    ],
+    "promotion_ids_distinct": true,
+    "union_record_count": 12,
+    "expected_12": true,
+    "wolfram_result": "<|\"baseCount\" -> 10, \"additionCount\" -> 2, \"distinctAdditions\" -> True, \"unionCount\" -> 12, \"expected12\" -> True|>"
+  },
+  "truth_boundary": {
+    "claim": "THE_TWO_DISTINCT_PROMOTION_CERTIFICATE_RECORDS_MUST_BOTH_BE_CACHED_ON_TOP_OF_THE_COMMON_TEN_RECORD_BASE.",
+    "nonclaim": "NO_ASSERTION_THAT_THE_TWELVE_CERTIFIED_REGIONS_ARE_PAIRWISE_DISJOINT_OR_EXHAUST_D_B.",
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
