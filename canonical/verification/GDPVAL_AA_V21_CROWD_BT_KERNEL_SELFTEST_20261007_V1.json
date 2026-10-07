@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_AA_V21_CROWD_BT_KERNEL_SELFTEST_V1",
+  "date": "2026-10-07",
+  "status": "PASS__PUBLIC_CROWD_BT_IDENTITIES_AND_ANCHORED_MLE_RECOVERY_VERIFIED__DISCONNECTED_GRAPH_FAILS_CLOSED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/gdpval_aa_v21_crowd_bt_kernel_v1.py",
+    "git_blob_sha": "8a880c6c38e608a4afcf082013ad69c1047d5df6"
+  },
+  "governance": {
+    "path": "canonical/governance/GDPVAL_AA_V21_CROWD_BT_PUBLIC_KERNEL_20261007_V1.json",
+    "git_blob_sha": "9e540d081b6d0b20062e12e65a4f65dd3107c3ad"
+  },
+  "replay": {
+    "executor": "CHATGPT_ISOLATED_PYTHON_3_SCIPY_RUNTIME",
+    "probability_identity_checks": {
+      "eta_1_equals_plain_bradley_terry": true,
+      "eta_half_equals_half_probability": true,
+      "eta_0_equals_reversed_bradley_terry": true
+    },
+    "synthetic_anchor_elo": 1600,
+    "synthetic_true_ratings": {
+      "strong": 1800,
+      "anchor": 1600,
+      "weak": 1400
+    },
+    "recovered_ratings": {
+      "strong": 1800.3964546126283,
+      "anchor": 1600,
+      "weak": 1399.7811274585724
+    },
+    "recovery_within_5_elo": true,
+    "disconnected_nonanchor_component_rejected": true
+  },
+  "hard_nonclaims": [
+    "SYNTHETIC_SELF_TEST_DOES_NOT_VALIDATE_OWNER_JUDGE_QUALITY_VALUES.",
+    "SYNTHETIC_SELF_TEST_DOES_NOT_VALIDATE_OWNER_SANDWICH_CI_OR_PAIRING_POLICY.",
+    "NO_GDPVAL_SCOPE_CLOSURE_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
