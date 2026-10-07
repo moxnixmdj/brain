@@ -46,8 +46,9 @@ def test_explicit_defined_term_condition_can_select_policy():
             "ordinary_policy": {"op": "NOT", "arg": {"op": "ATOM", "id": atom_id}},
         },
     )
-    assert out["status"] == "COMMON_POLICY_CERTIFIED"
-    assert out["certified_common_policies"] == ["exception_policy"]
+    assert out["status"] == "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED"
+    assert out["entailed_policy_conditions"] == ["exception_policy"]
+    assert out["certified_common_policies"] == []
 
 
 def test_caller_cannot_relabel_defined_term_or_field():
