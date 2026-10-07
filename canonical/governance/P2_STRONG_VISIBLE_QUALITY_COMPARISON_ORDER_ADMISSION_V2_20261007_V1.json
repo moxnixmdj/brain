@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_P2_STRONG_VISIBLE_QUALITY_COMPARISON_ORDER_ADMISSION_V2",
+  "date": "2026-10-07",
+  "status": "EXECUTABLE_TRUTH_REPAIR__FULL_RUBRIC_EQUIVALENCE_OR_MINIMUM_BOUND_COMPARISON_ORDER__ZERO_GLOBAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "stable_pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "f66928a97218fa5d327a9faaf53e90bcb1c89aec"
+    },
+    "strong_quality_v1": {
+      "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_SUBREGION_TOP_LAW_20261007_V1.json",
+      "git_blob_sha": "ec0831f086823995b671c33ff24cd76de3b0250e"
+    },
+    "rubric_equivalence_truth_repair": {
+      "path": "canonical/governance/P2_RUBRIC_EQUIVALENCE_NECESSITY_FALSIFIER_20261007_V1.json",
+      "git_blob_sha": "5622e9509d2a613103eb6c73255bddbb6aac671f"
+    },
+    "minimum_information_runtime": {
+      "path": "canonical/governance/V16_TERMINAL_SEMANTIC_QUOTIENT_INFORMATION_POLICY_20261007_V1.json",
+      "git_blob_sha": "27044c364eaf5f582c761a9b28b912c0f164a0b3"
+    },
+    "source_aligned_semantic_proof": {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v1.py",
+      "git_blob_sha": "d1d6a499e0122d1176f6de5a6315613245d288b1"
+    }
+  },
+  "runtime": {
+    "path": "canonical/runtime/p2_strong_quality_visible_certifier_v2.py",
+    "sha256": "173b017ab3914c1cb6cfcbc8a30c9895c8343525b7ddb856ea524b78a706c19f"
+  },
+  "admission_order_proof_one_of": [
+    {
+      "mode": "FULL_RUBRIC_EQUIVALENCE",
+      "requires": [
+        "explicit_rubric_equivalent_to_p2_objective == true",
+        "nonempty rubric_equivalence_receipt"
+      ]
+    },
+    {
+      "mode": "BOUND_COMPARISON_ORDER",
+      "requires": [
+        "target_comparison_order_bound == true",
+        "nonempty target_comparison_order_receipt",
+        "comparison selected_edit_ids exactly equal the runtime-selected plan",
+        "comparison ablated_edit_id exactly equals the runtime-selected maximum-marginal-loss ablation",
+        "selected_gt_baseline == true",
+        "selected_gt_ablated == true",
+        "rescue_eq_selected == true"
+      ]
+    }
+  ],
+  "preserved_fail_closed_requirements": [
+    "CONTENT_ADDRESSED_LOSSLESS_P2_MEMBERSHIP",
+    "BASELINE_LAYOUT_NONOBSCURING",
+    "MECHANICS_ONLY_BASELINE_EQUIVALENCE",
+    "ABLATION_RESCUE_SEMANTIC_BINDING",
+    "NATIVE_MECHANICAL_GATE_WHEN_LOAD_BEARING",
+    "VISIBLE_GROUNDING",
+    "REQUIRED_ANALYSIS_COVERAGE",
+    "AUDIENCE_MATCH",
+    "NONOBSCURING_SELECTED_PLAN"
+  ],
+  "theorem_effect": [
+    "GLOBAL_RUBRIC_FUNCTION_IDENTIFICATION_IS_NOT_REQUIRED_WHEN_ONLY_SELECTED_BASELINE_AND_SELECTED_ABLATION_ORDER_RELATIONS_ARE_LOAD_BEARING.",
+    "COMPARISON_ORDER_MODE_BINDS_THE_EXACT_RUNTIME_SELECTED_AND_ABLATED_OBJECTS__SO_A_RECEIPT_FOR_A_DIFFERENT_PLAN_CANNOT_BE_REUSED.",
+    "THE_CERTIFIER_DOES_NOT_SELF_AUTHENTICATE_THE_TARGET_COMPARISON_ORDER_RECEIPT.",
+    "SOURCE_ALIGNED_OPERATOR_OR_LITERAL_PROOFS_MAY_AUTHENTICATE_INPUT_FACTS_BUT_DO_NOT_BY_THEMSELVES_PROVE_TARGET_QUALITY_ORDER."
+  ],
+  "abc_effect": {
+    "target": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "leverage": "WIDEN_THE_AUTHENTICATED_STRONG_QUALITY_SUBREGION_BY_REPLACING_AN_OVERSTRONG_GLOBAL_RUBRIC_IDENTITY_PRECONDITION_WITH_THE_MINIMUM_LOAD_BEARING_TARGET_RELATIVE_ORDER_CERTIFICATE",
+    "real_context_admission_claimed": false,
+    "U_empty_claimed": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_CURRENT_AA_BRIEFCASE_OR_GDPVAL_CONTEXT_HAS_A_BOUND_TARGET_COMPARISON_ORDER_RECEIPT.",
+    "NO_CLAIM_PROFESSIONAL_QUALITY_IS_CLOSED.",
+    "NO_CLAIM_SOURCE_ALIGNED_OPERATOR_EXTRACTION_PROVES_DOMAIN_MEANING_OR_QUALITY_ORDER.",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
