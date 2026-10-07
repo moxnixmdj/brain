@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_NOW_V19_LIVE_HEAD_RECONCILIATION_V1",
+  "date": "2026-10-07",
+  "status": "LIVE_HEAD_RECONCILIATION__TARGET_SCOPE_STRUCTURALLY_CLOSED__TWELVE_SOUND_CACHED_REGIONS__UNKNOWN_DOMAIN_DUPLICATE_MECHANISM_HUNTS_COLLAPSED__EXECUTABLE_FAIL_CLOSED_ROUTER__TERMINAL_FALSE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "current_terminal_authority_v16": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+      "git_blob_sha": "c1bc4543860be08f9014f69a212ba2222d8dba7c"
+    },
+    "trace_scope_rebind_verification": {
+      "path": "canonical/verification/ABC_OBSERVABLE_TRACE_SCOPE_REBIND_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "5853776c01c928202722211126009db905c49629"
+    },
+    "twelve_region_db_manifest": {
+      "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json",
+      "git_blob_sha": "6b389699903b63f1350dd922064888e74201f687"
+    },
+    "twelve_region_db_verification": {
+      "path": "canonical/verification/V16_DB_EXISTING_EVIDENCE_SATURATION_WOLFRAM_CONNECTOR_VERIFY_20261007_V5.json",
+      "git_blob_sha": "d7b4f99fdde85983cfbb72f777edcef2075d74af"
+    },
+    "unknown_domain_shared_semantic_collapse": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_SHARED_SEMANTIC_TAIL_COLLAPSE_20261007_V1.json",
+      "git_blob_sha": "069dd49aa1be27b218a66eb2f91c6de5cd49ff27"
+    },
+    "unknown_domain_shared_semantic_verification": {
+      "path": "canonical/verification/UNKNOWN_DOMAIN_SHARED_SEMANTIC_TAIL_COLLAPSE_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "771cacd2de47025b6e546eb9cc18fb3cb0a56a3b"
+    },
+    "certificate_gated_router_runtime": {
+      "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+      "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
+    },
+    "certificate_gated_router_tests": {
+      "path": "canonical/tests/test_certificate_gated_selected_route_router_v1.py",
+      "git_blob_sha": "b33717611b21f01f11d570d894aeee7f010231fc"
+    }
+  },
+  "current_truth": {
+    "fixed_authorized_opus55_target_interface_scope_superset_closed": true,
+    "literal_all_target_universe_exhaustiveness_is_separate_open_task": false,
+    "known_sound_D_B_region_certificate_count": 12,
+    "unknown_domain_separate_named_behavior_mechanism_residual_count": 0,
+    "unknown_domain_shared_semantic_tail_open": true,
+    "certificate_gated_router_mechanical_core_implemented": true,
+    "router_non_boolean_admission_fails_closed": true,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "reconciliation": {
+    "supersedes_stale_live_head_facts": [
+      "ELEVEN_SOUND_CACHED_REGIONS",
+      "LITERAL_ALL_TARGET_UNIVERSE_EXHAUSTIVENESS_AS_A_SEPARATE_LIVE_BLOCKER",
+      "TWO_NAMED_UNKNOWN_DOMAIN_BEHAVIORS_AS_SEPARATE_UNKNOWN_DOMAIN_SPECIFIC_MECHANISM_BUILD_OR_DONOR_SEARCHES"
+    ],
+    "preserves": [
+      "THE_TARGET_SCOPE_IS_CLOSED_STRUCTURALLY_BY_THE_OBSERVABLE_TRACE_SUPERSET__DOMINANCE_INSIDE_THAT_SCOPE_REMAINS_OPEN",
+      "THE_TWELVE_REGION_COUNT_IS_A_CERTIFICATE_COUNT__NOT_A_DISJOINT_COVERAGE_MEASURE",
+      "THE_UNKNOWN_DOMAIN_SHARED_SEMANTIC_TAIL_IS_NOT_SOLVED_BY_DEPENDENCY_COLLAPSE",
+      "ROUTER_MECHANICS_DO_NOT_SELF_CERTIFY_CELL_ADEQUACY_OR_SELECTED_COVER_COMPLETENESS",
+      "TERMINAL_REMAINS_FALSE_UNTIL_COMPLETE_SELECTED_CONTEXT_ABC_AND_D_FINALITY_BOTH_CLOSE"
+    ]
+  },
+  "live_positive_frontier": [
+    "WITHIN_THE_ALREADY_CLOSED_TRACE_SCOPE__CLOSE_ONLY_SURVIVING_ADEQUACY_OR_TARGET_RELATIVE_DOMINANCE_GAPS_AND_LOAD_BEARING_CONDITION_COMPOSITION_RESOURCE_SAFETY_CONSTRAINTS.",
+    "USE_CONTEXT_LOCAL_SHARED_IDENTIFIABLE_SEMANTIC_CERTIFICATES_ONLY_WHERE_CAUSALLY_LOAD_BEARING__DO_NOT_REOPEN_GENERIC_UNKNOWN_DOMAIN_MECHANISM_HUNTS.",
+    "CLOSE_PROFESSIONAL_QUALITY_OUTSIDE_SOUND_CACHED_CELLS.",
+    "CLOSE_SYNTHESIS_LOAD_BEARING_COMPONENT_PERFORMANCE_AND_REQUIRED_CLAIM_COVERAGE_NOT_ALREADY_CERTIFIED.",
+    "CLOSE_GENERAL_INSTRUCTION_SCOPE_AND_JUDGMENT_OUTSIDE_SOUND_CACHED_SLICES.",
+    "PRESERVE_ANY_OTHER_TRACE_CONTEXT_IN_E_EQUALS_S_TRACE_MINUS_D_B_UNLESS_SOUNDLY SUBSUMED BY A CERTIFICATE.",
+    "AFTER_ABC_CLOSES__FREEZE_THE_FINAL_ROUTE_SET__RECOMPUTE_D__DELETE_DONORS__RUN_INDEPENDENT_CLEAN_ROOM_REPLAY."
+  ],
+  "scheduler_lock": [
+    "SUBTRACT_ALL_TWELVE_SOUND_CACHED_D_B_CERTIFICATE_REGIONS_BEFORE_NEW_WORK.",
+    "DO_NOT_REOPEN_TARGET_UNIVERSE_ENUMERATION_OR_WAIT_FOR_AN_EXHAUSTIVE_PROVIDER_CAPABILITY_LIST.",
+    "DO_NOT_BUILD_A_SECOND_GENERIC_ROUTER.",
+    "DO_NOT_BUILD_SEPARATE_UNKNOWN_DOMAIN_SPECIFICATION_ACCEPTANCE_OR_RESEARCH_CONTROL_ENGINES_WHILE_THE_SHARED_SEMANTIC_TAIL_AND_BOUND_OWNED_SUFFIX_REDUCTION_REMAINS_VALID.",
+    "FOR_EACH_SURVIVING_CONTEXT_ATTEMPT_DIRECT_E2E__TOP_LAW__FORMAL_TRANSFER__OR_STRUCTURAL_NONOCCUPANCY_BEFORE_NEW_MECHANISM WORK.",
+    "BIND_ONLY_SOUND_POSITIVE_ADMISSION_AND_ADEQUACY_RECEIPTS_TO_THE_FAIL_CLOSED_ROUTER.",
+    "NEVER_SET_TERMINAL_TRUE_FROM REGION_COUNT__FINITE_BENCHMARK_COUNT__ROUTER_EXISTENCE__OR DEPENDENCY_COLLAPSE ALONE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TWELVE_CERTIFICATE_REGIONS_EXHAUST_D_B_OR_S_TRACE.",
+    "NO_CLAIM_THE_SHARED_SEMANTIC_TAIL_IS CLOSED.",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS CLOSED.",
+    "NO_CLAIM_D_FINALITY_IS CLOSED.",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
