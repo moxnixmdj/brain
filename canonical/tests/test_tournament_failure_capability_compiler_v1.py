@@ -1,4 +1,5 @@
 import hashlib
+import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -11,6 +12,46 @@ from canonical.runtime.tournament_failure_capability_compiler_v1 import (
 def _blob_sha(path: Path) -> str:
     raw = path.read_bytes()
     return hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest()
+
+
+def _world_digest(cell):
+    material = [
+        {"id": w["id"], "adequate_actions": sorted(set(w["adequate_actions"]))}
+        for w in sorted(cell["worlds"], key=lambda w: w["id"])
+    ]
+    raw = json.dumps(material, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _install_receipts(root: Path, cell, *, minimum_policy_count: int, minimum_bits: int):
+    digest = _world_digest(cell)
+    proof = root / "proof.json"
+    proof_doc = {
+        "cell_id": cell["id"],
+        "world_set_sha256": digest,
+        "conclusion": "success",
+        "separator_necessary": True,
+        "minimum_policy_count": minimum_policy_count,
+        "minimum_persistent_bits": minimum_bits,
+    }
+    proof.write_text(json.dumps(proof_doc, sort_keys=True) + "\n", encoding="utf-8")
+    proof_binding = {"path": "proof.json", "git_blob_sha": _blob_sha(proof)}
+    verifier = root / "verify.json"
+    verifier_doc = {
+        "cell_id": cell["id"],
+        "world_set_sha256": digest,
+        "independent_verified": True,
+        "exact_byte_bound": True,
+        "conclusion": "success",
+        "proof_artifact": proof_binding,
+    }
+    verifier.write_text(json.dumps(verifier_doc, sort_keys=True) + "\n", encoding="utf-8")
+    cell["persistent_separator"]["necessity_proof"] = proof_binding
+    cell["persistent_separator"]["independent_verifier_receipt"] = {
+        "path": "verify.json",
+        "git_blob_sha": _blob_sha(verifier),
+    }
+    return proof
 
 
 def test_common_policy_needs_zero_persistent_bits():
@@ -96,22 +137,21 @@ def test_persistent_separator_requires_exact_repository_bytes():
 
         proof = root / "proof.json"
         verifier = root / "verify.json"
-        proof.write_text('{"necessity":true}\n', encoding="utf-8")
-        verifier.write_text('{"independent_verified":true}\n', encoding="utf-8")
-        base["persistent_separator"]["necessity_proof"] = {
-            "path": "proof.json",
-            "git_blob_sha": _blob_sha(proof),
-        }
-        base["persistent_separator"]["independent_verifier_receipt"] = {
-            "path": "verify.json",
-            "git_blob_sha": _blob_sha(verifier),
-        }
+        proof.write_text("{}\n", encoding="utf-8")
+        verifier.write_text("{}\n", encoding="utf-8")
+        base["persistent_separator"]["necessity_proof"] = {"path": "proof.json", "git_blob_sha": _blob_sha(proof)}
+        base["persistent_separator"]["independent_verifier_receipt"] = {"path": "verify.json", "git_blob_sha": _blob_sha(verifier)}
+        out = evaluate_cell(base, repo_root=root)
+        assert out["pass"] is False
+
+        proof = _install_receipts(root, base, minimum_policy_count=2, minimum_bits=1)
         out = evaluate_cell(base, repo_root=root)
         assert out["pass"] is True
         assert out["classification"] == "PERSISTENT_SEPARATOR_CANDIDATE"
         assert out["exact_repository_bytes_verified"] is True
+        assert out["independent_semantic_verification_bound"] is True
 
-        proof.write_text('{"necessity":false}\n', encoding="utf-8")
+        proof.write_text('{"mutated":true}\n', encoding="utf-8")
         out = evaluate_cell(base, repo_root=root)
         assert out["pass"] is False
 
@@ -132,12 +172,7 @@ def test_separator_symbol_alphabet_must_fit_declared_bits():
     }
     with TemporaryDirectory() as td:
         root = Path(td)
-        proof = root / "proof.json"
-        verifier = root / "verify.json"
-        proof.write_text("{}\n", encoding="utf-8")
-        verifier.write_text("{}\n", encoding="utf-8")
-        cell["persistent_separator"]["necessity_proof"] = {"path": "proof.json", "git_blob_sha": _blob_sha(proof)}
-        cell["persistent_separator"]["independent_verifier_receipt"] = {"path": "verify.json", "git_blob_sha": _blob_sha(verifier)}
+        _install_receipts(root, cell, minimum_policy_count=2, minimum_bits=1)
         out = evaluate_cell(cell, repo_root=root)
         assert out["pass"] is False
         assert out["minimum_persistent_bits"] == 1
