@@ -6,6 +6,12 @@ on:
       - 'canonical/runtime/agency_finite_portfolio_generator_v1.py'
       - 'canonical/runtime/agency_finite_portfolio_ceiling_v1.py'
       - 'canonical/tests/test_agency_finite_portfolio_ceiling_v1.py'
+  pull_request:
+    paths:
+      - 'canonical/governance/AGENCY_FINITE_PORTFOLIO_CEILING_CLOSURE_20261007_V1.json'
+      - 'canonical/runtime/agency_finite_portfolio_generator_v1.py'
+      - 'canonical/runtime/agency_finite_portfolio_ceiling_v1.py'
+      - 'canonical/tests/test_agency_finite_portfolio_ceiling_v1.py'
   workflow_dispatch:
 jobs:
   verify:
