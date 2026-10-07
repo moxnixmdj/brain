@@ -1,0 +1,18 @@
+{
+  "schema":"PROJECT_BRAIN_U_INFORMATION_TRICHOTOMY_QUOTIENT_V2",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_LIVE_14_WAKE_CLASSES_TO_3_REGIMES__DENSE_NONCHART_WAKE_DELETED__ZERO_CREDIT",
+  "supersedes":{"path":"canonical/governance/U_INFORMATION_TRICHOTOMY_QUOTIENT_20261007_V1.json","git_blob_sha":"f1f7e616b5983991a3cf6639fae05cf74b7ae7c8"},
+  "authority":{"path":"canonical/governance/CURRENT_TERMINAL_AUTHORITY.json","git_blob_sha":"94a4669ce31f3081731527b7dacf1db46617ef66","schema":"PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V31"},
+  "reality_cut":{"path":"canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V8.json","git_blob_sha":"8f328ecf3d69ec67bdb8619758ef733f6d633f4a","positive_reality_classes":14,"lanes":8},
+  "regimes":{
+    "E":{"classes":["TB4_SCOPE","HLE_TOOLS_SCOPE","TB_SCIENCE_SCOPE","CHARTOGRAPHY_SCOPE","FINANCE_ACCOUNTING_SCOPE","FINANCE_SEMANTIC_TAIL"],"count":6,"attack":"TARGET_INDEPENDENT_PROOF_FIRST"},
+    "S":{"classes":["FRONTIERCODE_SCOPE","CURSORBENCH_SCOPE","AA_BRIEFCASE_SHARED","AUTOMATIONBENCH_SCOPE","OSWORLD_SCOPE","FINANCE_AGENT_SCOPE"],"count":6,"attack":"SCOPE_CLOSURE_FIRST"},
+    "H":{"classes":["GDPVAL_SCOPE","MYSTERY_INTRINSIC_SCOPE"],"count":2,"attack":"ROBUST_COMMON_POLICY_OR_MINIMUM_TARGET_DISCRIMINATOR_FIRST"}
+  },
+  "partition":{"counts":[6,6,2],"sum":14,"pairwise_disjoint":true,"union_equals_live_wake_universe":true},
+  "dense_nonchart":{"distinct_wake":false,"still_in_U":true,"state":"ZERO_REALITY_DEVELOPMENT_PLUS_SHARED_QUALITY","source":"canonical/governance/DENSE_NONCHART_ZERO_REALITY_DECOMPOSITION_20261007_V1.json"},
+  "scheduler":["DO_NOT_RESURRECT_DENSE_NONCHART_AS_A_DISTINCT_INFORMATION_OR_TARGET_WAKE","DO_NOT_SCHEDULE_14_INDEPENDENT_PROOF_PROGRAMS","REUSE_ONE_PARAMETERIZED_PROOF_LAW_PER_INFORMATION_REGIME"],
+  "hard_nonclaims":["NO_U_EMPTY","NO_DENSE_NONCHART_CLOSURE","NO_TERMINAL_CREDIT"],
+  "accounting":{"incremental_spend_usd":0,"fresh_target_reality_units_consumed":0,"terminal_credit_delta":0}
+}
