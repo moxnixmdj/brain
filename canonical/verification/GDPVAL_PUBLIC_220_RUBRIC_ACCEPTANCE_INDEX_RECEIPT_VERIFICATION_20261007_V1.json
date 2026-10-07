@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_220_RUBRIC_ACCEPTANCE_INDEX_RECEIPT_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__INDEPENDENT_PUBLIC_REFETCH_MATCHES_SUBJECT_HASH_MANIFEST",
+  "pass": true,
+  "subject": {
+    "path": "canonical/evidence/GDPVAL_PUBLIC_220_RUBRIC_ACCEPTANCE_INDEX_RECEIPT_20261007_V1.json",
+    "git_blob_sha": "16019264745360cda3b7085341fe6a77a80b8cca"
+  },
+  "verification_method": "INDEPENDENT_SECOND_PUBLIC_ROWS_REFETCH_PLUS_RECOMPUTED_TASK_AND_CRITERION_ROOTS",
+  "observed": {
+    "pre_revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "post_revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "task_count": 220,
+    "criterion_count": 10453,
+    "all_criteria_human_authored": true,
+    "task_manifest_root_sha256": "6fde118664ebf8d28be09a5714db4eff48dd6160d1cc31a7cd2ab373800e2dcd",
+    "criterion_text_population_root_sha256": "9579e4205844b515a3230992fb5eefaae20041322764e7019a5557db73fea1fe"
+  },
+  "errors": [],
+  "soundness": {
+    "gdpval_scope_closed": false,
+    "u_deletion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "provider_evaluation_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
