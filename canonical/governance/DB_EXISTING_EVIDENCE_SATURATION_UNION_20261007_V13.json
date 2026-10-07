@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_DB_EXISTING_EVIDENCE_SATURATION_UNION_V13",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ZERO_REALITY_DB_UNION__V12_SYNTHESIS_FULL_QUALITY_REGION_REPAIRED_BY_VERIFIED_EXPLICIT_REQUIRED_UNCERTAINTY_V3__SEVENTEEN_RECORDS_UNCHANGED__ZERO_CREDIT",
+  "predecessor": {
+    "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V12.json",
+    "git_blob_sha": "0c98bea583d35392cbde49e2830b283bdbb09d06",
+    "sound_certificate_record_count": 17
+  },
+  "v2_uncertainty_truth_repair": {
+    "path": "canonical/governance/SYNTHESIS_V2_CACHE_UNCERTAINTY_RECONCILIATION_20261007_V1.json",
+    "git_blob_sha": "f50dfea8d43d03eb1e7a607dbc977742836a9806",
+    "preserved_rule": "BROAD_V2_ALONE_IS_NOT_AN_UNCONDITIONAL_FULL_MATCHED_QUALITY_REGION__FULL_QUALITY_REQUIRES_ZERO_REQUIRED_UNCERTAINTY_OR_EQUIVALENT_EXPLICIT_UNCERTAINTY_PRESERVATION"
+  },
+  "synthesis_semantic_replacement": {
+    "prior_broad_region": "SYNTHESIS_VISIBLE_SUPPORT_EXPLICIT_SELECTION_ORDER_ALL_FINITE_TASKS_V2",
+    "repaired_full_quality_region": "SYNTHESIS_VISIBLE_SUPPORT_EXPLICIT_SELECTION_ORDER_AND_REQUIRED_UNCERTAINTY_ALL_FINITE_TASKS_V3",
+    "governance": {
+      "path": "canonical/governance/SYNTHESIS_EXPLICIT_UNCERTAINTY_TOP_LAW_CELL_20261007_V3.json",
+      "git_blob_sha": "55326f8dab733c111f02badf1f5e86e5b2e70b28"
+    },
+    "independent_replay": {
+      "path": "canonical/verification/SYNTHESIS_EXPLICIT_UNCERTAINTY_V3_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "cb34f78a3789258656f2907d8b8d16a3c14daf7c",
+      "result": "INDEPENDENT_SPRITE_EXACT_BLOB_DIRECT_TEST_REPLAY_PASS__7_OF_7"
+    },
+    "membership_gate": [
+      "ALL_V2_MEMBERSHIP_PRECONDITIONS_HOLD",
+      "REQUIRED_UNCERTAINTY_UNITS_FIELD_IS_EXPLICITLY_PRESENT",
+      "A_SEPARATE_SOUND_UPSTREAM_RECEIPT_PROVES_THE_SUPPLIED_REQUIRED_UNCERTAINTY_SET_IS_COMPLETE_FOR_ALL_LOAD_BEARING_UNCERTAINTY_OR_DISAGREEMENT_IN_THE_CONTEXT",
+      "EVERY_REQUIRED_UNCERTAINTY_UNIT_HAS_NONEMPTY_TEXT_AND_PROVENANCE",
+      "OUTPUT_BOUNDS_ARE_FEASIBLE_WITHOUT_DROPPING_REQUIRED_CLAIMS_CONFLICTS_OR_UNCERTAINTY_UNITS"
+    ],
+    "runtime_self_proves_uncertainty_completeness": false,
+    "zero_required_uncertainty_is_empty_set_special_case": true,
+    "target_query_required": false
+  },
+  "saturation_result": {
+    "known_sound_D_B_certificate_record_count": 17,
+    "semantic_union_widened": true,
+    "record_count_unchanged": true,
+    "synthesis_full_quality_parameterized_region_repaired": true,
+    "U_empty_proved": false,
+    "fresh_target_reality_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduler_effect": [
+    "SEMANTICALLY_REPLACE_V12_SYNTHESIS_FULL_QUALITY_MEMBERSHIP_WITH_V3_WHEN_COMPLETE_REQUIRED_UNCERTAINTY_BINDING_IS_PROVED.",
+    "DO_NOT_ADD_A_NEW_DB_RECORD__THIS_IS_A_SCOPE_AND_SOUNDNESS_REPAIR_OF_THE_EXISTING_PARAMETERIZED_SYNTHESIS_REGION.",
+    "FOR_EACH_REAL_SYNTHESIS_CONTEXT_ATTEMPT_V3_MEMBERSHIP_BEFORE_ANY_OPUS_COMPARATOR_OR_NEW_SYNTHESIS_MECHANISM.",
+    "KEEP_CONTEXTS_WITH_UNPROVED_REQUIRED_UNCERTAINTY_COMPLETENESS_OR_OTHER_OUTSIDE_V3_SEMANTICS_IN_U.",
+    "DO_NOT_TREAT_RUNTIME_PRESERVATION_OF_THE_SUPPLIED_UNCERTAINTY_SET_AS_PROOF_THAT_THE_SET_IS_COMPLETE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_SYNTHESIS_IS_CLOSED.",
+    "NO_CLAIM_THE_V3_RUNTIME_DISCOVERS_HIDDEN_OR_UNDECLARED_UNCERTAINTY.",
+    "NO_CLAIM_ANY_REAL_TARGET_CONTEXT_HAS_YET_PROVED_V3_MEMBERSHIP.",
+    "NO_CLAIM_SEVENTEEN_RECORDS_EXHAUST_D_B_OR_U.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
