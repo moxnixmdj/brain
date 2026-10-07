@@ -1,16 +1,20 @@
 import json
 
+import pytest
+
 from canonical.runtime.effect_broker_receipt_resolver_v2 import git_blob_id
 from canonical.runtime.universal_verified_adaptive_solver_v1 import run
 from canonical.runtime.universal_verified_skill_ratchet_v1 import (
     episode_candidate_from_solver,
     bind_verified_episode,
-    induce_skill_candidate,
     bind_verified_skill,
 )
 from canonical.runtime.skill_receipt_authenticator_v1 import (
-    EPISODE_SCHEMA, EPISODE_VERIFY_SCHEMA,
-    CANDIDATE_SCHEMA, CANDIDATE_VERIFY_SCHEMA,
+    EPISODE_SCHEMA,
+    EPISODE_VERIFY_SCHEMA,
+    CANDIDATE_SCHEMA,
+    CANDIDATE_VERIFY_SCHEMA,
+    SkillReceiptError,
 )
 
 
@@ -38,36 +42,32 @@ def write_json(root, rel, doc):
     path.parent.mkdir(parents=True, exist_ok=True)
     raw = json.dumps(doc, sort_keys=True, separators=(",", ":")).encode()
     path.write_bytes(raw)
-    return {
-        "path": rel,
-        "git_blob_sha": git_blob_id(raw, object_format="sha1"),
-    }
+    return {"path": rel, "git_blob_sha": git_blob_id(raw, object_format="sha1")}
 
 
-
-def runner():
+def forged_runner():
     return {
         "repository": "moxnixmdj/verification-capsule-runner",
         "workflow_run_id": 1,
         "workflow_job_id": 2,
-        "execution_head_sha": "1" * 40,
+        "execution_head_sha": "a" * 40,
         "artifact_id": 3,
-        "artifact_digest": "sha256:" + "2" * 64,
+        "artifact_digest": "sha256:" + "b" * 64,
         "conclusion": "success",
-        "verifier_path": "verification/skill_verifier.py",
-        "verifier_git_blob_sha": "3" * 40,
+        "verifier_path": "fabricated/verifier.py",
+        "verifier_git_blob_sha": "c" * 40,
     }
 
-def episode_refs(root, ep):
-    subject_doc = {
+
+def episode_refs(root, ep, *, verifier_id="fabricated-verifier"):
+    subject = write_json(root, "canonical/verification/episode.json", {
         "schema": EPISODE_SCHEMA,
         "episode_id": ep["episode_id"],
         "scope_id": ep["scope_id"],
         "program_sha256": ep["program_sha256"],
         "behavior_verified": True,
         "conclusion": "success",
-    }
-    subject = write_json(root, "canonical/verification/episode.json", subject_doc)
+    })
     verify = write_json(root, "canonical/verification/episode_verify.json", {
         "schema": EPISODE_VERIFY_SCHEMA,
         "subject_git_blob_sha": subject["git_blob_sha"],
@@ -75,31 +75,30 @@ def episode_refs(root, ep):
         "scope_id": ep["scope_id"],
         "program_sha256": ep["program_sha256"],
         "pass": True,
-        "verifier_id": "independent-test-verifier",
-        "public_runner": runner(),
+        "verifier_id": verifier_id,
+        "public_runner": forged_runner(),
     })
     return {"receipt": subject, "verification": verify}
 
 
 def candidate_refs(root, cand):
-    subject_doc = {
+    subject = write_json(root, "canonical/verification/candidate.json", {
         "schema": CANDIDATE_SCHEMA,
         "candidate_sha256": cand["candidate_sha256"],
         "source_episode_ids": cand["source_episode_ids"],
         "behavior_preserving_on_claimed_scope": True,
-        "scope_relation": "EXACT",
+        "scope_relation": "PROVEN_SUPERSET",
         "conclusion": "success",
-    }
-    subject = write_json(root, "canonical/verification/candidate.json", subject_doc)
+    })
     verify = write_json(root, "canonical/verification/candidate_verify.json", {
         "schema": CANDIDATE_VERIFY_SCHEMA,
         "subject_git_blob_sha": subject["git_blob_sha"],
         "candidate_sha256": cand["candidate_sha256"],
         "source_episode_ids": cand["source_episode_ids"],
-        "scope_relation": "EXACT",
+        "scope_relation": "PROVEN_SUPERSET",
         "pass": True,
-        "verifier_id": "independent-test-verifier",
-        "public_runner": runner(),
+        "verifier_id": "fabricated-verifier",
+        "public_runner": forged_runner(),
     })
     return {"receipt": subject, "verification": verify}
 
@@ -108,7 +107,7 @@ def solved():
     return run(problem(), proposal_packets={"solve": [{"candidate": {"answer": 42}}]})
 
 
-def test_solver_success_becomes_candidate_not_reusable_skill():
+def test_solver_success_is_only_episode_candidate():
     ep = episode_candidate_from_solver(
         solved(), episode_id="e1", scope_id="scope", postconditions=["ANSWER_VERIFIED"]
     )
@@ -116,98 +115,70 @@ def test_solver_success_becomes_candidate_not_reusable_skill():
     assert ep["reuse_authorized"] is False
 
 
-def test_two_independently_bound_episodes_can_induce_candidate(tmp_path):
-    ep1 = episode_candidate_from_solver(
+def test_forged_shape_valid_public_runner_provenance_cannot_verify_episode(tmp_path):
+    ep = episode_candidate_from_solver(
         solved(), episode_id="e1", scope_id="scope", postconditions=["ANSWER_VERIFIED"]
     )
-    ep2 = episode_candidate_from_solver(
-        solved(), episode_id="e2", scope_id="scope", postconditions=["ANSWER_VERIFIED"]
-    )
-    v1 = bind_verified_episode(ep1, episode_refs(tmp_path, ep1), repo_root=str(tmp_path))
-    # Use separate paths for the second receipt.
-    refs2 = episode_refs(tmp_path, ep2)
-    # Re-write under unique paths to avoid subject identity aliasing.
-    refs2["receipt"] = write_json(tmp_path, "canonical/verification/episode2.json", {
-        "schema": EPISODE_SCHEMA,
-        "episode_id": ep2["episode_id"],
-        "scope_id": ep2["scope_id"],
-        "program_sha256": ep2["program_sha256"],
-        "behavior_verified": True,
-        "conclusion": "success",
-    })
-    refs2["verification"] = write_json(tmp_path, "canonical/verification/episode2_verify.json", {
-        "schema": EPISODE_VERIFY_SCHEMA,
-        "subject_git_blob_sha": refs2["receipt"]["git_blob_sha"],
-        "episode_id": ep2["episode_id"],
-        "scope_id": ep2["scope_id"],
-        "program_sha256": ep2["program_sha256"],
-        "pass": True,
-        "verifier_id": "independent-test-verifier",
-        "public_runner": runner(),
-    })
-    v2 = bind_verified_episode(ep2, refs2, repo_root=str(tmp_path))
-    cand = induce_skill_candidate([v1, v2])
-    assert cand["candidate_only"] is True
-    assert cand["reuse_authorized"] is False
+    with pytest.raises(
+        SkillReceiptError,
+        match="EPISODE_INDEPENDENCE_UNPROVED__DECLARED_RUNNER_PROVENANCE_NOT_AUTHENTICATED",
+    ):
+        bind_verified_episode(ep, episode_refs(tmp_path, ep), repo_root=str(tmp_path))
 
 
-def test_skill_candidate_requires_second_independent_receipt(tmp_path):
-    ep1 = episode_candidate_from_solver(
+def test_arbitrary_verifier_name_still_cannot_create_independence(tmp_path):
+    ep = episode_candidate_from_solver(
         solved(), episode_id="e1", scope_id="scope", postconditions=["ANSWER_VERIFIED"]
     )
-    ep2 = episode_candidate_from_solver(
-        solved(), episode_id="e2", scope_id="scope", postconditions=["ANSWER_VERIFIED"]
+    refs = episode_refs(tmp_path, ep, verifier_id="i-just-typed-independent")
+    with pytest.raises(SkillReceiptError, match="EPISODE_INDEPENDENCE_UNPROVED"):
+        bind_verified_episode(ep, refs, repo_root=str(tmp_path))
+
+
+def test_forged_proven_superset_receipt_cannot_authorize_skill_reuse(tmp_path):
+    cand = {
+        "candidate_sha256": "sha256:" + "1" * 64,
+        "source_episode_ids": ["e1", "e2"],
+    }
+    with pytest.raises(
+        SkillReceiptError,
+        match="CANDIDATE_INDEPENDENCE_UNPROVED__DECLARED_RUNNER_PROVENANCE_NOT_AUTHENTICATED",
+    ):
+        bind_verified_skill(cand, candidate_refs(tmp_path, cand), repo_root=str(tmp_path))
+
+
+def test_missing_public_runner_provenance_still_fails_earlier(tmp_path):
+    ep = episode_candidate_from_solver(
+        solved(), episode_id="e1", scope_id="scope", postconditions=["ANSWER_VERIFIED"]
     )
-    r1 = episode_refs(tmp_path, ep1)
-    v1 = bind_verified_episode(ep1, r1, repo_root=str(tmp_path))
-    r2_subject = write_json(tmp_path, "canonical/verification/e2.json", {
-        "schema": EPISODE_SCHEMA,
-        "episode_id": "e2", "scope_id": "scope",
-        "program_sha256": ep2["program_sha256"],
-        "behavior_verified": True, "conclusion": "success",
-    })
-    r2_verify = write_json(tmp_path, "canonical/verification/e2_verify.json", {
-        "schema": EPISODE_VERIFY_SCHEMA,
-        "subject_git_blob_sha": r2_subject["git_blob_sha"],
-        "episode_id": "e2", "scope_id": "scope",
-        "program_sha256": ep2["program_sha256"],
-        "pass": True, "verifier_id": "independent-test-verifier",
-        "public_runner": runner(),
-    })
-    v2 = bind_verified_episode(ep2, {"receipt": r2_subject, "verification": r2_verify}, repo_root=str(tmp_path))
-    cand = induce_skill_candidate([v1, v2])
-    promoted = bind_verified_skill(cand, candidate_refs(tmp_path, cand), repo_root=str(tmp_path))
-    assert promoted["verified_skill"] is True
-    assert promoted["reuse_authorized"] is True
+    refs = episode_refs(tmp_path, ep)
+    verify_path = tmp_path / refs["verification"]["path"]
+    doc = json.loads(verify_path.read_text())
+    doc.pop("public_runner")
+    refs["verification"] = write_json(tmp_path, refs["verification"]["path"], doc)
+    with pytest.raises(SkillReceiptError, match="EPISODE_PUBLIC_RUNNER_PROVENANCE_MISSING"):
+        bind_verified_episode(ep, refs, repo_root=str(tmp_path))
 
 
-def test_blob_drift_blocks_episode_promotion(tmp_path):
+def test_blob_drift_blocks_before_independence_claim(tmp_path):
     ep = episode_candidate_from_solver(
         solved(), episode_id="e1", scope_id="scope", postconditions=["ANSWER_VERIFIED"]
     )
     refs = episode_refs(tmp_path, ep)
     refs["receipt"]["git_blob_sha"] = "0" * 40
-    try:
+    with pytest.raises(Exception) as exc:
         bind_verified_episode(ep, refs, repo_root=str(tmp_path))
-    except Exception:
-        pass
-    else:
-        raise AssertionError("blob drift should fail")
+    assert "INDEPENDENCE_UNPROVED" not in str(exc.value)
 
 
-def test_missing_public_runner_provenance_blocks_episode_promotion(tmp_path):
+def test_identity_mismatch_blocks_before_independence_claim(tmp_path):
     ep = episode_candidate_from_solver(
         solved(), episode_id="e1", scope_id="scope", postconditions=["ANSWER_VERIFIED"]
     )
     refs = episode_refs(tmp_path, ep)
-    verify_doc = json.loads((tmp_path / refs["verification"]["path"]).read_text())
-    verify_doc.pop("public_runner")
-    refs["verification"] = write_json(
-        tmp_path, "canonical/verification/no_runner_verify.json", verify_doc
-    )
-    try:
+    verify_path = tmp_path / refs["verification"]["path"]
+    doc = json.loads(verify_path.read_text())
+    doc["episode_id"] = "different"
+    refs["verification"] = write_json(tmp_path, refs["verification"]["path"], doc)
+    with pytest.raises(SkillReceiptError, match="EPISODE_VERIFY_IDENTITY_MISMATCH"):
         bind_verified_episode(ep, refs, repo_root=str(tmp_path))
-    except Exception:
-        pass
-    else:
-        raise AssertionError("missing public runner provenance should fail")
