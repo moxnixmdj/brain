@@ -1,10 +1,10 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V6",
+  "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V7",
   "status": "CURRENT_MAIN_TERMINAL_NOT_REAL",
-  "checked_by": "CHATGPT_DIRECT_FROZEN_PROTOCOL_RECONCILIATION",
+  "checked_by": "CHATGPT_DIRECT_LOAD_BEARING_TRUTH_RECONCILIATION",
   "source_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-  "source_authority_blob_sha": "78f2c59aa35414ae24fb82190ece3e5b003c3e8f",
-  "source_authority_commit_sha": "74b82f3fba495e5ae6a68c5aabfb1b7eef25f4e5",
+  "source_authority_blob_sha": "acb0942121e2ec789f7cc261137866f3b6a560bf",
+  "source_authority_commit_sha": "91d035c206ef473d5f042c521ae6c4e3043e8136",
   "phase": "FROZEN_PROTOCOL_CLOSURE",
   "live_research_root_count": 1,
   "live_research_root": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
@@ -12,36 +12,40 @@
   "optional_stronger_route": "PROVE_NOT_X_OVER_SOUND_OBSERVABLE_TRACE_ESCAPE_MODEL",
   "progress": {
     "frozen_family_count": 19,
-    "fully_terminally_closed_family_count": 5,
+    "strict_acceptance_pass_family_count": 6,
+    "verified_owned_equal_or_better_family_count": 5,
+    "acceptance_open_family_count": 13,
     "frozen_atomic_predicate_count": 38,
     "frozen_atomic_predicates_proved": 16,
-    "frozen_atomic_predicates_unresolved": 22,
-    "newly_promoted_atoms": [
-      "IF_SCOPE_BOUNDARY_NONINFERIOR",
-      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
-    ],
+    "frozen_atomic_predicates_raw_unresolved": 22,
+    "independent_open_evidence_obligations": 18,
+    "nonindependent_raw_unresolved_scheduler_labels": 4,
+    "primary_acceptance_proof_engine_count": 3,
     "new_target_reality_units_consumed": 0,
     "incremental_spend_usd": 0
   },
   "remaining_terminal_conditions": [
-    "CLOSE_ALL_REMAINING_FROZEN_ACCEPTANCE_PREDICATES_OR_SOUNDLY_DISCHARGE_THEM_BY_STRONGER_SCOPE_COMPLETE_PROOFS",
-    "VERIFY_EXACT_BRAIN_OWNED_ROUTES_AND_REQUIRED_BEHAVIOR_CONTRACTS",
-    "VERIFY_DONOR_DEPENDENCE_ZERO_AND_ALL_REQUIRED_COUNTERS_ZERO",
-    "RUN_FINAL_DONOR_DELETION_AND_INDEPENDENT_CLEAN_ROOM_REPLAY",
-    "FREEZE_PROOF_BUNDLE",
+    "CLOSE_THE_18_INDEPENDENT_OPEN_ACCEPTANCE_EVIDENCE_OBLIGATIONS_OR_SOUNDLY_DISCHARGE_THEM_BY_STRONGER_SCOPE_COMPLETE_PROOFS",
+    "PROMOTE_EXACT_BRAIN_OWNED_ROUTES_FOR_ACCEPTED_BUT_NOT_YET_OWNED_FAMILIES",
+    "REQUIRE_ALL_FROZEN_FAMILY_ACCEPTANCE_AND_OWNERSHIP_FINALITY_PREDICATES_PASS",
+    "FREEZE_FINAL_PROOF_BUNDLE",
     "RUN_TERMINAL_CLOSURE_REDUCER_AND_REQUIRE_ACHIEVED_TRUE"
   ],
   "live_truth": {
     "all_frozen_acceptance_predicates_pass": false,
-    "final_donor_deletion_cleanroom_pass": false,
+    "all_non_acceptance_counters_zero": true,
+    "final_donor_deletion_cleanroom_pass": true,
     "proof_bundle_frozen": false,
     "terminal_closure_reducer_achieved": false,
     "terminal": false
   },
   "anti_bureaucracy": {
     "primary_scheduler_object_count": 1,
+    "reusable_acceptance_proof_engine_count": 3,
+    "raw_registry_rows_are_not_independent_jobs": true,
     "universal_trace_unsat_is_not_mandatory": true,
-    "derived_or_optional_routes_are_not_parallel_terminal_roots": true,
-    "no_work_counts_unless_it_closes_a_frozen_atom_or_soundly_discharges_one_or_more_by_stronger_scope_complete_proof": true
+    "composition_terminal_success_is_derived_not_primary": true,
+    "duplicate_aa_briefcase_measurement_is_one_fact": true,
+    "no_work_counts_unless_it_closes_an_independent_open_obligation_or_soundly_discharges_one_or_more_by_stronger_scope_complete_proof": true
   }
 }
