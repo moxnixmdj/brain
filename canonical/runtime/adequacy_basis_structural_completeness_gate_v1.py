@@ -194,6 +194,8 @@ def verify_policy_manifest(contract: Any, contract_schema: Any, manifest: Any) -
         for label, values in (("BASIS", basis), ("CONDITION", condition)):
             for unknown in sorted(values - all_atoms):
                 errors.append(f"POLICY_{label}_UNKNOWN_ATOM:{pid}:{unknown}")
+        for outside in sorted(condition - basis):
+            errors.append(f"POLICY_CONDITION_ATOM_OUTSIDE_BASIS:{pid}:{outside}")
 
         raw_discharges = row.get("unconditional_discharges", [])
         if not isinstance(raw_discharges, list):
