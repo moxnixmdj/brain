@@ -23,6 +23,7 @@ from canonical.runtime.semantic_operator_counterfactuals import (
     compile_explicit_operator_contract,
     extract_semantic_operators,
     generate_counterfactual_obligations,
+    expected_disposition_for_counterfactual_kind,
 )
 from canonical.runtime.bound_capabilities.evidence_decision_synthesis import (
     DecisionSynthesisError,
@@ -293,12 +294,12 @@ def _operator_bundle(text: str, source_id: str) -> tuple[list[dict[str, Any]], l
         bindings.append(row)
     scenarios = []
     for obligation in generate_counterfactual_obligations(text, source=source_id):
-        if obligation.counterfactual_kind == "ANY_SEMANTICS_MUST_BE_DISAMBIGUATED":
-            disposition = "DISAMBIGUATE"
-        elif "ACCEPT" in obligation.counterfactual_kind:
-            disposition = "ACCEPT"
-        else:
-            disposition = "REJECT"
+        disposition = expected_disposition_for_counterfactual_kind(obligation.counterfactual_kind)
+        if disposition is None:
+            raise ValueError(
+                "COUNTERFACTUAL_KIND_WITHOUT_DISPOSITION_RULE:"
+                + obligation.counterfactual_kind
+            )
         scenarios.append({
             "operator_id": obligation.operator_id,
             "counterfactual_kind": obligation.counterfactual_kind,
