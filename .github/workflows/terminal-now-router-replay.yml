@@ -61,14 +61,35 @@ jobs:
 
           astra = load_astra_after_root3_install()
 
-          def receipt(*, admitted=True, context="ctx-terminal-now-v1", route="route-a", cell="cell-a", a="1", q="2", r="3"):
+          from pathlib import Path
+          import hashlib
+
+          repo_root = Path.cwd()
+          route_path = "canonical/runtime/certificate_gated_selected_route_router_v1.py"
+          adequacy_path = "canonical/governance/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_THEOREM_20261006_V1.json"
+          admission_path = "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_SOUNDNESS_REDUCTION_20261007_V1.json"
+
+          def git_blob(rel):
+              raw = (repo_root / rel).read_bytes()
+              return hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\x00" + raw).hexdigest()
+
+          route_sha = git_blob(route_path)
+          adequacy_sha = git_blob(adequacy_path)
+          admission_sha = git_blob(admission_path)
+          bindings = {
+              route_sha: route_path,
+              adequacy_sha: adequacy_path,
+              admission_sha: admission_path,
+          }
+
+          def receipt(*, admitted=True, context="ctx-terminal-now-v1", route="route-a", cell="cell-a", a=None, q=None, r=None):
               return {
                   "context_digest": context,
                   "cell_id": cell,
                   "route_id": route,
-                  "route_blob_sha": r * 40,
-                  "adequacy_certificate_blob_sha": q * 40,
-                  "admission_certificate_blob_sha": a * 40,
+                  "route_blob_sha": route_sha,
+                  "adequacy_certificate_blob_sha": adequacy_sha,
+                  "admission_certificate_blob_sha": admission_sha,
                   "admitted": admitted,
               }
 
@@ -76,6 +97,7 @@ jobs:
               "id": "certificate-gated-route-selection",
               "adapter": "certificate_gated_route_select",
               "actual_context_digest": "ctx-terminal-now-v1",
+              "content_address_bindings": bindings,
               "admission_receipts": [
                   receipt(admitted=False, a="0"),
                   receipt(route="route-b", cell="cell-b", a="4", q="5", r="6"),
@@ -86,6 +108,7 @@ jobs:
           assert chosen["schema"] == "PROJECT_BRAIN_CERTIFICATE_GATED_DEPLOYED_ROUTE_SELECTION_V1"
           assert chosen["route_id"] == "route-a"
           assert chosen["admitted"] is True
+          assert chosen["content_address_binding_verified"] is True
           assert chosen["selection_only"] is True
           assert chosen["downstream_route_execution_performed"] is False
           assert chosen["execution_authority"] is False
@@ -99,6 +122,7 @@ jobs:
                   "id": "certificate-gated-route-selection-uncovered",
                   "adapter": "certificate_gated_route_select",
                   "actual_context_digest": "ctx-uncovered",
+                  "content_address_bindings": bindings,
                   "admission_receipts": [receipt()],
               }, mission={})
           except astra.Blocker as exc:
