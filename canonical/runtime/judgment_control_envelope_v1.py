@@ -13,6 +13,10 @@ from typing import Any, Mapping, Sequence
 
 from canonical.runtime.source_traceable_semantic_ir import compile_semantic_ir
 from canonical.runtime.semantic_identifiability_gate import adjudicate
+from canonical.runtime.finance_source_universe_gate_v1 import (
+    canonical_authority_sha256,
+    verify_finance_source_universe,
+)
 from canonical.runtime.finite_identifiability import Experiment, Hypothesis, select_discriminator
 from canonical.runtime.semantic_operator_counterfactuals import (
     compile_explicit_operator_contract,
@@ -176,7 +180,13 @@ def bare_terminal_decision(proposal: Mapping[str, Any]) -> dict[str, Any]:
     return {"accepted": accepted, "status": "TERMINAL_ACCEPTED" if accepted else "BLOCKED",
             "errors": [] if accepted else ["DECISION_INVALID"]}
 
-def configured_terminal_decision(proposal: Any, proof_bundle: Any, *, mode: str) -> dict[str, Any]:
+def configured_terminal_decision(
+    proposal: Any,
+    proof_bundle: Any,
+    *,
+    mode: str,
+    finance_source_authority: Any = None,
+) -> dict[str, Any]:
     errors: list[str] = []
     if mode not in MODES:
         errors.append("MODE_INVALID")
@@ -201,6 +211,18 @@ def configured_terminal_decision(proposal: Any, proof_bundle: Any, *, mode: str)
     rankings = decision.get("rankings") if isinstance(decision.get("rankings"), list) else []
     selected_row = next((x for x in rankings if isinstance(x, Mapping) and x.get("alternative") == selected), {})
     contributing = set(selected_row.get("contributing_evidence") or [])
+
+    finance_source_coverage = {"status": "NOT_APPLICABLE", "pass": True}
+    if mode == "FINANCE" and decision_kind == "CONCLUDE":
+        coverage_manifest = proof_bundle.get("source_coverage_manifest") if isinstance(proof_bundle, Mapping) else None
+        finance_source_coverage = verify_finance_source_universe(
+            leaf_id=leaf_id,
+            authority=finance_source_authority,
+            coverage_manifest=coverage_manifest,
+            contributing_evidence_ids=sorted(contributing),
+        )
+        if finance_source_coverage.get("pass") is not True:
+            errors.extend("FINANCE_SOURCE_COVERAGE:" + x for x in finance_source_coverage.get("errors", []))
 
     if decision_kind == "CONCLUDE":
         if semantic_ir.get("status") != "COMPILED":
@@ -261,6 +283,7 @@ def configured_terminal_decision(proposal: Any, proof_bundle: Any, *, mode: str)
         "leaf_id": leaf_id,
         "decision": decision_kind,
         "recomputed_proof": recomputed,
+        "finance_source_coverage": finance_source_coverage,
         "rule": (
             "GENERAL_COGNITION_MAY_PROPOSE_TYPED_STRUCTURE__"
             "BRAIN_RECOMPUTES_PROVENANCE_EVIDENCE_IDENTIFIABILITY_COUNTERFACTUALS_AND_DECISION__"
@@ -359,6 +382,24 @@ def evaluate_materiality_counterfactual() -> dict[str, Any]:
         "rule_evidence_ids": ["rule"], "exception_evidence_ids": ["exception"],
         "reconciliation_checks": [],
     }
+    finance_source_authority = {
+        "authority_id": "synthetic-finance-source-universe-v1",
+        "frozen_before_candidate": True,
+        "candidate_can_modify_authority": False,
+        "all_material_rule_ids": ["rule"],
+        "all_material_exception_ids": ["exception"],
+        "required_disclosure_ids": [],
+        "required_escalation_ids": [],
+    }
+    finance_source_authority["authority_sha256"] = canonical_authority_sha256(finance_source_authority)
+    finance_source_manifest = {
+        "authority_id": finance_source_authority["authority_id"],
+        "authority_sha256": finance_source_authority["authority_sha256"],
+        "covered_source_ids": ["rule", "exception"],
+        "semantic_binding_source_ids": ["rule", "exception"],
+    }
+    finance_good_bundle["source_coverage_manifest"] = dict(finance_source_manifest)
+    finance_bad_bundle["source_coverage_manifest"] = dict(finance_source_manifest)
 
     unknown_text = "Every transfer must not ignore a negative-transfer check before conclusion."
     unknown_good_bundle = _base_bundle(
@@ -378,8 +419,14 @@ def evaluate_materiality_counterfactual() -> dict[str, Any]:
     }
 
     bare_finance = bare_terminal_decision(finance_proposal)
-    configured_finance_bad = configured_terminal_decision(finance_proposal, finance_bad_bundle, mode="FINANCE")
-    configured_finance_good = configured_terminal_decision(finance_proposal, finance_good_bundle, mode="FINANCE")
+    configured_finance_bad = configured_terminal_decision(
+        finance_proposal, finance_bad_bundle, mode="FINANCE",
+        finance_source_authority=finance_source_authority,
+    )
+    configured_finance_good = configured_terminal_decision(
+        finance_proposal, finance_good_bundle, mode="FINANCE",
+        finance_source_authority=finance_source_authority,
+    )
     bare_unknown = bare_terminal_decision(unknown_proposal)
     configured_unknown_bad = configured_terminal_decision(unknown_proposal, unknown_bad_bundle, mode="UNKNOWN_DOMAIN")
     configured_unknown_good = configured_terminal_decision(unknown_proposal, unknown_good_bundle, mode="UNKNOWN_DOMAIN")
