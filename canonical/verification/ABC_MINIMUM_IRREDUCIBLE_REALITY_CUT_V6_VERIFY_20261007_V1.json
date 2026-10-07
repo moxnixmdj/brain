@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V6_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "CONNECTOR_EXACT_DELTA_RECOMPUTATION_PASS__CURSORBENCH_L7_STATE_ONLY__14_CLASSES__9_LANES__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V6.json",
+    "git_blob_sha": "4a69f526218524f29146444e00c54c6990f1421e"
+  },
+  "predecessor": {
+    "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V5.json",
+    "git_blob_sha": "c572bac44169890417e209e81254469ce6a1004b"
+  },
+  "source_authority": {
+    "owner_boundary": [
+      "canonical/governance/CURSORBENCH_OWNER_ACCESS_BOUNDARY_V1.json",
+      "d58c41a8e93fc95df6667e955e291b3f36c8942f"
+    ],
+    "current_route_correction": [
+      "canonical/governance/CURSORBENCH_CURRENT_ROOT2_ROUTE_CORRECTION_20261005_V1.json",
+      "4fe28c8db6693ae167184a8aa3ce1b571e18fc83"
+    ],
+    "independent_owner_route_verification": [
+      "canonical/verification/FRONTIERCODE_CURSORBENCH_OWNER_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "26c1f813503c156e818499b2e6fe4fdb00d40c05"
+    ]
+  },
+  "verified": {
+    "positive_reality_classes_identical": true,
+    "positive_reality_class_count": 14,
+    "lane_cover_sets_identical": true,
+    "lane_count": 9,
+    "only_semantic_lane_repair": "L7_CURSORBENCH",
+    "cursorbench_owner_run_external_systems_available": false,
+    "cursorbench_public_third_party_submission_interface_available": false,
+    "cursorbench_generic_public_self_run_search_closed": true,
+    "cursorbench_acceptance_predicate_remains_open": true,
+    "surviving_cursorbench_route": "SEPARATELY_ADMISSIBLE_STRONGER_SCOPE_COMPLETE_PROOF_OR_FUTURE_MATERIAL_OWNER_POLICY_OR_INTERFACE_CHANGE"
+  },
+  "hard_nonclaims": [
+    "NO_CURSORBENCH_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_CLASS_OR_LANE_COUNT_REDUCTION",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
