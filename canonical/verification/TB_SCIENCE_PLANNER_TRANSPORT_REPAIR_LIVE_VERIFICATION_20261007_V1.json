@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PLANNER_TRANSPORT_REPAIR_LIVE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_LIVE_LLAMA_CPP_TRANSPORT_PASS__NO_BENCHMARK_EXPOSURE__RANK10_TRANSPORT_PRECONDITION_CLOSED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_git_blob_sha": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "tests_git_blob_sha": "3020cc54412c158efe38180025d066b5c2028165",
+    "command_policy_git_blob_sha": "a525773417291c7a4841bf35e1baff5370350d0d"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37622800294,
+    "workflow_job_id": 112796995420,
+    "workflow_name": "Verify TB-Science planner transport repair v1",
+    "conclusion": "success",
+    "head_sha": "b8a31d29c2928cef6e99b61164477dc1e9591504",
+    "artifact_id": 11483605743,
+    "artifact_name": "tb-science-planner-transport-repair-v1",
+    "artifact_digest": "sha256:3645b4e82dc02dd7c663b8f2add7ced4d73a620211458dbb7f3470c8273b9d21"
+  },
+  "pinned_transport": {
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "model_alias": "brain-qwen3.5-9b"
+  },
+  "verified": {
+    "exact_byte_gate_passed": true,
+    "planner_unit_tests_passed": true,
+    "clean_llama_cpp_build_passed": true,
+    "exact_model_hash_passed": true,
+    "local_endpoint_health_passed": true,
+    "live_tool_schema_and_decode_probe_passed": true,
+    "decoded_command_bound_enforced": true,
+    "benchmark_task_exposure": 0,
+    "rank10_task_exposure": false
+  },
+  "causal_consequence": [
+    "THE_EXACT_PLANNER_TRANSPORT_FAILURE_CLASS_THAT_CONSUMED_RANK9_IS_CLOSED_FOR_THE_REPAIRED_PLANNER_BYTES.",
+    "NO_NEW_SCIENCE_CAPABILITY_PRIMITIVE_IS_JUSTIFIED_BY_RANK9.",
+    "RANK10_TRANSPORT_PRECONDITION_IS_CLOSED__EXACT_REPAIRED_TRANSITIVE_ROUTE_CLOSURE_REMAINS_A_SEPARATE_PRECONDITION."
+  ],
+  "hard_nonclaims": [
+    "NO_RANK10_EXECUTION_AUTHORITY_FROM_THIS_RECEIPT_ALONE",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TASK_CAPABILITY_RESULT",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
