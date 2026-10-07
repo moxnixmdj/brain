@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK8_PREEXPOSURE_ABORT_TRUTH_REPAIR_V2",
+  "date": "2026-10-07",
+  "status": "TRUTH_REPAIR__CANCELLED_PREEXPOSURE__EXECUTE_STEP_SKIPPED__FALSE_FINAL_ZERO_QUARANTINED__RANK8_UNCONSUMED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "authorized_slot": "terminal-bench-science/linked-cell-suppression::trial-0",
+  "suspended_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK8_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1.json",
+    "status_required": "SUSPENDED_BEFORE_EXPOSURE__RANK7_REVEALED_UNSOUND_COVERAGE_PROMOTION"
+  },
+  "cancelled_public_run": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37608961351,
+    "workflow_job_id": 112751265938,
+    "original_head_sha": "0cc1311ab4bd5f4529f705876cf8b030adc189a2",
+    "workflow_conclusion": "cancelled",
+    "preexposure_gate_conclusion": "success",
+    "install_harbor_conclusion": "success",
+    "clean_build_llama_cpp_conclusion": "cancelled",
+    "overlay_planner_conclusion": "skipped",
+    "start_cognition_endpoint_conclusion": "skipped",
+    "execute_frozen_rank8_slot_conclusion": "skipped",
+    "terminal_task_exposure": 0,
+    "verifier_result_observed": false,
+    "fresh_target_reality_units_consumed": 0,
+    "execution_authority_consumed": false
+  },
+  "quarantined_artifact": {
+    "artifact_id": 11477290644,
+    "artifact_name": "tb-science-linked-cell-suppression-trial-0-rank8",
+    "artifact_digest": "sha256:c0611b4c8b13f51bc70bda64c563d6c12337b67c89941b52542f044a54188edd",
+    "artifact_size_bytes": 910,
+    "generated_status": "FINAL_ZERO",
+    "generated_reward": 0,
+    "generated_execution_authority_consumed": true,
+    "generated_harbor_step_outcome": "skipped",
+    "generated_errors": [
+      "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD"
+    ],
+    "admissible_as_capability_evidence": false,
+    "admissible_as_consumption_evidence": false,
+    "quarantine_reason": "THE_FINALIZER_RAN_UNCONDITIONALLY_AFTER_CONCURRENCY_CANCELLATION; THE_TERMINAL_EXECUTION_STEP_WAS_SKIPPED, SO NO_TASK_RESULT_CANNOT_BE_REINTERPRETED_AS_A_BENCHMARK_ZERO_OR_AUTHORITY_CONSUMPTION"
+  },
+  "causal_repair": {
+    "stale_run_cancelled_before_task_exposure": true,
+    "cancellation_mechanism": "SAME_WORKFLOW_CONCURRENCY_GROUP_CANCEL_IN_PROGRESS",
+    "known_superseded_planner_route_not_executed": true,
+    "rank8_slot_remains_untouched": true,
+    "current_rank8_authority_remains_suspended": true,
+    "reissue_requires_independently_verified_current_repaired_planner_and_controller_bytes": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_SCORE_CREDIT_FROM_CANCELLED_RUN",
+    "NO_NEGATIVE_CAPABILITY_EVIDENCE_FROM_CANCELLED_RUN",
+    "NO_AUTHORITY_CONSUMPTION_FROM_CANCELLED_RUN",
+    "NO_RANK8_TASK_EXPOSURE",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
