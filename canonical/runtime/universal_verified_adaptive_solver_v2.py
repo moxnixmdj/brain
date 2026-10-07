@@ -29,6 +29,7 @@ from typing import Any, Mapping, Sequence
 from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
 from canonical.runtime.universal_verified_adaptive_solver_v1 import (
     BUILTIN_VERIFIERS,
+    PROPOSAL_FREE_VERIFIERS,
     UniversalSolverError,
     _normalize_caps,
 )
@@ -41,6 +42,9 @@ SUCCESS_CONDITIONS = {
     "FINANCE_JUDGMENT_CONTROL_V1": "CONFIGURED_TERMINAL_DECISION_ACCEPTED",
     "UNKNOWN_DOMAIN_JUDGMENT_CONTROL_V1": "CONFIGURED_TERMINAL_DECISION_ACCEPTED",
     "SOURCE_ALIGNED_SEMANTIC_POLICY_V6": "COMMON_POLICY_CERTIFIED",
+    "TYPED_ACCEPTANCE_PROGRAM_V1": "TYPED_ACCEPTANCE_PROGRAM_PASS",
+    "INSTRUCTION_CONSTRAINTS_V1": "INSTRUCTION_CONSTRAINTS_PASS",
+    "STRUCTURED_METHOD_EXPRESSION_AST_V2": "STRUCTURED_METHOD_COMPILED",
 }
 
 
@@ -199,7 +203,7 @@ def run(
             effect_contract = action["effect_contract"]
 
             packets = proposals.get(cid)
-            if verifier_id == "P2_AUTHENTICATED_TOP_LAW_V1":
+            if verifier_id in PROPOSAL_FREE_VERIFIERS:
                 packets = [{}]
             if not isinstance(packets, Sequence) or isinstance(packets, (str, bytes)) or not packets:
                 return {
