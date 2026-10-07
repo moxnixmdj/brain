@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK10_IRREVERSIBLE_RESULT_TRUTH_V1",
+  "date": "2026-10-07",
+  "status": "RANK10_CONSUMED__FINAL_ZERO__LOCAL_PLANNER_TIMEOUT__NOT_TASK_CAPABILITY_NEGATIVE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "schedule_rank": 10,
+    "schedule_order": 9,
+    "slot_id": "terminal-bench-science/rdkit-ic-constraints::trial-0",
+    "task_name": "terminal-bench-science/rdkit-ic-constraints",
+    "task_digest": "sha256:17e356ab255088712c7dfa9765bf077b33a3da221f4a03d4770576857f9c0b6f"
+  },
+  "source_bindings": {
+    "authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK10_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1.json",
+      "git_blob_sha": "7b4d8c2555d102b30e02673c95675403ae947629"
+    },
+    "intent": {
+      "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK10_ONE_SHOT_20261007_V1.json",
+      "git_blob_sha": "e65720a36d7c09a3be5a33246f3ab54e20612915"
+    },
+    "ledger_predecessor": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V8.json",
+      "git_blob_sha": "eb869db71db99a77912c0051ff12f162d616b1a1"
+    },
+    "planner_at_execution": {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "01d859c8f27b317893027e693c9aa49e833a256f"
+    },
+    "transport_verification": {
+      "path": "canonical/verification/TB_SCIENCE_PLANNER_TRANSPORT_REPAIR_LIVE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "877e5ddf815c1958f4ab41f8462ad54af87f0c87"
+    },
+    "closure_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261007_V2.json",
+      "git_blob_sha": "31656d35034338dfcb699672bcd4788b283b83c9"
+    },
+    "closure_verification": {
+      "path": "canonical/verification/TB_SCIENCE_REPAIRED_TRANSITIVE_CARRIER_CLOSURE_PUBLIC_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "61495f5977ea745e63ca14136875b97e3e95cd45"
+    }
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37630721044,
+    "workflow_job_id": 112823953786,
+    "execution_branch": "execute/tb-science-rank10-20261007-v1",
+    "workflow_conclusion": "success",
+    "run_attempt": 1,
+    "artifact_id": 11486926689,
+    "artifact_digest": "sha256:13aa4516e57f83b9a9d989e4a6ee038b66c50dd90f6abef34695c81d12c4b052",
+    "execution_claim_blob": "f9199b6fc08383acccdddd86b8c8bd243b048fad",
+    "authority_verification_run_id": 37628333729,
+    "authority_verification_head": "5ae36890449b929bb28d3b05134d771b15cb50a0"
+  },
+  "irreversible_receipt": {
+    "status": "FINAL_ZERO",
+    "reward": 0,
+    "verifier_result_present": false,
+    "errors": [
+      "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD"
+    ],
+    "exception_type": "SciencePlannerError",
+    "exception_message": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "execution_authority_consumed": true,
+    "rerun_credit": false,
+    "result_hashes": {
+      "trial": "e669c7f266a7ded93f96e63f537e4d7e4ba4c300ad07b67b36f612a586a8c478",
+      "aggregate": "25cce62799d711fa5964a716f8430d60c54e8a6933118adb5bda0b3a7188faf1"
+    }
+  },
+  "causal_falsification": {
+    "task_capability_negative_evidence": false,
+    "planner_local_route_timeout": true,
+    "exact_carrier_closure_preflight_passed": true,
+    "immediate_live_epoch_lease_and_authority_gate_passed": true,
+    "local_model_health_passed": true,
+    "root_cause_class": "PLANNER_LOCAL_INFERENCE_TIMEOUT_BEFORE_VERIFIER_RESULT",
+    "observed_planner_default_timeout_seconds": 180,
+    "planner_allowed_timeout_range_seconds": [
+      1,
+      300
+    ],
+    "tournament_failure_law_effect": "DO_NOT_ADMIT_NEW_SCIENCE_CAPABILITY_DEFICIT__REPAIR_ONLY_CAUSAL_PLANNER_LATENCY_TIMEOUT_PATH_BEFORE_ANY_FUTURE_UNTOUCHED_SLOT"
+  },
+  "next_boundary": {
+    "next_untouched_schedule_rank": 11,
+    "next_untouched_slot": "terminal-bench-science/supraglacial-lake-classification::trial-0",
+    "next_untouched_task_digest": "sha256:4a57227f84340ff6e245c3f2efeb8dfb6fb44a89713223d8742433dd569f9e3a",
+    "rank11_execution_authority": false,
+    "prerequisite": "INDEPENDENT_ZERO_BENCHMARK_EXPOSURE_LIVE_PLANNER_TIMEOUT_REPAIR_VERIFICATION"
+  },
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TASK_CAPABILITY_NEGATIVE_EVIDENCE_FROM_RANK10",
+    "NO_RANK10_RETRY_OR_REPLACEMENT",
+    "NO_RANK11_EXECUTION_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
