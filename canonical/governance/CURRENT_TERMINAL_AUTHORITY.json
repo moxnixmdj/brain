@@ -620,10 +620,10 @@
     },
     "symbolic_admission_predicate_router_v1": {
       "path": "canonical/runtime/symbolic_admission_predicate_router_v1.py",
-      "git_blob_sha": "4bd1e9a6594759d741080fc72163245455513827",
+      "git_blob_sha": "82152ed192c1066ccac628da4673474db08556a4",
       "tests_path": "canonical/tests/test_symbolic_admission_predicate_router_v1.py",
-      "tests_git_blob_sha": "6adb415a76c71cc1b8ef12e72cc901b055cd08be",
-      "note": "DEPLOYED_SYMBOLIC_REGION_MATCHER__FAIL_CLOSED__GLOBAL_COVER_STILL_REQUIRES_INDEPENDENT_RESIDUAL_COMPLEMENT_UNSAT"
+      "tests_git_blob_sha": "c93dd3d7480e93c8fbfffd6a944e4f45e56ceb87",
+      "note": "DEPLOYED_SYMBOLIC_REGION_MATCHER__FAIL_CLOSED_BY_SOURCE_REVIEW__TEST_FILE_BOUND__NO_INDEPENDENT_TEST_EXECUTION_CLAIM__GLOBAL_COVER_STILL_REQUIRES_INDEPENDENT_RESIDUAL_COMPLEMENT_UNSAT"
     },
     "public_fixed_bar_aggregate_scope_admission_truth_repair": {
       "path": "canonical/governance/PUBLIC_FIXED_BAR_AGGREGATE_SCOPE_ADMISSION_TRUTH_REPAIR_20261007_V1.json",
