@@ -1,11 +1,15 @@
-"""Content-addressed authentication for Universal Learning V7 skill receipts.
+"""Content-addressed parsing boundary for Universal Learning V7 skill receipts.
 
-The underlying executable_skill_program_v7 API consumes receipt mappings. This
-module is the hardened repository boundary: it resolves exact receipt bytes by Git
-blob ID and requires a separate independent-verification receipt bound to the
-subject blob.
+This module can prove exact repository bytes, schema consistency, subject binding,
+and that declared public-runner provenance is syntactically well formed.
 
-Direct in-memory booleans are therefore insufficient for skill promotion.
+It cannot prove from repository-authored JSON alone that the named workflow run,
+job, artifact, digest, execution head, or verifier actually existed and produced
+the declared result. Shape-valid provenance is not authenticated provenance.
+
+Therefore V1 deliberately fails closed before returning independent_verified=True.
+Reusable skill promotion must use a future boundary that verifies an independent
+execution/attestation against a trust source outside the receipt author's control.
 """
 from __future__ import annotations
 
@@ -34,8 +38,6 @@ def _token(value: Any, label: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise SkillReceiptError(label + "_INVALID")
     return value.strip()
-
-
 
 
 def _public_runner_provenance(doc: Mapping[str, Any], *, label: str) -> dict[str, Any]:
@@ -104,25 +106,12 @@ def authenticate_episode_receipt(
         raise SkillReceiptError("EPISODE_VERIFY_PROGRAM_MISMATCH")
     if vd.get("pass") is not True:
         raise SkillReceiptError("EPISODE_VERIFY_NOT_PASS")
-    verifier_id = _token(vd.get("verifier_id"), "EPISODE_VERIFIER_ID")
-    provenance = _public_runner_provenance(vd, label="EPISODE")
+    _token(vd.get("verifier_id"), "EPISODE_VERIFIER_ID")
+    _public_runner_provenance(vd, label="EPISODE")
 
-    return {
-        "independent_verified": True,
-        "exact_byte_bound": True,
-        "conclusion": "success",
-        "behavior_verified": True,
-        "episode_id": episode_id,
-        "scope_id": scope_id,
-        "program_sha256": program_sha256,
-        "receipt_id": subject["git_blob_sha"] + ":" + verify["git_blob_sha"],
-        "subject_path": subject["path"],
-        "subject_git_blob_sha": subject["git_blob_sha"],
-        "verification_path": verify["path"],
-        "verification_git_blob_sha": verify["git_blob_sha"],
-        "verifier_id": verifier_id,
-        "public_runner_provenance": provenance,
-    }
+    raise SkillReceiptError(
+        "EPISODE_INDEPENDENCE_UNPROVED__DECLARED_RUNNER_PROVENANCE_NOT_AUTHENTICATED"
+    )
 
 
 def authenticate_candidate_receipt(
@@ -167,22 +156,9 @@ def authenticate_candidate_receipt(
         raise SkillReceiptError("CANDIDATE_VERIFY_SCOPE_RELATION_MISMATCH")
     if vd.get("pass") is not True:
         raise SkillReceiptError("CANDIDATE_VERIFY_NOT_PASS")
-    verifier_id = _token(vd.get("verifier_id"), "CANDIDATE_VERIFIER_ID")
-    provenance = _public_runner_provenance(vd, label="CANDIDATE")
+    _token(vd.get("verifier_id"), "CANDIDATE_VERIFIER_ID")
+    _public_runner_provenance(vd, label="CANDIDATE")
 
-    return {
-        "independent_verified": True,
-        "exact_byte_bound": True,
-        "conclusion": "success",
-        "candidate_sha256": candidate_sha256,
-        "source_episode_ids": sorted(source_episode_ids),
-        "behavior_preserving_on_claimed_scope": True,
-        "scope_relation": relation,
-        "receipt_id": subject["git_blob_sha"] + ":" + verify["git_blob_sha"],
-        "subject_path": subject["path"],
-        "subject_git_blob_sha": subject["git_blob_sha"],
-        "verification_path": verify["path"],
-        "verification_git_blob_sha": verify["git_blob_sha"],
-        "verifier_id": verifier_id,
-        "public_runner_provenance": provenance,
-    }
+    raise SkillReceiptError(
+        "CANDIDATE_INDEPENDENCE_UNPROVED__DECLARED_RUNNER_PROVENANCE_NOT_AUTHENTICATED"
+    )
