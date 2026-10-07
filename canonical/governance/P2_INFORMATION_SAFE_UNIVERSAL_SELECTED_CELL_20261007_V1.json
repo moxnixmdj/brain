@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_P2_INFORMATION_SAFE_UNIVERSAL_SELECTED_CELL_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_DIRECT_E2E_UNIVERSAL_SELECTED_CONTEXT_ABC_CELL__EXACT_BOUNDED_GENERATOR_DOMAIN__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "candidate": {
+      "path": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+      "git_blob_sha": "ea8057b0eadac210c4f4378298df93ed233c5824"
+    },
+    "suite": {
+      "path": "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py",
+      "git_blob_sha": "9d3d9bb837a98a7f78b5794cec0c0ae88bb32860"
+    },
+    "t1_binding": {
+      "path": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d"
+    },
+    "mechanical_cell": {
+      "path": "canonical/governance/V13_NATIVE_ARTIFACT_MECHANICAL_SELECTED_CELL_20261007_V1.json",
+      "git_blob_sha": "10b766b2983357081f592dc64e576a8cfdd5ad7b"
+    },
+    "artifact_residual": {
+      "path": "canonical/governance/ARTIFACT_PROFESSIONAL_RESIDUAL_REDUCTION_20261007_V1.json",
+      "git_blob_sha": "afaf6e9c4dfe13873b732d49a468329fc9510ffe"
+    },
+    "authority_v15": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V15.json",
+      "git_blob_sha": "09f11461c7aa1ee7719409723726712f68d03da8"
+    }
+  },
+  "target": {
+    "family": "ARTIFACT_CREATION",
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "selected_cell_id": "PROFESSIONAL_ARTIFACT_P2_INFO_SAFE_V2_ALL_GENERATED_CASES",
+    "exact_domain": "ALL_CASES_EMITTED_BY_p2_p3_information_safe_proof_suites_v2::_p2_FOR_ANY_INTEGER_SEED_AND_DIFFICULTY_1_THROUGH_5",
+    "claim": "THE_BOUND_BRAIN_CANDIDATE_RETURNS_THE_EXACT_HIDDEN_ORACLE_SELECTED_EDIT_SET_FOR_EVERY_CASE_IN_THIS_EXACT_GENERATOR_DOMAIN"
+  },
+  "source_semantic_correspondence": {
+    "supported": "GENERATOR_supported_TRUE_EMITS_ONE_EXISTING_FACT_ID_AND_supported_FALSE_EMITS_UNSUPPORTED_i_NOT_IN_FACT_IDS__THEREFORE_CANDIDATE_grounded_IFF_hidden_supported",
+    "required_topic": "GENERATOR_hidden_required_topic_IS_topic_IN_required_topics__CANDIDATE_USES_THE_SAME_VISIBLE_MEMBERSHIP_TEST",
+    "audience_fit": "GENERATOR_hidden_audience_fit_IS_intended_audience_EQUALS_audience__CANDIDATE_USES_THE_SAME_VISIBLE_EQUALITY",
+    "analysis_value": "GENERATOR_hidden_analysis_value_IS_analysis_kind_NOT_EQUAL_layout__CANDIDATE_USES_THE_SAME_VISIBLE_TEST"
+  },
+  "theorem": {
+    "pointwise_score_identity": "FOR_EVERY_GENERATED_EDIT__candidate_estimate_EQUALS_oracle_utility",
+    "independent_algebra_check": "WOLFRAM_EXHAUSTIVE_16_BOOLEAN_ASSIGNMENTS_PASS",
+    "feasible_set_identity": "CANDIDATE_AND_ORACLE_ENUMERATE_THE_SAME_POWER_SET_OF_THE_SAME_EDIT_LIST_AND_APPLY_THE_SAME_SUM_COST_LESS_THAN_OR_EQUAL_TO_VISIBLE_BUDGET_CONSTRAINT",
+    "coverage_penalty_identity": "BOTH_SUBTRACT_20_TIMES_THE_NUMBER_OF_REQUIRED_TOPICS_NOT_COVERED_BY_SUPPORTED_NON_LAYOUT_SELECTED_EDITS",
+    "tie_break_identity": "BOTH_MINIMIZE_THE_EXACT_KEY_NEGATIVE_SCORE_THEN_COST_THEN_LEXICOGRAPHIC_SORTED_EDIT_IDS",
+    "conclusion": "FOR_EVERY_CASE_IN_THE_EXACT_BOUND_GENERATOR_DOMAIN__THE_SELECTED_EDIT_ID_TUPLES_ARE_IDENTICAL__THEREFORE_score_case_RETURNS_PASS"
+  },
+  "abc_consequence": {
+    "selected_cell_scope_complete": true,
+    "direct_e2e": true,
+    "target_information_consumed": 0,
+    "fresh_reality_units_consumed": 0,
+    "proposed_D_B_region": "PROFESSIONAL_ARTIFACT_P2_INFO_SAFE_V2_ALL_GENERATED_CASES",
+    "artifact_family_closed": false,
+    "professional_quality_global_closed": false,
+    "remaining_professional_escape": "ANY_PROFESSIONAL_DELIVERABLE_CONTEXT_NOT_SOUNDLY_SUBSUMED_BY_THIS_EXACT_GENERATOR_DOMAIN_OR_ANOTHER_SOUND_CELL",
+    "scheduler_delta": "DO_NOT_SCHEDULE_FRESH_RESULT_ACQUISITION_TO_PROVE_THIS_EXACT_P2_INFORMATION_SAFE_CELL__IT_IS_DEDUCTIVELY_CLOSED_FROM_CURRENT_BYTES"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_SYNTHETIC_P2_GENERATOR_IS_SCOPE_EQUIVALENT_TO_ALL_REALISTIC_PROFESSIONAL_DELIVERABLES",
+    "NO_CLAIM_ALL_ARTIFACT_PROFESSIONAL_QUALITY_IS_CLOSED",
+    "NO_AA_BRIEFCASE_OR_GDPVAL_SCORE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_THIS_CELL_SUBSUMES_NATIVE_ARTIFACT_MECHANICAL_SCOPE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
