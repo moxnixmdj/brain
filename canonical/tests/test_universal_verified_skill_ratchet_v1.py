@@ -182,3 +182,23 @@ def test_identity_mismatch_blocks_before_independence_claim(tmp_path):
     refs["verification"] = write_json(tmp_path, refs["verification"]["path"], doc)
     with pytest.raises(SkillReceiptError, match="EPISODE_VERIFY_IDENTITY_MISMATCH"):
         bind_verified_episode(ep, refs, repo_root=str(tmp_path))
+
+
+def test_different_action_semantics_do_not_share_learning_skeleton():
+    first = solved()
+    p2 = problem()
+    p2["capabilities"][0]["action"]["verifier_payload"] = {"expected": {"answer": 43}}
+    second = run(
+        p2,
+        proposal_packets={"solve": [{"candidate": {"answer": 43}}]},
+    )
+    assert second["pass"] is True, second
+    ep1 = episode_candidate_from_solver(
+        first, episode_id="e1", scope_id="scope", postconditions=["ANSWER_VERIFIED"]
+    )
+    ep2 = episode_candidate_from_solver(
+        second, episode_id="e2", scope_id="scope", postconditions=["ANSWER_VERIFIED"]
+    )
+    assert ep1["steps"] != ep2["steps"]
+    assert ep1["parameterization_claimed"] is False
+    assert ep2["parameterization_claimed"] is False
