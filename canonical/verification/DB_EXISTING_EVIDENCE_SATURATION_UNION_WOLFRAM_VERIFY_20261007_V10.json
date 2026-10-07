@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_DB_EXISTING_EVIDENCE_SATURATION_UNION_WOLFRAM_VERIFY_V10",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_LOGIC_COMPOSITION_PASS__EXISTING_SOURCE_REPLAY_BOUND__IF_REFINEMENT_SOUNDLY_SUBTRACTED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V10.json",
+    "git_blob_sha": "09c5c3c8ca4675f28585930ae74c04c8a34d3904"
+  },
+  "exact_source_bindings": {
+    "predecessor_v9": {
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V9.json",
+      "git_blob_sha": "73fbe58346dd2ff94feccfa0cbea7d00a9dcd1d0"
+    },
+    "if_protocol_truth_repair": {
+      "path": "canonical/governance/IF_SCOPE_FINITE_PROTOCOL_BINDING_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "15c5e607e9f5c921d62bf75492e26021980e75fa"
+    },
+    "independent_source_and_verifier_replay": {
+      "path": "canonical/verification/IF_SCOPE_FINITE_PROTOCOL_BINDING_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "b7bfc865267554f0c7005c0835f09107b2dec998",
+      "result": "INDEPENDENT_EXACT_SOURCE_BINDING_AND_VERIFIER_REPLAY_PASS"
+    },
+    "l1_normal_form": {
+      "path": "canonical/governance/L1_UNIVERSAL_ABC_NORMAL_FORM_THEOREM_20261007_V1.json",
+      "git_blob_sha": "cff6a95cad0027f3e142a32fd028a27566a00ea5"
+    },
+    "v10_runtime_verifier": {
+      "path": "canonical/runtime/db_existing_evidence_saturation_union_v10_verifier.py",
+      "git_blob_sha": "95b8ef3603725c2ba7ca1a3e7dd842b950a362ec"
+    },
+    "v10_tests": {
+      "path": "canonical/tests/test_db_existing_evidence_saturation_union_v10.py",
+      "git_blob_sha": "35468c3c5cf99750ce1991506dc66bb3c5d9423f"
+    }
+  },
+  "independent_logic": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "code": "FullSimplify[ForAll[q, Element[q, Reals] && 0 <= q <= 1, 1 >= q], Reals] && Reduce[0 <= q <= 1 && 1 < q, q, Reals] === False",
+    "output": "True",
+    "consequence": "ON_A_COMPLETE_SHARED_BINARY_SUCCESS_ACCEPTANCE_OBJECT__BRAIN_AT_SUCCESS_1_IS_NONINFERIOR_TO_EVERY_ADMISSIBLE_COMPARATOR_RESULT_IN_[0,1]"
+  },
+  "verified": {
+    "predecessor_sound_record_count": 16,
+    "added_record_count": 0,
+    "record_count_unchanged": true,
+    "if_declared_scope_mode": "FINITE_DECLARED_SCOPE",
+    "larger_population_declared": false,
+    "finite_manifest_is_complete_declared_acceptance_object": true,
+    "brain_success_160_of_160": true,
+    "objective_ceiling_dominance": true,
+    "if_scope_boundary_refinement_closed": true,
+    "sound_subtraction_from_U": true,
+    "opus_query_required": false,
+    "U_empty_proved": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_INSTRUCTION_FOLLOWING_OUTSIDE_THE_DECLARED_FINITE_SCOPE_BOUNDARY_PORTFOLIO.",
+    "NO_CLAIM_U_IS_EMPTY.",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED.",
+    "NO_CLAIM_D_FINALITY_OR_TERMINAL_IS_CLOSED.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
