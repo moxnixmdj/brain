@@ -52,7 +52,12 @@ def test_rejects_semantically_redundant_edge_even_when_graph_compiles():
         "left":{"op":"ref","id":"x"},
         "right":{"op":"ref","id":"x"},
     }
-    out=verify(base(expr=cancel, invariant=None))
+    neutral={
+        "op":"eq",
+        "left":{"op":"ref","id":"y"},
+        "right":{"op":"const","type":"number","dimension":"score","value":0.0},
+    }
+    out=verify(base(expr=cancel, invariant=neutral))
     assert out["pass"] is False
     assert "NO_INDEPENDENT_EDGE_SENSITIVITY_WITNESS:RULE1:x" in out["reason"]
 
