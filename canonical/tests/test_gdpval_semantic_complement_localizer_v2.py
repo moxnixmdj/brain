@@ -9,7 +9,7 @@ from canonical.runtime.gdpval_semantic_complement_localizer_v2 import (
 )
 
 
-class GDPvalSemanticComplementLocalizerV2Tests(unittest.TestCase):
+# Independent PR verification trigger: diagnostics captured fail-closed.\nclass GDPvalSemanticComplementLocalizerV2Tests(unittest.TestCase):
     def test_schema_is_v2_and_not_terminal_claim(self):
         self.assertEqual(
             SCHEMA,
