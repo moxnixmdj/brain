@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V8",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH__NINE_CONSUMED_SLOTS__RANK10_ONE_USE_AUTHORIZED__TASK_UNSTARTED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V7.json",
+    "git_blob_sha": "d3ff32dd833dfb5fcdce58e134185bfaf19e95ae"
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "current_counts": {
+    "consumed_slots": 9,
+    "consumed_successes": 0,
+    "consumed_final_failures": 9,
+    "next_untouched_slot": {
+      "schedule_rank": 10,
+      "slot_id": "terminal-bench-science/rdkit-ic-constraints::trial-0",
+      "task_digest": "sha256:17e356ab255088712c7dfa9765bf077b33a3da221f4a03d4770576857f9c0b6f"
+    },
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 78,
+    "maximum_possible_successes_remaining": 201,
+    "pass_still_mathematically_reachable": true
+  },
+  "rank10_preexposure": {
+    "planner_live_transport_verified": true,
+    "planner_live_transport_verification": {
+      "path": "canonical/verification/TB_SCIENCE_PLANNER_TRANSPORT_REPAIR_LIVE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "877e5ddf815c1958f4ab41f8462ad54af87f0c87"
+    },
+    "exact_repaired_transitive_carrier_closure_verified": true,
+    "carrier_closure_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261007_V2.json",
+      "git_blob_sha": "31656d35034338dfcb699672bcd4788b283b83c9"
+    },
+    "carrier_closure_verification": {
+      "path": "canonical/verification/TB_SCIENCE_REPAIRED_TRANSITIVE_CARRIER_CLOSURE_PUBLIC_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "61495f5977ea745e63ca14136875b97e3e95cd45"
+    },
+    "live_epoch": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "path": "capsules/tb_science_rank10_20261007_v1/RANK10_EPOCH_V1.json",
+      "git_blob_sha": "8d0bc7999769a32147eab08acb31436e7abe743c",
+      "epoch_id": "TBSCI-RANK10-20261007-E1"
+    },
+    "one_use_authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK10_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1.json",
+      "git_blob_sha": "7b4d8c2555d102b30e02673c95675403ae947629"
+    },
+    "action_intent": {
+      "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK10_ONE_SHOT_20261007_V1.json",
+      "git_blob_sha": "e65720a36d7c09a3be5a33246f3ab54e20612915"
+    }
+  },
+  "scheduler": [
+    "RANK8_AND_RANK9_ARE_CONSUMED_FINAL_ZERO__NEVER_REPLAY.",
+    "RANK9_TRANSPORT_FAILURE_IS_NOT_TASK_CAPABILITY_NEGATIVE_EVIDENCE.",
+    "RANK10_IS_THE_ONLY_CURRENT_TB_SCIENCE_SLOT_AUTHORIZED.",
+    "IMMEDIATELY_BEFORE_TASK_START__RECHECK_EXACT_PUBLIC_EPOCH_BLOB_AND_EXACT_CARRIER_BLOB_IDENTITIES.",
+    "PRECHECK_FAILURE_DOES_NOT_CONSUME_RANK10.",
+    "AFTER_TASK_START__THE_RESULT_IS_IRREVERSIBLE_AND_MISSING_OR_ZERO_VERIFIER_RESULT_COUNTS_FINAL_ZERO.",
+    "RACE_TB_SCIENCE_WITH_OTHER_INDEPENDENT_TERMINAL_OBLIGATIONS__DO_NOT_SERIALIZE_GLOBAL_PROGRESS_ON_THIS_SLOT."
+  ],
+  "hard_nonclaims": [
+    "NO_RANK10_TASK_RESULT_YET",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TASK_CAPABILITY_CREDIT_FROM_PREFLIGHTS",
+    "NO_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 4,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  }
+}
