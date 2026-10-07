@@ -31,6 +31,10 @@
     "abc_authority": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V9.json",
       "git_blob_sha": "1ec7f2c86534d046e51ddda00001ed287039fc0a"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
     }
   },
   "definitions": {
