@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_V13_LIVEBENCH_ACTIVE15_SELECTED_CELL_CLOSURE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SELECTED_TRACE_CELL_MOVED_INTO_D_B__NEW_ROUTE_D_DELTA_CLOSED__ZERO_NEW_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "cell": {
+      "path": "canonical/governance/V13_DB_LIVEBENCH_ACTIVE15_SELECTED_CELL_20261007_V1.json",
+      "git_blob_sha": "14e855a5ec4f1ec371f3b630d2c125ffcbdce6e1"
+    },
+    "cell_verification": {
+      "path": "canonical/verification/V13_DB_LIVEBENCH_ACTIVE15_SELECTED_CELL_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "dbfe5b40c39e9f83fc2682d5aa443f9faeab8c71"
+    },
+    "D_audit": {
+      "path": "canonical/governance/V13_LIVEBENCH_ACTIVE15_SELECTED_ROUTE_D_AUDIT_20261007_V1.json",
+      "git_blob_sha": "b22eb6fe998103c8bf511c5327481dc86dde881e"
+    },
+    "D_verification": {
+      "path": "canonical/verification/V13_LIVEBENCH_ACTIVE15_SELECTED_ROUTE_D_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "6a53ea4888992062d2c8bf857c9bc7605378f727"
+    }
+  },
+  "closure": {
+    "selected_cell": "LIVEBENCH_ACTIVE15_FROZEN_PUBLIC_GRAMMAR_CELL",
+    "parent_refinement": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+    "abc_cell_closed": true,
+    "brain_law_top_on_cell": true,
+    "maximal_K_minus_empty": true,
+    "moved_from_escape_E_to_D_B": true,
+    "newly_credited_route_D_delta_closed": true,
+    "material_effect_count": 0,
+    "model_dependency_count": 0
+  },
+  "consequence": [
+    "DELETE_TARGET_INFORMATION_WORK_FOR_THE_FROZEN_ACTIVE15_CELL.",
+    "DELETE_LOCAL_C_DECOMPOSITION_WORK_FOR_THE_CELL_BECAUSE_DIRECT_E2E_FINAL_ROUTE_PROOF_SUBSUMES_IT.",
+    "DELETE_NEW_EFFECT_MEDIATOR_WORK_FOR_THIS_ROUTE_BECAUSE_THE_DIRECT_MATERIAL_EFFECT_FOOTPRINT_IS_EMPTY.",
+    "KEEP_THE_REST_OF_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT_OPEN."
+  ],
+  "hard_nonclaims": [
+    "NO_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE",
+    "NO_SCOPE_BOUNDARY_OR_AUTHORITY_VIOLATION_CELL_CLOSURE",
+    "NO_GLOBAL_ABC_CLOSURE",
+    "NO_GLOBAL_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
