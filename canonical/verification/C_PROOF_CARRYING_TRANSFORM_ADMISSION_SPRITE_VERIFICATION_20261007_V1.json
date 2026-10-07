@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_C_PROOF_CARRYING_TRANSFORM_ADMISSION_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__5_OF_5__ZERO_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/C_PROOF_CARRYING_TRANSFORM_ADMISSION_20261007_V1.json",
+      "git_blob_sha": "0af7bdefe7bfca5dd840874824adecbaa013fb1b"
+    },
+    "runtime": {
+      "path": "canonical/runtime/c_proof_carrying_transform_admission_v1.py",
+      "git_blob_sha": "68e9e3fb954801de605ee74811b36aa3292299cc"
+    },
+    "tests": {
+      "path": "canonical/tests/test_c_proof_carrying_transform_admission_v1.py",
+      "git_blob_sha": "5d6f8a183a2086e0d6db690fb7060f46c3f50b2e"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/c_admission_exact",
+    "runtime_blob_recomputed": "68e9e3fb954801de605ee74811b36aa3292299cc",
+    "tests_blob_recomputed": "5d6f8a183a2086e0d6db690fb7060f46c3f50b2e",
+    "tests_passed": 5,
+    "tests_total": 5
+  },
+  "verified": [
+    "VALID_COMPLETE_EDGE_CERTIFICATE_PASSES",
+    "MISSING_EVALUATOR_PULLBACK_FAILS_CLOSED",
+    "MISSING_HARD_CONSTRAINT_PREIMAGE_FAILS_CLOSED",
+    "TRANSFORM_BYTE_DRIFT_FAILS_CLOSED",
+    "LOAD_BEARING_EDGE_OMISSION_FAILS_CLOSED"
+  ],
+  "boundary": [
+    "NO_CLAIM_CURRENT_CREDITED_ROUTES_ALREADY_HAVE_ALL_REQUIRED_EDGE_CERTIFICATES",
+    "NO_CLAIM_C_IS_CLOSED",
+    "ZERO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
