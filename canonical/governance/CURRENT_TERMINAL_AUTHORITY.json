@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34",
   "date": "2026-10-07",
-  "status": "ACTIVE_ZERO_BUREAUCRACY_SINGLE_BIT_EXECUTION_LOCK__TERMINAL_FALSE",
+  "status": "ACTIVE_FAIL_CLOSED_SINGLE_RESIDUAL_COMPLEMENT_UNSAT_ROOT__LATEST_V33_GENERIC_U_CLOSURE_BOUND__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -541,11 +541,7 @@
     "selected_cover_complement_unsat_normal_form": {
       "path": "canonical/governance/SELECTED_COVER_COMPLEMENT_UNSAT_NORMAL_FORM_20261007_V1.json",
       "git_blob_sha": "2667f6973a4fb2da039ed67fcb4db6dd61dde3d2",
-      "runtime": {
-        "path": "canonical/runtime/predicate_selected_cover_complement_gate_v1.py",
-        "git_blob_sha": "48408fad6ec30abc28e4136dcbb1696f015e7bd7"
-      },
-      "note": "U_EMPTY_REQUIRES_INDEPENDENT_CONTENT_BOUND_PROOF_THAT_THE_EXACT_SOUND_ADMISSION_COMPLEMENT_IS_UNSAT__NO_MANUAL_SELECTED_COVER_COMPLETE_FLAG"
+      "note": "LATEST_GLOBAL_ABC_NORMAL_FORM__SOUND_ADMISSION_UNION_PLUS_SYMBOLIC_COMPLEMENT__ABC_CLOSES_ONLY_FROM_INDEPENDENT_RESIDUAL_UNSAT"
     },
     "top_semantic_overapproximation_soundness": {
       "path": "canonical/governance/TOP_SEMANTIC_OVERAPPROXIMATION_SOUNDNESS_TRUTH_REPAIR_20261007_V1.json",
@@ -562,16 +558,22 @@
     "decision_relevant_admission_generator_closure": {
       "path": "canonical/governance/DECISION_RELEVANT_ADMISSION_GENERATOR_CLOSURE_THEOREM_20261007_V1.json",
       "git_blob_sha": "f6c8923ed8ec912e115c948822194495109ad040",
-      "runtime": {
-        "path": "canonical/runtime/decision_relevant_admission_generator_closure_v1.py",
-        "git_blob_sha": "3c6bcf4b08c465f47e9809737f13c3e6d6841b97"
-      },
-      "note": "GENERATOR_CLOSURE_IS_AN_ADMISSIBLE_SCOPE_COMPLETE_ROUTE_ONLY_AFTER_GENERATOR_BASE_COVER_TRANSFORM_PRESERVATION_AND_REACHABILITY_EQUAL_S_TRACE_ARE_PROVED"
+      "note": "LATEST_SCOPE_LIFT_CANDIDATE__USE_GENERATOR_AND_TRANSFORM_CLOSURE_TO_PROVE_RESIDUAL_UNSAT__ZERO_CREDIT_UNTIL_PREMISES_BOUND"
     },
     "terminal_bureaucracy_collapse_single_root": {
       "path": "canonical/governance/TERMINAL_BUREAUCRACY_COLLAPSE_SINGLE_ROOT_20261007_V1.json",
       "git_blob_sha": "d80f053f213c61091bd4af2d1bc271f566f158fd",
       "note": "ACTIVE_SCHEDULER_AUTHORITY__ONE_PRE_ABC_RESEARCH_ROOT_ESCAPE_POLICY_ADEQUACY__ROUTER_AND_ABC_DERIVED__D_POST_U_AUTOMATIC_FINALIZATION"
+    },
+    "top_semantic_overapproximation_truth_repair": {
+      "path": "canonical/governance/TOP_SEMANTIC_OVERAPPROXIMATION_SOUNDNESS_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "2e37860a0fb9d8212aa854c0d8c8749919c76204",
+      "note": "INITIALIZE_POSITIVE_ADMISSION_AT_PSI_TOP__DELETE_GENERAL_PARSE_AS_SERIAL_PREREQUISITE"
+    },
+    "dynamic_adequacy_extension_basis_truth_repair": {
+      "path": "canonical/governance/DYNAMIC_ADEQUACY_EXTENSION_BASIS_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "602014867b9947b2579831400ad868f1de94e8d3",
+      "note": "PRESERVE_NONSCHEMA_LOAD_BEARING_REQUIREMENTS_AS_OPAQUE_EXTENSION_ATOMS__NO_SILENT_OMISSION"
     }
   },
   "live_truth": {
@@ -820,15 +822,15 @@
     "single_escape_frontier_definition": "E_EQUALS_S_TRACE_MINUS_D_B",
     "current_primary_u_primitive_count": 1,
     "current_primary_u_primitives": [
-      "ESCAPE_POLICY_ADEQUACY"
+      "RESIDUAL_COMPLEMENT_UNSAT_OR_CONSTRUCTIVE_COUNTEREXAMPLE"
     ],
     "historical_13_open_refinement_families_are_primary_jobs": false,
     "historical_13_open_refinement_families_are_falsification_partitions": true,
     "total_abstraction_gap_closed_structurally": true,
     "current_escape_policy_adequacy_closed": false,
     "bureaucracy_collapse_active": true,
-    "current_terminal_root_predicate": "PROVE_NOT_X",
-    "current_terminal_root_X": "AT_LEAST_ONE_ACTUAL_USEFUL_TARGET_LAW_OCCUPIES_CURRENT_UNDOMINATED_ESCAPE_E",
+    "current_terminal_root_predicate": "PROVE_RESIDUAL_COMPLEMENT_UNSAT_OVER_EXACT_SOUND_ADMISSION_PREDICATE_SET",
+    "current_terminal_root_X": "EXISTS_CONTEXT_IN_S_TRACE_WITH_NO_SOUND_BRAIN_OWNED_ADEQUATE_ADMISSION_PREDICATE",
     "current_evidence_proves_X": false,
     "current_evidence_proves_not_X": false,
     "current_terminal_root_single_bit_unresolved": true,
@@ -846,7 +848,10 @@
     "generator_closure_equals_trace_scope_proved": false,
     "semantic_top_overapproximation_initialization_bound": true,
     "dynamic_extension_basis_structural_preservation_bound": true,
-    "zero_bureaucracy_execution_lock_active": true
+    "zero_bureaucracy_execution_lock_active": true,
+    "latest_v33_generic_u_closure_bound_into_terminal_authority": true,
+    "residual_complement_unsat_proved": false,
+    "symbolic_admission_predicate_successor_deployed": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -883,6 +888,11 @@
     "current_single_boundary": "CONSTRUCT_AND_AUTHENTICATE_TOTAL_SOUND_alpha_gamma_PLUS_TERMINAL_OR_COMPLETE_OUTCOME_STRICTLY_WELL_FOUNDED_SAFE_RESOURCE_BOUNDED_PROGRESS_COVER__OR_PROVE_THE_EXACT_SOUND_ADMISSION_COMPLEMENT_UNSAT"
   },
   "scheduling_lock": [
+    "AFTER_U_EMPTY_ONLY__FREEZE_SELECTED_ROUTES_AND_EXECUTE_D_FINALITY__NO_OTHER_TOP_LEVEL_TERMINAL JOB EXISTS.",
+    "NO_MANUAL_SELECTED_COVER_COMPLETE_FLAG__ONLY_EXACT_PREDICATE_SET_PLUS_INDEPENDENT_CONTENT_BOUND_RESIDUAL_UNSAT_PROOF_MAY_AUTHORIZE_U_EMPTY.",
+    "GENERAL_RAW_SEMANTIC_PARSING_IS_NOT_A_SERIAL_PREREQUISITE__INITIALIZE_AT_PSI_TOP_AND_ACQUIRE_ONLY_POLICY_CHANGING_FACTS.",
+    "DO_NOT_SCHEDULE_DOMAIN_OR_FAMILY_BULK_WORK__USE_EXISTING_TOP_LAWS_COMPLETE_OBJECTIVE_CELLS_POSITIVE_ADEQUACY_LAWS_EQUIVALENCE_BASIS_AND_GENERATOR_TRANSFORM_CLOSURE_ONLY_AS_CANDIDATE_CERTIFICATE_CONSTRUCTORS_FOR_R_UNSAT.",
+    "ONLY_LIVE_TERMINAL_U_ATTACK__FORM_R_AS_S_TRACE_AND_NOT_ANY_SOUND_ADMISSION_PREDICATE__PROVE_R_UNSAT_OR_RETURN_ONE_CONSTRUCTIVE_COUNTEREXAMPLE.",
     "PRIMARY_JOB_IS_ONLY_PROVE_NOT_X_FOR_CURRENT_ESCAPE_E.",
     "USE_EXISTING_BRAIN_TOP_LAWS_AND_DOMINANCE_THEOREMS_BEFORE_CREATING_ANY_NEW_MECHANISM.",
     "IF_NOT_X_CANNOT_BE_DERIVED_FROM_CURRENT_EVIDENCE__ACQUIRE_ONLY_THE_MINIMUM_POLICY_CHANGING_TARGET_FACT; DO_NOT EXPAND SIDE RESEARCH.",
