@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_E_REGIME_ACCEPTANCE_CEILING_LAW_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_PARAMETERIZED_ZERO_REALITY_LAW__NO_CLASS_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "regime": {
+      "path": "canonical/governance/U_INFORMATION_TRICHOTOMY_QUOTIENT_20261007_V2.json",
+      "git_blob_sha": "df1094e737909dca6b062263cccd5eba3d2d8238"
+    },
+    "ceiling": {
+      "path": "canonical/governance/TARGET_INFORMATION_CEILING_DOMINANCE_THEOREM_20261005_V1.json",
+      "git_blob_sha": "948123227a5c84a32a1035268f9db395c5d77bc1"
+    },
+    "lossless_raw_task": {
+      "path": "canonical/runtime/lossless_raw_task_universal_mission_v1.py",
+      "git_blob_sha": "3c7b715d4f2d2e445a62acebfd587d6a39b4e191"
+    },
+    "typed_constructor": {
+      "path": "canonical/runtime/typed_acceptance_constructive_solver_v1.py",
+      "git_blob_sha": "9ac34ce322874d81e3493a8840e24e55cb6a3239"
+    },
+    "componentwise_dominance": {
+      "path": "canonical/runtime/componentwise_monotone_dominance_v1.py",
+      "git_blob_sha": "84a59fa293e18082af4cb2d0304c7387363ccd54"
+    }
+  },
+  "scope": "E_INFORMATION_REGIME_ONLY_UNLESS_SEPARATELY_REBOUND",
+  "law": {
+    "premises": [
+      "C1_SCOPE_COMPLETE: the declared context/task universe for the claim is soundly complete or a sound stronger superdomain is bound.",
+      "C2_ACCEPTANCE_COMPLETE: every load-bearing success/quality/hard-constraint dimension is represented by an independently verified Brain-owned acceptance relation; lossless raw-task preservation may prevent silent requirement deletion but does not itself prove semantic adequacy.",
+      "C3_BRAIN_ROUTE_OWNED: the candidate is produced by a Brain-owned route with exact content-addressed execution identity.",
+      "C4_TOP_OR_DOMINANCE: either the Brain candidate attains a proved objective top/floor on the complete acceptance relation, or every complete component is independently proved noninferior under an independently proved componentwise-monotone aggregate order.",
+      "C5_RESOURCE_AND_HARD_CONSTRAINTS: every load-bearing deadline/resource/safety/authority constraint for the claimed capability is satisfied.",
+      "C6_LIVE_REVERIFY: the final candidate is reverified against the authoritative complete acceptance relation after all trusted values/effects are resolved."
+    ],
+    "conclusion": "BRAIN_IS_TARGET_INDEPENDENTLY_NONINFERIOR_ON_THE_BOUND_CONTEXT_CELL__NO_OPUS_OUTPUT_SCORE_OR_TRAJECTORY_IS_REQUIRED_FOR_THAT_CELL",
+    "reason": [
+      "C1+C2 fix the full claimed acceptance universe.",
+      "C3 binds the credited behavior to Brain-owned execution.",
+      "C4 gives an absolute ceiling/floor or complete componentwise noninferiority.",
+      "C5 prevents winning by weakening load-bearing constraints.",
+      "C6 prevents stale or proposal-only proof from being substituted for the actual final artifact/result.",
+      "Therefore every admissible target behavior under the same complete acceptance relation is weakly dominated or tied."
+    ]
+  },
+  "implementation_reuse": {
+    "raw_task_adapter": "LOSSLESS_RAW_TASK_UNIVERSAL_MISSION preserves all non-whitespace raw task segments as acceptance obligations and grants routing zero success authority.",
+    "typed_constructor": "TYPED_ACCEPTANCE_CONSTRUCTIVE_SOLVER can directly synthesize and live-reverify the declared conjunctive ge/le/eq constant fragment without Cartesian search.",
+    "componentwise_aggregator": "COMPONENTWISE_MONOTONE_DOMINANCE removes a separate aggregate target run once component completeness, monotonicity, and every component relation are independently verified."
+  },
+  "decisive_falsifiers": [
+    "ONE_LOAD_BEARING_CONTEXT_OUTSIDE_THE_BOUND_SCOPE_OR_SUPERDOMAIN",
+    "ONE_LOAD_BEARING_ACCEPTANCE_DIMENSION_OMITTED_OR_UNAUTHENTICATED",
+    "ONE_REQUIRED_RESOURCE_OR_HARD_CONSTRAINT_WEAKENED",
+    "ONE_COMPONENT_RELATION_OR_AGGREGATE_MONOTONICITY_PREMISE_NOT_INDEPENDENTLY_VERIFIED",
+    "FINAL_RESULT_DIFFERS_FROM_THE_RESULT_BOUND_TO_THE_ACCEPTANCE_RECEIPTS"
+  ],
+  "scheduler": [
+    "FOR_EACH_E_CLASS_RUN_C1_THROUGH_C6_AS_A FAIL_CLOSED MEMBERSHIP PREFLIGHT.",
+    "IF_ALL_SIX_PASS DELETE_THAT_CLASS'S TARGET_RESULT_WAKE AND CREDIT ONLY THE EXACT BOUND CELL.",
+    "IF_ANY PREMISE FAILS WORK_ONLY_THE_FIRST LOAD_BEARING MISSING PREMISE; DO_NOT WAKE OPUS BY DEFAULT.",
+    "DO_NOT TREAT LOSSLESS RAW TEXT PRESERVATION OR CONSTRUCTIVE SOLVER EXISTENCE AS ACCEPTANCE COMPLETENESS."
+  ],
+  "hard_nonclaims": [
+    "NO_E_CLASS_IS_CLOSED_BY_THIS_THEOREM_ALONE",
+    "NO_CLAIM_ANY_CURRENT_E_CLASS_HAS_C1_THROUGH_C6",
+    "NO_GLOBAL_ABC_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
