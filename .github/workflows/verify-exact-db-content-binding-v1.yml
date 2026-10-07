@@ -1,0 +1,68 @@
+name: Verify exact D_B content binding
+on:
+  push:
+    paths:
+      - 'canonical/runtime/content_bound_artifact_v1.py'
+      - 'canonical/runtime/exact_sound_db_admission_convergence_v1.py'
+      - 'canonical/runtime/predicate_selected_cover_complement_gate_v1.py'
+      - 'canonical/tests/test_exact_sound_db_admission_convergence_v1.py'
+      - 'canonical/tests/test_predicate_selected_cover_complement_gate_v1.py'
+      - '.github/workflows/verify-exact-db-content-binding-v1.yml'
+  pull_request:
+    paths:
+      - 'canonical/runtime/content_bound_artifact_v1.py'
+      - 'canonical/runtime/exact_sound_db_admission_convergence_v1.py'
+      - 'canonical/runtime/predicate_selected_cover_complement_gate_v1.py'
+      - 'canonical/tests/test_exact_sound_db_admission_convergence_v1.py'
+      - 'canonical/tests/test_predicate_selected_cover_complement_gate_v1.py'
+      - '.github/workflows/verify-exact-db-content-binding-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run exact content-binding canaries
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from tempfile import TemporaryDirectory
+          from canonical.tests import test_exact_sound_db_admission_convergence_v1 as c
+          from canonical.tests import test_predicate_selected_cover_complement_gate_v1 as g
+
+          c.test_missing_bindings_are_the_only_output_frontier()
+          with TemporaryDirectory() as td:
+              c.test_fake_hex_and_nonexistent_paths_cannot_self_certify(Path(td))
+          with TemporaryDirectory() as td:
+              c.test_complete_content_bound_set_compiles_exact_digest_but_no_terminal_credit(Path(td))
+          with TemporaryDirectory() as td:
+              c.test_receipt_byte_drift_fails_closed(Path(td))
+          with TemporaryDirectory() as td:
+              c.test_receipt_binding_disagreement_fails_closed(Path(td))
+          with TemporaryDirectory() as td:
+              c.test_path_escape_fails_closed(Path(td))
+          with TemporaryDirectory() as td:
+              c.test_unknown_region_binding_fails_closed(Path(td))
+
+          with TemporaryDirectory() as td:
+              g.test_sound_predicates_plus_unsat_complement_close_abc_not_terminal(Path(td))
+          with TemporaryDirectory() as td:
+              g.test_inline_self_certified_complement_receipt_is_rejected(Path(td))
+          with TemporaryDirectory() as td:
+              g.test_stale_predicate_set_digest_blocks_cover(Path(td))
+          with TemporaryDirectory() as td:
+              g.test_soundness_receipt_byte_drift_blocks_cover(Path(td))
+          with TemporaryDirectory() as td:
+              g.test_complement_receipt_byte_drift_blocks_cover(Path(td))
+          with TemporaryDirectory() as td:
+              g.test_scope_mismatch_blocks_cover(Path(td))
+          with TemporaryDirectory() as td:
+              g.test_duplicate_predicate_id_fails_closed(Path(td))
+          print("EXACT_DB_CONTENT_BINDING_TESTS_PASS")
+          PY
