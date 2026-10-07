@@ -98,6 +98,61 @@ def inspect(capability_id: str) -> dict[str, Any]:
     }
 
 
+def prepare(
+    capability_id: str,
+    *,
+    inputs: Mapping[str, Any],
+    instance_id: str | None = None,
+    requires: list[str] | None = None,
+    provides: list[str] | None = None,
+    result_fields: list[str] | None = None,
+) -> dict[str, Any]:
+    if not isinstance(inputs, Mapping):
+        raise BoundExecutionError("INPUTS_NOT_OBJECT")
+    inspected = inspect(capability_id)
+    cid = inspected["capability_id"]
+    entry = inspected["entry"]
+    template = entry["action_template"]
+    try:
+        rendered = astra_runtime._render_bound_template(template, dict(inputs))
+    except Exception as exc:
+        raise BoundExecutionError(
+            "BOUND_TEMPLATE_RENDER_FAILED:" + type(exc).__name__ + ":" + str(exc)
+        ) from exc
+    if not isinstance(rendered, Mapping) or rendered.get("type") != "invoke_capability":
+        raise BoundExecutionError("RENDERED_BOUND_ACTION_INVALID")
+    args = rendered.get("args")
+    if not isinstance(args, Mapping) or args.get("capability_id") != cid:
+        raise BoundExecutionError("RENDERED_BOUND_ACTION_CAPABILITY_ID_MISMATCH")
+
+    iid = str(instance_id or cid).strip()
+    if not iid:
+        raise BoundExecutionError("INSTANCE_ID_INVALID")
+    req = list(entry.get("requires") or []) if requires is None else list(requires)
+    prov = list(entry.get("provides") or []) if provides is None else list(provides)
+    fields = list(entry.get("result_fields") or []) if result_fields is None else list(result_fields)
+    if not prov:
+        raise BoundExecutionError("INSTANCE_PROVIDES_EMPTY")
+    return {
+        "schema": SCHEMA,
+        "status": "PREPARED__PROMOTED_BOUND_CAPABILITY",
+        "capability_id": cid,
+        "instance_id": iid,
+        "requires": req,
+        "provides": prov,
+        "result_fields": fields,
+        "inputs": deepcopy(dict(inputs)),
+        "inputs_sha256": _sha(inputs),
+        "registry_file_sha256": inspected["registry_file_sha256"],
+        "registry_entry_sha256": inspected["registry_entry_sha256"],
+        "rendered_action": deepcopy(dict(rendered)),
+        "rendered_action_sha256": _sha(rendered),
+        "incremental_spend_usd": 0,
+        "execution_authority": False,
+        "terminal_authority": False,
+    }
+
+
 def execute(
     capability_id: str,
     *,
@@ -105,39 +160,51 @@ def execute(
     instance_id: str | None = None,
     requires: list[str] | None = None,
     provides: list[str] | None = None,
+    result_fields: list[str] | None = None,
+    expected_registry_file_sha256: str | None = None,
+    expected_registry_entry_sha256: str | None = None,
+    expected_rendered_action_sha256: str | None = None,
 ) -> dict[str, Any]:
     try:
-        if not isinstance(inputs, Mapping):
-            raise BoundExecutionError("INPUTS_NOT_OBJECT")
-        inspected = inspect(capability_id)
-        cid = inspected["capability_id"]
+        prepared = prepare(
+            capability_id,
+            inputs=inputs,
+            instance_id=instance_id,
+            requires=requires,
+            provides=provides,
+            result_fields=result_fields,
+        )
+        cid = prepared["capability_id"]
+        inspected = inspect(cid)
         entry = inspected["entry"]
-        template = entry["action_template"]
-        try:
-            rendered = astra_runtime._render_bound_template(template, dict(inputs))
-        except Exception as exc:
-            raise BoundExecutionError(
-                "BOUND_TEMPLATE_RENDER_FAILED:" + type(exc).__name__ + ":" + str(exc)
-            ) from exc
-        if not isinstance(rendered, Mapping) or rendered.get("type") != "invoke_capability":
-            raise BoundExecutionError("RENDERED_BOUND_ACTION_INVALID")
-        args = rendered.get("args")
-        if not isinstance(args, Mapping) or args.get("capability_id") != cid:
-            raise BoundExecutionError("RENDERED_BOUND_ACTION_CAPABILITY_ID_MISMATCH")
+        rendered = prepared["rendered_action"]
+        args = rendered["args"]
+
+        if (
+            expected_registry_file_sha256 is not None
+            and prepared["registry_file_sha256"] != expected_registry_file_sha256
+        ):
+            raise BoundExecutionError("REGISTRY_FILE_CHANGED_AFTER_PREPARATION")
+        if (
+            expected_registry_entry_sha256 is not None
+            and prepared["registry_entry_sha256"] != expected_registry_entry_sha256
+        ):
+            raise BoundExecutionError("REGISTRY_ENTRY_CHANGED_AFTER_PREPARATION")
+        if (
+            expected_rendered_action_sha256 is not None
+            and prepared["rendered_action_sha256"] != expected_rendered_action_sha256
+        ):
+            raise BoundExecutionError("RENDERED_ACTION_CHANGED_AFTER_PREPARATION")
 
         result = astra_runtime._invoke_bound_capability(dict(args))
         if not isinstance(result, Mapping):
             raise BoundExecutionError("BOUND_CAPABILITY_RESULT_INVALID")
         astra_runtime._verify_action_expectation(rendered, result)
 
-        iid = str(instance_id or cid).strip()
-        if not iid:
-            raise BoundExecutionError("INSTANCE_ID_INVALID")
-        req = list(entry.get("requires") or []) if requires is None else list(requires)
-        prov = list(entry.get("provides") or []) if provides is None else list(provides)
-        if not prov:
-            raise BoundExecutionError("INSTANCE_PROVIDES_EMPTY")
-        result_fields = list(entry.get("result_fields") or [])
+        iid = prepared["instance_id"]
+        req = list(prepared["requires"])
+        prov = list(prepared["provides"])
+        declared_result_fields = list(prepared["result_fields"])
 
         problem = {
             "initial_facts": list(req),
@@ -148,7 +215,7 @@ def execute(
                 "provides": list(prov),
                 "cost": float(entry.get("cost", 1)),
                 "action": deepcopy(dict(rendered)),
-                "result_fields": result_fields,
+                "result_fields": declared_result_fields,
             }],
             "finish_summary": "verified promoted bound capability execution",
         }
@@ -184,11 +251,11 @@ def execute(
             "instance_id": iid,
             "requires": list(req),
             "provides": list(prov),
-            "result_fields": result_fields,
-            "inputs_sha256": _sha(inputs),
-            "registry_file_sha256": inspected["registry_file_sha256"],
-            "registry_entry_sha256": inspected["registry_entry_sha256"],
-            "rendered_action_sha256": _sha(rendered),
+            "result_fields": declared_result_fields,
+            "inputs_sha256": prepared["inputs_sha256"],
+            "registry_file_sha256": prepared["registry_file_sha256"],
+            "registry_entry_sha256": prepared["registry_entry_sha256"],
+            "rendered_action_sha256": prepared["rendered_action_sha256"],
             "rendered_action": deepcopy(dict(rendered)),
             "result_sha256": _sha(result),
             "result": deepcopy(dict(result)),
