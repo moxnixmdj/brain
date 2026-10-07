@@ -1,33 +1,33 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V7",
+  "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V8",
   "status": "CURRENT_MAIN_TERMINAL_NOT_REAL",
-  "checked_by": "CHATGPT_DIRECT_LOAD_BEARING_TRUTH_RECONCILIATION__IF_LITERAL_PASS_NORMALIZED",
+  "checked_by": "CHATGPT_DIRECT_POST_AGENCY_LOAD_BEARING_TRUTH_RECONCILIATION",
   "source_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-  "source_authority_blob_sha": "29e4374c080b79671676dd60db879996d674617b",
-  "source_authority_commit_sha": "72d9e06412a82cb6ad26c2c0f39a1b0deb374996",
-  "phase": "FROZEN_PROTOCOL_CLOSURE",
+  "source_authority_blob_sha": "6ed4dabb7ee736e19f87d5a3e54ba7ec17d89810",
+  "source_authority_commit_sha": "427d5fd655b3d2530ac0cdfbdd4704addc25b9c3",
+  "phase": "FROZEN_PROTOCOL_CLOSURE_WITH_COEQUAL_UNIVERSAL_COVER_ROUTE",
   "live_research_root_count": 1,
-  "live_research_root": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
+  "live_research_root": "PROVE_NOT_X_OR_CLOSE_THE_14_INDEPENDENT_ACCEPTANCE_EVIDENCE_OBLIGATIONS",
   "terminal_semantics": "FROZEN_19_FAMILY_ACCEPTANCE_AND_OWNERSHIP_FINALITY",
   "optional_stronger_route": "PROVE_NOT_X_OVER_SOUND_OBSERVABLE_TRACE_ESCAPE_MODEL",
   "progress": {
     "frozen_family_count": 19,
-    "strict_acceptance_pass_family_count": 6,
-    "verified_owned_equal_or_better_family_count": 6,
-    "acceptance_open_family_count": 13,
+    "strict_acceptance_pass_family_count": 7,
+    "verified_owned_equal_or_better_family_count": 7,
+    "acceptance_open_family_count": 12,
     "frozen_atomic_predicate_count": 38,
-    "frozen_atomic_predicates_proved": 16,
-    "frozen_atomic_predicates_raw_unresolved": 22,
-    "independent_open_evidence_obligations": 18,
-    "nonindependent_raw_unresolved_scheduler_labels": 4,
+    "frozen_atomic_predicates_proved": 18,
+    "frozen_atomic_predicates_raw_unresolved": 20,
+    "independent_open_evidence_obligations": 14,
+    "nonindependent_raw_unresolved_scheduler_labels": 6,
     "primary_acceptance_proof_engine_count": 3,
     "new_target_reality_units_consumed": 0,
     "incremental_spend_usd": 0,
-    "fully_terminally_closed_family_count": 6
+    "fully_terminally_closed_family_count": 7
   },
   "remaining_terminal_conditions": [
-    "CLOSE_THE_18_INDEPENDENT_OPEN_ACCEPTANCE_EVIDENCE_OBLIGATIONS_OR_SOUNDLY_DISCHARGE_THEM_BY_STRONGER_SCOPE_COMPLETE_PROOFS",
-    "PROMOTE_EXACT_BRAIN_OWNED_ROUTES_FOR_ACCEPTED_BUT_NOT_YET_OWNED_FAMILIES",
+    "CLOSE_THE_14_INDEPENDENT_OPEN_ACCEPTANCE_EVIDENCE_OBLIGATIONS_OR_SOUNDLY_DISCHARGE_THEM_BY_STRONGER_SCOPE_COMPLETE_PROOFS",
+    "PROMOTE_EXACT_BRAIN_OWNED_ROUTES_FOR_ANY_NEWLY_ACCEPTED_BUT_NOT_YET_OWNED_FAMILIES",
     "REQUIRE_ALL_FROZEN_FAMILY_ACCEPTANCE_AND_OWNERSHIP_FINALITY_PREDICATES_PASS",
     "FREEZE_FINAL_PROOF_BUNDLE",
     "RUN_TERMINAL_CLOSURE_REDUCER_AND_REQUIRE_ACHIEVED_TRUE"
@@ -47,8 +47,11 @@
     "universal_trace_unsat_is_not_mandatory": true,
     "composition_terminal_success_is_derived_not_primary": true,
     "duplicate_aa_briefcase_measurement_is_one_fact": true,
+    "dense_nonchart_is_shared_aa_quality_dependency": true,
     "no_work_counts_unless_it_closes_an_independent_open_obligation_or_soundly_discharges_one_or_more_by_stronger_scope_complete_proof": true
   },
   "source_manifest_path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-  "source_manifest_blob_sha": "94123f54f122d146b5ceba734ae40e9b30506a11"
+  "source_manifest_blob_sha": "b2aae1b51c445ae466e04737e06806801cdc711e",
+  "source_proof_shape_quotient_path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
+  "source_proof_shape_quotient_blob_sha": "b3b185030a1bb32ebb3c1556617f26eebdc98f6e"
 }
