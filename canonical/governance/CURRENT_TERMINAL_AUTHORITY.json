@@ -650,7 +650,8 @@
       "note": "ACTIVE__OLD_NOT_X_ONLY_PRIMARY_MOVE_SET_REVOKED__SCHEDULE_DIRECT_FROZEN_ATOM_CLOSURE_OR_STRONGER_MULTI_ATOM_DISCHARGE__ZERO_CREDIT"
     },
     "frozen_19_acceptance_proof_shape_quotient": {
-      "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json"
+      "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
+      "git_blob_sha": "6f062b5b94e0ec94b23b9e74ba132aaa6d38c654"
     }
   },
   "live_truth": {
@@ -973,7 +974,7 @@
     "if_zero_critical_authority_violations_proved": true,
     "scheduler_aligned_to_frozen_19_family_root": true,
     "primary_scheduler_targets_open_frozen_atoms": true,
-    "open_atomic_acceptance_predicates": 24,
+    "open_atomic_acceptance_predicates": 22,
     "primary_acceptance_proof_engine_count": 3,
     "primary_acceptance_proof_engines": [
       "E1_PUBLIC_FIXED_BAR_AGGREGATE",
@@ -982,7 +983,9 @@
     ],
     "open_atoms_are_independent_primary_research_jobs": false,
     "aa_briefcase_shared_measurement_fact_count": 1,
-    "composition_component_scope_dependency_is_independent_reality_job": false
+    "composition_component_scope_dependency_is_independent_reality_job": false,
+    "instruction_scope_E2_package_active": false,
+    "instruction_scope_E2_package_closed": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
