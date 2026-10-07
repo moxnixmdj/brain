@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V3_SPRITE_VERIFICATION_20261007_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BYTE_AND_SEMANTIC_REPLAY_PASS__FIVE_NEGATIVE_CANARIES_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V3.json",
+    "git_blob_sha": "a1db7d6a2553a0660b1dbcbbb9b920bbf7453f03"
+  },
+  "authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V14.json",
+    "git_blob_sha": "d9bd211b2557ac45331f6fe0c4347392f4cd7a95"
+  },
+  "db_saturation": {
+    "path": "canonical/governance/V14_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V2.json",
+    "git_blob_sha": "0618f2b4ee0638f8ea8adf93a3c0cfbaa6761cc7"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/v14_scheduler_pointer_v3",
+    "verifier": "verify.py",
+    "result": "PASS"
+  },
+  "verified": {
+    "exact_blob_match": true,
+    "semantic_check_pass": true,
+    "top_level_predicates": 2,
+    "cached_D_B_regions": 9,
+    "active_program_count": 4,
+    "target_scope_closed": true,
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false
+  },
+  "negative_canaries": {
+    "db_count_mutation_rejected": true,
+    "terminal_true_mutation_rejected": true,
+    "obsolete_program_injection_rejected": true,
+    "obsolete_queue_revival_rejected": true,
+    "scope_reopen_mutation_rejected": true
+  },
+  "consequence": [
+    "V3_POINTER_IS_INDEPENDENTLY_REPLAYED_AGAINST_EXACT_V14_AND_NINE_REGION_DB_BYTES",
+    "OBSOLETE_29_32_TRUTH_AND_19_FAMILY_QUEUES_ARE_REJECTED_AS_TOP_LEVEL_SCHEDULER_PROGRAMS",
+    "NO_TERMINAL_OR_ACCEPTANCE_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED",
+    "NO_CLAIM_GLOBAL_D_FINALITY_IS_CLOSED",
+    "NO_CLAIM_NINE_REGIONS_EXHAUST_D_B",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
