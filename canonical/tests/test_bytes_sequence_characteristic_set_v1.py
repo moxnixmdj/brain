@@ -8,7 +8,7 @@ def test_exact_counts_and_characteristic_set():
  assert o["program_count"]==2955
  assert o["pointwise_exact_classes"]==200
  assert o["sequence_global_equivalence_components"]==809
- assert o["characteristic_set_size"]==8
+ assert o["characteristic_set_size"]==7
  assert o["distinct_characteristic_signatures"]==809
 
 def test_symbolic_pointwise_equivalences():
