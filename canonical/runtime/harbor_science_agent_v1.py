@@ -38,6 +38,35 @@ _EXPLICIT_SUBMISSION_PATH_RE = re.compile(
     r"(?<![A-Za-z0-9_./-])((?:/app/)?submission/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)"
 )
 
+_TRIVIAL_VERIFY_RE = re.compile(
+    r"^\\s*(?:(?:echo|printf)\\b.*|true|:)\\s*$",
+    re.IGNORECASE | re.DOTALL,
+)
+_MATERIAL_VERIFY_TOKENS = (
+    "test ", "[ ", "[[ ", "python", "pytest", "grep ", "jq ", "cmp ",
+    "diff ", "sha256sum", "stat ", "find ", "cat ",
+)
+_FATAL_OUTPUT_MARKERS = (
+    "warning: here-document",
+    "no such file or directory",
+    "traceback (most recent call last)",
+    "syntaxerror",
+    "command not found",
+)
+
+def _verify_command_is_material(command: str) -> bool:
+    raw = str(command or "").strip()
+    if not raw or _TRIVIAL_VERIFY_RE.fullmatch(raw):
+        return False
+    lower = raw.lower()
+    return any(token in lower for token in _MATERIAL_VERIFY_TOKENS)
+
+def _output_has_fatal_marker(observed: dict[str, Any]) -> bool:
+    combined = (
+        str(observed.get("stdout") or "") + "\\n" + str(observed.get("stderr") or "")
+    ).lower()
+    return any(marker in combined for marker in _FATAL_OUTPUT_MARKERS)
+
 def _brain_mandated_deliverables(goal: str) -> dict[str, str]:
     paths: list[str] = []
     for match in _EXPLICIT_SUBMISSION_PATH_RE.finditer(str(goal or "")):
@@ -271,16 +300,27 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         }
         verify_observed = None
         verified = False
+        verification_block_reason = None
         verified_covers: list[str] = []
         deliverable_checks: list[dict[str, Any]] = []
-        if action_receipt.returncode == 0:
+        if action_receipt.returncode != 0:
+            verification_block_reason = "ACTION_NONZERO"
+        elif _output_has_fatal_marker(action_observed):
+            verification_block_reason = "ACTION_OUTPUT_ANOMALY"
+        elif not _verify_command_is_material(chosen["verify_command"]):
+            verification_block_reason = "TRIVIAL_OR_NONOBSERVING_VERIFY_COMMAND"
+        else:
             verify_receipt = await transport.exec(chosen["verify_command"], timeout_sec=180)
             verify_observed = {
                 "returncode": verify_receipt.returncode,
                 "stdout": verify_receipt.stdout[-MAX_OUTPUT_CHARS:],
                 "stderr": verify_receipt.stderr[-MAX_OUTPUT_CHARS:],
             }
-            if verify_receipt.returncode == 0:
+            if verify_receipt.returncode != 0:
+                verification_block_reason = "VERIFY_NONZERO"
+            elif _output_has_fatal_marker(verify_observed):
+                verification_block_reason = "VERIFY_OUTPUT_ANOMALY"
+            else:
                 for requirement_id in chosen["covers"]:
                     path = brain_deliverables.get(requirement_id)
                     if path is None:
@@ -292,6 +332,8 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                         verified_covers.append(requirement_id)
                 resolved.update(verified_covers)
                 verified = len(verified_covers) == len(chosen["covers"])
+                if not verified:
+                    verification_block_reason = "BRAIN_MANDATED_DELIVERABLE_CHECK_FAILED"
         record = {
             "cycle": cycle,
             "kind": "BRAIN_SELECTED_RESEARCH_ACTION",
@@ -303,6 +345,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "verified_covers": verified_covers,
             "brain_deliverable_checks": deliverable_checks,
             "coverage_promoted": verified,
+            "verification_block_reason": verification_block_reason,
         }
         trace.append(record)
         observations.append(record)
