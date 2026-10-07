@@ -1,0 +1,25 @@
+{
+  "schema": "GDPVAL_PUBLIC_26_POSITIVE_COMPLEMENT_REPLAY_V1",
+  "date": "2026-10-07",
+  "status": "PASS__26_OF_26__ZERO_WHOLE_TASK_CREDIT",
+  "prior_localization_blob": "7a2d726adb155bee0f1e6f4af71ee90cc547bbbc",
+  "runtime_blob": "cc9c63aa5aec45750be84a7e2e6857e9a1a52a9e",
+  "tests_blob": "7b05dd6e37ed74be5e4b9072ce87c3db14aac308",
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "runtime_canaries_pass": true
+  },
+  "replay": {
+    "rows": 26,
+    "task_id_matches": 26,
+    "prompt_sha256_matches": 26,
+    "rows_with_positive_unit": 26,
+    "zero_positive_rows_after": 0,
+    "whole_task_semantics_proved": 0,
+    "policy_adequacy_proved": 0
+  },
+  "effect": "DELETE_ONLY_THE_GDPVAL_26_ZERO_EXPLICIT_POSITIVE_UNIT_SCHEDULER_BUCKET",
+  "terminal": false,
+  "terminal_credit_delta": 0
+}
