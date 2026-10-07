@@ -1,5 +1,5 @@
 from __future__ import annotations
-import json, subprocess
+import json, hashlib
 from pathlib import Path
 from canonical.runtime.terminal_frontier_factorizer_v2 import ATOMIC, META
 
@@ -15,8 +15,10 @@ EXPECTED={
 }
 
 def blob(rel):
-    cp=subprocess.run(["git","-C",str(ROOT),"rev-parse",f"HEAD:{rel}"],text=True,capture_output=True,check=False)
-    return cp.stdout.strip() if cp.returncode==0 else ""
+    p=ROOT/rel
+    if not p.exists(): return ""
+    b=p.read_bytes()
+    return hashlib.sha1(b"blob "+str(len(b)).encode()+b"\0"+b).hexdigest()
 
 def verify():
     errors=[]
