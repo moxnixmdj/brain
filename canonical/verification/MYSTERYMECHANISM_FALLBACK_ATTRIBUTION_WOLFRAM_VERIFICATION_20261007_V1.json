@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_FALLBACK_ATTRIBUTION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_FINITE_ARITHMETIC_AND_CAUSAL_CLASSIFICATION_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/MYSTERYMECHANISM_FALLBACK_ATTRIBUTION_TRUTH_REPAIR_20261007_V1.json",
+    "branch": "truth-repair/mysterymechanism-fallback-attribution-20261007-v1",
+    "current_candidate_commit": "306a2cf1f8603a1952f0a7944a387899e31cdb3e"
+  },
+  "public_source_observation": {
+    "task_count": 222,
+    "deployed_score_percent": 49.55,
+    "fallback_excluded_score_percent": 49.1,
+    "source": "Vals AI model page for Claude Opus 5.5"
+  },
+  "wolfram": {
+    "100_times_110_over_222": 49.54954954954955,
+    "100_times_109_over_222": 49.0990990990991,
+    "rounded_2dp_110_over_222": 49.55,
+    "rounded_2dp_109_over_222": 49.1,
+    "successful_task_count_delta": 1
+  },
+  "verified": [
+    "THE_REPORTED 49.55 AND 49.10 VALUES ARE CONSISTENT WITH A ONE_SUCCESS DIFFERENCE ON A 222_TASK BINARY ACCURACY BENCHMARK.",
+    "IF THE REMOVED SUCCESS WAS PRODUCED BY A FALLBACK MODEL, THAT SUCCESS CANNOT BE USED AS DIRECT EVIDENCE OF INTRINSIC OPUS55 CAPABILITY UNDER THE CANONICAL CAUSAL_ATTRIBUTION RULE.",
+    "THE 49.10 VALUE IS NOT BY ITSELF A GLOBAL UPPER BOUND ON INTRINSIC OPUS55 PERFORMANCE."
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM WHICH SPECIFIC TASK WAS FALLBACK_ASSISTED.",
+    "NO CLAIM ALL FALLBACK_ASSISTED TASKS WERE SUCCESSES.",
+    "NO CLAIM 49.10 IS THE TRUE RAW OPUS55 SCORE UNDER A DIFFERENT PROFILE.",
+    "NO TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
