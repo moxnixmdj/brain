@@ -14,7 +14,7 @@
     },
     "threshold_dag": {
       "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V1.json",
-      "git_blob_sha": "f9d5b77c292568388127ed64b7c24c1a4f853b6c"
+      "git_blob_sha": "1fba51d15bcfdf6accd90948155517f7c9b98bbb"
     }
   },
   "rules": {
