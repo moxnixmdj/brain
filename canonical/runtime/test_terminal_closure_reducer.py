@@ -5,7 +5,14 @@ from canonical.runtime.terminal_closure_reducer import evaluate_manifest
 
 def passing_manifest():
     families = [
-        {"id": f"FAMILY_{i:02d}", "closure_state": "PASS"}
+        {
+            "id": f"FAMILY_{i:02d}",
+            "closure_state": "PASS",
+            "opus55_acceptance_state": "PASS",
+            "opus55_acceptance_calibrated": True,
+            "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+            "unresolved": [],
+        }
         for i in range(19)
     ]
     counters = {
@@ -98,3 +105,11 @@ def test_duplicate_family_id_fails():
     out = evaluate_manifest(m)
     assert out["achieved"] is False
     assert "DUPLICATE_FAMILY_ID" in out["failed_predicates"]
+
+
+def test_bare_pass_label_cannot_self_certify_family():
+    m = passing_manifest()
+    m["families"][0] = {"id": "FAMILY_00", "closure_state": "PASS"}
+    out = evaluate_manifest(m)
+    assert out["achieved"] is False
+    assert "FAMILY_OPEN:FAMILY_00" in out["failed_predicates"]
