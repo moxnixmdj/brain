@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_CHARTQA_BIN_PACKER_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_FINE_TUNED_DONOR_LINEAGE__RESTRICTED_UNPICKLER__ZERO_CREDIT",
+  "objective": "Pack the exact frozen UniChart ChartQA fine-tuned donor rather than the base model, preserving tied storage aliases and refusing arbitrary pickle execution.",
+  "donor": {
+    "model": "ahmed-masry/unichart-chartqa-960",
+    "revision": "e5eb1e52c1d775e0f3febaddc7fc3559e80cb989",
+    "checkpoint_file": "pytorch_model.bin",
+    "checkpoint_bytes": 809199995,
+    "checkpoint_sha256": "4407db60801a20bcf254946acfee6727491ef1739ad7b4d3abbf87b7c75e7229"
+  },
+  "independently_observed_serialization": {
+    "tensor_names": 484,
+    "unique_storages": 483,
+    "alias_storage_count": 1,
+    "tied_aliases": [
+      "decoder.model.decoder.embed_tokens.weight",
+      "decoder.lm_head.weight"
+    ],
+    "unique_storage_bytes": 809032672,
+    "exact_pickle_globals": [
+      "torch._utils._rebuild_tensor_v2",
+      "torch.FloatStorage",
+      "torch.LongStorage",
+      "collections.OrderedDict"
+    ]
+  },
+  "transformation": {
+    "group_size": 256,
+    "encoder_f32": "W4_AFFINE",
+    "decoder_and_other_f32": "W3_AFFINE",
+    "i64": "LOSSLESS",
+    "alias_policy": "PACK_PHYSICAL_STORAGE_ONCE_AND_RECORD_ALL_FULL_CONTIGUOUS_ALIASES",
+    "pickle_policy": "RESTRICTED_UNPICKLER_ALLOWLIST_ONLY",
+    "arbitrary_pickle_execution": false,
+    "benchmark_outcomes_used": false
+  },
+  "lineage_correction": {
+    "base_model_real_pack_result": "VALID_PACKER_MECHANISM_EVIDENCE_ONLY",
+    "base_model_not_capability_donor": true,
+    "chartqa_fine_tuned_donor_required_for_preservation_gate": true
+  },
+  "runtime": "canonical/runtime/h100_unichart_chartqa_bin_packer_v1.py",
+  "tests": "canonical/tests/test_h100_unichart_chartqa_bin_packer_v1.py",
+  "hard_nonclaims": [
+    "NO_CLAIM_CAPABILITY_PRESERVATION",
+    "NO_CHARTOGRAPHY_GE_89_CLAIM",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  }
+}\n

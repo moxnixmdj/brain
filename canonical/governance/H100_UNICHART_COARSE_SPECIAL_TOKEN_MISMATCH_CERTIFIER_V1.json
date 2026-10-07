@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_COARSE_SPECIAL_TOKEN_MISMATCH_CERTIFIER_V1",
+  "date": "2026-10-05",
+  "status": "REVOKED__UNSOUND_THEOREM__DO_NOT_EXECUTE__ZERO_CREDIT",
+  "revocation_reason": "A future generated <s_answer> token changes the frozen postprocess suffix boundary, so a previously emitted non-removable special token can be discarded from the final compared answer. Therefore early presence of <summarize_chart> does not prove exact-answer mismatch before generation terminates.",
+  "falsified_claim": "FUTURE_TOKENS_CANNOT_ERASE_THE_OBSERVED_BAD_SPECIAL_TOKEN_FROM_THE_POSTPROCESSED_ANSWER",
+  "surviving_fact": "FOUR_FINAL_EXACT_ANSWER_MISMATCHES_STILL_SUFFICE_TO_MAKE_THE_FROZEN_0_85_AGREEMENT_GATE_IMPOSSIBLE",
+  "runtime_deleted": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "h100_credit_delta": 0
+  }
+}

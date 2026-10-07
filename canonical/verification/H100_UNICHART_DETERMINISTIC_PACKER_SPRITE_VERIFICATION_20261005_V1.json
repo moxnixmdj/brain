@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_DETERMINISTIC_PACKER_SPRITE_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__INDEPENDENT_SPRITE_SYNTHETIC_REPLAY__REAL_CHECKPOINT_PACK_RECEIPT_OBSERVED__ZERO_CREDIT",
+  "subject": {
+    "branch": "research/h100-unichart-deterministic-packer-v1",
+    "runtime_path": "canonical/runtime/h100_unichart_lowbit_packer_v1.py",
+    "runtime_git_blob_sha": "05bc12235d2082ae0cb554e79a46d77116ea3c22",
+    "tests_path": "canonical/tests/test_h100_unichart_lowbit_packer_v1.py",
+    "tests_git_blob_sha": "3851ca2b62f998c47ad4f25f6b4efd70938dafd4",
+    "governance_path": "canonical/governance/H100_UNICHART_DETERMINISTIC_PACKER_CANDIDATE_V1.json",
+    "governance_git_blob_sha": "c09db4e6977ff2c2c7efa5c6d3744db2974a978a"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-heldout003-one-shot",
+    "sprite_id": "sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589",
+    "incremental_spend_usd": 0
+  },
+  "falsification_history": [
+    {
+      "stage": "INITIAL_SYNTHETIC_REPLAY",
+      "result": "FAIL",
+      "defect": "quantize_group checked finiteness only after min/max; NaN could evade the check depending on ordering",
+      "repair": "reject every nonfinite source value before extrema calculation"
+    },
+    {
+      "stage": "REPAIRED_SYNTHETIC_REPLAY",
+      "result": "PASS",
+      "tests_run": 10,
+      "tests_passed": 10,
+      "tests_failed": 0
+    }
+  ],
+  "real_checkpoint_observation": {
+    "source_sha256": "2faf9ef1ac62a290ea58c80e9e2454db4e3613579e7cb6167cb934a03c09664e",
+    "source_bytes": 809095376,
+    "source_checkpoint": "ahmed-masry/unichart-base-960@baa206a05372f8c49778313abb7091e1d0c8e474/model.safetensors",
+    "completed_pack_receipt": {
+      "output_bytes": 89809040,
+      "output_sha256": "1049220cc0eef2a572f75015b0fdb5609a5dcbe3fb6dd95081b0a462c8e3dc03",
+      "margin_bytes": 10190960,
+      "tensor_count": 483,
+      "manifest_bytes": 85504
+    },
+    "boundary": "REAL_CHECKPOINT_PACK_PROVES_TRANSFORMATION_AND_STORAGE_EXECUTABILITY_ONLY__CAPABILITY_PRESERVATION_REMAINS_OPEN"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_REAL_BASE_UNICHART_PACKED_ARTIFACT_IS_THE_FINE_TUNED_CHARTQA_DONOR",
+    "NO_CLAIM_LOW_BIT_CAPABILITY_PRESERVATION",
+    "NO_CHARTOGRAPHY_GE_89_CLAIM",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_CHARTQA_RUNTIME_ASSETS_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_BEFORE_PACKED_MODEL_OUTPUTS__OVERINCLUSIVE_ALL_NON_CHECKPOINT_DONOR_FILES__ZERO_CREDIT",
+  "donor": {
+    "model": "ahmed-masry/unichart-chartqa-960",
+    "revision": "e5eb1e52c1d775e0f3febaddc7fc3559e80cb989",
+    "checkpoint_sha256": "4407db60801a20bcf254946acfee6727491ef1739ad7b4d3abbf87b7c75e7229"
+  },
+  "files": [
+    {
+      "name": ".gitattributes",
+      "git_blob_sha": "c7d9f3332a950355d5a77d85000f05e6f45435ea",
+      "bytes": 1477
+    },
+    {
+      "name": "README.md",
+      "git_blob_sha": "f7801179f8736203a3305278da782f4550531f44",
+      "bytes": 25
+    },
+    {
+      "name": "added_tokens.json",
+      "git_blob_sha": "8ee2e9cde71694a24f920aca4b05d4ec4aac807e",
+      "bytes": 235
+    },
+    {
+      "name": "config.json",
+      "git_blob_sha": "cb4e9eac594e89130e4e5a61946080e2ccbd1b70",
+      "bytes": 5017
+    },
+    {
+      "name": "generation_config.json",
+      "git_blob_sha": "38ba5208549a4b200e081a9bca7ae2b61227e83e",
+      "bytes": 181
+    },
+    {
+      "name": "preprocessor_config.json",
+      "git_blob_sha": "42edb7a16684ca461e0c3bcb371ebc87c8ba93c9",
+      "bytes": 439
+    },
+    {
+      "name": "sentencepiece.bpe.model",
+      "git_blob_sha": "95de5ce10bc8d04fe34a4b16525d76a9c3087c8d",
+      "bytes": 1296245,
+      "sha256": "cb9e3dce4c326195d08fc3dd0f7e2eee1da8595c847bf4c1a9c78b7a82d47e2d"
+    },
+    {
+      "name": "special_tokens_map.json",
+      "git_blob_sha": "62d07d7325c9a9b5eca71dd7feff75996a7822cc",
+      "bytes": 355
+    },
+    {
+      "name": "tokenizer.json",
+      "git_blob_sha": "9bfcca8df40c4f109b54e2f6e0f5ee198c0ca5f2",
+      "bytes": 4008718
+    },
+    {
+      "name": "tokenizer_config.json",
+      "git_blob_sha": "6594eb174a6d842111d8fe143147759efdc6dcb8",
+      "bytes": 510
+    }
+  ],
+  "ancillary_total_bytes": 5313202,
+  "accounting_rule": "COUNT_ALL_NON_CHECKPOINT_DONOR_REPO_FILES_EVEN_IF_SOME_ARE_NOT_REQUIRED_AT_RUNTIME",
+  "packed_subject_bytes": 89874047,
+  "complete_overinclusive_bundle_bytes": 95187249,
+  "h100_budget_bytes": 100000000,
+  "margin_bytes": 4812751,
+  "hard_nonclaims": [
+    "BYTE_PASS_DOES_NOT_IMPLY_CAPABILITY_PRESERVATION",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "h100_credit_delta": 0
+}
