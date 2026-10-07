@@ -55,6 +55,9 @@ from canonical.runtime.bound_goal_plan_adapter_v1 import compile_bound_goal
 from canonical.runtime.bound_capability_execution_verifier_v1 import (
     verify as verify_bound_capability_execution,
 )
+from canonical.runtime.authenticated_complete_pareto_comparator_v1 import (
+    verify as verify_authenticated_complete_pareto,
+)
 from canonical.runtime.lossless_raw_task_acceptance_gate_v1 import (
     verify as verify_lossless_raw_task_acceptance,
 )
@@ -385,12 +388,14 @@ BUILTIN_VERIFIERS: dict[str, Verifier] = {
     "BOUND_GOAL_PLAN_V1": _verify_bound_goal_plan,
     "BOUND_CAPABILITY_EXECUTION_V1": verify_bound_capability_execution,
     "RAW_TASK_ACCEPTANCE_V1": verify_lossless_raw_task_acceptance,
+    "AUTHENTICATED_COMPLETE_PARETO_V1": verify_authenticated_complete_pareto,
 }
 
 PROPOSAL_FREE_VERIFIERS = {
     "P2_AUTHENTICATED_TOP_LAW_V1",
     "STRUCTURED_METHOD_EXPRESSION_AST_V2",
     "BOUND_GOAL_PLAN_V1",
+    "AUTHENTICATED_COMPLETE_PARETO_V1",
 }
 
 
