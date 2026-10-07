@@ -215,7 +215,9 @@ def _synthesis_case(seed: int, difficulty: int) -> dict[str, Any]:
     if not required:
         evidence[0]["role"]="required"; required.append("C0")
         if "C0" in optional: optional.remove("C0")
-        if "C0" in forbidden: forbidden.remove("C0")
+        if "C0" in forbidden:
+            forbidden.remove("C0")
+            evidence[0]["support"]="supported"
     return {
         "schema":SCHEMA,
         "contract":"EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
