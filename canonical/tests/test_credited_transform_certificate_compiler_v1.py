@@ -9,8 +9,6 @@ CREDITED = {
     "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
 }
 
-CERTIFIED = CREDITED - {"LONG_HORIZON_MEMORY_AND_CONTINUITY"}
-
 
 def test_registry_binds_exact_five_credited_families():
     out = compile_current()
@@ -19,17 +17,17 @@ def test_registry_binds_exact_five_credited_families():
     assert set(out["credited_families"]) == CREDITED
 
 
-def test_four_current_routes_have_complete_transform_certificates():
+def test_all_current_credited_routes_have_complete_transform_certificates():
     out = compile_current()
-    assert out["complete_transform_certificate_count"] == 4
-    assert out["open_transform_certificate_count"] == 1
-    for family in CERTIFIED:
+    assert out["complete_transform_certificate_count"] == 5
+    assert out["open_transform_certificate_count"] == 0
+    for family in CREDITED:
         assert out["route_results"][family]["pass"] is True, (family, out)
 
 
-def test_continuity_fails_closed_until_current_child_seam_is_requalified():
+def test_current_c_route_set_closes_fail_closed():
     out = compile_current()
-    assert out["route_results"]["LONG_HORIZON_MEMORY_AND_CONTINUITY"]["pass"] is False
-    assert out["c_closed"] is False
-    assert out["b9_independent_escape_deleted"] is False
+    assert out["c_closed"] is True
+    assert out["b9_independent_escape_deleted"] is True
+    assert out["terminal"] is False
     assert out["terminal_credit_delta"] == 0
