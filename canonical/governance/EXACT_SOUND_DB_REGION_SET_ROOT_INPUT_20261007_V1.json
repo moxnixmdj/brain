@@ -1,0 +1,172 @@
+{
+  "schema": "PROJECT_BRAIN_EXACT_SOUND_DB_REGION_SET_ROOT_INPUT_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_FLATTENED_ROOT_INPUT__SEVENTEEN_SOUND_DB_REGIONS__NO_COVER_OR_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "purpose": "REMOVE_PREDECESSOR_CHAIN_BUREAUCRACY_BY_FLATTENING_THE_CURRENT_SEVENTEEN_SOUND_D_B_REGIONS_INTO_ONE_CONTENT_ADDRESSED_INPUT_FOR_EXACT_SYMBOLIC_ADMISSION_PREDICATE_COMPILATION_AND_RESIDUAL_COMPLEMENT_ANALYSIS",
+  "authority_sources": {
+    "current_terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "current_db_union": {
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V13.json",
+      "git_blob_sha": "2499d6cbcc806d4466a4788a31606174fbc54551"
+    },
+    "base_ten": {
+      "path": "canonical/governance/V14_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V3.json",
+      "git_blob_sha": "8f64a698645e9ba0fe433560cbee3f084700b6e7"
+    },
+    "post_base_four": {
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V6.json",
+      "git_blob_sha": "3b438f63dfdcd208c984251d1addd1334ca4b44e"
+    },
+    "fifteenth": {
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V8.json",
+      "git_blob_sha": "7d34b15d71a2bb59178c774a1805cd398c2daa86"
+    },
+    "sixteenth": {
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V9.json",
+      "git_blob_sha": "73fbe58346dd2ff94feccfa0cbea7d00a9dcd1d0"
+    },
+    "seventeenth_and_replacements": {
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V13.json",
+      "git_blob_sha": "2499d6cbcc806d4466a4788a31606174fbc54551"
+    }
+  },
+  "regions": [
+    {
+      "id": "ACCEPTED_LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "kind": "ACCEPTED_OWNED_SCOPE",
+      "source_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "scope": "DURABLE_CROSS_SESSION_PROJECT_STATE_AND_SAME_MISSION_CHECKPOINT_RELAUNCH_CONTINUITY"
+    },
+    {
+      "id": "ACCEPTED_SUBAGENT_DELEGATION_AND_COORDINATION",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "kind": "ACCEPTED_OWNED_SCOPE",
+      "source_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+    },
+    {
+      "id": "ACCEPTED_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "kind": "ACCEPTED_OWNED_SCOPE",
+      "source_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+    },
+    {
+      "id": "ACCEPTED_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "kind": "ACCEPTED_OWNED_SCOPE",
+      "source_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+    },
+    {
+      "id": "ACCEPTED_EXACT_SYMBOLIC_COMPUTATION",
+      "family": "EXACT_SYMBOLIC_COMPUTATION",
+      "kind": "ACCEPTED_OWNED_BOUNDED_SCOPE",
+      "source_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+    },
+    {
+      "id": "LIVEBENCH_IF_ACTIVE15_FROZEN_200",
+      "kind": "SELECTED_CONTEXT_TOP_LAW_CELL",
+      "source_path": "canonical/governance/LIVEBENCH_IF_V9_SELECTED_CONTEXT_ABC_BUNDLE_20261007_V1.json"
+    },
+    {
+      "id": "NATIVE_ARTIFACT_T1_FROZEN_8_MECHANICAL",
+      "kind": "SELECTED_CONTEXT_OBJECTIVE_CEILING_CELL",
+      "source_path": "canonical/governance/V13_NATIVE_ARTIFACT_MECHANICAL_SELECTED_CELL_20261007_V1.json"
+    },
+    {
+      "id": "UNKNOWN_DOMAIN_V7_EXACT_REACHABLE_FROZEN_PRODUCTION_DOMAIN",
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "kind": "SELECTED_CONTEXT_DIRECT_E2E_UNIVERSAL_CELL",
+      "source_path": "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_SELECTED_CONTEXT_ABC_E2E_BUNDLE_20261007_V1.json"
+    },
+    {
+      "id": "SYNTHESIS_T1_T3_FROZEN_60_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "kind": "SELECTED_PROPERTY_BOOLEAN_TOP_LAW_CELL",
+      "source_path": "canonical/governance/V14_SYNTHESIS_UNSUPPORTED_CLAIM_SELECTED_PROPERTY_CELL_20261007_V1.json"
+    },
+    {
+      "id": "P2_PROFESSIONAL_T1_FROZEN_30_HIDDEN_OPTIMUM",
+      "family": "ARTIFACT_CREATION",
+      "kind": "SELECTED_CONTEXT_OBJECTIVE_TOP_LAW_CELL",
+      "source_path": "canonical/governance/V14_P2_PROFESSIONAL_TOP_LAW_SELECTED_CELL_20261007_V1.json"
+    },
+    {
+      "id": "P2_PROFESSIONAL_EXPLICIT_SEMANTIC_CONTRACT_ALL_FINITE_TASKS_V1",
+      "family": "ARTIFACT_CREATION",
+      "kind": "PARAMETERIZED_COMMON_POLICY_TOP_LAW_CELL",
+      "source_path": "canonical/governance/P2_EXPLICIT_SEMANTIC_CONTRACT_UNIVERSAL_TOP_LAW_20261007_V1.json",
+      "replaces": "PROFESSIONAL_ARTIFACT_P2_INFO_SAFE_V2_ALL_GENERATED_CASES"
+    },
+    {
+      "id": "PROFESSIONAL_ARTIFACT_T1_FROZEN_30_ZERO_UNSUPPORTED_MATERIAL_CONTENT",
+      "family": "ARTIFACT_CREATION",
+      "kind": "SELECTED_PROPERTY_BOOLEAN_TOP_LAW_CELL",
+      "source_path": "canonical/governance/V14_PROFESSIONAL_ARTIFACT_UNSUPPORTED_CONTENT_SELECTED_PROPERTY_CELL_20261007_V1.json"
+    },
+    {
+      "id": "BROWSER_STATE_INFORMATION_SAFE_ALL_SEEDS_ALL_ORDINALS_V1",
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "kind": "SELECTED_CONTEXT_UNIVERSAL_OBJECTIVE_TOP_LAW_CELL",
+      "source_path": "canonical/governance/BROWSER_STATE_GENERATOR_UNIVERSAL_TOP_LAW_CELL_20261007_V1.json"
+    },
+    {
+      "id": "SYNTHESIS_TARGET_SCOPE_REQUIRED_CLAIM_COVERAGE_TOP_LAW",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "kind": "SELECTED_PROPERTY_OBJECTIVE_CEILING_CELL",
+      "source_path": "canonical/governance/V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_SELECTED_PROPERTY_CELL_20261007_V1.json"
+    },
+    {
+      "id": "MATCHED_AGENCY_STATEFUL_ALL_VALID_CASE_TOKENS_AND_ORDINALS_V1",
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "kind": "SELECTED_CONTEXT_UNIVERSAL_DIRECT_E2E_TOP_LAW_CELL",
+      "source_path": "canonical/governance/AGENCY_STATEFUL_GENERATOR_UNIVERSAL_TOP_LAW_CELL_20261007_V1.json",
+      "scope_boundary": "EXACT_matched_agency_stateful_case_v1_GENERATOR_DOMAIN_ONLY"
+    },
+    {
+      "id": "IF_SCOPE_BOUNDARY_FROZEN_160_FINITE_MANIFEST",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "kind": "SELECTED_CONTEXT_EXACT_FINITE_MANIFEST_TOP_LAW_CELL",
+      "source_path": "canonical/governance/IF_SCOPE_FINITE_MANIFEST_TOP_CERTIFICATE_20261007_V1.json",
+      "scope_boundary": "EXACT_DECLARED_FINITE_PROTOCOL_ACCEPTANCE_OBJECT__160_CASES__5_DIMENSIONS__CLOSED"
+    },
+    {
+      "id": "SYNTHESIS_VISIBLE_SUPPORT_EXPLICIT_SELECTION_ORDER_AND_REQUIRED_UNCERTAINTY_ALL_FINITE_TASKS_V3",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "kind": "PARAMETERIZED_COMMON_POLICY_TOP_LAW_CELL",
+      "source_path": "canonical/governance/SYNTHESIS_EXPLICIT_UNCERTAINTY_TOP_LAW_CELL_20261007_V3.json",
+      "replaces": "SYNTHESIS_TYPED_VISIBLE_SUPPORT_COMMON_POLICY_TOP_LAW_V1",
+      "intermediate_replacement": "SYNTHESIS_VISIBLE_SUPPORT_EXPLICIT_SELECTION_ORDER_ALL_FINITE_TASKS_V2"
+    }
+  ],
+  "flattening_checks": {
+    "region_count": 17,
+    "record_count_matches_current_db_union": true,
+    "revoked_p3_whole_seven_gate_cell_included": false,
+    "semantic_replacements_applied": true,
+    "regions_may_overlap": true,
+    "semantic_disjointness_claimed": false,
+    "scope_exhaustiveness_claimed": false
+  },
+  "direct_root_use": {
+    "next_object": "EXACT_SOUND_ADMISSION_PREDICATE_SET",
+    "required_for_each_region": [
+      "CONTENT_ADDRESSED_EXECUTABLE_ADMISSION_PREDICATE_OR_EXISTING_EQUIVALENT",
+      "INDEPENDENT_EXACT_BYTE_BOUND_SOUNDNESS_RECEIPT_THAT_PREDICATE_IMPLIES_ROUTE_ADEQUACY"
+    ],
+    "then": "FORM_R_EQUALS_S_TRACE_AND_NOT_OR_OF_ALL_SOUND_ADMISSION_PREDICATES__PROVE_R_UNSAT_OR_RETURN_ONE_CONSTRUCTIVE_COUNTEREXAMPLE",
+    "forbidden_shortcut": "DO_NOT_SET_SELECTED_COVER_COMPLETE_U_EMPTY_OR_TERMINAL_FROM_THIS_FLATTENING_MANIFEST"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_SEVENTEEN_REGIONS_EXHAUST_S_TRACE",
+    "NO_CLAIM_THE_SEVENTEEN_REGIONS_ARE_DISJOINT",
+    "NO_CLAIM_ALL_SEVENTEEN_ALREADY_HAVE_EXECUTABLE_SYMBOLIC_ADMISSION_PREDICATES",
+    "NO_CLAIM_RESIDUAL_COMPLEMENT_R_IS_UNSAT",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
