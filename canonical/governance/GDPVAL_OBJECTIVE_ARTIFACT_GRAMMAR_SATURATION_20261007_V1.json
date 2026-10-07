@@ -1,0 +1,159 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_OBJECTIVE_ARTIFACT_GRAMMAR_SATURATION_V1",
+  "date": "2026-10-07",
+  "status": "EXECUTED_CROSS_IMPLEMENTATION_SATURATION__CURRENT_EXACT_OBJECTIVE_ARTIFACT_GRAMMAR_TOO_NARROW_FOR_TASK_CLOSURE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "current_pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+    },
+    "objective_compiler": {
+      "path": "canonical/runtime/gdpval_objective_artifact_criteria_v1.py",
+      "git_blob_sha": "16c8df7ed49ce907d0e19bb9c24013312710cd5f"
+    },
+    "public_population_manifest": {
+      "path": "canonical/evidence/GDPVAL_PUBLIC_220_RUBRIC_ACCEPTANCE_MANIFEST_20261007_V1.json",
+      "git_blob_sha": "99d62d7302f0be4a0f50ba976634042dbddc9972"
+    },
+    "public_population_revision": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "dataset_api": "https://datasets-server.huggingface.co/rows?dataset=openai%2Fgdpval&config=default&split=train",
+    "revision_api": "https://huggingface.co/api/datasets/openai/gdpval"
+  },
+  "replay": {
+    "method": "INDEPENDENT_JAVASCRIPT_PORT_OF_THE_EXACT_WHOLE_CRITERION_REGEX_GRAMMAR__THREE_PAGE_PUBLIC_220_FETCH__NO_MODEL_INFERENCE",
+    "revision_sha_observed": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "row_count": 220,
+    "criterion_count": 10453,
+    "expected_criterion_count": 10453,
+    "rubric_score_sum": 16000,
+    "compiled_objective_criterion_count": 12,
+    "compiled_objective_fraction": 0.001148,
+    "compiled_objective_percent": 0.1148,
+    "compiled_score_sum": 24,
+    "compiled_score_fraction": 0.0015,
+    "compiled_score_percent": 0.15,
+    "tasks_with_any_compiled_criterion": 10,
+    "tasks_fully_objective_under_current_exact_grammar": 0,
+    "by_kind": {
+      "EXACT_STEM_ALLOWED_EXTENSIONS": 1,
+      "XLSX_SHEET_NAME_CASEFOLD_TRIM": 1,
+      "AT_LEAST_ONE_VALID_FILE_BY_EXTENSION": 3,
+      "EXACT_FILENAME_NATIVE_VALID": 2,
+      "EXACT_TOP_LEVEL_FILE_COUNT_BY_EXTENSION": 2,
+      "SINGLE_WAV_SAMPLE_RATE": 1,
+      "SINGLE_WAV_SAMPLE_WIDTH_BITS": 1,
+      "EXACT_TOP_LEVEL_FILE_COUNT_ALLOWED_EXTENSIONS": 1
+    },
+    "compiled_criteria": [
+      [
+        "83d10b06-26d1-4636-a32c-23f92c57f30b",
+        "1d43f1eb-4011-47ac-8ad7-a3c467639a6a",
+        "EXACT_STEM_ALLOWED_EXTENSIONS",
+        2
+      ],
+      [
+        "83d10b06-26d1-4636-a32c-23f92c57f30b",
+        "4c7e9ce6-7b42-476d-a4a0-691d0e5ba3fa",
+        "XLSX_SHEET_NAME_CASEFOLD_TRIM",
+        2
+      ],
+      [
+        "7b08cd4d-df60-41ae-9102-8aaa49306ba2",
+        "708748d9-e5bf-4933-9053-f303bb95a72f",
+        "AT_LEAST_ONE_VALID_FILE_BY_EXTENSION",
+        2
+      ],
+      [
+        "ee09d943-5a11-430a-b7a2-971b4e9b01b5",
+        "75cd20e1-e5ba-4cd7-9b52-3d1a580cf9e1",
+        "EXACT_FILENAME_NATIVE_VALID",
+        2
+      ],
+      [
+        "38889c3b-e3d4-49c8-816a-3cc8e5313aba",
+        "cd6371ef-3939-42dc-87ea-1e7491ee5daf",
+        "EXACT_TOP_LEVEL_FILE_COUNT_BY_EXTENSION",
+        2
+      ],
+      [
+        "ff85ee58-bc9f-4aa2-806d-87edeabb1b81",
+        "727d54b9-27d7-46e6-84b6-eaba7d6524e2",
+        "SINGLE_WAV_SAMPLE_RATE",
+        2
+      ],
+      [
+        "ff85ee58-bc9f-4aa2-806d-87edeabb1b81",
+        "034b6ed1-d3c8-4531-978d-124044644cdb",
+        "SINGLE_WAV_SAMPLE_WIDTH_BITS",
+        2
+      ],
+      [
+        "4b894ae3-1f23-4560-b13d-07ed1132074e",
+        "ba10bf52-e77d-494e-aba9-7473da1afb36",
+        "EXACT_FILENAME_NATIVE_VALID",
+        2
+      ],
+      [
+        "93b336f3-61f3-4287-86d2-87445e1e0f90",
+        "155fdc3c-4309-44a7-90b6-aa943212d846",
+        "AT_LEAST_ONE_VALID_FILE_BY_EXTENSION",
+        2
+      ],
+      [
+        "15ddd28d-8445-4baa-ac7f-f41372e1344e",
+        "33f97e48-c2d3-432e-a397-99fec7e0fe37",
+        "EXACT_TOP_LEVEL_FILE_COUNT_ALLOWED_EXTENSIONS",
+        2
+      ],
+      [
+        "24d1e93f-9018-45d4-b522-ad89dfd78079",
+        "13807147-c9ae-4f79-a410-a25a10c3f0a2",
+        "EXACT_TOP_LEVEL_FILE_COUNT_BY_EXTENSION",
+        2
+      ],
+      [
+        "ec2fccc9-b7f6-4c73-bf51-896fdb433cec",
+        "4c591d1e-bf13-4a3e-8d01-a4b36f8b56f1",
+        "AT_LEAST_ONE_VALID_FILE_BY_EXTENSION",
+        2
+      ]
+    ]
+  },
+  "falsification": {
+    "claim_killed": "CURRENT_EXACT_OBJECTIVE_ARTIFACT_CRITERION_GRAMMAR_CAN_MATERIALLY_SATURATE_GDPVAL_PUBLIC_220_BY_ITSELF",
+    "reason": [
+      "ONLY_12_OF_10453_CRITERIA_COMPILE",
+      "ONLY_24_OF_16000_RUBRIC_POINTS_COMPILE",
+      "ZERO_OF_220_TASKS_ARE_FULLY_OBJECTIVE_UNDER_THIS_GRAMMAR"
+    ],
+    "consequence": "DO_NOT_SPEND_MORE_TERMINAL_TIME_EXTENDING_THIS_EXACT_FILENAME_FORMAT_SHEETNAME_WAV_GRAMMAR_INCREMENTALLY_UNLESS_A_SPECIFIC_NEW_PATTERN_CLOSES_A_LOAD_BEARING_SCOPE_CLASS"
+  },
+  "next_route": {
+    "preferred": "MEASURED_TYPED_ACCEPTANCE_OVER_CONTENT_ADDRESSED_ARTIFACTS_AND_REFERENCE_RELATIVE_FACTS",
+    "existing_runtime": [
+      "canonical/runtime/content_addressed_artifact_measurement_v1.py",
+      "canonical/runtime/measured_typed_acceptance_program_v1.py"
+    ],
+    "required_expansion": [
+      "REFERENCE_RELATIVE_XLSX_CELL_AND_FORMULA_FACTS",
+      "TABLE_HEADER_AND_ROW_PREDICATES",
+      "NUMERIC_RELATIONS_AND_ERROR_FREE_FORMULAS",
+      "REFERENCE_COPY_OR_RECONCILIATION_EQUALITY",
+      "CONTENT_PRESENCE_AND_STRUCTURAL_ROLE_FACTS"
+    ],
+    "rule": "ADD_ONLY_MEASUREMENT_KINDS_THAT_MAP_WHOLE_RUBRIC_CRITERIA_TO_OBJECTIVE_SOURCE_BOUND_ACCEPTANCE__NO_PARTIAL_CONJUNCT_LAUNDERING"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_REMAINING_10441_CRITERIA_ARE_SUBJECTIVE_OR_IRREDUCIBLE",
+    "NO_CLAIM_TYPED_MEASUREMENT_WILL_CLOSE_GDPVAL",
+    "NO_GDPVAL_U_DELETION",
+    "NO_OWNER_LAYER_CANCELLATION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_inference_requests": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
