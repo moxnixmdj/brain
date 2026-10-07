@@ -19,6 +19,8 @@ class Env:
         self.commands.append(command)
         if command == "verify-bad":
             return Receipt(1, "", "bad")
+        if command.startswith("test -s /app/submission/"):
+            return Receipt(1, "", "missing")
         return Receipt(0, "ok", "")
 
 def planner(outputs):
@@ -92,6 +94,55 @@ class ScienceAgentTests(unittest.TestCase):
         self.assertFalse(result["model_has_terminal_authority"])
         self.assertNotEqual(result["summary"],"premature-substrate-finish")
         self.assertEqual(result["trace"][0]["kind"],"FINISH_REJECTED")
+
+    def test_explicit_submission_deliverables_become_brain_mandated_and_block_false_finish(self):
+        env=Env()
+        outputs=[{
+            "material_requirements":["R1"],
+            "candidates":[
+                {"action_id":"a","covers":["R1"],"command":"echo partial","verify_command":"echo verify"}
+            ],
+            "finish_summary":"model-thinks-done"
+        }]
+        goal=(
+            "Create /app/submission/controller.py and "
+            "/app/submission/design_report.json for the task."
+        )
+        with patch.object(s.science_planner, "plan", planner(outputs)):
+            result=asyncio.run(s.run_science_goal(goal,env,max_cycles=1))
+        self.assertNotEqual(result["status"],"FINISHED",result)
+        self.assertEqual(
+            result["brain_mandated_deliverables"],
+            {
+                "BRAIN_DELIVERABLE_01":"/app/submission/controller.py",
+                "BRAIN_DELIVERABLE_02":"/app/submission/design_report.json",
+            },
+        )
+        self.assertIn("BRAIN_DELIVERABLE_01",result["material_requirements"])
+        self.assertIn("BRAIN_DELIVERABLE_02",result["material_requirements"])
+        self.assertNotIn("BRAIN_DELIVERABLE_01",result["resolved_requirements"])
+        self.assertNotIn("BRAIN_DELIVERABLE_02",result["resolved_requirements"])
+
+    def test_brain_deliverable_cover_requires_real_nonempty_file(self):
+        env=Env()
+        outputs=[{
+            "material_requirements":["R1","BRAIN_DELIVERABLE_01"],
+            "candidates":[{
+                "action_id":"a",
+                "covers":["R1","BRAIN_DELIVERABLE_01"],
+                "command":"echo not-a-file",
+                "verify_command":"echo verify"
+            }]
+        }]
+        goal="Create /app/submission/controller.py."
+        with patch.object(s.science_planner, "plan", planner(outputs)):
+            result=asyncio.run(s.run_science_goal(goal,env,max_cycles=1))
+        self.assertNotEqual(result["status"],"FINISHED",result)
+        self.assertIn("R1",result["resolved_requirements"])
+        self.assertNotIn("BRAIN_DELIVERABLE_01",result["resolved_requirements"])
+        selected=[x for x in result["trace"] if x.get("kind")=="BRAIN_SELECTED_RESEARCH_ACTION"][0]
+        self.assertFalse(selected["coverage_promoted"],selected)
+        self.assertFalse(selected["brain_deliverable_checks"][0]["verified"],selected)
 
     def test_failed_verify_does_not_promote_coverage_or_finish(self):
         env,result=self.run_goal([
