@@ -652,6 +652,11 @@
     "frozen_19_acceptance_proof_shape_quotient": {
       "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
       "git_blob_sha": "6f062b5b94e0ec94b23b9e74ba132aaa6d38c654"
+    },
+    "load_bearing_acceptance_truth_basis_reconciliation": {
+      "path": "canonical/governance/FROZEN_19_LOAD_BEARING_ACCEPTANCE_TRUTH_BASIS_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "595f5ec3d259c88da5ecd60b8687e00fde1dfc19",
+      "note": "ACTIVE_SCHEDULING_TRUTH_REPAIR__16_OF_38_PROVED__22_RAW_OPEN__THREE_VERIFIED_NONINDEPENDENT_VARIABLES_PRESERVED_AS_DELETED__19_INDEPENDENT_LOAD_BEARING_ACCEPTANCE_TRUTHS_OPEN__THREE_PROOF_ENGINES__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -985,7 +990,17 @@
     "aa_briefcase_shared_measurement_fact_count": 1,
     "composition_component_scope_dependency_is_independent_reality_job": false,
     "instruction_scope_E2_package_active": false,
-    "instruction_scope_E2_package_closed": true
+    "instruction_scope_E2_package_closed": true,
+    "frozen_atomic_predicates_unresolved_raw": 22,
+    "verified_nonindependent_acceptance_truth_variables": 3,
+    "independent_load_bearing_acceptance_truths_open": 19,
+    "raw_open_registry_rows_are_independent_primary_research_jobs": false,
+    "load_bearing_basis_reconciliation_active": true,
+    "deleted_independent_scheduler_variables": [
+      "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+    ]
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -1183,7 +1198,8 @@
     ],
     "optional_stronger_route_rule": "PROVE_NOT_X_IS_NONPREEMPTIVE__RUN_IT_ONLY_WHEN_IT_IS_THE_HIGHEST_LEVERAGE_SOUND_WAY_TO_DISCHARGE_ONE_OR_MORE_OPEN_FROZEN_ATOMS",
     "scheduler_precedence": "FROZEN_19_FAMILY_PROTOCOL_ATOMS_AND_OWNERSHIP_FINALITY_CONTROL_NECESSITY__UNIVERSAL_TRACE_NOT_X_IS_OPTIONAL_STRONGER_SUFFICIENCY_ONLY",
-    "acceptance_scheduler_rule": "KEEP_38_ATOMIC_TRUTHS_FOR_FINAL_REDUCTION__EXECUTE_ONLY_THE_THREE_REUSABLE_PROOF_ENGINES__STRONGER_SCOPE_COMPLETE_PROOFS_PREEMPT_WEAKER_SURFACE_RUNS"
+    "acceptance_scheduler_rule": "PRESERVE_THE_38_ROW_REGISTRY_AS_PROVENANCE__16_ROWS_ARE_PROVED__22_RAW_ROWS_REMAIN_UNRESOLVED__BUT_THREE_OF_THOSE_22_ARE_INDEPENDENTLY_VERIFIED_DUPLICATE_OR_NONNECESSARY_TRUTH_VARIABLES__SCHEDULE_ONLY_19_INDEPENDENT_LOAD_BEARING_ACCEPTANCE_TRUTHS_THROUGH_THE_THREE_REUSABLE_PROOF_ENGINES__DO_NOT_RESURRECT_DELETED_VARIABLES_AS_REALITY_JOBS",
+    "load_bearing_acceptance_truth_basis": "canonical/governance/FROZEN_19_LOAD_BEARING_ACCEPTANCE_TRUTH_BASIS_RECONCILIATION_20261007_V1.json"
   },
   "terminal_execution_root": {
     "path": "canonical/governance/TERMINAL_EXECUTION_ROOT_20261007_V1.json",
@@ -1221,6 +1237,6 @@
     },
     "mandatory_terminal_predicate": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
     "optional_stronger_route": "PROVE_NOT_X_OVER_SOUND_OBSERVABLE_TRACE_ESCAPE_MODEL",
-    "current_truth": "5_OF_19_FULLY_TERMINALLY_CLOSED__16_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__22_OPEN__TERMINAL_FALSE"
+    "current_truth": "5_OF_19_FULLY_TERMINALLY_CLOSED__16_OF_38_REGISTRY_ATOMS_PROVED__22_RAW_REGISTRY_ROWS_OPEN__19_INDEPENDENT_LOAD_BEARING_ACCEPTANCE_TRUTHS_OPEN_AFTER_THREE_VERIFIED_BASIS_DELETIONS__THREE_PROOF_ENGINES__TERMINAL_FALSE"
   }
 }
