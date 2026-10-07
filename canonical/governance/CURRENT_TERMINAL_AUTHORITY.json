@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_FAIL_CLOSED_SCHEDULING_POINTER__TARGET_SCOPE_CLOSED__TWELVE_DB_CERTIFICATE_RECORDS__SEMANTIC_MINIMUM_INFORMATION_FRONTIER__TERMINAL_FALSE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authoritative_sources": {
+    "terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+      "git_blob_sha": "c1bc4543860be08f9014f69a212ba2222d8dba7c"
+    },
+    "current_authority_reconciliation": {
+      "path": "canonical/governance/TERMINAL_NOW_V19_CURRENT_AUTHORITY_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "88606ca2e5c921261865c5f7ef6a272fab380877"
+    },
+    "live_reconciliation": {
+      "path": "canonical/governance/TERMINAL_NOW_V19_LIVE_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "c1b8f0a4c57cb298f40b474173bca089cccc727e"
+    },
+    "db_cache": {
+      "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json",
+      "git_blob_sha": "6637b23cd90f3df20ec87f817ef38d1eb233ea79"
+    },
+    "semantic_minimum_information": {
+      "path": "canonical/governance/TERMINAL_SHARED_SEMANTIC_MINIMUM_INFORMATION_LOWER_BOUND_20261007_V1.json",
+      "git_blob_sha": "0b63405d95009a95ad12e767d9785ceacaf5be12"
+    },
+    "semantic_minimum_information_independent_verification": {
+      "path": "canonical/verification/TERMINAL_SHARED_SEMANTIC_MINIMUM_INFORMATION_LOWER_BOUND_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "09cf80ab42fc44ef48190f0b90872dcc5e55f8a6"
+    },
+    "router_runtime": {
+      "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+      "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
+    },
+    "router_independent_exact_replay": {
+      "path": "canonical/verification/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_CHATGPT_CONTAINER_REPLAY_20261007_V1.json",
+      "git_blob_sha": "18715a5b1b777639f7e8dcff3561b2ba22f25c31"
+    },
+    "router_deployed_replay_lane": {
+      "path": ".github/workflows/terminal-now-router-replay.yml",
+      "git_blob_sha": "8312f1563eb285a71917e8b70db986a1fbeb0364"
+    }
+  },
+  "live_truth": {
+    "fixed_authorized_target_trace_scope_closed": true,
+    "known_sound_D_B_certificate_record_count": 12,
+    "new_generic_semantic_mechanism_required": false,
+    "generic_router_intelligence_required": false,
+    "router_mechanical_core_implemented": true,
+    "router_independent_exact_replay_passed": true,
+    "router_deployed_binding_closed": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "only_live_ABC_frontier": {
+    "quantified_scope": "ALREADY_CLOSED_FIXED_AUTHORIZED_OPUS55_OBSERVABLE_TRACE_SUPERSET_MINUS_SOUND_CACHED_D_B_COVER",
+    "per_residual_context_required_disjunction": [
+      "ONE_COMMON_CERTIFIED_ADEQUATE_BRAIN_OWNED_POLICY_OVER_THE_COARSEST_SOUND_CONTEXT_CELL",
+      "OR_THE_MINIMUM_TRUTHFUL_SELECTED_DISCRIMINATOR_PLUS_CERTIFIED_ADEQUATE_BRAIN_POLICY_FOR_EACH_RESULTING_CELL"
+    ],
+    "plus": [
+      "LOAD_BEARING_COMPOSITION_RESOURCE_SAFETY_AND_HONESTY_CONDITIONS",
+      "EXACT_CONTENT_ADDRESSED_ROUTER_ADMISSION_AND_ADEQUACY_BINDING"
+    ]
+  },
+  "scheduling_lock": [
+    "THIS_FILE_IS_THE_STABLE_ENTRY_POINTER_FOR_TERMINAL_SCHEDULING; VERSIONED_FILES_ARE_EVIDENCE_SOURCES, NOT_IMPLICITLY_NEWER_AUTHORITY.",
+    "DO_NOT_REOPEN_TARGET_SCOPE_ENUMERATION.",
+    "DO_NOT_REOPEN_THE_HISTORICAL_14_PROVED_24_UNRESOLVED_LEDGER_AS_A_SCHEDULING_FRONTIER.",
+    "DO_NOT_BUILD_A_GENERAL_SEMANTIC_WORLD_MODEL.",
+    "DO_NOT_BUILD_A_GENERAL_INTELLIGENT_ROUTER.",
+    "SUBTRACT_ALL_CURRENT_SOUND_D_B_CERTIFICATE_RECORDS_BEFORE_NEW_WORK.",
+    "ATTACK_ONLY_CONTEXT_LOCAL_COMMON_POLICY_ADEQUACY_OR_MINIMUM_SELECTED_DISCRIMINATOR_GAPS_AND_LOAD_BEARING_CONDITION_INTERACTIONS.",
+    "WHEN_COMPLETE_SELECTED_CONTEXT_ABC_CLOSES__FREEZE_EXACT_CREDITED_ROUTE_SET__RECOMPUTE_D__DELETE_DONORS__RUN_INDEPENDENT_CLEAN_ROOM_REPLAY."
+  ],
+  "superseded_for_scheduling": [
+    "HISTORICAL_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2_14_PROVED_24_UNRESOLVED_COUNTS",
+    "HISTORICAL_OWNERSHIP_MATRIX_NEXT_ACTIONS_THAT_CONFLICT_WITH_CURRENT_V16_V19_AUTHORITY",
+    "ANY_PRE_V16_LITERAL_TARGET_UNIVERSE_EXHAUSTIVENESS_BLOCKER",
+    "ANY_PRE_TWELVE_DB_REGION_COUNT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_RESIDUAL_CONTEXTS_HAVE_ADEQUACY_CERTIFICATES.",
+    "NO_CLAIM_ROUTER_DEPLOYED_BINDING_IS_CLOSED.",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED.",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
