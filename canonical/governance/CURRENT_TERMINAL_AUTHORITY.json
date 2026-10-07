@@ -681,6 +681,11 @@
       "path": "canonical/governance/FROZEN_18_ACCEPTANCE_REGIME_EXHAUSTIVE_CLASSIFICATION_20261007_V1.json",
       "git_blob_sha": "dc9f0c5147349fa806d2a0296a8139c637d85b83",
       "note": "CURRENT_15_OPEN_INDEPENDENT_OBLIGATIONS_AFTER_AGENCY_PROMOTION"
+    },
+    "dense_nonchart_shared_aa_dependency_reconciliation": {
+      "path": "canonical/governance/DENSE_NONCHART_SHARED_AA_DEPENDENCY_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "7c6c905f59ba33bc36364dc70bcb1405581110a2",
+      "note": "SCHEDULER_DEPENDENCY_COLLAPSE_ONLY__RAW_VISION_ATOM_REMAINS_UNRESOLVED__NO_ACCEPTANCE_CREDIT"
     }
   },
   "live_truth": {
@@ -1017,7 +1022,7 @@
     "instruction_scope_E2_package_closed": true,
     "frozen_atomic_predicates_unresolved_raw": 22,
     "verified_nonindependent_acceptance_truth_variables": 5,
-    "independent_load_bearing_acceptance_truths_open": 15,
+    "independent_load_bearing_acceptance_truths_open": 14,
     "raw_open_registry_rows_are_independent_primary_research_jobs": false,
     "load_bearing_basis_reconciliation_active": false,
     "deleted_independent_scheduler_variables": [
@@ -1027,7 +1032,7 @@
       "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
       "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_METRIC_IDENTITY"
     ],
-    "independent_open_acceptance_obligations": 15,
+    "independent_open_acceptance_obligations": 14,
     "raw_unresolved_registry_labels_are_independent_primary_jobs": false,
     "composition_terminal_success_is_independent_primary_job": false,
     "composition_critical_invariant_is_independent_primary_job": false,
@@ -1044,7 +1049,9 @@
     "agency_matched_success_noninferior_proved": true,
     "agency_scope_safety_no_material_regression_proved": true,
     "agency_frozen_acceptance_protocol_closed": true,
-    "agency_opus_case_execution_required": false
+    "agency_opus_case_execution_required": false,
+    "dense_nonchart_independent_scheduler_variable": false,
+    "dense_nonchart_shared_dependency": "AA_BRIEFCASE_V1_1_GE_1822_OR_STRONGER_SHARED_PROFESSIONAL_QUALITY_RESIDUAL"
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -1242,7 +1249,7 @@
     ],
     "optional_stronger_route_rule": "PROVE_NOT_X_IS_NONPREEMPTIVE__RUN_IT_ONLY_WHEN_IT_IS_THE_HIGHEST_LEVERAGE_SOUND_WAY_TO_DISCHARGE_ONE_OR_MORE_OPEN_FROZEN_ATOMS",
     "scheduler_precedence": "PREFER_SCOPE_COMPLETE_UNIVERSAL_COVER_WHEN_IT_CAN_SOUNDLY_DISCHARGE_MULTIPLE_OPEN_FROZEN_OBLIGATIONS__FROZEN_PROTOCOLS_REMAIN_DIRECT_WITNESS_ROUTE_NOT_A_BUREAUCRATIC_BARRIER_TO_A_STRONGER_PROOF",
-    "acceptance_scheduler_rule": "PRESERVE_38_REGISTRY_LABELS_FOR_PROVENANCE__18_PROVED__20_RAW_UNRESOLVED__FIVE_RAW_UNRESOLVED_LABELS_ARE_VERIFIED_DUPLICATE_OR_DERIVED_NONINDEPENDENT_SCHEDULER_VARIABLES__SCHEDULE_ONLY_15_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS_THROUGH_THE_THREE_REUSABLE_PROOF_ENGINES_OR_A_STRONGER_MULTI_OBLIGATION_SCOPE_COMPLETE_PROOF",
+    "acceptance_scheduler_rule": "PRESERVE_38_REGISTRY_LABELS_FOR_PROVENANCE__18_PROVED__20_RAW_UNRESOLVED__SIX_RAW_UNRESOLVED_LABELS_ARE_VERIFIED_DUPLICATE_OR_DERIVED_NONINDEPENDENT_SCHEDULER_VARIABLES__SCHEDULE_ONLY_14_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS_THROUGH_THE_REUSABLE_PROOF_ENGINES_OR_A_STRONGER_MULTI_OBLIGATION_SCOPE_COMPLETE_PROOF",
     "load_bearing_acceptance_truth_basis": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
     "mandatory_terminal_root": "PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
     "coequal_proof_routes": [
@@ -1292,7 +1299,7 @@
     },
     "mandatory_terminal_predicate": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
     "optional_stronger_route": "PROVE_NOT_X_OVER_SOUND_OBSERVABLE_TRACE_ESCAPE_MODEL",
-    "current_truth": "7_OF_19_FULLY_TERMINALLY_CLOSED__7_OF_19_ACCEPTANCE_PASS__7_OF_19_VERIFIED_OWNED__12_ACCEPTANCE_FAMILIES_OPEN__18_OF_38_REGISTRY_ATOMS_PROVED__20_RAW_UNRESOLVED__15_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__ALL_NON_ACCEPTANCE_COUNTERS_ZERO__FINAL_DONOR_DELETION_CLEANROOM_PASS_TRUE__TERMINAL_FALSE",
+    "current_truth": "7_OF_19_FULLY_TERMINALLY_CLOSED__7_OF_19_ACCEPTANCE_PASS__7_OF_19_VERIFIED_OWNED__12_ACCEPTANCE_FAMILIES_OPEN__18_OF_38_REGISTRY_ATOMS_PROVED__20_RAW_UNRESOLVED__14_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__ALL_NON_ACCEPTANCE_COUNTERS_ZERO__FINAL_DONOR_DELETION_CLEANROOM_PASS_TRUE__TERMINAL_FALSE",
     "accepted_terminal_acceptance_routes": [
       "FROZEN_19_FAMILY_PROTOCOLS",
       "UNIVERSAL_SCOPE_COMPLETE_COVER"
