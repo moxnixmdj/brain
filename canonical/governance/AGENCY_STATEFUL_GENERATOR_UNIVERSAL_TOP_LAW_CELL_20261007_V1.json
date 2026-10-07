@@ -1,0 +1,199 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_STATEFUL_GENERATOR_UNIVERSAL_TOP_LAW_CELL_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ZERO_REALITY_UNIVERSAL_DIRECT_E2E_TOP_LAW_SELECTED_CELL__EXACT_MATCHED_AGENCY_STATEFUL_GENERATOR_DOMAIN__ZERO_GLOBAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "current_v16": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+      "git_blob_sha": "c1bc4543860be08f9014f69a212ba2222d8dba7c"
+    },
+    "db_union_v6": {
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V6.json",
+      "git_blob_sha": "3b438f63dfdcd208c984251d1addd1334ca4b44e"
+    }
+  },
+  "selected_cell": {
+    "id": "MATCHED_AGENCY_STATEFUL_ALL_VALID_CASE_TOKENS_AND_ORDINALS_V1",
+    "family": "COMPLEX_MULTI_TOOL_AGENCY",
+    "scope": "ALL_INVOCATIONS_OF_matched_agency_stateful_case_v1.run_case(case_token,ordinal)_WITH_NONEMPTY_STRING_case_token_AND_NONNEGATIVE_INTEGER_ordinal_UNDER_THE_EXACT_BOUND_RUNTIME_BYTES_AND_DECLARED_LOCAL_PYTHON_FILESYSTEM_PROCESS_BOUNDARY",
+    "evaluator": "THE_run_case_RETURN_FIELD_pass",
+    "objective_order": {
+      "fail": 0,
+      "pass": 1
+    },
+    "brain_value": 1,
+    "top_value": 1
+  },
+  "exact_source_bindings": {
+    "agency_harness": {
+      "path": "canonical/runtime/matched_agency_stateful_case_v1.py",
+      "git_blob_sha": "be221c98b73af8552bcfd8c8ac61bd9a38295f0d"
+    },
+    "capability_planner": {
+      "path": "canonical/runtime/capability_planner.py",
+      "git_blob_sha": "629766f8a1194fd298e0809b64a5e9c5a39fa3ea"
+    },
+    "current_supervisor": {
+      "path": "canonical/runtime/same_identity_supervisor.py",
+      "git_blob_sha": "1fb03bd898ee673521799ff6dee6500e246feef6"
+    },
+    "continuous_obs": {
+      "path": "canonical/runtime/continuous_obs_runtime.py",
+      "git_blob_sha": "e2533a0335c4f6824b9542944d4682aeefb36b2b"
+    },
+    "browser_candidate": {
+      "path": "canonical/runtime/browser_state_information_safe_candidate.py",
+      "git_blob_sha": "8acf61f21a15a0d3b3e0e5735ebb80e20393e405"
+    },
+    "browser_proof": {
+      "path": "canonical/runtime/browser_state_information_safe_proof.py",
+      "git_blob_sha": "3723d3233d6058f0a43491e4654a21490f992d1e"
+    },
+    "tool_candidate": {
+      "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+      "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+    },
+    "tool_proof_v2": {
+      "path": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+      "git_blob_sha": "5e8a953864e13ec76768c3e8920644107c65a644"
+    },
+    "delegation_candidate": {
+      "path": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+      "git_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522"
+    },
+    "delegation_proof": {
+      "path": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+      "git_blob_sha": "928466401b36e4f3b09c517950cc050432a0616f"
+    },
+    "grounding": {
+      "path": "canonical/runtime/consensus_dom_grounding.py",
+      "git_blob_sha": "2849a9eea74c6c595709f77eba23fd40a3be8c9a"
+    }
+  },
+  "component_certificates": {
+    "browser": {
+      "path": "canonical/governance/BROWSER_STATE_GENERATOR_UNIVERSAL_TOP_LAW_CELL_20261007_V1.json",
+      "git_blob_sha": "68e6b4abacb14d92429f34fda54612027b09dfcf",
+      "scope_relation": "THE_AGENCY_HARNESS_CALLS_THE_EXACT_GENERATOR_WITH_ordinal_1_AND_AN_ARBITRARY_HASH_DERIVED_INTEGER_SEED__A_SUBSET_OF_THE_UNIVERSAL_BROWSER_CELL"
+    },
+    "tool_discovery": {
+      "path": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dd94bef997603ddd71224100d33fe3889a93d3c4",
+      "verification": {
+        "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+      },
+      "scope_relation": "THE_CERTIFICATE_BINDS_THE_EXACT_CANDIDATE_AND_PROOF_V2_USED_BY_THE_AGENCY_HARNESS_AND_PROVES_THE_FROZEN_FINITE_HIDDEN_TOOL_PROTOCOL_UNIVERSALLY"
+    },
+    "delegation": {
+      "path": "canonical/governance/DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V2.json",
+      "git_blob_sha": "f53937a9849cccdb408a75842aad4415a5992cc9",
+      "verification": {
+        "path": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "git_blob_sha": "955ac8f4bd0db2527bfbb465fc8252df6d916156"
+      },
+      "scope_relation": "THE_CERTIFICATE_BINDS_THE_EXACT_WHOLE_SCOPE_CANDIDATE_AND_PROOF_USED_BY_THE_AGENCY_HARNESS_AND_PROVES_ALL_VALID_FINITE_EXPLICIT_DELEGATION_CONTRACTS_IN_SCOPE"
+    },
+    "independent_current_dependency_replay": {
+      "path": "canonical/verification/MATCHED_AGENCY_FRESH_COMPONENT_SEEDS_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "a60f48fbaad2b399c5504b3b6d9e30e2561aa567",
+      "role": "CORROBORATING_EXACT_CURRENT_DEPENDENCY_CLOSURE_AND_FRESH_TOKEN_RECONSTRUCTION__NOT_THE_UNIVERSAL_GENERALIZATION_STEP"
+    }
+  },
+  "local_continuity_truth_repair": {
+    "global_old_credit_inherited": false,
+    "reason": "THE_HARNESS_USES_CURRENT_same_identity_supervisor.py_BLOB_1fb03b_WHILE_GLOBAL_ACCEPTED_CONTINUITY_CREDIT_IS_BOUND_TO_THE_OLDER_CREDITED_47c461_BLOB__SO_THIS_CELL_PROVES_THE_EXACT_CURRENT_PROCESS_TRACE_DIRECTLY.",
+    "exact_process_trace": [
+      "PROCESS_A_claim_task_ON_A_FRESH_TEMPORARY_STATE_CREATES_THE_SAME_AGENT_TASK_MISSION_BOUND_CLAIM_WITH_checkpoint_count_0.",
+      "PROCESS_A_execute_claimed_task_WITH_checkpoint_before_runtime_once_TRUE_AND_checkpoint_count_0_SETS_checkpoint_count_1_AND_RETURNS_CHECKPOINTED_RELAUNCH_REQUIRED_BEFORE_CALLING_RUNTIME.",
+      "PROCESS_B_RECLAIMS_THE_SAME_TASK_MISSION_AND_AGENT_ID_FROM_THE_DURABLE_STATE_AND_PASSES_THE_SAME_CONTINUOUS_OBS_VALIDATION.",
+      "PROCESS_B_execute_claimed_task_SEES_checkpoint_count_1__SKIPS_THE_CHECKPOINT_BRANCH__INCREMENTS_runtime_attempt_count_TO_1__AND_CALLS_THE_CUSTOM_RUNTIME_EXACTLY_ONCE.",
+      "THE_CUSTOM_RUNTIME_RETURNS_ZERO_WHEN_THE_UNIQUE_THREE_STEP_PLAN_AND_ALL_THREE_COMPONENTS_PASS.",
+      "ZERO_RETURN_SETS_THE_TASK_STATE_TO_COMPLETE__SO_THE_FINAL_CHECKS_checkpoint_count_1__runtime_attempt_count_1__same_agent__same_task__terminal_complete_ALL_HOLD."
+    ],
+    "environment_boundary": "THIS_DIRECT_PROOF_IS_FOR_THE_HARNESS_DECLARED_LOCAL_PYTHON_FILESYSTEM_AND_PROCESS_BOUNDARY__IT_DOES_NOT_REQUALIFY_THE_CURRENT_DEFAULT_SUPERVISOR_AS_GLOBAL_CONTINUITY_FAMILY_CREDIT."
+  },
+  "planner_proof": {
+    "problem_is_case_token_independent": true,
+    "initial_facts": [
+      "mission_loaded"
+    ],
+    "target_effects": [
+      "agency_complete"
+    ],
+    "capability_chain": [
+      {
+        "id": "browser",
+        "requires": [
+          "mission_loaded"
+        ],
+        "provides": [
+          "browser_done"
+        ]
+      },
+      {
+        "id": "tool",
+        "requires": [
+          "browser_done"
+        ],
+        "provides": [
+          "tool_done"
+        ]
+      },
+      {
+        "id": "delegation",
+        "requires": [
+          "tool_done"
+        ],
+        "provides": [
+          "agency_complete"
+        ]
+      }
+    ],
+    "theorem": "THE_ONLY_COMPLETE_ORDERING_SATISFYING_THE_DECLARED_PRECONDITIONS_IS_browser_THEN_tool_THEN_delegation__ALL_COSTS_ARE_NONNEGATIVE_EQUAL_AND_NO_ALTERNATIVE_ROUTE_EXISTS.",
+    "independent_wolfram_result": "{{browser,tool,delegation}}_IS_THE_UNIQUE_VALID_PERMUTATION"
+  },
+  "token_and_ordinal_invariance": {
+    "child_program_token_smuggling": false,
+    "case_token_effect": "ONLY_SHA256_DERIVED_seed_base_AND_MISSION_HASH_IDENTITY",
+    "ordinal_effect": "ONLY_TASK_ID_AND_COMPONENT_INTEGER_SEED_XOR_INPUT__THE_PLANNER_GRAPH_AND_COMPONENT_PROTOCOL_CLASSES_USED_BY_THE_HARNESS_DO_NOT_CHANGE",
+    "browser": "ARBITRARY_SEED_IS_COVERED_BY_THE_UNIVERSAL_BROWSER_CELL",
+    "tool": "ARBITRARY_HASH_DERIVED_SEED_IS_COVERED_BY_THE_UNIVERSAL_FORMAL_TOOL_DISCOVERY_SCOPE",
+    "delegation": "ARBITRARY_HASH_DERIVED_SEED_IS_COVERED_BY_THE_UNIVERSAL_FORMAL_DELEGATION_SCOPE"
+  },
+  "theorem": {
+    "premises": [
+      "THE_SYNTHETIC_CONTINUOUS_OBS_CONTEXT_CONSTRUCTION_PASSES_THE_CURRENT_VALIDATOR_FOR_THE_EXACT_BOUND_DEPENDENCY_CLOSURE.",
+      "THE_EXACT_TWO_PROCESS_CURRENT_SUPERVISOR_TRACE_CHECKPOINTS_ON_A_AND_RESUMES_TO_ONE_RUNTIME_ATTEMPT_ON_B.",
+      "THE_FIXED_CAPABILITY_GRAPH_HAS_ONE_VALID_COMPLETE_PLAN_browser_tool_delegation.",
+      "THE_BROWSER_COMPONENT_PASSES_FOR_EVERY_HASH_DERIVED_SEED_USED_BY_THE_HARNESS.",
+      "THE_TOOL_DISCOVERY_COMPONENT_PASSES_FOR_EVERY_VALID_GENERATED_CASE_USED_BY_THE_HARNESS.",
+      "THE_DELEGATION_COMPONENT_PASSES_FOR_EVERY_VALID_GENERATED_CASE_USED_BY_THE_HARNESS.",
+      "THE_CUSTOM_RUNTIME_RETURNS_ZERO_IFF_THE_THREE_PLANNED_ACTION_TYPES_ARE_PRESENT_AND_ALL_THREE_COMPONENT_RESULTS_PASS."
+    ],
+    "conclusion": "FOR_EVERY_VALID_case_token_AND_ordinal_THE_EXACT_BOUND_run_case_RETURNS_pass_TRUE.",
+    "top_law": "BOOLEAN_PASS_TRUE_EQUALS_THE_OBJECTIVE_TOP_VALUE_ONE__THEREFORE_NO_TARGET_LAW_CAN_SCORE_STRICTLY_HIGHER_INSIDE_THIS_EXACT_SELECTED_CELL.",
+    "K_c_minus": "EMPTY_ON_THIS_SELECTED_CELL"
+  },
+  "db_effect": {
+    "add_to_D_B": "ONLY_MATCHED_AGENCY_STATEFUL_ALL_VALID_CASE_TOKENS_AND_ORDINALS_V1",
+    "fresh_target_reality_consumed": 0
+  },
+  "D_boundary": {
+    "global_D_finality": "OPEN",
+    "note": "THE_HARNESS_USES_TEMPORARY_FILESYSTEM_AND_CHILD_PROCESS_EFFECTS__ANY TERMINAL CREDITED DEPLOYMENT OF AN AGENCY ROUTE STILL REQUIRES ROUTE-SPECIFIC D EFFECT AND DONOR-INDEPENDENCE ACCOUNTING."
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_WHOLE_COMPLEX_MULTI_TOOL_AGENCY_FAMILY_IS_CLOSED.",
+    "NO_AUTOMATIONBENCH_OSWORLD_OR_ARBITRARY_MULTI_APP_WORKFLOW_CREDIT.",
+    "NO_GLOBAL_CONTINUITY_REQUALIFICATION_OF_current_same_identity_supervisor.py.",
+    "NO_CLAIM_ALL_AGENTIC_STATE_CHANGE_REPLANNING_CONTEXTS_ARE_SUBSUMED.",
+    "NO_COMPLETE_SELECTED_CONTEXT_ABC_D_FINALITY_OR_TERMINAL_CLOSURE."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
