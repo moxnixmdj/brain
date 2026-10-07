@@ -6547,8 +6547,69 @@ _CERTIFICATE_GATED_ROUTE_RECEIPT_FIELDS=frozenset({
     "admitted",
 })
 
+_CERTIFICATE_GATED_CONTENT_SHA_FIELDS=(
+    "route_blob_sha",
+    "adequacy_certificate_blob_sha",
+    "admission_certificate_blob_sha",
+)
+
+def _git_blob_sha1_bytes(payload):
+    header=b"blob "+str(len(payload)).encode("ascii")+b"\x00"
+    return hashlib.sha1(header+payload).hexdigest()
+
+def _content_addressed_repo_file(raw_path):
+    value=str(raw_path or "").strip().replace("\\","/")
+    if not value:
+        raise Blocker("CONTENT_ADDRESS_PATH_MISSING")
+    if value.startswith("/"):
+        value=value.lstrip("/")
+    pure=pathlib.PurePosixPath(value)
+    if any(part in {"..",""} for part in pure.parts):
+        raise Blocker("CONTENT_ADDRESS_PATH_INVALID")
+    cursor=ROOT
+    for part in pure.parts:
+        if part==".":
+            continue
+        cursor=cursor/part
+        if cursor.is_symlink():
+            raise Blocker("CONTENT_ADDRESS_PATH_SYMLINK_FORBIDDEN:"+value)
+    root=ROOT.resolve()
+    path=(ROOT/pure).resolve()
+    if path==root or root not in path.parents:
+        raise Blocker("CONTENT_ADDRESS_PATH_OUTSIDE_REPOSITORY")
+    if not path.is_file():
+        raise Blocker("CONTENT_ADDRESS_FILE_MISSING:"+value)
+    return path,path.relative_to(root).as_posix()
+
+def _validate_certificate_gated_content_bindings(step,receipts):
+    raw=step.get("content_address_bindings")
+    if not isinstance(raw,dict) or not raw:
+        raise Blocker("CERTIFICATE_GATED_CONTENT_ADDRESS_BINDINGS_REQUIRED")
+    expected=set()
+    for receipt in receipts:
+        for field in _CERTIFICATE_GATED_CONTENT_SHA_FIELDS:
+            expected.add(getattr(receipt,field))
+    if set(raw)!=expected:
+        raise Blocker("CERTIFICATE_GATED_CONTENT_ADDRESS_BINDING_SET_MISMATCH")
+    verified={}
+    for expected_sha,raw_path in raw.items():
+        if (
+            not isinstance(expected_sha,str)
+            or len(expected_sha)!=40
+            or any(ch not in "0123456789abcdef" for ch in expected_sha)
+        ):
+            raise Blocker("CERTIFICATE_GATED_CONTENT_ADDRESS_SHA_INVALID")
+        if not isinstance(raw_path,str) or not raw_path.strip():
+            raise Blocker("CERTIFICATE_GATED_CONTENT_ADDRESS_PATH_INVALID")
+        path,rel=_content_addressed_repo_file(raw_path)
+        actual=_git_blob_sha1_bytes(path.read_bytes())
+        if actual!=expected_sha:
+            raise Blocker("CERTIFICATE_GATED_CONTENT_ADDRESS_GIT_BLOB_SHA_MISMATCH:"+expected_sha)
+        verified[expected_sha]=rel
+    return verified
+
 def run_certificate_gated_route_select(step):
-    """Production selection seam: select a certified route, but do not execute it."""
+    """Production selection seam: select only a content-bound certified route; do not execute it."""
     if not isinstance(step,dict):
         raise Blocker("CERTIFICATE_GATED_ROUTE_STEP_INVALID")
     actual_context_digest=step.get("actual_context_digest")
@@ -6587,6 +6648,8 @@ def run_certificate_gated_route_select(step):
             admitted=item["admitted"],
         ))
 
+    verified_paths=_validate_certificate_gated_content_bindings(step,receipts)
+
     try:
         selected=router.select_certified_route(
             actual_context_digest=actual_context_digest,
@@ -6604,6 +6667,10 @@ def run_certificate_gated_route_select(step):
         "route_blob_sha":selected.route_blob_sha,
         "adequacy_certificate_blob_sha":selected.adequacy_certificate_blob_sha,
         "admission_certificate_blob_sha":selected.admission_certificate_blob_sha,
+        "route_path":verified_paths[selected.route_blob_sha],
+        "adequacy_certificate_path":verified_paths[selected.adequacy_certificate_blob_sha],
+        "admission_certificate_path":verified_paths[selected.admission_certificate_blob_sha],
+        "content_address_binding_verified":True,
         "admitted":True,
         "selection_only":True,
         "downstream_route_execution_performed":False,
