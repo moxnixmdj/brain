@@ -11,7 +11,7 @@ def context():
     return c, typed_context_sha256(c)
 
 
-def test_explicit_defined_term_condition_can_select_policy():
+def test_explicit_defined_term_condition_is_not_self_certified_as_adequate():
     text = (
         "Total exposure means exposure_amount. "
         "Apply Rule A unless Total exposure is at least 125.50."
@@ -32,8 +32,7 @@ def test_explicit_defined_term_condition_can_select_policy():
         expected_typed_context_sha256=digest,
     )
     assert checked["status"] == "PROOF_CHECKED", checked
-    accepted = checked["accepted_claims"][0]
-    atom_id = accepted["condition_atom_id"]
+    atom_id = checked["accepted_claims"][0]["condition_atom_id"]
     out = resolve_from_source_proof(
         text,
         source_id="s",
@@ -46,8 +45,9 @@ def test_explicit_defined_term_condition_can_select_policy():
             "ordinary_policy": {"op": "NOT", "arg": {"op": "ATOM", "id": atom_id}},
         },
     )
-    assert out["status"] == "COMMON_POLICY_CERTIFIED"
-    assert out["certified_common_policies"] == ["exception_policy"]
+    assert out["status"] == "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED"
+    assert out["entailed_policy_conditions"] == ["exception_policy"]
+    assert out["certified_common_policies"] == []
 
 
 def test_caller_cannot_relabel_defined_term_or_field():
