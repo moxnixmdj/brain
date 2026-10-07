@@ -10,7 +10,7 @@
     },
     "solver_v1_verifier_registry": {
       "path": "canonical/runtime/universal_verified_adaptive_solver_v1.py",
-      "git_blob_sha": "30b3027f0c7a78f0a6350cd31e570e743837ed61"
+      "git_blob_sha": "ef98a50f3f3b505794a7288a41ae5070aa3231dd"
     },
     "v2_effect_binding_repair": {
       "path": "canonical/governance/UNIVERSAL_SOLVER_PROOF_TO_EFFECT_BINDING_TRUTH_REPAIR_20261007_V1.json",
