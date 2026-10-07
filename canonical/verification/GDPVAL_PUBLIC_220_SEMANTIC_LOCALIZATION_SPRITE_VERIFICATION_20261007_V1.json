@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_220_SEMANTIC_LOCALIZATION_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_COMPLETE_220_PROMPT_LOCALIZATION_PASS__ZERO_MODEL_INFERENCE__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/GDPVAL_PUBLIC_220_SEMANTIC_COMPLEMENT_LOCALIZATION_20261007_V1.json",
+      "git_blob_sha": "9f5fd6f89de1107adeb0e4eb95c1c16cd6d1392c"
+    },
+    "evidence": {
+      "path": "canonical/evidence/GDPVAL_PUBLIC_220_EXPLICIT_OBLIGATION_LOCALIZATION_20261007_V1.json",
+      "git_blob_sha": "7a2d726adb155bee0f1e6f4af71ee90cc547bbbc"
+    },
+    "parser": {
+      "path": "canonical/runtime/bounded_predicate_argument_semantics.py",
+      "git_blob_sha": "8303231779d6fe8c7fb740e3bbaa492914d4eba9"
+    },
+    "index": {
+      "path": "canonical/runtime/explicit_obligation_index_v1.py",
+      "git_blob_sha": "a28e1bde45bfe85c086202c3a5ecca2ae730fe7d"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/gdpval_semantic_localization_v1"
+  },
+  "population_crosscheck": {
+    "task_count": 220,
+    "row_indices_contiguous": true,
+    "unique_task_ids": true,
+    "rows_with_reference_files": 125,
+    "rows_with_gold_deliverables": 185,
+    "prompt_manifest_sha256": "46af591f16f6e50fa12e00370e65beef354bb9a4dae77f2ab85b27198ca77ad8"
+  },
+  "result": {
+    "segment_count": 5235,
+    "modal_segment_count": 509,
+    "resolved_explicit_obligation_count": 154,
+    "unsupported_modal_segment_count": 355,
+    "tasks_with_at_least_one_resolved_obligation": 93,
+    "tasks_with_unresolved_segments": 220,
+    "whole_task_semantic_membership_proved_count": 0
+  },
+  "boundary": [
+    "THE_PUBLIC_220_ROWS_WERE_FETCHED_FROM_THE_BOUND HUGGINGFACE DATASET SERVER SURFACE AND CROSSCHECKED AGAINST THE PRIOR CANONICAL POPULATION COUNTS.",
+    "THE EXACT CANONICAL PARSER AND INDEX BLOBS WERE EXECUTED ON EVERY PROMPT.",
+    "THIS_IS_ONE_SIDED_POSITIVE_SEMANTIC_LOCALIZATION__UNPARSED_TEXT_REMAINS_UNKNOWN.",
+    "NO MODEL INFERENCE WAS USED.",
+    "NO GDPVAL FAMILY ABC D FINALITY OR TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_inference_requests": 0,
+    "terminal_credit_delta": 0
+  }
+}
