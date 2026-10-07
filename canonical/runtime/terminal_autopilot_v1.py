@@ -347,7 +347,7 @@ def plan(manifest: dict[str, Any]) -> dict[str, Any]:
         wall = max(float(item["estimated_wall_clock_units"]), 1e-9)
         leverage = (item.get("discharge_count", 0) + item.get("unlock_count", 0)) / wall
         repair_bias = 1 if item["kind"] == "REPAIR" else 0
-        return (-leverage, -item.get("discharge_count", 0), -repair_bias, wall, item["action_id"])
+        return (-leverage, -repair_bias, -item.get("discharge_count", 0), wall, item["action_id"])
 
     candidates.sort(key=score)
     dispatch = candidates[:max_concurrency]
