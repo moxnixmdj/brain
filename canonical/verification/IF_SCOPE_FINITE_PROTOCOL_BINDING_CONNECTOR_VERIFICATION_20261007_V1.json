@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_IF_SCOPE_FINITE_PROTOCOL_BINDING_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_SOURCE_BINDING_AND_VERIFIER_REPLAY_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/IF_SCOPE_FINITE_PROTOCOL_BINDING_TRUTH_REPAIR_20261007_V1.json",
+    "git_blob_sha": "15c5e607e9f5c921d62bf75492e26021980e75fa",
+    "pull_request": 2784,
+    "verified_head_sha": "33181639325414750d94cac57c6ea684e3873c70"
+  },
+  "exact_source_bindings": {
+    "terminal_protocols": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "scope_semantics_disjunction": "cc83650aa20c934a664cd485cc4e8f8efe8924b2",
+    "precommit": "bdae02fc05339fb9a8709c26a8e448c475a4006f",
+    "finite_top_certificate": "40be3493b6786f2a0349d82f0b6219784d682d22",
+    "independent_execution": "f2736590ad5fb3161f4e65bdc137cea836996658"
+  },
+  "verified": {
+    "all_source_blob_bindings_exact": true,
+    "declared_scope_mode": "FINITE_DECLARED_SCOPE",
+    "protocol_declares_larger_underlying_population": false,
+    "protocol_dimension_count": 5,
+    "precommit_dimension_atom_set_exact": true,
+    "precommit_case_count": 160,
+    "cases_per_dimension": 32,
+    "result_blind_freeze_controls_all_true": true,
+    "independent_execution_pass": true,
+    "brain_success_count": 160,
+    "brain_failure_count": 0,
+    "covered_dimension_count": 5,
+    "authority_denied_route_touches": 0,
+    "binary_success_top_value": 1,
+    "if_scope_boundary_refinement_closed": true,
+    "sound_subtraction_from_U": true,
+    "opus_query_required": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_INSTRUCTION_FOLLOWING_OUTSIDE_THE_DECLARED_FIVE_DIMENSION_PORTFOLIO",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED",
+    "NO_CLAIM_D_FINALITY_OR_TERMINAL_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
