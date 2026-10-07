@@ -1,0 +1,75 @@
+name: GDPval public 220 composed semantic localization v2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/gdpval_semantic_complement_localizer_v2.py"
+      - "canonical/tests/test_gdpval_semantic_complement_localizer_v2.py"
+      - ".github/workflows/gdpval-semantic-complement-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gdpval-public-220-composed-semantic-localization-v2
+  cancel-in-progress: false
+
+jobs:
+  localize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify fail-closed localizer
+        run: |
+          set -euo pipefail
+          python -m unittest -v canonical.tests.test_gdpval_semantic_complement_localizer_v2
+
+      - name: Execute complete public 220 structural localization
+        run: |
+          set -euo pipefail
+          mkdir -p canonical/evidence
+          python -m canonical.runtime.gdpval_semantic_complement_localizer_v2             > canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_20261007_V2.json
+          python - <<'PY'
+          import json
+          p="canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_20261007_V2.json"
+          x=json.load(open(p))
+          assert x["status"].startswith("PASS__"), x
+          assert x["population"]["task_count"] == 220, x
+          assert x["inference"]["fresh_target_model_queries"] == 0, x
+          assert x["inference"]["provider_evaluation_queries"] == 0, x
+          assert x["soundness"]["candidate_is_credit"] is False, x
+          assert x["soundness"]["gdpval_scope_closed"] is False, x
+          assert x["soundness"]["u_deletion_authority"] is False, x
+          assert x["soundness"]["terminal_authority"] is False, x
+          print(json.dumps({
+              "status":x["status"],
+              "population":x["population"],
+              "aggregate":x["aggregate"],
+              "compound_candidate_counts":x["compound_candidate_counts"],
+          },sort_keys=True))
+          PY
+
+      - name: Persist content-addressed evidence
+        run: |
+          set -euo pipefail
+          git config user.name "Project Brain GDPval Localizer"
+          git config user.email "project-brain-gdpval-localizer@users.noreply.github.com"
+          git add canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_20261007_V2.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Bind GDPval public 220 composed semantic localization v2"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || { git rebase --abort || true; sleep 2; continue; }
+            git push origin HEAD:main && exit 0
+            sleep 2
+          done
+          exit 1
