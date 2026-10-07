@@ -94,7 +94,7 @@ def verify(beacon:str,docs:Mapping[str,Mapping[str,Any]]|None=None)->dict[str,An
     errors.append("DELEGATION_INTERACTION_MISSING:"+token)
 
   rv=d["recovery_verify"]
-  rtheorem=rv.get("theorem") or {}
+  rtheorem=rv.get("verified") or {}
   if rtheorem.get("scope_complete") is not True:
    errors.append("RECOVERY_NOT_SCOPE_COMPLETE")
   bounds=rtheorem.get("universal_achieved_bounds") or {}
