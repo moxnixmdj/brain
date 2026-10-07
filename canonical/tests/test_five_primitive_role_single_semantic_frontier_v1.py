@@ -11,6 +11,9 @@ EXPECTED={
 def test_exact_five_role_projection():
     out=project()
     assert out["pass"] is True,out
+    assert out["coarse_escape_role_count"]==6
+    assert out["b9_is_conditionally_derivative"] is True
+    assert out["conditional_on_C"] is True
     assert out["primitive_escape_role_count"]==5
     assert set(out["primitive_escape_roles"])==EXPECTED
     assert out["independent_new_implementation_searches_required"]==0
