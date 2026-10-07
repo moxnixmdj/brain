@@ -20,7 +20,7 @@ class Env:
         if command == "verify-bad":
             return Receipt(1, "", "bad")
         if command == "work-heredoc-warning":
-            return Receipt(0, "", "bash: line 22: warning: here-document at line 1 delimited by end-of-file (wanted PYEOF)")
+            return Receipt(0, "bash: line 22: warning: here-document at line 1 delimited by end-of-file (wanted PYEOF)", "")
         if command.startswith("test -s /app/submission/"):
             return Receipt(1, "", "missing")
         return Receipt(0, "ok", "")
