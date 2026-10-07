@@ -1,0 +1,133 @@
+name: Terminal Router Real Exact Symbolic
+
+on:
+  push:
+    branches:
+      - terminal-router-real-exact-symbolic-v1
+    paths:
+      - 'canonical/runtime/certificate_gated_exact_symbolic_deployed_route_v1.py'
+      - 'canonical/runtime/certificate_gated_selected_route_router_v1.py'
+      - 'canonical/tests/test_certificate_gated_exact_symbolic_deployed_route_v1.py'
+      - 'canonical/governance/EXACT_SYMBOLIC_ROUTER_ADMISSION_CERTIFICATE_20261007_V1.json'
+      - 'canonical/governance/CERTIFICATE_GATED_EXACT_SYMBOLIC_DEPLOYED_ROUTE_BINDING_20261007_V1.json'
+      - 'canonical/obsolescence/run_exact_symbolic_v1.py'
+      - 'canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json'
+      - '.github/workflows/terminal-router-real-exact-symbolic-v1.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: terminal-router-real-exact-symbolic-v1-${{ github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  real-selected-route:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - name: Checkout exact branch revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+
+      - name: Install exact runtime dependency
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --quiet 'sympy==1.14.0' pytest
+
+      - name: Run integration tests
+        run: |
+          set -euo pipefail
+          python3 -m pytest -q canonical/tests/test_certificate_gated_exact_symbolic_deployed_route_v1.py
+
+      - name: Execute router-selected accepted route
+        run: |
+          set -euo pipefail
+          python3 canonical/runtime/certificate_gated_exact_symbolic_deployed_route_v1.py > /tmp/router_result.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/router_result.json'))
+          assert x['router_selected'] is True
+          assert x['cell_id']=='OBS-EXACT-SYMBOLIC-001'
+          assert x['route_id']=='accepted.exact_symbolic'
+          assert x['pass_count']==12
+          assert x['fail_count']==0
+          assert x['exact_correctness']==1.0
+          assert x['incremental_spend_usd']==0
+          PY
+
+      - name: Persist remote exact-byte execution receipt
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          GIT_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p canonical/verification
+          ENTRY_BLOB="$(git rev-parse HEAD:canonical/runtime/certificate_gated_exact_symbolic_deployed_route_v1.py)"
+          ROUTER_BLOB="$(git rev-parse HEAD:canonical/runtime/certificate_gated_selected_route_router_v1.py)"
+          RUNNER_BLOB="$(git rev-parse HEAD:canonical/obsolescence/run_exact_symbolic_v1.py)"
+          SUITE_BLOB="$(git rev-parse HEAD:canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json)"
+          ADMISSION_BLOB="$(git rev-parse HEAD:canonical/governance/EXACT_SYMBOLIC_ROUTER_ADMISSION_CERTIFICATE_20261007_V1.json)"
+          ADEQUACY_BLOB="$(git rev-parse HEAD:canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json)"
+          BINDING_BLOB="$(git rev-parse HEAD:canonical/governance/CERTIFICATE_GATED_EXACT_SYMBOLIC_DEPLOYED_ROUTE_BINDING_20261007_V1.json)"
+          OUT="canonical/verification/CERTIFICATE_GATED_EXACT_SYMBOLIC_GITHUB_DEPLOYED_ROUTE_REPLAY_${RUN_ID}_V1.json"
+          python3 - "$OUT" "$ENTRY_BLOB" "$ROUTER_BLOB" "$RUNNER_BLOB" "$SUITE_BLOB" "$ADMISSION_BLOB" "$ADEQUACY_BLOB" "$BINDING_BLOB" <<'PY'
+          import json, os, sys
+          out, entry, router, runner, suite, admission, adequacy, binding = sys.argv[1:]
+          result=json.load(open('/tmp/router_result.json'))
+          doc={
+            "schema":"PROJECT_BRAIN_CERTIFICATE_GATED_EXACT_SYMBOLIC_GITHUB_DEPLOYED_ROUTE_REPLAY_V1",
+            "date":"2026-10-07",
+            "status":"PASS__REMOTE_GITHUB_RUNNER__ROUTER_IN_REAL_ACCEPTED_SELECTED_ROUTE_CALL_CHAIN__ZERO_TERMINAL_CREDIT",
+            "github":{
+              "run_id":os.environ["RUN_ID"],
+              "run_attempt":os.environ["RUN_ATTEMPT"],
+              "git_sha":os.environ["GIT_SHA"]
+            },
+            "exact_blobs":{
+              "deployment_entry":entry,
+              "router_core":router,
+              "selected_runner":runner,
+              "frozen_suite":suite,
+              "positive_admission_certificate":admission,
+              "adequacy_adjudication":adequacy,
+              "deployment_binding":binding
+            },
+            "observed":{
+              "router_selected":result["router_selected"],
+              "cell_id":result["cell_id"],
+              "route_id":result["route_id"],
+              "pass_count":result["pass_count"],
+              "fail_count":result["fail_count"],
+              "exact_correctness":result["exact_correctness"],
+              "context_digest":result["context_digest"]
+            },
+            "truth_effect":{
+              "remote_selected_route_execution_observed":True,
+              "router_is_in_real_selected_route_call_chain":True,
+              "fixed_bound_cell_deployment_seam_closed":True,
+              "global_selected_cover_complete":False,
+              "complete_selected_context_ABC_closed":False,
+              "D_finality_closed":False,
+              "terminal":False
+            },
+            "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0},
+            "hard_nonclaims":[
+              "NO_ADMISSION_OUTSIDE_THE_EXACT_FROZEN_CELL",
+              "NO_GLOBAL_SELECTED_COVER_COMPLETENESS",
+              "NO_GLOBAL_ROUTER_DEPLOYMENT_CLOSURE_FROM_ONE_CELL",
+              "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+            ]
+          }
+          with open(out,'w',encoding='utf-8') as f:
+            json.dump(doc,f,indent=2,sort_keys=True)
+            f.write('\n')
+          PY
+          git config user.name "Project Brain Terminal Router"
+          git config user.email "project-brain-terminal-router@users.noreply.github.com"
+          git add "$OUT"
+          git commit -m "Record real router-selected exact-symbolic deployment receipt"
+          git push origin HEAD:terminal-router-real-exact-symbolic-v1
