@@ -1,0 +1,226 @@
+{
+  "schema": "PROJECT_BRAIN_P3_SCOPE_COMPLETE_CAUSAL_SYNTHESIS_INPUT_V1",
+  "date": "2026-10-07",
+  "components": [
+    {
+      "id": "P3_INFORMATION_SAFE_V3",
+      "kind": "MECHANISM",
+      "requires": [
+        "P3_RAW_NUMERIC_EVIDENCE_SCHEMA",
+        "P3_EXPLICIT_AUDIENCE",
+        "P3_EXPLICIT_REQUIRED_CLAIMS"
+      ],
+      "provides": [
+        "P3_HIDDEN_SUPPORT_LABELS_NOT_CONSUMED",
+        "P3_BOUNDED_NUMERIC_SUPPORT_RELATION",
+        "P3_BOUNDED_AUDIENCE_KIND_RELEVANCE",
+        "P3_BOUNDED_AUDIENCE_CONDITIONED_SELECTION"
+      ],
+      "verified": true,
+      "brain_owned": true,
+      "donor_independent": true,
+      "cost": {
+        "wall_clock": 0,
+        "incremental_spend_usd": 0,
+        "persistent_bits": 0,
+        "risk": 0
+      }
+    },
+    {
+      "id": "BOUNDED_CLAIM_SUPPORT",
+      "kind": "MECHANISM",
+      "requires": [
+        "EXPLICIT_ENTITY_FIELD_VALUE_FACT_GRAMMAR"
+      ],
+      "provides": [
+        "BOUNDED_EXACT_CLAIM_SUPPORT_AND_CONFLICT"
+      ],
+      "verified": true,
+      "brain_owned": true,
+      "donor_independent": true,
+      "cost": {
+        "wall_clock": 0,
+        "incremental_spend_usd": 0,
+        "persistent_bits": 0,
+        "risk": 0
+      }
+    },
+    {
+      "id": "GENERIC_EVIDENCE_CLAIM_RELATION_V1",
+      "kind": "MECHANISM",
+      "requires": [
+        "VERIFIED_GENERIC_V2_EVIDENCE_UNITS"
+      ],
+      "provides": [
+        "EXACT_NORMALIZED_TEXT_SUPPORT",
+        "EXPLICIT_DECIMAL_RELATION"
+      ],
+      "verified": true,
+      "brain_owned": true,
+      "donor_independent": true,
+      "cost": {
+        "wall_clock": 0,
+        "incremental_spend_usd": 0,
+        "persistent_bits": 0,
+        "risk": 0
+      }
+    },
+    {
+      "id": "M4_DECISION_ROLE_RELEVANCE_001",
+      "kind": "MECHANISM",
+      "requires": [
+        "EXPLICIT_BINARY_COMPARISON_GRAMMAR"
+      ],
+      "provides": [
+        "BOUNDED_DECISION_ROLE_RELEVANCE"
+      ],
+      "verified": true,
+      "brain_owned": true,
+      "donor_independent": true,
+      "cost": {
+        "wall_clock": 0,
+        "incremental_spend_usd": 0,
+        "persistent_bits": 0,
+        "risk": 0
+      }
+    },
+    {
+      "id": "SYNTHESIS_EXPLICIT_UNCERTAINTY_TOP_LAW_V3",
+      "kind": "MECHANISM",
+      "requires": [
+        "SYNTHESIS_V2_MEMBERSHIP",
+        "SOUND_COMPLETE_REQUIRED_UNCERTAINTY_BINDING"
+      ],
+      "provides": [
+        "P3_AUDIENCE_ADAPTATION_ADEQUACY_ON_V3_CLASS",
+        "P3_WHOLE_CONTEXT_DOMINANCE_ON_V3_CLASS"
+      ],
+      "verified": true,
+      "brain_owned": true,
+      "donor_independent": true,
+      "cost": {
+        "wall_clock": 0,
+        "incremental_spend_usd": 0,
+        "persistent_bits": 0,
+        "risk": 0
+      }
+    },
+    {
+      "id": "PROOF_CARRYING_SEMANTIC_REFINEMENT_V6",
+      "kind": "VERIFIER",
+      "requires": [
+        "FORMAL_SOURCE_CONSTRAINTS",
+        "AUTHENTICATED_POLICY_ADEQUACY_BINDING"
+      ],
+      "provides": [
+        "COMMON_POLICY_CERTIFIED_ON_SUPPORTED_SEMANTIC_FRAGMENT"
+      ],
+      "verified": true,
+      "brain_owned": true,
+      "donor_independent": true,
+      "cost": {
+        "wall_clock": 0,
+        "incremental_spend_usd": 0,
+        "persistent_bits": 0,
+        "risk": 0
+      }
+    },
+    {
+      "id": "SOURCE_POSITIVE_ADEQUACY_DB_ADMISSION_V1",
+      "kind": "GATE",
+      "requires": [
+        "COMMON_POLICY_CERTIFIED_ON_SUPPORTED_SEMANTIC_FRAGMENT",
+        "CELL_SCOPE_SOUND",
+        "BRAIN_OWNED_POLICY",
+        "DEPLOYED_ROUTE_EXACT",
+        "RESOURCE_BOUND_PROVED"
+      ],
+      "provides": [
+        "SOUND_DB_ADMISSION_ON_SUPPORTED_CELL"
+      ],
+      "verified": true,
+      "brain_owned": true,
+      "donor_independent": true,
+      "cost": {
+        "wall_clock": 0,
+        "incremental_spend_usd": 0,
+        "persistent_bits": 0,
+        "risk": 0
+      }
+    },
+    {
+      "id": "SYMBOLIC_ADMISSION_PREDICATE_SUCCESSOR_V1",
+      "kind": "GATE",
+      "requires": [
+        "INDEPENDENT_SYMBOLIC_ADMISSION_SOUNDNESS_RECEIPT"
+      ],
+      "provides": [
+        "EXECUTABLE_SYMBOLIC_ADMISSION_REGION"
+      ],
+      "verified": true,
+      "brain_owned": true,
+      "donor_independent": true,
+      "cost": {
+        "wall_clock": 0,
+        "incremental_spend_usd": 0,
+        "persistent_bits": 0,
+        "risk": 0
+      }
+    }
+  ],
+  "initial_facts": [
+    "P3_RAW_NUMERIC_EVIDENCE_SCHEMA",
+    "P3_EXPLICIT_AUDIENCE",
+    "P3_EXPLICIT_REQUIRED_CLAIMS",
+    "EXPLICIT_ENTITY_FIELD_VALUE_FACT_GRAMMAR",
+    "VERIFIED_GENERIC_V2_EVIDENCE_UNITS",
+    "EXPLICIT_BINARY_COMPARISON_GRAMMAR",
+    "BRAIN_OWNED_POLICY",
+    "DEPLOYED_ROUTE_EXACT",
+    "RESOURCE_BOUND_PROVED"
+  ],
+  "target": {
+    "required_effects": [
+      "P3_SCOPE_COMPLETE_SUPPORT_RELEVANCE_BINDING",
+      "P3_SCOPE_COMPLETE_AUDIENCE_CONDITIONED_POLICY_ADEQUACY",
+      "P3_INFORMATION_BOUNDARY_SOUND",
+      "P3_WHOLE_SYNTHESIS_CONTEXT_DOMINANCE"
+    ],
+    "forbidden_effects": [],
+    "max_components": 8,
+    "top_k": 8
+  },
+  "counterexamples": [
+    {
+      "id": "P3_AUDIENCE_ONLY_COUNTERFACTUAL",
+      "trigger_all": [
+        "P3_EXPLICIT_AUDIENCE"
+      ],
+      "repair_any": [
+        "P3_SCOPE_COMPLETE_AUDIENCE_CONDITIONED_POLICY_ADEQUACY"
+      ]
+    },
+    {
+      "id": "P3_HIDDEN_SUPPORT_RELEVANCE_BOUNDARY",
+      "trigger_all": [
+        "P3_HIDDEN_SUPPORT_LABELS_NOT_CONSUMED"
+      ],
+      "repair_any": [
+        "P3_INFORMATION_BOUNDARY_SOUND",
+        "P3_SCOPE_COMPLETE_SUPPORT_RELEVANCE_BINDING"
+      ]
+    },
+    {
+      "id": "P3_SCOPE_OUTSIDE_BOUNDED_GRAMMARS",
+      "trigger_all": [
+        "BOUNDED_EXACT_CLAIM_SUPPORT_AND_CONFLICT",
+        "EXACT_NORMALIZED_TEXT_SUPPORT",
+        "BOUNDED_DECISION_ROLE_RELEVANCE"
+      ],
+      "repair_any": [
+        "P3_SCOPE_COMPLETE_SUPPORT_RELEVANCE_BINDING"
+      ]
+    }
+  ],
+  "allow_candidate_components": false
+}
