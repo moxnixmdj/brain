@@ -1,4 +1,5 @@
 name: Buildkite Bridge Probe
+# retrigger-after-registration
 
 on:
   push:
