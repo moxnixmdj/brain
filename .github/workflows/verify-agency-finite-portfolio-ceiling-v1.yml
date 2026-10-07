@@ -12,7 +12,10 @@ on:
       - 'canonical/runtime/agency_finite_portfolio_generator_v1.py'
       - 'canonical/runtime/agency_finite_portfolio_ceiling_v1.py'
       - 'canonical/tests/test_agency_finite_portfolio_ceiling_v1.py'
+      - '.github/workflows/verify-agency-finite-portfolio-ceiling-v1.yml'
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -24,7 +27,12 @@ jobs:
           python-version: '3.11'
       - name: Run exact byte-bound agency ceiling proof
         run: |
-          python -m pytest canonical/tests/test_agency_finite_portfolio_ceiling_v1.py -q
+          python - <<'PY'
+          from canonical.tests import test_agency_finite_portfolio_ceiling_v1 as t
+          t.test_generator_is_six_dimension_exact_cover()
+          t.test_exact_bound_repository_proves_agency_portfolio_ceiling()
+          print("AGENCY_FINITE_PORTFOLIO_TESTS_PASS")
+          PY
           python - <<'PY'
           import json, pathlib
           from canonical.runtime.agency_finite_portfolio_ceiling_v1 import verify
