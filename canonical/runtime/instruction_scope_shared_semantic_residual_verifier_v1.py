@@ -13,7 +13,7 @@ EXPECTED={
 }
 def blob(p:Path)->str:
  d=p.read_bytes()
- return hashlib.sha1(b"blob "+str(len(d)).encode()+b"\\0"+d).hexdigest()
+ return hashlib.sha1(b"blob "+str(len(d)).encode()+bytes([0])+d).hexdigest()
 def load(root:Path,rel:str):
  return json.loads((root/rel).read_text(encoding="utf-8"))
 def evaluate(v16,pstar,five,m0,gov):
