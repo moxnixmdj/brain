@@ -6,7 +6,7 @@
   "source_bindings": {
     "stable_pointer": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-      "git_blob_sha": "f2f4884d7c2e855fe5e6cc01b55b83b4bab82054"
+      "git_blob_sha": "dc5e4bbee47dcc069b4e83eea827633baf53356d"
     },
     "selected_discriminator_truth_repair": {
       "path": "canonical/governance/SHARED_SEMANTIC_TAIL_SELECTED_DISCRIMINATOR_TRUTH_REPAIR_20261007_V1.json",
