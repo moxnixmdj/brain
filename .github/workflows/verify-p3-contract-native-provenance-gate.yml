@@ -1,0 +1,42 @@
+name: Verify P3 contract-native provenance gate
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/contract_native_brain_candidate.py
+      - canonical/runtime/contract_native_proof_suites.py
+      - canonical/runtime/p3_contract_native_provenance_gate_verifier_v1.py
+      - canonical/tests/test_contract_native_brain_candidate.py
+      - canonical/tests/test_contract_native_proof_suites.py
+      - canonical/tests/test_p3_contract_native_provenance_gate_verifier_v1.py
+      - canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json
+      - .github/workflows/verify-p3-contract-native-provenance-gate.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/contract_native_brain_candidate.py
+      - canonical/runtime/contract_native_proof_suites.py
+      - canonical/runtime/p3_contract_native_provenance_gate_verifier_v1.py
+      - canonical/tests/test_contract_native_brain_candidate.py
+      - canonical/tests/test_contract_native_proof_suites.py
+      - canonical/tests/test_p3_contract_native_provenance_gate_verifier_v1.py
+      - canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json
+      - .github/workflows/verify-p3-contract-native-provenance-gate.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: |
+          PYTHONPATH=. python -m unittest -v \
+            canonical.tests.test_contract_native_brain_candidate \
+            canonical.tests.test_contract_native_proof_suites \
+            canonical.tests.test_p3_contract_native_provenance_gate_verifier_v1 \
+            canonical.tests.test_terminal_parent_portfolio_runner_v1
+      - run: PYTHONPATH=. python canonical/runtime/p3_contract_native_provenance_gate_verifier_v1.py
