@@ -1239,7 +1239,7 @@
   },
   "terminal_execution_root": {
     "path": "canonical/governance/TERMINAL_EXECUTION_ROOT_20261007_V1.json",
-    "git_blob_sha": "0f3ca4bbe761fe3071da5dfab5f593b184d8273d",
+    "git_blob_sha": "1dad167f92faaefc8026586c1078cdbe37c82575",
     "runtime_gate": {
       "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
       "git_blob_sha": "7c7e0c34cc599c7114fb83421307db2433e2b269"
