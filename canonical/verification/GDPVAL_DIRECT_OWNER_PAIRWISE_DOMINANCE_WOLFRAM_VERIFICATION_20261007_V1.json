@@ -1,0 +1,17 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_DIRECT_OWNER_PAIRWISE_DOMINANCE_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_LOGIC_PASS__ZERO_CREDIT",
+  "subject_sha":"a89d0eb65c8f79ae236b0570e8f74e6118c69f48",
+  "verified":{
+    "if_all_three_bound_judges_are_noninferior_then_any_one_selected_from_that_panel_is_noninferior":true,
+    "each_individual_selector_implication_is_a_tautology":true,
+    "one_judge_opus_win_breaks_the_universal_premise":true
+  },
+  "boundary":[
+    "NO_CLAIM_NUMERIC_CROWD_BT_ELO_REPRODUCTION",
+    "NO_CLAIM_PAIRWISE_RECEIPTS_CURRENTLY_EXIST",
+    "NO_CLAIM_EXACT_OWNER_PROMPT_OR_ZERO_SPEND_PANEL_ACCESS_IS_BOUND"
+  ],
+  "terminal_credit_delta":0
+}
