@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_C0_CONTROL_C2_V2_SPRITE_REPLAY_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__25_OF_25__GITHUB_ACTIONS_PRESTEP_FAILURE_CLASSIFIED_INFRASTRUCTURE__ZERO_CREDIT",
+  "subject": {
+    "github_pr": 2802,
+    "github_actions_run_id": 37567540245,
+    "github_actions_job_id": 112618587219,
+    "github_actions_observation": {
+      "status": "completed",
+      "conclusion": "failure",
+      "recorded_steps": 0,
+      "log_blob_available": false,
+      "classification": "PRE_STEP_INFRASTRUCTURE_FAILURE__NOT_TEST_EXECUTION_FAILURE"
+    }
+  },
+  "exact_blobs": {
+    "canonical/runtime/synthesis_bound_claim_guard_v2.py": "6d342f37140c1790485366dada18e32d5f7aa8d0",
+    "canonical/tests/test_synthesis_bound_claim_guard_v2.py": "3e5c4ec8b391388a28554769ef38aa296471db0e",
+    "canonical/runtime/synthesis_grounded_expression_ir_v1.py": "0709b7d43a069eaa9eb3240df28789a9107a36db",
+    "canonical/tests/test_synthesis_grounded_expression_ir_v1.py": "f28e5648e7327fdd6cba54c602016485e0eb66c5"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "working_directory": "/home/sprite/synthesis_c0_c2_v2_replay3",
+    "network_or_model_dependency": false
+  },
+  "result": {
+    "blob_identity_pass": true,
+    "tests_run": 25,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pass": true,
+    "suites": [
+      "canonical.tests.test_synthesis_bound_claim_guard_v2",
+      "canonical.tests.test_synthesis_grounded_expression_ir_v1"
+    ]
+  },
+  "verified_guarantees": {
+    "c0_control_v2_fail_closed_for_missing_or_invalid_required_support": true,
+    "c0_control_v2_preserves_claim_evidence_provenance_and_conflict_bindings": true,
+    "c2_preserves_all_admitted_selected_items_exactly_once": true,
+    "c2_preserves_selected_order_and_uncertainty_conflict_state": true,
+    "c2_preserves_unambiguous_provenance_binding": true,
+    "c2_rejects_unknown_constraints": true,
+    "c2_rejects_infeasible_item_or_character_budget_without_drop_or_truncation": true,
+    "exact_runtime_and_test_blob_bindings_matched": true
+  },
+  "consequence": {
+    "implementation_or_mechanical_blocker_removed_for": [
+      "SYNTHESIS_BOUND_CLAIM_GUARD_V2_CONTROL_SLICE",
+      "SYNTHESIS_C2_GROUNDED_EXPRESSION_AND_CONSTRAINT_REALIZATION_BOUNDED_ROUTE"
+    ],
+    "semantic_upstream_premises_still_required": true,
+    "synthesis_family_closed": false,
+    "shared_semantic_tail_closed": false,
+    "U_empty_proved": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_SYNTHESIS_MATCHED_QUALITY_NONINFERIORITY_IS_CLOSED.",
+    "NO_CLAIM_S_SUPPORT_RELEVANCE_OR_S_AUDIENCE_IS_CLOSED.",
+    "NO_CLAIM_SHARED_SELECTED_DISCRIMINATORS_ARE_BOUND_FOR_ALL_SYNTHESIS_CONTEXTS.",
+    "NO_CLAIM_U_IS_EMPTY.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
