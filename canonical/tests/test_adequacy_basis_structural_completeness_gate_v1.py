@@ -60,8 +60,8 @@ def _manifest():
         "terminal_accounting_atom_ids": [a["terminal_consequence"]],
         "policies": [{
             "policy_id": "P",
-            "basis_atom_ids": policy_atoms,
-            "policy_condition_atom_ids": policy_atoms,
+            "basis_atom_ids": list(policy_atoms),
+            "policy_condition_atom_ids": list(policy_atoms),
             "unconditional_discharges": [],
         }],
     }
