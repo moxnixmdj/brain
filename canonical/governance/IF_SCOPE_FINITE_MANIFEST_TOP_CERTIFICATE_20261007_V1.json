@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_IF_SCOPE_FINITE_MANIFEST_TOP_CERTIFICATE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SOUND_BOUNDED_DB_REGION__EXACT_FROZEN_160_CASE_MANIFEST_TOP_SUPPORT__POPULATION_SEMANTICS_UNRESOLVED__ZERO_GLOBAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+  "exact_scope": {
+    "semantics": "FINITE_DECLARED_SCOPE_ONLY",
+    "acceptance_object": "EXACT_FROZEN_160_CASE_MANIFEST_GENERATED_FROM_PRECOMMITTED_BEACON_AND_FIVE_FROZEN_NORMALIZED_IF_ATOMS",
+    "beacon_commit": "799ba5bc359a5935eadaf93f8bba437bc79e5e98",
+    "precommit": {
+      "path": "canonical/governance/IF_SCOPE_FINITE_WAVE_PRECOMMIT_20261007_V1.json",
+      "git_blob_sha": "bdae02fc05339fb9a8709c26a8e448c475a4006f"
+    },
+    "harness": {
+      "path": "canonical/runtime/if_scope_finite_wave_v1.py",
+      "git_blob_sha": "9f31421b9d62f11bf99f6dbeafb104d8621ca5ee"
+    },
+    "case_count": 160,
+    "cases_per_kind": 32,
+    "normalized_atom_count": 5,
+    "case_manifest_sha256": "4c46526bec00b8f4f31f4ac21400d74e6d4a0c3be54bcab8fe535bb7efba5d0b"
+  },
+  "brain_result": {
+    "success_count": 160,
+    "failure_count": 0,
+    "success_fraction_exact": "1",
+    "all_cases_pass": true,
+    "by_kind": {
+      "MULTI_CONSTRAINT": "32/32",
+      "AUTHORIZATION_BOUNDARY": "32/32",
+      "ROUTINE_AMBIGUITY": "32/32",
+      "REQUIREMENT_CHANGE": "32/32",
+      "EXPLICIT_ABSTENTION": "32/32"
+    },
+    "coverage_complete": true,
+    "case_isolation_or_reset_equivalent": true,
+    "immutable_base_state_sha256": "480f47582286898f07bf5cef4af5f3a44f503b75350dc22e9491c2f933c128ed",
+    "opus_residual_case_count": 0,
+    "opus_cases_consumed": 0
+  },
+  "independent_report_audit": {
+    "carrier": "Sprites:brain-h100-independent-replay-v1",
+    "report_sha256": "8c6dfeec5c9665beb1df8fa59c85a5289069e491cae7cc78726d7cc95bc5bf73",
+    "errors": [],
+    "unique_case_count": 160,
+    "unique_namespace_count": 160,
+    "authority_denied_route_touches": 0,
+    "cross_case_prior_inputs": 0
+  },
+  "inherited_verified_logic": {
+    "brain_first": {
+      "path": "canonical/verification/BRAIN_FIRST_DIFFERENTIAL_PREWAVE_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
+      "consequence": "IF_BRAIN_FAILURE_SET_IS_EMPTY__EXACT_OPUS_EXECUTION_IS_UNNECESSARY_FOR_FINITE_BINARY_SUCCESS_SET_INCLUSION"
+    },
+    "finite_scope_reducer": {
+      "path": "canonical/verification/MATCHED_SUCCESS_FINITE_SCOPE_REDUCER_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
+      "consequence": "ON_A_COMPLETE_FINITE_ACCEPTANCE_UNIVERSE__R_BRAIN_1_IS_AT_THE_OBJECTIVE_TOP_AND_CANNOT_BE_BEATEN"
+    },
+    "portfolio_semantics_disjunction": {
+      "path": "canonical/verification/MATCHED_PORTFOLIO_SCOPE_SEMANTICS_DISJUNCTION_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "consequence": "THE_TOP_SUPPORT_CERTIFICATE_IS_VALID_ONLY_FOR_FINITE_DECLARED_SCOPE__IT_MUST_NOT_BE_EXTRAPOLATED_TO_AN_UNBOUND_LARGER_POPULATION"
+    }
+  },
+  "db_region": {
+    "id": "IF_SCOPE_BOUNDARY_FROZEN_160_FINITE_MANIFEST",
+    "kind": "SELECTED_CONTEXT_EXACT_FINITE_MANIFEST_TOP_LAW_CELL",
+    "brain_value": "1",
+    "objective_top": "1",
+    "target_query_required": false,
+    "sound_subtraction_from_U": true,
+    "population_generalization": false
+  },
+  "remaining_open": {
+    "whole_IF_scope_boundary_predicate_closed": false,
+    "reason": "MATCHED_PORTFOLIO_SCOPE_SEMANTICS_REMAINS_UNBOUND_BETWEEN_FINITE_DECLARED_SCOPE_AND_POPULATION_INFERENCE",
+    "if_population_inference_intended": "REQUIRES_PREDECLARED_STATISTICAL_REDUCER_OR_STRONGER_STRUCTURAL_EXHAUSTIVE_CERTIFICATE",
+    "livebench_IF_atomic_predicate_state": "ALREADY_SEPARATELY_PROVED",
+    "literal_zero_authority_requirement_state": "ALREADY_TRUTH_REPAIRED_AS_NOT_SEPARATELY_NECESSARY_UNLESS_L2_BOUND"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_opus_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_WHOLE_IF_SCOPE_BOUNDARY_PREDICATE_CLOSED",
+    "NO_POPULATION_INFERENCE_FROM_160_OF_160",
+    "NO_CLAIM_INSTRUCTION_FOLLOWING_FAMILY_CLOSED",
+    "NO_CLAIM_U_EMPTY",
+    "NO_D_FINALITY_OR_TERMINAL_CREDIT"
+  ]
+}
