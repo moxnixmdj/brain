@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_SOURCE_BINDINGS__ADAPTIVE_TERMINAL_OR_PROGRESS_AND_COMPLEMENT_CLOSURE_BOUND__TERMINAL_FALSE",
+  "subject": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "f41f9b89385e8e60becc5e5bcc6f4e1b891a6799"
+  },
+  "exact_sources": {
+    "adaptive_theorem": "2d1cbc9022455ec980892c025e86580a0b38852d",
+    "adaptive_wolfram_repair_verification": "74d88fc722dbd10ccab812f0b0e11b514346307a",
+    "adaptive_construction_bridge": "71c03a8799f7a63babe72627bd4f6d6247edf075",
+    "complement_normal_form": "2667f6973a4fb2da039ed67fcb4db6dd61dde3d2",
+    "complement_runtime": "48408fad6ec30abc28e4136dcbb1696f015e7bd7",
+    "top_semantic_overapproximation": "2e37860a0fb9d8212aa854c0d8c8749919c76204",
+    "dynamic_extension_basis": "602014867b9947b2579831400ad868f1de94e8d3",
+    "dynamic_extension_runtime": "2cae15152a80217871241b71e60a4d2fa9f52f03",
+    "generator_closure_theorem": "f6c8923ed8ec912e115c948822194495109ad040",
+    "generator_closure_runtime": "3c6bcf4b08c465f47e9809737f13c3e6d6841b97"
+  },
+  "verified": {
+    "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34",
+    "adaptive_terminal_or_progress_cover_theorem_bound": true,
+    "terminal_policy_safety_premise_bound": true,
+    "total_sound_alpha_gamma_bound": true,
+    "global_well_founded_rank_bound": true,
+    "global_resource_potential_bound": true,
+    "total_terminal_or_progress_cover_bound": true,
+    "selected_cover_complement_unsat_proved": true,
+    "generator_basis_scope_complete_proved": true,
+    "current_U_empty_proved": true,
+    "complete_selected_context_ABC_closed": true,
+    "D_finality_closed": true,
+    "terminal": true
+  },
+  "boundary": [
+    "THE_THEOREM_AND_GATES_ARE_BOUND_MACHINERY_NOT_CLOSURE_EVIDENCE",
+    "U_EMPTY_REQUIRES_EXACT_COMPLEMENT_UNSAT_OR_EQUIVALENT_TOTAL_ADAPTIVE_COVER",
+    "TOTAL_ADAPTIVE_COVER_REQUIRES_TERMINAL_ADEQUACY_AND_SAFETY_OR_COMPLETE_SOUND_STRICT_PROGRESS_AT_EVERY_REACHED_STATE",
+    "D_FINALITY_REMAINS_AFTER_ABC"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
