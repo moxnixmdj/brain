@@ -1,7 +1,7 @@
 {
-  "schema": "PROJECT_BRAIN_FROZEN_17_ACCEPTANCE_REGIME_EXHAUSTIVE_CLASSIFICATION_V1",
+  "schema": "PROJECT_BRAIN_FROZEN_15_ACCEPTANCE_REGIME_EXHAUSTIVE_CLASSIFICATION_V1",
   "date": "2026-10-07",
-  "status": "ACTIVE_SCOPE_COMPLETE_CLASSIFICATION_OF_CURRENT_17_INDEPENDENT_OPEN_ACCEPTANCE_OBLIGATIONS__SYNTHESIS_METRIC_IDENTITY_DEMOTED__ZERO_TERMINAL_CREDIT",
+  "status": "ACTIVE_SCOPE_COMPLETE_CLASSIFICATION_OF_CURRENT_15_INDEPENDENT_OPEN_ACCEPTANCE_OBLIGATIONS__AGENCY_ABSOLUTE_TOP_LAW_PROMOTED__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "source_bindings": {
     "frozen_predicate_registry": {
@@ -10,7 +10,7 @@
     },
     "proof_shape_quotient": {
       "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
-      "git_blob_sha": "e31382ec9bc54127d3579a5277091cfdc54cca66"
+      "git_blob_sha": "4d2b042153dbe367ab29f5f054f4b7353dfd663f"
     },
     "candidate_O_Q_quotient": {
       "path": "canonical/governance/CURRENT_U_ACCEPTANCE_REGIME_QUOTIENT_20261007_V1.json",
@@ -43,16 +43,6 @@
       "obligation": "CODING_CURSORBENCH_GE_57_8",
       "regime": "O_OBJECTIVE_ACCEPTANCE",
       "basis": "PUBLIC_FIXED_BAR"
-    },
-    {
-      "obligation": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
-      "regime": "O_OBJECTIVE_ACCEPTANCE",
-      "basis": "MATCHED_TERMINAL_SUCCESS_BOUND"
-    },
-    {
-      "obligation": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
-      "regime": "O_OBJECTIVE_ACCEPTANCE",
-      "basis": "DECLARED_SAFETY_INVALID_ACTION_FAILURE_AND_CONFLICT_INVARIANTS"
     },
     {
       "obligation": "PROWORK_GDPVAL_GE_1846",
@@ -116,8 +106,8 @@
     }
   ],
   "counts": {
-    "independent_open_obligations": 17,
-    "O_OBJECTIVE_ACCEPTANCE": 15,
+    "independent_open_obligations": 15,
+    "O_OBJECTIVE_ACCEPTANCE": 13,
     "Q_QUALITATIVE_RELATIVE_ORDER": 2,
     "mixed": 0,
     "unclassified": 0
