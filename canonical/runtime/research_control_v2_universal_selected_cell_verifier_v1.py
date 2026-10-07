@@ -12,15 +12,16 @@ ROOT = Path(__file__).resolve().parents[2]
 GOV = "canonical/governance/RESEARCH_CONTROL_V2_UNIVERSAL_SELECTED_CELL_20261007_V1.json"
 
 EXPECTED = {
-    "canonical/action_intents/ACTION_INTENT_RESEARCH_CONTROL_V2_TOTALITY_20261007_V1.json": "28d9172f66375f98c2bc2bb3642018eb4003cfd6",
+    "canonical/action_intents/ACTION_INTENT_RESEARCH_CONTROL_V2_TOTALITY_20261007_V1.json": "2150ae98b2367e0a93b2904f41fe22c99df054d6",
     "canonical/runtime/research_control_information_safe_proof.py": "16c47efee0e0e38f479163d1285d7079798efdaf",
     "canonical/verification/RESEARCH_CONTROL_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "860cd929e3b7fdab6befec5bf052479dc4ae41ac",
     "canonical/runtime/research_control_information_safe_candidate.py": "cd6bf6e4163bbba64878b856766b1af4372d68bc",
     "canonical/runtime/research_control_information_safe_proof_v2.py": "a8d41a84b0368d0a9467173856912cc48742dcf1",
     "canonical/tests/test_research_control_information_safe_v2.py": "f2348d1837f05c950ca1c9293698060d150e9b20",
     "canonical/governance/TERMINAL_NOW_V18_INSTANT_CLOSURE_ROUTE_FALSIFICATION_20261007_V1.json": "794d1a6df9b2f062e0dee51d890a304a3dd04746",
-    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json": "c1bc4543860be08f9014f69a212ba2222d8dba7c",
-    GOV: "650544c9ac14202fc597167046becc2341c1ee51",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json": "f9f095de0d64ff11ff2e176728123ea54875e316",
+    "canonical/governance/U_EXHAUSTION_SCOPE_COMPLETE_CERTIFICATE_LEVERAGE_GUARD_20261007_V1.json": "b819801f7f7d19be843e5fdc3b7646bc2b1e749d",
+    GOV: "29048c2665f7cb619a22b76f0bf54d9534bba520",
 }
 
 
@@ -100,6 +101,10 @@ def verify():
         errors.append("SELECTED_CELL_SCOPE_NOT_COMPLETE")
     if selected.get("direct_e2e") is not True:
         errors.append("DIRECT_E2E_NOT_ASSERTED")
+    if selected.get("scope_complete_class_closure") is not True:
+        errors.append("SCOPE_COMPLETE_CLASS_CLOSURE_NOT_BOUND")
+    if selected.get("progress_kind") != "REUSABLE_PARAMETERIZED_LAW_OVER_THE_ENTIRE_EXACT_V2_GENERATOR_CLASS__NOT_FINITE_POINT_CELL_ACCUMULATION":
+        errors.append("ANTI_CHURN_PROGRESS_KIND_INVALID")
     if selected.get("open_world_research_scope_complete") is not False:
         errors.append("OPEN_WORLD_OVERCLAIM")
 
@@ -119,6 +124,8 @@ def verify():
         errors.append("UNKNOWN_DOMAIN_OVERCLAIM")
     if consequence.get("research_control_open_world_closed") is not False:
         errors.append("RESEARCH_CONTROL_OVERCLAIM")
+    if consequence.get("u_exhaustion_guard_compliance") != "LEGAL__CLOSES_A_PROVED_SCOPE_COMPLETE_PARAMETERIZED_RESIDUAL_CLASS__DOES_NOT_USE_CERTIFICATE_COUNT_AS_PROGRESS_PROXY":
+        errors.append("U_EXHAUSTION_GUARD_NOT_SATISFIED")
 
     accounting = gov.get("accounting") or {}
     for key in (
