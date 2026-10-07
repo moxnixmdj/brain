@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_LITE_T2_FALSIFICATION_PRECOMMIT_V1",
+  "date": "2026-10-07",
+  "status": "PRECOMMITTED_BEFORE_TASK_PROMPT_OR_SOURCE_FILE_REVIEW__ZERO_TERMINAL_CREDIT",
+  "objective": "Falsify the current Brain professional-work/artifact route cheaply on the public AA-Briefcase-Lite Market Model task before any private or official AA-Briefcase evidence.",
+  "benchmark": {
+    "repository": "ArtificialAnalysis/AA-Briefcase-Lite",
+    "public_status": "PUBLIC_DEMONSTRATIVE_SCENARIO_ONLY__NOT_PART_OF_OFFICIAL_AA_BRIEFCASE_RESULTS",
+    "license": "Apache-2.0",
+    "selected_task_id": "w1_t2",
+    "selected_task_name": "Market Model"
+  },
+  "selection_rule": "TASK_SELECTED_BEFORE_READING_THE_TASK_PROMPT_SOURCE_FILES_GRADING_CHECKS_OR_MODEL_SUBMISSIONS__SELECTED_BECAUSE_IT_EXERCISES_XLSX_PROFESSIONAL_ANALYSIS_AND_ARTIFACT_QUALITY_ON_THE_CURRENT_SHARED_AA_BRIEFCASE_RESIDUAL.",
+  "contamination_policy": {
+    "before_output_freeze": {
+      "allowed": [
+        "SELECTED_TASK_PROMPT",
+        "PUBLIC_SOURCE_FILES_REQUIRED_BY_SELECTED_TASK",
+        "PUBLIC_SCENARIO_CONTEXT",
+        "BRAIN_OWNED_TOOLS_SKILLS_AND_EXISTING_CANONICAL_CONFIGURATION"
+      ],
+      "forbidden": [
+        "PUBLIC_MODEL_SUBMISSIONS_FOR_W1_T2",
+        "JUDGE_OUTPUTS_FOR_W1_T2",
+        "TASK_SPECIFIC_GRADING_CHECKS_OR_EVIDENCE_CHAINS_BEYOND_VISIBLE_TASK_REQUIREMENTS",
+        "POST_HOC_TASK_SPECIFIC_PATCHES_DERIVED_FROM_GRADING"
+      ]
+    },
+    "after_output_freeze": {
+      "allowed": [
+        "PUBLIC_GRADING_CHECKS",
+        "PUBLIC_JUDGE_PROMPTS",
+        "PUBLIC_REFERENCE_MODEL_SUBMISSIONS_FOR_DIAGNOSTIC_COMPARISON"
+      ],
+      "rule": "POST_FREEZE_INFORMATION_MAY_DIAGNOSE_FAILURES_BUT_CANNOT_BE_USED_TO_REPAIR_AND_RECOUNT_THE_SAME_TASK_AS_FRESH."
+    }
+  },
+  "execution": {
+    "cognition_substrate": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION__ZERO_INCREMENTAL",
+    "saved_route": "BRAIN_PROFESSIONAL_WORK_STIRRUP_CONFIGURATION_PLUS_BRAIN_OWNED_ARTIFACT_TOOLS_WHERE_APPLICABLE",
+    "required_deliverable": "THE_EXACT_PUBLIC_W1_T2_DELIVERABLE_DEFINED_BY_THE_TASK_AFTER_PROMPT_OPEN",
+    "output_freeze_required_before_grading": true
+  },
+  "acceptance_for_this_falsification": {
+    "terminal_credit": 0,
+    "pass_meaning": "NO_SYSTEMIC_ROUTE_FAILURE_ON_THE_PUBLIC_DEMONSTRATIVE_TASK__NOT_AA_BRIEFCASE_PARITY",
+    "failure_meaning": "CAUSALLY_LOCALIZED_ROUTE_OR_TOOLING_DEFECT_DISCOVERED_CHEAPLY_BEFORE_PRIVATE_OR_OFFICIAL_EVIDENCE"
+  },
+  "hard_nonclaims": [
+    "NO_OFFICIAL_AA_BRIEFCASE_EVIDENCE",
+    "NO_AA_BRIEFCASE_ELO_INFERENCE",
+    "NO_ARTIFACT_OR_PROFESSIONAL_WORK_FAMILY_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_terminal_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
