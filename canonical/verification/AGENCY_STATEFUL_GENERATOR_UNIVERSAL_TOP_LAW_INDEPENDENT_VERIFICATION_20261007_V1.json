@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_STATEFUL_GENERATOR_UNIVERSAL_TOP_LAW_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_COMPOSITION_AND_EXISTING_SPRITE_SOURCE_CLOSURE_PASS__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/AGENCY_STATEFUL_GENERATOR_UNIVERSAL_TOP_LAW_CELL_20261007_V1.json",
+    "git_blob_sha": "d0f65c08d84777f4fdb24e5dfa74bdd1acbcfc22",
+    "branch": "abc/agency-stateful-universal-cell-v1"
+  },
+  "exact_source_bindings": {
+    "canonical/runtime/matched_agency_stateful_case_v1.py": "be221c98b73af8552bcfd8c8ac61bd9a38295f0d",
+    "canonical/runtime/capability_planner.py": "629766f8a1194fd298e0809b64a5e9c5a39fa3ea",
+    "canonical/runtime/same_identity_supervisor.py": "1fb03bd898ee673521799ff6dee6500e246feef6",
+    "canonical/runtime/continuous_obs_runtime.py": "e2533a0335c4f6824b9542944d4682aeefb36b2b",
+    "canonical/runtime/browser_state_information_safe_candidate.py": "8acf61f21a15a0d3b3e0e5735ebb80e20393e405",
+    "canonical/runtime/browser_state_information_safe_proof.py": "3723d3233d6058f0a43491e4654a21490f992d1e",
+    "canonical/runtime/tool_discovery_information_safe_candidate.py": "64c02edd568d95ec5ed54b7b8122183ce5b82e17",
+    "canonical/runtime/tool_discovery_information_safe_proof_v2.py": "5e8a953864e13ec76768c3e8920644107c65a644",
+    "canonical/runtime/delegation_whole_scope_candidate_v2.py": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py": "928466401b36e4f3b09c517950cc050432a0616f"
+  },
+  "independent_existing_replay": {
+    "path": "canonical/verification/MATCHED_AGENCY_FRESH_COMPONENT_SEEDS_SPRITE_VERIFICATION_20261007_V1.json",
+    "git_blob_sha": "a60f48fbaad2b399c5504b3b6d9e30e2561aa567",
+    "result": "PASS_5_OF_5",
+    "verified": [
+      "CASE_TOKEN_NOT_EMBEDDED_IN_CHILD_PROGRAM",
+      "FRESH_TOKENS_CHANGE_COMPONENT_CASE_IDS_WITHOUT_CHANGING_PREDECLARED_CLASSES",
+      "STATEFUL_AGENCY_END_TO_END_CHECKPOINT_RELAUNCH_PASS",
+      "OBJECTIVE_TRACE_PROVES_THREE_TARGET_SEMANTICS",
+      "SYNTHETIC_CONTINUOUS_OBS_CONTEXT_PASSES_CURRENT_VALIDATOR"
+    ]
+  },
+  "universal_component_receipts": {
+    "browser": {
+      "path": "canonical/verification/BROWSER_STATE_GENERATOR_UNIVERSAL_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "2d9b30654dce2a43de8c4fea905fa13478bc0893"
+    },
+    "tool_discovery": {
+      "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+    },
+    "delegation": {
+      "path": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "955ac8f4bd0db2527bfbb465fc8252df6d916156"
+    }
+  },
+  "wolfram": {
+    "planner_check": {
+      "all_permutations_checked": 6,
+      "valid_complete_orders": [
+        [
+          "browser",
+          "tool",
+          "delegation"
+        ]
+      ],
+      "unique_valid_order": true
+    },
+    "checkpoint_resume_abstract_trace": {
+      "stages": [
+        "NEW",
+        "CLAIMED_A",
+        "CHECKPOINTED",
+        "RESUMED_B",
+        "RUNNING_B",
+        "COMPLETE"
+      ],
+      "final_complete": true,
+      "final_checkpoint_count": 1,
+      "final_runtime_attempt_count": 1,
+      "runtime_invocation_count": 1,
+      "checkpoint_counter_monotone": true,
+      "runtime_attempt_counter_monotone": true
+    },
+    "composition_tautology": true
+  },
+  "verified": [
+    "THE_FIXED_CAPABILITY_GRAPH_HAS_EXACTLY_ONE_VALID_COMPLETE_PLAN.",
+    "THE_CURRENT_TWO_PROCESS_HARNESS_TRACE_HAS_EXACTLY_ONE_CHECKPOINT_AND_ONE_RUNTIME_ATTEMPT_IN_THE_ABSTRACT_SOURCE_BOUND_MODEL.",
+    "THE_EXACT_BROWSER_TOOL_AND_DELEGATION_COMPONENT_BYTES_USED_BY_THE_HARNESS_HAVE_INDEPENDENT_UNIVERSAL_SCOPE_OR_TOP_LAW CERTIFICATES.",
+    "CASE_TOKEN_AND_ORDINAL_VARIATION_ONLY_SELECTS_INPUTS_INSIDE_THOSE_UNIVERSALLY_CERTIFIED_COMPONENT_DOMAINS_AND DOES_NOT CHANGE THE_FIXED PLANNER GRAPH.",
+    "THE_HARNESS BOOLEAN PASS IS THEREFORE DEDUCTIVELY TOP ON ITS EXACT DECLARED GENERATOR DOMAIN."
+  ],
+  "boundary": [
+    "THE_CURRENT_same_identity_supervisor.py_IS_PROVED_ONLY_INSIDE_THIS_EXACT_HARNESS_TRACE__NO_GLOBAL_CONTINUITY REQUALIFICATION.",
+    "NO_WHOLE_AGENCY_AUTOMATIONBENCH_OSWORLD_OR_ARBITRARY_BROWSER_CREDIT.",
+    "NO_GLOBAL_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
