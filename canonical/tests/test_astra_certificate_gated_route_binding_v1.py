@@ -125,3 +125,5 @@ class CertificateGatedAstraBindingTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+# PR validation trigger: content-bound route seam
