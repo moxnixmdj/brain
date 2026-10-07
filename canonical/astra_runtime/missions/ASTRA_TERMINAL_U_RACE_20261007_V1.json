@@ -32,5 +32,76 @@
     "terminal_verifier_must_use_distinct_implementation": true,
     "user_device_required": false,
     "val_town_forbidden": true
+  },
+  "continuous_obs": {
+    "schema": "PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1",
+    "status": "CURRENT",
+    "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "information_boundary_complete": true,
+    "unknown_material_dependencies": [],
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": true,
+    "obs_layers_current": {
+      "goal": true,
+      "capability": true,
+      "blocker": true,
+      "solution": true,
+      "verification": true,
+      "inherited_system": true,
+      "obs_process": true
+    },
+    "information_policy": {
+      "mode": "NO_EXTERNAL_INFORMATION",
+      "allowed_exact_sources": [],
+      "allowed_external_tool_kinds": []
+    },
+    "canonical_state_dependencies": [
+      {
+        "path": "canonical/CANONICAL_POINTER.json",
+        "sha256": "3eb3bcee24b2a1870fe10892501057c7fd304bdf99c63a5362544fa78d86e898"
+      },
+      {
+        "path": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+        "sha256": "a9262307f755708525aa653087996cce5e2921c9f9ae3d83f9473e04dc00f1ef"
+      },
+      {
+        "path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+        "sha256": "80965a0b25d43812ffd9265c8cdc66c974c8b7fe221f5983573a0ceff1a93b32"
+      },
+      {
+        "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+        "sha256": "5a03228095e16686e6b249f62bf7872c84bebc3f3e8dd4761c20ec7813758e28"
+      },
+      {
+        "path": "canonical/governance/TERMINAL_EXECUTION_ROOT_20261007_V1.json",
+        "sha256": "55d116f753a1ddb3e7d3ed283ae6437de831e276cbd75cde847081a44fd1624e"
+      }
+    ],
+    "dependencies": [
+      {
+        "dependency_id": "CURRENT_TERMINAL_AUTHORITY",
+        "class": "EXECUTION_AUTHORITY",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "GLOBAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+        ]
+      },
+      {
+        "dependency_id": "TERMINAL_EXECUTION_ROOT",
+        "class": "CANONICAL_STATE",
+        "material": true,
+        "volatility": "STATIC",
+        "scope": "GLOBAL",
+        "status": "READY",
+        "evidence": [
+          "canonical/governance/TERMINAL_EXECUTION_ROOT_20261007_V1.json"
+        ]
+      }
+    ]
   }
 }
