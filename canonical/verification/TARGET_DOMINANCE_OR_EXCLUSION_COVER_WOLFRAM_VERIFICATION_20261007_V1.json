@@ -1,0 +1,22 @@
+{
+  "schema":"PROJECT_BRAIN_TARGET_DOMINANCE_OR_EXCLUSION_COVER_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_FINITE_SET_EXHAUSTIVE_PASS__ZERO_CREDIT",
+  "subject":{
+    "governance_sha":"298c04611cf44134122254531eaa6b1909df658b",
+    "runtime_sha":"fabac73ca4688f870242ef8ddce40b410d585a77",
+    "tests_sha":"e1dbd9b643a03110b27344c8136e4d03f4ca2314"
+  },
+  "verification":{
+    "universe_size":4,
+    "mixed_cover_sufficiency_all_subset_assignments":true,
+    "fixed_dominated_escape_equivalence_all_subset_assignments":true
+  },
+  "boundary":[
+    "NO_CLAIM_CURRENT_SUPERDOMAIN_IS_COMPLETE",
+    "NO_CLAIM_CURRENT_DOMINATED_OR_EXCLUDED_REGIONS_COVER_THE_SUPERDOMAIN",
+    "NO_CLAIM_A_OR_B_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
