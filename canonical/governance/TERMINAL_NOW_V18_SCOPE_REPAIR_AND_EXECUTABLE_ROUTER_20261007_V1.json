@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_NOW_V18_SCOPE_REPAIR_AND_EXECUTABLE_ROUTER_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_TRUTH_REPAIR_PLUS_EXECUTABLE_ROUTER__LITERAL_ALL_META_BLOCKER_DELETED__ABC_OPEN__D_OPEN__TERMINAL_FALSE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "exact_base_commit": "86bc7ccdf4fd5a7805b03b274f1b7aadbb287375",
+  "source_bindings": {
+    "authority_v15": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V15.json",
+      "git_blob_sha": "09f11461c7aa1ee7719409723726712f68d03da8"
+    },
+    "observable_trace_scope_superset": {
+      "path": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
+      "git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c"
+    },
+    "l1_universal_abc": {
+      "path": "canonical/governance/L1_UNIVERSAL_ABC_NORMAL_FORM_THEOREM_20261007_V1.json",
+      "git_blob_sha": "cff6a95cad0027f3e142a32fd028a27566a00ea5"
+    },
+    "v17_live_rebase": {
+      "path": "canonical/governance/TERMINAL_NOW_V17_LIVE_REBASE_20261007_V1.json",
+      "git_blob_sha": "f2889d64b44f582d28d7955432ecd46edeec2d65"
+    },
+    "router_soundness": {
+      "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_SOUNDNESS_REDUCTION_20261007_V1.json",
+      "git_blob_sha": "1259a3e3e6872d5355d92f19e9e3df217bdc254d"
+    },
+    "router_runtime": {
+      "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+      "git_blob_sha": "45c1abd895f2d19b8da2f3aa86499c4a2dbb546d"
+    },
+    "router_tests": {
+      "path": "canonical/tests/test_certificate_gated_selected_route_router_v1.py",
+      "git_blob_sha": "c0ac8c1e4f96fe273e3bfc665fcf203c2cb19c54"
+    }
+  },
+  "truth_repair": {
+    "finite_observed_surface_enumeration_is_not_complete": true,
+    "that_fact_creates_an_independent_literal_all_blocker": false,
+    "reason": [
+      "THE_LITERAL_ALL_THEOREM_CORRECTLY_REJECTS_INFERENCE_FROM_A_FINITE_OBSERVED_SET_O_TO_THE_ACTUAL_USEFUL_TARGET_SET_U.",
+      "THE_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_DOES_NOT_USE_FINITE_ENUMERATION; IT DEFINES_A_SOURCE_AGNOSTIC_STRUCTURAL_SUPERDOMAIN_CONTAINING_EVERY_EXTERNALLY_USEFUL_TARGET_BEHAVIOR_BY_ITS_OBSERVABLE_EFFECT.",
+      "CURRENT_TERMINAL_AUTHORITY_V15_ALREADY_RECORDS_TARGET_UNIVERSE_SCOPE_SUPERSET_CLOSED_TRUE.",
+      "THE_L1_UNIVERSAL_ABC_NORMAL_FORM_QUANTIFIES_DIRECTLY_OVER_ALL_EXTERNALLY_USEFUL_TARGET_CONTEXTS_AND_LOAD_BEARING_OBSERVABLE_PROPERTIES_IN_THAT_SUPERDOMAIN.",
+      "THEREFORE_AUTHORITATIVE_CAPABILITY_ENUMERATION_OR_A_COMPLETE_ENUMERATION_ORACLE_IS_NOT_AN_INDEPENDENT_TERMINAL_PREREQUISITE. THE_REMAINING_GLOBAL_OBLIGATION_IS_ABC_DOMINANCE_AND_SEMANTIC_COVER_INSIDE_THE_ALREADY_SOUND_STRUCTURAL_SUPERDOMAIN."
+    ],
+    "deleted_independent_blocker": "LITERAL_ALL_TARGET_UNIVERSE_EXHAUSTIVENESS",
+    "preserved_inside_ABC": [
+      "EVERY_ACTUAL_USEFUL_CONTEXT_MUST_STILL_BE_COVERED",
+      "LOAD_BEARING_TERMINAL_ORDER_AND_HARD_CONSTRAINT_SEMANTICS_MUST_BE_COMPLETE",
+      "A_SELECTED_BRAIN_ROUTE_MUST_HAVE_SOUND_POSITIVE_ADEQUACY_OR_DISTRIBUTIONAL_DOMINANCE",
+      "LOCAL_C_MUST_HOLD_FOR_EVERY_REACHED_LOAD_BEARING_TRANSFORM"
+    ]
+  },
+  "runtime_reality": {
+    "certificate_gated_router_core_implemented": true,
+    "selection_rule": "RETURN_ONLY_AN_ALREADY_POSITIVE_CONTEXT_BOUND_ADMISSION_RECEIPT_WITH_EXACT_CONTENT_ADDRESSED_ROUTE_AND_CERTIFICATE_BINDINGS",
+    "fail_closed_on": [
+      "NO_MATCH",
+      "MALFORMED_RECEIPT",
+      "INVALID_CONTENT_SHA",
+      "DUPLICATE_RECEIPT"
+    ],
+    "deterministic_tie_break": true,
+    "locally_replayed_core_canaries_passed_before_COMMIT": true,
+    "not_yet_proved_by_runtime_itself": [
+      "PER_CELL_ADMISSION_SOUNDNESS",
+      "PER_CELL_ADEQUACY",
+      "SELECTED_COVER_COMPLETENESS",
+      "DEPLOYED_RUNTIME_BINDING",
+      "GLOBAL_D_FINALITY"
+    ]
+  },
+  "current_truth": {
+    "target_universe_structural_scope_superset_closed": true,
+    "literal_all_independent_meta_finality_blocker": false,
+    "certificate_gated_router_mechanical_core_present": true,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "critical_path": [
+    "DO_NOT_SEARCH_FOR_A_COMPLETE_CAPABILITY_ENUMERATION_ORACLE_AS_A_SEPARATE_TERMINAL_TASK.",
+    "DO_NOT_BUILD_A_GENERAL_INTELLIGENT_ROUTER; USE_THE_CERTIFICATE_GATED_FAIL_CLOSED_ROUTER.",
+    "ATTACK_ONLY_SURVIVING_ABC_SEMANTIC_CELLS_INSIDE_THE_UNIVERSAL_TRACE_SUPERDOMAIN; TRY_DIRECT_E2E_OR_TOP_LAW_CERTIFICATES_BEFORE_NEW_MECHANISM_BUILD.",
+    "WHEN_COMPLETE_SELECTED_CONTEXT_ABC_CLOSES_FREEZE_THE_FINAL_CREDITED_ROUTE_SET__RECOMPUTE_D__DELETE_DONORS__RUN_INDEPENDENT_CLEAN_ROOM_REPLAY."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_REPRESENTATIONAL_SCOPE_COMPLETENESS_IMPLIES_SEMANTIC_DOMINANCE.",
+    "NO_CLAIM_EVERY_CONTEXT_HAS_A_POSITIVE_ADMISSION_RECEIPT.",
+    "NO_CLAIM_ABC_IS_CLOSED.",
+    "NO_CLAIM_D_IS_CLOSED.",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
