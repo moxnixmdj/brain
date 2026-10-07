@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Probe non-spending credential and model-list capacity
+      - name: Probe metadata-only capacity
         shell: bash
         run: |
           set -euo pipefail
@@ -36,10 +36,8 @@ jobs:
               try:
                   with urllib.request.urlopen(req, timeout=20) as r:
                       raw = r.read().decode("utf-8", "replace")
-                      try:
-                          body = json.loads(raw)
-                      except Exception:
-                          body = None
+                      try: body = json.loads(raw)
+                      except Exception: body = None
                       return {"status": r.status, "json": body}
               except urllib.error.HTTPError as e:
                   return {"status": e.code, "json": None}
@@ -50,176 +48,95 @@ jobs:
           mgmt = os.environ.get("OPENROUTER_MANAGEMENT_API_KEY", "")
           anthropic = os.environ.get("ANTHROPIC_API_KEY", "")
 
-          def bearer_get(url, token):
-              if not token:
-                  return {"present": False, "status": None, "json": None}
-              out = get(url, {"Authorization": "Bearer " + token})
-              out["present"] = True
-              return out
+          def bearer(url, token):
+              if not token: return {"present": False, "status": None, "json": None}
+              x = get(url, {"Authorization": "Bearer " + token}); x["present"] = True; return x
 
-          kp = bearer_get("https://openrouter.ai/api/v1/key", api)
-          ca = bearer_get("https://openrouter.ai/api/v1/credits", api)
-          cm = bearer_get("https://openrouter.ai/api/v1/credits", mgmt)
-          orm = bearer_get("https://openrouter.ai/api/v1/models", api)
-
+          kp = bearer("https://openrouter.ai/api/v1/key", api)
+          ca = bearer("https://openrouter.ai/api/v1/credits", api)
+          cm = bearer("https://openrouter.ai/api/v1/credits", mgmt)
+          orm = bearer("https://openrouter.ai/api/v1/models", api)
           if anthropic:
-              am = get(
-                  "https://api.anthropic.com/v1/models",
-                  {"x-api-key": anthropic, "anthropic-version": "2023-06-01"},
-              )
+              am = get("https://api.anthropic.com/v1/models", {
+                  "x-api-key": anthropic,
+                  "anthropic-version": "2023-06-01",
+              })
               am["present"] = True
           else:
               am = {"present": False, "status": None, "json": None}
 
           def safe_key(x):
               d = (x.get("json") or {}).get("data") if isinstance(x.get("json"), dict) else None
-              if not isinstance(d, dict):
-                  return None
-              return {k: d.get(k) for k in (
-                  "is_free_tier", "is_management_key", "limit",
-                  "limit_remaining", "limit_reset", "usage", "expires_at"
-              )}
+              if not isinstance(d, dict): return None
+              return {k:d.get(k) for k in ("is_free_tier","is_management_key","limit","limit_remaining","limit_reset","usage","expires_at")}
 
           def safe_credits(x):
               d = (x.get("json") or {}).get("data") if isinstance(x.get("json"), dict) else None
-              if not isinstance(d, dict):
-                  return None
+              if not isinstance(d, dict): return None
               total, used = d.get("total_credits"), d.get("total_usage")
-              rem = total - used if isinstance(total, (int, float)) and isinstance(used, (int, float)) else None
-              return {"total_credits": total, "total_usage": used, "remaining_credits": rem}
+              rem = total-used if isinstance(total,(int,float)) and isinstance(used,(int,float)) else None
+              return {"total_credits":total,"total_usage":used,"remaining_credits":rem}
 
-          def model_ids(x):
-              body = x.get("json")
-              if not isinstance(body, dict):
-                  return []
-              data = body.get("data")
-              if not isinstance(data, list):
-                  return []
-              ids = []
-              for row in data:
-                  if isinstance(row, dict):
-                      ident = row.get("id")
-                      if isinstance(ident, str):
-                          ids.append(ident)
-              return ids
+          def ids(x):
+              d = (x.get("json") or {}).get("data") if isinstance(x.get("json"), dict) else None
+              if not isinstance(d, list): return []
+              return sorted(row["id"] for row in d if isinstance(row,dict) and isinstance(row.get("id"),str))
 
-          k = safe_key(kp)
-          c1 = safe_credits(ca)
-          c2 = safe_credits(cm)
-          credit = next(
-              (x for x in (c2, c1) if isinstance(x, dict) and isinstance(x.get("remaining_credits"), (int, float))),
-              None,
-          )
+          def opus55(xs):
+              return [x for x in xs if x == "claude-opus-5-5" or ("opus" in x.lower() and ("5.5" in x.lower() or "5-5" in x.lower() or "5_5" in x.lower()))]
 
-          openrouter_models = model_ids(orm)
-          anthropic_models = model_ids(am)
-          def opus55(ids):
-              return sorted(x for x in ids if "opus" in x.lower() and ("5.5" in x.lower() or "5-5" in x.lower() or "5_5" in x.lower()))
-
-          or_opus55 = opus55(openrouter_models)
-          an_opus55 = opus55(anthropic_models)
-          positive_credit = bool(credit and credit.get("remaining_credits", 0) > 0)
-          authenticated_or = bool(kp.get("status") == 200 and (k is not None or credit is not None))
-          anthropic_model_access = bool(am.get("status") == 200 and an_opus55)
-          openrouter_model_access = bool(orm.get("status") == 200 and or_opus55)
+          k = safe_key(kp); c1 = safe_credits(ca); c2 = safe_credits(cm)
+          credit = next((x for x in (c2,c1) if isinstance(x,dict) and isinstance(x.get("remaining_credits"),(int,float))), None)
+          or55, an55 = opus55(ids(orm)), opus55(ids(am))
+          positive_credit = bool(credit and credit["remaining_credits"] > 0)
+          candidate = bool((positive_credit and orm.get("status")==200 and or55) or (am.get("status")==200 and an55))
 
           out = {
-              "schema": "PROJECT_BRAIN_ZERO_SPEND_PRIVATE_BRAIN_OPUS_CAPACITY_PROBE_V2",
-              "date": "2026-10-07",
-              "status": "EXECUTED_NONSPENDING_PRIVATE_BRAIN_CAPACITY_PROBE",
-              "carrier": {
-                  "repository": os.environ.get("GITHUB_REPOSITORY"),
-                  "workflow": os.environ.get("GITHUB_WORKFLOW"),
-                  "run_id": os.environ.get("GITHUB_RUN_ID"),
-                  "trigger_sha": os.environ.get("GITHUB_SHA"),
-              },
-              "probe_contract": {
-                  "model_inference_requests": 0,
-                  "purchases_or_topups": 0,
-                  "secret_values_emitted": False,
-                  "metadata_only_requests": [
-                      "OPENROUTER_KEY_METADATA_IF_KEY_PRESENT",
-                      "OPENROUTER_CREDIT_METADATA_IF_KEY_PRESENT",
-                      "OPENROUTER_MODEL_LIST_IF_KEY_PRESENT",
-                      "ANTHROPIC_MODEL_LIST_IF_KEY_PRESENT",
-                  ],
-              },
-              "credential_presence": {
-                  "openrouter_api_key": bool(api),
-                  "openrouter_management_api_key": bool(mgmt),
-                  "anthropic_api_key": bool(anthropic),
-              },
-              "openrouter": {
-                  "key_http_status": kp.get("status"),
-                  "safe_key_metadata": k,
-                  "credits_via_api_key_http_status": ca.get("status"),
-                  "credits_via_api_key": c1,
-                  "credits_via_management_key_http_status": cm.get("status"),
-                  "credits_via_management_key": c2,
-                  "models_http_status": orm.get("status"),
-                  "opus55_model_ids_visible": or_opus55,
-              },
-              "anthropic": {
-                  "models_http_status": am.get("status"),
-                  "opus55_model_ids_visible": an_opus55,
-              },
-              "interpretation": {
-                  "authenticated_openrouter_capacity_snapshot_observed": authenticated_or,
-                  "positive_preexisting_openrouter_credit_observed": positive_credit,
-                  "openrouter_opus55_model_access_metadata_observed": openrouter_model_access,
-                  "anthropic_opus55_model_access_metadata_observed": anthropic_model_access,
-                  "zero_spend_exact_comparator_candidate_exists": bool(
-                      (positive_credit and openrouter_model_access) or anthropic_model_access
-                  ),
-                  "exact_comparator_inference_authorized_by_this_receipt": False,
-                  "reason": "METADATA_ONLY_PROBE_DOES_NOT_AUTHORIZE_MODEL_INFERENCE_OR PROVE_ZERO_COST_PER_REQUEST",
-              },
-              "accounting": {
-                  "incremental_spend_usd": 0,
-                  "model_inference_requests": 0,
-                  "terminal_credit_delta": 0,
-              },
+              "schema":"PROJECT_BRAIN_ZERO_SPEND_PRIVATE_BRAIN_OPUS_CAPACITY_PROBE_V3",
+              "date":"2026-10-07",
+              "status":"EXECUTED_NONSPENDING_PRIVATE_BRAIN_CAPACITY_PROBE",
+              "carrier":{"repository":os.environ.get("GITHUB_REPOSITORY"),"workflow":os.environ.get("GITHUB_WORKFLOW"),"run_id":os.environ.get("GITHUB_RUN_ID"),"trigger_sha":os.environ.get("GITHUB_SHA")},
+              "probe_contract":{"model_inference_requests":0,"purchases_or_topups":0,"secret_values_emitted":False,"metadata_only":True},
+              "credential_presence":{"openrouter_api_key":bool(api),"openrouter_management_api_key":bool(mgmt),"anthropic_api_key":bool(anthropic)},
+              "openrouter":{"key_http_status":kp.get("status"),"safe_key_metadata":k,"credits_via_api_key_http_status":ca.get("status"),"credits_via_api_key":c1,"credits_via_management_key_http_status":cm.get("status"),"credits_via_management_key":c2,"models_http_status":orm.get("status"),"opus55_model_ids_visible":or55},
+              "anthropic":{"models_http_status":am.get("status"),"opus55_model_ids_visible":an55},
+              "interpretation":{"positive_preexisting_openrouter_credit_observed":positive_credit,"zero_spend_exact_comparator_candidate_exists":candidate,"exact_comparator_inference_authorized_by_this_receipt":False,"reason":"METADATA_ONLY_PROBE_DOES_NOT_AUTHORIZE_INFERENCE_OR_PROVE_ZERO_COST_PER_REQUEST"},
+              "accounting":{"incremental_spend_usd":0,"model_inference_requests":0,"terminal_credit_delta":0},
           }
-          path = "canonical/verification/OPUS55_ZERO_SPEND_PRIVATE_BRAIN_CAPACITY_PROBE_LATEST.json"
-          with open(path, "w", encoding="utf-8") as f:
-              json.dump(out, f, indent=2, sort_keys=True)
-              f.write("\n")
-          print(json.dumps({
-              "credential_presence": out["credential_presence"],
-              "interpretation": out["interpretation"],
-              "openrouter_status": {
-                  "key": out["openrouter"]["key_http_status"],
-                  "models": out["openrouter"]["models_http_status"],
-              },
-              "anthropic_models_status": out["anthropic"]["models_http_status"],
-          }, sort_keys=True))
+          with open("canonical/verification/OPUS55_ZERO_SPEND_PRIVATE_BRAIN_CAPACITY_PROBE_LATEST.json","w",encoding="utf-8") as f:
+              json.dump(out,f,indent=2,sort_keys=True); f.write("\n")
+          status = {
+              "schema":"PROJECT_BRAIN_ZERO_SPEND_PRIVATE_BRAIN_CAPACITY_STATUS_V1",
+              "status":"CANDIDATE_CAPACITY_PRESENT" if candidate else "NO_CANDIDATE_CAPACITY_OBSERVED"
+          }
+          with open("canonical/verification/OPUS55_ZERO_SPEND_PRIVATE_BRAIN_CAPACITY_STATUS.json","w",encoding="utf-8") as f:
+              json.dump(status,f,separators=(",",":"),sort_keys=True); f.write("\n")
+          print(json.dumps({"credential_presence":out["credential_presence"],"interpretation":out["interpretation"],"openrouter_models_status":orm.get("status"),"anthropic_models_status":am.get("status")},sort_keys=True))
           PY
 
       - uses: actions/upload-artifact@v4
         with:
           name: zero-spend-opus-capacity-probe
-          path: canonical/verification/OPUS55_ZERO_SPEND_PRIVATE_BRAIN_CAPACITY_PROBE_LATEST.json
+          path: |
+            canonical/verification/OPUS55_ZERO_SPEND_PRIVATE_BRAIN_CAPACITY_PROBE_LATEST.json
+            canonical/verification/OPUS55_ZERO_SPEND_PRIVATE_BRAIN_CAPACITY_STATUS.json
           if-no-files-found: error
           retention-days: 7
 
-      - name: Commit sanitized capacity receipt
+      - name: Commit sanitized probe receipts
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "Project Brain Capacity Probe"
           git config user.email "project-brain-capacity-probe@users.noreply.github.com"
-          git add canonical/verification/OPUS55_ZERO_SPEND_PRIVATE_BRAIN_CAPACITY_PROBE_LATEST.json
-          if git diff --cached --quiet; then
-            exit 0
-          fi
+          git add canonical/verification/OPUS55_ZERO_SPEND_PRIVATE_BRAIN_CAPACITY_PROBE_LATEST.json canonical/verification/OPUS55_ZERO_SPEND_PRIVATE_BRAIN_CAPACITY_STATUS.json
+          if git diff --cached --quiet; then exit 0; fi
           git commit -m "Record private zero-spend Opus capacity probe"
           for attempt in 1 2 3; do
             git pull --rebase origin main || { git rebase --abort || true; sleep 2; continue; }
-            if git push origin HEAD:main; then
-              exit 0
-            fi
+            if git push origin HEAD:main; then exit 0; fi
             sleep 2
           done
           exit 1
 
-# terminal-now private self-report capacity probe 2026-10-07
+# terminal-now deterministic status self-report 2026-10-07
