@@ -72,7 +72,7 @@ def test_false_condition_enters_as_negation_and_selects_ordinary_policy():
             "ordinary_policy": {"op": "NOT", "arg": {"op": "ATOM", "id": atom_id}},
         },
     )
-    assert out["certified_common_policies"] == ["ordinary_policy"]
+    assert out["status"] == "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED"\n    assert out["entailed_policy_conditions"] == ["ordinary_policy"]\n    assert out["certified_common_policies"] == []
 
 
 def test_wrong_claimed_condition_result_is_rejected():
