@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V3",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH_RECONCILIATION__SEVEN_CONSUMED_SLOTS__RANK7_SCORED_FINAL_ZERO__NEXT_SLOT_LINKED_CELL_SUPPRESSION_TRIAL0__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V2.json",
+    "git_blob_sha": "9fb958da1d7272a3133ef4f31ac39282e42a2ca5"
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "rank7_execution": {
+    "result_reconciliation": {
+      "path": "canonical/verification/TB_SCIENCE_RANK7_PUBLIC_RUNNER_RESULT_RECONCILIATION_20261007_V1.json"
+    },
+    "slot_id": "terminal-bench-science/reactor-safety-control::trial-0",
+    "task_digest": "sha256:96c8c5764042dca01ba0b7bd127cf2587f8df538a335f36abf6b4c200f0bb669",
+    "public_runner": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "workflow_run_id": 37606898246,
+      "workflow_job_id": 112744475576,
+      "github_run_attempt": 1,
+      "workflow_conclusion": "success",
+      "receipt_github_sha": "3dec87f1ad4d754e1c4b635c9ff5b2fe1bf3fc10",
+      "artifact_id": 11474839915,
+      "artifact_name": "tb-science-reactor-safety-control-trial-0-rank7",
+      "artifact_size_bytes": 19540,
+      "artifact_digest": "sha256:8866fd656285ede4081fecc99bd952680c59f63028a3ceb58c48013e3594fe5d",
+      "artifact_expired": false
+    },
+    "irreversible_receipt": {
+      "schema": "PROJECT_BRAIN_TB_SCIENCE_TERMINAL_SLOT_RECEIPT_RANK7_V1",
+      "status": "FINAL_ZERO",
+      "reward": 0,
+      "errors": [],
+      "exception_info": [],
+      "harbor_step_outcome": "success",
+      "execution_authority_consumed": true,
+      "rerun_credit": false,
+      "incremental_spend_usd": 0,
+      "promotion_authority": false,
+      "result_hashes": {
+        "jobs/reactor-safety-control-trial-0/reactor-safety-control-trial-0/reactor-safety-control__YcmHVm4/result.json": "96b5977f42902fcba7d601cf565bd67da313d96b8186403fb33c2f46dae6377a",
+        "jobs/reactor-safety-control-trial-0/reactor-safety-control-trial-0/result.json": "87b6b8a2ae06eb53e8f1db0e9ee085a321fe16c03ef51c17b3c2f4351978a71e"
+      }
+    },
+    "failure_localization": {
+      "harbor_execution_completed": true,
+      "verifier_reward_present": true,
+      "verifier_reward": 0,
+      "carrier_or_planner_error": false,
+      "exception_count": 0,
+      "scored_task_success": false,
+      "task_capability_negative_evidence_for_this_exact_slot": true
+    }
+  },
+  "truth_repair": {
+    "consumed_slots": [
+      "terminal-bench-science/genomic-model-ranking::trial-0",
+      "terminal-bench-science/mri-harmonization::trial-0",
+      "terminal-bench-science/navigation-sensor-calibration::trial-0",
+      "terminal-bench-science/baseline-free-localization::trial-0",
+      "terminal-bench-science/virtual-baseline-localization::trial-0",
+      "terminal-bench-science/koopman-mfg-id::trial-0",
+      "terminal-bench-science/reactor-safety-control::trial-0"
+    ],
+    "consumed_successes": 0,
+    "consumed_final_failures": 7,
+    "next_untouched_slot": {
+      "schedule_order": 7,
+      "slot_id": "terminal-bench-science/linked-cell-suppression::trial-0",
+      "task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0"
+    },
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 80,
+    "maximum_possible_successes_remaining": 203,
+    "pass_still_mathematically_reachable": true
+  },
+  "scheduler": [
+    "NEVER_REPLAY_RANK7__ITS_ONE_USE_AUTHORITY_IS_CONSUMED.",
+    "RANK7_IS_A_REAL_SCORED_ZERO__DO_NOT_RECLASSIFY_IT_AS_INFRASTRUCTURE_FAILURE.",
+    "DO_NOT_SHRINK_THE_FIXED_210_SLOT_DENOMINATOR.",
+    "IF_TB_SCIENCE_EXECUTION_CONTINUES__NEXT_CREDITABLE_SLOT_IS_EXACTLY_LINKED_CELL_SUPPRESSION_TRIAL0_UNDER_A_NEW_ONE_USE_AUTHORITY."
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_RANK8_EXECUTION_AUTHORITY_FROM_THIS_LEDGER_ALONE",
+    "NO_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_this_reconciliation": 1,
+    "cumulative_terminal_slots_consumed": 7,
+    "terminal_credit_delta": 0
+  }
+}
