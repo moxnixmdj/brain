@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_V1",
   "date": "2026-10-07",
-  "status": "ACTIVE_SCHEDULING_COMPRESSION__24_OPEN_ATOMS_TO_THREE_REUSABLE_PROOF_ENGINES__ZERO_TERMINAL_CREDIT",
+  "status": "ACTIVE_SCHEDULING_COMPRESSION__22_OPEN_ATOMS_TO_THREE_REUSABLE_PROOF_ENGINES__IF_PACKAGE_REMOVED_AFTER_VERIFIED_CLOSURE__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "source_bindings": {
     "registry": {
@@ -10,7 +10,7 @@
     },
     "evidence_ledger": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+      "git_blob_sha": "cb7bf612ab443c84d3db3b6183682cf53399003c"
     },
     "fixed_bar_truth_repair": {
       "path": "canonical/governance/PUBLIC_FIXED_BAR_AGGREGATE_SCOPE_ADMISSION_TRUTH_REPAIR_20261007_V1.json",
@@ -19,8 +19,8 @@
   },
   "exact_current_counts": {
     "atoms_total": 38,
-    "atoms_proved": 14,
-    "atoms_open": 24
+    "atoms_proved": 16,
+    "atoms_open": 22
   },
   "proof_engines": [
     {
@@ -46,13 +46,6 @@
           ]
         },
         {
-          "id": "INSTRUCTION_SCOPE",
-          "atoms": [
-            "IF_SCOPE_BOUNDARY_NONINFERIOR",
-            "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
-          ]
-        },
-        {
           "id": "COMPOSITION",
           "atoms": [
             "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
@@ -72,8 +65,18 @@
           ]
         }
       ],
-      "open_atoms": 8,
-      "unique_portfolio_or_stronger_proof_packages": 5
+      "open_atoms": 6,
+      "unique_portfolio_or_stronger_proof_packages": 4,
+      "closed_packages": [
+        {
+          "id": "INSTRUCTION_SCOPE",
+          "atoms": [
+            "IF_SCOPE_BOUNDARY_NONINFERIOR",
+            "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+          ],
+          "closure": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json"
+        }
+      ]
     },
     {
       "id": "E3_DIRECT_SCOPE_AND_DEPENDENCY_CLOSURE",
@@ -104,6 +107,13 @@
   ],
   "accounting": {
     "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "reconciliation_20261007": {
+    "live_ledger_proved": 16,
+    "live_ledger_open": 22,
+    "instruction_scope_removed_from_active_E2": true,
+    "fresh_reality_consumed": 0,
     "terminal_credit_delta": 0
   }
 }
