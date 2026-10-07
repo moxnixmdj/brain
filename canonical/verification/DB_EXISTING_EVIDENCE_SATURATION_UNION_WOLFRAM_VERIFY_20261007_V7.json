@@ -1,0 +1,15 @@
+{
+  "schema":"PROJECT_BRAIN_DB_EXISTING_EVIDENCE_SATURATION_UNION_WOLFRAM_VERIFY_V7",
+  "date":"2026-10-07",
+  "status":"PASS__FIFTEEN_CERTIFICATE_RECORD_IDS_DUPLICATE_FREE__P3_DELTA_PRESENT_ONCE__ZERO_CREDIT",
+  "subject":{"path":"canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V7.json","git_blob_sha":"96c7a323ffd42e4cb338ff969e971f81bdb841d6"},
+  "predecessor":{"path":"canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V6.json","git_blob_sha":"3b438f63dfdcd208c984251d1addd1334ca4b44e","certificate_record_count":14},
+  "added_cell":{"path":"canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_20261007_V1.json","git_blob_sha":"1c450f41e813a21b1a8b876c131c8574a21f5f51"},
+  "added_cell_verification":{"path":"canonical/verification/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_WOLFRAM_VERIFICATION_20261007_V1.json","git_blob_sha":"4d87522c515ec603362280e788ca8b1091520a83"},
+  "wolfram":{
+    "result":{"certificate_record_count":15,"duplicate_free":true,"p3_delta_count":1},
+    "interpretation":"THE_P3_WHOLE_DIRECT_SYNTHESIS_CELL_IS_A_NEW_CERTIFICATE_RECORD_RELATIVE_TO_THE_14_RECORD_LEDGER__OVERLAP_IN_SEMANTIC_SCOPE_IS_ALLOWED_AND_NOT_COUNTED_AS_COVERAGE_PERCENTAGE"
+  },
+  "hard_nonclaims":["NO_CLAIM_SEMANTIC_DISJOINTNESS.","NO_CLAIM_U_EMPTY.","NO_ABC_D_OR_TERMINAL_CREDIT."],
+  "accounting":{"incremental_spend_usd":0,"fresh_reality_units_consumed":0,"terminal_credit_delta":0}
+}
