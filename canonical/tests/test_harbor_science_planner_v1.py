@@ -103,9 +103,23 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(body["tools"][0]["function"]["name"],p.TOOL_NAME)
         self.assertEqual(body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["maxItems"],1)
         candidate_schema=body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["items"]["properties"]
-        self.assertEqual(candidate_schema["command"]["maxLength"],p.MAX_COMMAND_CHARS)
-        self.assertEqual(candidate_schema["verify_command"]["maxLength"],p.MAX_COMMAND_CHARS)
+        self.assertNotIn("maxLength",candidate_schema["command"])
+        self.assertNotIn("maxLength",candidate_schema["verify_command"])
         self.assertGreaterEqual(p.MAX_TOOL_COMPLETION_TOKENS,4096)
+
+    def test_decoded_command_length_is_enforced_after_transport(self):
+        args={
+            "material_requirements":["R1"],
+            "candidates":[{
+                "action_id":"A1",
+                "covers":["R1"],
+                "command":"x"*(p.MAX_COMMAND_CHARS+1),
+                "verify_command":"test true",
+            }],
+        }
+        with patch.object(p.urllib.request,"urlopen",return_value=Response(tool_response(args))):
+            with self.assertRaisesRegex(Exception,"COMMAND_TOO_LONG"):
+                p.plan("synthetic")
 
     def test_length_finish_reason_fails_closed_before_parsing_partial_arguments(self):
         response=json.dumps({
