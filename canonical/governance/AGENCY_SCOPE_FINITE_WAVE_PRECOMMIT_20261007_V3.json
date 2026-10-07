@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_SCOPE_FINITE_WAVE_PRECOMMIT_V3",
+  "date": "2026-10-07",
+  "status": "FROZEN_PREEXPOSURE_SUCCESSOR__REUSES_EXACT_V1_CASE_DESCRIPTORS__ONLY_CHILD_IMPORT_TRANSPORT_CHANGED__ZERO_V2_RESULTS",
+  "supersedes_execution_harness_only": {
+    "prior": "canonical/runtime/agency_scope_finite_wave_v1.py",
+    "successor": "canonical/runtime/agency_scope_finite_wave_v2.py",
+    "reason": "V1_CHILD_PROCESS_FAILED_BEFORE_IMPORT_WITH_MODULE_NOT_FOUND_CANONICAL"
+  },
+  "preserved_case_universe": {
+    "descriptor_beacon": "745475f3f4b1280fc91496423f52f913f0e1f852",
+    "case_count": 192,
+    "cases_per_kind": 32,
+    "kinds": [
+      "PLANNING_3_TOOL",
+      "STATE_CHANGE_REPLAN",
+      "LONG_HORIZON_RETENTION",
+      "TOOL_FAILURE_RECOVERY",
+      "SUBTASK_DEPENDENCY_FANIN",
+      "MINIMAL_OVERSIGHT"
+    ],
+    "case_replacement": false,
+    "case_selection_change": false,
+    "semantic_route_change": false
+  },
+  "permitted_transport_delta": {
+    "exact_change": "SET_CHILD_ENV_PYTHONPATH_TO_FROZEN_REPOSITORY_ROOT",
+    "changes_case_descriptor": false,
+    "changes_case_seed": false,
+    "changes_acceptance": false,
+    "changes_route_semantics": false
+  },
+  "target_predicates": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+  ],
+  "frozen_protocol": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+  },
+  "frozen_runtime_blobs": {
+    "canonical/runtime/agency_scope_finite_wave_v2.py": "6b171ce99126de6a335c4b0a881c621f9f972875",
+    "canonical/runtime/matched_agency_stateful_case_v1.py": "be221c98b73af8552bcfd8c8ac61bd9a38295f0d",
+    "canonical/runtime/matched_agency_missing_atoms_v1.py": "2c88fad9406fb837f2b3b135cd147ab14e912e0f",
+    "canonical/runtime/matched_executable_atom_semantics_v1.py": "47a0e828847a57fb206490a866a1041d83c42bde",
+    "canonical/runtime/capability_planner.py": "629766f8a1194fd298e0809b64a5e9c5a39fa3ea",
+    "canonical/runtime/browser_state_information_safe_candidate.py": "8acf61f21a15a0d3b3e0e5735ebb80e20393e405",
+    "canonical/runtime/browser_state_information_safe_proof.py": "3723d3233d6058f0a43491e4654a21490f992d1e",
+    "canonical/runtime/tool_discovery_information_safe_candidate.py": "64c02edd568d95ec5ed54b7b8122183ce5b82e17",
+    "canonical/runtime/tool_discovery_information_safe_proof_v2.py": "5e8a953864e13ec76768c3e8920644107c65a644",
+    "canonical/runtime/tool_discovery_information_safe_proof.py": "2450a9644119c9fdf9c43307a1d115098d6ba592",
+    "canonical/runtime/delegation_whole_scope_candidate_v2.py": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py": "928466401b36e4f3b09c517950cc050432a0616f",
+    "canonical/runtime/same_identity_supervisor.py": "5c620b2e4e371333343e4f42e7340b8a9b4d1e3c",
+    "canonical/runtime/continuous_obs_runtime.py": "e2533a0335c4f6824b9542944d4682aeefb36b2b",
+    "canonical/runtime/consensus_dom_grounding.py": "2849a9eea74c6c595709f77eba23fd40a3be8c9a"
+  },
+  "inherited_verified_logic": [
+    "BRAIN_FIRST_DIFFERENTIAL_PREWAVE_PUBLIC_RUNNER_VERIFICATION_20261006_V1",
+    "MATCHED_SUCCESS_FINITE_SCOPE_REDUCER_PUBLIC_RUNNER_VERIFICATION_20261006_V1",
+    "MATCHED_SUCCESS_SCOPE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261006_V1",
+    "MATCHED_CASE_ISOLATION_RESET_PUBLIC_RUNNER_VERIFICATION_20261006_V1"
+  ],
+  "execution_freeze": {
+    "no_case_replacement_after_exposure": true,
+    "no_adaptive_case_selection": true,
+    "no_result_dependent_scope_edit": true,
+    "no_brain_repair_from_case_results": true,
+    "each_case_fresh_python_process": true,
+    "cross_case_memory": false
+  },
+  "comparator_rule": "ONLY_BRAIN_FAILURE_RESIDUAL__ZERO_OPUS_CASES_IF_BRAIN_PASSES_ALL_FIXED_192",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "v2_cases_executed": 0,
+    "opus_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_V2_CASE_RESULT_EXISTS_AT_FREEZE",
+    "NO_CLAIM_V2_WILL_PASS",
+    "NO_AGENCY_CLOSURE_BEFORE_INDEPENDENT_REPLAY",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
