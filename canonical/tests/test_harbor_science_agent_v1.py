@@ -23,6 +23,19 @@ class Env:
             return Receipt(1, "", "missing")
         return Receipt(0, "ok", "")
 
+class ExistingButDeadControllerEnv(Env):
+    async def exec(self, command, timeout_sec=None, **kwargs):
+        self.commands.append(command)
+        if command == "verify-bad":
+            return Receipt(1, "", "bad")
+        if command.startswith("test -s /app/submission/"):
+            return Receipt(0, "", "")
+        if command.startswith("python -m py_compile /app/submission/"):
+            return Receipt(0, "", "")
+        if "PROJECT_BRAIN_CONTROLLER_LIVENESS_V1" in command:
+            return Receipt(42, "", "CONTROLLER_EXITED_BEFORE_INPUT")
+        return Receipt(0, "ok", "")
+
 def planner(outputs):
     it=iter(outputs)
     def _post(prompt, timeout_s=20):
@@ -143,6 +156,46 @@ class ScienceAgentTests(unittest.TestCase):
         selected=[x for x in result["trace"] if x.get("kind")=="BRAIN_SELECTED_RESEARCH_ACTION"][0]
         self.assertFalse(selected["coverage_promoted"],selected)
         self.assertFalse(selected["brain_deliverable_checks"][0]["verified"],selected)
+
+    def test_interactive_controller_must_stay_alive_before_first_input(self):
+        env=ExistingButDeadControllerEnv()
+        outputs=[{
+            "material_requirements":["R1","BRAIN_DELIVERABLE_01"],
+            "candidates":[{
+                "action_id":"a",
+                "covers":["R1","BRAIN_DELIVERABLE_01"],
+                "command":"echo create",
+                "verify_command":"echo verify"
+            }]
+        }]
+        goal=(
+            "Create /app/submission/controller.py. The controller process must read "
+            "one JSON line at a time from stdin and remain available for commands."
+        )
+        with patch.object(s.science_planner, "plan", planner(outputs)):
+            result=asyncio.run(s.run_science_goal(goal,env,max_cycles=1))
+        self.assertNotEqual(result["status"],"FINISHED",result)
+        self.assertIn("/app/submission/controller.py",result["interactive_controller_paths"])
+        self.assertNotIn("BRAIN_DELIVERABLE_01",result["resolved_requirements"])
+        selected=[x for x in result["trace"] if x.get("kind")=="BRAIN_SELECTED_RESEARCH_ACTION"][0]
+        self.assertFalse(selected["coverage_promoted"],selected)
+        self.assertTrue(
+            any(
+                "PROJECT_BRAIN_CONTROLLER_LIVENESS_V1" in row["command"]
+                and row["returncode"]==42
+                for row in selected["brain_deliverable_checks"][0]["checks"]
+            ),
+            selected,
+        )
+
+    def test_noninteractive_python_deliverable_does_not_invent_liveness_requirement(self):
+        self.assertEqual(
+            s._interactive_controller_paths(
+                "Write /app/submission/controller.py as a static reference implementation.",
+                {"BRAIN_DELIVERABLE_01":"/app/submission/controller.py"},
+            ),
+            set(),
+        )
 
     def test_failed_verify_does_not_promote_coverage_or_finish(self):
         env,result=self.run_goal([
