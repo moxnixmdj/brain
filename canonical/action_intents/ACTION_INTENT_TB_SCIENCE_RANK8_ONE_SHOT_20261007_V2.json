@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK8_ACTION_INTENT_V2",
+  "date": "2026-10-07",
+  "status": "READY_FOR_PRECHECK_AFTER_PUBLIC_REPLAY",
+  "objective": "Evaluate the next untouched Terminal-Bench-Science slot with the currently verified Brain science route.",
+  "slot": {
+    "id": "terminal-bench-science/linked-cell-suppression::trial-0",
+    "digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0",
+    "rank": 8
+  },
+  "route": {
+    "agent_git_blob_sha": "5bc8ebac26bb7c809d4698f535eff43b667b30df",
+    "planner_git_blob_sha": "c3e36eba57c450f325c8a9476ee048c841bbdbc8",
+    "raw_task_contract_git_blob_sha": "d54d5a2f7efa76b653d288f4f53da4883644baa6",
+    "raw_task_localizer_git_blob_sha": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76",
+    "ledger_git_blob_sha": "32a57737b09fd6b38758814a6e3f843afd13ca16",
+    "manifest_git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK8_REACTIVATION_PUBLIC_REPLAY_20261007_V1.json",
+    "git_blob_sha": "be73ef34aece4d1f9e5622a006568653ab2f5c5d",
+    "pass": true
+  },
+  "controls": {
+    "incremental_spend_usd_max": 0,
+    "attempts": 1,
+    "replacement_allowed": false,
+    "duplicate_credit_allowed": false,
+    "task_may_start_only_after_precheck": true,
+    "precheck_failure_consumes_slot": false,
+    "after_task_start_result_is_final": true
+  },
+  "credit": {
+    "acceptance": false,
+    "terminal": false
+  }
+}
