@@ -1,17 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V3",
   "status": "CURRENT_MAIN_TERMINAL_NOT_REAL",
-  "checked_by": "CHATGPT_DIRECT_AUTHORITY_RECONCILIATION",
-  "source_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-  "source_authority_blob_sha": "e825412dcdc83f9b03082ae15d6b8e49155d409b",
-  "source_authority_commit_sha": "cde0408eef90b9a69d82fd02a9843cda3509567a",
-  "blockers": [
-    "RESIDUAL_COMPLEMENT_UNSAT_UNPROVED",
-    "SYMBOLIC_ADMISSION_PREDICATE_SUCCESSOR_NOT_DEPLOYED",
-    "U_NOT_PROVED_EMPTY",
-    "REAL_SELECTED_COVER_INCOMPLETE",
-    "COMPLETE_SELECTED_CONTEXT_ABC_OPEN",
-    "D_FINALITY_OPEN"
-  ],
-  "stale_status_repair": "PREVIOUS_CURRENT_MAIN_TERMINAL_REAL_STATUS_CONTRADICTED_CURRENT_FAIL_CLOSED_TERMINAL_AUTHORITY_AND_IS_REVOKED"
+  "checked_by": "CHATGPT_CANONICAL_STABLE_POINTER_RECONCILIATION",
+  "source_terminal_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+  "source_terminal_authority_blob_sha": "221e66bb6f3745754f490b3cb32b5c0e966750c5",
+  "terminal_authority_status": "ACTIVE_FAIL_CLOSED_SINGLE_BIT_TERMINAL_EXECUTION_ROOT_V34__TERMINAL_FALSE",
+  "terminal_root": "PROVE_RESIDUAL_COMPLEMENT_UNSAT_OVER_EXACT_SOUND_ADMISSION_PREDICATE_SET",
+  "residual_complement_unsat_proved": false,
+  "current_U_empty_proved": false,
+  "D_finality_closed": false,
+  "terminal": false,
+  "note": "REVOKES_STALE_V2_CURRENT_MAIN_TERMINAL_REAL_FLAG__FAIL_CLOSED_UNTIL_ACTIVE_STABLE_POINTER_PROVES_TERMINAL"
 }
