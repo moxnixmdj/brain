@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_IF_SCOPE_FINITE_PROTOCOL_BINDING_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_TRUTH_REPAIR__MATCHED_IF_SCOPE_BINDS_TO_PRECOMMITTED_FINITE_PORTFOLIO__POPULATION_INFERENCE_NOT_DECLARED__ZERO_CREDIT_PENDING_INDEPENDENT_REPLAY",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "scope_semantics_disjunction": {
+      "path": "canonical/governance/MATCHED_PORTFOLIO_SCOPE_SEMANTICS_DISJUNCTION_20261007_V1.json",
+      "git_blob_sha": "cc83650aa20c934a664cd485cc4e8f8efe8924b2"
+    },
+    "scope_compiler": {
+      "path": "canonical/runtime/matched_success_scope_compiler_v1.py",
+      "git_blob_sha": "e10ad027ae6c44f587050362511cfaae31ff7f5c"
+    },
+    "precommit": {
+      "path": "canonical/governance/IF_SCOPE_FINITE_WAVE_PRECOMMIT_20261007_V1.json",
+      "git_blob_sha": "bdae02fc05339fb9a8709c26a8e448c475a4006f"
+    },
+    "finite_top_certificate": {
+      "path": "canonical/governance/IF_SCOPE_FINITE_MANIFEST_TOP_CERTIFICATE_20261007_V1.json",
+      "git_blob_sha": "40be3493b6786f2a0349d82f0b6219784d682d22"
+    },
+    "independent_execution": {
+      "path": "canonical/verification/IF_SCOPE_FINITE_WAVE_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "f2736590ad5fb3161f4e65bdc137cea836996658"
+    }
+  },
+  "protocol_binding": {
+    "predicate": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "declared_acceptance_object": "FROZEN_REPRESENTATIVE_PORTFOLIO_EXERCISING_EVERY_DECLARED_IF_SCOPE_DIMENSION",
+    "required_dimensions": [
+      "dimension:multi_constraint_instruction_compliance",
+      "dimension:authorization_and_scope_boundaries",
+      "dimension:routine_ambiguity",
+      "dimension:requirement_change",
+      "dimension:explicit_abstention_and_fail_closed_cases"
+    ],
+    "underlying_population_declared": false,
+    "sampling_frame_declared": false,
+    "population_estimator_declared": false,
+    "interpretation": "FINITE_DECLARED_SCOPE"
+  },
+  "bound_portfolio": {
+    "case_count": 160,
+    "cases_per_dimension": 32,
+    "required_dimension_count": 5,
+    "required_dimension_coverage_complete": true,
+    "frozen_before_results": true,
+    "result_dependent_scope_edit": false,
+    "brain_success_count": 160,
+    "brain_failure_count": 0,
+    "objective_success_ceiling": "1",
+    "comparator_residual_case_count": 0,
+    "authority_denied_route_touches": 0,
+    "case_isolation_or_reset_equivalent": true,
+    "case_manifest_sha256": "4c46526bec00b8f4f31f4ac21400d74e6d4a0c3be54bcab8fe535bb7efba5d0b"
+  },
+  "theorem": {
+    "premise_1": "THE_TERMINAL_PROTOCOL_REQUIRES_NONINFERIORITY_ON_A_FROZEN_REPRESENTATIVE_PORTFOLIO_EXERCISING_EVERY_DECLARED_IF_SCOPE_DIMENSION_AND_DOES_NOT_DECLARE_A_LARGER_POPULATION_ACCEPTANCE_OBJECT.",
+    "premise_2": "THE_PRECOMMITTED_160_CASE_PORTFOLIO_IS_FROZEN_BEFORE_RESULTS_AND_COVERS_ALL_FIVE_DECLARED_IF_SCOPE_DIMENSIONS.",
+    "premise_3": "INDEPENDENT_EXECUTION_PROVES_BRAIN_SUCCESS_160_OF_160_WITH_ZERO_AUTHORITY_DENIED_ROUTE_TOUCHES_AND ZERO_BRAIN_FAILURE_RESIDUAL.",
+    "premise_4": "ON_THE_EXACT_FINITE_ACCEPTANCE_OBJECT_BINARY_SUCCESS_IS_BOUNDED_ABOVE_BY_1.",
+    "conclusion": "BRAIN_AT_1_ON_THE_COMPLETE_DECLARED_FINITE_IF_SCOPE_PORTFOLIO_IS_NONINFERIOR_TO_ANY_OPUS55_RESULT_ON_THE_IDENTICAL_PORTFOLIO; NO_OPUS_EXECUTION_OR_POPULATION_INFERENCE_IS_REQUIRED_FOR_IF_SCOPE_BOUNDARY_NONINFERIOR."
+  },
+  "truth_repair": {
+    "delete": "UNDECLARED_POPULATION_INFERENCE_AS_A_PREREQUISITE_FOR_IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "supersede_only_for_protocol_interpretation": "IF_SCOPE_FINITE_MANIFEST_TOP_CERTIFICATE_20261007_V1_REMAINING_OPEN_POPULATION_SEMANTICS_CAVEAT",
+    "preserve": [
+      "LIVEBENCH_IF_GE_65_7_REMAINS_SEPARATE_ATOMIC_EVIDENCE",
+      "NO_TRANSFER_BEYOND_THE_FIVE_DECLARED_IF_SCOPE_DIMENSIONS",
+      "NO_CLAIM_GENERAL_TEXT_QUALITY_FROM_BINARY_SCOPE_BOUNDARY_CASES",
+      "ROUTE_OWNERSHIP_AND_D_FINALITY_REMAIN_SEPARATE"
+    ],
+    "if_scope_boundary_refinement_closed_if_verified": true,
+    "sound_subtraction_from_U_if_verified": true
+  },
+  "decisive_falsifiers": [
+    "THE_FROZEN_TERMINAL_PROTOCOL_EXPLICITLY_DECLares_A_LARGER_UNDERLYING_IF_TASK_POPULATION_AS_THE_ACCEPTANCE_OBJECT.",
+    "THE_PRECOMMITTED_160_CASE_MANIFEST_FAILS_TO_COVER_ANY_OF_THE_FIVE_DECLARED_IF_SCOPE_DIMENSIONS.",
+    "THE_160_CASE_EXECUTION_IS_NOT_RESULT_BLIND_FROZEN_OR_NOT_INDEPENDENTLY_REPLAYED.",
+    "ANY_CASE_HAS_BRAIN_FAILURE_OR_CRITICAL_AUTHORITY_VIOLATION.",
+    "THE_ACCEPTANCE_METRIC_CAN_EXCEED_1_OR_IS_NOT_THE_SHARED_BINARY_SUCCESS_METRIC_FOR_THIS_PORTFOLIO."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_INSTRUCTION_FOLLOWING_OUTSIDE_THE_DECLARED_FIVE_DIMENSION_SCOPE_BOUNDARY_PORTFOLIO.",
+    "NO_CLAIM_LIVEBENCH_SEMANTIC_TEXT_QUALITY_FROM_THIS_CERTIFICATE.",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED.",
+    "NO_CLAIM_D_FINALITY_OR_TERMINAL_IS_CLOSED.",
+    "NO_TERMINAL_CREDIT_FROM_THIS_CANDIDATE_BEFORE_INDEPENDENT_VERIFICATION."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "opus_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
