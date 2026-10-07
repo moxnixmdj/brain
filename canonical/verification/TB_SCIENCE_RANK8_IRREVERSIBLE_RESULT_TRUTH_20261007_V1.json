@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK8_IRREVERSIBLE_RESULT_TRUTH_V1",
+  "date": "2026-10-07",
+  "status": "FINAL_ZERO__POST_GATE_INFRA_CANCELLATION__NO_RERUN__ZERO_INCREMENTAL_SPEND",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "schedule_rank": 8,
+    "slot_id": "terminal-bench-science/linked-cell-suppression::trial-0",
+    "task_name": "terminal-bench-science/linked-cell-suppression",
+    "task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0"
+  },
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK8_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1.json",
+    "git_blob_sha": "82e9573f64037ae2f0d39228e4d57cc45deb7a29"
+  },
+  "predecessor_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V3.json",
+    "git_blob_sha": "32a57737b09fd6b38758814a6e3f843afd13ca16"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37608961351,
+    "workflow_job_id": 112751265938,
+    "workflow_head_sha": "0cc1311ab4bd5f4529f705876cf8b030adc189a2",
+    "workflow_merge_sha": "8d3e4996cd7603aa4ecc2f893c1144c57444919c",
+    "workflow_conclusion": "cancelled",
+    "preexposure_gate_conclusion": "success",
+    "install_harbor_conclusion": "success",
+    "runtime_build_conclusion": "cancelled",
+    "task_execution_conclusion": "skipped",
+    "artifact_id": 11477290644,
+    "artifact_name": "tb-science-linked-cell-suppression-trial-0-rank8",
+    "artifact_digest": "sha256:c0611b4c8b13f51bc70bda64c563d6c12337b67c89941b52542f044a54188edd",
+    "run_attempt": 1
+  },
+  "exact_result": {
+    "status": "FINAL_ZERO",
+    "reward": 0,
+    "verifier_result_present": false,
+    "errors": [
+      "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD"
+    ],
+    "execution_authority_consumed": true,
+    "rerun_credit": false,
+    "incremental_spend_usd": 0
+  },
+  "interpretation": {
+    "frozen_semantics": "ANY_FINAL_NON_SUCCESS_INCLUDING_INFRA_TIMEOUT_RESOURCE_FAILURE_PLANNER_FAILURE_OR_MISSING_VERIFIER_RESULT_IS_FINAL_ZERO",
+    "benchmark_fixed_denominator_failure": true,
+    "task_capability_negative_evidence": false,
+    "infrastructure_or_transport_failure": true,
+    "terminal_task_executed": false,
+    "no_retry_or_replacement_allowed": true
+  },
+  "next_untouched_slot": {
+    "schedule_rank": 9,
+    "slot_id": "terminal-bench-science/neo-orbit-determination::trial-0",
+    "task_digest": "sha256:b0038fd39395b57f2036b2c0271f37b508e1250fc97d12c899590b61e997cada"
+  },
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TASK_CAPABILITY_FAILURE_INFERENCE_FROM_RANK8",
+    "NO_RANK8_RERUN_OR_REPLACEMENT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 1,
+    "terminal_credit_delta": 0
+  }
+}
