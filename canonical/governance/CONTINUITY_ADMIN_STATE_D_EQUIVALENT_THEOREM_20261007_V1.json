@@ -1,0 +1,114 @@
+{
+  "schema": "PROJECT_BRAIN_CONTINUITY_ADMIN_STATE_D_EQUIVALENT_THEOREM_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_LOCAL_D_EFFECT_DISCHARGE__DIRECT_CONTINUITY_ADMIN_EFFECTS_HAVE_SEPARATELY_PROVED_EQUIVALENT__GLOBAL_D_OPEN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "terminal_normal_form": {
+    "path": "canonical/governance/L1_UNIVERSAL_ABC_NORMAL_FORM_THEOREM_20261007_V1.json",
+    "git_blob_sha": "cff6a95cad0027f3e142a32fd028a27566a00ea5",
+    "form": "COMPLETE_SELECTED_CONTEXT_ABC__AND__D_BRAIN_OWNERSHIP_EFFECT_DONOR_INDEPENDENCE_FINALITY"
+  },
+  "D_effect_rule": {
+    "path": "canonical/governance/ROOT3_CREDITED_ROUTE_EFFECT_FOOTPRINT_TOTALITY_20261007_V1.json",
+    "git_blob_sha": "9fd755465ae17b19335987b78c154afa6434ab3a",
+    "applicable_clause": "BROKER_TOTALITY_ON_FOOTPRINT_ALLOWS_EACH_EFFECT_TO_HAVE_A_TYPED_MEDIATED_COMMIT_ROUTE_OR_SEPARATELY_PROVED_EQUIVALENT"
+  },
+  "selected_route": {
+    "manifest": {
+      "path": "canonical/governance/CONTINUITY_SELECTED_DEPLOYMENT_ROUTE_20261007_V1.json",
+      "git_blob_sha": "783501ed976adb13972fa8534b1c3f1ad4cc9e9b"
+    },
+    "entry": {
+      "path": "canonical/runtime/continuity_root3_fixed_entry_v1.py",
+      "git_blob_sha": "af55015eb02f64dfce924b7b0a29cd085ab9de2e"
+    },
+    "adapter": {
+      "path": "canonical/runtime/continuity_root3_inprocess_executor_v1.py",
+      "git_blob_sha": "e5351b413ce9819da7f8e69589a2ac1547c902fa"
+    },
+    "credited_algorithm": {
+      "path": "canonical/runtime/same_identity_supervisor_credited_v1.py",
+      "git_blob_sha": "47c461f502e840def0c38728e1bfd7c6401cb804"
+    },
+    "reachability_verifier": {
+      "path": "canonical/runtime/continuity_root3_selected_route_reachability_v1.py",
+      "git_blob_sha": "49d75afcf265486460751de714b72bf9701315bc"
+    },
+    "filesystem_verifier": {
+      "path": "canonical/runtime/continuity_filesystem_confinement_v1.py",
+      "git_blob_sha": "df0b3139d388ba7459388f95b97bd8d69af2dcd4"
+    },
+    "authority_verifier": {
+      "path": "canonical/runtime/continuity_admin_state_authority_v1.py",
+      "git_blob_sha": "4c843655da6f61abad0a38c29d5922877ee68537"
+    }
+  },
+  "direct_continuity_effect_footprint": {
+    "effect_classes": [
+      "file.open_write",
+      "file.remove",
+      "file.rename",
+      "file.directory_mutation"
+    ],
+    "prefixes": [
+      "canonical/same_identity_worker/state",
+      "canonical/same_identity_worker/evidence",
+      "canonical/same_identity_worker/external_tool_bridge"
+    ],
+    "bridge_rule": "CONTINUITY_ITSELF_CREATES_ONLY_THE_TASK_BRIDGE_DIRECTORY__NO_BRIDGE_PAYLOAD_IS_WRITTEN_BY_THE_CONTINUITY_LEAF",
+    "downstream_rule": "MISSION_EFFECTS_AFTER_HANDOFF_ARE_A_SEPARATE_SELECTED_SEMANTIC_ROUTE_LEAF_AND_RECEIVE_NO_CREDIT_FROM_THIS_THEOREM"
+  },
+  "premise_matrix": {
+    "CREDITED_ROUTE_IDENTITY": "SATISFIED_LOCALLY_BY_EXACT_SELECTED_ROUTE_MANIFEST_AND_EXACT_BLOB_BINDINGS",
+    "REACHABILITY_SOUNDNESS": "SATISFIED_LOCALLY_BY_EXACT_ROUTE_REACHABILITY_AND_FILESYSTEM_CONFINEMENT_VERIFIERS_PLUS_INDEPENDENT_REPLAY",
+    "ENTRY_DOMINANCE": "SATISFIED_LOCALLY_FOR_CONTINUITY_ADMIN_EFFECTS_BY_FIXED_DEPLOYMENT_ENTRY_AND_EXACT_BASE_REDIRECTION_GUARDS",
+    "NO_AMBIENT_EFFECT_CHANNEL": "INHERITED_GLOBAL_D_PREMISE__NOT_CLOSED_BY_THIS_LOCAL_THEOREM",
+    "BROKER_TOTALITY_ON_FOOTPRINT": "SATISFIED_FOR_THE_FOUR_DIRECT_CONTINUITY_EFFECT_CLASSES_BY_THIS_SEPARATELY_PROVED_EQUIVALENT",
+    "FAIL_CLOSED_OUTSIDE_FOOTPRINT": "SATISFIED_LOCALLY_FOR_CONTINUITY_OWNED_EFFECTS_BY_CONTENT_ADDRESSED_STATIC_REACHABILITY_PLUS_EXACT_BASE_REDIRECTION_DENIAL",
+    "BROKER_POSTCONDITIONS": "SATISFIED_LOCALLY_BY_ATOMIC_JSON_COMMIT_STRUCTURE_AND_INDEPENDENT_CHECKPOINT_RESUME_REPLAY_VERIFYING_FINAL_STATE_EVIDENCE_IDENTITY_HASH_AND_NO_PROMOTION_POSTCONDITIONS",
+    "PERSISTENCE_AND_FINAL_OUTPUT_INCLUDED": "SATISFIED_LOCALLY_FOR_CONTINUITY_ADMIN_STATE_AND_EVIDENCE__DOWNSTREAM_MISSION_OUTPUTS_EXPLICITLY_SEPARATE",
+    "INVALIDATION_RULE": "SATISFIED_BY_EXACT_BLOB_BINDINGS__ANY_ENTRY_ADAPTER_SUPERVISOR_REACHABILITY_FILESYSTEM_OR_AUTHORITY_VERIFIER_DRIFT_REOPENS_THIS_CERTIFICATE"
+  },
+  "authority_nonexpansion": {
+    "mutable_admin_state_does_not_define_action_permission_sets": true,
+    "task_manifest_and_mission_bytes_are_not_mutated": true,
+    "mission_and_task_hashes_are_revalidated": true,
+    "self_promotion_disabled": true,
+    "p_real_self_claim_disabled": true,
+    "direct_process_network_native_effects": false,
+    "blocked_or_redirected_paths_fail_closed": true
+  },
+  "independent_replay": {
+    "carrier": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "workspace": "/home/sprite/continuity_admin_state_v2",
+    "redirect_hardening": "PASS_12_CHECKS",
+    "direct_admin_effect_replay": "PASS_CHECKPOINT_75_THEN_TERMINAL_0__ONLY_STATE_AND_EVIDENCE_FILES_CHANGED__BRIDGE_DIRECTORY_ONLY__LOCK_ABSENT",
+    "static_authority_verifier": "PASS__DIRECT_CONTINUITY_ADMIN_EFFECTS_AUTHORITY_NONEXPANSIVE"
+  },
+  "consequence": {
+    "direct_continuity_filesystem_broker_driver_required": false,
+    "reason": "THE_CURRENT_FOUR_DIRECT_CONTINUITY_EFFECT_CLASSES_HAVE_A_CONTENT_ADDRESSED_SEPARATELY_PROVED_EQUIVALENT_UNDER_THE_CURRENT_D_THEOREM",
+    "remaining_D": [
+      "GLOBAL_NO_AMBIENT_EFFECT_CHANNEL_PREMISE",
+      "DOWNSTREAM_SELECTED_MISSION_EFFECT_FOOTPRINT_AND_POSTCONDITIONS_FOR_ANY_CREDITED_COMPOSED_ROUTE",
+      "FUTURE_ACCEPTED_OR_CREDITED_ROUTE_EFFECTS",
+      "FINAL_DONOR_REMOVAL_CLEAN_ROOM_AND_WHOLE_CREDITED_ROUTE_REPLAY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_D_CLOSURE",
+    "NO_CLAIM_DOWNSTREAM_MISSION_EFFECTS_ARE_CLOSED",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED",
+    "NO_NEW_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
