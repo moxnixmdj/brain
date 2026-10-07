@@ -80,6 +80,8 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
         state_map[sid]={**row,"_regions":frozenset(rids)}
 
     uncovered=[]
+    observability_gaps=[]
+    solvability_gaps=[]
     selected={}
     terminal_states=[]
 
@@ -152,6 +154,10 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
 
         if not valid:
             uncovered.append(sid)
+            if len(regions)==1:
+                solvability_gaps.append(sid)
+            else:
+                observability_gaps.append(sid)
             continue
         valid.sort(key=lambda x:(x["resource_cost_units"],x["discriminator_id"]))
         selected[sid]=valid[0]
@@ -165,6 +171,8 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
             "terminal_state_ids":sorted(terminal_states),
             "selected_discriminators":selected,
             "uncovered_state_ids":sorted(uncovered),
+            "observability_gap_state_ids":sorted(observability_gaps),
+            "solvability_gap_state_ids":sorted(solvability_gaps),
             "declared_state_progress_totality":False,
             "terminal_authority":False,
             "u_empty_authorized":False,
@@ -180,6 +188,8 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
         "terminal_state_ids":sorted(terminal_states),
         "selected_discriminators":selected,
         "uncovered_state_ids":[],
+        "observability_gap_state_ids":[],
+        "solvability_gap_state_ids":[],
         "declared_state_progress_totality":True,
         "terminal_authority":False,
         "u_empty_authorized":False,
