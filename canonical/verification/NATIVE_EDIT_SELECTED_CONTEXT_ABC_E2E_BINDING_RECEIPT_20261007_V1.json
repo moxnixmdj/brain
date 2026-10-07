@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_NATIVE_EDIT_SELECTED_CONTEXT_ABC_E2E_BINDING_RECEIPT_V1",
+  "date": "2026-10-07",
+  "status": "SOURCE_BOUND_DIRECT_E2E_CANDIDATE__OBJECTIVE_TOP_CONFIRMED__NO_NEW_INDEPENDENT_REPLAY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/NATIVE_EDIT_SELECTED_CONTEXT_ABC_E2E_BUNDLE_20261007_V1.json",
+    "git_blob_sha": "bfd49c4c59a33ccd409f6c93652aa62efab24614",
+    "branch": "abc-native-edit-cell-v1"
+  },
+  "bound_facts": {
+    "predicate_state": "PROVED",
+    "proof_kind": "ABSOLUTE_CEILING",
+    "independent_or_objective": true,
+    "scope_complete": true,
+    "brain_value": 1,
+    "objective_ceiling_value": 1,
+    "exact_frozen_terminal_cell_cases": 8,
+    "exact_formats": [
+      "docx",
+      "xlsx",
+      "pptx",
+      "pdf"
+    ],
+    "candidate_git_blob_sha": "f3e5090647dd9029ab9f46efd06dc0c0d0addbc3",
+    "structural_public_runner_conclusion": "success",
+    "render_public_runner_conclusion": "success",
+    "target_information_required_for_top_law": false
+  },
+  "derivation": "ON_THE_EXACT_FROZEN_CELL_SCORE_IS_BOUNDED_ABOVE_BY_1_AND_THE_BOUND_BRAIN_ROUTE_HAS_VERIFIED_VALUE_1__THEREFORE_THE_BRAIN_LAW_IS_TOP_ON_THIS_CELL_AND_K_c_minus_IS_EMPTY",
+  "promotion_blockers": [
+    "NO_NEW_EXECUTABLE_BUNDLE_VERIFIER_WAS_ACCEPTED_BY_THE_CONNECTOR",
+    "INCREMENTAL_ROUTE_LOCAL_D_CHECK_REMAINS_IF_THIS_ROUTE_RECEIVES_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERALIZATION_BEYOND_THE_EXACT_FROZEN_8_CASE_NATIVE_EDIT_CELL",
+    "NO_PROFESSIONAL_QUALITY_OR_SEMANTIC_TARGET_SELECTION_CREDIT",
+    "NO_FAMILY_GLOBAL_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
