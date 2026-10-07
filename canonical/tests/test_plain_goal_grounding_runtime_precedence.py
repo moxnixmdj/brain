@@ -150,5 +150,33 @@ class PlainGoalGroundingRuntimePrecedenceTests(unittest.TestCase):
         self.assertEqual(calls[1],"DISCOVERY:"+expected)
 
 
+    def test_control_flow_compile_failure_falls_through_to_bound_grounding(self):
+        goal="If two worlds require different policies, use a truthful discriminator."
+        mission={"mission_id":"GROUNDING-CONTROL-FLOW-FALLTHROUGH","goal":goal}
+        step={"adapter":"goal","goal_ref":"goal","allow_optional_model_planner":False}
+        compile_error=runtime.Blocker(
+            'GOAL_COMPILATION_FAILED:GOAL_CONTROL_FLOW_UNSUPPORTED:{"index":0,"subgoal":"'+goal+'"}'
+        )
+        grounding={
+            "schema":"PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+            "grounded_clause_count":1,
+            "unresolved_clause_indexes":[],
+            "candidate_capability_ids":["terminal.kstar.root.assess.stdlib"],
+            "clauses":[{"index":0,"text":goal,"status":"GROUNDED","candidates":[{"capability_id":"terminal.kstar.root.assess.stdlib"}]}],
+            "model_dependency_count":0,
+        }
+        evidence_path=CANONICAL_ROOT/"astra_runtime"/"evidence"/"GROUNDING-CONTROL-FLOW-FALLTHROUGH__BOUND_CAPABILITY_GROUNDING.json"
+        composition_path=CANONICAL_ROOT/"astra_runtime"/"evidence"/"GROUNDING-CONTROL-FLOW-FALLTHROUGH__COMPOSITION.json"
+        composition={"problem":{"target_effects":["grounded.clause.0.satisfied"],"capabilities":[]}}
+        expected={"status":"UNRESOLVED","output_verified":True}
+        with mock.patch.object(runtime,"_compile_plain_goal",side_effect=compile_error), \
+             mock.patch.object(runtime,"_ground_plain_goal_to_bound_capabilities",return_value=(evidence_path,grounding)), \
+             mock.patch.object(runtime,"_compose_grounding_to_capability_problem",return_value=(composition_path,composition)), \
+             mock.patch.object(runtime,"_run_capability_planned_goal",side_effect=[None,expected]):
+            got=runtime.run_goal(step,mission)
+        self.assertEqual(got["status"],"UNRESOLVED")
+        self.assertEqual(got["composition_mode"],"MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH")
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)

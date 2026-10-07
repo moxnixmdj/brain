@@ -6133,6 +6133,7 @@ def _run_goal_unstamped(step, mission):
         unresolved_marker="GOAL_COMPILATION_FAILED:GOAL_COMPILATION_SUBGOAL_UNRESOLVED:"
         is_no_match="GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH" in error_text
         is_unresolved_subgoal=unresolved_marker in error_text
+        is_control_flow_unsupported="GOAL_COMPILATION_FAILED:GOAL_CONTROL_FLOW_UNSUPPORTED:" in error_text
         optional_planner=bool(step.get("allow_optional_model_planner",False))
         if is_unresolved_subgoal and not optional_planner:
             raw=error_text.split(unresolved_marker,1)[1]
@@ -6142,7 +6143,7 @@ def _run_goal_unstamped(step, mission):
                 acquisition_goal=""
             if not acquisition_goal:
                 raise
-        if (is_no_match or is_unresolved_subgoal) and not optional_planner:
+        if (is_no_match or is_unresolved_subgoal or is_control_flow_unsupported) and not optional_planner:
             gap_class=_classify_plain_goal_gap(acquisition_goal)
             gap_path,gap_evidence=_write_goal_gap_classification(
                 mission,acquisition_goal,gap_class,error_text
