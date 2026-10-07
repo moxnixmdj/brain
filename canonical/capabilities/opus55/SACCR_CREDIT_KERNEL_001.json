@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_SACCR_CREDIT_KERNEL_V1",
   "date": "2026-10-01",
-  "status": "VERIFIED_BRAIN_OWNED_NARROW_STRUCTURED_METHOD_COMPONENT__DONOR_RUNTIME_DELETED__ZERO_FAMILY_CREDIT",
+  "status": "PATCHED_FAIL_CLOSED_ON_MIXED_REFERENCE_CLASSIFICATION__INDEPENDENT_REPLAY_PENDING__ZERO_FAMILY_CREDIT",
   "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
   "artifact": "canonical/runtime/saccr_credit_kernel.py",
-  "artifact_blob_sha": "4a9536a391e21ec9895c1abdf45a673c0451ba3a",
+  "artifact_blob_sha": "8432f67fa81de5a22d38584aeaf98ab3c0431452",
   "donor": {
     "repository": "ankitjha67/baselkit",
     "revision": "52293ef9dfd9d260a0e954460945a7356843d18d",
@@ -39,5 +39,17 @@
     "OPUS_5_5_PARITY"
   ],
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "independent_verification_prior_blob_only": {
+    "prior_artifact_blob_sha": "4a9536a391e21ec9895c1abdf45a673c0451ba3a",
+    "prior_result": "success",
+    "current_blob_covered": false,
+    "reason": "CURRENT_PATCH_ADDS_FAIL_CLOSED_REFERENCE_ENTITY_SUPERVISORY_FACTOR_AND_CORRELATION_CONSISTENCY_CHECKS"
+  },
+  "current_patch": {
+    "commit": "1622c1defdeed5ae82f594420eee6c2b502b36ed",
+    "falsifier": "SAME_REFERENCE_ENTITY_WITH_INCONSISTENT_SUPERVISORY_CLASSIFICATION_WAS_ACCEPTED_BY_CANDIDATE_WHILE_INDEPENDENT_ORACLE_REJECTED",
+    "repair": "FAIL_CLOSED_ON_MIXED_SUPERVISORY_FACTOR_OR_CORRELATION_WITHIN_ONE_REFERENCE_ENTITY",
+    "independent_replay_passed": false
+  }
 }
