@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_EXECUTION_BASE_ISOLATION_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "VERIFIED_QUEUE_FANOUT_REDUCTION__ZERO_TERMINAL_EXPOSURE__ZERO_CREDIT",
+  "runner_repository": "moxnixmdj/verification-capsule-runner",
+  "dedicated_base_branch": "terminal-execution-v1",
+  "isolation_change_commit": "b2c5022007d4fe34bf9c4174458ea4502cfd27d5",
+  "canary_pull_request": 2389,
+  "before": {
+    "canary_head_sha": "66daf9e49fda23361b3f9bd13cc050d78cf3cfc0",
+    "triggered_workflow_count": 10,
+    "unrelated_generic_workflow_count": 9
+  },
+  "after": {
+    "canary_head_sha": "8aefa51df850600403c5b7c627cc71349468deb5",
+    "workflow_run_id": 37621052820,
+    "workflow_job_id": 112791137534,
+    "workflow_name": "Terminal execution base canary v1",
+    "workflow_conclusion": "success",
+    "triggered_workflow_count": 1,
+    "unrelated_generic_workflow_count": 0
+  },
+  "measured_reduction": {
+    "workflows_eliminated_per_marker_pr": 9,
+    "fanout_reduction_fraction": 0.9
+  },
+  "mechanism": "ON_DEDICATED_EXECUTION_BASE_ONLY__NINE_GENERIC_PULL_REQUEST_WORKFLOWS_ARE_SCOPED_TO_MAIN__EXECUTION_SPECIFIC_WORKFLOWS_REMAIN_PATH_GATED",
+  "terminal_case_exposure": false,
+  "fresh_target_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "hard_nonclaims": [
+    "NO_CLAIM_RUNNER_QUEUE_LATENCY_IS_ZERO",
+    "NO_CLAIM_PROVIDER_CAPACITY_IS GUARANTEED",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}
