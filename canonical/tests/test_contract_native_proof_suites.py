@@ -1,5 +1,6 @@
 import unittest
 
+from canonical.runtime.contract_native_brain_candidate import solve
 from canonical.runtime.contract_native_proof_suites import (
     CONTRACTS, generate_case, oracle_candidate, public_task, score_case,
 )
@@ -57,7 +58,7 @@ class ContractNativeProofSuitesTests(unittest.TestCase):
 
     def test_synthesis_missing_provenance_fails(self):
         case=generate_case("EVIDENCE_TO_AUDIENCE_SYNTHESIS_001", 304, 5)
-        candidate=oracle_candidate(case)
+        candidate=solve(public_task(case))
         victim=candidate["selected_claims"][0]
         del candidate["claim_provenance"][victim]
         out=score_case(case,candidate)
@@ -66,12 +67,19 @@ class ContractNativeProofSuitesTests(unittest.TestCase):
 
     def test_synthesis_wrong_provenance_fails(self):
         case=generate_case("EVIDENCE_TO_AUDIENCE_SYNTHESIS_001", 305, 5)
-        candidate=oracle_candidate(case)
+        candidate=solve(public_task(case))
         victim=candidate["selected_claims"][0]
         candidate["claim_provenance"][victim]=["FABRICATED-SOURCE"]
         out=score_case(case,candidate)
         self.assertFalse(out["pass"])
         self.assertTrue(any(x.startswith("PROVENANCE_MISMATCH:") for x in out["reasons"]))
+
+    def test_synthesis_real_candidate_seed80_required_claim_is_supported(self):
+        case=generate_case("EVIDENCE_TO_AUDIENCE_SYNTHESIS_001", 80, 1)
+        candidate=solve(public_task(case))
+        out=score_case(case,candidate)
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(set(candidate["claim_provenance"]),set(candidate["selected_claims"]))
 
     def test_professional_suboptimal_plan_fails(self):
         case=generate_case("PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001", 404, 5)
