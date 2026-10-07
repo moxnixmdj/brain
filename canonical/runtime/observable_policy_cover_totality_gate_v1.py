@@ -22,6 +22,7 @@ Negative result:
 from __future__ import annotations
 
 from functools import lru_cache
+import json
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_OBSERVABLE_POLICY_COVER_TOTALITY_GATE_V1"
@@ -182,10 +183,22 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
         )
         if not ok:
             return _fail(str(reason), discriminator_id=did)
-        # repr gives a deterministic equality key for JSON-like outcome values.
+        try:
+            encoded_outcomes = {
+                wid: json.dumps(
+                    outcomes[wid],
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    ensure_ascii=False,
+                    allow_nan=False,
+                )
+                for wid in world_ids
+            }
+        except (TypeError, ValueError):
+            return _fail("DISCRIMINATOR_OUTCOME_NOT_CANONICAL_JSON", discriminator_id=did)
         obs[did] = {
             "cost": float(cost),
-            "outcomes": {wid: repr(outcomes[wid]) for wid in world_ids},
+            "outcomes": encoded_outcomes,
         }
 
     def common_policies(state: frozenset[str]) -> tuple[str, ...]:
