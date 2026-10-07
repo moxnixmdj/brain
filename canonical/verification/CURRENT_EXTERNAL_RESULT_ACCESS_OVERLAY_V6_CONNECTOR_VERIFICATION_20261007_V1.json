@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_EXTERNAL_RESULT_ACCESS_OVERLAY_V6_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__BUILDKITE_AUTH_ACCESS_RESOURCE_PROTOCOL_ZERO_SPEND_BLOCKERS_RECONCILED__HF_LOGIN_OBSERVED_WITHOUT_SAVED_BROWSER_AUTH__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_EXTERNAL_RESULT_ACCESS_OVERLAY_V6.json",
+    "branch": "truth/external-access-overlay-v6-buildkite-ready-20261007",
+    "governance_commit_sha": "27c1b3b6ff71af37ebb62e40c0271b65229becc2"
+  },
+  "canonical_recomputations": {
+    "buildkite_runtime_receipt": {
+      "path": "canonical/verification/BUILDKITE_ZERO_CASE_RUNTIME_RECEIPT_20261006_V1.json",
+      "git_blob_sha": "5a10884bc32d3c003a26306ec67bbc902b7338bb",
+      "state": "PASS"
+    },
+    "buildkite_protocol": {
+      "path": "canonical/governance/TB4_BUILDKITE_PROTOCOL_EQUIVALENCE_BINDING_20261006_V1.json",
+      "git_blob_sha": "7b94ae5bee70406870ab3e43d1e3e61c7eb6b7b9",
+      "closed_prerequisite": "BUILDKITE_PROTOCOL_EQUIVALENCE"
+    },
+    "buildkite_zero_spend": {
+      "path": "canonical/verification/TB4_BUILDKITE_ACCOUNT_ZERO_SPEND_HARD_STOP_RECEIPT_20261006_V1.json",
+      "git_blob_sha": "75afb4de1594a858b873ec28bbca453ae3c9f40d",
+      "incremental_spend_usd": 0,
+      "trial_expiry_upper_bound": "2026-11-04T22:15:12.749Z"
+    },
+    "buildkite_delta": {
+      "path": "canonical/governance/BENCHMARK_WITNESS_ELIMINATION_BUILDKITE_RESOURCE_DELTA_20261006_V1.json",
+      "git_blob_sha": "1b2bd0bb8c0df7f481eea07d47409e296a027b02",
+      "delete_auth_blocker": true
+    }
+  },
+  "connected_account_observations": {
+    "buildkite_email": {
+      "provider": "GMAIL",
+      "message_id": "1a111d478e237133",
+      "sender": "ola.o@buildkite.com",
+      "subject": "Hey - Ola from Buildkite",
+      "received_at": "2026-10-06T15:28:17",
+      "verified_summary": "BUILDKITE_DSE_STATES_USER_HAS_KICKED_OFF_BUILDS_ON_HOSTED_AGENTS_AND_IS_IN_ONBOARDING_FLOW"
+    },
+    "huggingface_email": {
+      "provider": "GMAIL",
+      "message_id": "1a10e215d6836c7c",
+      "subject": "New login to your Hugging Face account",
+      "verified_summary": "HUGGING_FACE_REPORTED_A_SUCCESSFUL_ACCOUNT_LOGIN_ON_2026_10_05"
+    },
+    "browser_profile_recheck": {
+      "provider": "TINYFISH_PROFILE_LIST_READ_ONLY",
+      "profiles_checked": 2,
+      "any_signed_in_sites": false
+    }
+  },
+  "verified": {
+    "buildkite_interactive_authentication_is_current_blocker": false,
+    "buildkite_carrier_runtime_ready": true,
+    "buildkite_protocol_equivalence_ready": true,
+    "buildkite_zero_incremental_spend_hard_stop_ready": true,
+    "tb4_only_remaining_current_route_proof": "THRESHOLD_GE_66_4_OR_SOUND_STRONGER_CERTIFICATE",
+    "chartography_remaining": "MODEL_LOAD_PLUS_EVALUATOR_RELATION_PLUS_THRESHOLD_OR_STRONGER",
+    "huggingface_account_exists_and_login_observed": true,
+    "huggingface_current_saved_browser_auth_bound": false,
+    "wallet_metered_browser_automation_used": false,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NO_TB4_SCORE_OR_THRESHOLD_CREDIT",
+    "NO_CHARTOGRAPHY_SCORE_OR_THRESHOLD_CREDIT",
+    "NO_HLE_OR_OSWORLD_RESULT_CREDIT",
+    "NO_CLAIM_DIRECT_BUILDKITE_API_TOKEN_AVAILABLE_IN_CURRENT_CHAT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
