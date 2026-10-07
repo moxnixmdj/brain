@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V32_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__V32_REALITY_CUT_V9_RECONCILED__TB_SCIENCE_AUTHORIZED_UNCONSUMED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "272203c54b8f9db0b93c7b033eab04051bd0bf39",
+    "branch": "reality-cut-v9-tbscience-authority-reconcile"
+  },
+  "bindings": {
+    "reality_cut_v9": {
+      "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V9.json",
+      "git_blob_sha": "003f2b2dce926cad966aa238a680a4345f7feba5"
+    },
+    "reality_cut_v9_verification": {
+      "path": "canonical/verification/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V9_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "77464b1f87ef863f29225e65356f8fb203879b5a"
+    }
+  },
+  "verified": {
+    "current_reality_cut": "V9",
+    "positive_reality_class_count": 14,
+    "access_execution_lane_count": 8,
+    "tb_science_rank6_authority_bound": true,
+    "tb_science_rank6_zero_cost_preflight_bound": true,
+    "tb_science_rank6_consumed": false,
+    "stale_v8_current_binding_absent": true
+  },
+  "errors": [],
+  "terminal": false,
+  "terminal_credit_delta": 0,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0
+  }
+}
