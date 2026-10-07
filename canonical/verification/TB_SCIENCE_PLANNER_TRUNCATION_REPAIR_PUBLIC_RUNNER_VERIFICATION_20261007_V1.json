@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PLANNER_TRUNCATION_REPAIR_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_REPAIRED_PLANNER_BYTES__UNIT_TESTS_PASS__PINNED_LOCAL_QWEN_6_OF_6_LIVE_STRUCTURED_PROPOSALS__ZERO_TERMINAL_TASK_EXPOSURE__ZERO_CREDIT",
+  "subject": {
+    "planner": {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "3d6f50be86cc61a9b907a04d8f3fb161c2d40e99",
+      "creating_commit": "e77e5aa202b1504164eb1ffff12d0fea46b61260"
+    },
+    "tests": {
+      "path": "canonical/tests/test_harbor_science_planner_v1.py",
+      "git_blob_sha": "619af1b6e081f4d3f9a520cffb7f518fd23f807a",
+      "creating_commit": "3c5e95f0ec5978baf5ca17ef33c0812ad6391abd"
+    }
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "head_branch": "verify/tb-science-local-qwen-planner-20261003-sol",
+    "head_sha": "3bed535556c18ab055c47d947846e45e0bfaaf02",
+    "workflow_path": ".github/workflows/verify-tb-science-local-qwen-planner-repair.yml",
+    "workflow_git_blob_sha": "2e8146c4e02400403ce86bd2d094551e48cb5244",
+    "workflow_run_id": 37598994697,
+    "workflow_job_id": 112718466296,
+    "run_attempt": 1,
+    "conclusion": "success",
+    "artifact_id": 11472760949,
+    "artifact_name": "tb-science-local-qwen-planner-repair-v1",
+    "artifact_digest": "sha256:69e60e4370e8d2746f8df3348e6766acedb6a70bd48d625708a123e56347f2fe"
+  },
+  "checks": {
+    "exact_planner_blob_match": true,
+    "exact_test_blob_match": true,
+    "no_remote_generation_dependency": true,
+    "unit_tests_pass": true,
+    "pinned_llama_cpp_build_pass": true,
+    "pinned_qwen_bytes_verified": true,
+    "local_endpoint_health_pass": true,
+    "live_structured_proposals_passed": 6,
+    "live_structured_proposals_required": 6,
+    "tool_output_truncated_count": 0,
+    "terminal_task_exposure": 0,
+    "incremental_spend_usd": 0
+  },
+  "observed": {
+    "model": "brain-qwen3.5-9b",
+    "transport": "PINNED_LOCAL_QWEN_LLAMA_CPP_TOOL_CALL",
+    "proposal_durations_s": [
+      73.867,
+      22.441,
+      22.599,
+      22.933,
+      22.906,
+      24.854
+    ],
+    "local_endpoint_health": "ok"
+  },
+  "conclusion": "THE_RANK6_FAILURE_CLASS_SCIENCE_PLANNER_TOOL_ARGUMENTS_JSON_INVALID_FROM_THE_PRIOR_384_TOKEN_BOUND_IS_REPAIRED_FOR_THE_VERIFIED_SYNTHETIC_LIVE_PROPOSAL_SCOPE__THIS_DOES_NOT_GRANT_TB_SCIENCE_SCORE_CREDIT_OR_RANK7_EXECUTION_AUTHORITY",
+  "hard_nonclaims": [
+    "NO_TERMINAL_BENCHMARK_TASK_EXECUTED_BY_THIS_VERIFICATION",
+    "NO_CLAIM_ALL_FUTURE_TOOL_CALLS_CAN_NEVER_TRUNCATE__THE_RUNTIME_FAILS_CLOSED_IF_FINISH_REASON_LENGTH_OCCURS",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_RANK7_EXECUTION_AUTHORITY",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
