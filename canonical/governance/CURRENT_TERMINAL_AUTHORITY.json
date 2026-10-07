@@ -114,7 +114,7 @@
       "git_blob_sha": "4794c5a7d578258e8cf5d08866ee8b7946b6d1c9",
       "independent_verification": {
         "path": "canonical/verification/ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V2_CONNECTOR_VERIFICATION_20261007_V1.json",
-        "git_blob_sha": "64b5bcd06df1fac3375064bfcc3b76c29193c778"
+        "git_blob_sha": "36370480cc14ed4eceb976a3778a0203a5421250"
       }
     },
     "if_scope_complete_protocol_closure": {
