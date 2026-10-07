@@ -1,0 +1,22 @@
+{
+  "schema":"PROJECT_BRAIN_CONTINUITY_ROOT3_ADAPTER_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_SPRITE_PASS_4_OF_4__ZERO_CREDIT",
+  "adapter":{"path":"canonical/runtime/continuity_root3_inprocess_executor_v1.py","git_blob_sha":"a5cee8555b79d330e415d71df827c51bd6339644"},
+  "supervisor":{"path":"canonical/runtime/same_identity_supervisor_credited_v1.py","git_blob_sha":"47c461f502e840def0c38728e1bfd7c6401cb804"},
+  "tests":{"path":"canonical/tests/test_continuity_root3_inprocess_executor_v1.py","git_blob_sha":"8862f341dbe05871b6476d87d65ff6bd9f770e56"},
+  "carrier":{"provider":"SPRITES","sprite":"brain-h100-independent-replay-v1","workspace":"/home/sprite/continuity_root3_replay_v1"},
+  "result":{"passed":4,"total":4},
+  "checks":[
+    "UNEXPECTED_RUNTIME_REJECTED",
+    "IDENTITY_AND_WORKING_CONTEXT_PRESERVED_AND_RESTORED",
+    "CHECKPOINT_RESUME_PRESERVED_WITH_INPROCESS_ROOT3_COMPOSITION",
+    "MISSING_IDENTITY_REJECTED"
+  ],
+  "upstream":{
+    "launcher_git_blob_sha":"3ac42e7be5a391cfda738131ecb0d3d600fa2147",
+    "launcher_existing_replay_git_blob_sha":"01258544e1a06e958f7e5cf2f433b0f995fd053c"
+  },
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0},
+  "hard_nonclaims":["NO_D_CLOSURE","NO_TERMINAL_CREDIT"]
+}
