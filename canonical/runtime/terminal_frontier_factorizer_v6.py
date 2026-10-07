@@ -1,0 +1,106 @@
+from __future__ import annotations
+
+ATOMIC = (
+    "CODING_TB4_GE_66_4",
+    "CHARTOGRAPHY_TOOLS_GE_89",
+    "HLE_TOOLS_GE_67_7",
+    "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "FINANCE_AGENT_V2_GE_58_59",
+    "CODING_FRONTIERCODE_GE_54_4",
+    "PROWORK_GDPVAL_GE_1846",
+    "PROWORK_AA_BRIEFCASE_GE_1822",
+    "AUTOMATIONBENCH_GE_40",
+    "MYSTERYMECHANISM_GE_49_55",
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+    "VISION_DENSE_NONCHART_SCOPE",
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "FINANCE_ACCOUNTING_INDEX_GE_61",
+    "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "CODING_CURSORBENCH_GE_57_8",
+    "TB_SCIENCE_GE_58_7",
+)
+
+DERIVED_INSIDE_ABC = (
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+)
+
+META_REFINEMENTS = (
+    "CYBERSECURITY",
+    "BIOLOGY_RESEARCH_AND_DEVELOPMENT",
+    "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT",
+    "HEALTHCARE",
+    "MATHEMATICAL_REASONING_ARXIVMATH",
+    "MULTILINGUAL_PERFORMANCE",
+    "LONG_CONTEXT",
+    "CREATIVE_DIAGRAM_SURFACE_NONINFERIOR__META",
+)
+
+TARGET_TUPLE_ATOMS = {
+    "CODING_TB4_GE_66_4","CHARTOGRAPHY_TOOLS_GE_89","HLE_TOOLS_GE_67_7",
+    "OSWORLD_2_1_PARTIAL_GE_81_8","FINANCE_AGENT_V2_GE_58_59",
+    "CODING_FRONTIERCODE_GE_54_4","PROWORK_GDPVAL_GE_1846",
+    "PROWORK_AA_BRIEFCASE_GE_1822","AUTOMATIONBENCH_GE_40",
+    "MYSTERYMECHANISM_GE_49_55","FINANCE_ACCOUNTING_INDEX_GE_61",
+    "CODING_CURSORBENCH_GE_57_8","TB_SCIENCE_GE_58_7",
+}
+EXTERNAL_RESULT_ATOMS = TARGET_TUPLE_ATOMS | {
+    "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+}
+STRUCTURAL_ATOMS = set(ATOMIC) - EXTERNAL_RESULT_ATOMS
+EXPECTED_STRUCTURAL = {
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+    "VISION_DENSE_NONCHART_SCOPE",
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+}
+META_TO_ABC = {m:["ABC_SELECTED_CONTEXT_COVER"] for m in META_REFINEMENTS}
+DERIVED_RULES = {
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR":
+        "COMPLETE_SELECTED_CONTEXT_ABC__PRIMITIVE_DOMINANCE__LOCAL_C__B9_DERIVATIVE_THEOREM"
+}
+DERIVATION_VERIFICATION = {
+    "path": "canonical/verification/COMPOSITION_TERMINAL_SUCCESS_DERIVATION_WOLFRAM_VERIFICATION_20261007_V1.json",
+    "commit": "19f28b400fce5a30fa1e8514091bc3022316c399",
+}
+
+def factorize():
+    if STRUCTURAL_ATOMS != EXPECTED_STRUCTURAL:
+        raise RuntimeError("STRUCTURAL_DRIFT")
+    if set(DERIVED_INSIDE_ABC) & set(ATOMIC):
+        raise RuntimeError("DERIVED_STILL_COUNTED_AS_INDEPENDENT")
+    obligations=list(ATOMIC)
+    req={o:[] for o in obligations}
+    for o in TARGET_TUPLE_ATOMS:
+        req[o].append("TARGET_TUPLE_BINDING")
+    for o in EXTERNAL_RESULT_ATOMS:
+        req[o].append("EXTERNAL_RESULT_OR_ACCESS")
+    for o in STRUCTURAL_ATOMS:
+        req[o].append("ABC_SELECTED_CONTEXT_COVER")
+    missing=sorted(o for o,v in req.items() if not v)
+    if missing:
+        raise RuntimeError("UNMAPPED:"+",".join(missing))
+    return {
+      "status":"PASS__19_INDEPENDENT_TERMINAL_CONJUNCTS__COMPOSITION_SUCCESS_DERIVED_INSIDE_ABC__META8_REFINEMENTS__D15_U4__ZERO_CREDIT",
+      "atomic_independent_count":len(ATOMIC),
+      "direct_result_count":len(EXTERNAL_RESULT_ATOMS),
+      "structural_independent_count":len(STRUCTURAL_ATOMS),
+      "derived_inside_abc_count":len(DERIVED_INSIDE_ABC),
+      "meta_refinement_count":len(META_REFINEMENTS),
+      "independent_truth_count":len(ATOMIC),
+      "verified_independent_truth_deletions":5,
+      "independent_obligation_interfaces":{k:sorted(v) for k,v in sorted(req.items())},
+      "derived_rules":DERIVED_RULES,
+      "derivation_verification":DERIVATION_VERIFICATION,
+      "meta_refinement_interfaces":META_TO_ABC,
+      "route_counts":{"D":15,"U":4,"J":0,"G":0,"T":0},
+      "terminal_credit_delta":0,
+      "acceptance_credit_delta":0,
+      "ownership_credit_delta":0,
+    }
+
+if __name__=="__main__":
+    import json
+    print(json.dumps(factorize(),indent=2,sort_keys=True))
