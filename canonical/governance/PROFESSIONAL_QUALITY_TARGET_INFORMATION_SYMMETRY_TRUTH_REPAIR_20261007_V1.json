@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_TARGET_INFORMATION_SYMMETRY_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "TRUTH_REPAIR__WORLD_INFORMED_ORACLE_TARGET_COUNTERMODEL_REJECTED__ACTUAL_OPUS_KERNEL_COMPARATOR_RESTORED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "professional_information_boundary": {
+      "path": "canonical/governance/TERMINAL_NOW_PROFESSIONAL_QUALITY_INFORMATION_BOUNDARY_20261007_V1.json",
+      "git_blob_sha": "79b48e0096a017a679d3e49a8f69b4212e89f896"
+    },
+    "distributional_target_contract": {
+      "path": "canonical/governance/DISTRIBUTIONAL_TARGET_UPPER_ENVELOPE_THEOREM_20261006_V1.json",
+      "git_blob_sha": "3c672b701da1cf8263dd383e8d3dd021a62b4434"
+    },
+    "current_terminal_pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha_at_analysis": "6746ecfcd7a4254d39404b5ac3df297a8fcd2750"
+    }
+  },
+  "defect": {
+    "professional_boundary_assumption": "target_world_informed_success_EQUALS_1_IN_EACH_OPPOSED_HIDDEN_QUALITY_WORLD",
+    "target_contract_rule": "COMPARE_THE_ACTUAL_DEPLOYED_TARGET_AND_BRAIN_KERNELS_UNDER_THE_SAME_ADMISSIBLE_CONTEXT_c",
+    "target_kernel_rule": "FOR_EACH_ADMISSIBLE_CONTEXT_c_THE_FROZEN_OPUS55_KERNEL_INDUCES_ONE_TRAJECTORY_LAW_MU_O_c",
+    "contradiction": "THE_COUNTERMODEL_GIVES_TARGET_A_WORLD_DEPENDENT_ACTION_CHOICE_FROM_HIDDEN_EVALUATOR_STATE_WHILE_DECLARING_THE_PRECOMMITMENT_OBSERVATION_IDENTICAL__THAT_IS_AN_ORACLE_COMPARATOR_UNLESS_THE_HIDDEN_STATE_IS_ACTUALLY_AVAILABLE_TO_OR_CAUSALLY_CHANGES_THE_TARGET_KERNEL."
+  },
+  "corrected_two_world_model": {
+    "actions": ["a", "b"],
+    "same_target_precommitment_information": true,
+    "same_brain_precommitment_information": true,
+    "target_action_probability": "q_EQUALS_Pr_TARGET_CHOOSES_a_AND_IS_THE_SAME_IN_BOTH_WORLDS",
+    "brain_action_probability": "p_EQUALS_Pr_BRAIN_CHOOSES_a_AND_IS_THE_SAME_IN_BOTH_WORLDS",
+    "world_1_evaluator": "u1(a)=1__u1(b)=0",
+    "world_2_evaluator": "u2(a)=0__u2(b)=1",
+    "target_expected_utility": {"world_1": "q", "world_2": "1-q"},
+    "brain_expected_utility": {"world_1": "p", "world_2": "1-p"},
+    "brain_weak_dominance_constraints": ["0<=p<=1", "0<=q<=1", "p>=q", "1-p>=1-q"],
+    "solution": "p=q"
+  },
+  "verified_consequence": {
+    "the_two_world_construction_proves_a_hidden_evaluator_discriminator_is_information_theoretically_necessary_against_actual_opus55": false,
+    "the_two_world_construction_proves_brain_must_match_or_dominate_the_actual_target_law_under_each_admissible_evaluator": true,
+    "professional_quality_U_witness_closed": false,
+    "reason_U_remains_open": "NO_SCOPE_COMPLETE_BOUND_SOURCE_YET_PROVES_THE_BRAIN_OWNED_PROFESSIONAL_QUALITY_LAW_MATCHES_OR_DOMINATES_THE_ACTUAL_OPUS55_LAW_OVER_THE_OPEN_REALISTIC_CONTEXT.",
+    "fresh_evaluator_information_proved_necessary": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "scheduler_effect": [
+    "DO_NOT_TREAT_WORLD_INFORMED_ORACLE_SUCCESS_ONE_IN_EACH_HIDDEN_EVALUATOR_WORLD_AS_THE_OPUS55_TARGET_LAW.",
+    "DO_NOT_REQUIRE_A_HIDDEN_EVALUATOR_DISCRIMINATOR_SOLELY_FROM_THIS_FALSIFIED_ORACLE_COUNTERMODEL.",
+    "FOR_PROFESSIONAL_QUALITY_SEARCH_FIRST_FOR_A_SCOPE_COMPLETE_CERTIFICATE_THAT_THE_BRAIN_OWNED_LAW_MATCHES_OR_DOMINATES_THE_ACTUAL_FROZEN_OPUS55_LAW_UNDER_THE_SAME_EXTERNAL_CONTEXT.",
+    "ONLY_ACQUIRE_NEW_INFORMATION_IF_IT_IS_NEEDED_TO_IDENTIFY_OR_BOUND_THE_ACTUAL_TARGET_LAW_OR_A_LOAD_BEARING_EVALUATOR__NOT_TO_BEAT_AN_OMNISCIENT_ORACLE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PROFESSIONAL_QUALITY_U_IS_CLOSED.",
+    "NO_CLAIM_BRAIN_MATCHES_OPUS55_PROFESSIONAL_QUALITY.",
+    "NO_CLAIM_NO_NEW_TARGET_INFORMATION_WILL_BE_REQUIRED.",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
