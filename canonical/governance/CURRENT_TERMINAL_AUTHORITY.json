@@ -629,6 +629,19 @@
       "path": "canonical/governance/PUBLIC_FIXED_BAR_AGGREGATE_SCOPE_ADMISSION_TRUTH_REPAIR_20261007_V1.json",
       "git_blob_sha": "02cd9d5b3319c0cd7c051e9e1a335613b81f17ea",
       "note": "FIXED_BAR_COVERED_SCOPES_REQUIRE_THE_PROTOCOL_AGGREGATE_ACCEPTANCE_PREDICATE__NOT_AN_UNDECLARED_CASE_LEVEL_OPUS_PREFERENCE_RELATION__UNCOVERED_AND_MATCHED_DIRECT_LEAVES_REMAIN_SEPARATE"
+    },
+    "symbolic_admission_predicate_successor": {
+      "path": "canonical/governance/SYMBOLIC_ADMISSION_PREDICATE_SUCCESSOR_20261007_V1.json",
+      "git_blob_sha": "415347601051ffd8adb0c33537e8c03f571944b8",
+      "runtime": {
+        "path": "canonical/runtime/symbolic_admission_predicate_registry_v1.py",
+        "git_blob_sha": "1156414d3a78d416788472c40afb76b5fd668732"
+      },
+      "tests": {
+        "path": "canonical/tests/test_symbolic_admission_predicate_registry_v1.py",
+        "git_blob_sha": "b16dffb81cfe526795b4e98960f5dead1dc5bf3c"
+      },
+      "note": "DEPLOYED_RESTRICTED_SYMBOLIC_REGION_REGISTRY_AND_EXACT_RESIDUAL_CONSTRUCTOR__NO_UNSAT_OR_U_EMPTY_CREDIT"
     }
   },
   "live_truth": {
@@ -933,7 +946,8 @@
     "symbolic_admission_predicate_successor_independent_public_replay_claimed": false,
     "symbolic_admission_predicate_successor_terminal_authority": false,
     "case_level_opus_relation_required_for_public_fixed_bar_covered_scope": false,
-    "public_fixed_bar_scope_can_be_admitted_from_valid_scope_complete_aggregate_pass": true
+    "public_fixed_bar_scope_can_be_admitted_from_valid_scope_complete_aggregate_pass": true,
+    "current_symbolic_sound_route_population_bound": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
