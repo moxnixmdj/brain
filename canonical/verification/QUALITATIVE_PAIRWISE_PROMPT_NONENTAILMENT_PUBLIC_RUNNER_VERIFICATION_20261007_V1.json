@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_QUALITATIVE_PAIRWISE_PROMPT_NONENTAILMENT_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BYTES__LOGICAL_NONENTAILMENT_VERIFIED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "governance_path": "canonical/governance/QUALITATIVE_PAIRWISE_PROMPT_NONENTAILMENT_CUT_20261007_V1.json",
+    "governance_git_blob_sha": "bd1018b320418aeaa8aa6a06cd8df85521bad2b8",
+    "runtime_path": "canonical/runtime/qualitative_pairwise_prompt_nonentailment_v1.py",
+    "runtime_git_blob_sha": "2d309030afa3dc189579a8d989dfb52614063adf",
+    "tests_path": "canonical/tests/test_qualitative_pairwise_prompt_nonentailment_v1.py",
+    "tests_git_blob_sha": "db0889d0bf7c5a15ed5034003ee5645f25406a03"
+  },
+  "source_boundary_bindings": {
+    "gdpval_public_comparator_cut_git_blob_sha": "9bc454e57d544624a766bc808b56ef8fe673206e",
+    "no_free_lunch_frontier_git_blob_sha": "50ad273cc6c897a1d0809ed5d22c7b76be66124b",
+    "p2_visible_gate_falsifier_git_blob_sha": "23bc8bc11a1e55222f4071320741f40213742b9c"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2381,
+    "head_sha": "c055e675bc6cd8063a3fa35cf689aeddd74560a9",
+    "checked_out_merge_sha": "5c1f3f3b6962ce6db7cc52389be87d0563cf0090",
+    "preservation_merge_commit": "de7a45ff518ecd4cc3d5ab97972ac5c5fb3c0c8b",
+    "workflow_name": "Verify pairwise prompt non-entailment cut",
+    "workflow_run_id": 37612000940,
+    "workflow_job_id": 112761195612,
+    "conclusion": "success"
+  },
+  "independently_verified": {
+    "exact_candidate_bytes": true,
+    "exact_source_boundary_bytes": true,
+    "two_world_same_public_contract_countermodel": true,
+    "opposite_pairwise_preferences_exist_with_unbound_judge_semantics": true,
+    "prompt_and_public_metadata_alone_entail_unique_pairwise_preference": false,
+    "exact_prompt_bytes_alone_sufficient": false,
+    "zero_terminal_credit_preserved": true
+  },
+  "scheduler_effect": [
+    "DELETE_EXACT_PAIRWISE_PROMPT_BYTE_HUNT_AS_A_STANDALONE_TERMINAL_JOB",
+    "FIRST_SEARCH_FOR_EVALUATOR_ROBUST_COMMON_POLICY_OR_SCOPE_COMPLETE_TOP_CLASS",
+    "OTHERWISE_BIND_ONLY_THE_MINIMUM_AUTHENTIC_TARGET_OUTCOME_OR_RELATION_BIT_THAT_CHANGES_THE_SURVIVING_UNSPLITTABLE_CLASS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_REAL_JUDGE_BEHAVIOR_IS_ARBITRARY",
+    "NO_CLAIM_GDPVAL_AA_OR_AA_BRIEFCASE_IS_CLOSED",
+    "NO_CLAIM_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_TRUE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
