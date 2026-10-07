@@ -1,8 +1,8 @@
 """Bridge source-aligned semantic proof v5 into monotone policy resolution.
 
-Source entailment is not policy adequacy. V5 preserves the v3 content-addressed
-Brain-owned adequacy-authentication boundary before returning
-COMMON_POLICY_CERTIFIED.
+V5 source entailment is not policy adequacy. Caller-supplied policy conditions are
+logical queries only. COMMON_POLICY_CERTIFIED requires the same content-addressed,
+Brain-owned adequacy certificate plus independent verification boundary as v3/v4.
 """
 from __future__ import annotations
 
@@ -10,7 +10,9 @@ from typing import Any, Mapping, Sequence
 
 from canonical.runtime.source_aligned_semantic_proof_v5 import verify_proof
 from canonical.runtime.monotone_semantic_constraint_kernel_v1 import resolve_common_policy
-from canonical.runtime.proof_carrying_semantic_refinement_v3 import _authenticate_policy_adequacy
+from canonical.runtime.proof_carrying_semantic_refinement_v3 import (
+    _authenticate_policy_adequacy,
+)
 
 SCHEMA = "BRAIN_PROOF_CARRYING_SEMANTIC_REFINEMENT_V5"
 
@@ -60,26 +62,31 @@ def resolve_from_source_proof(
         }
 
     entailed = list(refinement.get("certified_common_policies", []))
-    bindings = policy_adequacy_bindings if isinstance(policy_adequacy_bindings, Mapping) else {}
-    certified = []
-    authenticated = []
-    rejected = []
-    for policy_id in entailed:
-        condition = policy_conditions.get(policy_id)
+    bindings = (
+        policy_adequacy_bindings
+        if isinstance(policy_adequacy_bindings, Mapping)
+        else {}
+    )
+
+    certified: list[str] = []
+    accepted: list[dict[str, Any]] = []
+    rejected: list[dict[str, Any]] = []
+    for pid in entailed:
+        condition = policy_conditions.get(pid)
         if not isinstance(condition, Mapping):
-            rejected.append({"policy_id": policy_id, "reason": "POLICY_CONDITION_MISSING"})
+            rejected.append({"policy_id": pid, "reason": "POLICY_CONDITION_MISSING"})
             continue
-        ok, row = _authenticate_policy_adequacy(policy_id, condition, bindings.get(policy_id))
+        ok, row = _authenticate_policy_adequacy(pid, condition, bindings.get(pid))
         if ok:
-            certified.append(policy_id)
-            authenticated.append(row)
+            certified.append(pid)
+            accepted.append(row)
         else:
             rejected.append(row)
 
     status = (
-        "COMMON_POLICY_CERTIFIED" if certified else
-        "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED" if entailed else
-        "UNRESOLVED"
+        "COMMON_POLICY_CERTIFIED" if certified
+        else "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED" if entailed
+        else "UNRESOLVED"
     )
     return {
         "schema": SCHEMA,
@@ -88,12 +95,13 @@ def resolve_from_source_proof(
         "semantic_refinement": refinement,
         "entailed_policy_conditions": entailed,
         "certified_common_policies": sorted(certified),
-        "authenticated_policy_adequacy": sorted(authenticated, key=lambda x: x["policy_id"]),
-        "rejected_policy_adequacy_bindings": sorted(rejected, key=lambda x: x.get("policy_id", "")),
+        "authenticated_policy_adequacy": sorted(accepted, key=lambda x: x["policy_id"]),
+        "rejected_policy_adequacy_bindings": sorted(
+            rejected, key=lambda x: x.get("policy_id", "")
+        ),
         "terminal_authority": False,
         "boundary": (
-            "V5_BINDS_EXPLICIT_DEFINED_TERM_CONDITIONS_INTO_MONOTONE_POLICY_RESOLUTION;"
-            "SOURCE_ENTAILMENT_DOES_NOT_SELF_CERTIFY_POLICY_ADEQUACY;"
+            "V5_BINDS_EXPLICIT_DEFINED_TERM_CONDITIONS_BUT_SOURCE_ENTAILMENT_IS_NOT_POLICY_ADEQUACY;"
             "COMMON_POLICY_CERTIFIED_REQUIRES_CONTENT_ADDRESSED_BRAIN_OWNED_ADEQUACY_PLUS_INDEPENDENT_VERIFICATION"
         ),
     }
