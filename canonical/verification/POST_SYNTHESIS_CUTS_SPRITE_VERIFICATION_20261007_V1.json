@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_POST_SYNTHESIS_CUTS_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_REPLAY_PASS__9_OF_9__ZERO_CREDIT",
+  "subjects": {
+    "information_cut": "5071da0058be8a6d109310acffdf21fa1a4ed0a9",
+    "reality_cut": "134b59a1eb6cd21cdb95c35d63e19e246747f05d"
+  },
+  "result": {
+    "information_wakes": 15,
+    "positive_reality_classes": 14,
+    "lanes": 9,
+    "synthesis_removed_from_U": false
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "workspace": "/home/sprite/post_synthesis_cuts"
+  },
+  "terminal_credit_delta": 0
+}
