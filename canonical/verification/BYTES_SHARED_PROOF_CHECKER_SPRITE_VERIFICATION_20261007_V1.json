@@ -1,0 +1,27 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_SHARED_PROOF_CHECKER_SPRITE_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_SPRITE_EXACT_BLOB_PASS__2955_TO_809__ZERO_TERMINAL_CREDIT",
+  "carrier":{"provider":"SPRITES","sprite_name":"brain-heldout003-one-shot","sprite_id":"sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589"},
+  "exact_blobs":{
+    "checker":"1106df820422703e7da8a77a1a7fad62140d6786",
+    "certificate":"403128bd3bcb4c7efb084e034aaf82d476265a4f",
+    "v10_runtime":"91bdde7a88e90bb6a2e411072a1dadb715ff7052"
+  },
+  "verified":{
+    "checker_status":"PASS",
+    "programs":2955,
+    "classes":809,
+    "witnesses":823,
+    "equations":149,
+    "checker_payload_bytes":1360,
+    "certificate_payload_bytes":462,
+    "checker_plus_certificate_joint_payload_bytes":1786,
+    "full_runtime_checker_certificate_joint_payload_bytes":3356,
+    "full_package_roundtrip_exact":true
+  },
+  "hard_nonclaims":[
+    "TRUSTED_RULE_KERNEL_SOUNDNESS_IS_A_REMAINING_META_PROOF_OBLIGATION",
+    "NO_UNCONDITIONAL_TOTALITY_OR_TERMINAL_CREDIT"
+  ]
+}
