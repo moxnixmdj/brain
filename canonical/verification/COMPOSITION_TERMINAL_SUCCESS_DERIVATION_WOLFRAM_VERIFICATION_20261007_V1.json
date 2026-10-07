@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_TERMINAL_SUCCESS_DERIVATION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_DERIVATION_PASS__COMPOSITION_SUCCESS_DERIVED_INSIDE_COMPLETE_ABC__PREMISE_FAILURE_COUNTERMODELS_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/COMPOSITION_TERMINAL_SUCCESS_DERIVATION_TRUTH_REPAIR_20261007_V1.json",
+    "git_blob_sha": "fb52ecf6e0ba703bbad9b0b626ba85057c438215"
+  },
+  "exact_source_audit": {
+    "b9_derivative": {
+      "path": "canonical/governance/B9_COMPOSITION_DERIVATIVE_REDUCTION_20261007_V1.json",
+      "git_blob_sha": "719ad74545f73f4f3e458892b7cd91005499cebd"
+    },
+    "b9_independent_verification": {
+      "path": "canonical/verification/B9_COMPOSITION_DERIVATIVE_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "2cba848dbd30c12da17451b947227a7ee10070f0"
+    },
+    "selected_cover_local_transform_closure": {
+      "path": "canonical/governance/SELECTED_COVER_LOCAL_TRANSFORM_CLOSURE_THEOREM_20261007_V1.json",
+      "git_blob_sha": "ea48341b1962c7c90cc78c6ef9affcabbe9abd26"
+    },
+    "selected_cover_local_transform_independent_verification": {
+      "path": "canonical/verification/SELECTED_COVER_LOCAL_TRANSFORM_CLOSURE_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "583c6a73c5e495292da88753309a6142d26ea338"
+    },
+    "factorizer_v5": {
+      "path": "canonical/runtime/terminal_frontier_factorizer_v5.py",
+      "git_blob_sha": "aa0b762038149d6776463940e1997b70cfc01d06"
+    }
+  },
+  "boolean_model": {
+    "ABC": "COMPLETE_SELECTED_CONTEXT_ABC_FOR_THE_BOUND_TARGET_SCOPE",
+    "P": "PRIMITIVE_ROLE_DOMINANCE_OR_ADEQUACY_FOR_THE_SELECTED_COMPOSITION_ROUTE",
+    "C": "LOCAL_TRANSFORM_CLOSURE_FOR_EVERY_REACHED_LOAD_BEARING_TRANSFORM",
+    "T": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+    "premises": [
+      "ABC_IMPLIES_P_AND_C",
+      "P_AND_C_IMPLIES_T"
+    ],
+    "wolfram_results": {
+      "derivation_tautology": true,
+      "top_level_conjunct_elimination_under_ABC_implies_T": true,
+      "primitive_missing_countermodel": {
+        "ABC": true,
+        "P": false,
+        "C": true,
+        "T": false
+      },
+      "local_C_missing_countermodel": {
+        "ABC": true,
+        "P": true,
+        "C": false,
+        "T": false
+      }
+    }
+  },
+  "verified_consequence": {
+    "delete_as_independent_top_level_truth_variable": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+    "preserve_as_derived_obligation": "EVERY_LOAD_BEARING_COMPOSITION_CELL_MUST_STILL_PROVE_PRIMITIVE_DOMINANCE_OR_ADEQUACY_AND_LOCAL_C_SUFFICIENT_TO_ENTAIL_COMPOSED_TERMINAL_SUCCESS_NONINFERIORITY",
+    "predecessor_independent_terminal_conjunct_count": 20,
+    "verified_candidate_independent_terminal_conjunct_count": 19,
+    "predecessor_structural_independent_conjunct_count": 5,
+    "verified_candidate_structural_independent_conjunct_count": 4,
+    "verified_independent_truth_deletions": 5,
+    "route_counts": {
+      "D": 15,
+      "U": 4,
+      "J": 0,
+      "G": 0,
+      "T": 0
+    }
+  },
+  "fail_closed_boundary": [
+    "IF_A_LOAD_BEARING_COMPOSITION_CONTEXT_IS_OUTSIDE_COMPLETE_ABC__THE_DERIVATION_DOES_NOT_APPLY.",
+    "IF_PRIMITIVE_DOMINANCE_OR_ADEQUACY_IS_MISSING__COMPOSITION_SUCCESS_MAY_BE_FALSE.",
+    "IF_LOCAL_C_IS_MISSING__COMPOSITION_SUCCESS_MAY_BE_FALSE.",
+    "IF_A_TARGET_RELEVANT_EVALUATOR_HARD_CONSTRAINT_OR_STATE_DISTINCTION_IS_OMITTED__REOPEN_THE_DERIVATION."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CURRENTLY_CLOSED.",
+    "NO_CLAIM_ANY_CURRENT_COMPOSITION_CELL_HAS_ALL_PREMISES_BOUND.",
+    "NO_COMPOSITION_SEMANTIC_BURDEN_IS_DELETED.",
+    "NO_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
