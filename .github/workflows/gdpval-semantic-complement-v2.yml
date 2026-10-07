@@ -7,12 +7,14 @@ on:
       - "canonical/runtime/gdpval_semantic_complement_localizer_v2.py"
       - "canonical/tests/test_gdpval_semantic_complement_localizer_v2.py"
       - ".github/workflows/gdpval-semantic-complement-v2.yml"
+      - "canonical/action_intents/ACTION_INTENT_GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_V2_20261007_V1.json"
   pull_request:
     branches: [main]
     paths:
       - "canonical/runtime/gdpval_semantic_complement_localizer_v2.py"
       - "canonical/tests/test_gdpval_semantic_complement_localizer_v2.py"
       - ".github/workflows/gdpval-semantic-complement-v2.yml"
+      - "canonical/action_intents/ACTION_INTENT_GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_V2_20261007_V1.json"
   workflow_dispatch:
 
 permissions:
@@ -34,6 +36,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      - name: Verify execution intent on push
+        if: github.event_name == 'push'
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          p="canonical/action_intents/ACTION_INTENT_GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_V2_20261007_V1.json"
+          x=json.load(open(p))
+          assert x["status"]=="ACTIVE__ONE_PUBLIC_220_STRUCTURAL_LOCALIZATION__ZERO_TARGET_QUERY__ZERO_SPEND", x
+          assert x["fresh_target_model_queries_authorized"]==0, x
+          assert x["provider_evaluation_queries_authorized"]==0, x
+          assert x["incremental_spend_usd_max"]==0, x
+          assert x["acceptance_credit"] is False and x["terminal_credit"] is False, x
+          PY
 
       - name: Verify fail-closed localizer
         id: unit
