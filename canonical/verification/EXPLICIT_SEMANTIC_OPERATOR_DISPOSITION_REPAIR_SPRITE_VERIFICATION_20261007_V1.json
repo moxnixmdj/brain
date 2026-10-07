@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_EXPLICIT_SEMANTIC_OPERATOR_DISPOSITION_REPAIR_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_BLOB_REPLAY_PASS__FALSIFIER_FIXED__23_OF_23_AFFECTED_TESTS_PASS__ZERO_CREDIT",
+  "subject": {
+    "branch": "repair/semantic-counterfactual-disposition-binding-v1",
+    "semantic_runtime_sha": "652155bb3bb46512dc43804e5ec24b22f19e3709",
+    "semantic_tests_sha": "615c8079e33700d4d409fb64994a851141d7d503",
+    "judgment_runtime_sha": "7bcbfc122336a63adc72b57fb0e9077c036a46e1",
+    "judgment_tests_sha": "e712746ecfb0c912779fc6436cbb4f2b51521c3d"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e"
+  },
+  "exact_blob_recomputation": {
+    "pass": true,
+    "method": "GIT_BLOB_SHA1_HEADER_PLUS_NUL_PLUS_BYTES_RECOMPUTED_INSIDE_SPRITE",
+    "checked_blob_count": 4
+  },
+  "results": {
+    "semantic_operator_counterfactual_suite": {
+      "passed": 13,
+      "total": 13
+    },
+    "judgment_control_envelope_suite": {
+      "passed": 10,
+      "total": 10
+    },
+    "total": {
+      "passed": 23,
+      "total": 23
+    },
+    "old_blob_falsifier_reproduced": true,
+    "patched_wrong_disposition_canary_rejected": true
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_CREDIT",
+    "NO_GENERAL_SEMANTIC_COMPLETENESS_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

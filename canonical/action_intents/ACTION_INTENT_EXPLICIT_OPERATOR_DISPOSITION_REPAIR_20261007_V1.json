@@ -1,0 +1,12 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_EXPLICIT_OPERATOR_DISPOSITION_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_SOUNDNESS_REPAIR__ZERO_CREDIT",
+  "action_kind": "TRUTH_REPAIR__SEMANTIC_VALIDATOR_FALSE_POSITIVE",
+  "real_objective": "Prevent enum-valid but semantically wrong counterfactual dispositions from laundering an explicit-operator semantic contract into a passing finance/unknown-domain proof bundle.",
+  "next_action": "MERGE PATCH__REBIND CONTENT_ADDRESSED DOWNSTREAM ROUTES__THEN USE ONLY PATCHED OR SOURCE_ALIGNED PROOF-CARRYING SEMANTIC REFINERS.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
