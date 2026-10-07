@@ -929,7 +929,7 @@
     "single_escape_frontier_definition": "E_EQUALS_S_TRACE_MINUS_D_B",
     "current_primary_u_primitive_count": 1,
     "current_primary_u_primitives": [
-      "ESCAPE_PROGRESS_TOTALITY"
+      "EXACT_SOUND_DB_ADMISSION_COMPLEMENT"
     ],
     "historical_13_open_refinement_families_are_primary_jobs": false,
     "historical_13_open_refinement_families_are_falsification_partitions": true,
@@ -1039,7 +1039,8 @@
     "universal_scope_complete_cover_is_coequal_terminal_proof_route": true,
     "universal_trace_not_x_coequal_terminal_proof_route": true,
     "synthesis_matched_quality_metric_independent_primary_job": false,
-    "synthesis_terminally_useful_quality_dimensions_preserved": true
+    "synthesis_terminally_useful_quality_dimensions_preserved": true,
+    "exact_sound_db_admission_convergence_gate_bound": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -1247,7 +1248,7 @@
   },
   "terminal_execution_root": {
     "path": "canonical/governance/TERMINAL_EXECUTION_ROOT_20261007_V1.json",
-    "git_blob_sha": "1dad167f92faaefc8026586c1078cdbe37c82575",
+    "git_blob_sha": "9c23b1623d306d7cde921f2b4bba64d8aac728b6",
     "runtime_gate": {
       "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
       "git_blob_sha": "7c7e0c34cc599c7114fb83421307db2433e2b269"
@@ -1256,7 +1257,13 @@
       "path": "canonical/tests/test_terminal_root_decision_gate_v1.py",
       "git_blob_sha": "7f51131ad6ee5f26cf752fde853e69cb2abdbf6c"
     },
-    "rule": "OPTIONAL_STRONGER_MULTI_PREDICATE_DISCHARGE_ROUTE__NOT_MANDATORY_TERMINAL_ROOT__TERMINAL_SEMANTICS_OVERRIDE_AND_FROZEN_19_FAMILY_REDUCER_CONTROL_TERMINAL_NECESSITY"
+    "rule": "COEQUAL_SCOPE_COMPLETE_UNIVERSAL_COVER_ROUTE__CURRENT_ROOT_BINDS_EXACT_DB_ADMISSION_CONVERGENCE_GATE__FROZEN_19_REMAINS_DIRECT_WITNESS_ROUTE",
+    "exact_sound_db_admission_convergence_gate": {
+      "path": "canonical/runtime/exact_sound_db_admission_convergence_v1.py",
+      "git_blob_sha": "4cb8e472dd4f8a8f65abd278cada8508d4ba47d0",
+      "tests_path": "canonical/tests/test_exact_sound_db_admission_convergence_v1.py",
+      "tests_git_blob_sha": "e4130b4e3401d382e27e233a02c2447e6c07d459"
+    }
   },
   "zero_bureaucracy_truth_reconciliation_20261007_v1": {
     "status": "BOUND_EXISTING_PROOF_INTO_LIVE_AUTHORITY__NO_TERMINAL_CREDIT",
