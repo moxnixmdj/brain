@@ -1,7 +1,7 @@
 {
-  "schema": "PROJECT_BRAIN_FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_V1",
+  "schema": "PROJECT_BRAIN_FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_V2",
   "date": "2026-10-07",
-  "status": "ACTIVE_SCHEDULING_COMPRESSION__22_OPEN_ATOMS_TO_THREE_REUSABLE_PROOF_ENGINES__IF_PACKAGE_REMOVED_AFTER_VERIFIED_CLOSURE__ZERO_TERMINAL_CREDIT",
+  "status": "ACTIVE_SCHEDULING_COMPRESSION__22_RAW_UNRESOLVED_REGISTRY_ATOMS__18_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__THREE_REUSABLE_PROOF_ENGINES__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "source_bindings": {
     "registry": {
@@ -9,68 +9,95 @@
       "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
     },
     "evidence_ledger": {
-      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "cb7bf612ab443c84d3db3b6183682cf53399003c"
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3.json",
+      "git_blob_sha": "3942d876e13c8a039f06c2e856434f44a9f50781"
     },
     "fixed_bar_truth_repair": {
       "path": "canonical/governance/PUBLIC_FIXED_BAR_AGGREGATE_SCOPE_ADMISSION_TRUTH_REPAIR_20261007_V1.json",
       "git_blob_sha": "02cd9d5b3319c0cd7c051e9e1a335613b81f17ea"
+    },
+    "aa_briefcase_shared_residual": {
+      "path": "canonical/governance/AA_BRIEFCASE_SHARED_RESIDUAL_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "2ec5e65558f7f622d8ab486068a8ebf4ce39bd3e"
+    },
+    "composition_terminal_success_derivation": {
+      "path": "canonical/governance/COMPOSITION_TERMINAL_SUCCESS_DERIVATION_TRUTH_REPAIR_20261007_V1.json",
+      "commit_sha": "3a724ba1b62e57104820fa636ea50bee6eebdd5b",
+      "independent_verification_path": "canonical/verification/COMPOSITION_TERMINAL_SUCCESS_DERIVATION_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "independent_verification_commit_sha": "19f28b400fce5a30fa1e8514091bc3022316c399"
+    },
+    "composition_component_necessity_repair": {
+      "path": "canonical/governance/COMPOSITION_COMPONENT_SCOPED_PROOF_NECESSITY_COUNTERMODEL_20261006_V1.json",
+      "commit_sha": "f05a2e7b527e3f719e95ec0e855d7ebcbd99f21c",
+      "independent_verification_path": "canonical/verification/COMPOSITION_COMPONENT_SCOPED_PROOF_NECESSITY_SPRITE_VERIFICATION_20261006_V1.json"
+    },
+    "composition_critical_invariant_necessity_repair": {
+      "path": "canonical/governance/COMPOSITION_CRITICAL_INVARIANT_NECESSITY_COUNTERMODEL_20261006_V1.json",
+      "promotion_commit_sha": "87b45579d8fdb93f914bc344b0ac4c45468e86a8",
+      "independent_verification_path": "canonical/verification/COMPOSITION_CRITICAL_INVARIANT_NECESSITY_SPRITE_VERIFICATION_20261006_V1.json"
     }
   },
   "exact_current_counts": {
-    "atoms_total": 38,
-    "atoms_proved": 16,
-    "atoms_open": 22
+    "registry_atoms_total": 38,
+    "registry_atoms_proved": 16,
+    "registry_atoms_raw_unresolved": 22,
+    "independent_open_evidence_obligations": 18,
+    "raw_unresolved_labels_removed_as_independent_work": 4,
+    "accepted_family_count": 6,
+    "acceptance_open_family_count": 13,
+    "verified_owned_family_count": 5
   },
   "proof_engines": [
     {
       "id": "E1_PUBLIC_FIXED_BAR_AGGREGATE",
       "semantics": "ONE_GENERIC_CONTAMINATION_SAFE_SCOPE_AGGREGATE_EVALUATOR_AND_ADMISSION_COMPILER__NO_CASE_LEVEL_OPUS_RELATION_REQUIRED",
-      "open_atoms": 14,
-      "unique_measurement_facts": 13,
+      "raw_open_registry_atoms": 14,
+      "independent_measurement_obligations": 13,
       "shared_fact": [
         "PROWORK_AA_BRIEFCASE_GE_1822",
         "ARTIFACT_AA_BRIEFCASE_GE_1822"
       ],
-      "rule": "ONE_VALID_AA_BRIEFCASE_SCOPE_RESULT_MAY_DISCHARGE_BOTH_ATOMS_WHEN_EACH_FAMILY_SCOPE_BINDING_IS_PROVED"
+      "rule": "ONE_VALID_AA_BRIEFCASE_SCOPE_RESULT_IS_ONE_MEASUREMENT_FACT_AND_MAY_DISCHARGE_BOTH_FAMILY_LABELS_WHEN_EACH_SCOPE_BINDING_IS_PROVED__DO_NOT_SCHEDULE_DUPLICATE_MEASUREMENT"
     },
     {
       "id": "E2_MATCHED_PORTFOLIO_NONINFERIORITY_AND_INVARIANTS",
-      "semantics": "ONE_GENERIC_FROZEN_PORTFOLIO_COMPARATOR_OR_STRONGER_SCOPE_COMPLETE_PROOF_CAN_CLOSE_SUCCESS_AND_INVARIANT_ATOMS_TOGETHER",
-      "packages": [
+      "semantics": "ONE_GENERIC_FROZEN_PORTFOLIO_COMPARATOR_OR_STRONGER_SCOPE_COMPLETE_PROOF_CAN_CLOSE_SUCCESS_AND_INVARIANT OBLIGATIONS_TOGETHER",
+      "independent_open_packages": [
         {
           "id": "AGENCY",
-          "atoms": [
+          "obligations": [
             "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
             "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
           ]
         },
         {
-          "id": "COMPOSITION",
-          "atoms": [
-            "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
-            "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
-          ]
-        },
-        {
           "id": "SYNTHESIS",
-          "atoms": [
+          "obligations": [
             "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
           ]
         },
         {
           "id": "VISION_NONCHART",
-          "atoms": [
+          "obligations": [
             "VISION_DENSE_NONCHART_SCOPE"
           ]
         }
       ],
-      "open_atoms": 6,
-      "unique_portfolio_or_stronger_proof_packages": 4,
+      "independent_open_obligation_count": 4,
+      "derived_non_primary": [
+        {
+          "id": "COMPOSITION",
+          "labels": [
+            "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+            "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+          ],
+          "rule": "DO_NOT_SCHEDULE_AS_INDEPENDENT_E2_PACKAGE__TERMINAL_SUCCESS_IS_DERIVED_INSIDE_COMPLETE_SELECTED_CONTEXT_ABC__STANDALONE_CRITICAL_INVARIANT_LABEL_IS_NOT_AN_INDEPENDENT_TERMINAL_TRUTH"
+        }
+      ],
       "closed_packages": [
         {
           "id": "INSTRUCTION_SCOPE",
-          "atoms": [
+          "labels": [
             "IF_SCOPE_BOUNDARY_NONINFERIOR",
             "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
           ],
@@ -81,28 +108,33 @@
     {
       "id": "E3_DIRECT_SCOPE_AND_DEPENDENCY_CLOSURE",
       "semantics": "TARGET_FREE_STRUCTURAL_SCOPE_PROOF_FIRST__NO_MATCHED_OPUS_CALL_BY_DEFAULT",
-      "primary_open_atoms": [
+      "independent_open_obligations": [
         "FINANCE_UNCOVERED_SCOPE_AUDIT"
       ],
-      "derived_open_atoms": [
-        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
-      ],
-      "rule": "COMPOSITION_COMPONENT_SCOPED_PROOFS_IS_DEPENDENCY_DERIVED_AFTER_THE_COMPONENT_SCOPES_USED_BY_FINAL_COMPOSITION_ARE_CLOSED__DO_NOT_SCHEDULE_AN_INDEPENDENT_BENCHMARK"
+      "independent_open_obligation_count": 1,
+      "derived_non_primary": [
+        {
+          "id": "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+          "rule": "DO_NOT_SCHEDULE_AS_AN_INDEPENDENT_TERMINAL_REQUIREMENT__STANDALONE_INTERNAL_COMPONENT_PARITY_WAS FALSIFIED_AS_NECESSARY_FOR_END_TO_END_COMPOSITION_PARITY__SEPARATE_USEFUL_COMPONENT_CAPABILITY_OBLIGATIONS_REMAIN_ELSEWHERE"
+        }
+      ]
     }
   ],
   "scheduler": [
-    "DO_NOT_SCHEDULE_24_ATOMS_AS_24_RESEARCH_PROGRAMS.",
-    "MAINTAIN_EXACT_ATOMIC_TRUTH_FOR_FINAL_REDUCER_BUT_EXECUTE_ONLY_THE_THREE_REUSABLE_PROOF_ENGINES.",
-    "FOR_E1_REUSE_ONE_GENERIC_FIXED_BAR_AGGREGATE_PIPELINE_AND_ACQUIRE_ONLY_MISSING_SCOPE_RESULTS.",
-    "FOR_E2_RACE_EACH_MATCHED_PACKAGE_AGAINST_A_SCOPE_COMPLETE_ABSOLUTE_OR_UNIVERSAL_PROOF__ONE_PACKAGE_RECEIPT_MAY_CLOSE_MULTIPLE_ATOMS.",
-    "FOR_E3_USE_EXISTING_STRUCTURAL_PROOF_MACHINERY__COMPOSITION_DEPENDENCY_IS_DERIVED_NOT_A_SEPARATE_REALITY_WAKE.",
-    "ANY_STRONGER_SCOPE_COMPLETE_PROOF_THAT_DISCHARGES_MULTIPLE_FAMILIES_PREEMPTS_WEAKER_PER_SURFACE_EXECUTION."
+    "DO_NOT_SCHEDULE_22_RAW_UNRESOLVED_REGISTRY_LABELS_AS_22_RESEARCH_PROGRAMS.",
+    "SCHEDULE_ONLY_THE_18_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS_OR_A_STRONGER_SCOPE_COMPLETE_PROOF_THAT_DISCHARGES_MULTIPLE_OF_THEM.",
+    "FOR_E1_REUSE_ONE_GENERIC_FIXED_BAR_AGGREGATE_PIPELINE_AND_ACQUIRE_ONLY_MISSING_SCOPE_RESULTS__AA_BRIEFCASE_IS_ONE_SHARED_MEASUREMENT_FACT.",
+    "FOR_E2_RACE_EACH OF THE THREE INDEPENDENT MATCHED PACKAGES AGAINST_A_SCOPE_COMPLETE_ABSOLUTE_OR_UNIVERSAL_PROOF.",
+    "DO_NOT_SCHEDULE_COMPOSITION_SUCCESS__COMPOSITION_CRITICAL_INVARIANT__OR_COMPOSITION_COMPONENT_SCOPED_PROOFS_AS_INDEPENDENT ACCEPTANCE RESEARCH__PRESERVE THEIR LOAD_BEARING_SEMANTICS_THROUGH_DERIVED_ABC_AND_SEPARATE_COMPONENT_CAPABILITY_OBLIGATIONS.",
+    "FOR_E3_CLOSE_ONLY_FINANCE_UNCOVERED_SCOPE_AS_CURRENT_INDEPENDENT_DIRECT_SCOPE_OBLIGATION.",
+    "ANY_STRONGER_SCOPE_COMPLETE_PROOF_THAT_DISCHARGES_MULTIPLE_INDEPENDENT_OBLIGATIONS_PREEMPTS_WEAKER_PER_SURFACE_EXECUTION."
   ],
   "hard_nonclaims": [
     "NO_CLAIM_ANY_CURRENT_OPEN_FIXED_BAR_HAS_A_BRAIN_PASS_RESULT.",
-    "NO_CLAIM_THE_FIVE_MATCHED_PACKAGES_ARE_ALREADY_CLOSED.",
+    "NO_CLAIM_THE_THREE_INDEPENDENT_MATCHED_PACKAGES_ARE_ALREADY_CLOSED.",
     "NO_CLAIM_FINANCE_UNCOVERED_SCOPE_AUDIT_IS_CLOSED.",
-    "NO_CHANGE_TO_FROZEN_19_FAMILY_TERMINAL_SEMANTICS.",
+    "NO_CLAIM_THE_18_INDEPENDENT_OPEN_OBLIGATIONS_ARE_PROVED.",
+    "NO_WEAKENING_OF_ANY_FROZEN_FAMILY_ACCEPTANCE_SEMANTICS__ONLY_DUPLICATE_OR_LOGICALLY_DERIVED_WORK_IS_REMOVED_FROM_PRIMARY_SCHEDULING.",
     "NO_TERMINAL_CREDIT."
   ],
   "accounting": {
@@ -111,9 +143,35 @@
   },
   "reconciliation_20261007": {
     "live_ledger_proved": 16,
-    "live_ledger_open": 22,
-    "instruction_scope_removed_from_active_E2": true,
+    "live_ledger_raw_open": 22,
+    "independent_open_evidence_obligations": 18,
+    "instruction_scope_closed": true,
+    "aa_briefcase_duplicate_measurement_removed": true,
+    "composition_terminal_success_primary_job_removed": true,
+    "composition_critical_invariant_primary_job_removed": true,
+    "composition_component_scoped_proof_primary_job_removed": true,
     "fresh_reality_consumed": 0,
+    "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "independent_open_obligations": [
+    "CODING_TB4_GE_66_4",
+    "CODING_FRONTIERCODE_GE_54_4",
+    "CODING_CURSORBENCH_GE_57_8",
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+    "PROWORK_GDPVAL_GE_1846",
+    "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+    "AUTOMATIONBENCH_GE_40",
+    "HLE_TOOLS_GE_67_7",
+    "TB_SCIENCE_GE_58_7",
+    "CHARTOGRAPHY_TOOLS_GE_89",
+    "VISION_DENSE_NONCHART_SCOPE",
+    "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "FINANCE_ACCOUNTING_INDEX_GE_61",
+    "FINANCE_AGENT_V2_GE_58_59",
+    "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+  ]
 }
