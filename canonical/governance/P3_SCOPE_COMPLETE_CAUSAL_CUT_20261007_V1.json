@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_P3_SCOPE_COMPLETE_CAUSAL_CUT_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_CURRENT_U_WITNESS_CAUSAL_LOCALIZATION__EIGHT_VERIFIED_COMPONENTS_INSUFFICIENT__ONE_UNIFIED_SCOPE_COMPLETE_P3_EFFECT_TARGET__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "terminal_architecture_self_tournament": {
+      "path": "canonical/governance/TERMINAL_ARCHITECTURE_SELF_TOURNAMENT_20261007_V1.json",
+      "git_blob_sha": "70999148eeb9b7f7c1ad3eabbffb7002cb58e52e"
+    },
+    "p3_current_falsifier": {
+      "path": "canonical/governance/P3_CONTRACT_NATIVE_AUDIENCE_AND_INFORMATION_BOUNDARY_FALSIFIER_20261007_V1.json",
+      "git_blob_sha": "40958e8235429ce63c0e2581dd4675c550ed95af"
+    },
+    "p3_information_safe_candidate": {
+      "path": "canonical/runtime/p3_information_safe_candidate_v3.py",
+      "git_blob_sha": "54bfc7e5ee205aa328863a5ea1ca6f47f864d85a"
+    },
+    "p3_information_safe_independent_preflight": {
+      "path": "canonical/verification/P3_INFORMATION_SAFE_V3_PREFLIGHT_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "c0812ad6e7ee1e1c93d7419ed72f4fc7c9980381"
+    },
+    "synthesis_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "bounded_claim_support": {
+      "path": "canonical/runtime/bounded_claim_support.py",
+      "git_blob_sha": "197246a50ace8c16b945def9edb1357fb317c393"
+    },
+    "generic_evidence_claim_relation": {
+      "path": "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py",
+      "git_blob_sha": "d66a7eb30774f66160b698d8082947776888293d"
+    },
+    "m4_decision_role_relevance": {
+      "path": "canonical/capabilities/opus55/M4_DECISION_ROLE_RELEVANCE_001.json",
+      "git_blob_sha": "6790c3b80e1a2442bbfa653a3683edc20677b301"
+    },
+    "proof_carrying_semantic_refinement_v6": {
+      "path": "canonical/runtime/proof_carrying_semantic_refinement_v6.py",
+      "git_blob_sha": "646c132fe215a3f0ed7e74eafcc5397942a60d55"
+    },
+    "counterexample_guided_synthesizer": {
+      "path": "canonical/runtime/counterexample_guided_causal_architecture_synthesizer_v1.py",
+      "git_blob_sha": "43bb7d4488c537e2f78112e13c58c5d0585c3e99"
+    },
+    "synthesis_input": {
+      "path": "canonical/governance/P3_SCOPE_COMPLETE_CAUSAL_SYNTHESIS_INPUT_20261007_V1.json",
+      "git_blob_sha": "4ecec60e2b5ce971bb5fc900bc93dbbac194be84"
+    }
+  },
+  "concrete_u_witness": {
+    "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "current_unclosed_properties": [
+      "AUDIENCE_ADAPTATION_ADEQUACY",
+      "INFORMATION_BOUNDARY_INDEPENDENCE_FOR_SUPPORT_AND_RELEVANCE_LABELS",
+      "WHOLE_SYNTHESIS_CONTEXT_DOMINANCE"
+    ],
+    "current_contract_native_failure": [
+      "CANDIDATE_DOES_NOT_READ_AUDIENCE",
+      "CANDIDATE_CONSUMES_VISIBLE_ROLE_SUPPORT_LABELS_WITHOUT_COMPLETE_ADMISSIBILITY_BRIDGE"
+    ]
+  },
+  "existing_reuse_scope_truth": {
+    "p3_information_safe_v3": "VERIFIED_BOUNDED_RAW_NUMERIC_EVIDENCE_SUPPORT_CONFLICT_PLUS_VISIBLE_AUDIENCE_KIND_RELEVANCE__NOT_WHOLE_OPEN_ENDED_CONTRACT_SCOPE",
+    "bounded_claim_support": "BOUNDED_EXPLICIT_ENTITY_FIELD_VALUE_FACTS_ONLY__OUTSIDE_GRAMMAR_UNRESOLVED",
+    "generic_evidence_claim_relation": "EXACT_NORMALIZED_TEXT_SUPPORT_AND_EXPLICIT_DECIMAL_RELATION_ONLY__SEMANTIC_ENTAILMENT_AND_SUFFICIENCY_EXPLICITLY_UNVERIFIED",
+    "m4_decision_role_relevance": "BOUNDED_EXPLICIT_BINARY_COMPARISON_ROLE_ANCHORS_ONLY__NO_GENERAL_SEMANTIC_RELEVANCE_OR_SUFFICIENCY",
+    "proof_carrying_semantic_refinement_v6": "VERIFIES_ONLY_SOURCE_CONSTRAINTS_SUPPORTED_BY_ITS_NARROW_PROOF_LANGUAGE_AND_REQUIRES_SEPARATE_CONTENT_ADDRESSED_POLICY_ADEQUACY__NOT_A_GENERAL_NL_SEMANTIC_PARSER"
+  },
+  "exact_causal_synthesis_result": {
+    "carrier": {
+      "provider": "SPRITES",
+      "name": "brain-root3-current-byte-replay-20261007-v1",
+      "id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "working_directory": "/home/sprite/p3_causal_synthesis_v2"
+    },
+    "synthesizer_git_blob_sha": "43bb7d4488c537e2f78112e13c58c5d0585c3e99",
+    "frontier_component_count": 8,
+    "admissible_component_count": 8,
+    "architectures_evaluated": 256,
+    "classification": "NEW_PRIMITIVE_REQUIRED",
+    "missing_required_effects": [
+      "P3_INFORMATION_BOUNDARY_SOUND",
+      "P3_SCOPE_COMPLETE_AUDIENCE_CONDITIONED_POLICY_ADEQUACY",
+      "P3_SCOPE_COMPLETE_SUPPORT_RELEVANCE_BINDING",
+      "P3_WHOLE_SYNTHESIS_CONTEXT_DOMINANCE"
+    ],
+    "exact_over_declared_frontier": true
+  },
+  "first_principles_collapse": {
+    "unified_effect": "P3_SCOPE_COMPLETE_GROUNDED_AUDIENCE_CONDITIONED_POLICY_DOMINANCE",
+    "definition": "A_BRAIN_OWNED_POLICY_OR_CERTIFICATE_ROUTE_THAT_FOR_THE_WHOLE_FROZEN_P3_SCOPE_DERIVES_OR_SOUNDLY_BINDS_CLAIM_SUPPORT_AND_DECISION_RELEVANCE_FROM_ONLY_ALLOWED_INFORMATION__ACTUALLY_CONDITIONS_ON_EXPLICIT_AUDIENCE_AND_OUTPUT_CONSTRAINTS__PRESERVES_PROVENANCE_CONFLICT_AND_MATERIAL_UNCERTAINTY__AND_PROVES_THE_SELECTED_POLICY_ADEQUATE_OR_DOMINANT_ON_EVERY_ADMITTED_CONTEXT",
+    "entails": [
+      "P3_SCOPE_COMPLETE_SUPPORT_RELEVANCE_BINDING",
+      "P3_INFORMATION_BOUNDARY_SOUND",
+      "P3_SCOPE_COMPLETE_AUDIENCE_CONDITIONED_POLICY_ADEQUACY",
+      "P3_WHOLE_SYNTHESIS_CONTEXT_DOMINANCE"
+    ],
+    "subeffects_are_not_four_independent_build_targets": true,
+    "build_target_count": 1
+  },
+  "scheduler_effect": [
+    "DO_NOT_BUILD_FOUR_SEPARATE_P3_FIXES.",
+    "DO_NOT_REOPEN_PROVENANCE__BOUNDED_NUMERIC_SUPPORT__EXACT_TEXT_SUPPORT__EXPLICIT_DECIMAL_RELATIONS__OR_BOUNDED_BINARY_COMPARISON_RELEVANCE_AS_PRIMARY_WORK.",
+    "ATTACK_ONLY_P3_SCOPE_COMPLETE_GROUNDED_AUDIENCE_CONDITIONED_POLICY_DOMINANCE_OR_A_STRONGER_WHOLE_P3_COMMON_POLICY_CERTIFICATE.",
+    "IF_A_SCOPE_COMPLETE_COMMON_POLICY_IS_PROVED__NO_HIDDEN_SUPPORT_OR_RELEVANCE_LABEL_ACQUISITION_IS_REQUIRED.",
+    "IF_NO_COMMON_POLICY_EXISTS__TOURNAMENT_LAW_REQUIRES_ONLY_THE_MINIMUM_TRUTHFUL_POLICY_CHANGING_DISCRIMINATOR__NOT_A_GENERAL_WORLD_MODEL.",
+    "NO_DIRECT_BENCHMARK_OR_TARGET_MODEL_CALL_IS_JUSTIFIED_BY_THIS RESULT ALONE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_UNIFIED_EFFECT_IS_IMPLEMENTED.",
+    "NO_CLAIM_A_GENERAL_NATURAL_LANGUAGE_SEMANTIC_ENGINE_IS_PROVED_NECESSARY.",
+    "NO_CLAIM_EXTERNAL_TARGET_INFORMATION_IS_PROVED_NECESSARY.",
+    "NO_CLAIM_U_EMPTY.",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
