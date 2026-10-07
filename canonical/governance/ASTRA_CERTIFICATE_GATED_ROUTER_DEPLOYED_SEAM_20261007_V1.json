@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_CERTIFICATE_GATED_ROUTER_DEPLOYED_SEAM_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_DEPLOYED_RUNTIME_SOURCE_BINDING__PENDING_INDEPENDENT_RUNNER__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "b249e76995d687caf9a6f07011d784d14a16d570"
+    },
+    "router_runtime": {
+      "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+      "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
+    },
+    "router_governance": {
+      "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_RUNTIME_20261007_V1.json",
+      "git_blob_sha": "4bb599a386ee23908155069235b4f754c0f1cb90"
+    },
+    "seam_test": {
+      "path": "canonical/tests/test_astra_certificate_gated_router_deployed_seam_v1.py",
+      "git_blob_sha": "7812aed40e3a6cdca47bf47e53704f02a5675c5b"
+    }
+  },
+  "execution_seam": {
+    "astra_action_type": "select_certified_route",
+    "delegate": "certificate_gated_selected_route_router_v1.select_certified_route",
+    "accepts_only": "EXPLICIT_CONTENT_ADDRESSED_ADMISSION_RECEIPTS",
+    "returns": [
+      "SELECTED_CELL_ID",
+      "SELECTED_ROUTE_ID",
+      "ROUTE_BLOB_SHA",
+      "ADEQUACY_CERTIFICATE_BLOB_SHA",
+      "ADMISSION_CERTIFICATE_BLOB_SHA"
+    ],
+    "fail_closed_on": [
+      "MISSING_CONTEXT",
+      "MISSING_OR_MALFORMED_RECEIPTS",
+      "NON_BOOLEAN_ADMISSION",
+      "ROUTER_REJECTED_OR_UNCOVERED_CONTEXT"
+    ],
+    "semantic_adequacy_self_certified": false
+  },
+  "verification_contract": {
+    "workflow": ".github/workflows/verify-astra-certificate-gated-router-seam.yml",
+    "required": [
+      "EXACT_ASTRA_RUNTIME_COMPILES",
+      "EXACT_ROUTER_RUNTIME_COMPILES",
+      "ASTRA_GOAL_ACTION_EXECUTES_CERTIFIED_SELECTION",
+      "UNCOVERED_CONTEXT_FAILS_CLOSED",
+      "NON_BOOLEAN_ADMISSION_FAILS_CLOSED"
+    ],
+    "promotion_requires": [
+      "INDEPENDENT_GITHUB_RUNNER_PASS_ON_EXACT_BYTES",
+      "MERGED_TO_MAIN",
+      "EXACT_MAIN_REPLAY_OR_EQUIVALENT_RUNTIME_EXECUTION_RECEIPT"
+    ]
+  },
+  "truth_effect": {
+    "deployed_runtime_source_binding_implemented": true,
+    "deployed_runtime_execution_observed": false,
+    "per_cell_admission_semantics_closed": false,
+    "per_cell_adequacy_closed": false,
+    "selected_cover_complete": false,
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
