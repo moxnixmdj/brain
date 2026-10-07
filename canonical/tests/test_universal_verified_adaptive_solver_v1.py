@@ -370,3 +370,99 @@ def test_unparsed_normative_requirement_requests_more_information_not_false_succ
     )
     assert out["status"] == "NEED_MORE_INFORMATION"
     assert "STRUCTURED_OUTPUT_VERIFIED" not in out["verified_facts"]
+
+
+def _effect_problem():
+    return {
+        "initial_facts": [],
+        "target_effects": ["RECEIPT_WRITTEN_AND_VERIFIED"],
+        "capabilities": [{
+            "id": "write-receipt",
+            "requires": [],
+            "provides": ["RECEIPT_WRITTEN_AND_VERIFIED"],
+            "cost": 1,
+            "result_fields": [],
+            "action": {
+                "type": "verified_effect_tool",
+                "pre_verifier_id": "TYPED_ACCEPTANCE_PROGRAM_V1",
+                "pre_verifier_payload": {
+                    "program": {
+                        "schema": "PROJECT_BRAIN_TYPED_ACCEPTANCE_PROGRAM_SPEC_V1",
+                        "fields": [
+                            {"id": "name", "type": "enum", "dimension": "dimensionless", "source": "candidate"},
+                            {"id": "score", "type": "number", "dimension": "score", "source": "candidate"},
+                            {"id": "passed", "type": "boolean", "dimension": "dimensionless", "source": "candidate"},
+                        ],
+                        "accept_when": {
+                            "op": "and",
+                            "args": [
+                                {
+                                    "op": "eq",
+                                    "left": {"op": "ref", "id": "name"},
+                                    "right": {"op": "const", "type": "enum", "dimension": "dimensionless", "value": "Alice"},
+                                },
+                                {
+                                    "op": "ge",
+                                    "left": {"op": "ref", "id": "score"},
+                                    "right": {"op": "const", "type": "number", "dimension": "score", "value": 0.5},
+                                },
+                                {"op": "ref", "id": "passed"},
+                            ],
+                        },
+                    },
+                    "trusted_values": {},
+                },
+                "executor_id": "H100_VERIFIED_EFFECT_TOOL_REGISTRY_V1",
+                "executor_payload": {
+                    "tool_id": "JSON_RECEIPT_WRITER_V1",
+                    "sandbox_rel": "mission-1",
+                },
+            },
+        }],
+    }
+
+
+def test_verified_effect_executes_then_readback_advances_state(tmp_path):
+    out = run(
+        _effect_problem(),
+        proposal_packets={
+            "write-receipt": [{
+                "candidate_values": {"name": "Alice", "score": 0.75, "passed": True},
+            }],
+        },
+        effect_root=str(tmp_path),
+    )
+    assert out["pass"] is True, out
+    assert "RECEIPT_WRITTEN_AND_VERIFIED" in out["verified_facts"]
+    assert (tmp_path / "mission-1" / "receipts" / "result.json").is_file()
+    assert out["trace"][0]["effect_outcome_sha256"]
+
+
+def test_falsified_effect_proposal_never_reaches_carrier(tmp_path):
+    out = run(
+        _effect_problem(),
+        proposal_packets={
+            "write-receipt": [{
+                "candidate_values": {"name": "Alice", "score": 0.10, "passed": True},
+            }],
+        },
+        effect_root=str(tmp_path),
+    )
+    assert out["pass"] is False
+    assert out["status"] == "ALL_AVAILABLE_PROPOSALS_FALSIFIED"
+    assert not (tmp_path / "mission-1" / "receipts" / "result.json").exists()
+    assert "RECEIPT_WRITTEN_AND_VERIFIED" not in out["verified_facts"]
+
+
+def test_effect_that_passes_precheck_still_cannot_run_without_effect_root():
+    out = run(
+        _effect_problem(),
+        proposal_packets={
+            "write-receipt": [{
+                "candidate_values": {"name": "Alice", "score": 0.75, "passed": True},
+            }],
+        },
+    )
+    assert out["pass"] is False
+    assert out["status"] == "BLOCKED__EFFECT_ROOT_REQUIRED"
+    assert "RECEIPT_WRITTEN_AND_VERIFIED" not in out["verified_facts"]
