@@ -1,0 +1,23 @@
+name: Verify terminal strike compiler v1
+on:
+  pull_request:
+    paths:
+      - canonical/runtime/terminal_strike_compiler_v1.py
+      - canonical/tests/test_terminal_strike_compiler_v1.py
+      - .github/workflows/verify-terminal-strike-compiler-v1.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_terminal_strike_compiler_v1
+      - run: python canonical/runtime/terminal_strike_compiler_v1.py . > terminal-strike-plan.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: terminal-strike-plan-v1
+          path: terminal-strike-plan.json
