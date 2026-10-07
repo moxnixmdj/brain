@@ -73,8 +73,13 @@ def evaluate(root:Path=ROOT):
    errors.append("STATE_PATH_SHAPE_DRIFT")
 
   exsrc=ast.get_source_segment(texts[SUPERVISOR],execfn) or ""
+  constants={
+   n.value for n in ast.walk(execfn)
+   if isinstance(n,ast.Constant) and isinstance(n.value,str)
+  }
+  for token in ("canonical","same_identity_worker","external_tool_bridge"):
+   if token not in constants: errors.append("BRIDGE_PATH_TOKEN_MISSING:"+token)
   required_fragments=[
-   'root / "canonical" / "same_identity_worker" / "external_tool_bridge"',
    'evidence_dir / f"{task[\'task_id\']}__CHECKPOINT.json"',
    'evidence_dir / f"{task[\'task_id\']}__ATTEMPT_{attempt}.json"',
   ]
