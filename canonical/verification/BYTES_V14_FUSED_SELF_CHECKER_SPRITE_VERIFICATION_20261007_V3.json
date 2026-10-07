@@ -1,0 +1,10 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_FUSED_SELF_CHECKER_V3_SPRITE_VERIFICATION",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_SPRITE_EXACT_BLOB_PASS__2626_BYTE_FULL_PACKAGE__ZERO_TERMINAL_CREDIT",
+  "carrier":{"provider":"SPRITES","sprite_name":"h100-real-image-v1","sprite_id":"sprite-68a466f6-88d5-493d-93f3-2b85377836a3"},
+  "exact_blobs":{"v14_runtime":"f5d140ca78b1512efd3ad248e5991909480331d5","checker":"e293377231da5cfee42b4bd453ebf80d082c454e"},
+  "replay":{"status":"PASS","programs":2955,"generated_equations":933,"classes":809,"witnesses":105},
+  "joint_encoding":{"raw_bytes":6682,"payload_bytes":2626,"payload_sha256":"2c225a63db9b72157efc113842fe42b7d96ea3186f9797fd66eac56aaf06abfb","tested_lzma1_configurations":15000,"match_finder":"BT2","python_lzma_constant":18,"roundtrip_exact":true},
+  "hard_nonclaims":["CLASS_SPECIFIC_RULE_KNOWLEDGE_REMAINS_IN_THE_CHECKER","TRUSTED_META_LEVEL_RULE_SOUNDNESS_REMAINS_OPEN","NO_TERMINAL_CREDIT"]
+}

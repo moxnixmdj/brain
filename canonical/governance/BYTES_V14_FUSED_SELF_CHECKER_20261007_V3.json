@@ -1,0 +1,31 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_FUSED_SELF_CHECKER_V3",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_EXACT_BLOB_REPLAY_PASS__2626_BYTE_FULL_RUNTIME_PLUS_SELF_PROOF_PACKAGE__UNCHANGED_TRUST_BOUNDARY__ZERO_TERMINAL_CREDIT",
+  "scope_lock":"BYTES_RESEARCH_ONLY",
+  "components":{
+    "runtime":{"path":"canonical/runtime/bytes_generic_zero_overhead_totality_core_v14.py","git_blob_sha":"f5d140ca78b1512efd3ad248e5991909480331d5","raw_bytes":3923},
+    "checker":{"path":"canonical/runtime/bytes_v14_fused_self_checker_v3.py","git_blob_sha":"e293377231da5cfee42b4bd453ebf80d082c454e","raw_bytes":2757,"standalone_best_payload_bytes":1238}
+  },
+  "fusion_changes":[
+    "REUSE_V14_PRIMITIVE_f_FOR_CONCRETE_SCALAR_POINT_EXECUTION_INSTEAD_OF_DUPLICATING_SCALAR_RUNTIME",
+    "REUSE_V14_OPERATOR_ALPHABET_L_INSTEAD_OF_STORING_A_SECOND_FULL_ALPHABET_LITERAL",
+    "REUSE_V14_105_INPUT_CHARACTERISTIC_ARRAY_FOR_CONCRETE_WITNESS_SIGNATURES_INSTEAD_OF_REGENERATING_THE_823_INPUT_SET",
+    "KEEP_THE_EXISTING_SYMBOLIC_TAIL_STATE_PROOF_AND_THE_EXISTING_933_EQUATION_RULE_KERNEL"
+  ],
+  "independent_result":{"carrier":"h100-real-image-v1","status":"PASS","programs":2955,"generated_equations":933,"classes":809,"witnesses":105},
+  "joint_package":{
+    "framing":"TWO_BYTE_BIG_ENDIAN_RUNTIME_LENGTH_THEN_EXACT_RUNTIME_BYTES_THEN_EXACT_CHECKER_BYTES",
+    "raw_bytes":6682,
+    "fixed_decoder_payload_bytes":2626,
+    "payload_sha256":"2c225a63db9b72157efc113842fe42b7d96ea3186f9797fd66eac56aaf06abfb",
+    "decoder":{"codec":"PYTHON_STDLIB_RAW_LZMA1","dict_size":8192,"lc":0,"lp":0,"pb":0,"mode":"NORMAL","match_finder":"BT2","python_lzma_constant":18,"nice_len":64},
+    "search_configurations_tested":15000,
+    "roundtrip_exact":true
+  },
+  "comparison":{"previous_smallest_full_package_bytes":2674,"new_full_package_bytes":2626,"bytes_saved":48,"saved_vs_original_v10_self_checker_package_bytes":226,"trust_boundary_changed":false},
+  "critical_truth":"THE_105_INPUT_REUSE_IS_ONLY_A_CONCRETE_CROSS_COMPONENT_SANITY_CHECK__GLOBAL_RULE_SOUNDNESS_REMAINS_WHERE_IT_ALREADY_WAS_IN_THE_SELF_CERTIFYING_RULE_KERNEL__NO_PROOF_BYTES_WERE_EXTERNALIZED",
+  "next_critical_path":"DERIVE_OR_REDUCE_THE_CLASS_SPECIFIC_SEQUENCE_RULE_KERNEL_FROM_PRIMITIVE_LIST_SEMANTICS_WITHOUT_GIVING_BACK_THE_PACKAGE_GAIN",
+  "hard_nonclaims":["NO_ZERO_TRUST_PROOF","NO_GENERAL_PROGRAM_EQUIVALENCE_CLAIM","NO_GLOBAL_MINIMUM_DESCRIPTION_LENGTH_CLAIM","NO_TERMINAL_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
