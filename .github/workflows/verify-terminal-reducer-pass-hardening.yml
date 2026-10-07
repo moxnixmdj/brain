@@ -1,0 +1,45 @@
+name: Verify terminal reducer PASS hardening
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/verify-terminal-reducer-pass-hardening.yml'
+      - 'canonical/runtime/terminal_closure_reducer.py'
+      - 'canonical/runtime/test_terminal_closure_reducer.py'
+      - 'canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py'
+      - 'canonical/tests/test_terminal_closure_reducer_v2.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run terminal reducer regression suites
+        run: |
+          set -euo pipefail
+          python -m pytest -q \
+            canonical/runtime/test_terminal_closure_reducer.py \
+            canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py \
+            canonical/tests/test_terminal_closure_reducer_v2.py
+      - name: Recompute current manifest fail-closed state
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.terminal_closure_reducer import evaluate_manifest
+          root = Path('.').resolve()
+          manifest = json.loads((root / 'canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json').read_text())
+          out = evaluate_manifest(manifest, repo_root=root)
+          assert out['achieved'] is False, out
+          assert out['closed_family_count'] == 7, out
+          print(json.dumps(out, sort_keys=True))
+          PY
