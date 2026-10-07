@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_U_EMPTY_NONDERIVABILITY_FROM_CERTIFICATE_COUNT_V1",
+  "date": "2026-10-07",
+  "status": "PASS__INDEPENDENT_WOLFRAM_COUNTERMODEL__COUNT_IS_NOT_EXHAUSTIVENESS__ZERO_TERMINAL_CREDIT",
+  "premises_tested": [
+    "THE_TARGET_UNIVERSE_T_IS_CLOSED.",
+    "THERE_ARE_EXACTLY_SIXTEEN_SOUND_CERTIFICATE_REGIONS_C_i_SUBSET_T.",
+    "NO_EXPLICIT_EXHAUSTIVE_COVER_WITNESS_T_SUBSET_UNION_i_C_i_IS_ASSUMED."
+  ],
+  "countermodels": {
+    "empty_U_model": {
+      "T": "1..16",
+      "C_i": "{i} for i=1..16",
+      "all_certificates_sound": true,
+      "U": []
+    },
+    "nonempty_U_model": {
+      "T": "1..17",
+      "C_i": "{i} for i=1..16",
+      "all_certificates_sound": true,
+      "U": [17]
+    }
+  },
+  "independent_wolfram_result": {
+    "modelEmptySound": true,
+    "modelEmptyU": [],
+    "modelResidualSound": true,
+    "modelResidualU": [17],
+    "sameCertificateCount": true,
+    "conclusion": "SOUND_16_CERTIFICATES_PLUS_CLOSED_T_DOES_NOT_ENTAIL_U_EMPTY_WITHOUT_EXHAUSTIVE_COVER_WITNESS"
+  },
+  "scheduler_effect": [
+    "DO_NOT_PROMOTE_U_EMPTY_FROM_CERTIFICATE_COUNT__CACHE_GROWTH__OR_TARGET_SCOPE_CLOSURE_ALONE.",
+    "REQUIRE_AN_EXPLICIT_SCOPE_COMPLETE_COVER_WITNESS_OR_EQUIVALENT_MACHINE_CHECK_OVER_THE_CLOSED_TARGET_TRACE_UNIVERSE.",
+    "ANY_LIVE_BRANCH_THAT_ONLY_ADDS_ANOTHER_BOUNDED_CELL_WITHOUT_CLOSING_A_RESIDUAL_PARTITION_GETS_ZERO_TERMINAL_CREDIT."
+  ],
+  "truth_boundary": {
+    "U_empty_proved": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
