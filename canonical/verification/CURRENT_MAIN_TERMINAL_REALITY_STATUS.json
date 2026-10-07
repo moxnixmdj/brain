@@ -13,7 +13,7 @@
   "progress": {
     "frozen_family_count": 19,
     "strict_acceptance_pass_family_count": 6,
-    "verified_owned_equal_or_better_family_count": 5,
+    "verified_owned_equal_or_better_family_count": 6,
     "acceptance_open_family_count": 13,
     "frozen_atomic_predicate_count": 38,
     "frozen_atomic_predicates_proved": 16,
@@ -22,7 +22,8 @@
     "nonindependent_raw_unresolved_scheduler_labels": 4,
     "primary_acceptance_proof_engine_count": 3,
     "new_target_reality_units_consumed": 0,
-    "incremental_spend_usd": 0
+    "incremental_spend_usd": 0,
+    "fully_terminally_closed_family_count": 6
   },
   "remaining_terminal_conditions": [
     "CLOSE_THE_18_INDEPENDENT_OPEN_ACCEPTANCE_EVIDENCE_OBLIGATIONS_OR_SOUNDLY_DISCHARGE_THEM_BY_STRONGER_SCOPE_COMPLETE_PROOFS",
@@ -47,5 +48,7 @@
     "composition_terminal_success_is_derived_not_primary": true,
     "duplicate_aa_briefcase_measurement_is_one_fact": true,
     "no_work_counts_unless_it_closes_an_independent_open_obligation_or_soundly_discharges_one_or_more_by_stronger_scope_complete_proof": true
-  }
+  },
+  "source_manifest_path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+  "source_manifest_blob_sha": "f76dffc50b6f8b382d4e3033fde70d3ea5f6e4ca"
 }
