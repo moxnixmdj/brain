@@ -1,30 +1,47 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V6",
   "status": "CURRENT_MAIN_TERMINAL_NOT_REAL",
-  "checked_by": "CHATGPT_DIRECT_FROZEN_PROTOCOL_ROOT_RECONCILIATION",
+  "checked_by": "CHATGPT_DIRECT_FROZEN_PROTOCOL_RECONCILIATION",
   "source_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-  "source_authority_blob_sha": "1fea8473d2c8c20f660b3771dfbfcf137bdbf1a3",
-  "evaluated_parent_main_commit_sha": "686d06678e1d987f68dca85d036b9448600fe3e7",
-  "phase": "FROZEN_PROTOCOL_ACCEPTANCE_ROOT",
+  "source_authority_blob_sha": "78f2c59aa35414ae24fb82190ece3e5b003c3e8f",
+  "source_authority_commit_sha": "74b82f3fba495e5ae6a68c5aabfb1b7eef25f4e5",
+  "phase": "FROZEN_PROTOCOL_CLOSURE",
   "live_research_root_count": 1,
-  "blockers": [
-    "ALL_FROZEN_TERMINAL_PROTOCOLS_PASS_AND_ALL_REQUIRED_OWNERSHIP_FINALITY_PREDICATES_PASS"
-  ],
-  "optional_stronger_routes": [
-    "PROVE_RESIDUAL_COMPLEMENT_UNSAT_OVER_EXACT_SOUND_ADMISSION_PREDICATE_SET",
-    "PROVE_EQUIVALENT_SCOPE_COMPLETE_ESCAPE_PROGRESS_TOTALITY"
-  ],
-  "anti_bureaucracy": {
-    "optional_stronger_route_is_not_mandatory_root": true,
-    "family_labels_are_evaluation_surfaces_not_parallel_research_programs": true,
-    "progress_counts_only_when_open_frozen_acceptance_or_ownership_predicates_are_discharged": true,
-    "post_acceptance_finalization_is_not_parallel_research": true
+  "live_research_root": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
+  "terminal_semantics": "FROZEN_19_FAMILY_ACCEPTANCE_AND_OWNERSHIP_FINALITY",
+  "optional_stronger_route": "PROVE_NOT_X_OVER_SOUND_OBSERVABLE_TRACE_ESCAPE_MODEL",
+  "progress": {
+    "frozen_family_count": 19,
+    "fully_terminally_closed_family_count": 5,
+    "frozen_atomic_predicate_count": 38,
+    "frozen_atomic_predicates_proved": 16,
+    "frozen_atomic_predicates_unresolved": 22,
+    "newly_promoted_atoms": [
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+    ],
+    "new_target_reality_units_consumed": 0,
+    "incremental_spend_usd": 0
   },
+  "remaining_terminal_conditions": [
+    "CLOSE_ALL_REMAINING_FROZEN_ACCEPTANCE_PREDICATES_OR_SOUNDLY_DISCHARGE_THEM_BY_STRONGER_SCOPE_COMPLETE_PROOFS",
+    "VERIFY_EXACT_BRAIN_OWNED_ROUTES_AND_REQUIRED_BEHAVIOR_CONTRACTS",
+    "VERIFY_DONOR_DEPENDENCE_ZERO_AND_ALL_REQUIRED_COUNTERS_ZERO",
+    "RUN_FINAL_DONOR_DELETION_AND_INDEPENDENT_CLEAN_ROOM_REPLAY",
+    "FREEZE_PROOF_BUNDLE",
+    "RUN_TERMINAL_CLOSURE_REDUCER_AND_REQUIRE_ACHIEVED_TRUE"
+  ],
   "live_truth": {
     "all_frozen_acceptance_predicates_pass": false,
-    "required_ownership_finality_pass": false,
-    "terminal": false,
-    "current_authority_terminal": false
+    "final_donor_deletion_cleanroom_pass": false,
+    "proof_bundle_frozen": false,
+    "terminal_closure_reducer_achieved": false,
+    "terminal": false
   },
-  "note": "Supersedes V5 wording that incorrectly promoted residual-complement UNSAT from optional stronger route to mandatory terminal root."
+  "anti_bureaucracy": {
+    "primary_scheduler_object_count": 1,
+    "universal_trace_unsat_is_not_mandatory": true,
+    "derived_or_optional_routes_are_not_parallel_terminal_roots": true,
+    "no_work_counts_unless_it_closes_a_frozen_atom_or_soundly_discharges_one_or_more_by_stronger_scope_complete_proof": true
+  }
 }
