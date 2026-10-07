@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_SHARED_SEMANTIC_RUNTIME_INDEPENDENT_REPLAY_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__12_OF_12__ZERO_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/SHARED_SEMANTIC_RUNTIME_BINDING_20261007_V1.json",
+      "git_blob_sha": "f3eb7ca6bd5906a1d07eb0563054d53d5c1c4525"
+    },
+    "monotone_runtime": {
+      "path": "canonical/runtime/monotone_semantic_constraint_kernel_v1.py",
+      "git_blob_sha": "a6b38321bac42fd1fd097489f6079916970f69d5"
+    },
+    "monotone_tests": {
+      "path": "canonical/tests/test_monotone_semantic_constraint_kernel_v1.py",
+      "git_blob_sha": "b8839846771c9973995c1b4dceb03afac8846aad"
+    },
+    "common_policy_runtime": {
+      "path": "canonical/runtime/common_policy_decision_region_gate_v1.py",
+      "git_blob_sha": "a26e3b26d917fcf110a856eb762c4f68e8f40002"
+    },
+    "common_policy_tests": {
+      "path": "canonical/tests/test_common_policy_decision_region_gate_v1.py",
+      "git_blob_sha": "94eda8cbe2181c373c9fe215f5230c12b5329791"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "working_directory": "/home/sprite/shared_semantic_runtime_v1"
+  },
+  "replay": {
+    "tests_passed": 12,
+    "tests_total": 12,
+    "monotone_kernel_tests": 7,
+    "common_policy_region_tests": 5
+  },
+  "verified": [
+    "BAD_DECISION_ATOMS_FAIL_CLOSED",
+    "CORRELATION_CONSTRAINTS_ARE_PRESERVED",
+    "MISSING_FACTS_STAY_BROAD_AND_CANNOT_CREATE_FALSE_COMMON_POLICY_CERTIFICATES",
+    "DISTINCT_POLICY_REGIONS_REMAIN_UNRESOLVED_WITHOUT_A_DISCRIMINATOR",
+    "MULTIPLE_INTERPRETATIONS_WITH_ONE_POLICY_NEED_NOT_BE_UNIQUELY_IDENTIFIED",
+    "SUPPORTED_FORMAL_SOURCE_CONSTRAINTS_CAN_CERTIFY_A_POLICY",
+    "UNPROVED_REFINEMENTS_ARE_REJECTED",
+    "COMMON_POLICY_REGION_CONTAINMENT_PASSES_FOR_MULTIPLE_SURVIVING_INTERPRETATIONS",
+    "DIFFERENT_POLICY_REGIONS_REQUIRE_A_DISCRIMINATOR",
+    "OVERLAPPING_POLICY_REGIONS_ARE_SUPPORTED",
+    "MISSING_ADEQUACY_CERTIFICATE_ID_FAILS_CLOSED",
+    "DUPLICATE_SURVIVING_INTERPRETATION_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_RAW_LANGUAGE_SEMANTIC_TRUTH_CREDIT",
+    "NO_POLICY_ADEQUACY_CERTIFICATE_SOUNDNESS_FROM_REGION_ID_ALONE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
