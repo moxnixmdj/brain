@@ -30,6 +30,18 @@ class Tests(unittest.TestCase):
         x=extract("Reference materials are attached. The report includes a summary.")
         self.assertEqual(x["positive_unit_count"],0)
         self.assertFalse(x["absence_proves_no_positive_semantics"])
+    def test_bullet_noun_is_not_promoted(self):
+        self.assertEqual(extract("- Cash deposits from unknown sources.")["positive_unit_count"],0)
+        self.assertEqual(extract("- Parking lots and sidewalks")["positive_unit_count"],0)
+
+    def test_adverb_after_will_is_not_action(self):
+        self.assertEqual(extract("You will ultimately receive the report.")["positive_unit_count"],0)
+
+    def test_tasked_as_role_binds_real_action_not_later_to(self):
+        x=extract("You have been tasked as a nurse practitioner to complete a review aimed at factors that contribute to or affect adherence.")
+        self.assertGreater(x["positive_unit_count"],0)
+        self.assertEqual(x["positive_units"][0]["action_head"],"complete")
+
     def test_no_argument_semantics_from_coordination(self):
         x=extract("Your responsibility is to investigate and report suspicious activity.")
         self.assertEqual(x["positive_units"][0]["action_head"],"investigate")
