@@ -1,0 +1,25 @@
+name: Verify terminal pointer V3 truth repair
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json"
+      - "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V3.json"
+      - "canonical/runtime/current_terminal_pointer_v3_truth_repair_verifier_v1.py"
+      - "canonical/tests/test_current_terminal_pointer_v3_truth_repair_v1.py"
+      - ".github/workflows/verify-current-terminal-pointer-v3-truth-repair.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m pytest -q canonical/tests/test_current_terminal_pointer_v3_truth_repair_v1.py
+      - run: python canonical/runtime/current_terminal_pointer_v3_truth_repair_verifier_v1.py
