@@ -1,0 +1,258 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V1",
+  "date": "2026-10-07",
+  "status": "CURRENT_BOUND_MINIMUM_ACCESS_EXECUTION_LANE_COVER__17_RESIDUAL_EVIDENCE_CLASSES__9_LANES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority_basis": {
+    "stable_pointer": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "fixed_point": "canonical/governance/ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_20261007_V3.json",
+    "post_saturation_delta_audit": {
+      "path": "canonical/governance/ABC_POST_SATURATION_DELTA_AUDIT_20261007_V2.json",
+      "git_blob_sha": "7e6d61a0aa2c2b458fe28c0a7d3f6edba0a09cbb"
+    },
+    "external_access_overlay": "canonical/governance/CURRENT_EXTERNAL_RESULT_ACCESS_OVERLAY_V6.json",
+    "public_target_refresh": "canonical/evidence/OPUS55_OFFICIAL_PUBLIC_REALITY_REFRESH_20261007_V1.json"
+  },
+  "cut_semantics": {
+    "meaning": "MINIMUM_NUMBER_OF_DISTINCT_CURRENTLY_LEGAL_ACCESS_OR_EXECUTION_LANES_NEEDED_TO_TOUCH_EVERY_CURRENT_RESIDUAL_EVIDENCE_CLASS_IF_NO_NEW_STRONGER_CERTIFICATE_OR_ROUTE_SUBSUMPTION APPEARS.",
+    "not_meaning": [
+      "NOT_THE_NUMBER_OF_MODEL_INFERENCE_CALLS",
+      "NOT_THE_NUMBER_OF_BENCHMARK_CASES",
+      "NOT_AN_INFORMATION_THEORETIC_LOWER_BOUND_ACROSS_FUTURE_PROOF_ARCHITECTURES",
+      "NOT_A_CLAIM_EACH_LANE_IS_CURRENTLY_AVAILABLE"
+    ]
+  },
+  "residual_evidence_classes": [
+    {
+      "id": "R1_TB4",
+      "family": "ADVANCED_AGENTIC_CODING"
+    },
+    {
+      "id": "R2_FRONTIERCODE",
+      "family": "ADVANCED_AGENTIC_CODING"
+    },
+    {
+      "id": "R3_CURSORBENCH",
+      "family": "ADVANCED_AGENTIC_CODING"
+    },
+    {
+      "id": "R4_AGENCY_CROSS_COMPONENT",
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "reality_is_fallback_only": true
+    },
+    {
+      "id": "R5_GDPVAL_AA",
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK"
+    },
+    {
+      "id": "R6_AA_BRIEFCASE_SHARED",
+      "families": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "ARTIFACT_CREATION"
+      ]
+    },
+    {
+      "id": "R7_AUTOMATIONBENCH",
+      "family": "BUSINESS_WORKFLOW_AUTOMATION"
+    },
+    {
+      "id": "R8_HLE_TOOLS",
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+    },
+    {
+      "id": "R9_TB_SCIENCE",
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH"
+    },
+    {
+      "id": "R10_CHARTOGRAPHY",
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+    },
+    {
+      "id": "R11_DENSE_NONCHART_MATCHED",
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+    },
+    {
+      "id": "R12_OSWORLD",
+      "family": "COMPUTER_AND_BROWSER_USE"
+    },
+    {
+      "id": "R13_FINANCE_INDEX",
+      "family": "FINANCIAL_ANALYSIS"
+    },
+    {
+      "id": "R14_FINANCE_AGENT_V2",
+      "family": "FINANCIAL_ANALYSIS"
+    },
+    {
+      "id": "R15_FINANCE_SEMANTIC_ADEQUACY_TAIL",
+      "family": "FINANCIAL_ANALYSIS"
+    },
+    {
+      "id": "R16_SYNTHESIS_MATCHED_QUALITY_COVERAGE",
+      "family": "COMMUNICATION_AND_SYNTHESIS"
+    },
+    {
+      "id": "R17_MYSTERYMECHANISM_INTRINSIC",
+      "family": "UNKNOWN_DOMAIN_ADAPTATION"
+    }
+  ],
+  "excluded_from_external_reality_cut": [
+    {
+      "id": "MULTI_CAPABILITY_COMPOSITION_LOCAL_C",
+      "reason": "ROUTE_LOCAL_TRANSFORM_CLOSURE_IS_DERIVED_FROM_THE_EVENTUAL_SELECTED_ROUTE_SET_AND_DOES_NOT_REQUIRE_FRESH_TARGET_REALITY_BY_DEFAULT"
+    },
+    {
+      "id": "D_FINALITY",
+      "reason": "RUNS_AFTER_ABC_ROUTE_SET_FREEZE__OWNERSHIP_EFFECT_DONOR_REMOVAL_AND_CLEAN_ROOM_FINALITY"
+    }
+  ],
+  "lanes": [
+    {
+      "id": "L1_BUILDKITE_TB4_CHARTOGRAPHY",
+      "covers": [
+        "R1_TB4",
+        "R10_CHARTOGRAPHY"
+      ],
+      "current_state": "CARRIER_READY_ZERO_SPEND__PROOFS_OPEN",
+      "reality_kind": "BRAIN_RESULT_EXECUTION_WITH_PUBLIC_TARGET_ANCHORS",
+      "unique_witness_for_minimum": "R1_TB4"
+    },
+    {
+      "id": "L2_HUGGINGFACE_HLE_OSWORLD",
+      "covers": [
+        "R8_HLE_TOOLS",
+        "R12_OSWORLD"
+      ],
+      "current_state": "ACCOUNT_EXISTS_LOGIN_OBSERVED__NO_CURRENT_SAVED_AUTH_SESSION",
+      "reality_kind": "DATA_HARNESS_AND_BRAIN_RESULT_EXECUTION",
+      "unique_witness_for_minimum": "R8_HLE_TOOLS"
+    },
+    {
+      "id": "L3_VALS_FINANCE_MYSTERY",
+      "covers": [
+        "R13_FINANCE_INDEX",
+        "R14_FINANCE_AGENT_V2",
+        "R15_FINANCE_SEMANTIC_ADEQUACY_TAIL",
+        "R17_MYSTERYMECHANISM_INTRINSIC"
+      ],
+      "current_state": "PROVIDER_WAIT__NO_NEW_REPLY",
+      "reality_kind": "MIXED_PUBLIC_RESULT_CONTEXT_SOURCE_AND_ACTOR_ATTRIBUTED_TARGET_INFORMATION",
+      "semantic_tail_condition": "FINANCE_LANE_ONLY_CLOSES_R15_IF_THE_OBTAINED_TASK_CONTEXT_OR_DIRECT_E2E_RESULT_SOUNDLY_BINDS_THE_SOURCE_GROUNDED_POLICY_ADEQUACY_TAIL",
+      "mystery_condition": "DEPLOYED_49_55_IS_NOT_SUFFICIENT_INTRINSIC_OPUS55_EVIDENCE__REQUIRE_PROFILE_ATTRIBUTION_OR_STRONGER_TARGET_FREE_CERTIFICATE",
+      "unique_witness_for_minimum": "R14_FINANCE_AGENT_V2"
+    },
+    {
+      "id": "L4_ARTIFICIAL_ANALYSIS_PROFESSIONAL",
+      "covers": [
+        "R5_GDPVAL_AA",
+        "R6_AA_BRIEFCASE_SHARED"
+      ],
+      "current_state": "PROVIDER_WAIT__NO_NEW_REPLY",
+      "reality_kind": "PROFESSIONAL_BRAIN_RESULT_OR_STRONGER_SCOPE_CERTIFICATE",
+      "leverage": "R6_IS_SHARED_BY_PROFESSIONAL_AND_ARTIFACT",
+      "unique_witness_for_minimum": "R5_GDPVAL_AA"
+    },
+    {
+      "id": "L5_COGNITION_FRONTIERCODE",
+      "covers": [
+        "R2_FRONTIERCODE"
+      ],
+      "current_state": "PROVIDER_WAIT__NO_NEW_REPLY",
+      "reality_kind": "BRAIN_RESULT_EXECUTION_OR_STRONGER",
+      "unique_witness_for_minimum": "R2_FRONTIERCODE"
+    },
+    {
+      "id": "L6_ZAPIER_AUTOMATIONBENCH",
+      "covers": [
+        "R7_AUTOMATIONBENCH"
+      ],
+      "current_state": "PROVIDER_WAIT__NO_NEW_REPLY",
+      "reality_kind": "BRAIN_ENDPOINT_RESULT_EXECUTION_OR_STRONGER",
+      "unique_witness_for_minimum": "R7_AUTOMATIONBENCH"
+    },
+    {
+      "id": "L7_CURSORBENCH_UNBOUND",
+      "covers": [
+        "R3_CURSORBENCH"
+      ],
+      "current_state": "NO_CANONICAL_ACCESS_SCORER_BRAIN_ROUTE_BOUND",
+      "reality_kind": "DATA_SCORER_AND_BRAIN_RESULT_OR_STRONGER",
+      "unique_witness_for_minimum": "R3_CURSORBENCH"
+    },
+    {
+      "id": "L8_TB_SCIENCE_HARBOR",
+      "covers": [
+        "R9_TB_SCIENCE"
+      ],
+      "current_state": "PUBLIC_IDENTITY_AND_HARBOR_SCORER_AVAILABLE__GENERAL_BRAIN_ADAPTER_NOT_BOUND",
+      "reality_kind": "BRAIN_RESULT_EXECUTION_OR_STRONGER",
+      "unique_witness_for_minimum": "R9_TB_SCIENCE"
+    },
+    {
+      "id": "L9_SHARED_MATCHED_TARGET_RELATIVE",
+      "covers": [
+        "R4_AGENCY_CROSS_COMPONENT",
+        "R11_DENSE_NONCHART_MATCHED",
+        "R16_SYNTHESIS_MATCHED_QUALITY_COVERAGE"
+      ],
+      "current_state": "EXACT_OPUS_CAPACITY_UNKNOWN__FROZEN_PREEXPOSURE_DESIGN__BRAIN_FIRST_REDUCTION_PREFERRED",
+      "reality_kind": "TARGET_RELATIVE_MATCHED_INFORMATION_OR_STRONGER_TARGET_FREE_CERTIFICATE",
+      "agency_note": "R4_REMAINS_PROOF_FIRST__IF_CROSS_COMPONENT_INTERACTION_CLOSURE_SUCCEEDS_ZERO_REALITY_R4_IS_REMOVED_BUT_L9_REMAINS_REQUIRED_BY_R11_OR_R16_UNDER_CURRENT_ROUTES",
+      "unique_witness_for_minimum": "R16_SYNTHESIS_MATCHED_QUALITY_COVERAGE"
+    }
+  ],
+  "set_cover_proof": {
+    "residual_class_count": 17,
+    "lane_count": 9,
+    "minimum_lane_count": 9,
+    "reason": "EACH_OF_THE_NINE_LANES_HAS_AT_LEAST_ONE_CURRENT_RESIDUAL_CLASS_WITH_NO_OTHER_LEGAL_LANE_IN_THE_BOUND_ROUTE_GRAPH__THEREFORE_EVERY_CURRENT_ROUTE_COVER_MUST_INCLUDE_ALL_NINE.",
+    "wolfram_result": "{9,{b->1,h->1,v->1,a->1,c->1,z->1,u->1,t->1,m->1}}"
+  },
+  "information_type_reduction": {
+    "public_bar_or_public_target_anchor_classes": [
+      "R1_TB4",
+      "R2_FRONTIERCODE",
+      "R3_CURSORBENCH",
+      "R5_GDPVAL_AA",
+      "R6_AA_BRIEFCASE_SHARED",
+      "R7_AUTOMATIONBENCH",
+      "R8_HLE_TOOLS",
+      "R9_TB_SCIENCE",
+      "R10_CHARTOGRAPHY",
+      "R12_OSWORLD",
+      "R13_FINANCE_INDEX",
+      "R14_FINANCE_AGENT_V2"
+    ],
+    "implication": "THESE_PRIMARILY_REQUIRE_COMPARABLE_BRAIN_RESULTS_OR_STRONGER_CERTIFICATES__NOT_NEW_OPUS_OUTPUTS_MERELY_TO_KNOW_THE_TARGET_BAR.",
+    "context_or_semantic_information_classes": [
+      "R15_FINANCE_SEMANTIC_ADEQUACY_TAIL"
+    ],
+    "genuinely_target_relative_or_actor_attributed_classes": [
+      "R11_DENSE_NONCHART_MATCHED",
+      "R16_SYNTHESIS_MATCHED_QUALITY_COVERAGE",
+      "R17_MYSTERYMECHANISM_INTRINSIC",
+      "R4_AGENCY_CROSS_COMPONENT_IF_ZERO_REALITY_INTERACTION_CLOSURE_FAILS"
+    ]
+  },
+  "scheduler": [
+    "L1_BUILDKITE_IS_THE_ONLY_CURRENTLY_VERIFIED_READY_ZERO_SPEND_EXTERNAL_COMPUTE_LANE__USE_IT_ONLY_WHEN_THE_THRESHOLD_ROUTE_ITSELF_IS SOUND.",
+    "DO_NOT_SPEND_TARGET_MODEL_CALLS_ON_PUBLIC_BAR_CLASSES_JUST_TO_RELEARN_ALREADY_BOUND_TARGET_THRESHOLDS.",
+    "PURSUE_SHARED_ACCESS_LANES_BEFORE_SINGLETON_LANES__L3_L4_L9_HAVE_HIGHEST_CROSS_RESIDUAL_LEVERAGE.",
+    "KEEP_R4_AGENCY_PROOF_FIRST_BEFORE_MATCHED_REALITY.",
+    "FOR_L9_RUN_BRAIN_FIRST_AND_ACQUIRE_TARGET_OUTPUTS_ONLY_ON_SURVIVING_BRAIN_FAILURE_OR_UNDOMINATED_CASES_WHEN_PROTOCOL_SEMANTICS_ALLOW.",
+    "RECOMPUTE_THIS_CUT_IMMEDIATELY_IF_ANY_NEW_STRONGER_CERTIFICATE_PROVIDER_REPLY_AUTH_SESSION_OR_SCOPE_SUBSUMPTION APPEARS."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_NINE_LANES_ARE_A_FUNDAMENTAL_INFORMATION_THEORETIC_LOWER_BOUND.",
+    "NO_CLAIM_ONE_LANE_ACTIVATION_EQUALS_ONE_CASE_OR_ONE_INFERENCE.",
+    "NO_CLAIM_L3_CURRENTLY_SUPPLIES_FINANCE_SEMANTIC_ADEQUACY.",
+    "NO_CLAIM_L9_EXACT_OPUS_CAPACITY_EXISTS.",
+    "NO_CLAIM_ALL_NINE_LANES_ARE_CURRENTLY_ACTIONABLE.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
