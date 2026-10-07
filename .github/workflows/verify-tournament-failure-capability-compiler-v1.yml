@@ -1,0 +1,20 @@
+name: Verify tournament failure capability compiler v1
+on:
+  pull_request:
+    paths:
+      - 'canonical/governance/TOURNAMENT_FAILURE_CAPABILITY_LAW_20261007_V1.json'
+      - 'canonical/runtime/tournament_failure_capability_compiler_v1.py'
+      - 'canonical/tests/test_tournament_failure_capability_compiler_v1.py'
+      - '.github/workflows/verify-tournament-failure-capability-compiler-v1.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pytest canonical/tests/test_tournament_failure_capability_compiler_v1.py -q
