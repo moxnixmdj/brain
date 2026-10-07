@@ -167,22 +167,44 @@ def compile_current() -> dict[str, Any]:
         family = str(row.get("family") or "")
         row_errors: list[str] = []
 
-        for binding_name in ("implementation", "acceptance_anchor"):
-            binding = row.get(binding_name)
+        artifacts = row.get("implementation_artifacts")
+        if not isinstance(artifacts, list) or not artifacts:
+            row_errors.append("IMPLEMENTATION_ARTIFACTS_INVALID")
+            artifacts = []
+        seen_paths: set[str] = set()
+        for i, binding in enumerate(artifacts):
             if not isinstance(binding, Mapping):
-                row_errors.append(binding_name.upper() + "_INVALID")
+                row_errors.append(f"IMPLEMENTATION_ARTIFACT_{i}_INVALID")
                 continue
             rel = binding.get("path")
             sha = binding.get("git_blob_sha")
             if not isinstance(rel, str) or not rel:
-                row_errors.append(binding_name.upper() + "_PATH_INVALID")
+                row_errors.append(f"IMPLEMENTATION_ARTIFACT_{i}_PATH_INVALID")
                 continue
+            if rel in seen_paths:
+                row_errors.append("IMPLEMENTATION_ARTIFACT_DUPLICATE:" + rel)
+            seen_paths.add(rel)
             path = ROOT / rel
             if not path.is_file():
-                row_errors.append(binding_name.upper() + "_MISSING")
+                row_errors.append(f"IMPLEMENTATION_ARTIFACT_{i}_MISSING")
                 continue
             if not isinstance(sha, str) or _git_blob_sha(path) != sha:
-                row_errors.append(binding_name.upper() + "_DRIFT")
+                row_errors.append(f"IMPLEMENTATION_ARTIFACT_{i}_DRIFT")
+
+        binding = row.get("acceptance_anchor")
+        if not isinstance(binding, Mapping):
+            row_errors.append("ACCEPTANCE_ANCHOR_INVALID")
+        else:
+            rel = binding.get("path")
+            sha = binding.get("git_blob_sha")
+            if not isinstance(rel, str) or not rel:
+                row_errors.append("ACCEPTANCE_ANCHOR_PATH_INVALID")
+            else:
+                path = ROOT / rel
+                if not path.is_file():
+                    row_errors.append("ACCEPTANCE_ANCHOR_MISSING")
+                elif not isinstance(sha, str) or _git_blob_sha(path) != sha:
+                    row_errors.append("ACCEPTANCE_ANCHOR_DRIFT")
 
         row_errors.extend(_validate_certificate(family, row.get("certificate")))
         passed = not row_errors
