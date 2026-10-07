@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_V13_LIVEBENCH_ACTIVE15_TOPLAW_CELL_CERTIFICATE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_V13_E2E_CELL_CLOSURE__K_C_MINUS_EMPTY__ZERO_GLOBAL_CREDIT_PENDING_INDEPENDENT_REPLAY",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "context_cell": {
+    "id": "LIVEBENCH_IF_ACTIVE15_FROZEN_200",
+    "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+    "scope": "EXACT_FROZEN_200_ROW_ACTIVE15_LIVEBENCH_INSTRUCTION_FOLLOWING_CELL",
+    "complete_semantics": "STRICT_CHECKER_SCORE_PER_CASE_PLUS_EQUAL_WEIGHT_POPULATION_MEAN__NO_EXTRA_CELL_SPECIFIC_HARD_CONSTRAINT"
+  },
+  "exact_route": {
+    "policy": "VISIBLE_CONSTRAINT_COMPILER_V4_PLUS_LEGACY15_POINTWISE_OPTIMAL_ROUTE",
+    "content_addressed_files": [
+      [
+        "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py",
+        "0dbef76a6189a3cdc21ce3dae97ef6921e333b34"
+      ],
+      [
+        "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+        "d73ec366b32252996258eae6d10d67d4d6a5e042"
+      ],
+      [
+        "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py",
+        "71e637c70edf1c582e28ea38b3b798965c803a06"
+      ],
+      [
+        "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+        "7477f5ea5bdeac3595ee2784a38d078fe2f385b0"
+      ],
+      [
+        "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py",
+        "34f4df9f0bd265fc555686bd251a264e446d4c04"
+      ],
+      [
+        "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py",
+        "721207ba39d502e3f610289578e9d5bab78b1fcc"
+      ]
+    ]
+  },
+  "existing_verified_inputs": {
+    "exact_scope_opening": true,
+    "exact_active_scope_family_count": 15,
+    "exact_frozen_population_rows": 200,
+    "pointwise_envelope_cases": 12489,
+    "pointwise_optimum_matches": 12489,
+    "visible_grammar_roundtrip_cases": 78190,
+    "visible_grammar_roundtrip_passes": 78190,
+    "punkt_satisfiable_contexts": 121368,
+    "punkt_satisfiable_all_pass": 121368,
+    "target_rows_read_for_proof": 0,
+    "cell_bundle_sprite_replay": "PASS",
+    "route_local_material_effect_footprint": "EMPTY"
+  },
+  "v13_law_reduction": {
+    "mu_B": "ACTUAL_BOUND_DEPLOYED_BRAIN_ROUTE_LAW_ON_THIS_CELL",
+    "K_c": "ANY_SOUND_SET_OF_OPUS55_LAWS_ADMISSIBLE_UNDER_THE_COMPLETE_CELL_SEMANTICS",
+    "top_law_fact": "FOR_EVERY_ADMISSIBLE_CASE_THE_BOUND_BRAIN_ROUTE_ATTAINS_THE_MAXIMUM_STRICT_CHECKER_SCORE_AVAILABLE_IN_THE_RESPONSE_SPACE",
+    "implication": [
+      "EVERY_OPUS55_RESPONSE_LAW_IN_K_c_PRODUCES_RESPONSES_FROM_THE_SAME_ADMISSIBLE_RESPONSE_SPACE",
+      "POINTWISE_BRAIN_SCORE_IS_AT_THE_RESPONSE_SPACE_MAXIMUM_FOR_EVERY_ADMISSIBLE_CASE",
+      "THEREFORE_mu_B_WEAKLY_DOMINATES_EVERY_mu_IN_K_c_ON_THE_COMPLETE_CELL_EVALUATOR",
+      "THEREFORE_K_c_minus_IS_EMPTY"
+    ],
+    "K_c_minus_empty": true,
+    "target_information_required": false
+  },
+  "e2e_binding": {
+    "admissible_form": "EXHAUSTIVE_FULL_CELL_POINTWISE_TOP_OR_DOMINANCE_PROOF",
+    "exact_route_bound": true,
+    "complete_cell_semantics_bound": true,
+    "local_c_separate_reconstruction_required": false
+  },
+  "consequence": {
+    "add_cell_to_D_B_candidate": true,
+    "delete_target_law_queries_for_this_cell": true,
+    "family_closed": false,
+    "remaining_instruction_following_residuals": [
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "ANY_LOAD_BEARING_AUTHORITY_SCOPE_OR_SAFETY_CONTEXT_OUTSIDE_THIS_EXACT_CHECKER_CELL"
+    ]
+  },
+  "falsifiers": [
+    "THE_POINTWISE_ROUTE_IS_NOT_THE_ACTUAL_BOUND_DEPLOYED_ROUTE",
+    "AN_ADMISSIBLE_CELL_RESPONSE_EXISTS_OUTSIDE_THE_RESPONSE_SPACE_USED_BY_THE_TOP_LAW_PROOF",
+    "A_LOAD_BEARING_CELL_EVALUATOR_OR_HARD_CONSTRAINT_IS_OMITTED",
+    "THE_EXACT_ACTIVE15_SCOPE_BINDING_IS_INVALID",
+    "ROUTE_BYTES_DRIFT"
+  ],
+  "hard_nonclaims": [
+    "NO_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE",
+    "NO_CLAIM_IF_SCOPE_BOUNDARY_NONINFERIOR_IS_CLOSED",
+    "NO_GLOBAL_ABC_CLOSURE",
+    "NO_GLOBAL_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
