@@ -39,6 +39,29 @@ REQUIRED_PREDICATES = (
 )
 
 
+def _family_terminally_closed(family: dict[str, Any]) -> bool:
+    """Derive terminal closure from semantic fields, not display-label equality.
+
+    Manifests use both the compact state PASS and decorated passing states.
+    A decorated state is closed only when calibrated Opus acceptance passes,
+    ownership is verified, and no unresolved obligation remains. Open,
+    quarantined, or failing states remain fail-closed.
+    """
+    state = family.get("closure_state")
+    if state == "PASS":
+        return True
+    if not isinstance(state, str) or "PASS" not in state:
+        return False
+    if any(marker in state for marker in ("OPEN", "FAIL", "QUARANTINED")):
+        return False
+    return (
+        family.get("opus55_acceptance_state") == "PASS"
+        and family.get("opus55_acceptance_calibrated") is True
+        and family.get("ownership_status") == "VERIFIED_OWNED_EQUAL_OR_BETTER"
+        and family.get("unresolved") == []
+    )
+
+
 def evaluate_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
     failures: list[str] = []
 
@@ -60,7 +83,7 @@ def evaluate_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
             failures.append(f"FAMILY_{index}_ID_INVALID")
             continue
         ids.append(fid)
-        if family.get("closure_state") != "PASS":
+        if not _family_terminally_closed(family):
             failures.append(f"FAMILY_OPEN:{fid}")
 
     if len(families) != REQUIRED_FAMILY_COUNT:
@@ -110,7 +133,7 @@ def evaluate_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         "family_count": len(families),
         "closed_family_count": sum(
             1 for family in families
-            if isinstance(family, dict) and family.get("closure_state") == "PASS"
+            if isinstance(family, dict) and _family_terminally_closed(family)
         ),
         "rule": "ACHIEVED_IFF_FAILED_PREDICATES_EMPTY",
     }
