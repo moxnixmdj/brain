@@ -193,3 +193,21 @@ def test_blob_drift_blocks_episode_promotion(tmp_path):
         pass
     else:
         raise AssertionError("blob drift should fail")
+
+
+def test_missing_public_runner_provenance_blocks_episode_promotion(tmp_path):
+    ep = episode_candidate_from_solver(
+        solved(), episode_id="e1", scope_id="scope", postconditions=["ANSWER_VERIFIED"]
+    )
+    refs = episode_refs(tmp_path, ep)
+    verify_doc = json.loads((tmp_path / refs["verification"]["path"]).read_text())
+    verify_doc.pop("public_runner")
+    refs["verification"] = write_json(
+        tmp_path, "canonical/verification/no_runner_verify.json", verify_doc
+    )
+    try:
+        bind_verified_episode(ep, refs, repo_root=str(tmp_path))
+    except Exception:
+        pass
+    else:
+        raise AssertionError("missing public runner provenance should fail")
