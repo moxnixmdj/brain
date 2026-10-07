@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_CHARACTERISTIC_ACTIVE_QUERY_V10_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_PROSPECTIVE_PASS__CHARACTERISTIC_SET_TOTAL_ON_DECLARED_CLOSURE__ZERO_TERMINAL_CREDIT",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e"
+  },
+  "exact_blobs": {
+    "v10_kernel": "91bdde7a88e90bb6a2e411072a1dadb715ff7052",
+    "target_generator": "86f82744c9a58a6b286de50774c616946ffe9436",
+    "tasks_precommit": "0f6fdeb97f492f32d2ec2509b0370750d96f3eb7",
+    "carrier_result": "167b7172a6f9ac0711b072215dbf1d9b7efdf218"
+  },
+  "generator_reproducibility": "PASS_EXACT",
+  "ordering_verified": [
+    "V10_KERNEL_FROZEN_BEFORE_GENERATOR",
+    "GENERATOR_FROZEN_BEFORE_TASK_GENERATION",
+    "TASKS_COMMITTED_BEFORE_EXECUTION"
+  ],
+  "verified": {
+    "tasks_passed": 12,
+    "tasks_total": 12,
+    "holdouts_passed": 72,
+    "holdouts_total": 72,
+    "total_queries": 16,
+    "max_queries": 3,
+    "persistent_learned_bytes_added": 0,
+    "persistent_compiled_capability_bytes_added": 0,
+    "persistent_registry_entries_added": 0
+  },
+  "totality_basis": {
+    "equivalence_authority_commit": "e2ac1fa633ac951c51e8f23c2e1e371ce2fc409a",
+    "characteristic_inputs": 823,
+    "global_classes": 809,
+    "meaning_of_no_separator": "ALL_REMAINING_PROGRAMS_ARE_GLOBALLY_EXTENSIONALLY_EQUIVALENT_ON_THE_DECLARED_DEPTH_LTE_3_SEQUENCE_CLOSURE"
+  },
+  "byte_delta": {
+    "v9_payload_bytes": 1779,
+    "v10_payload_bytes": 1741,
+    "payload_bytes_saved": 38
+  },
+  "hard_nonclaims": [
+    "TOTALITY_ONLY_FOR_DECLARED_DEPTH_LTE_3_SEQUENCE_CLOSURE",
+    "NO_GENERAL_PROGRAM_EQUIVALENCE_OR_OPEN_WORLD_TERMINAL_CLAIM"
+  ]
+}
