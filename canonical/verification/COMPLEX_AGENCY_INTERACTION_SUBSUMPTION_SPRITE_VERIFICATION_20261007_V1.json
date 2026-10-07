@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_COMPLEX_AGENCY_INTERACTION_SUBSUMPTION_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_LOGIC_REPLAY_PASS__5_OF_5__EXACT_BOUND_MAIN_PREMISE_BLOBS_RECONCILED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/COMPLEX_AGENCY_INTERACTION_SUBSUMPTION_THEOREM_20261007_V1.json",
+      "git_blob_sha": "1ecb09a6443b949d18046f1109aa050020dec748"
+    },
+    "runtime": {
+      "path": "canonical/runtime/agency_interaction_subsumption_v1.py",
+      "git_blob_sha": "415b4c96293d2e450add56815440affa8e5c9292"
+    },
+    "tests": {
+      "path": "canonical/tests/test_agency_interaction_subsumption_v1.py",
+      "git_blob_sha": "744c8882a6e4d57c536ac77c137eff9983bd2ae1"
+    }
+  },
+  "exact_bound_premises": {
+    "agency_reduction": "6d915e20d061b9c5b556347f4d505fd10181fbff",
+    "delegation_scope_equivalence": "52392515cd4de672f82f8afac82a41d3ce442656",
+    "delegation_scope_relation_v2": "8ffe02f3efe1ceebed30354404bc2f60f3bd6bbd",
+    "delegation_universal_verify": "955ac8f4bd0db2527bfbb465fc8252df6d916156",
+    "recovery_universal_verify": "981c8ac9b66ee7fccf5b531525849e29df9be483",
+    "stateful_agency_top_law": "d0f65c08d84777f4fdb24e5dfa74bdd1acbcfc22"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/agency_interaction_closure_v1"
+  },
+  "replay": {
+    "tests_run": 5,
+    "tests_passed": 5,
+    "failures": 0,
+    "checks": [
+      "EXACT_PREMISE_LOGICAL_PRODUCT_PASSES",
+      "MISSING_LIVE_REPLANNING_INTERACTION_FAILS_CLOSED",
+      "RECEIPT_ALPHABET_DRIFT_FAILS_CLOSED",
+      "RECOVERY_CEILING_DRIFT_FAILS_CLOSED",
+      "CHECKPOINT_CONTINUITY_DRIFT_FAILS_CLOSED"
+    ]
+  },
+  "conclusion": "THE_COMPLEX_AGENCY_CROSS_COMPONENT_INTERACTION_MECHANISM_RESIDUAL_IS_SUBSUMED_FOR_SOUNDLY_COMPILED_EXPLICIT_COMPONENT_CONTRACTS_BY_ALREADY_VERIFIED_DELEGATION_RECEIPT_PRODUCT_RECOVERY_AND_CONTINUITY_PREMISES__NO_NEW_AGENCY_INTERACTION_MECHANISM_OR_TARGET_RESULT_IS_REQUIRED.",
+  "remaining_boundary": "RAW_OR_IMPLICIT_TASK_SEMANTICS_NOT_YET_SOUNDLY_COMPILED_STAY_ON_THE_SHARED_ABC_SEMANTIC_ADMISSION_FRONTIER__THIS_RECEIPT_DOES_NOT_SELF_CERTIFY_THOSE_CONTEXTS.",
+  "hard_nonclaims": [
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED",
+    "NO_CLAIM_ALL_RAW_AGENCY_CONTEXTS_ARE_ALREADY_ADMITTED",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
