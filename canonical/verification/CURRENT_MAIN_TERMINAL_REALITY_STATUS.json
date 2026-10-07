@@ -1,18 +1,40 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V4",
+  "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V5",
   "status": "CURRENT_MAIN_TERMINAL_NOT_REAL",
-  "checked_by": "CHATGPT_DIRECT_AUTHORITY_RECONCILIATION",
+  "checked_by": "CHATGPT_DIRECT_EXACT_AUTHORITY_EVALUATION",
   "source_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-  "source_authority_blob_sha": "92af8c4812079a272b6b1be935472a59f71e76a2",
-  "source_authority_commit_sha": "7f05eba1733f41155906510511a23df398f87694",
+  "source_authority_blob_sha": "79a0c08fc069aa4e39b3b147528544b46359612d",
+  "source_main_commit_sha": "2b201b518f206762e9492c2da6e01b9f7aa4fae7",
+  "phase": "RESEARCH_ROOT",
   "live_research_root_count": 1,
-  "live_research_root": "PROVE_RESIDUAL_COMPLEMENT_UNSAT_OVER_EXACT_SOUND_ADMISSION_PREDICATE_SET",
-  "post_root_sequence": "FREEZE_FINAL_ROUTES__COMPILE_EFFECT_FOOTPRINT__DONOR_INDEPENDENCE__CLEAN_ROOM_REPLAY",
   "blockers": [
-    "RESIDUAL_COMPLEMENT_UNSAT_UNPROVED",
-    "U_NOT_PROVED_EMPTY",
-    "REAL_SELECTED_COVER_INCOMPLETE",
-    "COMPLETE_SELECTED_CONTEXT_ABC_OPEN"
+    "PROVE_RESIDUAL_COMPLEMENT_UNSAT_OVER_EXACT_SOUND_ADMISSION_PREDICATE_SET"
   ],
-  "note": "D_FINALITY_REMAINS_FALSE_BUT_IS_DEFERRED_POST_ABC_MECHANICAL_FINALIZATION_NOT_AN_INDEPENDENT_LIVE_RESEARCH_ROOT"
+  "derived_pending": [
+    "REAL_SELECTED_COVER_INCOMPLETE_DERIVED_FROM_OPEN_U",
+    "COMPLETE_SELECTED_CONTEXT_ABC_OPEN_DERIVED_FROM_OPEN_U"
+  ],
+  "post_root_finalization": [
+    "FREEZE_FINAL_CREDITED_ROUTE_BYTES",
+    "COMPILE_CONSERVATIVE_FINAL_EFFECT_FOOTPRINT",
+    "CLOSE_ONLY_REACHABLE_EFFECTS_OR_PROVE_ZERO_EFFECT",
+    "RUN_EXACT_ROUTE_OWNERSHIP_AND_DONOR_INDEPENDENCE_AUDIT",
+    "RUN_CLEAN_ROOM_REPLAY"
+  ],
+  "live_truth": {
+    "fixed_authorized_target_trace_scope_closed": true,
+    "router_mechanical_core_implemented": true,
+    "router_deployed_runtime_binding_closed": true,
+    "current_U_empty_proved": false,
+    "router_registry_real_selected_cover_complete": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false,
+    "residual_complement_unsat_proved": false
+  },
+  "anti_bureaucracy": {
+    "router_selected_cover_and_ABC_are_derived_from_open_U": true,
+    "D_finality_is_post_ABC_not_parallel_research": true,
+    "primary_scheduler_object_count": 1
+  }
 }
