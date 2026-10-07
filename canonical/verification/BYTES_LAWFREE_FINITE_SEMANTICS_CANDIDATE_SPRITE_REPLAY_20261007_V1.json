@@ -1,0 +1,9 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_LAWFREE_FINITE_SEMANTICS_CANDIDATE_SPRITE_REPLAY_V1",
+  "date":"2026-10-07",
+  "status":"PASS_CONDITIONAL_ON_SUPPORT_THEOREM",
+  "carrier":{"provider":"SPRITES","sprite_name":"brain-tbscience-v18-authority-verify-20261007-v1","sprite_id":"sprite-712e57be-f9ab-4d02-a590-62d84addd99e"},
+  "output":{"seed_classes":809,"relation_types":92457,"programs":2955,"final_classes":809,"milliseconds":6002},
+  "bytes":{"checker_payload":1628,"v10_checker_joint":3283,"joint_sha256":"a0773d097b54d0c1966942344a78c34da82df84d04bd5b73a0f68f0d2e2e0980"},
+  "hard_nonclaims":["PAIRWISE_LENGTH_LTE_4_SUPPORT_NOT_YET_PROVED","ZERO_TERMINAL_CREDIT"]
+}
