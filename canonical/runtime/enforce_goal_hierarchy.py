@@ -485,14 +485,50 @@ def _frontier_scope_chain(capability_id):
         current=parent
     return chain
 
-def enforce_model_independent_cognition(intent,obs):
+def _validate_brain_owned_cognition_substrate_configuration(preflight,model_dependencies):
+    """Enforce Mission Lock V6 / General Cognition Substrate Law V3.
+
+    A model may participate in cognition, but only as a declared general substrate
+    under a durable, materially load-bearing Brain-owned capability configuration.
+    Bare model/provider routing remains fail-closed.
+    """
+    config=preflight.get("brain_owned_capability_configuration")
+    if not isinstance(config,dict):
+        fail("GENERAL_SUBSTRATE_BRAIN_CONFIGURATION_MISSING")
+        return
+
+    artifacts=config.get("artifacts")
+    if not _nonempty_string_list(artifacts):
+        fail("GENERAL_SUBSTRATE_BRAIN_CONFIGURATION_ARTIFACTS_MISSING")
+    else:
+        for raw in artifacts:
+            if not (ROOT/str(raw)).is_file():
+                fail("GENERAL_SUBSTRATE_BRAIN_CONFIGURATION_ARTIFACT_MISSING:"+str(raw))
+
+    if config.get("materially_load_bearing") is not True:
+        fail("GENERAL_SUBSTRATE_BRAIN_CONFIGURATION_NOT_MATERIALLY_LOAD_BEARING")
+    if config.get("external_model_is_capability_provider") is not False:
+        fail("GENERAL_SUBSTRATE_OPAQUE_CAPABILITY_PROVIDER_NOT_EXCLUDED")
+    if config.get("promotion_evaluates_brain_configured_system") is not True:
+        fail("GENERAL_SUBSTRATE_CONFIGURED_SYSTEM_EVALUATION_NOT_REQUIRED")
+    if config.get("configuration_survives_substrate_unavailability") is not True:
+        fail("GENERAL_SUBSTRATE_CONFIGURATION_DURABILITY_NOT_PROVED")
+
+    for i,dep in model_dependencies:
+        if dep.get("capability_role")!="GENERAL_COMPUTATION_COGNITION_SUBSTRATE":
+            fail(f"GENERAL_SUBSTRATE_MODEL_ROLE_INVALID:{i}")
+        if dep.get("opaque_target_capability_provider") is not False:
+            fail(f"GENERAL_SUBSTRATE_OPAQUE_PROVIDER_FLAG_NOT_FALSE:{i}")
+
+
+def enforce_cognition_substrate_ownership(intent,obs):
     action_kind=str(intent.get("action_kind") or "")
     if action_kind not in REAL_TASK_ACTIONS:
         return
 
     capability_id=str(intent.get("capability_target") or "").strip()
     if not capability_id:
-        fail("MODEL_NON_DEPENDENCE_CAPABILITY_TARGET_MISSING")
+        fail("COGNITION_SUBSTRATE_CAPABILITY_TARGET_MISSING")
         return
 
     chain=_frontier_scope_chain(capability_id)
@@ -506,29 +542,26 @@ def enforce_model_independent_cognition(intent,obs):
 
     frontier=obs.get("route_frontier")
     if not isinstance(frontier,dict):
-        fail("MODEL_NON_DEPENDENCE_ROUTE_FRONTIER_MISSING")
+        fail("COGNITION_SUBSTRATE_ROUTE_FRONTIER_MISSING")
         return
     preflight=frontier.get("selected_route_preflight")
     if not isinstance(preflight,dict):
-        fail("MODEL_NON_DEPENDENCE_SELECTED_ROUTE_PREFLIGHT_MISSING")
+        fail("COGNITION_SUBSTRATE_SELECTED_ROUTE_PREFLIGHT_MISSING")
         return
     deps=preflight.get("execution_dependencies")
     if not isinstance(deps,list):
-        fail("MODEL_NON_DEPENDENCE_DEPENDENCY_INVENTORY_MISSING")
+        fail("COGNITION_SUBSTRATE_DEPENDENCY_INVENTORY_MISSING")
         return
 
     model_dependencies=[]
-    for dep in deps:
+    for i,dep in enumerate(deps):
         if not isinstance(dep,dict):
             continue
         if str(dep.get("kind") or "") in MODEL_DEPENDENCY_KINDS:
-            model_dependencies.append(str(dep.get("dependency") or dep.get("kind") or "MODEL"))
+            model_dependencies.append((i,dep))
 
     if model_dependencies:
-        fail(
-            "MODEL_PRESENT_IN_COGNITION_EXECUTION_PATH_FOR_COGNITIVE_CAPABILITY:"
-            +",".join(sorted(model_dependencies))
-        )
+        _validate_brain_owned_cognition_substrate_configuration(preflight,model_dependencies)
 
 
 def enforce_recursive_obs(intent,files,base):
@@ -635,7 +668,7 @@ def enforce_recursive_obs(intent,files,base):
         fail("RECURSIVE_OBS_SEARCH_STOP_DECISION_MISSING")
 
     enforce_live_route_frontier(intent,obs)
-    enforce_model_independent_cognition(intent,obs)
+    enforce_cognition_substrate_ownership(intent,obs)
 
 
 def blocker_lease_key(intent):
@@ -903,18 +936,45 @@ def enforce_promotion_truth(intent,files,base):
             planners.extend(_collect_key_values(doc,"planner_model_last"))
         if not counts:
             fail("COGNITIVE_PROMOTION_RUNTIME_MODEL_DEPENDENCY_COUNT_MISSING")
+        parsed_counts=[]
         for raw in counts:
             try:
-                if int(raw)!=0:
-                    fail("COGNITIVE_PROMOTION_RUNTIME_MODEL_DEPENDENCY_NONZERO")
+                value=int(raw)
+                if value<0:
+                    raise ValueError("negative")
+                parsed_counts.append(value)
             except Exception:
                 fail("COGNITIVE_PROMOTION_RUNTIME_MODEL_DEPENDENCY_COUNT_INVALID")
         if "ASTRA_RUNTIME_DERIVED_V1" not in {str(x) for x in authorities}:
             fail("COGNITIVE_PROMOTION_RUNTIME_PROVENANCE_AUTHORITY_MISSING")
-        if any(str(x or "").startswith("OPTIONAL_MODEL_ADVISORY") for x in modes):
-            fail("COGNITIVE_PROMOTION_ADVISORY_MODEL_CONTROLLER_PRESENT")
-        if any(x not in (None,"") for x in planners):
-            fail("COGNITIVE_PROMOTION_PLANNER_MODEL_PRESENT")
+
+        model_assisted=any(x>0 for x in parsed_counts)
+        if model_assisted:
+            substrate=evidence.get("general_cognition_substrate_ownership")
+            if not isinstance(substrate,dict):
+                fail("COGNITIVE_PROMOTION_GENERAL_SUBSTRATE_OWNERSHIP_EVIDENCE_MISSING")
+            else:
+                _require_existing_paths(
+                    substrate.get("brain_owned_configuration_artifacts"),
+                    "COGNITIVE_PROMOTION_BRAIN_CONFIGURATION_ARTIFACTS",
+                )
+                if substrate.get("materiality_verified") is not True:
+                    fail("COGNITIVE_PROMOTION_CONFIGURATION_MATERIALITY_NOT_VERIFIED")
+                if substrate.get("opaque_target_capability_provider") is not False:
+                    fail("COGNITIVE_PROMOTION_OPAQUE_CAPABILITY_PROVIDER_NOT_EXCLUDED")
+                if substrate.get("promotion_evaluates_brain_configured_system") is not True:
+                    fail("COGNITIVE_PROMOTION_CONFIGURED_SYSTEM_NOT_EVALUATED")
+                if substrate.get("configuration_survives_substrate_unavailability") is not True:
+                    fail("COGNITIVE_PROMOTION_CONFIGURATION_DURABILITY_NOT_PROVED")
+                if substrate.get("provider_fallbacks_fail_closed") is not True:
+                    fail("COGNITIVE_PROMOTION_PROVIDER_FALLBACKS_NOT_FAIL_CLOSED")
+        else:
+            # A zero model-dependency receipt that still names a model controller
+            # is internally inconsistent and remains rejected.
+            if any(str(x or "").startswith("OPTIONAL_MODEL_ADVISORY") for x in modes):
+                fail("COGNITIVE_PROMOTION_ZERO_DEPENDENCY_WITH_MODEL_CONTROLLER")
+            if any(x not in (None,"") for x in planners):
+                fail("COGNITIVE_PROMOTION_ZERO_DEPENDENCY_WITH_PLANNER_MODEL")
     cross_domain_required=any(
         bool((record.get("minimum_acquisition_evidence") or {}).get("cross_domain_transfer_required"))
         for record in chain
