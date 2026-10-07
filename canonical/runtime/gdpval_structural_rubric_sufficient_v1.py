@@ -141,28 +141,28 @@ def compile_criterion(criterion: str) -> dict[str, Any]:
     # form is intentionally stronger than (or exactly equal to) the source
     # wording; no role/content semantics are inferred.
     single_format_patterns = [
-        (r"(?:The )?final deliverable is provided as an Excel workbook in \.xlsx format\\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
-        (r"Delivers a single Excel workbook file in \.xlsx format\\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
-        (r"The submitted file is an \.xlsx Excel workbook \(not \.xlsm or other formats\)\\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
-        (r"(?:The )?deliverable is provided as an Excel workbook file \(\.xlsx\)\\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
-        (r"(?:The )?deliverable is an Excel workbook in \.xlsx format\\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
-        (r"(?:The )?deliverable is an Excel workbook file with a \.xlsx extension\\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
-        (r"(?:The )?deliverable is provided as a single Excel workbook in \.xlsx format\\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
-        (r"(?:The )?deliverable is provided as a single Excel workbook with the \.xlsx extension\\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
-        (r"(?:The )?deliverable is a single Excel workbook saved with the \.xlsx extension\\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
-        (r"(?:The )?final deliverable is a single Excel workbook with file extension \.xlsx\\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
-        (r"Output contains a single Excel \(\.xlsx\) file\\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
-        (r"Delivers the final output as a single Excel workbook file with \.xlsx extension\\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
-        (r"(?:The )?deliverable is a PDF file\\.?", "PDF", "SINGLE_PDF_FORMAT"),
-        (r"(?:The )?deliverable is provided as a PDF file\\.?", "PDF", "SINGLE_PDF_FORMAT"),
-        (r"Final deliverable is provided as a PDF document \(\.pdf\)\\.?", "PDF", "SINGLE_PDF_FORMAT"),
-        (r"A single PDF file is delivered\\.?", "PDF", "SINGLE_PDF_FORMAT"),
-        (r"The submitted deliverable is a single PDF file \(filename ends with \.pdf\) and not a link to cloud slides or other formats\\.?", "PDF", "SINGLE_PDF_FORMAT"),
-        (r"Submission is a single Word document in \.docx format\\.?", "DOCX", "SINGLE_DOCX_FORMAT"),
-        (r"The deliverable is a single Microsoft Word \(\.docx\) file\\.?", "DOCX", "SINGLE_DOCX_FORMAT"),
-        (r"The submission is delivered as a Microsoft Word document with a \.docx extension\\.?", "DOCX", "SINGLE_DOCX_FORMAT"),
-        (r"The uploaded deliverable is a Microsoft Word document \(\.docx or \.doc\)\\.?", "DOCX", "DOCX_SUFFICIENT_FOR_WORD_FORMAT"),
-        (r"Delivers a PowerPoint presentation file in \.pptx format that opens without errors\\.?", "PPTX", "SINGLE_PPTX_FORMAT"),
+        (r"(?:The )?final deliverable is provided as an Excel workbook in \.xlsx format\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
+        (r"Delivers a single Excel workbook file in \.xlsx format\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
+        (r"The submitted file is an \.xlsx Excel workbook \(not \.xlsm or other formats\)\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
+        (r"(?:The )?deliverable is provided as an Excel workbook file \(\.xlsx\)\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
+        (r"(?:The )?deliverable is an Excel workbook in \.xlsx format\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
+        (r"(?:The )?deliverable is an Excel workbook file with a \.xlsx extension\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
+        (r"(?:The )?deliverable is provided as a single Excel workbook in \.xlsx format\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
+        (r"(?:The )?deliverable is provided as a single Excel workbook with the \.xlsx extension\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
+        (r"(?:The )?deliverable is a single Excel workbook saved with the \.xlsx extension\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
+        (r"(?:The )?final deliverable is a single Excel workbook with file extension \.xlsx\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
+        (r"Output contains a single Excel \(\.xlsx\) file\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
+        (r"Delivers the final output as a single Excel workbook file with \.xlsx extension\.?", "XLSX", "SINGLE_XLSX_FORMAT"),
+        (r"(?:The )?deliverable is a PDF file\.?", "PDF", "SINGLE_PDF_FORMAT"),
+        (r"(?:The )?deliverable is provided as a PDF file\.?", "PDF", "SINGLE_PDF_FORMAT"),
+        (r"Final deliverable is provided as a PDF document \(\.pdf\)\.?", "PDF", "SINGLE_PDF_FORMAT"),
+        (r"A single PDF file is delivered\.?", "PDF", "SINGLE_PDF_FORMAT"),
+        (r"The submitted deliverable is a single PDF file \(filename ends with \.pdf\) and not a link to cloud slides or other formats\.?", "PDF", "SINGLE_PDF_FORMAT"),
+        (r"Submission is a single Word document in \.docx format\.?", "DOCX", "SINGLE_DOCX_FORMAT"),
+        (r"The deliverable is a single Microsoft Word \(\.docx\) file\.?", "DOCX", "SINGLE_DOCX_FORMAT"),
+        (r"The submission is delivered as a Microsoft Word document with a \.docx extension\.?", "DOCX", "SINGLE_DOCX_FORMAT"),
+        (r"The uploaded deliverable is a Microsoft Word document \(\.docx or \.doc\)\.?", "DOCX", "DOCX_SUFFICIENT_FOR_WORD_FORMAT"),
+        (r"Delivers a PowerPoint presentation file in \.pptx format that opens without errors\.?", "PPTX", "SINGLE_PPTX_FORMAT"),
     ]
     for pattern, fmt, rule in single_format_patterns:
         if re.fullmatch(pattern, t, re.I):
@@ -171,9 +171,9 @@ def compile_criterion(criterion: str) -> dict[str, Any]:
                 {"kind": "FILE_FORMAT_EQ", "format": fmt},
             ], rule)
 
-    m = re.fullmatch(r"(?:The )?submitted workbook file name is exactly ([A-Za-z0-9_.() #&+-]+\.xlsx)\\.?", t, re.I)
+    m = re.fullmatch(r"(?:The )?submitted workbook file name is exactly ([A-Za-z0-9_.() #&+-]+\.xlsx)\.?", t, re.I)
     if not m:
-        m = re.fullmatch(r"The workbook file name exactly equals ['\"]([^'\"\\/]+\.xlsx)['\"]\\.?", t, re.I)
+        m = re.fullmatch(r"The workbook file name exactly equals ['\"]([^'\"\\/]+\.xlsx)['\"]\.?", t, re.I)
     if m:
         name=m.group(1)
         return _compiled(criterion, [
@@ -181,21 +181,21 @@ def compile_criterion(criterion: str) -> dict[str, Any]:
             {"kind": "NAMED_FILE_FORMAT_EQ", "basename": name, "format": "XLSX"},
         ], "EXACT_XLSX_FILENAME")
 
-    m = re.fullmatch(r"The workbook contains a worksheet named exactly ['\"]([^'\"]+)['\"] \(case-insensitive, ignoring surrounding spaces\)\\.?", t, re.I)
+    m = re.fullmatch(r"The workbook contains a worksheet named exactly ['\"]([^'\"]+)['\"] \(case-insensitive, ignoring surrounding spaces\)\.?", t, re.I)
     if m:
         return _compiled(criterion, [
             {"kind": "UNIQUE_FORMAT_FILE", "format": "XLSX"},
             {"kind": "XLSX_SHEET_NAME_EQ_NORMALIZED", "name": m.group(1)},
         ], "EXACT_XLSX_SHEET_NAME")
 
-    m = re.fullmatch(r"The PowerPoint contains ['\"]([^'\"]+)['\"] \(case-insensitive\) in the file name\\.?", t, re.I)
+    m = re.fullmatch(r"The PowerPoint contains ['\"]([^'\"]+)['\"] \(case-insensitive\) in the file name\.?", t, re.I)
     if m:
         return _compiled(criterion, [
             {"kind": "UNIQUE_FORMAT_FILE", "format": "PPTX"},
             {"kind": "FORMAT_FILE_BASENAME_CONTAINS_CI", "format": "PPTX", "text": m.group(1)},
         ], "PPTX_FILENAME_CONTAINS")
 
-    m = re.fullmatch(r"Submission is a single-page PDF\\.?", t, re.I)
+    m = re.fullmatch(r"Submission is a single-page PDF\.?", t, re.I)
     if m:
         return _compiled(criterion, [
             {"kind": "OUTPUT_FILE_COUNT_EQ", "value": 1},
@@ -203,9 +203,9 @@ def compile_criterion(criterion: str) -> dict[str, Any]:
             {"kind": "PDF_PAGE_COUNT_EQ", "value": 1},
         ], "EXACT_SINGLE_PAGE_PDF")
 
-    m = re.fullmatch(r"The PDF length is between (\d+) and (\d+) pages inclusive\\.?", t, re.I)
+    m = re.fullmatch(r"The PDF length is between (\d+) and (\d+) pages inclusive\.?", t, re.I)
     if not m:
-        m = re.fullmatch(r"The PDF is (\d+)[-–](\d+) pages in length, inclusive\\.?", t, re.I)
+        m = re.fullmatch(r"The PDF is (\d+)[-–](\d+) pages in length, inclusive\.?", t, re.I)
     if m:
         lo,hi=map(int,m.groups())
         if 0 < lo <= hi <= 10000:
@@ -214,7 +214,7 @@ def compile_criterion(criterion: str) -> dict[str, Any]:
                 {"kind": "PDF_PAGE_COUNT_BETWEEN", "min": lo, "max": hi},
             ], "EXACT_PDF_PAGE_COUNT_RANGE")
 
-    m = re.fullmatch(r"The survey PDF contains exactly (\d+) pages\\.?", t, re.I)
+    m = re.fullmatch(r"The survey PDF contains exactly (\d+) pages\.?", t, re.I)
     if m:
         n=int(m.group(1))
         if 0 < n <= 10000:
@@ -223,19 +223,19 @@ def compile_criterion(criterion: str) -> dict[str, Any]:
                 {"kind": "PDF_PAGE_COUNT_EQ", "value": n},
             ], "EXACT_UNIQUE_PDF_PAGE_COUNT")
 
-    m = re.fullmatch(r"The zip archive contains a top-level file named ([A-Za-z0-9_.+-]+)\\.?", t, re.I)
+    m = re.fullmatch(r"The zip archive contains a top-level file named ([A-Za-z0-9_.+-]+)\.?", t, re.I)
     if m:
         return _compiled(criterion, [
             {"kind": "UNIQUE_ZIP_TOP_LEVEL_FILE_EXISTS", "basename": m.group(1)},
         ], "EXACT_ZIP_TOP_LEVEL_FILE")
 
-    m = re.fullmatch(r"Deliverable includes a Terraform file named ([A-Za-z0-9_.+-]+)\\.?", t, re.I)
+    m = re.fullmatch(r"Deliverable includes a Terraform file named ([A-Za-z0-9_.+-]+)\.?", t, re.I)
     if m:
         return _compiled(criterion, [
             {"kind": "OUTPUT_FILE_BASENAME_EXISTS", "basename": m.group(1)},
         ], "EXACT_DELIVERABLE_FILE_EXISTS")
 
-    m = re.fullmatch(r'Deliverable includes a file named ([A-Za-z0-9_.+-]+) with file extension ["\'](\.[A-Za-z0-9]+)["\']\\.?', t, re.I)
+    m = re.fullmatch(r'Deliverable includes a file named ([A-Za-z0-9_.+-]+) with file extension ["\'](\.[A-Za-z0-9]+)["\']\.?', t, re.I)
     if m:
         name=m.group(1)
         ext=m.group(2)
