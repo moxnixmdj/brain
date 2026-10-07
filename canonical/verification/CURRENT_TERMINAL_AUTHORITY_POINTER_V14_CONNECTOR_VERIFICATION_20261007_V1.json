@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V14_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_SOURCE_BINDINGS__SEMANTIC_RUNTIME_AND_P2_STRONG_QUALITY_LAW_BOUND__COUNTS_AND_TERMINAL_TRUTH_UNCHANGED",
+  "subject": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "f66928a97218fa5d327a9faaf53e90bcb1c89aec"
+  },
+  "verified": {
+    "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V14",
+    "current_v16_exact": true,
+    "semantic_minimum_information_policy_exact": true,
+    "semantic_policy_independent_replay_exact": true,
+    "p2_strong_visible_quality_law_exact": true,
+    "p2_strong_visible_quality_independent_replay_exact": true,
+    "known_sound_D_B_certificate_record_count": 17,
+    "open_ABC_refinement_family_count": 13,
+    "current_U_empty_proved": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false,
+    "p2_strong_quality_current_real_context_admission_count": 0
+  },
+  "boundary": [
+    "CURRENT_V16_OLDER_CACHE_AND_ROUTER_FIELDS_ARE_NOT_INHERITED_OVER_THE_LATER_STABLE_POINTER_FACTS",
+    "SEMANTIC_MINIMUM_INFORMATION_RUNTIME_REQUIRES_COMPLETE_BOUND_MODEL_PREMISES_OR_DIRECT_E2E_BYPASS",
+    "P2_STRONG_QUALITY_LAW_IS_PARAMETERIZED_AND_DOES_NOT_SELF_AUTHENTICATE_REAL_CONTEXT_BINDINGS",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
