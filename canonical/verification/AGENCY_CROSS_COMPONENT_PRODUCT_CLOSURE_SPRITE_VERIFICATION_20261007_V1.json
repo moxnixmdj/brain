@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_CROSS_COMPONENT_PRODUCT_CLOSURE_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__7_OF_7_LOGICAL_CHECKS__ZERO_CREDIT",
+  "subject": {
+    "theorem": {
+      "path": "canonical/governance/AGENCY_CROSS_COMPONENT_PRODUCT_CLOSURE_THEOREM_20261007_V1.json",
+      "git_blob_sha": "9752729f82fd3bcc9f6c45819211530a96c9f533"
+    },
+    "runtime": {
+      "path": "canonical/runtime/agency_cross_component_product_closure_v1.py",
+      "git_blob_sha": "04a2c8aef8d518daa70d88880afa51234709c978"
+    },
+    "tests": {
+      "path": "canonical/tests/test_agency_cross_component_product_closure_v1.py",
+      "git_blob_sha": "501ed8d8c44cdbdf89c731de9a7d4ce3414ee31a"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/agency_product_closure_v1",
+    "recomputed_theorem_blob": "9752729f82fd3bcc9f6c45819211530a96c9f533",
+    "recomputed_runtime_blob": "04a2c8aef8d518daa70d88880afa51234709c978",
+    "recomputed_tests_blob": "501ed8d8c44cdbdf89c731de9a7d4ce3414ee31a",
+    "unittest_checks_passed": 4,
+    "additional_adversarial_checks_passed": 3
+  },
+  "verified": [
+    "VALID_PRODUCT_TRACE_PASSES",
+    "STALE_STATE_HANDOFF_FAILS_CLOSED",
+    "CHECKPOINT_IDENTITY_DRIFT_FAILS_CLOSED",
+    "MISSING_DECLARED_AGENCY_DIMENSION_FAILS_CLOSED",
+    "UNRECOVERED_FAILURE_FAILS_CLOSED",
+    "TERMINAL_FANIN_EVIDENCE_LOSS_FAILS_CLOSED",
+    "RESOURCE_WRITE_COLLISION_FAILS_CLOSED"
+  ],
+  "remaining_boundary": "FROZEN_COMPLEX_MULTI_TOOL_AGENCY_ACCEPTANCE_SCOPE_MUST_STILL_BE_BOUND_TO_THE_EXPLICIT_RECEIPT_DRIVEN_PRODUCT_CLASS_OR_A_STRONGER_SCOPE_COMPLETE_CLASS",
+  "hard_nonclaims": [
+    "NO_WHOLE_AGENCY_FAMILY_CLOSURE",
+    "NO_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
