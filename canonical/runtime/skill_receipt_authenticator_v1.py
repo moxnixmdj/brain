@@ -1,11 +1,13 @@
-"""Content-addressed authentication for Universal Learning V7 skill receipts.
+"""Content-addressed authentication boundary for Universal Learning V7 skill receipts.
 
-The underlying executable_skill_program_v7 API consumes receipt mappings. This
-module is the hardened repository boundary: it resolves exact receipt bytes by Git
-blob ID and requires a separate independent-verification receipt bound to the
-subject blob.
+Exact Git blob binding proves byte identity and existence. It does not prove that
+an author-supplied pass=true or verifier_id came from an independent verification
+process.
 
-Direct in-memory booleans are therefore insufficient for skill promotion.
+V1 therefore validates the byte/schema/binding claims and then fails closed on
+independence. Reusable-skill promotion must remain disabled until a stronger
+boundary can verify an independent execution/attestation rather than merely read
+a document that says one happened.
 """
 from __future__ import annotations
 
@@ -62,23 +64,15 @@ def authenticate_episode_receipt(
         raise SkillReceiptError("EPISODE_VERIFY_PROGRAM_MISMATCH")
     if vd.get("pass") is not True:
         raise SkillReceiptError("EPISODE_VERIFY_NOT_PASS")
-    verifier_id = _token(vd.get("verifier_id"), "EPISODE_VERIFIER_ID")
+    _token(vd.get("verifier_id"), "EPISODE_VERIFIER_ID")
 
-    return {
-        "independent_verified": True,
-        "exact_byte_bound": True,
-        "conclusion": "success",
-        "behavior_verified": True,
-        "episode_id": episode_id,
-        "scope_id": scope_id,
-        "program_sha256": program_sha256,
-        "receipt_id": subject["git_blob_sha"] + ":" + verify["git_blob_sha"],
-        "subject_path": subject["path"],
-        "subject_git_blob_sha": subject["git_blob_sha"],
-        "verification_path": verify["path"],
-        "verification_git_blob_sha": verify["git_blob_sha"],
-        "verifier_id": verifier_id,
-    }
+    # Both JSON documents live in the same repository trust domain. Their exact
+    # bytes can be authenticated, but an arbitrary author can write both
+    # pass=true and any non-empty verifier_id. No property checked above
+    # establishes execution independence.
+    raise SkillReceiptError(
+        "EPISODE_INDEPENDENCE_UNPROVED__CONTENT_ADDRESSING_IS_NOT_INDEPENDENCE"
+    )
 
 
 def authenticate_candidate_receipt(
@@ -123,20 +117,11 @@ def authenticate_candidate_receipt(
         raise SkillReceiptError("CANDIDATE_VERIFY_SCOPE_RELATION_MISMATCH")
     if vd.get("pass") is not True:
         raise SkillReceiptError("CANDIDATE_VERIFY_NOT_PASS")
-    verifier_id = _token(vd.get("verifier_id"), "CANDIDATE_VERIFIER_ID")
+    _token(vd.get("verifier_id"), "CANDIDATE_VERIFIER_ID")
 
-    return {
-        "independent_verified": True,
-        "exact_byte_bound": True,
-        "conclusion": "success",
-        "candidate_sha256": candidate_sha256,
-        "source_episode_ids": sorted(source_episode_ids),
-        "behavior_preserving_on_claimed_scope": True,
-        "scope_relation": relation,
-        "receipt_id": subject["git_blob_sha"] + ":" + verify["git_blob_sha"],
-        "subject_path": subject["path"],
-        "subject_git_blob_sha": subject["git_blob_sha"],
-        "verification_path": verify["path"],
-        "verification_git_blob_sha": verify["git_blob_sha"],
-        "verifier_id": verifier_id,
-    }
+    # A second self-authored receipt does not become independent merely because
+    # it is content-addressed. PROVEN_SUPERSET must never be authorized by an
+    # unverified assertion.
+    raise SkillReceiptError(
+        "CANDIDATE_INDEPENDENCE_UNPROVED__CONTENT_ADDRESSING_IS_NOT_INDEPENDENCE"
+    )
