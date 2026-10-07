@@ -89,7 +89,7 @@
     "canonical/runtime/m0a_raw_source_brain_candidate_v2.py": "0aac96d27068bdad379703c1b0b8a7a32cacb2e2",
     "canonical/runtime/native_artifact_cross_format_proof_v1.py": "904eb61171f5ee775ff7824c1be7778d7acc4a23",
     "canonical/runtime/native_artifact_cross_format_candidate_v1.py": "f3e5090647dd9029ab9f46efd06dc0c0d0addbc3",
-    "canonical/runtime/contract_native_proof_suites.py": "f71f7aab54e259f0a9841646e2401a9e117d6773",
+    "canonical/runtime/contract_native_proof_suites.py": "617449a6f8cfb33c204c36e058581775977da0fa",
     "canonical/runtime/contract_native_brain_candidate.py": "74b8e2fda8e097d7e3ca48843e7c578c4be72012",
     "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py": "dd8fba0f27691002babbc7ad1fc6b65d7bb57282"
   },
