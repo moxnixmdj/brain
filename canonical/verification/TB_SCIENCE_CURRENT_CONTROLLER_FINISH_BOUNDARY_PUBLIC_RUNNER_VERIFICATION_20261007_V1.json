@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_CONTROLLER_FINISH_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_CONTROLLER_BLOB__DECLARED_INPUT_SNAPSHOT__MANDATORY_OUTPUT_FINISH_GATE__TRANSPORT_ANOMALY_FAIL_CLOSED__ZERO_TARGET_EXPOSURE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "path": "canonical/runtime/harbor_science_agent_v1.py",
+    "git_blob_sha": "39cc756bafba817dfd697e65769da5ca0a316837"
+  },
+  "independent_public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2374,
+    "pull_request_url": "https://github.com/moxnixmdj/verification-capsule-runner/pull/2374",
+    "head_sha": "9af6a54b23cd2754d96e16b4fd424deb2a06a2f0",
+    "workflow_run_id": 37609927740,
+    "workflow_job_id": 112754452440,
+    "workflow_name": "Verify current TB-Science controller PR",
+    "conclusion": "success",
+    "verifier_path": "capsules/tb_science_controller_current_20261007_v1/verify.py",
+    "verifier_git_blob_sha": "cee61e9c74022ea3f6267a0782389df7ce9cd4e7"
+  },
+  "verified_cases": [
+    "DECLARED_SPEC_INPUT_IS_READ_BEFORE_PLANNING_AND_EXACT_OUTPUT_IS_FROZEN_AS_BRAIN_MANDATORY",
+    "PLANNER_FINISH_CANNOT_BYPASS_ABSENT_MANDATORY_OUTPUT",
+    "EXACT_OUTPUT_CREATION_PLUS_INDEPENDENT_DELIVERABLE_GATE_CAN_REACH_BRAIN_FINISH",
+    "ZERO_EXIT_TRANSPORT_TRUNCATION_WARNING_REMAINS_FAIL_CLOSED"
+  ],
+  "causal_binding": {
+    "rank7_failure_class": "SUBSTRATE_DEFINED_FINISH_CONTRACT_AND_ZERO_EXIT_SHELL_TRUNCATION_COULD_LAUNDER_FALSE_COVERAGE",
+    "repaired": true,
+    "note": "This artifact verifies the current repair bytes against four synthetic falsification cases. It does not prove TB-Science benchmark acceptance."
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "benchmark_task_exposure": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_SCORE_CREDIT",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_RANK9_EXECUTION_AUTHORITY",
+    "NO_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
