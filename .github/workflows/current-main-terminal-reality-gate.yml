@@ -6,8 +6,10 @@ on:
     paths:
       - '.github/workflows/current-main-terminal-reality-gate.yml'
       - 'canonical/runtime/terminal_reality_gate_v1.py'
+      - 'canonical/runtime/terminal_closure_reducer.py'
       - 'canonical/tests/test_terminal_reality_gate_v1.py'
       - 'canonical/governance/CURRENT_TERMINAL_AUTHORITY.json'
+      - 'canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json'
   workflow_dispatch:
 
 permissions:
@@ -50,7 +52,7 @@ jobs:
               pass
           ok=(pytest_rc==0 and gate_rc==0 and terminal is True)
           receipt={
-            "schema":"PROJECT_BRAIN_CURRENT_MAIN_OFFICIAL_TERMINAL_REALITY_GATE_V2",
+            "schema":"PROJECT_BRAIN_CURRENT_MAIN_OFFICIAL_TERMINAL_REALITY_GATE_V3",
             "trigger_sha":os.environ.get("GITHUB_SHA"),
             "pytest_returncode":pytest_rc,
             "pytest_tail":pytest_out[-2000:],
@@ -61,10 +63,12 @@ jobs:
           with open("canonical/verification/CURRENT_MAIN_OFFICIAL_TERMINAL_REALITY_GATE_LATEST.json","w") as f:
               json.dump(receipt,f,indent=2,sort_keys=True);f.write("\n")
           status={
-            "schema":"PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V5",
+            "schema":"PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V6",
             "status":"CURRENT_MAIN_TERMINAL_REAL" if ok else "CURRENT_MAIN_TERMINAL_NOT_REAL",
             "phase":parsed.get("phase") if isinstance(parsed,dict) else None,
             "blockers":parsed.get("blockers") if isinstance(parsed,dict) else None,
+            "accepted_family_count":parsed.get("accepted_family_count") if isinstance(parsed,dict) else None,
+            "verified_owned_family_count":parsed.get("verified_owned_family_count") if isinstance(parsed,dict) else None,
           }
           with open("canonical/verification/CURRENT_MAIN_TERMINAL_REALITY_STATUS.json","w") as f:
               json.dump(status,f,indent=2,sort_keys=True);f.write("\n")
