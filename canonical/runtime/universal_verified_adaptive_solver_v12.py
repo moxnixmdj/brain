@@ -309,7 +309,18 @@ def run(
             return _fail("PROBLEM_NOT_OBJECT")
         problem = deepcopy(dict(problem))
         v4._tok(problem.get("task_id"), "TASK_ID")
-        caps = v4._caps(problem)
+        raw_capabilities = problem.get("capabilities")
+        if raw_capabilities is None:
+            raw_capabilities = []
+            problem["capabilities"] = raw_capabilities
+        if (
+            isinstance(raw_capabilities, list)
+            and not raw_capabilities
+            and capability_expander is not None
+        ):
+            caps = {}
+        else:
+            caps = v4._caps(problem)
         initial = v4._tokens(problem.get("initial_facts", []), "INITIAL_FACTS")
         targets = v4._tokens(problem.get("target_effects", []), "TARGET_EFFECTS", allow_empty=False)
         if set(initial) & set(targets):
