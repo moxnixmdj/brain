@@ -1,6 +1,8 @@
 from __future__ import annotations
 from typing import Any, Mapping
 
+from canonical.runtime.git_content_binding_v1 import validate_repo_blob_binding
+
 SCHEMA = "PROJECT_BRAIN_TERMINAL_ROOT_DECISION_GATE_V1"
 ALLOWED_PROOF_KINDS = {
     "FULL_SCOPE_DB_COVER",
@@ -9,16 +11,8 @@ ALLOWED_PROOF_KINDS = {
     "SELECTED_COVER_COMPLEMENT_UNSAT",
 }
 
-def _sha1(v: Any) -> bool:
-    return isinstance(v, str) and len(v) == 40 and all(c in "0123456789abcdef" for c in v)
-
 def _binding(v: Any) -> bool:
-    return (
-        isinstance(v, Mapping)
-        and isinstance(v.get("path"), str)
-        and bool(v["path"].strip())
-        and _sha1(v.get("git_blob_sha"))
-    )
+    return validate_repo_blob_binding(v)
 
 def _fail(reason: str, **detail: Any) -> dict[str, Any]:
     out = {
