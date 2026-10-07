@@ -1,0 +1,10 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_SELF_CHECKER_V4_SPRITE_VERIFICATION",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_SPRITE_EXACT_BLOB_PASS__2490_BYTE_FULL_PACKAGE__ZERO_TERMINAL_CREDIT",
+  "carrier":{"provider":"SPRITES","sprite_name":"h100-real-image-v1","sprite_id":"sprite-68a466f6-88d5-493d-93f3-2b85377836a3"},
+  "exact_blobs":{"runtime":"f5d140ca78b1512efd3ad248e5991909480331d5","checker":"cca5d79b15499bd263e84112feedc46228be05a4"},
+  "replay":{"hash_seeds":[1,999],"generated_equations":933,"status":"PASS"},
+  "joint_encoding":{"raw_bytes":6328,"payload_bytes":2490,"payload_sha256":"7a75f4091da6f1cc86015343fca82678b01a4ad709e67fb5fcaefc730fcdee23","match_finder":"BT2","python_lzma_constant":18,"roundtrip_exact":true},
+  "hard_nonclaims":["CLASS_SPECIFIC_RULE_KNOWLEDGE_REMAINS","META_LEVEL_RULE_SOUNDNESS_REMAINS_TRUSTED","NO_TERMINAL_CREDIT"]
+}
