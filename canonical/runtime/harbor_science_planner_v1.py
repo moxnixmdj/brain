@@ -19,7 +19,7 @@ ENDPOINT = "http://127.0.0.1:8080/v1/chat/completions"
 MODEL = "brain-qwen3.5-9b"
 TOOL_NAME = "submit_science_proposal"
 MAX_RESPONSE_BYTES = 100_000
-MAX_TOOL_COMPLETION_TOKENS = 4096
+MAX_TOOL_COMPLETION_TOKENS = 384
 
 TOOL = {
     "type": "function",
