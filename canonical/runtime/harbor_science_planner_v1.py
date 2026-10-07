@@ -56,8 +56,12 @@ TOOL = {
                                 "maxItems": 16,
                                 "items": {"type": "string", "minLength": 1, "maxLength": 64},
                             },
-                            "command": {"type": "string", "minLength": 1, "maxLength": MAX_COMMAND_CHARS},
-                            "verify_command": {"type": "string", "minLength": 1, "maxLength": MAX_COMMAND_CHARS},
+                            # Do not encode MAX_COMMAND_CHARS as JSON-schema maxLength here.
+                            # llama.cpp compiles tool schemas into grammars and rejects very
+                            # large repetition bounds before generation. Brain enforces the
+                            # exact bound immediately after decoding instead.
+                            "command": {"type": "string"},
+                            "verify_command": {"type": "string"},
                         },
                         "required": ["action_id", "covers", "command", "verify_command"],
                         "additionalProperties": False,
@@ -205,6 +209,19 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
         if not isinstance(data, dict):
             raise SciencePlannerError("SCIENCE_PLANNER_RESPONSE_OBJECT_REQUIRED")
         proposal = _decode_tool_arguments(data)
+        candidates = proposal.get("candidates")
+        if candidates is not None:
+            if not isinstance(candidates, list) or len(candidates) > 1:
+                raise SciencePlannerError("SCIENCE_PLANNER_CANDIDATES_BOUND_INVALID")
+            for candidate in candidates:
+                if not isinstance(candidate, dict):
+                    raise SciencePlannerError("SCIENCE_PLANNER_CANDIDATE_OBJECT_REQUIRED")
+                for field in ("command", "verify_command"):
+                    value = candidate.get(field)
+                    if not isinstance(value, str) or not value:
+                        raise SciencePlannerError(f"SCIENCE_PLANNER_{field.upper()}_REQUIRED")
+                    if len(value) > MAX_COMMAND_CHARS:
+                        raise SciencePlannerError(f"SCIENCE_PLANNER_{field.upper()}_TOO_LONG")
         # Keep the controller boundary unchanged: it consumes untrusted JSON text.
         text = json.dumps(proposal, sort_keys=True, separators=(",", ":"))
         extract_json_object(text)
