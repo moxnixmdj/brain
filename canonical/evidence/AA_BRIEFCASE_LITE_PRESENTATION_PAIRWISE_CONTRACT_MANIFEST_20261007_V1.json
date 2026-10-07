@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_LITE_PRESENTATION_PAIRWISE_CONTRACT_MANIFEST_V1",
+  "date": "2026-10-07",
+  "status": "PINNED_PUBLIC_EXAMPLE_PRESENTATION_CONTRACT_MANIFEST__4_CHECKS__20_DECLARED_DIMENSIONS__ZERO_OFFICIAL_AA_BRIEFCASE_CREDIT",
+  "source": {
+    "dataset": "ArtificialAnalysis/AA-Briefcase-Lite",
+    "revision_sha": "4dec557b47d43867a1648c0974db1d8208c8b677",
+    "file": "checks.jsonl",
+    "public_example_only": true,
+    "official_private_score_contribution": false
+  },
+  "aggregate": {
+    "total_check_rows": 63,
+    "presentation_check_count": 4,
+    "declared_dimension_occurrence_count": 20,
+    "task_ids": [
+      "w1_t1",
+      "w1_t2",
+      "w1_t3",
+      "w1_t4"
+    ]
+  },
+  "order_semantics": {
+    "observed_shared_rule": "PAIRWISE_A_OR_B_PRESENTATION_ORDER_OVER_A_DECLARED_FINITE_DIMENSION_SET",
+    "common_pareto_pattern": "A_WIN_IF_AT_LEAST_ONE_DIMENSION_IS_OBSERVABLY_STRONGER_AND_NO_DIMENSION_REGRESSES_MATERIALLY__WITH_CHECK_SPECIFIC_AUTOMATIC_LOSS_RULES_WHERE_DECLARED",
+    "exact_check_text_is_authority": true
+  },
+  "checks": [
+    {
+      "check_id": "W1-T1-P-01",
+      "task_id": "w1_t1",
+      "week": 1,
+      "taskdoer_output_file": "market_overview.pdf, market_overview.tex",
+      "files_needed": [
+        "week/halberd_ic_preread_template.docx"
+      ],
+      "dimension_count": 7,
+      "check_description": "Pairwise comparison: which `market_overview.tex` (rendered to `market_overview.pdf`) produces a more polished, professional single-page CDD market-overview appendix artefact?\n\n- (1) Node and label spacing. No overlapping shapes (nodes, boxes, containers physically overlapping each other on the rendered page); no overlapping labels; generous-enough whitespace that the eye can track grouping and direction without strain. Shape-on-shape overlap is the most penalised failure on this dimension - any visible overlap between two boxes / nodes / containers is treated as a near-automatic loss on dim (1) regardless of other spacing strengths. Arrows / lines / connectors do not overlap any text label or node body other than at their intended endpoints; no connectors crossing through node bodies or label boxes mid-path. Outputs that just barely avoid overlap score lower than outputs with comfortable margins.\n- (2) Containment within shapes and bounds. Text inside coloured boxes, bounding shapes, and nodes does not overflow or clip; all elements sit within the page bounds without bleeding off edges; arrows and connectors stay inside the page bounds and do not visually clip on the page edge.\n- (3) Typographic and line-weight consistency. Title differentiated from section labels; node labels at consistent size; consistent font family across the page (no mixed serif / sans, no random typeface substitutions); arrow / box / divider line weights coherent. Use of preset TikZ styles (`\\tikzset`) or `\\newcommand` macros for a consistent visual vocabulary is preferred over inline ad-hoc styling that varies element-by-element.\n- (4) Visual design discipline and aesthetic restraint. Restrained institutional colour palette (a defined set of 3-6 semantically named colours applied consistently - e.g. a primary navy / accent gold / neutral grey palette) beats arbitrary use of default TikZ pastel fills (`yellow!20`, `orange!20`, `red!20`, `brown!10` etc. picked ad hoc by what looks 'fine'). Colour assignments should be semantic and consistent across the page (e.g. the colour used for 'colony' in the production-system column should match the colour used for 'colony' wherever else it appears). Penalties: default TikZ pastels applied without a defined palette; &gt;6 distinct fill colours without semantic justification; clashing colour combinations; over-decorated pages with splashy fills that obscure the structural content; under-decorated monochrome pages that miss hierarchy entirely.\n- (5) Information hierarchy. Clear visual hierarchy across at least four typographic / colour strata: title &gt; section / column header &gt; primary node label &gt; secondary annotation / footnote. Each stratum is distinguishable by some combination of size, weight, and colour. Pages where everything sits at similar visual weight (flat hierarchy) score lower than pages where the eye is led through the content by deliberate size / weight / colour contrast.\n- (6) Legend, key, and annotation completeness. Colour coding, fill / hatch patterns, and arrow conventions explained via a legible legend or in-place key; annotations carry units / sources / dates where required. Footnote formatting: where footnotes are used, they are formatted at the bottom of the page (not floating mid-page), set at a footnote-appropriate size smaller than body text (e.g. `\\footnotesize` or smaller), do not overlap the diagram body or page edge, and footnote numbering / markers match the in-diagram superscripts / markers exactly.\n- (7) Compilation-render fidelity. The submitted `.tex` recompiles to a PDF that is visually identical to the submitted `.pdf` (no missing TikZ libraries, no font fallbacks producing different glyphs, no silent diagram-component drops). A-02 gates clean compilation as a binary; this dimension judges fidelity-of-match between source and submitted render."
+    },
+    {
+      "check_id": "W1-T2-P-01",
+      "task_id": "w1_t2",
+      "week": 1,
+      "taskdoer_output_file": "market_model.xlsx",
+      "files_needed": [
+        "week/halberd_ic_preread_template.docx"
+      ],
+      "dimension_count": 4,
+      "check_description": "Pairwise: which `market_model.xlsx` is the more polished, professional Excel market-sizing workbook across four XLSX-specific presentation dimensions?\nFour dimensions:\n- (1) Workbook integrity: no error values (#REF!, #DIV/0!, #VALUE!, #NAME?, #N/A) in any populated cell; the workbook opens in fresh Excel / LibreOffice without recalculation errors or broken cross-sheet references.\n- (2) Tab organisation and naming: tabs follow a sensible logical sequence (e.g. historical -&gt; forecast -&gt; scenarios -&gt; assumptions, or equivalent); no default 'Sheet1' / 'Sheet2' names; no empty or placeholder tabs.\n- (3) Number formatting and column hygiene: NZ$M / USD / % / decimal places are consistent within columns; column widths are sufficient (no '###' truncation; no zero-width columns hiding content); merged-cell content does not overflow or overlap; headers are readable.\n- (4) Cross-sheet linkage: scenario tabs and the assumptions tab are linked by formula references rather than copy-pasted values; flexing an assumption propagates to the dependent scenario / output cells.\nA stronger output is more polished across the four dimensions. Surface size (more rows, more tabs) is not polish; broken formulas or error cells in either output are an automatic loss on the workbook-integrity dimension."
+    },
+    {
+      "check_id": "W1-T3-P-01",
+      "task_id": "w1_t3",
+      "week": 1,
+      "taskdoer_output_file": "target_assessment.pptx",
+      "files_needed": [
+        "week/halberd_ic_preread_template.docx"
+      ],
+      "dimension_count": 4,
+      "check_description": "This pairwise check evaluates which `target_assessment.pptx` output presents the deck more professionally for an IC pre-read audience, across four polish dimensions:\n\n1. standard CDD structure; executive summary -&gt; market context -&gt; target overview -&gt; findings -&gt; risks -&gt; open questions, with clear section transitions and a coherent narrative arc.\n2. slide hygiene; no text overflow off slide edges; no text overlap (text on text); no text overflow off coloured boxes, bounding shapes, or container elements; every chart has a clear title, labelled axes, and a legend; tables have header rows.\n3. visual hierarchy; consistent type and colour use, effective use of comparison tables / heat maps / matrices where relevant, no inconsistent slide-master usage.\n4. IC-ready scannability; single-glance comprehension per slide (key takeaway visible without reading body bullets); preliminary CDD scope reflected in slide count (10-25 typical) without padding.\n\nA stronger output is more polished across the four dimensions with at least one observably stronger dimension and no material regression on the others. Slide count alone is not polish; padded decks lose on IC-ready scannability and structure."
+    },
+    {
+      "check_id": "W1-T4-P-01",
+      "task_id": "w1_t4",
+      "week": 1,
+      "taskdoer_output_file": "briefing.srt, briefing.mp4",
+      "files_needed": [
+        "week/halberd_ic_preread_template.docx"
+      ],
+      "dimension_count": 5,
+      "check_description": "Pairwise: which output is a more polished briefing-video + subtitle deliverable (`briefing.mp4` + `briefing.srt`) across five dimensions?\n\nThe five dimensions:\n1. SRT syntax correctness; well-formed SRT (sequential indices, HH:MM:SS,mmm timestamps with valid ordering, no overlapping cues, blank-line separation, no malformed lines that would crash a subtitle renderer).\n2. subtitle-audio alignment; subtitle text verbatim to spoken narration (per firm-wide convention) with timestamps matching audio cadence consistently across the runtime.\n3. subtitle timing / readability; cue lengths readable (~2-5 seconds per cue, ~7-10 words per line, two lines max), no text too long to read in time on-screen; cue rate sustained naturally across the longer runtime.\n4. audio quality; clear narration with consistent volume, no clipping, no digital artefacts, consistent voice across full runtime (no audio dropouts or volume jumps between primer / findings / open questions sections).\n5. pacing across runtime; primer / findings / open questions paced cleanly: primer doesn't drag without substantive payload; findings and open questions each receive adequate runtime; transitions between sections are clean (deliberate pause, transition phrase, or visual cue rather than abrupt cut).\n\nScore 1 (A wins): A more polished across the five dimensions: cleaner SRT syntax, more accurate subtitle-audio alignment with verbatim text sustained across full runtime, more readable cue timing, better audio quality with consistent voice, and cleaner pacing across primer / findings / open questions sections. SRT syntax errors in either output are an automatic loss on that dimension. Score 0 (B wins): B more polished on the same basis."
+    }
+  ],
+  "truth_boundary": {
+    "proves_public_lite_dimension_sets": true,
+    "proves_official_private_AA_briefcase_dimension_sets": false,
+    "proves_dimension_measurement_implementations": false,
+    "proves_target_pairwise_results": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
