@@ -1,0 +1,19 @@
+{
+  "schema":"PROJECT_BRAIN_ESCAPE_OCCUPANCY_NONENTAILMENT_V1",
+  "date":"2026-10-07",
+  "status":"PROVED_LOGICAL_BOUNDARY__ZERO_CREDIT",
+  "X":"AT_LEAST_ONE_ACTUAL_USEFUL_TARGET_LAW_IS_IN_THE_CURRENT_UNDOMINATED_ESCAPE_REGION",
+  "closure_rule":"ABC_CLOSES_IF_AND_ONLY_IF_X_IS_FALSE",
+  "current_evidence":{
+    "proves_X":false,
+    "proves_not_X":false,
+    "proves_ABC_closed":false
+  },
+  "important_distinction":"OPEN_OR_UNCERTIFIED_TARGET_ROLE_DOES_NOT_PROVE_ACTUAL_UNDOMINATED_TARGET_OCCUPANCY",
+  "models":[
+    {"X":false,"ABC_closed":true},
+    {"X":true,"ABC_closed":false}
+  ],
+  "next":"PROVE_NOT_X_BY_STRONGER_DOMINANCE_OR_STRUCTURAL_EXCLUSION__OTHERWISE_BIND_ONLY_THE_MINIMUM_TARGET_FACT_THAT_DECIDES_X",
+  "credit_delta":0
+}
