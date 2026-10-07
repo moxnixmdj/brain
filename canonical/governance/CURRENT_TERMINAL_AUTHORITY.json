@@ -751,9 +751,10 @@
       "role": "ONE_USE_RANK9_EXECUTION_AUTHORITY__EXACT_TRANSITIVE_CARRIER_PREFLIGHT_REQUIRED"
     },
     "tb_science_current_slot_ledger": {
-      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V7.json",
-      "git_blob_sha": "d3ff32dd833dfb5fcdce58e134185bfaf19e95ae",
-      "role": "CURRENT_IRREVERSIBLE_SLOT_TRUTH__RANK9_CONSUMED__RANK10_NEXT_UNTOUCHED"
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V10.json",
+      "git_blob_sha": "69ebcd48edd87f42bfeb47e5ab3f94ab3aa397e0",
+      "supersedes": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V9.json",
+      "note": "TEN_CONSUMED__RANK10_FINAL_ZERO__SOURCE_TIMEOUT_REPAIR_MERGED__INDEPENDENT_LIVE_REPAIRED_BOUNDARY_VERIFICATION_OPEN__RANK11_LOCKED"
     },
     "tb_science_rank9_irreversible_result": {
       "path": "canonical/verification/TB_SCIENCE_RANK9_IRREVERSIBLE_RESULT_TRUTH_20261007_V1.json",
@@ -835,6 +836,11 @@
         "git_blob_sha": "e5616778d35c5fae7ef518355d7f01fdac55c246"
       },
       "note": "COMMON_POLICY_FIRST__MINIMUM_TRUTHFUL_POLICY_CHANGING_DISCRIMINATOR_SECOND__INTERFACE_ALONE_GRANTS_ZERO_U_EMPTY_OR_TERMINAL_CREDIT"
+    },
+    "kstar_private_actions_transport_truth": {
+      "path": "canonical/verification/TERMINAL_KSTAR_PRIVATE_ACTIONS_TRANSPORT_TRUTH_20261007_V1.json",
+      "git_blob_sha": "ea4232ef98dfbc5681445648c9702b2a48838ca5",
+      "note": "TWO_ZERO_STEP_RUNS__RUNNER_ID_ZERO__KSTAR_SEMANTIC_EXECUTION_NOT_STARTED__DO_NOT_INFER_SEMANTIC_FAILURE"
     }
   },
   "live_truth": {
@@ -1309,7 +1315,13 @@
     "primary_pre_abc_research_root": "U_EMPTY",
     "obsolete_multi_race_primary_scheduling": false,
     "selected_discriminator_policy_cover_bridge_available": true,
-    "selected_discriminator_bridge_grants_u_empty_by_itself": false
+    "selected_discriminator_bridge_grants_u_empty_by_itself": false,
+    "tb_science_rank10_final_zero": true,
+    "tb_science_timeout_source_repair_merged": true,
+    "tb_science_repaired_boundary_independent_live_verified": false,
+    "kstar_private_actions_runner_available": false,
+    "kstar_semantic_execution_started": false,
+    "kstar_semantic_failure_inferred": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -1636,6 +1648,27 @@
     ],
     "u_empty_proved": false,
     "terminal": false,
+    "terminal_credit_delta": 0
+  },
+  "execution_transport_guard": {
+    "schema": "PROJECT_BRAIN_EXECUTION_TRANSPORT_GUARD_V1",
+    "private_github_actions": {
+      "current_kstar_runner_observed": false,
+      "observed_zero_step_runs": [
+        37639210118,
+        37639610017
+      ],
+      "retrigger_allowed_without_new_runner_evidence": false
+    },
+    "replacement_transport_requirements": [
+      "EXACT_PRIVATE_CANONICAL_BYTES",
+      "ZERO_INCREMENTAL_SPEND",
+      "NO_PUBLIC_PRIVATE_REPO_LEAK",
+      "NO_USER_DEVICE_DEPENDENCE",
+      "DISTINCT_INDEPENDENT_VERIFICATION",
+      "FAIL_CLOSED_PROMOTION",
+      "TERMINAL_REDUCER_ONLY_TERMINAL_AUTHORITY"
+    ],
     "terminal_credit_delta": 0
   }
 }
