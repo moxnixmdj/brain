@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
 ENTRY="canonical/runtime/continuity_root3_fixed_entry_v1.py"
-EXPECTED="72cae0e1a2ff115289673a4f4952fd23c83d7277"
+EXPECTED="af55015eb02f64dfce924b7b0a29cd085ab9de2e"
 EXPECTED_RELS={
     "TASKS_REL":"canonical/same_identity_worker/tasks",
     "STATE_REL":"canonical/same_identity_worker/state",
@@ -88,6 +88,10 @@ def evaluate(root:Path=ROOT):
         fixed_calls=[n for n in ast.walk(fixed) if isinstance(n,ast.Call) and dotted(n.func)=="supervisor._repo_path"]
         if len(fixed_calls)!=1:
             errors.append("FIXED_DIR_NOT_REPO_CONFINED")
+        fixed_src=ast.get_source_segment(text,fixed) or ""
+        for frag in ("expected=ROOT/pathlib.PurePosixPath(rel)","resolved != expected","FIXED_BASE_REDIRECTED"):
+            if frag not in fixed_src:
+                errors.append("FIXED_DIR_REDIRECT_GUARD_MISSING:"+frag)
 
         bound_src=ast.get_source_segment(text,bound) or ""
         for name in EXPECTED_RELS:
