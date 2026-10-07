@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_RESIDUAL_TRICHOTOMY_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_FINITE_LOGIC_PASS__COARSE_INFORMATION_FAILURE_NOT_EQUAL_CAPABILITY_FAILURE__ZERO_CREDIT",
+  "subject": {
+    "governance": "canonical/governance/ABC_RESIDUAL_DOMINATE_DISCRIMINATE_BUILD_TRICHOTOMY_20261007_V1.json",
+    "runtime": "canonical/runtime/abc_residual_trichotomy_v1.py",
+    "tests": "canonical/tests/test_abc_residual_trichotomy_v1.py",
+    "branch": "truth-repair/abc-residual-dominate-discriminate-build-v1"
+  },
+  "wolfram": {
+    "robust_common_cover_formula": "p0m0 && p0m1",
+    "coarse_no_common_policy_but_singletons_each_covered_satisfiable": true,
+    "singleton_missing_policy_region_satisfiable": true,
+    "coarse_failure_implies_capability_gap": false
+  },
+  "verified": [
+    "A SINGLE POLICY DOMINATING EVERY LAW IN THE CURRENT INFORMATION CELL ELIMINATES TARGET DISCRIMINATION.",
+    "AN EMPTY COMMON COVER ON A COARSE INFORMATION CELL DOES NOT IMPLY A CAPABILITY GAP; TWO POLICIES MAY COVER DIFFERENT SINGLETON TARGET LAWS.",
+    "AN ADMISSIBLE DISCRIMINATOR CAN THEREFORE CONVERT SOME APPARENT FAILURES INTO SELECTABLE POSITIVE COVERS WITHOUT ADDING CAPABILITY.",
+    "A SINGLETON TARGET LAW WITH NO ADEQUATE CURRENT POLICY DEFINES A CAPABILITY GAP REGION, BUT AN ACTUAL CAPABILITY GAP REQUIRES ACTUAL TARGET OCCUPANCY OR AN UNAVOIDABILITY PROOF.",
+    "MISSION V8 INVENTION/REDESIGN IS RELEVANT ONLY AFTER A LOAD_BEARING CAPABILITY REGION IS SUFFICIENTLY BOUND TO EVALUATE OR WHEN DOMINATING THAT REGION IS CHEAPER THAN EXCLUDING TARGET OCCUPANCY."
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM CURRENT TARGET UNCERTAINTY SETS ARE COMPLETE.",
+    "NO CLAIM ANY REAL CURRENT SINGLETON CAPABILITY REGION IS NONEMPTY.",
+    "NO ABC OR TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
