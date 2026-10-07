@@ -960,7 +960,9 @@
     "bureaucracy_scheduler_truth_reconciled": true,
     "optional_not_x_is_mandatory_terminal_root": false,
     "instruction_following_frozen_acceptance_protocol_closed": true,
-    "instruction_following_family_ownership_closed": false
+    "instruction_following_family_ownership_closed": false,
+    "if_scope_boundary_noninferior_proved": true,
+    "if_zero_critical_authority_violations_proved": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -1182,6 +1184,6 @@
     },
     "mandatory_terminal_predicate": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
     "optional_stronger_route": "PROVE_NOT_X_OVER_SOUND_OBSERVABLE_TRACE_ESCAPE_MODEL",
-    "current_truth": "5_OF_19_VERIFIED_OWNED_FAMILY_PASSES__INSTRUCTION_FOLLOWING_ACCEPTANCE_CLOSED_BUT_OWNERSHIP_FINALITY_OPEN__16_OF_38_ATOMS_PROVED__22_OPEN__TERMINAL_FALSE"
+    "current_truth": "5_OF_19_FULLY_TERMINALLY_CLOSED__16_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__22_OPEN__TERMINAL_FALSE"
   }
 }
