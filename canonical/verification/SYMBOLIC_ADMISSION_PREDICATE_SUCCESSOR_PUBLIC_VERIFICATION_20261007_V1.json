@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_SYMBOLIC_ADMISSION_PREDICATE_SUCCESSOR_PUBLIC_VERIFICATION_20261007_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_RUNTIME_AND_TEST_BYTES__ADVERSARIAL_FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/symbolic_admission_predicate_successor_v1.py",
+      "git_blob_sha": "c2f23feb71c233d265344337f3e588fee161f169"
+    },
+    "tests": {
+      "path": "canonical/tests/test_symbolic_admission_predicate_successor_v1.py",
+      "git_blob_sha": "fd235348907956240156b23947c7fd9e4d3bd7db"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2408,
+    "head_sha": "51f888cf5b5b097570a18c91da613f9b0532ec39",
+    "merge_commit": "545f4c826a5fcef49e8e0a17587953af0b5c3410",
+    "workflow_run_id": 37631727757,
+    "workflow_job_id": 112827436529,
+    "conclusion": "success",
+    "run_attempt": 1
+  },
+  "verified": {
+    "exact_runtime_blob": true,
+    "exact_test_blob": true,
+    "positive_symbolic_region_execution": true,
+    "negative_region_rejection": true,
+    "receipt_cannot_float_across_expression_route_scope_adequacy_or_predicate": true,
+    "expression_digest_tamper_rejected": true,
+    "dynamic_or_malformed_expression_rejected": true,
+    "missing_soundness_premises_rejected": true,
+    "malformed_context_rejected": true,
+    "selected_cover_complete_authorized": false,
+    "u_empty_authorized": false,
+    "terminal_authority": false
+  },
+  "consequence": [
+    "THE_SYMBOLIC_ADMISSION_PREDICATE_RUNTIME_IS_NOW_INDEPENDENTLY_REPLAYED_ON_EXACT_CANONICAL_BYTES.",
+    "THE_17_REGION_D_B_CONVERGENCE_PATH_MAY_USE_THIS_RUNTIME_AS_VERIFIED_PREDICATE_INFRASTRUCTURE_BUT_EACH_REGION_STILL_REQUIRES_ITS_OWN_EXACT_ADMISSION_SOUNDNESS_BINDING.",
+    "NO_REGION_ADEQUACY_OR_GLOBAL_COMPLEMENT_COVERAGE_IS_INFERRED_FROM_RUNTIME_VERIFICATION."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
