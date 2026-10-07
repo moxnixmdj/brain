@@ -1,0 +1,116 @@
+name: Current terminal closure reducer V2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/terminal_closure_reducer.py'
+      - 'canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py'
+      - 'canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json'
+      - '.github/workflows/current-terminal-closure-reducer-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: current-terminal-closure-reducer-v2
+  cancel-in-progress: true
+
+jobs:
+  reduce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Regression-test semantic family closure
+        run: |
+          set -euo pipefail
+          python -m pytest -q canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py
+
+      - name: Evaluate current frozen terminal manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p canonical/verification
+          rc=0
+          python canonical/runtime/terminal_closure_reducer.py \
+            canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json \
+            > /tmp/terminal_closure_verdict.json || rc=$?
+          export REDUCER_RC="$rc"
+
+          python3 - <<'PY'
+          import json
+          import os
+          import subprocess
+
+          with open('/tmp/terminal_closure_verdict.json', encoding='utf-8') as f:
+              verdict = json.load(f)
+
+          rc = int(os.environ['REDUCER_RC'])
+          achieved = verdict.get('achieved') is True
+          expected_rc = 0 if achieved else 1
+          if rc != expected_rc:
+              raise SystemExit(
+                  f'reducer return code {rc} disagrees with achieved={achieved}'
+              )
+
+          def blob(path):
+              return subprocess.check_output(
+                  ['git', 'rev-parse', f'HEAD:{path}'], text=True
+              ).strip()
+
+          receipt = {
+              'schema': 'PROJECT_BRAIN_CURRENT_TERMINAL_CLOSURE_REDUCER_V2',
+              'evaluated_trigger_sha': os.environ['GITHUB_SHA'],
+              'reducer_blob_sha': blob(
+                  'canonical/runtime/terminal_closure_reducer.py'
+              ),
+              'manifest_blob_sha': blob(
+                  'canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json'
+              ),
+              'test_blob_sha': blob(
+                  'canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py'
+              ),
+              'reducer_returncode': rc,
+              'terminal_real_by_mandatory_reducer': achieved,
+              'verdict': verdict,
+          }
+          with open(
+              'canonical/verification/CURRENT_TERMINAL_CLOSURE_REDUCER_LATEST_V2.json',
+              'w',
+              encoding='utf-8',
+          ) as f:
+              json.dump(receipt, f, indent=2, sort_keys=True)
+              f.write('\n')
+
+          print(json.dumps(receipt, sort_keys=True))
+          PY
+
+      - name: Persist current reducer receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT=canonical/verification/CURRENT_TERMINAL_CLOSURE_REDUCER_LATEST_V2.json
+          git config user.name "Project Brain Terminal Reducer"
+          git config user.email "project-brain-terminal-reducer@users.noreply.github.com"
+          git add "$OUT"
+          git diff --cached --quiet && exit 0
+          git commit -m "Record current mandatory terminal reducer verdict"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || {
+              git rebase --abort || true
+              sleep 1
+              continue
+            }
+            git push origin HEAD:main && exit 0
+            sleep 1
+          done
+          exit 1
