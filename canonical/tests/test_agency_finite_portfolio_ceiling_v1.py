@@ -18,3 +18,5 @@ def test_exact_bound_repository_proves_agency_portfolio_ceiling():
  assert out["target_predicates"]["AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"] is True
 
 # Execution trigger only: rerun the independent GitHub-hosted replay after the verifier landed.
+
+# Independent PR replay trigger: content-addressed verifier re-execution only; no semantics changed.
