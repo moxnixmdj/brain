@@ -56,7 +56,7 @@ class ProofCarryingSemanticRefinementV3AdequacyAuthTests(unittest.TestCase):
         self.assertEqual(out["certified_common_policies"], [])
         self.assertEqual(out["status"], "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED")
 
-    def test_authenticated_exact_policy_condition_can_be_certified(self):
+    def test_self_authored_exact_pair_is_not_an_independent_adequacy_root(self):
         text, claim, atom_id = self._fixture()
         condition = {"op": "ATOM", "id": atom_id}
         old_root = bridge.ROOT
@@ -106,9 +106,12 @@ class ProofCarryingSemanticRefinementV3AdequacyAuthTests(unittest.TestCase):
                         }
                     },
                 )
-                self.assertEqual(out["status"], "COMMON_POLICY_CERTIFIED")
-                self.assertEqual(out["certified_common_policies"], ["p"])
-                self.assertEqual(len(out["authenticated_policy_adequacy"]), 1)
+                self.assertEqual(out["status"], "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED")
+                self.assertEqual(out["certified_common_policies"], [])
+                self.assertIn(
+                    "POLICY_ADEQUACY_ROOT_UNREGISTERED",
+                    out["rejected_policy_adequacy_bindings"][0]["reason"],
+                )
         finally:
             bridge.ROOT = old_root
 
