@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_ARTIFACT_MECHANICAL_PRESERVATION_SELECTED_CONTEXT_ABC_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "SOURCE_BOUND_OBJECTIVE_CEILING_AND_SCOPE_PASS__STATIC_ROUTE_LOCAL_D_AUDIT__INDEPENDENT_SELECTED_ROUTE_REPLAY_STILL_REQUIRED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ARTIFACT_MECHANICAL_PRESERVATION_SELECTED_CONTEXT_ABC_BUNDLE_20261007_V1.json",
+    "git_blob_sha": "06a8b6a0ba1f09412e3e52ec0e32a53262de2a45",
+    "branch": "abc-artifact-mechanical-preservation-cell-v1"
+  },
+  "verified_from_bound_authority": [
+    "ARTIFACT_MECHANICAL_GATES_CEILING_STATE_PROVED",
+    "ARTIFACT_MECHANICAL_GATES_CEILING_SCOPE_COMPLETE_TRUE",
+    "ARTIFACT_MECHANICAL_GATES_CEILING_OBJECTIVE_CEILING_TRUE",
+    "ARTIFACT_MECHANICAL_GATES_CEILING_BRAIN_VALUE_1_EQUALS_OBJECTIVE_CEILING_1",
+    "ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT_STATE_PROVED",
+    "ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT_SCOPE_COMPLETE_TRUE"
+  ],
+  "independently_verified_receipts": [
+    {
+      "path": "canonical/verification/NATIVE_ARTIFACT_CROSS_FORMAT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "34d8a3b7a99363902d6212759125ac71fa54a986",
+      "proves": [
+        "DOCX_XLSX_PPTX_PDF_NATIVE_OUTPUTS_REOPEN",
+        "UNRELATED_NATIVE_STRUCTURE_PRESERVED",
+        "DECLARED_LOW_LEVEL_EDIT_ONLY"
+      ]
+    },
+    {
+      "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d",
+      "proves": [
+        "RENDER_GEOMETRY_PRESERVATION_ON_BOUND_LOW_LEVEL_TEXT_EDITS",
+        "VISIBLE_EDIT_REQUIRED",
+        "LARGE_GEOMETRY_MUTATION_REJECTED"
+      ]
+    },
+    {
+      "path": "canonical/verification/NATIVE_ARTIFACT_T1_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "b8b214a33808ef75c9f5a70fe5f0eb376ea2341e",
+      "proves": [
+        "EXPLICIT_LOW_LEVEL_EDIT_SCOPE_BOUND",
+        "SEMANTIC_TARGET_SELECTION_SEPARATED",
+        "UNSUPPORTED_SCOPE_FAILS_CLOSED"
+      ]
+    }
+  ],
+  "exact_selected_route": {
+    "candidate": {
+      "path": "canonical/runtime/native_artifact_cross_format_candidate_v1.py",
+      "git_blob_sha": "f3e5090647dd9029ab9f46efd06dc0c0d0addbc3"
+    },
+    "ooxml": {
+      "path": "canonical/runtime/ooxml_package_transaction.py",
+      "git_blob_sha": "970be62854c918b306ae3f62989009bfbd0e8fc7"
+    },
+    "pdf": {
+      "path": "canonical/runtime/pdf_native_edit_transaction.py",
+      "git_blob_sha": "b9f673ffe0474d00a598089077ad93db40c00dd8"
+    }
+  },
+  "static_route_local_D_audit": {
+    "candidate_network_calls": 0,
+    "candidate_process_spawn_calls": 0,
+    "candidate_model_or_provider_calls": 0,
+    "candidate_persistent_repository_writes": 0,
+    "candidate_ephemeral_io": "TemporaryDirectory + caller-scoped input/output files only",
+    "dependency_network_calls": 0,
+    "dependency_process_spawn_calls": 0,
+    "dependency_model_or_provider_calls": 0,
+    "dependency_persistent_repository_writes": 0,
+    "dependency_writes": "caller-supplied output path only",
+    "verifier_only_external_tools": [
+      "LibreOffice",
+      "Poppler"
+    ],
+    "independent_carrier_replay": false
+  },
+  "candidate_conclusion": "THE_DECLARED_NATIVE_MECHANICAL_PRESERVATION_CELL_HAS_A_BOUND_TARGET_FREE_OBJECTIVE_CEILING_ROUTE_AND_SCOPE_COMPLETE_AUDIT. THE EXACT CREDITED POLICY IS MODEL_INDEPENDENT_AND HAS_NO_OPAQUE_PROVIDER_OR_NETWORK_OR_PROCESS_ESCAPE; ONLY AN_INDEPENDENT_EXACT_ROUTE_REPLAY_REMAINS_BEFORE ANY_SELECTED_CELL_PROMOTION.",
+  "remaining": [
+    "INDEPENDENT_EXACT_BLOB_REPLAY_OF_SELECTED_ROUTE_AND_ROUTE_LOCAL_D",
+    "DO_NOT_PROMOTE_PROFESSIONAL_ARTIFACT_QUALITY_OR_SEMANTIC_TARGET_SELECTION",
+    "DO_NOT_PROMOTE_WHOLE_ARTIFACT_CREATION_FAMILY"
+  ],
+  "hard_nonclaims": [
+    "NO_FAMILY_CLOSURE",
+    "NO_GLOBAL_ABC_CLOSURE",
+    "NO_GLOBAL_D_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
