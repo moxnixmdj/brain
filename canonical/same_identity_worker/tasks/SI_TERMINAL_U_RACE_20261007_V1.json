@@ -4,7 +4,7 @@
   "agent_id": "SUPERWORKER-TERMINAL-U",
   "priority": 999987,
   "mission_path": "canonical/astra_runtime/missions/ASTRA_TERMINAL_U_RACE_20261007_V1.json",
-  "mission_sha256": "e08ef0d54520b4e724177b55e37f087e0bf1ee197028015fb07165a10fb9f4f0",
+  "mission_sha256": "fff624edf4815bd12ce57c9cdbf31cd1424f5bc2a4233fdabc041354fd9f3735",
   "prerequisites": [],
   "checkpoint_before_runtime_once": true,
   "incremental_spend_usd": 0,
