@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_220_LIST_CONTINUATION_REPLAY_V2_INDEPENDENT_VERIFICATION",
+  "date": "2026-10-07",
+  "status": "TWO_INDEPENDENT_PRIVATE_CARRIERS_PASS__EXACT_BRANCH_BYTES__41_BLOCKS__173_CHILDREN__33_TASKS__ZERO_CREDIT",
+  "subject": {
+    "verifier": {
+      "path": "canonical/runtime/gdpval_public_220_list_continuation_replay_v2.py",
+      "git_blob_sha": "383bad21f7b8caff90ac7dff912cde2aa45b315b"
+    },
+    "binder": {
+      "path": "canonical/runtime/bounded_task_list_continuation_v1.py",
+      "git_blob_sha": "ec3682aa4115063c937c36dd04bc73b0897d93f6"
+    },
+    "directive_dependency": {
+      "path": "canonical/runtime/bounded_task_directive_semantics_v1.py",
+      "git_blob_sha": "e3a4c01cc08e7a569692a5d6f03a6feec69934bf"
+    },
+    "population_identity": {
+      "path": "canonical/evidence/GDPVAL_PUBLIC_220_EXPLICIT_OBLIGATION_LOCALIZATION_20261007_V1.json",
+      "git_blob_sha": "7a2d726adb155bee0f1e6f4af71ee90cc547bbbc"
+    }
+  },
+  "carriers": [
+    {
+      "provider": "SPRITES",
+      "name": "brain-root3-current-byte-replay-20261007-v1",
+      "result": "PASS"
+    },
+    {
+      "provider": "SPRITES",
+      "name": "brain-tbscience-v18-authority-verify-20261007-v1",
+      "result": "PASS"
+    }
+  ],
+  "verified": {
+    "row_count": 220,
+    "all_task_ids_match_frozen_population": true,
+    "all_prompt_sha256_match_frozen_population": true,
+    "bound_list_block_count": 41,
+    "bound_child_item_count": 173,
+    "tasks_with_bound_list_structure": 33,
+    "exact_result_agreement_across_carriers": true
+  },
+  "falsified": {
+    "revoked_v1_bound_list_block_count": 37,
+    "revoked_v1_bound_child_item_count": 155,
+    "revoked_v1_tasks_with_bound_list_structure": 31
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_GDPVAL_SCOPE_CLOSURE",
+    "NO_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
