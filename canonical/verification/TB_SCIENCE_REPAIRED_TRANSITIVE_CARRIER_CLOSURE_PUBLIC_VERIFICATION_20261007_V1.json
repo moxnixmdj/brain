@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_REPAIRED_TRANSITIVE_CARRIER_CLOSURE_PUBLIC_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REPAIRED_14_FILE_CLOSURE__AGENT_PLANNER_IMPORT_PASS__ZERO_BENCHMARK_EXPOSURE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "planner_git_blob_sha": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "closure_manifest_git_blob_sha": "31656d35034338dfcb699672bcd4788b283b83c9",
+    "closure_file_count": 14
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 2397,
+    "head_sha": "9368d6544d9c305be22cfc69eee11bc4a0572526",
+    "base": "terminal-execution-v1",
+    "workflow_run_id": 37624610910,
+    "workflow_job_id": 112803073343,
+    "workflow_name": "Verify Science transitive closure v1",
+    "conclusion": "success",
+    "merged_base_commit": "542cb9a0c1c5a08eae45dc76dc3ad9416bfa17bf"
+  },
+  "verified": {
+    "exact_repaired_closure_recomputed": true,
+    "exact_science_runtime_closure_file_count": 14,
+    "all_manifest_blob_identities_match": true,
+    "complete_exact_carrier_closure_gate_pass": true,
+    "agent_import_pass": true,
+    "planner_import_pass": true,
+    "adversarial_missing_dependency_gate_pass": true,
+    "adversarial_mutated_dependency_gate_pass": true,
+    "dynamic_local_import_fail_closed_pass": true,
+    "path_escape_fail_closed_pass": true,
+    "benchmark_task_exposure": 0
+  },
+  "causal_consequence": [
+    "THE_TRANSITIVE_CARRIER_FAILURE_CLASS_THAT_CONSUMED_RANK8_REMAINS_CLOSED UNDER_THE_REPAIRED_PLANNER_BYTES.",
+    "THE_REPAIRED_PLANNER_DOES_NOT_CHANGE_THE_14_FILE_LOCAL_RUNTIME_CLOSURE.",
+    "WITH_THE_SEPARATE_LIVE_TRANSPORT_RECEIPT__RANK10_PREEXPOSURE_INFRASTRUCTURE_GATES_REQUIRED_BY_V7_ARE_CLOSED."
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TASK_CAPABILITY_RESULT",
+    "NO_RANK10_RESULT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
