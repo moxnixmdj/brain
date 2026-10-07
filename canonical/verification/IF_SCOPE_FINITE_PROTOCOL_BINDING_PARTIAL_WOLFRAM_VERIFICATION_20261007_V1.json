@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_IF_SCOPE_FINITE_PROTOCOL_BINDING_PARTIAL_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PARTIAL_INDEPENDENT_VERIFICATION_PASS__CEILING_LOGIC_VERIFIED__SOURCE_BINDING_REPLAY_PENDING__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/IF_SCOPE_FINITE_PROTOCOL_BINDING_TRUTH_REPAIR_20261007_V1.json",
+    "git_blob_sha": "15c5e607e9f5c921d62bf75492e26021980e75fa"
+  },
+  "independent_logic": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "code": "FullSimplify[ForAll[q, 0 <= q <= 1, 1 >= q], Reals] && Reduce[0 <= q <= 1 && 1 < q, q, Reals] === False",
+    "output": "True",
+    "consequence": "ON_AN_EXACT_SHARED_BINARY_SUCCESS_FRACTION_WITH_BRAIN_VALUE_1__NO_TARGET_VALUE_IN_0_TO_1_CAN_EXCEED_BRAIN"
+  },
+  "source_binding_validation": {
+    "state": "PENDING_INDEPENDENT_CARRIER_REPLAY",
+    "local_deterministic_checks_passed": true,
+    "blocked_reason": "SPRITE_SOURCE_MATERIALIZATION_BLOCKED_BY_TOOL_SAFETY_LAYER_DURING_THIS_EXECUTION",
+    "required_before_promotion": [
+      "REPLAY_CANONICAL_RUNTIME_IF_SCOPE_FINITE_PROTOCOL_BINDING_VERIFIER_V1_ON_EXACT_BRANCH_BYTES",
+      "VERIFY_ORIGINAL_IF_PROTOCOL_HAS_NO_EXPLICIT_LARGER_POPULATION_ACCEPTANCE_OBJECT",
+      "VERIFY_PRECOMMIT_AND_INDEPENDENT_160_CASE_RECEIPT_BLOBS_MATCH_CANDIDATE_BINDINGS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_FULL_INDEPENDENT_SOURCE_BINDING_VERIFICATION_HAS_PASSED.",
+    "NO_CLAIM_IF_SCOPE_BOUNDARY_REFINEMENT_IS_PROMOTED.",
+    "NO_CLAIM_ABC_D_FINALITY_OR_TERMINAL_CLOSED."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
