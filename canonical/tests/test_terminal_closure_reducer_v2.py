@@ -7,7 +7,7 @@ from canonical.runtime.terminal_closure_reducer import evaluate_manifest
 def _git_blob_sha(path):
     data = path.read_bytes()
     digest = sha1()
-    digest.update(f"blob {len(data)}\\0".encode("ascii"))
+    digest.update(f"blob {len(data)}".encode("ascii") + bytes([0]))
     digest.update(data)
     return digest.hexdigest()
 
