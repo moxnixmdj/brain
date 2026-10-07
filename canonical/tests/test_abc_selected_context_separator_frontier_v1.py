@@ -1,0 +1,15 @@
+from canonical.runtime.abc_selected_context_separator_frontier_verifier_v1 import verify,prior_activation
+def test_current_pass():
+ x=verify(); assert x["pass"],x; assert x["generic_preproof_semantic_implementation_residual_count"]==0; assert not x["active_persistent_prior_gap"]
+def test_exact_p_only_witness_activates():
+ assert prior_activation(selected_context=True,complete_semantics=True,empty_intersection=True,direct_certificate=False,verifier_available=False,discriminator_available=False,uncertainty_acceptable=False,opus_separator_bound=True,minimum_prior_localized=True)
+def test_verifier_blocks_prior_activation():
+ assert not prior_activation(selected_context=True,complete_semantics=True,empty_intersection=True,direct_certificate=False,verifier_available=True,discriminator_available=False,uncertainty_acceptable=False,opus_separator_bound=True,minimum_prior_localized=True)
+def test_discriminator_blocks_prior_activation():
+ assert not prior_activation(selected_context=True,complete_semantics=True,empty_intersection=True,direct_certificate=False,verifier_available=False,discriminator_available=True,uncertainty_acceptable=False,opus_separator_bound=True,minimum_prior_localized=True)
+def test_acceptable_uncertainty_blocks_prior_activation():
+ assert not prior_activation(selected_context=True,complete_semantics=True,empty_intersection=True,direct_certificate=False,verifier_available=False,discriminator_available=False,uncertainty_acceptable=True,opus_separator_bound=True,minimum_prior_localized=True)
+def test_missing_target_separator_blocks_prior_activation():
+ assert not prior_activation(selected_context=True,complete_semantics=True,empty_intersection=True,direct_certificate=False,verifier_available=False,discriminator_available=False,uncertainty_acceptable=False,opus_separator_bound=False,minimum_prior_localized=True)
+def test_incomplete_semantics_blocks_prior_claim():
+ assert not prior_activation(selected_context=True,complete_semantics=False,empty_intersection=True,direct_certificate=False,verifier_available=False,discriminator_available=False,uncertainty_acceptable=False,opus_separator_bound=True,minimum_prior_localized=True)
