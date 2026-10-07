@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ADAPTIVE_COVER_LEAST_FIXED_POINT_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_FINITE_EXHAUSTIVE_CROSSCHECK_PASS__2744_SYSTEMS__ZERO_RANK_VIOLATIONS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "theorem": {
+      "path": "canonical/governance/ADAPTIVE_COVER_LEAST_FIXED_POINT_RANK_ELIMINATION_THEOREM_20261007_V1.json",
+      "git_blob_sha": "873107deb2fd157bd9bf890d5780d2f67d84b758"
+    },
+    "runtime": {
+      "path": "canonical/runtime/adaptive_cover_least_fixed_point_v1.py",
+      "git_blob_sha": "8c345647de37b3b9b536dfe6eace36568baad6c1"
+    },
+    "tests": {
+      "path": "canonical/tests/test_adaptive_cover_least_fixed_point_v1.py",
+      "git_blob_sha": "f62abb7c455f05fb881ed9eaa2f13f32e2c295f0"
+    }
+  },
+  "independent_carrier": {
+    "provider": "WOLFRAM_LANGUAGE_EVALUATOR",
+    "method": "EXHAUSTIVE_THREE_STATE_TERMINAL_AND_NONEMPTY_SUCCESSOR_SET_SYSTEM_ENUMERATION"
+  },
+  "result": {
+    "systems_checked": 2744,
+    "systems_with_total_least_fixed_point_cover": 889,
+    "covered_nonterminal_successor_rank_violations": 0,
+    "first_violation": null
+  },
+  "verified": [
+    "FINITE_LEAST_FIXED_POINT_ENTRY_STAGE_INDUCES_STRICTLY_DECREASING_RANK_ON_EVERY_SELECTED_PROGRESS_SUCCESSOR_FOR_ALL_ENUMERATED_SYSTEMS",
+    "CYCLES_OR_SELF_DEPENDENT_PROGRESS_WITHOUT_AN_EARLIER_COVERED_ESCAPE_DO_NOT_ENTER_THE_LEAST_FIXED_POINT",
+    "EXPLICIT_EXTERNAL_GLOBAL_RANK_IS_NOT_NEEDED_FOR_THE_FINITE_DECLARED_CONSTRUCTION"
+  ],
+  "proof_boundary": [
+    "THE_GENERAL_TRANSFINITE_EQUIVALENCE_REMAINS_A_SET_THEORETIC_WELL_FOUNDED_INDUCTION_ARGUMENT",
+    "FINITE_RUNTIME_DOES_NOT_PROVE_TOTAL_SOUND_alpha_gamma_OVER_S_TRACE",
+    "RESOURCE_COMPOSITION_REMAINS_SEPARATE",
+    "NO_GLOBAL_U_CREDIT_FROM_THIS_VERIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_U_EMPTY",
+    "NO_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
