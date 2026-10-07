@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-07",
+  "status": "PROOF_ONLY__ZERO_CREDIT",
+  "canonical_base_commit": "eb04e1b08961e27bace7bc72a03c2f4e31e4f48e",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "claim_under_test": "THE_29_OPEN_ACCEPTANCE_TRUTH_ROWS_ARE_29_INDEPENDENT_PRIMITIVE_TERMINAL_BLOCKERS_RATHER_THAN_NAMED_SLICES_OF_V9_ABC_SELECTED_CONTEXT_COVER",
+  "method": "EXACT_SET_PRESERVING_FACTORIZATION_FROM_TERMINAL_FRONTIER_FACTORIZER_V2_INTO_CURRENT_V9_PROOF_SURFACES__NO_ROW_DELETION",
+  "source_bindings": {
+    "v9": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V9.json",
+      "git_blob_sha": "1ec7f2c86534d046e51ddda00001ed287039fc0a"
+    },
+    "factorizer_v2": {
+      "path": "canonical/runtime/terminal_frontier_factorizer_v2.py",
+      "git_blob_sha": "7bf57811d1b745cc2b92596f6c1c87ff5693aa1c"
+    },
+    "coverage_v4": {
+      "path": "canonical/governance/CURRENT_TERMINAL_COVERAGE_PARTITION_V4.json",
+      "git_blob_sha": "a878bd9b658e4db295dce49bc5b3aa2ba580c59e"
+    }
+  },
+  "invariants": [
+    "PRESERVE_ALL_29_NAMED_TRUTH_ROWS_AND_THEIR_FAIL_CLOSED_SEMANTICS",
+    "DO_NOT_CONVERT_OPEN_ROW_TO_PASS",
+    "DO_NOT_REDUCE_D_OWNERSHIP_EFFECT_REQUIREMENTS",
+    "ONLY_RECLASSIFY_PRIMITIVE_PROOF_SURFACE_CARDINALITY_IF_EVERY_ROW_MAPS_LOSSLESSLY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
