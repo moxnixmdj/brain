@@ -4,6 +4,26 @@
   "status": "ACTIVE_FAIL_CLOSED_SCHEDULING_POINTER__13_OPEN_ABC_REFINEMENTS__17_SOUND_DB_REGIONS__14_INFORMATION_WAKE_CLASSES__14_POSITIVE_REALITY_CLASSES__8_CURRENT_BOUND_ACCESS_EXECUTION_LANES__GDPVAL_RUBRIC_ACCEPTANCE_LANE_BOUND__ACTIONS_PRESTEP_DISPATCH_FAILURE_PROVED__CURSORBENCH_OWNER_BOUNDARY_TRUTH_REPAIRED__GDPVAL_IMPERATIVE_REQUIREMENT_CHANNEL_BOUND__GDPVAL_TARGET_INFORMATION_TOURNAMENT_BOUND__GDPVAL_TARGET_REFERENCE_DRIFT_REPAIRED__GDPVAL_IMPERATIVE_220_POPULATION_REEXECUTION_BOUND__GDPVAL_OWNER_LLM_JUDGE_SURFACE_BOUND__GDPVAL_V1_HUMAN_COMPARATOR_LABEL_REVOKED__GDPVAL_PUBLIC_220_RUBRIC_MANIFEST_VERIFIED__GDPVAL_PUBLIC_SUBMISSION_PROTOCOL_EXECUTABLE__GDPVAL_PUBLIC_CROWD_BT_KERNEL_EXECUTABLE__GDPVAL_OBJECTIVE_ARTIFACT_POPULATION_EXECUTED__GDPVAL_ZERO_POSITIVE_BUCKET_EXHAUSTED__GDPVAL_138_TASK_SHARED_FORMATTING_STYLE_RESIDUAL_BOUND__DENSE_NONCHART_DISTINCT_WAKE_DELETED__PRESENTATION_ORDER_CALCULUS_OWNED__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authoritative_sources": {
+    "universal_escape_resolver_v3_acceptance_relation_overlay": {
+      "path": "canonical/governance/UNIVERSAL_ESCAPE_RESOLVER_V3_ACCEPTANCE_RELATION_ACTIVATION_20261007_V1.json",
+      "git_blob_sha": "ee77bf0584095a39a2aeceb014462aaf5860aec2",
+      "acceptance_relation_normal_form": {
+        "path": "canonical/governance/ACCEPTANCE_RELATION_UNCERTAINTY_NORMAL_FORM_20261007_V1.json",
+        "git_blob_sha": "42498bbe40327cd47be5e4251e7f524a8c0c8d5b"
+      },
+      "universal_solver": {
+        "path": "canonical/runtime/universal_verified_adaptive_solver_v9.py",
+        "git_blob_sha": "659cda15bb956606a023cc9495e4036ce13e19d9"
+      },
+      "astra_bound_subplan_carrier": {
+        "path": "canonical/runtime/universal_bound_capability_carrier_v1.py",
+        "git_blob_sha": "3333e933af779f0de8d833f7c84e1507887b1343",
+        "semantic_effect_authority": false,
+        "db_admission_authority": false,
+        "terminal_authority": false
+      },
+      "note": "ACTIVE_PLANNING_ONLY__O_Q_COLLAPSED_TO_ONE_SOUND_ACCEPTANCE_RELATION_UNCERTAINTY_PRIMITIVE__ASTRA_BOUND_SUBPLANS_PROPOSAL_ONLY__ZERO_TERMINAL_CREDIT"
+    },
     "universal_escape_resolver_v2_active_planning_overlay": {
       "path": "canonical/governance/UNIVERSAL_ESCAPE_RESOLVER_V2_ACTIVATION_20261007_V1.json",
       "git_blob_sha": "78c1c6be7e6055f0bdf99ebdc682370083e5c847",
@@ -513,7 +533,18 @@
     }
   },
   "live_truth": {
-    "universal_escape_resolver_v2_planning_overlay_active": true,
+    "universal_escape_resolver_v3_acceptance_relation_overlay_active": true,
+    "universal_escape_resolver_primary_terminal_proof_primitive": "SOUND_ACCEPTANCE_RELATION_OVERAPPROXIMATION_PLUS_COMMON_POSITIVE_ADEQUACY",
+    "universal_escape_resolver_acceptance_relation_symbol": "R_OVER",
+    "universal_escape_resolver_actual_acceptance_relation_symbol": "R_STAR",
+    "universal_escape_resolver_acceptance_relation_rule": "FIND_ONE_BRAIN_POLICY_ADEQUATE_FOR_EVERY_R_IN_R_OVER__ELSE_REFINE_R_OVER_ONLY_BY_MINIMUM_TRUTHFUL_POLICY_CHANGING_INFORMATION",
+    "universal_escape_resolver_O_Q_split_superseded_for_primary_scheduling": true,
+    "universal_escape_resolver_O_Q_preserved_as_special_cases": true,
+    "astra_bound_subplan_carrier_available_as_proposal_source": true,
+    "astra_bound_subplan_carrier_semantic_effect_authority": false,
+    "astra_bound_subplan_carrier_db_admission_authority": false,
+    "astra_bound_subplan_carrier_terminal_authority": false,
+    "universal_escape_resolver_v2_planning_overlay_active": false,
     "universal_escape_resolver_primary_u_roles": [
       "B0_INPUT_PERCEPTION_AND_GROUNDING",
       "B2_INFORMATION_TRANSFORMATION_REASONING_AND_PROBLEM_SOLVING",
@@ -545,14 +576,13 @@
     "universal_solver_authenticated_skill_behavior_verification_required": true,
     "current_escape_planning_order": [
       "SELECT_BOUND_ESCAPE_CELL_IN_B0_B2_B4_OR_B7",
-      "CLASSIFY_LOAD_BEARING_ACCEPTANCE_AS_O_Q_OR_BOTH",
-      "SOURCE_PROVED_POSITIVE_ADEQUACY",
-      "ROBUST_COMMON_POLICY",
-      "COMPLETE_OBJECTIVE_OPTIMUM",
-      "DIRECT_END_TO_END_ACCEPTANCE",
-      "UNIVERSAL_LEARNING_V9_V8_V7_MINIMUM_MISSING_DECISION_RELEVANT_EVIDENCE_PLANNING",
-      "AUTHENTICATED_SOLVER_V9_CROSS_RUN_EPISODE_AND_SKILL_VERIFICATION_WHEN_NEEDED",
-      "RETRY_EXISTING_FAIL_CLOSED_D_B_ADMISSION",
+      "BIND_SOUND_R_OVER_CONTAINING_R_STAR",
+      "TRY_EXISTING_POSITIVE_ADEQUACY_PROOF_CONSTRUCTORS_FOR_ONE_POLICY_ADEQUATE_OVER_ALL_R_IN_R_OVER",
+      "IF_COMMON_POLICY_PROVED_SUBMIT_TO_EXISTING_FAIL_CLOSED_D_B_ADMISSION",
+      "IF_UNRESOLVED_USE_UNIVERSAL_LEARNING_FOR_MINIMUM_POLICY_CHANGING_INFORMATION_OR_MISSING_MECHANISM_ONLY",
+      "ALLOW_VERIFIED_ASTRA_BOUND_SUBPLAN_CARRIER_AS_PROPOSAL_SOURCE_WHEN_APPLICABLE_WITH_ZERO_SEMANTIC_AUTHORITY",
+      "USE_AUTHENTICATED_SOLVER_V9_FOR_MULTI_STEP_EXECUTION_RESUME_EPISODE_AND_SKILL_VERIFICATION",
+      "RETRY_POSITIVE_ADEQUACY_AND_D_B_ADMISSION",
       "RECOMPUTE_E",
       "B9_ONLY_FOR_REACHED_LOAD_BEARING_COMPOSITION"
     ],
