@@ -1,0 +1,237 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_BOUND_IRREDUCIBLE_REALITY_CUT_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_CURRENT_BOUND_DECLARED_ROUTE_MINIMUM__18_RESIDUAL_ATOMS__17_POSITIVE_REALITY_SURFACES_PLUS_ONE_ZERO_REALITY_DEFERRED_COMPOSITION_CERTIFICATE__ZERO_CREDIT",
+  "canonical_base_commit": "6a2e52d3bd071bef29094d0c6eff5ae4e0d96c35",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "d9c41440ec78886b5ba44c7eeda6f0c2680839ae"
+    },
+    "saturation": {
+      "path": "canonical/governance/ABC_CURRENT_BOUND_ZERO_REALITY_SATURATION_20261007_V1.json",
+      "git_blob_sha": "bfe6e36cf09abb6f0740dba77b273d5300c582a5"
+    },
+    "residual_map": {
+      "path": "canonical/governance/ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_20261007_V3.json",
+      "git_blob_sha": "c73391693f4cbae6efc9fc11f396c3a3be25875a"
+    },
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "multiplexing": {
+      "path": "canonical/governance/TERMINAL_OBSERVATION_DOMINANCE_AND_PROOF_MULTIPLEXING_V1.json",
+      "git_blob_sha": "9a5652c687d1f233d20ab65e9b534f7c044cb438"
+    },
+    "access_overlay": {
+      "path": "canonical/governance/CURRENT_EXTERNAL_RESULT_ACCESS_OVERLAY_V6.json",
+      "git_blob_sha": "77cf0717a1adcc91022563dc9bd3768d6bc05f16"
+    },
+    "mystery_attribution": {
+      "path": "canonical/governance/MYSTERYMECHANISM_FALLBACK_ATTRIBUTION_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "40b4f0deadf1d8f3e392cbb026cdd791005c0e47"
+    }
+  },
+  "cost_semantics": {
+    "positive_reality_surface": "ONE INDEPENDENT QUALIFICATION/EVALUATION SURFACE WHOSE RESULT CAN CHANGE U MEMBERSHIP.",
+    "zero_reality_certificate": "CONTENT_ADDRESSED DERIVATION OR ROUTE_LOCAL CERTIFICATE USING ALREADY_BOUND REALITY.",
+    "public_fixed_bar": "COUNTS ONE SURFACE PER DISTINCT BENCHMARK/EVALUATOR UNLESS A SOUND STRONGER SCOPE_COMPLETE CERTIFICATE SUBSUMES IT.",
+    "matched_portfolio": "MAY MULTIPLEX MULTIPLE RESIDUALS ONLY WHEN THE SAME FROZEN CASES DIRECTLY EXERCISE EVERY CLAIMED CONTRACT WITH PREDECLARED PER_CONTRACT SCORING AND A SOUND SCOPE_RELATION.",
+    "provider_or_launch_access": "NOT ITSELF TERMINAL REALITY__BUT A HARD EXECUTION DEPENDENCY FOR THE CORRESPONDING SURFACE."
+  },
+  "residual_atoms": [
+    "CODING_TB4",
+    "CODING_FRONTIERCODE",
+    "CODING_CURSORBENCH",
+    "AGENCY_CROSS_COMPONENT_INTERACTION",
+    "PROFESSIONAL_GDPVAL",
+    "PROFESSIONAL_ARTIFACT_AA_BRIEFCASE_SHARED",
+    "AUTOMATIONBENCH",
+    "HLE_WITH_TOOLS",
+    "TERMINAL_BENCH_SCIENCE",
+    "CHARTOGRAPHY",
+    "VISION_DENSE_NONCHART",
+    "OSWORLD_OR_MATCHED_COMPUTER_USE",
+    "FINANCE_ACCOUNTING_INDEX",
+    "FINANCE_AGENT_V2",
+    "FINANCE_SEMANTIC_TAIL",
+    "SYNTHESIS_MATCHED_QUALITY",
+    "UNKNOWN_DOMAIN_INTRINSIC_MYSTERYMECHANISM_OR_STRONGER",
+    "COMPOSITION_ROUTE_LOCAL_C_FINAL_SELECTED_ROUTES"
+  ],
+  "declared_observations": [
+    {
+      "id": "Q_TB4_BUILDKITE_THRESHOLD",
+      "cost": 1,
+      "covers": [
+        "CODING_TB4"
+      ],
+      "access": "BUILDKITE_CARRIER_READY__CURRENT_CHAT_LAUNCH_CONNECTOR_ABSENT"
+    },
+    {
+      "id": "Q_FRONTIERCODE_RESULT",
+      "cost": 1,
+      "covers": [
+        "CODING_FRONTIERCODE"
+      ],
+      "access": "PROVIDER_WAIT"
+    },
+    {
+      "id": "Q_CURSORBENCH_RESULT",
+      "cost": 1,
+      "covers": [
+        "CODING_CURSORBENCH"
+      ],
+      "access": "CURRENT_EXECUTION_ROUTE_UNBOUND"
+    },
+    {
+      "id": "Q_AGENCY_MATCHED_INTERACTION",
+      "cost": 1,
+      "covers": [
+        "AGENCY_CROSS_COMPONENT_INTERACTION"
+      ],
+      "access": "EXACT_OPUS_ZERO_SPEND_CASE_LEVEL_CAPACITY_UNBOUND"
+    },
+    {
+      "id": "Q_GDPVAL_RESULT",
+      "cost": 1,
+      "covers": [
+        "PROFESSIONAL_GDPVAL"
+      ],
+      "access": "ARTIFICIAL_ANALYSIS_PROVIDER_WAIT"
+    },
+    {
+      "id": "Q_AA_BRIEFCASE_RESULT",
+      "cost": 1,
+      "covers": [
+        "PROFESSIONAL_ARTIFACT_AA_BRIEFCASE_SHARED"
+      ],
+      "access": "ARTIFICIAL_ANALYSIS_PROVIDER_WAIT"
+    },
+    {
+      "id": "Q_AUTOMATIONBENCH_RESULT",
+      "cost": 1,
+      "covers": [
+        "AUTOMATIONBENCH"
+      ],
+      "access": "ZAPIER_PROVIDER_WAIT"
+    },
+    {
+      "id": "Q_HLE_TOOLS_RESULT",
+      "cost": 1,
+      "covers": [
+        "HLE_WITH_TOOLS"
+      ],
+      "access": "HF_ACCOUNT_EXISTS__CURRENT_AUTH_SESSION_UNBOUND"
+    },
+    {
+      "id": "Q_TB_SCIENCE_RESULT",
+      "cost": 1,
+      "covers": [
+        "TERMINAL_BENCH_SCIENCE"
+      ],
+      "access": "CURRENT_EXECUTION_ROUTE_UNBOUND"
+    },
+    {
+      "id": "Q_CHARTOGRAPHY_RESULT",
+      "cost": 1,
+      "covers": [
+        "CHARTOGRAPHY"
+      ],
+      "access": "BUILDKITE_CARRIER_READY__MODEL_LOAD_EVALUATOR_RELATION_STILL_OPEN"
+    },
+    {
+      "id": "Q_DENSE_NONCHART_MATCHED",
+      "cost": 1,
+      "covers": [
+        "VISION_DENSE_NONCHART"
+      ],
+      "access": "EXACT_OPUS_ZERO_SPEND_CASE_LEVEL_CAPACITY_UNBOUND"
+    },
+    {
+      "id": "Q_OSWORLD_RESULT_OR_MATCHED",
+      "cost": 1,
+      "covers": [
+        "OSWORLD_OR_MATCHED_COMPUTER_USE"
+      ],
+      "access": "HF_ACCOUNT_EXISTS__CURRENT_AUTH_SESSION_UNBOUND"
+    },
+    {
+      "id": "Q_FINANCE_ACCOUNTING_INDEX_RESULT",
+      "cost": 1,
+      "covers": [
+        "FINANCE_ACCOUNTING_INDEX"
+      ],
+      "access": "PUBLIC_RESULT_ROUTE_NOT_YET_BOUND_FOR_BRAIN_QUALIFICATION"
+    },
+    {
+      "id": "Q_FINANCE_AGENT_V2_RESULT",
+      "cost": 1,
+      "covers": [
+        "FINANCE_AGENT_V2"
+      ],
+      "access": "VALS_PROVIDER_WAIT"
+    },
+    {
+      "id": "Q_FINANCE_SEMANTIC_SCOPE",
+      "cost": 1,
+      "covers": [
+        "FINANCE_SEMANTIC_TAIL"
+      ],
+      "access": "REQUIRES_REAL_SCOPE_CONTEXT_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE"
+    },
+    {
+      "id": "Q_SYNTHESIS_MATCHED_QUALITY",
+      "cost": 1,
+      "covers": [
+        "SYNTHESIS_MATCHED_QUALITY"
+      ],
+      "access": "EXACT_OPUS_ZERO_SPEND_CASE_LEVEL_CAPACITY_UNBOUND__PARAMETERIZED_TOP_LAW_MEMBERSHIP_REMAINS_ALTERNATIVE"
+    },
+    {
+      "id": "Q_MYSTERYMECHANISM_INTRINSIC",
+      "cost": 1,
+      "covers": [
+        "UNKNOWN_DOMAIN_INTRINSIC_MYSTERYMECHANISM_OR_STRONGER"
+      ],
+      "access": "VALS_PROVIDER_WAIT__49_55_DEPLOYED_SCORE_DECONFOUNDED__INTRINSIC_TARGET_RELATION_OPEN"
+    },
+    {
+      "id": "Q_COMPOSITION_LOCAL_C_FINAL_ROUTE_SET",
+      "cost": 0,
+      "covers": [
+        "COMPOSITION_ROUTE_LOCAL_C_FINAL_SELECTED_ROUTES"
+      ],
+      "access": "DEFER_UNTIL_FINAL_SELECTED_ROUTE_SET__TARGET_REALITY_NOT_REQUIRED"
+    }
+  ],
+  "exact_declared_route_result": {
+    "positive_cost": 17,
+    "observation_count_including_zero_cost_deferred_certificate": 18,
+    "shared_aa_briefcase_counted_once": true,
+    "composition_target_reality_cost": 0,
+    "claim_scope": "EXACT_ONLY_RELATIVE_TO_THE_ABOVE_DECLARED_NONMULTIPLEXED_OBSERVATION_SET"
+  },
+  "scheduler": [
+    "DO_NOT EXECUTE ALL 17 BY DEFAULT.",
+    "RACE EACH POSITIVE_REALITY SURFACE AGAINST A SOUND STRONGER SCOPE_COMPLETE TOP_LAW OR COMMON_POLICY CERTIFICATE.",
+    "PRIORITIZE ACCESS_READY SURFACES__CURRENTLY TB4 IS THE CLEANEST LIVE CARRIER LANE.",
+    "KEEP AA_BRIEFCASE SINGLE_SPEND SHARED ACROSS PROFESSIONAL_AND_ARTIFACT.",
+    "DEFER COMPOSITION LOCAL_C UNTIL FINAL SELECTED ROUTES ARE FROZEN.",
+    "IF A MULTIPLEX CHALLENGER PROVES SAME_CASE_SCOPE_RELATION FOR MULTIPLE RESIDUALS__RECOMPUTE BEFORE SPENDING ANY OF THE DOMINATED SURFACES."
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM 17 IS A GLOBAL INFORMATION_THEORETIC LOWER_BOUND.",
+    "NO CLAIM A FUTURE STRONGER CERTIFICATE CANNOT REDUCE THE CUT.",
+    "NO CLAIM ANY CURRENT ACCESS_BLOCKED SURFACE CAN BE EXECUTED FROM THIS CHAT.",
+    "NO CLAIM U IS EMPTY.",
+    "NO ABC D FINALITY OR TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
