@@ -561,3 +561,49 @@ def test_cross_task_general_substrate_packet_is_rejected_before_verification():
     assert out["pass"] is False
     assert out["status"] == "ALL_AVAILABLE_PROPOSALS_FALSIFIED"
     assert any("PROPOSAL_PACKET_BINDING_FAILED" in str(x.get("reason")) for x in out["rejected_proposals"])
+
+
+def test_plain_goal_can_compile_to_bound_plan_as_verified_intermediate_fact():
+    problem = {
+        "initial_facts": [],
+        "target_effects": ["BOUND_PLAN_VERIFIED"],
+        "capabilities": [{
+            "id": "compile-goal",
+            "requires": [],
+            "provides": ["BOUND_PLAN_VERIFIED"],
+            "cost": 1,
+            "result_fields": [],
+            "action": {
+                "type": "verified_policy",
+                "verifier_id": "BOUND_GOAL_PLAN_V1",
+                "verifier_payload": {"goal": 'Respond with exactly "READY".'},
+            },
+        }],
+    }
+    out = run(problem, proposal_packets={})
+    assert out["pass"] is True, out
+    verified = out["trace"][0]["verified_output"]
+    assert verified["execution_authority"] is False
+    assert verified["compiled_plan"]["finish_summary"] == "READY"
+
+
+def test_uncompilable_plain_goal_requests_more_information():
+    problem = {
+        "initial_facts": [],
+        "target_effects": ["BOUND_PLAN_VERIFIED"],
+        "capabilities": [{
+            "id": "compile-goal",
+            "requires": [],
+            "provides": ["BOUND_PLAN_VERIFIED"],
+            "cost": 1,
+            "result_fields": [],
+            "action": {
+                "type": "verified_policy",
+                "verifier_id": "BOUND_GOAL_PLAN_V1",
+                "verifier_payload": {"goal": "Perform an undefined transcendent operation over everything."},
+            },
+        }],
+    }
+    out = run(problem, proposal_packets={})
+    assert out["pass"] is False
+    assert out["status"] == "NEED_MORE_INFORMATION"
