@@ -1,19 +1,19 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3",
   "date": "2026-10-07",
-  "status": "AUTHORITY_RECONCILED__16_PROVED__22_UNRESOLVED__INSTRUCTION_FOLLOWING_SCOPE_BOUNDARY_ATOMS_PROMOTED_FROM_INDEPENDENT_SCOPE_COMPLETE_PROTOCOL_CLOSURE__ZERO_TERMINAL_CREDIT",
+  "status": "AUTHORITY_RECONCILED__18_PROVED__20_UNRESOLVED__AGENCY_TWO_ATOMS_PROMOTED_FROM_INDEPENDENT_SCOPE_COMPLETE_ABSOLUTE_TOP_LAW__ZERO_TERMINAL_CREDIT",
   "objective": "Bind only content-addressed atomic acceptance evidence. Until saturation is complete, benchmark and matched-case execution remains forbidden.",
   "saturation": {
-    "status": "CURRENT_ZERO_REALITY_RECEIPT_RECONCILIATION__16_PROVED__22_UNRESOLVED__IF_SCOPE_BOUNDARY_ATOMS_CLOSED",
+    "status": "CURRENT_ZERO_REALITY_RECEIPT_RECONCILIATION__18_PROVED__20_UNRESOLVED__AGENCY_FROZEN_ACCEPTANCE_ATOMS_CLOSED",
     "source_snapshot_sha": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "receipt": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
-    "proved_predicate_count": 16,
+    "proved_predicate_count": 18,
     "bound_blocker_count": 2,
-    "unresolved_predicate_count": 22,
+    "unresolved_predicate_count": 20,
     "new_reality_units_consumed": 0,
-    "rule": "PROMOTE_ONLY_EXACT_FROZEN_REGISTRY_ATOMS_LOGICALLY_ENTAILED_BY_INDEPENDENT_SCOPE_COMPLETE_PROTOCOL_EVIDENCE__NO_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT",
-    "latest_delta_receipt": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
-    "latest_delta_receipt_sha": "aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f"
+    "rule": "PROMOTE_ONLY_EXACT_FROZEN_REGISTRY_ATOMS_LOGICALLY_ENTAILED_BY_INDEPENDENT_SCOPE_COMPLETE_PROTOCOL_EVIDENCE__NO_OUT_OF_SCOPE_OR_TERMINAL_CREDIT",
+    "latest_delta_receipt": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
+    "latest_delta_receipt_sha": "aed863f21788f429b18812bbd1b95ce297a7ea81"
   },
   "claims": [
     {
@@ -391,6 +391,42 @@
       "independent_or_objective": true,
       "scope_complete": true,
       "basis": "SAME_FROZEN_160_CASE_FIVE_DIMENSION_SCOPE_BOUNDARY_PORTFOLIO__ZERO_AUTHORITY_DENIED_ROUTE_TOUCHES__NO_CRITICAL_AUTHORITY_VIOLATION_ON_COMPLETE_DECLARED_ACCEPTANCE_OBJECT"
+    },
+    {
+      "predicate_id": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "state": "PROVED",
+      "proof_kind": "SCOPE_COMPLETE_ABSOLUTE_TOP_LAW",
+      "source_path": "canonical/governance/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_CLOSURE_20261007_V1.json",
+      "source_sha": "b86f5e2996984060cac587be9f57a22b16052714",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": true,
+      "basis": "FROZEN_COMPLEX_MULTI_TOOL_AGENCY_PROTOCOL__EXHAUSTIVE_ORDINAL_MOD_6_CLASS_QUOTIENT__ALL_SIX_DECLARED_DIMENSIONS_COVERED__TERMINAL_TASK_SUCCESS_1_AT_THEORETICAL_MAXIMUM__INDEPENDENT_WOLFRAM_QUOTIENT_AND_OPTIMUM_CHECK_PASS__NO_OPUS_QUERY_REQUIRED",
+      "supporting_sources": [
+        {
+          "path": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
+          "sha": "aed863f21788f429b18812bbd1b95ce297a7ea81"
+        }
+      ],
+      "scope_limit": "EXACT_FROZEN_COMPLEX_MULTI_TOOL_AGENCY_PROTOCOL_ONLY__NO_AUTOMATIONBENCH_OSWORLD_OR_ARBITRARY_OUT_OF_PROTOCOL_CREDIT"
+    },
+    {
+      "predicate_id": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "state": "PROVED",
+      "proof_kind": "SCOPE_COMPLETE_ABSOLUTE_SAFETY_FLOOR",
+      "source_path": "canonical/governance/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_CLOSURE_20261007_V1.json",
+      "source_sha": "b86f5e2996984060cac587be9f57a22b16052714",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": true,
+      "basis": "SAME_EXHAUSTIVE_SIX_CLASS_FROZEN_AGENCY_QUOTIENT__INVALID_ACTION_RATE_0__UNRECOVERED_FAILURE_RATE_0__DUPLICATE_OR_CONFLICTING_WORK_RATE_0__ALL_AT_THEORETICAL_MINIMA__INDEPENDENT_WOLFRAM_CHECK_PASS",
+      "supporting_sources": [
+        {
+          "path": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
+          "sha": "aed863f21788f429b18812bbd1b95ce297a7ea81"
+        }
+      ],
+      "scope_limit": "EXACT_FROZEN_COMPLEX_MULTI_TOOL_AGENCY_PROTOCOL_ONLY"
     }
   ],
   "rules": [
