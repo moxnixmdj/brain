@@ -1,0 +1,26 @@
+{
+  "schema":"PROJECT_BRAIN_DENSE_CAD_CAPABILITY_ACCEPTANCE_VERIFY_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_CHECK_PASS__ZERO_CREDIT",
+  "logic":{
+    "NOT_A_IMPLIES_M_TAUTOLOGY":false,
+    "B_TRUE_A_FALSE_M_FALSE_COUNTERMODEL_EXISTS":true
+  },
+  "cad_wave":{
+    "cases":128,
+    "passes":128,
+    "terminal_result":true,
+    "parent_acceptance_pass":true,
+    "load_bearing":true,
+    "case_replaced":false,
+    "tuning_replay":false
+  },
+  "postwave":{
+    "cad_contract_pass":true,
+    "all_12_contracts_pass":true,
+    "vision_provisional_family_pass":true,
+    "all_19_provisional_families_pass":true
+  },
+  "boundary":"DELETE_CURRENT_CAD_MECHANISM_BUILD_JOB__KEEP_TARGET_RELATIVE_ACCEPTANCE_OPEN",
+  "terminal_credit_delta":0
+}
