@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_DEPLOYED_BINDING_V2_EXACT_AUDIT_V1",
+  "date": "2026-10-07",
+  "status": "PASS__ALL_EXACT_BINDINGS_MATCH_MAIN__V2_SELECTED_ROUTE_EXECUTION_AUTHORITY__V1_REAL_CREDIT_REVOKED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_DEPLOYED_BINDING_20261007_V2.json",
+    "git_blob_sha": "35fd700eee70fc84411e461a0ad481742c534bee"
+  },
+  "verified": {
+    "all_exact_bindings_match": true,
+    "runtime_entrypoint_v2_blob": "ba260cd997adb8df97417e5f03eaf547b5365379",
+    "independent_runtime_replay_blob": "e3b02317645d9ca508b2fb9d6cec8d7276eac083",
+    "v1_entrypoint_creditable_for_real_routes": false,
+    "selected_cover_complete": false,
+    "terminal": false
+  },
+  "exact_bindings": [
+    [
+      "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+      "4b99ef1e95e033badfb21ab7af7355122933224a"
+    ],
+    [
+      "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "ba260cd997adb8df97417e5f03eaf547b5365379"
+    ],
+    [
+      "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
+      "78ef7174fd7cdebb24f97882e8c325a5164f18cb"
+    ],
+    [
+      "canonical/verification/CREDITABLE_ROUTER_CONTEXT_PAYLOAD_BINDING_SPRITE_VERIFICATION_20261007_V1.json",
+      "e3b02317645d9ca508b2fb9d6cec8d7276eac083"
+    ],
+    [
+      "canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "9acb150390be994dba251f3eb8e1c63eaaade86d"
+    ],
+    [
+      "canonical/runtime/router_deployment_canary_v1.py",
+      "de71202a17071c8af88ec7ac6e1f241fb42854c2"
+    ],
+    [
+      "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADEQUACY_CERTIFICATE_20261007_V1.json",
+      "e521f7b75123bca5cc9704340283a727bb45e957"
+    ],
+    [
+      "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADMISSION_CERTIFICATE_20261007_V1.json",
+      "1b2f97e7d46877b8782ea211fd15f679e6bfb5b0"
+    ]
+  ],
+  "boundary": [
+    "STRUCTURAL_BINDING_AUDIT_ONLY__RUNTIME_MECHANICS_ALREADY_INDEPENDENTLY_REPLAYED_IN_THE_BOUND_RECEIPT",
+    "NO_REAL_CREDITABLE_CELL_REGISTERED",
+    "NO_SELECTED_COVER_COMPLETENESS",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
