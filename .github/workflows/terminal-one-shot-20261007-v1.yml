@@ -1,0 +1,213 @@
+name: Terminal one-shot 20261007 V1
+
+on:
+  push:
+    branches:
+      - terminal-one-shot-20261007-v1
+    paths:
+      - 'canonical/astra_runtime/missions/ASTRA_TERMINAL_ONE_SHOT_20261007_V1.json'
+      - 'canonical/same_identity_worker/tasks/SI_TERMINAL_ONE_SHOT_20261007_V1.json'
+      - '.github/workflows/terminal-one-shot-20261007-v1.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: terminal-one-shot-20261007-v1
+  cancel-in-progress: true
+
+jobs:
+  terminalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      MISSION: canonical/astra_runtime/missions/ASTRA_TERMINAL_ONE_SHOT_20261007_V1.json
+      TASK: canonical/same_identity_worker/tasks/SI_TERMINAL_ONE_SHOT_20261007_V1.json
+      RESULT: canonical/astra_runtime/artifacts/TERMINAL_ONE_SHOT_RESULT_20261007_V1.json
+      VERDICT: canonical/verification/TERMINAL_ONE_SHOT_INDEPENDENT_VERDICT_20261007_V1.json
+      EXPECTED_MISSION_SHA256: a0d4b38c7decf31eba4d756786003442528b73ade800dbcd1857286408222716
+    steps:
+      - name: Checkout exact execution branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+
+      - name: Preflight exact mission and fail-closed runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os, pathlib
+          mission=pathlib.Path(os.environ['MISSION'])
+          task=pathlib.Path(os.environ['TASK'])
+          actual=hashlib.sha256(mission.read_bytes()).hexdigest()
+          assert actual==os.environ['EXPECTED_MISSION_SHA256'], (actual, os.environ['EXPECTED_MISSION_SHA256'])
+          t=json.loads(task.read_text())
+          assert t['mission_sha256']==actual
+          assert t['incremental_spend_usd']==0
+          assert t['terminal_autopilot']['irreversible_benchmark'] is False
+          assert len(t['terminal_autopilot']['obligation_ids'])==13
+          print(json.dumps({'mission_sha256':actual,'bound_obligations':13},sort_keys=True))
+          PY
+          python -m unittest             canonical.tests.test_external_tool_relay             canonical.tests.test_external_tool_bridge_wait             canonical.tests.test_goal_compiler_source_tree_independent_verification
+          python -m pytest -q             canonical/tests/test_terminal_root_decision_gate_v1.py             canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py
+
+      - name: Execute same-identity terminalization tournament
+        id: worker
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, multiprocessing, os, pathlib, subprocess, sys, time, traceback
+          agent='SUPERWORKER-UNIFIED-1'
+          task_id='SI-TERMINAL-ONE-SHOT-20261007-V1'
+          task=os.environ['TASK']
+          bridge=pathlib.Path('canonical/same_identity_worker/external_tool_bridge')/task_id
+          bridge.mkdir(parents=True,exist_ok=True)
+          relay_log=pathlib.Path('TERMINAL_ONE_SHOT_RELAY.jsonl')
+          transcript=[]
+          completed=False
+          def relay_loop():
+              from canonical.runtime import external_tool_relay as relay
+              try:
+                  while True:
+                      written=relay.service_pending(bridge,agent,task_id)
+                      if written:
+                          with relay_log.open('a',encoding='utf-8') as fh:
+                              fh.write(json.dumps({'epoch':time.time(),'responses':written,'serviced':len(written)},sort_keys=True)+'\n')
+                              fh.flush()
+                      time.sleep(0.02)
+              except BaseException as exc:
+                  with relay_log.open('a',encoding='utf-8') as fh:
+                      fh.write(json.dumps({'epoch':time.time(),'fatal':type(exc).__name__+':'+str(exc),'traceback':traceback.format_exc()[-6000:]},sort_keys=True)+'\n')
+                      fh.flush()
+                  raise
+          relay_proc=multiprocessing.Process(target=relay_loop,daemon=True)
+          relay_proc.start()
+          try:
+              for iteration in range(1,7):
+                  env=os.environ.copy()
+                  env['PROJECT_BRAIN_EXTERNAL_TOOL_WAIT_SECONDS']='90'
+                  worker=subprocess.Popen(
+                      [sys.executable,'canonical/runtime/same_identity_supervisor.py','--task',task],
+                      text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env
+                  )
+                  deadline=time.monotonic()+1800
+                  while worker.poll() is None:
+                      if not relay_proc.is_alive() or time.monotonic()>=deadline:
+                          worker.terminate()
+                          break
+                      time.sleep(0.1)
+                  try:
+                      stdout,stderr=worker.communicate(timeout=10)
+                  except subprocess.TimeoutExpired:
+                      worker.kill(); stdout,stderr=worker.communicate()
+                  record={'iteration':iteration,'returncode':worker.returncode,'stdout':stdout[-20000:],'stderr':stderr[-20000:],
+                          'relay_alive':relay_proc.is_alive(),'relay_exitcode':relay_proc.exitcode}
+                  transcript.append(record)
+                  print(json.dumps(record,sort_keys=True))
+                  if worker.returncode==0:
+                      completed=True
+                      break
+                  if worker.returncode==75:
+                      continue
+                  break
+          finally:
+              if relay_proc.is_alive():
+                  relay_proc.terminate()
+              relay_proc.join(timeout=5)
+              pathlib.Path('TERMINAL_ONE_SHOT_TRANSCRIPT.json').write_text(json.dumps(transcript,indent=2,sort_keys=True)+'\n')
+          pathlib.Path('/tmp/worker_complete').write_text('1' if completed else '0')
+          PY
+
+      - name: Independent reducer and candidate-diff verdict
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p canonical/astra_runtime/artifacts canonical/verification
+          git diff --binary > TERMINAL_ONE_SHOT_CANDIDATE.patch || true
+          git status --porcelain > TERMINAL_ONE_SHOT_STATUS.txt
+          rc=0
+          python canonical/runtime/terminal_closure_reducer.py             canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json             > /tmp/terminal_reducer.json || rc=$?
+          export REDUCER_RC="$rc"
+          python - <<'PY'
+          import json, os, pathlib, subprocess
+          result_path=pathlib.Path(os.environ['RESULT'])
+          reducer=json.loads(pathlib.Path('/tmp/terminal_reducer.json').read_text())
+          terminal=reducer.get('achieved') is True
+          worker_complete=pathlib.Path('/tmp/worker_complete').read_text().strip()=='1'
+          changed=subprocess.check_output(['git','status','--porcelain'],text=True).splitlines()
+          verdict={
+              'schema':'PROJECT_BRAIN_TERMINAL_ONE_SHOT_INDEPENDENT_VERDICT_V1',
+              'execution_sha':os.environ['GITHUB_SHA'],
+              'mission_sha256':os.environ['EXPECTED_MISSION_SHA256'],
+              'worker_complete':worker_complete,
+              'reducer_returncode':int(os.environ['REDUCER_RC']),
+              'terminal_real':terminal,
+              'reducer_verdict':reducer,
+              'changed_paths':changed,
+              'incremental_spend_usd':0,
+              'irreversible_benchmark_exposure_authorized_or_consumed':False,
+              'success_rule':'TERMINAL_REAL_IFF_REAL_TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE'
+          }
+          pathlib.Path(os.environ['VERDICT']).write_text(json.dumps(verdict,indent=2,sort_keys=True)+'\n')
+          if result_path.exists():
+              try: result=json.loads(result_path.read_text())
+              except Exception: result={}
+          else:
+              result={}
+          result.update({
+              'independent_terminal_real':terminal,
+              'independent_reducer_verdict':reducer,
+              'execution_sha':os.environ['GITHUB_SHA'],
+              'worker_complete':worker_complete,
+          })
+          if not result.get('status'):
+              result['status']='TERMINAL_REAL' if terminal else 'IRREDUCIBLE_EXTERNAL_BLOCKER_OR_WORKER_INCOMPLETE'
+          result_path.write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(verdict,sort_keys=True))
+          PY
+
+      - name: Upload complete one-shot evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: terminal-one-shot-20261007-v1
+          if-no-files-found: warn
+          retention-days: 90
+          path: |
+            TERMINAL_ONE_SHOT_TRANSCRIPT.json
+            TERMINAL_ONE_SHOT_RELAY.jsonl
+            TERMINAL_ONE_SHOT_CANDIDATE.patch
+            TERMINAL_ONE_SHOT_STATUS.txt
+            canonical/astra_runtime/artifacts/TERMINAL_ONE_SHOT_RESULT_20261007_V1.json
+            canonical/verification/TERMINAL_ONE_SHOT_INDEPENDENT_VERDICT_20261007_V1.json
+            canonical/same_identity_worker/state/
+            canonical/same_identity_worker/evidence/
+            canonical/same_identity_worker/external_tool_bridge/
+            canonical/astra_runtime/state/
+            canonical/astra_runtime/evidence/
+
+      - name: Enforce truthful final status
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          d=json.load(open(os.environ['VERDICT']))
+          if d['terminal_real']:
+              print('TERMINAL_ONE_SHOT_REAL')
+              raise SystemExit(0)
+          print('TERMINAL_ONE_SHOT_NONTERMINAL')
+          print(json.dumps(d['reducer_verdict'],indent=2,sort_keys=True))
+          raise SystemExit(2)
+          PY
