@@ -15,5 +15,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - run: python -m pip install --disable-pip-version-check --no-input pytest
       - run: python canonical/runtime/selected_discriminator_policy_cover_bridge_verifier_v1.py
       - run: python -m pytest -q canonical/tests/test_selected_discriminator_policy_cover_bridge_v1.py
