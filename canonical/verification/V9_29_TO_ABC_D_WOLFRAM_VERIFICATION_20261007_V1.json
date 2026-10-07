@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_V9_29_TO_ABC_D_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_NORMAL_FORM_LOGIC_PASS__IMPLEMENTATION_EXACT_SET_REPLAY_NOT_INDEPENDENTLY_EXECUTED__ZERO_CREDIT",
+  "subject": {
+    "governance_path": "canonical/governance/V9_29_TO_ABC_D_TERMINAL_NORMAL_FORM_20261007_V1.json",
+    "runtime_path": "canonical/runtime/terminal_v9_29_surface_factorizer_v1.py",
+    "branch": "obs/v9-29-to-abc-d-normal-form-20261007-v1"
+  },
+  "verification_provider": "WOLFRAM_LANGUAGE",
+  "formula": "Equivalent[And[r1..r29,d],abc&&d] /. abc->And[r1..r29]",
+  "result": true,
+  "verified": [
+    "IF_ABC_IS_EXTENSIONALLY_DEFINED_TO_PRESERVE_AND_REQUIRE_ALL_29_ROW_SEMANTICS__THEN_29_ROWS_PLUS_D_IS_LOGICALLY_EQUIVALENT_TO_ABC_PLUS_D",
+    "PRIMITIVE_PROOF_SURFACE_COMPRESSION_DOES_NOT_REQUIRE_DELETING_ANY_ROW"
+  ],
+  "exact_source_checks": {
+    "current_v9_git_blob_sha": "1ec7f2c86534d046e51ddda00001ed287039fc0a",
+    "historical_29_factorizer_git_blob_sha": "7bf57811d1b745cc2b92596f6c1c87ff5693aa1c",
+    "candidate_runtime_commit_sha": "bcfba3e6fd47c4c14574dfa9ce7476774223b988",
+    "candidate_test_commit_sha": "42d8687e3925e2993b0babf62f00e13a31258a34"
+  },
+  "not_verified": [
+    "NO_INDEPENDENT_EXECUTION_OF_THE_CANDIDATE_PYTHON_TESTS_IN_THIS_RECEIPT",
+    "NO_CLAIM_ANY_OF_THE_29_OPEN_ROWS_IS_DISCHARGED",
+    "NO_CLAIM_ABC_IS_CLOSED",
+    "NO_CLAIM_D_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
