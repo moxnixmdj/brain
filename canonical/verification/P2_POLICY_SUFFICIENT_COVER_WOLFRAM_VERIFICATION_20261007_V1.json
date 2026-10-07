@@ -1,0 +1,35 @@
+{
+  "schema":"PROJECT_BRAIN_P2_POLICY_SUFFICIENT_COVER_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_WOLFRAM_LOGIC_CHECK_PASS__POINTWISE_UTILITY_IDENTITY_NOT_NECESSARY_FOR_SELECTED_POLICY_ADEQUACY__ZERO_CREDIT",
+  "subject":{
+    "path":"canonical/governance/P2_POLICY_SUFFICIENT_COVER_TRUTH_REPAIR_20261007_V1.json"
+  },
+  "verification":{
+    "finite_witness":{
+      "explicit_objective":{"a":10,"b":0},
+      "target_objective":{"a":1,"b":0},
+      "pointwise_objective_identity":false,
+      "explicit_selected_policy":"a",
+      "target_selected_policy":"a",
+      "target_selected_policy_is_optimal":true
+    },
+    "general_two_policy_check":{
+      "premises":"ea_GT_eb_AND_ta_GE_tb",
+      "conclusion":"ta_GE_tb",
+      "wolfram_result":true
+    },
+    "wolfram_output":"{False, True, True, {True, True, a, True}}"
+  },
+  "proved":[
+    "POINTWISE_EQUALITY_OF_EXPLICIT_AND_TARGET_UTILITY_IS_NOT_NECESSARY_FOR_THE_SAME_SELECTED_POLICY_TO_BE_TARGET_OPTIMAL.",
+    "THE_EXISTING_LOSSLESS_P2_MEMBERSHIP_RULE_REMAINS_A_VALID_SUFFICIENT_ROUTE_TO_THE_EXACT_TOP_LAW.",
+    "A_SEPARATE_POLICY_SUFFICIENT_ADEQUACY_CERTIFICATE_CAN_DISCHARGE_A_CONTEXT_WITHOUT_ASSERTING_EXACT_P2_MEMBERSHIP."
+  ],
+  "accounting":{"incremental_spend_usd":0,"fresh_target_reality_units_consumed":0,"terminal_credit_delta":0},
+  "hard_nonclaims":[
+    "NO_CLAIM_ANY_CURRENT_REAL_PROFESSIONAL_CONTEXT_ALREADY_HAS_SUCH_A_POLICY_SUFFICIENT_CERTIFICATE.",
+    "NO_AA_BRIEFCASE_OR_GDPVAL_CLOSURE.",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT."
+  ]
+}
