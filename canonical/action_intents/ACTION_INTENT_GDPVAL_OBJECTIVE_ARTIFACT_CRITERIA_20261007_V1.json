@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "GDPVAL-OBJECTIVE-ARTIFACT-CRITERIA-20261007-SOL",
+  "date": "2026-10-07",
+  "status": "CANDIDATE__V26_BASE_BOUND__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "e286fb93e64ad979667a08a57673f9157cacac45",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "GDPVAL_EXPLICIT_RUBRIC_CRITERIA_NOT_MAPPED_TO_EXECUTABLE_BRAIN_OWNED_OBJECTIVE_VERIFIERS",
+  "action_kind": "STRUCTURAL_ACCEPTANCE_EXECUTABLE_REFINEMENT",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::GDPVAL_EXPLICIT_RUBRIC_CRITERIA_NOT_MAPPED_TO_EXECUTABLE_BRAIN_OWNED_OBJECTIVE_VERIFIERS",
+  "expected_parent_frontier_change": "Add a fail-closed whole-criterion compiler and artifact verifier for the machine-observable subset of the already-bound 10,453 GDPval rubric criteria, reusing Brain-owned native artifact reopen mechanics while leaving all mixed, semantic, quality, and pairwise-preference criteria unresolved.",
+  "highest_leverage_now": true,
+  "stop_condition": "Whole-criterion exact grammar is implemented; supported criteria compile to explicit checks; native artifact facts are re-opened with the existing Brain-owned format libraries; mixed or unsupported criteria fail closed; adversarial tests pass; no U-deletion or terminal credit is claimed.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "current_scheduler_binding": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "fceee71ce448c3b8e3fbd6eb0e892fd27ab4ce02",
+    "pointer": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V26",
+    "closure_condition": "U_IS_EMPTY",
+    "open_ABC_refinement_count": 13,
+    "public_gdpval_rubric_item_count": 10453,
+    "gdpval_brain_owner_elo_score_bound": false,
+    "terminal": false
+  },
+  "tournament": {
+    "proposal_id": "P_GDPVAL_OBJECTIVE_ARTIFACT_CRITERION_EXECUTORS",
+    "falsifier_id": "F_IGNORED_CONJUNCT_OR_WEAK_FILE_VALIDITY_OR_SCOPE_OVERCLAIM",
+    "decisive_question": "Can any already-bound GDPval rubric criteria be converted losslessly into Brain-owned executable objective checks without semantic inference or quality/pairwise substitution?",
+    "known_counterexamples_checked": true
+  },
+  "recursive_obs": {
+    "real_outcome": "Convert a sound subset of explicit GDPval acceptance requirements from text-only contracts into executable deterministic checks.",
+    "selected_route": "WHOLE_CRITERION_EXACT_GRAMMAR_PLUS_NATIVE_FORMAT_REOPEN_VERIFICATION",
+    "deleted_routes": [
+      "PARTIAL_REGEX_MATCH_WITH_IGNORED_CONJUNCTS",
+      "FILE_SIGNATURE_SNIFFING_AS_NATIVE_VALIDITY",
+      "MECHANICAL_CHECK_AS_PROFESSIONAL_QUALITY_CREDIT",
+      "RUBRIC_SUBSET_AS_WHOLE_TASK_OR_PAIRWISE_PREFERENCE_CREDIT"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The complete rubric population is already bound and the Brain already owns native DOCX/XLSX/PPTX/PDF reopen mechanics; the missing reusable layer is an exact source-to-executable-check mapping.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Uses already-bound GDPval rubric contracts and already-proved Brain-owned artifact mechanics; no new target/provider query is needed."
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_target_model_queries": 0,
+    "new_provider_evaluation_queries": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_target_reality_authority": false
+}
