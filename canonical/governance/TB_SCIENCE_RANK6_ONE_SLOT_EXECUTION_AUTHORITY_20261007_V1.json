@@ -1,0 +1,130 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK6_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ONE_USE_AUTHORITY__ACTIVATES_ONLY_AFTER_EXACT_PUBLIC_RUNNER_VERIFICATION_AND_MERGE_TO_BRAIN_MAIN",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "authority_basis": {
+    "action_intent_path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK6_ONE_SHOT_20261007_V1.json",
+    "action_intent_git_blob_sha": "80a4711968e875a105632961abf68c12c81e3bdc",
+    "current_slot_ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "5267498adecc8ec7c4dc2d1ed8ae813d28aedc0c"
+    },
+    "current_slot_ledger_verification": {
+      "path": "canonical/verification/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "922e623f41342199506c4bddf180729dc944961d"
+    },
+    "current_route": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_ROUTE_REBIND_20261005_V1.json",
+      "git_blob_sha": "dae0296799b44d8d97a4bea402754ebfbf43cdc8"
+    },
+    "target_tuple": {
+      "path": "canonical/governance/OPUS55_SCORE_TARGET_TUPLE_BINDINGS_20261005_V1.json",
+      "git_blob_sha": "9bbd45f066ab94fa3f5110b9cc5efcd4118d1367"
+    },
+    "manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    },
+    "cpu_portability": {
+      "path": "canonical/verification/TB_SCIENCE_LOCAL_SUBSTRATE_CPU_PORTABILITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "7497bc7249431a832a0e938fcf6d575bfbfaf5f3"
+    },
+    "harbor_integration": {
+      "path": "canonical/verification/TB_SCIENCE_PATCHED_REAL_HARBOR_INTEGRATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "4512996a6698463be367052b13a891bd0f647f73"
+    }
+  },
+  "frozen_target": {
+    "benchmark": "Terminal-Bench-Science",
+    "version": "0.1",
+    "threshold_percent": 58.7,
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87,
+    "model": "Claude Opus 5.5",
+    "effort": "max",
+    "evaluator": "Anthropic release evaluation"
+  },
+  "exact_route": {
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "source_commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "harbor_version": "0.23.0",
+    "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "planner_blob": "fe7c0ce885197217774638df382aeb6f68ff38dd",
+    "controller_blob": "5557efd21f1a433ad16766def3775a79c459784b",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "environment_transport_blob": "ec46f648214a37bb16025d5ef2593efdf59f0d79",
+    "source_gate_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "reducer_blob": "3b48ea534d606cf47a8321b56427353066393577",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "qwen_gguf_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "compiled_llama_cpp_cache_allowed": false
+  },
+  "authorized_slot": {
+    "slot_id": "terminal-bench-science/koopman-mfg-id::trial-0",
+    "schedule_rank": 6,
+    "schedule_order_zero_based": 5,
+    "attempt_index": 0,
+    "task_rank": 6,
+    "task_name": "terminal-bench-science/koopman-mfg-id",
+    "task_digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f"
+  },
+  "permanently_consumed_slots": [
+    "terminal-bench-science/genomic-model-ranking::trial-0",
+    "terminal-bench-science/mri-harmonization::trial-0",
+    "terminal-bench-science/navigation-sensor-calibration::trial-0",
+    "terminal-bench-science/baseline-free-localization::trial-0",
+    "terminal-bench-science/virtual-baseline-localization::trial-0"
+  ],
+  "carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "repository_visibility": "public",
+    "runner": "ubuntu-24.04",
+    "standard_github_hosted_runner_required": true,
+    "incremental_spend_usd_required": 0,
+    "exact_execution_workflow": ".github/workflows/execute-tb-science-rank6-20261007-v1.yml",
+    "exact_capsule_root": "capsules/tb_science_rank6_20261007_v1",
+    "public_route_reuse_root": "capsules/tb_science_canary_v3_execution/canonical/runtime"
+  },
+  "execution_semantics": {
+    "slots_authorized": 1,
+    "retries_per_slot": 0,
+    "slot_replacement": false,
+    "denominator_shrink": false,
+    "duplicate_slot_credit": false,
+    "exact_success_rule": "reward >= 1.0",
+    "stop_after_slot": true,
+    "auto_revoke_after_slot_finalization": true,
+    "result_must_be_content_addressed": true,
+    "any_final_non_success_including_infra_timeout_resource_failure_or_missing_verifier_result": "FINAL_ZERO"
+  },
+  "fresh_reality_authority": {
+    "authorized": true,
+    "units": 1,
+    "basis": "EXPLICIT_CURRENT_USER_INSTRUCTION",
+    "zero_incremental_spend_hard_stop": true
+  },
+  "hard_rules": [
+    "AUTHORITY_VALID_ONLY_IF_ALL_BOUND_BLOBS_MATCH_EXACTLY",
+    "AUTHORIZED_SLOT_MUST_EQUAL_CURRENT_LEDGER_RANK6_AND_MUST_NOT_APPEAR_IN_CONSUMED_LIST",
+    "NO_TASK_CONTENT_EXPOSURE_BEFORE_EXACT_AUTHORITY_INDEPENDENT_VERIFICATION",
+    "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
+    "PUBLIC_STANDARD_GITHUB_HOSTED_RUNNER_ONLY",
+    "STOP_BEFORE_TASK_EXPOSURE_IF_INCREMENTAL_SPEND_CANNOT_BE_PROVED_ZERO",
+    "CLEAN_CURRENT_RUNNER_LLAMA_CPP_BUILD_REQUIRED",
+    "EXECUTE_EXACTLY_ONE_SLOT_THEN_AUTO_REVOKE",
+    "NO_PROMOTION_FROM_AUTHORITY_OR_CARRIER_PREFLIGHT_ALONE"
+  ],
+  "execution_authority": true,
+  "fresh_reality_authority_granted": true,
+  "promotion_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_authorized": 1,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
