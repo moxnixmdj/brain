@@ -1,0 +1,188 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_LITE_T2_POSTFREEZE_DIAGNOSTIC_V1",
+  "date": "2026-10-07",
+  "status": "POST_FREEZE_ZERO_CREDIT_DIAGNOSTIC__SYSTEMIC_ROUTE_FAILURE_LOCALIZED__DO_NOT_REPAIR_AND_RECOUNT_SAME_TASK",
+  "objective": "Use one public non-official AA-Briefcase-Lite task to falsify the current professional-work/artifact route cheaply before private or official benchmark evidence.",
+  "frozen_output": {
+    "task_id": "w1_t2",
+    "sha256": "68e4f1c566a79b148a721e80269bceda2a94cbe3862b9656627dbff182efca76",
+    "bytes": 41874,
+    "freeze_receipt_commit": "4b5c8adcd993a3ecb3a99c215d03432cdbda4462"
+  },
+  "public_grader": {
+    "source": "ArtificialAnalysis/AA-Briefcase-Lite checks.jsonl",
+    "absolute_binary_check_count": 12,
+    "pairwise_check_count": 2,
+    "official_score_claim": false
+  },
+  "conservative_self_adjudication": {
+    "pass": [
+      {
+        "check": "W1-T2-A-04",
+        "reason": "Workbook explicitly models per-capita demand drift and plant-based displacement sensitivities in the source-consistent range."
+      },
+      {
+        "check": "W1-T2-A-08",
+        "reason": "Frozen workbook contains no recommendation/thesis-pillar language; direct authored-prose scan found no listed Commonwealth-spelling violations."
+      }
+    ],
+    "fail": [
+      {
+        "check": "W1-T2-A-01",
+        "reason": "No >=3 distinct cage-transition scenarios with scenario-specific housing-system pricing/premium paths."
+      },
+      {
+        "check": "W1-T2-A-02",
+        "reason": "No full net-additive producer roster, no producer-specific leader/mid/laggard conversion schedule, and no scenario-specific premium curves."
+      },
+      {
+        "check": "W1-T2-A-03",
+        "reason": "Financial figures remain NZD; task-critical firm FX curve from central assumptions workbook was not ingested."
+      },
+      {
+        "check": "W1-T2-A-05",
+        "reason": "No explicit channel-pricing architecture with retail wholesale/shelf, foodservice, industrial and documented markup-factor convention."
+      },
+      {
+        "check": "W1-T2-A-06",
+        "reason": "RetailIQ elasticity workbook was not ingested; no mechanical FR-commodity-to-barn substitution using its own/cross elasticities."
+      },
+      {
+        "check": "W1-T2-A-07",
+        "reason": "Workbook integrity is good, but source vintage is not complete for every input, >=4 consistent cell categories are not fully enforced, and no plain-language formatting legend is present."
+      },
+      {
+        "check": "W1-T2-A-09",
+        "reason": "Scenario set includes generic Base and lacks the required transition-specific substantive scenario names/rationales on the scenario tab."
+      },
+      {
+        "check": "W1-T2-C-01",
+        "reason": "No full bottom-up producer roster sourced explicitly to the gold expert series."
+      },
+      {
+        "check": "W1-T2-C-02",
+        "reason": "No explicit source-anchored top-down ~455m vs bottom-up ~540m reconciliation or flock x eggs/hen x utilization x channel-price chain."
+      },
+      {
+        "check": "W1-T2-C-03",
+        "reason": "Free-range is not split into commodity vs specialty/pasture-raised price tiers with differentiated scenario paths."
+      }
+    ],
+    "pass_count": 2,
+    "fail_count": 10,
+    "pairwise_not_adjudicated": [
+      "W1-T2-AQ-01",
+      "W1-T2-P-01"
+    ]
+  },
+  "causal_localization": [
+    {
+      "id": "R1_AUTHORITY_AND_STANDARDS_DISCOVERY_FAILURE",
+      "evidence": "Route selected sources mainly from filenames/task narrative but did not bind Halberd analytical standards, current Slack overrides, or the full expert-transcript authority chain before model construction.",
+      "affected_checks": [
+        "A-01",
+        "A-05",
+        "A-07",
+        "A-09",
+        "C-01",
+        "C-02",
+        "C-03"
+      ],
+      "class": "INFORMATION_ACQUISITION_AND_AUTHORITY_RESOLUTION__NOT_PROVEN_MISSING_REASONING_MECHANISM"
+    },
+    {
+      "id": "R2_BINARY_SPREADSHEET_INGESTION_FAILURE",
+      "evidence": "halberd_central_financial_assumptions.xlsx and nz_egg_retail_scan_data_q1_2026.xlsx were retrieved but not parsed; workbook explicitly failed closed on their contents.",
+      "affected_checks": [
+        "A-03",
+        "A-06",
+        "A-05"
+      ],
+      "class": "SOURCE_TRANSPORT_AND_MULTI_FORMAT_INGESTION"
+    },
+    {
+      "id": "R3_SOURCE_COVERAGE_PROOF_FAILURE",
+      "evidence": "No pre-execution proof that every requested model dimension had at least one authoritative source path; omitted producer roster, multi-channel pricing, tier elasticity, bottom-up sizing and firm-wide format/currency rules.",
+      "affected_checks": [
+        "A-01",
+        "A-02",
+        "A-03",
+        "A-05",
+        "A-06",
+        "A-07",
+        "A-09",
+        "C-01",
+        "C-02",
+        "C-03"
+      ],
+      "class": "K6_STYLE_TASK_SUFFICIENT_INFORMATION_BINDING"
+    },
+    {
+      "id": "R4_MODEL_SCHEMA_UNDERDECOMPOSITION",
+      "evidence": "Model emphasized demand/cost scenarios and aggregate housing transition but omitted distinct transition/pricing scenarios, producer-level conversion timing, channel pricing, tier substitution and top-down/bottom-up reconciliation.",
+      "affected_checks": [
+        "A-01",
+        "A-02",
+        "A-05",
+        "A-06",
+        "A-09",
+        "C-01",
+        "C-02",
+        "C-03"
+      ],
+      "class": "PLANNING_AND_MODEL_DECOMPOSITION"
+    },
+    {
+      "id": "R5_TRACEABILITY_AND_FIRM_CONVENTION_COMPILER_GAP",
+      "evidence": "Sources were visible, but source+vintage and four-category formatting/legend requirements were not discovered/enforced globally.",
+      "affected_checks": [
+        "A-03",
+        "A-07"
+      ],
+      "class": "PROFESSIONAL_DELIVERABLE_CONVENTION_BINDING"
+    }
+  ],
+  "deepest_interpretation": {
+    "proven_missing_generic_implementation_mechanism": false,
+    "main_failure_mode": "THE BRAIN BUILT A COHERENT MODEL OVER AN INCOMPLETE TASK_AUTHORITY_INFORMATION_SET.",
+    "implication": "This falsification supports the current theorem that professional-work gaps can be information/proof/route-binding failures rather than missing frontier cognition. The route must first become source-complete and authority-complete before any donor-capability conclusion is legal."
+  },
+  "general_repairs": [
+    {
+      "id": "G1_AUTHORITY_SWEEP_BEFORE_EXECUTION",
+      "rule": "Before planning, discover and bind firm standards, templates, assumptions workbooks, authority hierarchy, current overrides/pins, and task-specific source manifests."
+    },
+    {
+      "id": "G2_ALL_SOURCE_FORMATS_MUST_BE_INGESTIBLE_OR_BLOCK",
+      "rule": "Every task-relevant source file must be content-addressed and parsed. If XLSX/PDF/DOCX/email/etc cannot be parsed, mark execution BLOCKED rather than silently continue as if the missing source were optional."
+    },
+    {
+      "id": "G3_SOURCE_COVERAGE_CERTIFICATE",
+      "rule": "Compile task/output dimensions into a coverage matrix mapping each load-bearing dimension to authoritative source evidence before generating the deliverable. No uncovered dimension may be treated as complete."
+    },
+    {
+      "id": "G4_FIRM_CONVENTION_COMPILER",
+      "rule": "Extract currency/unit/FX, spelling/tone, recommendation rules, traceability/vintage, formatting legend and scenario conventions from source authority and enforce them mechanically in the artifact."
+    },
+    {
+      "id": "G5_SCENARIO_AND_RECONCILIATION_COMPLETENESS",
+      "rule": "For models, derive scenario axes from the actual structural uncertainty set; require named divergence rationales, relevant price/volume interactions, and explicit reconciliation when multiple sizing methods coexist."
+    },
+    {
+      "id": "G6_POST_BUILD_SELF_AUDIT_BEFORE_FREEZE",
+      "rule": "Before output freeze, re-run the source-coverage matrix against the artifact and fail closed on missing dimensions, unparsed authoritative sources, orphan inputs or unbound conventions."
+    }
+  ],
+  "contamination_rule": "The w1_t2 workbook remains frozen and cannot be repaired/recounted as fresh. General repairs must be validated on a different untouched task.",
+  "hard_nonclaims": [
+    "NO_OFFICIAL_AA_BRIEFCASE_SCORE",
+    "NO_PAIRWISE_AQ_OR_PRESENTATION_SCORE",
+    "NO_CLAIM_THE_GRADER_CHECKS_ARE_TERMINAL_TRUTHS",
+    "NO_FAMILY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_terminal_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
