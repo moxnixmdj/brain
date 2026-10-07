@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ORACLE_COMPARATOR_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH_REPAIR__PRIOR_TWO_WORLD_BOUNDARY_DOES_NOT_ESTABLISH_TARGET_RELATIVE_IMPOSSIBILITY__COMMON_VISIBLE_POLICY_ROUTE_REOPENED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "prior_information_boundary": {
+      "path": "canonical/governance/TERMINAL_NOW_PROFESSIONAL_QUALITY_INFORMATION_BOUNDARY_20261007_V1.json",
+      "git_blob_sha": "79b48e0096a017a679d3e49a8f69b4212e89f896"
+    },
+    "public_target_information_profile": {
+      "path": "canonical/evidence/AA_BRIEFCASE_TARGET_INFORMATION_PROFILE_PUBLIC_20261007_V1.json",
+      "git_blob_sha": "daa8a4cfc9be1892b27d195566a7fa26518bcc83"
+    },
+    "current_official_target_reality": {
+      "path": "canonical/evidence/OPUS55_OFFICIAL_PUBLIC_REALITY_REFRESH_20261007_V1.json",
+      "git_blob_sha": "4b308f6e8ebb4bab0b3d6049c9638f297de2f9ee"
+    }
+  },
+  "defect": {
+    "prior_comparator": "HIDDEN_WORLD_INFORMED_OPTIMAL_POLICY",
+    "actual_terminal_comparator": "CLAUDE_OPUS_5_5_UNDER_ITS_AUTHORIZED_OBSERVABLE_INPUT_PROFILE",
+    "mismatch": "THE_PRIOR_TWO_WORLD_LOWER_BOUND_SETS_TARGET_SUCCESS_TO_ONE_IN_EACH_OPPOSED_HIDDEN_WORLD_BY_ALLOWING_THE_COMPARATOR_TO_PICK_THE_WORLD_OPTIMAL_ACTION_AFTER_CONDITIONING_ON_HIDDEN_EVALUATOR_STATE. NO_BOUND SOURCE ESTABLISHES OPUS55 RECEIVES THAT HIDDEN STATE.",
+    "consequence": "THE_PROOF_IS_VALID_AGAINST_AN_OMNISCIENT_ORACLE_BUT_DOES_NOT_PROVE_THAT_A_VISIBLE_ONLY_BRAIN_POLICY_CANNOT_MATCH_OR_EXCEED_OPUS55."
+  },
+  "formal_counterexample": {
+    "worlds": [
+      "W1",
+      "W2"
+    ],
+    "brain_visible_policy": "P_B(a)=p; P_B(b)=1-p",
+    "target_visible_policy": "P_T(a)=q; P_T(b)=1-q",
+    "target_hidden_state_conditioning": false,
+    "arbitrary_world_utilities": [
+      "U1(a)=u1a; U1(b)=u1b",
+      "U2(a)=u2a; U2(b)=u2b"
+    ],
+    "witness": "SET_p_EQUAL_q",
+    "result": [
+      "E[U1|BRAIN]=q*u1a+(1-q)*u1b=E[U1|TARGET]",
+      "E[U2|BRAIN]=q*u2a+(1-q)*u2b=E[U2|TARGET]"
+    ],
+    "conclusion": "HIDDEN_WORLD_INDISTINGUISHABILITY_ALONE_CANNOT_IMPLY_TARGET_RELATIVE_NONINFERIORITY_IS_IMPOSSIBLE_WHEN_TARGET_AND_BRAIN_SHARE_THE_VISIBLE_INFORMATION_CLASS."
+  },
+  "truth_effect": {
+    "prior_claim_zero_reality_fixed_point_for_professional_quality": false,
+    "prior_claim_new_hidden_evaluator_information_is_logically_required": false,
+    "common_visible_policy_search_reopened": true,
+    "hidden_discriminator_required_only_if": "A_SOUND_SOURCE_PROVES_THE_AUTHORIZED_OPUS55_TARGET_POLICY_OR_ACCEPTANCE_RELATION_CONDITIONS_ON_INFORMATION_NOT_AVAILABLE_TO_THE_BRAIN_ROUTE_AND_THAT_CONDITIONING_IS_LOAD_BEARING_FOR_NONINFERIORITY.",
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "scheduler_effect": [
+    "SUPERSEDE_ONLY_THE_ORACLE_COMPARATOR_IMPOSSIBILITY_CONCLUSION_OF_TERMINAL_NOW_PROFESSIONAL_QUALITY_INFORMATION_BOUNDARY_20261007_V1.",
+    "DO_NOT_ACQUIRE_HIDDEN_GRADER_STATE_MERELY_BECAUSE_THE_ORACLE_COUNTERMODEL_REVERSES_OPTIMAL_ACTIONS.",
+    "RETURN_TO_THE_CURRENT_TERMINAL_AUTHORITY_RULE: FIRST_SEARCH_FOR_ONE_COMMON_CERTIFIED_ADEQUATE_BRAIN_POLICY_OVER_THE_COARSEST_SOUND_VISIBLE_CONTEXT_CELL.",
+    "COMPARE_BRAIN_TO_THE_AUTHORIZED_OPUS55_TARGET_POLICY_OR_ACCEPTANCE_THRESHOLD__NOT_TO_AN_UNOBSERVED_WORLD_OPTIMUM.",
+    "IF_TARGET_RELATIVE_COMMON_POLICY_ADEQUACY_CANNOT_BE_PROVED__THEN_BIND_ONLY_THE_MINIMUM_TARGET_RELEVANT_DISCRIMINATOR_ACTUALLY_SHOWN_LOAD_BEARING."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PROFESSIONAL_QUALITY_IS_NOW_CLOSED.",
+    "NO_CLAIM_BRAIN_ALREADY_MATCHES_THE_OPUS55_PROFESSIONAL_QUALITY_POLICY.",
+    "NO_CLAIM_PRIVATE_AA_BRIEFCASE_TASKS_OR_GRADING_RUBRICS_ARE_PUBLIC.",
+    "NO_CLAIM_PUBLIC_AGGREGATE_ELO_IS_A_PER_CONTEXT_ADEQUACY_CERTIFICATE.",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
