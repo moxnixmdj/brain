@@ -167,6 +167,20 @@ def compile_state(
 
     state = _and(accepted)
     model_count = len(_models(basis, state))
+    if model_count == 0:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED",
+            "errors": ["SEMANTIC_STATE_INCONSISTENT__NO_MODELS"],
+            "decision_basis": basis,
+            "state": state,
+            "state_sha256": _digest(state),
+            "accepted_refinements": accepted,
+            "rejected_refinements": rejected,
+            "model_count": 0,
+            "max_model_count": 2 ** len(basis),
+            "terminal_authority": False,
+        }
     return {
         "schema": SCHEMA,
         "status": "COMPILED" if not rejected else "COMPILED_WITH_REJECTED_REFINEMENTS",
