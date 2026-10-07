@@ -1,6 +1,27 @@
 {
-  "schema": "PROJECT_BRAIN_TERMINAL_NOW_STATUS_V2",
-  "status": "TERMINAL_REAL",
-  "checked_by": "CHATGPT_EXACT_BLOB_LEASE",
-  "source_status_blob_sha": "857f81c679de86aa3d0e3c640d5d216c0a002ced"
+  "schema": "PROJECT_BRAIN_TERMINAL_NOW_STATUS_V3",
+  "status": "TERMINAL_NOT_REAL__PR2785_FALSE_POSITIVE_REVOKED",
+  "date": "2026-10-07",
+  "replaces_blob_sha": "7ea1792d0663438e3a1d43020ea568984668c800",
+  "pinned_base": "991ac7ccb4014e58f6ac0de3b26827680ae995ac",
+  "exact_pinned_pointer": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "d2a271a1850cc98b735879a6d783f75639249778"
+  },
+  "gate_recomputation": {
+    "terminal_real": false,
+    "declared_terminal": false,
+    "blockers": [
+      "U_NOT_PROVED_EMPTY",
+      "ROUTER_REGISTRY_SELECTED_COVER_INCOMPLETE",
+      "COMPLETE_SELECTED_CONTEXT_ABC_OPEN",
+      "D_FINALITY_OPEN"
+    ]
+  },
+  "forensic_failure": {
+    "previous_source_status_blob_sha": "857f81c679de86aa3d0e3c640d5d216c0a002ced",
+    "source_status_blob_retrievable_from_repository": false,
+    "reason": "THE_PREVIOUS_TERMINAL_REAL_STATUS_CONTRADICTS_THE_EXACT_PINNED_STABLE_POINTER_AND_REFERENCES_A_SOURCE_STATUS_BLOB_NOT_RETRIEVABLE_FROM_THE_REPOSITORY"
+  },
+  "terminal_credit_delta": 0
 }
