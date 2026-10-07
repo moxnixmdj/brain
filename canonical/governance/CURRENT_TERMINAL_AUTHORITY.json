@@ -813,6 +813,28 @@
     "tb_science_current_slot_ledger_v9": {
       "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V9.json",
       "git_blob_sha": "82edae7eeb3e5ea5e30fc9f239c1d95faf9d089d"
+    },
+    "terminal_architecture_self_tournament": {
+      "path": "canonical/governance/TERMINAL_ARCHITECTURE_SELF_TOURNAMENT_20261007_V1.json",
+      "git_blob_sha": "70999148eeb9b7f7c1ad3eabbffb7002cb58e52e",
+      "independent_verification": {
+        "path": "canonical/verification/TERMINAL_ARCHITECTURE_SELF_TOURNAMENT_SPRITE_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "ee8adea6ab74c2261f51d8c55f7394ce04259607"
+      },
+      "note": "INDEPENDENTLY_VERIFIED_SCHEDULER_COMPRESSION__ONE_PRIMARY_PRE_ABC_RESEARCH_ROOT_U_EMPTY__ZERO_TERMINAL_CREDIT"
+    },
+    "selected_discriminator_policy_cover_bridge": {
+      "path": "canonical/governance/SELECTED_DISCRIMINATOR_POLICY_COVER_BRIDGE_20261007_V1.json",
+      "git_blob_sha": "32caf066826ca6ffe37dc7fa2b6b0af2c3fe38be",
+      "runtime": {
+        "path": "canonical/runtime/selected_discriminator_policy_cover_bridge_verifier_v1.py",
+        "git_blob_sha": "7fd30668f4ac84aabd03aea40879afbd17e247e4"
+      },
+      "tests": {
+        "path": "canonical/tests/test_selected_discriminator_policy_cover_bridge_v1.py",
+        "git_blob_sha": "e5616778d35c5fae7ef518355d7f01fdac55c246"
+      },
+      "note": "COMMON_POLICY_FIRST__MINIMUM_TRUTHFUL_POLICY_CHANGING_DISCRIMINATOR_SECOND__INTERFACE_ALONE_GRANTS_ZERO_U_EMPTY_OR_TERMINAL_CREDIT"
     }
   },
   "live_truth": {
@@ -1282,7 +1304,12 @@
     "tb_science_rank11_authority_active": false,
     "tb_science_rank11_task_started": false,
     "tb_science_rank11_result_present": false,
-    "tb_science_rank11_precondition": "INDEPENDENT_ZERO_BENCHMARK_EXPOSURE_CAUSAL_TIMEOUT_REPAIR_VERIFICATION_OR_STRONGER_ROUTE_PREEMPTION"
+    "tb_science_rank11_precondition": "INDEPENDENT_ZERO_BENCHMARK_EXPOSURE_CAUSAL_TIMEOUT_REPAIR_VERIFICATION_OR_STRONGER_ROUTE_PREEMPTION",
+    "primary_pre_abc_research_root_count": 1,
+    "primary_pre_abc_research_root": "U_EMPTY",
+    "obsolete_multi_race_primary_scheduling": false,
+    "selected_discriminator_policy_cover_bridge_available": true,
+    "selected_discriminator_bridge_grants_u_empty_by_itself": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -1579,6 +1606,36 @@
     "path": "canonical/governance/DENSE_NONCHART_SHARED_AA_DEPENDENCY_RECONCILIATION_20261007_V1.json",
     "git_blob_sha": "7a996de68bd1e6219e7289b657d012975172f202",
     "effect": "ONE_INDEPENDENT_SCHEDULER_OBLIGATION_REMOVED__RAW_FROZEN_ATOM_REMAINS_OPEN_UNTIL_SHARED_AA_OR_STRONGER_QUALITY_FACT_CLOSES",
+    "terminal_credit_delta": 0
+  },
+  "terminal_architecture_override": {
+    "schema": "PROJECT_BRAIN_TERMINAL_ARCHITECTURE_OVERRIDE_V1",
+    "status": "ACTIVE_INDEPENDENTLY_VERIFIED_SCHEDULER_OVERRIDE__TERMINAL_FALSE",
+    "precedence": "SUPERSEDES_OBSOLETE_MULTI_RACE_PRIMARY_SCHEDULING_ONLY__DOES_NOT_SUPERSEDE_FROZEN_ACCEPTANCE_OR_COMMON_FINALITY_SEMANTICS",
+    "primary_pre_abc_research_root_count": 1,
+    "primary_pre_abc_research_root": "U_EMPTY",
+    "live_primitive": "SCOPE_COMPLETE_OBSERVATIONAL_QUOTIENT_WITH_NO_TARGET_SUPPORTED_UNSPLITTABLE_POLICY_CONFLICT_CLASS",
+    "legal_scope_complete_success_routes": [
+      "PROVE_SELECTED_COVER_COMPLEMENT_UNSAT",
+      "PROVE_FULL_SCOPE_DB_COVER",
+      "PROVE_TARGET_ESCAPE_NONOCCUPANCY",
+      "PROVE_GENERATOR_CLOSURE_SCOPE_COMPLETE"
+    ],
+    "per_escape_cell_order": [
+      "TRY_ONE_COMMON_CERTIFIED_ADEQUATE_BRAIN_POLICY",
+      "IF_NEEDED_BIND_MINIMUM_TRUTHFUL_POLICY_CHANGING_DISCRIMINATOR",
+      "OTHERWISE_RETURN_ONE_CONSTRUCTIVE_UNRESOLVED_WITNESS"
+    ],
+    "post_u_tail": [
+      "FREEZE_EXACT_CREDITED_ROUTES",
+      "RUN_REACHED_LOCAL_C",
+      "RECOMPUTE_D",
+      "DELETE_DONORS",
+      "RUN_INDEPENDENT_CLEAN_ROOM_REPLAY",
+      "RUN_TERMINAL_CLOSURE_REDUCER"
+    ],
+    "u_empty_proved": false,
+    "terminal": false,
     "terminal_credit_delta": 0
   }
 }
