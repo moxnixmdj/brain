@@ -1,0 +1,71 @@
+name: Official terminal reality gate verification
+
+on:
+  push:
+    branches:
+      - terminal-now-scope-complete-cut-991ac
+    paths:
+      - '.github/workflows/official-terminal-reality-gate-991ac.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Run official gate tests and CLI
+        shell: bash
+        run: |
+          set -u
+          mkdir -p canonical/verification
+          pytest_rc=0
+          python -m pytest -q canonical/tests/test_terminal_reality_gate_v1.py > /tmp/pytest.txt 2>&1 || pytest_rc=$?
+          printf '%s' "$pytest_rc" > /tmp/pytest_rc
+
+          gate_rc=0
+          python canonical/runtime/terminal_reality_gate_v1.py > /tmp/gate.txt 2>&1 || gate_rc=$?
+          printf '%s' "$gate_rc" > /tmp/gate_rc
+
+          python3 - <<'PY'
+          import json, pathlib
+          pytest_rc=int(pathlib.Path("/tmp/pytest_rc").read_text())
+          gate_rc=int(pathlib.Path("/tmp/gate_rc").read_text())
+          pytest_out=pathlib.Path("/tmp/pytest.txt").read_text(errors="replace")
+          gate_out=pathlib.Path("/tmp/gate.txt").read_text(errors="replace")
+          terminal=None
+          parsed=None
+          try:
+              parsed=json.loads(gate_out)
+              if isinstance(parsed,dict):
+                  terminal=parsed.get("terminal_real")
+          except Exception:
+              pass
+          ok=(pytest_rc==0 and gate_rc==0 and terminal is True)
+          receipt={
+            "schema":"PROJECT_BRAIN_OFFICIAL_TERMINAL_REALITY_GATE_PINNED_991AC_V1",
+            "pinned_base":"991ac7ccb4014e58f6ac0de3b26827680ae995ac",
+            "pytest_returncode":pytest_rc,
+            "pytest_tail":pytest_out[-2000:],
+            "gate_returncode":gate_rc,
+            "gate_output":parsed if isinstance(parsed,dict) else gate_out[-4000:],
+            "official_terminal_real":bool(ok),
+          }
+          with open("canonical/verification/OFFICIAL_TERMINAL_REALITY_GATE_PINNED_991AC.json","w") as f:
+              json.dump(receipt,f,indent=2,sort_keys=True);f.write("\n")
+          status={"schema":"PROJECT_BRAIN_OFFICIAL_TERMINAL_REALITY_STATUS_V1","status":"OFFICIAL_TERMINAL_REAL" if ok else "OFFICIAL_TERMINAL_NOT_REAL"}
+          with open("canonical/verification/OFFICIAL_TERMINAL_REALITY_STATUS_991AC.json","w") as f:
+              json.dump(status,f,separators=(",",":"),sort_keys=True);f.write("\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+
+          git config user.name "Project Brain Official Terminal Gate"
+          git config user.email "project-brain-terminal-gate@users.noreply.github.com"
+          git add canonical/verification/OFFICIAL_TERMINAL_REALITY_GATE_PINNED_991AC.json canonical/verification/OFFICIAL_TERMINAL_REALITY_STATUS_991AC.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Verify official terminal reality gate at pinned 991ac"
+          git push origin HEAD:terminal-now-scope-complete-cut-991ac
