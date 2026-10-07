@@ -98,6 +98,10 @@ class PlannerTests(unittest.TestCase):
         self.assertFalse(body["parallel_tool_calls"])
         self.assertEqual(body["temperature"],0)
         self.assertEqual(body["max_tokens"],p.MAX_TOOL_COMPLETION_TOKENS)
+        candidate_schema=body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["items"]["properties"]
+        self.assertEqual(candidate_schema["command"]["maxLength"],10000)
+        self.assertEqual(candidate_schema["verify_command"]["maxLength"],4000)
+        self.assertEqual(p.MAX_TOOL_COMPLETION_TOKENS,4096)
         self.assertFalse(body["stream"])
         self.assertEqual(len(body["tools"]),1)
         self.assertEqual(body["tools"][0]["function"]["name"],p.TOOL_NAME)
