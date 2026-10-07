@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_DB_EXISTING_EVIDENCE_SATURATION_UNION_V10_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_SOURCE_AND_DELTA_CHECK_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V10.json",
+    "git_blob_sha": "2edaa6eed0e0e124a4f5de81c84efa2519659aa8"
+  },
+  "verified": {
+    "predecessor_blob_exact": true,
+    "new_region_id_absent_from_predecessor": true,
+    "independent_replay_exact_bound": true,
+    "predecessor_count": 16,
+    "added_count": 1,
+    "resulting_count": 17,
+    "arithmetic_valid": true,
+    "general_synthesis_closure_not_claimed": true,
+    "terminal_credit_zero": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_GENERAL_SYNTHESIS_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
