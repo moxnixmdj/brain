@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_220_DIRECTIVE_SEMANTIC_EXPANSION_REPLAY_V1",
+  "date": "2026-10-07",
+  "status": "EXACT_PUBLIC_POPULATION_REPLAY__OLD_MODAL_BASELINE_REPRODUCED_154__NEW_ONE_SIDED_DIRECTIVES_361__ZERO_TERMINAL_CREDIT",
+  "source_population": {
+    "dataset": "openai/gdpval",
+    "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "task_count": 220,
+    "prompt_manifest_sha256": "46af591f16f6e50fa12e00370e65beef354bb9a4dae77f2ab85b27198ca77ad8",
+    "canonical_population_receipt": {
+      "path": "canonical/evidence/GDPVAL_PUBLIC_220_POPULATION_REALITY_RECEIPT_20261007_V1.json",
+      "git_blob_sha": "55214960a5a3a383fe17aa5489c64ecd26a5c1a9"
+    },
+    "canonical_modal_localization": {
+      "path": "canonical/evidence/GDPVAL_PUBLIC_220_EXPLICIT_OBLIGATION_LOCALIZATION_20261007_V1.json",
+      "git_blob_sha": "7a2d726adb155bee0f1e6f4af71ee90cc547bbbc"
+    }
+  },
+  "candidate": {
+    "directive_parser": {
+      "path": "canonical/runtime/bounded_task_directive_semantics_v1.py",
+      "git_blob_sha": "e3a4c01cc08e7a569692a5d6f03a6feec69934bf"
+    },
+    "index_v2": {
+      "path": "canonical/runtime/explicit_obligation_index_v2.py",
+      "git_blob_sha": "75e1c187eb4d7f2a5acae81d2841c1db3f53b462"
+    },
+    "tests": {
+      "path": "canonical/tests/test_bounded_task_directive_semantics_v1.py",
+      "git_blob_sha": "05f3ffe8c69922621359a758510ef6734cc7a668"
+    }
+  },
+  "replay": {
+    "segment_count": 5235,
+    "old_modal_resolved": 154,
+    "canonical_old_modal_expected": 154,
+    "old_modal_task_level_difference_count": 0,
+    "new_directive_obligation_count": 361,
+    "combined_positive_obligation_count": 515,
+    "positive_obligation_count_multiplier_vs_v1": 3.344155844155844,
+    "tasks_with_new_directive_obligations": 161,
+    "tasks_with_any_positive_obligation": 188,
+    "tasks_fully_indexed": 0,
+    "unresolved_segment_count": 4720,
+    "top_directive_verbs": [
+      ["include",79],["use",46],["create",46],["ensure",26],["add",12],
+      ["draft",12],["prepare",11],["provide",10],["write",10],["build",7]
+    ]
+  },
+  "soundness_boundary": [
+    "DIRECTIVE_ROWS ASSERT_ONLY_AN_EXPLICIT_ACTION_HEAD_PLUS_THE_EXACT_OPAQUE_SOURCE_BOUND_TAIL.",
+    "COORDINATION_IS_NOT_SPLIT_OR_INTERPRETED.",
+    "NO_HIDDEN_ARGUMENT_TOPIC_AUDIENCE_EVIDENCE_EDIT_COST_OR_BUDGET_IS_INFERRED.",
+    "UNPARSED_TEXT_REMAINS_UNKNOWN.",
+    "NO_WHOLE_TASK_SEMANTIC_COMPLETENESS_OR_P2_MEMBERSHIP_IS_PROVED."
+  ],
+  "verification": {
+    "local_regression_tests": "8_OF_8_PASS",
+    "independent_verification": "PENDING__SPRITE_FILE_WRITE_BLOCKED_BY_CONTROL_PLANE_BEFORE_REMOTE_MUTATION",
+    "promotion_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_inference_requests": 0,
+    "terminal_credit_delta": 0,
+    "family_credit_delta": 0
+  }
+}
