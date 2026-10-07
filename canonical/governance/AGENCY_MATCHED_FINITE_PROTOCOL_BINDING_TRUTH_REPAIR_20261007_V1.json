@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_MATCHED_FINITE_PROTOCOL_BINDING_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH_REPAIR__AGENCY_MATCHED_PROTOCOL_BINDS_TO_FINITE_DECLARED_PORTFOLIO__NO_UNDECLARED_POPULATION_INFERENCE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "COMPLEX_MULTI_TOOL_AGENCY",
+  "target_predicates": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+  ],
+  "sources": {
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "semantics_disjunction": {
+      "path": "canonical/governance/MATCHED_PORTFOLIO_SCOPE_SEMANTICS_DISJUNCTION_20261007_V1.json",
+      "git_blob_sha": "cc83650aa20c934a664cd485cc4e8f8efe8924b2"
+    },
+    "scope_compiler": {
+      "path": "canonical/runtime/matched_success_scope_compiler_v1.py",
+      "git_blob_sha": "e10ad027ae6c44f587050362511cfaae31ff7f5c"
+    },
+    "scope_compiler_verification": {
+      "path": "canonical/verification/MATCHED_SUCCESS_SCOPE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "ea289a46559a6cb4373e9b38f62e49abad399fbc"
+    },
+    "interaction_subsumption": {
+      "path": "canonical/governance/COMPLEX_AGENCY_INTERACTION_SUBSUMPTION_THEOREM_20261007_V1.json",
+      "git_blob_sha": "1ecb09a6443b949d18046f1109aa050020dec748"
+    },
+    "stateful_top_cell": {
+      "path": "canonical/governance/AGENCY_STATEFUL_GENERATOR_UNIVERSAL_TOP_LAW_CELL_20261007_V1.json",
+      "git_blob_sha": "d0f65c08d84777f4fdb24e5dfa74bdd1acbcfc22"
+    }
+  },
+  "frozen_protocol_reading": {
+    "proof_mode": "MATCHED_DIRECT_NONINFERIORITY",
+    "declared_acceptance_object": "A_FROZEN_REPRESENTATIVE_PORTFOLIO_EXERCISING_EVERY_DECLARED_AGENCY_DIMENSION",
+    "dimensions": [
+      "multi-step planning with at least three distinct tool/action types",
+      "state change after actions requiring replanning",
+      "long-horizon state retention",
+      "tool failure/recovery",
+      "subtask dependency and fan-in",
+      "minimal-oversight completion"
+    ],
+    "primary_metrics": [
+      "terminal_task_success",
+      "invalid_action_rate",
+      "unrecovered_failure_rate",
+      "duplicate_or_conflicting_work_rate"
+    ],
+    "larger_underlying_population_declared": false,
+    "sampling_frame_declared": false,
+    "population_estimator_declared": false,
+    "population_confidence_rule_declared": false,
+    "interpretation": "FINITE_DECLARED_SCOPE"
+  },
+  "theorem": {
+    "premises": [
+      "THE_FROZEN_AGENCY_PROTOCOL_REQUIRES_A_FROZEN_REPRESENTATIVE_PORTFOLIO_EXERCISING_EVERY_DECLARED_DIMENSION.",
+      "THE_FROZEN_PROTOCOL_DOES_NOT_DECLARE_A_LARGER_UNDERLYING_TASK_POPULATION_SAMPLING_FRAME_POPULATION_ESTIMATOR_OR_CONFIDENCE_RULE.",
+      "THE_GENERIC_MATCHED_PORTFOLIO_SEMANTICS_THEOREM_FORBIDS_SILENTLY_UPGRADING_A_FINITE_DECLARED_ACCEPTANCE_OBJECT_INTO_AN_UNDECLARED_POPULATION_CLAIM.",
+      "THE_VERIFIED_MATCHED_SUCCESS_SCOPE_COMPILER_ALREADY_DEFINES_THE_EXACT_SIX_AGENCY_DIMENSION_BASIS_AND_FAIL_CLOSED_FREEZE_REQUIREMENTS."
+    ],
+    "conclusion": "AGENCY_MATCHED_SUCCESS_NONINFERIOR_AND_ITS_SCOPE_SAFETY_CONJUNCT_MUST_BE_ADJUDICATED_ON_A_RESULT_BLIND_CONTENT_ADDRESSED_FINITE_PORTFOLIO_THAT_COVERS_ALL_SIX_DECLARED_DIMENSIONS__NO_POPULATION_INFERENCE_IS_REQUIRED_BY_THE_FROZEN_PROTOCOL.",
+    "ceiling_route": "IF_THE_FROZEN_COMPLETE_FINITE_PORTFOLIO_YIELDS_BRAIN_BINARY_SUCCESS_1_ON_EVERY_CASE_AND_ZERO_INVALID_ACTION_UNRECOVERED_FAILURE_AND_DUPLICATE_OR_CONFLICTING_WORK_REGRESSIONS_UNDER_THE_PREDECLARED_SCORERS__THEN_BRAIN_IS_AT_THE_OBJECTIVE_CEILING_ON_EVERY_LOAD_BEARING_METRIC_AND_NO_OPUS_CASE_EXECUTION_IS_REQUIRED.",
+    "comparator_rule": "ONLY_BRAIN_FAILURE_OR_NONCEILING_RESIDUALS_REMAIN_COMPARATOR_RELEVANT_AFTER_A_VALID_BRAIN_FIRST_EXECUTION."
+  },
+  "existing_mechanism_effect": {
+    "individual_declared_dimension_missing_mechanism_count": 0,
+    "cross_component_interaction_mechanism_residual": "STRUCTURALLY_CLOSED_FOR_SOUNDLY_COMPILED_EXPLICIT_COMPONENT_CONTRACTS",
+    "remaining_load_bearing_work": "FREEZE_ONE_COMPLETE_FINITE_AGENCY_PORTFOLIO__PROVE_EACH_CASE_SOUNDLY_COMPILES_INTO_THE_BOUND_EXPLICIT_COMPONENT_CONTRACTS__RUN_BRAIN_FIRST_WITH_PREDECLARED_SCORERS__COMPARE_TO_OPUS_ONLY_ON_ANY_NONCEILING_RESIDUAL."
+  },
+  "scheduler_effect": [
+    "DELETE_UNDECLARED_AGENCY_POPULATION_INFERENCE_FROM_THE_CRITICAL_PATH.",
+    "DO_NOT_QUERY_OPUS_ON_AGENCY_CASES_BEFORE_BRAIN_FIRST_FINITE_PORTFOLIO_EXECUTION.",
+    "DO_NOT_RESEARCH_NEW_BROWSER_TOOL_DELEGATION_RECOVERY_OR_CONTINUITY_MECHANISMS_WITHOUT_A_CONSTRUCTIVE_PORTFOLIO_COMPILATION_COUNTEREXAMPLE.",
+    "NEXT_ONLY_LIVE_AGENCY_OBJECT__RESULT_BLIND_CONTENT_ADDRESSED_SIX_DIMENSION_FINITE_PORTFOLIO_PLUS_SOUND_EXPLICIT_CONTRACT_COMPILATION."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_AN_ACTUAL_COMPLETE_AGENCY_CASE_MANIFEST_IS_ALREADY_FROZEN.",
+    "NO_CLAIM_ALL_RAW_AGENCY_TASK_SEMANTICS_ALREADY_COMPILE_SOUNDLY.",
+    "NO_CLAIM_EITHER_AGENCY_ACCEPTANCE_PREDICATE_IS_PROVED.",
+    "NO_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
