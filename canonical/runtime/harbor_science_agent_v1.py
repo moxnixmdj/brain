@@ -14,6 +14,8 @@ from typing import Any
 from canonical.runtime import harbor_science_planner_v1 as science_planner
 from canonical.runtime.harbor_command_policy import validate_environment_command
 from canonical.runtime.harbor_environment_transport import HarborEnvironmentTransport
+from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract as compile_raw_task_contract
+from canonical.runtime.raw_task_acceptance_residual_localizer_v1 import localize as localize_raw_task_acceptance
 
 try:
     from harbor.agents.base import BaseAgent
@@ -173,6 +175,39 @@ async def _declared_output_gate(
             })
     return failures
 
+MAX_RAW_TASK_OBLIGATIONS = 64
+
+def _compile_lossless_task_scope(goal: str) -> tuple[dict[str, Any], dict[str, Any], list[dict[str, Any]]]:
+    """Compile the exact raw goal into non-droppable Brain-owned acceptance scope."""
+    contract = compile_raw_task_contract(
+        goal,
+        source_id="HARBOR_SCIENCE_GOAL",
+        routing_target_effects=["SCIENCE_CANDIDATE_READY"],
+    )
+    if contract.get("pass") is not True:
+        raise RuntimeError("SCIENCE_RAW_TASK_CONTRACT_FAILED:" + ";".join(contract.get("errors") or []))
+    acceptance = contract.get("acceptance_contract") or {}
+    obligations = acceptance.get("obligations") or []
+    if not obligations or len(obligations) > MAX_RAW_TASK_OBLIGATIONS:
+        raise RuntimeError("SCIENCE_RAW_TASK_OBLIGATION_COUNT_INVALID")
+    localization = localize_raw_task_acceptance(contract)
+    if localization.get("pass") is not True:
+        raise RuntimeError("SCIENCE_RAW_TASK_LOCALIZATION_FAILED:" + str(localization.get("reason") or "UNKNOWN"))
+    localized = {row.get("obligation_id"): row for row in localization.get("obligations") or []}
+    prompt_rows: list[dict[str, Any]] = []
+    for row in obligations:
+        oid = row.get("obligation_id")
+        if oid not in localized:
+            raise RuntimeError("SCIENCE_RAW_TASK_LOCALIZATION_INCOMPLETE")
+        prompt_rows.append({
+            "obligation_id": oid,
+            "segment_sha256": row.get("segment_sha256"),
+            "text": row.get("text"),
+            "acceptance_route_status": localized[oid].get("status"),
+            "acceptance_receipt_required": True,
+        })
+    return contract, localization, prompt_rows
+
 def _nonempty_strings(value: Any, *, maximum: int, field: str) -> list[str]:
     if not isinstance(value, list) or not value or len(value) > maximum:
         raise RuntimeError(f"SCIENCE_{field}_INVALID")
@@ -259,6 +294,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
     if not goal:
         raise ValueError("SCIENCE_GOAL_REQUIRED")
     max_cycles = max(1, min(int(max_cycles), MAX_CYCLES))
+    raw_task_contract, raw_task_localization, raw_task_obligations = _compile_lossless_task_scope(goal)
     brain_deliverables = _brain_mandated_deliverables(goal)
     mandatory_requirement_ids = list(brain_deliverables)
     requirements: list[str] | None = None
@@ -288,6 +324,10 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "independent verification resolves every frozen material requirement. finish_summary is optional "
             "descriptive metadata only and never execution or finish authority. "
             f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
+            "Brain lossless raw-task obligations (non-droppable; routing labels never equal acceptance): "
+            + json.dumps(raw_task_obligations, sort_keys=True)
+            + "\nEvery raw obligation remains acceptance-pending until exact candidate-bound independent acceptance exists. "
+            "Use the obligation text as authoritative semantic scope; material_requirements and covers are routing metadata only.\n"
             "Brain-declared authoritative local inputs: "
             + json.dumps(declared_inputs, sort_keys=True)
             + "\nBrain-mandated explicit deliverables (requirement ID -> path): "
@@ -331,10 +371,16 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             else:
                 return {
                     "schema": SCHEMA,
-                    "status": "FINISHED",
+                    "status": "SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER",
                     "controller_mode": "BRAIN_OWNED_RESEARCH_CONTROL__OPTIONAL_GENERAL_COGNITION_SUBSTRATE",
                     "model_has_terminal_authority": False,
-                    "finish_authority": "BRAIN_VERIFIED_STATE",
+                    "task_completion_claimed": False,
+                    "finish_authority": "RAW_TASK_ACCEPTANCE_V1_REQUIRED",
+                    "raw_task_contract_sha256": raw_task_contract.get("task_contract_sha256"),
+                    "raw_task_required_obligation_count": len(raw_task_obligations),
+                    "raw_task_objective_route_obligation_count": raw_task_localization.get("objective_route_obligation_count"),
+                    "raw_task_semantic_residual_obligation_count": raw_task_localization.get("semantic_residual_obligation_count"),
+                    "raw_task_acceptance_receipts_present": False,
                     "material_requirements": requirements,
                     "brain_mandated_deliverables": brain_deliverables,
                     "resolved_requirements": sorted(resolved),
@@ -437,16 +483,22 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                 continue
             return {
                 "schema": SCHEMA,
-                "status": "FINISHED",
+                "status": "SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER",
                 "controller_mode": "BRAIN_OWNED_RESEARCH_CONTROL__OPTIONAL_GENERAL_COGNITION_SUBSTRATE",
                 "model_has_terminal_authority": False,
-                "finish_authority": "BRAIN_VERIFIED_STATE",
+                "task_completion_claimed": False,
+                "finish_authority": "RAW_TASK_ACCEPTANCE_V1_REQUIRED",
+                "raw_task_contract_sha256": raw_task_contract.get("task_contract_sha256"),
+                "raw_task_required_obligation_count": len(raw_task_obligations),
+                "raw_task_objective_route_obligation_count": raw_task_localization.get("objective_route_obligation_count"),
+                "raw_task_semantic_residual_obligation_count": raw_task_localization.get("semantic_residual_obligation_count"),
+                "raw_task_acceptance_receipts_present": False,
                 "material_requirements": requirements,
                 "brain_mandated_deliverables": brain_deliverables,
                 "resolved_requirements": sorted(resolved),
                 "cycles": cycle + 1,
                 "trace": trace,
-                "summary": "Brain independently verified all frozen material requirements.",
+                "summary": "Brain verified routing state and declared outputs; exact raw-task acceptance remains external-verifier pending.",
                 "planner_model_last": planned.get("model"),
             }
 
@@ -460,6 +512,11 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         "resolved_requirements": sorted(resolved),
         "cycles": max_cycles,
         "trace": trace,
+        "task_completion_claimed": False,
+        "finish_authority": "RAW_TASK_ACCEPTANCE_V1_REQUIRED",
+        "raw_task_contract_sha256": raw_task_contract.get("task_contract_sha256"),
+        "raw_task_required_obligation_count": len(raw_task_obligations),
+        "raw_task_acceptance_receipts_present": False,
         "summary": "",
     }
 
