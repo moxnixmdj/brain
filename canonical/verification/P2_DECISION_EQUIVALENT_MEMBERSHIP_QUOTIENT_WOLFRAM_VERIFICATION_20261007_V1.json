@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_P2_DECISION_EQUIVALENT_MEMBERSHIP_QUOTIENT_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_FINITE_COUNTERMODEL_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/P2_DECISION_EQUIVALENT_MEMBERSHIP_QUOTIENT_20261007_V1.json",
+    "branch": "truth-repair/p2-decision-equivalent-membership-20261007-v1"
+  },
+  "wolfram_results": {
+    "explicit_argmax": "p0",
+    "hidden_dimension_can_change_scores_while_preserving_argmax": true,
+    "full_semantic_equality_required_for_argmax_preservation": false,
+    "another_hidden_dimension_can_flip_argmax": true,
+    "common_top_policy_across_preserve_and_flip_worlds": []
+  },
+  "verified": [
+    "FULL EVALUATOR SCORE OR SEMANTIC EQUALITY IS NOT NECESSARY FOR PRESERVING THE P2 TOP POLICY.",
+    "A LOAD_BEARING OMITTED DIMENSION MAY ALTER ABSOLUTE SCORES WITHOUT ALTERING THE TERMINALLY ADEQUATE OR TOP POLICY.",
+    "WHEN AN OMITTED DIMENSION CHANGES THE ADEQUATE POLICY CLASS, A COMMON POLICY CERTIFICATE OR TRUTHFUL SELECTED DISCRIMINATOR IS REQUIRED.",
+    "THE GENERAL SELECTED_SEMANTIC MINIMUM_INFORMATION LOWER BOUND SPECIALIZES CLEANLY TO P2 MEMBERSHIP."
+  ],
+  "hard_nonclaims": [
+    "NO GLOBAL PROFESSIONAL SCOPE CLOSURE",
+    "NO U_CLOSURE",
+    "NO TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
