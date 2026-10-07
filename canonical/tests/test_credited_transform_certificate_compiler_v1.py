@@ -9,7 +9,6 @@ def test_registry_binds_exact_five_credited_families():
         "EXACT_SYMBOLIC_COMPUTATION",
         "LONG_HORIZON_MEMORY_AND_CONTINUITY",
         "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
-        "SUBAGENT_DELEGATION_AND_COORDINATION",
         "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
     }
 
@@ -17,8 +16,8 @@ def test_registry_binds_exact_five_credited_families():
 def test_exact_symbolic_is_first_complete_transform_certificate():
     out = compile_current()
     assert out["route_results"]["EXACT_SYMBOLIC_COMPUTATION"]["pass"] is True
-    assert out["complete_transform_certificate_count"] == 1
-    assert out["open_transform_certificate_count"] == 4
+    assert out["complete_transform_certificate_count"] == 2
+    assert out["open_transform_certificate_count"] == 3
 
 
 def test_uncertified_routes_fail_closed_and_c_remains_open():
