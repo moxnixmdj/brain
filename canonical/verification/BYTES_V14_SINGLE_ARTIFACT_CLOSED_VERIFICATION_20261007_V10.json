@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V14_SINGLE_ARTIFACT_CLOSED_V10_VERIFICATION",
+  "date": "2026-10-07",
+  "status": "PASS",
+  "carrier": {
+    "provider": "SPRITES",
+    "name": "h100-real-image-v1",
+    "id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3"
+  },
+  "exact_blob": "124bee2bd7ff1d63c40cb8e4ca763e8b6e7de7da",
+  "checks": {
+    "closed_809_class_proof": "PASS",
+    "frozen_cross_capability_regression": {
+      "expression": 6,
+      "scalar": 9,
+      "sequence": 12,
+      "total": 27,
+      "status": "PASS"
+    },
+    "repaired_structural_basis": {
+      "expected": 170,
+      "present": 170,
+      "missing": 0,
+      "extra": 0
+    },
+    "fixed_decoder_search": {
+      "configurations": 2880,
+      "best_payload_bytes": 2751,
+      "roundtrip_exact": true
+    }
+  },
+  "payload_sha256": "b75b3f4f4546b8914edeb00512ebcbe8ca32a0bfd5b56c0e2a57dd3c93fdc370",
+  "baseline": {
+    "merged_v9_blob": "b933a6511f3dd81e32edc4b7e73f1166f3822f21",
+    "payload_bytes": 2951
+  },
+  "delta": {
+    "payload_bytes_saved": 200
+  },
+  "terminal_credit_delta": 0
+}
