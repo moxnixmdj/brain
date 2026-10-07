@@ -1,0 +1,210 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_EVALUATOR_SEMANTICS_SOURCE_AUTHORITY_RECONCILIATION_V1",
+  "date": "2026-10-06",
+  "status": "TRUTH_REPAIR__MIXED_PUBLIC_SOURCE_AUTHORITY__SUBSTANTIVE_BOUNDARIES_CORROBORATED__BLANKET_PRIMARY_SOURCE_LABEL_FALSIFIED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "path": "canonical/governance/PUBLIC_EVALUATOR_SEMANTICS_COMPRESSION_20261006_V1.json",
+    "git_blob_sha": "8228493403426407ad773bd1f51bb64552ddf5c1",
+    "bound_main": "1b5d7f2a6398e0ea9c63c56a2f5e40e9eb471ab5"
+  },
+  "falsified_metadata_claim": {
+    "claim": "PUBLIC_PRIMARY_SOURCE_COMPRESSION",
+    "reason": "NOT_EVERY_LOAD_BEARING_FINDING_IS_CURRENTLY_BOUND_TO_A_BENCHMARK_OWNER_OR_OTHER_PRIMARY_SOURCE__FRONTIERCODE_IS_BOUND_HERE_TO_EPOCH_AI_METHODOLOGY_AND_CHARTOGRAPHY_TO_BENCHLM_PROVIDER_SELF_REPORT_REGISTRY",
+    "repair": "TYPE_SOURCE_AUTHORITY_PER_FINDING__NEVER_PROMOTE_SECONDARY_METHODOLOGY_OR_PROVIDER_SELF_REPORT_TO_PRIMARY_RESULT_EVIDENCE"
+  },
+  "reconciliation": [
+    {
+      "target_family": "TERMINAL_BENCH",
+      "boundary_verdict": "CORROBORATED",
+      "source_authority": "INDEPENDENT_EVALUATOR_METHODOLOGY__NOT_TARGET_OWNER_RESULT_AUTHORITY",
+      "source": "https://artificialanalysis.ai/evaluations/terminalbench-4-0",
+      "establishes": [
+        "TERMINAL_BENCH_4_0_HAS_66_TASKS",
+        "EACH_TASK_HAS_ITS_OWN_TESTS",
+        "TASK_PASS_REQUIRES_EVERY_TEST_TO_PASS",
+        "CURRENT_AA_RUNS_REPORT_PASS_AT_1_OVER_THREE_REPEATS"
+      ],
+      "does_not_establish": [
+        "CANONICAL_BRAIN_TARGET_THRESHOLD_IDENTITY",
+        "OWNER_AUTHORITATIVE_OPUS55_RESULT",
+        "EXACT_TB4_TASK_AND_VERIFIER_BYTES_IN_BRAIN"
+      ]
+    },
+    {
+      "target_family": "OSWORLD_2_1",
+      "boundary_verdict": "CORROBORATED",
+      "source_authority": "BENCHMARK_OWNER_OFFICIAL_REPOSITORY",
+      "sources": [
+        "https://github.com/xlang-ai/OSWorld-V2",
+        "https://github.com/xlang-ai/OSWorld-V2/releases"
+      ],
+      "establishes": [
+        "OSWORLD_V2_1_PINS_CODE_TASK_ASSET_WEBSITE_AND_PROVIDER_IMAGE_REFERENCES_FOR_COMPARABILITY",
+        "OFFICIAL_TASK_IMPLEMENTATION_CLASSES_AND_COMPLETE_ASSETS_ARE_GATED",
+        "MATCHING_RELEASE_COMPONENTS_ARE_REQUIRED_FOR_REPRODUCIBLE_EVALUATION"
+      ],
+      "does_not_establish": [
+        "BRAIN_OSWORLD_SCORE",
+        "OPUS55_SCORE_IDENTITY_WITH_ANY_DIFFERENT_SETUP"
+      ]
+    },
+    {
+      "target_family": "HLE",
+      "boundary_verdict": "CORROBORATED",
+      "source_authority": "BENCHMARK_OWNER_OFFICIAL_REPOSITORY",
+      "source": "https://github.com/centerforaisafety/hle",
+      "establishes": [
+        "HLE_CONTAINS_MULTIPLE_CHOICE_AND_SHORT_ANSWER_ITEMS_SUITABLE_FOR_AUTOMATED_GRADING",
+        "REFERENCE_EVALUATION_INCLUDES_A_SEPARATE_JUDGE_STEP"
+      ],
+      "does_not_establish": [
+        "THE_EXACT_HLE_WITH_TOOLS_TARGET_VARIANT_OR_JUDGE_CONFIGURATION",
+        "COMPLETE_TARGET_CONFIGURATION_IDENTITY"
+      ]
+    },
+    {
+      "target_family": "FINANCE_AGENT_V2",
+      "boundary_verdict": "CORROBORATED",
+      "source_authority": "BENCHMARK_OWNER",
+      "source": "https://www.vals.ai/benchmarks/fabv2",
+      "establishes": [
+        "TEST_SPLIT_IS_PRIVATE_AND_REPORTED_RESULTS_USE_THE_PRIVATE_TEST_SET",
+        "GRADING_USES_WEIGHTED_CHECKS_WITH_DEALBREAKERS",
+        "PRIMARY_SCORE_IS_DEALBREAKER_GATED_SEVERITY_WEIGHTED_PARTIAL_CREDIT",
+        "PER_CHECK_JUDGMENT_USES_A_THREE_MODEL_LLM_JURY",
+        "OPUS55_CURRENT_DISPLAYED_RESULT_IS_58_59_PERCENT"
+      ],
+      "does_not_establish": [
+        "PUBLIC_RECONSTRUCTION_OF_PRIVATE_PER_CONTEXT_EVALUATOR_SEMANTICS",
+        "BRAIN_TARGET_SCORE"
+      ]
+    },
+    {
+      "target_family": "AUTOMATIONBENCH",
+      "boundary_verdict": "CORROBORATED",
+      "source_authority": "BENCHMARK_OWNER_OFFICIAL_REPOSITORY",
+      "source": "https://github.com/zapier/AutomationBench",
+      "establishes": [
+        "PUBLIC_TASKS_ARE_PROGRAMMATICALLY_VERIFIABLE_WITH_ASSERTION_BASED_RUBRICS",
+        "OFFICIAL_LEADERBOARD_USES_A_SEPARATE_HELD_OUT_PRIVATE_SET",
+        "PRIVATE_SET_IS_NOT_RELEASED_AND_LOCAL_PUBLIC_SCORES_NEED_NOT_MATCH_OFFICIAL_SCORES_ONE_TO_ONE"
+      ],
+      "does_not_establish": [
+        "PRIVATE_TASK_INSTANCES",
+        "BRAIN_PRIVATE_SET_SCORE"
+      ]
+    },
+    {
+      "target_family": "GDPVAL",
+      "boundary_verdict": "CORROBORATED",
+      "source_authority": "BENCHMARK_OWNER",
+      "source": "https://openai.com/index/gdpval/",
+      "establishes": [
+        "STANDARD_PERFORMANCE_GRADING_RELIES_ON_BLIND_EXPERT_COMPARISONS",
+        "TASK_WRITER_RUBRICS_ADD_CONSISTENCY",
+        "AUTOMATED_GRADER_ESTIMATES_EXPERT_PREFERENCE_AND_IS_NOT_USED_AS_A_REPLACEMENT_FOR_EXPERT_GRADERS"
+      ],
+      "does_not_establish": [
+        "A_DETERMINISTIC_PUBLIC_UTILITY_FUNCTION_EQUIVALENT_TO_EXPERT_PREFERENCE",
+        "THE_FROZEN_OPUS55_GDPVAL_AA_TARGET_RESULT_IDENTITY"
+      ]
+    },
+    {
+      "target_family": "AA_BRIEFCASE",
+      "boundary_verdict": "CORROBORATED",
+      "source_authority": "BENCHMARK_OWNER",
+      "sources": [
+        "https://artificialanalysis.ai/articles/aa-briefcase/",
+        "https://artificialanalysis.ai/evaluations/aa-briefcase"
+      ],
+      "establishes": [
+        "AGGREGATE_AA_BRIEFCASE_COMBINES_RUBRIC_PERFORMANCE_WITH_PAIRWISE_ANALYTICAL_QUALITY_AND_PRESENTATION_JUDGMENTS",
+        "PAIRWISE_QUALITY_DIMENSIONS_ARE_LOAD_BEARING_TO_AGGREGATE_ELO"
+      ],
+      "does_not_establish": [
+        "A_PUBLIC_DETERMINISTIC_REPLACEMENT_FOR_PAIRWISE_PREFERENCE",
+        "BRAIN_FROZEN_EPOCH_SCORE"
+      ]
+    },
+    {
+      "target_family": "FRONTIERCODE",
+      "boundary_verdict": "CORROBORATED_WITH_SOURCE_TIER_LIMIT",
+      "source_authority": "SECONDARY_INDEPENDENT_BENCHMARK_COMPILATION",
+      "source": "https://epoch.ai/benchmarks/frontiercode",
+      "establishes": [
+        "REPORTED_METHODOLOGY_USES_HELD_OUT_TESTS_AND_MAINTAINER_AUTHORED_RUBRICS",
+        "RUBRIC_COVERS_CORRECTNESS_REGRESSION_BUILD_STYLE_AND_PROJECT_CONVENTIONS",
+        "BLOCKER_FAILURE_ZEROES_THE_RUBRIC_SCORE"
+      ],
+      "does_not_establish": [
+        "BENCHMARK_OWNER_PRIMARY_AUTHORITY",
+        "PRIVATE_HELD_OUT_TEST_OR_RUBRIC_BYTES",
+        "BRAIN_OR_TARGET_SCORE_RECEIPT"
+      ]
+    },
+    {
+      "target_family": "MYSTERYMECHANISM",
+      "boundary_verdict": "CORROBORATED",
+      "source_authority": "BENCHMARK_OWNER",
+      "source": "https://www.vals.ai/benchmarks/mysterymechanism",
+      "establishes": [
+        "MECHANISMS_ARE_SEALED_FROM_THE_AGENT_AND_EXPERIMENT_BUDGET_IS_BOUNDED",
+        "PUBLIC_EXAMPLES_EXPOSE_TASK_SHAPE_WITHOUT_VALIDATION_OR_TEST_MECHANISM",
+        "SUBMISSIONS_ARE_EXECUTABLE_LAWS_EVALUATED_AGAINST_PRIVATE_MECHANISM_BEHAVIOR",
+        "OPUS55_CURRENT_DISPLAYED_RESULT_IS_49_55_PERCENT"
+      ],
+      "does_not_establish": [
+        "PRIVATE_MECHANISMS_OR_TEST_PROBES",
+        "BRAIN_TARGET_SCORE"
+      ]
+    },
+    {
+      "target_family": "CHARTOGRAPHY_TOOLS",
+      "boundary_verdict": "CORROBORATED_WITH_SOURCE_TIER_LIMIT",
+      "source_authority": "SECONDARY_PUBLIC_REGISTRY_OF_PROVIDER_SELF_REPORTS",
+      "source": "https://benchlm.ai/benchmarks/chartographywithtools",
+      "establishes": [
+        "THE_CURRENT_SURFACED_OPUS55_89_0_ROW_IS_CLASSIFIED_AS_PROVIDER_SELF_REPORTED",
+        "ZERO_OF_THE_SURFACED_ROWS_ARE_IDENTIFIED_THERE_AS_BENCHMARK_OWNER_OR_INDEPENDENT_RUNS"
+      ],
+      "does_not_establish": [
+        "INDEPENDENT_OPUS55_SCORE_RECEIPT",
+        "BENCHMARK_OWNER_PRIMARY_RESULT",
+        "BRAIN_SCORE"
+      ]
+    }
+  ],
+  "global_verdict": {
+    "semantic_boundary": "PASS_WITH_SOURCE_AUTHORITY_CORRECTION",
+    "blanket_primary_source_status": "FALSIFIED",
+    "scarce_astra_effect": [
+      "DO_NOT_SPEND_ASTRA_TO_REDISCOVER_THE_PUBLISHED_METHODOLOGY_FACTS_ABOVE",
+      "DO_NOT_USE_ASTRA_TO_GUESS_PRIVATE_SCORES_OR_PRIVATE_TASK_CONTENT",
+      "RESERVE_ASTRA_FOR_BROAD_E_OR_M_SEMANTIC_CLASSIFICATION_CONTEXT_GENERATORS_OR_COUNTEREXAMPLES_NOT_ALREADY_SETTLED_BY_PUBLIC_SOURCES"
+    ],
+    "external_result_effect": [
+      "PRIVATE_OR_PREFERENCE_BEARING_TARGET_SCORE_ATOMS_STILL_REQUIRE_AUTHENTICATED_RESULT_EVIDENCE_OR_A_STRONGER_SCOPE_COMPLETE_PROOF",
+      "SECONDARY_OR_PROVIDER_SELF_REPORTED_ROWS_MUST_NOT_BE_PROMOTED_TO_INDEPENDENT_RESULT_RECEIPTS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_PUBLIC_EVALUATOR_SEMANTICS_ARE_COMPLETE",
+    "NO_CLAIM_ANY_E_CANDIDATE_IS_FULLY_CERTIFIED",
+    "NO_CLAIM_ANY_PRIVATE_TARGET_SCORE_IS_RECONSTRUCTED",
+    "NO_CLAIM_CURRENT_BRAIN_DOMINATES_OPUS55",
+    "NO_OPEN_TRUTH_OBLIGATION_DELETED",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "THIS_RECONCILIATION_USES_LIVE_PUBLIC_SOURCE_OBSERVATIONS_AND_IS_NOT_A_CONTENT_ADDRESSED_SNAPSHOT_OF_THOSE_REMOTE_PAGES"
+  ],
+  "accounting": {
+    "classification": "TRUTH_REPAIR_EXTERNAL_SOURCE_RECONCILIATION",
+    "astra_access_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
