@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_UNRESTRICTED_SUPERDOMAIN_DOMINANCE_NO_FREE_LUNCH_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_COUNTERMODEL_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/UNRESTRICTED_SUPERDOMAIN_DOMINANCE_NO_FREE_LUNCH_20261007_V1.json",
+    "branch": "truth-repair/unrestricted-superdomain-dominance-no-free-lunch-20261007-v1",
+    "current_candidate_commit": "fea23edf7fa20f2ef844189155b7aea47ce3825b"
+  },
+  "finite_model": {
+    "context": "c",
+    "actions": [
+      "a0",
+      "a1"
+    ],
+    "brain_action": "a0",
+    "constructed_target_action": "a1",
+    "utility": {
+      "a0": 0,
+      "a1": 1
+    },
+    "brain_value": 0,
+    "target_value": 1,
+    "brain_dominates_target": false
+  },
+  "verified": [
+    "AN UNRESTRICTED TARGET CLASS CONTAINING ALL INTERFACE_ADMISSIBLE POLICIES CAN ALWAYS CONTAIN A TERMINALLY DISTINCT POLICY THAT A FIXED BRAIN POLICY DOES NOT DOMINATE ON SOME ADMISSIBLE UTILITY.",
+    "INTERFACE COVERAGE ALONE DOES NOT IDENTIFY TARGET STRUCTURE.",
+    "A SOUND GLOBAL A/L1 CLOSURE ROUTE NEEDS TARGET STRUCTURAL RESTRICTION, COMPLETE SPECIFICATION, FINITE EXHAUSTION, OR EQUIVALENT INFORMATION."
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM ACTUAL OPUS55 IS THE CONSTRUCTED ADVERSARIAL TARGET.",
+    "NO CLAIM RESTRICTED SUPERDOMAIN DOMINANCE IS IMPOSSIBLE.",
+    "NO TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
