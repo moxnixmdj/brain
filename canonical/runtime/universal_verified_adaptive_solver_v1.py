@@ -378,7 +378,9 @@ def run(
 ) -> dict[str, Any]:
     """Run until solved, falsified, or an untrusted proposal/information update is needed.
 
-    verified_facts must come from the caller's persistent verified state store.
+    Raw cross-run verified_facts are currently rejected because no authenticated
+    resume-state receipt has yet been supplied to this API. State accumulated
+    inside one run remains trusted only through the verifier/effect gates.
     This function never treats proposal text as a fact.
     """
     try:
@@ -388,10 +390,15 @@ def run(
         initial = problem.get("initial_facts", [])
         if not isinstance(initial, list):
             raise UniversalSolverError("INITIAL_FACTS_INVALID")
-        current = sorted(set(initial) | {str(x) for x in verified_facts if isinstance(x, str) and x})
+        external_resume = [str(x) for x in verified_facts if isinstance(x, str) and x]
+        if external_resume:
+            raise UniversalSolverError("RAW_VERIFIED_FACT_RESUME_FORBIDDEN__AUTHENTICATED_STATE_RECEIPT_REQUIRED")
+        current = sorted(set(initial))
         target = problem.get("target_effects", [])
         if not isinstance(target, list) or not target:
             raise UniversalSolverError("TARGET_EFFECTS_REQUIRED")
+        if set(target) & set(current):
+            raise UniversalSolverError("TARGET_EFFECT_MAY_NOT_BE_SELF_ASSERTED_AS_INITIAL_FACT")
         proposals = proposal_packets if isinstance(proposal_packets, Mapping) else {}
 
         trace: list[dict[str, Any]] = []
