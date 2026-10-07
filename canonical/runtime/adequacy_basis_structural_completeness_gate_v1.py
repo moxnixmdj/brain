@@ -6,11 +6,13 @@ A policy manifest is structurally complete only when:
 - all context-membership obligations are bound by admission;
 - every candidate policy either conditions on or independently discharges every
   adequacy/hard-constraint obligation;
-- evidence-authority and terminal-accounting obligations are bound; and
-- a separate certificate reference asserts completeness of the candidate policy set.
+- evidence-authority and terminal-accounting obligations are bound.
 
-Certificate IDs are references, never self-verification. This closes silent
-contract-field omission, not semantic truth or policy adequacy.
+Candidate-policy-set completeness is deliberately NOT required for positive
+adequacy: one sound resource-admissible positive policy cover is sufficient.
+Policy-set completeness remains relevant only to negative absence/global
+minimality claims. Certificate IDs are references, never self-verification.
+This closes silent contract-field omission, not semantic truth or policy adequacy.
 """
 from __future__ import annotations
 
@@ -169,8 +171,7 @@ def verify_policy_manifest(contract: Any, contract_schema: Any, manifest: Any) -
         errors.append("TERMINAL_ACCOUNTING_OBLIGATION_UNBOUND:" + missing)
 
     policy_set_cert = manifest.get("candidate_policy_set_complete_certificate_id")
-    if not isinstance(policy_set_cert, str) or not policy_set_cert.strip():
-        errors.append("CANDIDATE_POLICY_SET_COMPLETENESS_CERTIFICATE_MISSING")
+    policy_set_cert_present = isinstance(policy_set_cert, str) and bool(policy_set_cert.strip())
 
     policies = manifest.get("policies")
     if not isinstance(policies, list) or not policies:
@@ -245,7 +246,10 @@ def verify_policy_manifest(contract: Any, contract_schema: Any, manifest: Any) -
         "behavior_id": behavior_id,
         "compiled_contract": compiled,
         "policy_results": policy_results,
+        "candidate_policy_set_completeness_reference_present": policy_set_cert_present,
         "candidate_policy_set_completeness_self_verified": False,
+        "negative_policy_absence_or_global_minimality_authorized": False,
+        "positive_cover_does_not_require_policy_set_completeness": True,
         "certificate_truth_self_verified": False,
         "semantic_truth_self_verified": False,
         "structural_field_omission_closed": not errors,
