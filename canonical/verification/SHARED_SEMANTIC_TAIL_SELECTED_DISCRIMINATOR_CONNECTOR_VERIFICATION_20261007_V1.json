@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_SHARED_SEMANTIC_TAIL_SELECTED_DISCRIMINATOR_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_SOURCE_BINDING_AND_COUNTERMODEL_REPLAY_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SHARED_SEMANTIC_TAIL_SELECTED_DISCRIMINATOR_TRUTH_REPAIR_20261007_V1.json",
+    "git_blob_sha": "15048c3627cb19e7425139c93a0d51e9aeb6850b",
+    "pull_request": 2738
+  },
+  "source_bindings": {
+    "v19_live_reconciliation": "c1b8f0a4c57cb298f40b474173bca089cccc727e",
+    "selected_discriminator_coalescence": "40407100382be8ffd729f4ef1d15a5f0068bedff",
+    "wolfram_verification": "7529a473e04ccf38274457e108f926b83b65bf50"
+  },
+  "verified": {
+    "all_source_blob_bindings_exact": true,
+    "wolfram_subject_exact": true,
+    "common_policy_coalescence_countermodel_pass": true,
+    "unused_semantic_dimension_deletion_countermodel_pass": true,
+    "complete_semantic_content_not_separately_required": true,
+    "minimum_selected_discriminator_interface_preserved": true,
+    "positive_adequacy_for_every_selected_policy_cell_preserved": true,
+    "terminal_order_and_hard_constraint_facts_preserved": true,
+    "fail_closed_when_no_sound_policy_cover_preserved": true,
+    "generic_new_semantic_implementation_generator_required": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_SELECTED_DISCRIMINATORS_ARE_BOUND_FOR_ALL_RESIDUAL_CONTEXTS",
+    "NO_CLAIM_SHARED_SEMANTIC_TAIL_IS_CLOSED",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
