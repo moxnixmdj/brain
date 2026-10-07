@@ -34,7 +34,7 @@ MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
 
 _TRIVIAL_VERIFY_RE = re.compile(
-    r"^\\s*(?:(?:echo|printf)\\b.*|true|:)\\s*$",
+    r"^\s*(?:(?:echo|printf)\b.*|true|:)\s*$",
     re.IGNORECASE | re.DOTALL,
 )
 _MATERIAL_VERIFY_TOKENS = (
