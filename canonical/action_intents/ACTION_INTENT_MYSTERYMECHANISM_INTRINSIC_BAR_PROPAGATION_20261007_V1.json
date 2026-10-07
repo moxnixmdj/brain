@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "MYSTERYMECHANISM-INTRINSIC-BAR-PROPAGATION-20261007-SOL",
+  "date": "2026-10-07",
+  "status": "ACTIVE_PROOF_ONLY__ZERO_CREDIT__SCHEDULER_TRUTH_REPAIR",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "7cd976c70d265126ef3d288fd252ecd9c7403db7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "CURRENT_TERMINAL_AUTHORITY_STILL_PHRASES_UNKNOWN_DOMAIN_AS_FIXED_MYSTERYMECHANISM_49_55_INTRINSIC_BAR_AFTER_CAUSAL_ATTRIBUTION_REPAIR",
+  "action_kind": "SCHEDULER_TRUTH_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::MYSTERYMECHANISM_INTRINSIC_BAR_PROPAGATION",
+  "expected_parent_frontier_change": "Delete the stale fixed-49.55 intrinsic wording from the live scheduler and replace it with the truthful actor-attributed target-relative residual: intrinsic Opus 5.5 unknown-mechanism noninferiority or a stronger full-scope certificate. Preserve family/global/terminal open state and zero credit.",
+  "highest_leverage_now": true,
+  "stop_condition": "CURRENT_TERMINAL_AUTHORITY no longer treats deployed 49.55 as an intrinsic Opus 5.5 bar; 49.10 is not promoted to a global target; the scheduler retains only a causally matched intrinsic target evidence route or stronger target-free full-scope certificate.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_bindings": {
+    "current_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "ea4b79620c09d31fc7d59d4b2fdfe6b65069e312"
+    },
+    "fallback_truth_repair": {
+      "path": "canonical/governance/MYSTERYMECHANISM_FALLBACK_ATTRIBUTION_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "40b4f0deadf1d8f3e392cbb026cdd791005c0e47"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/MYSTERYMECHANISM_FALLBACK_ATTRIBUTION_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "d6fd272c59188a5296d84a6a10dcacbcc70ef1f1"
+    }
+  },
+  "tournament": {
+    "proposal_id": "P_PROPAGATE_CAUSAL_ATTRIBUTION_TO_LIVE_UNKNOWN_DOMAIN_SCHEDULER",
+    "falsifier_id": "F_FIND_ACTOR_ATTRIBUTED_EVIDENCE_PROVING_DEPLOYED_49_55_IS_INTRINSIC_OPUS55",
+    "decisive_question": "Does any bound evidence justify treating the deployed 49.55 score as an intrinsic Opus 5.5 capability bar after the fallback-attribution repair?",
+    "observed_answer": "NO__BOUND_REPAIR_EXPLICITLY_INVALIDATES_THAT_INFERENCE"
+  },
+  "recursive_obs": {
+    "real_outcome": "Make the live scheduler target the real unknown-domain evidence gap instead of an already-falsified deployed-system proxy.",
+    "selected_route": "PROPAGATE_ALREADY_VERIFIED_CAUSAL_ATTRIBUTION_REPAIR_INTO_CURRENT_SCHEDULER_ONLY",
+    "deleted_routes": [
+      "RERUN_MYSTERYMECHANISM",
+      "RESEARCH_PUBLIC_SCOPE_SUPERSET_WITH_UNCHANGED_SOURCE_SET",
+      "PROMOTE_49_10_TO_GLOBAL_INTRINSIC_TARGET",
+      "LEAVE_STALE_49_55_WORDING_IN_LIVE_AUTHORITY"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The causal repair and arithmetic verification are already canonical; only scheduler propagation is missing."
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
