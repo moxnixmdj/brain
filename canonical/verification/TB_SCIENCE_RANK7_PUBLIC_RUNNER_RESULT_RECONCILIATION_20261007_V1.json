@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK7_PUBLIC_RUNNER_RESULT_RECONCILIATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_PUBLIC_RUNNER_RESULT_RECONCILED__RANK7_FINAL_ZERO__NO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "slot_id": "terminal-bench-science/reactor-safety-control::trial-0",
+    "task_name": "terminal-bench-science/reactor-safety-control",
+    "task_digest": "sha256:96c8c5764042dca01ba0b7bd127cf2587f8df538a335f36abf6b4c200f0bb669"
+  },
+  "exact_route_bindings": {
+    "authority_blob": "544cc48f21f6f0736ffdb1c3288761bff6553b56",
+    "planner_blob": "3d6f50be86cc61a9b907a04d8f3fb161c2d40e99",
+    "planner_repair_verification_blob": "dcada0f538ace33e13bf716bdca5fdd02aae2561",
+    "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "controller_blob": "5557efd21f1a433ad16766def3775a79c459784b",
+    "source_gate_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37606898246,
+    "workflow_job_id": 112744475576,
+    "github_run_attempt": 1,
+    "workflow_conclusion": "success",
+    "receipt_github_sha": "3dec87f1ad4d754e1c4b635c9ff5b2fe1bf3fc10",
+    "artifact_id": 11474839915,
+    "artifact_name": "tb-science-reactor-safety-control-trial-0-rank7",
+    "artifact_size_bytes": 19540,
+    "artifact_digest": "sha256:8866fd656285ede4081fecc99bd952680c59f63028a3ceb58c48013e3594fe5d",
+    "artifact_expired": false
+  },
+  "irreversible_receipt": {
+    "schema": "PROJECT_BRAIN_TB_SCIENCE_TERMINAL_SLOT_RECEIPT_RANK7_V1",
+    "status": "FINAL_ZERO",
+    "reward": 0,
+    "errors": [],
+    "exception_info": [],
+    "harbor_step_outcome": "success",
+    "execution_authority_consumed": true,
+    "rerun_credit": false,
+    "incremental_spend_usd": 0,
+    "promotion_authority": false,
+    "result_hashes": {
+      "jobs/reactor-safety-control-trial-0/reactor-safety-control-trial-0/reactor-safety-control__YcmHVm4/result.json": "96b5977f42902fcba7d601cf565bd67da313d96b8186403fb33c2f46dae6377a",
+      "jobs/reactor-safety-control-trial-0/reactor-safety-control-trial-0/result.json": "87b6b8a2ae06eb53e8f1db0e9ee085a321fe16c03ef51c17b3c2f4351978a71e"
+    }
+  },
+  "deduction": {
+    "exact_verifier_reward_present": true,
+    "scored_success": false,
+    "slot_is_irreversibly_consumed": true,
+    "rerun_for_credit_forbidden": true,
+    "task_capability_negative_evidence_for_this_exact_slot": true,
+    "predicate_pass_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_RETRY_OR_REPLACEMENT_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 1,
+    "terminal_credit_delta": 0
+  }
+}
