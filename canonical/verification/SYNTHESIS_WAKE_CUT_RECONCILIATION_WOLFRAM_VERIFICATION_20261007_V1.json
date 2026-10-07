@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_WAKE_CUT_RECONCILIATION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_EXACT_DELTA_AND_SET_COVER_PASS__15_INFORMATION_WAKES__14_POSITIVE_REALITY_CLASSES__9_LANES__ZERO_CREDIT",
+  "subjects": [
+    "canonical/governance/ABC_CURRENT_BOUND_MINIMUM_IRREDUCIBLE_INFORMATION_CUT_20261007_V3.json",
+    "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V5.json"
+  ],
+  "verified": {
+    "predecessor_information_wake_count": 16,
+    "deleted_information_wake": "SYNTHESIS_QUALITY_OUTSIDE_CACHED_CELL",
+    "current_information_wake_count": 15,
+    "predecessor_positive_reality_class_count": 15,
+    "deleted_positive_reality_class": "SYNTHESIS_MATCHED_QUALITY_COVERAGE",
+    "current_positive_reality_class_count": 14,
+    "current_lane_count": 9,
+    "exact_minimum_lane_count": 9,
+    "unique_minimum_lane_cover": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5",
+      "L6",
+      "L7",
+      "L8",
+      "L9"
+    ],
+    "l9_survives_because": "DENSE_NONCHART_REMAINS_UNIQUELY_COVERED_BY_L9"
+  },
+  "boundary": [
+    "SYNTHESIS_CONTEXTS_REMAIN_IN_U_UNTIL_SOUND_SEMANTIC_ADMISSION_AND_ADEQUACY_COVER_IS_SCOPE_COMPLETE.",
+    "THIS_REPAIR_REMOVES_ONLY_A_DISTINCT_REALITY_WAKE_AND_DOES_NOT CLOSE_SYNTHESIS.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
