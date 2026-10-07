@@ -322,3 +322,69 @@ def test_repeated_independently_verified_success_induces_candidate_only(tmp_path
     assert out["current_episode_verified"] is True
     assert out["skill_candidate"]["status"] == "EXECUTABLE_SKILL_CANDIDATE_ONLY"
     assert out["skill_candidate_reuse_authorized"] is False
+
+
+def test_effectful_partial_progress_requires_authenticated_resume_before_later_proposal(tmp_path):
+    intermediate = ["INTERMEDIATE"]
+    effect_cap = {
+        "id": "write-first",
+        "requires": [],
+        "provides": intermediate,
+        "cost": 1,
+        "result_fields": [],
+        "action": {
+            "type": "verified_effect_tool",
+            "pre_verifier_id": "TYPED_ACCEPTANCE_PROGRAM_V1",
+            "pre_verifier_payload": {
+                "program": {
+                    "schema": "PROJECT_BRAIN_TYPED_ACCEPTANCE_PROGRAM_SPEC_V1",
+                    "fields": [
+                        {"id": "ok", "type": "boolean", "dimension": "dimensionless", "source": "candidate"},
+                    ],
+                    "accept_when": {"op": "ref", "id": "ok"},
+                },
+                "trusted_values": {},
+            },
+            "executor_id": "H100_VERIFIED_EFFECT_TOOL_REGISTRY_V1",
+            "executor_payload": {
+                "tool_id": "JSON_RECEIPT_WRITER_V1",
+                "sandbox_rel": "partial",
+            },
+            "effect_contract": {
+                "effects": intermediate,
+                "verifier_success_condition": SUCCESS_CONDITIONS["TYPED_ACCEPTANCE_PROGRAM_V1"],
+            },
+        },
+    }
+    final_cap = {
+        "id": "finish-reasoning",
+        "requires": ["INTERMEDIATE"],
+        "provides": ["GOAL"],
+        "cost": 1,
+        "result_fields": [],
+        "action": {
+            "type": "verified_policy",
+            "verifier_id": "EXACT_JSON_V1",
+            "verifier_payload": {"expected": {"answer": 42}},
+            "effect_contract": {
+                "effects": ["GOAL"],
+                "verifier_success_condition": SUCCESS_CONDITIONS["EXACT_JSON_V1"],
+            },
+        },
+    }
+    p = problem([effect_cap, final_cap])
+    bind_all(tmp_path, p)
+    effect_root = tmp_path / "effects-resume"
+    effect_root.mkdir()
+    out = run(
+        p,
+        proposal_packets={
+            "write-first": [{"candidate_values": {"ok": True}}],
+        },
+        repo_root=tmp_path,
+        effect_root=str(effect_root),
+    )
+    assert out["pass"] is False
+    assert out["status"] == "AUTHENTICATED_RESUME_REQUIRED_AFTER_PARTIAL_EFFECTFUL_PROGRESS"
+    assert out["state_capsule_head_hash"]
+    assert out["next_required_input"]["capability_id"] == "finish-reasoning"
