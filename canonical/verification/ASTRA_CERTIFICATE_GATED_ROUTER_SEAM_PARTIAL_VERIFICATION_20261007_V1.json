@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_CERTIFICATE_GATED_ROUTER_SEAM_PARTIAL_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PARTIAL_PASS__ISOLATED_SEAM_LOGIC_EXECUTES__GITHUB_RUNNER_DID_NOT_START__NO_DEPLOYED_CREDIT",
+  "subject": {
+    "pr": 2743,
+    "head_sha": "28ae6b0c974f3b473302d6768731f494672b40fb",
+    "astra_runtime_blob": "b249e76995d687caf9a6f07011d784d14a16d570",
+    "router_runtime_blob": "4b99ef1e95e033badfb21ab7af7355122933224a",
+    "seam_test_blob": "7812aed40e3a6cdca47bf47e53704f02a5675c5b"
+  },
+  "isolated_execution": {
+    "provider": "CHATGPT_ISOLATED_CONTAINER",
+    "internet_used": false,
+    "exercised": [
+      "CERTIFIED_CONTEXT_BOUND_SELECTION",
+      "UNCOVERED_CONTEXT_FAIL_CLOSED",
+      "NON_BOOLEAN_ADMISSION_FAIL_CLOSED"
+    ],
+    "result": "PASS",
+    "boundary": "THE_CONTAINER_REPLAY_EXERCISED_THE_ROUTER_AND_THE_NEW_ASTRA_SEAM_LOGIC_BUT_DID_NOT_EXECUTE_THE_ENTIRE_EXACT_ASTRA_RUNTIME_BLOB_AS_A DEPLOYED MISSION"
+  },
+  "github_runner": {
+    "workflow_run_id": 37563551717,
+    "job_id": 112606037651,
+    "status": "COMPLETED_FAILURE_BEFORE_OBSERVABLE_STEP_EXECUTION",
+    "steps_available": false,
+    "logs_url_available": false,
+    "inference": "NO_CODE_FAILURE_INFERRED_FROM_THIS_RUN__RUNNER_EXECUTION_WAS_NOT_OBSERVED"
+  },
+  "truth_effect": {
+    "source_binding_candidate_exists": true,
+    "seam_logic_isolated_execution_pass": true,
+    "exact_full_astra_blob_runner_replay_closed": false,
+    "deployed_runtime_binding_closed": false,
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false
+  },
+  "next": "OBTAIN_ONE_INDEPENDENT_EXECUTION_OF_THE_EXACT_FULL_ASTRA_BLOB_WITH_THE_SEAM__THEN_MERGE_OR_REBASE_ONLY_IF_CURRENT_MAIN_STILL_REQUIRES_THIS_BINDING",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
