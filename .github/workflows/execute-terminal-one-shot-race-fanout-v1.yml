@@ -1,3 +1,4 @@
+# retrigger: terminal one-shot fanout after verified rank10 reconciliation
 name: Execute terminal one-shot race fanout V1
 
 on:
