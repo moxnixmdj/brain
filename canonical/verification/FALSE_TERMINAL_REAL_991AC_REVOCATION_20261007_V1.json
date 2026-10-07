@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_FALSE_TERMINAL_REAL_991AC_REVOCATION_V1",
+  "date": "2026-10-07",
+  "status": "TRUTH_REPAIR__PR2785_TERMINAL_REAL_CLAIMS_REVOKED__PINNED_POINTER_FAILS_OFFICIAL_GATE",
+  "subject": {
+    "pull_request": 2785,
+    "pinned_base": "991ac7ccb4014e58f6ac0de3b26827680ae995ac",
+    "terminal_now_status_prior_blob": "7ea1792d0663438e3a1d43020ea568984668c800",
+    "official_status_prior_blob": "ef08fc44858d96d745fd0813b105116413b9dca4"
+  },
+  "exact_evidence": {
+    "pinned_pointer_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "pinned_pointer_git_blob_sha": "d2a271a1850cc98b735879a6d783f75639249778",
+    "pinned_pointer_declares_terminal": false,
+    "pinned_pointer_current_U_empty_proved": false,
+    "pinned_pointer_router_registry_real_selected_cover_complete": false,
+    "pinned_pointer_complete_selected_context_ABC_closed": false,
+    "pinned_pointer_D_finality_closed": false
+  },
+  "gate": {
+    "path": "canonical/runtime/terminal_reality_gate_v1.py",
+    "git_blob_sha": "3637bebbbb2707e268b4be9da0cb84ef45575b6d",
+    "derived_terminal_real": false,
+    "blockers": [
+      "U_NOT_PROVED_EMPTY",
+      "ROUTER_REGISTRY_SELECTED_COVER_INCOMPLETE",
+      "COMPLETE_SELECTED_CONTEXT_ABC_OPEN",
+      "D_FINALITY_OPEN"
+    ]
+  },
+  "forensics": {
+    "terminal_now_prior_source_status_blob_sha": "857f81c679de86aa3d0e3c640d5d216c0a002ced",
+    "official_prior_source_status_blob_sha": "0e6fb4c048d7c5fda986e5b361f42162b82e9dc2",
+    "terminal_now_prior_source_blob_fetch": "NOT_FOUND",
+    "official_prior_source_blob_fetch": "NOT_FOUND",
+    "conclusion": "THE_V2_STATUS_FILES_CANNOT_OVERRIDE_THE_EXACT_PINNED_POINTER_AND_DO_NOT_CARRY_RETRIEVABLE_SOURCE_STATUS_OBJECTS"
+  },
+  "truth_effect": {
+    "terminal_real_at_991ac": false,
+    "terminal_goal_achieved": false,
+    "scheduling_authority": "RESUME_FROM_CURRENT_STABLE_POINTER_ONLY",
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_PR2785_WAS_MALICIOUS",
+    "NO_CLAIM_THE_GATE_CODE_IS_INVALID",
+    "NO_CLAIM_TERMINAL_CAN_NEVER_BE_REACHED",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
