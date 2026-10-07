@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_UNCOVERED_SCOPE_SOURCE_ADMISSION_RECONCILIATION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_TRUTH_REPAIR__FINANCE_BRAIN_OWNED_SOURCE_ALREADY_ADMITTED__ONLY_TWO_OBJECTIVE_LEAVES_REMAIN_UNEXECUTED__ZERO_CREDIT",
+  "canonical_base_commit": "9fe273578a02bc802fc6d05b35b611298464d3fc",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "exact_sources": {
+    "finance_routing": {
+      "path": "canonical/governance/V13_FINANCE_UNCOVERED_SCOPE_ROUTING_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "432e4587bffbf5dc08975ca2740457438a6cd85d"
+    },
+    "source_activation": {
+      "path": "canonical/governance/DUAL_JUDGMENT_SOURCE_GATE_ACTIVATION_V1.json",
+      "git_blob_sha": "4211a0eee07c4758035d788c0be897d700c164cb"
+    },
+    "source_activation_verification": {
+      "path": "canonical/verification/DUAL_JUDGMENT_SOURCE_GATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "6ec5f6d808c88bf9ea728fb7f259edc3b4ae5a51"
+    },
+    "post_gate_reclassification": {
+      "path": "canonical/governance/POST_SOURCE_GATE_ROOT1_RECLASSIFICATION_V1.json",
+      "git_blob_sha": "963127da19fae1f6dd7478d43076d8d9bd026c9a"
+    },
+    "finance_protocol": {
+      "path": "canonical/governance/FINANCE_UNCOVERED_SCOPE_DIRECT_PROOF_PROTOCOL_V1.json",
+      "git_blob_sha": "84973ca473cbb8f6160b45c025567c56f8a3d4ba"
+    },
+    "authority_v14": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V14.json",
+      "git_blob_sha": "d9bd211b2557ac45331f6fe0c4347392f4cd7a95"
+    }
+  },
+  "conflict": {
+    "newer_routing_text": "NO_VERIFIED_BRAIN_OWNED_OPERATIVE_FINANCE_JUDGMENT_CONFIGURATION_FOR_THE_TWO_UNCOVERED_LEAVES",
+    "older_independently_verified_fact": "FINANCE_SOURCE_ADMITTED__FROZEN_DIRECT_ORACLE_LEAVES_REMAIN_UNEXECUTED",
+    "consistency": "THESE CANNOT BOTH BE THE CURRENT BLOCKER DESCRIPTION WHEN THE ADMITTED SOURCE REMAINS CONTENT_ADDRESSED AND UNREVOKED."
+  },
+  "recomputation": {
+    "source_gate_finance_admitted": true,
+    "source_gate_unknown_domain_admitted": true,
+    "exact_two_source_gate_requirements_discharged": true,
+    "independent_activation_pass": true,
+    "finance_direct_oracle_leaves_executed": false,
+    "finance_uncovered_acceptance_closed": false,
+    "finance_public_bars_closed": false,
+    "positive_missing_capability_source_blocker": false
+  },
+  "corrected_frontier": {
+    "finance_uncovered_scope_route_state": "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_OPERATIVE_SOURCE_ADMITTED__OBJECTIVE_DIRECT_PROOF_LEAVES_UNEXECUTED",
+    "remaining_objective_leaves": [
+      "SUPERVISORY_AND_COMPLIANCE_NUANCE_OUTSIDE_PUBLIC_BAR_SCOPE",
+      "DOCUMENT_SPECIFIC_ANALYSIS_LEAVES_OUTSIDE_PUBLIC_BAR_SCOPE"
+    ],
+    "separate_family_residuals": [
+      "FINANCE_ACCOUNTING_INDEX_GE_61_OR_SOUND_SUCCESSOR_CERTIFICATE",
+      "FINANCE_AGENT_V2_GE_58_59_OR_SOUND_SUCCESSOR_CERTIFICATE"
+    ],
+    "deleted_blocker": "ACQUIRE_OR_BUILD_A_FINANCE_JUDGMENT_SOURCE_BEFORE_THE_DIRECT_LEAVES",
+    "preserved_blocker": "PROVE_THE_TWO_OBJECTIVE_LEAVES_WITH_THE_ALREADY_ADMITTED_BRAIN_ROUTE_OR A STRONGER SOUND CERTIFICATE"
+  },
+  "scheduler_effect": [
+    "DO_NOT_REBUILD_OR_REACQUIRE_THE_ALREADY_ADMITTED_FINANCE_JUDGMENT_SOURCE.",
+    "TREAT_FINANCE_UNCOVERED_SCOPE_AS_AN_OBJECTIVE_BRAIN_SIDE_ABC_PROOF_INTERFACE.",
+    "BEFORE_FRESH_LEAF_EXECUTION__SATURATE_EXISTING_RECEIPTS_AND_RECOMPUTE_THE_CURRENT_V14_MINIMUM_REALITY_CUT.",
+    "IF_THE_TWO_LEAVES_ENTER_THE_EXACT_MINIMUM_REALITY_CUT__EXECUTE_ONLY_THOSE_FROZEN_LEAVES UNDER_THE_EXISTING_SOURCE_GATE.",
+    "KEEP_FINANCE_PUBLIC_SCORE_BARS_SEPARATE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TWO_FINANCE_LEAVES_PASS.",
+    "NO_CLAIM_FINANCE_FAMILY_ACCEPTED.",
+    "NO_FRESH_REALITY_EXECUTION_AUTHORITY_FROM_THIS_REPAIR.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
