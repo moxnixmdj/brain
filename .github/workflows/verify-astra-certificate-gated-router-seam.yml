@@ -1,0 +1,36 @@
+name: Verify ASTRA certificate-gated router seam
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/astra_runtime.py'
+      - 'canonical/runtime/certificate_gated_selected_route_router_v1.py'
+      - 'canonical/tests/test_astra_certificate_gated_router_deployed_seam_v1.py'
+      - '.github/workflows/verify-astra-certificate-gated-router-seam.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/astra_runtime.py'
+      - 'canonical/runtime/certificate_gated_selected_route_router_v1.py'
+      - 'canonical/tests/test_astra_certificate_gated_router_deployed_seam_v1.py'
+      - '.github/workflows/verify-astra-certificate-gated-router-seam.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile bound runtime bytes
+        run: |
+          set -euo pipefail
+          python3 -m py_compile canonical/runtime/astra_runtime.py
+          python3 -m py_compile canonical/runtime/certificate_gated_selected_route_router_v1.py
+      - name: Execute ASTRA deployed routing seam
+        run: |
+          set -euo pipefail
+          python3 -m pytest -q canonical/tests/test_astra_certificate_gated_router_deployed_seam_v1.py
