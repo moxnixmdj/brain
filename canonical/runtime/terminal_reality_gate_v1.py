@@ -20,14 +20,18 @@ def evaluate(pointer: dict) -> dict:
         blockers.append("TOP_LEVEL_PREDICATE_SET_DRIFT")
     if live.get("fixed_authorized_target_trace_scope_closed") is not True:
         blockers.append("TARGET_TRACE_SCOPE_OPEN")
+    if live.get("router_mechanical_core_implemented") is not True:
+        blockers.append("ROUTER_CORE_NOT_IMPLEMENTED")
+    if live.get("router_deployed_runtime_binding_closed") is not True:
+        blockers.append("ROUTER_DEPLOYED_RUNTIME_BINDING_OPEN")
     if live.get("current_U_empty_proved") is not True:
         blockers.append("U_NOT_PROVED_EMPTY")
+    if live.get("router_registry_real_selected_cover_complete") is not True:
+        blockers.append("ROUTER_REGISTRY_SELECTED_COVER_INCOMPLETE")
     if live.get("complete_selected_context_ABC_closed") is not True:
         blockers.append("COMPLETE_SELECTED_CONTEXT_ABC_OPEN")
     if live.get("D_finality_closed") is not True:
         blockers.append("D_FINALITY_OPEN")
-    if live.get("router_mechanical_core_implemented") is not True:
-        blockers.append("ROUTER_CORE_NOT_IMPLEMENTED")
 
     derived_terminal = not blockers
     declared_terminal = live.get("terminal") is True
