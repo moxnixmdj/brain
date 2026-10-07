@@ -1,0 +1,23 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_BOUNDARY_DERIVED_CHECKER_V3_HELDOUT_VERIFICATION",
+  "date":"2026-10-07",
+  "status":"PASS",
+  "carrier":{"provider":"SPRITES","sprite_name":"brain-heldout003-one-shot","sprite_id":"sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589"},
+  "exact_blobs":{
+    "checker":"52406689bc0f30249391fd80dd010d653593d838",
+    "v10":"91bdde7a88e90bb6a2e411072a1dadb715ff7052",
+    "certificate":"f4f55eba84a33ba918a37087a88e76ccebcf98e4"
+  },
+  "replay":{
+    "expected_rules":84,
+    "generated_rules":84,
+    "missing":[],
+    "extra":[],
+    "closure":[809,809,823,true],
+    "package_raw_bytes":9511,
+    "package_payload_bytes":3525,
+    "package_payload_sha256":"e733a5624f3265055baf44abc429c5d7c4f4c0f91d141dc07aa4735cc15f7b87",
+    "roundtrip_exact":true
+  },
+  "hard_nonclaims":["BOUNDARY_SMALL_MODEL_COMPLETENESS_LEMMAS_REMAIN_META_LEVEL_TRUST","NO_ZERO_TRUST_OR_TERMINAL_CREDIT"]
+}
