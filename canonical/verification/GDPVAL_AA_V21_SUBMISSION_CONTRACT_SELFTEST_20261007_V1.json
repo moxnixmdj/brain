@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_AA_V21_SUBMISSION_CONTRACT_SELFTEST_V1",
+  "date": "2026-10-07",
+  "status": "PASS__VALID_CASE_ACCEPTED__MUTATED_INVALID_CASE_FAILS_CLOSED__PUBLIC_PROTOCOL_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/gdpval_aa_v21_submission_contract_v1.py",
+    "git_blob_sha": "fedad80ecd8086efe24fe15cdbbb8524e8af6665"
+  },
+  "governance": {
+    "path": "canonical/governance/GDPVAL_AA_V21_PUBLIC_SUBMISSION_PROTOCOL_20261007_V1.json",
+    "git_blob_sha": "d0b77baa5b4f8158c5fbf73a028262130970059f"
+  },
+  "replay": {
+    "executor": "CHATGPT_ISOLATED_PYTHON_3_RUNTIME",
+    "valid_case_status": "PASS",
+    "invalid_mutations": [
+      "MAX_TURNS_251_INSTEAD_OF_250",
+      "FINISH_NOT_FINAL_ACTION",
+      "EMPTY_FINISH_SUMMARY",
+      "RELATIVE_FINISH_PATH",
+      "FINISH_PATH_EXISTENCE_NOT_VERIFIED"
+    ],
+    "invalid_case_status": "FAIL_CLOSED",
+    "invalid_case_error_count": 5
+  },
+  "source_binding_checks": {
+    "stirrup_main_commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
+    "finish_blob": "d4f48ffec2295d1ae0600d27ebb050abbbb382ca",
+    "web_blob": "2544b541ec2db173038753d0af2249eca089468a",
+    "e2b_blob": "1cebb2f71dc8c845d20416acc77242b93d1129bd",
+    "agent_blob": "7446c8ee00d49e81dd621d9f9cc6507900964903"
+  },
+  "hard_nonclaims": [
+    "SELF_TEST_DOES_NOT_PROVE_OWNER_EVALUATION_REPRODUCTION.",
+    "NO_GDPVAL_SCOPE_CLOSURE.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
