@@ -3,12 +3,19 @@ from __future__ import annotations
 import unittest
 
 from canonical.runtime.gdpval_semantic_complement_localizer_v2 import (
+    SCHEMA,
     _compound_candidate,
     localize_rows,
 )
 
 
-class GDPvalSemanticComplementLocalizerV2Tests(unittest.TestCase):
+# Independent PR verification trigger: diagnostics captured fail-closed.\nclass GDPvalSemanticComplementLocalizerV2Tests(unittest.TestCase):
+    def test_schema_is_v2_and_not_terminal_claim(self):
+        self.assertEqual(
+            SCHEMA,
+            "PROJECT_BRAIN_GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZER_V2",
+        )
+
     def test_flat_compound_candidate_is_diagnostic_not_credit(self):
         x = _compound_candidate("The report must include revenue and include expenses.")
         self.assertEqual(x["status"], "BOUNDED_COMPOUND_CANDIDATE")
