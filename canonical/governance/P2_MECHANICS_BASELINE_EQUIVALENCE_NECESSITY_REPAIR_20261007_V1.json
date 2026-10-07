@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_P2_MECHANICS_BASELINE_EQUIVALENCE_NECESSITY_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "EXECUTABLE_TRUTH_REPAIR__EMPTY_P2_PLAN_EQUIVALENCE_NOT_NECESSARY__ACTUAL_MECHANICS_BASELINE_BINDING_SUFFICIENT_WITH_TARGET_ORDER_CERTIFICATE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "canonical_base_commit": "9ef38723d345455bcd7c7dc32aefca7a4176f966",
+  "source_bindings": {
+    "stable_pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+    },
+    "p2_comparison_order_v2": {
+      "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_COMPARISON_ORDER_ADMISSION_V2_20261007_V1.json"
+    },
+    "rubric_truth_repair": {
+      "path": "canonical/governance/P2_RUBRIC_EQUIVALENCE_NECESSITY_FALSIFIER_20261007_V1.json"
+    },
+    "strong_quality_v1": {
+      "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_SUBREGION_TOP_LAW_20261007_V1.json"
+    }
+  },
+  "claim_under_attack": "THE_MECHANICS_ONLY_BASELINE_MUST_BE_SEMANTICALLY_IDENTICAL_TO_THE_EMPTY_P2_PLAN",
+  "constructive_countermodel": {
+    "selected_quality": 5,
+    "actual_mechanics_baseline_quality": 3,
+    "empty_p2_plan_quality": 1,
+    "ablated_quality": 4,
+    "selected_gt_actual_mechanics_baseline": true,
+    "actual_mechanics_baseline_ne_empty_p2_plan": true,
+    "selected_gt_ablated": true,
+    "load_bearing_quality_gate_can_hold": true
+  },
+  "repair": {
+    "legacy_mode": "PROVE_MECHANICS_ONLY_BASELINE_EQUALS_EMPTY_P2_PLAN_AND_USE_THE_EXPLICIT_P2_OBJECTIVE",
+    "minimum_mode": "BIND_THE_ACTUAL_MECHANICS_BASELINE_BY_STABLE_IDENTITY_AND_CONTENT_ADDRESSED_RECEIPT__THEN_BIND_TARGET_COMPARISON_ORDER_TO_THE_EXACT_SELECTED_PLAN_ACTUAL_BASELINE_AND_EXACT_ABLATION",
+    "required_in_minimum_mode": [
+      "mechanics_baseline_bound == true",
+      "nonempty mechanics_baseline_id",
+      "nonempty mechanics_baseline_binding_receipt",
+      "comparison_order.baseline_id exactly equals mechanics_baseline_id",
+      "selected_gt_baseline == true"
+    ]
+  },
+  "executable": {
+    "runtime": "canonical/runtime/p2_strong_quality_visible_certifier_v3.py",
+    "sha256": "4de1ba0468ab721015d535942f2a2c375505eea202609cf3983f691243657398",
+    "tests": "canonical/tests/test_p2_strong_quality_visible_certifier_v3.py",
+    "test_sha256": "7f2e43d379cff6c11384a37043d1eb2287b41cd497208323586ff2d9a1ac0a8f"
+  },
+  "preserved": [
+    "LOSSLESS_P2_MEMBERSHIP",
+    "BASELINE_LAYOUT_NONOBSCURING",
+    "ABLATION_RESCUE_SEMANTICS",
+    "NATIVE_MECHANICAL_GATE_WHEN_LOAD_BEARING",
+    "EXACT_SELECTED_PLAN_BINDING",
+    "EXACT_ABLATION_BINDING",
+    "TARGET_RELATIVE_SELECTED_GT_BASELINE",
+    "TARGET_RELATIVE_SELECTED_GT_ABLATION",
+    "RESCUE_EQ_SELECTED",
+    "VISIBLE_GROUNDING_REQUIRED_ANALYSIS_AUDIENCE_AND_NONOBSCURING_GATES"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_CURRENT_AA_BRIEFCASE_OR_GDPVAL_ACTUAL_MECHANICS_BASELINE_IS_ALREADY_BOUND.",
+    "NO_CLAIM_PROFESSIONAL_QUALITY_IS_CLOSED.",
+    "NO_CLAIM_AN_UNAUTHENTICATED_BASELINE_ID_IS_SUFFICIENT.",
+    "NO_U_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
