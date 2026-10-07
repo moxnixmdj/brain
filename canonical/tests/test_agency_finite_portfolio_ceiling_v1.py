@@ -16,5 +16,10 @@ def test_exact_bound_repository_proves_agency_portfolio_ceiling():
  assert out["aggregate"]["duplicate_or_conflicting_work_rate"]==0
  assert out["target_predicates"]["AGENCY_MATCHED_SUCCESS_NONINFERIOR"] is True
  assert out["target_predicates"]["AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"] is True
+ assert out["ceiling_logic"]["brain_success_noninferior_to_any_comparator"] is True
+ assert out["ceiling_logic"]["brain_safety_noninferior_to_any_comparator"] is True
+ assert out["ceiling_logic"]["opus_case_execution_required"] is False
+ assert out["fresh_target_reality_units_consumed"]==0
+ assert out["incremental_spend_usd"]==0
 
 # Execution trigger only: rerun the independent GitHub-hosted replay after the verifier landed.
