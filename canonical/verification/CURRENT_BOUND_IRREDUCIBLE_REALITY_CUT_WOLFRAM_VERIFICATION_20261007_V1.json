@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_BOUND_IRREDUCIBLE_REALITY_CUT_WOLFRAM_VERIFICATION_V1",
   "date": "2026-10-07",
-  "status": "INDEPENDENT_WOLFRAM_SET_COVER_ARITHMETIC_PASS__ZERO_CREDIT",
+  "status": "INDEPENDENT_WOLFRAM_SET_COVER_ARITHMETIC_PASS__AUTOMATIONBENCH_MULTIPLEX_FALSIFIED__ZERO_CREDIT",
   "subject": {
     "cut": {
       "path": "canonical/governance/CURRENT_BOUND_IRREDUCIBLE_REALITY_CUT_20261007_V1.json",
@@ -11,7 +11,7 @@
     "challenger": {
       "path": "canonical/governance/CURRENT_BOUND_REALITY_CUT_MULTIPLEX_CHALLENGER_20261007_V1.json",
       "branch": "truth/current-bound-irreducible-reality-cut-20261007-v1",
-      "candidate_commit": "c92d094320ea9e5c92e2e873851ffd9ef7d78e54"
+      "candidate_commit": "d501369a1b204e8c5f6f8ba836c5e63e48e902ad"
     }
   },
   "independent_provider": "WOLFRAM_LANGUAGE",
@@ -21,13 +21,20 @@
     "every_positive_atom_unique_under_declared_nonmultiplexed_observation_set": true,
     "declared_positive_reality_cost": 17,
     "composition_target_reality_cost": 0,
-    "challenger_replaced_positive_surfaces": 6,
-    "challenger_positive_reality_cost_if_scope_relation_verified": 12,
-    "challenger_savings_if_verified": 5
+    "prior_six_way_challenger_admissible": false,
+    "automationbench_preserved_independent": true,
+    "corrected_challenger_replaced_positive_surfaces": 5,
+    "corrected_challenger_positive_reality_cost_if_scope_relation_verified": 13,
+    "corrected_challenger_savings_if_verified": 4
   },
+  "falsification_basis": [
+    "AUTOMATIONBENCH AND OSWORLD ARE DISTINCT EVALUATION SURFACES WITH DISTINCT HARNESS/EVALUATOR CONTRACTS.",
+    "BEHAVIORAL OVERLAP DOES NOT PROVE THE FIVE_WAY OSWORLD_COMPATIBLE CASE SET IS SCOPE_EQUIVALENT_OR_STRONGER FOR AUTOMATIONBENCH.",
+    "THEREFORE AUTOMATIONBENCH REMAINS AN INDEPENDENT SURFACE UNTIL A CONTENT_ADDRESSED SCOPE_RELATION PROVES OTHERWISE."
+  ],
   "interpretation": [
     "17 IS EXACT ONLY RELATIVE TO THE DECLARED NONMULTIPLEXED OBSERVATION SET.",
-    "THE 12_SURFACE CHALLENGER IS CONDITIONAL AND EARNS NO COVERAGE UNTIL ITS SAME_CASE SIX_RESIDUAL SCOPE_RELATION IS PROVED.",
+    "13 IS CONDITIONAL ON A FIVE_WAY SAME_CASE SCOPE_RELATION AND EXACT_TARGET_OR_STRONGER CERTIFICATE.",
     "THE CHECK DOES NOT ESTABLISH A GLOBAL INFORMATION_THEORETIC LOWER_BOUND."
   ],
   "hard_nonclaims": [
