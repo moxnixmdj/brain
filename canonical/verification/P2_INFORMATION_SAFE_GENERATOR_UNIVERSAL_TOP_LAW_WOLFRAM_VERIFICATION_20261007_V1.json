@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_P2_INFORMATION_SAFE_GENERATOR_UNIVERSAL_TOP_LAW_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_BOOLEAN_ALGEBRA_PASS__EXACT_SOURCE_AND_CANDIDATE_CERTIFICATE_BLOBS_BOUND__BRANCH_TEST_REPLAY_STILL_REQUIRED__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/P2_INFORMATION_SAFE_GENERATOR_UNIVERSAL_TOP_LAW_20261007_V1.json",
+      "git_blob_sha": "ac73c8912a2d59f22abceb0c9b3c77efc5994441"
+    },
+    "runtime": {
+      "path": "canonical/runtime/p2_information_safe_generator_universal_top_law_v1.py",
+      "git_blob_sha": "4d60b9f7ee85d69a3f0ba3b75aef71bcd8d86d00"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p2_information_safe_generator_universal_top_law_v1.py",
+      "git_blob_sha": "111161bf2b1a069320828a3b4876d0720800a750"
+    },
+    "candidate": {
+      "path": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+      "git_blob_sha": "ea8057b0eadac210c4f4378298df93ed233c5824"
+    },
+    "evaluator": {
+      "path": "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py",
+      "git_blob_sha": "9d3d9bb837a98a7f78b5794cec0c0ae88bb32860"
+    }
+  },
+  "independent_symbolic_check": {
+    "engine": "WOLFRAM_LANGUAGE",
+    "boolean_variables": [
+      "SUPPORTED",
+      "REQUIRED_TOPIC",
+      "AUDIENCE_FIT",
+      "ANALYSIS_VALUE"
+    ],
+    "assignments_checked": 16,
+    "utility": "If[S,5,-12]+If[R&&V,4,0]+If[A,3,-1]+If[V,2,0]",
+    "proposition": "(UTILITY_GT_0_AND_ANALYSIS_VALUE) IFF (SUPPORTED_AND_ANALYSIS_VALUE)",
+    "result": true,
+    "unsupported_max_utility": -3,
+    "supported_analytical_min_utility": 6
+  },
+  "verified_implication": [
+    "GIVEN_THE_EXACT_PINNED_GENERATOR_AND_CANDIDATE_SOURCE_SEMANTICS__THE_PER_EDIT_UTILITY_FUNCTIONS_ARE_IDENTICAL.",
+    "THE_WOLFRAM_RESULT_PROVES_THE_CANDIDATE_AND_ORACLE_REQUIRED_TOPIC_COVERAGE_PREDICATES_ARE_IDENTICAL_FOR_ALL_BOOLEAN_FACTOR_ASSIGNMENTS.",
+    "SAME_FEASIBLE_SUBSETS_PLUS_SAME_SUBSET_SCORE_PLUS_SAME_MISSING_TOPIC_PENALTY_PLUS_SAME_COST_AND_LEXICAL_TIE_BREAK_IMPLIES_IDENTICAL_SELECTED_EDIT_SET."
+  ],
+  "remaining_before_canonical_promotion": [
+    "RUN_BRANCH_VERIFIER_AND_TESTS_IN_AN_INDEPENDENT_OR_CI_EXECUTION_ENVIRONMENT.",
+    "REBASE_IF_ANY_PINNED_SOURCE_BLOB_DRIFTS.",
+    "PROMOTE_ONLY_THE_EXACT_GENERATOR_IMAGE_CELL__NOT_OPEN_ENDED_PROFESSIONAL_SCOPE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_WOLFRAM_VERIFIED_THE_SOURCE_CODE_ITSELF__SOURCE_MEANING_IS_BOUND_BY_EXACT_BLOB_PINS_AND_THE_EXPLICIT_PROOF.",
+    "NO_CLAIM_OPEN_ENDED_PROFESSIONAL_ARTIFACT_SCOPE_IS_CLOSED.",
+    "NO_ABC_OR_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
