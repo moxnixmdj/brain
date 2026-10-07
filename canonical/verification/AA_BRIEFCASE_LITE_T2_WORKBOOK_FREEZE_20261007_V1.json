@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_LITE_T2_WORKBOOK_FREEZE_V1",
+  "date": "2026-10-07",
+  "status": "PRE_GRADING_OUTPUT_FROZEN__GRADER_AND_REFERENCE_SUBMISSIONS_STILL_UNOPENED__ZERO_TERMINAL_CREDIT",
+  "precommit": {
+    "path": "canonical/governance/AA_BRIEFCASE_LITE_T2_FALSIFICATION_PRECOMMIT_20261007_V1.json",
+    "commit": "f457c7bedb526936e6ecdfedd0900217040c249f"
+  },
+  "task": {
+    "benchmark": "AA-Briefcase-Lite",
+    "task_id": "w1_t2",
+    "deliverable": "market_model.xlsx",
+    "official_benchmark_credit": false
+  },
+  "frozen_output": {
+    "sha256": "68e4f1c566a79b148a721e80269bceda2a94cbe3862b9656627dbff182efca76",
+    "bytes": 41874,
+    "local_path": "/mnt/data/market_model_frozen.xlsx"
+  },
+  "workbook_structure": {
+    "sheets": [
+      "Inputs & Sources",
+      "Market Size",
+      "Housing Transition",
+      "Aurora Model",
+      "Scenarios",
+      "Dashboard",
+      "Model Audit"
+    ],
+    "formula_error_scan": "PASS__ZERO_MATCHES_FOR_REF_DIV0_VALUE_NAME_NA",
+    "visual_dashboard_render": "PASS",
+    "refreshable_formulas": true,
+    "explicit_source_and_caveat_columns": true,
+    "data_gaps_fail_closed": [
+      "halberd_central_financial_assumptions.xlsx cells not parsed by current zero-cost transport",
+      "nz_egg_retail_scan_data_q1_2026.xlsx cells not parsed by current zero-cost transport"
+    ]
+  },
+  "contamination_state_at_freeze": {
+    "grading_checks_opened": false,
+    "judge_outputs_opened": false,
+    "model_or_reference_submissions_opened": false,
+    "posthoc_task_specific_grader_patches": false
+  },
+  "important_model_boundaries": [
+    "End-2027 cage-free is modeled as retailer-driven commercial commitment, not statutory ban.",
+    "Market-size anchors distinguish external/public anchors, diligence sources, management claims, and model assumptions.",
+    "Aurora conversion capex contradiction is surfaced rather than averaged away.",
+    "Free-range premium contradiction is surfaced with diligence working trajectory separated from sell-side claim.",
+    "Public AA-Briefcase-Lite output has zero official or terminal credit."
+  ],
+  "next_per_precommit": [
+    "OPEN_PUBLIC_GRADING_CHECKS_AND_JUDGE_METHODOLOGY_ONLY_AFTER_THIS_FREEZE",
+    "GRADE_THE_FROZEN_OUTPUT_WITHOUT_EDITING_IT",
+    "OPTIONALLY_OPEN_REFERENCE_SUBMISSIONS_ONLY_FOR_POST_FREEZE_DIAGNOSTICS",
+    "LOCALIZE_ANY_FAILURE_TO_ROUTE_TOOLING_REASONING_OR_DATA_GAP",
+    "DO_NOT_REPAIR_AND_RECOUNT_THE_SAME_TASK_AS_FRESH"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_terminal_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
