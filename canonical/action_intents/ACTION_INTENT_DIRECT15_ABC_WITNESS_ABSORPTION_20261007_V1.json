@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-07",
+  "status": "PROOF_ONLY__ZERO_CREDIT",
+  "canonical_base_commit": "d5ff740714e57b62925d2a2c8c8a54d6e16d4435",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "claim_under_test": "THE_DIRECT15_REQUIRE_FIFTEEN_INDEPENDENT_TOP_LEVEL_L1_TERMINAL_CONJUNCTS_IN_ADDITION_TO_COMPLETE_ABC_SELECTED_CONTEXT_DOMINANCE",
+  "direct15": [
+    "CODING_TB4_GE_66_4",
+    "CHARTOGRAPHY_TOOLS_GE_89",
+    "HLE_TOOLS_GE_67_7",
+    "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "FINANCE_AGENT_V2_GE_58_59",
+    "CODING_FRONTIERCODE_GE_54_4",
+    "PROWORK_GDPVAL_GE_1846",
+    "PROWORK_AA_BRIEFCASE_GE_1822",
+    "AUTOMATIONBENCH_GE_40",
+    "MYSTERYMECHANISM_GE_49_55",
+    "FINANCE_ACCOUNTING_INDEX_GE_61",
+    "CODING_CURSORBENCH_GE_57_8",
+    "TB_SCIENCE_GE_58_7",
+    "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+  ],
+  "method": "FIRST_PRINCIPLES_WITNESS_VS_OBJECTIVE_SEPARATION_PLUS_ABC_QUANTIFIER_ABSORPTION",
+  "source_bindings": {
+    "authority_v10": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V10.json",
+      "git_blob_sha": "86d7cd3f96afc9330d5b474a33cc43018fc6ff6b"
+    },
+    "witness_elimination": {
+      "path": "canonical/governance/BENCHMARK_WITNESS_ELIMINATION_SYNTHESIS_20261006_V1.json",
+      "git_blob_sha": "d1f0d4462e5d56acb5d8f5193b7e544006b01d41"
+    },
+    "layered_order": {
+      "path": "canonical/governance/V7_LAYERED_DISTRIBUTIONAL_EQUAL_OR_BETTER_ORDER_20261006_V1.json",
+      "git_blob_sha": "af58fd7c48fcd18a86c6b93d8cd58f3fbce0cc74"
+    },
+    "selected_abc": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V9.json",
+      "git_blob_sha": "1ec7f2c86534d046e51ddda00001ed287039fc0a"
+    }
+  },
+  "incremental_spend_usd": 0,
+  "fresh_reality_units_consumed": 0
+}
