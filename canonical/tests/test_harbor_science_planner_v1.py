@@ -102,6 +102,10 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(len(body["tools"]),1)
         self.assertEqual(body["tools"][0]["function"]["name"],p.TOOL_NAME)
         self.assertEqual(body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["maxItems"],1)
+        candidate_schema=body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["items"]["properties"]
+        self.assertEqual(candidate_schema["command"]["maxLength"],p.MAX_COMMAND_CHARS)
+        self.assertEqual(candidate_schema["verify_command"]["maxLength"],p.MAX_COMMAND_CHARS)
+        self.assertGreaterEqual(p.MAX_TOOL_COMPLETION_TOKENS,4096)
 
     def test_length_finish_reason_fails_closed_before_parsing_partial_arguments(self):
         response=json.dumps({
