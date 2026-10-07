@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_FUNCTIONAL_BASIS_ABC_RESIDUAL_COMPRESSION_WOLFRAM_VERIFY_V2",
+  "date": "2026-10-07",
+  "status": "PASS__SEVEN_ROLE_CONSERVATIVE_RESIDUAL_SET_ALGEBRA_VERIFIED__B3_REOPENING_SCOPE_GUARD_PRESERVED__ZERO_CREDIT",
+  "subject": {
+    "commit_sha": "a6007fdcd29e49395a16d5faebde33816d9f6ae0",
+    "path": "canonical/governance/CURRENT_FUNCTIONAL_BASIS_ABC_RESIDUAL_COMPRESSION_20261007_V2.json",
+    "identity_rule": "GIT_COMMIT_SHA_PLUS_PATH_UNIQUELY_BINDS_THE_VERIFIED_FILE_BYTES"
+  },
+  "source_scope_guard": {
+    "accepted_continuity_package": {
+      "path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+      "git_blob_sha": "2d912cf8df64bd806fffb6a1070d95644d005470",
+      "explicit_exclusion": "GENERAL_SEMANTIC_MEMORY_QUALITY_OR_RECALL_ACCURACY"
+    },
+    "consequence": "B3_IS_NOT_REMOVED_AS_A_WHOLE_ROLE_BY_THE_NARROWER_ACCEPTED_CONTINUITY_PACKAGE"
+  },
+  "wolfram": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "expression": "Complement[{B0,B1,B2,B3,B4,B5,B6,B7,B8,B9},{B5,B6,B8}]",
+    "result": [
+      "B0",
+      "B1",
+      "B2",
+      "B3",
+      "B4",
+      "B7",
+      "B9"
+    ],
+    "result_count": 7
+  },
+  "verified": {
+    "basis_role_count": 10,
+    "safe_whole_role_closed_count": 3,
+    "conservative_open_whole_role_count": 7,
+    "safe_whole_role_closed": [
+      "B5",
+      "B6",
+      "B8"
+    ],
+    "conservative_open": [
+      "B0",
+      "B1",
+      "B2",
+      "B3",
+      "B4",
+      "B7",
+      "B9"
+    ],
+    "V1_six_role_compression_safe_for_scheduling": false,
+    "V2_seven_role_compression_set_algebra_pass": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_OF_THE_SEVEN_ROLES_IS_CLOSED.",
+    "NO_CLAIM_U_IS_EMPTY.",
+    "NO_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
