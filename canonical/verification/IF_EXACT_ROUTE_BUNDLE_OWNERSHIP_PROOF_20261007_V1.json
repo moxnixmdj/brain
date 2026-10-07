@@ -1,0 +1,140 @@
+{
+  "schema": "PROJECT_BRAIN_IF_EXACT_ROUTE_BUNDLE_OWNERSHIP_PROOF_20261007_V1",
+  "date": "2026-10-07",
+  "status": "PASS__DEDUCTIVE_ZERO_REALITY_OWNERSHIP_PROMOTION__INSTRUCTION_FOLLOWING_FROZEN_SCOPE",
+  "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "scope_limit": "EXACT_FROZEN_INSTRUCTION_FOLLOWING_TERMINAL_PROTOCOL_SCOPE_ONLY__NO_GENERALIZATION_BEYOND_DECLARED_PROTOCOL",
+  "theorem": {
+    "path": "canonical/governance/FINITE_CLOSED_ROUTE_BUNDLE_OWNERSHIP_THEOREM_20261007_V1.json",
+    "git_blob_sha": "64cafa8e8c0cb6435bccbcd85246a7d502304bb7"
+  },
+  "acceptance": {
+    "state": "PASS",
+    "closure_path": "canonical/governance/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_20261007_V1.json",
+    "closure_git_blob_sha": "307ea91b0150db9d6cca9580e1b7a399035929c1",
+    "independent_verification_path": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+    "independent_verification_git_blob_sha": "aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f",
+    "accepted_atoms": [
+      "LIVEBENCH_IF_GE_65_7",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+    ],
+    "scope_complete": true
+  },
+  "frozen_route_binding": {
+    "precommit_path": "canonical/governance/IF_SCOPE_FINITE_WAVE_PRECOMMIT_20261007_V1.json",
+    "precommit_git_blob_sha": "bdae02fc05339fb9a8709c26a8e448c475a4006f",
+    "harness": {
+      "path": "canonical/runtime/if_scope_finite_wave_v1.py",
+      "git_blob_sha": "9f31421b9d62f11bf99f6dbeafb104d8621ca5ee"
+    },
+    "load_bearing_routes": [
+      {
+        "path": "canonical/runtime/m0a_raw_source_brain_candidate_v2.py",
+        "git_blob_sha": "0aac96d27068bdad379703c1b0b8a7a32cacb2e2"
+      },
+      {
+        "path": "canonical/runtime/m0a_raw_source_terminal_suite_v2.py",
+        "git_blob_sha": "63b5daacfa5623c38228d41f6a84e548890d252d"
+      },
+      {
+        "path": "canonical/runtime/m0_requirement_change_case_v1.py",
+        "git_blob_sha": "d77ea422ab8d432e51ecb39a9396f5c126d6c23c"
+      },
+      {
+        "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+        "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+      },
+      {
+        "path": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+        "git_blob_sha": "5e8a953864e13ec76768c3e8920644107c65a644"
+      },
+      {
+        "path": "canonical/runtime/matched_executable_atom_semantics_v1.py",
+        "git_blob_sha": "47a0e828847a57fb206490a866a1041d83c42bde"
+      }
+    ],
+    "transitive_brain_dependencies": [
+      {
+        "path": "canonical/runtime/bounded_predicate_argument_semantics.py",
+        "git_blob_sha": "8303231779d6fe8c7fb740e3bbaa492914d4eba9"
+      },
+      {
+        "path": "canonical/runtime/explicit_compound_requirement_decomposer.py",
+        "git_blob_sha": "06da82ccd7cf5ba37b78d1d664b5638caa4e1956"
+      },
+      {
+        "path": "canonical/runtime/source_grounded_coreference.py",
+        "git_blob_sha": "3734d79c4d4db5fa78798d8421130090d15fe358"
+      },
+      {
+        "path": "canonical/runtime/requirement_acceptance_compiler.py",
+        "git_blob_sha": "c306ac6191e2d6f6d84445d7a698eeec8676a0ef"
+      },
+      {
+        "path": "canonical/runtime/independent_acceptance_model.py",
+        "git_blob_sha": "710298c5d7154b5a3c2a4a1700420c40cb2fa55a"
+      },
+      {
+        "path": "canonical/runtime/tool_discovery_information_safe_proof.py",
+        "git_blob_sha": "2450a9644119c9fdf9c43307a1d115098d6ba592"
+      }
+    ]
+  },
+  "closed_execution_audit": {
+    "canonical_route_and_dependency_blob_matches": true,
+    "external_model_provider_hits": [],
+    "network_client_or_socket_hits": [],
+    "dynamic_import_hits": [],
+    "shell_or_arbitrary_process_hits": [],
+    "benign_stdlib_dependencies": [
+      "argparse",
+      "base64",
+      "collections",
+      "dataclasses",
+      "hashlib",
+      "json",
+      "math",
+      "os",
+      "pathlib",
+      "random",
+      "re",
+      "sys",
+      "typing"
+    ],
+    "self_isolation_process": {
+      "present": true,
+      "capability_provider": false,
+      "exact_behavior": "subprocess.run([sys.executable, pathlib.Path(__file__).resolve(), '--child', frozen_payload], cwd=ROOT, fixed_environment, capture_output=True)",
+      "reentry_target": "SAME_CONTENT_ADDRESSED_HARNESS_FILE",
+      "external_command_selection": false,
+      "network_required": false,
+      "purpose": "CASE_ISOLATION_AND_RESET_EQUIVALENCE_ONLY"
+    },
+    "conclusion": "FINITE_EXECUTION_CLOSURE_IS_BRAIN_CONTROLLED__NO_EXTERNAL_HIDDEN_TARGET_CAPABILITY_PROVIDER"
+  },
+  "premise_discharge": {
+    "strict_opus55_acceptance_pass_and_scope_complete": true,
+    "independent_acceptance_receipt_binds_frozen_route_precommit": true,
+    "transitive_brain_dependency_closure_content_addressed": true,
+    "only_benign_stdlib_outside_brain": true,
+    "no_network_provider_dynamic_import_opaque_model_or_donor_runtime_path": true,
+    "child_process_closed_reentry_only": true,
+    "future_use_requires_no_capability_rediscovery": true
+  },
+  "promotion": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+  "accounting": {
+    "verified_owned_before": 5,
+    "verified_owned_after": 6,
+    "acceptance_family_count_unchanged": 6,
+    "fresh_target_reality_units_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NO_NEW_ACCEPTANCE_ATOM_OR_FAMILY_CREDIT__ACCEPTANCE_WAS_ALREADY_CLOSED.",
+    "NO_CLAIM_BEYOND_THE_FROZEN_INSTRUCTION_FOLLOWING_PROTOCOL_SCOPE.",
+    "NO_TERMINAL_GOAL_CLAIM.",
+    "NO_EXTERNAL_PROVIDER_PERFORMANCE_COUNTS_AS_OWNERSHIP."
+  ],
+  "promotion_authority": true
+}
