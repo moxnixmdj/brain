@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_RAW_TASK_ACCEPTANCE_RESIDUAL_LOCALIZER_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SHARED_SEMANTIC_FRONTIER_LOCALIZER__LOSSLESS_PARTITION__ZERO_ACCEPTANCE_AND_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem_closed": "VAGUE_RAW_TASK_SEMANTIC_FRONTIER_WITHOUT_AN_EXACT_OBLIGATION_LEVEL_PARTITION_BETWEEN_EXISTING_OBJECTIVE_ACCEPTANCE_ROUTES_AND_TRUE_SEMANTIC_RESIDUALS",
+  "exact_bindings": {
+    "localizer": {
+      "path": "canonical/runtime/raw_task_acceptance_residual_localizer_v1.py",
+      "git_blob_sha": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76"
+    },
+    "tests": {
+      "path": "canonical/tests/test_raw_task_acceptance_residual_localizer_v1.py",
+      "git_blob_sha": "1f643c93ec5f6ed59280036de71ad861eea2d65b"
+    },
+    "lossless_raw_task_contract": {
+      "path": "canonical/runtime/lossless_raw_task_contract_v1.py",
+      "git_blob_sha": "d54d5a2f7efa76b653d288f4f53da4883644baa6"
+    },
+    "lossless_acceptance_gate": {
+      "path": "canonical/runtime/lossless_raw_task_acceptance_gate_v1.py",
+      "git_blob_sha": "1cc72c7075d2e113dfbb2c0f790a3e0bd2a1e7dd"
+    },
+    "formal_constraint_compiler": {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+    },
+    "source_aligned_acceptance_compiler": {
+      "path": "canonical/runtime/source_aligned_acceptance_program_v1.py",
+      "git_blob_sha": "742c183cccc2ec4bb5f94e88048590e2991dacd4"
+    }
+  },
+  "theorem_candidate": {
+    "statement": "FOR_ANY_VALID_LOSSLESS_RAW_TASK_CONTRACT__EVERY_REQUIRED_RAW_SOURCE_OBLIGATION_IS_ACCOUNTED_FOR_EXACTLY_ONCE_AS_EITHER_HAVING_AT_LEAST_ONE_EXISTING_OBJECTIVE_ACCEPTANCE_COMPILER_ROUTE_OR_REMAINING_AN_EXPLICIT_SEMANTIC_ADJUDICATION_RESIDUAL__NO_UNROUTED_OBLIGATION_IS_SILENTLY_DELETED.",
+    "objective_route_is_not_acceptance": true,
+    "parser_recognition_is_not_acceptance": true,
+    "semantic_residual_is_not_failure": true,
+    "semantic_residual_is_exact_work_remaining": true
+  },
+  "current_objective_route_classes": [
+    "FORMAL__INSTRUCTION_CONSTRAINTS_V1",
+    "DETERMINISTIC__SOURCE_ALIGNED_ACCEPTANCE_PROGRAM_V1_WITH_EXPLICIT_FIELD_SCHEMA"
+  ],
+  "shared_frontier_effect": [
+    "RAW_TASK_ROUTING_NO_LONGER_NEEDS_TO_BE_SEMANTICALLY_COMPLETE_BEFORE_EXECUTION_PLANNING.",
+    "EVERY_RAW_SOURCE_SEGMENT_REMAINS_A_FINAL_ACCEPTANCE_OBLIGATION.",
+    "OBJECTIVELY_COMPILABLE_SEGMENTS_CAN_BE_ROUTED_TO_EXISTING_MACHINE_CHECKABLE_VERIFIERS.",
+    "ONLY_THE_EXACT_REMAINDER_REQUIRES_CONFIGURED_DOMAIN_HUMAN_AUTHORIZED_OR_OTHER_SOUND_SEMANTIC_ADJUDICATION.",
+    "THIS_LOCALIZATION_CAN_BE_REUSED_ACROSS_ALL_OPEN_FAMILIES_THAT_SHARE_RAW_TASK_TO_ACCEPTANCE_SEMANTICS."
+  ],
+  "falsifiers": [
+    "ONE_REQUIRED_RAW_OBLIGATION_IS_ABSENT_FROM_BOTH_PARTITIONS.",
+    "ONE_OBLIGATION_APPEARS_IN_BOTH_PARTITIONS.",
+    "AN_IMPERATIVE_OR_MODAL_PARSE_ALONE_IS_COUNTED_AS_CANDIDATE_ACCEPTANCE.",
+    "AN_OUT_OF_GRAMMAR_NORMATIVE_REQUIREMENT_IS_SILENTLY_MARKED_OBJECTIVE.",
+    "A_SEGMENT_TEXT_OR_DIGEST_DRIFT_IS_ACCEPTED.",
+    "OBJECTIVE_ROUTE_AVAILABILITY_IS_USED_AS_AN_ACCEPTANCE_RECEIPT."
+  ],
+  "remaining_boundary": [
+    "THE_LOCALIZER_DOES_NOT_PRODUCE_RAW_TASK_OBLIGATION_ACCEPTANCE_RECEIPTS.",
+    "THE_LOCALIZER_DOES_NOT_PROVE_ARBITRARY_LANGUAGE_SEMANTICS.",
+    "THE_LOCALIZER_DOES_NOT_PROVE_THAT_CONFIGURED_OR_DOMAIN_JUDGMENT_IS ADEQUATE_FOR_ANY_RESIDUAL OBLIGATION.",
+    "DOWNSTREAM_ACCEPTANCE_STILL_REQUIRES_CANDIDATE_BOUND_CONTENT_ADDRESSED_RECEIPTS_PLUS_SEPARATE_INDEPENDENT_VERIFICATION_FOR_EVERY_RAW_OBLIGATION.",
+    "ABC_U_EMPTY_REQUIRES_SOUND_COVER_OVER_THE_FULL_USEFUL_CONTEXT_SUPERDOMAIN_NOT_JUST_THIS_ROUTING_PARTITION."
+  ],
+  "hard_nonclaims": [
+    "NO_RAW_TASK_OBLIGATION_IS_ACCEPTED_BY_LOCALIZATION_ALONE.",
+    "NO_OPEN_ABC_REFINEMENT_FAMILY_IS_CLOSED_BY_THIS_COMPONENT_ALONE.",
+    "NO_CLAIM_U_IS_EMPTY.",
+    "NO_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
