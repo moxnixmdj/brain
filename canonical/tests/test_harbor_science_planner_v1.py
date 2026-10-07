@@ -101,7 +101,11 @@ class PlannerTests(unittest.TestCase):
         self.assertFalse(body["stream"])
         self.assertEqual(len(body["tools"]),1)
         self.assertEqual(body["tools"][0]["function"]["name"],p.TOOL_NAME)
+        params=body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["items"]["properties"]
         self.assertEqual(body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["maxItems"],1)
+        self.assertEqual(params["command"]["maxLength"],12000)
+        self.assertEqual(params["verify_command"]["maxLength"],12000)
+        self.assertGreaterEqual(body["max_tokens"],8192)
 
     def test_length_finish_reason_fails_closed_before_parsing_partial_arguments(self):
         response=json.dumps({
@@ -166,6 +170,24 @@ class PlannerTests(unittest.TestCase):
             with self.subTest(value=value):
                 with self.assertRaisesRegex(Exception,"TIMEOUT_INVALID"):
                     p.plan("synthetic",timeout_s=value)
+
+    def test_large_artifact_command_roundtrips_without_schema_truncation(self):
+        command="python - <<'PY'\n"+"x='a'\n"*1200+"PY"
+        self.assertGreater(len(command),512)
+        self.assertLessEqual(len(command),12000)
+        args={
+            "material_requirements":["artifact"],
+            "candidates":[{
+                "action_id":"author_artifact",
+                "covers":["artifact"],
+                "command":command,
+                "verify_command":"python -m py_compile /app/submission/controller.py",
+            }],
+        }
+        with patch.object(p.urllib.request,"urlopen",return_value=Response(tool_response(args))):
+            out=p.plan("synthetic artifact authoring")
+        got=p.extract_json_object(out["text"])
+        self.assertEqual(got["candidates"][0]["command"],command)
 
 
 if __name__=="__main__":
