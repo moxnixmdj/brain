@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ORACLE_FREE_ROLE_FAMILY_SPRITE_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_DIRECT_ASSERTION_PASS_5_OF_5__GITHUB_CI_INFRASTRUCTURE_FAILURE_CLASSIFIED_SEPARATELY__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/h100_oracle_free_role_family_v1.py",
+      "git_blob_sha": "e9f763a4bb78adab31b05636ecd56ad205686c2b"
+    },
+    "tests": {
+      "path": "canonical/tests/test_h100_oracle_free_role_family_v1.py",
+      "git_blob_sha": "c1ede2e75e5cdcbeef2859ac486f272a67cafb46"
+    },
+    "precommit": {
+      "path": "canonical/governance/H100_ORACLE_FREE_ROLE_FAMILY_PRECOMMIT_V1.json",
+      "git_blob_sha": "a6d9fc6fd3a741c4fa82cb3e8561fabbedf2c398"
+    },
+    "base_family_search": {
+      "path": "canonical/runtime/h100_zero_learned_parametric_unary_v1.py",
+      "git_blob_sha": "6a77f80e2cf01b079fcf7b688689d08a11b47c32"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "python_version": "3.13.7",
+    "execution": "DIRECT_IMPORT_AND_CALL_OF_THE_FIVE_FROZEN_ASSERTION_FUNCTIONS",
+    "pytest_installed": false
+  },
+  "observed": {
+    "tests_passed": 5,
+    "tests_total": 5,
+    "passes": [
+      "OPAQUE_EXP_ABS_UNIQUE_ROLE_AND_FAMILY",
+      "OPAQUE_THRESHOLD_STEP_UNIQUE_ROLE_AND_FAMILY",
+      "OPAQUE_LINEAR_TREND_SINUSOID_UNIQUE_ROLE_AND_FAMILY",
+      "BIDIRECTIONALLY_EXACT_LINEAR_RELATION_ABSTAINS",
+      "COLUMN_RENAMING_INVARIANCE"
+    ],
+    "target_column_supplied": false,
+    "input_column_supplied": false,
+    "expected_family_supplied": false,
+    "ontology_role_label_supplied": false,
+    "persistent_learned_bytes": 0,
+    "external_learned_capability_calls": 0
+  },
+  "github_ci_classification": {
+    "pull_request": 2444,
+    "run_ids": [37439600236, 37439772229],
+    "conclusion": "FAILURE_BEFORE_STEP_EXECUTION",
+    "evidence": {
+      "run_37439772229_job_id": 112190368920,
+      "runner_id": 0,
+      "runner_name": "",
+      "steps": [],
+      "started_at": "2026-10-06T08:58:48Z",
+      "completed_at": "2026-10-06T08:58:51Z"
+    },
+    "interpretation": "THE_GITHUB_ACTIONS_FAILURE_IS_NOT_EVIDENCE_THAT_THE_FROZEN_PYTHON_SEMANTIC_CONTRACT_FAILED__NO_JOB_STEP_WAS_REPORTED_AS_EXECUTED"
+  },
+  "deduction": "WITHIN_THE_FROZEN_TWO_COLUMN_NUMERIC_SCOPE__ROLE_ORIENTATION_AND_PARAMETRIC_FAMILY_SELECTION_CAN_BE_DERIVED_BY_ENUMERATING_DIRECTED_HYPOTHESES_AND_EXACTLY_VERIFYING_THEM__A_NONIDENTIFIABLE_BIDIRECTIONAL_CASE_FAILS_CLOSED_BY_ABSTENTION__THIS_REMOVES_TARGET_ROLE_AND_FAMILY_LABELS_AS_NECESSARY_ORACLES_FOR_THIS_BOUNDED_SLICE",
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_SEMANTIC_ATOM_DISCOVERY",
+    "NO_NATURAL_LANGUAGE_OR_MULTIMODAL_REPRESENTATION_CLAIM",
+    "THE_PREEXISTING_PARAMETRIC_FAMILY_VOCABULARY_REMAINS_EXECUTABLE_PRIOR_STRUCTURE",
+    "DIRECT_SPRITE_REPLAY_IS_NOT_THE_DECLARED_GITHUB_ACTIONS_INDEPENDENT_WORKFLOW",
+    "NO_OPUS55_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
