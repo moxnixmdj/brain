@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_COMPOSITION_CAPSULE_INTEGRATION_ACTIVATION_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__SOURCE_BOUND_CAPSULE_PLUS_RESOURCE_DEPENDENCY_ENFORCEMENT_INSTALLED__INDEPENDENT_EXECUTION_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_claims": [
+    "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+    "C_EFFECT_BOUNDARY_CLOSURE_V2"
+  ],
+  "objective": "Prove only the exact capability-planned model-independent goal path uses composition capsule V2 as the declared cross-capability state carrier, while preserving all broader no-bypass and semantic-completeness obligations.",
+  "implementation": {
+    "audit": {
+      "path": "canonical/runtime/capability_composition_capsule_integration_audit_v1.py",
+      "git_blob_sha": "84234e35e59833e141f842e53ef574b8c5334083"
+    },
+    "tests": {
+      "path": "canonical/tests/test_capability_composition_capsule_integration_audit_v1.py",
+      "git_blob_sha": "c311fd93784cf4edbf44f35d65f1cfbe63f9b4c7"
+    }
+  },
+  "exact_bound_sources": {
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "b7efc08e64a483e9a759c181a4f9a1cf29e47a9a"
+    },
+    "composition_guard": {
+      "path": "canonical/runtime/composition_state_capsule_guard_v2.py",
+      "git_blob_sha": "693c61b87d13d1c5e462aff5777ae975232751ab"
+    },
+    "capsule_v2": {
+      "path": "canonical/runtime/composition_state_capsule_v2.py",
+      "git_blob_sha": "cf72b9211872dfe1994248cc2395e031554507b4"
+    }
+  },
+  "candidate_implication": [
+    "CAPABILITY_PLANNED_PATH_FORCES_COMPOSITION_CAPSULE_ENFORCEMENT",
+    "DECLARED_REQUIRED_CROSS_CAPABILITY_READS_RESOLVE_FROM_CAPSULE",
+    "EXECUTED_RESULTS_COMMIT_TO_CAPSULE_BEFORE_CONTROLLER_CHECKPOINT",
+    "RESUME_REBUILDS_AND_REVALIDATES_CAPSULE_PREFIX",
+    "UNDECLARED_ACTION_AND_RESULT_REFERENCE_BYPASSES_FAIL_CLOSED",
+    "COMPOSITION_ENFORCED_PLANS_RUN_SOURCE_DERIVED_RESOURCE_DEPENDENCY_VALIDATION_BEFORE_CYCLE_ZERO",
+    "ACTIONS_BLOCKED_PENDING_GATEWAY_PROOF_ARE_DENIED_ON_COMPOSITION_ENFORCED_PATH",
+    "DIRECT_REPOSITORY_READ_OR_WRITE_OVERLAP_WITH_PRIOR_WRITE_REQUIRES_DECLARED_PROVIDER_DEPENDENCY"
+  ],
+  "adversarial_tests_authored": [
+    "EXACT_BOUND_SOURCES_EXPECT_PASS",
+    "REMOVED_PLANNER_CAPSULE_ACTIVATION_EXPECT_FAIL",
+    "REMOVED_RESULT_COMMIT_EXPECT_FAIL",
+    "REMOVED_PROVIDER_IDENTITY_GUARD_EXPECT_FAIL",
+    "NON_APPEND_ONLY_CAPSULE_EXPECT_FAIL",
+    "BOUND_SOURCE_SHA_DRIFT_EXPECT_FAIL"
+  ],
+  "execution_state": {
+    "local_or_independent_test_execution_observed": false,
+    "reason": "NO_CURRENT_PR_WORKFLOW_OR_INDEPENDENT_CARRIER_RECEIPT_FOR_THESE_EXACT_BRANCH_BYTES",
+    "promotion_eligible": false
+  },
+  "current_composition_scope_rebind": {
+    "prior_stale_component_count": "4_OF_12_IN_COMPOSITION_C1_TWO_CHANNEL_PREMISE_AUDIT_20261005_V1",
+    "current_authority": {
+      "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V7.json",
+      "git_blob_sha": "bfb8d868b1a40ac52b306921b085a232cfb031af"
+    },
+    "current_verified_state": "5_OF_12_SCOPED_PROVED__7_OPEN",
+    "scoped_components": [
+      "memory",
+      "recovery",
+      "debugging",
+      "tool discovery",
+      "delegation"
+    ],
+    "open_components": [
+      "research",
+      "tool use",
+      "artifact creation",
+      "browser/computer action",
+      "coding",
+      "evidence synthesis",
+      "artifact production"
+    ]
+  },
+  "remaining": [
+    "INDEPENDENTLY_REPLAY_EXACT_RUNTIME_INTEGRATION_AND_RESOURCE_GUARD_BYTES",
+    "BIND_RESOURCE_CONTENT_HASH_TYPE_AND_INITIAL_SNAPSHOT_SEMANTICS_FOR_DIRECT_REPOSITORY_MACROEDGES",
+    "PROVE_OR_ENFORCE_TRANSITIVE_HELPER_DYNAMIC_CAPABILITY_PROCESS_AND_EXTERNAL_INFORMATION_GATEWAYS_BEYOND_CURRENT_FAIL_CLOSED_BLOCKING",
+    "RUN_EXACT_AUDIT_AND_ADVERSARIAL_TESTS_ON_INDEPENDENT_OR_OBJECTIVE_CARRIER",
+    "PROVE_SEMANTIC_DECLARATION_COMPLETENESS_FOR_CREDITED_CAPABILITY_PLANNED_SCOPE",
+    "PROVE_EXTERNAL_EVIDENCE_CHANNEL_COMPLETENESS",
+    "BIND_FRESH_EPHEMERAL_DOMAIN_PER_MACROSTEP_OR_PROVE_SCOPE_COMPLETE_CHANNEL_GRAPH",
+    "CLOSE_7_OPEN_FROZEN_COMPONENT_INTERFACES_OR_PROVE_STRONGER_SCOPE_SUPERSET",
+    "ONLY_THEN_RECOMPUTE_C1_TWO_CHANNEL_RECEIPTS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_TESTS_HAVE_EXECUTED",
+    "NO_CLAIM_CAPABILITY_PLANNED_SCOPE_EQUALS_WHOLE_FROZEN_COMPOSITION_SCOPE",
+    "NO_CLAIM_EXTERNAL_EFFECTS_ARE_BROKERED",
+    "NO_CLAIM_SEMANTIC_DECLARATIONS_ARE_COMPLETE",
+    "NO_COMPOSITION_ACCEPTANCE_CAPABILITY_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_RESOURCE_CONTENT_INTEGRITY_OR_INITIAL_SNAPSHOT_BINDING_IS_CLOSED",
+    "NO_CLAIM_BLOCKING_19_ACTION_CLASSES_PROVES_THEIR_CAPABILITIES_UNNECESSARY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}

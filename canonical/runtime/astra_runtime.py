@@ -4612,6 +4612,16 @@ def _run_model_independent_goal(step, mission, goal):
                 "COMPOSITION_STATE_CONTRACT_INVALID:"
                 +type(exc).__name__+":"+str(exc)
             ) from exc
+        try:
+            resource_guard=_load_composition_resource_dependency_guard()
+            resource_guard.validate_resource_dependencies(
+                actions,composition_contract
+            )
+        except Exception as exc:
+            raise Blocker(
+                "COMPOSITION_RESOURCE_CONTRACT_INVALID:"
+                +type(exc).__name__+":"+str(exc)
+            ) from exc
 
     checkpoint_path,checkpoint,resumed=_load_controller_checkpoint(step,mission,actions)
     trace=list(checkpoint.get("completed_actions") or [])
@@ -5317,6 +5327,20 @@ def _load_composition_state_capsule_guard():
     )
     if spec is None or spec.loader is None:
         raise Blocker("COMPOSITION_STATE_CAPSULE_GUARD_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+def _load_composition_resource_dependency_guard():
+    path=pathlib.Path(__file__).resolve().with_name(
+        "composition_resource_dependency_guard_v1.py"
+    )
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_composition_resource_dependency_guard_v1",path
+    )
+    if spec is None or spec.loader is None:
+        raise Blocker("COMPOSITION_RESOURCE_DEPENDENCY_GUARD_LOAD_FAILED")
     module=importlib.util.module_from_spec(spec)
     sys.modules[spec.name]=module
     spec.loader.exec_module(module)
