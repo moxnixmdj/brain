@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "STRUCTURAL_SOURCE_BINDING_PASS__14_OF_14_OPEN_FAMILIES__ZERO_REALITY_RESIDUALS_RECONCILED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_20261007_V1.json",
+    "git_blob_sha": "f073870faec1fc3b04a46610740bc17e91b267c0",
+    "branch": "abc-zero-reality-fixed-point-residual-map-v1"
+  },
+  "verified": {
+    "current_open_family_count": 14,
+    "mapped_open_family_count": 14,
+    "missing_open_families": [],
+    "extra_nonopen_families": [],
+    "synthesis_zero_unsupported_subtracted_only_after_scope_complete_proof": true,
+    "artifact_mechanical_ceiling_subtracted_only_after_scope_complete_proof": true,
+    "artifact_uncovered_scope_audit_subtracted_only_after_scope_complete_proof": true,
+    "unknown_domain_uncovered_transfer_audit_subtracted_only_after_scope_complete_proof": true,
+    "livebench_if_subtracted_only_after_scope_complete_pointwise_dominance": true,
+    "aa_briefcase_shared_by_artifact_and_professional_work_protocols": true,
+    "no_direct_score_readiness_claim_used_as_terminal_truth": true,
+    "candidate_zero_credit": true
+  },
+  "consequence": "THE_CURRENT_14_OPEN_FAMILIES_HAVE_A_CONTENT_ADDRESSED_ZERO_REALITY_RESIDUAL_PROJECTION. NEW TARGET REALITY SHOULD BE SCHEDULED ONLY AGAINST THE EXACT SURVIVING RESIDUALS AFTER STRONGER_ZERO_REALITY_CERTIFICATE_SEARCH.",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_RESIDUALS_ARE_INDEPENDENT_TOP_LEVEL_TERMINAL_TRUTHS",
+    "NO_NEW_FAMILY_CLOSURE",
+    "NO_GLOBAL_ABC_CLOSURE",
+    "NO_GLOBAL_D_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
