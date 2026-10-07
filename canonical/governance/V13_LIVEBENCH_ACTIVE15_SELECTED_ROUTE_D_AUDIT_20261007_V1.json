@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_V13_LIVEBENCH_ACTIVE15_SELECTED_ROUTE_D_AUDIT_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_NEWLY_CREDITED_ROUTE_D_DELTA_ZERO_MATERIAL_EFFECTS_DONOR_INDEPENDENT__ZERO_TERMINAL_CREDIT",
+  "selected_cell": {
+    "path": "canonical/governance/V13_DB_LIVEBENCH_ACTIVE15_SELECTED_CELL_20261007_V1.json",
+    "git_blob_sha": "14e855a5ec4f1ec371f3b630d2c125ffcbdce6e1"
+  },
+  "route": {
+    "id": "BRAIN_LIVEBENCH_ACTIVE15_POINTWISE_OPTIMAL_ROUTE_V1",
+    "entrypoint": "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py::run",
+    "exact_execution_closure": {
+      "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34",
+      "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+      "canonical/runtime/livebench_legacy15_contract_composer_v2.py": "d73ec366b32252996258eae6d10d67d4d6a5e042",
+      "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py": "71e637c70edf1c582e28ea38b3b798965c803a06"
+    }
+  },
+  "effect_model": {
+    "material_effect_classes": [],
+    "returned_text_is_not_material_external_effect": true,
+    "filesystem_mutation": false,
+    "network_effect": false,
+    "subprocess_effect": false,
+    "browser_or_desktop_effect": false,
+    "external_service_effect": false
+  },
+  "ownership_and_donor_independence": {
+    "route_source_location": "CANONICAL_PROJECT_BRAIN_RUNTIME",
+    "opaque_external_capability_provider": false,
+    "model_dependency_count": 0,
+    "paid_provider_required": false,
+    "external_JIT_knowledge_required": false
+  },
+  "theorem": {
+    "statement": "THE_EXACT_SELECTED_ROUTE_EXECUTION_CLOSURE_IMPORTS_ONLY_STDLIB_PURE_COMPUTATION_MODULES_AND_THE_FOUR_CONTENT_ADDRESSED_BRAIN_MODULES__CONTAINS_NO_REACHABLE_FILESYSTEM_NETWORK_SUBPROCESS_BROWSER_DESKTOP_OR_EXTERNAL_SERVICE_EFFECT_PRIMITIVE__AND_EXECUTES_WITH_MODEL_DEPENDENCY_COUNT_ZERO__THEREFORE_ITS_DIRECT_MATERIAL_EFFECT_FOOTPRINT_IS_EMPTY_AND_THE_NEW_ROUTE_ADDS_NO_EFFECT_MEDIATOR_RESIDUAL",
+    "D_delta_state": "CLOSED_FOR_THIS_SELECTED_ROUTE",
+    "global_D_finality": "STILL_OPEN_UNTIL_FINAL_ROUTE_SET_FREEZE_DONOR_DELETE_AND_CLEAN_ROOM_REPLAY"
+  },
+  "hard_nonclaims": [
+    "NO_WHOLE_INSTRUCTION_FOLLOWING_FAMILY_CLOSURE",
+    "NO_GLOBAL_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
