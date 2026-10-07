@@ -60,3 +60,9 @@ def test_malformed_or_duplicate_receipts_fail_closed():
     good = receipt()
     with pytest.raises(RouterFailClosed, match="DUPLICATE_RECEIPT"):
         select_certified_route(actual_context_digest="ctx", receipts=[good, good])
+
+
+def test_non_boolean_admission_fails_closed():
+    bad = receipt(admitted="false")
+    with pytest.raises(RouterFailClosed, match="ADMISSION_MUST_BE_LITERAL_BOOL"):
+        select_certified_route(actual_context_digest="ctx", receipts=[bad])
