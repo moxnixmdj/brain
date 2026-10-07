@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_BUILDKITE_OWNER_TRIAL_SUPPORT_BINDING_V1",
+  "date": "2026-10-07",
+  "status": "DIRECT_OWNER_SUPPORT_REPLY_BOUND__OUTLINED_TRIAL_USE_CASE_CONFIRMED__RUNTIME_AUTH_UNBOUND__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source": {
+    "kind": "DIRECT_PROVIDER_SUPPORT_REPLY",
+    "sender_domain": "buildkite.com",
+    "subject": "Re: All Access Trial: confirm 8-vCPU Linux hosted agent + Docker for benchmark preflight",
+    "received_at": "2026-10-05T00:02:29+00:00",
+    "gmail_message_id": "1a1095e81e01a7dc"
+  },
+  "requested_use_case": {
+    "carrier": "Buildkite All Access Trial",
+    "required_compute": "Linux Large AMD64 class, at least 8 vCPU / 16 GB usable RAM / 50 GB disk",
+    "required_runtime": [
+      "Docker",
+      "Docker Compose"
+    ],
+    "budget_rule": "ZERO_INCREMENTAL_SPEND__NO_PAID_PROVISIONING"
+  },
+  "owner_reply_fact": "BUILDKITE_SUPPORT_CONFIRMED_THE_ALL_ACCESS_TRIAL_SUPPORTS_THE_OUTLINED_USE_CASE",
+  "conjunction_with_existing_public_preflight": {
+    "path": "canonical/verification/BUILDKITE_SHARED_TB4_CHARTOGRAPHY_PREFLIGHT_CONNECTOR_VERIFICATION_20261005_V1.json",
+    "public_facts_already_verified": [
+      "LINUX_AMD64_8X32_SHAPE_IS_8_VCPU_32GB_RAM_158GB_DISK",
+      "DOCKER_AND_DOCKER_COMPOSE_DOCUMENTED_ON_HOSTED_LINUX",
+      "ALL_ACCESS_TRIAL_DOCUMENTS_4000_LINUX_VCPU_MINUTES_AND_NO_CREDIT_CARD_REQUIRED"
+    ]
+  },
+  "consequence": {
+    "speculative_trial_support_uncertainty": "CLOSED_BY_DIRECT_PROVIDER_REPLY",
+    "account_authenticated_runtime_observation": "STILL_UNBOUND",
+    "current_chat_direct_trigger": "UNAVAILABLE_UNDER_CURRENT_ZERO_SPEND_TOOLING",
+    "execution_authority": false,
+    "acceptance_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_AN_AUTHENTICATED_BUILDKITE_JOB_HAS_RUN",
+    "NO_CLAIM_THE_REPLY_SEPARATELY_ENUMERATED_EACH_BULLET_AS_AN_INDEPENDENT_YES",
+    "NO_BENCHMARK_SCORE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
