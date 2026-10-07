@@ -1,0 +1,15 @@
+{
+  "schema":"PROJECT_BRAIN_P2_VISIBLE_GATE_SELF_PROOF_FALSIFIER_V1",
+  "date":"2026-10-07",
+  "status":"PROVED_ZERO_CREDIT",
+  "claim_under_attack":"VISIBLE_P2_GATE_IMPROVEMENT_ALONE_PROVES_TARGET_QUALITY_ORDER",
+  "countermodel":{
+    "baseline_visible":[0,0,0,0],
+    "selected_visible":[1,1,1,1],
+    "visible_selected_componentwise_ge_baseline":true,
+    "hidden_load_bearing_dimension_can_reverse_order":true
+  },
+  "wolfram":{"selected_visible_utility":4,"baseline_hidden_weighted_utility":10},
+  "consequence":"P2_TARGET_FREE_DOMINANCE_REQUIRES_COMPLETE_LOAD_BEARING_QUALITY_DIMENSION_COVER_OR_AN_AUTHENTICATED_TARGET_COMPARISON_ORDER__VISIBLE_GATES_ALONE_CANNOT_SELF_CERTIFY_COMPLETENESS",
+  "hard_nonclaims":["NO_CLAIM_CURRENT_TARGET_HAS_SUCH_A_HIDDEN_DIMENSION","NO_U_DELETION","NO_TERMINAL_CREDIT"]
+}
