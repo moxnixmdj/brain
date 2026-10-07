@@ -1,0 +1,74 @@
+name: Terminal-now exact gate self-report
+
+on:
+  push:
+    branches:
+      - terminal-now-scope-complete-cut-991ac
+    paths:
+      - '.github/workflows/terminal-now-gate-self-report-991ac.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Evaluate stable terminal pointer
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p canonical/verification
+          python3 - <<'PY'
+          import json
+          p="canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+          with open(p,encoding="utf-8") as f: a=json.load(f)
+          live=a.get("live_truth",{})
+          req={"COMPLETE_SELECTED_CONTEXT_ABC","D_FINAL_ROUTE_OWNERSHIP_EFFECT_DONOR_INDEPENDENCE_FINALITY"}
+          declared=set(live.get("independent_top_level_terminal_predicates") or [])
+          blockers=[]
+          if declared != req: blockers.append("TOP_LEVEL_PREDICATE_SET_DRIFT")
+          if live.get("fixed_authorized_target_trace_scope_closed") is not True: blockers.append("TARGET_TRACE_SCOPE_OPEN")
+          if live.get("router_mechanical_core_implemented") is not True: blockers.append("ROUTER_CORE_NOT_IMPLEMENTED")
+          if live.get("router_deployed_runtime_binding_closed") is not True: blockers.append("ROUTER_DEPLOYED_BINDING_OPEN")
+          if live.get("current_U_empty_proved") is not True: blockers.append("U_NOT_PROVED_EMPTY")
+          if live.get("router_registry_real_selected_cover_complete") is not True: blockers.append("ROUTER_REGISTRY_SELECTED_COVER_INCOMPLETE")
+          if live.get("complete_selected_context_ABC_closed") is not True: blockers.append("COMPLETE_SELECTED_CONTEXT_ABC_OPEN")
+          if live.get("D_finality_closed") is not True: blockers.append("D_FINALITY_OPEN")
+          derived=not blockers
+          declared_terminal=live.get("terminal") is True
+          if declared_terminal != derived:
+              blockers.append("DECLARED_TERMINAL_INCONSISTENT_WITH_REQUIRED_PREDICATES")
+              derived=False
+          receipt={
+            "schema":"PROJECT_BRAIN_TERMINAL_NOW_EXACT_GATE_SELF_REPORT_V1",
+            "source_pointer":p,
+            "terminal_real":derived,
+            "declared_terminal":declared_terminal,
+            "blockers":blockers,
+            "pointer_schema":a.get("schema"),
+            "pointer_status":a.get("status"),
+            "known_sound_D_B_certificate_record_count":live.get("known_sound_D_B_certificate_record_count"),
+            "abc_normal_form":live.get("complete_selected_context_ABC_normal_form"),
+          }
+          with open("canonical/verification/TERMINAL_NOW_EXACT_GATE_SELF_REPORT_991AC.json","w",encoding="utf-8") as f:
+              json.dump(receipt,f,indent=2,sort_keys=True);f.write("\n")
+          status={"schema":"PROJECT_BRAIN_TERMINAL_NOW_STATUS_V1","status":"TERMINAL_REAL" if derived else "TERMINAL_NOT_REAL"}
+          with open("canonical/verification/TERMINAL_NOW_STATUS_991AC.json","w",encoding="utf-8") as f:
+              json.dump(status,f,separators=(",",":"),sort_keys=True);f.write("\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+      - name: Commit gate receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Project Brain Terminal Gate"
+          git config user.email "project-brain-terminal-gate@users.noreply.github.com"
+          git add canonical/verification/TERMINAL_NOW_EXACT_GATE_SELF_REPORT_991AC.json canonical/verification/TERMINAL_NOW_STATUS_991AC.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Record exact terminal-now gate status at 991ac"
+          git push origin HEAD:terminal-now-scope-complete-cut-991ac
