@@ -7,6 +7,7 @@ coverage state, and finish authority. No benchmark-specific task content lives h
 from __future__ import annotations
 
 import json
+import re
 from typing import Any
 
 from canonical.runtime import harbor_science_planner_v1 as science_planner
@@ -31,6 +32,32 @@ MAX_CYCLES = 12
 MAX_REQUIREMENTS = 16
 MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
+
+_SUBMISSION_ARTIFACT_RE = re.compile(
+    r"/app/submission/([A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*\\.(?:py|json|ya?ml|txt|md|csv))"
+)
+_SUSPICIOUS_ACTION_DIAGNOSTICS = (
+    "here-document at line",
+    "delimited by end-of-file",
+    "unexpected eof",
+    "syntax error: unexpected end of file",
+)
+
+def _explicit_submission_artifacts(goal: str) -> list[str]:
+    out: list[str] = []
+    for match in _SUBMISSION_ARTIFACT_RE.finditer(str(goal or "")):
+        rel = match.group(1)
+        if rel not in out:
+            out.append(rel)
+    return out
+
+def _action_integrity_errors(stdout: str, stderr: str) -> list[str]:
+    text = (str(stdout or "") + "\n" + str(stderr or "")).lower()
+    return [
+        "SHELL_OUTPUT_TRUNCATION_OR_HEREDOC_INTEGRITY_WARNING:" + marker
+        for marker in _SUSPICIOUS_ACTION_DIAGNOSTICS
+        if marker in text
+    ]
 
 def _nonempty_strings(value: Any, *, maximum: int, field: str) -> list[str]:
     if not isinstance(value, list) or not value or len(value) > maximum:
@@ -106,6 +133,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
     goal = str(goal or "").strip()
     if not goal:
         raise ValueError("SCIENCE_GOAL_REQUIRED")
+    required_submission_artifacts = _explicit_submission_artifacts(goal)
     max_cycles = max(1, min(int(max_cycles), MAX_CYCLES))
     requirements: list[str] | None = None
     resolved: set[str] = set()
@@ -198,6 +226,11 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         }
         verify_observed = None
         verified = False
+        brain_postcheck = {
+            "required_submission_artifacts": list(required_submission_artifacts),
+            "integrity_errors": [],
+            "artifact_checks": [],
+        }
         if action_receipt.returncode == 0:
             verify_receipt = await transport.exec(chosen["verify_command"], timeout_sec=180)
             verify_observed = {
@@ -206,6 +239,48 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                 "stderr": verify_receipt.stderr[-MAX_OUTPUT_CHARS:],
             }
             verified = verify_receipt.returncode == 0
+
+        integrity_errors = _action_integrity_errors(
+            action_observed["stdout"], action_observed["stderr"]
+        )
+        if integrity_errors:
+            brain_postcheck["integrity_errors"].extend(integrity_errors)
+            verified = False
+
+        prospective_resolved = resolved | set(chosen["covers"])
+        would_finish = requirements is not None and not (set(requirements) - prospective_resolved)
+        if verified and would_finish and required_submission_artifacts:
+            missing_mentions = [
+                rel for rel in required_submission_artifacts
+                if rel not in chosen["verify_command"]
+                and ("/app/submission/" + rel) not in chosen["verify_command"]
+            ]
+            if missing_mentions:
+                brain_postcheck["integrity_errors"].append(
+                    "VERIFY_COMMAND_OMITS_EXPLICIT_REQUIRED_ARTIFACTS:" + ",".join(missing_mentions)
+                )
+                verified = False
+            else:
+                for rel in required_submission_artifacts:
+                    path = "/app/submission/" + rel
+                    existence = await transport.exec("test -s " + path, timeout_sec=30)
+                    check = {
+                        "path": path,
+                        "exists_nonempty": existence.returncode == 0,
+                        "syntax_or_parse_ok": None,
+                    }
+                    if existence.returncode != 0:
+                        verified = False
+                    elif rel.endswith(".py"):
+                        syntax = await transport.exec("python3 -m py_compile " + path, timeout_sec=30)
+                        check["syntax_or_parse_ok"] = syntax.returncode == 0
+                        verified = verified and syntax.returncode == 0
+                    elif rel.endswith(".json"):
+                        syntax = await transport.exec("python3 -m json.tool " + path + " >/dev/null", timeout_sec=30)
+                        check["syntax_or_parse_ok"] = syntax.returncode == 0
+                        verified = verified and syntax.returncode == 0
+                    brain_postcheck["artifact_checks"].append(check)
+
         if verified:
             resolved.update(chosen["covers"])
         record = {
@@ -216,6 +291,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "selection_reason": "MAX_DECLARED_UNRESOLVED_COVERAGE_THEN_ACTION_ID__STRUCTURAL_CONTROL_ONLY",
             "action_result": action_observed,
             "verify_result": verify_observed,
+            "brain_postcheck": brain_postcheck,
             "coverage_promoted": verified,
         }
         trace.append(record)
@@ -259,7 +335,7 @@ class HarborScienceAgent(BaseAgent):
         return "project-brain-science"
 
     def version(self) -> str:
-        return "1.2.0"
+        return "1.3.0"
 
     async def setup(self, environment: BaseEnvironment) -> None:
         return None
