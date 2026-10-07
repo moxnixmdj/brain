@@ -7,7 +7,7 @@ def test_receipt_writer_executes_and_readback_verifies(tmp_path):
     out = execute(
         executor_id=EXECUTOR_ID,
         executor_payload={"tool_id": "JSON_RECEIPT_WRITER_V1", "sandbox_rel": "task-1"},
-        proposal={"tool_payload": {"name": "Alice", "score": 0.75, "passed": True}},
+        proposal={"candidate_values": {"name": "Alice", "score": 0.75, "passed": True}},
         effect_root=tmp_path,
     )
     assert out["pass"] is True, out
@@ -20,7 +20,7 @@ def test_unknown_tool_fails_closed(tmp_path):
     out = execute(
         executor_id=EXECUTOR_ID,
         executor_payload={"tool_id": "SHELL_MAGIC", "sandbox_rel": "task-1"},
-        proposal={"tool_payload": {}},
+        proposal={"candidate_values": {}},
         effect_root=tmp_path,
     )
     assert out["pass"] is False
@@ -31,7 +31,7 @@ def test_proposal_cannot_override_tool_or_sandbox(tmp_path):
         executor_id=EXECUTOR_ID,
         executor_payload={"tool_id": "JSON_RECEIPT_WRITER_V1", "sandbox_rel": "task-1"},
         proposal={
-            "tool_payload": {"name": "Alice", "score": 0.75, "passed": True},
+            "candidate_values": {"name": "Alice", "score": 0.75, "passed": True},
             "tool_id": "JSONL_LEDGER_APPEND_V1",
         },
         effect_root=tmp_path,
@@ -43,7 +43,7 @@ def test_effect_root_escape_is_rejected(tmp_path):
     out = execute(
         executor_id=EXECUTOR_ID,
         executor_payload={"tool_id": "JSON_RECEIPT_WRITER_V1", "sandbox_rel": "../escape"},
-        proposal={"tool_payload": {"name": "Alice", "score": 0.75, "passed": True}},
+        proposal={"candidate_values": {"name": "Alice", "score": 0.75, "passed": True}},
         effect_root=tmp_path,
     )
     assert out["pass"] is False
@@ -53,7 +53,7 @@ def test_payload_schema_violation_fails_without_success(tmp_path):
     out = execute(
         executor_id=EXECUTOR_ID,
         executor_payload={"tool_id": "JSON_RECEIPT_WRITER_V1", "sandbox_rel": "task-1"},
-        proposal={"tool_payload": {"name": "Alice", "score": 0.75}},
+        proposal={"candidate_values": {"name": "Alice", "score": 0.75}},
         effect_root=tmp_path,
     )
     assert out["pass"] is False
