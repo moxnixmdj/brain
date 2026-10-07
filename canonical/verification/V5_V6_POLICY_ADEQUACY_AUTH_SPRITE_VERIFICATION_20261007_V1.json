@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_V5_V6_POLICY_ADEQUACY_AUTH_INDEPENDENT_REPLAY_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_REPLAY_PASS__V5_3_OF_3__V6_4_OF_4__SELF_CERTIFICATION_REMOVED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "canonical/runtime/proof_carrying_semantic_refinement_v5.py": "322a58d904eb781687f6979b7638f47e5fdbc814",
+    "canonical/tests/test_source_aligned_semantic_proof_v5.py": "1a9cfc461821d40dcbee51ffaa5ba303c480baff",
+    "canonical/runtime/proof_carrying_semantic_refinement_v6.py": "0fac6b4430dfd3aa60aa0d8889e0540b9ec0ffaf",
+    "canonical/tests/test_source_aligned_semantic_proof_v6.py": "ea7b8c762a191e4b97f73be68a03a3b633188453"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e"
+  },
+  "replay": {
+    "v5": {
+      "workspace": "/home/sprite/semantic_v4_v5_auth_replay_20261007",
+      "tests_run": 3,
+      "tests_passed": 3
+    },
+    "v6": {
+      "workspace": "/home/sprite/finance_raw_source_v6_replay",
+      "tests_run": 4,
+      "tests_passed": 4
+    }
+  },
+  "verified": [
+    "V5_SOURCE_ENTAILMENT_WITHOUT_ADEQUACY_BINDING_RETURNS_ADEQUACY_UNAUTHENTICATED",
+    "V6_RAW_FACT_SOURCE_ENTAILMENT_WITHOUT_ADEQUACY_BINDING_RETURNS_ADEQUACY_UNAUTHENTICATED",
+    "DEFINED_TERM_RELABELING_REMAINS_REJECTED",
+    "UNSUPPORTED_PARAPHRASE_REMAINS_UNPROVED",
+    "DUPLICATE_RAW_FACT_KEYS_CANNOT_MINT_CONSTRAINTS",
+    "FALSE_CLAIMED_CONDITION_RESULT_REMAINS_REJECTED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_OPEN_POLICY_ADEQUACY_CERTIFICATE_EXISTS",
+    "NO_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
