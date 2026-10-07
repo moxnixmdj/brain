@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_M0A_RAW_SOURCE_GENERATOR_IMAGE_UNIVERSAL_SELECTED_CELL_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_ZERO_REALITY_UNIVERSAL_GENERATOR_IMAGE_SELECTED_CELL__ZERO_GLOBAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "suite": {
+      "path": "canonical/runtime/m0a_raw_source_terminal_suite_v2.py",
+      "git_blob_sha": "63b5daacfa5623c38228d41f6a84e548890d252d"
+    },
+    "candidate": {
+      "path": "canonical/runtime/m0a_raw_source_brain_candidate_v2.py",
+      "git_blob_sha": "0aac96d27068bdad379703c1b0b8a7a32cacb2e2"
+    },
+    "prior_independent_diagnostic": {
+      "path": "canonical/verification/M0A_RAW_SOURCE_POST_REPAIR_PUBLIC_RUNNER_20261002_V1.json",
+      "git_blob_sha": "0eef12725a992a5f3377340ee4dcacb65e74b0cc"
+    },
+    "semantic_boundary": {
+      "path": "canonical/reasoning/2026-10-02_M0A_SEMANTIC_IDENTIFIABILITY_BOUNDARY_V1.json",
+      "git_blob_sha": "a8b3ca5230e8c1e73fdc0dbe0a4c5ae2a0710a6a"
+    }
+  },
+  "selected_cell": {
+    "id": "M0A_RAW_SOURCE_V2_EXACT_GENERATOR_IMAGE",
+    "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "domain": "ALL_PUBLIC_TASKS_EMITTED_BY_THE_PINNED_m0a_raw_source_terminal_suite_v2_generate_case_FOR_ANY_INTEGER_seed_AND_ANY_INTEGER_ordinal_GE_0",
+    "candidate_entry": "canonical.runtime.m0a_raw_source_brain_candidate_v2::solve",
+    "scope_complete_for_selected_cell": true,
+    "whole_open_ended_behavior_scope_complete": false
+  },
+  "finite_image_theorem": {
+    "generator_domain_tuple_count": 11,
+    "generator_case_class_count": 8,
+    "maximum_distinct_semantically_relevant_template_pairs": 88,
+    "proof": [
+      "THE_PINNED_GENERATOR_SELECTS_EXACTLY_ONE_MEMBER_OF_THE_FIXED_11_ELEMENT_DOMAINS_TUPLE.",
+      "THE_PINNED_GENERATOR_SELECTS_EXACTLY_ONE_MEMBER_OF_THE_FIXED_8_ELEMENT_CASE_CLASSES_TUPLE_BY_ordinal_MOD_8.",
+      "FOR_EACH_CASE_CLASS_THE_RAW_SOURCE_AND_HIDDEN_ORACLE_ARE_DETERMINISTIC_FUNCTIONS_ONLY_OF_THE_SELECTED_DOMAIN_TUPLE_AND_CASE_CLASS; seed_AND_THE_NUMERIC_VALUE_OF_ordinal_DO_NOT_ENTER_THE_SEMANTIC_PAYLOAD_AFTER_THOSE_SELECTIONS.",
+      "THE_CANDIDATE_SOLVER_CONSUMES_raw_source_AND_DOES_NOT_CONSUME_seed_ordinal_case_id_OR_THE_HIDDEN_ORACLE.",
+      "THEREFORE_THE_ACCEPTANCE_RESULT_FOR_EVERY_GENERATED_CASE_IS_DETERMINED_BY_AT_MOST_11_TIMES_8_DOMAIN_CLASS_PAIRS.",
+      "EXECUTING_ONE_ACTUAL_GENERATOR_WITNESS_FOR_EVERY_REACHABLE_DOMAIN_CLASS_PAIR_AND_OBSERVING_PASS_FOR_ALL_88_EXHAUSTS_THE_EXACT_GENERATOR_IMAGE."
+    ],
+    "falsifier": "ANY_PINNED_GENERATOR_OUTPUT_WITH_A_SEMANTIC_PAYLOAD_NOT_DETERMINED_BY_ONE_OF_THE_88_DOMAIN_CLASS_PAIRS_OR_ANY_OF_THE_88_PAIR_WITNESSES_FAILING_THE_PINNED_SCORER"
+  },
+  "consequence": {
+    "selected_cell_ABC_candidate": true,
+    "target_information_consumed": 0,
+    "fresh_reality_units_consumed": 0,
+    "proposed_D_B_region": "M0A_RAW_SOURCE_V2_EXACT_GENERATOR_IMAGE",
+    "scheduler_delta": "DO_NOT_REPLAY_RANDOM_M0A_V2_GENERATOR_SEEDS_FOR_THIS_EXACT_CELL__THE_GENERATOR_IMAGE_IS_EXHAUSTED_BY_THE_88_DOMAIN_CLASS_PAIRS"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_88_TEMPLATE_IMAGE_IS_SCOPE_EQUIVALENT_TO_ARBITRARY_NATURAL_LANGUAGE_SEMANTICS.",
+    "NO_CLAIM_WHOLE_OPEN_ENDED_SPECIFICATION_TO_ACCEPTANCE_SCOPE_IS_CLOSED.",
+    "NO_CLAIM_MYSTERYMECHANISM_SUCCESSOR_SCOPE_IS_CLOSED.",
+    "NO_CLAIM_GLOBAL_SELECTED_COVER_COMPLETENESS.",
+    "NO_FAMILY_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
