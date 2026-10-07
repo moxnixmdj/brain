@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_OFFICIAL_PUBLIC_REALITY_REFRESH_V1",
+  "date": "2026-10-07",
+  "status": "FRESH_OFFICIAL_TARGET_REALITY__PUBLIC_BENCHMARK_ANCHOR__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target": {
+    "model": "Claude Opus 5.5",
+    "release_date": "2026-09-22",
+    "official_source": "https://www.anthropic.com/claude-opus-5-5",
+    "system_cards_index": "https://www.anthropic.com/system-cards"
+  },
+  "official_public_benchmark_observations": [
+    {"benchmark":"Terminal-Bench 4.0","target_value":66.4,"unit":"percent","notes":"agentic coding; xhigh effort in Anthropic comparison"},
+    {"benchmark":"FrontierCode v1.1 Main","target_value":54.4,"unit":"percent","notes":"agentic coding"},
+    {"benchmark":"CursorBench 4.0","target_value":57.8,"unit":"percent","notes":"agentic coding"},
+    {"benchmark":"GDPval-AA v2.1","target_value":1846,"unit":"reported_score","notes":"knowledge work"},
+    {"benchmark":"AutomationBench","target_value":40.0,"unit":"percent","notes":"business workflows; Anthropic states no fallback models were used for these runs"},
+    {"benchmark":"Humanity's Last Exam","target_value":67.7,"unit":"percent","notes":"with tools"},
+    {"benchmark":"Terminal-Bench-Science 0.1","target_value":58.7,"unit":"percent","notes":"agentic scientific research"},
+    {"benchmark":"OSWorld 2.1","target_value":81.8,"unit":"percent","notes":"partial"},
+    {"benchmark":"Chartography","target_value":89.0,"unit":"percent","notes":"with tools"}
+  ],
+  "source_caveats": [
+    "ANTHROPIC_STATES_UNLESS_OTHERWISE_NOTED_OPUS_5_5_RESULTS_USE_ADAPTIVE_THINKING_AT_MAX_EFFORT.",
+    "ANTHROPIC_STATES_TERMINAL_BENCH_4_0_USES_XHIGH_EFFORT_FOR_OPUS_5_5_IN_THE_COMPARISON.",
+    "ANTHROPIC_STATES_PRODUCTION_SAFEGUARDS_WERE_ENABLED_AND_SOME_SAFEGUARD_INTERVENTIONS_ON_SELECTED_BENCHMARK_DOMAINS_FELL_BACK_TO_OTHER_CLAUDE_MODELS.",
+    "AUTOMATIONBENCH_IS_REPORTED_AS_RUN_WITHOUT_FALLBACK_MODELS.",
+    "THESE_PUBLIC_AGGREGATE_SCORES_DO_NOT_BY_THEMSELVES_IDENTIFY_EXACT_PER_CONTEXT_TARGET_SUCCESS OR COMPLETE THE BRAIN ABC COVER."
+  ],
+  "proof_effect": {
+    "fresh_target_reality_acquired": true,
+    "target_is_now_bound_to_current_official_public_performance_observations": true,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false,
+    "reason": "PUBLIC_AGGREGATE_TARGET_RESULTS_ANCHOR_REAL_TARGET_PERFORMANCE_BUT_DO_NOT_SUPPLY_THE_CONTEXT_LOCAL_BRAIN_ADEQUACY_OR_SELECTED_DISCRIMINATOR_CERTIFICATES_REQUIRED_TO_EMPTY_U."
+  },
+  "scheduler_effect": [
+    "DO_NOT_TREAT_OPUS_5_5_AS_AN_ABSTRACT_TARGET_WITHOUT_CURRENT_REALITY_ANCHORS.",
+    "WHEN_A_SURVIVING_U_CLASS_MAPS_SOUNDLY_TO_ONE_OF_THE_OFFICIAL_EVALUATION_DOMAINS__REQUIRE_A_BRAIN_OWNED_EQUAL_OR_BETTER_ACCEPTANCE_PROOF_OR_STRONGER_SCOPE_COMPLETE_TOP_LAW_CERTIFICATE.",
+    "DO_NOT_INFER_PER_CONTEXT_SUCCESS_FROM_AGGREGATE_PERCENTAGES.",
+    "DO_NOT_GRANT_TERMINAL_CREDIT_FROM_PUBLIC_BENCHMARK_METADATA_ALONE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_PUBLIC_BENCHMARK_LIST_EXHAUSTS_ALL_USEFUL_TARGET_CAPABILITIES.",
+    "NO_CLAIM_ANY_BRAIN_ROUTE_CURRENTLY_MATCHES_OR_EXCEEDS_THE_LISTED_TARGET_VALUES.",
+    "NO_CLAIM_AGGREGATE_TARGET_SCORE_PROVES_ANY_SPECIFIC_UNOBSERVED_TASK_SUCCESS.",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_public_target_reality_units_consumed": 1,
+    "terminal_credit_delta": 0
+  }
+}
