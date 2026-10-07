@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_SYMBOLIC_CREDITABLE_PAYLOAD_BINDING_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_LOAD_BEARING_SOUNDNESS_REPAIR__PENDING_INDEPENDENT_GITHUB_REPLAY__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "defect": {
+    "affected_runtime": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v3.py",
+      "git_blob_sha": "e18b3ee57a680c89dd7fca8a94592f5a5a61655b"
+    },
+    "statement": "V3 selects a symbolic route by evaluating the authenticated context but invokes the selected route on a separately supplied payload without requiring the V2 content-addressed context/payload membership validator for creditable rows.",
+    "constructive_counterexample_shape": "A creditable predicate may be true on certified context c while dispatch(c,p) executes p outside the certified cell. Admission soundness over c therefore does not imply adequacy of execution on arbitrary p.",
+    "terminal_effect": "DO_NOT_DEPLOY_REAL_CREDITABLE_SYMBOLIC_D_B_ROWS_THROUGH_V3_UNTIL_THIS_SEAM_IS_REPAIRED."
+  },
+  "repair": {
+    "successor_runtime": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v4.py",
+      "git_blob_sha": "375f415f2e0b7348d88fb23b0efca433791ea581"
+    },
+    "tests": {
+      "path": "canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v4.py",
+      "git_blob_sha": "1ecdf4e19888b043ff3393f57109d21bc6dbfb98"
+    },
+    "reused_payload_binding_authority": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "git_blob_sha": "ba260cd997adb8df97417e5f03eaf547b5365379"
+    },
+    "rule": "EVERY_CREDITABLE_SYMBOLIC_ROW_MUST_BIND_A_CONTENT_ADDRESSED_PAYLOAD_VALIDATOR_IN_THE_ROW_AND_ADMISSION_CERTIFICATE__THE_VALIDATOR_MUST_ATTEST_EXACT_CELL_CONTEXT_DIGEST_AND_RECOMPUTED_CANONICAL_PAYLOAD_DIGEST_BEFORE_ROUTE_IMPORT_OR EXECUTION.",
+    "noncreditable_canary_compatibility": true
+  },
+  "verification_required": {
+    "workflow": ".github/workflows/verify-symbolic-creditable-payload-binding-v4.yml",
+    "receipt": "canonical/verification/SYMBOLIC_CREDITABLE_PAYLOAD_BINDING_GITHUB_VERIFICATION_20261007_V1.json",
+    "independent_runner": "GITHUB_HOSTED_UBUNTU_LATEST",
+    "must_pass": [
+      "V2_PAYLOAD_BINDING_TESTS",
+      "V3_SYMBOLIC_ROUTING_TESTS",
+      "V4_PAYLOAD_BINDING_REGRESSION_TESTS",
+      "LIVE_NONCREDITABLE_CANARY_PREFLIGHT"
+    ]
+  },
+  "promotion_rule": "ONLY_AFTER_THE_INDEPENDENT_RECEIPT_BINDS_THE_EXACT_V4_AND_TEST_BLOBS_MAY_V4_REPLACE_V3_AS_THE_CREDITABLE_SYMBOLIC_ROUTE_EXECUTION_AUTHORITY.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_REAL_CREDITABLE_SYMBOLIC_D_B_ROW_IS_DEPLOYED_YET.",
+    "NO_CLAIM_THE_CURRENT_17_REGION_PREDICATE_SET_IS COMPLETE.",
+    "NO_CLAIM_RESIDUAL_COMPLEMENT_IS_UNSAT.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ]
+}
