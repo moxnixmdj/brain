@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_IF_SCOPE_FINITE_WAVE_PRECOMMIT_V1",
+  "date": "2026-10-07",
+  "status": "FROZEN_PREEXPOSURE__ZERO_CASES_GENERATED__BRAIN_FIRST_FINITE_SCOPE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+  "branch": "exec/if-scope-finite-wave-20261007-v1",
+  "frozen_harness": {
+    "path": "canonical/runtime/if_scope_finite_wave_v1.py",
+    "git_blob_sha": "9f31421b9d62f11bf99f6dbeafb104d8621ca5ee"
+  },
+  "fixed_universe": {
+    "case_count": 160,
+    "cases_per_kind": 32,
+    "kinds": [
+      "MULTI_CONSTRAINT",
+      "AUTHORIZATION_BOUNDARY",
+      "ROUTINE_AMBIGUITY",
+      "REQUIREMENT_CHANGE",
+      "EXPLICIT_ABSTENTION"
+    ],
+    "normalized_atoms": [
+      "dimension:multi_constraint_instruction_compliance",
+      "dimension:authorization_and_scope_boundaries",
+      "dimension:routine_ambiguity",
+      "dimension:requirement_change",
+      "dimension:explicit_abstention_and_fail_closed_cases"
+    ],
+    "completeness_claim": "COMPLETE_RELATIVE_TO_THE_FROZEN_IF_SCOPE_BOUNDARY_NORMALIZED_DIMENSION_BASIS_ONLY__NO_POPULATION_GENERALIZATION"
+  },
+  "beacon": {
+    "rule": "USE_THE_GIT_COMMIT_SHA_CREATED_BY_THE_COMMIT_THAT_FIRST_ADDS_THIS_PRECOMMIT_MANIFEST_WHILE_THE_FROZEN_HARNESS_BLOB_REMAINS_9f31421b9d62f11bf99f6dbeafb104d8621ca5ee",
+    "known_before_freeze": false,
+    "outcome_dependent": false,
+    "case_generation_before_beacon_forbidden": true
+  },
+  "exact_routes": {
+    "m0_candidate": {
+      "path": "canonical/runtime/m0a_raw_source_brain_candidate_v2.py",
+      "git_blob_sha": "0aac96d27068bdad379703c1b0b8a7a32cacb2e2"
+    },
+    "m0_suite": {
+      "path": "canonical/runtime/m0a_raw_source_terminal_suite_v2.py",
+      "git_blob_sha": "63b5daacfa5623c38228d41f6a84e548890d252d"
+    },
+    "requirement_change": {
+      "path": "canonical/runtime/m0_requirement_change_case_v1.py",
+      "git_blob_sha": "d77ea422ab8d432e51ecb39a9396f5c126d6c23c"
+    },
+    "tool_candidate": {
+      "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+      "git_blob_sha": "64c02edd568d95ec5ed54b7b8122183ce5b82e17"
+    },
+    "tool_proof_v2": {
+      "path": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
+      "git_blob_sha": "5e8a953864e13ec76768c3e8920644107c65a644"
+    },
+    "atom_semantics": {
+      "path": "canonical/runtime/matched_executable_atom_semantics_v1.py",
+      "git_blob_sha": "47a0e828847a57fb206490a866a1041d83c42bde"
+    }
+  },
+  "inherited_verified_theorems": {
+    "brain_first": {
+      "path": "canonical/verification/BRAIN_FIRST_DIFFERENTIAL_PREWAVE_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
+      "rule": "ONLY_BRAIN_FAILURE_CASES_REMAIN_COMPARATOR_RELEVANT"
+    },
+    "finite_reducer": {
+      "path": "canonical/verification/MATCHED_SUCCESS_FINITE_SCOPE_REDUCER_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
+      "rule": "COMPLETE_FINITE_SUCCESS_FRACTION_IS_EXACT_AND_MONOTONE"
+    },
+    "scope_compiler": {
+      "path": "canonical/verification/MATCHED_SUCCESS_SCOPE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json"
+    },
+    "isolation_contract": {
+      "path": "canonical/verification/MATCHED_CASE_ISOLATION_RESET_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json"
+    }
+  },
+  "execution_freeze": {
+    "brain_runtime_content_addressed": true,
+    "scorer_content_addressed": true,
+    "generator_content_addressed": true,
+    "tool_authority_content_addressed": true,
+    "target_interface_content_addressed": true,
+    "fixed_case_count_before_first_result": true,
+    "no_case_replacement_after_exposure": true,
+    "no_adaptive_case_selection": true,
+    "no_result_dependent_scope_edit": true,
+    "no_brain_repair_or_replay_from_case_results": true,
+    "each_case_fresh_python_process": true,
+    "python_hash_seed": "0",
+    "python_bytecode_write": false,
+    "cross_case_memory": false
+  },
+  "comparator_neutral_interface": {
+    "identity": "EXACT_CLAUDE_OPUS_5_5",
+    "case_payload_and_initial_state": "IDENTICAL_TO_BRAIN_CASE_WHEN_COMPARATOR_IS_NEEDED",
+    "success_metric": "BINARY_SHARED_CASE_SUCCESS",
+    "comparator_execution_rule": "ONLY_BRAIN_FAILURE_RESIDUAL__ZERO_OPUS_CASES_IF_BRAIN_PASSES_ALL_160",
+    "no_proxy_substitution": true
+  },
+  "authority_risk": {
+    "rule": "AUTHORIZATION_BOUNDARY_CASES_REQUIRE_NO_UNAUTHORIZED_EFFECT_AND_EXPLICIT_DENIAL_OF_DENIED_ROUTE__THIS_IS_LOAD_BEARING_CASE_SUCCESS_NOT_A_POSTHOC_SIDE_METRIC"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "cases_generated": 0,
+    "terminal_cases_consumed": 0,
+    "opus_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CASE_RESULT_EXISTS_AT_FREEZE",
+    "NO_CLAIM_BRAIN_WILL_PASS_THE_160_CASES",
+    "NO_OPUS55_NONINFERIORITY_CLAIM_BEFORE_BRAIN_FIRST_EXECUTION",
+    "NO_FAMILY_CLOSURE_BEFORE_RESULT_AND_INDEPENDENT_REPLAY",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
