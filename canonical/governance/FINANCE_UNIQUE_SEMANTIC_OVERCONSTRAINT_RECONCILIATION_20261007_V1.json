@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_UNIQUE_SEMANTIC_OVERCONSTRAINT_RECONCILIATION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_RUNTIME_GOVERNANCE_MISMATCH__CURRENT_JUDGMENT_RUNTIME_REQUIRES_UNIQUE_INTERPRETATION_WHERE_CURRENT_AUTHORITY_ALLOWS_COMMON_POLICY_OVER_COARSER_CELL__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "observed_runtime": {
+    "path": "canonical/runtime/judgment_control_envelope_v1.py",
+    "load_bearing_conditions_for_CONCLUDE": [
+      "semantic_ir.status_MUST_EQUAL_COMPILED",
+      "semantic_identifiability.status_MUST_EQUAL_UNIQUE",
+      "decision.status_MUST_EQUAL_DECIDED",
+      "proposed_selected_alternative_MUST_EQUAL_recomputed_selected_alternative",
+      "finance_source_coverage_MUST_PASS",
+      "leaf_specific_required_evidence_MUST_contribute",
+      "reconciliation_checks_MUST_pass"
+    ],
+    "specific_overconstraint": "FORCED_CONCLUSION_WITHOUT_UNIQUE_SEMANTIC_IDENTIFICATION"
+  },
+  "current_governance": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "observed_schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V13",
+    "minimum_information_rule": "FIRST_ONE_COMMON_CERTIFIED_ADEQUATE_POLICY__OTHERWISE_MINIMUM_TRUTHFUL_POLICY_CHANGING_DISCRIMINATOR",
+    "complete_semantic_world_reconstruction_required": false
+  },
+  "countermodel": {
+    "interpretations": ["i1","i2"],
+    "materially_distinct": true,
+    "same_certified_adequate_policy": "p",
+    "source_and_authorized_context_consistent": true,
+    "runtime_v1_result": "BLOCKED_BECAUSE_IDENT_STATUS_IS_AMBIGUOUS",
+    "governance_result": "SEMANTIC_ACQUISITION_MAY_STOP_IF_POLICY_p_IS_CERTIFIED_ADEQUATE_OVER_THE_ENTIRE_COARSE_CELL",
+    "conclusion": "UNIQUE_INTERPRETATION_IS_NOT_A_NECESSARY_CONDITION_FOR_SOUND_TERMINAL_CONCLUSION"
+  },
+  "repair_direction": {
+    "do_not_delete_fail_closed_semantics": true,
+    "replace_unique_requirement_with": "EITHER_UNIQUE_IDENTIFIED_INTERPRETATION_OR_SOUND_COMMON_POLICY_REGION_CERTIFICATE_COVERING_ALL_SURVIVING_INTERPRETATIONS",
+    "if_no_common_policy": "REQUEST_ONLY_A_TRUTHFUL_POLICY_CHANGING_DISCRIMINATOR_OR_ABSTAIN",
+    "required_new_proof_object": [
+      "SURVIVING_SEMANTIC_CONSTRAINT_STATE_OR_EXPLICIT_INTERPRETATION_SET",
+      "SELECTED_POLICY_ID",
+      "SOUND_ADEQUACY_CERTIFICATE_FOR_SELECTED_POLICY_OVER_ALL_SURVIVING_STATES",
+      "SOURCE_PROVENANCE_FOR_LOAD_BEARING_POLICY_ATOMS",
+      "NO_UNRESOLVED_HARD_CONSTRAINT_OR_TERMINAL_ORDER_CONFLICT"
+    ],
+    "preferred_selector": "DRD_HEC_WHEN_THE_SURVIVING_STATE_TEST_LIBRARY_IS_SOUNDLY_FINITE__OTHERWISE_CEGAR_STYLE_SOUND_REFINEMENT"
+  },
+  "important_nonimplication": {
+    "dual_extractor_agreement_not_enough": true,
+    "ambiguous_raw_semantics_may_still_be_safe": "ONLY_IF_ALL_SURVIVING_AUTHORIZED_INTERPRETATIONS_ARE_WITHIN_ONE_SOUND_POLICY_ADEQUACY_REGION",
+    "common_policy_certificate_not_same_as_majority_vote": true
+  },
+  "next_execution": [
+    "ADD_A_DECISION_REGION_COMMON_POLICY_GATE_AS_A_NEW_BRAIN_OWNED_RUNTIME_COMPONENT_WITHOUT_WEAKENING_EXISTING_V1",
+    "CREATE_COUNTERFACTUAL_TEST_WHERE_TWO_DISTINCT_INTERPRETATIONS_SHARE_ONE_ADEQUATE_POLICY_AND_V1_BLOCKS_BUT_NEW_GATE_PASSES",
+    "CREATE_NEGATIVE_TEST_WHERE_INTERPRETATIONS_REQUIRE_DIFFERENT_POLICIES_AND_NEW_GATE_MUST_BLOCK_OR_REQUEST_DISCRIMINATOR",
+    "INDEPENDENTLY_REPLAY_BEFORE_ANY_ROUTER_OR_D_B_PROMOTION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_EXISTING_V1_RUNTIME_IS_UNSOUND__IT_IS_CONSERVATIVELY_OVERSTRICT",
+    "NO_CLAIM_A_COMMON_POLICY_CERTIFICATE_ALREADY_EXISTS_FOR_THE_LIVE_FINANCE_RESIDUAL",
+    "NO_CLAIM_RAW_SEMANTIC_EXTRACTION_IS_SOLVED",
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_TERMINAL_OR_FAMILY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
