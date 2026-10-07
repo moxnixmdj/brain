@@ -1,0 +1,144 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_CLOSURE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_STRONGER_SCOPE_COMPLETE_AGENCY_ACCEPTANCE_CLOSURE__ZERO_TARGET_QUERY__ZERO_TERMINAL_CREDIT_PENDING_CANONICAL_PROMOTION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "frozen_protocol": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "family": "COMPLEX_MULTI_TOOL_AGENCY",
+    "predicates": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+    ],
+    "dimensions": [
+      "multi-step planning with at least three distinct tool/action types",
+      "state change after actions requiring replanning",
+      "long-horizon state retention",
+      "tool failure/recovery",
+      "subtask dependency and fan-in",
+      "minimal-oversight completion"
+    ],
+    "metrics": [
+      "terminal_task_success",
+      "invalid_action_rate",
+      "unrecovered_failure_rate",
+      "duplicate_or_conflicting_work_rate"
+    ]
+  },
+  "exact_route": {
+    "runtime": {
+      "path": "canonical/runtime/matched_agency_stateful_case_v2.py",
+      "git_blob_sha": "eb0af8b01f25bcd38885fde71ebe1eccde793e85"
+    },
+    "predecessor_independent_verification": {
+      "path": "canonical/verification/AGENCY_STATEFUL_GENERATOR_UNIVERSAL_TOP_LAW_INDEPENDENT_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "2f1efbc385c8d37d89c43c699981f8c235d93249"
+    },
+    "delegation_universal_verification": {
+      "path": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "955ac8f4bd0db2527bfbb465fc8252df6d916156"
+    },
+    "browser_universal_verification": {
+      "path": "canonical/verification/BROWSER_STATE_GENERATOR_UNIVERSAL_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "2d9b30654dce2a43de8c4fea905fa13478bc0893"
+    },
+    "tool_universal_verification": {
+      "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+    }
+  },
+  "exact_delta_from_verified_v1": {
+    "semantic_change_count": 1,
+    "change": "delegation generator ordinal changes from constant 0 to harness ordinal",
+    "unchanged_load_bearing_structure": [
+      "same three-action planner graph browser->tool->delegation",
+      "same checkpoint/relaunch continuity trace",
+      "same no-post-action-guidance boundary",
+      "same universally certified browser component",
+      "same universally certified tool-discovery component",
+      "same universally certified delegation candidate and scorer"
+    ]
+  },
+  "six_class_quotient": {
+    "class_selector": "ordinal mod 6",
+    "classes": [
+      "BASE_PARALLEL",
+      "RESOURCE_CONFLICT",
+      "WORKER_UNAVAILABLE",
+      "STEP_UNAVAILABLE",
+      "WORKER_CAPABILITY_REMOVED",
+      "RESOURCE_CAPACITY_CHANGED"
+    ],
+    "exhaustive": true,
+    "dimension_cover": {
+      "multi-step planning with at least three distinct tool/action types": [
+        "ALL_CLASSES"
+      ],
+      "state change after actions requiring replanning": [
+        "WORKER_UNAVAILABLE",
+        "STEP_UNAVAILABLE",
+        "WORKER_CAPABILITY_REMOVED",
+        "RESOURCE_CAPACITY_CHANGED"
+      ],
+      "long-horizon state retention": [
+        "ALL_CLASSES"
+      ],
+      "tool failure/recovery": [
+        "STEP_UNAVAILABLE",
+        "WORKER_CAPABILITY_REMOVED"
+      ],
+      "subtask dependency and fan-in": [
+        "ALL_CLASSES"
+      ],
+      "minimal-oversight completion": [
+        "ALL_CLASSES"
+      ]
+    }
+  },
+  "top_law": {
+    "terminal_task_success": {
+      "brain": 1,
+      "theoretical_maximum": 1
+    },
+    "invalid_action_rate": {
+      "brain": 0,
+      "theoretical_minimum": 0
+    },
+    "unrecovered_failure_rate": {
+      "brain": 0,
+      "theoretical_minimum": 0
+    },
+    "duplicate_or_conflicting_work_rate": {
+      "brain": 0,
+      "theoretical_minimum": 0
+    },
+    "consequence": "ON_THE_SCOPE_COMPLETE_SIX_CLASS_REPRESENTATIVE_PORTFOLIO_THE_BRAIN_IS_COMPONENTWISE_AT_THE_THEORETICAL_OPTIMUM__NO_COMPARATOR_CAN_BE_MATERIALLY_BETTER_ON_ANY_FROZEN_PRIMARY_METRIC",
+    "proof_mode": "ABSOLUTE_DOMINANCE_WITH_UNIVERSAL_COMPONENT_SCOPE_AND_EXHAUSTIVE_FINITE_CLASS_QUOTIENT",
+    "opus_query_required": false
+  },
+  "ownership": {
+    "brain_owned_route": true,
+    "opaque_target_capability_provider": false,
+    "external_donor_required_at_runtime": false,
+    "note": "ROUTE_IS_REPOSITORY_BOUND_BRAIN_RUNTIME_COMPOSED_ONLY_FROM_BRAIN_OWNED_OR_ALREADY_INTERNALIZED_COMPONENTS"
+  },
+  "promotion_effect_if_verified": [
+    "PROVE_AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "PROVE_AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+    "SET_COMPLEX_MULTI_TOOL_AGENCY_ACCEPTANCE_PASS",
+    "PROMOTE_EXACT_BRAIN_OWNED_AGENCY_ROUTE",
+    "REDUCE_INDEPENDENT_OPEN_ACCEPTANCE_EVIDENCE_OBLIGATIONS_BY_2"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_MULTI_TOOL_BEHAVIOR_OUTSIDE_THE_FROZEN_PROTOCOL_IS_CLOSED.",
+    "NO_AUTOMATIONBENCH_OR_OSWORLD_CREDIT.",
+    "NO_CLAIM_ANY_OTHER_FAMILY_IS_CLOSED.",
+    "NO_TERMINAL_CREDIT_FROM_THIS_FILE_ALONE."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
