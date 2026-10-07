@@ -32,6 +32,20 @@ MAX_REQUIREMENTS = 16
 MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
 
+# A shell command can exit zero even when an inline payload was cut off at EOF.
+# Such transport-integrity warnings must never be laundered into verified coverage.
+_FATAL_ACTION_STDERR_MARKERS = (
+    "here-document at line",
+    "unexpected eof",
+    "syntax error near unexpected token",
+)
+
+def _action_transport_clean(returncode: int, stderr: Any) -> bool:
+    if int(returncode) != 0:
+        return False
+    text = str(stderr or "").lower()
+    return not any(marker in text for marker in _FATAL_ACTION_STDERR_MARKERS)
+
 def _nonempty_strings(value: Any, *, maximum: int, field: str) -> list[str]:
     if not isinstance(value, list) or not value or len(value) > maximum:
         raise RuntimeError(f"SCIENCE_{field}_INVALID")
@@ -198,7 +212,10 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         }
         verify_observed = None
         verified = False
-        if action_receipt.returncode == 0:
+        action_transport_clean = _action_transport_clean(
+            action_receipt.returncode, action_receipt.stderr
+        )
+        if action_transport_clean:
             verify_receipt = await transport.exec(chosen["verify_command"], timeout_sec=180)
             verify_observed = {
                 "returncode": verify_receipt.returncode,
@@ -215,6 +232,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "covers": chosen["covers"],
             "selection_reason": "MAX_DECLARED_UNRESOLVED_COVERAGE_THEN_ACTION_ID__STRUCTURAL_CONTROL_ONLY",
             "action_result": action_observed,
+            "action_transport_clean": action_transport_clean,
             "verify_result": verify_observed,
             "coverage_promoted": verified,
         }
