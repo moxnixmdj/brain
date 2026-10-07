@@ -1,3 +1,4 @@
+# current authority rebinding verified via path-scoped CI
 from __future__ import annotations
 import hashlib, json
 from pathlib import Path
