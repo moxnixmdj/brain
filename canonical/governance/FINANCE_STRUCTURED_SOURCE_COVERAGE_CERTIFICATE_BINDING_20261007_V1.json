@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_STRUCTURED_SOURCE_COVERAGE_CERTIFICATE_BINDING_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_IMPLEMENTED_BOUNDED_SOURCE_COVERAGE_INTERFACE__NO_D_B_OR_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "finance_source_coverage_truth_repair": {
+      "path": "canonical/governance/FINANCE_DIRECT_ROUTE_SOURCE_COVERAGE_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "b760bdf4b68c51261d6513b232baaf5339089c8f"
+    },
+    "finance_two_leaf_cut": {
+      "path": "canonical/governance/V15_FINANCE_TWO_LEAF_PIECEWISE_ROUTE_CUT_20261007_V1.json",
+      "git_blob_sha": "2ae349caea470c716fcb48c23984d7603c963d6b"
+    },
+    "finance_shared_semantic_reconciliation": {
+      "path": "canonical/governance/FINANCE_SHARED_SEMANTIC_RESIDUAL_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "d9453733ac28a205305129ac7b80e6ea1b692815"
+    },
+    "source_contract_compiler": {
+      "path": "canonical/runtime/source_contract_compiler.py",
+      "git_blob_sha": "ba53b1f1a3c1d8e63c906eb4952c7e9b6aef1231"
+    },
+    "judgment_runtime": {
+      "path": "canonical/runtime/judgment_control_envelope_v1.py",
+      "git_blob_sha": "5ebfd1e7fa871da89ecca40ffeb8dd6575c21582"
+    },
+    "direct_e2e_theorem": {
+      "path": "canonical/governance/DIRECT_END_TO_END_SELECTED_CELL_CERTIFICATE_THEOREM_20261007_V1.json",
+      "git_blob_sha": "ecb52ca25fa14a60b7c34206fea25d8d3cfdcf0d"
+    }
+  },
+  "implementation": {
+    "runtime": {
+      "path": "canonical/runtime/finance_structured_source_coverage_certificate_v1.py",
+      "git_blob_sha": "a2928bccba3f31d31ace738f01e8ecfbc4974882"
+    },
+    "tests": {
+      "path": "canonical/tests/test_finance_structured_source_coverage_certificate_v1.py",
+      "git_blob_sha": "73c3a2fb707e8995942e4aaa0b9424007259505a"
+    }
+  },
+  "scope": {
+    "closed_by_mechanism_if_bound_to_a_frozen_authoritative_manifest": [
+      "SUPERVISORY_PRE_NORMALIZED_PACKAGE_SOURCE_ITEM_COMPLETENESS",
+      "DOCUMENT_PRE_NORMALIZED_PACKAGE_SOURCE_ITEM_COMPLETENESS"
+    ],
+    "mechanical_guarantees": [
+      "CONTENT_HASH_BINDS_THE_COMPLETE_AUTHORITATIVE_PACKAGE",
+      "EVERY_MANIFEST_ITEM_HAS_A_UNIQUE_ID_CATEGORY_AND_SOURCE_REFERENCE",
+      "EVERY_REQUIRED_MANIFEST_ITEM_MUST_APPEAR_IN_THE_CORRECT_PROOF_EVIDENCE_CHANNEL",
+      "OMISSIONS_EXTRAS_WRONG_CHANNELS_DUPLICATES_OR_PACKAGE_TAMPERING_FAIL_CLOSED"
+    ],
+    "explicit_exclusions": [
+      "RAW_TEXT_SEMANTIC_EXTRACTION",
+      "IMPLICIT_RULE_OR_DOCUMENT_MEANING_RECOVERY",
+      "PROOF_THAT_A_PRE_NORMALIZED_MANIFEST_ITSELF_IS_SEMANTICALLY_COMPLETE_OR_CORRECT",
+      "ANY_NEW_TARGET_OR_OPUS_RESULT"
+    ]
+  },
+  "promotion_condition": [
+    "BIND_AN_EXACT_PRE_FROZEN_AUTHORITATIVE_FINANCE_PACKAGE_MANIFEST",
+    "BIND_THE_EXACT_DEPLOYED_FINANCE_ROUTE_AND_PROOF_BUNDLE",
+    "RUN_INDEPENDENT_EXACT_BYTE_REPLAY_WITH_NEGATIVE_OMISSION_TAMPER_AND_WRONG_CHANNEL_CANARIES",
+    "ONLY_THEN_ADD_THE_EXACT_BOUND_STRUCTURED_SUBDOMAIN_TO_D_B"
+  ],
+  "scheduler_effect": [
+    "DO_NOT_BUILD_ANOTHER_GENERIC_FINANCE_RULE_GRAPH_OR_DOCUMENT_GRAPH_ENGINE",
+    "USE_THIS_INTERFACE_AS_THE_MINIMUM_LOCAL_COMPLETENESS_GATE_WHEN_THE_AUTHORITATIVE_INPUT_IS_ALREADY_PRE_NORMALIZED",
+    "KEEP_RAW_OR_IMPLICIT_SEMANTICS_ON_THE_SHARED_IDENTIFIABLE_SEMANTIC_FRONTIER",
+    "NO_TERMINAL_TRUE_LABEL_FROM_THIS_INTERFACE_ALONE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
