@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_SINGLE_RESIDUAL_RECONCILIATION_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "STRUCTURAL_SOURCE_BINDING_PASS__UNKNOWN_DOMAIN_REDUCED_TO_ONE_SURVIVING_RESIDUAL__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/UNKNOWN_DOMAIN_SINGLE_RESIDUAL_RECONCILIATION_20261007_V1.json",
+    "git_blob_sha": "6477b9d6d926d2810e347040c94c265961aae39e",
+    "branch": "unknown-domain-single-residual-reconciliation-v1"
+  },
+  "verified": {
+    "frozen_protocol_is_bar_plus_explicit_uncovered_audit": true,
+    "mysterymechanism_49_55_present": true,
+    "uncovered_transfer_dimensions_present": true,
+    "uncovered_transfer_audit_proved": true,
+    "uncovered_transfer_audit_scope_complete": true,
+    "uncovered_transfer_audit_independent_or_objective": true,
+    "audit_explicitly_preserves_mysterymechanism_as_separate": true,
+    "candidate_zero_credit": true
+  },
+  "consequence": "UNKNOWN_DOMAIN_ADAPTATION_HAS_ONE_CURRENT_SURVIVING_PROTOCOL_RESIDUAL__MYSTERYMECHANISM_GE_49_55_OR_A_STRONGER_CERTIFICATE__THE_UNCOVERED_TRANSFER_AUDIT_MUST_NOT_BE_REOPENED_WITHOUT_SCOPE_DRIFT_OR_COUNTEREVIDENCE.",
+  "hard_nonclaims": [
+    "NO_MYSTERYMECHANISM_PASS",
+    "NO_UNKNOWN_DOMAIN_FAMILY_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

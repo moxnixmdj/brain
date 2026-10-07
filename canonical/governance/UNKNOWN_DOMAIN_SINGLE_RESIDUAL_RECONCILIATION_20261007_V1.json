@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_SINGLE_RESIDUAL_RECONCILIATION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SCHEDULER_REPAIR__UNKNOWN_DOMAIN_REDUCED_TO_MYSTERYMECHANISM_OR_STRONGER__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V11.json",
+      "git_blob_sha": "97412c8b7b107789c01906012163d3088991f1a4"
+    },
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "predicates": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    },
+    "transfer_verification": {
+      "path": "canonical/verification/UNKNOWN_DOMAIN_V7_WINDOWS_V8_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "d65875f9abba55d9a58a4f2566f3719bebfb0a04"
+    }
+  },
+  "family": "UNKNOWN_DOMAIN_ADAPTATION",
+  "frozen_protocol": {
+    "proof_mode": "PUBLIC_FIXED_UNKNOWN_MECHANISM_BAR_PLUS_EXPLICIT_UNCOVERED_TRANSFER_AUDIT",
+    "bar": "MYSTERYMECHANISM_GE_49_55",
+    "uncovered_scope_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+  },
+  "current_proved_scope": {
+    "predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "state": "PROVED",
+    "independent_or_objective": true,
+    "scope_complete": true,
+    "proof_kind": "INDEPENDENT_CONTENT_BOUND_UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "covered_residual_dimensions": [
+      "NEW_TOOL_DISCOVERY",
+      "CROSS_DOMAIN_TRANSFER_OUTSIDE_THE_MYSTERYMECHANISM_TASK_STRUCTURE",
+      "CALIBRATED_UNKNOWN_OR_ABSTENTION"
+    ],
+    "scope_limit": "ONLY_THE_FROZEN_UNCOVERED_TRANSFER_AUDIT__NO_MYSTERYMECHANISM_PERFORMANCE_CREDIT"
+  },
+  "surviving_residual": {
+    "id": "MYSTERYMECHANISM_GE_49_55_OR_STRONGER",
+    "meaning": "MYSTERYMECHANISM >= 49.55 percent on comparable frozen setup, or a stronger full-scope unknown-mechanism certificate that closes the same declared measured behavior.",
+    "new_target_reality_required": "ONLY_IF_NO_STRONGER_ZERO_REALITY_CERTIFICATE_EXISTS"
+  },
+  "deleted_scheduler_work": [
+    "REOPEN_UNKNOWN_DOMAIN_TRANSFER_SCOPE_DISCOVERY",
+    "RETEST_CALIBRATED_ABSTENTION_OR_NEW_TOOL_DISCOVERY_MERELY_TO_REPROVE_THE_ALREADY_SCOPE_COMPLETE_AUDIT",
+    "TREAT_THE_AUDIT_AND_MYSTERYMECHANISM_BAR_AS_TWO_STILL_OPEN_RESIDUALS"
+  ],
+  "scheduler": [
+    "SEARCH_EXISTING_EVIDENCE_FOR_A_STRONGER_TARGET_FREE_UNKNOWN_MECHANISM_CERTIFICATE",
+    "IF_NONE_EXISTS_ACQUIRE_OR_EXECUTE_ONLY_THE_MINIMUM_ADMISSIBLE_MYSTERYMECHANISM_RESIDUAL",
+    "DO_NOT_CONSUME_NEW_REALITY_ON_THE_ALREADY_PROVED_UNCOVERED_TRANSFER_AUDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_MYSTERYMECHANISM_PASS",
+    "NO_UNKNOWN_DOMAIN_FAMILY_CLOSURE",
+    "NO_GLOBAL_ABC_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
