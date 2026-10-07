@@ -1,0 +1,9 @@
+{
+ "schema":"PROJECT_BRAIN_BYTES_V14_SINGLE_ARTIFACT_CLOSED_V11_VERIFICATION",
+ "date":"2026-10-07",
+ "carrier":{"provider":"SPRITES","name":"h100-real-image-v1","id":"sprite-68a466f6-88d5-493d-93f3-2b85377836a3"},
+ "exact_blob":"5dae01005784d1285ab79118557d65dc22406e24",
+ "checks":{"closed_proof":"PASS","proof_basis_equal_v10":true,"frozen_cross_capability_regression":"PASS_27_OF_27","fixed_decoder_search":{"configurations":2700,"best_payload_bytes":2738,"roundtrip_exact":true}},
+ "payload_sha256":"28490ac14ff5af335b43ac50b0187a55ed42fa9931a226b4df533d424f6bb8b9",
+ "terminal_credit_delta":0
+}
