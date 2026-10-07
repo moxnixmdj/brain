@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_COMMON_POLICY_TRANSITIVE_REPLAY_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH_REPAIR__PRIOR_INDEPENDENT_REPLAY_NOT_CURRENT_FOR_LIVE_EXECUTABLE_CLOSURE__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "gate_path": "canonical/runtime/judgment_common_policy_region_gate_v1.py",
+    "gate_git_blob_sha": "ddc3897154df17b54ce4611699c78f04dda15e19",
+    "governance_path": "canonical/governance/FINANCE_COMMON_POLICY_REGION_GATE_20261007_V1.json",
+    "prior_independent_verification_path": "canonical/verification/FINANCE_COMMON_POLICY_REGION_GATE_SPRITE_VERIFICATION_20261007_V1.json"
+  },
+  "dependency_drift": {
+    "imported_base_path": "canonical/runtime/judgment_control_envelope_v1.py",
+    "prior_verified_base_git_blob_sha": "15847dc96a7220c8d7865724d9b04624479f651f",
+    "current_base_git_blob_sha": "7bcbfc122336a63adc72b57fb0e9077c036a46e1",
+    "current_evidence_decision_synthesis_git_blob_sha": "d7c73c24d2038c40bfb38ea6f10749a15a2d5415",
+    "current_finance_source_coverage_git_blob_sha": "2b0d36cfd5392c0156300d864871996f52f7d35c"
+  },
+  "theorem": "AN_INDEPENDENT_REPLAY_OF_AN_IMPORTING_ENTRYPOINT_DOES_NOT_COVER_LATER_CHANGES_TO_A_TRANSITIVELY_IMPORTED_BRAIN_MODULE_UNLESS_THE_TRANSITIVE_DEPENDENCY_CLOSURE_IS_BOUND_AND_REPLAYED",
+  "consequence": {
+    "finance_common_policy_region_gate_independent_replay_current": false,
+    "runtime_candidate_deleted": false,
+    "common_policy_theorem_deleted": false,
+    "execution_credit_from_prior_replay": false,
+    "revalidation_required": true
+  },
+  "repair_route": {
+    "dependency_closure_runtime": "canonical/runtime/python_local_import_closure_v1.py",
+    "requirement": "RECOMPUTE_CURRENT_BRAIN_LOCAL_IMPORT_CLOSURE_AND_INDEPENDENTLY_REPLAY_THE_GATE_TESTS_AGAINST_EXACT_CURRENT_BYTES"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_CURRENT_COMMON_POLICY_GATE_IS_LOGICALLY_UNSOUND",
+    "NO_CLAIM_THE_COMMON_POLICY_THEOREM_IS_REVOKED",
+    "NO_FINANCE_FAMILY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
