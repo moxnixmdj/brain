@@ -147,6 +147,14 @@ class SameIdentitySupervisorTests(unittest.TestCase):
             self.assertEqual(seen["agent"], self.AGENT)
             self.assertEqual(seen["task"], "TASK-1")
             self.assertEqual(
+                seen["argv"],
+                [
+                    sys.executable,
+                    "canonical/runtime/root3_production_astra_launcher_v1.py",
+                    "canonical/astra_runtime/missions/REAL.json",
+                ],
+            )
+            self.assertEqual(
                 pathlib.Path(seen["bridge"]),
                 root/"canonical"/"same_identity_worker"/"external_tool_bridge"/"TASK-1",
             )
