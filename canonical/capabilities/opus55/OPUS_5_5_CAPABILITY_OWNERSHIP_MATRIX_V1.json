@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "CURRENT_RECONCILED__5_OF_19_ACCEPTANCE__5_VERIFIED_OWNED__14_ACCEPTANCE_OPEN__THREE_ZERO_REALITY_OWNERSHIP_PROMOTIONS",
+  "status": "CURRENT__6_OF_19_VERIFIED_OWNED_EQUAL_OR_BETTER__13_OPEN__INSTRUCTION_FOLLOWING_PROMOTED_ZERO_REALITY",
   "evaluated_utc": "2026-10-03",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -323,38 +323,28 @@
     },
     {
       "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
-        "GPT-6 Astra + Brain fail-closed gates + reasoning receipts"
+        "Brain-owned frozen IF route bundle: clean LiveBench Active15 pointwise-optimal compiler + finite 160-case scope/authority route bundle"
       ],
-      "evidence": "OpenAI reports strong intent/scope behavior for Astra, but no direct Opus 5.5 matched comparison closes the whole family.",
+      "evidence": "Strict frozen IF acceptance is scope-complete PASS; exact accepted route bundle and transitive capability dependencies are content-addressed under canonical Brain control with zero external provider/network/model/dynamic-import/external-process capability path.",
       "sources": [
-        "https://openai.com/index/gpt-6-astra/",
-        "https://www.anthropic.com/claude-opus-5-5"
+        "canonical/governance/IF_FAMILY_OWNERSHIP_PROMOTION_PROOF_20261007_V1.json",
+        "canonical/verification/IF_FAMILY_OWNERSHIP_PROMOTION_CONNECTOR_VERIFICATION_20261007_V1.json",
+        "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+        "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+        "canonical/verification/IF_SCOPE_FINITE_WAVE_SPRITE_VERIFICATION_20261007_V1.json"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
-      "candidate_internalization_routes": [
-        {
-          "repo": "ReflexioAI/reflexio",
-          "license": "Apache-2.0",
-          "role": "persistent playbook extraction and behavioral self-improvement",
-          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
-        },
-        {
-          "repo": "microsoft/AgentRx",
-          "license": "MIT",
-          "role": "failure diagnosis from agent execution trajectories",
-          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
-        }
-      ],
-      "campaign_next_action": "Test whether persisted corrections plus trajectory diagnosis improve scope discipline on fresh tasks without overfitting or weakening fail-closed behavior.",
+      "internalization_required": false,
+      "ownership_note": "PROMOTED_BY_EXACT_ACCEPTED_ROUTE_OWNERSHIP_THEOREM_OVER_FINITE_CONTENT_ADDRESSED_ROUTE_BUNDLE__NO_TARGET_CAPABILITY_PROVIDER_RUNTIME__ZERO_NEW_REALITY",
+      "candidate_internalization_routes": [],
+      "campaign_next_action": "NONE_FOR_FAMILY_OWNERSHIP__PRESERVE_CONTENT_ADDRESSES_AND_FAIL_CLOSED_SCOPE",
       "postwave_terminal_behavioral_status": "PASS",
-      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
-      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
-      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "postwave_opus55_acceptance_status": "PASS",
+      "postwave_ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "postwave_acceptance_evidence": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "current_behavioral_scope_state": "P1_SCOPE_RESTORED__WHOLE_SCOPE_PASS__STRICT_OPUS55_ACCEPTANCE_PASS__VERIFIED_OWNED",
+      "current_behavioral_scope_evidence": "canonical/verification/IF_FAMILY_OWNERSHIP_PROMOTION_CONNECTOR_VERIFICATION_20261007_V1.json"
     },
     {
       "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -774,5 +764,7 @@
     "quarantined_behavior_id": null,
     "rule": "P1_WHOLE_SCOPE_RESTORED_BY_INDEPENDENT_ZERO_REALITY_UNIVERSAL_PROOF__STRICT_ACCEPTANCE_AND_OWNERSHIP_ACCOUNTED_SEPARATELY",
     "current_restoration_evidence": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
-  }
+  },
+  "verified_owned_family_count": 6,
+  "open_family_count": 13
 }
