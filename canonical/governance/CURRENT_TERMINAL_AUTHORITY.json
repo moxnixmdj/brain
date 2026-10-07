@@ -1,20 +1,16 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V2",
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V3",
   "date": "2026-10-07",
-  "status": "ACTIVE_FAIL_CLOSED_SCHEDULING_POINTER__TARGET_SCOPE_CLOSED__FIFTEEN_DB_CERTIFICATE_RECORDS__SINGLE_U_FRONTIER__ROUTER_EXACT_PUBLIC_EXECUTION_PASS__TERMINAL_FALSE",
+  "status": "ACTIVE_FAIL_CLOSED_SCHEDULING_POINTER__TARGET_SCOPE_CLOSED__FOURTEEN_SOUND_DB_CERTIFICATE_RECORDS__SINGLE_U_FRONTIER__ROUTER_EXACT_PUBLIC_EXECUTION_PASS__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authoritative_sources": {
     "terminal_authority": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
-      "git_blob_sha": "e431951ace31ba8459027ee852fbf4b0dd1b6f60"
-    },
-    "db_cache_union": {
-      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V7.json",
-      "git_blob_sha": "96c7a323ffd42e4cb338ff969e971f81bdb841d6"
+      "git_blob_sha": "24aba9397af4bdd9c2d7f9abc47d6f2b9966bcff"
     },
     "single_abc_frontier": {
-      "path": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V2.json",
-      "git_blob_sha": "57e44bd056429e167fe5bbaac9855b7988baebe5"
+      "path": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V3.json",
+      "git_blob_sha": "1cfad0bc541ee6516bd6963da195c5e6e13344af"
     },
     "semantic_minimum_information": {
       "path": "canonical/governance/TERMINAL_SHARED_SEMANTIC_MINIMUM_INFORMATION_LOWER_BOUND_20261007_V1.json",
@@ -31,11 +27,31 @@
     "router_independent_public_execution": {
       "path": "canonical/verification/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json",
       "git_blob_sha": "42b8eeac29eafe2f74370d993badb046049391b3"
+    },
+    "db_cache": {
+      "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V7.json",
+      "git_blob_sha": "862649b49fe0b94ff2d6e3cea05119ade614cfb3",
+      "independent_verification": {
+        "path": "canonical/verification/V16_DB_EXISTING_EVIDENCE_SATURATION_VERIFY_20261007_V7.json",
+        "git_blob_sha": "60e46a05dac7b37853da42c21c6168b9d0239fa6"
+      }
+    },
+    "revoked_p3_whole_cell": {
+      "path": "canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_20261007_V1.json",
+      "git_blob_sha": "768953c6f754a911a1483733e84164087e77dd31",
+      "falsifier": {
+        "path": "canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_EXECUTED_SCORER_FALSIFIER_20261007_V1.json",
+        "git_blob_sha": "d4339cca92dabd058ae4675bcb3fa9e6d25bf391"
+      },
+      "independent_verification": {
+        "path": "canonical/verification/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_EXECUTED_SCORER_FALSIFIER_WOLFRAM_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "359a2a6c58d8a9b453abe738339afda62a98986c"
+      }
     }
   },
   "live_truth": {
     "fixed_authorized_target_trace_scope_closed": true,
-    "known_sound_D_B_certificate_record_count": 15,
+    "known_sound_D_B_certificate_record_count": 14,
     "cache_record_count_is_not_semantic_coverage_measure": true,
     "complete_selected_context_ABC_normal_form": "U_IS_EMPTY",
     "current_U_empty_proved": false,
@@ -64,7 +80,7 @@
   },
   "scheduling_lock": [
     "THIS_FILE_IS_THE_STABLE_ENTRY_POINTER_FOR_TERMINAL_SCHEDULING__VERSIONED_FILES_ARE_EVIDENCE_SOURCES_NOT_IMPLICITLY_NEWER_AUTHORITY.",
-    "SUBTRACT_ALL_FIFTEEN_CURRENT_SOUND_D_B_CERTIFICATE_RECORDS_BEFORE_NEW_WORK__OVERLAP_ALLOWED__DO_NOT_INFER_COVERAGE_PERCENTAGE_FROM_COUNT.",
+    "SUBTRACT_ALL_FOURTEEN_CURRENT_SOUND_D_B_CERTIFICATE_RECORDS_BEFORE_NEW_WORK__OVERLAP_ALLOWED__DO_NOT_INFER_COVERAGE_PERCENTAGE_FROM_COUNT.",
     "WORK_ONLY_ON_DEPLETING_U.",
     "FOR_EACH_SURVIVING_COARSE_CELL_FIRST_SEARCH_FOR_ONE_COMMON_CERTIFIED_ADEQUATE_BRAIN_POLICY.",
     "ONLY_IF_NO_COMMON_POLICY_CERTIFICATE_EXISTS_BIND_THE_MINIMUM_TRUTHFUL_SELECTED_DISCRIMINATOR_NEEDED_TO_SEPARATE_POLICY_ADEQUACY_CLASSES.",
@@ -74,6 +90,7 @@
     "WHEN_U_IS_PROVED_EMPTY_FREEZE_EXACT_CREDITED_ROUTE_SET__RECOMPUTE_D__DELETE_DONORS__RUN_INDEPENDENT_CLEAN_ROOM_REPLAY."
   ],
   "superseded_for_scheduling": [
+    "CURRENT_TERMINAL_AUTHORITY_POINTER_V2_FIFTEEN_RECORD_STATE_AFTER_P3_WHOLE_CELL_REVOCATION",
     "CURRENT_TERMINAL_AUTHORITY_POINTER_V1_TWELVE_RECORD_CACHE",
     "ANY_PRE_FIFTEEN_DB_RECORD_COUNT_AS_CURRENT",
     "HISTORICAL_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2_14_PROVED_24_UNRESOLVED_COUNTS",
@@ -83,7 +100,7 @@
   ],
   "hard_nonclaims": [
     "NO_CLAIM_U_IS_EMPTY.",
-    "NO_CLAIM_FIFTEEN_RECORDS_EXHAUST_D_B_OR_THE_CLOSED_TRACE_SCOPE.",
+    "NO_CLAIM_FOURTEEN_RECORDS_EXHAUST_D_B_OR_THE_CLOSED_TRACE_SCOPE.",
     "NO_CLAIM_PRIVATE_BRAIN_ACTIONS_CARRIER_BINDING_IS_OBSERVED.",
     "NO_CLAIM_D_FINALITY_IS_CLOSED.",
     "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT."
@@ -92,5 +109,12 @@
     "incremental_spend_usd": 0,
     "fresh_target_reality_units_consumed": 0,
     "terminal_credit_delta": 0
+  },
+  "truth_repair": {
+    "corrected_from_stale_count": 15,
+    "corrected_to_sound_count": 14,
+    "revoked_record": "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
+    "preserved_record": "SYNTHESIS_TARGET_SCOPE_REQUIRED_CLAIM_COVERAGE_TOP_LAW",
+    "terminal_unchanged": false
   }
 }
