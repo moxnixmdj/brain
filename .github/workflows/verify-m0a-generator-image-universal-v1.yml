@@ -1,0 +1,28 @@
+name: Verify M0A exact generator image universal cell
+
+on:
+  push:
+    branches:
+      - truth/m0a-generator-image-universal-20261007-v1
+    paths:
+      - 'canonical/governance/M0A_RAW_SOURCE_GENERATOR_IMAGE_UNIVERSAL_SELECTED_CELL_20261007_V1.json'
+      - 'canonical/runtime/m0a_raw_source_generator_image_universal_verifier_v1.py'
+      - 'canonical/tests/test_m0a_raw_source_generator_image_universal_v1.py'
+      - '.github/workflows/verify-m0a-generator-image-universal-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify exact generator image
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python canonical/runtime/m0a_raw_source_generator_image_universal_verifier_v1.py
