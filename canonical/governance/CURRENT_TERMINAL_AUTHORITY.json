@@ -727,6 +727,10 @@
       "path": "canonical/governance/TOURNAMENT_FAILURE_CURRENT_13_OBLIGATION_RECONCILIATION_20261007_V1.json",
       "git_blob_sha": "9f1f9d4525fe43f7eab8df75143fe6d14b3de356",
       "note": "13_CURRENT_INDEPENDENT_OPEN_ACCEPTANCE_OBLIGATIONS_REMAIN_FAIL_CLOSED__ZERO_CAPABILITY_DEFICIT_ADMITTED_FROM_LABEL_ALONE__CAPABILITY_BUILD_REQUIRES_BOUND_POLICY_DIVERGENCE_COUNTEREXAMPLE"
+    },
+    "tb_science_current_slot_ledger_reconciliation": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V5.json",
+      "note": "CURRENT_TRUTH__RANK8_REVOKED_BEFORE_TARGET_EXPOSURE__SEVEN_SLOTS_CONSUMED__V4_STALE_AUTHORITY_CONSUMPTION_SUPERSEDED"
     }
   },
   "live_truth": {
@@ -1109,7 +1113,12 @@
     "tournament_failure_current_open_acceptance_obligation_count": 13,
     "tournament_failure_current_admitted_capability_deficit_count": 0,
     "tournament_failure_acceptance_open_does_not_imply_capability_missing": true,
-    "tournament_failure_capability_build_requires_policy_divergence_witness": true
+    "tournament_failure_capability_build_requires_policy_divergence_witness": true,
+    "tb_science_consumed_slots": 7,
+    "tb_science_rank8_untouched": true,
+    "tb_science_rank8_stale_final_zero_quarantined": true,
+    "tb_science_next_untouched_rank": 8,
+    "tb_science_next_untouched_slot": "terminal-bench-science/linked-cell-suppression::trial-0"
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
