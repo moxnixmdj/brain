@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANSITIVE_CARRIER_CLOSURE_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_CAUSAL_REPAIR_FROM_RANK8_COUNTEREXAMPLE__ZERO_CREDIT",
+  "cause": "RANK8_COPIED_ONLY_TOP_LEVEL_ROUTE_BYTES__TRANSITIVE_RUNTIME_DEPENDENCIES_WERE_NOT_CLOSED__AGENT_IMPORT_FAILED_BEFORE_AGENT_EXECUTION.",
+  "repair": {
+    "compiler": "canonical/runtime/python_transitive_runtime_closure_v1.py",
+    "tests": "canonical/tests/test_python_transitive_runtime_closure_v1.py",
+    "science_manifest": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261007_V1.json"
+  },
+  "tournament_effect": {
+    "failure_class": "CARRIER_TRANSITIVE_DEPENDENCY_CLOSURE_MISSING",
+    "minimum_causal_delta": "MAKE_TRANSITIVE_LOCAL_RUNTIME_CLOSURE_A_MECHANICAL_PREEXPOSURE_CARRIER_GATE",
+    "new_science_capability_primitive_justified": false,
+    "rank8_retry_allowed": false
+  },
+  "future_rule": [
+    "RECOMPUTE_CLOSURE_FROM_EXACT_CURRENT_ROUTE_BYTES_BEFORE_EACH_NEW_ONE_USE_SCIENCE_AUTHORITY",
+    "MATERIALIZE_EVERY_CONTENT_ADDRESSED_LOCAL_RUNTIME_DEPENDENCY",
+    "VERIFY_EXACT_BLOB_IDENTITY_INSIDE_THE_CARRIER",
+    "IMPORT_THE_AGENT_AND_PLANNER_IN_THE_FINAL_CARRIER_BEFORE_TASK_START",
+    "IF_ANY_CLOSURE_OR_IMPORT_CHECK_FAILS_ABORT_PREEXPOSURE_WITHOUT_CONSUMING_THE_SLOT"
+  ],
+  "hard_nonclaims": [
+    "NO_RANK9_AUTHORITY_FROM_THIS_REPAIR_ALONE",
+    "NO_BENCHMARK_TASK_EXPOSURE",
+    "NO_ACCEPTANCE_FAMILY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {"incremental_spend_usd":0,"fresh_target_reality_units_consumed":0,"terminal_credit_delta":0}
+}
