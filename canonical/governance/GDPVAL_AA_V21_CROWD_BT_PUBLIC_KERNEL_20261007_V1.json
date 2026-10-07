@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_AA_V21_CROWD_BT_PUBLIC_KERNEL_V1",
+  "date": "2026-10-07",
+  "status": "PUBLIC_CROWD_BT_MATHEMATICAL_KERNEL_INTERNALIZED__ANCHORED_FIXED_QUALITY_MLE_CALLABLE__OWNER_HISTORICAL_JUDGE_QUALITY_AND_EPOCH_STATE_UNBOUND__ZERO_CREDIT",
+  "public_sources": {
+    "artificial_analysis": {
+      "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "methodology_version": "4.3.2",
+      "facts": [
+        "GDPval-AA v2.1 fits ratings with Crowd-BT by maximum likelihood.",
+        "DeepSeek V4.1 Flash (max) is pinned at 1600.",
+        "Judge quality is fitted on past GDPval-AA judgments.",
+        "Final confidence intervals use a sandwich estimator."
+      ]
+    },
+    "crowd_bt_primary_paper": {
+      "url": "https://erichorvitz.com/crowd_pairwise.pdf",
+      "title": "Pairwise Ranking Aggregation in a Crowdsourced Setting",
+      "facts": [
+        "Crowd-BT Eq.5 mixes Bradley-Terry preference probability with its reversal using annotator quality eta.",
+        "eta=1 is a perfect annotator, eta=0.5 contributes no ranking information, eta=0 reverses preference.",
+        "The paper regularizes with a virtual node when needed for non-strongly-connected comparison graphs.",
+        "The joint problem is non-concave and initialization matters."
+      ]
+    }
+  },
+  "brain_runtime": {
+    "path": "canonical/runtime/gdpval_aa_v21_crowd_bt_kernel_v1.py",
+    "git_blob_sha": "8a880c6c38e608a4afcf082013ad69c1047d5df6",
+    "capabilities": [
+      "BRADLEY_TERRY_PROBABILITY_IN_ELO_UNITS",
+      "CROWD_BT_EQ5_JUDGE_QUALITY_MIXTURE",
+      "TIE_AS_HALF_WIN_LIKELIHOOD_WEIGHT",
+      "DEEPSEEK_1600_ANCHOR_DEFAULT",
+      "FIXED_JUDGE_QUALITY_MAXIMUM_LIKELIHOOD_FIT",
+      "INFORMATIVE_ANCHOR_CONNECTIVITY_FAIL_CLOSED_GATE",
+      "DETERMINISTIC_SELF_TEST"
+    ]
+  },
+  "residual_after_internalization": [
+    "CURRENT_AA_FITTED_JUDGE_QUALITY_VALUES_FROM_PAST_GDPVAL_AA_JUDGMENTS",
+    "OWNER_EXACT_REGULARIZATION_AND_OPTIMIZER_CONVENTION_IF_DIFFERENT_OR_LOAD_BEARING",
+    "OWNER_SANDWICH_ESTIMATOR_CLUSTERING_OR_SCORE_AGGREGATION_CONVENTION",
+    "CURRENT_OWNER_EPOCH_PAIRWISE_GRAPH_AND_REALIZED_JUDGE_ASSIGNMENTS_OR_EQUIVALENT_SUFFICIENT_FIT_STATE",
+    "BRAIN_220_SUBMISSIONS_AND_MATCH_OUTCOMES"
+  ],
+  "scheduler_delta": [
+    "DELETE_BASIC_CROWD_BT_LIKELIHOOD_AND_ANCHORED_FIXED_QUALITY_MLE_IMPLEMENTATION_FROM_THE_GDPVAL_RESIDUAL.",
+    "DO_NOT_CALL_THIS_RUNTIME_THE_OWNER_SCORER_UNTIL_HISTORICAL_JUDGE_QUALITY_AND_OWNER_FIT_CONVENTIONS_ARE_BOUND.",
+    "IF_OWNER_JUDGE_QUALITY_VALUES_AND_MATCH_GRAPH_BECOME_AVAILABLE__THIS_RUNTIME_CAN_SCORE_THE_BOUND_GRAPH_WITHOUT_NEW_MODEL_RESEARCH."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_RUNTIME_REPRODUCES_ARTIFICIAL_ANALYSIS_OWNER_ELO_EXACTLY.",
+    "NO_CLAIM_AA_USES_THE_PRIMARY_PAPER_VIRTUAL_NODE_REGULARIZATION_WITH_ANY_SPECIFIC_LAMBDA.",
+    "NO_CLAIM_THE_OWNER_SANDWICH_COVARIANCE_CONVENTION_IS_REPRODUCED.",
+    "NO_BRAIN_GDPVAL_OWNER_ELO.",
+    "NO_GDPVAL_CLOSURE_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
