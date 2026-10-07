@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - ".github/workflows/private-zero-spend-opus-capacity-probe-v1.yml"
+  pull_request:
+    paths:
+      - ".github/private-zero-spend-opus-capacity-probe.trigger"
   workflow_dispatch:
 
 permissions:
