@@ -654,6 +654,7 @@ def run(
                 actual_packet = packet
                 packet_sha256 = None
                 packet_source_id = None
+                packet_proposal_source = proposal_source
                 if packet.get("schema") == PROPOSAL_PACKET_SCHEMA:
                     try:
                         unwrapped = unwrap_proposal_packet(packet, request=proposal_request)
@@ -667,7 +668,7 @@ def run(
                     actual_packet = unwrapped["proposal"]
                     packet_sha256 = unwrapped["packet_sha256"]
                     packet_source_id = unwrapped["source_id"]
-                    proposal_source = "GENERAL_COGNITION_SUBSTRATE:" + packet_source_id
+                    packet_proposal_source = "GENERAL_COGNITION_SUBSTRATE:" + packet_source_id
                 verdict = verifier(payload, actual_packet)
                 record = {
                     "cycle": cycle,
@@ -676,7 +677,7 @@ def run(
                     "action_contract_sha256": _digest(action),
                     "packet_index": i,
                     "proposal_sha256": _digest(actual_packet),
-                    "proposal_source": proposal_source,
+                    "proposal_source": packet_proposal_source,
                     "proposal_request_sha256": proposal_request.get("request_sha256"),
                     "proposal_packet_sha256": packet_sha256,
                     "proposal_source_id": packet_source_id,
