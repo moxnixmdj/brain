@@ -1,0 +1,18 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_SELF_CERTIFYING_SEQUENCE_CHECKER_V2_SPRITE_VERIFICATION",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_SPRITE_EXACT_BLOB_PASS__ZERO_TERMINAL_CREDIT",
+  "carrier":{"provider":"SPRITES","sprite_name":"brain-root3-current-byte-replay-20261007-v1","sprite_id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e"},
+  "exact_blobs":{"checker":"0ba92a4cbefe42034d39be9e17e9a66034eec784","v10_runtime":"91bdde7a88e90bb6a2e411072a1dadb715ff7052"},
+  "verified":{
+    "status":"PASS",
+    "programs":2955,
+    "generated_equations":933,
+    "classes":809,
+    "witnesses":823,
+    "checker_payload_bytes":1282,
+    "joint_v10_checker_payload_bytes":2852,
+    "joint_roundtrip_exact":true
+  },
+  "hard_nonclaims":["CLASS_SPECIFIC_RULE_KNOWLEDGE_IS_STILL_IN_THE_CHECKER","TRUSTED_RULE_SOUNDNESS_REMAINS_OPEN","NO_TERMINAL_CREDIT"]
+}
