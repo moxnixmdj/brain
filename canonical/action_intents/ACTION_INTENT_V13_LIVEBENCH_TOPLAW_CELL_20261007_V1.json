@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-07",
+  "status": "ZERO_REALITY_E2E_CELL_CERTIFICATE__ZERO_CREDIT_PENDING_INDEPENDENT_REPLAY",
+  "canonical_base_commit": "a3ee2a1e596ca122dcfea90ab123d955918f4514",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target": "V13_LIVEBENCH_ACTIVE15_EXACT_CELL",
+  "claim_under_test": "THE_EXACT_LIVEBENCH_ACTIVE15_CELL_HAS_EMPTY_K_C_MINUS_BECAUSE_THE_BOUND_DEPLOYED_BRAIN_ROUTE_IS_POINTWISE_TOP_OVER_THE_COMPLETE_ADMISSIBLE_RESPONSE_SPACE",
+  "source_bindings": {
+    "authority_v13": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V13.json",
+      "git_blob_sha": "0d18488b51a222e5da414329ccd9d33cbc1fc31c"
+    },
+    "e2e_theorem": {
+      "path": "canonical/governance/DIRECT_END_TO_END_SELECTED_CELL_CERTIFICATE_THEOREM_20261007_V1.json",
+      "git_blob_sha": "ecb52ca25fa14a60b7c34206fea25d8d3cfdcf0d"
+    },
+    "cell_bundle": {
+      "path": "canonical/governance/LIVEBENCH_IF_V9_SELECTED_CONTEXT_ABC_BUNDLE_20261007_V1.json",
+      "git_blob_sha": "7119d8e5e3c262048107a6ab8295b2e3f93326b2"
+    },
+    "pointwise_closure": {
+      "path": "canonical/governance/LIVEBENCH_ACTIVE15_SCOPE_REBOUND_POINTWISE_CLOSURE_20261005_V1.json",
+      "git_blob_sha": "fa08b109378c934079e0556dab15f5451415e846"
+    },
+    "cell_replay": {
+      "path": "canonical/verification/LIVEBENCH_IF_V9_SELECTED_CONTEXT_ABC_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "55871c15418ff173b6d5c8ac00150bab34f60595"
+    }
+  },
+  "incremental_spend_usd": 0,
+  "fresh_reality_units_consumed": 0
+}
