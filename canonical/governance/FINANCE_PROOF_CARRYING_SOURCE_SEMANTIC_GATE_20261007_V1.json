@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_PROOF_CARRYING_SOURCE_SEMANTIC_GATE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SELECTED_FINANCE_DIRECT_ROUTE__STRUCTURAL_SOURCE_OMISSION_CLOSED__SEMANTIC_TRUTH_OPEN__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "selected_route": {
+    "entry": "canonical.runtime.finance_proof_carrying_source_gate_v1::configured_finance_terminal_decision",
+    "entry_git_blob_sha": "2d2c1f3cf4a8a931168e873b2475b984e980e387",
+    "downstream": "canonical.runtime.judgment_control_envelope_v1::configured_terminal_decision",
+    "downstream_git_blob_sha": "5ebfd1e7fa871da89ecca40ffeb8dd6575c21582",
+    "source_completeness_kernel": "canonical/runtime/source_contract_compiler.py",
+    "source_completeness_kernel_git_blob_sha": "ba53b1f1a3c1d8e63c906eb4952c7e9b6aef1231"
+  },
+  "closes_structurally": [
+    "LOSSLESS_RAW_SOURCE_BYTE_ACCOUNTING",
+    "RISKY_SOURCE_SPAN_COVERAGE_BY_AT_LEAST_TWO_EXTRACTORS",
+    "EXACT_EXTRACTOR_SPAN_CLASS_AND_SEMANTIC_FINGERPRINT_CONSENSUS",
+    "OPERATIVE_SEMANTIC_UNIT_TO_REQUIREMENT_BIDIRECTIONAL_BINDING",
+    "REQUIREMENT_TO_FINANCE_SOURCE_MANIFEST_EVIDENCE_BINDING",
+    "SOURCE_MANIFEST_EVIDENCE_WITHOUT_SEMANTIC_REQUIREMENT_REJECTION",
+    "FAIL_CLOSED_BEFORE_DOWNSTREAM_JUDGMENT_WHEN_SOURCE_SEMANTIC_GATE_FAILS"
+  ],
+  "downstream_existing_guarantee": [
+    "FINANCE_SOURCE_MANIFEST_EVIDENCE_MUST_CONTRIBUTE_TO_SELECTED_DECISION",
+    "SEMANTIC_CONFLICT_OR_AMBIGUITY_BLOCKS_CONCLUSION",
+    "DETERMINISTIC_BRAIN_DECISION_MUST_MATCH_PROPOSED_CONCLUSION",
+    "LEAF_SPECIFIC_RULE_EXCEPTION_FACT_AND_CROSS_REFERENCE_EVIDENCE_REQUIREMENTS",
+    "EXACT_DECIMAL_RECONCILIATION_CHECKS"
+  ],
+  "remaining_finance_direct_residual": {
+    "id": "SOUND_SOURCE_GROUNDED_SEMANTIC_INTERPRETATION_OR_EQUIVALENT_DIRECT_END_TO_END_ADEQUACY",
+    "statement": "DUAL_EXTRACTOR_AGREEMENT_IS_NECESSARY_AND_NOW_LOAD_BEARING_BUT_DOES_NOT_PROVE_THAT_TWO_EXTRACTORS_CANNOT_SHARE_THE_SAME_CONCEPTUAL_ERROR",
+    "no_longer_open": "STRUCTURAL_SOURCE_OMISSION_OR_REQUIREMENT_EVIDENCE_TRACEABILITY"
+  },
+  "effect_boundary": {
+    "material_external_effects": [],
+    "opaque_external_capability_provider": false,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_RAW_FINANCE_LANGUAGE_IS_SEMANTICALLY_SOLVED",
+    "NO_CLAIM_FINANCE_DIRECT_LEAVES_ARE_CLOSED",
+    "NO_CLAIM_FINANCE_PUBLIC_SCORE_BARS_ARE_CLOSED",
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
