@@ -1,0 +1,1276 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SHARED_FORMATTING_STYLE_CRITERION_MANIFEST_V1",
+  "date": "2026-10-07",
+  "status": "EXECUTED_EXACT_PUBLIC_220_SHARED_CRITERION_MANIFEST__138_TASKS__690_SCORE_MASS__ZERO_TERMINAL_CREDIT",
+  "source": {
+    "dataset": "openai/gdpval",
+    "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "public_rows_endpoint": "https://datasets-server.huggingface.co/rows",
+    "population_contract_sha256": "f00d818e5513ed9ba6241bfc3a2c50d0083553f76d3613dc4a63daca78ccb3ea"
+  },
+  "exact_criterion": "Overall formatting and style of the deliverable",
+  "aggregate": {
+    "task_count": 220,
+    "matched_task_count": 138,
+    "matched_occurrence_count": 138,
+    "score_sum": 690,
+    "share_of_tasks": 0.6272727272727273,
+    "share_of_total_public_rubric_score_mass": 0.043125
+  },
+  "matches": [
+    {
+      "row_idx": 0,
+      "task_id": "83d10b06-26d1-4636-a32c-23f92c57f30b",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Accountants and Auditors",
+      "criterion_index": 37,
+      "criterion_id": "a64588ed-db04-4b8b-b3b8-3674ddcf10d1",
+      "score": 5
+    },
+    {
+      "row_idx": 1,
+      "task_id": "7b08cd4d-df60-41ae-9102-8aaa49306ba2",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Accountants and Auditors",
+      "criterion_index": 58,
+      "criterion_id": "ce2a2c8c-1eec-4d43-bd5f-dbc9192cc5d7",
+      "score": 5
+    },
+    {
+      "row_idx": 2,
+      "task_id": "7d7fc9a7-21a7-4b83-906f-416dea5ad04f",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Accountants and Auditors",
+      "criterion_index": 55,
+      "criterion_id": "52b999af-0182-433f-965b-49330e54de07",
+      "score": 5
+    },
+    {
+      "row_idx": 3,
+      "task_id": "43dc9778-450b-4b46-b77e-b6d82b202035",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Accountants and Auditors",
+      "criterion_index": 66,
+      "criterion_id": "3ac4c272-1d93-490c-a543-3328c4862cda",
+      "score": 5
+    },
+    {
+      "row_idx": 4,
+      "task_id": "ee09d943-5a11-430a-b7a2-971b4e9b01b5",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Accountants and Auditors",
+      "criterion_index": 43,
+      "criterion_id": "665a6aca-2c92-49ca-b805-8612cf088f1e",
+      "score": 5
+    },
+    {
+      "row_idx": 7,
+      "task_id": "27e8912c-8bd5-44ba-ad87-64066ea05264",
+      "sector": "Government",
+      "occupation": "Administrative Services Managers",
+      "criterion_index": 36,
+      "criterion_id": "8e5445d2-94c7-4e4d-aeaa-0e043338fd8d",
+      "score": 5
+    },
+    {
+      "row_idx": 10,
+      "task_id": "99ac6944-4ec6-4848-959c-a460ac705c6f",
+      "sector": "Information",
+      "occupation": "Audio and Video Technicians",
+      "criterion_index": 51,
+      "criterion_id": "eda4b838-a0dd-4f15-aafd-eb646b3b2bc1",
+      "score": 5
+    },
+    {
+      "row_idx": 11,
+      "task_id": "f9a1c16c-53fd-4c8f-88cc-5c325ec2f0bb",
+      "sector": "Information",
+      "occupation": "Audio and Video Technicians",
+      "criterion_index": 50,
+      "criterion_id": "133bc04a-4169-4315-8217-0af9623c532e",
+      "score": 5
+    },
+    {
+      "row_idx": 15,
+      "task_id": "1b1ade2d-f9f6-4a04-baa5-aa15012b53be",
+      "sector": "Manufacturing",
+      "occupation": "Buyers and Purchasing Agents",
+      "criterion_index": 50,
+      "criterion_id": "bf27cea9-f15e-43b1-b0a7-63bbc7fbb1b4",
+      "score": 5
+    },
+    {
+      "row_idx": 16,
+      "task_id": "93b336f3-61f3-4287-86d2-87445e1e0f90",
+      "sector": "Manufacturing",
+      "occupation": "Buyers and Purchasing Agents",
+      "criterion_index": 52,
+      "criterion_id": "2517cf92-4de2-4059-a40c-91dcb9f6f320",
+      "score": 5
+    },
+    {
+      "row_idx": 18,
+      "task_id": "24d1e93f-9018-45d4-b522-ad89dfd78079",
+      "sector": "Manufacturing",
+      "occupation": "Buyers and Purchasing Agents",
+      "criterion_index": 48,
+      "criterion_id": "ce0281b1-a1ad-48ad-a846-87dfb18e0047",
+      "score": 5
+    },
+    {
+      "row_idx": 19,
+      "task_id": "05389f78-589a-473c-a4ae-67c61050bfca",
+      "sector": "Manufacturing",
+      "occupation": "Buyers and Purchasing Agents",
+      "criterion_index": 65,
+      "criterion_id": "2a00a5ce-83e3-4316-8fba-8ba8990f88af",
+      "score": 5
+    },
+    {
+      "row_idx": 20,
+      "task_id": "575f8679-b4c1-47a2-8e96-d570d4ed9269",
+      "sector": "Government",
+      "occupation": "Child, Family, and School Social Workers",
+      "criterion_index": 49,
+      "criterion_id": "c2623df6-e407-45f8-9ff5-1847fe8d7f5e",
+      "score": 5
+    },
+    {
+      "row_idx": 21,
+      "task_id": "a74ead3b-f67d-4b1c-9116-f6bb81b29d4f",
+      "sector": "Government",
+      "occupation": "Child, Family, and School Social Workers",
+      "criterion_index": 49,
+      "criterion_id": "30671f00-7282-4a6c-9883-690628080c63",
+      "score": 5
+    },
+    {
+      "row_idx": 22,
+      "task_id": "bbe0a93b-ebf0-40b0-98dc-8d9243099034",
+      "sector": "Government",
+      "occupation": "Child, Family, and School Social Workers",
+      "criterion_index": 60,
+      "criterion_id": "e0692c1e-3c4f-4252-946b-ddae22eae229",
+      "score": 5
+    },
+    {
+      "row_idx": 23,
+      "task_id": "85d95ce5-b20c-41e2-834e-e788ce9622b6",
+      "sector": "Government",
+      "occupation": "Child, Family, and School Social Workers",
+      "criterion_index": 61,
+      "criterion_id": "57b03b26-a7de-4681-a74f-15e2244c42e6",
+      "score": 5
+    },
+    {
+      "row_idx": 24,
+      "task_id": "76d10872-9ffa-4ede-83ee-e0f1ec5e2b8d",
+      "sector": "Government",
+      "occupation": "Child, Family, and School Social Workers",
+      "criterion_index": 73,
+      "criterion_id": "e2ebaa19-9170-4366-b1f1-12293bf45829",
+      "score": 5
+    },
+    {
+      "row_idx": 26,
+      "task_id": "7bbfcfe9-132d-4194-82bb-d6f29d001b01",
+      "sector": "Government",
+      "occupation": "Compliance Officers",
+      "criterion_index": 34,
+      "criterion_id": "b9b37b71-e8b0-4d59-86e9-717f6bb25f6e",
+      "score": 5
+    },
+    {
+      "row_idx": 27,
+      "task_id": "2696757c-1f8a-4959-8f0d-f5597b9e70fc",
+      "sector": "Government",
+      "occupation": "Compliance Officers",
+      "criterion_index": 24,
+      "criterion_id": "a41319a8-b0e9-49f4-880d-cf1088935c17",
+      "score": 5
+    },
+    {
+      "row_idx": 31,
+      "task_id": "c2e8f271-7858-412f-b460-472463ad81d9",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Computer and Information Systems Managers",
+      "criterion_index": 66,
+      "criterion_id": "890d09eb-1f4d-4578-beef-fa344eeb31ad",
+      "score": 5
+    },
+    {
+      "row_idx": 33,
+      "task_id": "c357f0e2-963d-4eb7-a6fa-3078fe55b3ba",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Computer and Information Systems Managers",
+      "criterion_index": 69,
+      "criterion_id": "295263fa-e973-478b-ad02-27f76b58156b",
+      "score": 5
+    },
+    {
+      "row_idx": 34,
+      "task_id": "a45bc83b-22f9-4def-8d89-9c5661b2b86f",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Computer and Information Systems Managers",
+      "criterion_index": 71,
+      "criterion_id": "7b9926f6-896b-4d96-9592-5d5aec80178c",
+      "score": 5
+    },
+    {
+      "row_idx": 35,
+      "task_id": "a10ec48c-168e-476c-8fe3-23b2a5f616ac",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Concierges",
+      "criterion_index": 21,
+      "criterion_id": "f051d9b6-1ad0-4fc4-820d-0a88a21089c8",
+      "score": 5
+    },
+    {
+      "row_idx": 36,
+      "task_id": "fccaa4a1-1c39-49ac-b701-55361a19966b",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Concierges",
+      "criterion_index": 39,
+      "criterion_id": "7d6180a8-9317-46be-baa9-8bf45f1ff8fc",
+      "score": 5
+    },
+    {
+      "row_idx": 37,
+      "task_id": "f5d428fd-b38e-41f0-8783-35423dab80f6",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Concierges",
+      "criterion_index": 38,
+      "criterion_id": "3fed7820-45d3-4c05-9d0b-1a44736efcd0",
+      "score": 5
+    },
+    {
+      "row_idx": 39,
+      "task_id": "0e4fe8cd-16d0-4f41-8247-6385b4762582",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Concierges",
+      "criterion_index": 49,
+      "criterion_id": "3d96a5b6-19f4-40a3-ae04-d73a8267d173",
+      "score": 5
+    },
+    {
+      "row_idx": 40,
+      "task_id": "a0ef404e-82a6-4507-bff1-633d7c8e0004",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Counter and Rental Clerks",
+      "criterion_index": 40,
+      "criterion_id": "e1168479-896f-4f18-9365-9dc043137967",
+      "score": 5
+    },
+    {
+      "row_idx": 41,
+      "task_id": "b7a5912e-0e63-41f5-8c22-9cdb8f46ab01",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Counter and Rental Clerks",
+      "criterion_index": 58,
+      "criterion_id": "9dc96053-9fd0-4705-bc83-50ce4efeaa5a",
+      "score": 5
+    },
+    {
+      "row_idx": 43,
+      "task_id": "476db143-163a-4537-9e21-fe46adad703b",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Counter and Rental Clerks",
+      "criterion_index": 27,
+      "criterion_id": "8b407346-2da8-42a5-a041-1a67a17b9a75",
+      "score": 5
+    },
+    {
+      "row_idx": 44,
+      "task_id": "61f546a8-c374-467f-95cc-d0d9b5656eb6",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Counter and Rental Clerks",
+      "criterion_index": 78,
+      "criterion_id": "7a93dd0b-928a-456f-8918-8e90f57e9d2a",
+      "score": 5
+    },
+    {
+      "row_idx": 46,
+      "task_id": "61717508-4df7-41be-bf97-318dfb2475c0",
+      "sector": "Finance and Insurance",
+      "occupation": "Customer Service Representatives",
+      "criterion_index": 41,
+      "criterion_id": "d4885b48-ac11-4f71-ac03-9571ea66632f",
+      "score": 5
+    },
+    {
+      "row_idx": 48,
+      "task_id": "87da214f-fd92-4c58-9854-f4d0d10adce0",
+      "sector": "Finance and Insurance",
+      "occupation": "Customer Service Representatives",
+      "criterion_index": 58,
+      "criterion_id": "6a40e8e2-20b1-4253-bf16-b0a24a1f35e1",
+      "score": 5
+    },
+    {
+      "row_idx": 49,
+      "task_id": "d025a41c-c439-4ee1-bc79-dd5c94b27a2d",
+      "sector": "Finance and Insurance",
+      "occupation": "Customer Service Representatives",
+      "criterion_index": 59,
+      "criterion_id": "326100e8-ca19-4ec3-9327-b92368b00889",
+      "score": 5
+    },
+    {
+      "row_idx": 51,
+      "task_id": "afe56d05-dac8-47d7-a233-ad1d035ca5bd",
+      "sector": "Information",
+      "occupation": "Editors",
+      "criterion_index": 82,
+      "criterion_id": "d1324c93-0fda-47fa-b90d-0f39a080c34b",
+      "score": 5
+    },
+    {
+      "row_idx": 53,
+      "task_id": "3a4c347c-4aec-43c7-9a54-eb1f816ab1f9",
+      "sector": "Information",
+      "occupation": "Editors",
+      "criterion_index": 53,
+      "criterion_id": "de9cb74c-5d42-4b54-ba5c-51bb550dcaaa",
+      "score": 5
+    },
+    {
+      "row_idx": 54,
+      "task_id": "ec2fccc9-b7f6-4c73-bf51-896fdb433cec",
+      "sector": "Information",
+      "occupation": "Editors",
+      "criterion_index": 30,
+      "criterion_id": "85b35555-74c8-4535-86b9-f558a41c6a81",
+      "score": 5
+    },
+    {
+      "row_idx": 55,
+      "task_id": "8c8fc328-69fc-4559-a13f-82087baef0a1",
+      "sector": "Information",
+      "occupation": "Film and Video Editors",
+      "criterion_index": 29,
+      "criterion_id": "2794be9e-e802-48b1-be9f-c1473861e85e",
+      "score": 5
+    },
+    {
+      "row_idx": 58,
+      "task_id": "75401f7c-396d-406d-b08e-938874ad1045",
+      "sector": "Information",
+      "occupation": "Film and Video Editors",
+      "criterion_index": 39,
+      "criterion_id": "e2fa6c1c-42eb-482f-a0ba-0113e4913a0a",
+      "score": 5
+    },
+    {
+      "row_idx": 59,
+      "task_id": "a941b6d8-4289-4500-b45a-f8e4fc94a724",
+      "sector": "Information",
+      "occupation": "Film and Video Editors",
+      "criterion_index": 46,
+      "criterion_id": "ac9f81f3-90e6-410c-89fa-af60e02121ac",
+      "score": 5
+    },
+    {
+      "row_idx": 60,
+      "task_id": "8079e27d-b6f3-4f75-a9b5-db27903c798d",
+      "sector": "Finance and Insurance",
+      "occupation": "Financial and Investment Analysts",
+      "criterion_index": 39,
+      "criterion_id": "e2609c80-838b-4d47-98bb-8df1c43380c2",
+      "score": 5
+    },
+    {
+      "row_idx": 61,
+      "task_id": "e21cd746-404d-4602-b9d2-01d2812c5b87",
+      "sector": "Finance and Insurance",
+      "occupation": "Financial and Investment Analysts",
+      "criterion_index": 26,
+      "criterion_id": "26813467-6b69-4d21-93cd-5bf7533454fb",
+      "score": 5
+    },
+    {
+      "row_idx": 62,
+      "task_id": "9e8607e7-a38a-491f-ace1-e5ea7dc477cb",
+      "sector": "Finance and Insurance",
+      "occupation": "Financial and Investment Analysts",
+      "criterion_index": 11,
+      "criterion_id": "6ba72eff-35ef-4c3c-b111-61cf2b971629",
+      "score": 5
+    },
+    {
+      "row_idx": 64,
+      "task_id": "46b34f78-6c06-4416-87e2-77b6d8b20ce9",
+      "sector": "Finance and Insurance",
+      "occupation": "Financial and Investment Analysts",
+      "criterion_index": 52,
+      "criterion_id": "2946ace2-57f3-4699-acf0-8a5b3f8d06b1",
+      "score": 5
+    },
+    {
+      "row_idx": 65,
+      "task_id": "a1963a68-1bea-4bb1-b7e0-145c92a57449",
+      "sector": "Finance and Insurance",
+      "occupation": "Financial Managers",
+      "criterion_index": 47,
+      "criterion_id": "76f3c8de-3fb7-4e1e-b338-bacde090b5fd",
+      "score": 5
+    },
+    {
+      "row_idx": 68,
+      "task_id": "b78fd844-db76-448e-a783-5e9877cb74c2",
+      "sector": "Finance and Insurance",
+      "occupation": "Financial Managers",
+      "criterion_index": 50,
+      "criterion_id": "e23ed539-e38f-468e-bf2a-05e0cf3bc56a",
+      "score": 5
+    },
+    {
+      "row_idx": 69,
+      "task_id": "4520f882-715a-482d-8e87-1cb3cbdfe975",
+      "sector": "Finance and Insurance",
+      "occupation": "Financial Managers",
+      "criterion_index": 87,
+      "criterion_id": "b871ca80-9b5f-48aa-bd87-d0646204092a",
+      "score": 5
+    },
+    {
+      "row_idx": 70,
+      "task_id": "ec591973-04d5-48c0-981c-1ab2fcec2dc1",
+      "sector": "Wholesale Trade",
+      "occupation": "First-Line Supervisors of Non-Retail Sales Workers",
+      "criterion_index": 67,
+      "criterion_id": "f1e9d131-a8eb-45af-88f2-77781b62cde3",
+      "score": 5
+    },
+    {
+      "row_idx": 71,
+      "task_id": "62f04c2f-e0f7-4710-876c-54ee9c2e8256",
+      "sector": "Wholesale Trade",
+      "occupation": "First-Line Supervisors of Non-Retail Sales Workers",
+      "criterion_index": 52,
+      "criterion_id": "ead0bf07-599f-43b3-a5b9-e2adb3d7e24e",
+      "score": 5
+    },
+    {
+      "row_idx": 72,
+      "task_id": "3f821c2d-ab97-46ec-a0fb-b8f73c2682bc",
+      "sector": "Wholesale Trade",
+      "occupation": "First-Line Supervisors of Non-Retail Sales Workers",
+      "criterion_index": 45,
+      "criterion_id": "45e75f0c-4e40-4dab-9a7a-342acd87e3b3",
+      "score": 5
+    },
+    {
+      "row_idx": 73,
+      "task_id": "e996036e-8287-4e7f-8d0a-90a57cb53c45",
+      "sector": "Wholesale Trade",
+      "occupation": "First-Line Supervisors of Non-Retail Sales Workers",
+      "criterion_index": 49,
+      "criterion_id": "3af8ad23-df35-4a92-8b34-df9eb7e4ca6b",
+      "score": 5
+    },
+    {
+      "row_idx": 74,
+      "task_id": "327fbc21-7d26-4964-bf7c-f4f41e55c54d",
+      "sector": "Wholesale Trade",
+      "occupation": "First-Line Supervisors of Non-Retail Sales Workers",
+      "criterion_index": 65,
+      "criterion_id": "301457c7-1895-47ce-b801-b9b10b0f4310",
+      "score": 5
+    },
+    {
+      "row_idx": 75,
+      "task_id": "6dcae3f5-bf1c-48e0-8b4b-23e6486a934c",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "First-Line Supervisors of Office and Administrative Support Workers",
+      "criterion_index": 42,
+      "criterion_id": "bc9229f7-7cbf-4310-af6f-7d10ed3c5555",
+      "score": 5
+    },
+    {
+      "row_idx": 76,
+      "task_id": "1aecc095-4d76-4b89-b752-1a0f870502cd",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "First-Line Supervisors of Office and Administrative Support Workers",
+      "criterion_index": 51,
+      "criterion_id": "77bbf93e-cbf3-48d8-8255-209b1842713e",
+      "score": 5
+    },
+    {
+      "row_idx": 77,
+      "task_id": "0353ee0c-18b5-4ad3-88e8-e001d223e1d7",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "First-Line Supervisors of Office and Administrative Support Workers",
+      "criterion_index": 68,
+      "criterion_id": "531315fa-66dc-4587-97b1-851872a15213",
+      "score": 5
+    },
+    {
+      "row_idx": 78,
+      "task_id": "40a8c4b1-b169-4f92-a38b-7f79685037ec",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "First-Line Supervisors of Office and Administrative Support Workers",
+      "criterion_index": 68,
+      "criterion_id": "c20a147f-cbfe-4f4e-bb6f-49bcf0cfe871",
+      "score": 5
+    },
+    {
+      "row_idx": 79,
+      "task_id": "4d1a8410-e9c5-4be5-ab43-cc55563c594c",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "First-Line Supervisors of Office and Administrative Support Workers",
+      "criterion_index": 63,
+      "criterion_id": "6be9d58e-333c-4b57-966c-86ee887ae36a",
+      "score": 5
+    },
+    {
+      "row_idx": 80,
+      "task_id": "8c823e32-537c-42b2-84ba-635d63c2853a",
+      "sector": "Government",
+      "occupation": "First-Line Supervisors of Police and Detectives",
+      "criterion_index": 31,
+      "criterion_id": "f150024a-58d3-4e3a-b3aa-8fe454c979c6",
+      "score": 5
+    },
+    {
+      "row_idx": 81,
+      "task_id": "eb54f575-93f9-408b-b9e0-f1208a0b6759",
+      "sector": "Government",
+      "occupation": "First-Line Supervisors of Police and Detectives",
+      "criterion_index": 52,
+      "criterion_id": "2f9f8a63-c798-4848-90b0-cda47cced3d8",
+      "score": 5
+    },
+    {
+      "row_idx": 82,
+      "task_id": "11e1b169-5fb6-4d79-8a83-82ddf4987a85",
+      "sector": "Government",
+      "occupation": "First-Line Supervisors of Police and Detectives",
+      "criterion_index": 59,
+      "criterion_id": "c26f5831-b268-471a-bad1-39646eca423e",
+      "score": 5
+    },
+    {
+      "row_idx": 83,
+      "task_id": "a95a5829-34bb-40f3-993b-558aed6dcdef",
+      "sector": "Government",
+      "occupation": "First-Line Supervisors of Police and Detectives",
+      "criterion_index": 28,
+      "criterion_id": "f0dbcc2a-c4eb-4b70-af22-5bc2b71c38ef",
+      "score": 5
+    },
+    {
+      "row_idx": 84,
+      "task_id": "22c0809b-f8db-489e-93b3-b4da225e3e0e",
+      "sector": "Government",
+      "occupation": "First-Line Supervisors of Police and Detectives",
+      "criterion_index": 57,
+      "criterion_id": "28a4ee02-b8bc-440a-a919-c732946d2de5",
+      "score": 5
+    },
+    {
+      "row_idx": 85,
+      "task_id": "bf68f2ad-eac5-490a-adec-d847eb45bd6f",
+      "sector": "Manufacturing",
+      "occupation": "First-Line Supervisors of Production and Operating Workers",
+      "criterion_index": 39,
+      "criterion_id": "2c016b42-4d8c-4524-a7b7-f3946f9e0e6d",
+      "score": 5
+    },
+    {
+      "row_idx": 88,
+      "task_id": "68d8d901-dd0b-4a7e-bf9a-1074fddf1a96",
+      "sector": "Manufacturing",
+      "occupation": "First-Line Supervisors of Production and Operating Workers",
+      "criterion_index": 60,
+      "criterion_id": "734c2bba-fb5a-426a-888f-b66f562c22b5",
+      "score": 5
+    },
+    {
+      "row_idx": 89,
+      "task_id": "1752cb53-5983-46b6-92ee-58ac85a11283",
+      "sector": "Manufacturing",
+      "occupation": "First-Line Supervisors of Production and Operating Workers",
+      "criterion_index": 45,
+      "criterion_id": "2584e822-5f03-4d86-87d9-879bc90344e8",
+      "score": 5
+    },
+    {
+      "row_idx": 91,
+      "task_id": "211d0093-2c64-4bd0-828c-0201f18924e7",
+      "sector": "Retail Trade",
+      "occupation": "First-Line Supervisors of Retail Sales Workers",
+      "criterion_index": 39,
+      "criterion_id": "a6265096-67f5-4243-ad2f-3eea001edf80",
+      "score": 5
+    },
+    {
+      "row_idx": 94,
+      "task_id": "cecac8f9-8203-4ebd-ad49-54436a8c4171",
+      "sector": "Retail Trade",
+      "occupation": "First-Line Supervisors of Retail Sales Workers",
+      "criterion_index": 54,
+      "criterion_id": "746212b6-b5b2-4144-96c1-304b442910c9",
+      "score": 5
+    },
+    {
+      "row_idx": 95,
+      "task_id": "8f9e8bcd-6102-40da-ab76-23f51d8b21fa",
+      "sector": "Retail Trade",
+      "occupation": "General and Operations Managers",
+      "criterion_index": 32,
+      "criterion_id": "f585843f-9206-4605-9d3d-ec7cdae88431",
+      "score": 5
+    },
+    {
+      "row_idx": 96,
+      "task_id": "0fad6023-767b-42c1-a1b3-027cd4f583cb",
+      "sector": "Retail Trade",
+      "occupation": "General and Operations Managers",
+      "criterion_index": 43,
+      "criterion_id": "4023c456-06bc-43da-b89c-925971bff272",
+      "score": 5
+    },
+    {
+      "row_idx": 98,
+      "task_id": "4d61a19a-8438-4d4c-9fc2-cf167e36dcd6",
+      "sector": "Retail Trade",
+      "occupation": "General and Operations Managers",
+      "criterion_index": 42,
+      "criterion_id": "c2e72d1d-0c61-4312-bfd7-c75e874d9bcf",
+      "score": 5
+    },
+    {
+      "row_idx": 99,
+      "task_id": "6436ff9e-c5f2-47ba-9aaa-49d89b0594ab",
+      "sector": "Retail Trade",
+      "occupation": "General and Operations Managers",
+      "criterion_index": 48,
+      "criterion_id": "44f5060b-44d0-4d33-b703-d8c87f8b92ad",
+      "score": 5
+    },
+    {
+      "row_idx": 104,
+      "task_id": "be830ca0-b352-4658-a5bd-57139d6780ba",
+      "sector": "Manufacturing",
+      "occupation": "Industrial Engineers",
+      "criterion_index": 54,
+      "criterion_id": "d1b76461-a0f2-4ee7-8470-6db53f06a7cd",
+      "score": 5
+    },
+    {
+      "row_idx": 107,
+      "task_id": "3f625cb2-f40e-4ead-8a97-6924356d5989",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Lawyers",
+      "criterion_index": 63,
+      "criterion_id": "c5cec205-7f58-4ff3-a5b4-76e45ba29a8f",
+      "score": 5
+    },
+    {
+      "row_idx": 108,
+      "task_id": "aad21e4c-1d43-45fc-899a-97754a1b1b63",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Lawyers",
+      "criterion_index": 83,
+      "criterion_id": "6ec5107f-1167-4d02-a36f-6ac8525b5529",
+      "score": 5
+    },
+    {
+      "row_idx": 109,
+      "task_id": "8314d1b1-5b0f-42a4-b5d5-91c0867b0913",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Lawyers",
+      "criterion_index": 42,
+      "criterion_id": "436376d8-1c00-43d0-bd7a-56c197787cdf",
+      "score": 5
+    },
+    {
+      "row_idx": 112,
+      "task_id": "3940b7e7-ec4f-4cea-8097-3ab4cfdcaaa6",
+      "sector": "Manufacturing",
+      "occupation": "Mechanical Engineers",
+      "criterion_index": 51,
+      "criterion_id": "27eb86e8-9e2b-4449-a273-984afc340d2e",
+      "score": 5
+    },
+    {
+      "row_idx": 116,
+      "task_id": "81db15ff-ceea-4f63-a1cd-06dc88114709",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "Medical and Health Services Managers",
+      "criterion_index": 57,
+      "criterion_id": "c2e99be4-44b7-44b7-b0be-7fc6625d400d",
+      "score": 5
+    },
+    {
+      "row_idx": 117,
+      "task_id": "61b0946a-5c1c-4bf6-8607-84d7c7e0dfe0",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "Medical and Health Services Managers",
+      "criterion_index": 47,
+      "criterion_id": "05c615b2-6a19-4e6a-9bc5-4d86d79f7bf9",
+      "score": 5
+    },
+    {
+      "row_idx": 121,
+      "task_id": "41f6ef59-88c9-4b2c-bcc7-9ceb88422f48",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "Medical Secretaries and Administrative Assistants",
+      "criterion_index": 38,
+      "criterion_id": "9c91e2fe-591e-4698-b9f9-ab31fec3cb6a",
+      "score": 5
+    },
+    {
+      "row_idx": 122,
+      "task_id": "a0552909-bc66-4a3a-8970-ee0d17b49718",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "Medical Secretaries and Administrative Assistants",
+      "criterion_index": 49,
+      "criterion_id": "73888826-4302-4ef3-9b82-ccfd666670c4",
+      "score": 5
+    },
+    {
+      "row_idx": 123,
+      "task_id": "6d2c8e55-fe20-45c6-bdaf-93e676868503",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "Medical Secretaries and Administrative Assistants",
+      "criterion_index": 44,
+      "criterion_id": "9b338cae-0e27-4c4d-8bc5-828acde5b634",
+      "score": 5
+    },
+    {
+      "row_idx": 124,
+      "task_id": "4b98ccce-9e42-44e9-9115-6fc3e79de288",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "Medical Secretaries and Administrative Assistants",
+      "criterion_index": 30,
+      "criterion_id": "84690762-415b-499b-beb1-0782d076adc7",
+      "score": 5
+    },
+    {
+      "row_idx": 132,
+      "task_id": "0112fc9b-c3b2-4084-8993-5a4abb1f54f1",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "Nurse Practitioners",
+      "criterion_index": 54,
+      "criterion_id": "0b0a2934-c056-441c-b6bc-42b17eed82c8",
+      "score": 5
+    },
+    {
+      "row_idx": 133,
+      "task_id": "772e7524-174e-4c88-957e-6e510b61ea69",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "Nurse Practitioners",
+      "criterion_index": 64,
+      "criterion_id": "809e40ff-3df0-406e-b796-af49487148d4",
+      "score": 5
+    },
+    {
+      "row_idx": 134,
+      "task_id": "e6429658-4de1-42dd-a9e0-2d2b9b02fb10",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "Nurse Practitioners",
+      "criterion_index": 61,
+      "criterion_id": "78d972ee-42c5-4e73-9d46-6ed83bc6c800",
+      "score": 5
+    },
+    {
+      "row_idx": 135,
+      "task_id": "b5d2e6f1-62a2-433a-bcdd-95b260cdd860",
+      "sector": "Wholesale Trade",
+      "occupation": "Order Clerks",
+      "criterion_index": 31,
+      "criterion_id": "4d7535d6-f037-4682-aeb7-5828546d8b6f",
+      "score": 5
+    },
+    {
+      "row_idx": 136,
+      "task_id": "f841ddcf-2a28-4f6d-bac3-61b607219d3e",
+      "sector": "Wholesale Trade",
+      "occupation": "Order Clerks",
+      "criterion_index": 58,
+      "criterion_id": "0c1cc33e-d6f1-4ea3-b21b-d14f178814b8",
+      "score": 5
+    },
+    {
+      "row_idx": 137,
+      "task_id": "47ef842d-8eac-4b90-bda8-dd934c228c96",
+      "sector": "Wholesale Trade",
+      "occupation": "Order Clerks",
+      "criterion_index": 57,
+      "criterion_id": "6fc40f69-7541-4eda-9a48-43af4f960545",
+      "score": 5
+    },
+    {
+      "row_idx": 139,
+      "task_id": "c3525d4d-2012-45df-853e-2d2a0e902991",
+      "sector": "Wholesale Trade",
+      "occupation": "Order Clerks",
+      "criterion_index": 51,
+      "criterion_id": "e0f1d3f7-5714-4941-8f0c-4c693d6320f4",
+      "score": 5
+    },
+    {
+      "row_idx": 140,
+      "task_id": "9a0d8d36-6233-4c76-9107-0d1f783c7340",
+      "sector": "Finance and Insurance",
+      "occupation": "Personal Financial Advisors",
+      "criterion_index": 37,
+      "criterion_id": "f25166eb-a552-408b-a882-c8e3925b065d",
+      "score": 5
+    },
+    {
+      "row_idx": 142,
+      "task_id": "feb5eefc-39f1-4451-9ef9-bffe011b71dd",
+      "sector": "Finance and Insurance",
+      "occupation": "Personal Financial Advisors",
+      "criterion_index": 82,
+      "criterion_id": "aa2829cc-0e30-440c-8dc0-54079bcc3e64",
+      "score": 5
+    },
+    {
+      "row_idx": 147,
+      "task_id": "57b2cdf2-ad62-4591-aa91-aad489740320",
+      "sector": "Retail Trade",
+      "occupation": "Private Detectives and Investigators",
+      "criterion_index": 44,
+      "criterion_id": "32109b91-7da5-4361-ac6d-97a7d53cb62c",
+      "score": 5
+    },
+    {
+      "row_idx": 149,
+      "task_id": "a46d5cd2-55fe-48fa-a4c6-6aaf6b9991b5",
+      "sector": "Retail Trade",
+      "occupation": "Private Detectives and Investigators",
+      "criterion_index": 55,
+      "criterion_id": "3698fc82-1e30-40b1-b6da-3487326f2e66",
+      "score": 5
+    },
+    {
+      "row_idx": 153,
+      "task_id": "e4f664ea-0e5c-4e4e-a0d3-a87a33da947a",
+      "sector": "Information",
+      "occupation": "Producers and Directors",
+      "criterion_index": 49,
+      "criterion_id": "3b074c4f-b40a-4905-8f50-84a81298f2c7",
+      "score": 5
+    },
+    {
+      "row_idx": 154,
+      "task_id": "a079d38f-c529-436a-beca-3e291f9e62a3",
+      "sector": "Information",
+      "occupation": "Producers and Directors",
+      "criterion_index": 0,
+      "criterion_id": "43fce029-9c0e-4039-9627-08863641d42f",
+      "score": 5
+    },
+    {
+      "row_idx": 155,
+      "task_id": "02aa1805-c658-4069-8a6a-02dec146063a",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Project Management Specialists",
+      "criterion_index": 70,
+      "criterion_id": "3c1ecd45-e0de-4d79-8d6a-bb0bb1b33cfd",
+      "score": 5
+    },
+    {
+      "row_idx": 156,
+      "task_id": "fd6129bd-f095-429b-873c-dcc3137be2c3",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Project Management Specialists",
+      "criterion_index": 63,
+      "criterion_id": "ecd93539-007f-4407-ac64-f2d9ca612968",
+      "score": 5
+    },
+    {
+      "row_idx": 157,
+      "task_id": "ce864f41-8584-49ba-b24f-9c9104b47bf0",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Project Management Specialists",
+      "criterion_index": 38,
+      "criterion_id": "2d090a67-8fce-4aa3-957d-8cf1db2b38b2",
+      "score": 5
+    },
+    {
+      "row_idx": 158,
+      "task_id": "58ac1cc5-5754-4580-8c9c-8c67e1a9d619",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Project Management Specialists",
+      "criterion_index": 40,
+      "criterion_id": "82142df0-efd4-4d9b-84f9-a86383c0a530",
+      "score": 5
+    },
+    {
+      "row_idx": 160,
+      "task_id": "a99d85fc-eff8-48d2-a7d4-42a75d62f18d",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Property, Real Estate, and Community Association Managers",
+      "criterion_index": 51,
+      "criterion_id": "7ba5abe4-2e0d-4503-9833-39e4e0506278",
+      "score": 5
+    },
+    {
+      "row_idx": 161,
+      "task_id": "55ddb773-23a4-454c-8704-d432fe1b99d9",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Property, Real Estate, and Community Association Managers",
+      "criterion_index": 40,
+      "criterion_id": "5980d858-a129-4129-a1dd-1bb05d366425",
+      "score": 5
+    },
+    {
+      "row_idx": 162,
+      "task_id": "1e5a1d7f-12c1-48c6-afd9-82257b3f2409",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Property, Real Estate, and Community Association Managers",
+      "criterion_index": 17,
+      "criterion_id": "319e5a88-95e0-4677-982f-07ce9ded2f9e",
+      "score": 5
+    },
+    {
+      "row_idx": 163,
+      "task_id": "0419f1c3-d669-45d0-81cd-f4d5923b06a5",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Property, Real Estate, and Community Association Managers",
+      "criterion_index": 51,
+      "criterion_id": "f1b40fe9-9381-4fea-9d88-b42cd7afe818",
+      "score": 5
+    },
+    {
+      "row_idx": 164,
+      "task_id": "ed2bc14c-99ac-4a2a-8467-482a1a5d67f3",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Property, Real Estate, and Community Association Managers",
+      "criterion_index": 35,
+      "criterion_id": "543b663d-c9e3-46d7-b1b1-f2387d6a547f",
+      "score": 5
+    },
+    {
+      "row_idx": 165,
+      "task_id": "46bc7238-3501-4839-b989-e2bd47853676",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Real Estate Brokers",
+      "criterion_index": 45,
+      "criterion_id": "ae45579a-f97a-4651-97bf-90767c5ea1c3",
+      "score": 5
+    },
+    {
+      "row_idx": 166,
+      "task_id": "2d06bc0a-89c6-4e89-9417-5ffe725c1bc6",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Real Estate Brokers",
+      "criterion_index": 33,
+      "criterion_id": "ac03aba7-5c1b-4fbf-8427-d287279c03f0",
+      "score": 5
+    },
+    {
+      "row_idx": 168,
+      "task_id": "0818571f-5ff7-4d39-9d2c-ced5ae44299e",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Real Estate Brokers",
+      "criterion_index": 31,
+      "criterion_id": "adeb1380-3ee2-4362-87f0-17fc448efbea",
+      "score": 5
+    },
+    {
+      "row_idx": 171,
+      "task_id": "11593a50-734d-4449-b5b4-f8986a133fd8",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Real Estate Sales Agents",
+      "criterion_index": 28,
+      "criterion_id": "a02eefcb-d4fa-44ce-9dd4-75ae542dcb28",
+      "score": 5
+    },
+    {
+      "row_idx": 172,
+      "task_id": "94925f49-36bc-42da-b45b-61078d329300",
+      "sector": "Real Estate and Rental and Leasing",
+      "occupation": "Real Estate Sales Agents",
+      "criterion_index": 55,
+      "criterion_id": "ff5597f6-0548-4a37-844d-506b7d1cbd27",
+      "score": 5
+    },
+    {
+      "row_idx": 175,
+      "task_id": "403b9234-6299-4b5f-a106-70c1bc11ec4c",
+      "sector": "Government",
+      "occupation": "Recreation Workers",
+      "criterion_index": 16,
+      "criterion_id": "9e7a1046-1da6-49ce-b8a5-ef3a80b42a67",
+      "score": 5
+    },
+    {
+      "row_idx": 176,
+      "task_id": "1bff4551-1d54-4e37-b2e0-d5c3f2ea4a45",
+      "sector": "Government",
+      "occupation": "Recreation Workers",
+      "criterion_index": 28,
+      "criterion_id": "c2b4a19b-93c0-42c8-91d0-b89d7d4c4c0e",
+      "score": 5
+    },
+    {
+      "row_idx": 177,
+      "task_id": "650adcb1-ed19-4f88-8117-77640f7b94b6",
+      "sector": "Government",
+      "occupation": "Recreation Workers",
+      "criterion_index": 47,
+      "criterion_id": "b54fc144-c3ac-4b06-ab5d-99c533780eb1",
+      "score": 5
+    },
+    {
+      "row_idx": 179,
+      "task_id": "a73fbc98-90d4-4134-a54f-2b1d0c838791",
+      "sector": "Government",
+      "occupation": "Recreation Workers",
+      "criterion_index": 62,
+      "criterion_id": "ee8915fb-f686-44c1-b708-670ab87871b0",
+      "score": 5
+    },
+    {
+      "row_idx": 180,
+      "task_id": "0ec25916-1b5c-4bfe-93d3-4e103d860f3a",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "Registered Nurses",
+      "criterion_index": 41,
+      "criterion_id": "57b0bd78-8fcf-434c-8438-061c2890794a",
+      "score": 5
+    },
+    {
+      "row_idx": 181,
+      "task_id": "116e791e-890c-42b1-ba90-1db02e8bfd45",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "Registered Nurses",
+      "criterion_index": 45,
+      "criterion_id": "7ff3bf07-fbcd-4925-94e4-c1ad143c5597",
+      "score": 5
+    },
+    {
+      "row_idx": 184,
+      "task_id": "90edba97-74f0-425a-8ff6-8b93182eb7cb",
+      "sector": "Health Care and Social Assistance",
+      "occupation": "Registered Nurses",
+      "criterion_index": 70,
+      "criterion_id": "b112d998-c5ca-4698-b57a-2c4fbd6882f1",
+      "score": 5
+    },
+    {
+      "row_idx": 185,
+      "task_id": "91060ff0-3eb5-4ddf-9edb-f6758b95499e",
+      "sector": "Retail Trade",
+      "occupation": "Pharmacists",
+      "criterion_index": 35,
+      "criterion_id": "054fbddc-683d-45e2-9417-2ab7965f49b3",
+      "score": 5
+    },
+    {
+      "row_idx": 186,
+      "task_id": "8384083a-c31b-4194-80ba-4d335a444918",
+      "sector": "Retail Trade",
+      "occupation": "Pharmacists",
+      "criterion_index": 46,
+      "criterion_id": "c9035184-4109-46c4-9dc3-2d26dca5c0dc",
+      "score": 5
+    },
+    {
+      "row_idx": 187,
+      "task_id": "045aba2e-4093-42aa-ab7f-159cc538278c",
+      "sector": "Retail Trade",
+      "occupation": "Pharmacists",
+      "criterion_index": 33,
+      "criterion_id": "f949574d-4c4c-4054-9be2-5b84263162c7",
+      "score": 5
+    },
+    {
+      "row_idx": 188,
+      "task_id": "f2986c1f-2bbf-4b83-bc93-624a9d617f45",
+      "sector": "Retail Trade",
+      "occupation": "Pharmacists",
+      "criterion_index": 76,
+      "criterion_id": "22d6fd3e-f236-4609-a667-4c48cde6e5f1",
+      "score": 5
+    },
+    {
+      "row_idx": 190,
+      "task_id": "b3573f20-5d3e-4954-948f-9461fda693d2",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Managers",
+      "criterion_index": 16,
+      "criterion_id": "ba8fa77a-73b9-4009-ad88-35426c629409",
+      "score": 5
+    },
+    {
+      "row_idx": 191,
+      "task_id": "a69be28f-9a84-47c9-992e-b90446cdca9d",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Managers",
+      "criterion_index": 53,
+      "criterion_id": "b6474107-071b-4b41-9520-c7e29edbf91f",
+      "score": 5
+    },
+    {
+      "row_idx": 192,
+      "task_id": "788d2bc6-82df-4dc7-8467-a0f31405dc14",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Managers",
+      "criterion_index": 47,
+      "criterion_id": "e3038ede-3ee7-4bad-aa3d-060ab2528fe1",
+      "score": 5
+    },
+    {
+      "row_idx": 193,
+      "task_id": "74ed1dc7-1468-48a8-9071-58775c0d667a",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Managers",
+      "criterion_index": 34,
+      "criterion_id": "f0537781-880a-4f26-a392-3ffec27b8293",
+      "score": 5
+    },
+    {
+      "row_idx": 194,
+      "task_id": "69a8ef86-4e69-4fe2-9168-080f1e978e67",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Managers",
+      "criterion_index": 46,
+      "criterion_id": "86c5fb84-faeb-414a-91a0-6dca3103025d",
+      "score": 5
+    },
+    {
+      "row_idx": 195,
+      "task_id": "ab81b076-e5d8-473a-9bdb-7ea7c38f6ebc",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products",
+      "criterion_index": 38,
+      "criterion_id": "b3578e84-2bd6-44b5-9aa5-e11c549a7802",
+      "score": 5
+    },
+    {
+      "row_idx": 196,
+      "task_id": "d7cfae6f-4a82-4289-955e-c799dfe1e0f4",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products",
+      "criterion_index": 62,
+      "criterion_id": "c6bf8ca6-e15c-494e-a1d6-97c9d082f040",
+      "score": 5
+    },
+    {
+      "row_idx": 197,
+      "task_id": "19403010-3e5c-494e-a6d3-13594e99f6af",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products",
+      "criterion_index": 61,
+      "criterion_id": "8640b933-2be8-43f1-9099-4c8d6ea8434c",
+      "score": 5
+    },
+    {
+      "row_idx": 198,
+      "task_id": "7ed932dd-244f-4d61-bf02-1bc3bab1af14",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products",
+      "criterion_index": 54,
+      "criterion_id": "4fab8b38-77a3-40da-9405-7d60e91c4d4d",
+      "score": 5
+    },
+    {
+      "row_idx": 199,
+      "task_id": "105f8ad0-8dd2-422f-9e88-2be5fbd2b215",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products",
+      "criterion_index": 45,
+      "criterion_id": "0df310cf-5b81-4d1c-a15e-1a0fe89f3ffa",
+      "score": 5
+    },
+    {
+      "row_idx": 201,
+      "task_id": "15d37511-75c5-4c7f-81f1-16e00c0d95f3",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Representatives, Wholesale and Manufacturing, Technical and Scientific Products",
+      "criterion_index": 53,
+      "criterion_id": "6ef9d492-8b86-4c4e-a0a8-c09a29dd7c9a",
+      "score": 5
+    },
+    {
+      "row_idx": 202,
+      "task_id": "bb863dd9-31c2-4f64-911a-ce11f457143b",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Representatives, Wholesale and Manufacturing, Technical and Scientific Products",
+      "criterion_index": 52,
+      "criterion_id": "bb5df215-2ee3-44c2-b2fd-715d73d148c0",
+      "score": 5
+    },
+    {
+      "row_idx": 204,
+      "task_id": "6a900a40-8d2b-4064-a5b1-13a60bc173d8",
+      "sector": "Wholesale Trade",
+      "occupation": "Sales Representatives, Wholesale and Manufacturing, Technical and Scientific Products",
+      "criterion_index": 31,
+      "criterion_id": "3f33bf6a-3704-4997-a38e-5e5356c6b553",
+      "score": 5
+    },
+    {
+      "row_idx": 210,
+      "task_id": "5349dd7b-bf0a-4544-9a17-75b7013767e6",
+      "sector": "Manufacturing",
+      "occupation": "Shipping, Receiving, and Inventory Clerks",
+      "criterion_index": 93,
+      "criterion_id": "6f695d0d-1def-4da4-b38c-107bd2710e3d",
+      "score": 5
+    },
+    {
+      "row_idx": 212,
+      "task_id": "552b7dd0-96f4-437c-a749-0691e0e4b381",
+      "sector": "Manufacturing",
+      "occupation": "Shipping, Receiving, and Inventory Clerks",
+      "criterion_index": 57,
+      "criterion_id": "011cf931-ce02-4cac-b1ee-1ec7579ae68d",
+      "score": 5
+    },
+    {
+      "row_idx": 213,
+      "task_id": "11dcc268-cb07-4d3a-a184-c6d7a19349bc",
+      "sector": "Manufacturing",
+      "occupation": "Shipping, Receiving, and Inventory Clerks",
+      "criterion_index": 26,
+      "criterion_id": "46fcfb7d-3fce-4496-bce9-8627a095dfb3",
+      "score": 5
+    },
+    {
+      "row_idx": 214,
+      "task_id": "76418a2c-a3c0-4894-b89d-2493369135d9",
+      "sector": "Manufacturing",
+      "occupation": "Shipping, Receiving, and Inventory Clerks",
+      "criterion_index": 55,
+      "criterion_id": "b133d10e-a96d-444b-b951-8b4feae00170",
+      "score": 5
+    },
+    {
+      "row_idx": 216,
+      "task_id": "7de33b48-5163-4f50-b5f3-8deea8185e57",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Software Developers",
+      "criterion_index": 38,
+      "criterion_id": "2e9dda50-8892-4482-b240-6b728ab2082c",
+      "score": 5
+    },
+    {
+      "row_idx": 219,
+      "task_id": "2c249e0f-4a8c-4f8e-b4f4-6508ba29b34f",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Software Developers",
+      "criterion_index": 49,
+      "criterion_id": "57cea078-69ba-4f09-aa35-c40bf8a7a860",
+      "score": 5
+    }
+  ],
+  "soundness": {
+    "exact_string_equality_only": true,
+    "semantic_interpretation_performed": false,
+    "criterion_adequacy_proved": false,
+    "u_deletion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
