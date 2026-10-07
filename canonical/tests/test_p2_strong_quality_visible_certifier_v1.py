@@ -62,3 +62,21 @@ def test_lossless_membership_must_be_proved():
     x=base(); x["quality_binding"]["lossless_p2_membership_proved"]=False
     y=certify(x); assert y["pass"] is False
     assert "LOSSLESS_P2_MEMBERSHIP_NOT_PROVED" in y["errors"]
+
+def test_audience_mismatch_selected_plan_is_rejected():
+    x=base(); x["public"]["task"]["edit_candidates"][0]["intended_audience"]="auditor"
+    y=certify(x); assert y["pass"] is False
+    assert "QUALITY_GATE_FAILED:AUDIENCE_EMPHASIS_MATCHES_VISIBLE_OBJECTIVE" in y["errors"]
+
+def test_rubric_equivalence_receipt_is_required():
+    x=base(); x["quality_binding"]["rubric_equivalence_receipt"]=""
+    y=certify(x); assert y["pass"] is False
+    assert "RUBRIC_EQUIVALENCE_RECEIPT_MISSING" in y["errors"]
+
+def test_native_gate_receipt_is_required_when_native_gate_is_required():
+    x=base(); q=x["quality_binding"]
+    q["native_mechanical_gate_required"]=True
+    q["native_mechanical_gate_pass"]=True
+    q["native_mechanical_gate_receipt"]=""
+    y=certify(x); assert y["pass"] is False
+    assert "NATIVE_MECHANICAL_GATE_RECEIPT_MISSING" in y["errors"]
