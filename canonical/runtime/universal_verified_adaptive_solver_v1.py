@@ -50,6 +50,7 @@ from canonical.runtime.general_cognition_proposal_packet_v1 import (
     make_request as make_proposal_request,
     unwrap as unwrap_proposal_packet,
 )
+from canonical.runtime.bound_goal_plan_adapter_v1 import compile_bound_goal
 
 SCHEMA = "PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V1"
 
@@ -331,7 +332,35 @@ def _proposal_context(
         }
     if verifier_id == "EXACT_JSON_V1":
         return {"proposal_shape": {"candidate": "UNTRUSTED_VALUE"}}
+    if verifier_id == "BOUND_GOAL_PLAN_V1":
+        return {"goal": payload.get("goal"), "proposal_required": False}
     return {"verifier_id": verifier_id}
+
+
+
+
+def _verify_bound_goal_plan(payload: Mapping[str, Any], proposal: Mapping[str, Any]) -> dict[str, Any]:
+    if proposal:
+        return {"pass": False, "status": "REJECTED", "reason": "BOUND_GOAL_COMPILER_TAKES_NO_UNTRUSTED_PROPOSAL"}
+    goal = payload.get("goal")
+    if not isinstance(goal, str) or not goal.strip():
+        return {"pass": False, "status": "FAIL_CLOSED", "reason": "GOAL_REQUIRED"}
+    out = compile_bound_goal(goal)
+    ok = out.get("pass") is True
+    return {
+        "pass": ok,
+        "status": "VERIFIED" if ok else (
+            "NEED_MORE_INFORMATION" if out.get("status") == "UNRESOLVED" else "FAIL_CLOSED"
+        ),
+        "reason": None if ok else str(out.get("reason") or out.get("status") or "GOAL_COMPILATION_FAILED"),
+        "proof_digest": _digest(out),
+        "verified_output": {
+            "compiled_plan_sha256": out.get("compiled_plan_sha256"),
+            "compiled_plan": out.get("compiled_plan"),
+            "execution_authority": False,
+        } if ok else None,
+        "detail": out,
+    }
 
 
 Verifier = Callable[[Mapping[str, Any], Mapping[str, Any]], dict[str, Any]]
@@ -346,11 +375,13 @@ BUILTIN_VERIFIERS: dict[str, Verifier] = {
     "INSTRUCTION_CONSTRAINTS_V1": _verify_instruction_constraints,
     "STRUCTURED_METHOD_EXPRESSION_AST_V2": _verify_structured_method,
     "SOURCE_ALIGNED_ACCEPTANCE_PROGRAM_V1": _verify_source_aligned_acceptance_program,
+    "BOUND_GOAL_PLAN_V1": _verify_bound_goal_plan,
 }
 
 PROPOSAL_FREE_VERIFIERS = {
     "P2_AUTHENTICATED_TOP_LAW_V1",
     "STRUCTURED_METHOD_EXPRESSION_AST_V2",
+    "BOUND_GOAL_PLAN_V1",
 }
 
 
