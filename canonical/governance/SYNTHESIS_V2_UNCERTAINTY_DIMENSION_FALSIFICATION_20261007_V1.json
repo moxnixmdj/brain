@@ -1,0 +1,49 @@
+{
+  "schema":"PROJECT_BRAIN_SYNTHESIS_V2_UNCERTAINTY_DIMENSION_FALSIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_TRUTH_REPAIR__V2_TOP_LAW_DOES_NOT_YET_IMPLY_FROZEN_MATCHED_QUALITY_CEILING__ZERO_CREDIT",
+  "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subjects":{
+    "top_law":{"path":"canonical/governance/SYNTHESIS_EXPLICIT_SELECTION_ORDER_TOP_LAW_CELL_20261007_V2.json","git_blob_sha":"70f5796d77b79e96ffcc706918410da77dd4d653"},
+    "runtime":{"path":"canonical/runtime/synthesis_certified_visible_support_policy_v2.py","git_blob_sha":"14c7b3f99b6c28b3f28b5356e13907f843f5ee91"},
+    "matched_quality_contract":{"path":"canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json","git_blob_sha":"0886f7592875a5b750cdd401aa783351ab2f0854"}
+  },
+  "falsified_claim":"THE_CURRENT_V2_SELECTED_CLASS_AND_QUALITY_COORDINATES_ARE_SUFFICIENT_TO_PROVE_MATCHED_QUALITY_CEILING_ONE_FOR_EVERY_MEMBER_OF_THE_CLASS",
+  "countermodel":{
+    "all_current_v2_declared_coordinates_hold":true,
+    "selected_claims_supported_and_provenanced":true,
+    "all_detected_conflicts_preserved":true,
+    "typed_audience_and_format_constraints_satisfied":true,
+    "decision_relevant_selected_content_drop":0,
+    "unsupported_new_material_claims":0,
+    "required_uncertainty_units_total":1,
+    "required_uncertainty_units_preserved":0,
+    "frozen_uncertainty_component_score":0,
+    "matched_quality_ceiling_reached":false,
+    "reason":"THE_RUNTIME_HAS_NO EXPLICIT REQUIRED_UNCERTAINTY_OR_DISAGREEMENT_INPUT_BINDING__DETECTED_CONFLICT_PRESERVATION_IS_STRICTLY_WEAKER_THAN_PRESERVING_ALL_REQUIRED_UNCERTAINTY_OR_DISAGREEMENT_UNITS"
+  },
+  "source_audit":{
+    "runtime_contains_uncertainty_binding":false,
+    "runtime_contains_disagreement_binding":false,
+    "runtime_contains_conflict_handling":true
+  },
+  "truth_repair":{
+    "preserve":"THE_V2_COMMON_POLICY_TOP_LAW_FOR_THE_DIMENSIONS_IT_ACTUALLY_PROVES",
+    "remove":"UNCONDITIONAL_INFERENCE_FROM_CURRENT_V2_MEMBERSHIP_TO_FROZEN_MATCHED_QUALITY_CEILING_ONE",
+    "minimum_repair_options":[
+      "NARROW_THE_V2_CELL_TO_CONTEXTS_WITH_ZERO_REQUIRED_UNCERTAINTY_OR_DISAGREEMENT_UNITS_OUTSIDE_THE_EXPLICIT_CONFLICT_REPRESENTATION",
+      "OR_ADD_AN_EXACT_REQUIRED_UNCERTAINTY_OR_DISAGREEMENT_BINDING_AND_PRESERVATION_PATH_WITH_FAIL_CLOSED_MEMBERSHIP",
+      "OR_USE_A_STRONGER_SCOPE_COMPLETE_CERTIFICATE_THAT_DIRECTLY_PROVES_THE_FROZEN_UNCERTAINTY_COMPONENT"
+    ],
+    "scheduler":"DO_NOT_SUBTRACT_A_SYNTHESIS_CONTEXT_FROM_U_VIA_V2_MATCHED_QUALITY_TOP_LAW_UNLESS_ONE_MINIMUM_REPAIR_OPTION_IS CONTENT_ADDRESSED_AND_VERIFIED"
+  },
+  "pstar_effect":"THIS_IS_A_PROOF_GAP_NOT_EVIDENCE_OF_A_NEW_PERSISTENT_CAPABILITY",
+  "hard_nonclaims":[
+    "NO_CLAIM_V2_RUNTIME_IS USELESS",
+    "NO_CLAIM_V2_CACHED_REGION_MUST_BE FULLY_REVOKED FOR_ALL_OTHER_PROPERTIES",
+    "NO_CLAIM_SYNTHESIS_IS INFERIOR",
+    "NO_CLAIM_U_IS EMPTY",
+    "NO_TERMINAL_OR_CAPABILITY_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"fresh_target_reality_units_consumed":0,"terminal_credit_delta":0,"capability_credit_delta":0}
+}

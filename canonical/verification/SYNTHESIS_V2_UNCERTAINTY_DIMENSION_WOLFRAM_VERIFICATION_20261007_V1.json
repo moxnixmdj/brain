@@ -1,0 +1,13 @@
+{
+  "schema":"PROJECT_BRAIN_SYNTHESIS_V2_UNCERTAINTY_DIMENSION_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_WOLFRAM_COUNTERMODEL_PASS__ZERO_CREDIT",
+  "subject_sha":"c52d0a732beef45ea123e9d14cfc8b292a046ebd",
+  "verified":{
+    "current_v2_coordinates_can_all_hold_while_required_uncertainty_is_unpreserved":true,
+    "matched_quality_can_equal_zero_with_other_four_components_at_one":true,
+    "frozen_min_aggregator_returns_zero_for_vector_1_0_1_1_1":true
+  },
+  "boundary":"TRUTH_REPAIR_ONLY__NO_SYNTHESIS_FAMILY_OR_TERMINAL_CREDIT",
+  "terminal_credit_delta":0
+}
