@@ -6,7 +6,7 @@
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
       "path": "canonical/governance/UNIVERSAL_ESCAPE_RESOLVER_V2_ACTIVATION_20261007_V1.json",
-      "git_blob_sha": "4a3cf71c37b8c21a8346809a838d735ad8efdbcf",
+      "git_blob_sha": "78c1c6be7e6055f0bdf99ebdc682370083e5c847",
       "resolver_runtime": {
         "path": "canonical/runtime/universal_escape_resolver_v1.py",
         "git_blob_sha": "9043273c97b53a991de8cb418e0c6a58efa0cec3"
@@ -20,12 +20,14 @@
         "git_blob_sha": "2bf5d4b28fb839028fc7a369eab53f93e8b8605c"
       },
       "cross_run_solver": {
-        "path": "canonical/runtime/universal_verified_adaptive_solver_v8.py",
-        "git_blob_sha": "46e07d1af3c42b2e779fbb0ad7f6c293471fa60a",
+        "path": "canonical/runtime/universal_verified_adaptive_solver_v9.py",
+        "git_blob_sha": "659cda15bb956606a023cc9495e4036ce13e19d9",
         "resume_authenticator_path": "canonical/runtime/universal_solver_authenticated_resume_v1.py",
         "resume_authenticator_git_blob_sha": "6b9d3f2c9ad2096a294d97b255798cac13262cd1",
         "episode_verification_authenticator_path": "canonical/runtime/universal_solver_episode_verification_authenticator_v1.py",
-        "episode_verification_authenticator_git_blob_sha": "6a2fc8f26d1908eb7a35006f3a550fe2cd55c171"
+        "episode_verification_authenticator_git_blob_sha": "6a2fc8f26d1908eb7a35006f3a550fe2cd55c171",
+        "skill_verification_authenticator_path": "canonical/runtime/executable_skill_verification_authenticator_v1.py",
+        "skill_verification_authenticator_git_blob_sha": "aa1925d9192f5bba6e65d32c9319397e03b02e6c"
       },
       "resolver_independent_verification": {
         "path": "canonical/verification/UNIVERSAL_ESCAPE_RESOLVER_V1_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json",
@@ -540,6 +542,7 @@
     "new_environment_learning_reopened_as_capability_build_problem": false,
     "universal_solver_authenticated_cross_run_resume_available": true,
     "universal_solver_authenticated_episode_learning_evidence_required": true,
+    "universal_solver_authenticated_skill_behavior_verification_required": true,
     "current_escape_planning_order": [
       "SELECT_BOUND_ESCAPE_CELL_IN_B0_B2_B4_OR_B7",
       "CLASSIFY_LOAD_BEARING_ACCEPTANCE_AS_O_Q_OR_BOTH",
@@ -548,7 +551,7 @@
       "COMPLETE_OBJECTIVE_OPTIMUM",
       "DIRECT_END_TO_END_ACCEPTANCE",
       "UNIVERSAL_LEARNING_V9_V8_V7_MINIMUM_MISSING_DECISION_RELEVANT_EVIDENCE_PLANNING",
-      "AUTHENTICATED_SOLVER_V8_CROSS_RUN_CONTINUITY_AND_EPISODE_EVIDENCE_WHEN_NEEDED",
+      "AUTHENTICATED_SOLVER_V9_CROSS_RUN_EPISODE_AND_SKILL_VERIFICATION_WHEN_NEEDED",
       "RETRY_EXISTING_FAIL_CLOSED_D_B_ADMISSION",
       "RECOMPUTE_E",
       "B9_ONLY_FOR_REACHED_LOAD_BEARING_COMPOSITION"
