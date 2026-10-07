@@ -1,0 +1,13 @@
+{
+  "schema":"PROJECT_BRAIN_POLICY_ADEQUACY_BINDING_V1",
+  "date":"2026-10-07",
+  "policy_id":"SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_POLICY_V1",
+  "policy_condition":{"op":"ATOM","id":"SYNTHESIS_TYPED_VISIBLE_SUPPORT_COMMON_POLICY_TOP_LAW_V1"},
+  "adequacy_certificate_path":"canonical/governance/SYNTHESIS_VISIBLE_SUPPORT_POLICY_ADEQUACY_CERTIFICATE_20261007_V1.json",
+  "adequacy_certificate_blob_sha":"0e7fb524a83d97d85523c6c818af803608b72e81",
+  "independent_verification_path":"canonical/verification/SYNTHESIS_VISIBLE_SUPPORT_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261007_V1.json",
+  "independent_verification_blob_sha":"c8615927bd08bcc7daf79c419d3c5eb204a19bdd",
+  "membership_self_certified":false,
+  "terminal_authority":false,
+  "hard_nonclaims":["NO_NEW_CONTEXT_MEMBERSHIP","NO_GENERAL_SYNTHESIS_CLOSURE","NO_TERMINAL_CREDIT"]
+}

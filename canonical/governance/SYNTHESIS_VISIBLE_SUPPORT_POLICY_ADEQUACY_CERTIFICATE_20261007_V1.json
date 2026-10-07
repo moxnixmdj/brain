@@ -1,0 +1,24 @@
+{
+  "schema":"PROJECT_BRAIN_POLICY_ADEQUACY_CERTIFICATE_V1",
+  "date":"2026-10-07",
+  "policy_id":"SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_POLICY_V1",
+  "policy_condition":{"op":"ATOM","id":"SYNTHESIS_TYPED_VISIBLE_SUPPORT_COMMON_POLICY_TOP_LAW_V1"},
+  "policy_condition_sha256":"f25ad4ccc7958b9255c3f7fa69ffdf69abd946acd3ef48c38fa82d4df42e430f",
+  "adequacy_proved":true,
+  "brain_owned":true,
+  "load_bearing_constraints_preserved":true,
+  "status":"NORMALIZED_EXISTING_PARAMETERIZED_TOP_LAW_ADEQUACY__NO_NEW_SCOPE_CREDIT",
+  "exact_policy":{"path":"canonical/runtime/synthesis_certified_visible_support_policy_v1.py","git_blob_sha":"dcef050165201d506f66c86854cb30bcb7637b42"},
+  "adequacy_authority":{"path":"canonical/governance/SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_TOP_LAW_CELL_20261007_V1.json","git_blob_sha":"042d89d354a6d10f97a4ac45d45825d1673247ec"},
+  "common_policy_cover":{"path":"canonical/governance/SYNTHESIS_COMMON_POLICY_COVER_20261007_V1.json","git_blob_sha":"bca081880b4f90fc98b6be41c5f6b9a18192b39b"},
+  "independent_replay_source":{"path":"canonical/verification/SYNTHESIS_COMMON_POLICY_C2_INDEPENDENT_REPLAY_20261007_V1.json","git_blob_sha":"d038e5ca79286b7d69aa9ff8da8c18173569fc88","result":"PASS_7_OF_7"},
+  "meaning":"WHEN_A_CONTEXT_IS_INDEPENDENTLY_PROVED_TO_BE_A_MEMBER_OF_THE_EXACT_TYPED_VISIBLE_SUPPORT_COMMON_POLICY_TOP_LAW_CELL__THE_BOUND_BRAIN_OWNED_POLICY_IS_ADEQUATE_AT_THE_FROZEN_SYNTHESIS_OBJECTIVE_CEILING_FOR_THAT_CELL.",
+  "membership_self_certified":false,
+  "hard_nonclaims":[
+    "NO_CLAIM_ANY_NEW_REAL_SYNTHESIS_CONTEXT_IS_A_MEMBER_OF_THE_CELL.",
+    "NO_GENERAL_SYNTHESIS_CLOSURE.",
+    "NO_CLAIM_THE_POLICY_CONDITION_ATOM_IS_ENTAILED_WITHOUT_A_SEPARATE_SOUND_MEMBERSHIP_PROOF.",
+    "NO_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting":{"incremental_spend_usd":0,"fresh_target_reality_units_consumed":0,"terminal_credit_delta":0}
+}
