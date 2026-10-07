@@ -34,6 +34,10 @@ from canonical.runtime.typed_acceptance_program_v1 import verify as verify_typed
 from canonical.runtime.instruction_constraint_compiler_v1 import compile_constraints, validate_response
 from canonical.runtime.structured_method_expression_ast_candidate_v2 import compile_graph as compile_structured_method
 from canonical.runtime.source_aligned_acceptance_program_v1 import compile_program as compile_source_acceptance_program
+from canonical.runtime.universal_verified_effect_executor_v1 import (
+    execute as execute_verified_effect,
+    EXECUTOR_ID as VERIFIED_EFFECT_EXECUTOR_ID,
+)
 
 SCHEMA = "PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V1"
 
@@ -302,11 +306,23 @@ def _normalize_caps(problem: Mapping[str, Any]) -> dict[str, Mapping[str, Any]]:
         action = row.get("action")
         if not isinstance(action, Mapping):
             raise UniversalSolverError("CAPABILITY_ACTION_INVALID:" + cid)
-        verifier_id = action.get("verifier_id")
-        if verifier_id not in BUILTIN_VERIFIERS:
-            raise UniversalSolverError("VERIFIER_NOT_BUILTIN:" + cid + ":" + str(verifier_id))
-        if not isinstance(action.get("verifier_payload"), Mapping):
-            raise UniversalSolverError("VERIFIER_PAYLOAD_INVALID:" + cid)
+        action_type = str(action.get("type") or "")
+        if action_type == "verified_effect_tool":
+            verifier_id = action.get("pre_verifier_id")
+            if verifier_id not in BUILTIN_VERIFIERS:
+                raise UniversalSolverError("PRE_VERIFIER_NOT_BUILTIN:" + cid + ":" + str(verifier_id))
+            if not isinstance(action.get("pre_verifier_payload"), Mapping):
+                raise UniversalSolverError("PRE_VERIFIER_PAYLOAD_INVALID:" + cid)
+            if action.get("executor_id") != VERIFIED_EFFECT_EXECUTOR_ID:
+                raise UniversalSolverError("EFFECT_EXECUTOR_NOT_BUILTIN:" + cid)
+            if not isinstance(action.get("executor_payload"), Mapping):
+                raise UniversalSolverError("EFFECT_EXECUTOR_PAYLOAD_INVALID:" + cid)
+        else:
+            verifier_id = action.get("verifier_id")
+            if verifier_id not in BUILTIN_VERIFIERS:
+                raise UniversalSolverError("VERIFIER_NOT_BUILTIN:" + cid + ":" + str(verifier_id))
+            if not isinstance(action.get("verifier_payload"), Mapping):
+                raise UniversalSolverError("VERIFIER_PAYLOAD_INVALID:" + cid)
         out[cid] = row
     return out
 
@@ -316,6 +332,7 @@ def run(
     *,
     proposal_packets: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
     verified_facts: Sequence[str] = (),
+    effect_root: str | None = None,
 ) -> dict[str, Any]:
     """Run until solved, falsified, or an untrusted proposal/information update is needed.
 
@@ -386,9 +403,16 @@ def run(
             cid = str(plan["plan"][0])
             cap = caps[cid]
             action = cap["action"]
-            verifier_id = str(action["verifier_id"])
-            verifier = BUILTIN_VERIFIERS[verifier_id]
-            payload = action["verifier_payload"]
+            action_type = str(action.get("type") or "")
+            is_effect = action_type == "verified_effect_tool"
+            if is_effect:
+                verifier_id = str(action["pre_verifier_id"])
+                verifier = BUILTIN_VERIFIERS[verifier_id]
+                payload = action["pre_verifier_payload"]
+            else:
+                verifier_id = str(action["verifier_id"])
+                verifier = BUILTIN_VERIFIERS[verifier_id]
+                payload = action["verifier_payload"]
 
             packets = proposals.get(cid)
             if verifier_id in PROPOSAL_FREE_VERIFIERS:
@@ -464,7 +488,42 @@ def run(
                     "terminal_authority": False,
                 }
 
-            _, _, verdict, record = accepted
+            _, accepted_packet, verdict, record = accepted
+
+            effect_result = None
+            if is_effect:
+                if not isinstance(effect_root, str) or not effect_root.strip():
+                    return {
+                        "schema": SCHEMA,
+                        "status": "BLOCKED__EFFECT_ROOT_REQUIRED",
+                        "pass": False,
+                        "next_capability_id": cid,
+                        "verifier_id": verifier_id,
+                        "verified_facts": current,
+                        "trace": trace,
+                        "rejected_proposals": rejected,
+                        "terminal_authority": False,
+                    }
+                effect_result = execute_verified_effect(
+                    executor_id=str(action["executor_id"]),
+                    executor_payload=action["executor_payload"],
+                    proposal=accepted_packet,
+                    effect_root=effect_root,
+                )
+                if effect_result.get("pass") is not True:
+                    return {
+                        "schema": SCHEMA,
+                        "status": "FAIL_CLOSED__EFFECT_EXECUTION_OR_READBACK_FAILED",
+                        "pass": False,
+                        "next_capability_id": cid,
+                        "verifier_id": verifier_id,
+                        "effect_result": effect_result,
+                        "verified_facts": current,
+                        "trace": trace,
+                        "rejected_proposals": rejected,
+                        "terminal_authority": False,
+                    }
+
             new_facts = cap.get("provides")
             if not isinstance(new_facts, list) or not new_facts:
                 raise UniversalSolverError("CAPABILITY_PROVIDES_INVALID:" + cid)
@@ -473,7 +532,10 @@ def run(
             current = sorted(set(current) | set(new_facts))
             trace.append({
                 **record,
+                "action_type": action_type,
                 "verified_output": verdict.get("verified_output"),
+                "effect_outcome": effect_result.get("outcome") if isinstance(effect_result, Mapping) else None,
+                "effect_outcome_sha256": effect_result.get("effect_outcome_sha256") if isinstance(effect_result, Mapping) else None,
                 "new_verified_facts": sorted(set(new_facts)),
             })
 
