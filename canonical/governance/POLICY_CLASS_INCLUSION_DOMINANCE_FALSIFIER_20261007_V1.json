@@ -1,0 +1,22 @@
+{
+  "schema":"PROJECT_BRAIN_POLICY_CLASS_INCLUSION_DOMINANCE_FALSIFIER_V1",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_TRUTH_REPAIR__ZERO_CREDIT",
+  "claim_under_attack":"BRAIN_POLICY_OR_TRACE_CLASS_SUPERSET_OF_TARGET_CLASS_BY_ITSELF_IMPLIES_REALIZED_TARGET_NONINFERIORITY",
+  "verdict":"FALSIFIED",
+  "countermodel":{
+    "target_trace_is_expressible_by_brain":true,
+    "brain_candidate_class_contains_target_trace":true,
+    "load_bearing_evaluator_or_selection_rule_not_sufficiently_bound":true,
+    "resource_bounded_selection_not_proved":true,
+    "brain_may_select_inferior_trace":true
+  },
+  "necessary_strengthening":"POLICY_CLASS_INCLUSION_PLUS_SOUND_LOAD_BEARING_ACCEPTANCE_OR_DOMINANCE_RELATION_PLUS_RESOURCE_VALID_SELECTION_OF_AN_ADEQUATE_MEMBER",
+  "consequence":"UNIVERSAL_ENUMERATION_OR_TRACE_REPLAY_DOES_NOT_DELETE_THE_SINGLE_ESCAPE_FRONTIER",
+  "scheduler":[
+    "DO_NOT_TREAT_EXPRESSIBILITY_AS_ADEQUACY",
+    "DO_NOT_TREAT_EVENT_SUPERDOMAIN_COVERAGE_AS_POLICY_DOMINANCE",
+    "CONTINUE_ATTACKING_SURVIVING_ESCAPE_OCCUPANCY_OR_DOMINANCE_DIRECTLY"
+  ],
+  "hard_nonclaims":["NO_U_EMPTY","NO_TERMINAL_CREDIT"]
+}
