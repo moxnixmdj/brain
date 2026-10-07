@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_EXECUTED_SCORER_FALSIFIER_V1",
+  "date": "2026-10-07",
+  "status": "PASS__WHOLE_SEVEN_GATE_TOPLAW_PREMISE_FALSIFIED_BY_EXACT_EXECUTION_SNAPSHOT_BYTES__REVOKE_WHOLE_CELL__PRESERVE_NARROW_INDEPENDENT_CELLS",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "path": "canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_20261007_V1.json",
+    "pre_repair_git_blob_sha": "1c450f41e813a21b1a8b876c131c8574a21f5f51"
+  },
+  "execution_snapshot": {
+    "commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "terminal_parent_runner": {
+      "path": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
+      "git_blob_sha": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449"
+    },
+    "contract_native_scorer": {
+      "path": "canonical/runtime/contract_native_proof_suites.py",
+      "git_blob_sha": "0210790c7dd705ef328e1b55d529a30c5c6c3337"
+    },
+    "contract_native_candidate": {
+      "path": "canonical/runtime/contract_native_brain_candidate.py",
+      "git_blob_sha": "afc18af1d1da6f25166c6cc57dcbc0cd3070bb85"
+    }
+  },
+  "executed_semantics": {
+    "runner_route": "FOR_P3_THE_PARENT_RUNNER_CALLS_contract_suite.generate_case__contract_candidate.solve__THEN_contract_suite.score_case_AND_MARKS_DIRECT_INSTRUMENTATION_PASS_FROM_THAT_COMPOSITE_VERDICT",
+    "candidate_output_keys": [
+      "selected_claims",
+      "uncertainty_claims"
+    ],
+    "scorer_observed_checks": [
+      "REQUIRED_CLAIMS_NOT_MISSING",
+      "FORBIDDEN_UNSUPPORTED_CLAIMS_NOT_SELECTED",
+      "NO_UNKNOWN_SELECTED_CLAIMS",
+      "SELECTED_CONFLICTED_CLAIMS_HAVE_UNCERTAINTY_FLAG",
+      "NO_UNCERTAINTY_FLAG_FOR_UNSELECTED_CLAIM",
+      "MAX_CLAIMS_FORMAT_LIMIT",
+      "REQUIRED_BEFORE_OPTIONAL_ORDER_WHEN_BOUND"
+    ],
+    "absent_from_candidate_output_and_scorer": "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS",
+    "consequence": "DIRECT_INSTRUMENTATION_PASS_TRUE_DOES_NOT_ENTAIL_THE_SEVEN_DECLARED_BINDING_GATES_ARE_ALL_TRUE"
+  },
+  "falsified_claim": {
+    "premise": "THE_BOUND_P3_DIRECT_INSTRUMENTATION_SEMANTICS_ARE_THE_SEVEN_DECLARED_LOAD_BEARING_BOOLEAN_REQUIRED_CHECKS_FOR_THE_EXACT_FROZEN_T1_AND_T3_AGGREGATE_CELLS.",
+    "reason": "THE_EXACT_EXECUTED_CANDIDATE_AND_SCORER_DO_NOT_REPRESENT_OR_CHECK_PROVENANCE_PRESERVATION__SO_THE_EXECUTED_PASS_BIT_CANNOT_SOUNDLY_SET_THAT_GATE_TO_ONE.",
+    "invalidated_derived_claims": [
+      "brain_required_check_vector_EQUALS_ALL_ONES_SEVEN_VECTOR",
+      "WHOLE_SEVEN_GATE_COMPONENTWISE_TOP_ELEMENT",
+      "WHOLE_FROZEN_P3_DIRECT_CONJUNCTION_TOPLAW_CELL"
+    ]
+  },
+  "formal_nonimplication": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "formula": "{TautologyQ[Implies[required && unsupported && uncertainty && format, provenance], vars], SatisfiableQ[required && unsupported && uncertainty && format && !provenance, vars]}",
+    "result": [
+      false,
+      true
+    ],
+    "interpretation": "PASS_ON_THE_OBSERVED_NON_PROVENANCE_CONJUNCTION_DOES_NOT_LOGICALLY_IMPLY_PROVENANCE_PASS"
+  },
+  "preserve": [
+    "V14_SYNTHESIS_UNSUPPORTED_CLAIM_SELECTED_PROPERTY_CELL_20261007_V1_IF_ITS_OWN_INDEPENDENT_PROOF_REMAINS_SOUND",
+    "V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_SELECTED_PROPERTY_CELL_20261007_V1_AND_ITS_INDEPENDENT_VERIFICATION",
+    "ANY_OTHER_NARROW_PROPERTY_CELL_WITH_AN_INDEPENDENT_EXECUTED_OR_FORMAL_PROOF"
+  ],
+  "scheduler_effect": [
+    "DO_NOT_ADD_P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION_TO_D_B.",
+    "DO_NOT_USE_THE_SEVEN_GATE_ALL_ONES_VECTOR_FOR_ABC_CLOSURE.",
+    "KEEP_SYNTHESIS_CONTEXTS_OPEN_EXCEPT_WHERE_NARROW_SOUND_CERTIFICATES_OR_OTHER_DIRECT_E2E_CERTIFICATES_CLOSE_THEM.",
+    "REQUIRE_EXECUTED_SEMANTICS_OR_AN_INDEPENDENT_FORMAL_BRIDGE_FOR_EACH_DECLARED_GATE_BEFORE_WHOLE_CELL_PROMOTION."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_P3_EXECUTED_ROUTE_FAILS_REQUIRED_CLAIM_COVERAGE.",
+    "NO_CLAIM_THE_P3_EXECUTED_ROUTE_FAILS_UNSUPPORTED_CLAIM_OR_UNCERTAINTY_CHECKS.",
+    "NO_CLAIM_THE_PROVENANCE_PROPERTY_IS_FALSE_IN_REAL_OUTPUTS__ONLY_THAT_THE_BOUND_EXECUTION_DOES_NOT_PROVE_IT.",
+    "NO_GLOBAL_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
