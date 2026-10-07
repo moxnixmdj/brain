@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_LOWLEVEL_CONTROLFLOW_VM_FREEZE_V1",
+  "date": "2026-10-07",
+  "status": "FROZEN_BEFORE_PROSPECTIVE_LOOP_REQUIRED_TASK_GENERATOR__ZERO_TERMINAL_CREDIT",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "kernel": {
+    "path": "canonical/runtime/bytes_lowlevel_controlflow_vm_v1.py",
+    "raw_source_bytes": 644,
+    "sha256": "e6e5b85368d8e87f82754e86663270315e4d7f059602e6190e9dc4a685bcc139",
+    "git_blob_sha": "a50d0bf92ee14f7cb1db5658bf31f3a8a68b5189",
+    "fixed_decoder_payload_bytes": 359,
+    "fixed_decoder_payload_sha256": "10a93aefbeb22e96793078219118f4a3a974a6cd74dc2d6859c6da85121daa48"
+  },
+  "machine": {
+    "alphabet": "+ - < > [ ]",
+    "cell_semantics": "MOD_256",
+    "tape_representation": "SPARSE_INTEGER_INDEXED_CELLS",
+    "input": "CELL0_INITIALIZED_FROM_INTEGER_INPUT_MOD_256",
+    "output": "PAIR_CELL0_CELL1",
+    "step_limit": 512,
+    "synthesis": "EXHAUSTIVE_BALANCED_PROGRAM_SEARCH_LENGTH_LTE_6"
+  },
+  "prefreeze_smoke": {
+    "truth_program": "[->]+",
+    "holdouts": "PASS_4_OF_4",
+    "search_seconds": 0.10055814997758716
+  },
+  "next_rule": "ONLY_AFTER_THIS_KERNEL_IS_FROZEN_MAY_A_HASH_DERIVED_LOOP_REQUIRED_TASK_GENERATOR_BE_COMMITTED",
+  "hard_nonclaims": [
+    "NO_TURING_COMPLETENESS_OR_UNIVERSALITY_CLAIM",
+    "SEARCH_IS_BOUNDED_TO_PROGRAM_LENGTH_LTE_6_AND_512_STEPS",
+    "PYTHON_AND_ITERTOOLS_ARE_EXPLICIT_FIXED_SUBSTRATE_DEPENDENCIES",
+    "NO_OPEN_WORLD_OR_TERMINAL_CREDIT"
+  ]
+}
