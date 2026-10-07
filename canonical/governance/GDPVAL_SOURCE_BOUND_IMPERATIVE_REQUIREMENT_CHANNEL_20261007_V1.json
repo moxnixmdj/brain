@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SOURCE_BOUND_IMPERATIVE_REQUIREMENT_CHANNEL_V1",
+  "date": "2026-10-07",
+  "status": "VERIFIED_BOUNDED_PROMPT_SIDE_IMPERATIVE_REQUIREMENT_CHANNEL_MERGED__POPULATION_REEXECUTION_STILL_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "merged_commit": "448a5cddf8f17f3273c9a84ab26c1507afeb0a4f",
+    "bounded_imperative_runtime": {
+      "path": "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+      "git_blob_sha": "3f08b2703723537e5a146346eead6a387424687f"
+    },
+    "explicit_requirement_index_v2": {
+      "path": "canonical/runtime/explicit_requirement_index_v2.py",
+      "git_blob_sha": "30629b10fdbf3c337eb3252c043ec13123ca66a1"
+    },
+    "bounded_modal_runtime": {
+      "path": "canonical/runtime/bounded_predicate_argument_semantics.py",
+      "git_blob_sha": "8303231779d6fe8c7fb740e3bbaa492914d4eba9"
+    },
+    "explicit_obligation_index_v1": {
+      "path": "canonical/runtime/explicit_obligation_index_v1.py",
+      "git_blob_sha": "a28e1bde45bfe85c086202c3a5ecca2ae730fe7d"
+    }
+  },
+  "proved": {
+    "v1_modal_obligation_identity_preserved": true,
+    "source_bound_imperative_action_channel_added": true,
+    "closed_verb_lexicon": true,
+    "source_spans_preserved": true,
+    "raw_context_can_be_bound_without_interpreting_it": true,
+    "coordination_split": false,
+    "imperative_argument_semantics_resolved": false,
+    "absence_of_indexed_requirement_proves_no_requirement": false,
+    "semantic_completeness_claim": false
+  },
+  "scheduler_effect": [
+    "FOR_GDPVAL_PROMPT_SIDE_EXPLICIT_REQUIREMENTS__USE_explicit_requirement_index_v2_INSTEAD_OF_THE_MODAL_ONLY_V1_INDEX.",
+    "COMBINE_THIS_ONE_SIDED_PROMPT_REQUIREMENT_CHANNEL_WITH_THE_ALREADY_BOUND_RUBRIC_ACCEPTANCE_CHANNEL; DO_NOT_TREAT_EITHER_AS_WHOLE_TASK_COMPLETENESS.",
+    "REEXECUTE_THE_COMPLETE_PUBLIC_220_POPULATION_WHEN_A_ZERO_SPEND_CORPUS_EXECUTION_CARRIER_IS_AVAILABLE; CONTENT_ADDRESS THE_DELTA_IN_POSITIVE_REQUIREMENTS_AND_THE_SURVIVING_COMPLEMENT.",
+    "DELETE_NO_SCOPE_FROM_U_FROM_THIS_CHANNEL_ALONE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_220_TASK_POPULATION_HAS_BEEN_REEXECUTED_THROUGH_V2.",
+    "NO_CLAIM_IMPERATIVE_ARGUMENT_MEANING_IS_RESOLVED.",
+    "NO_CLAIM_COORDINATED_ACTIONS_ARE_SEMANTICALLY_SPLIT.",
+    "NO_CLAIM_GDPVAL_SCOPE_OR_HUMAN_PREFERENCE_ADEQUACY_IS_CLOSED.",
+    "NO_U_DELETION_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

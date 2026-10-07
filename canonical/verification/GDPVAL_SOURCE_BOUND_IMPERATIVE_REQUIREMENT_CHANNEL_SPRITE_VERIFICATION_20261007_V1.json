@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SOURCE_BOUND_IMPERATIVE_REQUIREMENT_CHANNEL_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__INDEPENDENT_WARM_SPRITE_REPLAY__12_OF_12_TESTS",
+  "subject": {
+    "runtime_blob_sha": "3f08b2703723537e5a146346eead6a387424687f",
+    "index_blob_sha": "30629b10fdbf3c337eb3252c043ec13123ca66a1",
+    "parser_test_blob_sha": "35bccc519a789ab81dcd77fd4d4dcace0d114f40",
+    "index_test_blob_sha": "1dc77e12546d6ee4bce87964fd45b7be716a529e",
+    "dependency_modal_blob_sha": "8303231779d6fe8c7fb740e3bbaa492914d4eba9",
+    "dependency_v1_index_blob_sha": "a28e1bde45bfe85c086202c3a5ecca2ae730fe7d"
+  },
+  "execution": {
+    "carrier": "brain-root3-current-byte-replay-20261007-v1",
+    "command": "python3 -m unittest -v canonical.tests.test_bounded_imperative_directive_semantics_v1 canonical.tests.test_explicit_requirement_index_v2",
+    "tests_run": 12,
+    "failures": 0,
+    "errors": 0,
+    "result": "OK"
+  },
+  "verified": [
+    "SIMPLE_SOURCE_BOUND_IMPERATIVE_ACTION",
+    "RAW_FOR_CONTEXT_BINDING",
+    "RAW_IF_CONTEXT_BINDING",
+    "PLEASE_PREFIX",
+    "COORDINATION_NOT_SPLIT",
+    "DECLARATIVE_REJECTED",
+    "UNKNOWN_IMPERATIVE_VERB_REJECTED",
+    "V1_MODAL_OBLIGATION_IDENTITY_PRESERVED",
+    "IMPERATIVE_ADDED_WITHOUT_ARGUMENT_SEMANTIC_SPLIT",
+    "CONTEXT_BOUND",
+    "DECLARATIVE_REMAINS_UNRESOLVED_OR_IGNORED",
+    "MIXED_MODAL_AND_IMPERATIVE_DOCUMENT"
+  ],
+  "scope_boundary": "UNIT_AND_IDENTITY_REPLAY_ONLY__NO_PUBLIC_220_POPULATION_COVERAGE_CLAIM",
+  "terminal_credit": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
