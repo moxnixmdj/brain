@@ -177,11 +177,19 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
     mandatory_requirement_ids = list(brain_deliverables)
     requirements: list[str] | None = None
     resolved: set[str] = set()
-    observations: list[dict[str, Any]] = []
+    declared_inputs, declared_outputs = _declared_task_paths(goal)
+    observations: list[dict[str, Any]] = await _snapshot_declared_inputs(
+        environment, declared_inputs
+    )
     trace: list[dict[str, Any]] = []
 
     for cycle in range(max_cycles):
         unresolved = [] if requirements is None else sorted(set(requirements) - resolved)
+        output_gate_failures: list[dict[str, Any]] = []
+        if requirements is not None and not unresolved and declared_outputs:
+            output_gate_failures = await _declared_output_gate(
+                environment, declared_outputs
+            )
         prompt = (
             "You are an OPTIONAL semantic proposal source inside Project Brain, not execution authority. "
             "Return one structured proposal object only. Project Brain owns action selection, command policy, verification, "
@@ -221,6 +229,15 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                 observations.append(rejected)
                 # A premature finish request is metadata only. It must not suppress
                 # otherwise admissible candidate actions in the same proposal.
+            elif output_gate_failures:
+                rejected = {
+                    "cycle": cycle,
+                    "kind": "FINISH_REJECTED",
+                    "reason": "BRAIN_DECLARED_OUTPUT_GATE_FAILED",
+                    "failures": output_gate_failures,
+                }
+                trace.append(rejected)
+                observations.append(rejected)
             else:
                 return {
                     "schema": SCHEMA,
@@ -248,7 +265,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         scored = []
         for row in candidates:
             new = len(set(row["covers"]) & unresolved_set)
-            if new:
+            if new or (not unresolved_set and bool(output_gate_failures)):
                 scored.append((-new, row["action_id"], row))
         if not scored:
             blocked = {
@@ -311,6 +328,19 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         # Do not spend another cognition turn asking the substrate to notice that
         # all requirements are already resolved.
         if requirements is not None and not (set(requirements) - resolved):
+            post_gate_failures = await _declared_output_gate(
+                environment, declared_outputs
+            )
+            if post_gate_failures:
+                rejected = {
+                    "cycle": cycle,
+                    "kind": "BRAIN_DECLARED_OUTPUT_GATE_FAILED",
+                    "reason": "MANDATORY_TASK_OUTPUT_MISSING_OR_INVALID",
+                    "failures": post_gate_failures,
+                }
+                trace.append(rejected)
+                observations.append(rejected)
+                continue
             return {
                 "schema": SCHEMA,
                 "status": "FINISHED",
