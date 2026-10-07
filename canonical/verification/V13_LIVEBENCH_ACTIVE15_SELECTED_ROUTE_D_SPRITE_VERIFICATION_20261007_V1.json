@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_V13_LIVEBENCH_ACTIVE15_SELECTED_ROUTE_D_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__ZERO_MATERIAL_EFFECTS__DONOR_INDEPENDENT__D_DELTA_CLOSED",
+  "subject": {
+    "audit": {
+      "path": "canonical/governance/V13_LIVEBENCH_ACTIVE15_SELECTED_ROUTE_D_AUDIT_20261007_V1.json",
+      "git_blob_sha": "b22eb6fe998103c8bf511c5327481dc86dde881e"
+    },
+    "verifier": {
+      "path": "canonical/runtime/v13_livebench_active15_d_route_verifier_v1.py",
+      "git_blob_sha": "990caae1b5dcb9c4cc45c1c5ba3202f7fc987aec"
+    },
+    "tests": {
+      "path": "canonical/tests/test_v13_livebench_active15_d_route_v1.py",
+      "git_blob_sha": "68a385138d345fa97e8e7372f5cd28c12102fc17"
+    },
+    "cell_verification": {
+      "path": "canonical/verification/V13_DB_LIVEBENCH_ACTIVE15_SELECTED_CELL_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "dbfe5b40c39e9f83fc2682d5aa443f9faeab8c71"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/v13_db_livebench_cell_v1",
+    "tests_passed": 1,
+    "tests_total": 1,
+    "recomputed_audit_blob": "b22eb6fe998103c8bf511c5327481dc86dde881e",
+    "recomputed_verifier_blob": "990caae1b5dcb9c4cc45c1c5ba3202f7fc987aec",
+    "recomputed_tests_blob": "68a385138d345fa97e8e7372f5cd28c12102fc17"
+  },
+  "verified": {
+    "execution_closure_complete": true,
+    "material_effect_count": 0,
+    "model_dependency_count": 0,
+    "paid_provider_required": false,
+    "external_capability_provider_required": false,
+    "D_delta_closed_for_selected_route": true,
+    "global_D_finality_closed": false,
+    "terminal_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
