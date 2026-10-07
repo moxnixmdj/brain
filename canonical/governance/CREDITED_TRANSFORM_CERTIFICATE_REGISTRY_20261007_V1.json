@@ -87,15 +87,78 @@
         "path": "canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json",
         "git_blob_sha": "1a0154d44963ce08ed78920978fb64ba054334cb"
       },
-      "certificate": null
+      "certificate": {
+        "transform_law": "DETERMINISTIC",
+        "source_state_complete": true,
+        "target_state_complete": true,
+        "external_controls_accounted": true,
+        "randomness_accounted": true,
+        "target_evaluator_set_complete": true,
+        "target_hard_constraint_set_complete": true,
+        "interactive_state_accounted": true,
+        "independent_verification_bound": true,
+        "source_state_ids": [
+          "FROZEN_SUITE_EXACT_BYTES",
+          "FROZEN_TASK_ROW_OPERATION_AND_ARGS",
+          "RUNNER_EXACT_BYTES",
+          "SYMPY_1_14_0_PRODUCER_VERSION",
+          "PYTHON_3_13_15_EXECUTION_VERSION",
+          "SYMBOL_AND_ALLOWED_FUNCTION_PARSE_ENVIRONMENT"
+        ],
+        "target_state_ids": [
+          "EXACT_SYMBOLIC_OUTPUT",
+          "TASK_PASS_BOOLEAN",
+          "TASK_ERROR_OR_NULL",
+          "PER_TASK_ELAPSED_S",
+          "SUITE_PASS_FAIL_COUNTS",
+          "SUITE_EXACT_CORRECTNESS",
+          "TOTAL_EVAL_S",
+          "INCREMENTAL_SPEND_USD"
+        ],
+        "target_evaluator_ids": [
+          "EXACT_CORRECTNESS_ON_FROZEN_OBS_EXACT_SYMBOLIC_001"
+        ],
+        "evaluator_pullbacks": [
+          {
+            "target_evaluator_id": "EXACT_CORRECTNESS_ON_FROZEN_OBS_EXACT_SYMBOLIC_001",
+            "source_evaluator_id": "RUN_TASK_EXACT_EQUAL_OR_EXACT_STRUCTURAL_ACCEPTANCE",
+            "proof_ref": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json"
+          }
+        ],
+        "target_hard_constraint_ids": [
+          "FROZEN_SUITE_SCOPE_ONLY",
+          "NUMERICAL_TOLERANCE_FORBIDDEN",
+          "INCREMENTAL_SPEND_USD_EQ_0"
+        ],
+        "hard_constraint_preimages": [
+          {
+            "target_hard_constraint_id": "FROZEN_SUITE_SCOPE_ONLY",
+            "source_preimage_or_invariant_id": "SUITE_SHA256_AND_TASK_OPERATION_DISPATCH_BOUNDARY",
+            "proof_ref": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json"
+          },
+          {
+            "target_hard_constraint_id": "NUMERICAL_TOLERANCE_FORBIDDEN",
+            "source_preimage_or_invariant_id": "SYMPY_EXACT_EQUAL_AND_EXACT_STRUCTURAL_COMPARISON_ONLY",
+            "proof_ref": "canonical/obsolescence/run_exact_symbolic_v1.py"
+          },
+          {
+            "target_hard_constraint_id": "INCREMENTAL_SPEND_USD_EQ_0",
+            "source_preimage_or_invariant_id": "FROZEN_EXECUTION_RECEIPT_INCREMENTAL_SPEND_ZERO",
+            "proof_ref": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json"
+          }
+        ],
+        "acceptance_semantics_completeness_ref": "canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json",
+        "independent_verification_ref": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+        "scope_note": "ONLY_THE_BOUNDED_FROZEN_OPERATION_CLASSES_ALREADY_CREDITED_BY_THE_ACCEPTED_FAMILY__NO_GENERAL_MATH_CLAIM"
+      }
     }
   ],
   "current_result": {
     "exact_credited_family_registry_bound": true,
     "route_count": 5,
-    "transform_certificates_complete": 0,
+    "transform_certificates_complete": 1,
     "c_closed": false,
-    "next": "POPULATE_ROUTE_CERTIFICATES_FROM_ACCEPTANCE_SEMANTICS_AND_IMPLEMENTATION_BOUNDARIES__FAIL_CLOSED_ON_ANY_UNBOUND_EVALUATOR_CONSTRAINT_STATE_OR_CONTROL"
+    "next": "CERTIFY_CONTINUITY_DELEGATION_RECOVERY_AND_TOOL_DISCOVERY_TRANSFORMS__FAIL_CLOSED_ON_ANY_UNBOUND_STATE_EVALUATOR_CONSTRAINT_OR_CONTROL"
   },
   "hard_nonclaims": [
     "NO_CLAIM_ANY_CURRENT_ROUTE_TRANSFORM_CERTIFICATE_IS_COMPLETE",
