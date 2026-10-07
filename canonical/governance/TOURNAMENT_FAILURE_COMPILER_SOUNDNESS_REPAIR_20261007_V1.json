@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_TOURNAMENT_FAILURE_COMPILER_SOUNDNESS_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH_REPAIR__CANONICAL_RUNTIME_PREVIOUSLY_ACCEPTED_SHA_SHAPED_NONEXISTENT_RECEIPTS_AND_UNBOUNDED_SYMBOL_ALPHABETS__HARDENED_BYTES_PROPOSED__ZERO_TERMINAL_CREDIT",
+  "defect": {
+    "canonical_runtime_blob_before": "dd0e0920ee45bb6d10eb77d9f13866b3f379a11c",
+    "counterfeit_binding_counterexample": "NONEXISTENT proof.json AND verify.json WITH ANY 40_CHARACTER_SHA_SHAPED_STRINGS WERE ACCEPTED AS PERSISTENT_SEPARATOR_CANDIDATE.",
+    "bit_capacity_counterexample": "A MAPPING WITH MORE THAN_2_POW_BITS DISTINCT SYMBOLS COULD PASS WHEN BITS_ONLY_MET_CEIL_LOG2_MINIMUM_POLICY_COUNT."
+  },
+  "repair": {
+    "runtime_blob_after": "999f075b9d888d35f6e10564aeaf45e0791c4a52",
+    "tests_blob_after": "9833fbb633d04613c98f26193f84a340c9a83da0",
+    "exact_repository_git_blob_verification": true,
+    "parsed_semantic_receipt_binding": true,
+    "exact_cell_world_set_sha256_binding": true,
+    "independent_verifier_receipt_required": true,
+    "separator_symbol_capacity_enforced": true,
+    "malformed_world_container_fail_closed": true,
+    "author_exact_byte_tests": "8_OF_8_PASS"
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT.",
+    "THIS_REPAIR_PREVENTS_FALSE_ADMISSION; IT DOES_NOT_CLOSE_ANY_ACCEPTANCE OBLIGATION."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
