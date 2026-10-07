@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_LITE_PUBLIC_PAIRWISE_SCHEMA_BOUNDARY_V1",
+  "date": "2026-10-07",
+  "status": "PUBLIC_PRIMARY_SOURCE_BOUNDARY__PAIRWISE_ORDER_PATTERN_OBSERVED_ON_ALL_FOUR_LITE_PRESENTATION_CHECKS__SCORED_SUITE_DIMENSION_COMPLETENESS_STILL_PRIVATE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "public_sources": [
+    {
+      "url": "https://huggingface.co/datasets/ArtificialAnalysis/AA-Briefcase-Lite",
+      "owner": "ArtificialAnalysis",
+      "observed": "PUBLIC_FIFTH_SCENARIO_REPRESENTATIVE_OF_STRUCTURE_SUBMISSION_AND_GRADING__NOT_PART_OF_SCORED_91_TASK_SUITE"
+    },
+    {
+      "url": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "owner": "Artificial Analysis",
+      "observed": "SCORED_SUITE_PRESENTATION_IS_PAIRWISE__WHICH_DELIVERABLE_IS_MORE_PROFESSIONALLY_PRESENTED"
+    },
+    {
+      "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "owner": "Artificial Analysis",
+      "observed": "AA_BRIEFCASE_V1_1_USES_THREE_JUDGE_PAIRWISE_PANEL_AND_CROWD_BT_FITTING"
+    }
+  ],
+  "observed_lite_presentation_checks": [
+    {
+      "check_id": "W1-T1-P-01",
+      "deliverable": "market_overview.pdf + market_overview.tex",
+      "declared_dimension_count": 7,
+      "order_pattern": "OUTPUT_A_MORE_POLISHED_ACROSS_THE_SEVEN_DIMENSIONS_OR_STRICTLY_STRONGER_ON_AT_LEAST_ONE_WITH_NO_REGRESSION"
+    },
+    {
+      "check_id": "W1-T2-P-01",
+      "deliverable": "market_model.xlsx",
+      "declared_dimension_count": 4,
+      "order_pattern": "OUTPUT_A_MORE_POLISHED_ACROSS_THE_FOUR_DIMENSIONS_OR_STRICTLY_STRONGER_ON_AT_LEAST_ONE_WITH_NO_REGRESSION"
+    },
+    {
+      "check_id": "W1-T3-P-01",
+      "deliverable": "target_assessment.pptx",
+      "declared_dimension_count": 4,
+      "order_pattern": "OUTPUT_A_MORE_POLISHED_ACROSS_THE_FOUR_DIMENSIONS_OR_STRICTLY_STRONGER_ON_AT_LEAST_ONE_WITH_NO_REGRESSION"
+    },
+    {
+      "check_id": "W1-T4-P-01",
+      "deliverable": "briefing.mp4 + briefing.srt",
+      "declared_dimension_count": 5,
+      "order_pattern": "OUTPUT_A_MORE_POLISHED_ACROSS_THE_FIVE_DIMENSIONS_OR_STRICTLY_STRONGER_ON_AT_LEAST_ONE_WITH_NO_REGRESSION"
+    }
+  ],
+  "structural_fact": {
+    "observed_public_order_calculus": "PARETO_LIKE__NO_WORSE_ON_ALL_DECLARED_DIMENSIONS_AND_STRICTLY_BETTER_ON_AT_LEAST_ONE__WITH_TIE_WHEN_NO_SIDE_STRICTLY_DOMINATES_UNDER_THE_BOUND_CHECK",
+    "relation_to_brain_runtime": "canonical/runtime/authenticated_presentation_pareto_comparator_v1.py",
+    "consequence": "THE_BRAIN_OWNED_ORDER_CALCULUS_HAS_A_DIRECT_PUBLIC_LITE_STRUCTURAL_ANALOG__BUT_THIS_DOES_NOT_AUTHENTICATE_THE_PRIVATE_SCORED_TASK_DIMENSION_SETS_OR_EXACT_SCORER_PROMPT"
+  },
+  "current_public_boundary": {
+    "published_prompt_scope": "GENERATION_AND_BINARY_RUBRIC_GRADING_PROMPTS_ARE_PUBLISHED_IN_LITE",
+    "pairwise_prompt_publicly_bound_from_examined_sources": false,
+    "scored_91_task_pairwise_dimension_sets_publicly_bound": false,
+    "scored_91_task_grading_rubrics_public": false
+  },
+  "scheduler_repair": [
+    "DO_NOT_TREAT_PAIRWISE_ORDER_CALCULUS_AS_WHOLLY_UNKNOWN__THE_PUBLIC_LITE_CHECKS_EXHIBIT_A_CONSISTENT_PARETO_STYLE_RULE",
+    "DO_NOT_PROMOTE_LITE_DIMENSIONS_TO_THE_PRIVATE_SCORED_91_TASK_SUITE",
+    "FOCUS_EXTERNAL_INFORMATION_REQUEST_ON_PRIVATE_SCORED_DIMENSION_COMPLETENESS_OR_SOUND_OWNER_COMPARISON_ROUTE__NOT_ON_REDISCOVERING_PARETO_CALCULUS",
+    "IF_A_COMPLETE_PRIVATE_DIMENSION_SET_IS_LATER_BOUND__USE_THE_AUTHENTICATED_PRESENTATION_PARETO_COMPARATOR_BEFORE_REQUESTING_A_SCALAR_PRESENTATION_UTILITY"
+  ],
+  "outreach": {
+    "channel": "EMAIL_TO_CONTACT_AT_ARTIFICIALANALYSIS_AI",
+    "thread_subject": "Research access request: no-cost evaluation route for multiple Artificial Analysis benchmarks",
+    "sent_2026_10_07": true,
+    "requested_minimum_object": "GENERIC_PAIRWISE_PRESENTATION_AND_ANALYTICAL_QUALITY_JUDGE_PROMPT_PLUS_SCORED_SUITE_CHECK_OR_DIMENSION_SCHEMA_WITH_PRIVATE_TASK_CONTENT_REMOVED__OR_NO_COST_OWNER_PAIRWISE_COMPARISON_ROUTE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_PRIVATE_91_TASK_PRESENTATION_DIMENSIONS_MATCH_THE_LITE_DIMENSIONS",
+    "NO_CLAIM_THE_PRIVATE_PAIRWISE_PROMPT_IS_IDENTICAL_TO_ANY_PUBLIC_LITE_TEXT",
+    "NO_CLAIM_PRESENTATION_QUALITY_IS_CLOSED",
+    "NO_AA_BRIEFCASE_GDPVAL_ARTIFACT_FAMILY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
