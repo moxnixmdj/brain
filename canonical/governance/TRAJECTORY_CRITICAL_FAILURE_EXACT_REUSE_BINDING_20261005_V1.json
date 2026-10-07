@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TRAJECTORY_CRITICAL_FAILURE_EXACT_REUSE_BINDING_20261005_V1",
   "date": "2026-10-05",
-  "status": "CANDIDATE__DEDUCTIVE_EXACT_CONTRACT_REUSE_BINDING__ONE_ACCEPTED_ROUTE_DISCHARGES_THREE_FAMILY_RESIDUAL_SLOTS_IF_INDEPENDENT_RECOMPUTATION_PASSES__ZERO_NEW_REALITY__ZERO_CREDIT",
+  "status": "ACTIVE__CURRENT_MAIN_REVALIDATED_EXACT_CONTRACT_REUSE__ZERO_NEW_REALITY__ZERO_TERMINAL_CREDIT",
   "objective": "Prove or falsify the first critical-path reuse candidate in FIVE_FAMILY_SHARED_RESIDUAL_SCOPE_CLOSURE_CUT_20261005_V1 without new reality spend.",
   "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
   "authorities": {
@@ -119,5 +119,33 @@
   "promotion_authority": false,
   "fresh_reality_authority": false,
   "independent_verification_required": true,
-  "next": "INDEPENDENTLY_RECOMPUTE_EXACT_SOURCE_BLOBS_AND_CURRENT_FAMILY_MAPPINGS__IF_PASS_ACTIVATE_CONTRACT_REUSE_AND_RECOMPUTE_FIVE_FAMILY_SCOPE_CLOSURE"
+  "next": "INDEPENDENTLY_RECOMPUTE_EXACT_SOURCE_BLOBS_AND_CURRENT_FAMILY_MAPPINGS__IF_PASS_ACTIVATE_CONTRACT_REUSE_AND_RECOMPUTE_FIVE_FAMILY_SCOPE_CLOSURE",
+  "current_main_revalidation": {
+    "date": "2026-10-07",
+    "exact_blobs": {
+      "registry": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+      "recovery": "981c8ac9b66ee7fccf5b531525849e29df9be483",
+      "ownership": "4711fb5eed330990edea369725de6eaedfd3bc70",
+      "transport": "95422fdb13ada158930486442c9441c9c5cd9852",
+      "scope_reduction": "f327bfdb5d52bb9551b52f67da14a4cd425533a3",
+      "whole_scope": "2c6bb594d353e4c6a169821da5f84a91be212ca7",
+      "policy_v7": "28940387bd6c11671035ad9201e37bba13fd9bc9"
+    },
+    "whole_p1_contract_restored": true,
+    "quarantined_contract_count": 0,
+    "current_registry_identity_reuse": {
+      "ADVANCED_AGENTIC_CODING": true,
+      "AGENTIC_SCIENTIFIC_RESEARCH": true,
+      "BUSINESS_WORKFLOW_AUTOMATION": true
+    }
+  },
+  "scheduling_effect": [
+    "REUSE_ONE_ACCEPTED_GLOBAL_TRAJECTORY_CONTRACT_PROOF_FOR_THE_IDENTICAL_BEHAVIOR_ID",
+    "DELETE_DUPLICATE_FAMILY_LOCAL_TRAJECTORY_PROOF_WORK_IN_CODING_SCIENCE_AND_AUTOMATION",
+    "NO_NEW_TARGET_CASES_OR_OPUS_COMPARATOR_FOR_THIS_IDENTICAL_CONTRACT"
+  ],
+  "hard_nonclaims": [
+    "NO_WHOLE_FAMILY_CLOSURE_FROM_REUSE_ALONE",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT"
+  ]
 }
