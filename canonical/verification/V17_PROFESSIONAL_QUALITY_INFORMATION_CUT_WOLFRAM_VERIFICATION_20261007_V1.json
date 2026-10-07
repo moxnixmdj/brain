@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_V17_PROFESSIONAL_QUALITY_INFORMATION_CUT_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_TWO_WORLD_ALGEBRA_PASS__SOURCE_BINDINGS_AUDITED__ZERO_CREDIT",
+  "subject": {
+    "governance_path": "canonical/governance/V17_PROFESSIONAL_QUALITY_INFORMATION_CUT_REALITY_WAKE_20261007_V1.json",
+    "governance_git_blob_sha": "d2640079672542b974e391722e8ae4163fd8c78a",
+    "runtime_path": "canonical/runtime/v17_professional_quality_information_cut_verifier_v1.py",
+    "runtime_git_blob_sha": "7a3f17b2f7e3b34d47e28e60bc143410b8b9d654"
+  },
+  "independent_math_check": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "input": "<|\"DominanceFeasible\" -> Reduce[0 <= p <= 1 && p >= 1 && 1 - p >= 1, p, Reals], \"Minimax\" -> Maximize[{Min[p,1-p],0<=p<=1},p]|>",
+    "output": "<|\"DominanceFeasible\" -> False, \"Minimax\" -> {1/2, {p -> 1/2}}|>",
+    "dominance_feasible": false,
+    "minimax_value": "1/2",
+    "minimax_argmax": "p=1/2"
+  },
+  "source_audit": {
+    "v17_professional_quality_outside_cached_cells_open": true,
+    "v17_forbids_inference_from_synthetic_generator_optimality": true,
+    "professional_internal_prewave_authoritative_scope_equivalent_now": false,
+    "professional_internal_prewave_no_scope_inheritance": true,
+    "professional_internal_prewave_has_unresolved_realistic_dimensions": true,
+    "terminal_binding_withholds_gold_quality_information": true,
+    "terminal_binding_forbids_standalone_synthetic_whole_domain_score": true,
+    "bounded_p2_cell_itself_claims_professional_quality_global_closed": false
+  },
+  "verified_conclusion": [
+    "THE_TWO_WORLD_VISIBLE_ONLY_DOMINANCE_CONSTRAINTS_ARE_INFEASIBLE.",
+    "THE_BEST_WORST_CASE_VISIBLE_ONLY_SUCCESS_IN_THE_TWO_WORLD_CONSTRUCTION_IS_ONE_HALF.",
+    "CURRENT_BOUND_PROFESSIONAL_QUALITY_SOURCES_DO_NOT_AUTHORIZE_SCOPE_INHERITANCE_FROM_THE_BOUNDED_SYNTHETIC_P2_CELL.",
+    "THEREFORE_REPEATING_THE_CURRENT_BOUNDED_P2_ZERO_REALITY_PROOF_CANNOT_BY_ITSELF_CLOSE_THE_OPEN_REALISTIC_PROFESSIONAL_QUALITY_RESIDUAL.",
+    "CLOSURE_REQUIRES_EITHER_NEW_STRUCTURAL_INFORMATION_THAT_EXCLUDES_THE_COUNTERMODEL_OR_MINIMUM_NEW_INFORMATION_THAT_SEPARATES_THE_SURVIVING_WORLD_FIBER."
+  ],
+  "execution_note": "THE_WOLFRAM_ALGEBRA_WAS_EXECUTED_INDEPENDENTLY_IN_THIS_SESSION. THE_REPOSITORY_RUNTIME_VERIFIER_IS_ADDED_FOR_FAIL_CLOSED_REPLAY; THIS_RECEIPT_DOES_NOT_CLAIM_A_GITHUB_ACTION_RUN.",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_COUNTERMODEL_IS_THE_ACTUAL_OPUS55_WORLD.",
+    "NO_CLAIM_FRESH_TARGET_INFORMATION_IS_REQUIRED_IF_A_NEW_SOUND_STRUCTURAL_CERTIFICATE_EXCLUDES_THE_COUNTERMODEL.",
+    "NO_PROFESSIONAL_QUALITY_ARTIFACT_FAMILY_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {"incremental_spend_usd": 0, "fresh_reality_units_consumed": 0, "terminal_credit_delta": 0}
+}
