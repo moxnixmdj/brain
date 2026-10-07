@@ -120,12 +120,14 @@ def test_discharge_without_certificate_fails_closed():
     assert "POLICY_DISCHARGE_CERTIFICATE_MISSING:P:" + a["failure_condition"] in out["errors"]
 
 
-def test_missing_candidate_policy_set_completeness_reference_fails_closed():
+def test_positive_cover_does_not_require_candidate_policy_set_completeness():
     m = _manifest()
     m["candidate_policy_set_complete_certificate_id"] = ""
     out = verify_policy_manifest(CONTRACT, SCHEMA, m)
-    assert out["pass"] is False
-    assert "CANDIDATE_POLICY_SET_COMPLETENESS_CERTIFICATE_MISSING" in out["errors"]
+    assert out["pass"] is True, out
+    assert out["positive_cover_does_not_require_policy_set_completeness"] is True
+    assert out["candidate_policy_set_completeness_reference_present"] is False
+    assert out["negative_policy_absence_or_global_minimality_authorized"] is False
 
 
 def test_required_contract_field_cannot_silently_disappear():
