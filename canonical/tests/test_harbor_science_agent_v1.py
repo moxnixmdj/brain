@@ -64,7 +64,7 @@ class ScienceAgentTests(unittest.TestCase):
             {"finish_summary":"done"}
         ])
         self.assertEqual(env.commands[0],"echo work")
-        self.assertEqual(result["status"],"FINISHED")
+        self.assertEqual(result["status"],"SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER")
         self.assertEqual(result["resolved_requirements"],["R1"])
 
     def test_lossless_raw_task_scope_is_non_droppable_and_acceptance_pending(self):
@@ -109,7 +109,7 @@ class ScienceAgentTests(unittest.TestCase):
             }
         ])
         self.assertEqual(env.commands,["echo work","echo verify"])
-        self.assertEqual(result["status"],"FINISHED")
+        self.assertEqual(result["status"],"SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER")
         self.assertEqual(result["finish_authority"],"RAW_TASK_ACCEPTANCE_V1_REQUIRED")
         self.assertEqual(result["cycles"],1)
         self.assertEqual(result["resolved_requirements"],["R1"])
