@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+  "task_id": "SI-TERMINAL-G-RACE-20261007-V1",
+  "agent_id": "SUPERWORKER-TERMINAL-G",
+  "priority": 999999,
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_TERMINAL_G_RACE_20261007_V1.json",
+  "mission_sha256": "d6f543f065ee33c61cbc5cd4364d8e168c829b5c40e6b5e4733ef81700e2cf52",
+  "prerequisites": [],
+  "checkpoint_before_runtime_once": true,
+  "incremental_spend_usd": 0,
+  "terminal_autopilot": {
+    "enabled": true,
+    "phase": "EXECUTE",
+    "execution_class": "REVERSIBLE_ZERO_REALITY",
+    "irreversible_benchmark": false,
+    "action_id": "route::GDPVAL_FINITE_PUBLIC_ACCEPTANCE_COVER",
+    "obligation_ids": [
+      "PROWORK_GDPVAL_GE_1846"
+    ]
+  }
+}
