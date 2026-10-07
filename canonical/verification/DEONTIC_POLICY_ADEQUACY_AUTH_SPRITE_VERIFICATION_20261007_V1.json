@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_DEONTIC_POLICY_ADEQUACY_AUTH_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_PATCHED_BRIDGE_REPLAY_PASS__4_OF_4__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/DEONTIC_POLICY_ADEQUACY_AUTH_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "4b6aca4f1e628ff8630014146bc117128e54d6d3"
+    },
+    "bridge": {
+      "path": "canonical/runtime/proof_carrying_deontic_refinement_v1.py",
+      "git_blob_sha": "4a0fadb6e9cc093f49750681692d31cc70935972"
+    },
+    "tests": {
+      "path": "canonical/tests/test_proof_carrying_deontic_refinement_v1.py",
+      "git_blob_sha": "adce6ae65a4daaf3039a4ac7039a7b4a5656e4cd"
+    },
+    "adequacy_auth_kernel": {
+      "path": "canonical/runtime/proof_carrying_semantic_refinement_v3.py",
+      "git_blob_sha": "a26daf2ab5d3c4c5192710a74145e1d937ad6128"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/semantic_v4_v5_auth_replay_20261007"
+  },
+  "replay": {
+    "command": "python -m unittest canonical.tests.test_proof_carrying_deontic_refinement_v1 -v",
+    "tests_run": 4,
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "checks": [
+      "ENTAILED_DEONTIC_POLICY_WITHOUT_ADEQUACY_BINDING_IS_NOT_CERTIFIED",
+      "EXACT_AUTHENTICATED_POLICY_CONDITION_CAN_BE_CERTIFIED",
+      "FORGED_INDEPENDENT_VERIFICATION_SUBJECT_CANNOT_CERTIFY",
+      "SEMANTIC_KERNEL_FAIL_CLOSED_PROPAGATES"
+    ]
+  },
+  "boundary": [
+    "THE_CHANGED_BRIDGE BYTES AND REAL V3 ADEQUACY AUTH KERNEL WERE REPLAYED.",
+    "THE UNCHANGED DEONTIC SOURCE PROOF IMPORT WAS STUBBED FOR THIS BRIDGE-LEVEL REPLAY BECAUSE THESE TESTS PATCH VERIFY_PROOF AND TARGET ONLY THE ADEQUACY AUTHENTICATION SEAM.",
+    "THIS RECEIPT DOES NOT REVERIFY THE UNCHANGED DEONTIC PARSER OR SOURCE-ALIGNMENT EXTENSION.",
+    "NO FAMILY ABC D OR TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
