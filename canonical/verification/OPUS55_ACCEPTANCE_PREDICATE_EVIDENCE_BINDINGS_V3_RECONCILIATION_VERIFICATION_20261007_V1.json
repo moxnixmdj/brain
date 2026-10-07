@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3_RECONCILIATION_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SOURCE_BOUND_RECONCILIATION_PASS__16_PROVED__22_UNRESOLVED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3.json",
+    "git_blob_sha": "3942d876e13c8a039f06c2e856434f44a9f50781"
+  },
+  "frozen_registry": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "total_predicates": 38
+  },
+  "source_closure": {
+    "path": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+    "git_blob_sha": "aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f"
+  },
+  "checks": {
+    "proved_predicate_count": 16,
+    "unresolved_predicate_count": 22,
+    "all_promoted_ids_exist_in_frozen_registry": true,
+    "if_scope_boundary_noninferior_proved": true,
+    "if_zero_critical_authority_violations_proved": true,
+    "source_reports_scope_boundary_160_of_160": true,
+    "source_reports_authority_denied_route_touches_zero": true
+  },
+  "boundary": "PROMOTION_RECONCILES_ALREADY_INDEPENDENTLY_PROVED_FROZEN_ACCEPTANCE_ATOMS_ONLY__NO_OWNERSHIP_D_FINALITY_OR_TERMINAL_CREDIT",
+  "hard_nonclaims": [
+    "NO_CLAIM_22_REMAINING_ATOMS_ARE_PROVED",
+    "NO_CLAIM_INSTRUCTION_FOLLOWING_OWNERSHIP_FINALITY_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
