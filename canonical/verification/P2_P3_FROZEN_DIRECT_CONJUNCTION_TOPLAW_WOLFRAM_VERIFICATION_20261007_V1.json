@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_P2_P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_FINITE_ORDER_PASS__EXACT_SOURCE_BINDINGS_RECORDED__BOUNDED_SELECTED_CELLS_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/P2_P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_20261007_V1.json",
+    "branch": "truth/p2-p3-whole-selected-toplaw-20261007-v1"
+  },
+  "exact_source_bindings": {
+    "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d",
+    "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+    "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V15.json": "09f11461c7aa1ee7719409723726712f68d03da8"
+  },
+  "wolfram": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "code": "Table[With[{brain = ConstantArray[1,n], targets = Tuples[{0,1},n]}, <|\"n\"->n, \"AllTargetsComponentwiseLEBrain\"->And@@(And@@Thread[#<=brain]& /@ targets), \"AnyStrictDominator\"->Or@@((And@@Thread[#>=brain] && Or@@Thread[#>brain])& /@ targets), \"TargetCount\"->Length[targets]|>], {n,{6,7}}]",
+    "result": [
+      {
+        "n": 6,
+        "AllTargetsComponentwiseLEBrain": true,
+        "AnyStrictDominator": false,
+        "TargetCount": 64
+      },
+      {
+        "n": 7,
+        "AllTargetsComponentwiseLEBrain": true,
+        "AnyStrictDominator": false,
+        "TargetCount": 128
+      }
+    ]
+  },
+  "verified_consequence": [
+    "THE_ALL_PASS_P2_REQUIRED_CHECK_VECTOR_IS_THE_COMPONENTWISE_TOP_ELEMENT_OF_THE_EXACT_SIX_BOOLEAN_CHECK_SPACE.",
+    "THE_ALL_PASS_P3_REQUIRED_CHECK_VECTOR_IS_THE_COMPONENTWISE_TOP_ELEMENT_OF_THE_EXACT_SEVEN_BOOLEAN_CHECK_SPACE.",
+    "NO_TARGET_VECTOR_IN_EITHER_BOUND_CHECK_SPACE_CAN_STRICTLY_DOMINATE_THE_BRAIN_VECTOR.",
+    "THE_REDUCTION_CONSUMES_ZERO_TARGET_INFORMATION_AND_ZERO_FRESH_REALITY."
+  ],
+  "hard_nonclaims": [
+    "NO_SCOPE_EQUIVALENCE_BEYOND_THE_EXACT_FROZEN_SELECTED_CELLS.",
+    "NO_GLOBAL_ARTIFACT_OR_SYNTHESIS_CLOSURE.",
+    "NO_GLOBAL_ABC_OR_D_CLOSURE.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
