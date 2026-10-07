@@ -518,3 +518,46 @@ def test_builtin_finite_search_generates_then_solver_reverifies_candidate():
     assert out["trace"][0]["proposal_source"] == "BUILTIN_FINITE_COMPLETE_SEARCH"
     assert out["trace"][0]["accepted_proposal"] == {"candidate_values": {"x": 2}}
     assert out["proposal_searches"][0]["complete_over_declared_domains"] is True
+
+
+def test_need_proposal_emits_content_addressed_general_substrate_request():
+    out = run(exact_problem(), proposal_packets={})
+    assert out["status"] == "NEED_PROPOSAL"
+    request = out["proposal_request"]
+    assert request["schema"] == "PROJECT_BRAIN_GENERAL_COGNITION_PROPOSAL_REQUEST_V1"
+    assert request["capability_id"] == "solve"
+    assert request["proposal_authority"] is False
+    assert len(request["request_sha256"]) == 64
+
+
+def test_bound_general_substrate_packet_is_unwrapped_then_normally_verified():
+    from canonical.runtime.general_cognition_proposal_packet_v1 import make_packet
+
+    first = run(exact_problem(), proposal_packets={})
+    request = first["proposal_request"]
+    packet = make_packet(
+        request,
+        source_id="replaceable-general-substrate",
+        proposal={"candidate": {"answer": 42}},
+    )
+    out = run(exact_problem(), proposal_packets={"solve": [packet]})
+    assert out["pass"] is True, out
+    assert out["trace"][0]["proposal_source"] == "GENERAL_COGNITION_SUBSTRATE:replaceable-general-substrate"
+    assert out["trace"][0]["proposal_packet_sha256"] == packet["packet_sha256"]
+
+
+def test_cross_task_general_substrate_packet_is_rejected_before_verification():
+    from canonical.runtime.general_cognition_proposal_packet_v1 import make_packet
+
+    first = run(exact_problem(), proposal_packets={})
+    packet = make_packet(
+        first["proposal_request"],
+        source_id="replaceable-general-substrate",
+        proposal={"candidate": {"answer": 42}},
+    )
+    changed = exact_problem()
+    changed["capabilities"][0]["action"]["verifier_payload"] = {"expected": {"answer": 43}}
+    out = run(changed, proposal_packets={"solve": [packet]})
+    assert out["pass"] is False
+    assert out["status"] == "ALL_AVAILABLE_PROPOSALS_FALSIFIED"
+    assert any("PROPOSAL_PACKET_BINDING_FAILED" in str(x.get("reason")) for x in out["rejected_proposals"])
