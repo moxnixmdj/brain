@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_AUTOPILOT_EXECUTOR_PUBLIC_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__INDEPENDENT_PUBLIC_EXACT_BYTE_REPLAY__13_OF_13_TESTS",
+  "subject": {
+    "brain_pr": 3049,
+    "brain_candidate_head_sha": "c42ef7d91a28d9d5780b5a2321982ec19659d732",
+    "planner_blob": "bb72c160f3be00efedbd5d111b77d956bed2cb11",
+    "planner_tests_blob": "45898e6a0ae04af83051a690e29668874e66921b",
+    "executor_blob": "657a94d00833ad91403070132ef4e1f0d7337336",
+    "executor_tests_blob": "1ddb46212739af4d8d8bcab39a20d23238ad907d",
+    "supervisor_blob": "5c620b2e4e371333343e4f42e7340b8a9b4d1e3c",
+    "continuous_obs_blob": "e2533a0335c4f6824b9542944d4682aeefb36b2b",
+    "activation_candidate_blob": "9708317a7d5c8014d882a510a9df8ceb66d3b315"
+  },
+  "independent_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 2393,
+    "capsule_head_sha": "3c15320e0f6cca297727f9cbc30d230c72b1fd6d",
+    "capsule_manifest_git_blob_sha": "866407ecbff79a2d54556d03beb5d0bcdb6f0b87",
+    "workflow_run_id": 37623025244,
+    "workflow_job_id": 112797748450,
+    "conclusion": "success",
+    "exact_brain_bytes_step": "success",
+    "planner_and_executor_tests_step": "success",
+    "tests_run": 13,
+    "test_failures": 0,
+    "test_errors": 0
+  },
+  "verified": {
+    "stale_consumed_science_intent_suppressed": true,
+    "live_science_authority_required_for_running_intent": true,
+    "irreversible_benchmark_autoexecution_rejected": true,
+    "distinct_worker_parallel_fanout_pass": true,
+    "same_worker_double_schedule_rejected": true,
+    "execution_completion_projects_result_present_only": true,
+    "verification_completion_projects_verified": true,
+    "promotion_requires_exact_content_bound_authority": true,
+    "incremental_spend_usd": 0,
+    "terminal_credit": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_AUTOPILOT_CAN_EXECUTE_IRREVERSIBLE_BENCHMARKS",
+    "NO_CLAIM_WORKER_COMPLETION_EQUALS_ACCEPTANCE",
+    "NO_CLAIM_PROMOTION_WITHOUT_EXPLICIT_CONTENT_BOUND_AUTHORITY",
+    "NO_TERMINAL_CREDIT_FROM_THIS_VERIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

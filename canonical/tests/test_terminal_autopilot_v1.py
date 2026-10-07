@@ -91,5 +91,69 @@ class TerminalAutopilotTests(unittest.TestCase):
             self.assertEqual(len(direct), 12)
 
 
+    def test_repo_mode_blocks_stale_science_intent_after_authority_consumed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            q = root / "canonical/governance"
+            a = root / "canonical/action_intents"
+            q.mkdir(parents=True)
+            a.mkdir(parents=True)
+            (q / "FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json").write_text(
+                json.dumps({"independent_open_obligations": OPEN}), encoding="utf-8")
+            (q / "CURRENT_TERMINAL_AUTHORITY.json").write_text(json.dumps({
+                "live_truth": {
+                    "tb_science_rank9_authority_active": False,
+                    "tb_science_rank9_execution_authority_consumed": True,
+                    "tb_science_rank10_authority_active": False,
+                    "tb_science_planner_grammar_repair_candidate_bound": True,
+                    "tb_science_planner_grammar_repair_live_transport_verified": False,
+                }
+            }), encoding="utf-8")
+            (a / "ACTION_INTENT_TB_SCIENCE_RANK9_ONE_SHOT_20261007_V1.json").write_text(
+                json.dumps({"status": "READY_AFTER_TRANSITIVE_CARRIER_CLOSURE_AND_LIVE_EPOCH_BINDING"}),
+                encoding="utf-8")
+            built = build_manifest_from_repo(root)
+            tb = [x for x in built["obligations"] if x["id"] == "TB_SCIENCE_GE_58_7"][0]
+            self.assertEqual(tb["status"], "BLOCKED")
+            self.assertEqual(len(built["active_jobs"]), 0)
+            self.assertEqual(built["blockers"][0]["unlocks"], ["TB_SCIENCE_GE_58_7"])
+            out = plan(built)
+            direct = {
+                x["obligation_ids"][0]
+                for x in out["dispatch"]
+                if x["kind"] == "EVIDENCE"
+            }
+            self.assertNotIn("TB_SCIENCE_GE_58_7", direct)
+            repairs = [x for x in out["dispatch"] if x["kind"] == "REPAIR"]
+            self.assertEqual(len(repairs), 1)
+            self.assertEqual(
+                repairs[0]["action_id"],
+                "repair::TB_SCIENCE_PLANNER_TRANSPORT_PREFLIGHT",
+            )
+
+    def test_repo_mode_allows_science_intent_only_with_live_authority(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            q = root / "canonical/governance"
+            a = root / "canonical/action_intents"
+            q.mkdir(parents=True)
+            a.mkdir(parents=True)
+            (q / "FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json").write_text(
+                json.dumps({"independent_open_obligations": OPEN}), encoding="utf-8")
+            (q / "CURRENT_TERMINAL_AUTHORITY.json").write_text(json.dumps({
+                "live_truth": {
+                    "tb_science_rank9_authority_active": False,
+                    "tb_science_rank10_authority_active": True,
+                }
+            }), encoding="utf-8")
+            (a / "ACTION_INTENT_TB_SCIENCE_RANK10_ONE_SHOT_20261007_V1.json").write_text(
+                json.dumps({"status": "READY_AFTER_PREFLIGHT"}),
+                encoding="utf-8")
+            built = build_manifest_from_repo(root)
+            tb = [x for x in built["obligations"] if x["id"] == "TB_SCIENCE_GE_58_7"][0]
+            self.assertEqual(tb["status"], "RUNNING")
+            self.assertEqual(len(built["blockers"]), 0)
+
+
 if __name__ == "__main__":
     unittest.main()

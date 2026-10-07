@@ -10,6 +10,8 @@ SCHEMA = "PROJECT_BRAIN_TERMINAL_AUTOPILOT_V1"
 TERMINAL_STATES = {"CLOSED", "PROMOTED"}
 DEFAULT_QUOTIENT = "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json"
 ACTION_INTENT_DIR = "canonical/action_intents"
+CURRENT_AUTHORITY = "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+SCIENCE_OBLIGATION = "TB_SCIENCE_GE_58_7"
 
 
 def _closed_dependencies(dependencies: list[str], closed: set[str]) -> bool:
@@ -33,6 +35,38 @@ def _intent_targets(intent: dict[str, Any], path: Path, open_ids: set[str]) -> l
     return sorted(targets)
 
 
+def _live_authority_truth(root: Path) -> dict[str, Any]:
+    path = root / CURRENT_AUTHORITY
+    if not path.is_file():
+        return {}
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    live = value.get("live_truth") if isinstance(value, dict) else None
+    return dict(live) if isinstance(live, dict) else {}
+
+
+def _science_execution_authority_active(live_truth: dict[str, Any]) -> bool | None:
+    if not live_truth:
+        return None
+    return any(
+        key.startswith("tb_science_rank")
+        and key.endswith("_authority_active")
+        and value is True
+        for key, value in live_truth.items()
+    )
+
+
+def _science_repair_action(live_truth: dict[str, Any]) -> str:
+    if (
+        live_truth.get("tb_science_planner_grammar_repair_candidate_bound") is True
+        and live_truth.get("tb_science_planner_grammar_repair_live_transport_verified") is not True
+    ):
+        return "repair::TB_SCIENCE_PLANNER_TRANSPORT_PREFLIGHT"
+    return "repair::TB_SCIENCE_CURRENT_AUTHORITY_PREFLIGHT"
+
+
 def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 16) -> dict[str, Any]:
     root = Path(repo_root).resolve()
     quotient_path = root / DEFAULT_QUOTIENT
@@ -44,6 +78,9 @@ def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 16
     open_ids = set(open_rows)
     statuses = {oid: "OPEN" for oid in open_rows}
     active_jobs: list[dict[str, Any]] = []
+    blockers: list[dict[str, Any]] = []
+    live_truth = _live_authority_truth(root)
+    science_authority_active = _science_execution_authority_active(live_truth)
 
     intent_dir = root / ACTION_INTENT_DIR
     if intent_dir.is_dir():
@@ -56,6 +93,8 @@ def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 16
             if not any(token in status for token in ("ACTIVE", "READY", "STARTED", "PREEXPOSURE")):
                 continue
             targets = _intent_targets(intent, path, open_ids)
+            if science_authority_active is False and SCIENCE_OBLIGATION in targets:
+                targets = [x for x in targets if x != SCIENCE_OBLIGATION]
             if not targets:
                 continue
             for oid in targets:
@@ -68,13 +107,32 @@ def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 16
                 "source_path": str(path.relative_to(root)).replace("\\", "/"),
             })
 
+    if (
+        SCIENCE_OBLIGATION in open_ids
+        and live_truth
+        and science_authority_active is False
+        and statuses[SCIENCE_OBLIGATION] != "RUNNING"
+    ):
+        statuses[SCIENCE_OBLIGATION] = "BLOCKED"
+        blockers.append({
+            "id": "TB_SCIENCE_CURRENT_EXECUTION_GATE",
+            "status": "OPEN",
+            "unlocks": [SCIENCE_OBLIGATION],
+            "repair_action": _science_repair_action(live_truth),
+            "estimated_wall_clock_units": 1.0,
+            "reason": (
+                "CURRENT_ONE_USE_AUTHORITY_INACTIVE_OR_CONSUMED__"
+                "REPAIR_AND_VERIFY_TRANSPORT_BEFORE_NEXT_SLOT"
+            ),
+        })
+
     obligations = [{"id": oid, "status": statuses[oid]} for oid in open_rows]
     return {
         "terminal": len(open_rows) == 0,
         "zero_incremental_spend_hard_stop": True,
         "max_concurrency": max_concurrency,
         "obligations": obligations,
-        "blockers": [],
+        "blockers": blockers,
         "routes": [{
             "id": "SCOPE_COMPLETE_UNIVERSAL_COVER",
             "status": "OPEN" if open_rows else "CLOSED",

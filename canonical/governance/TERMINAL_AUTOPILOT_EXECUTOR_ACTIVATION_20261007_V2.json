@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_AUTOPILOT_EXECUTOR_ACTIVATION_V2",
+  "date": "2026-10-07",
+  "status": "ACTIVE__INDEPENDENT_PUBLIC_EXACT_BYTE_VERIFICATION_PASS__FAIL_CLOSED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "candidate_activation": {
+      "path": "canonical/governance/TERMINAL_AUTOPILOT_EXECUTOR_ACTIVATION_20261007_V1.json",
+      "git_blob_sha": "9708317a7d5c8014d882a510a9df8ceb66d3b315"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/TERMINAL_AUTOPILOT_EXECUTOR_PUBLIC_VERIFICATION_20261007_V1.json"
+    },
+    "executor": {
+      "path": "canonical/runtime/terminal_autopilot_executor_v1.py",
+      "git_blob_sha": "657a94d00833ad91403070132ef4e1f0d7337336"
+    },
+    "planner": {
+      "path": "canonical/runtime/terminal_autopilot_v1.py",
+      "git_blob_sha": "bb72c160f3be00efedbd5d111b77d956bed2cb11"
+    }
+  },
+  "authority": {
+    "reversible_zero_reality_execution": true,
+    "independent_zero_spend_verification": true,
+    "content_bound_promotion": "PER_TASK_EXACT_AUTHORITY_REQUIRED",
+    "irreversible_benchmark_execution": false,
+    "self_verification": false,
+    "terminal": false
+  },
+  "scheduling": [
+    "RECOMPUTE_LIVE_AUTHORITY_BEFORE_EACH_WAVE",
+    "DISPATCH_ONLY_EXACT_PLANNER_ACTION_IDS",
+    "ONE_CONCURRENT_TASK_PER_DURABLE_WORKER_IDENTITY",
+    "FAN_OUT_ACROSS_DISTINCT_WORKERS_UP_TO_DECLARED_CONCURRENCY",
+    "PROJECT_EXECUTION_TO_RESULT_PRESENT_ONLY",
+    "PROJECT_INDEPENDENT_VERIFICATION_TO_VERIFIED_ONLY",
+    "PROMOTE_ONLY_WITH_EXACT_CONTENT_BOUND_PROMOTION_AUTHORITY",
+    "STOP_AT_QUIESCENCE_OR_FAIL_CLOSED_MAX_WAVES"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
