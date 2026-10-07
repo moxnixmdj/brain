@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-07",
+  "status": "PROOF_ONLY__ZERO_CREDIT",
+  "canonical_base_commit": "ba3183ca90a5233856fc2b6eac3871254dd9fe48",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "claim_under_test": "THE_EIGHT_META_SURFACES_REQUIRE_EIGHT_INDEPENDENT_TERMINAL_TRUTH_CONJUNCTS_IN_ADDITION_TO_COMPLETE_TARGET_COVERAGE_A_AND_CONTEXTWISE_DISTRIBUTIONAL_DOMINANCE_B",
+  "method": "FIRST_PRINCIPLES_QUANTIFIER_ABSORPTION_PLUS_NAMED_SLICE_PRESERVATION_AND_INDEPENDENT_WOLFRAM_SET_LOGIC",
+  "source_bindings": {
+    "authority_v6": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V6.json",
+      "git_blob_sha": "fafde6e942a423798c8cadd0d2a2ccfe140a9f53"
+    },
+    "factorizer_v3": {
+      "path": "canonical/runtime/terminal_frontier_factorizer_v3_candidate.py",
+      "git_blob_sha": "7fa597adec3df75145a501fb3090ffb3bca3026c"
+    },
+    "domain_mapping_v3": {
+      "path": "canonical/governance/OPUS55_DOMAIN_BEHAVIORAL_QUOTIENT_MAPPING_V3.json",
+      "git_blob_sha": "2c40a1e326e6f7162e362ae0ceba0026e2e92ba5"
+    },
+    "multilingual_long_context": {
+      "path": "canonical/governance/OPUS55_MULTILINGUAL_LONG_CONTEXT_BOUNDARY_V2.json",
+      "git_blob_sha": "3e630e61d0fd8f0ebb8a47ca726bd9c1ac9b59b2"
+    },
+    "creative_diagram": {
+      "path": "canonical/governance/CREATIVE_DIAGRAM_TERMINAL_ACCEPTANCE_BASIS_20261005_V1.json",
+      "git_blob_sha": "5778f0982f6658e3aa5af41e4d33a4ace5121e76"
+    },
+    "jit_boundary": {
+      "path": "canonical/governance/JIT_KNOWLEDGE_CAPABILITY_NONSMUGGLING_BOUNDARY_20261007_V1.json",
+      "git_blob_sha": "dad1fdb93f102e01b38193da546721ab611bb83f"
+    }
+  },
+  "incremental_spend_usd": 0,
+  "fresh_reality_units_consumed": 0
+}
