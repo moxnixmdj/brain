@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK6_RESULT_20261007_V1",
+  "date": "2026-10-07",
+  "status": "FINAL_ZERO__EXECUTION_AUTHORITY_CONSUMED__NO_RETRY__ZERO_TERMINAL_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "schedule_rank": 6,
+    "slot_id": "terminal-bench-science/koopman-mfg-id::trial-0",
+    "task_name": "terminal-bench-science/koopman-mfg-id",
+    "task_digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f"
+  },
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37581376271,
+    "workflow_run_number": 1,
+    "job_id": 112661592860,
+    "github_sha": "34ed23e1ed8d6944a22133502dc2fd45d8b3de76",
+    "run_attempt": 1,
+    "artifact_id": 11465925296,
+    "artifact_name": "tb-science-koopman-mfg-id-trial-0-rank6",
+    "artifact_digest": "sha256:3c7e6847ef0348ad1b35f6ed3dd62263b3681be89d0077a2b3c2d7033faba61f",
+    "authority_blob": "3c0193eb50c55d72eaf19dcc0b6f084e84b12ff2",
+    "authority_verification_blob": "1aff0bc47f34c6cd93c1252a0659e48712a22bef",
+    "planner_blob": "fe7c0ce885197217774638df382aeb6f68ff38dd",
+    "controller_blob": "5557efd21f1a433ad16766def3775a79c459784b",
+    "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "source_gate_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+  },
+  "receipt": {
+    "status": "FINAL_ZERO",
+    "reward": 0,
+    "error": "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD",
+    "receipt_sha256": "7a4d5bc9532a27d60b3af4a69077300e08037497a5bc697026be363d2071fdbb",
+    "trial_result_sha256": "7043d018071b62b26a1575bbb9e330eb6589cb611264c4c7a54a4ebe02d79f74",
+    "exception_sha256": "302b10047bfac6c5f54836b870ae0a0706e1f2c5948683cb63b6d7e3d3653572",
+    "job_log_sha256": "3609e3dc6f2449112229cf3baa8398ef3503755860a9c6ce81ec7c68aab4c35f"
+  },
+  "causal_failure": {
+    "exception_type": "SciencePlannerError",
+    "exception_message": "SCIENCE_PLANNER_TOOL_ARGUMENTS_JSON_INVALID",
+    "exact_inner_error": "json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 651 (char 650)",
+    "failing_component": "canonical/runtime/harbor_science_planner_v1.py::_decode_tool_arguments",
+    "route_stage": "LOCAL_QWEN_TOOL_ARGUMENT_DECODING_BEFORE_HARBOR_VERIFIER",
+    "verifier_executed": false,
+    "diagnosis": "THE_LOCAL_MODEL_TOOL_CALL_ARGUMENT_STRING_WAS_MALFORMED_OR_TRUNCATED__THE_PLANNER_FAIL_CLOSED_BEHAVIOR_WAS_CORRECT__THE_ROUTE_MUST_REPAIR_GENERATION_SERIALIZATION_BEFORE_ANY_NEW_SLOT"
+  },
+  "duplicate_suppression": {
+    "duplicate_run_4": 37582113995,
+    "duplicate_run_4_status": "CANCELLED_BEFORE_JOB_CREATION",
+    "duplicate_run_5": 37582787652,
+    "duplicate_run_5_status": "CANCELLED_BEFORE_JOB_CREATION",
+    "sentinel_run_6": 37582791067,
+    "sentinel_semantics": "REVOKED_ACTIVATION__MUST_FAIL_PREEXPOSURE",
+    "no_duplicate_credit": true
+  },
+  "immutable_consequence": {
+    "slot_permanently_consumed": true,
+    "success_delta": 0,
+    "final_failure_delta": 1,
+    "retry_allowed": false,
+    "replacement_allowed": false,
+    "denominator_shrink_allowed": false,
+    "execution_authority_remaining": false,
+    "fresh_reality_units_consumed": 1,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "next_rule": "DO_NOT_EXECUTE_RANK7_UNTIL_SCIENCE_PLANNER_TOOL_ARGUMENT_SERIALIZATION_REPAIR_IS_CONTENT_ADDRESSED_AND_INDEPENDENTLY_VERIFIED_ON_ZERO_REALITY_CASES"
+}
