@@ -1,0 +1,8 @@
+{
+  "schema":"PROJECT_BRAIN_V14_FINANCE_SOURCE_ADMISSION_RECONCILIATION_VERIFY_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_SOURCE_AND_LOGIC_RECONCILIATION_PASS__ZERO_CREDIT",
+  "subject":{"g":"0c852a749b076d56dbe81c40c5a20dbd98d71f6e","v":"c1e67a44c69041693f22458f843c532f129d82d9","t":"2fa3b918dbed4b85487a9e0d2beaffba50d599ef"},
+  "verified":{"finance_source_already_admitted":true,"missing_source_blocker_deleted":true,"two_unexecuted_objective_leaves_preserved":true,"source_admission_does_not_imply_leaf_pass":true},
+  "terminal_credit_delta":0
+}
