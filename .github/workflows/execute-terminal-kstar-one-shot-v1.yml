@@ -189,3 +189,5 @@ jobs:
             canonical/verification/TERMINAL_KSTAR_INDEPENDENT_VERIFICATION_20261007_V1.json
             canonical/verification/TERMINAL_KSTAR_PROMOTION_BRIDGE_RECEIPT_20261007_V1.json
             canonical/verification/TERMINAL_KSTAR_ONE_SHOT_EXECUTION_LATEST.json
+
+# retrigger_kstar_one_shot_20261007_1647_cairo
