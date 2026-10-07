@@ -7,6 +7,8 @@ coverage state, and finish authority. No benchmark-specific task content lives h
 from __future__ import annotations
 
 import json
+import re
+import shlex
 from typing import Any
 
 from canonical.runtime import harbor_science_planner_v1 as science_planner
@@ -31,6 +33,59 @@ MAX_CYCLES = 12
 MAX_REQUIREMENTS = 16
 MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
+MAX_BRAIN_DELIVERABLES = 16
+_EXPLICIT_SUBMISSION_PATH_RE = re.compile(
+    r"(?<![A-Za-z0-9_./-])((?:/app/)?submission/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)"
+)
+
+def _brain_mandated_deliverables(goal: str) -> dict[str, str]:
+    paths: list[str] = []
+    for match in _EXPLICIT_SUBMISSION_PATH_RE.finditer(str(goal or "")):
+        raw = match.group(1)
+        path = raw if raw.startswith("/app/") else "/app/" + raw.lstrip("/")
+        if any(part in {".", ".."} for part in path.split("/")):
+            continue
+        if path not in paths:
+            paths.append(path)
+        if len(paths) >= MAX_BRAIN_DELIVERABLES:
+            break
+    return {f"BRAIN_DELIVERABLE_{i + 1:02d}": path for i, path in enumerate(paths)}
+
+async def _validate_brain_deliverable(
+    requirement_id: str,
+    path: str,
+    environment: BaseEnvironment,
+) -> dict[str, Any]:
+    transport = HarborEnvironmentTransport(environment)
+    quoted = shlex.quote(path)
+    checks = [f"test -s {quoted}"]
+    if path.lower().endswith(".json"):
+        checks.append(f"python -m json.tool {quoted} >/dev/null")
+    elif path.lower().endswith(".py"):
+        checks.append(f"python -m py_compile {quoted}")
+    observed: list[dict[str, Any]] = []
+    for command in checks:
+        receipt = await transport.exec(command, timeout_sec=60)
+        row = {
+            "command": command,
+            "returncode": receipt.returncode,
+            "stdout": receipt.stdout[-MAX_OUTPUT_CHARS:],
+            "stderr": receipt.stderr[-MAX_OUTPUT_CHARS:],
+        }
+        observed.append(row)
+        if receipt.returncode != 0:
+            return {
+                "requirement_id": requirement_id,
+                "path": path,
+                "verified": False,
+                "checks": observed,
+            }
+    return {
+        "requirement_id": requirement_id,
+        "path": path,
+        "verified": True,
+        "checks": observed,
+    }
 
 def _nonempty_strings(value: Any, *, maximum: int, field: str) -> list[str]:
     if not isinstance(value, list) or not value or len(value) > maximum:
@@ -70,13 +125,21 @@ def _candidate_rows(raw: Any, requirements: set[str]) -> list[dict[str, Any]]:
         })
     return rows
 
-def _extract_contract(raw: dict[str, Any], prior_requirements: list[str] | None) -> tuple[list[str], list[dict[str, Any]], str | None]:
+def _extract_contract(raw: dict[str, Any], prior_requirements: list[str] | None, mandatory_requirements: list[str] | None = None) -> tuple[list[str], list[dict[str, Any]], str | None]:
+    mandatory = list(mandatory_requirements or [])
+    if len(mandatory) > MAX_REQUIREMENTS:
+        raise RuntimeError("SCIENCE_MANDATORY_REQUIREMENTS_OVERFLOW")
     if prior_requirements is None:
         requirements = _nonempty_strings(
             raw.get("material_requirements"),
             maximum=MAX_REQUIREMENTS,
             field="MATERIAL_REQUIREMENTS",
         )
+        for requirement_id in mandatory:
+            if requirement_id not in requirements:
+                requirements.append(requirement_id)
+        if len(requirements) > MAX_REQUIREMENTS:
+            raise RuntimeError("SCIENCE_REQUIREMENTS_WITH_MANDATORY_OVERFLOW")
     else:
         requirements = list(prior_requirements)
         if "material_requirements" in raw:
@@ -85,6 +148,9 @@ def _extract_contract(raw: dict[str, Any], prior_requirements: list[str] | None)
                 maximum=MAX_REQUIREMENTS,
                 field="MATERIAL_REQUIREMENTS",
             )
+            for requirement_id in mandatory:
+                if requirement_id not in repeated:
+                    repeated.append(requirement_id)
             if repeated != requirements:
                 raise RuntimeError("SCIENCE_REQUIREMENTS_MUTATED_AFTER_FREEZE")
     summary = raw.get("finish_summary")
@@ -107,6 +173,8 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
     if not goal:
         raise ValueError("SCIENCE_GOAL_REQUIRED")
     max_cycles = max(1, min(int(max_cycles), MAX_CYCLES))
+    brain_deliverables = _brain_mandated_deliverables(goal)
+    mandatory_requirement_ids = list(brain_deliverables)
     requirements: list[str] | None = None
     resolved: set[str] = set()
     observations: list[dict[str, Any]] = []
@@ -126,6 +194,10 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "independent verification resolves every frozen material requirement. finish_summary is optional "
             "descriptive metadata only and never execution or finish authority. "
             f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
+            "Brain-mandated explicit deliverables (requirement ID -> path): "
+            + json.dumps(brain_deliverables, sort_keys=True)
+            + "\nThese Brain-mandated requirement IDs are part of the frozen contract and may not be omitted. "
+            "A candidate claiming one of them must actually create that exact nonempty file; Brain validates it independently.\n"
             "Recent observations: " + json.dumps(observations[-4:], sort_keys=True)[:12000]
         )
         planned = science_planner.plan(prompt, timeout_s=180)
@@ -134,7 +206,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         )
         if not isinstance(raw, dict):
             raise RuntimeError("SCIENCE_PLANNER_OBJECT_REQUIRED")
-        requirements, candidates, finish_summary = _extract_contract(raw, requirements)
+        requirements, candidates, finish_summary = _extract_contract(raw, requirements, mandatory_requirement_ids)
         unresolved_set = set(requirements) - resolved
 
         if finish_summary is not None:
@@ -157,6 +229,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                     "model_has_terminal_authority": False,
                     "finish_authority": "BRAIN_VERIFIED_STATE",
                     "material_requirements": requirements,
+                    "brain_mandated_deliverables": brain_deliverables,
                     "resolved_requirements": sorted(resolved),
                     "cycles": cycle + 1,
                     "trace": trace,
@@ -198,6 +271,8 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         }
         verify_observed = None
         verified = False
+        verified_covers: list[str] = []
+        deliverable_checks: list[dict[str, Any]] = []
         if action_receipt.returncode == 0:
             verify_receipt = await transport.exec(chosen["verify_command"], timeout_sec=180)
             verify_observed = {
@@ -205,9 +280,18 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                 "stdout": verify_receipt.stdout[-MAX_OUTPUT_CHARS:],
                 "stderr": verify_receipt.stderr[-MAX_OUTPUT_CHARS:],
             }
-            verified = verify_receipt.returncode == 0
-        if verified:
-            resolved.update(chosen["covers"])
+            if verify_receipt.returncode == 0:
+                for requirement_id in chosen["covers"]:
+                    path = brain_deliverables.get(requirement_id)
+                    if path is None:
+                        verified_covers.append(requirement_id)
+                        continue
+                    check = await _validate_brain_deliverable(requirement_id, path, environment)
+                    deliverable_checks.append(check)
+                    if check["verified"] is True:
+                        verified_covers.append(requirement_id)
+                resolved.update(verified_covers)
+                verified = len(verified_covers) == len(chosen["covers"])
         record = {
             "cycle": cycle,
             "kind": "BRAIN_SELECTED_RESEARCH_ACTION",
@@ -216,6 +300,8 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "selection_reason": "MAX_DECLARED_UNRESOLVED_COVERAGE_THEN_ACTION_ID__STRUCTURAL_CONTROL_ONLY",
             "action_result": action_observed,
             "verify_result": verify_observed,
+            "verified_covers": verified_covers,
+            "brain_deliverable_checks": deliverable_checks,
             "coverage_promoted": verified,
         }
         trace.append(record)
@@ -232,6 +318,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                 "model_has_terminal_authority": False,
                 "finish_authority": "BRAIN_VERIFIED_STATE",
                 "material_requirements": requirements,
+                "brain_mandated_deliverables": brain_deliverables,
                 "resolved_requirements": sorted(resolved),
                 "cycles": cycle + 1,
                 "trace": trace,
@@ -245,6 +332,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         "controller_mode": "BRAIN_OWNED_RESEARCH_CONTROL__OPTIONAL_GENERAL_COGNITION_SUBSTRATE",
         "model_has_terminal_authority": False,
         "material_requirements": requirements or [],
+        "brain_mandated_deliverables": brain_deliverables,
         "resolved_requirements": sorted(resolved),
         "cycles": max_cycles,
         "trace": trace,
