@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V9_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__V8_SET_COVER_INHERITED_UNCHANGED__TB_SCIENCE_RANK6_AUTHORITY_AND_ZERO_COST_PREFLIGHT_BOUND__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V9.json",
+    "git_blob_sha": "003f2b2dce926cad966aa238a680a4345f7feba5",
+    "branch": "reality-cut-v9-tbscience-authority-reconcile"
+  },
+  "inherited_set_cover": {
+    "predecessor": {
+      "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V8.json",
+      "git_blob_sha": "8f328ecf3d69ec67bdb8619758ef733f6d633f4a"
+    },
+    "predecessor_verification": {
+      "path": "canonical/verification/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V8_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "0664592b8aa98ab746dc7018115249a2fe9168f2",
+      "result": "EXACT_MINIMUM__8_OF_8_LANES__14_CLASSES"
+    },
+    "class_set_unchanged": true,
+    "lane_cover_graph_unchanged": true,
+    "positive_reality_class_count": 14,
+    "lane_count": 8,
+    "exact_minimum_lane_count": 8
+  },
+  "tb_science_reconciliation": {
+    "authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK6_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1.json",
+      "git_blob_sha": "3c0193eb50c55d72eaf19dcc0b6f084e84b12ff2",
+      "execution_authority": true,
+      "fresh_reality_authority_granted": true,
+      "authorized_units": 1,
+      "authorized_slot": "terminal-bench-science/koopman-mfg-id::trial-0",
+      "schedule_rank": 6
+    },
+    "independent_preflight": {
+      "path": "canonical/verification/TB_SCIENCE_RANK6_ONE_SLOT_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "1aff0bc47f34c6cd93c1252a0659e48712a22bef",
+      "conclusion": "success",
+      "zero_incremental_spend_hard_stop": true,
+      "task_content_exposed": 0,
+      "terminal_slots_consumed": 0
+    },
+    "corrected_remaining_blocker": "EXECUTE_THE_ALREADY_AUTHORIZED_EXACT_RANK6_SLOT_ON_THE_BOUND_PUBLIC_ZERO_COST_CARRIER_ONCE__NO_RETRY_OR_REPLACEMENT"
+  },
+  "verified": [
+    "V8_REPORTED_AUTHORITY_UNBOUND_IS_STALE_RELATIVE_TO_EARLIER_MERGED_RANK6_AUTHORITY_AND_PREFLIGHT",
+    "V9_CORRECTS_ONLY_L8_EXECUTION_STATE_AND_SOURCE_BINDINGS",
+    "V9_DOES_NOT_CHANGE_POSITIVE_REALITY_CLASS_SET",
+    "V9_DOES_NOT_CHANGE_LANE_GRAPH_OR_MINIMUM_LANE_COUNT",
+    "V9_DOES_NOT_CONSUME_THE_AUTHORIZED_SLOT",
+    "V9_GRANTS_NO_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_RANK6_EXECUTION_RESULT",
+    "NO_TB_SCIENCE_SCORE_CREDIT",
+    "NO_ABC_OR_TERMINAL_CLOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
