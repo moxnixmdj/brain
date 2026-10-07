@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_KSTAR_PRIVATE_ACTIONS_TRANSPORT_TRUTH_V1",
+  "date": "2026-10-07",
+  "status": "FAIL_CLOSED_TRANSPORT_UNAVAILABLE__KSTAR_SEMANTIC_EXECUTION_NOT_STARTED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "execution_lock": {
+      "path": "canonical/governance/TERMINAL_KSTAR_ONE_SHOT_EXECUTION_LOCK_20261007_V1.json",
+      "git_blob_sha": "011e79cc69f8ba32be1e8cace303971e0d7d9a4f"
+    },
+    "workflow": {
+      "path": ".github/workflows/execute-terminal-kstar-one-shot-v1.yml",
+      "git_blob_sha": "764acf6ec6c8743ec13bd7ba53d99c37b9987ff6"
+    }
+  },
+  "observed_runs": [
+    {
+      "workflow_run_id": 37639210118,
+      "head_sha": "7d3130a4c3d4cb02bf484f6a9628d9b2c217b189",
+      "job_id": 112853386422,
+      "conclusion": "failure",
+      "runner_id": 0,
+      "runner_name": "",
+      "executed_step_count": 0
+    },
+    {
+      "workflow_run_id": 37639610017,
+      "head_sha": "ffa7dc9a357fee025a29cd7aad72241ef261202a",
+      "job_id": 112854750415,
+      "conclusion": "failure",
+      "runner_id": 0,
+      "runner_name": "",
+      "executed_step_count": 0
+    }
+  ],
+  "derived_truth": {
+    "private_actions_runner_assigned": false,
+    "kstar_generator_started": false,
+    "kstar_verifier_started": false,
+    "promotion_bridge_started": false,
+    "terminal_reducer_started_under_kstar": false,
+    "kstar_semantic_failure_inferred": false,
+    "kstar_scope_complete_proof_falsified": false,
+    "terminal": false
+  },
+  "scheduler": [
+    "DO_NOT_INTERPRET_ZERO_STEP_ACTIONS_FAILURE_AS_KSTAR_SEMANTIC_FAILURE.",
+    "DO_NOT_RETRIGGER_THE_PRIVATE_ACTIONS_KSTAR_LANE_UNTIL_RUNNER_AVAILABILITY_IS_OBSERVED_NONZERO_OR_THE_TRANSPORT_CHANGES.",
+    "ANY_REPLACEMENT_EXECUTION_TRANSPORT_MUST_PRESERVE_EXACT_PRIVATE_CANONICAL_BYTES__ZERO_INCREMENTAL_SPEND__NO_PUBLIC_PRIVATE_REPO_LEAK__NO_USER_DEVICE_DEPENDENCE__AND_DISTINCT_INDEPENDENT_VERIFICATION.",
+    "ONLY_THE_TERMINAL_REDUCER_MAY_AUTHORIZE_TERMINAL_TRUE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_KSTAR_EXECUTED",
+    "NO_CLAIM_KSTAR_FAILED_SEMANTICALLY",
+    "NO_CLAIM_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
