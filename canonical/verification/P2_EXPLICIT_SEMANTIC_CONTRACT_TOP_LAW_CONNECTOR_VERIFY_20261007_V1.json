@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_P2_EXPLICIT_SEMANTIC_CONTRACT_TOP_LAW_CONNECTOR_VERIFY_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_SOURCE_BINDING__PER_EDIT_IDENTITY__FEASIBLE_SET_AND_TIE_BREAK_IDENTITY__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/P2_EXPLICIT_SEMANTIC_CONTRACT_UNIVERSAL_TOP_LAW_20261007_V1.json",
+    "git_blob_sha": "decd0d46538a213f2e169c00c83fae09191a7ed3"
+  },
+  "sources": {
+    "candidate": {
+      "path": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+      "git_blob_sha": "ea8057b0eadac210c4f4378298df93ed233c5824"
+    },
+    "evaluator": {
+      "path": "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py",
+      "git_blob_sha": "9d3d9bb837a98a7f78b5794cec0c0ae88bb32860"
+    },
+    "predecessor_cell": {
+      "path": "canonical/governance/P2_INFORMATION_SAFE_UNIVERSAL_SELECTED_CELL_20261007_V1.json",
+      "git_blob_sha": "0ccc3ecbdbf2636b8f1e7f0daf959a48350cb82e"
+    }
+  },
+  "verified": {
+    "per_edit_boolean_algebra_all_16_assignments_equal": true,
+    "candidate_and_oracle_use_same_edit_list_power_set": true,
+    "candidate_and_oracle_use_same_integer_cost_sum_le_budget": true,
+    "candidate_and_oracle_use_same_required_topic_coverage_definition_under_explicit_contract": true,
+    "candidate_and_oracle_use_same_missing_topic_penalty_minus20": true,
+    "candidate_and_oracle_use_same_tie_break": "NEGATIVE_SCORE_THEN_COST_THEN_LEXICOGRAPHIC_SORTED_EDIT_IDS",
+    "generator_seed_difficulty_domain_not_used_by_the_proof": true,
+    "broader_selected_class_sound_conditional_on_lossless_explicit_contract_membership": true,
+    "prior_generated_cell_is_subset_of_broader_class": true
+  },
+  "wolfram": {
+    "result": true,
+    "check": "EXHAUSTIVE_16_BOOLEAN_ASSIGNMENTS_PER_EDIT_UTILITY_IDENTITY"
+  },
+  "consequence": "P2_PROFESSIONAL_EXPLICIT_SEMANTIC_CONTRACT_ALL_FINITE_TASKS_V1_IS_A_SOUND_PARAMETERIZED_TOP_LAW_REGION_AND_MAY_REPLACE_THE_NARROWER_GENERATOR_DEFINED_P2_DB_REGION",
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_REAL_PROFESSIONAL_TASKS_SATISFY_THE_CONTRACT",
+    "NO_AA_BRIEFCASE_OR_GDPVAL_GLOBAL_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
