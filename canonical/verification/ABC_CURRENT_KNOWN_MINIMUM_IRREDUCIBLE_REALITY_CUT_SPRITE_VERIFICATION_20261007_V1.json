@@ -1,0 +1,37 @@
+{
+  "schema":"PROJECT_BRAIN_ABC_CURRENT_KNOWN_MINIMUM_IRREDUCIBLE_REALITY_CUT_SPRITE_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_SPRITE_EXACT_SOURCE_REPLAY_PASS__13_OPEN_TO_9_REALITY_PACKAGES_PLUS_EVENT_DRIVEN_COMPOSITION__ZERO_CREDIT",
+  "subject":{
+    "governance":{"path":"canonical/governance/ABC_CURRENT_KNOWN_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V1.json","git_blob_sha":"44a13eff49a0b8b00a9b5d2d89297a8837e00135"},
+    "verifier":{"path":"canonical/runtime/abc_current_known_minimum_irreducible_reality_cut_verifier_v1.py","git_blob_sha":"f74ce23077b0d1d2da561cd12751690479457e23"},
+    "tests":{"path":"canonical/tests/test_abc_current_known_minimum_irreducible_reality_cut_v1.py","git_blob_sha":"8901bd347bcda86d5d1074b33d0b9c7c5686e7f7"}
+  },
+  "independent_carrier":{
+    "provider":"SPRITES",
+    "sprite":"brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace":"/home/sprite/abc_reality_cut_v1",
+    "runner":"python3 canonical/runtime/abc_current_known_minimum_irreducible_reality_cut_verifier_v1.py"
+  },
+  "result":{
+    "pass":true,
+    "open_refinement_count":13,
+    "noncomposition_family_count":12,
+    "unique_noncomposition_residual_count":17,
+    "reality_package_count":9,
+    "composition_direct_reality_required":false,
+    "U_empty":false,
+    "terminal":false
+  },
+  "verified":[
+    "EVERY_CURRENT_NONCOMPOSITION_RESIDUAL_IS_COVERED_BY_EXACTLY_ONE_REALITY_PACKAGE_AFTER_SHARED_AA_DEDUPLICATION",
+    "ALL_12_NONCOMPOSITION_OPEN_FAMILIES_ARE_ACCOUNTED_FOR",
+    "MULTI_CAPABILITY_COMPOSITION_IS_EVENT_DRIVEN_ROUTE_LOCAL_C_AND_REQUIRES_NO_SEPARATE_DIRECT_TARGET_REALITY_PACKAGE",
+    "THE_SHARED_MATCHED_PACKAGE_CLAIMS_ONLY_FAMILIES_PRESENT_IN_THE_FROZEN_MATCHED_SUPERPORTFOLIO_DESIGN",
+    "AGENCY_MATCHED_SUCCESS_IS_BRAIN_FIRST_ELIGIBLE",
+    "NO_CROSS_FAMILY_PASS_INHERITANCE_IS_INTRODUCED",
+    "THE_CUT_IS_CURRENT_KNOWN_NONREDUNDANT_NOT_A_GLOBAL_INFORMATION_THEORETIC_MINIMUM"
+  ],
+  "accounting":{"incremental_spend_usd":0,"fresh_target_reality_units_consumed":0,"terminal_credit_delta":0}
+}
