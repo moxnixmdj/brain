@@ -1,0 +1,29 @@
+{
+  "schema":"PROJECT_BRAIN_V6_POLICY_ADEQUACY_SELF_CERTIFICATION_INDEPENDENT_REPLAY_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_ZERO_COST_SPRITE_DIRECT_REPLAY_PASS_5_OF_5__ZERO_CREDIT",
+  "subject":{
+    "runtime":{"path":"canonical/runtime/proof_carrying_semantic_refinement_v6.py","git_blob_sha":"646c132fe215a3f0ed7e74eafcc5397942a60d55"},
+    "tests":{"path":"canonical/tests/test_source_aligned_semantic_proof_v6.py","git_blob_sha":"564baf49565e0c3c85ea28a3ff5ac78472b4cfd7"}
+  },
+  "carrier":{
+    "provider":"SPRITES",
+    "sprite":"brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace":"/home/sprite/finance_v4_auth_replay"
+  },
+  "result":{"pass":true,"passed":5,"total":5},
+  "verified":[
+    "RAW_TRUE_ENTAILMENT_WITHOUT_ADEQUACY_BINDING_IS_NOT_CERTIFIED_POLICY_ADEQUACY",
+    "RAW_FALSE_ENTAILMENT_WITHOUT_ADEQUACY_BINDING_IS_NOT_CERTIFIED_POLICY_ADEQUACY",
+    "DUPLICATE_RAW_FACT_KEYS_CANNOT_MINT_A_SEMANTIC_CONSTRAINT",
+    "WRONG_CLAIMED_RAW_CONDITION_RESULT_IS_REJECTED",
+    "V6_DELEGATES_POSITIVE_POLICY_CREDIT_TO_THE_SHARED_ADEQUACY_AUTHENTICATOR"
+  ],
+  "hard_nonclaims":[
+    "NO_SOURCE_AUTHORIZATION_PROOF",
+    "NO_FINANCE_CLOSURE",
+    "NO_U_EMPTY_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
