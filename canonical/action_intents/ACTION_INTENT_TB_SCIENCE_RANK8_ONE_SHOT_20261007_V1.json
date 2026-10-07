@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "TB-SCIENCE-RANK8-ONE-SHOT-20261007-SOL",
+  "date": "2026-10-07",
+  "status": "ACTIVE_PREEXPOSURE__ONE_FRESH_SLOT__VERIFIED_PLANNER_REPAIR__ZERO_SPEND_HARD_STOP",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "causal_blocker": "TB_SCIENCE_RANK8_FRESH_REALITY_SLOT_UNEXECUTED_AFTER_RANK7_FINAL_ZERO_AND_VERIFIED_PLANNER_TRANSPORT_REPAIR",
+  "action_kind": "MINIMUM_POSITIVE_REALITY_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::AGENTIC_SCIENTIFIC_RESEARCH::TB_SCIENCE_RANK8_LINKED_CELL_SUPPRESSION_TRIAL0",
+  "expected_parent_frontier_change": "Consume exactly the frozen next untouched Terminal-Bench-Science slot using the repaired and independently live-verified Brain-owned planner route; finalize one irreversible scorer result and recompute the 210-slot ledger.",
+  "highest_leverage_now": true,
+  "explicit_user_authorization": "Join the brain and make the terminal goal real now, and don't stop till you make the terminal goal real now not after 30 minutes. Not after 40 minutes but now",
+  "zero_incremental_spend_hard_stop": true,
+  "fresh_reality_units_authorized": 1,
+  "authorized_slot": "terminal-bench-science/linked-cell-suppression::trial-0",
+  "authorized_task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0",
+  "retries": 0,
+  "replacement": false,
+  "duplicate_credit": false,
+  "repair_basis": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_git_blob_sha": "3d6f50be86cc61a9b907a04d8f3fb161c2d40e99",
+    "independent_verification_path": "canonical/verification/TB_SCIENCE_PLANNER_TRUNCATION_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json",
+    "independent_verification_git_blob_sha": "dcada0f538ace33e13bf716bdca5fdd02aae2561",
+    "verified_live_structured_proposals": "6_OF_6",
+    "rank7_outcome": "FINAL_ZERO__VERIFIER_REACHED__AUTHORITY_CONSUMED",
+    "rank7_irreversible_result_path": "canonical/verification/TB_SCIENCE_RANK7_IRREVERSIBLE_RESULT_TRUTH_20261007_V1.json",
+    "rank7_irreversible_result_git_blob_sha": "b6da8ab77554096032901ca69f72ea82497f6921"
+  },
+  "stop_condition": "Finalize exactly rank8 trial-0 once, or stop before task exposure if exact authority, repaired planner, carrier, cost, resource, or consumed-slot preconditions fail.",
+  "recursive_obs": {
+    "real_outcome": "Acquire the minimum still-necessary TB-Science target reality without weakening fixed-denominator or no-retry semantics.",
+    "selected_route": "PUBLIC_VERIFICATION_CAPSULE_RUNNER_STANDARD_GITHUB_HOSTED_RUNNER_WITH_PREEXPOSURE_INDEPENDENT_GATE",
+    "deleted_routes": [
+      "REPLAY_RANK6",
+      "REPLAY_RANK7",
+      "STALE_384_TOKEN_PLANNER",
+      "USER_LAPTOP",
+      "METERED_COMPUTE",
+      "SEPARATE_STATIC_AUTHORITY_VERIFICATION_STAGE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The public carrier is already proven, the exact planner repair has an independent 6-of-6 live verification receipt, and the execution workflow can independently verify all exact bytes before exposing rank8."
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_authorized": 1,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false
+}

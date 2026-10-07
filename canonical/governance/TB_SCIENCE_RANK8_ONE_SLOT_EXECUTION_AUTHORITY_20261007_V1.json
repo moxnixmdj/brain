@@ -1,0 +1,130 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK8_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_ONE_USE_AUTHORITY__PREEXPOSURE_INDEPENDENT_GATE_REQUIRED_IN_SAME_PUBLIC_RUN",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "authority_basis": {
+    "action_intent": {
+      "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK8_ONE_SHOT_20261007_V1.json",
+      "git_blob_sha": "87fea6ecfe13cd2b40e1f549138276d75744681b"
+    },
+    "seven_slot_ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V3.json",
+      "git_blob_sha": "32a57737b09fd6b38758814a6e3f843afd13ca16"
+    },
+    "rank7_irreversible_result": {
+      "path": "canonical/verification/TB_SCIENCE_RANK7_IRREVERSIBLE_RESULT_TRUTH_20261007_V1.json",
+      "git_blob_sha": "b6da8ab77554096032901ca69f72ea82497f6921"
+    },
+    "planner_repair_verification": {
+      "path": "canonical/verification/TB_SCIENCE_PLANNER_TRUNCATION_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "dcada0f538ace33e13bf716bdca5fdd02aae2561"
+    },
+    "manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    }
+  },
+  "frozen_target": {
+    "benchmark": "Terminal-Bench-Science",
+    "version": "0.1",
+    "threshold_percent": 58.7,
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87,
+    "model": "Claude Opus 5.5",
+    "effort": "max",
+    "evaluator": "Anthropic release evaluation"
+  },
+  "exact_route": {
+    "dataset": "terminal-bench-science/terminal-bench-science@0.1.0",
+    "source_commit": "f81afac4f11048e77a15dfc8fb1dbfb897fea0ce",
+    "harbor_version": "0.23.0",
+    "manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "planner_blob": "3d6f50be86cc61a9b907a04d8f3fb161c2d40e99",
+    "planner_repair_verification_blob": "dcada0f538ace33e13bf716bdca5fdd02aae2561",
+    "controller_blob": "5557efd21f1a433ad16766def3775a79c459784b",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "environment_transport_blob": "ec46f648214a37bb16025d5ef2593efdf59f0d79",
+    "source_gate_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "reducer_blob": "3b48ea534d606cf47a8321b56427353066393577",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "qwen_gguf_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "compiled_llama_cpp_cache_allowed": false
+  },
+  "authorized_slot": {
+    "slot_id": "terminal-bench-science/linked-cell-suppression::trial-0",
+    "schedule_rank": 8,
+    "schedule_order_zero_based": 7,
+    "attempt_index": 0,
+    "task_rank": 8,
+    "task_name": "terminal-bench-science/linked-cell-suppression",
+    "task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0"
+  },
+  "permanently_consumed_slots": [
+    "terminal-bench-science/genomic-model-ranking::trial-0",
+    "terminal-bench-science/mri-harmonization::trial-0",
+    "terminal-bench-science/navigation-sensor-calibration::trial-0",
+    "terminal-bench-science/baseline-free-localization::trial-0",
+    "terminal-bench-science/virtual-baseline-localization::trial-0",
+    "terminal-bench-science/koopman-mfg-id::trial-0",
+    "terminal-bench-science/reactor-safety-control::trial-0"
+  ],
+  "carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "repository_visibility": "public",
+    "runner": "ubuntu-24.04",
+    "standard_github_hosted_runner_required": true,
+    "incremental_spend_usd_required": 0,
+    "exact_execution_workflow": ".github/workflows/execute-tb-science-rank8-20261007-v1.yml",
+    "exact_capsule_root": "capsules/tb_science_rank8_20261007_v1",
+    "public_route_reuse_root": "capsules/tb_science_canary_v3_execution/canonical/runtime",
+    "repaired_planner_overlay": "capsules/tb_science_rank8_20261007_v1/harbor_science_planner_v1.py"
+  },
+  "activation_model": {
+    "separate_static_authority_verification_required": false,
+    "reason": "THE_SAME_PUBLIC_RUN_MUST_COMPLETE_AN_INDEPENDENT_PREEXPOSURE_GATE_OVER_EXACT_AUTHORITY_PLANNER_ROUTE_CARRIER_AND_COST_BYTES_BEFORE_HARBOR_MAY_RECEIVE_THE_TERMINAL_TASK",
+    "task_exposure_allowed_only_after_gate_pass": true
+  },
+  "execution_semantics": {
+    "slots_authorized": 1,
+    "retries_per_slot": 0,
+    "slot_replacement": false,
+    "denominator_shrink": false,
+    "duplicate_slot_credit": false,
+    "exact_success_rule": "reward >= 1.0",
+    "stop_after_slot": true,
+    "auto_revoke_after_slot_finalization": true,
+    "result_must_be_content_addressed": true,
+    "any_final_non_success_including_infra_timeout_resource_failure_planner_failure_or_missing_verifier_result": "FINAL_ZERO"
+  },
+  "fresh_reality_authority": {
+    "authorized": true,
+    "units": 1,
+    "basis": "EXPLICIT_CURRENT_USER_INSTRUCTION",
+    "zero_incremental_spend_hard_stop": true
+  },
+  "hard_rules": [
+    "PREEXPOSURE_GATE_MUST_VERIFY_EXACT_AUTHORITY_ACTION_INTENT_LEDGER_RANK7_RESULT_MANIFEST_REPAIRED_PLANNER_AND_REPAIR_VERIFICATION_BLOBS",
+    "AUTHORIZED_SLOT_MUST_EQUAL_LEDGER_RANK8_AND_MUST_NOT_APPEAR_IN_CONSUMED_LIST",
+    "NO_TASK_CONTENT_EXPOSURE_BEFORE_PREEXPOSURE_GATE_PASS",
+    "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
+    "PUBLIC_STANDARD_GITHUB_HOSTED_RUNNER_ONLY",
+    "STOP_BEFORE_TASK_EXPOSURE_IF_INCREMENTAL_SPEND_CANNOT_BE_PROVED_ZERO",
+    "CLEAN_CURRENT_RUNNER_LLAMA_CPP_BUILD_REQUIRED",
+    "REPAIRED_PLANNER_BLOB_3D6F50BE_REQUIRED",
+    "EXECUTE_EXACTLY_ONE_SLOT_THEN_AUTO_REVOKE",
+    "NO_PROMOTION_FROM_AUTHORITY_OR_PREFLIGHT_ALONE"
+  ],
+  "execution_authority": true,
+  "fresh_reality_authority_granted": true,
+  "promotion_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_authorized": 1,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
