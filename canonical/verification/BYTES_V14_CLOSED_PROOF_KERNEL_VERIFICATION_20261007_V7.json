@@ -1,0 +1,10 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_CLOSED_PROOF_KERNEL_V7_VERIFICATION",
+  "date":"2026-10-07",
+  "carrier":{"provider":"SPRITES","name":"h100-real-image-v1","id":"sprite-68a466f6-88d5-493d-93f3-2b85377836a3"},
+  "exact_blobs":{"runtime":"f5d140ca78b1512efd3ad248e5991909480331d5","self_checker":"cca5d79b15499bd263e84112feedc46228be05a4","closed_proof":"9523b7f8c9bb05f3dd2d41b9f86c472996dccb07"},
+  "replay":{"status":"PASS","law_equations":280,"pointwise_words":820,"compact_classes":200,"exact_symbolic_classes":200,"closure_809":"PASS"},
+  "encoding":{"raw_bytes":8981,"payload_bytes":3307,"sha256":"98d99a46ba87eddd3b546726fc6373364498c9d194c62c095bb7cecef96e3447","roundtrip_exact":true},
+  "remaining_boundary":["PYTHON_RUNTIME_SUBSTRATE","FIXED_DECODER_SUBSTRATE","NO_GLOBAL_MINIMUM_DESCRIPTION_PROOF"],
+  "terminal_credit_delta":0
+}
