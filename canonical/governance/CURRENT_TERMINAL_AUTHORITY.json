@@ -1323,7 +1323,7 @@
     "precedence": "THIS_OBJECT_CONTROLS_TERMINAL_NECESSITY__V34_PROVE_NOT_X_IS_RETAINED_AS_AN_OPTIONAL_STRONGER_SUFFICIENCY_ROUTE",
     "mandatory_terminal_reducer": {
       "path": "canonical/runtime/terminal_closure_reducer.py",
-      "git_blob_sha": "e0cb3f34565c1df328c19d22e330216370071d83"
+      "git_blob_sha": "27b51e53db5063756ff3046f978c0087fd4a9256"
     },
     "mandatory_terminal_predicate": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
     "optional_stronger_route": "PROVE_NOT_X_OVER_SOUND_OBSERVABLE_TRACE_ESCAPE_MODEL",
