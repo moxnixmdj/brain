@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_TARGET_INFORMATION_PROFILE_PUBLIC_V1",
+  "date": "2026-10-07",
+  "status": "PUBLIC_PROTOCOL_EVIDENCE__TARGET_HIDDEN_GRADER_STATE_NOT_ESTABLISHED_AS_MODEL_INPUT__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": [
+    {
+      "url": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "publisher": "Artificial Analysis",
+      "observed_facts": [
+        "AA-Briefcase v1.1 evaluates 91 tasks across four private multi-week projects.",
+        "Models produce task deliverables from task/project inputs; each deliverable is subsequently graded.",
+        "Grading has binary rubric checks plus pairwise analytical-quality and presentation comparisons.",
+        "A public fifth scenario demonstrates structure/submission/grading but does not count toward official results."
+      ]
+    },
+    {
+      "url": "https://artificialanalysis.ai/articles/aa-briefcase/",
+      "publisher": "Artificial Analysis",
+      "observed_facts": [
+        "The four scored scenarios, including task instructions, project input files and grading rubrics, are private for evaluation integrity.",
+        "Public benchmark description separates task execution/submission from grading and scoring."
+      ]
+    },
+    {
+      "url": "https://evals.openai.com/gdpval/grading",
+      "publisher": "OpenAI",
+      "observed_facts": [
+        "GDPval grading uses pairwise human expert preferences as the standard.",
+        "Rubrics and gold deliverables are grading resources; grading is conceptually downstream of submission."
+      ]
+    }
+  ],
+  "proof_boundary": {
+    "established": [
+      "THE_PUBLIC_PROTOCOL_DISTINGUISHES_MODEL_TASK_INPUT_FROM_POST_SUBMISSION_EVALUATOR_STATE.",
+      "NO_BOUND_SOURCE_HERE_ESTABLISHES_THAT_CLAUDE_OPUS_5_5_RECEIVES_THE_HIDDEN_EVALUATOR_QUALITY_STATE_USED_BY_THE_PRIOR_TWO_WORLD_ORACLE_COMPARATOR."
+    ],
+    "not_established": [
+      "NO_CLAIM_THE_PUBLIC_PROTOCOL_REVEALS_PRIVATE_AA_BRIEFCASE_TASKS_OR_PRIVATE_GRADING_RUBRICS.",
+      "NO_CLAIM_THE_EXACT_OPUS55_POLICY_OR_PER_TASK_OUTPUTS_ARE_PUBLIC.",
+      "NO_CLAIM_BRAIN_MATCHES_OR_EXCEEDS_OPUS55_PROFESSIONAL_QUALITY."
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
