@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_MONOTONE_SEMANTIC_DECISION_LOOP_EXECUTABLE_BINDING_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_EXECUTABLE_CHAIN__COMMITTED_AND_CODE_INSPECTED__NO_REMOTE_CI_RECEIPT_AVAILABLE__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority_observed": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V14",
+    "terminal": false,
+    "minimum_information_rule": "COMMON_CERTIFIED_ADEQUATE_POLICY_OR_MINIMUM_TRUTHFUL_POLICY_CHANGING_DISCRIMINATOR"
+  },
+  "executable_chain": [
+    {
+      "component": "MONOTONE_SEMANTIC_CONSTRAINT_KERNEL",
+      "path": "canonical/runtime/monotone_semantic_constraint_kernel_v1.py",
+      "commit": "61f1ec9aa3653b3f5d14d196a7b9041cc7d17b9d",
+      "role": "START_AT_TRUE__ADMIT_ONLY_PROOF_CARRYING_CONSTRAINTS__FAIL_CLOSED_ON_ZERO_MODELS__CERTIFY_POLICY_ONLY_BY_ENTAILMENT_OVER_ALL_REMAINING_MODELS"
+    },
+    {
+      "component": "SOURCE_ALIGNED_SEMANTIC_PROOF_V1",
+      "path": "canonical/runtime/source_aligned_semantic_proof_v1.py",
+      "commit": "fc02c178a63f2c3ff1ffd5d1aa935ae551d69345",
+      "role": "RECOMPUTE_EXACT_SOURCE_LITERAL_AND_EXPLICIT_OPERATOR_CLASS_OR_BOUND_FACTS"
+    },
+    {
+      "component": "CERTIFIED_SCOPE_FRAGMENT",
+      "path": "canonical/runtime/certified_scope_fragment_v1.py",
+      "commit": "08d9089ddf8635d9571891b0c2fb5cbeab4d6ea4",
+      "role": "CERTIFY_NARROW_SOURCE_ALIGNED_SCOPE_FOR_UNLESS_IF_WHEN_BEFORE_AFTER__REJECT_MULTIPLE_OR_UNSUPPORTED_STRUCTURES"
+    },
+    {
+      "component": "SOURCE_ALIGNED_SEMANTIC_PROOF_V2",
+      "path": "canonical/runtime/source_aligned_semantic_proof_v2.py",
+      "commit": "41f9d8e866d0f620ecfb50d9419eff007dc371f6",
+      "role": "ADMIT_CERTIFIED_SCOPE_FACTS_ONLY_ON_EXACT_RECOMPUTED_AGREEMENT"
+    },
+    {
+      "component": "PROOF_CARRYING_SEMANTIC_REFINEMENT_V2",
+      "path": "canonical/runtime/proof_carrying_semantic_refinement_v2.py",
+      "commit": "a578719068b81744bde6c5562122b42b6ea09ae1",
+      "role": "BIND_CHECKED_SOURCE_FACTS_INTO_MONOTONE_STATE_AND_TEST_COMMON_POLICY"
+    },
+    {
+      "component": "FINITE_MINIMAX_DECISION_REGION",
+      "path": "canonical/runtime/finite_minimax_decision_region_v1.py",
+      "commit": "078aafa72ea41430251db20b64cd966f9540a6e2",
+      "role": "EXACT_WORST_CASE_INFORMATION_POLICY_FOR_FINITE_COMPLETE_OVERLAPPING_POLICY_REGIONS"
+    },
+    {
+      "component": "MONOTONE_SEMANTIC_DRD_BRIDGE",
+      "path": "canonical/runtime/monotone_semantic_drd_bridge_v1.py",
+      "commit": "60d165841403f22428a777da896b25e7d42f2867",
+      "role": "ENUMERATE_ALL_MODELS_OF_THE_SOUND_BOUNDED_ABSTRACT_STATE__INDUCE_DECLARED_POLICY_REGIONS_AND_TRUTHFUL_BOOLEAN_OBSERVATIONS__HAND_TO_EXACT_MINIMAX_DRD"
+    }
+  ],
+  "tests_committed": [
+    "canonical/tests/test_monotone_semantic_constraint_kernel_v1.py@9ef38723d345455bcd7c7dc32aefca7a4176f966",
+    "canonical/tests/test_source_aligned_semantic_proof_v1.py@b8eb5483f8ee082b853a49440dc1730d6a5249c5",
+    "canonical/tests/test_certified_scope_fragment_v1.py@6a38bd234a3dda7c2356b540d92e2be59ada6c2f",
+    "canonical/tests/test_source_aligned_semantic_proof_v2.py@68274d9b541e6539dec021c74c978d71d9d82e90",
+    "canonical/tests/test_proof_carrying_semantic_refinement_v2.py@bdcba078c16e5a9dd095a48090a0375b2b679052",
+    "canonical/tests/test_finite_minimax_decision_region_v1.py@a46bb73f156e0b7daf1ed1ff2f5ae51044e01b45",
+    "canonical/tests/test_monotone_semantic_drd_bridge_v1.py@67efe811c3ffa7980f8b6b56f12447a005b4a344"
+  ],
+  "safety_repairs": [
+    "CONTRADICTORY_SEMANTIC_STATE_WITH_ZERO_MODELS_NOW_FAILS_CLOSED_INSTEAD_OF_VACUOUSLY_ENTAILING_EVERY_POLICY",
+    "UNSUPPORTED_HIGH_LEVEL_MEANING_CLAIMS_CANNOT_MINT_TRUSTED_CONSTRAINTS",
+    "SCOPE_ROLE_OR_SPAN_MISMATCH_CANNOT_MINT_TRUSTED_SCOPE_FACT",
+    "MULTIPLE_SUPPORTED_SCOPE_OPERATORS_IN_ONE_V1_FRAGMENT_RETURN_UNRESOLVED",
+    "OMITTED_PROVABLE_FACTS_LEAVE_THE_ABSTRACTION_BROADER_AND_CANNOT_BY_THEMSELVES_CREATE_A_POLICY_PROOF"
+  ],
+  "relationship_to_existing_v14_runtime": {
+    "terminal_semantic_quotient_v1": "COMPLEMENTARY__REQUIRES_COMPLETE_BOUND_FINITE_TERMINAL_SIGNATURES",
+    "semantic_information_frontier_v1": "COMPLEMENTARY__EXACT_FOR_DISJOINT_TERMINAL_SIGNATURE_EQUIVALENCE",
+    "new_decision_region_solver": "HANDLES_OVERLAPPING_POLICY_ADEQUACY_REGIONS_AND_STOPS_AS_SOON_AS_ONE_POLICY_COVERS_ALL_SURVIVING_STATES",
+    "new_monotone_layer": "ATTACKS_THE_UPSTREAM_COMPLETENESS_PREMISE_BY_KEEPING_A_SOUND_OVERAPPROXIMATION_UNTIL_ENOUGH_PROOF_EXISTS"
+  },
+  "verification_boundary": {
+    "github_ci_run_observed_for_new_commits": false,
+    "reason": "NO_WORKFLOW_RUN_EXPOSED_FOR_THE_NEW_COMMITS__CURRENT_BRAIN_ALREADY_CLASSIFIES_PRIVATE_ACTIONS_CAPACITY_AS_UNKNOWN_DUE_TO_PRE_STEP_INFRASTRUCTURE_BLOCK",
+    "sprites_used": false,
+    "replit_used": false,
+    "claim": "CODE_AND_TESTS_COMMITTED_AND_INSPECTED__NOT_INDEPENDENTLY_EXECUTED_OR_PROMOTED"
+  },
+  "remaining_hard_core": [
+    "EXPAND_ONE_SIDED_SOUND_SOURCE_ALIGNED_SEMANTIC_PRIMITIVES_ONLY_WHEN_LIVE_POLICY_OBLIGATIONS_REQUIRE_THEM",
+    "PROVE_OR_BIND_SOUND_POLICY_ADEQUACY_FORMULAS_FOR_LIVE_RESIDUAL_CONTEXTS",
+    "BIND_TRUTHFUL_EXECUTABLE_DISCRIMINATOR_PROCEDURES_TO_SELECTED_OBSERVATION_FORMULAS",
+    "INDEPENDENTLY_EXECUTE_THE_NEW_TESTS_WHEN_A_ZERO_SPEND_REMOTE_RUNNER_PATH_IS_AVAILABLE",
+    "ONLY_THEN_ATTEMPT_SCOPE_COMPLETE_U_DEPLETION_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_NATURAL_LANGUAGE_SEMANTICS_IS_SOLVED",
+    "NO_CLAIM_THE_NEW_SCOPE_FRAGMENT_COVERS_ALL_FINANCE_LANGUAGE",
+    "NO_CLAIM_POLICY_CERTIFICATE_IDS_ARE_SELF_VERIFYING",
+    "NO_CLAIM_THE_NEW_DRD_SOLVER_IS_OPTIMAL_RELATIVE_TO_REAL_ADEQUACY_IF_THE_DECLARED_POLICY_REGIONS_ARE_ONLY_SUFFICIENT_UNDERAPPROXIMATIONS",
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED",
+    "NO_TERMINAL_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
