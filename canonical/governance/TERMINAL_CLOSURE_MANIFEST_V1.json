@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "CURRENT_SCOPE_RECONCILED__P1_SCOPE_RESTORED__5_OF_19_OPUS55_ACCEPTANCE_PASS__5_OF_19_VERIFIED_OWNED__14_OPEN__TERMINAL_FALSE",
+  "status": "CURRENT_SCOPE_RECONCILED__P1_SCOPE_RESTORED__6_OF_19_OPUS55_ACCEPTANCE_PASS__5_OF_19_VERIFIED_OWNED__13_ACCEPTANCE_OPEN__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -225,21 +225,22 @@
     },
     {
       "id": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "closure_state": "WHOLE_SCOPE_BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_OPEN",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "closure_state": "WHOLE_SCOPE_BEHAVIORAL_PASS__STRICT_OPUS55_ACCEPTANCE_PASS__OWNERSHIP_FINALITY_OPEN",
+      "ownership_status": "STRICT_OPUS55_ACCEPTANCE_PASS__PROVISIONAL_OWNERSHIP_FINALITY_OPEN",
       "target_behavior": "Follow complex instructions, stay within authorization/scope, resolve routine ambiguity and adapt when requirements change.",
       "acceptance_basis": null,
       "proof_bundle": "OpenAI reports strong intent/scope behavior for Astra, but no direct Opus 5.5 matched comparison closes the whole family.",
       "unresolved": [
-        "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
+        "OWNERSHIP_FINALITY_PENDING"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "opus55_acceptance_calibrated": false,
-      "opus55_acceptance_state": "OPEN",
+      "acceptance_calibration_evidence": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "opus55_acceptance_calibrated": true,
+      "opus55_acceptance_state": "PASS",
       "behavioral_scope_quarantine_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "current_behavioral_scope_state": "P1_SCOPE_RESTORED__WHOLE_SCOPE_PASS",
-      "scope_restoration_evidence": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+      "scope_restoration_evidence": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "acceptance_promotion_evidence": "canonical/governance/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_20261007_V1.json"
     },
     {
       "id": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -431,7 +432,7 @@
   },
   "current_machine_verdict": {
     "achieved": false,
-    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__5_OF_19_OPUS55_ACCEPTANCE_PASS__14_OPEN__14_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__24_UNRESOLVED__LIVEBENCH_IF_AND_UNKNOWN_DOMAIN_TRANSFER_AUDIT_CLEANLY_PROVED__OWNERSHIP_PROMOTION_SEPARATE",
+    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__6_OF_19_OPUS55_ACCEPTANCE_PASS__13_ACCEPTANCE_OPEN__16_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__22_UNRESOLVED__5_OF_19_VERIFIED_OWNED__TERMINAL_FALSE",
     "override_allowed": false
   },
   "specification_closure": {
@@ -467,7 +468,7 @@
     "retained_role": "HISTORICAL_GLOBAL_POSTCONDITION_RESIDUAL_DIAGNOSTIC_ONLY",
     "rule": "GLOBAL_POSTCONDITION_CLOSURE_DOES_NOT_SUBSTITUTE_FOR_FROZEN_OPUS55_PROTOCOL_RESULT"
   },
-  "next": "RECOMPUTE_LIVE_27_PREDICATE_INFORMATION_DOMINANCE_AND_ZERO_REALITY_FRONTIER__NO_FRESH_REALITY_UNTIL_RECOMPUTE",
+  "next": "CLOSE_THE_22_REMAINING_ATOMIC_ACCEPTANCE_PREDICATES_OR_SOUNDLY_DISCHARGE_THEM_BY_STRONGER_SCOPE_COMPLETE_PROOFS__PROMOTE_ACCEPTED_FAMILIES_TO_DONOR_INDEPENDENT_OWNERSHIP_ONLY_WITH_EXACT_ROUTE_BINDING",
   "postwave_global_ownership_reconciliation": "canonical/governance/POSTWAVE_GLOBAL_OWNERSHIP_RECONCILIATION_V1.json",
   "postwave_remaining_exact_gates": [
     "RESTORE_OR_REDEFINE_P1_WHOLE_FROZEN_SCOPE_ONLY_WITH_ADMISSIBLE_PREDECLARED_EVIDENCE_OR_EXPLICITLY_AUTHORIZED_IRREDUCIBLE_NEW_OBSERVATION",
@@ -506,13 +507,14 @@
     "invalidation_blob_sha": "9dfda8e533e0d51985b2b32f709b1b238db1ef19"
   },
   "opus55_acceptance_summary": {
-    "calibrated_family_count": 5,
-    "pending_family_count": 14,
+    "calibrated_family_count": 6,
+    "pending_family_count": 13,
     "calibrated_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
       "LONG_HORIZON_MEMORY_AND_CONTINUITY",
-      "SUBAGENT_DELEGATION_AND_COORDINATION",
       "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
     ],
     "pending_families": [
@@ -525,7 +527,6 @@
       "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
       "COMPUTER_AND_BROWSER_USE",
       "FINANCIAL_ANALYSIS",
-      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
       "ARTIFACT_CREATION",
       "COMMUNICATION_AND_SYNTHESIS",
       "UNKNOWN_DOMAIN_ADAPTATION",
@@ -533,8 +534,8 @@
     ],
     "authority": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
     "atomic_predicates": {
-      "proved": 14,
-      "unresolved": 24,
+      "proved": 16,
+      "unresolved": 22,
       "total": 38
     },
     "ownership_promotion_authority": false,
@@ -593,10 +594,9 @@
     },
     "latest_atomic_reconciliation": {
       "ledger_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "ledger_git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
-      "livebench_verification": "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
-      "unknown_domain_verification": "canonical/verification/UNKNOWN_DOMAIN_V7_WINDOWS_V8_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
-      "status": "CURRENT__14_PROVED__24_UNRESOLVED__TERMINAL_FALSE"
+      "ledger_git_blob_sha": "d6f6c4d5f86116073f3ecab08208051dc593f332",
+      "instruction_following_protocol_closure": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "status": "CURRENT__16_PROVED__22_UNRESOLVED__IF_ACCEPTANCE_PASS__TERMINAL_FALSE"
     }
   },
   "behavioral_quarantined_family_count": 0,
