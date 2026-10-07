@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_PRESENTATION_PUBLIC_CONTRACT_INFORMATION_LOWER_BOUND_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_TWO_WORLD_INFORMATION_LOWER_BOUND_PASS__OFFICIAL_PUBLIC_CONTRACT_RECHECKED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_PRESENTATION_PUBLIC_CONTRACT_INFORMATION_LOWER_BOUND_20261007_V1.json",
+    "git_blob_sha": "ef20a762365f9b4ab79ef695085bc76e35b0351d"
+  },
+  "official_public_recheck": {
+    "methodology_url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "observed_on": "2026-10-07",
+    "facts": [
+      "AA_BRIEFCASE_PAIRWISE_PRESENTATION_COMPARES_TWO_SUBMISSIONS_FOR_THE_SAME_TASK_AND_RETURNS_A_PREFERRED_SUBMISSION_OR_TIE",
+      "AA_BRIEFCASE_PRESENTATION_MEANS_WHICH_OUTPUT_IS_MORE_PROFESSIONALLY_PRESENTED",
+      "GDPVAL_AA_V2_1_PAIRWISE_GRADING_BLINDLY_RANKS_TWO_SUBMISSIONS_FOR_THE_SAME_TASK",
+      "GDPVAL_AA_V2_1_SUBMISSIONS_ARE_RANDOMLY_ANONYMIZED_AS_A_AND_B",
+      "GDPVAL_AA_V2_1_JUDGE_RECEIVES_TASK_REFERENCE_FILES_AND_BOTH_SUBMISSIONS_AND_IS_ASKED_WHICH_BETTER_RESPONDS_TO_THE_TASK",
+      "PUBLIC_METHODOLOGY_DOES_NOT_PUBLISH_A_COMPLETE_TOTAL_UTILITY_ORDER_OVER_ALL_POSSIBLE_SUBMISSION_PAIRS"
+    ]
+  },
+  "wolfram": {
+    "code": "{SatisfiableQ[And[c,p],{c,p}],SatisfiableQ[And[c,Not[p]],{c,p}],TautologyQ[Not[And[Equivalent[d,True],Equivalent[d,False]]],{d}],BooleanMinimize[And[Equivalent[d,True],Equivalent[d,False]]]}",
+    "result": [
+      true,
+      true,
+      true,
+      false
+    ],
+    "interpretation": [
+      "ONE_PUBLIC_CONTRACT_C_IS_COMPATIBLE_WITH_A_WORLD_PREFERRING_A_OVER_B",
+      "THE_SAME_PUBLIC_CONTRACT_C_IS_COMPATIBLE_WITH_A_WORLD_PREFERRING_B_OVER_A",
+      "ONE_DETERMINISTIC_DECISION_FROM_C_ALONE_CANNOT_BE_CORRECT_IN_BOTH_WORLDS",
+      "THEREFORE_CURRENT_PUBLIC_CONTRACT_FACTS_ALONE_DO_NOT_DETERMINE_THE_MISSING_PRESENTATION_ORDER"
+    ]
+  },
+  "verified": {
+    "current_public_contract_underdetermines_unspecified_pairwise_presentation_order": true,
+    "task_by_task_style_theory_from_same_underdetermining_contract_is_not_scope_complete_closure": true,
+    "target_relation_information_or_absolute_top_theorem_or_matched_target_outcome_is_required_for_any_PAIR_NOT_ALREADY_ORDERED_BY_EXPLICIT_RULES": true,
+    "shared_professional_presentation_dimension_can_be_scheduled_once_across_its_consumers": true,
+    "U_deletion": false,
+    "terminal": false
+  },
+  "scheduling_effect": [
+    "COALESCE_PROFESSIONAL_PRESENTATION_ORDER_AS_ONE_SHARED_INFORMATION_CAUSE_ACROSS_GDPVAL_STYLE_AA_BRIEFCASE_PRESENTATION_AND_ARTIFACT_PRESENTATION_COMPLEMENT.",
+    "DO_NOT_CREATE_PER_TASK_STYLE_HEURISTICS_AS_TERMINAL_PROOFS_WHEN_THE_ONLY_MISSING_PREMISE_IS_THE_UNBOUND_TARGET_ORDER.",
+    "CONTINUE_TARGET_FREE_WORK_ONLY_WHEN_IT_CAN_PROVE_AN_ABSOLUTE_TOP_OR_SCOPE_COMPLETE_ORDER_FOR_A_SOUNDLY_ADMITTED_SUBREGION.",
+    "OTHERWISE_BIND_THE_MINIMUM_MATCHED_TARGET_RELATION_INFORMATION_NEEDED_TO_ORDER_ONLY_THE_SURVIVING_POLICY_RELEVANT_CELLS."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_PRESENTATION_QUALITY_REQUIRES_TARGET_MODEL_CALLS.",
+    "NO_CLAIM_THE_ACTUAL_JUDGE_PANEL_HAS_ARBITRARY_PREFERENCES.",
+    "NO_CLAIM_A_STRONGER_ABSOLUTE_TOP_THEOREM_IS_IMPOSSIBLE.",
+    "NO_CLAIM_GDPVAL_AA_BRIEFCASE_OR_ARTIFACT_CREATION_IS_CLOSED.",
+    "NO_U_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
