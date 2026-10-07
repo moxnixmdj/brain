@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_MONOTONE_SEMANTIC_DECISION_LOOP_INDEPENDENT_SPRITE_VERIFICATION_V2",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_REPLAY_PASS__37_OF_37__ZERO_CREDIT",
+  "source": {
+    "authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+    "executable_binding": "canonical/governance/MONOTONE_SEMANTIC_DECISION_LOOP_EXECUTABLE_BINDING_20261007_V1.json"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "workspace": "/home/sprite/v16_semantic_replay"
+  },
+  "replay": {
+    "tests_run": 37,
+    "tests_passed": 37,
+    "failures": 0,
+    "errors": 0
+  },
+  "verified": [
+    "UNPROVED_SEMANTIC_CONSTRAINTS_REJECTED",
+    "MISSING_FACTS_STAY_BROAD",
+    "CONTRADICTIONS_FAIL_CLOSED",
+    "RELATIONAL_CORRELATION_PRESERVED",
+    "COMMON_POLICY_STOPS_WITHOUT_UNNECESSARY_QUERY",
+    "MINIMUM_SOUND_DISCRIMINATOR_SELECTED_IN_BOUND_FINITE_CASES"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTICS_CLAIM",
+    "NO_U_EMPTY",
+    "NO_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
