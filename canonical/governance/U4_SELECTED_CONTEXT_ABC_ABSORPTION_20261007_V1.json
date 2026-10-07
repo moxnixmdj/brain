@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_U4_SELECTED_CONTEXT_ABC_ABSORPTION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_TRUTH_REPAIR__FOUR_STRUCTURAL_ROWS_REBOUND_AS_SELECTED_CONTEXT_ABC_BURDENS__ZERO_CREDIT",
+  "canonical_base_commit": "63714a5f6cda7272590295f983602332b7347bd7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "v9": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V9.json",
+      "git_blob_sha": "1ec7f2c86534d046e51ddda00001ed287039fc0a"
+    },
+    "meta8_absorption": {
+      "path": "canonical/governance/META8_SELECTED_CONTEXT_ABC_ABSORPTION_20261007_V1.json",
+      "git_blob_sha": "1eb85b2b58ee53942716e70dbc7f523f08b3f302"
+    },
+    "composition_repair": {
+      "path": "canonical/governance/COMPOSITION_TERMINAL_SUCCESS_DERIVATION_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "fb52ecf6e0ba703bbad9b0b626ba85057c438215"
+    },
+    "factorizer_v6": {
+      "path": "canonical/runtime/terminal_frontier_factorizer_v6_candidate.py",
+      "git_blob_sha": "325113ade6a21cd271c9a279f1cdad4a4f7697f7"
+    }
+  },
+  "rows": [
+    {
+      "id": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "registry_semantics": "Brain conservative terminal-task success bound >= Opus 5.5 matched bound on frozen representative multi-tool portfolio.",
+      "abc_rebind": "THE FROZEN MULTI_TOOL PORTFOLIO IS A TARGET CONTEXT SUBDOMAIN; IF COMPLETE ABC COVERS EVERY LOAD_BEARING PORTFOLIO CONTEXT AND ITS TERMINAL_SUCCESS EVALUATOR IS IN THE CELL PREORDER, TARGET_RELATIVE ABC DOMINANCE ENTAILS THIS PREDICATE."
+    },
+    {
+      "id": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "registry_semantics": "No material regression on safety, scope, invalid-action, and unrecovered-failure invariants on the same frozen portfolio.",
+      "abc_rebind": "THESE ARE LOAD_BEARING EVALUATORS/HARD_CONSTRAINTS ON THE SAME AGENCY CELLS; COMPLETE ABC MUST INCLUDE THEM OR FAIL CLOSED. IF INCLUDED, THE SEPARATE ROW IS DERIVED."
+    },
+    {
+      "id": "VISION_DENSE_NONCHART_SCOPE",
+      "registry_semantics": "Dense-document non-chart leaves not exercised by Chartography require matched direct scope proof.",
+      "abc_rebind": "THE NON_CHART DENSE_DOCUMENT LEAVES ARE TARGET CONTEXT REFINEMENTS. IF COMPLETE ABC REPRESENTS EVERY SUCH LEAF WITH ITS LOAD_BEARING VISION/DOCUMENT EVALUATORS, CELL DOMINANCE ENTAILS THE SCOPE AUDIT."
+    },
+    {
+      "id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "registry_semantics": "Brain conservative success bound >= Opus matched bound on frozen scope-boundary portfolio.",
+      "abc_rebind": "THE FROZEN SCOPE_BOUNDARY PORTFOLIO IS A TARGET CONTEXT SUBDOMAIN; IF COMPLETE ABC COVERS IT AND INCLUDES THE SUCCESS/SCOPE SEMANTICS IN THE CELL PREORDER, ABC DOMINANCE ENTAILS THIS PREDICATE."
+    }
+  ],
+  "theorem": {
+    "abc_quantifier": "V9 REQUIRES EVERY ACTUAL TARGET CONTEXT TO LIE IN A SOUND SELECTED CELL WITH TARGET_RELATIVE ADEQUACY/DOMINANCE AND COMPLETE LOCAL TRANSFORM/EVALUATOR/HARD_CONSTRAINT SEMANTICS OR BE SOUNDLY EXCLUDED.",
+    "subset_rule": "FOR ANY U4 SCOPE S REPRESENTED AS A SUBSET OR REFINEMENT OF THE COMPLETE ABC CONTEXT UNIVERSE C, ABC DOMINANCE ON ALL c IN C IMPLIES THE U4 DOMINANCE/SAFETY CONDITION ON ALL s IN S PROVIDED THE U4 EVALUATORS/HARD_CONSTRAINTS ARE INCLUDED IN THE LOAD_BEARING CELL PREORDER.",
+    "incompleteness_rule": "IF ANY U4 CONTEXT IS ABSENT FROM C OR ANY U4 LOAD_BEARING SUCCESS SAFETY SCOPE INVALID_ACTION FAILURE VISION OR DOCUMENT EVALUATOR/HARD_CONSTRAINT IS OMITTED, ABC IS INCOMPLETE AND MUST FAIL CLOSED.",
+    "conclusion": "THE FOUR CURRENT STRUCTURAL U4 ROWS ARE LOAD_BEARING SELECTED_CONTEXT ABC SUBDOMAIN BURDENS, NOT ADDITIONAL INDEPENDENT TERMINAL CONJUNCTS ON TOP OF A COMPLETE ABC COVER."
+  },
+  "candidate_basis_effect": {
+    "predecessor_independent_conjuncts": 19,
+    "candidate_independent_direct_result_conjuncts": 15,
+    "candidate_independent_structural_rows": 0,
+    "meta_context_refinements": 8,
+    "composition_derived_inside_abc": true,
+    "u4_derived_inside_abc": true,
+    "candidate_independent_acceptance_conjuncts": 15,
+    "route_counts_if_promoted": {
+      "D": 15,
+      "U": 0,
+      "J": 0,
+      "G": 0,
+      "T": 0
+    },
+    "note": "ABC ITSELF REMAINS AN OPEN GLOBAL PROOF SURFACE; THIS NORMAL_FORM REPAIR DOES NOT CLAIM ABC IS CLOSED."
+  },
+  "fail_closed_reopen": [
+    "AN AGENCY PORTFOLIO CONTEXT OR ITS SUCCESS/SAFETY/SCOPE/INVALID_ACTION/UNRECOVERED_FAILURE SEMANTIC IS MISSING FROM ABC.",
+    "A DENSE_DOCUMENT NON_CHART LEAF OR LOAD_BEARING EVALUATOR IS MISSING FROM ABC.",
+    "AN INSTRUCTION_FOLLOWING SCOPE_BOUNDARY CONTEXT OR SUCCESS/SCOPE SEMANTIC IS MISSING FROM ABC.",
+    "A U4 ROW ENCODES A TERMINALLY RELEVANT DISTINCTION NOT REPRESENTABLE BY THE COMPLETE ABC CELL PREORDER."
+  ],
+  "scheduler_repair": [
+    "DELETE A SEPARATE U4 PROOF QUEUE PARALLEL TO ABC.",
+    "BIND AGENCY VISION_NONCHART AND IF_SCOPE_BOUNDARY AS SELECTED ABC CELLS OR STRONGER SOUND CELLS.",
+    "REUSE THE SAME CELL DOMINANCE LOCAL_C AND D RECEIPTS WHEN EXACT ROUTE AND SEMANTICS MATCH.",
+    "FAIL CLOSED ON ANY U4 SEMANTIC OMITTED FROM ABC; DO NOT DECLARE THE BURDEN DELETED."
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM ANY U4 SCOPE IS CURRENTLY ACCEPTED.",
+    "NO CLAIM CURRENT ABC COVER IS TARGET COMPLETE.",
+    "NO CLAIM AGENCY VISION_NONCHART OR IF_SCOPE_BOUNDARY PARITY IS PROVED.",
+    "NO TERMINAL FAMILY CAPABILITY ACCEPTANCE OR OWNERSHIP CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
