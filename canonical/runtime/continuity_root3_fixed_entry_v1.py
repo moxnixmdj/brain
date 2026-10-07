@@ -7,23 +7,40 @@ import pathlib
 from canonical.runtime import continuity_root3_inprocess_executor_v1 as adapter
 from canonical.runtime import same_identity_supervisor_credited_v1 as supervisor
 
-SCHEMA="PROJECT_BRAIN_CONTINUITY_ROOT3_FIXED_ENTRY_V1"
+SCHEMA="PROJECT_BRAIN_CONTINUITY_ROOT3_FIXED_ENTRY_V2"
 ROOT=supervisor.ROOT.resolve()
-TASKS_DIR=ROOT/"canonical/same_identity_worker/tasks"
-STATE_DIR=ROOT/"canonical/same_identity_worker/state"
-EVIDENCE_DIR=ROOT/"canonical/same_identity_worker/evidence"
+
+TASKS_REL="canonical/same_identity_worker/tasks"
+STATE_REL="canonical/same_identity_worker/state"
+EVIDENCE_REL="canonical/same_identity_worker/evidence"
+BRIDGE_REL="canonical/same_identity_worker/external_tool_bridge"
+
+def _fixed_repo_dir(rel: str) -> pathlib.Path:
+    return supervisor._repo_path(ROOT, rel)
 
 def _task_path(raw: str | None) -> pathlib.Path | None:
     if raw is None:
         return None
     return supervisor._repo_path(ROOT, raw)
 
+def _bound_dirs() -> tuple[pathlib.Path,pathlib.Path,pathlib.Path,pathlib.Path]:
+    # Resolve through the supervisor's repository-confinement primitive before
+    # any continuity mutation. This rejects pre-existing base-prefix symlinks
+    # that resolve outside the canonical repository.
+    return (
+        _fixed_repo_dir(TASKS_REL),
+        _fixed_repo_dir(STATE_REL),
+        _fixed_repo_dir(EVIDENCE_REL),
+        _fixed_repo_dir(BRIDGE_REL),
+    )
+
 def run(task: str | None = None):
+    tasks_dir,state_dir,evidence_dir,_bridge_base=_bound_dirs()
     return adapter.run_once(
         root=ROOT,
-        tasks_dir=TASKS_DIR,
-        state_dir=STATE_DIR,
-        evidence_dir=EVIDENCE_DIR,
+        tasks_dir=tasks_dir,
+        state_dir=state_dir,
+        evidence_dir=evidence_dir,
         agent_id=supervisor.DEFAULT_AGENT_ID,
         task_path=_task_path(task),
     )
@@ -43,13 +60,15 @@ def main(argv: list[str] | None = None) -> int:
     except (supervisor.SupervisorError, adapter.ContinuityRoot3Error) as exc:
         print(json.dumps({"status":"CONTINUITY_ROOT3_BLOCKED","error":str(exc)}))
         return 22
+    tasks_dir,state_dir,evidence_dir,bridge_base=_bound_dirs()
     print(json.dumps({
         **receipt,
         "deployment_entry_schema":SCHEMA,
         "fixed_root":str(ROOT),
-        "fixed_tasks_dir":str(TASKS_DIR),
-        "fixed_state_dir":str(STATE_DIR),
-        "fixed_evidence_dir":str(EVIDENCE_DIR),
+        "fixed_tasks_dir":str(tasks_dir),
+        "fixed_state_dir":str(state_dir),
+        "fixed_evidence_dir":str(evidence_dir),
+        "fixed_bridge_dir":str(bridge_base),
     },sort_keys=True))
     return int(code)
 
