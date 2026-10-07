@@ -88,7 +88,17 @@ class TerminalAutopilotTests(unittest.TestCase):
             out = plan(built)
             direct = {x["obligation_ids"][0] for x in out["dispatch"] if x["kind"] == "EVIDENCE"}
             self.assertNotIn("TB_SCIENCE_GE_58_7", direct)
-            self.assertEqual(len(direct), 12)
+            routes = {
+                x["route_id"]
+                for x in out["dispatch"]
+                if x["kind"] == "ROUTE_RACE"
+            }
+            self.assertIn("SCOPE_COMPLETE_UNIVERSAL_COVER", routes)
+            self.assertIn("OBJECTIVE_ACCEPTANCE_COMMON_LAW", routes)
+            self.assertIn("CODING_TRIAD_SCOPE_COMPLETE_COVER", routes)
+            self.assertIn("FINANCE_MYSTERY_COMMON_POLICY_COVER", routes)
+            self.assertIn("PROFESSIONAL_QUALITATIVE_ROBUST_DOMINANCE", routes)
+            self.assertLessEqual(len(direct), 12)
 
 
     def test_repo_mode_blocks_stale_science_intent_after_authority_consumed(self):
@@ -130,6 +140,12 @@ class TerminalAutopilotTests(unittest.TestCase):
                 repairs[0]["action_id"],
                 "repair::TB_SCIENCE_PLANNER_TRANSPORT_PREFLIGHT",
             )
+            routes = {
+                x["route_id"]
+                for x in out["dispatch"]
+                if x["kind"] == "ROUTE_RACE"
+            }
+            self.assertIn("SCOPE_COMPLETE_UNIVERSAL_COVER", routes)
 
     def test_repo_mode_allows_science_intent_only_with_live_authority(self):
         with tempfile.TemporaryDirectory() as td:
@@ -153,6 +169,35 @@ class TerminalAutopilotTests(unittest.TestCase):
             tb = [x for x in built["obligations"] if x["id"] == "TB_SCIENCE_GE_58_7"][0]
             self.assertEqual(tb["status"], "RUNNING")
             self.assertEqual(len(built["blockers"]), 0)
+
+
+    def test_repo_mode_installs_one_shot_attack_graph(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            q = root / "canonical/governance"
+            q.mkdir(parents=True)
+            (q / "FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json").write_text(
+                json.dumps({"independent_open_obligations": OPEN}), encoding="utf-8")
+            built = build_manifest_from_repo(root)
+            self.assertTrue(built["one_shot_attack_graph"])
+            by_id = {row["id"]: row for row in built["routes"]}
+            self.assertEqual(len(by_id), 6)
+            self.assertEqual(
+                set(by_id["SCOPE_COMPLETE_UNIVERSAL_COVER"]["can_discharge"]),
+                set(OPEN),
+            )
+            self.assertEqual(
+                set(by_id["CODING_TRIAD_SCOPE_COMPLETE_COVER"]["can_discharge"]),
+                {
+                    "CODING_TB4_GE_66_4",
+                    "CODING_FRONTIERCODE_GE_54_4",
+                    "CODING_CURSORBENCH_GE_57_8",
+                },
+            )
+            for route in by_id.values():
+                self.assertFalse(route["promotion_authority"])
+                self.assertFalse(route["terminal_credit"])
+                self.assertTrue(set(route["can_discharge"]).issubset(set(OPEN)))
 
 
 if __name__ == "__main__":
