@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_NOW_PROFESSIONAL_QUALITY_INFORMATION_BOUNDARY_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE_CURRENT_HEAD_INFORMATION_BOUNDARY__ZERO_REALITY_FIXED_POINT_FOR_OPEN_REALISTIC_PROFESSIONAL_QUALITY_UNLESS_STRUCTURAL_CERTIFICATE_EXCLUDES_COUNTERMODEL__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "single_abc_frontier": {
+      "path": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V1.json",
+      "git_blob_sha": "cc2dc5ca123ced7ee3bf77fc6160b026259975ce"
+    },
+    "current_cached_union": {
+      "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V7.json",
+      "git_blob_sha": "96c7a323ffd42e4cb338ff969e971f81bdb841d6"
+    },
+    "professional_internal_prewave": {
+      "path": "canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json",
+      "git_blob_sha": "89083d0a7039f4e3e9ac0f9fbdd392836eb11f25"
+    },
+    "professional_terminal_binding": {
+      "path": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d"
+    },
+    "bounded_p2_universal_cell": {
+      "path": "canonical/governance/P2_INFORMATION_SAFE_UNIVERSAL_SELECTED_CELL_20261007_V1.json",
+      "git_blob_sha": "0ccc3ecbdbf2636b8f1e7f0daf959a48350cb82e"
+    }
+  },
+  "live_fact": {
+    "abc_closure_condition": "U_IS_EMPTY",
+    "u_currently_proved_empty": false,
+    "bounded_p2_cell_scope_equivalent_to_all_realistic_professional_deliverables": false,
+    "professional_prewave_terminal_result_count": 0,
+    "professional_terminal_gold_quality_information_available_to_candidate": false
+  },
+  "two_world_information_cut": {
+    "visible_observation_same": true,
+    "actions": ["a", "b"],
+    "world_1": "a_STRICTLY_BETTER_THAN_b",
+    "world_2": "b_STRICTLY_BETTER_THAN_a",
+    "both_worlds_excluded_by_current_bound_sources": false,
+    "visible_only_policy": "CHOOSE_a_WITH_PROBABILITY_p_AND_b_WITH_PROBABILITY_1_MINUS_p",
+    "target_world_informed_success": {"world_1": 1, "world_2": 1},
+    "brain_visible_only_success": {"world_1": "p", "world_2": "1-p"},
+    "universal_noninferiority_constraints": ["0<=p<=1", "p>=1", "1-p>=1"],
+    "feasible": false,
+    "best_worst_case_visible_only_success": "1/2",
+    "argmax": "p=1/2"
+  },
+  "theorem": {
+    "statement": "WHILE_BOTH_OPPOSED_HIDDEN_QUALITY_WORLDS_REMAIN_ADMISSIBLE_FOR_THE_OPEN_REALISTIC_PROFESSIONAL_QUALITY_RESIDUAL__CURRENT_VISIBLE_ONLY_ZERO_REALITY_BYTES_CANNOT_PROVE_UNIVERSAL_NONINFERIORITY_TO_A_WORLD_INFORMED_OPTIMAL_TARGET.",
+    "what_would_falsify_this_boundary": [
+      "A_SOUND_SCOPE_RESTRICTION_PROVING_ONE_OR_BOTH_OPPOSED_WORLDS_INADMISSIBLE",
+      "A_SCOPE_COMPLETE_DIRECT_E2E_OR_OBJECTIVE_TOP_LAW_CERTIFICATE_FOR_THE_OPEN_REALISTIC_PROFESSIONAL_QUALITY_CONTEXT",
+      "NEW_MINIMUM_DISCRIMINATING_EVALUATOR_INFORMATION_THAT_SEPARATES_THE_SURVIVING_WORLD_FIBER"
+    ],
+    "what_does_not_change_it": [
+      "REPEATING_THE_ALREADY_UNIVERSAL_BOUNDED_P2_GENERATOR_PROOF",
+      "INCREASING_CACHED_CERTIFICATE_RECORD_COUNT_WITHOUT_COVERING_THIS_OPEN_REALISTIC_CONTEXT",
+      "RENAMING_THE_SHARED_SEMANTIC_TAIL",
+      "BUILDING_ANOTHER_GENERAL_ROUTER"
+    ]
+  },
+  "scheduler_effect": [
+    "KEEP_THE_TERMINAL_OBJECTIVE_FIXED.",
+    "STOP_ZERO_REALITY_REPROOFS_OF_THE_BOUNDED_P2_GENERATOR_AS_A_ROUTE_TO_OPEN_REALISTIC_PROFESSIONAL_QUALITY_CLOSURE.",
+    "SEARCH_FIRST_FOR_A_CONTENT_ADDRESSED_STRUCTURAL_OR_DIRECT_E2E_CERTIFICATE_THAT_EXCLUDES_THE_TWO_WORLD_COUNTERMODEL.",
+    "IF_NO_SUCH_CERTIFICATE_EXISTS__THE_NEXT_INFORMATION-BEARING_ACTION_MUST_BE_THE_SMALLEST_DISCRIMINATING_EVALUATOR_EVIDENCE_ALLOWED_BY_CURRENT_AUTHORITY_AND_ZERO_COST.",
+    "DO_NOT_SET_ABC_OR_TERMINAL_TRUE_WHILE_THIS_U_WITNESS_REMAINS_UNCLOSED."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_EITHER_COUNTERMODEL_WORLD_IS_THE_ACTUAL_OPUS55_WORLD.",
+    "NO_CLAIM_FRESH_TARGET_INFORMATION_IS_REQUIRED_IF_A_NEW_SOUND_STRUCTURAL_CERTIFICATE_EXCLUDES_THE_COUNTERMODEL.",
+    "NO_CLAIM_THE_BOUNDED_P2_UNIVERSAL_CELL_IS_INVALID.",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_IS_CLOSED.",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
