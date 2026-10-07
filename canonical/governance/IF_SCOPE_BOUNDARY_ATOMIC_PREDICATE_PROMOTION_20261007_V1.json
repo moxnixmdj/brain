@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_IF_SCOPE_BOUNDARY_ATOMIC_PREDICATE_PROMOTION_20261007_V1",
+  "date": "2026-10-07",
+  "status": "PROMOTION_ELIGIBLE__INDEPENDENT_EXACT_SOURCE_BINDING_AND_REPLAY_PASS__ZERO_FRESH_TARGET_REALITY",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate_id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+  "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "frozen_acceptance": "Brain conservative success bound >= Opus matched bound on frozen scope-boundary portfolio.",
+  "proof": {
+    "protocol_binding": {
+      "path": "canonical/governance/IF_SCOPE_FINITE_PROTOCOL_BINDING_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "15c5e607e9f5c921d62bf75492e26021980e75fa"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/IF_SCOPE_FINITE_PROTOCOL_BINDING_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "b7bfc865267554f0c7005c0835f09107b2dec998",
+      "status": "INDEPENDENT_EXACT_SOURCE_BINDING_AND_VERIFIER_REPLAY_PASS__ZERO_CREDIT"
+    },
+    "finite_execution": {
+      "path": "canonical/verification/IF_SCOPE_FINITE_WAVE_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "f2736590ad5fb3161f4e65bdc137cea836996658"
+    },
+    "precommit": {
+      "path": "canonical/governance/IF_SCOPE_FINITE_WAVE_PRECOMMIT_20261007_V1.json",
+      "git_blob_sha": "bdae02fc05339fb9a8709c26a8e448c475a4006f"
+    }
+  },
+  "derivation": [
+    "THE_FROZEN_TERMINAL_PROTOCOL_DECLARED_THE_ACCEPTANCE_OBJECT_AS_A_FROZEN_REPRESENTATIVE_PORTFOLIO_EXERCISING_ALL_FIVE_IF_SCOPE_DIMENSIONS_AND_DID_NOT_DECLARE_A_LARGER_POPULATION.",
+    "THE_PORTFOLIO_WAS_PRECOMMITTED_BEFORE_RESULTS_AS_EXACTLY_160_CASES__32_PER_DECLARED_DIMENSION__WITH_RESULT_BLIND_FREEZE_CONTROLS.",
+    "INDEPENDENT_EXECUTION PASSED 160_OF_160 WITH ALL_FIVE_DIMENSIONS_COVERED AND ZERO_BRAIN_FAILURE_RESIDUAL.",
+    "THE_SHARED_BINARY_SUCCESS METRIC HAS OBJECTIVE TOP_VALUE_1.",
+    "THEREFORE BRAIN_SCORE_EQUALS_1_ON_THE_COMPLETE_DECLARED_FINITE_ACCEPTANCE_OBJECT__NO_OPUS55_SCORE_ON_THE_IDENTICAL_OBJECT_CAN_EXCEED_1.",
+    "THEREFORE IF_SCOPE_BOUNDARY_NONINFERIOR IS PROVED WITHOUT FRESH_OPUS_EXECUTION."
+  ],
+  "promotion": {
+    "state": "PROVED",
+    "proof_kind": "INDEPENDENT_FINITE_DECLARED_SCOPE_OBJECTIVE_CEILING",
+    "independent_or_objective": true,
+    "scope_complete": true,
+    "brain_value": 1,
+    "objective_ceiling_value": 1,
+    "fresh_opus_cases_consumed": 0,
+    "fresh_target_reality_units_consumed": 0
+  },
+  "scope_limit": "EXACT_FROZEN_160_CASE_IF_SCOPE_BOUNDARY_ACCEPTANCE_OBJECT_ONLY__NO_GENERALIZATION_BEYOND_THE_FIVE_DECLARED_DIMENSIONS__LIVEBENCH_AND_ZERO_CRITICAL_AUTHORITY_ATOMS_REMAIN_SEPARATE",
+  "hard_nonclaims": [
+    "NO_CLAIM_IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS_IS_CLOSED_BY_THIS_PROMOTION",
+    "NO_CLAIM_INSTRUCTION_FOLLOWING_FAMILY_IS_CLOSED",
+    "NO_CLAIM_TERMINAL_IS_TRUE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 1,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
