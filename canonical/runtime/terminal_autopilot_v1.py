@@ -124,7 +124,7 @@ def _science_repair_action(live_truth: dict[str, Any]) -> str:
     return "repair::TB_SCIENCE_CURRENT_AUTHORITY_PREFLIGHT"
 
 
-def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 16) -> dict[str, Any]:
+def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 32) -> dict[str, Any]:
     root = Path(repo_root).resolve()
     quotient_path = root / DEFAULT_QUOTIENT
     quotient = json.loads(quotient_path.read_text(encoding="utf-8"))
@@ -374,7 +374,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("manifest", nargs="?", type=Path)
     parser.add_argument("--repo-root", type=Path)
-    parser.add_argument("--max-concurrency", type=int, default=16)
+    parser.add_argument("--max-concurrency", type=int, default=32)
     args = parser.parse_args()
     if (args.manifest is None) == (args.repo_root is None):
         parser.error("provide exactly one of manifest or --repo-root")
