@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_CONTENT_ADDRESS_BINDING_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PARTIAL_PASS__EXACT_MAIN_HARDENING_PRESENT__INDEPENDENT_HELPER_CASES_PASS__GITHUB_RUNNER_UNASSIGNED__FULL_DEPLOYED_REPLAY_NOT_CREDITED",
+  "subject_blobs": {
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "6da76c61cc7cded0f09a106509c7035856a08d61"
+    },
+    "regression_tests": {
+      "path": "canonical/tests/test_astra_certificate_gated_route_binding_v1.py",
+      "git_blob_sha": "b479aef46cfe5f276f0b39ed5abfe22f81108c3c"
+    },
+    "deployed_replay_workflow": {
+      "path": ".github/workflows/terminal-now-router-replay.yml",
+      "git_blob_sha": "cb3c5476929054d0c39c797834f7661f74b1f22f"
+    }
+  },
+  "main_hardening_observed": {
+    "requires_content_address_bindings": true,
+    "recomputes_git_blob_sha1_from_repository_bytes": true,
+    "rejects_repository_escape": true,
+    "rejects_symlink_path": true,
+    "rejects_binding_set_mismatch": true,
+    "returns_selected_route_and_certificate_paths_only_after_exact_blob_match": true
+  },
+  "independent_chatgpt_isolated_container_check": {
+    "scope": "CONTENT_ADDRESS_BINDING_HELPER_SEMANTICS_RECONSTRUCTED_FROM_THE_EXACT_PATCH_LOGIC",
+    "positive_exact_blob_binding": "PASS",
+    "forged_sha_binding": "PASS_FAIL_CLOSED",
+    "path_traversal": "PASS_FAIL_CLOSED",
+    "symlink_binding": "PASS_FAIL_CLOSED",
+    "full_astra_runtime_import_replay": false
+  },
+  "github_pr_validation": {
+    "pull_request": 2770,
+    "workflow_run_id": 37564152308,
+    "workflow_job_id": 112607928239,
+    "workflow_name": "Terminal Now Router Replay",
+    "run_conclusion": "failure",
+    "runner_id": 0,
+    "runner_name": "",
+    "executed_step_count": 0,
+    "interpretation": "RUNNER_WAS_NOT_ASSIGNED__NO_TEST_OR_RUNTIME_STEP_EXECUTED__THIS_IS_NOT_CODE_FAILURE_EVIDENCE_AND_NOT_A_PASS"
+  },
+  "truth_effect": {
+    "fake_forty_hex_only_content_address_boundary_removed_on_main": true,
+    "exact_repository_blob_binding_mechanism_present_on_main": true,
+    "independent_helper_semantics_checked": true,
+    "full_deployed_github_replay_closed": false,
+    "downstream_route_execution_closed": false,
+    "per_cell_admission_semantics_closed": false,
+    "per_cell_adequacy_closed": false,
+    "selected_cover_complete": false,
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_terminal_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
