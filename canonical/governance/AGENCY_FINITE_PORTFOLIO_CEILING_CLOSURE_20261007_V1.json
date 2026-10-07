@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_FINITE_PORTFOLIO_CEILING_CLOSURE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_PENDING_INDEPENDENT_CI_REPLAY__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "COMPLEX_MULTI_TOOL_AGENCY",
+  "target_predicates": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+  ],
+  "freeze": {
+    "generator": [
+      "canonical/runtime/agency_finite_portfolio_generator_v1.py",
+      "89e73e7fc7aa276f4228e5023c1a21b692fe176a"
+    ],
+    "verifier": [
+      "canonical/runtime/agency_finite_portfolio_ceiling_v1.py",
+      "19d75fe177ff04da196024bcb44ea6087c695507"
+    ],
+    "tests": [
+      "canonical/tests/test_agency_finite_portfolio_ceiling_v1.py",
+      "ef839debcf3578b3f47d784488c42d0ab66033fe"
+    ],
+    "workflow": [
+      ".github/workflows/verify-agency-finite-portfolio-ceiling-v1.yml",
+      "4de1c3dc8f88587f93cd86f661c9e766b78ce1c1"
+    ],
+    "post_freeze_beacon_commit_sha": "80dfe07fcea8ddddfd1c2282ce0b79895841d8dd",
+    "result_blind": true,
+    "adaptive_case_selection": false
+  },
+  "portfolio": {
+    "case_count": 6,
+    "manifest_sha256": "d51df0eb1b93f4c9612b5e0a6e63cba1f71cd06a26bd39427e2f950cdf90e145",
+    "dimensions": [
+      "multi-step planning with at least three distinct tool/action types",
+      "state change after actions requiring replanning",
+      "long-horizon state retention",
+      "tool failure/recovery",
+      "subtask dependency and fan-in",
+      "minimal-oversight completion"
+    ]
+  },
+  "proof_basis": {
+    "finite_protocol_binding": [
+      "canonical/governance/AGENCY_MATCHED_FINITE_PROTOCOL_BINDING_TRUTH_REPAIR_20261007_V1.json",
+      "2f267f49f776f2aa09c2b20d5096333cf6032cc6"
+    ],
+    "interaction_independent": [
+      "canonical/verification/COMPLEX_AGENCY_INTERACTION_SUBSUMPTION_SPRITE_VERIFICATION_20261007_V1.json",
+      "4b36715df4e9aacce370eb14b54f431b3da6ec09"
+    ],
+    "stateful_independent": [
+      "canonical/verification/AGENCY_STATEFUL_GENERATOR_UNIVERSAL_TOP_LAW_INDEPENDENT_VERIFICATION_20261007_V1.json",
+      "2f1efbc385c8d37d89c43c699981f8c235d93249"
+    ],
+    "delegation_independent": [
+      "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "955ac8f4bd0db2527bfbb465fc8252df6d916156"
+    ],
+    "recovery_independent": [
+      "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "981c8ac9b66ee7fccf5b531525849e29df9be483"
+    ]
+  },
+  "candidate_result": {
+    "brain_success": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "brain_invalid_action_rate": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "brain_unrecovered_failure_rate": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "brain_duplicate_or_conflicting_work_rate": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "success_upper_bound": 1,
+    "negative_rate_lower_bound": 0,
+    "target_execution_required_after_replay_pass": false
+  },
+  "independent_math_check": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "set_cover_complete": true,
+    "all_ceiling_dominance_implications": true
+  },
+  "promotion_rule": "PROMOTE_THE_TWO_AGENCY_PREDICATES_ONLY_AFTER_EXACT_CONTENT_ADDRESSED_CI_REPLAY_PASS",
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT_BEFORE_CI_PASS",
+    "NO_CREDIT_OUTSIDE_THIS_FINITE_DECLARED_AGENCY_SCOPE",
+    "NO_TARGET_CALL",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
