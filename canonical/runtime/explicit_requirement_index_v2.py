@@ -54,9 +54,11 @@ def build_index(source_text:str,*,source_id:str)->dict[str,Any]:
             if isinstance(parsed.get("condition"),Mapping):
                 c=parsed["condition"]
                 condition={"relation":c["relation"],"text":c["text"],"span":_shift(c["span"],start)}
-            payload={"kind":"MODAL_OBLIGATION","source_id":source_id,"source_sha256":source_sha,"segment_span":[start,end],"semantic_graph":graph,"condition":condition}
+            legacy_payload={"source_id":source_id,"source_sha256":source_sha,"segment_span":[start,end],"semantic_graph":graph,"condition":condition}
+            payload={"kind":"MODAL_OBLIGATION",**legacy_payload}
             modal.append({
               "requirement_id":"REQ:"+sha256(_canon(payload).encode("utf-8")).hexdigest(),
+              "obligation_id":"OBL:"+sha256(_canon(legacy_payload).encode("utf-8")).hexdigest(),
               "kind":"MODAL_OBLIGATION","source_id":source_id,"source_sha256":source_sha,
               "segment_index":index,"segment_span":[start,end],"segment_sha256":sha256(segment.encode("utf-8")).hexdigest(),
               "semantic_graph":graph,"condition":condition,
