@@ -1,0 +1,13 @@
+{
+ "schema":"PROJECT_BRAIN_K6_ADAPTIVE_V2_CURRENT_MAIN_SPRITE_VERIFICATION",
+ "date":"2026-10-06",
+ "status":"INDEPENDENT_SPRITE_CURRENT_MAIN_REPLAY_PASS__STATIC_3_ADAPTIVE_2__ZERO_CREDIT",
+ "exact_blobs":{
+  "adaptive_v2":"9e517c879c561d57d74393dc1243b0f3fe4c235f",
+  "current_static_compiler":"6746edda3fda74d95f15af6e910021771d795c4e",
+  "current_policy_cover":"31938f7918888ff9023bfd88ba1514380c58dd1f"
+ },
+ "result":{"current_static_cost":3,"adaptive_worst_case_cost":2,"strict_improvement":true},
+ "hard_nonclaims":["NO_SEMANTIC_BINDING_CLOSURE","NO_TERMINAL_CREDIT"],
+ "terminal_credit_delta":0
+}
