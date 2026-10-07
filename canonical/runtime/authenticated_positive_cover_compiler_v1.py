@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from typing import Any, Callable, Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
 from canonical.runtime.proof_carrying_semantic_refinement_v6 import (
     resolve_from_source_proof,
@@ -41,11 +41,7 @@ def _fail(reason: str, *, details: Any = None) -> dict[str, Any]:
     return out
 
 
-def compile_positive_cover(
-    manifest: Mapping[str, Any],
-    *,
-    resolver: Callable[..., Mapping[str, Any]] = resolve_from_source_proof,
-) -> dict[str, Any]:
+def compile_positive_cover(manifest: Mapping[str, Any]) -> dict[str, Any]:
     """Compile a sound positive-policy cover over an already-bound finite manifest.
 
     This compiler deliberately does *not* prove that the manifest is the whole target
@@ -133,7 +129,7 @@ def compile_positive_cover(
         }
 
         try:
-            resolved = resolver(required["source_text"], **kwargs)
+            resolved = resolve_from_source_proof(required["source_text"], **kwargs)
         except Exception as exc:
             return _fail(
                 "RESOLVER_EXCEPTION",
