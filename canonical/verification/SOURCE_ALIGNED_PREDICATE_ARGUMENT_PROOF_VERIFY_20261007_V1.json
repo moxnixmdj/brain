@@ -1,0 +1,25 @@
+{
+  "schema":"PROJECT_BRAIN_SOURCE_ALIGNED_PREDICATE_ARGUMENT_PROOF_VERIFY_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_SPRITE_PASS__ZERO_CREDIT",
+  "carrier":"brain-root3-current-byte-replay-20261007-v1",
+  "blobs":{
+    "parser":"8303231779d6fe8c7fb740e3bbaa492914d4eba9",
+    "proof":"1b00288ecd47868845808ff1aacc5ddf88147b20"
+  },
+  "results":{
+    "parser_passed":12,
+    "parser_total":12,
+    "proof_passed":8,
+    "proof_total":8
+  },
+  "negative_checks":[
+    "WRONG_OBJECT_REJECTED",
+    "WRONG_POLARITY_REJECTED",
+    "WRONG_CONDITION_RELATION_REJECTED",
+    "PRONOUN_DEPENDENT_UNRESOLVED",
+    "COORDINATION_UNRESOLVED"
+  ],
+  "terminal_credit_delta":0,
+  "hard_nonclaims":["NO_DOMAIN_TRUTH","NO_REFERENCE_RESOLUTION","NO_POLICY_ADEQUACY","NO_TERMINAL_CREDIT"]
+}
