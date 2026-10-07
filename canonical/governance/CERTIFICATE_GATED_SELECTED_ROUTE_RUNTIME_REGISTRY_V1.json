@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1",
+  "date": "2026-10-07",
+  "status": "DEPLOYED_FAIL_CLOSED_REGISTRY__CANARY_ONLY__NO_SELECTED_COVER_CREDIT",
+  "router": {
+    "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+    "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
+  },
+  "routes": [
+    {
+      "context_digest": "c1a047876bb0bd9e8d51044832957721099bbfaa9b59c1234dbefb890351a256",
+      "cell_id": "ROUTER_DEPLOYMENT_CANARY_ONLY",
+      "route_id": "router-deployment-canary",
+      "route_path": "canonical/runtime/router_deployment_canary_v1.py",
+      "route_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2",
+      "callable": "invoke",
+      "adequacy_certificate_path": "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADEQUACY_CERTIFICATE_20261007_V1.json",
+      "adequacy_certificate_blob_sha": "e521f7b75123bca5cc9704340283a727bb45e957",
+      "admission_certificate_path": "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADMISSION_CERTIFICATE_20261007_V1.json",
+      "admission_certificate_blob_sha": "1b2f97e7d46877b8782ea211fd15f679e6bfb5b0",
+      "admitted": true,
+      "creditable": false
+    }
+  ],
+  "default": "FAIL_CLOSED",
+  "selected_cover_complete": false,
+  "abc_credit": false,
+  "d_credit": false,
+  "terminal_credit_delta": 0
+}
