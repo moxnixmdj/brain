@@ -1,0 +1,28 @@
+{
+  "schema":"PROJECT_BRAIN_ABC_FINAL_ROUTE_NORMAL_FORM_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_WOLFRAM_LOGIC_PASS__FINAL_ROUTE_DOMINANCE_DOES_NOT_IMPLY_PRIMITIVE_DOMINANCE__ZERO_CREDIT",
+  "subject":{
+    "governance":{"path":"canonical/governance/ABC_FINAL_ROUTE_NORMAL_FORM_20261007_V1.json","git_blob_sha":"8875bb66625579dd2e69f583707c44c16cd7ce5a"}
+  },
+  "verified":{
+    "existence_of_countermodel":true,
+    "universal_implication_final_dominance_implies_primitive_dominance":false,
+    "explicit_witness":{
+      "brain_final_utility":1,
+      "opus_final_utility":1,
+      "brain_final_risk":1,
+      "opus_final_risk":1,
+      "brain_primitive_utility":0,
+      "opus_primitive_utility":1
+    }
+  },
+  "conclusion":"PRIMITIVE_DOMINANCE_PLUS_LOCAL_C_IS_A_SUFFICIENT_DERIVATION_ROUTE_BUT_NOT_A_LOGICALLY_NECESSARY_TERMINAL_PREMISE_WHEN_COMPLETE_DIRECT_FINAL_ROUTE_L1_DOMINANCE_IS_SOUNDLY_CERTIFIED.",
+  "hard_nonclaims":[
+    "NO_CLAIM_LOCAL_C_IS_GLOBALLY_UNNECESSARY.",
+    "NO_CLAIM_ANY_CURRENT_CELL_HAS_A_COMPLETE_DIRECT_FINAL_ROUTE_CERTIFICATE.",
+    "NO_ABC_OR_D_CLOSURE.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
