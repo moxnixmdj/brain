@@ -1,4 +1,3 @@
-# forced replay trigger 2026-10-07T02:40Z
 name: Terminal Now Router Replay
 
 on:
@@ -6,7 +5,17 @@ on:
     branches: [main]
     paths:
       - 'canonical/runtime/certificate_gated_selected_route_router_v1.py'
+      - 'canonical/runtime/astra_runtime.py'
       - 'canonical/tests/test_certificate_gated_selected_route_router_v1.py'
+      - 'canonical/tests/test_astra_certificate_gated_route_binding_v1.py'
+      - 'canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_RUNTIME_20261007_V1.json'
+      - '.github/workflows/terminal-now-router-replay.yml'
+  pull_request:
+    paths:
+      - 'canonical/runtime/certificate_gated_selected_route_router_v1.py'
+      - 'canonical/runtime/astra_runtime.py'
+      - 'canonical/tests/test_certificate_gated_selected_route_router_v1.py'
+      - 'canonical/tests/test_astra_certificate_gated_route_binding_v1.py'
       - 'canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_RUNTIME_20261007_V1.json'
       - '.github/workflows/terminal-now-router-replay.yml'
   workflow_dispatch:
@@ -23,74 +32,93 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     steps:
-      - name: Checkout exact main revision
+      - name: Checkout exact revision
         uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
           fetch-depth: 2
 
-      - name: Compile exact runtime
+      - name: Compile exact production seam
         run: |
           set -euo pipefail
-          python3 -m py_compile canonical/runtime/certificate_gated_selected_route_router_v1.py
+          python3 -m py_compile \
+            canonical/runtime/certificate_gated_selected_route_router_v1.py \
+            canonical/runtime/astra_runtime.py \
+            canonical/runtime/root3_production_astra_launcher_v1.py
 
-      - name: Exercise positive selection and fail-closed boundary
-        id: replay
+      - name: Run ASTRA binding regression tests
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v canonical.tests.test_astra_certificate_gated_route_binding_v1
+
+      - name: Exercise Root3 to ASTRA certificate-gated selection seam
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
           import json
-          from canonical.runtime.certificate_gated_selected_route_router_v1 import (
-              AdmissionReceipt,
-              RouterFailClosed,
-              select_certified_route,
-          )
+          from canonical.runtime.root3_production_astra_launcher_v1 import load_astra_after_root3_install
 
-          r1 = AdmissionReceipt(
-              context_digest="ctx-terminal-now-v1",
-              cell_id="cell-a",
-              route_id="route-a",
-              route_blob_sha="3"*40,
-              adequacy_certificate_blob_sha="2"*40,
-              admission_certificate_blob_sha="1"*40,
-              admitted=True,
-          )
-          r2 = AdmissionReceipt(
-              context_digest="ctx-terminal-now-v1",
-              cell_id="cell-b",
-              route_id="route-b",
-              route_blob_sha="6"*40,
-              adequacy_certificate_blob_sha="5"*40,
-              admission_certificate_blob_sha="4"*40,
-              admitted=True,
-          )
-          chosen = select_certified_route(
-              actual_context_digest="ctx-terminal-now-v1",
-              receipts=[r2, r1],
-          )
-          assert chosen.route_id == "route-a"
-          assert chosen.admitted is True
+          astra = load_astra_after_root3_install()
+
+          def receipt(*, admitted=True, context="ctx-terminal-now-v1", route="route-a", cell="cell-a", a="1", q="2", r="3"):
+              return {
+                  "context_digest": context,
+                  "cell_id": cell,
+                  "route_id": route,
+                  "route_blob_sha": r * 40,
+                  "adequacy_certificate_blob_sha": q * 40,
+                  "admission_certificate_blob_sha": a * 40,
+                  "admitted": admitted,
+              }
+
+          step = {
+              "id": "certificate-gated-route-selection",
+              "adapter": "certificate_gated_route_select",
+              "actual_context_digest": "ctx-terminal-now-v1",
+              "admission_receipts": [
+                  receipt(admitted=False, a="0"),
+                  receipt(route="route-b", cell="cell-b", a="4", q="5", r="6"),
+                  receipt(route="route-a", cell="cell-a", a="1", q="2", r="3"),
+              ],
+          }
+          chosen = astra.execute_step(step, mission={})
+          assert chosen["schema"] == "PROJECT_BRAIN_CERTIFICATE_GATED_DEPLOYED_ROUTE_SELECTION_V1"
+          assert chosen["route_id"] == "route-a"
+          assert chosen["admitted"] is True
+          assert chosen["selection_only"] is True
+          assert chosen["downstream_route_execution_performed"] is False
+          assert chosen["execution_authority"] is False
+          assert chosen["promotion_authority"] is False
+          assert chosen["terminal_results_observed"] == 0
+          assert chosen["terminal_credit_delta"] == 0
 
           denied = False
           try:
-              select_certified_route(
-                  actual_context_digest="ctx-uncovered",
-                  receipts=[r1, r2],
-              )
-          except RouterFailClosed as exc:
-              assert str(exc) == "NO_CERTIFIED_ROUTE_FOR_ACTUAL_CONTEXT"
+              astra.execute_step({
+                  "id": "certificate-gated-route-selection-uncovered",
+                  "adapter": "certificate_gated_route_select",
+                  "actual_context_digest": "ctx-uncovered",
+                  "admission_receipts": [receipt()],
+              }, mission={})
+          except astra.Blocker as exc:
+              assert "NO_CERTIFIED_ROUTE_FOR_ACTUAL_CONTEXT" in str(exc)
               denied = True
           assert denied
 
           print(json.dumps({
-              "positive_selection_pass": True,
-              "deterministic_selected_route": chosen.route_id,
-              "uncovered_context_fail_closed_pass": True,
+              "root3_production_bootstrap_loaded": True,
+              "astra_execute_step_binding_observed": True,
+              "positive_context_bound_selection": True,
+              "deterministic_selected_route": chosen["route_id"],
+              "uncovered_context_fail_closed": True,
+              "downstream_route_execution_performed": False,
+              "terminal_credit_delta": 0,
           }, sort_keys=True))
           PY
 
-      - name: Persist exact replay receipt
+      - name: Persist exact main replay receipt
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         shell: bash
         env:
           RUN_ID: ${{ github.run_id }}
@@ -99,39 +127,47 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p canonical/verification
-          RUNTIME_BLOB="$(git rev-parse HEAD:canonical/runtime/certificate_gated_selected_route_router_v1.py)"
-          TEST_BLOB="$(git rev-parse HEAD:canonical/tests/test_certificate_gated_selected_route_router_v1.py)"
+          ROUTER_BLOB="$(git rev-parse HEAD:canonical/runtime/certificate_gated_selected_route_router_v1.py)"
+          ASTRA_BLOB="$(git rev-parse HEAD:canonical/runtime/astra_runtime.py)"
+          ROUTER_TEST_BLOB="$(git rev-parse HEAD:canonical/tests/test_certificate_gated_selected_route_router_v1.py)"
+          ASTRA_TEST_BLOB="$(git rev-parse HEAD:canonical/tests/test_astra_certificate_gated_route_binding_v1.py)"
           GOVERNANCE_BLOB="$(git rev-parse HEAD:canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_RUNTIME_20261007_V1.json)"
-          OUT="canonical/verification/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_GITHUB_REPLAY_${RUN_ID}_V1.json"
-          python3 - "$OUT" "$RUNTIME_BLOB" "$TEST_BLOB" "$GOVERNANCE_BLOB" <<'PY'
+          OUT="canonical/verification/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_GITHUB_REPLAY_${RUN_ID}_V2.json"
+          python3 - "$OUT" "$ROUTER_BLOB" "$ASTRA_BLOB" "$ROUTER_TEST_BLOB" "$ASTRA_TEST_BLOB" "$GOVERNANCE_BLOB" <<'PY'
           import datetime as dt
           import json
           import os
           import sys
 
-          out, runtime_blob, test_blob, governance_blob = sys.argv[1:]
+          out, router_blob, astra_blob, router_test_blob, astra_test_blob, governance_blob = sys.argv[1:]
           doc = {
-              "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_GITHUB_REPLAY_V1",
+              "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_GITHUB_REPLAY_V2",
               "date": dt.datetime.now(dt.timezone.utc).date().isoformat(),
-              "status": "PASS__EXACT_MAIN_GITHUB_RUNNER_ROUTER_CORE_REPLAY__DEPLOYED_EXECUTION_SEAM_NOT_OBSERVED__ZERO_TERMINAL_CREDIT",
+              "status": "PASS__EXACT_MAIN_ROOT3_ASTRA_CERTIFICATE_GATED_SELECTION_SEAM_OBSERVED__ZERO_TERMINAL_CREDIT",
               "github": {
                   "run_id": os.environ["RUN_ID"],
                   "run_attempt": os.environ["RUN_ATTEMPT"],
                   "git_sha": os.environ["GIT_SHA"],
               },
               "exact_blobs": {
-                  "canonical/runtime/certificate_gated_selected_route_router_v1.py": runtime_blob,
-                  "canonical/tests/test_certificate_gated_selected_route_router_v1.py": test_blob,
+                  "canonical/runtime/certificate_gated_selected_route_router_v1.py": router_blob,
+                  "canonical/runtime/astra_runtime.py": astra_blob,
+                  "canonical/tests/test_certificate_gated_selected_route_router_v1.py": router_test_blob,
+                  "canonical/tests/test_astra_certificate_gated_route_binding_v1.py": astra_test_blob,
                   "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_RUNTIME_20261007_V1.json": governance_blob,
               },
               "replay": {
                   "runtime_compile": True,
+                  "root3_production_bootstrap_loaded": True,
+                  "astra_execute_step_binding_observed": True,
                   "positive_context_bound_selection": True,
                   "deterministic_content_addressed_tie_break": True,
                   "uncovered_context_fail_closed": True,
+                  "downstream_route_execution_performed": False,
               },
               "truth_effect": {
-                  "deployed_runtime_execution_observed": False,
+                  "deployed_router_selection_binding_observed": True,
+                  "downstream_route_execution_observed": False,
                   "per_cell_admission_semantics_closed": False,
                   "per_cell_adequacy_closed": False,
                   "selected_cover_complete": False,
@@ -151,5 +187,6 @@ jobs:
           git config user.name "Project Brain Terminal Replay"
           git config user.email "project-brain-terminal-replay@users.noreply.github.com"
           git add "$OUT"
-          git commit -m "Record exact terminal-now router replay receipt"
+          git commit -m "Record exact Root3-ASTRA router replay receipt"
+          git pull --rebase origin main
           git push origin HEAD:main
