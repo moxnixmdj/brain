@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_POLICY_ADEQUACY_SELF_CERTIFICATION_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_RUNTIME_SOUNDNESS_REPAIR__SOURCE_ENTAILMENT_SEPARATED_FROM_POLICY_ADEQUACY__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "defect": {
+    "runtime": "canonical/runtime/proof_carrying_semantic_refinement_v3.py",
+    "statement": "CALLER_SUPPLIED_POLICY_CONDITIONS_WERE_PASSED_DIRECTLY_TO_MONOTONE_POLICY_RESOLUTION_AND_THE_RESULT_COMMON_POLICY_CERTIFIED_WAS_EXPOSED_WITHOUT_AUTHENTICATING_THAT_THE_CONDITION_WAS_A_SOUND_ADEQUACY_CONDITION_FOR_THE_POLICY.",
+    "minimal_counterexample": {
+      "source_fact": "ANY_PROVED_SOURCE_OR_TYPED_FACT",
+      "caller_policy_condition": {
+        "op": "TRUE"
+      },
+      "prior_result": "COMMON_POLICY_CERTIFIED",
+      "why_unsound": "TRUE_IS_ENTAILED_BY_EVERY_SEMANTIC_STATE_BUT_DOES_NOT_PROVE_THE_NAMED_POLICY_IS_ADEQUATE."
+    }
+  },
+  "repair": {
+    "logical_stage": "SOURCE_PROOF_MAY_ONLY_ESTABLISH_THAT_A_CALLER_DECLARED_POLICY_CONDITION_IS_ENTAILED.",
+    "adequacy_stage": "COMMON_POLICY_CERTIFIED_REQUIRES_A_SEPARATE_CONTENT_ADDRESSED_BRAIN_OWNED_POLICY_ADEQUACY_CERTIFICATE_BOUND_TO_THE_EXACT_POLICY_CONDITION_PLUS_AN_INDEPENDENT_VERIFICATION_RECEIPT.",
+    "unauthenticated_status": "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED",
+    "exact_runtime_path": "canonical/runtime/proof_carrying_semantic_refinement_v3.py",
+    "regression_test_path": "canonical/tests/test_proof_carrying_semantic_refinement_v3.py"
+  },
+  "required_adequacy_certificate_schema": {
+    "schema": "PROJECT_BRAIN_POLICY_ADEQUACY_CERTIFICATE_V1",
+    "required_fields": [
+      "policy_id",
+      "policy_condition_sha256",
+      "adequacy_proved=true",
+      "brain_owned=true",
+      "load_bearing_constraints_preserved=true"
+    ]
+  },
+  "required_independent_verification_schema": {
+    "schema": "PROJECT_BRAIN_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_V1",
+    "required_fields": [
+      "policy_id",
+      "subject_git_blob_sha",
+      "pass=true"
+    ]
+  },
+  "effect": [
+    "BLOCK_FALSE_COMMON_POLICY_PROMOTION_FROM_CALLER_CHOSEN_TRUE_OR_OTHER_UNAUTHENTICATED_FORMULAS.",
+    "PRESERVE_MONOTONE_SOURCE_REFINEMENT_AS_A_USEFUL_ENTAILMENT_ENGINE.",
+    "MAKE_POLICY_ADEQUACY_AN_EXPLICIT_CONTENT_ADDRESSED_PROOF_BOUNDARY."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_OPEN_ABC_REFINEMENT_IS_CLOSED_BY_THIS_REPAIR.",
+    "NO_CLAIM_ANY_CURRENT_POLICY_ADEQUACY_CERTIFICATE_EXISTS_UNDER_THE_NEW_NORMALIZED_SCHEMA.",
+    "NO_CLAIM_U_IS_EMPTY.",
+    "NO_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
