@@ -23,7 +23,8 @@
     "current_minimum_information_cut": {
       "gdpval_aa_v21": "PUBLIC_COMPARATOR_CONTRACT_BOUND__EXACT_PROMPT_OR_EXTENSIONALLY_EQUIVALENT_PREFERENCE_RELATION_NOT_BOUND__STRONGER_ROBUST_DOMINANCE_REMAINS_A_TARGET_FREE_ESCAPE_ROUTE",
       "rule": "DO_NOT_REPEAT_PUBLIC_METADATA_SEARCH__ACQUIRE_ONLY_INFORMATION_THAT_CAN_CHANGE_SURVIVING_POLICY_ADEQUACY_OR_PROVE_A_STRONGER_SCOPE_COMPLETE_COVER"
-    }
+    },
+    "current_compilation_input": "FLATTENED_SEVENTEEN_SOUND_D_B_REGIONS__COMPILE_EXACT_SOUND_ADMISSION_PREDICATE_SET__THEN_DECIDE_RESIDUAL_COMPLEMENT"
   },
   "execution_policy": [
     "SCHEDULE_ONLY_WORK_THAT_CAN_PRODUCE_ONE_ACCEPTED_ROOT_CLOSURE_RECEIPT_OR_THE_MINIMUM_FACT_NEEDED_TO_DECIDE_X.",
@@ -59,6 +60,10 @@
     "gdpval_aa_v21_public_comparator_cut": {
       "path": "canonical/evidence/GDPVAL_AA_V21_PUBLIC_COMPARATOR_CUT_20261007_V1.json",
       "git_blob_sha": "9bc454e57d544624a766bc808b56ef8fe673206e"
+    },
+    "exact_sound_db_region_set_root_input": {
+      "path": "canonical/governance/EXACT_SOUND_DB_REGION_SET_ROOT_INPUT_20261007_V1.json",
+      "git_blob_sha": "173fab34d18bafb0f2a134e8fe233e448b17e5b6"
     }
   },
   "current_truth": {
