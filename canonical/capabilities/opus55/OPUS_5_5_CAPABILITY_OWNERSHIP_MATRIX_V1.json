@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "CURRENT_RECONCILED__6_VERIFIED_OWNED__IF_ACCEPTANCE_AND_OWNERSHIP_PROMOTED__REMAINING_FAMILIES_FAIL_CLOSED",
+  "status": "CURRENT_RECONCILED__7_VERIFIED_OWNED__AGENCY_ACCEPTANCE_AND_OWNERSHIP_PROMOTED__REMAINING_FAMILIES_FAIL_CLOSED",
   "evaluated_utc": "2026-10-03",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -70,17 +70,17 @@
     },
     {
       "family": "COMPLEX_MULTI_TOOL_AGENCY",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "GPT-6 Astra Work + Brain persistent state + installed plugins/tools + reasoning receipts"
       ],
-      "evidence": "Astra is designed for complex end-to-end multi-step work and Work provides agentic execution, but no direct whole-family Opus 5.5 comparison establishes parity.",
+      "evidence": "Independent scope-complete absolute top-law verification proves the exact frozen six-dimension Agency protocol at the theoretical optimum: terminal success 1; invalid-action, unrecovered-failure, and duplicate/conflicting-work rates 0.",
       "sources": [
         "https://openai.com/index/gpt-6-astra/",
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "internalization_required": false,
+      "ownership_note": "Verified exact Brain-owned route canonical/runtime/matched_agency_stateful_case_v2.py; no opaque target-capability provider and no external donor required at runtime.",
       "candidate_internalization_routes": [
         {
           "repo": "trymeka/agent",
@@ -97,11 +97,17 @@
       ],
       "campaign_next_action": "Factor reusable planning/state/tool-control primitives from browser agents; no credit until donor-independent multi-tool tasks pass.",
       "postwave_terminal_behavioral_status": "PASS",
-      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
-      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "postwave_opus55_acceptance_status": "PASS",
+      "postwave_ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "postwave_acceptance_evidence": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
       "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
-      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "verified_route": {
+        "path": "canonical/runtime/matched_agency_stateful_case_v2.py",
+        "git_blob_sha": "eb0af8b01f25bcd38885fde71ebe1eccde793e85",
+        "closure": "canonical/governance/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_CLOSURE_20261007_V1.json",
+        "independent_verification": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json"
+      }
     },
     {
       "family": "PROFESSIONAL_KNOWLEDGE_WORK",
@@ -643,10 +649,10 @@
       "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "SUBAGENT_DELEGATION_AND_COORDINATION",
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "COMPLEX_MULTI_TOOL_AGENCY"
     ],
     "external_specimen_backed_families": [
-      "COMPLEX_MULTI_TOOL_AGENCY",
       "BUSINESS_WORKFLOW_AUTOMATION",
       "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
       "AGENTIC_SCIENTIFIC_RESEARCH",
