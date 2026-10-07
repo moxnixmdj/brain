@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_V9_TWO_SURFACE_NECESSITY_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_BOOLEAN_COUNTERMODEL_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/V9_TWO_SURFACE_NECESSITY_LOWER_BOUND_20261007_V1.json",
+    "commit_sha": "118a9a9aeb18b484dd4cded247caa265199ae3e2"
+  },
+  "verification_provider": "WOLFRAM_LANGUAGE",
+  "verified": {
+    "terminal_definition_equivalence_under_T_equals_ABC_and_D": true,
+    "witness_ABC_true_D_false_exists": [
+      true,
+      false
+    ],
+    "witness_D_true_ABC_false_exists": [
+      false,
+      true
+    ],
+    "ABC_and_D_jointly_imply_each_component": true
+  },
+  "interpretation": [
+    "ABC_AND_D_ARE_SEMANTICALLY_INDEPENDENT_REQUIREMENT_CLASSES",
+    "NEITHER_REQUIREMENT_CLASS_CAN_BE_REMOVED_FROM_THE_TERMINAL_OBJECTIVE_BY_PURE_LOGIC",
+    "A_SINGLE_CERTIFICATE_OBJECT_MAY_PACKAGE_BOTH_BUT_MUST_ENTAIL_BOTH"
+  ],
+  "not_verified": [
+    "NO_CLAIM_CURRENT_ABC_IS_CLOSED",
+    "NO_CLAIM_CURRENT_D_IS_CLOSED",
+    "NO_CLAIM_CURRENT_29_ROW_TO_ABC_IMPLEMENTATION_TESTS_HAVE_INDEPENDENTLY_REPLAYED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
