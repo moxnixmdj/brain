@@ -651,8 +651,8 @@
     },
     "frozen_19_acceptance_proof_shape_quotient": {
       "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
-      "git_blob_sha": "e31382ec9bc54127d3579a5277091cfdc54cca66",
-      "note": "17_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__SYNTHESIS_MATCHED_QUALITY_METRIC_IDENTITY_DEMOTED_BY_INDEPENDENT_COUNTERMODEL"
+      "git_blob_sha": "4d2b042153dbe367ab29f5f054f4b7353dfd663f",
+      "note": "15_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__AGENCY_TWO_ATOMS_CLOSED_BY_INDEPENDENTLY_VERIFIED_ABSOLUTE_TOP_LAW"
     },
     "load_bearing_acceptance_truth_basis_reconciliation": {
       "path": "canonical/governance/FROZEN_19_LOAD_BEARING_ACCEPTANCE_TRUTH_BASIS_RECONCILIATION_20261007_V1.json",
@@ -679,8 +679,8 @@
     },
     "frozen_acceptance_regime_classification": {
       "path": "canonical/governance/FROZEN_18_ACCEPTANCE_REGIME_EXHAUSTIVE_CLASSIFICATION_20261007_V1.json",
-      "git_blob_sha": "35be46d0d6013486480693e818b8e8a473a6aa04",
-      "note": "CURRENT_17_OBLIGATIONS_CLASSIFIED_AS_15_OBJECTIVE_PLUS_2_QUALITATIVE__RAW_SYNTHESIS_SEMANTICS_REMAIN_SHARED_ABC_FRONTIER"
+      "git_blob_sha": "dc9f0c5147349fa806d2a0296a8139c637d85b83",
+      "note": "CURRENT_15_OPEN_INDEPENDENT_OBLIGATIONS_AFTER_AGENCY_PROMOTION"
     }
   },
   "live_truth": {
@@ -990,8 +990,8 @@
     "frozen_terminal_family_count": 19,
     "frozen_terminal_family_pass_count": 6,
     "frozen_terminal_family_open_count": 13,
-    "frozen_atomic_predicates_proved": 16,
-    "frozen_atomic_predicates_unresolved": 22,
+    "frozen_atomic_predicates_proved": 18,
+    "frozen_atomic_predicates_unresolved": 20,
     "frozen_atomic_predicates_total": 38,
     "universal_trace_not_x_required_for_terminal": false,
     "universal_trace_not_x_optional_stronger_route": false,
@@ -1017,7 +1017,7 @@
     "instruction_scope_E2_package_closed": true,
     "frozen_atomic_predicates_unresolved_raw": 22,
     "verified_nonindependent_acceptance_truth_variables": 5,
-    "independent_load_bearing_acceptance_truths_open": 17,
+    "independent_load_bearing_acceptance_truths_open": 15,
     "raw_open_registry_rows_are_independent_primary_research_jobs": false,
     "load_bearing_basis_reconciliation_active": false,
     "deleted_independent_scheduler_variables": [
@@ -1027,12 +1027,12 @@
       "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
       "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_METRIC_IDENTITY"
     ],
-    "independent_open_acceptance_obligations": 17,
+    "independent_open_acceptance_obligations": 15,
     "raw_unresolved_registry_labels_are_independent_primary_jobs": false,
     "composition_terminal_success_is_independent_primary_job": false,
     "composition_critical_invariant_is_independent_primary_job": false,
-    "frozen_acceptance_family_pass_count": 6,
-    "frozen_acceptance_family_open_count": 13,
+    "frozen_acceptance_family_pass_count": 7,
+    "frozen_acceptance_family_open_count": 12,
     "load_bearing_basis_reconciliation_predecessor_preserved": true,
     "composition_terminal_success_preserved_as_derived_abc_obligation": true,
     "terminal_proof_route_disjunction_bound": true,
@@ -1040,7 +1040,11 @@
     "universal_trace_not_x_coequal_terminal_proof_route": true,
     "synthesis_matched_quality_metric_independent_primary_job": false,
     "synthesis_terminally_useful_quality_dimensions_preserved": true,
-    "exact_sound_db_admission_convergence_gate_bound": true
+    "exact_sound_db_admission_convergence_gate_bound": true,
+    "agency_matched_success_noninferior_proved": true,
+    "agency_scope_safety_no_material_regression_proved": true,
+    "agency_frozen_acceptance_protocol_closed": true,
+    "agency_opus_case_execution_required": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
