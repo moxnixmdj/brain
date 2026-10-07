@@ -1,0 +1,215 @@
+from __future__ import annotations
+
+import argparse
+import itertools
+import json
+import math
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+
+@dataclass(frozen=True)
+class World:
+    world_id: str
+    adequate_actions: frozenset[str]
+
+
+def _worlds(cell: dict[str, Any]) -> list[World]:
+    out: list[World] = []
+    seen: set[str] = set()
+    for raw in cell.get("worlds", []):
+        wid = raw.get("id")
+        actions = raw.get("adequate_actions")
+        if not isinstance(wid, str) or not wid or wid in seen:
+            raise ValueError("WORLD_ID_INVALID_OR_DUPLICATE")
+        if not isinstance(actions, list) or not actions or not all(isinstance(a, str) and a for a in actions):
+            raise ValueError(f"ADEQUATE_ACTIONS_INVALID:{wid}")
+        seen.add(wid)
+        out.append(World(wid, frozenset(actions)))
+    if not out:
+        raise ValueError("NO_WORLDS")
+    return out
+
+
+def common_actions(worlds: list[World]) -> set[str]:
+    common = set(worlds[0].adequate_actions)
+    for world in worlds[1:]:
+        common.intersection_update(world.adequate_actions)
+    return common
+
+
+def _action_cover(worlds: list[World]) -> dict[str, frozenset[str]]:
+    actions = sorted({a for w in worlds for a in w.adequate_actions})
+    return {
+        action: frozenset(w.world_id for w in worlds if action in w.adequate_actions)
+        for action in actions
+    }
+
+
+def minimum_policy_cover(worlds: list[World]) -> tuple[int, list[str]]:
+    universe = frozenset(w.world_id for w in worlds)
+    cover = _action_cover(worlds)
+    actions = list(cover)
+    for size in range(1, len(actions) + 1):
+        for chosen in itertools.combinations(actions, size):
+            reached: set[str] = set()
+            for action in chosen:
+                reached.update(cover[action])
+            if reached == set(universe):
+                return size, list(chosen)
+    raise ValueError("NO_POLICY_COVER")
+
+
+def _bucket_sound(worlds_by_id: dict[str, World], mapping: dict[str, str]) -> tuple[bool, dict[str, list[str]]]:
+    if set(mapping) != set(worlds_by_id):
+        return False, {}
+    buckets: dict[str, list[World]] = {}
+    for wid, value in mapping.items():
+        if not isinstance(value, str) or not value:
+            return False, {}
+        buckets.setdefault(value, []).append(worlds_by_id[wid])
+    witnesses: dict[str, list[str]] = {}
+    for value, members in buckets.items():
+        common = common_actions(members)
+        if not common:
+            return False, {}
+        witnesses[value] = sorted(common)
+    return True, witnesses
+
+
+def evaluate_cell(cell: dict[str, Any]) -> dict[str, Any]:
+    try:
+        worlds = _worlds(cell)
+    except ValueError as exc:
+        return {"pass": False, "classification": "INVALID_CELL", "reason": str(exc)}
+
+    worlds_by_id = {w.world_id: w for w in worlds}
+    common = sorted(common_actions(worlds))
+    minimum_policy_count, minimum_cover = minimum_policy_cover(worlds)
+    minimum_bits = 0 if minimum_policy_count <= 1 else math.ceil(math.log2(minimum_policy_count))
+
+    if common:
+        return {
+            "pass": True,
+            "classification": "COMMON_POLICY",
+            "common_adequate_actions": common,
+            "minimum_policy_count": 1,
+            "minimum_persistent_bits": 0,
+            "terminal_credit": False,
+        }
+
+    jit = cell.get("jit_discriminator")
+    if isinstance(jit, dict) and jit.get("available_before_commitment") is True:
+        mapping = jit.get("world_to_value")
+        if isinstance(mapping, dict):
+            sound, witnesses = _bucket_sound(worlds_by_id, mapping)
+            if sound:
+                return {
+                    "pass": True,
+                    "classification": "JIT_DISCRIMINATOR",
+                    "bucket_adequate_actions": witnesses,
+                    "minimum_policy_count": minimum_policy_count,
+                    "one_minimum_policy_cover": minimum_cover,
+                    "minimum_persistent_bits": minimum_bits,
+                    "terminal_credit": False,
+                }
+
+    persistent = cell.get("persistent_separator")
+    if isinstance(persistent, dict):
+        mapping = persistent.get("world_to_symbol")
+        proof = persistent.get("necessity_proof")
+        verifier = persistent.get("independent_verifier_receipt")
+        bits = persistent.get("bits")
+        binding_ok = (
+            isinstance(proof, dict)
+            and isinstance(proof.get("path"), str)
+            and isinstance(proof.get("git_blob_sha"), str)
+            and len(proof["git_blob_sha"]) == 40
+            and isinstance(verifier, dict)
+            and isinstance(verifier.get("path"), str)
+            and isinstance(verifier.get("git_blob_sha"), str)
+            and len(verifier["git_blob_sha"]) == 40
+        )
+        if isinstance(mapping, dict) and isinstance(bits, int) and bits >= minimum_bits and binding_ok:
+            sound, witnesses = _bucket_sound(worlds_by_id, mapping)
+            if sound:
+                return {
+                    "pass": True,
+                    "classification": "PERSISTENT_SEPARATOR_CANDIDATE",
+                    "bucket_adequate_actions": witnesses,
+                    "minimum_policy_count": minimum_policy_count,
+                    "one_minimum_policy_cover": minimum_cover,
+                    "minimum_persistent_bits": minimum_bits,
+                    "declared_persistent_bits": bits,
+                    "requires_exact_byte_verification_before_credit": True,
+                    "terminal_credit": False,
+                }
+
+    conflicts = []
+    for left, right in itertools.combinations(worlds, 2):
+        if left.adequate_actions.isdisjoint(right.adequate_actions):
+            conflicts.append([left.world_id, right.world_id])
+
+    return {
+        "pass": False,
+        "classification": "TOURNAMENT_FAILURE_UNRESOLVED",
+        "reason": "NO_COMMON_POLICY_AND_NO_SOUND_PRECOMMITMENT_DISCRIMINATOR_OR_VERIFIED_SEPARATOR",
+        "conflicting_world_pairs": conflicts,
+        "minimum_policy_count": minimum_policy_count,
+        "one_minimum_policy_cover": minimum_cover,
+        "minimum_persistent_bits": minimum_bits,
+        "next_required_fact": "MINIMUM_POLICY_CHANGING_DISCRIMINATOR_OR_EXACT_SEPARATOR_NECESSITY_RECEIPT",
+        "terminal_credit": False,
+    }
+
+
+def evaluate_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
+    cells = manifest.get("cells")
+    if not isinstance(cells, list) or not cells:
+        return {
+            "pass": False,
+            "reason": "NO_COUNTEREXAMPLE_CELLS",
+            "terminal_credit": False,
+        }
+
+    results = []
+    seen: set[str] = set()
+    for cell in cells:
+        cid = cell.get("id") if isinstance(cell, dict) else None
+        if not isinstance(cid, str) or not cid or cid in seen:
+            return {
+                "pass": False,
+                "reason": "CELL_ID_INVALID_OR_DUPLICATE",
+                "terminal_credit": False,
+            }
+        seen.add(cid)
+        result = evaluate_cell(cell)
+        result["id"] = cid
+        results.append(result)
+
+    unresolved = [r["id"] for r in results if not r["pass"]]
+    return {
+        "pass": not unresolved,
+        "cell_count": len(results),
+        "resolved_cell_count": len(results) - len(unresolved),
+        "unresolved_cell_count": len(unresolved),
+        "unresolved_cells": unresolved,
+        "results": results,
+        "terminal_credit": False,
+        "rule": "THIS_COMPILER_CLASSIFIES_MINIMUM_REPAIR_SHAPE_ONLY__TERMINAL_CREDIT_REQUIRES_FROZEN_ACCEPTANCE_AND_FINALITY",
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("manifest", type=Path)
+    args = parser.parse_args()
+    payload = json.loads(args.manifest.read_text(encoding="utf-8"))
+    verdict = evaluate_manifest(payload)
+    print(json.dumps(verdict, indent=2, sort_keys=True))
+    return 0 if verdict["pass"] else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
