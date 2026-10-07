@@ -143,7 +143,10 @@ def _complete_bundle_and_proposal():
     for obligation in generate_counterfactual_obligations(text, source=source):
         disposition_value = (
             "DISAMBIGUATE"
-            if obligation.counterfactual_kind == "ANY_SEMANTICS_MUST_BE_DISAMBIGUATED"
+            if obligation.counterfactual_kind in {
+                "ANY_SEMANTICS_MUST_BE_DISAMBIGUATED",
+                "UNLESS_EXCEPTION_BRANCH_MUST_BE_DISTINGUISHED",
+            }
             else ("ACCEPT" if "ACCEPT" in obligation.counterfactual_kind else "REJECT")
         )
         scenarios.append({
@@ -259,3 +262,13 @@ def test_same_transaction_fails_when_rule_and_exception_labels_are_swapped():
     out = configured_finance_supervisory_terminal_decision_v2(proposal, bundle)
     assert out["accepted"] is False
     assert "FINANCE_CERTIFIED_EVIDENCE_ROLE_GATE_FAIL_CLOSED" in out["errors"]
+
+
+def test_fixture_binds_unless_counterfactual_to_disambiguate():
+    bundle, _ = _complete_bundle_and_proposal()
+    rows = [
+        x for x in bundle["counterfactual_scenarios"]
+        if x.get("counterfactual_kind") == "UNLESS_EXCEPTION_BRANCH_MUST_BE_DISTINGUISHED"
+    ]
+    assert len(rows) == 1
+    assert rows[0]["expected_disposition"] == "DISAMBIGUATE"
