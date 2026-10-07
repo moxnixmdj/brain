@@ -302,6 +302,13 @@ def _episode(problem, trace, caps, episode_id, scope_id, invalidators, receipt):
     return out
 
 
+def _verified_effect_already_occurred(trace: Sequence[Mapping[str, Any]]) -> bool:
+    return any(
+        isinstance(row, Mapping) and bool(row.get("effect_outcome_sha256"))
+        for row in trace
+    )
+
+
 def _episode_receipt_ok(ep: Mapping[str, Any], receipt: Mapping[str, Any] | None) -> tuple[bool, str | None]:
     if not isinstance(receipt, Mapping):
         return False, "EPISODE_VERIFICATION_RECEIPT_REQUIRED"
@@ -490,6 +497,35 @@ def run(
                 ),
                 pending[0] if pending else None,
             )
+            if _verified_effect_already_occurred(trace):
+                return {
+                    "schema": SCHEMA,
+                    "status": "AUTHENTICATED_RESUME_REQUIRED_AFTER_PARTIAL_EFFECTFUL_PROGRESS",
+                    "pass": False,
+                    "verified_facts": current,
+                    "trace": trace,
+                    "attempts": attempts,
+                    "counterexamples": counterexamples,
+                    "falsified_capability_ids": sorted(falsified),
+                    "deferred_capability_ids": sorted(deferred),
+                    "next_required_input": None if first is None else {
+                        "capability_id": first.get("next_capability_id"),
+                        "status": first.get("status"),
+                        "proposal_request": first.get("proposal_request"),
+                        "reason": first.get("reason"),
+                        "detail": first.get("detail"),
+                    },
+                    "state_capsule": capsule,
+                    "state_capsule_head_hash": capsule.get("head_hash"),
+                    "reason": (
+                        "A_VERIFIED_EXTERNAL_EFFECT_ALREADY_OCCURRED_IN_THIS_INVOCATION__"
+                        "CONTINUATION_REQUIRES_AN_INDEPENDENTLY_AUTHENTICATED_RESUME_CAPSULE__"
+                        "RESTART_FROM_TASK_ORIGIN_IS_FORBIDDEN"
+                    ),
+                    "terminal_authority": False,
+                    "capability_credit_delta": 0,
+                    "ownership_credit_delta": 0,
+                }
             return {
                 "schema": SCHEMA,
                 "status": "UNRESOLVED__ALTERNATIVE_ROUTES_EXHAUSTED__DEFERRED_ROUTE_REMAINS",
@@ -508,6 +544,29 @@ def run(
                     "detail": first.get("detail"),
                 },
                 "state_capsule": capsule,
+                "terminal_authority": False,
+                "capability_credit_delta": 0,
+                "ownership_credit_delta": 0,
+            }
+
+        if _verified_effect_already_occurred(trace):
+            return {
+                "schema": SCHEMA,
+                "status": "AUTHENTICATED_RESUME_REQUIRED_FOR_CAPABILITY_DISCOVERY_AFTER_EFFECT",
+                "pass": False,
+                "verified_facts": current,
+                "trace": trace,
+                "attempts": attempts,
+                "counterexamples": counterexamples,
+                "falsified_capability_ids": sorted(falsified),
+                "deferred_capability_ids": sorted(deferred),
+                "target_effects": targets,
+                "state_capsule": capsule,
+                "state_capsule_head_hash": capsule.get("head_hash"),
+                "reason": (
+                    "CAPABILITY_DISCOVERY_MAY_CONTINUE_ONLY_FROM_AN_INDEPENDENTLY_"
+                    "AUTHENTICATED_RESUME_STATE_AFTER_THE_ALREADY_EXECUTED_EFFECTS"
+                ),
                 "terminal_authority": False,
                 "capability_credit_delta": 0,
                 "ownership_credit_delta": 0,
