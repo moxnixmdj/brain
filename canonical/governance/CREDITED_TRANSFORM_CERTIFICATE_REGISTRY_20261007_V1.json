@@ -35,11 +35,195 @@
         "path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
         "git_blob_sha": "2d912cf8df64bd806fffb6a1070d95644d005470"
       },
-      "certificate": null,
+      "certificate": {
+        "transform_law": "DETERMINISTIC",
+        "source_state_complete": true,
+        "target_state_complete": true,
+        "external_controls_accounted": true,
+        "randomness_accounted": true,
+        "target_evaluator_set_complete": true,
+        "target_hard_constraint_set_complete": true,
+        "interactive_state_accounted": true,
+        "independent_verification_bound": true,
+        "source_state_ids": [
+          "EXACT_TASK_MANIFEST_BYTES_AND_CANONICAL_JSON_HASH",
+          "EXACT_MISSION_BYTES_AND_SHA256",
+          "BOUND_AGENT_ID",
+          "BOUND_TASK_ID",
+          "PRIOR_SUPERVISOR_DURABLE_STATE_OR_ABSENT",
+          "PRIOR_CHECKPOINT_AND_ATTEMPT_RECEIPTS_OR_ABSENT",
+          "CHECKPOINT_BEFORE_RUNTIME_ONCE_FLAG",
+          "CURRENT_CANONICAL_STATE_CONTENT_ADDRESSED_BY_CONTINUOUS_OBS",
+          "CONTENT_ADDRESSED_17_FILE_OPERATIVE_RUNTIME_DEPENDENCY_SET",
+          "DEFAULT_CHILD_PROCESS_RETURN_CODE_STDOUT_STDERR_TRACE"
+        ],
+        "target_state_ids": [
+          "DURABLE_SUPERVISOR_STATE_AFTER_RESTART",
+          "SAME_AGENT_ID",
+          "SAME_TASK_ID",
+          "SAME_TASK_MANIFEST_HASH",
+          "SAME_MISSION_PATH_AND_HASH",
+          "CHECKPOINT_COUNT",
+          "CLAIM_COUNT",
+          "RUNTIME_ATTEMPT_COUNT",
+          "ORDERED_CONTINUITY_EVENT_LEDGER",
+          "CHILD_RUNTIME_COMMAND",
+          "CHILD_RUNTIME_RESULT_HASHES",
+          "TERMINAL_OR_BLOCKED_STATE",
+          "ASTRA_CHILD_STATE_AND_TERMINAL_RECEIPT_WHEN_CHILD_SUCCEEDS"
+        ],
+        "target_evaluator_ids": [
+          "DURABLE_STATE_SURVIVES_FORCED_PROCESS_BOUNDARY",
+          "EXACT_IDENTITY_TASK_AND_MISSION_PRESERVATION",
+          "NO_REEXECUTION_BEFORE_CHECKPOINT_AND_EXACTLY_ONE_POST_RESUME_CHILD_ATTEMPT",
+          "CURRENT_DEFAULT_CHILD_SEAM_TERMINAL_CONTINUATION"
+        ],
+        "evaluator_pullbacks": [
+          {
+            "target_evaluator_id": "DURABLE_STATE_SURVIVES_FORCED_PROCESS_BOUNDARY",
+            "source_evaluator_id": "PROCESS_A_CHECKPOINT_RECEIPT_PLUS_PROCESS_B_REHYDRATED_STATE_AND_EVENT_LEDGER",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_evaluator_id": "EXACT_IDENTITY_TASK_AND_MISSION_PRESERVATION",
+            "source_evaluator_id": "SUPERVISOR_CLAIM_RESUME_HASH_EQUALITY_AND_ASTRA_SAME_IDENTITY_BINDING",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_evaluator_id": "NO_REEXECUTION_BEFORE_CHECKPOINT_AND_EXACTLY_ONE_POST_RESUME_CHILD_ATTEMPT",
+            "source_evaluator_id": "CHECKPOINT_BEFORE_RUNTIME_ONCE_PLUS_RUNTIME_ATTEMPT_COUNTER_AND_EVENT_ORDER",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_evaluator_id": "CURRENT_DEFAULT_CHILD_SEAM_TERMINAL_CONTINUATION",
+            "source_evaluator_id": "PROCESS_B_DEFAULT_EXECUTOR_RETURN_ZERO_PLUS_ASTRA_STATE_AND_RECEIPT_COMPLETE",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          }
+        ],
+        "target_hard_constraint_ids": [
+          "WRONG_AGENT_CANNOT_RESUME",
+          "TASK_MANIFEST_OR_MISSION_DRIFT_CANNOT_REUSE_CONTINUITY_STATE",
+          "CHECKPOINT_PRECEDES_RUNTIME_WHEN_REQUESTED",
+          "DEFAULT_CHILD_USES_CANONICAL_ROOT3_PRODUCTION_ENTRY",
+          "PRIVATE_CANONICAL_STATE_BYTES_NOT_REQUIRED_BY_PUBLIC_VERIFIER",
+          "MODEL_DEPENDENCY_COUNT_ZERO_FOR_QUALIFICATION",
+          "INCREMENTAL_SPEND_USD_ZERO",
+          "CLAIM_SCOPE_EXCLUDES_AUTONOMOUS_WAKE_AND_GENERAL_SEMANTIC_MEMORY"
+        ],
+        "hard_constraint_preimages": [
+          {
+            "target_hard_constraint_id": "WRONG_AGENT_CANNOT_RESUME",
+            "source_preimage_or_invariant_id": "CLAIM_AND_STATE_AGENT_ID_EQUALITY_FAIL_CLOSED",
+            "proof_ref": "canonical/runtime/same_identity_supervisor_credited_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "TASK_MANIFEST_OR_MISSION_DRIFT_CANNOT_REUSE_CONTINUITY_STATE",
+            "source_preimage_or_invariant_id": "TASK_MANIFEST_AND_MISSION_HASH_BINDING_FAIL_CLOSED",
+            "proof_ref": "canonical/runtime/same_identity_supervisor_credited_v2.py"
+          },
+          {
+            "target_hard_constraint_id": "CHECKPOINT_PRECEDES_RUNTIME_WHEN_REQUESTED",
+            "source_preimage_or_invariant_id": "CHECKPOINT_EVENT_AND_EXIT_75_BEFORE_EXECUTOR",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "DEFAULT_CHILD_USES_CANONICAL_ROOT3_PRODUCTION_ENTRY",
+            "source_preimage_or_invariant_id": "CANDIDATE_RUNTIME_COMMAND_LITERAL_AND_ATTEMPT_RECEIPT",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "PRIVATE_CANONICAL_STATE_BYTES_NOT_REQUIRED_BY_PUBLIC_VERIFIER",
+            "source_preimage_or_invariant_id": "PARAMETERIZED_CONTENT_ADDRESS_BINDING_WITH_SYNTHETIC_PUBLIC_FIXTURE_AND_SEPARATE_PRIVATE_GIT_BLOB_BINDINGS",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "MODEL_DEPENDENCY_COUNT_ZERO_FOR_QUALIFICATION",
+            "source_preimage_or_invariant_id": "MODEL_INDEPENDENT_FINISH_CONTROLLER_PLAN",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "INCREMENTAL_SPEND_USD_ZERO",
+            "source_preimage_or_invariant_id": "TASK_CONSTRAINT_AND_TWO_PROCESS_RECEIPTS_ZERO",
+            "proof_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "CLAIM_SCOPE_EXCLUDES_AUTONOMOUS_WAKE_AND_GENERAL_SEMANTIC_MEMORY",
+            "source_preimage_or_invariant_id": "ACCEPTED_FAMILY_PACKAGE_EXPLICIT_SCOPE_BOUNDARY",
+            "proof_ref": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json"
+          }
+        ],
+        "acceptance_semantics_completeness_ref": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+        "independent_verification_ref": "canonical/verification/CONTINUITY_CURRENT_CHILD_SEAM_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json",
+        "scope_note": "ACCEPTED_SCOPED_CONTINUITY_BEHAVIOR_ONLY__DURABLE_CROSS_SESSION_STATE_SAME_IDENTITY_CHECKPOINT_RELAUNCH_NO_COMPLETED_WORK_REEXECUTION_AND_TERMINAL_CONTINUATION__NO_AUTONOMOUS_WAKE_OR_GENERAL_SEMANTIC_MEMORY_QUALITY"
+      },
       "implementation_artifacts": [
         {
-          "path": "canonical/runtime/same_identity_supervisor_credited_v1.py",
-          "git_blob_sha": "47c461f502e840def0c38728e1bfd7c6401cb804"
+          "path": "canonical/runtime/same_identity_supervisor_credited_v2.py",
+          "git_blob_sha": "45d48c23ec4ae429550c264c07f530b0347430cb"
+        },
+        {
+          "path": "canonical/runtime/root3_production_astra_launcher_v1.py",
+          "git_blob_sha": "3ac42e7be5a391cfda738131ecb0d3d600fa2147"
+        },
+        {
+          "path": "canonical/runtime/root3_strict_current_bootstrap_v2.py",
+          "git_blob_sha": "7d6e4f4e00fda4eae6ff1974f68f970ceee69c2e"
+        },
+        {
+          "path": "canonical/runtime/root3_subprocess_mediator_v2.py",
+          "git_blob_sha": "80560cdfa91c11a4b47b9ee2161af726b2f9bccf"
+        },
+        {
+          "path": "canonical/runtime/root3_subprocess_mediator_v1.py",
+          "git_blob_sha": "8443b61b15cb2bc597c4fa292650f2a0aae899b5"
+        },
+        {
+          "path": "canonical/runtime/root3_subprocess_callsite_classifier_v1.py",
+          "git_blob_sha": "e654b264096dba724d82f04e5adef0dc6d6c90f7"
+        },
+        {
+          "path": "canonical/runtime/root3_subprocess_effect_class_registry_v1.py",
+          "git_blob_sha": "24e00a3e6b70d0879cab664a8512f243973c6196"
+        },
+        {
+          "path": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+          "git_blob_sha": "fc737c1ff5d767d590a5ac52b604890f5d22b1c5"
+        },
+        {
+          "path": "canonical/runtime/root3_two_class_attempt_authorizer_v1.py",
+          "git_blob_sha": "5aac8664433115c47d24e0fbbca15b81126753ee"
+        },
+        {
+          "path": "canonical/runtime/root3_read_only_local_file_query_executor_v1.py",
+          "git_blob_sha": "74166a80c47ed8ddce7bae7b61a3a3610ac2ef8a"
+        },
+        {
+          "path": "canonical/runtime/root3_pdf_raster_temp_executor_v1.py",
+          "git_blob_sha": "c07c632ac43e591bdde139f3440bdbe288ea930c"
+        },
+        {
+          "path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+          "git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+        },
+        {
+          "path": "canonical/runtime/astra_runtime.py",
+          "git_blob_sha": "3567cfd77eae06e2d384c5e0b18972b2d3a62c3b"
+        },
+        {
+          "path": "canonical/runtime/continuous_obs_runtime.py",
+          "git_blob_sha": "e2533a0335c4f6824b9542944d4682aeefb36b2b"
+        },
+        {
+          "path": "canonical/runtime/honesty_load_bearing_result_gate_v1.py",
+          "git_blob_sha": "6506690507854f3f28ff0c6161e34b79e9687c0b"
+        },
+        {
+          "path": "canonical/runtime/honesty_envelope_v1.py",
+          "git_blob_sha": "1ff02d62322b76068933498e869b1ee22949b991"
+        },
+        {
+          "path": "canonical/runtime/root3_typed_durable_admin_write_v1.py",
+          "git_blob_sha": "6c488b10b8afbaf61781703775cfd9a79710de52"
         }
       ]
     },
@@ -482,9 +666,10 @@
   "current_result": {
     "exact_credited_family_registry_bound": true,
     "route_count": 5,
-    "transform_certificates_complete": 4,
+    "transform_certificates_complete": 5,
     "c_closed": false,
-    "next": "CERTIFY_CONTINUITY_TRANSFORM_ONLY__MUST_BIND_SUPERVISOR_PLUS_CHILD_RUNTIME_AND_ANY_LOAD_BEARING_MISSION_STATE_CONTROL"
+    "next": "RECOMPUTE_FAIL_CLOSED_COMPILER_AGAINST_EXACT_CURRENT_OWNERSHIP_MATRIX_AND_ALL_BOUND_ARTIFACTS__ONLY_THEN_PROMOTE_C_CLOSED",
+    "c_closed_candidate": true
   },
   "hard_nonclaims": [
     "NO_CLAIM_ANY_CURRENT_ROUTE_TRANSFORM_CERTIFICATE_IS_COMPLETE",
