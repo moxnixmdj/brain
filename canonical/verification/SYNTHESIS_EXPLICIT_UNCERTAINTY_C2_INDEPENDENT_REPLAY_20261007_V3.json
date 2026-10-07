@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_EXPLICIT_UNCERTAINTY_C2_INDEPENDENT_REPLAY_V3",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_BLOB_REPLAY_PASS__7_OF_7__V3_REQUIRED_UNCERTAINTY_PRESERVED__ZERO_TERMINAL_CREDIT",
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "incremental_spend_usd": 0
+  },
+  "exact_blobs": {
+    "runtime": {
+      "path": "canonical/runtime/synthesis_certified_visible_support_policy_v3.py",
+      "git_blob_sha": "cd81b812f30b46b9889826adbc39df8690bdb40d"
+    },
+    "tests": {
+      "path": "canonical/tests/test_synthesis_certified_visible_support_policy_v3.py",
+      "git_blob_sha": "f433982a8f5c10eab6ccef43f340d2793bcc6781"
+    },
+    "predecessor_v2": {
+      "path": "canonical/runtime/synthesis_certified_visible_support_policy_v2.py",
+      "git_blob_sha": "14c7b3f99b6c28b3f28b5356e13907f843f5ee91"
+    },
+    "bounded_support": {
+      "path": "canonical/runtime/bounded_claim_support.py",
+      "git_blob_sha": "197246a50ace8c16b945def9edb1357fb317c393"
+    },
+    "grounded_realizer": {
+      "path": "canonical/runtime/synthesis_grounded_expression_ir_v1.py",
+      "git_blob_sha": "0709b7d43a069eaa9eb3240df28789a9107a36db"
+    },
+    "top_law": {
+      "path": "canonical/governance/SYNTHESIS_EXPLICIT_UNCERTAINTY_TOP_LAW_CELL_20261007_V3.json",
+      "git_blob_sha": "55326f8dab733c111f02badf1f5e86e5b2e70b28"
+    }
+  },
+  "replay_method": {
+    "blob_identity_recomputed_on_independent_carrier": true,
+    "pytest_available": false,
+    "test_module_style": "PLAIN_TOP_LEVEL_ASSERTION_FUNCTIONS__NO_FIXTURES_OR_PYTEST_ONLY_FEATURES",
+    "execution": "IMPORT_EXACT_TEST_MODULE__DISCOVER_ALL_CALLABLE_NAMES_STARTING_test___REQUIRE_EXACT_COUNT_7__EXECUTE_EACH_DIRECTLY",
+    "expected_test_count": 7,
+    "executed_test_count": 7,
+    "failure_count": 0,
+    "error_count": 0
+  },
+  "passed_tests": [
+    "test_explicit_zero_uncertainty_passes",
+    "test_item_budget_cannot_drop_uncertainty",
+    "test_missing_uncertainty_binding_fails_closed",
+    "test_multiple_uncertainties_preserve_explicit_input_order",
+    "test_required_uncertainty_is_rendered_with_provenance",
+    "test_required_uncertainty_without_provenance_fails_closed",
+    "test_unresolved_claim_evidence_relation_still_fails_closed"
+  ],
+  "verified_consequence": [
+    "THE_EXACT_V3_RUNTIME_AND_ALL_BOUND_DEPENDENCIES_MATCH_THE_CURRENT_GITHUB_BLOBS.",
+    "ALL_SEVEN_COMMITTED_V3_ASSERTION_TESTS_PASS_ON_AN_INDEPENDENT_REMOTE_CARRIER.",
+    "REQUIRED_UNCERTAINTY_BINDING_IS_MANDATORY__MISSING_BINDING_FAILS_CLOSED.",
+    "EXPLICIT_ZERO_REQUIRED_UNCERTAINTY_PASSES.",
+    "NONZERO_REQUIRED_UNCERTAINTY_IS_RENDERED_WITH_PROVENANCE_AND_INPUT_ORDER.",
+    "OUTPUT_BUDGETS_CANNOT_SILENTLY_DROP_REQUIRED_UNCERTAINTY.",
+    "UNRESOLVED_CLAIM_EVIDENCE_SEMANTICS_REMAIN_FAIL_CLOSED."
+  ],
+  "boundary": [
+    "THIS_REPLAY_DOES_NOT_PROVE_THE_UPSTREAM_REQUIRED_UNCERTAINTY_SET_IS COMPLETE_FOR_ANY_REAL_CONTEXT.",
+    "THIS_REPLAY_DOES_NOT_DISCOVER_HIDDEN_UNCERTAINTY.",
+    "THIS_REPLAY_DOES_NOT_CLOSE_GENERAL_SYNTHESIS.",
+    "NO_U_EMPTY_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
