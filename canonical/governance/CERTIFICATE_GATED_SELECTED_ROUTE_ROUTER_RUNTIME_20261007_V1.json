@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_RUNTIME_V1",
+  "date": "2026-10-07",
+  "status": "EXECUTABLE_ROUTER_GATE_ON_MAIN__ZERO_ABC_D_TERMINAL_CREDIT_UNTIL_EXACT_REPLAY_AND_DEPLOYED_BINDING",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_theorem": {
+    "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_SOUNDNESS_REDUCTION_20261007_V1.json",
+    "git_blob_sha": "1259a3e3e6872d5355d92f19e9e3df217bdc254d"
+  },
+  "runtime": {
+    "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+    "contract": [
+      "SELECT_ONLY_ALREADY_POSITIVE_ADMISSION_RECEIPTS",
+      "REQUIRE_EXACT_ACTUAL_CONTEXT_DIGEST_MATCH",
+      "BIND_ROUTE_AND_ADEQUACY_AND_ADMISSION_CERTIFICATE_BLOB_SHAS",
+      "DETERMINISTIC_CONTENT_ADDRESSED_TIE_BREAK",
+      "FAIL_CLOSED_ON_NO_MATCH_MALFORMED_RECEIPT_OR_DUPLICATE_RECEIPT"
+    ]
+  },
+  "truth_effect": {
+    "implemented": "MECHANICAL_CERTIFICATE_GATED_FAIL_CLOSED_DISPATCH_CORE",
+    "not_implemented": [
+      "PER_CELL_ADMISSION_PREDICATE_SEMANTICS",
+      "PER_CELL_ADEQUACY_PROOFS",
+      "SELECTED_COVER_COMPLETENESS",
+      "DEPLOYED_RUNTIME_BINDING"
+    ],
+    "abc_closed": false,
+    "d_finality_closed": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
