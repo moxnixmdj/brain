@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_V16_DB_EXISTING_EVIDENCE_SATURATION_WOLFRAM_VERIFICATION_V5",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_SET_DELTA_PASS__TWELVE_SOUND_CACHED_REGIONS__EXACTLY_ONE_NEW_P3_REGION__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json",
+    "git_blob_sha": "bb3380b75829543d7252cfdbf74999bc27a4a1d0",
+    "branch": "truth/p2-p3-whole-selected-toplaw-20261007-v1"
+  },
+  "predecessor": {
+    "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V4.json",
+    "git_blob_sha": "d86bbf7a1cc8968b3f48fbe1d13c390ab1310b9a",
+    "region_count": 11
+  },
+  "delta": {
+    "exact_added_region": "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
+    "predecessor_region_count": 11,
+    "new_region_count": 12,
+    "duplicate_free": true
+  },
+  "wolfram": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "exact_output": "{12, True, True, 11}",
+    "interpretation": {
+      "region_count": 12,
+      "duplicate_free": true,
+      "p3_region_present": true,
+      "count_after_removing_exact_p3_region": 11
+    }
+  },
+  "verified": [
+    "THE_V5_CACHE_HAS_EXACTLY_TWELVE_REGION_IDS.",
+    "THE_TWELVE_REGION_ID_SET_IS_DUPLICATE_FREE.",
+    "THE_NEW_P3_WHOLE_DIRECT_SYNTHESIS_REGION_IS_PRESENT.",
+    "REMOVING_EXACTLY_THAT_REGION_RETURNS_THE_PREDECESSOR_CARDINALITY_ELEVEN."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_TWELVE_REGIONS_EXHAUST_D_B.",
+    "NO_CLAIM_GLOBAL_SELECTED_CONTEXT_COVER_IS_COMPLETE.",
+    "NO_CLAIM_D_FINALITY_OR_TERMINAL_IS_CLOSED."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
