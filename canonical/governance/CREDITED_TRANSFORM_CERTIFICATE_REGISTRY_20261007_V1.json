@@ -178,7 +178,108 @@
         "path": "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json",
         "git_blob_sha": "4f5348949c1c2d8784a056c637f05c865ff389b6"
       },
-      "certificate": null,
+      "certificate": {
+        "transform_law": "DETERMINISTIC",
+        "source_state_complete": true,
+        "target_state_complete": true,
+        "external_controls_accounted": true,
+        "randomness_accounted": true,
+        "target_evaluator_set_complete": true,
+        "target_hard_constraint_set_complete": true,
+        "interactive_state_accounted": true,
+        "independent_verification_bound": true,
+        "source_state_ids": [
+          "PUBLIC_TASK_TRAJECTORY_ROWS",
+          "ACTION_IDS_AND_TOPOLOGICAL_DEPENDENCIES",
+          "READ_AND_WRITE_RESOURCE_SETS",
+          "DEPENDENCY_COMPOSITION_SEMANTICS",
+          "CHECK_IDS_KINDS_PASS_BITS_AND_CONTENT_ADDRESSED_EVIDENCE",
+          "EXPLICIT_FAILURE_SEMANTICS_DIRECT_CONTRACT_OR_DERIVED_UPSTREAM",
+          "TERMINAL_FAILED_RESOURCE_SET",
+          "EXOGENOUS_HIDDEN_CAUSAL_TRUTH_FOR_POST_OUTPUT_INDEPENDENT_SCORING_ONLY"
+        ],
+        "target_state_ids": [
+          "STATUS_IDENTIFIED_INTERACTION_AMBIGUOUS_ESCALATE_OR_FAIL_CLOSED",
+          "CAUSE_ACTION_ID_OR_IDS",
+          "CRITICAL_ACTION_ID_OR_NULL",
+          "MECHANISM_CLASSES",
+          "SUPPORTING_RECEIPTS",
+          "REPAIR_TARGETS",
+          "INTERACTION_WITNESS_ACTION_IDS_WHEN_APPLICABLE",
+          "INFORMATION_REQUEST_WHEN_NONIDENTIFIABLE"
+        ],
+        "target_evaluator_ids": [
+          "RECOVERY_CAUSAL_LOCALIZATION",
+          "RECOVERY_TERMINAL_RESCUE",
+          "RECOVERY_CRITICAL_FAIL_CLOSED_MISSES"
+        ],
+        "evaluator_pullbacks": [
+          {
+            "target_evaluator_id": "RECOVERY_CAUSAL_LOCALIZATION",
+            "source_evaluator_id": "V7_INTERVENTION_CAUSAL_ROOT_AND_MECHANISM_SCORER",
+            "proof_ref": "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+          },
+          {
+            "target_evaluator_id": "RECOVERY_TERMINAL_RESCUE",
+            "source_evaluator_id": "SOURCE_NATIVE_HIDDEN_CAUSE_REPAIR_RESCUE_SCORER",
+            "proof_ref": "canonical/verification/P1_UNIVERSAL_GENERATOR_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+          },
+          {
+            "target_evaluator_id": "RECOVERY_CRITICAL_FAIL_CLOSED_MISSES",
+            "source_evaluator_id": "UNIDENTIFIABLE_INVALID_OR_ONLY_DERIVED_CASE_FAIL_CLOSED_CHECK",
+            "proof_ref": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json"
+          }
+        ],
+        "target_hard_constraint_ids": [
+          "HIDDEN_ORACLE_NOT_VISIBLE_TO_CANDIDATE",
+          "FAILED_CHECKS_REQUIRE_NONEMPTY_CAUSALLY_RELEVANT_EVIDENCE",
+          "FAILURE_SEMANTICS_MUST_BE_EXPLICIT_AND_VALID",
+          "NON_TOPOLOGICAL_DEPENDENCIES_FAIL_CLOSED",
+          "ONLY_DERIVED_UPSTREAM_FAILURES_DO_NOT_CREATE_FAKE_ROOT",
+          "ALTERNATIVE_MULTI_ROOT_NONIDENTIFIABILITY_RETURNS_AMBIGUOUS",
+          "INVALID_TASK_OR_STEP_SCHEMA_FAILS_CLOSED"
+        ],
+        "hard_constraint_preimages": [
+          {
+            "target_hard_constraint_id": "HIDDEN_ORACLE_NOT_VISIBLE_TO_CANDIDATE",
+            "source_preimage_or_invariant_id": "PUBLIC_SOURCE_CASE_ORACLE_REMOVAL_AND_NONINTERFERENCE",
+            "proof_ref": "canonical/governance/P1_SHARED_FAILURE_SEMANTICS_BATCH_FREEZE_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "FAILED_CHECKS_REQUIRE_NONEMPTY_CAUSALLY_RELEVANT_EVIDENCE",
+            "source_preimage_or_invariant_id": "FAILED_CHECK_EVIDENCE_NONEMPTY_VALIDATION",
+            "proof_ref": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+          },
+          {
+            "target_hard_constraint_id": "FAILURE_SEMANTICS_MUST_BE_EXPLICIT_AND_VALID",
+            "source_preimage_or_invariant_id": "ALLOWED_FAILURE_SEMANTICS_VALIDATION",
+            "proof_ref": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+          },
+          {
+            "target_hard_constraint_id": "NON_TOPOLOGICAL_DEPENDENCIES_FAIL_CLOSED",
+            "source_preimage_or_invariant_id": "DEPENDENCY_PREDECESSOR_MUST_ALREADY_EXIST",
+            "proof_ref": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+          },
+          {
+            "target_hard_constraint_id": "ONLY_DERIVED_UPSTREAM_FAILURES_DO_NOT_CREATE_FAKE_ROOT",
+            "source_preimage_or_invariant_id": "DIRECT_FAILED_EMPTY_WITH_DERIVED_FAILED_RETURNS_ESCALATE",
+            "proof_ref": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+          },
+          {
+            "target_hard_constraint_id": "ALTERNATIVE_MULTI_ROOT_NONIDENTIFIABILITY_RETURNS_AMBIGUOUS",
+            "source_preimage_or_invariant_id": "ALTERNATIVE_WITNESS_BRANCH_RETURNS_AMBIGUOUS_AND_REQUESTS_DISCRIMINATOR",
+            "proof_ref": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+          },
+          {
+            "target_hard_constraint_id": "INVALID_TASK_OR_STEP_SCHEMA_FAILS_CLOSED",
+            "source_preimage_or_invariant_id": "TASK_TRAJECTORY_AND_STEP_SCHEMA_VALIDATION",
+            "proof_ref": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+          }
+        ],
+        "acceptance_semantics_completeness_ref": "canonical/governance/RECOVERY_OPUS55_ZERO_REALITY_ACCEPTANCE_CANDIDATE_V1.json",
+        "independent_verification_ref": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+        "scope_note": "POST_QUARANTINE_ZERO_REALITY_UNIVERSAL_GENERATOR_TRANSPORT_AND_SCOPE_RESTORATION__HIDDEN_CAUSAL_TRUTH_USED_ONLY_AFTER_CANDIDATE_OUTPUT_FOR_INDEPENDENT_SCORING"
+      },
       "implementation_artifacts": [
         {
           "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
@@ -381,9 +482,9 @@
   "current_result": {
     "exact_credited_family_registry_bound": true,
     "route_count": 5,
-    "transform_certificates_complete": 3,
+    "transform_certificates_complete": 4,
     "c_closed": false,
-    "next": "CERTIFY_RECOVERY_AND_CONTINUITY_TRANSFORMS__RECOVERY_MUST_USE_POST_QUARANTINE_SCOPE_RESTORATION__CONTINUITY_MUST_BIND_CHILD_RUNTIME_DEPENDENCY_CONE"
+    "next": "CERTIFY_CONTINUITY_TRANSFORM_ONLY__MUST_BIND_SUPERVISOR_PLUS_CHILD_RUNTIME_AND_ANY_LOAD_BEARING_MISSION_STATE_CONTROL"
   },
   "hard_nonclaims": [
     "NO_CLAIM_ANY_CURRENT_ROUTE_TRANSFORM_CERTIFICATE_IS_COMPLETE",
