@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_ESCAPE_RESOLVER_V1_ACTIVATION",
+  "date": "2026-10-07",
+  "status": "ACTIVE_PLANNING_OVERLAY_CANDIDATE__ZERO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "purpose": "MAKE_THE_INDEPENDENTLY_VERIFIED_UNIVERSAL_ESCAPE_RESOLVER_THE_DEFAULT_PLANNING_ORDER_FOR_ALREADY_BOUND_SURVIVING_E_CELLS_WITHOUT_CHANGING_ANY_D_B_ADMISSION_AUTHORITY_OR_TERMINAL_TRUTH",
+  "bound_components": {
+    "runtime": {
+      "path": "canonical/runtime/universal_escape_resolver_v1.py",
+      "git_blob_sha": "9043273c97b53a991de8cb418e0c6a58efa0cec3"
+    },
+    "governance": {
+      "path": "canonical/governance/UNIVERSAL_ESCAPE_RESOLVER_V1.json",
+      "git_blob_sha": "1459c9da4e7178ca06a30cf46588bfd5f644b534"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/UNIVERSAL_ESCAPE_RESOLVER_V1_PUBLIC_RUNNER_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "dc9e16ee542c9c77e1fc35c225e8a7fdc990f5c2",
+      "runner_repository": "moxnixmdj/verification-capsule-runner",
+      "runner_preservation_commit": "0d09b3c10197a1bd1ad5a103b0f4aa594e9cf0d9",
+      "workflow_run_id": 37595704301,
+      "workflow_job_id": 112707682297,
+      "conclusion": "success"
+    }
+  },
+  "operative_scope": "ANY_ALREADY_BOUND_SURVIVING_ESCAPE_CELL_IN_E_EQUALS_S_TRACE_MINUS_D_B",
+  "planning_order": [
+    "TRY_SOURCE_PROVED_POSITIVE_ADEQUACY",
+    "TRY_ROBUST_COMMON_POLICY",
+    "TRY_COMPLETE_OBJECTIVE_OPTIMUM",
+    "TRY_DIRECT_END_TO_END_ACCEPTANCE",
+    "IF_UNRESOLVED_RUN_UNIVERSAL_LEARNING_V9_V8_V7_PLANNING_ONLY_TO_FIND_THE_MINIMUM_MISSING_DECISION_RELEVANT_EVIDENCE_OR_MECHANISM",
+    "AFTER_NEW_INDEPENDENT_EVIDENCE_RETRY_EXISTING_FAIL_CLOSED_D_B_ADMISSION",
+    "RECOMPUTE_E_AFTER_EVERY_SOUND_D_B_EXPANSION"
+  ],
+  "scheduler_effect": [
+    "DO_NOT_CONFINE_UNIVERSAL_LEARNING_TO_THE_HISTORICAL_UNKNOWN_DOMAIN_LABEL",
+    "DO_NOT_REOPEN_NEW_ENVIRONMENT_LEARNING_AS_A_CAPABILITY_BUILD_PROBLEM",
+    "REUSE_THE_EXISTING_UNIVERSAL_LEARNING_STACK_AS_A_GLOBAL_ESCAPE_PLANNER_ONLY",
+    "DO_NOT_LEARN_OR_QUERY_TARGET_INFORMATION_WHEN_AN_EXISTING_TARGET_FREE_D_B_ADMISSION_ALREADY_CLOSES_THE_CELL",
+    "PRIORITIZE_SHARED_ESCAPE_STRUCTURE_AND_VERIFIED_TRANSFER_OVER_BENCHMARK_SPECIFIC_PATCHING"
+  ],
+  "authority_boundary": {
+    "planner_may_authorize_execution": false,
+    "planner_may_authorize_db_admission": false,
+    "planner_may_authorize_u_empty": false,
+    "planner_may_authorize_terminal": false,
+    "only_existing_fail_closed_db_admission_can_promote_cell": true
+  },
+  "truth_preservation": {
+    "open_abc_refinement_family_count_changed": false,
+    "u_empty_changed": false,
+    "d_finality_changed": false,
+    "terminal_changed": false,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_CURRENT_ESCAPE_CELL_IS_CLOSED_BY_ACTIVATION_ALONE",
+    "NO_CLAIM_UNIVERSAL_LEARNING_IS_GLOBALLY_COMPLETE",
+    "NO_U_EMPTY",
+    "NO_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
