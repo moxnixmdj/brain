@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V5",
+  "date": "2026-10-07",
+  "status": "ACTIVE_TRUTH__SEVEN_CONSUMED_SLOTS__RANK8_REVOKED_BEFORE_TASK_EXPOSURE__V4_STALE_AUTHORITY_CONSUMPTION_REVOKED__NEXT_UNTOUCHED_RANK8__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessors": {
+    "v3": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V3.json",
+      "git_blob_sha": "32a57737b09fd6b38758814a6e3f843afd13ca16"
+    },
+    "v4": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V4.json",
+      "git_blob_sha": "370087e3d8c1f77679d5f6a8b1be391e50f0faa9",
+      "status": "SUPERSEDED_UNSOUND_STALE_AUTHORITY_CONSUMPTION"
+    }
+  },
+  "authority_revocation": {
+    "path": "canonical/governance/TB_SCIENCE_RANK8_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1.json",
+    "current_git_blob_sha": "fb02e9680bc1671f35f4aa055e9f71f7725508b6",
+    "status": "SUSPENDED_BEFORE_EXPOSURE__RANK7_REVEALED_UNSOUND_COVERAGE_PROMOTION",
+    "merge_commit": "7c0167f019fccb55eca612728e4f8a2d00927d61",
+    "merged_at_utc": "2026-10-07T10:42:38Z"
+  },
+  "stale_run": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37608961351,
+    "workflow_job_id": 112751265938,
+    "runner_started_at_utc": "2026-10-07T10:41:27Z",
+    "cancellation_observed_at_utc": "2026-10-07T10:45:25Z",
+    "preexposure_gate_used_stale_active_authority_blob": "82e9573f64037ae2f0d39228e4d57cc45deb7a29",
+    "canonical_authority_revoked_during_run_before_task_exposure": true,
+    "task_execution_conclusion": "skipped",
+    "terminal_task_exposure": 0,
+    "verifier_result_observed": false,
+    "generated_final_zero_admissible": false,
+    "generated_execution_authority_consumed_admissible": false
+  },
+  "causal_rule": "A_STALE_CARRIER_CANNOT_RESURRECT_AUTHORITY_REVOKED_ON_CANONICAL_MAIN_BEFORE_TARGET_EXPOSURE. INTENTIONAL_FAIL_CLOSED_REVOCATION_BEFORE_TASK_EXPOSURE_PREEMPTS_THE_OLD_INFRA_FAILURE_FINAL_ZERO_CLAUSE.",
+  "truth_repair": {
+    "consumed_slots": [
+      "terminal-bench-science/genomic-model-ranking::trial-0",
+      "terminal-bench-science/mri-harmonization::trial-0",
+      "terminal-bench-science/navigation-sensor-calibration::trial-0",
+      "terminal-bench-science/baseline-free-localization::trial-0",
+      "terminal-bench-science/virtual-baseline-localization::trial-0",
+      "terminal-bench-science/koopman-mfg-id::trial-0",
+      "terminal-bench-science/reactor-safety-control::trial-0"
+    ],
+    "consumed_successes": 0,
+    "consumed_final_failures": 7,
+    "next_untouched_slot": {
+      "schedule_rank": 8,
+      "slot_id": "terminal-bench-science/linked-cell-suppression::trial-0",
+      "task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0"
+    },
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 80,
+    "maximum_possible_successes_remaining": 203,
+    "pass_still_mathematically_reachable": true
+  },
+  "hard_rules": [
+    "DO_NOT_REISSUE_RANK8_UNTIL_CURRENT_CONTROLLER_AND_PLANNER_BYTES_ARE_INDEPENDENTLY_VERIFIED",
+    "ANY_FUTURE_PREEXPOSURE_GATE_MUST_VALIDATE_LIVE_CANONICAL_AUTHORITY_OR_A_CONTENT_ADDRESSED_REVOCATION_EPOCH__NOT_ONLY_STALE_CARRIER_COPIES",
+    "NO_RETRY_OF_CONSUMED_RANK1_THROUGH_RANK7",
+    "NO_BENCHMARK_OR_CAPABILITY_CREDIT_FROM_REVOKED_RANK8_RUN"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
