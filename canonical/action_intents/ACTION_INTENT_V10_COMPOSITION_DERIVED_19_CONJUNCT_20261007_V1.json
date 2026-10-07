@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-07",
+  "status": "PROOF_ONLY__ZERO_CREDIT",
+  "canonical_base_commit": "2ff181d5bbf1780c1d779254f14f8164a4ce7ab0",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "claim_under_test": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR_IS_AN_INDEPENDENT_TOP_LEVEL_STRUCTURAL_CONJUNCT_IN_ADDITION_TO_COMPLETE_SELECTED_CONTEXT_ABC",
+  "method": "NECESSITY_FALSIFICATION_BY_V9_B9_DERIVATIVE_RULE_PLUS_EXISTING_B9_COMPOSITION_DERIVATIVE_THEOREM_AND_INDEPENDENT_BOOLEAN_EQUIVALENCE",
+  "source_bindings": {
+    "v10": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V10.json",
+      "git_blob_sha": "86d7cd3f96afc9330d5b474a33cc43018fc6ff6b"
+    },
+    "v9": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V9.json",
+      "git_blob_sha": "1ec7f2c86534d046e51ddda00001ed287039fc0a"
+    },
+    "b9_derivative": {
+      "path": "canonical/governance/B9_COMPOSITION_DERIVATIVE_REDUCTION_20261007_V1.json",
+      "git_blob_sha": "719ad74545f73f4f3e458892b7cd91005499cebd"
+    },
+    "b9_verification": {
+      "path": "canonical/verification/B9_COMPOSITION_DERIVATIVE_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "2cba848dbd30c12da17451b947227a7ee10070f0"
+    }
+  },
+  "invariants": [
+    "COMPOSITION_TERMINAL_SUCCESS_REMAINS_MANDATORY_AS_A_DERIVED_ABC_CONSEQUENCE",
+    "NO_COMPOSITION_TARGET_CONTEXT_MAY_BE_DROPPED_FROM_ABC",
+    "EVERY_REACHED_COMPOSITION_TRANSFORM_STILL_REQUIRES_LOCAL_C",
+    "ALL_PRIMITIVE_ROLE_DOMINANCE_PREMISES_USED_BY_COMPOSED_TRAJECTORIES_REMAIN_LOAD_BEARING",
+    "D_OWNERSHIP_EFFECT_GATES_UNCHANGED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
