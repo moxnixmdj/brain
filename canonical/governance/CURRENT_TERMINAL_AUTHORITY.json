@@ -514,7 +514,7 @@
     },
     "above_exponential_u_single_primitive_reconciliation": {
       "path": "canonical/governance/ABOVE_EXPONENTIAL_U_SINGLE_PRIMITIVE_RECONCILIATION_20261007_V2.json",
-      "git_blob_sha": ""
+      "git_blob_sha": "f0776f0f900962228e8924aaf602d98973f5eddb"
     },
     "db_escape_catchall_total_abstraction": {
       "path": "canonical/governance/DB_ESCAPE_CATCHALL_TOTAL_ABSTRACTION_REDUCTION_20261007_V1.json",
@@ -804,7 +804,7 @@
     "gdpval_direct_target_query_currently_irreducible": false,
     "gdpval_public_220_structural_semantic_quality_complement_open": true,
     "current_information_cut": "ABC_CURRENT_BOUND_MINIMUM_IRREDUCIBLE_INFORMATION_CUT_20261007_V3",
-    "current_reality_cut": "ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V7",
+    "current_reality_cut": "ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V8",
     "authenticated_positive_cover_compiler_bound": true,
     "finance_unique_interpretation_overconstraint_closed": true,
     "finance_common_policy_region_gate_independent_replay_passed": true,
