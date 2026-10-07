@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_TARGET_RELATIVE_INFORMATION_CUT_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_PASS__TWO_WORLD_INFORMATION_CUT__15_CLASS_9_LANE_SET_COVER__ZERO_CREDIT",
+  "subjects": {
+    "information_cut": {
+      "path": "canonical/governance/GDPVAL_TARGET_RELATIVE_INFORMATION_CUT_20261007_V1.json",
+      "git_blob_sha": "5fae9a761246698a6c8302a70ed5400a3db84248"
+    },
+    "reality_cut_v7": {
+      "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V7.json",
+      "git_blob_sha": "4061c8ce4eb59217cdbcc35aca7d1203aa317269"
+    }
+  },
+  "wolfram": {
+    "two_world_counterexamples": [
+      {
+        "o1": true,
+        "o2": true,
+        "h1": true,
+        "h2": false
+      },
+      {
+        "o1": true,
+        "o2": true,
+        "h1": false,
+        "h2": true
+      }
+    ],
+    "same_decision_matches_opposite_targets_satisfiability_count": 0,
+    "set_cover_minimum_lane_count": 9,
+    "set_cover_unique_minimum": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5",
+      "L6",
+      "L7",
+      "L8",
+      "L9"
+    ],
+    "result": "PASS"
+  },
+  "verified": [
+    "IDENTICAL_PUBLIC_OBSERVATION_CAN_COEXIST_WITH_OPPOSITE_HIDDEN_TARGET_RELATIONS_IN_THE_ABSTRACT_COUNTERMODEL.",
+    "NO_SINGLE_DETERMINISTIC_DECISION_FROM_THAT_IDENTICAL_OBSERVATION_MATCHES_BOTH_OPPOSITE_TARGET_TRUTHS.",
+    "RESTORING_GDPVAL_AA_OWNER_LAYER_INSIDE_EXISTING_L4_PRODUCES_15_CURRENT_POSITIVE_REALITY_CLASSES_WITH_MINIMUM_CURRENT_BOUND_LANE_COUNT_9.",
+    "SYNTHESIS_MATCHED_QUALITY_REMAINS_ABSENT_FROM_THE_POSITIVE_REALITY_SET.",
+    "CURSORBENCH_REMAINS_IN_THE_REPAIRED_OWNER_BOUNDARY_L7."
+  ],
+  "hard_nonclaims": [
+    "THE_ABSTRACT_TWO_WORLD_THEOREM_DOES_NOT_BY_ITSELF_IDENTIFY_THE_REAL_HUMAN_PREFERENCE_FUNCTION.",
+    "NO_GDPVAL_CLOSURE.",
+    "NO_BRAIN_OWNER_ELO.",
+    "NO_U_EMPTY_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
