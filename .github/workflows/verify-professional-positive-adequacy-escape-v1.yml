@@ -1,0 +1,20 @@
+name: Verify professional positive adequacy escape
+on:
+  pull_request:
+    paths:
+      - canonical/runtime/professional_positive_adequacy_escape_router_v1.py
+      - canonical/tests/test_professional_positive_adequacy_escape_router_v1.py
+      - canonical/governance/PROFESSIONAL_POSITIVE_ADEQUACY_ESCAPE_20261007_V1.json
+      - .github/workflows/verify-professional-positive-adequacy-escape-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_professional_positive_adequacy_escape_router_v1

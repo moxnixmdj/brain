@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_POSITIVE_ADEQUACY_ESCAPE_PUBLIC_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_ROUTER_GOVERNANCE_AND_DIRECT_DEPENDENCY_BYTES__FAIL_CLOSED_ROUTING_VERIFIED__ZERO_CREDIT",
+  "subject": {
+    "runtime": {"path":"canonical/runtime/professional_positive_adequacy_escape_router_v1.py","git_blob_sha":"8344807bb267c88df45091dc2d037001faf8979f"},
+    "governance": {"path":"canonical/governance/PROFESSIONAL_POSITIVE_ADEQUACY_ESCAPE_20261007_V1.json","git_blob_sha":"471840f0c4c6ae690b7fa3b953714131a11e6de3"},
+    "direct_reused_mechanisms": [
+      {"path":"canonical/runtime/professional_source_authority_coverage_gate_v1.py","git_blob_sha":"45ff93b28a3ef4170127f572639964fd3b12d637"},
+      {"path":"canonical/runtime/p2_membership_residual_localizer_v1.py","git_blob_sha":"e4b555b7dd7c7ff380b687f980ea03856614992b"},
+      {"path":"canonical/runtime/source_positive_adequacy_db_admission_v1.py","git_blob_sha":"1febb024c049acf2a0108219d074c31a1f33db26"}
+    ]
+  },
+  "current_main_dependency_crosscheck": {
+    "all_direct_reused_mechanism_blobs_still_exact": true,
+    "main_head_at_crosscheck": "1ecdcb64d7be22023b9c18bbbf1367a7d14852a6"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2384,
+    "verification_branch_head": "f57aa23a04144d16b465acb373228a013455cee5",
+    "preservation_merge_commit": "d2770bb60abc9c5fb0549ba9f8eb3d6f101883d0",
+    "workflow_name": "Verify professional positive adequacy escape",
+    "workflow_run_id": 37616521911,
+    "workflow_job_id": 112776063985,
+    "conclusion": "success"
+  },
+  "verified": {
+    "declared_structural_omission_blocks_before_semantic_routes": true,
+    "exact_p2_membership_short_circuits_positive_adequacy": true,
+    "free_form_p2_failure_routes_to_positive_adequacy_before_full_semantic_completion": true,
+    "source_proved_positive_adequacy_can_close_only_the_selected_cell": true,
+    "positive_pass_without_db_admission_authority_is_rejected": true,
+    "positive_adequacy_source_text_mismatch_fails_closed": true,
+    "positive_adequacy_source_id_mismatch_fails_closed": true,
+    "global_professional_scope_not_granted": true,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "causal_effect": {
+    "deleted_assumption": "FULL_SEMANTIC_COMPLETION_IS_ALWAYS_A_NECESSARY_PRECONDITION_FOR_PROFESSIONAL_POLICY_ADMISSION",
+    "replacement_rule": "FIRST_TEST_WHETHER_ONE_BRAIN_OWNED_POLICY_IS_SOURCE_PROVED_ADEQUATE_ACROSS_THE_SOUND_SOURCE_COMPATIBLE_OVERAPPROXIMATION__ONLY_POLICY_CHANGING_UNRESOLVED_SEMANTICS_SURVIVE",
+    "new_capability_primitive_justified": false
+  },
+  "hard_nonclaims": [
+    "NO_AA_BRIEFCASE_SCORE_OR_ACCEPTANCE_CLOSED",
+    "NO_GDPVAL_ACCEPTANCE_CLOSED",
+    "NO_GLOBAL_PROFESSIONAL_SCOPE_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
