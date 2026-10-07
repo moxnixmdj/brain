@@ -1,0 +1,36 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_28_CURRENT_BASIS_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_CURRENT_BASE_PASS__28_TOTAL__D15_U13__ZERO_CREDIT",
+  "subject":{
+    "factorizer":{"path":"canonical/runtime/terminal_frontier_factorizer_v4.py","git_blob_sha":"bd8c89c2c18a33bfc5ba788741aff02476b6c6b1"},
+    "tests":{"path":"canonical/tests/test_terminal_28_truth_basis_current_v1.py","git_blob_sha":"4ecad1819b0531833bab2030fe855e14aad8597e"},
+    "countermodel":{"path":"canonical/governance/IF_ZERO_CRITICAL_AUTHORITY_NECESSITY_COUNTERMODEL_20261007_V1.json","git_blob_sha":"359bf94a129961a3899e7d7c485ffc29ff015880"},
+    "audit":{"path":"canonical/governance/IF_ZERO_CRITICAL_AUTHORITY_TERMINAL_BINDING_AUDIT_20261007_V1.json","git_blob_sha":"8135c0ada40254b13cd18a22dec44b8d81281f3b"},
+    "current_authority":{"path":"canonical/governance/CURRENT_TERMINAL_AUTHORITY_V9.json","git_blob_sha":"1ec7f2c86534d046e51ddda00001ed287039fc0a"}
+  },
+  "verified":{
+    "atomic_count":20,
+    "meta_count":8,
+    "truth_count":28,
+    "direct_result_count":15,
+    "structural_count":13,
+    "deleted_predicate_absent":true,
+    "relative_authority_noninferiority_does_not_imply_literal_zero":true,
+    "separate_absolute_zero_gate_can_be_absorbed_into_D_L2_without_changing_terminal_conjunction":true
+  },
+  "preserves":[
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+    "AUTHORITY_RISK_NONREGRESSION_WHERE_LOAD_BEARING",
+    "ANY_SEPARATELY_PROVED_ABSOLUTE_ZERO_AUTHORITY_GATE_INSIDE_D_L2",
+    "ALL_V9_SELECTED_CONTEXT_ABC_REQUIREMENTS",
+    "ALL_V9_D_OWNERSHIP_AND_EFFECT_REQUIREMENTS"
+  ],
+  "hard_nonclaims":[
+    "NO_IF_FAMILY_ACCEPTANCE",
+    "NO_RELAXATION_OF_ABSOLUTE_PROJECT_SAFETY_OR_AUTHORITY_GATES",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
