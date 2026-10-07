@@ -1215,9 +1215,78 @@ def _knowledge_source_identity(url,json_path):
     ).hexdigest()
 
 
+
+def _certificate_gated_route_action(args):
+    """Bind the verified certificate-gated router into the live ASTRA action seam.
+
+    This function contributes no semantic adequacy authority. It accepts only
+    pre-existing positive admission receipts, delegates selection to the
+    independently replayed router core, and converts every malformed/uncovered
+    case into an ASTRA fail-closed blocker.
+    """
+    if not isinstance(args,dict):
+        raise Blocker("CERTIFICATE_GATED_ROUTE_ARGS_INVALID")
+    actual_context_digest=str(args.get("actual_context_digest") or "").strip()
+    raw_receipts=args.get("receipts")
+    if not actual_context_digest:
+        raise Blocker("CERTIFICATE_GATED_ROUTE_CONTEXT_MISSING")
+    if not isinstance(raw_receipts,list) or not raw_receipts:
+        raise Blocker("CERTIFICATE_GATED_ROUTE_RECEIPTS_INVALID")
+
+    router=_load_runtime_helper("certificate_gated_selected_route_router_v1")
+    receipts=[]
+    required=(
+        "context_digest","cell_id","route_id","route_blob_sha",
+        "adequacy_certificate_blob_sha","admission_certificate_blob_sha","admitted",
+    )
+    for i,row in enumerate(raw_receipts):
+        if not isinstance(row,dict) or any(k not in row for k in required):
+            raise Blocker("CERTIFICATE_GATED_ROUTE_RECEIPT_MALFORMED:"+str(i))
+        if type(row.get("admitted")) is not bool:
+            raise Blocker("CERTIFICATE_GATED_ROUTE_ADMISSION_NOT_BOOLEAN:"+str(i))
+        try:
+            receipts.append(router.AdmissionReceipt(
+                context_digest=str(row["context_digest"]),
+                cell_id=str(row["cell_id"]),
+                route_id=str(row["route_id"]),
+                route_blob_sha=str(row["route_blob_sha"]),
+                adequacy_certificate_blob_sha=str(row["adequacy_certificate_blob_sha"]),
+                admission_certificate_blob_sha=str(row["admission_certificate_blob_sha"]),
+                admitted=row["admitted"],
+            ))
+        except Exception as exc:
+            raise Blocker(
+                "CERTIFICATE_GATED_ROUTE_RECEIPT_CONSTRUCTION_FAILED:"
+                +str(i)+":"+type(exc).__name__+":"+str(exc)
+            ) from exc
+    try:
+        chosen=router.select_certified_route(
+            actual_context_digest=actual_context_digest,
+            receipts=receipts,
+        )
+    except Exception as exc:
+        if isinstance(exc,getattr(router,"RouterFailClosed",())):
+            raise Blocker("CERTIFICATE_GATED_ROUTE_FAIL_CLOSED:"+str(exc)) from exc
+        raise
+    return {
+        "type":"select_certified_route",
+        "output_verified":True,
+        "actual_context_digest":actual_context_digest,
+        "cell_id":chosen.cell_id,
+        "route_id":chosen.route_id,
+        "route_blob_sha":chosen.route_blob_sha,
+        "adequacy_certificate_blob_sha":chosen.adequacy_certificate_blob_sha,
+        "admission_certificate_blob_sha":chosen.admission_certificate_blob_sha,
+        "admitted":chosen.admitted,
+        "router_runtime":"canonical/runtime/certificate_gated_selected_route_router_v1.py",
+        "semantic_adequacy_self_certified":False,
+    }
+
 def _goal_action(action):
     typ=action.get("type")
     args=action.get("args") or {}
+    if typ=="select_certified_route":
+        return _certificate_gated_route_action(args)
     if typ=="list_tree":
         base=_safe_repo_path(args.get("prefix",""))
         if not base.exists(): return {"type":typ,"error":"PATH_NOT_FOUND","path":str(args.get("prefix",""))}
