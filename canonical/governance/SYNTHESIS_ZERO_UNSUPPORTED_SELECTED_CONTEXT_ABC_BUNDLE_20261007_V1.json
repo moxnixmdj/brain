@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_ZERO_UNSUPPORTED_SELECTED_CONTEXT_ABC_BUNDLE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SELECTED_CONTEXT_ABC_CELL__ZERO_UNSUPPORTED_MATERIAL_CLAIMS__ZERO_GLOBAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V9.json",
+    "git_blob_sha": "1ec7f2c86534d046e51ddda00001ed287039fc0a"
+  },
+  "target_predicate": "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+  "family": "COMMUNICATION_AND_SYNTHESIS",
+  "selected_cell": {
+    "id": "P3_T1_T3_LOAD_BEARING_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+    "scope": "THE FROZEN T1/T3 LOAD-BEARING EVIDENCE_TO_AUDIENCE_SYNTHESIS SURFACES FOR WHICH DIRECT P3 INSTRUMENTATION IS PART OF THE TERMINAL ACCEPTANCE CONTRACT",
+    "scope_binding": {
+      "predicate_registry_path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "predicate_registry_git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+      "current_state": "PROVED",
+      "independent_or_objective": true,
+      "scope_complete": true
+    },
+    "terminal_semantics": {
+      "source_quotient": "VISIBLE VERIFIED EVIDENCE UNITS USER OBJECTIVE AUDIENCE REQUIRED CLAIMS OUTPUT BUDGET FORMAT STYLE AND MATERIAL UNCERTAINTY",
+      "target_quotient": "COUNT OF UNSUPPORTED MATERIAL CLAIMS ON THE DECLARED LOAD-BEARING SYNTHESIS SURFACE",
+      "evaluator": "MINIMIZE UNSUPPORTED MATERIAL CLAIM COUNT",
+      "objective_floor": 0,
+      "hard_constraints": "PRESERVE REQUIRED CLAIM COVERAGE PROVENANCE MATERIAL CONFLICT UNCERTAINTY DECISION-RELEVANT EVIDENCE AND AUDIENCE/FORMAT CONSTRAINTS AS DECLARED BY THE P3 CONTRACT"
+    }
+  },
+  "selected_brain_route": {
+    "policy": "P3_INFORMATION_SAFE_CANDIDATE_V3",
+    "selected_discriminator": "NONE BEYOND EXPLICIT VISIBLE TASK EVIDENCE AND CONSTRAINTS",
+    "operative_files": [
+      {
+        "path": "canonical/runtime/p3_information_safe_candidate_v3.py",
+        "git_blob_sha": "54bfc7e5ee205aa328863a5ea1ca6f47f864d85a"
+      }
+    ],
+    "dependencies": "STDLIB_ONLY_TYPING"
+  },
+  "A_B_semantic_adequacy": {
+    "current_predicate_binding": {
+      "source": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "state": "PROVED",
+      "proof_kind": "RECEIPT",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "basis": "T1_AND_T3_LOAD_BEARING_SYNTHESIS_RECEIPTS_PASS__FROZEN_P3_BINDING_REQUIRED_CHECK_INCLUDES_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_AND_ANY_LOAD_BEARING_P3_FAILURE_BLOCKS_BEHAVIOR_PROOF"
+    },
+    "terminal_wave": {
+      "source": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "public_runner_conclusion": "success",
+      "direct_P3_instrumentation_load_bearing": true
+    },
+    "dominance_statement": "UNSUPPORTED_MATERIAL_CLAIM_COUNT_IS NONNEGATIVE AND THE BOUND BRAIN ROUTE IS VERIFIED AT THE OBJECTIVE FLOOR ZERO ON THE DECLARED SCOPE__THEREFORE NO TARGET CAN HAVE A STRICTLY LOWER VALUE ON THIS COORDINATE"
+  },
+  "local_C": {
+    "transform_boundary": "ONE DETERMINISTIC ROUTE FROM VISIBLE EVIDENCE/CONSTRAINT STATE TO SELECTED CLAIM/UNCERTAINTY OUTPUT",
+    "source_state_quotient": "VISIBLE P3 TASK CONTRACT FIELDS USED BY THE ROUTE",
+    "target_state_quotient": "UNSUPPORTED MATERIAL CLAIM COUNT PLUS THE DECLARED LOAD-BEARING P3 HARD-CONSTRAINT CHECKS",
+    "evaluator_pullback": "THE P3 CHECKER DETERMINISTICALLY EVALUATES THE ROUTE OUTPUT AGAINST THE BOUND LOAD-BEARING SYNTHESIS CONTRACT",
+    "hard_constraint_preimages": "THE SAME P3 DIRECT INSTRUMENTATION GATES BLOCK CREDIT ON REQUIRED CLAIM COVERAGE PROVENANCE CONFLICT UNCERTAINTY DECISION-RELEVANT OMISSION AND AUDIENCE/FORMAT FAILURE",
+    "status": "CANDIDATE_LOCAL_C_FOR_THIS_CELL"
+  },
+  "route_local_D": {
+    "model_dependency": "MODEL_INDEPENDENT",
+    "opaque_external_capability_provider": false,
+    "external_tools_required": false,
+    "material_effect_footprint": "EMPTY BY SOURCE INSPECTION__THE EXACT OPERATIVE MODULE IMPORTS ONLY typing AND PERFORMS IN-MEMORY DETERMINISTIC TRANSFORMATION",
+    "status": "CANDIDATE_ROUTE_LOCAL_EFFECT_AND_PROVIDER_CLOSURE__NOT_GLOBAL_D"
+  },
+  "consequence": {
+    "selected_cell_ABC_seed": true,
+    "family_closed": false,
+    "remaining_family_residuals": [
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "ANY LOAD-BEARING SYNTHESIS CONTEXT OUTSIDE THE DECLARED T1/T3 ZERO-UNSUPPORTED-CLAIMS CELL"
+    ],
+    "new_target_reality_consumed": 0,
+    "global_terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO WHOLE COMMUNICATION_AND_SYNTHESIS FAMILY ACCEPTANCE OR OWNERSHIP CREDIT",
+    "NO CLAIM SYNTHESIS QUALITY OR COVERAGE NONINFERIORITY IS CLOSED",
+    "NO CLAIM ALL B7 CONTEXTS ARE COVERED",
+    "NO GLOBAL D CLOSURE",
+    "NO TERMINAL GOAL CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
