@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_220_IMPERATIVE_DIRECTIVE_LOCALIZATION_CROSS_IMPLEMENTATION_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__LIVE_PUBLIC_220_REPLAY__ZERO_TASK_ID_DRIFT__ZERO_PROMPT_SHA_DRIFT__421_DIRECTIVES__FAIL_CLOSED_NO_TERMINAL_CREDIT",
+  "candidate": {
+    "path": "canonical/evidence/GDPVAL_PUBLIC_220_IMPERATIVE_DIRECTIVE_LOCALIZATION_20261007_V2.json",
+    "git_blob_sha": "e1a054a937df919749834619be2506de1f3aa39d"
+  },
+  "implementation": {
+    "path": "canonical/runtime/bounded_imperative_directive_semantics_v2.py",
+    "git_blob_sha": "8afaa0ab30a98276b04076b6c9a9c25b9df8642e"
+  },
+  "replay": {
+    "path": "canonical/runtime/gdpval_public_220_imperative_directive_audit_v1.py",
+    "git_blob_sha": "47ebccb16abc7c38651d79310a482ab3648cfb0c"
+  },
+  "verification_method": [
+    "FETCH_PUBLIC_GDPVAL_ROWS_IN_THREE_PAGES_0_100__100_100__200_20",
+    "COMPARE_ALL_220_TASK_IDS_TO_CANONICAL_PRIOR_LOCALIZATION",
+    "RECOMPUTE_SHA256_OF_ALL_220_PROMPTS_AND_COMPARE_TO_CANONICAL_PROMPT_HASHES",
+    "REIMPLEMENT_V2_SEGMENTATION_AND_DIRECTIVE_ADMISSION_IN_JAVASCRIPT_INDEPENDENT_OF_THE_COMMITTED_PYTHON_RUNTIME",
+    "ADVERSARIALLY_INSPECT_AMBIGUOUS_VERB_PARSES_AND_REPAIR_FOUND_FILENAME_DECLARATIVE_HEADING_AND_SLASH_LABEL_FALSE_POSITIVES",
+    "REPLAY_FINAL_COUNTS"
+  ],
+  "observed": {
+    "row_count": 220,
+    "task_id_mismatch_count": 0,
+    "prompt_sha256_mismatch_count": 0,
+    "resolved_imperative_directive_count": 421,
+    "tasks_with_imperative_directives": 173,
+    "tasks_with_any_prior_modal_or_new_imperative_positive_semantics": 194,
+    "whole_task_semantic_membership_proved_count": 0
+  },
+  "verified": [
+    "PUBLIC_POPULATION_IDENTITY_MATCHES_CANONICAL_220_PROMPTS",
+    "V2_FILENAME_AND_DECIMAL_SEGMENTATION_REPAIR_IS_LOAD_BEARING",
+    "AMBIGUOUS_NOUN_HEADING_GUARDS_ARE_LOAD_BEARING",
+    "421_ONE_SIDED_SOURCE_BOUND_IMPERATIVE_DIRECTIVES_SURVIVE_FINAL_FAIL_CLOSED_REPLAY",
+    "173_OF_220_TASKS_CONTAIN_AT_LEAST_ONE_SUCH_DIRECTIVE",
+    "194_OF_220_TASKS_HAVE_AT_LEAST_ONE_PRIOR_MODAL_OR_NEW_IMPERATIVE_POSITIVE_SEMANTIC_UNIT",
+    "NO_WHOLE_TASK_ADMISSION_FOLLOWS"
+  ],
+  "hard_nonclaims": [
+    "NOT_AN_INDEPENDENT_ORACLE_FOR_POLICY_ADEQUACY",
+    "NO_WHOLE_TASK_SEMANTIC_COMPLETENESS",
+    "NO_GDPVAL_SCOPE_CLOSURE",
+    "NO_U_EMPTY",
+    "NO_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
