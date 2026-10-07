@@ -1,18 +1,15 @@
 """Bridge source-aligned semantic proof v4 into monotone policy resolution.
 
-V4 source entailment is not policy adequacy. This bridge preserves the v3
-content-addressed adequacy-authentication boundary: caller-supplied policy
-conditions are logical queries only and cannot self-certify a policy.
+V4 source facts may entail policy-condition formulas, but source entailment is not
+policy adequacy. COMMON_POLICY_CERTIFIED requires the same content-addressed
+adequacy certificate + independent verification boundary enforced by v3.
 """
 from __future__ import annotations
-
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.source_aligned_semantic_proof_v4 import verify_proof
 from canonical.runtime.monotone_semantic_constraint_kernel_v1 import resolve_common_policy
-from canonical.runtime.proof_carrying_semantic_refinement_v3 import (
-    _authenticate_policy_adequacy,
-)
+import canonical.runtime.proof_carrying_semantic_refinement_v3 as adequacy_auth
 
 SCHEMA = "BRAIN_PROOF_CARRYING_SEMANTIC_REFINEMENT_V4"
 
@@ -37,11 +34,9 @@ def resolve_from_source_proof(
     )
     if proof.get("status") == "FAIL_CLOSED":
         return {
-            "schema": SCHEMA,
-            "status": "FAIL_CLOSED",
+            "schema": SCHEMA, "status": "FAIL_CLOSED",
             "reason": "SOURCE_PROOF_FAIL_CLOSED",
-            "source_proof": proof,
-            "terminal_authority": False,
+            "source_proof": proof, "terminal_authority": False,
         }
 
     proved = proof.get("proved_constraints") or []
@@ -53,11 +48,9 @@ def resolve_from_source_proof(
     )
     if refinement.get("status") == "FAIL_CLOSED":
         return {
-            "schema": SCHEMA,
-            "status": "FAIL_CLOSED",
+            "schema": SCHEMA, "status": "FAIL_CLOSED",
             "reason": "SEMANTIC_REFINEMENT_FAIL_CLOSED",
-            "source_proof": proof,
-            "semantic_refinement": refinement,
+            "source_proof": proof, "semantic_refinement": refinement,
             "terminal_authority": False,
         }
 
@@ -67,24 +60,22 @@ def resolve_from_source_proof(
         if isinstance(policy_adequacy_bindings, Mapping)
         else {}
     )
-
-    certified: list[str] = []
-    auth_rows: list[dict[str, Any]] = []
-    rejected_auth: list[dict[str, Any]] = []
+    certified = []
+    auth_rows = []
+    rejected = []
     for pid in entailed:
         condition = policy_conditions.get(pid)
         if not isinstance(condition, Mapping):
-            rejected_auth.append({
-                "policy_id": pid,
-                "reason": "POLICY_CONDITION_MISSING",
-            })
+            rejected.append({"policy_id": pid, "reason": "POLICY_CONDITION_MISSING"})
             continue
-        ok, row = _authenticate_policy_adequacy(pid, condition, bindings.get(pid))
+        ok, row = adequacy_auth._authenticate_policy_adequacy(
+            pid, condition, bindings.get(pid)
+        )
         if ok:
             certified.append(pid)
             auth_rows.append(row)
         else:
-            rejected_auth.append(row)
+            rejected.append(row)
 
     if certified:
         status = "COMMON_POLICY_CERTIFIED"
@@ -104,13 +95,12 @@ def resolve_from_source_proof(
             auth_rows, key=lambda x: x["policy_id"]
         ),
         "rejected_policy_adequacy_bindings": sorted(
-            rejected_auth, key=lambda x: x.get("policy_id", "")
+            rejected, key=lambda x: x.get("policy_id", "")
         ),
         "terminal_authority": False,
         "boundary": (
-            "V4_BINDS_CONTROLLED_SOURCE_EXCEPTION_CONDITION_TRUTH_INTO_MONOTONE_"
-            "POLICY_RESOLUTION_BUT_SOURCE_ENTAILMENT_DOES_NOT_SELF_CERTIFY_POLICY_"
-            "ADEQUACY;COMMON_POLICY_CERTIFIED_REQUIRES_CONTENT_ADDRESSED_BRAIN_"
-            "OWNED_ADEQUACY_PLUS_INDEPENDENT_VERIFICATION"
+            "V4_BINDS_CONTROLLED_SOURCE_EXCEPTION_CONDITION_TRUTH;"
+            "SOURCE_ENTAILMENT_IS_NOT_POLICY_ADEQUACY;"
+            "COMMON_POLICY_CERTIFIED_REQUIRES_V3_CONTENT_ADDRESSED_ADEQUACY_AUTH"
         ),
     }
