@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_AUTHENTICATED_PRESENTATION_PARETO_COMPARATOR_SEPARATE_ENVIRONMENT_REPLAY_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_GIT_BLOBS_REPLAYED_IN_SEPARATE_PYTHON_EXECUTION_ENVIRONMENT__7_OF_7_TESTS_PASS__NOT_GITHUB_ACTIONS_CI",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/authenticated_presentation_pareto_comparator_v1.py",
+      "git_blob_sha": "248c48bda4004cea514f06359969c0aa4222e15c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_authenticated_presentation_pareto_comparator_v1.py",
+      "git_blob_sha": "71443bf5d6f48aefcecc87bbe839b4bac2230736"
+    },
+    "dependency": {
+      "path": "canonical/runtime/effect_broker_receipt_resolver_v2.py",
+      "git_blob_sha": "7f4eeeb19def420d0014631b99c5e2dc3a30592e"
+    }
+  },
+  "replay": {
+    "environment": "SEPARATE_CHATGPT_PYTHON_SANDBOX",
+    "exact_blob_identity_recomputed": true,
+    "command": "python -m pytest -q canonical/tests/test_authenticated_presentation_pareto_comparator_v1.py",
+    "returncode": 0,
+    "passed": 7,
+    "failed": 0,
+    "pytest_summary": "7 passed in 0.07s",
+    "test_classes": [
+      "A_PARETO_DOMINATES_WHEN_ONE_BETTER_AND_NONE_WORSE",
+      "B_PARETO_DOMINATES",
+      "MIXED_REGRESSION_IS_INCOMPARABLE",
+      "ALL_EQUAL_IS_TIE",
+      "MISSING_DIMENSION_BINDING_FAILS_CLOSED",
+      "INCOMPLETE_DIMENSION_SET_FAILS_CLOSED",
+      "DIMENSION_RECEIPT_BLOB_DRIFT_FAILS_CLOSED"
+    ]
+  },
+  "truth_boundary": {
+    "github_actions_receipt_observed": false,
+    "claim": "THIS_IS_AN_EXACT_BYTE_SEPARATE_EXECUTION_REPLAY__NOT_A_CLAIM_OF_INDEPENDENT_GITHUB_ACTIONS_OR_SEPARATE_AGENT_ADJUDICATION",
+    "semantic_dimension_truth_self_verified": false,
+    "dimension_set_completeness_self_verified": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
