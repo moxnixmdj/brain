@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_TOP_LAW_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_BLOB_REPLAY_PASS__7_OF_7__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_TOP_LAW_CELL_20261007_V1.json",
+      "git_blob_sha": "042d89d354a6d10f97a4ac45d45825d1673247ec"
+    },
+    "runtime": {
+      "path": "canonical/runtime/synthesis_certified_visible_support_policy_v1.py",
+      "git_blob_sha": "dcef050165201d506f66c86854cb30bcb7637b42"
+    },
+    "tests": {
+      "path": "canonical/tests/test_synthesis_certified_visible_support_policy_v1.py",
+      "git_blob_sha": "1a0e01a3de260d0f43549c0b15df4d5f2668ad1b"
+    },
+    "bounded_support": {
+      "path": "canonical/runtime/bounded_claim_support.py",
+      "git_blob_sha": "197246a50ace8c16b945def9edb1357fb317c393"
+    },
+    "grounded_realizer": {
+      "path": "canonical/runtime/synthesis_grounded_expression_ir_v1.py",
+      "git_blob_sha": "0709b7d43a069eaa9eb3240df28789a9107a36db"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-c2-independent-replay-v3",
+    "sprite_id": "sprite-b5cc7147-1e70-4905-8176-d3fa129aac58",
+    "working_directory": "/home/sprite/synth_visible_support_replay_v1",
+    "pytest_available": false,
+    "execution_mode": "DIRECT_IMPORT_AND_CALL_OF_ALL_CALLABLE_TEST_FUNCTIONS_PREFIXED_test_",
+    "tests_passed": 7,
+    "tests_total": 7
+  },
+  "exact_blob_recomputation": {
+    "all_exact": true,
+    "method": "GIT_BLOB_SHA1_OVER_header_blob_space_len_NUL_plus_bytes_RECOMPUTED_INSIDE_SPRITE",
+    "blobs": {
+      "canonical/runtime/synthesis_certified_visible_support_policy_v1.py": "dcef050165201d506f66c86854cb30bcb7637b42",
+      "canonical/tests/test_synthesis_certified_visible_support_policy_v1.py": "1a0e01a3de260d0f43549c0b15df4d5f2668ad1b",
+      "canonical/runtime/bounded_claim_support.py": "197246a50ace8c16b945def9edb1357fb317c393",
+      "canonical/runtime/synthesis_grounded_expression_ir_v1.py": "0709b7d43a069eaa9eb3240df28789a9107a36db"
+    }
+  },
+  "passed_checks": [
+    "VISIBLE_SUPPORT_AND_CONFLICT_DERIVED_WITHOUT_HIDDEN_LABELS",
+    "EXPLICIT_AUDIENCE_PROFILE_CAUSAL_TO_OUTPUT",
+    "UNRESOLVED_GENERAL_SEMANTICS_FAIL_CLOSED",
+    "CLAIM_WITHOUT_CERTIFIED_SUPPORT_FAILS_CLOSED",
+    "OPTIONAL_SALIENCE_NOT_SMUGGLED_INTO_CELL",
+    "UNVERIFIED_EVIDENCE_REJECTED",
+    "SEMANTIC_REORDERING_REQUEST_STAYS_OUTSIDE_CELL"
+  ],
+  "consequence": [
+    "THE_INDEPENDENT_REPLAY_BLOCKER_DECLARED_BY_SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_TOP_LAW_CELL_V1_IS SATISFIED FOR THE EXACT BOUND BLOBS.",
+    "THE PARAMETERIZED EXACT CELL MAY BE SUBTRACTED FROM SYNTHESIS_U AS A SOUND CACHED D_B REGION, SUBJECT TO THE CELL PRECONDITIONS.",
+    "NO CLAIM IS MADE OUTSIDE THE BOUNDED FACT GRAMMAR, EXPLICIT_REQUIRED_CLAIM, EXPLICIT_TYPED_AUDIENCE_CONSTRAINT CELL."
+  ],
+  "hard_nonclaims": [
+    "NO GENERAL SYNTHESIS CLOSURE",
+    "NO GENERAL PARAPHRASE ENTAILMENT",
+    "NO OPTIONAL SALIENCE OR ARBITRARY AUDIENCE SEMANTICS",
+    "NO ABC OR D FINALITY",
+    "NO TERMINAL FAMILY CAPABILITY OR OWNERSHIP CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
