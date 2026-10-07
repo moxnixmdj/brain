@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_FINITE_PORTFOLIO_CEILING_CLOSURE_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_FAIL_CLOSED_PENDING_INDEPENDENT_WORKFLOW_VERIFICATION__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "COMPLEX_MULTI_TOOL_AGENCY",
+  "target_predicates": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
+  ],
+  "freeze": {
+    "generator_freeze_commit_sha": "336c4686b26cf949c6694d6f00cf1234e5c4dd8f",
+    "post_freeze_beacon_commit_sha": "2ef64703f8852ef1d8e6d0572296552751b68926",
+    "result_blind": true,
+    "adaptive_case_selection": false
+  },
+  "portfolio": {
+    "expected_case_count": 6,
+    "expected_dimension_count": 6,
+    "manifest_sha256": "PENDING_INDEPENDENT_VERIFIER_RECONCILIATION"
+  },
+  "verification": {
+    "workflow": ".github/workflows/verify-agency-finite-portfolio-ceiling-v1.yml",
+    "status": "PENDING"
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT_BEFORE_INDEPENDENT_VERIFICATION",
+    "NO_POPULATION_GENERALIZATION_BEYOND_THE_FROZEN_FINITE_DECLARED_SCOPE",
+    "NO_OPUS_CASE_EXECUTION_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
