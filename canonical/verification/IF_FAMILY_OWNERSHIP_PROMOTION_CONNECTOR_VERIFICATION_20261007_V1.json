@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_IF_FAMILY_OWNERSHIP_PROMOTION_CONNECTOR_VERIFICATION_20261007_V1",
+  "date": "2026-10-07",
+  "status": "EXACT_SOURCE_BINDING_AND_STATIC_PROVIDER_ESCAPE_AUDIT_PASS__OWNERSHIP_PROMOTION_SUPPORTED__ZERO_NEW_REALITY",
+  "subject": {
+    "path": "canonical/governance/IF_FAMILY_OWNERSHIP_PROMOTION_PROOF_20261007_V1.json",
+    "git_blob_sha": "b12fdba5e7e33e27fb1b5ae00bd0a2b321e5fbb6"
+  },
+  "acceptance_receipts": {
+    "family_closure": [
+      "canonical/governance/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_20261007_V1.json",
+      "307ea91b0150db9d6cca9580e1b7a399035929c1"
+    ],
+    "closure_verification": [
+      "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f"
+    ],
+    "livebench": [
+      "canonical/verification/LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_PROMOTION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+      "57e27e3c56372b57a1d4e0255f49340d4a4c8588"
+    ],
+    "finite_scope_binding": [
+      "canonical/verification/IF_SCOPE_FINITE_PROTOCOL_BINDING_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "b7bfc865267554f0c7005c0835f09107b2dec998"
+    ],
+    "finite_scope_execution": [
+      "canonical/verification/IF_SCOPE_FINITE_WAVE_SPRITE_VERIFICATION_20261007_V1.json",
+      "f2736590ad5fb3161f4e65bdc137cea836996658"
+    ]
+  },
+  "verified": {
+    "strict_frozen_if_acceptance_pass": true,
+    "scope_complete": true,
+    "livebench_exact_subject_blob_count": 7,
+    "finite_scope_exact_route_blob_count": 6,
+    "transitive_capability_dependency_blob_count": 6,
+    "all_audited_nodes_under_canonical_brain_control": true,
+    "all_recorded_git_blob_shas_match_fetched_repository_content": true,
+    "external_network_calls_found": 0,
+    "opaque_model_or_target_provider_calls_found": 0,
+    "dynamic_import_calls_found": 0,
+    "os_system_calls_found": 0,
+    "external_process_calls_in_operative_nodes_found": 0,
+    "only_process_use_observed": "IF_SCOPE_FINITE_WAVE_V1_EVALUATION_HARNESS_SELF_INVOCATION_FOR_CASE_ISOLATION__NOT_OPERATIVE_CAPABILITY_RUNTIME",
+    "target_capability_rediscovery_required": false,
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "theorem_premises_satisfied": true,
+    "promotion": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+  },
+  "audit_scope_note": "STATIC_AUDIT_COVERS_THE_EXACT_LOAD_BEARING_NODES_LISTED_IN_THE_SUBJECT_PLUS_THEIR_EXPLICIT_TRANSITIVE_CAPABILITY_DEPENDENCIES_FETCHED_BY_GIT_CONTENT_ADDRESS__IT_DOES_NOT_GENERALIZE_TO_UNLISTED_CODE",
+  "hard_nonclaims": [
+    "NO_GLOBAL_D_FINALITY_CREDIT",
+    "NO_TERMINAL_CREDIT",
+    "NO_ACCEPTANCE_CREDIT_BEYOND_ALREADY_PROVED_INSTRUCTION_FOLLOWING_PROTOCOL",
+    "NO_SCOPE_GENERALIZATION_BEYOND_FROZEN_INSTRUCTION_FOLLOWING_TARGET"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "ownership_credit_delta": 1,
+    "terminal_credit_delta": 0
+  }
+}
