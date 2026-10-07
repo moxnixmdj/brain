@@ -634,6 +634,10 @@
       "path": "canonical/governance/TERMINAL_SEMANTICS_OVERSTRENGTH_REPAIR_20261007_V1.json",
       "git_blob_sha": "aa210ea6faa62d4622bd3cb72aa9f0d1be6e387a",
       "note": "MANDATORY_TERMINAL_SEMANTICS_RESTORED_TO_FROZEN_19_FAMILY_ACCEPTANCE_PLUS_OWNERSHIP_FINALITY__UNIVERSAL_TRACE_NOT_X_REMAINS_OPTIONAL_STRONGER_DISCHARGE_ROUTE"
+    },
+    "v34_false_terminal_verification_truth_repair": {
+      "path": "canonical/verification/CURRENT_TERMINAL_AUTHORITY_POINTER_V34_FALSE_TERMINAL_VERIFICATION_TRUTH_REPAIR_20261007_V1.json",
+      "note": "REVOKES_ONLY_THE_UNSUPPORTED_TRUE_CLOSURE_AND_TERMINAL_FIELDS_IN_THE_PRIOR_V34_CONNECTOR_VERIFICATION__DOES_NOT_CHANGE_THE_SINGLE_BIT_ROOT_OR_GRANT_TERMINAL_CREDIT"
     }
   },
   "live_truth": {
@@ -947,7 +951,9 @@
     "frozen_atomic_predicates_unresolved": 24,
     "frozen_atomic_predicates_total": 38,
     "universal_trace_not_x_required_for_terminal": false,
-    "universal_trace_not_x_optional_stronger_route": true
+    "universal_trace_not_x_optional_stronger_route": true,
+    "v34_connector_false_terminal_fields_revoked": true,
+    "v34_connector_verification_has_terminal_authority": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
