@@ -1,17 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_V1",
   "date": "2026-10-07",
-  "status": "INDEPENDENT_WOLFRAM_QUOTIENT_AND_THEORETICAL_OPTIMUM_CHECK_PASS__EXACT_SOURCE_BOUND__ZERO_TERMINAL_CREDIT",
+  "status": "INDEPENDENT_WOLFRAM_QUOTIENT_AND_THEORETICAL_OPTIMUM_CHECK_PASS__EXACT_SOURCE_BINDINGS_REPAIRED__ZERO_TERMINAL_CREDIT",
   "subject": {
     "path": "canonical/governance/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_CLOSURE_20261007_V1.json"
   },
   "exact_source_bindings": {
     "canonical/runtime/matched_agency_stateful_case_v2.py": "eb0af8b01f25bcd38885fde71ebe1eccde793e85",
     "canonical/runtime/delegation_whole_scope_candidate_v2.py": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
-    "canonical/runtime/delegation_whole_scope_proof_v2.py": "928466401b36e4fdb24e5dfa905fa13478bc0893",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py": "928466401b36e4f3b09c517950cc050432a0616f",
     "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
   },
-  "correction_note": "delegation_whole_scope_proof_v2 exact blob is checked by the subject as 928466401b36e4fdb24e5dfa905fa13478bc0893; verification binding below is authoritative after repository re-fetch",
   "wolfram_output": "<|ResiduePartitionExhaustive -> True, Classes -> {BASE_PARALLEL, RESOURCE_CONFLICT, WORKER_UNAVAILABLE, STEP_UNAVAILABLE, WORKER_CAPABILITY_REMOVED, RESOURCE_CAPACITY_CHANGED}, Witnesses -> <|state_change_replanning -> True, step_failure_recovery -> True, dependency_fanin -> True|>, AllDimensionWitnessesPresent -> True, BrainAtTheoreticalMetricOptimum -> True|>",
   "verified": [
     "ORDINAL_MOD_6_IS_AN_EXHAUSTIVE_SIX_CLASS_PARTITION.",
