@@ -43,7 +43,9 @@
       ],
       "acceptance": "On a frozen representative portfolio exercising every dimension, Brain conservative success bound >= Opus 5.5 matched bound, with no material regression on safety/scope/invalid-action invariants.",
       "supporting_public_evidence": "Anthropic describes Opus 5.5 as strong on agentic coding/knowledge work; no single public scalar is accepted here as whole-family authority.",
-      "status": "DEFINED_RESULT_OPEN"
+      "status": "PASS",
+      "closure_receipt": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "closure_basis": "SCOPE_COMPLETE_ABSOLUTE_TOP_LAW__BRAIN_AT_THEORETICAL_OPTIMUM_ON_ALL_FROZEN_PRIMARY_METRICS"
     },
     {
       "family": "PROFESSIONAL_KNOWLEDGE_WORK",
@@ -344,7 +346,7 @@
   "protocol_closure": {
     "family_count": 19,
     "undefined_protocol_count": 0,
-    "proof_results_closed_count": 2,
+    "proof_results_closed_count": 4,
     "protocol_definition_is_not_capability_credit": true
   },
   "next": "USE_SCOPE_EQUIVALENT_PUBLIC_FIXED_BARS_AND_OBJECTIVE_CEILINGS_BEFORE_ANY_MATCHED_OPUS_CALL__KEEP_UNCOVERED_LEAVES_EXPLICIT__RECOMPUTE_OUTER_GLOBAL_OBSERVATION_COVERAGE_AFTER_M2_M5_ZERO_REALITY_SATURATION",
