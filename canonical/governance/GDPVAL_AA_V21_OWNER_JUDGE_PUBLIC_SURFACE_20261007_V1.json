@@ -1,0 +1,128 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_AA_V21_OWNER_JUDGE_PUBLIC_SURFACE_V1",
+  "date": "2026-10-07",
+  "status": "CURRENT_PUBLIC_OWNER_EVALUATOR_SURFACE_PARTIALLY_BOUND__PAIRWISE_LLM_PANEL_AND_CROWD_BT_PUBLIC__EXACT_REALIZED_OWNER_EPOCH_GRAPH_AND_CALLABLE_ZERO_SPEND_EXECUTION_UNBOUND__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "public_sources": [
+    {
+      "source": "Artificial Analysis Intelligence Benchmarking methodology",
+      "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "observed_2026_10_07": true,
+      "methodology_version": "4.3.2",
+      "facts": [
+        "GDPval-AA v2.1 uses 220 tasks and agentic task completion with file outputs.",
+        "Pairwise grading blindly ranks two submissions for the same task.",
+        "Each pairwise comparison is decided by one judge sampled from a three-model panel.",
+        "Current pairwise judge panel: Claude Opus 5 at high effort; GPT-5.6 Sol at medium reasoning; Gemini 3.8 Flash at high reasoning.",
+        "Judge sampling is balanced across checks and matches.",
+        "Ratings are fitted with a Crowd-BT model by maximum likelihood.",
+        "DeepSeek V4.1 Flash (max) is pinned at Elo 1600.",
+        "Confidence intervals use the sandwich estimator."
+      ]
+    },
+    {
+      "source": "Artificial Analysis GDPval-AA v2.1 leaderboard",
+      "url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+      "observed_2026_10_07": true,
+      "facts": [
+        "Claude Opus 5.5 (Max, Default Fallback) is current rank 1 at Elo 1866.",
+        "Current displayed confidence interval is -26 / +26.",
+        "FAQ describes anonymized head-to-head submissions judged by an LLM and aggregated into Elo."
+      ]
+    }
+  ],
+  "corrected_evaluator_identity": {
+    "evaluation": "GDPval-AA v2.1",
+    "owner": "Artificial Analysis",
+    "submission_stage": "STIRRUP_AGENTIC_TASK_COMPLETION_WITH_FILE_OUTPUTS",
+    "pairwise_stage": {
+      "type": "BLIND_LLM_JUDGE_PANEL",
+      "judges": [
+        {
+          "model": "Claude Opus 5",
+          "effort": "high"
+        },
+        {
+          "model": "GPT-5.6 Sol",
+          "reasoning": "medium"
+        },
+        {
+          "model": "Gemini 3.8 Flash",
+          "reasoning": "high"
+        }
+      ],
+      "one_judge_per_comparison": true,
+      "sampling": "BALANCED_ACROSS_CHECKS_AND_MATCHES__EXACT_REALIZED_ASSIGNMENT_GRAPH_NOT_BOUND"
+    },
+    "rating_stage": {
+      "model": "CROWD_BT",
+      "fit": "MAXIMUM_LIKELIHOOD",
+      "anchor": {
+        "model": "DeepSeek V4.1 Flash (max)",
+        "elo": 1600
+      },
+      "confidence_intervals": "SANDWICH_ESTIMATOR"
+    },
+    "current_target": {
+      "model": "Claude Opus 5.5 (Max, Default Fallback)",
+      "elo": 1866,
+      "ci_minus": 26,
+      "ci_plus": 26,
+      "observation_date": "2026-10-07",
+      "mutable": true
+    }
+  },
+  "truth_repair": {
+    "wrong_prior_label": "HIDDEN_PAIRWISE_HUMAN_PREFERENCE_RELATION",
+    "corrected_label": "ARTIFICIAL_ANALYSIS_OWNER_PAIRWISE_LLM_JUDGE_PANEL_PLUS_CROWD_BT_TARGET_RELATION",
+    "upstream_openai_gdpval_human_expert_grading_is_not_the_same_evaluator_as_gdpval_aa_v2_1": true,
+    "information_cut_survives": true,
+    "why": "THE_RELEVANT UNOBSERVED VARIABLE IS NOW THE OWNER LLM PANEL'S REALIZED PAIRWISE OUTCOMES AND RESULTING CROWD_BT STATE FOR BRAIN SUBMISSIONS__NOT A HUMAN_PREFERENCE_FUNCTION.",
+    "consequence": "PANEL_IDENTITY_REASONING_LEVELS_RATING_MODEL_AND_ANCHOR_ARE_NO_LONGER MISSING INFORMATION AND MUST NOT BE SCHEDULED AS OWNER_BLACK_BOX_DISCOVERY."
+  },
+  "bound_now": {
+    "task_population_count": 220,
+    "judge_panel_identity": true,
+    "judge_reasoning_config": true,
+    "one_judge_per_comparison_rule": true,
+    "balanced_sampling_rule_coarse": true,
+    "crowd_bt_rating_family": true,
+    "maximum_likelihood_fit": true,
+    "anchor_identity_and_value": true,
+    "current_target_identity_and_elo": true,
+    "current_target_ci": true
+  },
+  "not_yet_bound_fail_closed": {
+    "exact_pairwise_judge_prompt_or_message_template": false,
+    "exact_submission_rendering_and_pairwise_presentation_recipe": false,
+    "exact_realized_judge_assignment_per_match": false,
+    "current_epoch_raw_pairwise_outcome_graph": false,
+    "current_epoch_fitted_judge_quality_parameters": false,
+    "complete_reproducible_owner_epoch_fit_inputs": false,
+    "callable_zero_spend_claude_opus_5_high_judge": false,
+    "callable_zero_spend_gpt_5_6_sol_medium_judge": false,
+    "callable_zero_spend_gemini_3_8_flash_high_judge": false,
+    "brain_complete_220_submission_manifest": false,
+    "brain_owner_elo_score": false
+  },
+  "scheduler_delta": [
+    "DELETE_GENERIC_OWNER_JUDGE_IDENTITY_DISCOVERY_FROM_THE_GDPVAL_RESIDUAL__THE_CURRENT_THREE_MODEL_PAIRWISE_PANEL_AND_REASONING_LEVELS_ARE PUBLICLY BOUND.",
+    "DELETE_GENERIC_ELO_MODEL_DISCOVERY__CROWD_BT_MLE_DEEPSEEK_V4_1_FLASH_MAX_1600_ANCHOR_AND_SANDWICH_CI_ARE PUBLICLY BOUND.",
+    "RETAIN_ONLY_EXACT_OWNER_PROMPT_PRESENTATION_REALIZED_GRAPH_FIT_STATE_EXECUTION_CAPACITY_AND_BRAIN_SUBMISSION OBJECTS THAT ARE NOT YET BOUND.",
+    "RACE A SOUND SCOPE_COMPLETE_DOMINANCE_CERTIFICATE AGAINST REPRODUCIBLE_OWNER_SCORING; DO NOT WAIT FOR ONE ROUTE TO EXHAUST THE OTHER.",
+    "DO_NOT SPEND MONEY TO RECREATE THE THREE_JUDGE_PANEL UNDER THE HARD_ZERO_INCREMENTAL_SPEND_CONSTRAINT."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_EXACT_ARTIFICIAL_ANALYSIS_PAIRWISE_JUDGE_PROMPT_IS_PUBLIC_OR_ABSENT__ONLY_NOT_BOUND.",
+    "NO_CLAIM_THE_RAW_CURRENT_EPOCH_PAIRWISE_GRAPH_IS_PUBLIC_OR_ABSENT__ONLY_NOT_BOUND.",
+    "NO_CLAIM_THE_PUBLIC_METHOD_DESCRIPTION_IS SUFFICIENT TO REPRODUCE THE EXACT OWNER ELO.",
+    "NO_BRAIN_GDPVAL_OWNER_ELO.",
+    "NO_GDPVAL_SCOPE_CLOSURE.",
+    "NO_U_EMPTY_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
