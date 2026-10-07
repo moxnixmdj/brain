@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK10_ACTION_INTENT_V1",
+  "date": "2026-10-07",
+  "status": "READY__INFRASTRUCTURE_PREFLIGHTS_VERIFIED__LIVE_EPOCH_PRECHECK_REQUIRED__ONE_SHOT",
+  "slot": {
+    "id": "terminal-bench-science/rdkit-ic-constraints::trial-0",
+    "digest": "sha256:17e356ab255088712c7dfa9765bf077b33a3da221f4a03d4770576857f9c0b6f",
+    "rank": 10
+  },
+  "exact_route": {
+    "agent": "5bc8ebac26bb7c809d4698f535eff43b667b30df",
+    "planner": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "raw_task_contract": "d54d5a2f7efa76b653d288f4f53da4883644baa6",
+    "raw_task_localizer": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76"
+  },
+  "current_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V8.json",
+    "git_blob_sha": "d826315ba393c93f52a24aab9568691948b7cdf3"
+  },
+  "planner_transport_verification": {
+    "path": "canonical/verification/TB_SCIENCE_PLANNER_TRANSPORT_REPAIR_LIVE_VERIFICATION_20261007_V1.json",
+    "git_blob_sha": "877e5ddf815c1958f4ab41f8462ad54af87f0c87"
+  },
+  "transitive_runtime_closure": {
+    "manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261007_V2.json",
+      "git_blob_sha": "31656d35034338dfcb699672bcd4788b283b83c9"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/TB_SCIENCE_REPAIRED_TRANSITIVE_CARRIER_CLOSURE_PUBLIC_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "61495f5977ea745e63ca14136875b97e3e95cd45"
+    },
+    "exact_file_count": 14,
+    "required_preexposure": true
+  },
+  "public_epoch": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "path": "capsules/tb_science_rank10_20261007_v1/RANK10_EPOCH_V1.json",
+    "git_blob_sha": "8d0bc7999769a32147eab08acb31436e7abe743c",
+    "epoch_id": "TBSCI-RANK10-20261007-E1",
+    "current_public_epoch_must_match_immediately_before_task_start": true
+  },
+  "controls": {
+    "attempts": 1,
+    "retries": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "exact_carrier_blob_identity_required": true,
+    "agent_and_planner_import_required_before_task_start": true,
+    "precheck_failure_consumes_slot": false,
+    "after_task_start_result_is_final": true,
+    "after_task_start_missing_or_zero_verifier_result_counts_as_final_zero": true
+  },
+  "benchmark_task_exposure_authorized_only_after_exact_authority_binding": true,
+  "credit": false
+}
