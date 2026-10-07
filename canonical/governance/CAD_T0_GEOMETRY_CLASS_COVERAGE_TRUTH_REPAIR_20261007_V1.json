@@ -1,0 +1,77 @@
+{
+  "schema":"PROJECT_BRAIN_CAD_T0_GEOMETRY_CLASS_COVERAGE_TRUTH_REPAIR_V1",
+  "date":"2026-10-07",
+  "status":"CANDIDATE_BLOCKER_DELETION__FROZEN_T0_GEOMETRY_CLASS_COVERAGE_PROVED__BROADER_CAD_SCOPE_OPEN__ZERO_TERMINAL_CREDIT",
+  "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings":{
+    "old_blocker_map":{"path":"canonical/reasoning/2026-10-02_CAD_ZERO_REALITY_BLOCKER_RECONCILIATION_V1.json","git_blob_sha":"0fd3791d2d2d8c3ae0bcfda99db4aa2f402b6605"},
+    "population":{"path":"canonical/runtime/cad_t0_geometry_population.py","git_blob_sha":"64ca276410e2c1dbcd55cfad057e3eec0709790a"},
+    "candidate":{"path":"canonical/runtime/cad_t0_route_specific_candidate_v1.py","git_blob_sha":"aa32750b220a023617938b7be9476f6b3aac6704"},
+    "candidate_tests":{"path":"canonical/tests/test_cad_t0_route_specific_candidate_v1.py","git_blob_sha":"6fa98b0fd04f86097cbd77f8657ba472e5d6b6dd"},
+    "candidate_freeze":{"path":"canonical/governance/CAD_T0_CANDIDATE_FREEZE_V4.json","git_blob_sha":"37b4286ddd927da316b59c764f65f542f8a774b9"},
+    "post_refreeze_binding":{"path":"canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V4.json","git_blob_sha":"a636d1292e6f92d240fab420a9ee75ced7a05104"}
+  },
+  "old_blocker":"FROZEN_TERMINAL_ENVELOPE_GEOMETRY_CLASS_COVERAGE_BEYOND_VERIFIED_ANALYTIC_CSG_LINE_ARC_REVOLVE_SPLINE_REVOLVE_AND_MULTI_SECTION_LOFT_GRAMMARS_NOT_YET_PROVEN",
+  "facts":{
+    "frozen_population_family_set":[
+      "BOX_EXTRUDE",
+      "CIRCLE_EXTRUDE",
+      "BOX_THROUGH_HOLE",
+      "REVOLVED_STEPS",
+      "SPLINE_REVOLVE",
+      "CIRCLE_LOFT",
+      "POLYGON_LOFT",
+      "NONIDENTIFIABLE_DEPTH"
+    ],
+    "frozen_population_family_count":8,
+    "candidate_has_explicit_route_for_every_family":true,
+    "candidate_test_cycles_cover_all_families_twice":true,
+    "post_refreeze_binding_requires_ALL_EIGHT_FROZEN_GEOMETRY_FAMILIES":true
+  },
+  "route_mapping":[
+    {"family":"BOX_EXTRUDE","route":"M1B_CONTINUOUS_GEOMETRY_PLUS_CAD_PARTSPEC"},
+    {"family":"CIRCLE_EXTRUDE","route":"M1B_CONTINUOUS_GEOMETRY_PLUS_CAD_PARTSPEC"},
+    {"family":"BOX_THROUGH_HOLE","route":"M1B_CONTINUOUS_GEOMETRY_PLUS_CAD_PARTSPEC"},
+    {"family":"REVOLVED_STEPS","route":"M1B_CONTINUOUS_GEOMETRY_PLUS_CAD_PARTSPEC"},
+    {"family":"SPLINE_REVOLVE","route":"M1B_SMOOTH_SURFACE_COMPILER"},
+    {"family":"CIRCLE_LOFT","route":"M1B_SMOOTH_SURFACE_COMPILER"},
+    {"family":"POLYGON_LOFT","route":"M1B_SMOOTH_SURFACE_COMPILER"},
+    {"family":"NONIDENTIFIABLE_DEPTH","route":"EXPLICIT_NONIDENTIFIABILITY_WITNESS"}
+  ],
+  "truth_repair":{
+    "statement":"FOR_THE_FROZEN_CAD_T0_POST_REFREEZE_POPULATION__GEOMETRY_CLASS_COVERAGE_IS_COMPLETE_RELATIVE_TO_THE_DECLARED_EIGHT_FAMILY_GENERATOR.",
+    "reasoning":[
+      "THE_GENERATOR DEFINES EXACTLY EIGHT FAMILIES AND NO NINTH FAMILY CAN APPEAR WITHOUT BYTE DRIFT.",
+      "THE FROZEN CANDIDATE HAS AN EXPLICIT SOURCE PARSE AND COMPILATION OR NONIDENTIFIABILITY ROUTE FOR EACH OF THE EIGHT.",
+      "THE FROZEN TEST SUITE RUNS ALL EIGHT FAMILIES IN TWO DISTINCT SEED CYCLES.",
+      "THE POST_REFREEZE BINDING LISTS ALL eight frozen geometry families as a required regression."
+    ],
+    "blocker_disposition":"DELETE_THE_OLD_GEOMETRY_CLASS_COVERAGE_BLOCKER_FOR_T0_ONLY"
+  },
+  "remaining_CAD_zero_reality_blockers":[
+    "M1A_WHOLE_COMPOSED_RAW_DRAWING_ROUTE_SCOPE_EQUIVALENCE_AND_MUTATION_PREFLIGHT_PENDING",
+    "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
+    "POST_FREEZE_TERMINAL_POPULATION_AND_INDEPENDENT_ORACLE_BINDING_PENDING"
+  ],
+  "scope_boundary":{
+    "proved":"FROZEN_T0_EIGHT_FAMILY_POPULATION_CLASS_COVERAGE",
+    "not_proved":[
+      "ARBITRARY_ENGINEERING_DRAWING_GEOMETRY_CLASS_COVERAGE",
+      "ALL_POSSIBLE_CAD_ANALYTIC_OR_FREEFORM_GEOMETRIES",
+      "WHOLE_BEHAVIORAL_CONTRACT_SCOPE_EQUIVALENCE",
+      "TERMINAL_POPULATION_PASS"
+    ]
+  },
+  "scheduler_effect":[
+    "DO_NOT_SPEND_MORE_ZERO_REALITY_WORK_ENUMERATING_T0_GEOMETRY_FAMILIES.",
+    "WORK_ONLY_THE_THREE_REMAINING_SCOPE_BINDING_AND_POSTFREEZE_OBLIGATIONS.",
+    "REOPEN_GEOMETRY_CLASS_COVERAGE_ONLY_IF_THE_FROZEN_POPULATION_GENERATOR_OR_CANDIDATE_DEPENDENCY_CONE_DRIFTS."
+  ],
+  "accounting":{"incremental_spend_usd":0,"fresh_target_reality_units_consumed":0,"terminal_credit_delta":0,"capability_credit_delta":0},
+  "hard_nonclaims":[
+    "NO_CLAIM_WHOLE_CAD_CONTRACT_IS_CLOSED.",
+    "NO_CLAIM_T0_TERMINAL_RESULT_EXISTS.",
+    "NO_CLAIM_U_IS_EMPTY.",
+    "NO_TERMINAL_CREDIT."
+  ]
+}
