@@ -19,7 +19,7 @@ def facts(value="130.00"):
     }, separators=(",", ":"))
 
 
-def test_raw_fact_source_selects_exception_policy_without_expected_digest_input():
+def test_raw_fact_source_entailment_is_not_self_certified_as_adequate():
     claim = {
         "claim_id": "raw",
         "kind": "CERTIFIED_DEFINED_TERM_RAW_TYPED_CONDITION",
@@ -46,10 +46,12 @@ def test_raw_fact_source_selects_exception_policy_without_expected_digest_input(
             "ordinary_policy": {"op": "NOT", "arg": {"op": "ATOM", "id": atom_id}},
         },
     )
-    assert out["status"] == "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED"\n    assert out["entailed_policy_conditions"] == ["exception_policy"]\n    assert out["certified_common_policies"] == []
+    assert out["status"] == "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED"
+    assert out["entailed_policy_conditions"] == ["exception_policy"]
+    assert out["certified_common_policies"] == []
 
 
-def test_raw_fact_source_below_threshold_selects_ordinary_policy():
+def test_raw_fact_source_below_threshold_is_not_self_certified_as_adequate():
     claim = {
         "claim_id": "raw",
         "kind": "CERTIFIED_DEFINED_TERM_RAW_TYPED_CONDITION",
@@ -75,7 +77,9 @@ def test_raw_fact_source_below_threshold_selects_ordinary_policy():
             "ordinary_policy": {"op": "NOT", "arg": {"op": "ATOM", "id": atom_id}},
         },
     )
-    assert out["status"] == "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED"\n    assert out["entailed_policy_conditions"] == ["ordinary_policy"]\n    assert out["certified_common_policies"] == []
+    assert out["status"] == "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED"
+    assert out["entailed_policy_conditions"] == ["ordinary_policy"]
+    assert out["certified_common_policies"] == []
 
 
 def test_duplicate_key_fact_source_cannot_mint_semantic_constraint():
