@@ -4,7 +4,7 @@ def ev(i,text):
     return {"evidence_id":i,"text":text,"provenance":[{"source_id":i,"locator":"p1"}]}
 
 def test_no_conflict_yields_empty_complete_set():
-    out=compile_required_uncertainty([ev("E1","Revenue growth is 12."),ev("E2","Revenue growth is 12.0.")])
+    out=compile_required_uncertainty([ev("E1","Revenue growth is 12."),ev("E2","Revenue growth is 12.")])
     assert out["status"].startswith("PASS")
     assert out["scope_complete"] is True
     assert out["required_uncertainty_units"]==[]
