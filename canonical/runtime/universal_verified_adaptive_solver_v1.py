@@ -1,0 +1,359 @@
+"""Universal Verified Adaptive Solver V1.
+
+One control loop for Brain-owned capability composition.
+
+Architecture:
+    explicit task contract
+      -> exact capability planner
+      -> untrusted proposal packet(s)
+      -> immutable built-in verifier adapter
+      -> accept / falsify / request more information
+      -> update explicit state only after verification
+      -> replan
+      -> finish when target effects are verified
+
+This module deliberately does not call a model. A general cognition substrate may
+prepare proposal packets, but proposals have zero authority. Verifier adapters are
+module-owned and immutable. New verifier kinds require code review plus tests.
+
+Task-contract semantics and source authority remain upstream obligations. External
+side effects are not considered successful merely because they are proposed or
+semantically authorized; carrier/outcome verification remains separate.
+"""
+from __future__ import annotations
+
+from hashlib import sha256
+import json
+from typing import Any, Callable, Mapping, Sequence
+
+from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
+from canonical.runtime.p2_authenticated_top_law_route_v1 import execute as p2_execute
+from canonical.runtime.judgment_control_envelope_v1 import configured_terminal_decision
+from canonical.runtime.proof_carrying_semantic_refinement_v6 import resolve_from_source_proof
+
+SCHEMA = "PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V1"
+
+
+class UniversalSolverError(ValueError):
+    pass
+
+
+def _canon(value: Any) -> str:
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+
+
+def _digest(value: Any) -> str:
+    return sha256(_canon(value).encode("utf-8")).hexdigest()
+
+
+def _verify_exact_json(payload: Mapping[str, Any], proposal: Mapping[str, Any]) -> dict[str, Any]:
+    if set(payload) != {"expected"}:
+        return {"pass": False, "status": "FAIL_CLOSED", "reason": "EXACT_JSON_PAYLOAD_INVALID"}
+    if set(proposal) != {"candidate"}:
+        return {"pass": False, "status": "REJECTED", "reason": "EXACT_JSON_PROPOSAL_INVALID"}
+    ok = _canon(proposal["candidate"]) == _canon(payload["expected"])
+    return {
+        "pass": ok,
+        "status": "VERIFIED" if ok else "FALSIFIED",
+        "reason": None if ok else "CANDIDATE_NE_EXPECTED",
+        "proof_digest": _digest({
+            "verifier": "EXACT_JSON_V1",
+            "expected": payload["expected"],
+            "candidate": proposal["candidate"],
+        }),
+        "verified_output": proposal["candidate"] if ok else None,
+    }
+
+
+def _verify_p2(payload: Mapping[str, Any], proposal: Mapping[str, Any]) -> dict[str, Any]:
+    if proposal:
+        return {"pass": False, "status": "REJECTED", "reason": "P2_TOP_LAW_TAKES_NO_UNTRUSTED_PROPOSAL"}
+    raw = payload.get("raw_source")
+    source_id = payload.get("source_id")
+    if not isinstance(raw, (str, bytes)) or not isinstance(source_id, str):
+        return {"pass": False, "status": "FAIL_CLOSED", "reason": "P2_INPUT_INVALID"}
+    out = p2_execute(raw, source_id=source_id)
+    return {
+        "pass": out.get("pass") is True,
+        "status": "VERIFIED" if out.get("pass") is True else str(out.get("status") or "UNRESOLVED"),
+        "reason": None if out.get("pass") is True else str(out.get("status") or "P2_NOT_VERIFIED"),
+        "proof_digest": _digest(out),
+        "verified_output": out.get("policy_result") if out.get("pass") is True else None,
+        "detail": out,
+    }
+
+
+def _verify_judgment(mode: str, payload: Mapping[str, Any], proposal: Mapping[str, Any]) -> dict[str, Any]:
+    proof_bundle = payload.get("proof_bundle")
+    if not isinstance(proof_bundle, Mapping):
+        return {"pass": False, "status": "FAIL_CLOSED", "reason": "PROOF_BUNDLE_INVALID"}
+    out = configured_terminal_decision(proposal, proof_bundle, mode=mode)
+    return {
+        "pass": out.get("accepted") is True,
+        "status": "VERIFIED" if out.get("accepted") is True else "FALSIFIED",
+        "reason": None if out.get("accepted") is True else ";".join(out.get("errors") or ["JUDGMENT_REJECTED"]),
+        "proof_digest": _digest(out),
+        "verified_output": out if out.get("accepted") is True else None,
+        "detail": out,
+    }
+
+
+def _verify_semantic_policy_v6(payload: Mapping[str, Any], proposal: Mapping[str, Any]) -> dict[str, Any]:
+    allowed = {"claims"}
+    if set(proposal) - allowed:
+        return {"pass": False, "status": "REJECTED", "reason": "PROPOSAL_TRIES_TO_OVERRIDE_TRUSTED_SEMANTIC_INPUT"}
+    claims = proposal.get("claims", payload.get("claims"))
+    if not isinstance(claims, Sequence) or isinstance(claims, (str, bytes)):
+        return {"pass": False, "status": "REJECTED", "reason": "CLAIMS_REQUIRED"}
+    required = (
+        "source_text", "source_id", "decision_basis", "policy_conditions",
+        "policy_adequacy_bindings",
+    )
+    if any(key not in payload for key in required):
+        return {"pass": False, "status": "FAIL_CLOSED", "reason": "SEMANTIC_POLICY_PAYLOAD_INCOMPLETE"}
+    out = resolve_from_source_proof(
+        payload["source_text"],
+        source_id=payload["source_id"],
+        claims=claims,
+        decision_basis=payload["decision_basis"],
+        policy_conditions=payload["policy_conditions"],
+        policy_adequacy_bindings=payload["policy_adequacy_bindings"],
+        typed_context=payload.get("typed_context"),
+        expected_typed_context_sha256=payload.get("expected_typed_context_sha256"),
+        fact_source=payload.get("fact_source"),
+        fact_source_id=payload.get("fact_source_id"),
+    )
+    ok = out.get("status") == "COMMON_POLICY_CERTIFIED" and bool(out.get("certified_common_policies"))
+    unresolved = out.get("status") in {
+        "UNRESOLVED",
+        "POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED",
+    }
+    return {
+        "pass": ok,
+        "status": "VERIFIED" if ok else ("NEED_MORE_INFORMATION" if unresolved else "FALSIFIED"),
+        "reason": None if ok else str(out.get("status") or "SEMANTIC_POLICY_NOT_CERTIFIED"),
+        "proof_digest": _digest(out),
+        "verified_output": {
+            "certified_common_policies": out.get("certified_common_policies", []),
+        } if ok else None,
+        "detail": out,
+    }
+
+
+Verifier = Callable[[Mapping[str, Any], Mapping[str, Any]], dict[str, Any]]
+
+BUILTIN_VERIFIERS: dict[str, Verifier] = {
+    "EXACT_JSON_V1": _verify_exact_json,
+    "P2_AUTHENTICATED_TOP_LAW_V1": _verify_p2,
+    "FINANCE_JUDGMENT_CONTROL_V1": lambda p, q: _verify_judgment("FINANCE", p, q),
+    "UNKNOWN_DOMAIN_JUDGMENT_CONTROL_V1": lambda p, q: _verify_judgment("UNKNOWN_DOMAIN", p, q),
+    "SOURCE_ALIGNED_SEMANTIC_POLICY_V6": _verify_semantic_policy_v6,
+}
+
+
+def _normalize_caps(problem: Mapping[str, Any]) -> dict[str, Mapping[str, Any]]:
+    raw = problem.get("capabilities")
+    if not isinstance(raw, list) or not raw:
+        raise UniversalSolverError("CAPABILITIES_REQUIRED")
+    out: dict[str, Mapping[str, Any]] = {}
+    for row in raw:
+        if not isinstance(row, Mapping):
+            raise UniversalSolverError("CAPABILITY_NOT_OBJECT")
+        cid = row.get("id")
+        if not isinstance(cid, str) or not cid or cid in out:
+            raise UniversalSolverError("CAPABILITY_ID_INVALID_OR_DUPLICATE")
+        action = row.get("action")
+        if not isinstance(action, Mapping):
+            raise UniversalSolverError("CAPABILITY_ACTION_INVALID:" + cid)
+        verifier_id = action.get("verifier_id")
+        if verifier_id not in BUILTIN_VERIFIERS:
+            raise UniversalSolverError("VERIFIER_NOT_BUILTIN:" + cid + ":" + str(verifier_id))
+        if not isinstance(action.get("verifier_payload"), Mapping):
+            raise UniversalSolverError("VERIFIER_PAYLOAD_INVALID:" + cid)
+        out[cid] = row
+    return out
+
+
+def run(
+    problem: Mapping[str, Any],
+    *,
+    proposal_packets: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+    verified_facts: Sequence[str] = (),
+) -> dict[str, Any]:
+    """Run until solved, falsified, or an untrusted proposal/information update is needed.
+
+    verified_facts must come from the caller's persistent verified state store.
+    This function never treats proposal text as a fact.
+    """
+    try:
+        if not isinstance(problem, Mapping):
+            raise UniversalSolverError("PROBLEM_NOT_OBJECT")
+        caps = _normalize_caps(problem)
+        initial = problem.get("initial_facts", [])
+        if not isinstance(initial, list):
+            raise UniversalSolverError("INITIAL_FACTS_INVALID")
+        current = sorted(set(initial) | {str(x) for x in verified_facts if isinstance(x, str) and x})
+        target = problem.get("target_effects", [])
+        if not isinstance(target, list) or not target:
+            raise UniversalSolverError("TARGET_EFFECTS_REQUIRED")
+        proposals = proposal_packets if isinstance(proposal_packets, Mapping) else {}
+
+        trace: list[dict[str, Any]] = []
+        rejected: list[dict[str, Any]] = []
+        used_packets: set[tuple[str, int]] = set()
+
+        max_cycles = int(problem.get("max_solver_cycles", 256))
+        if max_cycles < 1 or max_cycles > 10000:
+            raise UniversalSolverError("MAX_SOLVER_CYCLES_INVALID")
+
+        for cycle in range(max_cycles):
+            if set(target).issubset(current):
+                return {
+                    "schema": SCHEMA,
+                    "status": "SOLVED__ALL_TARGET_EFFECTS_VERIFIED",
+                    "pass": True,
+                    "verified_facts": current,
+                    "trace": trace,
+                    "rejected_proposals": rejected,
+                    "cycles": cycle,
+                    "terminal_authority": False,
+                    "capability_ownership_credit_delta": 0,
+                }
+
+            replanning_problem = dict(problem)
+            replanning_problem["initial_facts"] = current
+            try:
+                plan = plan_capabilities(replanning_problem)
+            except PlanningFailure as exc:
+                return {
+                    "schema": SCHEMA,
+                    "status": "UNRESOLVED__NO_CURRENT_CAPABILITY_PLAN",
+                    "pass": False,
+                    "reason": str(exc),
+                    "verified_facts": current,
+                    "trace": trace,
+                    "rejected_proposals": rejected,
+                    "terminal_authority": False,
+                }
+
+            if not plan.get("plan"):
+                return {
+                    "schema": SCHEMA,
+                    "status": "FAIL_CLOSED__PLANNER_RETURNED_EMPTY_UNSOLVED_PLAN",
+                    "pass": False,
+                    "verified_facts": current,
+                    "trace": trace,
+                    "terminal_authority": False,
+                }
+
+            cid = str(plan["plan"][0])
+            cap = caps[cid]
+            action = cap["action"]
+            verifier_id = str(action["verifier_id"])
+            verifier = BUILTIN_VERIFIERS[verifier_id]
+            payload = action["verifier_payload"]
+
+            packets = proposals.get(cid)
+            if verifier_id == "P2_AUTHENTICATED_TOP_LAW_V1":
+                packets = [{}]
+            if not isinstance(packets, Sequence) or isinstance(packets, (str, bytes)) or not packets:
+                return {
+                    "schema": SCHEMA,
+                    "status": "NEED_PROPOSAL",
+                    "pass": False,
+                    "next_capability_id": cid,
+                    "verifier_id": verifier_id,
+                    "verified_facts": current,
+                    "trace": trace,
+                    "rejected_proposals": rejected,
+                    "proposal_has_authority": False,
+                    "terminal_authority": False,
+                }
+
+            accepted = None
+            last_need_info = None
+            for i, packet in enumerate(packets):
+                key = (cid, i)
+                if key in used_packets:
+                    continue
+                used_packets.add(key)
+                if not isinstance(packet, Mapping):
+                    rejected.append({"capability_id": cid, "packet_index": i, "reason": "PROPOSAL_NOT_OBJECT"})
+                    continue
+                verdict = verifier(payload, packet)
+                record = {
+                    "cycle": cycle,
+                    "capability_id": cid,
+                    "verifier_id": verifier_id,
+                    "packet_index": i,
+                    "proposal_sha256": _digest(packet),
+                    "verdict_status": verdict.get("status"),
+                    "proof_digest": verdict.get("proof_digest"),
+                }
+                if verdict.get("pass") is True:
+                    accepted = (i, packet, verdict, record)
+                    break
+                rejected.append({
+                    **record,
+                    "reason": verdict.get("reason"),
+                })
+                if verdict.get("status") == "NEED_MORE_INFORMATION":
+                    last_need_info = verdict
+
+            if accepted is None:
+                if last_need_info is not None:
+                    return {
+                        "schema": SCHEMA,
+                        "status": "NEED_MORE_INFORMATION",
+                        "pass": False,
+                        "next_capability_id": cid,
+                        "verifier_id": verifier_id,
+                        "reason": last_need_info.get("reason"),
+                        "detail": last_need_info.get("detail"),
+                        "verified_facts": current,
+                        "trace": trace,
+                        "rejected_proposals": rejected,
+                        "terminal_authority": False,
+                    }
+                return {
+                    "schema": SCHEMA,
+                    "status": "ALL_AVAILABLE_PROPOSALS_FALSIFIED",
+                    "pass": False,
+                    "next_capability_id": cid,
+                    "verifier_id": verifier_id,
+                    "verified_facts": current,
+                    "trace": trace,
+                    "rejected_proposals": rejected,
+                    "terminal_authority": False,
+                }
+
+            _, _, verdict, record = accepted
+            new_facts = cap.get("provides")
+            if not isinstance(new_facts, list) or not new_facts:
+                raise UniversalSolverError("CAPABILITY_PROVIDES_INVALID:" + cid)
+            if any(not isinstance(x, str) or not x for x in new_facts):
+                raise UniversalSolverError("CAPABILITY_PROVIDES_INVALID:" + cid)
+            current = sorted(set(current) | set(new_facts))
+            trace.append({
+                **record,
+                "verified_output": verdict.get("verified_output"),
+                "new_verified_facts": sorted(set(new_facts)),
+            })
+
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED__MAX_SOLVER_CYCLES_EXCEEDED",
+            "pass": False,
+            "verified_facts": current,
+            "trace": trace,
+            "rejected_proposals": rejected,
+            "terminal_authority": False,
+        }
+    except Exception as exc:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "errors": [type(exc).__name__ + ":" + str(exc)],
+            "terminal_authority": False,
+        }
