@@ -236,5 +236,5 @@ def test_route_execute_complete_does_not_project_result_present(tmp_path):
         "status": "COMPLETE",
     }
     (states / "U.json").write_text(json.dumps(state), encoding="utf-8")
-    terminal_autopilot_executor_v1.overlay_worker_progress(manifest, tmp_path)
+    overlay_worker_progress(manifest, tmp_path)
     assert manifest["obligations"][0]["status"] == "OPEN"
