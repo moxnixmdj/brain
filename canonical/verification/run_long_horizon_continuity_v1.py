@@ -29,6 +29,7 @@ if {expect_checkpoint!r}:
 else:
     seen={{}}
     def ok(argv,cwd,env):
+        seen["argv"]=list(argv)
         seen["agent"]=env.get("PROJECT_BRAIN_AGENT_ID")
         seen["task"]=env.get("PROJECT_BRAIN_TASK_ID")
         return m.RuntimeResult(0,"ok\\n","")
