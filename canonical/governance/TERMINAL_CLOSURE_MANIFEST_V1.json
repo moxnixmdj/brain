@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "CURRENT_SCOPE_RECONCILED__6_OF_19_OPUS55_ACCEPTANCE_PASS__6_OF_19_VERIFIED_OWNED__IF_FULLY_TERMINALLY_CLOSED__13_ACCEPTANCE_FAMILIES_OPEN__16_OF_38_ATOMIC_PROVED__22_RAW_UNRESOLVED__TERMINAL_FALSE",
+  "status": "CURRENT_SCOPE_RECONCILED__6_OF_19_TERMINALLY_CLOSED__13_OPEN__TERMINAL_FALSE",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
   "expected_family_count": 19,
   "actual_family_count": 19,
-  "verified_closed_family_count": 2,
-  "open_family_count": 17,
+  "verified_closed_family_count": 6,
+  "open_family_count": 13,
   "families": [
     {
       "id": "ADVANCED_AGENTIC_CODING",
