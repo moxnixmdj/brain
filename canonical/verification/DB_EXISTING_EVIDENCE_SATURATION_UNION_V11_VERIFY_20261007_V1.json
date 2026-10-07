@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_DB_EXISTING_EVIDENCE_SATURATION_UNION_V11_VERIFY_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_BINDINGS__SOUND_SUPERSET_REPLACEMENT__RECORD_COUNT_UNCHANGED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V11.json",
+    "git_blob_sha": "27f9d68d6e10bc568afd2f6d807e64daf8f9dbde"
+  },
+  "bindings": {
+    "predecessor": "2edaa6eed0e0e124a4f5de81c84efa2519659aa8",
+    "broader_p2": "decd0d46538a213f2e169c00c83fae09191a7ed3",
+    "broader_p2_verification": "8375f545ff35ce519719467596bdf1bc15453174"
+  },
+  "verified": {
+    "predecessor_record_count": 17,
+    "successor_record_count": 17,
+    "narrow_p2_is_subset_of_broader_p2": true,
+    "broader_p2_sound_conditional_on_lossless_contract_membership": true,
+    "replacement_preserves_all_predecessor_coverage": true,
+    "replacement_strictly_expands_available_p2_semantic_region": true,
+    "fresh_target_reality_consumed": 0,
+    "U_empty_proved": false
+  },
+  "wolfram": {
+    "statement": "A_IMPLIES_B__IMPLIES__R_OR_A_IMPLIES_R_OR_B",
+    "result": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_AA_BRIEFCASE_OR_GDPVAL_GLOBAL_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
