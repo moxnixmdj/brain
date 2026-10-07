@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_V16_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_SELECTED_PROPERTY_CELL_V2",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_SELECTED_PROPERTY_TOP_LAW_CELL__REQUIRED_CLAIM_COVERAGE_GLOBAL_CEILING__OWNED_DONOR_DELETED_ROUTE__ZERO_GLOBAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "terminal_v16": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+      "git_blob_sha": "c1bc4543860be08f9014f69a212ba2222d8dba7c"
+    }
+  },
+  "sources": {
+    "promoted_coverage_proof": {
+      "path": "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V2.json",
+      "git_blob_sha": "f2ef80facb39264b1e12b81e451eb4499a3b987f",
+      "promotion_commit": "7722a43f23c7bc4564357a049626f26be71b1788"
+    },
+    "scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "p3_binding": {
+      "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+    },
+    "terminal_wave": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    },
+    "donor_cleanroom": {
+      "path": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "d3144bf0aa618b15ef594d24de54d55cbdb329fd"
+    },
+    "global_ownership": {
+      "path": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "e0dbd996c18bdb818693ab0d217d751594a03d0f"
+    }
+  },
+  "selected_property_cell": {
+    "id": "SYNTHESIS_TARGET_SCOPE_REQUIRED_CLAIM_COVERAGE_TOP_LAW",
+    "family": "COMMUNICATION_AND_SYNTHESIS",
+    "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "target_scope_id": "scope://opus55/SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "witness_scope_id": "scope://brain/EVIDENCE_TO_AUDIENCE_SYNTHESIS_001/T1_T3_TERMINAL",
+    "property": "required_claim_coverage_noninferiority",
+    "property_semantics": "FRACTION_OF_REQUIRED_CLAIMS_COVERED",
+    "property_order": "HIGHER_IS_BETTER",
+    "brain_lower_bound": 1,
+    "global_upper_bound": 1,
+    "source_scope_relation": "PROVEN_STRONGER",
+    "scope_complete_for_this_property": true
+  },
+  "dominance": {
+    "route": "ABSOLUTE_OBJECTIVE_CEILING_ON_VERIFIED_SUPERSET_SCOPE",
+    "theorem": "BRAIN_REQUIRED_CLAIM_COVERAGE_IS_AT_LEAST_ONE_ON_A_VERIFIED_SUPERSET_OF_THE_FROZEN_TARGET_SCOPE_AND_NO_ADMISSIBLE_LAW_CAN_EXCEED_ONE",
+    "K_c": "MAXIMAL_ADMISSIBLE_TARGET_LAW_SPACE_FOR_THIS_PROPERTY_ON_THE_FROZEN_TARGET_SCOPE",
+    "K_c_minus": "EMPTY",
+    "target_identity_required": false,
+    "target_score_required": false,
+    "target_information_consumed": 0
+  },
+  "operative_brain_route": {
+    "binding_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+    "terminal_wave_rows": [
+      "T1::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+      "T3::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30"
+    ],
+    "terminal_wave_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+    "terminal_wave_execution_snapshot": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "direct_instrumentation_pass": true,
+    "parent_terminal_acceptance_pass": true,
+    "hidden_target_information_visible": false
+  },
+  "ownership_and_donor_independence": {
+    "exact_same_package_cleanroom": true,
+    "donor_cleanroom_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+    "donor_cleanroom_execution_snapshot": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "provider_credentials_present": [],
+    "undeclared_dependency_count": 0,
+    "behavior_preserved": true,
+    "byte_identical_terminal_result": true,
+    "global_ownership_postconditions_zero": true,
+    "final_D_boundary": "FROZEN_ROUTE_OWNERSHIP_EVIDENCE_ONLY__FINAL_ROUTE_SET_D_REPLAY_STILL_REQUIRED_AFTER_ABC_CLOSES"
+  },
+  "consequence": {
+    "add_to_D_B": "SYNTHESIS_TARGET_SCOPE_REQUIRED_CLAIM_COVERAGE_TOP_LAW",
+    "remove_from_current_synthesis_residual": "REQUIRED_CLAIM_COVERAGE",
+    "surviving_synthesis_residual": "LOAD_BEARING_USEFUL_SYNTHESIS_QUALITY_DIMENSION_PERFORMANCE_NOT_ALREADY_SOUNDLY_CERTIFIED",
+    "matched_quality_metric_identity_required": false,
+    "synthesis_family_closed": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_USEFUL_SYNTHESIS_QUALITY_DIMENSIONS_ARE_NONINFERIOR",
+    "NO_CLAIM_SYNTHESIS_FAMILY_CLOSED",
+    "NO_CLAIM_MATCHED_QUALITY_METRIC_NONINFERIORITY_IS_REQUIRED_OR_PROVED",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_CLOSED",
+    "NO_CLAIM_D_FINALITY_CLOSED",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
