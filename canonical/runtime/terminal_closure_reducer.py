@@ -38,6 +38,78 @@ REQUIRED_PREDICATES = (
     "proof_bundle_frozen",
 )
 
+UNIVERSAL_PROOF_KINDS = {
+    "FULL_SCOPE_DB_COVER",
+    "TARGET_ESCAPE_NONOCCUPANCY",
+    "GENERATOR_CLOSURE_SCOPE_COMPLETE",
+    "SELECTED_COVER_COMPLEMENT_UNSAT",
+}
+UNIVERSAL_REQUIRED_TRUE = (
+    "independent_verified",
+    "exact_byte_bound",
+    "observable_trace_scope_complete",
+    "all_useful_target_behaviors_in_scope",
+    "every_admission_sound",
+    "residual_complement_unsat",
+    "selected_cover_complete",
+    "u_empty",
+    "abc_closed",
+    "all_credited_routes_brain_owned",
+    "donor_independence_closed",
+    "clean_room_replay_pass",
+)
+
+
+def _hex40(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 40
+        and all(ch in "0123456789abcdef" for ch in value)
+    )
+
+
+def _content_binding(value: Any) -> bool:
+    return (
+        isinstance(value, dict)
+        and isinstance(value.get("path"), str)
+        and bool(value["path"].strip())
+        and _hex40(value.get("git_blob_sha"))
+    )
+
+
+def _evaluate_universal_cover_proof(manifest: dict[str, Any]) -> dict[str, Any]:
+    """Validate the stronger scope-complete proof route without self-certification."""
+    proof = manifest.get("universal_cover_proof")
+    if not isinstance(proof, dict):
+        return {
+            "pass": False,
+            "reason": "UNIVERSAL_COVER_PROOF_ABSENT",
+            "failed_predicates": ["UNIVERSAL_COVER_PROOF_ABSENT"],
+        }
+
+    failures: list[str] = []
+    if proof.get("proof_kind") not in UNIVERSAL_PROOF_KINDS:
+        failures.append("UNIVERSAL_PROOF_KIND_INVALID")
+    if proof.get("scope_id") != "scope://opus55/observable-trace":
+        failures.append("UNIVERSAL_SCOPE_ID_INVALID")
+    if proof.get("conclusion") != "success":
+        failures.append("UNIVERSAL_SUCCESS_CONCLUSION_REQUIRED")
+    for name in UNIVERSAL_REQUIRED_TRUE:
+        if proof.get(name) is not True:
+            failures.append(f"UNIVERSAL_PREDICATE_NOT_TRUE:{name}")
+    for name in ("proof_artifact", "verifier_receipt_artifact"):
+        if not _content_binding(proof.get(name)):
+            failures.append(f"UNIVERSAL_CONTENT_BINDING_INVALID:{name}")
+
+    unique = sorted(set(failures))
+    return {
+        "pass": not unique,
+        "reason": "PASS__UNIVERSAL_SCOPE_COMPLETE_COVER" if not unique else "FAIL_CLOSED",
+        "failed_predicates": unique,
+        "proof_kind": proof.get("proof_kind"),
+        "scope_id": proof.get("scope_id"),
+    }
+
 
 def _family_terminally_closed(family: dict[str, Any]) -> bool:
     """Derive terminal closure from semantic fields, not display-label equality.
@@ -125,17 +197,52 @@ def evaluate_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         if counters.get(counter) != 0 and predicates.get(predicate) is True:
             failures.append(f"COUNTER_PREDICATE_CONTRADICTION:{counter}:{predicate}")
 
-    unique_failures = sorted(set(failures))
+    legacy_failures = sorted(set(failures))
+    universal = _evaluate_universal_cover_proof(manifest)
+
+    # The 19-family protocol conjunction is one sound proof route, not the only
+    # logically sufficient route. A scope-complete universal cover may bypass
+    # only family-open failures and the aggregate frozen-acceptance predicate.
+    # It may not bypass common safety, ownership, donor, resource, clean-room,
+    # specification, or proof-freeze predicates.
+    bypassable = {
+        failure
+        for failure in legacy_failures
+        if failure.startswith("FAMILY_OPEN:")
+        or failure == "PREDICATE_NOT_TRUE:all_frozen_opus_acceptance_predicates_pass"
+    }
+
+    if universal["pass"]:
+        effective_failures = sorted(
+            failure for failure in legacy_failures if failure not in bypassable
+        )
+    else:
+        effective_failures = legacy_failures
+
+    achieved = not effective_failures
+    if achieved and universal["pass"] and legacy_failures:
+        proof_route = "UNIVERSAL_SCOPE_COMPLETE_COVER"
+    elif achieved:
+        proof_route = "FROZEN_19_FAMILY_PROTOCOLS"
+    else:
+        proof_route = None
+
     return {
-        "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_VERDICT_V1",
-        "achieved": not unique_failures,
-        "failed_predicates": unique_failures,
+        "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_VERDICT_V2",
+        "achieved": achieved,
+        "proof_route": proof_route,
+        "failed_predicates": effective_failures,
+        "legacy_family_route_failed_predicates": legacy_failures,
+        "universal_cover_route": universal,
         "family_count": len(families),
         "closed_family_count": sum(
             1 for family in families
             if isinstance(family, dict) and _family_terminally_closed(family)
         ),
-        "rule": "ACHIEVED_IFF_FAILED_PREDICATES_EMPTY",
+        "rule": (
+            "ACHIEVED_IFF_COMMON_FINALITY_PREDICATES_PASS_AND_EITHER_"
+            "FROZEN_19_FAMILY_PROTOCOL_ROUTE_OR_SCOPE_COMPLETE_UNIVERSAL_COVER_ROUTE_PASSES"
+        ),
     }
 
 
