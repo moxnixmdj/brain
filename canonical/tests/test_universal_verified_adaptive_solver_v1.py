@@ -99,14 +99,24 @@ def test_unknown_verifier_cannot_be_registered_from_task_data():
     assert any("VERIFIER_NOT_BUILTIN" in x for x in out["errors"])
 
 
-def test_verified_facts_may_resume_persistent_state_without_reproposal():
+def test_raw_resumed_verified_facts_are_rejected_without_authenticated_state_receipt():
     out = run(
         exact_problem(),
         proposal_packets={},
         verified_facts=["ANSWER_VERIFIED"],
     )
-    assert out["pass"] is True
-    assert out["trace"] == []
+    assert out["pass"] is False
+    assert out["status"] == "FAIL_CLOSED"
+    assert any("RAW_VERIFIED_FACT_RESUME_FORBIDDEN" in x for x in out["errors"])
+
+
+def test_target_effect_cannot_be_self_asserted_as_initial_fact():
+    p = exact_problem()
+    p["initial_facts"] = ["ANSWER_VERIFIED"]
+    out = run(p, proposal_packets={})
+    assert out["pass"] is False
+    assert out["status"] == "FAIL_CLOSED"
+    assert any("TARGET_EFFECT_MAY_NOT_BE_SELF_ASSERTED" in x for x in out["errors"])
 
 
 def test_typed_acceptance_program_verifier_extends_solver_without_new_task_python():
