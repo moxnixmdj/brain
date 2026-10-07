@@ -30,6 +30,7 @@ from canonical.runtime.capability_planner import PlanningFailure, plan_capabilit
 from canonical.runtime.p2_authenticated_top_law_route_v1 import execute as p2_execute
 from canonical.runtime.judgment_control_envelope_v1 import configured_terminal_decision
 from canonical.runtime.proof_carrying_semantic_refinement_v6 import resolve_from_source_proof
+from canonical.runtime.typed_acceptance_program_v1 import verify as verify_typed_acceptance_program
 
 SCHEMA = "PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V1"
 
@@ -140,6 +141,33 @@ def _verify_semantic_policy_v6(payload: Mapping[str, Any], proposal: Mapping[str
     }
 
 
+
+
+def _verify_typed_acceptance_program(payload: Mapping[str, Any], proposal: Mapping[str, Any]) -> dict[str, Any]:
+    program = payload.get("program")
+    trusted_values = payload.get("trusted_values")
+    candidate_values = proposal.get("candidate_values") if isinstance(proposal, Mapping) else None
+    if not isinstance(program, Mapping) or not isinstance(trusted_values, Mapping):
+        return {"pass": False, "status": "FAIL_CLOSED", "reason": "TYPED_ACCEPTANCE_PAYLOAD_INVALID"}
+    if not isinstance(candidate_values, Mapping):
+        return {"pass": False, "status": "REJECTED", "reason": "CANDIDATE_VALUES_REQUIRED"}
+    out = verify_typed_acceptance_program(
+        program,
+        trusted_values=trusted_values,
+        candidate_values=candidate_values,
+    )
+    return {
+        "pass": out.get("pass") is True,
+        "status": "VERIFIED" if out.get("pass") is True else (
+            "FALSIFIED" if str(out.get("status") or "").startswith("FALSIFIED") else "FAIL_CLOSED"
+        ),
+        "reason": None if out.get("pass") is True else str(out.get("status") or "TYPED_ACCEPTANCE_REJECTED"),
+        "proof_digest": _digest(out),
+        "verified_output": dict(candidate_values) if out.get("pass") is True else None,
+        "detail": out,
+    }
+
+
 Verifier = Callable[[Mapping[str, Any], Mapping[str, Any]], dict[str, Any]]
 
 BUILTIN_VERIFIERS: dict[str, Verifier] = {
@@ -148,6 +176,7 @@ BUILTIN_VERIFIERS: dict[str, Verifier] = {
     "FINANCE_JUDGMENT_CONTROL_V1": lambda p, q: _verify_judgment("FINANCE", p, q),
     "UNKNOWN_DOMAIN_JUDGMENT_CONTROL_V1": lambda p, q: _verify_judgment("UNKNOWN_DOMAIN", p, q),
     "SOURCE_ALIGNED_SEMANTIC_POLICY_V6": _verify_semantic_policy_v6,
+    "TYPED_ACCEPTANCE_PROGRAM_V1": _verify_typed_acceptance_program,
 }
 
 
