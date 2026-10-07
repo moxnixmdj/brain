@@ -87,3 +87,4 @@ jobs:
           # attempted until zero-spend capacity/admissibility is independently bound.
           print(json.dumps(out, sort_keys=True))
           PY
+# terminal-now-pr-trigger-20261007-v1
