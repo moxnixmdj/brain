@@ -262,6 +262,17 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
     unresolved_classes.sort()
 
     if not root["possible"]:
+        library_complete = False
+        if problem.get("discriminator_library_scope_complete") is True:
+            library_ok, _ = _auth_receipt(
+                problem.get("discriminator_library_completeness_receipt"),
+                required={
+                    "discriminator_library_scope_complete": True,
+                    "state_id": state_id,
+                },
+                label="DISCRIMINATOR_LIBRARY_COMPLETENESS",
+            )
+            library_complete = library_ok
         return {
             "schema": SCHEMA,
             "pass": False,
@@ -271,10 +282,7 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
             "policy_count": len(policy_regions),
             "discriminator_count": len(obs),
             "unresolved_observational_classes": unresolved_classes,
-            "negative_impossibility_authorized": (
-                problem.get("discriminator_library_scope_complete") is True
-                and isinstance(problem.get("discriminator_library_completeness_receipt"), Mapping)
-            ),
+            "negative_impossibility_authorized": library_complete,
             "bound_state_totality_proved": False,
             "u_empty_authorized": False,
             "terminal_authority": False,
