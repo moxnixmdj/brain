@@ -6148,7 +6148,14 @@ def _run_goal_unstamped(step, mission):
             gap_path,gap_evidence=_write_goal_gap_classification(
                 mission,acquisition_goal,gap_class,error_text
             )
-            if gap_class!="CAPABILITY_CANDIDATE":
+            # Unsupported control-flow may still be executable when the exact
+            # semantics are already represented by a verified bound capability.
+            # Probe bound grounding first, but never use external acquisition to
+            # invent control-flow semantics.
+            control_flow_bound_probe=bool(
+                is_control_flow_unsupported and gap_class=="CONTROL_FLOW"
+            )
+            if gap_class!="CAPABILITY_CANDIDATE" and not control_flow_bound_probe:
                 raise Blocker(
                     "GOAL_ARCHITECTURAL_GAP:"+json.dumps({
                       "gap_class":gap_class,
@@ -6213,6 +6220,17 @@ def _run_goal_unstamped(step, mission):
                 composed_result["composition_mode"]="MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH"
                 composed_result["model_dependency_count"]=0
                 return composed_result
+
+            if control_flow_bound_probe and grounded_count<=0:
+                raise Blocker(
+                    "GOAL_ARCHITECTURAL_GAP:"+json.dumps({
+                      "gap_class":"CONTROL_FLOW",
+                      "subgoal":acquisition_goal,
+                      "evidence_path":str(gap_path.relative_to(ROOT)),
+                      "capability_acquisition_attempted":False,
+                      "bound_grounding_attempted":True,
+                    },sort_keys=True)
+                ) from e
 
             broad=grounding.get("broad_objective_decomposition")
             if isinstance(broad,dict) and broad.get("status")=="DECOMPOSED":

@@ -178,5 +178,29 @@ class PlainGoalGroundingRuntimePrecedenceTests(unittest.TestCase):
         self.assertEqual(got["composition_mode"],"MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH")
 
 
+    def test_unbound_control_flow_remains_architectural_gap(self):
+        goal="If the latent branch changes, choose a different action."
+        mission={"mission_id":"GROUNDING-CONTROL-FLOW-UNBOUND","goal":goal}
+        step={"adapter":"goal","goal_ref":"goal","allow_optional_model_planner":False}
+        compile_error=runtime.Blocker(
+            'GOAL_COMPILATION_FAILED:GOAL_CONTROL_FLOW_UNSUPPORTED:{"index":0,"subgoal":"'+goal+'"}'
+        )
+        grounding={
+            "schema":"PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+            "grounded_clause_count":0,
+            "unresolved_clause_indexes":[0],
+            "candidate_capability_ids":[],
+            "clauses":[{"index":0,"text":goal,"status":"UNRESOLVED","candidates":[]}],
+            "broad_objective_decomposition":None,
+            "model_dependency_count":0,
+        }
+        evidence_path=CANONICAL_ROOT/"astra_runtime"/"evidence"/"GROUNDING-CONTROL-FLOW-UNBOUND__BOUND_CAPABILITY_GROUNDING.json"
+        with mock.patch.object(runtime,"_compile_plain_goal",side_effect=compile_error), \
+             mock.patch.object(runtime,"_ground_plain_goal_to_bound_capabilities",return_value=(evidence_path,grounding)), \
+             mock.patch.object(runtime,"_load_auto_capability_acquisition",side_effect=AssertionError("must not acquire")):
+            with self.assertRaisesRegex(runtime.Blocker,"GOAL_ARCHITECTURAL_GAP"):
+                runtime.run_goal(step,mission)
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
