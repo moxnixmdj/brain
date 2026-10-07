@@ -1,0 +1,23 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_FUSED_GENERIC_CERTIFICATE_CHECKER_V2",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_EXACT_BLOB_REPLAY_PASS__SAME_TRUST_BOUNDARY__STRICT_BYTE_IMPROVEMENT__ZERO_TERMINAL_CREDIT",
+  "scope_lock":"BYTES_RESEARCH_ONLY",
+  "checker":{
+    "path":"canonical/runtime/bytes_fused_generic_certificate_checker_v2.py",
+    "git_blob_sha":"fee363cc8aaf038b6d083621de805299cc5b8901",
+    "raw_bytes":4218,
+    "fixed_decoder_payload_bytes":1572
+  },
+  "verified":{"scalar_equations":65,"structural_equations":84,"congruence_classes":809,"witness_classes":809,"witness_inputs":823},
+  "byte_accounting":{
+    "checker_plus_certificate_joint_payload_bytes":1974,
+    "v10_plus_checker_plus_certificate_joint_payload_bytes":3590,
+    "previous_current_package_payload_bytes":3692,
+    "durable_payload_bytes_saved":102,
+    "older_broader_trust_package_payload_bytes":3356
+  },
+  "trust_boundary":"UNCHANGED_FROM_GENERIC_CHECKER_V1__SOUNDNESS_OF_FIVE_GENERIC_LIST_LAW_FAMILIES_REMAINS_TRUSTED",
+  "next_critical_path":"USE_THE_102_BYTE_HEADROOM_TO_MECHANIZE_OR_REDUCE_THE_FIVE_GENERIC_LIST_LAW_FAMILIES__SORTED_BOUNDARY_FIRST",
+  "hard_nonclaims":["NO_TRUST_REDUCTION_IN_THIS_MERGE","NO_ZERO_TRUST_PROOF","NO_TERMINAL_CREDIT"]
+}
