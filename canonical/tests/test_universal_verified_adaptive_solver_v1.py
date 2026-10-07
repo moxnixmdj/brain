@@ -607,3 +607,21 @@ def test_uncompilable_plain_goal_requests_more_information():
     out = run(problem, proposal_packets={})
     assert out["pass"] is False
     assert out["status"] == "NEED_MORE_INFORMATION"
+
+
+def test_failed_bound_packet_cannot_launder_source_label_onto_later_raw_proposal():
+    from canonical.runtime.general_cognition_proposal_packet_v1 import make_packet
+
+    first = run(exact_problem(), proposal_packets={})
+    request = first["proposal_request"]
+    bad_bound = make_packet(
+        request,
+        source_id="bound-substrate",
+        proposal={"candidate": {"answer": 41}},
+    )
+    raw_good = {"candidate": {"answer": 42}}
+    out = run(exact_problem(), proposal_packets={"solve": [bad_bound, raw_good]})
+    assert out["pass"] is True, out
+    assert out["trace"][0]["proposal_source"] == "UNBOUND_EXTERNAL_PROPOSAL"
+    assert out["trace"][0]["proposal_source_id"] is None
+    assert out["rejected_proposals"][0]["proposal_source"] == "GENERAL_COGNITION_SUBSTRATE:bound-substrate"
