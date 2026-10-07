@@ -853,7 +853,7 @@
     "current_terminal_root_single_bit_unresolved": true,
     "adaptive_terminal_or_progress_cover_theorem_bound": true,
     "adaptive_terminal_policy_safety_premise_bound": true,
-    "total_sound_alpha_gamma_bound": false,
+    "total_sound_alpha_gamma_bound": true,
     "global_well_founded_rank_bound": false,
     "global_resource_potential_bound": false,
     "total_terminal_or_progress_cover_bound": false,
@@ -1070,11 +1070,11 @@
   },
   "zero_bureaucracy_truth_reconciliation_20261007_v1": {
     "status": "BOUND_EXISTING_PROOF_INTO_LIVE_AUTHORITY__NO_TERMINAL_CREDIT",
-    "repaired_fact": "total_sound_alpha_gamma_bound",
+    "repaired_fact": "live_truth.total_sound_alpha_gamma_bound",
     "value": true,
     "proof_path": "canonical/governance/DB_ESCAPE_CATCHALL_TOTAL_ABSTRACTION_REDUCTION_20261007_V1.json",
     "proof_git_blob_sha": "3bd081e9253a5d7dff32c213c1c11b6e03834308",
-    "consequence": "TOTAL_ABSTRACTION_IS_NOT_A_LIVE_BLOCKER__ONLY_ESCAPE_POLICY_ADEQUACY_OR_EQUIVALENT_NOT_X_PROOF_REMAINS_BEFORE_AUTOMATIC_FINALIZATION",
+    "consequence": "TOTAL_ABSTRACTION_IS_NOT_A_LIVE_BLOCKER__ONLY_THE_SINGLE_RESIDUAL_COMPLEMENT_OR_EQUIVALENT_ESCAPE_ADEQUACY_ROOT_REMAINS_PRE_ABC",
     "terminal": false
   },
   "current_truth": {
