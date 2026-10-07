@@ -6,6 +6,7 @@ ROOT=Path(__file__).resolve().parents[2]
 THEOREM="canonical/governance/HONESTY_SELECTED_COVER_LOCALITY_THEOREM_20261007_V1.json"
 SOURCES={
  "canonical/governance/L1_UNIVERSAL_ABC_NORMAL_FORM_THEOREM_20261007_V1.json":"cff6a95cad0027f3e142a32fd028a27566a00ea5",
+ "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V11.json":"97412c8b7b107789c01906012163d3088991f1a4",
  "canonical/governance/SELECTED_COVER_LOCAL_TRANSFORM_CLOSURE_THEOREM_20261007_V1.json":"ea48341b1962c7c90cc78c6ef9affcabbe9abd26",
  "canonical/governance/HONESTY_CLOSED_WORLD_TOTALIZATION_V1.json":"7996512bdaa76c37ce79e0fabfbaafb77256f2d0",
  "canonical/verification/HONESTY_TARGET_SEMANTIC_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json":"1e164984ff1d41741246b489647b39373bd5c66f",
@@ -41,6 +42,7 @@ def verify():
 
     t=load(THEOREM)
     l1=load("canonical/governance/L1_UNIVERSAL_ABC_NORMAL_FORM_THEOREM_20261007_V1.json")
+    v11=load("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V11.json")
     lc=load("canonical/governance/SELECTED_COVER_LOCAL_TRANSFORM_CLOSURE_THEOREM_20261007_V1.json")
     cw=load("canonical/governance/HONESTY_CLOSED_WORLD_TOTALIZATION_V1.json")
     sb=load("canonical/verification/HONESTY_TARGET_SEMANTIC_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json")
@@ -49,6 +51,10 @@ def verify():
 
     if (l1.get("normal_form_effect_if_verified") or {}).get("independent_L1_predicates")!=["COMPLETE_SELECTED_CONTEXT_ABC"]:
         errors.append("L1_NOT_SINGLE_ABC")
+    if (v11.get("current_truth") or {}).get("independent_top_level_terminal_predicates")!=["COMPLETE_SELECTED_CONTEXT_ABC","D_FINAL_ROUTE_OWNERSHIP_EFFECT_DONOR_INDEPENDENCE_FINALITY"]:
+        errors.append("V11_TERMINAL_FORM_DRIFT")
+    if ((v11.get("normal_form") or {}).get("ABC_COMPLETE_SELECTED_CONTEXT_COVER") or {}).get("scheduler_priority")!=1:
+        errors.append("V11_ABC_NOT_PRIORITY_ONE")
     if "UNUSED_TRANSFORM_RULE" in "":
         pass
     local_rule=((lc.get("theorem") or {}).get("unused_transform_rule") or "")
