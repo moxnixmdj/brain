@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK7_IRREVERSIBLE_RESULT_TRUTH_V1",
+  "date": "2026-10-07",
+  "status": "FINAL_ZERO__VERIFIER_REACHED__NO_RERUN__ZERO_INCREMENTAL_SPEND",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot_id": "terminal-bench-science/reactor-safety-control::trial-0",
+  "task_name": "terminal-bench-science/reactor-safety-control",
+  "task_digest": "sha256:96c8c5764042dca01ba0b7bd127cf2587f8df538a335f36abf6b4c200f0bb669",
+  "execution_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK7_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1.json",
+    "git_blob_sha": "544cc48f21f6f0736ffdb1c3288761bff6553b56"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37606898246,
+    "workflow_job_id": 112744475576,
+    "artifact_id": 11474839915,
+    "artifact_name": "tb-science-reactor-safety-control-trial-0-rank7",
+    "artifact_digest": "sha256:8866fd656285ede4081fecc99bd952680c59f63028a3ceb58c48013e3594fe5d",
+    "workflow_conclusion": "success",
+    "github_run_attempt": 1
+  },
+  "exact_result": {
+    "receipt_schema": "PROJECT_BRAIN_TB_SCIENCE_TERMINAL_SLOT_RECEIPT_RANK7_V1",
+    "harbor_step_outcome": "success",
+    "verifier_result_present": true,
+    "reward": 0,
+    "status": "FINAL_ZERO",
+    "errors": [],
+    "exception_info": [],
+    "execution_authority_consumed": true,
+    "rerun_credit": false,
+    "incremental_spend_usd": 0,
+    "result_hashes": {
+      "jobs/reactor-safety-control-trial-0/reactor-safety-control-trial-0/reactor-safety-control__YcmHVm4/result.json": "96b5977f42902fcba7d601cf565bd67da313d96b8186403fb33c2f46dae6377a",
+      "jobs/reactor-safety-control-trial-0/reactor-safety-control-trial-0/result.json": "87b6b8a2ae06eb53e8f1db0e9ee085a321fe16c03ef51c17b3c2f4351978a71e"
+    }
+  },
+  "interpretation": {
+    "task_capability_negative_evidence": true,
+    "infrastructure_or_transport_failure": false,
+    "reason": "THE_REPAIRED_PLANNER_COMPLETED_THE_TASK_ROUTE__HARBOR_COMPLETED__THE_VERIFIER_RAN__AND_RETURNED_REWARD_0_0__THEREFORE_THIS_SLOT_IS_A_GENUINE_NEGATIVE_TASK_OUTCOME_UNDER_THE_FROZEN_ROUTE",
+    "protocol_effect": "COUNT_EXACTLY_ONE_FINAL_FAILURE__NEVER_REPLAY_OR_REPLACE_THIS_SLOT"
+  },
+  "next_frozen_slot": {
+    "schedule_rank": 8,
+    "slot_id": "terminal-bench-science/linked-cell-suppression::trial-0",
+    "task_digest": "sha256:34d92f30b75011c93d55caced3a4a58c6f68a7bebdbb601b36cb6561ef4069c0"
+  },
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_INFERENCE_FROM_ONE_ZERO_TO_WHOLE_BENCHMARK_CAPABILITY",
+    "NO_RANK8_EXECUTION_AUTHORITY_FROM_THIS_RECEIPT_ALONE",
+    "NO_U_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 1,
+    "terminal_credit_delta": 0
+  }
+}
