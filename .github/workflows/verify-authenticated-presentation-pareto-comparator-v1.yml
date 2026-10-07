@@ -1,0 +1,64 @@
+name: Verify authenticated presentation Pareto comparator v1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-authenticated-presentation-pareto-comparator-v1.yml'
+      - 'canonical/runtime/authenticated_presentation_pareto_comparator_v1.py'
+      - 'canonical/tests/test_authenticated_presentation_pareto_comparator_v1.py'
+      - 'canonical/runtime/effect_broker_receipt_resolver_v2.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Run narrow comparator verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pytest -q canonical/tests/test_authenticated_presentation_pareto_comparator_v1.py | tee /tmp/pytest.txt
+          mkdir -p canonical/verification
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          def blob(path):
+              data=pathlib.Path(path).read_bytes()
+              return hashlib.sha1(b"blob "+str(len(data)).encode()+b"\0"+data).hexdigest()
+          receipt={
+            "schema":"PROJECT_BRAIN_AUTHENTICATED_PRESENTATION_PARETO_COMPARATOR_INDEPENDENT_VERIFICATION_V1",
+            "date":"2026-10-07",
+            "status":"PASS",
+            "pass":True,
+            "trigger_sha":os.environ.get("GITHUB_SHA"),
+            "runtime":{
+              "path":"canonical/runtime/authenticated_presentation_pareto_comparator_v1.py",
+              "git_blob_sha":blob("canonical/runtime/authenticated_presentation_pareto_comparator_v1.py")
+            },
+            "tests":{
+              "path":"canonical/tests/test_authenticated_presentation_pareto_comparator_v1.py",
+              "git_blob_sha":blob("canonical/tests/test_authenticated_presentation_pareto_comparator_v1.py")
+            },
+            "pytest_output":pathlib.Path("/tmp/pytest.txt").read_text()[-2000:],
+            "incremental_spend_usd":0,
+            "terminal_credit_delta":0
+          }
+          pathlib.Path("canonical/verification/AUTHENTICATED_PRESENTATION_PARETO_COMPARATOR_INDEPENDENT_VERIFICATION_20261007_V1.json").write_text(json.dumps(receipt,indent=2,sort_keys=True)+"\n")
+          PY
+          git config user.name "Project Brain Presentation Verify"
+          git config user.email "project-brain-presentation-verify@users.noreply.github.com"
+          git add canonical/verification/AUTHENTICATED_PRESENTATION_PARETO_COMPARATOR_INDEPENDENT_VERIFICATION_20261007_V1.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Verify authenticated presentation Pareto comparator"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || { git rebase --abort || true; sleep 2; continue; }
+            git push origin HEAD:main && exit 0
+            sleep 2
+          done
+          exit 1
