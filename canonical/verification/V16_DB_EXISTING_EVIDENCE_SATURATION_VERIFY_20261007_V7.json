@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_V16_DB_EXISTING_EVIDENCE_SATURATION_VERIFY_V7",
+  "date": "2026-10-07",
+  "status": "PASS__CURRENT_THIRTEEN_REGION_PREDECESSOR_PLUS_DISTINCT_VERIFIED_SYNTHESIS_CEILING_EQUALS_FOURTEEN_CERTIFICATE_REGIONS__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V7.json",
+    "git_blob_sha": "862649b49fe0b94ff2d6e3cea05119ade614cfb3"
+  },
+  "source_audit": {
+    "current_v5_predecessor": "6637b23cd90f3df20ec87f817ef38d1eb233ea79",
+    "synthesis_cell": "7b2cb008f34082ae0aa4be78f2444287cf6022b2",
+    "synthesis_independent_wolfram_verification": "200576296c16e3c5231e6a873a83129d8ea06545",
+    "synthesis_connector_wolfram_verification": "e4435dd6ffe95ce723159a2222217e8d427c5dd9",
+    "authority_v16": "c1bc4543860be08f9014f69a212ba2222d8dba7c"
+  },
+  "reconciliation_check": {
+    "predecessor_certificate_count": 13,
+    "synthesis_region_absent_from_predecessor": true,
+    "distinct_added_certificate_count": 1,
+    "reconciled_certificate_count": 14,
+    "semantic_disjointness_not_required_or_claimed": true
+  },
+  "formal_check": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "expression": "TautologyQ[Implies[s && !(d || q), s && !d], {s,d,q}]",
+    "result": true,
+    "interpretation": "ADDING_A_SOUND_REGION_Q_TO_D_B_CANNOT_ENLARGE_THE_RESIDUAL_ESCAPE_E"
+  },
+  "verified_consequence": [
+    "THE_LIVE_CACHED_CERTIFICATE_LEDGER_HAS_A_SOUND_FOURTEEN_REGION_LOWER_BOUND_AFTER_RECONCILING_THE_SYNTHESIS_CEILING.",
+    "REQUIRED_CLAIM_COVERAGE_IS_REMOVED_FROM_THE_LIVE_SYNTHESIS_RESIDUAL_ON_ITS_VERIFIED_SCOPE.",
+    "THIS_DOES_NOT_PROVE_GLOBAL_SELECTED_COVER_COMPLETENESS."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_FOURTEEN_REGIONS_ARE_DISJOINT.",
+    "NO_CLAIM_FOURTEEN_REGIONS_EXHAUST_THE_CLOSED_TRACE_SUPERSET.",
+    "NO_CLAIM_COMPLETE_SELECTED_CONTEXT_ABC_D_FINALITY_OR_TERMINAL_CLOSURE."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
