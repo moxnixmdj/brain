@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "CURRENT_RECONCILED__5_OF_19_ACCEPTANCE__5_VERIFIED_OWNED__14_ACCEPTANCE_OPEN__THREE_ZERO_REALITY_OWNERSHIP_PROMOTIONS",
+  "status": "CURRENT_RECONCILED__6_VERIFIED_OWNED__IF_ACCEPTANCE_AND_OWNERSHIP_PROMOTED__REMAINING_FAMILIES_FAIL_CLOSED",
   "evaluated_utc": "2026-10-03",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -323,17 +323,17 @@
     },
     {
       "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "GPT-6 Astra + Brain fail-closed gates + reasoning receipts"
       ],
-      "evidence": "OpenAI reports strong intent/scope behavior for Astra, but no direct Opus 5.5 matched comparison closes the whole family.",
+      "evidence": "Frozen instruction-following acceptance is scope-complete and independently verified; the exact accepted operative closure is content-addressed Brain-local deterministic code. A transitive provider audit found no network, opaque-model, dynamic-import, or external-capability path; the only subprocess is a self-fork of the same canonical IF harness.",
       "sources": [
         "https://openai.com/index/gpt-6-astra/",
         "https://www.anthropic.com/claude-opus-5-5"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "internalization_required": false,
+      "ownership_note": "Ownership promoted deductively from the exact accepted route. The local child-process boundary is execution isolation, not an external capability supplier; no capability rediscovery or external target provider is required.",
       "candidate_internalization_routes": [
         {
           "repo": "ReflexioAI/reflexio",
@@ -350,11 +350,14 @@
       ],
       "campaign_next_action": "Test whether persisted corrections plus trajectory diagnosis improve scope discipline on fresh tasks without overfitting or weakening fail-closed behavior.",
       "postwave_terminal_behavioral_status": "PASS",
-      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
-      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
-      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "postwave_opus55_acceptance_status": "PASS_SCOPE_COMPLETE_FROZEN_PROTOCOL",
+      "postwave_ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "postwave_acceptance_evidence": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "current_behavioral_scope_state": "P1_SCOPE_RESTORED__WHOLE_SCOPE_PASS",
+      "current_behavioral_scope_evidence": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "ownership_promotion_evidence": "canonical/verification/IF_ACCEPTED_ROUTE_OWNERSHIP_PROMOTION_20261007_V1.json",
+      "ownership_promotion_mode": "EXACT_ACCEPTED_ROUTE_CONTENT_BINDING_PLUS_TRANSITIVE_PROVIDER_CLOSURE_WITH_LOCAL_SELF_PROCESS_CONFINEMENT",
+      "next_required_action": "PRESERVE_VERIFIED_IF_OWNERSHIP__NO_REPLAY__REOPEN_ONLY_ON_CONTENT_ADDRESSED_COUNTEREVIDENCE_OR_SCOPE_DRIFT"
     },
     {
       "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -639,7 +642,8 @@
       "LONG_HORIZON_MEMORY_AND_CONTINUITY",
       "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
     ],
     "external_specimen_backed_families": [
       "COMPLEX_MULTI_TOOL_AGENCY",
@@ -649,7 +653,6 @@
       "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
       "COMPUTER_AND_BROWSER_USE",
       "FINANCIAL_ANALYSIS",
-      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
       "COMMUNICATION_AND_SYNTHESIS",
       "UNKNOWN_DOMAIN_ADAPTATION"
     ],
@@ -739,7 +742,7 @@
   },
   "postwave_acceptance_summary": {
     "calibrated_family_count": 5,
-    "verified_owned_family_count": 5,
+    "verified_owned_family_count": 6,
     "pending_acceptance_family_count": 14,
     "calibrated_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
