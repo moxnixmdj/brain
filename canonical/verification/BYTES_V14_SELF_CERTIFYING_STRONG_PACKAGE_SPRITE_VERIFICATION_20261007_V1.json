@@ -1,0 +1,34 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_V14_SELF_CERTIFYING_STRONG_PACKAGE_SPRITE_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_SPRITE_EXACT_BLOB_PASS__2674_BYTE_FULL_PACKAGE__ZERO_TERMINAL_CREDIT",
+  "carrier":{
+    "provider":"SPRITES",
+    "sprite_name":"brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e"
+  },
+  "exact_blobs":{
+    "v14_runtime":"f5d140ca78b1512efd3ad248e5991909480331d5",
+    "self_checker":"0ba92a4cbefe42034d39be9e17e9a66034eec784"
+  },
+  "replay":{
+    "status":"PASS",
+    "programs":2955,
+    "generated_equations":933,
+    "classes":809,
+    "witnesses":823,
+    "adapter_bytes":0
+  },
+  "joint_encoding":{
+    "raw_bytes":6947,
+    "payload_bytes":2674,
+    "payload_sha256":"4721dfb851dd40bc0a310853993f24581131e4a7210a98382cbe810968b3f067",
+    "tested_lzma1_configurations":15000,
+    "roundtrip_exact":true
+  },
+  "hard_nonclaims":[
+    "CLASS_SPECIFIC_RULE_KNOWLEDGE_REMAINS_IN_THE_SELF_CHECKER",
+    "TRUSTED_META_LEVEL_RULE_SOUNDNESS_REMAINS_OPEN",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
