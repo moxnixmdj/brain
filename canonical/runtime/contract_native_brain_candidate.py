@@ -84,13 +84,27 @@ def solve_synthesis(public: Mapping[str, Any]) -> dict[str, Any]:
     evidence=task.get("evidence")
     if not isinstance(evidence,list):
         raise CandidateError("EVIDENCE_INVALID")
-    required=[]; optional=[]; uncertainty=[]
+    required=[]; optional=[]; uncertainty=[]; provenance_by_claim={}; seen_claim_ids=set()
     for row in evidence:
         if not isinstance(row,Mapping):
             raise CandidateError("EVIDENCE_ROW_INVALID")
         cid=row.get("claim_id"); role=row.get("role"); support=row.get("support")
         if not isinstance(cid,str) or not cid:
             raise CandidateError("CLAIM_ID_INVALID")
+        if cid in seen_claim_ids:
+            raise CandidateError("DUPLICATE_CLAIM_ID")
+        seen_claim_ids.add(cid)
+        selectable=role in {"required","optional"} and support!="unsupported"
+        if selectable:
+            provenance=row.get("provenance")
+            if (
+                not isinstance(provenance,list)
+                or not provenance
+                or any(not isinstance(x,str) or not x for x in provenance)
+                or len(provenance)!=len(set(provenance))
+            ):
+                raise CandidateError("PROVENANCE_INVALID")
+            provenance_by_claim[cid]=list(provenance)
         if role=="required" and support!="unsupported":
             required.append(cid)
         elif role=="optional" and support!="unsupported":
@@ -109,6 +123,7 @@ def solve_synthesis(public: Mapping[str, Any]) -> dict[str, Any]:
     return {
         "selected_claims":selected,
         "uncertainty_claims":[x for x in uncertainty if x in selected_set],
+        "provenance_by_claim":{x:list(provenance_by_claim[x]) for x in selected},
     }
 
 
