@@ -33,7 +33,7 @@ TOOL = {
                     "type": "array",
                     "minItems": 1,
                     "maxItems": 16,
-                    "items": {"type": "string", "minLength": 1},
+                    "items": {"type": "string", "minLength": 1, "maxLength": 64},
                     "description": (
                         "Stable short material requirement IDs. Repeat the exact same "
                         "frozen list on later cycles."
@@ -46,7 +46,7 @@ TOOL = {
                     "items": {
                         "type": "object",
                         "properties": {
-                            "action_id": {"type": "string", "minLength": 1},
+                            "action_id": {"type": "string", "minLength": 1, "maxLength": 64},
                             "covers": {
                                 "type": "array",
                                 "minItems": 1,
@@ -171,7 +171,7 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
         "tool_choice": "required",
         "parallel_tool_calls": False,
         "temperature": 0,
-        "max_tokens": 384,
+        "max_tokens": MAX_TOOL_COMPLETION_TOKENS,
         "stream": False,
     }).encode("utf-8")
     req = urllib.request.Request(
