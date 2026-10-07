@@ -24,4 +24,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m unittest -v canonical.tests.test_counterexample_guided_causal_architecture_synthesizer_v1
+      - name: Compile
+        run: |
+          python -m py_compile canonical/runtime/counterexample_guided_causal_architecture_synthesizer_v1.py
+          python -m py_compile canonical/tests/test_counterexample_guided_causal_architecture_synthesizer_v1.py
+      - name: Test
+        run: |
+          set -o pipefail
+          python -m unittest -v canonical.tests.test_counterexample_guided_causal_architecture_synthesizer_v1 2>&1 | tee /tmp/architecture-synthesis-test.log
+      - name: Upload test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: architecture-synthesis-test-log
+          path: /tmp/architecture-synthesis-test.log
+          if-no-files-found: ignore
