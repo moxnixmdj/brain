@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__17_RESIDUAL_CLASSES__9_LANE_CURRENT_BOUND_MINIMUM__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V1.json",
+    "git_blob_sha": "fdbe98afd9b65f20e3d20bd5371d0b34b3b085aa",
+    "branch": "abc-post-saturation-delta-audit-v2"
+  },
+  "verified": {
+    "residual_evidence_class_count": 17,
+    "lane_count": 9,
+    "uncovered_residual_classes": [],
+    "every_lane_has_unique_current_route_witness": true,
+    "minimum_lane_count_under_bound_route_graph": 9,
+    "wolfram_binary_cover_minimum": 9
+  },
+  "unique_lane_witnesses": {
+    "L1_BUILDKITE_TB4_CHARTOGRAPHY": "R1_TB4",
+    "L2_HUGGINGFACE_HLE_OSWORLD": "R8_HLE_TOOLS",
+    "L3_VALS_FINANCE_MYSTERY": "R14_FINANCE_AGENT_V2",
+    "L4_ARTIFICIAL_ANALYSIS_PROFESSIONAL": "R5_GDPVAL_AA",
+    "L5_COGNITION_FRONTIERCODE": "R2_FRONTIERCODE",
+    "L6_ZAPIER_AUTOMATIONBENCH": "R7_AUTOMATIONBENCH",
+    "L7_CURSORBENCH_UNBOUND": "R3_CURSORBENCH",
+    "L8_TB_SCIENCE_HARBOR": "R9_TB_SCIENCE",
+    "L9_SHARED_MATCHED_TARGET_RELATIVE": "R16_SYNTHESIS_MATCHED_QUALITY_COVERAGE"
+  },
+  "interpretation": "UNDER_THE_CURRENT_BOUND_LEGAL_ROUTE_GRAPH__NO_LANE_CAN_BE_DELETED_WITHOUT_LEAVING_AT_LEAST_ONE_RESIDUAL_CLASS_UNTOUCHED. FUTURE_STRONGER_CERTIFICATES_OR_NEW_ROUTE_SUBSUMPTIONS_MUST_TRIGGER_RECOMPUTATION.",
+  "hard_nonclaims": [
+    "NO_INFORMATION_THEORETIC_GLOBAL_MINIMUM_CLAIM",
+    "NO_CLAIM_ALL_LANES_ACTIONABLE_NOW",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
