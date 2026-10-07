@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_CURRENT_MAIN_INFORMATION_WAKE_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_TWO_WORLD_ALGEBRA_PASS__CURRENT_MAIN_SOURCE_HASH_AUDIT_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_CURRENT_MAIN_INFORMATION_WAKE_20261007_V1.json",
+    "git_blob_sha": "b335e05abe0f9fddddb47502b1d975ba8843a806",
+    "branch": "terminal-now/professional-information-wake-current-main-v1"
+  },
+  "independent_math": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "input": "<|\"DominanceFeasible\" -> Reduce[0 <= p <= 1 && p >= 1 && 1 - p >= 1, p, Reals], \"Minimax\" -> Maximize[{Min[p,1-p],0<=p<=1},p]|>",
+    "output": "<|\"DominanceFeasible\" -> False, \"Minimax\" -> {1/2, {p -> 1/2}}|>",
+    "dominance_feasible": false,
+    "minimax_value": "1/2",
+    "minimax_argmax": "p=1/2"
+  },
+  "current_main_source_hash_audit": {
+    "CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V5": "e9c47da572fdc17ba8759476cacc9b7738fabfb7",
+    "PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1": "89083d0a7039f4e3e9ac0f9fbdd392836eb11f25",
+    "P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d",
+    "P2_INFORMATION_SAFE_UNIVERSAL_SELECTED_CELL_20261007_V1": "0ccc3ecbdbf2636b8f1e7f0daf959a48350cb82e",
+    "DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V6": "3b438f63dfdcd208c984251d1addd1334ca4b44e",
+    "TERMINAL_SHARED_SEMANTIC_MINIMUM_INFORMATION_LOWER_BOUND_20261007_V1": "0b63405d95009a95ad12e767d9785ceacaf5be12"
+  },
+  "verified": [
+    "CURRENT_BOUND_PROFESSIONAL_SOURCES_STILL_REFUSE_SCOPE_INHERITANCE_TO_WHOLE_REALISTIC_QUALITY.",
+    "THE_14_RECORD_CACHE_DOES_NOT_CLAIM_WHOLE_ARTIFACT_FAMILY_CLOSURE.",
+    "THE_VISIBLE_ONLY_TWO_WORLD_UNIVERSAL_NONINFERIORITY_CONSTRAINTS_ARE_INFEASIBLE.",
+    "REPEATING_THE_BOUNDED_P2_PROOF_CANNOT_BY_ITSELF_EXCLUDE_THE_OPPOSED_HIDDEN_EVALUATOR_COUNTERMODEL.",
+    "A_SCOPE_COMPLETE_STRUCTURAL_CERTIFICATE_REMAINS_A_VALID_ZERO_TARGET_INFORMATION_ESCAPE."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_COUNTERMODEL_IS_THE_ACTUAL_TARGET_WORLD.",
+    "NO_CLAIM_A_SPECIFIC_CONCRETE_CONTEXT_HAS_BEEN_PROVED_IN_U.",
+    "NO_ABC_D_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
