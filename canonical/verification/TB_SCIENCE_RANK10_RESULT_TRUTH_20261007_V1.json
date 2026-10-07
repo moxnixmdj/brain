@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK10_RESULT_TRUTH_V1",
+  "date": "2026-10-07",
+  "status": "FINAL_ZERO__PLANNER_LOCAL_ROUTE_TIMEOUT__NO_VERIFIER_RESULT__NO_TASK_CAPABILITY_INFERENCE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/rdkit-ic-constraints::trial-0",
+    "ledger_schedule_rank": 10,
+    "task_digest": "sha256:17e356ab255088712c7dfa9765bf077b33a3da221f4a03d4770576857f9c0b6f"
+  },
+  "execution": {
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2407,
+    "workflow_run_id": 37630721044,
+    "workflow_job_id": 112823953786,
+    "head_sha": "7401404aca000cec38d5f9a41182e6d5fe19487e",
+    "artifact_id": 11486926689,
+    "artifact_digest": "sha256:13aa4516e57f83b9a9d989e4a6ee038b66c50dd90f6abef34695c81d12c4b052",
+    "harbor_job_conclusion": "success",
+    "execution_authority_consumed": true,
+    "rerun_credit": false,
+    "reward": 0.0
+  },
+  "exact_bindings": {
+    "authority_blob": "7b4d8c2555d102b30e02673c95675403ae947629",
+    "intent_blob": "e65720a36d7c09a3be5a33246f3ab54e20612915",
+    "execution_claim_blob": "f9199b6fc08383acccdddd86b8c8bd243b048fad",
+    "epoch_blob": "8d0bc7999769a32147eab08acb31436e7abe743c",
+    "planner_blob": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "closure_manifest_blob": "31656d35034338dfcb699672bcd4788b283b83c9",
+    "transport_verification_blob": "877e5ddf815c1958f4ab41f8462ad54af87f0c87",
+    "closure_verification_blob": "61495f5977ea745e63ca14136875b97e3e95cd45"
+  },
+  "result_hashes_sha256": {
+    "trial_result": "e669c7f266a7ded93f96e63f537e4d7e4ba4c300ad07b67b36f612a586a8c478",
+    "job_result": "25cce62799d711fa5964a716f8430d60c54e8a6933118adb5bda0b3a7188faf1"
+  },
+  "observed_failure": {
+    "exception_type": "SciencePlannerError",
+    "exception_message": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "verifier_result_present": false,
+    "slot_receipt_error": "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD",
+    "local_qwen_health_before_task": "ok"
+  },
+  "causal_classification": {
+    "task_capability_negative_evidence": false,
+    "planner_or_transport_latency_failure": true,
+    "task_verifier_reached": false,
+    "safe_inference": "THE_EXACT_CURRENT_PLANNER_SUBSTRATE_DID_NOT_RETURN_A_PLAN_WITHIN_THE_BOUND_TIMEOUT__NO_INFERENCE_ABOUT_THE_TASK_SOLUTION_CAPABILITY_IS_AUTHORIZED"
+  },
+  "controls": {
+    "rerun_forbidden": true,
+    "rank11_authority_granted": false,
+    "next_slot_must_remain_locked_until_A_NEW_CAUSAL_REPAIR_IS_INDEPENDENTLY_VERIFIED": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
