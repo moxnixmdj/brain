@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_ACTION_INTENT_V1",
+  "date": "2026-10-07",
+  "status": "ACTIVE__ONE_PUBLIC_220_STRUCTURAL_LOCALIZATION__ZERO_TARGET_QUERY__ZERO_SPEND",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target": "COMPLETE_PUBLIC_GDPVAL_220_STRUCTURAL_AND_SEMANTIC_COMPLEMENT_LOCALIZATION",
+  "source_bindings": {
+    "runtime": {
+      "path": "canonical/runtime/gdpval_semantic_complement_localizer_v2.py",
+      "git_blob_sha": "347607991ccd68c9a27b0afcb56a271f45ed0326"
+    },
+    "tests": {
+      "path": "canonical/tests/test_gdpval_semantic_complement_localizer_v2.py",
+      "git_blob_sha": "8f7f70f5007a9fd3e4cff668559fd9aab6586bf4"
+    },
+    "workflow": {
+      "path": ".github/workflows/gdpval-semantic-complement-v2.yml",
+      "git_blob_sha": "f93760d69afe9a6460d34076f74b7ee2839838fc"
+    },
+    "population_receipt": {
+      "path": "canonical/evidence/GDPVAL_PUBLIC_220_POPULATION_REALITY_RECEIPT_20261007_V1.json",
+      "git_blob_sha": "55214960a5a3a383fe17aa5489c64ecd26a5c1a9"
+    },
+    "prior_localization": {
+      "path": "canonical/governance/GDPVAL_PUBLIC_220_SEMANTIC_COMPLEMENT_LOCALIZATION_20261007_V1.json",
+      "git_blob_sha": "9f5fd6f89de1107adeb0e4eb95c1c16cd6d1392c"
+    }
+  },
+  "execution": {
+    "exact_task_population_count": 220,
+    "public_population_only": true,
+    "fresh_target_model_queries_authorized": 0,
+    "provider_evaluation_queries_authorized": 0,
+    "new_internal_model_inference_authorized": 0,
+    "incremental_spend_usd_max": 0,
+    "output": "canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_20261007_V2.json",
+    "persist_content_addressed_evidence": true
+  },
+  "tournament_boundary": {
+    "purpose": "EXHAUST_ALREADY_OWNED_ZERO_REALITY_STRUCTURAL_LOCALIZATION_BEFORE_ANY_TARGET_RELATIVE_WAKE",
+    "capability_deficit_inference_authorized": false,
+    "target_query_irreducibility_inference_authorized": false,
+    "unresolved_semantics_remain_unknown": true
+  },
+  "fresh_target_model_queries_authorized": 0,
+  "provider_evaluation_queries_authorized": 0,
+  "incremental_spend_usd_max": 0,
+  "acceptance_credit": false,
+  "terminal_credit": false
+}
