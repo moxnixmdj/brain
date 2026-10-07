@@ -4439,6 +4439,149 @@ def _planner_post(prompt, timeout_s=20):
             errors.append({"model":model,"error":type(e).__name__+":"+str(e),"duration_s":round(time.monotonic()-t,3)})
     raise Blocker("PLANNER_ALL_ROUTES_FAILED:"+json.dumps(errors,sort_keys=True)[:1800])
 
+
+TERMINAL_OWNED_PLANNER_MODEL="Qwen3.5-9B-M-Q4_K_M-local"
+TERMINAL_OWNED_PLANNER_BACKEND="LOCAL_LLAMA_SERVER"
+TERMINAL_OWNED_MODEL_SHA256="f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c"
+TERMINAL_OWNED_MODEL_BYTES=5060174144
+TERMINAL_OWNED_LLAMA_CPP_COMMIT="bec4772f6a2527d371557b5d2032641e5ff7619c"
+_TERMINAL_LOCAL_SUBSTRATE_CACHE=None
+
+def _git_head_commit_without_process(repo_dir):
+    repo_dir=pathlib.Path(repo_dir).resolve()
+    dotgit=repo_dir/".git"
+    if dotgit.is_file():
+        raw=dotgit.read_text(encoding="utf-8").strip()
+        if not raw.startswith("gitdir:"):
+            raise Blocker("TERMINAL_LLAMA_CPP_GITDIR_INVALID")
+        git_dir=(dotgit.parent/raw.split(":",1)[1].strip()).resolve()
+    elif dotgit.is_dir():
+        git_dir=dotgit.resolve()
+    else:
+        raise Blocker("TERMINAL_LLAMA_CPP_GIT_METADATA_MISSING")
+    head=(git_dir/"HEAD").read_text(encoding="utf-8").strip()
+    if re.fullmatch(r"[0-9a-fA-F]{40}",head):
+        return head.lower()
+    if not head.startswith("ref: "):
+        raise Blocker("TERMINAL_LLAMA_CPP_HEAD_INVALID")
+    ref=head[5:].strip()
+    ref_path=git_dir/ref
+    if ref_path.is_file():
+        value=ref_path.read_text(encoding="utf-8").strip().lower()
+        if re.fullmatch(r"[0-9a-f]{40}",value):
+            return value
+    packed=git_dir/"packed-refs"
+    if packed.is_file():
+        for line in packed.read_text(encoding="utf-8",errors="replace").splitlines():
+            line=line.strip()
+            if not line or line.startswith("#") or line.startswith("^"):
+                continue
+            parts=line.split(" ",1)
+            if len(parts)==2 and parts[1]==ref and re.fullmatch(r"[0-9a-fA-F]{40}",parts[0]):
+                return parts[0].lower()
+    raise Blocker("TERMINAL_LLAMA_CPP_HEAD_UNRESOLVED")
+
+def _terminal_local_substrate_identity():
+    global _TERMINAL_LOCAL_SUBSTRATE_CACHE
+    raw_model=os.environ.get("PROJECT_BRAIN_TERMINAL_LOCAL_MODEL_PATH","").strip()
+    raw_llama=os.environ.get("PROJECT_BRAIN_TERMINAL_LLAMA_CPP_DIR","").strip()
+    if not raw_model:
+        raise Blocker("TERMINAL_LOCAL_MODEL_PATH_REQUIRED")
+    if not raw_llama:
+        raise Blocker("TERMINAL_LLAMA_CPP_DIR_REQUIRED")
+    model_path=pathlib.Path(raw_model).expanduser().resolve()
+    llama_dir=pathlib.Path(raw_llama).expanduser().resolve()
+    if not model_path.is_file():
+        raise Blocker("TERMINAL_LOCAL_MODEL_FILE_MISSING")
+    if not llama_dir.is_dir():
+        raise Blocker("TERMINAL_LLAMA_CPP_DIR_MISSING")
+    stat=model_path.stat()
+    revision=_git_head_commit_without_process(llama_dir)
+    if revision!=TERMINAL_OWNED_LLAMA_CPP_COMMIT:
+        raise Blocker("TERMINAL_LLAMA_CPP_REVISION_MISMATCH")
+    cache=_TERMINAL_LOCAL_SUBSTRATE_CACHE
+    cache_key=(str(model_path),int(stat.st_size),int(stat.st_mtime_ns),str(llama_dir),revision)
+    if isinstance(cache,dict) and cache.get("cache_key")==cache_key:
+        return dict(cache["identity"])
+    if int(stat.st_size)!=TERMINAL_OWNED_MODEL_BYTES:
+        raise Blocker("TERMINAL_LOCAL_MODEL_BYTES_MISMATCH")
+    digest=sha_file(model_path)
+    if digest!=TERMINAL_OWNED_MODEL_SHA256:
+        raise Blocker("TERMINAL_LOCAL_MODEL_SHA256_MISMATCH")
+    identity={
+      "model":TERMINAL_OWNED_PLANNER_MODEL,
+      "backend":TERMINAL_OWNED_PLANNER_BACKEND,
+      "model_path":str(model_path),
+      "model_sha256":digest,
+      "model_bytes":int(stat.st_size),
+      "llama_cpp_dir":str(llama_dir),
+      "llama_cpp_commit":revision,
+    }
+    _TERMINAL_LOCAL_SUBSTRATE_CACHE={"cache_key":cache_key,"identity":dict(identity)}
+    return identity
+
+def _terminal_owned_planner_server_url():
+    raw=os.environ.get("PROJECT_BRAIN_TERMINAL_LOCAL_PLANNER_SERVER","http://127.0.0.1:8080").strip()
+    try:
+        parsed=urllib.parse.urlsplit(raw)
+    except Exception as exc:
+        raise Blocker("TERMINAL_LOCAL_PLANNER_SERVER_URL_INVALID") from exc
+    if parsed.scheme!="http" or parsed.hostname not in {"127.0.0.1","localhost","::1"}:
+        raise Blocker("TERMINAL_LOCAL_PLANNER_SERVER_NOT_LOOPBACK")
+    if parsed.username or parsed.password or parsed.query or parsed.fragment:
+        raise Blocker("TERMINAL_LOCAL_PLANNER_SERVER_URL_INVALID")
+    if parsed.path not in {"","/"}:
+        raise Blocker("TERMINAL_LOCAL_PLANNER_SERVER_PATH_FORBIDDEN")
+    return urllib.parse.urlunsplit((parsed.scheme,parsed.netloc,"","","")).rstrip("/")
+
+def _terminal_owned_planner_post(prompt,timeout_s=20):
+    """Terminal-only Brain-owned planner path.
+
+    This path has no hosted-provider fallback and does not consume the generic
+    external-tool bridge. The current process verifies the exact local model
+    bytes and llama.cpp source revision before directly contacting a loopback
+    llama.cpp server.
+    """
+    identity=_terminal_local_substrate_identity()
+    server=_terminal_owned_planner_server_url()
+    body=json.dumps({
+      "model":"local",
+      "messages":[{"role":"user","content":str(prompt)}],
+      "temperature":0.1,
+      "max_tokens":1024,
+      "stream":False,
+    }).encode("utf-8")
+    req=urllib.request.Request(
+      server+"/v1/chat/completions",
+      data=body,
+      headers={"Content-Type":"application/json","User-Agent":"ProjectBrain-TerminalOwnedPlanner/1"},
+      method="POST",
+    )
+    t=time.monotonic()
+    try:
+        with _ORIGINAL_URLOPEN(req,timeout=min(max(float(timeout_s),1.0),240.0)) as response:
+            raw=response.read(3_000_000).decode("utf-8","replace")
+        obj=json.loads(raw)
+    except Exception as exc:
+        raise Blocker("TERMINAL_LOCAL_PLANNER_REQUEST_FAILED:"+type(exc).__name__+":"+str(exc)) from exc
+    msg=((obj.get("choices") or [{}])[0].get("message") or {})
+    text_value=msg.get("content")
+    if not isinstance(text_value,str) or not text_value.strip():
+        text_value=msg.get("reasoning_content")
+    if not isinstance(text_value,str) or not text_value.strip():
+        raise Blocker("TERMINAL_LOCAL_PLANNER_RESPONSE_EMPTY")
+    return {
+      "text":text_value,
+      "model":identity["model"],
+      "backend":identity["backend"],
+      "duration_s":round(time.monotonic()-t,3),
+      "errors":[],
+      "transport":"BRAIN_OWNED_LOOPBACK_LLAMA_CPP_V1",
+      "model_sha256":identity["model_sha256"],
+      "model_bytes":identity["model_bytes"],
+      "llama_cpp_commit":identity["llama_cpp_commit"],
+    }
+
 def _controller_actions(step, mission):
     actions=step.get("controller_actions")
     ref=step.get("controller_actions_ref")
