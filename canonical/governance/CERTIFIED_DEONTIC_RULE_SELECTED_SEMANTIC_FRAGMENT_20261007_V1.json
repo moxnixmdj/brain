@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFIED_DEONTIC_RULE_SELECTED_SEMANTIC_FRAGMENT_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_REUSABLE_PARAMETERIZED_U_DEPLETION_LAW__EXPLICIT_DEONTIC_AND_CERTIFIED_SCOPE_ONLY__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "authority": {
+    "current_terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+    "single_u_frontier": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V2.json",
+    "proof_carrying_semantics": "canonical/governance/PROOF_CARRYING_SOURCE_ALIGNED_SEMANTIC_ENTAILMENT_20261007_V1.json",
+    "monotone_refinement": "canonical/governance/MONOTONE_PROOF_CARRYING_SEMANTIC_REFINEMENT_THEOREM_20261007_V1.json"
+  },
+  "exact_runtime": {
+    "deontic_parser": {
+      "path": "canonical/runtime/certified_deontic_rule_fragment_v1.py",
+      "git_blob_sha": "eac6849b1a134f277709c25f673c979db1edd764"
+    },
+    "source_proof_v3": {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v3.py",
+      "git_blob_sha": "1aca28a2141f12d4aa9a78e4803c36d0f384f8bc"
+    },
+    "policy_bridge_v3": {
+      "path": "canonical/runtime/proof_carrying_semantic_refinement_v3.py",
+      "git_blob_sha": "8de325919d428ef21c679d31b4151906fa3a9e16"
+    },
+    "scope_parser": {
+      "path": "canonical/runtime/certified_scope_fragment_v1.py",
+      "git_blob_sha": "daad64c3854a4820f59236c1e1e2beca633d5f01"
+    },
+    "monotone_kernel": {
+      "path": "canonical/runtime/monotone_semantic_constraint_kernel_v1.py",
+      "git_blob_sha": "8874d89ad852ae118330a50961e61ba9633b00ff"
+    }
+  },
+  "certified_fragment": {
+    "simple_forms": [
+      "SUBJECT must ACTION",
+      "SUBJECT shall ACTION",
+      "SUBJECT must not ACTION",
+      "SUBJECT shall not ACTION",
+      "SUBJECT is required to ACTION",
+      "SUBJECT is prohibited from ACTION"
+    ],
+    "scoped_forms": [
+      "If CONDITION, SIMPLE_DEONTIC_CLAUSE",
+      "SIMPLE_DEONTIC_CLAUSE if CONDITION",
+      "SIMPLE_DEONTIC_CLAUSE unless EXCEPTION",
+      "SIMPLE_DEONTIC_CLAUSE when TRIGGER"
+    ],
+    "proof_payload": [
+      "EXACT_SOURCE_SPANS_FOR_SUBJECT_ACTION_MODAL_AND_OPTIONAL_CONDITION",
+      "REQUIRED_OR_PROHIBITED_RELATION",
+      "CERTIFIED_SCOPE_RELATION_WHERE_PRESENT",
+      "CONTENT_ADDRESSED_SOURCE_LITERAL_HASHES"
+    ],
+    "fail_closed": [
+      "COORDINATED_OR_COMPOUND_ACTIONS_OUTSIDE_FRAGMENT",
+      "MULTIPLE_OR_NESTED_SCOPE_OPERATORS",
+      "IMPLICIT_DEONTIC_MEANING",
+      "REFERENCE_RESOLUTION",
+      "DOMAIN_CLASSIFICATION",
+      "UNPROVED_APPLICABILITY_OR_MATERIALITY"
+    ]
+  },
+  "theorem": {
+    "statement": "FOR_ANY_TARGET_RELEVANT CONTEXT WHOSE LOAD_BEARING POLICY DISTINCTION IS FULLY EXPRESSED BY THIS CONTROLLED DEONTIC FRAGMENT AND WHOSE SOURCE AUTHORITY AND POLICY ADEQUACY MAPPING ARE SEPARATELY SOUND__THE EXACT SOURCE CAN SUPPLY A ONE_SIDED PROOF_CARRYING CONSTRAINT THAT THE MONOTONE KERNEL MAY USE TO CERTIFY A COMMON BRAIN_POLICY WITHOUT OPAQUE SEMANTIC AUTHORITY.",
+    "U_effect": "DELETE_ONLY_THE_EXPLICIT_DEONTIC_FRAGMENT_CLASS_FROM_U_WHEN_THE_CONTEXT_SPECIFIC_AUTHORITY_AND_ADEQUACY_PREMISES_ARE_BOUND__DO_NOT_DELETE_IMPLICIT_OR_OUT_OF_FRAGMENT_SEMANTIC_TAILS.",
+    "reuse": [
+      "FINANCE_EXPLICIT_RULE_AND_EXCEPTION_CLAUSES",
+      "INSTRUCTION_SCOPE_EXPLICIT_AUTHORITY_OR_REQUIREMENT_CLAUSES",
+      "OTHER_CONTEXTS_WITH_THE_SAME_CONTROLLED_DEONTIC_SOURCE_FORM"
+    ]
+  },
+  "local_replay": {
+    "carrier": "CHATGPT_LOCAL_CONTAINER",
+    "test_files": [
+      {
+        "path": "canonical/tests/test_certified_deontic_rule_fragment_v1.py",
+        "git_blob_sha": "e9d1d90de8d0ffeba12d98ab5f324d778c68fc83"
+      },
+      {
+        "path": "canonical/tests/test_proof_carrying_semantic_refinement_v3.py",
+        "git_blob_sha": "90615a9fda6be79f0bff30deaeab29b0c5b67398"
+      }
+    ],
+    "passed": 12,
+    "failed": 0,
+    "adversarial_checks": [
+      "SCOPE_STRIPPING_REJECTED",
+      "COORDINATED_ACTION_REJECTED",
+      "IMPLICIT_MEANING_REJECTED",
+      "MULTI_SCOPE_REJECTED",
+      "WRONG_DEONTIC_RELATION_REJECTED",
+      "OMITTED_PROOF_CANNOT_CERTIFY_POLICY",
+      "WRONG_SCOPE_CANNOT_CERTIFY_POLICY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_NATURAL_LANGUAGE_SEMANTICS_IS_SOLVED",
+    "NO_CLAIM_FINANCE_DIRECT_LEAVES_ARE_CLOSED",
+    "NO_CLAIM_INSTRUCTION_SCOPE_FAMILY_IS_CLOSED",
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
