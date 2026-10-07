@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V3",
+  "date": "2026-10-07",
+  "status": "ACTIVE_V16_ZERO_REALITY_EXECUTION_AUTHORITY__SOURCE_BOUND_POST_V15_REDUCTION__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "supersedes": {
+    "path": "canonical/governance/TERMINAL_SCHEDULING_CURRENT_AUTHORITY_V2.json",
+    "git_blob_sha": "c590c6c86777bf7f8085ef55cb97527671a74b13",
+    "reason": "V2_BINDS_NINE_REGION_V15_WORLD_AND_PRE_POST_V15_REDUCTIONS"
+  },
+  "pointer": {
+    "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V4.json",
+    "git_blob_sha": "7c8fec5b04b75eb5a2d9861625a4c6efe59a32a5"
+  },
+  "current_terminal_authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+    "git_blob_sha": "89612bd93d74ff985febb9cd8f5533e7901e91f8"
+  },
+  "live_world": {
+    "independent_top_level_terminal_predicates": [
+      "COMPLETE_SELECTED_CONTEXT_ABC",
+      "D_FINAL_ROUTE_OWNERSHIP_EFFECT_DONOR_INDEPENDENCE_FINALITY"
+    ],
+    "known_sound_D_B_regions_lower_bound": 11,
+    "target_scope_closed": true,
+    "general_router_intelligence_separate_global_blocker": false,
+    "terminal": false
+  },
+  "authorized_actions": [
+    "ACTION::SATURATE_EXISTING_EVIDENCE_INTO_D_B",
+    "ACTION::COMPUTE_RESIDUAL_CONTEXT_K_c_minus_FROM_EXISTING_EVIDENCE",
+    "ACTION::CERTIFY_SELECTED_ROUTE_LOCAL_SEMANTICS_FROM_EXISTING_EVIDENCE",
+    "ACTION::BIND_POSITIVE_CELL_ADMISSION_CERTIFICATES_FROM_EXISTING_EVIDENCE",
+    "ACTION::CHECK_NEW_D_ROUTE_DELTA_FROM_EXISTING_EVIDENCE"
+  ],
+  "execution_rules": [
+    "NO_FRESH_REALITY",
+    "NO_SPEND",
+    "NO_TARGET_QUERY_UNLESS_A_SURVIVING_UNDOMINATED_LAW_IS_PROVED_INFORMATION_LOAD_BEARING",
+    "NO_GENERAL_GLOBAL_ROUTER_INTELLIGENCE_PROGRAM",
+    "NO_MONOLITHIC_FINANCE_AGENT_OR_GLOBAL_FINANCE_SEMANTIC_ENGINE_REQUIREMENT",
+    "D_CHECK_ONLY_NEWLY_CREDITED_ROUTE_DELTAS_UNTIL_ABC_CLOSES",
+    "RECOMPUTE_FIXED_POINT_AFTER_EVERY_VERIFIED_D_B_EXPANSION_OR_RESIDUAL_ELIMINATION"
+  ],
+  "execution_authority": true,
+  "execution_authority_scope": "ZERO_REALITY_EXISTING_EVIDENCE_SATURATION_FORMAL_REDUCTION_AND_SOURCE_BOUND_CELL_ADMISSION_ONLY",
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "hard_nonclaims": [
+    "NO_CLAIM_ABC_CLOSED",
+    "NO_CLAIM_D_FINALITY_CLOSED",
+    "NO_CLAIM_TERMINAL_TRUE",
+    "NO_AUTHORITY_TO_RUN_FRESH_TARGET_CASES",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
