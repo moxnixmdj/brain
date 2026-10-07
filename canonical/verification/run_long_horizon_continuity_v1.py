@@ -36,7 +36,9 @@ else:
     code,receipt=m.execute_claimed_task(root,task,state,evidence,{AGENT!r},ok)
     assert code==0 and receipt["terminal_state"]=="COMPLETE"
     assert receipt["same_identity_bound"] is True
-    assert seen=={{"agent":{AGENT!r},"task":{TASK_ID!r}}}
+    assert seen["agent"]=={AGENT!r}
+    assert seen["task"]=={TASK_ID!r}
+    assert seen["argv"]==[sys.executable,"canonical/runtime/root3_production_astra_launcher_v1.py","canonical/missions/mission.json"]
 print("PASS")
 """
 
