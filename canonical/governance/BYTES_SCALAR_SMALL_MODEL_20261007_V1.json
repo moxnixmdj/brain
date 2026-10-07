@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_SCALAR_SMALL_MODEL_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_REPLAY_PASS__SCALAR_VALUE_REDUCTION_FOUNDATION__PAIRWISE_LENGTH_SUPPORT_STILL_OPEN__ZERO_TERMINAL_CREDIT",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "result": {
+    "scalar_prefixes_len_lte_2": 31,
+    "order_basis": [
+      "x-y",
+      "x+y+2",
+      "x+y",
+      "x+y-2"
+    ],
+    "all_scalar_map_breakpoints_len_lte_3": [
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2
+    ],
+    "constructive_tuple_compressor_for_len_lte_4": {
+      "representative_abs_bound": 18
+    }
+  },
+  "proof": "ORDER_AFTER_ANY_SCALAR_PREFIX_LEN_LTE_2_IS_MONOTONE_AFFINE_OR_PLUS_MINUS_DISTANCE_FROM_CENTER_MINUS1_0_PLUS1. ABS_DISTANCE_COMPARISON_REDUCES_TO_SIGN_OF_(x-y)(x+y-2c). CENTRAL_VALUES_MINUS2_TO_PLUS2_STAY_EXACT. TAIL_MAGNITUDES_KEEP_GAPS_1_OR_2_EXACT_AND_REPLACE_ANY_LARGER_GAP_BY_3_OR_4_ACCORDING_TO_PARITY, PRESERVING THE FULL RELATIONAL_SIGNATURE FOR_AT_MOST_FOUR_ELEMENTS.",
+  "crosscheck": {
+    "relation_type_count_abs_bound_8": 57321,
+    "relation_type_count_abs_bound_16": 92457,
+    "relation_type_count_abs_bound_18": 92457,
+    "correction": "PRIOR_89341_RELATION_TYPE_COUNT_WAS_WRONG__EXACT_PYTHON_AND_CPP_ENCODERS_AGREE_ON_92457"
+  },
+  "open": "PROVE_INDEPENDENTLY_THAT_ANY_TWO_DEPTH_LTE_3_SEQUENCE_PROGRAMS_THAT_DIFFER_HAVE_A_COUNTEREXAMPLE_SUPPORTED_BY_AT_MOST_FOUR_INPUT_ELEMENTS",
+  "hard_nonclaims": [
+    "NO_COMPLETE_SEQUENCE_EQUIVALENCE_DECIDER_YET",
+    "NO_CLAIM_809_CLASSES_GLOBALLY_PROVED_YET",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "independent_replay": {
+    "carrier": "brain-tbscience-v18-authority-verify-20261007-v1",
+    "runtime_git_blob_sha": "b571323845e14929c92c07fc3aaaefeee0d76400",
+    "prefixes": 31,
+    "pair_checks": 52111,
+    "tuple_checks": 88740,
+    "representative_abs_bound": 18,
+    "status": "PASS"
+  }
+}

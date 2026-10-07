@@ -1,0 +1,11 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_SCALAR_SMALL_MODEL_SPRITE_VERIFICATION_V2",
+  "date":"2026-10-07",
+  "status":"PASS__VALUE_SIDE_ONLY__ZERO_TERMINAL_CREDIT",
+  "carrier":{"provider":"SPRITES","sprite_name":"brain-tbscience-v18-authority-verify-20261007-v1","sprite_id":"sprite-712e57be-f9ab-4d02-a590-62d84addd99e"},
+  "exact_blob":"b571323845e14929c92c07fc3aaaefeee0d76400",
+  "replay":{"prefixes":31,"pair_checks":52111,"tuple_checks":88740,"representative_abs_bound":18},
+  "relational_type_crosscheck":{"abs_bound_8":57321,"abs_bound_16":92457,"abs_bound_18":92457},
+  "correction":"THE_PREVIOUS_89341_COUNT_IS_REJECTED",
+  "hard_nonclaims":["NO_PAIRWISE_LENGTH_LTE_4_SUPPORT_PROOF_YET","NO_LAW_FREE_GLOBAL_EQUIVALENCE_PROMOTION_YET","NO_TERMINAL_CREDIT"]
+}
