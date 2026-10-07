@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34_FALSE_TERMINAL_VERIFICATION_TRUTH_REPAIR_V1",
+  "date": "2026-10-07",
+  "status": "PASS__FALSE_TERMINAL_VERIFICATION_FIELDS_REVOKED__SINGLE_BIT_ROOT_PRESERVED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "superseded_subject": {
+    "path": "canonical/verification/CURRENT_TERMINAL_AUTHORITY_POINTER_V34_CONNECTOR_VERIFICATION_20261007_V1.json",
+    "defect": "ITS_verified_OBJECT_SETS_U_EMPTY_ABC_D_FINALITY_AND_TERMINAL_TRUE_WHILE_THE_SAME_ARTIFACT_BOUNDARY_EXPLICITLY_STATES_THE_BOUND_THEOREMS_AND_GATES_ARE_MACHINERY_NOT_CLOSURE_EVIDENCE_AND_D_FINALITY_REMAINS_AFTER_ABC"
+  },
+  "controlling_authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "required_status": "ACTIVE_ZERO_BUREAUCRACY_SINGLE_BIT_EXECUTION_LOCK__TERMINAL_FALSE"
+  },
+  "logical_repair": {
+    "rule": "A_VERIFICATION_ARTIFACT_MAY_VERIFY_BYTE_BINDINGS_OR_THE_EXISTENCE_OF_CLOSURE_MACHINERY_BUT_MAY_NOT_SET_A_LOAD_BEARING_TERMINAL_PREDICATE_TRUE_UNLESS_IT_BINDS_THE_EVIDENCE_THAT_PROVES_THAT_PREDICATE",
+    "revoked_fields": [
+      "verified.current_U_empty_proved",
+      "verified.complete_selected_context_ABC_closed",
+      "verified.D_finality_closed",
+      "verified.terminal",
+      "verified.total_sound_alpha_gamma_bound",
+      "verified.global_well_founded_rank_bound",
+      "verified.global_resource_potential_bound",
+      "verified.total_terminal_or_progress_cover_bound",
+      "verified.selected_cover_complement_unsat_proved",
+      "verified.generator_basis_scope_complete_proved"
+    ],
+    "revoked_value_semantics": "THE_TRUE_VALUES_IN_THE_SUPERSEDED_VERIFICATION_FILE_HAVE_NO_CLOSURE_OR_TERMINAL_AUTHORITY",
+    "current_truth": {
+      "current_U_empty_proved": false,
+      "complete_selected_context_ABC_closed": false,
+      "D_finality_closed": false,
+      "terminal": false,
+      "current_terminal_root_predicate": "PROVE_NOT_X",
+      "current_terminal_root_X": "AT_LEAST_ONE_ACTUAL_USEFUL_TARGET_LAW_OCCUPIES_CURRENT_UNDOMINATED_ESCAPE_E",
+      "current_evidence_proves_X": false,
+      "current_evidence_proves_not_X": false
+    }
+  },
+  "single_bit_execution_effect": [
+    "DO_NOT_TREAT_THE_SUPERSEDED_V34_CONNECTOR_VERIFICATION_AS_TERMINAL_EVIDENCE",
+    "SCHEDULE_ONLY_PROVE_NOT_X_FOR_CURRENT_ESCAPE_E",
+    "A_SCOPE_COMPLETE_SOUND_ADMISSION_COMPLEMENT_UNSAT_OR_EQUIVALENT_TOTAL_SOUND_ADAPTIVE_COVER_MAY_PROVE_NOT_X",
+    "IF_CURRENT_EVIDENCE_CANNOT_DECIDE_NOT_X_ACQUIRE_ONLY_THE_MINIMUM_POLICY_CHANGING_TARGET_FACT",
+    "AFTER_NOT_X_RUN_THE_ALREADY_BOUND_ROUTE_FREEZE_LOCAL_C_FINAL_D_DONOR_DELETE_CLEAN_ROOM_SEQUENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_NOT_X_IS_PROVED",
+    "NO_CLAIM_U_IS_EMPTY",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
