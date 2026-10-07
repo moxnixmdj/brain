@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFIED_DEONTIC_SOURCE_EXTENSION_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_REUSABLE_PARAMETERIZED_U_DEPLETION_LAW__ORTHOGONAL_TO_CURRENT_V6__LOCAL_BOUNDARY_REPLAY_14_OF_14_PASS__ZERO_TERMINAL_CREDIT",
+  "parent": {
+    "source_aligned_semantic_proof_v6": {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v6.py",
+      "git_blob_sha": "d82bffda32c1e493e79dfe824ebc1e080b991d9c"
+    },
+    "proof_carrying_semantic_refinement_v6": {
+      "path": "canonical/runtime/proof_carrying_semantic_refinement_v6.py",
+      "git_blob_sha": "14e4fd25f41c50e208a45cc15b9ca71b00810849"
+    }
+  },
+  "theorem": {
+    "statement": "ALL_NON_DEONTIC_CLAIMS_AND_CURRENT_V6_INPUTS_ARE_DELEGATED_UNCHANGED__THE_EXTENSION_ADDS_ONLY_EXPLICIT_CONTROLLED_REQUIRED_OR_PROHIBITED_SOURCE_STRUCTURE_WITH_EXACT_SOURCE_SPANS_AND_CERTIFIED_SCOPE.",
+    "U_effect": "WHEN_SOURCE_AUTHORITY_AND_POLICY_ADEQUACY_ARE_SEPARATELY_BOUND__EXPLICIT_CONTROLLED_DEONTIC_FORCE_NEED_NOT_REMAIN_IN_THE_SHARED_SEMANTIC_U_TAIL.",
+    "reusable_in": [
+      "FINANCE_EXPLICIT_RULE_CLAUSES",
+      "INSTRUCTION_SCOPE_EXPLICIT_REQUIREMENT_OR_PROHIBITION_CLAUSES"
+    ]
+  },
+  "local_replay": {
+    "passed": 14,
+    "failed": 0,
+    "verified": [
+      "CURRENT_V6_ARGUMENT_FORWARDING",
+      "REQUIRED_AND_PROHIBITED_FORCE",
+      "IF_AND_UNLESS_SCOPE_BINDING",
+      "SCOPE_CORRUPTION_REJECTED",
+      "COMPOUND_LANGUAGE_REJECTED",
+      "IMPLICIT_MEANING_REJECTED",
+      "MULTI_SCOPE_REJECTED",
+      "WRONG_RELATION_REJECTED"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTICS",
+    "NO_FINANCE_FAMILY_CLOSURE",
+    "NO_INSTRUCTION_FAMILY_CLOSURE",
+    "NO_CLAIM_U_EMPTY",
+    "NO_D_FINALITY_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
