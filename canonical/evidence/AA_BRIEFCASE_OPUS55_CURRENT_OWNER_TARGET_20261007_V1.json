@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_OPUS55_CURRENT_OWNER_TARGET_V1",
+  "date": "2026-10-07",
+  "status": "CURRENT_OWNER_PUBLIC_REFERENCE__OPUS55_MAX_AA_BRIEFCASE_V1_1_1807__ZERO_BRAIN_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target": {
+    "benchmark": "AA-Briefcase v1.1",
+    "model": "Claude Opus 5.5 (Max, Default Fallback)",
+    "current_owner_elo": 1807,
+    "confidence_interval": {
+      "minus": 11,
+      "plus": 12
+    },
+    "observed_date": "2026-10-07",
+    "owner_source": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+    "corroborating_owner_source": "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-xhigh-vs-claude-opus-5-5"
+  },
+  "epoch_rule": {
+    "current_epoch_condition": "BRAIN_RESULT_MUST_BE_PRODUCED_ON_THE_CURRENT_AA_BRIEFCASE_V1_1_OWNER_TASK_POPULATION_HARNESS_GRADING_AND_RATING_EPOCH_WITH_MATCHED_CONFIGURATION",
+    "current_epoch_minimum_opus55_target_elo": 1807,
+    "historical_frozen_predicate_id_preserved": true,
+    "historical_1822_not_rewritten": true,
+    "rationale": "THE_TERMINAL_OBJECTIVE_IS_EQUAL_OR_BETTER_THAN_THE_TARGET_CAPABILITY__A_RELATIVE_RATING_MUST_USE_A_MATCHED_EPOCH_REFERENCE_OR_A_STRONGER_SCOPE_COMPLETE_PROOF"
+  },
+  "methodology": {
+    "task_count": 91,
+    "private_scored_project_count": 4,
+    "score_aggregation": "RUBRIC_PASS_RATE_PLUS_ANALYTICAL_QUALITY_ELO_PLUS_PRESENTATION_ELO",
+    "pairwise_judging": true
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_AA_BRIEFCASE_SCORE_IS_CLAIMED.",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_IS_GRANTED.",
+    "NO_CLAIM_1807_APPLIES_TO_A_HISTORICAL_1822_EPOCH.",
+    "NO_CLAIM_PRIVATE_TASKS_OR_PRIVATE_GRADING_RUBRICS_ARE_PUBLIC."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
