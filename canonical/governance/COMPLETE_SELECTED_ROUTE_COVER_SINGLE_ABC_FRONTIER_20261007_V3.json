@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_V3",
+  "date": "2026-10-07",
+  "status": "ACTIVE_ZERO_REALITY_CRITICAL_PATH_COMPRESSION__SINGLE_U_FRONTIER__FOURTEEN_SOUND_RECORD_CACHE_AFTER_P3_REVOCATION__MINIMUM_INFORMATION_RULE_BOUND__TERMINAL_FALSE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "current_authority_before_this_reconciliation": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+      "git_blob_sha": "e431951ace31ba8459027ee852fbf4b0dd1b6f60"
+    },
+    "predecessor_frontier": {
+      "path": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V2.json",
+      "git_blob_sha": "57e44bd056429e167fe5bbaac9855b7988baebe5"
+    },
+    "minimum_information_lower_bound": {
+      "path": "canonical/governance/TERMINAL_SHARED_SEMANTIC_MINIMUM_INFORMATION_LOWER_BOUND_20261007_V1.json",
+      "git_blob_sha": "0b63405d95009a95ad12e767d9785ceacaf5be12"
+    },
+    "positive_cover_theorem": {
+      "path": "canonical/governance/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_THEOREM_20261006_V1.json",
+      "git_blob_sha": "8a235f91ad3064714fab3ea73b324487d9b7f8e5"
+    },
+    "router_soundness": {
+      "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_SOUNDNESS_REDUCTION_20261007_V1.json",
+      "git_blob_sha": "1259a3e3e6872d5355d92f19e9e3df217bdc254d"
+    },
+    "cached_db_manifest_v7": {
+      "path": "canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V7.json",
+      "git_blob_sha": "862649b49fe0b94ff2d6e3cea05119ade614cfb3",
+      "independent_verification": {
+        "path": "canonical/verification/V16_DB_EXISTING_EVIDENCE_SATURATION_VERIFY_20261007_V7.json",
+        "git_blob_sha": "60e46a05dac7b37853da42c21c6168b9d0239fa6"
+      }
+    },
+    "revoked_p3_whole_cell": {
+      "path": "canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_20261007_V1.json",
+      "git_blob_sha": "768953c6f754a911a1483733e84164087e77dd31",
+      "falsifier": {
+        "path": "canonical/governance/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_EXECUTED_SCORER_FALSIFIER_20261007_V1.json",
+        "git_blob_sha": "d4339cca92dabd058ae4675bcb3fa9e6d25bf391"
+      },
+      "independent_verification": {
+        "path": "canonical/verification/P3_FROZEN_DIRECT_CONJUNCTION_TOPLAW_EXECUTED_SCORER_FALSIFIER_WOLFRAM_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "359a2a6c58d8a9b453abe738339afda62a98986c"
+      }
+    }
+  },
+  "definitions": {
+    "S_TRACE": "THE_ALREADY_CLOSED_FIXED_AUTHORIZED_OPUS55_OBSERVABLE_TRACE_SUPERSET",
+    "D_B": "UNION_OF_ALL_SOUND_CACHED_BRAIN_DOMINATED_CERTIFICATE_REGIONS",
+    "E": "TARGET_RELEVANT_CONTEXTS_IN_S_TRACE_NOT_ALREADY_SOUNDLY_SUBSUMED_BY_D_B",
+    "Covered_c": "EXISTS_BRAIN_OWNED_ROUTE_WITH_SOUND_POSITIVE_ADMISSION_AND_SOUND_ADEQUACY_OR_DOMINANCE_CERTIFICATE_PRESERVING_ALL_LOAD_BEARING_HARD_CONSTRAINT_RESOURCE_SAFETY_AUTHORITY_AND_COMPOSITION_CONDITIONS",
+    "U": "SET_OF_c_IN_E_FOR_WHICH_Covered_c_IS_FALSE"
+  },
+  "theorem": {
+    "closure_condition": "U_IS_EMPTY",
+    "complete_selected_context_ABC_iff": "U_IS_EMPTY",
+    "scheduler_normal_form": [
+      "SUBTRACT_ALL_FOURTEEN_SOUND_CACHED_CERTIFICATE_RECORDS_FIRST.",
+      "FOR_EACH_SURVIVING_COARSE_CELL_FIRST_TEST_FOR_ONE_COMMON_CERTIFIED_ADEQUATE_BRAIN_POLICY.",
+      "ONLY_IF_NO_COMMON_POLICY_CERTIFICATE_EXISTS_BIND_THE_MINIMUM_TRUTHFUL_DISCRIMINATOR_NEEDED_TO_SEPARATE_POLICY_ADEQUACY_CLASSES.",
+      "DO_NOT_BUILD_A_GENERAL_SEMANTIC_WORLD_MODEL_OR_NEW_GENERIC_INTELLIGENCE_MECHANISM_WITHOUT_A_LOCALIZED_COUNTEREXAMPLE.",
+      "EACH_ACTION_MUST_DELETE_A_PROVED_ELEMENT_OR_SCOPE_COMPLETE_CLASS_FROM_U_OR_DELETE_A_FALSE_PREREQUISITE."
+    ],
+    "nonclosure_witness": "ANY_SINGLE_TARGET_RELEVANT_CONTEXT_IN_U"
+  },
+  "current_reconciliation": {
+    "known_cached_certificate_record_count": 14,
+    "cached_records_may_overlap_semantically": true,
+    "coverage_measure_inferred_from_record_count": false,
+    "target_scope_closed": true,
+    "complete_selected_context_ABC_closed": false,
+    "reason": "NO_CURRENT_BOUND_SOURCE_PROVES_U_EMPTY__AND_THE_FORMER_FIFTEENTH_WHOLE_P3_CELL_IS_REVOKED_BY_EXACT_EXECUTED_SCORER_SEMANTICS",
+    "router_mechanical_core_implemented": true,
+    "generic_router_build_obligations": 0,
+    "generic_global_semantic_model_obligations": 0,
+    "d_finality_closed": false,
+    "terminal": false,
+    "revoked_p3_whole_cell_excluded": true,
+    "required_claim_synthesis_ceiling_preserved": true
+  },
+  "next_legal_terminal_transition": {
+    "from": "ABC_OPEN",
+    "to": "ABC_CLOSED",
+    "exact_condition": "PROVE_U_EMPTY_USING_ONLY_SOUND_COMMON_POLICY_CERTIFICATES_OR_MINIMUM_TRUTHFUL_SELECTED_DISCRIMINATORS_PLUS_CERTIFIED_BRAIN_OWNED_ROUTES",
+    "then": "FREEZE_FINAL_ROUTE_SET__RECOMPUTE_D__DELETE_DONORS__RUN_INDEPENDENT_CLEAN_ROOM_REPLAY"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_U_IS_EMPTY.",
+    "NO_CLAIM_FOURTEEN_CERTIFICATE_RECORDS_EXHAUST_D_B_OR_S_TRACE.",
+    "NO_CLAIM_FOURTEEN_CERTIFICATE_RECORDS_ARE_SEMANTICALLY_DISJOINT.",
+    "NO_CLAIM_D_FINALITY_IS_CLOSED.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "truth_repair": {
+    "stale_predecessor_count": 15,
+    "corrected_sound_count": 14,
+    "removed_record": "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
+    "removal_reason": "EXECUTED_SCORER_DOES_NOT_PROVE_PROVENANCE_GATE__WHOLE_SEVEN_GATE_TOPLAW_REVOKED",
+    "preserved_narrow_synthesis_certificate": "SYNTHESIS_TARGET_SCOPE_REQUIRED_CLAIM_COVERAGE_TOP_LAW"
+  }
+}
