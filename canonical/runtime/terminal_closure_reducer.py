@@ -13,6 +13,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from canonical.runtime.git_content_binding_v1 import validate_repo_blob_binding
+
 REQUIRED_FAMILY_COUNT = 19
 REQUIRED_COUNTERS = (
     "uncontracted_required_behaviors",
@@ -60,21 +62,8 @@ UNIVERSAL_REQUIRED_TRUE = (
 )
 
 
-def _hex40(value: Any) -> bool:
-    return (
-        isinstance(value, str)
-        and len(value) == 40
-        and all(ch in "0123456789abcdef" for ch in value)
-    )
-
-
 def _content_binding(value: Any) -> bool:
-    return (
-        isinstance(value, dict)
-        and isinstance(value.get("path"), str)
-        and bool(value["path"].strip())
-        and _hex40(value.get("git_blob_sha"))
-    )
+    return validate_repo_blob_binding(value)
 
 
 def _evaluate_universal_cover_proof(manifest: dict[str, Any]) -> dict[str, Any]:
