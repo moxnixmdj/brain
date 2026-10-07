@@ -1,0 +1,46 @@
+name: V7 Continuity Current Child Seam
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/same_identity_supervisor_credited_v2.py'
+      - 'canonical/verification/run_long_horizon_continuity_v2.py'
+      - 'canonical/governance/CONTINUITY_CURRENT_CHILD_SEAM_BLOCKER_20261007_V1.json'
+      - 'canonical/governance/CREDITED_TRANSFORM_CERTIFICATE_REGISTRY_20261007_V1.json'
+      - 'canonical/runtime/credited_transform_certificate_compiler_v1.py'
+      - 'canonical/tests/test_credited_transform_certificate_compiler_v1.py'
+      - '.github/workflows/v7-continuity-current-child-seam.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.13'
+      - name: Verify C registry compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m canonical.runtime.credited_transform_certificate_compiler_v1 | tee /tmp/C_REGISTRY.json
+          python -m unittest canonical.tests.test_credited_transform_certificate_compiler_v1 -v
+      - name: Verify real current continuity default-child seam
+        shell: bash
+        run: |
+          set -euo pipefail
+          python canonical/verification/run_long_horizon_continuity_v2.py /tmp/CONTINUITY_CURRENT_SEAM.json
+      - name: Upload qualification reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: v7-continuity-current-child-seam
+          path: |
+            /tmp/C_REGISTRY.json
+            /tmp/CONTINUITY_CURRENT_SEAM.json
+          if-no-files-found: warn
