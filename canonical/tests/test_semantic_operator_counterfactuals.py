@@ -5,6 +5,7 @@ from canonical.runtime.semantic_operator_counterfactuals import (
     compile_explicit_operator_contract,
     extract_semantic_operators,
     generate_counterfactual_obligations,
+    expected_disposition_for_counterfactual_kind,
     validate_counterfactual_coverage,
     validate_operator_bindings,
 )
@@ -29,12 +30,9 @@ def complete_scenarios(text, source="case"):
     rows = []
     for ob in generate_counterfactual_obligations(text, source=source):
         kind = ob.counterfactual_kind
-        if "DISAMBIGUATED" in kind or "DISTINGUISHED" in kind:
-            disposition = "DISAMBIGUATE"
-        elif "ACCEPTED" in kind:
-            disposition = "ACCEPT"
-        else:
-            disposition = "REJECT"
+        disposition = expected_disposition_for_counterfactual_kind(kind)
+        if disposition is None:
+            raise AssertionError("unbound counterfactual disposition: " + kind)
         rows.append({
             "operator_id": ob.operator_id,
             "counterfactual_kind": kind,
@@ -127,6 +125,19 @@ class SemanticOperatorCounterfactualTests(unittest.TestCase):
         verdict = validate_counterfactual_coverage(text, scenarios, source="coverage")
         self.assertFalse(verdict["pass"])
         self.assertTrue(any("MISSING_SEMANTIC_COUNTERFACTUAL" in x for x in verdict["errors"]))
+
+    def test_wrong_counterfactual_disposition_is_rejected(self):
+        text = "The transfer must not execute before approval."
+        scenarios = complete_scenarios(text, source="wrong-disposition")
+        self.assertTrue(scenarios)
+        scenarios[0]["expected_disposition"] = "ACCEPT"
+        verdict = validate_counterfactual_coverage(
+            text, scenarios, source="wrong-disposition"
+        )
+        self.assertFalse(verdict["pass"])
+        self.assertTrue(
+            any("COUNTERFACTUAL_DISPOSITION_MISMATCH" in x for x in verdict["errors"])
+        )
 
     def test_complete_explicit_operator_contract_passes(self):
         text = (
