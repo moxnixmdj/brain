@@ -1,4 +1,4 @@
-name: Zero-spend private Opus capacity probe
+name: Zero-spend private Opus capacity probe # run-v1
 
 on:
   pull_request:
