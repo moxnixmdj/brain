@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_V9_SELECTED_CELL_MANIFEST_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__29_LEAVES_21_ROUTE_BUNDLES_17_TYPED_METRIC_LEAVES__ZERO_CREDIT",
+  "subject": {
+    "manifest": {
+      "path": "canonical/governance/V9_SELECTED_CELL_MANIFEST_20261007_V1.json",
+      "git_blob_sha": "4b1585d714c4580a49386f470861a7bc1fef552f"
+    },
+    "runtime": {
+      "path": "canonical/runtime/v9_selected_cell_manifest_verifier_v1.py",
+      "git_blob_sha": "2b991b5907f8f50affbca95a2219e390dfa86ca8"
+    },
+    "tests": {
+      "path": "canonical/tests/test_v9_selected_cell_manifest_v1.py",
+      "git_blob_sha": "dcfc8999025d09e4b0d670ac9ac74f50475eece9"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/v9_cell_manifest_v1",
+    "recomputed_manifest_blob": "4b1585d714c4580a49386f470861a7bc1fef552f",
+    "recomputed_runtime_blob": "2b991b5907f8f50affbca95a2219e390dfa86ca8",
+    "recomputed_tests_blob": "dcfc8999025d09e4b0d670ac9ac74f50475eece9"
+  },
+  "verified": {
+    "truth_leaf_count": 29,
+    "route_bundle_count": 21,
+    "typed_metric_leaf_count": 17,
+    "duplicate_truth_leaves": 0,
+    "missing_truth_leaves": 0,
+    "extra_truth_leaves": 0,
+    "metric_class_mismatches": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "ROUTE_BUNDLE_ID_IS_NOT_A_PROOF_OF_SHARED_ROUTE_IDENTITY",
+    "NO_CELL_IS_CLOSED_BY_THIS_MANIFEST",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
