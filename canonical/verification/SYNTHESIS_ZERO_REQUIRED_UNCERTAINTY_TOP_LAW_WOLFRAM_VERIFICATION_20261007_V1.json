@@ -1,0 +1,17 @@
+{
+  "schema":"PROJECT_BRAIN_SYNTHESIS_ZERO_REQUIRED_UNCERTAINTY_TOP_LAW_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_WOLFRAM_CEILING_PASS__ZERO_CREDIT",
+  "subject":{
+    "governance_sha":"28507719aae66f4fd51b6da298a06a59c1b393f9",
+    "runtime_sha":"05018e16170b85e88fa21ce8081bc64748b9aaf1",
+    "tests_sha":"cd913337b6b2431bc6c48b65ae00ccc9b88b3809"
+  },
+  "verified":{
+    "empty_required_uncertainty_set_scores_one_by_frozen_empty_total_rule":true,
+    "five_frozen_components_all_one_imply_matched_quality_one":true,
+    "zero_unsupported_material_claims_avoids_hard_zero":true
+  },
+  "boundary":"NONEMPTY_OR_UNBOUND_REQUIRED_UNCERTAINTY_CONTEXTS_REMAIN_OUTSIDE_THE_SUBREGION__ZERO_TERMINAL_CREDIT",
+  "terminal_credit_delta":0
+}
