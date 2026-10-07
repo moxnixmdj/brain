@@ -1,0 +1,35 @@
+name: Verify Root3 C1 effect carrier registry V3
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V3.json"
+      - "canonical/runtime/root3_effect_channel_registry_v3.py"
+      - "canonical/tests/test_root3_effect_channel_registry_v3.py"
+      - ".github/workflows/verify-root3-c1-v3.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Unit falsification tests
+        run: python -m unittest -v canonical.tests.test_root3_effect_channel_registry_v3
+      - name: Current-checkout C1 carrier audit
+        run: |
+          python canonical/runtime/root3_effect_channel_registry_v3.py             --repo-root .             --manifest canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V3.json             > root3_c1_v3_audit.json
+          cat root3_c1_v3_audit.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: root3-c1-v3-audit
+          path: root3_c1_v3_audit.json
