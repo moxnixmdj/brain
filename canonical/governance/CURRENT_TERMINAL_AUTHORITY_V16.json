@@ -62,7 +62,28 @@
     },
     "db_saturation_union_v8": {
       "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V8.json",
-      "git_blob_sha": "7d34b15d71a2bb59178c774a1805cd398c2daa86"
+      "git_blob_sha": "7d34b15d71a2bb59178c774a1805cd398c2daa86",
+      "independent_verification": {
+        "path": "canonical/verification/DB_EXISTING_EVIDENCE_SATURATION_UNION_WOLFRAM_VERIFY_20261007_V8.json",
+        "git_blob_sha": "26f05f12ca695a524be0f67e5318527123cffbc7",
+        "result": "PASS"
+      }
+    },
+    "single_abc_frontier_v4": {
+      "path": "canonical/governance/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V4.json",
+      "git_blob_sha": "f86eadec4f86b00a1b82d6e7784dd41c143be7e9"
+    },
+    "terminal_frontier_factorizer_v7": {
+      "path": "canonical/runtime/terminal_frontier_factorizer_v7.py",
+      "git_blob_sha": "e6de2408cb912b181cb650c6cef72956f4c3d362",
+      "test": {
+        "path": "canonical/tests/test_terminal_frontier_factorizer_v7.py",
+        "git_blob_sha": "09feaaac47afa537a6a961877aff9bd3fd5746af"
+      }
+    },
+    "router_deployed_binding": {
+      "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_DEPLOYED_BINDING_20261007_V1.json",
+      "git_blob_sha": "909ea27a7ddd3228bc1d5c29ad3ced79a1ccf9cb"
     }
   },
   "truth_repair": {
@@ -74,7 +95,7 @@
     "remaining_global_problem": "UNIVERSAL_DOMINANCE_ADEQUACY_AND_HARD_CONSTRAINT_COVERAGE_OVER_THE_ALREADY_CLOSED_TARGET_TRACE_SCOPE_PLUS_DONOR_INDEPENDENT_EFFECT_FINALITY",
     "general_router_intelligence_required": false,
     "certificate_gated_router_mechanical_core_implemented": true,
-    "certificate_gated_router_deployed_binding_closed": false,
+    "certificate_gated_router_deployed_binding_closed": true,
     "complete_selected_context_ABC_closed": false,
     "D_finality_closed": false,
     "terminal": false,
@@ -87,7 +108,10 @@
     "current_U_empty_proved": false,
     "revoked_certificate_record": "P3_T1_T3_FROZEN_60_WHOLE_DIRECT_SYNTHESIS_CONJUNCTION",
     "revocation_reason": "EXACT_EXECUTED_P3_SCORER_DOES_NOT_PROVE_THE_DECLARED_SEVEN_GATE_VECTOR",
-    "certificate_gated_router_remote_execution_observed": true
+    "certificate_gated_router_remote_execution_observed": true,
+    "U_cardinality_known": false,
+    "structural_abc_refinement_count": 4,
+    "structural_refinement_count_is_U_cardinality": false
   },
   "top_level_terminal_predicates": [
     "COMPLETE_SELECTED_CONTEXT_ABC",
@@ -118,18 +142,22 @@
       "PER_CELL_SOUND_POSITIVE_ADMISSION_PREDICATE",
       "PER_CELL_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
       "SELECTED_COVER_COMPLETENESS_OVER_SURVIVING_TRACE_CONTEXTS",
-      "EXACT_REPLAY",
-      "DEPLOYED_RUNTIME_BINDING"
+      "EXACT_REPLAY"
     ],
     "fail_closed": true,
     "remote_exact_blob_execution_observed": true,
     "remote_exact_blob_execution_carrier": "SPRITES__brain-h100-independent-replay-v1",
-    "remote_execution_does_not_supply_selected_cover_or_adequacy": true
+    "remote_execution_does_not_supply_selected_cover_or_adequacy": true,
+    "deployed_runtime_binding_closed": true,
+    "satisfied_before_credit": [
+      "DEPLOYED_RUNTIME_BINDING"
+    ]
   },
   "scheduler": [
     "DO_NOT_REOPEN_TARGET_UNIVERSE_SCOPE_DISCOVERY_WITH_FINITE_ENUMERATION.",
     "SUBTRACT_ALL_FIFTEEN_SOUND_CACHED_D_B_CERTIFICATE_RECORDS_BEFORE_NEW_WORK__THE_REVOKED_WHOLE_P3_SEVEN_GATE_CELL_IS_NOT_SOUND_D_B__THE_SOUND_STATEFUL_AGENCY_GENERATOR_CELL_IS_CACHED.",
     "WORK_ONLY_ON_DEPLETING_THE_SINGLE_U_UNCOVERED_CONTEXT_SET.",
+    "DO_NOT_INFER_U_CARDINALITY_FROM_THE_FOUR_STRUCTURAL_ABC_REFINEMENT_DIMENSIONS_OR_FROM_D_B_RECORD_COUNT.",
     "FOR_EACH_SURVIVING_COARSE_CELL_FIRST_SEARCH_FOR_ONE_COMMON_CERTIFIED_ADEQUATE_BRAIN_POLICY.",
     "ONLY_IF_NO_COMMON_POLICY_CERTIFICATE_EXISTS_BIND_THE_MINIMUM_TRUTHFUL_SELECTED_DISCRIMINATOR_NEEDED_TO_SEPARATE_POLICY_ADEQUACY_CLASSES.",
     "BIND_EACH_CLOSED_CELL_TO_THE_EXECUTABLE_CERTIFICATE_GATED_ROUTER_USING_EXACT_CONTENT_ADDRESSED_ADMISSION_AND_ADEQUACY_RECEIPTS.",
@@ -137,6 +165,7 @@
   ],
   "hard_nonclaims": [
     "NO_CLAIM_UNIVERSAL_BEHAVIORAL_DOMINANCE_IS_CLOSED.",
+    "NO_CLAIM_U_HAS_FOUR_ELEMENTS.",
     "NO_CLAIM_ALL_SURVIVING_CONTEXTS_HAVE_SOUND_ADEQUACY_CERTIFICATES.",
     "NO_CLAIM_ROUTER_DEPLOYED_BINDING_IS CLOSED.",
     "NO_CLAIM_D_FINALITY_IS CLOSED.",
