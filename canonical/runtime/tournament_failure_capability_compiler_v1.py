@@ -26,9 +26,9 @@ def _git_blob_sha(path: Path) -> str:
     ).hexdigest()
 
 
-def _content_binding(value: Any, repo_root: Path) -> bool:
+def _load_bound_json(value: Any, repo_root: Path) -> dict[str, Any] | None:
     if not isinstance(value, dict):
-        return False
+        return None
     rel_text = value.get("path")
     claimed = value.get("git_blob_sha")
     if (
@@ -38,17 +38,32 @@ def _content_binding(value: Any, repo_root: Path) -> bool:
         or len(claimed) != 40
         or any(ch not in "0123456789abcdef" for ch in claimed)
     ):
-        return False
+        return None
     rel = Path(rel_text)
     if rel.is_absolute():
-        return False
+        return None
     try:
         root = repo_root.resolve()
         candidate = (root / rel).resolve(strict=True)
         candidate.relative_to(root)
     except (OSError, RuntimeError, ValueError):
-        return False
-    return candidate.is_file() and _git_blob_sha(candidate) == claimed
+        return None
+    if not candidate.is_file() or _git_blob_sha(candidate) != claimed:
+        return None
+    try:
+        payload = json.loads(candidate.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return None
+    return payload if isinstance(payload, dict) else None
+
+
+def _world_set_sha256(worlds: list[World]) -> str:
+    material = [
+        {"id": w.world_id, "adequate_actions": sorted(w.adequate_actions)}
+        for w in sorted(worlds, key=lambda w: w.world_id)
+    ]
+    raw = json.dumps(material, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
 
 
 def _worlds(cell: dict[str, Any]) -> list[World]:
@@ -162,13 +177,32 @@ def evaluate_cell(cell: dict[str, Any], *, repo_root: Path = REPO_ROOT) -> dict[
         proof = persistent.get("necessity_proof")
         verifier = persistent.get("independent_verifier_receipt")
         bits = persistent.get("bits")
-        binding_ok = _content_binding(proof, repo_root) and _content_binding(verifier, repo_root)
+        proof_doc = _load_bound_json(proof, repo_root)
+        verifier_doc = _load_bound_json(verifier, repo_root)
+        cell_id = cell.get("id")
+        world_set_sha256 = _world_set_sha256(worlds)
+        semantic_verification_ok = (
+            proof_doc is not None
+            and verifier_doc is not None
+            and proof_doc.get("cell_id") == cell_id
+            and proof_doc.get("world_set_sha256") == world_set_sha256
+            and proof_doc.get("conclusion") == "success"
+            and proof_doc.get("separator_necessary") is True
+            and proof_doc.get("minimum_policy_count") == minimum_policy_count
+            and proof_doc.get("minimum_persistent_bits") == minimum_bits
+            and verifier_doc.get("cell_id") == cell_id
+            and verifier_doc.get("world_set_sha256") == world_set_sha256
+            and verifier_doc.get("independent_verified") is True
+            and verifier_doc.get("exact_byte_bound") is True
+            and verifier_doc.get("conclusion") == "success"
+            and verifier_doc.get("proof_artifact") == proof
+        )
         if (
             isinstance(mapping, dict)
             and isinstance(bits, int)
             and not isinstance(bits, bool)
             and bits >= minimum_bits
-            and binding_ok
+            and semantic_verification_ok
         ):
             sound, witnesses = _bucket_sound(worlds_by_id, mapping)
             symbol_count = len(witnesses) if sound else 0
@@ -184,7 +218,9 @@ def evaluate_cell(cell: dict[str, Any], *, repo_root: Path = REPO_ROOT) -> dict[
                     "declared_persistent_bits": bits,
                     "declared_symbol_count": symbol_count,
                     "required_bits_for_declared_symbols": required_symbol_bits,
+                    "world_set_sha256": world_set_sha256,
                     "exact_repository_bytes_verified": True,
+                    "independent_semantic_verification_bound": True,
                     "requires_exact_byte_verification_before_credit": False,
                     "terminal_credit": False,
                 }
