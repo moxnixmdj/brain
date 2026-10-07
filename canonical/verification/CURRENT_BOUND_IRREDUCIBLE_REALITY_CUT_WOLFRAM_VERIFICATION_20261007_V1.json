@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_BOUND_IRREDUCIBLE_REALITY_CUT_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_SET_COVER_ARITHMETIC_PASS__ZERO_CREDIT",
+  "subject": {
+    "cut": {
+      "path": "canonical/governance/CURRENT_BOUND_IRREDUCIBLE_REALITY_CUT_20261007_V1.json",
+      "branch": "truth/current-bound-irreducible-reality-cut-20261007-v1",
+      "candidate_commit": "26877a719b96ae929c061c9c544931fec12567be"
+    },
+    "challenger": {
+      "path": "canonical/governance/CURRENT_BOUND_REALITY_CUT_MULTIPLEX_CHALLENGER_20261007_V1.json",
+      "branch": "truth/current-bound-irreducible-reality-cut-20261007-v1",
+      "candidate_commit": "c92d094320ea9e5c92e2e873851ffd9ef7d78e54"
+    }
+  },
+  "independent_provider": "WOLFRAM_LANGUAGE",
+  "result": {
+    "residual_atom_count": 18,
+    "declared_cut_exact_coverage": true,
+    "every_positive_atom_unique_under_declared_nonmultiplexed_observation_set": true,
+    "declared_positive_reality_cost": 17,
+    "composition_target_reality_cost": 0,
+    "challenger_replaced_positive_surfaces": 6,
+    "challenger_positive_reality_cost_if_scope_relation_verified": 12,
+    "challenger_savings_if_verified": 5
+  },
+  "interpretation": [
+    "17 IS EXACT ONLY RELATIVE TO THE DECLARED NONMULTIPLEXED OBSERVATION SET.",
+    "THE 12_SURFACE CHALLENGER IS CONDITIONAL AND EARNS NO COVERAGE UNTIL ITS SAME_CASE SIX_RESIDUAL SCOPE_RELATION IS PROVED.",
+    "THE CHECK DOES NOT ESTABLISH A GLOBAL INFORMATION_THEORETIC LOWER_BOUND."
+  ],
+  "hard_nonclaims": [
+    "NO_U_EMPTY_CLAIM",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
