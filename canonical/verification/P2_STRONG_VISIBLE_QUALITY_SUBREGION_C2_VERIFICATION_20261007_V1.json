@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_P2_STRONG_VISIBLE_QUALITY_SUBREGION_C2_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_BLOB_REPLAY_PASS__12_OF_12__WOLFRAM_BOOLEAN_TOP_LAW_PASS__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_SUBREGION_TOP_LAW_20261007_V1.json",
+      "git_blob_sha": "ec0831f086823995b671c33ff24cd76de3b0250e"
+    },
+    "runtime": {
+      "path": "canonical/runtime/p2_strong_quality_visible_certifier_v1.py",
+      "git_blob_sha": "90ae1ce0f413da26dd32562afb2f17a1289b23d7"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p2_strong_quality_visible_certifier_v1.py",
+      "git_blob_sha": "00110e40a7d1205d1f9744c1413412f46e5d24b4"
+    },
+    "candidate": {
+      "path": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+      "git_blob_sha": "ea8057b0eadac210c4f4378298df93ed233c5824"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-c2-independent-replay-v3",
+    "sprite_id": "sprite-b5cc7147-1e70-4905-8176-d3fa129aac58",
+    "python": "3.14.4",
+    "tests_passed": 12,
+    "tests_total": 12
+  },
+  "replay_verified": [
+    "STRONG_VISIBLE_QUALITY_PASS_CASE",
+    "AUDIENCE_MISMATCH_FAILS_CLOSED",
+    "BASELINE_LAYOUT_CERTIFICATE_REQUIRED",
+    "LAYOUT_SELECTED_PLAN_REJECTED",
+    "LOSSLESS_P2_MEMBERSHIP_REQUIRED",
+    "MECHANICS_BASELINE_EQUIVALENCE_REQUIRED",
+    "MISSING_REQUIRED_ANALYTIC_COVERAGE_REJECTED",
+    "RUBRIC_EQUIVALENCE_REQUIRED",
+    "NATIVE_MECHANICAL_GATE_PASS_REQUIRED_WHEN_LOAD_BEARING",
+    "NATIVE_MECHANICAL_GATE_RECEIPT_REQUIRED",
+    "RUBRIC_EQUIVALENCE_RECEIPT_REQUIRED",
+    "ABLATION_RESCUE_SEMANTIC_BINDING_REQUIRED"
+  ],
+  "wolfram": {
+    "statement": "FOR_SIX_BOOLEAN_TARGET_GATE_VALUES_t_i_IN_{0,1}__BRAIN_GATE_VALUE_ONE_WEAKLY_DOMINATES_EACH_t_i",
+    "result": true
+  },
+  "boundary": [
+    "THE_CERTIFIER_DOES_NOT_SELF_AUTHENTICATE_UPSTREAM_SEMANTIC_RECEIPTS",
+    "REAL_CONTEXT_ADMISSION_REQUIRES_CONTENT_ADDRESSED_PROOFS_FOR_MEMBERSHIP_RUBRIC_EQUIVALENCE_BASELINE_LAYOUT_BASELINE_EQUIVALENCE_ABLATION_RESCUE_SEMANTICS_AND_NATIVE_MECHANICS_WHEN_REQUIRED",
+    "NO_CURRENT_AA_BRIEFCASE_OR_GDPVAL_CONTEXT_ADMISSION_IS_CLAIMED",
+    "NO_DB_RECORD_COUNT_INCREMENT",
+    "NO_PROFESSIONAL_FAMILY_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
