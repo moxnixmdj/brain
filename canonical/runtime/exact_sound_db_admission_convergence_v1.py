@@ -1,34 +1,26 @@
-"""Exact convergence gate for the flattened sound D_B region set.
+"""Compile the flattened sound D_B regions into one exact admission predicate set.
 
-This module does one deliberately narrow job: convert the current flattened sound
-D_B regions into the exact creditable predicate-set input expected by the
-selected-cover complement gate. It never infers executable membership predicates
-from prose and never grants U-empty/ABC/terminal credit.
-
-A region becomes complement-ready only when a content-addressed, independently
-verified binding supplies:
-  * a symbolic admission predicate,
-  * a Brain-owned route,
-  * an adequacy certificate, and
-  * an admission-soundness receipt proving admission => route adequacy.
-
-The output is therefore either the exact predicate set to send to the existing
-complement gate, or the exact missing bindings. No benchmark/family detour is
-created here.
+This gate is deliberately fail-closed. A region is complement-ready only when the
+source, Brain-owned route, executable admission predicate, adequacy certificate,
+and independent admission-soundness receipt all exist inside the repository and
+match their declared Git blob SHAs. Semantic soundness is read from the bound
+receipt bytes, never from caller-supplied booleans.
 """
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from canonical.runtime.predicate_selected_cover_complement_gate_v1 import (
-    predicate_set_digest,
-)
+from canonical.runtime.content_bound_artifact_v1 import load_bound_json, resolve_bound_file
+from canonical.runtime.predicate_selected_cover_complement_gate_v1 import predicate_set_digest
 
 SCHEMA = "PROJECT_BRAIN_EXACT_SOUND_DB_ADMISSION_CONVERGENCE_V1"
 SCOPE_ID = "scope://opus55/observable-trace"
+ROOT = Path(__file__).resolve().parents[2]
 
 _REQUIRED_BINDING_TEXT = (
     "route_id",
+    "route_path",
     "admission_predicate_id",
     "admission_predicate_path",
     "adequacy_certificate_path",
@@ -41,20 +33,6 @@ _REQUIRED_BINDING_SHA = (
     "adequacy_certificate_blob_sha",
     "admission_soundness_receipt_blob_sha",
 )
-_REQUIRED_TRUE = (
-    "independent_verified",
-    "exact_byte_bound",
-    "brain_owned_route",
-    "admission_implies_route_adequacy",
-)
-
-
-def _hex40(value: Any) -> bool:
-    return (
-        isinstance(value, str)
-        and len(value) == 40
-        and all(ch in "0123456789abcdef" for ch in value)
-    )
 
 
 def _fail(reason: str, **detail: Any) -> dict[str, Any]:
@@ -74,10 +52,53 @@ def _fail(reason: str, **detail: Any) -> dict[str, Any]:
     return out
 
 
+def _receipt_errors(
+    receipt: Mapping[str, Any],
+    *,
+    region_id: str,
+    route_id: str,
+    predicate_id: str,
+    route_blob_sha: str,
+    predicate_blob_sha: str,
+    adequacy_blob_sha: str,
+) -> list[str]:
+    errors: list[str] = []
+    if receipt.get("independent_verified") is not True:
+        errors.append("RECEIPT_INDEPENDENT_VERIFICATION_MISSING")
+    if receipt.get("exact_byte_bound") is not True:
+        errors.append("RECEIPT_EXACT_BYTE_BINDING_MISSING")
+    if receipt.get("conclusion") != "success":
+        errors.append("RECEIPT_SUCCESS_CONCLUSION_MISSING")
+    if receipt.get("admission_implies_route_adequacy") is not True:
+        errors.append("RECEIPT_ADMISSION_SOUNDNESS_MISSING")
+    if receipt.get("brain_owned_route") is not True:
+        errors.append("RECEIPT_BRAIN_OWNERSHIP_MISSING")
+    if str(receipt.get("scope_id") or "") != SCOPE_ID:
+        errors.append("RECEIPT_SCOPE_MISMATCH")
+
+    receipt_region = str(receipt.get("region_id") or receipt.get("cell_id") or "")
+    if receipt_region != region_id:
+        errors.append("RECEIPT_REGION_MISMATCH")
+    if str(receipt.get("route_id") or "") != route_id:
+        errors.append("RECEIPT_ROUTE_MISMATCH")
+    if str(receipt.get("admission_predicate_id") or "") != predicate_id:
+        errors.append("RECEIPT_PREDICATE_MISMATCH")
+    if receipt.get("route_blob_sha") != route_blob_sha:
+        errors.append("RECEIPT_ROUTE_BLOB_MISMATCH")
+    if receipt.get("admission_predicate_blob_sha") != predicate_blob_sha:
+        errors.append("RECEIPT_PREDICATE_BLOB_MISMATCH")
+    if receipt.get("adequacy_certificate_blob_sha") != adequacy_blob_sha:
+        errors.append("RECEIPT_ADEQUACY_BLOB_MISMATCH")
+    return errors
+
+
 def compile_region_set(
     flattened: Mapping[str, Any],
     bindings: Sequence[Mapping[str, Any]],
+    repo_root: Path | None = None,
 ) -> dict[str, Any]:
+    root = repo_root or ROOT
+
     if not isinstance(flattened, Mapping):
         return _fail("FLATTENED_ROOT_INPUT_MAPPING_REQUIRED")
     if flattened.get("schema") != "PROJECT_BRAIN_EXACT_SOUND_DB_REGION_SET_ROOT_INPUT_V1":
@@ -159,11 +180,11 @@ def compile_region_set(
             if not isinstance(row.get(field), str) or not str(row.get(field)).strip():
                 errors.append(f"MISSING:{field}")
         for field in _REQUIRED_BINDING_SHA:
-            if not _hex40(row.get(field)):
+            value = row.get(field)
+            if not isinstance(value, str) or len(value) != 40 or any(
+                ch not in "0123456789abcdef" for ch in value
+            ):
                 errors.append(f"INVALID_GIT_BLOB_SHA:{field}")
-        for field in _REQUIRED_TRUE:
-            if row.get(field) is not True:
-                errors.append(f"NOT_PROVED:{field}")
 
         route_id = str(row.get("route_id") or "").strip()
         predicate_id = str(row.get("admission_predicate_id") or "").strip()
@@ -171,6 +192,53 @@ def compile_region_set(
             errors.append("ROUTE_ID_DUPLICATE")
         if predicate_id and predicate_id in seen_predicate_ids:
             errors.append("ADMISSION_PREDICATE_ID_DUPLICATE")
+
+        exact_files = (
+            ("source_artifact", source_by_region[rid], row.get("source_artifact_blob_sha")),
+            ("route", row.get("route_path"), row.get("route_blob_sha")),
+            (
+                "admission_predicate",
+                row.get("admission_predicate_path"),
+                row.get("admission_predicate_blob_sha"),
+            ),
+            (
+                "adequacy_certificate",
+                row.get("adequacy_certificate_path"),
+                row.get("adequacy_certificate_blob_sha"),
+            ),
+            (
+                "admission_soundness_receipt",
+                row.get("admission_soundness_receipt_path"),
+                row.get("admission_soundness_receipt_blob_sha"),
+            ),
+        )
+        if not errors:
+            for name, path_value, blob_sha in exact_files:
+                _, error = resolve_bound_file(path_value, blob_sha, root)
+                if error is not None:
+                    errors.append(f"UNBOUND:{name}:{error}")
+
+        receipt: Mapping[str, Any] | None = None
+        if not errors:
+            receipt, error = load_bound_json(
+                row.get("admission_soundness_receipt_path"),
+                row.get("admission_soundness_receipt_blob_sha"),
+                root,
+            )
+            if error is not None:
+                errors.append(f"UNBOUND:admission_soundness_receipt:{error}")
+            elif receipt is not None:
+                errors.extend(
+                    _receipt_errors(
+                        receipt,
+                        region_id=rid,
+                        route_id=route_id,
+                        predicate_id=predicate_id,
+                        route_blob_sha=str(row["route_blob_sha"]),
+                        predicate_blob_sha=str(row["admission_predicate_blob_sha"]),
+                        adequacy_blob_sha=str(row["adequacy_certificate_blob_sha"]),
+                    )
+                )
 
         if errors:
             missing.append(
@@ -188,20 +256,21 @@ def compile_region_set(
             {
                 "cell_id": rid,
                 "route_id": route_id,
+                "route_path": row["route_path"],
+                "route_blob_sha": row["route_blob_sha"],
                 "admission_predicate_id": predicate_id,
+                "admission_predicate_path": row["admission_predicate_path"],
                 "admission_predicate_blob_sha": row["admission_predicate_blob_sha"],
+                "adequacy_certificate_path": row["adequacy_certificate_path"],
                 "adequacy_certificate_blob_sha": row["adequacy_certificate_blob_sha"],
+                "admission_soundness_receipt_path": row[
+                    "admission_soundness_receipt_path"
+                ],
                 "admission_soundness_receipt_blob_sha": row[
                     "admission_soundness_receipt_blob_sha"
                 ],
                 "source_path": source_by_region[rid],
                 "source_artifact_blob_sha": row["source_artifact_blob_sha"],
-                "route_blob_sha": row["route_blob_sha"],
-                "admission_predicate_path": row["admission_predicate_path"],
-                "adequacy_certificate_path": row["adequacy_certificate_path"],
-                "admission_soundness_receipt_path": row[
-                    "admission_soundness_receipt_path"
-                ],
             }
         )
 
