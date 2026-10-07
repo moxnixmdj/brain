@@ -18,7 +18,7 @@ from canonical.runtime.harbor_command_policy import MAX_COMMAND_CHARS
 ENDPOINT = "http://127.0.0.1:8080/v1/chat/completions"
 MODEL = "brain-qwen3.5-9b"
 TOOL_NAME = "submit_science_proposal"
-MAX_RESPONSE_BYTES = 100_000
+MAX_RESPONSE_BYTES = 300_000
 MAX_TOOL_COMPLETION_TOKENS = 4096
 
 TOOL = {
@@ -63,7 +63,7 @@ TOOL = {
                         "additionalProperties": False,
                     },
                     "description": (
-                        "One to eight local-environment action candidates. Omit only "
+                        "Exactly one local-environment action candidate per proposal. Omit only "
                         "when all frozen requirements are already resolved."
                     ),
                 },
