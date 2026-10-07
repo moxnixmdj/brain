@@ -192,7 +192,107 @@
         "path": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
         "git_blob_sha": "913d171b3c855000d322e183b142b3200eeaf0a9"
       },
-      "certificate": null,
+      "certificate": {
+        "transform_law": "DETERMINISTIC",
+        "source_state_complete": true,
+        "target_state_complete": true,
+        "external_controls_accounted": true,
+        "randomness_accounted": true,
+        "target_evaluator_set_complete": true,
+        "target_hard_constraint_set_complete": true,
+        "interactive_state_accounted": true,
+        "independent_verification_bound": true,
+        "source_state_ids": [
+          "CURRENT_REQUIRED_CAPABILITIES",
+          "FINITE_CURRENT_TOOL_SET",
+          "TOOL_IDS_AND_VISIBLE_COSTS",
+          "CURRENT_AVAILABILITY_AND_AUTHORIZATION",
+          "CURRENT_TOOL_VERSION_EPOCHS",
+          "EARNED_CURRENT_EPOCH_SAFE_PROBE_RECEIPTS",
+          "PUBLIC_VERSION_CHANGE_EVENTS",
+          "EXOGENOUS_HIDDEN_ACTUAL_TOOL_CAPABILITY_MATRIX",
+          "TRUTHFUL_SAFE_PROBE_TRANSITION_SEMANTICS"
+        ],
+        "target_state_ids": [
+          "NEXT_ACTION_PROBE_SELECT_OR_ESCALATE",
+          "SELECTED_TOOL_ID_OR_NULL",
+          "PROBE_TOOL_AND_CAPABILITY_OR_NULL",
+          "CURRENT_EPOCH_EVIDENCE_STATE",
+          "TERMINAL_ROUTE_SUCCESS",
+          "NO_ROUTE_ESCALATION_CORRECTNESS"
+        ],
+        "target_evaluator_ids": [
+          "TERMINAL_ROUTE_CORRECTNESS",
+          "LEAST_COST_SUFFICIENT_ROUTE_OPTIMALITY",
+          "CORRECT_NO_ROUTE_ESCALATION"
+        ],
+        "evaluator_pullbacks": [
+          {
+            "target_evaluator_id": "TERMINAL_ROUTE_CORRECTNESS",
+            "source_evaluator_id": "FINITE_UNKNOWN_PAIR_ELIMINATION_AND_SUFFICIENCY_CHECK",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V1.json"
+          },
+          {
+            "target_evaluator_id": "LEAST_COST_SUFFICIENT_ROUTE_OPTIMALITY",
+            "source_evaluator_id": "VISIBLE_COST_THEN_TOOL_ID_TOTAL_ORDER_WITH_EARLIER_ROUTE_DISPROOF",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json"
+          },
+          {
+            "target_evaluator_id": "CORRECT_NO_ROUTE_ESCALATION",
+            "source_evaluator_id": "ALL_ELIGIBLE_TOOLS_EVIDENCE_DISPROVED",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json"
+          }
+        ],
+        "target_hard_constraint_ids": [
+          "SELECT_ONLY_AVAILABLE_TOOLS",
+          "SELECT_ONLY_AUTHORIZED_TOOLS",
+          "SELECT_ONLY_AFTER_ALL_REQUIRED_CAPABILITIES_HAVE_CURRENT_POSITIVE_EVIDENCE",
+          "STALE_RECEIPTS_INVALIDATED_ON_TOOL_VERSION_CHANGE",
+          "UNCHANGED_CURRENT_EPOCH_RECEIPTS_REUSED_WITHOUT_REPROBE",
+          "NO_INTERNET_WIDE_TOOL_IDENTITY_COMPLETENESS_CLAIM",
+          "UNTRUTHFUL_OR_FORBIDDEN_PROBE_ENVIRONMENTS_OUT_OF_SCOPE_FAIL_CLOSED"
+        ],
+        "hard_constraint_preimages": [
+          {
+            "target_hard_constraint_id": "SELECT_ONLY_AVAILABLE_TOOLS",
+            "source_preimage_or_invariant_id": "TOOLS_FILTER_AVAILABLE_TRUE",
+            "proof_ref": "canonical/runtime/tool_discovery_information_safe_candidate.py"
+          },
+          {
+            "target_hard_constraint_id": "SELECT_ONLY_AUTHORIZED_TOOLS",
+            "source_preimage_or_invariant_id": "TOOLS_FILTER_AUTHORIZED_TRUE",
+            "proof_ref": "canonical/runtime/tool_discovery_information_safe_candidate.py"
+          },
+          {
+            "target_hard_constraint_id": "SELECT_ONLY_AFTER_ALL_REQUIRED_CAPABILITIES_HAVE_CURRENT_POSITIVE_EVIDENCE",
+            "source_preimage_or_invariant_id": "UNKNOWN_REQUIRED_PAIR_FORCES_PROBE_AND_NEGATIVE_PAIR_DISPROVES_TOOL",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "STALE_RECEIPTS_INVALIDATED_ON_TOOL_VERSION_CHANGE",
+            "source_preimage_or_invariant_id": "TOOL_EPOCH_MATCH_REQUIRED_FOR_RECEIPT_USE",
+            "proof_ref": "canonical/runtime/tool_discovery_information_safe_candidate.py"
+          },
+          {
+            "target_hard_constraint_id": "UNCHANGED_CURRENT_EPOCH_RECEIPTS_REUSED_WITHOUT_REPROBE",
+            "source_preimage_or_invariant_id": "CURRENT_EPOCH_RECEIPT_EVIDENCE_MAP_PERSISTS",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "NO_INTERNET_WIDE_TOOL_IDENTITY_COMPLETENESS_CLAIM",
+            "source_preimage_or_invariant_id": "FROZEN_PROTOCOL_EXPOSES_TOOL_IDS_AND_ONLY_HIDES_CAPABILITY_TRUTH",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json"
+          },
+          {
+            "target_hard_constraint_id": "UNTRUTHFUL_OR_FORBIDDEN_PROBE_ENVIRONMENTS_OUT_OF_SCOPE_FAIL_CLOSED",
+            "source_preimage_or_invariant_id": "FORMAL_PREMISE_TRUTHFUL_BOUNDED_SAFE_PROBES_REQUIRED",
+            "proof_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_CERTIFICATE_V1.json"
+          }
+        ],
+        "acceptance_semantics_completeness_ref": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json",
+        "independent_verification_ref": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+        "scope_note": "FROZEN_HIDDEN_TOOL_PROTOCOL_ONLY__FINITE_VISIBLE_TOOL_IDENTITIES_AND_REQUIREMENTS__HIDDEN_CAPABILITY_TRUTH_WITH_TRUTHFUL_SAFE_PROBES__NO_OPEN_INTERNET_IDENTITY_DISCOVERY"
+      },
       "implementation_artifacts": [
         {
           "path": "canonical/runtime/tool_discovery_information_safe_candidate.py",
@@ -281,9 +381,9 @@
   "current_result": {
     "exact_credited_family_registry_bound": true,
     "route_count": 5,
-    "transform_certificates_complete": 2,
+    "transform_certificates_complete": 3,
     "c_closed": false,
-    "next": "CERTIFY_CONTINUITY_RECOVERY_AND_TOOL_DISCOVERY_TRANSFORMS__FAIL_CLOSED_ON_ANY_UNBOUND_STATE_EVALUATOR_CONSTRAINT_OR_CONTROL"
+    "next": "CERTIFY_RECOVERY_AND_CONTINUITY_TRANSFORMS__RECOVERY_MUST_USE_POST_QUARANTINE_SCOPE_RESTORATION__CONTINUITY_MUST_BIND_CHILD_RUNTIME_DEPENDENCY_CONE"
   },
   "hard_nonclaims": [
     "NO_CLAIM_ANY_CURRENT_ROUTE_TRANSFORM_CERTIFICATE_IS_COMPLETE",
