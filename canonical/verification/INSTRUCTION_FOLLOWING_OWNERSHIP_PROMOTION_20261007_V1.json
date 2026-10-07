@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_INSTRUCTION_FOLLOWING_OWNERSHIP_PROMOTION_20261007_V1",
+  "date": "2026-10-07",
+  "status": "PASS__DEDUCTIVE_ZERO_REALITY_FAMILY_OWNERSHIP_PROMOTION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "acceptance": {
+    "state": "PASS_SCOPE_COMPLETE_FROZEN_PROTOCOL",
+    "closure": {
+      "path":"canonical/governance/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_20261007_V1.json",
+      "git_blob_sha":"307ea91b0150db9d6cca9580e1b7a399035929c1"
+    },
+    "independent_verification": {
+      "path":"canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "git_blob_sha":"aa7d7ecfb50472f4ee84d41ee69ec41fa8dba84f"
+    },
+    "atomic_predicates": [
+      "LIVEBENCH_IF_GE_65_7",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+    ]
+  },
+  "ownership_theorem": {
+    "path":"canonical/governance/EXACT_ACCEPTED_FINITE_EXECUTION_CLOSURE_OWNERSHIP_THEOREM_20261007_V1.json",
+    "git_blob_sha":"a35a3c611b452d7a3da3bc1a9ede5869770048a0"
+  },
+  "owned_configuration": {
+    "path":"canonical/capabilities/opus55/OPUS55_INSTRUCTION_FOLLOWING_SCOPE_JUDGMENT_OWNED_CONFIGURATION_V1.json",
+    "git_blob_sha":"add1c13ffb895b3f9afbdf70e4aeadc896a68ecb"
+  },
+  "premise_check": {
+    "strict_family_acceptance_pass": true,
+    "scope_complete_for_frozen_family_protocol": true,
+    "independent_acceptance_receipt_exists": true,
+    "finite_enumerated_execution_closure": true,
+    "all_nonstdlib_load_bearing_dependencies_content_addressed_under_brain_control": true,
+    "external_capability_provider": false,
+    "network_capability_dependency": false,
+    "dynamic_code_loading_capability_dependency": false,
+    "opaque_model_dependency": false,
+    "target_capability_donor_runtime_dependency": false,
+    "future_capability_rediscovery_required": false,
+    "evaluation_process_isolation_supplies_target_capability": false
+  },
+  "deduction": [
+    "THE_FROZEN_INSTRUCTION_FOLLOWING_FAMILY_ACCEPTANCE_PROTOCOL_IS_SCOPE_COMPLETE_AND_INDEPENDENTLY_CLOSED.",
+    "THE_ACCEPTED_BEHAVIOR_IS_REALIZED_BY_THE_CONTENT_ADDRESSED_FINITE_CANONICAL_BRAIN_EXECUTION_CLOSURE_BOUND_IN_THE_OWNED_CONFIGURATION.",
+    "THE_LOAD_BEARING_CLOSURE_HAS_NO_EXTERNAL_PROVIDER_NETWORK_OPAQUE_MODEL_DYNAMIC_CODE_OR_DONOR_CAPABILITY_PATH.",
+    "THE_CHILD_PROCESS_USED_BY_THE_FINITE_SCOPE_VERIFICATION_HARNESS_IS_CASE_ISOLATION_ONLY__THE_OPERATIVE_CAPABILITY_BYTES_ARE_THE_PINNED_BRAIN_MODULES_AND_DO_NOT_USE_PROCESS_ESCAPE.",
+    "THE_TARGET_CAPABILITY_CAN_BE_INVOKED_AGAIN_FROM_THE_DURABLE_CANONICAL_CONFIGURATION_WITHOUT_REDISCOVERING_OR_IMPORTING_AN_EXTERNAL_CAPABILITY.",
+    "THEREFORE_THE_FROZEN_ACCEPTED_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT_CAPABILITY_IS_BRAIN_OWNED_AND_EQUAL_OR_BETTER_THAN_OPUS55_ON_ITS_FROZEN_PROTOCOL."
+  ],
+  "promotion": {
+    "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+    "acceptance_family_delta": 0,
+    "ownership_family_delta": 1,
+    "fully_terminally_closed_family_delta": 1,
+    "fresh_target_reality_units_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FULL_19_FAMILY_TERMINAL_GOAL_IS_ACHIEVED",
+    "NO_CLAIM_GENERAL_INSTRUCTION_FOLLOWING_OUTSIDE_THE_FROZEN_PROTOCOL_SCOPE",
+    "NO_CLAIM_GLOBAL_DONOR_DELETION_CLEANROOM_FINALITY_IS_COMPLETE",
+    "NO_CLAIM_ANY_OTHER_OPEN_FAMILY_IS_PROMOTED"
+  ]
+}
