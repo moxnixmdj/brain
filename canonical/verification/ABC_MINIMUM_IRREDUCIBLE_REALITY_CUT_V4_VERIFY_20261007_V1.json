@@ -1,0 +1,37 @@
+{
+  "schema":"PROJECT_BRAIN_ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_V4_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"CONNECTOR_EXACT_DELTA_RECOMPUTATION_PASS__ONLY_L8_STATE_CHANGED__15_CLASSES__9_LANES__ZERO_CREDIT",
+  "subject":{
+    "path":"canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V4.json",
+    "git_blob_sha":"d0675d4f0eb6a78b663984ca731c7386835695ba"
+  },
+  "predecessor":{
+    "path":"canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V3.json",
+    "git_blob_sha":"e4c2bd799c31a78b8d26fbecdeeea988aedc4a43"
+  },
+  "verified":{
+    "positive_reality_classes_identical":true,
+    "positive_reality_class_count":15,
+    "lane_ids_identical":true,
+    "lane_count":9,
+    "all_lane_cover_sets_identical":true,
+    "only_changed_lane_state":"L8_TB_SCIENCE_HARBOR",
+    "minimum_lane_count_under_current_bound_lane_graph":9,
+    "tb_science_general_brain_adapter_unbound":false,
+    "tb_science_next_untouched_schedule_rank":6,
+    "tb_science_next_untouched_slot":"terminal-bench-science/koopman-mfg-id::trial-0",
+    "tb_science_execution_authority":false
+  },
+  "source_verification":{
+    "tb_science_ledger_sha":"5267498adecc8ec7c4dc2d1ed8ae813d28aedc0c",
+    "tb_science_ledger_verification_sha":"922e623f41342199506c4bddf180729dc944961d"
+  },
+  "hard_nonclaims":[
+    "NO_TB_SCIENCE_TERMINAL_SLOT_EXECUTED",
+    "NO_FRESH_REALITY_AUTHORITY_GRANTED",
+    "NO_CLASS_OR_LANE_COUNT_REDUCTION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"fresh_target_reality_units_consumed":0,"terminal_credit_delta":0}
+}
