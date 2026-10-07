@@ -133,6 +133,7 @@ jobs:
           ASTRA_TEST_BLOB="$(git rev-parse HEAD:canonical/tests/test_astra_certificate_gated_route_binding_v1.py)"
           GOVERNANCE_BLOB="$(git rev-parse HEAD:canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_RUNTIME_20261007_V1.json)"
           OUT="canonical/verification/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_GITHUB_REPLAY_${RUN_ID}_V2.json"
+          LATEST="canonical/verification/CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_GITHUB_REPLAY_LATEST_V2.json"
           python3 - "$OUT" "$ROUTER_BLOB" "$ASTRA_BLOB" "$ROUTER_TEST_BLOB" "$ASTRA_TEST_BLOB" "$GOVERNANCE_BLOB" <<'PY'
           import datetime as dt
           import json
@@ -186,7 +187,8 @@ jobs:
           PY
           git config user.name "Project Brain Terminal Replay"
           git config user.email "project-brain-terminal-replay@users.noreply.github.com"
-          git add "$OUT"
+          cp "$OUT" "$LATEST"
+          git add "$OUT" "$LATEST"
           git commit -m "Record exact Root3-ASTRA router replay receipt"
           git pull --rebase origin main
           git push origin HEAD:main
