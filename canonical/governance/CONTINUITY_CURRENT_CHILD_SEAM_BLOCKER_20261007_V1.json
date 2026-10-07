@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_CONTINUITY_CURRENT_CHILD_SEAM_BLOCKER_V1",
+  "date": "2026-10-07",
+  "status": "VERIFIED_STATIC_BLOCKER__SUPERVISOR_CONTINUITY_STATE_MACHINE_PRESERVED__DEFAULT_CHILD_SEAM_STALE__ZERO_CREDIT",
+  "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "accepted_scope": "DURABLE_CROSS_SESSION_PROJECT_STATE_AND_SAME_MISSION_CHECKPOINT_RELAUNCH_CONTINUITY__PRESERVE_COMMITTED_WORK_IDENTITY_TASK_AND_MISSION_BINDINGS__RESUME_WITHOUT_REEXECUTING_COMPLETED_WORK__CONTINUE_TO_TERMINAL_COMPLETION",
+  "exact_current_route": {
+    "credited_supervisor": {
+      "path": "canonical/runtime/same_identity_supervisor_credited_v1.py",
+      "git_blob_sha": "47c461f502e840def0c38728e1bfd7c6401cb804"
+    },
+    "supervisor_default_child_command": "PYTHON canonical/runtime/astra_runtime.py <mission_path>",
+    "current_child": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "3567cfd77eae06e2d384c5e0b18972b2d3a62c3b"
+    },
+    "canonical_production_launcher": {
+      "path": "canonical/runtime/root3_production_astra_launcher_v1.py",
+      "git_blob_sha": "3ac42e7be5a391cfda738131ecb0d3d600fa2147"
+    },
+    "current_bootstrap": {
+      "path": "canonical/runtime/root3_strict_current_bootstrap_v2.py",
+      "git_blob_sha": "7d6e4f4e00fda4eae6ff1974f68f970ceee69c2"
+    }
+  },
+  "accepted_fresh_verification": {
+    "package": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+    "package_git_blob_sha": "2d912cf8df64bd806fffb6a1070d95644d005470",
+    "historical_runtime_blob_bound_in_seam_evidence": "81b115422887aa9e7fabdd414cfc7a272717d9d3",
+    "current_runtime_blob": "3567cfd77eae06e2d384c5e0b18972b2d3a62c3b",
+    "runtime_blob_drift": true,
+    "fresh_promotion_verifier": "canonical/verification/run_long_horizon_continuity_v1.py",
+    "verifier_semantics": "PROCESS_A_CHECKPOINTS_WITH_EXECUTOR_FORBIDDEN__PROCESS_B_INJECTS_FAKE_EXECUTOR_RETURNING_RUNTIMERESULT_0__PROCESS_C_RECOMPUTES_LEDGER",
+    "implication": "FRESH_PROMOTION_PROVED_SUPERVISOR_CHECKPOINT_IDENTITY_AND_EXACTLY_ONCE_EXECUTOR_INVOCATION__NOT_CURRENT_DEFAULT_CHILD_EXECUTION"
+  },
+  "current_child_bootstrap_boundary": {
+    "astra_runtime_direct_entry_rule": "WHEN_RUN_AS___MAIN___CURRENT_ASTRA_REQUIRES_ROOT3_SUBPROCESS_MEDIATOR_RUN_AND_POPEN_GUARDS_ALREADY_ACTIVE_OR_EXITS_ROOT3_PRODUCTION_BOOTSTRAP_REQUIRED",
+    "production_launcher_rule": "ROOT3_PRODUCTION_ASTRA_LAUNCHER_INSTALLS_ROOT3_BEFORE_IMPORTING_ASTRA",
+    "supervisor_current_rule": "CREDITED_SUPERVISOR_DIRECTLY_EXECUTES_ASTRA_RUNTIME_PY_AND_DOES_NOT_USE_PRODUCTION_LAUNCHER",
+    "repo_root_python_autobootstrap_found": false,
+    "consequence": "DEFAULT_CHILD_SEAM_CANNOT_BE_INHERITED_FROM_20260930_PROOF_AND_MUST_BE_REBOUND_OR_EXPLICITLY_REMOVED_FROM_LOAD_BEARING_CONTINUITY_SEMANTICS"
+  },
+  "root3_non_escape": {
+    "subprocess_classification_proves_child_internal_effect_safety": false,
+    "arbitrary_command_execution_status": "DENIED_IN_CURRENT_STRICT_BOOTSTRAP_UNLESS_SEPARATELY_BOUND",
+    "bound_child_code_status": "UNBOUND_IN_CURRENT_STRICT_BOOTSTRAP",
+    "direct_python_write_totality_proved": false,
+    "consequence": "SUBPROCESS_MEDIATION_ALONE_CANNOT_CERTIFY_CHILD_NONINTERFERENCE_WITH_CONTINUITY_AUTHORITY"
+  },
+  "preserved_truth": [
+    "EXACT_CREDITED_SUPERVISOR_STATE_MACHINE_BYTES_REMAIN_BOUND",
+    "CHECKPOINT_RELAUNCH_IDENTITY_TASK_MISSION_HASH_AND_LEDGER_INVARIANTS_WERE_FRESHLY_PROVED",
+    "THE_DEFECT_IS_LOCALIZED_TO_DEFAULT_POST_RESUME_CHILD_EXECUTION_AND_NONINTERFERENCE__NOT_THE_DURABLE_STATE_MACHINE"
+  ],
+  "minimum_repair": [
+    "CREATE_A_NEW_CONTENT_ADDRESSED_SUPERVISOR_CANDIDATE_WHOSE_DEFAULT_CHILD_COMMAND_USES_THE_CANONICAL_ROOT3_PRODUCTION_LAUNCHER",
+    "FREEZE_THE_EXACT_MISSION_CLASS_USED_FOR_CONTINUITY_QUALIFICATION",
+    "RUN_TWO_REAL_FRESH_PROCESSES_WITHOUT_INJECTING_A_FAKE_EXECUTOR__PROCESS_A_CHECKPOINTS__PROCESS_B_USES_THE_DEFAULT_PRODUCTION_CHILD_SEAM",
+    "INDEPENDENTLY_RECOMPUTE_STATE_TASK_MISSION_EVENT_AND_RUNTIME_COMMAND_BINDINGS",
+    "FAIL_CLOSED_IF_THE_CHILD_CAN_MUTATE_SUPERVISOR_AUTHORITY_STATE_OUTSIDE_THE_DECLARED_CONTINUITY_CONTRACT_OR_IF_CURRENT_PRODUCTION_SEAM_CANNOT_COMPLETE"
+  ],
+  "c_effect": {
+    "credited_transform_certificates_complete": 4,
+    "credited_transform_certificates_total": 5,
+    "c_closed": false,
+    "only_current_credited_route_without_complete_c_certificate": "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_LONG_HORIZON_CONTINUITY_CAPABILITY_IS_GLOBALLY_REVOKED",
+    "NO_CLAIM_THE_SUPERVISOR_STATE_MACHINE_IS_BROKEN",
+    "NO_CLAIM_CURRENT_ASTRA_RUNTIME_IS_UNSAFE_IN_GENERAL",
+    "NO_CLAIM_ROOT3_IS_GLOBALLY_CLOSED",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
