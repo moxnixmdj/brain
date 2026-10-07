@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_DB_EXISTING_EVIDENCE_SATURATION_UNION_V12",
+  "date": "2026-10-07",
+  "status": "ACTIVE_ZERO_REALITY_DB_UNION__V11_PLUS_P2_QUALITY_STRENGTHENING_PLUS_SYNTHESIS_V2_SEMANTIC_WIDENING__SEVENTEEN_SOUND_RECORDS__NOT_EXHAUSTIVE__ZERO_CREDIT",
+  "predecessor": {
+    "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V11.json",
+    "git_blob_sha": "27f9d68d6e10bc568afd2f6d807e64daf8f9dbde",
+    "sound_certificate_record_count": 17
+  },
+  "preserved_p2_base_semantic_replacement": {
+    "narrow_id": "PROFESSIONAL_ARTIFACT_P2_INFO_SAFE_V2_ALL_GENERATED_CASES",
+    "broader_id": "P2_PROFESSIONAL_EXPLICIT_SEMANTIC_CONTRACT_ALL_FINITE_TASKS_V1",
+    "broader_source": {
+      "path": "canonical/governance/P2_EXPLICIT_SEMANTIC_CONTRACT_UNIVERSAL_TOP_LAW_20261007_V1.json",
+      "git_blob_sha": "decd0d46538a213f2e169c00c83fae09191a7ed3"
+    },
+    "verification": {
+      "path": "canonical/verification/P2_EXPLICIT_SEMANTIC_CONTRACT_TOP_LAW_CONNECTOR_VERIFY_20261007_V1.json",
+      "git_blob_sha": "8375f545ff35ce519719467596bdf1bc15453174"
+    },
+    "narrow_is_subset_of_broader": true,
+    "membership_gate": "LOSSLESS_BINDING_TO_EXPLICIT_SEMANTIC_CONTRACT",
+    "target_query_required": false
+  },
+  "p2_quality_strengthening": {
+    "id": "P2_STRONG_VISIBLE_QUALITY_AUTHENTICATED_BINDINGS_ALL_FINITE_TASKS_V1",
+    "source": {
+      "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_SUBREGION_TOP_LAW_20261007_V1.json",
+      "git_blob_sha": "ec0831f086823995b671c33ff24cd76de3b0250e"
+    },
+    "independent_replay": {
+      "path": "canonical/verification/P2_STRONG_VISIBLE_QUALITY_SUBREGION_C2_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "c7ef4fab2acf175614d5871609ae73776988ab44"
+    },
+    "base_region": "P2_PROFESSIONAL_EXPLICIT_SEMANTIC_CONTRACT_ALL_FINITE_TASKS_V1",
+    "action": "STRENGTHEN_EXISTING_P2_REGION_ON_CONTEXTS_BINDING_ALL_AUTHENTICATED_QUALITY_PRECONDITIONS",
+    "record_count_delta": 0,
+    "target_query_required": false
+  },
+  "synthesis_semantic_replacement": {
+    "narrow_id": "SYNTHESIS_TYPED_VISIBLE_SUPPORT_COMMON_POLICY_TOP_LAW_V1",
+    "broader_id": "SYNTHESIS_VISIBLE_SUPPORT_EXPLICIT_SELECTION_ORDER_ALL_FINITE_TASKS_V2",
+    "broader_source": {
+      "path": "canonical/governance/SYNTHESIS_EXPLICIT_SELECTION_ORDER_TOP_LAW_CELL_20261007_V2.json",
+      "git_blob_sha": "70f5796d77b79e96ffcc706918410da77dd4d653"
+    },
+    "independent_replay": {
+      "path": "canonical/verification/SYNTHESIS_EXPLICIT_SELECTION_ORDER_C2_INDEPENDENT_REPLAY_20261007_V2.json",
+      "git_blob_sha": "2f666879468619e820fde63b212d306fe2aa5f52"
+    },
+    "narrow_is_subset_of_broader": true,
+    "membership_gate": "EXPLICIT_OPTIONAL_SELECTION_PLUS_BOUNDED_RELATION_RESOLUTION_PLUS_CERTIFIED_SUPPORT_FOR_SELECTED_CLAIMS_PLUS_EXACT_DECLARED_SELECTED_CLAIM_ORDER_PLUS_SUPPORTED_TYPED_AUDIENCE_CONSTRAINTS",
+    "target_query_required": false
+  },
+  "saturation_result": {
+    "known_sound_D_B_certificate_record_count": 17,
+    "semantic_union_widened": true,
+    "record_count_unchanged": true,
+    "U_empty_proved": false,
+    "fresh_target_reality_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduler_effect": [
+    "PRESERVE_ALL_V11_SOUND_REGIONS_AND_THE_GENERATOR_INDEPENDENT_P2_EXPLICIT_CONTRACT_REGION.",
+    "WITHIN_THE_P2_REGION_USE_THE_AUTHENTICATED_STRONG_QUALITY_SUBREGION_WHEN_ALL_BOUND_QUALITY_PRECONDITIONS_ARE_PROVED__DO_NOT_ADD_A_SEPARATE_CACHE_RECORD.",
+    "SEMANTICALLY_REPLACE_THE_NARROWER_SYNTHESIS_V1_TYPED_VISIBLE_SUPPORT_REGION_WITH_THE_BROADER_V2_EXPLICIT_SELECTION_ORDER_CLASS.",
+    "TEST_SYNTHESIS_CONTEXTS_FOR_V2_MEMBERSHIP_BEFORE_ANY_TARGET_QUERY_OR_NEW_SEMANTIC_IMPLEMENTATION.",
+    "SUBTRACT_ANY_PROVED_V2_MEMBER_CONTEXT_FROM_U_WITHOUT_AN_OPUS_COMPARATOR.",
+    "KEEP_ONLY_CONTEXTS_REQUIRING_INFERRED_OPTIONAL_SALIENCE_INFERRED_SEMANTIC_ORDER_GENERAL_PARAPHRASE_ARBITRARY_AUDIENCE_MEANING_OR_OTHER_OUTSIDE_CLASS_SEMANTICS_ON_THE_SHARED_FRONTIER."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_PROFESSIONAL_CONTEXTS_SATISFY_THE_P2_STRONG_QUALITY_SUBREGION",
+    "NO_CLAIM_ALL_SYNTHESIS_CONTEXTS_SATISFY_THE_V2_CLASS",
+    "NO_GENERAL_PROFESSIONAL_OR_SYNTHESIS_CLOSURE",
+    "NO_CLAIM_SEVENTEEN_RECORDS_ARE_DISJOINT_OR_EXHAUSTIVE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

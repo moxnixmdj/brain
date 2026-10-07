@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_DB_EXISTING_EVIDENCE_SATURATION_UNION_V12_CONNECTOR_VERIFICATION_V2",
+  "date": "2026-10-07",
+  "status": "PASS__P2_QUALITY_STRENGTHENED__SYNTHESIS_V2_WIDENED__17_RECORDS_UNCHANGED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/DB_EXISTING_EVIDENCE_SATURATION_UNION_20261007_V12.json",
+    "git_blob_sha": "8bca8544f94b7beca7bb803c0f259bfb1f3876c7"
+  },
+  "verified": {
+    "predecessor_v11_exact": true,
+    "p2_quality_source_exact": true,
+    "p2_quality_independent_replay_status": "INDEPENDENT_EXACT_BLOB_REPLAY_PASS__12_OF_12__WOLFRAM_BOOLEAN_TOP_LAW_PASS__ZERO_GLOBAL_CREDIT",
+    "p2_record_count_delta": 0,
+    "synthesis_v2_source_exact": true,
+    "synthesis_v2_independent_replay_status": "INDEPENDENT_EXACT_BLOB_REPLAY_PASS__11_OF_11__ZERO_TERMINAL_CREDIT",
+    "synthesis_v1_is_semantic_subset": true,
+    "synthesis_target_query_required": false,
+    "known_sound_D_B_certificate_record_count": 17,
+    "record_count_unchanged": true,
+    "semantic_union_widened": true,
+    "U_empty_proved": false,
+    "fresh_target_reality_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "source_bindings": {
+    "p2_top_law": {
+      "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_SUBREGION_TOP_LAW_20261007_V1.json",
+      "git_blob_sha": "ec0831f086823995b671c33ff24cd76de3b0250e"
+    },
+    "p2_verification": {
+      "path": "canonical/verification/P2_STRONG_VISIBLE_QUALITY_SUBREGION_C2_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "c7ef4fab2acf175614d5871609ae73776988ab44"
+    },
+    "synthesis_top_law": {
+      "path": "canonical/governance/SYNTHESIS_EXPLICIT_SELECTION_ORDER_TOP_LAW_CELL_20261007_V2.json",
+      "git_blob_sha": "70f5796d77b79e96ffcc706918410da77dd4d653"
+    },
+    "synthesis_replay": {
+      "path": "canonical/verification/SYNTHESIS_EXPLICIT_SELECTION_ORDER_C2_INDEPENDENT_REPLAY_20261007_V2.json",
+      "git_blob_sha": "2f666879468619e820fde63b212d306fe2aa5f52"
+    }
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_PROFESSIONAL_CLOSURE",
+    "NO_GENERAL_SYNTHESIS_CLOSURE",
+    "NO_CLAIM_SEVENTEEN_RECORDS_EXHAUST_D_B",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ]
+}

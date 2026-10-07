@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_EXPLICIT_SELECTION_ORDER_C2_INDEPENDENT_REPLAY_V2",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_EXACT_BLOB_REPLAY_PASS__11_OF_11__ZERO_TERMINAL_CREDIT",
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-c2-independent-replay-v3",
+    "sprite_id": "sprite-b5cc7147-1e70-4905-8176-d3fa129aac58",
+    "working_directory": "/home/sprite/synthesis_policy_v2"
+  },
+  "exact_blobs": {
+    "policy": {
+      "path": "canonical/runtime/synthesis_certified_visible_support_policy_v2.py",
+      "git_blob_sha": "14c7b3f99b6c28b3f28b5356e13907f843f5ee91"
+    },
+    "tests": {
+      "path": "canonical/tests/test_synthesis_certified_visible_support_policy_v2.py",
+      "git_blob_sha": "a28c8264e2b865528b4d88631259bf79cf1d758f"
+    },
+    "bounded_support": {
+      "path": "canonical/runtime/bounded_claim_support.py",
+      "git_blob_sha": "197246a50ace8c16b945def9edb1357fb317c393"
+    },
+    "grounded_realizer": {
+      "path": "canonical/runtime/synthesis_grounded_expression_ir_v1.py",
+      "git_blob_sha": "0709b7d43a069eaa9eb3240df28789a9107a36db"
+    },
+    "top_law": {
+      "path": "canonical/governance/SYNTHESIS_EXPLICIT_SELECTION_ORDER_TOP_LAW_CELL_20261007_V2.json",
+      "git_blob_sha": "70f5796d77b79e96ffcc706918410da77dd4d653"
+    }
+  },
+  "replay": {
+    "test_count": 11,
+    "pass_count": 11,
+    "fail_count": 0,
+    "verified": [
+      "EXPLICIT_OPTIONAL_EXCLUSION_IS_HONORED_WITHOUT_SALIENCE_INFERENCE",
+      "EXPLICIT_OPTIONAL_INCLUSION_REQUIRES_SUPPORT_AND_IS_RENDERED",
+      "OPTIONAL_SELECTION_WITHOUT_EXPLICIT_BOOLEAN_FAILS_CLOSED",
+      "REQUIRED_CLAIM_CANNOT_BE_EXCLUDED",
+      "EXPLICIT_SELECTED_CLAIM_ORDER_IS_CAUSALLY_APPLIED",
+      "CLAIM_ORDER_MUST_BE_EXACT_SELECTED_PERMUTATION",
+      "DOWNSTREAM_ORDER_CONFLICT_FAILS_CLOSED",
+      "UNRESOLVED_RELATION_ON_EXCLUDED_OPTIONAL_CLAIM_STILL_FAILS_CLOSED",
+      "SELECTED_UNSUPPORTED_CLAIM_FAILS_CLOSED",
+      "DETECTED_CONFLICT_FOLLOWS_SELECTED_CLAIM_IN_EXPLICIT_ORDER",
+      "V1_ALL_REQUIRED_INPUT_ORDER_CLASS_IS_SUBSUMED"
+    ]
+  },
+  "verified_consequence": [
+    "THE_V2_POLICY_AND_EXACT_DEPENDENCIES_EXECUTE_SUCCESSFULLY_ON_AN_INDEPENDENT_CARRIER",
+    "OPTIONAL_SELECTION_AND_NONINPUT_ORDER_ARE_ACCEPTED_ONLY_WHEN_EXPLICITLY_DECLARED",
+    "NO_UNKNOWN_SEMANTIC_RELATION_CAN_BE_HIDDEN_BY_OPTIONAL_EXCLUSION",
+    "THE_V1_TYPED_VISIBLE_SUPPORT_CLASS_IS_A_SPECIAL_CASE_OF_THE_V2_CLASS",
+    "THE_V2_CLASS_IS_ELIGIBLE_TO_SEMANTICALLY_REPLACE_THE_NARROWER_CACHED_SYNTHESIS_V1_REGION"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_OPTIONAL_SALIENCE_INFERENCE",
+    "NO_GENERAL_SEMANTIC_REORDERING",
+    "NO_GENERAL_PARAPHRASE_OR_AUDIENCE_INTERPRETATION",
+    "NO_GENERAL_SYNTHESIS_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
