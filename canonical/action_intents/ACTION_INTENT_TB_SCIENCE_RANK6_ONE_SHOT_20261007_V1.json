@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "TB-SCIENCE-RANK6-ONE-SHOT-20261007-SOL",
+  "date": "2026-10-07",
+  "status": "ACTIVE_PREEXPOSURE__ONE_FRESH_SLOT__ZERO_SPEND_HARD_STOP",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "e396aa7cae77850fda7f08857128de1f820ce8bc",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "causal_blocker": "TB_SCIENCE_RANK6_FRESH_REALITY_SLOT_UNEXECUTED",
+  "action_kind": "MINIMUM_POSITIVE_REALITY_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::AGENTIC_SCIENTIFIC_RESEARCH::TB_SCIENCE_RANK6_KOOPMAN_MFG_ID_TRIAL0",
+  "expected_parent_frontier_change": "Consume exactly the frozen next untouched Terminal-Bench-Science slot using the already-bound Brain-owned route on a public standard GitHub-hosted runner; finalize one irreversible scorer result and recompute the 210-slot ledger.",
+  "highest_leverage_now": true,
+  "explicit_user_authorization": "Join the brain and make the goal real now, not after 30 minutes or 40 minutes, but now.",
+  "zero_incremental_spend_hard_stop": true,
+  "fresh_reality_units_authorized": 1,
+  "authorized_slot": "terminal-bench-science/koopman-mfg-id::trial-0",
+  "authorized_task_digest": "sha256:ba37bd6173cc7d21aff84b2124524ef2ec60cb85f5f9cef2c42e6111ad9ed18f",
+  "retries": 0,
+  "replacement": false,
+  "duplicate_credit": false,
+  "stop_condition": "Finalize exactly rank6 trial-0 once, or stop before task exposure if exact authority, carrier, cost, or resource preconditions fail.",
+  "tournament": {
+    "proposal_id": "P_PUBLIC_GITHUB_ZERO_COST_RANK6_ONE_SHOT",
+    "falsifier_id": "F_ANY_COST_ROUTE_DRIFT_AUTHORITY_MISMATCH_DUPLICATE_SLOT_OR_CARRIER_RESOURCE_MISMATCH",
+    "decisive_question": "Can rank6 be executed once on the already-used public GitHub carrier with exact current route bytes at $0 incremental spend and no replay?"
+  },
+  "recursive_obs": {
+    "real_outcome": "Acquire the minimum still-necessary TB-Science positive reality without weakening fixed-denominator or no-retry semantics.",
+    "selected_route": "PUBLIC_VERIFICATION_CAPSULE_RUNNER_STANDARD_GITHUB_HOSTED_RUNNER",
+    "deleted_routes": [
+      "PRIVATE_BRAIN_GITHUB_ACTIONS_MINUTES_EXHAUSTED",
+      "SPRITES_METERED_USAGE",
+      "CURRENT_CHAT_CONTAINER_INSUFFICIENT_RAM_NO_DOCKER_NO_HARBOR",
+      "USER_LAPTOP"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The public verifier repository and prior Harbor carrier are already proven; standard public GitHub-hosted runners are nonbillable under the project hard-zero rule."
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_authorized": 1,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false
+}

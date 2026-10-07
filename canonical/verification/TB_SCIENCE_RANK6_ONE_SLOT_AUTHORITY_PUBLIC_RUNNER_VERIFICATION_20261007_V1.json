@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK6_ONE_SLOT_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261007_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_AUTHORITY_AND_ZERO_COST_CARRIER_PREFLIGHT__NO_TASK_EXPOSURE__ZERO_CREDIT",
+  "subject": {
+    "authority_path": "canonical/governance/TB_SCIENCE_RANK6_ONE_SLOT_EXECUTION_AUTHORITY_20261007_V1.json",
+    "authority_git_blob_sha": "3c0193eb50c55d72eaf19dcc0b6f084e84b12ff2",
+    "authorized_slot": "terminal-bench-science/koopman-mfg-id::trial-0",
+    "schedule_rank": 6
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2348,
+    "merge_sha": "91810f4b8b57e465dce0591bc19311d1748f6053",
+    "workflow_run_id": 37580602737,
+    "workflow_name": "Verify TB-Science rank6 authority and carrier",
+    "job_id": 112659125100,
+    "conclusion": "success"
+  },
+  "verified": {
+    "public_repository": true,
+    "standard_github_hosted_runner": "ubuntu-24.04",
+    "cpu_minimum_ge_4": true,
+    "memory_minimum_ge_12000000_kb": true,
+    "disk_minimum_ge_12000000_kb": true,
+    "docker_available": true,
+    "harbor_version": "0.23.0",
+    "exact_authority_blob": true,
+    "exact_route_blobs": true,
+    "authorized_slot_rank6": true,
+    "authorized_slot_not_consumed": true,
+    "retries": 0,
+    "replacement": false,
+    "denominator_shrink": false,
+    "fresh_reality_units_authorized": 1,
+    "zero_incremental_spend_hard_stop": true,
+    "task_content_exposed": 0,
+    "terminal_slots_consumed": 0
+  },
+  "boundary": [
+    "VERIFIES_AUTHORITY_AND_PUBLIC_CARRIER_PREFLIGHT_ONLY",
+    "NO_TERMINAL_TASK_EXECUTED",
+    "NO_TB_SCIENCE_SCORE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
