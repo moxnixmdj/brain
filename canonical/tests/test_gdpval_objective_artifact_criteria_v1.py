@@ -128,3 +128,75 @@ def test_single_zip_rejects_extra_top_level_file():
             z.writestr("x.txt", "x")
         (Path(d) / "extra.txt").write_text("x")
         assert m.verify_compiled(c, d)["pass"] is False
+
+
+def test_frozen_public_220_simple_pdf_forms_compile_without_role_inference():
+    for criterion in [
+        "The deliverable is a single PDF file.",
+        "The deliverable is provided as a single PDF document",
+        "Submission consists of exactly one file in PDF format (.pdf).",
+        "The deliverable is provided as a PDF file.",
+        "Deliverable is a PDF.",
+    ]:
+        out = m.compile_criterion(criterion)
+        assert out["status"] == "COMPILED_OBJECTIVE_CHECK", criterion
+
+
+def test_single_page_pdf_is_machine_verified(tmp_path):
+    from pypdf import PdfWriter
+
+    c = m.compile_criterion("Submission is a single-page PDF")
+    assert c["status"] == "COMPILED_OBJECTIVE_CHECK"
+
+    p = tmp_path / "one.pdf"
+    writer = PdfWriter()
+    writer.add_blank_page(width=100, height=100)
+    with p.open("wb") as f:
+        writer.write(f)
+    assert m.verify_compiled(c, tmp_path)["pass"] is True
+
+    writer = PdfWriter()
+    writer.add_blank_page(width=100, height=100)
+    writer.add_blank_page(width=100, height=100)
+    with p.open("wb") as f:
+        writer.write(f)
+    assert m.verify_compiled(c, tmp_path)["pass"] is False
+
+
+def test_exact_four_sheet_xlsx_is_machine_verified(tmp_path):
+    from openpyxl import Workbook
+
+    c = m.compile_criterion(
+        "Provides an Excel .xlsx workbook with exactly four worksheets (tabs)."
+    )
+    assert c["status"] == "COMPILED_OBJECTIVE_CHECK"
+
+    p = tmp_path / "book.xlsx"
+    wb = Workbook()
+    for name in ["B", "C", "D"]:
+        wb.create_sheet(name)
+    wb.save(p)
+    wb.close()
+    assert m.verify_compiled(c, tmp_path)["pass"] is True
+
+
+def test_new_mechanical_forms_stay_fail_closed_on_mixed_semantics():
+    assert m.compile_criterion(
+        "The deliverable is a single PDF file containing a complete legal analysis."
+    )["status"] == "UNRESOLVED"
+    assert m.compile_criterion(
+        "Provides two distinct .pptx files: one presentation for Session 13 and one for Session 14."
+    )["status"] == "UNRESOLVED"
+
+
+def test_frozen_public_220_exact_single_native_forms_compile():
+    for criterion in [
+        "Delivers a single Excel workbook file in .xlsx format.",
+        "Output is a single Excel workbook file with the .xlsx extension.",
+        "The submitted file is an .xlsx Excel workbook (not .xlsm or other formats).",
+        "The deliverable is a single Word document (.docx) rather than multiple files or a PDF.",
+        "Exactly one Microsoft Word file is delivered and it opens as a valid DOCX package (ZIP with [Content_Types].xml and word/document.xml).",
+        "The delivered file is a WAV file and not a compressed format (e.g., MP3/AAC).",
+    ]:
+        out = m.compile_criterion(criterion)
+        assert out["status"] == "COMPILED_OBJECTIVE_CHECK", criterion
