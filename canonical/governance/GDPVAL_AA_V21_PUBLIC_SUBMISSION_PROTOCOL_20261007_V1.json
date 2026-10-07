@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_AA_V21_PUBLIC_SUBMISSION_PROTOCOL_V1",
+  "date": "2026-10-07",
+  "status": "CURRENT_PUBLIC_TASK_SUBMISSION_PROTOCOL_BOUND__EXACT_AA_PROMPT_SURFACE_AND_STIRRUP_CORE_SOURCE_BOUND__OWNER_PAIRWISE_PRESENTATION_STILL_OPEN__ZERO_CREDIT",
+  "public_methodology": {
+    "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "methodology_version": "4.3.2",
+    "facts": {
+      "tasks": 220,
+      "harness": "ArtificialAnalysis/Stirrup",
+      "sandbox": "E2B",
+      "turn_limit": 250,
+      "context_compaction_threshold": 0.7,
+      "fresh_sandbox_per_task": true,
+      "non_root_user": "user",
+      "uid": 1000,
+      "working_directory": "/home/user",
+      "shell_state_persists_between_calls": false,
+      "command_timeout_seconds": 600,
+      "exact_task_submission_system_prompt_public": true,
+      "exact_task_submission_prompt_template_public": true,
+      "reference_files_injected_as_absolute_paths": true,
+      "finish_requires_summary_and_absolute_file_paths": true,
+      "abandon_tool_name": "abandon_task_finish",
+      "user_interaction_allowed": false,
+      "tools": [
+        "Web Fetch",
+        "Web Search",
+        "View Image when vision-supported",
+        "Code Exec",
+        "Finish",
+        "Abandon Task"
+      ],
+      "view_image_max_megapixels": 1,
+      "web_search_provider": "Brave Search API",
+      "web_search_result_count": 5,
+      "office_compatibility_repairs": "MINIMAL_METADATA_AND_RELATIONSHIP_REPAIRS_ONLY__DOCUMENT_BODY_SLIDE_CONTENT_AND_LAYOUT_UNCHANGED",
+      "public_dataset": "openai/gdpval"
+    }
+  },
+  "stirrup_source_binding": {
+    "repository": "ArtificialAnalysis/Stirrup",
+    "commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
+    "blobs": {
+      "tools_init": "a8b0bb8f1e4e66a0e07a09a48f897019b09c0836",
+      "finish": "d4f48ffec2295d1ae0600d27ebb050abbbb382ca",
+      "web": "2544b541ec2db173038753d0af2249eca089468a",
+      "view_image": "85698cfdc02106c5d4533f891137186e093b5bd6",
+      "code_backend_base": "a829d7296c5fae6db1db08ed66faed0d47baf111",
+      "e2b_backend": "1cebb2f71dc8c845d20416acc77242b93d1129bd",
+      "agent": "7446c8ee00d49e81dd621d9f9cc6507900964903",
+      "constants": "03a8579aa42454c4f6f36d075c9cc894f1f2719a",
+      "message_summarizer": "04a3667dd366da0253f9d5ea2062660551b91ce2",
+      "message_summarizer_bridge": "7eaf68ae5d6efa0f5e3f4fe02634ce366efcb193"
+    },
+    "verified_core_tool_names": {
+      "web_fetch": "fetch_web_page",
+      "web_search": "web_search",
+      "code_exec": "code_exec",
+      "view_image": "view_image",
+      "finish": "finish"
+    },
+    "evaluation_specific_boundary": {
+      "abandon_task_finish_declared_by_current_aa_methodology": true,
+      "abandon_task_finish_found_in_public_stirrup_main": false,
+      "consequence": "DO_NOT_CLAIM_PUBLIC_STIRRUP_ALONE_IS_THE_COMPLETE_GDPVAL_AA_EVALUATION_RUNNER"
+    }
+  },
+  "brain_runtime": {
+    "path": "canonical/runtime/gdpval_aa_v21_submission_contract_v1.py",
+    "git_blob_sha": "fedad80ecd8086efe24fe15cdbbb8524e8af6665",
+    "role": "FAIL_CLOSED_PUBLIC_SUBMISSION_SESSION_MANIFEST_VALIDATOR",
+    "exact_owner_evaluation_reproduction_claimed": false
+  },
+  "pairwise_owner_surface_now_bound": {
+    "sampling_seed_phase": "BALANCED_ACROSS_TASKS_JUDGES_AND_OPPONENTS",
+    "active_phase": "ELO_INFORMED_SIMILAR_RATING_PAIRINGS_WITH_BALANCED_TASK_EXPOSURE",
+    "random_anonymization": "SUBMISSION_A_OR_B",
+    "judge_context": "INITIAL_TASK_PLUS_ALL_REFERENCE_FILES_PLUS_ALL_SUBMISSION_FILES",
+    "document_parsing": "DOCUMENT_FILES_AS_TEXT_AND_IMAGES__ZIP_EXTRACTED_AND_EACH_FILE_PARSED",
+    "audio_video_route": "GEMINI_3_8_FLASH_NATIVE_MODALITY",
+    "tie_rule": "HALF_WIN_EACH_SIDE",
+    "final_fit": "CROWD_BT_MAXIMUM_LIKELIHOOD__DEEPSEEK_V4_1_FLASH_MAX_1600_ANCHOR__SANDWICH_95_PERCENT_CI"
+  },
+  "residual_after_binding": [
+    "EXACT_OWNER_PAIRWISE_JUDGE_PROMPT_OR_SOUNDLY_EQUIVALENT_ACCEPTANCE_PROGRAM",
+    "EXACT_OWNER_FILE_PARSING_RENDERING_AND_PAIRWISE_MESSAGE_SERIALIZATION_IF_LOAD_BEARING",
+    "EXACT_REALIZED_PAIR_AND_JUDGE_ASSIGNMENTS_OR_OTHER_SUFFICIENT_MATCHED_EPOCH_STATE",
+    "RAW_CURRENT_EPOCH_PAIRWISE_OUTCOMES_AND_CROWD_BT_FIT_STATE_OR_SOUND_EQUIVALENT",
+    "CALLABLE_ZERO_INCREMENTAL_SPEND_CAPACITY_FOR_THE_THREE_OWNER_JUDGES_OR_A_SOUND_SCOPE_COMPLETE_TARGET_BRIDGE",
+    "BRAIN_COMPLETE_220_TASK_SUBMISSIONS"
+  ],
+  "scheduler_delta": [
+    "DELETE_GDPVAL_TASK_SUBMISSION_SYSTEM_PROMPT_DISCOVERY_FROM_THE_RESIDUAL.",
+    "DELETE_BASIC_STIRRUP_TOOL_NAME_E2B_WORKING_DIR_TURN_LIMIT_CONTEXT_COMPACTION_AND_FINISH_CONTRACT_DISCOVERY_FROM_THE_RESIDUAL.",
+    "DO_NOT_DELETE_ABANDON_TASK_FINISH_EVALUATION_WRAPPER_DISCOVERY_FROM_EXACT_REPRODUCTION__IT_IS_DECLARED_PUBLICLY_BUT_NOT_PRESENT_IN_PUBLIC_STIRRUP_MAIN.",
+    "USE_THE_BRAIN_RUNTIME_VALIDATOR_TO_FAIL_CLOSED_ANY_CANDIDATE_SUBMISSION_SESSION_BEFORE_OWNER_SCORING.",
+    "CONTINUE_STRUCTURAL_AND_OWNER_SCORING_ROUTES_IN_PARALLEL."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_STIRRUP_MAIN_EQUALS_THE_COMPLETE_ARTIFICIAL_ANALYSIS_GDPVAL_AA_RUNNER.",
+    "NO_CLAIM_EXACT_OWNER_PAIRWISE_JUDGE_PROMPT_IS_BOUND.",
+    "NO_CLAIM_RAW_OWNER_PAIRWISE_GRAPH_OR_FIT_STATE_IS_BOUND.",
+    "NO_BRAIN_220_SUBMISSION_MANIFEST.",
+    "NO_BRAIN_GDPVAL_OWNER_ELO.",
+    "NO_GDPVAL_CLOSURE_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
