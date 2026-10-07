@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_QUALITY_WAKE_SUBSUMPTION_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_LOGIC_REPLAY_PASS__5_OF_5__ZERO_CREDIT",
+  "subject": {
+    "theorem": "84c3c238b31e49f9fabfcf39e7670546dc61cf66",
+    "runtime": "97462c213bbaeb755ec5f9fab0cbb179fbd2404d",
+    "tests": "4a8fe533b1a13e667399f2769b54ff12cc01fa98"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "workspace": "/home/sprite/synthesis_quality_wake_v1"
+  },
+  "replay": {
+    "tests_run": 5,
+    "tests_passed": 5
+  },
+  "verified": [
+    "EXACT_DIMENSION_PRODUCT",
+    "MISSING_SCOPE_FAILS",
+    "COVERAGE_DRIFT_FAILS",
+    "UNCERTAINTY_DRIFT_FAILS",
+    "REPLAY_DRIFT_FAILS"
+  ],
+  "boundary": "RAW_OR_UNBOUND_SYNTHESIS_SEMANTICS_REMAIN_ON_SHARED_ABC_ADMISSION_FRONTIER",
+  "terminal_credit_delta": 0
+}
