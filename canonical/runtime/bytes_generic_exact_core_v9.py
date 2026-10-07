@@ -118,19 +118,28 @@ def ds(ex,d=3):
   q=n
  return {"status":"MISS","t":None}
 def ps(c,x):return rp(c["t"],x)
-def aq(ex,xs,d=3):
+def qi(x,n=2000):
+ if isinstance(x,list):
+  for i in range(n):
+   q=i+1;z=[]
+   for _ in range(6+i%3):q=(1103515245*q+12345)&2147483647;z.append(q%17-8)
+   yield z
+ else:
+  for i in range(n):yield i-n//2
+def aq(ex,d=3,n=2000):
  q=[()];v=[]
  for _ in range(d+1):
-  n=[]
+  w=[]
   for p in q:
    if all(rp(p,x)==y for x,y in ex):v.append(p)
-   n += [p+(o,) for o in G]
-  q=n
+   w += [p+(o,) for o in G]
+  q=w
  if len(v)<2:return
  b=None
- for x in xs:
+ for x in qi(ex[0][0],n):
   z={}
-  for p in v:z[str(rp(p,x))]=z.get(str(rp(p,x)),0)+1
+  for p in v:
+   y=str(rp(p,x));z[y]=z.get(y,0)+1
   if len(z)>1:
    w=(max(z.values()),-len(z))
    if b is None or w<b[0]:b=(w,x)
