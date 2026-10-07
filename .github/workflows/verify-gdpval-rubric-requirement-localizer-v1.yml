@@ -10,9 +10,17 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        case:
+          - test_modal_and_imperative_localize_and_unknown_stays_open
+          - test_bad_index_fails_closed
+          - test_unresolved_does_not_become_credit
+    name: ${{ matrix.case }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m unittest -v canonical.tests.test_gdpval_rubric_requirement_localizer_v1
+      - run: python -m unittest -v canonical.tests.test_gdpval_rubric_requirement_localizer_v1.${{ matrix.case }}
