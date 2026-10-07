@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_P3_SYNTHESIS_PROVENANCE_GATE_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__EXACT_BRANCH_BLOBS__REAL_CANDIDATE_1000_WORLD_REPLAY__TWO_PROVENANCE_NEGATIVE_CANARIES__ELEVEN_UNIT_TESTS__ZERO_CREDIT",
+  "exact_blobs": {
+    "canonical/runtime/contract_native_brain_candidate.py": "1171ff86ec0beed43e6d79b2253c1a92804194cf",
+    "canonical/runtime/contract_native_proof_suites.py": "b72cec9a928000df5ef4ce7fcb807f69c3943c01",
+    "canonical/tests/test_contract_native_proof_suites.py": "47898fd9f813cca9708136ab00079489521d8bbc"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/p3_provenance_v1"
+  },
+  "results": {
+    "git_blob_hashes_recomputed_and_matched": true,
+    "real_candidate_synthesis_worlds": 1000,
+    "all_real_candidate_worlds_passed": true,
+    "seed80_required_support_regression_passed": true,
+    "missing_provenance_rejected": true,
+    "fabricated_provenance_rejected": true,
+    "unit_tests_run": 11,
+    "unit_tests_passed": 11
+  },
+  "truth_boundary": {
+    "frozen_terminal_population_replayed": false,
+    "terminal_credit_delta": 0
+  }
+}
