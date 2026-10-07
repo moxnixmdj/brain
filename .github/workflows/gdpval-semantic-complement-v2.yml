@@ -7,13 +7,19 @@ on:
       - "canonical/runtime/gdpval_semantic_complement_localizer_v2.py"
       - "canonical/tests/test_gdpval_semantic_complement_localizer_v2.py"
       - ".github/workflows/gdpval-semantic-complement-v2.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/gdpval_semantic_complement_localizer_v2.py"
+      - "canonical/tests/test_gdpval_semantic_complement_localizer_v2.py"
+      - ".github/workflows/gdpval-semantic-complement-v2.yml"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: gdpval-public-220-composed-semantic-localization-v2
+  group: gdpval-public-220-composed-semantic-localization-v2-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -59,7 +65,15 @@ jobs:
           },sort_keys=True))
           PY
 
+      - name: Upload localization evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: gdpval-public-220-composed-semantic-localization-v2
+          path: canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_20261007_V2.json
+          if-no-files-found: error
+
       - name: Persist content-addressed evidence
+        if: github.event_name != 'pull_request'
         run: |
           set -euo pipefail
           git config user.name "Project Brain GDPval Localizer"
