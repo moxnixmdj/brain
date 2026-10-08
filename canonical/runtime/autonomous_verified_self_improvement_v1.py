@@ -357,13 +357,22 @@ def _prior_verified_episodes(
 
 
 def _effect_may_have_occurred(out: Mapping[str, Any]) -> bool:
+    """Unknown execution state is effectful for replay-safety purposes."""
+    status = (_s(out.get("status")) + " " + _s(out.get("reason"))).upper()
+    if any(token in status for token in (
+        "RECOVERY_REQUIRED", "EFFECT_MAY_HAVE_OCCURRED",
+        "EFFECT_OUTCOME_UNRESOLVED", "INDETERMINATE_EFFECT",
+    )):
+        return True
     trace = out.get("trace")
     if not isinstance(trace, Sequence) or isinstance(trace, (str, bytes)):
-        return False
-    return any(
-        isinstance(row, Mapping) and bool(row.get("effect_outcome_sha256"))
-        for row in trace
-    )
+        return True
+    for row in trace:
+        if not isinstance(row, Mapping):
+            return True
+        if row.get("effect_outcome_sha256") or row.get("effect_may_have_occurred"):
+            return True
+    return False
 
 
 def _select_active_skill(
