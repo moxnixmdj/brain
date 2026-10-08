@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_R1_SINGLE_CANONICAL_FRONT_DOOR_REPLAY_20261008_V3",
+  "date": "2026-10-08",
+  "status": "PASS__REBASed_CURRENT_MAIN__EXACT_CHANGED_SOURCE_COMPILES__R3_REUSE_REPAIR_CARRIER_BOUND",
+  "base_commit": "13fff459ad216adf266bdaa7ba95417379f67833",
+  "canonical_public_entrypoint": "canonical.runtime.unified_cognitive_fabric_v1.run",
+  "subordinate_runtime_entrypoint": "canonical.runtime.live_brain_runtime_v1.run",
+  "exact_blobs": {
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "68ee5a9d21bd5b47c50b83d97785064bdf64c0ce"
+    },
+    "subordinate_runtime": {
+      "path": "canonical/runtime/live_brain_runtime_v1.py",
+      "git_blob_sha": "a7c8ad109471ea2f6d004474d556c6693c5b2033"
+    },
+    "fabric_tests": {
+      "path": "canonical/tests/test_unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "da3d5ec2f8d839856a6ccb140e9e2c1af006be89"
+    },
+    "runtime_tests": {
+      "path": "canonical/tests/test_live_brain_runtime_v1.py",
+      "git_blob_sha": "c1376f9b7361061d948fa5039351ddfa4330ad71"
+    },
+    "activation": {
+      "path": "canonical/governance/LIVE_BRAIN_RUNTIME_V1_ACTIVATION_20261008_V1.json",
+      "git_blob_sha": "40a55028183fa0c121c234e499580ad71f4e9d2f"
+    },
+    "workflow": {
+      "path": ".github/workflows/verify-unified-cognitive-fabric-v1.yml",
+      "git_blob_sha": "8cc9425a9c7e0fc532fa7427be5c1ef3bba79093"
+    }
+  },
+  "verification": {
+    "sprite": "brain-live-runtime-v1-verify-20261008",
+    "python_compile_changed_files_pass": true,
+    "activation_json_parse_pass": true
+  },
+  "preserved": {
+    "universal_live_capability_invocation": true,
+    "latest_r3_replay_context_and_repair_changes": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
