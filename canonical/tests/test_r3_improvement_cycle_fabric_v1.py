@@ -79,6 +79,37 @@ class R3ImprovementCycleFabricTests(unittest.TestCase):
         self.assertIsNone(kwargs["failure_repair_provider"])
         self.assertEqual(kwargs["max_actions"], 2)
 
+    def test_frontier_acquisition_provider_reaches_driver(self):
+        provider = object()
+        fake = {
+            "schema": "PROJECT_BRAIN_R3_IMPROVEMENT_QUEUE_DRIVER_V1",
+            "status": "IMPROVEMENT_QUEUE_STABLE",
+            "pass": True,
+            "progress_count": 0,
+            "actions": [],
+            "terminal_authority": False,
+        }
+        with mock.patch.object(
+            fabric.improvement_driver,
+            "drain",
+            return_value=fake,
+        ) as drain:
+            fabric.run(
+                {"mode": "IMPROVEMENT_CYCLE", "payload": {}, "options": {}},
+                verification_frontier_acquisition_provider=provider,
+                verification_frontier_acquisition_provider_id="root1-worker-v1",
+            )
+        self.assertIs(
+            drain.call_args.kwargs["verification_frontier_acquisition_provider"],
+            provider,
+        )
+        self.assertEqual(
+            drain.call_args.kwargs[
+                "verification_frontier_acquisition_provider_id"
+            ],
+            "root1-worker-v1",
+        )
+
     def test_success_adapter_provider_reaches_driver(self):
         adapter = object()
         fake = {
