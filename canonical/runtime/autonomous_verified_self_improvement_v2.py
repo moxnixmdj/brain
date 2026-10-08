@@ -28,6 +28,7 @@ from canonical.runtime import autonomous_verified_self_improvement_v1 as v1
 SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V2"
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_STATE_PATH = v1.DEFAULT_STATE_PATH
+load_state = v1.load_state
 
 RepairProvider = Callable[[Mapping[str, Any], int], Mapping[str, Any] | None]
 
