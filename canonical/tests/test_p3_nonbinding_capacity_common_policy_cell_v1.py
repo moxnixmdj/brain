@@ -1,11 +1,20 @@
-from copy import deepcopy
-
 from canonical.runtime.p3_nonbinding_capacity_common_policy_cell_v1 import evaluate
+from canonical.runtime.synthesis_certified_visible_support_policy_v3 import INPUT_SCHEMA
+
+
+def ev(i, text):
+    return {
+        "evidence_id": i,
+        "text": text,
+        "verified": True,
+        "provenance": [{"source_id": i, "locator": "p1"}],
+    }
 
 
 def case(max_items=3):
     return {
         "v3_input": {
+            "schema": INPUT_SCHEMA,
             "task": {
                 "claims": [
                     {"claim_id": "R", "text": "alpha status is ready", "required": True},
@@ -13,33 +22,33 @@ def case(max_items=3):
                     {"claim_id": "O2", "text": "gamma status is ready", "required": False},
                 ],
                 "evidence": [
-                    {"evidence_id": "e1", "text": "source: alpha status is ready", "verified": True},
-                    {"evidence_id": "e2", "text": "source: beta status is ready", "verified": True},
-                    {"evidence_id": "e3", "text": "source: gamma status is ready", "verified": True},
+                    ev("e1", "source: alpha status is ready"),
+                    ev("e2", "source: beta status is ready"),
+                    ev("e3", "source: gamma status is ready"),
                 ],
                 "required_uncertainty_units": [],
                 "audience_profile": {
-                    "profile_id": "p",
+                    "profile_id": "EXPLICIT",
                     "constraints": {
-                        "output_format": "bullets",
-                        "citation_mode": "inline",
-                        "style": "concise",
+                        "output_format": "BULLETS",
+                        "citation_mode": "INLINE_SOURCE_IDS",
+                        "style": "VERBATIM_GROUNDED",
                         "required_sections": [],
-                        "allowed_sections": [],
+                        "allowed_sections": None,
                         "max_items": max_items,
                         "max_chars": 2000,
                         "heading_level": 2,
                         "require_title": False,
                     },
                 },
-            }
+            },
         }
     }
 
 
 def test_all_supported_optionals_fit_without_weights():
     out = evaluate(case(3))
-    assert out["pass"] is True
+    assert out["pass"] is True, out
     assert out["selected_claim_ids"] == ["R", "O1", "O2"]
     assert out["selected_optional_claim_ids"] == ["O1", "O2"]
     assert out["top_law_eligible"] is True
@@ -57,7 +66,7 @@ def test_unsupported_optional_is_mechanically_excluded():
     p = case(3)
     p["v3_input"]["task"]["evidence"] = p["v3_input"]["task"]["evidence"][:2]
     out = evaluate(p)
-    assert out["pass"] is True
+    assert out["pass"] is True, out
     assert out["selected_claim_ids"] == ["R", "O1"]
     assert out["excluded_unsupported_optional_claim_ids"] == ["O2"]
 
@@ -72,7 +81,7 @@ def test_required_claim_without_support_fails_closed():
 def test_conflict_requires_uncertainty_semantics():
     p = case(4)
     p["v3_input"]["task"]["evidence"].append(
-        {"evidence_id": "e4", "text": "source: beta status is blocked", "verified": True}
+        ev("e4", "source: beta status is blocked")
     )
     out = evaluate(p)
     assert out["reason"] == "CONFLICT_REQUIRES_UNCERTAINTY_SEMANTICS"
@@ -101,7 +110,9 @@ def test_caller_order_forbidden():
 
 def test_nonempty_uncertainty_outside_cell():
     p = case(3)
-    p["v3_input"]["task"]["required_uncertainty_units"] = [{"id": "u"}]
+    p["v3_input"]["task"]["required_uncertainty_units"] = [
+        {"uncertainty_id": "u", "text": "uncertain", "provenance": [{"source_id": "e1"}]}
+    ]
     out = evaluate(p)
     assert out["reason"] == "NONEMPTY_OR_UNBOUND_UNCERTAINTY_OUTSIDE_CELL"
 
