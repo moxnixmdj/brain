@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_LEDGER_V12",
+  "date": "2026-10-08",
+  "status": "PRESTART_RANK12__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor_blob": "1db8e637ad3dfec5d4ac432c78a86ec1371eb006",
+  "intent_blob": "fb808faaa65cab15434349522052de84d27f4376",
+  "authority_blob": "732b00c707a1e5b1ef6cf39ed85c5bd1abb557a9",
+  "authority_verification_blob": "14adffc894a3ca953a8596e5cbe5c6d122efeae6",
+  "public_epoch_blob": "5426f9db570cfa83d5f96859d2087d11cd6b813a",
+  "counts": {
+    "consumed": 11,
+    "successes": 0,
+    "failures": 11,
+    "needed_successes": 124,
+    "failures_until_fail_lock": 76,
+    "remaining_slots": 199,
+    "required_rate": 0.6231155778894473
+  },
+  "next": {
+    "rank": 12,
+    "slot": "terminal-bench-science/clinical-metadata-recovery::trial-0",
+    "digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8"
+  },
+  "state": {
+    "authority_active": true,
+    "intent_active": true,
+    "claim_active": false,
+    "activation_armed": false,
+    "task_started": false,
+    "result_present": false
+  },
+  "route": {
+    "agent_blob": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "planner_blob": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "closure_blob": "cf9cc9fb8830eda991c71381a523b8f67caedaa7"
+  },
+  "benchmark_task_exposure_delta": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
