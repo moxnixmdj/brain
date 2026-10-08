@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DOCX_DIRECT_ADEQUACY_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS__BOUNDED_TRANSACTIONAL_DOCX_ADEQUACY_FAMILY",
+  "branch": "r2-docx-direct-adequacy-v1-20261008",
+  "base_main_commit": "7f049d4bf75576b9f4514aab8b4ee56f815a309d",
+  "exact_blobs": {
+    "docx_runtime": "631fcf2aa82d090d1f3ade6199829f060b000937",
+    "direct_runtime": "456ce67524ba491a5cb79a5a7f4e41d76f5dc0f5",
+    "docx_tests": "f7590a66458d1cc96982a1ea3b6a746c7aa62abb",
+    "direct_tests": "74ba587a7a866c7c40055821217ed7a39ed70f98",
+    "workflow": "b5140dd03b7253b7f335592ae2cd5e8c39a0dfb1"
+  },
+  "isolated_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "standalone_docx_checks": {
+      "passed": 5,
+      "total": 5
+    },
+    "modified_surface_checks": {
+      "passed": 20,
+      "total": 20
+    },
+    "unchanged_codec_neighbor_isolated_with_test_stub": true,
+    "codec_stub_scope": "TEST_IMPORT_ISOLATION_ONLY__NO_BRANCH_RUNTIME_BYTES_REPLACED",
+    "syntax_compile_passed": true
+  },
+  "current_compiler_probe": {
+    "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+    "exact_chain": [
+      "docx.document.create.python_docx",
+      "docx.document.verify.intent_ooxml",
+      "finish"
+    ],
+    "clause_coverage_verified": true,
+    "model_independent": true
+  },
+  "proved": [
+    "EXACT_TWO_CLAUSE_LITERAL_DOCX_GRAMMAR_ONLY",
+    "CURRENT_DETERMINISTIC_COMPILER_CHAIN_REQUIRED",
+    "GOAL_SCOPED_POLICY_ID_BOUND_TO_RAW_GOAL_SHA256",
+    "PRODUCER_REGISTRY_INDEPENDENT_VERIFICATION_REQUIRED",
+    "RAW_INTENT_SIDECAR_CHAIN_MUST_BE_INDEPENDENTLY_REPARSED",
+    "SIDECAR_SOURCE_GOAL_AND_OUTPUT_PATH_MUST_BIND_EXACTLY_TO_RAW_CREATION_CLAUSE",
+    "PRODUCER_INDEPENDENT_STDLIB_OOXML_VERIFICATION_MUST_PROVE_TITLE_PARAGRAPH_AND_TABLE_SEMANTICS",
+    "MODEL_INDEPENDENT_EXACT_CONTROLLER_TRACE_REQUIRED",
+    "DOCX_AND_INTENT_SIDECAR_FORM_ONE_ROLLBACK_TRANSACTION",
+    "ALL_LOSSLESS_RAW_OBLIGATIONS_ACCEPTED_ONLY_AFTER_FULL_PROOF",
+    "MATCHED_ROUTE_FAILURE_CANNOT_FALL_THROUGH_TO_ALTERNATE_EXECUTION"
+  ],
+  "github_actions": {
+    "run_id": 37797985228,
+    "job_id": 113382344453,
+    "conclusion": "failure",
+    "observed_steps": null,
+    "logs_available": false,
+    "classification": "CARRIER_FAILURE_BEFORE_TEST_EXECUTION__NOT_CODE_FAILURE"
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_DOCX_LANGUAGE_ADEQUACY",
+    "NO_EXTERNAL_OR_IRREVERSIBLE_EFFECT_AUTHORITY",
+    "NO_FULL_REPOSITORY_SUITE_REPLAY",
+    "NO_GLOBAL_OPEN_WORLD_R2_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
