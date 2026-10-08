@@ -25,6 +25,9 @@ from canonical.runtime.monotone_semantic_constraint_kernel_v1 import (
     _valuations,
     compile_state,
 )
+from canonical.runtime.p3_policy_adequacy_registry_v1 import (
+    augment_problem as augment_with_registered_adequacy,
+)
 
 SCHEMA = "PROJECT_BRAIN_P3_ROBUST_POLICY_ADEQUACY_CEGAR_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -203,7 +206,7 @@ def _policy_sets(
     ]
 
 
-def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
+def _solve_augmented(problem: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(problem, Mapping):
         return _fail("PROBLEM_MAPPING_REQUIRED")
 
@@ -446,6 +449,30 @@ def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
         "terminal_authority": False,
         "terminal_credit_delta": 0,
     }
+
+
+def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
+    registry = augment_with_registered_adequacy(problem, repo_root=ROOT)
+    if registry.get("pass") is not True:
+        return _fail(
+            "POLICY_ADEQUACY_REGISTRY_FAIL_CLOSED",
+            policy_adequacy_registry=registry,
+        )
+    result = _solve_augmented(registry["problem"])
+    out = dict(result)
+    out["policy_adequacy_registry"] = {
+        "status": registry.get("status"),
+        "registered_policy_count": registry.get("registered_policy_count"),
+        "basis_eligible_policy_count": registry.get("basis_eligible_policy_count"),
+        "injected_policy_ids": list(registry.get("injected_policy_ids") or []),
+        "reused_policy_ids": list(registry.get("reused_policy_ids") or []),
+        "skipped_registered_policies": list(
+            registry.get("skipped_registered_policies") or []
+        ),
+        "membership_self_certified": False,
+        "registry_authority": False,
+    }
+    return out
 
 
 def run(args: Mapping[str, Any] | None = None, root: Any = None) -> dict[str, Any]:
