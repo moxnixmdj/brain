@@ -26,7 +26,10 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import universal_verified_adaptive_solver_v1 as v1
-from canonical.runtime.effect_broker_receipt_resolver_v2 import git_blob_id
+from canonical.runtime.effect_broker_receipt_resolver_v2 import (
+    git_blob_id,
+    resolve_receipt_bytes,
+)
 from canonical.runtime.executable_skill_program_v7 import (
     candidate_digest,
     induce_candidate,
@@ -55,6 +58,8 @@ from canonical.runtime.universal_solver_value_state_v1 import (
 SCHEMA = "PROJECT_BRAIN_R3_INDEPENDENT_LEARNING_VERIFIER_V1"
 INDEPENDENT_VERIFIER_ID = "R3_INDEPENDENT_EVIDENCE_RECOMPUTATION_V1"
 DEFAULT_RECEIPT_DIR = "canonical/runtime/r3_learning_verification_receipts"
+STRUCTURAL_MATCH_SCOPE_PREDICATE = "STRUCTURAL_MATCH_V1"
+NON_EFFECTFUL_VERIFICATION_BASIS = "SEPARATE_R3_EVIDENCE_RECOMPUTATION_WORKER"
 
 
 class R3IndependentVerificationError(ValueError):
@@ -335,8 +340,9 @@ def verify_episode_request(
             "trace_reverified": True,
             "state_lineage_reverified": True,
             "effect_outcomes_reverified": False,
+            "non_effectful_trace": True,
             "independent_verifier_id": INDEPENDENT_VERIFIER_ID,
-            "verification_basis": "SEPARATE_R3_EVIDENCE_RECOMPUTATION_WORKER",
+            "verification_basis": NON_EFFECTFUL_VERIFICATION_BASIS,
         }
         return _emit_pair(
             stem="episode",
@@ -372,6 +378,47 @@ def _candidate_core(candidate: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _assert_structurally_closed_candidate(candidate: Mapping[str, Any]) -> None:
+    steps = normalize_steps(candidate.get("steps"))
+    available = set(str(x) for x in candidate.get("preconditions", []))
+    seen: set[str] = set()
+    for step in steps:
+        op = str(step.get("op") or "").strip()
+        if not op or op in seen:
+            raise R3IndependentVerificationError("STRUCTURAL_MATCH_OPERATION_INVALID_OR_REPEATED")
+        required = set(str(x) for x in step.get("inputs", []))
+        provided = set(str(x) for x in step.get("outputs", []))
+        if not required.issubset(available):
+            raise R3IndependentVerificationError("STRUCTURAL_MATCH_INPUT_NOT_DERIVABLE:" + op)
+        if not provided:
+            raise R3IndependentVerificationError("STRUCTURAL_MATCH_OUTPUT_REQUIRED:" + op)
+        available.update(provided)
+        seen.add(op)
+    targets = set(str(x) for x in candidate.get("postconditions", []))
+    if not targets or not targets.issubset(available):
+        raise R3IndependentVerificationError("STRUCTURAL_MATCH_POSTCONDITION_NOT_DERIVABLE")
+
+
+def _assert_non_effectful_source_proof(
+    record: Mapping[str, Any],
+    *,
+    repo_root: str | Path,
+) -> None:
+    binding = record.get("verification_binding")
+    if not isinstance(binding, Mapping):
+        raise R3IndependentVerificationError("GENERALIZATION_SOURCE_BINDING_MISSING")
+    resolved = resolve_receipt_bytes(binding.get("verification"), repo_root=repo_root)
+    document = resolved.get("document")
+    if not isinstance(document, Mapping):
+        raise R3IndependentVerificationError("GENERALIZATION_SOURCE_VERIFICATION_INVALID")
+    if document.get("independent_verifier_id") != INDEPENDENT_VERIFIER_ID:
+        raise R3IndependentVerificationError("GENERALIZATION_SOURCE_VERIFIER_NOT_ADMITTED")
+    if document.get("verification_basis") != NON_EFFECTFUL_VERIFICATION_BASIS:
+        raise R3IndependentVerificationError("GENERALIZATION_SOURCE_BASIS_NOT_ADMITTED")
+    if document.get("non_effectful_trace") is not True:
+        raise R3IndependentVerificationError("GENERALIZATION_SOURCE_NOT_PROVED_NON_EFFECTFUL")
+
+
 def verify_skill_request(
     request: Mapping[str, Any],
     *,
@@ -381,8 +428,15 @@ def verify_skill_request(
 ) -> Mapping[str, Any] | None:
     """Verify only exact observed-scope candidates from authenticated episodes."""
     try:
-        if not isinstance(request, Mapping) or request.get("kind") != "SKILL_VERIFICATION":
+        if not isinstance(request, Mapping):
             return None
+        kind = request.get("kind")
+        if kind not in {
+            "SKILL_VERIFICATION",
+            "SKILL_SCOPE_GENERALIZATION_VERIFICATION",
+        }:
+            return None
+        generalization = kind == "SKILL_SCOPE_GENERALIZATION_VERIFICATION"
         candidate = request.get("candidate")
         if not isinstance(candidate, Mapping) or candidate.get("candidate_only") is not True:
             raise R3IndependentVerificationError("SKILL_CANDIDATE_INVALID")
@@ -428,25 +482,58 @@ def verify_skill_request(
         if candidate.get("candidate_sha256") != expected_digest:
             raise R3IndependentVerificationError("SKILL_CANDIDATE_DIGEST_MISMATCH")
 
+        relation = "EXACT"
+        scope_predicate = None
+        verification_basis = "EXACT_REINDUCTION_FROM_REAUTHENTICATED_SOURCE_EPISODES"
+        if generalization:
+            requested_relation = str(request.get("requested_scope_relation") or "")
+            requested_predicate = str(request.get("requested_scope_predicate") or "")
+            supported = {
+                str(x)
+                for x in request.get("supported_scope_predicates", [])
+                if isinstance(x, str)
+            }
+            if requested_relation != "PROVEN_SUPERSET":
+                raise R3IndependentVerificationError("GENERALIZATION_RELATION_NOT_ADMITTED")
+            if (
+                requested_predicate != STRUCTURAL_MATCH_SCOPE_PREDICATE
+                or requested_predicate not in supported
+            ):
+                raise R3IndependentVerificationError("GENERALIZATION_PREDICATE_NOT_ADMITTED")
+            for eid in source_ids:
+                _assert_non_effectful_source_proof(by_id[eid], repo_root=repo_root)
+            _assert_structurally_closed_candidate(candidate)
+            relation = "PROVEN_SUPERSET"
+            scope_predicate = STRUCTURAL_MATCH_SCOPE_PREDICATE
+            verification_basis = (
+                "EXACT_REINDUCTION_PLUS_NON_EFFECTFUL_SOURCE_PROOF_PLUS_"
+                "STRUCTURAL_MATCH_RUNTIME_GUARD"
+            )
+
         bindings = {
             "candidate_sha256": candidate.get("candidate_sha256"),
             "source_episode_ids": source_ids,
-            "scope_relation": "EXACT",
+            "scope_relation": relation,
         }
         receipt = {
             "schema": SKILL_RECEIPT_SCHEMA,
             **bindings,
-            "scope_predicate": None,
+            "scope_predicate": scope_predicate,
             "pass": True,
             "conclusion": "success",
             "exact_byte_bound": True,
             "behavior_preserving_on_claimed_scope": True,
-            "verification_basis": "EXACT_REINDUCTION_FROM_REAUTHENTICATED_SOURCE_EPISODES",
+            "verification_basis": verification_basis,
+            "scope_claim": (
+                "STRUCTURAL_ROUTE_ONLY__EXECUTION_STILL_REVERIFIED"
+                if generalization
+                else "EXACT_OBSERVED_SOURCE_SCOPE"
+            ),
         }
         verification = {
             "schema": SKILL_VERIFY_SCHEMA,
             **bindings,
-            "scope_predicate": None,
+            "scope_predicate": scope_predicate,
             "pass": True,
             "independent_verified": True,
             "exact_byte_bound": True,
@@ -454,7 +541,9 @@ def verify_skill_request(
             "candidate_reexecuted_or_equivalently_checked": True,
             "source_episode_lineage_reverified": True,
             "independent_verifier_id": INDEPENDENT_VERIFIER_ID,
-            "verification_basis": "SEPARATE_R3_EXACT_SKILL_REINDUCTION_WORKER",
+            "verification_basis": verification_basis,
+            "structural_match_runtime_guard_verified": bool(generalization),
+            "non_effectful_source_proof_required": bool(generalization),
         }
         return _emit_pair(
             stem="skill",
