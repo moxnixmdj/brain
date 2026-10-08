@@ -118,6 +118,46 @@ class LiveIntegratedBrainV1Tests(unittest.TestCase):
         manifest.unlink()
         source.unlink()
 
+    def test_explicit_archive_goal_has_independent_raw_semantic_acceptance(self):
+        temp_dir = ROOT / "canonical/astra_runtime/tmp/live-integrated-brain-v1-acceptance"
+        temp_dir.mkdir(parents=True, exist_ok=True)
+        source = temp_dir / "source.txt"
+        manifest = temp_dir / "manifest.json"
+        output = temp_dir / "bundle.tar.gz"
+        source.write_text("acceptance path", encoding="utf-8")
+        manifest.write_text(json.dumps({
+            "records": [{"verification_paths": [str(source.relative_to(ROOT)).replace("\\", "/")]}]
+        }), encoding="utf-8")
+        if output.exists():
+            output.unlink()
+
+        manifest_rel = str(manifest.relative_to(ROOT)).replace("\\", "/")
+        output_rel = str(output.relative_to(ROOT)).replace("\\", "/")
+        goal = (
+            f"Create a tar.gz archive from the manifest {manifest_rel}, "
+            f"including all its verification_paths files, and save it to {output_rel}."
+        )
+        result = run_raw_goal({
+            "task_id": "LIVE_BRAIN_RAW_GOAL_ACCEPTED_ARCHIVE_001",
+            "goal": goal,
+        })
+        self.assertTrue(result["pass"], result)
+        self.assertTrue(result["semantic_acceptance_complete"], result)
+        self.assertEqual(
+            result["status"], "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        )
+        self.assertEqual(
+            len(result["accepted_raw_obligation_ids"]),
+            result["raw_acceptance_obligation_count"],
+        )
+        self.assertTrue(result["raw_goal_acceptance"]["verified_output_sha256"])
+        self.assertFalse(result["raw_goal_acceptance"]["terminal_authority"])
+        self.assertTrue(output.is_file())
+
+        output.unlink()
+        manifest.unlink()
+        source.unlink()
+
     def test_unknown_plain_english_goal_fails_as_compilation_gap(self):
         result = run_raw_goal({
             "task_id": "LIVE_BRAIN_RAW_GOAL_UNKNOWN_001",
