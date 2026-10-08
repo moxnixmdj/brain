@@ -123,6 +123,91 @@ def _make_retry_capsule(context: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Retain only bounded execution-proof metadata needed for later read-only verification."""
+    if not isinstance(out, Mapping) or out.get("pass") is not True:
+        return None
+    checkpoint = out.get("controller_checkpoint")
+    selected_plan = out.get("selected_plan")
+    if not isinstance(checkpoint, Mapping):
+        return None
+    if not isinstance(selected_plan, Sequence) or isinstance(selected_plan, (str, bytes)):
+        return None
+    checkpoint_path = _s(checkpoint.get("path"))
+    plan_sha256 = _s(checkpoint.get("plan_sha256"))
+    if not checkpoint_path or len(plan_sha256) != 64:
+        return None
+
+    execution_summary: list[dict[str, Any]] = []
+    raw_execution = out.get("execution")
+    if isinstance(raw_execution, Sequence) and not isinstance(raw_execution, (str, bytes)):
+        for raw in raw_execution:
+            if not isinstance(raw, Mapping):
+                return None
+            execution_summary.append({
+                "capability_id": _s(raw.get("capability_id")) or None,
+                "pass": raw.get("pass") is True,
+                "status": _s(raw.get("status")) or None,
+                "composition_capsule_head_hash": (
+                    _s(raw.get("composition_capsule_head_hash")) or None
+                ),
+            })
+
+    material = {
+        "source_schema": _s(out.get("schema")) or None,
+        "source_status": _s(out.get("status")) or None,
+        "task_id": _s(out.get("task_id")) or None,
+        "selected_plan": [_s(x) for x in selected_plan if _s(x)],
+        "verified_target_effects": _items(out.get("verified_target_effects")),
+        "controller_checkpoint": {
+            "path": checkpoint_path,
+            "plan_sha256": plan_sha256,
+        },
+        "execution": execution_summary,
+        "cognition_dependency_class": _s(out.get("cognition_dependency_class")) or None,
+        "model_dependency_count": out.get("model_dependency_count"),
+        "semantic_acceptance_complete": out.get("semantic_acceptance_complete") is True,
+    }
+    _validate_retry_value(material, path="success_proof")
+    raw = _canon(material).encode("utf-8")
+    if len(raw) > 128_000:
+        raise SelfImprovementError("SUCCESS_PROOF_CAPSULE_TOO_LARGE")
+    return {
+        "schema": "PROJECT_BRAIN_SUCCESS_PROOF_CAPSULE_V1",
+        "sha256": _sha(material),
+        "material": material,
+        "secret_scan": "PASS",
+    }
+
+
+def get_success_proof_context(
+    observation_id: str,
+    *,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+) -> dict[str, Any]:
+    oid = _s(observation_id)
+    state = load_state(state_path)
+    observation = state.get("observations", {}).get(oid)
+    if not isinstance(observation, Mapping):
+        raise SelfImprovementError("SUCCESS_OBSERVATION_UNKNOWN:" + oid)
+    capsule = observation.get("proof_capsule")
+    if not isinstance(capsule, Mapping):
+        raise SelfImprovementError("SUCCESS_OBSERVATION_PROOF_UNAVAILABLE:" + oid)
+    material = capsule.get("material")
+    expected = _s(capsule.get("sha256"))
+    if not isinstance(material, Mapping) or not expected:
+        raise SelfImprovementError("SUCCESS_PROOF_CAPSULE_INVALID:" + oid)
+    _validate_retry_value(material, path="success_proof")
+    actual = _sha(material)
+    if actual != expected:
+        raise SelfImprovementError("SUCCESS_PROOF_CAPSULE_DIGEST_MISMATCH:" + oid)
+    return {
+        "observation_id": oid,
+        "proof_capsule_sha256": expected,
+        "material": deepcopy(dict(material)),
+    }
+
+
 def _empty_state() -> dict[str, Any]:
     return {
         "schema": STATE_SCHEMA,
@@ -711,12 +796,18 @@ def record_success_observation(
         str(replay_capsule.get("sha256") or "")
         if isinstance(replay_capsule, Mapping) else ""
     )
+    proof_capsule = _make_success_proof_capsule(out)
+    proof_sha = (
+        str(proof_capsule.get("sha256") or "")
+        if isinstance(proof_capsule, Mapping) else ""
+    )
     core = {
         "surface": name,
         "schema": _s(out.get("schema")) or None,
         "status": _s(out.get("status")) or None,
         "output_sha256": _sha(out),
         "replay_capsule_sha256": replay_sha or None,
+        "proof_capsule_sha256": proof_sha or None,
     }
     oid = "observation:" + _sha(core)
     state = load_state(state_path)
@@ -726,6 +817,7 @@ def record_success_observation(
         "observation_id": oid,
         "count": int(previous.get("count", 0)) + 1 if isinstance(previous, Mapping) else 1,
         "replay_capsule": deepcopy(replay_capsule),
+        "proof_capsule": deepcopy(proof_capsule),
     }
     work_id = _enqueue_improvement(
         state,
@@ -738,6 +830,8 @@ def record_success_observation(
             "output_sha256": core["output_sha256"],
             "replay_capsule_sha256": core["replay_capsule_sha256"],
             "replayable": replay_capsule is not None,
+            "proof_capsule_sha256": core["proof_capsule_sha256"],
+            "proof_available": proof_capsule is not None,
             "required_result": "VERIFIED_EPISODE_OR_PROVED_NONLEARNABLE_SUCCESS",
         },
     )
@@ -750,6 +844,8 @@ def record_success_observation(
         "observation_id": oid,
         "replay_capsule_sha256": core["replay_capsule_sha256"],
         "replayable": replay_capsule is not None,
+        "proof_capsule_sha256": core["proof_capsule_sha256"],
+        "proof_available": proof_capsule is not None,
         "improvement_work_id": work_id,
         "next_improvement_action": _next_improvement_from_state(state),
         "permanent_reuse_authorized": False,
