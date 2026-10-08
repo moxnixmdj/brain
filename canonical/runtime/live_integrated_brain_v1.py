@@ -1,0 +1,213 @@
+"""Live integrated Brain V1.
+
+Runs a compiled real task through the existing verified bound-capability registry,
+minimum-cost capability planner, promoted executor, and independent execution
+trace verifier. This is a construction runtime, not a benchmark scorer.
+
+V1 intentionally accepts an already-compiled task contract. Raw natural-language
+task compilation remains outside this file and is surfaced as a precise failure
+instead of guessed.
+"""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from time import perf_counter_ns
+from typing import Any, Mapping
+
+from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
+from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute
+
+SCHEMA = "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1"
+ROOT = Path(__file__).resolve().parents[2]
+REGISTRY = ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+
+
+class LiveBrainError(ValueError):
+    pass
+
+
+def _tokens(value: Any, label: str, *, allow_empty: bool = True) -> list[str]:
+    if not isinstance(value, list):
+        raise LiveBrainError(label + "_MUST_BE_LIST")
+    out = []
+    for item in value:
+        if not isinstance(item, str) or not item.strip():
+            raise LiveBrainError(label + "_ITEM_INVALID")
+        token = item.strip()
+        if token in out:
+            raise LiveBrainError(label + "_DUPLICATE:" + token)
+        out.append(token)
+    if not allow_empty and not out:
+        raise LiveBrainError(label + "_EMPTY")
+    return out
+
+
+def load_verified_registry() -> dict[str, Mapping[str, Any]]:
+    doc = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    if doc.get("schema") != "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
+        raise LiveBrainError("BOUND_CAPABILITY_REGISTRY_SCHEMA_INVALID")
+    raw = doc.get("capabilities")
+    if not isinstance(raw, Mapping):
+        raise LiveBrainError("BOUND_CAPABILITY_REGISTRY_INVALID")
+    out: dict[str, Mapping[str, Any]] = {}
+    for cid, entry in raw.items():
+        if not isinstance(cid, str) or not isinstance(entry, Mapping):
+            continue
+        if entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+            continue
+        if float(entry.get("incremental_spend_usd", 0)) != 0:
+            continue
+        out[cid] = entry
+    if not out:
+        raise LiveBrainError("NO_VERIFIED_ZERO_SPEND_CAPABILITIES")
+    return out
+
+
+def compile_capability_graph(
+    *,
+    initial_facts: list[str],
+    target_effects: list[str],
+    registry: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    capabilities = []
+    for cid, entry in registry.items():
+        requires = list(entry.get("requires") or [])
+        provides = list(entry.get("provides") or [])
+        if not provides:
+            continue
+        capabilities.append(
+            {
+                "id": cid,
+                "requires": requires,
+                "provides": provides,
+                "cost": float(entry.get("cost", 1)),
+                "action": {"type": "verified_bound_capability"},
+                "result_fields": list(entry.get("result_fields") or []),
+            }
+        )
+    return {
+        "initial_facts": list(initial_facts),
+        "target_effects": list(target_effects),
+        "capabilities": capabilities,
+        "max_expansions": 100000,
+    }
+
+
+def run(request: Mapping[str, Any]) -> dict[str, Any]:
+    started = perf_counter_ns()
+    try:
+        if not isinstance(request, Mapping):
+            raise LiveBrainError("REQUEST_NOT_OBJECT")
+        task_id = str(request.get("task_id") or "").strip()
+        if not task_id:
+            raise LiveBrainError("TASK_ID_REQUIRED")
+        initial = _tokens(request.get("initial_facts", []), "INITIAL_FACTS")
+        targets = _tokens(request.get("target_effects", []), "TARGET_EFFECTS", allow_empty=False)
+        capability_inputs = request.get("capability_inputs", {})
+        if not isinstance(capability_inputs, Mapping):
+            raise LiveBrainError("CAPABILITY_INPUTS_NOT_OBJECT")
+
+        registry = load_verified_registry()
+        problem = compile_capability_graph(
+            initial_facts=initial,
+            target_effects=targets,
+            registry=registry,
+        )
+        try:
+            planned = plan_capabilities(problem)
+        except PlanningFailure as exc:
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL__CAPABILITY_OR_TASK_CONTRACT_GAP",
+                "pass": False,
+                "task_id": task_id,
+                "failure_class": "MISSING_CAPABILITY_OR_COMPILED_TASK_CONTRACT",
+                "planner_code": exc.code,
+                "planner_detail": exc.detail,
+                "verified_registry_capability_count": len(registry),
+                "elapsed_ns": perf_counter_ns() - started,
+                "incremental_spend_usd": 0,
+            }
+
+        current = set(initial)
+        execution = []
+        for cid in planned["plan"]:
+            entry = registry[cid]
+            inputs = capability_inputs.get(cid)
+            if not isinstance(inputs, Mapping):
+                return {
+                    "schema": SCHEMA,
+                    "status": "FAIL__MISSING_CAPABILITY_INPUTS",
+                    "pass": False,
+                    "task_id": task_id,
+                    "failure_class": "TASK_CONTRACT_COMPILATION_GAP",
+                    "capability_id": cid,
+                    "selected_plan": list(planned["plan"]),
+                    "verified_registry_capability_count": len(registry),
+                    "elapsed_ns": perf_counter_ns() - started,
+                    "incremental_spend_usd": 0,
+                }
+            out = execute(
+                cid,
+                inputs=dict(inputs),
+                instance_id=cid,
+                requires=list(entry.get("requires") or []),
+                provides=list(entry.get("provides") or []),
+                result_fields=list(entry.get("result_fields") or []),
+            )
+            execution.append(
+                {
+                    "capability_id": cid,
+                    "pass": out.get("pass") is True,
+                    "status": out.get("status"),
+                    "composition_capsule_head_hash": out.get("composition_capsule_head_hash"),
+                    "result": out.get("result"),
+                    "errors": out.get("errors"),
+                }
+            )
+            if out.get("pass") is not True:
+                return {
+                    "schema": SCHEMA,
+                    "status": "FAIL__VERIFIED_CAPABILITY_EXECUTION",
+                    "pass": False,
+                    "task_id": task_id,
+                    "failure_class": "EXECUTION_OR_BOUND_CONTRACT_FAILURE",
+                    "capability_id": cid,
+                    "selected_plan": list(planned["plan"]),
+                    "execution": execution,
+                    "elapsed_ns": perf_counter_ns() - started,
+                    "incremental_spend_usd": 0,
+                }
+            current.update(entry.get("provides") or [])
+
+        missing = sorted(set(targets) - current)
+        if missing:
+            raise LiveBrainError("POST_EXECUTION_TARGETS_MISSING:" + ",".join(missing))
+
+        return {
+            "schema": SCHEMA,
+            "status": "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED",
+            "pass": True,
+            "task_id": task_id,
+            "selected_plan": list(planned["plan"]),
+            "planner_total_cost": planned["total_cost"],
+            "planner_expanded_states": planned["expanded_states"],
+            "verified_registry_capability_count": len(registry),
+            "execution": execution,
+            "verified_target_effects": sorted(targets),
+            "elapsed_ns": perf_counter_ns() - started,
+            "incremental_spend_usd": 0,
+            "benchmark_specific": False,
+            "terminal_credit_delta": 0,
+        }
+    except Exception as exc:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "failure_class": "INTEGRATION_RUNTIME_ERROR",
+            "reason": type(exc).__name__ + ":" + str(exc),
+            "elapsed_ns": perf_counter_ns() - started,
+            "incremental_spend_usd": 0,
+        }
