@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_P3_SUPPORT_V6_PREDICATE_ARGUMENT_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_9_OF_9_ON_TWO_SPRITES__P3_V3_UNKNOWN_TO_V4_PASS__15_OF_15_EXACT_BLOB_PIN_AUDIT__ZERO_TERMINAL_CREDIT",
+  "branch": "research/p3-support-v8-predicate-argument-20261008",
+  "exact_subject_blobs": {
+    "canonical/runtime/bounded_predicate_argument_support_v1.py": "9c7a2b97cf50d1e4fc4b4f36a6a819afdcf9f91d",
+    "canonical/runtime/selected_support_truth_certificate_v6.py": "26226f44bb74ee6820726b69bdd4a1a84a1a7a18",
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v4.py": "e959af638587ae9f0a4fdcd79c5ff5d4ea6c24d5",
+    "canonical/tests/test_selected_support_truth_certificate_v6.py": "510d50391d7fa29651dac7a469768d354cc77cbd"
+  },
+  "inherited_exact_dependencies": {
+    "canonical/runtime/bounded_predicate_argument_semantics.py": "8303231779d6fe8c7fb740e3bbaa492914d4eba9",
+    "canonical/runtime/bounded_claim_support.py": "197246a50ace8c16b945def9edb1357fb317c393",
+    "canonical/runtime/bounded_attestation_support_v1.py": "68b47a2526b4fd9bd055c2096b24baacc67968b4",
+    "canonical/runtime/bounded_source_declared_equivalence_support_v1.py": "d532e11aff1db95b320d29a49eb19eb9567ed2d3",
+    "canonical/runtime/bounded_numeric_relation_support_v1.py": "1704da840f821711ce62d6640a6d90777af3a603",
+    "canonical/runtime/bounded_set_membership_support_v1.py": "b12c054a04cb902afb5f45b02df021418e576d22",
+    "canonical/runtime/bounded_explicit_categorical_support_v1.py": "663545f4ad4275191c352f4431414996509941d5",
+    "canonical/runtime/explicit_definition_reference_graph.py": "950f073b35b9d7f42c76c518711462f00e89b262",
+    "canonical/runtime/selected_support_truth_certificate_v5.py": "485df3635f11f8dd1fa3ff50d0f51c2f0b6acd24",
+    "canonical/runtime/synthesis_grounded_expression_ir_v1.py": "0709b7d43a069eaa9eb3240df28789a9107a36db",
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py": "dd0acc257ae5f68a41dfc13234d17cc527363d02"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "portfolio_tests": "PASS_9_OF_9",
+      "p3_delta": "V3_REQUIRED_CLAIM_SUPPORT_UNKNOWN__V4_PASS",
+      "exact_blob_pin_audit": "PASS_15_OF_15"
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "portfolio_tests": "PASS_9_OF_9",
+      "p3_delta": "V3_REQUIRED_CLAIM_SUPPORT_UNKNOWN__V4_PASS",
+      "exact_blob_pin_audit": "PASS_15_OF_15"
+    }
+  ],
+  "newly_verified_effect": [
+    "SIMPLE_EXPLICIT_MODAL_ACTIVE_AND_PASSIVE_CLAUSES_CAN_BE_NORMALIZED_TO_ONE_BOUNDED_SUBJECT_PREDICATE_OBJECT_RELATION_WHEN_REGULAR_ACTIVE_PASSIVE_INFLECTION_IS_EXACTLY_CHECKED",
+    "MATCHED_POLARITY_PROVES_SUPPORT_AND_OPPOSITE_POLARITY_PROVES_CONFLICT_INSIDE_THE_BOUNDED_GRAMMAR",
+    "COORDINATION_PRONOUNS_IRREGULAR_MORPHOLOGY_AND_UNCHECKED_LANGUAGE_REMAIN_UNKNOWN_OR_UNRELATED",
+    "EXISTING_V5_NUMERIC_SET_MEMBERSHIP_CATEGORICAL_AND_EXACT_ATTESTATION_REGRESSIONS_STILL_PASS",
+    "THE_P3_REQUIRED_CLAIM_REALIZATION_CELL_GAINS_A_REAL_CASE_PREVIOUSLY_UNKNOWN_IN_V3_AND_SUPPORTED_IN_V4_WITH_VERBATIM_RENDERING_AND_PROVENANCE"
+  ],
+  "authority_boundary": {
+    "source_authorization_verified": false,
+    "policy_adequacy_authority": false,
+    "db_admission_authority": false,
+    "u_subtraction_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_PARAPHRASE_OR_NLI_CLOSURE",
+    "NO_IRREGULAR_MORPHOLOGY_CLAIM",
+    "NO_COREFERENCE_OR_COORDINATION_CLOSURE",
+    "NO_CLAIM_P3_REAL_CONTEXT_V8_FRONT_DOOR_IS_YET_INDEPENDENTLY_VERIFIED",
+    "NO_U_EMPTY_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
