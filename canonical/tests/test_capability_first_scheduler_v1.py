@@ -144,6 +144,9 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         self.assertTrue(out["admitted"])
         self.assertEqual([x["capability_id"] for x in out["frontier"]], ["new"])
         self.assertEqual(out["removed_dominated"], ["old"])
+        self.assertEqual(out["retired_from_active_frontier"], ["old"])
+        self.assertFalse(out["dominated_means_deleted"])
+        self.assertFalse(out["physical_deletion_authority"])
 
     def test_benchmark_result_cannot_be_promoted_as_capability(self):
         out = s.update_pareto_frontier([], {
@@ -170,6 +173,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
                 "EXTRACT_MECHANISM",
                 "GENERALIZE",
                 "COMPRESS",
+                "PRESERVE_OPTIONS",
                 "REUSE_CHEAPER",
             ),
         )
@@ -188,6 +192,13 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertFalse(
             activation["r2_judgment_model_policy"]["external_closed_model_dependency"]
+        )
+        self.assertEqual(
+            activation["option_preservation"]["invariant"],
+            "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
+        )
+        self.assertFalse(
+            activation["option_preservation"]["physical_deletion_authority_from_scheduler"]
         )
         self.assertEqual(
             pointer["capability_first_scheduler_20261008_v1"]["status"],
