@@ -44,5 +44,33 @@ class T(unittest.TestCase):
         self.assertTrue(out["pass"], out)
         self.assertTrue(out["decoded_payload_exact"])
 
+    @patch.object(qr, "execute_bound")
+    def test_wrong_decoded_payload_is_rejected(self, decode):
+        pf = qr.preflight(GOAL)
+        contract = compile_contract(
+            GOAL, source_id="user", routing_target_effects=[qr.ROUTING_EFFECT]
+        )
+        decode.return_value = {
+            "pass": True,
+            "result_sha256": "b" * 64,
+            "result": {"stdout": "not-the-requested-payload\\n"},
+        }
+        raw = {
+            "pass": True,
+            "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+            "compiled_capability_id": qr.QR_CAPABILITY_ID,
+            "raw_goal_sha256": pf["goal_sha256"],
+            "raw_task_contract_sha256": contract["task_contract_sha256"],
+            "raw_source_coverage_complete": True,
+            "raw_acceptance_obligation_count": len(
+                contract["acceptance_contract"]["obligations"]
+            ),
+            "model_dependency_count": 0,
+            "cognition_dependency_class": "MODEL_INDEPENDENT",
+        }
+        out = qr.verify(goal=GOAL, raw_result=raw)
+        self.assertFalse(out["pass"])
+        self.assertFalse(out["decoded_payload_exact"])
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
