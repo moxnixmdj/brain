@@ -172,5 +172,90 @@ class R2DirectEndToEndAdequacyV1Tests(unittest.TestCase):
         self.assertEqual(out["selected_policy_id"],direct.LITERAL_JSON_ROUTE_ID)
         self.assertFalse(out["retry_by_other_route_authorized"])
 
+
+    @patch.object(direct.json_markdown_acceptance,"preflight")
+    def test_json_markdown_preflight_routes_without_execution(self,pf):
+        goal=(
+            "Read canonical/tmp/SOURCE.json. Create canonical/tmp/REPORT.md "
+            "containing a table with every READY_STATUS."
+        )
+        pf.return_value={
+            "matched":True,
+            "goal_sha256":"g"*64,
+            "input_path":"canonical/tmp/SOURCE.json",
+            "output_path":"canonical/tmp/REPORT.md",
+            "source_sha256":"s"*64,
+            "expected_markdown_sha256":"m"*64,
+        }
+        with patch.object(direct.live_bound,"run_raw_goal") as execute:
+            out=direct.preflight({"task_id":"t","goal":goal})
+        self.assertTrue(out["matched"],out)
+        self.assertEqual(out["route_id"],direct.JSON_MARKDOWN_ROUTE_ID)
+        self.assertEqual(out["capability_id"],"json.query.jq")
+        execute.assert_not_called()
+
+    @patch.object(direct.json_markdown_acceptance,"preflight")
+    @patch.object(direct.live_bound,"run_raw_goal")
+    @patch.object(direct.json_markdown_acceptance,"verify")
+    def test_json_markdown_full_acceptance_is_direct_adequacy(self,verify,execute,pf):
+        goal=(
+            "Read canonical/tmp/SOURCE.json. Create canonical/tmp/REPORT.md "
+            "containing a table with every READY_STATUS."
+        )
+        pf.return_value={
+            "matched":True,
+            "goal_sha256":"g"*64,
+            "input_path":"canonical/tmp/SOURCE.json",
+            "output_path":"canonical/tmp/REPORT.md",
+            "source_sha256":"s"*64,
+            "expected_markdown_sha256":"m"*64,
+        }
+        execute.return_value={"pass":True,"raw_goal_sha256":"g"*64}
+        verify.return_value={
+            "pass":True,
+            "semantic_acceptance_complete":True,
+            "actual_goal_satisfaction_verified":True,
+            "artifact_exact":True,
+            "source_stable":True,
+            "accepted_obligation_ids":["RAWREQ:x"],
+            "required_obligation_count":1,
+        }
+        out=direct.run({"task_id":"t","goal":goal})
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(out["selected_policy_id"],direct.JSON_MARKDOWN_ROUTE_ID)
+        self.assertTrue(out["actual_goal_satisfaction_verified"])
+        self.assertFalse(out["retry_by_other_route_authorized"])
+
+    @patch.object(direct.json_markdown_acceptance,"preflight")
+    @patch.object(direct.live_bound,"run_raw_goal")
+    @patch.object(direct.json_markdown_acceptance,"verify")
+    def test_json_markdown_tamper_blocks_and_never_falls_through(self,verify,execute,pf):
+        goal=(
+            "Read canonical/tmp/SOURCE.json. Create canonical/tmp/REPORT.md "
+            "containing a table with every READY_STATUS."
+        )
+        pf.return_value={
+            "matched":True,
+            "goal_sha256":"g"*64,
+            "input_path":"canonical/tmp/SOURCE.json",
+            "output_path":"canonical/tmp/REPORT.md",
+            "source_sha256":"s"*64,
+            "expected_markdown_sha256":"m"*64,
+        }
+        execute.return_value={"pass":True,"raw_goal_sha256":"g"*64}
+        verify.return_value={
+            "pass":False,
+            "semantic_acceptance_complete":False,
+            "actual_goal_satisfaction_verified":False,
+            "artifact_exact":False,
+            "source_stable":True,
+            "accepted_obligation_ids":[],
+            "required_obligation_count":1,
+        }
+        out=direct.run({"task_id":"t","goal":goal})
+        self.assertFalse(out["pass"])
+        self.assertFalse(out["retry_by_other_route_authorized"])
+        self.assertEqual(out["route_id"],direct.JSON_MARKDOWN_ROUTE_ID)
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
