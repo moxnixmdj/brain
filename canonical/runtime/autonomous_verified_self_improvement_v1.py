@@ -493,6 +493,68 @@ def _next_improvement_from_state(state: Mapping[str, Any]) -> dict[str, Any] | N
     return pending[0]
 
 
+def resolve_nonactionable_unreplayable_failure_work(
+    *,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+) -> dict[str, Any]:
+    """Retire legacy repair debt that has no replay capsule and therefore no task to retry.
+
+    The failure diagnosis is preserved. Only queue authority is removed. A future
+    observation of the same failure with a retained retry context may enqueue a
+    fresh actionable repair work item with a content-addressed retry capsule.
+    """
+    state = load_state(state_path)
+    queue = state.get("improvement_queue", {})
+    failures = state.get("failures", {})
+    resolved: list[str] = []
+    if isinstance(queue, Mapping) and isinstance(failures, Mapping):
+        for wid, raw in queue.items():
+            if (
+                not isinstance(raw, dict)
+                or raw.get("status") not in {"PENDING", "PARKED"}
+                or raw.get("kind") != "REPAIR_FAILURE_CLASS"
+            ):
+                continue
+            payload = raw.get("payload")
+            if not isinstance(payload, Mapping):
+                continue
+            if _s(payload.get("retry_capsule_sha256")):
+                continue
+            fid = _s(payload.get("failure_fingerprint"))
+            failure = failures.get(fid)
+            if not isinstance(failure, Mapping):
+                continue
+            retry_capsules = failure.get("retry_capsules")
+            if (
+                _s(failure.get("last_retry_capsule_sha256"))
+                or (isinstance(retry_capsules, Mapping) and bool(retry_capsules))
+            ):
+                continue
+            raw["status"] = "RESOLVED"
+            raw["resolved_by"] = (
+                "NONACTIONABLE_FAILURE_TELEMETRY__RETRY_CONTEXT_ABSENT"
+            )
+            raw["resolution_reason"] = (
+                "NO_REPLAY_CAPSULE__NO_SAFE_OR_EXACT_ORIGINAL_TASK_RETRY_EXISTS"
+            )
+            resolved.append(str(wid))
+    if resolved:
+        _refresh_stats(state)
+        _write_state(state, state_path)
+    return {
+        "schema": SCHEMA,
+        "status": (
+            "NONACTIONABLE_UNREPLAYABLE_FAILURE_WORK_RETIRED"
+            if resolved
+            else "NO_NONACTIONABLE_UNREPLAYABLE_FAILURE_WORK"
+        ),
+        "pass": True,
+        "progress": bool(resolved),
+        "resolved_work_ids": sorted(resolved),
+        "terminal_authority": False,
+    }
+
+
 def next_improvement_action(
     *,
     state_path: str | Path = DEFAULT_STATE_PATH,
@@ -1078,31 +1140,44 @@ def integrate_solver_output(
             ),
             "repair_receipts": repair_receipts,
         }
-        work_id = _enqueue_improvement(
-            state,
-            kind="REPAIR_FAILURE_CLASS",
-            priority=30,
-            identity={
-                "failure_fingerprint": fid,
-                "retry_capsule_sha256": retry_sha,
-            },
-            payload={
-                "failure_fingerprint": fid,
-                "repair_class": diagnosis["repair_class"],
-                "status": diagnosis.get("status"),
-                "reason": diagnosis.get("reason"),
-                "retry_capsule_sha256": retry_sha,
-            },
-        )
+        work_id = None
+        if retry_sha is not None:
+            work_id = _enqueue_improvement(
+                state,
+                kind="REPAIR_FAILURE_CLASS",
+                priority=30,
+                identity={
+                    "failure_fingerprint": fid,
+                    "retry_capsule_sha256": retry_sha,
+                },
+                payload={
+                    "failure_fingerprint": fid,
+                    "repair_class": diagnosis["repair_class"],
+                    "status": diagnosis.get("status"),
+                    "reason": diagnosis.get("reason"),
+                    "retry_capsule_sha256": retry_sha,
+                },
+            )
         _refresh_stats(state)
         _write_state(state, state_path)
+        repair_actionable = retry_sha is not None
         return {
             "schema": SCHEMA,
-            "status": "FAILURE_DIAGNOSED__REPAIR_QUEUED",
+            "status": (
+                "FAILURE_DIAGNOSED__REPAIR_QUEUED"
+                if repair_actionable
+                else "FAILURE_DIAGNOSED__NONACTIONABLE_TELEMETRY__RETRY_CONTEXT_REQUIRED"
+            ),
             "pass": False,
             "diagnosis": diagnosis,
             "retry_capsule_sha256": retry_sha,
-            "retry_capsule_persisted": retry_sha is not None,
+            "retry_capsule_persisted": repair_actionable,
+            "repair_actionable": repair_actionable,
+            "repair_queue_disposition": (
+                "ACTIONABLE_REPAIR_QUEUED"
+                if repair_actionable
+                else "NOT_QUEUED__REPLAY_CONTEXT_ABSENT"
+            ),
             "improvement_work_id": work_id,
             "next_improvement_action": _next_improvement_from_state(state),
             "state_stats": deepcopy(state["stats"]),
