@@ -73,6 +73,25 @@ def verify_core_owner_attestation(
         raise CoreOwnerAttestationError("STATEMENT_TYPE_MISMATCH")
     if statement.get("predicateType") != PREDICATE_TYPE:
         raise CoreOwnerAttestationError("PREDICATE_TYPE_MISMATCH")
+    owner_key_binding = current_target.get("owner_attestation_trust_anchor")
+    if not isinstance(owner_key_binding, Mapping):
+        raise CoreOwnerAttestationError("OWNER_TRUST_ANCHOR_MISSING")
+    if owner_key_binding.get("status") != "VERIFIED_OWNER_KEY_BINDING":
+        raise CoreOwnerAttestationError("OWNER_TRUST_ANCHOR_NOT_VERIFIED")
+
+    signature_verification = verify_owner_signature(
+        statement,
+        signature_bundle,
+        owner_key_binding,
+    )
+    if signature_verification.get("statement_sha256") != _sha256(statement):
+        raise CoreOwnerAttestationError("SIGNED_STATEMENT_DIGEST_MISMATCH")
+    if signature_verification.get("attestor_is_benchmark_owner_or_authorized_operator") is not True:
+        raise CoreOwnerAttestationError("ATTESTOR_AUTHORITY_NOT_VERIFIED")
+    if signature_verification.get("identity_verified") is not True:
+        raise CoreOwnerAttestationError("ATTESTOR_IDENTITY_NOT_VERIFIED")
+    _hex64(signature_verification.get("verification_receipt_sha256"), "SIGNATURE_VERIFICATION_RECEIPT_SHA256")
+
     subject = _subject(statement)
 
     predicate = statement.get("predicate")
@@ -99,25 +118,6 @@ def verify_core_owner_attestation(
         raise CoreOwnerAttestationError("DIRECT_ATTESTATION_MUST_NOT_CLAIM_OFFICIAL_ELO")
     if predicate.get("historical_1822_epoch_rewritten") is not False:
         raise CoreOwnerAttestationError("HISTORICAL_EPOCH_REWRITE_FORBIDDEN")
-
-    owner_key_binding = current_target.get("owner_attestation_trust_anchor")
-    if not isinstance(owner_key_binding, Mapping):
-        raise CoreOwnerAttestationError("OWNER_TRUST_ANCHOR_MISSING")
-    if owner_key_binding.get("status") != "VERIFIED_OWNER_KEY_BINDING":
-        raise CoreOwnerAttestationError("OWNER_TRUST_ANCHOR_NOT_VERIFIED")
-
-    signature_verification = verify_owner_signature(
-        statement,
-        signature_bundle,
-        owner_key_binding,
-    )
-    if signature_verification.get("statement_sha256") != _sha256(statement):
-        raise CoreOwnerAttestationError("SIGNED_STATEMENT_DIGEST_MISMATCH")
-    if signature_verification.get("attestor_is_benchmark_owner_or_authorized_operator") is not True:
-        raise CoreOwnerAttestationError("ATTESTOR_AUTHORITY_NOT_VERIFIED")
-    if signature_verification.get("identity_verified") is not True:
-        raise CoreOwnerAttestationError("ATTESTOR_IDENTITY_NOT_VERIFIED")
-    _hex64(signature_verification.get("verification_receipt_sha256"), "SIGNATURE_VERIFICATION_RECEIPT_SHA256")
 
     audit = predicate.get("audit_commitments")
     audit_commitments_present = False
