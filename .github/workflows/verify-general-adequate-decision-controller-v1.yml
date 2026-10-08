@@ -4,8 +4,10 @@ on:
     branches: [main]
     paths:
       - canonical/runtime/general_adequate_decision_controller_v1.py
+      - canonical/runtime/r2_grounded_candidate_policy_frontier_v1.py
       - canonical/runtime/r2_existing_policy_cover_observation_reuse_v1.py
       - canonical/tests/test_general_adequate_decision_controller_v1.py
+      - canonical/tests/test_r2_grounded_candidate_policy_frontier_v1.py
       - canonical/tests/test_general_adequate_decision_policy_cover_integration_v1.py
       - canonical/tests/test_r2_existing_policy_cover_observation_reuse_v1.py
       - canonical/governance/R2_GENERAL_ADEQUATE_DECISION_CONTROLLER_ACTIVATION_20261008_V1.json
