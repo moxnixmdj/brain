@@ -1,0 +1,166 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "TB4-SLACK-EXPANSION-THEOREM-20261006-SOL",
+  "status": "CANDIDATE__CURRENT_BASE_BOUND__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "cd1a8618211f9f67aa9caf74e47150467c6048ca",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "CODING_TB4_GE_66_4__CURRENT_CARRIER_ZERO_SLACK_FALSE_DICHOTOMY",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::CODING_TB4_GE_66_4__CURRENT_CARRIER_ZERO_SLACK_FALSE_DICHOTOMY",
+  "expected_parent_frontier_change": "Correct the zero-slack route from a false dichotomy to three routes: universal certificate, creditable-task-set expansion, or slotwise execution last. Establish that each additional recovered resource-excluded task creates five threshold slack slots and narrowly wakes carrier resource matching.",
+  "highest_leverage_now": true,
+  "stop_condition": "The generalized slack theorem is content-addressed, the 0-to-4 task expansion arithmetic is explicit, general H100 work remains forbidden, and only a zero-case resource-envelope match to the four named excluded tasks is woken.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "de8fe0b66a214bad3596fd92b10460d0bcf2afca",
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "proof_state_reachability": "FALSIFIES_THE_CURRENT_ZERO_SLACK_FALSE_DICHOTOMY_AND_CREATES_A_MINIMAL_RESOURCE_ONLY_WAKE_TO_INCREASE_THRESHOLD_ATTAINABILITY_WITHOUT_TERMINAL_CASE_EXPOSURE",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 24,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 18,
+      "root3_touching_count": 9,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 32,
+      "terminal": false
+    },
+    "tournament": {
+      "proposal_id": "P_TB4_ZERO_SLACK_ONLY_UNIVERSAL_OR_220_OF_220",
+      "falsifier_id": "F_TB4_RECOVER_ADDITIONAL_RESOURCE_EXCLUDED_TASK",
+      "decisive_question": "Can a richer zero-cost protocol-comparable carrier make one or more of the four remaining resource-excluded tasks creditable, thereby creating positive score slack without first proving additional task successes?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+          "git_blob_sha": "fc5bb61b1b97e6aae46222b9de84e16797510bcc"
+        }
+      ]
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "cd1a8618211f9f67aa9caf74e47150467c6048ca",
+    "real_outcome": "Create a nonzero TB4 error budget before expensive score execution.",
+    "required_capability": "RESOURCE_ENVELOPE_ATTAINABILITY_EXPANSION",
+    "obs_goal": {
+      "real_outcome": "Increase the maximum creditable TB4 success mass with the fewest actions.",
+      "proxy_goals_deleted": [
+        "PROVE_220_OF_220_BEFORE_CHECKING_CARRIER_EXPANSION",
+        "GENERAL_GPU_RESEARCH"
+      ],
+      "surviving_necessity": "Recover at least one additional resource-excluded task or prove no existing zero-cost carrier can."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+        "canonical/governance/TB4_BUILDKITE_ZERO_SPEND_HARD_STOP_BINDING_20261006_V1.json",
+        "sol/tb4-zero-slack-threshold-theorem-20261006"
+      ],
+      "external_existing_routes_checked": [
+        "existing authorized Sprite carrier metadata only"
+      ],
+      "capability_work_deleted": [
+        "UNSCOPED_H100_RESEARCH"
+      ],
+      "surviving_gap": "MATCH_EXISTING_ZERO_COST_CARRIER_ENVELOPES_TO_FOUR_NAMED_RESOURCE_EXCLUDED_TASKS"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_RESOURCE_ATTAINABILITY",
+      "delete_bypass_substitute_options": [
+        "reuse existing carrier receipts",
+        "read-only resource metadata",
+        "zero-case probe only if needed",
+        "do not open task instructions"
+      ],
+      "surviving_causal_blocker": "NO_ADDITIONAL_RESOURCE_EXCLUDED_TASK_IS_YET_BOUND_TO_A_ZERO_COST_PROTOCOL_COMPARABLE_CARRIER"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "REUSE_EXISTING_CARRIER_ENVELOPE",
+        "ZERO_CASE_EXISTING_CARRIER_PROBE",
+        "NEW_CARRIER_DISCOVERY",
+        "TERMINAL_EXECUTION"
+      ],
+      "losing_routes_reason": "Task execution before resource-scope expansion spends cases while the attainable error budget is still zero.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Only CPU/memory/disk/GPU/container facts are required at this stage; benchmark instructions and verifiers are unnecessary."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "TB4_220_OF_220_AS_ONLY_EMPIRICAL_ROUTE"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "verified Buildkite Harbor protocol",
+        "zero-spend hard stop",
+        "H100 quarantine mechanism"
+      ],
+      "fresh_reuse_plan": "A carrier is reusable only for named tasks whose declared resource envelope and protocol semantics it proves."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused frozen resource metadata",
+        "reused Buildkite closure",
+        "reused zero-slack base arithmetic"
+      ],
+      "search_stop_decision": "Stop as soon as one additional task becomes creditable, then recompute whether more carrier expansion still dominates capability repair or execution.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "UNIVERSAL_CERTIFICATE",
+      "CARRIER_SCOPE_EXPANSION",
+      "220_SLOT_EXECUTION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "UNSCOPED_H100_RESEARCH",
+      "IMMEDIATE_220_SLOT_EXECUTION"
+    ],
+    "selected_surviving_route": "CARRIER_SCOPE_EXPANSION_IN_PARALLEL_WITH_UNIVERSAL_CERTIFICATE",
+    "why_selected_route_is_fastest_sufficient": "One resource-only carrier binding can create five units of failure tolerance before any task success is known.",
+    "expected_parent_level_state_change": "Create positive TB4 threshold slack or prove carrier expansion dead.",
+    "stop_condition": "Resource-scope expansion is decided without terminal case exposure.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "An authorized existing running carrier already exists; inspect/reuse before discovering anything new."
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
