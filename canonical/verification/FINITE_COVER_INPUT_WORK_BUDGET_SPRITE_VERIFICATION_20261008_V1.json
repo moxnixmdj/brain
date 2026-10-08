@@ -1,0 +1,14 @@
+{
+  "schema": "FINITE_COVER_INPUT_WORK_BUDGET_REMOTE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_18_OF_18_DIRECT_TESTS__ZERO_TERMINAL_CREDIT",
+  "source_blob": "e38855cf5024b529ba5adda22e08aacbec58418f",
+  "tests_blob": "888f159a3b68c6eba0e970946c4bb7277e0e494d",
+  "resolver_blob": "7f4eeeb19def420d0014631b99c5e2dc3a30592e",
+  "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+  "exact_blobs_verified": 3,
+  "tests_passed": 18,
+  "random_reference_cases": 160,
+  "terminal_credit_delta": 0,
+  "scope_boundary": "DECLARED_FINITE_BOOLEAN_MODEL_ONLY__NO_REAL_OPUS_SCOPE_OR_REAL_WORLD_ADEQUACY_PROOF"
+}
