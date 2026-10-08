@@ -357,7 +357,7 @@ def parse_source_bytes(raw: bytes, *, source_path: str) -> dict[str, Any]:
         parsed = _parse_email(raw)
     elif ext in {".html", ".htm"}:
         parsed = _parse_html(raw)
-    elif ext in {".txt", ".md", ".srt", ".tex"}:
+    elif ext in {".txt", ".md", ".srt", ".tex", ".ics"}:
         parsed = _parse_text(raw, ext.lstrip("."))
     elif ext == ".pdf":
         parsed = _parse_pdf(raw)
