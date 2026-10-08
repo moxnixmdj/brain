@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_P3_OPTIONAL_RELEVANCE_JIT_INPUT_V1",
+  "date": "2026-10-08",
+  "scope": "BEHAVIORAL_CONTRACT_DERIVED_OPTIONAL_RELEVANCE_CELL__NO_GLOBAL_P3_ENUMERATION",
+  "mode": "CONSTRUCTIVE_JIT_DISCRIMINATOR",
+  "cells": [
+    {
+      "id": "P3_OPTIONAL_CLAIM_RELEVANCE_WITHOUT_EXPLICIT_WEIGHTS",
+      "worlds": [
+        {"id": "OPTIONAL_CLAIM_DECISION_RELEVANT", "adequate_actions": ["INCLUDE_OPTIONAL_CLAIM"]},
+        {"id": "OPTIONAL_CLAIM_IRRELEVANT", "adequate_actions": ["OMIT_OPTIONAL_CLAIM"]}
+      ],
+      "jit_discriminator": {
+        "available_before_commitment": true,
+        "world_to_value": {
+          "OPTIONAL_CLAIM_DECISION_RELEVANT": "RELEVANT",
+          "OPTIONAL_CLAIM_IRRELEVANT": "IRRELEVANT"
+        }
+      }
+    }
+  ]
+}
