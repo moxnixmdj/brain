@@ -887,10 +887,10 @@
     "current_r2_decision_intelligence": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "scheduler_cut": {
-        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V7.json",
-        "git_blob_sha": "d5d98468d2d82240a17a52a4f9687f3ada28433d"
+        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V8.json",
+        "git_blob_sha": "07f60fae7a9193b0ba70e5e4ed33c645a47af3da"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__LIVE_CONTROL_LAW_TOTALIZED__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__FIXED_POINT_NATIVE_TOTAL_CONTROL_PLUS_LIVE_TOTALIZER__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     }
@@ -1387,15 +1387,16 @@
     "tb_science_rank12_public_activation_armed": false,
     "tb_science_rank12_authority_consumed": false,
     "gdpval_owner_layer_target_relative_route_state": "EXTERNAL_REQUIRED_SLEEP",
-    "gdpval_owner_layer_wake_authority": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V7.json",
+    "gdpval_owner_layer_wake_authority": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V8.json",
     "opus_5_5_is_global_terminal_objective": false,
     "opus_5_5_is_frontier_checkpoint": true,
-    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V7",
+    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V8",
     "historical_root2_scheduler_fields_currently_authoritative": false,
     "r2_general_control_mechanism_closed_as_adequacy_or_abstain": true,
     "r2_open_world_positive_action_coverage_complete": false,
     "r2_decisive_unobservable_reality_requires_abstention_or_information_acquisition": true,
-    "r2_live_decision_control_law_totalized": true
+    "r2_live_decision_control_law_totalized": true,
+    "r2_fixed_point_native_control_policy_total": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
