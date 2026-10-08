@@ -37,7 +37,11 @@
     "cost_average_usd": 0.8016,
     "duration_average_minutes": 6.34,
     "tool_calls_average": 35.1,
-    "steps_average": 64
+    "steps_average": 64,
+    "target_reference_harness": "claude-code",
+    "brain_literal_same_harness_required": false,
+    "brain_harness_comparability_rule": "OWNER_ADMISSIBLE_OR_SEPARATELY_PROVED_PROTOCOL_EQUIVALENT",
+    "brain_harness_admissibility_currently_proved": false
   },
   "all_opus55_main_rows": {
     "low": {
@@ -65,7 +69,7 @@
   "epoch_reconciliation": {
     "historical_frozen_predicate_percent": 54.4,
     "current_owner_target_percent": 54.64,
-    "rule": "PRESERVE_THE_FROZEN_PREDICATE_ID_FOR_PROVENANCE__A_CURRENT_MATCHED_BRAIN_EXECUTION_MAY_COMPARE_TO_54_64_ONLY_WHEN_FRONTIERCODE_1_1_MAIN_TASK_POPULATION_HARNESS_GRADING_REVISION_AND_CONFIGURATION_ARE_GENUINELY_MATCHED__DO_NOT_TREAT_54_4_AS_THE_EXACT_CURRENT_OWNER_TARGET__A_SCOPE_COMPLETE_STRONGER_PROOF_PREEMPTS_THE_SCALAR_ROUTE"
+    "rule": "PRESERVE_THE_FROZEN_PREDICATE_ID_FOR_PROVENANCE__A_CURRENT_MATCHED_BRAIN_EXECUTION_MAY_COMPARE_TO_54_64_ONLY_WHEN_FRONTIERCODE_1_1_MAIN_TASK_POPULATION_GRADING_REVISION_SCORE_AGGREGATION_INTERNET_POLICY_AND_AN_OWNER_ADMISSIBLE_OR_SEPARATELY_PROVED_PROTOCOL_EQUIVALENT_BRAIN_HARNESS_CONFIGURATION_ARE_MATCHED__LITERAL_CLAUDE_CODE_IDENTITY_IS_NOT_REQUIRED__A_SCOPE_COMPLETE_STRONGER_PROOF_PREEMPTS_THE_SCALAR_ROUTE"
   },
   "task_population_boundary": {
     "main_count_public": 100,
@@ -85,5 +89,6 @@
     "incremental_spend_usd": 0,
     "fresh_target_reality_units_consumed": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "harness_comparability_binding": "canonical/governance/FRONTIERCODE_HARNESS_COMPARABILITY_TRUTH_REPAIR_20261008_V1.json"
 }
