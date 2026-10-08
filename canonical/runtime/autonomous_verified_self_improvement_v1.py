@@ -235,7 +235,8 @@ def _skill_pareto_row(skill_id: str, skill: Mapping[str, Any]) -> dict[str, Any]
 def _diagnose_failure(out: Mapping[str, Any]) -> dict[str, Any]:
     status = _s(out.get("status"))
     reason = _s(out.get("reason") or out.get("failure_class"))
-    joined = (status + " " + reason).upper()
+    next_edge = _s(out.get("next_required_edge") or out.get("next_required_effect"))
+    joined = (status + " " + reason + " " + next_edge).upper()
 
     if any(token in joined for token in (
         "NO_VERIFIED_CAPABILITY",
@@ -244,6 +245,18 @@ def _diagnose_failure(out: Mapping[str, Any]) -> dict[str, Any]:
         "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
     )):
         repair = "ACQUIRE_COMPOSE_OR_INVENT_VERIFIABLE_CAPABILITY"
+    elif any(token in joined for token in (
+        "POSITIVE_POLICY_ADEQUACY",
+        "POLICY_ADEQUACY_COVERAGE",
+        "AUTHENTICATED_POLICY_ADEQUACY",
+    )):
+        repair = "SYNTHESIZE_OR_AUTHENTICATE_POLICY_ADEQUACY_COVER"
+    elif any(token in joined for token in (
+        "POLICY_CHANGING_DISCRIMINATOR",
+        "POLICY_COVER_OBSERVATION",
+        "OBSERVATION_BINDING_REQUIRED",
+    )):
+        repair = "RESOLVE_MINIMUM_BLOCKING_INFORMATION_AND_RETRY"
     elif "SEMANTIC" in joined:
         repair = "BIND_AND_INDEPENDENTLY_VERIFY_EFFECT_SEMANTICS"
     elif "VERIFICATION" in joined or "NOT_AUTHENTICATED" in joined:
@@ -260,6 +273,7 @@ def _diagnose_failure(out: Mapping[str, Any]) -> dict[str, Any]:
     core = {
         "status": status or None,
         "reason": reason or None,
+        "next_required_edge": next_edge or None,
         "repair_class": repair,
         "falsified_capability_ids": _items(out.get("falsified_capability_ids")),
         "deferred_capability_ids": _items(out.get("deferred_capability_ids")),
