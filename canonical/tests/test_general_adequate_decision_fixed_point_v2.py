@@ -309,6 +309,84 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         self.assertFalse(auto_trace["repair_authority"])
         self.assertTrue(auto_trace["downstream_reverification_required"])
 
+    @patch.object(fixed, "repair_basis_discriminator")
+    @patch.object(fixed, "repair_existing_adequacy")
+    @patch.object(fixed, "run_controller")
+    def test_conflict_witness_basis_question_is_generated_without_external_provider(
+        self, controller, existing_repair, basis_repair
+    ):
+        opened = {
+            **self._open(
+                "OPEN__POLICY_CHANGING_DISCRIMINATOR_OR_STRONGER_ADEQUACY_REQUIRED"
+            ),
+            "next_required_edge": (
+                "ONE_POLICY_CHANGING_DISCRIMINATOR_OR_STRONGER_POSITIVE_ADEQUACY"
+            ),
+            "next_policy_request": {
+                "schema": "PROJECT_BRAIN_MINIMUM_POLICY_REPAIR_REQUEST_V1",
+                "required_artifact": (
+                    "POLICY_CHANGING_DISCRIMINATOR_OR_STRONGER_ADEQUACY"
+                ),
+                "search_context": {
+                    "decision_basis": ["x"],
+                    "conflicting_policy_region_witness": [
+                        {
+                            "model_id": "m0",
+                            "valuation": {"x": False},
+                            "adequate_policy_ids": ["p0"],
+                        },
+                        {
+                            "model_id": "m1",
+                            "valuation": {"x": True},
+                            "adequate_policy_ids": ["p1"],
+                        },
+                    ],
+                },
+            },
+        }
+        controller.side_effect = [opened, self._pass()]
+        existing_repair.return_value = {
+            "pass": False,
+            "status": "NOT_APPLICABLE__POLICY_ARTIFACT_NOT_REUSE_DISCOVERABLE",
+        }
+        basis_repair.return_value = {
+            "pass": True,
+            "status": "PASS__DECISION_BASIS_DISCRIMINATORS_PROPOSED_FOR_REVERIFICATION",
+            "request_patch": {
+                "decision_payload": {
+                    "context_id": "basis-repaired",
+                    "bound_relevance_cegar_loop": {
+                        "cegar_problem": {
+                            "discriminators": [
+                                {
+                                    "discriminator_id": "auto-x",
+                                    "formula": {"op": "ATOM", "id": "x"},
+                                }
+                            ]
+                        }
+                    },
+                }
+            },
+            "added_discriminator_ids": ["auto-x"],
+            "added_basis_atoms": ["x"],
+        }
+
+        out = fixed.run(self._request())
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(controller.call_count, 2)
+        existing_repair.assert_called_once()
+        basis_repair.assert_called_once()
+        second = controller.call_args_list[1].args[0]
+        self.assertEqual(second["decision_payload"]["context_id"], "basis-repaired")
+        trace = out["r2_fixed_point_trace"][0][
+            "automatic_basis_discriminator_repair"
+        ]
+        self.assertTrue(trace["pass"])
+        self.assertEqual(trace["added_basis_atoms"], ["x"])
+        self.assertFalse(trace["semantic_truth_authority"])
+        self.assertTrue(trace["downstream_cegar_reverification_required"])
+
     @patch.object(fixed, "run_controller")
     def test_exact_policy_repair_request_reaches_resolver(self, controller):
         opened = {
