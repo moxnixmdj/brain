@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_SUPPORT_TRUTH_CERTIFICATE_V5_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_CARRIERS__11_OF_11_EACH__EXACT_COMPLETE_SET_MEMBERSHIP_SUPPORT__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "membership": {
+      "path": "canonical/runtime/bounded_exact_set_membership_support_v1.py",
+      "git_blob_sha": "2f3710e79f6322760c713b5bf38bfe0251ceb599"
+    },
+    "certificate": {
+      "path": "canonical/runtime/selected_support_truth_certificate_v5.py",
+      "git_blob_sha": "e831ed53d379053a0effb149b19cd1ef03cddd4a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_selected_support_truth_certificate_v5.py",
+      "git_blob_sha": "9cb4a8dad2bcbae6d1594cce86d0aa8709343fc0"
+    }
+  },
+  "primary_execution": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "result": {
+      "pass": true,
+      "passed": 11,
+      "total": 11
+    }
+  },
+  "independent_execution": {
+    "provider": "SPRITES",
+    "sprite": "h100-real-image-v1",
+    "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+    "result": {
+      "pass": true,
+      "passed": 11,
+      "total": 11
+    }
+  },
+  "verified_effects": [
+    "MEMBERSHIP_TRUE_FROM_EXPLICIT_COMPLETE_SET_ENUMERATION",
+    "MEMBERSHIP_FALSE_ONLY_FROM_EXPLICIT_COMPLETE_SET_ENUMERATION",
+    "BELONGS_TO_SURFACE_SUPPORTED",
+    "DIFFERENT_SET_RESOLVES_UNRELATED",
+    "NONEXACT_INCLUDE_STYLE_EVIDENCE_RETURNS_UNKNOWN",
+    "DUPLICATE_MEMBER_ENUMERATION_RETURNS_UNKNOWN",
+    "CASE_AND_SPACING_NORMALIZED",
+    "EXACT_ATTESTATION_MEMBERSHIP_REGRESSION_PRESERVED",
+    "NUMERIC_RELATION_REGRESSION_PRESERVED",
+    "SOURCE_DECLARED_EQUIVALENCE_REGRESSION_PRESERVED",
+    "NO_AUTHORITY_ESCALATION"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_ABSENCE_AS_NEGATION",
+    "NO_TAXONOMY_OR_ONTOLOGY_INFERENCE",
+    "NO_FUZZY_SET_MATCHING",
+    "NO_GENERAL_RELATIONAL_REASONING",
+    "NO_SOURCE_AUTHORIZATION",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
