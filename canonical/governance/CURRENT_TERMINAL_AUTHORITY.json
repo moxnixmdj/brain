@@ -13,7 +13,7 @@
       },
       "primitive_u_frontier": {
         "path": "canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json",
-        "git_blob_sha": "8ab5cd358f460ca649ec3b0ac8eea56e87d7f838"
+        "git_blob_sha": "8340829830dc81095abd4d643a8be6894a39f2f3"
       },
       "acceptance_regime_quotient": {
         "path": "canonical/governance/CURRENT_U_ACCEPTANCE_REGIME_QUOTIENT_20261007_V1.json",
