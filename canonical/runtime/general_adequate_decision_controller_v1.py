@@ -26,6 +26,7 @@ from canonical.runtime.observable_policy_cover_executor_v1 import (
 from canonical.runtime.r2_authenticated_adequacy_authority_registry_v1 import (
     discover as discover_authenticated_adequacy,
 )
+from canonical.runtime import r2_raw_source_proof_material_adapter_v1 as source_proof_material
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_CONTROLLER_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -802,6 +803,57 @@ def _append_truth_payload(
         raise DecisionControllerError("EXISTING_TRUTH_PAYLOAD_INVALID")
 
 
+def _ingest_information_provider_material(
+    decision_payload: dict[str, Any],
+    predicate_id: str,
+    provided: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Append either an existing truth payload or raw source/fact proof material.
+
+    Raw material is deliberately weaker provider authority: the provider supplies
+    bytes only; the Brain creates both truth candidates and the downstream
+    selected-semantic-truth checker recomputes predicate identity and truth.
+    """
+    if provided.get("kind") == source_proof_material.KIND:
+        compiled = source_proof_material.adapt(predicate_id, provided)
+        if compiled.get("pass") is not True:
+            return {
+                "pass": False,
+                "status": "SOURCE_PROOF_MATERIAL_REJECTED",
+                "reason": compiled.get("reason"),
+                "provider_authority": False,
+                "semantic_truth_authority": False,
+            }
+        candidates = compiled.get("truth_payload_candidates")
+        if not isinstance(candidates, list) or len(candidates) != 2:
+            raise DecisionControllerError(
+                "SOURCE_PROOF_MATERIAL_CANDIDATE_COUNT_INVALID"
+            )
+        for candidate in candidates:
+            if not isinstance(candidate, Mapping):
+                raise DecisionControllerError(
+                    "SOURCE_PROOF_MATERIAL_CANDIDATE_INVALID"
+                )
+            _append_truth_payload(decision_payload, predicate_id, candidate)
+        return {
+            "pass": True,
+            "status": "RAW_SOURCE_PROOF_MATERIAL_COMPILED_FOR_CHECKER",
+            "candidate_count": 2,
+            "provider_authority": False,
+            "provider_declared_truth": False,
+            "semantic_truth_authority": False,
+        }
+
+    _append_truth_payload(decision_payload, predicate_id, provided)
+    return {
+        "pass": True,
+        "status": "EXISTING_TRUTH_PAYLOAD_APPENDED_FOR_CHECKER",
+        "candidate_count": 1,
+        "provider_authority": False,
+        "semantic_truth_authority": False,
+    }
+
+
 def _open(
     status: str,
     *,
@@ -1303,6 +1355,21 @@ def run(
                 "decision_payload_sha256": _digest(working),
                 "predicate_id": gap["predicate_id"],
                 "reason": gap["loop_status"],
+                "accepted_provider_response_modes": [
+                    "EXISTING_SELECTED_SEMANTIC_TRUTH_PAYLOAD",
+                    source_proof_material.KIND,
+                ],
+                "raw_source_material_contract": {
+                    "provider_supplies": [
+                        "source_text",
+                        "source_id",
+                        "fact_source",
+                        "fact_source_id",
+                    ],
+                    "provider_must_not_supply_truth": True,
+                    "brain_compiles_both_boolean_claims": True,
+                    "downstream_checker_recomputes_predicate_identity_and_truth": True,
+                },
                 "information_authority": False,
                 "semantic_truth_authority": False,
             }
@@ -1351,7 +1418,31 @@ def run(
                     information_trace=information_trace,
                     goal_to_decision_binding=goal_binding,
                 )
-            _append_truth_payload(working, gap["predicate_id"], provided)
+            ingestion = _ingest_information_provider_material(
+                working,
+                gap["predicate_id"],
+                provided,
+            )
+            information_trace[-1]["ingestion_status"] = ingestion.get("status")
+            information_trace[-1]["provider_declared_truth"] = ingestion.get(
+                "provider_declared_truth"
+            )
+            information_trace[-1]["compiled_candidate_count"] = ingestion.get(
+                "candidate_count"
+            )
+            if ingestion.get("pass") is not True:
+                return _open(
+                    "OPEN__MINIMUM_POLICY_CHANGING_INFORMATION_REQUIRED",
+                    task_id=task_id,
+                    goal=goal,
+                    raw_contract=raw_contract,
+                    next_required_edge="SOURCE_BOUND_TRUTH_FOR_SELECTED_PREDICATE",
+                    next_information_request=request_packet,
+                    decision_result=decision,
+                    information_trace=information_trace,
+                    goal_to_decision_binding=goal_binding,
+                    information_material_rejection=ingestion,
+                )
 
         if not isinstance(decision, Mapping) or decision.get("pass") is not True:
             return _open(
