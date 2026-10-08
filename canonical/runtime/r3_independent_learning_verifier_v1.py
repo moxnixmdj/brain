@@ -8,6 +8,8 @@ recorded by the solver.
 Current admitted scope:
 - non-effectful Universal Solver episodes whose accepted proposals can be
   deterministically rechecked by the Brain-owned built-in verifiers;
+- V12 BOUND_CAPABILITY_EXECUTION_V1 carrier episodes whose stored accepted inner
+  execution is deterministically reverified without replaying the effect;
 - exact-scope executable-skill candidates recomputed from already authenticated
   source episodes;
 - PROVEN_SUPERSET planning-scope claims only for STRUCTURAL_MATCH_V1 when every
@@ -15,8 +17,10 @@ Current admitted scope:
   re-induction, and its program is structurally closed. Reuse still passes the
   runtime structural guard and fresh V12 execution verification.
 
-Effectful episodes are intentionally not replayed. Without an independently
-re-readable effect root in the verification request, they remain fail-closed.
+Effectful episodes are never replayed. They remain fail-closed except for the
+narrow V12 bound-capability carrier case where the accepted inner execution trace
+is already present and the Brain-owned verifier can independently recompute the
+entire carrier proof without causing the effect again.
 
 No terminal, capability, ownership, or execution authority is granted here.
 """
@@ -68,6 +72,9 @@ INDEPENDENT_VERIFIER_ID = "R3_INDEPENDENT_EVIDENCE_RECOMPUTATION_V1"
 DEFAULT_RECEIPT_DIR = "canonical/runtime/r3_learning_verification_receipts"
 STRUCTURAL_MATCH_SCOPE_PREDICATE = "STRUCTURAL_MATCH_V1"
 NON_EFFECTFUL_VERIFICATION_BASIS = "SEPARATE_R3_EVIDENCE_RECOMPUTATION_WORKER"
+BOUND_CARRIER_VERIFICATION_BASIS = (
+    "SEPARATE_R3_BOUND_CARRIER_ACCEPTED_EXECUTION_RECOMPUTATION_WORKER"
+)
 
 
 class R3IndependentVerificationError(ValueError):
@@ -203,6 +210,7 @@ def _reverify_non_effectful_trace(
     value_capsule = initialize_value_capsule(problem)
     expected_steps: list[dict[str, Any]] = []
     current_facts = sorted(str(x) for x in problem.get("initial_facts", []))
+    effectful_bound_row_count = 0
 
     for expected_cycle, raw_row in enumerate(trace):
         if not isinstance(raw_row, Mapping):
@@ -227,13 +235,6 @@ def _reverify_non_effectful_trace(
         if not isinstance(plan, list) or not plan or str(plan[0]) != cid:
             raise R3IndependentVerificationError(
                 "TRACE_NOT_STRAIGHT_THROUGH_DETERMINISTIC_PLAN:" + cid
-            )
-
-        # Never replay or self-attest an effect. A future worker may admit an
-        # effectful episode only when it can independently read back the effect.
-        if row.get("effect_outcome_sha256"):
-            raise R3IndependentVerificationError(
-                "EFFECTFUL_EPISODE_REQUIRES_INDEPENDENT_READBACK_VERIFIER"
             )
 
         action = _active_action(cap, row)
@@ -322,6 +323,55 @@ def _reverify_non_effectful_trace(
         if _canon(verdict.get("verified_output")) != _canon(row.get("verified_output")):
             raise R3IndependentVerificationError("VERIFIED_OUTPUT_MISMATCH:" + cid)
 
+        effectful = bool(row.get("effect_outcome_sha256"))
+        if effectful:
+            if row.get("bound_capability_carrier_authenticated") is not True:
+                raise R3IndependentVerificationError(
+                    "EFFECTFUL_EPISODE_REQUIRES_ADMITTED_BOUND_CARRIER:" + cid
+                )
+            if verifier_id != "BOUND_CAPABILITY_EXECUTION_V1":
+                raise R3IndependentVerificationError(
+                    "EFFECTFUL_BOUND_CARRIER_VERIFIER_INVALID:" + cid
+                )
+            effect_outcome = row.get("effect_outcome")
+            execution = proposal.get("execution")
+            if not isinstance(effect_outcome, Mapping):
+                raise R3IndependentVerificationError(
+                    "BOUND_CARRIER_EFFECT_OUTCOME_INVALID:" + cid
+                )
+            if not isinstance(execution, Mapping):
+                raise R3IndependentVerificationError(
+                    "BOUND_CARRIER_ACCEPTED_EXECUTION_MISSING:" + cid
+                )
+            inner_trace = execution.get("trace")
+            if (
+                not isinstance(inner_trace, Sequence)
+                or isinstance(inner_trace, (str, bytes))
+                or not inner_trace
+            ):
+                raise R3IndependentVerificationError(
+                    "BOUND_CARRIER_INNER_TRACE_INVALID:" + cid
+                )
+            expected_outcome = {
+                "carrier_schema": "PROJECT_BRAIN_UNIVERSAL_BOUND_CAPABILITY_CARRIER_V1",
+                "execution_verification": deepcopy(dict(verdict)),
+                "inner_execution_sha256": v1._digest(execution),
+                "executed_nonfinish_action_count": max(len(inner_trace) - 1, 0),
+            }
+            if _canon(effect_outcome) != _canon(expected_outcome):
+                raise R3IndependentVerificationError(
+                    "BOUND_CARRIER_EFFECT_OUTCOME_RECOMPUTATION_MISMATCH:" + cid
+                )
+            if row.get("effect_outcome_sha256") != v1._digest(expected_outcome):
+                raise R3IndependentVerificationError(
+                    "BOUND_CARRIER_EFFECT_OUTCOME_DIGEST_MISMATCH:" + cid
+                )
+            effectful_bound_row_count += 1
+        elif row.get("bound_capability_carrier_authenticated") is True:
+            raise R3IndependentVerificationError(
+                "BOUND_CARRIER_AUTHENTICATION_WITHOUT_EFFECT_OUTCOME:" + cid
+            )
+
         provides = sorted(str(x) for x in cap.get("provides", []))
         semantic_effects = sorted(
             str(x)
@@ -374,6 +424,8 @@ def _reverify_non_effectful_trace(
         "fact_capsule_head_hash": fact_capsule.get("head_hash"),
         "value_capsule_head_hash": value_capsule.get("head_hash"),
         "target_verdict": target_verdict,
+        "effectful_bound_row_count": effectful_bound_row_count,
+        "effect_outcomes_reverified": effectful_bound_row_count > 0,
     }
 
 
@@ -439,6 +491,12 @@ def verify_episode_request(
         }
         if any(not isinstance(v, str) or not v for v in bindings.values()):
             raise R3IndependentVerificationError("EPISODE_BINDING_FIELD_INVALID")
+        effectful_bound = int(recomputed.get("effectful_bound_row_count", 0)) > 0
+        verification_basis = (
+            BOUND_CARRIER_VERIFICATION_BASIS
+            if effectful_bound
+            else NON_EFFECTFUL_VERIFICATION_BASIS
+        )
         receipt = {
             "schema": EPISODE_RECEIPT_SCHEMA,
             **bindings,
@@ -457,10 +515,16 @@ def verify_episode_request(
             "exact_byte_bound": True,
             "trace_reverified": True,
             "state_lineage_reverified": True,
-            "effect_outcomes_reverified": False,
-            "non_effectful_trace": True,
+            "effect_outcomes_reverified": bool(
+                recomputed.get("effect_outcomes_reverified")
+            ),
+            "non_effectful_trace": not effectful_bound,
+            "bound_carrier_effectful_trace": effectful_bound,
+            "bound_carrier_effectful_row_count": int(
+                recomputed.get("effectful_bound_row_count", 0)
+            ),
             "independent_verifier_id": INDEPENDENT_VERIFIER_ID,
-            "verification_basis": NON_EFFECTFUL_VERIFICATION_BASIS,
+            "verification_basis": verification_basis,
         }
         return _emit_pair(
             stem="episode",
