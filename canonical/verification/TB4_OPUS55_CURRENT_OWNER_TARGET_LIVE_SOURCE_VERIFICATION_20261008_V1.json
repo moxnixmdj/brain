@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_OPUS55_CURRENT_OWNER_TARGET_LIVE_SOURCE_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_LIVE_OWNER_SOURCE_REFETCH_PASS__INDEPENDENT_ARITHMETIC_REPLAY_PASS__ZERO_TB4_CASES__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "owner_source": {
+    "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+    "title": "Claude Opus 5.5 System Card",
+    "live_refetch": true,
+    "refetch_freshness": "TTL_0",
+    "observed_facts": {
+      "terminal_bench_4_task_count": 66,
+      "opus55_score_percent": 66.36,
+      "trials_per_task": 5,
+      "total_trials": 330,
+      "harness": "Claude Code --bare",
+      "reasoning_effort": "xhigh",
+      "safeguards_enabled": true,
+      "fallback_affected_trial_fraction": 0.10
+    }
+  },
+  "owner_launch_page_corroboration": {
+    "url": "https://www.anthropic.com/claude-opus-5-5",
+    "rounded_display_percent": 66.4,
+    "footnote_public_leaderboard_trials_per_task": 5,
+    "opus55_effort": "xhigh",
+    "safeguards_enabled": true
+  },
+  "independent_arithmetic_replay": {
+    "engine": "Wolfram Language",
+    "minimum_successes_for_raw_ge_66_36": 219,
+    "successes_218_percent": 66.06060606060606,
+    "successes_219_percent": 66.36363636363636,
+    "successes_220_percent": 66.66666666666667,
+    "round_219_of_330_to_two_decimals": 66.36,
+    "minimum_successes_for_strict_raw_ge_66_4": 220,
+    "result": "PASS"
+  },
+  "provenance_interpretation": {
+    "historical_frozen_alias_percent": 66.4,
+    "current_detailed_owner_target_percent": 66.36,
+    "current_detailed_owner_target_successes": 219,
+    "rule": "PRESERVE_HISTORICAL_66_4_PREDICATE_FOR_PROVENANCE__USE_66_36_FOR_CURRENT_MATCHED_OPUS55_NONINFERIORITY_WHEN_TASK_POPULATION_TRIAL_COUNT_SCORING_HARNESS_RESOURCE_SEMANTICS_AND_RELEVANT_CONFIGURATION_ARE_MATCHED"
+  },
+  "verification_result": {
+    "owner_source_refetch_pass": true,
+    "owner_summary_corroboration_pass": true,
+    "arithmetic_replay_pass": true,
+    "historical_predicate_preserved": true,
+    "current_owner_target_binding_supported": true
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_TB4_SCORE_RESULT",
+    "NO_TB4_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_ANTHROPIC_INTERNAL_SETUP_EQUALS_PUBLIC_LEADERBOARD_SETUP",
+    "NO_EXECUTION_AUTHORITY_FROM_TARGET_BINDING_ALONE",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

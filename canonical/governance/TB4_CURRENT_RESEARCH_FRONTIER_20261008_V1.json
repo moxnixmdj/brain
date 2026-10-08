@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CURRENT_RESEARCH_FRONTIER_20261008_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_FRONTIER__EXACT_OWNER_TARGET_PRECISION_DISCOVERED__CANONICAL_PROMOTION_PENDING__ZERO_TB4_CASES__ZERO_CREDIT",
+  "predicate": "CODING_TB4_GE_66_4",
+  "historical_frozen_alias_percent": 66.4,
+  "current_owner_detailed_target_candidate_percent": 66.36,
+  "owner_reported_task_count": 66,
+  "owner_reported_trials_per_task": 5,
+  "owner_reported_total_trials": 330,
+  "binary_success_count_corresponding_to_66_36": 219,
+  "current_creditable_task_count": 44,
+  "current_slot_capacity": 220,
+  "conditional_current_target_slack": 1,
+  "conditional_slack_formula_after_k_additional_recovered_tasks": "1+5*k",
+  "source_state": {
+    "official_launch_page_confirms_rounded_66_4": true,
+    "independent_system_card_transcriptions_agree_on_66_36_and_330_trials": true,
+    "exact_owner_pdf_byte_hash_independently_refetched": false,
+    "canonical_promotion_ready": false
+  },
+  "governance_state": {
+    "historical_predicate_preserved": true,
+    "frontiercode_target_epoch_precedent_identified": true,
+    "candidate_current_owner_target_refresh_created": true,
+    "candidate_slack_propagation_created": true,
+    "canonical_required_successes_still": 220,
+    "conditional_matched_current_target_required_successes": 219
+  },
+  "external_wakes": {
+    "buildkite_resource_reply_received": false,
+    "omc_resource_reply_received": false,
+    "provider_wait_on_critical_path": false
+  },
+  "trace_parametricity": {
+    "sprite_name": "brain-trace-parametricity-v1-verify",
+    "sprite_status_observed": "warm",
+    "active_exec_sessions_observed": 0,
+    "durable_tb4_result_found_in_brain": false,
+    "credit": 0
+  },
+  "next_load_bearing_actions": [
+    "INDEPENDENTLY_BIND_THE_OWNER_SYSTEM_CARD_SOURCE_OR_EQUIVALENT_OWNER_LIVE_SOURCE_FOR_66_36_AND_330_TRIALS",
+    "IF_VERIFIED_PROMOTE_CURRENT_MATCHED_TARGET_66_36_WHILE_PRESERVING_HISTORICAL_66_4_PROVENANCE",
+    "RECOMPILE_TB4_ATTAINABILITY_WITH_219_REQUIRED_SUCCESSES",
+    "KEEP_RESOURCE_RECOVERY_AND_TASK_CONDITIONED_DOMINANCE_AS_PARALLEL_NONBLOCKING_ROUTES"
+  ],
+  "hard_nonclaims": [
+    "NO_CURRENT_CANONICAL_THRESHOLD_CHANGE",
+    "NO_TB4_ACCEPTANCE_CREDIT",
+    "NO_TB4_CASE_EXECUTION",
+    "NO_PROVIDER_RESOURCE_RECOVERY_CREDIT",
+    "NO_TRACE_PARAMETRICITY_CREDIT"
+  ],
+  "accounting": {
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd_claimed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
