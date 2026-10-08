@@ -1918,8 +1918,14 @@
     "r1_closure_gate": {
       "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
       "git_blob_sha": "a7d02b26ff0f8e15cecac356b58e548d8837afd1",
-      "rule": "R1_CLOSURE_MUST_FAIL_CLOSED_ON_FRONT_DOOR_SUBRUNTIME_ENGINE_ACTIVATION_OR_AUTHORITY_DRIFT"
-    }
+      "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
+    },
+    "r1_drift_lock_verification": {
+      "path": "canonical/verification/R1_LIVE_ARCHITECTURE_DRIFT_LOCK_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "74d5e16e1c7213ef38028ca66575ca821b1b4195",
+      "status": "PASS__R1_LIVE_ARCHITECTURE_CLOSED_AND_DRIFT_LOCKED"
+    },
+    "r1_drift_locked": true
   },
   "r1_universal_live_capability_invocation_20261008_v1": {
     "status": "ACTIVE_FAIL_CLOSED_UNIVERSAL_LIVE_CAPABILITY_INVOCATION__V3_FRONT_DOOR_BOUND",
@@ -1937,7 +1943,7 @@
     },
     "workflow": {
       "path": ".github/workflows/verify-unified-cognitive-fabric-v1.yml",
-      "git_blob_sha": "8cc9425a9c7e0fc532fa7427be5c1ef3bba79093"
+      "git_blob_sha": "e83b098dc248ff8ffc5de1ad67668346bdf1b4c1"
     },
     "rule": "EVERY_LIVE_OWNED_CAPABILITY_IDENTITY_MUST_BE_CLASSIFIABLE_AND_DISPATCHABLE_THROUGH_UNIFIED_COGNITIVE_FABRIC_LIVE_CAPABILITY_OR_FAIL_CLOSED",
     "semantic_selection_boundary": "CAPABILITY_SELECTION_FROM_ARBITRARY_INTENT_REMAINS_R2",
@@ -1958,7 +1964,13 @@
     },
     "r1_closure_gate": {
       "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
-      "git_blob_sha": "a7d02b26ff0f8e15cecac356b58e548d8837afd1"
+      "git_blob_sha": "a7d02b26ff0f8e15cecac356b58e548d8837afd1",
+      "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
+    },
+    "r1_drift_lock_verification": {
+      "path": "canonical/verification/R1_LIVE_ARCHITECTURE_DRIFT_LOCK_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "74d5e16e1c7213ef38028ca66575ca821b1b4195",
+      "status": "PASS__R1_LIVE_ARCHITECTURE_CLOSED_AND_DRIFT_LOCKED"
     }
   }
 }
