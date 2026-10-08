@@ -168,6 +168,8 @@ def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None
         safe_identity_fields = (
             "json_path",
             "source_sha256",
+            "source_json_sha256",
+            "expected_semantics_sha256",
             "output_path",
             "output_sha256",
             "markdown_path",
