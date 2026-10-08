@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_INTERVAL_INFORMATION_FRONTIER_PUBLIC_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_BLOBS__9_OF_9_COMMITTED_TESTS__6_OF_6_FRESH_CANARIES__ZERO_CREDIT",
+  "subject": {
+    "brain_pull_request": 3158,
+    "branch": "research/mysterymechanism-interval-frontier-v1b-20261008",
+    "exact_blobs": {
+      "canonical/runtime/interval_information_frontier_v1.py": "71ede5329f1d18505845d399f0243d76c005118a",
+      "canonical/tests/test_interval_information_frontier_v1.py": "3cec294a2bff0a3aa623c7129b82e72e784321de",
+      "canonical/governance/MYSTERYMECHANISM_INTERVAL_INFORMATION_FRONTIER_20261008_V1.json": "779f09fa1faae687aa87055bbd0c8863eba565c4"
+    }
+  },
+  "private_actions_diagnosis": {
+    "failed_run_id": 37744044896,
+    "failed_job_id": 113201202376,
+    "observed_job_steps": [],
+    "classification": "PRIVATE_BRAIN_ACTIONS_RUNNER_NOT_ASSIGNED__KNOWN_REPOSITORY_INFRASTRUCTURE_CONDITION__NOT_A_RUNTIME_TEST_FAILURE",
+    "supporting_repository_workflow": ".github/workflows/drift-immunity-guard.yml",
+    "supporting_repository_comment": "private Brain Actions jobs are failing before runner assignment; PR/manual verification remains available"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2426,
+    "merged_commit": "7c609f9a4b9743bf50860e6e259a1d69de2b0792",
+    "workflow_run_id": 37744869458,
+    "workflow_job_id": 113203856040,
+    "conclusion": "success",
+    "exact_committed_tests_passed": 9,
+    "fresh_independent_canaries_passed": 6
+  },
+  "verified_properties": [
+    "EXACT_PRIVATE_BRANCH_BLOBS_MATCH",
+    "COMMITTED_9_TEST_SUITE_PASSES",
+    "NONFINITE_INTERVAL_FAILS_CLOSED",
+    "CLOSED_ENDPOINT_AMBIGUITY_PRESERVED",
+    "ENDPOINT_CELL_SURVIVOR_ENUMERATION_COMPLETE_FOR_FRESH_THREE_INTERVAL_CASE",
+    "TERMINAL_EQUIVALENCE_STOPS_WITH_ZERO_QUERY_COST",
+    "DECLARED_QUERY_BUDGET_FAILS_CLOSED",
+    "UNPROVED_HYPOTHESIS_COVER_FAILS_CLOSED",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_TERMINAL_CREDIT"
+  ],
+  "theorem_boundary": "VERIFIES_ONLY_THE_GENERIC_FINITE_COMPLETE_HYPOTHESIS_COVER_PLUS_SOUND_INTERVAL_MINIMAX_QUERY_KERNEL__DOES_NOT_PROVE_CURRENT_SYMBOLIC_GRAMMAR_COVERS_PRIVATE_MYSTERYMECHANISM__DOES_NOT_PROVE_ANY_PRIVATE_TASK_PREDICTION_INTERVAL_SOUND__DOES_NOT_PROVE_PRIVATE_SCORE",
+  "next_required": [
+    "SOUND_SYMBOLIC_FAMILY_AND_PARAMETER_CELL_COVER_CONSTRUCTION",
+    "SOUND_PREDICTION_INTERVAL_PROPAGATION_OVER_PHYSICAL_BOUNDS_AND_BOUND_NOISE",
+    "EVALUATOR_EQUIVALENCE_SIGNATURE_CERTIFICATION_OR_CONSERVATIVE_EXACT_FUNCTION_SIGNATURE",
+    "ADAPTIVE_BENCHMARK_ADAPTER_REPLANNING_AFTER_EVERY_OBSERVATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
