@@ -184,6 +184,9 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             @staticmethod
             def load_state(path):
                 return {"stats": {}}
+            @staticmethod
+            def next_improvement_action(*, state_path):
+                return None
         learning_module.return_value = L
         out = brain.inventory()
         self.assertEqual(out["status"], "UNIFIED_LIVE_BRAIN_READY")
