@@ -4,7 +4,7 @@
   "status": "ACTIVE_SUBORDINATE_EXECUTION_RUNTIME",
   "root": "R1_UNIFIED_LIVE_COGNITIVE_ARCHITECTURE_MISSING",
   "public_entrypoint": "canonical.runtime.unified_cognitive_fabric_v1.run",
-  "default_raw_intent_route": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
+  "default_raw_intent_route": "GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2",
   "default_explicit_execution_route": "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
   "verified_learning_route": "AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1",
   "integrated_existing_mechanisms": [
