@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PROOF_CARRYING_DOMINANCE_ROUTE_V1",
   "date": "2026-10-08",
-  "status": "EXECUTABLE_MULTI_ROUTE_NONINFERIORITY_BRIDGE__38_OF_38__OWNER_TRUST_BOOTSTRAP_PLUS_REAL_RECEIPT_MISSING__ZERO_TERMINAL_CREDIT",
+  "status": "EXECUTABLE_CRYPTOGRAPHIC_CORE_ROUTE__49_OF_49__REAL_OWNER_ATTESTATION_BUNDLE_MISSING__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "problem_reduction": {
     "old_default": "REPRODUCE_OR_OBTAIN_ONE_MATCHED_CURRENT_OWNER_AA_BRIEFCASE_ELO_AND_COMPARE_TO_1807",
@@ -43,7 +43,7 @@
     },
     "disjunctive_bridge_v3": {
       "path": "canonical/runtime/aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
-      "git_blob_sha": "ebde3d53f492f68edf060587c24ea18707330b30"
+      "git_blob_sha": "977465d4ef2e8f7b0c3323255507b1a16a316129"
     },
     "tests": [
       {
@@ -52,7 +52,7 @@
       },
       {
         "path": "canonical/tests/test_aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
-        "git_blob_sha": "0eaf5c0c6523eea10cade6b1e24a3e7674bb0e63"
+        "git_blob_sha": "5e31a8c37aaad6cd02f4f02b9eb29d749187b288"
       }
     ],
     "independent_runtime_verification": {
@@ -81,7 +81,7 @@
     },
     "owner_attestation_request_contract": {
       "path": "canonical/governance/AA_BRIEFCASE_OWNER_ATTESTATION_REQUEST_CONTRACT_20261008_V1.json",
-      "git_blob_sha": "084c8769e7c6eadc5479175e4f34a4b91e972e80"
+      "git_blob_sha": "a2912161313b92b7b45d45c361c83934e81a8423"
     },
     "owner_identity_bootstrap": {
       "path": "canonical/evidence/AA_BRIEFCASE_OWNER_IDENTITY_BOOTSTRAP_20261008_V1.json",
@@ -94,6 +94,18 @@
     "owner_signature_tests": {
       "path": "canonical/tests/test_aa_briefcase_owner_signature_verifier_v1.py",
       "git_blob_sha": "b8706a9a27b7e86fdb6b43874b5ff5d9031e9d47"
+    },
+    "core_owner_attestation_runtime": {
+      "path": "canonical/runtime/aa_briefcase_core_owner_attestation_v2.py",
+      "git_blob_sha": "93b5b2fa488f053a39ca0cd99b85678dda0b4990"
+    },
+    "core_owner_attestation_tests": {
+      "path": "canonical/tests/test_aa_briefcase_core_owner_attestation_v2.py",
+      "git_blob_sha": "5e4ce7d01d2282bfb9fa0ce3921c395861c9d8c1"
+    },
+    "core_owner_attestation_verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_CORE_OWNER_ATTESTATION_V2_SPRITE_VERIFICATION_20261008.json",
+      "git_blob_sha": "7dfce59b3e18955a5d97bb2e9842ded56e0e8fe2"
     }
   },
   "per_check_certification": {
@@ -158,7 +170,7 @@
     "SECOND AA_BRIEFCASE EXECUTION FOR THE ARTIFACT FAMILY ALIAS",
     "TARGET QUERIES FOR E OR M CHECKS ALREADY CLOSED BY STRONGER TOP OR MONOTONE PROOFS"
   ],
-  "remaining_minimum_missing_fact": "ONE OWNER-ORIGIN BOOTSTRAP PLUS ONE CURRENT-EPOCH SCOPE-COMPLETE NONINFERIORITY STATEMENT. CHEAPEST KNOWN BOOTSTRAP: OFFICIAL ArtificialAnalysis GITHUB-ORG PUBLICATION OF THE STATEMENT; PORTABLE CRYPTOGRAPHIC ALTERNATIVE: OWNER/AUTHORIZED-OPERATOR PUBLIC KEY AUTHENTICATED ON AN OFFICIAL SURFACE PLUS ED25519 SIGNATURE.",
+  "remaining_minimum_missing_fact": "ONE REAL AUTHENTICATED OWNER-ATTESTATION BUNDLE FOR THE ACTUAL BRAIN SUBJECT: A CURRENT-EPOCH COMPLETE-SCOPE BRAIN_NONINFERIORITY STATEMENT__A VERIFIABLE OWNER OR AUTHORIZED-OPERATOR SIGNATURE__AND A VERIFIED SIGNER TRUST ANCHOR AUTHORIZED FOR AA_BRIEFCASE_V1_1. PRIVATE BENCHMARK CONTENT AND PRIVATE POPULATION HASHES ARE NOT REQUIRED BY THE LOGICAL CORE.",
   "fail_closed_falsifiers": [
     "MISSING OR UNVERIFIED OWNER-ORIGIN TRUST BOOTSTRAP FOR THE MINIMAL ATTESTATION ROUTE",
     "PUBLIC KEY SUPPLIED ONLY BY THE SAME UNTRUSTED ATTESTATION",
@@ -178,11 +190,11 @@
     "ATTEMPT TO REWRITE THE HISTORICAL 1822 EPOCH"
   ],
   "hard_nonclaims": [
-    "NO OWNER PUBLICATION OR AUTHENTICATED OWNER SIGNING TRUST ANCHOR FOR THE REQUIRED AA STATEMENT CURRENTLY EXISTS IN BRAIN",
-    "NO PRIVATE AA_BRIEFCASE RECEIPT CURRENTLY EXISTS IN THIS CANDIDATE",
-    "NO BRAIN AA_BRIEFCASE ELO IS CLAIMED BY THE DIRECT OR ATTESTATION ROUTES",
-    "NO CURRENT AA_BRIEFCASE PREDICATE IS PROMOTED TRUE BY THIS FILE ALONE",
-    "NO FAMILY OR TERMINAL CREDIT UNTIL REAL OWNER-ORIGIN EVIDENCE AND A REAL SCOPE-COMPLETE NONINFERIORITY RESULT EXIST"
+    "NO REAL ARTIFICIAL ANALYSIS OWNER SIGNATURE OR VERIFIED OWNER KEY BINDING CURRENTLY EXISTS IN BRAIN.",
+    "NO PRIVATE AA_BRIEFCASE RESULT IS CLAIMED.",
+    "NO BRAIN AA_BRIEFCASE ELO IS CLAIMED BY A DIRECT ATTESTATION ROUTE.",
+    "NO CURRENT AA_BRIEFCASE PREDICATE IS PROMOTED TRUE BY THIS FILE ALONE.",
+    "NO FAMILY OR TERMINAL CREDIT UNTIL A REAL VERIFIED OWNER BUNDLE OR OTHER SUPPORTED RESULT EXISTS."
   ],
   "accounting": {
     "incremental_spend_usd": null,
@@ -192,13 +204,13 @@
     "spend_measurement_available_for_remote_replay": false
   },
   "runtime_verification": {
-    "tests_run": 38,
-    "tests_passed": 38,
+    "tests_run": 49,
+    "tests_passed": 49,
     "failures": 0,
     "errors": 0,
     "executor": "REMOTE_ISOLATED_SPRITE",
     "private_benchmark_cases_consumed": 0,
-    "conclusion": "CRYPTOGRAPHIC OWNER-ATTESTATION ROUTE AND ALL EXISTING AA ROUTES PASS FAIL-CLOSED TESTS__REAL OWNER ORIGIN PLUS REAL NONINFERIORITY STATEMENT STILL REQUIRED"
+    "conclusion": "CRYPTOGRAPHIC OWNER-SIGNATURE VERIFICATION CORE-ATTESTATION LOGIC RICHER OWNER ATTESTATION DETAILED E_M_U DOMINANCE AND MATCHED ELO FALLBACKS ALL PASS__REAL OWNER BUNDLE STILL REQUIRED"
   },
   "external_receipt_route": {
     "discovered_self_service_official_aa_briefcase_endpoint": false,
@@ -209,37 +221,49 @@
   "current_noninferiority_routes": [
     {
       "rank": 1,
-      "id": "OFFICIAL_OWNER_PUBLICATION_OF_SCOPE_COMPLETE_NONINFERIORITY",
-      "external_information": "ONE STATEMENT PUBLISHED ON AN AUTHENTICATED ARTIFICIAL ANALYSIS OWNER SURFACE, PREFERABLY THE CROSS-LINKED ArtificialAnalysis GITHUB ORGANIZATION",
+      "id": "CORE_OWNER_ATTESTATION_V2",
+      "external_information": "ONE COMPLETE-SCOPE CURRENT-EPOCH NONINFERIORITY STATEMENT FOR THE EXACT BRAIN SUBJECT__PLUS A VERIFIABLE OWNER/AUTHORIZED-OPERATOR SIGNATURE AND VERIFIED SIGNER TRUST ANCHOR",
       "private_task_bytes_disclosed": false,
       "private_rubric_bytes_disclosed": false,
-      "new_signing_key_required": false,
+      "private_check_ids_disclosed": false,
+      "private_population_hashes_required": false,
       "numeric_elo_reconstruction_required": false,
-      "executable_verification_status": "PROVENANCE FETCH ROUTE IS EXTERNAL-EVIDENCE DEPENDENT__NO PUBLICATION EXISTS YET"
+      "current_runtime_support": true
     },
     {
       "rank": 2,
-      "id": "CRYPTOGRAPHIC_MINIMAL_OWNER_ATTESTATION",
-      "external_information": "AUTHENTICATED OWNER/AUTHORIZED-OPERATOR PUBLIC KEY PLUS ED25519 SIGNATURE OVER THE SCOPE-COMPLETE STATEMENT",
+      "id": "RICH_OWNER_ATTESTATION_V1",
+      "external_information": "SIGNED COMPLETE-SCOPE OWNER ATTESTATION PLUS OPAQUE PRIVATE POPULATION COMMITMENTS",
       "private_task_bytes_disclosed": false,
-      "private_rubric_bytes_disclosed": false,
       "numeric_elo_reconstruction_required": false,
-      "executable_verification_status": "VERIFIED_38_OF_38"
+      "current_runtime_support": true
     },
     {
       "rank": 3,
       "id": "SCOPE_COMPLETE_DIRECT_DOMINANCE",
       "external_information": "DETAILED E_M_U CHECK-LEVEL CERTIFICATES OVER THE COMPLETE PRIVATE SCOPE",
       "private_task_bytes_disclosed": false,
-      "numeric_elo_reconstruction_required": false
+      "numeric_elo_reconstruction_required": false,
+      "current_runtime_support": true
     },
     {
       "rank": 4,
       "id": "MATCHED_CURRENT_EPOCH_ELO",
       "external_information": "ONE INDEPENDENT OR OWNER-VERIFIED COMPARABLE CURRENT-EPOCH BRAIN ELO RECEIPT",
-      "numeric_elo_reconstruction_required": true
+      "numeric_elo_reconstruction_required": true,
+      "current_runtime_support": true
     }
   ],
   "external_receipt_request_ready": true,
-  "external_receipt_request_sent": false
+  "external_receipt_request_sent": false,
+  "deleted_external_requirements_if_certificate_passes": [
+    "DISCLOSURE OF PRIVATE TASK CONTENT",
+    "DISCLOSURE OF PRIVATE RUBRIC TEXT",
+    "DISCLOSURE OF PRIVATE CHECK IDENTIFIERS",
+    "DISCLOSURE OF PER-CHECK JUDGE OUTCOMES",
+    "MANDATORY DISCLOSURE OF PRIVATE TASK OR CHECK POPULATION HASHES",
+    "BRAIN-SIDE CROWD_BT RECONSTRUCTION",
+    "BRAIN-SIDE NUMERICAL ELO RECONSTRUCTION",
+    "SECOND AA_BRIEFCASE EVALUATION FOR THE ARTIFACT FAMILY ALIAS"
+  ]
 }
