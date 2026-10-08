@@ -235,6 +235,17 @@ def _reverify_trace(
             recorded_digest = str(row.get("effect_outcome_sha256") or "")
             if not isinstance(recorded_outcome, Mapping) or not recorded_digest:
                 raise R3IndependentVerificationError("EFFECT_OUTCOME_RECORD_INVALID:" + cid)
+            executor_payload = action.get("executor_payload")
+            if not isinstance(executor_payload, Mapping):
+                raise R3IndependentVerificationError("EFFECT_EXECUTOR_PAYLOAD_INVALID:" + cid)
+            if recorded_outcome.get("executor_id") != action.get("executor_id"):
+                raise R3IndependentVerificationError("EFFECT_EXECUTOR_BINDING_MISMATCH:" + cid)
+            if recorded_outcome.get("tool_id") != executor_payload.get("tool_id"):
+                raise R3IndependentVerificationError("EFFECT_TOOL_BINDING_MISMATCH:" + cid)
+            if recorded_outcome.get("sandbox_rel") != executor_payload.get("sandbox_rel"):
+                raise R3IndependentVerificationError("EFFECT_SANDBOX_BINDING_MISMATCH:" + cid)
+            if recorded_outcome.get("proposal_sha256") != row.get("proposal_sha256"):
+                raise R3IndependentVerificationError("EFFECT_PROPOSAL_BINDING_MISMATCH:" + cid)
             readback = verify_outcome_readback(
                 outcome=recorded_outcome,
                 expected_effect_outcome_sha256=recorded_digest,
