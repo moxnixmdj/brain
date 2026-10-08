@@ -128,6 +128,76 @@ def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None
     """Retain only bounded execution-proof metadata needed for later read-only verification."""
     if not isinstance(out, Mapping) or out.get("pass") is not True:
         return None
+
+    if (
+        out.get("r2_fixed_point_status")
+        == "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED"
+        and out.get("semantic_acceptance_complete") is True
+        and out.get("actual_goal_satisfaction_verified") is True
+    ):
+        route_id = _s(out.get("route_id"))
+        goal_sha256 = _s(out.get("goal_sha256"))
+        accepted = _items(out.get("accepted_raw_obligation_ids"))
+        required_count = out.get("raw_acceptance_obligation_count")
+        if not route_id:
+            raise SelfImprovementError("DIRECT_SUCCESS_ROUTE_ID_MISSING")
+        if len(goal_sha256) != 64:
+            raise SelfImprovementError("DIRECT_SUCCESS_GOAL_SHA256_INVALID")
+        if (
+            not isinstance(required_count, int)
+            or isinstance(required_count, bool)
+            or required_count <= 0
+            or len(accepted) != required_count
+        ):
+            raise SelfImprovementError("DIRECT_SUCCESS_ACCEPTANCE_SET_INVALID")
+
+        material = {
+            "proof_kind": "R2_DIRECT_ADEQUACY_READBACK_V1",
+            "source_schema": _s(out.get("schema")) or None,
+            "source_status": _s(out.get("status")) or None,
+            "route_id": route_id,
+            "capability_id": _s(out.get("capability_id")) or None,
+            "selected_policy_id": _s(out.get("selected_policy_id")) or None,
+            "goal_sha256": goal_sha256,
+            "raw_task_contract_sha256": _s(out.get("raw_task_contract_sha256")) or None,
+            "raw_acceptance_obligation_count": required_count,
+            "accepted_raw_obligation_ids": accepted,
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+        }
+        safe_identity_fields = (
+            "json_path",
+            "source_sha256",
+            "output_path",
+            "output_sha256",
+            "markdown_path",
+            "spec_path",
+            "spec_sha256",
+            "input_path",
+            "input_sha256",
+            "intent_path",
+            "payload_sha256",
+            "format",
+            "source_type",
+            "producer_id",
+        )
+        for key in safe_identity_fields:
+            value = out.get(key)
+            if isinstance(value, (str, int, bool)) or value is None:
+                if value is not None:
+                    material[key] = value
+
+        _validate_retry_value(material, path="success_proof")
+        raw = _canon(material).encode("utf-8")
+        if len(raw) > 32_000:
+            raise SelfImprovementError("DIRECT_SUCCESS_PROOF_CAPSULE_TOO_LARGE")
+        return {
+            "schema": "PROJECT_BRAIN_SUCCESS_PROOF_CAPSULE_V1",
+            "sha256": _sha(material),
+            "material": material,
+            "secret_scan": "PASS",
+        }
+
     checkpoint = out.get("controller_checkpoint")
     selected_plan = out.get("selected_plan")
     if not isinstance(checkpoint, Mapping):
