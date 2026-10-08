@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_R2_EXACT_LITERAL_DIRECT_ADEQUACY_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__SECOND_DIRECT_ADEQUACY_CELL__EXACT_LITERAL_END_TO_END",
+  "branch": "r2-direct-exact-literal-adequacy-20261008",
+  "route_id": "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1",
+  "exact_blobs": {
+    "canonical/runtime/goal_compiler.py": {
+      "path": "canonical/runtime/goal_compiler.py",
+      "git_blob_sha": "03c09bb5c5ea5c27eb090dc324e3cd04179e9886"
+    },
+    "canonical/runtime/raw_goal_exact_literal_acceptance_v1.py": {
+      "path": "canonical/runtime/raw_goal_exact_literal_acceptance_v1.py",
+      "git_blob_sha": "18e1a6f1daa8d0b83853649be83c427a063ae55c"
+    },
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "30e210e0a95f08ac9fab0e83e21705aaa12626d7"
+    },
+    "canonical/tests/test_goal_compiler.py": {
+      "path": "canonical/tests/test_goal_compiler.py",
+      "git_blob_sha": "b0e279a28a37cc16d7499530116c814e1c3f569e"
+    },
+    "canonical/tests/test_raw_goal_exact_literal_acceptance_v1.py": {
+      "path": "canonical/tests/test_raw_goal_exact_literal_acceptance_v1.py",
+      "git_blob_sha": "b62d67e02b5773b396b4b5fb4bdd74810b5a41d8"
+    },
+    "canonical/tests/test_r2_direct_end_to_end_adequacy_v1.py": {
+      "path": "canonical/tests/test_r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "ad35c2200fc01e56def3b13a03b1d9065a44cc2f"
+    },
+    "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json": {
+      "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
+      "git_blob_sha": "9d5eeec149113ebdb1683ceef36458ea0f8baec8"
+    },
+    ".github/workflows/verify-general-adequate-decision-fixed-point-v2.yml": {
+      "path": ".github/workflows/verify-general-adequate-decision-fixed-point-v2.yml",
+      "git_blob_sha": "e21f5fac21174c0c83ba09f3028ae546af3b77d4"
+    }
+  },
+  "focused_isolated_replay": {
+    "carrier": "SPRITES",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "tests_run": 11,
+    "tests_passed": 11,
+    "failures": 0,
+    "errors": 0,
+    "covered": [
+      "EXACT_LITERAL_PREFLIGHT_FULLMATCH",
+      "UNMODELED_EXTRA_TEXT_REJECTED",
+      "LOSSLESS_RAW_ROUTING_EFFECT_PRESENT",
+      "EXACT_SINGLE_FINISH_TRACE_ACCEPTED",
+      "NEAR_MISS_SUMMARY_REJECTED",
+      "DIRECT_ADEQUACY_REQUIRES_FULL_ACCEPTANCE",
+      "ARCHIVE_DIRECT_CELL_REGRESSION_PRESERVED"
+    ]
+  },
+  "real_end_to_end_replay": {
+    "carrier": "SPRITES",
+    "fresh_task_identity": true,
+    "result": "R2_EXACT_LITERAL_DIRECT_E2E_PASS",
+    "observed": {
+      "compiler_mode": "DETERMINISTIC_EXACT_LITERAL_RESPONSE",
+      "cognition_dependency_class": "MODEL_INDEPENDENT",
+      "model_dependency_count": 0,
+      "controller_action_count": 1,
+      "raw_acceptance_obligation_count": 1,
+      "accepted_raw_obligation_count": 1,
+      "semantic_acceptance_complete": true,
+      "actual_goal_satisfaction_verified": true
+    }
+  },
+  "checkpoint_replay_observation": {
+    "same_task_id_second_execution_rejected": true,
+    "observed_failure": "MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH",
+    "classification": "EXPECTED_COMPLETED_CHECKPOINT_RESUME_SAFETY__NOT_ROUTE_FAILURE",
+    "production_test_corrected_to_fresh_task_identity": true
+  },
+  "current_direct_adequacy_cells": [
+    "DIRECT_ADEQUACY::ARCHIVE_MANIFEST_TAR_GZ_V1",
+    "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1"
+  ],
+  "proved": [
+    "EXACT_LITERAL_COMPILER_NOW_BINDS_NONEMPTY_ROUTING_EFFECT_FOR_LOSSLESS_CONTRACT",
+    "STRICT_FULLMATCH_PREFLIGHT_OCCURS_BEFORE_EXECUTION",
+    "FULL_RAW_NONWHITESPACE_SOURCE_IS_PRESERVED_AS_ACCEPTANCE_OBLIGATION",
+    "MODEL_INDEPENDENT_SINGLE_FINISH_TRACE_MUST_EQUAL_REQUESTED_LITERAL",
+    "EXECUTION_SUCCESS_WITHOUT_EXACT_TRACE_ACCEPTANCE_CANNOT_PROMOTE",
+    "MATCHED_DIRECT_ROUTE_REMAINS_SINGLE_ATTEMPT_AND_CANNOT_RETRY_BY_ANOTHER_POLICY_PATH"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_CLOSURE",
+    "NO_GLOBAL_R2_CLOSURE",
+    "NO_CLAIM_OTHER_RESPONSE_FORMS_ARE_COVERED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
