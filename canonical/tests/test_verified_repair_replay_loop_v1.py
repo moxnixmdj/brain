@@ -216,9 +216,27 @@ class VerifiedRepairReplayLoopV1Tests(unittest.TestCase):
         )
 
 
-    def test_new_primitive_required_without_expander_remains_unresolved(self):
+    def test_new_primitive_required_without_expander_remains_unresolved_for_generic_gap(self):
         path = self.temp_state()
-        fid, retry_sha, _ = self.seed_failure(path)
+        retry = {
+            "mode": "generic",
+            "problem": {
+                "task_id": "generic-gap",
+                "initial_facts": [],
+                "target_effects": ["GENERIC_TARGET"],
+                "capabilities": [],
+            },
+            "episode_id": "generic-gap",
+            "scope_id": "scope",
+            "learn": True,
+        }
+        seeded = learning.integrate_solver_output(
+            FAILURE,
+            state_path=path,
+            retry_context=retry,
+        )
+        fid = seeded["diagnosis"]["failure_fingerprint"]
+        retry_sha = seeded["retry_capsule_sha256"]
         missing = {
             "pass": False,
             "classification": "NEW_PRIMITIVE_REQUIRED",
@@ -238,6 +256,114 @@ class VerifiedRepairReplayLoopV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(out["status"], "REPAIR_CYCLE_UNRESOLVED_AT_SYNTHESIS")
         self.assertFalse(out["capability_expander_available"])
+        self.assertFalse(out["owned_raw_acquisition_available"])
+
+
+    def test_raw_gap_without_host_expander_uses_owned_acquisition_then_replays(self):
+        path = self.temp_state()
+        fid, retry_sha, _ = self.seed_failure(path)
+        missing = {
+            "pass": False,
+            "classification": "NEW_PRIMITIVE_REQUIRED",
+            "missing_required_effects": ["repair.capability.available"],
+        }
+        acquisition = {
+            "pass": True,
+            "status": "OWNED_RAW_CAPABILITY_ACQUISITION_EXECUTED",
+            "mission_id": "LIVE-BRAIN-AUTO-ACQUIRE-ABC",
+            "origin_mission_sha256": "a" * 64,
+            "auto_acquisition": {
+                "status": "VERIFIED_AND_PROMOTED",
+                "capability_id": "auto.new",
+            },
+        }
+        with (
+            mock.patch.object(brain, "_causal_synthesize", return_value=missing),
+            mock.patch.object(
+                brain,
+                "_owned_raw_capability_acquisition",
+                return_value=acquisition,
+            ) as acquire,
+            mock.patch.object(
+                brain,
+                "_raw_bound_run",
+                return_value={"pass": True, "status": "PASS__ORIGINAL_OBLIGATION"},
+            ) as replay,
+        ):
+            out = brain.execute_failure_repair_cycle(
+                {
+                    "failure_fingerprint": fid,
+                    "retry_capsule_sha256": retry_sha,
+                    "components": [],
+                    "initial_facts": [],
+                },
+                state_path=path,
+            )
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "REPAIR_VERIFIED_BY_OWNED_ACQUISITION_AND_ORIGINAL_REPLAY",
+        )
+        self.assertEqual(out["repair_mode"], "OWNED_RAW_CAPABILITY_ACQUISITION")
+        acquire.assert_called_once()
+        replay.assert_called_once()
+        state = learning.load_state(path)
+        self.assertTrue(
+            state["failures"][fid]["retry_capsules"][retry_sha]["resolved"]
+        )
+
+    def test_owned_acquisition_without_original_replay_success_stays_unresolved(self):
+        path = self.temp_state()
+        fid, retry_sha, _ = self.seed_failure(path)
+        missing = {
+            "pass": False,
+            "classification": "NEW_PRIMITIVE_REQUIRED",
+            "missing_required_effects": ["repair.capability.available"],
+        }
+        acquisition = {
+            "pass": True,
+            "status": "OWNED_RAW_CAPABILITY_ACQUISITION_EXECUTED",
+            "mission_id": "LIVE-BRAIN-AUTO-ACQUIRE-ABC",
+            "origin_mission_sha256": "a" * 64,
+            "auto_acquisition": {"status": "VERIFIED_AND_PROMOTED"},
+        }
+        with (
+            mock.patch.object(brain, "_causal_synthesize", return_value=missing),
+            mock.patch.object(
+                brain,
+                "_owned_raw_capability_acquisition",
+                return_value=acquisition,
+            ),
+            mock.patch.object(
+                brain,
+                "_raw_bound_run",
+                return_value={
+                    "pass": False,
+                    "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+                    "failure_class": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
+                },
+            ),
+        ):
+            out = brain.execute_failure_repair_cycle(
+                {
+                    "failure_fingerprint": fid,
+                    "retry_capsule_sha256": retry_sha,
+                    "components": [],
+                    "initial_facts": [],
+                },
+                state_path=path,
+            )
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "OWNED_ACQUISITION_COMPLETED__ORIGINAL_FAILURE_PERSISTS",
+        )
+        state = learning.load_state(path)
+        self.assertFalse(
+            state["failures"][fid]["retry_capsules"][retry_sha]["resolved"]
+        )
 
     def test_new_primitive_required_uses_authenticated_v12_expansion_then_replays(self):
         path = self.temp_state()
