@@ -19,6 +19,7 @@ from canonical.runtime import exact_linear_parameter_polytope_v1 as mystery_poly
 from canonical.runtime import interval_information_frontier_v1 as mystery_information
 from canonical.runtime import capability_first_scheduler_v1 as capability_scheduler
 from canonical.runtime.brain_owned_python_closure_census_v1 import census as closure_census
+from canonical.runtime.current_authority_runtime_census_v1 import run as authority_runtime_census
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
@@ -101,6 +102,7 @@ def catalog() -> dict[str, Any]:
         ROOT,
         ["canonical/runtime/unified_cognitive_fabric_v1.py"],
     )
+    authority_census = authority_runtime_census(ROOT)
     return {
         "schema": SCHEMA,
         "status": "LIVE_FEDERATED_COGNITIVE_FABRIC",
@@ -114,6 +116,14 @@ def catalog() -> dict[str, Any]:
         "brain_owned_transitive_source_bytes": closure["brain_owned_transitive_source_bytes"],
         "brain_owned_transitive_files": [
             row["path"] for row in closure["brain_owned_transitive_files"]
+        ],
+        "current_authority_runtime_census": authority_census,
+        "current_authority_runtime_complete": authority_census["pass"],
+        "current_authority_runtime_missing_count": authority_census[
+            "authority_runtime_missing_count"
+        ],
+        "current_authority_runtime_missing_paths": authority_census[
+            "authority_runtime_missing_paths"
         ],
         "known_unified_fabric_residuals": list(KNOWN_RESIDUALS),
         "single_front_door": True,
