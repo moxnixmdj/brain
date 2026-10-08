@@ -135,6 +135,7 @@ def verify_outcome_readback(
             "tool_id",
             "sandbox_rel",
             "receipts",
+            "proposal_sha256",
             "pack_git_blob_sha",
             "prior_verification",
         }
@@ -160,6 +161,7 @@ def verify_outcome_readback(
             "tool_id": tool_id,
             "sandbox_rel": sandbox_rel,
             "receipts": checked,
+            "proposal_sha256": outcome.get("proposal_sha256"),
             "pack_git_blob_sha": outcome.get("pack_git_blob_sha"),
             "prior_verification": outcome.get("prior_verification"),
         }
@@ -234,6 +236,13 @@ def execute(
             "tool_id": tool_id,
             "sandbox_rel": sandbox_rel,
             "receipts": checked,
+            "proposal_sha256": sha256(
+                json.dumps(
+                    proposal,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ).encode("utf-8")
+            ).hexdigest(),
             "pack_git_blob_sha": result.get("pack_git_blob_sha"),
             "prior_verification": result.get("prior_verification"),
         }
