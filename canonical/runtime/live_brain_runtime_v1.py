@@ -334,6 +334,7 @@ def _replay_retry_context(
     if mode in {"repair_synthesis", "repair_cycle"}:
         return _fail("RETRY_CONTEXT_REPAIR_RECURSION_FORBIDDEN")
     replay_context = deepcopy(dict(context))
+    replay_context.pop("policy_repair_context", None)
     replay_context["auto_repair"] = False
     if state_path is not None:
         replay_context["state_path"] = str(state_path)
@@ -498,7 +499,24 @@ def execute_failure_repair_cycle(
                             invention_target_source = "STORED_ORIGINAL_OBLIGATION_TARGET_EFFECTS"
             fingerprint_prefix = fingerprint[:16]
             repair_context = request.get("repair_context")
-            if repair_context is not None and not isinstance(repair_context, Mapping):
+            retry_context_for_repair = retry.get("context")
+            persisted_repair_context = (
+                retry_context_for_repair.get("policy_repair_context")
+                if isinstance(retry_context_for_repair, Mapping)
+                else None
+            )
+            if repair_context is None:
+                repair_context = persisted_repair_context
+            elif (
+                persisted_repair_context is not None
+                and repair_context != persisted_repair_context
+            ):
+                return _fail("REPAIR_CONTEXT_CONFLICT_WITH_RETRY_CAPSULE")
+            if repair_context is not None and (
+                not isinstance(repair_context, Mapping)
+                or repair_context.get("schema")
+                != "PROJECT_BRAIN_R2_POLICY_REPAIR_CONTEXT_V1"
+            ):
                 return _fail("REPAIR_CONTEXT_INVALID")
 
             if required_effect == "repair.policy_adequacy_cover.available":
@@ -689,7 +707,7 @@ def _parse_grounded_bound_policy_id(policy_id: str) -> dict[str, str] | None:
 
 
 def _compact_policy_repair_context(result: Mapping[str, Any]) -> dict[str, Any] | None:
-    """Keep only causal policy-frontier structure needed by same-dispatch repair."""
+    """Keep only causal policy-frontier structure needed by immediate or deferred repair."""
     if not isinstance(result, Mapping):
         return None
     decision = result.get("decision_output")
@@ -1140,7 +1158,25 @@ def _observe_runtime_outcome(
         return None
 
     if out.get("pass") is not True:
-        return _integrate_learning(out, state_path=state_path, retry_context=retry_context)
+        observed = deepcopy(dict(out))
+        durable_retry_context = (
+            deepcopy(dict(retry_context))
+            if isinstance(retry_context, Mapping)
+            else retry_context
+        )
+        policy_repair_context = _compact_policy_repair_context(observed)
+        if (
+            policy_repair_context is not None
+            and isinstance(durable_retry_context, dict)
+        ):
+            durable_retry_context["policy_repair_context"] = deepcopy(
+                dict(policy_repair_context)
+            )
+        return _integrate_learning(
+            observed,
+            state_path=state_path,
+            retry_context=durable_retry_context,
+        )
 
     learning_keys = {
         "current_episode_verified",
