@@ -1035,6 +1035,61 @@ def run(
                     dict(grounded_frontier["policy_conditions"])
                 )
                 problem["policy_adequacy_bindings"] = {}
+
+                # Grounded capabilities are hypotheses, so their adequacy is
+                # represented as explicit semantic predicates rather than TRUE.
+                # This lets R2 target the smallest policy-changing uncertainty
+                # without granting grounding any adequacy authority.
+                basis_additions = grounded_frontier.get("decision_basis_additions", [])
+                if not isinstance(basis_additions, list) or any(
+                    not isinstance(x, str) or not x for x in basis_additions
+                ):
+                    raise DecisionControllerError(
+                        "GROUNDED_POLICY_FRONTIER_DECISION_BASIS_INVALID"
+                    )
+                basis = problem.get("decision_basis")
+                if not isinstance(basis, list):
+                    raise DecisionControllerError(
+                        "OPAQUE_BOOTSTRAP_DECISION_BASIS_INVALID"
+                    )
+                for atom in basis_additions:
+                    if atom not in basis:
+                        basis.append(atom)
+
+                frontier_discriminators = grounded_frontier.get("discriminators", [])
+                if not isinstance(frontier_discriminators, list):
+                    raise DecisionControllerError(
+                        "GROUNDED_POLICY_FRONTIER_DISCRIMINATORS_INVALID"
+                    )
+                existing_discriminators = problem.setdefault("discriminators", [])
+                if not isinstance(existing_discriminators, list):
+                    raise DecisionControllerError(
+                        "OPAQUE_BOOTSTRAP_DISCRIMINATORS_INVALID"
+                    )
+                seen_discriminator_ids = {
+                    row.get("discriminator_id")
+                    for row in existing_discriminators
+                    if isinstance(row, Mapping)
+                    and isinstance(row.get("discriminator_id"), str)
+                }
+                for row in frontier_discriminators:
+                    if not isinstance(row, Mapping):
+                        raise DecisionControllerError(
+                            "GROUNDED_POLICY_FRONTIER_DISCRIMINATOR_NOT_OBJECT"
+                        )
+                    discriminator_id = row.get("discriminator_id")
+                    if not isinstance(discriminator_id, str) or not discriminator_id:
+                        raise DecisionControllerError(
+                            "GROUNDED_POLICY_FRONTIER_DISCRIMINATOR_ID_INVALID"
+                        )
+                    if discriminator_id in seen_discriminator_ids:
+                        raise DecisionControllerError(
+                            "GROUNDED_POLICY_FRONTIER_DISCRIMINATOR_ID_CONFLICT:"
+                            + discriminator_id
+                        )
+                    existing_discriminators.append(deepcopy(dict(row)))
+                    seen_discriminator_ids.add(discriminator_id)
+
                 opaque_bootstrap_binding["decision_payload_sha256"] = _digest(
                     decision_payload
                 )
@@ -1320,6 +1375,25 @@ def run(
                         break
                 policy_gap = _extract_policy_gap(decision)
                 if policy_gap is not None:
+                    policy_search_context = deepcopy(
+                        dict(policy_gap.get("search_context", {}))
+                    )
+                    if isinstance(grounded_frontier, Mapping):
+                        predicates = grounded_frontier.get(
+                            "adequacy_predicate_by_policy", {}
+                        )
+                        capabilities = grounded_frontier.get(
+                            "capability_by_policy", {}
+                        )
+                        if isinstance(predicates, Mapping):
+                            policy_search_context[
+                                "grounded_candidate_adequacy_predicates"
+                            ] = deepcopy(dict(predicates))
+                        if isinstance(capabilities, Mapping):
+                            policy_search_context[
+                                "grounded_capability_by_policy"
+                            ] = deepcopy(dict(capabilities))
+
                     policy_request = {
                         "schema": "PROJECT_BRAIN_MINIMUM_POLICY_REPAIR_REQUEST_V1",
                         "task_id": task_id,
@@ -1330,7 +1404,7 @@ def run(
                         "required_artifact": policy_gap["required_artifact"],
                         "selected_policy_id": policy_gap.get("selected_policy_id"),
                         "loop_detail": policy_gap.get("loop_detail", {}),
-                        "search_context": policy_gap.get("search_context", {}),
+                        "search_context": policy_search_context,
                         "preferred_resolution_order": [
                             "REPAIR_OR_REUSE_EXISTING_DECLARED_POLICY_BEFORE_INVENTION",
                             "CERTIFY_ONE_COMMON_BRAIN_OWNED_POLICY_IF_POSSIBLE",
