@@ -4,11 +4,14 @@ import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
+from unittest import mock
 
 from canonical.runtime import r3_independent_learning_verifier_v1 as worker
 from canonical.runtime import universal_verified_adaptive_solver_v1 as v1
 from canonical.runtime import universal_verified_adaptive_solver_v3 as v3
 from canonical.runtime import universal_verified_adaptive_solver_v4 as v4
+from canonical.runtime import universal_verified_adaptive_solver_v12 as v12
+from canonical.runtime import universal_bound_capability_carrier_v1 as carrier
 from canonical.runtime.universal_verified_adaptive_solver_v2 import SUCCESS_CONDITIONS
 from canonical.runtime.executable_skill_program_v7 import induce_candidate, program_digest
 from canonical.runtime.executable_skill_verification_authenticator_v1 import (
@@ -187,6 +190,96 @@ class R3IndependentLearningVerifierV1Tests(unittest.TestCase):
         }
         return problem, episode, trace, request
 
+    def _bound_outer_problem(self):
+        inner = {
+            "initial_facts": [],
+            "target_effects": ["inner.done"],
+            "capabilities": [{
+                "id": "inner",
+                "requires": [],
+                "provides": ["inner.done"],
+                "cost": 1,
+                "result_fields": [],
+                "action": {
+                    "type": "invoke_capability",
+                    "args": {"capability_id": "verified.test.capability"},
+                    "expect": {
+                        "type": "field_equals",
+                        "field": "verified",
+                        "value": True,
+                    },
+                },
+            }],
+            "finish_summary": "INNER_DONE",
+        }
+        action = {
+            "type": "verified_policy",
+            "verifier_id": "BOUND_CAPABILITY_EXECUTION_V1",
+            "verifier_payload": {"problem": inner},
+            "effect_contract": {
+                "effects": ["GOAL"],
+                "verifier_success_condition": SUCCESS_CONDITIONS[
+                    "BOUND_CAPABILITY_EXECUTION_V1"
+                ],
+            },
+        }
+        return {
+            "task_id": "r3-bound-carrier-learning",
+            "initial_facts": [],
+            "target_effects": ["GOAL"],
+            "capabilities": [{
+                "id": "macro",
+                "requires": [],
+                "provides": ["GOAL"],
+                "cost": 1,
+                "result_fields": [],
+                "action": action,
+                "bound_capability_carrier": True,
+            }],
+        }
+
+    def _bind_bound_outer_semantics(self, root: Path, problem: dict) -> None:
+        cap = problem["capabilities"][0]
+        action = cap["action"]
+        expected = {
+            "capability_id": "macro",
+            "task_contract_sha256": v3.task_contract_sha256(problem),
+            "requires": [],
+            "verifier_id": "BOUND_CAPABILITY_EXECUTION_V1",
+            "verifier_payload_sha256": v1._digest(action["verifier_payload"]),
+            "verifier_success_condition": SUCCESS_CONDITIONS[
+                "BOUND_CAPABILITY_EXECUTION_V1"
+            ],
+            "provided_effects": ["GOAL"],
+        }
+        receipt = self._write_doc(
+            root,
+            "evidence/bound-macro.receipt.json",
+            {
+                "schema": v3.BINDING_SCHEMA,
+                **expected,
+                "pass": True,
+                "claim": "BUILTIN_VERIFIER_PASS_IMPLIES_EXACT_PROVIDED_EFFECTS",
+            },
+        )
+        verification = self._write_doc(
+            root,
+            "evidence/bound-macro.verification.json",
+            {
+                "schema": v3.BINDING_VERIFY_SCHEMA,
+                "subject_git_blob_sha": receipt["git_blob_sha"],
+                **expected,
+                "pass": True,
+                "independent_verified": True,
+                "implication_semantics_verified": True,
+                "independent_verifier_id": "TEST_BOUND_CARRIER_SEMANTICS_VERIFIER",
+            },
+        )
+        cap["effect_semantics_binding"] = {
+            "receipt": receipt,
+            "verification": verification,
+        }
+
     def _authenticate_material(self, root: Path, *, episode_id: str, scope_id: str):
         problem, episode, trace, request = self.material(
             root,
@@ -258,6 +351,79 @@ class R3IndependentLearningVerifierV1Tests(unittest.TestCase):
             _, _, _, request = self.material(root)
             request["trace"][0]["effect_outcome_sha256"] = "e" * 64
             request["trace"][0]["effect_outcome"] = {"pretend": "effect"}
+            self.assertIsNone(worker.verify_episode_request(request, repo_root=root))
+
+    def test_bound_carrier_effectful_episode_is_reverified_without_effect_replay(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            problem = self._bound_outer_problem()
+            self._bind_bound_outer_semantics(root, problem)
+            with mock.patch.object(
+                carrier.astra_runtime,
+                "_invoke_bound_capability",
+                return_value={"verified": True},
+            ) as invoke:
+                out = v12.run(
+                    problem,
+                    repo_root=root,
+                    episode_id="bound-ep",
+                    scope_id="bound-scope",
+                )
+
+            self.assertTrue(out["pass"], out)
+            self.assertEqual(out["status"], "SOLVED__EPISODE_VERIFICATION_REQUIRED")
+            self.assertEqual(invoke.call_count, 1)
+            self.assertTrue(out["trace"][0]["effect_outcome_sha256"])
+            request = {
+                "kind": "EPISODE_VERIFICATION",
+                "problem": problem,
+                "episode": out["current_episode"],
+                "trace": out["trace"],
+                "fact_capsule_head_hash": out["state_capsule_head_hash"],
+                "value_capsule_head_hash": out["value_capsule_head_hash"],
+            }
+            binding = worker.verify_episode_request(request, repo_root=root)
+            self.assertIsInstance(binding, dict)
+            self.assertEqual(invoke.call_count, 1, "verification must not replay the effect")
+            auth = authenticate_episode(
+                binding,
+                problem=problem,
+                episode=out["current_episode"],
+                trace=out["trace"],
+                fact_capsule_head_hash=out["state_capsule_head_hash"],
+                value_capsule_head_hash=out["value_capsule_head_hash"],
+                repo_root=root,
+            )
+            self.assertTrue(auth["pass"], auth)
+            self.assertTrue(auth["effect_outcomes_reverified"])
+
+    def test_bound_carrier_effect_outcome_tamper_is_rejected(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            problem = self._bound_outer_problem()
+            self._bind_bound_outer_semantics(root, problem)
+            with mock.patch.object(
+                carrier.astra_runtime,
+                "_invoke_bound_capability",
+                return_value={"verified": True},
+            ):
+                out = v12.run(
+                    problem,
+                    repo_root=root,
+                    episode_id="bound-ep-tamper",
+                    scope_id="bound-scope",
+                )
+            self.assertTrue(out["pass"], out)
+            trace = json.loads(json.dumps(out["trace"]))
+            trace[0]["effect_outcome"]["executed_nonfinish_action_count"] = 999
+            request = {
+                "kind": "EPISODE_VERIFICATION",
+                "problem": problem,
+                "episode": out["current_episode"],
+                "trace": trace,
+                "fact_capsule_head_hash": out["state_capsule_head_hash"],
+                "value_capsule_head_hash": out["value_capsule_head_hash"],
+            }
             self.assertIsNone(worker.verify_episode_request(request, repo_root=root))
 
     def test_exact_skill_is_verified_only_from_reauthenticated_source_episodes(self):
