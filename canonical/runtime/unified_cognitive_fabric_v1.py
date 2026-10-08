@@ -20,6 +20,11 @@ from canonical.runtime import interval_information_frontier_v1 as mystery_inform
 from canonical.runtime import capability_first_scheduler_v1 as capability_scheduler
 from canonical.runtime.brain_owned_python_closure_census_v1 import census as closure_census
 from canonical.runtime.current_authority_runtime_census_v1 import run as authority_runtime_census
+from canonical.runtime import universal_escape_resolver_v1 as universal_escape
+from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
+from canonical.runtime import terminal_autopilot_v1 as terminal_autopilot
+from canonical.runtime import terminal_root_decision_gate_v1 as terminal_root
+from canonical.runtime import terminal_closure_reducer as terminal_closure
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
@@ -36,6 +41,11 @@ ENGINE_DESCRIPTORS = {
     "H100_INFERENCE": "h100_verified_capability_registry_v8",
     "MYSTERY_INFERENCE": "exact_linear_parameter_polytope_v1 + interval_information_frontier_v1",
     "CAPABILITY_SCHEDULER": "capability_first_scheduler_v1.rank_work",
+    "UNIVERSAL_ESCAPE": "universal_escape_resolver_v1.resolve",
+    "CERTIFIED_ROUTE": "certificate_gated_selected_route_runtime_entrypoint_v2",
+    "TERMINAL_AUTOPILOT": "terminal_autopilot_v1",
+    "TERMINAL_ROOT": "terminal_root_decision_gate_v1.evaluate",
+    "TERMINAL_CLOSURE": "terminal_closure_reducer",
 }
 
 KNOWN_RESIDUALS = (
@@ -64,6 +74,14 @@ def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
             return "MYSTERY_INFERENCE"
         if operation in {"SNAPSHOT", "RESOLVE", "PREDICT"}:
             return "H100_INFERENCE"
+
+    if {
+        "escape_cell_id",
+        "escape_membership_bound",
+        "admission_candidates",
+        "v9_args",
+    } <= keys:
+        return "UNIVERSAL_ESCAPE"
 
     if {"task_id", "initial_facts", "target_effects", "capability_inputs"} <= keys:
         return "COMPILED_TASK"
@@ -236,6 +254,71 @@ def run(
                 raise CognitiveFabricError("SCHEDULER_WORK_MUST_BE_LIST")
             out = capability_scheduler.rank_work(work)
             out = {"pass": True, **out}
+        elif mode == "UNIVERSAL_ESCAPE":
+            out = universal_escape.resolve(**dict(payload))
+        elif mode == "CERTIFIED_ROUTE":
+            operation = str(payload.get("operation") or "").strip().upper()
+            if operation == "PREFLIGHT":
+                out = certified_route.preflight()
+            elif operation == "DISPATCH":
+                context = payload.get("context")
+                route_payload = payload.get("route_payload")
+                if not isinstance(context, Mapping):
+                    raise CognitiveFabricError("CERTIFIED_ROUTE_CONTEXT_NOT_OBJECT")
+                if not isinstance(route_payload, Mapping):
+                    raise CognitiveFabricError("CERTIFIED_ROUTE_PAYLOAD_NOT_OBJECT")
+                out = certified_route.dispatch(context, route_payload)
+                out = {"pass": True, **out}
+            else:
+                raise CognitiveFabricError("CERTIFIED_ROUTE_OPERATION_INVALID:" + operation)
+        elif mode == "TERMINAL_AUTOPILOT":
+            operation = str(payload.get("operation") or "").strip().upper()
+            if operation == "BUILD_MANIFEST":
+                out = terminal_autopilot.build_manifest_from_repo(
+                    ROOT,
+                    max_concurrency=int(payload.get("max_concurrency", 32)),
+                )
+                out = {"pass": True, "status": "PASS__TERMINAL_AUTOPILOT_MANIFEST_BUILT", **out}
+            elif operation == "PLAN":
+                manifest = payload.get("manifest")
+                if not isinstance(manifest, Mapping):
+                    raise CognitiveFabricError("TERMINAL_AUTOPILOT_MANIFEST_NOT_OBJECT")
+                out = terminal_autopilot.plan(dict(manifest))
+            else:
+                raise CognitiveFabricError("TERMINAL_AUTOPILOT_OPERATION_INVALID:" + operation)
+        elif mode == "TERMINAL_ROOT":
+            out = terminal_root.evaluate(payload, repo_root=ROOT)
+        elif mode == "TERMINAL_CLOSURE":
+            operation = str(payload.get("operation") or "").strip().upper()
+            if operation == "MANIFEST":
+                manifest = payload.get("manifest")
+                if not isinstance(manifest, Mapping):
+                    raise CognitiveFabricError("TERMINAL_CLOSURE_MANIFEST_NOT_OBJECT")
+                verdict = terminal_closure.evaluate_manifest(dict(manifest), repo_root=ROOT)
+                out = {
+                    "pass": verdict.get("achieved") is True,
+                    "status": (
+                        "PASS__TERMINAL_CLOSURE_ACHIEVED"
+                        if verdict.get("achieved") is True
+                        else "OPEN__TERMINAL_CLOSURE_NOT_ACHIEVED"
+                    ),
+                    **verdict,
+                }
+            elif operation == "FRONTIER":
+                active = payload.get("active_hierarchy")
+                universe = payload.get("global_universe")
+                prequalification = payload.get("prequalification")
+                if not all(isinstance(x, Mapping) for x in (active, universe, prequalification)):
+                    raise CognitiveFabricError("TERMINAL_FRONTIER_INPUT_NOT_OBJECT")
+                verdict = terminal_closure.evaluate_frontier_state(
+                    dict(active), dict(universe), dict(prequalification)
+                )
+                out = {
+                    "pass": verdict.get("status") != "FAIL_CLOSED",
+                    **verdict,
+                }
+            else:
+                raise CognitiveFabricError("TERMINAL_CLOSURE_OPERATION_INVALID:" + operation)
         elif mode == "LEARNING_EPISODE":
             out = self_improvement.run_learning_episode(
                 payload,
