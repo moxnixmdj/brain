@@ -203,3 +203,90 @@ def test_search_budget_returns_verified_irreducible_not_fabricated_minimum():
     assert core["irreducible_proved"] is True
     assert len(core["region_ids"])==14
     assert out["terminal_credit_delta"]==0
+
+
+def test_exact_minimum_observations_avoids_redundant_checks():
+    p=base()
+    p["discriminators"]=[
+        {"discriminator_id":"q_critical","outcomes":{"w0":"left","w1":"left","w2":"right"}},
+    ]+[
+        {"discriminator_id":f"q_redundant_{i}",
+         "outcomes":{"w0":"same","w1":"same","w2":"same"}}
+        for i in range(7)
+    ]
+    out=run(p)
+    assert out["pass"] is True,out
+    plan=out["minimum_declared_observation_plan"]
+    assert plan["minimum_proved"] is True,plan
+    assert plan["observation_count"]==1,plan
+    assert plan["selected_discriminator_ids"]==["q_critical"],plan
+    assert plan["avoided_declared_observations"]==7,plan
+    assert out["policy_adequacy_semantics_verified"] is False
+    assert out["terminal_credit_delta"]==0
+
+
+def test_zero_observation_common_policy_is_proved_minimum():
+    p=base()
+    p["policies"].append(
+        {"policy_id":"pall","adequate_region_ids":["w0","w1","w2"],
+         "adequacy_certificate_ref":None}
+    )
+    out=run(p)
+    assert out["pass"] is True,out
+    plan=out["minimum_declared_observation_plan"]
+    assert plan["minimum_proved"] is True
+    assert plan["selected_discriminator_ids"]==[]
+    assert plan["observation_count"]==0
+
+
+def test_more_than_twelve_observations_returns_no_fake_minimum():
+    p=base()
+    p["discriminators"]=[
+        {"discriminator_id":f"q{i}","outcomes":{"w0":"left","w1":"left","w2":"right"}}
+        for i in range(13)
+    ]
+    out=run(p)
+    assert out["pass"] is True
+    plan=out["minimum_declared_observation_plan"]
+    assert plan["status"]=="UNPROVED_TOO_MANY_DECLARED_DISCRIMINATORS"
+    assert plan["minimum_proved"] is False
+
+
+def test_minimum_q_subset_differential_exhaustive_oracle():
+    import itertools,random
+    rng=random.Random(20261008)
+    for trial in range(110):
+        nr=rng.randint(2,6)
+        nq=rng.randint(0,6)
+        np=rng.randint(1,6)
+        regs=[f"w{i}" for i in range(nr)]
+        policies=[{
+            "policy_id":f"p{i}",
+            "adequate_region_ids":[r for r in regs if rng.random()<0.6],
+            "adequacy_certificate_ref":None,
+        } for i in range(np)]
+        qs=[{
+            "discriminator_id":f"q{i}",
+            "outcomes":{r:rng.choice(["a","b","c"]) for r in regs},
+        } for i in range(nq)]
+        p={"region_ids":regs,"discriminators":qs,"policies":policies}
+        out=run(p)
+        if not out["pass"]:
+            assert out["status"]=="UNSPLITTABLE_DECLARED_POLICY_CONFLICT_CLASS_FOUND",(trial,out)
+            continue
+        plan=out["minimum_declared_observation_plan"]
+        assert plan["minimum_proved"],(trial,plan)
+        found=None
+        for k in range(nq+1):
+            for sub in itertools.combinations(qs,k):
+                buckets={}
+                for reg in regs:
+                    signature=tuple(x["outcomes"][reg] for x in sub)
+                    buckets.setdefault(signature,[]).append(reg)
+                if all(any(set(members)<=set(pol["adequate_region_ids"])
+                           for pol in policies) for members in buckets.values()):
+                    found=k
+                    break
+            if found is not None:break
+        assert found==plan["observation_count"],(trial,found,plan)
+        assert len(plan["selected_discriminator_ids"])==found
