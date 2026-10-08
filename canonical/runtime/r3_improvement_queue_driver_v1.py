@@ -269,6 +269,7 @@ def _reactivate_parked_successes(
     reopened: list[str] = []
     reopened_by: dict[str, str] = {}
     resolved_frontier_handoffs: list[str] = []
+    state_changed = False
     if isinstance(queue, Mapping):
         for wid, raw in list(queue.items()):
             if (
@@ -287,6 +288,7 @@ def _reactivate_parked_successes(
                 raw["verification_authority_sha256"] = verification_authority
                 raw["verification_frontier_sha256"] = frontier
                 raw["frontier_partition_initialized_fail_closed"] = True
+                state_changed = True
                 if not external_authority_available:
                     continue
                 stored_adapter = adapter_frontier
@@ -314,9 +316,16 @@ def _reactivate_parked_successes(
                 raw.pop("blocked_verification_authority_sha256", None)
                 reopened.append(str(wid))
                 reopened_by[str(wid)] = str(raw["reactivated_by"])
+                state_changed = True
             elif stored_authority != verification_authority:
-                raw["verification_authority_change_blocked"] = True
-                raw["blocked_verification_authority_sha256"] = verification_authority
+                if (
+                    raw.get("verification_authority_change_blocked") is not True
+                    or raw.get("blocked_verification_authority_sha256")
+                    != verification_authority
+                ):
+                    raw["verification_authority_change_blocked"] = True
+                    raw["blocked_verification_authority_sha256"] = verification_authority
+                    state_changed = True
 
         if reopened_by:
             for handoff_id, handoff in list(queue.items()):
@@ -338,7 +347,8 @@ def _reactivate_parked_successes(
                 handoff["resolved_by"] = reopened_by[blocked]
                 handoff["resolved_frontier_sha256"] = frontier
                 resolved_frontier_handoffs.append(str(handoff_id))
-    if reopened or resolved_frontier_handoffs:
+                state_changed = True
+    if state_changed:
         learning._refresh_stats(state)
         learning._write_state(state, state_path)
     return {
