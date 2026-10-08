@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+from unittest.mock import Mock, patch
 from pathlib import Path
 
 from canonical.runtime import autonomous_verified_self_improvement_v1 as r3
@@ -178,6 +179,39 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
 
     def test_r3_uses_current_solver_v12(self):
         self.assertIs(r3.solver_v12, solver_v12)
+
+    @patch("canonical.runtime.unified_cognitive_fabric_v1.self_improvement.run_learning_episode")
+    def test_auto_solver_with_independent_verifier_provider_routes_through_r3(
+        self, learning_run
+    ):
+        learning_run.return_value = {
+            "pass": True,
+            "status": "VERIFIED_SKILL_PERMANENTLY_ADMITTED_FOR_REUSE",
+        }
+        episode_verifier = Mock()
+        skill_verifier = Mock()
+        out = run(
+            {
+                "mode": "AUTO",
+                "payload": {
+                    "task_id": "FABRIC-R3-AUTO-001",
+                    "initial_facts": [],
+                    "target_effects": ["DONE"],
+                    "capabilities": [],
+                },
+                "options": {
+                    "episode_id": "ep",
+                    "scope_id": "scope",
+                },
+            },
+            episode_verification_provider=episode_verifier,
+            skill_verification_provider=skill_verifier,
+        )
+        self.assertEqual(out["mode"], "LEARNING_EPISODE")
+        self.assertTrue(out["auto_routed"])
+        kwargs = learning_run.call_args.kwargs
+        self.assertIs(kwargs["episode_verification_provider"], episode_verifier)
+        self.assertIs(kwargs["skill_verification_provider"], skill_verifier)
 
     def test_learning_episode_persists_failure_diagnosis(self):
         with tempfile.TemporaryDirectory() as td:
