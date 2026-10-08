@@ -10,7 +10,7 @@
   "status":"NORMALIZED_EXISTING_P2_PARAMETERIZED_TOP_LAW_ADEQUACY__NO_SCOPE_WIDENING",
   "exact_policy":{"path":"canonical/runtime/p2_p3_information_safe_candidate_v2.py","git_blob_sha":"ea8057b0eadac210c4f4378298df93ed233c5824"},
   "adequacy_authority":{"path":"canonical/governance/P2_EXPLICIT_SEMANTIC_CONTRACT_UNIVERSAL_TOP_LAW_20261007_V1.json","git_blob_sha":"decd0d46538a213f2e169c00c83fae09191a7ed3"},
-  "existing_authenticator":{"path":"canonical/runtime/p2_top_law_policy_adequacy_authenticator_v1.py","git_blob_sha":"ceb8f383c0760fd9d67b967e6edf528d6d6eff37"},
+  "existing_authenticator":{"path":"canonical/runtime/p2_top_law_policy_adequacy_authenticator_v1.py","git_blob_sha":"32aa9e8eea58f15ab23cee1c8441c0c1c2a02360"},
   "independent_replay_source":{"path":"canonical/verification/P2_EXPLICIT_SEMANTIC_CONTRACT_TOP_LAW_CONNECTOR_VERIFY_20261007_V1.json","git_blob_sha":"8375f545ff35ce519719467596bdf1bc15453174"},
   "meaning":"WHEN_CURRENT_CONTEXT_MEMBERSHIP_IN_P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1_IS_SEPARATELY_PROVED__THE_EXACT_BRAIN_OWNED_P2_INFORMATION_SAFE_POLICY_IS_ADEQUATE_FOR_PLAN_SELECTION_INSIDE_THE_VERIFIED_PARAMETERIZED_SELECTED_CLASS.",
   "membership_self_certified":false,
