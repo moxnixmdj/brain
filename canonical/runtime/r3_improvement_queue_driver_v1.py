@@ -66,6 +66,8 @@ def _resolve_work(
 SUCCESS_ADAPTER_FRONTIER_PATHS = (
     "canonical/runtime/r3_bound_success_adapter_v1.py",
     "canonical/runtime/r3_raw_success_adapter_v1.py",
+    "canonical/runtime/r3_structural_bound_success_adapter_v1.py",
+    "canonical/runtime/R3_STRUCTURAL_BOUND_ADAPTER_RULES_V1.json",
 )
 SUCCESS_VERIFICATION_AUTHORITY_PATHS = (
     "canonical/runtime/r3_independent_learning_verifier_v1.py",
@@ -79,6 +81,8 @@ SUCCESS_LEARNING_FRONTIER_PATHS = (
     "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
     "canonical/runtime/r3_raw_success_adapter_v1.py",
     "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
+    "canonical/runtime/r3_structural_bound_success_adapter_v1.py",
+    "canonical/runtime/R3_STRUCTURAL_BOUND_ADAPTER_RULES_V1.json",
 )
 
 FRONTIER_EXPANSION_KIND = "EXPAND_SUCCESS_VERIFICATION_FRONTIER"
@@ -243,6 +247,7 @@ def _activate_owned_success_adapter_frontier(
     importlib.invalidate_caches()
     from canonical.runtime import r3_bound_success_adapter_v1 as bound_success_adapter
     from canonical.runtime import r3_raw_success_adapter_v1 as raw_success_adapter
+    from canonical.runtime import r3_structural_bound_success_adapter_v1 as structural_success_adapter
 
     modules = (
         (
@@ -252,6 +257,10 @@ def _activate_owned_success_adapter_frontier(
         (
             raw_success_adapter,
             "canonical/runtime/r3_raw_success_adapter_v1.py",
+        ),
+        (
+            structural_success_adapter,
+            "canonical/runtime/r3_structural_bound_success_adapter_v1.py",
         ),
     )
     activated: list[dict[str, str]] = []
@@ -1466,12 +1475,16 @@ def advance_once(
     if success_episode_adapter_provider is None:
         from canonical.runtime import r3_bound_success_adapter_v1 as bound_success_adapter
         from canonical.runtime import r3_raw_success_adapter_v1 as raw_success_adapter
+        from canonical.runtime import r3_structural_bound_success_adapter_v1 as structural_success_adapter
 
         def _owned_success_adapter(request):
             adapted = bound_success_adapter.adapt(request, repo_root=repo_root)
             if adapted is not None:
                 return adapted
-            return raw_success_adapter.adapt(request, repo_root=repo_root)
+            adapted = raw_success_adapter.adapt(request, repo_root=repo_root)
+            if adapted is not None:
+                return adapted
+            return structural_success_adapter.adapt(request, repo_root=repo_root)
 
         success_episode_adapter_provider = _owned_success_adapter
 
@@ -1741,7 +1754,24 @@ def advance_once(
 
             if kind == FRONTIER_EXPANSION_KIND:
                 payload = work.get("payload")
-                if verification_frontier_acquisition_provider is None:
+                acquisition_provider = verification_frontier_acquisition_provider
+                acquisition_provider_id = verification_frontier_acquisition_provider_id
+                if acquisition_provider is None:
+                    from canonical.runtime import r3_structural_bound_rule_acquisition_v1 as native_structural_acquisition
+
+                    if native_structural_acquisition.can_acquire(
+                        work,
+                        state_path=state_path,
+                        repo_root=repo_root,
+                    ):
+                        acquisition_provider = lambda request: native_structural_acquisition.acquire(
+                            request,
+                            state_path=state_path,
+                            repo_root=repo_root,
+                        )
+                        acquisition_provider_id = native_structural_acquisition.PROVIDER_ID
+
+                if acquisition_provider is None:
                     from canonical.runtime import r3_root1_adapter_gap_witness_v1 as root1_gap
 
                     compiled_gap = root1_gap.compile_gap(
@@ -1783,8 +1813,8 @@ def advance_once(
                     work,
                     state_path=state_path,
                     repo_root=repo_root,
-                    provider=verification_frontier_acquisition_provider,
-                    provider_id=verification_frontier_acquisition_provider_id,
+                    provider=acquisition_provider,
+                    provider_id=acquisition_provider_id,
                 )
                 return {
                     **out,
