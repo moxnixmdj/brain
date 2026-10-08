@@ -858,7 +858,7 @@ def record_success_observation(
             "replayable": replay_capsule is not None,
             "proof_capsule_sha256": core["proof_capsule_sha256"],
             "proof_available": proof_capsule is not None,
-            "required_result": "VERIFIED_EPISODE_OR_PROVED_NONLEARNABLE_SUCCESS",
+            "required_result": "VERIFIED_EPISODE_OR_TRUTHFUL_VERIFICATION_FRONTIER_DISPOSITION",
         },
     )
     _refresh_stats(state)
@@ -1029,6 +1029,51 @@ def integrate_solver_output(
             "improvement_work_id": work_id,
             "next_improvement_action": _next_improvement_from_state(state),
             "state_stats": deepcopy(state["stats"]),
+            "permanent_reuse_authorized": False,
+            "terminal_authority": False,
+        }
+
+    raw_episode = out.get("current_episode")
+    raw_skill_candidate = out.get("skill_candidate")
+    raw_verified_skill = out.get("verified_executable_skill")
+
+    if out.get("current_episode_verified") is True and not isinstance(raw_episode, Mapping):
+        raise SelfImprovementError("VERIFIED_EPISODE_MISSING")
+    if (
+        out.get("verified_skill_reuse_authorized") is True
+        and not isinstance(raw_verified_skill, Mapping)
+    ):
+        raise SelfImprovementError("VERIFIED_SKILL_REUSE_AUTHORITY_MISSING")
+
+    has_episode_evidence = isinstance(raw_episode, Mapping)
+    has_content_addressed_skill_candidate = (
+        isinstance(raw_skill_candidate, Mapping)
+        and bool(_s(raw_skill_candidate.get("candidate_sha256")))
+    )
+    has_verified_skill_evidence = (
+        out.get("verified_skill_reuse_authorized") is True
+        and isinstance(raw_verified_skill, Mapping)
+    )
+
+    if not (
+        has_episode_evidence
+        or has_content_addressed_skill_candidate
+        or has_verified_skill_evidence
+    ):
+        observed = record_success_observation(
+            out,
+            surface="SOLVER_SUCCESS_WITHOUT_ADMISSIBLE_LEARNING_EVIDENCE",
+            state_path=state_path,
+            replay_context=retry_context,
+        )
+        return {
+            **observed,
+            "status": "SUCCESS_RETAINED__ADMISSIBLE_LEARNING_EVIDENCE_INCOMPLETE",
+            "integration_disposition_reason": (
+                "SKILL_CANDIDATE_MISSING_CONTENT_ADDRESS"
+                if isinstance(raw_skill_candidate, Mapping)
+                else "NO_ADMISSIBLE_LEARNING_EVIDENCE"
+            ),
             "permanent_reuse_authorized": False,
             "terminal_authority": False,
         }
