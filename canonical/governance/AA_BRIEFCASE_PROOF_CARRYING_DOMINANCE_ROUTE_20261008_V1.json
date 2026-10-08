@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PROOF_CARRYING_DOMINANCE_ROUTE_V1",
   "date": "2026-10-08",
-  "status": "EXECUTABLE_ROUTE_INDEPENDENTLY_REPLAYED__22_OF_22__PRIVATE_SCOPE_RECEIPT_MISSING__ZERO_TERMINAL_CREDIT",
+  "status": "EXECUTABLE_MULTI_ROUTE_NONINFERIORITY_BRIDGE__31_OF_31__MINIMAL_OWNER_ATTESTATION_AVAILABLE__REAL_OWNER_RECEIPT_MISSING__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "problem_reduction": {
     "old_default": "REPRODUCE_OR_OBTAIN_ONE_MATCHED_CURRENT_OWNER_AA_BRIEFCASE_ELO_AND_COMPARE_TO_1807",
@@ -43,7 +43,7 @@
     },
     "disjunctive_bridge_v3": {
       "path": "canonical/runtime/aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
-      "git_blob_sha": "d810398d345d46230cdd695a376d041f58fe6809"
+      "git_blob_sha": "f6182964cae265bf7d58b10d8275d8fc3e015a45"
     },
     "tests": [
       {
@@ -52,7 +52,7 @@
       },
       {
         "path": "canonical/tests/test_aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
-        "git_blob_sha": "9bca3033620e8988ea7ea29ad36b8286c373f0de"
+        "git_blob_sha": "6e673cc6e80f0de9d1911aa04f4bf42ea8fdc6d8"
       }
     ],
     "independent_runtime_verification": {
@@ -62,6 +62,22 @@
     "current_external_receipt_route_audit": {
       "path": "canonical/evidence/AA_BRIEFCASE_CURRENT_EXTERNAL_RECEIPT_ROUTE_AUDIT_20261008_V1.json",
       "git_blob_sha": "4a670c8e798c99ba926c64be11d0fb1bc7205769"
+    },
+    "minimal_owner_attestation_information_cut": {
+      "path": "canonical/governance/AA_BRIEFCASE_MINIMAL_OWNER_ATTESTATION_INFORMATION_CUT_20261008_V1.json",
+      "git_blob_sha": "e41066f4a8304ae1bc93644c26cb78def3d1a360"
+    },
+    "minimal_owner_attestation_runtime": {
+      "path": "canonical/runtime/aa_briefcase_minimal_owner_attestation_v1.py",
+      "git_blob_sha": "7ef8b3a1b15e996fabfbad64b2116d834a380baf"
+    },
+    "minimal_owner_attestation_tests": {
+      "path": "canonical/tests/test_aa_briefcase_minimal_owner_attestation_v1.py",
+      "git_blob_sha": "555db3d8d21fda1d784c321a07a61f1628a76c9a"
+    },
+    "minimal_owner_attestation_verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_MINIMAL_OWNER_ATTESTATION_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "eb9ab40ee986bc3853abfdc000ae6869ca656c83"
     }
   },
   "per_check_certification": {
@@ -126,7 +142,7 @@
     "SECOND AA_BRIEFCASE EXECUTION FOR THE ARTIFACT FAMILY ALIAS",
     "TARGET QUERIES FOR E OR M CHECKS ALREADY CLOSED BY STRONGER TOP OR MONOTONE PROOFS"
   ],
-  "remaining_minimum_missing_fact": "ONE AUTHENTICATED CURRENT-EPOCH SCOPE-COMPLETE PRIVATE AA_BRIEFCASE RECEIPT PROVIDING THE PRIVATE POPULATION ROOTS AND THE E_M_U PER-CHECK CERTIFICATES OR AN OWNER-EQUIVALENT DIRECT DOMINANCE ATTESTATION",
+  "remaining_minimum_missing_fact": "ONE REAL VERIFIED CURRENT-EPOCH BENCHMARK-OWNER OR AUTHORIZED-OPERATOR SIGNED SCOPE-COMPLETE NONINFERIORITY ATTESTATION BINDING THE BRAIN SUBJECT CURRENT GRADING PROTOCOL PRIVATE TASK/CHECK POPULATION COMMITMENTS AND CURRENT OPUS55 REFERENCE__OR A STRONGER ALREADY-SUPPORTED ROUTE.",
   "fail_closed_falsifiers": [
     "STALE OR DIFFERENT EPOCH",
     "CURRENT GRADING PROTOCOL MANIFEST DRIFT",
@@ -156,18 +172,41 @@
     "spend_measurement_available_for_remote_replay": false
   },
   "runtime_verification": {
-    "tests_run": 22,
-    "tests_passed": 22,
+    "tests_run": 31,
+    "tests_passed": 31,
     "failures": 0,
     "errors": 0,
     "executor": "REMOTE_ISOLATED_SPRITE",
     "private_benchmark_cases_consumed": 0,
-    "conclusion": "ROUTE_MECHANICS_AND_FAIL_CLOSED_INVARIANTS_PASS__REAL_PRIVATE_SCOPE_RECEIPT_STILL_REQUIRED"
+    "conclusion": "ALL THREE ROUTE MECHANICS PASS__MINIMAL OWNER ATTESTATION IS NOW THE CHEAPEST SOUND EXTERNAL CUT__REAL OWNER RECEIPT STILL REQUIRED"
   },
   "external_receipt_route": {
     "discovered_self_service_official_aa_briefcase_endpoint": false,
     "discovered_public_path": "ARTIFICIAL_ANALYSIS_CUSTOM_BENCHMARKING_CONTACT",
     "sufficiency": "UNPROVED__MUST_EXPLICITLY PRODUCE CURRENT_EPOCH_SCOPE_COMPLETE_AA_BRIEFCASE_RECEIPT_OR OWNER-EQUIVALENT DIRECT-DOMINANCE ATTESTATION",
     "third_party_aa_style_scores_accepted": false
-  }
+  },
+  "current_noninferiority_routes": [
+    {
+      "rank": 1,
+      "id": "MINIMAL_OWNER_ATTESTATION",
+      "external_information": "SIGNED OWNER OR AUTHORIZED-OPERATOR SCOPE-COMPLETE CURRENT-EPOCH NONINFERIORITY STATEMENT PLUS PRIVATE POPULATION COMMITMENTS",
+      "private_task_bytes_disclosed": false,
+      "private_rubric_bytes_disclosed": false,
+      "numeric_elo_reconstruction_required": false
+    },
+    {
+      "rank": 2,
+      "id": "SCOPE_COMPLETE_DIRECT_DOMINANCE",
+      "external_information": "DETAILED E_M_U CHECK-LEVEL CERTIFICATES OVER THE COMPLETE PRIVATE SCOPE",
+      "private_task_bytes_disclosed": false,
+      "numeric_elo_reconstruction_required": false
+    },
+    {
+      "rank": 3,
+      "id": "MATCHED_CURRENT_EPOCH_ELO",
+      "external_information": "ONE INDEPENDENT OR OWNER-VERIFIED COMPARABLE CURRENT-EPOCH BRAIN ELO RECEIPT",
+      "numeric_elo_reconstruction_required": true
+    }
+  ]
 }
