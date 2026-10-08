@@ -1850,5 +1850,20 @@
     "terminal": false,
     "gdpval_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "capability_first_scheduler_20261008_v1": {
+    "status": "ACTIVE_PRIMARY_CAPABILITY_DEVELOPMENT_SCHEDULER",
+    "governance": {
+      "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V1.json"
+    },
+    "runtime": {
+      "path": "canonical/runtime/capability_first_scheduler_v1.py"
+    },
+    "operational_objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+    "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT",
+    "benchmark_role": "INSTRUMENTATION_NOT_PRODUCT",
+    "rule": "PRIMARY_DEVELOPMENT_PRIORITY_FOLLOWS_CAPABILITY_RESOURCE_PARETO_LEVERAGE__BENCHMARK_ONLY_BOOKKEEPING_IS_DEMOTED_UNLESS_IT_LOCALIZES_VALIDATES_FALSIFIES_OR_CERTIFIES",
+    "preserves_terminal_truth": "ACTIVE_FAIL_CLOSED_ONE_TERMINAL_ACCEPTANCE_ROOT__UNIVERSAL_COVER_OR_FROZEN_PROTOCOL_ROUTE__TERMINAL_FALSE",
+    "terminal_credit_delta": 0
   }
 }
