@@ -1801,6 +1801,23 @@ def run_learning_episode(
     if not eid or not scope:
         raise SelfImprovementError("EPISODE_ID_AND_SCOPE_REQUIRED")
 
+    if episode_verification_provider is None or skill_verification_provider is None:
+        from canonical.runtime import r3_independent_learning_verifier_v1 as independent
+        if episode_verification_provider is None:
+            episode_verification_provider = lambda request: independent.verify_episode_request(
+                {
+                    **dict(request),
+                    "effect_root": effect_root,
+                },
+                repo_root=repo_root,
+            )
+        if skill_verification_provider is None:
+            skill_verification_provider = lambda request: independent.verify_skill_request(
+                request,
+                repo_root=repo_root,
+                state_path=state_path,
+            )
+
     state = load_state(state_path)
     prior = _prior_verified_episodes(state, scope_id=scope, episode_id=eid)
     generalization_prior = _all_prior_verified_episodes(state, episode_id=eid)
