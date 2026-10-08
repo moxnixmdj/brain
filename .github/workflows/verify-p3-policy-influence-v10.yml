@@ -1,0 +1,22 @@
+name: Verify P3 policy influence V10
+on:
+  pull_request:
+    paths:
+      - canonical/runtime/p3_policy_influence_relevance_cell_v1.py
+      - canonical/runtime/p3_real_context_v3_admission_v10.py
+      - canonical/tests/test_p3_policy_influence_relevance_cell_v1.py
+      - canonical/tests/test_p3_real_context_v3_admission_v10.py
+      - canonical/governance/P3_POLICY_INFLUENCE_NONINTERFERENCE_20261008_V1.json
+      - .github/workflows/verify-p3-policy-influence-v10.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_p3_policy_influence_relevance_cell_v1 canonical.tests.test_p3_real_context_v3_admission_v10
