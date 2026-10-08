@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_R3_FRONTIER_AUTHORITY_PARTITION_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__R3_EXACT_ORIGIN_ADAPTER_FRONTIER_PARTITION__26_OF_26_FOCUSED_TESTS",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r3-frontier-authority-origin-v3-20261008-sol",
+    "base_main_commit": "b6c68af299f30ae09518f2805008e44da6fbf22e",
+    "head_before_receipt": "61f1ead8d5fa6f7e3f28da1837d2908f6c06364f",
+    "exact_blobs": {
+      "canonical/runtime/r3_improvement_queue_driver_v1.py": "9f50f3faae4f99926d983649ad1d644ec66767c2",
+      "canonical/tests/test_r3_improvement_queue_driver_v1.py": "d9b3862185f9fb6ac4e3894fdf4ca5f63e94b89d"
+    }
+  },
+  "proved": {
+    "success_frontier_partitioned": true,
+    "candidate_adapter_paths": [
+      "canonical/runtime/r3_bound_success_adapter_v1.py",
+      "canonical/runtime/r3_raw_success_adapter_v1.py"
+    ],
+    "verification_authority_paths": [
+      "canonical/runtime/r3_independent_learning_verifier_v1.py",
+      "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
+      "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py"
+    ],
+    "adapter_activation_requires_exact_repository_origin": true,
+    "adapter_activation_reloads_only_adapter_modules": true,
+    "verification_authority_digest_checked_before_activation": true,
+    "verification_authority_digest_checked_after_activation": true,
+    "acquisition_provider_verification_authority_rewrite_rejected": true,
+    "rejected_authority_change_remains_parked_on_next_tick": true,
+    "external_success_adapter_cannot_override_changed_owned_verification_authority": true,
+    "explicit_external_episode_verification_authority_can_still_reopen": true,
+    "adapter_only_frontier_change_can_reopen_after_successful_activation": true,
+    "original_success_replayed": false,
+    "acquisition_provider_promotion_authority": false,
+    "acquisition_provider_terminal_authority": false
+  },
+  "isolated_verification": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "py_compile": "PASS",
+    "command": "python3 -m unittest canonical.tests.test_r3_improvement_queue_driver_v1 -v",
+    "tests_run": 26,
+    "tests_passed": 26,
+    "tests_failed": 0,
+    "tests_errors": 0,
+    "elapsed_seconds": 0.098,
+    "incremental_spend_usd": 0
+  },
+  "integration_boundary": {
+    "unified_fabric_signature_changed": false,
+    "provider_forwarding_contract_changed": false,
+    "full_fabric_replay_on_this_sprite": "NOT_COUNTED__SPRITE_SNAPSHOT_MISSING_TRANSITIVE_UNIVERSAL_LEARNING_MODULES",
+    "prior_v8_origin_bound_fabric_authority_preserved": true
+  },
+  "supersedes_narrow_claim": {
+    "prior_v8_rule": "ANY_ACTIVATED_COMBINED_FRONTIER_BYTE_CHANGE_MAY_REOPEN",
+    "corrected_rule": "ONLY_ACTIVATED_SUCCESS_ADAPTER_FRONTIER_CHANGE_WITH_BYTE_IDENTICAL_VERIFICATION_AUTHORITY_MAY_REOPEN_WITHOUT_EXTERNAL_VERIFICATION_AUTHORITY"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_DEFAULT_ROOT1_ACQUISITION_PROVIDER_EXISTS",
+    "NO_CLAIM_EVERY_MISSING_ADAPTER_IS_ACQUIRABLE",
+    "NO_CLAIM_VERIFICATION_AUTHORITY_CAN_BE_PROMOTED_THROUGH_THIS_ACQUISITION_INTERFACE",
+    "NO_TERMINAL_GOAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
