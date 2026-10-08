@@ -45,7 +45,7 @@ class T(unittest.TestCase):
         )
         self.assertEqual(out["predicate_results"], {p: True for p in PREDICATES})
         self.assertTrue(out["numeric_elo_reconstruction_required"])
-        self.assertTrue(out["official_owner_elo_claimed"])
+        self.assertFalse(out["official_owner_elo_claimed"])\n        self.assertTrue(out["numeric_comparable_elo_used"])
 
     def test_below_score_fails_without_affecting_direct_route(self):
         out = compile_current_epoch_noninferiority(
