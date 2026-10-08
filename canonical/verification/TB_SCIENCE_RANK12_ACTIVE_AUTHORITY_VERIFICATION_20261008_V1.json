@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK12_ACTIVE_AUTHORITY_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_WOLFRAM_AND_DUAL_PUBLIC_RUNNER_PREFLIGHT_PASS__TASK_NOT_STARTED__ZERO_CREDIT",
+  "subject": {
+    "authority_path": "canonical/governance/TB_SCIENCE_RANK12_ONE_SLOT_EXECUTION_AUTHORITY_20261008_V1.json",
+    "authority_blob": "732b00c707a1e5b1ef6cf39ed85c5bd1abb557a9",
+    "intent_blob": "fb808faaa65cab15434349522052de84d27f4376"
+  },
+  "public_epoch": {
+    "runner_base_commit": "88c3f76be396494a2594130e09974e9d18b6b5a3",
+    "epoch_blob": "5426f9db570cfa83d5f96859d2087d11cd6b813a",
+    "run_attempts_authorized": 0
+  },
+  "independent_wolfram": {
+    "all_pass": true,
+    "checks": [
+      "RANK12_EQUALS_11_CONSUMED_PLUS_ONE",
+      "ONE_ATTEMPT",
+      "ZERO_RETRIES",
+      "NO_REPLACEMENT",
+      "PRESTART_EXECUTION_CLAIM_FALSE",
+      "PRESTART_ACTIVATION_FALSE",
+      "TASK_STARTED_FALSE",
+      "RESULT_PRESENT_FALSE",
+      "AUTHORITY_CONSUMED_FALSE",
+      "PRECHECK_FAILURE_NONCONSUMING",
+      "POST_START_IRREVERSIBLE",
+      "199_REMAINING_SLOTS",
+      "124_SUCCESSES_STILL_NEEDED",
+      "76_ADDITIONAL_FAILURES_BEFORE_FAIL_LOCK",
+      "PASS_STILL_MATHEMATICALLY_REACHABLE"
+    ],
+    "required_success_rate_over_remaining": 0.6231155778894473
+  },
+  "live_carrier_corroboration": [
+    {
+      "workflow_run_id": 37724821890,
+      "job_id": 113140481790,
+      "conclusion": "success",
+      "artifact_id": 11528115607,
+      "artifact_digest": "sha256:d2e057a994afa9bb684a7e47cdbd5ef1f4d7c9a488f9cbcddc1e625798cf5329"
+    },
+    {
+      "workflow_run_id": 37725615649,
+      "job_id": 113142972080,
+      "conclusion": "success",
+      "artifact_id": 11527369247,
+      "artifact_digest": "sha256:e97881054c8d2f8899343277bc3ffbce8bf0c901ba1e3c302a5ecccc19d514b7"
+    }
+  ],
+  "verified_state": {
+    "execution_claim_active": false,
+    "public_activation_armed": false,
+    "task_started": false,
+    "result_present": false,
+    "authority_consumed": false,
+    "benchmark_task_exposure_from_preflights": 0
+  },
+  "conclusion": "ACTIVE_BRAIN_SIDE_ONE_SLOT_AUTHORITY_IS_STRUCTURALLY_SOUND_BUT_CANNOT_START_RANK12_UNTIL_A_SEPARATE_EXACT_PUBLIC_EXECUTION_LEASE_IS_PUBLISHED_AND_RECHECKED",
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
