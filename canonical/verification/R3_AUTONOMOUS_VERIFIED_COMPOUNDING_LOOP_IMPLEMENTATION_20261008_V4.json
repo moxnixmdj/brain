@@ -53,7 +53,18 @@
       "run_id": 37784424151,
       "job_id": 113335399057,
       "conclusion": "success",
-      "exact_driver_blob": "2a0f33604ddc49f312f7bdc5c4feadc817790692"
+      "exact_driver_blob": "2a0f33604ddc49f312f7bdc5c4feadc817790692",
+      "workflow_commit": "f9248ac074410c5e8e2858c2c9d66cabe20c950e",
+      "verified": [
+        "EXACT_CURRENT_SOURCE_GIT_BLOB_BOUND",
+        "EXACT_CURRENT_SOURCE_COMPILES",
+        "UNSUPPORTED_DEFAULT_SUCCESS_ADAPTATION_PARKS_CURRENT_EVIDENCE",
+        "UNCHANGED_OWNED_VERIFIER_FRONTIER_DOES_NOT_RETRY_PARKED_WORK",
+        "OWNED_VERIFIER_FRONTIER_CHANGE_REOPENS_PARKED_WORK",
+        "EXTERNAL_VERIFICATION_AUTHORITY_REOPENS_PARKED_WORK",
+        "PARKING_DOES_NOT_CLAIM_PERMANENT_NONLEARNABILITY",
+        "PARKED_DISPOSITION_DOES_NOT_STARVE_UNRELATED_ACTIONABLE_WORK"
+      ]
     },
     {
       "path": "canonical/verification/R3_EFFECTFUL_READBACK_PUBLIC_RUNNER_VERIFICATION_20261008_V1.json",
@@ -80,5 +91,21 @@
   "current_truth": "R3 NOW HAS A CLOSED CONTROL POLICY FOR EVERY OBSERVED EXPERIENCE UNDER ITS CURRENT EVIDENCE: VERIFY_AND_REUSE, REPAIR, QUARANTINE, WAIT_FOR_SPECIFIC_EVIDENCE, OR PARK_WITHOUT_PERMANENT_IMPOSSIBILITY_CLAIMS. THE REMAINING UNIVERSAL LIMIT IS WHETHER REALITY EXPOSES INDEPENDENT EVIDENCE FOR A PARTICULAR EFFECT.",
   "incremental_spend_usd": 0,
   "terminal_authority": false,
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "merged_main_commit": "9eb55ccbcac9bc8d25464edb7192e5dcb79a027b",
+  "private_ci": {
+    "status": "CARRIER_FAILURE_BEFORE_RUNNER_ASSIGNMENT__NO_CODE_VERDICT",
+    "pull_request_run_id": 37784715719,
+    "pull_request_job_id": 113336400161,
+    "pull_request_steps_executed": 0,
+    "merged_main_run_id": 37784758714,
+    "merged_main_job_id": 113336548265,
+    "merged_main_steps_executed": 0
+  },
+  "verification_truth": {
+    "current_driver_control_flow_independently_executed": true,
+    "complete_private_repository_integration_freshly_executed": false,
+    "reason": "PRIVATE_GITHUB_ACTIONS_CARRIER_FAILED_BEFORE_RUNNER_ASSIGNMENT_WITH_ZERO_STEPS",
+    "carrier_failure_is_not_code_failure": true
+  }
 }
