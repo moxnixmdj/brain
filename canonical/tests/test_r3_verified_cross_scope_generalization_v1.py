@@ -50,21 +50,26 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
             out["scope_predicate"] = predicate
         return out
 
+    def authorized_state(self, verified):
+        sid = loop._skill_id(verified)
+        return sid, {
+            "skills": {
+                sid: {
+                    "active": True,
+                    "skill": verified,
+                    "family_id": loop._family_id(verified),
+                    "pareto_metrics": {},
+                }
+            }
+        }
+
     def test_unbound_proven_superset_stays_source_scope_only(self):
         candidate = self.candidate()
         verified = skill_program.verify_candidate(
             candidate=candidate,
             verification_receipt=self.legacy_receipt(candidate),
         )
-        state = {
-            "skills": {
-                "skill:test": {
-                    "active": True,
-                    "skill": verified,
-                    "pareto_metrics": {},
-                }
-            }
-        }
+        sid, state = self.authorized_state(verified)
         problem = {
             "task_id": "t",
             "initial_facts": ["A"],
@@ -73,21 +78,27 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
                 {"id": "cap.demo", "requires": ["A"], "provides": ["B"]}
             ],
         }
-        self.assertIsNone(
-            loop._select_active_skill(
+        with mock.patch.object(
+            loop,
+            "reauthenticate_skill_record",
+            return_value={"pass": True, "verified_skill": verified},
+        ):
+            self.assertIsNone(
+                loop._select_active_skill(
+                    problem,
+                    state,
+                    scope_id="scope-b",
+                    known_absent_invalidators=[],
+                )
+            )
+            same_scope = loop._select_active_skill(
                 problem,
                 state,
-                scope_id="scope-b",
+                scope_id="scope-a",
                 known_absent_invalidators=[],
             )
-        )
-        same_scope = loop._select_active_skill(
-            problem,
-            state,
-            scope_id="scope-a",
-            known_absent_invalidators=[],
-        )
         self.assertIsNotNone(same_scope)
+        self.assertEqual(same_scope["skill_id"], sid)
 
     def test_structural_match_verified_superset_reuses_across_scope(self):
         candidate = self.candidate()
@@ -98,15 +109,7 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
                 predicate=loop.VERIFIED_SUPERSET_SCOPE_PREDICATE,
             ),
         )
-        state = {
-            "skills": {
-                "skill:test": {
-                    "active": True,
-                    "skill": verified,
-                    "pareto_metrics": {},
-                }
-            }
-        }
+        sid, state = self.authorized_state(verified)
         problem = {
             "task_id": "t",
             "initial_facts": ["A"],
@@ -115,14 +118,19 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
                 {"id": "cap.demo", "requires": ["A"], "provides": ["B"]}
             ],
         }
-        selected = loop._select_active_skill(
-            problem,
-            state,
-            scope_id="scope-b",
-            known_absent_invalidators=[],
-        )
+        with mock.patch.object(
+            loop,
+            "reauthenticate_skill_record",
+            return_value={"pass": True, "verified_skill": verified},
+        ):
+            selected = loop._select_active_skill(
+                problem,
+                state,
+                scope_id="scope-b",
+                known_absent_invalidators=[],
+            )
         self.assertIsNotNone(selected)
-        self.assertEqual(selected["skill_id"], "skill:test")
+        self.assertEqual(selected["skill_id"], sid)
 
     def test_cross_scope_reuse_still_requires_exact_executable_structure(self):
         candidate = self.candidate()
@@ -133,15 +141,7 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
                 predicate=loop.VERIFIED_SUPERSET_SCOPE_PREDICATE,
             ),
         )
-        state = {
-            "skills": {
-                "skill:test": {
-                    "active": True,
-                    "skill": verified,
-                    "pareto_metrics": {},
-                }
-            }
-        }
+        sid, state = self.authorized_state(verified)
         drifted = {
             "task_id": "t",
             "initial_facts": ["A"],
@@ -150,14 +150,20 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
                 {"id": "cap.demo", "requires": ["A"], "provides": ["C"]}
             ],
         }
-        self.assertIsNone(
-            loop._select_active_skill(
-                drifted,
-                state,
-                scope_id="scope-b",
-                known_absent_invalidators=[],
+        with mock.patch.object(
+            loop,
+            "reauthenticate_skill_record",
+            return_value={"pass": True, "verified_skill": verified},
+        ) as reauth:
+            self.assertIsNone(
+                loop._select_active_skill(
+                    drifted,
+                    state,
+                    scope_id="scope-b",
+                    known_absent_invalidators=[],
+                )
             )
-        )
+        reauth.assert_called()
 
     def test_pareto_generalization_credit_requires_bound_predicate(self):
         candidate = self.candidate()
