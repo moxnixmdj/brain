@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK12_AUTHORITY_CANDIDATE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SPRITE_AND_PUBLIC_RUNNER_PREEXPOSURE_PASS__ZERO_TASK_EXPOSURE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TB_SCIENCE_RANK12_ONE_SLOT_EXECUTION_AUTHORITY_CANDIDATE_20261008_V1.json",
+    "git_blob_sha": "c495b513fb6088a3df6340b77c6b1dfffef9c6c4"
+  },
+  "independent_sprite": {
+    "provider": "SPRITES",
+    "name": "brain-root3-current-byte-replay-20261007-v1",
+    "id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/tb_science_rank12_candidate_verify_v1",
+    "candidate_blob_exact": true,
+    "ledger_blob_exact": true,
+    "structural_replay_exit_code": 0
+  },
+  "verified": {
+    "slot_id": "terminal-bench-science/clinical-metadata-recovery::trial-0",
+    "task_digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8",
+    "schedule_rank": 12,
+    "current_consumed_slots": 11,
+    "current_final_failures": 11,
+    "attempts": 1,
+    "retries": 0,
+    "replacement_allowed": false,
+    "precheck_failure_consumes_slot": false,
+    "candidate_execution_authority": false,
+    "current_authority_blob": "0c168c4682c4631a9d9b76f329d111389f32872a",
+    "current_ledger_blob": "1db8e637ad3dfec5d4ac432c78a86ec1371eb006",
+    "closure_blob": "cf9cc9fb8830eda991c71381a523b8f67caedaa7"
+  },
+  "public_preflights": {
+    "live_output_control": {
+      "workflow_run_id": 37724821890,
+      "workflow_job_id": 113140481790,
+      "conclusion": "success",
+      "artifact_id": 11528115607,
+      "evidence_blob": "d8de49aa3f8fd7d1ffbf39e16505e62241652722",
+      "benchmark_task_exposure": 0
+    },
+    "storage_headroom": {
+      "workflow_run_id": 37725615457,
+      "workflow_job_id": 113142971353,
+      "conclusion": "success",
+      "artifact_id": 11527474005,
+      "evidence_blob": "9dfdbd1cf6988f5585fd4ff18e59b7a2d9f87cf3",
+      "benchmark_task_exposure": 0
+    }
+  },
+  "consequence": "CANDIDATE_SAFE_TO_MERGE_AS_NONEXECUTABLE_PREFLIGHT_EVIDENCE__ACTIVE_ONE_USE_AUTHORITY_MUST_BE_DERIVED_AFTER_POST_MERGE_CURRENT_MAIN_REBIND",
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
