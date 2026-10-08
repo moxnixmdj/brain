@@ -530,6 +530,14 @@ def advance_once(
             continue
         try:
             if kind == "VERIFY_SKILL_CANDIDATE":
+                payload = work.get("payload") if isinstance(work.get("payload"), Mapping) else {}
+                if not isinstance(payload.get("candidate"), Mapping):
+                    blockers.append({
+                        "work_id": wid,
+                        "kind": kind,
+                        "blocker": "LEGACY_SKILL_VERIFICATION_MATERIAL_INCOMPLETE",
+                    })
+                    continue
                 if skill_verification_provider is None:
                     blockers.append({"work_id": wid, "kind": kind, "blocker": "SKILL_VERIFICATION_PROVIDER_REQUIRED"})
                     continue
