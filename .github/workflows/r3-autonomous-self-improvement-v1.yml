@@ -10,6 +10,8 @@ on:
       - "canonical/tests/test_r3_independent_learning_verifier_v1.py"
       - "canonical/runtime/executable_skill_program_v7.py"
       - "canonical/runtime/executable_skill_verification_authenticator_v1.py"
+      - "canonical/tests/test_executable_skill_verification_authenticator_v1.py"
+      - "canonical/tests/test_executable_skill_verification_authenticator_v1.py"
       - "canonical/runtime/live_brain_runtime_v1.py"
       - "canonical/runtime/universal_verified_adaptive_solver_v12.py"
       - "canonical/runtime/capability_first_scheduler_v1.py"
@@ -69,6 +71,8 @@ jobs:
           canonical/runtime/executable_skill_verification_authenticator_v1.py
           canonical/runtime/live_brain_runtime_v1.py
           canonical/runtime/unified_cognitive_fabric_v1.py
+      - name: Run R3 skill authority authenticator suite
+        run: python -m unittest canonical.tests.test_executable_skill_verification_authenticator_v1 -v
       - name: Run R3 learning regression suite
         run: python -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v
       - name: Run R3 verified cross-scope generalization suite
