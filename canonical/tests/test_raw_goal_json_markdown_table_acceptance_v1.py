@@ -24,7 +24,7 @@ def _source():
 
 def _raw(goal,root):
     pf=a.preflight(goal,root=root)
-    contract=a.compile_contract(goal,source_id="user",routing_target_effects=[a.ROUTING_EFFECT])
+    contract=a.compile_contract(goal,source_id="user",routing_target_effects=[])
     return {
         "pass":True,
         "compiler_mode":"DETERMINISTIC_COMPOUND_ACTION_PLAN",
