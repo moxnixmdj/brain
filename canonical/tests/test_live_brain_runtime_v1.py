@@ -16,10 +16,9 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         }
 
     @patch("canonical.runtime.live_brain_runtime_v1._active_learning_context")
-    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
-    @patch("canonical.runtime.live_brain_runtime_v1._v12_run")
-    def test_generic_path_reuses_verified_experience_and_integrates_new_experience(
-        self, solver, integrate, context
+    @patch("canonical.runtime.live_brain_runtime_v1._learning_module")
+    def test_generic_path_runs_through_r3_controller_not_direct_v12(
+        self, learning_module, context
     ):
         context.return_value = {
             "state_path": "/tmp/state.json",
@@ -27,8 +26,20 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "prior_verified_episodes": [{"episode_id": "old"}],
             "active_verified_skills": [],
         }
-        solver.return_value = {"pass": True, "status": "SOLVED__VERIFIED_EPISODE"}
-        integrate.return_value = {"status": "VERIFIED_EPISODE_PERSISTED__MORE_EVIDENCE_NEEDED_FOR_SKILL"}
+        r3 = learning_module.return_value.run_learning_episode
+        r3.return_value = {
+            "status": "VERIFIED_EPISODE_PERSISTED__MORE_EVIDENCE_NEEDED_FOR_SKILL",
+            "pass": True,
+            "solver_output": {"pass": True, "status": "SOLVED__VERIFIED_EPISODE"},
+            "learning": {
+                "status": "VERIFIED_EPISODE_PERSISTED__MORE_EVIDENCE_NEEDED_FOR_SKILL"
+            },
+            "prior_verified_episode_count_used": 1,
+            "reused_skill_id": None,
+            "rehydrated_expansion_count": 2,
+            "persisted_expansion_count": 1,
+            "invalidated_expansion_count": 0,
+        }
 
         out = brain.run({
             "mode": "generic",
@@ -38,11 +49,18 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         })
 
         self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["solver"],
+            "AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1__UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
+        )
         self.assertEqual(out["verified_prior_episode_count_reused"], 1)
-        kwargs = solver.call_args.kwargs["kwargs"]
-        self.assertEqual(kwargs["prior_verified_episode_records"], [{"episode_id": "old"}])
+        self.assertEqual(out["rehydrated_expansion_count"], 2)
+        self.assertEqual(out["persisted_expansion_count"], 1)
+        r3.assert_called_once()
+        kwargs = r3.call_args.kwargs
+        self.assertEqual(kwargs["state_path"], "/tmp/state.json")
         self.assertEqual(kwargs["episode_id"], "new")
-        integrate.assert_called_once_with(solver.return_value, state_path="/tmp/state.json")
+        self.assertEqual(kwargs["scope_id"], "scope")
 
     @patch("canonical.runtime.live_brain_runtime_v1._decision_run")
     @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
@@ -326,6 +344,30 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         out = brain.run({"mode": "invented"})
         self.assertFalse(out["pass"])
         self.assertEqual(out["status"], "FAIL_CLOSED")
+
+
+    @patch("canonical.runtime.live_brain_runtime_v1._active_learning_context")
+    @patch("canonical.runtime.live_brain_runtime_v1._v12_run")
+    def test_learning_disabled_keeps_direct_v12_escape_hatch(self, solver, context):
+        context.return_value = {
+            "state_path": "/tmp/state.json",
+            "state": {},
+            "prior_verified_episodes": [{"episode_id": "old"}],
+            "active_verified_skills": [],
+        }
+        solver.return_value = {"pass": True, "status": "SOLVED"}
+        out = brain.run_generic(
+            self.problem(),
+            episode_id="new",
+            scope_id="scope",
+            learn=False,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["solver"], "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12")
+        self.assertIsNone(out["learning"])
+        kwargs = solver.call_args.kwargs["kwargs"]
+        self.assertEqual(kwargs["prior_verified_episode_records"], [{"episode_id": "old"}])
+        self.assertEqual(kwargs["episode_id"], "new")
 
 
 if __name__ == "__main__":
