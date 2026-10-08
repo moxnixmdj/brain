@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 from canonical.runtime import autonomous_verified_self_improvement_v1 as r3
@@ -15,6 +16,15 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         c = catalog()
         self.assertEqual(c["status"], "LIVE_FEDERATED_COGNITIVE_FABRIC")
         self.assertTrue(c["single_front_door"])
+        self.assertEqual(
+            c["canonical_public_entrypoint"],
+            "canonical.runtime.unified_cognitive_fabric_v1.run",
+        )
+        self.assertEqual(
+            c["subordinate_runtime_entrypoint"],
+            "canonical.runtime.live_brain_runtime_v1.run",
+        )
+        self.assertFalse(c["subordinate_runtime_public_authority"])
         self.assertGreaterEqual(c["verified_bound_capability_count"], 43)
         self.assertIn("RAW_GOAL", c["engines"])
         self.assertIn("ADEQUATE_DECISION", c["engines"])
@@ -67,10 +77,15 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
                 "task_id": "FABRIC-RAW-UNKNOWN-001",
                 "goal": "Calibrate the neutrino interferometer phase drift.",
             },
+            "options": {"learn": False, "auto_repair": False},
         })
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
         self.assertFalse(out["inner_pass"])
         self.assertEqual(out["result"]["failure_class"], "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP")
+        self.assertEqual(
+            out["result"]["_live_runtime"]["subruntime_entrypoint"],
+            "canonical.runtime.live_brain_runtime_v1.run",
+        )
 
     def test_auto_raw_goal_route_is_structurally_selected(self):
         out = run({
@@ -78,6 +93,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
                 "task_id": "FABRIC-AUTO-RAW-001",
                 "goal": "Calibrate the neutrino interferometer phase drift.",
             },
+            "options": {"learn": False, "auto_repair": False},
         })
         self.assertTrue(out["auto_routed"])
         self.assertEqual(out["mode"], "RAW_GOAL")
@@ -91,6 +107,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
                 "target_effects": ["effect.that.does.not.exist"],
                 "capability_inputs": {},
             },
+            "options": {"learn": False, "auto_repair": False},
         })
         self.assertTrue(out["auto_routed"])
         self.assertEqual(out["mode"], "COMPILED_TASK")
@@ -171,10 +188,43 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
                 "task_id": "FABRIC-DECISION-OPEN-001",
                 "goal": "Choose the adequate action.",
             },
+            "options": {"learn": False, "auto_repair": False},
         })
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
         self.assertFalse(out["inner_pass"])
         self.assertEqual(out["result"]["status"], "OPEN__DECISION_CONTEXT_REQUIRED")
+
+    @patch("canonical.runtime.unified_cognitive_fabric_v1.live_runtime.run")
+    def test_adaptive_solver_delegates_to_subordinate_reuse_repair_runtime(self, runtime_run):
+        runtime_run.return_value = {
+            "pass": True,
+            "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
+            "solver_output": {
+                "pass": True,
+                "status": "SOLVED__VERIFIED_EPISODE",
+            },
+            "learning": {"status": "VERIFIED_EPISODE_PERSISTED"},
+            "reuse_first": True,
+            "reused_skill_id": "skill:test",
+            "auto_repair_attempted": False,
+            "automatic_repair": None,
+        }
+        out = run({
+            "mode": "ADAPTIVE_SOLVER",
+            "payload": {
+                "task_id": "FABRIC-DELEGATION-001",
+                "initial_facts": [],
+                "target_effects": ["done"],
+                "capabilities": [],
+            },
+            "options": {"learn": True},
+        })
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(out["result"]["status"], "SOLVED__VERIFIED_EPISODE")
+        self.assertTrue(out["result"]["_live_runtime"]["reuse_first"])
+        request = runtime_run.call_args.args[0]
+        self.assertEqual(request["mode"], "generic")
+        self.assertEqual(request["problem"]["task_id"], "FABRIC-DELEGATION-001")
 
     def test_r3_uses_current_solver_v12(self):
         self.assertIs(r3.solver_v12, solver_v12)
