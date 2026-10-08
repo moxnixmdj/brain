@@ -11,8 +11,11 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
+    def rank_general(self, rows):
+        return s.rank_work(rows, checkpoint_open_obligation_count=0)
+
     def test_benchmark_bookkeeping_is_hard_demoted(self):
-        out = s.rank_work([
+        out = self.rank_general([
             {
                 "work_id": "GDPVAL_ELO_RECONSTRUCTION",
                 "work_type": "BENCHMARK_INSTRUMENTATION",
@@ -33,7 +36,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         self.assertEqual(out["ranked"][0]["priority_score"], "0")
 
     def test_capability_build_beats_benchmark_certification(self):
-        out = s.rank_work([
+        out = self.rank_general([
             {
                 "work_id": "GENERALIZE_RELEVANCE_CEGAR",
                 "work_type": "CAPABILITY_BUILD",
@@ -84,7 +87,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             "generalization_lcb": 8,
             "success_probability_lcb": "4/5",
         }
-        out = s.rank_work([
+        out = self.rank_general([
             dict(common, work_id="HEAVY", wall_clock_cost_ub=8, compute_cost_ub=8, memory_cost_ub=8, complexity_cost_ub=8),
             dict(common, work_id="LEAN", wall_clock_cost_ub=2, compute_cost_ub=2, memory_cost_ub=2, complexity_cost_ub=2),
         ])
@@ -98,7 +101,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             "MILESTONE_CERTIFICATION",
         ):
             with self.subTest(role=role):
-                row = s.rank_work([{
+                row = self.rank_general([{
                     "work_id": role,
                     "work_type": "BENCHMARK_INSTRUMENTATION",
                     "benchmark_role": role,
@@ -114,6 +117,143 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
                     "complexity_cost_ub": 1,
                 }])["ranked"][0]
                 self.assertEqual(row["eligibility"], "ELIGIBLE")
+
+    def test_open_checkpoint_demotes_generic_capability_side_work(self):
+        out = s.rank_work(
+            [{
+                "work_id": "GENERIC_NEW_ROUTE",
+                "work_type": "CAPABILITY_BUILD",
+                "expected_capability_gain_lcb": 100,
+                "expected_efficiency_gain_lcb": 100,
+                "expected_reliability_gain_lcb": 100,
+                "reuse_breadth_lcb": 100,
+                "generalization_lcb": 100,
+                "success_probability_lcb": "1",
+                "wall_clock_cost_ub": 1,
+                "compute_cost_ub": 1,
+                "memory_cost_ub": 1,
+                "complexity_cost_ub": 1,
+            }],
+            checkpoint_open_obligation_count=13,
+        )
+        row = out["ranked"][0]
+        self.assertEqual(row["eligibility"], "DEMOTED_NON_LOAD_BEARING_WHILE_OPEN_OBLIGATIONS")
+        self.assertEqual(row["priority_score"], "0")
+        self.assertTrue(out["load_bearing_primary_gate_active"])
+
+    def test_primary_work_requires_explicit_causal_path(self):
+        out = s.rank_work(
+            [{
+                "work_id": "UNBOUND_PRIMARY",
+                "work_type": "CAPABILITY_BUILD",
+                "scheduling_lane": "LOAD_BEARING_PRIMARY",
+                "expected_obligation_discharge_lcb": 1,
+                "success_probability_lcb": "1",
+                "wall_clock_cost_ub": 1,
+            }],
+            checkpoint_open_obligation_count=13,
+        )
+        self.assertEqual(
+            out["ranked"][0]["eligibility"],
+            "DEMOTED_NO_CAUSAL_PATH_TO_OPEN_OBLIGATION",
+        )
+
+    def test_zero_expected_terminal_yield_is_demoted(self):
+        out = s.rank_work(
+            [{
+                "work_id": "NAMED_BUT_ZERO_YIELD",
+                "work_type": "CAPABILITY_BUILD",
+                "scheduling_lane": "LOAD_BEARING_PRIMARY",
+                "open_obligation_ids": ["OPEN_A"],
+                "expected_obligation_discharge_lcb": 0,
+                "expected_obligation_unlock_lcb": 0,
+                "success_probability_lcb": "1",
+                "wall_clock_cost_ub": 1,
+            }],
+            checkpoint_open_obligation_count=13,
+        )
+        self.assertEqual(
+            out["ranked"][0]["eligibility"],
+            "DEMOTED_ZERO_EXPECTED_LOAD_BEARING_YIELD",
+        )
+
+    def test_goal_velocity_beats_raw_capability_gain(self):
+        out = s.rank_work(
+            [
+                {
+                    "work_id": "HIGH_GENERIC_GAIN",
+                    "work_type": "CAPABILITY_BUILD",
+                    "expected_capability_gain_lcb": 1000,
+                    "expected_efficiency_gain_lcb": 1000,
+                    "expected_reliability_gain_lcb": 1000,
+                    "reuse_breadth_lcb": 1000,
+                    "generalization_lcb": 1000,
+                    "success_probability_lcb": "1",
+                    "wall_clock_cost_ub": 1,
+                    "compute_cost_ub": 1,
+                    "memory_cost_ub": 1,
+                    "complexity_cost_ub": 1,
+                },
+                {
+                    "work_id": "CLOSE_OPEN_ATOM",
+                    "work_type": "CAPABILITY_BUILD",
+                    "scheduling_lane": "LOAD_BEARING_PRIMARY",
+                    "open_obligation_ids": ["OPEN_A"],
+                    "expected_obligation_discharge_lcb": "1/2",
+                    "expected_obligation_unlock_lcb": 0,
+                    "success_probability_lcb": "4/5",
+                    "wall_clock_cost_ub": 2,
+                },
+            ],
+            checkpoint_open_obligation_count=13,
+        )
+        self.assertEqual(out["ranked"][0]["work_id"], "CLOSE_OPEN_ATOM")
+        self.assertEqual(out["ranked"][0]["priority_score"], "1/5")
+        self.assertEqual(
+            out["ranked"][1]["eligibility"],
+            "DEMOTED_NON_LOAD_BEARING_WHILE_OPEN_OBLIGATIONS",
+        )
+
+    def test_constructive_gap_unlock_is_valid_primary_work(self):
+        out = s.rank_work(
+            [{
+                "work_id": "BUILD_MISSING_VERIFIER",
+                "work_type": "CAPABILITY_BUILD",
+                "scheduling_lane": "LOAD_BEARING_PRIMARY",
+                "constructive_gap_for_open_obligation_ids": ["OPEN_A", "OPEN_B"],
+                "expected_obligation_discharge_lcb": 0,
+                "expected_obligation_unlock_lcb": "3/2",
+                "success_probability_lcb": "2/3",
+                "wall_clock_cost_ub": 2,
+            }],
+            checkpoint_open_obligation_count=13,
+        )
+        self.assertEqual(out["ranked"][0]["eligibility"], "ELIGIBLE")
+        self.assertEqual(out["ranked"][0]["priority_score"], "1/2")
+
+    def test_live_entrypoint_reads_current_authority_and_enforces_gate(self):
+        out = s.rank_live_work([
+            {
+                "work_id": "LIVE_GENERIC_SIDEQUEST",
+                "work_type": "CAPABILITY_BUILD",
+                "expected_capability_gain_lcb": 999,
+                "expected_efficiency_gain_lcb": 999,
+                "expected_reliability_gain_lcb": 999,
+                "reuse_breadth_lcb": 999,
+                "generalization_lcb": 999,
+                "success_probability_lcb": "1",
+                "wall_clock_cost_ub": 1,
+                "compute_cost_ub": 1,
+                "memory_cost_ub": 1,
+                "complexity_cost_ub": 1,
+            }
+        ])
+        self.assertGreater(out["checkpoint_open_obligation_count"], 0)
+        self.assertTrue(out["load_bearing_primary_gate_active"])
+        self.assertEqual(
+            out["ranked"][0]["eligibility"],
+            "DEMOTED_NON_LOAD_BEARING_WHILE_OPEN_OBLIGATIONS",
+        )
 
     def test_verified_reusable_candidate_enters_pareto_frontier(self):
         incumbent = {
@@ -247,9 +387,9 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
 
     def test_governance_activation_and_terminal_pointer_are_bound(self):
-        activation = json.loads((ROOT / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V1.json").read_text())
+        activation = json.loads((ROOT / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V2.json").read_text())
         pointer = json.loads((ROOT / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json").read_text())
-        self.assertEqual(activation["status"], "ACTIVE_PRIMARY_CAPABILITY_DEVELOPMENT_SCHEDULER")
+        self.assertEqual(activation["status"], "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER")
         self.assertEqual(
             activation["terminal_milestone"],
             "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
@@ -268,10 +408,9 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         self.assertFalse(
             activation["option_preservation"]["physical_deletion_authority_from_scheduler"]
         )
-        self.assertEqual(
-            pointer["capability_first_scheduler_20261008_v1"]["status"],
-            "ACTIVE_PRIMARY_CAPABILITY_DEVELOPMENT_SCHEDULER",
-        )
+        self.assertGreater(pointer["live_truth"]["independent_open_acceptance_obligations"], 0)
+        self.assertEqual(activation["canonical_primary_entrypoint"], "rank_live_work")
+        self.assertTrue(activation["primary_work_gate"]["fail_closed_if_authority_unreadable"])
 
 
 if __name__ == "__main__":
