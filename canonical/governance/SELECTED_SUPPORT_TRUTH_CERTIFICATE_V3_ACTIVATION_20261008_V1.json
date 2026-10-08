@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_SUPPORT_TRUTH_CERTIFICATE_V3_ACTIVATION_V1",
+  "date": "2026-10-08",
+  "status": "VERIFIED_BRAIN_OWNED_SOURCE_DECLARED_EQUIVALENCE_SUPPORT_TRUTH_EXPANSION__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/selected_support_truth_certificate_v3.py",
+    "git_blob_sha": "e65dc94dee98863d3875b05cdb00318ec761e9ac"
+  },
+  "equivalence_parser": {
+    "path": "canonical/runtime/bounded_source_declared_equivalence_support_v1.py",
+    "git_blob_sha": "d532e11aff1db95b320d29a49eb19eb9567ed2d3"
+  },
+  "verification": {
+    "path": "canonical/verification/SELECTED_SUPPORT_TRUTH_CERTIFICATE_V3_VERIFICATION_20261008_V1.json"
+  },
+  "owned_effect": "FOR_STRUCTURALLY_REQUIRED_CLAIMS__CANONICALIZE_EXACT_ATTESTED_PROPOSITIONS_THROUGH_SIMPLE_NONNESTED_SOURCE_DECLARED_NAMED_EQUIVALENCE_AND_RETURN_TRUE_FALSE_UNKNOWN_WITH_CONTENT_ADDRESSED_IDENTITY",
+  "causal_target": "P3_PARAPHRASE_OR_SEMANTIC_ENTAILMENT_OUTSIDE_CHECKED_GRAMMARS__PARTIAL_SOURCE_DECLARED_EQUIVALENCE_SUBREGION",
+  "scheduler_effect": "TRY_SUPPORT_TRUTH_V3_BEFORE_REQUESTING_UNDECLARED_PARAPHRASE_OR_GENERAL_SEMANTIC_ENTAILMENT",
+  "next_root": "SEMANTIC_EQUIVALENCE_OR_ENTAILMENT_NOT_EXPLICITLY_DECLARED_BY_SOURCE",
+  "hard_nonclaims": [
+    "NO_GENERAL_P3_CLOSURE",
+    "NO_GENERAL_PARAPHRASE_NLI",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_SUPPORT_TRUTH_CERTIFICATE_V3_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_CARRIERS__13_OF_13_EACH__SOURCE_DECLARED_EQUIVALENCE_SUPPORT_EXPANSION__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "equivalence_parser": {
+      "path": "canonical/runtime/bounded_source_declared_equivalence_support_v1.py",
+      "git_blob_sha": "d532e11aff1db95b320d29a49eb19eb9567ed2d3"
+    },
+    "certificate": {
+      "path": "canonical/runtime/selected_support_truth_certificate_v3.py",
+      "git_blob_sha": "e65dc94dee98863d3875b05cdb00318ec761e9ac"
+    },
+    "tests": {
+      "path": "canonical/tests/test_selected_support_truth_certificate_v3.py",
+      "git_blob_sha": "886e01d97240cf267eaf8b4465409f19a5ae1fdb"
+    },
+    "definition_graph": {
+      "path": "canonical/runtime/explicit_definition_reference_graph.py",
+      "git_blob_sha": "950f073b35b9d7f42c76c518711462f00e89b262"
+    },
+    "prior_fact_parser": {
+      "path": "canonical/runtime/bounded_claim_support.py",
+      "git_blob_sha": "197246a50ace8c16b945def9edb1357fb317c393"
+    },
+    "prior_attestation_parser": {
+      "path": "canonical/runtime/bounded_attestation_support_v1.py",
+      "git_blob_sha": "68b47a2526b4fd9bd055c2096b24baacc67968b4"
+    }
+  },
+  "primary_execution": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "result": {
+      "pass": true,
+      "passed": 13,
+      "total": 13
+    }
+  },
+  "independent_execution": {
+    "provider": "SPRITES",
+    "sprite": "h100-real-image-v1",
+    "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+    "result": {
+      "pass": true,
+      "passed": 13,
+      "total": 13
+    }
+  },
+  "verified_effects": [
+    "SOURCE_EXPLICIT_X_MEANS_Y_CANONICALIZES_ATTESTED_PROPOSITION_SURFACES",
+    "DEFINITION_DIRECTION_DOES_NOT_CHANGE_CANONICAL_PROPOSITION",
+    "SOURCE_DECLARED_EQUIVALENCE_PLUS_EXACT_DENIAL_PRODUCES_CONFLICT",
+    "CONFLICTING_DEFINITIONS_RETURN_UNKNOWN",
+    "NESTED_DEFINITIONS_RETURN_UNKNOWN_IN_V1",
+    "UNPARSED_EXTRA_SENTENCE_RETURNS_UNKNOWN",
+    "MIXED_POLARITY_AFTER_CANONICALIZATION_RETURNS_UNKNOWN",
+    "ORDINARY_UNDECLARED_PARAPHRASE_REMAINS_UNKNOWN",
+    "FACT_AND_EXACT_ATTESTATION_REGRESSIONS_PRESERVED",
+    "DEFINITION_MUTATION_CHANGES_OBSERVATION_BINDING_NOT_CALLER_ALIAS_AUTHORITY",
+    "NO_AUTHORITY_ESCALATION"
+  ],
+  "hard_nonclaims": [
+    "NO_GUESSED_SYNONYMY",
+    "NO_GENERAL_PARAPHRASE_ENTAILMENT",
+    "NO_ONTOLOGY_OR_WORLD_KNOWLEDGE",
+    "NO_SOURCE_AUTHORIZATION",
+    "NO_OPTIONAL_RELEVANCE_AUTHORITY",
+    "NO_POLICY_ADEQUACY",
+    "NO_DB_ADMISSION_U_SUBTRACTION_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
