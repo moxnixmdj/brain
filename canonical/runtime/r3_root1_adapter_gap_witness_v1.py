@@ -9,6 +9,7 @@ from typing import Any, Mapping, Sequence
 from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
 from canonical.runtime import r3_bound_success_adapter_v1 as bound_adapter
 from canonical.runtime import r3_raw_success_adapter_v1 as raw_adapter
+from canonical.runtime import r3_direct_r2_success_adapter_v1 as direct_r2_adapter
 from canonical.runtime import root1_acquisition_closure_controller_v3 as root1
 
 SCHEMA = "PROJECT_BRAIN_R3_ROOT1_ADAPTER_GAP_WITNESS_V1"
@@ -19,11 +20,14 @@ REQUIRED_PRIMITIVE = "R3_SUCCESS_ADAPTER_PATCH_AUTHOR"
 SUCCESS_ADAPTER_FRONTIER_PATHS = (
     "canonical/runtime/r3_bound_success_adapter_v1.py",
     "canonical/runtime/r3_raw_success_adapter_v1.py",
+    "canonical/runtime/r3_direct_r2_success_adapter_v1.py",
+    "canonical/runtime/R3_SUCCESS_ADAPTER_RULES_V1.json",
 )
 SUCCESS_VERIFICATION_AUTHORITY_PATHS = (
     "canonical/runtime/r3_independent_learning_verifier_v1.py",
     "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
     "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
+    "canonical/runtime/r3_direct_r2_success_checkpoint_verifier_v1.py",
 )
 
 
@@ -203,7 +207,15 @@ def compile_gap(
             adapter_request,
             repo_root=repo_root,
         )
-        if isinstance(bound_candidate, Mapping) or isinstance(raw_candidate, Mapping):
+        direct_r2_candidate = direct_r2_adapter.adapt(
+            adapter_request,
+            repo_root=repo_root,
+        )
+        if (
+            isinstance(bound_candidate, Mapping)
+            or isinstance(raw_candidate, Mapping)
+            or isinstance(direct_r2_candidate, Mapping)
+        ):
             return _fail(
                 "OWNED_ADAPTER_CANDIDATE_NOW_AVAILABLE__ROOT1_GAP_NOT_ESTABLISHED"
             )
