@@ -1,6 +1,7 @@
 import json
 
 from canonical.runtime import universal_bound_capability_carrier_v1 as carrier
+from canonical.runtime import universal_verified_adaptive_solver_v10 as v10
 from canonical.runtime.universal_verified_adaptive_solver_v10 import run
 from canonical.runtime.universal_verified_adaptive_solver_v2 import SUCCESS_CONDITIONS
 from canonical.runtime.universal_verified_adaptive_solver_v3 import (
@@ -221,6 +222,47 @@ def test_verified_skill_preference_can_select_declared_route_without_bypassing_v
         vr = save(tmp_path, f"canonical/verification/preferred-{i}-verify.json", vd)
         cap["effect_semantics_binding"] = {"receipt": rr, "verification": vr}
 
+    skill = {
+        "candidate_sha256": "sha256:" + "9" * 64,
+        "verified_skill": True,
+        "reuse_authorized": True,
+        "candidate_only": False,
+        "scope_relation": "EXACT",
+        "source_episode_ids": ["ep1", "ep2"],
+        "source_scopes": ["scope"],
+        "steps": [{"index": 0, "op": "macro", "inputs": [], "outputs": ["GOAL"]}],
+        "preconditions": [],
+        "postconditions": ["GOAL"],
+        "invalidators": [],
+    }
+    candidate = {
+        **skill,
+        "verified_skill": False,
+        "reuse_authorized": False,
+        "candidate_only": True,
+    }
+    record = {
+        "candidate": candidate,
+        "skill": skill,
+        "verification_binding": {
+            "receipt": {"path": "unused-r", "git_blob_sha": "1" * 40},
+            "verification": {"path": "unused-v", "git_blob_sha": "2" * 40},
+        },
+    }
+    monkeypatch.setattr(
+        v10,
+        "authenticate_skill_verification",
+        lambda candidate, binding, repo_root: {"pass": True, "verified_skill": skill},
+    )
+    monkeypatch.setattr(
+        v10,
+        "plan_with_skills",
+        lambda problem, verified_skills, active_invalidators=(): {
+            "pass": True,
+            "used_verified_skill_macros": ["SKILL_MACRO::test"],
+            "expanded_execution_plan": ["macro"],
+        },
+    )
     monkeypatch.setattr(
         carrier.astra_runtime,
         "_invoke_bound_capability",
@@ -232,7 +274,7 @@ def test_verified_skill_preference_can_select_declared_route_without_bypassing_v
         repo_root=tmp_path,
         episode_id="ep",
         scope_id="scope",
-        preferred_capability_order=["macro"],
+        verified_skill_records=[record],
     )
     assert out["pass"] is True, out
     assert out["trace"][0]["capability_id"] == "macro"
