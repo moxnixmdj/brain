@@ -80,7 +80,7 @@ def test_unparsed_extra_evidence_blocks_positive_claim():
     out=evaluate_support("Company eligible is yes.",[
         ev("E1","Report states Company status is active."),
         ev("E2","Policy states if Company status is active, then Company eligible is yes."),
-        ev("E3","This prose is not in the checked fact grammar."),
+        ev("E3","Completely unrelated prose without a checked copula."),
     ])
     assert out["status"]=="UNRESOLVED"
     assert out["unresolved_evidence_ids"]==["E3"]
