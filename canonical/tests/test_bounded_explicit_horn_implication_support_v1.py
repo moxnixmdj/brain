@@ -73,7 +73,7 @@ def test_malformed_rule_shaped_evidence_unknown():
         ev("E2","Policy states if nonsense, then Company eligible is yes."),
     ])
     assert out["status"]=="UNRESOLVED"
-    assert out["reason"]=="ONE_OR_MORE_EVIDENCE_ROWS_OUTSIDE_HORN_FACT_GRAMMAR"
+    assert out["reason"]=="MALFORMED_EXPLICIT_HORN_RULE_EVIDENCE"
     assert out["unresolved_evidence_ids"]==["E2"]
 
 def test_unparsed_extra_evidence_blocks_positive_claim():
