@@ -42,6 +42,7 @@ ENGINE_DESCRIPTORS = {
     "ADAPTIVE_SOLVER": "live_brain_runtime_v1.run(generic)",
     "LEARNING_EPISODE": "autonomous_verified_self_improvement_v1.run_learning_episode",
     "IMPROVEMENT_CYCLE": "r3_improvement_queue_driver_v1.drain",
+    "ONE_SHOT_VERIFIED_CLOSURE": "live_brain_runtime_v1.run(one_shot_verified_closure)",
     "BOUND_CAPABILITY": "verified_bound_capability_execution_adapter_v1.execute",
     "H100_INFERENCE": "h100_verified_capability_registry_v8",
     "MYSTERY_INFERENCE": "exact_linear_parameter_polytope_v1 + interval_information_frontier_v1",
@@ -373,6 +374,16 @@ def run(
                 skill_verification_provider=skill_verification_provider,
             )
             out = _unwrap_live_runtime(wrapped, "solver_output")
+        elif mode == "ONE_SHOT_VERIFIED_CLOSURE":
+            wrapped = live_runtime.run(
+                {
+                    "mode": "one_shot_verified_closure",
+                    **deepcopy(dict(payload)),
+                    **dict(options),
+                },
+                repo_root=ROOT,
+            )
+            out = deepcopy(dict(wrapped))
         elif mode == "H100_INFERENCE":
             operation = str(payload.get("operation") or "").strip().upper()
             if operation == "SNAPSHOT":
