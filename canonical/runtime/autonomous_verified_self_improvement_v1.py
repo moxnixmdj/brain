@@ -30,6 +30,17 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.capability_first_scheduler_v1 import update_pareto_frontier
+from canonical.runtime.executable_skill_program_v7 import (
+    ExecutableSkillProgramError,
+    induce_candidate,
+)
+from canonical.runtime.executable_skill_verification_authenticator_v1 import (
+    authenticate_and_verify as authenticate_skill_verification,
+)
+from canonical.runtime.universal_solver_episode_verification_authenticator_v1 import (
+    authenticate as authenticate_episode_verification,
+    reauthenticate_record as reauthenticate_episode_record,
+)
 from canonical.runtime import universal_verified_adaptive_solver_v12 as solver_v12
 
 SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1"
@@ -566,6 +577,7 @@ def integrate_solver_output(
                     "source_episode_ids": _items(skill_candidate.get("source_episode_ids")),
                     "source_scopes": _items(skill_candidate.get("source_scopes")),
                     "postconditions": _items(skill_candidate.get("postconditions")),
+                    "candidate": deepcopy(dict(skill_candidate)),
                 },
             )
     elif out.get("current_episode_verified") is True and not isinstance(skill_candidate, Mapping):
@@ -1036,6 +1048,152 @@ def _record_reuse_result(
         "next_improvement_action": _next_improvement_from_state(state),
     }
 
+def _post_execution_independent_verification(
+    out: Mapping[str, Any],
+    *,
+    problem: Mapping[str, Any],
+    prior_verified_episode_records: Sequence[Mapping[str, Any]],
+    repo_root: str | Path,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
+) -> dict[str, Any]:
+    """Complete the independent-verifier handshake after execution, without replay.
+
+    Providers only supply content-addressed bindings. Existing authenticators remain
+    the authority. This permits autonomous two-phase verification while keeping the
+    executor unable to certify its own episode or skill.
+    """
+    result = deepcopy(dict(out))
+    if result.get("pass") is not True:
+        return result
+
+    episode = result.get("current_episode")
+    if (
+        result.get("current_episode_verified") is not True
+        and isinstance(episode, Mapping)
+        and episode_verification_provider is not None
+    ):
+        trace = result.get("trace")
+        if not isinstance(trace, Sequence) or isinstance(trace, (str, bytes)):
+            result["post_execution_episode_verification_error"] = "TRACE_INVALID"
+        else:
+            request = {
+                "kind": "EPISODE_VERIFICATION",
+                "problem": deepcopy(dict(problem)),
+                "episode": deepcopy(dict(episode)),
+                "trace": deepcopy(list(trace)),
+                "fact_capsule_head_hash": _s(result.get("state_capsule_head_hash")),
+                "value_capsule_head_hash": _s(result.get("value_capsule_head_hash")),
+            }
+            try:
+                binding = episode_verification_provider(deepcopy(request))
+                if binding is not None and not isinstance(binding, Mapping):
+                    raise SelfImprovementError("EPISODE_VERIFICATION_PROVIDER_RESULT_INVALID")
+                if isinstance(binding, Mapping):
+                    auth = authenticate_episode_verification(
+                        binding,
+                        problem=problem,
+                        episode=episode,
+                        trace=trace,
+                        fact_capsule_head_hash=request["fact_capsule_head_hash"],
+                        value_capsule_head_hash=request["value_capsule_head_hash"],
+                        repo_root=repo_root,
+                    )
+                    result["episode_verification_authentication"] = auth
+                    if auth.get("pass") is True:
+                        result["current_episode"] = auth["authenticated_episode"]
+                        result["current_episode_verified"] = True
+                        result["episode_verification_error"] = None
+                    else:
+                        result["episode_verification_error"] = _s(auth.get("reason"))
+                else:
+                    result["post_execution_episode_verification_error"] = (
+                        "EPISODE_VERIFICATION_PROVIDER_RETURNED_NO_BINDING"
+                    )
+            except Exception as exc:
+                result["post_execution_episode_verification_error"] = (
+                    type(exc).__name__ + ":" + str(exc)
+                )
+
+    candidate = result.get("skill_candidate")
+    if (
+        result.get("current_episode_verified") is True
+        and not isinstance(candidate, Mapping)
+        and prior_verified_episode_records
+    ):
+        authenticated_prior = []
+        candidate_error = None
+        for record in prior_verified_episode_records:
+            verdict = reauthenticate_episode_record(record, repo_root=repo_root)
+            if verdict.get("pass") is not True:
+                candidate_error = (
+                    "PRIOR_EPISODE_REAUTHENTICATION_FAILED:"
+                    + _s(verdict.get("reason"))
+                )
+                authenticated_prior = []
+                break
+            authenticated_prior.append(verdict["authenticated_episode"])
+        if authenticated_prior and candidate_error is None:
+            try:
+                candidate = induce_candidate([
+                    *authenticated_prior,
+                    result["current_episode"],
+                ])
+                result["skill_candidate"] = candidate
+                result["skill_candidate_error"] = None
+            except ExecutableSkillProgramError as exc:
+                result["skill_candidate_error"] = str(exc)
+        elif candidate_error is not None:
+            result["skill_candidate_error"] = candidate_error
+
+    candidate = result.get("skill_candidate")
+    if (
+        isinstance(candidate, Mapping)
+        and not isinstance(result.get("verified_executable_skill"), Mapping)
+        and skill_verification_provider is not None
+    ):
+        request = {
+            "kind": "SKILL_VERIFICATION",
+            "candidate": deepcopy(dict(candidate)),
+            "current_episode": deepcopy(dict(result.get("current_episode") or {})),
+        }
+        try:
+            binding = skill_verification_provider(deepcopy(request))
+            if binding is not None and not isinstance(binding, Mapping):
+                raise SelfImprovementError("SKILL_VERIFICATION_PROVIDER_RESULT_INVALID")
+            if isinstance(binding, Mapping):
+                auth = authenticate_skill_verification(
+                    candidate,
+                    binding,
+                    repo_root=repo_root,
+                )
+                result["skill_verification_authentication"] = auth
+                if auth.get("pass") is True:
+                    verified = auth["verified_skill"]
+                    result["verified_executable_skill"] = verified
+                    result["verified_skill_reuse_authorized"] = bool(
+                        verified.get("reuse_authorized")
+                    )
+                else:
+                    result["skill_verification_error"] = _s(auth.get("reason"))
+            else:
+                result["post_execution_skill_verification_error"] = (
+                    "SKILL_VERIFICATION_PROVIDER_RETURNED_NO_BINDING"
+                )
+        except Exception as exc:
+            result["post_execution_skill_verification_error"] = (
+                type(exc).__name__ + ":" + str(exc)
+            )
+
+    if isinstance(result.get("verified_executable_skill"), Mapping):
+        result["status"] = "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY"
+    elif isinstance(result.get("skill_candidate"), Mapping):
+        result["status"] = "SOLVED__SKILL_CANDIDATE_READY"
+    elif result.get("current_episode_verified") is True:
+        result["status"] = "SOLVED__VERIFIED_EPISODE"
+    return result
+
+
 def run_learning_episode(
     problem: Mapping[str, Any],
     *,
@@ -1048,6 +1206,8 @@ def run_learning_episode(
     scope_id: str = "scope",
     episode_verification_binding: Mapping[str, Any] | None = None,
     skill_verification_binding: Mapping[str, Any] | None = None,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
     resume_binding: Mapping[str, Any] | None = None,
     known_absent_invalidators: Sequence[str] = (),
     proposal_provider=None,
@@ -1117,6 +1277,14 @@ def run_learning_episode(
             "reuse_learning": reuse_learning,
         }
         if reuse_out.get("pass") is True:
+            reuse_out = _post_execution_independent_verification(
+                reuse_out,
+                problem=learned_problem,
+                prior_verified_episode_records=prior,
+                repo_root=repo_root,
+                episode_verification_provider=episode_verification_provider,
+                skill_verification_provider=skill_verification_provider,
+            )
             integrated = integrate_solver_output(reuse_out, state_path=state_path, retry_context=retry_context)
             return {
                 "schema": SCHEMA,
@@ -1166,6 +1334,14 @@ def run_learning_episode(
         proposal_provider_max_candidates=proposal_provider_max_candidates,
         capability_expander_id=capability_expander_id,
         max_capability_expansions=max_capability_expansions,
+    )
+    out = _post_execution_independent_verification(
+        out,
+        problem=problem,
+        prior_verified_episode_records=prior,
+        repo_root=repo_root,
+        episode_verification_provider=episode_verification_provider,
+        skill_verification_provider=skill_verification_provider,
     )
     integrated = integrate_solver_output(out, state_path=state_path, retry_context=retry_context)
     return {
