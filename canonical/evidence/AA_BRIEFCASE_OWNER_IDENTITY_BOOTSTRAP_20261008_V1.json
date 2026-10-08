@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_OWNER_IDENTITY_BOOTSTRAP_V1",
+  "date": "2026-10-08",
+  "status": "CURRENT_PUBLIC_IDENTITY_SURFACE_AUDIT__OFFICIAL_GITHUB_ORG_CROSSLINKED__NO_PUBLIC_SIGNING_KEY_DISCOVERED__ZERO_TERMINAL_CREDIT",
+  "benchmark": "AA-Briefcase v1.1",
+  "public_identity_evidence": [
+    {
+      "source": "https://stirrup.artificialanalysis.ai/",
+      "fact": "ARTIFICIAL ANALYSIS OFFICIAL-DOMAIN DOCUMENTATION DIRECTLY INSTRUCTS USERS TO CLONE https://github.com/ArtificialAnalysis/Stirrup.git"
+    },
+    {
+      "source": "https://github.com/ArtificialAnalysis",
+      "fact": "THE ARTIFICIALANALYSIS GITHUB ORGANIZATION PROFILE LINKS BACK TO https://artificialanalysis.ai/ AND LISTS hello@artificialanalysis.ai"
+    },
+    {
+      "source": "https://artificialanalysis.ai/articles/stirrup-open-source-framework-agents",
+      "fact": "ARTIFICIAL ANALYSIS DESCRIBES STIRRUP AS ITS OWN OPEN-SOURCE FRAMEWORK AND LINKS THE REPOSITORY/DOCUMENTATION"
+    }
+  ],
+  "current_key_search": {
+    "searched": [
+      "COSIGN",
+      "SIGSTORE",
+      "PUBLIC KEY",
+      "PEM",
+      "GPG",
+      "SIGNING KEY",
+      "ATTESTATION"
+    ],
+    "repositories": [
+      "ArtificialAnalysis/Stirrup",
+      "ArtificialAnalysis/aa-agentperf-local"
+    ],
+    "discovered_owner_attestation_signing_key": false,
+    "discovered_sigstore_identity_contract": false,
+    "boundary": "CURRENT PUBLIC SURFACE ONLY__DOES NOT PROVE NO PRIVATE OR FUTURE KEY EXISTS"
+  },
+  "admissible_bootstrap_routes": [
+    {
+      "rank": 1,
+      "id": "OFFICIAL_GITHUB_PUBLICATION",
+      "owner_action": "COMMIT THE SCOPE-COMPLETE AA NONINFERIORITY STATEMENT AS A FILE IN ANY REPOSITORY CONTROLLED BY THE CROSSED-LINKED ArtificialAnalysis GITHUB ORGANIZATION",
+      "brain_receipt": "FETCH EXACT FILE THROUGH GITHUB API/CONNECTOR AND BIND REPOSITORY FULL NAME COMMIT SHA GIT BLOB SHA AND STATEMENT SHA256",
+      "new_signing_key_required": false,
+      "private_benchmark_content_required": false,
+      "rationale": "AUTHORIZED WRITE ACCESS TO THE OFFICIAL CROSS-LINKED ORGANIZATION IS THE OWNER-PUBLICATION TRUST LAYER."
+    },
+    {
+      "rank": 2,
+      "id": "OFFICIAL_DOMAIN_PUBLICATION",
+      "owner_action": "PUBLISH THE STATEMENT ON AN ARTIFICIALANALYSIS.AI HTTPS URL",
+      "brain_receipt": "FETCH AND CONTENT-ADDRESS THE EXACT RESPONSE WITH OWNER-DOMAIN PROVENANCE",
+      "new_signing_key_required": false,
+      "private_benchmark_content_required": false
+    },
+    {
+      "rank": 3,
+      "id": "OWNER_KEY_SIGNATURE",
+      "owner_action": "PUBLISH OR IDENTIFY AN OWNER/AUTHORIZED-OPERATOR ED25519 PUBLIC KEY ON AN OFFICIAL OWNER SURFACE AND SIGN THE CANONICAL STATEMENT",
+      "brain_receipt": "BIND THE PUBLIC-KEY HASH INTO THE CURRENT TARGET AND VERIFY THE ED25519 SIGNATURE LOCALLY WITH OPENSSL",
+      "new_signing_key_required": "ONLY_IF_NO_EXISTING OWNER KEY IS AVAILABLE",
+      "private_benchmark_content_required": false
+    },
+    {
+      "rank": 4,
+      "id": "SIGSTORE_KEYLESS",
+      "owner_action": "ISSUE A SIGSTORE/COSIGN ATTESTATION WITH AN IDENTITY VERIFIABLY CONTROLLED BY ARTIFICIAL ANALYSIS",
+      "brain_receipt": "VERIFY BUNDLE SIGNATURE CERTIFICATE IDENTITY OIDC ISSUER TIMESTAMP AND TRANSPARENCY-LOG PROOF",
+      "new_signing_key_required": false,
+      "private_benchmark_content_required": false
+    }
+  ],
+  "scheduler_effect": [
+    "PREFER OFFICIAL GITHUB PUBLICATION BECAUSE IT USES AN ALREADY ESTABLISHED OWNER IDENTITY SURFACE AND REQUIRES NO NEW KEY MANAGEMENT.",
+    "DO NOT ACCEPT A PUBLIC KEY SUPPLIED ONLY INSIDE THE SAME ATTESTATION IT SIGNS.",
+    "DO NOT ACCEPT SELF-DECLARED VERIFIED BOOLEAN FIELDS AS IDENTITY EVIDENCE.",
+    "IF OWNER PUBLICATION IS OBTAINED, CONTENT-ADDRESS IT AND REUSE ONE RESULT FOR BOTH AA PREDICATE ALIASES."
+  ],
+  "hard_nonclaims": [
+    "NO OWNER PUBLICATION OF THE REQUIRED AA STATEMENT CURRENTLY EXISTS.",
+    "NO PUBLIC OWNER SIGNING KEY WAS DISCOVERED.",
+    "NO CLAIM ARTIFICIAL ANALYSIS WILL PUBLISH THE REQUESTED STATEMENT.",
+    "NO CLAIM ANY EXTERNAL ROUTE IS FREE.",
+    "NO AA ACCEPTANCE OR TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "fresh_private_benchmark_cases_consumed": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
