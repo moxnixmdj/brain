@@ -599,6 +599,151 @@ def _resolve_legacy_direct_owned_success_no_delta(
     }
 
 
+def _repark_stale_replayable_success_after_resolved_handoff(
+    work: Mapping[str, Any],
+    *,
+    state_path: str | Path,
+    repo_root: str | Path,
+) -> dict[str, Any] | None:
+    """Normalize a replayable adapter miss whose prior frontier handoff was resolved.
+
+    A historical external-verifier wake can resolve the acquisition handoff and
+    reopen the blocked ADAPT_SUCCESS work even when the owned success adapter
+    still returns no candidate. If that second adaptation consumes the same
+    evidence, generic backoff would otherwise hide the still-real Root1 adapter
+    gap forever. Re-park exactly that work and reopen its deterministic handoff
+    before same-evidence backoff is consulted.
+    """
+    if str(work.get("kind") or "") != "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE":
+        return None
+    if str(work.get("status") or "") != "PENDING":
+        return None
+    payload = work.get("payload")
+    if not isinstance(payload, Mapping):
+        return None
+    if payload.get("replayable") is not True:
+        return None
+    replay_capsule_sha256 = str(payload.get("replay_capsule_sha256") or "").strip()
+    if len(replay_capsule_sha256) != 64:
+        return None
+    if (
+        str(work.get("last_attempt_status") or "")
+        != "IMPROVEMENT_PROVIDER_RETURNED_NO_SUCCESS_ADAPTATION"
+    ):
+        return None
+    last = work.get("last_attempt_observations")
+    if last is None or int(last) < int(work.get("observations", 0)):
+        return None
+
+    wid = str(work.get("work_id") or "").strip()
+    observation_id = str(payload.get("observation_id") or "").strip()
+    prior_handoff_id = str(work.get("frontier_expansion_work_id") or "").strip()
+    if not wid or not observation_id or not prior_handoff_id:
+        return None
+
+    state = learning.load_state(state_path)
+    queue = state.get("improvement_queue", {})
+    observations = state.get("observations", {})
+    row = queue.get(wid) if isinstance(queue, Mapping) else None
+    handoff = queue.get(prior_handoff_id) if isinstance(queue, Mapping) else None
+    observation = (
+        observations.get(observation_id)
+        if isinstance(observations, Mapping)
+        else None
+    )
+    if (
+        not isinstance(row, dict)
+        or row.get("status") != "PENDING"
+        or not isinstance(handoff, Mapping)
+        or handoff.get("kind") != FRONTIER_EXPANSION_KIND
+        or handoff.get("status") != "RESOLVED"
+        or not isinstance(observation, Mapping)
+    ):
+        return None
+    handoff_payload = handoff.get("payload")
+    if (
+        not isinstance(handoff_payload, Mapping)
+        or str(handoff_payload.get("blocked_success_work_id") or "") != wid
+        or str(handoff_payload.get("observation_id") or "") != observation_id
+    ):
+        return None
+
+    # Require the retained replay capsule to remain authentic before creating
+    # any new acquisition debt. This does not replay the success.
+    replay = learning.get_success_replay_context(
+        observation_id,
+        state_path=state_path,
+    )
+    if replay.get("replay_capsule_sha256") != replay_capsule_sha256:
+        raise ImprovementDriverError(
+            "STALE_SUCCESS_REPLAY_CAPSULE_BINDING_MISMATCH:" + wid
+        )
+
+    current_frontier = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    current_adapter = _owned_success_adapter_frontier_sha256(repo_root=repo_root)
+    current_authority = _owned_success_verification_authority_sha256(
+        repo_root=repo_root,
+    )
+    stored_authority = str(row.get("verification_authority_sha256") or "")
+    if stored_authority and stored_authority != current_authority:
+        return None
+
+    _park_success_work(
+        work,
+        observation_id=observation_id,
+        frontier_sha256=current_frontier,
+        state_path=state_path,
+        repo_root=repo_root,
+    )
+    updated = learning.load_state(state_path)
+    updated_queue = updated.get("improvement_queue", {})
+    updated_row = (
+        updated_queue.get(wid)
+        if isinstance(updated_queue, Mapping)
+        else None
+    )
+    new_handoff_id = (
+        str(updated_row.get("frontier_expansion_work_id") or "")
+        if isinstance(updated_row, Mapping)
+        else ""
+    )
+    new_handoff = (
+        updated_queue.get(new_handoff_id)
+        if isinstance(updated_queue, Mapping)
+        else None
+    )
+    if (
+        not isinstance(updated_row, Mapping)
+        or updated_row.get("status") != "PARKED"
+        or not new_handoff_id
+        or not isinstance(new_handoff, Mapping)
+        or new_handoff.get("kind") != FRONTIER_EXPANSION_KIND
+        or new_handoff.get("status") != "PENDING"
+    ):
+        raise ImprovementDriverError(
+            "STALE_SUCCESS_HANDOFF_RECONCILIATION_DID_NOT_REPARK:" + wid
+        )
+
+    return {
+        "schema": SCHEMA,
+        "status": (
+            "IMPROVEMENT_REPARKED__STALE_RESOLVED_FRONTIER_HANDOFF__"
+            "ADAPTER_MISS_STILL_OPEN"
+        ),
+        "pass": True,
+        "progress": False,
+        "disposition_recorded": True,
+        "work_id": wid,
+        "observation_id": observation_id,
+        "prior_frontier_handoff_work_id": prior_handoff_id,
+        "frontier_expansion_work_id": new_handoff_id,
+        "adapter_frontier_sha256": current_adapter,
+        "verification_authority_sha256": current_authority,
+        "replay_original_success": False,
+        "terminal_authority": False,
+    }
+
+
 def _episode_pools(
     state: Mapping[str, Any],
     current_episode: Mapping[str, Any],
@@ -1353,6 +1498,16 @@ def advance_once(
         if legacy_direct is not None:
             return {
                 **legacy_direct,
+                "blockers_skipped": blockers,
+            }
+        stale_repark = _repark_stale_replayable_success_after_resolved_handoff(
+            work,
+            state_path=state_path,
+            repo_root=repo_root,
+        )
+        if stale_repark is not None:
+            return {
+                **stale_repark,
                 "blockers_skipped": blockers,
             }
         if _frontier_acquisition_attempt_consumed(
