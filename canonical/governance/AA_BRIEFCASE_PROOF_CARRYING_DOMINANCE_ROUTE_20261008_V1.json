@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PROOF_CARRYING_DOMINANCE_ROUTE_V1",
   "date": "2026-10-08",
-  "status": "CANDIDATE_EXECUTABLE_STRONGER_CURRENT_EPOCH_ROUTE__ZERO_TERMINAL_CREDIT_PENDING_INDEPENDENT_VERIFICATION_AND_PRIVATE_SCOPE_RECEIPT",
+  "status": "EXECUTABLE_ROUTE_INDEPENDENTLY_REPLAYED__PRIVATE_SCOPE_RECEIPT_MISSING__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "problem_reduction": {
     "old_default": "REPRODUCE_OR_OBTAIN_ONE_MATCHED_CURRENT_OWNER_AA_BRIEFCASE_ELO_AND_COMPARE_TO_1807",
@@ -54,7 +54,11 @@
         "path": "canonical/tests/test_aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
         "git_blob_sha": "9bca3033620e8988ea7ea29ad36b8286c373f0de"
       }
-    ]
+    ],
+    "independent_runtime_verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_PROOF_CARRYING_DOMINANCE_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "58d1e5ea1de35e6ed87a921ed10006d74975b968"
+    }
   },
   "per_check_certification": {
     "E_EXPLICIT_COMPLETE": {
@@ -126,9 +130,18 @@
     "NO FAMILY OR TERMINAL CREDIT BEFORE INDEPENDENT VERIFICATION AND A REAL SCOPE-COMPLETE RECEIPT"
   ],
   "accounting": {
-    "incremental_spend_usd": 0,
+    "incremental_spend_usd": null,
     "fresh_target_model_queries": 0,
     "fresh_private_benchmark_cases_consumed": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "spend_measurement_available_for_remote_replay": false
+  },
+  "runtime_verification": {
+    "tests_run": 16,
+    "tests_passed": 16,
+    "failures": 0,
+    "executor": "REMOTE_ISOLATED_SPRITE",
+    "private_benchmark_cases_consumed": 0,
+    "conclusion": "ROUTE_MECHANICS_AND_FAIL_CLOSED_INVARIANTS_PASS__REAL_PRIVATE_SCOPE_RECEIPT_STILL_REQUIRED"
   }
 }
