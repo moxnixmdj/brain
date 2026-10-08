@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_R2_CONDITION_BOUND_P3_ADEQUACY_REUSE_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_DISTINCT_SPRITE_REPLAYS__18_OF_18_EACH",
+  "scope": "CONDITION_BOUND_POLICY_ADEQUACY_REUSE_INSIDE_P3_PLUS_EVIDENCE_PATH_HARDENING",
+  "exact_blobs": {
+    "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py": "7dd0897bec985f294e29b854a32d85df51ddbc77",
+    "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py": "805f9508ed98b57dd092415879e6e38860a02ac0",
+    "canonical/tests/test_p3_conditioned_policy_adequacy_registry_v1.py": "81d9e0a98ee7698bb22702a8ee89fca377fed52a",
+    "canonical/tests/test_p3_robust_policy_adequacy_cegar_v1.py": "26d6714a5c11eacb3029c1f10579b696cfcbcf56",
+    ".github/workflows/verify-p3-robust-adequacy-cegar-v1.yml": "e712b6864510609f9443d031b89d43e12c678e24"
+  },
+  "reused_existing_authority": {
+    "binding_path": "canonical/governance/SYNTHESIS_VISIBLE_SUPPORT_POLICY_ADEQUACY_BINDING_20261007_V1.json",
+    "binding_git_blob_sha": "7d2322ff8205e98752c4cd2674215f93c145305c",
+    "policy_id": "SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_POLICY_V1",
+    "condition_atom": "SYNTHESIS_TYPED_VISIBLE_SUPPORT_COMMON_POLICY_TOP_LAW_V1"
+  },
+  "replays": [
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-live-integrated-v1-run-20261008",
+      "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+      "tests_run": 18,
+      "tests_passed": 18,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-mm-functional-cegar-verify2-20261008",
+      "sprite_id": "sprite-7bd17231-0b9b-4a35-abc2-defe0e0a2c22",
+      "tests_run": 18,
+      "tests_passed": 18,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "proved": [
+    "EXISTING_INDEPENDENTLY_AUTHENTICATED_CONDITION_BOUND_POLICY_ADEQUACY_CAN_BE_REUSED_AUTOMATICALLY_WHEN_THE_EXACT_CONDITION_ATOM_ALREADY_EXISTS_IN_THE_DECISION_BASIS",
+    "REGISTRY_PRESENCE_DOES_NOT_SELF_CERTIFY_CONDITION_TRUTH",
+    "FALSE_CONDITION_WORLDS_REMAIN_SURVIVING_UNTIL_SOURCE_AUTHORIZED_REFINEMENT_PROVES_MEMBERSHIP",
+    "CALLER_CANNOT_OVERRIDE_REGISTERED_POLICY_CONDITION_OR_REGISTERED_BINDING",
+    "CONTENT_ADDRESS_DRIFT_FAILS_CLOSED",
+    "REGISTERED_BINDING_SYMLINK_ESCAPE_FAILS_CLOSED",
+    "P3_ADEQUACY_CERTIFICATE_AND_VERIFICATION_PATH_SYMLINK_ESCAPE_FAILS_CLOSED",
+    "ALL_PREEXISTING_ROBUST_P3_CEGAR_REGRESSIONS_REMAIN_PASSING"
+  ],
+  "hard_nonclaims": [
+    "NO_NEW_CONDITION_MEMBERSHIP",
+    "NO_NEW_POLICY_ADEQUACY_THEOREM",
+    "NO_GENERAL_SYNTHESIS_CLOSURE",
+    "NO_GLOBAL_R2_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
