@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE_VERIFICATION_20261008_V2",
+  "date": "2026-10-08",
+  "status": "PASS__R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE__87_OF_87__ONE_SHOT_VERIFIED_CLOSURE_ACTIVE__R2_V25_REBASE",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "one-shot-canonical-frontdoor-v2-20261008",
+    "base_main_sha": "ec76da1127ae12f457d46c294459bd36b57cbd32"
+  },
+  "exact_blobs": {
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "147c2df7ba15e4fb5fec1431e6d0473e599d67c1"
+    },
+    "subordinate_runtime": {
+      "path": "canonical/runtime/live_brain_runtime_v1.py",
+      "git_blob_sha": "b24010e0ed811c7c62faab0119c6f25c2f409bc6"
+    },
+    "closure_gate": {
+      "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
+      "git_blob_sha": "3f06f9b39ce91547a5bf70e292c7dcc0ec5f3695"
+    },
+    "invoker": {
+      "path": "canonical/runtime/live_capability_invoker_v1.py",
+      "git_blob_sha": "c25f6e79d41bdec1d3fe2f6943e68afb6bb854de"
+    },
+    "live_composition": {
+      "path": "canonical/runtime/live_capability_composition_v1.py",
+      "git_blob_sha": "2c32696b79463936b91e5b45bbba8098cd5f3ff1"
+    },
+    "authority_runtime_census": {
+      "path": "canonical/runtime/current_authority_runtime_census_v1.py",
+      "git_blob_sha": "14d21fc3ad453493fa0e0a1477783ce0cbdb277b"
+    },
+    "one_shot_supervisor": {
+      "path": "canonical/runtime/one_shot_verified_closure_v1.py",
+      "git_blob_sha": "2540e940bf9bc8ce3212e9910161bed814101f33"
+    }
+  },
+  "live_ownership": {
+    "fabric_engine_count": 22,
+    "verified_bound_capability_count": 43,
+    "h100_verified_capability_count": 21,
+    "active_verified_learned_skill_count": 0,
+    "certified_route_count": 1,
+    "live_owned_capability_count": 87,
+    "universally_invocable_capability_count": 87,
+    "missing_invocation_contract_count": 0
+  },
+  "capability_lifecycle": {
+    "discoverable": true,
+    "composable": true,
+    "executable": true,
+    "verifiable": true,
+    "learnable": true,
+    "reusable": true,
+    "lifecycle_complete": true
+  },
+  "architecture_replay": {
+    "carrier": "SPRITES",
+    "result": "PASS__R1_LIVE_ARCHITECTURE_CLOSED_AND_DRIFT_LOCKED",
+    "r1_and_frontdoor_test_bundle": "7_OF_7_PASS",
+    "required_engine_binding_count": 12,
+    "required_subruntime_surface_count": 9,
+    "exact_lifecycle_all_true": true
+  },
+  "one_shot_frontdoor_verification": {
+    "fabric_status": "FABRIC_DISPATCH_COMPLETE",
+    "inner_pass": true,
+    "inner_status": "VERIFIED_FIXED_POINT__IRREDUCIBLE_EXTERNAL_INFORMATION_REQUIRED",
+    "fixed_point": true,
+    "irreducible_external_information_proved": true,
+    "verified_goal_satisfied_or_irreducible_external_only": true,
+    "state_sha256": "8d67d2535012fb783daac20ec8fd5c52206a3e982f19f1a9cd3c68fc594b6810",
+    "frontier_digest": "960d001e99474ceddb9a51b57f3596ab4b44f45decb4140a70ec80133aa53985",
+    "witness_sha256": "aba4d2ba8f7ff79f660caccb0b8d0d4d2ffe71660772dd67e84e6b74a4a7aadc",
+    "terminal_authority": false
+  },
+  "repairs_verified": {
+    "authority_runtime_census_regex": "PASS__NORMAL_CANONICAL_RUNTIME_PATHS_RECOGNIZED"
+  },
+  "boundaries": {
+    "arbitrary_intent_to_correct_capability_selection": "R2_SEMANTIC_DECISION_INTELLIGENCE",
+    "positive_open_world_adequacy_coverage": "R2_REMAINS_OPEN",
+    "global_mission_terminal": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
