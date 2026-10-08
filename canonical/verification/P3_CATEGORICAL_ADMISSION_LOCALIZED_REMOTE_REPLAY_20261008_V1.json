@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_P3_CATEGORICAL_ADMISSION_LOCALIZED_REMOTE_REPLAY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "REMOTE_FOCUSED_REPLAY_PASS__ZERO_TERMINAL_CREDIT",
+  "target_pr": 3109,
+  "source_branch": "p3-categorical-support-v1-20261008",
+  "source_commit_before_verification": "7c95a4a3359eade3e862d05800f6ff54edb16620",
+  "verification_environment": {
+    "provider": "Sprites",
+    "environment_name": "brain-abstract-cover-lift-verify-20261008-v1",
+    "environment_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+    "isolated_working_directory": "/home/sprite/p3-categorical-verify-20261008",
+    "test_runner": "Python 3.13 direct runpy zero-argument test-function invocation; pytest module unavailable in environment",
+    "test_runner_limitations": "Focused assertion replay only; no pytest plugin/fixture discovery or full repository CI execution"
+  },
+  "pinned_changed_git_blobs": {
+    "canonical/runtime/bounded_explicit_categorical_support_v1.py": "342600328e71922cf387ae2a82be787bb7a07288",
+    "canonical/runtime/selected_support_truth_certificate_v5.py": "2deeeefbd422dcd4a907db1edacc21f024363e26",
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py": "1305a87fec0984a52db1791e9c42314e6faee3c8",
+    "canonical/runtime/p3_real_context_v3_admission_v6.py": "af50c0f355610016f686759962d862a731373441",
+    "canonical/tests/test_bounded_explicit_categorical_support_v1.py": "92b0de6acc5056131667ca675cf7f94cd85d4d53",
+    "canonical/tests/test_selected_support_truth_certificate_v5.py": "f324c61ab58f7b7e03bacae15e19a0240624743d",
+    "canonical/tests/test_p3_required_claim_grounded_realization_cell_v3.py": "69f874dd81e196d6e48ea5597bef01c0a4c883aa",
+    "canonical/tests/test_p3_real_context_v3_admission_v6.py": "547d3fec696677c71677dc6a7cba8884a3c92504"
+  },
+  "assertion_replays": [
+    {
+      "suite": "test_bounded_explicit_categorical_support_v1",
+      "passed": 13,
+      "failed": 0
+    },
+    {
+      "suite": "test_selected_support_truth_certificate_v5",
+      "passed": 16,
+      "failed": 0
+    },
+    {
+      "suite": "test_p3_required_claim_grounded_realization_cell_v3",
+      "passed": 11,
+      "failed": 0
+    },
+    {
+      "suite": "test_p3_real_context_v3_admission_v6",
+      "passed": 11,
+      "failed": 0
+    }
+  ],
+  "focused_total": {
+    "passed": 51,
+    "failed": 0,
+    "total": 51
+  },
+  "independent_differential_check": {
+    "kind": "separate finite-set semantics enumerator, truth-based model entailment and selected evidence-path soundness",
+    "random_seed": 20261008,
+    "random_cases": 400,
+    "finite_models_per_case": 256,
+    "proved_claims_checked": 90,
+    "unsound_derived_claims": 0,
+    "unsound_proof_paths": 0,
+    "limitation": "Finite randomized differential evidence; does not prove unbounded symbolic soundness, parser semantic alignment, evaluator noninferiority, or global scope completeness"
+  },
+  "incident_and_repair": {
+    "initial_failures": "12/13 tests failed because active parser called missing _term during a concurrent branch update",
+    "intermediate_failures": "12/13 passed; one quantified-term test failed because raw-regex boundaries were double escaped",
+    "repair_commits": [
+      "7c95a4a3359eade3e862d05800f6ff54edb16620"
+    ],
+    "final_state": "51/51 suite assertions pass in pinned isolated remote replay"
+  },
+  "authority": {
+    "source_authorization_verified": false,
+    "independent_global_scope_complete": false,
+    "policy_adequacy_authority": false,
+    "db_admission_authority": false,
+    "u_empty_authorized": false,
+    "abc_closed_authorized": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0,
+    "pr_merge_approved": false
+  },
+  "next_required": "INDEPENDENT_EXACT_BYTE_VERIFICATION_OF_COMPLETE_RUNTIME_BOUNDARIES_AND_TARGET_SCOPED_ADMISSION_ADEQUACY__DO_NOT_MERGE_ON_THIS_RECORD_ALONE"
+}
