@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_OPTION_PRESERVING_OPTIMIZATION_POINTER_V1",
   "date": "2026-10-08",
-  "status": "ACTIVE",
+  "status": "ACTIVE_INDEPENDENTLY_VERIFIED",
   "policy": {
     "path": "canonical/governance/OPTION_PRESERVING_CAPABILITY_OPTIMIZATION_20261008_V1.json"
   },
@@ -11,5 +11,9 @@
   "invariant": "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
   "active_dominance_semantics": "RETIRE_FROM_HOT_FRONTIER_ONLY",
   "physical_delete_requires_separate_proof": true,
-  "new_technology_triggers_cost_model_reextraction": true
+  "new_technology_triggers_cost_model_reextraction": true,
+  "verification": {
+    "path": "canonical/verification/OPTION_PRESERVING_CAPABILITY_OPTIMIZER_INDEPENDENT_VERIFICATION_20261008_V1.json",
+    "status": "PASS__OPTION_PRESERVING_OPTIMIZER_AND_SCHEDULER_REGRESSION__16_OF_16__GOVERNANCE_PASS"
+  }
 }
