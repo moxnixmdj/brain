@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_ROBUST_SCORE_LOWER_BOUND_RECONCILIATION_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_TRUTH_REPAIR__PUBLIC_CATEGORY_ONLY_SCORE_LOWER_BOUND_IS_ZERO__ROBUST_MINIMUM_INFORMATION_BOUND_COMPILED__ZERO_CREDIT",
+  "benchmark": "FrontierCode 1.1 Main",
+  "frozen_predicate_id": "CODING_FRONTIERCODE_GE_54_4",
+  "current_owner_target_binding": "canonical/evidence/FRONTIERCODE_OPUS55_CURRENT_OWNER_TARGET_REFRESH_20261008_V1.json",
+  "current_owner_target": {
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "score_fraction": 0.5464,
+    "score_percent": 54.64,
+    "main_tasks": 100,
+    "trials_per_effort": 5,
+    "scored_cells": 500,
+    "target_full_score_cell_equivalents": 273.2
+  },
+  "owner_public_scoring_semantics": {
+    "methodology_url": "https://cognition.com/blog/frontier-code",
+    "revision_url": "https://cognition.com/blog/frontier-code-1.1",
+    "facts": [
+      "A_SOLUTION_PASSES_ONLY_IF_IT_CLEARS_ALL_BLOCKER_CRITERIA",
+      "A_SOLUTION_SCORE_IS_A_WEIGHTED_AGGREGATE_OF_RUBRIC_ITEMS",
+      "A_SOLUTION_THAT_DOES_NOT_PASS_BLOCKERS_RECEIVES_ZERO_UNDER_THE_PUBLISHED_BASE_METHODOLOGY",
+      "EACH_MODEL_IS_RUN_FIVE_TIMES_AT_EACH_AVAILABLE_REASONING_EFFORT_AND_METRICS_ARE_AVERAGED",
+      "TASK_CREATORS_ASSIGN_CRITERION_WEIGHTS_RELATIVE_TO_OTHER_CRITERIA",
+      "FRONTIERCODE_1_1_AUDITED_MORE_THAN_1000_BLOCKER_CRITERIA_AND_DEMOTED_75_OVERLY_STRICT_BLOCKERS",
+      "PUBLIC_OWNER_MATERIAL_DOES_NOT_PUBLISH_THE_COMPLETE_MAIN_PER_TASK_BLOCKER_SET_OR_PER_CRITERION_WEIGHT_MANIFEST"
+    ]
+  },
+  "robust_uncertainty_model": {
+    "hidden_per_task_facts": [
+      "WHICH_CRITERIA_ARE_BLOCKERS",
+      "COMPLETE_CRITERION_CONTENT",
+      "NORMALIZED_CRITERION_WEIGHTS",
+      "PROMPT_OR_ADAPTIVE_GRADER_SEMANTICS_FOR_HIDDEN_CRITERIA"
+    ],
+    "public_information_only_worst_case": [
+      "AN_UNSEEN_BLOCKER_CAN_FAIL_AND_ZERO_A_RUN",
+      "UNSEEN_CRITERIA_CAN_CARRY_ARBITRARILY_MUCH_OF_THE_NORMALIZED_WEIGHT_ABSENT_A_PUBLISHED_LOWER_BOUND_ON_KNOWN_PASSED_WEIGHT"
+    ],
+    "consequence": "PUBLIC_CATEGORY_OR_METHOD_LABELS_ALONE_IMPLY_NO_POSITIVE_SCORE_LOWER_BOUND"
+  },
+  "theorem": {
+    "id": "C_FRONTIERCODE_ROBUST_SCORE_LOWER_BOUND_V1",
+    "statement": "FOR_EACH_SCORED_CELL_c__LET_B_c_BE_ONE_IFF_ALL_BLOCKERS_ARE_INDEPENDENTLY_PROVED_PASSED_AND_LET_L_c_IN_[0,1]_BE_AN_INDEPENDENTLY_CERTIFIED_LOWER_BOUND_ON_NORMALIZED_PASSED_RUBRIC_WEIGHT__THEN_A_SOUND_WORST_CASE SCORE LOWER BOUND IS_AVG_c(B_c_TIMES_L_c)__IF_B_c_IS_UNPROVED_OR_L_c_HAS_NO_POSITIVE_CERTIFICATE_THE_CELL_LOWER_BOUND_IS_ZERO",
+    "target_condition": "SUM_c(B_c_TIMES_L_c)_GE_0_5464_TIMES_500_EQUALS_273_2",
+    "integer_full_score_corollary": {
+      "if_unknown_cells_have_zero_lower_bound": true,
+      "minimum_number_of_full_score_cells_required": 274,
+      "full_score_cells_273_lower_bound": 0.546,
+      "full_score_cells_274_lower_bound": 0.548
+    }
+  },
+  "minimum_missing_information_routes": [
+    {
+      "id": "COMPACT_AGGREGATE_LOWER_BOUND_CERTIFICATE",
+      "sufficient_fact": "INDEPENDENT_OWNER_OR_PROTOCOL_EQUIVALENT_CERTIFICATE_THAT_THE_500_CELL_SUM_OF_BLOCKER_GATED_PASSED_WEIGHT_LOWER_BOUNDS_IS_AT_LEAST_273_2",
+      "requires_full_hidden_rubric_disclosure": false
+    },
+    {
+      "id": "GROUPED_CELL_CERTIFICATES",
+      "sufficient_fact": "A_PARTITION_OF_THE_500_CELLS_INTO_GROUPS_WITH_INDEPENDENT_ALL_BLOCKERS_PASS_CERTIFICATES_AND_NORMALIZED_PASSED_WEIGHT_LOWER_BOUNDS_WHOSE_MULTIPLICITY_WEIGHTED_SUM_IS_AT_LEAST_273_2",
+      "requires_full_hidden_rubric_disclosure": false
+    },
+    {
+      "id": "SCOPE_COMPLETE_STRONGER_PROOF",
+      "sufficient_fact": "A_SCOPE_COMPLETE_STRONGER_BRAIN_NONINFERIORITY_PROOF",
+      "requires_benchmark_score_computation": false
+    }
+  ],
+  "eliminated_shortcuts": [
+    "PASS_PUBLIC_CLASSICAL_TESTS_THEREFORE_SCORE_GE_54_64",
+    "COVER_PUBLISHED_GRADING_METHOD_CATEGORIES_THEREFORE_SCORE_GE_54_64",
+    "PROVE_MERGEABILITY_BLOCKERS_ONLY_WITHOUT_ANY_PASSED_WEIGHT_LOWER_BOUND_THEREFORE_SCORE_GE_54_64",
+    "USE_OPUS_PASS_RATE_OR_AGGREGATE_SCORE_TO_INFER_HIDDEN_BRAIN_RUBRIC_WEIGHTS"
+  ],
+  "runtime": {
+    "path": "canonical/runtime/frontiercode_robust_score_lower_bound_v1.py",
+    "role": "ARITHMETIC_ONLY_FAIL_CLOSED_ROBUST_LOWER_BOUND_COMPILER",
+    "promotion_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_BRAIN_HAS_ANY_POSITIVE_FRONTIERCODE_SCORE_LOWER_BOUND",
+    "NO_CLAIM_HIDDEN_RUBRIC_WEIGHTS_ARE_UNIFORM",
+    "NO_CLAIM_ALL_BLOCKERS_ARE_PUBLIC",
+    "NO_CLAIM_OWNER_WILL_PROVIDE_A_COMPACT_LOWER_BOUND_CERTIFICATE",
+    "NO_FRONTIERCODE_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  },
+  "next": "INDEPENDENTLY_VERIFY_THE_ROBUST_BOUND_COMPILER__THEN_SEARCH_EXISTING_BRAIN_PROOFS_FOR_ANY_WHOLE_CELL_OR_GROUP_CERTIFICATES_THAT_CAN_SUPPLY_B_c_AND_L_c__DO_NOT_REOPEN_PUBLIC_CATEGORY_ONLY_SHORTCUTS"
+}
