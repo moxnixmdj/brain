@@ -365,7 +365,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         with mock.patch.object(
             loop,
             "reauthenticate_skill_record",
-            return_value={"pass": True, "verified_skill": stronger},
+            side_effect=lambda skill, **_: {"pass": True, "verified_skill": skill},
         ):
             second = loop.integrate_solver_output(
                 {
@@ -421,7 +421,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         with mock.patch.object(
             loop,
             "reauthenticate_skill_record",
-            return_value={"pass": True, "verified_skill": weak},
+            side_effect=lambda skill, **_: {"pass": True, "verified_skill": skill},
         ):
             rejected = loop.integrate_solver_output(
                 {
@@ -735,6 +735,54 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             ["op0", "op1", "distractor"],
         )
         reauth.assert_called_once()
+
+    def test_reauthenticated_skill_with_registry_identity_mismatch_is_not_reused(self):
+        path = self.temp_state()
+        skill = verified_skill("2", relation="EXACT", source_ids=("ep1", "ep2"))
+        state = loop._empty_state()
+        real_sid = loop._skill_id(skill)
+        family = loop._family_id(skill)
+        wrong_sid = "skill:" + "0" * 64
+        state["skills"][wrong_sid] = {
+            "skill": skill,
+            "family_id": family,
+            "pareto_metrics": loop._skill_pareto_row(real_sid, skill),
+            "active": True,
+            "dominated_by": None,
+            "compression": {},
+        }
+        state["pareto_frontiers"][family] = [wrong_sid]
+        loop._refresh_stats(state)
+        loop._write_state(state, path)
+
+        solved = {
+            "pass": True,
+            "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+            "current_episode_verified": False,
+            "skill_candidate": None,
+            "verified_skill_reuse_authorized": False,
+            "verified_executable_skill": None,
+        }
+        with (
+            mock.patch.object(
+                loop,
+                "reauthenticate_skill_record",
+                return_value={"pass": True, "verified_skill": skill},
+            ),
+            mock.patch.object(loop.solver_v12, "run", return_value=solved) as run_mock,
+        ):
+            out = loop.run_learning_episode(
+                self._reuse_problem(),
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep3",
+                scope_id="scope",
+            )
+
+        self.assertFalse(out["reuse_first"], out)
+        self.assertIsNone(out["reused_skill_id"])
+        self.assertEqual(run_mock.call_count, 1)
+        self.assertNotEqual(wrong_sid, real_sid)
 
     def test_active_verified_skill_is_automatically_used_as_planning_compression(self):
         path = self.temp_state()
