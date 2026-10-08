@@ -66,6 +66,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             kwargs["retry_context"]["known_absent_invalidators"],
             ["inv.old"],
         )
+        self.assertFalse(kwargs["retry_context"]["auto_repair"])
 
     @patch("canonical.runtime.live_brain_runtime_v1._active_learning_context")
     @patch("canonical.runtime.live_brain_runtime_v1._v12_run")
@@ -154,6 +155,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             kwargs["retry_context"]["request"]["scope_id"],
             "unified-live-brain",
         )
+        self.assertFalse(kwargs["retry_context"]["auto_repair"])
 
     @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
     def test_compiled_bound_route_is_behind_same_front_door(self, bound):
@@ -255,6 +257,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
                     "target_effects": ["X"],
                 },
                 "learn": True,
+                "auto_repair": False,
             },
         )
 
@@ -283,6 +286,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
                 "mode": "raw_bound",
                 "request": {"task_id": "r-fail", "goal": "unknown"},
                 "learn": True,
+                "auto_repair": False,
             },
         )
 
@@ -435,6 +439,170 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         })
         self.assertFalse(out["pass"])
         self.assertIn("FAILURE_FINGERPRINT_UNKNOWN", out["reason"])
+
+    @patch("canonical.runtime.live_brain_runtime_v1.execute_failure_repair_cycle")
+    @patch("canonical.runtime.live_brain_runtime_v1._active_learning_context")
+    @patch("canonical.runtime.live_brain_runtime_v1._run_learning_episode")
+    def test_generic_failure_automatically_repairs_and_replays_original_obligation(
+        self, learning_run, context, repair_cycle
+    ):
+        context.return_value = {
+            "state_path": "/tmp/state.json",
+            "state": {},
+            "prior_verified_episodes": [],
+            "active_verified_skills": [],
+        }
+        solver_failure = {
+            "pass": False,
+            "status": "FAIL_CLOSED__NO_CURRENT_CAPABILITY_PLAN",
+        }
+        learning_run.return_value = {
+            "pass": False,
+            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "solver_output": solver_failure,
+            "learning": {
+                "pass": False,
+                "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+                "diagnosis": {"failure_fingerprint": "fp:auto"},
+                "retry_capsule_sha256": "a" * 64,
+            },
+            "prior_verified_episode_count_used": 0,
+            "reuse_first": False,
+            "reused_skill_id": None,
+            "reuse_attempt": None,
+            "fallback_used": False,
+        }
+        repair_cycle.return_value = {
+            "pass": True,
+            "status": "REPAIR_VERIFIED_BY_ORIGINAL_OBLIGATION_REPLAY",
+            "original_replay": {"pass": True},
+        }
+
+        def expander(request, index, problem):
+            return None
+
+        out = brain.run(
+            {
+                "mode": "generic",
+                "problem": self.problem(),
+                "episode_id": "auto-repair",
+            },
+            capability_expander=expander,
+        )
+
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["automatic_repair_enabled"])
+        self.assertTrue(out["automatic_repair_triggered"])
+        self.assertTrue(out["automatic_repair"]["auto_repair_executed"])
+        self.assertTrue(out["recovered_by_automatic_repair"])
+        self.assertIn("AUTOMATIC_REPAIR_VERIFIED_BY_ORIGINAL_REPLAY", out["status"])
+        repair_request = repair_cycle.call_args.args[0]
+        self.assertEqual(repair_request["failure_fingerprint"], "fp:auto")
+        self.assertEqual(repair_request["retry_capsule_sha256"], "a" * 64)
+        self.assertEqual(repair_request["components"], [])
+        self.assertFalse(learning_run.call_args.kwargs["retry_context"]["auto_repair"])
+
+    @patch("canonical.runtime.live_brain_runtime_v1.execute_failure_repair_cycle")
+    @patch("canonical.runtime.live_brain_runtime_v1._active_learning_context")
+    @patch("canonical.runtime.live_brain_runtime_v1._run_learning_episode")
+    def test_generic_auto_repair_fails_closed_when_no_repair_substrate_exists(
+        self, learning_run, context, repair_cycle
+    ):
+        context.return_value = {
+            "state_path": "/tmp/state.json",
+            "state": {},
+            "prior_verified_episodes": [],
+            "active_verified_skills": [],
+        }
+        learning_run.return_value = {
+            "pass": False,
+            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "solver_output": {"pass": False, "status": "FAIL_CLOSED"},
+            "learning": {
+                "pass": False,
+                "diagnosis": {"failure_fingerprint": "fp:blocked"},
+                "retry_capsule_sha256": "b" * 64,
+            },
+            "prior_verified_episode_count_used": 0,
+            "reuse_first": False,
+            "reused_skill_id": None,
+            "reuse_attempt": None,
+            "fallback_used": False,
+        }
+
+        out = brain.run({
+            "mode": "generic",
+            "problem": self.problem(),
+            "episode_id": "blocked",
+        })
+
+        self.assertFalse(out["pass"])
+        self.assertTrue(out["automatic_repair_triggered"])
+        self.assertFalse(out["recovered_by_automatic_repair"])
+        self.assertFalse(out["automatic_repair"]["auto_repair_executed"])
+        self.assertEqual(
+            out["automatic_repair"]["status"],
+            "AUTO_REPAIR_BLOCKED__NO_VERIFIED_REPAIR_COMPONENTS_OR_AUTHENTICATED_EXPANDER",
+        )
+        repair_cycle.assert_not_called()
+
+    @patch("canonical.runtime.live_brain_runtime_v1.execute_failure_repair_cycle")
+    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
+    @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
+    def test_compiled_bound_failure_uses_same_automatic_repair_closure(
+        self, bound, integrate, repair_cycle
+    ):
+        bound.return_value = {
+            "pass": False,
+            "status": "FAIL__CAPABILITY_OR_TASK_CONTRACT_GAP",
+            "failure_class": "MISSING_CAPABILITY_OR_COMPILED_TASK_CONTRACT",
+        }
+        integrate.return_value = {
+            "pass": False,
+            "diagnosis": {"failure_fingerprint": "fp:bound"},
+            "retry_capsule_sha256": "c" * 64,
+        }
+        repair_cycle.return_value = {
+            "pass": True,
+            "status": "REPAIR_VERIFIED_BY_ORIGINAL_OBLIGATION_REPLAY",
+        }
+        component = {
+            "id": "verified-repair",
+            "verified": True,
+            "brain_owned": True,
+            "donor_independent": True,
+        }
+        out = brain.run({
+            "mode": "compiled_bound",
+            "task_id": "b-auto",
+            "initial_facts": [],
+            "target_effects": ["X"],
+            "repair_components": [component],
+        })
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["recovered_by_automatic_repair"])
+        self.assertEqual(
+            repair_cycle.call_args.args[0]["components"],
+            [component],
+        )
+
+    @patch("canonical.runtime.live_brain_runtime_v1.run")
+    def test_original_obligation_replay_forces_auto_repair_off(self, live_run):
+        live_run.return_value = {"pass": False}
+        context = {
+            "mode": "generic",
+            "problem": self.problem(),
+            "auto_repair": True,
+        }
+        brain._replay_retry_context(
+            context,
+            repo_root=brain.ROOT,
+            information_provider=None,
+            proposal_provider=None,
+            capability_expander=None,
+        )
+        replayed = live_run.call_args.args[0]
+        self.assertFalse(replayed["auto_repair"])
 
     def test_unknown_mode_fails_closed(self):
         out = brain.run({"mode": "invented"})
