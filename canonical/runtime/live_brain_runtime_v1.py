@@ -297,17 +297,47 @@ def execute_failure_repair_cycle(
             retry_capsule_sha256=request.get("retry_capsule_sha256"),
         )
         synthesized = synthesize_failure_repair(request, state_path=path)
+        invention_mode = False
         if synthesized.get("pass") is not True:
-            return {
-                **synthesized,
-                "status": "REPAIR_CYCLE_UNRESOLVED_AT_SYNTHESIS",
-                "retry_capsule_sha256": retry["retry_capsule_sha256"],
+            causal = synthesized.get("causal_synthesis")
+            classification = (
+                str(causal.get("classification") or "")
+                if isinstance(causal, Mapping)
+                else ""
+            )
+            if classification != "NEW_PRIMITIVE_REQUIRED" or capability_expander is None:
+                return {
+                    **synthesized,
+                    "status": "REPAIR_CYCLE_UNRESOLVED_AT_SYNTHESIS",
+                    "retry_capsule_sha256": retry["retry_capsule_sha256"],
+                    "capability_expander_available": capability_expander is not None,
+                }
+            required_effect = str(synthesized.get("required_repair_effect") or "").strip()
+            if not required_effect:
+                return _fail("NEW_PRIMITIVE_REPAIR_EFFECT_MISSING")
+            fingerprint_prefix = fingerprint[:16]
+            problem = {
+                "task_id": str(
+                    request.get("repair_task_id")
+                    or (
+                        "invent-repair-"
+                        + fingerprint_prefix
+                        + "-"
+                        + retry["retry_capsule_sha256"][:12]
+                    )
+                ),
+                "initial_facts": list(request.get("initial_facts") or []),
+                "target_effects": [required_effect],
+                "capabilities": [],
+                "max_solver_cycles": min(int(request.get("max_solver_cycles", 64)), 256),
             }
-        problem = _compile_verified_repair_problem(
-            repair=synthesized,
-            request=request,
-            retry_capsule_sha256=retry["retry_capsule_sha256"],
-        )
+            invention_mode = True
+        else:
+            problem = _compile_verified_repair_problem(
+                repair=synthesized,
+                request=request,
+                retry_capsule_sha256=retry["retry_capsule_sha256"],
+            )
         kwargs = dict(request.get("solver_kwargs") or {})
         kwargs.setdefault("episode_id", "repair-" + retry["retry_capsule_sha256"][:12])
         kwargs.setdefault("scope_id", "verified-repair-loop")
@@ -351,9 +381,25 @@ def execute_failure_repair_cycle(
             capability_expander=capability_expander,
         )
         replay_pass = replay.get("pass") is True
+        winner_components = []
+        if not invention_mode:
+            winner_components = list(
+                synthesized["causal_synthesis"]["winner"]["components"]
+            )
         repair_record = {
             "required_repair_effect": synthesized["required_repair_effect"],
-            "winner_components": list(synthesized["causal_synthesis"]["winner"]["components"]),
+            "repair_mode": (
+                "V12_AUTHENTICATED_CAPABILITY_EXPANSION"
+                if invention_mode
+                else "EXISTING_VERIFIED_COMPONENT_ARCHITECTURE"
+            ),
+            "winner_components": winner_components,
+            "expanded_capability_ids": list(
+                repair_execution.get("expanded_capability_ids") or []
+            ),
+            "capability_expansion_attempts": deepcopy(
+                list(repair_execution.get("capability_expansion_attempts") or [])
+            ),
             "repair_task_id": problem["task_id"],
             "repair_execution_status": repair_execution.get("status"),
             "repair_execution_pass": True,
@@ -377,6 +423,11 @@ def execute_failure_repair_cycle(
             "failure_fingerprint": fingerprint,
             "retry_capsule_sha256": retry["retry_capsule_sha256"],
             "repair_synthesis": synthesized,
+            "repair_mode": (
+                "V12_AUTHENTICATED_CAPABILITY_EXPANSION"
+                if invention_mode
+                else "EXISTING_VERIFIED_COMPONENT_ARCHITECTURE"
+            ),
             "repair_problem": problem,
             "repair_execution": repair_execution,
             "repair_learning": repair_learning,
