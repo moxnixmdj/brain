@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from canonical.runtime import live_brain_runtime_v1 as brain
 
@@ -42,12 +42,69 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         kwargs = solver.call_args.kwargs["kwargs"]
         self.assertEqual(kwargs["prior_verified_episode_records"], [{"episode_id": "old"}])
         self.assertEqual(kwargs["episode_id"], "new")
-        integrate.assert_called_once_with(solver.return_value, state_path="/tmp/state.json")
+        integrate.assert_called_once_with(
+            solver.return_value,
+            state_path="/tmp/state.json",
+            retry_context={
+                "mode": "generic",
+                "problem": self.problem(),
+                "episode_id": "new",
+                "scope_id": "scope",
+                "active_invalidators": [],
+                "learn": True,
+            },
+        )
+
+    @patch("canonical.runtime.live_brain_runtime_v1._v12_run")
+    @patch("canonical.runtime.live_brain_runtime_v1._skill_plan")
+    @patch("canonical.runtime.live_brain_runtime_v1._learning_module")
+    @patch("canonical.runtime.live_brain_runtime_v1._active_learning_context")
+    def test_active_verified_skill_uses_r3_reuse_first_in_live_generic_path(
+        self, context, learning_module, skill_plan, direct_solver
+    ):
+        context.return_value = {
+            "state_path": "/tmp/state.json",
+            "state": {},
+            "prior_verified_episodes": [{"episode_id": "old"}],
+            "active_verified_skills": [{"candidate_sha256": "sha256:skill"}],
+        }
+        skill_plan.return_value = {"pass": True, "status": "PASS__SKILL_AWARE_PLAN_COMPILED"}
+        learning = Mock()
+        learning.run_learning_episode.return_value = {
+            "pass": True,
+            "status": "VERIFIED_EPISODE_PERSISTED__MORE_EVIDENCE_NEEDED_FOR_SKILL",
+            "solver_output": {"pass": True, "status": "SOLVED__VERIFIED_EPISODE"},
+            "learning": {"status": "VERIFIED_EPISODE_PERSISTED__MORE_EVIDENCE_NEEDED_FOR_SKILL"},
+            "prior_verified_episode_count_used": 1,
+            "reuse_first": True,
+            "reused_skill_id": "skill:abc",
+            "reuse_attempt": {"pass": True},
+            "fallback_used": False,
+        }
+        learning_module.return_value = learning
+
+        out = brain.run({
+            "mode": "generic",
+            "problem": self.problem(),
+            "episode_id": "new",
+            "scope_id": "scope",
+        })
+
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["reuse_first"])
+        self.assertEqual(out["reused_skill_id"], "skill:abc")
+        self.assertFalse(out["fallback_used"])
+        learning.run_learning_episode.assert_called_once()
+        direct_solver.assert_not_called()
 
     @patch("canonical.runtime.live_brain_runtime_v1._decision_run")
     @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
     def test_raw_goal_defaults_to_r2_and_feeds_verified_execution_to_r3(self, integrate, decision):
-        execution = {"pass": True, "status": "SOLVED__VERIFIED_EPISODE"}
+        execution = {
+            "pass": True,
+            "status": "SOLVED__VERIFIED_EPISODE",
+            "current_episode_verified": True,
+        }
         decision.return_value = {
             "pass": True,
             "status": "PASS__GOAL_BOUND_ADEQUATE_POLICY_EXECUTED_AND_ACCEPTANCE_VERIFIED",
@@ -62,7 +119,15 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertTrue(out["semantic_acceptance_complete"])
         self.assertTrue(out["actual_goal_satisfaction_verified"])
         decision.assert_called_once()
-        integrate.assert_called_once_with(execution, state_path=None)
+        integrate.assert_called_once_with(
+            execution,
+            state_path=None,
+            retry_context={
+                "mode": "decision",
+                "request": {"task_id": "d1", "goal": "do the exact thing"},
+                "learn": True,
+            },
+        )
 
     @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
     def test_compiled_bound_route_is_behind_same_front_door(self, bound):
@@ -72,6 +137,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "task_id": "b1",
             "initial_facts": [],
             "target_effects": ["X"],
+            "learn": False,
         })
         self.assertTrue(out["pass"], out)
         bound.assert_called_once()
@@ -83,6 +149,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "mode": "specialized",
             "surface": "P3_REAL_CONTEXT_V12",
             "payload": {"x": 1},
+            "learn": False,
         })
         self.assertTrue(out["pass"], out)
         p3.assert_called_once()
@@ -201,26 +268,38 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
         )
 
-    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
+    @patch("canonical.runtime.live_brain_runtime_v1._learning_module")
     @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
-    def test_plain_success_without_verified_episode_is_not_promoted(self, bound, integrate):
+    def test_plain_success_queues_verifiable_episode_adapter_without_promotion(
+        self, bound, learning_module
+    ):
         bound.return_value = {
             "pass": True,
             "status": "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED",
         }
+        learning = Mock()
+        learning.DEFAULT_STATE_PATH = "/tmp/state.json"
+        learning.record_success_observation.return_value = {
+            "status": "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
+            "pass": True,
+            "permanent_reuse_authorized": False,
+        }
+        learning_module.return_value = learning
+
         out = brain.run({
             "mode": "compiled_bound",
             "task_id": "b-ok",
             "initial_facts": [],
             "target_effects": ["X"],
+            "state_path": "/tmp/state.json",
         })
         self.assertTrue(out["pass"])
         self.assertEqual(
             out["learning"]["status"],
-            "SUCCESS_OBSERVED__NO_VERIFIED_LEARNING_ARTIFACT",
+            "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
         )
         self.assertFalse(out["learning"]["permanent_reuse_authorized"])
-        integrate.assert_not_called()
+        learning.record_success_observation.assert_called_once()
 
 
     @patch("canonical.runtime.live_brain_runtime_v1._causal_synthesize")
