@@ -125,10 +125,27 @@ def _verify_check(row: Mapping[str, Any]) -> str:
 
     elif route == "U_DIRECT_TARGET_RELATION":
         _receipt_sha(row, "target_relation_receipt_sha256")
-        if row.get("matched_pairwise_semantics_verified") is not True:
-            raise DominanceCertificateError("U_PAIRWISE_SEMANTICS_UNVERIFIED:" + check_id)
-        if row.get("outcome") not in ALLOWED_DIRECT_OUTCOMES:
-            raise DominanceCertificateError("U_OPUS_WIN_OR_INVALID:" + check_id)
+        relation_kind = row.get("relation_kind")
+        if relation_kind == "PAIRWISE_PREFERENCE":
+            if row.get("judge_panel_class") != "PAIRWISE_PANEL":
+                raise DominanceCertificateError("U_PAIRWISE_PANEL_MISMATCH:" + check_id)
+            if row.get("matched_pairwise_semantics_verified") is not True:
+                raise DominanceCertificateError("U_PAIRWISE_SEMANTICS_UNVERIFIED:" + check_id)
+            if row.get("outcome") not in ALLOWED_DIRECT_OUTCOMES:
+                raise DominanceCertificateError("U_OPUS_WIN_OR_INVALID:" + check_id)
+        elif relation_kind == "BINARY_RUBRIC":
+            if row.get("judge_panel_class") != "RUBRIC_PANEL":
+                raise DominanceCertificateError("U_RUBRIC_PANEL_MISMATCH:" + check_id)
+            if row.get("matched_rubric_semantics_verified") is not True:
+                raise DominanceCertificateError("U_RUBRIC_SEMANTICS_UNVERIFIED:" + check_id)
+            brain_pass = row.get("brain_pass")
+            opus_pass = row.get("opus_pass")
+            if not isinstance(brain_pass, bool) or not isinstance(opus_pass, bool):
+                raise DominanceCertificateError("U_RUBRIC_BITS_INVALID:" + check_id)
+            if opus_pass and not brain_pass:
+                raise DominanceCertificateError("U_RUBRIC_OPUS_STRICTLY_BETTER:" + check_id)
+        else:
+            raise DominanceCertificateError("U_RELATION_KIND_INVALID:" + check_id)
 
     return route
 
