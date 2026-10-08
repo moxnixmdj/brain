@@ -305,6 +305,35 @@ class ScienceAgentTests(unittest.TestCase):
         self.assertNotEqual(result["status"],"FINISHED")
         self.assertEqual(result["resolved_requirements"],[])
 
+    def test_model_max_requirements_plus_one_mandatory_deliverable_do_not_overflow(self):
+        raw={
+            "material_requirements":[f"R{i:02d}" for i in range(1,s.MAX_MODEL_REQUIREMENTS+1)],
+            "candidates":[{
+                "action_id":"a",
+                "covers":["R01","BRAIN_DELIVERABLE_01"],
+                "command":"echo work",
+                "verify_command":"echo verify",
+            }],
+        }
+        requirements,candidates,summary=s._extract_contract(
+            raw,
+            None,
+            ["BRAIN_DELIVERABLE_01"],
+        )
+        self.assertEqual(len(requirements),s.MAX_MODEL_REQUIREMENTS+1)
+        self.assertEqual(requirements[-1],"BRAIN_DELIVERABLE_01")
+        self.assertEqual(candidates[0]["covers"],["R01","BRAIN_DELIVERABLE_01"])
+
+    def test_composed_requirement_capacity_equals_two_declared_source_bounds(self):
+        self.assertEqual(
+            s.MAX_REQUIREMENTS,
+            s.MAX_MODEL_REQUIREMENTS+s.MAX_BRAIN_DELIVERABLES,
+        )
+        raw={"material_requirements":[f"R{i:02d}" for i in range(1,s.MAX_MODEL_REQUIREMENTS+1)]}
+        mandatory=[f"BRAIN_DELIVERABLE_{i:02d}" for i in range(1,s.MAX_BRAIN_DELIVERABLES+1)]
+        requirements,_,_=s._extract_contract(raw,None,mandatory)
+        self.assertEqual(len(requirements),s.MAX_REQUIREMENTS)
+
     def test_requirements_cannot_mutate_after_first_cycle(self):
         env=Env()
         outputs=[
