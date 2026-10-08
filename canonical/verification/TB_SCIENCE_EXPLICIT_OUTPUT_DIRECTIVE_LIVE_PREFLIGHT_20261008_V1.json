@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_EXPLICIT_OUTPUT_DIRECTIVE_LIVE_PREFLIGHT_RECEIPT_V1",
+  "date": "2026-10-08",
+  "status": "PASS__REAL_LOCAL_QWEN__REAL_BRAIN_CONTROLLER__SYNTHETIC_EXPLICIT_OUTPUT_CREATED_AND_VERIFIED__ZERO_BENCHMARK_EXPOSURE__ZERO_CREDIT",
+  "purpose": "DISCHARGE_THE_POST_RANK11_PRE_RANK12_ZERO_EXPOSURE_END_TO_END_PREFLIGHT",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2416,
+    "workflow_run_id": 37724821890,
+    "workflow_job_id": 113140481790,
+    "head_sha": "bb12cf52d8ba5804fa4290db6bc4d963c668a533",
+    "artifact_id": 11528115607,
+    "artifact_name": "tb-science-output-directive-live-preflight-v1",
+    "artifact_digest": "sha256:d2e057a994afa9bb684a7e47cdbd5ef1f4d7c9a488f9cbcddc1e625798cf5329",
+    "conclusion": "success"
+  },
+  "exact_route": {
+    "agent_git_blob_sha": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "planner_git_blob_sha": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "closure_manifest_git_blob_sha": "cf9cc9fb8830eda991c71381a523b8f67caedaa7",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "planner_timeout_s": 300
+  },
+  "synthetic_goal": "Create a plain text file containing exactly BRAIN_OK and no other text. Write the result to /tmp/brain_output_probe.txt.",
+  "observed": {
+    "brain_mandated_deliverables": {
+      "BRAIN_DELIVERABLE_01": "/tmp/brain_output_probe.txt"
+    },
+    "resolved_requirements": [
+      "BRAIN_DELIVERABLE_01"
+    ],
+    "cycles": 4,
+    "path_exists": true,
+    "path_content": "BRAIN_OK",
+    "controller_status": "SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER",
+    "task_completion_claimed": false
+  },
+  "assertions": {
+    "repaired_carrier_gate": true,
+    "clean_pinned_llama_cpp_build": true,
+    "exact_qwen_hash_verified": true,
+    "local_cognition_endpoint_started": true,
+    "explicit_output_path_promoted_to_brain_mandated_deliverable": true,
+    "explicit_output_created": true,
+    "explicit_output_content_exact": true,
+    "deliverable_requirement_verified_and_resolved": true,
+    "benchmark_task_content_loaded": false,
+    "benchmark_task_scored": false,
+    "fresh_benchmark_task_exposure": 0,
+    "incremental_spend_usd": 0
+  },
+  "conclusion": "THE_POST_RANK11_OUTPUT_DIRECTIVE_CONTROL_REPAIR_PASSES_A_REAL_END_TO_END_LOCAL_QWEN_PREFLIGHT_WITH_ZERO_BENCHMARK_EXPOSURE__THE_SPECIFIC_RANK12_UNLOCK_CONDITION_IS_SATISFIED",
+  "execution_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_RANK12_WILL_PASS",
+    "NO_CLAIM_GENERAL_SCIENTIFIC_REASONING_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
