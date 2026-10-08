@@ -570,6 +570,21 @@ def run(
                 max_actions=int(options.get("self_improvement_max_actions", 4)),
             )
 
+        episode_compounding_tick = None
+        if episode_verification_provider is not None:
+            episode_compounding_tick = improvement_driver.drain(
+                state_path=options.get(
+                    "state_path",
+                    self_improvement.DEFAULT_STATE_PATH,
+                ),
+                repo_root=ROOT,
+                episode_verification_provider=episode_verification_provider,
+                skill_verification_provider=None,
+                success_episode_adapter_provider=success_episode_adapter_provider,
+                failure_repair_provider=None,
+                max_actions=int(options.get("self_improvement_max_actions", 4)),
+            )
+
         return {
             "schema": SCHEMA,
             "status": "FABRIC_DISPATCH_COMPLETE",
@@ -581,6 +596,7 @@ def run(
             "inner_status": out.get("status") if isinstance(out, Mapping) else None,
             "result": deepcopy(dict(out)) if isinstance(out, Mapping) else out,
             "compounding_tick": deepcopy(compounding_tick),
+            "episode_compounding_tick": deepcopy(episode_compounding_tick),
             "single_front_door": True,
             "terminal_authority": False,
             "terminal_credit_delta": 0,
