@@ -97,6 +97,13 @@ ROUTES = {
         "executor": "r2_visual_code_direct_adequacy_v1.run",
         "acceptance": "PRODUCER_INDEPENDENT_ZBARIMG_DECODE_MUST_EQUAL_EXACT_QUOTED_PAYLOAD",
     },
+    TYPED_JSON_TRANSFORM_ROUTE_ID: {
+        "capability_id": "json.query.jq",
+        "scope": "EXACT_TYPED_LOCAL_JSON_ARRAY_TRANSFORMS__SELECT_EQ_SORT_BY_PROJECT_TAKE",
+        "preflight": "r2_typed_json_transform_direct_adequacy_v1.preflight",
+        "executor": "r2_typed_json_transform_direct_adequacy_v1.run",
+        "acceptance": "PRODUCER_INDEPENDENT_PYTHON_STDLIB_FULL_TRANSFORM_RECOMPUTATION",
+    },
     DOCX_JSON_ROUTE_ID: {
         "capability_id": "docx.document.create_from_json_record",
         "scope": "EXACT_SINGLE_RECORD_JSON_TO_SEMANTICALLY_VERIFIED_DOCX_REPORT_FAMILY",
