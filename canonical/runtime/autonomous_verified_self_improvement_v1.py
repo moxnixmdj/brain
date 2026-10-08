@@ -154,6 +154,16 @@ def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None
                 ),
             })
 
+    if out.get("semantic_acceptance_complete") is True:
+        raw_acceptance = out.get("raw_goal_acceptance")
+        if not isinstance(raw_acceptance, Mapping):
+            raise SelfImprovementError("SEMANTICALLY_ACCEPTED_SUCCESS_MISSING_ACCEPTANCE_RECEIPT")
+        if (
+            raw_acceptance.get("pass") is not True
+            or raw_acceptance.get("semantic_acceptance_complete") is not True
+        ):
+            raise SelfImprovementError("SEMANTICALLY_ACCEPTED_SUCCESS_RECEIPT_INVALID")
+
     material = {
         "source_schema": _s(out.get("schema")) or None,
         "source_status": _s(out.get("status")) or None,
