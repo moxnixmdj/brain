@@ -28,6 +28,11 @@ class HistoricalEvidenceCertificateError(ValueError):
     pass
 
 
+def _learning_module():
+    from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
+    return learning
+
+
 def _sha_bytes(raw: bytes) -> str:
     return sha256(raw).hexdigest()
 
@@ -51,7 +56,7 @@ def certify(
     state_path: str | Path,
     repo_root: str | Path,
 ) -> dict[str, Any]:
-    from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
+    learning = _learning_module()
 
     wid = str(work_id or "").strip()
     if not wid:
