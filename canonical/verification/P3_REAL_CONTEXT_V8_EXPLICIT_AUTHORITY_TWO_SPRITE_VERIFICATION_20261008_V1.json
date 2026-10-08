@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_P3_REAL_CONTEXT_V8_EXPLICIT_AUTHORITY_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "EXACT_CHANGED_BLOBS_VERIFIED__18_OF_18_ON_TWO_SPRITES__EXPLICIT_SELECTION_AUTHORITIES_BINDING__ZERO_TERMINAL_CREDIT",
+  "branch": "fix/p3-v8-explicit-contract-authority-20261008-v1",
+  "purpose": "Fail closed before every positive P3 route on undeclared contract semantics; make explicit objective weights and exact decision-dependency contracts binding; preserve current V7/V6 positive routes when no stronger explicit selection authority is supplied.",
+  "changed_blobs": {
+    "canonical/runtime/p3_v3_contract_surface_guard_v1.py": "9b90380b444c6d58299dd97bc51ed4f96bdd9cf9",
+    "canonical/runtime/p3_real_context_v3_admission_v8.py": "3c2dbc056ec86424a5455a41ab552d2160f14eea",
+    "canonical/tests/test_p3_v3_contract_surface_guard_v1.py": "0d45d3a53329520427fe09ca4dfdd4f1f0359c0e",
+    "canonical/tests/test_p3_real_context_v3_admission_v8.py": "6da30a28f2cac5dd3f9eeb74116dad8c96cfa7e4"
+  },
+  "exact_upstream_blobs": {
+    "canonical/runtime/p3_real_context_v3_admission_v7.py": "7085b469ae443186eb0bcab7064bc17f9a745eb4",
+    "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py": "69a1c2fce5d48d3a0d6251090017addd31681258",
+    "canonical/runtime/p3_real_context_v3_admission_v6.py": "2a99dcc3dc791177153f2cd0704cb0cfd1dc5ad1",
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py": "dd0acc257ae5f68a41dfc13234d17cc527363d02",
+    "canonical/runtime/selected_support_truth_certificate_v5.py": "485df3635f11f8dd1fa3ff50d0f51c2f0b6acd24",
+    "canonical/runtime/bounded_explicit_categorical_support_v1.py": "663545f4ad4275191c352f4431414996509941d5",
+    "canonical/tests/test_p3_real_context_v3_admission_v7.py": "1e25ad4739e9a9d81d713bc033d4567814f8002c",
+    "canonical/tests/test_p3_membership_frontdoor_v6.py": "3a583ddf3d173289f23880bec464ad700085058e"
+  },
+  "verification": [
+    {
+      "provider": "SPRITES",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "workspace": "/home/sprite/p3-v8-contract-authority-verify-20261008",
+      "tests_passed": 18,
+      "tests_total": 18,
+      "exact_candidate_blob_matches": 4,
+      "exact_upstream_blob_matches": 8
+    },
+    {
+      "provider": "SPRITES",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "workspace": "/home/sprite/p3-v8-contract-authority-verify-20261008",
+      "tests_passed": 18,
+      "tests_total": 18,
+      "exact_candidate_blob_matches": 4,
+      "exact_upstream_blob_matches": 8
+    }
+  ],
+  "verified_behavior": [
+    "WRONG_V3_SCHEMA_FAILS_BEFORE_ANY_POSITIVE_ROUTE",
+    "UNMODELED_V3_INPUT_TASK_CLAIM_OR_AUDIENCE_PROFILE_FIELDS_FAIL_CLOSED",
+    "NAMED_AUDIENCE_PROFILE_SEMANTICS_DO_NOT_SILENTLY_ENTER_BOUNDED_ROUTE",
+    "UNMODELED_REAL_CONTEXT_ADMISSION_FIELDS_FAIL_CLOSED",
+    "EXPLICIT_OBJECTIVE_WEIGHTS_ARE_BINDING_AND_CANNOT_BE_BYPASSED_BY_STRUCTURAL_COMMON_POLICY",
+    "INVALID_EXPLICIT_WEIGHTS_FAIL_CLOSED_WITHOUT_FALLTHROUGH",
+    "EXPLICIT_DECISION_DEPENDENCY_CONTRACT_IS_BINDING_AND_INVALID_RECEIPT_CANNOT_FALL_THROUGH",
+    "SIMULTANEOUS_WEIGHTS_AND_DEPENDENCY_AUTHORITY_FAIL_CLOSED_WITHOUT_PRECEDENCE_PROOF",
+    "CURRENT_V7_EXACT_DEPENDENCY_RELEVANCE_ROUTE_PRESERVED",
+    "CURRENT_V6_STRUCTURAL_SET_MEMBERSHIP_AND_HIERARCHICAL_CATEGORICAL_ROUTES_PRESERVED",
+    "ALL_POSITIVE_ROUTES_KEEP_SOURCE_POLICY_DB_U_AND_TERMINAL_AUTHORITY_ZERO"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_DECLARED_CONTRACT_SURFACE_IS_SEMANTICALLY_COMPLETE",
+    "NO_GENERAL_OPTIONAL_RELEVANCE_CLOSURE",
+    "NO_GENERAL_AUDIENCE_MEANING_CLOSURE",
+    "NO_GENERAL_PARAPHRASE_NLI_TEMPORAL_CAUSAL_OR_MULTIMODAL_CLOSURE",
+    "NO_SOURCE_AUTHORIZATION_OR_POLICY_ADEQUACY_PROMOTION",
+    "NO_DB_ADMISSION_U_SUBTRACTION_U_EMPTY_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
