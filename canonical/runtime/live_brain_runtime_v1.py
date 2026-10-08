@@ -1529,12 +1529,17 @@ def run_decision(
         learning = None
         if isinstance(learned, Mapping):
             learning = learned.get("learning")
-        elif learn and out.get("pass") is not True:
+        elif learn:
             learning = _observe_runtime_outcome(
                 out,
                 state_path=state_path,
                 learn=True,
                 retry_context=retry_context,
+                surface=(
+                    "R2_DIRECT_END_TO_END_ADEQUACY"
+                    if out.get("direct_adequacy_authority") is True
+                    else "R2_DECISION"
+                ),
             )
 
         return {
