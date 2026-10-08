@@ -1,0 +1,33 @@
+name: Verify P3 grounded numeric front door V7
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/p3_real_context_v3_admission_v7.py
+      - canonical/tests/test_p3_real_context_v3_admission_v7.py
+      - .github/workflows/verify-p3-grounded-numeric-front-door-v7.yml
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/p3_real_context_v3_admission_v7.py
+      - canonical/tests/test_p3_real_context_v3_admission_v7.py
+      - .github/workflows/verify-p3-grounded-numeric-front-door-v7.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run P3 grounded numeric front-door regressions
+        run: PYTHONPATH=. pytest -q canonical/tests/test_p3_real_context_v3_admission_v7.py
+      - name: Re-run underlying independently qualified cell regressions
+        run: PYTHONPATH=. pytest -q canonical/tests/test_p3_audience_grounded_numeric_synthesis_v1.py
