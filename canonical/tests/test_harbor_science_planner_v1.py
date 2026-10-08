@@ -110,7 +110,7 @@ class PlannerTests(unittest.TestCase):
         self.assertFalse(body["stream"])
         self.assertEqual(len(body["tools"]),1)
         self.assertEqual(body["tools"][0]["function"]["name"],p.TOOL_NAME)
-        self.assertEqual(body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["maxItems"],1)
+        self.assertEqual(body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["maxItems"],p.MAX_CANDIDATES_PER_PROPOSAL)
         candidate_schema=body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["items"]["properties"]
         self.assertNotIn("maxLength",candidate_schema["command"])
         self.assertNotIn("maxLength",candidate_schema["verify_command"])
@@ -254,6 +254,26 @@ class PlannerTests(unittest.TestCase):
                 with self.assertRaisesRegex(Exception,"TIMEOUT_INVALID"):
                     p.plan("synthetic",timeout_s=value)
 
+
+    def test_multi_action_schema_is_bounded_and_dependency_aware(self):
+        schema=p.TOOL["function"]["parameters"]["properties"]["candidates"]
+        self.assertEqual(schema["maxItems"],p.MAX_CANDIDATES_PER_PROPOSAL)
+        props=schema["items"]["properties"]
+        self.assertIn("depends_on",props)
+        self.assertEqual(props["timeout_sec"]["maximum"],7200)
+        self.assertEqual(props["verify_timeout_sec"]["maximum"],3600)
+
+    def test_plan_accepts_four_bounded_candidates(self):
+        args={
+            "material_requirements":["R1","R2","R3","R4"],
+            "candidates":[
+                {"action_id":f"A{i}","covers":[f"R{i}"],"command":f"echo {i}","verify_command":"test true"}
+                for i in range(1,5)
+            ],
+        }
+        with patch.object(p.urllib.request,"urlopen",lambda req,timeout=180: Response(tool_response(args))):
+            out=p.plan("synthetic",timeout_s=180)
+        self.assertEqual(len(p.extract_json_object(out["text"])["candidates"]),4)
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
