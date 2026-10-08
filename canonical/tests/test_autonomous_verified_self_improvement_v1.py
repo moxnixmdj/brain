@@ -108,6 +108,50 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         state = loop.load_state(path)
         self.assertEqual(len(state["failures"]), 1)
         self.assertEqual(next(iter(state["failures"].values()))["count"], 2)
+        self.assertEqual(state["stats"]["pending_improvement_count"], 1)
+        next_work = loop.next_improvement_action(state_path=path)
+        self.assertEqual(next_work["kind"], "REPAIR_FAILURE_CLASS")
+        self.assertEqual(next_work["observations"], 2)
+
+    def test_repair_resolution_is_bound_to_exact_retry_capsule(self):
+        path = self.temp_state()
+        failure = {
+            "pass": False,
+            "status": "FAIL__CAPABILITY_OR_TASK_CONTRACT_GAP",
+            "failure_class": "MISSING_CAPABILITY_OR_COMPILED_TASK_CONTRACT",
+            "attempts": [],
+        }
+        first = loop.integrate_solver_output(
+            failure,
+            state_path=path,
+            retry_context={"mode": "generic", "problem": {"task_id": "a"}},
+        )
+        second = loop.integrate_solver_output(
+            failure,
+            state_path=path,
+            retry_context={"mode": "generic", "problem": {"task_id": "b"}},
+        )
+        self.assertNotEqual(first["retry_capsule_sha256"], second["retry_capsule_sha256"])
+
+        loop.record_repair_outcome(
+            first["diagnosis"]["failure_fingerprint"],
+            retry_capsule_sha256=first["retry_capsule_sha256"],
+            repair_record={"repair": "verified-a"},
+            original_replay_pass=True,
+            state_path=path,
+        )
+        state = loop.load_state(path)
+        repair_rows = [
+            row for row in state["improvement_queue"].values()
+            if row.get("kind") == "REPAIR_FAILURE_CLASS"
+        ]
+        self.assertEqual(len(repair_rows), 2)
+        by_retry = {
+            row["identity"]["retry_capsule_sha256"]: row["status"]
+            for row in repair_rows
+        }
+        self.assertEqual(by_retry[first["retry_capsule_sha256"]], "RESOLVED")
+        self.assertEqual(by_retry[second["retry_capsule_sha256"]], "PENDING")
 
     def test_only_authenticated_verified_episode_is_persisted(self):
         path = self.temp_state()
@@ -127,6 +171,10 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertTrue(integrated["episode_added"])
         self.assertEqual(state["stats"]["verified_episode_count"], 1)
         self.assertEqual(len(state["episodes"]), 1)
+        self.assertEqual(
+            loop.next_improvement_action(state_path=path)["kind"],
+            "COLLECT_MATCHING_VERIFIED_EPISODE",
+        )
 
     def test_unverified_candidate_never_gets_permanent_reuse(self):
         path = self.temp_state()
@@ -147,6 +195,10 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         )
         self.assertFalse(integrated["permanent_reuse_authorized"])
         self.assertEqual(state["stats"]["verified_skill_count"], 0)
+        self.assertEqual(
+            loop.next_improvement_action(state_path=path)["kind"],
+            "VERIFY_SKILL_CANDIDATE",
+        )
 
     def test_verified_stronger_skill_pareto_replaces_dominated_variant(self):
         path = self.temp_state()
@@ -164,6 +216,10 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         )
         self.assertTrue(first["permanent_reuse_authorized"])
         first_id = first["active_skill_id"]
+        self.assertEqual(
+            loop.next_improvement_action(state_path=path)["kind"],
+            "SEEK_VERIFIED_SCOPE_GENERALIZATION",
+        )
 
         stronger = verified_skill(
             "4",
@@ -191,6 +247,11 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertTrue(state["skills"][second_id]["active"])
         family = state["skills"][second_id]["family_id"]
         self.assertEqual(state["pareto_frontiers"][family], [second_id])
+        self.assertFalse(any(
+            row.get("kind") == "SEEK_VERIFIED_SCOPE_GENERALIZATION"
+            and row.get("status") == "PENDING"
+            for row in state["improvement_queue"].values()
+        ))
 
     def test_dominated_verified_skill_is_kept_as_evidence_but_not_activated(self):
         path = self.temp_state()
@@ -424,6 +485,33 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertEqual(run_mock.call_count, 1)
         state = loop.load_state(path)
         self.assertEqual(state["reuse"][sid]["effectful_failures"], 1)
+        self.assertFalse(state["skills"][sid]["active"])
+        self.assertTrue(state["skills"][sid]["quarantined"])
+        self.assertNotIn(sid, state["pareto_frontiers"][state["skills"][sid]["family_id"]])
+        self.assertEqual(
+            loop.next_improvement_action(state_path=path)["kind"],
+            "REVERIFY_QUARANTINED_SKILL",
+        )
+
+    def test_plain_success_is_retained_as_adapter_work_without_promotion(self):
+        path = self.temp_state()
+        result = loop.record_success_observation(
+            {"pass": True, "schema": "X", "status": "PASS", "value": 7},
+            surface="TEST_SURFACE",
+            state_path=path,
+        )
+        self.assertEqual(
+            result["status"],
+            "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
+        )
+        self.assertFalse(result["permanent_reuse_authorized"])
+        state = loop.load_state(path)
+        self.assertEqual(state["stats"]["success_observation_count"], 1)
+        self.assertEqual(state["stats"]["pending_improvement_count"], 1)
+        self.assertEqual(
+            loop.next_improvement_action(state_path=path)["kind"],
+            "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+        )
 
 
     def test_reuse_first_runner_forwards_retry_context_to_failure_integration(self):
@@ -453,7 +541,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
                  loop,
                  "integrate_solver_output",
                  return_value={
-                     "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+                     "status": "FAILURE_DIAGNOSED__REPAIR_QUEUED",
                      "pass": False,
                  },
              ) as integrate:
