@@ -1,0 +1,138 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_PRIVATE_BENCHMARK_PROOF_CARRYING_SCOPE_COVER_RECONCILIATION_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_TRUTH_REPAIR__ROUTE_REDUNDANCY_SEPARATED_FROM_ACCEPTANCE_CLOSURE__PROOF_CARRYING_POSITIVE_ADEQUACY_COVER_BOUND__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem": {
+    "stale_inference": "BLOCKED_PRIVATE_BENCHMARK_ROUTE_REDUNDANT__THEREFORE_FIXED_BAR_ACCEPTANCE_CLOSED",
+    "correction": "ROUTE_REDUNDANCY_ONLY_PROVES_THE_BLOCKED_EXECUTION_ROUTE_IS_NOT_NEEDED_TO_SERVICE_THE_ALREADY_ATTRIBUTED_BEHAVIORAL_OBLIGATIONS__IT_DOES_NOT_PROVE_THOSE_ATTRIBUTED_OBLIGATIONS_EXHAUST_THE_BENCHMARK_RELEVANT_SCOPE",
+    "exact_missing_link": "INDEPENDENT_BENCHMARK_SCOPE_COMPLETENESS_PLUS_COMPLETE_POSITIVE_POLICY_ADEQUACY_COVER"
+  },
+  "brain_sources": {
+    "proof_route_dominance": "canonical/runtime/proof_route_dominance.py",
+    "private_surface_dominance_input": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_INPUT_V2.json",
+    "private_surface_dominance_verification": "canonical/verification/PRIVATE_SURFACE_DOMINANCE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "specification_acceptance_boundary": "canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MODEL_EVIDENCE_V1.json",
+    "specification_prewave_binding": "canonical/governance/SPECIFICATION_INDEPENDENT_ACCEPTANCE_PREWAVE_BINDING_V1.json",
+    "k6_positive_cover_theorem": "canonical/governance/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_THEOREM_20261006_V1.json",
+    "selected_discriminator_coalescence": "canonical/governance/TARGET_RELATIVE_SELECTED_SEMANTIC_DISCRIMINATOR_COALESCENCE_20261007_V1.json",
+    "fixed_bar_scope_lift": "canonical/governance/FROZEN_O_OBJECTIVE_ACCEPTANCE_SCOPE_LIFT_NORMAL_FORM_20261007_V1.json",
+    "new_runtime": "canonical/runtime/proof_carrying_scope_cover_v1.py",
+    "new_tests": "canonical/tests/test_proof_carrying_scope_cover_v1.py"
+  },
+  "public_owner_evidence": {
+    "cursorbench_4_0": {
+      "url": "https://cursor.com/cursorbench",
+      "retrieved_date": "2026-10-08",
+      "owner_scope_statement": "AMBIGUOUS_MULTI_FILE_TASKS_FROM_REAL_CURSOR_SESSIONS",
+      "current_opus55_max_score_percent": 57.8,
+      "version_4_0_new_long_horizon_focus": [
+        "EDIT",
+        "REFACTOR",
+        "INVESTIGATION",
+        "INTENT_UNDERSTANDING",
+        "MANAGING_JOBS",
+        "DESIGN_ADHERENCE"
+      ],
+      "inherited_changelog_focus": [
+        "BUGFIX",
+        "CODEBASE_UNDERSTANDING",
+        "BUGFINDING",
+        "PLANNING",
+        "CODE_REVIEW",
+        "INSTRUCTION_FOLLOWING",
+        "ADVANCED_TOOL_USE"
+      ],
+      "methodology_url": "https://cursor.com/blog/cursorbench",
+      "measured_dimensions": [
+        "SOLUTION_CORRECTNESS",
+        "CODE_QUALITY",
+        "EFFICIENCY",
+        "INTERACTION_BEHAVIOR"
+      ],
+      "completeness_boundary": "THE_PUBLIC_OWNER_DESCRIPTION_DOES_NOT_PUBLISH_THE_COMPLETE_4_0_TASK_MANIFEST_OR_DECLARE_THE_LISTED_FOCUS_CATEGORIES_AN_EXHAUSTIVE_SEMANTIC_PARTITION_OF_EVERY_HIDDEN_TASK_AND_GRADING_DIMENSION"
+    },
+    "frontiercode_1_1": {
+      "url": "https://cognition.com/frontiercode",
+      "methodology_url": "https://cognition.com/blog/frontier-code-1.1",
+      "retrieved_date": "2026-10-08",
+      "main_task_count": 100,
+      "extended_task_count": 150,
+      "primary_acceptance_object": "MERGEABILITY__WOULD_THE_MAINTAINER_ACTUALLY_MERGE_THIS_PR",
+      "public_quality_dimensions": [
+        "CORRECTNESS",
+        "TEST_QUALITY",
+        "SCOPE_DISCIPLINE",
+        "STYLE",
+        "ADHERENCE_TO_CODEBASE_STANDARDS"
+      ],
+      "grading_components": [
+        "UNIT_TESTS",
+        "RUBRICS",
+        "OTHER_VERIFIERS"
+      ],
+      "unfair_internet_use_zeroes_run": true,
+      "public_explorer_complete_manifest": false,
+      "public_task_exemplar_count_observed": 1,
+      "completeness_boundary": "TASKS_ARE_NOT_RELEASED_PUBLICLY_AND_MAINTAINER_DEFINED_PER_TASK_RUBRICS_REMAIN_PARTLY_HIDDEN__ONE_PUBLIC_EXEMPLAR_AND_PUBLIC_METHODOLOGY_DO_NOT_FORM_THE_COMPLETE_MAIN_TASK_UNIVERSE"
+    }
+  },
+  "theorem": {
+    "id": "C_PROOF_CARRYING_SCOPE_COVER_SUFFICIENCY_V1",
+    "statement": "FOR_A_FROZEN_ACCEPTANCE_PREDICATE__IF_THE_TARGET_RELEVANT_SCOPE_IS_INDEPENDENTLY_PROVED_COMPLETE__THE_DECLARED_CELLS_INDEPENDENTLY_COVER_THAT_ENTIRE_SCOPE__EVERY_CELL_HAS_A_BRAIN_OWNED_DEPLOYABLE_RESOURCE_ADMISSIBLE_POLICY_WITH_AN_INDEPENDENT_POSITIVE_ADEQUACY_CERTIFICATE_FOR_THE_ENTIRE_CELL__AND_WHEN_MULTIPLE_POLICIES_ARE_NEEDED_A_TRUTHFUL_PRECOMMITMENT_SELECTOR_SELECTS_ONLY_CERTIFIED_CELLS__THEN_THE_RESULT_IS_ELIGIBLE_AS_A_SCOPE_COMPLETE_STRONGER_PROOF_CANDIDATE",
+    "nonimplications": [
+      "BLOCKED_ROUTE_REDUNDANCY_DOES_NOT_IMPLY_SCOPE_COMPLETENESS",
+      "PUBLIC_BENCHMARK_TAXONOMY_DOES_NOT_IMPLY_EXHAUSTIVENESS_UNLESS_AUTHENTICATED_AS_SUCH",
+      "VERIFIER_OR_COMPILER_CORRECTNESS_DOES_NOT_IMPLY_RAW_SPECIFICATION_SEMANTIC_CORRECTNESS",
+      "FINITE_SUCCESS_SAMPLES_DO_NOT_IMPLY_OPEN_SCOPE_DOMINANCE"
+    ]
+  },
+  "accepted_scope_completeness_bases": [
+    "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+    "EXHAUSTIVE_FINITE_SUPERSET",
+    "UNIVERSAL_FORMAL_SCOPE_PROOF"
+  ],
+  "current_projection": {
+    "cursorbench": {
+      "route_execution_dependency": "DELETED_FOR_ALREADY_ATTRIBUTED_BEHAVIORAL_OBLIGATIONS",
+      "acceptance": "OPEN",
+      "exact_blocker": "PROVE_COMPLETE_CURSORBENCH_RELEVANT_SCOPE_OR_A_PROVEN_STRONGER_SUPERSET__THEN_BIND_A_COMPLETE_POSITIVE_ADEQUACY_COVER",
+      "current_public_description_is_scope_complete_receipt": false,
+      "terminal_credit_delta": 0
+    },
+    "frontiercode": {
+      "route_execution_dependency": "PARTIALLY_REDUCED",
+      "acceptance": "OPEN",
+      "exact_blocker": "PROVE_COMPLETE_FRONTIERCODE_MAIN_RELEVANT_SCOPE_OR_A_PROVEN_STRONGER_SUPERSET__THEN_COVER_EVERY_CELL__STRUCTURED_METHOD_TOP_LAW_MAY_DISCHARGE_ONLY_CELLS_WITH_SEPARATELY_PROVED_REAL_CONTEXT_MEMBERSHIP",
+      "current_public_methodology_is_scope_complete_receipt": false,
+      "terminal_credit_delta": 0
+    }
+  },
+  "scheduling": [
+    "DO_NOT_SEARCH_FOR_CURSORBENCH_OWNER_EXECUTION_WHILE_OWNER_INTERFACE_REMAINS_CLOSED.",
+    "DO_NOT_PROMOTE_CURSORBENCH_FROM_PRIVATE_SURFACE_DOMINANCE_SET_COVER_ALONE.",
+    "DO_NOT_TREAT_VERIFIED_ACCEPTANCE_COMPILER_DIRECT_AS_WHOLE_RAW_SPECIFICATION_SEMANTIC_AUTHORITY.",
+    "FOR_CURSORBENCH_AND_FRONTIERCODE_SEARCH_SCOPE_COMPLETENESS_OR_A_PROVEN_STRONGER_SUPERSET_BEFORE_ANY_NEW_BENCHMARK_EXECUTION.",
+    "USE_K6_POSITIVE_COVER_FIRST__TRY_ONE_COMMON_CERTIFIED_POLICY_PER_COARSE_CELL__ADD_ONLY_A_MINIMUM_TRUTHFUL_POLICY_CHANGING_DISCRIMINATOR_WHEN_REQUIRED.",
+    "FOR_FRONTIERCODE_REUSE_TYPED_STRUCTURED_METHOD_TOP_LAW_ONLY_AFTER_REAL_CONTEXT_MEMBERSHIP_IS_INDEPENDENTLY_PROVED.",
+    "IF_SCOPE_COMPLETENESS_CANNOT_BE_PROVED_FROM_PUBLIC_INFORMATION__PRESERVE_THE_EXACT_MISSING_OWNER_OR_UNIVERSAL_FACT__DO_NOT_INFER_COMPLETENESS_FROM_CATEGORY_NAMES."
+  ],
+  "hard_nonclaims": [
+    "NO_CURSORBENCH_ACCEPTANCE_CREDIT",
+    "NO_FRONTIERCODE_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_PUBLIC_CURSORBENCH_CATEGORIES_EXHAUST_THE_HIDDEN_4_0_POPULATION",
+    "NO_CLAIM_PUBLIC_FRONTIERCODE_DIMENSIONS_EXHAUST_ALL_HIDDEN_PER_TASK_MAINTAINER_RUBRICS",
+    "NO_CLAIM_A_COMPLETE_POSITIVE_POLICY_COVER_CURRENTLY_EXISTS_FOR_EITHER_BENCHMARK",
+    "NO_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "next": "INDEPENDENTLY_VERIFY_THE_NEW_SCOPE_COVER_RUNTIME_AND_TESTS__THEN_BUILD_THE_CHEAPEST_SCOPE_COMPLETENESS_CANDIDATE_FOR_CURSORBENCH_AND_FRONTIERCODE_WITHOUT_TREATING_PUBLIC_TAXONOMY_AS_EXHAUSTIVE"
+}
