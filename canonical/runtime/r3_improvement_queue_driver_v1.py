@@ -233,8 +233,26 @@ def _verify_scope_generalization_work(
     raw_skill = record.get("skill") if isinstance(record, Mapping) else None
     if not isinstance(raw_skill, Mapping):
         raise ImprovementDriverError("SCOPE_GENERALIZATION_SKILL_MISSING:" + skill_id)
+    authority = learning.reauthenticate_skill_record(
+        raw_skill,
+        repo_root=repo_root,
+    )
+    authenticated_skill = authority.get("verified_skill")
+    if (
+        authority.get("pass") is not True
+        or not isinstance(authenticated_skill, Mapping)
+        or learning._skill_id(authenticated_skill) != skill_id
+    ):
+        return {
+            "schema": SCHEMA,
+            "status": "SCOPE_GENERALIZATION_SOURCE_SKILL_AUTHORITY_INVALID",
+            "pass": False,
+            "work_id": work.get("work_id"),
+            "verification_error": authority.get("reason"),
+            "terminal_authority": False,
+        }
 
-    candidate = learning._candidate_from_verified_skill(raw_skill)
+    candidate = learning._candidate_from_verified_skill(authenticated_skill)
     predicate = learning.VERIFIED_SUPERSET_SCOPE_PREDICATE
     binding = skill_verification_provider({
         "kind": "SKILL_SCOPE_GENERALIZATION_VERIFICATION",
