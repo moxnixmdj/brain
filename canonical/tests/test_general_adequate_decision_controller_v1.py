@@ -631,5 +631,49 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
         self.assertIn("GOAL_BINDING_MODE_AMBIGUOUS", out["reason"])
 
 
+    def test_bound_evidence_rejects_symlink_outside_allowed_scope(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            allowed = root / "canonical/governance"
+            allowed.mkdir(parents=True)
+            outside = root / "outside.json"
+            outside.write_text('{"valid": true}', encoding="utf-8")
+            link = allowed / "redirect.json"
+            try:
+                link.symlink_to(outside)
+            except (OSError, NotImplementedError):
+                self.skipTest("symlink creation not supported on this runner")
+            with self.assertRaisesRegex(
+                controller.DecisionControllerError, "BOUND_SYMLINK_FORBIDDEN"
+            ):
+                controller._bound_json(
+                    {
+                        "path": "canonical/governance/redirect.json",
+                        "git_blob_sha": controller._git_blob_sha(outside),
+                    },
+                    repo_root=root,
+                    prefixes=("canonical/governance/",),
+                )
+
+    def test_bound_evidence_accepts_regular_in_scope_file(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            allowed = root / "canonical/governance"
+            allowed.mkdir(parents=True)
+            receipt = allowed / "receipt.json"
+            receipt.write_text('{"valid": true}', encoding="utf-8")
+            obj, rel, blob = controller._bound_json(
+                {
+                    "path": "canonical/governance/receipt.json",
+                    "git_blob_sha": controller._git_blob_sha(receipt),
+                },
+                repo_root=root,
+                prefixes=("canonical/governance/",),
+            )
+            self.assertTrue(obj["valid"])
+            self.assertEqual(rel, "canonical/governance/receipt.json")
+            self.assertEqual(blob, controller._git_blob_sha(receipt))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
