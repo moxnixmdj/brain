@@ -267,8 +267,13 @@ def _replay_retry_context(
     mode = str(context.get("mode") or "")
     if mode in {"repair_synthesis", "repair_cycle"}:
         return _fail("RETRY_CONTEXT_REPAIR_RECURSION_FORBIDDEN")
+    replay_request = deepcopy(dict(context))
+    # Repair replay must never recursively launch another repair cycle. This is
+    # enforced here as well as in newly persisted retry capsules so historical
+    # capsules remain safe after the live autonomous-repair upgrade.
+    replay_request["auto_repair"] = False
     return run(
-        deepcopy(dict(context)),
+        replay_request,
         repo_root=repo_root,
         information_provider=information_provider,
         proposal_provider=proposal_provider,
@@ -382,6 +387,7 @@ def execute_failure_repair_cycle(
                 "episode_id": kwargs["episode_id"],
                 "scope_id": kwargs["scope_id"],
                 "learn": True,
+                    "auto_repair": False,
             },
         )
         if repair_execution.get("pass") is not True:
@@ -620,6 +626,141 @@ def _observe_runtime_outcome(
     }
 
 
+def _autonomous_repair_disposition(
+    live_result: Mapping[str, Any],
+    *,
+    state_path: str | Path | None,
+    repair_components: Sequence[Mapping[str, Any]],
+    initial_facts: Sequence[str],
+    repo_root: str | Path,
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None,
+) -> dict[str, Any]:
+    """Attempt the verified repair->original-replay loop for one live failure.
+
+    This function grants no repair authority itself. It only bridges a replayable
+    R3 diagnosis into execute_failure_repair_cycle. If neither an independently
+    verified repair component frontier nor an authenticated capability expander is
+    available, it records the exact blocking condition instead of self-certifying.
+    """
+    learning = live_result.get("learning")
+    if not isinstance(learning, Mapping):
+        return {
+            "status": "AUTO_REPAIR_BLOCKED__NO_REPLAYABLE_R3_DIAGNOSIS",
+            "pass": False,
+            "auto_repair_executed": False,
+            "terminal_authority": False,
+        }
+    diagnosis = learning.get("diagnosis")
+    fingerprint = (
+        str(diagnosis.get("failure_fingerprint") or "").strip()
+        if isinstance(diagnosis, Mapping) else ""
+    )
+    retry_sha = str(learning.get("retry_capsule_sha256") or "").strip()
+    if not fingerprint or not retry_sha:
+        return {
+            "status": "AUTO_REPAIR_BLOCKED__FAILURE_REPLAY_CAPSULE_UNAVAILABLE",
+            "pass": False,
+            "auto_repair_executed": False,
+            "terminal_authority": False,
+        }
+    if not isinstance(repair_components, Sequence) or isinstance(
+        repair_components, (str, bytes)
+    ):
+        return {
+            "status": "AUTO_REPAIR_BLOCKED__REPAIR_COMPONENT_FRONTIER_INVALID",
+            "pass": False,
+            "auto_repair_executed": False,
+            "terminal_authority": False,
+        }
+    if not isinstance(initial_facts, Sequence) or isinstance(
+        initial_facts, (str, bytes)
+    ):
+        return {
+            "status": "AUTO_REPAIR_BLOCKED__INITIAL_FACTS_INVALID",
+            "pass": False,
+            "auto_repair_executed": False,
+            "terminal_authority": False,
+        }
+    components = deepcopy(list(repair_components))
+    if not components and capability_expander is None:
+        return {
+            "status": (
+                "AUTO_REPAIR_BLOCKED__"
+                "NO_VERIFIED_REPAIR_COMPONENTS_OR_AUTHENTICATED_EXPANDER"
+            ),
+            "pass": False,
+            "auto_repair_executed": False,
+            "failure_fingerprint": fingerprint,
+            "retry_capsule_sha256": retry_sha,
+            "terminal_authority": False,
+        }
+    repaired = execute_failure_repair_cycle(
+        {
+            "failure_fingerprint": fingerprint,
+            "retry_capsule_sha256": retry_sha,
+            "components": components,
+            "initial_facts": list(initial_facts),
+            "learn": True,
+                    "auto_repair": False,
+        },
+        repo_root=repo_root,
+        state_path=state_path,
+        information_provider=information_provider,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+    )
+    return {
+        "auto_repair_executed": True,
+        **deepcopy(dict(repaired)),
+    }
+
+
+def _finalize_autonomous_repair(
+    live_result: Mapping[str, Any],
+    *,
+    auto_repair: bool,
+    state_path: str | Path | None,
+    repair_components: Sequence[Mapping[str, Any]],
+    initial_facts: Sequence[str],
+    repo_root: str | Path,
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None,
+) -> dict[str, Any]:
+    """Close a failed live run through verified repair and exact obligation replay."""
+    out = deepcopy(dict(live_result))
+    out["automatic_repair_enabled"] = bool(auto_repair)
+    out["automatic_repair_triggered"] = False
+    out["automatic_repair"] = None
+    out["recovered_by_automatic_repair"] = False
+    if out.get("pass") is True or not auto_repair:
+        return out
+
+    out["automatic_repair_triggered"] = True
+    repair = _autonomous_repair_disposition(
+        out,
+        state_path=state_path,
+        repair_components=repair_components,
+        initial_facts=initial_facts,
+        repo_root=repo_root,
+        information_provider=information_provider,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+    )
+    out["automatic_repair"] = repair
+    recovered = repair.get("pass") is True
+    out["recovered_by_automatic_repair"] = recovered
+    if recovered:
+        out["pass"] = True
+        out["status"] = (
+            str(out.get("status") or "LIVE_EXECUTION")
+            + "__AUTOMATIC_REPAIR_VERIFIED_BY_ORIGINAL_REPLAY"
+        )
+    return out
+
+
 def _h100(operation: str, payload: Mapping[str, Any]) -> Any:
     from canonical.runtime import h100_verified_capability_registry_v8 as module
     if operation == "registry_snapshot":
@@ -718,6 +859,9 @@ def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
         "automatic_verified_experience_integration": True,
         "verified_skill_execution_reuse_first": True,
         "active_skill_planning_reuse": True,
+        "automatic_failure_repair_trigger": True,
+        "automatic_repair_success_requires_original_obligation_replay": True,
+        "automatic_repair_fails_closed_without_verified_components_or_authenticated_expander": True,
         "verified_bound_capability_count": bound_count,
         "bound_inventory_error": bound_error,
         "learning_state_stats": learning_stats,
@@ -774,6 +918,7 @@ def run_generic(
                     "active_invalidators": list(active_invalidators),
                     "known_absent_invalidators": list(known_absent_invalidators),
                     "learn": True,
+                    "auto_repair": False,
                 },
                 known_absent_invalidators=known_absent_invalidators,
                 solver_kwargs=solver_kwargs,
@@ -886,6 +1031,7 @@ def run_decision(
                     "request": deepcopy(dict(bound_request)),
                     "known_absent_invalidators": list(known_absent_invalidators),
                     "learn": True,
+                    "auto_repair": False,
                 },
                 known_absent_invalidators=known_absent_invalidators,
                 proposal_provider=proposal_provider,
@@ -911,6 +1057,7 @@ def run_decision(
             "request": deepcopy(dict(bound_request)),
             "known_absent_invalidators": list(known_absent_invalidators),
             "learn": True,
+                    "auto_repair": False,
         }
 
         learning = None
@@ -1007,6 +1154,7 @@ def run_specialized(
                 "surface": name,
                 "payload": deepcopy(dict(payload)),
                 "learn": True,
+                    "auto_repair": False,
             },
         )
         return {
@@ -1061,7 +1209,7 @@ def run(
                 "max_information_rounds", "episode_id", "scope_id",
             }
             payload = {k: deepcopy(v) for k, v in request.items() if k in allowed}
-        return run_decision(
+        live = run_decision(
             payload,
             repo_root=repo_root,
             state_path=request.get("state_path"),
@@ -1071,12 +1219,28 @@ def run(
             known_absent_invalidators=request.get("known_absent_invalidators") or (),
             learn=request.get("learn", True) is not False,
         )
+        execution_problem = payload.get("execution_problem")
+        initial_facts = (
+            execution_problem.get("initial_facts") or []
+            if isinstance(execution_problem, Mapping) else []
+        )
+        return _finalize_autonomous_repair(
+            live,
+            auto_repair=request.get("auto_repair", True) is not False,
+            state_path=request.get("state_path"),
+            repair_components=request.get("repair_components") or (),
+            initial_facts=initial_facts,
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
 
     if mode == "generic":
         problem = request.get("problem")
         if not isinstance(problem, Mapping):
             return _fail("GENERIC_PROBLEM_REQUIRED")
-        return run_generic(
+        live = run_generic(
             problem,
             repo_root=repo_root,
             state_path=request.get("state_path"),
@@ -1086,6 +1250,17 @@ def run(
             known_absent_invalidators=request.get("known_absent_invalidators") or (),
             learn=request.get("learn", True) is not False,
             solver_kwargs=request.get("solver_kwargs") or {},
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
+        return _finalize_autonomous_repair(
+            live,
+            auto_repair=request.get("auto_repair", True) is not False,
+            state_path=request.get("state_path"),
+            repair_components=request.get("repair_components") or (),
+            initial_facts=problem.get("initial_facts") or [],
+            repo_root=repo_root,
+            information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
         )
@@ -1102,9 +1277,10 @@ def run(
                 "mode": "compiled_bound",
                 "request": deepcopy(dict(payload)),
                 "learn": True,
+                    "auto_repair": False,
             },
         )
-        return {
+        live = {
             "schema": SCHEMA,
             "status": "UNIFIED_BOUND_EXECUTION_COMPLETE",
             "pass": raw.get("pass") is True,
@@ -1114,6 +1290,17 @@ def run(
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
         }
+        return _finalize_autonomous_repair(
+            live,
+            auto_repair=request.get("auto_repair", True) is not False,
+            state_path=request.get("state_path"),
+            repair_components=request.get("repair_components") or (),
+            initial_facts=payload.get("initial_facts") or [],
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
 
     if mode == "raw_bound":
         nested = request.get("request")
@@ -1127,9 +1314,10 @@ def run(
                 "mode": "raw_bound",
                 "request": deepcopy(dict(payload)),
                 "learn": True,
+                    "auto_repair": False,
             },
         )
-        return {
+        live = {
             "schema": SCHEMA,
             "status": "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE",
             "pass": raw.get("pass") is True,
@@ -1140,6 +1328,17 @@ def run(
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
         }
+        return _finalize_autonomous_repair(
+            live,
+            auto_repair=request.get("auto_repair", True) is not False,
+            state_path=request.get("state_path"),
+            repair_components=request.get("repair_components") or (),
+            initial_facts=[],
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
 
     if mode == "repair_synthesis":
         nested = request.get("request")
@@ -1181,12 +1380,23 @@ def run(
             return _fail("DEVELOPMENT_SCHEDULER_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
 
     if mode == "specialized":
-        return run_specialized(
+        live = run_specialized(
             str(request.get("surface") or ""),
             request.get("payload") or {},
             repo_root=repo_root,
             state_path=request.get("state_path"),
             learn=request.get("learn", True) is not False,
+        )
+        return _finalize_autonomous_repair(
+            live,
+            auto_repair=request.get("auto_repair", True) is not False,
+            state_path=request.get("state_path"),
+            repair_components=request.get("repair_components") or (),
+            initial_facts=[],
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
         )
 
     if mode == "skill_plan":
