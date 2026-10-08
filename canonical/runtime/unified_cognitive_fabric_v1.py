@@ -13,7 +13,7 @@ from canonical.runtime import live_integrated_brain_v1 as live_brain
 from canonical.runtime import general_adequate_decision_controller_v1 as adequate_decision
 from canonical.runtime import p3_real_context_v3_admission_v12 as p3
 from canonical.runtime import universal_verified_adaptive_solver_v12 as adaptive_solver
-from canonical.runtime import autonomous_verified_self_improvement_v1 as self_improvement
+from canonical.runtime import autonomous_verified_self_improvement_v2 as self_improvement
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
@@ -66,6 +66,7 @@ def run(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    repair_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     try:
         if not isinstance(request, Mapping):
@@ -107,6 +108,8 @@ def run(
                 proposal_provider_max_candidates=int(options.get("proposal_provider_max_candidates", 4)),
                 capability_expander_id=str(options.get("capability_expander_id") or "HOST_CAPABILITY_EXPANDER"),
                 max_capability_expansions=int(options.get("max_capability_expansions", 4)),
+                repair_provider=repair_provider,
+                max_repair_rounds=int(options.get("max_repair_rounds", 3)),
             )
         elif mode == "LEARNING_EPISODE":
             out = self_improvement.run_learning_episode(
