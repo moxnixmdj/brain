@@ -196,6 +196,40 @@ def evaluate(
         )
     )
 
+    lifecycle = {
+        "discoverable": (
+            ownership.get("pass") is True
+            and ownership.get("live_owned_equals_fabric_reachable") is True
+        ),
+        "composable": (
+            engine_descriptors.get("LIVE_COMPOSITION")
+            == "live_capability_composition_v1.execute"
+            and "HETEROGENEOUS_LIVE_CAPABILITY_COMPOSITION_FAIL_CLOSED"
+                in activation_invariants
+        ),
+        "executable": (
+            invocation.get("pass") is True
+            and int(invocation.get("missing_capability_count", -1)) == 0
+        ),
+        "verifiable": (
+            "NATIVE_VERIFICATION_CONTRACTS_PRESERVED" in activation_invariants
+        ),
+        "learnable": (
+            "AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1" in surface_set
+            and "LIVE_COMPOSITION_OUTCOMES_AUTOMATICALLY_OBSERVED_BY_R3"
+                in activation_invariants
+        ),
+        "reusable": (
+            "PRIOR_VERIFIED_EPISODES_AUTOMATICALLY_REUSED_IN_V12_SCOPE"
+                in activation_invariants
+            and "ACTIVE_VERIFIED_SKILLS_AUTOMATICALLY_LOADED_FOR_SKILL_AWARE_PLANNING"
+                in activation_invariants
+        ),
+    }
+    lifecycle_complete = all(lifecycle.values())
+    if not lifecycle_complete:
+        errors.append("R1_CAPABILITY_LIFECYCLE_INCOMPLETE")
+
     passed = not errors
     return {
         "schema": SCHEMA,
@@ -212,6 +246,8 @@ def evaluate(
         "required_engine_binding_count": len(REQUIRED_ENGINE_BINDINGS),
         "required_subruntime_surface_count": len(REQUIRED_SUBRUNTIME_SURFACES),
         "missing_subruntime_surfaces": missing_surfaces,
+        "capability_lifecycle": lifecycle,
+        "capability_lifecycle_complete": lifecycle_complete,
         "live_owned_capability_count": ownership.get("live_owned_capability_count"),
         "universally_invocable_capability_count": invocation.get("supported_capability_count"),
         "fabric_blob_sha": fabric_blob,
