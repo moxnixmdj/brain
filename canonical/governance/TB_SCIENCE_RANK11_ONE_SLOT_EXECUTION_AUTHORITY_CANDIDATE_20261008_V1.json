@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK11_ONE_SLOT_EXECUTION_AUTHORITY_CANDIDATE_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_ONLY__CURRENT_TIMEOUT300_REPAIR_BOUND__INDEPENDENT_EXACT_BYTE_AND_MAIN_ANCESTRY_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "current_truth_basis": {
+    "terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "27d179c9bb28274bcc6dbc14215caee22bfedb6c"
+    },
+    "slot_ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V9.json",
+      "git_blob_sha": "82edae7eeb3e5ea5e30fc9f239c1d95faf9d089d"
+    },
+    "rank10_result": {
+      "path": "canonical/verification/TB_SCIENCE_RANK10_RESULT_TRUTH_20261007_V1.json",
+      "git_blob_sha": "e928c1213cadd4bb6e155bf2a6f9edd931dcbf32"
+    }
+  },
+  "causal_repair_basis": {
+    "current_closure": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V3.json",
+      "git_blob_sha": "5c03f885c747e921265da4934783cf107d7de641"
+    },
+    "independent_zero_exposure_verification": {
+      "path": "canonical/verification/TB_SCIENCE_TIMEOUT300_CURRENT_CLOSURE_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "72218ad1f50d8b29a273d7f32118ffb1d9cfb2b5"
+    },
+    "agent_git_blob_sha": "99d6ba6edcfad425e4cb940e5b7b2ccd99f6cdab",
+    "planner_git_blob_sha": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "planner_timeout_s": 300,
+    "exact_current_controller_tests": "15_OF_15_PASS",
+    "benchmark_task_exposure": 0
+  },
+  "authorized_slot_candidate": {
+    "ledger_schedule_rank": 11,
+    "frozen_manifest_schedule_order": 10,
+    "slot_id": "terminal-bench-science/supraglacial-lake-classification::trial-0",
+    "task_digest": "sha256:4a57227f84340ff6e245c3f2efeb8dfb6fb44a89713223d8742433dd569f9e3a"
+  },
+  "immutable_execution_semantics": {
+    "slots_authorized_if_later_activated": 1,
+    "retries_per_slot": 0,
+    "slot_replacement": false,
+    "denominator_shrink": false,
+    "duplicate_slot_credit": false,
+    "first_attempt_only": true,
+    "exact_success_rule": "EXACT_HARBOR_VERIFIER_REWARD_GE_1_0",
+    "every_other_final_state": "ZERO",
+    "auto_revoke_after_slot_finalization": true,
+    "result_must_be_content_addressed": true,
+    "incremental_spend_usd": 0
+  },
+  "current_counts": {
+    "consumed_slots": 10,
+    "consumed_successes": 0,
+    "consumed_final_failures": 10,
+    "required_successes": 124,
+    "fail_lock_failures": 87,
+    "additional_failures_before_fail_lock": 77,
+    "maximum_possible_successes_remaining": 200,
+    "minimum_required_success_rate_over_remaining_slots": 0.62,
+    "pass_still_mathematically_reachable": true
+  },
+  "activation_preconditions": [
+    "THIS_EXACT_CANDIDATE_BLOB_INDEPENDENTLY_VERIFIED",
+    "CANDIDATE_CURRENT_MAIN_ANCESTRY_AND_ALL_BOUND_BLOBS_RECOMPUTED",
+    "EXACT_ACTIVE_AUTHORITY_DERIVED_FROM_VERIFIED_CANDIDATE_MERGED_TO_BRAIN_MAIN",
+    "PUBLIC_EXECUTION_CAPSULE_HASH_BINDS_ACTIVE_AUTHORITY_AND_VERIFICATION",
+    "ARM_CREATED_LAST_AND_EXACTLY_ONCE",
+    "RANK11_SLOT_STILL_UNCONSUMED_AT_ARM_TIME"
+  ],
+  "hard_rules": [
+    "NO_EXECUTION_FROM_THIS_CANDIDATE",
+    "NO_RANK8_RANK9_OR_RANK10_REPLAY",
+    "NO_RETRY_NO_REPLACEMENT_NO_DENOMINATOR_SHRINK",
+    "NO_TASK_EXPOSURE_BEFORE_ACTIVE_AUTHORITY",
+    "NO_ACCEPTANCE_CREDIT_FROM_PREFLIGHT",
+    "ABORT_IF_CURRENT_MAIN_OR_SLOT_LEDGER_CHANGES_BEFORE_ACTIVATION"
+  ],
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
