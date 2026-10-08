@@ -26,16 +26,16 @@ class R3RawAcceptedReadonlyLearningV1Tests(unittest.TestCase):
     def material(self, root: Path):
         (root / "canonical").mkdir(parents=True, exist_ok=True)
         source = root / "canonical/source.txt"
-        manifest = root / "manifest.json"
-        output = root / "bundle.tar.gz"
+        manifest = root / "canonical/manifest.json"
+        output = root / "canonical/bundle.tar.gz"
         source.write_text("raw accepted learning", encoding="utf-8")
         manifest.write_text(
             json.dumps({"records": [{"verification_paths": ["canonical/source.txt"]}]}),
             encoding="utf-8",
         )
         goal = (
-            "Create a tar.gz archive from the manifest manifest.json, including all its "
-            "verification_paths files, and save it to bundle.tar.gz."
+            "Create a tar.gz archive from the manifest canonical/manifest.json, including all its "
+            "verification_paths files, and save it to canonical/bundle.tar.gz."
         )
         registry = load_verified_registry()
         admissible = goal_compiler._platform_admissible_registry(dict(registry))
@@ -51,17 +51,17 @@ class R3RawAcceptedReadonlyLearningV1Tests(unittest.TestCase):
         plan_sha = astra_runtime._controller_plan_sha256(plans)
 
         with tarfile.open(output, "w:gz") as archive:
-            archive.add(manifest, arcname="manifest.json")
+            archive.add(manifest, arcname="canonical/manifest.json")
             archive.add(source, arcname="canonical/source.txt")
         source_hashes = {
             "canonical/source.txt": sha256(source.read_bytes()).hexdigest(),
-            "manifest.json": sha256(manifest.read_bytes()).hexdigest(),
+            "canonical/manifest.json": sha256(manifest.read_bytes()).hexdigest(),
         }
         inner = {
             "output_verified": True,
-            "output_path": "bundle.tar.gz",
+            "output_path": "canonical/bundle.tar.gz",
             "output_sha256": sha256(output.read_bytes()).hexdigest(),
-            "members": ["canonical/source.txt", "manifest.json"],
+            "members": ["canonical/manifest.json", "canonical/source.txt"],
             "member_count": 2,
             "source_sha256": source_hashes,
         }
