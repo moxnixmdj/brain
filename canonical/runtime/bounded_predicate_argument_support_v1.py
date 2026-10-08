@@ -3,9 +3,11 @@
 Deterministically proves SUPPORTS / CONFLICTS only for source texts and claims
 that both fit Brain's existing bounded explicit modal predicate-argument grammar.
 
-Active and passive voice are normalized to the same semantic role tuple. Exact
-surface wording is not required. Unsupported coordination, co-reference,
-ellipsis, open lexical inference, and world knowledge remain UNRESOLVED.
+Active/passive equivalence is admitted only for a small explicit regular English
+inflection relation checked against the active predicate itself. Irregular or
+otherwise unproved morphology is not normalized. Unsupported coordination,
+co-reference, ellipsis, open lexical inference, and world knowledge remain
+UNRESOLVED or unrelated.
 
 This module has no policy, DB, U-empty, acceptance, or terminal authority.
 """
@@ -30,6 +32,7 @@ def _normalized(text: str) -> dict[str, Any] | None:
         "object": str(g["object"]).strip().lower(),
         "modality": str(g["modality"]).strip().lower(),
         "polarity": str(g["polarity"]).strip().upper(),
+        "voice": str(g["voice"]).strip().upper(),
         "condition": (
             {
                 "relation": str(condition["relation"]).strip().upper(),
@@ -39,6 +42,28 @@ def _normalized(text: str) -> dict[str, Any] | None:
             else None
         ),
     }
+
+
+def _regular_passive_form(active: str) -> str:
+    if active.endswith("e"):
+        return active + "d"
+    if (
+        len(active) >= 2
+        and active.endswith("y")
+        and active[-2] not in "aeiou"
+    ):
+        return active[:-1] + "ied"
+    return active + "ed"
+
+
+def _predicate_equivalent(a: dict[str, Any], b: dict[str, Any]) -> bool:
+    if a["predicate"] == b["predicate"]:
+        return True
+    if a["voice"] == "ACTIVE" and b["voice"] == "PASSIVE":
+        return b["predicate"] == _regular_passive_form(a["predicate"])
+    if a["voice"] == "PASSIVE" and b["voice"] == "ACTIVE":
+        return a["predicate"] == _regular_passive_form(b["predicate"])
+    return False
 
 
 def classify_support(claim_text: str, evidence_text: str, *, evidence_id: str) -> dict[str, Any]:
@@ -61,10 +86,12 @@ def classify_support(claim_text: str, evidence_text: str, *, evidence_id: str) -
             "terminal_authority": False,
         }
 
-    claim_core = {k: claim[k] for k in ("subject", "predicate", "object", "modality", "condition")}
-    evidence_core = {k: evidence[k] for k in ("subject", "predicate", "object", "modality", "condition")}
-
-    if claim_core != evidence_core:
+    same_nonpredicate = all(
+        claim[k] == evidence[k]
+        for k in ("subject", "object", "modality", "condition")
+    )
+    same_predicate = _predicate_equivalent(claim, evidence)
+    if not (same_nonpredicate and same_predicate):
         return {
             "schema": SCHEMA,
             "status": "RESOLVED",
@@ -76,11 +103,7 @@ def classify_support(claim_text: str, evidence_text: str, *, evidence_id: str) -
             "terminal_authority": False,
         }
 
-    if claim["polarity"] == evidence["polarity"]:
-        relation = "SUPPORTS"
-    else:
-        relation = "CONFLICTS"
-
+    relation = "SUPPORTS" if claim["polarity"] == evidence["polarity"] else "CONFLICTS"
     return {
         "schema": SCHEMA,
         "status": "RESOLVED",
@@ -88,11 +111,12 @@ def classify_support(claim_text: str, evidence_text: str, *, evidence_id: str) -
         "reason": "BOUNDED_NORMALIZED_PREDICATE_ARGUMENT_MATCH",
         "claim_graph": claim,
         "evidence_graph": evidence,
-        "active_passive_voice_normalized": True,
+        "regular_active_passive_inflection_checked": True,
         "evidence_id": evidence_id,
         "terminal_authority": False,
         "boundary": (
-            "SIMPLE_EXPLICIT_MODAL_PREDICATE_ARGUMENT_CLAUSES_ONLY__"
+            "SIMPLE_EXPLICIT_MODAL_PREDICATE_ARGUMENT_CLAUSES__"
+            "REGULAR_ACTIVE_PASSIVE_INFLECTION_ONLY__NO_IRREGULAR_MORPHOLOGY__"
             "NO_GENERAL_PARAPHRASE_COREFERENCE_WORLD_KNOWLEDGE_OR_NLI"
         ),
     }
