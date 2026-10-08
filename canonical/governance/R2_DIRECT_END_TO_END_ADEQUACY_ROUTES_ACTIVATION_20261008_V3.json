@@ -1,0 +1,122 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_V3",
+  "date": "2026-10-08",
+  "status": "ACTIVE_LIVE_DIRECT_ADEQUACY_ROUTE_LAYER__THREE_EXACT_CELLS_PLUS_THREE_TRANSACTIONAL_FAMILIES",
+  "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE_INCOMPLETE",
+  "runtime": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+  "controller": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+  "rule": [
+    "PURE_EXACT_PREFLIGHT_MUST_MATCH_BEFORE_ANY_EFFECT",
+    "MATCHED_ROUTE_EXECUTES_AT_MOST_ONCE",
+    "SUCCESS_REQUIRES_INDEPENDENT_POST_EXECUTION_ACCEPTANCE_OF_EVERY_RAW_OBLIGATION",
+    "PARTIAL_ACCEPTANCE_IS_NOT_ADEQUACY",
+    "MATCHED_ROUTE_FAILURE_MUST_NOT_RETRY_THROUGH_ANOTHER_POLICY_PATH",
+    "UNMATCHED_GOALS_FALL_THROUGH_TO_THE_EXISTING_R2_FIXED_POINT_LOOP",
+    "TRANSACTIONAL_FAMILY_ROUTES_MAY_COMMIT_ONLY_AFTER_PRODUCER_INDEPENDENT_SEMANTIC_ACCEPTANCE__FAILURE_RESTORES_OR_REMOVES_THE_DECLARED_REPOSITORY_LOCAL_OUTPUT",
+    "DOCX_FAMILY_COMMITS_ONLY_AFTER_EXACT_RAW_INTENT_SIDECAR_BINDING_AND_PRODUCER_INDEPENDENT_STDLIB_OOXML_SEMANTIC_VERIFICATION",
+    "DOCX_JSON_FAMILY_COMMITS_ONLY_AFTER_SOURCE_HASH_FREEZE_EXACT_INTENT_BINDING_AND_PRODUCER_INDEPENDENT_SOURCE_PLUS_OOXML_SEMANTIC_VERIFICATION"
+  ],
+  "current_routes": [
+    {
+      "route_id": "DIRECT_ADEQUACY::ARCHIVE_MANIFEST_TAR_GZ_V1",
+      "capability_id": "archive.tar_gz.create_from_manifest",
+      "preflight": "raw_goal_archive_acceptance_v1.GRAMMAR.fullmatch",
+      "acceptance": "raw_goal_archive_acceptance_v1.verify",
+      "scope": "EXACT_ARCHIVE_MANIFEST_VERIFICATION_PATHS_GOAL_ONLY"
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1",
+      "capability_id": null,
+      "preflight": "raw_goal_exact_literal_acceptance_v1.preflight",
+      "acceptance": "raw_goal_exact_literal_acceptance_v1.verify",
+      "scope": "STRICT_REPLY_OR_RESPOND_WITH_EXACTLY_LITERAL_GOAL_ONLY"
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1",
+      "capability_id": null,
+      "preflight": "raw_goal_literal_json_acceptance_v1.preflight",
+      "acceptance": "raw_goal_literal_json_acceptance_v1.verify",
+      "scope": "STRICT_LITERAL_JSON_RECORDS_TO_CANONICAL_REPOSITORY_PATH_ONLY"
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1",
+      "capability_id": "DYNAMIC_VERIFIED_BOUND_CODEC",
+      "runtime": "canonical/runtime/r2_structured_binary_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "d3d687fbd1d049b1162520f96c7ba4fb57927f42",
+      "preflight": "EXACT_SINGLE_ACTION_JSON_TO_CBOR_MSGPACK_OR_BSON_GRAMMAR_PLUS_VERIFIED_GOAL_COMPILATION",
+      "acceptance": "PRODUCER_INDEPENDENT_CROSS_SUPPLIER_DECODE_MUST_EQUAL_EXACT_SOURCE_JSON",
+      "transaction": "ONE_REPOSITORY_LOCAL_OUTPUT_FILE__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_SINGLE_ACTION_JSON_TO_STRUCTURED_BINARY_GOAL_FAMILY",
+      "current_verified_capability_count": 4,
+      "verification": {
+        "path": "canonical/verification/R2_STRUCTURED_BINARY_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "16947dbae01230fe3739d8016dcdb63c10e17675",
+        "isolated_checks": 16
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1",
+      "capability_id": "docx.document.create.python_docx",
+      "runtime": "canonical/runtime/r2_docx_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "631fcf2aa82d090d1f3ade6199829f060b000937",
+      "preflight": "EXACT_TWO_CLAUSE_LITERAL_DOCX_GRAMMAR_PLUS_CURRENT_DETERMINISTIC_COMPILER_CHAIN",
+      "acceptance": "EXACT_INTENT_SIDECAR_BINDING_PLUS_PRODUCER_INDEPENDENT_STDLIB_OOXML_SEMANTIC_VERIFICATION",
+      "transaction": "DOCX_PLUS_INTENT_SIDECAR__ROLLBACK_BOTH_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_TWO_CLAUSE_LITERAL_DOCX_PLUS_INDEPENDENT_REOPEN_VERIFY_FAMILY",
+      "current_verified_capability_count": 1,
+      "verification": {
+        "path": "canonical/verification/R2_DOCX_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "f47ba33f5d8aed21bd856315380fc5b391a7e314",
+        "isolated_standalone_checks": 5,
+        "isolated_modified_surface_checks": 20
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1",
+      "capability_id": "docx.document.create_from_json_record",
+      "runtime": "canonical/runtime/r2_docx_json_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "27fdb096b00bd5dda21e912a1b740ac79bf35cd4",
+      "preflight": "EXACT_SINGLE_RECORD_JSON_TO_DOCX_REPORT_GRAMMAR_PLUS_CURRENT_VERIFIED_GOAL_COMPILATION",
+      "acceptance": "EXACT_SOURCE_HASH_PLUS_INTENT_BINDING_PLUS_PRODUCER_INDEPENDENT_RAW_GOAL_SOURCE_JSON_AND_OOXML_SEMANTIC_REOPEN",
+      "transaction": "DOCX_PLUS_INTENT_SIDECAR__ROLLBACK_BOTH_ON_ANY_EXECUTION_BINDING_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_SINGLE_RECORD_JSON_TO_SEMANTICALLY_VERIFIED_DOCX_REPORT_FAMILY",
+      "current_verified_capability_count": 1,
+      "verification": {
+        "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "2ed67b97a6a20338fee346af3e4339823176f24a",
+        "family_tests": 9,
+        "integration_tests": 3,
+        "real_independent_ooxml_acceptance_replay": true,
+        "fresh_exact_pinned_producer_replay": false
+      }
+    }
+  ],
+  "expansion_law": "ADD_A_ROUTE_ONLY_WHEN_BOTH_AN_EXACT_SIDE_EFFECT_FREE_PREFLIGHT_AND_AN_INDEPENDENT_FULL_RAW_OBLIGATION_ACCEPTANCE_VERIFIER_EXIST",
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_CLOSURE",
+    "NO_CLAIM_UNMATCHED_GOALS_ARE_INADEQUATE",
+    "NO_CLAIM_EXECUTION_SUCCESS_ALONE_IS_GOAL_SUCCESS",
+    "NO_CLAIM_THE_CODEC_FAMILY_GENERALIZES_BEYOND_THE_EXACT_DECLARED_GRAMMAR_OR_TO_EXTERNAL_IRREVERSIBLE_EFFECTS",
+    "NO_CLAIM_THE_DOCX_FAMILY_GENERALIZES_BEYOND_THE_EXACT_TWO_CLAUSE_GRAMMAR_OR_TO_EXTERNAL_IRREVERSIBLE_EFFECTS",
+    "NO_CLAIM_THE_DOCX_JSON_FAMILY_GENERALIZES_BEYOND_THE_EXACT_SINGLE_RECORD_JSON_TO_DOCX_REPORT_GRAMMAR_OR_TO_EXTERNAL_IRREVERSIBLE_EFFECTS",
+    "NO_CLAIM_FRESH_EXECUTION_OF_THE_PINNED_DOCX_JSON_PRODUCER_WAS_REPLAYED_IN_THE_ROUTE_VERIFICATION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "current_route_count": 6,
+  "exact_cell_count": 3,
+  "route_expansion_note": "THREE_EXACT_CELLS_PLUS_THREE_TRANSACTIONAL_FAMILIES_ACTIVE__STRUCTURED_BINARY_CODEC_FAMILY_HAS_FOUR_VERIFIED_MEMBERS__LITERAL_DOCX_AND_JSON_RECORD_DOCX_FAMILIES_REQUIRE_INDEPENDENT_OOXML_SEMANTIC_ACCEPTANCE__EVERY_ROUTE_REQUIRES_EXACT_PREFLIGHT_AND_FULL_RAW_ACCEPTANCE",
+  "runtime_binding": {
+    "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+    "git_blob_sha": "fce7a71ab75c4a80fdd9891f6f7ff3ae67c462eb"
+  },
+  "bounded_family_count": 3,
+  "supersedes": {
+    "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V2.json",
+    "git_blob_sha": "f450789a8e4a3440e5b35339aa0ba3ba87d45ef5",
+    "reason": "ADD_VERIFIED_JSON_RECORD_TO_DOCX_DIRECT_ADEQUACY_FAMILY_AND_REBIND_CURRENT_DIRECT_RUNTIME_BYTES"
+  }
+}
