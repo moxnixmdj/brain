@@ -9,6 +9,7 @@ and finish authority.
 from __future__ import annotations
 
 import json
+import math
 import time
 import urllib.request
 from typing import Any
@@ -20,6 +21,21 @@ MODEL = "brain-qwen3.5-9b"
 TOOL_NAME = "submit_science_proposal"
 MAX_RESPONSE_BYTES = 100_000
 MAX_TOOL_COMPLETION_TOKENS = 4096
+MIN_TIMEOUT_S = 300
+MAX_TIMEOUT_S = 900
+PROMPT_BYTES_PER_TOKEN_ESTIMATE = 4
+PREFILL_TOKENS_PER_SECOND_FLOOR = 15
+GENERATION_AND_TRANSPORT_MARGIN_S = 180
+
+
+def effective_timeout_s(prompt: str, requested_timeout_s: int) -> int:
+    if (not isinstance(requested_timeout_s, int) or isinstance(requested_timeout_s, bool) or not 1 <= requested_timeout_s <= MAX_TIMEOUT_S):
+        raise SciencePlannerError("SCIENCE_PLANNER_TIMEOUT_INVALID")
+    prompt_bytes = len(str(prompt or "").encode("utf-8"))
+    estimated_prompt_tokens = max(1, math.ceil(prompt_bytes / PROMPT_BYTES_PER_TOKEN_ESTIMATE))
+    prompt_floor = math.ceil(estimated_prompt_tokens / PREFILL_TOKENS_PER_SECOND_FLOOR)
+    required = prompt_floor + GENERATION_AND_TRANSPORT_MARGIN_S
+    return min(MAX_TIMEOUT_S, max(MIN_TIMEOUT_S, requested_timeout_s, required))
 
 TOOL = {
     "type": "function",
@@ -158,12 +174,7 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
     prompt = str(prompt or "")
     if not prompt.strip():
         raise SciencePlannerError("SCIENCE_PLANNER_PROMPT_REQUIRED")
-    if (
-        not isinstance(timeout_s, int)
-        or isinstance(timeout_s, bool)
-        or not 1 <= timeout_s <= 300
-    ):
-        raise SciencePlannerError("SCIENCE_PLANNER_TIMEOUT_INVALID")
+    timeout_s = effective_timeout_s(prompt, timeout_s)
 
     body = json.dumps({
         "model": MODEL,
