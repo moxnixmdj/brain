@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_P3_BOUND_BINARY_REAL_CONTEXT_MEMBERSHIP_SELF_CERTIFICATION_INVALIDATION_V1",
+  "date": "2026-10-08",
+  "status": "PROMOTION_INVALIDATED__CALLER_CONSTRUCTIBLE_AUTHORITY_AND_SEMANTIC_RECEIPTS__KEEP_DIAGNOSTIC_ONLY__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/p3_bound_binary_real_context_membership_v1.py",
+      "git_blob_sha": "2b9832ae4efa3c4fc30119034ecbc9b509263d35"
+    },
+    "verification": {
+      "path": "canonical/verification/P3_BOUND_BINARY_REAL_CONTEXT_MEMBERSHIP_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "91d7882632f687147b2e9e9f51e6d7444f2f6672"
+    }
+  },
+  "defect": [
+    "THE_RUNTIME_DEREFERENCES_THE_AUTHORITY_RECEIPT_BYTES_BUT_THE_RECEIPT_SEMANTICS_INCLUDE_CALLER_CONSTRUCTIBLE_INDEPENDENT_VERIFIED_AND_COMPLETE_AUTHORITY BOOLEAN CLAIMS.",
+    "THE_RUNTIME_ACCEPTS_CALLER_SUPPLIED_DUAL_SEMANTIC_DECOMPOSITIONS; TWO IDENTICAL FABRICATED_DECOMPOSITIONS_CAN AGREE WITHOUT ESTABLISHING NATURAL_LANGUAGE_MEANING.",
+    "THEREFORE_STRUCTURAL CONSISTENCY OF THOSE RECEIPTS IS NOT SUFFICIENT FOR D_B_PROMOTION."
+  ],
+  "relation_to_existing_truth_repair": [
+    "EFFECT_BROKER_FORGED_RECEIPT_COUNTEREXAMPLE_20261005_V1",
+    "SELECTED_COVER_UNTRUSTED_RECEIPT_GUARD_SPRITE_VERIFICATION_20261008_V1",
+    "UNIVERSAL_PROBLEM_CONTRACT_AUTHORITY_V1_ROOT_TASK_INPUT_IS_UPSTREAM_ROOT_OF_TRUST"
+  ],
+  "replacement": {
+    "runtime": {
+      "path": "canonical/runtime/p3_binary_explicit_contract_membership_v1.py",
+      "git_blob_sha": "ca24d891210fb6d885a959c26a9da3451a8b67c7"
+    },
+    "verification": {
+      "path": "canonical/verification/P3_BINARY_EXPLICIT_CONTRACT_MEMBERSHIP_TWO_SPRITE_VERIFICATION_20261008_V1.json"
+    },
+    "rule": "FOR_PROMOTION_USE_ONLY_THE_STRICT_EXPLICIT_ROOT_SOURCE_CLASS_OR_A_FUTURE_TRUSTED_INGRESS_BOUND_FREE_FORM_AUTHORITY_VERIFIER"
+  },
+  "effect": {
+    "old_runtime_may_be_used_for_diagnostics": true,
+    "old_runtime_may_authorize_policy_adequacy": false,
+    "old_runtime_may_authorize_db_admission": false,
+    "old_runtime_may_authorize_u_subtraction": false,
+    "terminal_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
