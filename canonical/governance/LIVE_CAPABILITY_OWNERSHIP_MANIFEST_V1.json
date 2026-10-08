@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE_AUTHORITATIVE_LIVE_OWNERSHIP_ONTOLOGY",
+  "default": "NOT_LIVE_OWNED_UNLESS_ADMITTED_BY_ONE_PROVIDER",
+  "scope": "CURRENT_LIVE_BRAIN_ONLY__HISTORICAL_AND_SUPERSEDED_CODE_EXCLUDED_UNLESS_READMITTED",
+  "providers": {
+    "FABRIC_ENGINES": {
+      "kind": "DYNAMIC_ENGINE_DESCRIPTOR_SET",
+      "source_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "selector": "ENGINE_DESCRIPTORS",
+      "fabric_carrier": "DIRECT_ENGINE_MODE"
+    },
+    "VERIFIED_BOUND_CAPABILITIES": {
+      "kind": "VERIFIED_BOUND_REGISTRY",
+      "source_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "selector": "live_integrated_brain_v1.load_verified_registry",
+      "fabric_carrier": "BOUND_CAPABILITY"
+    },
+    "ACTIVE_VERIFIED_LEARNED_SKILLS": {
+      "kind": "VERIFIED_DYNAMIC_SKILL_STATE",
+      "source_path": "canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json",
+      "selector": "active && skill.verified_skill && skill.reuse_authorized",
+      "source_optional_when_empty": true,
+      "fabric_carrier": "LEARNING_EPISODE"
+    },
+    "H100_VERIFIED_CAPABILITIES": {
+      "kind": "VERIFIED_INFERENCE_REGISTRY",
+      "source_path": "canonical/runtime/h100_verified_capability_registry_v8.py",
+      "selector": "REGISTRY",
+      "fabric_carrier": "H100_INFERENCE"
+    },
+    "CERTIFICATE_GATED_SELECTED_ROUTES": {
+      "kind": "CONTENT_ADDRESSED_ROUTE_REGISTRY",
+      "source_path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
+      "selector": "admitted routes accepted by certificate_gated_selected_route_runtime_entrypoint_v2",
+      "fabric_carrier": "CERTIFIED_ROUTE"
+    }
+  },
+  "invariants": [
+    "EVERY_LIVE_OWNED_CAPABILITY_IS_ADMITTED_BY_EXACTLY_ONE_OWNERSHIP_PROVIDER",
+    "EVERY_PROVIDER_HAS_ONE_UNIFIED_FABRIC_CARRIER",
+    "EVERY_ADMITTED_LIVE_OWNED_CAPABILITY_IS_DISCOVERABLE_FROM_THE_FABRIC_CATALOG",
+    "EVERY_ADMITTED_LIVE_OWNED_CAPABILITY_IS_EXECUTABLE_OR_COMPOSABLE_THROUGH_ITS_FABRIC_CARRIER",
+    "UNREGISTERED_REPOSITORY_CODE_HAS_NO_LIVE_OWNERSHIP_STATUS",
+    "HISTORICAL_OR_SUPERSEDED_CAPABILITIES_REQUIRE_EXPLICIT_READMISSION_TO_BECOME_LIVE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_HISTORICAL_REPOSITORY_CAPABILITIES_ARE_LIVE",
+    "NO_CLAIM_ARBITRARY_RAW_LANGUAGE_CAN_ALWAYS_SELECT_THE_CORRECT_CAPABILITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
