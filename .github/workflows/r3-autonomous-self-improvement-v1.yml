@@ -7,8 +7,6 @@ on:
       - "canonical/runtime/r3_improvement_queue_driver_v1.py"
       - "canonical/runtime/r3_independent_learning_verifier_v1.py"
       - "canonical/tests/test_r3_independent_learning_verifier_v1.py"
-      - "canonical/runtime/r3_independent_learning_verifier_v1.py"
-      - "canonical/tests/test_r3_independent_learning_verifier_v1.py"
       - "canonical/runtime/executable_skill_program_v7.py"
       - "canonical/runtime/executable_skill_verification_authenticator_v1.py"
       - "canonical/runtime/live_brain_runtime_v1.py"
@@ -30,6 +28,8 @@ on:
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
       - "canonical/runtime/r3_improvement_queue_driver_v1.py"
+      - "canonical/runtime/r3_independent_learning_verifier_v1.py"
+      - "canonical/tests/test_r3_independent_learning_verifier_v1.py"
       - "canonical/runtime/executable_skill_program_v7.py"
       - "canonical/runtime/executable_skill_verification_authenticator_v1.py"
       - "canonical/runtime/live_brain_runtime_v1.py"
