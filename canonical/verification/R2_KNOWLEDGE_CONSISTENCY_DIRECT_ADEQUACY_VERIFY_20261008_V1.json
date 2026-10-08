@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_R2_KNOWLEDGE_CONSISTENCY_DIRECT_ADEQUACY_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__PROVENANCE_KNOWLEDGE_CONSISTENCY__BRANCH_REGRESSION_25_OF_25__SUPPORTED_CONFLICTED_STALE_REPLAYS_PASS__ZERO_CREDIT",
+  "subject": {
+    "family_runtime": {
+      "path": "canonical/runtime/r2_knowledge_consistency_direct_adequacy_v1.py",
+      "git_blob_sha": "14c87718111c4fc235eb697624a98b2a95fa8968"
+    },
+    "direct_router": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "696eb2728947a0d6ad149ecfa28f5b78ca382463"
+    },
+    "family_tests": {
+      "path": "canonical/tests/test_r2_knowledge_consistency_direct_adequacy_v1.py",
+      "git_blob_sha": "3308f39b37a000831af5c1605c50d07c77e64f67"
+    },
+    "integration_tests": {
+      "path": "canonical/tests/test_r2_knowledge_consistency_direct_integration_v1.py",
+      "git_blob_sha": "c8045880b259bac7e395ddbe73112660ec8e3ebc"
+    }
+  },
+  "admitted_semantics": {
+    "input": "PROJECT_BRAIN_KNOWLEDGE_CONSISTENCY_REQUEST_V1_MANIFEST_OVER_PROJECT_BRAIN_KNOWLEDGE_EVIDENCE_V1_ARTIFACTS",
+    "producer_capability_id": "knowledge.consistency.assess",
+    "producer_adapter": "runtime_native_action",
+    "independent_acceptance": "RECOMPUTE_EVIDENCE_CONTRACT_CANONICAL_URL_PLUS_JSON_PATH_SOURCE_IDENTITIES_CANONICAL_VALUES_FRESHNESS_COUNTS_AND_TERMINAL_STATUS",
+    "terminal_outcomes": [
+      "SUPPORTED",
+      "CONFLICTED",
+      "STALE",
+      "INSUFFICIENT"
+    ],
+    "supported_rule": "AT_LEAST_TWO_FRESH_DISTINCT_URL_PLUS_JSON_PATH_IDENTITIES_AND_ONE_CANONICAL_VALUE",
+    "transactional_output": true
+  },
+  "focused_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "family_plus_integration_plus_direct_router": "25_OF_25_PASS",
+    "supported_replay": "PASS",
+    "conflicted_replay": "PASS",
+    "stale_replay": "PASS",
+    "insufficient_same_identity_replay": "PASS",
+    "malformed_evidence_negative": "PASS_FAIL_CLOSED",
+    "matched_failure_no_fallthrough": "PASS"
+  },
+  "inherited_live_runtime_qualification": {
+    "capability_verification_receipts": [
+      "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-SUPPORT-001__RECEIPT.json",
+      "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001__RECEIPT.json",
+      "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-STALE-001__RECEIPT.json"
+    ],
+    "historical_statuses": [
+      "SUPPORTED",
+      "CONFLICTED",
+      "STALE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_DISTINCT_URL_PLUS_JSON_PATH_IDENTITIES_IMPLY_ORGANIZATIONAL_INDEPENDENCE",
+    "NO_CLAIM_SUPPORTED_STATUS_PROVES_FACTUAL_TRUTH",
+    "NO_CLAIM_SOURCE_AUTHORITY_CAUSALITY_COMPLETENESS_OR_EVIDENCE_SUFFICIENCY_BEYOND_THE_EXACT_BOUNDED_RULE",
+    "NO_CLAIM_THE_FRESH_DIRECT_REPLAYS_USED_LIVE_EXTERNAL_NETWORK_FETCHES",
+    "NO_CLAIM_OPEN_WORLD_R2_COVERAGE_IS_COMPLETE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
