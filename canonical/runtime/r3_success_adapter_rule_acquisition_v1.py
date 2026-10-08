@@ -51,6 +51,40 @@ def _fail(reason: str, **extra: Any) -> dict[str, Any]:
     }
 
 
+def can_acquire(
+    work: Mapping[str, Any],
+    *,
+    state_path: str | Path,
+) -> bool:
+    """Return True only for the exact preverified native rule-acquisition scope."""
+    try:
+        if not isinstance(work, Mapping) or work.get("kind") != "EXPAND_SUCCESS_VERIFICATION_FRONTIER":
+            return False
+        payload = work.get("payload")
+        if not isinstance(payload, Mapping):
+            return False
+        observation_id = str(payload.get("observation_id") or "").strip()
+        if not observation_id:
+            return False
+        state = learning.load_state(state_path)
+        observation = state.get("observations", {}).get(observation_id)
+        if not isinstance(observation, Mapping):
+            return False
+        replay_capsule = observation.get("replay_capsule")
+        proof_capsule = observation.get("proof_capsule")
+        replay = replay_capsule.get("context") if isinstance(replay_capsule, Mapping) else None
+        material = proof_capsule.get("material") if isinstance(proof_capsule, Mapping) else None
+        return bool(
+            isinstance(replay, Mapping)
+            and replay.get("mode") == "decision"
+            and isinstance(material, Mapping)
+            and material.get("proof_kind") == "R2_DIRECT_ADEQUACY_READONLY_REVERIFY_V1"
+            and str(material.get("route_id") or "") in SUPPORTED_ROUTES
+        )
+    except Exception:
+        return False
+
+
 def acquire(
     request: Mapping[str, Any],
     *,
