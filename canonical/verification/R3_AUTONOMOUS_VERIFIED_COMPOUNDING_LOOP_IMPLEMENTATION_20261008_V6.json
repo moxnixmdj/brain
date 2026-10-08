@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V6",
+  "date": "2026-10-08",
+  "status": "R3_CONTROL_LOOP_SUFFICIENTLY_CLOSED__TRUTHFUL_CROSS_ROOT_AND_EVIDENCE_BOUNDARIES_EXPLICIT",
+  "subject_main_head": "25ba651ec23f0004a46bce6f9883c72987cfdb83",
+  "root": "R3_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_LOOP",
+  "exact_live_blobs": {
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "ea80a2f32142448b86816e169b6aeb7875d0f583",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "31df74a3f08ab839f2bdcb4b3fdc4a5db3a1ee2b",
+    "canonical/runtime/r3_independent_learning_verifier_v1.py": "b38b5315ef79a215976144866514cb2a95076c9e",
+    "canonical/runtime/r3_bound_success_adapter_v1.py": "8c73e1ab3486df9ed56fff778ec35401720eb1e7",
+    "canonical/runtime/r3_raw_success_adapter_v1.py": "80a2599a31501db18754e913b763254966b4923e",
+    "canonical/runtime/unified_cognitive_fabric_v1.py": "77213208ef8760a04ae7f3003a6db59b3f1d05eb"
+  },
+  "closure": {
+    "experience_capture": true,
+    "causal_failure_diagnosis": true,
+    "durable_failure_deduplication": true,
+    "repair_synthesis": true,
+    "invention_route_for_failed_execution": true,
+    "autonomous_replay_only_when_proved_safe": true,
+    "original_obligation_replay_required_for_repair_closure": true,
+    "verified_episode_persistence": true,
+    "bounded_effect_readback_without_replay": true,
+    "compiled_bound_success_readback": true,
+    "raw_bound_success_readback": true,
+    "skill_induction": true,
+    "independent_skill_verification": true,
+    "cross_scope_generalization_only_after_proof": true,
+    "quarantine_and_recovery": true,
+    "pareto_replacement": true,
+    "permanent_reuse": true,
+    "durable_improvement_queue": true,
+    "automatic_queue_drain_on_canonical_dispatch": true,
+    "same_evidence_retry_backoff": true,
+    "starvation_prevention": true,
+    "unsupported_success_truthful_parking": true,
+    "verifier_frontier_gap_creates_durable_cross_root_handoff": true,
+    "original_success_replay_forbidden_for_frontier_acquisition": true,
+    "parked_success_reopens_when_verification_frontier_changes": true
+  },
+  "total_disposition": {
+    "verified_learnable_experience": "VERIFY__GENERALIZE_WHEN_PROVED__COMPRESS__PARETO_ADMIT__REUSE",
+    "failed_experience": "DIAGNOSE__REPAIR_OR_INVENT__REPLAY_ONLY_IF_SAFE__VERIFY_OR_REJECT",
+    "success_with_current_verifier_gap": "PARK_WITHOUT_IMPOSSIBILITY_CLAIM__EMIT_R1_VERIFIER_CAPABILITY_ACQUISITION_HANDOFF__REOPEN_ON_FRONTIER_CHANGE",
+    "genuinely_observationally_indistinguishable_evidence": "WAIT_FOR_NEW_DISTINGUISHING_EVIDENCE_ONLY_AFTER_INSEPARABILITY_IS_ACTUALLY_PROVED",
+    "counterexample_to_learned_skill": "QUARANTINE__CONTRACT_SCOPE_OR_REVERIFY__DO_NOT_BLINDLY_REUSE"
+  },
+  "cross_root_boundary": {
+    "r3_owns": [
+      "EXPERIENCE_CAPTURE_AND_CAUSAL_DIAGNOSIS",
+      "DURABLE_IMPROVEMENT_SCHEDULING",
+      "FAIL_CLOSED_VERIFICATION_AND_PROMOTION",
+      "GENERALIZATION_COMPRESSION_PARETO_AND_REUSE",
+      "DETECTION_OF_VERIFICATION_FRONTIER_GAPS",
+      "NONREPLAYING_HANDOFF_AND_AUTOMATIC_REOPEN"
+    ],
+    "root1_owns": [
+      "ACQUISITION_OR_CONSTRUCTION_OF_A_MISSING_INDEPENDENT_READONLY_VERIFIER_OR_ADAPTER_CAPABILITY"
+    ],
+    "boundary_is_not_a_success_claim_for_root1": true
+  },
+  "evidence_boundary": {
+    "theorem": "R3_OBSERVABILITY_BOUNDARY_THEOREM_20261008_V1",
+    "theorem_valid": true,
+    "identical_evidence_cannot_soundly_distinguish_success_and_failure": true,
+    "missing_current_adapter_does_not_prove_identical_evidence": true,
+    "information_theoretic_nonlearnability_requires_actual_observational_inseparability_proof": true
+  },
+  "supersedes": {
+    "document": "canonical/verification/R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V5.json",
+    "superseded_claim": "NO_CURRENT_OWNED_SUCCESS_ADAPTER_IMPLIES_PROVED_NONLEARNABLE_FROM_CURRENT_RETAINED_EVIDENCE",
+    "preserved_from_v5": [
+      "OBSERVABILITY_THEOREM",
+      "FAIL_CLOSED_PROMOTION",
+      "PARK_AND_REOPEN_MECHANISM",
+      "BOUND_AND_RAW_READBACK_PATHS",
+      "AUTONOMOUS_QUEUE_DRAIN",
+      "NO_SAME_EVIDENCE_RETRY"
+    ]
+  },
+  "verification_receipts": {
+    "observability_truth_repair": {
+      "path": "canonical/verification/R3_OBSERVABILITY_TRUTH_BOUNDARY_REPAIR_VERIFY_20261008_V1.json",
+      "git_blob_sha": "2817bbf5868002ac3ae816f7d5b8ce5cd9544b73",
+      "result": "17_OF_17_PASS"
+    },
+    "verifier_frontier_handoff": {
+      "path": "canonical/verification/R3_VERIFICATION_FRONTIER_HANDOFF_VERIFY_20261008_V1.json",
+      "git_blob_sha": "a7e25faee474a86dc295a42a94db46bcae2e4193",
+      "result": "18_OF_18_PASS"
+    }
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_REALITY_IS_OBSERVABLE",
+    "NO_CLAIM_EVERY_MISSING_VERIFIER_CAPABILITY_IS_ACQUIRABLE",
+    "NO_CLAIM_ROOT1_IS_CLOSED_BY_THIS_R3_RESULT",
+    "NO_CLAIM_ARBITRARY_OPEN_WORLD_SUCCESS_CAN_BE_CERTIFIED_WITHOUT_DISTINGUISHING_EVIDENCE",
+    "NO_SELF_CERTIFICATION",
+    "NO_TERMINAL_GOAL_CREDIT"
+  ],
+  "current_truth": "R3 ITSELF NOW HAS A COMPLETE FAIL_CLOSED COMPOUNDING CONTROL LOOP OVER THE EVIDENCE AND CAPABILITIES AVAILABLE TO IT. WHEN A REQUIRED VERIFIER CAPABILITY IS MISSING, R3 DOES NOT MISLABEL THE CASE AS IMPOSSIBLE OR REPLAY THE SUCCESS; IT PERSISTS A NONREPLAYING ROOT1 ACQUISITION HANDOFF AND AUTOMATICALLY REOPENS LEARNING WHEN THE VERIFICATION FRONTIER CHANGES. GENUINELY INDISTINGUISHABLE EVIDENCE REMAINS AN INFORMATION BOUNDARY, NOT AN R3 ALGORITHM DEFECT.",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
