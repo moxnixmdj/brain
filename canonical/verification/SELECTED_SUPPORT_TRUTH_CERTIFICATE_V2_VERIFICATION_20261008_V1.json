@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_SUPPORT_TRUTH_CERTIFICATE_V2_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_CARRIERS__10_OF_10_EACH__FACT_PLUS_EXACT_ATTESTATION_SUPPORT_PORTFOLIO__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "attestation_parser": {
+      "path": "canonical/runtime/bounded_attestation_support_v1.py",
+      "git_blob_sha": "68b47a2526b4fd9bd055c2096b24baacc67968b4"
+    },
+    "certificate": {
+      "path": "canonical/runtime/selected_support_truth_certificate_v2.py",
+      "git_blob_sha": "dfbbde1c05ccf63d2047f95bf70300dd2a7cc22b"
+    },
+    "tests": {
+      "path": "canonical/tests/test_selected_support_truth_certificate_v2.py",
+      "git_blob_sha": "c0ee23f8f8b5678a8b249d12662a3c41d28ef7da"
+    },
+    "bounded_fact_dependency": {
+      "path": "canonical/runtime/bounded_claim_support.py",
+      "git_blob_sha": "197246a50ace8c16b945def9edb1357fb317c393"
+    }
+  },
+  "primary_execution": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "result": {
+      "pass": true,
+      "passed": 10,
+      "total": 10
+    }
+  },
+  "independent_execution": {
+    "provider": "SPRITES",
+    "sprite": "h100-real-image-v1",
+    "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+    "result": {
+      "pass": true,
+      "passed": 10,
+      "total": 10
+    }
+  },
+  "verified_effects": [
+    "ARBITRARY_PROPOSITION_EXACT_ATTESTATION_SUPPORT",
+    "ARBITRARY_PROPOSITION_EXACT_DENIAL_CONFLICT",
+    "ENTITY_FIELD_VALUE_FACT_SUPPORT_REGRESSION_PRESERVED",
+    "UNRELATED_EXACT_ATTESTATION_RESOLVES_NOT_SUPPORT",
+    "UNWRAPPED_PARAPHRASE_REMAINS_UNKNOWN",
+    "ALL_VISIBLE_EVIDENCE_RELATIONS_MUST_RESOLVE_IN_AT_LEAST_ONE_CHECKED_GRAMMAR",
+    "CALLER_ALIAS_HAS_NO_TRUTH_AUTHORITY",
+    "EVIDENCE_MUTATION_CHANGES_OBSERVATION_BINDING_NOT_PREDICATE_IDENTITY",
+    "NO_AUTHORITY_ESCALATION"
+  ],
+  "hard_nonclaims": [
+    "NO_PARAPHRASE_ENTAILMENT",
+    "NO_GENERAL_NLI",
+    "NO_SOURCE_AUTHORIZATION",
+    "NO_OPTIONAL_RELEVANCE_AUTHORITY",
+    "NO_POLICY_ADEQUACY",
+    "NO_DB_ADMISSION_U_SUBTRACTION_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
