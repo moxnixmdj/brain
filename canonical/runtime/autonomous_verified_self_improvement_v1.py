@@ -36,6 +36,7 @@ from canonical.runtime.executable_skill_program_v7 import (
 )
 from canonical.runtime.executable_skill_verification_authenticator_v1 import (
     authenticate_and_verify as authenticate_skill_verification,
+    reauthenticate_record as reauthenticate_skill_record,
 )
 from canonical.runtime.universal_solver_episode_verification_authenticator_v1 import (
     authenticate as authenticate_episode_verification,
@@ -120,6 +121,91 @@ def _make_retry_capsule(context: Mapping[str, Any]) -> dict[str, Any]:
         "secret_scan": "PASS",
         "replay_authorized": True,
         "resolved": False,
+    }
+
+
+def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Retain only bounded execution-proof metadata needed for later read-only verification."""
+    if not isinstance(out, Mapping) or out.get("pass") is not True:
+        return None
+    checkpoint = out.get("controller_checkpoint")
+    selected_plan = out.get("selected_plan")
+    if not isinstance(checkpoint, Mapping):
+        return None
+    if not isinstance(selected_plan, Sequence) or isinstance(selected_plan, (str, bytes)):
+        return None
+    checkpoint_path = _s(checkpoint.get("path"))
+    plan_sha256 = _s(checkpoint.get("plan_sha256"))
+    if not checkpoint_path or len(plan_sha256) != 64:
+        return None
+
+    execution_summary: list[dict[str, Any]] = []
+    raw_execution = out.get("execution")
+    if isinstance(raw_execution, Sequence) and not isinstance(raw_execution, (str, bytes)):
+        for raw in raw_execution:
+            if not isinstance(raw, Mapping):
+                return None
+            execution_summary.append({
+                "capability_id": _s(raw.get("capability_id")) or None,
+                "pass": raw.get("pass") is True,
+                "status": _s(raw.get("status")) or None,
+                "composition_capsule_head_hash": (
+                    _s(raw.get("composition_capsule_head_hash")) or None
+                ),
+            })
+
+    material = {
+        "source_schema": _s(out.get("schema")) or None,
+        "source_status": _s(out.get("status")) or None,
+        "task_id": _s(out.get("task_id")) or None,
+        "selected_plan": [_s(x) for x in selected_plan if _s(x)],
+        "verified_target_effects": _items(out.get("verified_target_effects")),
+        "controller_checkpoint": {
+            "path": checkpoint_path,
+            "plan_sha256": plan_sha256,
+        },
+        "execution": execution_summary,
+        "cognition_dependency_class": _s(out.get("cognition_dependency_class")) or None,
+        "model_dependency_count": out.get("model_dependency_count"),
+        "semantic_acceptance_complete": out.get("semantic_acceptance_complete") is True,
+    }
+    _validate_retry_value(material, path="success_proof")
+    raw = _canon(material).encode("utf-8")
+    if len(raw) > 128_000:
+        raise SelfImprovementError("SUCCESS_PROOF_CAPSULE_TOO_LARGE")
+    return {
+        "schema": "PROJECT_BRAIN_SUCCESS_PROOF_CAPSULE_V1",
+        "sha256": _sha(material),
+        "material": material,
+        "secret_scan": "PASS",
+    }
+
+
+def get_success_proof_context(
+    observation_id: str,
+    *,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+) -> dict[str, Any]:
+    oid = _s(observation_id)
+    state = load_state(state_path)
+    observation = state.get("observations", {}).get(oid)
+    if not isinstance(observation, Mapping):
+        raise SelfImprovementError("SUCCESS_OBSERVATION_UNKNOWN:" + oid)
+    capsule = observation.get("proof_capsule")
+    if not isinstance(capsule, Mapping):
+        raise SelfImprovementError("SUCCESS_OBSERVATION_PROOF_UNAVAILABLE:" + oid)
+    material = capsule.get("material")
+    expected = _s(capsule.get("sha256"))
+    if not isinstance(material, Mapping) or not expected:
+        raise SelfImprovementError("SUCCESS_PROOF_CAPSULE_INVALID:" + oid)
+    _validate_retry_value(material, path="success_proof")
+    actual = _sha(material)
+    if actual != expected:
+        raise SelfImprovementError("SUCCESS_PROOF_CAPSULE_DIGEST_MISMATCH:" + oid)
+    return {
+        "observation_id": oid,
+        "proof_capsule_sha256": expected,
+        "material": deepcopy(dict(material)),
     }
 
 
@@ -402,6 +488,8 @@ def _candidate_from_verified_skill(skill: Mapping[str, Any]) -> dict[str, Any]:
         "scope_relation",
         "scope_predicate",
         "verification_receipt",
+        "verification_binding",
+        "independent_verifier_id",
         "verified_skill",
         "reuse_authorized",
         "candidate_only",
@@ -644,6 +732,7 @@ def advance_verification_queue(
                     "verified_skill_reuse_authorized": True,
                 },
                 state_path=state_path,
+                repo_root=repo_root,
             )
             completed += 1
             results.append({
@@ -711,12 +800,18 @@ def record_success_observation(
         str(replay_capsule.get("sha256") or "")
         if isinstance(replay_capsule, Mapping) else ""
     )
+    proof_capsule = _make_success_proof_capsule(out)
+    proof_sha = (
+        str(proof_capsule.get("sha256") or "")
+        if isinstance(proof_capsule, Mapping) else ""
+    )
     core = {
         "surface": name,
         "schema": _s(out.get("schema")) or None,
         "status": _s(out.get("status")) or None,
         "output_sha256": _sha(out),
         "replay_capsule_sha256": replay_sha or None,
+        "proof_capsule_sha256": proof_sha or None,
     }
     oid = "observation:" + _sha(core)
     state = load_state(state_path)
@@ -726,6 +821,7 @@ def record_success_observation(
         "observation_id": oid,
         "count": int(previous.get("count", 0)) + 1 if isinstance(previous, Mapping) else 1,
         "replay_capsule": deepcopy(replay_capsule),
+        "proof_capsule": deepcopy(proof_capsule),
     }
     work_id = _enqueue_improvement(
         state,
@@ -738,6 +834,8 @@ def record_success_observation(
             "output_sha256": core["output_sha256"],
             "replay_capsule_sha256": core["replay_capsule_sha256"],
             "replayable": replay_capsule is not None,
+            "proof_capsule_sha256": core["proof_capsule_sha256"],
+            "proof_available": proof_capsule is not None,
             "required_result": "VERIFIED_EPISODE_OR_PROVED_NONLEARNABLE_SUCCESS",
         },
     )
@@ -750,6 +848,8 @@ def record_success_observation(
         "observation_id": oid,
         "replay_capsule_sha256": core["replay_capsule_sha256"],
         "replayable": replay_capsule is not None,
+        "proof_capsule_sha256": core["proof_capsule_sha256"],
+        "proof_available": proof_capsule is not None,
         "improvement_work_id": work_id,
         "next_improvement_action": _next_improvement_from_state(state),
         "permanent_reuse_authorized": False,
@@ -808,6 +908,7 @@ def integrate_solver_output(
     out: Mapping[str, Any],
     *,
     state_path: str | Path = DEFAULT_STATE_PATH,
+    repo_root: str | Path = ROOT,
     retry_context: Mapping[str, Any] | None = None,
     verification_problem: Mapping[str, Any] | None = None,
     verification_effect_root: str | Path | None = None,
@@ -908,6 +1009,16 @@ def integrate_solver_output(
         receipt = ep.get("verification_receipt")
         if not isinstance(binding, Mapping) or not isinstance(receipt, Mapping):
             raise SelfImprovementError("VERIFIED_EPISODE_AUTHORITY_MISSING")
+        episode_authority = reauthenticate_episode_record(ep, repo_root=repo_root)
+        if episode_authority.get("pass") is not True:
+            raise SelfImprovementError(
+                "VERIFIED_EPISODE_REAUTHENTICATION_FAILED:"
+                + _s(episode_authority.get("reason"))
+            )
+        authenticated_ep = episode_authority.get("authenticated_episode")
+        if not isinstance(authenticated_ep, Mapping):
+            raise SelfImprovementError("VERIFIED_EPISODE_REAUTHENTICATED_VALUE_MISSING")
+        ep = authenticated_ep
         episode_key = _episode_key(ep)
         episode_added = episode_key not in state["episodes"]
         state["episodes"][episode_key] = deepcopy(dict(ep))
@@ -962,6 +1073,23 @@ def integrate_solver_output(
     active_skill_id = None
     verified_skill = out.get("verified_executable_skill")
     skill_candidate = out.get("skill_candidate")
+    if (
+        out.get("verified_skill_reuse_authorized") is True
+        and isinstance(verified_skill, Mapping)
+    ):
+        skill_authority = reauthenticate_skill_record(
+            verified_skill,
+            repo_root=repo_root,
+        )
+        if skill_authority.get("pass") is not True:
+            raise SelfImprovementError(
+                "VERIFIED_SKILL_REAUTHENTICATION_FAILED:"
+                + _s(skill_authority.get("reason"))
+            )
+        authenticated_skill = skill_authority.get("verified_skill")
+        if not isinstance(authenticated_skill, Mapping):
+            raise SelfImprovementError("VERIFIED_SKILL_REAUTHENTICATED_VALUE_MISSING")
+        verified_skill = authenticated_skill
     if isinstance(skill_candidate, Mapping) and not isinstance(verified_skill, Mapping):
         candidate_sha = _s(skill_candidate.get("candidate_sha256"))
         if candidate_sha:
@@ -1028,11 +1156,40 @@ def integrate_solver_output(
         frontier_rows = []
         for old_sid in existing_ids:
             old = state["skills"].get(old_sid)
-            if not isinstance(old, Mapping):
+            if not isinstance(old, dict):
                 continue
             old_skill = old.get("skill")
-            if isinstance(old_skill, Mapping):
-                frontier_rows.append(_skill_pareto_row(old_sid, old_skill))
+            if not isinstance(old_skill, Mapping):
+                old["active"] = False
+                old["authority_invalidated"] = "STORED_SKILL_MISSING"
+                continue
+            old_authority = reauthenticate_skill_record(
+                old_skill,
+                repo_root=repo_root,
+            )
+            authenticated_old = old_authority.get("verified_skill")
+            valid_old = (
+                old_authority.get("pass") is True
+                and isinstance(authenticated_old, Mapping)
+            )
+            if valid_old:
+                try:
+                    valid_old = (
+                        _skill_id(authenticated_old) == str(old_sid)
+                        and _family_id(authenticated_old) == family
+                    )
+                except SelfImprovementError:
+                    valid_old = False
+            if not valid_old:
+                old["active"] = False
+                old["authority_invalidated"] = (
+                    _s(old_authority.get("reason"))
+                    or "STORED_SKILL_ID_OR_FAMILY_MISMATCH"
+                )
+                continue
+            frontier_rows.append(
+                _skill_pareto_row(str(old_sid), authenticated_old)
+            )
 
         skill_admission = update_pareto_frontier(frontier_rows, row)
         previous_record = state["skills"].get(sid)
@@ -1327,6 +1484,7 @@ def _select_active_skill(
     state: Mapping[str, Any],
     *,
     scope_id: str,
+    repo_root: str | Path = ROOT,
     known_absent_invalidators: Sequence[str] = (),
 ) -> dict[str, Any] | None:
     """Select a durable verified skill only when its exact executable skeleton fits.
@@ -1374,6 +1532,21 @@ def _select_active_skill(
         if not isinstance(skill, Mapping):
             continue
         if skill.get("verified_skill") is not True or skill.get("reuse_authorized") is not True:
+            continue
+        authority = reauthenticate_skill_record(skill, repo_root=repo_root)
+        if authority.get("pass") is not True:
+            continue
+        skill = authority.get("verified_skill")
+        if not isinstance(skill, Mapping):
+            continue
+        try:
+            authenticated_sid = _skill_id(skill)
+            authenticated_family = _family_id(skill)
+        except SelfImprovementError:
+            continue
+        if str(sid) != authenticated_sid:
+            continue
+        if _s(record.get("family_id")) != authenticated_family:
             continue
         relation = _s(skill.get("scope_relation"))
         source_scopes = set(_items(skill.get("source_scopes")))
@@ -1428,15 +1601,13 @@ def _select_active_skill(
         if not valid or not targets.issubset(available):
             continue
 
-        metrics = record.get("pareto_metrics")
-        if not isinstance(metrics, Mapping):
-            metrics = {}
+        metrics = _skill_pareto_row(authenticated_sid, skill)
         rank = (
-            int(metrics.get("latency", len(op_ids))),
-            int(metrics.get("compute", len(op_ids))),
-            int(metrics.get("memory", 0)),
-            -int(metrics.get("reliability", 0)),
-            str(sid),
+            int(metrics["latency"]),
+            int(metrics["compute"]),
+            int(metrics["memory"]),
+            -int(metrics["reliability"]),
+            authenticated_sid,
         )
         candidates.append(
             (
@@ -1824,6 +1995,7 @@ def run_learning_episode(
         problem,
         state,
         scope_id=scope,
+        repo_root=repo_root,
         known_absent_invalidators=known_absent_invalidators,
     )
     reuse_attempt = None
@@ -1881,6 +2053,7 @@ def run_learning_episode(
             integrated = integrate_solver_output(
                 reuse_out,
                 state_path=state_path,
+                repo_root=repo_root,
                 retry_context=retry_context,
                 verification_problem=learned_problem,
                 verification_effect_root=effect_root,
@@ -1902,6 +2075,7 @@ def run_learning_episode(
             integrated = integrate_solver_output(
                 reuse_out,
                 state_path=state_path,
+                repo_root=repo_root,
                 retry_context=retry_context,
                 verification_problem=learned_problem,
             )
@@ -1952,6 +2126,7 @@ def run_learning_episode(
     integrated = integrate_solver_output(
         out,
         state_path=state_path,
+        repo_root=repo_root,
         retry_context=retry_context,
         verification_problem=problem,
         verification_effect_root=effect_root,
