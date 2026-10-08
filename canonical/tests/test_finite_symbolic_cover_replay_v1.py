@@ -187,3 +187,56 @@ def test_seeded_differential_against_independent_truth_table_interpreter():
         if actual in {"UNCOVERED_SCOPED_VALUATION","ADMITTED_ROUTE_OUTPUT_MISMATCH"}:
             val=output["failing_valuation"]
             assert independent_eval(problem["scope_cnf"],val)
+
+
+def test_unknown_metadata_fields_cannot_claim_authority():
+    p = spec()
+    p["abc_closed_authorized"] = True
+    out = run(p)
+    assert out["pass"] is False
+    assert out["reason"] == "SPEC_FIELDS_INVALID"
+    p = spec()
+    p["routes"][0]["independent_verified"] = True
+    out = run(p)
+    assert out["reason"] == "ROUTE_FIELDS_INVALID"
+
+
+def test_cnf_token_budget_denies_replay_blowup():
+    p = spec()
+    p["scope_cnf"] = [["x"] for _ in range(1200)]
+    out = run(p)
+    assert out["pass"] is False
+    assert out["reason"] == "SPEC_BINDING_OR_REPLAY_INVALID"
+    assert "CNF_TOKEN_BUDGET_EXCEEDED" in out["detail"]
+
+
+def test_shared_budget_applies_across_all_route_formulas():
+    p = spec()
+    p["scope_cnf"] = [["x"] for _ in range(500)]
+    p["expected_output_cnf"] = [["x"] for _ in range(100)]
+    p["routes"][0]["admission_cnf"] = [["x"] for _ in range(100)]
+    out = run(p)
+    assert out["pass"] is False
+    assert "CNF_TOKEN_BUDGET_EXCEEDED" in out["detail"]
+
+
+def test_full_fifteen_variable_scope_within_budget():
+    p = spec()
+    p["variables"] = ["x", "y"] + [f"v{i}" for i in range(2, 15)]
+    out = run(p)
+    assert out["pass"] is True
+    assert out["total_valuations"] == 32768
+    assert out["scoped_valuations_checked"] == 32768
+    assert out["max_cnf_tokens"] == 1024
+    assert out["global_scope_complete"] is False
+
+
+def test_identity_length_limits_fail_closed():
+    p = spec()
+    p["routes"][0]["route_id"] = "z" * 129
+    out = run(p)
+    assert out["reason"] == "ROUTE_ID_INVALID"
+    p = spec()
+    p["scope_id"] = "s" * 257
+    out = run(p, expected_scope_id="s"*257)
+    assert out["reason"] == "EXPECTED_SCOPE_REQUIRED"
