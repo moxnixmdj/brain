@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_R3_EXECUTABLE_VERIFICATION_FRONTIER_HANDOFF_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__R3_EXECUTABLE_VERIFIER_FRONTIER_HANDOFF__24_OF_24_FOCUSED_TESTS",
+  "subject_main_head_before_receipt": "4c451e1d8606a49f583372f9cea8eda9c389e08c",
+  "exact_blobs": {
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "d0164f0b48ac4db6a6c7e406d4750a080423781e",
+    "canonical/runtime/unified_cognitive_fabric_v1.py": "876e32b049062d6ae7a7cb36036e78d0c423f2b1",
+    "canonical/tests/test_r3_improvement_queue_driver_v1.py": "205752f9728865c2e218d0efcd2abf95f3996c48",
+    "canonical/tests/test_r3_improvement_cycle_fabric_v1.py": "2cd0a5e278e3eb0b9a76ff7f77bea68f401faaeb"
+  },
+  "isolated_verification": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "queue_driver_suite": {
+      "command": "python3 -m unittest canonical.tests.test_r3_improvement_queue_driver_v1 -v",
+      "tests_run": 20,
+      "tests_passed": 20,
+      "tests_failed": 0,
+      "tests_errors": 0
+    },
+    "fabric_forwarding_suite": {
+      "command": "python3 run_fabric_v7_isolated.py",
+      "tests_run": 4,
+      "tests_passed": 4,
+      "tests_failed": 0,
+      "tests_errors": 0,
+      "isolation": "EXACT_CURRENT_FABRIC_AND_TEST_BYTES_WITH_IMPORT_BOUNDARY_STUBS_ONLY",
+      "queue_driver_behavior_in_fabric_tests": "MOCKED_BY_TEST_DESIGN"
+    }
+  },
+  "proved": {
+    "durable_frontier_handoff_is_executable_when_provider_available": true,
+    "canonical_fabric_forwards_provider_on_explicit_improvement_cycle": true,
+    "canonical_fabric_forwards_provider_on_automatic_compounding_tick": true,
+    "provider_claim_without_owned_frontier_byte_change_is_rejected": true,
+    "actual_owned_frontier_byte_change_reopens_blocked_success": true,
+    "same_provider_same_frontier_same_evidence_is_backed_off": true,
+    "original_success_replay_forbidden": true,
+    "candidate_generation_authority_granted": false,
+    "promotion_authority_granted": false,
+    "terminal_authority_granted": false
+  },
+  "truthful_boundary": {
+    "canonical_default_root1_acquisition_provider_present": false,
+    "r3_provider_interface_present": true,
+    "root1_must_supply_or_bind_actual_acquisition_worker": true,
+    "r3_recomputes_owned_frontier_after_provider_returns": true,
+    "provider_self_report_is_not_authority": true,
+    "full_end_to_end_root1_acquisition_success_claimed": false
+  },
+  "ci_truth": {
+    "private_github_actions_status": "ZERO_STEP_RUNNER_FAILURES__NO_CODE_VERDICT",
+    "counted_as_test_failure": false,
+    "counted_as_test_success": false
+  },
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
