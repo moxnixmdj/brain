@@ -404,7 +404,9 @@ def run(
                 "terminal_authority": False,
             }
 
-    residual = classify_residual(\n        final_blockers, pending=final["payload"]["pending"]\n    )
+    residual = classify_residual(
+        final_blockers, pending=final["payload"]["pending"]
+    )
     return {
         "schema": SCHEMA,
         "status": "FAIL_CLOSED__MAX_ROUNDS_REACHED_BEFORE_FIXED_POINT",
