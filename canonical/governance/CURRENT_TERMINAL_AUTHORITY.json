@@ -1859,12 +1859,18 @@
     "runtime": {
       "path": "canonical/runtime/capability_first_scheduler_v1.py"
     },
-    "operational_objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
-    "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT",
+    "operational_objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE_WITHOUT_DESTROYING_SEMANTIC_CAPABILITY_OR_FUTURE_OPTION_VALUE",
+    "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
     "benchmark_role": "INSTRUMENTATION_NOT_PRODUCT",
-    "rule": "PRIMARY_DEVELOPMENT_PRIORITY_FOLLOWS_CAPABILITY_RESOURCE_PARETO_LEVERAGE__BENCHMARK_ONLY_BOOKKEEPING_IS_DEMOTED_UNLESS_IT_LOCALIZES_VALIDATES_FALSIFIES_OR_CERTIFIES",
+    "rule": "PRIMARY_DEVELOPMENT_PRIORITY_FOLLOWS_CAPABILITY_RESOURCE_PARETO_LEVERAGE__CURRENT_DOMINANCE_MAY_RETIRE_HOT_EXECUTION_BUT_NEVER_GRANTS_PHYSICAL_DELETION__BENCHMARK_BOOKKEEPING_REMAINS_DEMOTED_UNLESS_IT_LOCALIZES_VALIDATES_FALSIFIES_OR_CERTIFIES",
     "preserves_terminal_truth": "ACTIVE_FAIL_CLOSED_ONE_TERMINAL_ACCEPTANCE_ROOT__UNIVERSAL_COVER_OR_FROZEN_PROTOCOL_ROUTE__TERMINAL_FALSE",
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "option_preservation": {
+      "pointer": "canonical/governance/CURRENT_OPTION_PRESERVING_OPTIMIZATION.json",
+      "invariant": "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
+      "physical_deletion_authority_from_scheduler": false,
+      "reextract_on_new_cost_model": true
+    }
   },
   "live_capability_ownership_20261008_v1": {
     "status": "ACTIVE_AUTHORITATIVE_LIVE_OWNERSHIP_ONTOLOGY__UNIVERSAL_INVOCATION_INVARIANT",
@@ -2011,5 +2017,19 @@
       "reusable": true
     },
     "capability_lifecycle_complete": true
+  },
+  "current_option_preserving_optimization_20261008_v1": {
+    "status": "ACTIVE_FAIL_CLOSED_OPTION_PRESERVATION_LAW",
+    "pointer": {
+      "path": "canonical/governance/CURRENT_OPTION_PRESERVING_OPTIMIZATION.json"
+    },
+    "policy": {
+      "path": "canonical/governance/OPTION_PRESERVING_CAPABILITY_OPTIMIZATION_20261008_V1.json"
+    },
+    "runtime": {
+      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py"
+    },
+    "physical_deletion_requires_separate_proof": true,
+    "terminal_credit_delta": 0
   }
 }
