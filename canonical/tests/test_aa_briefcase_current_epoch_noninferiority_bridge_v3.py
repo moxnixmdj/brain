@@ -34,6 +34,7 @@ class T(unittest.TestCase):
         )
         self.assertEqual(out["predicate_results"], {p: True for p in PREDICATES})
         self.assertFalse(out["numeric_elo_reconstruction_required"])
+        self.assertFalse(out["numeric_comparable_elo_used"])
         self.assertFalse(out["official_owner_elo_claimed"])
         self.assertTrue(out["single_result_reused_across_predicates"])
         self.assertFalse(out["historical_epoch_rewritten"])
@@ -45,7 +46,8 @@ class T(unittest.TestCase):
         )
         self.assertEqual(out["predicate_results"], {p: True for p in PREDICATES})
         self.assertTrue(out["numeric_elo_reconstruction_required"])
-        self.assertFalse(out["official_owner_elo_claimed"])\n        self.assertTrue(out["numeric_comparable_elo_used"])
+        self.assertTrue(out["numeric_comparable_elo_used"])
+        self.assertFalse(out["official_owner_elo_claimed"])
 
     def test_below_score_fails_without_affecting_direct_route(self):
         out = compile_current_epoch_noninferiority(
