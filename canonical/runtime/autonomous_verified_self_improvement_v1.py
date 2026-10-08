@@ -42,6 +42,9 @@ from canonical.runtime.universal_solver_episode_verification_authenticator_v1 im
     authenticate as authenticate_episode_verification,
     reauthenticate_record as reauthenticate_episode_record,
 )
+from canonical.runtime.proof_carrying_outcome_v1 import (
+    verify_proof_carrying_outcome_integrity,
+)
 from canonical.runtime import universal_verified_adaptive_solver_v12 as solver_v12
 
 SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1"
@@ -131,6 +134,9 @@ def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None
 
     proof_outcome = out.get("proof_carrying_outcome")
     if isinstance(proof_outcome, Mapping):
+        integrity = verify_proof_carrying_outcome_integrity(proof_outcome)
+        if integrity.get("pass") is not True:
+            return None
         if (
             proof_outcome.get("pass") is not True
             or proof_outcome.get("semantic_acceptance_complete") is not True
