@@ -102,6 +102,148 @@ class GeneralAdequateDecisionPolicyCoverIntegrationV1Tests(TestCase):
         self.assertEqual(out["next_observation_request"], next_request)
         execute.assert_not_called()
 
+    def test_information_provider_can_supply_authenticated_cover_observation(self):
+        request = self._request()
+        next_request = {
+            "schema": "PROJECT_BRAIN_POLICY_COVER_OBSERVATION_REQUEST_V1",
+            "state_id": "state-1",
+            "discriminator_id": "disc-1",
+            "surviving_world_ids": ["w1", "w2"],
+            "observation_authority": False,
+        }
+        cover_open = {
+            "pass": False,
+            "status": "OPEN__POLICY_COVER_OBSERVATION_BINDING_REQUIRED",
+            "reason": "SELECTED_POLICY_CHANGING_OBSERVATION_NOT_AUTHENTICATED",
+            "next_observation_request": next_request,
+        }
+        binding = {
+            "receipt": {
+                "path": "canonical/governance/obs-disc-1.json",
+                "git_blob_sha": "abc",
+            },
+            "verification": {
+                "path": "canonical/verification/obs-disc-1.json",
+                "git_blob_sha": "def",
+            },
+        }
+        provider = Mock(return_value={"observation_binding": binding})
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value={"pass": True}), \
+             patch.object(controller, "evaluate_p3", return_value=self._p3_open_without_information_gap()), \
+             patch.object(
+                 controller,
+                 "evaluate_policy_cover",
+                 side_effect=[cover_open, self._cover_pass()],
+             ) as cover, \
+             patch.object(controller, "_authenticate_policy_execution_binding", return_value={"pass": True}), \
+             patch.object(controller, "run_universal", return_value={"pass": True, "verified_target_effects": True}), \
+             patch.object(controller, "_authenticate_goal_satisfaction_binding", return_value={"pass": True, "independent_verifier_id": "test"}):
+            out = controller.run(request, information_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(cover.call_count, 2)
+        provider.assert_called_once()
+        packet = provider.call_args.args[0]
+        self.assertEqual(
+            packet["request_kind"],
+            "AUTHENTICATED_POLICY_COVER_OBSERVATION_BINDING",
+        )
+        self.assertEqual(packet["discriminator_id"], "disc-1")
+        self.assertFalse(packet["information_authority"])
+        second_cover_payload = cover.call_args_list[1].args[0]
+        self.assertEqual(
+            second_cover_payload["observation_bindings_by_discriminator_id"][
+                "disc-1"
+            ],
+            binding,
+        )
+        self.assertEqual(
+            out["information_trace"][0]["kind"],
+            "POLICY_COVER_OBSERVATION",
+        )
+        self.assertFalse(out["information_trace"][0]["provider_authority"])
+
+    def test_information_provider_can_supply_multiple_cover_observations_in_one_run(self):
+        request = self._request()
+
+        def cover_open(discriminator_id):
+            return {
+                "pass": False,
+                "status": "OPEN__POLICY_COVER_OBSERVATION_BINDING_REQUIRED",
+                "reason": "SELECTED_POLICY_CHANGING_OBSERVATION_NOT_AUTHENTICATED",
+                "next_observation_request": {
+                    "schema": "PROJECT_BRAIN_POLICY_COVER_OBSERVATION_REQUEST_V1",
+                    "state_id": "state-1",
+                    "discriminator_id": discriminator_id,
+                    "surviving_world_ids": ["w1", "w2"],
+                    "observation_authority": False,
+                },
+            }
+
+        def provider(packet, index):
+            discriminator_id = packet["discriminator_id"]
+            return {
+                "receipt": {
+                    "path": "canonical/governance/" + discriminator_id + ".json",
+                    "git_blob_sha": "abc",
+                },
+                "verification": {
+                    "path": "canonical/verification/" + discriminator_id + ".json",
+                    "git_blob_sha": "def",
+                },
+            }
+
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value={"pass": True}), \
+             patch.object(controller, "evaluate_p3", return_value=self._p3_open_without_information_gap()), \
+             patch.object(
+                 controller,
+                 "evaluate_policy_cover",
+                 side_effect=[
+                     cover_open("disc-1"),
+                     cover_open("disc-2"),
+                     self._cover_pass(),
+                 ],
+             ) as cover, \
+             patch.object(controller, "_authenticate_policy_execution_binding", return_value={"pass": True}), \
+             patch.object(controller, "run_universal", return_value={"pass": True, "verified_target_effects": True}), \
+             patch.object(controller, "_authenticate_goal_satisfaction_binding", return_value={"pass": True, "independent_verifier_id": "test"}):
+            out = controller.run(request, information_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(cover.call_count, 3)
+        final_cover_payload = cover.call_args_list[2].args[0]
+        self.assertEqual(
+            set(
+                final_cover_payload[
+                    "observation_bindings_by_discriminator_id"
+                ]
+            ),
+            {"disc-1", "disc-2"},
+        )
+        self.assertEqual(
+            [row["discriminator_id"] for row in out["information_trace"]],
+            ["disc-1", "disc-2"],
+        )
+
+    def test_cover_executor_fail_closed_status_is_not_downgraded_to_open(self):
+        request = self._request()
+        cover_failure = {
+            "pass": False,
+            "status": "FAIL_CLOSED__POLICY_COVER_OBSERVATION_BINDING_INVALID",
+            "reason": "forged observation",
+        }
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value={"pass": True}), \
+             patch.object(controller, "evaluate_p3", return_value=self._p3_open_without_information_gap()), \
+             patch.object(controller, "evaluate_policy_cover", return_value=cover_failure):
+            out = controller.run(request)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("POLICY_COVER_EXECUTOR_FAIL_CLOSED", out["reason"])
+
     def test_cover_pass_without_adequacy_authority_fails_closed(self):
         request = self._request()
         bad_cover = dict(self._cover_pass())
