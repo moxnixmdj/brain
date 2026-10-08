@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CURRENT_OWNER_TARGET_ATTAINABILITY_RECOMPILE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "CURRENT_MATCHED_TARGET_ATTAINABILITY_REOPENED__219_REQUIRED_LT_220_CREDITABLE_CAPACITY__ONE_SLOT_MARGIN__ZERO_SCORE_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "historical_predicate_provenance": {
+    "value_percent": 66.4,
+    "preserved": true
+  },
+  "current_owner_target": {
+    "binding": "canonical/evidence/TB4_OPUS55_CURRENT_OWNER_TARGET_REFRESH_20261008_V1.json",
+    "verification": "canonical/verification/TB4_OPUS55_CURRENT_OWNER_TARGET_LIVE_SOURCE_VERIFICATION_20261008_V1.json",
+    "detailed_score_percent": 66.36,
+    "task_count": 66,
+    "trials_per_task": 5,
+    "total_trials": 330,
+    "required_successes": 219
+  },
+  "carrier_chain": {
+    "recovery_identity_binding": "canonical/governance/TB4_RECOVERY_TASK_IDENTITY_BINDING_20261006_V1.json",
+    "protocol_equivalence_binding": "canonical/governance/TB4_BUILDKITE_PROTOCOL_EQUIVALENCE_BINDING_20261006_V1.json",
+    "zero_spend_binding": "canonical/governance/TB4_BUILDKITE_ZERO_SPEND_HARD_STOP_BINDING_20261006_V1.json",
+    "current_creditable_task_count": 44,
+    "trials_per_task": 5,
+    "maximum_creditable_success_slots": 220
+  },
+  "attainability_math": {
+    "maximum_creditable_success_slots": 220,
+    "current_matched_required_successes": 219,
+    "margin_slots": 1,
+    "attainable_under_bound_resource_scope": true,
+    "proof": "44*5=220__AND__219<=220__AND__220-219=1"
+  },
+  "supersession_scope": {
+    "revokes_for_current_matched_owner_target": [
+      "ZERO_SLACK_CLAIM",
+      "REQUIRED_SUCCESSES_220_AS_OPUS55_NONINFERIORITY_TARGET",
+      "ATTAINABILITY_BLOCKED_SOLELY_BY_220_OF_220_REQUIREMENT"
+    ],
+    "does_not_revoke": [
+      "HISTORICAL_66_4_PREDICATE_PROVENANCE",
+      "NO_REPLAY_RULES",
+      "FROZEN_TASK_IDENTITIES",
+      "PROTOCOL_EQUIVALENCE_REQUIREMENT",
+      "ZERO_SPEND_HARD_STOP",
+      "REAL_SUCCESS_RECEIPT_OR_SOUND_STRONGER_CERTIFICATE_REQUIREMENT"
+    ]
+  },
+  "execution_state": {
+    "attainability_reopened": true,
+    "score_proved": false,
+    "execution_authority": false,
+    "reason": "ATTAINABILITY_IS_NECESSARY_NOT_SUFFICIENT__REAL_THRESHOLD_REACHING_RECEIPTS_OR_A_SOUND_STRONGER_CERTIFICATE_STILL_REQUIRED"
+  },
+  "slack_expansion": {
+    "formula_after_k_additional_recovered_tasks": "1+5*k",
+    "k0": 1,
+    "k1": 6,
+    "k2": 11,
+    "k3": 16,
+    "k4": 21
+  },
+  "hard_nonclaims": [
+    "NO_TB4_SCORE_PROMOTION",
+    "NO_ATOMIC_ACCEPTANCE_PREDICATE_PROMOTION",
+    "NO_TERMINAL_CASE_EXECUTION_AUTHORITY",
+    "NO_CAPABILITY_FAMILY_OR_OWNERSHIP_PROMOTION"
+  ],
+  "accounting": {
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false
+}
