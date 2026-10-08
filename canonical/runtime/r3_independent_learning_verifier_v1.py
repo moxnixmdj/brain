@@ -429,7 +429,7 @@ def verify_skill_request(
     state_path: str | Path,
     receipt_dir: str = DEFAULT_RECEIPT_DIR,
 ) -> Mapping[str, Any] | None:
-    """Verify only exact observed-scope candidates from authenticated episodes."""
+    """Verify exact candidates and narrowly proved non-effectful structural supersets."""
     try:
         if not isinstance(request, Mapping):
             return None
