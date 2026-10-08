@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_V1",
   "date": "2026-10-08",
-  "status": "ACTIVE_LIVE_DIRECT_ADEQUACY_ROUTE_LAYER__THREE_EXACT_CELLS_PLUS_ONE_TRANSACTIONAL_CODEC_FAMILY",
+  "status": "ACTIVE_LIVE_DIRECT_ADEQUACY_ROUTE_LAYER__THREE_EXACT_CELLS_PLUS_THREE_BOUNDED_TRANSACTIONAL_FAMILIES",
   "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE_INCOMPLETE",
   "runtime": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
   "controller": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
@@ -51,6 +51,38 @@
         "git_blob_sha": "16947dbae01230fe3739d8016dcdb63c10e17675",
         "isolated_checks": 16
       }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1",
+      "capability_id": "docx.document.create.python_docx",
+      "runtime": "canonical/runtime/r2_docx_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "631fcf2aa82d090d1f3ade6199829f060b000937",
+      "preflight": "EXACT_TWO_CLAUSE_LITERAL_DOCX_GRAMMAR_PLUS_CURRENT_DETERMINISTIC_COMPILER_CHAIN",
+      "acceptance": "EXACT_INTENT_BINDING_PLUS_PRODUCER_INDEPENDENT_STDLIB_OOXML_VERIFICATION",
+      "transaction": "DOCX_PLUS_INTENT_SIDECAR__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_TWO_CLAUSE_LITERAL_DOCX_PLUS_INDEPENDENT_OOXML_VERIFICATION_FAMILY",
+      "verification": {
+        "path": "canonical/verification/R2_DOCX_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "f47ba33f5d8aed21bd856315380fc5b391a7e314",
+        "isolated_checks": "5_STANDALONE_PLUS_20_MODIFIED_SURFACE"
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::TRANSACTIONAL_TABULAR_ARTIFACT_FAMILY_V1",
+      "capability_id": "DYNAMIC_VERIFIED_BOUND_TABULAR_PRODUCER",
+      "runtime": "canonical/runtime/r2_tabular_artifact_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "07fa3fd50913f08cb20997dcc8b316f841719f23",
+      "preflight": "EXACT_JSON_TO_SQLITE_OR_XLSX_GRAMMAR_PLUS_VERIFIED_BOUND_PRODUCER_VERIFIER_PAIR",
+      "acceptance": "PRODUCER_INDEPENDENT_QUERY_OR_REOPEN_AGAINST_CANONICAL_SOURCE_JSON_PLUS_EXACT_ARTIFACT_HASH_BINDING",
+      "transaction": "ONE_REPOSITORY_LOCAL_OUTPUT_FILE__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_TRANSACTIONAL_JSON_TO_SQLITE_OR_XLSX_GOAL_FAMILY",
+      "current_verified_producer_verifier_pair_count": 2,
+      "verification": {
+        "path": "canonical/verification/R2_TRANSACTIONAL_TABULAR_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "227ec5c4a0731627d4f11f6b6e89c14fd3568431",
+        "isolated_checks": "8_TABULAR_PLUS_5_DOCX_NEIGHBOR_PLUS_18_COMPOSED_DIRECT",
+        "real_direct_semantic_replays": 2
+      }
     }
   ],
   "expansion_law": "ADD_A_ROUTE_ONLY_WHEN_BOTH_AN_EXACT_SIDE_EFFECT_FREE_PREFLIGHT_AND_AN_INDEPENDENT_FULL_RAW_OBLIGATION_ACCEPTANCE_VERIFIER_EXIST",
@@ -59,18 +91,21 @@
     "NO_CLAIM_UNMATCHED_GOALS_ARE_INADEQUATE",
     "NO_CLAIM_EXECUTION_SUCCESS_ALONE_IS_GOAL_SUCCESS",
     "NO_CLAIM_THE_CODEC_FAMILY_GENERALIZES_BEYOND_THE_EXACT_DECLARED_GRAMMAR_OR_TO_EXTERNAL_IRREVERSIBLE_EFFECTS",
-    "NO_TERMINAL_CREDIT"
+    "NO_TERMINAL_CREDIT",
+    "NO_CLAIM_THE_DOCX_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_TWO_CLAUSE_GRAMMAR_OR_TO_EXTERNAL_IRREVERSIBLE_EFFECTS",
+    "NO_CLAIM_THE_TABULAR_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_SQLITE_XLSX_GRAMMARS_OR_TO_EXTERNAL_IRREVERSIBLE_EFFECTS",
+    "NO_CLAIM_THREE_BOUNDED_FAMILIES_EXHAUST_POSITIVE_ADEQUACY_COVERAGE"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
   },
-  "current_route_count": 4,
+  "current_route_count": 6,
   "exact_cell_count": 3,
-  "route_expansion_note": "THREE_EXACT_CELLS_PLUS_ONE_TRANSACTIONAL_STRUCTURED_BINARY_FAMILY_ACTIVE__CODEC_FAMILY_CURRENTLY_HAS_FOUR_INDEPENDENTLY_VERIFIED_BOUND_CAPABILITY_MEMBERS__EVERY_ROUTE_REQUIRES_EXACT_PREFLIGHT_AND_FULL_RAW_ACCEPTANCE",
+  "route_expansion_note": "THREE_EXACT_CELLS_PLUS_STRUCTURED_BINARY_CODEC_DOCX_AND_TABULAR_TRANSACTIONAL_FAMILIES_ACTIVE__EVERY_ROUTE_REQUIRES_EXACT_PREFLIGHT_AND_FULL_INDEPENDENT_RAW_ACCEPTANCE",
   "runtime_binding": {
     "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
-    "git_blob_sha": "92d46eff9d78ad6616a2cbc6d9bde1c8d5813332"
+    "git_blob_sha": "2c30b38ae33fddce27d24955b8a29a5c0881f397"
   },
-  "bounded_family_count": 1
+  "bounded_family_count": 3
 }
