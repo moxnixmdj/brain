@@ -4,7 +4,9 @@ V2 removes the broad negative premise "no load-bearing semantics outside V3".
 The independently verified P3 scope certificate proves the load-bearing scope is
 the exact union of six dimensions. Three are discharged mechanically by the V3
 runtime; the three genuinely semantic context bindings remain explicit selected
-truth certificates.
+truth certificates. This V2 adapter currently has no trusted evaluator that
+can authenticate those global completeness propositions for a real context.
+Caller-built success dictionaries are quarantined, not accepted.
 
 This module proves membership only. Adequacy comes from the separately verified
 V3 top-law and promotion remains with existing fail-closed D_B admission.
@@ -70,7 +72,13 @@ def _truth_certificate(value: Any, predicate_id: str) -> tuple[bool, str]:
         return False, "SEMANTIC_CERTIFICATE_MUST_NOT_SELF_CERTIFY_ADEQUACY"
     if value.get("terminal_authority") is not False:
         return False, "SEMANTIC_CERTIFICATE_TERMINAL_AUTHORITY_INVALID"
-    return True, "PASS"
+    # This method receives attacker-/caller-writable data, not a recomputed
+    # semantic proof. None of the checked fields establishes the asserted
+    # global property for the *actual* source, audience, or task scope.
+    # The checked V6 predicate certificate itself covers only a bounded
+    # defined-term condition, not any of these three completeness claims.
+    # Fail closed until a trusted, context-bound proof verifier is wired here.
+    return False, "UNAUTHENTICATED_P3_CONTEXT_COMPLETENESS_PROOF"
 
 
 def _v3_mechanical_audit(result: Mapping[str, Any]) -> tuple[bool, list[str]]:
