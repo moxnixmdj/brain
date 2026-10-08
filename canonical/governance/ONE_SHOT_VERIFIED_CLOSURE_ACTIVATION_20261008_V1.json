@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_SHOT_VERIFIED_CLOSURE_ACTIVATION_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE_CANDIDATE__FAIL_CLOSED_FIXED_POINT_EXECUTION__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "EXECUTE_CURRENT_OWNED_CLOSURE_MACHINERY_TO_A_VERIFIED_FIXED_POINT_AND_SEPARATE_INTERNAL_ACTIONABLE_RESIDUALS_FROM_IRREDUCIBLE_EXTERNAL_INFORMATION_AND_ACCEPTANCE_EVIDENCE",
+  "runtime_path": "canonical/runtime/one_shot_verified_closure_v1.py",
+  "tests_path": "canonical/tests/test_one_shot_verified_closure_v1.py",
+  "invariants": [
+    "NO_INTERNAL_ACTIONABLE_RESIDUAL_MAY_BE_RELABELLED_EXTERNAL",
+    "OPEN_CHECKPOINT_EVIDENCE_IS_NOT_AUTOMATICALLY_A_CAPABILITY_DEFICIT",
+    "R1_R2_AUTHORITY_AND_R3_RECEIPT_BYTE_DRIFT_FAIL_CLOSED",
+    "R3_IMPROVEMENT_WORK_IS_DRAINED_UNTIL_NO_PROGRESS_OR_EXPLICIT_ROUND_BOUND",
+    "PASS_REQUIRES_FIXED_POINT_AND_ZERO_IDENTIFIED_INTERNAL_ACTIONABLE_RESIDUALS"
+  ],
+  "authority": {
+    "execution_authority": true,
+    "capability_promotion_authority": false,
+    "semantic_truth_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_EXTERNAL_REALITY_IS_OBSERVABLE",
+    "NO_CLAIM_EVERY_CAPABILITY_IS_ACQUIRABLE",
+    "NO_CLAIM_PERMANENT_GLOBAL_OPTIMALITY",
+    "NO_TERMINAL_CREDIT_FROM_CONTROLLER_INSTALLATION"
+  ]
+}
