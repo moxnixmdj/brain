@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFIER_FIRST_PROOF_CARRYING_COGNITION_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE_FAIL_CLOSED_VERIFIER_FIRST_COGNITION_LAW",
+  "core_law": "CONTRACT_EVIDENCE_COUNTEREXAMPLE_PROOF_AND_COST_ARE_THE_COMMON_CURRENCY__CREATIVE_GENERATION_NEVER_OWNS_TRUTH",
+  "primary_order": [
+    "PRESERVE_EXACT_RAW_OBLIGATIONS",
+    "COMPILE_EXPLICIT_VERIFIER_ROUTES_BEFORE_OPEN_ENDED_GENERATION_WHEN_POSSIBLE",
+    "GENERATE_OR_SELECT_POLICY",
+    "EXECUTE_ONLY_THROUGH_EXISTING_AUTHORITY_BOUNDARIES",
+    "BIND_EVERY_RAW_OBLIGATION_TO_AUTHENTICATED_ACCEPTANCE_EVIDENCE",
+    "EMIT_NON_SELF_CERTIFYING_PROOF_CARRYING_OUTCOME",
+    "FEED_VERIFIED_SUCCESS_TO_R3_FOR_ADAPTATION_WITHOUT_AUTOMATIC_PROMOTION"
+  ],
+  "verifier_compiler": {
+    "runtime": "canonical/runtime/verifier_compiler_v1.py",
+    "input": "LOSSLESS_RAW_TASK_ACCEPTANCE_CONTRACT",
+    "required_property": "EVERY_REQUIRED_RAW_OBLIGATION_HAS_ONE_EXPLICIT_VERIFIER_ROUTE_OR_THE_TASK_REMAINS_OPEN",
+    "structural_checkers": "SUPPLEMENTAL_ONLY_UNLESS_SEPARATELY_PROVED_SEMANTICALLY_SUFFICIENT",
+    "arbitrary_semantic_truth_invention": false,
+    "acceptance_authority": false
+  },
+  "proof_carrying_outcome": {
+    "runtime": "canonical/runtime/proof_carrying_outcome_v1.py",
+    "authority_source": "EXISTING_INDEPENDENTLY_AUTHENTICATED_R2_GOAL_SATISFACTION_BINDING",
+    "self_certifying": false,
+    "acceptance_authority": false,
+    "capability_promotion_authority": false,
+    "terminal_authority": false,
+    "required_property": "EVERY_EXACT_RAW_ACCEPTANCE_OBLIGATION_REMAINS_BOUND_TO_THE_AUTHENTICATED_FINAL_ACCEPTANCE_EVIDENCE"
+  },
+  "r2_integration": {
+    "controller": "canonical/runtime/general_adequate_decision_controller_v1.py",
+    "open_states_expose_verifier_plan": true,
+    "success_requires_proof_carrying_outcome_build": true,
+    "existing_goal_satisfaction_authority_preserved": true,
+    "policy_cover_authority_unchanged": true,
+    "learned_judgment_remains_advisory_only": true
+  },
+  "r3_integration": {
+    "runtime": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+    "live_runtime": "canonical/runtime/live_brain_runtime_v1.py",
+    "direct_r2_verified_success_observed": true,
+    "proof_carrying_outcome_retained_as_bounded_success_evidence": true,
+    "adaptation_work_queued": true,
+    "automatic_skill_promotion": false,
+    "independent_episode_and_skill_verification_still_required": true
+  },
+  "unresolved_rule": "IF_NO_SOUND_VERIFIER_OR_AUTHENTICATED_ACCEPTANCE_RELATION_EXISTS_THE_OBLIGATION_REMAINS_OPEN__DO_NOT_DOWNGRADE_TO_PROBABLE_SUCCESS",
+  "future_architecture_alignment": {
+    "decision_quotient": "VERIFIER_PLAN_IS_THE_ACCEPTANCE_SIDE_OF_DECISION_QUOTIENT_REFINEMENT",
+    "capability_compiler": "CAPABILITY_HOLES_MUST_CARRY_A_VERIFIER_BEFORE_SYNTHESIS_CAN_RECEIVE_PROMOTION_CREDIT",
+    "abstraction_compiler": "ONLY_PROOF_CARRYING_VERIFIED_EPISODES_MAY_FEED_DURABLE_ABSTRACTION_PROMOTION",
+    "option_preservation": "VERIFIER_AND_SEMANTIC_CONTRACTS_ARE_PRESERVED_ABOVE_SUBSTRATE_SPECIFIC_IMPLEMENTATIONS"
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_OPEN_WORLD_VERIFIER_COMPLETENESS",
+    "NO_CLAIM_ALL_RAW_LANGUAGE_OBLIGATIONS_ARE_AUTOMATICALLY_DECIDABLE",
+    "NO_PROOF_CARRYING_OUTCOME_AUTHORITY_INDEPENDENT_OF_ITS_AUTHENTICATED_SOURCE_BINDING",
+    "NO_AUTOMATIC_R3_PROMOTION_FROM_SUCCESS_OBSERVATION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
