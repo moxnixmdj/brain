@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_R3_LIVE_REUSE_V2_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__R3_LIVE_REUSE_9_OF_9",
+  "subject_branch": "r3-live-reuse-v2-20261008",
+  "subject_commit_before_evidence": "1c7989c62262223e5ba1f103459ca753b6c0d5eb",
+  "isolated_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+  },
+  "verification": {
+    "command": "python3 -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v",
+    "tests_run": 9,
+    "tests_passed": 9,
+    "tests_failed": 0,
+    "elapsed_seconds": 0.013
+  },
+  "newly_proved_behaviors": [
+    "active independently verified skills are automatically selected as reuse-first planning compression when exact executable applicability is proved",
+    "pre-effect learned-route failures may safely fall back to full solver search",
+    "effectful learned-route failures block fallback to prevent blind replay",
+    "reuse attempts and outcomes persist durably"
+  ],
+  "applicability_gate": [
+    "current scope is an independently verified source scope",
+    "stored invalidators are explicitly known absent",
+    "skill preconditions hold",
+    "skill postconditions cover current targets",
+    "every skill operation id exists in the current problem",
+    "current requires/provides exactly match the verified skill skeleton",
+    "the skill sequence is executable from current initial facts"
+  ],
+  "verification_boundary": {
+    "universal_solver_v10": "STUBBED_AT_MODULE_BOUNDARY; ALL TESTED CALLS MOCK V10 RUN",
+    "claim": "VERIFIES R3 DURABLE REUSE SELECTION, PROBLEM RESTRICTION, FALLBACK, AND NO-BLIND-REPLAY CONTROL LOGIC; DOES NOT RE-PROVE V10 INTERNALS"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
