@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_P3_POLICY_INFLUENCE_V10_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__KERNEL_10_OF_10_AND_ROUTING_DELTA_7_OF_7_ON_TWO_INDEPENDENT_SPRITES__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "kernel": {
+      "path": "canonical/runtime/p3_policy_influence_relevance_cell_v1.py",
+      "git_blob_sha": "b9db2cff043cdf5e8184e6d6849857fd0da750f2"
+    },
+    "kernel_tests": {
+      "path": "canonical/tests/test_p3_policy_influence_relevance_cell_v1.py",
+      "git_blob_sha": "fb31499f3c274b6d4202a4cc321a29e8d3fb926e"
+    },
+    "front_door": {
+      "path": "canonical/runtime/p3_real_context_v3_admission_v10.py",
+      "git_blob_sha": "4c00507df77ed547a84a20265040edb5e5fc4c1c"
+    },
+    "front_door_tests": {
+      "path": "canonical/tests/test_p3_real_context_v3_admission_v10.py",
+      "git_blob_sha": "6e406005f7eb3d0aa68051dcfc97b8709c4c8ed9"
+    },
+    "kernel_replay": {
+      "path": "canonical/verification/p3_policy_influence_v10_kernel_replay_v1.py",
+      "git_blob_sha": "db081b6a94bbfacf321a7f3fa565e52f9ef085a7"
+    },
+    "compositional_replay": {
+      "path": "canonical/verification/p3_policy_influence_v10_compositional_replay_v1.py",
+      "git_blob_sha": "b338859fb2df6c9f0c03a46f8168ebcb3572628a"
+    },
+    "governance": {
+      "path": "canonical/governance/P3_POLICY_INFLUENCE_NONINTERFERENCE_20261008_V1.json",
+      "git_blob_sha": "a66cc5782c1b17c9aeafe984022fa25a32b5a061"
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "kernel_tests_passed": 10,
+      "kernel_tests_run": 10,
+      "routing_delta_tests_passed": 7,
+      "routing_delta_tests_run": 7
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "kernel_tests_passed": 10,
+      "kernel_tests_run": 10,
+      "routing_delta_tests_passed": 7,
+      "routing_delta_tests_run": 7
+    }
+  ],
+  "proved": [
+    "EXACT_DISCRIMINATOR_BUCKETS_WITH_NONEMPTY_ADEQUATE_POLICY_INTERSECTION_SUPPORT_A_DETERMINISTIC_COMMON_POLICY",
+    "RESIDUAL_WORLD_VARIATION_INSIDE_SUCH_A_BUCKET_CANNOT_INVALIDATE_THE_SELECTED_COMMON_POLICY",
+    "DROP_ONE_DISCRIMINATOR_ABLATION_CLASSIFIES_A_DISCRIMINATOR_RELEVANT_WHEN_REMOVAL_CREATES_A_BUCKET_WITH_EMPTY_COMMON_POLICY_INTERSECTION",
+    "A_DISCRIMINATOR_IS_CLASSIFIED_IRRELEVANT_ONLY_WHEN_ITS_REMOVAL_PRESERVES_A_NONEMPTY_COMMON_POLICY_INTERSECTION_FOR_EVERY_MERGED_BUCKET",
+    "VERIFICATION_RECEIPT_DRIFT_FAILS_CLOSED",
+    "UNVERIFIED_POLICY_WORLD_RECEIPT_FAILS_CLOSED",
+    "REQUIRED_CLAIMS_CANNOT_BE_OMITTED_BY_A_POLICY",
+    "EXPLICIT_ITEM_BUDGET_CANNOT_BE_EXCEEDED_BY_A_POLICY",
+    "CALLER_CANNOT_SMUGGLE_SELECTION_ORDER_THROUGH_POLICY_BINDINGS",
+    "CURRENT_DISCRIMINATOR_BUCKET_MUST_EXIST_IN_THE_VERIFIED_WORLD_UNIVERSE",
+    "V9_POSITIVE_ROUTE_PRECEDENCE_IS_PRESERVED_BY_THE_V10_DELTA",
+    "FAILED_EXPLICIT_OBJECTIVE_WEIGHT_AUTHORITY_CANNOT_FALL_THROUGH_TO_THE_V10_ROUTE",
+    "NON_RELEVANCE_V9_FAILURES_CANNOT_BE_SWALLOWED_BY_THE_V10_ROUTE",
+    "INVALID_POLICY_INFLUENCE_CONTRACT_FAILS_CLOSED",
+    "NO_SOURCE_POLICY_DB_U_OR_TERMINAL_AUTHORITY_ESCALATION"
+  ],
+  "verification_method_boundary": {
+    "kernel": "EXACT_BRANCH_BYTES_EXECUTED_DIRECTLY_ON_BOTH_SPRITES",
+    "routing_delta": "EXACT_V10_FRONT_DOOR_BYTES_WITH_CONTROLLED_V9_INTERFACE_STUB_AND_REAL_POLICY_INFLUENCE_KERNEL",
+    "reason_for_delta_isolation": "THE_TWO_SELECTED_SPRITE_SNAPSHOTS_PREDATE_THE_CURRENT_V8_V9_PREDECESSOR_CHAIN; V9_HAS_SEPARATE_PRIOR_VERIFICATION_AND_THIS_REPLAY_TESTS_ONLY_THE_NEW_V10_ROUTING_DELTA",
+    "github_actions": "NOT_USED_AS_POSITIVE_EVIDENCE__AVAILABLE_RUNS_FAILED_BEFORE_RUNNER_START_WITH_RUNNER_ID_ZERO_AND_ZERO_STEPS"
+  },
+  "causal_effect": {
+    "closed": "COMPLETE_EXACT_DECISION_DEPENDENCY_GRAPH_IS_NO_LONGER_THE_ONLY_NON_WEIGHT_MECHANISM_FOR_CAPACITY_BINDING_RELEVANCE",
+    "new_sufficient_route": "INDEPENDENTLY_AUTHENTICATED_SOUND_SOURCE_COMPATIBLE_POLICY_WORLD_PARTITION_WITH_COMMON_ADEQUATE_POLICY_PER_DISCRIMINATOR_BUCKET",
+    "remaining": "CONSTRUCT_OR_AUTHENTICATE_SUCH_A_POLICY_WORLD_OVERAPPROXIMATION_AND_POLICY_ADEQUACY_BINDINGS_FOR_EACH_REACHED_REAL_CONTEXT_NOT_CLOSED_BY_STRONGER_EXISTING_ROUTES"
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_FREE_FORM_SEMANTIC_RELEVANCE",
+    "NO_CLAIM_EVERY_REAL_P3_CONTEXT_ALREADY_HAS_A_VERIFIED_POLICY_WORLD_CONTRACT",
+    "NO_GLOBAL_P3_CLOSURE",
+    "NO_U_EMPTY_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "kernel_checks_passed_total": 20,
+    "routing_delta_checks_passed_total": 14,
+    "total_checks_passed": 34,
+    "total_checks_run": 34,
+    "terminal_credit_delta": 0
+  }
+}
