@@ -50,7 +50,9 @@ def _fail(reason: str, **detail: Any) -> dict[str, Any]:
 def _ids(values: Sequence[str], *, label: str) -> tuple[str, ...]:
     if not isinstance(values, Sequence) or isinstance(values, (str, bytes)) or not values:
         raise ValueError(label + "_INVALID_OR_EMPTY")
-    out = tuple(str(v) for v in values)
+    if any(not isinstance(v, str) for v in values):
+        raise ValueError(label + "_MUST_BE_STRINGS")
+    out = tuple(values)
     if any(not v for v in out) or len(set(out)) != len(out):
         raise ValueError(label + "_INVALID_OR_DUPLICATE")
     return out
@@ -194,6 +196,8 @@ def reduce_obstruction(
     try:
         if not isinstance(payload, Mapping):
             return _fail("PAYLOAD_MAPPING_REQUIRED")
+        if set(payload) != {"region_ids", "discriminators", "policies"}:
+            return _fail("UNMODELED_OBSTRUCTION_INPUT_FIELDS")
         root = Path(repo_root).resolve(strict=True)
 
         regions = _ids(payload.get("region_ids"), label="REGION_IDS")
@@ -207,6 +211,8 @@ def reduce_obstruction(
         for i, row in enumerate(q_rows):
             if not isinstance(row, Mapping):
                 return _fail("DISCRIMINATOR_NOT_OBJECT", index=i)
+            if set(row) != {"discriminator_id", "outcomes"}:
+                return _fail("UNMODELED_DISCRIMINATOR_FIELDS", index=i)
             qid = row.get("discriminator_id")
             outcomes = row.get("outcomes")
             if not isinstance(qid, str) or not qid or qid in q_ids:
