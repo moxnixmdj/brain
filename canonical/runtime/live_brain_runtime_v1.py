@@ -69,7 +69,7 @@ def _decision_run(
     capability_expander: Callable[..., Mapping[str, Any] | None] | None,
     execution_provider: Callable[..., Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    from canonical.runtime.general_adequate_decision_totalized_v1 import run
+    from canonical.runtime.general_adequate_decision_fixed_point_v2 import run
     return run(
         request,
         repo_root=repo_root,
