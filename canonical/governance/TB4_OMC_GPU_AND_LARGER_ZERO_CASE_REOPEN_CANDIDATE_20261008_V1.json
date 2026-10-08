@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_OMC_GPU_AND_LARGER_ZERO_CASE_REOPEN_CANDIDATE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_ONLY__PRIMARY_SOURCE_GPU_FREE_TRIAL_ROUTE_FOUND__MATERIAL_RESOURCE_PREFLIGHT_OPEN__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "objective": "Reuse the TB4 slack-expansion theorem and reopen only resource-envelope matching for the four remaining resource-excluded tasks using OMC Cloud's currently documented no-card 30-day GPU/larger-configuration trial route, without reading task instructions or executing TB4 cases.",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "reused_prior_solution": {
+    "pull_request": 2406,
+    "head_commit": "f412a6e76a4b25ee404e193dd383cac46bc0710e",
+    "theorem": "FOR_K_ADDITIONAL_RESOURCE_EXCLUDED_TASKS_RECOVERED__SUCCESS_CEILING_EQUALS_220_PLUS_5K__SLACK_EQUALS_5K",
+    "truth_boundary": "PR2406_IS_PRIOR_CANDIDATE_WORK_NOT_CURRENT_CANONICAL_AUTHORITY"
+  },
+  "current_canonical_baseline": {
+    "minimum_recovery_cut": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+    "current_creditable_tasks": 44,
+    "current_success_ceiling": 220,
+    "required_successes": 220,
+    "current_slack_slots": 0
+  },
+  "primary_source_facts": [
+    {
+      "url": "https://omc.cloud/30-day-free-trial",
+      "facts": [
+        "THIRTY_DAY_FREE_TRIAL",
+        "NO_CREDIT_CARD_REQUIRED",
+        "ONE_STANDARD_CLOUD_SERVER_UP_TO_100_USD",
+        "GPU_OR_LARGER_CONFIGURATIONS_AVAILABLE_BY_ACCOUNT_EXECUTIVE_REQUEST",
+        "NO_AUTOMATIC_CHARGE_WITHOUT_PAYMENT_METHOD"
+      ]
+    },
+    {
+      "url": "https://omc.cloud/products/gpu",
+      "facts": [
+        "GPU_MODELS_INCLUDE_L4_L40S_RTX6000_ADA_A16_H100_H200",
+        "GPU_PASSTHROUGH_IS_DEDICATED",
+        "CUDA_ENVIRONMENTS_SUPPORTED",
+        "NVME_STORAGE",
+        "FULL_GPU_RESOURCE_SHAPE_AND_FREE_TRIAL_ENTITLEMENT_STILL_REQUIRE_ACCOUNT_LEVEL_BINDING"
+      ]
+    },
+    {
+      "url": "https://omc.cloud/usecases/ai-machine-learning",
+      "facts": [
+        "H100_80GB_AND_H200_LISTED",
+        "FULL_ROOT_CUDA_CONTROL",
+        "GPU_INSTANCES_HAVE_30_DAY_FREE_TRIAL",
+        "FREE_TRIAL_PAGE_STATES_NO_CREDIT_CARD_REQUIRED"
+      ]
+    },
+    {
+      "url": "https://omc.cloud/usecases/llm-training",
+      "facts": [
+        "GPU_CONFIGURATIONS_ADVERTISE_UP_TO_104_VCPU",
+        "UP_TO_512_GB_RAM",
+        "NVME_STORAGE"
+      ]
+    }
+  ],
+  "remaining_resource_excluded_tasks": [
+    {
+      "task": "terminal-bench/live-database-cutover",
+      "cpus": 16,
+      "memory_mb": 16384,
+      "storage_mb": 20480,
+      "gpus": 0,
+      "candidate_route": "OMC_LARGER_CPU_CONFIGURATION_TRIAL_EXCEPTION",
+      "incremental_slack_if_recovered": 5,
+      "state": "PROVIDER_ACCOUNT_RESOURCE_BINDING_REQUIRED"
+    },
+    {
+      "task": "terminal-bench/math-eval-grader",
+      "cpus": 8,
+      "memory_mb": 16384,
+      "storage_mb": 30720,
+      "gpus": 1,
+      "candidate_route": "OMC_GPU_FREE_TRIAL",
+      "incremental_slack_if_recovered": 5,
+      "state": "EXACT_CPU_RAM_DISK_GPU_MODEL_AND_CONTAINER_RUNTIME_PREFLIGHT_REQUIRED"
+    },
+    {
+      "task": "terminal-bench/fp8-rmsnorm-gemm",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 30720,
+      "gpus": 1,
+      "candidate_route": "OMC_H100_OR_PROTOCOL_EQUIVALENT_GPU_FREE_TRIAL",
+      "incremental_slack_if_recovered": 5,
+      "state": "EXACT_GPU_ARCHITECTURE_COMPATIBILITY_AND_RESOURCE_PREFLIGHT_REQUIRED"
+    },
+    {
+      "task": "terminal-bench/jax-speedrun-gpu",
+      "cpus": 16,
+      "memory_mb": 32768,
+      "storage_mb": 1024000,
+      "gpus": 1,
+      "candidate_route": "OMC_LARGER_GPU_CONFIGURATION_TRIAL_EXCEPTION",
+      "incremental_slack_if_recovered": 5,
+      "state": "ONE_TB_STORAGE_PLUS_CPU_RAM_GPU_ZERO_COST_TRIAL_BINDING_REQUIRED"
+    }
+  ],
+  "conditional_ceiling_table": [
+    {"additional_tasks_recovered": 0, "maximum_success_slots": 220, "slack_slots": 0},
+    {"additional_tasks_recovered": 1, "maximum_success_slots": 225, "slack_slots": 5},
+    {"additional_tasks_recovered": 2, "maximum_success_slots": 230, "slack_slots": 10},
+    {"additional_tasks_recovered": 3, "maximum_success_slots": 235, "slack_slots": 15},
+    {"additional_tasks_recovered": 4, "maximum_success_slots": 240, "slack_slots": 20}
+  ],
+  "required_zero_case_preflight_before_any_recompile": [
+    "MATERIAL_OMC_TRIAL_ACCOUNT_ACCESS",
+    "NO_PAYMENT_METHOD_BOUND",
+    "NO_PAID_UPGRADE_OR_AUTOMATIC_OVERAGE",
+    "EXACT_RESOURCE_SHAPE_IDENTITY",
+    "NPROC_MATCHES_DECLARED_TASK_CPU_REQUIREMENT",
+    "USABLE_MEMORY_MATCHES_DECLARED_REQUIREMENT",
+    "FREE_STORAGE_MATCHES_DECLARED_REQUIREMENT",
+    "GPU_MODEL_AND_PASSTHROUGH_OBSERVED_WHERE_REQUIRED",
+    "NVIDIA_SMI_AND_CUDA_RUNTIME_PASS_WHERE_REQUIRED",
+    "DOCKER_AND_DOCKER_COMPOSE_PASS",
+    "GPU_CONTAINER_PASSTHROUGH_PASS_WHERE_REQUIRED",
+    "HARBOR_ZERO_CASE_PROTOCOL_EQUIVALENCE_PASS_FOR_EACH_MATCHED_RESOURCE_CLASS"
+  ],
+  "decision_rule": {
+    "if_any_task_matches": "CONTENT_ADDRESS_PROVIDER_ACCOUNT_RECEIPT__RUN_ZERO_CASE_RESOURCE_PREFLIGHT_ONLY__INDEPENDENTLY_VERIFY_PROTOCOL_EQUIVALENCE__RECOMPILE_TB4_CEILING_BY_PLUS_5_PER_RECOVERED_TASK",
+    "if_no_task_matches": "KILL_OMC_SLACK_ROUTE_ONLY__PRESERVE_220_CEILING__DO_NOT_CONSUME_TB4_CASES"
+  },
+  "hard_rules": [
+    "NO_TASK_INSTRUCTION_SOLUTION_OR_HIDDEN_VERIFIER_CONTENT",
+    "NO_TB4_ACCEPTANCE_CASE_EXECUTION_FROM_THIS_CANDIDATE",
+    "NO_CLAIM_ANY_OMC_GPU_OR_LARGER_SHAPE_IS_GRANTED_TO_THIS ACCOUNT BEFORE RECEIPT",
+    "NO_PAID_UPGRADE",
+    "NO_CREDIT_CARD",
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_SCORE_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
+    "PRIMARY_SOURCE_PRODUCT AVAILABILITY DOES_NOT_EQUAL_ACCOUNT_ENTITLEMENT"
+  ],
+  "accounting": {
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
