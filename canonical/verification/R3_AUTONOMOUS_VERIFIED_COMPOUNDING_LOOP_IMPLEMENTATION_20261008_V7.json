@@ -93,7 +93,7 @@
   "verification_receipts": {
     "executable_frontier_handoff_current_bytes": {
       "path": "canonical/verification/R3_VERIFICATION_FRONTIER_HANDOFF_VERIFY_20261008_V2.json",
-      "git_blob_sha": "0baf85900c74807539bd53d646f15554d33b6eb9",
+      "git_blob_sha": "19d28b2b10340106912f5a38a3536573c1448429",
       "result": "26_OF_26_DRIVER_PASS__4_OF_4_FABRIC_WIRING_PASS"
     },
     "observability_truth_repair": {
