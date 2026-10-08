@@ -341,6 +341,47 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             "WAITING_FOR_NEW_INDEPENDENTLY_VERIFIED_EXPERIENCE",
         )
 
+    def test_drain_failed_repair_does_not_stall_unrelated_actionable_work(self):
+        path = self.temp_state()
+        stable_state = learning._empty_state()
+        learning._write_state(stable_state, path)
+        failed_repair = {
+            "schema": driver.SCHEMA,
+            "status": "IMPROVEMENT_REPAIR_ATTEMPT_DID_NOT_CLOSE_ORIGINAL_OBLIGATION",
+            "pass": False,
+            "progress": False,
+            "work_id": "repair",
+            "terminal_authority": False,
+        }
+        advanced_other = {
+            "schema": driver.SCHEMA,
+            "status": "IMPROVEMENT_ADVANCED__SUCCESS_BECAME_VERIFIED_EPISODE",
+            "pass": True,
+            "progress": True,
+            "work_id": "other",
+            "terminal_authority": False,
+        }
+        stable = {
+            "schema": driver.SCHEMA,
+            "status": "IMPROVEMENT_QUEUE_HAS_NO_CURRENTLY_ACTIONABLE_WORK",
+            "pass": True,
+            "progress": False,
+            "pending_count": 1,
+            "blockers": [],
+            "terminal_authority": False,
+        }
+        with mock.patch.object(
+            driver,
+            "advance_once",
+            side_effect=[failed_repair, advanced_other, stable],
+        ) as advance:
+            out = driver.drain(state_path=path, max_actions=3)
+
+        self.assertEqual(advance.call_count, 3)
+        self.assertEqual(out["progress_count"], 1)
+        self.assertEqual(out["status"], "IMPROVEMENT_QUEUE_ADVANCED")
+        self.assertFalse(out["pass"])
+
     def test_drain_stops_when_no_more_actionable_work_exists(self):
         path = self.temp_state()
         self.write_state(
