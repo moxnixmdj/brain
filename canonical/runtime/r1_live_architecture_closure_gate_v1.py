@@ -23,6 +23,11 @@ AUTHORITY_PATH = ROOT / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
 FABRIC_PATH = ROOT / "canonical/runtime/unified_cognitive_fabric_v1.py"
 INVOKER_PATH = ROOT / "canonical/runtime/live_capability_invoker_v1.py"
 SUBRUNTIME_PATH = ROOT / "canonical/runtime/live_brain_runtime_v1.py"
+CURRENT_RECEIPT_PATH = (
+    ROOT
+    / "canonical/verification/"
+    / "LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json"
+)
 
 EXPECTED_PUBLIC_ENTRYPOINT = "canonical.runtime.unified_cognitive_fabric_v1.run"
 EXPECTED_SUBRUNTIME_ENTRYPOINT = "canonical.runtime.live_brain_runtime_v1.run"
@@ -120,6 +125,90 @@ def _authority_binding_errors(
     return errors
 
 
+def _receipt_exact_blob_errors(
+    receipt: Mapping[str, Any],
+    *,
+    repo_root: str | Path = ROOT,
+) -> tuple[list[str], int]:
+    errors: list[str] = []
+    checked = 0
+    exact = receipt.get("exact_blobs")
+    if not isinstance(exact, Mapping):
+        return ["RECEIPT_EXACT_BLOBS_NOT_OBJECT"], checked
+
+    root = Path(repo_root).resolve()
+    for name, binding in sorted(exact.items()):
+        if not isinstance(binding, Mapping):
+            errors.append("RECEIPT_BINDING_NOT_OBJECT:" + str(name))
+            continue
+        rel = str(binding.get("path") or "")
+        declared = str(binding.get("git_blob_sha") or "")
+        if not rel or not declared:
+            errors.append("RECEIPT_BINDING_INCOMPLETE:" + str(name))
+            continue
+        path = (root / rel).resolve()
+        if root not in path.parents or not path.is_file():
+            errors.append("RECEIPT_BOUND_FILE_MISSING:" + str(name))
+            continue
+        checked += 1
+        if _git_blob_sha(path) != declared:
+            errors.append("RECEIPT_EXACT_BLOB_DRIFT:" + str(name))
+    return errors, checked
+
+
+def _current_receipt_errors(
+    authority: Mapping[str, Any],
+    *,
+    repo_root: str | Path = ROOT,
+) -> tuple[list[str], int]:
+    errors: list[str] = []
+    ownership = authority.get("live_capability_ownership_20261008_v1")
+    invocation = authority.get("r1_universal_live_capability_invocation_20261008_v1")
+    if not isinstance(ownership, Mapping):
+        return ["AUTHORITY_LIVE_OWNERSHIP_NODE_MISSING"], 0
+
+    verification = ownership.get("verification")
+    if not isinstance(verification, Mapping):
+        return ["AUTHORITY_VERIFICATION_BINDING_MISSING"], 0
+
+    expected_rel = str(CURRENT_RECEIPT_PATH.relative_to(ROOT)).replace("\\", "/")
+    rel = str(verification.get("path") or "")
+    declared = str(verification.get("git_blob_sha") or "")
+    if rel != expected_rel:
+        errors.append("AUTHORITY_VERIFICATION_RECEIPT_PATH_DRIFT")
+        return errors, 0
+
+    root = Path(repo_root).resolve()
+    receipt_path = (root / rel).resolve()
+    if root not in receipt_path.parents or not receipt_path.is_file():
+        errors.append("AUTHORITY_VERIFICATION_RECEIPT_MISSING")
+        return errors, 0
+
+    actual = _git_blob_sha(receipt_path)
+    if declared != actual:
+        errors.append("AUTHORITY_VERIFICATION_RECEIPT_BLOB_DRIFT")
+
+    if isinstance(invocation, Mapping):
+        inv_verification = invocation.get("verification")
+        if not isinstance(inv_verification, Mapping):
+            errors.append("INVOCATION_VERIFICATION_BINDING_MISSING")
+        else:
+            if str(inv_verification.get("path") or "") != rel:
+                errors.append("INVOCATION_VERIFICATION_RECEIPT_PATH_DIVERGENCE")
+            if str(inv_verification.get("git_blob_sha") or "") != actual:
+                errors.append("INVOCATION_VERIFICATION_RECEIPT_BLOB_DRIFT")
+
+    try:
+        receipt = _json(receipt_path)
+    except Exception as exc:
+        errors.append("VERIFICATION_RECEIPT_PARSE_FAILURE:" + type(exc).__name__)
+        return errors, 0
+
+    exact_errors, checked = _receipt_exact_blob_errors(receipt, repo_root=root)
+    errors.extend(exact_errors)
+    return errors, checked
+
+
 def evaluate(
     engine_descriptors: Mapping[str, str],
     *,
@@ -191,6 +280,11 @@ def evaluate(
             subruntime_blob=subruntime_blob,
         )
     )
+    receipt_errors, receipt_checked_binding_count = _current_receipt_errors(
+        authority,
+        repo_root=ROOT,
+    )
+    errors.extend(receipt_errors)
 
     passed = not errors
     return {
@@ -213,6 +307,8 @@ def evaluate(
         "fabric_blob_sha": fabric_blob,
         "invoker_blob_sha": invoker_blob,
         "subruntime_blob_sha": subruntime_blob,
+        "receipt_checked_binding_count": receipt_checked_binding_count,
+        "receipt_drift_error_count": len(receipt_errors),
         "semantic_selection_authority": False,
         "terminal_authority": False,
         "terminal_credit_delta": 0,
