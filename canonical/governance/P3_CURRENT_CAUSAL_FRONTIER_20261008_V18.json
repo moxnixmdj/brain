@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_P3_CURRENT_CAUSAL_FRONTIER_20261008_V18",
+  "date": "2026-10-08",
+  "status": "ACTIVE_POST_SOURCE_POSITIVE_SELECTION_V11__COMPLETE_WORLD_PARTITION_DELETED_AS_NECESSARY_FOR_REACHED_CURRENT_CELL__GENERAL_P3_OPEN__ZERO_TERMINAL_CREDIT",
+  "supersedes": {
+    "path": "canonical/governance/P3_CURRENT_CAUSAL_FRONTIER_20261008_V17.json",
+    "git_blob_sha": "940da61296c86abe045b979c6f404cb064351e39"
+  },
+  "reconciles": [
+    {
+      "path": "canonical/governance/P3_SOURCE_POSITIVE_SELECTION_REDUCTION_20261008_V1.json",
+      "git_blob_sha": "33e84b64a5ad52a8e41c81cf763ac958ff294804"
+    },
+    {
+      "path": "canonical/verification/P3_SOURCE_POSITIVE_SELECTION_V11_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "bf33e79d0f84b049e6374b7c9c818d13f3d3f270"
+    },
+    {
+      "path": "canonical/runtime/p3_real_context_v3_admission_v11.py",
+      "git_blob_sha": "118bc3ab56d05edd7daa306966bdc583f3558c3a"
+    }
+  ],
+  "current_front_door": "canonical/runtime/p3_real_context_v3_admission_v11.py",
+  "current_front_door_git_blob_sha": "118bc3ab56d05edd7daa306966bdc583f3558c3a",
+  "newly_preserved_truth": {
+    "v10_policy_influence_noninterference_route_preserved": true,
+    "v11_source_positive_current_cell_selection_verified": true,
+    "complete_policy_world_partition_required_for_reached_current_cell": false,
+    "negative_relevance_classification_of_unused_semantic_dimensions_required_inside_certified_current_cell": false,
+    "exact_selected_policy_must_be_source_proved_adequate_across_current_sound_semantic_overapproximation": true,
+    "exact_selected_policy_to_claim_set_binding_required": true,
+    "general_free_form_semantic_relevance_solved": false,
+    "whole_p3_closed": false,
+    "u_empty_proved": false,
+    "terminal": false
+  },
+  "frontier_reduction": {
+    "deleted_as_primary_requirement": "CONSTRUCT_A_COMPLETE_POLICY_WORLD_OVERAPPROXIMATION_BEFORE_ANY_CAPACITY_BINDING_CURRENT_CONTEXT_CAN_BE_SELECTED",
+    "replacement": "FIRST_SEARCH_FOR_ONE_EXISTING_BRAIN_OWNED_POLICY_SOURCE_PROVED_ADEQUATE_ACROSS_THE_CURRENT_SOUND_SEMANTIC_OVERAPPROXIMATION_AND_INDEPENDENTLY_BOUND_TO_THE_EXACT_SELECTED_CLAIM_SET",
+    "remaining_if_no_common_policy_is_certified": "ACQUIRE_ONLY_THE_SMALLEST_POLICY_CHANGING_SELECTED_DISCRIMINATOR_OR_MISSING_POSITIVE_ADEQUACY FACT_NEEDED_TO_CERTIFY_ONE_SOUND_SELECTED_POLICY_CELL",
+    "still_open": [
+      "CURRENT_CELL_POSITIVE_ADEQUACY_OR_MINIMUM_SELECTED_DISCRIMINATOR_BINDING_WHEN_V11_CANNOT_CERTIFY_ONE_POLICY",
+      "AUTHORITATIVE_SOURCE_OR_SCOPE_MEMBERSHIP_FOR_CONTEXTS_OUTSIDE_EXISTING_RECOGNIZERS",
+      "GENERAL_CONFLICT_AND_NONFACTUAL_UNCERTAINTY_REALIZATION_OUTSIDE_VERIFIED_CELLS",
+      "UNMODELED_AUDIENCE_MEANING_AND_OPEN_AUDIENCE_ADAPTATION",
+      "GENERAL_STRUCTURED_OR_MULTIMODAL_EVIDENCE_AND_OUTPUT_FORMS"
+    ]
+  },
+  "current_scheduler": [
+    "USE_V11_AS_THE_CURRENT_P3_FRONT_DOOR.",
+    "PRESERVE_OBJECTIVE_WEIGHTS_EXACT_DEPENDENCY_V9_NONBINDING_CAPACITY_AND_V10_POLICY_INFLUENCE_ROUTES_WITH_THEIR_EXISTING_PRECEDENCE.",
+    "AT_THE_REMAINING_CAPACITY_BINDING_FRONTIER__TRY_SOURCE_POSITIVE_CURRENT_CELL_SELECTION_BEFORE_BUILDING_ANY_COMPLETE_WORLD MODEL.",
+    "STOP_ON_THE_FIRST_SOURCE_PROVED_ADEQUATE_RESOURCE_ADMISSIBLE_EXACT_SELECTED_POLICY.",
+    "DO_NOT_CLASSIFY_UNUSED_SEMANTIC_DIMENSIONS_OR_UNUSED_POLICY_EDGES.",
+    "IF_NO_COMMON_POLICY_CAN_BE_CERTIFIED__LOCALIZE_ONLY_THE_MINIMUM_POLICY_CHANGING_SELECTED_DISCRIMINATOR_OR MISSING_POSITIVE_ADEQUACY_WITNESS.",
+    "DO_NOT_INFER_NEGATIVE_RELEVANCE_FROM_LEXICAL_ROLE_OR_EMBEDDING_NONMATCH.",
+    "NO_V11_PASS_ALONE_MINTS_SOURCE_AUTHORIZATION_GLOBAL_POLICY_ADEQUACY_U_SUBTRACTION_OR_TERMINAL_AUTHORITY."
+  ],
+  "verification_accounting": {
+    "v11_checks_passed_on_two_sprites": 28,
+    "v11_checks_run_on_two_sprites": 28,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_FREE_FORM_SEMANTIC_RELEVANCE",
+    "NO_CLAIM_ONE_SOURCE_PROVED_COMMON_POLICY_EXISTS_FOR_EVERY_REAL_P3_CONTEXT",
+    "NO_GENERAL_P3_CLOSURE",
+    "NO_GENERAL_AUDIENCE_MEANING_CLAIM",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "whole_p3_closed": false,
+  "u_empty_proved": false,
+  "terminal": false,
+  "terminal_credit_delta": 0
+}
