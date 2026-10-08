@@ -3,6 +3,7 @@ from canonical.runtime.policy_adequacy_executable_predicate_cover_v1 import (
     _trusted_catalog,
     evaluate_universal_overapproximation,
     P3_ATOM,
+    P2_ATOM,
 )
 
 
