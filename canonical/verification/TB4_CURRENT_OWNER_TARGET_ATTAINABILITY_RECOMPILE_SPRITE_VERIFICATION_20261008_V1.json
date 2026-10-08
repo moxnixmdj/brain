@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CURRENT_OWNER_TARGET_ATTAINABILITY_RECOMPILE_SPRITE_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SPRITE_REPLAY_PASS__CURRENT_OWNER_66_36_RESOURCE_ATTAINABILITY_MARGIN_ONE__EMPIRICAL_ACCEPTANCE_NOT_PROVED__ZERO_CREDIT",
+  "subject": {
+    "brain_pull_request": 3148,
+    "candidate_path": "canonical/governance/TB4_CURRENT_OWNER_TARGET_ATTAINABILITY_RECOMPILE_CANDIDATE_20261008_V1.json",
+    "candidate_git_blob_sha": "e5b7c21542502f413cc62c2d27edd800fdcd0131",
+    "candidate_utf8_sha256": "219417363b9f82df656d7f2dd1c96ef278f3b1988d36bc71376fc5b22d96469f"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-objective-pass-lock-v1-verify",
+    "sprite_id": "sprite-64f51750-7c85-4715-9c30-a6bb89f60a24",
+    "workspace": "/tmp/tb4_recompile"
+  },
+  "exact_input_bytes": {
+    "target_precision_verification_sha256": "1d44d50993de98d4b7fd0b9199ccaf348922576950ee78ffbba60e2466f1596b",
+    "recovery_identity_sha256": "2dfa6f926b5a09f2cbb6e6955424c3a74f48107967a345d3da25025a20bd91a8",
+    "protocol_equivalence_sha256": "51245e06234b71205c40a8a57e5e4ebba12d93091c4b1583b9cb1120d1a4eb7d",
+    "zero_spend_binding_sha256": "6bd5bfcf39cbfdabf87db568a03360f32cea756f06f4d82c698a09cad165d8c3",
+    "source_gate_sha256": "87f10870cf83ed1085933e58093a92425f9bdaca74c19b8de4c86fc24b794cec",
+    "verifier_script_sha256": "2d64f5b8882de06a6dfc1f39afdea7ea38fe5f868cb15889c31f116898d19ca6"
+  },
+  "replay": {
+    "target_precision_public_runner_pass_bound": true,
+    "owner_pdf_sha256_bound": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378",
+    "exact_recovery_task_count": 8,
+    "buildkite_protocol_equivalence_closed": true,
+    "buildkite_zero_spend_hard_stop_closed": true,
+    "clean_case_source_gate_pass": true,
+    "base_creditable_tasks": 36,
+    "current_creditable_tasks": 44,
+    "trials_per_task": 5,
+    "capacity_slots": 220,
+    "current_owner_required_successes": 219,
+    "resource_margin_slots": 1,
+    "resource_attainability": "ATTAINABLE",
+    "empirical_acceptance": "NOT_PROVED",
+    "verdict": "PASS"
+  },
+  "logical_conclusion": "UNDER_THE_INDEPENDENTLY_VERIFIED_66_36_CURRENT_OWNER_TARGET_CANDIDATE_AND_ALREADY_BOUND_44_TASK_RESOURCE_ROUTE__THE_OLD_ZERO_SLACK_RESOURCE_CLAIM_DOES_NOT_HOLD__RESOURCE_CAPACITY_IS_220_AGAINST_219_REQUIRED__ONE_SLOT_MARGIN_EXISTS__THIS_DOES_NOT_PROVE_219_SUCCESS_RECEIPTS_OR_TB4_ACCEPTANCE",
+  "remaining_load_bearing_premises": [
+    "SCALAR_COMPARABILITY_OF_BRAIN_TB4_ROUTE_TO_THE_OWNER_66_36_SETUP_UNDER_THE_FROZEN_ACCEPTANCE_PROTOCOL",
+    "THRESHOLD_REACHING_IMMUTABLE_SUCCESS_RECEIPTS_OR_A_SEPARATELY_ADMISSIBLE_SCOPE_COMPLETE_STRONGER_PROOF"
+  ],
+  "hard_nonclaims": [
+    "NO_TB4_SCORE",
+    "NO_TB4_ACCEPTANCE_PROMOTION",
+    "NO_EXECUTION_AUTHORITY_FROM_THIS_RECEIPT",
+    "NO_CLAIM_219_SUCCESS_RECEIPTS_EXIST",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CASES_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
