@@ -36,6 +36,31 @@ class R1LiveArchitectureClosureGateV1Tests(unittest.TestCase):
             out["universally_invocable_capability_count"],
         )
 
+    def test_receipt_exact_blob_drift_reopens_r1(self):
+        receipt = gate._json(gate.CURRENT_RECEIPT_PATH)
+        tampered = dict(receipt)
+        tampered["exact_blobs"] = {
+            key: dict(value)
+            for key, value in receipt["exact_blobs"].items()
+        }
+        tampered["exact_blobs"]["unified_fabric"]["git_blob_sha"] = "0" * 40
+        errors, checked = gate._receipt_exact_blob_errors(tampered)
+        self.assertGreater(checked, 0)
+        self.assertIn("RECEIPT_EXACT_BLOB_DRIFT:unified_fabric", errors)
+
+    def test_stale_authority_receipt_binding_reopens_r1(self):
+        authority = gate._json(gate.AUTHORITY_PATH)
+        authority = dict(authority)
+        authority["live_capability_ownership_20261008_v1"] = dict(
+            authority["live_capability_ownership_20261008_v1"]
+        )
+        authority["live_capability_ownership_20261008_v1"]["verification"] = dict(
+            authority["live_capability_ownership_20261008_v1"]["verification"]
+        )
+        authority["live_capability_ownership_20261008_v1"]["verification"]["git_blob_sha"] = "0" * 40
+        errors, _checked = gate._current_receipt_errors(authority)
+        self.assertIn("AUTHORITY_VERIFICATION_RECEIPT_BLOB_DRIFT", errors)
+
     def test_engine_route_drift_reopens_r1(self):
         ownership, invocation = self._current()
         drifted = dict(ENGINE_DESCRIPTORS)
