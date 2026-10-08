@@ -294,7 +294,7 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             state_path=path,
             skill_verification_provider=verifier,
             failure_repair_provider=repair,
-            max_actions=3,
+            max_actions=2,
         )
 
         self.assertEqual(verifier.call_count, 1)
