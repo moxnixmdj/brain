@@ -117,3 +117,14 @@ def test_weight_lower_bound_out_of_range_fails_closed():
     out = evaluate(p)
     assert out["pass"] is False
     assert any("PASSED_WEIGHT_LB_OUT_OF_RANGE" in x for x in out["errors"])
+
+
+def test_duplicate_group_ids_fail_closed():
+    p = base()
+    p["groups"] = [
+        group("DUP", 250, blocker=True, lb=1.0),
+        group("DUP", 250, blocker=True, lb=1.0),
+    ]
+    out = evaluate(p)
+    assert out["pass"] is False
+    assert any("GROUP_ID_DUPLICATE" in x for x in out["errors"])
