@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DETERMINISTIC_REPAIR_LADDER_ACTIVATION_V1",
+  "date": "2026-10-08",
+  "status": "LIVE__REUSE_FIRST_DETERMINISTIC_R2_REPAIR_BEFORE_GENERATIVE_INVENTION__ZERO_TERMINAL_CREDIT",
+  "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE_INCOMPLETE",
+  "live_components": [
+    "canonical/runtime/general_adequate_decision_controller_v1.py",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "canonical/runtime/r2_existing_policy_adequacy_repair_v1.py",
+    "canonical/runtime/r2_basis_discriminator_repair_v1.py"
+  ],
+  "control_order": [
+    "TRY_DIRECT_END_TO_END_ADEQUACY_CELL",
+    "TRY_SELF_AUTHENTICATING_SPECIALIST_ADEQUACY",
+    "RUN_SOUND_P3_COMMON_POLICY_OR_MINIMUM_INFORMATION_CONTROL",
+    "IF_ADEQUACY_EVIDENCE_IS_MISSING__DISCOVER_EXACT_EXISTING_CANONICAL_POLICY_ADEQUACY_BINDINGS",
+    "IF_POLICY_REGIONS_CONFLICT_AND_NO_DECLARED_SEPARATOR_CLOSES_THEM__PROPOSE_ONLY_DIFFERING_EXISTING_DECISION_BASIS_ATOMS_AS_CANDIDATE_DISCRIMINATORS",
+    "REENTER_P3_AFTER_EVERY_AUTOMATIC_PATCH",
+    "OBSERVE_ONLY_THE_SELECTED_POLICY_CHANGING_PREDICATE_THROUGH_SOURCE_BOUND_TRUTH_AUTHORITY",
+    "ONLY_AFTER_DETERMINISTIC_REPAIR_IS_EXHAUSTED__ALLOW_ADVISORY_PROPOSAL_OR_R3_VERIFIED_REPAIR",
+    "R3_REPAIR_MUST_REPLAY_THE_ORIGINAL_R2_OBLIGATION_BEFORE_RECOVERY_COUNTS"
+  ],
+  "authority_boundary": {
+    "deterministic_repair_semantic_truth_authority": false,
+    "deterministic_repair_policy_adequacy_authority": false,
+    "deterministic_repair_goal_satisfaction_authority": false,
+    "downstream_reverification_mandatory": true,
+    "terminal_authority": false
+  },
+  "verification_path": "canonical/verification/R2_DETERMINISTIC_REPAIR_LADDER_VERIFY_20261008_V1.json",
+  "remaining_frontier": {
+    "id": "R2_NEW_VERIFIABLE_POLICY_OR_SOURCE_PROOF_PRIMITIVE",
+    "definition": "ONLY_REACHED_WHEN_NO_EXISTING_EXACT_ADEQUACY_PROOF_NO_EXISTING_COMMON_POLICY_AND_NO_EXISTING_DECISION_BASIS_SEPARATOR_PLUS_SOURCE_PROOF_CAN_CLOSE_THE_CURRENT_CONFLICT",
+    "delegated_verified_repair": "R3_SAME_DISPATCH_REPAIR_AND_ORIGINAL_REPLAY",
+    "irreducible_external_case": "SELECTED_FACT_REQUIRES_FRESH_REALITY_NOT_PRESENT_IN_CURRENT_AUTHENTIC_SOURCES"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
