@@ -1,33 +1,42 @@
 {
-  "schema":"PROJECT_BRAIN_GDPVAL_PUBLIC_220_OBJECTIVE_COMPILER_COVERAGE_RECEIPT_20261008_V1",
-  "date":"2026-10-08",
-  "status":"PRIMARY_PUBLIC_220_SCAN_PASS__CURRENT_COMPILER_COVERAGE_MEASURED__ZERO_CREDIT",
-  "source":{
-    "dataset":"openai/gdpval",
-    "split":"train",
-    "rows_api":"https://datasets-server.huggingface.co/rows",
-    "task_count":220,
-    "rubric_item_count":10453
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_220_OBJECTIVE_COMPILER_COVERAGE_RECEIPT_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__PRIMARY_AND_INDEPENDENT_PUBLIC_220_SCAN__ZERO_CREDIT",
+  "source": {
+    "dataset": "openai/gdpval",
+    "split": "train",
+    "rows_api": "https://datasets-server.huggingface.co/rows",
+    "task_count": 220,
+    "rubric_item_count": 10453
   },
-  "compiler":{
-    "path":"canonical/runtime/gdpval_objective_artifact_criteria_v1.py",
-    "semantics":"WHOLE_CRITERION_EXACT_GRAMMAR_ONLY__UNSUPPORTED_OR_MIXED_SEMANTICS_FAIL_CLOSED"
+  "compiler": {
+    "path": "canonical/runtime/gdpval_objective_artifact_criteria_v1.py",
+    "semantics": "WHOLE_CRITERION_EXACT_GRAMMAR_ONLY__UNSUPPORTED_OR_MIXED_SEMANTICS_FAIL_CLOSED"
   },
-  "result":{
-    "compiled_objective_check_count":41,
-    "unresolved_count":10412,
-    "compiled_fraction":0.003922318951497178,
-    "tasks_with_at_least_one_compiled_criterion":37,
-    "tasks_fully_compiled":0,
-    "max_compiled_criteria_in_one_task":2
+  "result": {
+    "compiled_objective_check_count": 41,
+    "unresolved_count": 10412,
+    "compiled_fraction": 0.003922318951497178,
+    "tasks_with_at_least_one_compiled_criterion": 37,
+    "tasks_fully_compiled": 0,
+    "max_compiled_criteria_in_one_task": 2
   },
-  "consequence":"CURRENT_OBJECTIVE_ARTIFACT_COMPILER_ALONE_CANNOT_SUPPORT_A_SCOPE_COMPLETE_220_TASK_GLOBAL_OPTIMUM_CERTIFICATE__SEMANTIC_AND_REFERENCE_BOUNDING_REMAINS_LOAD_BEARING",
-  "important_noninference":"UNRESOLVED_BY_THIS_NARROW_COMPILER_DOES_NOT_MEAN_SUBJECTIVE_OR_IRREDUCIBLE__MANY_UNRESOLVED_CRITERIA_ARE_MECHANICAL_BUT_REQUIRE_RICHER_SEMANTIC_OR_REFERENCE_BINDING",
-  "hard_nonclaims":[
+  "consequence": "CURRENT_OBJECTIVE_ARTIFACT_COMPILER_ALONE_CANNOT_SUPPORT_A_SCOPE_COMPLETE_220_TASK_GLOBAL_OPTIMUM_CERTIFICATE__SEMANTIC_AND_REFERENCE_BOUNDING_REMAINS_LOAD_BEARING",
+  "important_noninference": "UNRESOLVED_BY_THIS_NARROW_COMPILER_DOES_NOT_MEAN_SUBJECTIVE_OR_IRREDUCIBLE__MANY_UNRESOLVED_CRITERIA_ARE_MECHANICAL_BUT_REQUIRE_RICHER_SEMANTIC_OR_REFERENCE_BINDING",
+  "hard_nonclaims": [
     "NO_CLAIM_ONLY_41_CRITERIA_ARE_OBJECTIVE",
     "NO_CLAIM_10412_CRITERIA_REQUIRE_LLM_JUDGMENT",
     "NO_CLAIM_GLOBAL_OPTIMUM_BRIDGE_IS_IMPOSSIBLE",
     "NO_GDPVAL_OR_TERMINAL_CREDIT"
   ],
-  "accounting":{"incremental_spend_usd":0,"model_queries":0,"terminal_credit_delta":0}
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_queries": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_execution": {
+    "provider": "SPRITES",
+    "carrier": "brain-heldout003-one-shot",
+    "result": "INDEPENDENT_SCAN_PASS {'COMPILED_OBJECTIVE_CHECK': 41, 'UNRESOLVED': 10412} 37 0 2"
+  }
 }
