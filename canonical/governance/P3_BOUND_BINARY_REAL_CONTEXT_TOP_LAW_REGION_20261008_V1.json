@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_P3_BOUND_BINARY_REAL_CONTEXT_TOP_LAW_REGION_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_PARAMETERIZED_SOUND_TOP_LAW_REGION__EXECUTABLE_MEMBERSHIP__ZERO_GLOBAL_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "region": {
+    "id": "P3_BOUND_BINARY_REAL_CONTEXT_GROUNDED_DECISION_TOP_LAW_V1",
+    "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "recognizer": {
+      "path": "canonical/runtime/p3_bound_binary_real_context_membership_v1.py",
+      "git_blob_sha": "2b9832ae4efa3c4fc30119034ecbc9b509263d35"
+    },
+    "policy": {
+      "path": "canonical/runtime/p3_binary_decision_grounded_expression_v1.py",
+      "git_blob_sha": "590cdc4e7f5a513d0e40bb31afed20df61826bad"
+    },
+    "membership_rule": "CONTEXT_IS_IN_REGION_IFF_THE_RECOGNIZER_RETURNS_PASS_WITH_SELECTED_CLASS_MEMBERSHIP_AUTHENTICATED_TRUE_AND_REAL_CONTEXT_SEMANTIC_SCOPE_COMPLETE_TRUE"
+  },
+  "sources": {
+    "membership_verification": {
+      "path": "canonical/verification/P3_BOUND_BINARY_REAL_CONTEXT_MEMBERSHIP_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "91d7882632f687147b2e9e9f51e6d7444f2f6672"
+    },
+    "decision_expression_verification": {
+      "path": "canonical/verification/P3_BINARY_DECISION_GROUNDED_EXPRESSION_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "2964ab7b86b61a6362e310e35b4a38ab75e04e87"
+    },
+    "presentation_top_law": {
+      "path": "canonical/governance/P3_BOUND_OBJECTIVE_ROLE_PRESENTATION_TOP_LAW_CANDIDATE_20261008_V1.json",
+      "git_blob_sha": "471a17702a9ab6e0c3b68e9d5714003469c9aa7c"
+    },
+    "explicit_selection_order_top_law": {
+      "path": "canonical/governance/SYNTHESIS_EXPLICIT_SELECTION_ORDER_TOP_LAW_CELL_20261007_V2.json",
+      "git_blob_sha": "70f5796d77b79e96ffcc706918410da77dd4d653"
+    },
+    "contract_implication": {
+      "path": "canonical/governance/SYNTHESIS_P3_CONTRACT_SEMANTIC_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "f6b83872bf1288693e4e5250a561599f1cc6fa75"
+    },
+    "source_contract_compiler_verification": {
+      "path": "canonical/verification/SOURCE_CONTRACT_COMPLETENESS_V2_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "f7d4f1e9d5dc5fb5f3d9d1efee1287f9385cb7ef"
+    }
+  },
+  "theorem": {
+    "premises": [
+      "MEMBERSHIP_RECOGNIZER_PASS_PROVES_COMPLETE_AUTHORITY_SCOPE__FULL_SOURCE_SEMANTIC_COVERAGE__NO_OPEN_AMBIGUITY__AND_NO_LOAD_BEARING_REQUIREMENT_OUTSIDE_THE_EXACT_BINARY_STRUCTURED_CONTRACT.",
+      "THE_SAME_PASS_REQUIRES_THE_BOUND_BINARY_GROUNDED_EXPRESSION_COMPILER_TO_PASS.",
+      "THE_EXPRESSION_COMPILER_DERIVES_THE_BOOLEAN_DECISION_FROM_VERIFIED_ROLE_BOUND_NUMERIC_EVIDENCE__QUOTES_THE_EXACT_OBJECTIVE__CITES_DECISION_SOURCES__AND_EMITS_BOTH_OPERAND_FACTS_VERBATIM_WITH_PROVENANCE.",
+      "THE_PRESENTATION_COMPILER_IS_A_VERIFIED_INSTANCE_OF_THE_EXPLICIT_SELECTION_ORDER_TOP_LAW_FOR_CONTEXTS_WITH_NO_ADDITIONAL_IMPLICIT_PRESENTATION_SEMANTICS.",
+      "THE_CONTRACT_REDUCTION_MAPS_THE_P3_SUPPORT__COVERAGE__PROVENANCE__CONFLICT_UNCERTAINTY__AUDIENCE_FORMAT__AND_DECISION_RELEVANCE_CHECKS_TO_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_SUCCESS."
+    ],
+    "conclusion": "FOR_EVERY_CONTEXT_RECOGNIZED_BY_THIS_REGION__THE_EXACT_BRAIN_OWNED_GROUNDED_BINARY_DECISION_POLICY_SATISFIES_ALL_LOAD_BEARING_CONTEXT_REQUIREMENTS_AND_ATTAINS_THE_DECLARED_TOP_ELEMENT__THEREFORE_NO_TARGET_POLICY_CAN_BE STRICTLY BETTER UNDER_THE_BOUND_CONTRACT.",
+    "target_comparator_required": false,
+    "exact_target_identity_required": false,
+    "common_policy_region": true
+  },
+  "resource_and_ownership": {
+    "brain_owned": true,
+    "exact_runtime_bytes_bound": true,
+    "finite_input_policy": true,
+    "output_item_count": 3,
+    "no_caller_selection_or_order": true,
+    "no_external_target_model_runtime_dependency": true
+  },
+  "D_B_effect": "ADD_ONLY_CONTEXTS_PASSING_P3_BOUND_BINARY_REAL_CONTEXT_MEMBERSHIP_V1_TO_D_B_AS_ONE_PARAMETERIZED_RECOGNIZABLE_REGION",
+  "escape_effect": "REMOVE_ONLY_THOSE_PASSING_CONTEXTS_FROM_THE_CURRENT_SYNTHESIS_PRESENTATION_ESCAPE",
+  "hard_nonclaims": [
+    "NO_GENERAL_P3_CLOSURE",
+    "NO_GENERAL_PRESENTATION_OR_AUDIENCE_MEANING_CLAIM",
+    "NO_CLAIM_ANY_CONTEXT_PASSES_WITHOUT_THE_INDEPENDENT_COMPLETE_AUTHORITY_SCOPE_RECEIPT",
+    "NO_CLAIM_CONTEXTS_OUTSIDE_THE_EXACT_BINARY_CELL_ARE_COVERED",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
