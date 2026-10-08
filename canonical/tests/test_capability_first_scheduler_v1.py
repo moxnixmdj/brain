@@ -148,6 +148,74 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         self.assertFalse(out["dominated_means_deleted"])
         self.assertFalse(out["physical_deletion_authority"])
 
+
+    def test_dominated_candidate_is_preserved_not_deleted(self):
+        incumbent = {
+            "capability_id": "incumbent",
+            "semantic_contract_sha256": "sha256:same",
+            "reusable_capability": True,
+            "independently_verified": True,
+            "capability": 10,
+            "generalization": 10,
+            "reliability": 10,
+            "latency": 1,
+            "compute": 1,
+            "memory": 1,
+            "incremental_spend_usd": 0,
+        }
+        candidate = {
+            "capability_id": "candidate",
+            "semantic_contract_sha256": "sha256:same",
+            "reusable_capability": True,
+            "independently_verified": True,
+            "capability": 5,
+            "generalization": 5,
+            "reliability": 5,
+            "latency": 5,
+            "compute": 5,
+            "memory": 5,
+            "incremental_spend_usd": 0,
+        }
+        out = s.update_pareto_frontier([incumbent], candidate)
+        self.assertFalse(out["admitted"])
+        self.assertTrue(out["preserve_candidate_evidence"])
+        self.assertFalse(out["dominated_means_deleted"])
+        self.assertFalse(out["physical_deletion_authority"])
+
+    def test_different_semantic_contracts_do_not_dominate(self):
+        incumbent = {
+            "capability_id": "a",
+            "semantic_contract_sha256": "sha256:a",
+            "reusable_capability": True,
+            "independently_verified": True,
+            "capability": 10,
+            "generalization": 10,
+            "reliability": 10,
+            "latency": 1,
+            "compute": 1,
+            "memory": 1,
+            "incremental_spend_usd": 0,
+        }
+        candidate = {
+            "capability_id": "b",
+            "semantic_contract_sha256": "sha256:b",
+            "reusable_capability": True,
+            "independently_verified": True,
+            "capability": 1,
+            "generalization": 1,
+            "reliability": 1,
+            "latency": 100,
+            "compute": 100,
+            "memory": 100,
+            "incremental_spend_usd": 0,
+        }
+        out = s.update_pareto_frontier([incumbent], candidate)
+        self.assertTrue(out["admitted"])
+        self.assertEqual(
+            [x["capability_id"] for x in out["frontier"]],
+            ["a", "b"],
+        )
+
     def test_benchmark_result_cannot_be_promoted_as_capability(self):
         out = s.update_pareto_frontier([], {
             "capability_id": "benchmark-score",
