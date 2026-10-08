@@ -21,6 +21,8 @@ MODEL = "brain-qwen3.5-9b"
 TOOL_NAME = "submit_science_proposal"
 MAX_RESPONSE_BYTES = 100_000
 MAX_TOOL_COMPLETION_TOKENS = 4096
+MAX_MODEL_REQUIREMENTS = 16
+MAX_COVERS = 32
 MIN_TIMEOUT_S = 300
 MAX_TIMEOUT_S = 900
 REQUEST_BYTES_PER_TOKEN_ESTIMATE = 2
@@ -60,7 +62,7 @@ TOOL = {
                 "material_requirements": {
                     "type": "array",
                     "minItems": 1,
-                    "maxItems": 16,
+                    "maxItems": MAX_MODEL_REQUIREMENTS,
                     "items": {"type": "string", "minLength": 1, "maxLength": 64},
                     "description": (
                         "Stable short material requirement IDs. Repeat the exact same "
@@ -78,7 +80,7 @@ TOOL = {
                             "covers": {
                                 "type": "array",
                                 "minItems": 1,
-                                "maxItems": 16,
+                                "maxItems": MAX_COVERS,
                                 "items": {"type": "string", "minLength": 1, "maxLength": 64},
                             },
                             # Do not encode MAX_COMMAND_CHARS as JSON-schema maxLength here.
