@@ -31,6 +31,8 @@ class R1LiveArchitectureClosureGateV1Tests(unittest.TestCase):
         )
         self.assertTrue(out["pass"], out)
         self.assertEqual(out["errors"], [])
+        self.assertTrue(out["capability_lifecycle_complete"], out)
+        self.assertTrue(all(out["capability_lifecycle"].values()), out)
         self.assertEqual(
             out["live_owned_capability_count"],
             out["universally_invocable_capability_count"],
@@ -70,6 +72,24 @@ class R1LiveArchitectureClosureGateV1Tests(unittest.TestCase):
             "SUBRUNTIME_SURFACE_MISSING:AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1",
             out["errors"],
         )
+
+
+    def test_missing_live_composition_reopens_r1(self):
+        ownership, invocation = self._current()
+        drifted = dict(ENGINE_DESCRIPTORS)
+        drifted.pop("LIVE_COMPOSITION", None)
+        out = gate.evaluate(
+            drifted,
+            ownership=ownership,
+            invocation=invocation,
+            subruntime_surfaces=live_runtime.SURFACES,
+            canonical_public_entrypoint=CANONICAL_PUBLIC_ENTRYPOINT,
+            subordinate_runtime_entrypoint=SUBORDINATE_RUNTIME_ENTRYPOINT,
+        )
+        self.assertFalse(out["pass"])
+        self.assertIn("ENGINE_BINDING_DRIFT:LIVE_COMPOSITION", out["errors"])
+        self.assertFalse(out["capability_lifecycle"]["composable"])
+        self.assertFalse(out["capability_lifecycle_complete"])
 
 
 if __name__ == "__main__":
