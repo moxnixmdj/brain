@@ -819,9 +819,28 @@ def integrate_solver_output(
             capsule = _make_retry_capsule(retry_context)
             retry_sha = capsule["sha256"]
             prior_capsule = retry_capsules.get(retry_sha)
-            if isinstance(prior_capsule, Mapping) and prior_capsule.get("resolved") is True:
-                capsule["resolved"] = True
-                capsule["resolved_by"] = prior_capsule.get("resolved_by")
+            autonomous_replay_authorized = not _effect_may_have_occurred(out)
+            autonomous_replay_reason = (
+                "NO_EFFECT_OUTCOME_RECORDED"
+                if autonomous_replay_authorized
+                else "EFFECT_MAY_HAVE_OCCURRED__RECOVERY_OR_EXPLICIT_REPLAY_REQUIRED"
+            )
+            if isinstance(prior_capsule, Mapping):
+                # Replay safety is monotonic. Once this exact retry context has
+                # evidence that an effect may have occurred, or comes from a
+                # legacy capsule without an explicit autonomous-safety proof,
+                # a later observation cannot silently upgrade it to replayable.
+                if prior_capsule.get("autonomous_replay_authorized") is not True:
+                    autonomous_replay_authorized = False
+                    autonomous_replay_reason = (
+                        prior_capsule.get("autonomous_replay_reason")
+                        or "LEGACY_OR_UNSAFE_RETRY_CAPSULE__EXPLICIT_RECOVERY_REQUIRED"
+                    )
+                if prior_capsule.get("resolved") is True:
+                    capsule["resolved"] = True
+                    capsule["resolved_by"] = prior_capsule.get("resolved_by")
+            capsule["autonomous_replay_authorized"] = autonomous_replay_authorized
+            capsule["autonomous_replay_reason"] = autonomous_replay_reason
             retry_capsules[retry_sha] = capsule
         state["failures"][fid] = {
             **diagnosis,
@@ -1135,6 +1154,10 @@ def get_failure_retry_context(
         "failure_fingerprint": fid,
         "retry_capsule_sha256": wanted,
         "context": deepcopy(dict(context)),
+        "autonomous_replay_authorized": (
+            capsule.get("autonomous_replay_authorized") is True
+        ),
+        "autonomous_replay_reason": capsule.get("autonomous_replay_reason"),
         "resolved": capsule.get("resolved") is True,
         "resolved_by": capsule.get("resolved_by"),
     }

@@ -96,6 +96,93 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         repair.assert_called_once()
         self.assertEqual(repair.call_args.kwargs["state_path"], path)
 
+    def test_internal_repair_marks_replay_as_autonomous(self):
+        path = self.temp_state()
+        work = {
+            "work_id": "repair",
+            "kind": "REPAIR_FAILURE_CLASS",
+            "payload": {
+                "failure_fingerprint": "f",
+                "retry_capsule_sha256": "r",
+            },
+        }
+        with mock.patch(
+            "canonical.runtime.live_brain_runtime_v1.execute_failure_repair_cycle",
+            return_value={"pass": False, "status": "BLOCKED"},
+        ) as repair:
+            driver._internal_failure_repair(
+                work,
+                state_path=path,
+                repo_root=driver.ROOT,
+            )
+
+        request = repair.call_args.args[0]
+        self.assertTrue(request["autonomous"])
+        self.assertEqual(request["failure_fingerprint"], "f")
+        self.assertEqual(request["retry_capsule_sha256"], "r")
+
+    def test_failed_internal_repair_is_not_retried_until_new_evidence(self):
+        path = self.temp_state()
+        self.write_state(
+            path,
+            {
+                "repair": {
+                    "work_id": "repair",
+                    "kind": "REPAIR_FAILURE_CLASS",
+                    "priority": 30,
+                    "identity": {},
+                    "payload": {
+                        "failure_fingerprint": "f",
+                        "retry_capsule_sha256": "r",
+                    },
+                    "status": "PENDING",
+                    "observations": 1,
+                    "reopen_count": 0,
+                    "attempt_count": 0,
+                    "last_attempt_observations": None,
+                    "last_attempt_status": None,
+                    "last_attempt_reason": None,
+                }
+            },
+        )
+        with mock.patch.object(
+            driver,
+            "_internal_failure_repair",
+            return_value={
+                "pass": False,
+                "status": "AUTONOMOUS_REPAIR_BLOCKED__REPLAY_NOT_PROVED_SAFE",
+                "autonomous_replay_reason": "unsafe",
+            },
+        ) as repair:
+            first = driver.advance_once(state_path=path)
+            second = driver.advance_once(state_path=path)
+
+        self.assertFalse(first["pass"], first)
+        self.assertFalse(first["progress"], first)
+        self.assertTrue(second["pass"], second)
+        self.assertFalse(second["progress"], second)
+        self.assertEqual(
+            second["blockers"][0]["blocker"],
+            "REPAIR_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
+        )
+        repair.assert_called_once()
+        state = learning.load_state(path)
+        row = state["improvement_queue"]["repair"]
+        self.assertEqual(row["attempt_count"], 1)
+        self.assertEqual(row["last_attempt_observations"], 1)
+
+        row["observations"] = 2
+        learning._write_state(state, path)
+        with mock.patch.object(
+            driver,
+            "_internal_failure_repair",
+            return_value={"pass": True, "status": "REPAIRED"},
+        ) as repair_after_new_evidence:
+            third = driver.advance_once(state_path=path)
+        self.assertTrue(third["pass"], third)
+        self.assertTrue(third["progress"], third)
+        repair_after_new_evidence.assert_called_once()
+
     def test_delayed_episode_queue_retains_exact_verification_material(self):
         path = self.temp_state()
         episode = {
@@ -253,6 +340,47 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             out["blockers"][0]["blocker"],
             "WAITING_FOR_NEW_INDEPENDENTLY_VERIFIED_EXPERIENCE",
         )
+
+    def test_drain_failed_repair_does_not_stall_unrelated_actionable_work(self):
+        path = self.temp_state()
+        stable_state = learning._empty_state()
+        learning._write_state(stable_state, path)
+        failed_repair = {
+            "schema": driver.SCHEMA,
+            "status": "IMPROVEMENT_REPAIR_ATTEMPT_DID_NOT_CLOSE_ORIGINAL_OBLIGATION",
+            "pass": False,
+            "progress": False,
+            "work_id": "repair",
+            "terminal_authority": False,
+        }
+        advanced_other = {
+            "schema": driver.SCHEMA,
+            "status": "IMPROVEMENT_ADVANCED__SUCCESS_BECAME_VERIFIED_EPISODE",
+            "pass": True,
+            "progress": True,
+            "work_id": "other",
+            "terminal_authority": False,
+        }
+        stable = {
+            "schema": driver.SCHEMA,
+            "status": "IMPROVEMENT_QUEUE_HAS_NO_CURRENTLY_ACTIONABLE_WORK",
+            "pass": True,
+            "progress": False,
+            "pending_count": 1,
+            "blockers": [],
+            "terminal_authority": False,
+        }
+        with mock.patch.object(
+            driver,
+            "advance_once",
+            side_effect=[failed_repair, advanced_other, stable],
+        ) as advance:
+            out = driver.drain(state_path=path, max_actions=3)
+
+        self.assertEqual(advance.call_count, 3)
+        self.assertEqual(out["progress_count"], 1)
+        self.assertEqual(out["status"], "IMPROVEMENT_QUEUE_ADVANCED")
+        self.assertFalse(out["pass"])
 
     def test_drain_stops_when_no_more_actionable_work_exists(self):
         path = self.temp_state()

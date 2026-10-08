@@ -628,15 +628,34 @@ def run(
                 raise CognitiveFabricError("BOUND_CAPABILITY_INPUTS_NOT_OBJECT")
             out = execute_bound(capability_id, inputs=dict(inputs))
 
+        autonomous_failure_repair_provider = None
+        if capability_expander is not None or bool(options.get("repair_components")):
+            def _autonomous_repair_pending(work: Mapping[str, Any]) -> Mapping[str, Any]:
+                payload_row = work.get("payload")
+                if not isinstance(payload_row, Mapping):
+                    raise CognitiveFabricError("R3_REPAIR_WORK_PAYLOAD_INVALID")
+                return live_runtime.execute_failure_repair_cycle(
+                    {
+                        "failure_fingerprint": payload_row.get("failure_fingerprint"),
+                        "retry_capsule_sha256": payload_row.get("retry_capsule_sha256"),
+                        "components": list(options.get("repair_components") or []),
+                        "solver_kwargs": deepcopy(
+                            dict(options.get("repair_solver_kwargs") or {})
+                        ),
+                        "learn": True,
+                        "autonomous": True,
+                    },
+                    repo_root=ROOT,
+                    state_path=options.get("state_path"),
+                    information_provider=information_provider,
+                    proposal_provider=proposal_provider,
+                    capability_expander=capability_expander,
+                )
+
+            autonomous_failure_repair_provider = _autonomous_repair_pending
+
         compounding_tick = None
-        if (
-            mode != "IMPROVEMENT_CYCLE"
-            and (
-                episode_verification_provider is not None
-                or skill_verification_provider is not None
-                or success_episode_adapter_provider is not None
-            )
-        ):
+        if mode != "IMPROVEMENT_CYCLE":
             compounding_tick = improvement_driver.drain(
                 state_path=options.get(
                     "state_path",
@@ -646,7 +665,7 @@ def run(
                 episode_verification_provider=episode_verification_provider,
                 skill_verification_provider=skill_verification_provider,
                 success_episode_adapter_provider=success_episode_adapter_provider,
-                failure_repair_provider=None,
+                failure_repair_provider=autonomous_failure_repair_provider,
                 max_actions=int(options.get("self_improvement_max_actions", 4)),
             )
 

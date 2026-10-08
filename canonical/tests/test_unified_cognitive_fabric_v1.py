@@ -182,6 +182,118 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertEqual(kwargs["max_actions"], 2)
 
 
+    def test_canonical_front_door_advances_queue_even_without_attached_verifiers(self):
+        tick = {
+            "schema": "PROJECT_BRAIN_R3_IMPROVEMENT_QUEUE_DRIVER_V1",
+            "status": "IMPROVEMENT_QUEUE_STABLE",
+            "pass": True,
+            "progress_count": 0,
+            "actions": [],
+            "terminal_authority": False,
+        }
+        request = {
+            "mode": "CAPABILITY_SCHEDULER",
+            "payload": {
+                "work": [{
+                    "work_id": "R3-ALWAYS-TICK",
+                    "work_type": "CAPABILITY_BUILD",
+                    "expected_capability_gain_lcb": 1,
+                    "expected_efficiency_gain_lcb": 0,
+                    "expected_reliability_gain_lcb": 1,
+                    "reuse_breadth_lcb": 1,
+                    "generalization_lcb": 1,
+                    "success_probability_lcb": 1,
+                    "wall_clock_cost_ub": 1,
+                    "compute_cost_ub": 1,
+                    "memory_cost_ub": 1,
+                    "complexity_cost_ub": 1,
+                }],
+            },
+            "options": {"self_improvement_max_actions": 2},
+        }
+        with patch(
+            "canonical.runtime.unified_cognitive_fabric_v1.improvement_driver.drain",
+            return_value=tick,
+        ) as drain:
+            out = run(request)
+
+        self.assertEqual(out["compounding_tick"], tick)
+        drain.assert_called_once()
+        kwargs = drain.call_args.kwargs
+        self.assertIsNone(kwargs["episode_verification_provider"])
+        self.assertIsNone(kwargs["skill_verification_provider"])
+        self.assertIsNone(kwargs["success_episode_adapter_provider"])
+        self.assertIsNone(kwargs["failure_repair_provider"])
+        self.assertEqual(kwargs["max_actions"], 2)
+
+    def test_background_compounding_forwards_available_repair_authority(self):
+        tick = {
+            "schema": "PROJECT_BRAIN_R3_IMPROVEMENT_QUEUE_DRIVER_V1",
+            "status": "IMPROVEMENT_QUEUE_STABLE",
+            "pass": True,
+            "progress_count": 0,
+            "actions": [],
+            "terminal_authority": False,
+        }
+        component = {"id": "repairer"}
+        expander = Mock()
+        with (
+            patch(
+                "canonical.runtime.unified_cognitive_fabric_v1.improvement_driver.drain",
+                return_value=tick,
+            ) as drain,
+            patch(
+                "canonical.runtime.unified_cognitive_fabric_v1.live_runtime.execute_failure_repair_cycle",
+                return_value={"pass": False, "status": "BLOCKED"},
+            ) as repair_cycle,
+        ):
+            out = run(
+                {
+                    "mode": "CAPABILITY_SCHEDULER",
+                    "payload": {
+                        "work": [{
+                            "work_id": "R3-REPAIR-AUTHORITY",
+                            "work_type": "CAPABILITY_BUILD",
+                            "expected_capability_gain_lcb": 1,
+                            "expected_efficiency_gain_lcb": 0,
+                            "expected_reliability_gain_lcb": 1,
+                            "reuse_breadth_lcb": 1,
+                            "generalization_lcb": 1,
+                            "success_probability_lcb": 1,
+                            "wall_clock_cost_ub": 1,
+                            "compute_cost_ub": 1,
+                            "memory_cost_ub": 1,
+                            "complexity_cost_ub": 1,
+                        }],
+                    },
+                    "options": {
+                        "repair_components": [component],
+                        "self_improvement_max_actions": 2,
+                    },
+                },
+                capability_expander=expander,
+            )
+
+            provider = drain.call_args.kwargs["failure_repair_provider"]
+            self.assertIsNotNone(provider)
+            provider({
+                "payload": {
+                    "failure_fingerprint": "fp:pending",
+                    "retry_capsule_sha256": "retry:pending",
+                }
+            })
+
+        self.assertEqual(out["compounding_tick"], tick)
+        request = repair_cycle.call_args.args[0]
+        self.assertEqual(request["failure_fingerprint"], "fp:pending")
+        self.assertEqual(request["retry_capsule_sha256"], "retry:pending")
+        self.assertEqual(request["components"], [component])
+        self.assertTrue(request["autonomous"])
+        self.assertIs(
+            repair_cycle.call_args.kwargs["capability_expander"],
+            expander,
+        )
+
     def test_auto_universal_escape_route_is_structurally_selected(self):
         out = run({
             "payload": {

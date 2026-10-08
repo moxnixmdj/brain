@@ -367,6 +367,21 @@ def execute_failure_repair_cycle(
             state_path=path,
             retry_capsule_sha256=request.get("retry_capsule_sha256"),
         )
+        if (
+            request.get("autonomous") is True
+            and retry.get("autonomous_replay_authorized") is not True
+        ):
+            return {
+                "schema": SCHEMA,
+                "status": "AUTONOMOUS_REPAIR_BLOCKED__REPLAY_NOT_PROVED_SAFE",
+                "pass": False,
+                "failure_fingerprint": fingerprint,
+                "retry_capsule_sha256": retry["retry_capsule_sha256"],
+                "autonomous_replay_reason": retry.get("autonomous_replay_reason"),
+                "capability_promotion_authority": False,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
         synthesized = synthesize_failure_repair(request, state_path=path)
         invention_mode = False
         if synthesized.get("pass") is not True:
@@ -704,6 +719,7 @@ def _auto_repair_live_failure(
         ],
         "solver_kwargs": deepcopy(dict(request.get("repair_solver_kwargs") or {})),
         "learn": True,
+        "autonomous": True,
     }
     repaired = execute_failure_repair_cycle(
         repair_request,
@@ -720,13 +736,38 @@ def _auto_repair_live_failure(
         out["status"] = str(out.get("status") or "LIVE_EXECUTION") + "__R3_RECOVERED"
         out["recovered_execution"] = deepcopy(repaired.get("original_replay"))
         out["r3_original_failure_status"] = result.get("status")
+    else:
+        work_id = str(learning.get("improvement_work_id") or "").strip()
+        if work_id:
+            learning_module = _learning_module()
+            learning_state_path = (
+                learning_module.DEFAULT_STATE_PATH
+                if request.get("state_path") is None
+                else Path(request.get("state_path"))
+            )
+            learning_module._record_improvement_attempt(
+                work_id,
+                status=str(
+                    repaired.get("status")
+                    or "AUTO_REPAIR_DID_NOT_CLOSE_ORIGINAL_OBLIGATION"
+                ),
+                reason=(
+                    str(
+                        repaired.get("reason")
+                        or repaired.get("autonomous_replay_reason")
+                        or ""
+                    ).strip()
+                    or None
+                ),
+                state_path=learning_state_path,
+            )
     return out
 
 
 def _replay_request_payload(payload: Mapping[str, Any]) -> dict[str, Any]:
     """Strip R3 control-plane fields so exact replay cannot recursively auto-repair."""
     cleaned = deepcopy(dict(payload))
-    for key in ("repair_components", "repair_solver_kwargs", "auto_repair"):
+    for key in ("repair_components", "repair_solver_kwargs", "auto_repair", "autonomous"):
         cleaned.pop(key, None)
     return cleaned
 
