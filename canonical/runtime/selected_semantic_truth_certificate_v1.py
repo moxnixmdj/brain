@@ -6,8 +6,9 @@ TRUE/FALSE/UNKNOWN observation suitable for the existing Tournament/minimax
 information machinery.
 
 It does not prove policy adequacy, target acceptance, U-empty, or terminality.
-A caller-selected predicate ID must equal the stable identity derived from the
-checker-verified source condition; arbitrary aliases cannot inherit its truth.
+The checker mints the authoritative predicate ID from the verified source
+condition. Caller-supplied predicate labels are preserved only as unauthenticated
+metadata and can never inherit semantic truth authority.
 """
 from __future__ import annotations
 
@@ -110,7 +111,9 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             "pass": False,
             "status": "UNKNOWN__SELECTED_PREDICATE_NOT_PROVED",
             "reason": "TARGET_CLAIM_NOT_UNIQUELY_ACCEPTED",
-            "predicate_id": predicate_id,
+            "predicate_id": None,
+            "requested_predicate_id": predicate_id,
+            "requested_predicate_id_authority": False,
             "target_claim_id": target_claim_id,
             "predicate_truth": "UNKNOWN",
             "source_id": source_id,
@@ -132,7 +135,9 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             "pass": False,
             "status": "UNKNOWN__ACCEPTED_CLAIM_NOT_BOOLEAN",
             "reason": "TARGET_CLAIM_HAS_NO_VERIFIED_BOOLEAN_TRUTH_VALUE",
-            "predicate_id": predicate_id,
+            "predicate_id": None,
+            "requested_predicate_id": predicate_id,
+            "requested_predicate_id_authority": False,
             "target_claim_id": target_claim_id,
             "predicate_truth": "UNKNOWN",
             "accepted_claim": dict(row),
@@ -148,15 +153,16 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
 
     source_sha256 = hashlib.sha256(source_text.encode("utf-8")).hexdigest()
     checked_predicate_id = _checked_predicate_id(row, source_id, source_sha256)
-    if checked_predicate_id is None or predicate_id != checked_predicate_id:
+    if checked_predicate_id is None:
         return {
             "schema": SCHEMA,
             "pass": False,
-            "status": "UNKNOWN__PREDICATE_IDENTITY_NOT_SOURCE_BOUND",
-            "reason": "REQUESTED_PREDICATE_DOES_NOT_MATCH_CHECKER_AUTHENTICATED_SOURCE_CONDITION",
+            "status": "UNKNOWN__CHECKED_PREDICATE_ID_UNAVAILABLE",
+            "reason": "CHECKER_ACCEPTED_BOOLEAN_WITHOUT_CANONICAL_SOURCE_CONDITION_IDENTITY",
             "predicate_truth": "UNKNOWN",
+            "predicate_id": None,
             "requested_predicate_id": predicate_id,
-            "verified_predicate_id": checked_predicate_id,
+            "requested_predicate_id_authority": False,
             "target_claim_id": target_claim_id,
             "source_id": source_id,
             "source_sha256": source_sha256,
@@ -172,7 +178,9 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         "schema": SCHEMA,
         "pass": True,
         "status": "PASS__SELECTED_SEMANTIC_PREDICATE_PROVED_TRUE" if holds else "PASS__SELECTED_SEMANTIC_PREDICATE_PROVED_FALSE",
-        "predicate_id": predicate_id,
+        "predicate_id": checked_predicate_id,
+        "requested_predicate_id": predicate_id,
+        "requested_predicate_id_authority": False,
         "target_claim_id": target_claim_id,
         "predicate_truth": "TRUE" if holds else "FALSE",
         "truthful_precommitment_observation": True,
@@ -188,6 +196,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         "terminal_credit_delta": 0,
         "boundary": (
             "SEMANTIC_TRUTH_ONLY__SOURCE_AUTHORIZATION_AND_POLICY_ADEQUACY_REMAIN_SEPARATE__"
+            "CALLER_PREDICATE_LABEL_IS_NONAUTHORITATIVE__"
             "UNKNOWN_IS_REQUIRED_OUTSIDE_THE_CHECKED_SOURCE_ALIGNED_PROOF_FRAGMENT"
         ),
     }
