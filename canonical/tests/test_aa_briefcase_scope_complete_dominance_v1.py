@@ -7,8 +7,8 @@ from canonical.runtime.aa_briefcase_scope_complete_dominance_v1 import (
 )
 
 
-def target():
-    return {
+def target(owner_key_binding=None):
+    out = {
         "schema": "PROJECT_BRAIN_AA_BRIEFCASE_OPUS55_CURRENT_OWNER_TARGET_V1",
         "target": {
             "benchmark": "AA-Briefcase v1.1",
@@ -18,6 +18,9 @@ def target():
         },
         "epoch_rule": {"current_epoch_minimum_opus55_target_elo": 1807},
     }
+    if owner_key_binding is not None:
+        out["owner_attestation_trust_anchor"] = owner_key_binding
+    return out
 
 
 def certificate():
