@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_AA_PUBLIC_PAIRWISE_BOUNDARY_REFRESH_20261008_V1",
+  "date": "2026-10-08",
+  "status": "FRESH_PUBLIC_OWNER_AND_OPEN_SOURCE_BOUNDARY_REFRESH__PAIRWISE_STRUCTURE_BOUND__EXACT_OWNER_PREFERENCE_RELATION_STILL_UNBOUND__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "observed_public_owner": {
+    "methodology_url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "leaderboard_url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "evaluation": "GDPval-AA v2.1",
+    "task_count": 220,
+    "submission_harness": "Stirrup",
+    "grading": "blind pairwise comparison by a sampled judge from a three-model frontier panel",
+    "pairwise_judge_panel": [
+      "Claude Opus 5 (high effort)",
+      "GPT-5.6 Sol (medium reasoning)",
+      "Gemini 3.8 Flash (high reasoning)"
+    ],
+    "aggregation": "Crowd-BT maximum-likelihood fit",
+    "anchor": "DeepSeek V4.1 Flash (max) = 1600",
+    "current_opus55_max_default_fallback_elo": 1866,
+    "current_opus55_rank": 1
+  },
+  "checked_public_implementation_surface": {
+    "stirrup_url": "https://github.com/ArtificialAnalysis/Stirrup",
+    "stirrup_role": "PUBLIC_SUBMISSION_AGENT_HARNESS",
+    "public_issue_requesting_gdpval_evaluation_scripts": "https://github.com/ArtificialAnalysis/Stirrup/issues/8",
+    "issue_state_observed": "OPEN",
+    "external_implementation_crosscheck": "https://github.com/melandlabs/openloomi/blob/main/benchmark/GDPval-AA%20v2/openloomi-runner/readme_gdpvalAAV2_for_openloomi.md",
+    "crosscheck_statement": "PUBLIC_STIRRUP_AND_DATASET_SUPPORT_SUBMISSION_GENERATION__OWNER_PAIRWISE_GRADING_SERVICE_AND_FULL_THREE_JUDGE_GRADING_STACK_ARE_NOT_EXPOSED_AS_AN_OPEN_SOURCE_DROP_IN_OWNER_EVALUATOR"
+  },
+  "result": {
+    "exact_owner_pairwise_judge_prompt_bound": false,
+    "complete_owner_pairwise_outcome_relation_bound": false,
+    "free_public_owner_grader_route_bound": false,
+    "aggregate_opus55_reference_bound": true,
+    "public_structure_bound": true,
+    "proves_brain_noninferiority": false,
+    "proves_target_escape_nonoccupancy": false
+  },
+  "minimum_remaining_target_relative_fact": "EXACT_OWNER_PAIRWISE_JUDGE_INSTRUCTION_OR_EXTENSIONALLY_EQUIVALENT_PREFERENCE_RELATION__OR_A_STRONGER_SCOPE_COMPLETE_BRAIN_DOMINANCE_CERTIFICATE_THAT_MAKES_THE_RELATION_IRRELEVANT",
+  "scheduler_effect": [
+    "DO_NOT_REPEAT_GENERAL_GDPVAL_METADATA_OR_STIRRUP_SEARCH_AS_A_PRIMARY TERMINAL ACTION.",
+    "DO_NOT_TREAT_THE_THREE_JUDGE_PANEL_IDENTITIES_CROWD_BT_FORMULA_OR_1866_AGGREGATE_AS_THE_MISSING_PAIRWISE_PREFERENCE_RELATION.",
+    "PREFER_A_SCOPE_COMPLETE_BRAIN_SIDE_DOMINANCE_OR_TOP_LAW_CERTIFICATE.",
+    "ONLY_IF_THAT_FAILS__ACQUIRE_THE_EXACT_OWNER_PAIRWISE_RELATION_OR_RUN_A_MATCHED_OWNER_EVALUATION THROUGH AN AUTHORIZED ACCESSIBLE ROUTE.",
+    "NO_BENCHMARK_OR_TERMINAL_CREDIT_FROM_THIS_REFRESH."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_EXACT_OWNER_JUDGE_PROMPT_IS IMPOSSIBLE_TO_OBTAIN.",
+    "NO_CLAIM_PUBLIC_METADATA_PROVES_BRAIN_OR_OPUS_PER_TASK PREFERENCE.",
+    "NO_CLAIM_GDPVAL_OR_PROFESSIONAL_QUALITY_IS_CLOSED.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_public_search_actions": 2,
+    "terminal_credit_delta": 0
+  }
+}
