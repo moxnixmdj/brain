@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_PINNED_KIND_PREDICATE_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "EXACT_GIT_BLOB_SOURCE_CONFORMANCE_11_OF_11_TARGETED_TESTS_ON_TWO_SPRITES_ZERO_ACCEPTANCE_CREDIT",
+  "source_blobs": {
+    "canonical/runtime/pinned_kind_predicate_conformance_v1.py": "7f2a9c197fe5a3f474680b79e57d5563ff35a29d",
+    "canonical/tests/test_pinned_kind_predicate_conformance_v1.py": "8e9b0f033a957a22c2d5a891353a0745c1d1e3d5",
+    "canonical/runtime/effect_broker_receipt_resolver_v2.py": "7f4eeeb19def420d0014631b99c5e2dc3a30592e",
+    "canonical/runtime/symbolic_router_deployment_canary_predicate_v1.py": "b8a9ba97dc4a2e11cfbcf03fb36dcaa5ca0e45e6"
+  },
+  "exact_behavior": {
+    "source_function": "admit",
+    "source_path": "canonical/runtime/symbolic_router_deployment_canary_predicate_v1.py",
+    "proved_input_domain": "EXACT_BUILTIN_DICT_WITH_ABSENT_OR_STRING_KIND_VALUE",
+    "derived_admission_predicate": "context.get('kind') == 'SYMBOLIC_ROUTER_DEPLOYMENT_CANARY_V1'",
+    "proof_method": "RESTRICTED_AST_SHAPE_CHECK_PLUS_EXACT_GIT_BLOB_PIN",
+    "source_executed_by_validator": false
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "pin_count": 4,
+      "tests_passed": 11,
+      "tests_run": 11
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "pin_count": 4,
+      "tests_passed": 11,
+      "tests_run": 11
+    }
+  ],
+  "tested_failures": [
+    "STALE_BLOB",
+    "CHANGED_STRING_LITERAL",
+    "CHANGED_KEY",
+    "NOT_EQUAL_COMPARISON",
+    "GUARD_INVERSION",
+    "ADDED_SIDE_EFFECT",
+    "GLOBAL_MUTATION",
+    "EXTRA_FUNCTION",
+    "EXTRA_PYTHON_CALL"
+  ],
+  "limitations": [
+    "PROOF_APPLIES_TO_ONE_RESTRICTED_SOURCE_AST_SHAPE_ONLY",
+    "INPUT_DOMAIN_IS_BUILTIN_DICT_NOT_ARBITRARY_MAPPING_SUBCLASSES",
+    "DOES_NOT_PROVE_INVOKE_ROUTE_OUTPUT_ADEQUACY",
+    "DEPLOYMENT_CANARY_IS_NONCREDITABLE",
+    "DOES_NOT_BIND_TO_ANY_OPEN_OPUS55_ACCEPTANCE_OBLIGATION",
+    "DOES_NOT_PROVE_TARGET_SCOPE_COMPLETENESS_OR_U_EMPTY",
+    "NO_TERMINAL_OR_FAMILY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
