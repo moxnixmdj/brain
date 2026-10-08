@@ -28,6 +28,9 @@ from canonical.runtime.r2_existing_policy_adequacy_repair_v1 import (
 from canonical.runtime.r2_basis_discriminator_repair_v1 import (
     repair as repair_basis_discriminator,
 )
+from canonical.runtime.r2_total_control_action_v1 import (
+    compile_next_action,
+)
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2"
 MAX_FIXED_POINT_STEPS = 16
@@ -85,11 +88,19 @@ def _decorate(
     out.setdefault("terminal_authority", False)
     out.setdefault("terminal_credit_delta", 0)
     out.setdefault("incremental_spend_usd", 0)
+    next_action = compile_next_action(out)
+    out["r2_next_control_action"] = next_action
+    out["r2_control_plane_totalized"] = (
+        next_action.get("classification_complete") is True
+    )
+    out["r2_domain_goal_closed"] = (
+        next_action.get("kind") == "VERIFIED_DOMAIN_ACTION"
+    )
     return out
 
 
 def _fail(reason: str, *, trace: list[dict[str, Any]] | None = None) -> dict[str, Any]:
-    return {
+    out = {
         "schema": SCHEMA,
         "status": "FAIL_CLOSED",
         "pass": False,
@@ -108,6 +119,13 @@ def _fail(reason: str, *, trace: list[dict[str, Any]] | None = None) -> dict[str
         "terminal_credit_delta": 0,
         "incremental_spend_usd": 0,
     }
+    next_action = compile_next_action(out)
+    out["r2_next_control_action"] = next_action
+    out["r2_control_plane_totalized"] = (
+        next_action.get("classification_complete") is True
+    )
+    out["r2_domain_goal_closed"] = False
+    return out
 
 
 def _normalize_provider_candidate(
