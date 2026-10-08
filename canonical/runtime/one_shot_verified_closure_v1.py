@@ -38,8 +38,6 @@ INTERNAL_ROOT1_BLOCKERS = {
 
 EXTERNAL_OR_NEW_EVIDENCE_BLOCKERS = {
     "WAITING_FOR_NEW_INDEPENDENTLY_VERIFIED_EXPERIENCE",
-    "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
-    "FRONTIER_ACQUISITION_ALREADY_ATTEMPTED_FOR_CURRENT_PROVIDER_AND_FRONTIER",
 }
 
 
@@ -81,7 +79,10 @@ def frontier_snapshot(
     state_path: str | Path,
 ) -> dict[str, Any]:
     root = Path(repo_root).resolve(strict=True)
-    state = learning.load_state(state_path)
+    state_target = Path(state_path).resolve(strict=True)
+    state_target.relative_to(root)
+    state_raw = state_target.read_bytes()
+    state = learning.load_state(state_target)
     queue = state.get("improvement_queue", {})
     pending: list[dict[str, Any]] = []
     if isinstance(queue, Mapping):
@@ -90,6 +91,7 @@ def frontier_snapshot(
                 continue
             if raw.get("status") not in {"PENDING", "PARKED"}:
                 continue
+            payload = raw.get("payload") if isinstance(raw.get("payload"), Mapping) else {}
             pending.append({
                 "work_id": str(wid),
                 "kind": str(raw.get("kind") or ""),
@@ -100,9 +102,38 @@ def frontier_snapshot(
                 "last_attempt_frontier_sha256": raw.get(
                     "last_attempt_frontier_sha256"
                 ),
+                "last_attempt_status": raw.get("last_attempt_status"),
+                "last_attempt_reason": raw.get("last_attempt_reason"),
+                "frontier_expansion_work_id": raw.get("frontier_expansion_work_id"),
+                "verification_frontier_sha256": raw.get(
+                    "verification_frontier_sha256"
+                ),
+                "adapter_frontier_sha256": raw.get("adapter_frontier_sha256"),
+                "verification_authority_sha256": raw.get(
+                    "verification_authority_sha256"
+                ),
+                "payload": {
+                    "replayable": payload.get("replayable"),
+                    "proof_available": payload.get("proof_available"),
+                    "proof_capsule_sha256": payload.get("proof_capsule_sha256"),
+                    "replay_capsule_sha256": payload.get("replay_capsule_sha256"),
+                    "retry_capsule_sha256": payload.get("retry_capsule_sha256"),
+                    "repair_class": payload.get("repair_class"),
+                    "required_result": payload.get("required_result"),
+                    "surface": payload.get("surface"),
+                    "boundary_root": payload.get("boundary_root"),
+                    "required_capability_class": payload.get(
+                        "required_capability_class"
+                    ),
+                },
             })
     files = [_safe_file_digest(root, rel) for rel in LOAD_BEARING_PATHS]
     payload = {
+        "state_file": {
+            "path": state_target.relative_to(root).as_posix(),
+            "sha256": sha256(state_raw).hexdigest(),
+            "bytes": len(state_raw),
+        },
         "files": files,
         "pending": sorted(pending, key=lambda x: (x["kind"], x["work_id"])),
         "stats": deepcopy(state.get("stats", {})),
@@ -110,6 +141,7 @@ def frontier_snapshot(
     return {
         "schema": SCHEMA,
         "digest": _sha(payload),
+        "state_sha256": payload["state_file"]["sha256"],
         "payload": payload,
     }
 
@@ -143,38 +175,106 @@ def _extract_blockers(actions: list[Mapping[str, Any]]) -> list[dict[str, Any]]:
     return out
 
 
-def classify_residual(blockers: list[Mapping[str, Any]]) -> dict[str, Any]:
+def classify_residual(
+    blockers: list[Mapping[str, Any]],
+    *,
+    pending: list[Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
     if not blockers:
         return {
             "class": "NONE",
             "internally_solvable_gap_remaining": False,
             "external_or_new_evidence_required": False,
+            "internal_blockers": [],
+            "evidence_blockers": [],
         }
-    names = {str(row.get("blocker") or "") for row in blockers}
-    internal = sorted(names & INTERNAL_ROOT1_BLOCKERS)
-    unsupported = sorted(
-        name
-        for name in names
-        if name
-        and name not in INTERNAL_ROOT1_BLOCKERS
-        and name not in EXTERNAL_OR_NEW_EVIDENCE_BLOCKERS
-    )
-    waiting = sorted(names & EXTERNAL_OR_NEW_EVIDENCE_BLOCKERS)
+
+    pending_by_id = {
+        str(row.get("work_id") or ""): row
+        for row in (pending or [])
+        if isinstance(row, Mapping)
+    }
+    internal: set[str] = set()
+    evidence: set[str] = set()
+
+    for blocker_row in blockers:
+        blocker = str(blocker_row.get("blocker") or "")
+        wid = str(blocker_row.get("work_id") or "")
+        kind = str(blocker_row.get("kind") or "")
+        work = pending_by_id.get(wid, {})
+        status = str(work.get("last_attempt_status") or "")
+        reason = str(work.get("last_attempt_reason") or "")
+        payload = work.get("payload") if isinstance(work.get("payload"), Mapping) else {}
+
+        if blocker in INTERNAL_ROOT1_BLOCKERS:
+            internal.add(blocker)
+            continue
+        if blocker in EXTERNAL_OR_NEW_EVIDENCE_BLOCKERS:
+            evidence.add(blocker)
+            continue
+        if blocker == "FRONTIER_ACQUISITION_ALREADY_ATTEMPTED_FOR_CURRENT_PROVIDER_AND_FRONTIER":
+            internal.add("ROOT1_ACQUISITION_EXHAUSTED_ON_CURRENT_PROVIDER_FRONTIER")
+            continue
+        if blocker != "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE":
+            internal.add(blocker or "UNCLASSIFIED_BLOCKER")
+            continue
+
+        if kind == "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE":
+            replayable = payload.get("replayable")
+            proof_available = payload.get("proof_available")
+            replay_capsule = payload.get("replay_capsule_sha256")
+            if (
+                replayable is False
+                and proof_available is not True
+                and not replay_capsule
+            ) or "SUCCESS_OBSERVATION_NOT_REPLAYABLE" in reason:
+                evidence.add(
+                    "NEW_EXPERIENCE_REQUIRED__HISTORICAL_SUCCESS_NOT_REPLAYABLE"
+                )
+                continue
+            if (
+                status == "IMPROVEMENT_PROVIDER_RETURNED_NO_SUCCESS_ADAPTATION"
+                or work.get("frontier_expansion_work_id")
+            ):
+                internal.add("ROOT1_SUCCESS_ADAPTER_OR_VERIFIER_FRONTIER_GAP")
+                continue
+            internal.add("UNRESOLVED_SUCCESS_ADAPTATION_GAP")
+            continue
+
+        if kind == "REPAIR_FAILURE_CLASS":
+            retry_capsule = payload.get("retry_capsule_sha256")
+            repair_class = str(payload.get("repair_class") or "")
+            if (
+                not retry_capsule
+                or status == "IMPROVEMENT_REPAIR_BLOCKED__REPLAY_CAPSULE_REQUIRED"
+            ):
+                evidence.add(
+                    "NEW_EXPERIENCE_REQUIRED__HISTORICAL_FAILURE_REPLAY_CAPSULE_MISSING"
+                )
+                continue
+            if (
+                repair_class == "ACQUIRE_COMPOSE_OR_INVENT_VERIFIABLE_CAPABILITY"
+                or status == "REPAIR_CYCLE_UNRESOLVED_AT_SYNTHESIS"
+            ):
+                internal.add(
+                    "ROOT1_CAPABILITY_ACQUISITION_OR_REPAIR_SYNTHESIS_GAP"
+                )
+                continue
+            internal.add("UNRESOLVED_FAILURE_REPAIR_GAP")
+            continue
+
+        internal.add("UNRESOLVED_BACKOFF_GAP:" + (kind or "UNKNOWN"))
+
     if internal:
-        cls = "INTERNAL_ROOT1_CONSTRUCTIVE_CAPABILITY_GAP"
-    elif unsupported:
-        cls = "INTERNAL_UNCLASSIFIED_OR_UNSUPPORTED_GAP"
+        cls = "INTERNAL_SOLVABLE_OR_CONSTRUCTIVE_GAP"
     else:
-        cls = "EXTERNAL_OR_NEW_EVIDENCE_REQUIRED"
+        cls = "NEW_INFORMATION_OR_EXPERIENCE_REQUIRED"
     return {
         "class": cls,
-        "internally_solvable_gap_remaining": bool(internal or unsupported),
-        "external_or_new_evidence_required": bool(waiting) and not bool(
-            internal or unsupported
-        ),
-        "internal_blockers": internal,
-        "unsupported_blockers": unsupported,
-        "evidence_blockers": waiting,
+        "internally_solvable_gap_remaining": bool(internal),
+        "external_or_new_evidence_required": bool(evidence) and not bool(internal),
+        "internal_blockers": sorted(internal),
+        "evidence_blockers": sorted(evidence),
     }
 
 
@@ -246,6 +346,7 @@ def run(
                 "fixed_point": False,
                 "round": round_index,
                 "initial_frontier_digest": initial["digest"],
+                "initial_state_sha256": initial["state_sha256"],
                 "before_frontier_digest": before["digest"],
                 "after_frontier_digest": after["digest"],
                 "drain_result": deepcopy(dict(drained)),
@@ -274,41 +375,47 @@ def run(
                 "closure_class": "NO_CURRENT_INTERNAL_IMPROVEMENT_WORK_REMAINS",
                 "initial_frontier_digest": initial["digest"],
                 "final_frontier_digest": after["digest"],
+                "final_state_sha256": after["state_sha256"],
                 "rounds_executed": round_index + 1,
                 "transcript": transcript,
-                "residual": classify_residual([]),
+                "residual": classify_residual([], pending=[]),
                 "terminal_authority": False,
             }
 
         if not changed and int(drained.get("progress_count", 0)) == 0:
-            residual = classify_residual(blockers)
+            residual = classify_residual(blockers, pending=pending)
             internal = residual["internally_solvable_gap_remaining"]
             return {
                 "schema": SCHEMA,
                 "status": (
                     "OPEN__INTERNAL_SOLVABLE_GAP_REMAINS"
                     if internal
-                    else "VERIFIED_FIXED_POINT__EXTERNAL_OR_NEW_EVIDENCE_REQUIRED"
+                    else "VERIFIED_FIXED_POINT__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED"
                 ),
                 "pass": not internal,
                 "fixed_point": True,
                 "closure_class": residual["class"],
                 "initial_frontier_digest": initial["digest"],
                 "final_frontier_digest": after["digest"],
+                "final_state_sha256": after["state_sha256"],
                 "rounds_executed": round_index + 1,
                 "transcript": transcript,
                 "residual": residual,
                 "terminal_authority": False,
             }
 
-    residual = classify_residual(final_blockers)
+    residual = classify_residual(
+        final_blockers, pending=final["payload"]["pending"]
+    )
     return {
         "schema": SCHEMA,
         "status": "FAIL_CLOSED__MAX_ROUNDS_REACHED_BEFORE_FIXED_POINT",
         "pass": False,
         "fixed_point": False,
         "initial_frontier_digest": initial["digest"],
+        "initial_state_sha256": initial["state_sha256"],
         "final_frontier_digest": final["digest"],
+        "final_state_sha256": final["state_sha256"],
         "rounds_executed": max_rounds,
         "transcript": transcript,
         "residual": residual,
