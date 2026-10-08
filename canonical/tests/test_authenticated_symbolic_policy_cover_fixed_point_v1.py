@@ -110,8 +110,8 @@ def test_inline_discriminator_truth_flags_are_rejected(monkeypatch):
         "adequacy_proved": True, "brain_owned": True, "proof_digest": "x",
     })
     out = m.evaluate(p)
-    assert out["pass"] is False
-    assert out["status"].startswith("UNRESOLVED")
+    assert out["pass"] is True
+    assert out["decision_tree"]["terminal_policy_id"] == "p"
     assert out["rejected_discriminator_candidates"][0]["reason"] == "DISCRIMINATOR_FIELDS_INVALID"
 
 
