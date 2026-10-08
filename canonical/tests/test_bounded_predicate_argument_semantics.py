@@ -43,6 +43,21 @@ class Tests(unittest.TestCase):
         r=parse_clause("He must write the report.")
         self.assertEqual(r["status"],"UNRESOLVED")
 
+    def test_noun_after_modal_is_not_promoted_to_predicate(self):
+        r=parse_clause("The writing must improvement in practice.")
+        self.assertEqual(r["status"],"UNRESOLVED")
+        self.assertEqual(r["reason"],"PREDICATE_OUTSIDE_BOUND_LEXICON")
+
+    def test_unknown_passive_participle_is_not_promoted(self):
+        r=parse_clause("The report must be frobnicated by the approver.")
+        self.assertEqual(r["status"],"UNRESOLVED")
+        self.assertEqual(r["reason"],"PASSIVE_PREDICATE_OUTSIDE_BOUND_LEXICON")
+
+    def test_supported_retry_remains_owned(self):
+        r=parse_clause("The worker must retry the operation.")
+        self.assertEqual(r["status"],"RESOLVED")
+        self.assertEqual(r["semantic_graph"]["predicate"],"retry")
+
     def test_outside_grammar_unresolved(self):
         r=parse_clause("Writing the report is desirable.")
         self.assertEqual(r["status"],"UNRESOLVED")
