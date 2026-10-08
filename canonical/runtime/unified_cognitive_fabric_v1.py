@@ -579,7 +579,7 @@ def run(
                 ),
                 repo_root=ROOT,
                 episode_verification_provider=episode_verification_provider,
-                skill_verification_provider=None,
+                skill_verification_provider=skill_verification_provider,
                 success_episode_adapter_provider=success_episode_adapter_provider,
                 failure_repair_provider=None,
                 max_actions=int(options.get("self_improvement_max_actions", 4)),
