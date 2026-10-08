@@ -23,6 +23,7 @@ from canonical.runtime import r2_structured_table_direct_adequacy_v1 as table_ad
 from canonical.runtime import r2_docx_direct_adequacy_v1 as docx_adequacy
 from canonical.runtime import r2_docx_json_direct_adequacy_v1 as docx_json_adequacy
 from canonical.runtime import r2_typed_decision_direct_adequacy_v1 as typed_decision_adequacy
+from canonical.runtime import r2_visual_code_direct_adequacy_v1 as visual_code_adequacy
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -35,6 +36,7 @@ STRUCTURED_TABLE_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_TABLE_ARTIFACT_FAMILY_V
 DOCX_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1"
 DOCX_JSON_ROUTE_ID = "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1"
 TYPED_DECISION_ROUTE_ID = "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1"
+VISUAL_CODE_ROUTE_ID = "DIRECT_ADEQUACY::VISUAL_CODE_QR_CODE128_FAMILY_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -85,6 +87,13 @@ ROUTES = {
         "preflight": "r2_typed_decision_direct_adequacy_v1.preflight",
         "executor": "r2_typed_decision_direct_adequacy_v1.run",
         "acceptance": "PRODUCER_INDEPENDENT_FULL_DECISION_RECOMPUTATION_PLUS_LOSSLESS_RAW_GOAL_ACCEPTANCE",
+    },
+    VISUAL_CODE_ROUTE_ID: {
+        "capability_id": "DYNAMIC_VERIFIED_BOUND_VISUAL_CODE_PRODUCER",
+        "scope": "EXACT_QUOTED_ASCII_PAYLOAD_TO_QR_OR_CODE128_PNG_GOAL_FAMILY",
+        "preflight": "r2_visual_code_direct_adequacy_v1.preflight",
+        "executor": "r2_visual_code_direct_adequacy_v1.run",
+        "acceptance": "PRODUCER_INDEPENDENT_ZBARIMG_DECODE_MUST_EQUAL_EXACT_QUOTED_PAYLOAD",
     },
     DOCX_JSON_ROUTE_ID: {
         "capability_id": "docx.document.create_from_json_record",
