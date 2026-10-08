@@ -30,6 +30,8 @@ from typing import Any, Mapping, Sequence
 
 from canonical.runtime import universal_verified_adaptive_solver_v1 as v1
 from canonical.runtime import universal_verified_adaptive_solver_v4 as v4
+from canonical.runtime import universal_verified_effect_executor_v1 as effect_executor
+from canonical.runtime import h100_verified_effect_tool_registry_v1 as effect_registry
 from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
 from canonical.runtime.resolved_capability_semantics_authenticator_v1 import (
     authenticate as authenticate_resolved_semantics,
@@ -190,6 +192,84 @@ def _needs_resolved_semantics(cap: Mapping[str, Any]) -> bool:
     ) or _contains_effect_ref(cap.get("action"))
 
 
+def _reverify_effect_outcome(
+    *,
+    row: Mapping[str, Any],
+    action: Mapping[str, Any],
+    effect_root: str | Path | None,
+    capability_id: str,
+) -> None:
+    if effect_root is None:
+        raise R3IndependentVerificationError(
+            "EFFECTFUL_EPISODE_REQUIRES_INDEPENDENT_READBACK_ROOT"
+        )
+    outcome = row.get("effect_outcome")
+    digest = str(row.get("effect_outcome_sha256") or "")
+    if not isinstance(outcome, Mapping) or len(digest) != 64:
+        raise R3IndependentVerificationError(
+            "EFFECT_OUTCOME_EVIDENCE_INVALID:" + capability_id
+        )
+    if action.get("executor_id") != effect_executor.EXECUTOR_ID:
+        raise R3IndependentVerificationError(
+            "EFFECT_EXECUTOR_NOT_ADMITTED:" + capability_id
+        )
+    executor_payload = action.get("executor_payload")
+    if not isinstance(executor_payload, Mapping):
+        raise R3IndependentVerificationError(
+            "EFFECT_EXECUTOR_PAYLOAD_INVALID:" + capability_id
+        )
+    tool_id = str(executor_payload.get("tool_id") or "")
+    sandbox_rel = effect_executor._safe_rel(executor_payload.get("sandbox_rel"))
+    if outcome.get("executor_id") != effect_executor.EXECUTOR_ID:
+        raise R3IndependentVerificationError(
+            "EFFECT_OUTCOME_EXECUTOR_MISMATCH:" + capability_id
+        )
+    if outcome.get("tool_id") != tool_id or outcome.get("sandbox_rel") != sandbox_rel:
+        raise R3IndependentVerificationError(
+            "EFFECT_OUTCOME_BINDING_MISMATCH:" + capability_id
+        )
+    entry = next(
+        (x for x in effect_registry.REGISTRY if x.get("tool_id") == tool_id),
+        None,
+    )
+    if not isinstance(entry, Mapping):
+        raise R3IndependentVerificationError(
+            "EFFECT_TOOL_NOT_IN_VERIFIED_REGISTRY:" + capability_id
+        )
+    if (
+        outcome.get("pack_git_blob_sha") != entry.get("pack_git_blob_sha")
+        or outcome.get("prior_verification") != entry.get("prior_verification")
+    ):
+        raise R3IndependentVerificationError(
+            "EFFECT_TOOL_PRIOR_VERIFICATION_MISMATCH:" + capability_id
+        )
+
+    root = Path(effect_root).resolve(strict=True)
+    sandbox = (root / sandbox_rel).resolve(strict=True)
+    try:
+        sandbox.relative_to(root)
+    except ValueError as exc:
+        raise R3IndependentVerificationError(
+            "EFFECT_READBACK_SANDBOX_ESCAPES_ROOT:" + capability_id
+        ) from exc
+    checked = effect_executor._verify_receipts(outcome, sandbox=sandbox)
+    if _canon(checked) != _canon(outcome.get("receipts")):
+        raise R3IndependentVerificationError(
+            "EFFECT_RECEIPT_READBACK_MISMATCH:" + capability_id
+        )
+    actual_digest = sha256(
+        json.dumps(
+            dict(outcome),
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    if actual_digest != digest:
+        raise R3IndependentVerificationError(
+            "EFFECT_OUTCOME_DIGEST_MISMATCH:" + capability_id
+        )
+
+
 def _reverify_non_effectful_trace(
     *,
     problem: Mapping[str, Any],
@@ -197,12 +277,14 @@ def _reverify_non_effectful_trace(
     fact_capsule_head_hash: str,
     value_capsule_head_hash: str,
     repo_root: str | Path,
+    effect_root: str | Path | None = None,
 ) -> dict[str, Any]:
     caps = _caps(problem)
     fact_capsule = initialize_fact_capsule(problem)
     value_capsule = initialize_value_capsule(problem)
     expected_steps: list[dict[str, Any]] = []
     current_facts = sorted(str(x) for x in problem.get("initial_facts", []))
+    effectful_count = 0
 
     for expected_cycle, raw_row in enumerate(trace):
         if not isinstance(raw_row, Mapping):
@@ -229,20 +311,22 @@ def _reverify_non_effectful_trace(
                 "TRACE_NOT_STRAIGHT_THROUGH_DETERMINISTIC_PLAN:" + cid
             )
 
-        # Never replay or self-attest an effect. A future worker may admit an
-        # effectful episode only when it can independently read back the effect.
-        if row.get("effect_outcome_sha256"):
-            raise R3IndependentVerificationError(
-                "EFFECTFUL_EPISODE_REQUIRES_INDEPENDENT_READBACK_VERIFIER"
-            )
-
         action = _active_action(cap, row)
         if v1._digest(action) != row.get("action_contract_sha256"):
             raise R3IndependentVerificationError("ACTION_CONTRACT_DIGEST_MISMATCH:" + cid)
         action_type = str(action.get("type") or "")
-        if action_type == "verified_effect_tool":
+        is_effectful = action_type == "verified_effect_tool"
+        if is_effectful:
+            _reverify_effect_outcome(
+                row=row,
+                action=action,
+                effect_root=effect_root,
+                capability_id=cid,
+            )
+            effectful_count += 1
+        elif row.get("effect_outcome_sha256") or row.get("effect_outcome") is not None:
             raise R3IndependentVerificationError(
-                "EFFECTFUL_ACTION_REQUIRES_INDEPENDENT_READBACK_VERIFIER"
+                "NON_EFFECT_ACTION_CARRIES_EFFECT_OUTCOME:" + cid
             )
 
         pair = {
@@ -299,13 +383,22 @@ def _reverify_non_effectful_trace(
                 "VERIFIER_SUCCESS_CONDITION_REAUTHENTICATION_MISMATCH:" + cid
             )
 
-        verifier_id = str(action.get("verifier_id") or "").strip()
+        verifier_id = str(
+            action.get("pre_verifier_id")
+            if is_effectful
+            else action.get("verifier_id")
+            or ""
+        ).strip()
         if verifier_id != str(row.get("verifier_id") or "").strip():
             raise R3IndependentVerificationError("VERIFIER_ID_MISMATCH:" + cid)
         verifier = v1.BUILTIN_VERIFIERS.get(verifier_id)
         if verifier is None:
             raise R3IndependentVerificationError("VERIFIER_NOT_BRAIN_OWNED:" + verifier_id)
-        payload = action.get("verifier_payload")
+        payload = (
+            action.get("pre_verifier_payload")
+            if is_effectful
+            else action.get("verifier_payload")
+        )
         proposal = row.get("accepted_proposal")
         if not isinstance(payload, Mapping):
             raise R3IndependentVerificationError("VERIFIER_PAYLOAD_INVALID:" + cid)
@@ -374,6 +467,7 @@ def _reverify_non_effectful_trace(
         "fact_capsule_head_hash": fact_capsule.get("head_hash"),
         "value_capsule_head_hash": value_capsule.get("head_hash"),
         "target_verdict": target_verdict,
+        "effectful_count": effectful_count,
     }
 
 
@@ -405,6 +499,7 @@ def verify_episode_request(
             fact_capsule_head_hash=fact_head,
             value_capsule_head_hash=value_head,
             repo_root=repo_root,
+            effect_root=request.get("effect_root"),
         )
         expected_pre = sorted(str(x) for x in problem.get("initial_facts", []))
         expected_post = sorted(str(x) for x in problem.get("target_effects", []))
@@ -457,10 +552,14 @@ def verify_episode_request(
             "exact_byte_bound": True,
             "trace_reverified": True,
             "state_lineage_reverified": True,
-            "effect_outcomes_reverified": False,
-            "non_effectful_trace": True,
+            "effect_outcomes_reverified": bool(recomputed["effectful_count"]),
+            "non_effectful_trace": recomputed["effectful_count"] == 0,
             "independent_verifier_id": INDEPENDENT_VERIFIER_ID,
-            "verification_basis": NON_EFFECTFUL_VERIFICATION_BASIS,
+            "verification_basis": (
+                NON_EFFECTFUL_VERIFICATION_BASIS
+                if recomputed["effectful_count"] == 0
+                else "SEPARATE_R3_EFFECT_READBACK_RECOMPUTATION_WORKER"
+            ),
         }
         return _emit_pair(
             stem="episode",
