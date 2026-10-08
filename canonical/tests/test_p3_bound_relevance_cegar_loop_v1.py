@@ -9,6 +9,7 @@ def base_payload():
         "v3_input":{"task":{"claims":[]}},
         "cegar_problem":{"formal_source_constraints":[]},
         "truth_payloads_by_discriminator_id":{},
+        "truth_payloads_by_predicate_id":{},
         "source_positive_selection_contracts":{},
         "max_refinement_steps":3,
     }
@@ -158,16 +159,49 @@ def test_unknown_truth_localizes_proof_coverage():
     assert out["status"]=="OPEN__SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED"
 
 
-def test_composite_selected_formula_localizes_binding_gap():
+def test_composite_selected_formula_is_proved_from_authoritative_atoms_with_short_circuit():
+    a="source-condition-sha256:a"
+    b="source-condition-sha256:b"
     p=base_payload()
-    s=selected()
+    p["truth_payloads_by_predicate_id"]={a:{"a":1},b:{"b":1}}
+    p["source_positive_selection_contracts"]={"p":{"selected_policy_id":"p"}}
+    s=selected(atom=a)
+    s["selected_discriminator"]["formula"]={
+        "op":"OR",
+        "args":[{"op":"ATOM","id":a},{"op":"ATOM","id":b}],
+    }
+    seen=[]
+    def cegar(problem):
+        seen.append(problem)
+        return s if len(seen)==1 else common()
+    def truth_eval(payload):
+        if "a" in payload:
+            return truth(a,"TRUE")
+        raise AssertionError("OR short circuit should not request b after a is true")
+    with patch("canonical.runtime.p3_bound_relevance_cegar_loop_v1.solve_cegar",side_effect=cegar), patch(
+        "canonical.runtime.p3_bound_relevance_cegar_loop_v1.evaluate_truth",side_effect=truth_eval
+    ), patch("canonical.runtime.p3_bound_relevance_cegar_loop_v1.evaluate_selection",return_value=realized()):
+        out=evaluate(p)
+    assert out["pass"] is True,out
+    assert seen[1]["formal_source_constraints"]==[{"op":"ATOM","id":a}]
+
+
+def test_composite_formula_missing_atom_payload_localizes_exact_atom():
+    a="source-condition-sha256:a"
+    b="source-condition-sha256:b"
+    p=base_payload()
+    p["truth_payloads_by_predicate_id"]={a:{"a":1}}
+    s=selected(atom=a)
     s["selected_discriminator"]["formula"]={
         "op":"AND",
-        "args":[{"op":"ATOM","id":"a"},{"op":"ATOM","id":"b"}],
+        "args":[{"op":"ATOM","id":a},{"op":"ATOM","id":b}],
     }
-    with patch("canonical.runtime.p3_bound_relevance_cegar_loop_v1.solve_cegar",return_value=s):
+    with patch("canonical.runtime.p3_bound_relevance_cegar_loop_v1.solve_cegar",return_value=s), patch(
+        "canonical.runtime.p3_bound_relevance_cegar_loop_v1.evaluate_truth",return_value=truth(a,"TRUE")
+    ):
         out=evaluate(p)
-    assert out["status"]=="OPEN__SELECTED_DISCRIMINATOR_FORMULA_TRUTH_BINDING_REQUIRED"
+    assert out["status"]=="OPEN__SELECTED_PREDICATE_PROOF_PAYLOAD_REQUIRED"
+    assert out["detail"]["predicate_id"]==b
 
 
 def test_policy_coverage_hole_is_not_misclassified_as_relevance():
