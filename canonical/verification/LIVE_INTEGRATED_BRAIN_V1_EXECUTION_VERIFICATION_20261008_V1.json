@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1_EXECUTION_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__REAL_TASK_EXECUTED__FIRST_INTEGRATION_BUG_FOUND_AND_REPAIRED__13_OF_13_PASS",
+  "branch": "live-integrated-brain-v1-20261008",
+  "isolated_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+  },
+  "real_task": {
+    "task_id": "LIVE_BRAIN_REAL_ARCHIVE_001",
+    "route": [
+      "BOUND_CAPABILITY_REGISTRY_V1",
+      "capability_planner",
+      "archive.tar_gz.create_from_manifest",
+      "verified_bound_capability_execution_adapter_v1",
+      "bound_capability_execution_verifier_v1",
+      "capability_execution_trace_capsule_v1"
+    ],
+    "outcome": "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED",
+    "benchmark_specific": false
+  },
+  "first_observed_failure": {
+    "class": "EXECUTION_OR_BOUND_CONTRACT_FAILURE",
+    "cause": "INITIAL_FACT_WITNESS_WAS_NOT_REPRESENTED_IN_COMPOSITION_CAPSULE_PROVENANCE",
+    "exact_error": "BoundExecutionError:BOUND_CAPABILITY_EXECUTION_TRACE_NOT_VERIFIED:CapsuleError:MISSING_REQUIRED_STATE:effect:manifest.json.available"
+  },
+  "repair": {
+    "path": "canonical/runtime/capability_execution_trace_capsule_v1.py",
+    "rule": "VERIFIED_INITIAL_FACT_REQUIREMENTS_ARE_BOUND_AS_EXPLICIT_EVIDENCE_LINEAGE;ONLY_PREVIOUSLY_PRODUCED_EFFECTS_ARE_CAPSULE_STATE_REQUIREMENTS",
+    "weakens_verification": false
+  },
+  "verification": {
+    "command": "python3 -m unittest canonical.tests.test_capability_execution_trace_capsule_v1 canonical.tests.test_live_integrated_brain_v1 -v",
+    "tests_run": 13,
+    "tests_passed": 13,
+    "tests_failed": 0,
+    "elapsed_seconds": 0.017
+  },
+  "next_observed_boundary": "RAW_TASK_TO_SOUND_COMPILED_TASK_CONTRACT_AND_CAPABILITY_INPUT_BINDING",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

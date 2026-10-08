@@ -325,7 +325,17 @@ def verify_and_compile(
                 effect: copy.deepcopy(providers[effect]) for effect in requires
             }
 
-            state_requires = ["effect:" + effect for effect in requires]
+            state_required_effects = [
+                effect
+                for effect in requires
+                if requirement_witnesses[effect]["origin"] != "VERIFIED_INITIAL_FACT"
+            ]
+            initial_required_effects = [
+                effect
+                for effect in requires
+                if requirement_witnesses[effect]["origin"] == "VERIFIED_INITIAL_FACT"
+            ]
+            state_requires = ["effect:" + effect for effect in state_required_effects]
             state_provides = ["effect:" + effect for effect in provides]
             values = {
                 "effect:" + effect: {
@@ -339,11 +349,17 @@ def verify_and_compile(
                 }
                 for effect in provides
             }
-            evidence_ref = "result_sha256:" + result_sha
+            result_evidence_ref = "result_sha256:" + result_sha
+            initial_evidence_refs = [
+                "verified_initial_fact:" + _canon_sha256({"effect": effect})
+                for effect in initial_required_effects
+            ]
+            evidence_refs = [result_evidence_ref] + initial_evidence_refs
             action_ref = resolved_action_sha
             lineage_refs = (
-                ["state:effect:" + effect for effect in requires]
-                + ["evidence:" + evidence_ref, "action:" + action_ref]
+                ["state:effect:" + effect for effect in state_required_effects]
+                + ["evidence:" + ref for ref in initial_evidence_refs]
+                + ["evidence:" + result_evidence_ref, "action:" + action_ref]
             )
             lineage = {
                 "effect:" + effect: list(lineage_refs) for effect in provides
@@ -355,7 +371,7 @@ def verify_and_compile(
                 requires=state_requires,
                 provides=state_provides,
                 values=values,
-                evidence_refs=[evidence_ref],
+                evidence_refs=evidence_refs,
                 lineage=lineage,
             )
 

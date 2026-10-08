@@ -1,0 +1,22 @@
+name: verify-live-integrated-brain-v1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/live_integrated_brain_v1.py
+      - canonical/runtime/capability_execution_trace_capsule_v1.py
+      - canonical/tests/test_live_integrated_brain_v1.py
+      - canonical/tests/test_capability_execution_trace_capsule_v1.py
+      - .github/workflows/verify-live-integrated-brain-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest canonical.tests.test_capability_execution_trace_capsule_v1 canonical.tests.test_live_integrated_brain_v1 -v
