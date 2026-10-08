@@ -25,6 +25,9 @@ from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as direct_adequac
 from canonical.runtime.r2_existing_policy_adequacy_repair_v1 import (
     repair as repair_existing_adequacy,
 )
+from canonical.runtime.r2_basis_discriminator_repair_v1 import (
+    repair as repair_basis_discriminator,
+)
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2"
 MAX_FIXED_POINT_STEPS = 16
@@ -341,6 +344,53 @@ def run(
                 ] = candidate_digest
                 trace[-1]["automatic_existing_adequacy_repair"][
                     "downstream_reverification_required"
+                ] = True
+                current = merged
+                seen.add(candidate_digest)
+                continue
+
+            basis_repair = repair_basis_discriminator(
+                current,
+                policy_request,
+            )
+            trace[-1]["automatic_basis_discriminator_repair"] = {
+                "status": basis_repair.get("status"),
+                "pass": basis_repair.get("pass") is True,
+                "added_discriminator_ids": deepcopy(
+                    basis_repair.get("added_discriminator_ids", [])
+                ),
+                "added_basis_atoms": deepcopy(
+                    basis_repair.get("added_basis_atoms", [])
+                ),
+                "repair_authority": False,
+                "semantic_truth_authority": False,
+            }
+            if basis_repair.get("status") == "FAIL_CLOSED":
+                return _fail(
+                    "BUILTIN_BASIS_DISCRIMINATOR_REPAIR_FAIL_CLOSED:"
+                    + str(basis_repair.get("reason") or "UNKNOWN"),
+                    trace=trace,
+                )
+            if basis_repair.get("pass") is True:
+                candidate = {"request_patch": basis_repair.get("request_patch")}
+                merged, error = _merge_candidate(current, candidate)
+                if error is not None or merged is None:
+                    return _fail(
+                        "BUILTIN_BASIS_DISCRIMINATOR_REPAIR_PATCH_INVALID:"
+                        + str(error),
+                        trace=trace,
+                    )
+                candidate_digest = _digest(merged)
+                if candidate_digest == _digest(current) or candidate_digest in seen:
+                    return _fail(
+                        "BUILTIN_BASIS_DISCRIMINATOR_REPAIR_NO_PROGRESS",
+                        trace=trace,
+                    )
+                trace[-1]["automatic_basis_discriminator_repair"][
+                    "candidate_request_sha256"
+                ] = candidate_digest
+                trace[-1]["automatic_basis_discriminator_repair"][
+                    "downstream_cegar_reverification_required"
                 ] = True
                 current = merged
                 seen.add(candidate_digest)
