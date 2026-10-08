@@ -92,7 +92,6 @@ def test_authority_boundaries_zero():
     assert out["terminal_authority"] is False
     assert out["terminal_credit_delta"]==0
 
-
 def test_categorical_transitive_membership_realized_end_to_end():
     out=evaluate(payload([req("C1","Tweety is a member of Animal.")],[
       ev("E1","Report states that Tweety is a member of Canary.","REPORT"),
@@ -100,7 +99,7 @@ def test_categorical_transitive_membership_realized_end_to_end():
       ev("E3","Taxonomy states Bird is a subclass of Animal.","TAXONOMY"),
     ]))
     assert out["pass"],out
-    assert out["rendered_text"]=="- Tweety is a member of Animal. [src:REPORT@p1; TAXONOMY@p1]"
+    assert out["rendered_text"]=="- Tweety is a member of Animal. [src:REPORT@p1;TAXONOMY@p1]"
     receipt=out["support_receipts"][0]["receipt"]
     assert receipt["predicate_truth"]=="TRUE"
     assert receipt["support_evidence_ids"]==["E1","E2","E3"]
