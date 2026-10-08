@@ -15,7 +15,7 @@ from copy import deepcopy
 from hashlib import sha1, sha256
 import json
 from pathlib import Path
-from typing import Any, Callable, Mapping
+from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 from canonical.runtime.p3_real_context_v3_admission_v12 import evaluate as evaluate_p3
@@ -25,6 +25,8 @@ SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_CONTROLLER_V1"
 ROOT = Path(__file__).resolve().parents[2]
 GOAL_BINDING_SCHEMA = "PROJECT_BRAIN_GOAL_TO_DECISION_CONTEXT_BINDING_V1"
 GOAL_BINDING_VERIFY_SCHEMA = "PROJECT_BRAIN_GOAL_TO_DECISION_CONTEXT_BINDING_INDEPENDENT_VERIFICATION_V1"
+PARTIAL_GOAL_BINDING_SCHEMA = "PROJECT_BRAIN_PARTIAL_GOAL_TO_DECISION_CONTEXT_BINDING_V1"
+PARTIAL_GOAL_BINDING_VERIFY_SCHEMA = "PROJECT_BRAIN_PARTIAL_GOAL_TO_DECISION_CONTEXT_BINDING_INDEPENDENT_VERIFICATION_V1"
 POLICY_EXECUTION_SCHEMA = "PROJECT_BRAIN_POLICY_EXECUTION_BINDING_V1"
 POLICY_EXECUTION_VERIFY_SCHEMA = "PROJECT_BRAIN_POLICY_EXECUTION_BINDING_INDEPENDENT_VERIFICATION_V1"
 GOAL_SATISFACTION_SCHEMA = "PROJECT_BRAIN_GOAL_SATISFACTION_BINDING_V1"
@@ -138,6 +140,249 @@ def _authenticate_goal_binding(
         return {
             "pass": False,
             "status": "FAIL_CLOSED__GOAL_TO_DECISION_BINDING_INVALID",
+            "reason": type(exc).__name__ + ":" + str(exc),
+        }
+
+
+def _opaque_goal_atom_id(obligation_id: str) -> str:
+    return "GOALOPAQUE::" + sha256(obligation_id.encode("utf-8")).hexdigest()
+
+
+def _decision_basis_from_payload(decision_payload: Mapping[str, Any]) -> set[str]:
+    loop = decision_payload.get("bound_relevance_cegar_loop")
+    if not isinstance(loop, Mapping):
+        raise DecisionControllerError(
+            "PARTIAL_GOAL_BINDING_REQUIRES_BOUND_RELEVANCE_CEGAR_LOOP"
+        )
+    problem = loop.get("cegar_problem")
+    if not isinstance(problem, Mapping):
+        raise DecisionControllerError(
+            "PARTIAL_GOAL_BINDING_REQUIRES_CEGAR_PROBLEM"
+        )
+    basis = problem.get("decision_basis")
+    if (
+        not isinstance(basis, Sequence)
+        or isinstance(basis, (str, bytes))
+        or not basis
+        or any(not isinstance(x, str) or not x for x in basis)
+        or len(set(basis)) != len(basis)
+    ):
+        raise DecisionControllerError("PARTIAL_GOAL_DECISION_BASIS_INVALID")
+    return set(basis)
+
+
+def _raw_obligation_ids(raw_contract: Mapping[str, Any]) -> list[str]:
+    acceptance = raw_contract.get("acceptance_contract")
+    if not isinstance(acceptance, Mapping):
+        raise DecisionControllerError("RAW_ACCEPTANCE_CONTRACT_INVALID")
+    obligations = acceptance.get("obligations")
+    if (
+        not isinstance(obligations, Sequence)
+        or isinstance(obligations, (str, bytes))
+        or not obligations
+    ):
+        raise DecisionControllerError("RAW_ACCEPTANCE_OBLIGATIONS_INVALID")
+    out: list[str] = []
+    for index, row in enumerate(obligations):
+        if not isinstance(row, Mapping):
+            raise DecisionControllerError(
+                f"RAW_ACCEPTANCE_OBLIGATION_INVALID:{index}"
+            )
+        obligation_id = row.get("obligation_id")
+        if not isinstance(obligation_id, str) or not obligation_id:
+            raise DecisionControllerError(
+                f"RAW_ACCEPTANCE_OBLIGATION_ID_INVALID:{index}"
+            )
+        if obligation_id in out:
+            raise DecisionControllerError(
+                "RAW_ACCEPTANCE_OBLIGATION_ID_DUPLICATE:" + obligation_id
+            )
+        out.append(obligation_id)
+    return out
+
+
+def _authenticate_partial_goal_binding(
+    binding: Mapping[str, Any] | None,
+    *,
+    goal: str,
+    decision_payload: Mapping[str, Any],
+    raw_contract: Mapping[str, Any],
+    repo_root: Path,
+) -> dict[str, Any]:
+    """Authenticate a sound partial goal semantics overapproximation.
+
+    Every exact raw-source obligation must remain represented in the actual
+    decision basis. A fully semantically bound obligation may be represented by
+    independently verified semantic atoms. Every obligation not proved fully
+    bound must additionally carry a deterministic opaque remainder atom. The
+    opaque atom preserves all still-unknown load-bearing meaning, so missing
+    semantics can reduce precision but cannot silently create policy authority.
+    """
+    if not isinstance(binding, Mapping):
+        return {
+            "pass": False,
+            "status": "OPEN__PARTIAL_GOAL_TO_DECISION_BINDING_REQUIRED",
+        }
+    try:
+        receipt, receipt_path, receipt_blob = _bound_json(
+            binding.get("receipt"),
+            repo_root=repo_root,
+            prefixes=("canonical/governance/", "canonical/verification/"),
+        )
+        verification, verification_path, verification_blob = _bound_json(
+            binding.get("verification"),
+            repo_root=repo_root,
+            prefixes=("canonical/verification/",),
+        )
+        goal_sha = sha256(goal.encode("utf-8")).hexdigest()
+        decision_sha = _digest(decision_payload)
+        raw_contract_sha = str(raw_contract.get("task_contract_sha256") or "")
+        if not raw_contract_sha:
+            raise DecisionControllerError("RAW_TASK_CONTRACT_SHA_MISSING")
+
+        if receipt.get("schema") != PARTIAL_GOAL_BINDING_SCHEMA:
+            raise DecisionControllerError("PARTIAL_GOAL_BINDING_SCHEMA_INVALID")
+        if receipt.get("goal_sha256") != goal_sha:
+            raise DecisionControllerError("PARTIAL_GOAL_BINDING_GOAL_MISMATCH")
+        if receipt.get("decision_payload_sha256") != decision_sha:
+            raise DecisionControllerError("PARTIAL_GOAL_BINDING_DECISION_MISMATCH")
+        if receipt.get("raw_task_contract_sha256") != raw_contract_sha:
+            raise DecisionControllerError(
+                "PARTIAL_GOAL_BINDING_RAW_CONTRACT_MISMATCH"
+            )
+
+        for field in (
+            "binding_proved",
+            "all_raw_obligations_represented",
+            "sound_overapproximation_proved",
+            "load_bearing_constraints_preserved",
+        ):
+            if receipt.get(field) is not True:
+                raise DecisionControllerError(
+                    "PARTIAL_GOAL_BINDING_PREMISE_UNPROVED:" + field
+                )
+
+        raw_ids = _raw_obligation_ids(raw_contract)
+        raw_set = set(raw_ids)
+        fully_bound = receipt.get("fully_semantically_bound_obligation_ids", [])
+        if (
+            not isinstance(fully_bound, list)
+            or any(not isinstance(x, str) or not x for x in fully_bound)
+            or len(set(fully_bound)) != len(fully_bound)
+        ):
+            raise DecisionControllerError(
+                "PARTIAL_GOAL_FULLY_BOUND_OBLIGATIONS_INVALID"
+            )
+        fully_bound_set = set(fully_bound)
+        if not fully_bound_set.issubset(raw_set):
+            raise DecisionControllerError(
+                "PARTIAL_GOAL_FULLY_BOUND_UNKNOWN_OBLIGATION"
+            )
+
+        semantic_map = receipt.get("semantic_atom_ids_by_obligation", {})
+        if not isinstance(semantic_map, Mapping):
+            raise DecisionControllerError("PARTIAL_GOAL_SEMANTIC_MAP_INVALID")
+        if not set(semantic_map).issubset(raw_set):
+            raise DecisionControllerError(
+                "PARTIAL_GOAL_SEMANTIC_MAP_UNKNOWN_OBLIGATION"
+            )
+
+        semantic_atoms: set[str] = set()
+        for obligation_id, raw_atoms in semantic_map.items():
+            if (
+                not isinstance(raw_atoms, list)
+                or any(not isinstance(x, str) or not x for x in raw_atoms)
+                or len(set(raw_atoms)) != len(raw_atoms)
+            ):
+                raise DecisionControllerError(
+                    "PARTIAL_GOAL_SEMANTIC_ATOMS_INVALID:" + obligation_id
+                )
+            semantic_atoms.update(raw_atoms)
+
+        opaque_map = receipt.get("opaque_remainder_atom_ids", {})
+        if not isinstance(opaque_map, Mapping):
+            raise DecisionControllerError("PARTIAL_GOAL_OPAQUE_MAP_INVALID")
+        expected_opaque_ids = raw_set - fully_bound_set
+        if set(opaque_map) != expected_opaque_ids:
+            raise DecisionControllerError(
+                "PARTIAL_GOAL_OPAQUE_REMAINDER_COVERAGE_MISMATCH"
+            )
+        opaque_atoms: set[str] = set()
+        for obligation_id in sorted(expected_opaque_ids):
+            atom = opaque_map.get(obligation_id)
+            expected = _opaque_goal_atom_id(obligation_id)
+            if atom != expected:
+                raise DecisionControllerError(
+                    "PARTIAL_GOAL_OPAQUE_ATOM_MISMATCH:" + obligation_id
+                )
+            opaque_atoms.add(expected)
+
+        basis = _decision_basis_from_payload(decision_payload)
+        missing_atoms = sorted((semantic_atoms | opaque_atoms) - basis)
+        if missing_atoms:
+            raise DecisionControllerError(
+                "PARTIAL_GOAL_REPRESENTATION_OUTSIDE_DECISION_BASIS:"
+                + ",".join(missing_atoms)
+            )
+
+        if verification.get("schema") != PARTIAL_GOAL_BINDING_VERIFY_SCHEMA:
+            raise DecisionControllerError(
+                "PARTIAL_GOAL_BINDING_VERIFY_SCHEMA_INVALID"
+            )
+        if verification.get("subject_git_blob_sha") != receipt_blob:
+            raise DecisionControllerError(
+                "PARTIAL_GOAL_BINDING_VERIFY_SUBJECT_MISMATCH"
+            )
+        if verification.get("goal_sha256") != goal_sha:
+            raise DecisionControllerError(
+                "PARTIAL_GOAL_BINDING_VERIFY_GOAL_MISMATCH"
+            )
+        if verification.get("decision_payload_sha256") != decision_sha:
+            raise DecisionControllerError(
+                "PARTIAL_GOAL_BINDING_VERIFY_DECISION_MISMATCH"
+            )
+        if verification.get("raw_task_contract_sha256") != raw_contract_sha:
+            raise DecisionControllerError(
+                "PARTIAL_GOAL_BINDING_VERIFY_RAW_CONTRACT_MISMATCH"
+            )
+        for field in (
+            "pass",
+            "independent_verified",
+            "representation_completeness_verified",
+            "semantic_atom_mapping_verified",
+            "opaque_remainder_completeness_verified",
+            "sound_overapproximation_verified",
+            "load_bearing_constraints_verified",
+        ):
+            if verification.get(field) is not True:
+                raise DecisionControllerError(
+                    "PARTIAL_GOAL_BINDING_VERIFY_PREMISE_UNPROVED:" + field
+                )
+
+        return {
+            "pass": True,
+            "status": (
+                "PASS__PARTIAL_GOAL_CONTEXT_SOUND_OVERAPPROXIMATION_AUTHENTICATED"
+            ),
+            "goal_sha256": goal_sha,
+            "decision_payload_sha256": decision_sha,
+            "raw_task_contract_sha256": raw_contract_sha,
+            "raw_obligation_count": len(raw_ids),
+            "fully_semantically_bound_obligation_count": len(fully_bound_set),
+            "opaque_remainder_obligation_count": len(expected_opaque_ids),
+            "semantic_atom_count": len(semantic_atoms),
+            "opaque_atom_count": len(opaque_atoms),
+            "receipt_path": receipt_path,
+            "receipt_git_blob_sha": receipt_blob,
+            "verification_path": verification_path,
+            "verification_git_blob_sha": verification_blob,
+            "sound_overapproximation_only": True,
+            "semantic_completeness_claimed": False,
+        }
+    except Exception as exc:
+        return {
+            "pass": False,
+            "status": "FAIL_CLOSED__PARTIAL_GOAL_TO_DECISION_BINDING_INVALID",
             "reason": type(exc).__name__ + ":" + str(exc),
         }
 
@@ -400,6 +645,7 @@ def run(
             "goal",
             "decision_payload",
             "goal_to_decision_binding",
+            "partial_goal_to_decision_binding",
             "execution_problem",
             "policy_execution_binding",
             "goal_satisfaction_binding",
@@ -450,12 +696,39 @@ def run(
             )
         working = deepcopy(dict(decision_payload))
 
-        goal_binding = _authenticate_goal_binding(
-            request.get("goal_to_decision_binding"),
-            goal=goal,
-            decision_payload=decision_payload,
-            repo_root=root,
+        full_binding_supplied = isinstance(
+            request.get("goal_to_decision_binding"), Mapping
         )
+        partial_binding_supplied = isinstance(
+            request.get("partial_goal_to_decision_binding"), Mapping
+        )
+        if full_binding_supplied and partial_binding_supplied:
+            raise DecisionControllerError("GOAL_BINDING_MODE_AMBIGUOUS")
+
+        if full_binding_supplied:
+            goal_binding = _authenticate_goal_binding(
+                request.get("goal_to_decision_binding"),
+                goal=goal,
+                decision_payload=decision_payload,
+                repo_root=root,
+            )
+            goal_binding_mode = "FULL"
+        elif partial_binding_supplied:
+            goal_binding = _authenticate_partial_goal_binding(
+                request.get("partial_goal_to_decision_binding"),
+                goal=goal,
+                decision_payload=decision_payload,
+                raw_contract=raw_contract,
+                repo_root=root,
+            )
+            goal_binding_mode = "PARTIAL_SOUND_OVERAPPROXIMATION"
+        else:
+            goal_binding = {
+                "pass": False,
+                "status": "OPEN__GOAL_TO_DECISION_BINDING_REQUIRED",
+            }
+            goal_binding_mode = "NONE"
+
         if goal_binding.get("pass") is not True:
             return _open(
                 str(
@@ -465,8 +738,11 @@ def run(
                 task_id=task_id,
                 goal=goal,
                 raw_contract=raw_contract,
-                next_required_edge="AUTHENTICATED_GOAL_TO_DECISION_CONTEXT",
+                next_required_edge=(
+                    "AUTHENTICATED_FULL_OR_SOUND_PARTIAL_GOAL_TO_DECISION_CONTEXT"
+                ),
                 goal_to_decision_binding=goal_binding,
+                goal_binding_mode=goal_binding_mode,
             )
 
         max_rounds = request.get("max_information_rounds", MAX_INFORMATION_ROUNDS)
