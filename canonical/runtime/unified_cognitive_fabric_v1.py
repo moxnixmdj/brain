@@ -572,14 +572,24 @@ def run(
                 payload_row = work.get("payload")
                 if not isinstance(payload_row, Mapping):
                     raise CognitiveFabricError("R3_REPAIR_WORK_PAYLOAD_INVALID")
+                repair_context = payload_row.get("policy_repair_context")
+                if repair_context is not None and (
+                    not isinstance(repair_context, Mapping)
+                    or repair_context.get("schema")
+                    != "PROJECT_BRAIN_R2_POLICY_REPAIR_CONTEXT_V1"
+                ):
+                    raise CognitiveFabricError("R3_REPAIR_POLICY_CONTEXT_INVALID")
+                repair_request = {
+                    "failure_fingerprint": payload_row.get("failure_fingerprint"),
+                    "retry_capsule_sha256": payload_row.get("retry_capsule_sha256"),
+                    "components": list(options.get("repair_components") or []),
+                    "solver_kwargs": deepcopy(dict(options.get("repair_solver_kwargs") or {})),
+                    "learn": True,
+                }
+                if isinstance(repair_context, Mapping):
+                    repair_request["repair_context"] = deepcopy(dict(repair_context))
                 return live_runtime.execute_failure_repair_cycle(
-                    {
-                        "failure_fingerprint": payload_row.get("failure_fingerprint"),
-                        "retry_capsule_sha256": payload_row.get("retry_capsule_sha256"),
-                        "components": list(options.get("repair_components") or []),
-                        "solver_kwargs": deepcopy(dict(options.get("repair_solver_kwargs") or {})),
-                        "learn": True,
-                    },
+                    repair_request,
                     repo_root=ROOT,
                     state_path=options.get("state_path"),
                     information_provider=information_provider,
@@ -634,17 +644,27 @@ def run(
                 payload_row = work.get("payload")
                 if not isinstance(payload_row, Mapping):
                     raise CognitiveFabricError("R3_REPAIR_WORK_PAYLOAD_INVALID")
+                repair_context = payload_row.get("policy_repair_context")
+                if repair_context is not None and (
+                    not isinstance(repair_context, Mapping)
+                    or repair_context.get("schema")
+                    != "PROJECT_BRAIN_R2_POLICY_REPAIR_CONTEXT_V1"
+                ):
+                    raise CognitiveFabricError("R3_REPAIR_POLICY_CONTEXT_INVALID")
+                repair_request = {
+                    "failure_fingerprint": payload_row.get("failure_fingerprint"),
+                    "retry_capsule_sha256": payload_row.get("retry_capsule_sha256"),
+                    "components": list(options.get("repair_components") or []),
+                    "solver_kwargs": deepcopy(
+                        dict(options.get("repair_solver_kwargs") or {})
+                    ),
+                    "learn": True,
+                    "autonomous": True,
+                }
+                if isinstance(repair_context, Mapping):
+                    repair_request["repair_context"] = deepcopy(dict(repair_context))
                 return live_runtime.execute_failure_repair_cycle(
-                    {
-                        "failure_fingerprint": payload_row.get("failure_fingerprint"),
-                        "retry_capsule_sha256": payload_row.get("retry_capsule_sha256"),
-                        "components": list(options.get("repair_components") or []),
-                        "solver_kwargs": deepcopy(
-                            dict(options.get("repair_solver_kwargs") or {})
-                        ),
-                        "learn": True,
-                        "autonomous": True,
-                    },
+                    repair_request,
                     repo_root=ROOT,
                     state_path=options.get("state_path"),
                     information_provider=information_provider,
