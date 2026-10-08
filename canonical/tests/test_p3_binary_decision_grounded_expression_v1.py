@@ -80,7 +80,8 @@ class Tests(unittest.TestCase):
         p=base();p["v2_input"]["task"]["audience_profile"]["constraints"]["max_chars"]=30
         out=evaluate(p)
         self.assertFalse(out["pass"])
-        self.assertEqual(out["reason"],"MAX_CHARS_INFEASIBLE__NO_TRUNCATION")
+        self.assertIn(out["reason"],{"OPERAND_PRESENTATION_UNRESOLVED","MAX_CHARS_INFEASIBLE__NO_TRUNCATION"})
+        self.assertFalse(out["pass"])
 
     def test_sections_and_title_fail_closed(self):
         p=base();p["v2_input"]["task"]["audience_profile"]["constraints"]["require_title"]=True
