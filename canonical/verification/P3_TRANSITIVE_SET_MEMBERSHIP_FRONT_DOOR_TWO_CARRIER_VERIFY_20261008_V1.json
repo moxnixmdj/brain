@@ -1,0 +1,36 @@
+{
+  "schema":"PROJECT_BRAIN_P3_TRANSITIVE_SET_MEMBERSHIP_FRONT_DOOR_TWO_CARRIER_VERIFICATION_V1",
+  "date":"2026-10-08",
+  "status":"PASS__TRANSITIVE_EXPLICIT_CATEGORICAL_MEMBERSHIP_REACHES_P3_FRONT_DOOR__48_OF_48_ON_TWO_CARRIERS__ZERO_TERMINAL_CREDIT",
+  "research_branch":"research/p3-proof-carrying-paraphrase-v1",
+  "subject":{
+    "closure_runtime":{"path":"canonical/runtime/bounded_set_inclusion_membership_closure_v1.py","git_blob_sha":"3ddd8738c1183731c7a50730292e75551b40568e"},
+    "support_v8":{"path":"canonical/runtime/selected_support_truth_certificate_v8.py","git_blob_sha":"cd9fbcc4767da9220e4e5296d1b79b5d7127ab66"},
+    "realization_v4":{"path":"canonical/runtime/p3_required_claim_grounded_realization_cell_v4.py","git_blob_sha":"3144426db7ff3a72504452ddbfc6bccc0c428749"},
+    "front_door_v7":{"path":"canonical/runtime/p3_real_context_v3_admission_v7.py","git_blob_sha":"616f8460ffa622ba9b7e8182d5957d955e11c144"}
+  },
+  "verified_properties":[
+    "DIRECT_MEMBERSHIP_PLUS_EXPLICIT_SUBSET_TRANSITIVE_CLOSURE",
+    "CYCLE_SAFE_SHORTEST_PATH_PROOF",
+    "OPEN_WORLD_NO_PATH_DOES_NOT_PROVE_NONMEMBERSHIP",
+    "COMPLETE_TARGET_ENUMERATION_CAN_PROVE_NONMEMBERSHIP",
+    "SUPPORT_PATH_PLUS_COMPLETE_ABSENCE_RETURNS_UNKNOWN_INCONSISTENCY",
+    "UNPARSED_EVIDENCE_PREVENTS_SILENT_GRAPH_PROOF",
+    "TAXONOMIC_LANGUAGE_NOT_TREATED_AS_SUBSET",
+    "RENDERED_OUTPUT_CITES_DIRECT_MEMBERSHIP_AND_EVERY_LOAD_BEARING_SUBSET_EDGE",
+    "EXISTING_STRUCTURAL_WEIGHTED_NUMERIC_ATTESTATION_MEMBERSHIP_AND_EVENT_ROUTES_REGRESSION_PASS",
+    "NO_AUTHORITY_ESCALATION"
+  ],
+  "primary":{"sprite":"brain-root3-current-byte-replay-20261007-v1","result":{"passed":48,"failed":0}},
+  "independent":{"sprite":"brain-tbscience-v18-authority-verify-20261007-v1","result":{"passed":48,"failed":0},"runner":"ZERO_DEPENDENCY_ASSERT_FUNCTION_RUNNER"},
+  "hard_nonclaims":[
+    "NO_FUZZY_TAXONOMY",
+    "NO_WORLD_KNOWLEDGE_CATEGORY_INFERENCE",
+    "NO_GENERAL_PARAPHRASE",
+    "NO_GENERAL_TEMPORAL_OR_CAUSAL_REASONING",
+    "NO_GLOBAL_P3_CLOSURE",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
