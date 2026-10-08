@@ -49,6 +49,29 @@ def test_active_skill_selector_rejects_unverified_active_skill():
         raise AssertionError("expected fail-closed active skill rejection")
 
 
+def test_current_authority_and_receipt_bindings_are_exact():
+    out = o._authority_binding_check()
+    assert out["pass"] is True, out
+    assert out["mismatch_count"] == 0
+    assert out["checked_binding_count"] > 12
+
+
+def test_authority_binding_fails_closed_on_tampered_hash():
+    pointer = json.loads(o.AUTHORITY_PATH.read_text(encoding="utf-8"))
+    pointer["live_capability_ownership_20261008_v1"]["unified_fabric"]["git_blob_sha"] = "0" * 40
+    with tempfile.TemporaryDirectory() as td:
+        tampered = Path(td) / "CURRENT_TERMINAL_AUTHORITY.json"
+        tampered.write_text(json.dumps(pointer), encoding="utf-8")
+        out = o._authority_binding_check(authority_path=tampered)
+    assert out["pass"] is False
+    assert out["status"] == "FAIL_CLOSED__R1_AUTHORITY_OR_RECEIPT_DRIFT"
+    assert any(
+        row.get("field") == "unified_fabric"
+        and row.get("reason") == "GIT_BLOB_SHA_MISMATCH"
+        for row in out["mismatches"]
+    )
+
+
 def test_empty_dynamic_skill_state_is_valid_provider():
     with tempfile.TemporaryDirectory() as td:
         state_path = Path(td) / "state.json"
