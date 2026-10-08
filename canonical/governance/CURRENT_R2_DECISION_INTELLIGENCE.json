@@ -127,9 +127,10 @@
     "universal_control_semantics_closed": true,
     "universal_positive_action_coverage_closed": false,
     "global_open_world_closure_claimed": false,
-    "verification_path": "canonical/verification/R2_V6_MECHANISM_CLOSURE_AUTHORITY_VERIFY_20261008_V1.json",
-    "verification_git_blob_sha": "6d23c34c7c529738905a8fe7173ff9c6b74555b6",
-    "live_authority_coherence": "11_OF_11_PASS"
+    "verification_path": "canonical/verification/R2_V6_MECHANISM_CLOSURE_AUTHORITY_VERIFY_20261008_V2.json",
+    "verification_git_blob_sha": "65d2f07b5c5dab79ecd92ccdac7a72668665e602",
+    "live_authority_coherence": "11_OF_11_PASS",
+    "verification_semantics": "MUTABLE_POINTER_PATH_IDENTITY__IMMUTABLE_DESCENDANTS_CONTENT_ADDRESSED__NON_SELF_STALING"
   },
   "grounded_candidate_policy_frontier": {
     "path": "canonical/runtime/r2_grounded_candidate_policy_frontier_v1.py",
