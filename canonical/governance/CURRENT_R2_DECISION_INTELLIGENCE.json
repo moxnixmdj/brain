@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-08",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V22_FOURTEEN_DIRECT_ROUTES__ELEVEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V23_FIFTEEN_DIRECT_ROUTES__TWELVE_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -18,18 +18,18 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V22.json",
-    "git_blob_sha": "d50ad6d83aac76622e63b23001b9f2f42741e9f7"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V23.json",
+    "git_blob_sha": "fc3f8478b5fea7788d21adb8f7df21b0cae916bd"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V10.json",
-    "activation_git_blob_sha": "f0e93250c840510697cf93453e44e736d349b203",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V11.json",
+    "activation_git_blob_sha": "f3767e270e56171553a6e5147b0a2114a162a9bc",
     "exact_cell_count": 3,
-    "bounded_family_count": 11,
-    "current_route_count": 14,
-    "current_activation_status": "THREE_EXACT_CELLS_PLUS_ELEVEN_BOUNDED_FAMILIES",
+    "bounded_family_count": 12,
+    "current_route_count": 15,
+    "current_activation_status": "THREE_EXACT_CELLS_PLUS_TWELVE_BOUNDED_FAMILIES",
     "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
-    "direct_runtime_git_blob_sha": "6eeab02898398e2f509c971e194722bf096ba546",
+    "direct_runtime_git_blob_sha": "b5296389bac8f1ee9fe4f1c9d0a79471dc864b1a",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -75,11 +75,16 @@
         "path": "canonical/verification/R2_EXACT_EVIDENCE_CLAIM_SUPPORT_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
         "git_blob_sha": "bac9c5365981585db8fa6afcca7204c46a3394d1",
         "status": "PASS__EXACT_GROUNDED_EVIDENCE_CLAIM_SUPPORT__BRANCH_REGRESSION_24_OF_24__ACTUAL_PRODUCER_DIRECT_REPLAY_PASS__TAMPER_NEGATIVE_PASS__ZERO_CREDIT"
+      },
+      {
+        "path": "canonical/verification/R2_EXPLICIT_NUMERIC_COMPARISON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "7332bad585a48b7c178dc235555b2e38d088b4ca",
+        "status": "PASS__EXPLICIT_GROUNDED_NUMERIC_COMPARISON__BRANCH_REGRESSION_24_OF_24__ACTUAL_PRODUCER_TRUE_AND_FALSE_REPLAYS_PASS__ZERO_CREDIT"
       }
     ],
-    "latest_verification_path": "canonical/verification/R2_EXACT_EVIDENCE_CLAIM_SUPPORT_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
-    "latest_verification_git_blob_sha": "bac9c5365981585db8fa6afcca7204c46a3394d1",
-    "latest_verification_status": "PASS__EXACT_GROUNDED_EVIDENCE_CLAIM_SUPPORT__BRANCH_REGRESSION_24_OF_24__ACTUAL_PRODUCER_DIRECT_REPLAY_PASS__TAMPER_NEGATIVE_PASS__ZERO_CREDIT"
+    "latest_verification_path": "canonical/verification/R2_EXPLICIT_NUMERIC_COMPARISON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "latest_verification_git_blob_sha": "7332bad585a48b7c178dc235555b2e38d088b4ca",
+    "latest_verification_status": "PASS__EXPLICIT_GROUNDED_NUMERIC_COMPARISON__BRANCH_REGRESSION_24_OF_24__ACTUAL_PRODUCER_TRUE_AND_FALSE_REPLAYS_PASS__ZERO_CREDIT"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
@@ -106,7 +111,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__FOURTEEN_DIRECT_ROUTES__ELEVEN_BOUNDED_FAMILIES__VERIFIED_CAPABILITY_ESCAPE_LIVE__EXTERNAL_OBSERVATION_PROVENANCE_AND_EXACT_EVIDENCE_CLAIM_SUPPORT_LIVE",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__FIFTEEN_DIRECT_ROUTES__TWELVE_BOUNDED_FAMILIES__VERIFIED_CAPABILITY_ESCAPE_LIVE__EXTERNAL_OBSERVATION_PROVENANCE_EXACT_CLAIM_SUPPORT_AND_EXPLICIT_NUMERIC_COMPARISON_LIVE",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -243,7 +248,7 @@
   "sufficient_closure": {
     "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V7.json",
     "git_blob_sha": "c78a157335c90864b01edffc03b8e19e1fc48f58",
-    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__ELEVEN_BOUNDED_DIRECT_FAMILIES_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
+    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__TWELVE_BOUNDED_DIRECT_FAMILIES_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
     "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY"
   },
   "policy_adequacy_capability_escape": {
@@ -432,5 +437,28 @@
     ],
     "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
     "semantic_entailment_claimed": false
+  },
+  "explicit_numeric_comparison_direct_adequacy": {
+    "path": "canonical/runtime/r2_explicit_numeric_comparison_direct_adequacy_v1.py",
+    "git_blob_sha": "ad688f55d86e3d995e9f1e3851913833a453ad66",
+    "verification_path": "canonical/verification/R2_EXPLICIT_NUMERIC_COMPARISON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "verification_git_blob_sha": "7332bad585a48b7c178dc235555b2e38d088b4ca",
+    "route_id": "DIRECT_ADEQUACY::EXPLICIT_GROUNDED_NUMERIC_COMPARISON_FAMILY_V1",
+    "producer_capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+    "supported_operators": [
+      "GT",
+      "LT",
+      "GTE",
+      "LTE",
+      "EQ",
+      "NE",
+      "ABS_DIFF_LTE"
+    ],
+    "branch_regression": "24_OF_24_PASS",
+    "actual_true_predicate_replay_pass": true,
+    "actual_false_predicate_replay_pass": true,
+    "semantic_role_binding_authority": "INHERITED_FROM_INDEPENDENTLY_QUALIFIED_BOUNDED_PRODUCER",
+    "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
+    "general_language_claimed": false
   }
 }
