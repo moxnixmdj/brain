@@ -1046,6 +1046,14 @@ def integrate_solver_output(
 
         if skill_admission.get("admitted") is True:
             active_skill_id = sid
+            _resolve_improvements(
+                state,
+                kind="REVERIFY_QUARANTINED_SKILL",
+                predicate=lambda work: (
+                    work.get("payload", {}).get("family_id") == family
+                ),
+                resolved_by=sid,
+            )
             source_scopes = set(_items(verified_skill.get("source_scopes")))
             postconditions = _items(verified_skill.get("postconditions"))
             _resolve_improvements(
@@ -1440,6 +1448,8 @@ def _record_reuse_result(
     skill_id: str,
     success: bool,
     effect_may_have_occurred: bool,
+    failure_output: Mapping[str, Any] | None = None,
+    retry_context: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     state = load_state(state_path)
     row = dict(state["reuse"].get(skill_id) or {})
@@ -1467,15 +1477,35 @@ def _record_reuse_result(
                     sid for sid in frontier if sid != skill_id
                 ]
             quarantined = True
+            diagnosis = (
+                _diagnose_failure(failure_output)
+                if isinstance(failure_output, Mapping)
+                else {}
+            )
+            retry_capsule_sha256 = None
+            if isinstance(retry_context, Mapping):
+                retry_capsule_sha256 = _make_retry_capsule(retry_context)["sha256"]
             _enqueue_improvement(
                 state,
                 kind="REVERIFY_QUARANTINED_SKILL",
                 priority=5,
-                identity={"skill_id": skill_id},
+                identity={
+                    "skill_id": skill_id,
+                    "family_id": _s(family),
+                },
                 payload={
                     "skill_id": skill_id,
+                    "family_id": _s(family),
                     "reason": record["quarantine_reason"],
-                    "required_result": "INDEPENDENT_REVERIFICATION_OR_REPLACEMENT",
+                    "failure_fingerprint": diagnosis.get("failure_fingerprint"),
+                    "failure_status": diagnosis.get("status"),
+                    "repair_class": diagnosis.get("repair_class"),
+                    "falsified_capability_ids": diagnosis.get("falsified_capability_ids", []),
+                    "counterexamples": diagnosis.get("counterexamples", []),
+                    "retry_capsule_sha256": retry_capsule_sha256,
+                    "required_result": (
+                        "INDEPENDENT_REVERIFICATION_OR_VERIFIED_FAMILY_REPLACEMENT"
+                    ),
                 },
             )
 
@@ -1750,6 +1780,8 @@ def run_learning_episode(
             skill_id=selected["skill_id"],
             success=reuse_out.get("pass") is True,
             effect_may_have_occurred=effectful,
+            failure_output=(reuse_out if reuse_out.get("pass") is not True else None),
+            retry_context=retry_context,
         )
         reuse_attempt = {
             "skill_id": selected["skill_id"],
