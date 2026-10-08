@@ -34,6 +34,8 @@ def _fail(reason: str, **detail: Any) -> dict[str, Any]:
         "status": "FAIL_CLOSED",
         "reason": reason,
         "common_law_certified": False,
+        "conditional_common_law_proved": False,
+        "upstream_authentication_performed": False,
         "counterexample_selected": False,
         "execution_authority": False,
         "promotion_authority": False,
@@ -230,8 +232,10 @@ def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
         return {
             **common,
             "pass": True,
-            "status": "PASS__COMMON_LAW_ROBUSTLY_ADEQUATE_ON_DECLARED_COMPLETE_COVER",
-            "common_law_certified": True,
+            "status": "CONDITIONAL_PASS__COMMON_LAW_ROBUSTLY_ADEQUATE_IF_DECLARED_PREMISES_ARE_AUTHENTIC",
+            "common_law_certified": False,
+            "conditional_common_law_proved": True,
+            "upstream_authentication_performed": False,
             "counterexample_selected": False,
             "selected_counterexample": None,
             "theorem": (
@@ -240,9 +244,10 @@ def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
                 "CELL_OF_THE_DECLARED_COMPLETE_EVALUATOR_DOMAIN_COVER"
             ),
             "boundary": (
-                "CREDIT_REQUIRES_UPSTREAM_INDEPENDENT_AUTHENTICATION_OF_METRIC_SEMANTICS_"
-                "WORLD_COVER_CHALLENGE_COVER_AND_LOSS_BOUND_SOUNDNESS;THIS_KERNEL_ONLY_"
-                "CHECKS_THE_BOUND_PROBLEM_AND_NEVER_GRANTS_BENCHMARK_OR_TERMINAL_CREDIT"
+                "CALLER_SUPPLIED_BOUND_FLAGS_AND_POLICY_HASHES_ARE_PREMISES_NOT_AUTHENTICATED_EVIDENCE;"
+                "CREDIT_REQUIRES_A_SEPARATE_TRUSTED_VERIFIER_TO_REPLAY_METRIC_SEMANTICS_WORLD_COVER_"
+                "CHALLENGE_COVER_LOSS_BOUND_SOUNDNESS_AND_POLICY_IDENTITY;THIS_KERNEL_ONLY_CHECKS_"
+                "THE_CONDITIONAL_THEOREM_AND_NEVER_GRANTS_BENCHMARK_OR_TERMINAL_CREDIT"
             ),
         }
 
@@ -251,6 +256,8 @@ def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
         "pass": False,
         "status": "UNRESOLVED__ROBUST_FUNCTIONAL_COUNTEREXAMPLE_SELECTED",
         "common_law_certified": False,
+        "conditional_common_law_proved": False,
+        "upstream_authentication_performed": False,
         "counterexample_selected": True,
         "selected_counterexample": {
             "challenge_id": selected["worst_case_challenge_id"],
