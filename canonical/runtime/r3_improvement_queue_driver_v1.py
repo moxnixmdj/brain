@@ -118,6 +118,7 @@ def _verify_episode_work(
         repo_root=repo_root,
         episode_verification_provider=episode_verification_provider,
         skill_verification_provider=skill_verification_provider,
+        effect_root=payload.get("effect_root"),
     )
     if verified.get("current_episode_verified") is not True:
         return {
