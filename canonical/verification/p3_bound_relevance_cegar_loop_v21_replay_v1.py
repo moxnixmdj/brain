@@ -22,9 +22,21 @@ m3=types.ModuleType("canonical.runtime.p3_source_positive_selection_cell_v1")
 m3.evaluate=lambda payload,repo_root=None: {"pass":False,"status":"FAIL_CLOSED","reason":"REPLAY_STUB"}
 sys.modules[m3.__name__]=m3
 
-import canonical.tests.test_p3_bound_relevance_cegar_loop_v1 as t
+m4=types.ModuleType("canonical.runtime.p3_real_context_v3_admission_v11")
+m4.evaluate=lambda payload,repo_root=None: {
+    "pass":False,
+    "nonbinding_capacity_reason":"CAPACITY_BINDING_REQUIRES_RELEVANCE_POLICY",
+    "terminal_authority":False,
+    "terminal_credit_delta":0,
+}
+sys.modules[m4.__name__]=m4
 
-tests=[(n,f) for n,f in vars(t).items() if n.startswith("test_") and callable(f)]
+import canonical.tests.test_p3_bound_relevance_cegar_loop_v1 as t1
+import canonical.tests.test_p3_real_context_v3_admission_v12 as t2
+
+tests=[]
+for t in (t1,t2):
+    tests.extend((t.__name__+"."+n,f) for n,f in vars(t).items() if n.startswith("test_") and callable(f))
 failed=[]
 for name,fn in tests:
     try:
