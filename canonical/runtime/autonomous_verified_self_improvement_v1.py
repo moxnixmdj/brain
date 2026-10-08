@@ -128,6 +128,80 @@ def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None
     """Retain only bounded execution-proof metadata needed for later read-only verification."""
     if not isinstance(out, Mapping) or out.get("pass") is not True:
         return None
+
+    proof_outcome = out.get("proof_carrying_outcome")
+    if isinstance(proof_outcome, Mapping):
+        if (
+            proof_outcome.get("pass") is not True
+            or proof_outcome.get("semantic_acceptance_complete") is not True
+            or proof_outcome.get(
+                "all_raw_obligations_bound_to_authenticated_acceptance"
+            ) is not True
+            or proof_outcome.get("acceptance_authority") is not False
+            or proof_outcome.get("self_certifying") is not False
+        ):
+            return None
+        obligation_evidence = proof_outcome.get("obligation_evidence")
+        if (
+            not isinstance(obligation_evidence, Sequence)
+            or isinstance(obligation_evidence, (str, bytes))
+            or not obligation_evidence
+        ):
+            return None
+        bounded_evidence: list[dict[str, Any]] = []
+        for row in obligation_evidence:
+            if not isinstance(row, Mapping):
+                return None
+            binding = row.get("acceptance_binding")
+            if not isinstance(binding, Mapping):
+                return None
+            bounded_evidence.append({
+                "obligation_id": _s(row.get("obligation_id")),
+                "segment_sha256": _s(row.get("segment_sha256")),
+                "accepted": row.get("accepted") is True,
+                "independent_verifier_id": _s(binding.get("independent_verifier_id")),
+                "receipt_git_blob_sha": _s(binding.get("receipt_git_blob_sha")),
+                "verification_git_blob_sha": _s(binding.get("verification_git_blob_sha")),
+            })
+        if any(
+            not row["obligation_id"]
+            or not row["segment_sha256"]
+            or row["accepted"] is not True
+            or not row["independent_verifier_id"]
+            for row in bounded_evidence
+        ):
+            return None
+        material = {
+            "proof_kind": "PROOF_CARRYING_OUTCOME_V1",
+            "source_schema": _s(out.get("schema")) or None,
+            "source_status": _s(out.get("status")) or None,
+            "task_id": _s(out.get("task_id")) or None,
+            "raw_task_contract_sha256": _s(
+                proof_outcome.get("raw_task_contract_sha256")
+            ) or None,
+            "verifier_plan_sha256": _s(
+                proof_outcome.get("verifier_plan_sha256")
+            ) or None,
+            "proof_carrying_outcome_sha256": _s(
+                proof_outcome.get("proof_carrying_outcome_sha256")
+            ) or None,
+            "selected_policy_id": _s(
+                proof_outcome.get("selected_policy_id")
+            ) or None,
+            "obligation_evidence": bounded_evidence,
+            "semantic_acceptance_complete": True,
+        }
+        _validate_retry_value(material, path="success_proof")
+        raw = _canon(material).encode("utf-8")
+        if len(raw) > 128_000:
+            raise SelfImprovementError("SUCCESS_PROOF_CAPSULE_TOO_LARGE")
+        return {
+            "schema": "PROJECT_BRAIN_SUCCESS_PROOF_CAPSULE_V1",
+            "sha256": _sha(material),
+            "material": material,
+            "secret_scan": "PASS",
+        }
+
     checkpoint = out.get("controller_checkpoint")
     selected_plan = out.get("selected_plan")
     if not isinstance(checkpoint, Mapping):
