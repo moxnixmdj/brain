@@ -46,6 +46,7 @@ class R3BoundSuccessReadonlyLearningV1Tests(unittest.TestCase):
             },
         }
         result = {
+            "status": "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
             "pass": True,
             "inputs_sha256": prepared["inputs_sha256"],
             "registry_file_sha256": prepared["registry_file_sha256"],
@@ -84,28 +85,30 @@ class R3BoundSuccessReadonlyLearningV1Tests(unittest.TestCase):
         }
         checkpoint_path = root / "checkpoint.json"
         checkpoint_path.write_text(json.dumps(checkpoint), encoding="utf-8")
+        proof_material = {
+            "source_schema": "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1",
+            "source_status": "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED",
+            "task_id": "task-1",
+            "selected_plan": [cid],
+            "verified_target_effects": ["done"],
+            "controller_checkpoint": {
+                "path": "checkpoint.json",
+                "plan_sha256": plan_sha,
+            },
+            "execution": [{
+                "capability_id": cid,
+                "pass": True,
+                "status": "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
+                "composition_capsule_head_hash": "5" * 64,
+            }],
+            "cognition_dependency_class": "MODEL_INDEPENDENT",
+            "model_dependency_count": 0,
+            "semantic_acceptance_complete": True,
+        }
         proof = {
             "schema": "PROJECT_BRAIN_SUCCESS_PROOF_CAPSULE_V1",
-            "material": {
-                "source_schema": "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1",
-                "source_status": "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED",
-                "task_id": "task-1",
-                "selected_plan": [cid],
-                "verified_target_effects": ["done"],
-                "controller_checkpoint": {
-                    "path": "checkpoint.json",
-                    "plan_sha256": plan_sha,
-                },
-                "execution": [{
-                    "capability_id": cid,
-                    "pass": True,
-                    "status": "PASS",
-                    "composition_capsule_head_hash": "5" * 64,
-                }],
-                "cognition_dependency_class": "MODEL_INDEPENDENT",
-                "model_dependency_count": 0,
-                "semantic_acceptance_complete": True,
-            },
+            "sha256": adapter._sha(proof_material),
+            "material": proof_material,
         }
         observation = {
             "observation_id": "observation:test",
@@ -169,6 +172,32 @@ class R3BoundSuccessReadonlyLearningV1Tests(unittest.TestCase):
             self.assertFalse(out["execution_replayed"])
             self.assertTrue(out["effect_outcomes_reverified"])
 
+    def test_proof_capsule_material_tampering_is_rejected_before_adaptation(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            observation, replay, _ = self.material(root)
+            observation["proof_capsule"]["material"]["verified_target_effects"] = ["forged"]
+            self.assertIsNone(
+                adapter.adapt(
+                    {"observation": observation, "replay_context": replay},
+                    repo_root=root,
+                )
+            )
+
+    def test_digest_valid_but_replay_target_mismatch_is_rejected(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            observation, replay, _ = self.material(root)
+            material = observation["proof_capsule"]["material"]
+            material["verified_target_effects"] = ["forged"]
+            observation["proof_capsule"]["sha256"] = adapter._sha(material)
+            self.assertIsNone(
+                adapter.adapt(
+                    {"observation": observation, "replay_context": replay},
+                    repo_root=root,
+                )
+            )
+
     def test_artifact_tampering_blocks_success_learning(self):
         with TemporaryDirectory() as td:
             root = Path(td)
@@ -210,6 +239,50 @@ class R3BoundSuccessReadonlyLearningV1Tests(unittest.TestCase):
                 )
             self.assertFalse(out["pass"])
             self.assertIn("DURABLE_ARTIFACT_HASH_MISMATCH", out["reason"])
+
+    def test_underivable_cross_step_prerequisite_blocks_learning(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            observation, replay, prepared = self.material(root)
+            adapted = adapter.adapt(
+                {"observation": observation, "replay_context": replay},
+                repo_root=root,
+            )
+            self.assertIsInstance(adapted, dict)
+            broken = deepcopy(prepared)
+            broken["requires"] = ["missing-prerequisite"]
+            solver = adapted["solver_output"]
+            with (
+                mock.patch.object(
+                    verifier.astra_runtime,
+                    "_controller_checkpoint_record_valid",
+                    return_value=True,
+                ),
+                mock.patch.object(verifier.bound_adapter, "prepare", return_value=broken),
+                mock.patch.object(
+                    verifier.bound_adapter,
+                    "inspect",
+                    return_value={"entry": {"cost": 1}},
+                ),
+                mock.patch.object(
+                    verifier,
+                    "verify_bound_execution",
+                    return_value={
+                        "pass": True,
+                        "verified_output": {"capsule_head_hash": "5" * 64},
+                    },
+                ),
+            ):
+                out = verifier.verify_material(
+                    problem=adapted["problem"],
+                    episode=solver["current_episode"],
+                    trace=solver["trace"],
+                    fact_capsule_head_hash=solver["state_capsule_head_hash"],
+                    value_capsule_head_hash=solver["value_capsule_head_hash"],
+                    repo_root=root,
+                )
+            self.assertFalse(out["pass"])
+            self.assertIn("BOUND_COMPOSITION_PREREQUISITE_NOT_DERIVABLE", out["reason"])
 
     def test_adapter_rejects_non_compiled_bound_success(self):
         with TemporaryDirectory() as td:
