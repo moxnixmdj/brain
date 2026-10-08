@@ -95,15 +95,15 @@ FRONTIER_ACQUISITION_MUTABLE_RUNTIME_PATHS = frozenset(
 )
 
 
-def _immutable_runtime_control_surface_sha256(
+def _runtime_control_surface_snapshot(
     *,
     repo_root: str | Path = ROOT,
-) -> str:
-    """Digest runtime files that an adapter-acquisition worker is never allowed to mutate."""
+) -> dict[str, dict[str, Any]]:
+    """Capture exact runtime bytes so rejected acquisition attempts can be rolled back."""
     root = Path(repo_root).resolve(strict=True)
     runtime = (root / "canonical/runtime").resolve(strict=True)
     runtime.relative_to(root)
-    rows: list[dict[str, Any]] = []
+    rows: dict[str, dict[str, Any]] = {}
     for target in sorted(runtime.rglob("*"), key=lambda p: p.as_posix()):
         if "__pycache__" in target.parts or target.suffix in {".pyc", ".pyo"}:
             continue
@@ -115,25 +115,128 @@ def _immutable_runtime_control_surface_sha256(
         if not target.is_file():
             continue
         relative = target.relative_to(root).as_posix()
-        if relative in FRONTIER_ACQUISITION_MUTABLE_RUNTIME_PATHS:
+        rows[relative] = {
+            "raw": target.read_bytes(),
+            "mode": int(target.stat().st_mode & 0o777),
+        }
+    if not rows:
+        raise ImprovementDriverError(
+            "FRONTIER_ACQUISITION_RUNTIME_SNAPSHOT_EMPTY"
+        )
+    return rows
+
+
+def _runtime_snapshot_sha256(
+    snapshot: Mapping[str, Mapping[str, Any]],
+    *,
+    immutable_only: bool,
+) -> str:
+    rows: list[dict[str, Any]] = []
+    for relative in sorted(snapshot):
+        if immutable_only and relative in FRONTIER_ACQUISITION_MUTABLE_RUNTIME_PATHS:
             continue
-        raw = target.read_bytes()
+        record = snapshot[relative]
+        raw = record.get("raw")
+        if not isinstance(raw, (bytes, bytearray)):
+            raise ImprovementDriverError(
+                "FRONTIER_ACQUISITION_RUNTIME_SNAPSHOT_BYTES_INVALID:"
+                + relative
+            )
+        payload = bytes(raw)
         rows.append({
             "path": relative,
-            "sha256": sha256(raw).hexdigest(),
-            "bytes": len(raw),
+            "sha256": sha256(payload).hexdigest(),
+            "bytes": len(payload),
+            "mode": int(record.get("mode", 0)),
         })
     if not rows:
         raise ImprovementDriverError(
-            "FRONTIER_ACQUISITION_IMMUTABLE_RUNTIME_SURFACE_EMPTY"
+            "FRONTIER_ACQUISITION_RUNTIME_DIGEST_SURFACE_EMPTY"
         )
-    payload = json.dumps(
+    raw = json.dumps(
         rows,
         sort_keys=True,
         separators=(",", ":"),
         ensure_ascii=False,
     ).encode("utf-8")
-    return sha256(payload).hexdigest()
+    return sha256(raw).hexdigest()
+
+
+def _immutable_runtime_control_surface_sha256(
+    *,
+    repo_root: str | Path = ROOT,
+) -> str:
+    return _runtime_snapshot_sha256(
+        _runtime_control_surface_snapshot(repo_root=repo_root),
+        immutable_only=True,
+    )
+
+
+def _restore_runtime_control_surface_snapshot(
+    snapshot: Mapping[str, Mapping[str, Any]],
+    *,
+    repo_root: str | Path = ROOT,
+) -> dict[str, Any]:
+    """Restore exact pre-acquisition runtime bytes after a rejected child attempt."""
+    root = Path(repo_root).resolve(strict=True)
+    runtime = root / "canonical/runtime"
+    if runtime.is_symlink():
+        runtime.unlink()
+    runtime.mkdir(parents=True, exist_ok=True)
+    runtime = runtime.resolve(strict=True)
+    runtime.relative_to(root)
+
+    expected = set(snapshot)
+    current: set[str] = set()
+    for target in sorted(runtime.rglob("*"), key=lambda p: p.as_posix()):
+        if "__pycache__" in target.parts or target.suffix in {".pyc", ".pyo"}:
+            continue
+        if target.is_symlink():
+            relative = target.relative_to(root).as_posix()
+            target.unlink()
+            continue
+        if target.is_file():
+            current.add(target.relative_to(root).as_posix())
+
+    for relative in sorted(current - expected, reverse=True):
+        target = root / relative
+        if target.exists() or target.is_symlink():
+            target.unlink()
+
+    for relative in sorted(expected):
+        record = snapshot[relative]
+        raw = record.get("raw")
+        if not isinstance(raw, (bytes, bytearray)):
+            raise ImprovementDriverError(
+                "FRONTIER_ACQUISITION_RUNTIME_SNAPSHOT_BYTES_INVALID:"
+                + relative
+            )
+        target = root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if target.is_symlink():
+            target.unlink()
+        tmp = target.with_name(target.name + ".r3-restore-tmp")
+        tmp.write_bytes(bytes(raw))
+        try:
+            os.chmod(tmp, int(record.get("mode", 0o644)))
+        except Exception:
+            pass
+        os.replace(tmp, target)
+
+    restored = _runtime_control_surface_snapshot(repo_root=root)
+    expected_sha = _runtime_snapshot_sha256(snapshot, immutable_only=False)
+    restored_sha = _runtime_snapshot_sha256(restored, immutable_only=False)
+    if restored_sha != expected_sha:
+        raise ImprovementDriverError(
+            "FRONTIER_ACQUISITION_RUNTIME_ROLLBACK_VERIFICATION_FAILED"
+        )
+    return {
+        "status": "FRONTIER_ACQUISITION_RUNTIME_ROLLED_BACK",
+        "pass": True,
+        "runtime_snapshot_sha256": restored_sha,
+        "restored_file_count": len(restored),
+    }
+
 
 
 def _run_frontier_acquisition_provider_isolated(
