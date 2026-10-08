@@ -104,3 +104,102 @@ def test_duplicate_region_rejected():
 def test_no_policy_rows_rejected():
     p=base(); p["policies"]=[]
     assert run(p)["reason"]=="POLICIES_INVALID_OR_EMPTY"
+
+
+def test_missing_policy_is_not_misdiagnosed_as_missing_discriminator():
+    p=base()
+    p["policies"]=[{"policy_id":"only_w0","adequate_region_ids":["w0"],
+                    "adequacy_receipt":receipt("only_w0")}]
+    out=reduce_obstruction(p)
+    assert out["pass"] is False
+    core=out["counterexample_class"]["smallest_verified_conflict_core"]
+    assert len(core["region_ids"])==1 and core["minimum_cardinality_proved"] is True
+    assert out["counterexample_class"]["regions_with_no_declared_adequate_policy"]
+    assert (out["counterexample_class"]["minimum_missing_decision_relevant_primitive"]
+            =="PROVE_OR_BUILD_ADEQUATE_POLICY")
+
+
+def test_pairwise_policy_coverage_can_still_have_exact_three_region_obstruction():
+    p=base()
+    p["discriminators"]=[]
+    p["policies"]=[
+        {"policy_id":"p01","adequate_region_ids":["w0","w1"],"adequacy_receipt":receipt("p01")},
+        {"policy_id":"p12","adequate_region_ids":["w1","w2"],"adequacy_receipt":receipt("p12")},
+        {"policy_id":"p02","adequate_region_ids":["w0","w2"],"adequacy_receipt":receipt("p02")},
+    ]
+    out=reduce_obstruction(p)
+    assert out["status"]=="UNSPLITTABLE_POLICY_CONFLICT_CLASS_FOUND"
+    witness=out["counterexample_class"]
+    core=witness["smallest_verified_conflict_core"]
+    assert core["region_ids"]==["w0","w1","w2"],core
+    assert core["minimum_cardinality_proved"] and core["irreducible_proved"]
+    assert witness["regions_with_no_declared_adequate_policy"]==[]
+    assert (witness["minimum_missing_decision_relevant_primitive"]
+            =="ADD_TRUTHFUL_DISCRIMINATOR_OR_PROVE_COMMON_ADEQUATE_POLICY")
+
+
+def test_domain_totality_is_not_fake_proof_q_or_receipt_authentication():
+    out=reduce_obstruction(base())
+    assert out["pass"] is True
+    assert out["declared_q_outcome_domain_total_on_h"] is True
+    assert out["declared_q_complete_on_h"] is False
+    assert out["q_information_library_complete_proved"] is False
+    assert out["policy_adequacy_receipt_bytes_authenticated"] is False
+    assert out["policy_receipt_claim_shape_checked"] is True
+    assert out["terminal_authority"] is False
+    assert out["u_empty_authorized"] is False
+
+
+def test_minimum_core_differential_against_independent_combinatorial_oracle():
+    import random
+    from itertools import combinations
+    rng=random.Random(20261008)
+    for trial in range(140):
+        region_count=rng.randint(2,7)
+        policy_count=rng.randint(1,5)
+        region_ids=[f"w{i}" for i in range(region_count)]
+        policies=[]
+        for i in range(policy_count):
+            coverage=[r for r in region_ids if rng.random()<0.55]
+            policies.append({"policy_id":f"p{i}","adequate_region_ids":coverage,
+                             "adequacy_receipt":receipt(f"p{i}")})
+        p={"region_ids":region_ids,"discriminators":[],"policies":policies}
+        actual=reduce_obstruction(p)
+        if actual["pass"]:
+            assert any(set(region_ids)<=set(pol["adequate_region_ids"])
+                       for pol in policies),(trial,actual)
+            continue
+        assert actual["status"]=="UNSPLITTABLE_POLICY_CONFLICT_CLASS_FOUND",(trial,actual)
+        core=actual["counterexample_class"]["smallest_verified_conflict_core"]
+        assert core["minimum_cardinality_proved"],(trial,core)
+        oracle=None
+        for k in range(1,len(region_ids)+1):
+            for subset in combinations(region_ids,k):
+                if not any(set(subset)<=set(pol["adequate_region_ids"])
+                           for pol in policies):
+                    oracle=k
+                    break
+            if oracle is not None:
+                break
+        assert oracle==len(core["region_ids"]),(trial,oracle,core,policies)
+        for r in core["region_ids"]:
+            subset=set(core["region_ids"])-{r}
+            assert any(subset<=set(pol["adequate_region_ids"])
+                       for pol in policies),(trial,core)
+
+
+def test_search_budget_returns_verified_irreducible_not_fabricated_minimum():
+    regions=[f"w{i}" for i in range(14)]
+    p={"region_ids":regions,"discriminators":[],"policies":[
+        {"policy_id":f"p{i}","adequate_region_ids":[r for r in regions if r!=f"w{i}"],
+         "adequacy_receipt":receipt(f"p{i}")}
+        for i in range(len(regions))
+    ]}
+    out=reduce_obstruction(p)
+    assert out["status"]=="UNSPLITTABLE_POLICY_CONFLICT_CLASS_FOUND"
+    core=out["counterexample_class"]["smallest_verified_conflict_core"]
+    assert core["search_budget_exceeded"] is True
+    assert core["minimum_cardinality_proved"] is False
+    assert core["irreducible_proved"] is True
+    assert len(core["region_ids"])==14
+    assert out["terminal_credit_delta"]==0
