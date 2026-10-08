@@ -50,7 +50,11 @@
       "INDEPENDENT_ACTUAL_GOAL_SATISFACTION_ACCEPTANCE_BINDING_COVERAGE",
       "TOTAL_SOUND_ADAPTIVE_COVER_PLUS_WELL_FOUNDED_PROGRESS_AND_RESOURCE_POTENTIAL_IF_UNIVERSAL_OPEN_WORLD_PROOF_IS_REQUIRED",
       "OPEN_WORLD_CANDIDATE_GENERATION_AND_ABSTENTION_COVERAGE_WITHOUT_FIXED_LABEL_COMPLETENESS_ASSUMPTION"
-    ]
+    ],
+    "architectural_root_closed": true,
+    "open_world_verified_coverage_root_open": true,
+    "closure_theorem": "canonical/governance/R2_TOTAL_FAIL_CLOSED_ADEQUACY_CONTROL_CLOSURE_20261008_V1.json",
+    "remaining_incompleteness_class": "AUTHENTICATED_COVERAGE_NOT_GENERAL_CONTROL_MECHANISM"
   },
   "relation_to_adaptive_fixed_point": {
     "theorem": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V1.json",
@@ -101,5 +105,8 @@
     ],
     "closed_external_model_dependency": false,
     "jev_role": "INTERFACE_OR_IDEA_REFERENCE_ONLY__NOT_RUNTIME_DEPENDENCY_NOT_OWNED_CAPABILITY"
-  }
+  },
+  "architectural_status": "CLOSED__TOTAL_FAIL_CLOSED_GENERAL_DECISION_CONTROL",
+  "open_world_verified_coverage_status": "OPEN__EXPANDABLE_AUTHENTICATED_COVERAGE_FRONTIER",
+  "closure_theorem": "canonical/governance/R2_TOTAL_FAIL_CLOSED_ADEQUACY_CONTROL_CLOSURE_20261008_V1.json"
 }
