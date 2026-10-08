@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_THRESHOLD_LOWER_BOUND_STRUCTURAL_LAW_CANDIDATE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE__EXACT_SCORE_DECOMPOSITION_AND_EVALUATOR_RELATION_BOUND__SUCCESS_MASS_LOWER_BOUND_OPEN__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "certificate_type": "THRESHOLD_LOWER_BOUND",
+  "frozen_metric_authority": {
+    "path": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "git_blob_sha": "99721d680c57a1848fcf87ca8036770a6a4b9a0e",
+    "status_prefix": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "repository": "harbor-framework/terminal-bench",
+    "benchmark_commit": "1dcda8716784493721921c23e4bc7f7d988b4494",
+    "metrics_blob": "1b8d56f9e9beb9294c1f78ef3cdc5e8829014f9e",
+    "task_count": 66,
+    "minimum_trials_per_task": 5,
+    "full_population_trial_slots": 330,
+    "success_semantics": "REWARD_GREATER_THAN_ZERO",
+    "accuracy_semantics": "SUCCESSFUL_TRIALS_DIVIDED_BY_ALL_TRIALS",
+    "unavailable_or_unproved_slot_value": 0
+  },
+  "current_owner_target_precision_authority": {
+    "path": "canonical/verification/TB4_OPUS55_CURRENT_OWNER_TARGET_PRECISION_RELATION_PUBLIC_RUNNER_VERIFICATION_20261008_V2.json",
+    "same_owner_pdf_sha256": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378",
+    "historical_summary_alias_percent": 66.4,
+    "detailed_owner_percent": 66.36,
+    "required_successes_for_detailed_owner_target": 219
+  },
+  "score_decomposition": {
+    "exact": true,
+    "slot_universe_size": 330,
+    "slot_key": ["task_identity", "trial_index"],
+    "trial_index_domain": [0,1,2,3,4],
+    "slot_value": "1_IFF_OFFICIAL_REWARD_GREATER_THAN_ZERO_ELSE_0",
+    "total_success_mass": "SUM_OVER_330_DISTINCT_SLOT_VALUES",
+    "accuracy_percent": "100_TIMES_TOTAL_SUCCESS_MASS_DIVIDED_BY_330",
+    "target_success_mass": 219,
+    "proof": "218_OF_330_LT_66_36_PERCENT__219_OF_330_GE_66_36_PERCENT"
+  },
+  "evaluator_relation": {
+    "proved": true,
+    "relation": "A_CERTIFIED_SUCCESS_SLOT_MUST_LOGICALLY_IMPLY_THE_SAME_OFFICIAL_REWARD_GREATER_THAN_ZERO_EVENT_USED_BY_THE_FROZEN_METRIC",
+    "admissible_slot_certificate_classes": [
+      "IMMUTABLE_OFFICIAL_SUCCESS_RECEIPT",
+      "SOUND_LOGICAL_CERTIFICATE_THAT_IMPLIES_OFFICIAL_REWARD_GREATER_THAN_ZERO_FOR_THE_EXACT_SLOT"
+    ],
+    "inadmissible": [
+      "PREDICTED_SUCCESS",
+      "MODEL_SELF_RATING",
+      "PROXY_TEST_PASS_WITHOUT_OFFICIAL_EVALUATOR_IMPLICATION",
+      "DUPLICATE_SLOT_CREDIT",
+      "UNRUN_SLOT_ASSUMED_SUCCESS",
+      "TASK_LEVEL_THEOREM_MAPPED_TO_MULTIPLE_TRIAL_SLOTS_WITHOUT_PROVING_EACH_COVERED_SLOT"
+    ],
+    "double_counting_forbidden": true,
+    "unknown_or_unproved_slot_value": 0
+  },
+  "lower_bound_compiler": {
+    "definition": "L_EQUALS_SUM_OF_DISTINCT_SLOT_LOWER_BOUNDS",
+    "per_slot_lower_bound_domain": [0,1],
+    "pass_rule": "L_GE_219",
+    "fail_closed_rule": "ANY_UNPROVED_OR_AMBIGUOUS_SLOT_CONTRIBUTES_ZERO",
+    "current_proved_lower_bound": 0,
+    "current_state": "OPEN",
+    "only_remaining_structural_input": "CONTENT_ADDRESSED_DISTINCT_SUCCESS_SLOT_CERTIFICATES_WITH_TOTAL_LOWER_BOUND_AT_LEAST_219"
+  },
+  "witness_elimination_projection": {
+    "exact_target_tuple_bound": true,
+    "score_decomposition_exact": true,
+    "evaluator_relation_proved": true,
+    "target_threshold_success_mass": 219,
+    "proved_lower_bound_success_mass": 0,
+    "expected_current_verdict": "PROVED_LOWER_BOUND_BELOW_TARGET",
+    "meaning": "CERTIFICATE_SHAPE_AND_EVALUATOR_RELATION_ARE_CLOSED__ONLY_SUCCESS_MASS_IS_OPEN"
+  },
+  "hard_nonclaims": [
+    "NO_SUCCESS_SLOT_IS_CREATED_BY_THIS_LAW",
+    "NO_TASK_LEVEL_CERTIFICATE_AUTOMATICALLY_COUNTS_AS_FIVE_TRIALS",
+    "NO_TB4_SCORE",
+    "NO_TB4_ACCEPTANCE_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PERMISSION_FOR_SAME_TASK_REPLAY",
+    "NO_RELAXATION_OF_RESULT_BLIND_PRECOMMITMENT_OR_FROZEN_CONFIGURATION_RULES"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
