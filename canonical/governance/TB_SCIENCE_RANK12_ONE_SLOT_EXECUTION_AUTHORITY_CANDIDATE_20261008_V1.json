@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK12_ONE_SLOT_AUTHORITY_CANDIDATE_V1",
+  "date": "2026-10-08",
+  "status": "NONEXECUTABLE_CANDIDATE__CURRENT_PREEXPOSURE_PROOFS_BOUND__ZERO_TASK_EXPOSURE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/clinical-metadata-recovery::trial-0",
+    "rank": 12,
+    "digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8"
+  },
+  "source_bindings": {
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261008_V11.json",
+      "git_blob_sha": "1db8e637ad3dfec5d4ac432c78a86ec1371eb006"
+    },
+    "terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "0c168c4682c4631a9d9b76f329d111389f32872a"
+    },
+    "terminal_reality": {
+      "path": "canonical/verification/CURRENT_MAIN_TERMINAL_REALITY_STATUS.json",
+      "git_blob_sha": "8d3c1674e744d9a24a70ee96c57129b199315f7f"
+    },
+    "terminal_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    },
+    "carrier_closure": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V4.json",
+      "git_blob_sha": "cf9cc9fb8830eda991c71381a523b8f67caedaa7"
+    },
+    "repair_verification": {
+      "path": "canonical/verification/TB_SCIENCE_EXPLICIT_OUTPUT_DIRECTIVE_REPAIR_INDEPENDENT_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "7a11ec5b0b7d7506f17f1d22f5b04b6e96d354c5"
+    },
+    "live_output_preflight": {
+      "path": "canonical/verification/TB_SCIENCE_LIVE_OUTPUT_PREFLIGHT_20261008_V1.json",
+      "git_blob_sha": "d8de49aa3f8fd7d1ffbf39e16505e62241652722"
+    },
+    "storage_preflight": {
+      "path": "canonical/verification/TB_SCIENCE_RANK12_STORAGE_HEADROOM_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "9dfdbd1cf6988f5585fd4ff18e59b7a2d9f87cf3"
+    }
+  },
+  "exact_route": {
+    "agent": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "planner": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "raw_task_contract": "d54d5a2f7efa76b653d288f4f53da4883644baa6",
+    "raw_task_localizer": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76",
+    "transitive_runtime_file_count": 14,
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c"
+  },
+  "controls": {
+    "exact_slot_count": 1,
+    "attempts": 1,
+    "retries": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "exact_carrier_blob_identity_required": true,
+    "current_public_epoch_required_immediately_before_task_start": true,
+    "agent_and_planner_import_required_before_task_start": true,
+    "post_model_storage_gate_required": true,
+    "minimum_post_model_free_bytes": 12884901888,
+    "precheck_failure_consumes_slot": false,
+    "after_task_start_result_is_irreversible": true,
+    "after_task_start_missing_or_zero_verifier_result_counts_as_final_zero": true
+  },
+  "verified_preconditions": {
+    "next_untouched_rank_is_12": true,
+    "prior_consumed_slots": 11,
+    "prior_successes": 0,
+    "prior_final_failures": 11,
+    "rank11_rerun_forbidden": true,
+    "rank11_output_binding_failure_repaired": true,
+    "live_output_control_preflight_pass": true,
+    "live_output_preflight_cycles": 4,
+    "normal_controller_max_cycles": 8,
+    "post_model_storage_headroom_pass": true,
+    "benchmark_task_exposure": 0
+  },
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_RANK12_TASK_CONTENT_READ",
+    "NO_RANK12_TASK_START",
+    "NO_RANK12_EXECUTION_AUTHORITY",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
