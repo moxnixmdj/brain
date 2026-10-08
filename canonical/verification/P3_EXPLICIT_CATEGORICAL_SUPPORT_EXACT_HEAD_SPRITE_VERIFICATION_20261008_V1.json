@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_P3_EXPLICIT_CATEGORICAL_SUPPORT_EXACT_HEAD_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "EXACT_BLOB_INDEPENDENT_REMOTE_REPLAY_PASS__49_OF_49__ZERO_TERMINAL_CREDIT",
+  "candidate_branch": "feature/p3-explicit-categorical-support-20261008-v1",
+  "verified_code_commit": "c6145d1b1dd17009fe96aba3efd28835924025b0",
+  "verifier": {
+    "provider": "SPRITES",
+    "sprite": "brain-trace-parametricity-v1-verify",
+    "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+    "workspace": "/home/sprite/p3-current-head-exact-20261008"
+  },
+  "exact_git_blobs": {
+    "canonical/runtime/bounded_explicit_categorical_support_v1.py": "663545f4ad4275191c352f4431414996509941d5",
+    "canonical/runtime/selected_support_truth_certificate_v5.py": "da35d2c10b56017af28c8a54d59c1bc88b6a7e44",
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py": "ee2a440ac6c263428aee4b922d723a392b0ce4a3",
+    "canonical/runtime/p3_real_context_v3_admission_v6.py": "af50c0f355610016f686759962d862a731373441",
+    "canonical/tests/test_bounded_explicit_categorical_support_v1.py": "633bf3e320038de8aed026099998cd0e0b29bc34",
+    "canonical/tests/test_selected_support_truth_certificate_v5.py": "ba03522b347a5feb240bd0ca80d6d0aada9df0a7",
+    "canonical/tests/test_p3_required_claim_grounded_realization_cell_v3.py": "01f1914c01d2eac01a7ef9e494acca3142c8e0ef",
+    "canonical/tests/test_p3_real_context_v3_admission_v6.py": "29a3985aac00ca940eb63168d68e3b043adc9622"
+  },
+  "verification": {
+    "tests_passed": 49,
+    "tests_total": 49,
+    "tests_failed": 0,
+    "exact_blob_match_count": 8,
+    "exact_blob_mismatch_count": 0,
+    "authority_boundary_terminal_credit_delta": 0
+  },
+  "repaired_during_verification": {
+    "defect": "GROUNDING_TEST_EXPECTED_CITATION_WHITESPACE_DISAGREED_WITH_CANONICAL_REALIZER",
+    "classification": "TEST_EXPECTATION_DEFECT__RUNTIME_RENDERER_UNCHANGED",
+    "repair_commit": "c6145d1b1dd17009fe96aba3efd28835924025b0"
+  },
+  "github_actions_observation": {
+    "prior_run_id": 37731021339,
+    "jobs_observed_failed": 5,
+    "retrievable_job_steps": 0,
+    "classification": "PRE_EXECUTION_OR_RUNNER_INFRASTRUCTURE_FAILURE_NOT_ACCEPTED_AS_CODE_VERDICT",
+    "note": "Independent exact-byte Sprite replay is the positive execution evidence; this receipt does not claim GitHub Actions success."
+  },
+  "hard_nonclaims": [
+    "NO_WHOLE_P3_CLOSURE",
+    "NO_SOURCE_AUTHORIZATION_PROMOTION",
+    "NO_POLICY_ADEQUACY_PROMOTION",
+    "NO_DB_ADMISSION_OR_U_SUBTRACTION",
+    "NO_U_EMPTY_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
