@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB4_OPUS55_CURRENT_OWNER_TARGET_REFRESH_CANDIDATE_V1",
   "date": "2026-10-08",
-  "status": "CANDIDATE__CURRENT_OWNER_DETAILED_TARGET_66_36_PERCENT__HISTORICAL_FROZEN_PREDICATE_66_4_PRESERVED__INDEPENDENT_OWNER_SOURCE_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "OWNER_PUBLIC_TARGET_TUPLE_BOUND__CURRENT_OPUS55_TB4_SCORE_66_36_PERCENT__HISTORICAL_FROZEN_PREDICATE_66_4_PRESERVED__INDEPENDENT_LIVE_OWNER_SOURCE_VERIFICATION_PASS__ZERO_CREDIT",
   "benchmark": "Terminal-Bench 4.0",
   "frozen_predicate_id": "CODING_TB4_GE_66_4",
   "governance_precedent": {
@@ -25,7 +25,8 @@
       "observed_harness": "Claude Code --bare",
       "observed_reasoning_effort": "xhigh",
       "observed_safeguards_enabled": true,
-      "source_byte_verification_state": "PENDING_INDEPENDENT_OWNER_SOURCE_REFETCH_OR_CONTENT_ADDRESS"
+      "source_byte_verification_state": "LIVE_OWNER_SOURCE_REFETCH_VERIFIED_BY_CANONICAL_VERIFICATION_RECEIPT",
+      "verification_receipt": "canonical/verification/TB4_OPUS55_CURRENT_OWNER_TARGET_LIVE_SOURCE_VERIFICATION_20261008_V1.json"
     },
     "secondary_corroboration": {
       "url": "https://unifybench.ai/benchmarks/terminal-bench-4-0-percent-47e7ec",
@@ -74,10 +75,9 @@
     "NO_TERMINAL_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
   ],
   "promotion_requirements": [
-    "INDEPENDENT_OWNER_SOURCE_REFETCH_OR_EQUIVALENT_CONTENT_ADDRESS_FOR_SECTION_8_5",
-    "INDEPENDENT_ARITHMETIC_REPLAY",
     "CURRENT_AUTHORITY_RECOMPILE",
-    "PRESERVE_HISTORICAL_PREDICATE_PROVENANCE"
+    "PRESERVE_HISTORICAL_PREDICATE_PROVENANCE",
+    "REQUIRE_MATCHED_TASK_POPULATION_TRIAL_COUNT_SCORING_HARNESS_RESOURCE_SEMANTICS_AND_RELEVANT_CONFIGURATION_FOR_SCALAR_COMPARISON"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -87,5 +87,13 @@
     "acceptance_credit_delta": 0
   },
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "promotion_state": {
+    "owner_source_verified": true,
+    "arithmetic_verified": true,
+    "target_epoch_binding_supported": true,
+    "attainability_recompiled": true,
+    "attainability_recompile": "canonical/governance/TB4_CURRENT_OWNER_TARGET_ATTAINABILITY_RECOMPILE_20261008_V1.json",
+    "acceptance_credit_granted": false
+  }
 }
