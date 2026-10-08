@@ -16,6 +16,7 @@ separate premises.
 from __future__ import annotations
 
 from collections import deque
+from itertools import combinations
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
@@ -57,6 +58,7 @@ def _ids(values: Sequence[str], *, label: str) -> tuple[str, ...]:
 
 
 MAX_CORE_SEARCH_STATES = 8192
+MAX_EXACT_Q_DISCRIMINATORS = 12
 
 
 def _smallest_conflict_core(
@@ -131,6 +133,57 @@ def _smallest_conflict_core(
         "checked_intersection_states": len(seen),
         "search_budget_exceeded": exhausted,
     }
+
+
+
+def _minimal_observation_plan(
+    regions: Sequence[str],
+    experiments: Sequence[Experiment],
+    policies: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Exact minimum-count subset of declared Q sufficient for common policies.
+
+    Enumerates subsets in cardinality order, including the no-observation
+    common-policy case. Does not claim receipt semantics or global Q completeness.
+    """
+    qs = sorted(experiments, key=lambda x: x.experiment_id)
+    if len(qs) > MAX_EXACT_Q_DISCRIMINATORS:
+        return {
+            "status": "UNPROVED_TOO_MANY_DECLARED_DISCRIMINATORS",
+            "minimum_proved": False,
+            "searched_subsets": 0,
+            "max_exact_q_count": MAX_EXACT_Q_DISCRIMINATORS,
+        }
+    tested = 0
+    for count in range(len(qs) + 1):
+        for subset in combinations(qs, count):
+            tested += 1
+            classes = equivalence_classes(regions, subset)
+            chosen_policies = []
+            for members in classes:
+                common = sorted(
+                    pid for pid, p in policies.items()
+                    if set(members) <= p["regions"]
+                )
+                if not common:
+                    break
+                chosen_policies.append({
+                    "region_ids": members,
+                    "common_declared_policy_id": common[0],
+                })
+            else:
+                return {
+                    "status": "PASS__EXACT_MINIMUM_Q_SUBSET_OVER_DECLARED_H_P_Q",
+                    "minimum_proved": True,
+                    "selected_discriminator_ids": [e.experiment_id for e in subset],
+                    "observation_count": count,
+                    "full_declared_q_count": len(qs),
+                    "avoided_declared_observations": len(qs) - count,
+                    "policy_by_observation_class": chosen_policies,
+                    "searched_subsets": tested,
+                    "bound": "DECLARED_FINITE_H_P_Q_ONLY__ADEQUACY_SEMANTICS_AND_Q_COMPLETENESS_UNPROVED",
+                }
+    raise ValueError("OBSERVATION_PLANNER_INVARIANT_FAILED")
 
 
 def reduce_obstruction(
@@ -290,6 +343,7 @@ def reduce_obstruction(
             "pass": True,
             "status": "PASS__ALL_DECLARED_FINAL_OBSERVATIONAL_CLASSES_STRUCTURALLY_COVERED",
             "classes": detailed,
+            "minimum_declared_observation_plan": _minimal_observation_plan(regions, experiments, policies),
             "all_final_observational_classes_structurally_covered": True,
             "boundary": (
                 "EXACT_ONLY_OVER_DECLARED_FINITE_H_P_Q;"
