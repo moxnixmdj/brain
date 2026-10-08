@@ -321,13 +321,17 @@ def _run_coupling(
     extra_pair: tuple[str, str] | None = None,
 ) -> dict[str, Any]:
     # extra_pair = (better_brain_outcome, worse_target_outcome).
-    edges = set(
+    target_ids = {str(row["id"]) for row in target}
+    brain_ids = {str(row["id"]) for row in brain}
+    edges = {
         (str(row["target"]), str(row["brain"]))
         for row in _coupling_edges(contract)
-    )
+        if str(row["target"]) in target_ids and str(row["brain"]) in brain_ids
+    }
     if extra_pair is not None:
         better, worse = extra_pair
-        edges.add((worse, better))
+        if worse in target_ids and better in brain_ids:
+            edges.add((worse, better))
     return coupling_solve({
         "target_distribution": target,
         "brain_distribution": brain,
