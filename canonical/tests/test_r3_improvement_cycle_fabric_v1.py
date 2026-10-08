@@ -33,6 +33,7 @@ class R3ImprovementCycleFabricTests(unittest.TestCase):
 
     def test_normal_dispatch_auto_drains_episode_compounding_when_verifier_exists(self):
         verifier = object()
+        skill_verifier = object()
         adapter = object()
         tick = {
             "schema": "PROJECT_BRAIN_R3_IMPROVEMENT_QUEUE_DRIVER_V1",
@@ -61,15 +62,20 @@ class R3ImprovementCycleFabricTests(unittest.TestCase):
                     "options": {"self_improvement_max_actions": 2},
                 },
                 episode_verification_provider=verifier,
+                skill_verification_provider=skill_verifier,
                 success_episode_adapter_provider=adapter,
             )
         self.assertTrue(out["inner_pass"], out)
-        self.assertEqual(out["episode_compounding_tick"], tick)
+        self.assertEqual(out["compounding_tick"], tick)
+        self.assertEqual(
+            out["episode_compounding_tick"]["status"],
+            "MERGED_INTO_UNIFIED_COMPOUNDING_TICK",
+        )
         drain.assert_called_once()
         kwargs = drain.call_args.kwargs
         self.assertIs(kwargs["episode_verification_provider"], verifier)
         self.assertIs(kwargs["success_episode_adapter_provider"], adapter)
-        self.assertIsNone(kwargs["skill_verification_provider"])
+        self.assertIs(kwargs["skill_verification_provider"], skill_verifier)
         self.assertIsNone(kwargs["failure_repair_provider"])
         self.assertEqual(kwargs["max_actions"], 2)
 
