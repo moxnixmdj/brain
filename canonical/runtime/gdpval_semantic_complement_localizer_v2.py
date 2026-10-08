@@ -24,7 +24,6 @@ from canonical.runtime.bounded_contextual_semantics import explicit_discourse_re
 from canonical.runtime.contextual_reference_operators import propose_contextual_references
 from canonical.runtime.bounded_semantic_decomposer import decompose as bounded_decompose
 from canonical.runtime.source_obligation_inventory import inventory_source_obligations
-from canonical.runtime.source_bound_shared_modal_and_v1 import bind_shared_modal_and
 
 SCHEMA = "PROJECT_BRAIN_GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZER_V2"
 ROWS_API = (
@@ -115,19 +114,11 @@ def localize_task(row_idx: int, row: dict[str, Any]) -> dict[str, Any]:
 
     compound = Counter()
     modal_segments = 0
-    source_bound_shared_modal_and = 0
-    source_bound_shared_modal_and_obligations = 0
     for segment in _segments(prompt):
         if _MODAL_RE.search(segment):
             modal_segments += 1
             c = _compound_candidate(segment)
             compound[c["status"]] += 1
-            bound = bind_shared_modal_and(segment)
-            if bound.get("status") == "BOUND_SHARED_MODAL_AND":
-                source_bound_shared_modal_and += 1
-                source_bound_shared_modal_and_obligations += int(
-                    bound.get("obligation_count") or 0
-                )
 
     defs = compile_reference_graph(prompt)
     definitions = len(defs.get("definitions") or []) if defs.get("status") == "COMPILED" else 0
@@ -177,8 +168,6 @@ def localize_task(row_idx: int, row: dict[str, Any]) -> dict[str, Any]:
         "baseline_ignored_segment_count": len(ignored),
         "modal_segment_count": modal_segments,
         "compound_candidate_counts": dict(sorted(compound.items())),
-        "source_bound_shared_modal_and_count": source_bound_shared_modal_and,
-        "source_bound_shared_modal_and_obligation_count": source_bound_shared_modal_and_obligations,
         "explicit_definition_count": definitions,
         "named_reference_sentence_count": named_reference_sentences,
         "explicit_discourse_relation_count": len(discourse),
@@ -213,8 +202,6 @@ def localize_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "baseline_unresolved_segment_count",
             "baseline_ignored_segment_count",
             "modal_segment_count",
-            "source_bound_shared_modal_and_count",
-            "source_bound_shared_modal_and_obligation_count",
             "explicit_definition_count",
             "named_reference_sentence_count",
             "explicit_discourse_relation_count",
