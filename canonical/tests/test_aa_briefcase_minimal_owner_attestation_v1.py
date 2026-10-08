@@ -57,6 +57,12 @@ class T(unittest.TestCase):
         self.assertFalse(out["private_task_or_check_contents_required_for_brain_verification"])
         self.assertFalse(out["numeric_elo_reconstruction_required"])
 
+    def test_missing_owner_trust_anchor_fails(self):
+        s = statement()
+        bundle, _binding = make_signed(s)
+        with self.assertRaisesRegex(OwnerAttestationError, "OWNER_TRUST_ANCHOR_MISSING"):
+            verify_minimal_owner_attestation(target(), s, bundle)
+
     def test_stale_epoch_fails(self):
         s = statement()
         s["predicate"]["target_observed_date"] = "2026-10-07"
