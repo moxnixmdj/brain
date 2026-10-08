@@ -273,7 +273,7 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
             # Routing is not success authority. Bind the *whole* unmodified
             # source goal to its acceptance obligations before any execution.
             raw_contract = compile_contract(
-                goal, source_id="user", routing_target_effects=[]
+                goal, source_id="user", routing_target_effects=["controller.compound_plan.executed"]
             )
             if raw_contract.get("pass") is not True:
                 raise LiveBrainError("LOSSLESS_RAW_TASK_CONTRACT_INVALID")
