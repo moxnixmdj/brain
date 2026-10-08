@@ -128,6 +128,60 @@ def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None
     """Retain only bounded execution-proof metadata needed for later read-only verification."""
     if not isinstance(out, Mapping) or out.get("pass") is not True:
         return None
+    # Direct R2 adequacy successes carry their own independent acceptance material
+    # rather than the legacy controller-checkpoint envelope. Retain only the two
+    # currently admitted read-only-reverifiable direct families. Broader families
+    # remain unpromoted until an independent readback verifier is explicitly added.
+    direct_route = _s(out.get("route_id"))
+    if (
+        _s(out.get("r2_fixed_point_status"))
+        == "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED"
+        and out.get("semantic_acceptance_complete") is True
+        and out.get("actual_goal_satisfaction_verified") is True
+        and direct_route in {
+            "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1",
+            "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1",
+        }
+    ):
+        direct_acceptance = out.get("acceptance_receipt")
+        direct_raw_result = out.get("raw_result")
+        accepted_ids = _items(out.get("accepted_raw_obligation_ids"))
+        if (
+            not isinstance(direct_acceptance, Mapping)
+            or not isinstance(direct_raw_result, Mapping)
+            or direct_acceptance.get("pass") is not True
+            or direct_acceptance.get("semantic_acceptance_complete") is not True
+            or not accepted_ids
+            or out.get("raw_acceptance_obligation_count") != len(accepted_ids)
+        ):
+            return None
+        material = {
+            "proof_kind": "R2_DIRECT_ADEQUACY_READONLY_REVERIFY_V1",
+            "source_schema": _s(out.get("schema")) or None,
+            "source_status": _s(out.get("status")) or None,
+            "route_id": direct_route,
+            "goal_sha256": _s(out.get("goal_sha256")) or None,
+            "semantic_scope": _s(out.get("semantic_scope")) or None,
+            "capability_id": _s(out.get("capability_id")) or None,
+            "selected_policy_id": _s(out.get("selected_policy_id")) or None,
+            "raw_acceptance_obligation_count": out.get(
+                "raw_acceptance_obligation_count"
+            ),
+            "accepted_raw_obligation_ids": accepted_ids,
+            "acceptance_receipt": deepcopy(dict(direct_acceptance)),
+            "raw_result": deepcopy(dict(direct_raw_result)),
+        }
+        _validate_retry_value(material, path="success_proof")
+        raw = _canon(material).encode("utf-8")
+        if len(raw) > 256_000:
+            return None
+        return {
+            "schema": "PROJECT_BRAIN_SUCCESS_PROOF_CAPSULE_V1",
+            "sha256": _sha(material),
+            "material": material,
+            "secret_scan": "PASS",
+        }
+
     checkpoint = out.get("controller_checkpoint")
     selected_plan = out.get("selected_plan")
     if not isinstance(checkpoint, Mapping):
