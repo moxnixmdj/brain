@@ -1922,7 +1922,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "314eb74dccd724fb28f718b337367a2476a98eae"
+      "git_blob_sha": "147c2df7ba15e4fb5fec1431e6d0473e599d67c1"
     },
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
@@ -1935,8 +1935,8 @@
     "semantic_auto_routing_boundary": "ARBITRARY_RAW_LANGUAGE_TO_CORRECT_CAPABILITY_SELECTION_REMAINS_R2_AND_IS_NOT_REQUIRED_FOR_R1_STRUCTURAL_CLOSURE",
     "historical_capability_rule": "HISTORICAL_OR_SUPERSEDED_CAPABILITIES_REQUIRE_EXPLICIT_READMISSION_BEFORE_LIVE_OWNERSHIP",
     "r1_structural_closure": true,
-    "live_owned_capability_count": 86,
-    "universally_invocable_live_owned_capability_count": 86,
+    "live_owned_capability_count": 87,
+    "universally_invocable_live_owned_capability_count": 87,
     "missing_fabric_carrier_count": 0,
     "missing_universal_invocation_contract_count": 0,
     "all_live_owned_capabilities_universally_invocable": true,
@@ -1945,7 +1945,7 @@
     "terminal_credit_delta": 0,
     "subordinate_runtime": {
       "path": "canonical/runtime/live_brain_runtime_v1.py",
-      "git_blob_sha": "68683757b5eb64369f482d4cba222a317dd23cb7",
+      "git_blob_sha": "b24010e0ed811c7c62faab0119c6f25c2f409bc6",
       "public_authority": false
     },
     "activation": {
@@ -1957,7 +1957,7 @@
     "subordinate_runtime_public_authority": false,
     "r1_closure_gate": {
       "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
-      "git_blob_sha": "34e559b81e08ff67281a2feb401ebc24bb663741",
+      "git_blob_sha": "3f06f9b39ce91547a5bf70e292c7dcc0ec5f3695",
       "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
     },
     "r1_drift_lock_verification": {
@@ -1965,8 +1965,8 @@
       "git_blob_sha": "74d5e16e1c7213ef38028ca66575ca821b1b4195",
       "status": "PASS__R1_LIVE_ARCHITECTURE_CLOSED_AND_DRIFT_LOCKED"
     },
-    "r1_drift_locked": true,
-    "verification_status": "PASS__R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE__86_OF_86",
+    "r1_drift_locked": false,
+    "verification_status": "PENDING_CURRENT_BRANCH_REVALIDATION__87_OF_87",
     "live_composition": {
       "path": "canonical/runtime/live_capability_composition_v1.py",
       "git_blob_sha": "2c32696b79463936b91e5b45bbba8098cd5f3ff1"
@@ -1996,7 +1996,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "314eb74dccd724fb28f718b337367a2476a98eae"
+      "git_blob_sha": "147c2df7ba15e4fb5fec1431e6d0473e599d67c1"
     },
     "regression": {
       "path": "canonical/tests/test_live_capability_invoker_v1.py",
@@ -2008,11 +2008,11 @@
     },
     "rule": "EVERY_LIVE_OWNED_CAPABILITY_IDENTITY_MUST_BE_CLASSIFIABLE_AND_DISPATCHABLE_THROUGH_UNIFIED_COGNITIVE_FABRIC_LIVE_CAPABILITY_OR_FAIL_CLOSED",
     "semantic_selection_boundary": "CAPABILITY_SELECTION_FROM_ARBITRARY_INTENT_REMAINS_R2",
-    "verification_status": "PASS__R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE__86_OF_86",
+    "verification_status": "PENDING_CURRENT_BRANCH_REVALIDATION__87_OF_87",
     "verification_pr": 3223,
     "terminal_credit_delta": 0,
-    "current_live_owned_capability_count": 86,
-    "universal_invocation_contract_coverage_count": 86,
+    "current_live_owned_capability_count": 87,
+    "universal_invocation_contract_coverage_count": 87,
     "missing_invocation_contract_count": 0,
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
@@ -2025,7 +2025,7 @@
     },
     "r1_closure_gate": {
       "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
-      "git_blob_sha": "34e559b81e08ff67281a2feb401ebc24bb663741",
+      "git_blob_sha": "3f06f9b39ce91547a5bf70e292c7dcc0ec5f3695",
       "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
     },
     "r1_drift_lock_verification": {
