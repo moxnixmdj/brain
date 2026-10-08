@@ -100,6 +100,6 @@ def test_transitive_categorical_membership_realized_end_to_end():
       ev("E3","Taxonomy states that Bird is a subclass of Animal.","TAX"),
     ]))
     assert out["pass"],out
-    assert out["rendered_text"]=="- Tweety is a member of Animal. [src:REPORT@p1] [src:TAX@p1]"
+    assert out["rendered_text"]=="- Tweety is a member of Animal. [src:REPORT@p1;TAX@p1]"
     receipt=out["support_receipts"][0]["receipt"]
     assert receipt["categorical_receipt"]["support_proof_paths"]==[["E1","E2","E3"]]
