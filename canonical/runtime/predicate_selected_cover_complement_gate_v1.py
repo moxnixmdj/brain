@@ -8,10 +8,13 @@ identity and an independently verified complement proof that:
 
 is unsatisfiable over the claimed scope.
 
-It does not itself execute admission predicates or validate their adequacy
-certificates. Therefore it may authorize SELECTED-COVER COMPLETENESS only when
-every predicate row carries an independently verified admission-soundness
-receipt, but it never grants terminal authority. D finality is separate.
+It does not execute admission predicates or validate adequacy certificates,
+and it does not inspect or replay the claimed complement proof. Caller-supplied
+receipt flags and plausible Git blob SHA strings are not authenticated evidence.
+This gate checks claim-shape consistency only and never grants U-empty, ABC,
+or terminal authority. A separate trusted verifier must independently replay
+exact proof bytes, prove admission adequacy and scope coverage, and bind them
+to the live authority before any such credit. D finality is also separate.
 """
 from __future__ import annotations
 
@@ -148,18 +151,25 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
 
     return {
         "schema":SCHEMA,
-        "pass":True,
-        "status":"PASS__PREDICATE_SELECTED_COVER_COMPLETE_BY_COMPLEMENT_UNSAT",
+        "pass":False,
+        "status":"STRUCTURALLY_CONSISTENT__UNCHECKED_PROOF__FAIL_CLOSED",
+        "reason":"INDEPENDENT_PROOF_REPLAY_NOT_PERFORMED",
         "scope_id":scope_id,
         "predicate_set_sha256":digest,
         "route_count":len(normalized),
         "routes":sorted(normalized,key=lambda x:(x["admission_predicate_id"],x["route_id"])),
-        "selected_cover_complete_authorized":True,
-        "u_empty_authorized":True,
-        "abc_closed_authorized":True,
+        # The receipts above are plain mappings supplied by the caller. This
+        # function validates internal field agreement, NOT the existence,
+        # contents, or mathematical validity of the referenced proof objects.
+        # Therefore no global closure authority may follow from these fields.
+        "receipt_claim_shape_consistent":True,
+        "independent_proof_replay_performed":False,
+        "selected_cover_complete_authorized":False,
+        "u_empty_authorized":False,
+        "abc_closed_authorized":False,
         "d_finality_required":True,
         "terminal_authority":False,
         "terminal_credit_delta":0,
-        "proof_rule":"EVERY_REGISTERED_ADMISSION_IMPLIES_ADEQUACY__AND_NO_SCOPE_CONTEXT_EXISTS_OUTSIDE_THE_UNION_OF_REGISTERED_ADMISSIONS__THEREFORE_EVERY_SCOPE_CONTEXT_HAS_A_SOUND_BRAIN_ROUTE",
-        "boundary":"AUTHORIZES_ABC_ONLY_FOR_THE_EXACT_SCOPE_AND_EXACT_PREDICATE_SET_BOUND_BY_THE_INDEPENDENT_COMPLEMENT_PROOF__D_FINALITY_REMAINS_SEPARATE",
+        "next_required":"TRUSTED_EXACT_BYTE_PROOF_REPLAY_AND_SCOPE_COMPLETE_ADMISSION_ADEQUACY_CHECKER",
+        "boundary":"STRUCTURAL_CLAIM_CONSISTENCY_ONLY__CALLER_ASSERTED_FLAGS_AND_SHA_SHAPES_ARE_NOT_PROOFS__NO_U_EMPTY_OR_ABC_AUTHORITY",
     }

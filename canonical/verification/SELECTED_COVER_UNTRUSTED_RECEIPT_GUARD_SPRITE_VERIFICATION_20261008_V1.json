@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_COVER_UNTRUSTED_RECEIPT_GUARD_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_EXACT_BYTE_REMOTE_TEST_PASS__UNTRUSTED_GLOBAL_PROOF_FLAGS_REJECTED__ZERO_TERMINAL_CREDIT",
+  "causal_counterexample": {
+    "source_blob_before_patch": "48408fad6ec30abc28e4136dcbb1696f015e7bd7",
+    "fabricated_blob_ids": [
+      "1111111111111111111111111111111111111111",
+      "2222222222222222222222222222222222222222"
+    ],
+    "admission_receipt_flags_self_asserted": true,
+    "independent_proof_replay_performed": false,
+    "observed_before_patch": {
+      "pass": true,
+      "u_empty_authorized": true,
+      "abc_closed_authorized": true
+    },
+    "source_test": "canonical/tests/test_predicate_selected_cover_complement_gate_v1.py"
+  },
+  "repaired_exact_blobs": {
+    "runtime_path": "canonical/runtime/predicate_selected_cover_complement_gate_v1.py",
+    "runtime_git_blob_sha": "49a57d88105ef774bfeb6e5637c7a6e8487d0c1c",
+    "test_path": "canonical/tests/test_predicate_selected_cover_complement_gate_v1.py",
+    "test_git_blob_sha": "76548829a35d64f1338ab6eebe6e9990969ddbd7"
+  },
+  "verification": {
+    "provider": "SPRITES",
+    "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+    "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+    "workspace": "/home/sprite/cover_receipt_hardening_20261008",
+    "python_compileall_passed": true,
+    "exact_git_blob_hashes_verified": 2,
+    "old_and_new_test_functions_passed": 7,
+    "test_stdout": [
+      "HASHES_OK",
+      "TESTS_PASSED 7"
+    ],
+    "dynamic_external_evaluator_replay": false
+  },
+  "unresolved_requirements": [
+    "DOWNSTREAM_IMPORT_AND_CONSUMER_COMPATIBILITY_AUDIT__GITHUB_PRIVATE_CODE_SEARCH_INCOMPLETE",
+    "BIND_A_TRUSTED_VERIFIER_FOR_REAL_ADEQUACY_AND_COMPLEMENT_PROOFS",
+    "DO_NOT_CLAIM_FINITE_OR_UNIVERSAL_TRACE_SCOPE_COMPLETENESS_FROM_RECEIPT_FIELDS_ONLY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

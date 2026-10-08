@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_COVER_REAL_CONSUMER_COMPATIBILITY_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "EXACT_BYTE_REMOTE_CONSUMER_PREFLIGHT_AND_DISPATCH_PASS__UNTRUSTED_GLOBAL_COVER_REJECTED__ZERO_CREDIT",
+  "branch": "research/selected-cover-untrusted-receipt-gate-20261008-v1",
+  "source_gate_patch_blob": "49a57d88105ef774bfeb6e5637c7a6e8487d0c1c",
+  "provider": "SPRITES",
+  "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+  "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+  "verified_exact_git_blobs": {
+    "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v1.py": "4c923a53861c8dc29e5a69bf0bd8678f669d2702",
+    "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v3.py": "e18b3ee57a680c89dd7fca8a94592f5a5a61655b",
+    "canonical/runtime/certificate_gated_selected_route_router_v1.py": "4b99ef1e95e033badfb21ab7af7355122933224a",
+    "canonical/runtime/predicate_selected_cover_complement_gate_v1.py": "49a57d88105ef774bfeb6e5637c7a6e8487d0c1c",
+    "canonical/runtime/router_deployment_canary_v1.py": "de71202a17071c8af88ec7ac6e1f241fb42854c2",
+    "canonical/runtime/symbolic_router_deployment_canary_predicate_v1.py": "b8a9ba97dc4a2e11cfbcf03fb36dcaa5ca0e45e6",
+    "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V2.json": "5ef3efe40c83b7cb6b2d272593cf50fcbd89b3f4",
+    "canonical/verification/SYMBOLIC_ROUTER_DEPLOYMENT_CANARY_ADEQUACY_CERTIFICATE_20261007_V1.json": "1f87838111c606437442b5d100f57004faf89a05",
+    "canonical/verification/SYMBOLIC_ROUTER_DEPLOYMENT_CANARY_ADMISSION_CERTIFICATE_20261007_V1.json": "5eda5a3275cb11c273159426ab79565d6d2ceaab"
+  },
+  "results": {
+    "consumer_preflight_pass": true,
+    "creditable_route_count": 0,
+    "selected_cover_complete": false,
+    "noncreditable_canary_execute_pass": true,
+    "unknown_context_fail_closed": true,
+    "stdout": [
+      "EXACT_CONSUMER_DEPENDENCY_BLOBS 9",
+      "CONSUMER_PREFLIGHT_PASS_NO_FALSE_COVER",
+      "CONSUMER_NONCREDITABLE_CANARY_EXECUTION_PASS",
+      "UNCOVERED_CONTEXT_FAILS_CLOSED"
+    ]
+  },
+  "static_dependency_audit": {
+    "inspected_candidate_runtime_files": 69,
+    "other_inspected_related_files": 18,
+    "identified_direct_evaluate_caller": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v3.py",
+    "identified_digest_only_consumer": "canonical/runtime/exact_sound_db_admission_convergence_v1.py",
+    "observed_default_registry_only_noncreditable_canary": true,
+    "complete_global_code_reference_search_proved": false
+  },
+  "hard_nonclaims": [
+    "NO_UNIVERSAL_REFERENCE_AUDIT",
+    "NO_CREDITABLE_ROUTE_PROMOTION",
+    "NO_TRUSTED_GENERAL_PROOF_CHECKER",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

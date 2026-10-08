@@ -45,12 +45,16 @@ def payload():
         },
     }
 
-def test_sound_predicates_plus_unsat_complement_close_abc_not_terminal():
+def test_claimed_predicates_and_unsat_receipts_do_not_grant_authority():
+    # The fixture uses fabricated Git SHAs and unsupported self-asserted proof flags.
     out=evaluate(payload())
-    assert out["pass"] is True
-    assert out["selected_cover_complete_authorized"] is True
-    assert out["u_empty_authorized"] is True
-    assert out["abc_closed_authorized"] is True
+    assert out["pass"] is False
+    assert out["receipt_claim_shape_consistent"] is True
+    assert out["independent_proof_replay_performed"] is False
+    assert out["selected_cover_complete_authorized"] is False
+    assert out["u_empty_authorized"] is False
+    assert out["abc_closed_authorized"] is False
+    assert out["terminal_credit_delta"] == 0
     assert out["d_finality_required"] is True
     assert out["terminal_authority"] is False
 
@@ -89,3 +93,17 @@ def test_duplicate_predicate_id_fails_closed():
     out=evaluate(p)
     assert out["pass"] is False
     assert out["reason"]=="ADMISSION_PREDICATE_ID_DUPLICATE"
+
+
+def test_self_asserted_receipt_flags_and_plausible_hashes_never_close_abc():
+    p=payload()
+    # Invented strings have the correct length; no Git object or theorem checked.
+    p["routes"][0]["admission_predicate_blob_sha"]="a"*40
+    p["routes"][0]["admission_soundness_receipt"]["admission_predicate_blob_sha"]="a"*40
+    p["complement_coverage_receipt"]["predicate_set_sha256"]=predicate_set_digest(SCOPE,p["routes"])
+    out=evaluate(p)
+    assert out["receipt_claim_shape_consistent"] is True
+    assert out["pass"] is False
+    assert out["u_empty_authorized"] is False
+    assert out["abc_closed_authorized"] is False
+    assert out["reason"] == "INDEPENDENT_PROOF_REPLAY_NOT_PERFORMED"
