@@ -12,6 +12,17 @@ GOAL = (
     "canonical/tmp/output.tar.gz."
 )
 
+CODEC_GOAL = (
+    "Create canonical/astra_runtime/tmp/R2_CODEC_SOURCE.json containing exactly "
+    "three records with fields id and text: 1 alpha, 2 beta, 3 gamma. "
+    "Encode those exact records as BSON and save "
+    "canonical/astra_runtime/tmp/R2_CODEC_RECORDS.bson. "
+    "Independently decode the BSON artifact using an implementation that is not "
+    "provided by the BSON producer package, and verify the decoded records are "
+    "exactly identical to canonical/astra_runtime/tmp/R2_CODEC_SOURCE.json in "
+    "values, order, field names, and record count."
+)
+
 
 class R2DirectEndToEndAdequacyV1Tests(unittest.TestCase):
     def test_exact_archive_goal_preflight_matches_without_execution(self):
@@ -171,6 +182,69 @@ class R2DirectEndToEndAdequacyV1Tests(unittest.TestCase):
         self.assertTrue(out["actual_goal_satisfaction_verified"])
         self.assertEqual(out["selected_policy_id"],direct.LITERAL_JSON_ROUTE_ID)
         self.assertFalse(out["retry_by_other_route_authorized"])
+
+
+    def test_structured_binary_preflight_matches_without_execution(self):
+        with patch.object(direct.live_bound, "run_raw_goal") as execute:
+            out = direct.preflight({"task_id": "t", "goal": CODEC_GOAL})
+        self.assertTrue(out["matched"], out)
+        self.assertEqual(out["route_id"], direct.STRUCTURED_BINARY_ROUTE_ID)
+        self.assertEqual(out["format"], "bson")
+        self.assertEqual(out["capability_id"], "auto.pypi.bson-modern")
+        self.assertFalse(out["preflight_execution_authority"])
+        execute.assert_not_called()
+
+    @patch.object(direct.live_bound, "run_raw_goal")
+    @patch.object(direct.structured_binary_acceptance, "verify")
+    def test_structured_binary_full_acceptance_is_direct_adequacy(self, verify, execute):
+        pf = direct.preflight({"task_id": "t", "goal": CODEC_GOAL})
+        execute.return_value = {
+            "pass": True,
+            "raw_goal_sha256": pf["goal_sha256"],
+        }
+        verify.return_value = {
+            "pass": True,
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "source_exact": True,
+            "binary_present": True,
+            "producer_output_verified": True,
+            "independent_semantic_verification_verified": True,
+            "accepted_obligation_ids": ["RAWREQ:a", "RAWREQ:b", "RAWREQ:c"],
+            "required_obligation_count": 3,
+        }
+        out = direct.run({"task_id": "t", "goal": CODEC_GOAL})
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["actual_goal_satisfaction_verified"])
+        self.assertEqual(out["selected_policy_id"], direct.STRUCTURED_BINARY_ROUTE_ID)
+        self.assertEqual(out["capability_id"], "auto.pypi.bson-modern")
+        self.assertFalse(out["retry_by_other_route_authorized"])
+        execute.assert_called_once()
+        verify.assert_called_once()
+
+    @patch.object(direct.live_bound, "run_raw_goal")
+    @patch.object(direct.structured_binary_acceptance, "verify")
+    def test_structured_binary_partial_acceptance_never_becomes_adequacy(self, verify, execute):
+        pf = direct.preflight({"task_id": "t", "goal": CODEC_GOAL})
+        execute.return_value = {
+            "pass": True,
+            "raw_goal_sha256": pf["goal_sha256"],
+        }
+        verify.return_value = {
+            "pass": False,
+            "semantic_acceptance_complete": False,
+            "actual_goal_satisfaction_verified": False,
+            "accepted_obligation_ids": [],
+            "required_obligation_count": 3,
+        }
+        out = direct.run({"task_id": "t", "goal": CODEC_GOAL})
+        self.assertFalse(out["pass"])
+        self.assertFalse(out["actual_goal_satisfaction_verified"])
+        self.assertFalse(out["retry_by_other_route_authorized"])
+        self.assertEqual(
+            out["status"],
+            "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY",
+        )
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
