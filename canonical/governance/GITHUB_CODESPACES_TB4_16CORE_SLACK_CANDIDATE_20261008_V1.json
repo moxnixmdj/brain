@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_GITHUB_CODESPACES_TB4_16CORE_SLACK_CANDIDATE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_ONLY__REUSES_PRIOR_CODESPACES_ACCOUNT_CLASS_WORK__16CORE_NINTH_TASK_ROUTE__ACCOUNT_MACHINE_QUOTA_AND_BILLING_FACTS_OPEN__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "objective": "Recover only terminal-bench/live-database-cutover as the ninth additional creditable TB4 task using GitHub Codespaces included personal-account usage, if and only if a 16-core machine is actually offered to this personal repository/account, enough included quota remains, and billable fallthrough is impossible.",
+  "current_tb4_authority": {
+    "current_owner_target_binding": "canonical/evidence/TB4_OPUS55_CURRENT_OWNER_TARGET_REFRESH_20261008_V1.json",
+    "current_owner_target_verification": "canonical/verification/TB4_OPUS55_CURRENT_OWNER_TARGET_LIVE_SOURCE_VERIFICATION_20261008_V1.json",
+    "current_attainability_recompile": "canonical/governance/TB4_CURRENT_OWNER_TARGET_ATTAINABILITY_RECOMPILE_20261008_V1.json",
+    "required_successes": 219,
+    "current_creditable_tasks": 44,
+    "current_slot_capacity": 220,
+    "current_failure_slack": 1
+  },
+  "reused_prior_codespaces_work": {
+    "pr_1580": "GITHUB_CODESPACES_TB4_ZERO_COST_CARRIER_CANDIDATE_V1",
+    "pr_1581": "REBASED_ZERO_COST_CODESPACES_CARRIER_CANDIDATE",
+    "pr_1595": "GITHUB_CODESPACES_ACCOUNT_CLASS_CONNECTOR_OBSERVATION_20261004_V1",
+    "historical_result": "CONNECTED_ACCOUNT_IS_PERSONAL_GITHUB_FREE_CLASS__120_INCLUDED_CODESPACES_CORE_HOURS_PER_MONTH__REMAINING_QUOTA_MACHINE_AVAILABILITY_AND_BILLING_STATE_NOT_PROVED",
+    "reuse_rule": "REUSE_ONLY_ACCOUNT_CLASS_AND_PUBLIC_POLICY_FACTS__DO_NOT_INHERIT_STALE_MACHINE_OR_QUOTA CLAIMS"
+  },
+  "account_class": {
+    "authenticated_login": "moxnixmdj",
+    "account_type": "PERSONAL_USER_ACCOUNT",
+    "plan_class_evidence": "GITHUB_EMAIL_STATES_0_5_GB_ACTIONS_STORAGE_INCLUDED__CURRENT_GITHUB_PLAN_DOCS_MAP_500_MB_ACTIONS_STORAGE_TO_FREE_PERSONAL",
+    "codespaces_included_core_hours_per_month": 120,
+    "plan_class": "GITHUB_FREE_PERSONAL"
+  },
+  "public_github_policy": {
+    "included_usage_source": "https://docs.github.com/en/billing/reference/product-usage-included",
+    "codespaces_billing_source": "https://docs.github.com/en/billing/concepts/product-billing/github-codespaces",
+    "included_usage_behavior_source": "https://docs.github.com/en/codespaces/troubleshooting/troubleshooting-included-usage",
+    "machine_type_source": "https://docs.github.com/en/codespaces/customizing-your-codespace/changing-the-machine-type-for-your-codespace",
+    "facts": [
+      "GITHUB_FREE_PERSONAL_INCLUDES_120_CODESPACES_CORE_HOURS_PER_MONTH",
+      "PERSONAL_INCLUDED_USAGE_IS_CONSUMED_BEFORE_BILLABLE_USAGE",
+      "WHEN_INCLUDED_QUOTA_IS_EXHAUSTED_USAGE_IS_RESTRICTED_UNLESS_A_PAYMENT_METHOD_AND_SPENDING_LIMIT_ALLOW_BILLABLE_USAGE",
+      "CODESPACES_MACHINE_TYPES_RANGE_FROM_2_TO_32_CORES_BUT_THE_FULL_RANGE_IS_NOT_ALWAYS_AVAILABLE",
+      "16_CORE_COMPUTE_CONSUMES_16_INCLUDED_CORE_HOURS_PER_WALL_HOUR"
+    ]
+  },
+  "candidate_ninth_task": {
+    "task": "terminal-bench/live-database-cutover",
+    "declared_cpus": 16,
+    "declared_memory_mb": 16384,
+    "declared_storage_mb": 20480,
+    "declared_gpus": 0,
+    "selection_basis": "RESOURCE_METADATA_ONLY__NO_TASK_INSTRUCTION_SOLUTION_OR_HIDDEN_VERIFIER_CONTENT"
+  },
+  "conditional_score_effect": {
+    "if_task_recovered": true,
+    "creditable_tasks": 45,
+    "maximum_success_slots": 225,
+    "required_successes": 219,
+    "failure_slack_slots": 6,
+    "proof": "45*5=225__AND__225-219=6"
+  },
+  "minimum_account_facts_still_missing": [
+    "REPO_MOXNIXMDJ_BRAIN_CURRENTLY_OFFERS_A_16_CORE_CODESPACE_MACHINE_TO_THIS_ACCOUNT",
+    "CURRENT_REMAINING_INCLUDED_CODESPACES_CORE_HOURS_ARE_SUFFICIENT_FOR_ZERO_CASE_PREFLIGHT_AND_ANY_LATER_AUTHORIZED_TRIALS",
+    "BILLABLE_FALLTHROUGH_IS_IMPOSSIBLE_BECAUSE_NO_VALID_PAYMENT_METHOD_EXISTS_OR_A_ZERO_DOLLAR_STOP_BUDGET_BLOCKS_CODESPACES_USAGE",
+    "ZERO_CASE_CODESPACE_OBSERVES_AT_LEAST_16_LOGICAL_CPUS",
+    "ZERO_CASE_CODESPACE_OBSERVES_AT_LEAST_16384_MB_USABLE_MEMORY",
+    "ZERO_CASE_CODESPACE_OBSERVES_AT_LEAST_20480_MB_FREE_STORAGE",
+    "DOCKER_ENGINE_AND_DOCKER_COMPOSE_PASS",
+    "HARBOR_RESOURCE_AND_REWARD_SEMANTICS_ARE_PROTOCOL_COMPARABLE_ON_CODESPACES"
+  ],
+  "minimum_quota_math": {
+    "16_core_machine_included_core_hours_per_wall_hour": 16,
+    "full_monthly_free_quota_wall_hours_if_unused": 7.5,
+    "zero_case_prefight_must_have_explicit_wall_clock_cap": true,
+    "terminal_execution_runtime_sufficiency_not_assumed": true
+  },
+  "decision_rule": {
+    "if_16core_unavailable": "KILL_CODESPACES_NINTH_TASK_ROUTE",
+    "if_remaining_quota_insufficient": "KILL_OR_DEFER_UNTIL_QUOTA_RESET__NO_PAID_USAGE",
+    "if_billable_fallthrough_possible_without_hard_stop": "KILL_ROUTE_UNTIL_ZERO_DOLLAR_STOP_IS_PROVED__DO_NOT_CHANGE_BILLING_SETTINGS_FROM_THIS_CANDIDATE",
+    "if_account_facts_pass": "RUN_ZERO_CASE_RESOURCE_DOCKER_PROTOCOL_PREFLIGHT_ONLY__NO_TB4_ACCEPTANCE_CASE",
+    "if_zero_case_passes": "RECOMPILE_TB4_CAPACITY_TO_225_AND_SLACK_TO_6_BEFORE_ANY_TERMINAL_EXECUTION"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_16CORE_MACHINE_IS_AVAILABLE_NOW",
+    "NO_CLAIM_REMAINING_CODESPACES_QUOTA",
+    "NO_CLAIM_PAYMENT_METHOD_IS_ABSENT",
+    "NO_CLAIM_ZERO_DOLLAR_CODESPACES_BUDGET_IS_CONFIGURED",
+    "NO_CODESPACE_CREATED",
+    "NO_TB4_CASE_EXECUTED",
+    "NO_RESOURCE_RECOVERY_CREDIT",
+    "NO_SCORE_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
