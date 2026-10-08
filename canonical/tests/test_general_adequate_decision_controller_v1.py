@@ -252,6 +252,85 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
         self.assertEqual(out["next_information_request"]["predicate_id"], predicate_id)
         self.assertFalse(out["actual_goal_satisfaction_verified"])
 
+    def test_positive_adequacy_gap_is_preserved_as_exact_policy_repair(self):
+        request = self._base_request()
+        opened = {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "BOUND_RELEVANCE_CEGAR_LOOP_UNSATISFIED",
+            "detail": {
+                "loop_result": {
+                    "pass": False,
+                    "status": "OPEN__POSITIVE_POLICY_ADEQUACY_CERTIFICATE_REQUIRED",
+                    "reason": "NO_AUTHENTICATED_POLICY_ADEQUACY",
+                    "detail": {
+                        "selected_policy_id": "policy.p",
+                        "cegar": {"reason": "NO_AUTHENTICATED_POLICY_ADEQUACY"},
+                    },
+                }
+            },
+        }
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value=self._goal_binding_pass()), \
+             patch.object(controller, "evaluate_p3", return_value=opened):
+            out = controller.run(request)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "OPEN__POSITIVE_POLICY_ADEQUACY_CERTIFICATE_REQUIRED",
+        )
+        self.assertEqual(
+            out["next_required_edge"],
+            "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+        )
+        policy_request = out["next_policy_request"]
+        self.assertEqual(
+            policy_request["required_artifact"],
+            "POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+        )
+        self.assertEqual(policy_request["selected_policy_id"], "policy.p")
+        self.assertFalse(policy_request["policy_adequacy_authority"])
+        self.assertFalse(policy_request["semantic_truth_authority"])
+        self.assertEqual(
+            policy_request["preferred_resolution_order"][0],
+            "CERTIFY_ONE_COMMON_BRAIN_OWNED_POLICY_IF_POSSIBLE",
+        )
+
+    def test_common_policy_selection_binding_gap_is_not_collapsed_to_generic_semantics(self):
+        request = self._base_request()
+        opened = {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "BOUND_RELEVANCE_CEGAR_LOOP_UNSATISFIED",
+            "detail": {
+                "loop_result": {
+                    "pass": False,
+                    "status": "OPEN__COMMON_POLICY_SELECTION_BINDING_REQUIRED",
+                    "reason": "COMMON_POLICY_HAS_NO_EXACT_SOURCE_POSITIVE_SELECTION_CONTRACT",
+                    "detail": {"selected_policy_id": "policy.certified"},
+                }
+            },
+        }
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value=self._goal_binding_pass()), \
+             patch.object(controller, "evaluate_p3", return_value=opened):
+            out = controller.run(request)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["next_required_edge"],
+            "EXACT_SOURCE_POSITIVE_SELECTION_CONTRACT_FOR_CERTIFIED_COMMON_POLICY",
+        )
+        self.assertEqual(
+            out["next_policy_request"]["selected_policy_id"],
+            "policy.certified",
+        )
+        self.assertEqual(
+            out["next_policy_request"]["required_artifact"],
+            "SOURCE_POSITIVE_SELECTION_CONTRACT",
+        )
+
     def test_provider_cannot_self_authorize_semantic_truth(self):
         request = self._base_request()
         request["max_information_rounds"] = 1
