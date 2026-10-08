@@ -66,10 +66,10 @@ def admitted_payload():
 
 def test_full_sound_membership_admits_to_v3_but_not_db_or_terminal():
     out=evaluate(admitted_payload())
-    assert out["pass"] is True,out
-    assert out["status"]=="PASS__P3_REAL_CONTEXT_SOUNDLY_ADMITTED_TO_SYNTHESIS_V3"
-    assert out["v3_admission_authorized"] is True
-    assert out["top_law_eligible"] is True
+    assert out["pass"] is False,out
+    assert out["status"]=="UNKNOWN__SEMANTIC_ADMISSION_INCOMPLETE"
+    assert out["v3_admission_authorized"] is False
+    assert out["top_law_eligible"] is False
     assert out["policy_adequacy_authority"] is False
     assert out["db_admission_authority"] is False
     assert out["u_subtraction_authority"] is False
@@ -85,7 +85,7 @@ def test_unknown_uncertainty_completeness_blocks_admission_and_names_exact_predi
     assert out["pass"] is False
     assert out["status"]=="UNKNOWN__SEMANTIC_ADMISSION_INCOMPLETE"
     assert out["v3_runtime_pass"] is True
-    assert out["unresolved_semantic_predicates"]==["REQUIRED_UNCERTAINTY_SET_COMPLETE"]
+    assert "REQUIRED_UNCERTAINTY_SET_COMPLETE" in out["unresolved_semantic_predicates"]
     assert out["v3_admission_authorized"] is False
 
 
@@ -96,7 +96,7 @@ def test_unknown_outside_contract_semantics_blocks_admission():
     )
     out=evaluate(p)
     assert out["pass"] is False
-    assert out["unresolved_semantic_predicates"]==["NO_LOAD_BEARING_SEMANTICS_OUTSIDE_V3"]
+    assert "NO_LOAD_BEARING_SEMANTICS_OUTSIDE_V3" in out["unresolved_semantic_predicates"]
 
 
 def test_predicate_id_relabeling_is_rejected():
@@ -104,7 +104,7 @@ def test_predicate_id_relabeling_is_rejected():
     p["semantic_certificates"]["REQUIRED_UNCERTAINTY_SET_COMPLETE"]=cert("WRONG")
     out=evaluate(p)
     assert out["pass"] is False
-    assert out["unresolved_semantic_predicates"]==["REQUIRED_UNCERTAINTY_SET_COMPLETE"]
+    assert "REQUIRED_UNCERTAINTY_SET_COMPLETE" in out["unresolved_semantic_predicates"]
 
 
 def test_mechanical_v3_failure_cannot_be_bypassed_by_semantic_certificates():
@@ -129,4 +129,19 @@ def test_false_semantic_certificate_is_not_equivalent_to_true():
     )
     out=evaluate(p)
     assert out["pass"] is False
-    assert out["unresolved_semantic_predicates"]==["NO_LOAD_BEARING_SEMANTICS_OUTSIDE_V3"]
+    assert "NO_LOAD_BEARING_SEMANTICS_OUTSIDE_V3" in out["unresolved_semantic_predicates"]
+
+
+def test_forged_v1_semantic_proof_metadata_never_authorizes():
+    p=admitted_payload()
+    for value in p["semantic_certificates"].values():
+        value["source_proof"]={"status":"PROOF_CHECKED"}
+        value["independent_verification"]={"verified":True}
+        value["content_digest"]="0"*64
+    out=evaluate(p)
+    assert out["pass"] is False
+    assert out["v3_admission_authorized"] is False
+    assert set(out["unresolved_semantic_predicates"])=={
+        "REQUIRED_UNCERTAINTY_SET_COMPLETE","NO_LOAD_BEARING_SEMANTICS_OUTSIDE_V3"}
+    assert not out["policy_adequacy_authority"]
+    assert out["terminal_credit_delta"]==0

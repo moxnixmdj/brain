@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_P3_SEMANTIC_COMPLETENESS_SELF_ATTESTATION_REPAIR_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__17_OF_17_EXACT_BYTES__SELF_REPORTED_COMPLETENESS_REVOKED__ZERO_TERMINAL_CREDIT",
+  "subject": [
+    {
+      "path": "canonical/runtime/p3_real_context_v3_admission_v1.py",
+      "git_blob_sha": "6e71cfecdbecc1c3bcbfa8d508e1e91c3cdbed07"
+    },
+    {
+      "path": "canonical/runtime/p3_real_context_v3_admission_v2.py",
+      "git_blob_sha": "c4728d43a903acb62c6f8c5b0877d99ab12cd844"
+    },
+    {
+      "path": "canonical/tests/test_p3_real_context_v3_admission_v1.py",
+      "git_blob_sha": "43da80c9d6a543e57cae0cadef3e8d25a6fc1966"
+    },
+    {
+      "path": "canonical/tests/test_p3_real_context_v3_admission_v2.py",
+      "git_blob_sha": "a5d87bc1afb23f34129c0752046d3e79792b7aef"
+    },
+    {
+      "path": "canonical/tests/test_p3_semantic_false_admission_falsifier_v1.py",
+      "git_blob_sha": "e5d6f5a41ee5e21e40c7584c9f8201ec288027e9"
+    }
+  ],
+  "tested_environment": "isolated local Python 3 with real V3, V2, expression and support dependencies; identical content-addressed changed runtime/test bytes",
+  "command": "python -m pytest -q canonical/tests/test_p3_real_context_v3_admission_v1.py canonical/tests/test_p3_real_context_v3_admission_v2.py canonical/tests/test_p3_semantic_false_admission_falsifier_v1.py",
+  "passed": 17,
+  "total": 17,
+  "adversarial_mutations": 200,
+  "verified_behavior": [
+    "FAKE_POSITIVE_SEMANTIC_COMPLETENESS_FLAGS_NOT_ACCEPTED_BY_V1_OR_V2",
+    "TAMPERED_PROOF_METADATA_DID_NOT_CHANGE_VERDICT",
+    "REAL_V3_MECHANICAL_GATES_REMAIN_ACTIVE",
+    "SEMANTIC_COMPLETENESS_WITHOUT_TRUSTED_RECOMPUTATION_STAYS_UNKNOWN",
+    "NO_DB_ADMISSION_U_SUBTRACTION_OR_TERMINAL_AUTHORITY_GRANTED"
+  ],
+  "current_limitation": "GENUINE_SEMANTIC_COMPLETENESS_VERIFIER_NOT_IMPLEMENTED__NO_TRUE_CONTEXT_MEMBERSHIP_CREDIT",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}

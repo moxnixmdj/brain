@@ -70,7 +70,10 @@ def _truth_certificate(value: Any, predicate_id: str) -> tuple[bool, str]:
         return False, "SEMANTIC_CERTIFICATE_MUST_NOT_SELF_CERTIFY_ADEQUACY"
     if value.get("terminal_authority") is not False:
         return False, "SEMANTIC_CERTIFICATE_TERMINAL_AUTHORITY_INVALID"
-    return True, "PASS"
+    # Caller-supplied certificate flags are not independently recomputed
+    # evidence of this quantified semantic completeness proposition.
+    # Fail closed until a trusted source-bound semantic proof verifier exists.
+    return False, "SELECTED_SEMANTIC_COMPLETENESS_NOT_RECOMPUTED"
 
 
 def _v3_mechanical_audit(result: Mapping[str, Any]) -> tuple[bool, list[str]]:
