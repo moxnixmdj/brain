@@ -20,6 +20,7 @@ from canonical.runtime.effect_broker_receipt_resolver_v2 import (
 )
 from canonical.runtime.executable_skill_program_v7 import (
     RELATIONS,
+    SUPERSET_SCOPE_PREDICATES,
     ExecutableSkillProgramError,
     verify_candidate,
 )
@@ -69,6 +70,16 @@ def authenticate_and_verify(
         relation = rd.get("scope_relation")
         if relation not in RELATIONS:
             raise SkillVerificationError("SKILL_SCOPE_RELATION_INVALID")
+        scope_predicate = str(rd.get("scope_predicate") or "").strip()
+        if relation == "PROVEN_SUPERSET":
+            if scope_predicate and scope_predicate not in SUPERSET_SCOPE_PREDICATES:
+                raise SkillVerificationError("SKILL_SCOPE_PREDICATE_INVALID")
+            verifier_scope_predicate = str(vd.get("scope_predicate") or "").strip()
+            if verifier_scope_predicate != scope_predicate:
+                raise SkillVerificationError("SKILL_SCOPE_PREDICATE_BINDING_MISMATCH")
+        else:
+            if scope_predicate or str(vd.get("scope_predicate") or "").strip():
+                raise SkillVerificationError("EXACT_SCOPE_MAY_NOT_DECLARE_SUPERSET_PREDICATE")
         expected = {
             "candidate_sha256": candidate_sha,
             "source_episode_ids": source_ids,
@@ -113,6 +124,7 @@ def authenticate_and_verify(
             "source_episode_ids": source_ids,
             "behavior_preserving_on_claimed_scope": True,
             "scope_relation": relation,
+            "scope_predicate": scope_predicate or None,
             "receipt_id": "SKVR:" + rr["git_blob_sha"],
         }
         verified = verify_candidate(
