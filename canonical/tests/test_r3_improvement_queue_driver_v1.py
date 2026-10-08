@@ -208,6 +208,37 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         repair.assert_called_once()
         self.assertEqual(repair.call_args.kwargs["state_path"], path)
 
+    def test_rejected_acquisition_runtime_snapshot_restores_exact_bytes(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            runtime = root / "canonical/runtime"
+            runtime.mkdir(parents=True)
+            adapter = runtime / "r3_bound_success_adapter_v1.py"
+            verifier = runtime / "r3_independent_learning_verifier_v1.py"
+            adapter.write_text("adapter=1\n", encoding="utf-8")
+            verifier.write_text("verifier=1\n", encoding="utf-8")
+
+            snapshot = driver._runtime_control_surface_snapshot(repo_root=root)
+            adapter.write_text("adapter=999\n", encoding="utf-8")
+            verifier.write_text("verifier=999\n", encoding="utf-8")
+            extra = runtime / "unauthorized_runtime.py"
+            extra.write_text("bad=True\n", encoding="utf-8")
+
+            receipt = driver._restore_runtime_control_surface_snapshot(
+                snapshot,
+                repo_root=root,
+            )
+
+            self.assertTrue(receipt["pass"], receipt)
+            self.assertEqual(adapter.read_text(encoding="utf-8"), "adapter=1\n")
+            self.assertEqual(verifier.read_text(encoding="utf-8"), "verifier=1\n")
+            self.assertFalse(extra.exists())
+            restored = driver._runtime_control_surface_snapshot(repo_root=root)
+            self.assertEqual(
+                driver._runtime_snapshot_sha256(snapshot, immutable_only=False),
+                driver._runtime_snapshot_sha256(restored, immutable_only=False),
+            )
+
     def test_internal_repair_marks_replay_as_autonomous(self):
         path = self.temp_state()
         work = {
@@ -1317,8 +1348,8 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             mock.patch.object(driver, "_owned_success_verification_authority_sha256", return_value=authority),
             mock.patch.object(
                 driver,
-                "_immutable_runtime_control_surface_sha256",
-                side_effect=["4" * 64, "5" * 64],
+                "_runtime_snapshot_sha256",
+                side_effect=["4" * 64, "5" * 64, "6" * 64, "6" * 64],
             ),
             mock.patch.object(
                 driver,
