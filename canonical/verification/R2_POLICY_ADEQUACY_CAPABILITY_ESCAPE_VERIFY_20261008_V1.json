@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_R2_POLICY_ADEQUACY_CAPABILITY_ESCAPE_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__FIRST_CLASS_ZERO_AUTHORITY_CAPABILITY_ESCAPE__30_OF_30_RELEVANT_REPLAY",
+  "subject": {
+    "merged_commit": "ef9816f296bdad0a7afb528376c7c432fe61395f",
+    "runtime_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "runtime_git_blob_sha": "6c3767f734ef0b227ad4c0e67051e269c05013cd",
+    "regression_test_path": "canonical/tests/test_general_adequate_decision_fixed_point_v2.py",
+    "regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd",
+    "pull_request": 3312
+  },
+  "isolated_replay": {
+    "carrier": "SPRITES",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "tests_run": 30,
+    "tests_passed": 30,
+    "failures": 0,
+    "errors": 0,
+    "command": "python -m unittest canonical.tests.test_general_adequate_decision_fixed_point_v2 canonical.tests.test_r2_basis_discriminator_repair_v1 canonical.tests.test_r2_existing_policy_adequacy_repair_v1 -v"
+  },
+  "proved": [
+    "DETERMINISTIC_EXISTING_ADEQUACY_REUSE_REMAINS_FIRST",
+    "BASIS_DISCRIMINATOR_REPAIR_REMAINS_BEFORE_CAPABILITY_EXPANSION",
+    "EXPLICIT_POLICY_ADEQUACY_GAP_CAN_REQUEST_A_FIRST_CLASS_CAPABILITY_EXPANSION",
+    "CAPABILITY_EXPANDER_OUTPUT_HAS_ZERO_SEMANTIC_TRUTH_POLICY_ADEQUACY_EXECUTION_ACCEPTANCE_OR_TERMINAL_AUTHORITY",
+    "CAPABILITY_EXPANDER_MAY_ONLY_ADVANCE_R2_BY_A_VALID_REQUEST_PATCH",
+    "IMMUTABLE_GOAL_AND_TASK_ID_GUARDS_REMAIN_ACTIVE",
+    "NO_PROGRESS_AND_FIXED_POINT_CYCLE_GUARDS_REMAIN_ACTIVE",
+    "EVERY_PROGRESSIVE_EXPANSION_IS_RERUN_THROUGH_THE_V1_AUTHORITY_KERNEL_BEFORE_POLICY_SELECTION",
+    "EXPANDER_SELF_CERTIFIED_PASS_WITHOUT_REQUEST_PATCH_IS_REJECTED"
+  ],
+  "github_actions_carrier": {
+    "status": "CARRIER_FAILURE_BEFORE_OBSERVABLE_TEST_STEPS",
+    "required_for_authority": false,
+    "note": "Relevant GitHub Actions runs reported failure with no observable steps/log payload; exact isolated Sprite replay is load-bearing for this patch verification."
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_OPEN_WORLD_POSITIVE_POLICY_COVERAGE_CLAIM",
+    "NO_CLAIM_EVERY_NEEDED_NEW_CAPABILITY_EXISTS",
+    "NO_CLAIM_EXPANDER_OUTPUT_IS_TRUE_OR_ADEQUATE_BEFORE_REVERIFICATION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
