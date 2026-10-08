@@ -20,6 +20,7 @@ from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_ac
 from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
 from canonical.runtime import r2_structured_binary_direct_adequacy_v1 as codec_adequacy
 from canonical.runtime import r2_structured_table_direct_adequacy_v1 as table_adequacy
+from canonical.runtime import r2_typed_decision_direct_adequacy_v1 as typed_decision_adequacy
 from canonical.runtime import r2_docx_direct_adequacy_v1 as docx_adequacy
 from canonical.runtime import r2_docx_json_direct_adequacy_v1 as docx_json_adequacy
 
@@ -31,6 +32,7 @@ EXACT_LITERAL_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1"
 LITERAL_JSON_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1"
 STRUCTURED_BINARY_CODEC_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1"
 STRUCTURED_TABLE_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_TABLE_ARTIFACT_FAMILY_V1"
+TYPED_DECISION_ROUTE_ID = "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1"
 DOCX_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1"
 DOCX_JSON_ROUTE_ID = "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1"
 
@@ -69,6 +71,13 @@ ROUTES = {
         "preflight": "r2_structured_table_direct_adequacy_v1.preflight",
         "executor": "r2_structured_table_direct_adequacy_v1.run",
         "acceptance": "PRODUCER_INDEPENDENT_SOURCE_JSON_SEMANTIC_READBACK",
+    },
+    TYPED_DECISION_ROUTE_ID: {
+        "capability_id": "decision.synthesis.typed.stdlib",
+        "scope": "EXACT_TYPED_DECISION_JSON_TO_INDEPENDENTLY_VERIFIED_DECISION_JSON_FAMILY",
+        "preflight": "r2_typed_decision_direct_adequacy_v1.preflight",
+        "executor": "r2_typed_decision_direct_adequacy_v1.run",
+        "acceptance": "PRODUCER_INDEPENDENT_FULL_DECISION_RECOMPUTATION",
     },
     DOCX_ROUTE_ID: {
         "capability_id": "docx.document.create.python_docx",
@@ -178,6 +187,28 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "preflight_execution_authority": False,
         }
 
+    typed_decision = typed_decision_adequacy.preflight(request)
+    if typed_decision.get("matched") is True:
+        if typed_decision.get("status") == "FAIL_CLOSED":
+            return {
+                **_base("FAIL_CLOSED", passed=False),
+                "matched": True,
+                "route_id": TYPED_DECISION_ROUTE_ID,
+                "reason": typed_decision.get("reason"),
+            }
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": TYPED_DECISION_ROUTE_ID,
+            "capability_id": typed_decision.get("capability_id"),
+            "policy_id": typed_decision.get("policy_id"),
+            "goal_sha256": typed_decision.get("goal_sha256"),
+            "input_path": typed_decision.get("input_path"),
+            "output_path": typed_decision.get("output_path"),
+            "semantic_scope": ROUTES[TYPED_DECISION_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
     codec = codec_adequacy.preflight(request)
     if codec.get("matched") is True:
         if codec.get("status") == "FAIL_CLOSED":
@@ -256,6 +287,50 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
     pf = preflight(request)
     if pf.get("matched") is not True:
         return pf
+
+    if pf["route_id"] == TYPED_DECISION_ROUTE_ID:
+        decision_result = typed_decision_adequacy.run(request)
+        if decision_result.get("pass") is not True:
+            return {
+                **_base(
+                    str(
+                        decision_result.get("status")
+                        or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"
+                    ),
+                    passed=False,
+                ),
+                "matched": True,
+                "route_id": pf["route_id"],
+                "capability_id": pf.get("capability_id"),
+                "goal_sha256": pf.get("goal_sha256"),
+                "execution_attempted": True,
+                "retry_by_other_route_authorized": False,
+                "typed_decision_adequacy": deepcopy(dict(decision_result)),
+                "reason": decision_result.get("reason"),
+            }
+        return {
+            **_base("PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED", passed=True),
+            "matched": True,
+            "route_id": pf["route_id"],
+            "capability_id": decision_result.get("capability_id"),
+            "selected_policy_id": decision_result.get("policy_id"),
+            "goal_sha256": decision_result.get("goal_sha256"),
+            "semantic_scope": pf["semantic_scope"],
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "accepted_raw_obligation_ids": list(
+                decision_result.get("accepted_raw_obligation_ids") or []
+            ),
+            "raw_acceptance_obligation_count": decision_result.get(
+                "raw_acceptance_obligation_count"
+            ),
+            "acceptance_receipt": deepcopy(dict(decision_result)),
+            "raw_result": deepcopy(dict(decision_result.get("raw_result") or {})),
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "authority_boundary": decision_result.get("authority_boundary"),
+        }
 
     if pf["route_id"] == STRUCTURED_TABLE_ROUTE_ID:
         table_result = table_adequacy.run(request)
