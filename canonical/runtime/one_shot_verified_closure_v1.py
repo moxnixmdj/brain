@@ -20,6 +20,7 @@ from typing import Any, Callable, Mapping
 from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
 from canonical.runtime import r3_improvement_queue_driver_v1 as r3
 from canonical.runtime import r3_historical_evidence_irreducibility_v1 as historical_evidence
+from canonical.runtime import r3_historical_failure_irreducibility_v1 as historical_failure
 
 SCHEMA = "PROJECT_BRAIN_ONE_SHOT_VERIFIED_CLOSURE_V1"
 
@@ -402,6 +403,7 @@ def run(
             residual = classify_residual(blockers, pending=pending)
             internal = residual["internally_solvable_gap_remaining"]
             bounded_historical_certificate = None
+            strict_external_failure_certificate = None
             if (
                 not internal
                 and residual.get("external_or_new_evidence_required") is True
@@ -421,6 +423,24 @@ def run(
                     residual["current_evidence_boundary"] = (
                         "EXACT_HISTORICAL_OBSERVATIONS_REQUIRE_NEW_INDEPENDENT_"
                         "EVIDENCE_OR_NEW_REPLAYABLE_EXPERIENCE"
+                    )
+
+                strict_external_failure_certificate = (
+                    historical_failure.certify_pending_set(
+                        pending,
+                        state_path=state_path,
+                        repo_root=repo_root,
+                    )
+                )
+                if strict_external_failure_certificate.get("pass") is True:
+                    residual["irreducible_external_information_proved"] = True
+                    residual["irreducible_external_certificate"] = deepcopy(
+                        strict_external_failure_certificate
+                    )
+                    residual["irreducible_external_boundary"] = (
+                        "EXACT_HISTORICAL_FAILURE_REPLAY_CONTEXT_IS_ABSENT_FROM_"
+                        "CURRENT_DURABLE_R3_STATE__NEW_EXTERNAL_REPLAY_INFORMATION_"
+                        "OR_NEW_REPLAYABLE_FAILURE_EXPERIENCE_REQUIRED"
                     )
             external_proved = (
                 residual.get("irreducible_external_information_proved") is True
@@ -449,6 +469,9 @@ def run(
                 "irreducible_external_information_proved": external_proved,
                 "bounded_historical_evidence_certificate": deepcopy(
                     bounded_historical_certificate
+                ),
+                "strict_external_failure_certificate": deepcopy(
+                    strict_external_failure_certificate
                 ),
                 "terminal_authority": False,
             }
