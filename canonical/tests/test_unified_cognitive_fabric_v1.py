@@ -20,6 +20,16 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("ADEQUATE_DECISION", c["engines"])
         self.assertIn("ADAPTIVE_SOLVER", c["engines"])
         self.assertIn("LEARNING_EPISODE", c["engines"])
+        self.assertIn("H100_INFERENCE", c["engines"])
+        self.assertIn("MYSTERY_INFERENCE", c["engines"])
+        self.assertNotIn(
+            "H100_SPECIALIZED_INFERENCE_REGISTRIES_NOT_YET_EXPOSED_AS_FABRIC_CAPABILITIES",
+            c["known_unified_fabric_residuals"],
+        )
+        self.assertNotIn(
+            "MYSTERYMECHANISM_SPECIALIZED_INFERENCE_KERNELS_NOT_YET_EXPOSED_AS_FABRIC_CAPABILITIES",
+            c["known_unified_fabric_residuals"],
+        )
         self.assertFalse(c["all_historical_brain_capabilities_unified"])
 
     def test_raw_goal_dispatches(self):
@@ -72,6 +82,36 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             self.assertTrue(state.is_file())
             doc = json.loads(state.read_text(encoding="utf-8"))
             self.assertGreaterEqual(doc["stats"]["failure_class_count"], 1)
+
+    def test_h100_snapshot_dispatches_through_fabric(self):
+        out = run({
+            "mode": "H100_INFERENCE",
+            "payload": {"operation": "SNAPSHOT"},
+        })
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertGreaterEqual(out["result"]["entry_count"], 21)
+
+    def test_mystery_exact_polytope_dispatches_through_fabric(self):
+        out = run({
+            "mode": "MYSTERY_INFERENCE",
+            "payload": {
+                "operation": "EXACT_LINEAR_POLYTOPE",
+                "problem": {
+                    "feature_semantics_bound": True,
+                    "observation_intervals_sound": True,
+                    "observations": [
+                        {"features": ["1"], "output_interval": ["1", "1"]},
+                    ],
+                    "queries": [
+                        {"query_id": "q", "features": ["2"]},
+                    ],
+                },
+            },
+        })
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(out["result"]["query_predictions"][0]["prediction_interval"], ["2", "2"])
 
 
 if __name__ == "__main__":
