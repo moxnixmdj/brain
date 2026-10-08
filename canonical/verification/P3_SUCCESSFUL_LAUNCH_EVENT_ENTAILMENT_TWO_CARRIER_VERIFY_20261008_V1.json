@@ -1,0 +1,56 @@
+{
+  "schema":"PROJECT_BRAIN_P3_SUCCESSFUL_LAUNCH_EVENT_ENTAILMENT_TWO_CARRIER_VERIFICATION_V1",
+  "date":"2026-10-08",
+  "status":"PASS__CONCRETE_P3_PARAPHRASE_COUNTEREXAMPLE_CLASS_CLOSED__32_OF_32_ON_TWO_CARRIERS__ZERO_TERMINAL_CREDIT",
+  "research_branch":"research/p3-proof-carrying-paraphrase-v1",
+  "subject":{
+    "event_runtime":{"path":"canonical/runtime/bounded_successful_launch_event_entailment_v1.py","git_blob_sha":"3c36b0528b4dee302aaa1ebb4a88b05b57d2f9b3"},
+    "event_tests":{"path":"canonical/tests/test_bounded_successful_launch_event_entailment_v1.py","git_blob_sha":"28bfa585f01efaa06f780fc1c6267950d16218e5"},
+    "support_v6":{"path":"canonical/runtime/selected_support_truth_certificate_v6.py","git_blob_sha":"14beb78b3a4d90ce7a97a2b12db698f9f317b4e5"},
+    "support_v6_tests":{"path":"canonical/tests/test_selected_support_truth_certificate_v6.py","git_blob_sha":"67c78f68dc4a5d6bd07e1ea1b206745bb940a47e"},
+    "proof_carrying_runtime":{"path":"canonical/runtime/proof_carrying_proposition_entailment_v1.py","git_blob_sha":"60596c63159785a6bcb7e9437a02cb8a8e0543fd"},
+    "support_v5":{"path":"canonical/runtime/selected_support_truth_certificate_v5.py","git_blob_sha":"979dbb024e98ee29c86cbfa97a5f4cb94dd1bd10"}
+  },
+  "concrete_counterexample_closed":{
+    "claim":"The product launched in June.",
+    "evidence":"The June launch of the product succeeded.",
+    "compiled_evidence":"EXISTS e: launch(e,product) AND time(e,June) AND succeeded(e)",
+    "compiled_claim":"EXISTS e: launch(e,product) AND time(e,June)",
+    "proof_rule":"EXISTENTIAL_CONJUNCTION_WEAKENING"
+  },
+  "negative_boundary_verified":[
+    "PLANNED_LAUNCH_REMAINS_UNKNOWN",
+    "FAILED_LAUNCH_REMAINS_UNKNOWN",
+    "OTHER_EVENT_NOMINALIZATIONS_REMAIN_UNKNOWN",
+    "ENTITY_MISMATCH_IS_UNRELATED",
+    "TIME_MISMATCH_IS_UNRELATED",
+    "EXISTING_NUMERIC_RESULT_CANNOT_BE_OVERRIDDEN_BY_SEMANTIC_PROOF",
+    "TEST_ONLY_EXTERNAL_SEMANTIC_RELATIONS_REJECTED_IN_PRODUCTION",
+    "NO_SOURCE_POLICY_DB_U_OR_TERMINAL_AUTHORITY_ESCALATION"
+  ],
+  "primary":{
+    "sprite":"brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "mode":"FULL_TREE_INTEGRATION",
+    "result":{"passed":32,"failed":0}
+  },
+  "independent":{
+    "sprite":"brain-tbscience-v18-authority-verify-20261007-v1",
+    "sprite_id":"sprite-712e57be-f9ab-4d02-a590-62d84addd99e",
+    "mode":"MINIMAL_EXACT_BLOB_CAPSULE_ZERO_DEPENDENCY_RUNNER",
+    "result":{"passed":32,"failed":0}
+  },
+  "external_semantic_context":{
+    "note":"NOMINALIZATIONS_CAN_HAVE_EVENT_RESULT_OR_PARTICIPANT_READINGS__RULE_THEREFORE_LOCKED_TO_ONE_EXACT_SUCCESSFUL_LAUNCH_EVENT_SURFACE",
+    "research_basis":"ACL_NOMINALIZATION_LITERATURE__NO_GENERAL_NOMINALIZATION_INFERENCE_CLAIM"
+  },
+  "hard_nonclaims":[
+    "NO_GENERAL_PARAPHRASE_OR_NLI",
+    "NO_GENERAL_DEVERBAL_NOUN_RULE",
+    "NO_CLAIM_ALL_R3_RELATIONAL_SEMANTICS_ARE_CLOSED",
+    "NO_GLOBAL_P3_CLOSURE",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
