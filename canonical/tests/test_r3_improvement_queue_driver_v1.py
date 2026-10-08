@@ -614,6 +614,118 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         )
         provider.assert_not_called()
 
+    def test_default_success_adapter_parks_current_evidence_without_permanent_claim(self):
+        path = self.temp_state()
+        observed = learning.record_success_observation(
+            {
+                "schema": "TEST_SUCCESS_V1",
+                "status": "PASS__OPAQUE_EXTERNAL_SUCCESS",
+                "pass": True,
+                "result": {"opaque": True},
+            },
+            surface="OPAQUE_EXTERNAL_SURFACE",
+            state_path=path,
+            replay_context={
+                "mode": "generic",
+                "problem": {"task_id": "opaque-success"},
+            },
+        )
+
+        out = driver.advance_once(state_path=path)
+        self.assertTrue(out["pass"], out)
+        self.assertFalse(out["progress"], out)
+        self.assertTrue(out["disposition_recorded"], out)
+        self.assertEqual(
+            out["status"],
+            "IMPROVEMENT_PARKED__PROVED_NONLEARNABLE_FROM_CURRENT_RETAINED_EVIDENCE",
+        )
+        self.assertFalse(out["permanent_nonlearnability_claimed"])
+
+        state = learning.load_state(path)
+        row = state["improvement_queue"][observed["improvement_work_id"]]
+        self.assertEqual(row["status"], "PARKED")
+        self.assertEqual(
+            row["parked_reason"],
+            "NO_ADMISSIBLE_CURRENT_OWNED_VERIFICATION_PATH",
+        )
+        observation = state["observations"][observed["observation_id"]]
+        self.assertEqual(
+            observation["learning_disposition"],
+            "PROVED_NONLEARNABLE_FROM_CURRENT_RETAINED_EVIDENCE",
+        )
+        self.assertFalse(observation["permanent_nonlearnability_claimed"])
+        self.assertEqual(state["stats"]["pending_improvement_count"], 0)
+        self.assertEqual(state["stats"]["parked_success_learning_count"], 1)
+
+    def test_parked_success_reopens_on_new_evidence_or_external_authority(self):
+        path = self.temp_state()
+        first = learning.record_success_observation(
+            {
+                "schema": "TEST_SUCCESS_V1",
+                "status": "PASS__OPAQUE_EXTERNAL_SUCCESS",
+                "pass": True,
+                "result": {"generation": 1},
+            },
+            surface="OPAQUE_EXTERNAL_SURFACE",
+            state_path=path,
+            replay_context={"mode": "generic", "problem": {"task_id": "opaque-1"}},
+        )
+        parked = driver.advance_once(state_path=path)
+        self.assertTrue(parked["disposition_recorded"], parked)
+
+        second = learning.record_success_observation(
+            {
+                "schema": "TEST_SUCCESS_V1",
+                "status": "PASS__OPAQUE_EXTERNAL_SUCCESS",
+                "pass": True,
+                "result": {"generation": 2},
+            },
+            surface="OPAQUE_EXTERNAL_SURFACE",
+            state_path=path,
+            replay_context={"mode": "generic", "problem": {"task_id": "opaque-2"}},
+        )
+        self.assertEqual(first["improvement_work_id"], second["improvement_work_id"])
+        state = learning.load_state(path)
+        row = state["improvement_queue"][second["improvement_work_id"]]
+        self.assertEqual(row["status"], "PENDING")
+        self.assertEqual(row["observations"], 2)
+
+        driver.advance_once(state_path=path)
+        state = learning.load_state(path)
+        self.assertEqual(
+            state["improvement_queue"][second["improvement_work_id"]]["status"],
+            "PARKED",
+        )
+
+        with mock.patch.object(
+            driver,
+            "_adapt_success_work",
+            return_value={
+                "schema": driver.SCHEMA,
+                "status": "IMPROVEMENT_ADVANCED__SUCCESS_BECAME_VERIFIED_EPISODE",
+                "pass": True,
+                "work_id": second["improvement_work_id"],
+                "terminal_authority": False,
+            },
+        ) as adapt:
+            out = driver.advance_once(
+                state_path=path,
+                episode_verification_provider=object(),
+                success_episode_adapter_provider=object(),
+            )
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["progress"], out)
+        adapt.assert_called_once()
+        state = learning.load_state(path)
+        self.assertEqual(
+            state["improvement_queue"][second["improvement_work_id"]]["status"],
+            "PENDING",
+        )
+        self.assertEqual(
+            state["improvement_queue"][second["improvement_work_id"]]["reactivated_by"],
+            "EXTERNAL_VERIFICATION_AUTHORITY_AVAILABLE",
+        )
+
     def test_event_waiting_work_does_not_claim_progress(self):
         path = self.temp_state()
         self.write_state(
