@@ -29,8 +29,8 @@ jobs:
           python-version: "3.12"
       - name: Run categorical P3 tests
         run: |
-          PYTHONPATH=. python - <<'PY'
-          import importlib
+          PYTHONPATH=. python - <<'PY' > categorical-test-report.txt 2>&1
+          import importlib, traceback
           modules = [
               "canonical.tests.test_bounded_explicit_categorical_support_v1",
               "canonical.tests.test_selected_support_truth_certificate_v5",
@@ -38,21 +38,35 @@ jobs:
               "canonical.tests.test_p3_real_context_v3_admission_v6",
           ]
           count = 0
+          failures = []
           for name in modules:
-              mod = importlib.import_module(name)
+              try:
+                  mod = importlib.import_module(name)
+              except Exception:
+                  failures.append((name, "<IMPORT>", traceback.format_exc()))
+                  continue
               for attr in sorted(vars(mod)):
                   fn = getattr(mod, attr)
                   if attr.startswith("test_") and callable(fn):
-                      fn()
-                      count += 1
-                      print("PASS", name, attr)
+                      try:
+                          fn()
+                          count += 1
+                          print("PASS", name, attr)
+                      except Exception:
+                          failures.append((name, attr, traceback.format_exc()))
+          print("TOTAL_EXECUTED_PASS", count)
+          if failures:
+              print("FAILURE_COUNT", len(failures))
+              for name, attr, tb in failures:
+                  print("\nFAIL", name, attr)
+                  print(tb)
+              raise SystemExit(1)
           if count < 20:
               raise SystemExit(f"TOO_FEW_TESTS_EXECUTED:{count}")
-          print("TOTAL_PASS", count)
           PY
       - name: Assert authority boundary
         run: |
-          PYTHONPATH=. python - <<'PY'
+          PYTHONPATH=. python - <<'PY' >> categorical-test-report.txt 2>&1
           from canonical.runtime.selected_support_truth_certificate_v5 import evaluate
           payload={
             "predicate_id":"BOUNDARY",
@@ -74,3 +88,10 @@ jobs:
           assert out["terminal_credit_delta"]==0
           print("AUTHORITY_BOUNDARY_PASS")
           PY
+      - name: Upload diagnostic report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p3-categorical-test-report
+          path: categorical-test-report.txt
+          if-no-files-found: warn
