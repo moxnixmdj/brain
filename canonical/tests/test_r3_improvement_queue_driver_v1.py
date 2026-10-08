@@ -756,6 +756,128 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertFalse(expansion["payload"]["candidate_generation_authority"])
         self.assertFalse(expansion["payload"]["promotion_authority"])
 
+    def test_frontier_acquisition_provider_must_change_owned_frontier_before_reopen(self):
+        path = self.temp_state()
+        observed = learning.record_success_observation(
+            {
+                "schema": "TEST_SUCCESS_V1",
+                "status": "PASS__OPAQUE_EXTERNAL_SUCCESS",
+                "pass": True,
+                "result": {"opaque": True},
+            },
+            surface="OPAQUE_EXTERNAL_SURFACE",
+            state_path=path,
+            replay_context={
+                "mode": "generic",
+                "problem": {"task_id": "frontier-executable-handoff"},
+            },
+        )
+        parked = driver.advance_once(state_path=path)
+        self.assertTrue(parked["disposition_recorded"], parked)
+        state = learning.load_state(path)
+        parked_row = state["improvement_queue"][observed["improvement_work_id"]]
+        old_frontier = parked_row["verification_frontier_sha256"]
+        new_frontier = "f" * 64
+        self.assertNotEqual(old_frontier, new_frontier)
+
+        provider = mock.Mock(return_value={
+            "pass": True,
+            "status": "ROOT1_VERIFIER_CAPABILITY_INSTALLED",
+        })
+        with mock.patch.object(
+            driver,
+            "_owned_success_learning_frontier_sha256",
+            side_effect=[old_frontier, old_frontier, new_frontier, new_frontier],
+        ):
+            out = driver.advance_once(
+                state_path=path,
+                verification_frontier_acquisition_provider=provider,
+                verification_frontier_acquisition_provider_id="root1-worker-v1",
+            )
+
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["progress"], out)
+        self.assertEqual(
+            out["status"],
+            "IMPROVEMENT_ADVANCED__VERIFICATION_FRONTIER_EXPANDED_AND_SUCCESS_REOPENED",
+        )
+        provider.assert_called_once()
+        request = provider.call_args.args[0]
+        self.assertEqual(request["kind"], driver.FRONTIER_EXPANSION_KIND)
+        self.assertEqual(
+            request["required_capability_class"],
+            "INDEPENDENT_READONLY_SUCCESS_VERIFIER_OR_ADAPTER",
+        )
+        self.assertFalse(request["replay_original_success"])
+        self.assertFalse(request["promotion_authority"])
+
+        state = learning.load_state(path)
+        self.assertEqual(
+            state["improvement_queue"][observed["improvement_work_id"]]["status"],
+            "PENDING",
+        )
+        expansion = state["improvement_queue"][
+            parked_row["frontier_expansion_work_id"]
+        ]
+        self.assertEqual(expansion["status"], "RESOLVED")
+
+    def test_frontier_acquisition_provider_cannot_self_certify_without_byte_change(self):
+        path = self.temp_state()
+        observed = learning.record_success_observation(
+            {
+                "schema": "TEST_SUCCESS_V1",
+                "status": "PASS__OPAQUE_EXTERNAL_SUCCESS",
+                "pass": True,
+                "result": {"opaque": True},
+            },
+            surface="OPAQUE_EXTERNAL_SURFACE",
+            state_path=path,
+            replay_context={
+                "mode": "generic",
+                "problem": {"task_id": "frontier-no-self-cert"},
+            },
+        )
+        driver.advance_once(state_path=path)
+        state = learning.load_state(path)
+        parked_row = state["improvement_queue"][observed["improvement_work_id"]]
+        frontier = parked_row["verification_frontier_sha256"]
+        provider = mock.Mock(return_value={"pass": True, "status": "CLAIMS_DONE"})
+
+        with mock.patch.object(
+            driver,
+            "_owned_success_learning_frontier_sha256",
+            return_value=frontier,
+        ):
+            first = driver.advance_once(
+                state_path=path,
+                verification_frontier_acquisition_provider=provider,
+                verification_frontier_acquisition_provider_id="root1-worker-v1",
+            )
+            second = driver.advance_once(
+                state_path=path,
+                verification_frontier_acquisition_provider=provider,
+                verification_frontier_acquisition_provider_id="root1-worker-v1",
+            )
+
+        self.assertFalse(first["pass"], first)
+        self.assertFalse(first["progress"], first)
+        self.assertTrue(first["attempt_backoff_recorded"], first)
+        self.assertEqual(
+            first["status"],
+            "FRONTIER_ACQUISITION_DID_NOT_CHANGE_OWNED_VERIFICATION_FRONTIER",
+        )
+        self.assertTrue(second["pass"], second)
+        self.assertFalse(second["progress"], second)
+        self.assertEqual(provider.call_count, 1)
+        blocker = next(
+            row for row in second["blockers"]
+            if row["kind"] == driver.FRONTIER_EXPANSION_KIND
+        )
+        self.assertEqual(
+            blocker["blocker"],
+            "FRONTIER_ACQUISITION_ALREADY_ATTEMPTED_FOR_CURRENT_PROVIDER_AND_FRONTIER",
+        )
+
     def test_parked_success_reopens_on_new_evidence_or_external_authority(self):
         path = self.temp_state()
         first = learning.record_success_observation(
