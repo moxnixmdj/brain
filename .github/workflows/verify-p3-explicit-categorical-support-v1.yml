@@ -1,0 +1,76 @@
+name: Verify P3 explicit categorical support V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/bounded_explicit_categorical_support_v1.py"
+      - "canonical/runtime/selected_support_truth_certificate_v5.py"
+      - "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py"
+      - "canonical/runtime/p3_real_context_v3_admission_v6.py"
+      - "canonical/tests/test_bounded_explicit_categorical_support_v1.py"
+      - "canonical/tests/test_selected_support_truth_certificate_v5.py"
+      - "canonical/tests/test_p3_required_claim_grounded_realization_cell_v3.py"
+      - "canonical/tests/test_p3_real_context_v3_admission_v6.py"
+      - ".github/workflows/verify-p3-explicit-categorical-support-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run categorical P3 tests
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          import importlib
+          modules = [
+              "canonical.tests.test_bounded_explicit_categorical_support_v1",
+              "canonical.tests.test_selected_support_truth_certificate_v5",
+              "canonical.tests.test_p3_required_claim_grounded_realization_cell_v3",
+              "canonical.tests.test_p3_real_context_v3_admission_v6",
+          ]
+          count = 0
+          for name in modules:
+              mod = importlib.import_module(name)
+              for attr in sorted(vars(mod)):
+                  fn = getattr(mod, attr)
+                  if attr.startswith("test_") and callable(fn):
+                      fn()
+                      count += 1
+                      print("PASS", name, attr)
+          if count < 20:
+              raise SystemExit(f"TOO_FEW_TESTS_EXECUTED:{count}")
+          print("TOTAL_PASS", count)
+          PY
+      - name: Assert authority boundary
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          from canonical.runtime.selected_support_truth_certificate_v5 import evaluate
+          payload={
+            "predicate_id":"BOUNDARY",
+            "claim":{"claim_id":"C","text":"Tweety is a member of Animal.","required":True},
+            "evidence":[
+              {"evidence_id":"E1","text":"Report states that Tweety is a member of Canary.","verified":True,
+               "provenance":[{"source_id":"REPORT","locator":"p1"}]},
+              {"evidence_id":"E2","text":"Taxonomy states Canary is a subclass of Animal.","verified":True,
+               "provenance":[{"source_id":"TAXONOMY","locator":"p1"}]},
+            ],
+          }
+          out=evaluate(payload)
+          assert out["pass"] is True
+          for field in (
+              "source_authorization_verified","policy_adequacy_authority",
+              "db_admission_authority","u_subtraction_authority","terminal_authority"
+          ):
+              assert out[field] is False,(field,out[field])
+          assert out["terminal_credit_delta"]==0
+          print("AUTHORITY_BOUNDARY_PASS")
+          PY
