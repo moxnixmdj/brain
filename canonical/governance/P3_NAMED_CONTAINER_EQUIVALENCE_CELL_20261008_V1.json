@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_P3_NAMED_CONTAINER_EQUIVALENCE_CELL_20261008_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE__GDPVAL_SOURCE_BOUND_COUNTEREXAMPLE__ZERO_CREDIT_PENDING_VERIFICATION",
+  "causal_target": "PARAPHRASE_OR_SEMANTIC_ENTAILMENT_OUTSIDE_CHECKED_FACT_AND_ATTESTATION_GRAMMARS",
+  "counterexample": {
+    "task_id": "83d10b06-26d1-4636-a32c-23f92c57f30b",
+    "source_requirement": "Include your workings in a second tab titled ‘Sample Size Calculation’.",
+    "rubric_criterion": "The workbook contains a worksheet named exactly 'Sample Size Calculation' (case-insensitive, ignoring surrounding spaces).",
+    "public_sources": [
+      "https://cogym.saltlab.stanford.edu/tasks/83d10b06-26d1-4636-a32c-23f92c57f30b",
+      "https://huggingface.co/datasets/openai/gdpval"
+    ]
+  },
+  "minimal_primitive": {
+    "name": "EXACT_NAMED_SPREADSHEET_CONTAINER_EXISTENCE_EQUIVALENCE",
+    "normalization": [
+      "TAB_SHEET_WORKSHEET_TO_WORKSHEET",
+      "CASEFOLD_AND_COLLAPSE_WHITESPACE_FOR_EXPLICIT_QUOTED_TITLE"
+    ],
+    "proof": "A source directive that explicitly requires a tab/sheet/worksheet with quoted title X and a rubric criterion that explicitly checks workbook existence of a tab/sheet/worksheet with quoted title X share the same bounded named-container existence atom.",
+    "scope": "ONLY_EXISTENCE_OF_EXPLICITLY_NAMED_SPREADSHEET_CONTAINER"
+  },
+  "hard_nonclaims": [
+    "NO GENERAL PARAPHRASE OR NLI.",
+    "NO CLAIM THAT SECOND-TAB ORDERING IS CHECKED BY THE RUBRIC.",
+    "NO CLAIM THAT WORKINGS CONTENT IS CHECKED BY THE NAMED-CONTAINER ATOM.",
+    "NO CLAIM THE WHOLE GDPVAL TASK OR P3 IS CLOSED.",
+    "NO TERMINAL CREDIT."
+  ],
+  "runtime": "canonical/runtime/bounded_named_container_equivalence_v1.py",
+  "tests": "canonical/tests/test_bounded_named_container_equivalence_v1.py",
+  "accounting": {"incremental_spend_usd": 0, "terminal_credit_delta": 0}
+}
