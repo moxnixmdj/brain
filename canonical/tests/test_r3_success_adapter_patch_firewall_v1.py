@@ -248,5 +248,33 @@ class R3SuccessAdapterPatchFirewallV1Tests(unittest.TestCase):
             )
 
 
+    def test_current_owned_adapters_are_within_source_capability_allowlist(self):
+        repo_root = Path(__file__).resolve().parents[2]
+        for relative in sorted(firewall.ALLOWED_TARGETS):
+            source = (repo_root / relative).read_text(encoding="utf-8")
+            firewall._validate_source_capabilities(source)
+
+    def test_reflective_dynamic_call_is_rejected(self):
+        with TemporaryDirectory() as td:
+            root = self._repo(td)
+            dangerous = (
+                "def adapt(request):\n"
+                "    getter = getattr(request, 'get')\n"
+                "    return getter('payload')\n"
+            )
+            out = firewall.validate_candidate(
+                self._candidate(
+                    content=dangerous,
+                    content_sha256=digest(dangerous),
+                ),
+                repo_root=root,
+            )
+            self.assertFalse(out["pass"])
+            self.assertIn(
+                "SOURCE_CALL_NOT_ALLOWED:getattr",
+                out["reason"],
+            )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
