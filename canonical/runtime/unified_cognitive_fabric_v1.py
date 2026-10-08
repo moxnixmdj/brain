@@ -189,6 +189,8 @@ def run(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
 ) -> dict[str, Any]:
     try:
         if not isinstance(request, Mapping):
@@ -206,6 +208,15 @@ def run(
 
         auto_routed = requested_mode in {"", "AUTO"}
         mode = _auto_mode(payload, options) if auto_routed else requested_mode
+        if (
+            auto_routed
+            and mode == "ADAPTIVE_SOLVER"
+            and (
+                episode_verification_provider is not None
+                or skill_verification_provider is not None
+            )
+        ):
+            mode = "LEARNING_EPISODE"
         if mode not in ENGINE_DESCRIPTORS:
             raise CognitiveFabricError("MODE_INVALID:" + mode)
 
@@ -419,6 +430,8 @@ def run(
                 scope_id=str(options.get("scope_id") or "scope"),
                 episode_verification_binding=options.get("episode_verification_binding"),
                 skill_verification_binding=options.get("skill_verification_binding"),
+                episode_verification_provider=episode_verification_provider,
+                skill_verification_provider=skill_verification_provider,
                 resume_binding=options.get("resume_binding"),
                 known_absent_invalidators=options.get("known_absent_invalidators", ()),
                 proposal_provider=proposal_provider,
