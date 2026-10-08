@@ -22,6 +22,7 @@ semantically authorized; carrier/outcome verification remains separate.
 """
 from __future__ import annotations
 
+from copy import deepcopy
 from hashlib import sha256
 import base64
 import json
