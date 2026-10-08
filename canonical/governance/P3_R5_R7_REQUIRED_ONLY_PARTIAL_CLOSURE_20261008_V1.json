@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_P3_R5_R7_REQUIRED_ONLY_PARTIAL_CLOSURE_V1",
+  "date": "2026-10-08",
+  "status": "VERIFIED_PARTIAL_CLOSURE__R5_SILENT_REQUIRED_OMISSION_AND_R7_IDS_ONLY_REALIZATION_REMOVED_ON_SUPPORT_V3_REQUIRED_ONLY_CELL__GENERAL_R5_R7_OPEN__ZERO_TERMINAL_CREDIT",
+  "source_countermodel": {
+    "path": "canonical/governance/SYNTHESIS_P3_TYPED_INPUT_DOMAIN_COUNTERMODEL_PARTITION_20261005_V1.json",
+    "git_blob_sha": "4150a16f4c20bf0bfcaa23d31b0b03af69417b2b"
+  },
+  "runtime": {
+    "path": "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py",
+    "git_blob_sha": "b2941876eebd7dd12eb630e8c3c4c7b5f72219ec"
+  },
+  "verification": {
+    "path": "canonical/verification/P3_REQUIRED_CLAIM_GROUNDED_REALIZATION_CELL_VERIFICATION_20261008_V1.json"
+  },
+  "r5_effect": {
+    "old_failure": "REQUIRED_CLAIM_WITH_ZERO_MATCHING_SUPPORT_COULD_BE_SILENTLY_OMITTED",
+    "new_admitted_cell_behavior": "ZERO_SUPPORT_OR_UNCHECKED_SUPPORT_RETURNS_FAIL_CLOSED_WITH_EXPLICIT_REASON__CLAIM_IS_NEVER_SILENTLY_DROPPED",
+    "whole_r5_closed": false
+  },
+  "r7_effect": {
+    "old_failure": "BOUNDED_ROUTE_EMITTED_SELECTED_CLAIM_IDS_ONLY",
+    "new_admitted_cell_behavior": "SUPPORTED_REQUIRED_CLAIMS_ARE_RENDERED_AS_VERBATIM_GROUNDED_TEXT_WITH_SUPPORTING_PROVENANCE_AND_NO_CONTENT_DROP",
+    "whole_r7_closed": false
+  },
+  "admitted_cell": [
+    "ALL_CLAIMS_REQUIRED",
+    "SUPPORT_TRUTH_V3_TRUE_FOR_EACH_CLAIM",
+    "EMPTY_REQUIRED_UNCERTAINTY_SET",
+    "EXPLICIT_BOUNDED_BULLET_OR_PARAGRAPH_RENDER_CONSTRAINTS",
+    "INPUT_ORDER_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_WHOLE_CONTRACT_SCOPE_COMPLETENESS",
+    "NO_R5_GLOBAL_CLOSURE",
+    "NO_R7_GLOBAL_CLOSURE",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
