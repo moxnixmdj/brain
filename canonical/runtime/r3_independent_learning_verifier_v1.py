@@ -15,8 +15,9 @@ Current admitted scope:
   re-induction, and its program is structurally closed. Reuse still passes the
   runtime structural guard and fresh V12 execution verification.
 
-Effectful episodes are intentionally not replayed. Without an independently
-re-readable effect root in the verification request, they remain fail-closed.
+Effectful episodes are never replayed. The admitted bounded filesystem-effect
+class may be verified only by independently re-reading its exact recorded files
+under the supplied effect root; all other effect classes remain fail-closed.
 
 No terminal, capability, ownership, or execution authority is granted here.
 """
@@ -56,6 +57,9 @@ from canonical.runtime.universal_solver_state_capsule_v1 import (
 from canonical.runtime.universal_solver_value_state_v1 import (
     append_verified_transition as append_value_transition,
     initialize as initialize_value_capsule,
+)
+from canonical.runtime.universal_verified_effect_executor_v1 import (
+    verify_outcome_readback,
 )
 
 SCHEMA = "PROJECT_BRAIN_R3_INDEPENDENT_LEARNING_VERIFIER_V1"
@@ -167,17 +171,19 @@ def _active_action(
     return action
 
 
-def _reverify_non_effectful_trace(
+def _reverify_trace(
     *,
     problem: Mapping[str, Any],
     trace: Sequence[Mapping[str, Any]],
     fact_capsule_head_hash: str,
     value_capsule_head_hash: str,
+    effect_root: str | Path | None = None,
 ) -> dict[str, Any]:
     caps = _caps(problem)
     fact_capsule = initialize_fact_capsule(problem)
     value_capsule = initialize_value_capsule(problem)
     expected_steps: list[dict[str, Any]] = []
+    effectful_step_count = 0
 
     for expected_cycle, raw_row in enumerate(trace):
         if not isinstance(raw_row, Mapping):
@@ -190,28 +196,22 @@ def _reverify_non_effectful_trace(
         if cap is None:
             raise R3IndependentVerificationError("TRACE_CAPABILITY_UNKNOWN:" + cid)
 
-        # Never replay or self-attest an effect. A future worker may admit an
-        # effectful episode only when it can independently read back the effect.
-        if row.get("effect_outcome_sha256"):
-            raise R3IndependentVerificationError(
-                "EFFECTFUL_EPISODE_REQUIRES_INDEPENDENT_READBACK_VERIFIER"
-            )
-
         action = _active_action(cap, row)
         if v1._digest(action) != row.get("action_contract_sha256"):
             raise R3IndependentVerificationError("ACTION_CONTRACT_DIGEST_MISMATCH:" + cid)
         action_type = str(action.get("type") or "")
-        if action_type == "verified_effect_tool":
-            raise R3IndependentVerificationError(
-                "EFFECTFUL_ACTION_REQUIRES_INDEPENDENT_READBACK_VERIFIER"
-            )
-        verifier_id = str(action.get("verifier_id") or "").strip()
+        is_effect = action_type == "verified_effect_tool"
+        if is_effect:
+            verifier_id = str(action.get("pre_verifier_id") or "").strip()
+            payload = action.get("pre_verifier_payload")
+        else:
+            verifier_id = str(action.get("verifier_id") or "").strip()
+            payload = action.get("verifier_payload")
         if verifier_id != str(row.get("verifier_id") or "").strip():
             raise R3IndependentVerificationError("VERIFIER_ID_MISMATCH:" + cid)
         verifier = v1.BUILTIN_VERIFIERS.get(verifier_id)
         if verifier is None:
             raise R3IndependentVerificationError("VERIFIER_NOT_BRAIN_OWNED:" + verifier_id)
-        payload = action.get("verifier_payload")
         proposal = row.get("accepted_proposal")
         if not isinstance(payload, Mapping):
             raise R3IndependentVerificationError("VERIFIER_PAYLOAD_INVALID:" + cid)
@@ -227,6 +227,29 @@ def _reverify_non_effectful_trace(
             raise R3IndependentVerificationError("VERIFIER_PROOF_DIGEST_MISMATCH:" + cid)
         if _canon(verdict.get("verified_output")) != _canon(row.get("verified_output")):
             raise R3IndependentVerificationError("VERIFIED_OUTPUT_MISMATCH:" + cid)
+
+        if is_effect:
+            if effect_root is None:
+                raise R3IndependentVerificationError("EFFECT_ROOT_REQUIRED_FOR_READBACK")
+            recorded_outcome = row.get("effect_outcome")
+            recorded_digest = str(row.get("effect_outcome_sha256") or "")
+            if not isinstance(recorded_outcome, Mapping) or not recorded_digest:
+                raise R3IndependentVerificationError("EFFECT_OUTCOME_RECORD_INVALID:" + cid)
+            readback = verify_outcome_readback(
+                outcome=recorded_outcome,
+                expected_effect_outcome_sha256=recorded_digest,
+                effect_root=effect_root,
+            )
+            if readback.get("pass") is not True:
+                raise R3IndependentVerificationError(
+                    "EFFECT_OUTCOME_READBACK_FAILED:"
+                    + cid
+                    + ":"
+                    + ";".join(str(x) for x in readback.get("errors", []))
+                )
+            effectful_step_count += 1
+        elif row.get("effect_outcome_sha256") or row.get("effect_outcome") is not None:
+            raise R3IndependentVerificationError("NON_EFFECT_ACTION_HAS_EFFECT_OUTCOME:" + cid)
 
         provides = sorted(str(x) for x in cap.get("provides", []))
         observed = sorted(str(x) for x in row.get("new_verified_facts", []))
@@ -264,6 +287,9 @@ def _reverify_non_effectful_trace(
         "fact_capsule_head_hash": fact_capsule.get("head_hash"),
         "value_capsule_head_hash": value_capsule.get("head_hash"),
         "target_verdict": target_verdict,
+        "effectful_step_count": effectful_step_count,
+        "effect_outcomes_reverified": effectful_step_count > 0,
+        "non_effectful_trace": effectful_step_count == 0,
     }
 
 
@@ -289,11 +315,12 @@ def verify_episode_request(
         if len(fact_head) != 64 or len(value_head) != 64:
             raise R3IndependentVerificationError("EPISODE_CAPSULE_HEAD_INVALID")
 
-        recomputed = _reverify_non_effectful_trace(
+        recomputed = _reverify_trace(
             problem=problem,
             trace=trace,
             fact_capsule_head_hash=fact_head,
             value_capsule_head_hash=value_head,
+            effect_root=request.get("effect_root"),
         )
         expected_pre = sorted(str(x) for x in problem.get("initial_facts", []))
         expected_post = sorted(str(x) for x in problem.get("target_effects", []))
@@ -342,8 +369,8 @@ def verify_episode_request(
             "exact_byte_bound": True,
             "trace_reverified": True,
             "state_lineage_reverified": True,
-            "effect_outcomes_reverified": False,
-            "non_effectful_trace": True,
+            "effect_outcomes_reverified": recomputed["effect_outcomes_reverified"],
+            "non_effectful_trace": recomputed["non_effectful_trace"],
             "independent_verifier_id": INDEPENDENT_VERIFIER_ID,
             "verification_basis": NON_EFFECTFUL_VERIFICATION_BASIS,
         }
