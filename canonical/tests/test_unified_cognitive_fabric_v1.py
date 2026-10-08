@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from canonical.runtime import autonomous_verified_self_improvement_v1 as r3
+from canonical.runtime import autonomous_verified_self_improvement_v2 as r3
 from canonical.runtime import universal_verified_adaptive_solver_v12 as solver_v12
 from canonical.runtime.unified_cognitive_fabric_v1 import catalog, run
 
@@ -48,6 +48,54 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
 
     def test_r3_uses_current_solver_v12(self):
         self.assertIs(r3.solver_v12, solver_v12)
+
+    def test_r3_bounded_repair_ratchet_is_live_through_fabric(self):
+        calls = {"n": 0}
+
+        def fake_v1(problem, **kwargs):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                return {
+                    "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+                    "pass": False,
+                    "solver_output": {"status": "FAIL_CLOSED", "reason": "CAPABILITY_OR_TASK_CONTRACT_GAP", "trace": []},
+                    "learning": {"diagnosis": {"repair_class": "ACQUIRE_COMPOSE_OR_INVENT_VERIFIABLE_CAPABILITY", "failure_fingerprint": "f1"}},
+                }
+            return {
+                "status": "VERIFIED_SKILL_PERMANENTLY_ADMITTED_FOR_REUSE",
+                "pass": True,
+                "solver_output": {"status": "SOLVED", "pass": True, "trace": []},
+                "learning": {"permanent_reuse_authorized": True},
+            }
+
+        def repair_provider(request, index):
+            self.assertFalse(request["repair_authority"])
+            return {"known_absent_invalidators": ["verified.absent"]}
+
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as td, patch.object(r3.v1, "run_learning_episode", side_effect=fake_v1):
+            out = run(
+                {
+                    "mode": "LEARNING_EPISODE",
+                    "payload": {
+                        "task_id": "FABRIC-R3-REPAIR-001",
+                        "initial_facts": [],
+                        "target_effects": ["target"],
+                        "capabilities": [],
+                    },
+                    "options": {
+                        "state_path": str(Path(td) / "state.json"),
+                        "episode_id": "repair-episode",
+                        "scope_id": "repair-scope",
+                        "max_repair_rounds": 2,
+                    },
+                },
+                repair_provider=repair_provider,
+            )
+        self.assertTrue(out["inner_pass"])
+        self.assertEqual(out["result"]["ratchet_status"], "COMPOUNDING_LOOP_SUCCESS")
+        self.assertEqual(out["result"]["repair_rounds_used"], 1)
+        self.assertFalse(out["result"]["self_certification_used"])
 
     def test_learning_episode_persists_failure_diagnosis(self):
         with tempfile.TemporaryDirectory() as td:
