@@ -56,7 +56,20 @@ def _bound_path(raw: Any, *, prefixes: tuple[str, ...]) -> Path:
         raise ValueError("NONCANONICAL_BINDING_PATH")
     if not any(value.startswith(prefix) for prefix in prefixes):
         raise ValueError("BINDING_PATH_OUTSIDE_ALLOWED_SCOPE")
-    full = ROOT / p
+    base = ROOT.resolve(strict=True)
+    full = base / p
+    if any(
+        part.is_symlink()
+        for part in [full, *full.parents]
+        if part != base and base in part.parents
+    ):
+        raise ValueError("BOUND_SYMLINK_FORBIDDEN:" + value)
+    resolved = full.resolve(strict=False)
+    if not any(
+        resolved.is_relative_to((base / prefix).resolve(strict=False))
+        for prefix in prefixes
+    ):
+        raise ValueError("BOUND_RESOLVED_PATH_OUTSIDE_ALLOWED_SCOPE:" + value)
     if not full.is_file():
         raise ValueError("BOUND_FILE_MISSING:" + value)
     return full
