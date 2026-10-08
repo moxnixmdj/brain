@@ -311,38 +311,71 @@ def _reactivate_parked_successes(
     state_path: str | Path,
     repo_root: str | Path,
     external_authority_available: bool,
+    external_adapter_available: bool = False,
 ) -> dict[str, Any]:
-    """Reopen parked success work only after its new verifier frontier is active."""
+    """Reopen only after a safe adapter change or explicit verification authority."""
     frontier = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    adapter_frontier = _owned_success_adapter_frontier_sha256(repo_root=repo_root)
+    verification_authority = _owned_success_verification_authority_sha256(
+        repo_root=repo_root,
+    )
     state = learning.load_state(state_path)
     queue = state.get("improvement_queue", {})
     reopened: list[str] = []
     reopened_by: dict[str, str] = {}
     resolved_frontier_handoffs: list[str] = []
     frontier_activation: dict[str, Any] | None = None
+    state_changed = False
 
-    owned_frontier_changed = False
+    safe_owned_adapter_change = False
     if isinstance(queue, Mapping):
-        owned_frontier_changed = any(
-            isinstance(raw, Mapping)
-            and raw.get("status") == "PARKED"
-            and raw.get("kind") == "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE"
-            and raw.get("verification_frontier_sha256") != frontier
-            for raw in queue.values()
-        )
+        for raw in queue.values():
+            if (
+                not isinstance(raw, dict)
+                or raw.get("status") != "PARKED"
+                or raw.get("kind") != "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE"
+            ):
+                continue
+            stored_adapter = str(raw.get("adapter_frontier_sha256") or "")
+            stored_authority = str(raw.get("verification_authority_sha256") or "")
+            if not stored_adapter or not stored_authority:
+                raw["adapter_frontier_sha256"] = adapter_frontier
+                raw["verification_authority_sha256"] = verification_authority
+                raw["verification_frontier_sha256"] = frontier
+                raw["frontier_partition_initialized_fail_closed"] = True
+                state_changed = True
+                continue
+            if stored_authority != verification_authority:
+                if (
+                    raw.get("verification_authority_change_blocked") is not True
+                    or raw.get("blocked_verification_authority_sha256")
+                    != verification_authority
+                ):
+                    raw["verification_authority_change_blocked"] = True
+                    raw["blocked_verification_authority_sha256"] = verification_authority
+                    state_changed = True
+                continue
+            if stored_adapter != adapter_frontier:
+                safe_owned_adapter_change = True
 
-    if owned_frontier_changed and not external_authority_available:
+    if (
+        safe_owned_adapter_change
+        and not external_authority_available
+        and not external_adapter_available
+    ):
         try:
-            frontier_activation = _activate_owned_success_learning_frontier(
-                expected_frontier_sha256=frontier,
+            frontier_activation = _activate_owned_success_adapter_frontier(
+                expected_adapter_frontier_sha256=adapter_frontier,
+                expected_verification_authority_sha256=verification_authority,
                 repo_root=repo_root,
             )
         except Exception as exc:
             frontier_activation = {
                 "schema": SCHEMA,
-                "status": "SUCCESS_VERIFICATION_FRONTIER_ACTIVATION_FAILED",
+                "status": "SUCCESS_ADAPTER_FRONTIER_ACTIVATION_FAILED",
                 "pass": False,
-                "frontier_sha256": frontier,
+                "adapter_frontier_sha256": adapter_frontier,
+                "verification_authority_sha256": verification_authority,
                 "reason": type(exc).__name__ + ":" + str(exc),
                 "terminal_authority": False,
             }
@@ -355,25 +388,46 @@ def _reactivate_parked_successes(
                 or raw.get("kind") != "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE"
             ):
                 continue
-            owned_change_active = (
-                raw.get("verification_frontier_sha256") != frontier
+            stored_adapter = str(raw.get("adapter_frontier_sha256") or "")
+            stored_authority = str(raw.get("verification_authority_sha256") or "")
+            authority_unchanged = stored_authority == verification_authority
+            adapter_changed = stored_adapter != adapter_frontier
+            owned_adapter_change_active = (
+                authority_unchanged
+                and adapter_changed
                 and isinstance(frontier_activation, Mapping)
                 and frontier_activation.get("pass") is True
             )
-            if external_authority_available or owned_change_active:
+            external_adapter_safe = (
+                external_adapter_available and authority_unchanged
+            )
+            if (
+                external_authority_available
+                or external_adapter_safe
+                or owned_adapter_change_active
+            ):
                 raw["status"] = "PENDING"
                 raw["reopen_count"] = int(raw.get("reopen_count", 0)) + 1
                 raw["reactivated_by"] = (
                     "EXTERNAL_VERIFICATION_AUTHORITY_AVAILABLE"
                     if external_authority_available
-                    else "OWNED_VERIFICATION_FRONTIER_CHANGED"
+                    else (
+                        "EXTERNAL_SUCCESS_ADAPTER_AVAILABLE__AUTHORITY_UNCHANGED"
+                        if external_adapter_safe
+                        else "OWNED_SUCCESS_ADAPTER_FRONTIER_CHANGED__AUTHORITY_UNCHANGED"
+                    )
                 )
                 raw["previous_verification_frontier_sha256"] = raw.get(
                     "verification_frontier_sha256"
                 )
                 raw["verification_frontier_sha256"] = frontier
+                raw["adapter_frontier_sha256"] = adapter_frontier
+                raw["verification_authority_sha256"] = verification_authority
+                raw.pop("verification_authority_change_blocked", None)
+                raw.pop("blocked_verification_authority_sha256", None)
                 reopened.append(str(wid))
                 reopened_by[str(wid)] = str(raw["reactivated_by"])
+                state_changed = True
 
         if reopened_by:
             for handoff_id, handoff in list(queue.items()):
@@ -395,16 +449,18 @@ def _reactivate_parked_successes(
                 handoff["resolved_by"] = reopened_by[blocked]
                 handoff["resolved_frontier_sha256"] = frontier
                 resolved_frontier_handoffs.append(str(handoff_id))
-    if reopened or resolved_frontier_handoffs:
+                state_changed = True
+    if state_changed:
         learning._refresh_stats(state)
         learning._write_state(state, state_path)
     return {
         "frontier_sha256": frontier,
+        "adapter_frontier_sha256": adapter_frontier,
+        "verification_authority_sha256": verification_authority,
         "frontier_activation": deepcopy(frontier_activation),
         "reopened_work_ids": sorted(reopened),
         "resolved_frontier_handoff_work_ids": sorted(resolved_frontier_handoffs),
     }
-
 
 def _episode_pools(
     state: Mapping[str, Any],
@@ -882,14 +938,24 @@ def _execute_frontier_acquisition(
         raise ImprovementDriverError("FRONTIER_EXPANSION_PAYLOAD_INVALID")
     wid = str(work.get("work_id") or "").strip()
     before = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    before_adapter = _owned_success_adapter_frontier_sha256(repo_root=repo_root)
+    before_authority = _owned_success_verification_authority_sha256(
+        repo_root=repo_root,
+    )
     request = {
         "kind": FRONTIER_EXPANSION_KIND,
         "improvement_work_id": wid,
         "blocked_success_work_id": payload.get("blocked_success_work_id"),
         "observation_id": payload.get("observation_id"),
         "verification_frontier_sha256": before,
+        "adapter_frontier_sha256": before_adapter,
+        "verification_authority_sha256": before_authority,
         "required_capability_class": payload.get("required_capability_class"),
         "boundary_root": payload.get("boundary_root"),
+        "allowed_frontier_change_class": (
+            "SUCCESS_ADAPTER_ONLY__VERIFICATION_AUTHORITY_IMMUTABLE"
+        ),
+        "verification_authority_change_allowed": False,
         "replay_original_success": False,
         "candidate_generation_authority": False,
         "promotion_authority": False,
@@ -917,13 +983,18 @@ def _execute_frontier_acquisition(
         }
 
     after = _owned_success_learning_frontier_sha256(repo_root=repo_root)
-    if after == before:
-        status = "FRONTIER_ACQUISITION_DID_NOT_CHANGE_OWNED_VERIFICATION_FRONTIER"
+    after_adapter = _owned_success_adapter_frontier_sha256(repo_root=repo_root)
+    after_authority = _owned_success_verification_authority_sha256(
+        repo_root=repo_root,
+    )
+
+    if after_authority != before_authority:
+        status = "FRONTIER_ACQUISITION_REJECTED__VERIFICATION_AUTHORITY_REWRITTEN"
         reason = str(result.get("reason") or result.get("status") or status)
         _record_frontier_acquisition_attempt(
             wid,
             provider_id=provider_id,
-            frontier_sha256=before,
+            frontier_sha256=after,
             status=status,
             reason=reason,
             state_path=state_path,
@@ -937,6 +1008,39 @@ def _execute_frontier_acquisition(
             "provider_result": deepcopy(dict(result)),
             "verification_frontier_sha256_before": before,
             "verification_frontier_sha256_after": after,
+            "adapter_frontier_sha256_before": before_adapter,
+            "adapter_frontier_sha256_after": after_adapter,
+            "verification_authority_sha256_before": before_authority,
+            "verification_authority_sha256_after": after_authority,
+            "verification_authority_change_accepted": False,
+            "attempt_backoff_recorded": True,
+            "terminal_authority": False,
+        }
+
+    if after_adapter == before_adapter:
+        status = "FRONTIER_ACQUISITION_DID_NOT_CHANGE_OWNED_SUCCESS_ADAPTER_FRONTIER"
+        reason = str(result.get("reason") or result.get("status") or status)
+        _record_frontier_acquisition_attempt(
+            wid,
+            provider_id=provider_id,
+            frontier_sha256=after,
+            status=status,
+            reason=reason,
+            state_path=state_path,
+        )
+        return {
+            "schema": SCHEMA,
+            "status": status,
+            "pass": False,
+            "progress": False,
+            "work_id": wid,
+            "provider_result": deepcopy(dict(result)),
+            "verification_frontier_sha256_before": before,
+            "verification_frontier_sha256_after": after,
+            "adapter_frontier_sha256_before": before_adapter,
+            "adapter_frontier_sha256_after": after_adapter,
+            "verification_authority_sha256_before": before_authority,
+            "verification_authority_sha256_after": after_authority,
             "attempt_backoff_recorded": True,
             "terminal_authority": False,
         }
@@ -945,16 +1049,17 @@ def _execute_frontier_acquisition(
         state_path=state_path,
         repo_root=repo_root,
         external_authority_available=False,
+        external_adapter_available=False,
     )
     blocked = str(payload.get("blocked_success_work_id") or "")
     reopened = set(reactivation.get("reopened_work_ids") or [])
     if blocked not in reopened:
         activation = reactivation.get("frontier_activation")
         status = (
-            "FRONTIER_CHANGED_BUT_RUNTIME_ACTIVATION_FAILED"
+            "ADAPTER_FRONTIER_CHANGED_BUT_RUNTIME_ACTIVATION_FAILED"
             if isinstance(activation, Mapping)
             and activation.get("pass") is not True
-            else "FRONTIER_CHANGED_BUT_BLOCKED_SUCCESS_NOT_REOPENED"
+            else "ADAPTER_FRONTIER_CHANGED_BUT_BLOCKED_SUCCESS_NOT_REOPENED"
         )
         reason = (
             str(activation.get("reason") or activation.get("status") or status)
@@ -979,13 +1084,17 @@ def _execute_frontier_acquisition(
             "provider_result": deepcopy(dict(result)),
             "verification_frontier_sha256_before": before,
             "verification_frontier_sha256_after": after,
+            "adapter_frontier_sha256_before": before_adapter,
+            "adapter_frontier_sha256_after": after_adapter,
+            "verification_authority_sha256_before": before_authority,
+            "verification_authority_sha256_after": after_authority,
             "frontier_activation": deepcopy(activation),
             "attempt_backoff_recorded": True,
             "terminal_authority": False,
         }
     return {
         "schema": SCHEMA,
-        "status": "IMPROVEMENT_ADVANCED__VERIFICATION_FRONTIER_EXPANDED_AND_SUCCESS_REOPENED",
+        "status": "IMPROVEMENT_ADVANCED__SUCCESS_ADAPTER_FRONTIER_EXPANDED_AND_SUCCESS_REOPENED",
         "pass": True,
         "progress": True,
         "work_id": wid,
@@ -993,6 +1102,11 @@ def _execute_frontier_acquisition(
         "provider_result": deepcopy(dict(result)),
         "verification_frontier_sha256_before": before,
         "verification_frontier_sha256_after": after,
+        "adapter_frontier_sha256_before": before_adapter,
+        "adapter_frontier_sha256_after": after_adapter,
+        "verification_authority_sha256_before": before_authority,
+        "verification_authority_sha256_after": after_authority,
+        "verification_authority_unchanged": True,
         "frontier_activation": deepcopy(reactivation.get("frontier_activation")),
         "reopened_work_ids": sorted(reopened),
         "resolved_frontier_handoff_work_ids": reactivation.get(
@@ -1000,7 +1114,6 @@ def _execute_frontier_acquisition(
         ) or [],
         "terminal_authority": False,
     }
-
 
 def _record_failed_action_attempt(
     work_id: str,
@@ -1045,9 +1158,8 @@ def advance_once(
     reactivation = _reactivate_parked_successes(
         state_path=state_path,
         repo_root=repo_root,
-        external_authority_available=(
-            external_episode_verifier or external_success_adapter
-        ),
+        external_authority_available=external_episode_verifier,
+        external_adapter_available=external_success_adapter,
     )
 
     # Missing host providers are not treated as missing capability when the Brain
