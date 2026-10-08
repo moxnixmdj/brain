@@ -18,8 +18,8 @@
     "fixed_point_regression_test_git_blob_sha": "1fa9f605dff0016fe2e8647e3a972e71e419ffa0"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V8.json",
-    "git_blob_sha": "07f60fae7a9193b0ba70e5e4ed33c645a47af3da"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V9.json",
+    "git_blob_sha": "17dea48c39d050cc36a12779a95f5a7899155a49"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
@@ -53,7 +53,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__FIXED_POINT_NATIVE_TOTAL_CONTROL_PLUS_LIVE_TOTALIZER",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__TOTAL_CONTROL_MECHANISM_CLOSED",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -82,7 +82,7 @@
     "generic_meta_effect_retained_only_when_no_grounded_policy_identity_exists": true,
     "verification_path": "canonical/verification/R2_R3_CONCRETE_GROUNDED_ADEQUACY_TARGET_VERIFY_20261008_V1.json",
     "verification_git_blob_sha": "5b965a06f0ebfded59aacaaa5bb131f61e9abb4b",
-    "live_runtime_git_blob_sha": "043edf1746b5f8e118df7e7ec514ec25de141ee8",
+    "live_runtime_git_blob_sha": "b8f395270d5adf87a1aabb28ff99a938b650c0ef",
     "merged_commit": "aecf59ece1140409c171cb7d0824f8085697ad3b"
   },
   "remaining_hard_frontier": [
@@ -148,7 +148,7 @@
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
     "live_route": "canonical/runtime/live_brain_runtime_v1.py::_decision_run",
-    "live_runtime_git_blob_sha": "043edf1746b5f8e118df7e7ec514ec25de141ee8",
+    "live_runtime_git_blob_sha": "b8f395270d5adf87a1aabb28ff99a938b650c0ef",
     "status": "ACTIVE__LIVE_EXTERNAL_META_ACTION_NORMALIZER_OVER_NATIVE_TOTAL_FIXED_POINT_CONTROL",
     "meta_actions": [
       "RETURN_VERIFIED_RESULT",
@@ -169,9 +169,9 @@
     "authoritative_field": "mechanism_closure"
   },
   "sufficient_closure": {
-    "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V3.json",
-    "git_blob_sha": "691c750ea69af19393e630f98a6277846c3aca4b",
-    "status": "PASS__CURRENT_FIXED_POINT_NATIVE_TOTALITY_AND_LIVE_TOTALIZED_ROUTE_BOUND",
+    "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V4.json",
+    "git_blob_sha": "b27e1af875523ce965c51832cc0628d10a4751b3",
+    "status": "PASS__CURRENT_LIVE_REPAIR_FIX_PLUS_TOTAL_CONTROL_BOUND",
     "remaining_problem_class": "ADEQUACY_COVERAGE_CAPABILITY_EXPANSION_AND_OBSERVABILITY"
   }
 }
