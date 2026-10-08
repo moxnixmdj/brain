@@ -56,10 +56,35 @@ class R2GroundedCandidatePolicyFrontierV1Tests(unittest.TestCase):
         self.assertTrue(out["pass"], out)
         self.assertGreaterEqual(out["candidate_policy_count"], 2)
         self.assertTrue(out["ambiguity_preserved"])
-        self.assertEqual(
-            set(out["capability_by_policy"].values()),
-            set(out["grounding"]["candidate_capability_ids"]),
+        selected = set(out["capability_by_policy"].values())
+        self.assertTrue(
+            {"auto.npm.dfinity-cbor", "auto.npm.msgpack-msgpack"}.intersection(selected),
+            selected,
         )
+        self.assertNotIn("terminal.kstar.root.assess.stdlib", selected)
+        self.assertNotIn("yaml.to_json.yq", selected)
+        self.assertNotIn("json.query.jq", selected)
+        self.assertTrue(out["policy_adequacy_authority"] is False)
+
+
+    def test_execution_bindability_does_not_block_semantic_policy_discovery(self):
+        out = frontier.propose(
+            "Audit the Python tests with unittest and report passed failed and skipped counts.",
+            repo_root=ROOT,
+        )
+        self.assertTrue(out["pass"], out)
+        selected = set(out["capability_by_policy"].values())
+        self.assertIn("python.tests.audit.unittest", selected)
+        self.assertFalse(out["execution_authority"])
+
+    def test_multi_clause_goal_is_not_collapsed_into_one_capability_policy(self):
+        out = frontier.propose(
+            "Choose the decision route using the available evidence and constraints, and independently verify the decision.",
+            repo_root=ROOT,
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "NOT_APPLICABLE__MULTI_CLAUSE_OR_EMPTY")
+        self.assertEqual(out["candidate_policy_count"], 0)
 
 
 if __name__ == "__main__":
