@@ -23,6 +23,7 @@ CAPABILITY_LEARNING_LOOP = (
     "EXTRACT_MECHANISM",
     "GENERALIZE",
     "COMPRESS",
+    "PRESERVE_OPTIONS",
     "REUSE_CHEAPER",
 )
 ALLOWED_BENCHMARK_ROLES = frozenset(
@@ -163,6 +164,10 @@ def _metrics(raw: Mapping[str, Any]) -> dict[str, Fraction]:
 
 
 def _dominates(a: Mapping[str, Any], b: Mapping[str, Any]) -> bool:
+    a_contract = _s(a.get("semantic_contract_sha256"))
+    b_contract = _s(b.get("semantic_contract_sha256"))
+    if a_contract and b_contract and a_contract != b_contract:
+        return False
     am, bm = _metrics(a), _metrics(b)
     weak = all(am[k] >= bm[k] for k in _BENEFITS) and all(am[k] <= bm[k] for k in _COSTS)
     strict = any(am[k] > bm[k] for k in _BENEFITS) or any(am[k] < bm[k] for k in _COSTS)
@@ -187,6 +192,10 @@ def update_pareto_frontier(
                 "reason": "DOMINATED_BY_EXISTING_FRONTIER",
                 "dominated_by": _s(incumbent.get("capability_id")),
                 "frontier": list(frontier),
+                "preserve_candidate_evidence": True,
+                "dominated_means_deleted": False,
+                "physical_deletion_authority": False,
+                "option_preservation_policy": OPTION_PRESERVATION_POLICY,
             }
     removed = [_s(x.get("capability_id")) for x in frontier if _dominates(candidate, x)]
     # "removed" is strictly active-frontier retirement. The implementation,
