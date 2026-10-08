@@ -946,6 +946,58 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             result["replay_capsule_sha256"],
         )
 
+    def test_success_observation_retains_bounded_digest_checked_proof_capsule(self):
+        path = self.temp_state()
+        out = {
+            "pass": True,
+            "schema": "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1",
+            "status": "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED",
+            "task_id": "proof-task",
+            "selected_plan": ["cap.a"],
+            "verified_target_effects": ["goal"],
+            "execution": [{
+                "capability_id": "cap.a",
+                "pass": True,
+                "status": "PASS",
+                "composition_capsule_head_hash": "c" * 64,
+                "result": {"private_payload": "must-not-be-copied"},
+            }],
+            "controller_checkpoint": {
+                "path": "canonical/astra_runtime/state/proof.json",
+                "plan_sha256": "a" * 64,
+            },
+            "cognition_dependency_class": "MODEL_INDEPENDENT",
+            "model_dependency_count": 0,
+        }
+        result = loop.record_success_observation(
+            out,
+            surface="COMPILED_BOUND",
+            state_path=path,
+            replay_context={
+                "mode": "compiled_bound",
+                "request": {
+                    "task_id": "proof-task",
+                    "initial_facts": [],
+                    "target_effects": ["goal"],
+                },
+                "learn": True,
+            },
+        )
+        self.assertTrue(result["proof_available"])
+        recovered = loop.get_success_proof_context(
+            result["observation_id"],
+            state_path=path,
+        )
+        self.assertEqual(
+            recovered["proof_capsule_sha256"],
+            result["proof_capsule_sha256"],
+        )
+        material = recovered["material"]
+        self.assertEqual(material["selected_plan"], ["cap.a"])
+        self.assertEqual(material["verified_target_effects"], ["goal"])
+        self.assertNotIn("result", material["execution"][0])
+        self.assertNotIn("private_payload", repr(material))
+
     def test_success_replay_capsule_rejects_sensitive_context(self):
         path = self.temp_state()
         with self.assertRaisesRegex(
