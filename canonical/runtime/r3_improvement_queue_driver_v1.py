@@ -441,6 +441,7 @@ ATTEMPT_BACKOFF_KINDS = {
     "VERIFY_EPISODE",
     "REPAIR_FAILURE_CLASS",
     "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+    "REVERIFY_QUARANTINED_SKILL",
     "SEEK_VERIFIED_SCOPE_GENERALIZATION",
 }
 
@@ -626,12 +627,37 @@ def advance_once(
                 }
 
             if kind == "REVERIFY_QUARANTINED_SKILL":
-                blockers.append({
-                    "work_id": wid,
-                    "kind": kind,
-                    "blocker": "COUNTEREXAMPLE_REVERIFICATION_REQUIRES_FRESH_CANDIDATE_OR_REPLACEMENT",
-                })
-                continue
+                payload = work.get("payload") if isinstance(work.get("payload"), Mapping) else {}
+                if payload.get("scope_contraction_safe") is not True:
+                    blockers.append({
+                        "work_id": wid,
+                        "kind": kind,
+                        "blocker": "COUNTEREXAMPLE_REVERIFICATION_REQUIRES_FRESH_CANDIDATE_OR_REPLACEMENT",
+                    })
+                    continue
+                if skill_verification_provider is None:
+                    blockers.append({
+                        "work_id": wid,
+                        "kind": kind,
+                        "blocker": "SKILL_VERIFICATION_PROVIDER_REQUIRED",
+                    })
+                    continue
+                from canonical.runtime.r3_quarantine_recovery_v1 import recover_exact_scope
+                out = recover_exact_scope(
+                    work,
+                    state_path=state_path,
+                    repo_root=repo_root,
+                    skill_verification_provider=skill_verification_provider,
+                )
+                failed = out.get("pass") is not True
+                if failed:
+                    _record_failed_action_attempt(wid, out, state_path=state_path)
+                return {
+                    **out,
+                    "progress": out.get("pass") is True,
+                    "attempt_backoff_recorded": failed,
+                    "blockers_skipped": blockers,
+                }
 
             if kind == "SEEK_VERIFIED_SCOPE_GENERALIZATION":
                 if skill_verification_provider is None:
