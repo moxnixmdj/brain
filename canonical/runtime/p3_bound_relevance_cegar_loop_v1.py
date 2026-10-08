@@ -93,7 +93,7 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
         return _fail("PAYLOAD_MAPPING_REQUIRED")
     allowed={
         "context_id","v3_input","cegar_problem",
-        "truth_payloads_by_discriminator_id",
+        "truth_payloads_by_discriminator_id","truth_payloads_by_predicate_id",
         "source_positive_selection_contracts",
         "max_refinement_steps",
     }
@@ -104,6 +104,7 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
     public=payload.get("v3_input")
     problem=payload.get("cegar_problem")
     truth_payloads=payload.get("truth_payloads_by_discriminator_id")
+    predicate_truth_payloads=payload.get("truth_payloads_by_predicate_id",{})
     selection_contracts=payload.get("source_positive_selection_contracts")
     if not isinstance(public,Mapping):
         return _fail("V3_INPUT_REQUIRED")
@@ -111,6 +112,8 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
         return _fail("CEGAR_PROBLEM_REQUIRED")
     if not isinstance(truth_payloads,Mapping):
         return _fail("TRUTH_PAYLOADS_BY_DISCRIMINATOR_ID_REQUIRED")
+    if not isinstance(predicate_truth_payloads,Mapping):
+        return _fail("TRUTH_PAYLOADS_BY_PREDICATE_ID_INVALID")
     if not isinstance(selection_contracts,Mapping):
         return _fail("SOURCE_POSITIVE_SELECTION_CONTRACTS_REQUIRED")
 
@@ -126,6 +129,7 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
 
     trace:list[dict[str,Any]]=[]
     used_observations:set[tuple[str,bool]] = set()
+    known_truths:dict[str,bool] = {}
     root=Path(repo_root) if repo_root is not None else Path(__file__).resolve().parents[2]
 
     for step in range(max_steps+1):
@@ -200,7 +204,7 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
                 "u_subtraction_authority":False,
                 "terminal_authority":False,
                 "terminal_credit_delta":0,
-                "boundary":"FINITE_DECLARED_CEGAR_REGION__SOURCE_BOUND_ATOM_OR_NEGATED_ATOM_TRUTH_BINDING_ONLY__NO_GLOBAL_P3_CLOSURE",
+                "boundary":"FINITE_DECLARED_CEGAR_REGION__SOURCE_BOUND_BOOLEAN_FORMULA_TRUTH_COMPOSED_FROM_AUTHORITATIVE_ATOM_CERTIFICATES__NO_GLOBAL_P3_CLOSURE",
             }
 
         reason=cegar.get("reason")
@@ -233,79 +237,174 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
         if not isinstance(selected,Mapping):
             return _fail("CEGAR_SELECTED_DISCRIMINATOR_INVALID",trace=trace)
         discriminator_id=selected.get("discriminator_id")
+        formula=selected.get("formula")
         if not isinstance(discriminator_id,str) or not discriminator_id:
             return _fail("CEGAR_SELECTED_DISCRIMINATOR_ID_INVALID",trace=trace)
-        bound=_formula_atom(selected.get("formula"))
-        if bound is None:
-            return _open(
-                "OPEN__SELECTED_DISCRIMINATOR_FORMULA_TRUTH_BINDING_REQUIRED",
-                reason="V1_BINDS_ONLY_ATOM_OR_NOT_ATOM_SELECTED_DISCRIMINATORS",
-                trace=trace,
-                selected_discriminator=selected,
-            )
-        atom_id,formula_positive=bound
-        truth_payload=truth_payloads.get(discriminator_id)
-        if not isinstance(truth_payload,Mapping):
-            return _open(
-                "OPEN__SELECTED_PREDICATE_PROOF_PAYLOAD_REQUIRED",
-                reason="SELECTED_DISCRIMINATOR_HAS_NO_TRUTH_CERTIFICATE_PAYLOAD",
-                trace=trace,
-                selected_discriminator=selected,
-            )
+        if not isinstance(formula,Mapping):
+            return _fail("CEGAR_SELECTED_DISCRIMINATOR_FORMULA_INVALID",trace=trace)
 
-        truth=evaluate_truth(truth_payload)
+        new_observations=0
+
+        def candidates_for(atom_id:str):
+            raw=predicate_truth_payloads.get(atom_id)
+            if raw is None:
+                raw=truth_payloads.get(discriminator_id)
+            if isinstance(raw,Mapping):
+                return [raw]
+            if isinstance(raw,list) and raw and all(isinstance(x,Mapping) for x in raw):
+                return list(raw)
+            return []
+
+        def prove_atom(atom_id:str):
+            nonlocal new_observations
+            if atom_id in known_truths:
+                return known_truths[atom_id],None
+            candidates=candidates_for(atom_id)
+            if not candidates:
+                return None,_open(
+                    "OPEN__SELECTED_PREDICATE_PROOF_PAYLOAD_REQUIRED",
+                    reason="SELECTED_FORMULA_ATOM_HAS_NO_TRUTH_CERTIFICATE_PAYLOAD",
+                    trace=trace,
+                    selected_discriminator=selected,
+                    predicate_id=atom_id,
+                )
+            successes=[]
+            attempts=[]
+            for candidate_payload in candidates:
+                truth=evaluate_truth(candidate_payload)
+                attempts.append({
+                    "status":truth.get("status"),
+                    "reason":truth.get("reason"),
+                    "predicate_id":truth.get("predicate_id"),
+                    "predicate_truth":truth.get("predicate_truth"),
+                })
+                if truth.get("pass") is not True or truth.get("truthful_precommitment_observation") is not True:
+                    continue
+                if truth.get("predicate_id")!=atom_id:
+                    return None,_fail(
+                        "SELECTED_DISCRIMINATOR_TRUTH_IDENTITY_MISMATCH",
+                        trace=trace,
+                        selected_formula_atom_id=atom_id,
+                        truth_certificate_predicate_id=truth.get("predicate_id"),
+                        requested_predicate_id=truth.get("requested_predicate_id"),
+                    )
+                if truth.get("predicate_truth") not in {"TRUE","FALSE"}:
+                    return None,_fail("SELECTED_DISCRIMINATOR_TRUTH_VALUE_INVALID",trace=trace,truth_result=truth)
+                successes.append(truth)
+            if not successes:
+                trace.append({
+                    "step":step,
+                    "kind":"SELECTED_SEMANTIC_TRUTH",
+                    "predicate_id":atom_id,
+                    "selected_discriminator_id":discriminator_id,
+                    "attempts":attempts,
+                    "result":"UNKNOWN",
+                })
+                return None,_open(
+                    "OPEN__SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
+                    reason="SELECTED_SEMANTIC_TRUTH_CERTIFICATE_RETURNED_UNKNOWN_OR_FAILED",
+                    trace=trace,
+                    selected_discriminator=selected,
+                    predicate_id=atom_id,
+                    attempts=attempts,
+                )
+            values={x["predicate_truth"] for x in successes}
+            if len(values)!=1:
+                return None,_fail(
+                    "CONFLICTING_AUTHORITATIVE_TRUTH_CERTIFICATES",
+                    trace=trace,predicate_id=atom_id,truth_values=sorted(values),
+                )
+            atom_truth=next(iter(values))=="TRUE"
+            observation=(atom_id,atom_truth)
+            opposite=(atom_id,not atom_truth)
+            if opposite in used_observations:
+                return None,_fail(
+                    "CONTRADICTORY_REFINEMENT_OBSERVATION",
+                    trace=trace,predicate_id=atom_id,
+                )
+            if observation not in used_observations:
+                used_observations.add(observation)
+                known_truths[atom_id]=atom_truth
+                constraint=_truth_constraint(atom_id,atom_truth)
+                working["formal_source_constraints"].append(constraint)
+                new_observations+=1
+                trace.append({
+                    "step":step,
+                    "kind":"REFINEMENT",
+                    "authoritative_predicate_id":atom_id,
+                    "predicate_truth":"TRUE" if atom_truth else "FALSE",
+                    "formal_source_constraint":constraint,
+                    "selected_discriminator_id":discriminator_id,
+                })
+            return atom_truth,None
+
+        def prove_formula(node:Mapping[str,Any]):
+            op=node.get("op")
+            if op=="TRUE":
+                return True,None
+            if op=="FALSE":
+                return False,None
+            if op=="ATOM":
+                atom=node.get("id")
+                if not isinstance(atom,str) or not atom:
+                    return None,_fail("SELECTED_FORMULA_ATOM_ID_INVALID",trace=trace)
+                return prove_atom(atom)
+            if op=="NOT":
+                value,error=prove_formula(node.get("arg"))
+                return (None,error) if error is not None else (not value,None)
+            if op=="AND":
+                args=node.get("args")
+                if not isinstance(args,list) or len(args)<2:
+                    return None,_fail("SELECTED_FORMULA_AND_ARGS_INVALID",trace=trace)
+                for child in args:
+                    value,error=prove_formula(child)
+                    if error is not None: return None,error
+                    if value is False: return False,None
+                return True,None
+            if op=="OR":
+                args=node.get("args")
+                if not isinstance(args,list) or len(args)<2:
+                    return None,_fail("SELECTED_FORMULA_OR_ARGS_INVALID",trace=trace)
+                for child in args:
+                    value,error=prove_formula(child)
+                    if error is not None: return None,error
+                    if value is True: return True,None
+                return False,None
+            if op=="XOR":
+                args=node.get("args")
+                if not isinstance(args,list) or len(args)<2:
+                    return None,_fail("SELECTED_FORMULA_XOR_ARGS_INVALID",trace=trace)
+                values=[]
+                for child in args:
+                    value,error=prove_formula(child)
+                    if error is not None: return None,error
+                    values.append(value)
+                return sum(1 for value in values if value)==1,None
+            if op=="IMPLIES":
+                left,error=prove_formula(node.get("if"))
+                if error is not None: return None,error
+                if left is False: return True,None
+                right,error=prove_formula(node.get("then"))
+                return (None,error) if error is not None else (bool(right),None)
+            return None,_fail("SELECTED_FORMULA_OPERATOR_UNSUPPORTED",trace=trace,operator=op)
+
+        formula_truth,error=prove_formula(formula)
+        if error is not None:
+            return error
         trace.append({
             "step":step,
-            "kind":"SELECTED_SEMANTIC_TRUTH",
-            "status":truth.get("status"),
-            "reason":truth.get("reason"),
-            "predicate_id":truth.get("predicate_id"),
-            "predicate_truth":truth.get("predicate_truth"),
+            "kind":"SELECTED_DISCRIMINATOR_FORMULA_TRUTH",
             "selected_discriminator_id":discriminator_id,
+            "formula":formula,
+            "formula_truth":formula_truth,
+            "new_authoritative_atom_observations":new_observations,
         })
-        if truth.get("pass") is not True or truth.get("truthful_precommitment_observation") is not True:
-            return _open(
-                "OPEN__SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
-                reason="SELECTED_SEMANTIC_TRUTH_CERTIFICATE_RETURNED_UNKNOWN_OR_FAILED",
-                trace=trace,
-                selected_discriminator=selected,
-                truth_result=truth,
-            )
-        if truth.get("predicate_id")!=atom_id:
-            return _fail(
-                "SELECTED_DISCRIMINATOR_TRUTH_IDENTITY_MISMATCH",
-                trace=trace,
-                selected_formula_atom_id=atom_id,
-                truth_certificate_predicate_id=truth.get("predicate_id"),
-                requested_predicate_id=truth.get("requested_predicate_id"),
-            )
-        truth_value=truth.get("predicate_truth")
-        if truth_value not in {"TRUE","FALSE"}:
-            return _fail("SELECTED_DISCRIMINATOR_TRUTH_VALUE_INVALID",trace=trace,truth_result=truth)
-
-        atom_truth=(truth_value=="TRUE")
-        observation=(atom_id,atom_truth)
-        if observation in used_observations:
+        if new_observations==0:
             return _fail(
                 "CEGAR_REFINEMENT_NO_PROGRESS_REPEAT_OBSERVATION",
                 trace=trace,
-                predicate_id=atom_id,
-                predicate_truth=truth_value,
+                selected_discriminator_id=discriminator_id,
             )
-        used_observations.add(observation)
-
-        # The selected formula can be NOT(atom), but semantic refinement records
-        # the truth of the underlying authoritative source predicate atom.
-        constraint=_truth_constraint(atom_id,atom_truth)
-        working["formal_source_constraints"].append(constraint)
-        trace.append({
-            "step":step,
-            "kind":"REFINEMENT",
-            "authoritative_predicate_id":atom_id,
-            "predicate_truth":truth_value,
-            "selected_formula_positive":formula_positive,
-            "formal_source_constraint":constraint,
-        })
 
     return _open(
         "OPEN__REFINEMENT_STEP_BOUND_EXHAUSTED",
