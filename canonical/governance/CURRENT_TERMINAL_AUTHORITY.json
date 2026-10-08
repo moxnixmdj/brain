@@ -1890,7 +1890,7 @@
       "status": "PASS__R1_V3_SINGLE_FRONT_DOOR__LIVE_OWNERSHIP_84__UNIVERSAL_INVOCATION_84"
     },
     "live_ownership_rule": "LIVE_OWNED_IFF_ADMITTED_BY_ONE_CANONICAL_OWNERSHIP_PROVIDER__UNREGISTERED_AND_SUPERSEDED_REPOSITORY_CODE_IS_NOT_LIVE_OWNED",
-    "structural_r1_rule": "EVERY_LIVE_OWNED_CAPABILITY_MUST_BE_DISCOVERABLE_AND_HAVE_ONE_DETERMINISTIC_FAIL_CLOSED_INVOCATION_CONTRACT_THROUGH_UNIFIED_COGNITIVE_FABRIC",
+    "structural_r1_rule": "EVERY_LIVE_OWNED_CAPABILITY_MUST_BE_DISCOVERABLE_COMPOSABLE_EXECUTABLE_VERIFIABLE_LEARNABLE_AND_REUSABLE_THROUGH_ONE_CANONICAL_FAIL_CLOSED_RUNTIME",
     "universal_invocation_api": "unified_cognitive_fabric_v1.run(mode=LIVE_CAPABILITY)",
     "semantic_auto_routing_boundary": "ARBITRARY_RAW_LANGUAGE_TO_CORRECT_CAPABILITY_SELECTION_REMAINS_R2_AND_IS_NOT_REQUIRED_FOR_R1_STRUCTURAL_CLOSURE",
     "historical_capability_rule": "HISTORICAL_OR_SUPERSEDED_CAPABILITIES_REQUIRE_EXPLICIT_READMISSION_BEFORE_LIVE_OWNERSHIP",
@@ -1917,7 +1917,7 @@
     "subordinate_runtime_public_authority": false,
     "r1_closure_gate": {
       "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
-      "git_blob_sha": "266d56165d67958be2768d440d48e4b5075dd395",
+      "git_blob_sha": "34e559b81e08ff67281a2feb401ebc24bb663741",
       "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
     },
     "r1_drift_lock_verification": {
@@ -1926,13 +1926,27 @@
       "status": "PASS__R1_LIVE_ARCHITECTURE_CLOSED_AND_DRIFT_LOCKED"
     },
     "r1_drift_locked": true,
-    "verification_status": "PENDING_FULL_DRIFT_GATE_REPLAY__LIVE_OWNERSHIP_86",
+    "verification_status": "PASS__R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE__86_OF_86",
     "live_composition": {
       "path": "canonical/runtime/live_capability_composition_v1.py",
       "git_blob_sha": "2c32696b79463936b91e5b45bbba8098cd5f3ff1"
     },
     "heterogeneous_live_composition": true,
-    "composition_outcomes_r3_observed": true
+    "composition_outcomes_r3_observed": true,
+    "r1_complete_lifecycle_verification": {
+      "path": "canonical/verification/R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "d640b70b126e0277ef9b45558b2c8e4ef4e8fed5",
+      "status": "PASS__R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE__86_OF_86"
+    },
+    "capability_lifecycle": {
+      "discoverable": true,
+      "composable": true,
+      "executable": true,
+      "verifiable": true,
+      "learnable": true,
+      "reusable": true
+    },
+    "capability_lifecycle_complete": true
   },
   "r1_universal_live_capability_invocation_20261008_v1": {
     "status": "ACTIVE_FAIL_CLOSED_UNIVERSAL_LIVE_CAPABILITY_INVOCATION__V3_FRONT_DOOR_BOUND",
@@ -1954,7 +1968,7 @@
     },
     "rule": "EVERY_LIVE_OWNED_CAPABILITY_IDENTITY_MUST_BE_CLASSIFIABLE_AND_DISPATCHABLE_THROUGH_UNIFIED_COGNITIVE_FABRIC_LIVE_CAPABILITY_OR_FAIL_CLOSED",
     "semantic_selection_boundary": "CAPABILITY_SELECTION_FROM_ARBITRARY_INTENT_REMAINS_R2",
-    "verification_status": "PENDING_FULL_DRIFT_GATE_REPLAY__LIVE_OWNERSHIP_86",
+    "verification_status": "PASS__R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE__86_OF_86",
     "verification_pr": 3223,
     "terminal_credit_delta": 0,
     "current_live_owned_capability_count": 86,
@@ -1971,7 +1985,7 @@
     },
     "r1_closure_gate": {
       "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
-      "git_blob_sha": "266d56165d67958be2768d440d48e4b5075dd395",
+      "git_blob_sha": "34e559b81e08ff67281a2feb401ebc24bb663741",
       "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
     },
     "r1_drift_lock_verification": {
@@ -1982,6 +1996,20 @@
     "live_composition": {
       "path": "canonical/runtime/live_capability_composition_v1.py",
       "git_blob_sha": "2c32696b79463936b91e5b45bbba8098cd5f3ff1"
-    }
+    },
+    "r1_complete_lifecycle_verification": {
+      "path": "canonical/verification/R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "d640b70b126e0277ef9b45558b2c8e4ef4e8fed5",
+      "status": "PASS__R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE__86_OF_86"
+    },
+    "capability_lifecycle": {
+      "discoverable": true,
+      "composable": true,
+      "executable": true,
+      "verifiable": true,
+      "learnable": true,
+      "reusable": true
+    },
+    "capability_lifecycle_complete": true
   }
 }
