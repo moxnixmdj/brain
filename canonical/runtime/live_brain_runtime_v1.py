@@ -318,7 +318,7 @@ def run_generic(
             skill_plan = _skill_plan(problem, ctx["active_verified_skills"], active_invalidators)
 
         out = _v12_run(problem, repo_root=repo_root, kwargs=kwargs)
-        learning = _observe_runtime_outcome(out, state_path=ctx["state_path"], learn=learn)
+        learning = _integrate_learning(out, state_path=ctx["state_path"]) if learn else None
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
@@ -359,12 +359,15 @@ def run_decision(
             capability_expander=capability_expander,
         )
         execution = out.get("execution_result")
-        observed = execution if isinstance(execution, Mapping) else out
-        learning = _observe_runtime_outcome(
-            observed,
-            state_path=state_path,
-            learn=learn,
-        )
+        learning = None
+        if learn and isinstance(execution, Mapping):
+            learning = _integrate_learning(execution, state_path=state_path)
+        elif learn and out.get("pass") is not True:
+            learning = _observe_runtime_outcome(
+                out,
+                state_path=state_path,
+                learn=True,
+            )
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_DECISION_EXECUTION_COMPLETE",
