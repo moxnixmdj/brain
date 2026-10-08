@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_R3_CONCRETE_INVENTION_TARGETS_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS_9_OF_9",
+  "branch": "r3-concrete-invention-targets-20261008",
+  "exact_blobs": {
+    "runtime": "43c0a1105c7bacb196e1e954a316cadda1b3f803",
+    "tests": "cdd6082688bb2cf3d128e966f6d0347a9b5ac64b"
+  },
+  "isolated_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "tests_run": 9,
+    "tests_passed": 9,
+    "tests_failed": 0
+  },
+  "proved": [
+    "CAPABILITY_GAP_INVENTION_USES_STORED_ORIGINAL_TARGET_EFFECTS_WHEN_STRUCTURALLY_AVAILABLE",
+    "META_REPAIR_EFFECT_REMAINS_FALLBACK_WHEN_CONCRETE_TARGETS_ARE_NOT_BOUND",
+    "ORIGINAL_OBLIGATION_REPLAY_REMAINS_REQUIRED"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
