@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_P3_REQUIRED_CLAIM_BOUND_CONFLICT_CELL_CLOSURE_V1",
+  "date": "2026-10-08",
+  "status": "VERIFIED_BOUND_CONFLICT_CELL_CLOSED_INSIDE_STRUCTURALLY_REQUIRED_BOUNDED_FACT_SUBCELL__GENERAL_P3_OPEN__ZERO_TERMINAL_CREDIT",
+  "source_bindings": {
+    "causal_reduction": {
+      "path": "canonical/governance/P3_MINIMUM_SEMANTIC_DISCRIMINATOR_REDUCTION_20261008_V1.json",
+      "git_blob_sha": "f955be3b73ac3092fa5984c998b6a7877607713b"
+    },
+    "jit_cell": {
+      "path": "canonical/governance/P3_POLICY_CHANGING_SEMANTIC_JIT_INPUT_20261008_V1.json",
+      "git_blob_sha": "7496a46caf32a805089b4848e8e91e0ca2d6432c"
+    },
+    "truth_runtime": {
+      "path": "canonical/runtime/selected_bounded_support_truth_certificate_v1.py",
+      "git_blob_sha": "894e2ab8d7861f3b382119842807c1c3ddbd991f"
+    },
+    "verification": {
+      "path": "canonical/verification/SELECTED_BOUNDED_SUPPORT_TRUTH_CERTIFICATE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "407467ccbfe7c62c6f88a931201eded85f65b335"
+    }
+  },
+  "admitted_subcell": {
+    "cell_id": "P3_REQUIRED_CLAIM_SUPPORT_RELEVANCE_OUTSIDE_CURRENT_CERTIFIED_FRAGMENT",
+    "required_preconditions": [
+      "CLAIM_REQUIRED_TRUE",
+      "CLAIM_AND_ALL_VISIBLE_EVIDENCE_RELATIONS_RESOLVE_IN_BOUNDED_ENTITY_FIELD_VALUE_FACT_GRAMMAR",
+      "ALL_EVIDENCE_UNITS_MARKED_VERIFIED_WITH_PROVENANCE",
+      "NO_CALLER_SUPPORT_RELEVANCE_OR_INCLUDE_METADATA_USED_AS_AUTHORITY"
+    ],
+    "decision_relevance_basis": "STRUCTURALLY_REQUIRED_CLAIM__NO_OPTIONAL_RELEVANCE_JUDGMENT",
+    "scope_complete_over_admitted_subcell": true
+  },
+  "theorem": {
+    "predicate": "REQUIRED_CLAIM_HAS_AT_LEAST_ONE_SUPPORT_AND_ZERO_CONFLICTS",
+    "true_case": {
+      "condition": "SUPPORT_COUNT_GE_1_AND_CONFLICT_COUNT_EQ_0",
+      "tournament_world": "SUPPORTED_AND_DECISION_RELEVANT",
+      "selected_action": "ASSERT_REQUIRED_CLAIM_AS_SUPPORTED_WITH_PROVENANCE"
+    },
+    "false_case": {
+      "condition": "SUPPORT_COUNT_EQ_0_OR_CONFLICT_COUNT_GT_0",
+      "tournament_world": "NOT_CERTIFIABLY_SUPPORTED_OR_MATERIAL_UNCERTAINTY",
+      "selected_action": "DO_NOT_ASSERT_REQUIRED_CLAIM_AS_SUPPORTED__PRESERVE_UNCERTAINTY_OR_SEEK_EVIDENCE"
+    },
+    "unknown_case": {
+      "condition": "ANY_CLAIM_EVIDENCE_RELATION_OUTSIDE_CHECKED_BOUNDED_GRAMMAR",
+      "action": "RETURN_UNKNOWN__NO_POLICY_COMMITMENT",
+      "cell_credit": false
+    },
+    "caller_alias_authority": false,
+    "policy_strings_exactly_match_tournament_actions": true
+  },
+  "consequence": {
+    "prior_missing_causal_function_for_this_subcell": "P3_TRUTHFUL_PRECOMMITMENT_POLICY_CHANGING_SEMANTIC_TRUTH_CERTIFICATE",
+    "state": "IMPLEMENTED_AND_TWO_CARRIER_VERIFIED_FOR_THIS_SUBCELL",
+    "whole_p3_scope_closed": false,
+    "u_empty_proved": false,
+    "terminal": false
+  },
+  "next_live_counterexample_classes": [
+    "CLAIM_SUPPORT_OR_ENTAILMENT_OUTSIDE_BOUNDED_FACT_GRAMMAR",
+    "OPTIONAL_RELEVANCE_WITHOUT_EXPLICIT_OBJECTIVE_WEIGHTS",
+    "HIDDEN_OR_NONFACTUAL_UNCERTAINTY",
+    "UNMODELED_AUDIENCE_MEANING",
+    "UPSTREAM_SOURCE_AUTHORIZATION_OR_SEMANTIC_EXTRACTION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THIS_TWO_WORLD_ABSTRACTION_ENUMERATES_ALL_P3_CONTEXTS",
+    "NO_CLAIM_OPTIONAL_RELEVANCE_IS_SOLVED_WITHOUT_EXPLICIT_WEIGHTS",
+    "NO_CLAIM_GENERAL_NLI_OR_WORLD_MODEL",
+    "NO_CLAIM_SOURCE_AUTHORIZATION",
+    "NO_POLICY_ADEQUACY_BEYOND_THE_TOURNAMENT_ACTION_CLASSIFICATION",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
