@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_R2_TOTAL_FAIL_CLOSED_ADEQUACY_CONTROL_CLOSURE_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TOTAL_DECISION_CONTROL_ARCHITECTURE_CLOSED__OPEN_WORLD_VERIFIED_COVERAGE_SEPARATED",
+  "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE",
+  "theorem": {
+    "statement": "For every admitted raw goal/context, the Brain's general decision controller must terminate each control step in exactly one authority-safe class: independently authenticated adequate action/realization, acquisition of the cheapest declared policy-changing information edge, explicit open/abstain with the exact missing authority edge, or fail-closed invalidity. No unsupported action is promoted to success.",
+    "robust_adequacy_law": "A candidate policy is admissible only when its authenticated adequacy covers every surviving sound semantic/world model consistent with bound evidence and load-bearing constraints.",
+    "information_law": "Information may be acquired only through an authenticated discriminator whose possible outcomes can change the admissible-policy set; otherwise it is decision-irrelevant and must not be requested.",
+    "execution_law": "Effectful execution requires an authenticated selected-policy-to-execution binding or an exact grounded realization cell.",
+    "acceptance_law": "Execution/effect success never self-certifies the user's goal. Actual goal satisfaction requires an independent content-addressed acceptance binding over the raw goal, selected policy/realization, observed result, and load-bearing constraints."
+  },
+  "total_outcome_classes": [
+    "EXECUTE_OR_REALIZE_ONLY_WITH_AUTHENTICATED_ADEQUACY",
+    "ACQUIRE_MINIMUM_POLICY_CHANGING_INFORMATION",
+    "OPEN_OR_ABSTAIN_WITH_EXACT_MISSING_EDGE",
+    "FAIL_CLOSED_ON_INVALID_OR_CONFLICTING_AUTHORITY"
+  ],
+  "root_reclassification": {
+    "architectural_general_decision_control": "CLOSED",
+    "minimum_information_control": "CLOSED",
+    "fail_closed_uncertainty_handling": "CLOSED",
+    "independent_goal_acceptance_gate": "CLOSED",
+    "open_world_verified_semantic_and_adequacy_coverage": "OPEN",
+    "reason": "The remaining incompleteness is coverage of authenticated semantics, adequacy certificates, world predicates, execution bindings, and acceptance verifiers. It is not a missing general control-loop mechanism."
+  },
+  "impossibility_boundary": {
+    "claim": "No finite controller can truthfully guarantee complete verified action adequacy over the unrestricted useful open world when materially different success/failure worlds can expose identical retained evidence, or when required semantic/goal predicates are not independently observable or decidable.",
+    "consequence": "Universal open-world coverage must remain an expandable verified frontier. The correct universal property is total fail-closed control, not omniscient semantic completeness.",
+    "does_not_weaken_goal": true,
+    "explanation": "The original goal remains exact: take the right action. The controller executes only where that claim is evidenced; everywhere else it returns the exact information/authority gap instead of substituting a weaker success claim."
+  },
+  "live_runtime": {
+    "controller": "canonical/runtime/general_adequate_decision_controller_v1.py",
+    "raw_goal_contract": "canonical/runtime/lossless_raw_task_contract_v1.py",
+    "decision_front_door": "canonical/runtime/p3_real_context_v3_admission_v12.py",
+    "minimum_information_loop": "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py",
+    "policy_adequacy_kernel": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+    "grounded_candidate_frontier": "canonical/runtime/r2_grounded_candidate_policy_frontier_v1.py",
+    "authenticated_adequacy_registry": "canonical/runtime/r2_authenticated_adequacy_authority_registry_v1.py",
+    "conditioned_adequacy_registry": "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+    "adaptive_execution": "canonical/runtime/universal_verified_adaptive_solver_v12.py"
+  },
+  "remaining_coverage_frontier": [
+    "GOAL_TO_DECISION_SEMANTIC_BINDING_COVERAGE",
+    "POSITIVE_POLICY_ADEQUACY_CERTIFICATE_COVERAGE",
+    "SOURCE_ALIGNED_SELECTED_PREDICATE_PROOF_COVERAGE",
+    "SELECTED_POLICY_TO_EXECUTION_BINDING_COVERAGE_FOR_EFFECTFUL_ACTIONS",
+    "INDEPENDENT_ACTUAL_GOAL_SATISFACTION_ACCEPTANCE_BINDING_COVERAGE",
+    "OPEN_WORLD_CANDIDATE_GENERATION_AND_ABSTENTION_COVERAGE"
+  ],
+  "falsifiers": [
+    "ANY_PATH_EXECUTES_WITHOUT_AUTHENTICATED_ADEQUACY_OR_EXACT_GROUNDED_REALIZATION",
+    "ANY_PROVIDER_OR_MODEL_OUTPUT_IS_TREATED_AS_SEMANTIC_TRUTH_BY_ASSERTION",
+    "ANY_INFORMATION_QUERY_CANNOT_CHANGE_POLICY_SELECTION",
+    "ANY_EFFECT_SUCCESS_SELF_CERTIFIES_RAW_GOAL_SATISFACTION",
+    "ANY_OPEN_OR_UNPROVED_CASE_IS_REPORTED_AS_SUCCESS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_OPEN_WORLD_SEMANTIC_COVERAGE_IS_COMPLETE",
+    "NO_CLAIM_EVERY_POLICY_ALREADY_HAS_ADEQUACY_EVIDENCE",
+    "NO_CLAIM_EVERY_REAL_WORLD_EFFECT_IS_OBSERVABLE",
+    "NO_CLAIM_GLOBAL_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
