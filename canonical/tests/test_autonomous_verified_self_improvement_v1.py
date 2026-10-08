@@ -199,6 +199,8 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             loop.next_improvement_action(state_path=path)["kind"],
             "VERIFY_SKILL_CANDIDATE",
         )
+        work = loop.next_improvement_action(state_path=path)
+        self.assertEqual(work["payload"]["candidate"], candidate)
 
     def test_verified_stronger_skill_pareto_replaces_dominated_variant(self):
         path = self.temp_state()
@@ -492,6 +494,139 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             loop.next_improvement_action(state_path=path)["kind"],
             "REVERIFY_QUARANTINED_SKILL",
         )
+
+    def test_post_execution_episode_verifier_promotes_without_rerunning_task(self):
+        path = self.temp_state()
+        raw_episode = {
+            "episode_id": "ep-post",
+            "scope_id": "scope",
+            "program_sha256": "sha256:program",
+            "trace_sha256": "sha256:trace",
+        }
+        solved = {
+            "pass": True,
+            "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+            "current_episode": raw_episode,
+            "current_episode_verified": False,
+            "trace": [{"capability_id": "c1"}],
+            "state_capsule_head_hash": "fact-head",
+            "value_capsule_head_hash": "value-head",
+            "skill_candidate": None,
+        }
+        authenticated = {
+            **raw_episode,
+            "verification_binding": {"receipt": {}, "verification": {}},
+            "verification_receipt": {
+                "independent_verified": True,
+                "exact_byte_bound": True,
+                "conclusion": "success",
+                "behavior_verified": True,
+                "episode_id": "ep-post",
+                "scope_id": "scope",
+                "program_sha256": "sha256:program",
+                "receipt_id": "EPVR:test",
+            },
+        }
+        provider = mock.Mock(return_value={"receipt": {"path": "r"}, "verification": {"path": "v"}})
+        auth = {
+            "pass": True,
+            "authenticated_episode": authenticated,
+            "status": "PASS__AUTHENTICATED_INDEPENDENT_EPISODE_VERIFICATION",
+        }
+        integrated = {
+            "status": "VERIFIED_EPISODE_PERSISTED__MORE_EVIDENCE_NEEDED_FOR_SKILL",
+            "pass": True,
+        }
+        with mock.patch.object(loop, "load_state", return_value=loop._empty_state()), \
+             mock.patch.object(loop, "_select_active_skill", return_value=None), \
+             mock.patch.object(loop.solver_v12, "run", return_value=solved) as run_mock, \
+             mock.patch.object(loop, "authenticate_episode_verification", return_value=auth) as authenticate, \
+             mock.patch.object(loop, "integrate_solver_output", return_value=integrated) as integrate:
+            out = loop.run_learning_episode(
+                self._reuse_problem(),
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep-post",
+                scope_id="scope",
+                episode_verification_provider=provider,
+            )
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(run_mock.call_count, 1)
+        provider.assert_called_once()
+        authenticate.assert_called_once()
+        integrated_out = integrate.call_args.args[0]
+        self.assertTrue(integrated_out["current_episode_verified"])
+        self.assertEqual(integrated_out["current_episode"], authenticated)
+
+    def test_post_execution_skill_verifier_promotes_candidate_without_rerunning_task(self):
+        path = self.temp_state()
+        candidate = {
+            "candidate_only": True,
+            "candidate_sha256": "sha256:candidate",
+            "source_episode_ids": ["e1", "e2"],
+            "source_scopes": ["scope"],
+            "postconditions": ["DONE"],
+        }
+        episode = {
+            "episode_id": "ep-skill",
+            "scope_id": "scope",
+            "program_sha256": "sha256:program",
+            "trace_sha256": "sha256:trace",
+            "verification_binding": {"receipt": {}, "verification": {}},
+            "verification_receipt": {"receipt_id": "EPVR:test"},
+        }
+        solved = {
+            "pass": True,
+            "status": "SOLVED__SKILL_CANDIDATE_READY",
+            "current_episode": episode,
+            "current_episode_verified": True,
+            "trace": [],
+            "skill_candidate": candidate,
+            "verified_executable_skill": None,
+            "verified_skill_reuse_authorized": False,
+        }
+        verified_skill = {
+            **candidate,
+            "candidate_only": False,
+            "verified_skill": True,
+            "reuse_authorized": True,
+            "scope_relation": "EXACT",
+        }
+        provider = mock.Mock(return_value={"receipt": {"path": "r"}, "verification": {"path": "v"}})
+        auth = {
+            "pass": True,
+            "verified_skill": verified_skill,
+            "status": "PASS__AUTHENTICATED_VERIFIED_EXECUTABLE_SKILL",
+        }
+        with mock.patch.object(loop, "load_state", return_value=loop._empty_state()), \
+             mock.patch.object(loop, "_select_active_skill", return_value=None), \
+             mock.patch.object(loop.solver_v12, "run", return_value=solved) as run_mock, \
+             mock.patch.object(loop, "authenticate_skill_verification", return_value=auth) as authenticate, \
+             mock.patch.object(
+                 loop,
+                 "integrate_solver_output",
+                 return_value={
+                     "status": "VERIFIED_SKILL_PERMANENTLY_ADMITTED_FOR_REUSE",
+                     "pass": True,
+                 },
+             ) as integrate:
+            out = loop.run_learning_episode(
+                self._reuse_problem(),
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep-skill",
+                scope_id="scope",
+                skill_verification_provider=provider,
+            )
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(run_mock.call_count, 1)
+        provider.assert_called_once()
+        authenticate.assert_called_once()
+        integrated_out = integrate.call_args.args[0]
+        self.assertEqual(integrated_out["verified_executable_skill"], verified_skill)
+        self.assertTrue(integrated_out["verified_skill_reuse_authorized"])
 
     def test_plain_success_is_retained_as_adapter_work_without_promotion(self):
         path = self.temp_state()
