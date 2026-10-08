@@ -17,6 +17,8 @@ from canonical.runtime import autonomous_verified_self_improvement_v1 as self_im
 from canonical.runtime import h100_verified_capability_registry_v8 as h100_inference
 from canonical.runtime import exact_linear_parameter_polytope_v1 as mystery_polytope
 from canonical.runtime import interval_information_frontier_v1 as mystery_information
+from canonical.runtime import capability_first_scheduler_v1 as capability_scheduler
+from canonical.runtime.brain_owned_python_closure_census_v1 import census as closure_census
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
@@ -32,10 +34,11 @@ ENGINE_DESCRIPTORS = {
     "BOUND_CAPABILITY": "verified_bound_capability_execution_adapter_v1.execute",
     "H100_INFERENCE": "h100_verified_capability_registry_v8",
     "MYSTERY_INFERENCE": "exact_linear_parameter_polytope_v1 + interval_information_frontier_v1",
+    "CAPABILITY_SCHEDULER": "capability_first_scheduler_v1.rank_work",
 }
 
 KNOWN_RESIDUALS = (
-    "CAPABILITY_FIRST_SCHEDULER_NOT_YET_MANDATORY_FOR_EVERY_FABRIC_CALL",
+    "AUTO_ROUTE_NOT_SCOPE_COMPLETE_FOR_ALL_COGNITIVE_PAYLOADS",
     "HISTORICAL_CAPABILITY_CENSUS_NOT_YET_PROVED_COMPLETE",
 )
 
@@ -44,9 +47,60 @@ class CognitiveFabricError(ValueError):
     pass
 
 
+def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
+    """Select only structurally unambiguous fabric routes; otherwise fail closed."""
+    keys = set(payload)
+
+    if {"capability_id", "inputs"} <= keys:
+        return "BOUND_CAPABILITY"
+
+    if isinstance(payload.get("work"), list):
+        return "CAPABILITY_SCHEDULER"
+
+    operation = str(payload.get("operation") or "").strip().upper()
+    if operation:
+        if isinstance(payload.get("problem"), Mapping):
+            return "MYSTERY_INFERENCE"
+        if operation in {"SNAPSHOT", "RESOLVE", "PREDICT"}:
+            return "H100_INFERENCE"
+
+    if {"task_id", "initial_facts", "target_effects", "capability_inputs"} <= keys:
+        return "COMPILED_TASK"
+
+    if {"task_id", "capabilities", "target_effects"} <= keys:
+        learning_option_keys = {
+            "state_path",
+            "episode_verification_binding",
+            "skill_verification_binding",
+            "resume_binding",
+            "known_absent_invalidators",
+        }
+        return (
+            "LEARNING_EPISODE"
+            if learning_option_keys & set(options)
+            else "ADAPTIVE_SOLVER"
+        )
+
+    if {"task_id", "goal"} <= keys:
+        decision_keys = {
+            "decision_payload",
+            "goal_to_decision_binding",
+            "execution_problem",
+            "policy_execution_binding",
+            "goal_satisfaction_binding",
+        }
+        return "ADEQUATE_DECISION" if decision_keys & keys else "RAW_GOAL"
+
+    raise CognitiveFabricError("AUTO_ROUTE_AMBIGUOUS_OR_UNMODELED")
+
+
 def catalog() -> dict[str, Any]:
     bound = live_brain.load_verified_registry()
     state = self_improvement.load_state()
+    closure = closure_census(
+        ROOT,
+        ["canonical/runtime/unified_cognitive_fabric_v1.py"],
+    )
     return {
         "schema": SCHEMA,
         "status": "LIVE_FEDERATED_COGNITIVE_FABRIC",
@@ -56,6 +110,11 @@ def catalog() -> dict[str, Any]:
         "verified_bound_capability_ids": sorted(bound),
         "verified_learned_skill_count": int(state.get("stats", {}).get("verified_skill_count", 0)),
         "active_learned_skill_count": int(state.get("stats", {}).get("active_skill_count", 0)),
+        "brain_owned_transitive_file_count": closure["brain_owned_file_count"],
+        "brain_owned_transitive_source_bytes": closure["brain_owned_transitive_source_bytes"],
+        "brain_owned_transitive_files": [
+            row["path"] for row in closure["brain_owned_transitive_files"]
+        ],
         "known_unified_fabric_residuals": list(KNOWN_RESIDUALS),
         "single_front_door": True,
         "all_historical_brain_capabilities_unified": False,
@@ -74,11 +133,9 @@ def run(
     try:
         if not isinstance(request, Mapping):
             raise CognitiveFabricError("REQUEST_NOT_OBJECT")
-        mode = str(request.get("mode") or "").strip().upper()
-        if mode == "CATALOG":
+        requested_mode = str(request.get("mode") or "").strip().upper()
+        if requested_mode == "CATALOG":
             return catalog()
-        if mode not in ENGINE_DESCRIPTORS:
-            raise CognitiveFabricError("MODE_INVALID:" + mode)
 
         payload = request.get("payload")
         if not isinstance(payload, Mapping):
@@ -86,6 +143,11 @@ def run(
         options = request.get("options") or {}
         if not isinstance(options, Mapping):
             raise CognitiveFabricError("OPTIONS_NOT_OBJECT")
+
+        auto_routed = requested_mode in {"", "AUTO"}
+        mode = _auto_mode(payload, options) if auto_routed else requested_mode
+        if mode not in ENGINE_DESCRIPTORS:
+            raise CognitiveFabricError("MODE_INVALID:" + mode)
 
         if mode == "RAW_GOAL":
             out = live_brain.run_raw_goal(payload)
@@ -158,6 +220,12 @@ def run(
                 out = mystery_information.solve(problem)
             else:
                 raise CognitiveFabricError("MYSTERY_OPERATION_INVALID:" + operation)
+        elif mode == "CAPABILITY_SCHEDULER":
+            work = payload.get("work")
+            if not isinstance(work, list):
+                raise CognitiveFabricError("SCHEDULER_WORK_MUST_BE_LIST")
+            out = capability_scheduler.rank_work(work)
+            out = {"pass": True, **out}
         elif mode == "LEARNING_EPISODE":
             out = self_improvement.run_learning_episode(
                 payload,
@@ -192,6 +260,8 @@ def run(
             "schema": SCHEMA,
             "status": "FABRIC_DISPATCH_COMPLETE",
             "mode": mode,
+            "requested_mode": requested_mode or "AUTO",
+            "auto_routed": auto_routed,
             "engine": ENGINE_DESCRIPTORS[mode],
             "inner_pass": bool(isinstance(out, Mapping) and out.get("pass") is True),
             "inner_status": out.get("status") if isinstance(out, Mapping) else None,
