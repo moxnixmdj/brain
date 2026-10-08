@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_P3_CONDITIONED_POLICY_ADEQUACY_REGISTRY_ISOLATED_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__ISOLATED_EXACT_SOURCE_REPLAY_16_OF_16__ZERO_CREDIT",
+  "subject": {
+    "registry_runtime": {
+      "path": "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+      "git_blob_sha": "6e7609d1c18bc1c327664c36bead6e931ff4b6ee"
+    },
+    "p3_runtime": {
+      "path": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+      "git_blob_sha": "37b830fe34ff57333fa5bf389cb637cb30372d33"
+    },
+    "registry_tests": {
+      "path": "canonical/tests/test_p3_conditioned_policy_adequacy_registry_v1.py",
+      "git_blob_sha": "ad1decc9bf84e049e61880b1aa539f7f712b2d91"
+    },
+    "p3_regression_tests": {
+      "path": "canonical/tests/test_p3_robust_policy_adequacy_cegar_v1.py",
+      "git_blob_sha": "26d6714a5c11eacb3029c1f10579b696cfcbcf56"
+    },
+    "workflow": {
+      "path": ".github/workflows/verify-p3-robust-adequacy-cegar-v1.yml",
+      "git_blob_sha": "2dd8802a770b77e517f823441d60a445a7cb68eb"
+    }
+  },
+  "registered_conditioned_cell": {
+    "policy_id": "SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_POLICY_V1",
+    "condition_atom": "SYNTHESIS_TYPED_VISIBLE_SUPPORT_COMMON_POLICY_TOP_LAW_V1",
+    "binding": {
+      "path": "canonical/governance/SYNTHESIS_VISIBLE_SUPPORT_POLICY_ADEQUACY_BINDING_20261007_V1.json",
+      "git_blob_sha": "7d2322ff8205e98752c4cd2674215f93c145305c"
+    },
+    "certificate": {
+      "path": "canonical/governance/SYNTHESIS_VISIBLE_SUPPORT_POLICY_ADEQUACY_CERTIFICATE_20261007_V1.json",
+      "git_blob_sha": "0e7fb524a83d97d85523c6c818af803608b72e81"
+    },
+    "verification": {
+      "path": "canonical/verification/SYNTHESIS_VISIBLE_SUPPORT_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "c8615927bd08bcc7daf79c419d3c5eb204a19bdd"
+    }
+  },
+  "complementarity": {
+    "raw_source_self_authenticating_registry": "canonical/runtime/r2_authenticated_adequacy_authority_registry_v1.py",
+    "division_of_authority": "R2_RAW_SOURCE_REGISTRY_OWNS_SELF_AUTHENTICATING_P2_P3_SPECIALIST_ENTRY__THIS_REGISTRY_OWNS_ONLY_CONDITION_BOUND_P3_ADEQUACY_REUSE_AFTER_A_CONDITION_ATOM_ALREADY_EXISTS_IN_THE_DECISION_BASIS",
+    "duplicated_p2_p3_authority": false
+  },
+  "isolated_replay": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/r2_conditioned_registry_verify",
+    "tests_run": 16,
+    "tests_passed": 16,
+    "failures": 0,
+    "errors": 0,
+    "verified": [
+      "EXISTING_P3_REGRESSION_SUITE_REMAINS_PASSING.",
+      "EXISTING_SYNTHESIS_ADEQUACY_BINDING_IS_AUTOMATICALLY_REUSED_WHEN_ITS_CONDITION_ATOM_IS_PRESENT.",
+      "P3_AUTHENTICATES_THE_REGISTERED_CELL_END_TO_END_WHEN_AN_ACCEPTED_SOURCE_REFINEMENT_PROVES_THE_CONDITION.",
+      "REGISTRY_PRESENCE_ALONE_DOES_NOT_SELF_CERTIFY_THE_CONDITION;FALSE_CONDITION_WORLDS_REMAIN_UNCOVERED.",
+      "CALLER_POLICY_CONDITION_OVERRIDE_FAILS_CLOSED.",
+      "CALLER_POLICY_BINDING_OVERRIDE_FAILS_CLOSED.",
+      "REGISTERED_BINDING_BLOB_DRIFT_FAILS_CLOSED.",
+      "UNRELATED_DECISION_BASES_RECEIVE_NO_REGISTERED_POLICY."
+    ]
+  },
+  "effect": {
+    "previous_live_p3_automatic_condition_bound_adequacy_reuse": "CALLER_WIRING_REQUIRED",
+    "current_live_p3_automatic_condition_bound_adequacy_reuse": "SYNTHESIS_VISIBLE_SUPPORT_CELL_AUTO_REUSED",
+    "new_policy_adequacy_theorems_created": 0,
+    "new_membership_authority_created": 0,
+    "scope_widening": false,
+    "general_open_world_policy_adequacy_coverage_complete": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_SYNTHESIS_MEMBERSHIP_IS_TRUE_WITHOUT_UPSTREAM_SOURCE_AUTHORITY.",
+    "NO_DUPLICATION_OR_REPLACEMENT_OF_THE_R2_RAW_SOURCE_SELF_AUTHENTICATING_P2_P3_REGISTRY.",
+    "NO_CLAIM_GENERAL_OPEN_WORLD_POLICY_ADEQUACY_COVERAGE_IS_COMPLETE.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "github_actions": {
+    "workflow_run_id": 37774367361,
+    "job_id": 113301419293,
+    "conclusion": "failure",
+    "steps": null,
+    "logs_url": null,
+    "classification": "INFRASTRUCTURE_FAILURE_BEFORE_STEP_EXECUTION__NOT_A_TEST_RESULT"
+  }
+}
