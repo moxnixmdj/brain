@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_R2_AUTHENTICATED_ADEQUACY_AUTHORITY_REGISTRY_ACTIVATION_V1",
+  "date": "2026-10-08",
+  "status": "LIVE__SELF_AUTHENTICATING_OWNED_ADEQUACY_REUSE_BEFORE_GENERAL_SEMANTIC_SEARCH__ZERO_TERMINAL_CREDIT",
+  "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE_INCOMPLETE",
+  "mechanism": {
+    "registry": "canonical/runtime/r2_authenticated_adequacy_authority_registry_v1.py",
+    "live_controller": "canonical/runtime/general_adequate_decision_controller_v1.py",
+    "rule": "WHEN_RAW_SOURCE_ITSELF_MATCHES_A_BRAIN_OWNED_SELF_AUTHENTICATING_ADEQUACY_REGION__REUSE_THAT_AUTHORITY_BEFORE_OPAQUE_GENERAL_REASONING"
+  },
+  "initial_authorities": [
+    {
+      "id": "P2_EXPLICIT_CONTRACT_AUTHENTICATED_TOP_LAW_V1",
+      "membership": "canonical/runtime/p2_explicit_contract_membership_v1.py",
+      "adequacy": "canonical/runtime/p2_top_law_policy_adequacy_authenticator_v1.py",
+      "route": "canonical/runtime/p2_authenticated_top_law_route_v1.py",
+      "self_asserted_semantic_flags_accepted": false
+    },
+    {
+      "id": "P3_STRICT_BINARY_AUTHENTICATED_TOP_LAW_V1",
+      "membership": "canonical/runtime/p3_binary_explicit_contract_membership_v1.py",
+      "adequacy": "canonical/runtime/p3_binary_explicit_top_law_region_verifier_v1.py",
+      "policy": "canonical/runtime/p3_binary_decision_grounded_expression_v1.py",
+      "self_asserted_semantic_flags_accepted": false
+    }
+  ],
+  "authority_law": [
+    "RAW_SOURCE_MEMBERSHIP_MUST_BE_RECOMPUTED_BY_THE_REGISTERED_AUTHORITY",
+    "POLICY_ADEQUACY_MUST_BE_BOUND_TO_BRAIN_OWNED_VERIFIED_EVIDENCE",
+    "CALLER_OR_PROVIDER_BOOLEAN_SCOPE_AND_ADEQUACY_ASSERTIONS_ARE_NOT_REGISTRY_AUTHORITY",
+    "MULTIPLE_MATCHING_SELF_AUTHENTICATING_AUTHORITIES_FAIL_CLOSED",
+    "SPECIALIST_ADEQUACY_MAY_SKIP_REDUNDANT_GENERAL_SEMANTIC_SEARCH",
+    "SPECIALIST_ADEQUACY_NEVER_IMPLIES_ACTUAL_RAW_GOAL_SATISFACTION",
+    "THE_EXISTING_INDEPENDENT_GOAL_SATISFACTION_GATE_REMAINS_MANDATORY"
+  ],
+  "root_reduction": {
+    "owned_adequacy_authority_reuse_missing": false,
+    "general_adequacy_coverage_complete": false,
+    "remaining": "SYNTHESIZE_OR_AUTHENTICATE_NEW_ADEQUACY_REGIONS_ONLY_FOR_CONTEXTS_NOT_COVERED_BY_SELF_AUTHENTICATING_OWNED_AUTHORITIES_OR_AUTHENTICATED_OBSERVABLE_POLICY_COVERS"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_FREE_FORM_LANGUAGE_MATCHES_THE_STRICT_P2_OR_P3_SOURCE_CLASSES",
+    "NO_CLAIM_ALL_OWNED_ADEQUACY_THEOREMS_ARE_YET_REGISTERED",
+    "NO_CLAIM_GENERAL_OPEN_WORLD_POLICY_ADEQUACY_COVERAGE_IS_COMPLETE",
+    "NO_CLAIM_SPECIALIST_POLICY_SELECTION_ALONE_SATISFIES_THE_ORIGINAL_GOAL",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
