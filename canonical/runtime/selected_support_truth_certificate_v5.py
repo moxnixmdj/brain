@@ -104,21 +104,16 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
         c_support=set(categorical_receipt.get("support_evidence_ids") or [])
         c_conflict=set(categorical_receipt.get("conflict_evidence_ids") or [])
         supports.extend(sorted(c_support));conflicts.extend(sorted(c_conflict))
+        unresolved.extend(categorical_receipt.get("unresolved_evidence_ids") or [])
         for row in rows:
             eid=row["evidence_id"]
-            if eid in parsed:
-                in_s=eid in c_support;in_c=eid in c_conflict
-                relation=("SUPPORTS_AND_CONFLICTS" if in_s and in_c else
-                          "SUPPORTS" if in_s else
-                          "CONFLICTS" if in_c else "UNRELATED")
-                audit.append({"evidence_id":eid,"relation":relation,"grammar":"CATEGORICAL_RELATION_V1"})
+            if eid not in parsed:
                 continue
-            relation,grammar=_legacy_classify(text,row["text"],eid)
-            if relation is None:
-                unresolved.append(eid);continue
-            audit.append({"evidence_id":eid,"relation":relation,"grammar":grammar})
-            if relation=="SUPPORTS": supports.append(eid)
-            elif relation=="CONFLICTS": conflicts.append(eid)
+            in_s=eid in c_support;in_c=eid in c_conflict
+            relation=("SUPPORTS_AND_CONFLICTS" if in_s and in_c else
+                      "SUPPORTS" if in_s else
+                      "CONFLICTS" if in_c else "UNRELATED")
+            audit.append({"evidence_id":eid,"relation":relation,"grammar":"CATEGORICAL_RELATION_V1"})
     else:
         for row in rows:
             relation,grammar=_legacy_classify(text,row["text"],row["evidence_id"])
