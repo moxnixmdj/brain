@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_LIVE_OUTPUT_PREFLIGHT_V1",
+  "date": "2026-10-08",
+  "status": "PASS__REAL_LOCAL_QWEN__ZERO_BENCHMARK_EXPOSURE__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "repaired_agent_blob": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+  "planner_blob": "01d859c8f27b317893027e693c9aa49e833a256f",
+  "closure_blob": "cf9cc9fb8830eda991c71381a523b8f67caedaa7",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2416,
+    "workflow_run_id": 37724821890,
+    "workflow_job_id": 113140481790,
+    "head_sha": "bb12cf52d8ba5804fa4290db6bc4d963c668a533",
+    "artifact_id": 11528115607,
+    "artifact_digest": "sha256:d2e057a994afa9bb684a7e47cdbd5ef1f4d7c9a488f9cbcddc1e625798cf5329",
+    "result_file_sha256": "8a5839285ef30d846c7464f0dc2a0a53a645c827c473de484302bdd482e5c971"
+  },
+  "carrier": {
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "qwen_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "planner_timeout_s": 300,
+    "test_max_cycles": 4,
+    "normal_max_cycles": 8
+  },
+  "observed": {
+    "controller_status": "SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER",
+    "mandatory_output": {
+      "id": "BRAIN_DELIVERABLE_01",
+      "path": "/tmp/brain_output_probe.txt"
+    },
+    "output_present": true,
+    "output_content": "BRAIN_OK",
+    "resolved": [
+      "BRAIN_DELIVERABLE_01"
+    ],
+    "cycles": 4,
+    "task_completion_claimed": false,
+    "benchmark_task_exposure": 0
+  },
+  "consequence": "V11_ZERO_EXPOSURE_OUTPUT_CONTROL_PREFLIGHT_PRECONDITION_SATISFIED__RANK12_ELIGIBLE_FOR_NONEXECUTABLE_AUTHORITY_CANDIDATE",
+  "execution_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
