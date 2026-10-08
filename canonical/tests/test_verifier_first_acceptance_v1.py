@@ -84,6 +84,7 @@ class VerifierFirstAcceptanceV1Tests(unittest.TestCase):
             len(raw["acceptance_contract"]["obligations"]),
         )
         self.assertTrue(out["all_raw_obligations_bound_to_authenticated_acceptance"])
+        self.assertFalse(out["acceptance_authority"])
         self.assertFalse(out["self_certifying"])
         self.assertEqual(
             out["proof_authority_derived_from"],
