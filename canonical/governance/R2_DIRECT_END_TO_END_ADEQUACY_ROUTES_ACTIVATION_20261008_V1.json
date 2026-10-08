@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_LIVE_DIRECT_ADEQUACY_ROUTE_LAYER__EXACT_CELL_ONLY",
+  "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE_INCOMPLETE",
+  "runtime": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+  "controller": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+  "rule": [
+    "PURE_EXACT_PREFLIGHT_MUST_MATCH_BEFORE_ANY_EFFECT",
+    "MATCHED_ROUTE_EXECUTES_AT_MOST_ONCE",
+    "SUCCESS_REQUIRES_INDEPENDENT_POST_EXECUTION_ACCEPTANCE_OF_EVERY_RAW_OBLIGATION",
+    "PARTIAL_ACCEPTANCE_IS_NOT_ADEQUACY",
+    "MATCHED_ROUTE_FAILURE_MUST_NOT_RETRY_THROUGH_ANOTHER_POLICY_PATH",
+    "UNMATCHED_GOALS_FALL_THROUGH_TO_THE_EXISTING_R2_FIXED_POINT_LOOP"
+  ],
+  "current_routes": [
+    {
+      "route_id": "DIRECT_ADEQUACY::ARCHIVE_MANIFEST_TAR_GZ_V1",
+      "capability_id": "archive.tar_gz.create_from_manifest",
+      "preflight": "raw_goal_archive_acceptance_v1.GRAMMAR.fullmatch",
+      "acceptance": "raw_goal_archive_acceptance_v1.verify",
+      "scope": "EXACT_ARCHIVE_MANIFEST_VERIFICATION_PATHS_GOAL_ONLY"
+    }
+  ],
+  "expansion_law": "ADD_A_ROUTE_ONLY_WHEN_BOTH_AN_EXACT_SIDE_EFFECT_FREE_PREFLIGHT_AND_AN_INDEPENDENT_FULL_RAW_OBLIGATION_ACCEPTANCE_VERIFIER_EXIST",
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_CLOSURE",
+    "NO_CLAIM_UNMATCHED_GOALS_ARE_INADEQUATE",
+    "NO_CLAIM_EXECUTION_SUCCESS_ALONE_IS_GOAL_SUCCESS",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
