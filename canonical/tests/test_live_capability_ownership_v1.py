@@ -13,6 +13,25 @@ def test_manifest_is_fail_closed_provider_ontology():
     assert set(manifest["providers"]) == set(o.EXPECTED_PROVIDERS)
 
 
+def test_h100_historical_id_collision_is_disambiguated_by_route():
+    ids, collisions = o._h100_owned_ids([
+        {"capability_id": "CAP_X", "route": "ROUTE_A"},
+        {"capability_id": "CAP_X", "route": "ROUTE_B"},
+        {"capability_id": "CAP_Y", "route": "ROUTE_C"},
+    ])
+    assert ids == [
+        "h100:CAP_X@ROUTE_A",
+        "h100:CAP_X@ROUTE_B",
+        "h100:CAP_Y",
+    ]
+    assert collisions == [{
+        "capability_id": "CAP_X",
+        "row_count": 2,
+        "routes": ["ROUTE_A", "ROUTE_B"],
+        "ownership_ids": ["h100:CAP_X@ROUTE_A", "h100:CAP_X@ROUTE_B"],
+    }]
+
+
 def test_active_skill_selector_rejects_unverified_active_skill():
     state = {
         "skills": {
