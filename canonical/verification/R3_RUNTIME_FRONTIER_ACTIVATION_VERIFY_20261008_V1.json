@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_R3_RUNTIME_FRONTIER_ACTIVATION_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__R3_RUNTIME_FRONTIER_ACTIVATION__22_OF_22_FOCUSED_TESTS",
+  "subject_main_head_before_receipt": "321e06b7dfecf5387bc0bf2931a91ed979b397c3",
+  "exact_blobs": {
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "70c6f1dbe5b2ee52377791312aff4ebb2b45d700",
+    "canonical/tests/test_r3_improvement_queue_driver_v1.py": "7fdafb88b7b31ede9b6c29bcc69193457ce63057"
+  },
+  "isolated_verification": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "compile": {
+      "command": "python3 -m py_compile canonical/runtime/r3_improvement_queue_driver_v1.py canonical/tests/test_r3_improvement_queue_driver_v1.py",
+      "result": "PASS"
+    },
+    "queue_driver_suite": {
+      "command": "python3 -m unittest canonical.tests.test_r3_improvement_queue_driver_v1 -v",
+      "tests_run": 22,
+      "tests_passed": 22,
+      "tests_failed": 0,
+      "tests_errors": 0
+    }
+  },
+  "proved": {
+    "frontier_source_byte_change_alone_cannot_reopen_learning": true,
+    "frontier_modules_reload_before_owned_frontier_reopen": true,
+    "activation_failure_keeps_success_parked": true,
+    "activation_success_reopens_parked_success": true,
+    "activation_reloads_bound_success_adapter": true,
+    "activation_reloads_raw_success_adapter": true,
+    "activation_reloads_bound_success_checkpoint_verifier": true,
+    "activation_reloads_raw_success_checkpoint_verifier": true,
+    "activation_reloads_independent_learning_verifier": true,
+    "activated_frontier_digest_rechecked_after_reload": true,
+    "acquisition_provider_self_report_is_not_activation_authority": true,
+    "no_effect_replay_added": true,
+    "promotion_authority_granted": false,
+    "terminal_authority_granted": false
+  },
+  "runtime_invariant": "OWNED_FRONTIER_BYTES_CHANGED_AND_RUNTIME_FRONTIER_ACTIVATED_BEFORE_REOPEN",
+  "truthful_boundary": {
+    "root1_acquisition_provider_still_external_to_r3": true,
+    "canonical_default_root1_acquisition_provider_present": false,
+    "activation_only_covers_owned_r3_success_learning_frontier_modules": true,
+    "arbitrary_new_plugin_registration_not_claimed": true
+  },
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
