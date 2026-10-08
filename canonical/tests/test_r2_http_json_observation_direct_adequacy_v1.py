@@ -32,14 +32,13 @@ class R2HttpJsonObservationDirectAdequacyV1Tests(unittest.TestCase):
         out=obs.preflight({"task_id":"x","goal":GOAL+" Then post it elsewhere."})
         self.assertFalse(out["matched"])
 
-    @patch.object(obs.bound_exec,"execute")
+    @patch.object(obs.http_json_fetch,"run")
     def test_independent_semantic_equality_commits(self,execute):
         pf=obs.preflight({"task_id":"ok","goal":GOAL})
         def fake(*args,**kwargs):
             OUT.write_text(json.dumps({"x":1,"items":[1,2]}),encoding="utf-8")
-            return {"pass":True,"capability_id":obs.CAPABILITY_ID,
-                    "result":{"output_verified":True,"output_path":pf["output_path"],
-                              "requested_url":pf["requested_url"],"final_url":pf["requested_url"]}}
+            return {"output_verified":True,"output_path":pf["output_path"],
+                    "requested_url":pf["requested_url"],"final_url":pf["requested_url"]}
         execute.side_effect=fake
         out=obs.run({"task_id":"ok","goal":GOAL},
                     independent_fetch_provider=lambda url:{
@@ -49,7 +48,7 @@ class R2HttpJsonObservationDirectAdequacyV1Tests(unittest.TestCase):
         self.assertTrue(out["actual_goal_satisfaction_verified"])
         self.assertTrue(out["transaction_committed"])
 
-    @patch.object(obs.bound_exec,"execute")
+    @patch.object(obs.http_json_fetch,"run")
     def test_independent_mismatch_rolls_back(self,execute):
         pf=obs.preflight({"task_id":"bad","goal":GOAL})
         OUT.write_bytes(b'{"old":true}')
