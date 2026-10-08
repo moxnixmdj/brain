@@ -169,6 +169,24 @@ def _merge_candidate(
 
     merged = deepcopy(dict(current))
     for key, value in patch.items():
+        if key == "policy_cover_observation_bindings":
+            if not isinstance(value, Mapping):
+                return None, "POLICY_COVER_OBSERVATION_BINDINGS_PATCH_NOT_OBJECT"
+            prior_bindings = merged.get(key, {})
+            if not isinstance(prior_bindings, Mapping):
+                return None, "EXISTING_POLICY_COVER_OBSERVATION_BINDINGS_NOT_OBJECT"
+            combined = deepcopy(dict(prior_bindings))
+            for discriminator_id, binding in value.items():
+                if not isinstance(discriminator_id, str) or not discriminator_id:
+                    return None, "POLICY_COVER_OBSERVATION_DISCRIMINATOR_ID_INVALID"
+                if discriminator_id in combined and combined[discriminator_id] != binding:
+                    return None, (
+                        "POLICY_COVER_OBSERVATION_BINDING_MUTATION_FORBIDDEN:"
+                        + discriminator_id
+                    )
+                combined[discriminator_id] = deepcopy(binding)
+            merged[key] = combined
+            continue
         merged[key] = deepcopy(value)
 
     if merged.get("task_id") != current.get("task_id"):
