@@ -331,6 +331,83 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             "SOURCE_POSITIVE_SELECTION_CONTRACT",
         )
 
+    def test_policy_repair_request_exposes_only_verified_cegar_search_frontier(self):
+        request = self._base_request()
+        opened = {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "BOUND_RELEVANCE_CEGAR_LOOP_UNSATISFIED",
+            "detail": {
+                "loop_result": {
+                    "pass": False,
+                    "status": "OPEN__POLICY_CHANGING_DISCRIMINATOR_OR_STRONGER_ADEQUACY_REQUIRED",
+                    "reason": "NO_DECLARED_ONE_STEP_DISCRIMINATOR_CLOSES_POLICY_REGIONS",
+                    "detail": {
+                        "cegar": {
+                            "decision_basis": ["x", "y"],
+                            "surviving_model_count": 2,
+                            "authenticated_policy_adequacy": [
+                                {"policy_id": "policy.a", "receipt": "opaque"},
+                                {"policy_id": "policy.b", "receipt": "opaque"},
+                            ],
+                            "rejected_policy_adequacy_bindings": [
+                                {"policy_id": "policy.c", "reason": "ADEQUACY_BINDING_MISSING"},
+                            ],
+                            "conflicting_policy_region_witness": [
+                                {
+                                    "model_id": "m0",
+                                    "valuation": {"x": False, "y": False},
+                                    "adequate_policy_ids": ["policy.a"],
+                                },
+                                {
+                                    "model_id": "m1",
+                                    "valuation": {"x": True, "y": False},
+                                    "adequate_policy_ids": ["policy.b"],
+                                },
+                            ],
+                            "certified_common_policies": [],
+                        }
+                    },
+                }
+            },
+        }
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value=self._goal_binding_pass()), \
+             patch.object(controller, "evaluate_p3", return_value=opened):
+            out = controller.run(request)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["next_required_edge"],
+            "ONE_POLICY_CHANGING_DISCRIMINATOR_OR_STRONGER_POSITIVE_ADEQUACY",
+        )
+        search = out["next_policy_request"]["search_context"]
+        self.assertEqual(
+            search["authenticated_policy_ids"],
+            ["policy.a", "policy.b"],
+        )
+        self.assertEqual(
+            search["rejected_policy_candidates"],
+            [{"policy_id": "policy.c", "reason": "ADEQUACY_BINDING_MISSING"}],
+        )
+        self.assertEqual(search["decision_basis"], ["x", "y"])
+        self.assertEqual(search["surviving_model_count"], 2)
+        self.assertEqual(
+            search["conflicting_policy_region_witness"][0]["adequate_policy_ids"],
+            ["policy.a"],
+        )
+        order = out["next_policy_request"]["preferred_resolution_order"]
+        self.assertEqual(
+            order[0],
+            "REPAIR_OR_REUSE_EXISTING_DECLARED_POLICY_BEFORE_INVENTION",
+        )
+        self.assertIn(
+            "INVENT_A_NEW_POLICY_ONLY_IF_THE_CURRENT_AUTHENTICATED_SET_CANNOT_COVER_THE_CONFLICT_WITNESS",
+            order,
+        )
+        self.assertFalse(out["next_policy_request"]["policy_adequacy_authority"])
+        self.assertFalse(out["next_policy_request"]["semantic_truth_authority"])
+
     def test_provider_cannot_self_authorize_semantic_truth(self):
         request = self._base_request()
         request["max_information_rounds"] = 1
