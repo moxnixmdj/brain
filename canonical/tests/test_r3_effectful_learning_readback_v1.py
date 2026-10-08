@@ -6,6 +6,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
+from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
 from canonical.runtime import r3_independent_learning_verifier_v1 as worker
 from canonical.runtime import universal_verified_adaptive_solver_v4 as v4
 from canonical.runtime.effect_broker_receipt_resolver_v2 import git_blob_id
@@ -264,6 +265,42 @@ class R3EffectfulLearningReadbackV1Tests(unittest.TestCase):
             )
             self.assertTrue(auth["pass"], auth)
             self.assertTrue(auth["effect_outcomes_reverified"])
+
+    def test_learning_episode_autonomously_promotes_effectful_success_via_readback(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            repo_root = root / "repo"
+            effect_root = root / "effects"
+            state_path = root / "state.json"
+            repo_root.mkdir(parents=True)
+            problem = effect_problem(repo_root)
+            proposal = {
+                "candidate_values": {
+                    "name": "Alice",
+                    "score": 0.75,
+                    "passed": True,
+                }
+            }
+            out = learning.run_learning_episode(
+                problem,
+                repo_root=repo_root,
+                state_path=state_path,
+                proposal_packets={"write-receipt": [proposal]},
+                effect_root=str(effect_root),
+                episode_id="effect-auto-episode",
+                scope_id="effect-auto-scope",
+            )
+            self.assertTrue(out["pass"], out)
+            self.assertTrue(out["solver_output"]["current_episode_verified"], out)
+            auth = out["solver_output"]["episode_verification_authentication"]
+            self.assertTrue(auth["pass"], auth)
+            self.assertTrue(auth["effect_outcomes_reverified"], auth)
+            state = learning.load_state(state_path)
+            self.assertEqual(len(state["episodes"]), 1, state)
+            self.assertFalse(any(
+                row.get("kind") == "VERIFY_EPISODE" and row.get("status") == "PENDING"
+                for row in state["improvement_queue"].values()
+            ), state)
 
     def test_effectful_episode_reverification_fails_after_effect_bytes_drift(self):
         with TemporaryDirectory() as td:
