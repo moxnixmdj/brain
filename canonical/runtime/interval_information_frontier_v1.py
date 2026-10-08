@@ -8,6 +8,11 @@ SCHEMA = "PROJECT_BRAIN_INTERVAL_INFORMATION_FRONTIER_V1"
 MAX_WORLDS = 128
 MAX_QUERIES = 256
 MAX_INTERVAL_CELLS_PER_QUERY = 512
+MAX_DP_STATES = 65_536
+
+
+class _WorkBudgetExceeded(RuntimeError):
+    pass
 
 
 def _fail(reason: str, **detail: Any) -> dict[str, Any]:
@@ -210,12 +215,18 @@ def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
     def resolved(state: frozenset[str]) -> bool:
         return len({signatures[world_id] for world_id in state}) <= 1
 
+    dp_states_seen: set[frozenset[str]] = set()
+
     @lru_cache(maxsize=None)
     def dp(state: frozenset[str]) -> tuple[
         float,
         str | None,
         tuple[tuple[tuple[str, ...], float], ...],
     ]:
+        if state not in dp_states_seen:
+            dp_states_seen.add(state)
+            if len(dp_states_seen) > MAX_DP_STATES:
+                raise _WorkBudgetExceeded("DP_STATE_BUDGET_EXCEEDED")
         if resolved(state):
             return 0.0, None, ()
 
@@ -261,7 +272,15 @@ def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
         return best
 
     initial = frozenset(ids)
-    total, first_query, children = dp(initial)
+    try:
+        total, first_query, children = dp(initial)
+    except _WorkBudgetExceeded:
+        return {
+            **_fail("DP_STATE_BUDGET_EXCEEDED"),
+            "status": "FAIL_CLOSED__EXACT_MINIMAX_WORK_BUDGET_EXCEEDED",
+            "dp_states_checked": len(dp_states_seen),
+            "max_dp_states": MAX_DP_STATES,
+        }
 
     if total == float("inf"):
         unresolved_pairs = sorted(
@@ -297,6 +316,8 @@ def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
         "world_count": len(ids),
         "terminal_equivalence_class_count": len(set(signatures.values())),
         "query_count": len(query_intervals),
+        "dp_states_checked": len(dp_states_seen),
+        "max_dp_states": MAX_DP_STATES,
         "minimum_worst_case_cost_units": total,
         "max_worst_case_cost_units": budget_value,
         "within_declared_budget": within_budget,
