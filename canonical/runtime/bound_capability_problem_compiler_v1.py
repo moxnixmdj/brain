@@ -21,7 +21,6 @@ from typing import Any, Mapping, Sequence
 SCHEMA = "PROJECT_BRAIN_BOUND_CAPABILITY_PROBLEM_COMPILER_V1"
 ROOT = Path(__file__).resolve().parents[2]
 REGISTRY_PATH = "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
-REGISTRY_BLOB = "7badee4878700f2cd4176beb8319d2a6a0bdf782"
 
 
 class BoundProblemError(ValueError):
@@ -32,18 +31,19 @@ def _git_blob(raw: bytes) -> str:
     return sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest()
 
 
-def _load_registry() -> Mapping[str, Any]:
+def _load_registry() -> tuple[Mapping[str, Any], str]:
+    # The checked-out Git commit already binds code and registry atomically.
+    # Bind the compiled problem to those exact current registry bytes instead of
+    # requiring a second manually-updated blob constant that goes stale.
     raw = (ROOT / REGISTRY_PATH).read_bytes()
     actual = _git_blob(raw)
-    if actual != REGISTRY_BLOB:
-        raise BoundProblemError("BOUND_REGISTRY_BLOB_DRIFT:" + actual)
     doc = json.loads(raw.decode("utf-8"))
     if doc.get("schema") != "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
         raise BoundProblemError("BOUND_REGISTRY_SCHEMA_INVALID")
     caps = doc.get("capabilities")
     if not isinstance(caps, Mapping) or not caps:
         raise BoundProblemError("BOUND_REGISTRY_CAPABILITIES_INVALID")
-    return caps
+    return caps, actual
 
 
 def _token(value: Any, label: str) -> str:
@@ -158,7 +158,7 @@ def compile_problem(spec: Mapping[str, Any]) -> dict[str, Any]:
         if not isinstance(raw_instances, list) or not raw_instances:
             raise BoundProblemError("CAPABILITY_INSTANCES_REQUIRED")
 
-        registry = _load_registry()
+        registry, registry_blob = _load_registry()
         platform = _current_platform()
         caps: list[dict[str, Any]] = []
         seen_ids: set[str] = set()
@@ -248,7 +248,7 @@ def compile_problem(spec: Mapping[str, Any]) -> dict[str, Any]:
             "problem": problem,
             "problem_sha256": sha256(canonical).hexdigest(),
             "registry_path": REGISTRY_PATH,
-            "registry_git_blob_sha": REGISTRY_BLOB,
+            "registry_git_blob_sha": registry_blob,
             "instance_bindings": bindings,
             "manual_capability_action_injection_permitted": False,
             "execution_authority": False,

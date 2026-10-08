@@ -1,4 +1,4 @@
-from canonical.runtime.bound_capability_problem_compiler_v1 import compile_problem
+from canonical.runtime.bound_capability_problem_compiler_v1 import ROOT, REGISTRY_PATH, _git_blob, compile_problem
 from canonical.runtime.capability_planner import plan_actions
 
 
@@ -76,3 +76,10 @@ def test_manual_capability_injection_is_not_an_input_surface():
     out = compile_problem(x)
     assert out["pass"] is False
     assert any("SPEC_FIELDS_UNSUPPORTED:capabilities" in e for e in out["errors"])
+
+
+def test_compiler_binds_exact_registry_bytes_from_current_commit():
+    out = compile_problem(valid_spec())
+    assert out["pass"] is True, out
+    raw = (ROOT / REGISTRY_PATH).read_bytes()
+    assert out["registry_git_blob_sha"] == _git_blob(raw)
