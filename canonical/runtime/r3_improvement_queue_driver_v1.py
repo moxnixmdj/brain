@@ -1496,10 +1496,28 @@ def advance_once(
             if kind == FRONTIER_EXPANSION_KIND:
                 payload = work.get("payload")
                 if verification_frontier_acquisition_provider is None:
+                    from canonical.runtime import r3_root1_adapter_gap_witness_v1 as root1_gap
+
+                    compiled_gap = root1_gap.compile_gap(
+                        work,
+                        state_path=state_path,
+                        repo_root=repo_root,
+                        acquisition_provider_bound=False,
+                    )
+                    gap_established = (
+                        isinstance(compiled_gap, Mapping)
+                        and compiled_gap.get("pass") is True
+                        and compiled_gap.get("root1_positive_gap_established") is True
+                    )
                     blockers.append({
                         "work_id": wid,
                         "kind": kind,
-                        "blocker": "ROOT1_VERIFICATION_CAPABILITY_ACQUISITION_REQUIRED",
+                        "blocker": (
+                            "ROOT1_CONSTRUCTIVE_R3_ADAPTER_AUTHORING_GAP__"
+                            "NO_BOUND_ACQUISITION_ROUTE"
+                            if gap_established
+                            else "ROOT1_VERIFICATION_CAPABILITY_ACQUISITION_REQUIRED"
+                        ),
                         "boundary_root": (
                             payload.get("boundary_root")
                             if isinstance(payload, Mapping)
@@ -1510,6 +1528,8 @@ def advance_once(
                             if isinstance(payload, Mapping)
                             else None
                         ),
+                        "root1_positive_gap_established": gap_established,
+                        "root1_gap_witness": deepcopy(dict(compiled_gap)),
                         "replay_original_success": False,
                     })
                     continue

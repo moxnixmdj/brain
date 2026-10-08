@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_R3_ROOT1_ADAPTER_GAP_WITNESS_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SPRITE_PASS__CURRENT_R3_V10_COMPOSITION__14_BLOB_BINDINGS__6_OF_6_FOCUSED_TESTS_PASS__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "pull_request": 3350,
+    "candidate_head_sha": "afb4916f7e4d9a59e35353da10dd6a900dde632b",
+    "branch": "r3-root1-adapter-gap-witness-v2-20261008",
+    "exact_load_bearing_blob_count": 14
+  },
+  "verification_capsule": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2433,
+    "branch": "verify-r3-root1-adapter-gap-3350",
+    "head_sha": "f03c57dacb3f05a125105adaaa5866605757e329",
+    "capsule_path": "capsules/r3_root1_adapter_gap_3350",
+    "exact_blob_binding_pass_count": 14
+  },
+  "independent_execution": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-r3-root1-gap-verify-20261008",
+    "sprite_id": "sprite-91472ada-4fea-4536-9558-7a7e3da49928",
+    "source_transport": "PUBLIC_VERIFICATION_CAPSULE_GIT_CLONE",
+    "private_brain_repository_credentials_used": false,
+    "py_compile": "PASS",
+    "focused_tests_run": 6,
+    "focused_failures": 0,
+    "focused_errors": 0,
+    "conclusion": "success"
+  },
+  "proved": {
+    "exact_parked_proof_bearing_adapter_miss_reopens_root1": true,
+    "root1_minimum_delta_is_exactly_R3_SUCCESS_ADAPTER_PATCH_AUTHOR": true,
+    "no_current_bound_acquisition_route_is_reported": true,
+    "stale_adapter_frontier_fails_closed": true,
+    "newly_available_owned_adapter_blocks_root1_gap": true,
+    "already_bound_acquisition_provider_blocks_gap_compiler_authority": true,
+    "proofless_success_does_not_fabricate_root1_gap": true,
+    "queue_integration_surfaces_constructive_gap_without_replay": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_R3_SUCCESS_ADAPTER_PATCH_AUTHOR_IS_ALREADY_OWNED",
+    "NO_CLAIM_A_DEFAULT_PATCH_AUTHOR_ACQUISITION_ROUTE_EXISTS",
+    "NO_CLAIM_ANY_ADAPTER_WAS_AUTHORED_OR_INSTALLED",
+    "NO_CLAIM_VERIFICATION_AUTHORITY_CHANGED",
+    "NO_CAPABILITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "composition_replay": {
+    "current_main_head_observed": "8b082a3900d2d9e1f9884123dee1b9157a46a094",
+    "current_r3_v10_learning_blob": "84d78909e7282f50a43c589a28a988d0f3f7b9ce",
+    "pr_driver_blob": "1f0b45a405a9c35b2cf00a1c5d8e93c0fac14251",
+    "all_other_bound_dependencies_matched_original_capsule": true,
+    "exact_blob_binding_pass_count": 14,
+    "focused_tests_run": 6,
+    "focused_failures": 0,
+    "focused_errors": 0,
+    "conclusion": "success"
+  }
+}
