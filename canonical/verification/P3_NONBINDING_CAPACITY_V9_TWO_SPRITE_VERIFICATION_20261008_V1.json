@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_P3_NONBINDING_CAPACITY_V9_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__CELL_11_OF_11_AND_V9_COMPOSITION_7_OF_7_ON_TWO_SPRITES__ZERO_TERMINAL_CREDIT",
+  "independent_verified": true,
+  "exact_byte_bound": true,
+  "conclusion": "success",
+  "subject": {
+    "nonbinding_cell": {
+      "path": "canonical/runtime/p3_nonbinding_capacity_common_policy_cell_v1.py",
+      "git_blob_sha": "db870161f0890f93e2c01c68d7e9632bef1b548a",
+      "sha256": "4240de3c1f04540681c0db4d28d95e15afddcf82bd71fc02a562d68b534b5707"
+    },
+    "cell_tests": {
+      "path": "canonical/tests/test_p3_nonbinding_capacity_common_policy_cell_v1.py",
+      "git_blob_sha": "9c64464e0f4bc94bbe1fe7dc5fa128c8a78e2c40",
+      "sha256": "7c663998859a8137d4e2678e0a7534d3944986ddf89ec6ed44143a50bb4df9de"
+    },
+    "v9_front_door": {
+      "path": "canonical/runtime/p3_real_context_v3_admission_v9.py",
+      "git_blob_sha": "2faf2a638e047ce40a1c169f3d2677d2a3a3d426",
+      "sha256": "32624c6f05620bdd260434a6c72d4fc9220c164bd5e1b6690630fde3bb4ca4e6"
+    },
+    "v9_repository_regression_tests": {
+      "path": "canonical/tests/test_p3_real_context_v3_admission_v9.py",
+      "git_blob_sha": "0270a52b860bde8b3e1ea3067e20ec430d54a28a",
+      "note": "PRESENT_ON_BRANCH__NOT_THE_INDEPENDENT_COMPOSITION_REPLAY_BOUND_BY_THIS_RECEIPT"
+    },
+    "compositional_replay": {
+      "path": "canonical/verification/p3_nonbinding_v9_compositional_replay_v1.py",
+      "git_blob_sha": "e7a44af1ed4125c70604e066196c5a0078fcace7",
+      "sha256": "efc3dd1fc42e56629ec286049909ed7cfe98d1dc31f61e587496d553550609a2"
+    },
+    "predecessor_v8": {
+      "path": "canonical/runtime/p3_real_context_v3_admission_v8.py",
+      "git_blob_sha": "3c2dbc056ec86424a5455a41ab552d2160f14eea",
+      "independent_verification": {
+        "path": "canonical/verification/P3_REAL_CONTEXT_V8_EXPLICIT_AUTHORITY_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+        "git_blob_sha": "0097b3670ffc2c890858f1af49846849b20713bb"
+      },
+      "reverified_in_this_receipt": false
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "h100-real-image-v1",
+      "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+      "exact_cell_tests": {
+        "passed": 11,
+        "total": 11
+      },
+      "exact_v9_composition_replay": {
+        "passed": 7,
+        "total": 7
+      }
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "exact_cell_tests": {
+        "passed": 11,
+        "total": 11
+      },
+      "exact_v9_composition_replay": {
+        "passed": 7,
+        "total": 7
+      }
+    }
+  ],
+  "proved": [
+    "WHEN_ALL_SUPPORTED_SAFE_CLAIMS_FIT_THE_EXPLICIT_ITEM_BUDGET__NO_OPTIONAL_SALIENCE_CHOICE_REMAINS",
+    "ALL_SUPPORTED_OPTIONAL_CLAIMS_ARE_INCLUDED__UNSUPPORTED_OPTIONALS_ARE_EXCLUDED__REQUIRED_CLAIMS_CANNOT_BE_DROPPED",
+    "BINDING_CAPACITY_FAILS_CLOSED_INSTEAD_OF_INVENTING_HIDDEN_WEIGHTS",
+    "CONFLICT_OR_NONEMPTY_UNCERTAINTY_FAILS_CLOSED",
+    "UNMODELED_SEMANTIC_FIELDS_FAIL_CLOSED_INSIDE_THE_CELL",
+    "V9_PRESERVES_A_SUCCESSFUL_V8_RESULT",
+    "V9_NEVER_FALLS_THROUGH_FROM_FAILED_EXPLICIT_OBJECTIVE_WEIGHTS_OR_DECISION_DEPENDENCY_AUTHORITY_TO_THE_WEAKER_NONBINDING_ROUTE",
+    "V9_REQUIRES_CONTEXT_ID_FOR_THE_NONDEPENDENCY_ROUTE",
+    "NO_SOURCE_POLICY_DB_U_OR_TERMINAL_AUTHORITY_ESCALATION"
+  ],
+  "verification_boundary": {
+    "cell_tests": "FULL_EXACT_TEST_MODULE_EXECUTED_VIA_DETERMINISTIC_FUNCTION_HARNESS",
+    "v9_replay": "NEW_V9_ROUTING_DELTA_ONLY__PREDECESSOR_V8_REPLACED_BY_A_CONTROLLED_INTERFACE_STUB_BECAUSE_V8_HAS_ITS_OWN_INDEPENDENT_EXACT_BYTE_VERIFICATION",
+    "current_main_integration": "NOT_YET_PROMOTED_BY_THIS_RECEIPT"
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_SEMANTIC_RELEVANCE",
+    "NO_CLAIM_CAPACITY_BINDING_OPTIONAL_RELEVANCE_IS_SOLVED_WITHOUT_AN_EXPLICIT_OR_VERIFIED_SELECTION_AUTHORITY",
+    "NO_SOURCE_AUTHORIZATION",
+    "NO_POLICY_ADEQUACY_AUTHORITY",
+    "NO_DB_ADMISSION",
+    "NO_U_SUBTRACTION",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
