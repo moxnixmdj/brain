@@ -38,18 +38,13 @@ def test_numeric_v5_regression():
     assert out["relation_audit"][0]["grammar"]=="NUMERIC_RELATION_V1"
 
 def test_categorical_v5_regression():
-    out=evaluate(p("sparrow is a member of bird",[
-        ev("E1","Report states sparrow is a member of animal"),
+    out=evaluate(p("sparrow is a member of animal",[
+        ev("E1","Report states sparrow is a member of bird"),
         ev("E2","Report states bird is a subclass of animal"),
     ]))
-    assert out["pass"] is True or out["pass"] is False
-    # The exact relation is deliberately not re-derived here; this test only
-    # ensures V6 executes the categorical route rather than laundering it
-    # through the new predicate-argument grammar.
-    if out["pass"]:
-        assert "categorical_support_receipt" in out
-    else:
-        assert out["status"].startswith("UNKNOWN__")
+    assert out["pass"] and out["predicate_truth"]=="TRUE"
+    assert "categorical_support_receipt" in out
+    assert {r["grammar"] for r in out["relation_audit"] if r["relation"]=="SUPPORTS"}=={"EXPLICIT_CATEGORICAL_RELATION_V1"}
 
 def test_exact_attestation_regression():
     out=evaluate(p("The product launched in June.",[
