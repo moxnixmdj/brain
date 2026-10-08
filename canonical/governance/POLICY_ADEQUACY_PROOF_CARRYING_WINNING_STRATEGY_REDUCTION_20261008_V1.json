@@ -32,10 +32,10 @@
     },
     "authenticated_fixed_point": {
       "path": "canonical/runtime/authenticated_symbolic_policy_cover_fixed_point_v1.py",
-      "git_blob_sha": "965b45c8776110d0500e995cb24cd1561f991d2f"
+      "git_blob_sha": "3ca9921e081ed6764af5ae9362d7be2b325be604"
     },
     "composition_verification": {
-      "path": "canonical/verification/POLICY_ADEQUACY_SELECTED_OBSERVATION_COMPOSITION_SPRITE_VERIFICATION_20261008_V1.json"
+      "path": "canonical/verification/POLICY_ADEQUACY_SELECTED_OBSERVATION_COMPOSITION_SPRITE_VERIFICATION_20261008_V2.json"
     },
     "current_selected_semantic_truth": {
       "path": "canonical/runtime/selected_semantic_truth_certificate_v1.py",
@@ -99,7 +99,7 @@
   ],
   "current_code_level_gap": {
     "branch_repair": "AUTHENTICATED_SYMBOLIC_POLICY_COVER_FIXED_POINT_V1_REJECTS_CALLER_SEMANTIC_FLAGS_AND_ACCEPTS_ONLY_IN_PROCESS_BRAIN_OWNED_VERIFIER_RESULTS",
-    "independent_composition": "36_OF_36_TESTS_PASS__12_EXACT_GIT_BLOBS_VERIFIED",
+    "independent_composition": "38_OF_38_TESTS_PASS__12_EXACT_GIT_BLOBS_VERIFIED__OPTIONAL_BAD_CANDIDATES_QUARANTINED",
     "real_positive_subregion": "STRICT_EXPLICIT_P2_RAW_SOURCE_TO_RECOMPUTED_MEMBERSHIP_TO_AUTHENTICATED_TOP_LAW_POLICY_WIN",
     "selected_observation_subregion": "DEFINED_TERM_RAW_TYPED_CONDITION_SELECTED_PREDICATE_TRUE_FALSE_RECOMPUTATION_COMPOSES_WITH_SYMBOLIC_BELIEF_REFINEMENT__FORGED_ID_AND_UNKNOWN_FAIL_CLOSED",
     "remaining_gap": "COVERAGE__FOR_EACH_REACHED_UNCLOSED_CONTEXT_PROVE_ONE_POSITIVE_POLICY_ADEQUACY_EDGE_OR_PROVE_THE_SINGLE_CEGAR_SELECTED_POLICY_CHANGING_PREDICATE_WITH_AN_OWNED_SOURCE_ALIGNED_PRIMITIVE__PLUS_BIND_THE_ACTUAL_AUTHORIZED_SOURCE_BYTES",
@@ -138,7 +138,7 @@
   "current_truth": {
     "conceptual_reduction_proposed": true,
     "authenticated_symbolic_fixed_point_implemented": true,
-    "independent_composition_tests_passed": 36,
+    "independent_composition_tests_passed": 38,
     "exact_git_blobs_verified_in_composition": 12,
     "strict_explicit_p2_real_positive_path_proved": true,
     "source_bound_selected_semantic_observation_composed": true,
@@ -149,7 +149,9 @@
     "current_selected_predicate_proof_coverage_scope_complete": false,
     "current_arbitrary_source_authorization_bound": false,
     "U_empty": false,
-    "terminal": false
+    "terminal": false,
+    "optional_bad_candidate_quarantine_verified": true,
+    "positive_cover_survives_irrelevant_unverified_candidates": true
   },
   "hard_nonclaims": [
     "NO_CLAIM_POLICY_ADEQUACY_IS_GLOBALLY_CLOSED_YET",
