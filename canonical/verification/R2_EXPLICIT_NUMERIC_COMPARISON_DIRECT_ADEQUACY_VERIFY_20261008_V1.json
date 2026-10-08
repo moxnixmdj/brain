@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_R2_EXPLICIT_NUMERIC_COMPARISON_DIRECT_ADEQUACY_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXPLICIT_GROUNDED_NUMERIC_COMPARISON__BRANCH_REGRESSION_24_OF_24__ACTUAL_PRODUCER_TRUE_AND_FALSE_REPLAYS_PASS__ZERO_CREDIT",
+  "subject": {
+    "family_runtime": {
+      "path": "canonical/runtime/r2_explicit_numeric_comparison_direct_adequacy_v1.py",
+      "git_blob_sha": "ad688f55d86e3d995e9f1e3851913833a453ad66"
+    },
+    "direct_router": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "b5296389bac8f1ee9fe4f1c9d0a79471dc864b1a"
+    },
+    "family_tests": {
+      "path": "canonical/tests/test_r2_explicit_numeric_comparison_direct_adequacy_v1.py",
+      "git_blob_sha": "6df1f87c1fe27b8d8e072638f12fa4f7a0cf22fb"
+    },
+    "integration_tests": {
+      "path": "canonical/tests/test_r2_explicit_numeric_comparison_direct_integration_v1.py",
+      "git_blob_sha": "ce76cb237cd52d4973aa5d263aeab329b07fdf07"
+    }
+  },
+  "admitted_semantics": {
+    "input": "ONE_REPOSITORY_LOCAL_VERIFIED_GENERIC_V2_GROUNDED_EVIDENCE_EXTRACTION",
+    "objective_binding": "EXPLICIT_BOUNDED_COMPARISON_OBJECTIVE_QUOTED_IN_RAW_GOAL",
+    "producer_capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+    "supported_operators": [
+      "GT",
+      "LT",
+      "GTE",
+      "LTE",
+      "EQ",
+      "NE",
+      "ABS_DIFF_LTE"
+    ],
+    "semantic_role_binding_authority": "INHERITED_FROM_INDEPENDENTLY_QUALIFIED_BOUNDED_PRODUCER",
+    "independent_acceptance": "RECOMPUTE_EVIDENCE_INTEGRITY_REFERENCED_NUMERIC_LITERALS_EXACT_UNIT_COMPATIBILITY_THRESHOLD_AND_DECIMAL_PREDICATE",
+    "false_predicates_are_valid_verified_outputs": true,
+    "transactional_output": true
+  },
+  "focused_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "family_plus_integration_plus_direct_router": "24_OF_24_PASS",
+    "true_predicate_preflight": "PASS",
+    "false_predicate_preflight": "PASS",
+    "unit_mismatch_negative": "PASS_FAIL_CLOSED",
+    "ambiguous_entity_binding_negative": "PASS_FAIL_CLOSED",
+    "wrong_producer_predicate_negative": "PASS_ROLLBACK"
+  },
+  "actual_producer_direct_replays": [
+    {
+      "objective": "Engine A is higher than Engine B",
+      "operator": "GT",
+      "predicate": true,
+      "left_value": "120",
+      "right_value": "90",
+      "unit": "kn",
+      "status": "PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED"
+    },
+    {
+      "objective": "Engine A is lower than Engine B",
+      "operator": "LT",
+      "predicate": false,
+      "left_value": "120",
+      "right_value": "90",
+      "unit": "kn",
+      "status": "PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED"
+    }
+  ],
+  "inherited_producer_qualification": {
+    "capability_receipt": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json",
+    "exact_producer_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+    "inherited_relation_blob": "d66a7eb30774f66160b698d8082947776888293d",
+    "public_run_id": 36686583882,
+    "authored_fail_closed_regressions": "17_OF_17_PASS",
+    "independent_full_surface_cross_domain_oracle": "PASS",
+    "verified_positive_surface": [
+      "GT",
+      "LT",
+      "GTE",
+      "LTE",
+      "EQ",
+      "NE",
+      "ABS_DIFF_LTE",
+      "FALSE_PREDICATE_PROPAGATION"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_UNDERSTANDING_AUTHORITY",
+    "NO_PARAPHRASE_OR_GENERAL_SEMANTIC_ENTAILMENT_AUTHORITY",
+    "NO_UNIT_CONVERSION_AUTHORITY",
+    "NO_FACTUAL_CORRECTNESS_CAUSALITY_EVIDENCE_QUALITY_SUFFICIENCY_OR_SOURCE_INDEPENDENCE_AUTHORITY",
+    "NO_CLAIM_THE_DIRECT_REPLAYS_USED_LIVE_EXTERNAL_SOURCES",
+    "NO_CLAIM_OPEN_WORLD_R2_COVERAGE_IS_COMPLETE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
