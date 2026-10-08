@@ -58,6 +58,43 @@ def _load_manifest(path: str | Path = MANIFEST_PATH) -> dict[str, Any]:
     return deepcopy(dict(doc))
 
 
+def _h100_owned_ids(entries: list[Mapping[str, Any]]) -> tuple[list[str], list[dict[str, Any]]]:
+    """Return stable ownership identities while preserving historical capability IDs.
+
+    Some independently verified H100 mechanisms intentionally share a historical
+    capability_id. When that occurs, route identity disambiguates the live-owned
+    mechanisms without mutating historical verification artifacts.
+    """
+    by_id: dict[str, list[Mapping[str, Any]]] = {}
+    for row in entries:
+        if not isinstance(row, Mapping):
+            raise LiveOwnershipError("H100_REGISTRY_ROW_NOT_OBJECT")
+        cid = str(row.get("capability_id") or "").strip()
+        if not cid:
+            raise LiveOwnershipError("H100_CAPABILITY_ID_INVALID")
+        by_id.setdefault(cid, []).append(row)
+
+    owned_ids: list[str] = []
+    collisions: list[dict[str, Any]] = []
+    for cid in sorted(by_id):
+        rows = by_id[cid]
+        if len(rows) == 1:
+            owned_ids.append("h100:" + cid)
+            continue
+        routes = [str(row.get("route") or "").strip() for row in rows]
+        if any(not route for route in routes) or len(set(routes)) != len(routes):
+            raise LiveOwnershipError("H100_CAPABILITY_COLLISION_NOT_DISAMBIGUATED:" + cid)
+        identities = ["h100:" + cid + "@" + route for route in sorted(routes)]
+        owned_ids.extend(identities)
+        collisions.append({
+            "capability_id": cid,
+            "row_count": len(rows),
+            "routes": sorted(routes),
+            "ownership_ids": identities,
+        })
+    return sorted(owned_ids), collisions
+
+
 def _active_skill_ids(state: Mapping[str, Any]) -> list[str]:
     out: list[str] = []
     skills = state.get("skills")
@@ -139,26 +176,20 @@ def evaluate(
     }
 
     h100_entries = list(h100_registry.REGISTRY)
-    h100_ids: list[str] = []
-    seen_h100: set[str] = set()
-    for row in h100_entries:
-        if not isinstance(row, Mapping):
-            raise LiveOwnershipError("H100_REGISTRY_ROW_NOT_OBJECT")
-        cid = str(row.get("capability_id") or "").strip()
-        if not cid or cid in seen_h100:
-            raise LiveOwnershipError("H100_CAPABILITY_ID_INVALID_OR_DUPLICATE:" + cid)
-        seen_h100.add(cid)
-        h100_ids.append("h100:" + cid)
+    h100_ids, h100_collisions = _h100_owned_ids(h100_entries)
+    for ownership_id in h100_ids:
         owned.append({
-            "capability_id": "h100:" + cid,
+            "capability_id": ownership_id,
             "provider": "H100_VERIFIED_CAPABILITIES",
             "carrier_mode": str(providers["H100_VERIFIED_CAPABILITIES"]["fabric_carrier"]),
             "carrier_kind": "VERIFIED_INFERENCE_REGISTRY",
         })
-    h100_ids.sort()
     provider_rows["H100_VERIFIED_CAPABILITIES"] = {
         "count": len(h100_ids),
+        "registry_row_count": len(h100_entries),
         "capability_ids": h100_ids,
+        "historical_id_collision_count": len(h100_collisions),
+        "historical_id_collisions": h100_collisions,
         "carrier_modes": [str(providers["H100_VERIFIED_CAPABILITIES"]["fabric_carrier"])],
     }
 
