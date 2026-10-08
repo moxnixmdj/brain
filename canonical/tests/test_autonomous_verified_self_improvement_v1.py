@@ -108,6 +108,10 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         state = loop.load_state(path)
         self.assertEqual(len(state["failures"]), 1)
         self.assertEqual(next(iter(state["failures"].values()))["count"], 2)
+        self.assertEqual(state["stats"]["pending_improvement_count"], 1)
+        next_work = loop.next_improvement_action(state_path=path)
+        self.assertEqual(next_work["kind"], "REPAIR_FAILURE_CLASS")
+        self.assertEqual(next_work["observations"], 2)
 
     def test_only_authenticated_verified_episode_is_persisted(self):
         path = self.temp_state()
@@ -127,6 +131,10 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertTrue(integrated["episode_added"])
         self.assertEqual(state["stats"]["verified_episode_count"], 1)
         self.assertEqual(len(state["episodes"]), 1)
+        self.assertEqual(
+            loop.next_improvement_action(state_path=path)["kind"],
+            "COLLECT_MATCHING_VERIFIED_EPISODE",
+        )
 
     def test_unverified_candidate_never_gets_permanent_reuse(self):
         path = self.temp_state()
@@ -147,6 +155,10 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         )
         self.assertFalse(integrated["permanent_reuse_authorized"])
         self.assertEqual(state["stats"]["verified_skill_count"], 0)
+        self.assertEqual(
+            loop.next_improvement_action(state_path=path)["kind"],
+            "VERIFY_SKILL_CANDIDATE",
+        )
 
     def test_verified_stronger_skill_pareto_replaces_dominated_variant(self):
         path = self.temp_state()
@@ -247,7 +259,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "counterexamples": [],
             "attempts": [],
         }
-        with mock.patch.object(loop.solver_v10, "run", return_value=solver_out) as run_mock:
+        with mock.patch.object(loop.solver_v12, "run", return_value=solver_out) as run_mock:
             result = loop.run_learning_episode(
                 {"task_id": "t", "initial_facts": [], "target_effects": ["goal"], "capabilities": []},
                 state_path=path,
@@ -321,7 +333,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "verified_skill_reuse_authorized": False,
             "verified_executable_skill": None,
         }
-        with mock.patch.object(loop.solver_v10, "run", return_value=solved) as run_mock:
+        with mock.patch.object(loop.solver_v12, "run", return_value=solved) as run_mock:
             out = loop.run_learning_episode(
                 self._reuse_problem(),
                 state_path=path,
@@ -367,7 +379,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "verified_executable_skill": None,
         }
         with mock.patch.object(
-            loop.solver_v10, "run", side_effect=[failed, solved]
+            loop.solver_v12, "run", side_effect=[failed, solved]
         ) as run_mock:
             out = loop.run_learning_episode(
                 self._reuse_problem(),
@@ -406,7 +418,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "counterexamples": [],
             "attempts": [],
         }
-        with mock.patch.object(loop.solver_v10, "run", return_value=failed) as run_mock:
+        with mock.patch.object(loop.solver_v12, "run", return_value=failed) as run_mock:
             out = loop.run_learning_episode(
                 self._reuse_problem(),
                 state_path=path,
@@ -424,6 +436,33 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertEqual(run_mock.call_count, 1)
         state = loop.load_state(path)
         self.assertEqual(state["reuse"][sid]["effectful_failures"], 1)
+        self.assertFalse(state["skills"][sid]["active"])
+        self.assertTrue(state["skills"][sid]["quarantined"])
+        self.assertNotIn(sid, state["pareto_frontiers"][state["skills"][sid]["family_id"]])
+        self.assertEqual(
+            loop.next_improvement_action(state_path=path)["kind"],
+            "REVERIFY_QUARANTINED_SKILL",
+        )
+
+    def test_plain_success_is_retained_as_adapter_work_without_promotion(self):
+        path = self.temp_state()
+        result = loop.record_success_observation(
+            {"pass": True, "schema": "X", "status": "PASS", "value": 7},
+            surface="TEST_SURFACE",
+            state_path=path,
+        )
+        self.assertEqual(
+            result["status"],
+            "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
+        )
+        self.assertFalse(result["permanent_reuse_authorized"])
+        state = loop.load_state(path)
+        self.assertEqual(state["stats"]["success_observation_count"], 1)
+        self.assertEqual(state["stats"]["pending_improvement_count"], 1)
+        self.assertEqual(
+            loop.next_improvement_action(state_path=path)["kind"],
+            "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+        )
 
 
 if __name__ == "__main__":
