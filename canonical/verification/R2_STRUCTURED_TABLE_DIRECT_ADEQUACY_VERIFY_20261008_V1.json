@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_R2_STRUCTURED_TABLE_DIRECT_ADEQUACY_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_CURRENT_RUNTIME_BYTES__FOCUSED_REMOTE_REPLAY_10_OF_10__ZERO_CREDIT",
+  "subject": {
+    "merge_commit": "d5245d72db387d3c488cf67d65fbff0a675db096",
+    "direct_runtime": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "4da3aade6ee049f5a0fd0bf942deb183e276368d"
+    },
+    "structured_table_runtime": {
+      "path": "canonical/runtime/r2_structured_table_direct_adequacy_v1.py",
+      "git_blob_sha": "2db9a7b10fab4410e08f8f59a8f414817b4f51c3"
+    },
+    "family_tests": {
+      "path": "canonical/tests/test_r2_structured_table_direct_adequacy_v1.py",
+      "git_blob_sha": "8e2bdbc09fecaa7e45f7842b0b1184874dd03978"
+    },
+    "integration_tests": {
+      "path": "canonical/tests/test_r2_structured_table_direct_integration_v1.py",
+      "git_blob_sha": "cdc242bf3af85bcd23e8142e307087b6cf825060"
+    }
+  },
+  "replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "suite": [
+      "canonical.tests.test_r2_structured_table_direct_adequacy_v1",
+      "canonical.tests.test_r2_structured_table_direct_integration_v1"
+    ],
+    "result": "10_OF_10_PASS",
+    "dependency_sync_note": "The warm verifier predated newer current-main dependency modules. Only exact current-main dependency bytes required to import the current runtime surface were synchronized before replay.",
+    "fresh_isolated_carrier_claimed": false
+  },
+  "proved": [
+    "EXACT_XLSX_JSON_RECORDS_FAMILY_PREFLIGHT_IS_SIDE_EFFECT_FREE_AND_BINDS_VERIFIED_PRODUCER_AND_PRODUCER_INDEPENDENT_VERIFIER",
+    "EXACT_SQLITE_JSON_RECORDS_FAMILY_PREFLIGHT_IS_SIDE_EFFECT_FREE_AND_BINDS_VERIFIED_PRODUCER_AND_PRODUCER_INDEPENDENT_VERIFIER",
+    "MATCHED_FAMILY_FAILURE_ROLLS_BACK_THE_SINGLE_DECLARED_REPOSITORY_LOCAL_OUTPUT",
+    "SOURCE_JSON_BYTES_ARE_SHA256_BOUND_BEFORE_EXECUTION_AND_MUTATION_FAILS_CLOSED",
+    "SUCCESS_REQUIRES_PRODUCER_INDEPENDENT_SEMANTIC_READBACK_AGAINST_THE_CANONICAL_JSON_SOURCE",
+    "SUCCESS_ACCEPTS_EVERY_LOSSLESS_RAW_OBLIGATION",
+    "MATCHED_FAMILY_FAILURE_CANNOT_FALL_THROUGH_TO_CODEC_DOCX_DOCX_JSON_OR_LEGACY_DIRECT_EXECUTION",
+    "CURRENT_V14_DOCX_AND_DOCX_JSON_DIRECT_ROUTES_ARE_PRESERVED"
+  ],
+  "coverage_delta": {
+    "new_direct_route": "DIRECT_ADEQUACY::STRUCTURED_TABLE_ARTIFACT_FAMILY_V1",
+    "new_verified_formats": ["xlsx", "sqlite"],
+    "global_open_world_coverage_complete": false,
+    "general_control_mechanism_missing": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_NATURAL_LANGUAGE_SEMANTIC_CLOSURE",
+    "NO_CLAIM_THE_TABLE_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_GRAMMARS",
+    "NO_CLAIM_EXTERNAL_OR_IRREVERSIBLE_EFFECT_AUTHORITY",
+    "NO_CLAIM_FRESH_ISOLATED_CARRIER_REPLAY",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
