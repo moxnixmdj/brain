@@ -36,12 +36,20 @@
     ".github/workflows/r3-autonomous-self-improvement-v1.yml": "b78b265704534fe2df6c0e5a1a27963df2c6ca09"
   },
   "independent_execution_evidence": {
-    "exact_queue_driver_public_runner_receipt": "canonical/verification/R3_QUEUE_DRIVER_PUBLIC_RUNNER_VERIFICATION_20261008_V1.json",
-    "public_run_id": 37770735506,
-    "public_job_id": 113289392228,
+    "exact_queue_driver_public_runner_receipt": "canonical/verification/R3_QUEUE_DRIVER_PUBLIC_RUNNER_VERIFICATION_20261008_V2.json",
+    "public_run_id": 37774433958,
+    "public_job_id": 113301634144,
     "public_conclusion": "success",
-    "exact_verified_driver_blob": "1a049b263856f52687bdf22010640c3fdbd67c8b",
-    "limitation": "PUBLIC_RECEIPT_VERIFIES_THE_EARLIER_QUEUE_DRIVER_CONTROL_FLOW_BLOB; SUBSEQUENT_LIVE_BLOB_EXTENSIONS_REQUIRE_FRESH_FULL_PRIVATE_OR_DISCLOSABLE_CAPSULE_EXECUTION"
+    "exact_verified_driver_blob": "b548f07b36ed5bf0a3495635046a26049df24f33",
+    "verified_properties": [
+      "exact_current_source_compile",
+      "evidence_bound_verifier_backoff",
+      "same_evidence_no_retry",
+      "new_evidence_retry",
+      "failed_repair_no_starvation",
+      "event_wait_no_false_progress"
+    ],
+    "limitation": "FRESH_PUBLIC_RECEIPT_VERIFIES_THE_CURRENT_QUEUE_DRIVER_CONTROL_FLOW_BLOB; FULL_PRIVATE_FABRIC_EXECUTION_AND_CONFIDENTIAL_EPISODE_VERIFICATION_REMAIN_SEPARATE_AUTHORITIES"
   },
   "latest_private_carrier_attempts": [
     {
