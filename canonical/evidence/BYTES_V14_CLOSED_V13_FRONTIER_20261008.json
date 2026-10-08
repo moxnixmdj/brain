@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V14_CLOSED_V13_FRONTIER",
+  "date": "2026-10-08",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "status": "PASS_EXACT_GIT_BLOB_REPLAY",
+  "source": {
+    "path": "canonical/runtime/bytes_v14_single_artifact_closed_v13.py",
+    "git_blob_sha": "b1c2850dd67f8c56f2e5f2baff1c14e4db065bef",
+    "raw_sha256": "e00dd2e282be92b8ec3101695dfe9a5eea80be88161eedb5914537f046f3c0e6",
+    "raw_bytes": 5947
+  },
+  "encoding": {
+    "format": "RAW_LZMA1",
+    "dictionary": 8192,
+    "lc": 0,
+    "lp": 0,
+    "pb": 0,
+    "mode": "NORMAL",
+    "match_finder": "BT2",
+    "nice_len": 32,
+    "bytes": 2615,
+    "sha256": "047dbd01f811acccf025256dc8aeaa604cbf846b2c18d590ef96efd24573438a",
+    "tested_configurations": 2700,
+    "roundtrip_exact": true
+  },
+  "comparison": {
+    "canonical_v12_bytes": 2727,
+    "candidate_v13_bytes": 2615,
+    "savings_bytes": 112
+  },
+  "verified": {
+    "closed_proof": "PASS",
+    "full_edge_basis_exact_match": true,
+    "expression_cases": 6,
+    "scalar_cases": 9,
+    "sequence_cases": 12,
+    "regressions_passed": 27,
+    "differential": {
+      "scalar_ops": 3133,
+      "binary_ops": 6748,
+      "list_ops": 2240,
+      "composed_programs": 640,
+      "symbolic_signatures": 820
+    }
+  },
+  "boundaries": [
+    "DOES_NOT_COUNT_PYTHON_INTERPRETER_OR_LZMA_DECODER",
+    "DECLARED_FROZEN_OPERATOR_CLOSURE_ONLY",
+    "NO_GLOBAL_MINIMUM_DESCRIPTION_PROOF",
+    "NO_TERMINAL_GOAL_CREDIT"
+  ]
+}
