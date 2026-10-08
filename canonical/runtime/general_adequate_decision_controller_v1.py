@@ -1248,6 +1248,9 @@ def run(
                         cover_observation_bindings[discriminator_id] = (
                             candidate_binding
                         )
+
+                    if isinstance(decision, Mapping) and decision.get("pass") is True:
+                        break
                 policy_gap = _extract_policy_gap(decision)
                 if policy_gap is not None:
                     policy_request = {
