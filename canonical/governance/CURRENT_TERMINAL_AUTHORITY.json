@@ -1213,8 +1213,8 @@
     "instruction_following_family_ownership_closed": true,
     "if_scope_boundary_noninferior_proved": true,
     "if_zero_critical_authority_violations_proved": true,
-    "scheduler_aligned_to_frozen_19_family_root": false,
-    "primary_scheduler_targets_open_frozen_atoms": false,
+    "scheduler_aligned_to_frozen_19_family_root": true,
+    "primary_scheduler_targets_open_frozen_atoms": true,
     "open_atomic_acceptance_predicates": 20,
     "primary_acceptance_proof_engine_count": 3,
     "primary_acceptance_proof_engines": [
@@ -1396,7 +1396,9 @@
     "r2_open_world_positive_action_coverage_complete": false,
     "r2_decisive_unobservable_reality_requires_abstention_or_information_acquisition": true,
     "r2_live_decision_control_law_totalized": true,
-    "r2_fixed_point_native_control_policy_total": true
+    "r2_fixed_point_native_control_policy_total": true,
+    "primary_scheduler_load_bearing_gate_active": true,
+    "primary_scheduler_goal_velocity_objective": "MAXIMIZE_EXPECTED_INDEPENDENT_LOAD_BEARING_OBLIGATION_DISCHARGE_OR_UNLOCK_PER_WALL_CLOCK"
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -1878,7 +1880,7 @@
     "terminal_credit_delta": 0
   },
   "capability_first_scheduler_20261008_v1": {
-    "status": "ACTIVE_PRIMARY_CAPABILITY_DEVELOPMENT_SCHEDULER",
+    "status": "SUPERSEDED_BY_LOAD_BEARING_GOAL_VELOCITY_V2",
     "governance": {
       "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V1.json"
     },
@@ -1896,7 +1898,8 @@
       "invariant": "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
       "physical_deletion_authority_from_scheduler": false,
       "reextract_on_new_cost_model": true
-    }
+    },
+    "superseded_by": "capability_first_scheduler_20261008_v2"
   },
   "live_capability_ownership_20261008_v1": {
     "status": "ACTIVE_AUTHORITATIVE_LIVE_OWNERSHIP_ONTOLOGY__UNIVERSAL_INVOCATION_INVARIANT",
@@ -2085,5 +2088,28 @@
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA"
   },
-  "pointer_revision": 44
+  "pointer_revision": 45,
+  "capability_first_scheduler_20261008_v2": {
+    "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
+    "governance": {
+      "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V2.json",
+      "git_blob_sha": "52e125eae3fdcd099a5b563c6ef64954c2af2850"
+    },
+    "runtime": {
+      "path": "canonical/runtime/capability_first_scheduler_v1.py",
+      "git_blob_sha": "b6878df39fc22813b93f5c35a2db36cd4297441d",
+      "entrypoint": "rank_live_work"
+    },
+    "verification": {
+      "path": "canonical/verification/LOAD_BEARING_PRIMARY_SCHEDULER_VERIFY_20261008_V2.json"
+    },
+    "authority_source": "live_truth.independent_open_acceptance_obligations",
+    "active_open_obligation_count": 13,
+    "primary_admission_rule": "OPEN_OBLIGATIONS_GT_ZERO_REQUIRES_LOAD_BEARING_PRIMARY_LANE_PLUS_EXPLICIT_CAUSAL_PATH_PLUS_POSITIVE_EXPECTED_DISCHARGE_OR_UNLOCK_YIELD",
+    "ranking_rule": "(EXPECTED_OBLIGATION_DISCHARGE_LCB+EXPECTED_OBLIGATION_UNLOCK_LCB)*SUCCESS_PROBABILITY_LCB/WALL_CLOCK_COST_UB",
+    "generic_capability_work_while_open": "DEMOTED_UNLESS_LOAD_BEARING",
+    "post_checkpoint_rule": "REVERT_TO_REUSABLE_VERIFIED_CAPABILITY_RESOURCE_PARETO_OPTIMIZATION",
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  }
 }
