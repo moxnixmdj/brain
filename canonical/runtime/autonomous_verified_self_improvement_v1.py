@@ -732,6 +732,7 @@ def advance_verification_queue(
                     "verified_skill_reuse_authorized": True,
                 },
                 state_path=state_path,
+                repo_root=repo_root,
             )
             completed += 1
             results.append({
@@ -2020,6 +2021,7 @@ def run_learning_episode(
             integrated = integrate_solver_output(
                 reuse_out,
                 state_path=state_path,
+                repo_root=repo_root,
                 retry_context=retry_context,
                 verification_problem=learned_problem,
             )
@@ -2069,6 +2071,7 @@ def run_learning_episode(
     integrated = integrate_solver_output(
         out,
         state_path=state_path,
+        repo_root=repo_root,
         retry_context=retry_context,
         verification_problem=problem,
     )
