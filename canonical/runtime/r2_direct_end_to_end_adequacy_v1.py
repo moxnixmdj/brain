@@ -26,6 +26,7 @@ from canonical.runtime import r2_typed_decision_direct_adequacy_v1 as typed_deci
 from canonical.runtime import r2_visual_code_direct_adequacy_v1 as visual_code_adequacy
 from canonical.runtime import r2_markdown_pdf_direct_adequacy_v1 as markdown_pdf_adequacy
 from canonical.runtime import r2_typed_json_transform_direct_adequacy_v1 as typed_json_transform_adequacy
+from canonical.runtime import r2_http_json_observation_direct_adequacy_v1 as http_json_observation_adequacy
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -41,6 +42,7 @@ TYPED_DECISION_ROUTE_ID = "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1"
 VISUAL_CODE_ROUTE_ID = "DIRECT_ADEQUACY::VISUAL_CODE_QR_CODE128_FAMILY_V1"
 MARKDOWN_PDF_ROUTE_ID = "DIRECT_ADEQUACY::PLAIN_MARKDOWN_PDF_FAMILY_V1"
 TYPED_JSON_TRANSFORM_ROUTE_ID = "DIRECT_ADEQUACY::TYPED_JSON_TRANSFORM_FAMILY_V1"
+HTTP_JSON_OBSERVATION_ROUTE_ID = "DIRECT_ADEQUACY::STATE_KEYED_HTTPS_JSON_OBSERVATION_FAMILY_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -105,6 +107,13 @@ ROUTES = {
         "preflight": "r2_typed_json_transform_direct_adequacy_v1.preflight",
         "executor": "r2_typed_json_transform_direct_adequacy_v1.run",
         "acceptance": "PRODUCER_INDEPENDENT_PYTHON_STDLIB_FULL_TRANSFORM_RECOMPUTATION",
+    },
+    HTTP_JSON_OBSERVATION_ROUTE_ID: {
+        "capability_id": "http.json.fetch_from_state",
+        "scope": "EXACT_STATE_KEYED_READ_ONLY_HTTPS_JSON_OBSERVATION",
+        "preflight": "r2_http_json_observation_direct_adequacy_v1.preflight",
+        "executor": "r2_http_json_observation_direct_adequacy_v1.run",
+        "acceptance": "PRODUCER_INDEPENDENT_CURL_REFETCH_PARSED_JSON_SEMANTIC_EQUALITY",
     },
     VISUAL_CODE_ROUTE_ID: {
         "capability_id": "DYNAMIC_VERIFIED_BOUND_VISUAL_CODE_PRODUCER",
@@ -188,6 +197,29 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "output_path": literal_json["output_path"],
             "records_sha256": literal_json["records_sha256"],
             "semantic_scope": ROUTES[LITERAL_JSON_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
+    http_json_observation = http_json_observation_adequacy.preflight(request)
+    if http_json_observation.get("matched") is True:
+        if http_json_observation.get("status") == "FAIL_CLOSED":
+            return {
+                **_base("FAIL_CLOSED", passed=False),
+                "matched": True,
+                "route_id": HTTP_JSON_OBSERVATION_ROUTE_ID,
+                "reason": http_json_observation.get("reason"),
+            }
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": HTTP_JSON_OBSERVATION_ROUTE_ID,
+            "capability_id": http_json_observation.get("capability_id"),
+            "policy_id": http_json_observation.get("policy_id"),
+            "goal_sha256": http_json_observation.get("goal_sha256"),
+            "state_path": http_json_observation.get("state_path"),
+            "url_key": http_json_observation.get("url_key"),
+            "output_path": http_json_observation.get("output_path"),
+            "semantic_scope": ROUTES[HTTP_JSON_OBSERVATION_ROUTE_ID]["scope"],
             "preflight_execution_authority": False,
         }
 
@@ -383,6 +415,52 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
     pf = preflight(request)
     if pf.get("matched") is not True:
         return pf
+
+    if pf["route_id"] == HTTP_JSON_OBSERVATION_ROUTE_ID:
+        observation_result = http_json_observation_adequacy.run(request)
+        if observation_result.get("pass") is not True:
+            return {
+                **_base(
+                    str(
+                        observation_result.get("status")
+                        or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"
+                    ),
+                    passed=False,
+                ),
+                "matched": True,
+                "route_id": pf["route_id"],
+                "capability_id": pf.get("capability_id"),
+                "goal_sha256": pf.get("goal_sha256"),
+                "execution_attempted": True,
+                "retry_by_other_route_authorized": False,
+                "http_json_observation_adequacy": deepcopy(dict(observation_result)),
+                "reason": observation_result.get("reason"),
+            }
+        return {
+            **_base("PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED", passed=True),
+            "matched": True,
+            "route_id": pf["route_id"],
+            "capability_id": observation_result.get("capability_id"),
+            "selected_policy_id": observation_result.get("selected_policy_id"),
+            "goal_sha256": observation_result.get("goal_sha256"),
+            "semantic_scope": pf["semantic_scope"],
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "accepted_raw_obligation_ids": list(
+                observation_result.get("accepted_raw_obligation_ids") or []
+            ),
+            "raw_acceptance_obligation_count": observation_result.get(
+                "raw_acceptance_obligation_count"
+            ),
+            "acceptance_receipt": deepcopy(
+                dict(observation_result.get("acceptance_receipt") or {})
+            ),
+            "raw_result": deepcopy(dict(observation_result)),
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "authority_boundary": observation_result.get("authority_boundary"),
+        }
 
     if pf["route_id"] == TYPED_JSON_TRANSFORM_ROUTE_ID:
         transform_result = typed_json_transform_adequacy.run(request)
