@@ -195,11 +195,11 @@ def _park_success_work(
 def _reactivate_parked_successes(
     *,
     state_path: str | Path,
-    repo_root: str | Path,
+    frontier_root: str | Path,
     external_authority_available: bool,
 ) -> dict[str, Any]:
-    """Reopen parked success work when its evidence/verifier boundary changes."""
-    frontier = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    """Reopen parked success work when its owned verifier-code frontier changes."""
+    frontier = _owned_success_learning_frontier_sha256(repo_root=frontier_root)
     state = learning.load_state(state_path)
     queue = state.get("improvement_queue", {})
     reopened: list[str] = []
@@ -682,7 +682,7 @@ def _frontier_acquisition_attempt_consumed(
     work: Mapping[str, Any],
     *,
     provider_id: str,
-    repo_root: str | Path,
+    frontier_root: str | Path,
 ) -> bool:
     """Back off only for the same provider identity and unchanged owned frontier."""
     if str(work.get("kind") or "") != FRONTIER_EXPANSION_KIND:
@@ -694,7 +694,7 @@ def _frontier_acquisition_attempt_consumed(
         return False
     if str(work.get("last_attempt_provider_id") or "") != provider_id:
         return False
-    current = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    current = _owned_success_learning_frontier_sha256(repo_root=frontier_root)
     return str(work.get("last_attempt_frontier_sha256") or "") == current
 
 
@@ -728,7 +728,7 @@ def _execute_frontier_acquisition(
     work: Mapping[str, Any],
     *,
     state_path: str | Path,
-    repo_root: str | Path,
+    frontier_root: str | Path,
     provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None],
     provider_id: str,
 ) -> dict[str, Any]:
@@ -736,7 +736,7 @@ def _execute_frontier_acquisition(
     if not isinstance(payload, Mapping):
         raise ImprovementDriverError("FRONTIER_EXPANSION_PAYLOAD_INVALID")
     wid = str(work.get("work_id") or "").strip()
-    before = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    before = _owned_success_learning_frontier_sha256(repo_root=frontier_root)
     request = {
         "kind": FRONTIER_EXPANSION_KIND,
         "improvement_work_id": wid,
@@ -771,7 +771,7 @@ def _execute_frontier_acquisition(
             "terminal_authority": False,
         }
 
-    after = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    after = _owned_success_learning_frontier_sha256(repo_root=frontier_root)
     if after == before:
         status = "FRONTIER_ACQUISITION_DID_NOT_CHANGE_OWNED_VERIFICATION_FRONTIER"
         reason = str(result.get("reason") or result.get("status") or status)
@@ -798,7 +798,7 @@ def _execute_frontier_acquisition(
 
     reactivation = _reactivate_parked_successes(
         state_path=state_path,
-        repo_root=repo_root,
+        frontier_root=frontier_root,
         external_authority_available=False,
     )
     blocked = str(payload.get("blocked_success_work_id") or "")
@@ -851,6 +851,7 @@ def advance_once(
     *,
     state_path: str | Path = learning.DEFAULT_STATE_PATH,
     repo_root: str | Path = ROOT,
+    frontier_root: str | Path = ROOT,
     episode_verification_provider=None,
     skill_verification_provider=None,
     success_episode_adapter_provider=None,
@@ -867,7 +868,7 @@ def advance_once(
     external_success_adapter = success_episode_adapter_provider is not None
     reactivation = _reactivate_parked_successes(
         state_path=state_path,
-        repo_root=repo_root,
+        frontier_root=frontier_root,
         external_authority_available=(
             external_episode_verifier or external_success_adapter
         ),
@@ -923,7 +924,7 @@ def advance_once(
         if _frontier_acquisition_attempt_consumed(
             work,
             provider_id=verification_frontier_acquisition_provider_id,
-            repo_root=repo_root,
+            frontier_root=frontier_root,
         ):
             blockers.append({
                 "work_id": wid,
@@ -1171,7 +1172,7 @@ def advance_once(
                 out = _execute_frontier_acquisition(
                     work,
                     state_path=state_path,
-                    repo_root=repo_root,
+                    frontier_root=frontier_root,
                     provider=verification_frontier_acquisition_provider,
                     provider_id=verification_frontier_acquisition_provider_id,
                 )
@@ -1220,6 +1221,7 @@ def drain(
     *,
     state_path: str | Path = learning.DEFAULT_STATE_PATH,
     repo_root: str | Path = ROOT,
+    frontier_root: str | Path = ROOT,
     episode_verification_provider=None,
     skill_verification_provider=None,
     success_episode_adapter_provider=None,
@@ -1239,6 +1241,7 @@ def drain(
         result = advance_once(
             state_path=state_path,
             repo_root=repo_root,
+            frontier_root=frontier_root,
             episode_verification_provider=episode_verification_provider,
             skill_verification_provider=skill_verification_provider,
             success_episode_adapter_provider=success_episode_adapter_provider,
