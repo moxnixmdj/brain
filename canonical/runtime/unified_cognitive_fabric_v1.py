@@ -22,6 +22,7 @@ from canonical.runtime import capability_first_scheduler_v1 as capability_schedu
 from canonical.runtime.brain_owned_python_closure_census_v1 import census as closure_census
 from canonical.runtime.current_authority_runtime_census_v1 import run as authority_runtime_census
 from canonical.runtime import live_capability_ownership_v1 as live_ownership
+from canonical.runtime import live_capability_invoker_v1 as live_invoker
 from canonical.runtime import universal_escape_resolver_v1 as universal_escape
 from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
 from canonical.runtime import terminal_autopilot_v1 as terminal_autopilot
@@ -51,6 +52,7 @@ ENGINE_DESCRIPTORS = {
     "TERMINAL_ROOT": "terminal_root_decision_gate_v1.evaluate",
     "TERMINAL_CLOSURE": "terminal_closure_reducer",
     "OWNERSHIP_CATALOG": "live_capability_ownership_v1.evaluate",
+    "LIVE_CAPABILITY": "live_capability_invoker_v1.invoke",
 }
 
 KNOWN_R1_RESIDUALS: tuple[str, ...] = ()
@@ -67,6 +69,9 @@ class CognitiveFabricError(ValueError):
 def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
     """Select only structurally unambiguous fabric routes; otherwise fail closed."""
     keys = set(payload)
+
+    if {"capability_id", "capability_payload"} <= keys:
+        return "LIVE_CAPABILITY"
 
     if {"capability_id", "inputs"} <= keys:
         return "BOUND_CAPABILITY"
@@ -135,6 +140,9 @@ def catalog() -> dict[str, Any]:
     )
     authority_census = authority_runtime_census(ROOT)
     ownership = live_ownership.evaluate(ENGINE_DESCRIPTORS)
+    invocation = live_invoker.coverage(ownership["live_owned_capability_ids"])
+    r1_closed = bool(ownership["r1_structural_closure"] and invocation["pass"])
+    r1_residuals = [] if r1_closed else ["LIVE_OWNED_CAPABILITY_UNIVERSAL_INVOCATION_COVERAGE_GAP"]
     return {
         "schema": SCHEMA,
         "status": "LIVE_FEDERATED_COGNITIVE_FABRIC",
@@ -162,8 +170,11 @@ def catalog() -> dict[str, Any]:
         "live_owned_capability_ids": ownership["live_owned_capability_ids"],
         "live_owned_equals_fabric_reachable": ownership["live_owned_equals_fabric_reachable"],
         "current_live_ownership_ontology_complete": ownership["provider_coverage_complete"],
-        "r1_structural_closure": ownership["r1_structural_closure"],
-        "known_r1_residuals": list(KNOWN_R1_RESIDUALS),
+        "live_capability_invocation_coverage": invocation,
+        "all_live_owned_capabilities_universally_invocable": invocation["pass"],
+        "r1_structural_closure": r1_closed,
+        "known_r1_residuals": r1_residuals,
+        "known_unified_fabric_residuals": r1_residuals,
         "cross_root_boundaries": list(CROSS_ROOT_BOUNDARIES),
         "single_front_door": True,
         "all_historical_brain_capabilities_unified": False,
@@ -356,6 +367,46 @@ def run(
                 raise CognitiveFabricError("TERMINAL_CLOSURE_OPERATION_INVALID:" + operation)
         elif mode == "OWNERSHIP_CATALOG":
             out = live_ownership.evaluate(ENGINE_DESCRIPTORS)
+        elif mode == "LIVE_CAPABILITY":
+            capability_id = str(payload.get("capability_id") or "").strip()
+            capability_payload = payload.get("capability_payload")
+            if not capability_id:
+                raise CognitiveFabricError("LIVE_CAPABILITY_ID_REQUIRED")
+            if not isinstance(capability_payload, Mapping):
+                raise CognitiveFabricError("LIVE_CAPABILITY_PAYLOAD_NOT_OBJECT")
+            depth = int(options.get("__live_capability_depth", 0))
+            if depth >= 8:
+                raise CognitiveFabricError("LIVE_CAPABILITY_RECURSION_LIMIT")
+
+            def _engine_runner(
+                target_mode: str,
+                target_payload: Mapping[str, Any],
+                target_options: Mapping[str, Any],
+            ) -> Mapping[str, Any]:
+                nested_options = dict(target_options)
+                nested_options["__live_capability_depth"] = depth + 1
+                return run(
+                    {
+                        "mode": target_mode,
+                        "payload": dict(target_payload),
+                        "options": nested_options,
+                    },
+                    information_provider=information_provider,
+                    proposal_provider=proposal_provider,
+                    capability_expander=capability_expander,
+                )
+
+            invoker_options = dict(options)
+            if proposal_provider is not None:
+                invoker_options["proposal_provider"] = proposal_provider
+            if capability_expander is not None:
+                invoker_options["capability_expander"] = capability_expander
+            out = live_invoker.invoke(
+                capability_id,
+                capability_payload,
+                engine_runner=_engine_runner,
+                options=invoker_options,
+            )
         elif mode == "LEARNING_EPISODE":
             out = self_improvement.run_learning_episode(
                 payload,
