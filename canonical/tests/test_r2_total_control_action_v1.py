@@ -13,10 +13,28 @@ class R2TotalControlActionV1Tests(unittest.TestCase):
             "actual_goal_satisfaction_verified": True,
             "action": {"kind": "DO_X"},
         })
-        self.assertEqual(out["kind"], "VERIFIED_DOMAIN_ACTION")
+        self.assertEqual(out["kind"], "COMPLETE_VERIFIED_GOAL")
         self.assertTrue(out["classification_complete"])
         self.assertTrue(out["domain_goal_satisfaction_verified"])
         self.assertFalse(out["semantic_truth_authority"])
+        self.assertFalse(out["execute_domain_action"])
+        self.assertTrue(out["verified_result_available"])
+        self.assertEqual(out["verified_result"], {"kind": "DO_X"})
+
+    def test_verified_direct_route_completes_without_reexecuting_raw_result(self):
+        raw = {"pass": True, "response": "READY_42"}
+        out = total.compile_next_action({
+            "pass": True,
+            "status": "PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED",
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "raw_result": raw,
+        })
+        self.assertEqual(out["kind"], "COMPLETE_VERIFIED_GOAL")
+        self.assertFalse(out["execute_domain_action"])
+        self.assertTrue(out["verified_result_available"])
+        self.assertEqual(out["verified_result"], raw)
+        self.assertFalse(out["requires_reverification"])
 
     def test_pass_without_acceptance_does_not_become_success(self):
         out = total.compile_next_action({
