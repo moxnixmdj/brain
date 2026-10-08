@@ -4927,6 +4927,65 @@ def _compile_domain_free_authority_source_goal(goal,clauses,registry,root):
 
 
 
+
+def _compile_exact_markdown_pdf_goal(goal, registry, root):
+    """Bind the exact repository-local Markdown-to-PDF conversion family.
+
+    Generic token scoring sees the output PDF path and can prefer PDF readers.
+    This exact compiler resolves only the unambiguous conversion grammar and
+    requires the already-verified Pandoc+WeasyPrint producer.
+    """
+    text=" ".join(str(goal or "").strip().split())
+    match=re.fullmatch(
+        r"Convert (?P<markdown>canonical/[A-Za-z0-9_.\-/]+\.(?:md|markdown)) "
+        r"to (?P<output>canonical/[A-Za-z0-9_.\-/]+\.pdf)\.?",
+        text,
+        re.IGNORECASE,
+    )
+    if match is None:
+        return None
+    cid="document.convert.markdown_pdf.pandoc_weasyprint"
+    entry=(registry or {}).get(cid)
+    if (
+        not isinstance(entry,dict)
+        or entry.get("status")!="VERIFIED_BOUND_CAPABILITY"
+        or str(entry.get("adapter_module") or "")!="pandoc_weasyprint"
+        or not isinstance(entry.get("action_template"),dict)
+    ):
+        raise GoalCompilationFailure("MARKDOWN_PDF_VERIFIED_PRODUCER_REQUIRED")
+    root_path=pathlib.Path(root).resolve()
+    markdown=match.group("markdown")
+    output=match.group("output")
+    src=(root_path/markdown).resolve()
+    dst=(root_path/output).resolve()
+    try:
+        src.relative_to(root_path)
+        dst.relative_to(root_path)
+    except ValueError as exc:
+        raise GoalCompilationFailure("MARKDOWN_PDF_PATH_OUTSIDE_REPOSITORY") from exc
+    if not src.is_file():
+        raise GoalCompilationFailure("MARKDOWN_PDF_SOURCE_MISSING",markdown)
+    if src == dst:
+        raise GoalCompilationFailure("MARKDOWN_PDF_INPUT_OUTPUT_COLLISION")
+    inputs={"markdown_path":markdown,"output_path":output}
+    return {
+        "schema":"PROJECT_BRAIN_COMPILED_CAPABILITY_PROBLEM_V1",
+        "compiler_mode":"DETERMINISTIC_EXACT_MARKDOWN_PDF_CONVERSION",
+        "selected_capability":cid,
+        "score":1000,
+        "match_evidence":{
+            "exact_grammar":"REPOSITORY_LOCAL_MARKDOWN_TO_PDF_V1",
+            "source_exists":True,
+            "producer_adapter":"pandoc_weasyprint",
+        },
+        "inputs":inputs,
+        "initial_facts":list(entry.get("requires") or []),
+        "target_effects":list(entry.get("provides") or []),
+        "capabilities":[],
+        "finish_summary":"PLAIN_GOAL_COMPLETE",
+    }
+
+
 def _compile_exact_literal_response_goal(goal):
     """Lower a strict exact-literal response instruction to one native finish action.
 
@@ -5011,6 +5070,9 @@ def compile_goal(goal, registry, root):
     literal_json=_compile_literal_json_goal(goal,root)
     if literal_json is not None:
         return _validate_compiled_clause_coverage(literal_json)
+    markdown_pdf=_compile_exact_markdown_pdf_goal(goal,registry,root)
+    if markdown_pdf is not None:
+        return _validate_compiled_clause_coverage(markdown_pdf)
     browser_interaction=_compile_verified_browser_interaction(goal,registry,root)
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
