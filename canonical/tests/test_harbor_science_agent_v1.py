@@ -15,8 +15,10 @@ class Receipt:
 class Env:
     def __init__(self):
         self.commands=[]
+        self.calls=[]
     async def exec(self, command, timeout_sec=None, **kwargs):
         self.commands.append(command)
+        self.calls.append((command,timeout_sec))
         if command == "verify-bad":
             return Receipt(1, "", "bad")
         if command == "work-heredoc-warning":
@@ -327,6 +329,114 @@ class ScienceAgentTests(unittest.TestCase):
         }
         out=source_gate(route)
         self.assertTrue(out["pass"],out)
+
+    def test_lossless_prompt_quotient_uses_exact_goal_spans_without_duplicate_text(self):
+        goal="Create alpha. Create beta."
+        contract,localized,rows=s._compile_lossless_task_scope(goal)
+        self.assertTrue(contract["pass"],contract)
+        self.assertTrue(localized["pass"],localized)
+        self.assertTrue(rows)
+        self.assertTrue(all("text" not in row for row in rows))
+        for row in rows:
+            start,end=row["span"]
+            self.assertTrue(goal[start:end].strip())
+            self.assertEqual(
+                __import__("hashlib").sha256(goal[start:end].encode("utf-8")).hexdigest(),
+                row["segment_sha256"],
+            )
+
+    def test_one_plan_executes_multiple_nonredundant_actions_without_replanning(self):
+        env=Env()
+        calls=[]
+        def one_plan(prompt,timeout_s=20):
+            calls.append(prompt)
+            return {
+                "text":json.dumps({
+                    "material_requirements":["R1","R2"],
+                    "candidates":[
+                        {"action_id":"A1","covers":["R1"],"command":"echo one","verify_command":"echo verify-one"},
+                        {"action_id":"A2","covers":["R2"],"command":"echo two","verify_command":"echo verify-two"},
+                    ],
+                }),
+                "model":"synthetic-fixed-substrate",
+            }
+        with patch.object(s.science_planner,"plan",one_plan):
+            result=asyncio.run(s.run_science_goal("synthetic science goal",env,max_cycles=1))
+        self.assertEqual(len(calls),1)
+        self.assertEqual(
+            env.commands,
+            ["echo one","echo verify-one","echo two","echo verify-two"],
+        )
+        self.assertEqual(result["resolved_requirements"],["R1","R2"])
+        self.assertEqual(result["status"],"SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER")
+
+    def test_multi_action_dependencies_are_verified_before_execution(self):
+        env=Env()
+        outputs=[{
+            "material_requirements":["R1","R2"],
+            "candidates":[
+                {"action_id":"A2","covers":["R2"],"depends_on":["A1"],"command":"echo second","verify_command":"echo verify-second"},
+                {"action_id":"A1","covers":["R1"],"command":"echo first","verify_command":"echo verify-first"},
+            ],
+        }]
+        with patch.object(s.science_planner,"plan",planner(outputs)):
+            result=asyncio.run(s.run_science_goal("synthetic science goal",env,max_cycles=1))
+        self.assertEqual(
+            env.commands,
+            ["echo first","echo verify-first","echo second","echo verify-second"],
+        )
+        self.assertEqual(result["resolved_requirements"],["R1","R2"])
+
+    def test_overlapping_alternative_is_not_executed_after_requirement_resolves(self):
+        env=Env()
+        outputs=[{
+            "material_requirements":["R1"],
+            "candidates":[
+                {"action_id":"A1","covers":["R1"],"command":"echo preferred","verify_command":"echo verify"},
+                {"action_id":"A2","covers":["R1"],"command":"echo redundant","verify_command":"echo verify-redundant"},
+            ],
+        }]
+        with patch.object(s.science_planner,"plan",planner(outputs)):
+            result=asyncio.run(s.run_science_goal("synthetic science goal",env,max_cycles=1))
+        self.assertEqual(env.commands,["echo preferred","echo verify"])
+        self.assertEqual(result["resolved_requirements"],["R1"])
+
+    def test_candidate_timeouts_are_brain_bounded_and_applied(self):
+        env=Env()
+        outputs=[{
+            "material_requirements":["R1"],
+            "candidates":[{
+                "action_id":"A1",
+                "covers":["R1"],
+                "timeout_sec":2345,
+                "verify_timeout_sec":789,
+                "command":"echo long-work",
+                "verify_command":"echo long-verify",
+            }],
+        }]
+        with patch.object(s.science_planner,"plan",planner(outputs)):
+            result=asyncio.run(s.run_science_goal("synthetic science goal",env,max_cycles=1))
+        self.assertEqual(
+            env.calls[:2],
+            [("echo long-work",2345),("echo long-verify",789)],
+        )
+        self.assertEqual(result["resolved_requirements"],["R1"])
+
+    def test_invalid_candidate_timeout_fails_closed(self):
+        env=Env()
+        outputs=[{
+            "material_requirements":["R1"],
+            "candidates":[{
+                "action_id":"A1",
+                "covers":["R1"],
+                "timeout_sec":s.MAX_ACTION_TIMEOUT_S+1,
+                "command":"echo work",
+                "verify_command":"echo verify",
+            }],
+        }]
+        with patch.object(s.science_planner,"plan",planner(outputs)):
+            with self.assertRaisesRegex(RuntimeError,"ACTION_TIMEOUT_INVALID"):
+                asyncio.run(s.run_science_goal("synthetic science goal",env,max_cycles=1))
 
 if __name__=="__main__":
     unittest.main(verbosity=2)

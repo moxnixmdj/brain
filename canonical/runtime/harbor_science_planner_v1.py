@@ -22,6 +22,7 @@ MODEL = "brain-qwen3.5-9b"
 TOOL_NAME = "submit_science_proposal"
 MAX_RESPONSE_BYTES = 100_000
 MAX_TOOL_COMPLETION_TOKENS = 4096
+MAX_CANDIDATES_PER_PROPOSAL = 4
 MIN_TIMEOUT_S = 300
 MAX_TIMEOUT_S = 900
 TOKEN_COUNT_TIMEOUT_S = 60
@@ -70,7 +71,7 @@ TOOL = {
                 "candidates": {
                     "type": "array",
                     "minItems": 1,
-                    "maxItems": 1,
+                    "maxItems": MAX_CANDIDATES_PER_PROPOSAL,
                     "items": {
                         "type": "object",
                         "properties": {
@@ -85,6 +86,13 @@ TOOL = {
                             # llama.cpp compiles tool schemas into grammars and rejects very
                             # large repetition bounds before generation. Brain enforces the
                             # exact bound immediately after decoding instead.
+                            "depends_on": {
+                                "type": "array",
+                                "maxItems": MAX_CANDIDATES_PER_PROPOSAL,
+                                "items": {"type": "string", "minLength": 1, "maxLength": 64},
+                            },
+                            "timeout_sec": {"type": "integer", "minimum": 1, "maximum": 7200},
+                            "verify_timeout_sec": {"type": "integer", "minimum": 1, "maximum": 3600},
                             "command": {"type": "string"},
                             "verify_command": {"type": "string"},
                         },
@@ -92,8 +100,9 @@ TOOL = {
                         "additionalProperties": False,
                     },
                     "description": (
-                        "One to eight local-environment action candidates. Omit only "
-                        "when all frozen requirements are already resolved."
+                        "One to four local-environment action candidates. Use depends_on for "
+                        "true sequencing; overlapping candidates may be alternatives. Brain "
+                        "independently verifies each action before promoting coverage."
                     ),
                 },
                 "finish_summary": {
@@ -125,8 +134,10 @@ def _request_payload(prompt: str) -> dict[str, Any]:
                 "content": (
                     "You are an optional proposal source inside Project Brain. "
                     "Use the provided submit_science_proposal tool exactly once. "
-                    "Return exactly one terse candidate action per proposal. Use short requirement IDs, "
-                    f"keep command and verify_command under {MAX_COMMAND_CHARS} characters each, and use no explanatory prose. "
+                    "Return one to four terse candidate actions per proposal. Use short requirement IDs, "
+                    "declare depends_on when an action requires a prior proposed action, and request only the "
+                    "smallest sufficient timeout_sec / verify_timeout_sec when defaults may be insufficient. "
+                    f"Keep command and verify_command under {MAX_COMMAND_CHARS} characters each, and use no explanatory prose. "
                     "Never claim execution or finish authority."
                 ),
             },
@@ -280,7 +291,7 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
         proposal = _decode_tool_arguments(data)
         candidates = proposal.get("candidates")
         if candidates is not None:
-            if not isinstance(candidates, list) or len(candidates) > 1:
+            if not isinstance(candidates, list) or len(candidates) > MAX_CANDIDATES_PER_PROPOSAL:
                 raise SciencePlannerError("SCIENCE_PLANNER_CANDIDATES_BOUND_INVALID")
             for candidate in candidates:
                 if not isinstance(candidate, dict):

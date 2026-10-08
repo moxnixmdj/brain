@@ -36,6 +36,10 @@ MAX_REQUIREMENTS = 16
 MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
 PLANNER_TIMEOUT_S = 300
+DEFAULT_ACTION_TIMEOUT_S = 1800
+MAX_ACTION_TIMEOUT_S = 7200
+DEFAULT_VERIFY_TIMEOUT_S = 600
+MAX_VERIFY_TIMEOUT_S = 3600
 
 _FATAL_ACTION_STDERR_MARKERS = (
     "here-document at line",
@@ -226,7 +230,8 @@ def _compile_lossless_task_scope(goal: str) -> tuple[dict[str, Any], dict[str, A
         prompt_rows.append({
             "obligation_id": oid,
             "segment_sha256": row.get("segment_sha256"),
-            "text": row.get("text"),
+            "segment_index": row.get("segment_index"),
+            "span": row.get("span"),
             "acceptance_route_status": localized[oid].get("status"),
             "acceptance_receipt_required": True,
         })
@@ -245,6 +250,14 @@ def _nonempty_strings(value: Any, *, maximum: int, field: str) -> list[str]:
         out.append(s)
     return out
 
+def _candidate_timeout(value: Any, *, default: int, maximum: int, field: str) -> int:
+    if value is None:
+        return default
+    if not isinstance(value, int) or isinstance(value, bool) or not 1 <= value <= maximum:
+        raise RuntimeError(f"SCIENCE_{field}_INVALID")
+    return value
+
+
 def _candidate_rows(raw: Any, requirements: set[str]) -> list[dict[str, Any]]:
     if not isinstance(raw, list) or not raw or len(raw) > MAX_CANDIDATES:
         raise RuntimeError("SCIENCE_CANDIDATES_INVALID")
@@ -260,14 +273,39 @@ def _candidate_rows(raw: Any, requirements: set[str]) -> list[dict[str, Any]]:
         covers = _nonempty_strings(item.get("covers"), maximum=MAX_REQUIREMENTS, field="COVERS")
         if not set(covers).issubset(requirements):
             raise RuntimeError("SCIENCE_COVERAGE_OUTSIDE_CONTRACT")
+        depends_on_raw = item.get("depends_on") or []
+        if not isinstance(depends_on_raw, list) or len(depends_on_raw) > MAX_CANDIDATES:
+            raise RuntimeError("SCIENCE_DEPENDS_ON_INVALID")
+        depends_on: list[str] = []
+        for dep in depends_on_raw:
+            dep = str(dep or "").strip()
+            if not dep or dep == aid or dep in depends_on:
+                raise RuntimeError("SCIENCE_DEPENDS_ON_INVALID")
+            depends_on.append(dep)
         command = validate_environment_command(item.get("command"))
         verify_command = validate_environment_command(item.get("verify_command"))
         rows.append({
             "action_id": aid,
             "covers": covers,
+            "depends_on": depends_on,
+            "timeout_sec": _candidate_timeout(
+                item.get("timeout_sec"),
+                default=DEFAULT_ACTION_TIMEOUT_S,
+                maximum=MAX_ACTION_TIMEOUT_S,
+                field="ACTION_TIMEOUT",
+            ),
+            "verify_timeout_sec": _candidate_timeout(
+                item.get("verify_timeout_sec"),
+                default=DEFAULT_VERIFY_TIMEOUT_S,
+                maximum=MAX_VERIFY_TIMEOUT_S,
+                field="VERIFY_TIMEOUT",
+            ),
             "command": command,
             "verify_command": verify_command,
         })
+    for row in rows:
+        if not set(row["depends_on"]).issubset(ids):
+            raise RuntimeError("SCIENCE_DEPENDS_ON_UNKNOWN_ACTION")
     return rows
 
 def _extract_contract(raw: dict[str, Any], prior_requirements: list[str] | None, mandatory_requirements: list[str] | None = None) -> tuple[list[str], list[dict[str, Any]], str | None]:
@@ -342,16 +380,17 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "requirement-state updates, and finish authority. No network acquisition, package installation, "
             "git fetch/clone/pull, secrets, or host escape. "
             "On the first cycle provide material_requirements (1-16 stable short IDs). "
-            "Provide 1-8 candidate actions as {action_id,covers,command,verify_command}. "
-            "covers must name only frozen material_requirements. verify_command must independently test the "
-            "candidate's claimed effect inside the task environment. Brain alone decides completion after "
+            "Provide 1-4 candidate actions as {action_id,covers,depends_on?,timeout_sec?,verify_timeout_sec?,command,verify_command}. "
+            "Use depends_on only for true within-proposal sequencing. covers must name only frozen material_requirements. "
+            "Brain may execute multiple nonredundant candidates from one proposal, but promotes each claimed effect only "
+            "after its independent verify_command succeeds. Brain alone decides completion after "
             "independent verification resolves every frozen material requirement. finish_summary is optional "
             "descriptive metadata only and never execution or finish authority. "
             f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
-            "Brain lossless raw-task obligations (non-droppable; routing labels never equal acceptance): "
+            "Brain lossless raw-task obligation quotient (non-droppable; exact text is the Goal span above): "
             + json.dumps(raw_task_obligations, sort_keys=True)
             + "\nEvery raw obligation remains acceptance-pending until exact candidate-bound independent acceptance exists. "
-            "Use the obligation text as authoritative semantic scope; material_requirements and covers are routing metadata only.\n"
+            "Use Goal[span[0]:span[1]] as the authoritative obligation text; IDs and covers are routing metadata only.\n"
             "Brain-declared authoritative local inputs: "
             + json.dumps(declared_inputs, sort_keys=True)
             + "\nBrain-mandated explicit deliverables (requirement ID -> path): "
@@ -421,72 +460,109 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             continue
 
         # Candidate coverage is substrate-proposed metadata, not a verified semantic fact.
-        # Brain may use it only as a control heuristic; it never becomes acceptance evidence.
-        scored = []
-        for row in candidates:
-            new = len(set(row["covers"]) & unresolved_set)
-            if new or (not unresolved_set and bool(output_gate_failures)):
-                scored.append((-new, row["action_id"], row))
-        if not scored:
+        # Brain may execute several nonredundant candidates from one proposal, but
+        # every promotion remains independently verified and dependency-gated.
+        transport = HarborEnvironmentTransport(environment)
+        executed_action_ids: set[str] = set()
+        verified_action_ids: set[str] = set()
+        executed_any = False
+
+        while True:
+            unresolved_set = set(requirements) - resolved
+            current_output_failures: list[dict[str, Any]] = []
+            if not unresolved_set and declared_outputs:
+                current_output_failures = await _declared_output_gate(
+                    environment, declared_outputs
+                )
+                if not current_output_failures:
+                    break
+
+            scored = []
+            for row in candidates:
+                if row["action_id"] in executed_action_ids:
+                    continue
+                if not set(row["depends_on"]).issubset(verified_action_ids):
+                    continue
+                new = len(set(row["covers"]) & unresolved_set)
+                if new or (not unresolved_set and bool(current_output_failures)):
+                    scored.append((-new, row["action_id"], row))
+            if not scored:
+                break
+
+            scored.sort(key=lambda x:(x[0],x[1]))
+            chosen = scored[0][2]
+            executed_action_ids.add(chosen["action_id"])
+            executed_any = True
+
+            action_receipt = await transport.exec(
+                chosen["command"], timeout_sec=chosen["timeout_sec"]
+            )
+            action_observed = {
+                "returncode": action_receipt.returncode,
+                "stdout": action_receipt.stdout[-MAX_OUTPUT_CHARS:],
+                "stderr": action_receipt.stderr[-MAX_OUTPUT_CHARS:],
+            }
+            verify_observed = None
+            verified = False
+            verified_covers: list[str] = []
+            deliverable_checks: list[dict[str, Any]] = []
+            action_transport_clean = _action_transport_clean(
+                action_receipt.returncode, action_receipt.stdout, action_receipt.stderr
+            )
+            if action_transport_clean:
+                verify_receipt = await transport.exec(
+                    chosen["verify_command"],
+                    timeout_sec=chosen["verify_timeout_sec"],
+                )
+                verify_observed = {
+                    "returncode": verify_receipt.returncode,
+                    "stdout": verify_receipt.stdout[-MAX_OUTPUT_CHARS:],
+                    "stderr": verify_receipt.stderr[-MAX_OUTPUT_CHARS:],
+                }
+                if verify_receipt.returncode == 0:
+                    for requirement_id in chosen["covers"]:
+                        path = brain_deliverables.get(requirement_id)
+                        if path is None:
+                            verified_covers.append(requirement_id)
+                            continue
+                        check = await _validate_brain_deliverable(requirement_id, path, environment)
+                        deliverable_checks.append(check)
+                        if check["verified"] is True:
+                            verified_covers.append(requirement_id)
+                    resolved.update(verified_covers)
+                    verified = len(verified_covers) == len(chosen["covers"])
+                    if verified:
+                        verified_action_ids.add(chosen["action_id"])
+
+            record = {
+                "cycle": cycle,
+                "kind": "BRAIN_SELECTED_RESEARCH_ACTION",
+                "action_id": chosen["action_id"],
+                "covers": chosen["covers"],
+                "depends_on": chosen["depends_on"],
+                "action_timeout_sec": chosen["timeout_sec"],
+                "verify_timeout_sec": chosen["verify_timeout_sec"],
+                "selection_reason": "MAX_DECLARED_UNRESOLVED_COVERAGE_THEN_ACTION_ID__DEPENDENCY_GATED__STRUCTURAL_CONTROL_ONLY",
+                "action_result": action_observed,
+                "action_transport_clean": action_transport_clean,
+                "verify_result": verify_observed,
+                "verified_covers": verified_covers,
+                "brain_deliverable_checks": deliverable_checks,
+                "coverage_promoted": verified,
+            }
+            trace.append(record)
+            observations.append(record)
+
+        if not executed_any:
             blocked = {
                 "cycle": cycle,
                 "kind": "BRAIN_RESEARCH_SELECTION_BLOCKED",
-                "reason": "NO_STRUCTURALLY_ADMITTED_PROPOSAL_COVERS_UNRESOLVED_REQUIREMENT",
-                "unresolved": sorted(unresolved_set),
+                "reason": "NO_DEPENDENCY_SATISFIED_NONREDUNDANT_PROPOSAL_COVERS_CURRENT_RESIDUAL",
+                "unresolved": sorted(set(requirements) - resolved),
             }
             trace.append(blocked)
             observations.append(blocked)
             continue
-        scored.sort(key=lambda x:(x[0],x[1]))
-        chosen = scored[0][2]
-        transport = HarborEnvironmentTransport(environment)
-        action_receipt = await transport.exec(chosen["command"], timeout_sec=180)
-        action_observed = {
-            "returncode": action_receipt.returncode,
-            "stdout": action_receipt.stdout[-MAX_OUTPUT_CHARS:],
-            "stderr": action_receipt.stderr[-MAX_OUTPUT_CHARS:],
-        }
-        verify_observed = None
-        verified = False
-        verified_covers: list[str] = []
-        deliverable_checks: list[dict[str, Any]] = []
-        action_transport_clean = _action_transport_clean(
-            action_receipt.returncode, action_receipt.stdout, action_receipt.stderr
-        )
-        if action_transport_clean:
-            verify_receipt = await transport.exec(chosen["verify_command"], timeout_sec=180)
-            verify_observed = {
-                "returncode": verify_receipt.returncode,
-                "stdout": verify_receipt.stdout[-MAX_OUTPUT_CHARS:],
-                "stderr": verify_receipt.stderr[-MAX_OUTPUT_CHARS:],
-            }
-            if verify_receipt.returncode == 0:
-                for requirement_id in chosen["covers"]:
-                    path = brain_deliverables.get(requirement_id)
-                    if path is None:
-                        verified_covers.append(requirement_id)
-                        continue
-                    check = await _validate_brain_deliverable(requirement_id, path, environment)
-                    deliverable_checks.append(check)
-                    if check["verified"] is True:
-                        verified_covers.append(requirement_id)
-                resolved.update(verified_covers)
-                verified = len(verified_covers) == len(chosen["covers"])
-        record = {
-            "cycle": cycle,
-            "kind": "BRAIN_SELECTED_RESEARCH_ACTION",
-            "action_id": chosen["action_id"],
-            "covers": chosen["covers"],
-            "selection_reason": "MAX_DECLARED_UNRESOLVED_COVERAGE_THEN_ACTION_ID__STRUCTURAL_CONTROL_ONLY",
-            "action_result": action_observed,
-            "action_transport_clean": action_transport_clean,
-            "verify_result": verify_observed,
-            "verified_covers": verified_covers,
-            "brain_deliverable_checks": deliverable_checks,
-            "coverage_promoted": verified,
-        }
-        trace.append(record)
-        observations.append(record)
 
         # Completion is a deterministic consequence of Brain-owned verified state.
         # Do not spend another cognition turn asking the substrate to notice that

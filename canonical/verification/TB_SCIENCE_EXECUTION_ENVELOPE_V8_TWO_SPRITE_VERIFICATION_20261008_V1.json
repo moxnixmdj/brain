@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_EXECUTION_ENVELOPE_V8_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__44_OF_44_ON_EACH_OF_TWO_INDEPENDENT_SPRITES__88_TOTAL__ZERO_BENCHMARK_EXPOSURE__ZERO_CREDIT",
+  "subject": {
+    "agent_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "agent_git_blob_sha": "5e851d884b9784c6dc6fc9f83c08c502e41c3bdc",
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_git_blob_sha": "715aee168f02cb4abff961849b2b26709eef2e64",
+    "agent_tests_path": "canonical/tests/test_harbor_science_agent_v1.py",
+    "agent_tests_git_blob_sha": "0eb5e930baf7d3347870d742d6356999954dcaa9",
+    "planner_tests_path": "canonical/tests/test_harbor_science_planner_v1.py",
+    "planner_tests_git_blob_sha": "c2aeed8fcef24126035cd8d90a436fae116e964d"
+  },
+  "verification": [
+    {
+      "provider": "SPRITES",
+      "name": "brain-root3-current-byte-replay-20261007-v1",
+      "id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "workspace": "/home/sprite/tbscience_full_closure_v6",
+      "safety_checkpoint": "v29",
+      "tests_passed": 44,
+      "tests_total": 44
+    },
+    {
+      "provider": "SPRITES",
+      "name": "tbscience-v8-envelope-verify-20261008-v1",
+      "id": "sprite-69dbb63e-6568-4016-a43e-089e86ce2aba",
+      "workspace": "/home/sprite/tbscience_v8",
+      "reconstruction": "EXACT_V7_14_FILE_RUNTIME_CLOSURE_PLUS_SOURCE_GATE_AND_TWO_TEST_MODULES",
+      "tests_passed": 44,
+      "tests_total": 44
+    }
+  ],
+  "newly_checked_properties": [
+    "LOSSLESS_PROMPT_QUOTIENT_RECONSTRUCTS_OBLIGATION_TEXT_FROM_EXACT_GOAL_SPANS",
+    "FOUR_BOUNDED_CANDIDATES_ACCEPTED_BY_PLANNER_TRANSPORT",
+    "MULTIPLE_NONREDUNDANT_ACTIONS_EXECUTE_FROM_ONE_PLANNER_TURN",
+    "DEPENDENCIES_REQUIRE_VERIFIED_PREDECESSORS",
+    "OVERLAPPING_ALTERNATIVES_ARE_NOT_EXECUTED_AFTER_RESIDUAL_RESOLUTION",
+    "CUSTOM_ACTION_AND_VERIFY_TIMEOUTS_ARE_BOUNDED_AND_APPLIED",
+    "INVALID_ACTION_TIMEOUT_FAILS_CLOSED",
+    "ALL_PREEXISTING_PLANNER_AND_CONTROLLER_TESTS_REMAIN_PASSING"
+  ],
+  "benchmark_task_exposure": 0,
+  "benchmark_trials_executed": 0,
+  "rank13_started": false,
+  "execution_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
