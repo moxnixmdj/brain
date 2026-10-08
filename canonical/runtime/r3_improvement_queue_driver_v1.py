@@ -663,10 +663,15 @@ def advance_once(
 
     if success_episode_adapter_provider is None:
         from canonical.runtime import r3_bound_success_adapter_v1 as bound_success_adapter
-        success_episode_adapter_provider = lambda request: bound_success_adapter.adapt(
-            request,
-            repo_root=repo_root,
-        )
+        from canonical.runtime import r3_raw_success_adapter_v1 as raw_success_adapter
+
+        def _owned_success_adapter(request):
+            adapted = bound_success_adapter.adapt(request, repo_root=repo_root)
+            if adapted is not None:
+                return adapted
+            return raw_success_adapter.adapt(request, repo_root=repo_root)
+
+        success_episode_adapter_provider = _owned_success_adapter
 
     state = learning.load_state(state_path)
     pending = _pending(state)
