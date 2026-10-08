@@ -13,6 +13,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from hashlib import sha256
+import json
 from typing import Any, Mapping
 
 from canonical.runtime.p2_authenticated_top_law_route_v1 import (
@@ -223,7 +224,13 @@ def _p3_binary_candidate(
             "raw_source_sha256": raw_sha,
             "rendered_text": str(policy["rendered_text"]),
             "policy_result_sha256": "sha256:" + sha256(
-                repr(sorted(dict(policy).items())).encode("utf-8")
+                json.dumps(
+                    dict(policy),
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    ensure_ascii=False,
+                    allow_nan=False,
+                ).encode("utf-8")
             ).hexdigest(),
         },
         "terminal_authority": False,
