@@ -378,6 +378,15 @@ def _diagnose_failure(out: Mapping[str, Any]) -> dict[str, Any]:
     else:
         repair = "LOCALIZE_CAUSAL_FAILURE_AND_GENERATE_MINIMAL_REPAIR"
 
+    raw_policy_repair_context = out.get("policy_repair_context")
+    policy_repair_context = (
+        deepcopy(dict(raw_policy_repair_context))
+        if isinstance(raw_policy_repair_context, Mapping)
+        and raw_policy_repair_context.get("schema")
+        == "PROJECT_BRAIN_R2_POLICY_REPAIR_CONTEXT_V1"
+        else None
+    )
+
     core = {
         "status": status or None,
         "reason": reason or None,
@@ -387,6 +396,7 @@ def _diagnose_failure(out: Mapping[str, Any]) -> dict[str, Any]:
         "deferred_capability_ids": _items(out.get("deferred_capability_ids")),
         "counterexamples": deepcopy(list(out.get("counterexamples") or [])),
         "attempts": deepcopy(list(out.get("attempts") or [])),
+        "policy_repair_context": policy_repair_context,
     }
     return {
         **core,
@@ -1015,6 +1025,11 @@ def integrate_solver_output(
                 "status": diagnosis.get("status"),
                 "reason": diagnosis.get("reason"),
                 "retry_capsule_sha256": retry_sha,
+                "policy_repair_context": deepcopy(
+                    diagnosis.get("policy_repair_context")
+                )
+                if isinstance(diagnosis.get("policy_repair_context"), Mapping)
+                else None,
             },
         )
         _refresh_stats(state)
