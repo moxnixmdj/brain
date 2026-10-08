@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_EXACT_RATIONAL_SYMBOLIC_FEATURE_PUBLIC_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__11_OF_11_COMMITTED_TESTS__5_OF_5_FRESH_CANARY_GROUPS__ZERO_CREDIT",
+  "subject": {
+    "brain_pull_request": 3168,
+    "exact_blobs": {
+      "canonical/runtime/exact_rational_symbolic_feature_v1.py": "d90110a54f80c1d0d6e6c3baa443f8c057da42ca",
+      "canonical/tests/test_exact_rational_symbolic_feature_v1.py": "55e0b8ae688bbfc7ee1331c56cd4827bdac74598",
+      "canonical/governance/MYSTERYMECHANISM_EXACT_RATIONAL_SYMBOLIC_FEATURE_20261008_V1.json": "b783c6f91255cce73e3aed0a9c4a15da134b059f"
+    }
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2429,
+    "merged_commit": "e9373a3e1d1cf61f62cd91954d61e8d31c05325f",
+    "workflow_run_id": 37747064209,
+    "workflow_job_id": 113210942493,
+    "conclusion": "success",
+    "exact_committed_tests_passed": 11,
+    "fresh_independent_canary_groups_passed": 5
+  },
+  "verified_properties": [
+    "SUPPORTED_RATIONAL_SUBGRAMMAR_EVALUATES_EXACTLY",
+    "EXACT_RATIONAL_INPUT_BINDING",
+    "SAFE_DIV_AND_RECIPROCAL_ZERO_FAIL_CLOSED",
+    "UNSUPPORTED_FRACTIONAL_AND_TRANSCENDENTAL_OPERATORS_FAIL_CLOSED",
+    "STRICT_TREE_SHAPE_REJECTS_EXTRA_SEMANTICS",
+    "BASIS_IDENTITY_IS_DATA_ROW_ORDER_INDEPENDENT",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_TERMINAL_CREDIT"
+  ],
+  "theorem_boundary": "SUPPORTED_RATIONAL_SUBGRAMMAR_ONLY__NO_CLAIM_IT_COVERS_PRIVATE_222__NO_NOISE_BOUND__NO_UNSUPPORTED_OPERATOR_EQUIVALENCE__NO_PRIVATE_SCORE",
+  "next_required": [
+    "COMPOSE_EXACT_FEATURE_COMPILER_WITH_EXACT_PARAMETER_POLYTOPE",
+    "COMPOSE_SOUND_PREDICTION_INTERVALS_WITH_INTERVAL_INFORMATION_FRONTIER",
+    "KEEP_OBSERVATION_INTERVAL_SOUNDNESS_AS_A_REQUIRED_GATE",
+    "EXPAND_FRACTIONAL_POWER_OPERATORS_WITH_SOUND_ALGEBRAIC_ENCLOSURE_OR_ROUTE_THEM_HEURISTIC_ONLY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
