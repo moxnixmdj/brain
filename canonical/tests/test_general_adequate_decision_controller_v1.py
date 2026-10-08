@@ -265,6 +265,61 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
         self.assertTrue(out["actual_goal_satisfaction_verified"])
         self.assertFalse(out["terminal_authority"])
 
+    def test_execution_provider_replaces_only_execution_carrier(self):
+        request = self._base_request()
+        request["execution_problem"] = {"task_id": "exec", "target_effects": ["DONE"]}
+        request["policy_execution_binding"] = {"receipt": {}, "verification": {}}
+        request["goal_satisfaction_binding"] = {"receipt": {}, "verification": {}}
+        execution_pass = {"pass": True, "status": "SOLVED__VERIFIED_EPISODE"}
+        provider = Mock(return_value=execution_pass)
+
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value=self._goal_binding_pass()), \
+             patch.object(controller, "evaluate_p3", return_value=self._decision_pass()), \
+             patch.object(controller, "_authenticate_policy_execution_binding", return_value={"pass": True}), \
+             patch.object(controller, "run_universal") as default_solver, \
+             patch.object(
+                 controller,
+                 "_authenticate_goal_satisfaction_binding",
+                 return_value=self._goal_satisfaction_pass(),
+             ):
+            out = controller.run(request, execution_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        provider.assert_called_once()
+        default_solver.assert_not_called()
+        kwargs = provider.call_args.kwargs
+        self.assertEqual(kwargs["episode_id"], "R2_TEST_001")
+        self.assertEqual(kwargs["scope_id"], "general-adequate-decision")
+        self.assertTrue(out["actual_goal_satisfaction_verified"])
+        self.assertFalse(out["terminal_authority"])
+
+    def test_execution_provider_cannot_bypass_policy_execution_binding(self):
+        request = self._base_request()
+        request["execution_problem"] = {"task_id": "exec", "target_effects": ["DONE"]}
+        provider = Mock(return_value={"pass": True})
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value=self._goal_binding_pass()), \
+             patch.object(controller, "evaluate_p3", return_value=self._decision_pass()):
+            out = controller.run(request, execution_provider=provider)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "OPEN__POLICY_EXECUTION_BINDING_REQUIRED")
+        provider.assert_not_called()
+
+    def test_non_mapping_execution_provider_result_fails_closed(self):
+        request = self._base_request()
+        request["execution_problem"] = {"task_id": "exec", "target_effects": ["DONE"]}
+        request["policy_execution_binding"] = {"receipt": {}, "verification": {}}
+        provider = Mock(return_value="not-an-execution-result")
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value=self._goal_binding_pass()), \
+             patch.object(controller, "evaluate_p3", return_value=self._decision_pass()), \
+             patch.object(controller, "_authenticate_policy_execution_binding", return_value={"pass": True}):
+            out = controller.run(request, execution_provider=provider)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("EXECUTION_PROVIDER_RESULT_NOT_OBJECT", out["reason"])
+
     def test_goal_satisfaction_receipt_is_exact_content_bound_and_tamper_evident(self):
         goal = "do the exact task"
         policy = "policy.p"
