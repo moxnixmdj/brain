@@ -116,12 +116,12 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             ) as verify_work,
         ):
             out = driver.advance_once(state_path=path)
+            provider = verify_work.call_args.kwargs["episode_verification_provider"]
+            self.assertEqual(provider({"kind": "EPISODE_VERIFICATION"}), binding)
+            owned_verifier.assert_called_once()
 
         self.assertTrue(out["pass"], out)
         self.assertTrue(out["progress"], out)
-        provider = verify_work.call_args.kwargs["episode_verification_provider"]
-        self.assertEqual(provider({"kind": "EPISODE_VERIFICATION"}), binding)
-        owned_verifier.assert_called_once()
 
     def test_delayed_episode_worker_forwards_retained_effect_root(self):
         path = self.temp_state()
@@ -275,7 +275,7 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertFalse(second["progress"], second)
         self.assertEqual(
             second["blockers"][0]["blocker"],
-            "REPAIR_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
+            "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
         )
         repair.assert_called_once()
         state = learning.load_state(path)
