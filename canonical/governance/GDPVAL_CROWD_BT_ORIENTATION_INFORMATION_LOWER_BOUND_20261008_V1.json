@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_CROWD_BT_ORIENTATION_INFORMATION_LOWER_BOUND_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_INFORMATION_THEOREM__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "target": "GDPval-AA v2.1 direct Brain-vs-Opus Crowd-BT routes",
+  "identity": "P_CROWD(p,eta)=eta*p+(1-eta)*(1-p)=P_CROWD(1-p,1-eta)",
+  "consequence": "IF THE RELEVANT JUDGE QUALITY ORIENTATION IS UNCONSTRAINED, ANY DIRECT-COMPARISON WORLD WITH BRAIN LATENTLY ABOVE OPUS HAS AN OBSERVATIONALLY IDENTICAL MIRROR WORLD WITH BRAIN LATENTLY BELOW OPUS AND ALL eta VALUES REFLECTED AROUND 1/2.",
+  "scheduler_effect_if_verified": [
+    "DO_NOT SCHEDULE MORE DIRECT BRAIN_VS_OPUS PAIRWISE VOTES AS A WAY TO IDENTIFY THE CROWD_BT STRENGTH SIGN WHILE ALL LOAD_BEARING eta ORIENTATION INFORMATION REMAINS UNBOUND.",
+    "TARGET ORIENTATION/CALIBRATION INFORMATION OR A STRONGER TARGET_RELATION BRIDGE INSTEAD.",
+    "THE EXISTING UNIVERSAL PRIMITIVE PAIRWISE DOMINANCE ROUTE REMAINS VALID BECAUSE IT BYPASSES NUMERICAL CROWD_BT SIGN_IDENTIFICATION."
+  ],
+  "current_public_fact": "Artificial Analysis states annotator quality is fitted on past GDPval-AA judgements but does not publish the fitted values or an eta>1/2 constraint on the public methodology surface observed 2026-10-08.",
+  "hard_nonclaims": [
+    "NO CLAIM THAT OWNER eta VALUES ARE BELOW OR ABOVE 1/2.",
+    "NO CLAIM THAT THE COMPLETE OWNER HISTORICAL GRAPH CANNOT ITSELF IDENTIFY eta ORIENTATION.",
+    "NO CLAIM THAT GDPVAL IS CLOSED.",
+    "NO TERMINAL CREDIT."
+  ],
+  "runtime": "canonical/runtime/gdpval_crowd_bt_orientation_mirror_v1.py",
+  "tests": "canonical/tests/test_gdpval_crowd_bt_orientation_mirror_v1.py",
+  "accounting": {"incremental_spend_usd": 0, "terminal_credit_delta": 0}
+}
