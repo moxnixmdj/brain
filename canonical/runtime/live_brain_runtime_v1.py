@@ -140,6 +140,46 @@ def _integrate_learning(out: Mapping[str, Any], *, state_path: str | Path | None
     return learning.integrate_solver_output(out, state_path=path)
 
 
+def _observe_runtime_outcome(
+    out: Mapping[str, Any],
+    *,
+    state_path: str | Path | None,
+    learn: bool,
+) -> dict[str, Any] | None:
+    """Feed every live failure into R3 while keeping success promotion fail-closed.
+
+    Failed outcomes are always useful causal evidence and may be fingerprinted /
+    deduplicated without granting capability authority. Successful non-solver
+    actions are merely observed; they are never persisted as reusable learning
+    unless they already carry the verified episode / skill machinery expected by
+    autonomous_verified_self_improvement_v1.
+    """
+    if not learn:
+        return None
+    if not isinstance(out, Mapping):
+        return None
+
+    if out.get("pass") is not True:
+        return _integrate_learning(out, state_path=state_path)
+
+    learning_keys = {
+        "current_episode_verified",
+        "current_episode",
+        "skill_candidate",
+        "verified_executable_skill",
+        "verified_skill_reuse_authorized",
+    }
+    if any(key in out for key in learning_keys):
+        return _integrate_learning(out, state_path=state_path)
+
+    return {
+        "status": "SUCCESS_OBSERVED__NO_VERIFIED_LEARNING_ARTIFACT",
+        "pass": True,
+        "permanent_reuse_authorized": False,
+        "terminal_authority": False,
+    }
+
+
 def _h100(operation: str, payload: Mapping[str, Any]) -> Any:
     from canonical.runtime import h100_verified_capability_registry_v8 as module
     if operation == "registry_snapshot":
@@ -278,7 +318,7 @@ def run_generic(
             skill_plan = _skill_plan(problem, ctx["active_verified_skills"], active_invalidators)
 
         out = _v12_run(problem, repo_root=repo_root, kwargs=kwargs)
-        learning = _integrate_learning(out, state_path=ctx["state_path"]) if learn else None
+        learning = _observe_runtime_outcome(out, state_path=ctx["state_path"], learn=learn)
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
@@ -319,9 +359,12 @@ def run_decision(
             capability_expander=capability_expander,
         )
         execution = out.get("execution_result")
-        learning = None
-        if learn and isinstance(execution, Mapping):
-            learning = _integrate_learning(execution, state_path=state_path)
+        observed = execution if isinstance(execution, Mapping) else out
+        learning = _observe_runtime_outcome(
+            observed,
+            state_path=state_path,
+            learn=learn,
+        )
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_DECISION_EXECUTION_COMPLETE",
@@ -339,7 +382,14 @@ def run_decision(
         return _fail("DECISION_RUNTIME_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
 
 
-def run_specialized(surface: str, payload: Mapping[str, Any], *, repo_root: str | Path = ROOT) -> dict[str, Any]:
+def run_specialized(
+    surface: str,
+    payload: Mapping[str, Any],
+    *,
+    repo_root: str | Path = ROOT,
+    state_path: str | Path | None = None,
+    learn: bool = True,
+) -> dict[str, Any]:
     if not isinstance(payload, Mapping):
         return _fail("SPECIALIZED_PAYLOAD_NOT_OBJECT")
     name = str(surface or "").strip()
@@ -354,12 +404,27 @@ def run_specialized(surface: str, payload: Mapping[str, Any], *, repo_root: str 
             raw = _mystery_separable(str(payload.get("operation") or ""), payload)
         else:
             return _fail("SPECIALIZED_SURFACE_UNKNOWN:" + name)
+        passed = not (
+            isinstance(raw, Mapping)
+            and str(raw.get("status") or "").startswith("FAIL_CLOSED")
+        )
+        observation = deepcopy(dict(raw)) if isinstance(raw, Mapping) else {
+            "status": "SPECIALIZED_RESULT",
+            "result": raw,
+        }
+        observation["pass"] = passed
+        learning = _observe_runtime_outcome(
+            observation,
+            state_path=state_path,
+            learn=learn,
+        )
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_SPECIALIZED_EXECUTION_COMPLETE",
-            "pass": not (isinstance(raw, Mapping) and str(raw.get("status") or "").startswith("FAIL_CLOSED")),
+            "pass": passed,
             "surface": name,
             "raw_result": raw,
+            "learning": learning,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -436,11 +501,17 @@ def run(
         nested = request.get("request")
         payload = nested if isinstance(nested, Mapping) else request
         raw = _bound_run(payload)
+        learning = _observe_runtime_outcome(
+            raw,
+            state_path=request.get("state_path"),
+            learn=request.get("learn", True) is not False,
+        )
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_BOUND_EXECUTION_COMPLETE",
             "pass": raw.get("pass") is True,
             "raw_result": raw,
+            "learning": learning,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -450,11 +521,17 @@ def run(
         nested = request.get("request")
         payload = nested if isinstance(nested, Mapping) else request
         raw = _raw_bound_run(payload)
+        learning = _observe_runtime_outcome(
+            raw,
+            state_path=request.get("state_path"),
+            learn=request.get("learn", True) is not False,
+        )
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE",
             "pass": raw.get("pass") is True,
             "raw_result": raw,
+            "learning": learning,
             "semantic_acceptance_complete": raw.get("semantic_acceptance_complete") is True,
             "terminal_authority": False,
             "capability_promotion_authority": False,
@@ -485,6 +562,8 @@ def run(
             str(request.get("surface") or ""),
             request.get("payload") or {},
             repo_root=repo_root,
+            state_path=request.get("state_path"),
+            learn=request.get("learn", True) is not False,
         )
 
     if mode == "skill_plan":
