@@ -1124,7 +1124,7 @@ def run(
             learn=request.get("learn", True) is not False,
             retry_context={
                 "mode": "raw_bound",
-                "request": deepcopy(dict(payload)),
+                "request": _replay_request_payload(payload),
                 "learn": True,
             },
         )
