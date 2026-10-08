@@ -27,6 +27,7 @@ SCHEMA = "PROJECT_BRAIN_ONE_SHOT_VERIFIED_CLOSURE_V1"
 R2_POINTER = "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
 TERMINAL_POINTER = "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
 PROOF_QUOTIENT = "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json"
+R1_RECEIPT = "canonical/verification/R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE_VERIFICATION_20261008_V1.json"
 
 _EXTERNAL_MARKERS = (
     "FRESH_EXTERNAL_REALITY",
@@ -122,6 +123,49 @@ def _classify_r2_edge(edge: Any) -> dict[str, Any]:
     else:
         cls = "INTERNAL_ACTIONABLE"
     return {"edge": text, "class": cls}
+
+
+def _r1_receipt_freshness(root: Path) -> dict[str, Any]:
+    try:
+        receipt = _read_json(root, R1_RECEIPT)
+    except Exception as exc:
+        return {
+            "pass": False,
+            "receipt_path": R1_RECEIPT,
+            "reason": type(exc).__name__ + ":" + str(exc),
+            "drift": [],
+        }
+    exact = receipt.get("exact_blobs")
+    if not isinstance(exact, Mapping) or not exact:
+        return {
+            "pass": False,
+            "receipt_path": R1_RECEIPT,
+            "reason": "R1_EXACT_BLOBS_MISSING",
+            "drift": [],
+        }
+    drift = []
+    for label, binding in sorted(exact.items()):
+        if not isinstance(binding, Mapping):
+            drift.append({
+                "label": label,
+                "path": None,
+                "reason": "R1_EXACT_BLOB_BINDING_INVALID",
+            })
+            continue
+        status = _binding_status(root, binding)
+        if status.get("pass") is not True:
+            drift.append({"label": label, **status})
+    ownership = receipt.get("live_ownership")
+    ownership = ownership if isinstance(ownership, Mapping) else {}
+    return {
+        "pass": not drift,
+        "receipt_path": R1_RECEIPT,
+        "receipt_status": receipt.get("status"),
+        "drift": drift,
+        "reason": None if not drift else "R1_RECEIPT_NOT_EXACT_CURRENT_BYTES",
+        "live_owned_capability_count": ownership.get("live_owned_capability_count"),
+        "verified_learned_skill_count": ownership.get("active_verified_learned_skill_count"),
+    }
 
 
 def _latest_r3_receipt(root: Path) -> tuple[str | None, dict[str, Any] | None]:
@@ -348,9 +392,29 @@ def run(
     if not 1 <= max_actions <= 64:
         raise OneShotClosureError("MAX_ACTIONS_PER_ROUND_INVALID")
 
-    from canonical.runtime import unified_cognitive_fabric_v1 as fabric
+    r1_validation_mode = str(
+        request.get("r1_validation_mode") or "FABRIC_CATALOG"
+    ).strip().upper()
+    if r1_validation_mode == "FABRIC_CATALOG":
+        from canonical.runtime import unified_cognitive_fabric_v1 as fabric
+        before_catalog = fabric.catalog()
+    elif r1_validation_mode == "EXACT_RECEIPT":
+        r1_before_receipt = _r1_receipt_freshness(root)
+        before_catalog = {
+            "r1_structural_closure": r1_before_receipt.get("pass") is True,
+            "known_r1_residuals": deepcopy(r1_before_receipt.get("drift") or []),
+            "live_owned_capability_count": r1_before_receipt.get(
+                "live_owned_capability_count"
+            ),
+            "verified_learned_skill_count": r1_before_receipt.get(
+                "verified_learned_skill_count"
+            ),
+        }
+    else:
+        raise OneShotClosureError(
+            "R1_VALIDATION_MODE_INVALID:" + r1_validation_mode
+        )
 
-    before_catalog = fabric.catalog()
     authority_before = _authority_snapshot(root)
     r3_before = _r3_receipt_freshness(root)
 
@@ -371,7 +435,20 @@ def run(
         ),
     )
 
-    after_catalog = fabric.catalog()
+    if r1_validation_mode == "FABRIC_CATALOG":
+        after_catalog = fabric.catalog()
+    else:
+        r1_after_receipt = _r1_receipt_freshness(root)
+        after_catalog = {
+            "r1_structural_closure": r1_after_receipt.get("pass") is True,
+            "known_r1_residuals": deepcopy(r1_after_receipt.get("drift") or []),
+            "live_owned_capability_count": r1_after_receipt.get(
+                "live_owned_capability_count"
+            ),
+            "verified_learned_skill_count": r1_after_receipt.get(
+                "verified_learned_skill_count"
+            ),
+        }
     authority_after = _authority_snapshot(root)
     r3_after = _r3_receipt_freshness(root)
     r2 = authority_after["r2"]
@@ -445,6 +522,7 @@ def run(
         "status": status,
         "pass": internally_closed,
         "fixed_point_reached": fixed_point,
+        "r1_validation_mode": r1_validation_mode,
         "internal_actionable_residual_count": len(internal),
         "internal_actionable_residuals": internal,
         "external_information_residual_count": len(external),
