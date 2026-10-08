@@ -4,11 +4,14 @@ on:
     branches: [main]
     paths:
       - canonical/runtime/unified_cognitive_fabric_v1.py
+      - canonical/runtime/live_brain_runtime_v1.py
+      - canonical/governance/LIVE_BRAIN_RUNTIME_V1_ACTIVATION_20261008_V1.json
       - canonical/runtime/live_capability_ownership_v1.py
       - canonical/governance/LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1.json
       - canonical/governance/CURRENT_TERMINAL_AUTHORITY.json
       - canonical/runtime/autonomous_verified_self_improvement_v1.py
       - canonical/tests/test_unified_cognitive_fabric_v1.py
+      - canonical/tests/test_live_brain_runtime_v1.py
       - canonical/tests/test_live_capability_ownership_v1.py
       - .github/workflows/verify-unified-cognitive-fabric-v1.yml
   workflow_dispatch:
@@ -22,4 +25,4 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m unittest canonical.tests.test_live_capability_ownership_v1 canonical.tests.test_unified_cognitive_fabric_v1 -v
+      - run: python -m unittest canonical.tests.test_live_capability_ownership_v1 canonical.tests.test_unified_cognitive_fabric_v1 canonical.tests.test_live_brain_runtime_v1 -v
