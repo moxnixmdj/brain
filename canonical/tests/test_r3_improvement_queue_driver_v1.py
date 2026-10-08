@@ -116,12 +116,12 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             ) as verify_work,
         ):
             out = driver.advance_once(state_path=path)
+            provider = verify_work.call_args.kwargs["episode_verification_provider"]
+            self.assertEqual(provider({"kind": "EPISODE_VERIFICATION"}), binding)
+            owned_verifier.assert_called_once()
 
         self.assertTrue(out["pass"], out)
         self.assertTrue(out["progress"], out)
-        provider = verify_work.call_args.kwargs["episode_verification_provider"]
-        self.assertEqual(provider({"kind": "EPISODE_VERIFICATION"}), binding)
-        owned_verifier.assert_called_once()
 
     def test_delayed_episode_worker_forwards_retained_effect_root(self):
         path = self.temp_state()
@@ -275,7 +275,7 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertFalse(second["progress"], second)
         self.assertEqual(
             second["blockers"][0]["blocker"],
-            "REPAIR_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
+            "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
         )
         repair.assert_called_once()
         state = learning.load_state(path)
@@ -637,8 +637,11 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertTrue(out["disposition_recorded"], out)
         self.assertEqual(
             out["status"],
-            "IMPROVEMENT_PARKED__PROVED_NONLEARNABLE_FROM_CURRENT_RETAINED_EVIDENCE",
+            "IMPROVEMENT_PARKED__CURRENT_OWNED_VERIFICATION_FRONTIER_INCOMPLETE",
         )
+        self.assertFalse(out["epistemic_nonlearnability_proved"])
+        self.assertFalse(out["observational_inseparability_proved"])
+        self.assertTrue(out["frontier_expansion_required"])
         self.assertFalse(out["permanent_nonlearnability_claimed"])
 
         state = learning.load_state(path)
@@ -646,16 +649,57 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertEqual(row["status"], "PARKED")
         self.assertEqual(
             row["parked_reason"],
-            "NO_ADMISSIBLE_CURRENT_OWNED_VERIFICATION_PATH",
+            "NO_CURRENT_OWNED_VERIFICATION_PATH",
         )
+        self.assertFalse(row["epistemic_nonlearnability_proved"])
+        self.assertFalse(row["observational_inseparability_proved"])
+        self.assertTrue(row["frontier_expansion_required"])
         observation = state["observations"][observed["observation_id"]]
         self.assertEqual(
             observation["learning_disposition"],
-            "PROVED_NONLEARNABLE_FROM_CURRENT_RETAINED_EVIDENCE",
+            "UNRESOLVED_WITH_CURRENT_OWNED_VERIFICATION_FRONTIER",
         )
+        self.assertFalse(observation["epistemic_nonlearnability_proved"])
+        self.assertFalse(observation["observational_inseparability_proved"])
+        self.assertTrue(observation["frontier_expansion_required"])
         self.assertFalse(observation["permanent_nonlearnability_claimed"])
         self.assertEqual(state["stats"]["pending_improvement_count"], 0)
         self.assertEqual(state["stats"]["parked_success_learning_count"], 1)
+
+    def test_missing_owned_adapter_is_not_labeled_information_theoretic_impossibility(self):
+        path = self.temp_state()
+        observed = learning.record_success_observation(
+            {
+                "schema": "TEST_SUCCESS_V1",
+                "status": "PASS__EVIDENCE_EXISTS_BUT_NO_OWNED_ADAPTER",
+                "pass": True,
+                "result": {"receipt_like_evidence": "present"},
+            },
+            surface="UNSUPPORTED_BUT_OBSERVABLE_SURFACE",
+            state_path=path,
+            replay_context={
+                "mode": "generic",
+                "problem": {"task_id": "frontier-gap-not-theorem"},
+            },
+        )
+
+        out = driver.advance_once(state_path=path)
+        self.assertTrue(out["pass"], out)
+        self.assertFalse(out["progress"], out)
+        self.assertTrue(out["frontier_expansion_required"], out)
+        self.assertFalse(out["epistemic_nonlearnability_proved"], out)
+        self.assertFalse(out["observational_inseparability_proved"], out)
+
+        state = learning.load_state(path)
+        observation = state["observations"][observed["observation_id"]]
+        self.assertNotEqual(
+            observation["learning_disposition"],
+            "PROVED_NONLEARNABLE_FROM_CURRENT_RETAINED_EVIDENCE",
+        )
+        self.assertEqual(
+            observation["learning_disposition"],
+            "UNRESOLVED_WITH_CURRENT_OWNED_VERIFICATION_FRONTIER",
+        )
 
     def test_parked_success_reopens_on_new_evidence_or_external_authority(self):
         path = self.temp_state()
@@ -761,6 +805,7 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             "pass": False,
             "progress": False,
             "work_id": "repair",
+            "attempt_backoff_recorded": True,
             "terminal_authority": False,
         }
         advanced_other = {
