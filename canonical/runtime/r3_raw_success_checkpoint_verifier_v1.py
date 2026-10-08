@@ -18,6 +18,7 @@ from canonical.runtime.live_integrated_brain_v1 import load_verified_registry
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 from canonical.runtime.raw_goal_archive_acceptance_v1 import (
     CAPABILITY as ARCHIVE_CAPABILITY,
+    GRAMMAR as ARCHIVE_GOAL_GRAMMAR,
     verify as verify_raw_acceptance,
 )
 from canonical.runtime.r3_raw_success_adapter_v1 import VERIFICATION_KIND
@@ -76,21 +77,25 @@ def verify_material(
         if problem.get("selected_capability_id") != ARCHIVE_CAPABILITY:
             raise ValueError("RAW_CAPABILITY_NOT_ADMITTED")
 
+        match = ARCHIVE_GOAL_GRAMMAR.fullmatch(goal)
+        if match is None:
+            raise ValueError("RAW_GOAL_NO_LONGER_MATCHES_ACCEPTED_GRAMMAR")
+        inputs = {
+            "manifest_path": match.group("manifest"),
+            "output_path": match.group("output"),
+        }
         registry = load_verified_registry()
-        admissible = goal_compiler._platform_admissible_registry(dict(registry))
-        compiled = goal_compiler.compile_goal(goal, admissible, root)
-        if str(compiled.get("selected_capability") or "") != ARCHIVE_CAPABILITY:
-            raise ValueError("RAW_GOAL_RECOMPILATION_CAPABILITY_MISMATCH")
-        inputs = compiled.get("inputs")
-        initial = compiled.get("initial_facts")
-        targets = compiled.get("target_effects")
-        if not isinstance(inputs, Mapping) or not isinstance(initial, list) or not isinstance(targets, list):
-            raise ValueError("RAW_GOAL_RECOMPILATION_SHAPE_INVALID")
+        entry = registry.get(ARCHIVE_CAPABILITY)
+        if not isinstance(entry, Mapping):
+            raise ValueError("RAW_CAPABILITY_NO_LONGER_VERIFIED_OWNED")
+        action_template = entry.get("action_template")
+        if not isinstance(action_template, Mapping):
+            raise ValueError("RAW_CAPABILITY_ACTION_TEMPLATE_MISSING")
 
         raw_contract = compile_contract(
             goal,
             source_id="user",
-            routing_target_effects=list(targets),
+            routing_target_effects=[ARCHIVE_CAPABILITY],
         )
         if raw_contract.get("pass") is not True:
             raise ValueError("RAW_TASK_CONTRACT_RECOMPILATION_FAILED")
@@ -127,7 +132,7 @@ def verify_material(
         if plan_sha != problem.get("controller_plan_sha256") or doc.get("plan_sha256") != plan_sha:
             raise ValueError("CHECKPOINT_PLAN_SHA_MISMATCH")
         expected_action = goal_compiler._render_template(
-            admissible[ARCHIVE_CAPABILITY]["action_template"],
+            action_template,
             dict(inputs),
         )
         if plans[0] != expected_action:
