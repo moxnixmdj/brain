@@ -232,6 +232,37 @@ def _compile_lossless_task_scope(goal: str) -> tuple[dict[str, Any], dict[str, A
         })
     return contract, localization, prompt_rows
 
+MAX_PLANNER_OBSERVATION_CHARS = 8000
+
+def _planner_scope_projection(raw_task_obligations: list[dict[str, Any]]) -> list[dict[str, str]]:
+    """Project the lossless contract to the minimum semantic view needed by the proposal source.
+
+    Brain retains hashes, routing status, and acceptance metadata internally. Re-sending
+    those verifier/control fields to a CPU planner only increases latency and cannot
+    authorize anything.
+    """
+    rows: list[dict[str, str]] = []
+    for row in raw_task_obligations:
+        oid = str(row.get("obligation_id") or "").strip()
+        text = str(row.get("text") or "").strip()
+        if not oid or not text:
+            raise RuntimeError("SCIENCE_PLANNER_SCOPE_PROJECTION_INVALID")
+        rows.append({"id": oid, "text": text})
+    return rows
+
+def _planner_observation_projection(observations: list[dict[str, Any]]) -> str:
+    raw = json.dumps(observations[-8:], sort_keys=True, separators=(",", ":"))
+    if len(raw) <= MAX_PLANNER_OBSERVATION_CHARS:
+        return raw
+    # Preserve newest evidence and fail visibly rather than silently fabricating a summary.
+    newest = json.dumps(observations[-2:], sort_keys=True, separators=(",", ":"))
+    if len(newest) <= MAX_PLANNER_OBSERVATION_CHARS:
+        return newest
+    return json.dumps(
+        [{"kind": "OBSERVATION_BYTES_OMITTED_FROM_PLANNER_VIEW", "count": len(observations)}],
+        separators=(",", ":"),
+    )
+
 def _nonempty_strings(value: Any, *, maximum: int, field: str) -> list[str]:
     if not isinstance(value, list) or not value or len(value) > maximum:
         raise RuntimeError(f"SCIENCE_{field}_INVALID")
@@ -336,31 +367,27 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             output_gate_failures = await _declared_output_gate(
                 environment, declared_outputs
             )
+        planner_scope = _planner_scope_projection(raw_task_obligations)
         prompt = (
-            "You are an OPTIONAL semantic proposal source inside Project Brain, not execution authority. "
-            "Return one structured proposal object only. Project Brain owns action selection, command policy, verification, "
-            "requirement-state updates, and finish authority. No network acquisition, package installation, "
-            "git fetch/clone/pull, secrets, or host escape. "
-            "On the first cycle provide material_requirements (1-16 stable short IDs). "
-            "Provide 1-8 candidate actions as {action_id,covers,command,verify_command}. "
-            "covers must name only frozen material_requirements. verify_command must independently test the "
-            "candidate's claimed effect inside the task environment. Brain alone decides completion after "
-            "independent verification resolves every frozen material requirement. finish_summary is optional "
-            "descriptive metadata only and never execution or finish authority. "
-            f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
-            "Brain lossless raw-task obligations (non-droppable; routing labels never equal acceptance): "
-            + json.dumps(raw_task_obligations, sort_keys=True)
-            + "\nEvery raw obligation remains acceptance-pending until exact candidate-bound independent acceptance exists. "
-            "Use the obligation text as authoritative semantic scope; material_requirements and covers are routing metadata only.\n"
-            "Brain-declared authoritative local inputs: "
-            + json.dumps(declared_inputs, sort_keys=True)
-            + "\nBrain-mandated explicit deliverables (requirement ID -> path): "
-            + json.dumps(brain_deliverables, sort_keys=True)
-            + "\nThe BRAIN_DECLARED_INPUT_SNAPSHOT observations below are exact local task-source reads. "
-            "Use those bytes instead of guessing plant parameters, interfaces, scenarios, or other declared source facts. "
-            "These Brain-mandated requirement IDs are part of the frozen contract and may not be omitted. "
-            "A candidate claiming one of them must actually create that exact nonempty file; Brain validates it independently.\n"
-            "Recent observations: " + json.dumps(observations[-8:], sort_keys=True)[:30000]
+            "Project Brain proposal interface. Brain owns execution, verification, state, and finish authority. "
+            "No network acquisition, package installation, git fetch/clone/pull, secrets, or host escape. "
+            "First cycle: return 1-16 stable material requirement IDs and exactly one candidate action. "
+            "Later cycles: repeat the frozen requirement IDs exactly. Candidate covers may name only those IDs. "
+            "The semantic task scope below is lossless and non-droppable; route IDs are control metadata, not acceptance evidence.\n"
+            "TASK_OBLIGATIONS="
+            + json.dumps(planner_scope, ensure_ascii=False, separators=(",", ":"))
+            + "\nFROZEN_REQUIREMENTS="
+            + json.dumps(requirements, separators=(",", ":"))
+            + "\nUNRESOLVED="
+            + json.dumps(unresolved, separators=(",", ":"))
+            + "\nDECLARED_INPUTS="
+            + json.dumps(declared_inputs, separators=(",", ":"))
+            + "\nMANDATORY_DELIVERABLES="
+            + json.dumps(brain_deliverables, sort_keys=True, separators=(",", ":"))
+            + "\nA candidate covering a mandatory deliverable must create that exact nonempty file; Brain checks it independently. "
+            "Use exact declared-input snapshot bytes when present rather than guessing source facts.\n"
+            "RECENT_VERIFIED_OBSERVATIONS="
+            + _planner_observation_projection(observations)
         )
         planned = science_planner.plan(prompt, timeout_s=PLANNER_TIMEOUT_S)
         raw = science_planner.normalize_proposal_object(
