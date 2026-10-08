@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_P3_BINARY_EXPLICIT_SOURCE_MEMBERSHIP_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_20_OF_20_ON_TWO_SPRITES__STRICT_EXPLICIT_RAW_SOURCE_MEMBERSHIP_PROVED_FOR_BOUND_BINARY_CELL__ZERO_TERMINAL_CREDIT",
+  "branch": "feature/p3-binary-explicit-source-membership-20261008-v1",
+  "runtime": {
+    "path": "canonical/runtime/p3_binary_explicit_source_membership_v1.py",
+    "git_blob_sha": "64d047499e06b3bb25c14c6b0e4443b73a82c686"
+  },
+  "tests": {
+    "path": "canonical/tests/test_p3_binary_explicit_source_membership_v1.py",
+    "git_blob_sha": "2873825169cd68ac13bb8aba18e12462677fc871"
+  },
+  "exact_reused_blobs": {
+    "canonical/runtime/p3_binary_decision_grounded_expression_v1.py": "590cdc4e7f5a513d0e40bb31afed20df61826bad",
+    "canonical/runtime/p3_binary_objective_decision_v1.py": "c62ff59d73a4fe364273995265e795907a67afa6",
+    "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py": "da4da391280a985f6d90028b12c9cdb0ef0aaf46",
+    "canonical/runtime/p3_bounded_objective_role_relevance_v1.py": "d8977024955a22003c6bcde9d54c40cad68e44b7",
+    "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py": "48fd058430d8d361fc75beced567c7b6d1166531",
+    "canonical/runtime/synthesis_certified_visible_support_policy_v2.py": "14c7b3f99b6c28b3f28b5356e13907f843f5ee91"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "h100-real-image-v1",
+      "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+      "workspace": "/home/sprite/p3_binary_membership_verify_a",
+      "tests_passed": 20,
+      "tests_run": 20
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-root3-current-byte-replay-20261007-v1",
+      "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "workspace": "/home/sprite/p3_binary_membership_verify_b",
+      "tests_passed": 20,
+      "tests_run": 20
+    }
+  ],
+  "proved": [
+    "AUTHORITATIVE_RAW_SOURCE_MUST_BE_EXACT_JSON_ENCODING_OF_THE_DECLARED_BOUND_BINARY_CELL",
+    "DUPLICATE_JSON_KEYS_FAIL_CLOSED",
+    "TOP_TASK_CLAIM_EVIDENCE_PROVENANCE_AUDIENCE_AND_CONSTRAINT_FIELDS_ARE_EXACT_NOT_OPEN_ENDED",
+    "OBJECTIVE_MUST_BE_FULLY_CONSUMED_BY_EXACTLY_ONE_EXISTING_BINARY_NUMERIC_GRAMMAR",
+    "VALID_BINARY_COMPARISON_WITH_TRAILING_OR_SAME_SENTENCE_EXTRA_REQUIREMENT_FAILS_CLOSED",
+    "EXACTLY_TWO_OPTIONAL_CLAIMS_AND_EXACTLY_TWO_VERIFIED_EVIDENCE_UNITS_ARE_REQUIRED",
+    "EXPLICIT_AUDIENCE_PROFILE_AND_EXACT_CONSTRAINT_SURFACE_ARE_REQUIRED",
+    "VERIFIED_GROUNDED_BINARY_DECISION_EXPRESSION_MUST_PASS",
+    "MEMBERSHIP_RECEIPT_IS_DETERMINISTIC_AND_BOUND_TO_SOURCE_ID_RAW_BYTES_AND_NORMALIZED_DOCUMENT",
+    "NO_AUTHORITY_ESCALATION"
+  ],
+  "causal_effect": {
+    "closed": "REAL_CONTEXT_SEMANTIC_SCOPE_MEMBERSHIP_FOR_THE_PARAMETERIZED_EXPLICIT_RAW_SOURCE_BOUND_BINARY_CELL",
+    "remaining": "FREE_FORM_OR_OTHER_RAW_SOURCES_REQUIRE_A_SEPARATE_LOSSLESS_MAPPING_OR_THE_SMALLEST_POLICY_CHANGING_OMITTED_REQUIREMENT"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_FREE_FORM_NATURAL_LANGUAGE_IS_LOSSLESSLY_MAPPED_TO_THE_EXPLICIT_SCHEMA",
+    "NO_CLAIM_UPSTREAM_SOURCE_AUTHORIZATION_IS_PROVED",
+    "NO_CLAIM_ALL_REAL_P3_CONTEXTS_HAVE_THIS_EXPLICIT_RAW_SOURCE_FORM",
+    "NO_GENERAL_OPTIONAL_RELEVANCE_AUDIENCE_PARAPHRASE_TEMPORAL_CAUSAL_OR_MULTIMODAL_CLOSURE",
+    "NO_POLICY_ADEQUACY_DB_ADMISSION_U_SUBTRACTION_U_EMPTY_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
