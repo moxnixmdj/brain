@@ -620,6 +620,60 @@ def _observe_runtime_outcome(
     }
 
 
+def _automatic_failure_repair(
+    learning_result: Mapping[str, Any] | None,
+    *,
+    repo_root: str | Path,
+    state_path: str | Path | None,
+    repair_components: Sequence[Mapping[str, Any]] = (),
+    initial_facts: Sequence[str] = (),
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+) -> dict[str, Any] | None:
+    """Bridge a durable R3 diagnosis directly into verified repair and replay."""
+    if not isinstance(learning_result, Mapping) or learning_result.get("pass") is not False:
+        return None
+    diagnosis = learning_result.get("diagnosis")
+    if not isinstance(diagnosis, Mapping):
+        return None
+    fingerprint = str(diagnosis.get("failure_fingerprint") or "").strip()
+    retry_sha = str(learning_result.get("retry_capsule_sha256") or "").strip()
+    if not fingerprint or not retry_sha:
+        return None
+    if not isinstance(repair_components, Sequence) or isinstance(
+        repair_components, (str, bytes)
+    ):
+        return _fail("AUTOMATIC_REPAIR_COMPONENT_FRONTIER_INVALID")
+    if not isinstance(initial_facts, Sequence) or isinstance(initial_facts, (str, bytes)):
+        return _fail("AUTOMATIC_REPAIR_INITIAL_FACTS_INVALID")
+    if not repair_components and capability_expander is None:
+        return {
+            "schema": SCHEMA,
+            "status": "AUTOMATIC_REPAIR_BLOCKED__NO_VERIFIED_COMPONENT_OR_EXPANDER",
+            "pass": False,
+            "failure_fingerprint": fingerprint,
+            "retry_capsule_sha256": retry_sha,
+            "terminal_authority": False,
+            "capability_promotion_authority": False,
+            "terminal_credit_delta": 0,
+        }
+    return execute_failure_repair_cycle(
+        {
+            "failure_fingerprint": fingerprint,
+            "retry_capsule_sha256": retry_sha,
+            "components": deepcopy(list(repair_components)),
+            "initial_facts": list(initial_facts),
+            "learn": True,
+        },
+        repo_root=repo_root,
+        state_path=state_path,
+        information_provider=information_provider,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+    )
+
+
 def _h100(operation: str, payload: Mapping[str, Any]) -> Any:
     from canonical.runtime import h100_verified_capability_registry_v8 as module
     if operation == "registry_snapshot":
@@ -742,6 +796,8 @@ def run_generic(
     solver_kwargs: Mapping[str, Any] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    auto_repair: bool = True,
+    repair_components: Sequence[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
     if not isinstance(problem, Mapping):
         return _fail("PROBLEM_NOT_OBJECT")
@@ -773,6 +829,7 @@ def run_generic(
                     "scope_id": scope_id,
                     "active_invalidators": list(active_invalidators),
                     "known_absent_invalidators": list(known_absent_invalidators),
+                    "auto_repair": False,
                     "learn": True,
                 },
                 known_absent_invalidators=known_absent_invalidators,
@@ -783,13 +840,45 @@ def run_generic(
             out = learned.get("solver_output")
             if not isinstance(out, Mapping):
                 raise ValueError("R3_SOLVER_OUTPUT_MISSING")
+            automatic_repair = None
+            if learned.get("pass") is not True and auto_repair:
+                automatic_repair = _automatic_failure_repair(
+                    learned.get("learning"),
+                    repo_root=repo_root,
+                    state_path=ctx["state_path"],
+                    repair_components=repair_components,
+                    initial_facts=problem.get("initial_facts") or (),
+                    proposal_provider=proposal_provider,
+                    capability_expander=capability_expander,
+                )
+            repaired = (
+                isinstance(automatic_repair, Mapping)
+                and automatic_repair.get("pass") is True
+            )
+            repaired_replay = (
+                automatic_repair.get("original_replay")
+                if repaired and isinstance(automatic_repair, Mapping)
+                else None
+            )
+            effective_out = out
+            if isinstance(repaired_replay, Mapping) and isinstance(
+                repaired_replay.get("solver_output"), Mapping
+            ):
+                effective_out = repaired_replay["solver_output"]
             return {
                 "schema": SCHEMA,
-                "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
-                "pass": learned.get("pass") is True,
+                "status": (
+                    "UNIFIED_GENERIC_EXECUTION_REPAIRED_AND_REPLAYED"
+                    if repaired else "UNIFIED_GENERIC_EXECUTION_COMPLETE"
+                ),
+                "pass": repaired or learned.get("pass") is True,
                 "solver": "R3_REUSE_FIRST_OVER_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
-                "solver_output": out,
+                "solver_output": effective_out,
+                "initial_solver_output": out if repaired else None,
                 "learning": learned.get("learning"),
+                "automatic_repair_attempted": automatic_repair is not None,
+                "automatic_repair": automatic_repair,
+                "repaired_original_replay": repaired_replay,
                 "verified_prior_episode_count_reused": learned.get(
                     "prior_verified_episode_count_used", 0
                 ),
@@ -858,6 +947,8 @@ def run_decision(
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
     known_absent_invalidators: Sequence[str] = (),
     learn: bool = True,
+    auto_repair: bool = True,
+    repair_components: Sequence[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
     if not isinstance(request, Mapping):
         return _fail("DECISION_REQUEST_NOT_OBJECT")
@@ -885,6 +976,7 @@ def run_decision(
                     "mode": "decision",
                     "request": deepcopy(dict(bound_request)),
                     "known_absent_invalidators": list(known_absent_invalidators),
+                    "auto_repair": False,
                     "learn": True,
                 },
                 known_absent_invalidators=known_absent_invalidators,
@@ -910,6 +1002,7 @@ def run_decision(
             "mode": "decision",
             "request": deepcopy(dict(bound_request)),
             "known_absent_invalidators": list(known_absent_invalidators),
+            "auto_repair": False,
             "learn": True,
         }
 
@@ -924,13 +1017,53 @@ def run_decision(
                 retry_context=retry_context,
             )
 
+        automatic_repair = None
+        if out.get("pass") is not True and auto_repair:
+            execution_problem = bound_request.get("execution_problem")
+            initial_facts = (
+                execution_problem.get("initial_facts") or ()
+                if isinstance(execution_problem, Mapping)
+                else ()
+            )
+            automatic_repair = _automatic_failure_repair(
+                learning,
+                repo_root=repo_root,
+                state_path=state_path,
+                repair_components=repair_components,
+                initial_facts=initial_facts,
+                information_provider=information_provider,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+            )
+        repaired = (
+            isinstance(automatic_repair, Mapping)
+            and automatic_repair.get("pass") is True
+        )
+        repaired_replay = (
+            automatic_repair.get("original_replay")
+            if repaired and isinstance(automatic_repair, Mapping)
+            else None
+        )
+        effective_out = out
+        if isinstance(repaired_replay, Mapping) and isinstance(
+            repaired_replay.get("decision_output"), Mapping
+        ):
+            effective_out = repaired_replay["decision_output"]
+
         return {
             "schema": SCHEMA,
-            "status": "UNIFIED_DECISION_EXECUTION_COMPLETE",
-            "pass": out.get("pass") is True,
+            "status": (
+                "UNIFIED_DECISION_EXECUTION_REPAIRED_AND_REPLAYED"
+                if repaired else "UNIFIED_DECISION_EXECUTION_COMPLETE"
+            ),
+            "pass": repaired or out.get("pass") is True,
             "decision_controller": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
-            "decision_output": out,
+            "decision_output": effective_out,
+            "initial_decision_output": out if repaired else None,
             "learning": learning,
+            "automatic_repair_attempted": automatic_repair is not None,
+            "automatic_repair": automatic_repair,
+            "repaired_original_replay": repaired_replay,
             "reuse_first": (
                 learned.get("reuse_first") is True
                 if isinstance(learned, Mapping) else False
@@ -952,10 +1085,10 @@ def run_decision(
                 if isinstance(learned, Mapping) else False
             ),
             "semantic_acceptance_complete": (
-                out.get("semantic_acceptance_complete") is True
+                effective_out.get("semantic_acceptance_complete") is True
             ),
             "actual_goal_satisfaction_verified": (
-                out.get("actual_goal_satisfaction_verified") is True
+                effective_out.get("actual_goal_satisfaction_verified") is True
             ),
             "terminal_authority": False,
             "capability_promotion_authority": False,
@@ -1070,6 +1203,8 @@ def run(
             capability_expander=capability_expander,
             known_absent_invalidators=request.get("known_absent_invalidators") or (),
             learn=request.get("learn", True) is not False,
+            auto_repair=request.get("auto_repair", True) is not False,
+            repair_components=request.get("repair_components") or (),
         )
 
     if mode == "generic":
@@ -1088,6 +1223,8 @@ def run(
             solver_kwargs=request.get("solver_kwargs") or {},
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
+            auto_repair=request.get("auto_repair", True) is not False,
+            repair_components=request.get("repair_components") or (),
         )
 
     if mode == "compiled_bound":
