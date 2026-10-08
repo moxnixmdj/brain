@@ -9,17 +9,15 @@ from hashlib import sha256
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as direct
-from canonical.runtime import raw_goal_archive_acceptance_v1 as archive_acceptance
-from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_acceptance
-from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
-from canonical.runtime import r2_structured_binary_direct_adequacy_v1 as codec
-from canonical.runtime import r2_structured_table_direct_adequacy_v1 as table
-from canonical.runtime import r2_docx_direct_adequacy_v1 as docx
-from canonical.runtime import r2_docx_json_direct_adequacy_v1 as docx_json
-from canonical.runtime import r2_typed_decision_direct_adequacy_v1 as typed
-from canonical.runtime.bound_capabilities import docx_verify_ooxml_intent
-from canonical.runtime.bound_capabilities import evidence_decision_verify
+ARCHIVE_ROUTE_ID = "DIRECT_ADEQUACY::ARCHIVE_MANIFEST_TAR_GZ_V1"
+EXACT_LITERAL_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1"
+LITERAL_JSON_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1"
+STRUCTURED_BINARY_CODEC_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1"
+STRUCTURED_TABLE_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_TABLE_ARTIFACT_FAMILY_V1"
+DOCX_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1"
+DOCX_JSON_ROUTE_ID = "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1"
+TYPED_DECISION_ROUTE_ID = "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1"
+
 
 SCHEMA = "PROJECT_BRAIN_R3_DIRECT_ADEQUACY_READBACK_VERIFIER_V1"
 VERIFICATION_BASIS = "EXACT_DIRECT_PREFLIGHT_PLUS_PRODUCER_INDEPENDENT_CURRENT_ARTIFACT_READBACK"
@@ -77,17 +75,18 @@ def verify_material(
         goal_sha = sha256(goal.encode("utf-8")).hexdigest()
         if not goal or problem.get("goal_sha256") != goal_sha or material.get("goal_sha256") != goal_sha:
             raise ValueError("GOAL_HASH_MISMATCH")
-        pf = direct.preflight(request)
-        if pf.get("matched") is not True:
-            raise ValueError("DIRECT_PREFLIGHT_NO_LONGER_MATCHES")
         route_id = str(material.get("route_id") or "")
-        if pf.get("route_id") != route_id or problem.get("route_id") != route_id:
+        if problem.get("route_id") != route_id:
             raise ValueError("DIRECT_ROUTE_ID_DRIFT")
         retained_ids = _accepted_ids(material)
         raw_result = material.get("raw_result")
         evidence: Mapping[str, Any]
 
-        if route_id == direct.EXACT_LITERAL_ROUTE_ID:
+        if route_id == EXACT_LITERAL_ROUTE_ID:
+            from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_acceptance
+            pf = literal_acceptance.preflight(goal)
+            if pf.get("matched") is not True:
+                raise ValueError("DIRECT_PREFLIGHT_NO_LONGER_MATCHES")
             if not isinstance(raw_result, Mapping):
                 raise ValueError("EXACT_LITERAL_RAW_RESULT_MISSING")
             evidence = literal_acceptance.verify(goal=goal, raw_result=raw_result)
@@ -97,7 +96,11 @@ def verify_material(
                 and evidence.get("semantic_acceptance_complete") is True
                 and evidence.get("actual_goal_satisfaction_verified") is True
             )
-        elif route_id == direct.LITERAL_JSON_ROUTE_ID:
+        elif route_id == LITERAL_JSON_ROUTE_ID:
+            from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
+            pf = literal_json_acceptance.preflight(goal, root=root)
+            if pf.get("matched") is not True:
+                raise ValueError("DIRECT_PREFLIGHT_NO_LONGER_MATCHES")
             if not isinstance(raw_result, Mapping):
                 raise ValueError("LITERAL_JSON_RAW_RESULT_MISSING")
             evidence = literal_json_acceptance.verify(goal=goal, raw_result=raw_result)
@@ -108,7 +111,12 @@ def verify_material(
                 and evidence.get("actual_goal_satisfaction_verified") is True
                 and evidence.get("artifact_exact") is True
             )
-        elif route_id == direct.ARCHIVE_ROUTE_ID:
+        elif route_id == ARCHIVE_ROUTE_ID:
+            from canonical.runtime import raw_goal_archive_acceptance_v1 as archive_acceptance
+            match = archive_acceptance.GRAMMAR.fullmatch(goal)
+            if match is None:
+                raise ValueError("DIRECT_PREFLIGHT_NO_LONGER_MATCHES")
+            pf = {"bound_inputs": {"manifest_path": match.group("manifest"), "output_path": match.group("output")}}
             retained = material.get("acceptance_receipt")
             if not isinstance(retained, Mapping) or retained.get("pass") is not True:
                 raise ValueError("ARCHIVE_ACCEPTANCE_RECEIPT_MISSING")
@@ -119,8 +127,11 @@ def verify_material(
             evidence = retained
             ids = retained.get("accepted_obligation_ids")
             ok = retained.get("semantic_acceptance_complete") is True
-        elif route_id == direct.STRUCTURED_BINARY_CODEC_ROUTE_ID:
+        elif route_id == STRUCTURED_BINARY_CODEC_ROUTE_ID:
+            from canonical.runtime import r2_structured_binary_direct_adequacy_v1 as codec
             cp = codec.preflight(request, repo_root=root)
+            if cp.get("matched") is not True:
+                raise ValueError("DIRECT_PREFLIGHT_NO_LONGER_MATCHES")
             evidence = codec._independent_verify(cp, repo_root=root)
             ids = retained_ids
             ok = (
@@ -134,14 +145,17 @@ def verify_material(
                     )
                 )
             )
-        elif route_id == direct.STRUCTURED_TABLE_ROUTE_ID:
+        elif route_id == STRUCTURED_TABLE_ROUTE_ID:
+            from canonical.runtime import r2_structured_table_direct_adequacy_v1 as table
             tp = table.preflight(request, repo_root=root)
             if tp.get("source_sha256") != _sha_file(root, str(tp.get("json_path") or "")):
                 raise ValueError("TABLE_SOURCE_HASH_DRIFT")
             evidence = table._independent_verify(tp, repo_root=root)
             ids = retained_ids
             ok = evidence.get("verified") is True and evidence.get("producer_independent_verifier") is True
-        elif route_id == direct.DOCX_ROUTE_ID:
+        elif route_id == DOCX_ROUTE_ID:
+            from canonical.runtime import r2_docx_direct_adequacy_v1 as docx
+            from canonical.runtime.bound_capabilities import docx_verify_ooxml_intent
             dp = docx.preflight(request, repo_root=root)
             evidence = docx_verify_ooxml_intent.run({"path": dp["output_path"]}, root)
             ids = retained_ids
@@ -151,7 +165,8 @@ def verify_material(
                 and evidence.get("intent_source_goal") == dp.get("creation_clause")
                 and evidence.get("intent_derived_expected") == dp.get("expected")
             )
-        elif route_id == direct.DOCX_JSON_ROUTE_ID:
+        elif route_id == DOCX_JSON_ROUTE_ID:
+            from canonical.runtime import r2_docx_json_direct_adequacy_v1 as docx_json
             dp = docx_json.preflight(request, repo_root=root)
             evidence = docx_json._independent_verify(dp, repo_root=root)
             ids = retained_ids
@@ -160,7 +175,9 @@ def verify_material(
                 and evidence.get("producer_independent_verifier") is True
                 and evidence.get("intent_source_goal") == dp.get("goal")
             )
-        elif route_id == direct.TYPED_DECISION_ROUTE_ID:
+        elif route_id == TYPED_DECISION_ROUTE_ID:
+            from canonical.runtime import r2_typed_decision_direct_adequacy_v1 as typed
+            from canonical.runtime.bound_capabilities import evidence_decision_verify
             tp = typed.preflight(request, repo_root=root)
             if tp.get("input_sha256") != _sha_file(root, str(tp.get("input_path") or "")):
                 raise ValueError("TYPED_DECISION_INPUT_HASH_DRIFT")
