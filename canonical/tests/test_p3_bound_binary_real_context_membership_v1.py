@@ -172,3 +172,44 @@ def test_objective_drift_without_new_authority_receipt_fails():
     def mut(x,root): x["objective"]="Determine whether 6061 aluminum is higher than AISI type 304 stainless steel."
     out=run(mut)
     assert out["reason"]=="AUTHORITY_SCOPE_RECEIPT_INVALID:structured_contract_sha256"
+
+
+def _rebind_source_authority(x,root):
+    ref=x["authority_scope_ref"]
+    doc=json.loads((root/ref["path"]).read_text())
+    doc["source_sha256"]=m._sha_text(x["source_text"])
+    raw=json.dumps(doc,sort_keys=True,separators=(",",":")).encode()
+    (root/ref["path"]).write_bytes(raw)
+    ref["git_blob_sha"]=git_blob_id(raw,object_format="sha1")
+
+def test_nonrisky_unclassified_source_tail_fails():
+    def mut(x,root):
+        x["source_text"] += "Background note.\n"
+        atoms=atomize_source(x["source_text"],x["source_name"])
+        tail=atoms[-1]
+        x["dispositions"].append({
+          "atom_id":tail.atom_id,"kind":"INFORMATIVE","rationale":"background","requirement_ids":[]
+        })
+        _rebind_source_authority(x,root)
+    out=run(mut)
+    assert out["reason"]=="SEMANTIC_SOURCE_TEXT_NOT_FULLY_COVERED"
+
+def test_nonrisky_ambiguous_source_tail_fails():
+    def mut(x,root):
+        x["source_text"] += "Background note.\n"
+        atoms=atomize_source(x["source_text"],x["source_name"])
+        tail=atoms[-1]
+        x["dispositions"].append({
+          "atom_id":tail.atom_id,"kind":"INFORMATIVE","rationale":"background","requirement_ids":[]
+        })
+        unit={
+          "atom_id":tail.atom_id,"start":0,"end":len(tail.text),
+          "text_sha256":hashlib.sha256(tail.text.encode()).hexdigest(),
+          "kind":"AMBIGUOUS","semantic_fingerprint":"AMBIGUOUS:background",
+          "rationale":"unclear meaning",
+        }
+        x["extractor_units"]["A"].append(dict(unit))
+        x["extractor_units"]["B"].append(dict(unit))
+        _rebind_source_authority(x,root)
+    out=run(mut)
+    assert out["reason"]=="OPEN_SEMANTIC_AMBIGUITY"
