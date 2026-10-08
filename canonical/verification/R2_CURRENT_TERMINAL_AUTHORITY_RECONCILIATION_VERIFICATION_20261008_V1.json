@@ -1,0 +1,55 @@
+{
+  "schema":"PROJECT_BRAIN_R2_CURRENT_TERMINAL_AUTHORITY_RECONCILIATION_VERIFICATION_20261008_V1",
+  "date":"2026-10-08",
+  "status":"PASS__R2_AUTHORITY_STATE_RECONCILED_TO_NEWER_FIXED_POINT_AND_INFORMATION_CUT__ZERO_CREDIT",
+  "subject":{
+    "path":"canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha":"9332ebb2c3b29da90ea66b01fa792296b1cd3d9a"
+  },
+  "bound_sources":{
+    "r2_fixed_point_activation":{
+      "path":"canonical/governance/R2_GENERAL_ADEQUATE_DECISION_FIXED_POINT_ACTIVATION_20261008_V2.json",
+      "git_blob_sha":"96f67d92da1cb37d0864c07e687be54b2e59471f"
+    },
+    "r2_fixed_point_runtime":{
+      "path":"canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+      "git_blob_sha":"58c664a05cc580081c78c7e08ec07700f56e2db2"
+    },
+    "r2_fixed_point_verification":{
+      "path":"canonical/verification/R2_GENERAL_ADEQUATE_DECISION_FIXED_POINT_LOCAL_VERIFICATION_20261008_V2.json",
+      "git_blob_sha":"bc7e59aec2b5f7c74fffa95e534c9f01f2bf9c5b"
+    },
+    "r2_scheduler":{
+      "path":"canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V2.json",
+      "git_blob_sha":"6f9b39cdab13b446f3399e7eb4bfe3b8ce42bbe9"
+    },
+    "r2_scheduler_verification":{
+      "path":"canonical/verification/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_V2_CONNECTOR_VERIFICATION_20261008_V1.json",
+      "git_blob_sha":"6c2b818a5fae0141d928f68bb81220b0d7ebb93d"
+    },
+    "gdpval_minimum_information_cut":{
+      "path":"canonical/governance/GDPVAL_EVALUATION_LAW_MINIMUM_INFORMATION_CUT_20261008_V1.json",
+      "git_blob_sha":"7bf8b2ffc8186e14380da080e5a9832a2fd9a2a8"
+    }
+  },
+  "recomputed_checks":{
+    "authority_binds_r2_v2_fixed_point":true,
+    "authority_binds_current_r2_v2_scheduler":true,
+    "authority_gdpval_owner_layer_awake_is_false":true,
+    "authority_gdpval_state_is_external_required_sleep":true,
+    "authority_r2_adaptive_fixed_point_controller_live":true,
+    "authority_r2_global_escape_policy_adequacy_closed_is_false":true,
+    "authority_r2_active_zero_reality_cell_count_is_zero":true,
+    "authority_r2_external_required_sleep_cell_count_is_two":true,
+    "authority_r2_primary_internal_research_authorized_is_false":true,
+    "newer_gdpval_information_cut_postdates_and_supersedes_the_older_awake_boundary_refresh_for_primary_scheduling":true,
+    "no_newer_declared_gdpval_separator_wake_found_after_current_r2_scheduler":true
+  },
+  "boundary":[
+    "THIS_REPAIRS_AUTHORITY_CONSISTENCY_ONLY.",
+    "IT_DOES_NOT CLAIM_GLOBAL_R2_CLOSURE.",
+    "IT_DOES_NOT CREATE A_NEW_GDPVAL_OR_FINANCE_FACT.",
+    "IT_DOES_NOT_GRANT_ACCEPTANCE_CAPABILITY_OWNERSHIP_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
