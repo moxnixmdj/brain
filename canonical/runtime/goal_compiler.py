@@ -762,6 +762,7 @@ def _compile_json_markdown_table(subgoal, context_paths, registry, root):
         "status_value":wanted,
         "collection_path":list(collection),
         "capability_id":"json.query.jq",
+        "target_effects":["document.markdown.table_from_json"],
       }
     }
 
