@@ -35,7 +35,7 @@ MAX_CYCLES = 12
 MAX_REQUIREMENTS = 16
 MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
-PLANNER_TIMEOUT_S = 300
+PLANNER_TIMEOUT_S = 600
 
 _FATAL_ACTION_STDERR_MARKERS = (
     "here-document at line",
@@ -348,10 +348,15 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "independent verification resolves every frozen material requirement. finish_summary is optional "
             "descriptive metadata only and never execution or finish authority. "
             f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
-            "Brain lossless raw-task obligations (non-droppable; routing labels never equal acceptance): "
-            + json.dumps(raw_task_obligations, sort_keys=True)
+            "Brain lossless raw-task acceptance summary (the full Goal text above is the sole semantic copy): "
+            + json.dumps({
+                "task_contract_sha256": raw_task_contract.get("task_contract_sha256"),
+                "required_obligation_count": len(raw_task_obligations),
+                "objective_route_obligation_count": raw_task_localization.get("objective_route_obligation_count"),
+                "semantic_residual_obligation_count": raw_task_localization.get("semantic_residual_obligation_count"),
+            }, sort_keys=True)
             + "\nEvery raw obligation remains acceptance-pending until exact candidate-bound independent acceptance exists. "
-            "Use the obligation text as authoritative semantic scope; material_requirements and covers are routing metadata only.\n"
+            "Use the Goal text as authoritative semantic scope; this acceptance summary and material_requirements/covers are control metadata only.\n"
             "Brain-declared authoritative local inputs: "
             + json.dumps(declared_inputs, sort_keys=True)
             + "\nBrain-mandated explicit deliverables (requirement ID -> path): "
