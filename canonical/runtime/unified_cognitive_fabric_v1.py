@@ -25,7 +25,7 @@ ENGINE_DESCRIPTORS = {
     "ADEQUATE_DECISION": "general_adequate_decision_controller_v1.run",
     "P3": "p3_real_context_v3_admission_v12.evaluate",
     "ADAPTIVE_SOLVER": "universal_verified_adaptive_solver_v12.run",
-    "LEARNING_EPISODE": "autonomous_verified_self_improvement_v1.run_learning_episode",
+    "LEARNING_EPISODE": "autonomous_verified_self_improvement_v2.run_learning_episode",
     "BOUND_CAPABILITY": "verified_bound_capability_execution_adapter_v1.execute",
 }
 
@@ -108,8 +108,6 @@ def run(
                 proposal_provider_max_candidates=int(options.get("proposal_provider_max_candidates", 4)),
                 capability_expander_id=str(options.get("capability_expander_id") or "HOST_CAPABILITY_EXPANDER"),
                 max_capability_expansions=int(options.get("max_capability_expansions", 4)),
-                repair_provider=repair_provider,
-                max_repair_rounds=int(options.get("max_repair_rounds", 3)),
             )
         elif mode == "LEARNING_EPISODE":
             out = self_improvement.run_learning_episode(
@@ -131,6 +129,8 @@ def run(
                 proposal_provider_max_candidates=int(options.get("proposal_provider_max_candidates", 4)),
                 capability_expander_id=str(options.get("capability_expander_id") or "HOST_CAPABILITY_EXPANDER"),
                 max_capability_expansions=int(options.get("max_capability_expansions", 4)),
+                repair_provider=repair_provider,
+                max_repair_rounds=int(options.get("max_repair_rounds", 3)),
             )
         else:
             capability_id = str(payload.get("capability_id") or "").strip()
