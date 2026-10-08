@@ -143,6 +143,58 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         self.assertFalse(packet["provider_is_terminal_authority"])
 
     @patch.object(fixed, "run_controller")
+    def test_policy_cover_observation_request_can_be_repaired_and_reverified(self, controller):
+        open_cover = {
+            **self._open("OPEN__POLICY_COVER_OBSERVATION_BINDING_REQUIRED"),
+            "next_required_edge": "AUTHENTICATED_SELECTED_POLICY_CHANGING_OBSERVATION",
+            "next_observation_request": {
+                "schema": "PROJECT_BRAIN_POLICY_COVER_OBSERVATION_REQUEST_V1",
+                "state_id": "state-1",
+                "discriminator_id": "disc-1",
+                "surviving_world_ids": ["w1", "w2"],
+                "observation_authority": False,
+            },
+        }
+        controller.side_effect = [open_cover, self._pass()]
+
+        provider = Mock(
+            return_value={
+                "request_patch": {
+                    "policy_cover_observation_bindings": {
+                        "disc-1": {
+                            "receipt": {
+                                "path": "canonical/governance/obs.json",
+                                "git_blob_sha": "abc",
+                            },
+                            "verification": {
+                                "path": "canonical/verification/obs.json",
+                                "git_blob_sha": "def",
+                            },
+                        }
+                    },
+                    "max_policy_cover_observations": 8,
+                }
+            }
+        )
+
+        out = fixed.run(self._request(), proposal_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(controller.call_count, 2)
+        packet = provider.call_args.args[0]
+        self.assertEqual(
+            packet["next_observation_request"]["discriminator_id"],
+            "disc-1",
+        )
+        self.assertIn(
+            "policy_cover_observation_bindings",
+            packet["allowed_request_patch_fields"],
+        )
+        second = controller.call_args_list[1].args[0]
+        self.assertIn("disc-1", second["policy_cover_observation_bindings"])
+        self.assertEqual(second["max_policy_cover_observations"], 8)
+
+    @patch.object(fixed, "run_controller")
     def test_provider_pass_claim_cannot_bypass_controller(self, controller):
         controller.return_value = self._open()
         provider = Mock(return_value={"pass": True, "status": "I_SAY_DONE"})
