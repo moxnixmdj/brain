@@ -23,6 +23,9 @@ from canonical.runtime.universal_verified_adaptive_solver_v12 import run as run_
 from canonical.runtime.observable_policy_cover_executor_v1 import (
     evaluate as evaluate_policy_cover,
 )
+from canonical.runtime.r2_authenticated_adequacy_authority_registry_v1 import (
+    discover as discover_authenticated_adequacy,
+)
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_CONTROLLER_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -758,6 +761,109 @@ def run(
             }
 
         decision_payload = request.get("decision_payload")
+        full_binding_supplied = isinstance(
+            request.get("goal_to_decision_binding"), Mapping
+        )
+        partial_binding_supplied = isinstance(
+            request.get("partial_goal_to_decision_binding"), Mapping
+        )
+
+        # Before starting open-ended semantic refinement, reuse any exact
+        # Brain-owned adequacy region that proves its own raw-source membership.
+        # This registry accepts no provider/caller semantic authority. A matched
+        # adequate policy still must pass the independent raw-goal satisfaction
+        # gate below.
+        specialist_adequacy = None
+        if (
+            not isinstance(decision_payload, Mapping)
+            and not full_binding_supplied
+            and not partial_binding_supplied
+            and request.get("execution_problem") is None
+        ):
+            specialist_adequacy = discover_authenticated_adequacy(
+                goal,
+                source_id="user",
+            )
+            if (
+                isinstance(specialist_adequacy, Mapping)
+                and specialist_adequacy.get("pass") is True
+            ):
+                selected_policy_id = specialist_adequacy.get("policy_id")
+                realization = specialist_adequacy.get("realization")
+                if (
+                    not isinstance(selected_policy_id, str)
+                    or not selected_policy_id
+                    or not isinstance(realization, Mapping)
+                    or specialist_adequacy.get("scope_membership_verified") is not True
+                    or specialist_adequacy.get("selected_policy_adequacy_verified") is not True
+                    or specialist_adequacy.get("policy_selection_authorized") is not True
+                    or specialist_adequacy.get("actual_goal_satisfaction_verified") is not False
+                    or specialist_adequacy.get("terminal_authority") is not False
+                ):
+                    raise DecisionControllerError(
+                        "SPECIALIST_ADEQUACY_PASS_WITH_INVALID_AUTHORITY_BOUNDARY"
+                    )
+                realization = deepcopy(dict(realization))
+                goal_satisfaction = _authenticate_goal_satisfaction_binding(
+                    request.get("goal_satisfaction_binding"),
+                    goal=goal,
+                    selected_policy_id=selected_policy_id,
+                    realization=realization,
+                    repo_root=root,
+                )
+                if goal_satisfaction.get("pass") is not True:
+                    return _open(
+                        str(
+                            goal_satisfaction.get("status")
+                            or "OPEN__GOAL_SATISFACTION_BINDING_REQUIRED"
+                        ),
+                        task_id=task_id,
+                        goal=goal,
+                        raw_contract=raw_contract,
+                        next_required_edge=(
+                            "INDEPENDENT_ACTUAL_GOAL_SATISFACTION_VERIFICATION"
+                        ),
+                        selected_policy_id=selected_policy_id,
+                        decision_result=specialist_adequacy,
+                        realization=realization,
+                        goal_satisfaction_binding=goal_satisfaction,
+                        specialist_adequacy_authority=specialist_adequacy,
+                    )
+                return {
+                    "schema": SCHEMA,
+                    "status": (
+                        "PASS__GOAL_BOUND_AUTHENTICATED_SPECIALIST_POLICY_"
+                        "REALIZED_AND_ACCEPTANCE_VERIFIED"
+                    ),
+                    "pass": True,
+                    "task_id": task_id,
+                    "goal_sha256": sha256(goal.encode("utf-8")).hexdigest(),
+                    "raw_task_contract_sha256": raw_contract[
+                        "task_contract_sha256"
+                    ],
+                    "raw_source_coverage_complete": raw_contract[
+                        "nonwhitespace_source_coverage_complete"
+                    ],
+                    "decision_result": specialist_adequacy,
+                    "selected_policy_id": selected_policy_id,
+                    "action_kind": "AUTHENTICATED_SPECIALIST_POLICY_RESULT",
+                    "action": realization,
+                    "realization": realization,
+                    "goal_satisfaction_binding": goal_satisfaction,
+                    "specialist_adequacy_authority": specialist_adequacy,
+                    "information_trace": [],
+                    "minimum_information_rounds_used": 0,
+                    "semantic_acceptance_complete": True,
+                    "actual_goal_satisfaction_verified": True,
+                    "verification_scope": (
+                        "SELF_AUTHENTICATING_SPECIALIST_ADEQUACY_PLUS_"
+                        "INDEPENDENT_ACTUAL_GOAL_SATISFACTION"
+                    ),
+                    "terminal_authority": False,
+                    "terminal_credit_delta": 0,
+                    "incremental_spend_usd": 0,
+                }
+
         opaque_bootstrap_binding = None
         if not isinstance(decision_payload, Mapping):
             decision_payload, opaque_bootstrap_binding = _bootstrap_opaque_decision_context(
@@ -767,12 +873,6 @@ def run(
             )
         working = deepcopy(dict(decision_payload))
 
-        full_binding_supplied = isinstance(
-            request.get("goal_to_decision_binding"), Mapping
-        )
-        partial_binding_supplied = isinstance(
-            request.get("partial_goal_to_decision_binding"), Mapping
-        )
         if opaque_bootstrap_binding is not None and (
             full_binding_supplied or partial_binding_supplied
         ):

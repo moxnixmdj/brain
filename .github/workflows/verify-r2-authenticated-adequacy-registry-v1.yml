@@ -1,0 +1,29 @@
+name: verify-r2-authenticated-adequacy-registry-v1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/r2_authenticated_adequacy_authority_registry_v1.py
+      - canonical/runtime/general_adequate_decision_controller_v1.py
+      - canonical/tests/test_r2_authenticated_adequacy_authority_registry_v1.py
+      - canonical/tests/test_general_decision_authenticated_adequacy_bridge_v1.py
+      - canonical/governance/R2_AUTHENTICATED_ADEQUACY_AUTHORITY_REGISTRY_ACTIVATION_20261008_V1.json
+      - .github/workflows/verify-r2-authenticated-adequacy-registry-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run R2 authenticated adequacy registry falsification suite
+        run: |
+          set -o pipefail
+          python3 -m unittest \
+            canonical.tests.test_r2_authenticated_adequacy_authority_registry_v1 \
+            canonical.tests.test_general_decision_authenticated_adequacy_bridge_v1 \
+            canonical.tests.test_general_adequate_decision_controller_v1 -v
