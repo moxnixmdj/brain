@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GDPVAL_EVALUATION_ROUTE_RECOMPUTE_20261008_V1",
   "date": "2026-10-08",
-  "status": "RESEARCH_ROUTE_RECOMPUTE__ZERO_CREDIT",
+  "status": "TRUTH_REPAIRED_ROUTE_RECOMPUTE__PUBLIC_FIXED_BAR_NOT_REPLACEABLE__ZERO_CREDIT",
   "objective": "Prove Brain >= Opus 5.5 on the frozen GDPval professional-work target relation with minimum new information and zero incremental spend.",
   "verified_research_facts": [
     "DIRECT_CROWD_BT_ORIENTATION_MIRROR_RUNTIME_PRIMARY_EXACT_BLOB_REPLAY_8_OF_8_PASS",
@@ -18,38 +18,42 @@
   "ranked_routes": [
     {
       "rank": 1,
-      "id": "STRUCTURAL_SCOPE_COMPLETE_TARGET_RELATION_BRIDGE",
-      "reason": "Can delete owner eta, raw graph, assignment state, and exact numeric Elo if a stronger scope-complete professional-work relation is actually proved.",
-      "current_blocker": "P3_GENERAL_SEMANTIC_POLICY_ADEQUACY_AND_REMAINING_GDPVAL_SCOPE_COMPLETE_QUALITY_RELATION"
+      "id": "EXACT_GDPVAL_AA_V2_1_FIXED_BAR_CERTIFICATE",
+      "reason": "Only route that directly satisfies the current normative predicate without changing the goal.",
+      "target": "PROVE_BRAIN_GDPVAL_AA_V2_1_ELO_GE_1846_ON_THE_FROZEN_COMPARABLE_COORDINATE",
+      "minimal_certificate_forms": [
+        "AUTHENTIC_OWNER_SCORE_OR_RECEIPT_BOUND_TO_FROZEN_BRAIN_AND_EVALUATION_EPOCH",
+        "SOUND_LOWER_BOUND_ON_THE_EXACT_OWNER_ELO_THAT_IS_GE_1846",
+        "EXACT_REPRODUCIBLE_OWNER_SCORING_STATE_AND_BRAIN_RUN_YIELDING_ELO_GE_1846"
+      ]
     },
     {
       "rank": 2,
-      "id": "PRIMITIVE_OWNER_PAIRWISE_DOMINANCE",
-      "reason": "Bypasses Crowd-BT eta and historical graph entirely.",
+      "id": "TARGET_RELATIVE_OWNER_SCORE_BOUND",
+      "reason": "May avoid reproducing the entire historical graph if a mathematically sound lower bound on Brain's exact owner Elo can be derived from a smaller authenticated subset of owner-state facts.",
       "current_blockers": [
-        "BRAIN_COMPLETE_220_SUBMISSIONS",
-        "OPUS55_REFERENCE_SUBMISSIONS_OR_OWNER_EQUIVALENT",
-        "SOUND_OWNER_PAIRWISE_ACCEPTANCE_PROGRAM/PRESENTATION",
-        "ZERO_SPEND_OWNER_PANEL_OR_EQUIVALENT_RECEIPTS"
-      ],
-      "note": "Existing universal no-Opus-win route is sound but stronger than necessary."
+        "BRAIN_220_SUBMISSIONS_OR_EXACT_OWNER_EXECUTION_RECEIPT",
+        "SUFFICIENT_OWNER_PAIRWISE_OUTCOMES_OR_EQUIVALENT_SCORE_STATE",
+        "LOAD_BEARING_CROWD_BT_ANNOTATOR_QUALITY_ORIENTATION/CALIBRATION",
+        "ENOUGH_ANCHOR_OR_REFERENCE_STATE_TO_PLACE_THE_LOWER_BOUND_ON_THE_OWNER_1600_SCALE"
+      ]
     },
     {
       "rank": 3,
-      "id": "DIRECT_CROWD_BT_MARGIN_WITH_ORIENTATION",
-      "reason": "Allows Opus wins and needs only aggregate per-judge margins once load-bearing eta orientation/calibration is bound.",
-      "current_blocker": "GDPVAL_PANEL_ETA_ORIENTATION_OR_OTHER_SOUND_CALIBRATION_FACT"
-    },
-    {
-      "rank": 4,
-      "id": "EXACT_OWNER_ELO_RECONSTRUCTION",
-      "reason": "Most information-expensive route; keep only as fallback.",
+      "id": "FULL_OWNER_ELO_RECONSTRUCTION",
+      "reason": "Sound fallback but information-expensive.",
       "current_blockers": [
         "RAW_OWNER_EPOCH_GRAPH_OR_EQUIVALENT_FIT_STATE",
         "FITTED_ANNOTATOR_QUALITY_VALUES",
-        "EXACT_LOAD_BEARING_OWNER_PROMPT/PARSER/PRESENTATION_DETAILS",
-        "OPTIMIZER/REGULARIZATION_AND_CI_CONVENTIONS_IF_NUMERIC_IDENTITY_REQUIRES_THEM"
+        "LOAD_BEARING_OWNER_PROMPT/PARSER/PRESENTATION_DETAILS",
+        "OPTIMIZER_REGULARIZATION_AND_CI_CONVENTIONS_IF_NEEDED_FOR_NUMERIC_IDENTITY"
       ]
+    },
+    {
+      "rank": 4,
+      "id": "STRUCTURAL_OR_DIRECT_DOMINANCE_SUPPORT_ONLY",
+      "reason": "Useful for capability evidence and for finding lower-bound implications, but not itself authorized to replace the literal public fixed bar.",
+      "acceptance_credit": false
     }
   ],
   "deleted_work": [
@@ -58,7 +62,9 @@
     "GENERIC_SEARCH_FOR_ANONYMIZATION_RULE",
     "GENERIC_SEARCH_FOR_PAIR_SAMPLING_STRATEGY",
     "DIRECT_VOTE_ACCUMULATION_WITHOUT_eta_ORIENTATION",
-    "RECONSTRUCT_FULL_HISTORICAL_ELO_GRAPH_BEFORE_TRYING_STRONGER_RELATION_ROUTES"
+    "RECONSTRUCT_FULL_HISTORICAL_ELO_GRAPH_BEFORE_TRYING_STRONGER_RELATION_ROUTES",
+    "TREAT_STRUCTURAL_CAPABILITY_CLOSURE_AS_A_REPLACEMENT_FOR_PROWORK_GDPVAL_GE_1846",
+    "TREAT_DIRECT_BRAIN_VS_OPUS_PAIRWISE_DOMINANCE_AS_LITERAL_GDPVAL_ELO_BAR_CLOSURE_WITHOUT_A_PROVED_NUMERIC_IMPLICATION"
   ],
   "hard_nonclaims": [
     "NO CLAIM GDPVAL IS CLOSED.",
@@ -67,5 +73,18 @@
     "NO TERMINAL CREDIT."
   ],
   "research_branch": "research/robust-evaluator-mixture-v1",
-  "accounting": {"incremental_spend_usd": 0, "terminal_credit_delta": 0}
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "truth_repair": {
+    "finding": "CURRENT_TERMINAL_PROTOCOL_NORMATIVELY_REQUIRES_THE_PUBLIC_FIXED_BAR_PROWORK_GDPVAL_GE_1846_AND_EXTERNAL_BENCHMARK_DOMINANCE_GATE_REQUIRES_EXACT_EXISTING_BENCHMARK_REUSE",
+    "consequence": "STRUCTURAL_SCOPE_COMPLETE_CAPABILITY_PROOFS_AND_DIRECT_PAIRWISE_DOMINANCE_MAY_SUPPORT_CAPABILITY_ANALYSIS_BUT DO NOT DISCHARGE THE LITERAL GDPVAL_AA_V2_1_GE_1846 ACCEPTANCE PREDICATE UNDER CURRENT AUTHORITY.",
+    "forbidden_move": "DO_NOT_REPLACE_OR_DELETE_PROWORK_GDPVAL_GE_1846_WITH_A_DIFFERENT_CAPABILITY_PREDICATE_UNLESS_THE_USER_EXPLICITLY_CHANGES_THE_TERMINAL_GOAL."
+  },
+  "authority_sources": {
+    "terminal_protocol": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "acceptance_registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "external_benchmark_gate": "canonical/governance/EXTERNAL_BENCHMARK_DOMINANCE_GATE_V1.json"
+  }
 }
