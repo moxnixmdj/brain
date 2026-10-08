@@ -143,6 +143,72 @@ class R3ImprovementWorkerV1Tests(unittest.TestCase):
         self.assertEqual(state["improvement_queue"][wid]["status"], "RESOLVED")
         self.assertTrue(advanced["results"][0]["permanent_reuse_authorized"])
 
+    def test_quarantined_skill_can_only_return_via_independent_reverification(self):
+        path = self.temp_state()
+        candidate_sha = "sha256:" + "9" * 64
+        verified_skill = {
+            "schema": "PROJECT_BRAIN_EXECUTABLE_SKILL_PROGRAM_V7",
+            "status": "VERIFIED_EXECUTABLE_SKILL",
+            "candidate_sha256": candidate_sha,
+            "source_episode_ids": ["ep-1", "ep-2"],
+            "source_scopes": ["scope-a"],
+            "steps": [{"index": 0, "op": "solve", "inputs": [], "outputs": ["goal"]}],
+            "preconditions": [],
+            "postconditions": ["goal"],
+            "invalidators": [],
+            "candidate_only": False,
+            "verified_skill": True,
+            "reuse_authorized": True,
+            "scope_relation": "EXACT",
+            "scope_predicate": None,
+            "verification_receipt": "old",
+        }
+        sid = r3._skill_id(verified_skill)
+        family = r3._family_id(verified_skill)
+        state = r3.load_state(path)
+        state["skills"][sid] = {
+            "skill": verified_skill,
+            "family_id": family,
+            "pareto_metrics": r3._skill_pareto_row(sid, verified_skill),
+            "active": False,
+            "quarantined": True,
+            "quarantine_reason": "VERIFIED_REUSE_ROUTE_EFFECTFUL_FAILURE_COUNTEREXAMPLE",
+        }
+        state["pareto_frontiers"][family] = []
+        wid = r3._enqueue_improvement(
+            state,
+            kind="REVERIFY_QUARANTINED_SKILL",
+            priority=5,
+            identity={"skill_id": sid},
+            payload={
+                "skill_id": sid,
+                "reason": "VERIFIED_REUSE_ROUTE_EFFECTFUL_FAILURE_COUNTEREXAMPLE",
+                "required_result": "INDEPENDENT_REVERIFICATION_OR_REPLACEMENT",
+            },
+        )
+        r3._refresh_stats(state)
+        r3._write_state(state, path)
+
+        replacement = {**verified_skill, "verification_receipt": "new"}
+        provider = mock.Mock(return_value={"binding": "content-addressed"})
+        with mock.patch.object(
+            worker.r3,
+            "authenticate_skill_verification",
+            return_value={"pass": True, "verified_skill": replacement},
+        ):
+            advanced = worker.advance_improvement_queue(
+                state_path=path,
+                skill_verification_provider=provider,
+            )
+
+        self.assertEqual(advanced["completed_count"], 1, advanced)
+        state = r3.load_state(path)
+        self.assertEqual(state["improvement_queue"][wid]["status"], "RESOLVED")
+        self.assertTrue(state["skills"][sid]["active"])
+        request = provider.call_args.args[0]
+        self.assertTrue(request["candidate"]["candidate_only"])
+        self.assertFalse(request["candidate"]["verified_skill"])
+
     def test_no_provider_never_self_certifies_pending_work(self):
         path = self.temp_state()
         state = r3.load_state(path)
