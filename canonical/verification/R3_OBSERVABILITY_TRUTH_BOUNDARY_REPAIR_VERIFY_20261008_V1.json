@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_R3_OBSERVABILITY_TRUTH_BOUNDARY_REPAIR_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__R3_VERIFIER_FRONTIER_TRUTH_REPAIR__17_OF_17_FOCUSED_TESTS",
+  "subject_branch": "r3-observability-truth-repair-current-main-20261008-sol",
+  "subject_head_before_receipt": "1e75a8fb62719da2ba2e8dd5a58a6786ec8b0f4e",
+  "base_main_commit": "7fbe66a7140dd2b9c50b9892cbfc2544fe0c8205",
+  "exact_blobs": {
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "7cafffb1292b8203d1237c7f9b61a9375acefc13",
+    "canonical/tests/test_r3_improvement_queue_driver_v1.py": "4163193df751b96c4b092d07d2b82983097eda21"
+  },
+  "repaired_inference": {
+    "invalid": "OWNED_SUCCESS_ADAPTER_RETURNED_NO_CANDIDATE => PROVED_NONLEARNABLE_FROM_CURRENT_RETAINED_EVIDENCE",
+    "replacement": "OWNED_SUCCESS_ADAPTER_RETURNED_NO_CANDIDATE => UNRESOLVED_WITH_CURRENT_OWNED_VERIFICATION_FRONTIER",
+    "epistemic_nonlearnability_proved": false,
+    "observational_inseparability_proved": false,
+    "frontier_expansion_required": true,
+    "permanent_nonlearnability_claimed": false
+  },
+  "preserved": {
+    "park_and_reopen": true,
+    "fail_closed_promotion": true,
+    "independent_verification_authority": true,
+    "same_evidence_backoff": true,
+    "no_blind_effect_replay": true
+  },
+  "isolated_verification": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "command": "python3 -m unittest canonical.tests.test_r3_improvement_queue_driver_v1 -v",
+    "tests_run": 17,
+    "tests_passed": 17,
+    "tests_failed": 0,
+    "tests_errors": 0,
+    "elapsed_seconds": 0.045,
+    "py_compile": "PASS",
+    "incremental_spend_usd": 0
+  },
+  "github_actions_observation": {
+    "prior_branch_run_id": 37791584436,
+    "prior_branch_job_id": 113360091563,
+    "conclusion": "failure",
+    "steps_executed": 0,
+    "classification": "CARRIER_FAILURE_BEFORE_CODE_EXECUTION__NO_CODE_VERDICT"
+  },
+  "theorem_boundary": {
+    "observability_theorem_valid": true,
+    "theorem_statement": "Identical retained evidence across success and failure worlds cannot support sound world-discriminating certification.",
+    "theorem_not_triggered_by_adapter_absence": true,
+    "proof_of_inseparability_required_before_information_theoretic_nonlearnability_claim": true
+  },
+  "nonclaims": [
+    "Does not prove arbitrary real-world effects observable.",
+    "Does not prove a universal verifier can always be synthesized.",
+    "Does not alter terminal or capability authority.",
+    "Does not by itself close autonomous verifier-frontier expansion."
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
