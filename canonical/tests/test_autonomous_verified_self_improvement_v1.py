@@ -722,6 +722,45 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "REVERIFY_QUARANTINED_SKILL",
         )
 
+    def test_effectful_superset_failure_outside_source_scope_queues_safe_contraction(self):
+        path = self.temp_state()
+        skill = verified_skill("8", relation="PROVEN_SUPERSET", source_ids=("ep1", "ep2"))
+        sid = self._seed_active_skill(path, skill)
+        failed = {
+            "pass": False,
+            "status": "BOUND_SUBPLAN_EFFECT_OUTCOME_UNRESOLVED__RECOVERY_REQUIRED",
+            "reason": "effect may have occurred",
+            "trace": [{"capability_id": "op0", "effect_outcome_sha256": "b" * 64}],
+            "falsified_capability_ids": [],
+            "deferred_capability_ids": [],
+            "counterexamples": [],
+            "attempts": [],
+        }
+        with mock.patch.object(loop.solver_v12, "run", return_value=failed):
+            out = loop.run_learning_episode(
+                self._reuse_problem(),
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep-outside",
+                scope_id="outside-scope",
+            )
+
+        self.assertFalse(out["pass"])
+        state = loop.load_state(path)
+        rec = state["skills"][sid]
+        self.assertTrue(rec["quarantined"])
+        self.assertEqual(
+            rec["generalization_counterexample_scopes"],
+            ["outside-scope"],
+        )
+        self.assertTrue(rec["generalization_repromotion_blocked"])
+        work = loop.next_improvement_action(state_path=path)
+        self.assertEqual(work["kind"], "REVERIFY_QUARANTINED_SKILL")
+        self.assertTrue(work["payload"]["scope_contraction_safe"])
+        self.assertEqual(work["payload"]["counterexample_scope_id"], "outside-scope")
+        self.assertEqual(work["payload"]["source_scopes"], ["scope"])
+        self.assertEqual(work["payload"]["previous_scope_relation"], "PROVEN_SUPERSET")
+
     def test_post_execution_episode_verifier_promotes_without_rerunning_task(self):
         path = self.temp_state()
         raw_episode = {
