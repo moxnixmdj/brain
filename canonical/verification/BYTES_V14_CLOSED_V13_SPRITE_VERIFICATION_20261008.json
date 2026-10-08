@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V14_CLOSED_V13_SPRITE_VERIFICATION",
+  "date": "2026-10-08",
+  "carrier": {
+    "provider": "SPRITES",
+    "name": "h100-real-image-v1",
+    "id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3"
+  },
+  "exact_source_blob_sha": "b1c2850dd67f8c56f2e5f2baff1c14e4db065bef",
+  "result": {
+    "status": "PASS",
+    "closed_proof": true,
+    "congruence_edge_basis_equal_to_canonical_v12": true,
+    "regressions": "27_OF_27_PASS",
+    "extra_differential_checks": 13561,
+    "pointwise_symbolic_signatures": 820,
+    "encoding_roundtrip_exact": true,
+    "best_fixed_decoder_payload_bytes": 2615
+  },
+  "terminal_credit_delta": 0,
+  "limitations": [
+    "FINITE_DECLARED_GRAMMAR",
+    "FIXED_EXTERNAL_DECODER_AND_PYTHON_RUNTIME",
+    "NO_GLOBAL_BYTE_MINIMALITY_PROOF"
+  ]
+}
