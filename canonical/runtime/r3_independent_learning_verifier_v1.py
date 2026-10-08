@@ -15,9 +15,8 @@ Current admitted scope:
   re-induction, and its program is structurally closed. Reuse still passes the
   runtime structural guard and fresh V12 execution verification.
 
-Effectful episodes are never replayed. The admitted bounded filesystem-effect
-class may be verified only by independently re-reading its exact recorded files
-under the supplied effect root; all other effect classes remain fail-closed.
+Effectful episodes are intentionally not replayed. Without an independently
+re-readable effect root in the verification request, they remain fail-closed.
 
 No terminal, capability, ownership, or execution authority is granted here.
 """
@@ -30,6 +29,11 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import universal_verified_adaptive_solver_v1 as v1
+from canonical.runtime import universal_verified_adaptive_solver_v4 as v4
+from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
+from canonical.runtime.resolved_capability_semantics_authenticator_v1 import (
+    authenticate as authenticate_resolved_semantics,
+)
 from canonical.runtime.effect_broker_receipt_resolver_v2 import (
     git_blob_id,
     resolve_receipt_bytes,
@@ -171,12 +175,31 @@ def _active_action(
     return action
 
 
+def _contains_effect_ref(value: Any) -> bool:
+    if isinstance(value, Mapping):
+        if "$effect_result" in value:
+            return True
+        return any(_contains_effect_ref(x) for x in value.values())
+    if isinstance(value, list):
+        return any(_contains_effect_ref(x) for x in value)
+    return False
+
+
+def _needs_resolved_semantics(cap: Mapping[str, Any]) -> bool:
+    fields = cap.get("result_fields")
+    return (
+        isinstance(fields, list)
+        and bool(fields)
+    ) or _contains_effect_ref(cap.get("action"))
+
+
 def _reverify_trace(
     *,
     problem: Mapping[str, Any],
     trace: Sequence[Mapping[str, Any]],
     fact_capsule_head_hash: str,
     value_capsule_head_hash: str,
+    repo_root: str | Path,
     effect_root: str | Path | None = None,
 ) -> dict[str, Any]:
     caps = _caps(problem)
@@ -184,6 +207,7 @@ def _reverify_trace(
     value_capsule = initialize_value_capsule(problem)
     expected_steps: list[dict[str, Any]] = []
     effectful_step_count = 0
+    current_facts = sorted(str(x) for x in problem.get("initial_facts", []))
 
     for expected_cycle, raw_row in enumerate(trace):
         if not isinstance(raw_row, Mapping):
@@ -196,11 +220,80 @@ def _reverify_trace(
         if cap is None:
             raise R3IndependentVerificationError("TRACE_CAPABILITY_UNKNOWN:" + cid)
 
+        replanning_problem = deepcopy(dict(problem))
+        replanning_problem["initial_facts"] = list(current_facts)
+        try:
+            planned = plan_capabilities(replanning_problem)
+        except PlanningFailure as exc:
+            raise R3IndependentVerificationError(
+                "PLANNER_RECOMPUTATION_FAILED:" + str(exc)
+            ) from exc
+        plan = planned.get("plan")
+        if not isinstance(plan, list) or not plan or str(plan[0]) != cid:
+            raise R3IndependentVerificationError(
+                "TRACE_NOT_STRAIGHT_THROUGH_DETERMINISTIC_PLAN:" + cid
+            )
+
         action = _active_action(cap, row)
         if v1._digest(action) != row.get("action_contract_sha256"):
             raise R3IndependentVerificationError("ACTION_CONTRACT_DIGEST_MISMATCH:" + cid)
         action_type = str(action.get("type") or "")
         is_effect = action_type == "verified_effect_tool"
+
+        pair = {
+            "receipt": row.get("effect_semantics_receipt"),
+            "verification": row.get("effect_semantics_verification"),
+        }
+        if _needs_resolved_semantics(cap):
+            if row.get("value_capsule_head_before") != value_capsule.get("head_hash"):
+                raise R3IndependentVerificationError(
+                    "VALUE_CAPSULE_HEAD_BEFORE_MISMATCH:" + cid
+                )
+            semantics = authenticate_resolved_semantics(
+                problem,
+                cap,
+                action,
+                value_capsule,
+                pair,
+                repo_root=repo_root,
+            )
+            if semantics.get("pass") is not True:
+                raise R3IndependentVerificationError(
+                    "RESOLVED_EFFECT_SEMANTICS_REAUTHENTICATION_FAILED:" + cid
+                )
+        else:
+            semantics = v4._authenticate_effect_semantics(
+                problem,
+                cap,
+                repo_root=repo_root,
+            )
+        if semantics.get("receipt") != pair["receipt"]:
+            raise R3IndependentVerificationError(
+                "EFFECT_SEMANTICS_RECEIPT_REF_MISMATCH:" + cid
+            )
+        if semantics.get("verification") != pair["verification"]:
+            raise R3IndependentVerificationError(
+                "EFFECT_SEMANTICS_VERIFICATION_REF_MISMATCH:" + cid
+            )
+        if row.get("effect_semantics_authenticated") is not True:
+            raise R3IndependentVerificationError(
+                "EFFECT_SEMANTICS_AUTHENTICATED_FLAG_MISSING:" + cid
+            )
+        if (
+            str(row.get("independent_effect_semantics_verifier_id") or "")
+            != str(semantics.get("independent_verifier_id") or "")
+        ):
+            raise R3IndependentVerificationError(
+                "EFFECT_SEMANTICS_VERIFIER_ID_MISMATCH:" + cid
+            )
+        if (
+            row.get("verifier_success_condition")
+            != semantics.get("verifier_success_condition")
+        ):
+            raise R3IndependentVerificationError(
+                "VERIFIER_SUCCESS_CONDITION_REAUTHENTICATION_MISMATCH:" + cid
+            )
+
         if is_effect:
             verifier_id = str(action.get("pre_verifier_id") or "").strip()
             payload = action.get("pre_verifier_payload")
@@ -263,8 +356,16 @@ def _reverify_trace(
             raise R3IndependentVerificationError("NON_EFFECT_ACTION_HAS_EFFECT_OUTCOME:" + cid)
 
         provides = sorted(str(x) for x in cap.get("provides", []))
+        semantic_effects = sorted(
+            str(x)
+            for x in (
+                semantics.get("provided_effects")
+                or semantics.get("effects")
+                or []
+            )
+        )
         observed = sorted(str(x) for x in row.get("new_verified_facts", []))
-        if not provides or observed != provides:
+        if not provides or observed != provides or semantic_effects != provides:
             raise R3IndependentVerificationError("VERIFIED_EFFECT_SET_MISMATCH:" + cid)
 
         fact_capsule = append_fact_transition(
@@ -277,6 +378,14 @@ def _reverify_trace(
             capability=cap,
             trace_row=row,
         )
+        if (
+            row.get("value_capsule_head_after") is not None
+            and row.get("value_capsule_head_after") != value_capsule.get("head_hash")
+        ):
+            raise R3IndependentVerificationError(
+                "VALUE_CAPSULE_HEAD_AFTER_MISMATCH:" + cid
+            )
+        current_facts = sorted(set(current_facts) | set(provides))
         expected_steps.append({
             "op": cid,
             "inputs": sorted(str(x) for x in cap.get("requires", [])),
@@ -331,6 +440,7 @@ def verify_episode_request(
             trace=trace,
             fact_capsule_head_hash=fact_head,
             value_capsule_head_hash=value_head,
+            repo_root=repo_root,
             effect_root=request.get("effect_root"),
         )
         expected_pre = sorted(str(x) for x in problem.get("initial_facts", []))
@@ -342,6 +452,10 @@ def verify_episode_request(
         if sorted(str(x) for x in episode.get("postconditions", [])) != expected_post:
             raise R3IndependentVerificationError("EPISODE_POSTCONDITIONS_MISMATCH")
         invalidators = sorted(str(x) for x in episode.get("invalidators", []))
+        if invalidators:
+            raise R3IndependentVerificationError(
+                "NONEMPTY_INVALIDATORS_REQUIRE_INDEPENDENT_ROUTE_FAILURE_REPLAY"
+            )
         expected_program = program_digest(
             steps=recomputed["steps"],
             preconditions=expected_pre,
