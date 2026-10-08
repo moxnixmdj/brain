@@ -1910,14 +1910,14 @@
     },
     "activation": {
       "path": "canonical/governance/LIVE_BRAIN_RUNTIME_V1_ACTIVATION_20261008_V1.json",
-      "git_blob_sha": "7ce6cecd04d3dffde7ef949fd677f6df95a09022"
+      "git_blob_sha": "71c5b174eae0924f2792e5a8a41ca587c3c8ba4a"
     },
     "canonical_public_entrypoint": "canonical.runtime.unified_cognitive_fabric_v1.run",
     "subordinate_runtime_entrypoint": "canonical.runtime.live_brain_runtime_v1.run",
     "subordinate_runtime_public_authority": false,
     "r1_closure_gate": {
       "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
-      "git_blob_sha": "9226da69470cc9ce60a7db75364dd236d4a94cba",
+      "git_blob_sha": "266d56165d67958be2768d440d48e4b5075dd395",
       "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
     },
     "r1_drift_lock_verification": {
@@ -1971,7 +1971,7 @@
     },
     "r1_closure_gate": {
       "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
-      "git_blob_sha": "9226da69470cc9ce60a7db75364dd236d4a94cba",
+      "git_blob_sha": "266d56165d67958be2768d440d48e4b5075dd395",
       "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
     },
     "r1_drift_lock_verification": {
