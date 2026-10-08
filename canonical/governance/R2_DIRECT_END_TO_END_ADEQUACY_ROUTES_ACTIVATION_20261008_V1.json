@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_V1",
   "date": "2026-10-08",
-  "status": "ACTIVE_LIVE_DIRECT_ADEQUACY_ROUTE_LAYER__THREE_EXACT_CELLS",
+  "status": "ACTIVE_LIVE_DIRECT_ADEQUACY_ROUTE_LAYER__FOUR_EXACT_CELLS",
   "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE_INCOMPLETE",
   "runtime": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
   "controller": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
@@ -34,6 +34,13 @@
       "preflight": "raw_goal_literal_json_acceptance_v1.preflight",
       "acceptance": "raw_goal_literal_json_acceptance_v1.verify",
       "scope": "STRICT_LITERAL_JSON_RECORDS_TO_CANONICAL_REPOSITORY_PATH_ONLY"
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::JSON_SQLITE_TABLE_V1",
+      "capability_id": "sqlite.table.create_from_json_records",
+      "preflight": "raw_goal_json_sqlite_acceptance_v1.preflight",
+      "acceptance": "raw_goal_json_sqlite_acceptance_v1.verify",
+      "scope": "STRICT_LOCAL_FLAT_JSON_STATUS_COLLECTION_TO_SQLITE_TABLE_ONLY"
     }
   ],
   "expansion_law": "ADD_A_ROUTE_ONLY_WHEN_BOTH_AN_EXACT_SIDE_EFFECT_FREE_PREFLIGHT_AND_AN_INDEPENDENT_FULL_RAW_OBLIGATION_ACCEPTANCE_VERIFIER_EXIST",
@@ -47,7 +54,7 @@
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
   },
-  "current_route_count": 3,
-  "exact_cell_count": 3,
-  "route_expansion_note": "THREE_EXACT_CELLS_ACTIVE__ARCHIVE_MANIFEST__EXACT_LITERAL_RESPONSE__LITERAL_JSON_RECORDS__EVERY_CELL_REQUIRES_EXACT_PREFLIGHT_AND_FULL_RAW_ACCEPTANCE"
+  "current_route_count": 4,
+  "exact_cell_count": 4,
+  "route_expansion_note": "FOUR_EXACT_CELLS_ACTIVE__ARCHIVE_MANIFEST__EXACT_LITERAL_RESPONSE__LITERAL_JSON_RECORDS__LOCAL_JSON_SQLITE_TABLE__EVERY_CELL_REQUIRES_EXACT_PREFLIGHT_AND_FULL_RAW_ACCEPTANCE"
 }
