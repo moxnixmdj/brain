@@ -4,8 +4,10 @@ on:
     branches: [main]
     paths:
       - canonical/runtime/live_integrated_brain_v1.py
+      - canonical/runtime/raw_goal_archive_acceptance_v1.py
       - canonical/runtime/capability_execution_trace_capsule_v1.py
       - canonical/tests/test_live_integrated_brain_v1.py
+      - canonical/tests/test_raw_goal_archive_acceptance_v1.py
       - canonical/tests/test_capability_execution_trace_capsule_v1.py
       - .github/workflows/verify-live-integrated-brain-v1.yml
   workflow_dispatch:
@@ -19,4 +21,4 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m unittest canonical.tests.test_capability_execution_trace_capsule_v1 canonical.tests.test_live_integrated_brain_v1 -v
+      - run: python -m unittest canonical.tests.test_capability_execution_trace_capsule_v1 canonical.tests.test_live_integrated_brain_v1 canonical.tests.test_raw_goal_archive_acceptance_v1 -v
