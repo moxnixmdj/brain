@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_CURRENT_CERTIFIED_SCORE_MASS_PROJECTION_V1",
+  "date": "2026-10-08",
+  "status": "CURRENT_EVIDENCE_PROJECTS_TO_ZERO_CERTIFIED_FRONTIERCODE_SCORE_MASS__ZERO_CREDIT",
+  "benchmark": "FrontierCode 1.1 Main",
+  "target_score_fraction": 0.5464,
+  "total_scored_cells": 500,
+  "candidate_evidence_routes": [
+    {
+      "id": "STRUCTURED_METHOD_TYPED_SEMANTIC_TOP_LAW_SUBREGION",
+      "source": "canonical/governance/STRUCTURED_METHOD_TYPED_SEMANTIC_TOP_LAW_SUBREGION_20261007_V1.json",
+      "strength": "ABSOLUTE_TOP_LAW_ON_ADMITTED_TYPED_CONTEXT",
+      "blocker_pass_mass_eligible": false,
+      "passed_weight_mass_eligible": false,
+      "disqualifier": "REAL_CONTEXT_MEMBERSHIP_IN_THE_TYPED_SUBREGION_IS_EXPLICITLY_UNPROVED__NO_MAPPING_TO_HIDDEN_FRONTIERCODE_TASK_CELLS_BLOCKERS_OR_RUBRIC_WEIGHTS"
+    },
+    {
+      "id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_EXACT_REUSE",
+      "source": "canonical/governance/PRIVATE_ROUTE_DOMINANCE_RECOMPUTE_20261007_V2.json",
+      "strength": "BEHAVIORAL_ROUTE_SUPPORT",
+      "blocker_pass_mass_eligible": false,
+      "passed_weight_mass_eligible": false,
+      "disqualifier": "NO_HIDDEN_FRONTIERCODE_CELL_MEMBERSHIP__NO_ALL_BLOCKERS_PASS_RECEIPT__NO_NORMALIZED_RUBRIC_WEIGHT_LOWER_BOUND"
+    },
+    {
+      "id": "SPECIFICATION_ACCEPTANCE_COMPILER_SUPPORT",
+      "source": "canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MODEL_EVIDENCE_V1.json",
+      "strength": "NARROW_FAIL_CLOSED_ACCEPTANCE_PLAN_DIAGNOSTICS",
+      "blocker_pass_mass_eligible": false,
+      "passed_weight_mass_eligible": false,
+      "disqualifier": "CURRENT_EVIDENCE_EXPLICITLY_DOES_NOT_OWN_WHOLE_ARBITRARY_SPECIFICATION_TO_ACCEPTANCE_MODEL__AND_SUPPLIES_NO_HIDDEN_FRONTIERCODE_BLOCKER_OR_WEIGHT_RECEIPT"
+    },
+    {
+      "id": "PUBLIC_FRONTIERCODE_METHOD_TAXONOMY",
+      "source": "canonical/governance/FRONTIERCODE_ROBUST_SCORE_LOWER_BOUND_RECONCILIATION_20261008_V1.json",
+      "strength": "PUBLIC_METHOD_AND_SCORING_SEMANTICS",
+      "blocker_pass_mass_eligible": false,
+      "passed_weight_mass_eligible": false,
+      "disqualifier": "PUBLIC_METHOD_CATEGORIES_DO_NOT_DISCLOSE_COMPLETE_PER_TASK_BLOCKER_SET_OR_NORMALIZED_RUBRIC_WEIGHTS"
+    },
+    {
+      "id": "COGNITION_OWNER_EVALUATION_ACCESS",
+      "source": "canonical/governance/FRONTIERCODE_OWNER_EVALUATION_ACCESS_REFRESH_20261008_V1.json",
+      "strength": "DIRECT_RESULT_ROUTE_EXISTS_IN_PRINCIPLE",
+      "blocker_pass_mass_eligible": false,
+      "passed_weight_mass_eligible": false,
+      "disqualifier": "NO_BRAIN_OWNER_RESULT_EXISTS_YET__INTAKE_ELIGIBILITY_HARNESS_AND_ZERO_COST_TERMS_UNBOUND"
+    },
+    {
+      "id": "SCOPE_COMPLETE_STRONGER_PROOF",
+      "source": "canonical/governance/CODING_PRIVATE_BENCHMARK_PROOF_CARRYING_SCOPE_COVER_RECONCILIATION_20261008_V1.json",
+      "strength": "WOULD_PREEMPT_SCORE_ROUTE_IF_PROVED",
+      "blocker_pass_mass_eligible": false,
+      "passed_weight_mass_eligible": false,
+      "disqualifier": "NO_COMPLETE_FRONTIERCODE_SCOPE_COVER_CURRENTLY_CERTIFIED"
+    }
+  ],
+  "projection": {
+    "independently_certified_all_blocker_pass_cell_count_lower_bound": 0,
+    "independently_certified_positive_passed_weight_cell_count_lower_bound": 0,
+    "robust_score_lower_bound_fraction": 0,
+    "robust_score_lower_bound_percent": 0,
+    "target_met": false
+  },
+  "scheduling": [
+    "DO_NOT_REUSE_BEHAVIORAL_ROUTE_REDUNDANCY_AS_SCORE_MASS.",
+    "DO_NOT_ASSIGN_POSITIVE_MULTIPLICITY_TO_STRUCTURED_METHOD_TOP_LAW_BEFORE_REAL_FRONTIERCODE_CONTEXT_MEMBERSHIP_IS_PROVED.",
+    "DO_NOT_INFER_RUBRIC_WEIGHT_FROM_PUBLIC_METHOD_CATEGORY.",
+    "ONLY_NEW_EVIDENCE_THAT_PROVES_BLOCKER_GATED_SCORE_MASS_OR_A_SCOPE_COMPLETE_STRONGER_PROOF_CAN_RAISE_THE_CURRENT_ZERO_LOWER_BOUND.",
+    "DIRECT_OWNER_EVALUATION_IS_LIVE_IN_PRINCIPLE_BUT_REQUIRES_INTAKE_ELIGIBILITY_HARNESS_AND_ZERO_COST_BINDING_BEFORE_EXECUTION."
+  ],
+  "hard_nonclaims": [
+    "ZERO_CERTIFIED_LOWER_BOUND_DOES_NOT_MEAN_BRAIN_ACTUAL_FRONTIERCODE_SCORE_IS_ZERO",
+    "ZERO_CERTIFIED_LOWER_BOUND_DOES_NOT_PROVE_CAPABILITY_FAILURE",
+    "NO_FRONTIERCODE_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
