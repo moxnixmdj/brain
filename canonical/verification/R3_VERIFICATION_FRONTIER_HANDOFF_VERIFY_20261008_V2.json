@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_R3_VERIFICATION_FRONTIER_HANDOFF_VERIFY_20261008_V2",
+  "date": "2026-10-08",
+  "status": "PASS__R3_EXECUTABLE_VERIFIER_FRONTIER_HANDOFF__CURRENT_BYTE_CUT",
+  "subject_branch": "r3-v7-reseal-current-main-20261008",
+  "subject_main_head": "ac00de7ddf85428e0305cf288ed55b11d6606300",
+  "exact_blobs": {
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "9f50f3faae4f99926d983649ad1d644ec66767c2",
+    "canonical/runtime/unified_cognitive_fabric_v1.py": "876e32b049062d6ae7a7cb36036e78d0c423f2b1",
+    "canonical/tests/test_r3_improvement_queue_driver_v1.py": "d9b3862185f9fb6ac4e3894fdf4ca5f63e94b89d",
+    "canonical/tests/test_r3_improvement_cycle_fabric_v1.py": "2cd0a5e278e3eb0b9a76ff7f77bea68f401faaeb"
+  },
+  "proved": {
+    "durable_frontier_expansion_work_created": true,
+    "acquisition_worker_can_be_executed_by_r3_when_supplied": true,
+    "canonical_fabric_forwards_acquisition_worker_to_explicit_improvement_cycle": true,
+    "canonical_fabric_forwards_acquisition_worker_to_automatic_compounding_tick": true,
+    "original_success_replay_forbidden": true,
+    "provider_self_certification_rejected_without_owned_frontier_byte_change": true,
+    "changed_adapter_frontier_must_activate_before_reopen": true,
+    "activated_modules_must_originate_from_exact_repo_paths": true,
+    "verification_authority_partitioned_from_adapter_frontier": true,
+    "verifier_authority_rewrite_by_acquisition_is_rejected": true,
+    "external_adapter_cannot_override_changed_verification_authority": true,
+    "same_provider_same_frontier_backoff": true,
+    "parked_success_reopens_only_after_admitted_active_adapter_frontier_change_or_external_verification_authority": true,
+    "unrelated_compounding_work_not_starved": true,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "isolated_driver_verification": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "command": "python3 -m unittest canonical.tests.test_r3_improvement_queue_driver_v1 -v",
+    "tests_run": 26,
+    "tests_passed": 26,
+    "tests_failed": 0,
+    "tests_errors": 0,
+    "py_compile": "PASS",
+    "exact_subject_blobs": true,
+    "incremental_spend_usd": 0
+  },
+  "isolated_fabric_wiring_verification": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "command": "python3 run_fabric_v7_isolated.py",
+    "tests_run": 4,
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "tests_errors": 0,
+    "fabric_source_git_blob_sha": "876e32b049062d6ae7a7cb36036e78d0c423f2b1",
+    "test_source_git_blob_sha": "2cd0a5e278e3eb0b9a76ff7f77bea68f401faaeb",
+    "dependency_method": "IMPORT_BOUNDARY_STUBS_ONLY__TESTED_FABRIC_SOURCE_UNMODIFIED",
+    "claim_scope": "ARGUMENT_PROPAGATION_AND_COMPOUNDING_DRAIN_WIRING_ONLY",
+    "incremental_spend_usd": 0
+  },
+  "cross_root_boundary": {
+    "r3_responsibility": "Detect verifier-frontier insufficiency, persist the non-replaying acquisition work item, execute a supplied acquisition worker, independently recompute and activate only admitted adapter-frontier bytes, reject verifier-authority rewrites, then reopen learning.",
+    "root1_responsibility": "Supply or construct the missing independently verifiable read-only success adapter capability.",
+    "root1_worker_is_not_claimed_to_exist_for_every_request": true,
+    "no_claim_root1_always_succeeds": true,
+    "no_claim_arbitrary_verifier_synthesis": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_AN_ACQUISITION_PROVIDER_IS_AUTOMATICALLY_AVAILABLE_FOR_EVERY_FRONTIER_GAP",
+    "NO_CLAIM_ROOT1_IS_CLOSED",
+    "NO_CLAIM_VERIFICATION_AUTHORITY_MAY_BE_REWRITTEN_BY_ACQUISITION",
+    "NO_CLAIM_UNOBSERVABLE_REALITY_CAN_BE_CERTIFIED",
+    "NO_SELF_CERTIFICATION",
+    "NO_TERMINAL_GOAL_CREDIT"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
