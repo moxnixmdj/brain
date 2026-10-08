@@ -217,7 +217,8 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             out["learning"]["status"],
             "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
         )
-        integrate.assert_called_once_with(failure, state_path=None)
+        integrate.assert_called_once()
+        self.assertEqual(integrate.call_args.kwargs["retry_context"]["mode"], "compiled_bound")
 
     @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
     @patch("canonical.runtime.live_brain_runtime_v1._raw_bound_run")
@@ -237,7 +238,8 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "request": {"task_id": "r-fail", "goal": "unknown"},
         })
         self.assertFalse(out["pass"])
-        integrate.assert_called_once_with(failure, state_path=None)
+        integrate.assert_called_once()
+        self.assertEqual(integrate.call_args.kwargs["retry_context"]["mode"], "raw_bound")
 
     @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
     @patch("canonical.runtime.live_brain_runtime_v1._p3")
