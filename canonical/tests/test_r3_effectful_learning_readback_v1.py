@@ -1,12 +1,20 @@
 from __future__ import annotations
 
+from hashlib import sha256
+import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
 from canonical.runtime import r3_independent_learning_verifier_v1 as worker
-from canonical.runtime import universal_verified_adaptive_solver_v1 as v1
+from canonical.runtime import universal_verified_adaptive_solver_v4 as v4
+from canonical.runtime.effect_broker_receipt_resolver_v2 import git_blob_id
 from canonical.runtime.executable_skill_program_v7 import program_digest
+from canonical.runtime.universal_verified_adaptive_solver_v2 import SUCCESS_CONDITIONS
+from canonical.runtime.universal_verified_adaptive_solver_v3 import (
+    BINDING_SCHEMA,
+    BINDING_VERIFY_SCHEMA,
+)
 from canonical.runtime.universal_solver_episode_verification_authenticator_v1 import (
     authenticate as authenticate_episode,
 )
@@ -20,84 +28,154 @@ from canonical.runtime.universal_solver_value_state_v1 import (
 )
 
 
-def effect_problem() -> dict:
+def _canon(value) -> str:
+    return json.dumps(
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    )
+
+
+def _write_doc(root: Path, rel: str, doc: dict) -> dict[str, str]:
+    raw = _canon(doc).encode("utf-8")
+    target = root / rel
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(raw)
     return {
-        "initial_facts": [],
-        "target_effects": ["RECEIPT_WRITTEN_AND_VERIFIED"],
-        "capabilities": [{
-            "id": "write-receipt",
-            "requires": [],
-            "provides": ["RECEIPT_WRITTEN_AND_VERIFIED"],
-            "cost": 1,
-            "result_fields": [],
-            "action": {
-                "type": "verified_effect_tool",
-                "pre_verifier_id": "TYPED_ACCEPTANCE_PROGRAM_V1",
-                "pre_verifier_payload": {
-                    "program": {
-                        "schema": "PROJECT_BRAIN_TYPED_ACCEPTANCE_PROGRAM_SPEC_V1",
-                        "fields": [
-                            {
-                                "id": "name",
-                                "type": "enum",
-                                "dimension": "dimensionless",
-                                "source": "candidate",
-                            },
-                            {
-                                "id": "score",
-                                "type": "number",
-                                "dimension": "score",
-                                "source": "candidate",
-                            },
-                            {
-                                "id": "passed",
-                                "type": "boolean",
-                                "dimension": "dimensionless",
-                                "source": "candidate",
-                            },
-                        ],
-                        "accept_when": {
-                            "op": "and",
-                            "args": [
-                                {
-                                    "op": "eq",
-                                    "left": {"op": "ref", "id": "name"},
-                                    "right": {
-                                        "op": "const",
-                                        "type": "enum",
-                                        "dimension": "dimensionless",
-                                        "value": "Alice",
-                                    },
-                                },
-                                {
-                                    "op": "ge",
-                                    "left": {"op": "ref", "id": "score"},
-                                    "right": {
-                                        "op": "const",
-                                        "type": "number",
-                                        "dimension": "score",
-                                        "value": 0.5,
-                                    },
-                                },
-                                {"op": "ref", "id": "passed"},
-                            ],
-                        },
-                    },
-                    "trusted_values": {},
-                },
-                "executor_id": "H100_VERIFIED_EFFECT_TOOL_REGISTRY_V1",
-                "executor_payload": {
-                    "tool_id": "JSON_RECEIPT_WRITER_V1",
-                    "sandbox_rel": "r3-effect-episode",
-                },
-            },
-        }],
+        "path": rel,
+        "git_blob_sha": git_blob_id(raw, object_format="sha1"),
     }
 
 
+def effect_problem(repo_root: Path) -> dict:
+    provides = ["RECEIPT_WRITTEN_AND_VERIFIED"]
+    action = {
+        "type": "verified_effect_tool",
+        "pre_verifier_id": "TYPED_ACCEPTANCE_PROGRAM_V1",
+        "pre_verifier_payload": {
+            "program": {
+                "schema": "PROJECT_BRAIN_TYPED_ACCEPTANCE_PROGRAM_SPEC_V1",
+                "fields": [
+                    {
+                        "id": "name",
+                        "type": "enum",
+                        "dimension": "dimensionless",
+                        "source": "candidate",
+                    },
+                    {
+                        "id": "score",
+                        "type": "number",
+                        "dimension": "score",
+                        "source": "candidate",
+                    },
+                    {
+                        "id": "passed",
+                        "type": "boolean",
+                        "dimension": "dimensionless",
+                        "source": "candidate",
+                    },
+                ],
+                "accept_when": {
+                    "op": "and",
+                    "args": [
+                        {
+                            "op": "eq",
+                            "left": {"op": "ref", "id": "name"},
+                            "right": {
+                                "op": "const",
+                                "type": "enum",
+                                "dimension": "dimensionless",
+                                "value": "Alice",
+                            },
+                        },
+                        {
+                            "op": "ge",
+                            "left": {"op": "ref", "id": "score"},
+                            "right": {
+                                "op": "const",
+                                "type": "number",
+                                "dimension": "score",
+                                "value": 0.5,
+                            },
+                        },
+                        {"op": "ref", "id": "passed"},
+                    ],
+                },
+            },
+            "trusted_values": {},
+        },
+        "executor_id": "H100_VERIFIED_EFFECT_TOOL_REGISTRY_V1",
+        "executor_payload": {
+            "tool_id": "JSON_RECEIPT_WRITER_V1",
+            "sandbox_rel": "r3-effect-episode",
+        },
+        "effect_contract": {
+            "effects": provides,
+            "verifier_success_condition": SUCCESS_CONDITIONS["TYPED_ACCEPTANCE_PROGRAM_V1"],
+        },
+    }
+    cap = {
+        "id": "write-receipt",
+        "requires": [],
+        "provides": provides,
+        "cost": 1,
+        "result_fields": [],
+        "action": action,
+    }
+    problem = {
+        "task_id": "r3-effectful-learning-readback",
+        "initial_facts": [],
+        "target_effects": provides,
+        "capabilities": [cap],
+    }
+
+    verifier_id = action["pre_verifier_id"]
+    payload = action["pre_verifier_payload"]
+    core = {
+        "capability_id": cap["id"],
+        "task_contract_sha256": v4.task_contract_sha256(problem),
+        "requires": [],
+        "verifier_id": verifier_id,
+        "verifier_payload_sha256": sha256(_canon(payload).encode("utf-8")).hexdigest(),
+        "verifier_success_condition": SUCCESS_CONDITIONS[verifier_id],
+        "provided_effects": provides,
+    }
+    receipt = {
+        "schema": BINDING_SCHEMA,
+        **core,
+        "pass": True,
+        "claim": "BUILTIN_VERIFIER_PASS_IMPLIES_EXACT_PROVIDED_EFFECTS",
+    }
+    receipt_ref = _write_doc(
+        repo_root,
+        "evidence/write-receipt.effect-semantics.receipt.json",
+        receipt,
+    )
+    verification = {
+        "schema": BINDING_VERIFY_SCHEMA,
+        **core,
+        "subject_git_blob_sha": receipt_ref["git_blob_sha"],
+        "pass": True,
+        "independent_verified": True,
+        "implication_semantics_verified": True,
+        "independent_verifier_id": "R3_EFFECT_TEST_INDEPENDENT_SEMANTICS_VERIFIER",
+    }
+    verification_ref = _write_doc(
+        repo_root,
+        "evidence/write-receipt.effect-semantics.verification.json",
+        verification,
+    )
+    cap["effect_semantics_binding"] = {
+        "receipt": receipt_ref,
+        "verification": verification_ref,
+    }
+    return problem
+
+
 class R3EffectfulLearningReadbackV1Tests(unittest.TestCase):
-    def material(self, effect_root: Path):
-        problem = effect_problem()
+    def material(self, repo_root: Path, effect_root: Path):
+        problem = effect_problem(repo_root)
         proposal = {
             "candidate_values": {
                 "name": "Alice",
@@ -105,9 +183,10 @@ class R3EffectfulLearningReadbackV1Tests(unittest.TestCase):
                 "passed": True,
             }
         }
-        out = v1.run(
+        out = v4.run(
             problem,
             proposal_packets={"write-receipt": [proposal]},
+            repo_root=repo_root,
             effect_root=str(effect_root),
         )
         self.assertTrue(out["pass"], out)
@@ -115,6 +194,7 @@ class R3EffectfulLearningReadbackV1Tests(unittest.TestCase):
         self.assertEqual(len(trace), 1)
         row = trace[0]
         self.assertTrue(row["effect_outcome_sha256"])
+        self.assertTrue(row["effect_semantics_authenticated"])
         self.assertEqual(
             row["effect_outcome"]["proposal_sha256"],
             row["proposal_sha256"],
@@ -165,9 +245,9 @@ class R3EffectfulLearningReadbackV1Tests(unittest.TestCase):
             root = Path(td)
             repo_root = root / "repo"
             effect_root = root / "effects"
-            (repo_root / "canonical" / "runtime").mkdir(parents=True)
+            repo_root.mkdir(parents=True)
 
-            problem, episode, trace, request = self.material(effect_root)
+            problem, episode, trace, request = self.material(repo_root, effect_root)
             binding = worker.verify_episode_request(
                 request,
                 repo_root=repo_root,
@@ -190,9 +270,9 @@ class R3EffectfulLearningReadbackV1Tests(unittest.TestCase):
             root = Path(td)
             repo_root = root / "repo"
             effect_root = root / "effects"
-            (repo_root / "canonical" / "runtime").mkdir(parents=True)
+            repo_root.mkdir(parents=True)
 
-            _, _, _, request = self.material(effect_root)
+            _, _, _, request = self.material(repo_root, effect_root)
             target = (
                 effect_root
                 / "r3-effect-episode"
