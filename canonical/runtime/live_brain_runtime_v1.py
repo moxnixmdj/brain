@@ -1107,6 +1107,11 @@ def run_specialized(
     repo_root: str | Path = ROOT,
     state_path: str | Path | None = None,
     learn: bool = True,
+    auto_repair: bool = True,
+    repair_components: Sequence[Mapping[str, Any]] = (),
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     if not isinstance(payload, Mapping):
         return _fail("SPECIALIZED_PAYLOAD_NOT_OBJECT")
@@ -1139,16 +1144,48 @@ def run_specialized(
                 "mode": "specialized",
                 "surface": name,
                 "payload": deepcopy(dict(payload)),
+                "auto_repair": False,
                 "learn": True,
             },
         )
+        automatic_repair = None
+        if not passed and auto_repair:
+            automatic_repair = _automatic_failure_repair(
+                learning,
+                repo_root=repo_root,
+                state_path=state_path,
+                repair_components=repair_components,
+                initial_facts=payload.get("initial_facts") or (),
+                information_provider=information_provider,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+            )
+        repaired = (
+            isinstance(automatic_repair, Mapping)
+            and automatic_repair.get("pass") is True
+        )
+        repaired_replay = (
+            automatic_repair.get("original_replay")
+            if repaired and isinstance(automatic_repair, Mapping)
+            else None
+        )
+        effective_raw = raw
+        if isinstance(repaired_replay, Mapping) and "raw_result" in repaired_replay:
+            effective_raw = repaired_replay.get("raw_result")
         return {
             "schema": SCHEMA,
-            "status": "UNIFIED_SPECIALIZED_EXECUTION_COMPLETE",
-            "pass": passed,
+            "status": (
+                "UNIFIED_SPECIALIZED_EXECUTION_REPAIRED_AND_REPLAYED"
+                if repaired else "UNIFIED_SPECIALIZED_EXECUTION_COMPLETE"
+            ),
+            "pass": repaired or passed,
             "surface": name,
-            "raw_result": raw,
+            "raw_result": effective_raw,
+            "initial_raw_result": raw if repaired else None,
             "learning": learning,
+            "automatic_repair_attempted": automatic_repair is not None,
+            "automatic_repair": automatic_repair,
+            "repaired_original_replay": repaired_replay,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -1238,15 +1275,49 @@ def run(
             retry_context={
                 "mode": "compiled_bound",
                 "request": deepcopy(dict(payload)),
+                "auto_repair": False,
                 "learn": True,
             },
         )
+        automatic_repair = None
+        if raw.get("pass") is not True and request.get("auto_repair", True) is not False:
+            automatic_repair = _automatic_failure_repair(
+                learning,
+                repo_root=repo_root,
+                state_path=request.get("state_path"),
+                repair_components=request.get("repair_components") or (),
+                initial_facts=payload.get("initial_facts") or (),
+                information_provider=information_provider,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+            )
+        repaired = (
+            isinstance(automatic_repair, Mapping)
+            and automatic_repair.get("pass") is True
+        )
+        repaired_replay = (
+            automatic_repair.get("original_replay")
+            if repaired and isinstance(automatic_repair, Mapping)
+            else None
+        )
+        effective_raw = raw
+        if isinstance(repaired_replay, Mapping) and isinstance(
+            repaired_replay.get("raw_result"), Mapping
+        ):
+            effective_raw = repaired_replay["raw_result"]
         return {
             "schema": SCHEMA,
-            "status": "UNIFIED_BOUND_EXECUTION_COMPLETE",
-            "pass": raw.get("pass") is True,
-            "raw_result": raw,
+            "status": (
+                "UNIFIED_BOUND_EXECUTION_REPAIRED_AND_REPLAYED"
+                if repaired else "UNIFIED_BOUND_EXECUTION_COMPLETE"
+            ),
+            "pass": repaired or raw.get("pass") is True,
+            "raw_result": effective_raw,
+            "initial_raw_result": raw if repaired else None,
             "learning": learning,
+            "automatic_repair_attempted": automatic_repair is not None,
+            "automatic_repair": automatic_repair,
+            "repaired_original_replay": repaired_replay,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -1263,16 +1334,50 @@ def run(
             retry_context={
                 "mode": "raw_bound",
                 "request": deepcopy(dict(payload)),
+                "auto_repair": False,
                 "learn": True,
             },
         )
+        automatic_repair = None
+        if raw.get("pass") is not True and request.get("auto_repair", True) is not False:
+            automatic_repair = _automatic_failure_repair(
+                learning,
+                repo_root=repo_root,
+                state_path=request.get("state_path"),
+                repair_components=request.get("repair_components") or (),
+                initial_facts=payload.get("initial_facts") or (),
+                information_provider=information_provider,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+            )
+        repaired = (
+            isinstance(automatic_repair, Mapping)
+            and automatic_repair.get("pass") is True
+        )
+        repaired_replay = (
+            automatic_repair.get("original_replay")
+            if repaired and isinstance(automatic_repair, Mapping)
+            else None
+        )
+        effective_raw = raw
+        if isinstance(repaired_replay, Mapping) and isinstance(
+            repaired_replay.get("raw_result"), Mapping
+        ):
+            effective_raw = repaired_replay["raw_result"]
         return {
             "schema": SCHEMA,
-            "status": "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE",
-            "pass": raw.get("pass") is True,
-            "raw_result": raw,
+            "status": (
+                "UNIFIED_RAW_BOUND_EXECUTION_REPAIRED_AND_REPLAYED"
+                if repaired else "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE"
+            ),
+            "pass": repaired or raw.get("pass") is True,
+            "raw_result": effective_raw,
+            "initial_raw_result": raw if repaired else None,
             "learning": learning,
-            "semantic_acceptance_complete": raw.get("semantic_acceptance_complete") is True,
+            "automatic_repair_attempted": automatic_repair is not None,
+            "automatic_repair": automatic_repair,
+            "repaired_original_replay": repaired_replay,
+            "semantic_acceptance_complete": effective_raw.get("semantic_acceptance_complete") is True,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -1324,6 +1429,11 @@ def run(
             repo_root=repo_root,
             state_path=request.get("state_path"),
             learn=request.get("learn", True) is not False,
+            auto_repair=request.get("auto_repair", True) is not False,
+            repair_components=request.get("repair_components") or (),
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
         )
 
     if mode == "skill_plan":
