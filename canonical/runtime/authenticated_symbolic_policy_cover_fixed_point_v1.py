@@ -329,36 +329,57 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         return _fail("TRUSTED_CONSTRAINTS_MAKE_ROOT_INCONSISTENT")
 
     policies = payload.get("policies")
-    if not isinstance(policies, Sequence) or isinstance(policies, (str, bytes)) or not policies:
-        return _fail("POLICIES_REQUIRED")
+    if not isinstance(policies, Sequence) or isinstance(policies, (str, bytes)):
+        return _fail("POLICIES_INVALID")
     policy_conditions: dict[str, Mapping[str, Any]] = {}
     policy_costs: dict[str, float] = {}
     policy_proofs: dict[str, dict[str, Any]] = {}
+    rejected_policies: list[dict[str, Any]] = []
+    seen_policy_ids: set[str] = set()
     for i, row in enumerate(policies):
         if not isinstance(row, Mapping) or set(row) != _POLICY_FIELDS:
-            return _fail("POLICY_FIELDS_INVALID", index=i)
+            rejected_policies.append({"index": i, "reason": "POLICY_FIELDS_INVALID"})
+            continue
         pid = row.get("policy_id")
         vid = row.get("verifier_id")
         cost = row.get("cost_units")
         if (
-            not isinstance(pid, str) or not pid or pid in policy_conditions
+            not isinstance(pid, str) or not pid
             or not isinstance(vid, str) or not vid
         ):
-            return _fail("POLICY_ID_OR_VERIFIER_INVALID", index=i)
+            rejected_policies.append({"index": i, "policy_id": pid, "reason": "POLICY_ID_OR_VERIFIER_INVALID"})
+            continue
+        if pid in seen_policy_ids:
+            rejected_policies.append({"index": i, "policy_id": pid, "reason": "POLICY_ID_DUPLICATE"})
+            continue
+        seen_policy_ids.add(pid)
         if not _valid_cost(cost):
-            return _fail("POLICY_COST_INVALID", policy_id=pid)
+            rejected_policies.append({"index": i, "policy_id": pid, "reason": "POLICY_COST_INVALID"})
+            continue
         proof = _policy_verifier(vid, pid)
         if proof.get("pass") is not True:
-            return _fail("TRUSTED_POLICY_VERIFICATION_FAILED", policy_id=pid, verifier_id=vid)
+            rejected_policies.append({
+                "index": i, "policy_id": pid, "verifier_id": vid,
+                "reason": "TRUSTED_POLICY_VERIFICATION_FAILED",
+            })
+            continue
         if (
             proof.get("adequacy_proved") is not True
             or proof.get("brain_owned") is not True
             or proof.get("policy_id") != pid
         ):
-            return _fail("TRUSTED_POLICY_PROOF_SEMANTICS_INVALID", policy_id=pid)
+            rejected_policies.append({
+                "index": i, "policy_id": pid,
+                "reason": "TRUSTED_POLICY_PROOF_SEMANTICS_INVALID",
+            })
+            continue
         phi = proof.get("policy_condition")
         if not _validate_formula(phi, basis_set):
-            return _fail("TRUSTED_POLICY_CONDITION_INVALID", policy_id=pid)
+            rejected_policies.append({
+                "index": i, "policy_id": pid,
+                "reason": "TRUSTED_POLICY_CONDITION_INVALID",
+            })
+            continue
         policy_conditions[pid] = phi
         policy_costs[pid] = float(cost)
         policy_proofs[pid] = {
@@ -372,32 +393,62 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
     discriminator_formulas: dict[str, Mapping[str, Any]] = {}
     discriminator_costs: dict[str, float] = {}
     discriminator_proofs: dict[str, dict[str, Any]] = {}
+    rejected_discriminators: list[dict[str, Any]] = []
+    seen_discriminator_ids: set[str] = set()
     for i, row in enumerate(discriminators):
         if not isinstance(row, Mapping) or set(row) != _DISCRIMINATOR_FIELDS:
-            return _fail("DISCRIMINATOR_FIELDS_INVALID", index=i)
+            rejected_discriminators.append({"index": i, "reason": "DISCRIMINATOR_FIELDS_INVALID"})
+            continue
         did = row.get("discriminator_id")
         vid = row.get("verifier_id")
         cost = row.get("cost_units")
         if (
-            not isinstance(did, str) or not did or did in discriminator_formulas
+            not isinstance(did, str) or not did
             or not isinstance(vid, str) or not vid
         ):
-            return _fail("DISCRIMINATOR_ID_OR_VERIFIER_INVALID", index=i)
+            rejected_discriminators.append({
+                "index": i, "discriminator_id": did,
+                "reason": "DISCRIMINATOR_ID_OR_VERIFIER_INVALID",
+            })
+            continue
+        if did in seen_discriminator_ids:
+            rejected_discriminators.append({
+                "index": i, "discriminator_id": did,
+                "reason": "DISCRIMINATOR_ID_DUPLICATE",
+            })
+            continue
+        seen_discriminator_ids.add(did)
         if not _valid_cost(cost):
-            return _fail("DISCRIMINATOR_COST_INVALID", discriminator_id=did)
+            rejected_discriminators.append({
+                "index": i, "discriminator_id": did,
+                "reason": "DISCRIMINATOR_COST_INVALID",
+            })
+            continue
         proof = _discriminator_verifier(vid, did)
         if proof.get("pass") is not True:
-            return _fail("TRUSTED_DISCRIMINATOR_VERIFICATION_FAILED", discriminator_id=did, verifier_id=vid)
+            rejected_discriminators.append({
+                "index": i, "discriminator_id": did, "verifier_id": vid,
+                "reason": "TRUSTED_DISCRIMINATOR_VERIFICATION_FAILED",
+            })
+            continue
         if (
             proof.get("truthful") is not True
             or proof.get("safe") is not True
             or proof.get("total_over_basis") is not True
             or proof.get("discriminator_id") != did
         ):
-            return _fail("TRUSTED_DISCRIMINATOR_PROOF_SEMANTICS_INVALID", discriminator_id=did)
+            rejected_discriminators.append({
+                "index": i, "discriminator_id": did,
+                "reason": "TRUSTED_DISCRIMINATOR_PROOF_SEMANTICS_INVALID",
+            })
+            continue
         phi = proof.get("predicate_formula")
         if not _validate_formula(phi, basis_set):
-            return _fail("TRUSTED_DISCRIMINATOR_FORMULA_INVALID", discriminator_id=did)
+            rejected_discriminators.append({
+                "index": i, "discriminator_id": did,
+                "reason": "TRUSTED_DISCRIMINATOR_FORMULA_INVALID",
+            })
+            continue
         discriminator_formulas[did] = phi
         discriminator_costs[did] = float(cost)
         discriminator_proofs[did] = {
@@ -499,6 +550,8 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             "accepted_constraint_proofs": accepted_constraints,
             "authenticated_policy_count": len(policy_conditions),
             "authenticated_discriminator_count": len(discriminator_formulas),
+            "rejected_policy_candidates": rejected_policies,
+            "rejected_discriminator_candidates": rejected_discriminators,
             "negative_impossibility_authorized": False,
             "u_empty_authorized": False,
             "terminal_authority": False,
@@ -518,6 +571,8 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         "accepted_constraint_proofs": accepted_constraints,
         "authenticated_policy_count": len(policy_conditions),
         "authenticated_discriminator_count": len(discriminator_formulas),
+        "rejected_policy_candidates": rejected_policies,
+        "rejected_discriminator_candidates": rejected_discriminators,
         "minimum_worst_case_resource_bound_units": root["worst_cost"],
         "decision_tree": serialize(root),
         "caller_semantic_flags_accepted": False,
