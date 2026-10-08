@@ -19,6 +19,7 @@ from typing import Any, Callable, Mapping
 
 from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
 from canonical.runtime import r3_improvement_queue_driver_v1 as r3
+from canonical.runtime import r3_historical_evidence_irreducibility_v1 as historical_evidence
 
 SCHEMA = "PROJECT_BRAIN_ONE_SHOT_VERIFIED_CLOSURE_V1"
 
@@ -400,6 +401,27 @@ def run(
         if not changed and int(drained.get("progress_count", 0)) == 0:
             residual = classify_residual(blockers, pending=pending)
             internal = residual["internally_solvable_gap_remaining"]
+            bounded_historical_certificate = None
+            if (
+                not internal
+                and residual.get("external_or_new_evidence_required") is True
+            ):
+                bounded_historical_certificate = (
+                    historical_evidence.certify_pending_set(
+                        pending,
+                        state_path=state_path,
+                        repo_root=repo_root,
+                    )
+                )
+                if bounded_historical_certificate.get("pass") is True:
+                    residual["current_evidence_irreducibility_proved"] = True
+                    residual["current_evidence_certificate"] = deepcopy(
+                        bounded_historical_certificate
+                    )
+                    residual["current_evidence_boundary"] = (
+                        "EXACT_HISTORICAL_OBSERVATIONS_REQUIRE_NEW_INDEPENDENT_"
+                        "EVIDENCE_OR_NEW_REPLAYABLE_EXPERIENCE"
+                    )
             external_proved = (
                 residual.get("irreducible_external_information_proved") is True
             )
@@ -425,6 +447,9 @@ def run(
                     (not internal) and external_proved
                 ),
                 "irreducible_external_information_proved": external_proved,
+                "bounded_historical_evidence_certificate": deepcopy(
+                    bounded_historical_certificate
+                ),
                 "terminal_authority": False,
             }
 
