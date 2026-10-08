@@ -752,6 +752,12 @@ def integrate_solver_output(
             ]
             state["pareto_frontiers"][family] = sorted(set(admitted_ids))
             for removed in skill_admission.get("removed_dominated", []) or []:
+                # A stronger verification of the same content-addressed skill
+                # legitimately replaces its prior Pareto row. Do not deactivate
+                # the just-written upgraded record by treating that identity as
+                # a separate dominated skill.
+                if removed == sid:
+                    continue
                 if removed in state["skills"] and isinstance(state["skills"][removed], dict):
                     state["skills"][removed]["active"] = False
                     state["skills"][removed]["dominated_by"] = sid
