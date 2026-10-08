@@ -54,6 +54,8 @@ def certificate():
                 "target_relation_receipt_sha256": "3" * 64,
                 "relation_kind": "PAIRWISE_PREFERENCE",
                 "judge_panel_class": "PAIRWISE_PANEL",
+                "assignment_coverage": "ACTUAL_OWNER_ASSIGNMENT",
+                "owner_assignment_verified": True,
                 "matched_pairwise_semantics_verified": True,
                 "outcome": "TIE",
             })
@@ -98,6 +100,28 @@ class T(unittest.TestCase):
         with self.assertRaisesRegex(DominanceCertificateError, "U_OPUS_WIN_OR_INVALID"):
             verify_scope_complete_dominance(target(), c)
 
+    def test_pairwise_full_panel_rejects_one_opus_win(self):
+        c = certificate()
+        u = next(x for x in c["checks"] if x["route"] == "U_DIRECT_TARGET_RELATION")
+        u.pop("owner_assignment_verified")
+        u.pop("outcome")
+        u["assignment_coverage"] = "ALL_BOUND_PANEL_JUDGES"
+        u["panel_complete_verified"] = True
+        u["panel_outcomes"] = ["BRAIN_WIN", "TIE", "OPUS_WIN"]
+        with self.assertRaisesRegex(DominanceCertificateError, "U_OPUS_WIN_OR_INVALID"):
+            verify_scope_complete_dominance(target(), c)
+
+    def test_pairwise_full_panel_all_noninferior_passes(self):
+        c = certificate()
+        u = next(x for x in c["checks"] if x["route"] == "U_DIRECT_TARGET_RELATION")
+        u.pop("owner_assignment_verified")
+        u.pop("outcome")
+        u["assignment_coverage"] = "ALL_BOUND_PANEL_JUDGES"
+        u["panel_complete_verified"] = True
+        u["panel_outcomes"] = ["BRAIN_WIN", "TIE", "BRAIN_WIN"]
+        out = verify_scope_complete_dominance(target(), c)
+        self.assertEqual(out["status"], "PASS_SCOPE_COMPLETE_CURRENT_EPOCH_DOMINANCE")
+
     def test_rubric_opus_strictly_better_fails(self):
         c = certificate()
         u = next(x for x in c["checks"] if x["route"] == "U_DIRECT_TARGET_RELATION")
@@ -105,6 +129,8 @@ class T(unittest.TestCase):
         u.pop("outcome")
         u["relation_kind"] = "BINARY_RUBRIC"
         u["judge_panel_class"] = "RUBRIC_PANEL"
+        u["assignment_coverage"] = "ACTUAL_OWNER_ASSIGNMENT"
+        u["owner_assignment_verified"] = True
         u["matched_rubric_semantics_verified"] = True
         u["brain_pass"] = False
         u["opus_pass"] = True
