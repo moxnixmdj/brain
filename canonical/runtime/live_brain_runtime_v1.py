@@ -1093,6 +1093,11 @@ def run_specialized(
     repo_root: str | Path = ROOT,
     state_path: str | Path | None = None,
     learn: bool = True,
+    auto_repair: bool = True,
+    repair_components: Sequence[Mapping[str, Any]] = (),
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     if not isinstance(payload, Mapping):
         return _fail("SPECIALIZED_PAYLOAD_NOT_OBJECT")
@@ -1128,13 +1133,33 @@ def run_specialized(
                 "learn": True,
             },
         )
+        automatic_repair = _automatic_failure_repair(
+            learning,
+            repo_root=repo_root,
+            state_path=state_path,
+            initial_facts=(),
+            repair_components=repair_components,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+            enabled=auto_repair,
+        )
+        repaired = (
+            isinstance(automatic_repair, Mapping)
+            and automatic_repair.get("pass") is True
+        )
         return {
             "schema": SCHEMA,
-            "status": "UNIFIED_SPECIALIZED_EXECUTION_COMPLETE",
-            "pass": passed,
+            "status": (
+                "UNIFIED_SPECIALIZED_EXECUTION_REPAIRED"
+                if repaired else "UNIFIED_SPECIALIZED_EXECUTION_COMPLETE"
+            ),
+            "pass": passed or repaired,
             "surface": name,
             "raw_result": raw,
             "learning": learning,
+            "auto_repair_attempted": automatic_repair is not None,
+            "automatic_repair": automatic_repair,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -1227,12 +1252,32 @@ def run(
                 "learn": True,
             },
         )
+        automatic_repair = _automatic_failure_repair(
+            learning,
+            repo_root=repo_root,
+            state_path=request.get("state_path"),
+            initial_facts=payload.get("initial_facts") or (),
+            repair_components=request.get("repair_components") or (),
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+            enabled=request.get("auto_repair", True) is not False,
+        )
+        repaired = (
+            isinstance(automatic_repair, Mapping)
+            and automatic_repair.get("pass") is True
+        )
         return {
             "schema": SCHEMA,
-            "status": "UNIFIED_BOUND_EXECUTION_COMPLETE",
-            "pass": raw.get("pass") is True,
+            "status": (
+                "UNIFIED_BOUND_EXECUTION_REPAIRED"
+                if repaired else "UNIFIED_BOUND_EXECUTION_COMPLETE"
+            ),
+            "pass": raw.get("pass") is True or repaired,
             "raw_result": raw,
             "learning": learning,
+            "auto_repair_attempted": automatic_repair is not None,
+            "automatic_repair": automatic_repair,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -1252,13 +1297,35 @@ def run(
                 "learn": True,
             },
         )
+        automatic_repair = _automatic_failure_repair(
+            learning,
+            repo_root=repo_root,
+            state_path=request.get("state_path"),
+            initial_facts=payload.get("initial_facts") or (),
+            repair_components=request.get("repair_components") or (),
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+            enabled=request.get("auto_repair", True) is not False,
+        )
+        repaired = (
+            isinstance(automatic_repair, Mapping)
+            and automatic_repair.get("pass") is True
+        )
         return {
             "schema": SCHEMA,
-            "status": "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE",
-            "pass": raw.get("pass") is True,
+            "status": (
+                "UNIFIED_RAW_BOUND_EXECUTION_REPAIRED"
+                if repaired else "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE"
+            ),
+            "pass": raw.get("pass") is True or repaired,
             "raw_result": raw,
             "learning": learning,
-            "semantic_acceptance_complete": raw.get("semantic_acceptance_complete") is True,
+            "semantic_acceptance_complete": (
+                raw.get("semantic_acceptance_complete") is True or repaired
+            ),
+            "auto_repair_attempted": automatic_repair is not None,
+            "automatic_repair": automatic_repair,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -1310,6 +1377,11 @@ def run(
             repo_root=repo_root,
             state_path=request.get("state_path"),
             learn=request.get("learn", True) is not False,
+            auto_repair=request.get("auto_repair", True) is not False,
+            repair_components=request.get("repair_components") or (),
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
         )
 
     if mode == "skill_plan":
