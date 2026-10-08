@@ -11,7 +11,11 @@ from copy import deepcopy
 from hashlib import sha256
 import importlib
 import json
+import os
 from pathlib import Path
+import signal
+import tempfile
+import time
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
@@ -83,6 +87,205 @@ SUCCESS_LEARNING_FRONTIER_PATHS = (
 
 FRONTIER_EXPANSION_KIND = "EXPAND_SUCCESS_VERIFICATION_FRONTIER"
 FRONTIER_EXPANSION_PRIORITY = 35
+
+FRONTIER_ACQUISITION_PROVIDER_TIMEOUT_SECONDS = 30
+FRONTIER_ACQUISITION_PROVIDER_MAX_RESULT_BYTES = 64_000
+FRONTIER_ACQUISITION_MUTABLE_RUNTIME_PATHS = frozenset(
+    SUCCESS_ADAPTER_FRONTIER_PATHS
+)
+
+
+def _immutable_runtime_control_surface_sha256(
+    *,
+    repo_root: str | Path = ROOT,
+) -> str:
+    """Digest runtime files that an adapter-acquisition worker is never allowed to mutate."""
+    root = Path(repo_root).resolve(strict=True)
+    runtime = (root / "canonical/runtime").resolve(strict=True)
+    runtime.relative_to(root)
+    rows: list[dict[str, Any]] = []
+    for target in sorted(runtime.rglob("*"), key=lambda p: p.as_posix()):
+        if "__pycache__" in target.parts or target.suffix in {".pyc", ".pyo"}:
+            continue
+        if target.is_symlink():
+            raise ImprovementDriverError(
+                "FRONTIER_ACQUISITION_RUNTIME_SYMLINK_REJECTED:"
+                + target.relative_to(root).as_posix()
+            )
+        if not target.is_file():
+            continue
+        relative = target.relative_to(root).as_posix()
+        if relative in FRONTIER_ACQUISITION_MUTABLE_RUNTIME_PATHS:
+            continue
+        raw = target.read_bytes()
+        rows.append({
+            "path": relative,
+            "sha256": sha256(raw).hexdigest(),
+            "bytes": len(raw),
+        })
+    if not rows:
+        raise ImprovementDriverError(
+            "FRONTIER_ACQUISITION_IMMUTABLE_RUNTIME_SURFACE_EMPTY"
+        )
+    payload = json.dumps(
+        rows,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    return sha256(payload).hexdigest()
+
+
+def _run_frontier_acquisition_provider_isolated(
+    provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None],
+    request: Mapping[str, Any],
+    *,
+    timeout_seconds: int = FRONTIER_ACQUISITION_PROVIDER_TIMEOUT_SECONDS,
+) -> Mapping[str, Any] | None:
+    """Run an acquisition callback outside the parent Python process.
+
+    Fork isolation is load-bearing: a supplied callback may write authorized adapter
+    bytes, but Python-module monkeypatches and other in-memory mutations must die with
+    the child. The child returns JSON data only; the parent never unpickles provider
+    output.
+    """
+    if not callable(provider):
+        raise ImprovementDriverError(
+            "FRONTIER_ACQUISITION_PROVIDER_NOT_CALLABLE"
+        )
+    if (
+        isinstance(timeout_seconds, bool)
+        or not isinstance(timeout_seconds, int)
+        or timeout_seconds < 1
+        or timeout_seconds > 300
+    ):
+        raise ImprovementDriverError(
+            "FRONTIER_ACQUISITION_PROVIDER_TIMEOUT_INVALID"
+        )
+    if not hasattr(os, "fork"):
+        raise ImprovementDriverError(
+            "FRONTIER_ACQUISITION_PROVIDER_PROCESS_ISOLATION_UNAVAILABLE"
+        )
+
+    fd, result_path = tempfile.mkstemp(
+        prefix="r3-frontier-acquisition-",
+        suffix=".json",
+    )
+    os.close(fd)
+    try:
+        pid = os.fork()
+        if pid == 0:
+            try:
+                try:
+                    os.setsid()
+                except Exception:
+                    pass
+                signal.alarm(timeout_seconds)
+                try:
+                    result = provider(deepcopy(dict(request)))
+                    if result is not None and not isinstance(result, Mapping):
+                        raise ImprovementDriverError(
+                            "FRONTIER_ACQUISITION_PROVIDER_RESULT_INVALID"
+                        )
+                    envelope = {
+                        "ok": True,
+                        "result": None if result is None else deepcopy(dict(result)),
+                    }
+                except BaseException as exc:
+                    envelope = {
+                        "ok": False,
+                        "error": type(exc).__name__ + ":" + str(exc),
+                    }
+                raw = json.dumps(
+                    envelope,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    ensure_ascii=False,
+                    allow_nan=False,
+                ).encode("utf-8")
+                if len(raw) > FRONTIER_ACQUISITION_PROVIDER_MAX_RESULT_BYTES:
+                    raw = json.dumps(
+                        {
+                            "ok": False,
+                            "error": "FRONTIER_ACQUISITION_PROVIDER_RESULT_TOO_LARGE",
+                        },
+                        sort_keys=True,
+                        separators=(",", ":"),
+                    ).encode("utf-8")
+                Path(result_path).write_bytes(raw)
+            finally:
+                os._exit(0)
+
+        deadline = time.monotonic() + timeout_seconds + 1
+        child_status: int | None = None
+        while time.monotonic() < deadline:
+            waited, status = os.waitpid(pid, os.WNOHANG)
+            if waited == pid:
+                child_status = status
+                break
+            time.sleep(0.01)
+        if child_status is None:
+            try:
+                os.killpg(pid, signal.SIGKILL)
+            except Exception:
+                try:
+                    os.kill(pid, signal.SIGKILL)
+                except Exception:
+                    pass
+            try:
+                os.waitpid(pid, 0)
+            except Exception:
+                pass
+            raise ImprovementDriverError(
+                "FRONTIER_ACQUISITION_PROVIDER_TIMEOUT"
+            )
+        # Kill any descendants left in the provider's process group.
+        try:
+            os.killpg(pid, signal.SIGKILL)
+        except Exception:
+            pass
+        if not os.WIFEXITED(child_status) or os.WEXITSTATUS(child_status) != 0:
+            raise ImprovementDriverError(
+                "FRONTIER_ACQUISITION_PROVIDER_CHILD_EXIT_INVALID"
+            )
+
+        raw = Path(result_path).read_bytes()
+        if not raw:
+            raise ImprovementDriverError(
+                "FRONTIER_ACQUISITION_PROVIDER_CHILD_RESULT_MISSING"
+            )
+        if len(raw) > FRONTIER_ACQUISITION_PROVIDER_MAX_RESULT_BYTES:
+            raise ImprovementDriverError(
+                "FRONTIER_ACQUISITION_PROVIDER_RESULT_TOO_LARGE"
+            )
+        try:
+            envelope = json.loads(raw.decode("utf-8"))
+        except Exception as exc:
+            raise ImprovementDriverError(
+                "FRONTIER_ACQUISITION_PROVIDER_RESULT_JSON_INVALID"
+            ) from exc
+        if not isinstance(envelope, Mapping):
+            raise ImprovementDriverError(
+                "FRONTIER_ACQUISITION_PROVIDER_ENVELOPE_INVALID"
+            )
+        if envelope.get("ok") is not True:
+            raise ImprovementDriverError(
+                "FRONTIER_ACQUISITION_PROVIDER_CHILD_FAILED:"
+                + str(envelope.get("error") or "UNKNOWN")
+            )
+        result = envelope.get("result")
+        if result is None:
+            return None
+        if not isinstance(result, Mapping):
+            raise ImprovementDriverError(
+                "FRONTIER_ACQUISITION_PROVIDER_RESULT_INVALID"
+            )
+        return deepcopy(dict(result))
+    finally:
+        try:
+            Path(result_path).unlink(missing_ok=True)
+        except Exception:
+            pass
 
 
 def _enqueue_success_verification_frontier_expansion(
