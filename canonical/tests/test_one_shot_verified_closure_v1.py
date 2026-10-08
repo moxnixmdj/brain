@@ -32,7 +32,17 @@ class OneShotClosureTests(unittest.TestCase):
         return {
             "schema": closure.SCHEMA,
             "digest": digest,
-            "payload": {"files": [], "pending": pending, "stats": {}},
+            "state_sha256": "state-" + digest,
+            "payload": {
+                "state_file": {
+                    "path": "canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json",
+                    "sha256": "state-" + digest,
+                    "bytes": 1,
+                },
+                "files": [],
+                "pending": pending,
+                "stats": {},
+            },
         }
 
     def test_empty_queue_is_verified_internal_fixed_point(self):
@@ -122,7 +132,7 @@ class OneShotClosureTests(unittest.TestCase):
         self.assertTrue(out["pass"])
         self.assertEqual(
             out["status"],
-            "VERIFIED_FIXED_POINT__EXTERNAL_OR_NEW_EVIDENCE_REQUIRED",
+            "VERIFIED_FIXED_POINT__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED",
         )
 
     def test_rejects_false_progress(self):
@@ -147,6 +157,94 @@ class OneShotClosureTests(unittest.TestCase):
         self.assertEqual(
             out["status"],
             "FAIL_CLOSED__CLAIMED_PROGRESS_WITHOUT_STATE_OR_FRONTIER_CHANGE",
+        )
+
+
+    def test_replayable_success_backoff_is_internal_root1_gap(self):
+        pending = [{
+            "work_id": "w4",
+            "kind": "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+            "last_attempt_status": "IMPROVEMENT_PROVIDER_RETURNED_NO_SUCCESS_ADAPTATION",
+            "last_attempt_reason": None,
+            "frontier_expansion_work_id": "handoff:w4",
+            "payload": {
+                "replayable": True,
+                "proof_available": False,
+                "replay_capsule_sha256": "a" * 64,
+            },
+        }]
+        snaps = [
+            self._snap("a", pending),
+            self._snap("a", pending),
+            self._snap("a", pending),
+        ]
+        blocker = {
+            "work_id": "w4",
+            "kind": "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+            "blocker": "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
+        }
+        with patch.object(closure, "frontier_snapshot", side_effect=snaps), patch.object(
+            closure.r3,
+            "drain",
+            return_value={
+                "status": "IMPROVEMENT_QUEUE_STABLE",
+                "pass": True,
+                "progress_count": 0,
+                "actions": [{"blockers": [blocker]}],
+            },
+        ):
+            out = closure.run(repo_root=".", state_path="state.json")
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "OPEN__INTERNAL_SOLVABLE_GAP_REMAINS")
+        self.assertIn(
+            "ROOT1_SUCCESS_ADAPTER_OR_VERIFIER_FRONTIER_GAP",
+            out["residual"]["internal_blockers"],
+        )
+
+    def test_unreplayable_historical_success_requires_new_experience(self):
+        pending = [{
+            "work_id": "w5",
+            "kind": "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+            "last_attempt_status": "IMPROVEMENT_ACTION_EXCEPTION",
+            "last_attempt_reason": (
+                "SelfImprovementError:SUCCESS_OBSERVATION_NOT_REPLAYABLE:observation:x"
+            ),
+            "frontier_expansion_work_id": None,
+            "payload": {
+                "replayable": False,
+                "proof_available": False,
+                "replay_capsule_sha256": None,
+            },
+        }]
+        snaps = [
+            self._snap("a", pending),
+            self._snap("a", pending),
+            self._snap("a", pending),
+        ]
+        blocker = {
+            "work_id": "w5",
+            "kind": "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+            "blocker": "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
+        }
+        with patch.object(closure, "frontier_snapshot", side_effect=snaps), patch.object(
+            closure.r3,
+            "drain",
+            return_value={
+                "status": "IMPROVEMENT_QUEUE_STABLE",
+                "pass": True,
+                "progress_count": 0,
+                "actions": [{"blockers": [blocker]}],
+            },
+        ):
+            out = closure.run(repo_root=".", state_path="state.json")
+        self.assertTrue(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "VERIFIED_FIXED_POINT__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED",
+        )
+        self.assertIn(
+            "NEW_EXPERIENCE_REQUIRED__HISTORICAL_SUCCESS_NOT_REPLAYABLE",
+            out["residual"]["evidence_blockers"],
         )
 
 
