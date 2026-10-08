@@ -121,20 +121,26 @@ def _park_success_work(
     if not isinstance(row, dict) or row.get("status") != "PENDING":
         raise ImprovementDriverError("SUCCESS_WORK_NOT_PENDING:" + wid)
     row["status"] = "PARKED"
-    row["parked_reason"] = "NO_ADMISSIBLE_CURRENT_OWNED_VERIFICATION_PATH"
+    row["parked_reason"] = "NO_CURRENT_OWNED_VERIFICATION_PATH"
     row["verification_frontier_sha256"] = frontier_sha256
     row["parked_observations"] = int(row.get("observations", 0))
+    row["epistemic_nonlearnability_proved"] = False
+    row["observational_inseparability_proved"] = False
+    row["frontier_expansion_required"] = True
 
     observations = state.get("observations", {})
     observation = observations.get(observation_id) if isinstance(observations, Mapping) else None
     if isinstance(observation, dict):
         observation["learning_disposition"] = (
-            "PROVED_NONLEARNABLE_FROM_CURRENT_RETAINED_EVIDENCE"
+            "UNRESOLVED_WITH_CURRENT_OWNED_VERIFICATION_FRONTIER"
         )
         observation["learning_disposition_reason"] = (
             "OWNED_SUCCESS_ADAPTER_RETURNED_NO_CANDIDATE"
         )
         observation["learning_disposition_frontier_sha256"] = frontier_sha256
+        observation["epistemic_nonlearnability_proved"] = False
+        observation["observational_inseparability_proved"] = False
+        observation["frontier_expansion_required"] = True
         observation["permanent_nonlearnability_claimed"] = False
 
     learning._refresh_stats(state)
@@ -831,7 +837,7 @@ def advance_once(
                         "schema": SCHEMA,
                         "status": (
                             "IMPROVEMENT_PARKED__"
-                            "PROVED_NONLEARNABLE_FROM_CURRENT_RETAINED_EVIDENCE"
+                            "CURRENT_OWNED_VERIFICATION_FRONTIER_INCOMPLETE"
                         ),
                         "pass": True,
                         "progress": False,
@@ -841,6 +847,9 @@ def advance_once(
                         "verification_frontier_sha256": reactivation[
                             "frontier_sha256"
                         ],
+                        "epistemic_nonlearnability_proved": False,
+                        "observational_inseparability_proved": False,
+                        "frontier_expansion_required": True,
                         "permanent_nonlearnability_claimed": False,
                         "blockers_skipped": blockers,
                         "terminal_authority": False,
