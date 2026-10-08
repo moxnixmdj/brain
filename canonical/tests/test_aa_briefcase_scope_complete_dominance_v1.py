@@ -14,7 +14,7 @@ def target():
             "benchmark": "AA-Briefcase v1.1",
             "model": "Claude Opus 5.5 (Max, Default Fallback)",
             "current_owner_elo": 1807,
-            "observed_date": "2026-10-07",
+            "observed_date": "2026-10-08",
         },
         "epoch_rule": {"current_epoch_minimum_opus55_target_elo": 1807},
     }
@@ -62,12 +62,13 @@ def certificate():
         "benchmark": "AA-Briefcase v1.1",
         "model": "Claude Opus 5.5 (Max, Default Fallback)",
         "matched_current_owner_epoch": True,
-        "target_observed_date": "2026-10-07",
+        "target_observed_date": "2026-10-08",
         "subject_sha256": "a" * 64,
         "opus_reference_subject_sha256": "b" * 64,
         "private_task_population_sha256": "c" * 64,
         "scope_manifest_sha256": "d" * 64,
         "verification_receipt_sha256": "e" * 64,
+        "grading_protocol_manifest_git_blob_sha": "5c77f294e09d4933e3a3175c46af225b414f4702",
         "task_count": 91,
         "expected_check_count": len(checks),
         "checks": checks,
@@ -113,6 +114,12 @@ class T(unittest.TestCase):
         m = next(x for x in c["checks"] if x["route"] == "M_HIDDEN_RESTRICTED_MONOTONE")
         m["monotone_class_complete_verified"] = False
         with self.assertRaisesRegex(DominanceCertificateError, "M_CLASS_NOT_COMPLETE"):
+            verify_scope_complete_dominance(target(), c)
+
+    def test_grading_protocol_drift_fails(self):
+        c = certificate()
+        c["grading_protocol_manifest_git_blob_sha"] = "0" * 40
+        with self.assertRaisesRegex(DominanceCertificateError, "GRADING_PROTOCOL_MANIFEST_DRIFT"):
             verify_scope_complete_dominance(target(), c)
 
     def test_stale_epoch_fails(self):
