@@ -18,8 +18,8 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V10.json",
-    "git_blob_sha": "19642f8999e8c485bdecb2bab994ce55567cd6a1"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V11.json",
+    "git_blob_sha": "3350fd3fe7829f326722af0428a3359df14dd1b7"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
@@ -53,7 +53,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__VERIFIED_CAPABILITY_ESCAPE_LIVE",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__VERIFIED_CAPABILITY_ESCAPE_LIVE__GOAL_SCOPED_POLICY_IDENTITIES_RECONCILED",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -138,9 +138,14 @@
   },
   "grounded_candidate_policy_frontier": {
     "path": "canonical/runtime/r2_grounded_candidate_policy_frontier_v1.py",
-    "git_blob_sha": "0d13e7c5fe5e8ce5bf8430e1741765d0c57e9b0b",
-    "verification_path": "canonical/verification/R2_GROUNDED_FRONTIER_PRECISION_RECALL_VERIFY_20261008_V1.json",
-    "status": "ACTIVE__CANDIDATE_ONLY__POLICY_ADEQUACY_AUTHORITY_FALSE"
+    "git_blob_sha": "1959fb77c8f2ebc628e8c34fff47f577271b0d11",
+    "regression_test_path": "canonical/tests/test_r2_grounded_candidate_policy_frontier_v1.py",
+    "regression_test_git_blob_sha": "9750cf81c29b2abc49bb7ec65cc9368adae765a2",
+    "policy_identity_scope": "EXACT_RAW_GOAL_SHA256",
+    "verification_path": "canonical/governance/R2_GOAL_SCOPED_GROUNDED_FRONTIER_AUTHORITY_RECONCILIATION_20261008_V1.json",
+    "verification_git_blob_sha": "d3009fcf9be4146307e3856ba042aaa5a8abe01e",
+    "verification_status": "MONOTONIC_SAFETY_RECONCILED__INDEPENDENT_REPLAY_NOT_CLAIMED",
+    "status": "ACTIVE__GOAL_SCOPED_CANDIDATE_ONLY__POLICY_ADEQUACY_AUTHORITY_FALSE"
   },
   "control_mechanism_status": "CLOSED__TOTAL_FAIL_CLOSED_ADEQUACY_OR_ABSTAIN_CONTROL",
   "remaining_problem_class": "ADEQUACY_COVERAGE_AND_OBSERVABILITY__CAPABILITY_EXPANSION_PATH_NOW_LIVE",
@@ -166,12 +171,14 @@
   "control_law_closure": {
     "status": "CLOSED__FIXED_POINT_NATIVE_TOTAL_NEXT_MOVE_PLUS_LIVE_TOTALIZER",
     "remaining_problem_class": "ADEQUACY_COVERAGE_EXPANSION_AND_OBSERVABILITY_NOT_GENERAL_CONTROL_MECHANISM",
-    "authoritative_field": "mechanism_closure"
+    "authoritative_field": "mechanism_closure",
+    "goal_scoped_grounded_frontier_authority_reconciled": true,
+    "goal_scoped_frontier_independent_replay_claimed": false
   },
   "sufficient_closure": {
-    "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V5.json",
-    "git_blob_sha": "b50125c7e9eff11104720540ec71116349aed5a0",
-    "status": "PASS__VERIFIED_CAPABILITY_ESCAPE_PLUS_TOTAL_CONTROL_BOUND",
+    "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V6.json",
+    "git_blob_sha": "9db44e98fc9374cd341e4aabfdf7b8032bffe7f3",
+    "status": "ACTIVE__V5_CONTROL_AND_CAPABILITY_ESCAPE_PRESERVED__GOAL_SCOPED_FRONTIER_BYTES_RECONCILED__NO_NEW_INDEPENDENT_REPLAY_CLAIM",
     "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY"
   },
   "policy_adequacy_capability_escape": {
