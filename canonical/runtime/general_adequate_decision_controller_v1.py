@@ -984,19 +984,19 @@ def run(
                         specialist_adequacy_authority=specialist_adequacy,
                     )
                 proof_carrying_outcome = build_proof_carrying_outcome(
-                raw_contract=raw_contract,
-                verifier_plan=verifier_plan,
-                selected_policy_id=selected_policy_id,
-                realization=realization,
-                goal_satisfaction_binding=goal_satisfaction,
-                candidate_text=None,
-            )
-            if proof_carrying_outcome.get("pass") is not True:
-                raise DecisionControllerError(
-                    "PROOF_CARRYING_OUTCOME_BUILD_FAILED:"
-                    + str(proof_carrying_outcome.get("reason") or "")
+                    raw_contract=raw_contract,
+                    verifier_plan=verifier_plan,
+                    selected_policy_id=selected_policy_id,
+                    realization=realization,
+                    goal_satisfaction_binding=goal_satisfaction,
+                    candidate_text=None,
                 )
-            return {
+                if proof_carrying_outcome.get("pass") is not True:
+                    raise DecisionControllerError(
+                        "PROOF_CARRYING_OUTCOME_BUILD_FAILED:"
+                        + str(proof_carrying_outcome.get("reason") or "")
+                    )
+                return {
                     "schema": SCHEMA,
                     "status": (
                         "PASS__GOAL_BOUND_AUTHENTICATED_SPECIALIST_POLICY_"
