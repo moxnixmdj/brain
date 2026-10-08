@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_SUPPORT_TRUTH_CERTIFICATE_V4_ACTIVATION_V1",
+  "date": "2026-10-08",
+  "status": "VERIFIED_BRAIN_OWNED_NUMERIC_RELATION_SUPPORT_TRUTH_EXPANSION__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/selected_support_truth_certificate_v4.py",
+    "git_blob_sha": "77fc8d17c3b40df5f0983657215c3cd32acf2649"
+  },
+  "numeric_relation": {
+    "path": "canonical/runtime/bounded_numeric_relation_support_v1.py",
+    "git_blob_sha": "1704da840f821711ce62d6640a6d90777af3a603"
+  },
+  "verification": {
+    "path": "canonical/verification/SELECTED_SUPPORT_TRUTH_CERTIFICATE_V4_VERIFICATION_20261008_V1.json"
+  },
+  "causal_target": "SYNTHESIS_SCOPE_R3_GENERAL_CLAIM_SEMANTICS__NUMERIC_THRESHOLD_AND_INTERVAL_SUBREGION",
+  "owned_effect": "FOR_STRUCTURALLY_REQUIRED_EXACT_DECIMAL_RELATIONAL_CLAIMS__RECOMPUTE_SUPPORT_CONFLICT_OR_UNKNOWN_FROM_RAW_CONTROLLED_EVIDENCE_WITH_NO_CALLER_SUPPORT_LABEL_AUTHORITY",
+  "next_root": "R3_MEMBERSHIP_TEMPORAL_CAUSAL_LOGICAL_RELATIONS_PLUS_UNDECLARED_PARAPHRASE",
+  "hard_nonclaims": [
+    "NO_R3_GLOBAL_CLOSURE",
+    "NO_GENERAL_P3_CLOSURE",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
