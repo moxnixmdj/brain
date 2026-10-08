@@ -149,7 +149,7 @@ def verify(*,goal: str,raw_result: Mapping[str,Any],root: str|Path=ROOT)->dict[s
         return {**pf,"status":"FAIL_CLOSED__RAW_RESULT_NOT_OBJECT",
                 "accepted_obligation_ids":[]}
 
-    contract=compile_contract(str(goal),source_id="user",routing_target_effects=[ROUTING_EFFECT])
+    contract=compile_contract(str(goal),source_id="user",routing_target_effects=[])
     if contract.get("pass") is not True:
         return {**pf,"status":"FAIL_CLOSED__LOSSLESS_RAW_CONTRACT_INVALID",
                 "accepted_obligation_ids":[],"contract_errors":contract.get("errors")}
