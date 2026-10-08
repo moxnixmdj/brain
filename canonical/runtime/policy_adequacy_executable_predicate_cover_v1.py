@@ -17,12 +17,27 @@ from __future__ import annotations
 
 from itertools import product
 from typing import Any, Mapping, Sequence
+from pathlib import Path
+import hashlib
+import json
 
 SCHEMA = "PROJECT_BRAIN_EXECUTABLE_ADEQUACY_PREDICATE_COVER_RUNTIME_V1"
 MAX_ATOMS = 16
 
 P3_ATOM = "P3_STRICT_EXPLICIT_BINARY_TOP_LAW_MEMBERSHIP_V1"
 P3_POLICY = "P3_GROUNDED_BINARY_DECISION_TOP_LAW_POLICY_V1"
+P2_ATOM = "P2_STRICT_EXPLICIT_SOURCE_TOP_LAW_MEMBERSHIP_V1"
+P2_POLICY = "P2_INFORMATION_SAFE_EXPLICIT_CONTRACT_TOP_LAW_POLICY_V1"
+ROOT = Path(__file__).resolve().parents[2]
+P2_MEMBERSHIP_PATH = "canonical/runtime/p2_explicit_contract_membership_v1.py"
+P2_MEMBERSHIP_BLOB = "a6f357d952434692a809382d1cbd41f3c78a2af0"
+P2_PREDICATE_VERIFY_PATH = "canonical/verification/P2_EXECUTABLE_MEMBERSHIP_PREDICATE_TWO_SPRITE_VERIFICATION_20261008_V1.json"
+P2_PREDICATE_VERIFY_BLOB = "12026e8fcc5d0669f5f41aeb8b74059b7608bb70"
+
+
+def _git_blob(path: str) -> str:
+    data=(ROOT/path).read_bytes()
+    return hashlib.sha1(b"blob "+str(len(data)).encode()+b"\\0"+data).hexdigest()
 
 
 def _fail(reason: str, **detail: Any) -> dict[str, Any]:
