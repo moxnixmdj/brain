@@ -133,3 +133,18 @@ def test_namespaced_terms_are_not_misread_as_source_prefixes():
     assert prefixed["subclass"]=="ex:canary"
     assert prefixed["superclass"]=="ex:bird"
     assert prefixed["source"]=="Taxonomy"
+
+
+def test_explicit_reflexive_subclass_keeps_provenance():
+    out=classify_support("Bird is a subclass of Bird.",[
+        ev("E1","Taxonomy states that Bird is a subclass of Bird.")
+    ])
+    assert out["relation"]=="SUPPORTS",out
+    assert out["support_evidence_ids"]==["E1"]
+
+def test_unevidenced_reflexivity_does_not_mint_grounded_support():
+    out=classify_support("Bird is a subclass of Bird.",[
+        ev("E1","Taxonomy states that Canary is a subclass of Bird.")
+    ])
+    assert out["relation"]=="UNRELATED",out
+    assert out["support_evidence_ids"]==[]
