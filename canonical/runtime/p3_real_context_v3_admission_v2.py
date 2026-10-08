@@ -3,8 +3,8 @@
 V2 removes the broad negative premise "no load-bearing semantics outside V3".
 The independently verified P3 scope certificate proves the load-bearing scope is
 the exact union of six dimensions. Three are discharged mechanically by the V3
-runtime; the three genuinely semantic context bindings remain explicit selected
-truth certificates.
+runtime; the three genuinely semantic context bindings remain open selected-context
+proof obligations. Caller-provided booleans cannot discharge them.
 
 This module proves membership only. Adequacy comes from the separately verified
 V3 top-law and promotion remains with existing fail-closed D_B admission.
@@ -70,7 +70,11 @@ def _truth_certificate(value: Any, predicate_id: str) -> tuple[bool, str]:
         return False, "SEMANTIC_CERTIFICATE_MUST_NOT_SELF_CERTIFY_ADEQUACY"
     if value.get("terminal_authority") is not False:
         return False, "SEMANTIC_CERTIFICATE_TERMINAL_AUTHORITY_INVALID"
-    return True, "PASS"
+    # These fields are caller assertions, not recomputed semantic evidence.
+    # In particular a caller can set every truth bit without proving that the
+    # supplied uncertainty set, relevance order, or audience profile is complete.
+    # Until a source-bound independent checker is implemented, remain UNKNOWN.
+    return False, "UNAUTHENTICATED_SEMANTIC_TRUTH_ASSERTION__CHECKER_NOT_BOUND"
 
 
 def _v3_mechanical_audit(result: Mapping[str, Any]) -> tuple[bool, list[str]]:
