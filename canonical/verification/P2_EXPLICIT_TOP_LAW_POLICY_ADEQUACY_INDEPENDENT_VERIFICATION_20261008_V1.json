@@ -1,0 +1,27 @@
+{
+  "schema":"PROJECT_BRAIN_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_V1",
+  "date":"2026-10-08",
+  "policy_id":"P2_INFORMATION_SAFE_EXPLICIT_CONTRACT_TOP_LAW_POLICY_V1",
+  "subject_git_blob_sha":"14eb8a71eaeb3cf8eaf04a4930ccd99e127316c6",
+  "pass":true,
+  "status":"NORMALIZATION_VERIFIED_FROM_EXISTING_CONTENT_ADDRESSED_P2_TOP_LAW_PROOF__ZERO_NEW_SCOPE_CREDIT",
+  "evidence":{
+    "top_law":{"path":"canonical/governance/P2_EXPLICIT_SEMANTIC_CONTRACT_UNIVERSAL_TOP_LAW_20261007_V1.json","git_blob_sha":"decd0d46538a213f2e169c00c83fae09191a7ed3"},
+    "top_law_verification":{"path":"canonical/verification/P2_EXPLICIT_SEMANTIC_CONTRACT_TOP_LAW_CONNECTOR_VERIFY_20261007_V1.json","git_blob_sha":"8375f545ff35ce519719467596bdf1bc15453174"},
+    "authenticator":{"path":"canonical/runtime/p2_top_law_policy_adequacy_authenticator_v1.py","git_blob_sha":"ceb8f383c0760fd9d67b967e6edf528d6d6eff37"},
+    "exact_policy":{"path":"canonical/runtime/p2_p3_information_safe_candidate_v2.py","git_blob_sha":"ea8057b0eadac210c4f4378298df93ed233c5824"}
+  },
+  "verified":[
+    "THE_NORMALIZED_CERTIFICATE_NAMES_THE_EXACT_POLICY_ALREADY_BOUND_BY_THE_EXISTING_AUTHENTICATOR.",
+    "THE_POLICY_CONDITION_IS_ONLY_P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1.",
+    "THE_EXISTING_TOP_LAW_PROVES_OBJECTIVE_TOP_ELEMENT_PLAN_SELECTION_CONDITIONAL_ON_LOSSLESS_SELECTED_CLASS_MEMBERSHIP.",
+    "THE_NORMALIZATION_DOES_NOT_SELF_CERTIFY_MEMBERSHIP_OR_WIDEN_THE_SELECTED_CLASS."
+  ],
+  "hard_nonclaims":[
+    "NO_NEW_CONTEXT_MEMBERSHIP.",
+    "NO_NEW_POLICY_ADEQUACY_THEOREM.",
+    "NO_GENERAL_PROFESSIONAL_OR_GDPVAL_CLOSURE.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
