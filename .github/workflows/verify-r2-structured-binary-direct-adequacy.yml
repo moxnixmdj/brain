@@ -1,0 +1,20 @@
+name: verify-r2-structured-binary-direct-adequacy
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/r2_structured_binary_direct_adequacy_v1.py
+      - canonical/tests/test_r2_structured_binary_direct_adequacy_v1.py
+      - .github/workflows/verify-r2-structured-binary-direct-adequacy.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest canonical.tests.test_r2_structured_binary_direct_adequacy_v1 -v
