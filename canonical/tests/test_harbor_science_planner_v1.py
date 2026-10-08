@@ -107,6 +107,40 @@ class PlannerTests(unittest.TestCase):
         self.assertNotIn("maxLength",candidate_schema["verify_command"])
         self.assertGreaterEqual(p.MAX_TOOL_COMPLETION_TOKENS,4096)
 
+    def test_prompt_aware_timeout_keeps_small_prompt_floor(self):
+        self.assertEqual(p.effective_timeout_s("small",180),300)
+
+    def test_prompt_aware_timeout_exceeds_rank12_observed_prefill_need(self):
+        # Rank12 showed ~7.1k prompt tokens at ~19.6 tok/s and timed out at 300s
+        # before generation. Use a conservative 4 bytes/token estimate and 15 tok/s floor.
+        prompt="x"*(7140*p.PROMPT_BYTES_PER_TOKEN_ESTIMATE)
+        out=p.effective_timeout_s(prompt,300)
+        self.assertGreaterEqual(out,656)
+        self.assertLessEqual(out,p.MAX_TIMEOUT_S)
+
+    def test_prompt_aware_timeout_caps_inside_fail_closed_envelope(self):
+        prompt="x"*(100000*p.PROMPT_BYTES_PER_TOKEN_ESTIMATE)
+        self.assertEqual(p.effective_timeout_s(prompt,300),p.MAX_TIMEOUT_S)
+
+    def test_plan_uses_effective_timeout_not_raw_requested_timeout(self):
+        seen=[]
+        args={
+            "material_requirements":["R1"],
+            "candidates":[{
+                "action_id":"A1",
+                "covers":["R1"],
+                "command":"echo x",
+                "verify_command":"test true",
+            }],
+        }
+        prompt="x"*(7140*p.PROMPT_BYTES_PER_TOKEN_ESTIMATE)
+        def fake(req, timeout=180):
+            seen.append(timeout)
+            return Response(tool_response(args))
+        with patch.object(p.urllib.request,"urlopen",fake):
+            p.plan(prompt,timeout_s=300)
+        self.assertEqual(seen,[p.effective_timeout_s(prompt,300)])
+
     def test_decoded_command_length_is_enforced_after_transport(self):
         args={
             "material_requirements":["R1"],
@@ -180,7 +214,7 @@ class PlannerTests(unittest.TestCase):
                 p.plan("synthetic")
 
     def test_timeout_bounds_fail_closed(self):
-        for value in (0,301,True,1.5):
+        for value in (0,p.MAX_TIMEOUT_S+1,True,1.5):
             with self.subTest(value=value):
                 with self.assertRaisesRegex(Exception,"TIMEOUT_INVALID"):
                     p.plan("synthetic",timeout_s=value)
