@@ -45,12 +45,16 @@ def payload():
         },
     }
 
-def test_sound_predicates_plus_unsat_complement_close_abc_not_terminal():
+def test_claimed_sound_predicates_and_unsat_are_structural_only_not_authority():
     out=evaluate(payload())
-    assert out["pass"] is True
-    assert out["selected_cover_complete_authorized"] is True
-    assert out["u_empty_authorized"] is True
-    assert out["abc_closed_authorized"] is True
+    assert out["pass"] is False
+    assert out["structural_claim_consistency_checked"] is True
+    assert out["proof_bytes_authenticated"] is False
+    assert out["semantic_unsat_proof_checked"] is False
+    assert out["selected_policy_adequacy_authenticated"] is False
+    assert out["selected_cover_complete_authorized"] is False
+    assert out["u_empty_authorized"] is False
+    assert out["abc_closed_authorized"] is False
     assert out["d_finality_required"] is True
     assert out["terminal_authority"] is False
 
@@ -89,3 +93,18 @@ def test_duplicate_predicate_id_fails_closed():
     out=evaluate(p)
     assert out["pass"] is False
     assert out["reason"]=="ADMISSION_PREDICATE_ID_DUPLICATE"
+
+def test_fabricated_hex_object_ids_and_self_asserted_unsat_never_grant_authority():
+    p=payload()
+    # These fixture receipt fields and object IDs were invented locally.
+    # Shape consistency is not evidence that referenced Git objects exist,
+    # that an independent checker was run, or that the UNSAT claim is true.
+    assert all(len(row["admission_predicate_blob_sha"]) == 40 for row in p["routes"])
+    out=evaluate(p)
+    assert out["structural_claim_consistency_checked"] is True
+    for key in (
+        "pass", "selected_cover_complete_authorized", "u_empty_authorized",
+        "abc_closed_authorized", "terminal_authority",
+    ):
+        assert out[key] is False
+    assert out["status"].startswith("UNVERIFIED__")
