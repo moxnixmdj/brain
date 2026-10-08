@@ -237,6 +237,8 @@ def _empty_state() -> dict[str, Any]:
             "failure_class_count": 0,
             "success_observation_count": 0,
             "pending_improvement_count": 0,
+            "parked_improvement_count": 0,
+            "parked_success_learning_count": 0,
         },
     }
 
@@ -910,6 +912,18 @@ def _refresh_stats(state: dict[str, Any]) -> None:
         "pending_improvement_count": sum(
             1 for row in queue.values()
             if isinstance(row, Mapping) and row.get("status") == "PENDING"
+        ) if isinstance(queue, Mapping) else 0,
+        "parked_improvement_count": sum(
+            1 for row in queue.values()
+            if isinstance(row, Mapping) and row.get("status") == "PARKED"
+        ) if isinstance(queue, Mapping) else 0,
+        "parked_success_learning_count": sum(
+            1 for row in queue.values()
+            if (
+                isinstance(row, Mapping)
+                and row.get("status") == "PARKED"
+                and row.get("kind") == "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE"
+            )
         ) if isinstance(queue, Mapping) else 0,
     }
 
