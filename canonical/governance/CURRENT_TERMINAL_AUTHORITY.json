@@ -1726,28 +1726,62 @@
     },
     "runtime": {
       "path": "canonical/runtime/gdpval_necessary_preference_certificate_v1.py",
-      "git_blob_sha": "9ff9ac0592ca642d56e3925a0da1006320aa7b15"
+      "git_blob_sha": "1d8a9c83506929662d6e095e9c708d48e5662702"
     },
     "tests": {
       "path": "canonical/tests/test_gdpval_necessary_preference_certificate_v1.py",
-      "git_blob_sha": "215f714d1aa7c1ca4263c714a4419714328e13ec",
-      "local_prewrite_result": "10_OF_10_PASS",
+      "git_blob_sha": "5eebc39bf9071a09558e84ccb7cfd67c055bd38e",
+      "local_prewrite_result": "15_OF_15_PASS",
       "independent_replay_required": true
     },
     "replacement_rule": "DO_NOT_TREAT_EXACT_OWNER_PROMPT_AS_SERIAL_PREREQUISITE__FIRST_PROVE_TRUE_OWNER_RELATION_CONTAINMENT_IN_A_SOUND_PUBLIC_CONTRACT_ENVELOPE_AND_SCOPE_COMPLETE_NECESSARY_PREFERENCE_OR_TOP_DOMINANCE_OVER_ALL_220_TASKS",
     "load_bearing_open": [
-      "OWNER_COMPATIBLE_PREFERENCE_ENVELOPE_CONTAINMENT",
+      "VALID_CURRENT_OWNER_CONTAINMENT_PROOF_CLASS_WITH_INDEPENDENT_SEMANTIC_VERIFICATION",
       "220_TASK_DIMENSION_COVER_AND_DOMINANCE_OR_TOP_EVIDENCE",
       "INDEPENDENT_REPLAY"
     ],
     "demoted": [
       "REPEAT_GENERAL_GDPVAL_METADATA_SEARCH",
       "EXACT_CROWD_BT_ELO_REPRODUCTION_AS_PRIMARY_ROUTE",
-      "SELF_CERTIFIED_PUBLIC_RUBRIC_TO_OWNER_PREFERENCE_EQUIVALENCE"
+      "SELF_CERTIFIED_PUBLIC_RUBRIC_TO_OWNER_PREFERENCE_EQUIVALENCE",
+      "PUBLIC_METHODOLOGY_ONLY_ENVELOPE_CONTAINMENT",
+      "HISTORICAL_V1_PROMPT_CARRYFORWARD"
     ],
     "exact_owner_prompt_bound": false,
     "exact_owner_prompt_required_if_stronger_route_closes": false,
     "real_220_necessary_preference_proved": false,
+    "gdpval_closed": false,
+    "terminal": false,
+    "terminal_credit_delta": 0,
+    "gdpval_credit_delta": 0
+  },
+  "gdpval_evaluator_trichotomy_prompt_provenance_reconciliation_20261008_v1": {
+    "status": "ACTIVE_TRUTH_REPAIR__INVALID_CONTAINMENT_SHORTCUTS_FIREWALLED__ZERO_CREDIT",
+    "governance": {
+      "path": "canonical/governance/GDPVAL_EVALUATOR_TRICHOTOMY_AND_PROMPT_PROVENANCE_RECONCILIATION_20261008_V1.json",
+      "git_blob_sha": "2cc5dd79c255fe80973be6fdaa71e3119ac16f13"
+    },
+    "hardened_runtime": {
+      "path": "canonical/runtime/gdpval_necessary_preference_certificate_v1.py",
+      "git_blob_sha": "1d8a9c83506929662d6e095e9c708d48e5662702"
+    },
+    "hardened_tests": {
+      "path": "canonical/tests/test_gdpval_necessary_preference_certificate_v1.py",
+      "git_blob_sha": "5eebc39bf9071a09558e84ccb7cfd67c055bd38e",
+      "local_result": "15_OF_15_PASS",
+      "independent_replay_required": true
+    },
+    "inadmissible_as_owner_containment_proof": [
+      "PUBLIC_METHODOLOGY_ONLY",
+      "HISTORICAL_V1_PROMPT_CARRYFORWARD",
+      "PUBLIC_RUBRIC_ONLY",
+      "UNVERIFIED_RECONSTRUCTED_GRADER"
+    ],
+    "exact_current_pairwise_prompt_bound": false,
+    "proven_current_v2_prompt_equivalence": false,
+    "proven_monotone_owner_class": false,
+    "target_law_equality_bound": false,
+    "minimum_information_target": "PROVENANCED_V2_PAIRWISE_PROMPT_PLUS_CURRENT_V2_1_INHERITANCE_PROOF_OR_EXTENSIONALLY_EQUIVALENT_RELATION_OR_STRONGER_EVALUATOR_CLASS_CERTIFICATE",
     "gdpval_closed": false,
     "terminal": false,
     "terminal_credit_delta": 0,

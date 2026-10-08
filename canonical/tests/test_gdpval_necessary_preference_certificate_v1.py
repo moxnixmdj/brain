@@ -15,6 +15,8 @@ def envelope(**overrides):
         "true_owner_relation_contained_in_envelope": True,
         "owner_contract_evidence_sha256": H,
         "envelope_containment_evidence_sha256": H,
+        "containment_proof_class": "EXTENSIONALLY_EQUIVALENT_CURRENT_PREFERENCE_RELATION",
+        "containment_independent_verification_sha256": H,
     }
     out.update(overrides)
     return out
@@ -72,6 +74,44 @@ class GDPValNecessaryPreferenceCertificateV1Tests(unittest.TestCase):
         self.assertEqual(
             out["reason"],
             "OWNER_COMPATIBLE_PREFERENCE_ENVELOPE_EVIDENCE_MISSING",
+        )
+
+    def test_public_methodology_only_cannot_certify_containment(self):
+        m = manifest()
+        m["preference_envelope"]["containment_proof_class"] = "PUBLIC_METHODOLOGY_ONLY"
+        out = verify(m)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["reason"], "ENVELOPE_CONTAINMENT_PROOF_CLASS_INADMISSIBLE")
+
+    def test_historical_v1_prompt_cannot_be_carried_forward(self):
+        m = manifest()
+        m["preference_envelope"]["containment_proof_class"] = "HISTORICAL_V1_PROMPT_CARRYFORWARD"
+        out = verify(m)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["reason"], "ENVELOPE_CONTAINMENT_PROOF_CLASS_INADMISSIBLE")
+
+    def test_unverified_reconstructed_grader_cannot_certify_containment(self):
+        m = manifest()
+        m["preference_envelope"]["containment_proof_class"] = "UNVERIFIED_RECONSTRUCTED_GRADER"
+        out = verify(m)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["reason"], "ENVELOPE_CONTAINMENT_PROOF_CLASS_INADMISSIBLE")
+
+    def test_unknown_proof_class_fails_closed(self):
+        m = manifest()
+        m["preference_envelope"]["containment_proof_class"] = "MAGIC"
+        out = verify(m)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["reason"], "ENVELOPE_CONTAINMENT_PROOF_CLASS_UNBOUND")
+
+    def test_independent_containment_verification_is_required(self):
+        m = manifest()
+        m["preference_envelope"]["containment_independent_verification_sha256"] = None
+        out = verify(m)
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["reason"],
+            "ENVELOPE_CONTAINMENT_INDEPENDENT_VERIFICATION_MISSING",
         )
 
     def test_one_surviving_preference_discriminator_blocks(self):
