@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GOAL_SCOPED_GROUNDED_FRONTIER_AUTHORITY_RECONCILIATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__MONOTONIC_SAFETY_RECONCILIATION__EXACT_CURRENT_BYTES_BOUND__NO_INDEPENDENT_REPLAY_CLAIM",
+  "issue": "V10_AND_CURRENT_POINTER_BOUND_PRE_GOAL_SCOPING_GROUNDED_FRONTIER_BLOBS_AFTER_MAIN_RUNTIME_CHANGED",
+  "current_subject": {
+    "runtime_path": "canonical/runtime/r2_grounded_candidate_policy_frontier_v1.py",
+    "runtime_git_blob_sha": "1959fb77c8f2ebc628e8c34fff47f577271b0d11",
+    "regression_test_path": "canonical/tests/test_r2_grounded_candidate_policy_frontier_v1.py",
+    "regression_test_git_blob_sha": "9750cf81c29b2abc49bb7ec65cc9368adae765a2",
+    "controller_regression_test_path": "canonical/tests/test_general_adequate_decision_controller_v1.py",
+    "controller_regression_test_git_blob_sha": "3394a417efbdcf8b57ba81815a7f99d283034e03"
+  },
+  "superseded_bindings": {
+    "runtime_git_blob_sha": "0d13e7c5fe5e8ce5bf8430e1741765d0c57e9b0b",
+    "regression_test_git_blob_sha": "1557c2bf63f4ad48c6373266b070a1957a473bbd"
+  },
+  "source_commits": {
+    "goal_scoped_policy_identity": "91143ec54f726dd84684a6177ae8d5e4d3988082",
+    "goal_scoped_frontier_regression": "0fa9b84ac6d5a4d5d085ca3d097b345c36641091",
+    "goal_scoped_repair_preservation": "4944291594b5b425c6342b839a4bcd6836802be2",
+    "repair_regression": "f6ba0fb8d2887627d4146cb67741908b05500309",
+    "controller_regression_update": "a48d73fa6bfb0540d9bbda40e9706cb98bb87eb1"
+  },
+  "monotonic_safety_proof": {
+    "before": "POLICY_ID = BOUND_CAPABILITY_POLICY::<CAPABILITY_ID>",
+    "after": "POLICY_ID = BOUND_CAPABILITY_POLICY::<CAPABILITY_ID>::RAW_GOAL_SHA256::<SHA256(EXACT_RAW_GOAL)>",
+    "candidate_capability_selection_changed": false,
+    "policy_condition_changed": false,
+    "policy_adequacy_authority_before": false,
+    "policy_adequacy_authority_after": false,
+    "semantic_truth_authority_before": false,
+    "semantic_truth_authority_after": false,
+    "execution_authority_before": false,
+    "execution_authority_after": false,
+    "safety_relation": "THE_NEW_IDENTITY_PARTITIONS_A_PREVIOUS_POLICY_ID_BY_EXACT_RAW_GOAL_AND_CANNOT_ADD_A_CANDIDATE_CAPABILITY_OR_MINT_ADEQUACY. IT_CAN ONLY_PREVENT_CROSS_GOAL_IDENTITY_REUSE_UNLESS_A_DOWNSTREAM_AUTHORITY_EXPLICITLY_SUPPORTS_THE_SCOPED_ID.",
+    "false_positive_authority_expansion_possible_from_this_CHANGE": false
+  },
+  "downstream_compatibility": {
+    "live_repair_parser_accepts_goal_scoped_ids": true,
+    "exact_goal_hash_preserved_in_repair_target": true,
+    "controller_regression_updated_for_goal_scoped_id": true
+  },
+  "execution_evidence": {
+    "independent_replay_performed_for_goal_scope_patch": false,
+    "github_actions_run_found": false,
+    "claim": "NO_TEST_EXECUTION_PASS_IS_CLAIMED_BY_THIS_RECONCILIATION"
+  },
+  "authority_consequence": {
+    "safe_to_rebind_candidate_only_frontier_bytes": true,
+    "reason": "THE_PATCH_IS_AUTHORITY_NONEXPANSIVE_AND_GOAL_SCOPE_RESTRICTING; REBINDING_CORRECTS_CONTENT_ADDRESS_DRIFT_WITHOUT_PROMOTING_POSITIVE_ADEQUACY.",
+    "positive_adequacy_coverage_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_INDEPENDENT_REPLAY_CLAIM_FOR_THE_GOAL_SCOPING_PATCH",
+    "NO_NEW_POLICY_ADEQUACY_CERTIFICATE",
+    "NO_NEW_EXECUTION_AUTHORITY",
+    "NO_GLOBAL_OPEN_WORLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
