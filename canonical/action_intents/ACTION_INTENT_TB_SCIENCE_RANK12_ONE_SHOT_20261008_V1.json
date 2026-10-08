@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK12_ONE_SHOT_INTENT_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE_INTENT__ONE_EXACT_SLOT__SEPARATE_PUBLIC_EXECUTION_LEASE_REQUIRED",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot_id": "terminal-bench-science/clinical-metadata-recovery::trial-0",
+  "task_digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8",
+  "schedule_rank": 12,
+  "source_candidate_blob": "c495b513fb6088a3df6340b77c6b1dfffef9c6c4",
+  "source_candidate_verification_blob": "1b39b24444c49d158a81bc2704f39a8de227913e",
+  "public_epoch": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base_commit": "88c3f76be396494a2594130e09974e9d18b6b5a3",
+    "epoch_path": "capsules/tb_science_rank12_20261008_v1/RANK12_EPOCH_V1.json",
+    "epoch_blob": "5426f9db570cfa83d5f96859d2087d11cd6b813a"
+  },
+  "exact_route": {
+    "agent_blob": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "planner_blob": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "carrier_closure_blob": "cf9cc9fb8830eda991c71381a523b8f67caedaa7"
+  },
+  "preconditions": {
+    "live_output_preflight_blob": "d8de49aa3f8fd7d1ffbf39e16505e62241652722",
+    "storage_preflight_blob": "9dfdbd1cf6988f5585fd4ff18e59b7a2d9f87cf3",
+    "current_ledger_blob": "1db8e637ad3dfec5d4ac432c78a86ec1371eb006",
+    "current_terminal_authority_blob": "0c168c4682c4631a9d9b76f329d111389f32872a",
+    "benchmark_task_exposure_so_far": 0
+  },
+  "attempts_authorized": 1,
+  "retries_authorized": 0,
+  "replacement_allowed": false,
+  "incremental_spend_usd_max": 0,
+  "public_execution_claim_required": true,
+  "execution_claim_active": false,
+  "task_started": false,
+  "result_present": false,
+  "acceptance_credit": false,
+  "terminal_credit": false
+}
