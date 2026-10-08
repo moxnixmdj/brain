@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_R3_VERIFIED_REPAIR_GROWTH_V3_VERIFICATION_20261008_V2",
+  "date": "2026-10-08",
+  "status": "PASS__R3_V3_REBASED_REAL_V12__R3_12_OF_12__V12_3_OF_3",
+  "subject_branch": "r3-verified-repair-growth-v3-rebased-20261008",
+  "subject_base": "6c048a26871156db4fe06640de64c36a352ccd20",
+  "isolated_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+  },
+  "verification": {
+    "r3_command": "python3 -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v",
+    "r3_tests_run": 12,
+    "r3_tests_passed": 12,
+    "r3_tests_failed": 0,
+    "r3_elapsed_seconds": 0.023,
+    "real_v12_dependency_graph": true,
+    "v12_native_test_style": "PYTEST_STYLE_FUNCTIONS",
+    "v12_execution_method": "DIRECT_FUNCTION_HARNESS_WITH_FRESH_TEMP_DIRECTORY_PER_TEST_BECAUSE_PYTEST_IS_NOT_INSTALLED_ON_THE_EXISTING_SPRITE",
+    "v12_tests": [
+      "test_zero_graph_can_expand_and_solve",
+      "test_unauthenticated_expansion_is_not_admitted",
+      "test_value_dependent_dynamic_expansion_waits_for_bound_semantics"
+    ],
+    "v12_tests_run": 3,
+    "v12_tests_passed": 3,
+    "v12_tests_failed": 0
+  },
+  "proved_r3_chain": [
+    "VERIFIED_EPISODES_PERSIST",
+    "VERIFIED_SKILLS_INDUCE_AND_PERSIST",
+    "ACTIVE_VERIFIED_SKILLS_ARE_REUSED_FIRST",
+    "PRE_EFFECT_REUSE_FAILURE_MAY_FALL_BACK",
+    "EFFECTFUL_FAILURE_BLOCKS_BLIND_REPLAY",
+    "V12_PROPOSAL_AND_CAPABILITY_REPAIR_PROVIDERS_ARE_BOUND_INTO_THE_LOOP",
+    "ONLY_V12_AUTHENTICATED_EXPANDED_CAPABILITIES_ARE_PERSISTED",
+    "AUTHENTICATED_REPAIRS_ARE_REHYDRATED_ONLY_FOR_THE_EXACT_TASK_CONTRACT",
+    "FALSIFIED_PERSISTED_REPAIRS_ARE_EVICTED",
+    "PARETO_DOMINATED_SKILLS_ARE_DEACTIVATED_BUT_PRESERVED_AS_EVIDENCE"
+  ],
+  "exact_task_contract_cache_key": [
+    "task_id",
+    "initial_facts",
+    "target_effects"
+  ],
+  "authority_boundary": [
+    "PROPOSAL_PROVIDER_AND_CAPABILITY_EXPANDER_OUTPUTS_HAVE_ZERO_AUTHORITY",
+    "V12_REQUIRES_BUILTIN_VERIFIER_COMPATIBILITY_EXACT_TASK_BINDING_AND_INDEPENDENT_EFFECT_SEMANTICS_VERIFICATION_BEFORE_ADMISSION",
+    "R3_PERSISTS_ONLY_ROWS_REPORTED_IN_V12_AUTHENTICATED_ADMISSION_RECORDS",
+    "REHYDRATED_ROWS_ARE_REAUTHENTICATED_BY_V12_ON_REUSE",
+    "NO_CLAIM_THAT_EVERY_OPEN_WORLD_FAILURE_HAS_A_CONSTRUCTIBLE_VERIFIABLE_REPAIR"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
