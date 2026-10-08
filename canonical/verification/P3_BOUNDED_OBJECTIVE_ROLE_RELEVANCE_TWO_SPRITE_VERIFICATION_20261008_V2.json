@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_P3_BOUNDED_OBJECTIVE_ROLE_RELEVANCE_TWO_SPRITE_VERIFICATION_V2",
+  "date": "2026-10-08",
+  "status": "PASS_7_OF_7_ON_TWO_SPRITES__POSITIVE_RELEVANCE_BIT_BOUND__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/p3_bounded_objective_role_relevance_v1.py",
+    "git_blob_sha": "d8977024955a22003c6bcde9d54c40cad68e44b7"
+  },
+  "tests": {
+    "path": "canonical/tests/test_p3_bounded_objective_role_relevance_v1.py",
+    "git_blob_sha": "059390e8cc4cb2216f68b94c3809a9e86d03ed14"
+  },
+  "reused_objective_role_binder": {
+    "path": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py",
+    "git_blob_sha": "48fd058430d8d361fc75beced567c7b6d1166531"
+  },
+  "minimum_information_cut": {
+    "path": "canonical/governance/P3_OPTIONAL_RELEVANCE_MINIMUM_INFORMATION_CUT_20261008_V1.json",
+    "git_blob_sha": "8506b0a05be2ee4dea489f9640d8ce1099a143a2"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_passed": 7,
+      "tests_run": 7
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_passed": 7,
+      "tests_run": 7
+    }
+  ],
+  "proved": [
+    "EXACTLY_TWO_OPTIONAL_CLAIMS_MAP_BIJECTIVELY_TO_EXPLICIT_BINARY_OBJECTIVE_LEFT_RIGHT_OPERAND_PHRASES",
+    "EACH_OPTIONAL_CLAIM_EXACTLY_MATCHES_ONE_UNIQUE_VERIFIED_PROVENANCE_BOUND_EVIDENCE_UNIT",
+    "EACH_OBJECTIVE_ROLE_HAS_EXACTLY_ONE_VERIFIED_EVIDENCE_ANCHOR",
+    "THE_BOUND_OPTIONAL_CLAIMS_RECEIVE_TRUTHFUL_PRECOMMITMENT_RELEVANCE_OUTCOME_RELEVANT",
+    "THE_BOUND_OPTIONAL_CLAIMS_MAY_BE_INCLUDED_WITHOUT_ACQUIRING_A_NEW_GENERAL_SEMANTIC_RELEVANCE_MODEL",
+    "AMBIGUOUS_DUPLICATE_ROLE_EVIDENCE_EXTRA_OPTIONALS_UNSUPPORTED_OBJECTIVES_UNMAPPED_CLAIMS_AND_UNVERIFIED_EVIDENCE_FAIL_CLOSED"
+  ],
+  "boundaries": [
+    "NO_NEGATIVE_RELEVANCE_AUTHORITY__NONMATCH_DOES_NOT_PROVE_IRRELEVANT",
+    "NO_GENERAL_SEMANTIC_RELEVANCE",
+    "NO_PRESENTATION_ORGANIZATION_ADEQUACY",
+    "NO_SOURCE_AUTHORIZATION_POLICY_ADEQUACY_DB_ADMISSION_OR_U_SUBTRACTION",
+    "NO_U_EMPTY_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
