@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V14",
+  "date": "2026-10-08",
+  "status": "CURRENT_POST_RANK12_FINAL_ZERO__TWELVE_CONSUMED_SLOTS__EXACT_TOKEN_TRANSPORT_LIVE_PREFLIGHT_PASS__RANK13_TRANSPORT_GATE_SATISFIED__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261008_V13.json",
+    "git_blob_sha": "0a6a398941465301a63b6c6cb67073ec8713cde7"
+  },
+  "rank12_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK12_IRREVERSIBLE_RESULT_TRUTH_20261008_V1.json",
+    "git_blob_sha": "2a7fc6b4273b76fd9fc34c937398e62fa4c02647",
+    "status": "FINAL_ZERO__PLANNER_TIMEOUT_DURING_PROMPT_PREFILL__NO_VERIFIER_RESULT",
+    "workflow_run_id": 37729003096,
+    "artifact_id": 11529089208
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "current_counts": {
+    "consumed_slots": 12,
+    "consumed_successes": 0,
+    "consumed_final_failures": 12,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 75,
+    "maximum_possible_successes_remaining": 198,
+    "minimum_required_success_rate_over_remaining_slots": 0.6262626262626263,
+    "pass_still_mathematically_reachable": true,
+    "next_untouched_slot": {
+      "ledger_schedule_rank": 13,
+      "frozen_manifest_schedule_order": 12,
+      "slot_id": "terminal-bench-science/dapi-he-alignment::trial-0",
+      "task_digest": "sha256:a4291c3f09b0fc2a1c8713129d3afd1b46929482f6c03df630c25814b53b755e"
+    }
+  },
+  "rank12_causal_truth": {
+    "task_started": true,
+    "verifier_reached": false,
+    "verifier_reward": 0,
+    "execution_authority_consumed": true,
+    "rerun_forbidden": true,
+    "planner_timeout_failure": true,
+    "scientific_task_quality_evaluated": false,
+    "task_capability_negative_evidence": false,
+    "admitted_deficit_class": "MINIMUM_CONTROL_PLANE_PROMPT_TRANSPORT_TIMEOUT_FAILURE"
+  },
+  "repaired_route": {
+    "agent_git_blob_sha": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "planner_git_blob_sha": "2e9b817c65cb25e17bc61f0a78cc9d9c271da644",
+    "closure_manifest_path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V7.json",
+    "closure_manifest_git_blob_sha": "cc24730fcdf83cd87a02dd73ff5eb619dd81af66",
+    "code_verification_path": "canonical/verification/TB_SCIENCE_EXACT_TOKEN_TRANSPORT_REPAIR_INDEPENDENT_VERIFICATION_20261008_V1.json",
+    "code_verification_git_blob_sha": "a9235249f2b167f6ec9dffb5c36fb85f10199dff",
+    "live_preflight_verification_path": "canonical/verification/TB_SCIENCE_ZERO_EXPOSURE_LONG_PROMPT_LIVE_PREFLIGHT_20261008_V1.json",
+    "live_preflight_verification_git_blob_sha": "5c49b5c4310373d8db616f9968d61ecfb38c07c3",
+    "planner_and_preflight_tests": "23_OF_23_PASS_ON_EACH_OF_TWO_INDEPENDENT_SPRITES__46_TOTAL",
+    "controller_integration_tests": "17_OF_17_PASS_ON_V6_CLOSURE_ON_INDEPENDENT_SPRITE",
+    "live_rank12_scale_preflight": {
+      "workflow_run_id": 37741815339,
+      "workflow_job_id": 113194014065,
+      "artifact_id": 11534463423,
+      "observed_input_tokens": 7203,
+      "effective_timeout_s": 661,
+      "planner_duration_s": 626.839,
+      "benchmark_task_exposure": 0,
+      "benchmark_trials_executed": 0,
+      "result": "PASS"
+    },
+    "benchmark_replay_count": 0
+  },
+  "rank13": {
+    "authority_active": false,
+    "action_intent_active": false,
+    "task_started": false,
+    "result_present": false,
+    "preexposure_long_prompt_gate_passed": true,
+    "next_untouched_slot": {
+      "ledger_schedule_rank": 13,
+      "frozen_manifest_schedule_order": 12,
+      "slot_id": "terminal-bench-science/dapi-he-alignment::trial-0",
+      "task_digest": "sha256:a4291c3f09b0fc2a1c8713129d3afd1b46929482f6c03df630c25814b53b755e"
+    },
+    "rule": "THE_RANK13_LONG_PROMPT_TRANSPORT_PRECONDITION_IS_SATISFIED__RANK13_IS_ELIGIBLE_FOR_A_SEPARATE_EXACT_ONE_SLOT_AUTHORITY_TRANSITION__DO_NOT_EXPOSE_OR_START_THE_TASK_UNTIL_THAT_AUTHORITY_AND_ACTION_INTENT_ARE_ACTIVE_AND_INDEPENDENTLY_VERIFIED"
+  },
+  "scheduler": [
+    "NEVER_REPLAY_RANK12.",
+    "DO_NOT_INFER_A_GENERAL_SCIENTIFIC_REASONING_DEFICIT_FROM_RANK12_BECAUSE_NO_VERIFIER_RESULT_EXISTED.",
+    "USE_THE_EXACT_SERVER_COUNTED_V7_TRANSPORT_CLOSURE.",
+    "THE_ZERO_BENCHMARK_EXPOSURE_RANK12_SCALE_LONG_PROMPT_GATE_IS SATISFIED.",
+    "KEEP_RANK13_UNSTARTED UNTIL A SEPARATE EXACT ONE_SLOT AUTHORITY AND ACTION INTENT ARE ACTIVE AND VERIFIED.",
+    "TB_SCIENCE_ACCEPTANCE_REMAINS OPEN."
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT_FROM_PREFLIGHT",
+    "NO_RANK13_EXECUTION_AUTHORITY",
+    "NO_RANK13_TASK_EXPOSURE",
+    "NO_CLAIM_TRANSPORT_REPAIR_GUARANTEES_SCIENTIFIC_TASK_SUCCESS",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_delta_from_v13": 0,
+    "benchmark_task_exposure_delta_from_v13": 0,
+    "benchmark_trials_consumed_delta_from_v13": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

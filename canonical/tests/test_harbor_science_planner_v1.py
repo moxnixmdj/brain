@@ -38,6 +38,12 @@ def tool_response(args: dict, *, model: str = "brain-qwen3.5-9b") -> str:
 
 
 class PlannerTests(unittest.TestCase):
+    def setUp(self):
+        self._real_count_input_tokens = p.count_input_tokens
+        self._count_patcher = patch.object(p, "count_input_tokens", return_value=1000)
+        self.mock_count_input_tokens = self._count_patcher.start()
+        self.addCleanup(self._count_patcher.stop)
+
     def test_extract_plain_object(self):
         self.assertEqual(p.extract_json_object('{"x":1}'), {"x": 1})
 
@@ -88,8 +94,11 @@ class PlannerTests(unittest.TestCase):
         with patch.object(p.urllib.request,"urlopen",fake):
             out=p.plan("synthetic",timeout_s=180)
         self.assertEqual(out["endpoint"],p.ENDPOINT)
-        self.assertEqual(out["transport"],"PINNED_LOCAL_QWEN_LLAMA_CPP_TOOL_CALL")
+        self.assertEqual(out["transport"],"PINNED_LOCAL_QWEN_LLAMA_CPP_TOOL_CALL__EXACT_SERVER_TOKEN_COUNT")
         self.assertEqual(out["model"],"brain-qwen3.5-9b")
+        self.assertEqual(out["input_tokens"],1000)
+        self.assertEqual(out["effective_timeout_s"],300)
+        self.assertEqual(out["token_count_endpoint"],p.TOKEN_COUNT_ENDPOINT)
         self.assertEqual(p.extract_json_object(out["text"]),args)
         self.assertEqual(seen[0]["url"],"http://127.0.0.1:8080/v1/chat/completions")
         body=seen[0]["body"]
@@ -107,22 +116,45 @@ class PlannerTests(unittest.TestCase):
         self.assertNotIn("maxLength",candidate_schema["verify_command"])
         self.assertGreaterEqual(p.MAX_TOOL_COMPLETION_TOKENS,4096)
 
-    def test_prompt_aware_timeout_keeps_small_prompt_floor(self):
-        self.assertEqual(p.effective_timeout_s("small",180),300)
+    def test_exact_token_count_endpoint_uses_full_chat_payload(self):
+        payload=p._request_payload("synthetic")
+        seen=[]
+        def fake(req, timeout=180):
+            seen.append({
+                "url":req.full_url,
+                "body":json.loads(req.data.decode("utf-8")),
+                "timeout":timeout,
+            })
+            return Response(json.dumps({
+                "object":"response.input_tokens",
+                "input_tokens":7311,
+            }))
+        with patch.object(p.urllib.request,"urlopen",fake):
+            out=self._real_count_input_tokens(payload)
+        self.assertEqual(out,7311)
+        self.assertEqual(seen[0]["url"],p.TOKEN_COUNT_ENDPOINT)
+        self.assertEqual(seen[0]["body"],payload)
+        self.assertEqual(seen[0]["timeout"],p.TOKEN_COUNT_TIMEOUT_S)
 
-    def test_prompt_aware_timeout_exceeds_rank12_observed_prefill_need(self):
-        # Rank12 showed ~7.1k prompt tokens at ~19.6 tok/s and timed out at 300s
-        # before generation. Use a conservative 4 bytes/token estimate and 15 tok/s floor.
-        prompt="x"*(7140*p.PROMPT_BYTES_PER_TOKEN_ESTIMATE)
-        out=p.effective_timeout_s(prompt,300)
-        self.assertGreaterEqual(out,656)
+    def test_exact_token_timeout_keeps_small_prompt_floor(self):
+        self.assertEqual(p.effective_timeout_s(1000,180),300)
+
+    def test_exact_token_timeout_exceeds_rank12_observed_prefill_need(self):
+        # Rank12 inferred about 7,142 prompt tokens and timed out at 300s.
+        out=p.effective_timeout_s(7142,300)
+        self.assertGreaterEqual(out,657)
         self.assertLessEqual(out,p.MAX_TIMEOUT_S)
 
-    def test_prompt_aware_timeout_caps_inside_fail_closed_envelope(self):
-        prompt="x"*(100000*p.PROMPT_BYTES_PER_TOKEN_ESTIMATE)
-        self.assertEqual(p.effective_timeout_s(prompt,300),p.MAX_TIMEOUT_S)
+    def test_exact_token_timeout_caps_inside_fail_closed_envelope(self):
+        self.assertEqual(p.effective_timeout_s(100000,300),p.MAX_TIMEOUT_S)
 
-    def test_plan_uses_effective_timeout_not_raw_requested_timeout(self):
+    def test_exact_token_timeout_rejects_invalid_counts(self):
+        for value in (0,-1,True,1.5):
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(Exception,"INPUT_TOKEN_COUNT_INVALID"):
+                    p.effective_timeout_s(value,300)
+
+    def test_plan_uses_exact_count_for_effective_timeout_and_receipt(self):
         seen=[]
         args={
             "material_requirements":["R1"],
@@ -133,13 +165,16 @@ class PlannerTests(unittest.TestCase):
                 "verify_command":"test true",
             }],
         }
-        prompt="x"*(7140*p.PROMPT_BYTES_PER_TOKEN_ESTIMATE)
+        self.mock_count_input_tokens.return_value=7142
         def fake(req, timeout=180):
             seen.append(timeout)
             return Response(tool_response(args))
         with patch.object(p.urllib.request,"urlopen",fake):
-            p.plan(prompt,timeout_s=300)
-        self.assertEqual(seen,[p.effective_timeout_s(prompt,300)])
+            out=p.plan("synthetic",timeout_s=300)
+        expected=p.effective_timeout_s(7142,300)
+        self.assertEqual(seen,[expected])
+        self.assertEqual(out["input_tokens"],7142)
+        self.assertEqual(out["effective_timeout_s"],expected)
 
     def test_decoded_command_length_is_enforced_after_transport(self):
         args={

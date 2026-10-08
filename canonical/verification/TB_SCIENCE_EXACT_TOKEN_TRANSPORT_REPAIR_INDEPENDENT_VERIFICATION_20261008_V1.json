@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_EXACT_TOKEN_TRANSPORT_REPAIR_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_23_OF_23_ON_TWO_INDEPENDENT_SPRITES__46_TOTAL__ZERO_BENCHMARK_EXPOSURE__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "subject": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_git_blob_sha": "2e9b817c65cb25e17bc61f0a78cc9d9c271da644",
+    "planner_test_path": "canonical/tests/test_harbor_science_planner_v1.py",
+    "planner_test_git_blob_sha": "8755d862b1c9023c3b7c9e809139f2e6e878f09f",
+    "preflight_path": "canonical/runtime/tb_science_zero_exposure_transport_preflight_v1.py",
+    "preflight_git_blob_sha": "4a024bf03eacd41d5c893a9c8dd87de772935e7d",
+    "preflight_test_path": "canonical/tests/test_tb_science_zero_exposure_transport_preflight_v1.py",
+    "preflight_test_git_blob_sha": "523c5d10d5929a11cb797f0d62fdfb8bcb07f302",
+    "command_policy_git_blob_sha": "a525773417291c7a4841bf35e1baff5370350d0d"
+  },
+  "causal_counterexample": {
+    "consumed_slot": "terminal-bench-science/clinical-metadata-recovery::trial-0",
+    "workflow_run_id": 37729003096,
+    "old_timeout_seconds": 300,
+    "inferred_prompt_tokens_approx": 7142,
+    "observed_prefill_tokens_per_second_approx": 19.64,
+    "verifier_result_present": false,
+    "scientific_task_quality_evaluated": false
+  },
+  "repaired_policy": {
+    "token_count_source": "PINNED_LLAMA_CPP_POST_/v1/chat/completions/input_tokens",
+    "token_count_scope": "EXACT_FULL_CHAT_COMPLETION_PAYLOAD_INCLUDING_SYSTEM_USER_AND_TOOL_SCHEMA",
+    "minimum_timeout_s": 300,
+    "maximum_timeout_s": 900,
+    "prefill_tokens_per_second_floor": 15,
+    "generation_and_transport_margin_s": 180,
+    "timeout_rule": "min(900,max(300,requested,ceil(exact_input_tokens/15)+180))",
+    "full_8192_context_conservative_bound_seconds": 727,
+    "zero_exposure_preflight_input_token_window": [
+      7200,
+      7600
+    ]
+  },
+  "verification": [
+    {
+      "provider": "SPRITES",
+      "name": "brain-root3-current-byte-replay-20261007-v1",
+      "id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "workspace": "/home/sprite/tbscience_exact_token_v1",
+      "tests_passed": 23,
+      "tests_total": 23
+    },
+    {
+      "provider": "SPRITES",
+      "name": "h100-real-image-v1",
+      "id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+      "workspace": "/tmp/tbscience_exact_token_v1",
+      "tests_passed": 23,
+      "tests_total": 23
+    }
+  ],
+  "checked_properties": [
+    "EXACT_SERVER_TOKEN_COUNT_ENDPOINT_REQUEST_SHAPE",
+    "FULL_CHAT_AND_TOOL_PAYLOAD_IS_COUNTED",
+    "RANK12_SCALE_TIMEOUT_EXCEEDS_OBSERVED_PREFILL_NEED",
+    "900_SECOND_CAP_DOMINATES_FULL_8192_CONTEXT_AT_15_TOKENS_PER_SECOND_PLUS_180_SECOND_MARGIN",
+    "INVALID_TOKEN_COUNTS_FAIL_CLOSED",
+    "PLAN_RECEIPT_BINDS_EXACT_INPUT_TOKEN_COUNT_AND_EFFECTIVE_TIMEOUT",
+    "ZERO_EXPOSURE_PREFLIGHT_SYNTHETIC_SCOPE",
+    "PREFLIGHT_TOKEN_COUNT_DRIFT_FAILS_CLOSED",
+    "PREFLIGHT_REQUIRES_EXACTLY_ONE_STRUCTURED_CANDIDATE"
+  ],
+  "live_rank12_class_preflight": {
+    "status": "PENDING_SEPARATE_PUBLIC_RUNNER_RECEIPT",
+    "benchmark_task_exposure_authorized": 0
+  },
+  "benchmark_task_exposure": 0,
+  "benchmark_task_replays": 0,
+  "execution_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
