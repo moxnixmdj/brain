@@ -1303,9 +1303,20 @@ def _execute_frontier_acquisition(
     before_authority = _owned_success_verification_authority_sha256(
         repo_root=repo_root,
     )
-    immutable_runtime_before = _immutable_runtime_control_surface_sha256(
+    runtime_before_snapshot = _runtime_control_surface_snapshot(
         repo_root=repo_root,
     )
+    immutable_runtime_before = _runtime_snapshot_sha256(
+        runtime_before_snapshot,
+        immutable_only=True,
+    )
+
+    def rollback() -> dict[str, Any]:
+        return _restore_runtime_control_surface_snapshot(
+            runtime_before_snapshot,
+            repo_root=repo_root,
+        )
+
     request = {
         "kind": FRONTIER_EXPANSION_KIND,
         "improvement_work_id": wid,
@@ -1339,14 +1350,42 @@ def _execute_frontier_acquisition(
         result = None
         provider_error = type(exc).__name__ + ":" + str(exc)
 
-    after = _owned_success_learning_frontier_sha256(repo_root=repo_root)
-    after_adapter = _owned_success_adapter_frontier_sha256(repo_root=repo_root)
-    after_authority = _owned_success_verification_authority_sha256(
-        repo_root=repo_root,
-    )
-    immutable_runtime_after = _immutable_runtime_control_surface_sha256(
-        repo_root=repo_root,
-    )
+    try:
+        after = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+        after_adapter = _owned_success_adapter_frontier_sha256(repo_root=repo_root)
+        after_authority = _owned_success_verification_authority_sha256(
+            repo_root=repo_root,
+        )
+        runtime_after_snapshot = _runtime_control_surface_snapshot(
+            repo_root=repo_root,
+        )
+        immutable_runtime_after = _runtime_snapshot_sha256(
+            runtime_after_snapshot,
+            immutable_only=True,
+        )
+    except Exception as exc:
+        validation_error = type(exc).__name__ + ":" + str(exc)
+        rollback_receipt = rollback()
+        status = "FRONTIER_ACQUISITION_REJECTED__RUNTIME_VALIDATION_FAILED"
+        _record_frontier_acquisition_attempt(
+            wid,
+            provider_id=provider_id,
+            frontier_sha256=before,
+            status=status,
+            reason=validation_error,
+            state_path=state_path,
+        )
+        return {
+            "schema": SCHEMA,
+            "status": status,
+            "pass": False,
+            "progress": False,
+            "work_id": wid,
+            "reason": validation_error,
+            "rollback": rollback_receipt,
+            "attempt_backoff_recorded": True,
+            "terminal_authority": False,
+        }
 
     if after_authority != before_authority:
         status = "FRONTIER_ACQUISITION_REJECTED__VERIFICATION_AUTHORITY_REWRITTEN"
@@ -1355,10 +1394,11 @@ def _execute_frontier_acquisition(
             if isinstance(result, Mapping)
             else (provider_error or status)
         )
+        rollback_receipt = rollback()
         _record_frontier_acquisition_attempt(
             wid,
             provider_id=provider_id,
-            frontier_sha256=after,
+            frontier_sha256=before,
             status=status,
             reason=reason,
             state_path=state_path,
@@ -1380,6 +1420,7 @@ def _execute_frontier_acquisition(
             "immutable_runtime_control_surface_sha256_before": immutable_runtime_before,
             "immutable_runtime_control_surface_sha256_after": immutable_runtime_after,
             "verification_authority_change_accepted": False,
+            "rollback": rollback_receipt,
             "attempt_backoff_recorded": True,
             "terminal_authority": False,
         }
@@ -1391,10 +1432,11 @@ def _execute_frontier_acquisition(
             if isinstance(result, Mapping)
             else (provider_error or status)
         )
+        rollback_receipt = rollback()
         _record_frontier_acquisition_attempt(
             wid,
             provider_id=provider_id,
-            frontier_sha256=after,
+            frontier_sha256=before,
             status=status,
             reason=reason,
             state_path=state_path,
@@ -1416,16 +1458,18 @@ def _execute_frontier_acquisition(
             "immutable_runtime_control_surface_sha256_before": immutable_runtime_before,
             "immutable_runtime_control_surface_sha256_after": immutable_runtime_after,
             "immutable_runtime_change_accepted": False,
+            "rollback": rollback_receipt,
             "attempt_backoff_recorded": True,
             "terminal_authority": False,
         }
 
     if provider_error is not None:
         status = "FRONTIER_ACQUISITION_PROVIDER_ISOLATED_EXECUTION_FAILED"
+        rollback_receipt = rollback()
         _record_frontier_acquisition_attempt(
             wid,
             provider_id=provider_id,
-            frontier_sha256=after,
+            frontier_sha256=before,
             status=status,
             reason=provider_error,
             state_path=state_path,
@@ -1437,24 +1481,18 @@ def _execute_frontier_acquisition(
             "progress": False,
             "work_id": wid,
             "reason": provider_error,
-            "verification_frontier_sha256_before": before,
-            "verification_frontier_sha256_after": after,
-            "adapter_frontier_sha256_before": before_adapter,
-            "adapter_frontier_sha256_after": after_adapter,
-            "verification_authority_sha256_before": before_authority,
-            "verification_authority_sha256_after": after_authority,
-            "immutable_runtime_control_surface_sha256_before": immutable_runtime_before,
-            "immutable_runtime_control_surface_sha256_after": immutable_runtime_after,
+            "rollback": rollback_receipt,
             "attempt_backoff_recorded": True,
             "terminal_authority": False,
         }
 
     if not isinstance(result, Mapping):
         status = "FRONTIER_ACQUISITION_PROVIDER_RETURNED_NO_RESULT"
+        rollback_receipt = rollback()
         _record_frontier_acquisition_attempt(
             wid,
             provider_id=provider_id,
-            frontier_sha256=after,
+            frontier_sha256=before,
             status=status,
             reason=status,
             state_path=state_path,
@@ -1465,8 +1503,7 @@ def _execute_frontier_acquisition(
             "pass": False,
             "progress": False,
             "work_id": wid,
-            "immutable_runtime_control_surface_sha256_before": immutable_runtime_before,
-            "immutable_runtime_control_surface_sha256_after": immutable_runtime_after,
+            "rollback": rollback_receipt,
             "attempt_backoff_recorded": True,
             "terminal_authority": False,
         }
@@ -1474,10 +1511,11 @@ def _execute_frontier_acquisition(
     if after_adapter == before_adapter:
         status = "FRONTIER_ACQUISITION_DID_NOT_CHANGE_OWNED_SUCCESS_ADAPTER_FRONTIER"
         reason = str(result.get("reason") or result.get("status") or status)
+        rollback_receipt = rollback()
         _record_frontier_acquisition_attempt(
             wid,
             provider_id=provider_id,
-            frontier_sha256=after,
+            frontier_sha256=before,
             status=status,
             reason=reason,
             state_path=state_path,
@@ -1495,8 +1533,7 @@ def _execute_frontier_acquisition(
             "adapter_frontier_sha256_after": after_adapter,
             "verification_authority_sha256_before": before_authority,
             "verification_authority_sha256_after": after_authority,
-            "immutable_runtime_control_surface_sha256_before": immutable_runtime_before,
-            "immutable_runtime_control_surface_sha256_after": immutable_runtime_after,
+            "rollback": rollback_receipt,
             "provider_process_isolated": True,
             "attempt_backoff_recorded": True,
             "terminal_authority": False,
@@ -1523,10 +1560,11 @@ def _execute_frontier_acquisition(
             if isinstance(activation, Mapping)
             else status
         )
+        rollback_receipt = rollback()
         _record_frontier_acquisition_attempt(
             wid,
             provider_id=provider_id,
-            frontier_sha256=after,
+            frontier_sha256=before,
             status=status,
             reason=reason,
             state_path=state_path,
@@ -1545,10 +1583,9 @@ def _execute_frontier_acquisition(
             "adapter_frontier_sha256_after": after_adapter,
             "verification_authority_sha256_before": before_authority,
             "verification_authority_sha256_after": after_authority,
-            "immutable_runtime_control_surface_sha256_before": immutable_runtime_before,
-            "immutable_runtime_control_surface_sha256_after": immutable_runtime_after,
             "provider_process_isolated": True,
             "frontier_activation": deepcopy(activation),
+            "rollback": rollback_receipt,
             "attempt_backoff_recorded": True,
             "terminal_authority": False,
         }
@@ -1571,6 +1608,7 @@ def _execute_frontier_acquisition(
         "verification_authority_unchanged": True,
         "immutable_runtime_unchanged": True,
         "provider_process_isolated": True,
+        "acquisition_transaction_committed": True,
         "frontier_activation": deepcopy(reactivation.get("frontier_activation")),
         "reopened_work_ids": sorted(reopened),
         "resolved_frontier_handoff_work_ids": reactivation.get(
