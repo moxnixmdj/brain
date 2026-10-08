@@ -1,0 +1,14 @@
+{
+  "schema": "PROJECT_BRAIN_SELF_IMPROVEMENT_STATE_V1",
+  "version": 1,
+  "episodes": {},
+  "skills": {},
+  "pareto_frontiers": {},
+  "failures": {},
+  "stats": {
+    "verified_episode_count": 0,
+    "verified_skill_count": 0,
+    "active_skill_count": 0,
+    "failure_class_count": 0
+  }
+}
