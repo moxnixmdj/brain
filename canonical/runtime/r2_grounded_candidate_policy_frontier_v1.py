@@ -28,7 +28,7 @@ POLICY_PREFIX = "BOUND_CAPABILITY_POLICY::"
 
 def _git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
-    return sha1(b"blob " + str(len(data)).encode() + b"\\0" + data).hexdigest()
+    return sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
 
 
 def _exact_origin_adequacy_binding(
