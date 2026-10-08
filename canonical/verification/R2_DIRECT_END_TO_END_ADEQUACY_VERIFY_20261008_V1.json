@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS_14_OF_14",
+  "branch": "r2-direct-end-to-end-adequacy-routes-20261008",
+  "exact_blobs": {
+    "direct_runtime": "0fbece0aee641e31c014ae008bf549e90a43af55",
+    "fixed_point_runtime": "aaa6ebc1b7ff72404bb9368dcd91af5882a4dede",
+    "direct_tests": "96664f1c2845bd571f5c2043cbb6120aa7fd879b",
+    "fixed_point_tests": "05128fb9ede48d78f555b0460c036f1a29738e3f",
+    "governance": "74adbcc6d09a78a0441bd8eaa9c5d2c0e9506a5d"
+  },
+  "isolated_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "tests_run": 14,
+    "tests_passed": 14,
+    "failures": 0,
+    "errors": 0
+  },
+  "proved": [
+    "EXACT_PREFLIGHT_IS_SIDE_EFFECT_FREE",
+    "UNMODELED_EXTRA_TEXT_DOES_NOT_MATCH_THE_DIRECT_CELL",
+    "FULL_RAW_OBLIGATION_ACCEPTANCE_IS_REQUIRED_FOR_DIRECT_ADEQUACY",
+    "PARTIAL_ACCEPTANCE_CANNOT_PROMOTE",
+    "MATCHED_ROUTE_EXECUTES_BEFORE_SEMANTIC_RECONSTRUCTION_ONLY_INSIDE_THE_EXACT_CELL",
+    "MATCHED_ROUTE_FAILURE_CANNOT_RETRY_THROUGH_ANOTHER_POLICY_PATH",
+    "UNMATCHED_GOALS_PRESERVE_THE_EXISTING_R2_FIXED_POINT_PATH"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_LANGUAGE_CLOSURE",
+    "NO_GLOBAL_R2_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
