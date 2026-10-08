@@ -39,6 +39,92 @@ def _s(value: Any) -> str:
     return " ".join(str(value or "").split())
 
 
+def verify_proof_carrying_outcome_integrity(
+    outcome: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Recompute the bounded capsule digest and structural acceptance invariants.
+
+    This verifies capsule integrity only. It does not replace reauthentication of
+    the underlying independent receipt/verification bytes when authority is needed.
+    """
+    try:
+        if not isinstance(outcome, Mapping):
+            raise ProofCarryingOutcomeError("OUTCOME_NOT_OBJECT")
+        if outcome.get("schema") != SCHEMA:
+            raise ProofCarryingOutcomeError("OUTCOME_SCHEMA_INVALID")
+        if outcome.get("pass") is not True:
+            raise ProofCarryingOutcomeError("OUTCOME_PASS_REQUIRED")
+        if outcome.get("status") != "PASS__PROOF_CARRYING_OUTCOME_OBLIGATION_COMPLETE":
+            raise ProofCarryingOutcomeError("OUTCOME_STATUS_INVALID")
+        if outcome.get("self_certifying") is not False:
+            raise ProofCarryingOutcomeError("OUTCOME_SELF_CERTIFYING_INVALID")
+        if outcome.get("semantic_acceptance_complete") is not True:
+            raise ProofCarryingOutcomeError("SEMANTIC_ACCEPTANCE_INCOMPLETE")
+        if outcome.get("all_raw_obligations_bound_to_authenticated_acceptance") is not True:
+            raise ProofCarryingOutcomeError("OBLIGATION_ACCEPTANCE_COVERAGE_INCOMPLETE")
+
+        evidence = outcome.get("obligation_evidence")
+        if (
+            not isinstance(evidence, Sequence)
+            or isinstance(evidence, (str, bytes))
+            or not evidence
+        ):
+            raise ProofCarryingOutcomeError("OBLIGATION_EVIDENCE_REQUIRED")
+        ids: list[str] = []
+        for index, row in enumerate(evidence):
+            if not isinstance(row, Mapping):
+                raise ProofCarryingOutcomeError(f"OBLIGATION_EVIDENCE_INVALID:{index}")
+            oid = _s(row.get("obligation_id"))
+            binding = row.get("acceptance_binding")
+            if not oid or oid in ids:
+                raise ProofCarryingOutcomeError("OBLIGATION_EVIDENCE_ID_INVALID:" + oid)
+            if row.get("accepted") is not True or not isinstance(binding, Mapping):
+                raise ProofCarryingOutcomeError("OBLIGATION_EVIDENCE_NOT_ACCEPTED:" + oid)
+            if not _s(binding.get("independent_verifier_id")):
+                raise ProofCarryingOutcomeError("OBLIGATION_INDEPENDENT_VERIFIER_MISSING:" + oid)
+            ids.append(oid)
+
+        raw_count = outcome.get("raw_obligation_count")
+        accepted_count = outcome.get("accepted_obligation_count")
+        if raw_count != len(evidence) or accepted_count != len(evidence):
+            raise ProofCarryingOutcomeError("OBLIGATION_COUNT_MISMATCH")
+
+        core = {
+            "raw_task_contract_sha256": outcome.get("raw_task_contract_sha256"),
+            "task_sha256": outcome.get("task_sha256"),
+            "verifier_plan_sha256": outcome.get("verifier_plan_sha256"),
+            "selected_policy_id": outcome.get("selected_policy_id"),
+            "realization_sha256": outcome.get("realization_sha256"),
+            "obligation_evidence": list(evidence),
+            "structural_validation": outcome.get("structural_validation"),
+            "goal_satisfaction_binding": outcome.get("goal_satisfaction_binding"),
+        }
+        actual = _sha(core)
+        expected = _s(outcome.get("proof_carrying_outcome_sha256"))
+        if actual != expected:
+            raise ProofCarryingOutcomeError("PROOF_CARRYING_OUTCOME_DIGEST_MISMATCH")
+        return {
+            "schema": SCHEMA,
+            "status": "PASS__PROOF_CARRYING_OUTCOME_INTEGRITY",
+            "pass": True,
+            "proof_carrying_outcome_sha256": actual,
+            "raw_obligation_count": len(evidence),
+            "self_certifying": False,
+            "authority_reauthentication_complete": False,
+            "terminal_authority": False,
+        }
+    except Exception as exc:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED__PROOF_CARRYING_OUTCOME_INTEGRITY",
+            "pass": False,
+            "reason": type(exc).__name__ + ":" + str(exc),
+            "self_certifying": False,
+            "authority_reauthentication_complete": False,
+            "terminal_authority": False,
+        }
+
+
 def build_proof_carrying_outcome(
     *,
     raw_contract: Mapping[str, Any],
