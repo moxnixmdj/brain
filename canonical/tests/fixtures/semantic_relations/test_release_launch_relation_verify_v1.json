@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_PROPOSITION_RELATION_VERIFICATION_V1",
+  "subject": {
+    "path": "canonical/tests/fixtures/semantic_relations/test_release_launch_relation_v1.json",
+    "git_blob_sha": "831a3d71425e396da9a1f4438fe4dbc4013e0338"
+  },
+  "verified_relation": "ENTAILS",
+  "verified_premise": "The product's commercial release occurred in June.",
+  "verified_hypothesis": "The product launched in June.",
+  "pass": true,
+  "verifier": "TEST_FIXTURE_ONLY",
+  "hard_nonclaims": [
+    "TEST_FIXTURE_ONLY__NOT_REAL_SEMANTIC_EVIDENCE"
+  ]
+}
