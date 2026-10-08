@@ -177,3 +177,64 @@ def test_bound_macro_without_effect_semantics_receipt_fails_before_execution(mon
     )
     assert out["pass"] is False
     assert calls["count"] == 0
+
+
+def test_verified_skill_preference_can_select_declared_route_without_bypassing_verification(monkeypatch, tmp_path):
+    p = outer_problem()
+    other = json.loads(json.dumps(p["capabilities"][0]))
+    other["id"] = "other"
+    other["cost"] = 0.1
+    p["capabilities"].append(other)
+
+    for i, cap in enumerate(p["capabilities"]):
+        action = cap["action"]
+        expected = {
+            "capability_id": cap["id"],
+            "task_contract_sha256": task_contract_sha256(p),
+            "requires": [],
+            "verifier_id": "BOUND_CAPABILITY_EXECUTION_V1",
+            "verifier_payload_sha256": __import__(
+                "canonical.runtime.universal_verified_adaptive_solver_v1",
+                fromlist=["_digest"],
+            )._digest(action["verifier_payload"]),
+            "verifier_success_condition": SUCCESS_CONDITIONS[
+                "BOUND_CAPABILITY_EXECUTION_V1"
+            ],
+            "provided_effects": ["GOAL"],
+        }
+        rd = {
+            "schema": BINDING_SCHEMA,
+            **expected,
+            "pass": True,
+            "claim": "BUILTIN_VERIFIER_PASS_IMPLIES_EXACT_PROVIDED_EFFECTS",
+        }
+        rr = save(tmp_path, f"canonical/verification/preferred-{i}.json", rd)
+        vd = {
+            "schema": BINDING_VERIFY_SCHEMA,
+            "subject_git_blob_sha": rr["git_blob_sha"],
+            **expected,
+            "pass": True,
+            "independent_verified": True,
+            "implication_semantics_verified": True,
+            "independent_verifier_id": "preferred-route-test-verifier",
+        }
+        vr = save(tmp_path, f"canonical/verification/preferred-{i}-verify.json", vd)
+        cap["effect_semantics_binding"] = {"receipt": rr, "verification": vr}
+
+    monkeypatch.setattr(
+        carrier.astra_runtime,
+        "_invoke_bound_capability",
+        lambda args: {"verified": True},
+    )
+
+    out = run(
+        p,
+        repo_root=tmp_path,
+        episode_id="ep",
+        scope_id="scope",
+        preferred_capability_order=["macro"],
+    )
+    assert out["pass"] is True, out
+    assert out["trace"][0]["capability_id"] == "macro"
+    assert out["preferred_capability_order"] == ["macro"]
+    assert out["preferred_capability_ids_used"] == ["macro"]
