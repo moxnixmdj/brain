@@ -49,6 +49,14 @@ def _action_transport_clean(returncode: int, stdout: Any, stderr: Any) -> bool:
     text = (str(stdout or "") + "\n" + str(stderr or "")).lower()
     return not any(marker in text for marker in _FATAL_ACTION_STDERR_MARKERS)
 MAX_BRAIN_DELIVERABLES = 16
+_INTERACTIVE_CONTROLLER_CUES = (
+    "stdin",
+    "standard input",
+    "json line",
+    "jsonl",
+    "one json",
+    "controller process",
+)
 _EXPLICIT_SUBMISSION_PATH_RE = re.compile(
     r"(?<![A-Za-z0-9_./-])((?:/app/)?submission/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)"
 )
@@ -66,10 +74,46 @@ def _brain_mandated_deliverables(goal: str) -> dict[str, str]:
             break
     return {f"BRAIN_DELIVERABLE_{i + 1:02d}": path for i, path in enumerate(paths)}
 
+def _interactive_controller_paths(goal: str, deliverables: dict[str, str]) -> set[str]:
+    lower = str(goal or "").lower()
+    if not any(cue in lower for cue in _INTERACTIVE_CONTROLLER_CUES):
+        return set()
+    return {
+        path for path in deliverables.values()
+        if path.lower().endswith(".py")
+        and "controller" in path.rsplit("/", 1)[-1].lower()
+    }
+
+def _controller_liveness_command(path: str) -> str:
+    script = (
+        "# PROJECT_BRAIN_CONTROLLER_LIVENESS_V1\n"
+        "import subprocess, sys, time\n"
+        f"path={path!r}\n"
+        "proc=None\n"
+        "try:\n"
+        "    proc=subprocess.Popen([sys.executable,path],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)\n"
+        "    time.sleep(0.35)\n"
+        "    alive=proc.poll() is None\n"
+        "    if not alive:\n"
+        "        err=(proc.stderr.read() if proc.stderr else '')[-4000:]\n"
+        "        print('CONTROLLER_EXITED_BEFORE_INPUT',err,file=sys.stderr)\n"
+        "    raise SystemExit(0 if alive else 42)\n"
+        "finally:\n"
+        "    if proc is not None and proc.poll() is None:\n"
+        "        proc.terminate()\n"
+        "        try:\n"
+        "            proc.communicate(timeout=1)\n"
+        "        except Exception:\n"
+        "            proc.kill(); proc.communicate()\n"
+    )
+    return validate_environment_command("python - <<'PY'\n" + script + "PY")
+
 async def _validate_brain_deliverable(
     requirement_id: str,
     path: str,
     environment: BaseEnvironment,
+    *,
+    require_interactive_liveness: bool = False,
 ) -> dict[str, Any]:
     transport = HarborEnvironmentTransport(environment)
     quoted = shlex.quote(path)
@@ -78,6 +122,8 @@ async def _validate_brain_deliverable(
         checks.append(f"python -m json.tool {quoted} >/dev/null")
     elif path.lower().endswith(".py"):
         checks.append(f"python -m py_compile {quoted}")
+        if require_interactive_liveness:
+            checks.append(_controller_liveness_command(path))
     observed: list[dict[str, Any]] = []
     for command in checks:
         receipt = await transport.exec(command, timeout_sec=60)
@@ -152,6 +198,7 @@ async def _snapshot_declared_inputs(
 async def _declared_output_gate(
     environment: BaseEnvironment,
     paths: list[str],
+    interactive_controller_paths: set[str] | None = None,
 ) -> list[dict[str, Any]]:
     """Revalidate exact declared outputs immediately before Brain finish."""
     if not paths:
@@ -174,6 +221,17 @@ async def _declared_output_gate(
                 "stdout": receipt.stdout[-2000:],
                 "stderr": receipt.stderr[-2000:],
             })
+            continue
+        if path in (interactive_controller_paths or set()):
+            live_receipt = await transport.exec(_controller_liveness_command(path), timeout_sec=10)
+            if live_receipt.returncode != 0:
+                failures.append({
+                    "path": path,
+                    "returncode": live_receipt.returncode,
+                    "stdout": live_receipt.stdout[-2000:],
+                    "stderr": live_receipt.stderr[-2000:],
+                    "reason": "INTERACTIVE_CONTROLLER_EXITED_BEFORE_INPUT",
+                })
     return failures
 
 MAX_RAW_TASK_OBLIGATIONS = 64
@@ -297,6 +355,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
     max_cycles = max(1, min(int(max_cycles), MAX_CYCLES))
     raw_task_contract, raw_task_localization, raw_task_obligations = _compile_lossless_task_scope(goal)
     brain_deliverables = _brain_mandated_deliverables(goal)
+    interactive_controller_paths = _interactive_controller_paths(goal, brain_deliverables)
     mandatory_requirement_ids = list(brain_deliverables)
     requirements: list[str] | None = None
     resolved: set[str] = set()
@@ -311,7 +370,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         output_gate_failures: list[dict[str, Any]] = []
         if requirements is not None and not unresolved and declared_outputs:
             output_gate_failures = await _declared_output_gate(
-                environment, declared_outputs
+                environment, declared_outputs, interactive_controller_paths
             )
         prompt = (
             "You are an OPTIONAL semantic proposal source inside Project Brain, not execution authority. "
@@ -443,7 +502,12 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                     if path is None:
                         verified_covers.append(requirement_id)
                         continue
-                    check = await _validate_brain_deliverable(requirement_id, path, environment)
+                    check = await _validate_brain_deliverable(
+                        requirement_id,
+                        path,
+                        environment,
+                        require_interactive_liveness=path in interactive_controller_paths,
+                    )
                     deliverable_checks.append(check)
                     if check["verified"] is True:
                         verified_covers.append(requirement_id)
@@ -470,7 +534,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         # all requirements are already resolved.
         if requirements is not None and not (set(requirements) - resolved):
             post_gate_failures = await _declared_output_gate(
-                environment, declared_outputs
+                environment, declared_outputs, interactive_controller_paths
             )
             if post_gate_failures:
                 rejected = {
@@ -529,7 +593,7 @@ class HarborScienceAgent(BaseAgent):
         return "project-brain-science"
 
     def version(self) -> str:
-        return "1.2.0"
+        return "1.3.0"
 
     async def setup(self, environment: BaseEnvironment) -> None:
         return None
