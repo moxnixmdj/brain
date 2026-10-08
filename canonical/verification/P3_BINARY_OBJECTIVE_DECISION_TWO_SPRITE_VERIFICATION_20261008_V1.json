@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_P3_BINARY_OBJECTIVE_DECISION_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_9_OF_9_ON_TWO_SPRITES__BOUND_BINARY_OBJECTIVE_DECISION_DERIVATION_OWNED__DECISION_EXPRESSION_STILL_OPEN__ZERO_TERMINAL_CREDIT",
+  "runtime": {"path":"canonical/runtime/p3_binary_objective_decision_v1.py","git_blob_sha":"c62ff59d73a4fe364273995265e795907a67afa6"},
+  "tests": {"path":"canonical/tests/test_p3_binary_objective_decision_v1.py","git_blob_sha":"061c1236eddbdbf6625edcd461e020a2729482ce"},
+  "reused": [
+    {"path":"canonical/runtime/p3_bounded_objective_role_relevance_v1.py","git_blob_sha":"d8977024955a22003c6bcde9d54c40cad68e44b7"},
+    {"path":"canonical/runtime/bound_capabilities/objective_claim_operand_binding.py","git_blob_sha":"48fd058430d8d361fc75beced567c7b6d1166531"},
+    {"path":"canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py","git_blob_sha":"d66a7eb30774f66160b698d8082947776888293d"}
+  ],
+  "verification": [
+    {"provider":"Sprites","sprite":"h100-real-image-v1","sprite_id":"sprite-68a466f6-88d5-493d-93f3-2b85377836a3","tests_passed":9,"tests_run":9},
+    {"provider":"Sprites","sprite":"brain-root3-current-byte-replay-20261007-v1","sprite_id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e","tests_passed":9,"tests_run":9}
+  ],
+  "proved": [
+    "BOUND_ROLE_EVIDENCE_IS_ADAPTED_TO_THE_EXISTING_INTEGRITY_CHECKED_GENERIC_EXTRACTION_SCHEMA",
+    "EXISTING_OBJECTIVE_BINDER_SELECTS_THE_UNIQUE_EXACT_UNIT_COMPATIBLE_NUMERIC_OPERAND_PAIR",
+    "ENTITY_MODEL_NUMBERS_DO_NOT_DISPLACE_THE_SHARED_EXPLICIT_MEASUREMENT_UNIT_PAIR",
+    "THE_EXISTING_GENERIC_RELATION_EVALUATOR_RETURNS_THE_BOOLEAN_DECISION",
+    "REVERSING_OBJECTIVE_ROLES_CHANGES_THE_DECISION_WHEN_EXPECTED",
+    "CLAIM_INPUT_ORDER_AND_UNRELATED_NUMERIC_DECOYS_DO_NOT_CHANGE_THE_DECISION",
+    "DUPLICATE_ROLE_EVIDENCE_UNIT_MISMATCH_AND_UNVERIFIED_EVIDENCE_FAIL_CLOSED",
+    "DECISION_PROVENANCE_BINDS_BOTH_ROLE_SOURCES",
+    "NO_AUTHORITY_ESCALATION"
+  ],
+  "causal_effect": {
+    "closed": "EXACT_BINARY_OBJECTIVE_DECISION_DERIVATION_FOR_THE_BOUND_POSITIVE_ROLE_SUBREGION",
+    "remaining": "GROUND_AND_EXPRESS_THE_VERIFIED_DERIVED_DECISION_WITH_THE_TWO_ROLE_FACTS_UNDER_THE_EXPLICIT_AUDIENCE_FORMAT_CONTRACT"
+  },
+  "boundaries": [
+    "NO_DECISION_EXPRESSION_CLAIM",
+    "NO_GENERAL_NUMERIC_REASONING",
+    "NO_GENERAL_PRESENTATION_ADEQUACY",
+    "NO_POLICY_ADEQUACY_DB_ADMISSION_U_SUBTRACTION_U_EMPTY_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
