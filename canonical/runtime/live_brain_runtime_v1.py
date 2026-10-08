@@ -1842,6 +1842,26 @@ def run(
             capability_expander=capability_expander,
         )
 
+    if mode == "one_shot_verified_closure":
+        from canonical.runtime import one_shot_verified_closure_v1 as one_shot
+        try:
+            return one_shot.run(
+                repo_root=repo_root,
+                state_path=(
+                    request.get("state_path")
+                    or _learning_module().DEFAULT_STATE_PATH
+                ),
+                max_rounds=request.get("max_rounds", 64),
+                max_actions_per_round=request.get("max_actions_per_round", 32),
+            )
+        except Exception as exc:
+            return _fail(
+                "ONE_SHOT_VERIFIED_CLOSURE_EXCEPTION:"
+                + type(exc).__name__
+                + ":"
+                + str(exc)
+            )
+
     if mode == "improvement_fixed_point":
         from canonical.runtime import r3_verified_fixed_point_driver_v1 as fixed_point
         try:
