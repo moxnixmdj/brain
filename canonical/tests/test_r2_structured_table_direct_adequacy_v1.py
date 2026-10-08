@@ -165,5 +165,32 @@ class R2StructuredTableDirectAdequacyV1Tests(unittest.TestCase):
         self.assertEqual(out["status"], "FAIL_CLOSED")
 
 
+    @patch.object(table, "_independent_verify")
+    @patch.object(table.live_bound, "run_raw_goal")
+    def test_source_mutation_fails_closed_and_restores_output(self, execute, verify):
+        old = b"old-artifact"
+        XLSX.write_bytes(old)
+        pf = table.preflight({"task_id": "table-source-mutation", "goal": XLSX_GOAL})
+        self.assertTrue(pf["matched"], pf)
+
+        def fake_execute(request):
+            XLSX.write_bytes(b"replacement")
+            SOURCE.write_text('{"mutated":true}', encoding="utf-8")
+            return {
+                "pass": True,
+                "compiled_capability_id": pf["capability_id"],
+                "raw_goal_sha256": pf["goal_sha256"],
+                "raw_source_coverage_complete": True,
+            }
+
+        execute.side_effect = fake_execute
+        out = table.run({"task_id": "table-source-mutation", "goal": XLSX_GOAL})
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertTrue(out["transaction_rolled_back"])
+        self.assertEqual(XLSX.read_bytes(), old)
+        verify.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
