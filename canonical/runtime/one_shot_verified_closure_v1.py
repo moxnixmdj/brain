@@ -390,7 +390,7 @@ def run(
                 "status": (
                     "OPEN__INTERNAL_SOLVABLE_GAP_REMAINS"
                     if internal
-                    else "VERIFIED_FIXED_POINT__EXTERNAL_OR_NEW_EVIDENCE_REQUIRED"
+                    else "VERIFIED_FIXED_POINT__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED"
                 ),
                 "pass": not internal,
                 "fixed_point": True,
