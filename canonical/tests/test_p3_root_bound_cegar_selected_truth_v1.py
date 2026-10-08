@@ -143,3 +143,24 @@ class RootBoundBridgeTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+    def test_missing_predicate_field_fails_root_membership(self):
+        doc = json.loads(root_task())
+        facts = json.loads(doc["fact_source"]["raw_json"])
+        facts["fields"] = {
+            "other_field": {"type": "DECIMAL_STRING", "value": "130.00"}
+        }
+        doc["fact_source"]["raw_json"] = json.dumps(facts, separators=(",", ":"))
+        out = compile_root_task(json.dumps(doc, separators=(",", ":")))
+        self.assertFalse(out["pass"])
+        self.assertIn("PREDICATE_FIELD_NOT_PRESENT_IN_FACT_SOURCE", out["errors"])
+
+    def test_wrong_predicate_field_type_fails_root_membership(self):
+        doc = json.loads(root_task())
+        facts = json.loads(doc["fact_source"]["raw_json"])
+        facts["fields"]["exposure_amount"] = {"type": "STRING", "value": "130.00"}
+        doc["fact_source"]["raw_json"] = json.dumps(facts, separators=(",", ":"))
+        out = compile_root_task(json.dumps(doc, separators=(",", ":")))
+        self.assertFalse(out["pass"])
+        self.assertIn("PREDICATE_FIELD_TYPE_MISMATCH", out["errors"])
