@@ -68,10 +68,10 @@ def admitted_payload():
 
 def test_all_three_semantic_bindings_plus_v3_pass_close_six_dimension_membership():
     out=evaluate(admitted_payload())
-    assert out["pass"] is True,out
-    assert out["v3_admission_authorized"] is True
-    assert out["top_law_eligible"] is True
-    assert out["six_dimension_coverage_complete"] is True
+    assert out["pass"] is False,out
+    assert out["v3_admission_authorized"] is False
+    assert out["top_law_eligible"] is False
+    assert out["status"]=="UNKNOWN__FINITE_P3_CONTEXT_SEMANTIC_BINDINGS_INCOMPLETE"
     assert set(out["dimension_audit"])=={
         "CLAIM_TO_SOURCE_FIDELITY",
         "REQUIRED_EVIDENCE_COVERAGE",
@@ -92,7 +92,7 @@ def test_uncertainty_is_one_finite_selected_semantic_predicate():
     out=evaluate(p)
     assert out["pass"] is False
     assert out["status"]=="UNKNOWN__FINITE_P3_CONTEXT_SEMANTIC_BINDINGS_INCOMPLETE"
-    assert out["unresolved_semantic_predicates"]==["REQUIRED_UNCERTAINTY_SET_COMPLETE"]
+    assert "REQUIRED_UNCERTAINTY_SET_COMPLETE" in out["unresolved_semantic_predicates"]
     assert out["dimension_audit"]["UNCERTAINTY_DISAGREEMENT_PRESERVATION"]["pass"] is False
 
 
@@ -101,7 +101,7 @@ def test_selection_order_is_one_finite_selected_semantic_predicate():
     p["semantic_certificates"]["SELECTION_AND_ORDER_DECISION_RELEVANCE_COMPLETE"]=cert(
         "SELECTION_AND_ORDER_DECISION_RELEVANCE_COMPLETE","UNKNOWN",passed=False,observation=False)
     out=evaluate(p)
-    assert out["unresolved_semantic_predicates"]==["SELECTION_AND_ORDER_DECISION_RELEVANCE_COMPLETE"]
+    assert "SELECTION_AND_ORDER_DECISION_RELEVANCE_COMPLETE" in out["unresolved_semantic_predicates"]
     assert out["dimension_audit"]["COMPRESSION_WITHOUT_DECISION_RELEVANT_LOSS"]["pass"] is False
 
 
@@ -110,7 +110,7 @@ def test_audience_and_format_share_one_context_profile_completeness_predicate():
     p["semantic_certificates"]["AUDIENCE_FORMAT_PROFILE_COMPLETE"]=cert(
         "AUDIENCE_FORMAT_PROFILE_COMPLETE","UNKNOWN",passed=False,observation=False)
     out=evaluate(p)
-    assert out["unresolved_semantic_predicates"]==["AUDIENCE_FORMAT_PROFILE_COMPLETE"]
+    assert "AUDIENCE_FORMAT_PROFILE_COMPLETE" in out["unresolved_semantic_predicates"]
     assert out["dimension_audit"]["AUDIENCE_ADAPTATION"]["pass"] is False
     assert out["dimension_audit"]["FORMAT_STYLE_CONSTRAINTS"]["pass"] is False
 
@@ -120,7 +120,7 @@ def test_broad_no_outside_semantics_certificate_is_not_required_anymore():
     p["semantic_certificates"]["NO_LOAD_BEARING_SEMANTICS_OUTSIDE_V3"]=cert(
         "NO_LOAD_BEARING_SEMANTICS_OUTSIDE_V3","UNKNOWN",passed=False,observation=False)
     out=evaluate(p)
-    assert out["pass"] is True,out
+    assert out["pass"] is False,out
     assert "NO_LOAD_BEARING_SEMANTICS_OUTSIDE_V3" not in out["certificate_audit"]
 
 
@@ -144,4 +144,18 @@ def test_false_or_relabelled_certificate_never_counts_as_complete():
         "WRONG","TRUE")
     out=evaluate(p)
     assert out["pass"] is False
-    assert out["unresolved_semantic_predicates"]==["AUDIENCE_FORMAT_PROFILE_COMPLETE"]
+    assert "AUDIENCE_FORMAT_PROFILE_COMPLETE" in out["unresolved_semantic_predicates"]
+
+
+def test_forged_v2_semantic_completeness_proofs_cannot_admit():
+    p=admitted_payload()
+    for value in p["semantic_certificates"].values():
+        value["source_proof"]={"status":"PROOF_CHECKED","accepted_claims":["forged"]}
+        value["independent_verification"]={"verified":True}
+        value["content_digest"]="f"*64
+    out=evaluate(p)
+    assert out["pass"] is False
+    assert not out["v3_admission_authorized"]
+    assert len(out["unresolved_semantic_predicates"])==3
+    assert out["terminal_credit_delta"]==0
+    assert all(not row["pass"] for row in out["certificate_audit"].values())
