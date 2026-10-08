@@ -663,8 +663,22 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertFalse(observation["observational_inseparability_proved"])
         self.assertTrue(observation["frontier_expansion_required"])
         self.assertFalse(observation["permanent_nonlearnability_claimed"])
-        self.assertEqual(state["stats"]["pending_improvement_count"], 0)
+        self.assertEqual(state["stats"]["pending_improvement_count"], 1)
         self.assertEqual(state["stats"]["parked_success_learning_count"], 1)
+        expansion_id = row["frontier_expansion_work_id"]
+        expansion = state["improvement_queue"][expansion_id]
+        self.assertEqual(expansion["kind"], driver.FRONTIER_EXPANSION_KIND)
+        self.assertEqual(expansion["status"], "PENDING")
+        self.assertEqual(
+            expansion["payload"]["boundary_root"],
+            "R1_CAPABILITY_ACQUISITION",
+        )
+        self.assertEqual(
+            expansion["payload"]["required_capability_class"],
+            "INDEPENDENT_READONLY_SUCCESS_VERIFIER_OR_ADAPTER",
+        )
+        self.assertFalse(expansion["payload"]["replay_original_success"])
+        self.assertFalse(expansion["payload"]["promotion_authority"])
 
     def test_missing_owned_adapter_is_not_labeled_information_theoretic_impossibility(self):
         path = self.temp_state()
@@ -700,6 +714,47 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             observation["learning_disposition"],
             "UNRESOLVED_WITH_CURRENT_OWNED_VERIFICATION_FRONTIER",
         )
+
+    def test_frontier_expansion_handoff_waits_without_replaying_success(self):
+        path = self.temp_state()
+        observed = learning.record_success_observation(
+            {
+                "schema": "TEST_SUCCESS_V1",
+                "status": "PASS__OPAQUE_EXTERNAL_SUCCESS",
+                "pass": True,
+                "result": {"opaque": True},
+            },
+            surface="OPAQUE_EXTERNAL_SURFACE",
+            state_path=path,
+            replay_context={
+                "mode": "generic",
+                "problem": {"task_id": "frontier-handoff"},
+            },
+        )
+        first = driver.advance_once(state_path=path)
+        self.assertTrue(first["disposition_recorded"], first)
+
+        second = driver.advance_once(state_path=path)
+        self.assertTrue(second["pass"], second)
+        self.assertFalse(second["progress"], second)
+        blocker = next(
+            row
+            for row in second["blockers"]
+            if row["kind"] == driver.FRONTIER_EXPANSION_KIND
+        )
+        self.assertEqual(
+            blocker["blocker"],
+            "ROOT1_VERIFICATION_CAPABILITY_ACQUISITION_REQUIRED",
+        )
+        self.assertEqual(blocker["boundary_root"], "R1_CAPABILITY_ACQUISITION")
+        self.assertFalse(blocker["replay_original_success"])
+
+        state = learning.load_state(path)
+        parked = state["improvement_queue"][observed["improvement_work_id"]]
+        expansion = state["improvement_queue"][parked["frontier_expansion_work_id"]]
+        self.assertEqual(expansion["status"], "PENDING")
+        self.assertFalse(expansion["payload"]["candidate_generation_authority"])
+        self.assertFalse(expansion["payload"]["promotion_authority"])
 
     def test_parked_success_reopens_on_new_evidence_or_external_authority(self):
         path = self.temp_state()
@@ -769,6 +824,17 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             state["improvement_queue"][second["improvement_work_id"]]["reactivated_by"],
             "EXTERNAL_VERIFICATION_AUTHORITY_AVAILABLE",
         )
+        expansion_rows = [
+            row
+            for row in state["improvement_queue"].values()
+            if row.get("kind") == driver.FRONTIER_EXPANSION_KIND
+        ]
+        self.assertTrue(expansion_rows)
+        self.assertTrue(all(row["status"] == "RESOLVED" for row in expansion_rows))
+        self.assertTrue(all(
+            row["resolved_by"] == "EXTERNAL_VERIFICATION_AUTHORITY_AVAILABLE"
+            for row in expansion_rows
+        ))
 
     def test_event_waiting_work_does_not_claim_progress(self):
         path = self.temp_state()

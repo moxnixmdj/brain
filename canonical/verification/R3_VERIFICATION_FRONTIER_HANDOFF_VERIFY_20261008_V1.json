@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_R3_VERIFICATION_FRONTIER_HANDOFF_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__R3_DURABLE_VERIFIER_FRONTIER_ACQUISITION_HANDOFF__18_OF_18_FOCUSED_TESTS",
+  "subject_branch": "r3-verifier-frontier-handoff-20261008-sol",
+  "subject_head_before_receipt": "34e040069ab648dda00a9dd7b193c46660855df8",
+  "base_main_commit": "4f6c8c2a1f22c70cd1b9ef765130b39db3182346",
+  "exact_blobs": {
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "31df74a3f08ab839f2bdcb4b3fdc4a5db3a1ee2b",
+    "canonical/tests/test_r3_improvement_queue_driver_v1.py": "82df31c1544057db1cdccfae9f8af28ad215aa3a"
+  },
+  "proved": {
+    "unverifiable_success_parks_without_false_impossibility_claim": true,
+    "durable_frontier_expansion_work_created": true,
+    "boundary_root": "R1_CAPABILITY_ACQUISITION",
+    "required_capability_class": "INDEPENDENT_READONLY_SUCCESS_VERIFIER_OR_ADAPTER",
+    "original_success_replay_forbidden": true,
+    "candidate_generation_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false,
+    "frontier_handoff_does_not_starve_other_work": true,
+    "frontier_change_or_external_authority_reopens_original_success": true,
+    "corresponding_frontier_handoff_resolves_on_reopen": true
+  },
+  "isolated_verification": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "command": "python3 -m unittest canonical.tests.test_r3_improvement_queue_driver_v1 -v",
+    "tests_run": 18,
+    "tests_passed": 18,
+    "tests_failed": 0,
+    "tests_errors": 0,
+    "elapsed_seconds": 0.05,
+    "py_compile": "PASS",
+    "incremental_spend_usd": 0
+  },
+  "boundary": {
+    "r3_responsibility": "Detect verifier-frontier insufficiency, persist non-replaying acquisition handoff, continue unrelated compounding work, and reopen learning when the frontier changes.",
+    "root1_responsibility": "Acquire or construct the missing independently verifiable read-only verifier/adapter capability.",
+    "no_claim_root1_always_succeeds": true,
+    "no_claim_unobservable_reality_can_be_certified": true
+  },
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}

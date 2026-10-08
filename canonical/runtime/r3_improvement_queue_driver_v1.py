@@ -70,6 +70,41 @@ SUCCESS_LEARNING_FRONTIER_PATHS = (
     "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
 )
 
+FRONTIER_EXPANSION_KIND = "EXPAND_SUCCESS_VERIFICATION_FRONTIER"
+FRONTIER_EXPANSION_PRIORITY = 35
+
+
+def _enqueue_success_verification_frontier_expansion(
+    state: dict[str, Any],
+    *,
+    blocked_work_id: str,
+    observation_id: str,
+    frontier_sha256: str,
+) -> str:
+    """Persist a non-replaying cross-root acquisition handoff for a missing verifier."""
+    return learning._enqueue_improvement(
+        state,
+        kind=FRONTIER_EXPANSION_KIND,
+        priority=FRONTIER_EXPANSION_PRIORITY,
+        identity={
+            "blocked_success_work_id": blocked_work_id,
+            "verification_frontier_sha256": frontier_sha256,
+        },
+        payload={
+            "blocked_success_work_id": blocked_work_id,
+            "observation_id": observation_id,
+            "verification_frontier_sha256": frontier_sha256,
+            "required_capability_class": (
+                "INDEPENDENT_READONLY_SUCCESS_VERIFIER_OR_ADAPTER"
+            ),
+            "boundary_root": "R1_CAPABILITY_ACQUISITION",
+            "replay_original_success": False,
+            "candidate_generation_authority": False,
+            "promotion_authority": False,
+            "terminal_authority": False,
+        },
+    )
+
 
 def _owned_success_learning_frontier_sha256(
     *,
@@ -143,6 +178,16 @@ def _park_success_work(
         observation["frontier_expansion_required"] = True
         observation["permanent_nonlearnability_claimed"] = False
 
+    expansion_work_id = _enqueue_success_verification_frontier_expansion(
+        state,
+        blocked_work_id=wid,
+        observation_id=observation_id,
+        frontier_sha256=frontier_sha256,
+    )
+    row["frontier_expansion_work_id"] = expansion_work_id
+    if isinstance(observation, dict):
+        observation["frontier_expansion_work_id"] = expansion_work_id
+
     learning._refresh_stats(state)
     learning._write_state(state, state_path)
 
@@ -158,8 +203,10 @@ def _reactivate_parked_successes(
     state = learning.load_state(state_path)
     queue = state.get("improvement_queue", {})
     reopened: list[str] = []
+    reopened_by: dict[str, str] = {}
+    resolved_frontier_handoffs: list[str] = []
     if isinstance(queue, Mapping):
-        for wid, raw in queue.items():
+        for wid, raw in list(queue.items()):
             if (
                 not isinstance(raw, dict)
                 or raw.get("status") != "PARKED"
@@ -182,12 +229,35 @@ def _reactivate_parked_successes(
                 )
                 raw["verification_frontier_sha256"] = frontier
                 reopened.append(str(wid))
-    if reopened:
+                reopened_by[str(wid)] = str(raw["reactivated_by"])
+
+        if reopened_by:
+            for handoff_id, handoff in list(queue.items()):
+                if (
+                    not isinstance(handoff, dict)
+                    or handoff.get("status") != "PENDING"
+                    or handoff.get("kind") != FRONTIER_EXPANSION_KIND
+                ):
+                    continue
+                payload = handoff.get("payload")
+                blocked = (
+                    str(payload.get("blocked_success_work_id") or "")
+                    if isinstance(payload, Mapping)
+                    else ""
+                )
+                if blocked not in reopened_by:
+                    continue
+                handoff["status"] = "RESOLVED"
+                handoff["resolved_by"] = reopened_by[blocked]
+                handoff["resolved_frontier_sha256"] = frontier
+                resolved_frontier_handoffs.append(str(handoff_id))
+    if reopened or resolved_frontier_handoffs:
         learning._refresh_stats(state)
         learning._write_state(state, state_path)
     return {
         "frontier_sha256": frontier,
         "reopened_work_ids": sorted(reopened),
+        "resolved_frontier_handoff_work_ids": sorted(resolved_frontier_handoffs),
     }
 
 
@@ -913,6 +983,26 @@ def advance_once(
                     "attempt_backoff_recorded": failed,
                     "blockers_skipped": blockers,
                 }
+
+            if kind == FRONTIER_EXPANSION_KIND:
+                payload = work.get("payload")
+                blockers.append({
+                    "work_id": wid,
+                    "kind": kind,
+                    "blocker": "ROOT1_VERIFICATION_CAPABILITY_ACQUISITION_REQUIRED",
+                    "boundary_root": (
+                        payload.get("boundary_root")
+                        if isinstance(payload, Mapping)
+                        else "R1_CAPABILITY_ACQUISITION"
+                    ),
+                    "required_capability_class": (
+                        payload.get("required_capability_class")
+                        if isinstance(payload, Mapping)
+                        else None
+                    ),
+                    "replay_original_success": False,
+                })
+                continue
 
             if kind == "COLLECT_MATCHING_VERIFIED_EPISODE":
                 blockers.append({
