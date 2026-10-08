@@ -673,18 +673,10 @@ def _auto_repair_live_failure(
         out["auto_repair"] = _fail("AUTO_REPAIR_COMPONENT_FRONTIER_INVALID")
         return out
 
-    if not components and capability_expander is None:
-        out["auto_repair"] = {
-            "schema": SCHEMA,
-            "status": "AUTO_REPAIR_BLOCKED__VERIFIED_FRONTIER_OR_CAPABILITY_EXPANDER_REQUIRED",
-            "pass": False,
-            "failure_fingerprint": fingerprint,
-            "retry_capsule_sha256": retry_sha,
-            "terminal_authority": False,
-            "capability_promotion_authority": False,
-            "terminal_credit_delta": 0,
-        }
-        return out
+    # Do not pre-block an empty repair frontier here. The verified repair cycle
+    # owns that decision and can invoke the Brain-owned zero-cost acquisition
+    # path for replayable raw failures. Generic failures still fail closed when
+    # no authenticated expansion/acquisition route can satisfy the obligation.
 
     mode = str(request.get("mode") or "").strip()
     nested = request.get("request")
