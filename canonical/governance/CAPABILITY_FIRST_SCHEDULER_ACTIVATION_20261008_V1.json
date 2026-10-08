@@ -3,7 +3,7 @@
   "date": "2026-10-08",
   "status": "ACTIVE_PRIMARY_CAPABILITY_DEVELOPMENT_SCHEDULER",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "operational_objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+  "operational_objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE_WITHOUT_DESTROYING_SEMANTIC_CAPABILITY_OR_FUTURE_OPTION_VALUE",
   "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
   "scheduler_runtime": "canonical/runtime/capability_first_scheduler_v1.py",
   "canonical_learning_loop": [
@@ -12,6 +12,7 @@
     "EXTRACT_MECHANISM",
     "GENERALIZE",
     "COMPRESS",
+    "PRESERVE_OPTIONS",
     "REUSE_CHEAPER"
   ],
   "benchmark_policy": {
@@ -28,8 +29,10 @@
   "promotion_policy": {
     "reusable_capability_required": true,
     "independent_verification_required": true,
-    "frontier": "PARETO_OVER_CAPABILITY_GENERALIZATION_RELIABILITY_LATENCY_COMPUTE_MEMORY_INCREMENTAL_SPEND",
-    "benchmark_pass_alone_is_capability_promotion": false
+    "frontier": "ACTIVE_PARETO_OVER_CAPABILITY_GENERALIZATION_RELIABILITY_LATENCY_COMPUTE_MEMORY_INCREMENTAL_SPEND__WITH_SEPARATE_OPTION_PRESERVATION_AND_DESTRUCTION_AUTHORITY",
+    "benchmark_pass_alone_is_capability_promotion": false,
+    "dominated_semantics": "RETIRED_FROM_ACTIVE_FRONTIER_NOT_DELETED",
+    "permanent_deletion_requires_separate_proof": true
   },
   "current_high_leverage_conversion": [
     {
@@ -58,7 +61,10 @@
     "NO_CAPABILITY_CREDIT_FROM_PRIORITY_SCORE_ALONE",
     "NO_BENCHMARK_PASS_IS_TREATED_AS_A_REUSABLE_CAPABILITY",
     "NO_CLOSED_EXTERNAL_JUDGMENT_MODEL_IS_LOAD_BEARING_FOR_R2",
-    "OPUS_5_5_IS_A_FRONTIER_CHECKPOINT_NOT_THE_TERMINAL_OBJECTIVE"
+    "OPUS_5_5_IS_A_FRONTIER_CHECKPOINT_NOT_THE_TERMINAL_OBJECTIVE",
+    "NO_CURRENT_COST_DOMINANCE_IS_PHYSICAL_DELETION_AUTHORITY",
+    "NO_SINGLE_SCALAR_SCORE_IS_ALLOWED_TO_ERASE_FUTURE_OPTION_VALUE",
+    "NO_SUBSTRATE_SPECIFIC_IMPLEMENTATION_MAY_REDEFINE_THE_SEMANTIC_CAPABILITY_CONTRACT"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -73,5 +79,12 @@
     "rule": "LEARNED_JUDGMENT_MAY_GENERATE_RANK_OR_PRIORITIZE_ONLY__AUTHORITY_REMAINS_WITH_VERIFIED_POLICY_ADEQUACY_AND_ACCEPTANCE",
     "external_closed_model_dependency": false,
     "generic_judgment_model_project_primary_priority": false
+  },
+  "option_preservation": {
+    "pointer": "canonical/governance/CURRENT_OPTION_PRESERVING_OPTIMIZATION.json",
+    "runtime": "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+    "invariant": "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
+    "physical_deletion_authority_from_scheduler": false,
+    "new_technology_rule": "REEXTRACT_ACTIVE_FRONTIERS_FROM_PRESERVED_ALTERNATIVES_UNDER_NEW_COST_MODEL"
   }
 }
