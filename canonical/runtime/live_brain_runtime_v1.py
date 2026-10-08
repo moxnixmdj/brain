@@ -620,6 +620,23 @@ def _observe_runtime_outcome(
     }
 
 
+def _compile_native_specialized(
+    problem: Mapping[str, Any],
+    instances: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    from canonical.runtime.native_specialized_capability_registry_v1 import (
+        compile_into_problem,
+    )
+    return compile_into_problem(problem, instances)
+
+
+def _native_specialized_snapshot() -> dict[str, Any]:
+    from canonical.runtime.native_specialized_capability_registry_v1 import (
+        registry_snapshot,
+    )
+    return registry_snapshot()
+
+
 def _h100(operation: str, payload: Mapping[str, Any]) -> Any:
     from canonical.runtime import h100_verified_capability_registry_v8 as module
     if operation == "registry_snapshot":
@@ -706,6 +723,13 @@ def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
     except Exception as exc:
         learning_error = type(exc).__name__ + ":" + str(exc)
 
+    native_snapshot = None
+    native_error = None
+    try:
+        native_snapshot = _native_specialized_snapshot()
+    except Exception as exc:
+        native_error = type(exc).__name__ + ":" + str(exc)
+
     return {
         "schema": SCHEMA,
         "status": "UNIFIED_LIVE_BRAIN_READY",
@@ -718,6 +742,20 @@ def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
         "automatic_verified_experience_integration": True,
         "verified_skill_execution_reuse_first": True,
         "active_skill_planning_reuse": True,
+        "native_specialized_composition_enabled": native_error is None,
+        "native_specialized_operation_count": (
+            native_snapshot.get("operation_count")
+            if isinstance(native_snapshot, Mapping) else 0
+        ),
+        "native_specialized_operation_ids": (
+            [
+                row.get("operation_id")
+                for row in native_snapshot.get("operations", [])
+                if isinstance(row, Mapping)
+            ]
+            if isinstance(native_snapshot, Mapping) else []
+        ),
+        "native_specialized_registry_error": native_error,
         "verified_bound_capability_count": bound_count,
         "bound_inventory_error": bound_error,
         "learning_state_stats": learning_stats,
@@ -738,6 +776,7 @@ def run_generic(
     scope_id: str = "unified-live-brain",
     active_invalidators: Sequence[str] = (),
     known_absent_invalidators: Sequence[str] = (),
+    native_specialized_instances: Sequence[Mapping[str, Any]] = (),
     learn: bool = True,
     solver_kwargs: Mapping[str, Any] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
@@ -746,6 +785,10 @@ def run_generic(
     if not isinstance(problem, Mapping):
         return _fail("PROBLEM_NOT_OBJECT")
     try:
+        compiled_problem = _compile_native_specialized(
+            problem,
+            native_specialized_instances,
+        )
         ctx = _active_learning_context(
             state_path,
             scope_id=scope_id,
@@ -754,21 +797,21 @@ def run_generic(
         skill_plan = None
         if ctx["active_verified_skills"]:
             skill_plan = _skill_plan(
-                problem,
+                compiled_problem,
                 ctx["active_verified_skills"],
                 active_invalidators,
             )
 
         if learn:
             learned = _run_learning_episode(
-                problem,
+                compiled_problem,
                 repo_root=repo_root,
                 state_path=ctx["state_path"],
                 episode_id=episode_id,
                 scope_id=scope_id,
                 retry_context={
                     "mode": "generic",
-                    "problem": deepcopy(dict(problem)),
+                    "problem": deepcopy(dict(compiled_problem)),
                     "episode_id": episode_id,
                     "scope_id": scope_id,
                     "active_invalidators": list(active_invalidators),
@@ -803,6 +846,7 @@ def run_generic(
                     learned.get("fallback_blocked_effect_may_have_occurred") is True
                 ),
                 "learning_persistence_enabled": True,
+                "native_specialized_instance_count": len(native_specialized_instances),
                 "terminal_authority": False,
                 "capability_promotion_authority": False,
                 "terminal_credit_delta": 0,
@@ -819,7 +863,7 @@ def run_generic(
             kwargs["proposal_provider"] = proposal_provider
         if capability_expander is not None:
             kwargs["capability_expander"] = capability_expander
-        out = _v12_run(problem, repo_root=repo_root, kwargs=kwargs)
+        out = _v12_run(compiled_problem, repo_root=repo_root, kwargs=kwargs)
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
@@ -838,6 +882,7 @@ def run_generic(
             "fallback_used": False,
             "fallback_blocked_effect_may_have_occurred": False,
             "learning_persistence_enabled": False,
+            "native_specialized_instance_count": len(native_specialized_instances),
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -1084,6 +1129,7 @@ def run(
             scope_id=str(request.get("scope_id") or "unified-live-brain"),
             active_invalidators=request.get("active_invalidators") or (),
             known_absent_invalidators=request.get("known_absent_invalidators") or (),
+            native_specialized_instances=request.get("native_specialized_instances") or (),
             learn=request.get("learn", True) is not False,
             solver_kwargs=request.get("solver_kwargs") or {},
             proposal_provider=proposal_provider,
