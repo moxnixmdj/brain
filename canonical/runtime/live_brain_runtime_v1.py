@@ -261,14 +261,27 @@ def _replay_retry_context(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None,
+    state_path: str | Path | None = None,
 ) -> dict[str, Any]:
     if not isinstance(context, Mapping):
         return _fail("RETRY_CONTEXT_NOT_OBJECT")
     mode = str(context.get("mode") or "")
     if mode in {"repair_synthesis", "repair_cycle"}:
         return _fail("RETRY_CONTEXT_REPAIR_RECURSION_FORBIDDEN")
+
+    replay_context = deepcopy(dict(context))
+    # Exact obligation replay is the verifier for the repair, not a fresh repair
+    # opportunity. Disable the R3 control edge on this nested invocation so one
+    # observed failure can trigger at most one repair cycle.
+    replay_context["auto_repair"] = False
+    # Repair and replay must share the same durable learning state. Otherwise a
+    # custom-state live invocation can accidentally replay against the default
+    # state and fracture the compounding history.
+    if state_path is not None:
+        replay_context["state_path"] = str(state_path)
+
     return run(
-        deepcopy(dict(context)),
+        replay_context,
         repo_root=repo_root,
         information_provider=information_provider,
         proposal_provider=proposal_provider,
@@ -405,6 +418,7 @@ def execute_failure_repair_cycle(
             information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
+            state_path=path,
         )
         replay_pass = replay.get("pass") is True
         winner_components = []
