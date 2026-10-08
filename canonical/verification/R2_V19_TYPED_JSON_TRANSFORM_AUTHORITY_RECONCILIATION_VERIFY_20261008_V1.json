@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V19_TYPED_JSON_TRANSFORM_AUTHORITY_RECONCILIATION_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_BLOB_RECONCILIATION__ELEVEN_ROUTES__EIGHT_BOUNDED_FAMILIES__OPEN_WORLD_COVERAGE_STILL_OPEN__ZERO_CREDIT",
+  "merged_runtime_subject": {
+    "merge_commit": "e15fc946458e27396e4cde6c58ebb84adcc5a278",
+    "direct_runtime": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "5fae2670ece87b161abf251abf5b52e08c579851"
+    },
+    "typed_json_transform_runtime": {
+      "path": "canonical/runtime/r2_typed_json_transform_direct_adequacy_v1.py",
+      "git_blob_sha": "6c89b82321525689b27fd08b730a19567b864fe7"
+    },
+    "typed_json_transform_verification": {
+      "path": "canonical/verification/R2_TYPED_JSON_TRANSFORM_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+      "git_blob_sha": "8b560061f0e41b2c0587d872eceac75c2c006b9b"
+    }
+  },
+  "authority_subjects": {
+    "activation_v7": {
+      "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V7.json",
+      "git_blob_sha": "38768b4b9e09185e5889a34deddee782ce67be77"
+    },
+    "scheduler_v19": {
+      "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V19.json",
+      "git_blob_sha": "1f2e03f997f427be3137a90c5d5bfe3f91f3c582"
+    },
+    "current_r2": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "6777ad520e32e5f9af4ac1ed3d6e841003952c50"
+    },
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "6dda5c919296484b5dee078152c88f9384152dd1"
+    }
+  },
+  "reconciled_truth": {
+    "current_route_count": 11,
+    "exact_cell_count": 3,
+    "bounded_family_count": 8,
+    "newest_family": "DIRECT_ADEQUACY::TYPED_JSON_TRANSFORM_FAMILY_V1",
+    "general_control_mechanism_closed_as_adequacy_or_abstain": true,
+    "global_open_world_positive_action_coverage_complete": false,
+    "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY",
+    "single_live_primitive": "ESCAPE_POLICY_ADEQUACY"
+  },
+  "evidence": {
+    "direct_router_regression": "15_OF_15_PASS",
+    "new_family_plus_integration": "6_OF_6_PASS",
+    "source_mutation_falsifier_pass": true,
+    "live_jq_python_semantic_crosscheck": "2_OF_2_PASS",
+    "canonical_v18_markdown_pdf_verification_preserved": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GLOBAL_OPEN_WORLD_ADEQUACY_COVERAGE_IS_COMPLETE",
+    "NO_CLAIM_OBSERVABILITY_IS_COMPLETE",
+    "NO_CLAIM_ARBITRARY_JQ_FILTERS_ARE_COVERED",
+    "NO_CLAIM_EXACT_REGISTRY_PINNED_JQ_BINARY_WAS_REPLAYED_ON_THE_WARM_CARRIER",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
