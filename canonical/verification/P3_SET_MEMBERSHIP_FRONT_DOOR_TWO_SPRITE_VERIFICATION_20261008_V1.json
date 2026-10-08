@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_P3_SET_MEMBERSHIP_FRONT_DOOR_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_8_OF_8_ON_TWO_SPRITES__SUPPORT_V5_MEMBERSHIP_EXPOSED_THROUGH_REAL_CONTEXT_FRONT_DOOR__ZERO_TERMINAL_CREDIT",
+  "grounded_realization": {
+    "path": "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py",
+    "git_blob_sha": "dd0acc257ae5f68a41dfc13234d17cc527363d02"
+  },
+  "front_door": {
+    "path": "canonical/runtime/p3_real_context_v3_admission_v6.py",
+    "git_blob_sha": "2a99dcc3dc791177153f2cd0704cb0cfd1dc5ad1"
+  },
+  "tests": {
+    "path": "canonical/tests/test_p3_membership_frontdoor_v6.py",
+    "git_blob_sha": "3a583ddf3d173289f23880bec464ad700085058e"
+  },
+  "support_v5_verification": {
+    "path": "canonical/verification/SELECTED_SUPPORT_TRUTH_V5_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+    "git_blob_sha": "f3be817e37dae019a1d0c818c486d5a640433f0e"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "tests_passed": 8,
+      "tests_run": 8
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "tests_passed": 8,
+      "tests_run": 8
+    }
+  ],
+  "verified_behavior": [
+    "POSITIVE_SET_MEMBERSHIP_REQUIRED_CLAIM_REALIZED_WITH_PROVENANCE",
+    "NEGATIVE_SET_MEMBERSHIP_REQUIRED_CLAIM_REALIZED_WITH_PROVENANCE",
+    "CONFLICTING_MEMBERSHIP_FAILS_CLOSED",
+    "UNCHECKABLE_MEMBERSHIP_REMAINS_CLOSED",
+    "PRIOR_NUMERIC_V5_ROUTE_PRESERVED",
+    "PRIOR_STRUCTURAL_ROUTE_PRESERVED",
+    "NO_AUTHORITY_ESCALATION"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_PARAPHRASE_OR_LOGICAL_ENTAILMENT",
+    "NO_TEMPORAL_OR_CAUSAL_RELATION_CLOSURE",
+    "NO_GENERAL_P3_CLOSURE",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
