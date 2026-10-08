@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_P3_SELECTED_SEMANTIC_TRUTH_CERTIFICATE_V2_ACTIVATION_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_SELECTED_TRUTH_COVERAGE_EXTENSION__PRESERVES_V1_AND_ADDS_EXACT_CONTROLLED_DEONTIC_RULE_PRESENCE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "problem": "P3 V20 mechanically owns selected-predicate TRUE_FALSE_UNKNOWN control flow, but selected_semantic_truth_certificate_v1 calls source_aligned_semantic_proof_v6 directly. Brain already owns a source_aligned_deontic_extension_v1, so an explicit policy-changing MUST_MUST_NOT_SHALL_PROHIBITED rule can remain UNKNOWN only because the selected-truth adapter does not invoke the existing checker.",
+  "implementation": {
+    "runtime": "canonical/runtime/selected_semantic_truth_certificate_v2.py",
+    "tests": "canonical/tests/test_selected_semantic_truth_certificate_v2.py"
+  },
+  "reuses": [
+    {
+      "path": "canonical/runtime/selected_semantic_truth_certificate_v1.py",
+      "role": "V1_SOURCE_ALIGNED_BOOLEAN_TRUTH_INTERFACE_SEMANTICS_PRESERVED"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_deontic_extension_v1.py",
+      "role": "DELEGATES_V6_UNCHANGED_AND_ADDS_CONTROLLED_EXPLICIT_DEONTIC_RULE_CHECKING"
+    },
+    {
+      "path": "canonical/runtime/certified_deontic_rule_fragment_v1.py",
+      "role": "ONE_SIDED_EXACT_SOURCE_RULE_RECOGNIZER"
+    },
+    {
+      "path": "canonical/governance/DEONTIC_POLICY_ADEQUACY_AUTH_TRUTH_REPAIR_20261007_V1.json",
+      "role": "SEMANTIC_DEONTIC_ENTAILMENT_REMAINS_SEPARATE_FROM_POLICY_ADEQUACY"
+    }
+  ],
+  "theorem_candidate": {
+    "statement": "IF_THE_EXISTING_SOURCE_ALIGNED_DEONTIC_EXTENSION_ACCEPTS_EXACTLY_ONE_TARGET_DEONTIC_RULE_CLAIM_AND_RECOMPUTES_ITS_EXACT_SOURCE_BOUND_RELATION_SUBJECT_ACTION_AND_SCOPE__THEN_THE_POSITIVE_PREDICATE THAT_THIS_EXACT_DEONTIC_RULE_IS_PRESENT_IN_THE_BOUND_SOURCE_IS_TRUE.",
+    "negative_boundary": "FAILURE_TO_ACCEPT_THE_RULE_DOES_NOT_PROVE_THE_RULE_FALSE__MISMATCH_ABSENCE_REFERENCE_RESOLUTION_OR_OUT_OF_FRAGMENT_INPUT_RETURNS_UNKNOWN.",
+    "predicate_identity": "MINTED_FROM_EXACT_SOURCE_HASH_PLUS_CHECKER_PRODUCED_DEONTIC_RULE_ID_RELATION_SUBJECT_ACTION_SCOPE_AND_CONSTRAINT_ATOM__CALLER_ALIAS_NEVER_HAS_AUTHORITY."
+  },
+  "expected_causal_effect_if_verified": {
+    "closes_bounded_subregion": "P3_SELECTED_POLICY_CHANGING_SEMANTIC_PROOF_COVERAGE_FOR_EXPLICIT_CONTROLLED_DEONTIC_RULE_PRESENCE",
+    "shrinks": "GENERAL_CONFLICT_AND_NONFACTUAL_UNCERTAINTY_SELECTED_PREDICATE_RESIDUAL",
+    "still_open": [
+      "IMPLICIT_OR_REFERENCE_DEPENDENT_DEONTIC_MEANING",
+      "DOMAIN_MAPPING_AND_APPLICABILITY_NOT_PROVED_BY_THE_CONTROLLED_FRAGMENT",
+      "NEGATIVE_RULE_ABSENCE_WITHOUT_A_SCOPE_COMPLETE_SOURCE_CERTIFICATE",
+      "POLICY_ADEQUACY_AUTHENTICATION",
+      "UPSTREAM_SOURCE_AUTHORIZATION",
+      "NON_DEONTIC_SELECTED_PREDICATES_OUTSIDE_EXISTING_SOURCE_ALIGNED_PRIMITIVES",
+      "GENERAL_STRUCTURED_OR_MULTIMODAL_REALIZATION"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_CONFLICT_CLOSURE",
+    "NO_GENERAL_NATURAL_LANGUAGE_ENTAILMENT",
+    "NO_NEGATIVE_RELEVANCE_OR_NEGATIVE_RULE_INFERENCE_FROM_ABSENCE",
+    "NO_POLICY_ADEQUACY_FROM_DEONTIC_ENTAILMENT",
+    "NO_SOURCE_AUTHORIZATION_DB_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
