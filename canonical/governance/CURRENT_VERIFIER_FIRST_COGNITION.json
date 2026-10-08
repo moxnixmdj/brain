@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_VERIFIER_FIRST_COGNITION_POINTER_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE_PENDING_FRESH_REBASE_VERIFICATION",
+  "policy": {
+    "path": "canonical/governance/VERIFIER_FIRST_PROOF_CARRYING_COGNITION_20261008_V1.json"
+  },
+  "verifier_compiler": {
+    "path": "canonical/runtime/verifier_compiler_v1.py"
+  },
+  "proof_carrying_outcome": {
+    "path": "canonical/runtime/proof_carrying_outcome_v1.py"
+  },
+  "r2_controller": {
+    "path": "canonical/runtime/general_adequate_decision_controller_v1.py"
+  },
+  "r3_runtime": {
+    "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+  },
+  "live_runtime": {
+    "path": "canonical/runtime/live_brain_runtime_v1.py"
+  },
+  "core_law": "VERIFIER_FIRST__PROOF_CARRYING__NON_SELF_CERTIFYING"
+}
