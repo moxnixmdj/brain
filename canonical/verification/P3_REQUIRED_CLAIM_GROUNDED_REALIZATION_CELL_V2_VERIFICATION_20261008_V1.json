@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_P3_REQUIRED_CLAIM_GROUNDED_REALIZATION_CELL_V2_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_CARRIERS__10_OF_10_EACH__SUPPORT_V4_TO_REALIZED_OUTPUT__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/p3_required_claim_grounded_realization_cell_v2.py",
+      "git_blob_sha": "f930885eb443d0583c87bd06eb71c5d0d1004138"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p3_required_claim_grounded_realization_cell_v2.py",
+      "git_blob_sha": "39e120e7a8521ce2277a4f10216e574dfc8097e3"
+    },
+    "support_truth_v4": {
+      "path": "canonical/runtime/selected_support_truth_certificate_v4.py",
+      "git_blob_sha": "77fc8d17c3b40df5f0983657215c3cd32acf2649"
+    },
+    "grounded_realizer": {
+      "path": "canonical/runtime/synthesis_grounded_expression_ir_v1.py",
+      "git_blob_sha": "0709b7d43a069eaa9eb3240df28789a9107a36db"
+    }
+  },
+  "primary_execution": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "result": {
+      "pass": true,
+      "passed": 10,
+      "total": 10
+    }
+  },
+  "independent_execution": {
+    "provider": "SPRITES",
+    "sprite": "h100-real-image-v1",
+    "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+    "result": {
+      "pass": true,
+      "passed": 10,
+      "total": 10
+    }
+  },
+  "verified_effects": [
+    "EXACT_DECIMAL_AT_LEAST_CLAIM_REALIZED_WITH_SUPPORTING_PROVENANCE",
+    "EXACT_DECIMAL_BETWEEN_CLAIM_REALIZED_WITH_SUPPORTING_PROVENANCE",
+    "NUMERIC_FALSE_CLAIM_FAILS_INSTEAD_OF_ASSERTING",
+    "NUMERIC_NONNUMERIC_EVIDENCE_RETURNS_UNKNOWN",
+    "EXACT_ATTESTATION_REGRESSION_PRESERVED",
+    "SOURCE_DECLARED_EQUIVALENCE_REGRESSION_PRESERVED",
+    "ZERO_SUPPORT_REQUIRED_CLAIM_FAILS_EXPLICITLY",
+    "IRRELEVANT_PARSEABLE_EVIDENCE_NOT_CITED",
+    "OPTIONAL_CLAIM_REJECTED",
+    "NO_AUTHORITY_ESCALATION"
+  ],
+  "hard_nonclaims": [
+    "NO_OPTIONAL_RELEVANCE_WITHOUT_EXPLICIT_WEIGHTS",
+    "NO_GENERAL_UNCERTAINTY_REALIZATION",
+    "NO_UNITS_OR_DIMENSIONAL_ANALYSIS",
+    "NO_GENERAL_NLI",
+    "NO_SOURCE_AUTHORIZATION",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
