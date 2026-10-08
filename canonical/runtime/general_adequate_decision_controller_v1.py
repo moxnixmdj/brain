@@ -30,6 +30,7 @@ from canonical.runtime.r2_existing_policy_cover_observation_reuse_v1 import (
     discover as discover_existing_cover_observation,
 )
 from canonical.runtime import r2_grounded_candidate_policy_frontier_v1 as grounded_policy_frontier
+from canonical.runtime import goal_compiler
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_CONTROLLER_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -59,6 +60,79 @@ def _digest(value: Any) -> str:
 def _git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
     return sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+
+
+BOUND_POLICY_PREFIX = "BOUND_CAPABILITY_POLICY::"
+
+
+def _compile_selected_grounded_capability_execution(
+    *,
+    goal: str,
+    selected_policy_id: str,
+    repo_root: Path,
+) -> dict[str, Any]:
+    if not selected_policy_id.startswith(BOUND_POLICY_PREFIX):
+        return {
+            "pass": False,
+            "status": "NOT_APPLICABLE__NOT_BOUND_CAPABILITY_POLICY",
+        }
+    capability_id = selected_policy_id[len(BOUND_POLICY_PREFIX):]
+    try:
+        registry_path = repo_root / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        registry_doc = json.loads(registry_path.read_text(encoding="utf-8"))
+        registry = registry_doc.get("capabilities")
+        if not isinstance(registry, dict):
+            raise DecisionControllerError("BOUND_CAPABILITY_REGISTRY_INVALID")
+        registry = goal_compiler._platform_admissible_registry(registry)
+        if capability_id not in registry:
+            return {
+                "pass": False,
+                "status": "UNRESOLVED__SELECTED_BOUND_CAPABILITY_NOT_PLATFORM_ADMISSIBLE",
+                "capability_id": capability_id,
+            }
+        compiled = goal_compiler.compile_goal(goal, registry, repo_root)
+        if not isinstance(compiled, Mapping):
+            raise DecisionControllerError("GROUNDED_EXECUTION_COMPILER_NOT_OBJECT")
+        if compiled.get("selected_capability") != capability_id:
+            raise DecisionControllerError(
+                "GROUNDED_EXECUTION_SELECTED_CAPABILITY_MISMATCH"
+            )
+        if compiled.get("schema") != "PROJECT_BRAIN_COMPILED_CAPABILITY_PROBLEM_V1":
+            raise DecisionControllerError("GROUNDED_EXECUTION_SCHEMA_INVALID")
+        execution_problem = deepcopy(dict(compiled))
+        compiler_path = repo_root / "canonical/runtime/goal_compiler.py"
+        return {
+            "pass": True,
+            "status": "PASS__SELECTED_GROUNDED_CAPABILITY_EXECUTION_BOUND_BY_CONSTRUCTION",
+            "execution_problem": execution_problem,
+            "policy_execution_binding": {
+                "pass": True,
+                "status": "PASS__BOUND_CAPABILITY_POLICY_TO_COMPILER_REALIZATION_BY_CONSTRUCTION",
+                "policy_id": selected_policy_id,
+                "capability_id": capability_id,
+                "execution_problem_sha256": _digest(execution_problem),
+                "registry_git_blob_sha": _git_blob_sha(registry_path),
+                "goal_compiler_git_blob_sha": _git_blob_sha(compiler_path),
+                "binding_authority": "BRAIN_OWNED_DETERMINISTIC_SELECTED_CAPABILITY_IDENTITY",
+                "semantic_truth_authority": False,
+                "goal_satisfaction_authority": False,
+                "terminal_authority": False,
+            },
+        }
+    except goal_compiler.GoalCompilationFailure as exc:
+        return {
+            "pass": False,
+            "status": "UNRESOLVED__SELECTED_GROUNDED_CAPABILITY_INPUT_BINDING_REQUIRED",
+            "reason": str(exc),
+            "capability_id": capability_id,
+        }
+    except Exception as exc:
+        return {
+            "pass": False,
+            "status": "FAIL_CLOSED__GROUNDED_CAPABILITY_EXECUTION_BINDING",
+            "reason": type(exc).__name__ + ":" + str(exc),
+            "capability_id": capability_id,
+        }
 
 
 def _bound_json(
@@ -202,6 +276,7 @@ def _bootstrap_opaque_decision_context(
             "cegar_problem": {
                 "decision_basis": opaque_atoms,
                 "formal_source_constraints": [],
+                "raw_goal_sha256": sha256(goal.encode("utf-8")).hexdigest(),
             },
             "truth_payloads_by_discriminator_id": {},
             "truth_payloads_by_predicate_id": {},
@@ -1034,7 +1109,16 @@ def run(
                 problem["policy_conditions"] = deepcopy(
                     dict(grounded_frontier["policy_conditions"])
                 )
-                problem["policy_adequacy_bindings"] = {}
+                exact_origin_bindings = grounded_frontier.get(
+                    "exact_origin_adequacy_bindings", {}
+                )
+                if not isinstance(exact_origin_bindings, Mapping):
+                    raise DecisionControllerError(
+                        "GROUNDED_EXACT_ORIGIN_ADEQUACY_BINDINGS_INVALID"
+                    )
+                problem["policy_adequacy_bindings"] = deepcopy(
+                    dict(exact_origin_bindings)
+                )
                 opaque_bootstrap_binding["decision_payload_sha256"] = _digest(
                     decision_payload
                 )
@@ -1436,6 +1520,30 @@ def run(
             raise DecisionControllerError("P3_SELECTED_POLICY_ID_INVALID")
 
         execution_problem = request.get("execution_problem")
+        constructed_grounded_execution = None
+        if execution_problem is None and selected_policy_id.startswith(
+            BOUND_POLICY_PREFIX
+        ):
+            constructed_grounded_execution = (
+                _compile_selected_grounded_capability_execution(
+                    goal=goal,
+                    selected_policy_id=selected_policy_id,
+                    repo_root=root,
+                )
+            )
+            if str(constructed_grounded_execution.get("status") or "").startswith(
+                "FAIL_CLOSED"
+            ):
+                raise DecisionControllerError(
+                    str(constructed_grounded_execution.get("status"))
+                    + ":"
+                    + str(constructed_grounded_execution.get("reason") or "UNKNOWN")
+                )
+            if constructed_grounded_execution.get("pass") is True:
+                execution_problem = constructed_grounded_execution[
+                    "execution_problem"
+                ]
+
         if execution_problem is None:
             rendered = decision.get("rendered_text")
             if not isinstance(rendered, str) or not rendered:
@@ -1509,12 +1617,20 @@ def run(
 
         if not isinstance(execution_problem, Mapping):
             raise DecisionControllerError("EXECUTION_PROBLEM_NOT_OBJECT")
-        execution_binding = _authenticate_policy_execution_binding(
-            request.get("policy_execution_binding"),
-            selected_policy_id=selected_policy_id,
-            execution_problem=execution_problem,
-            repo_root=root,
-        )
+        if (
+            isinstance(constructed_grounded_execution, Mapping)
+            and constructed_grounded_execution.get("pass") is True
+        ):
+            execution_binding = deepcopy(
+                dict(constructed_grounded_execution["policy_execution_binding"])
+            )
+        else:
+            execution_binding = _authenticate_policy_execution_binding(
+                request.get("policy_execution_binding"),
+                selected_policy_id=selected_policy_id,
+                execution_problem=execution_problem,
+                repo_root=root,
+            )
         if execution_binding.get("pass") is not True:
             return _open(
                 str(
