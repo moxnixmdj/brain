@@ -1874,7 +1874,7 @@
     },
     "runtime": {
       "path": "canonical/runtime/live_capability_ownership_v1.py",
-      "git_blob_sha": "6ae0622da537a79a40e9f90c9eee4833791d861f"
+      "git_blob_sha": "2e09b9fdbf2095f9723b64f1afd321e67be37941"
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
