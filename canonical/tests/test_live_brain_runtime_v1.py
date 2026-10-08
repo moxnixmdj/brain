@@ -859,6 +859,22 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "R2_GROUNDED_BOUND_POLICY_FRONTIER_ADEQUACY_GAP",
         )
 
+    def test_non_policy_repair_target_is_not_rewritten_by_policy_concretizer(self):
+        targets, source = brain._concretize_policy_adequacy_repair_target(
+            "repair.capability.available",
+            {
+                "selected_policy_id": "BOUND_CAPABILITY_POLICY::irrelevant",
+                "grounded_bound_policy_candidates": [
+                    {
+                        "policy_id": "BOUND_CAPABILITY_POLICY::irrelevant",
+                        "capability_id": "irrelevant",
+                    }
+                ],
+            },
+        )
+        self.assertEqual(targets, ["repair.capability.available"])
+        self.assertEqual(source, "REPAIR_CLASS_META_EFFECT")
+
     def test_non_grounded_policy_gap_keeps_generic_meta_effect(self):
         targets, source = brain._concretize_policy_adequacy_repair_target(
             "repair.policy_adequacy_cover.available",
