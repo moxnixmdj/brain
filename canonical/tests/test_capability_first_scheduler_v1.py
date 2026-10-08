@@ -231,6 +231,30 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         self.assertEqual(out["ranked"][0]["eligibility"], "ELIGIBLE")
         self.assertEqual(out["ranked"][0]["priority_score"], "1/2")
 
+    def test_live_entrypoint_reads_current_authority_and_enforces_gate(self):
+        out = s.rank_live_work([
+            {
+                "work_id": "LIVE_GENERIC_SIDEQUEST",
+                "work_type": "CAPABILITY_BUILD",
+                "expected_capability_gain_lcb": 999,
+                "expected_efficiency_gain_lcb": 999,
+                "expected_reliability_gain_lcb": 999,
+                "reuse_breadth_lcb": 999,
+                "generalization_lcb": 999,
+                "success_probability_lcb": "1",
+                "wall_clock_cost_ub": 1,
+                "compute_cost_ub": 1,
+                "memory_cost_ub": 1,
+                "complexity_cost_ub": 1,
+            }
+        ])
+        self.assertGreater(out["checkpoint_open_obligation_count"], 0)
+        self.assertTrue(out["load_bearing_primary_gate_active"])
+        self.assertEqual(
+            out["ranked"][0]["eligibility"],
+            "DEMOTED_NON_LOAD_BEARING_WHILE_OPEN_OBLIGATIONS",
+        )
+
     def test_verified_reusable_candidate_enters_pareto_frontier(self):
         incumbent = {
             "capability_id": "old",
