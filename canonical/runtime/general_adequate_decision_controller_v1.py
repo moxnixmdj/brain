@@ -29,6 +29,7 @@ from canonical.runtime.r2_authenticated_adequacy_authority_registry_v1 import (
 from canonical.runtime.r2_existing_policy_cover_observation_reuse_v1 import (
     discover as discover_existing_cover_observation,
 )
+from canonical.runtime import r2_grounded_candidate_policy_frontier_v1 as grounded_policy_frontier
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_CONTROLLER_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -999,12 +1000,44 @@ def run(
                 }
 
         opaque_bootstrap_binding = None
+        grounded_frontier = None
         if not isinstance(decision_payload, Mapping):
             decision_payload, opaque_bootstrap_binding = _bootstrap_opaque_decision_context(
                 task_id=task_id,
                 goal=goal,
                 raw_contract=raw_contract,
             )
+            grounded_frontier = grounded_policy_frontier.propose(
+                goal,
+                repo_root=root,
+            )
+            if grounded_frontier.get("status") == "FAIL_CLOSED":
+                raise DecisionControllerError(
+                    "GROUNDED_POLICY_FRONTIER_FAIL_CLOSED:"
+                    + str(grounded_frontier.get("reason") or "UNKNOWN")
+                )
+            if grounded_frontier.get("pass") is True:
+                loop = decision_payload.get("bound_relevance_cegar_loop")
+                if not isinstance(loop, dict):
+                    raise DecisionControllerError(
+                        "OPAQUE_BOOTSTRAP_BOUND_RELEVANCE_LOOP_INVALID"
+                    )
+                problem = loop.get("cegar_problem")
+                if not isinstance(problem, dict):
+                    raise DecisionControllerError(
+                        "OPAQUE_BOOTSTRAP_CEGAR_PROBLEM_INVALID"
+                    )
+                if problem.get("policy_conditions") not in (None, {}):
+                    raise DecisionControllerError(
+                        "OPAQUE_BOOTSTRAP_POLICY_FRONTIER_ALREADY_PRESENT"
+                    )
+                problem["policy_conditions"] = deepcopy(
+                    dict(grounded_frontier["policy_conditions"])
+                )
+                problem["policy_adequacy_bindings"] = {}
+                opaque_bootstrap_binding["decision_payload_sha256"] = _digest(
+                    decision_payload
+                )
         working = deepcopy(dict(decision_payload))
 
         if opaque_bootstrap_binding is not None and (
