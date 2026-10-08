@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PROOF_CARRYING_DOMINANCE_SPRITE_VERIFICATION_V1",
   "date": "2026-10-08",
-  "status": "INDEPENDENT_REMOTE_REPLAY_PASS__18_OF_18__ZERO_TERMINAL_CREDIT",
+  "status": "INDEPENDENT_REMOTE_REPLAY_PASS__22_OF_22__ZERO_TERMINAL_CREDIT",
   "subject": "AA_BRIEFCASE_CURRENT_EPOCH_PROOF_CARRYING_DOMINANCE_ROUTE",
   "executor": {
     "kind": "SPRITE_REMOTE_ISOLATED_RUNTIME",
@@ -12,7 +12,7 @@
   "source_blobs": {
     "dominance_runtime": {
       "path": "canonical/runtime/aa_briefcase_scope_complete_dominance_v1.py",
-      "git_blob_sha": "4afbcae9d8356a0b3ec93ba323a1a795fee17748"
+      "git_blob_sha": "fc62cc86598e304a5dafc8823b8ca43908bd1fc1"
     },
     "disjunctive_bridge_v3": {
       "path": "canonical/runtime/aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
@@ -24,7 +24,7 @@
     },
     "dominance_tests": {
       "path": "canonical/tests/test_aa_briefcase_scope_complete_dominance_v1.py",
-      "git_blob_sha": "ccbc9d3006e07a2f0b77aa80f7d65b59aeff597a"
+      "git_blob_sha": "c49b40319863f0c7f3bfee0ab683834e8f679c8c"
     },
     "bridge_v3_tests": {
       "path": "canonical/tests/test_aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
@@ -45,8 +45,8 @@
   },
   "execution": {
     "command": "python3 -m unittest -v canonical.tests.test_aa_briefcase_scope_complete_dominance_v1 canonical.tests.test_aa_briefcase_current_epoch_noninferiority_bridge_v3 canonical.tests.test_aa_briefcase_current_epoch_result_bridge_v2",
-    "tests_run": 18,
-    "tests_passed": 18,
+    "tests_run": 22,
+    "tests_passed": 22,
     "failures": 0,
     "errors": 0,
     "result": "OK"
@@ -60,6 +60,10 @@
     "PAIRWISE U ROUTE OPUS_WIN IS REJECTED",
     "BINARY RUBRIC U ROUTE REJECTS BRAIN_FAIL WHEN OPUS_PASS",
     "BINARY RUBRIC U ROUTE ACCEPTS BRAIN_FAIL OPUS_FAIL AS NONINFERIOR",
+    "ACTUAL OWNER-ASSIGNED JUDGE MUST BE VERIFIED",
+    "ALL-BOUND-PANEL-JUDGES COVERAGE REQUIRES EXACTLY THREE PAIRWISE OUTCOMES",
+    "ALL-BOUND-PANEL-JUDGES PAIRWISE COVERAGE REJECTS ONE OPUS_WIN",
+    "ALL-BOUND-PANEL-JUDGES PAIRWISE COVERAGE PASSES WHEN ALL THREE ARE BRAIN_WIN_OR_TIE",
     "MATCHED CURRENT-EPOCH ELO BELOW 1807 FAILS",
     "MATCHED CURRENT-EPOCH ELO AT 1807 PASSES",
     "ONE DIRECT-DOMINANCE RESULT MULTIPLEXES BOTH AA-BRIEFCASE PREDICATE ALIASES",
