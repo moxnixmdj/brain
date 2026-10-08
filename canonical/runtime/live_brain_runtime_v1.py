@@ -301,6 +301,7 @@ def run_generic(
     episode_id: str = "episode",
     scope_id: str = "unified-live-brain",
     active_invalidators: Sequence[str] = (),
+    known_absent_invalidators: Sequence[str] = (),
     learn: bool = True,
     solver_kwargs: Mapping[str, Any] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
