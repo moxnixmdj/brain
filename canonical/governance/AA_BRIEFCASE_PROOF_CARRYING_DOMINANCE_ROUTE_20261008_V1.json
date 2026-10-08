@@ -14,8 +14,12 @@
   },
   "source_bindings": {
     "current_target": {
-      "path": "canonical/evidence/AA_BRIEFCASE_OPUS55_CURRENT_OWNER_TARGET_20261007_V1.json",
-      "git_blob_sha": "5433034b59cbc0ee9494accc9f5bf59a348b027d"
+      "path": "canonical/evidence/AA_BRIEFCASE_OPUS55_CURRENT_OWNER_TARGET_20261008_V2.json",
+      "git_blob_sha": "258f8d55dce3f2a664db7a95012e9cdc08886552"
+    },
+    "current_grading_protocol": {
+      "path": "canonical/evidence/AA_BRIEFCASE_CURRENT_GRADING_PROTOCOL_20261008_V1.json",
+      "git_blob_sha": "5c77f294e09d4933e3a3175c46af225b414f4702"
     },
     "current_scalar_bridge_v2": {
       "path": "canonical/runtime/aa_briefcase_current_epoch_result_bridge_v2.py",
@@ -35,20 +39,20 @@
     },
     "dominance_runtime": {
       "path": "canonical/runtime/aa_briefcase_scope_complete_dominance_v1.py",
-      "git_blob_sha": "76234d93c3961c223e963f26421ae556c16e2090"
+      "git_blob_sha": "f7db24d0f4e89bb19eb489463092849fd5e572f7"
     },
     "disjunctive_bridge_v3": {
       "path": "canonical/runtime/aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
-      "git_blob_sha": "55b6a8f944c5d8f662b07c94a2f3af34e24e908e"
+      "git_blob_sha": "d810398d345d46230cdd695a376d041f58fe6809"
     },
     "tests": [
       {
         "path": "canonical/tests/test_aa_briefcase_scope_complete_dominance_v1.py",
-        "git_blob_sha": "7152467c1d1df2d7293cef597447eb309f7a558d"
+        "git_blob_sha": "d25ecd7b315befd2e0f7e047642d0d7b5706b64a"
       },
       {
         "path": "canonical/tests/test_aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
-        "git_blob_sha": "c481b7fd891ac058ad4cf6ae864930a2801c4f91"
+        "git_blob_sha": "9bca3033620e8988ea7ea29ad36b8286c373f0de"
       }
     ]
   },
@@ -79,13 +83,14 @@
       "EXACT_CHECK_ID_SET_ROOT",
       "NO_DUPLICATE_CHECK_IDS",
       "EVERY_PRIVATE TASK REPRESENTED",
-      "OWNER_OR_INDEPENDENT ATTESTATION THAT NO LOAD_BEARING CHECK IS OMITTED"
+      "OWNER_OR_INDEPENDENT ATTESTATION THAT NO LOAD_BEARING CHECK IS OMITTED",
+      "EXACT CURRENT GRADING PROTOCOL MANIFEST BINDING INCLUDING RUBRIC AND PAIRWISE JUDGE PANELS"
     ],
     "reason": "WITHOUT COMPLETE PRIVATE SCOPE COVERAGE A DIRECT DOMINANCE CERTIFICATE COULD SILENTLY IGNORE THE ONE CHECK WHERE OPUS WINS"
   },
   "theorem": {
     "premises": [
-      "THE CERTIFICATE IS BOUND TO THE SAME CURRENT OWNER AA_BRIEFCASE_V1_1 EPOCH AND OPUS55 MAX DEFAULT-FALLBACK REFERENCE",
+      "THE CERTIFICATE IS BOUND TO THE SAME CURRENT OWNER AA_BRIEFCASE_V1_1 EPOCH OPUS55 MAX DEFAULT-FALLBACK REFERENCE AND CURRENT GRADING-PROTOCOL MANIFEST",
       "THE PRIVATE TASK AND LOAD-BEARING CHECK POPULATION IS COMPLETE",
       "EVERY LOAD-BEARING CHECK IS CERTIFIED BY EXACTLY ONE SOUND E M OR U ROUTE",
       "NO CHECK CERTIFIES OPUS STRICTLY ABOVE BRAIN"
@@ -103,6 +108,7 @@
   "remaining_minimum_missing_fact": "ONE AUTHENTICATED CURRENT-EPOCH SCOPE-COMPLETE PRIVATE AA_BRIEFCASE RECEIPT PROVIDING THE PRIVATE POPULATION ROOTS AND THE E_M_U PER-CHECK CERTIFICATES OR AN OWNER-EQUIVALENT DIRECT DOMINANCE ATTESTATION",
   "fail_closed_falsifiers": [
     "STALE OR DIFFERENT EPOCH",
+    "CURRENT GRADING PROTOCOL MANIFEST DRIFT",
     "PRIVATE TASK POPULATION ROOT DRIFT",
     "CHECK SET ROOT DRIFT",
     "FEWER THAN 91 UNIQUE TASKS REPRESENTED",
