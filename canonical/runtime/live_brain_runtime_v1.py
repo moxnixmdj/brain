@@ -1207,9 +1207,29 @@ def observe_runtime_outcome(
 ) -> dict[str, Any] | None:
     """Public fail-closed observation bridge for canonical fabric surfaces.
 
-    This exposes R3 observation without exposing promotion authority. Callers
-    should pass a bounded structural summary, not raw secrets or opaque payloads.
+    Direct Fabric surfaces are invocations of already-owned capabilities. A
+    successful bounded structural summary that carries no episode / skill evidence
+    therefore records telemetry without creating fictitious adapter work. Failures
+    still enter the normal causal repair path.
     """
+    if not learn or not isinstance(out, Mapping):
+        return None
+    if out.get("pass") is True and str(surface).startswith("UNIFIED_FABRIC_DIRECT_"):
+        learning_keys = {
+            "current_episode_verified",
+            "current_episode",
+            "skill_candidate",
+            "verified_executable_skill",
+            "verified_skill_reuse_authorized",
+        }
+        if not any(key in out for key in learning_keys):
+            learning = _learning_module()
+            path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
+            return learning.record_owned_direct_success_observation(
+                out,
+                surface=surface,
+                state_path=path,
+            )
     return _observe_runtime_outcome(
         out,
         state_path=state_path,

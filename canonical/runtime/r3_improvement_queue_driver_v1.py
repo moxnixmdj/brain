@@ -84,6 +84,9 @@ SUCCESS_LEARNING_FRONTIER_PATHS = (
 FRONTIER_EXPANSION_KIND = "EXPAND_SUCCESS_VERIFICATION_FRONTIER"
 FRONTIER_EXPANSION_PRIORITY = 35
 
+DIRECT_OWNED_OBSERVATION_SCHEMA = "PROJECT_BRAIN_R3_DIRECT_SURFACE_OBSERVATION_V1"
+DIRECT_OWNED_SURFACE_PREFIX = "UNIFIED_FABRIC_DIRECT_"
+
 
 def _enqueue_success_verification_frontier_expansion(
     state: dict[str, Any],
@@ -516,6 +519,85 @@ def _reactivate_parked_successes(
         "reopened_work_ids": sorted(reopened),
         "resolved_frontier_handoff_work_ids": sorted(resolved_frontier_handoffs),
     }
+
+def _resolve_legacy_direct_owned_success_no_delta(
+    work: Mapping[str, Any],
+    *,
+    state_path: str | Path,
+) -> dict[str, Any] | None:
+    """Retire legacy direct-success adapter work that never contained learning evidence.
+
+    Older canonical Fabric versions recorded bounded direct-capability success as a
+    generic success observation, which queued ADAPT_SUCCESS work despite stripping
+    replay and proof material. Those records are executions of already-owned direct
+    surfaces, not evidence of a new executable capability. Resolve them before
+    same-evidence backoff can hide them forever.
+    """
+    if str(work.get("kind") or "") != "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE":
+        return None
+    payload = work.get("payload")
+    if not isinstance(payload, Mapping):
+        return None
+    if payload.get("proof_available") is True or payload.get("replayable") is True:
+        return None
+    observation_id = str(payload.get("observation_id") or "").strip()
+    if not observation_id:
+        return None
+
+    state = learning.load_state(state_path)
+    observations = state.get("observations", {})
+    queue = state.get("improvement_queue", {})
+    observation = (
+        observations.get(observation_id)
+        if isinstance(observations, Mapping)
+        else None
+    )
+    wid = str(work.get("work_id") or "").strip()
+    row = queue.get(wid) if isinstance(queue, Mapping) else None
+    if not isinstance(observation, dict) or not isinstance(row, dict):
+        return None
+    surface = str(observation.get("surface") or "")
+    if (
+        observation.get("schema") != DIRECT_OWNED_OBSERVATION_SCHEMA
+        or not surface.startswith(DIRECT_OWNED_SURFACE_PREFIX)
+        or observation.get("proof_capsule") is not None
+        or observation.get("replay_capsule") is not None
+        or row.get("status") != "PENDING"
+    ):
+        return None
+
+    row["status"] = "RESOLVED"
+    row["resolved_by"] = "DIRECT_OWNED_SUCCESS_NO_NEW_EXECUTABLE_CAPABILITY_EVIDENCE"
+    row["resolved_without_promotion"] = True
+    observation["learning_disposition"] = (
+        "NO_NEW_EXECUTABLE_CAPABILITY_EVIDENCE_FROM_OWNED_DIRECT_SURFACE"
+    )
+    observation["learning_disposition_reason"] = (
+        "LEGACY_DIRECT_SURFACE_SUCCESS_CONTAINED_NO_EPISODE_SKILL_REPLAY_OR_PROOF_EVIDENCE"
+    )
+    observation["frontier_expansion_required"] = False
+    observation["permanent_nonlearnability_claimed"] = False
+    observation["existing_capability_authority_unchanged"] = True
+    observation["legacy_adapter_debt_retired"] = True
+    learning._refresh_stats(state)
+    learning._write_state(state, state_path)
+    return {
+        "schema": SCHEMA,
+        "status": (
+            "IMPROVEMENT_RESOLVED__LEGACY_DIRECT_OWNED_SUCCESS__"
+            "NO_NEW_EXECUTABLE_CAPABILITY_EVIDENCE"
+        ),
+        "pass": True,
+        "progress": False,
+        "disposition_recorded": True,
+        "work_id": wid,
+        "observation_id": observation_id,
+        "resolved_without_promotion": True,
+        "frontier_expansion_required": False,
+        "permanent_nonlearnability_claimed": False,
+        "terminal_authority": False,
+    }
+
 
 def _episode_pools(
     state: Mapping[str, Any],
@@ -1264,6 +1346,15 @@ def advance_once(
     for work in pending:
         kind = str(work.get("kind") or "")
         wid = str(work.get("work_id") or "")
+        legacy_direct = _resolve_legacy_direct_owned_success_no_delta(
+            work,
+            state_path=state_path,
+        )
+        if legacy_direct is not None:
+            return {
+                **legacy_direct,
+                "blockers_skipped": blockers,
+            }
         if _frontier_acquisition_attempt_consumed(
             work,
             provider_id=verification_frontier_acquisition_provider_id,
