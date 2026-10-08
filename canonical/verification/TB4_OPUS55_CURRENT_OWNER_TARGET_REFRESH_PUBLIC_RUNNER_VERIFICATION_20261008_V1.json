@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_OPUS55_CURRENT_OWNER_TARGET_REFRESH_PUBLIC_RUNNER_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_OWNER_PDF_BYTES_SECTION_8_5_AND_THRESHOLD_ARITHMETIC_VERIFIED__ZERO_ACCEPTANCE_CREDIT",
+  "subject": {
+    "brain_pull_request": 3148,
+    "candidate_path": "canonical/evidence/TB4_OPUS55_CURRENT_OWNER_TARGET_REFRESH_20261008_V1.json",
+    "target_predicate": "CODING_TB4_GE_66_4",
+    "historical_frozen_value_percent": 66.4,
+    "candidate_current_owner_detailed_value_percent": 66.36
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2427,
+    "branch": "verify-tb4-opus55-target-precision-20261008-v1",
+    "verifier_commit": "04d9ad29e898b78eb2ba2486d6a7762319a8f69f",
+    "pull_request_merge_ref": "a6d4d808f121b373407329588f112d09810d1879",
+    "workflow_name": "Verify TB4 Opus 5.5 target precision",
+    "workflow_run_id": 37746540483,
+    "workflow_run_number": 3,
+    "workflow_job_id": 113209248006,
+    "conclusion": "success",
+    "runner": "ubuntu-24.04"
+  },
+  "owner_source": {
+    "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+    "sha256": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378",
+    "section": "8.5 Terminal-Bench 4.0"
+  },
+  "verified_owner_section_facts": {
+    "task_count": 66,
+    "opus55_score_percent": 66.36,
+    "trials_per_task": 5,
+    "total_trials": 330,
+    "safeguards_enabled": true,
+    "fallback_requests_fraction": 0.025,
+    "fallback_affected_trial_fraction": 0.10,
+    "agent_harness": "Claude Code --bare",
+    "reasoning_effort": "xhigh",
+    "sandbox_provider_caveat_preserved": true,
+    "section_statement_about_sandboxing": "THE_CHOICE_OF_SANDBOXING_PROVIDER_MIGHT_STILL_BE_A_CONFOUNDING_FACTOR_IN_A_FEW_TASKS_BUT_IS_EXPECTED_TO_PLAY_A_SIGNIFICANTLY_SMALLER_ROLE_THAN_IN_PREVIOUS_VERSIONS"
+  },
+  "verified_arithmetic": {
+    "successes_218_percent": 66.06060606060606,
+    "successes_219_percent": 66.36363636363636,
+    "successes_220_percent": 66.66666666666667,
+    "minimum_successes_for_raw_ge_owner_detailed_66_36": 219,
+    "minimum_successes_for_strict_raw_ge_66_4": 220,
+    "round_219_to_2_decimals": 66.36,
+    "round_219_to_1_decimal": 66.4
+  },
+  "adjudication": {
+    "owner_source_precision_fact": "PROVED",
+    "owner_source_byte_identity": "PROVED",
+    "219_SUCCESS_ARITHMETIC_FOR_66_36": "PROVED",
+    "historical_66_4_provenance": "PRESERVED",
+    "current_matched_target_promotion": "NOT_YET_CANONICAL__REQUIRES_AUTHORITY_RECOMPILE_AND_COMPARABILITY_ADJUDICATION",
+    "tb4_score": "NOT_RUN",
+    "acceptance_predicate": "NOT_PROVED"
+  },
+  "comparability_residual": {
+    "reason": "THE_OWNER_SECTION_EXPLICITLY_NAMES_CLAUDE_CODE_BARE_XHIGH_AND_NOTES_SANDBOX_PROVIDER_CAN_STILL_CONFOUND_A_FEW_TASKS",
+    "required_before_scalar_promotion": [
+      "PRESERVE_THE_SAME_FROZEN_66_TASK_TB4_4_0_POPULATION_AND_BINARY_REWARD_SCORING",
+      "PROVE_THE_BRAIN_EXECUTION_ROUTE_IS_COMPARABLE_ENOUGH_UNDER_THE_FROZEN_ACCEPTANCE_PROTOCOL",
+      "DO_NOT_INFER_AGENT_SCAFFOLD_EQUIVALENCE_FROM_SHARED_HARBOR_REWARD_SEMANTICS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_TB4_RESULT",
+    "NO_CODING_TB4_GE_66_4_PROMOTION",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_ANTHROPIC_INTERNAL_SANDBOX_EQUALS_BUILDKITE_OR_OTHER_BRAIN_CARRIER",
+    "NO_CLAIM_CLAUDE_CODE_BARE_EQUALS_THE_BRAIN_AGENT_CONFIGURATION",
+    "NO_TERMINAL_CASES_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
