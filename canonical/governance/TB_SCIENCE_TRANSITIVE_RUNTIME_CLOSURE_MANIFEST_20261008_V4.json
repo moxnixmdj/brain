@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_V4",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_CURRENT_14_FILE_CLOSURE__EXPLICIT_OUTPUT_DIRECTIVE_REPAIR_ONLY__ZERO_BENCHMARK_REPLAY__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V3.json",
+    "git_blob_sha": "5c03f885c747e921265da4934783cf107d7de641"
+  },
+  "delta": {
+    "changed_runtime_files": [
+      "canonical/runtime/harbor_science_agent_v1.py"
+    ],
+    "old_agent_git_blob_sha": "99d6ba6edcfad425e4cb940e5b7b2ccd99f6cdab",
+    "new_agent_git_blob_sha": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "semantic_change": "EXPLICIT_ABSOLUTE_FILE_OUTPUT_DIRECTIVES_BECOME_BRAIN_MANDATED_DELIVERABLES__ORDINARY_INPUT_PATH_REFERENCES_REMAIN_NONOUTPUT",
+    "planner_unchanged_git_blob_sha": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "other_13_closure_files_unchanged": true
+  },
+  "causal_basis": {
+    "rank11_slot": "terminal-bench-science/supraglacial-lake-classification::trial-0",
+    "rank11_workflow_run_id": 37722244972,
+    "observed_failure": "VERIFIER_REACHED__REQUIRED_/results/predictions.csv_NOT_PRODUCED",
+    "controller_trace_fact": "RAW_TASK_REQUIRED_OBLIGATION_COUNT_17__BRAIN_MANDATED_DELIVERABLES_EMPTY__MATERIAL_REQUIREMENTS_ONLY_labeling_protocol.md",
+    "public_instruction_blob": "f7badfc9f0b068dd282b7eb92f482471e8c7afc5",
+    "public_task_toml_blob": "ad69f04ab61cc2108a48707ab1d031fa218c9395"
+  },
+  "closure": [
+    {
+      "path": "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+      "git_blob_sha": "3f08b2703723537e5a146346eead6a387424687f"
+    },
+    {
+      "path": "canonical/runtime/bounded_predicate_argument_semantics.py",
+      "git_blob_sha": "8303231779d6fe8c7fb740e3bbaa492914d4eba9"
+    },
+    {
+      "path": "canonical/runtime/explicit_requirement_index_v2.py",
+      "git_blob_sha": "30629b10fdbf3c337eb3252c043ec13123ca66a1"
+    },
+    {
+      "path": "canonical/runtime/harbor_command_policy.py",
+      "git_blob_sha": "a525773417291c7a4841bf35e1baff5370350d0d"
+    },
+    {
+      "path": "canonical/runtime/harbor_environment_transport.py",
+      "git_blob_sha": "ec46f648214a37bb16025d5ef2593efdf59f0d79"
+    },
+    {
+      "path": "canonical/runtime/harbor_science_agent_v1.py",
+      "git_blob_sha": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0"
+    },
+    {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "01d859c8f27b317893027e693c9aa49e833a256f"
+    },
+    {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+    },
+    {
+      "path": "canonical/runtime/lossless_raw_task_contract_v1.py",
+      "git_blob_sha": "d54d5a2f7efa76b653d288f4f53da4883644baa6"
+    },
+    {
+      "path": "canonical/runtime/raw_task_acceptance_residual_localizer_v1.py",
+      "git_blob_sha": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_acceptance_program_v1.py",
+      "git_blob_sha": "742c183cccc2ec4bb5f94e88048590e2991dacd4"
+    },
+    {
+      "path": "canonical/runtime/source_contract_compiler.py",
+      "git_blob_sha": "ba53b1f1a3c1d8e63c906eb4952c7e9b6aef1231"
+    },
+    {
+      "path": "canonical/runtime/structured_method_expression_ast_candidate_v2.py",
+      "git_blob_sha": "7623f68bab3c1b207e237389841a4b688e509ff3"
+    },
+    {
+      "path": "canonical/runtime/typed_acceptance_program_v1.py",
+      "git_blob_sha": "7fd2e575bd2d5c36f48c713f15177d5b0d7e68c5"
+    }
+  ],
+  "closure_file_count": 14,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "benchmark_task_replay": 0,
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "hard_nonclaims": [
+    "NO_RANK11_REPLAY",
+    "NO_RANK12_EXECUTION_AUTHORITY",
+    "NO_CLAIM_OUTPUT_BINDING_REPAIR_SOLVES_THE_SCIENCE_TASK",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}

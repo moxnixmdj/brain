@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_EXPLICIT_OUTPUT_DIRECTIVE_REPAIR_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SECOND_SPRITE_PASS__17_OF_17_CONTROLLER_TESTS__RANK11_FAILURE_SHAPE_REGRESSION_CLOSED__ZERO_BENCHMARK_REPLAY__ZERO_CREDIT",
+  "subject": {
+    "agent_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "agent_git_blob_sha": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "test_path": "canonical/tests/test_harbor_science_agent_v1.py",
+    "test_git_blob_sha": "aab433ff0d0ed576c7f8d04b500c5c4cead473cc",
+    "closure_path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V4.json"
+  },
+  "causal_counterexample": {
+    "consumed_slot": "terminal-bench-science/supraglacial-lake-classification::trial-0",
+    "workflow_run_id": 37722244972,
+    "verifier_reached": true,
+    "verifier_reward": 0,
+    "required_output_missing": "/results/predictions.csv",
+    "pre_repair_brain_mandated_deliverables": {},
+    "pre_repair_planner_material_requirements": [
+      "labeling_protocol.md"
+    ],
+    "pre_repair_raw_task_required_obligation_count": 17,
+    "public_instruction_repo": "harbor-framework/terminal-bench-science",
+    "public_instruction_ref": "8ef49c8a64cf57f9913755b41ed6a0fe1a667192",
+    "public_instruction_blob": "f7badfc9f0b068dd282b7eb92f482471e8c7afc5",
+    "public_task_toml_blob": "ad69f04ab61cc2108a48707ab1d031fa218c9395"
+  },
+  "verification": {
+    "primary_carrier": {
+      "provider": "SPRITES",
+      "name": "brain-root3-current-byte-replay-20261007-v1",
+      "id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "workspace": "/home/sprite/tb_science_output_directive_repair_v1",
+      "tests_passed": 17,
+      "tests_total": 17
+    },
+    "independent_carrier": {
+      "provider": "SPRITES",
+      "name": "h100-real-image-v1",
+      "id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+      "workspace": "/home/sprite/tb_science_output_directive_repair_v1_independent",
+      "tests_passed": 17,
+      "tests_total": 17
+    },
+    "exact_regressions": [
+      "ABSOLUTE_OUTPUT_DIRECTIVE_/results/predictions.csv_BECOMES_BRAIN_MANDATED_DELIVERABLE",
+      "INPUT_REFERENCES_/root/data/_AND_/root/labeling_protocol.md_DO_NOT_BECOME_OUTPUTS",
+      "PLANNER_CANNOT_RETURN_SUBMISSION_READY_WHILE_EXPLICIT_OUTPUT_DELIVERABLE_IS_UNRESOLVED"
+    ],
+    "benchmark_task_replays": 0,
+    "fresh_target_reality_units_consumed": 0
+  },
+  "conclusion": "THE_RANK11_CONTROL_PLANE_FAILURE_CLASS_IS_REPAIRED_FOR_EXPLICIT_ABSOLUTE_FILE_OUTPUT_DIRECTIVES__THE_REPAIR_DOES_NOT_PROVE_THE_NEXT_SCIENCE_TASK_WILL_SUCCEED",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}

@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V11",
+  "date": "2026-10-08",
+  "status": "CURRENT_POST_RANK11_FINAL_ZERO__ELEVEN_CONSUMED_SLOTS__OUTPUT_DIRECTIVE_CONTROL_REPAIR_VERIFIED__RANK12_LOCKED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261008_V10.json",
+    "git_blob_sha": "aa23792656c70d900498bd14f0089c18034ba00b"
+  },
+  "rank11_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK11_IRREVERSIBLE_RESULT_TRUTH_20261008_V1.json",
+    "git_blob_sha": "6d72fd19ec723d707c967bd98d7ac8d3761e8d5f",
+    "status": "FINAL_ZERO__VERIFIER_REACHED__REQUIRED_OUTPUT_NOT_PRODUCED__CONTROL_PLANE_DELIVERABLE_BINDING_FAILURE",
+    "workflow_run_id": 37722244972,
+    "artifact_id": 11526478864
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "current_counts": {
+    "consumed_slots": 11,
+    "consumed_successes": 0,
+    "consumed_final_failures": 11,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 76,
+    "maximum_possible_successes_remaining": 199,
+    "minimum_required_success_rate_over_remaining_slots": 0.6231155778894473,
+    "pass_still_mathematically_reachable": true,
+    "next_untouched_slot": {
+      "ledger_schedule_rank": 12,
+      "frozen_manifest_schedule_order": 11,
+      "slot_id": "terminal-bench-science/clinical-metadata-recovery::trial-0",
+      "task_digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8"
+    }
+  },
+  "rank11_causal_truth": {
+    "task_started": true,
+    "verifier_reached": true,
+    "verifier_reward": 0,
+    "execution_authority_consumed": true,
+    "rerun_forbidden": true,
+    "required_output_missing": "/results/predictions.csv",
+    "scientific_classification_quality_evaluated": false,
+    "task_capability_negative_evidence": false,
+    "admitted_deficit_class": "MINIMUM_CONTROL_PLANE_DELIVERABLE_BINDING_FAILURE"
+  },
+  "repaired_route": {
+    "agent_git_blob_sha": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "planner_git_blob_sha": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "closure_manifest_path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V4.json",
+    "closure_manifest_git_blob_sha": "cf9cc9fb8830eda991c71381a523b8f67caedaa7",
+    "independent_verification_path": "canonical/verification/TB_SCIENCE_EXPLICIT_OUTPUT_DIRECTIVE_REPAIR_INDEPENDENT_VERIFICATION_20261008_V1.json",
+    "independent_verification_git_blob_sha": "7a11ec5b0b7d7506f17f1d22f5b04b6e96d354c5",
+    "controller_tests": "17_OF_17_PASS_ON_TWO_SPRITES",
+    "benchmark_replay_count": 0
+  },
+  "rank12": {
+    "authority_active": false,
+    "action_intent_active": false,
+    "task_started": false,
+    "result_present": false,
+    "rule": "DO_NOT_AUTHORIZE_OR_EXPOSE_RANK12_UNTIL_THE_REPAIRED_CURRENT_CARRIER_IS_REBOUND_AND_A_ZERO_BENCHMARK_EXPOSURE_END_TO_END_PREFLIGHT_PROVES_EXPLICIT_OUTPUT_DIRECTIVES_CONTROL_COMPLETION_WITHOUT_INTRODUCING_A_NEW_CAUSAL_FAILURE_CLASS"
+  },
+  "scheduler": [
+    "NEVER_REPLAY_RANK11.",
+    "DO_NOT_INFER_A_GENERAL_SCIENTIFIC_REASONING_DEFICIT_FROM_RANK11_BECAUSE_THE_VERIFIER_NEVER_RECEIVED_THE_REQUIRED_CLASSIFICATION_ARTIFACT.",
+    "USE_THE_MINIMUM_VERIFIED_OUTPUT_DIRECTIVE_CONTROL_REPAIR_ONLY.",
+    "KEEP_RANK12_LOCKED_PENDING_NEW_ZERO_EXPOSURE_END_TO_END_PREFLIGHT.",
+    "TB_SCIENCE_ACCEPTANCE_REMAINS_OPEN."
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_RANK12_EXECUTION_AUTHORITY",
+    "NO_CLAIM_REPAIR_GUARANTEES_FUTURE_TASK_SUCCESS",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_delta_from_v10": 1,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

@@ -52,18 +52,41 @@ MAX_BRAIN_DELIVERABLES = 16
 _EXPLICIT_SUBMISSION_PATH_RE = re.compile(
     r"(?<![A-Za-z0-9_./-])((?:/app/)?submission/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)"
 )
+_EXPLICIT_OUTPUT_DIRECTIVE_RE = re.compile(
+    r"""(?is)\b(?:write|create|save|store|export|produce|deliver|emit)\b
+        [^.\n]{0,240}?
+        \b(?:to|at|as|into)\s+
+        [`'"\[]*
+        (?P<path>/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)
+    """,
+    re.VERBOSE,
+)
+
+def _valid_mandated_output_path(path: str) -> bool:
+    if not path.startswith("/") or any(part in {"", ".", ".."} for part in path.split("/")[1:]):
+        return False
+    return bool(re.fullmatch(r"/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+", path))
 
 def _brain_mandated_deliverables(goal: str) -> dict[str, str]:
+    text = str(goal or "")
     paths: list[str] = []
-    for match in _EXPLICIT_SUBMISSION_PATH_RE.finditer(str(goal or "")):
-        raw = match.group(1)
-        path = raw if raw.startswith("/app/") else "/app/" + raw.lstrip("/")
-        if any(part in {".", ".."} for part in path.split("/")):
-            continue
-        if path not in paths:
+
+    def add(path: str) -> None:
+        if not _valid_mandated_output_path(path):
+            return
+        if path not in paths and len(paths) < MAX_BRAIN_DELIVERABLES:
             paths.append(path)
-        if len(paths) >= MAX_BRAIN_DELIVERABLES:
-            break
+
+    for match in _EXPLICIT_SUBMISSION_PATH_RE.finditer(text):
+        raw = match.group(1)
+        add(raw if raw.startswith("/app/") else "/app/" + raw.lstrip("/"))
+
+    # A task can require an artifact anywhere, not only under /app/submission.
+    # Bind only absolute file paths that are syntactically attached to an
+    # explicit output-producing directive; ordinary input references remain inputs.
+    for match in _EXPLICIT_OUTPUT_DIRECTIVE_RE.finditer(text):
+        add(match.group("path"))
+
     return {f"BRAIN_DELIVERABLE_{i + 1:02d}": path for i, path in enumerate(paths)}
 
 async def _validate_brain_deliverable(
