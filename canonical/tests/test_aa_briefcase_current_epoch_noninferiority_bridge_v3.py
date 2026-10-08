@@ -41,6 +41,24 @@ class T(unittest.TestCase):
         self.assertTrue(out["single_result_reused_across_predicates"])
         self.assertFalse(out["historical_epoch_rewritten"])
 
+    def test_core_owner_attestation_passes_both_aliases(self):
+        s = core_statement()
+        out = compile_current_epoch_noninferiority(
+            target(),
+            {
+                "mode": "CORE_OWNER_ATTESTATION",
+                "payload": {
+                    "statement": s,
+                    "signature_verification": core_sig(s),
+                },
+            },
+        )
+        self.assertEqual(out["predicate_results"], {p: True for p in PREDICATES})
+        self.assertEqual(out["comparison_route"], "CORE_OWNER_ATTESTATION")
+        self.assertFalse(out["numeric_elo_reconstruction_required"])
+        self.assertFalse(out["numeric_comparable_elo_used"])
+        self.assertFalse(out["official_owner_elo_claimed"])
+
     def test_minimal_owner_attestation_passes_both_aliases(self):
         s = statement()
         bundle, binding = make_signed(s)
