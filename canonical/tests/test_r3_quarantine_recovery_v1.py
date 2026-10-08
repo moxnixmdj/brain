@@ -116,6 +116,27 @@ class R3QuarantineRecoveryV1Tests(unittest.TestCase):
             for row in state["improvement_queue"].values()
         ))
 
+    def test_recovery_rejects_unauthenticated_quarantined_source(self):
+        path = self.temp_state()
+        self.seed(path, safe=True)
+        verifier = mock.Mock()
+        with (
+            mock.patch.object(
+                learning,
+                "reauthenticate_skill_record",
+                return_value={"pass": False, "reason": "TAMPERED"},
+            ),
+            mock.patch(
+                "canonical.runtime.r3_independent_learning_verifier_v1.verify_skill_request",
+                verifier,
+            ),
+        ):
+            out = driver.advance_once(state_path=path)
+
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(out["status"], "RECOVERY_SOURCE_SKILL_AUTHORITY_INVALID")
+        verifier.assert_not_called()
+
     def test_noncontractible_counterexample_stays_fail_closed(self):
         path = self.temp_state()
         self.seed(path, safe=False)
