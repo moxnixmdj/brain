@@ -465,6 +465,11 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         provider = mock.Mock(return_value={"binding": "content-addressed"})
         with (
             mock.patch.object(
+                driver.learning,
+                "reauthenticate_skill_record",
+                return_value={"pass": True, "verified_skill": verified_skill},
+            ),
+            mock.patch.object(
                 driver,
                 "authenticate_skill_verification",
                 return_value={"pass": True, "verified_skill": promoted},
@@ -503,6 +508,60 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertTrue(request["candidate"]["candidate_only"])
         self.assertNotIn("scope_relation", request["candidate"])
         integrate.assert_called_once()
+
+    def test_scope_generalization_rejects_unauthenticated_source_before_provider(self):
+        path = self.temp_state()
+        skill = {
+            "candidate_sha256": "sha256:" + "3" * 64,
+            "source_episode_ids": ["ep1", "ep2"],
+            "source_scopes": ["scope-a"],
+            "steps": [{"index": 0, "op": "solve", "inputs": [], "outputs": ["goal"]}],
+            "preconditions": [],
+            "postconditions": ["goal"],
+            "invalidators": [],
+            "verified_skill": True,
+            "reuse_authorized": True,
+            "candidate_only": False,
+            "scope_relation": "EXACT",
+        }
+        sid = learning._skill_id(skill)
+        family = learning._family_id(skill)
+        state = learning._empty_state()
+        state["skills"][sid] = {
+            "skill": skill,
+            "family_id": family,
+            "pareto_metrics": learning._skill_pareto_row(sid, skill),
+            "active": True,
+            "dominated_by": None,
+            "compression": {},
+        }
+        learning._enqueue_improvement(
+            state,
+            kind="SEEK_VERIFIED_SCOPE_GENERALIZATION",
+            priority=60,
+            identity={"family_id": family, "skill_id": sid},
+            payload={"family_id": family, "skill_id": sid},
+        )
+        learning._refresh_stats(state)
+        learning._write_state(state, path)
+
+        provider = mock.Mock()
+        with mock.patch.object(
+            driver.learning,
+            "reauthenticate_skill_record",
+            return_value={"pass": False, "reason": "TAMPERED"},
+        ):
+            out = driver.advance_once(
+                state_path=path,
+                skill_verification_provider=provider,
+            )
+
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "SCOPE_GENERALIZATION_SOURCE_SKILL_AUTHORITY_INVALID",
+        )
+        provider.assert_not_called()
 
     def test_event_waiting_work_does_not_claim_progress(self):
         path = self.temp_state()
