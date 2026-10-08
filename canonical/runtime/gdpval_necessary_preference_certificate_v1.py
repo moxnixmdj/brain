@@ -8,6 +8,20 @@ PASS_OUTCOMES = {"BRAIN_WEAKLY_DOMINATES", "BRAIN_TOP"}
 EXPECTED_TASKS = 220
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 
+INADMISSIBLE_CONTAINMENT_PROOF_CLASSES = {
+    "PUBLIC_METHODOLOGY_ONLY",
+    "HISTORICAL_V1_PROMPT_CARRYFORWARD",
+    "PUBLIC_RUBRIC_ONLY",
+    "UNVERIFIED_RECONSTRUCTED_GRADER",
+}
+
+ADMISSIBLE_CONTAINMENT_PROOF_CLASSES = {
+    "EXACT_CURRENT_OWNER_PROMPT",
+    "PROVED_CURRENT_V2_PROMPT_EQUIVALENCE",
+    "EXTENSIONALLY_EQUIVALENT_CURRENT_PREFERENCE_RELATION",
+    "INDEPENDENTLY_VERIFIED_RESTRICTED_OWNER_CLASS",
+}
+
 
 def _valid_sha256(value: Any) -> bool:
     return isinstance(value, str) and _SHA256.fullmatch(value) is not None
@@ -62,6 +76,23 @@ def verify(manifest: Mapping[str, Any]) -> dict[str, Any]:
                 "OWNER_COMPATIBLE_PREFERENCE_ENVELOPE_EVIDENCE_MISSING",
                 missing_or_invalid_evidence_field=field,
             )
+
+    proof_class = envelope.get("containment_proof_class")
+    if proof_class in INADMISSIBLE_CONTAINMENT_PROOF_CLASSES:
+        return _fail(
+            "ENVELOPE_CONTAINMENT_PROOF_CLASS_INADMISSIBLE",
+            containment_proof_class=proof_class,
+        )
+    if proof_class not in ADMISSIBLE_CONTAINMENT_PROOF_CLASSES:
+        return _fail(
+            "ENVELOPE_CONTAINMENT_PROOF_CLASS_UNBOUND",
+            containment_proof_class=proof_class,
+        )
+    if not _valid_sha256(envelope.get("containment_independent_verification_sha256")):
+        return _fail(
+            "ENVELOPE_CONTAINMENT_INDEPENDENT_VERIFICATION_MISSING",
+            containment_proof_class=proof_class,
+        )
 
     tasks = manifest.get("tasks")
     if not isinstance(tasks, Sequence) or isinstance(tasks, (str, bytes)):
@@ -197,6 +228,7 @@ def verify(manifest: Mapping[str, Any]) -> dict[str, Any]:
         "task_count": EXPECTED_TASKS,
         "passed_tasks": passed_tasks,
         "total_dimensions": total_dimensions,
+        "containment_proof_class": proof_class,
         "theorem": (
             "FOR_EACH_TASK_x__IF_THE_TRUE_OWNER_PAIRWISE_RELATION_JSTAR_x_IS_IN_"
             "THE_SOUNDLY_BOUND_ENVELOPE_E_x__AND_BRAIN_IS_PROVED_NONINFERIOR_TO_"
