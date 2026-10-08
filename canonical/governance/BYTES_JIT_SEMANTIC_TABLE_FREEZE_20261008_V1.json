@@ -1,0 +1,31 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_JIT_SEMANTIC_TABLE_FREEZE_V1",
+  "date":"2026-10-08",
+  "scope_lock":"BYTES_RESEARCH_ONLY",
+  "status":"KERNEL_FROZEN_BEFORE_PROSPECTIVE_TASK_GENERATION",
+  "kernel":{
+    "path":"canonical/runtime/bytes_jit_semantic_table_core_v1.py",
+    "git_blob_sha":"dea993ab43994c5f847c5390c7566730cb785b80",
+    "freeze_commit_sha":"711446e1ec0e5f4f386dcf29a9bb2e5d3540634e",
+    "raw_bytes":215,
+    "raw_sha256":"499e40e9c9b5d6c42417b67c8eea47e229f68e58c011e46883f2fd0c979cab2d",
+    "fixed_decoder":{"format":"RAW_LZMA1","dict_size":4096,"lc":0,"lp":0,"pb":0,"mode":"NORMAL","match_finder":"BT2","nice_len":64,"payload_bytes":155,"payload_sha256":"e4d2af908ae8431ad07dd9ec06063ac35fa33e5abc8fbf594d03419db61da0d0"}
+  },
+  "architectural_claim_under_test":"A_CONTENT_FROZEN_GENERIC_COMPOSITION_SEARCH_KERNEL_CAN_ACQUIRE_FRESH_TASK_SCOPED_PRIMITIVE_SEMANTICS_FROM_DECLARATIVE_JIT_TABLES_SYNTHESIZE_AN_EXACT_COMPOSITION_EXECUTE_IT_AND_DISCARD_IT_WITH_ZERO_TASK_SPECIFIC_PERSISTENT_OPERATIVE_CAPABILITY_GROWTH",
+  "accounting_boundary":{
+    "counted_as_persistent_operational_capability":"THE_FROZEN_KERNEL_PAYLOAD",
+    "jit_task_information":"PRIMITIVE_TRANSITION_TABLES_PLUS_TARGET_EXTENTIONAL_TABLE",
+    "ephemeral":"SYNTHESIZED_COMPOSITION",
+    "evidence_bytes":"REPORTED_SEPARATELY_NOT_ROUTED_AS_OPERATIVE_CAPABILITY",
+    "python_runtime_not_counted":true,
+    "lzma_decoder_not_counted":true
+  },
+  "hard_nonclaims":[
+    "FINITE_DECLARED_DOMAINS_ONLY",
+    "JIT_SEMANTICS_ARE_SUPPLIED_DECLARATIVELY_BEFORE_COMMITMENT",
+    "NO_NATURAL_LANGUAGE_OR_UNGROUNDED_SEMANTIC_IDENTIFICATION_CLAIM",
+    "NO_GLOBAL_MINIMUM_KERNEL_SIZE_PROOF",
+    "NO_CLAIM_JIT_INFORMATION_IS_ZERO_BYTES",
+    "NO_CLAIM_EVIDENCE_STORAGE_IS_ZERO_BYTES"
+  ]
+}
