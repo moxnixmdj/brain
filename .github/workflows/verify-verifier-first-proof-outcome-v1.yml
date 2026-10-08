@@ -1,0 +1,70 @@
+name: verify-verifier-first-proof-outcome-v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/verifier_compiler_v1.py"
+      - "canonical/runtime/proof_carrying_outcome_v1.py"
+      - "canonical/runtime/general_adequate_decision_controller_v1.py"
+      - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+      - "canonical/runtime/live_brain_runtime_v1.py"
+      - "canonical/tests/test_verifier_first_acceptance_v1.py"
+      - "canonical/tests/test_r3_proof_carrying_outcome_bridge_v1.py"
+      - "canonical/tests/test_general_adequate_decision_controller_v1.py"
+      - "canonical/tests/test_live_brain_runtime_v1.py"
+      - "canonical/governance/VERIFIER_FIRST_PROOF_CARRYING_COGNITION_20261008_V1.json"
+      - "canonical/governance/CURRENT_VERIFIER_FIRST_COGNITION.json"
+      - "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
+      - "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
+      - "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json"
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+      - ".github/workflows/verify-verifier-first-proof-outcome-v1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/verifier_compiler_v1.py"
+      - "canonical/runtime/proof_carrying_outcome_v1.py"
+      - "canonical/runtime/general_adequate_decision_controller_v1.py"
+      - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+      - "canonical/runtime/live_brain_runtime_v1.py"
+      - "canonical/tests/test_verifier_first_acceptance_v1.py"
+      - "canonical/tests/test_r3_proof_carrying_outcome_bridge_v1.py"
+      - "canonical/tests/test_general_adequate_decision_controller_v1.py"
+      - "canonical/tests/test_live_brain_runtime_v1.py"
+      - "canonical/governance/VERIFIER_FIRST_PROOF_CARRYING_COGNITION_20261008_V1.json"
+      - "canonical/governance/CURRENT_VERIFIER_FIRST_COGNITION.json"
+      - ".github/workflows/verify-verifier-first-proof-outcome-v1.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile verifier-first runtime
+        run: |
+          python -m py_compile canonical/runtime/verifier_compiler_v1.py
+          python -m py_compile canonical/runtime/proof_carrying_outcome_v1.py
+          python -m py_compile canonical/runtime/general_adequate_decision_controller_v1.py
+          python -m py_compile canonical/runtime/autonomous_verified_self_improvement_v1.py
+          python -m py_compile canonical/runtime/live_brain_runtime_v1.py
+      - name: Run verifier-first regressions
+        run: |
+          python -m unittest             canonical.tests.test_verifier_first_acceptance_v1             canonical.tests.test_r3_proof_carrying_outcome_bridge_v1             canonical.tests.test_general_adequate_decision_controller_v1             canonical.tests.test_live_brain_runtime_v1             -v
+      - name: Validate verifier-first governance JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for p in (
+              "canonical/governance/VERIFIER_FIRST_PROOF_CARRYING_COGNITION_20261008_V1.json",
+              "canonical/governance/CURRENT_VERIFIER_FIRST_COGNITION.json",
+              "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+              "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+              "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+              "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+          ):
+              json.loads(Path(p).read_text())
+          PY
