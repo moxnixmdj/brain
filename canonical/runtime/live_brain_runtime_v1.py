@@ -387,7 +387,7 @@ def execute_failure_repair_cycle(
                 "episode_id": kwargs["episode_id"],
                 "scope_id": kwargs["scope_id"],
                 "learn": True,
-                    "auto_repair": False,
+                "auto_repair": False,
             },
         )
         if repair_execution.get("pass") is not True:
@@ -703,7 +703,7 @@ def _autonomous_repair_disposition(
             "components": components,
             "initial_facts": list(initial_facts),
             "learn": True,
-                    "auto_repair": False,
+            "auto_repair": False,
         },
         repo_root=repo_root,
         state_path=state_path,
@@ -1057,7 +1057,7 @@ def run_decision(
             "request": deepcopy(dict(bound_request)),
             "known_absent_invalidators": list(known_absent_invalidators),
             "learn": True,
-                    "auto_repair": False,
+            "auto_repair": False,
         }
 
         learning = None
@@ -1154,7 +1154,7 @@ def run_specialized(
                 "surface": name,
                 "payload": deepcopy(dict(payload)),
                 "learn": True,
-                    "auto_repair": False,
+                "auto_repair": False,
             },
         )
         return {
@@ -1277,7 +1277,7 @@ def run(
                 "mode": "compiled_bound",
                 "request": deepcopy(dict(payload)),
                 "learn": True,
-                    "auto_repair": False,
+                "auto_repair": False,
             },
         )
         live = {
@@ -1314,7 +1314,7 @@ def run(
                 "mode": "raw_bound",
                 "request": deepcopy(dict(payload)),
                 "learn": True,
-                    "auto_repair": False,
+                "auto_repair": False,
             },
         )
         live = {
