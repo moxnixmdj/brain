@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V13",
+  "date": "2026-10-08",
+  "status": "CURRENT_POST_RANK12_FINAL_ZERO__TWELVE_CONSUMED_SLOTS__PLANNER_PROMPT_INGESTION_FAILURE_LOCALIZED__RANK13_LOCKED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261008_V12.json",
+    "git_blob_sha": "35456bbbeb8e80708a5e413b28b4ee2ab43c2a16"
+  },
+  "rank12_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK12_IRREVERSIBLE_RESULT_TRUTH_20261008_V1.json",
+    "git_blob_sha": "6c6d9992f113303373628cacaa5099fb02a7b993",
+    "status": "FINAL_ZERO__LOCAL_PLANNER_TIMEOUT_DURING_PROMPT_INGESTION",
+    "workflow_run_id": 37729003096,
+    "artifact_id": 11529089208
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "counts": {
+    "consumed": 12,
+    "successes": 0,
+    "failures": 12,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 75,
+    "maximum_possible_successes_remaining": 198,
+    "minimum_required_success_rate_over_remaining_slots": 0.6262626262626263,
+    "pass_still_mathematically_reachable": true
+  },
+  "next": {
+    "rank": 13,
+    "frozen_manifest_schedule_order": 12,
+    "slot": "terminal-bench-science/dapi-he-alignment::trial-0",
+    "digest": "sha256:a4291c3f09b0fc2a1c8713129d3afd1b46929482f6c03df630c25814b53b755e8"
+  },
+  "causal_truth": {
+    "rank12_task_started": true,
+    "rank12_execution_authority_consumed": true,
+    "rank12_rerun_forbidden": true,
+    "rank12_reward": 0,
+    "verifier_reward_present": false,
+    "planner_timeout_s": 300,
+    "timeout_phase": "PROMPT_INGESTION_BEFORE_COMPLETION_GENERATION",
+    "domain_capability_negative_evidence": false,
+    "exact_configured_route_runtime_negative_evidence": true
+  },
+  "rank13": {
+    "authority_active": false,
+    "task_started": false,
+    "result_present": false,
+    "rule": "DO_NOT_AUTHORIZE_RANK13_UNTIL_THE_PLANNER_PROMPT_PROJECTION_REPAIR_OR_STRONGER_ROUTE_PASSES_A_ZERO_NEW_SLOT_REAL_LOCAL_QWEN_PREFLIGHT_UNDER_THE_EXISTING_300S_BOUND"
+  },
+  "scheduler": [
+    "NEVER_REPLAY_RANK12.",
+    "DO_NOT_INFER_DOMAIN_SCIENCE_DEFICIT_FROM_A_PREVERIFIER_PLANNER_TIMEOUT.",
+    "LOCALIZE_AND_REPAIR_PROMPT_INGESTION_WITH_ZERO_NEW_BENCHMARK_SLOT_CONSUMPTION.",
+    "ONLY_AFTER_LIVE_REPAIR_VERIFICATION_RECOMPUTE_THE_CURRENT_CARRIER_CLOSURE_AND_CONSIDER_RANK13.",
+    "RACE_THIS_EMPIRICAL_ROUTE_AGAINST_ANY_STRONGER_SCOPE_COMPLETE_ACCEPTANCE_ROUTE."
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_RANK13_EXECUTION_AUTHORITY",
+    "NO_CLAIM_THE_PROMPT_PROJECTION_REPAIR_IS_LIVE_VERIFIED_YET",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_delta_from_v12": 1,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

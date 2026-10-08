@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK12_IRREVERSIBLE_RESULT_TRUTH_V1",
+  "date": "2026-10-08",
+  "status": "RANK12_CONSUMED__FINAL_ZERO__LOCAL_PLANNER_TIMEOUT_BEFORE_VERIFIER_REWARD__NO_DOMAIN_CAPABILITY_INFERENCE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/clinical-metadata-recovery::trial-0",
+    "ledger_schedule_rank": 12,
+    "frozen_manifest_schedule_order": 11,
+    "task_digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8"
+  },
+  "execution": {
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2420,
+    "workflow_run_id": 37729003096,
+    "workflow_job_id": 113153995536,
+    "workflow_head_sha": "dd85ae95762809733d98a79a1302cab27e143371",
+    "receipt_github_sha": "33e4432cf5e513d3178f89412ab34a2e6bb7633b",
+    "artifact_id": 11529089208,
+    "artifact_name": "tb-science-clinical-metadata-recovery-trial-0-rank12-v1",
+    "artifact_digest": "sha256:549b84756524f7eeafe8faf1f9b3d9b4edea118c914a7d3b58d3272d4f5f0f4f",
+    "task_started": true,
+    "execution_authority_consumed": true,
+    "rerun_credit": false,
+    "status": "FINAL_ZERO",
+    "reward": 0,
+    "errors": [
+      "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD"
+    ],
+    "exception_info": [
+      {
+        "exception_type": "SciencePlannerError",
+        "exception_message": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out"
+      }
+    ]
+  },
+  "exact_bindings": {
+    "authority_blob": "732b00c707a1e5b1ef6cf39ed85c5bd1abb557a9",
+    "authority_verification_blob": "14adffc894a3ca953a8596e5cbe5c6d122efeae6",
+    "intent_blob": "fb808faaa65cab15434349522052de84d27f4376",
+    "ledger_v12_blob": "35456bbbeb8e80708a5e413b28b4ee2ab43c2a16",
+    "closure_manifest_blob": "cf9cc9fb8830eda991c71381a523b8f67caedaa7",
+    "repair_verification_blob": "7a11ec5b0b7d7506f17f1d22f5b04b6e96d354c5",
+    "live_output_preflight_blob": "d8de49aa3f8fd7d1ffbf39e16505e62241652722",
+    "storage_preflight_blob": "9dfdbd1cf6988f5585fd4ff18e59b7a2d9f87cf3",
+    "epoch_blob": "5426f9db570cfa83d5f96859d2087d11cd6b813a",
+    "execution_claim_blob": "73f44f8a06d355693d954d8af828fe81fa7d08e7",
+    "agent_blob": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "planner_blob": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "planner_timeout_s": 300
+  },
+  "result_hashes_sha256": {
+    "trial_result": "032421f346842debcc8309600b859da54188e3572d43ec6ce357c19318ce6a2f",
+    "outer_result": "55abdbb312fee64541718d02ef440fe66a52af85cd18e91f54d1a94aa9e56296"
+  },
+  "causal_localization": {
+    "whole_harbor_job_runtime_approx_seconds": 336,
+    "planner_timeout_seconds": 300,
+    "local_qwen_server_log_observation": {
+      "prompt_tokens_at_30s": 618,
+      "prompt_tokens_at_132s": 2666,
+      "prompt_tokens_at_240s": 4714,
+      "prompt_progress_at_240s": 0.66,
+      "task_cancelled_after_http_timeout": true,
+      "inference": "THE_REQUEST_TIMED_OUT_DURING_PROMPT_INGESTION_BEFORE_COMPLETION_GENERATION"
+    },
+    "public_instruction_blob": "d2b53d7282f1490e491e1d207ed9b07898ebec88",
+    "public_task_toml_blob": "dfc2e693802c20072fb145594f6a7d7db3dab628",
+    "instruction_size_class": "MODEST__NOT_INTRINSICALLY_LARGE",
+    "root_cause": "BRAIN_PROPOSAL_PROMPT_REPEATED_AND_CARRIED_CONTROL_METADATA_SUFFICIENT_TO_PUSH_CPU_PROMPT_INGESTION_BEYOND_300S",
+    "domain_scientific_quality_evaluated": false,
+    "task_capability_negative_evidence": false,
+    "exact_route_runtime_negative_evidence": true
+  },
+  "scheduler_consequence": [
+    "NEVER_REPLAY_RANK12.",
+    "DO_NOT_INFER_A_CLINICAL_TRANSCRIPTOMICS_CAPABILITY_DEFICIT_FROM_RANK12.",
+    "REPAIR_OR_REPLACE_THE_OVERSIZED_PLANNER_PROMPT_PATH_WITH_ZERO_NEW_BENCHMARK_EXPOSURE.",
+    "RANK13_REMAINS_LOCKED_UNTIL_THE_REPAIRED_PLANNER_COMPLETES_A_REAL_LOCAL_QWEN_PREFLIGHT_UNDER_THE_EXISTING_300S_BOUND."
+  ],
+  "hard_nonclaims": [
+    "NO_RANK12_RETRY_OR_REPLACEMENT",
+    "NO_VERIFIER_REWARD_WAS_OBSERVED",
+    "NO_TASK_DOMAIN_SCORE_WAS_MEASURED",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_delta": 1,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
