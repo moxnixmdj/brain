@@ -43,12 +43,14 @@ from canonical.runtime.universal_solver_episode_verification_authenticator_v1 im
     reauthenticate_record as reauthenticate_episode_record,
 )
 from canonical.runtime import universal_verified_adaptive_solver_v12 as solver_v12
+from canonical.runtime import r3_verified_skill_memory_v1 as skill_memory
 
 SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1"
 VERIFIED_SUPERSET_SCOPE_PREDICATE = "STRUCTURAL_MATCH_V1"
 STATE_SCHEMA = "PROJECT_BRAIN_SELF_IMPROVEMENT_STATE_V1"
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_STATE_PATH = ROOT / "canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json"
+DEFAULT_SKILL_MEMORY_PATH = ROOT / skill_memory.DEFAULT_MEMORY_RELATIVE
 SENSITIVE_RETRY_KEY_PARTS = (
     "password", "passwd", "secret", "api_key", "apikey", "authorization",
     "cookie", "credential", "access_token", "refresh_token", "private_key",
@@ -253,23 +255,38 @@ def _empty_state() -> dict[str, Any]:
     }
 
 
+def _is_default_state_path(path: str | Path) -> bool:
+    try:
+        return Path(path).resolve() == Path(DEFAULT_STATE_PATH).resolve()
+    except Exception:
+        return False
+
+
 def load_state(path: str | Path = DEFAULT_STATE_PATH) -> dict[str, Any]:
     p = Path(path)
     if not p.exists():
-        return _empty_state()
-    doc = json.loads(p.read_text(encoding="utf-8"))
-    if not isinstance(doc, Mapping) or doc.get("schema") != STATE_SCHEMA:
-        raise SelfImprovementError("SELF_IMPROVEMENT_STATE_SCHEMA_INVALID")
-    state = deepcopy(dict(doc))
-    state.setdefault("reuse", {})
-    state.setdefault("observations", {})
-    state.setdefault("improvement_queue", {})
-    for key in (
-        "episodes", "skills", "pareto_frontiers", "failures", "reuse",
-        "observations", "improvement_queue", "stats",
-    ):
-        if not isinstance(state.get(key), Mapping):
-            raise SelfImprovementError("SELF_IMPROVEMENT_STATE_FIELD_INVALID:" + key)
+        state = _empty_state()
+    else:
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        if not isinstance(doc, Mapping) or doc.get("schema") != STATE_SCHEMA:
+            raise SelfImprovementError("SELF_IMPROVEMENT_STATE_SCHEMA_INVALID")
+        state = deepcopy(dict(doc))
+        state.setdefault("reuse", {})
+        state.setdefault("observations", {})
+        state.setdefault("improvement_queue", {})
+        for key in (
+            "episodes", "skills", "pareto_frontiers", "failures", "reuse",
+            "observations", "improvement_queue", "stats",
+        ):
+            if not isinstance(state.get(key), Mapping):
+                raise SelfImprovementError("SELF_IMPROVEMENT_STATE_FIELD_INVALID:" + key)
+    if _is_default_state_path(p):
+        state = skill_memory.merge_file(
+            state,
+            memory_path=DEFAULT_SKILL_MEMORY_PATH,
+            repo_root=ROOT,
+        )
+        _refresh_stats(state)
     return state
 
 
@@ -279,6 +296,12 @@ def _write_state(state: Mapping[str, Any], path: str | Path) -> None:
     tmp = p.with_name(p.name + ".tmp")
     tmp.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     tmp.replace(p)
+    if _is_default_state_path(p):
+        skill_memory.write_file(
+            state,
+            memory_path=DEFAULT_SKILL_MEMORY_PATH,
+            repo_root=ROOT,
+        )
 
 
 def _episode_key(ep: Mapping[str, Any]) -> str:
