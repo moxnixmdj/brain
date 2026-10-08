@@ -112,6 +112,38 @@ def make_frontier_provider(*, repo_root: str | Path = ROOT):
     _provider.provider_id = PROVIDER_ID
     return _provider
 
+def make_information_provider(*, repo_root: str | Path = ROOT):
+    """Fail-closed current-evidence provider.
+
+    Fresh reality is never fabricated. Returning None tells R2 that the exact
+    requested predicate is not present in the provider's authenticated local
+    evidence frontier, so the one-shot controller can classify it as an external
+    information cut instead of an internal missing-provider defect.
+    """
+    def _provider(request: Mapping[str, Any], index: int):
+        return None
+    _provider.provider_id = PROVIDER_ID
+    return _provider
+
+def make_r2_proposal_provider(*, repo_root: str | Path = ROOT):
+    """Residual R2 proposal worker after built-in reuse/refinement is exhausted."""
+    def _provider(packet: Mapping[str, Any], index: int, prior_candidates):
+        # Existing-policy repair and basis-discriminator refinement run inside
+        # R2 before this hook. No arbitrary semantic patch is manufactured here.
+        return None
+    _provider.provider_id = PROVIDER_ID
+    return _provider
+
+def make_r2_capability_expander(*, repo_root: str | Path = ROOT):
+    """Residual R2 capability worker with zero semantic/promotion authority."""
+    def _provider(packet: Mapping[str, Any], step: int, current: Mapping[str, Any]):
+        # A request_patch is authoritative only after complete R2 re-verification.
+        # The residual packet does not by itself prove a sound semantic binding,
+        # so the native worker abstains rather than minting one from a package name.
+        return None
+    _provider.provider_id = PROVIDER_ID
+    return _provider
+
 def exhaustion_certificate(result: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(result, Mapping):
         raise TypeError("ROOT1_PROVIDER_RESULT_NOT_OBJECT")

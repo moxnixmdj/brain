@@ -166,6 +166,13 @@ def run(
         raise OneShotClosureError("MAX_R3_ACTIONS_PER_ROUND_INVALID")
 
     root = Path(repo_root)
+    if information_provider is None:
+        information_provider = root1.make_information_provider(repo_root=root)
+    if proposal_provider is None:
+        proposal_provider = root1.make_r2_proposal_provider(repo_root=root)
+    if capability_expander is None:
+        capability_expander = root1.make_r2_capability_expander(repo_root=root)
+
     frontier_provider = verification_frontier_acquisition_provider
     provider_id = verification_frontier_acquisition_provider_id
     if frontier_provider is None:

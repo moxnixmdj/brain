@@ -116,6 +116,10 @@ class OneShotVerifiedClosureTests(unittest.TestCase):
         ):
             closure.run({"task_id": "t", "goal": "g"}, state_path=state)
         self.assertIsNotNone(drain.call_args.kwargs["verification_frontier_acquisition_provider"])
+        r2_kwargs = closure.r2.run.call_args.kwargs
+        self.assertIsNotNone(r2_kwargs["information_provider"])
+        self.assertIsNotNone(r2_kwargs["proposal_provider"])
+        self.assertIsNotNone(r2_kwargs["capability_expander"])
         self.assertEqual(
             drain.call_args.kwargs["verification_frontier_acquisition_provider_id"],
             root1.PROVIDER_ID,
