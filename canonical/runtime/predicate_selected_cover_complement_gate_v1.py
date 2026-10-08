@@ -1,17 +1,20 @@
 """Predicate-selected-cover complement gate.
 
-This gate replaces per-context enumeration with a finite set of content-addressed
-positive admission predicates A_i(c). It validates the exact predicate-set
-identity and an independently verified complement proof that:
+This gate checks the STRUCTURE of claimed evidence for a finite set of
+content-addressed positive admission predicates A_i(c). It validates the
+declared predicate-set identity and asserted complement result that:
 
   S_TRACE(c) AND NOT(A_1(c) OR ... OR A_n(c))
 
 is unsatisfiable over the claimed scope.
 
-It does not itself execute admission predicates or validate their adequacy
-certificates. Therefore it may authorize SELECTED-COVER COMPLETENESS only when
-every predicate row carries an independently verified admission-soundness
-receipt, but it never grants terminal authority. D finality is separate.
+It DOES NOT authenticate these receipts, check their Git objects, execute
+admission predicates, validate their adequacy, or verify any UNSAT proof.
+A self-asserted receipt with SHA-shaped strings must NEVER authorize selected
+cover, U-empty, ABC closure, or terminal truth. This structural checker is
+only a prerequisite for a separate independently authenticated semantic proof
+checker. D finality remains separate. This hardening intentionally fails closed
+for claims that lack that external independent proof validation.
 """
 from __future__ import annotations
 
@@ -148,18 +151,22 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
 
     return {
         "schema":SCHEMA,
-        "pass":True,
-        "status":"PASS__PREDICATE_SELECTED_COVER_COMPLETE_BY_COMPLEMENT_UNSAT",
+        "pass":False,
+        "status":"UNVERIFIED__STRUCTURAL_COMPLEMENT_CLAIMS_ONLY__PROOF_AUTHENTICATION_REQUIRED",
         "scope_id":scope_id,
         "predicate_set_sha256":digest,
         "route_count":len(normalized),
         "routes":sorted(normalized,key=lambda x:(x["admission_predicate_id"],x["route_id"])),
-        "selected_cover_complete_authorized":True,
-        "u_empty_authorized":True,
-        "abc_closed_authorized":True,
+        "selected_cover_complete_authorized":False,
+        "u_empty_authorized":False,
+        "abc_closed_authorized":False,
         "d_finality_required":True,
+        "structural_claim_consistency_checked":True,
+        "proof_bytes_authenticated":False,
+        "semantic_unsat_proof_checked":False,
+        "selected_policy_adequacy_authenticated":False,
         "terminal_authority":False,
         "terminal_credit_delta":0,
         "proof_rule":"EVERY_REGISTERED_ADMISSION_IMPLIES_ADEQUACY__AND_NO_SCOPE_CONTEXT_EXISTS_OUTSIDE_THE_UNION_OF_REGISTERED_ADMISSIONS__THEREFORE_EVERY_SCOPE_CONTEXT_HAS_A_SOUND_BRAIN_ROUTE",
-        "boundary":"AUTHORIZES_ABC_ONLY_FOR_THE_EXACT_SCOPE_AND_EXACT_PREDICATE_SET_BOUND_BY_THE_INDEPENDENT_COMPLEMENT_PROOF__D_FINALITY_REMAINS_SEPARATE",
+        "boundary":"ONLY_CONDITIONAL_CLAIM_CONSISTENCY__EXPLICIT_EXTERNAL_AUTHENTICATION_AND_SEMANTIC_PROOF_CHECK_NEEDED_BEFORE_SELECTED_COVER_U_EMPTY_OR_ABC_AUTHORITY",
     }
