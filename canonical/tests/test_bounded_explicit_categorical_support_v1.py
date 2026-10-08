@@ -79,3 +79,37 @@ def test_authority_is_always_zero():
         ev("E1","Report states that Tweety is a member of Bird.")
     ])
     assert out["terminal_authority"] is False
+
+
+def test_negative_subclass_transitive_conflict():
+    # Canary ⊆ Bird ⊆ Animal ⊆ Living conflicts with Canary ⊈ Living.
+    rows=[
+        ev("E1","T states that Canary is a subclass of Bird."),
+        ev("E2","T states that Bird is a subclass of Animal."),
+        ev("E3","T states that Animal is a subclass of Living."),
+        ev("E4","T states that Canary is not a subclass of Living."),
+    ]
+    p=classify_support("Bird is a subclass of Animal.",rows)
+    assert p["relation"]=="BOTH",p
+    assert p["support_evidence_ids"]==["E2"]
+    assert set(p["conflict_evidence_ids"])=={"E1","E3","E4"}
+    n=classify_support("Bird is not a subclass of Animal.",rows)
+    assert n["relation"]=="BOTH",n
+    assert set(n["support_evidence_ids"])=={"E1","E3","E4"}
+    assert n["conflict_evidence_ids"]==["E2"]
+
+
+def test_negative_subclass_without_all_edges_stays_unrelated():
+    out=classify_support("Bird is not a subclass of Animal.",[
+        ev("E1","T states that Canary is not a subclass of Living."),
+        ev("E2","T states that Canary is a subclass of Bird."),
+    ])
+    assert out["relation"]=="UNRELATED",out
+
+
+def test_reflexive_negative_subset_never_supported():
+    out=classify_support("Bird is not a subset of Bird.",[
+        ev("E1","T states that Bird is not a subset of Bird."),
+    ])
+    assert out["status"]=="UNRESOLVED" and out["relation"]=="UNKNOWN",out
+    assert out["terminal_authority"] is False
