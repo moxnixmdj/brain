@@ -118,6 +118,57 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertEqual(next_work["kind"], "REPAIR_FAILURE_CLASS")
         self.assertEqual(next_work["observations"], 2)
 
+    def test_retry_capsule_autonomous_replay_is_effect_safety_bound(self):
+        path = self.temp_state()
+        safe = {
+            "pass": False,
+            "status": "FAIL__CAPABILITY_OR_TASK_CONTRACT_GAP",
+            "failure_class": "MISSING_CAPABILITY_OR_COMPILED_TASK_CONTRACT",
+            "trace": [{"capability_id": "x"}],
+        }
+        safe_out = loop.integrate_solver_output(
+            safe,
+            state_path=path,
+            retry_context={"mode": "generic", "problem": {"task_id": "safe"}},
+        )
+        safe_retry = loop.get_failure_retry_context(
+            safe_out["diagnosis"]["failure_fingerprint"],
+            state_path=path,
+            retry_capsule_sha256=safe_out["retry_capsule_sha256"],
+        )
+        self.assertTrue(safe_retry["autonomous_replay_authorized"])
+        self.assertEqual(
+            safe_retry["autonomous_replay_reason"],
+            "NO_EFFECT_OUTCOME_RECORDED",
+        )
+
+        effectful = {
+            "pass": False,
+            "status": "FAIL__CAPABILITY_OR_TASK_CONTRACT_GAP",
+            "failure_class": "MISSING_CAPABILITY_OR_COMPILED_TASK_CONTRACT",
+            "trace": [
+                {
+                    "capability_id": "x",
+                    "effect_outcome_sha256": "sha256:" + "e" * 64,
+                }
+            ],
+        }
+        effectful_out = loop.integrate_solver_output(
+            effectful,
+            state_path=path,
+            retry_context={"mode": "generic", "problem": {"task_id": "effectful"}},
+        )
+        effectful_retry = loop.get_failure_retry_context(
+            effectful_out["diagnosis"]["failure_fingerprint"],
+            state_path=path,
+            retry_capsule_sha256=effectful_out["retry_capsule_sha256"],
+        )
+        self.assertFalse(effectful_retry["autonomous_replay_authorized"])
+        self.assertEqual(
+            effectful_retry["autonomous_replay_reason"],
+            "EFFECT_MAY_HAVE_OCCURRED__RECOVERY_OR_EXPLICIT_REPLAY_REQUIRED",
+        )
+
     def test_repair_resolution_is_bound_to_exact_retry_capsule(self):
         path = self.temp_state()
         failure = {
