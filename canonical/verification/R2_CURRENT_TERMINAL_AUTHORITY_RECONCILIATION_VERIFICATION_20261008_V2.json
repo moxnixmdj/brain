@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_R2_CURRENT_TERMINAL_AUTHORITY_RECONCILIATION_VERIFY_20261008_V2",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_DISTINCT_SPRITE_REPLAYS__4_OF_4_EACH__MISSION_R2_V5_CHAIN_COHERENT",
+  "exact_blobs": {
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "950910a53c6c18129bc1d6ec16486b3453e9813b",
+    "canonical/governance/CURRENT_MISSION_OBJECTIVE.json": "0fb2d4e5f369ef937946d7ad8815764b439c1d11",
+    "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "4c30fe665372af5c3c4c94f0b8907703871c85ab",
+    "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json": "e13a3440b0ce581a574b584faecfd70ef1a4167d",
+    "canonical/tests/test_current_terminal_authority_r2_reconciliation_v1.py": "00882f848becbfc40be22c716cdf335a78d02991",
+    ".github/workflows/verify-r2-terminal-authority-reconciliation-v1.yml": "e51c72b6fc6f09d56e8f9c5c797bcd3cc4f4b7d3"
+  },
+  "replays": [
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-live-integrated-v1-run-20261008",
+      "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+      "tests_run": 4,
+      "tests_passed": 4,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-mm-functional-cegar-verify2-20261008",
+      "sprite_id": "sprite-7bd17231-0b9b-4a35-abc2-defe0e0a2c22",
+      "tests_run": 4,
+      "tests_passed": 4,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "proved": [
+    "CURRENT_TERMINAL_AUTHORITY_BINDS_THE_CURRENT_REAL_MISSION_OBJECTIVE_BY_GIT_BLOB_SHA",
+    "OPUS_5_5_IS_PRESERVED_AS_A_FRONTIER_CHECKPOINT_AND_NOT_THE_GLOBAL_TERMINAL_OBJECTIVE",
+    "CURRENT_TERMINAL_AUTHORITY_BINDS_CURRENT_R2_DECISION_INTELLIGENCE_BY_GIT_BLOB_SHA",
+    "CURRENT_R2_BINDS_ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_V5_BY_GIT_BLOB_SHA",
+    "GDPVAL_OWNER_LAYER_TARGET_RELATIVE_ROUTE_IS_NOT_CURRENTLY_AWAKE",
+    "GDPVAL_OWNER_LAYER_IS_EXTERNAL_REQUIRED_SLEEP",
+    "HISTORICAL_ROOT2_SCHEDULER_FIELDS_HAVE_NO_CURRENT_R2_SCHEDULING_AUTHORITY",
+    "CURRENT_R2_ENUMERATES_ZERO_ACTIVE_ZERO_REALITY_CELLS_AND_TWO_EXTERNAL_REQUIRED_SLEEP_CELLS"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_R2_CLOSURE",
+    "NO_GDPVAL_CLOSURE",
+    "NO_OPUS_CHECKPOINT_CLOSURE",
+    "NO_TERMINAL_CREDIT",
+    "NO_ERASURE_OF_HISTORICAL_CHECKPOINT_EVIDENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
