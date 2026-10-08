@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_R2_EXISTING_POLICY_COVER_OBSERVATION_REUSE_ACTIVATION_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE__REUSE_AUTHENTICATED_POLICY_COVER_OBSERVATIONS_BEFORE_PROVIDER__ZERO_TERMINAL_CREDIT",
+  "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE_INCOMPLETE",
+  "runtime": "canonical/runtime/r2_existing_policy_cover_observation_reuse_v1.py",
+  "controller": "canonical/runtime/general_adequate_decision_controller_v1.py",
+  "order": [
+    "WHEN_POLICY_COVER_SELECTS_ONE_DISCRIMINATOR__SEARCH_EXACT_EXISTING_AUTHENTICATED_OBSERVATION_BINDING",
+    "IF_ONE_NONCONFLICTING_BINDING_EXISTS__REUSE_AS_CANDIDATE_ONLY_AND_REENTER_POLICY_COVER_AUTHENTICATOR",
+    "IF_NONE_EXISTS__USE_INFORMATION_PROVIDER_IF_AVAILABLE",
+    "IF_MULTIPLE_AUTHENTICATED_OUTCOMES_CONFLICT__FAIL_CLOSED",
+    "IF_PROVIDER_UNAVAILABLE_AND_NO_REUSABLE_BINDING__REMAIN_OPEN"
+  ],
+  "authority_boundary": {
+    "reuse_semantic_truth_authority": false,
+    "reuse_policy_adequacy_authority": false,
+    "reuse_goal_satisfaction_authority": false,
+    "downstream_observation_reauthentication_mandatory": true,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_NEW_OBSERVATION_TRUTH_IS_INFERRED",
+    "NO_PROVIDER_REPLACEMENT_WHEN_NEW_REALITY_IS_REQUIRED",
+    "NO_GLOBAL_R2_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
