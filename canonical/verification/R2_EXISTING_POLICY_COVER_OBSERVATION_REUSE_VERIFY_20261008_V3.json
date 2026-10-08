@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_R2_EXISTING_POLICY_COVER_OBSERVATION_REUSE_VERIFY_20261008_V3",
+  "date": "2026-10-08",
+  "status": "PASS__FINAL_REBASE_ON_CURRENT_AUTHORITY__TESTED_BYTES_PRESERVED",
+  "branch": "r2-cover-observation-reuse-final-20261008",
+  "base_main": "cb3fc3851968962eed8f213fe699cea25663df71",
+  "exact_blobs": {
+    "canonical/runtime/r2_existing_policy_cover_observation_reuse_v1.py": {
+      "path": "canonical/runtime/r2_existing_policy_cover_observation_reuse_v1.py",
+      "git_blob_sha": "f2b7dec1887b26dde06aac78fd357a632e986876"
+    },
+    "canonical/runtime/general_adequate_decision_controller_v1.py": {
+      "path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+      "git_blob_sha": "7e25ed6ee5ff2c5c40ccddd074b999c4f3e2719b"
+    },
+    "canonical/tests/test_r2_existing_policy_cover_observation_reuse_v1.py": {
+      "path": "canonical/tests/test_r2_existing_policy_cover_observation_reuse_v1.py",
+      "git_blob_sha": "a873912f0b0d388075a0fd0a9a2af5ca4159fb55"
+    },
+    "canonical/tests/test_general_adequate_decision_policy_cover_integration_v1.py": {
+      "path": "canonical/tests/test_general_adequate_decision_policy_cover_integration_v1.py",
+      "git_blob_sha": "c7b4f40b4799130313469dde4a32a29b00c8342b"
+    },
+    ".github/workflows/verify-general-adequate-decision-controller-v1.yml": {
+      "path": ".github/workflows/verify-general-adequate-decision-controller-v1.yml",
+      "git_blob_sha": "f1bd099c1dc8fd5163310d1c256b248688a262e9"
+    },
+    "canonical/governance/R2_EXISTING_POLICY_COVER_OBSERVATION_REUSE_ACTIVATION_20261008_V1.json": {
+      "path": "canonical/governance/R2_EXISTING_POLICY_COVER_OBSERVATION_REUSE_ACTIVATION_20261008_V1.json",
+      "git_blob_sha": "92f9b92e370ac98c774b5e548c651d4921248000"
+    }
+  },
+  "verification": {
+    "standalone_reuser": "4_OF_4_PASS",
+    "controller_integration": "8_OF_8_PASS",
+    "exact_tested_runtime_blob": "7e25ed6ee5ff2c5c40ccddd074b999c4f3e2719b",
+    "exact_tested_reuse_blob": "f2b7dec1887b26dde06aac78fd357a632e986876",
+    "note": "FINAL_REBASE_PRESERVES_IDENTICAL_TESTED_RUNTIME_AND_REUSE_BYTES"
+  },
+  "scheduler_context": {
+    "current_scheduler": "V5",
+    "frontier_changed": false
+  },
+  "hard_nonclaims": [
+    "NO_NEW_TRUTH_INFERRED",
+    "NO_GLOBAL_R2_CLOSURE",
+    "NO_FULL_REPOSITORY_CLEAN_ROOM_REPLAY_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
