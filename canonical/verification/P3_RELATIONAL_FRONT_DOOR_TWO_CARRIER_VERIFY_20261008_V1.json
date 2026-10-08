@@ -1,0 +1,32 @@
+{
+  "schema":"PROJECT_BRAIN_P3_RELATIONAL_FRONT_DOOR_TWO_CARRIER_VERIFICATION_20261008_V1",
+  "date":"2026-10-08",
+  "status":"PASS__EXACT_SET_MEMBERSHIP_AND_LAUNCH_EVENT_RELATIONS_REACH_REAL_CONTEXT_FRONT_DOOR__44_OF_44_ON_TWO_CARRIERS__ZERO_TERMINAL_CREDIT",
+  "research_branch":"research/p3-proof-carrying-paraphrase-v1",
+  "subject":{
+    "membership_runtime":{"path":"canonical/runtime/bounded_exact_set_membership_support_v1.py","git_blob_sha":"b10904f5cb199bb138078091be0b2399a89a538d"},
+    "support_v7":{"path":"canonical/runtime/selected_support_truth_certificate_v7.py","git_blob_sha":"8bcec6ceba14374848be9fc9cc38caed3d2972ce"},
+    "realization_v3":{"path":"canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py","git_blob_sha":"ac5851a0b958cbf7983c1fdb75ef70398936c7b1"},
+    "front_door_v6":{"path":"canonical/runtime/p3_real_context_v3_admission_v6.py","git_blob_sha":"10bfefe76c3b50455d26c1e9ed5ed2ad74a0d737"}
+  },
+  "verified_end_to_end":{
+    "exact_positive_membership":"EVIDENCE_TO_SUPPORT_TO_VERBATIM_PROVENANCE_BOUND_OUTPUT",
+    "complete_set_nonmembership":"CONFLICT__CLAIM_NOT_ASSERTED",
+    "open_world_absence_guard":"POSITIVE_CONTAINS_DOES_NOT_PROVE_NONMEMBERSHIP",
+    "successful_launch_event":"CHECKED_EVENT_ENTAILMENT_TO_VERBATIM_PROVENANCE_BOUND_OUTPUT",
+    "uncontrolled_membership":"FAILS_CLOSED_TO_V2_FALLBACK",
+    "existing_structural_weighted_numeric_attestation_and_source_defined_routes":"REGRESSION_PASS"
+  },
+  "primary":{"sprite":"brain-root3-current-byte-replay-20261007-v1","result":{"passed":44,"failed":0}},
+  "independent":{"sprite":"brain-tbscience-v18-authority-verify-20261007-v1","result":{"passed":44,"failed":0},"runner":"ZERO_DEPENDENCY_ASSERT_FUNCTION_RUNNER"},
+  "hard_nonclaims":[
+    "NO_TAXONOMIC_OR_SUBSET_TRANSITIVE_CLOSURE_YET",
+    "NO_GENERAL_PARAPHRASE",
+    "NO_GENERAL_TEMPORAL_OR_CAUSAL_REASONING",
+    "NO_OPTIONAL_RELEVANCE_CLOSURE",
+    "NO_GLOBAL_P3_CLOSURE",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
