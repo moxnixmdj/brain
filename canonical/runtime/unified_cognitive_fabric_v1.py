@@ -12,6 +12,7 @@ from typing import Any, Callable, Mapping
 from canonical.runtime import live_integrated_brain_v1 as live_brain
 from canonical.runtime import p3_real_context_v3_admission_v12 as p3
 from canonical.runtime import autonomous_verified_self_improvement_v1 as self_improvement
+from canonical.runtime import r3_improvement_queue_driver_v1 as improvement_driver
 from canonical.runtime import live_brain_runtime_v1 as live_runtime
 from canonical.runtime import h100_verified_capability_registry_v8 as h100_inference
 from canonical.runtime import exact_linear_parameter_polytope_v1 as mystery_polytope
@@ -38,6 +39,7 @@ ENGINE_DESCRIPTORS = {
     "P3": "p3_real_context_v3_admission_v12.evaluate",
     "ADAPTIVE_SOLVER": "live_brain_runtime_v1.run(generic)",
     "LEARNING_EPISODE": "autonomous_verified_self_improvement_v1.run_learning_episode",
+    "IMPROVEMENT_CYCLE": "r3_improvement_queue_driver_v1.drain",
     "BOUND_CAPABILITY": "verified_bound_capability_execution_adapter_v1.execute",
     "H100_INFERENCE": "h100_verified_capability_registry_v8",
     "MYSTERY_INFERENCE": "exact_linear_parameter_polytope_v1 + interval_information_frontier_v1",
@@ -220,6 +222,7 @@ def run(
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
     episode_verification_provider=None,
     skill_verification_provider=None,
+    success_episode_adapter_provider=None,
 ) -> dict[str, Any]:
     try:
         if not isinstance(request, Mapping):
@@ -468,6 +471,7 @@ def run(
                     capability_expander=capability_expander,
                     episode_verification_provider=episode_verification_provider,
                     skill_verification_provider=skill_verification_provider,
+                    success_episode_adapter_provider=success_episode_adapter_provider,
                 )
 
             invoker_options = dict(options)
@@ -480,6 +484,35 @@ def run(
                 capability_payload,
                 engine_runner=_engine_runner,
                 options=invoker_options,
+            )
+        elif mode == "IMPROVEMENT_CYCLE":
+            def _repair_pending(work: Mapping[str, Any]) -> Mapping[str, Any]:
+                payload_row = work.get("payload")
+                if not isinstance(payload_row, Mapping):
+                    raise CognitiveFabricError("R3_REPAIR_WORK_PAYLOAD_INVALID")
+                return live_runtime.execute_failure_repair_cycle(
+                    {
+                        "failure_fingerprint": payload_row.get("failure_fingerprint"),
+                        "retry_capsule_sha256": payload_row.get("retry_capsule_sha256"),
+                        "components": list(options.get("repair_components") or []),
+                        "solver_kwargs": deepcopy(dict(options.get("repair_solver_kwargs") or {})),
+                        "learn": True,
+                    },
+                    repo_root=ROOT,
+                    state_path=options.get("state_path"),
+                    information_provider=information_provider,
+                    proposal_provider=proposal_provider,
+                    capability_expander=capability_expander,
+                )
+
+            out = improvement_driver.drain(
+                state_path=options.get("state_path", self_improvement.DEFAULT_STATE_PATH),
+                repo_root=ROOT,
+                episode_verification_provider=episode_verification_provider,
+                skill_verification_provider=skill_verification_provider,
+                success_episode_adapter_provider=success_episode_adapter_provider,
+                failure_repair_provider=_repair_pending,
+                max_actions=int(options.get("max_improvement_actions", 4)),
             )
         elif mode == "LEARNING_EPISODE":
             out = self_improvement.run_learning_episode(
