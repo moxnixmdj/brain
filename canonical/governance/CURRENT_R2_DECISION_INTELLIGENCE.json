@@ -11,11 +11,11 @@
   "controller": {
     "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py",
-    "authority_kernel_git_blob_sha": "7e25ed6ee5ff2c5c40ccddd074b999c4f3e2719b"
+    "authority_kernel_git_blob_sha": "29872fc55a5ec577feea769cc919dc889899c2bd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json",
-    "git_blob_sha": "e13a3440b0ce581a574b584faecfd70ef1a4167d"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V6.json",
+    "git_blob_sha": "6eee31433fb5b8b5776a45f1f6ac423022497177"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
@@ -48,8 +48,8 @@
   "judgment_model_policy": {
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
-  "primary_primitive": "ESCAPE_POLICY_ADEQUACY",
-  "primary_primitive_state": "OPEN__NEW_VERIFIABLE_POLICY_OR_SOURCE_PROOF_PRIMITIVE_ONLY_AFTER_REUSE_FIRST_REPAIR_EXHAUSTED",
+  "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
+  "primary_primitive_state": "OPEN__COVERAGE_AND_OBSERVABILITY_ONLY__GENERAL_ADEQUACY_OR_ABSTAIN_CONTROL_MECHANISM_CLOSED",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -74,10 +74,10 @@
     "new_primitive_boundary": "CAPABILITY_EXPANDER_OR_EQUIVALENT_VERIFIABLE_OWNED_ACQUISITION_REQUIRED"
   },
   "remaining_hard_frontier": [
-    "NEW_POLICY_OR_STRONGER_ADEQUACY_EVIDENCE_WHEN_NO_EXISTING_CERTIFICATE_OR_COMPOSABLE_REPAIR_COVERS_THE_REACHED_STATE",
-    "NEW_SOURCE_ALIGNED_PROOF_PRIMITIVE_WHEN_THE_SINGLE_SELECTED_POLICY_CHANGING_PREDICATE_IS_UNKNOWN",
+    "VERIFIED_ADEQUACY_COVERAGE_EXPANSION_FOR_REACHED_STATES_NOT_ALREADY_COVERED",
+    "NEW_SOURCE_ALIGNED_PROOF_PRIMITIVE_WHEN_THE_SELECTED_POLICY_CHANGING_PREDICATE_IS_UNKNOWN",
     "FRESH_EXTERNAL_REALITY_WHEN_THE_SELECTED_FACT_IS_NOT_PRESENT_IN_CURRENT_AUTHENTIC_SOURCES",
-    "GENUINELY_NEW_R3_PRIMITIVE_REQUIRES_A_VERIFIABLE_CAPABILITY_EXPANSION_PATH"
+    "GENUINELY_NEW_CAPABILITY_REQUIRES_A_VERIFIABLE_OWNED_ACQUISITION_PATH"
   ],
   "policy_cover_information_provider_integration": {
     "verification_path": "canonical/verification/R2_POLICY_COVER_INFORMATION_PROVIDER_INTEGRATION_VERIFY_20261008_V1.json",
@@ -111,5 +111,18 @@
     "focused_replay": "4_STANDALONE_PLUS_8_CONTROLLER_INTEGRATION_PASS",
     "base_scheduler": "V5",
     "global_frontier_changed": false
+  },
+  "mechanism_closure": {
+    "path": "canonical/governance/R2_ADEQUACY_OR_ABSTAIN_MECHANISM_CLOSURE_20261008_V1.json",
+    "git_blob_sha": "d0fb6e7992d2aa08223280dc6bd4930467c513ba",
+    "status": "MECHANISM_CLOSED__OPEN_WORLD_COVERAGE_AND_OBSERVABILITY_REMAIN_OPEN",
+    "universal_control_semantics_closed": true,
+    "universal_positive_action_coverage_closed": false
+  },
+  "grounded_candidate_policy_frontier": {
+    "path": "canonical/runtime/r2_grounded_candidate_policy_frontier_v1.py",
+    "git_blob_sha": "0d13e7c5fe5e8ce5bf8430e1741765d0c57e9b0b",
+    "verification_path": "canonical/verification/R2_GROUNDED_FRONTIER_PRECISION_RECALL_VERIFY_20261008_V1.json",
+    "status": "ACTIVE__CANDIDATE_ONLY__POLICY_ADEQUACY_AUTHORITY_FALSE"
   }
 }
