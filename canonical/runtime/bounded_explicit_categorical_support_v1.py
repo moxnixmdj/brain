@@ -237,23 +237,33 @@ def classify_support(
             if path is not None:
                 conflict_paths.append([eid] + path)
 
-    elif ctype == "SUBCLASS":
+    elif ctype in ("SUBCLASS", "NOT_SUBCLASS"):
         sub, sup = claim["subclass"], claim["superclass"]
-        path = _shortest_path(subclass_edges, sub, sup)
-        if path is not None:
-            support_paths.append(path)
+        # A strict non-inclusion of a class in itself is impossible.
+        if ctype == "NOT_SUBCLASS" and sub == sup:
+            return {
+                "schema": SCHEMA, "status": "UNRESOLVED",
+                "relation": "UNKNOWN", "claim_in_scope": True,
+                "reason": "SELF_NOT_SUBCLASS_CONTRADICTS_SET_SEMANTICS",
+                "terminal_authority": False,
+            }
+        positive_path = _shortest_path(subclass_edges, sub, sup)
+        negative_paths = []
         for a, b, eid in neg_subclass:
-            if a == sub and b == sup:
-                conflict_paths.append([eid])
-
-    else:
-        sub, sup = claim["subclass"], claim["superclass"]
-        for a, b, eid in neg_subclass:
-            if a == sub and b == sup:
-                support_paths.append([eid])
-        path = _shortest_path(subclass_edges, sub, sup)
-        if path is not None:
-            conflict_paths.append(path)
+            # A !subset B, A subset X, Y subset B imply X !subset Y.
+            # Every contributing edge is retained in the proof path.
+            left = _shortest_path(subclass_edges, a, sub)
+            right = _shortest_path(subclass_edges, sup, b)
+            if left is not None and right is not None:
+                negative_paths.append(left + [eid] + right)
+        if ctype == "SUBCLASS":
+            if positive_path is not None:
+                support_paths.append(positive_path)
+            conflict_paths.extend(negative_paths)
+        else:
+            support_paths.extend(negative_paths)
+            if positive_path is not None:
+                conflict_paths.append(positive_path)
 
     def _best(paths: list[list[str]]) -> list[str]:
         if not paths:
