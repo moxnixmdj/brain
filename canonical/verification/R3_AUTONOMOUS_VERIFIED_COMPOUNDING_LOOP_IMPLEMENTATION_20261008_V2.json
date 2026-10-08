@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V2",
+  "date": "2026-10-08",
+  "status": "IMPLEMENTED__FRESH_INDEPENDENT_EXECUTION_BLOCKED_BY_ZERO_RUNNER_CARRIER",
+  "subject_head": "9e5510680ef45096773acefc384912980593365b",
+  "root": "R3_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_LOOP",
+  "implementation": {
+    "experience_capture": true,
+    "causal_failure_diagnosis_and_deduplication": true,
+    "immediate_verified_repair_dispatch": true,
+    "exact_original_obligation_replay_required_for_repair_success": true,
+    "repair_replay_recursion_guard": true,
+    "authenticated_new_primitive_expansion": true,
+    "success_replay_capsules": true,
+    "success_replay_secret_scan": true,
+    "independent_episode_verification_provider_handshake": true,
+    "automatic_skill_candidate_induction": true,
+    "exact_program_cross_scope_candidate_induction": true,
+    "cross_scope_candidate_has_zero_authority_until_independent_verification": true,
+    "independent_skill_verification_provider_handshake": true,
+    "permanent_verified_skill_reuse": true,
+    "effectful_counterexample_skill_quarantine": true,
+    "verified_skill_pareto_replacement": true,
+    "durable_prioritized_improvement_queue": true,
+    "unified_live_fabric_verifier_propagation": true
+  },
+  "exact_subject_blobs": {
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "05f13e872b5766836d7cfc73ba2847e37ebef8d1",
+    "canonical/runtime/live_brain_runtime_v1.py": "e5a6a80a5335d1e73411e6a240473d16c1ac6227",
+    "canonical/runtime/unified_cognitive_fabric_v1.py": "bf57e5d6aa1dfd3fb7323138d2a658393f9dded4",
+    "canonical/tests/test_autonomous_verified_self_improvement_v1.py": "89a3f0e64286cf65cccf9fa1174a6527814a5dce",
+    "canonical/tests/test_verified_repair_replay_loop_v1.py": "20f94e1bad664c8048253452a65e5d92773182b2",
+    "canonical/tests/test_live_brain_runtime_v1.py": "044e80a393af07012e19cc6afb3360a68e2defc1",
+    "canonical/tests/test_unified_cognitive_fabric_v1.py": "7f89e9f2ca7c5bb7faf786c2425279ec31475730",
+    ".github/workflows/r3-autonomous-self-improvement-v1.yml": "3923c486f8a8f9ebb25c26a402e2f15972ab6dc3"
+  },
+  "verification_gate": {
+    "workflow": ".github/workflows/r3-autonomous-self-improvement-v1.yml",
+    "latest_attempt_run_id": 37769408853,
+    "latest_attempt_job_id": 113284955214,
+    "runner_id": 0,
+    "runner_name": "",
+    "steps_executed": 0,
+    "conclusion": "failure",
+    "classification": "CARRIER_FAILURE_BEFORE_RUNNER_ASSIGNMENT__NO_CODE_VERDICT",
+    "governing_fallback": "canonical/governance/INDEPENDENT_VERIFICATION_CARRIER_FALLBACK_V1.json",
+    "public_fallback_not_used_reason": "NO_ASSERTION_THAT_THE_CURRENT_PRIVATE_R3_SOURCE_IS_SAFE_TO_PUBLISH_AS_A_PUBLIC_CAPSULE"
+  },
+  "historical_evidence": {
+    "prior_receipt": "canonical/verification/R3_AUTONOMOUS_SELF_IMPROVEMENT_VERIFICATION_20261008_V1.json",
+    "limitation": "V1_VERIFIED_AN_EARLIER_SIX_TEST_INTEGRATION_LAYER_AND_DOES_NOT_VERIFY_THIS_CURRENT_V12_LIVE_COMPOUNDING_SURFACE"
+  },
+  "authority_boundary": {
+    "candidate_self_certification_forbidden": true,
+    "repair_self_certification_forbidden": true,
+    "independent_verification_authenticators_remain_authority": true,
+    "carrier_failure_must_not_be_counted_as_artifact_failure": true
+  },
+  "current_truth": "R3_CONTROL_PLANE_AND_COMPOUNDING_MECHANISMS_ARE_IMPLEMENTED_ON_MAIN; A_FRESH_INDEPENDENT_EXECUTION_RECEIPT_FOR_THE_EXACT_CURRENT_BLOBS_IS_NOT_AVAILABLE_WHILE_THE_PRIVATE_RUNNER_REMAINS_UNASSIGNED.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
