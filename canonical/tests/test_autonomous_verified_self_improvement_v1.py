@@ -1,0 +1,266 @@
+from __future__ import annotations
+
+import json
+import tempfile
+from pathlib import Path
+import unittest
+from unittest import mock
+
+from canonical.runtime import autonomous_verified_self_improvement_v1 as loop
+
+
+def verified_episode(eid: str, scope: str = "scope") -> dict:
+    return {
+        "episode_id": eid,
+        "scope_id": scope,
+        "steps": [{"index": 0, "op": "solve", "inputs": [], "outputs": ["goal"]}],
+        "preconditions": [],
+        "postconditions": ["goal"],
+        "invalidators": [],
+        "program_sha256": "sha256:" + ("a" * 64),
+        "problem_sha256": "b" * 64,
+        "trace_sha256": ("c" if eid == "ep1" else "d") * 64,
+        "fact_capsule_head_hash": "e" * 64,
+        "value_capsule_head_hash": "f" * 64,
+        "verification_receipt": {
+            "independent_verified": True,
+            "exact_byte_bound": True,
+            "conclusion": "success",
+            "behavior_verified": True,
+            "episode_id": eid,
+            "scope_id": scope,
+            "program_sha256": "sha256:" + ("a" * 64),
+            "receipt_id": "EPVR:test-" + eid,
+        },
+        "verification_binding": {
+            "receipt": {"path": "r-" + eid, "git_blob_sha": "1" * 40},
+            "verification": {"path": "v-" + eid, "git_blob_sha": "2" * 40},
+        },
+    }
+
+
+def verified_skill(
+    digest_char: str,
+    *,
+    relation: str = "EXACT",
+    source_ids=("ep1", "ep2"),
+    step_count: int = 2,
+) -> dict:
+    return {
+        "schema": "PROJECT_BRAIN_EXECUTABLE_SKILL_PROGRAM_V7",
+        "status": "VERIFIED_EXECUTABLE_SKILL",
+        "source_episode_ids": list(source_ids),
+        "source_episode_receipts": ["EPVR:" + x for x in source_ids],
+        "source_scopes": ["scope"],
+        "steps": [
+            {
+                "index": i,
+                "op": "op" + str(i),
+                "inputs": ["x"] if i else [],
+                "outputs": ["goal"] if i == step_count - 1 else ["x"],
+            }
+            for i in range(step_count)
+        ],
+        "preconditions": [],
+        "postconditions": ["goal"],
+        "invalidators": [],
+        "candidate_sha256": "sha256:" + (digest_char * 64),
+        "verified_skill": True,
+        "reuse_authorized": True,
+        "candidate_only": False,
+        "scope_relation": relation,
+        "verification_receipt": "SKVR:" + digest_char * 40,
+        "acceptance_credit_delta": 0,
+        "family_credit_delta": 0,
+        "capability_credit_delta": 0,
+        "ownership_credit_delta": 0,
+        "promotion_authority": False,
+        "execution_authority": False,
+    }
+
+
+class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
+    def temp_state(self):
+        td = tempfile.TemporaryDirectory()
+        self.addCleanup(td.cleanup)
+        return Path(td.name) / "state.json"
+
+    def test_failure_is_causally_classified_and_deduplicated(self):
+        path = self.temp_state()
+        failure = {
+            "pass": False,
+            "status": "FAIL__CAPABILITY_OR_TASK_CONTRACT_GAP",
+            "failure_class": "MISSING_CAPABILITY_OR_COMPILED_TASK_CONTRACT",
+            "attempts": [{"capability_id": "x", "status": "failed"}],
+        }
+        first = loop.integrate_solver_output(failure, state_path=path)
+        second = loop.integrate_solver_output(failure, state_path=path)
+
+        self.assertFalse(first["pass"])
+        self.assertEqual(
+            first["diagnosis"]["repair_class"],
+            "ACQUIRE_COMPOSE_OR_INVENT_VERIFIABLE_CAPABILITY",
+        )
+        self.assertEqual(
+            first["diagnosis"]["failure_fingerprint"],
+            second["diagnosis"]["failure_fingerprint"],
+        )
+        state = loop.load_state(path)
+        self.assertEqual(len(state["failures"]), 1)
+        self.assertEqual(next(iter(state["failures"].values()))["count"], 2)
+
+    def test_only_authenticated_verified_episode_is_persisted(self):
+        path = self.temp_state()
+        ep = verified_episode("ep1")
+        out = {
+            "pass": True,
+            "status": "SOLVED__VERIFIED_EPISODE",
+            "current_episode_verified": True,
+            "current_episode": ep,
+            "skill_candidate": None,
+            "verified_skill_reuse_authorized": False,
+            "verified_executable_skill": None,
+        }
+        integrated = loop.integrate_solver_output(out, state_path=path)
+        state = loop.load_state(path)
+
+        self.assertTrue(integrated["episode_added"])
+        self.assertEqual(state["stats"]["verified_episode_count"], 1)
+        self.assertEqual(len(state["episodes"]), 1)
+
+    def test_unverified_candidate_never_gets_permanent_reuse(self):
+        path = self.temp_state()
+        out = {
+            "pass": True,
+            "status": "SOLVED__SKILL_CANDIDATE_READY",
+            "current_episode_verified": False,
+            "skill_candidate": {"candidate_sha256": "sha256:" + "9" * 64},
+            "verified_skill_reuse_authorized": False,
+            "verified_executable_skill": None,
+        }
+        integrated = loop.integrate_solver_output(out, state_path=path)
+        state = loop.load_state(path)
+
+        self.assertEqual(
+            integrated["status"],
+            "SKILL_CANDIDATE_AWAITS_INDEPENDENT_VERIFICATION",
+        )
+        self.assertFalse(integrated["permanent_reuse_authorized"])
+        self.assertEqual(state["stats"]["verified_skill_count"], 0)
+
+    def test_verified_stronger_skill_pareto_replaces_dominated_variant(self):
+        path = self.temp_state()
+        first_skill = verified_skill("3", relation="EXACT", source_ids=("ep1", "ep2"))
+        first = loop.integrate_solver_output(
+            {
+                "pass": True,
+                "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
+                "current_episode_verified": False,
+                "skill_candidate": first_skill,
+                "verified_skill_reuse_authorized": True,
+                "verified_executable_skill": first_skill,
+            },
+            state_path=path,
+        )
+        self.assertTrue(first["permanent_reuse_authorized"])
+        first_id = first["active_skill_id"]
+
+        stronger = verified_skill(
+            "4",
+            relation="PROVEN_SUPERSET",
+            source_ids=("ep1", "ep2", "ep3"),
+        )
+        second = loop.integrate_solver_output(
+            {
+                "pass": True,
+                "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
+                "current_episode_verified": False,
+                "skill_candidate": stronger,
+                "verified_skill_reuse_authorized": True,
+                "verified_executable_skill": stronger,
+            },
+            state_path=path,
+        )
+        state = loop.load_state(path)
+        second_id = second["active_skill_id"]
+
+        self.assertIsNotNone(second_id)
+        self.assertNotEqual(first_id, second_id)
+        self.assertFalse(state["skills"][first_id]["active"])
+        self.assertEqual(state["skills"][first_id]["dominated_by"], second_id)
+        self.assertTrue(state["skills"][second_id]["active"])
+        family = state["skills"][second_id]["family_id"]
+        self.assertEqual(state["pareto_frontiers"][family], [second_id])
+
+    def test_dominated_verified_skill_is_kept_as_evidence_but_not_activated(self):
+        path = self.temp_state()
+        strong = verified_skill(
+            "5",
+            relation="PROVEN_SUPERSET",
+            source_ids=("ep1", "ep2", "ep3"),
+            step_count=1,
+        )
+        active = loop.integrate_solver_output(
+            {
+                "pass": True,
+                "current_episode_verified": False,
+                "skill_candidate": strong,
+                "verified_skill_reuse_authorized": True,
+                "verified_executable_skill": strong,
+            },
+            state_path=path,
+        )
+        weak = verified_skill("6", relation="EXACT", source_ids=("ep1", "ep2"), step_count=2)
+        rejected = loop.integrate_solver_output(
+            {
+                "pass": True,
+                "current_episode_verified": False,
+                "skill_candidate": weak,
+                "verified_skill_reuse_authorized": True,
+                "verified_executable_skill": weak,
+            },
+            state_path=path,
+        )
+        state = loop.load_state(path)
+        weak_id = "skill:" + "6" * 64
+
+        self.assertIsNone(rejected["active_skill_id"])
+        self.assertFalse(rejected["permanent_reuse_authorized"])
+        self.assertIn(weak_id, state["skills"])
+        self.assertFalse(state["skills"][weak_id]["active"])
+        self.assertEqual(state["skills"][weak_id]["dominated_by"], active["active_skill_id"])
+
+    def test_learning_run_automatically_reuses_prior_verified_episodes(self):
+        path = self.temp_state()
+        state = loop.load_state(path)
+        ep = verified_episode("ep1")
+        state["episodes"][loop._episode_key(ep)] = ep
+        loop._refresh_stats(state)
+        loop._write_state(state, path)
+
+        solver_out = {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "TEST_STOP",
+            "falsified_capability_ids": [],
+            "deferred_capability_ids": [],
+            "counterexamples": [],
+            "attempts": [],
+        }
+        with mock.patch.object(loop.solver_v10, "run", return_value=solver_out) as run_mock:
+            result = loop.run_learning_episode(
+                {"task_id": "t", "initial_facts": [], "target_effects": ["goal"], "capabilities": []},
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep2",
+                scope_id="scope",
+            )
+
+        self.assertEqual(result["prior_verified_episode_count_used"], 1)
+        kwargs = run_mock.call_args.kwargs
+        self.assertEqual(len(kwargs["prior_verified_episode_records"]), 1)
+        self.assertEqual(kwargs["prior_verified_episode_records"][0]["episode_id"], "ep1")
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

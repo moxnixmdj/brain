@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_R3_AUTONOMOUS_SELF_IMPROVEMENT_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__R3_INTEGRATION_LAYER_REGRESSION_6_OF_6",
+  "subject_branch": "r3-autonomous-self-improvement-v1-20261008",
+  "subject_commit_before_evidence": "a4100d9b603ecd7b716995fda4e3593f5d702dd1",
+  "verified_files": [
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+    "canonical/tests/test_autonomous_verified_self_improvement_v1.py",
+    "canonical/runtime/capability_first_scheduler_v1.py"
+  ],
+  "isolated_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+  },
+  "verification": {
+    "command": "python3 -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "elapsed_seconds": 0.008
+  },
+  "proved_behaviors": [
+    "failure fingerprints are causally classified and deduplicated",
+    "only authenticated verified episodes are persisted",
+    "unverified skill candidates never receive permanent reuse authority",
+    "stronger independently verified skills Pareto-replace dominated variants",
+    "dominated verified skills remain evidence but are not activated",
+    "later learning episodes automatically consume prior verified episodes from durable state"
+  ],
+  "verification_boundary": {
+    "universal_solver_v10": "STUBBED_ONLY_AT_MODULE_BOUNDARY_BECAUSE_THE_REGRESSION_SUITE_MOCKS_SOLVER_V10_RUN",
+    "v10_interface_checked_against_repository": "canonical.runtime.universal_verified_adaptive_solver_v10.run EXISTS WITH COMPATIBLE KEYWORD INTERFACE",
+    "claim": "THIS_RECEIPT_VERIFIES_THE_NEW_R3_PERSISTENCE_PROMOTION_AND_PARETO_INTEGRATION_LAYER; IT_DOES_NOT RE-PROVE ALL V10 INTERNALS"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
