@@ -1,0 +1,338 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_EXACT_66_TASK_TARGET_SCOPE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE__EXACT_COMPLETE_TARGET_CASE_UNIVERSE_FROM_FROZEN_PUBLIC_RELEASE_TOP_LEVEL_METADATA__ZERO_TASK_CONTENT_EXPOSURE__ZERO_CREDIT",
+  "objective": "Bind the exact finite Terminal-Bench 4.0 target task universe at the frozen release using only top-level task directory names and Git tree identities, without reading task instructions, solutions, tests, or verifier logic.",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "benchmark": "Terminal-Bench 4.0",
+  "source": {
+    "repository": "harbor-framework/terminal-bench",
+    "release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "endpoint": "https://api.github.com/repos/harbor-framework/terminal-bench/contents/tasks?ref=452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "retrieval_scope": "TOP_LEVEL_TASKS_DIRECTORY_METADATA_ONLY",
+    "task_contents_requested": false,
+    "task_instructions_requested": false,
+    "solutions_requested": false,
+    "tests_requested": false,
+    "hidden_verifier_requested": false
+  },
+  "enumeration": {
+    "directory_count": 66,
+    "only_non_directory_entries": [
+      {
+        "name": "README.md",
+        "git_blob_sha": "c5abc9dd6a3792fb14883d122bd940035ac8f697",
+        "type": "file"
+      },
+      {
+        "name": "dataset.toml",
+        "git_blob_sha": "f93d1456609f74dfae967cd6c0d8ef4b5b057f3a",
+        "type": "file"
+      }
+    ],
+    "tasks": [
+      {
+        "task": "atrx-vep-crispr",
+        "tree_sha": "1476c5fd2b2ab57427687cff61093009b4aa990d"
+      },
+      {
+        "task": "batched-eval-parity",
+        "tree_sha": "531f87027ae5c3080965b7054854efc1b45f2eeb"
+      },
+      {
+        "task": "biped-contact-dynamics",
+        "tree_sha": "fa045890105efd073373d211b47b17d4834f5705"
+      },
+      {
+        "task": "bun-sourcemap-leak",
+        "tree_sha": "15dd9f93a73c743c9c37478205524dc3c1f509bd"
+      },
+      {
+        "task": "cad-model",
+        "tree_sha": "e0d9d5571c902b9cd810f37e53d4a3cae1db05f3"
+      },
+      {
+        "task": "cargo-flight-dispatch",
+        "tree_sha": "a17f9c316e7fa8df1366f82db5db7ea3af22a99f"
+      },
+      {
+        "task": "coq-block-bound",
+        "tree_sha": "89bf4fcad555ffe15878eb7385d549cf91aac7d2"
+      },
+      {
+        "task": "ctr-optimization",
+        "tree_sha": "5332890d206b7eb78bf47cd3bbe598c845b01659"
+      },
+      {
+        "task": "cumulative-layout-shift",
+        "tree_sha": "b3f6aca7e990df4cb7175fef9c863da2dd429708"
+      },
+      {
+        "task": "data-anonymization",
+        "tree_sha": "63aee73b99abfd3c7a861bee0917b23d01aee65d"
+      },
+      {
+        "task": "distributed-dedup",
+        "tree_sha": "91586d74cbf9d5de0ee692f6f9161341e402ae9e"
+      },
+      {
+        "task": "embedding-drift-monitor",
+        "tree_sha": "205b1321b578f54520235e0ff4a84eb705930f43"
+      },
+      {
+        "task": "fin-saccr-rwa",
+        "tree_sha": "121fc32b8e1a0eeaf8ab588641a78aee05dd689b"
+      },
+      {
+        "task": "foodstuff-beta-activity",
+        "tree_sha": "54f6b88e60528c166741e2cb7d783dfb467c0b67"
+      },
+      {
+        "task": "formal-crypto",
+        "tree_sha": "5785894f21263717ad71d4bc51ce07c0aed782bd"
+      },
+      {
+        "task": "fp8-rmsnorm-gemm",
+        "tree_sha": "ea3b626b9abdce90700f6c2ab9cf97ef36cf31a5"
+      },
+      {
+        "task": "freecad-impeller",
+        "tree_sha": "b756059472f29c19cf81a68e043cc04305aa12dc"
+      },
+      {
+        "task": "freecad-platform-drawing",
+        "tree_sha": "495851e9b86ba3c5a091795fcd384c73b6e403dd"
+      },
+      {
+        "task": "freecad-spring-clip",
+        "tree_sha": "ddbc6cab2ec637f0ad9b7cc6dd1c4344310b35c4"
+      },
+      {
+        "task": "freight-dispatch-shift",
+        "tree_sha": "6660ee50b732b23f6ac4fe6ecb4798e07328a69c"
+      },
+      {
+        "task": "glycan-ms2-elucidation",
+        "tree_sha": "544475579195eccb3428e1e6bc2b7e47d5964a5e"
+      },
+      {
+        "task": "gsea-proteomics",
+        "tree_sha": "edeb6731bc20980a5f6d18cf480a35844ddf23ca"
+      },
+      {
+        "task": "heat-pump-warranty",
+        "tree_sha": "68602115f2ec366bbdba5d292a4d8f8ebd538eeb"
+      },
+      {
+        "task": "hof-topology-interpenetration",
+        "tree_sha": "0c649817db5b68d5bb977a1802cb2e2b5cede122"
+      },
+      {
+        "task": "html-js-filter",
+        "tree_sha": "f77bc4b71db925fd88587930bfdd2a026645da92"
+      },
+      {
+        "task": "interleaved-vigenere",
+        "tree_sha": "af2a9c496140203b68f653d4b6575917287fed45"
+      },
+      {
+        "task": "intrastat-meldung",
+        "tree_sha": "b426637c899f8fff9379cc8bf61309512fc2b418"
+      },
+      {
+        "task": "jax-speedrun-gpu",
+        "tree_sha": "68646693b8eaf284404dd71cf5fb775e746605e8"
+      },
+      {
+        "task": "ks-solver-cpp",
+        "tree_sha": "793717d415fa05c390b4de07e2a3ee2de15b448e"
+      },
+      {
+        "task": "kv-live-surgery",
+        "tree_sha": "a4525fd5f2ece2e6dc570d90ff2c04ed6d5f6d49"
+      },
+      {
+        "task": "lake-temp-glm",
+        "tree_sha": "48ff54b633da348191f67d3cf5af52235bdd20aa"
+      },
+      {
+        "task": "layout-config-recreation",
+        "tree_sha": "24403f85600cbf5962fa834e2240b69cba33b563"
+      },
+      {
+        "task": "layout-config-recreation2",
+        "tree_sha": "4d195d8f94cc10a12398c7584dabcbace2b2b5c2"
+      },
+      {
+        "task": "legacy-utility-triage",
+        "tree_sha": "68bcd50b8fce77ffc0dd2c3a5c8660eb19e54b56"
+      },
+      {
+        "task": "live-database-cutover",
+        "tree_sha": "5821e6e3b25686e6460eaa46faa350ae7ec9dd19"
+      },
+      {
+        "task": "math-eval-grader",
+        "tree_sha": "88948dde7ac6d3d76d34bac267679f8b9afc5a0f"
+      },
+      {
+        "task": "medical-claims-processing",
+        "tree_sha": "463c94b6c38b082ac9bb1b856c724e71fe0be021"
+      },
+      {
+        "task": "mp-checkpoint-consolidation",
+        "tree_sha": "3e5028cf1e4426f8f9cf3eb4a70fdbc360dd4496"
+      },
+      {
+        "task": "music-harmony",
+        "tree_sha": "bd117fac42e0d7ad63ec20e4c297c2a1892b886e"
+      },
+      {
+        "task": "mvcc-lsm-compaction",
+        "tree_sha": "d937ad9de788625952897098a32aeb1fefda68a2"
+      },
+      {
+        "task": "nextjs-performance",
+        "tree_sha": "50882f74143bca460cf8745d26367a1be2ec6254"
+      },
+      {
+        "task": "ontology-kg-querying",
+        "tree_sha": "53ee75059d2c82b964f46deaa549b6c88f673b40"
+      },
+      {
+        "task": "payments-pipeline-fix",
+        "tree_sha": "8154e5f646fd8e0fe0f9fe5a062fbe6454074b72"
+      },
+      {
+        "task": "photonic-waveguide-routing",
+        "tree_sha": "32e0d0e771cd0db200b02e22a86cab0300ed1e00"
+      },
+      {
+        "task": "pretrain-shard-corruption",
+        "tree_sha": "105e69735f35fd857dd417390511e527721513da"
+      },
+      {
+        "task": "production-planning",
+        "tree_sha": "8a103147473b53e0c09819b74bcfe4f86f7566bb"
+      },
+      {
+        "task": "protein-autointerp-disulfide",
+        "tree_sha": "62d36bac6e15cafffc33f08f7197e7eb316dd5aa"
+      },
+      {
+        "task": "react-lead-form",
+        "tree_sha": "a181b1085fabb12dd3c5ea5814b15e45ba540b0a"
+      },
+      {
+        "task": "retro-console-soc",
+        "tree_sha": "9a14cd923dbec51cc190b5658bb0412d66ea4adc"
+      },
+      {
+        "task": "risk-scorer-replay",
+        "tree_sha": "9c9a259486637b915847ceacacd8f5412e2d2d57"
+      },
+      {
+        "task": "roy-polymorph-cn",
+        "tree_sha": "9d1c0393a3a47bcfc32ffee01dd4ad893a2f0508"
+      },
+      {
+        "task": "rs-archive-clone",
+        "tree_sha": "de559cdf3e6aae15aa3c4b71d22db62b58c6f7f1"
+      },
+      {
+        "task": "satb-audio-transcription",
+        "tree_sha": "1b8bdada4d38800e60dc63db6488ef619e9b7ced"
+      },
+      {
+        "task": "session-window-debug",
+        "tree_sha": "a1c13b0f0d072e4c186190fee0df378101c8d50b"
+      },
+      {
+        "task": "sglang-qwen-burst",
+        "tree_sha": "c73224b1525884d6dce74e96e745b4472e27d3ab"
+      },
+      {
+        "task": "shadow-relay",
+        "tree_sha": "96548cb6b729aefbaa6be710c16dc3289a8b31fc"
+      },
+      {
+        "task": "sound-change-cascade",
+        "tree_sha": "5877c6223ff66f53cf2f8eb6899392e206c7c3b6"
+      },
+      {
+        "task": "takens-embedding-lean",
+        "tree_sha": "cc3f9664feb2c8cd51d0bb799f7cb1437b5fcfeb"
+      },
+      {
+        "task": "telecom-entity-resolution",
+        "tree_sha": "d7abcdb5e5cea8960b7ba5c36c302eee33d2d7c8"
+      },
+      {
+        "task": "uefi-bootkit",
+        "tree_sha": "2cc10542784a8ca541958521b3f7ea7be3cc2787"
+      },
+      {
+        "task": "vba-userform-port",
+        "tree_sha": "5926d83be053ffc8ab407a31ec6dd5b77406fcce"
+      },
+      {
+        "task": "vf2-speedup-networkx",
+        "tree_sha": "c78673da2da786f72bf24a532b474f93ecafdff1"
+      },
+      {
+        "task": "vllm-deepseek-streaming",
+        "tree_sha": "ebfe19ee79b072b04478d703d5d4f722ecbe3315"
+      },
+      {
+        "task": "vpp-loss-divergence",
+        "tree_sha": "09b3c3904389468e84332d48ac6c3aff01d67d4c"
+      },
+      {
+        "task": "wal-recovery-ordering",
+        "tree_sha": "55e146c823b0e999c08203f17d45af382163f897"
+      },
+      {
+        "task": "wdm-design",
+        "tree_sha": "ea4b9b446fd1925d76be84b0231b9ceecf2ad507"
+      }
+    ]
+  },
+  "scope_certificate": {
+    "basis": "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+    "complete_target_case_set": true,
+    "exact_task_count": 66,
+    "target_subset_proved": true,
+    "public_finite_scope": true,
+    "identity_binding": "RELEASE_COMMIT_PLUS_SORTED_TASK_DIRECTORY_NAMES_PLUS_TREE_SHAS",
+    "semantic_limit": "PROVES_EXACT_TASK_IDENTITY_SCOPE_ONLY__DOES_NOT_PROVE_ANY_TASK_SUCCESS_EVALUATOR_RELATION_RESOURCE_SEMANTICS_OR_POLICY_ADEQUACY"
+  },
+  "task_conditioned_dominance_effect_if_independently_verified": {
+    "domain_subset_proved": true,
+    "closes_only": "TARGET_DOMAIN_COVERAGE",
+    "still_open": [
+      "EVALUATOR_RELATION_PROOF",
+      "RESOURCE_SEMANTICS_PRESERVATION",
+      "UNIVERSAL_SUCCESS_OR_THRESHOLD_REACHING_LOWER_BOUND_PROOF"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_TASK_INSTRUCTION_SOLUTION_TEST_OR_VERIFIER_CONTENT_EXPOSED",
+    "NO_TB4_SUCCESS_PROOF",
+    "NO_TB4_SCORE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_CLAIM_EVERY_TASK_IS_RESOURCE_EXECUTABLE",
+    "NO_CLAIM_EVERY_TASK_POLICY_IS_ADEQUATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
