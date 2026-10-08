@@ -27,10 +27,10 @@ from copy import deepcopy
 from hashlib import sha256
 import json
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime.capability_first_scheduler_v1 import update_pareto_frontier
-from canonical.runtime import universal_verified_adaptive_solver_v10 as solver_v10
+from canonical.runtime import universal_verified_adaptive_solver_v12 as solver_v12
 
 SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1"
 STATE_SCHEMA = "PROJECT_BRAIN_SELF_IMPROVEMENT_STATE_V1"
@@ -76,6 +76,7 @@ def _empty_state() -> dict[str, Any]:
         "pareto_frontiers": {},
         "failures": {},
         "reuse": {},
+        "expanded_capabilities": {},
         "stats": {
             "verified_episode_count": 0,
             "verified_skill_count": 0,
@@ -94,7 +95,16 @@ def load_state(path: str | Path = DEFAULT_STATE_PATH) -> dict[str, Any]:
         raise SelfImprovementError("SELF_IMPROVEMENT_STATE_SCHEMA_INVALID")
     state = deepcopy(dict(doc))
     state.setdefault("reuse", {})
-    for key in ("episodes", "skills", "pareto_frontiers", "failures", "reuse", "stats"):
+    state.setdefault("expanded_capabilities", {})
+    for key in (
+        "episodes",
+        "skills",
+        "pareto_frontiers",
+        "failures",
+        "reuse",
+        "expanded_capabilities",
+        "stats",
+    ):
         if not isinstance(state.get(key), Mapping):
             raise SelfImprovementError("SELF_IMPROVEMENT_STATE_FIELD_INVALID:" + key)
     return state
@@ -530,6 +540,165 @@ def _record_reuse_result(
     state["reuse"][skill_id] = row
     _write_state(state, state_path)
 
+
+def _task_contract_key(problem: Mapping[str, Any]) -> str:
+    task_id = _s(problem.get("task_id"))
+    if not task_id:
+        raise SelfImprovementError("TASK_ID_REQUIRED_FOR_EXPANSION_CACHE")
+    return "task:" + _sha(
+        {
+            "task_id": task_id,
+            "initial_facts": _items(problem.get("initial_facts")),
+            "target_effects": _items(problem.get("target_effects")),
+        }
+    )
+
+
+def _rehydrate_verified_expansions(
+    problem: Mapping[str, Any],
+    state: Mapping[str, Any],
+) -> tuple[dict[str, Any], int, str]:
+    """Reattach previously authenticated V12 capability growth for this task contract."""
+    key = _task_contract_key(problem)
+    record = state.get("expanded_capabilities", {}).get(key)
+    if record is None:
+        return deepcopy(dict(problem)), 0, key
+    if not isinstance(record, Mapping):
+        raise SelfImprovementError("EXPANSION_CACHE_RECORD_INVALID")
+    rows = record.get("capabilities", [])
+    if not isinstance(rows, Sequence) or isinstance(rows, (str, bytes)):
+        raise SelfImprovementError("EXPANSION_CACHE_CAPABILITIES_INVALID")
+
+    derived = deepcopy(dict(problem))
+    raw_caps = derived.get("capabilities")
+    if raw_caps is None:
+        raw_caps = []
+    if not isinstance(raw_caps, list):
+        raise SelfImprovementError("PROBLEM_CAPABILITIES_MUST_BE_LIST_FOR_REHYDRATION")
+    derived["capabilities"] = raw_caps
+    existing = {
+        _s(cap.get("id")): cap
+        for cap in raw_caps
+        if isinstance(cap, Mapping) and _s(cap.get("id"))
+    }
+    added = 0
+    for raw in rows:
+        if not isinstance(raw, Mapping):
+            raise SelfImprovementError("EXPANSION_CACHE_CAPABILITY_INVALID")
+        row = deepcopy(dict(raw))
+        cid = _s(row.get("id"))
+        if not cid:
+            raise SelfImprovementError("EXPANSION_CACHE_CAPABILITY_ID_REQUIRED")
+        prior = existing.get(cid)
+        if prior is not None:
+            if _canon(prior) != _canon(row):
+                raise SelfImprovementError(
+                    "EXPANSION_CACHE_CAPABILITY_ID_COLLISION:" + cid
+                )
+            continue
+        raw_caps.append(row)
+        existing[cid] = row
+        added += 1
+    return derived, added, key
+
+
+def _persist_authenticated_expansions(
+    out: Mapping[str, Any],
+    *,
+    base_problem: Mapping[str, Any],
+    state_path: str | Path,
+) -> int:
+    """Persist only capability rows V12 reports as independently authenticated."""
+    expanded_ids = _items(out.get("expanded_capability_ids"))
+    if not expanded_ids:
+        return 0
+    attempts = out.get("capability_expansion_attempts")
+    expanded_problem = out.get("expanded_problem")
+    if (
+        not isinstance(attempts, Sequence)
+        or isinstance(attempts, (str, bytes))
+        or not isinstance(expanded_problem, Mapping)
+    ):
+        raise SelfImprovementError("EXPANSION_AUTHENTICATION_EVIDENCE_MISSING")
+
+    admitted: set[str] = set()
+    for attempt in attempts:
+        if not isinstance(attempt, Mapping):
+            continue
+        for row in attempt.get("admitted") or []:
+            if not isinstance(row, Mapping):
+                continue
+            cid = _s(row.get("capability_id"))
+            if not cid:
+                continue
+            if not isinstance(row.get("effect_semantics_receipt"), Mapping):
+                continue
+            if not isinstance(row.get("effect_semantics_verification"), Mapping):
+                continue
+            admitted.add(cid)
+
+    if not set(expanded_ids).issubset(admitted):
+        raise SelfImprovementError(
+            "EXPANDED_CAPABILITY_WITHOUT_AUTHENTICATED_ADMISSION"
+        )
+
+    raw_caps = expanded_problem.get("capabilities")
+    if not isinstance(raw_caps, Sequence) or isinstance(raw_caps, (str, bytes)):
+        raise SelfImprovementError("EXPANDED_PROBLEM_CAPABILITIES_INVALID")
+    by_id = {
+        _s(row.get("id")): deepcopy(dict(row))
+        for row in raw_caps
+        if isinstance(row, Mapping) and _s(row.get("id"))
+    }
+
+    rows = []
+    for cid in expanded_ids:
+        row = by_id.get(cid)
+        if not isinstance(row, Mapping):
+            raise SelfImprovementError(
+                "AUTHENTICATED_EXPANDED_CAPABILITY_ROW_MISSING:" + cid
+            )
+        if not isinstance(row.get("effect_semantics_binding"), Mapping):
+            raise SelfImprovementError(
+                "AUTHENTICATED_EXPANSION_SEMANTICS_BINDING_MISSING:" + cid
+            )
+        rows.append(deepcopy(dict(row)))
+
+    state = load_state(state_path)
+    key = _task_contract_key(base_problem)
+    current = state["expanded_capabilities"].get(key)
+    existing_rows = []
+    if current is not None:
+        if not isinstance(current, Mapping):
+            raise SelfImprovementError("EXPANSION_CACHE_RECORD_INVALID")
+        existing_rows = list(current.get("capabilities") or [])
+    existing_by_id = {
+        _s(row.get("id")): deepcopy(dict(row))
+        for row in existing_rows
+        if isinstance(row, Mapping) and _s(row.get("id"))
+    }
+    added = 0
+    for row in rows:
+        cid = _s(row.get("id"))
+        prior = existing_by_id.get(cid)
+        if prior is not None:
+            if _canon(prior) != _canon(row):
+                raise SelfImprovementError(
+                    "EXPANSION_CACHE_AUTHENTICATED_ROW_DRIFT:" + cid
+                )
+            continue
+        existing_by_id[cid] = row
+        added += 1
+
+    state["expanded_capabilities"][key] = {
+        "task_contract_key": key,
+        "capabilities": [
+            existing_by_id[cid] for cid in sorted(existing_by_id)
+        ],
+    }
+    _write_state(state, state_path)
+    return added
+
 def run_learning_episode(
     problem: Mapping[str, Any],
     *,
@@ -544,10 +713,14 @@ def run_learning_episode(
     skill_verification_binding: Mapping[str, Any] | None = None,
     resume_binding: Mapping[str, Any] | None = None,
     known_absent_invalidators: Sequence[str] = (),
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander_id: str = "R3_VERIFIED_REPAIR_EXPANDER",
+    max_capability_expansions: int = 4,
 ) -> dict[str, Any]:
-    """Run verified learned routes first, then fall back safely to full V10 search.
+    """Run verified learned routes first, then use V12 verified repair growth.
 
-    A learned route is used only as a planning compression overlay. V10 still
+    A learned route is used only as a planning compression overlay. V12 still
     authenticates semantics and verifies execution. If a reuse attempt fails after
     any verified effect may already have occurred, full-search fallback is blocked
     to prevent blind replay.
@@ -557,10 +730,14 @@ def run_learning_episode(
     if not eid or not scope:
         raise SelfImprovementError("EPISODE_ID_AND_SCOPE_REQUIRED")
 
+    base_problem = deepcopy(dict(problem))
     state = load_state(state_path)
+    working_problem, rehydrated_expansion_count, task_contract_key = (
+        _rehydrate_verified_expansions(base_problem, state)
+    )
     prior = _prior_verified_episodes(state, scope_id=scope, episode_id=eid)
     selected = _select_active_skill(
-        problem,
+        working_problem,
         state,
         scope_id=scope,
         known_absent_invalidators=known_absent_invalidators,
@@ -568,8 +745,8 @@ def run_learning_episode(
     reuse_attempt = None
 
     if selected is not None:
-        learned_problem = _restrict_problem_to_skill(problem, selected)
-        reuse_out = solver_v10.run(
+        learned_problem = _restrict_problem_to_skill(working_problem, selected)
+        reuse_out = solver_v12.run(
             learned_problem,
             proposal_packets=proposal_packets,
             repo_root=repo_root,
@@ -581,6 +758,9 @@ def run_learning_episode(
             prior_verified_episode_records=prior,
             skill_verification_binding=skill_verification_binding,
             resume_binding=resume_binding,
+            proposal_provider=proposal_provider,
+            capability_expander=None,
+            max_capability_expansions=0,
         )
         effectful = _effect_may_have_occurred(reuse_out)
         _record_reuse_result(
@@ -609,6 +789,9 @@ def run_learning_episode(
                 "reused_skill_id": selected["skill_id"],
                 "reuse_attempt": reuse_attempt,
                 "fallback_used": False,
+                "rehydrated_expansion_count": rehydrated_expansion_count,
+                "persisted_expansion_count": 0,
+                "task_contract_key": task_contract_key,
                 "terminal_authority": False,
             }
         if effectful:
@@ -625,11 +808,14 @@ def run_learning_episode(
                 "reuse_attempt": reuse_attempt,
                 "fallback_used": False,
                 "fallback_blocked_effect_may_have_occurred": True,
+                "rehydrated_expansion_count": rehydrated_expansion_count,
+                "persisted_expansion_count": 0,
+                "task_contract_key": task_contract_key,
                 "terminal_authority": False,
             }
 
-    out = solver_v10.run(
-        problem,
+    out = solver_v12.run(
+        working_problem,
         proposal_packets=proposal_packets,
         repo_root=repo_root,
         resolved_semantics_bindings=resolved_semantics_bindings,
@@ -640,6 +826,15 @@ def run_learning_episode(
         prior_verified_episode_records=prior,
         skill_verification_binding=skill_verification_binding,
         resume_binding=resume_binding,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+        capability_expander_id=capability_expander_id,
+        max_capability_expansions=max_capability_expansions,
+    )
+    persisted_expansion_count = _persist_authenticated_expansions(
+        out,
+        base_problem=base_problem,
+        state_path=state_path,
     )
     integrated = integrate_solver_output(out, state_path=state_path)
     return {
@@ -653,5 +848,9 @@ def run_learning_episode(
         "reused_skill_id": selected["skill_id"] if selected is not None else None,
         "reuse_attempt": reuse_attempt,
         "fallback_used": selected is not None,
+        "rehydrated_expansion_count": rehydrated_expansion_count,
+        "persisted_expansion_count": persisted_expansion_count,
+        "task_contract_key": task_contract_key,
+        "capability_expander_enabled": capability_expander is not None,
         "terminal_authority": False,
     }
