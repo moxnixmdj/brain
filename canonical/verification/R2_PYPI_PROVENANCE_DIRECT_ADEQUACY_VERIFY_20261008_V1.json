@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_R2_PYPI_PROVENANCE_DIRECT_ADEQUACY_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__PYPI_PROVENANCE_FAMILY__BRANCH_REGRESSION_22_OF_22__REAL_PYPDF_WHEEL_REDOWNLOAD_HASH_CONVERGENCE__ZERO_CREDIT",
+  "subject": {
+    "family_runtime": {
+      "path": "canonical/runtime/r2_pypi_provenance_direct_adequacy_v1.py",
+      "git_blob_sha": "2ead573756663bbb119e7319eff64b9ffcbc4da0"
+    },
+    "direct_router": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "42b2710bd71021d198debb20194aac4ad46204f4"
+    },
+    "family_tests": {
+      "path": "canonical/tests/test_r2_pypi_provenance_direct_adequacy_v1.py",
+      "git_blob_sha": "9175aaac4696d8e37f2349eec108974f06996199"
+    },
+    "integration_tests": {
+      "path": "canonical/tests/test_r2_pypi_provenance_direct_integration_v1.py",
+      "git_blob_sha": "9ae563ac41547637b3dd9c0a13232f3cdc692389"
+    }
+  },
+  "admitted_semantics": {
+    "input": "CANONICAL_SELECTION_JSON_PLUS_CANONICAL_PYPI_METADATA_JSON",
+    "producer_capability_id": "pypi.provenance.audit_live_artifact",
+    "producer_adapter": "pypi_provenance_audit",
+    "independent_verifier": "curl",
+    "metadata_host": "pypi.org",
+    "artifact_host": "files.pythonhosted.org",
+    "acceptance": "RECORDED_HASH_EQUALS_LIVE_METADATA_HASH_EQUALS_PRODUCER_DOWNLOAD_HASH_EQUALS_INDEPENDENT_DOWNLOAD_HASH",
+    "selection_immutability_required": true,
+    "metadata_immutability_required": true,
+    "transactional_report": true,
+    "external_effect_class": "READ_ONLY_PYPI_METADATA_AND_WHEEL_OBSERVATION"
+  },
+  "focused_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "family_plus_integration_plus_direct_router": "22_OF_22_PASS"
+  },
+  "real_public_replay": {
+    "audited_capability_id": "pdf.extract.text.pypdf",
+    "project": "pypdf",
+    "pinned_version": "6.19.0",
+    "wheel_filename": "pypdf-6.19.0-py3-none-any.whl",
+    "artifact_bytes": 395480,
+    "recorded_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+    "live_metadata_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+    "producer_downloaded_artifact_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+    "independent_downloaded_artifact_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+    "all_hashes_equal": true
+  },
+  "proved": [
+    "AUDIT_ROUTE_IDENTITY_IS_DISTINCT_FROM_THE_AUDITED_CAPABILITY_ID",
+    "EXACT_GOAL_BINDS_ONLY_REPOSITORY_LOCAL_SELECTION_METADATA_AND_REPORT_PATHS",
+    "METADATA_URL_MUST_BE_CANONICAL_PYPI_ORG",
+    "WHEEL_URL_MUST_BE_CANONICAL_FILES_PYTHONHOSTED_ORG",
+    "SUCCESS_REQUIRES_INDEPENDENT_METADATA_REFETCH_AND_WHEEL_REDOWNLOAD",
+    "SELECTION_AND_METADATA_BYTES_MUST_REMAIN_IMMUTABLE",
+    "MATCHED_FAILURE_ROLLS_BACK_THE_REPORT",
+    "MATCHED_FAILURE_CANNOT_FALL_THROUGH_TO_OTHER_DIRECT_ROUTES"
+  ],
+  "hard_nonclaims": [
+    "NO_PACKAGE_INSTALLATION_AUTHORITY",
+    "NO_ARBITRARY_HOST_OR_CREDENTIAL_AUTHORITY",
+    "NO_MUTATING_NETWORK_AUTHORITY",
+    "NO_CLAIM_ALL_SOFTWARE_SUPPLY_CHAIN_PROVENANCE_IS_SOLVED",
+    "NO_CLAIM_OPEN_WORLD_R2_COVERAGE_IS_COMPLETE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
