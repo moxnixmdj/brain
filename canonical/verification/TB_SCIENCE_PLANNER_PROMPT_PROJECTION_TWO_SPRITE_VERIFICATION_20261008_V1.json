@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PLANNER_PROMPT_PROJECTION_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "EXACT_CHANGED_BLOBS_VERIFIED__PRIMARY_19_OF_19__SECONDARY_19_OF_19__LIVE_CPU_QWEN_PREFLIGHT_SEPARATELY_REQUIRED__ZERO_CREDIT",
+  "subject": {
+    "agent_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "agent_git_blob_sha": "9b651589733a54b4144aad5c68be7cb8bdd8a8d5",
+    "tests_path": "canonical/tests/test_harbor_science_agent_v1.py",
+    "tests_git_blob_sha": "a11f77a8b1ef70dbd4f505edae0da598a73e6901",
+    "closure_path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V5.json",
+    "closure_git_blob_sha": "8b041592d7ad636709f986e001a1936df9ccf041"
+  },
+  "verification": [
+    {
+      "provider": "SPRITES",
+      "sprite": "brain-root3-current-byte-replay-20261007-v1",
+      "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "workspace": "/home/sprite/tb_science_prompt_projection_v1",
+      "tests_passed": 19,
+      "tests_total": 19
+    },
+    {
+      "provider": "SPRITES",
+      "sprite": "h100-real-image-v1",
+      "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+      "workspace": "/home/sprite/tb_science_output_directive_repair_v1_independent",
+      "tests_passed": 19,
+      "tests_total": 19
+    }
+  ],
+  "exact_regressions": [
+    "LOSSLESS_RAW_TASK_CONTRACT_RETAINED_IN_BRAIN",
+    "MODEL_FACING_SCOPE_PRESERVES_OBLIGATION_ID_AND_TEXT",
+    "FULL_GOAL_NOT_DUPLICATED_IN_MODEL_PROMPT",
+    "VERIFIER_ONLY_SEGMENT_HASH_AND_ACCEPTANCE_METADATA_NOT_SENT_TO_MODEL",
+    "MANDATORY_DELIVERABLES_PRESERVED",
+    "DECLARED_INPUT_SNAPSHOT_STILL_PRESENT",
+    "RANK11_EXPLICIT_OUTPUT_REPAIR_REGRESSIONS_PRESERVED"
+  ],
+  "measured_spent_rank12_projection": {
+    "goal_chars": 2296,
+    "first_cycle_prompt_chars": 6087,
+    "full_goal_occurrences": 0,
+    "segment_sha256_present": false,
+    "mandatory_output_present": true
+  },
+  "live_public_runner_preflight": {
+    "run_id": 37731973885,
+    "required": true,
+    "status": "PENDING"
+  },
+  "benchmark_slot_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
