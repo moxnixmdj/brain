@@ -716,7 +716,12 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
                     "search_context": {
                         "authenticated_policy_ids": ["p1", "p0"],
                         "rejected_policy_candidates": [
-                            {"policy_id": "p2", "reason": "missing authority", "raw_secret": "drop"},
+                            {
+                                "policy_id": "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest",
+                                "reason": "missing authority",
+                                "raw_secret": "drop",
+                            },
+                            {"policy_id": "p2", "reason": "missing authority"},
                         ],
                         "certified_common_policies": [],
                         "uncovered_models": [
@@ -765,10 +770,106 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             out["selected_discriminator"],
             {"discriminator_id": "d1", "cost_units": 1},
         )
+        self.assertEqual(
+            out["grounded_bound_policy_candidates"],
+            [
+                {
+                    "policy_id": (
+                        "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest"
+                    ),
+                    "capability_id": "python.tests.audit.unittest",
+                }
+            ],
+        )
         rendered = str(out)
         self.assertNotIn("PRIVATE_RAW_FACT", rendered)
         self.assertNotIn("OTHER_PRIVATE_FACT", rendered)
         self.assertNotIn("raw_secret", rendered)
+
+    def test_exact_grounded_policy_gap_becomes_one_concrete_adequacy_target(self):
+        targets, source = brain._concretize_policy_adequacy_repair_target(
+            "repair.policy_adequacy_cover.available",
+            {
+                "selected_policy_id": (
+                    "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest"
+                ),
+                "grounded_bound_policy_candidates": [
+                    {
+                        "policy_id": (
+                            "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest"
+                        ),
+                        "capability_id": "python.tests.audit.unittest",
+                    },
+                    {
+                        "policy_id": "BOUND_CAPABILITY_POLICY::auto.pypi.msgpack",
+                        "capability_id": "auto.pypi.msgpack",
+                    },
+                ],
+            },
+        )
+        self.assertEqual(len(targets), 1)
+        self.assertTrue(targets[0].startswith("repair.policy_adequacy.prove::"))
+        self.assertEqual(
+            source,
+            "R2_EXACT_GROUNDED_BOUND_POLICY_ADEQUACY_GAP",
+        )
+        again, again_source = brain._concretize_policy_adequacy_repair_target(
+            "repair.policy_adequacy_cover.available",
+            {
+                "selected_policy_id": (
+                    "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest"
+                ),
+                "grounded_bound_policy_candidates": [
+                    {
+                        "policy_id": (
+                            "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest"
+                        ),
+                        "capability_id": "python.tests.audit.unittest",
+                    }
+                ],
+            },
+        )
+        self.assertEqual(targets, again)
+        self.assertEqual(source, again_source)
+
+    def test_ambiguous_grounded_policy_gap_requests_proof_of_one_not_all(self):
+        targets, source = brain._concretize_policy_adequacy_repair_target(
+            "repair.policy_adequacy_cover.available",
+            {
+                "grounded_bound_policy_candidates": [
+                    {
+                        "policy_id": "BOUND_CAPABILITY_POLICY::auto.pypi.msgpack",
+                        "capability_id": "auto.pypi.msgpack",
+                    },
+                    {
+                        "policy_id": "BOUND_CAPABILITY_POLICY::auto.npm.msgpack-msgpack",
+                        "capability_id": "auto.npm.msgpack-msgpack",
+                    },
+                ],
+            },
+        )
+        self.assertEqual(len(targets), 1)
+        self.assertTrue(
+            targets[0].startswith(
+                "repair.policy_adequacy_cover.prove_one_of::"
+            )
+        )
+        self.assertEqual(
+            source,
+            "R2_GROUNDED_BOUND_POLICY_FRONTIER_ADEQUACY_GAP",
+        )
+
+    def test_non_grounded_policy_gap_keeps_generic_meta_effect(self):
+        targets, source = brain._concretize_policy_adequacy_repair_target(
+            "repair.policy_adequacy_cover.available",
+            {
+                "rejected_policy_candidates": [
+                    {"policy_id": "some.other.policy"}
+                ]
+            },
+        )
+        self.assertEqual(targets, ["repair.policy_adequacy_cover.available"])
+        self.assertEqual(source, "REPAIR_CLASS_META_EFFECT")
 
     @patch("canonical.runtime.live_brain_runtime_v1.execute_failure_repair_cycle")
     def test_same_dispatch_auto_repair_receives_compact_policy_frontier(self, repair):
