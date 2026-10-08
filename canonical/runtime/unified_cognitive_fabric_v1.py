@@ -65,6 +65,47 @@ CROSS_ROOT_BOUNDARIES = (
 )
 
 
+R3_DIRECT_EXPERIENCE_MODES = frozenset({
+    "P3",
+    "H100_INFERENCE",
+    "MYSTERY_INFERENCE",
+    "UNIVERSAL_ESCAPE",
+    "CERTIFIED_ROUTE",
+    "LIVE_CAPABILITY",
+    "BOUND_CAPABILITY",
+})
+
+
+def _bounded_r3_direct_observation(
+    mode: str,
+    out: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Retain learning-relevant structure without arbitrary result payloads."""
+    observation: dict[str, Any] = {
+        "schema": "PROJECT_BRAIN_R3_DIRECT_SURFACE_OBSERVATION_V1",
+        "pass": out.get("pass") is True,
+        "status": str(out.get("status") or "").strip()
+        or "UNSPECIFIED_DIRECT_SURFACE_STATUS",
+        "source_mode": mode,
+        "source_schema": str(out.get("schema") or "").strip() or None,
+        "source_key_set": sorted(
+            str(key) for key in out.keys() if isinstance(key, str)
+        )[:128],
+    }
+    for key in (
+        "failure_class",
+        "capability_id",
+        "route",
+        "operation",
+        "step_count",
+        "executed_step_count",
+    ):
+        value = out.get(key)
+        if value is None or isinstance(value, (str, int, float, bool)):
+            observation[key] = value
+    return observation
+
+
 CANONICAL_PUBLIC_ENTRYPOINT = "canonical.runtime.unified_cognitive_fabric_v1.run"
 SUBORDINATE_RUNTIME_ENTRYPOINT = "canonical.runtime.live_brain_runtime_v1.run"
 
@@ -640,6 +681,23 @@ def run(
                 raise CognitiveFabricError("BOUND_CAPABILITY_INPUTS_NOT_OBJECT")
             out = execute_bound(capability_id, inputs=dict(inputs))
 
+        direct_learning = None
+        direct_learning_error = None
+        if (
+            mode in R3_DIRECT_EXPERIENCE_MODES
+            and isinstance(out, Mapping)
+            and options.get("learn", True) is not False
+        ):
+            try:
+                direct_learning = live_runtime.observe_runtime_outcome(
+                    _bounded_r3_direct_observation(mode, out),
+                    state_path=options.get("state_path"),
+                    learn=True,
+                    surface="UNIFIED_FABRIC_DIRECT_" + mode,
+                )
+            except Exception as exc:
+                direct_learning_error = type(exc).__name__ + ":" + str(exc)
+
         autonomous_failure_repair_provider = None
         if capability_expander is not None or bool(options.get("repair_components")):
             def _autonomous_repair_pending(work: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -707,6 +765,11 @@ def run(
             "inner_pass": bool(isinstance(out, Mapping) and out.get("pass") is True),
             "inner_status": out.get("status") if isinstance(out, Mapping) else None,
             "result": deepcopy(dict(out)) if isinstance(out, Mapping) else out,
+            "direct_learning": deepcopy(direct_learning),
+            "direct_learning_error": direct_learning_error,
+            "direct_experience_observed": (
+                direct_learning is not None and direct_learning_error is None
+            ),
             "compounding_tick": deepcopy(compounding_tick),
             "episode_compounding_tick": deepcopy(episode_compounding_tick),
             "single_front_door": True,
