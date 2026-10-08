@@ -51,7 +51,7 @@ def compile_current_epoch_noninferiority(
         subject_sha256 = result["subject_sha256"]
         reference = result["opus55_reference_score"]
         observed_date = result["target_observed_date"]
-        official_owner_elo_claimed = True
+        numeric_comparable_elo_used = True
         numeric_elo_reconstruction_required = True
         source_verdict_sha256 = result["bridge_verdict_sha256"]
 
@@ -62,7 +62,7 @@ def compile_current_epoch_noninferiority(
         subject_sha256 = result["subject_sha256"]
         reference = result["current_owner_reference_elo_context_only"]
         observed_date = result["target_observed_date"]
-        official_owner_elo_claimed = False
+        numeric_comparable_elo_used = False
         numeric_elo_reconstruction_required = False
         source_verdict_sha256 = result["verdict_sha256"]
 
@@ -80,7 +80,8 @@ def compile_current_epoch_noninferiority(
         "single_result_reused_across_predicates": True,
         "historical_1822_predicate_ids_preserved": True,
         "historical_epoch_rewritten": False,
-        "official_owner_elo_claimed": official_owner_elo_claimed,
+        "official_owner_elo_claimed": False,
+        "numeric_comparable_elo_used": numeric_comparable_elo_used,
         "numeric_elo_reconstruction_required": numeric_elo_reconstruction_required,
         "source_verdict_sha256": source_verdict_sha256,
         "terminal_authority": False,
