@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_P3_EXPLICIT_AUDIENCE_PROFILE_GUARD_TWO_ENV_REPLAY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PINNED_TWO_SPRITE_FOCUSED_REPLAY_PASS_ZERO_CREDIT",
+  "source_ref": "39529cd4d82e5070e6135d2c9ebd058a2c7606f4",
+  "pull_request": 3109,
+  "observed_failure_before_repair": {
+    "input": "Profile id 'GERMAN_ONLY' or 'German speaking only' with complete explicit renderer constraints",
+    "direct_required_route": "PASS with English rendered text",
+    "v6_real_context_route": "PASS via REQUIRED_SUPPORT_V5_REALIZATION_CELL_V3",
+    "defect": "Positive route did not check whether arbitrary named profile IDs implied extra normative semantics beyond its explicitly representable renderer contract."
+  },
+  "repair": {
+    "shared_runtime_path": "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py",
+    "check": "Explicitly require profile_id == 'EXPLICIT' for V3 contract surface validation, otherwise AUDIENCE_PROFILE_SEMANTICS_UNMODELED",
+    "consumer": "canonical/runtime/p3_real_context_v3_admission_v6.py invokes the shared contract guard ahead of positive paths",
+    "behavior_boundary": "Narrow fail-closed rule does not interpret a named audience profile or prove upstream requirement extraction."
+  },
+  "changed_code_blobs": {
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py": "0e40c1404a5d9e9d4834118733461cececfedf2c",
+    "canonical/runtime/p3_real_context_v3_admission_v6.py": "18f45c8040f2a1f1d40f919ae18263177f893583"
+  },
+  "changed_test_blobs": {
+    "canonical/tests/test_p3_required_claim_grounded_realization_cell_v3.py": "762be7bceadbfc0231c0535f0491668104afbf45",
+    "canonical/tests/test_p3_real_context_v3_admission_v6.py": "39e1586a8234b3898ffb926a78db25b6c62ca12b"
+  },
+  "other_target_test_blobs": {
+    "canonical/tests/test_bounded_explicit_categorical_support_v1.py": "0e8bc51ab56bbfa16fb07f47740c973eb7b6cbc9",
+    "canonical/tests/test_selected_support_truth_certificate_v5.py": "f324c61ab58f7b7e03bacae15e19a0240624743d"
+  },
+  "verification": [
+    {
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "test_runner": "runpy direct Python assertion replay",
+      "passed": 61,
+      "failed": 0
+    },
+    {
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "test_runner": "importlib separate Python assertion replay",
+      "passed": 61,
+      "failed": 0,
+      "group_counts": {
+        "categorical": 16,
+        "support_certificates": 16,
+        "required_realization": 13,
+        "real_context_admission": 16
+      }
+    }
+  ],
+  "authority": {
+    "terminal_credit_delta": 0,
+    "policy_adequacy_verified": false,
+    "db_admission_authorized": false,
+    "u_empty_authorized": false,
+    "abc_closed_authorized": false,
+    "real_target_scope_complete": false,
+    "terminal_authority": false,
+    "merge_approved": false
+  },
+  "limitations": [
+    "Manual zero-argument focused tests because pytest was unavailable.",
+    "Profile marker EXPLICIT is syntactic only; cannot prove every implicit audience need is present in task constraints.",
+    "No Opus matched-epoch comparison or universal target-domain proof.",
+    "No change to frozen terminal registry or authority."
+  ]
+}
