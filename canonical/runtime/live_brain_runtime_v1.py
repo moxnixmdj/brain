@@ -261,6 +261,7 @@ def _replay_retry_context(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None,
+    state_path: str | Path | None = None,
 ) -> dict[str, Any]:
     if not isinstance(context, Mapping):
         return _fail("RETRY_CONTEXT_NOT_OBJECT")
@@ -273,6 +274,8 @@ def _replay_retry_context(
     # insufficient; one observed failure therefore causes at most one automatic
     # repair attempt per live invocation.
     replay_context["auto_repair"] = False
+    if state_path is not None:
+        replay_context["state_path"] = str(state_path)
     return run(
         replay_context,
         repo_root=repo_root,
@@ -411,6 +414,7 @@ def execute_failure_repair_cycle(
             information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
+            state_path=path,
         )
         replay_pass = replay.get("pass") is True
         winner_components = []
