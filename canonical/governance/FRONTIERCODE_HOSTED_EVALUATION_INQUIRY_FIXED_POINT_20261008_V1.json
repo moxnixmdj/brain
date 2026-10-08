@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_HOSTED_EVALUATION_INQUIRY_FIXED_POINT_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE_SCHEDULING_FIXED_POINT__OWNER_INQUIRY_ALREADY_SENT__NO_REPLY_OBSERVED__ZERO_COST_TERMS_UNBOUND__EXTERNAL_ROUTE_EVENT_WAIT_ONLY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "CODING_FRONTIERCODE_GE_54_4",
+  "source_route_refresh": {
+    "path": "canonical/governance/FRONTIERCODE_HOSTED_EVALUATION_ROUTE_REFRESH_20261008_V1.json",
+    "state": "OWNER_HOSTED_EVALUATION_REQUESTABLE__PUBLIC_SELF_RUN_UNAVAILABLE"
+  },
+  "connected_owner_correspondence_observation": {
+    "source_class": "CONNECTED_GMAIL_OWNER_CORRESPONDENCE",
+    "initial_inquiry_sent_date": "2026-10-03",
+    "follow_up_sent_date": "2026-10-05",
+    "initial_request": "REQUEST_EXACT_FRONTIERCODE_1_1_MAIN_OWNER_RUN_OR_MINIMUM_SUBMISSION_INTERFACE_WITH_PRIVATE_TASKS_PRESERVED_AND_ZERO_INCREMENTAL_SPEND",
+    "follow_up_request": "REQUEST_ONE_OWNER_RUN_SCORE_FOR_FROZEN_EXTERNAL_SYSTEM_OR_CONFIRM_NO_NO_COST_EXTERNAL_SYSTEM_EVALUATION_ROUTE",
+    "thread_message_count": 2,
+    "outbound_message_count": 2,
+    "owner_reply_count_observed": 0,
+    "separate_owner_reply_search_observed": 0,
+    "observation_date": "2026-10-08"
+  },
+  "current_external_route_state": {
+    "owner_hosted_evaluation_requestable_in_principle": true,
+    "request_already_made": true,
+    "follow_up_already_made": true,
+    "reply_observed": false,
+    "exact_submission_contract_bound": false,
+    "zero_incremental_cost_terms_bound": false,
+    "score_bearing_execution_authorized": false,
+    "brain_result_receipt_exists": false,
+    "state": "EVENT_WAIT_ONLY"
+  },
+  "scheduling_effect": [
+    "DO_NOT_SEND_ANOTHER_FRONTIERCODE_OWNER_FOLLOW_UP_WITH_UNCHANGED_INFORMATION.",
+    "DO_NOT_KEEP_OWNER_REPLY_WAIT_ON_THE_ACTIVE_CRITICAL_PATH.",
+    "WAKE_THIS_ROUTE_ONLY_ON_A_NEW_OWNER_REPLY_OR_PUBLIC_OWNER_SUBMISSION_OR_COST_TERM_CHANGE.",
+    "CONTINUE_INTERNAL_SCOPE_SUPERSET_OR_TASK_CONDITIONED_DOMINANCE_CERTIFICATE_SYNTHESIS_IN_PARALLEL.",
+    "IF_OWNER_REPLY_OFFERS_A_PAID_ROUTE_ONLY__HARD_ZERO_INCREMENTAL_SPEND_REJECTS_EXECUTION_UNLESS_THE_OWNER_CHANGES_THE_TERMS."
+  ],
+  "wake_conditions": [
+    "NEW_REPLY_FROM_COGNITION_TO_THE_EXISTING_FRONTIERCODE_EVALUATION_THREAD",
+    "PUBLIC_COGNITION_FRONTIERCODE_SUBMISSION_INTERFACE_APPEARS",
+    "PUBLIC_OR_DIRECT_OWNER_CONFIRMATION_OF_ZERO_INCREMENTAL_COST_HOSTED_EVALUATION",
+    "MATERIAL_FRONTIERCODE_TARGET_OR_OWNER_POLICY_CHANGE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_COGNITION_HAS_REJECTED_THE_REQUEST.",
+    "NO_CLAIM_COGNITION_WILL_PROVIDE_A_FREE_EVALUATION.",
+    "NO_CLAIM_NO_REPLY_WILL_ARRIVE_LATER.",
+    "NO_CLAIM_A_BRAIN_FRONTIERCODE_RESULT_EXISTS.",
+    "NO_CHANGE_TO_THE_FROZEN_FRONTIERCODE_TARGET_TUPLE_OR_54_4_PREDICATE.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "next_active_internal_action": "SYNTHESIZE_OR_FALSIFY_PROOF_CARRYING_FRONTIERCODE_SCOPE_SUPERSET_CERTIFICATE_PREMISES__START_WITH_HIDDEN_SCOPE_UPPER_BOUND_AND_EVALUATOR_RELATION"
+}
