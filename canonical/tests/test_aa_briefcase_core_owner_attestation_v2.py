@@ -2,13 +2,13 @@ import unittest
 
 from canonical.runtime.aa_briefcase_core_owner_attestation_v2 import (
     CoreOwnerAttestationError,
-    _sha256,
     verify_core_owner_attestation,
 )
+from canonical.tests.test_aa_briefcase_owner_signature_verifier_v1 import make_signed
 
 
-def target():
-    return {
+def target(owner_key_binding=None):
+    out = {
         "target": {
             "benchmark": "AA-Briefcase v1.1",
             "model": "Claude Opus 5.5 (Max, Default Fallback)",
@@ -17,6 +17,9 @@ def target():
         },
         "epoch_rule": {"current_epoch_minimum_opus55_target_elo": 1807},
     }
+    if owner_key_binding is not None:
+        out["owner_attestation_trust_anchor"] = owner_key_binding
+    return out
 
 
 def statement(audit=False):
@@ -46,69 +49,72 @@ def statement(audit=False):
     }
 
 
-def sig(s):
-    return {
-        "status": "VERIFIED",
-        "statement_sha256": _sha256(s),
-        "attestor_is_benchmark_owner_or_authorized_operator": True,
-        "identity_verified": True,
-        "verification_receipt_sha256": "e" * 64,
-    }
-
-
 class T(unittest.TestCase):
     def test_core_without_private_roots_is_sufficient(self):
         s = statement()
-        out = verify_core_owner_attestation(target(), s, sig(s))
+        bundle, binding = make_signed(s)
+        out = verify_core_owner_attestation(target(binding), s, bundle)
         self.assertEqual(out["status"], "PASS_CORE_OWNER_ATTESTATION")
         self.assertFalse(out["audit_commitments_present"])
         self.assertFalse(out["private_population_hashes_required_for_logical_sufficiency"])
 
     def test_optional_audit_commitments_are_accepted(self):
         s = statement(audit=True)
-        out = verify_core_owner_attestation(target(), s, sig(s))
+        bundle, binding = make_signed(s)
+        out = verify_core_owner_attestation(target(binding), s, bundle)
         self.assertTrue(out["audit_commitments_present"])
+
+    def test_missing_owner_trust_anchor_rejected(self):
+        s = statement()
+        bundle, _binding = make_signed(s)
+        with self.assertRaisesRegex(CoreOwnerAttestationError, "OWNER_TRUST_ANCHOR_MISSING"):
+            verify_core_owner_attestation(target(), s, bundle)
 
     def test_wrong_subject_digest_rejected(self):
         s = statement()
         s["subject"][0]["digest"]["sha256"] = "z" * 64
+        bundle, binding = make_signed(s)
         with self.assertRaisesRegex(CoreOwnerAttestationError, "SUBJECT_SHA256_INVALID"):
-            verify_core_owner_attestation(target(), s, sig(s))
+            verify_core_owner_attestation(target(binding), s, bundle)
 
     def test_stale_epoch_rejected(self):
         s = statement()
         s["predicate"]["target_observed_date"] = "2026-10-07"
+        bundle, binding = make_signed(s)
         with self.assertRaisesRegex(CoreOwnerAttestationError, "PREDICATE_EPOCH_MISMATCH"):
-            verify_core_owner_attestation(target(), s, sig(s))
+            verify_core_owner_attestation(target(binding), s, bundle)
 
     def test_scope_incomplete_rejected(self):
         s = statement()
         s["predicate"]["complete_current_scored_private_scope_used"] = False
+        bundle, binding = make_signed(s)
         with self.assertRaisesRegex(CoreOwnerAttestationError, "PRIVATE_SCOPE_NOT_COMPLETE"):
-            verify_core_owner_attestation(target(), s, sig(s))
+            verify_core_owner_attestation(target(binding), s, bundle)
 
     def test_grading_relations_incomplete_rejected(self):
         s = statement()
         s["predicate"]["all_load_bearing_grading_relations_included"] = False
+        bundle, binding = make_signed(s)
         with self.assertRaisesRegex(CoreOwnerAttestationError, "GRADING_RELATION_SCOPE_NOT_COMPLETE"):
-            verify_core_owner_attestation(target(), s, sig(s))
+            verify_core_owner_attestation(target(binding), s, bundle)
 
     def test_noninferiority_false_rejected(self):
         s = statement()
         s["predicate"]["brain_weakly_dominates_current_opus55"] = False
+        bundle, binding = make_signed(s)
         with self.assertRaisesRegex(CoreOwnerAttestationError, "NONINFERIORITY_NOT_ATTESTED"):
-            verify_core_owner_attestation(target(), s, sig(s))
+            verify_core_owner_attestation(target(binding), s, bundle)
 
-    def test_unverified_signer_rejected(self):
+    def test_unverified_owner_identity_rejected(self):
         s = statement()
-        v = sig(s)
-        v["identity_verified"] = False
-        with self.assertRaisesRegex(CoreOwnerAttestationError, "ATTESTOR_IDENTITY_NOT_VERIFIED"):
-            verify_core_owner_attestation(target(), s, v)
+        bundle, binding = make_signed(s)
+        binding["identity_verified"] = False
+        with self.assertRaisesRegex(Exception, "OWNER_KEY_IDENTITY_UNVERIFIED"):
+            verify_core_owner_attestation(target(binding), s, bundle)
 
-    def test_tampered_statement_rejected(self):
+    def test_modified_statement_signature_rejected(self):
         s = statement()
-        v = sig(s)
-        s["predicate"]["task_count"] = 90
-        with self.assertRaises(CoreOwnerAttestationError):
-            verify_core_owner_attestation(target(), s, v)
+        bundle, binding = make_signed(s)
+        s["predicate"]["brain_weakly_dominates_current_opus55"] = False
+        with self.assertRaisesRegex(Exception, "CRYPTOGRAPHIC_SIGNATURE_INVALID"):
+            verify_core_owner_attestation(target(binding), s, bundle)
