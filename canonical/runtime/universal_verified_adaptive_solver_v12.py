@@ -100,6 +100,7 @@ from canonical.runtime.universal_solver_episode_verification_authenticator_v1 im
 from canonical.runtime.executable_skill_verification_authenticator_v1 import (
     authenticate_and_verify as authenticate_skill_verification,
 )
+from canonical.runtime import verified_skill_macro_planner_v1 as skill_macro
 from canonical.runtime.universal_bound_capability_carrier_v1 import (
     execute as execute_bound_capability_subplan,
 )
@@ -290,6 +291,7 @@ def run(
     episode_verification_binding: Mapping[str, Any] | None = None,
     prior_verified_episode_records: Sequence[Mapping[str, Any]] = (),
     skill_verification_binding: Mapping[str, Any] | None = None,
+    verified_skill_records: Sequence[Mapping[str, Any]] = (),
     resume_binding: Mapping[str, Any] | None = None,
     proposal_provider: Callable[
         [Mapping[str, Any], int, Sequence[Mapping[str, Any]]],
@@ -309,6 +311,18 @@ def run(
             return _fail("PROBLEM_NOT_OBJECT")
         problem = deepcopy(dict(problem))
         v4._tok(problem.get("task_id"), "TASK_ID")
+        if not isinstance(verified_skill_records, Sequence) or isinstance(verified_skill_records, (str, bytes)):
+            return _fail("VERIFIED_SKILL_RECORDS_INVALID")
+        authenticated_skills = []
+        for index, record in enumerate(verified_skill_records):
+            if not isinstance(record, Mapping):
+                return _fail("VERIFIED_SKILL_RECORD_NOT_OBJECT:" + str(index))
+            candidate = record.get("candidate")
+            binding = record.get("binding")
+            verdict = authenticate_skill_verification(candidate, binding, repo_root=repo_root)
+            if verdict.get("pass") is not True:
+                return _fail("VERIFIED_SKILL_REAUTH_FAILED:" + str(index) + ":" + str(verdict.get("reason")))
+            authenticated_skills.append(verdict["verified_skill"])
         raw_capabilities = problem.get("capabilities")
         if raw_capabilities is None:
             raw_capabilities = []
@@ -522,6 +536,7 @@ def run(
             fact_capsule = initialize_fact_capsule(problem)
             value_capsule = initialize_value_capsule(problem)
         pending: list[dict[str, Any]] = []
+        learned_skill_macros_planned: list[str] = []
         cycle_offset = len(trace)
 
         max_cycles = int(problem.get("max_solver_cycles", 256))
@@ -551,6 +566,7 @@ def run(
                 finished["capability_expansion_attempts"] = expansion_attempts
                 finished["expanded_capability_ids"] = list(expanded_capability_ids)
                 finished["expanded_problem"] = deepcopy(problem)
+                finished["used_verified_skill_macros"] = sorted(set(learned_skill_macros_planned))
                 if resume_auth is not None:
                     finished["resume_authentication"] = {
                         "receipt": resume_auth["receipt"],
@@ -567,8 +583,34 @@ def run(
                     continue
                 break
             try:
-                plan = plan_capabilities(planning_problem)
-            except PlanningFailure as exc:
+                # Reauthenticated skills change planning only. Every selected
+                # macro is expanded into original capabilities and V12 verifies
+                # their effects independently as before.
+                usable_skills = []
+                for prior_skill in authenticated_skills:
+                    try:
+                        skill_macro.compile_macro(planning_problem, prior_skill)
+                    except skill_macro.SkillMacroError:
+                        continue  # stale or currently inapplicable, not authority
+                    usable_skills.append(prior_skill)
+                if usable_skills:
+                    skill_plan = skill_macro.plan_with_skills(
+                        planning_problem, usable_skills,
+                        active_invalidators=(
+                            ["route_falsified:" + x for x in sorted(falsified)]
+                            + ["route_deferred:" + x for x in sorted(deferred)]
+                        ),
+                    )
+                    if skill_plan.get("pass") is True and skill_plan.get("expanded_execution_plan"):
+                        plan = {"plan": skill_plan["expanded_execution_plan"]}
+                        learned_skill_macros_planned.extend(
+                            skill_plan.get("used_verified_skill_macros", [])
+                        )
+                    else:
+                        plan = plan_capabilities(planning_problem)
+                else:
+                    plan = plan_capabilities(planning_problem)
+            except (PlanningFailure, skill_macro.SkillMacroError) as exc:
                 if try_expand("NO_CURRENT_CAPABILITY_PLAN:" + str(exc)):
                     continue
                 break
