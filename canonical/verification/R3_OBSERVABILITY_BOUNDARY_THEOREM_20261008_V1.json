@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_R3_OBSERVABILITY_BOUNDARY_THEOREM_V1",
+  "date": "2026-10-08",
+  "theorem": "SOUND_POST_HOC_LEARNING_REQUIRES_EFFECT_DISTINGUISHING_EVIDENCE",
+  "statement": "If two physically possible post-execution worlds yield identical retained evidence to the Brain, but the target effect occurred in one world and did not occur in the other, then no learner restricted to that retained evidence can soundly certify that the target effect occurred.",
+  "proof": [
+    "Assume retained evidence E is identical in worlds W_success and W_failure.",
+    "Assume target effect T occurred in W_success and did not occur in W_failure.",
+    "Any deterministic verifier receiving only E has identical input in both worlds and therefore returns the same verdict in both.",
+    "Any randomized verifier receiving only E has the same verdict distribution in both worlds and cannot make a sound world-discriminating certification.",
+    "Therefore a verifier that certifies success from E alone must be unsound in at least W_failure, while a verifier that refuses certification preserves soundness.",
+    "A new independent observation, authenticated receipt, re-readable durable state, sensor measurement, or other evidence that differs between the worlds is necessary to soundly promote the experience."
+  ],
+  "consequence_for_r3": "When current retained evidence cannot distinguish success from failure, the correct autonomous R3 action is PARK_WITHOUT_PERMANENT_NONLEARNABILITY_CLAIM and automatically reopen on new evidence or verifier authority.",
+  "not_a_system_defect": true,
+  "falsification_condition": "Exhibit a sound verifier that distinguishes two worlds while receiving exactly identical information in both worlds.",
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
