@@ -13,9 +13,11 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.executable_skill_program_v7 import program_digest
+from canonical.runtime.live_integrated_brain_v1 import load_verified_registry
 
 SCHEMA = "PROJECT_BRAIN_R3_BOUND_SUCCESS_ADAPTER_V1"
 VERIFICATION_KIND = "BOUND_CONTROLLER_CHECKPOINT_V1"
+RAW_BOUND_VERIFICATION_KIND = "RAW_BOUND_EXACT_ARCHIVE_ACCEPTANCE_V1"
 
 
 class BoundSuccessAdapterError(ValueError):
@@ -85,6 +87,158 @@ def _lineage_heads(
     return _sha(fact), _sha(value)
 
 
+def _adapt_raw_bound(
+    *,
+    observation: Mapping[str, Any],
+    replay: Mapping[str, Any],
+    material: Mapping[str, Any],
+    repo_root: str | Path,
+) -> Mapping[str, Any] | None:
+    raw_request = replay.get("request")
+    acceptance = material.get("raw_goal_acceptance")
+    if not isinstance(raw_request, Mapping) or not isinstance(acceptance, Mapping):
+        return None
+    if material.get("semantic_acceptance_complete") is not True:
+        return None
+    if (
+        acceptance.get("pass") is not True
+        or acceptance.get("semantic_acceptance_complete") is not True
+    ):
+        return None
+
+    selected_plan = _items(material.get("selected_plan"), "SELECTED_PLAN", allow_empty=False)
+    if len(selected_plan) != 1:
+        return None
+    capability_id = selected_plan[0]
+    if capability_id != str(material.get("compiled_capability_id") or "").strip():
+        return None
+
+    checkpoint = material.get("controller_checkpoint")
+    if not isinstance(checkpoint, Mapping):
+        return None
+    checkpoint_path = str(checkpoint.get("path") or "").strip()
+    plan_sha256 = str(checkpoint.get("plan_sha256") or "").strip()
+    if len(plan_sha256) != 64:
+        return None
+
+    root = Path(repo_root).resolve(strict=True)
+    _, raw_checkpoint, checkpoint_doc = _safe_checkpoint(root, checkpoint_path)
+    if (
+        checkpoint_doc.get("schema") != "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1"
+        or checkpoint_doc.get("status") != "COMPLETE"
+        or checkpoint_doc.get("plan_sha256") != plan_sha256
+    ):
+        return None
+    completed = checkpoint_doc.get("completed_actions")
+    if (
+        not isinstance(completed, list)
+        or len(completed) != 2
+        or not isinstance(completed[0], Mapping)
+        or not isinstance(completed[1], Mapping)
+        or not isinstance(completed[0].get("plan"), Mapping)
+        or completed[0]["plan"].get("type") != "invoke_capability"
+        or (completed[1].get("plan") or {}).get("type") != "finish"
+    ):
+        return None
+    args = completed[0]["plan"].get("args")
+    raw_result = completed[0].get("result")
+    if (
+        not isinstance(args, Mapping)
+        or str(args.get("capability_id") or "") != capability_id
+        or not isinstance(raw_result, Mapping)
+    ):
+        return None
+
+    registry = load_verified_registry()
+    entry = registry.get(capability_id)
+    if not isinstance(entry, Mapping):
+        return None
+    requires = _items(entry.get("requires", []), "STEP_REQUIRES")
+    provides = _items(entry.get("provides", []), "STEP_PROVIDES", allow_empty=False)
+
+    steps = [{
+        "index": 0,
+        "op": capability_id,
+        "inputs": requires,
+        "outputs": provides,
+    }]
+    trace = [{
+        "cycle": 0,
+        "capability_id": capability_id,
+        "requires": requires,
+        "provides": provides,
+        "result_sha256": _sha(raw_result),
+        "composition_capsule_head_hash": None,
+        "raw_acceptance_sha256": _sha(acceptance),
+        "effect_outcome_sha256": str(acceptance.get("verified_output_sha256") or ""),
+    }]
+    if not trace[0]["effect_outcome_sha256"]:
+        return None
+
+    fact_head, value_head = _lineage_heads(
+        initial_facts=requires,
+        target_effects=provides,
+        steps=steps,
+        trace=trace,
+    )
+    digest = program_digest(
+        steps=steps,
+        preconditions=requires,
+        postconditions=provides,
+        invalidators=[],
+    )
+    observation_id = str(observation.get("observation_id") or "").strip()
+    if not observation_id:
+        return None
+    episode = {
+        "episode_id": "raw-bound-success:" + _sha({"observation_id": observation_id})[:24],
+        "scope_id": "raw-bound:" + _sha({
+            "capability_id": capability_id,
+            "requires": requires,
+            "provides": provides,
+        })[:24],
+        "steps": steps,
+        "preconditions": requires,
+        "postconditions": provides,
+        "invalidators": [],
+        "program_sha256": digest,
+    }
+    problem = {
+        "task_id": str(raw_request.get("task_id") or material.get("task_id") or episode["episode_id"]),
+        "verification_kind": RAW_BOUND_VERIFICATION_KIND,
+        "initial_facts": requires,
+        "target_effects": provides,
+        "selected_plan": selected_plan,
+        "compiled_capability_id": capability_id,
+        "checkpoint_path": checkpoint_path,
+        "checkpoint_sha256": sha256(raw_checkpoint).hexdigest(),
+        "controller_plan_sha256": plan_sha256,
+        "raw_request": deepcopy(dict(raw_request)),
+        "raw_goal_sha256": material.get("raw_goal_sha256"),
+        "raw_task_contract_sha256": material.get("raw_task_contract_sha256"),
+        "raw_goal_acceptance": deepcopy(dict(acceptance)),
+    }
+    return {
+        "schema": SCHEMA,
+        "status": "RAW_BOUND_SUCCESS_EPISODE_CANDIDATE_READY",
+        "problem": problem,
+        "solver_output": {
+            "pass": True,
+            "status": "RAW_BOUND_SUCCESS_EPISODE_CANDIDATE_READY",
+            "current_episode": episode,
+            "current_episode_verified": False,
+            "trace": trace,
+            "state_capsule_head_hash": fact_head,
+            "value_capsule_head_hash": value_head,
+            "skill_candidate": None,
+        },
+        "candidate_only": True,
+        "execution_authority": False,
+        "promotion_authority": False,
+        "terminal_authority": False,
+    }
+
+
 def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, Any] | None:
     """Build a candidate episode from existing durable proof; never execute effects."""
     if not isinstance(request, Mapping):
@@ -93,13 +247,24 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
     replay = request.get("replay_context")
     if not isinstance(observation, Mapping) or not isinstance(replay, Mapping):
         return None
-    if str(replay.get("mode") or "").strip() != "compiled_bound":
-        return None
+    mode = str(replay.get("mode") or "").strip()
 
     capsule = observation.get("proof_capsule")
     material = capsule.get("material") if isinstance(capsule, Mapping) else None
     raw_request = replay.get("request")
     if not isinstance(material, Mapping) or not isinstance(raw_request, Mapping):
+        return None
+    if mode == "raw_bound":
+        try:
+            return _adapt_raw_bound(
+                observation=observation,
+                replay=replay,
+                material=material,
+                repo_root=repo_root,
+            )
+        except Exception:
+            return None
+    if mode != "compiled_bound":
         return None
 
     try:

@@ -17,7 +17,13 @@ from canonical.runtime import astra_runtime
 from canonical.runtime import verified_bound_capability_execution_adapter_v1 as bound_adapter
 from canonical.runtime.bound_capability_execution_verifier_v1 import verify as verify_bound_execution
 from canonical.runtime.executable_skill_program_v7 import program_digest
-from canonical.runtime.r3_bound_success_adapter_v1 import VERIFICATION_KIND
+from canonical.runtime.live_integrated_brain_v1 import load_verified_registry
+from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
+from canonical.runtime.raw_goal_archive_acceptance_v1 import verify as verify_raw_acceptance
+from canonical.runtime.r3_bound_success_adapter_v1 import (
+    RAW_BOUND_VERIFICATION_KIND,
+    VERIFICATION_KIND,
+)
 
 SCHEMA = "PROJECT_BRAIN_R3_BOUND_SUCCESS_CHECKPOINT_VERIFIER_V1"
 
@@ -110,6 +116,191 @@ def _lineage_heads(
     )
 
 
+def _verify_raw_bound_material(
+    *,
+    problem: Mapping[str, Any],
+    episode: Mapping[str, Any],
+    trace: Sequence[Mapping[str, Any]],
+    fact_capsule_head_hash: str,
+    value_capsule_head_hash: str,
+    repo_root: str | Path,
+) -> dict[str, Any]:
+    root = Path(repo_root).resolve(strict=True)
+    checkpoint = _safe_file(root, str(problem.get("checkpoint_path") or ""))
+    raw_checkpoint = checkpoint.read_bytes()
+    if sha256(raw_checkpoint).hexdigest() != problem.get("checkpoint_sha256"):
+        raise BoundSuccessVerificationError("CHECKPOINT_SHA256_MISMATCH")
+    doc = json.loads(raw_checkpoint.decode("utf-8"))
+    if (
+        not isinstance(doc, Mapping)
+        or doc.get("schema") != "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1"
+        or doc.get("status") != "COMPLETE"
+    ):
+        raise BoundSuccessVerificationError("CHECKPOINT_NOT_COMPLETE")
+    plan_sha = str(problem.get("controller_plan_sha256") or "")
+    if doc.get("plan_sha256") != plan_sha:
+        raise BoundSuccessVerificationError("CHECKPOINT_PLAN_SHA_MISMATCH")
+    completed = doc.get("completed_actions")
+    if (
+        not isinstance(completed, list)
+        or len(completed) != 2
+        or any(
+            not isinstance(row, Mapping) or not isinstance(row.get("plan"), Mapping)
+            for row in completed
+        )
+    ):
+        raise BoundSuccessVerificationError("RAW_BOUND_CHECKPOINT_SHAPE_INVALID")
+    plans = [deepcopy(dict(row["plan"])) for row in completed]
+    if astra_runtime._controller_plan_sha256(plans) != plan_sha:
+        raise BoundSuccessVerificationError("CHECKPOINT_PLAN_RECOMPUTATION_MISMATCH")
+    if plans[-1].get("type") != "finish":
+        raise BoundSuccessVerificationError("CHECKPOINT_FINISH_MISSING")
+
+    selected = _items(problem.get("selected_plan"))
+    if len(selected) != 1:
+        raise BoundSuccessVerificationError("RAW_BOUND_SINGLE_CAPABILITY_REQUIRED")
+    capability_id = selected[0]
+    if capability_id != str(problem.get("compiled_capability_id") or ""):
+        raise BoundSuccessVerificationError("COMPILED_CAPABILITY_BINDING_MISMATCH")
+    first = completed[0]
+    plan = first["plan"]
+    result = first.get("result")
+    if plan.get("type") != "invoke_capability":
+        raise BoundSuccessVerificationError("RAW_BOUND_ACTION_TYPE_INVALID")
+    args = plan.get("args")
+    if (
+        not isinstance(args, Mapping)
+        or str(args.get("capability_id") or "") != capability_id
+        or not isinstance(result, Mapping)
+    ):
+        raise BoundSuccessVerificationError("RAW_BOUND_ACTION_OR_RESULT_INVALID")
+
+    registry = load_verified_registry()
+    entry = registry.get(capability_id)
+    if not isinstance(entry, Mapping):
+        raise BoundSuccessVerificationError("RAW_BOUND_CAPABILITY_NOT_VERIFIED")
+    requires = _items(entry.get("requires", []))
+    provides = _items(entry.get("provides", []))
+    if not provides:
+        raise BoundSuccessVerificationError("RAW_BOUND_CAPABILITY_PROVIDES_EMPTY")
+    if _items(problem.get("initial_facts", [])) != requires:
+        raise BoundSuccessVerificationError("INITIAL_FACT_BINDING_MISMATCH")
+    if _items(problem.get("target_effects", [])) != provides:
+        raise BoundSuccessVerificationError("TARGET_EFFECT_BINDING_MISMATCH")
+
+    raw_request = problem.get("raw_request")
+    prior_acceptance = problem.get("raw_goal_acceptance")
+    if not isinstance(raw_request, Mapping) or not isinstance(prior_acceptance, Mapping):
+        raise BoundSuccessVerificationError("RAW_BOUND_ACCEPTANCE_MATERIAL_MISSING")
+    goal = str(raw_request.get("goal") or "").strip()
+    if not goal:
+        raise BoundSuccessVerificationError("RAW_GOAL_MISSING")
+    raw_contract = compile_contract(
+        goal,
+        source_id="user",
+        routing_target_effects=provides,
+    )
+    if raw_contract.get("pass") is not True:
+        raise BoundSuccessVerificationError("RAW_CONTRACT_RECOMPUTATION_FAILED")
+    if raw_contract.get("task_sha256") != problem.get("raw_goal_sha256"):
+        raise BoundSuccessVerificationError("RAW_GOAL_SHA_MISMATCH")
+    if raw_contract.get("task_contract_sha256") != problem.get("raw_task_contract_sha256"):
+        raise BoundSuccessVerificationError("RAW_TASK_CONTRACT_SHA_MISMATCH")
+
+    inputs = {
+        str(key): deepcopy(value)
+        for key, value in args.items()
+        if str(key) != "capability_id"
+    }
+    execution = {
+        "capability_id": capability_id,
+        "pass": True,
+        "status": "PASS__MODEL_INDEPENDENT_CONTROLLER_ACTION",
+        "result": deepcopy(dict(result)),
+        "execution_proof_type": "MODEL_INDEPENDENT_CONTROLLER_TRACE_V1",
+        "controller_plan_sha256": plan_sha,
+        "controller_trace": deepcopy(completed),
+    }
+    acceptance = verify_raw_acceptance(
+        goal=goal,
+        capability_id=capability_id,
+        inputs=inputs,
+        execution=execution,
+        raw_contract=raw_contract,
+        root=root,
+    )
+    if (
+        acceptance.get("pass") is not True
+        or acceptance.get("semantic_acceptance_complete") is not True
+    ):
+        raise BoundSuccessVerificationError(
+            "RAW_SEMANTIC_ACCEPTANCE_REVERIFICATION_FAILED:"
+            + str(acceptance.get("reason") or acceptance.get("status") or "")
+        )
+    if _canon(acceptance) != _canon(prior_acceptance):
+        raise BoundSuccessVerificationError("RAW_ACCEPTANCE_EVIDENCE_DRIFT")
+
+    steps = [{
+        "index": 0,
+        "op": capability_id,
+        "inputs": requires,
+        "outputs": provides,
+    }]
+    expected_trace = [{
+        "cycle": 0,
+        "capability_id": capability_id,
+        "requires": requires,
+        "provides": provides,
+        "result_sha256": _sha(result),
+        "composition_capsule_head_hash": None,
+        "raw_acceptance_sha256": _sha(acceptance),
+        "effect_outcome_sha256": str(acceptance.get("verified_output_sha256") or ""),
+    }]
+    if [dict(x) for x in trace] != expected_trace:
+        raise BoundSuccessVerificationError("EPISODE_TRACE_MISMATCH")
+    if list(episode.get("steps") or []) != steps:
+        raise BoundSuccessVerificationError("EPISODE_STEPS_MISMATCH")
+    if list(episode.get("preconditions") or []) != requires:
+        raise BoundSuccessVerificationError("EPISODE_PRECONDITIONS_MISMATCH")
+    if list(episode.get("postconditions") or []) != provides:
+        raise BoundSuccessVerificationError("EPISODE_POSTCONDITIONS_MISMATCH")
+    if list(episode.get("invalidators") or []):
+        raise BoundSuccessVerificationError("RAW_BOUND_INVALIDATORS_UNSUPPORTED")
+    expected_program = program_digest(
+        steps=steps,
+        preconditions=requires,
+        postconditions=provides,
+        invalidators=[],
+    )
+    if episode.get("program_sha256") != expected_program:
+        raise BoundSuccessVerificationError("EPISODE_PROGRAM_DIGEST_MISMATCH")
+    fact_head, value_head = _lineage_heads(
+        initial_facts=requires,
+        target_effects=provides,
+        steps=steps,
+        trace=expected_trace,
+    )
+    if fact_capsule_head_hash != fact_head:
+        raise BoundSuccessVerificationError("FACT_LINEAGE_HEAD_MISMATCH")
+    if value_capsule_head_hash != value_head:
+        raise BoundSuccessVerificationError("VALUE_LINEAGE_HEAD_MISMATCH")
+
+    return {
+        "schema": SCHEMA,
+        "status": "PASS__RAW_BOUND_SUCCESS_REVERIFIED_READ_ONLY",
+        "pass": True,
+        "effect_outcomes_reverified": True,
+        "state_lineage_reverified": True,
+        "trace_reverified": True,
+        "execution_replayed": False,
+        "verification_basis": (
+            "RAW_GOAL_CONTRACT_PLUS_CONTROLLER_CHECKPOINT_PLUS_"
+            "CURRENT_REGISTRY_PLUS_ARCHIVE_BYTE_READBACK_V1"
+        ),
+        "terminal_authority": False,
+    }
+
+
 def verify_material(
     *,
     problem: Mapping[str, Any],
@@ -120,7 +311,17 @@ def verify_material(
     repo_root: str | Path,
 ) -> dict[str, Any]:
     try:
-        if problem.get("verification_kind") != VERIFICATION_KIND:
+        verification_kind = problem.get("verification_kind")
+        if verification_kind == RAW_BOUND_VERIFICATION_KIND:
+            return _verify_raw_bound_material(
+                problem=problem,
+                episode=episode,
+                trace=trace,
+                fact_capsule_head_hash=fact_capsule_head_hash,
+                value_capsule_head_hash=value_capsule_head_hash,
+                repo_root=repo_root,
+            )
+        if verification_kind != VERIFICATION_KIND:
             raise BoundSuccessVerificationError("VERIFICATION_KIND_INVALID")
         root = Path(repo_root).resolve(strict=True)
         checkpoint = _safe_file(root, str(problem.get("checkpoint_path") or ""))
