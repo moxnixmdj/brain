@@ -518,5 +518,94 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         self.assertFalse(out["actual_goal_satisfaction_verified"])
 
 
+    def test_next_meta_action_is_total_and_non_authoritative(self):
+        cases = [
+            (
+                {"pass": True, "status": "PASS__DONE"},
+                "RETURN_VERIFIED_GOAL_SATISFACTION",
+            ),
+            (
+                {
+                    "pass": False,
+                    "status": "OPEN__INFO",
+                    "next_information_request": {"predicate_id": "p"},
+                },
+                "ACQUIRE_MINIMUM_DECISION_INFORMATION",
+            ),
+            (
+                {
+                    "pass": False,
+                    "status": "OPEN__OBS",
+                    "next_observation_request": {"discriminator_id": "d"},
+                },
+                "ACQUIRE_MINIMUM_DECISION_INFORMATION",
+            ),
+            (
+                {
+                    "pass": False,
+                    "status": "OPEN__POLICY",
+                    "next_policy_request": {"required_artifact": "A"},
+                },
+                "REPAIR_OR_PROVE_POLICY_ADEQUACY",
+            ),
+            (
+                {
+                    "pass": False,
+                    "status": "OPEN__EXEC",
+                    "next_required_edge": "AUTHENTICATED_SELECTED_POLICY_TO_EXECUTION_BINDING",
+                },
+                "BIND_OR_EXECUTE_SELECTED_POLICY",
+            ),
+            (
+                {
+                    "pass": False,
+                    "status": "OPEN__ACCEPT",
+                    "next_required_edge": "INDEPENDENT_ACTUAL_GOAL_SATISFACTION_VERIFICATION",
+                },
+                "VERIFY_ACTUAL_GOAL_SATISFACTION",
+            ),
+            (
+                {"pass": False, "status": "FAIL_CLOSED"},
+                "ABSTAIN_FAIL_CLOSED",
+            ),
+            (
+                {
+                    "pass": False,
+                    "status": "OPEN__UNKNOWN",
+                    "next_required_edge": "EXACT_UNKNOWN_EDGE",
+                },
+                "RESOLVE_EXACT_OPEN_EDGE",
+            ),
+        ]
+        for payload, expected in cases:
+            with self.subTest(expected=expected):
+                action = fixed._next_meta_action(payload)
+                self.assertEqual(action["kind"], expected)
+                self.assertTrue(action["routing_total"])
+                self.assertFalse(action["semantic_truth_authority"])
+                self.assertFalse(action["policy_adequacy_authority"])
+                self.assertFalse(action["execution_authority"])
+                self.assertFalse(action["acceptance_authority"])
+                self.assertFalse(action["terminal_authority"])
+
+    @patch.object(fixed, "run_controller")
+    def test_every_decorated_open_result_exposes_one_typed_next_move(self, controller):
+        controller.return_value = {
+            **self._open("OPEN__GOAL_SATISFACTION_BINDING_REQUIRED"),
+            "next_required_edge": "INDEPENDENT_ACTUAL_GOAL_SATISFACTION_VERIFICATION",
+        }
+        out = fixed.run(self._request())
+        self.assertFalse(out["pass"])
+        self.assertTrue(out["r2_control_policy_total"])
+        self.assertEqual(
+            out["r2_next_meta_action"]["kind"],
+            "VERIFY_ACTUAL_GOAL_SATISFACTION",
+        )
+        self.assertEqual(
+            out["r2_next_meta_action"]["required_edge"],
+            "INDEPENDENT_ACTUAL_GOAL_SATISFACTION_VERIFICATION",
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
