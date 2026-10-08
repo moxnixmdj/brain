@@ -1,0 +1,184 @@
+"""Selected required-claim support truth certificate v6.
+
+Checked support portfolio:
+1. exact arbitrary-proposition attestation/denial;
+2. source-declared simple equivalence + exact attestation/denial;
+3. exact Decimal numeric relations;
+4. exact categorical set membership / nonmembership;
+5. bounded explicit modal predicate-argument equivalence/conflict;
+6. exact entity/field/value equality facts.
+
+Relation-shaped claims use strict checkers and return UNKNOWN when their matching
+evidence cannot be checked. No general NLI, taxonomy inference, or source authority.
+"""
+from __future__ import annotations
+
+import hashlib, json, re
+from typing import Any, Mapping, Sequence
+
+from canonical.runtime import bounded_claim_support as facts
+from canonical.runtime import bounded_attestation_support_v1 as attest
+from canonical.runtime import bounded_source_declared_equivalence_support_v1 as defined
+from canonical.runtime import bounded_numeric_relation_support_v1 as numeric
+from canonical.runtime import bounded_set_membership_support_v1 as membership
+from canonical.runtime import bounded_explicit_categorical_support_v1 as categorical
+from canonical.runtime import bounded_predicate_argument_support_v1 as predicate_argument
+
+SCHEMA="PROJECT_BRAIN_SELECTED_SUPPORT_TRUTH_CERTIFICATE_V6"
+RULE="REQUIRED_CLAIM_SUPPORT_PORTFOLIO__ATTESTATION_DEFINED_EQUIVALENCE_NUMERIC_SET_MEMBERSHIP_PREDICATE_ARGUMENT_FACT"
+TRUE_POLICY="ASSERT_REQUIRED_CLAIM_AS_SUPPORTED_WITH_PROVENANCE"
+FALSE_POLICY="DO_NOT_ASSERT_REQUIRED_CLAIM_AS_SUPPORTED__PRESERVE_UNCERTAINTY_OR_SEEK_EVIDENCE"
+CAT_RULE="REQUIRED_CLAIM_SUPPORT_PORTFOLIO__EXPLICIT_CATEGORICAL_RELATIONS_V1"
+_ALLOWED_CLAIM={"claim_id","text","required"}
+_ALLOWED_EVIDENCE={"evidence_id","text","verified","provenance"}
+
+def _digest(v:Any)->str:
+    return hashlib.sha256(json.dumps(v,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()).hexdigest()
+
+def _fail(reason:str,**detail:Any)->dict[str,Any]:
+    out={"schema":SCHEMA,"pass":False,"status":"FAIL_CLOSED","reason":reason,
+         "predicate_truth":"UNKNOWN","truthful_precommitment_observation":False,
+         "selected_policy_id":None,"source_authorization_verified":False,
+         "policy_adequacy_authority":False,"db_admission_authority":False,
+         "u_subtraction_authority":False,"terminal_authority":False,"terminal_credit_delta":0}
+    if detail: out["detail"]=detail
+    return out
+
+def _classify(claim:str,evidence:str,eid:str)->tuple[str|None,str]:
+    if re.search(r"\b(?:means|refers to|is defined as)\b",evidence,re.I):
+        out=defined.classify_support(claim,evidence,evidence_id=eid)
+        if out.get("status")=="RESOLVED":
+            return out.get("relation"),"SOURCE_DECLARED_EQUIVALENCE_V1"
+        return None,"UNRESOLVED_DEFINITION_BEARING_EVIDENCE"
+
+    out=attest.classify_support(claim,evidence,evidence_id=eid)
+    if out.get("status")=="RESOLVED" and out.get("relation") in {"SUPPORTS","CONFLICTS"}:
+        return out.get("relation"),"EXACT_ATTESTATION_V1"
+
+    nclaim=numeric.parse_numeric_relation_claim(claim)
+    if nclaim.get("claim_in_scope") is True:
+        nout=numeric.classify_support(claim,evidence,evidence_id=eid)
+        if nout.get("status")=="RESOLVED":
+            return nout.get("relation"),"NUMERIC_RELATION_V1"
+        return None,"UNRESOLVED_NUMERIC_RELATION_EVIDENCE"
+
+    mclaim=membership.parse_set_membership_claim(claim)
+    if mclaim.get("claim_in_scope") is True:
+        mout=membership.classify_support(claim,evidence,evidence_id=eid)
+        if mout.get("status")=="RESOLVED":
+            return mout.get("relation"),"SET_MEMBERSHIP_V1"
+        return None,"UNRESOLVED_SET_MEMBERSHIP_EVIDENCE"
+
+    pout=predicate_argument.classify_support(claim,evidence,evidence_id=eid)
+    if pout.get("status")=="RESOLVED":
+        return pout.get("relation"),"PREDICATE_ARGUMENT_SUPPORT_V1"
+
+    if out.get("status")=="RESOLVED":
+        return out.get("relation"),"EXACT_ATTESTATION_V1"
+
+    fout=facts.classify_support(claim,evidence,evidence_id=eid)
+    if fout.get("status")=="RESOLVED":
+        return fout.get("relation"),"ENTITY_FIELD_VALUE_FACT_V1"
+    return None,"UNRESOLVED"
+
+def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
+    if not isinstance(payload,Mapping): return _fail("PAYLOAD_MAPPING_REQUIRED")
+    alias=payload.get("predicate_id")
+    if not isinstance(alias,str) or not alias.strip(): return _fail("PREDICATE_ALIAS_REQUIRED")
+    claim=payload.get("claim"); evidence=payload.get("evidence")
+    if not isinstance(claim,Mapping): return _fail("CLAIM_REQUIRED")
+    if set(claim)-_ALLOWED_CLAIM: return _fail("UNTRUSTED_CLAIM_METADATA_FORBIDDEN")
+    cid=claim.get("claim_id"); text=claim.get("text")
+    if not isinstance(cid,str) or not cid.strip() or not isinstance(text,str) or not text.strip():
+        return _fail("CLAIM_FIELDS_REQUIRED")
+    if claim.get("required") is not True: return _fail("CLAIM_NOT_STRUCTURALLY_REQUIRED")
+    if not isinstance(evidence,Sequence) or isinstance(evidence,(str,bytes)) or not evidence:
+        return _fail("EVIDENCE_SEQUENCE_REQUIRED")
+    rows=[];seen=set()
+    for row in evidence:
+        if not isinstance(row,Mapping): return _fail("EVIDENCE_ROW_INVALID")
+        if set(row)-_ALLOWED_EVIDENCE: return _fail("UNTRUSTED_EVIDENCE_METADATA_FORBIDDEN")
+        eid=row.get("evidence_id");et=row.get("text")
+        if not isinstance(eid,str) or not eid.strip() or not isinstance(et,str) or not et.strip():
+            return _fail("EVIDENCE_FIELDS_REQUIRED")
+        if eid in seen: return _fail("DUPLICATE_EVIDENCE_ID")
+        seen.add(eid)
+        if row.get("verified") is not True: return _fail("UNVERIFIED_EVIDENCE_UNIT")
+        prov=row.get("provenance")
+        if not isinstance(prov,list) or not prov or not all(isinstance(p,Mapping) for p in prov):
+            return _fail("EVIDENCE_PROVENANCE_REQUIRED")
+        rows.append(dict(row))
+    rows.sort(key=lambda r:r["evidence_id"])
+
+    cclaim=categorical.parse_categorical_claim(text)
+    if cclaim.get("claim_in_scope") is True:
+        claim_sha=hashlib.sha256(text.encode()).hexdigest()
+        predicate_id="support-portfolio-v6-sha256:"+_digest({"rule":CAT_RULE,"claim_text_sha256":claim_sha,"required":True})
+        binding=[{"evidence_id":r["evidence_id"],"text_sha256":hashlib.sha256(r["text"].encode()).hexdigest(),
+                  "verified":True,"provenance":r["provenance"]} for r in rows]
+        evidence_sha=_digest(binding)
+        base={"schema":SCHEMA,"predicate_id":predicate_id,"requested_predicate_id":alias,
+              "requested_predicate_id_authority":False,"claim_id":cid,"claim_text_sha256":claim_sha,
+              "evidence_set_sha256":evidence_sha,"source_authorization_verified":False,
+              "policy_adequacy_authority":False,"db_admission_authority":False,
+              "u_subtraction_authority":False,"terminal_authority":False,"terminal_credit_delta":0}
+        if cclaim.get("status")!="RESOLVED":
+            return {**base,"pass":False,"status":"UNKNOWN__EXPLICIT_CATEGORICAL_CLAIM_OUTSIDE_CHECKED_GRAMMAR",
+                    "reason":cclaim.get("reason") or "CATEGORICAL_CLAIM_UNRESOLVED",
+                    "predicate_truth":"UNKNOWN","truthful_precommitment_observation":False,
+                    "selected_policy_id":None,"unresolved_evidence_ids":[],"relation_audit":[]}
+        cout=categorical.evaluate_support(text,rows)
+        if cout.get("status")!="RESOLVED":
+            return {**base,"pass":False,"status":"UNKNOWN__CATEGORICAL_SUPPORT_RELATION_OUTSIDE_CHECKED_PORTFOLIO",
+                    "reason":cout.get("reason") or "CATEGORICAL_SUPPORT_UNRESOLVED",
+                    "predicate_truth":"UNKNOWN","truthful_precommitment_observation":False,
+                    "selected_policy_id":None,
+                    "unresolved_evidence_ids":sorted(cout.get("unresolved_evidence_ids") or []),
+                    "relation_audit":list(cout.get("relation_audit") or [])}
+        supports=sorted(cout.get("support_evidence_ids") or [])
+        conflicts=sorted(cout.get("conflict_evidence_ids") or [])
+        holds=bool(supports) and not conflicts
+        truth="TRUE" if holds else "FALSE"
+        return {**base,"pass":True,"status":"PASS__SELECTED_SUPPORT_PREDICATE_PROVED_"+truth,
+                "predicate_truth":truth,"truthful_precommitment_observation":True,
+                "selected_policy_id":TRUE_POLICY if holds else FALSE_POLICY,
+                "support_evidence_ids":supports,"conflict_evidence_ids":conflicts,
+                "relation_audit":list(cout.get("relation_audit") or []),
+                "categorical_support_receipt":cout,
+                "boundary":"CURRENT_V5_PORTFOLIO_PLUS_EXPLICIT_CATEGORICAL_RELATIONS__NO_GENERAL_NLI_OR_LEXICAL_TAXONOMY"}
+
+    supports=[];conflicts=[];unresolved=[];audit=[]
+    for row in rows:
+        relation,grammar=_classify(text,row["text"],row["evidence_id"])
+        if relation is None:
+            unresolved.append(row["evidence_id"]);continue
+        audit.append({"evidence_id":row["evidence_id"],"relation":relation,"grammar":grammar})
+        if relation=="SUPPORTS": supports.append(row["evidence_id"])
+        elif relation=="CONFLICTS": conflicts.append(row["evidence_id"])
+
+    claim_sha=hashlib.sha256(text.encode()).hexdigest()
+    predicate_id="support-portfolio-v6-sha256:"+_digest({"rule":RULE,"claim_text_sha256":claim_sha,"required":True})
+    binding=[{"evidence_id":r["evidence_id"],"text_sha256":hashlib.sha256(r["text"].encode()).hexdigest(),
+              "verified":True,"provenance":r["provenance"]} for r in rows]
+    evidence_sha=_digest(binding)
+    base={"schema":SCHEMA,"predicate_id":predicate_id,"requested_predicate_id":alias,
+          "requested_predicate_id_authority":False,"claim_id":cid,"claim_text_sha256":claim_sha,
+          "evidence_set_sha256":evidence_sha,"source_authorization_verified":False,
+          "policy_adequacy_authority":False,"db_admission_authority":False,
+          "u_subtraction_authority":False,"terminal_authority":False,"terminal_credit_delta":0}
+    if unresolved:
+        return {**base,"pass":False,"status":"UNKNOWN__SUPPORT_RELATION_OUTSIDE_CHECKED_PORTFOLIO",
+                "reason":"ONE_OR_MORE_RELATIONS_UNRESOLVED","predicate_truth":"UNKNOWN",
+                "truthful_precommitment_observation":False,"selected_policy_id":None,
+                "unresolved_evidence_ids":sorted(unresolved),"relation_audit":audit}
+    holds=bool(supports) and not conflicts
+    truth="TRUE" if holds else "FALSE"
+    return {**base,"pass":True,"status":"PASS__SELECTED_SUPPORT_PREDICATE_PROVED_"+truth,
+            "predicate_truth":truth,"truthful_precommitment_observation":True,
+            "selected_policy_id":TRUE_POLICY if holds else FALSE_POLICY,
+            "support_evidence_ids":sorted(supports),"conflict_evidence_ids":sorted(conflicts),
+            "relation_audit":audit,
+            "boundary":"ATTESTATION_SOURCE_DEFINED_EQUIVALENCE_EXACT_DECIMAL_SET_MEMBERSHIP_BOUNDED_PREDICATE_ARGUMENT_OR_EXACT_FACT_EQUALITY_ONLY__NO_GENERAL_NLI"}
+
+def run(args:Mapping[str,Any]|None=None,root:Any=None)->dict[str,Any]:
+    return evaluate(args or {})
