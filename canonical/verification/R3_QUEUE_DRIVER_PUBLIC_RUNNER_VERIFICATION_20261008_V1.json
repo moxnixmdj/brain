@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_R3_QUEUE_DRIVER_PUBLIC_RUNNER_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_QUEUE_DRIVER_SOURCE__PRIVATE_INTEGRATION_CARRIER_UNAVAILABLE",
+  "subject": {
+    "branch": "r3-autonomous-queue-driver-v2-20261008",
+    "driver": {
+      "path": "canonical/runtime/r3_improvement_queue_driver_v1.py",
+      "git_blob_sha": "1a049b263856f52687bdf22010640c3fdbd67c8b"
+    },
+    "self_improvement": {
+      "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+      "git_blob_sha": "1beb9a7f6e78cdc15a5bf7c76285c2028973254c"
+    },
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "e01642ddbded6b93c5f276da75df009480b3691f"
+    },
+    "private_regression_test": {
+      "path": "canonical/tests/test_r3_improvement_queue_driver_v1.py",
+      "git_blob_sha": "6681c3c3a784f56b92ffacffc541e8bfc395d149"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "r3-queue-driver-capsule-20261008",
+    "workflow": ".github/workflows/verify-r3-queue-driver-capsule.yml",
+    "run_id": 37770735506,
+    "job_id": 113289392228,
+    "conclusion": "success",
+    "exact_driver_blob_bound": "1a049b263856f52687bdf22010640c3fdbd67c8b"
+  },
+  "verified": {
+    "driver_python_compile": true,
+    "exact_source_git_blob_binding": true,
+    "blocked_priority_work_does_not_starve_actionable_repair": true,
+    "actionable_repair_dispatch": true,
+    "event_waiting_work_claims_no_false_progress": true,
+    "drain_terminates_when_no_actionable_work_remains": true
+  },
+  "private_integration_gate": {
+    "pull_request": 3236,
+    "private_r3_workflow_run_id": 37770530692,
+    "private_r3_job_id": 113288722479,
+    "runner_assigned": false,
+    "steps_executed": 0,
+    "conclusion": "failure",
+    "classification": "CARRIER_FAILURE_BEFORE_RUNNER_ASSIGNMENT__NO_PRIVATE_CODE_VERDICT"
+  },
+  "nonclaims": [
+    "The public capsule does not independently execute the private autonomous_verified_self_improvement_v1.py integration.",
+    "The public capsule does not independently execute the private unified_cognitive_fabric_v1.py integration.",
+    "This receipt does not grant terminal authority or weaken episode/skill independent-verification requirements."
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
