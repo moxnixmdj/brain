@@ -426,5 +426,53 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertEqual(state["reuse"][sid]["effectful_failures"], 1)
 
 
+    def test_reuse_first_runner_forwards_retry_context_to_failure_integration(self):
+        path = self.temp_state()
+        failed = {
+            "pass": False,
+            "status": "FAIL_CLOSED__PROPOSAL_SEARCH_FAILED",
+            "reason": "no proposal",
+            "trace": [],
+            "falsified_capability_ids": [],
+            "deferred_capability_ids": [],
+            "counterexamples": [],
+            "attempts": [],
+        }
+        retry_context = {
+            "mode": "generic",
+            "problem": self._reuse_problem(),
+            "scope_id": "scope",
+            "episode_id": "ep3",
+            "learn": True,
+        }
+        empty = loop._empty_state()
+        with mock.patch.object(loop, "load_state", return_value=empty), \
+             mock.patch.object(loop, "_select_active_skill", return_value=None), \
+             mock.patch.object(loop.solver_v12, "run", return_value=failed), \
+             mock.patch.object(
+                 loop,
+                 "integrate_solver_output",
+                 return_value={
+                     "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+                     "pass": False,
+                 },
+             ) as integrate:
+            out = loop.run_learning_episode(
+                self._reuse_problem(),
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep3",
+                scope_id="scope",
+                retry_context=retry_context,
+            )
+
+        self.assertFalse(out["pass"])
+        integrate.assert_called_once_with(
+            failed,
+            state_path=path,
+            retry_context=retry_context,
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
