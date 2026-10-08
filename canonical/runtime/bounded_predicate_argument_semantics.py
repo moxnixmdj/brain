@@ -13,10 +13,23 @@ from __future__ import annotations
 import re
 from typing import Any
 
+from canonical.runtime.bounded_task_directive_semantics_v1 import ACTION_VERBS
+
 SCHEMA="BRAIN_BOUNDED_PREDICATE_ARGUMENT_SEMANTICS_V1"
 
 _MODAL=r"(must|shall|should)"
 _WORD=r"[A-Za-z][A-Za-z0-9_-]*"
+_ACTIVE_PREDICATES=frozenset(ACTION_VERBS)|frozenset({"delete","retry","read","sign"})
+_PASSIVE_PREDICATES=frozenset({
+    "approved","assessed","built","calculated","captured","compiled","completed",
+    "constructed","copied","created","defined","delivered","described","designed",
+    "determined","developed","documented","drafted","evaluated","explained",
+    "extracted","filled","formatted","generated","highlighted","identified",
+    "included","incorporated","listed","made","modeled","organised","organized",
+    "outlined","performed","prepared","presented","produced","provided",
+    "recommended","reported","researched","reviewed","selected","shown","signed",
+    "summarized","updated","used","validated","verified","written",
+})
 _ACTIVE=re.compile(
     rf"^\s*(?P<subject>.+?)\s+(?P<modal>{_MODAL})\s+(?P<neg>not\s+)?(?P<verb>{_WORD})\s+(?P<object>.+?)\s*[.]?\s*$",
     re.I,
@@ -61,6 +74,10 @@ def _parse_simple(text:str, *, offset:int=0)->dict[str,Any]:
     modal=gd["modal"].lower()
     neg=bool(gd.get("neg"))
     verb=gd["verb"].lower()
+    if voice=="ACTIVE" and verb not in _ACTIVE_PREDICATES:
+        return {"status":"UNRESOLVED","reason":"PREDICATE_OUTSIDE_BOUND_LEXICON"}
+    if voice=="PASSIVE" and verb not in _PASSIVE_PREDICATES:
+        return {"status":"UNRESOLVED","reason":"PASSIVE_PREDICATE_OUTSIDE_BOUND_LEXICON"}
     if voice=="PASSIVE":
         obj=subject
         agent=_clean_arg(gd["agent"])
