@@ -66,7 +66,19 @@ def _bound_json(
         raise DecisionControllerError("BOUND_PATH_INVALID")
     if not any(rel.startswith(prefix) for prefix in prefixes):
         raise DecisionControllerError("BOUND_PATH_OUTSIDE_ALLOWED_SCOPE")
-    full = repo_root / p
+    # The lexical prefix check above is not enough: a symlink inside an
+    # allowed evidence directory can escape to a different filesystem location.
+    # Evidence references must resolve to real files within the permitted scope.
+    base = repo_root.resolve(strict=True)
+    full = base / p
+    if any(part.is_symlink() for part in [full, *full.parents] if part != base and base in part.parents):
+        raise DecisionControllerError("BOUND_SYMLINK_FORBIDDEN:" + rel)
+    resolved = full.resolve(strict=False)
+    if not any(
+        resolved.is_relative_to((base / prefix).resolve(strict=False))
+        for prefix in prefixes
+    ):
+        raise DecisionControllerError("BOUND_RESOLVED_PATH_OUTSIDE_ALLOWED_SCOPE")
     if not full.is_file():
         raise DecisionControllerError("BOUND_FILE_MISSING:" + rel)
     actual = _git_blob_sha(full)
