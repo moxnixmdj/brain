@@ -290,7 +290,9 @@ def _enqueue_improvement(
     )
     reopen_count = (
         int(previous.get("reopen_count", 0))
-        + (1 if isinstance(previous, Mapping) and previous.get("status") == "RESOLVED" else 0)
+        + (1 if previous.get("status") == "RESOLVED" else 0)
+        if isinstance(previous, Mapping)
+        else 0
     )
     queue[wid] = {
         "work_id": wid,
