@@ -1015,6 +1015,12 @@ def integrate_solver_output(
                 frontier_rows.append(_skill_pareto_row(old_sid, old_skill))
 
         skill_admission = update_pareto_frontier(frontier_rows, row)
+        previous_record = state["skills"].get(sid)
+        preserved_counterexample_scopes = (
+            _items(previous_record.get("generalization_counterexample_scopes"))
+            if isinstance(previous_record, Mapping)
+            else []
+        )
         record = {
             "skill": deepcopy(dict(verified_skill)),
             "family_id": family,
@@ -1029,6 +1035,11 @@ def integrate_solver_output(
                 ),
             },
         }
+        if preserved_counterexample_scopes:
+            record["generalization_counterexample_scopes"] = preserved_counterexample_scopes
+            record["generalization_repromotion_blocked"] = True
+            if _s(verified_skill.get("scope_relation")) == "EXACT":
+                record["recovered_from_quarantine_by_scope_contraction"] = True
         state["skills"][sid] = record
         _resolve_improvements(
             state,
@@ -1070,7 +1081,7 @@ def integrate_solver_output(
                 and _s(verified_skill.get("scope_predicate"))
                 == VERIFIED_SUPERSET_SCOPE_PREDICATE
             )
-            if not verified_generalization:
+            if not verified_generalization and not preserved_counterexample_scopes:
                 _enqueue_improvement(
                     state,
                     kind="SEEK_VERIFIED_SCOPE_GENERALIZATION",
@@ -1083,6 +1094,13 @@ def integrate_solver_output(
                         "postconditions": postconditions,
                         "required_result": "INDEPENDENTLY_VERIFIED_PROVEN_SUPERSET_SKILL",
                     },
+                )
+            elif not verified_generalization:
+                _resolve_improvements(
+                    state,
+                    kind="SEEK_VERIFIED_SCOPE_GENERALIZATION",
+                    predicate=lambda work: work.get("identity", {}).get("skill_id") == sid,
+                    resolved_by=sid + ":GENERALIZATION_BLOCKED_BY_COUNTEREXAMPLE",
                 )
             else:
                 _resolve_improvements(
@@ -1471,6 +1489,28 @@ def _record_reuse_result(
             record["active"] = False
             record["quarantined"] = True
             record["quarantine_reason"] = "VERIFIED_REUSE_ROUTE_EFFECTFUL_FAILURE_COUNTEREXAMPLE"
+            raw_skill = record.get("skill")
+            source_scopes = (
+                set(_items(raw_skill.get("source_scopes")))
+                if isinstance(raw_skill, Mapping)
+                else set()
+            )
+            relation = (
+                _s(raw_skill.get("scope_relation"))
+                if isinstance(raw_skill, Mapping)
+                else ""
+            )
+            counterexample_scope = _s(counterexample_scope_id)
+            scope_contraction_safe = (
+                relation == "PROVEN_SUPERSET"
+                and bool(counterexample_scope)
+                and counterexample_scope not in source_scopes
+            )
+            if scope_contraction_safe:
+                prior = set(_items(record.get("generalization_counterexample_scopes")))
+                prior.add(counterexample_scope)
+                record["generalization_counterexample_scopes"] = sorted(prior)
+                record["generalization_repromotion_blocked"] = True
             family = record.get("family_id")
             frontier = state["pareto_frontiers"].get(family)
             if isinstance(frontier, Sequence) and not isinstance(frontier, (str, bytes)):
@@ -1504,7 +1544,10 @@ def _record_reuse_result(
                     "falsified_capability_ids": diagnosis.get("falsified_capability_ids", []),
                     "counterexamples": diagnosis.get("counterexamples", []),
                     "retry_capsule_sha256": retry_capsule_sha256,
-                    "counterexample_scope_id": _s(counterexample_scope_id) or None,
+                    "counterexample_scope_id": counterexample_scope or None,
+                    "source_scopes": sorted(source_scopes),
+                    "previous_scope_relation": relation or None,
+                    "scope_contraction_safe": scope_contraction_safe,
                     "required_result": (
                         "INDEPENDENT_REVERIFICATION_OR_VERIFIED_FAMILY_REPLACEMENT"
                     ),
