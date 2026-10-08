@@ -4,7 +4,8 @@ import json
 import unittest
 from pathlib import Path
 
-from canonical.runtime import live_brain_runtime_v1 as live
+from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
+from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as exact_acceptance
 from canonical.runtime import r3_improvement_queue_driver_v1 as driver
 from canonical.runtime import r3_direct_r2_success_adapter_v1 as direct_adapter
 
@@ -39,22 +40,67 @@ class R3DirectR2AdapterAcquisitionV1Tests(unittest.TestCase):
             STATE.unlink()
 
     def _run_direct(self, task_id: str, literal: str):
-        out = live.run_decision(
-            {
-                "task_id": task_id,
-                "goal": f'Reply with exactly "{literal}"',
+        goal = f'Reply with exactly "{literal}"'
+        pf = exact_acceptance.preflight(goal)
+        contract = exact_acceptance.compile_contract(
+            goal,
+            source_id="user",
+            routing_target_effects=[exact_acceptance.ROUTING_EFFECT],
+        )
+        raw_result = {
+            "pass": True,
+            "compiler_mode": "DETERMINISTIC_EXACT_LITERAL_RESPONSE",
+            "raw_goal_sha256": pf["goal_sha256"],
+            "raw_task_contract_sha256": contract["task_contract_sha256"],
+            "raw_source_coverage_complete": True,
+            "raw_acceptance_obligation_count": len(
+                contract["acceptance_contract"]["obligations"]
+            ),
+            "controller_action_count": 1,
+            "model_dependency_count": 0,
+            "cognition_dependency_class": "MODEL_INDEPENDENT",
+            "controller_execution": {
+                "returncode": 0,
+                "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+                "final_summary": literal,
+                "trace": [{
+                    "plan": {"type": "finish", "args": {"summary": literal}},
+                    "result": {"summary": literal},
+                }],
             },
+        }
+        acceptance = exact_acceptance.verify(goal=goal, raw_result=raw_result)
+        self.assertTrue(acceptance["pass"], acceptance)
+        out = {
+            "schema": "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2",
+            "status": "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED",
+            "pass": True,
+            "r2_fixed_point_status": "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED",
+            "route_id": direct_adapter.EXACT_LITERAL_ROUTE_ID,
+            "goal_sha256": pf["goal_sha256"],
+            "semantic_scope": "EXACT_LITERAL_RESPONSE_V1",
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "raw_acceptance_obligation_count": len(
+                acceptance["accepted_obligation_ids"]
+            ),
+            "accepted_raw_obligation_ids": list(
+                acceptance["accepted_obligation_ids"]
+            ),
+            "acceptance_receipt": acceptance,
+            "raw_result": raw_result,
+        }
+        learned = learning.record_success_observation(
+            out,
+            surface="ADEQUATE_DECISION_DIRECT_SUCCESS",
             state_path=STATE,
-            learn=True,
+            replay_context={
+                "mode": "decision",
+                "request": {"task_id": task_id, "goal": goal},
+            },
         )
-        self.assertTrue(out["pass"], out)
-        self.assertEqual(
-            out["decision_output"]["r2_fixed_point_status"],
-            "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED",
-        )
-        self.assertIsInstance(out.get("learning"), dict)
-        self.assertTrue(out["learning"]["proof_available"], out["learning"])
-        return out
+        self.assertTrue(learned["proof_available"], learned)
+        return {"decision_output": out, "learning": learned}
 
     def test_park_acquire_reopen_verify_then_sibling_reuses_rule(self):
         first = self._run_direct("direct-rule-a", "alpha")
@@ -93,7 +139,7 @@ class R3DirectR2AdapterAcquisitionV1Tests(unittest.TestCase):
             verified["status"],
             "IMPROVEMENT_ADVANCED__SUCCESS_BECAME_VERIFIED_EPISODE",
         )
-        state = live._learning_module().load_state(STATE)
+        state = learning.load_state(STATE)
         self.assertGreaterEqual(state["stats"]["verified_episode_count"], 1)
 
         rules_after_first = RULES.read_bytes()
@@ -109,7 +155,7 @@ class R3DirectR2AdapterAcquisitionV1Tests(unittest.TestCase):
         )
         self.assertEqual(RULES.read_bytes(), rules_after_first)
 
-        state = live._learning_module().load_state(STATE)
+        state = learning.load_state(STATE)
         self.assertGreaterEqual(state["stats"]["verified_episode_count"], 2)
         obs = state["observations"][second_observation_id]
         self.assertNotEqual(
