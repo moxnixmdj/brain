@@ -22,6 +22,7 @@ from canonical.runtime.brain_owned_python_closure_census_v1 import census as clo
 from canonical.runtime.current_authority_runtime_census_v1 import run as authority_runtime_census
 from canonical.runtime import live_capability_ownership_v1 as live_ownership
 from canonical.runtime import live_capability_invoker_v1 as live_invoker
+from canonical.runtime import live_capability_composition_v1 as live_composition
 from canonical.runtime import r1_live_architecture_closure_gate_v1 as r1_closure_gate
 from canonical.runtime import universal_escape_resolver_v1 as universal_escape
 from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
@@ -54,6 +55,7 @@ ENGINE_DESCRIPTORS = {
     "TERMINAL_CLOSURE": "terminal_closure_reducer",
     "OWNERSHIP_CATALOG": "live_capability_ownership_v1.evaluate",
     "LIVE_CAPABILITY": "live_capability_invoker_v1.invoke",
+    "LIVE_COMPOSITION": "live_capability_composition_v1.execute",
 }
 
 KNOWN_R1_RESIDUALS: tuple[str, ...] = ()
@@ -98,6 +100,9 @@ def _unwrap_live_runtime(wrapper: Mapping[str, Any], inner_key: str) -> dict[str
 def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
     """Select only structurally unambiguous fabric routes; otherwise fail closed."""
     keys = set(payload)
+
+    if isinstance(payload.get("composition_steps"), list):
+        return "LIVE_COMPOSITION"
 
     if {"capability_id", "capability_payload"} <= keys:
         return "LIVE_CAPABILITY"
@@ -454,6 +459,71 @@ def run(
                 raise CognitiveFabricError("TERMINAL_CLOSURE_OPERATION_INVALID:" + operation)
         elif mode == "OWNERSHIP_CATALOG":
             out = live_ownership.evaluate(ENGINE_DESCRIPTORS)
+        elif mode == "LIVE_COMPOSITION":
+            depth = int(options.get("__live_capability_depth", 0))
+            if depth >= 8:
+                raise CognitiveFabricError("LIVE_COMPOSITION_RECURSION_LIMIT")
+
+            def _composition_engine_runner(
+                target_mode: str,
+                target_payload: Mapping[str, Any],
+                target_options: Mapping[str, Any],
+            ) -> Mapping[str, Any]:
+                nested_options = dict(target_options)
+                nested_options["__live_capability_depth"] = depth + 1
+                return run(
+                    {
+                        "mode": target_mode,
+                        "payload": dict(target_payload),
+                        "options": nested_options,
+                    },
+                    information_provider=information_provider,
+                    proposal_provider=proposal_provider,
+                    capability_expander=capability_expander,
+                    episode_verification_provider=episode_verification_provider,
+                    skill_verification_provider=skill_verification_provider,
+                    success_episode_adapter_provider=success_episode_adapter_provider,
+                )
+
+            composition_options = dict(options)
+            if proposal_provider is not None:
+                composition_options["proposal_provider"] = proposal_provider
+            if capability_expander is not None:
+                composition_options["capability_expander"] = capability_expander
+
+            def _invoke_composed_capability(
+                capability_id: str,
+                capability_payload: Mapping[str, Any],
+                capability_options: Mapping[str, Any],
+            ) -> Mapping[str, Any]:
+                return live_invoker.invoke(
+                    capability_id,
+                    capability_payload,
+                    engine_runner=_composition_engine_runner,
+                    options=capability_options,
+                )
+
+            composed = live_composition.execute(
+                payload,
+                invoke_capability=_invoke_composed_capability,
+                options=composition_options,
+            )
+            out = deepcopy(dict(composed))
+            observation = out.get("learning_observation")
+            if isinstance(observation, Mapping):
+                try:
+                    out["learning"] = live_runtime.observe_runtime_outcome(
+                        observation,
+                        state_path=options.get("state_path"),
+                        learn=options.get("learn", True) is not False,
+                        surface="LIVE_COMPOSITION",
+                    )
+                    out["learning_observation_error"] = None
+                except Exception as exc:
+                    out["learning"] = None
+                    out["learning_observation_error"] = (
+                        type(exc).__name__ + ":" + str(exc)
+                    )
         elif mode == "LIVE_CAPABILITY":
             capability_id = str(payload.get("capability_id") or "").strip()
             capability_payload = payload.get("capability_payload")
