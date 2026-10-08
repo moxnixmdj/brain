@@ -260,6 +260,40 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         )
 
     @patch.object(fixed, "run_controller")
+    def test_exact_policy_repair_request_reaches_resolver(self, controller):
+        opened = {
+            **self._open("OPEN__POSITIVE_POLICY_ADEQUACY_CERTIFICATE_REQUIRED"),
+            "next_required_edge": "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+            "next_policy_request": {
+                "schema": "PROJECT_BRAIN_MINIMUM_POLICY_REPAIR_REQUEST_V1",
+                "required_artifact": "POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+                "selected_policy_id": "policy.p",
+                "policy_adequacy_authority": False,
+            },
+        }
+        controller.side_effect = [opened, self._pass()]
+        provider = Mock(
+            return_value={
+                "request_patch": {
+                    "decision_payload": {"context_id": "refined-context"}
+                }
+            }
+        )
+
+        out = fixed.run(self._request(), proposal_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        packet = provider.call_args.args[0]
+        self.assertEqual(
+            packet["next_policy_request"]["required_artifact"],
+            "POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+        )
+        self.assertEqual(
+            packet["next_required_edge"],
+            "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+        )
+
+    @patch.object(fixed, "run_controller")
     def test_provider_pass_claim_cannot_bypass_controller(self, controller):
         controller.return_value = self._open()
         provider = Mock(return_value={"pass": True, "status": "I_SAY_DONE"})
