@@ -254,5 +254,31 @@ class NativeSpecializedCapabilityRegistryV1Tests(unittest.TestCase):
         )
 
 
+    def test_native_node_without_effect_semantics_binding_is_rejected_by_v4(self):
+        from canonical.runtime import universal_verified_adaptive_solver_v4 as solver_v4
+
+        compiled = native.compile_into_problem(
+            {
+                "task_id": "semantic-gate",
+                "initial_facts": [],
+                "target_effects": ["H100_READY"],
+                "capabilities": [],
+            },
+            [{
+                "instance_id": "h100-snapshot",
+                "operation_id": "H100_REGISTRY_SNAPSHOT_V8",
+                "requires": [],
+                "provides": ["H100_READY"],
+                "args": {},
+            }],
+        )
+        cap = compiled["capabilities"][0]
+        with self.assertRaisesRegex(
+            solver_v4.UniversalSolverV4Error,
+            "EFFECT_SEMANTICS_BINDING_REQUIRED",
+        ):
+            solver_v4._validate_structural_effect_contract(cap)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
