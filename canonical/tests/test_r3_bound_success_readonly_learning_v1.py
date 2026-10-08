@@ -46,6 +46,7 @@ class R3BoundSuccessReadonlyLearningV1Tests(unittest.TestCase):
             },
         }
         result = {
+            "status": "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
             "pass": True,
             "inputs_sha256": prepared["inputs_sha256"],
             "registry_file_sha256": prepared["registry_file_sha256"],
@@ -97,7 +98,7 @@ class R3BoundSuccessReadonlyLearningV1Tests(unittest.TestCase):
             "execution": [{
                 "capability_id": cid,
                 "pass": True,
-                "status": "PASS",
+                "status": "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
                 "composition_capsule_head_hash": "5" * 64,
             }],
             "cognition_dependency_class": "MODEL_INDEPENDENT",
