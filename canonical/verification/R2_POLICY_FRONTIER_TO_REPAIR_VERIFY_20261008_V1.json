@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_R2_POLICY_FRONTIER_TO_REPAIR_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS_25_OF_25",
+  "branch": "r2-policy-frontier-to-repair-v1",
+  "exact_blobs": {
+    "runtime": "afc7eb360e7893138d8f98b5ca76718aa452b676",
+    "tests": "5c399db0415ae4fd16623acdf94e09f2437aee9c"
+  },
+  "isolated_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "tests_run": 25,
+    "tests_passed": 25,
+    "tests_failed": 0
+  },
+  "proved": [
+    "COMPACT_POLICY_FRONTIER_REACHES_SAME_DISPATCH_REPAIR",
+    "RAW_MODEL_VALUATIONS_ARE_NOT_PERSISTED_IN_REPAIR_CONTEXT",
+    "AUTHENTICATED_POLICY_IDS_AND_UNCOVERED_MODEL_IDS_ARE_PRESERVED",
+    "DISCRIMINATOR_IDENTITIES_AND_COSTS_ARE_PRESERVED",
+    "FULL_LIVE_RUNTIME_REGRESSION_REMAINS_GREEN"
+  ],
+  "hard_nonclaims": [
+    "NO_POLICY_ADEQUACY_SELF_CERTIFICATION",
+    "NO_CLAIM_R2_GLOBAL_COVERAGE_COMPLETE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
