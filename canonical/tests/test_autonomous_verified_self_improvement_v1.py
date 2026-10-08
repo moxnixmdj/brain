@@ -717,10 +717,9 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertFalse(state["skills"][sid]["active"])
         self.assertTrue(state["skills"][sid]["quarantined"])
         self.assertNotIn(sid, state["pareto_frontiers"][state["skills"][sid]["family_id"]])
-        self.assertEqual(
-            loop.next_improvement_action(state_path=path)["kind"],
-            "REVERIFY_QUARANTINED_SKILL",
-        )
+        next_work = loop.next_improvement_action(state_path=path)
+        self.assertEqual(next_work["kind"], "REVERIFY_QUARANTINED_SKILL")
+        self.assertFalse(next_work["payload"]["scope_contraction_safe"])
 
     def test_effectful_superset_failure_outside_source_scope_queues_safe_contraction(self):
         path = self.temp_state()
