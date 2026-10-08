@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_R2_VISUAL_CODE_DIRECT_ADEQUACY_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_BRANCH_CONTROL_REPLAY_11_OF_11__PINNED_PRODUCER_REPLAY_BOTH_FORMATS__INDEPENDENT_LIVE_DECODE_EXACT__ZERO_CREDIT",
+  "subject": {
+    "family_runtime": {
+      "path": "canonical/runtime/r2_visual_code_direct_adequacy_v1.py",
+      "git_blob_sha": "59f574d5e6726330f29bc41bf2afeb2044c7f7ea"
+    },
+    "direct_router": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "b93a4ae8876773c7f71bbb764c71440c412a716c"
+    },
+    "family_tests": {
+      "path": "canonical/tests/test_r2_visual_code_direct_adequacy_v1.py",
+      "git_blob_sha": "8bf68a5297f5f14450cd1a4c4f844e40335fba91"
+    },
+    "integration_tests": {
+      "path": "canonical/tests/test_r2_visual_code_direct_integration_v1.py",
+      "git_blob_sha": "2aa76cbf20744b5408c39fff4daa4def8b3cdda5"
+    }
+  },
+  "focused_remote_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "result": "11_OF_11_PASS",
+    "suites": [
+      "canonical.tests.test_r2_visual_code_direct_adequacy_v1",
+      "canonical.tests.test_r2_visual_code_direct_integration_v1"
+    ],
+    "proved": [
+      "QR_EXACT_PREFLIGHT_BINDS_QRENCODE",
+      "CODE128_EXACT_PREFLIGHT_BINDS_VERIFIED_EXECUTION_ADAPTER_WITHOUT_GLOBAL_COMPILER_SCORE_CHANGE",
+      "MATCHED_FAILURE_ROLLS_BACK_AND_NEVER_FALLS_THROUGH",
+      "SUCCESS_REQUIRES_EXACT_DECODED_PAYLOAD_EQUALITY",
+      "PRODUCER_AND_VERIFIER_PACKAGE_IDENTITIES_ARE_DISJOINT",
+      "NO_TERMINAL_AUTHORITY"
+    ]
+  },
+  "pinned_supplier_replay": {
+    "qrencode": {
+      "registry_package": "qrencode_4.1.1-1build2_amd64.deb",
+      "registry_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+      "downloaded_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+      "exact_package_hash_match": true,
+      "isolated_binary_version": "4.1.1",
+      "payload": "PROJECT_BRAIN_42",
+      "output_sha256": "e0b4c578a34642601f5f8f4002ff26ea629040cf9f6e82e721d6a6ec4dc2cc55",
+      "live_independent_decoder_output": "PROJECT_BRAIN_42",
+      "semantic_roundtrip_exact": true
+    },
+    "zint": {
+      "registry_package": "zint_2.13.0-1build3_amd64.deb",
+      "registry_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+      "downloaded_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+      "exact_package_hash_match": true,
+      "isolated_binary_version": "2.13.0",
+      "payload": "PROJECT_BRAIN_42",
+      "output_sha256": "6869c59f721d40d5a155587fd17d7360cc53d9357be9a9bad49e9efce336abd5",
+      "live_independent_decoder_output": "PROJECT_BRAIN_42",
+      "semantic_roundtrip_exact": true
+    },
+    "zbar_tools": {
+      "registry_package": "zbar-tools_0.23.93-4build3_amd64.deb",
+      "registry_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
+      "downloaded_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
+      "exact_package_hash_match": true,
+      "exact_pinned_binary_executed": false,
+      "exact_pinned_binary_blocker": "NOBLE_ZBARIMG_REQUIRES_IMAGEMAGICK_6_SHARED_LIBRARY_NOT_PRESENT_ON_RESOLUTE_CARRIER",
+      "live_decoder_version": "0.23.93",
+      "live_decoder_semantic_replay_passed_for": [
+        "QR",
+        "CODE128"
+      ]
+    }
+  },
+  "verification_boundary": {
+    "exact_pinned_producer_replay_qr": true,
+    "exact_pinned_producer_replay_code128": true,
+    "exact_pinned_zbarimg_replay": false,
+    "existing_registry_independent_zbar_multiformat_verification_reused": true,
+    "fresh_live_independent_semantic_decode_replay": true
+  },
+  "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
+  "hard_nonclaims": [
+    "NO_CLAIM_EXACT_PINNED_ZBARIMG_BINARY_WAS_EXECUTED_IN_THIS_REPLAY",
+    "NO_CLAIM_PAYLOADS_OUTSIDE_THE_EXACT_QUOTED_ASCII_GRAMMAR_ARE_COVERED",
+    "NO_CLAIM_EXTERNAL_OR_IRREVERSIBLE_EFFECTS_ARE_AUTHORIZED",
+    "NO_CLAIM_OPEN_WORLD_R2_COVERAGE_IS_COMPLETE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
