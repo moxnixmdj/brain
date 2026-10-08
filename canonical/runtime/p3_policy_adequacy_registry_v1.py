@@ -83,8 +83,24 @@ def _load_registered_binding(
     *,
     root: Path,
 ) -> tuple[dict[str, Any] | None, str | None]:
-    rel = entry["binding_path"]
-    path = root / rel
+    rel = str(entry["binding_path"])
+    p = Path(rel)
+    if not rel or p.is_absolute() or ".." in p.parts:
+        return None, "REGISTERED_BINDING_PATH_INVALID:" + rel
+    if not rel.startswith("canonical/governance/"):
+        return None, "REGISTERED_BINDING_PATH_OUTSIDE_ALLOWED_SCOPE:" + rel
+    base = root.resolve(strict=True)
+    path = base / p
+    if any(
+        part.is_symlink()
+        for part in [path, *path.parents]
+        if part != base and base in part.parents
+    ):
+        return None, "REGISTERED_BINDING_SYMLINK_FORBIDDEN:" + rel
+    resolved = path.resolve(strict=False)
+    allowed = (base / "canonical/governance").resolve(strict=False)
+    if not resolved.is_relative_to(allowed):
+        return None, "REGISTERED_BINDING_RESOLVED_PATH_OUTSIDE_ALLOWED_SCOPE:" + rel
     if not path.is_file():
         return None, "REGISTERED_BINDING_MISSING:" + rel
     actual = _git_blob_sha(path)
