@@ -294,7 +294,11 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
         self.assertFalse(policy_request["semantic_truth_authority"])
         self.assertEqual(
             policy_request["preferred_resolution_order"][0],
+            "REPAIR_OR_REUSE_EXISTING_DECLARED_POLICY_BEFORE_INVENTION",
+        )
+        self.assertIn(
             "CERTIFY_ONE_COMMON_BRAIN_OWNED_POLICY_IF_POSSIBLE",
+            policy_request["preferred_resolution_order"],
         )
 
     def test_common_policy_selection_binding_gap_is_not_collapsed_to_generic_semantics(self):
