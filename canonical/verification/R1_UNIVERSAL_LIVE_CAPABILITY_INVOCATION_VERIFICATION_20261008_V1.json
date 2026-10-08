@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_R1_UNIVERSAL_LIVE_CAPABILITY_INVOCATION_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_SOURCE_ISOLATED_R1_INVOCATION_REPLAY",
+  "exact_blobs": {
+    "invoker": {
+      "path": "canonical/runtime/live_capability_invoker_v1.py",
+      "git_blob_sha": "c25f6e79d41bdec1d3fe2f6943e68afb6bb854de"
+    },
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "bf57e5d6aa1dfd3fb7323138d2a658393f9dded4"
+    },
+    "invoker_test": {
+      "path": "canonical/tests/test_live_capability_invoker_v1.py",
+      "git_blob_sha": "119bdc3ffde1f7f0a32a68e0618a8c3fc89f6ce5"
+    },
+    "workflow": {
+      "path": ".github/workflows/verify-unified-cognitive-fabric-v1.yml",
+      "git_blob_sha": "ba7d766b3257b234c1d00a38cda2ba8bfa8dc61a"
+    }
+  },
+  "current_live_ownership_replay": {
+    "fabric_engines": 19,
+    "verified_bound_capabilities": 43,
+    "active_verified_learned_skills": 0,
+    "h100_verified_capabilities": 21,
+    "certified_routes": 1,
+    "total_live_owned_capabilities": 84,
+    "universal_invocation_contract_coverage": 84,
+    "missing_invocation_contracts": 0
+  },
+  "execution_replay": {
+    "carrier": "SPRITES",
+    "sprite": "brain-live-integrated-v1-run-20261008",
+    "exact_source_invoker_executed": true,
+    "python_compile_pass": true,
+    "ownership_classifier_coverage_pass": true,
+    "engine_identity_dispatch_pass": true,
+    "bound_identity_dispatch_pass": true,
+    "unknown_identity_fail_closed_pass": true
+  },
+  "github_actions": {
+    "verification_pr": 3223,
+    "run_id": 37768830791,
+    "conclusion": "failure",
+    "code_failure_observed": false,
+    "runner_steps_executed": 0,
+    "classification": "INFRASTRUCTURE_RUNNER_FAILURE__NO_TEST_STEP_EXECUTED"
+  },
+  "structural_r1": {
+    "one_live_front_door": "unified_cognitive_fabric_v1.run",
+    "universal_identity_mode": "LIVE_CAPABILITY",
+    "live_owned_equals_fabric_reachable": true,
+    "live_owned_universal_invocation_contract_complete": true,
+    "r1_structural_closure": true
+  },
+  "boundaries": {
+    "arbitrary_raw_language_capability_selection": "R2_SEMANTIC_DECISION_INTELLIGENCE",
+    "historical_superseded_repository_code": "NOT_LIVE_OWNED_UNLESS_READMITTED",
+    "terminal_credit_delta": 0
+  }
+}
