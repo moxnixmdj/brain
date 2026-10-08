@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V5",
   "date": "2026-10-08",
-  "status": "PREPARED__AWAITING_ISOLATED_FULL_EXACT_BLOB_DRIFT_REPLAY",
+  "status": "PASS__R1_CURRENT_MAIN__OWNERSHIP_84__INVOCATION_84__FULL_EXACT_BLOB_DRIFT_LOCK",
   "exact_blobs": {
     "ownership_manifest": {
       "path": "canonical/governance/LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1.json",
@@ -108,14 +108,26 @@
     "stale_authority_receipt_expected_error": "AUTHORITY_VERIFICATION_RECEIPT_BLOB_DRIFT"
   },
   "boundary": {
-    "r1_structural_closure_candidate": true,
     "arbitrary_raw_language_route_selection_classification": "R2_SEMANTIC_DECISION_INTELLIGENCE",
-    "historical_repository_capability_completeness_proved": false
+    "historical_repository_capability_completeness_proved": false,
+    "r1_structural_closure": true
   },
   "accounting": {
     "incremental_spend_usd": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "independent_execution": {
+    "carrier": "SPRITES",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "python_compile_gate_and_regression_pass": true,
+    "current_exact_gate_pass": true,
+    "current_gate_status": "PASS__R1_LIVE_ARCHITECTURE_CLOSED_AND_DRIFT_LOCKED",
+    "current_fabric_blob_sha": "2ce97e82d2b2921be7b4e7c483a98cec726a65cc",
+    "exact_receipt_binding_count_checked": 16,
+    "exact_receipt_drift_errors": 0,
+    "tampered_receipt_hash_fail_closed": true,
+    "tampered_authority_receipt_hash_fail_closed": true
   }
 }
