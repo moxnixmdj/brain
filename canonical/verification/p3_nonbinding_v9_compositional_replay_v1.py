@@ -8,8 +8,13 @@ closure. The new nonbinding cell and contract-surface guard are real modules.
 from __future__ import annotations
 
 import json
+from pathlib import Path
 import sys
 import types
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 
 def _v8_stub(payload, repo_root=None):
