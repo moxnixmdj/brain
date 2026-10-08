@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_P3_MINIMUM_SEMANTIC_DISCRIMINATOR_REDUCTION_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_CAUSAL_REDUCTION__COMMON_POLICY_REJECTED_ON_BOUND_P3_CONFLICT_CELL__JIT_DISCRIMINATOR_SUFFICIENT__SELECTION_MACHINERY_ALREADY_OWNED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "p3_causal_cut": {
+      "path": "canonical/governance/P3_SCOPE_COMPLETE_CAUSAL_CUT_20261007_V1.json",
+      "git_blob_sha": "37c0246a4b9a231d3e5b0a306816077f55fcf8a9"
+    },
+    "p3_causal_cut_verification": {
+      "path": "canonical/verification/P3_SCOPE_COMPLETE_CAUSAL_CUT_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "537d9fdea9a5df4b82a989feff2b7437ed6a4daa"
+    },
+    "tournament_compiler": {
+      "path": "canonical/runtime/tournament_failure_capability_compiler_v1.py",
+      "git_blob_sha": "999f075b9d888d35f6e10564aeaf45e0791c4a52"
+    },
+    "no_jit_input": {
+      "path": "canonical/governance/P3_POLICY_CHANGING_SEMANTIC_TOURNAMENT_INPUT_20261008_V1.json",
+      "git_blob_sha": "b84b8b81ebfa05efa4520dc26f46c5474fa3dee5"
+    },
+    "jit_input": {
+      "path": "canonical/governance/P3_POLICY_CHANGING_SEMANTIC_JIT_INPUT_20261008_V1.json",
+      "git_blob_sha": "7496a46caf32a805089b4848e8e91e0ca2d6432c"
+    },
+    "u_depletion_orchestrator": {
+      "path": "canonical/runtime/u_scope_complete_depletion_orchestrator_v1.py",
+      "git_blob_sha": "b783ebdf51db3c6581facf4cc1cc3e9d59440760"
+    },
+    "semantic_information_frontier": {
+      "path": "canonical/runtime/semantic_information_frontier_v1.py",
+      "git_blob_sha": "b16e2c40dec3030868c37adad880b8601f565e46"
+    },
+    "terminal_semantic_quotient": {
+      "path": "canonical/runtime/terminal_semantic_quotient_v1.py",
+      "git_blob_sha": "eda1043099b54a695854a923a540a38362ebedd5"
+    },
+    "minimum_information_verification": {
+      "path": "canonical/verification/V16_SEMANTIC_QUOTIENT_INFORMATION_POLICY_INDEPENDENT_REPLAY_20261007_V1.json",
+      "git_blob_sha": "9bd54b5dd5d24b810c58536705aa1b714e5c491b"
+    }
+  },
+  "bound_conflict_cell": {
+    "id": "P3_REQUIRED_CLAIM_SUPPORT_RELEVANCE_OUTSIDE_CURRENT_CERTIFIED_FRAGMENT",
+    "adequate_policy_classes": [
+      "ASSERT_REQUIRED_CLAIM_AS_SUPPORTED_WITH_PROVENANCE",
+      "DO_NOT_ASSERT_REQUIRED_CLAIM_AS_SUPPORTED__PRESERVE_UNCERTAINTY_OR_SEEK_EVIDENCE"
+    ],
+    "common_policy_intersection_empty": true,
+    "minimum_policy_count": 2,
+    "minimum_selector_bits_for_this_cell": 1,
+    "selector_bit_is_global_p3_bound": false
+  },
+  "exact_tournament_results": {
+    "without_discriminator": {
+      "classification": "TOURNAMENT_FAILURE_UNRESOLVED",
+      "pass": false,
+      "conflicting_world_pair": [
+        "SUPPORTED_AND_DECISION_RELEVANT",
+        "NOT_CERTIFIABLY_SUPPORTED_OR_MATERIAL_UNCERTAINTY"
+      ],
+      "minimum_policy_count": 2,
+      "minimum_persistent_bits": 1,
+      "next_required_fact": "MINIMUM_POLICY_CHANGING_DISCRIMINATOR_OR_EXACT_SEPARATOR_NECESSITY_RECEIPT"
+    },
+    "with_truthful_precommitment_discriminator": {
+      "classification": "JIT_DISCRIMINATOR",
+      "pass": true,
+      "minimum_policy_count": 2,
+      "minimum_persistent_bits": 1,
+      "persistent_state_required": false,
+      "selected_buckets": {
+        "SUPPORTED": "ASSERT_REQUIRED_CLAIM_AS_SUPPORTED_WITH_PROVENANCE",
+        "NOT_SUPPORTED_OR_UNCERTAIN": "DO_NOT_ASSERT_REQUIRED_CLAIM_AS_SUPPORTED__PRESERVE_UNCERTAINTY_OR_SEEK_EVIDENCE"
+      }
+    }
+  },
+  "first_principles_reduction": {
+    "prior_unified_effect": "P3_SCOPE_COMPLETE_GROUNDED_AUDIENCE_CONDITIONED_POLICY_DOMINANCE",
+    "existing_brain_owned_mechanics_already_cover": [
+      "COMMON_POLICY_FIRST_ORCHESTRATION",
+      "FINITE_TERMINAL_SEMANTIC_QUOTIENT_COMPILATION",
+      "EXACT_MINIMAX_DISCRIMINATOR_SELECTION",
+      "SELECTED_DISCRIMINATOR_POLICY_COVER_BRIDGING",
+      "PERSISTENT_STATE_AVOIDANCE_WHEN_PRECOMMITMENT_JIT_OBSERVATION_EXISTS"
+    ],
+    "smallest_new_causal_function_exposed_by_bound_cell": "P3_TRUTHFUL_PRECOMMITMENT_POLICY_CHANGING_SEMANTIC_TRUTH_CERTIFICATE",
+    "definition": "GIVEN_ONLY_ALLOWED_P3_VISIBLE_INFORMATION_AND_ONE_SELECTED_POLICY_CHANGING_SEMANTIC_PREDICATE__RETURN_A_CONTENT_ADDRESSED_TRUTHFUL_PRECOMMITMENT_PROOF_OF_THE_PREDICATE_OR_FAIL_CLOSED_UNKNOWN__WITHOUT_ASSERTING_POLICY_ADEQUACY_FROM_ENTAILMENT_ALONE",
+    "why_smaller": "THE_BRAIN_ALREADY_OWNS_THE_QUOTIENT_SELECTOR_MINIMAX_POLICY_AND_POLICY_COVER_MECHANICS__THE_BOUND_CONFLICT_REQUIRES_TRUTH_FOR_ONLY_THE_POLICY_CHANGING_SEMANTIC_PREDICATE_NOT_A_COMPLETE_WORLD_MODEL"
+  },
+  "preferred_implementation_basis": [
+    "PROOF_CARRYING_SOURCE_ALIGNED_SEMANTIC_ENTAILMENT",
+    "EXPLICIT_SEMANTIC_OPERATOR_COUNTERFACTUAL_ORACLE",
+    "AUTHORIZED_CONTENT_ADDRESSED_JIT_LEXICAL_OR_ONTOLOGY_RELATIONS",
+    "EXACT_TYPED_FIELD_AND_NUMERIC_RELATIONS",
+    "UNTRUSTED_PROPOSER_FOR_SEARCH_ONLY__TRUSTED_CHECKER_FOR_AUTHORITY",
+    "RETURN_UNKNOWN_OUTSIDE_CHECKED_FRAGMENT"
+  ],
+  "next_execution": [
+    "IMPLEMENT_OR_REUSE_ONLY_THE_SELECTED_SEMANTIC_TRUTH_CERTIFICATE_INTERFACE.",
+    "COMPOSE_IT_WITH_EXISTING_SEMANTIC_INFORMATION_FRONTIER_AND_U_DEPLETION_ORCHESTRATOR.",
+    "USE_P3_CAUSAL_COUNTEREXAMPLES_TO_ADD_ONLY_MISSING_SOUND_PRIMITIVES_OR_RULES.",
+    "STOP_AS_SOON_AS_EACH_REACHED_P3_CELL_HAS_ONE_CERTIFIED_COMMON_POLICY_OR_A_TRUTHFUL_SELECTED_DISCRIMINATOR.",
+    "DO_NOT_BUILD_A_GENERAL_WORLD_MODEL_GENERAL_NLI_MODEL_OR_PERSISTENT_SELECTOR."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ONE_BIT_SOLVES_ALL_P3.",
+    "NO_CLAIM_THE_ABSTRACT_TWO_WORLD_CELL_PROVES_ACTUAL_OPUS_TARGET_OCCUPANCY.",
+    "NO_CLAIM_A_GENERAL_NATURAL_LANGUAGE_ENGINE_IS NECESSARY.",
+    "NO_CLAIM_THE_SELECTED_SEMANTIC_TRUTH_CERTIFICATE_IS YET SCOPE_COMPLETE.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
