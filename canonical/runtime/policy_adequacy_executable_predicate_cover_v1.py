@@ -201,19 +201,38 @@ def _trusted_catalog() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     except Exception as exc:
         rejected.append({"candidate": "P3", "reason": type(exc).__name__ + ":" + str(exc)[:160]})
 
-    # P2 has authenticated adequacy, but this runtime intentionally does NOT
-    # admit it as an executable predicate until an exact trusted membership
-    # evaluator for its condition is bound. Adequacy proof != observability.
+    # P2 strict explicit-source membership is an executable one-sided
+    # recognizer. Admit it only when both the existing top-law adequacy
+    # authenticator and the two-Sprite membership-predicate binding are exact.
     try:
         from canonical.runtime.p2_top_law_policy_adequacy_authenticator_v1 import authenticate_repository
+        from canonical.runtime.p2_explicit_contract_membership_v1 import compile_membership as _p2_membership
         p2 = authenticate_repository()
-        if p2.get("pass") is True and p2.get("adequacy_proved") is True:
-            rejected.append({
-                "candidate": p2.get("policy_id", "P2"),
-                "reason": "ADEQUACY_AUTHENTICATED_BUT_EXECUTABLE_MEMBERSHIP_PREDICATE_NOT_BOUND",
-            })
-        else:
-            rejected.append({"candidate": "P2", "reason": "P2_ADEQUACY_AUTHENTICATOR_NOT_PASS"})
+        if _git_blob(P2_MEMBERSHIP_PATH) != P2_MEMBERSHIP_BLOB:
+            raise ValueError("P2_MEMBERSHIP_RUNTIME_DRIFT")
+        if _git_blob(P2_PREDICATE_VERIFY_PATH) != P2_PREDICATE_VERIFY_BLOB:
+            raise ValueError("P2_MEMBERSHIP_VERIFICATION_DRIFT")
+        verify_doc=json.loads((ROOT/P2_PREDICATE_VERIFY_PATH).read_text(encoding="utf-8"))
+        if not str(verify_doc.get("status") or "").startswith("PASS_10_OF_10_ON_TWO_SPRITES__STRICT_EXPLICIT_P2_ROOT_SOURCE_MEMBERSHIP_PREDICATE"):
+            raise ValueError("P2_MEMBERSHIP_VERIFICATION_NOT_PASS")
+        if p2.get("pass") is not True or p2.get("adequacy_proved") is not True:
+            raise ValueError("P2_ADEQUACY_AUTHENTICATOR_NOT_PASS")
+        if p2.get("policy_id") != P2_POLICY:
+            raise ValueError("P2_POLICY_ID_MISMATCH")
+        if p2.get("selected_class") != "P2_PROFESSIONAL_EXPLICIT_SEMANTIC_CONTRACT_ALL_FINITE_TASKS_V1":
+            raise ValueError("P2_SELECTED_CLASS_MISMATCH")
+        if p2.get("policy_condition") != {"op":"ATOM","id":"P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1"}:
+            raise ValueError("P2_ADEQUACY_CONDITION_DRIFT")
+        if not callable(_p2_membership):
+            raise ValueError("P2_MEMBERSHIP_NOT_EXECUTABLE")
+        accepted.append({
+            "policy_id": P2_POLICY,
+            "condition": {"op": "ATOM", "id": P2_ATOM},
+            "trusted_provenance": (
+                "canonical.runtime.p2_top_law_policy_adequacy_authenticator_v1.authenticate_repository"
+                "+canonical.runtime.p2_explicit_contract_membership_v1.compile_membership"
+            ),
+        })
     except Exception as exc:
         rejected.append({"candidate": "P2", "reason": type(exc).__name__ + ":" + str(exc)[:160]})
 
