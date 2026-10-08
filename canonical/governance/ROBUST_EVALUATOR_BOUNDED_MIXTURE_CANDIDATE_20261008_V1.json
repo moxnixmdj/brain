@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ROBUST_EVALUATOR_BOUNDED_MIXTURE_CANDIDATE_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE__EXACT_RUNTIME_ADDED__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION_AND_REAL_SEMANTIC_BINDING",
+  "purpose": "Bridge the gap between one fully known evaluator and universal per-component dominance by certifying Brain-minus-target noninferiority over every mixture consistent with independently proved component-delta and mixture-weight bounds.",
+  "theorem": {
+    "uncertainty_set": "For component i, delta_i is in [L_i,U_i], weight_i is in [a_i,b_i], all weights are nonnegative and sum to one. The runtime conservatively treats unresolved dependence between deltas and weights as the full Cartesian product.",
+    "lower_bound": "min over the bounded simplex of sum_i w_i*L_i",
+    "upper_bound": "max over the bounded simplex of sum_i w_i*U_i",
+    "decision": [
+      "LOWER_BOUND_GE_0_IMPLIES_ROBUST_NONINFERIORITY",
+      "UPPER_BOUND_LT_0_IMPLIES_ROBUST_INFERIORITY",
+      "OTHERWISE_UNKNOWN"
+    ]
+  },
+  "strict_improvement_over_current_gdpval_direct_route": "A universal no-Opus-win condition for every task/judge cell is sufficient but not necessary. When sound aggregate component-delta intervals and judge-mixture bounds are available, some negative components can be tolerated if the exact worst admissible mixture remains nonnegative.",
+  "required_before_real_credit": [
+    "CONTENT_ADDRESSED_PROOF_OF_WHAT_EACH_COMPONENT_MEANS",
+    "CONTENT_ADDRESSED_PROOF_THAT_COMPONENT_DELTA_BOUNDS_APPLY_TO_THE_FROZEN_BRAIN_AND_OPUS_COORDINATE",
+    "CONTENT_ADDRESSED_PROOF_OF_VALID_MIXTURE_WEIGHT_BOUNDS",
+    "INDEPENDENT_RUNTIME_VERIFICATION",
+    "EXPLICIT_EVALUATOR_RELATION_ADMISSION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_GDPVAL_AA_COMPONENT_BOUNDS_ARE_AVAILABLE",
+    "NO_CLAIM_CURRENT_CURSORBENCH_SEMANTICS_FIT_THIS_MIXTURE_MODEL",
+    "NO_CLAIM_ARTIFICIAL_ANALYSIS_CROWD_BT_IS_IDENTICAL_TO_A_SIMPLE_LINEAR_MIXTURE",
+    "NO_TERMINAL_OR_ACCEPTANCE_CREDIT"
+  ],
+  "runtime": "canonical/runtime/robust_evaluator_bounded_mixture_v1.py",
+  "tests": "canonical/tests/test_robust_evaluator_bounded_mixture_v1.py",
+  "accounting": {"incremental_spend_usd": 0, "terminal_credit_delta": 0}
+}
