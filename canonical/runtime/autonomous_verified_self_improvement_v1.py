@@ -361,6 +361,7 @@ def record_success_observation(
     *,
     surface: str,
     state_path: str | Path = DEFAULT_STATE_PATH,
+    replay_context: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Durably retain a compact success pointer when no verified episode exists.
 
@@ -371,11 +372,20 @@ def record_success_observation(
     if not isinstance(out, Mapping) or out.get("pass") is not True:
         raise SelfImprovementError("SUCCESS_OBSERVATION_REQUIRES_PASSING_OUTPUT")
     name = _s(surface) or "UNSPECIFIED_RUNTIME_SURFACE"
+    replay_capsule = (
+        _make_retry_capsule(replay_context)
+        if replay_context is not None else None
+    )
+    replay_sha = (
+        str(replay_capsule.get("sha256") or "")
+        if isinstance(replay_capsule, Mapping) else ""
+    )
     core = {
         "surface": name,
         "schema": _s(out.get("schema")) or None,
         "status": _s(out.get("status")) or None,
         "output_sha256": _sha(out),
+        "replay_capsule_sha256": replay_sha or None,
     }
     oid = "observation:" + _sha(core)
     state = load_state(state_path)
@@ -384,6 +394,7 @@ def record_success_observation(
         **core,
         "observation_id": oid,
         "count": int(previous.get("count", 0)) + 1 if isinstance(previous, Mapping) else 1,
+        "replay_capsule": deepcopy(replay_capsule),
     }
     work_id = _enqueue_improvement(
         state,
@@ -394,6 +405,8 @@ def record_success_observation(
             "observation_id": oid,
             "surface": name,
             "output_sha256": core["output_sha256"],
+            "replay_capsule_sha256": core["replay_capsule_sha256"],
+            "replayable": replay_capsule is not None,
             "required_result": "VERIFIED_EPISODE_OR_PROVED_NONLEARNABLE_SUCCESS",
         },
     )
@@ -404,10 +417,41 @@ def record_success_observation(
         "status": "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
         "pass": True,
         "observation_id": oid,
+        "replay_capsule_sha256": core["replay_capsule_sha256"],
+        "replayable": replay_capsule is not None,
         "improvement_work_id": work_id,
         "next_improvement_action": _next_improvement_from_state(state),
         "permanent_reuse_authorized": False,
         "terminal_authority": False,
+    }
+
+
+def get_success_replay_context(
+    observation_id: str,
+    *,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+) -> dict[str, Any]:
+    oid = _s(observation_id)
+    state = load_state(state_path)
+    observation = state.get("observations", {}).get(oid)
+    if not isinstance(observation, Mapping):
+        raise SelfImprovementError("SUCCESS_OBSERVATION_UNKNOWN:" + oid)
+    capsule = observation.get("replay_capsule")
+    if not isinstance(capsule, Mapping):
+        raise SelfImprovementError("SUCCESS_OBSERVATION_NOT_REPLAYABLE:" + oid)
+    context = capsule.get("context")
+    expected = _s(capsule.get("sha256"))
+    if not isinstance(context, Mapping) or not expected:
+        raise SelfImprovementError("SUCCESS_REPLAY_CAPSULE_INVALID:" + oid)
+    _validate_retry_value(context)
+    actual = _sha(context)
+    if actual != expected:
+        raise SelfImprovementError("SUCCESS_REPLAY_CAPSULE_DIGEST_MISMATCH:" + oid)
+    return {
+        "observation_id": oid,
+        "replay_capsule_sha256": expected,
+        "context": deepcopy(dict(context)),
+        "replay_authorized": capsule.get("replay_authorized") is True,
     }
 
 
@@ -841,6 +885,28 @@ def _prior_verified_episodes(
 
 
 
+def _all_prior_verified_episodes(
+    state: Mapping[str, Any],
+    *,
+    episode_id: str,
+) -> list[Mapping[str, Any]]:
+    out = []
+    for ep in state.get("episodes", {}).values():
+        if not isinstance(ep, Mapping):
+            continue
+        if _s(ep.get("episode_id")) == episode_id:
+            continue
+        out.append(deepcopy(dict(ep)))
+    out.sort(
+        key=lambda x: (
+            _s(x.get("scope_id")),
+            _s(x.get("episode_id")),
+            _s(x.get("program_sha256")),
+        )
+    )
+    return out
+
+
 def _effect_may_have_occurred(out: Mapping[str, Any]) -> bool:
     trace = out.get("trace")
     if not isinstance(trace, Sequence) or isinstance(trace, (str, bytes)):
@@ -1053,6 +1119,7 @@ def _post_execution_independent_verification(
     *,
     problem: Mapping[str, Any],
     prior_verified_episode_records: Sequence[Mapping[str, Any]],
+    generalization_episode_records: Sequence[Mapping[str, Any]] = (),
     repo_root: str | Path,
     episode_verification_provider=None,
     skill_verification_provider=None,
@@ -1116,35 +1183,76 @@ def _post_execution_independent_verification(
                 )
 
     candidate = result.get("skill_candidate")
-    if (
-        result.get("current_episode_verified") is True
-        and not isinstance(candidate, Mapping)
-        and prior_verified_episode_records
-    ):
-        authenticated_prior = []
-        candidate_error = None
-        for record in prior_verified_episode_records:
+    if result.get("current_episode_verified") is True:
+        current_episode = result.get("current_episode")
+        current_program = (
+            _s(current_episode.get("program_sha256"))
+            if isinstance(current_episode, Mapping) else ""
+        )
+        current_scope = (
+            _s(current_episode.get("scope_id"))
+            if isinstance(current_episode, Mapping) else ""
+        )
+
+        pool: list[Mapping[str, Any]] = []
+        seen_episode_ids: set[str] = set()
+        candidate_errors: list[str] = []
+        for record in [
+            *prior_verified_episode_records,
+            *generalization_episode_records,
+        ]:
+            if not isinstance(record, Mapping):
+                continue
+            rid = _s(record.get("episode_id"))
+            if not rid or rid in seen_episode_ids:
+                continue
+            # Cross-context generalization is proposed only from independently
+            # verified executions of the exact same executable program. Scope
+            # widening still grants zero authority until the independent skill
+            # verifier proves the claimed scope relation.
+            if current_program and _s(record.get("program_sha256")) != current_program:
+                continue
             verdict = reauthenticate_episode_record(record, repo_root=repo_root)
             if verdict.get("pass") is not True:
-                candidate_error = (
+                candidate_errors.append(
                     "PRIOR_EPISODE_REAUTHENTICATION_FAILED:"
                     + _s(verdict.get("reason"))
                 )
-                authenticated_prior = []
-                break
-            authenticated_prior.append(verdict["authenticated_episode"])
-        if authenticated_prior and candidate_error is None:
+                continue
+            authenticated = verdict["authenticated_episode"]
+            seen_episode_ids.add(rid)
+            pool.append(authenticated)
+
+        if isinstance(current_episode, Mapping) and pool:
             try:
-                candidate = induce_candidate([
-                    *authenticated_prior,
-                    result["current_episode"],
-                ])
-                result["skill_candidate"] = candidate
-                result["skill_candidate_error"] = None
+                generalized = induce_candidate([*pool, current_episode])
+                existing_scopes = (
+                    set(_items(candidate.get("source_scopes")))
+                    if isinstance(candidate, Mapping) else set()
+                )
+                generalized_scopes = set(_items(generalized.get("source_scopes")))
+                if (
+                    not isinstance(candidate, Mapping)
+                    or len(generalized_scopes) > len(existing_scopes)
+                    or (
+                        len(generalized_scopes) == len(existing_scopes)
+                        and len(_items(generalized.get("source_episode_ids")))
+                        > len(_items(candidate.get("source_episode_ids")))
+                    )
+                ):
+                    candidate = generalized
+                    result["skill_candidate"] = candidate
+                    result["skill_candidate_error"] = None
+                    result["cross_scope_candidate_induced"] = (
+                        len(generalized_scopes) > 1
+                    )
+                    result["candidate_source_scopes"] = sorted(generalized_scopes)
             except ExecutableSkillProgramError as exc:
-                result["skill_candidate_error"] = str(exc)
-        elif candidate_error is not None:
-            result["skill_candidate_error"] = candidate_error
+                candidate_errors.append(str(exc))
+
+        if candidate_errors and not isinstance(result.get("skill_candidate"), Mapping):
+            result["skill_candidate_error"] = ";".join(sorted(set(candidate_errors)))
+
 
     candidate = result.get("skill_candidate")
     if (
@@ -1232,6 +1340,7 @@ def run_learning_episode(
 
     state = load_state(state_path)
     prior = _prior_verified_episodes(state, scope_id=scope, episode_id=eid)
+    generalization_prior = _all_prior_verified_episodes(state, episode_id=eid)
     selected = _select_active_skill(
         problem,
         state,
@@ -1281,6 +1390,7 @@ def run_learning_episode(
                 reuse_out,
                 problem=learned_problem,
                 prior_verified_episode_records=prior,
+                generalization_episode_records=generalization_prior,
                 repo_root=repo_root,
                 episode_verification_provider=episode_verification_provider,
                 skill_verification_provider=skill_verification_provider,
@@ -1339,6 +1449,7 @@ def run_learning_episode(
         out,
         problem=problem,
         prior_verified_episode_records=prior,
+        generalization_episode_records=generalization_prior,
         repo_root=repo_root,
         episode_verification_provider=episode_verification_provider,
         skill_verification_provider=skill_verification_provider,
