@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_OWNER_EVALUATION_ACCESS_REFRESH_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_REMOTE_LIVE_OWNER_PAGE_REPLAY_PASS_9_OF_9__ZERO_ACCEPTANCE_CREDIT",
+  "subject_branch": "obs/frontiercode-owner-access-refresh-20261008-v1",
+  "exact_boundary_blob": "d4c8c57947830bd40f135aea478d4040aa01c325",
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-scope-cover-v1-verify",
+    "sprite_id": "sprite-d5d24558-e690-4f9b-acda-589284eb3ac1",
+    "workspace": "/tmp/fc_owner_access"
+  },
+  "verified": [
+    "FIRST_PARTY_LAUNCH_PAGE_STATES_EVALUATION_IS_OPEN_TO_ALL_MODEL_CREATORS",
+    "FIRST_PARTY_LAUNCH_PAGE_STATES_TASKS_ARE_NOT_PLANNED_FOR_PUBLIC_RELEASE",
+    "CURRENT_FRONTIERCODE_LEADERBOARD_IS_PUBLIC",
+    "CURRENT_LEADERBOARD_PAGE_DOES_NOT_EXPOSE_SUBMIT_YOUR_MODEL_OR_UPLOAD_MODEL_TEXT",
+    "COGNITION_DEMO_PAGE_IS_A_GENERIC_DEVIN_DEMO_PAGE",
+    "GENERIC_DEMO_PAGE_IS_NOT_NAMED_AS_FRONTIERCODE_INTAKE",
+    "BRAIN_CONFIGURED_SYSTEM_ELIGIBILITY_REMAINS_UNPROVED",
+    "INCREMENTAL_COST_REMAINS_UNPROVED",
+    "NO_EXECUTION_AUTHORITY_IS_GRANTED"
+  ],
+  "search_boundary": {
+    "general_company_email_observed_elsewhere": "info@cognition.ai",
+    "frontiercode_specific_email_found": false,
+    "frontiercode_specific_public_submission_form_found": false,
+    "rule": "DO_NOT_TREAT_GENERAL_COMPANY_CONTACT_AS_AN_AUTHENTICATED_FRONTIERCODE_INTAKE_CHANNEL_WITHOUT_OWNER_CONFIRMATION"
+  },
+  "conclusion": "OWNER_EVALUATION_ACCESS_IS_FIRST_PARTY_INTENDED_FOR_MODEL_CREATORS__BUT_PUBLIC_INTAKE_MECHANICS_BRAIN_ELIGIBILITY_HARNESS_ADMISSIBILITY_AND_ZERO_COST_COMPATIBILITY_REMAIN_UNBOUND",
+  "hard_nonclaims": [
+    "NO_BRAIN_FRONTIERCODE_RESULT",
+    "NO_CLAIM_COGNITION_WILL_EVALUATE_BRAIN",
+    "NO_CLAIM_OWNER_EVALUATION_IS_FREE",
+    "NO_FRONTIERCODE_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
