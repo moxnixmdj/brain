@@ -1,0 +1,28 @@
+{
+  "schema":"PROJECT_BRAIN_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_V1",
+  "date":"2026-10-08",
+  "policy_id":"P3_BOUND_BINARY_DECISION_GROUNDED_EXPRESSION_POLICY_V1",
+  "subject_git_blob_sha":"1e9f3b9e56e6d1f6de98720e5787e29c0cf2911b",
+  "pass":true,
+  "status":"NORMALIZATION_VERIFIED_FROM_EXISTING_TWO_SPRITE_STRICT_P3_BINARY_TOP_LAW_EVIDENCE__ZERO_NEW_SCOPE_CREDIT",
+  "evidence":{
+    "region":{"path":"canonical/governance/P3_BOUND_BINARY_REAL_CONTEXT_TOP_LAW_REGION_20261008_V1.json","git_blob_sha":"e367ff0a5734e2430b0b5476bf073b4688c410e1"},
+    "region_verifier":{"path":"canonical/runtime/p3_binary_explicit_top_law_region_verifier_v1.py","git_blob_sha":"da871727e5939b5c190e9c383d6c361642168b80"},
+    "membership_two_sprite_replay":{"path":"canonical/verification/P3_BINARY_EXPLICIT_CONTRACT_MEMBERSHIP_TWO_SPRITE_VERIFICATION_20261008_V1.json","git_blob_sha":"9d39f0b01f5ff571c8f607f0a4ec50b97542e017"},
+    "policy_two_sprite_replay":{"path":"canonical/verification/P3_BINARY_DECISION_GROUNDED_EXPRESSION_TWO_SPRITE_VERIFICATION_20261008_V1.json","git_blob_sha":"2964ab7b86b61a6362e310e35b4a38ab75e04e87"},
+    "exact_policy":{"path":"canonical/runtime/p3_binary_decision_grounded_expression_v1.py","git_blob_sha":"590cdc4e7f5a513d0e40bb31afed20df61826bad"}
+  },
+  "verified":[
+    "THE_NORMALIZED_CERTIFICATE_NAMES_THE_EXACT_POLICY_BYTES_BOUND_BY_THE_STRICT_BINARY_REGION.",
+    "THE_POLICY_CONDITION_IS_ONLY_P3_BOUND_BINARY_REAL_CONTEXT_GROUNDED_DECISION_TOP_LAW_V1.",
+    "THE_REGION_THEOREM_AND_EXISTING_TWO_SPRITE_REPLAYS ESTABLISH THE BOUNDED COMMON_POLICY_TOP_LAW CONDITIONAL ON STRICT ROOT_SOURCE MEMBERSHIP.",
+    "THE_NORMALIZATION_DOES_NOT_SELF_CERTIFY_ROOT_TASK_MEMBERSHIP_OR WIDEN THE REGION."
+  ],
+  "hard_nonclaims":[
+    "NO_FREE_FORM_P3_MEMBERSHIP.",
+    "NO_NEW_POLICY_ADEQUACY_THEOREM.",
+    "NO_GENERAL_SYNTHESIS_OR PRESENTATION_CLOSURE.",
+    "NO_TERMINAL_CREDIT."
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
