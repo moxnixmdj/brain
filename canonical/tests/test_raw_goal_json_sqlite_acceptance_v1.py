@@ -54,7 +54,7 @@ def _raw(goal,root):
                  "expect":{"type":"field_nonempty","field":"content"}},"result":{"content":"source"}},
                 {"cycle":1,"plan":{"type":"invoke_capability","args":{
                     "capability_id":a.CAPABILITY,
-                    "goal":"Create canonical/tmp/OUT.sqlite as a SQLite table named records with columns capability_id, name, status, and count containing every READY_STATUS",
+                    "goal":"Create canonical/tmp/OUT.sqlite as a SQLite table named records containing every READY_STATUS with columns capability_id, name, status, and count",
                     "json_path":pf["input_path"],"output_path":pf["output_path"]},
                     "expect":{"type":"field_equals","field":"output_verified","value":True}},
                  "result":{"output_verified":True,"table_name":pf["table_name"],
