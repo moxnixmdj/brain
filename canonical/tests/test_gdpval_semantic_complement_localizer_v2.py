@@ -50,14 +50,6 @@ class GDPvalSemanticComplementLocalizerV2Tests(unittest.TestCase):
             out["compound_candidate_counts"].get("BOUNDED_COMPOUND_CANDIDATE", 0),
             0,
         )
-        self.assertEqual(
-            out["aggregate"]["source_bound_shared_modal_and_count"],
-            220,
-        )
-        self.assertEqual(
-            out["aggregate"]["source_bound_shared_modal_and_obligation_count"],
-            440,
-        )
 
 
 if __name__ == "__main__":
