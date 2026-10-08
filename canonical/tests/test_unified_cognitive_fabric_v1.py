@@ -10,6 +10,7 @@ from canonical.runtime import universal_verified_adaptive_solver_v12 as solver_v
 from canonical.runtime.unified_cognitive_fabric_v1 import catalog, run
 
 
+# R3 V2 ratchet compatibility is verified through the unified live front door.
 class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
     def test_catalog_exposes_single_front_door(self):
         c = catalog()
