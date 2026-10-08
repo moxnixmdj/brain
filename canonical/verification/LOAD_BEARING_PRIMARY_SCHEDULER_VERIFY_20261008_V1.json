@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_LOAD_BEARING_PRIMARY_SCHEDULER_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_BRANCH_BYTES__16_OF_16_UNITTEST__PY_COMPILE_PASS__ZERO_SPEND",
+  "base_main_commit": "ff6106d045f93af19ce3dd9b0b5b880330801fe2",
+  "exact_blobs": {
+    "canonical/runtime/capability_first_scheduler_v1.py": "b6878df39fc22813b93f5c35a2db36cd4297441d",
+    "canonical/tests/test_capability_first_scheduler_v1.py": "e1e555cf669e540742033835c2121d0eb9e0d787",
+    "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V2.json": "52e125eae3fdcd099a5b563c6ef64954c2af2850",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "6dda5c919296484b5dee078152c88f9384152dd1"
+  },
+  "carrier": {
+    "kind": "SPRITE",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "materialization": "EXACT_CHANGED_BRANCH_FILES_PLUS_EXACT_BASE_CURRENT_TERMINAL_AUTHORITY"
+  },
+  "verification": {
+    "unittest_command": "python3 -m unittest canonical.tests.test_capability_first_scheduler_v1 -v",
+    "unittest_result": "16_OF_16_PASS",
+    "py_compile_command": "python3 -m py_compile canonical/runtime/capability_first_scheduler_v1.py canonical/tests/test_capability_first_scheduler_v1.py",
+    "py_compile_result": "PASS"
+  },
+  "proved": [
+    "GENERIC_CAPABILITY_WORK_IS_DEMOTED_WHILE_INDEPENDENT_OPEN_ACCEPTANCE_OBLIGATIONS_EXIST",
+    "PRIMARY_WORK_REQUIRES_EXPLICIT_CAUSAL_PATH_TO_CURRENT_OPEN_OBLIGATION_OR_SCOPE_COMPLETE_DISCHARGE",
+    "ZERO_EXPECTED_LOAD_BEARING_YIELD_IS_DEMOTED",
+    "CONSTRUCTIVE_GAP_WORK_CAN_BE_PRIMARY_WHEN_BOUND_TO_OPEN_OBLIGATIONS_AND_POSITIVE_EXPECTED_UNLOCK_YIELD",
+    "PRIMARY_RANKING_USES_CONSERVATIVE_EXPECTED_OBLIGATION_DISCHARGE_OR_UNLOCK_PER_WALL_CLOCK",
+    "LIVE_ENTRYPOINT_READS_CURRENT_TERMINAL_AUTHORITY",
+    "POST_CHECKPOINT_GENERIC_CAPABILITY_RANKING_REMAINS_AVAILABLE",
+    "EXISTING_PARETO_OPTION_PRESERVATION_BEHAVIOR_REMAINS_PASSING"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT",
+    "NO_CLAIM_ALL_WORKERS_ALREADY_CALL_THE_NEW_ENTRYPOINT",
+    "NO_CLAIM_PRIORITY_ESTIMATES_ARE_SELF_AUTHENTICATING"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
