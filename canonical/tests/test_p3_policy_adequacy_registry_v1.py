@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import copy
+from pathlib import Path
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -206,6 +208,52 @@ class P3PolicyAdequacyRegistryV1Tests(unittest.TestCase):
         for policy_id, condition in out["problem"]["policy_conditions"].items():
             registered = registry._REGISTRY[policy_id]["condition"]
             self.assertEqual(condition, registered)
+
+    def test_registry_rejects_symlink_escape_before_reading_binding(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            allowed = root / "canonical" / "governance"
+            allowed.mkdir(parents=True)
+            outside = root / "outside.json"
+            outside.write_text("{}", encoding="utf-8")
+            link = allowed / "link.json"
+            try:
+                link.symlink_to(outside)
+            except OSError:
+                self.skipTest("symlink creation unavailable")
+            value, error = registry._load_registered_binding(
+                "TEST_POLICY",
+                {
+                    "binding_path": "canonical/governance/link.json",
+                    "binding_blob_sha": "0" * 40,
+                    "condition": atom(P2_ATOM),
+                },
+                root=root,
+            )
+            self.assertIsNone(value)
+            self.assertTrue(
+                str(error).startswith("REGISTERED_BINDING_SYMLINK_FORBIDDEN:"),
+                error,
+            )
+
+    def test_p3_adequacy_evidence_loader_rejects_symlink_escape(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            allowed = root / "canonical" / "governance"
+            allowed.mkdir(parents=True)
+            outside = root / "outside.json"
+            outside.write_text("{}", encoding="utf-8")
+            link = allowed / "link.json"
+            try:
+                link.symlink_to(outside)
+            except OSError:
+                self.skipTest("symlink creation unavailable")
+            with patch.object(p3, "ROOT", root):
+                with self.assertRaisesRegex(ValueError, "BOUND_SYMLINK_FORBIDDEN"):
+                    p3._bound_path(
+                        "canonical/governance/link.json",
+                        prefixes=("canonical/governance/",),
+                    )
 
 
 if __name__ == "__main__":
