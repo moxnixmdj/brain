@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_R3_DIRECT_ADEQUACY_READBACK_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__DIRECT_R2_DURABLE_SUCCESS_READBACK__61_OF_61_R3_REGRESSION",
+  "branch": "one-shot-r3-direct-readback-20261008",
+  "exact_blobs": {
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "6155b951fd8587ce426e4405b50fc9028f2634ac",
+    "canonical/runtime/r3_direct_adequacy_success_adapter_v1.py": "271eddb93277572d0ae9155eac3638349a485b44",
+    "canonical/runtime/r3_direct_adequacy_readback_verifier_v1.py": "5237c98c738360feb908ed78e23957c580cbca56",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "386d332298c04e56e665d9f68c84b13c3ab07138",
+    "canonical/runtime/r3_root1_adapter_gap_witness_v1.py": "1d53af8c8fda0decb4b433b8d39310a390904034",
+    "canonical/runtime/r3_independent_learning_verifier_v1.py": "de3360699101821c3ee0dc84f2d0bfc21dd60204",
+    "canonical/runtime/live_brain_runtime_v1.py": "1e8a384aefec147ba42de233f30f4154c98df0f3",
+    "canonical/tests/test_r3_direct_adequacy_readback_v1.py": "89ad9bf060512203a1ff546301d459813096f30d",
+    "canonical/tests/test_r3_direct_decision_success_observation_v1.py": "08aab82ae530378b9f82c3f00afadeb634a41a5e",
+    "canonical/tests/test_r3_root1_adapter_gap_witness_v1.py": "06aaee9c6a3cc25b4cb8d12175f72806583cef61",
+    "canonical/tests/test_r3_root1_adapter_gap_driver_v1.py": "ad7b7ea7050d17d2456ac5b3bfcd4985c037bec9"
+  },
+  "verification": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "coherent_source_tree": "/home/sprite/r3v3full",
+    "py_compile": "PASS",
+    "combined_r3_regression": "61_OF_61_PASS",
+    "focused_direct_readback": "6_OF_6_PASS",
+    "constructive_root1_gap_regression": "PASS",
+    "producer_replay_during_direct_readback": false
+  },
+  "proved": {
+    "verified_direct_r2_success_gets_bounded_content_addressed_proof_capsule": true,
+    "durable_direct_success_candidate_adapter_is_candidate_only": true,
+    "independent_readback_recompiles_goal_and_rechecks_current_artifact": true,
+    "episode_program_trace_and_lineage_are_independently_recomputed": true,
+    "artifact_mutation_fails_closed": true,
+    "candidate_program_tampering_fails_closed": true,
+    "exact_literal_without_durable_readback_remains_unadmitted": true,
+    "structured_binary_without_original_source_identity_remains_unadmitted": true,
+    "constructive_root1_gap_checks_all_current_owned_success_adapters": true,
+    "verification_authority_remains_separate_from_adapter_frontier": true
+  },
+  "admitted_readback_routes": [
+    "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1",
+    "DIRECT_ADEQUACY::STRUCTURED_TABLE_ARTIFACT_FAMILY_V1",
+    "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1",
+    "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1",
+    "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1",
+    "DIRECT_ADEQUACY::PLAIN_MARKDOWN_PDF_FAMILY_V1",
+    "DIRECT_ADEQUACY::TYPED_JSON_TRANSFORM_FAMILY_V1",
+    "DIRECT_ADEQUACY::VISUAL_CODE_QR_CODE128_FAMILY_V1"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_DIRECT_ROUTES_ARE_LEARNABLE",
+    "NO_PRODUCER_REPLAY_AUTHORITY",
+    "NO_ADAPTER_SELF_CERTIFICATION",
+    "NO_CLAIM_DEFAULT_ROOT1_PATCH_AUTHOR_ROUTE_EXISTS",
+    "NO_TERMINAL_GOAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
