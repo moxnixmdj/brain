@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_RESIDUAL_LRAT_SMOKE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__BRAIN_RESIDUAL_TO_LRAT_TO_PINNED_CHECKER_VERIFIED__ZERO_TERMINAL_CREDIT",
+  "branch": "research/universal-residual-unsat-certificate-20261008-v1",
+  "upstream_checker": {
+    "repository": "https://github.com/marijnheule/drat-trim",
+    "commit": "2e3b2dc0ecf938addbd779d42877b6ed69d9a985",
+    "license": "MIT",
+    "checker": "lrat-check.c",
+    "elaborator": "drat-trim.c"
+  },
+  "build": {
+    "lrat_check_command": "gcc lrat-check.c -std=c99 -DLONGTYPE -O2 -o lrat-check",
+    "drat_trim_command": "gcc drat-trim.c -std=c99 -D_GNU_SOURCE -O2 -o drat-trim",
+    "lrat_check_build_pass": true,
+    "drat_trim_build_pass": true,
+    "environment_note": "D_GNU_SOURCE_REQUIRED_HERE_FOR_GETC_UNLOCKED_DECLARATION"
+  },
+  "brain_residual": {
+    "scope_id": "scope://smoke/lrat-v1",
+    "declared_variables": ["x"],
+    "overapprox_cnf": [["x"]],
+    "routes": [
+      {
+        "route_id": "x_route",
+        "admission_cnf": [["x"]]
+      }
+    ],
+    "compiler_semantic_status": "UNSAT_ON_DECLARED_BOUNDED_MODEL",
+    "residual_sha256": "6b2b9532e86e036f60e74e645513e6375e74ff022ab3bd1577cddcc0fa3524e6",
+    "dimacs_variable_count": 3,
+    "dimacs_clause_count": 6
+  },
+  "proof_pipeline": {
+    "drat_seed": "EMPTY_CLAUSE_RUP_PROOF_FOR_UNIT_PROPAGATION_UNSAT_INSTANCE",
+    "drat_trim_result": "s VERIFIED",
+    "lrat_check_result": "c VERIFIED",
+    "independent_proof_replay_performed": true,
+    "proof_format": "LRAT"
+  },
+  "proved_claim": "FOR_THIS_EXACT_BRAIN_GENERATED_DECLARED_BOOLEAN_RESIDUAL__AN_EXTERNAL_PROOF_ELABORATOR_GENERATED_AN_LRAT_CERTIFICATE_AND_THE_PINNED_INDEPENDENT_LRAT_CHECKER_ACCEPTED_THE_EXACT_CNF_LRAT_PAIR",
+  "next_required": [
+    "BIND_CHECKER_AND_EXACT_UPSTREAM_SOURCE_BYTES_OR_A_FORMALLY_VERIFIED_EQUIVALENT_INTO_BRAIN",
+    "ADD_FAIL_CLOSED_RUNTIME_WRAPPER_THAT_REQUIRES_EXACT_CNF_AND_LRAT_BYTES",
+    "TEST_FORGED_PROOF__CNF_DRIFT__TRUNCATED_PROOF__SCOPE_SWAP__AND_NONEMPTY_PROOF_WITHOUT_EMPTY_CLAUSE",
+    "COMPILE_REAL_CREDITABLE_D_B_REGION_ADMISSIONS_INTO_THE_RESIDUAL",
+    "NO_U_EMPTY_UNTIL_REAL_SCOPE_FIDELITY_AND_ROUTE_ADEQUACY_BINDINGS_PASS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THIS_SMOKE_RESIDUAL_IS_THE_REAL_GLOBAL_ESCAPE_COMPLEMENT",
+    "NO_CLAIM_THE_EXTERNAL_CHECKER_IS_YET_BRAIN_OWNED_OR_VENDOR_BOUND",
+    "NO_CLAIM_GLOBAL_R_UNSAT",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
