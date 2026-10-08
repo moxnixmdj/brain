@@ -4,11 +4,14 @@ import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
+from unittest import mock
 
 from canonical.runtime import r3_independent_learning_verifier_v1 as worker
 from canonical.runtime import universal_verified_adaptive_solver_v1 as v1
 from canonical.runtime import universal_verified_adaptive_solver_v3 as v3
 from canonical.runtime import universal_verified_adaptive_solver_v4 as v4
+from canonical.runtime import universal_verified_adaptive_solver_v12 as v12
+from canonical.tests import test_universal_verified_adaptive_solver_v10 as bound_case
 from canonical.runtime.universal_verified_adaptive_solver_v2 import SUCCESS_CONDITIONS
 from canonical.runtime.typed_acceptance_program_v1 import PROGRAM_SCHEMA
 from canonical.runtime.universal_verified_effect_executor_v1 import (
@@ -482,6 +485,79 @@ class R3IndependentLearningVerifierV1Tests(unittest.TestCase):
             root = Path(td)
             _, _, _, request, _ = self.effectful_material(root)
             request.pop("effect_root")
+            self.assertIsNone(worker.verify_episode_request(request, repo_root=root))
+
+    def test_v12_bound_carrier_episode_reverified_without_effect_replay(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            problem = bound_case.outer_problem()
+            bound_case.semantics_pair(root, problem)
+            invoke = mock.Mock(return_value={"verified": True})
+            with mock.patch.object(
+                bound_case.carrier.astra_runtime,
+                "_invoke_bound_capability",
+                invoke,
+            ):
+                out = v12.run(
+                    problem,
+                    repo_root=root,
+                    episode_id="bound-ep",
+                    scope_id="bound-scope",
+                )
+
+            self.assertTrue(out["pass"], out)
+            self.assertEqual(out["status"], "SOLVED__EPISODE_VERIFICATION_REQUIRED")
+            self.assertEqual(invoke.call_count, 1)
+            request = {
+                "kind": "EPISODE_VERIFICATION",
+                "problem": problem,
+                "episode": out["current_episode"],
+                "trace": out["trace"],
+                "fact_capsule_head_hash": out["state_capsule_head_hash"],
+                "value_capsule_head_hash": out["value_capsule_head_hash"],
+            }
+            binding = worker.verify_episode_request(request, repo_root=root)
+            self.assertIsInstance(binding, dict)
+            self.assertEqual(invoke.call_count, 1)
+            auth = authenticate_episode(
+                binding,
+                problem=problem,
+                episode=out["current_episode"],
+                trace=out["trace"],
+                fact_capsule_head_hash=out["state_capsule_head_hash"],
+                value_capsule_head_hash=out["value_capsule_head_hash"],
+                repo_root=root,
+            )
+            self.assertTrue(auth["pass"], auth)
+            self.assertTrue(auth["effect_outcomes_reverified"])
+
+    def test_v12_bound_carrier_effect_outcome_tamper_is_rejected(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            problem = bound_case.outer_problem()
+            bound_case.semantics_pair(root, problem)
+            with mock.patch.object(
+                bound_case.carrier.astra_runtime,
+                "_invoke_bound_capability",
+                return_value={"verified": True},
+            ):
+                out = v12.run(
+                    problem,
+                    repo_root=root,
+                    episode_id="bound-ep-tamper",
+                    scope_id="bound-scope",
+                )
+            self.assertTrue(out["pass"], out)
+            trace = json.loads(json.dumps(out["trace"]))
+            trace[0]["effect_outcome"]["executed_nonfinish_action_count"] = 999
+            request = {
+                "kind": "EPISODE_VERIFICATION",
+                "problem": problem,
+                "episode": out["current_episode"],
+                "trace": trace,
+                "fact_capsule_head_hash": out["state_capsule_head_hash"],
+                "value_capsule_head_hash": out["value_capsule_head_hash"],
+            }
             self.assertIsNone(worker.verify_episode_request(request, repo_root=root))
 
     def test_exact_skill_is_verified_only_from_reauthenticated_source_episodes(self):
