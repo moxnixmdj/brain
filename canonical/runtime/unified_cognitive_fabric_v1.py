@@ -14,6 +14,9 @@ from canonical.runtime import general_adequate_decision_controller_v1 as adequat
 from canonical.runtime import p3_real_context_v3_admission_v12 as p3
 from canonical.runtime import universal_verified_adaptive_solver_v12 as adaptive_solver
 from canonical.runtime import autonomous_verified_self_improvement_v1 as self_improvement
+from canonical.runtime import h100_verified_capability_registry_v8 as h100_inference
+from canonical.runtime import exact_linear_parameter_polytope_v1 as mystery_polytope
+from canonical.runtime import interval_information_frontier_v1 as mystery_information
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
@@ -27,12 +30,13 @@ ENGINE_DESCRIPTORS = {
     "ADAPTIVE_SOLVER": "universal_verified_adaptive_solver_v12.run",
     "LEARNING_EPISODE": "autonomous_verified_self_improvement_v1.run_learning_episode",
     "BOUND_CAPABILITY": "verified_bound_capability_execution_adapter_v1.execute",
+    "H100_INFERENCE": "h100_verified_capability_registry_v8",
+    "MYSTERY_INFERENCE": "exact_linear_parameter_polytope_v1 + interval_information_frontier_v1",
 }
 
 KNOWN_RESIDUALS = (
-    "H100_SPECIALIZED_INFERENCE_REGISTRIES_NOT_YET_EXPOSED_AS_FABRIC_CAPABILITIES",
-    "MYSTERYMECHANISM_SPECIALIZED_INFERENCE_KERNELS_NOT_YET_EXPOSED_AS_FABRIC_CAPABILITIES",
     "CAPABILITY_FIRST_SCHEDULER_NOT_YET_MANDATORY_FOR_EVERY_FABRIC_CALL",
+    "HISTORICAL_CAPABILITY_CENSUS_NOT_YET_PROVED_COMPLETE",
 )
 
 
@@ -108,6 +112,52 @@ def run(
                 capability_expander_id=str(options.get("capability_expander_id") or "HOST_CAPABILITY_EXPANDER"),
                 max_capability_expansions=int(options.get("max_capability_expansions", 4)),
             )
+        elif mode == "H100_INFERENCE":
+            operation = str(payload.get("operation") or "").strip().upper()
+            if operation == "SNAPSHOT":
+                snap = h100_inference.registry_snapshot()
+                out = {"pass": True, **snap}
+            elif operation == "RESOLVE":
+                rows = payload.get("rows")
+                if not isinstance(rows, list):
+                    raise CognitiveFabricError("H100_ROWS_MUST_BE_LIST")
+                out = h100_inference.resolve_verified_capability(
+                    rows,
+                    target=str(payload.get("target") or ""),
+                    input_name=payload.get("input_name"),
+                    exact_nrmse=float(payload.get("exact_nrmse", 1e-8)),
+                )
+                out = {
+                    "pass": out.get("status") == "LIBRARY_HIT__VERIFY_BEFORE_USE",
+                    **out,
+                }
+            elif operation == "PREDICT":
+                resolution = payload.get("resolution")
+                point = payload.get("point")
+                if not isinstance(resolution, Mapping):
+                    raise CognitiveFabricError("H100_RESOLUTION_NOT_OBJECT")
+                if not isinstance(point, Mapping):
+                    raise CognitiveFabricError("H100_POINT_NOT_OBJECT")
+                value = h100_inference.predict(resolution, point)
+                out = {
+                    "pass": True,
+                    "status": "PASS__H100_VERIFIED_CAPABILITY_PREDICTION",
+                    "prediction": value,
+                    "registry_schema": h100_inference.SCHEMA,
+                }
+            else:
+                raise CognitiveFabricError("H100_OPERATION_INVALID:" + operation)
+        elif mode == "MYSTERY_INFERENCE":
+            operation = str(payload.get("operation") or "").strip().upper()
+            problem = payload.get("problem")
+            if not isinstance(problem, Mapping):
+                raise CognitiveFabricError("MYSTERY_PROBLEM_NOT_OBJECT")
+            if operation == "EXACT_LINEAR_POLYTOPE":
+                out = mystery_polytope.solve(problem)
+            elif operation == "INTERVAL_INFORMATION_POLICY":
+                out = mystery_information.solve(problem)
+            else:
+                raise CognitiveFabricError("MYSTERY_OPERATION_INVALID:" + operation)
         elif mode == "LEARNING_EPISODE":
             out = self_improvement.run_learning_episode(
                 payload,
