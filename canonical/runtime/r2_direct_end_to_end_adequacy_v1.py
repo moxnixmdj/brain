@@ -17,12 +17,14 @@ from typing import Any, Mapping
 from canonical.runtime import live_integrated_brain_v1 as live_bound
 from canonical.runtime import raw_goal_archive_acceptance_v1 as archive_acceptance
 from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_acceptance
+from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
 ARCHIVE_ROUTE_ID = "DIRECT_ADEQUACY::ARCHIVE_MANIFEST_TAR_GZ_V1"
 ARCHIVE_CAPABILITY_ID = "archive.tar_gz.create_from_manifest"
 EXACT_LITERAL_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1"
+LITERAL_JSON_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -38,6 +40,13 @@ ROUTES = {
         "preflight": "raw_goal_exact_literal_acceptance_v1.preflight",
         "executor": "live_integrated_brain_v1.run_raw_goal",
         "acceptance": "raw_goal_exact_literal_acceptance_v1.verify",
+    },
+    LITERAL_JSON_ROUTE_ID: {
+        "capability_id": None,
+        "scope": "STRICT_LITERAL_JSON_RECORDS_TO_CANONICAL_REPOSITORY_PATH_ONLY",
+        "preflight": "raw_goal_literal_json_acceptance_v1.preflight",
+        "executor": "live_integrated_brain_v1.run_raw_goal",
+        "acceptance": "raw_goal_literal_json_acceptance_v1.verify",
     },
 }
 
@@ -96,6 +105,20 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "preflight_execution_authority": False,
         }
 
+    literal_json = literal_json_acceptance.preflight(goal)
+    if literal_json.get("matched") is True:
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": LITERAL_JSON_ROUTE_ID,
+            "capability_id": None,
+            "goal_sha256": literal_json["goal_sha256"],
+            "output_path": literal_json["output_path"],
+            "records_sha256": literal_json["records_sha256"],
+            "semantic_scope": ROUTES[LITERAL_JSON_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
     return {
         **_base("NO_DIRECT_ADEQUACY_ROUTE", passed=False),
         "matched": False,
@@ -146,6 +169,27 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
             and accepted.get("pass") is True
             and accepted.get("semantic_acceptance_complete") is True
             and accepted.get("actual_goal_satisfaction_verified") is True
+            and isinstance(accepted_ids, list)
+            and isinstance(required_count, int)
+            and not isinstance(required_count, bool)
+            and required_count > 0
+            and len(accepted_ids) == required_count
+            and len(set(accepted_ids)) == required_count
+            and raw.get("raw_goal_sha256") == pf["goal_sha256"]
+        )
+    elif pf["route_id"] == LITERAL_JSON_ROUTE_ID:
+        accepted = literal_json_acceptance.verify(
+            goal=str(request["goal"]), raw_result=raw
+        )
+        accepted_ids = accepted.get("accepted_obligation_ids")
+        required_count = accepted.get("required_obligation_count")
+        full = (
+            raw.get("pass") is True
+            and isinstance(accepted, Mapping)
+            and accepted.get("pass") is True
+            and accepted.get("semantic_acceptance_complete") is True
+            and accepted.get("actual_goal_satisfaction_verified") is True
+            and accepted.get("artifact_exact") is True
             and isinstance(accepted_ids, list)
             and isinstance(required_count, int)
             and not isinstance(required_count, bool)

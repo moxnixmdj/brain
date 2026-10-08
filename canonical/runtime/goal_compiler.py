@@ -3016,6 +3016,50 @@ def _compile_literal_json_records(subgoal, root):
     }
 
 
+def _compile_literal_json_goal(goal, root):
+    """Promote the existing strict literal-record grammar to a top-level goal."""
+    text=" ".join(str(goal or "").strip().split())
+    compiled=_compile_literal_json_records(text,root)
+    if compiled is None:
+        return None
+    output_path=str(compiled["output_path"])
+    path=pathlib.PurePosixPath(output_path)
+    if (
+        not output_path.startswith("canonical/")
+        or path.is_absolute()
+        or ".." in path.parts
+        or path.suffix.lower()!=".json"
+    ):
+        return None
+    action=compiled["action"]
+    records=(action.get("args") or {}).get("records")
+    fields=(action.get("args") or {}).get("fields")
+    if not isinstance(records,list) or not isinstance(fields,list):
+        return None
+    return {
+      "schema":"PROJECT_BRAIN_COMPILED_LITERAL_JSON_RECORDS_V1",
+      "compiler_mode":"DETERMINISTIC_LITERAL_JSON_RECORDS",
+      "target_effects":["structured.json.literal_records"],
+      "clauses":[text],
+      "compiled_parts":[{
+        "index":0,
+        "subgoal":text,
+        "mode":"NATIVE_LITERAL_JSON_RECORDS",
+        "output_path":output_path,
+        "fields":list(fields),
+        "record_count":len(records),
+        "records_sha256":hashlib.sha256(
+            json.dumps(records,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode("utf-8")
+        ).hexdigest(),
+      }],
+      "controller_actions":[
+        action,
+        {"type":"finish","args":{"summary":"LITERAL_JSON_GOAL_COMPLETE"}},
+      ],
+      "finish_summary":"LITERAL_JSON_GOAL_COMPLETE",
+    }
+
+
 def _generic_entity_forms(raw):
     value=str(raw or "").strip().lower()
     forms={value}
@@ -4964,6 +5008,9 @@ def compile_goal(goal, registry, root):
     exact_literal=_compile_exact_literal_response_goal(goal)
     if exact_literal is not None:
         return _validate_compiled_clause_coverage(exact_literal)
+    literal_json=_compile_literal_json_goal(goal,root)
+    if literal_json is not None:
+        return _validate_compiled_clause_coverage(literal_json)
     browser_interaction=_compile_verified_browser_interaction(goal,registry,root)
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)

@@ -13,20 +13,21 @@
     "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V3.json",
-    "git_blob_sha": "4a38f7d7d97eb58251287002e6ef6ced9519ebd1"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V4.json",
+    "git_blob_sha": "7fff8fb0023842c9207a31e36d2150d1cdc1d2e3"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
-    "activation_git_blob_sha": "9d5eeec149113ebdb1683ceef36458ea0f8baec8",
-    "exact_cell_count": 2,
-    "latest_verification_path": "canonical/verification/R2_EXACT_LITERAL_DIRECT_ADEQUACY_VERIFICATION_20261008_V2.json",
-    "latest_verification_git_blob_sha": "d1db07583df752d45f9e939143d86260bf5b3166"
+    "activation_git_blob_sha": "d3a0ba90534e1f5bcc4b871e30af6e8cd9a7d9c6",
+    "exact_cell_count": 3,
+    "latest_verification_path": "canonical/verification/R2_LITERAL_JSON_DIRECT_ADEQUACY_VERIFICATION_20261008_V1.json",
+    "latest_verification_git_blob_sha": "88351bafa9dab6b77f18646a6b5518828170c544"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
     "policy_cover_observations_accumulate_monotonically": true,
-    "existing_observation_binding_mutation_forbidden": true
+    "existing_observation_binding_mutation_forbidden": true,
+    "direct_exact_cells_expand_without_fabricating_sleeping_cell_wake_facts": true
   },
   "judgment_model_policy": {
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
