@@ -567,17 +567,32 @@ def _internal_failure_repair(
             "terminal_authority": False,
         }
 
+    repair_context = payload.get("policy_repair_context")
+    if repair_context is not None:
+        if (
+            not isinstance(repair_context, Mapping)
+            or repair_context.get("schema")
+            != "PROJECT_BRAIN_R2_POLICY_REPAIR_CONTEXT_V1"
+        ):
+            raise ImprovementDriverError(
+                "FAILURE_REPAIR_POLICY_CONTEXT_INVALID"
+            )
+
     from canonical.runtime import live_brain_runtime_v1 as live_brain
 
+    repair_request = {
+        "failure_fingerprint": fingerprint,
+        "retry_capsule_sha256": retry_sha,
+        "components": [],
+        "initial_facts": [],
+        "learn": True,
+        "autonomous": True,
+    }
+    if isinstance(repair_context, Mapping):
+        repair_request["repair_context"] = deepcopy(dict(repair_context))
+
     return live_brain.execute_failure_repair_cycle(
-        {
-            "failure_fingerprint": fingerprint,
-            "retry_capsule_sha256": retry_sha,
-            "components": [],
-            "initial_facts": [],
-            "learn": True,
-            "autonomous": True,
-        },
+        repair_request,
         repo_root=repo_root,
         state_path=state_path,
     )
