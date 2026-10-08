@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_PRIVATE_ROUTE_DOMINANCE_INPUT_20261008_V3",
+  "date": "2026-10-08",
+  "strength_scale": {
+    "1": "PUBLIC_OR_RELATIVE_SCORE_ONLY",
+    "2": "FROZEN_SCOPE_EQUIVALENT_STATISTICAL_OR_RUBRIC_ORACLE",
+    "3": "INDEPENDENT_MACHINE_CHECKABLE_DIRECT_ACCEPTANCE",
+    "4": "EXHAUSTIVE_OR_FORMAL_PROOF"
+  },
+  "obligations": [
+    {
+      "id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "min_oracle_strength": 3
+    },
+    {
+      "id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "min_oracle_strength": 3
+    },
+    {
+      "id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "min_oracle_strength": 3
+    }
+  ],
+  "routes": [
+    {
+      "id": "BLOCKED_CURSORBENCH_4_0",
+      "covers": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "oracle_strength": 2,
+      "zero_cost": false,
+      "executable": false,
+      "independent_oracle": true,
+      "scope_mapping_frozen": true,
+      "contamination_boundary_frozen": true,
+      "blocked": true
+    },
+    {
+      "id": "BLOCKED_FRONTIERCODE_1_1",
+      "covers": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "oracle_strength": 2,
+      "zero_cost": false,
+      "executable": false,
+      "independent_oracle": true,
+      "scope_mapping_frozen": true,
+      "contamination_boundary_frozen": true,
+      "blocked": true
+    },
+    {
+      "id": "ACCEPTED_GLOBAL_TRAJECTORY_EXACT_REUSE",
+      "covers": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "oracle_strength": 3,
+      "zero_cost": true,
+      "executable": true,
+      "independent_oracle": true,
+      "scope_mapping_frozen": true,
+      "contamination_boundary_frozen": true,
+      "blocked": false
+    },
+    {
+      "id": "STRUCTURED_METHOD_OBJECTIVE_CEILING_CLOSURE",
+      "covers": [
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+      ],
+      "oracle_strength": 4,
+      "zero_cost": true,
+      "executable": true,
+      "independent_oracle": true,
+      "scope_mapping_frozen": true,
+      "contamination_boundary_frozen": true,
+      "blocked": false
+    }
+  ],
+  "excluded_stale_route": {
+    "id": "VERIFIED_ACCEPTANCE_COMPILER_DIRECT",
+    "reason": "BOUND_EVIDENCE_EXPLICITLY_STATES_WHOLE_SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001_IS_NOT_OWNED_AND_COMPILER_MUST_NOT_BE_TREATED_AS_SUFFICIENT_TERMINAL_AUTHORITY",
+    "evidence": [
+      "canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MODEL_EVIDENCE_V1.json",
+      "canonical/governance/SPECIFICATION_ACCEPTANCE_MODEL_MINIMUM_RESIDUAL_TOURNAMENT_20261007_V1.json",
+      "canonical/governance/TARGET_RELATIVE_SELECTED_SEMANTIC_DISCRIMINATOR_COALESCENCE_20261007_V1.json"
+    ]
+  },
+  "support_bindings": {
+    "trajectory": "canonical/governance/PRIVATE_ROUTE_DOMINANCE_RECOMPUTE_20261007_V2.json",
+    "structured_method": "canonical/governance/STRUCTURED_METHOD_CONTRACT_OBJECTIVE_CEILING_CLOSURE_20261008_V1.json",
+    "specification_boundary": "canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MODEL_EVIDENCE_V1.json"
+  },
+  "expected": {
+    "global_uncovered_obligations": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+    ],
+    "cursorbench_uncovered": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+    ],
+    "frontiercode_uncovered": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+    ]
+  }
+}
