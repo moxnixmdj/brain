@@ -7,7 +7,9 @@ The operation stops only when one of these conditions is proved on the current
 state/provider frontier:
 1. the improvement queue is empty;
 2. every remaining work item is non-actionable and the residual class is typed;
-3. a claimed-progress invariant is violated, in which case it fails closed.
+3. an explicit strict certificate proves the exact residual requires information
+   absent from current durable state;
+4. a claimed-progress invariant is violated, in which case it fails closed.
 """
 from __future__ import annotations
 
