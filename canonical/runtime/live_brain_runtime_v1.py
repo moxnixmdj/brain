@@ -1,6 +1,6 @@
-"""Unified live cognitive architecture V1.
+"""Unified live execution subruntime V1.
 
-One public runtime entrypoint over the Brain's already-existing verified mechanisms.
+Subordinate execution/compatibility runtime behind canonical.runtime.unified_cognitive_fabric_v1.run.
 
 Default routes:
 - raw intent -> R2 general adequate-decision controller (P3 V12 + Universal Solver V12);
@@ -973,7 +973,10 @@ def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
         "schema": SCHEMA,
         "status": "UNIFIED_LIVE_BRAIN_READY",
         "pass": bound_error is None and learning_error is None,
-        "public_entrypoint": "canonical.runtime.live_brain_runtime_v1.run",
+        "public_entrypoint": "canonical.runtime.unified_cognitive_fabric_v1.run",
+        "canonical_public_entrypoint": "canonical.runtime.unified_cognitive_fabric_v1.run",
+        "subruntime_entrypoint": "canonical.runtime.live_brain_runtime_v1.run",
+        "subruntime_public_authority": False,
         "surfaces": list(SURFACES),
         "default_raw_intent_path": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
         "default_explicit_execution_path": "R3_REUSE_FIRST_OVER_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
@@ -1307,7 +1310,7 @@ def run(
     episode_verification_provider=None,
     skill_verification_provider=None,
 ) -> dict[str, Any]:
-    """The Brain's single public live runtime router."""
+    """Subordinate execution router; Unified Cognitive Fabric V1 is the canonical public entrypoint."""
     if not isinstance(request, Mapping):
         return _fail("REQUEST_NOT_OBJECT")
 
