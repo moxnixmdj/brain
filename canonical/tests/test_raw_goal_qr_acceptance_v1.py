@@ -10,5 +10,9 @@ class T(unittest.TestCase):
         self.assertEqual(out["capability_id"], qr.QR_CAPABILITY_ID)
         self.assertEqual(out["payload"], "brain-qr-42")
 
+    def test_extra_clause_does_not_match(self):
+        out = qr.preflight(GOAL + " Then explain it.")
+        self.assertFalse(out["matched"])
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
