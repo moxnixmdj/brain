@@ -24,11 +24,17 @@ class R2GroundedCandidatePolicyFrontierV1Tests(unittest.TestCase):
             "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest",
             out["policy_conditions"],
         )
-        self.assertEqual(
-            out["policy_conditions"][
-                "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest"
-            ],
-            {"op": "TRUE"},
+        policy_id = "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest"
+        condition = out["policy_conditions"][policy_id]
+        self.assertEqual(condition["op"], "ATOM")
+        predicate_id = out["adequacy_predicate_by_policy"][policy_id]
+        self.assertEqual(condition["id"], predicate_id)
+        self.assertIn(predicate_id, out["decision_basis_additions"])
+        self.assertTrue(
+            any(
+                row["formula"] == {"op": "ATOM", "id": predicate_id}
+                for row in out["discriminators"]
+            )
         )
         self.assertFalse(out["policy_adequacy_authority"])
         self.assertFalse(out["semantic_truth_authority"])
