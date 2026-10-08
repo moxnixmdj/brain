@@ -817,6 +817,13 @@ def integrate_solver_output(
         retry_sha = None
         if retry_context is not None:
             capsule = _make_retry_capsule(retry_context)
+            autonomous_replay_authorized = not _effect_may_have_occurred(out)
+            capsule["autonomous_replay_authorized"] = autonomous_replay_authorized
+            capsule["autonomous_replay_reason"] = (
+                "NO_EFFECT_OUTCOME_RECORDED"
+                if autonomous_replay_authorized
+                else "EFFECT_MAY_HAVE_OCCURRED__RECOVERY_OR_EXPLICIT_REPLAY_REQUIRED"
+            )
             retry_sha = capsule["sha256"]
             prior_capsule = retry_capsules.get(retry_sha)
             if isinstance(prior_capsule, Mapping) and prior_capsule.get("resolved") is True:
@@ -1135,6 +1142,8 @@ def get_failure_retry_context(
         "failure_fingerprint": fid,
         "retry_capsule_sha256": wanted,
         "context": deepcopy(dict(context)),
+        "autonomous_replay_authorized": capsule.get("autonomous_replay_authorized") is True,
+        "autonomous_replay_reason": capsule.get("autonomous_replay_reason"),
         "resolved": capsule.get("resolved") is True,
         "resolved_by": capsule.get("resolved_by"),
     }
