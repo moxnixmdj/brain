@@ -32,7 +32,9 @@ except ImportError:
 
 SCHEMA = "PROJECT_BRAIN_HARBOR_SCIENCE_AGENT_TRACE_V1"
 MAX_CYCLES = 12
-MAX_REQUIREMENTS = 16
+MAX_MODEL_REQUIREMENTS = 16
+MAX_BRAIN_DELIVERABLES = 16
+MAX_REQUIREMENTS = MAX_MODEL_REQUIREMENTS + MAX_BRAIN_DELIVERABLES
 MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
 PLANNER_TIMEOUT_S = 300
@@ -48,7 +50,6 @@ def _action_transport_clean(returncode: int, stdout: Any, stderr: Any) -> bool:
         return False
     text = (str(stdout or "") + "\n" + str(stderr or "")).lower()
     return not any(marker in text for marker in _FATAL_ACTION_STDERR_MARKERS)
-MAX_BRAIN_DELIVERABLES = 16
 _EXPLICIT_SUBMISSION_PATH_RE = re.compile(
     r"(?<![A-Za-z0-9_./-])((?:/app/)?submission/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)"
 )
