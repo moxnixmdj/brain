@@ -254,8 +254,6 @@ def reduce_obstruction(
             "declared_q_complete_on_h": False,
                 "declared_q_outcome_domain_total_on_h": True,
                 "q_information_library_complete_proved": False,
-                "policy_adequacy_receipt_bytes_authenticated": False,
-                "policy_receipt_claim_shape_checked": True,
             "policy_certificate_bytes_bound": True,
             "policy_adequacy_semantics_verified": False,
             "global_q_scope_complete": False,
