@@ -286,6 +286,10 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
         )
         self.assertTrue(out["semantic_acceptance_complete"])
         self.assertTrue(out["actual_goal_satisfaction_verified"])
+        self.assertTrue(out["verifier_plan"]["pass"])
+        self.assertTrue(out["proof_carrying_outcome"]["pass"])
+        self.assertEqual(out["raw_goal_acceptance"], out["proof_carrying_outcome"])
+        self.assertEqual(out["accepted_raw_obligation_ids"], ["RAWREQ:o1"])
         self.assertFalse(out["terminal_authority"])
 
     def test_only_selected_policy_changing_predicate_is_requested(self):
@@ -574,6 +578,10 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             "PASS__GOAL_BOUND_ADEQUATE_POLICY_EXECUTED_AND_ACCEPTANCE_VERIFIED",
         )
         self.assertTrue(out["actual_goal_satisfaction_verified"])
+        self.assertTrue(out["verifier_plan"]["pass"])
+        self.assertTrue(out["proof_carrying_outcome"]["pass"])
+        self.assertEqual(out["raw_goal_acceptance"], out["proof_carrying_outcome"])
+        self.assertEqual(out["accepted_raw_obligation_ids"], ["RAWREQ:o1"])
         self.assertFalse(out["terminal_authority"])
 
     def test_execution_provider_replaces_only_execution_carrier(self):
