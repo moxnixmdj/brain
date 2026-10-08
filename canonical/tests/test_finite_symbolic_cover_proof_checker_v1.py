@@ -138,3 +138,50 @@ def test_randomized_256_bounded_truth_table_oracle_cases():
                     "PASS__EXACT_FINITE_FORMULA_COVER_VERIFIED")
         assert result["status"] == expected, (p, result, expected)
         assert result["terminal_credit_delta"] == 0
+
+
+def test_full_twelve_variable_domain_is_exhausted_without_claiming_terminal_scope():
+    names = [f"v{i}" for i in range(12)]
+    p = {
+        "scope_id": "finite://max-bound",
+        "variables": names,
+        "scope": ["const", True],
+        "routes": [{"route_id": "every", "admission": ["const", True],
+                    "adequacy": ["const", True]}],
+    }
+    r = check(p)
+    assert r["pass"] is True
+    assert r["all_assignments_checked"] == 4096
+    assert r["covered_in_scope_assignments"] == 4096
+    assert r["scope_is_entire_terminal_universe_proved"] is False
+
+
+def test_thirteen_variables_exceed_checker_sound_resource_bound():
+    p = base()
+    p["variables"] = [f"v{i}" for i in range(13)]
+    assert check(p)["reason"] == "VARIABLE_DOMAIN_INVALID"
+
+
+def test_oversized_identity_strings_fail_closed():
+    p = base()
+    p["scope_id"] = "s" * 257
+    assert check(p)["reason"] == "SCOPE_ID_INVALID"
+    p = base()
+    p["routes"][0]["route_id"] = "r" * 129
+    assert check(p)["reason"] == "ROUTE_ID_INVALID_OR_DUPLICATE"
+
+
+def test_large_ast_is_bounded_by_total_node_count():
+    p = base()
+    p["scope"] = ["and"] + [["var", "a"] for _ in range(520)]
+    assert check(p)["reason"] == "AST_NODE_LIMIT"
+
+
+def test_supplied_adequacy_true_still_does_not_prove_real_capability():
+    p = base()
+    for route in p["routes"]:
+        route["adequacy"] = ["const", True]
+    r = check(p)
+    assert r["pass"] is True
+    assert r["route_real_world_adequacy_proved"] is False
+    assert r["terminal_authority"] is False
