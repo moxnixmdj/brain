@@ -35,13 +35,16 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             c["brain_owned_transitive_files"],
         )
         self.assertGreaterEqual(
-            c["current_authority_runtime_census"]["authority_declared_runtime_count"],
+            c["authority_pointer_runtime_reachability_census"][
+                "authority_pointer_runtime_reference_count"
+            ],
             1,
         )
         self.assertEqual(
-            c["current_authority_runtime_complete"],
-            c["current_authority_runtime_missing_count"] == 0,
+            c["authority_pointer_runtime_reference_reachability_complete"],
+            c["authority_pointer_runtime_reference_missing_count"] == 0,
         )
+        self.assertFalse(c["current_live_ownership_set_completeness_proved"])
         self.assertNotIn(
             "H100_SPECIALIZED_INFERENCE_REGISTRIES_NOT_YET_EXPOSED_AS_FABRIC_CAPABILITIES",
             c["known_unified_fabric_residuals"],
