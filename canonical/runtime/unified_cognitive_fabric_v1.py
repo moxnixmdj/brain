@@ -55,7 +55,7 @@ ENGINE_DESCRIPTORS = {
 
 KNOWN_R1_RESIDUALS: tuple[str, ...] = ()
 CROSS_ROOT_BOUNDARIES = (
-    "ARBITRARY_RAW_LANGUAGE_TO_CORRECT_ENGINE_SELECTION_REMAINS_R2_SEMANTIC_DECISION_INTELLIGENCE",
+    "ARBITRARY_RAW_LANGUAGE_SEMANTIC_CLOSURE_REMAINS_R2_COVERAGE_NOT_R1_ROUTING",
     "HISTORICAL_SUPERSEDED_REPOSITORY_CAPABILITY_CENSUS_IS_OUTSIDE_CURRENT_LIVE_OWNERSHIP_SCOPE",
 )
 
@@ -145,14 +145,11 @@ def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
         )
 
     if {"task_id", "goal"} <= keys:
-        decision_keys = {
-            "decision_payload",
-            "goal_to_decision_binding",
-            "execution_problem",
-            "policy_execution_binding",
-            "goal_satisfaction_binding",
-        }
-        return "ADEQUATE_DECISION" if decision_keys & keys else "RAW_GOAL"
+        # Raw intent belongs to R2. The fixed-point R2 controller may acquire a
+        # sound decision context, but no routing heuristic is allowed to bypass
+        # semantic decision/acceptance authority merely because the caller
+        # supplied only natural language.
+        return "ADEQUATE_DECISION"
 
     raise CognitiveFabricError("AUTO_ROUTE_AMBIGUOUS_OR_UNMODELED")
 

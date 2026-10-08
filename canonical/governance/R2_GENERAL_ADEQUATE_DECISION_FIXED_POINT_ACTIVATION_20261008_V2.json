@@ -8,9 +8,11 @@
     "live_front_door": "canonical/runtime/live_brain_runtime_v1.py",
     "fixed_point_controller": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py",
-    "proposal_carrier": "existing proposal_provider callback shared with the verified adaptive solver"
+    "proposal_carrier": "existing proposal_provider callback shared with the verified adaptive solver",
+    "canonical_auto_route": "canonical/runtime/unified_cognitive_fabric_v1.py AUTO task_id+goal -> ADEQUATE_DECISION"
   },
   "control_law": [
+    "ROUTE_PLAIN_TASK_ID_PLUS_GOAL_AUTO_INTENT_THROUGH_R2_V2_INSTEAD_OF_BYPASSING_IT_VIA_RAW_BOUND_COMPILATION",
     "RUN_THE_EXISTING_VERIFIED_R2_V1_CONTROLLER",
     "IF_V1_CLOSES_RETURN_ONLY_THAT_VERIFIED_SUCCESS",
     "IF_V1_IS_OPEN_EMIT_A_TYPED_EXACT_UNRESOLVED_EDGE_PACKET",
@@ -45,7 +47,8 @@
       "POLICY_TO_EXECUTION_BINDING_COVERAGE",
       "INDEPENDENT_ACTUAL_GOAL_SATISFACTION_VERIFIER_COVERAGE",
       "GLOBAL_PROOF_THAT_EVERY_USEFUL_OPEN_WORLD_CONTEXT_HAS_A_SOUND_TERMINAL_OR_STRICTLY_PROGRESSING_EDGE"
-    ]
+    ],
+    "raw_goal_auto_route_bypasses_r2": false
   },
   "hard_nonclaims": [
     "NO_CLAIM_ARBITRARY_OPEN_WORLD_SEMANTICS_ARE_ALREADY_SOLVED",
