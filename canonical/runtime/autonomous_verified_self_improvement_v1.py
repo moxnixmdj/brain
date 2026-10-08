@@ -1054,6 +1054,14 @@ def integrate_solver_output(
                     "verification_error": _s(out.get("episode_verification_error")) or None,
                     "episode": deepcopy(dict(raw_ep)),
                     "trace": deepcopy(list(out.get("trace") or [])),
+                    "attempts": deepcopy(list(out.get("attempts") or [])),
+                    "counterexamples": deepcopy(list(out.get("counterexamples") or [])),
+                    "falsified_capability_ids": _items(
+                        out.get("falsified_capability_ids")
+                    ),
+                    "deferred_capability_ids": _items(
+                        out.get("deferred_capability_ids")
+                    ),
                     "problem": (
                         deepcopy(dict(verification_problem))
                         if isinstance(verification_problem, Mapping)
@@ -1789,6 +1797,14 @@ def _post_execution_independent_verification(
                 "problem": deepcopy(dict(problem)),
                 "episode": deepcopy(dict(episode)),
                 "trace": deepcopy(list(trace)),
+                "attempts": deepcopy(list(result.get("attempts") or [])),
+                "counterexamples": deepcopy(list(result.get("counterexamples") or [])),
+                "falsified_capability_ids": _items(
+                    result.get("falsified_capability_ids")
+                ),
+                "deferred_capability_ids": _items(
+                    result.get("deferred_capability_ids")
+                ),
                 "fact_capsule_head_hash": _s(result.get("state_capsule_head_hash")),
                 "value_capsule_head_hash": _s(result.get("value_capsule_head_hash")),
                 "effect_root": str(effect_root) if effect_root is not None else None,
