@@ -21,6 +21,7 @@ from canonical.runtime import universal_verified_adaptive_solver_v12 as solver
 from canonical.runtime import executable_skill_program_v7 as skill_program
 from canonical.runtime.universal_solver_episode_verification_authenticator_v1 import (
     reauthenticate_record,
+    authenticate as authenticate_episode_verification,
 )
 from canonical.runtime.executable_skill_verification_authenticator_v1 import (
     authenticate_and_verify,
@@ -168,6 +169,7 @@ def _induce_all(state: dict[str, Any]) -> int:
 
 def reconcile(*, repo_root: str | Path, state_path: str | Path,
               candidate_verification_bindings: Mapping[str, Mapping[str, Any]] | None = None,
+              candidate_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
               new_episode: Mapping[str, Any] | None = None,
               failure: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Ingest a solver episode or failure; promote only independently verified skills."""
@@ -192,12 +194,20 @@ def reconcile(*, repo_root: str | Path, state_path: str | Path,
         })
         state["failures"] = state["failures"][-64:]
     new_candidates = _induce_all(state)
-    bindings = candidate_verification_bindings or {}
+    bindings = dict(candidate_verification_bindings or {})
     verified = {item["candidate"]["candidate_sha256"] for item in state["skills"]}
     promoted = 0
     for candidate in state["candidates"]:
         digest = candidate["candidate_sha256"]
-        if digest in verified or digest not in bindings:
+        if digest in verified:
+            continue
+        if digest not in bindings and candidate_verifier is not None:
+            offered = candidate_verifier(candidate)
+            if offered is not None:
+                if not isinstance(offered, Mapping):
+                    raise CompoundingError("CANDIDATE_VERIFIER_BINDING_INVALID")
+                bindings[digest] = offered
+        if digest not in bindings:
             continue
         verdict = authenticate_and_verify(candidate, bindings[digest], repo_root=repo_root)
         if verdict.get("pass") is not True:
