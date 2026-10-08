@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ZERO_EXPOSURE_LONG_PROMPT_LIVE_PREFLIGHT_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_RANK12_CLASS_CPU_ROUTE__7203_SERVER_COUNTED_INPUT_TOKENS__ZERO_BENCHMARK_EXPOSURE__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "purpose": "CLOSE_THE_OBSERVED_RANK12_PLANNER_PREFILL_TIMEOUT_FAILURE_CLASS_BEFORE_ANY_RANK13_TASK_EXPOSURE",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2425,
+    "workflow_run_id": 37741815339,
+    "workflow_job_id": 113194014065,
+    "workflow_head_sha": "f358ca4b3f8bad0d7b82e16a22c2c8564a118428",
+    "conclusion": "success",
+    "run_attempt": 1,
+    "artifact_id": 11534463423,
+    "artifact_name": "tb-science-zero-exposure-exact-token-preflight-v1",
+    "artifact_digest": "sha256:d3fd7c7d0bfc81d22d485fc5c210a56caf15408b60a22fb4283b32a1ae23993d",
+    "artifact_size_bytes": 1884
+  },
+  "exact_brain_bytes": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_git_blob_sha": "2e9b817c65cb25e17bc61f0a78cc9d9c271da644",
+    "command_policy_path": "canonical/runtime/harbor_command_policy.py",
+    "command_policy_git_blob_sha": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "preflight_path": "canonical/runtime/tb_science_zero_exposure_transport_preflight_v1.py",
+    "preflight_git_blob_sha": "4a024bf03eacd41d5c893a9c8dd87de772935e7d"
+  },
+  "exact_execution_route": {
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "model_alias": "brain-qwen3.5-9b",
+    "host": "127.0.0.1",
+    "port": 8080,
+    "context_tokens": 8192,
+    "threads": 4,
+    "parallel": 1,
+    "token_count_endpoint": "/v1/chat/completions/input_tokens",
+    "completion_endpoint": "/v1/chat/completions"
+  },
+  "live_receipt": {
+    "pass": true,
+    "benchmark_task_exposure": 0,
+    "benchmark_trials_executed": 0,
+    "selected_input_tokens": 7203,
+    "observed_input_tokens": 7203,
+    "target_min_input_tokens": 7200,
+    "target_max_input_tokens": 7600,
+    "effective_timeout_s": 661,
+    "planner_duration_s": 626.839,
+    "planner_transport": "PINNED_LOCAL_QWEN_LLAMA_CPP_TOOL_CALL__EXACT_SERVER_TOKEN_COUNT",
+    "planner_model": "brain-qwen3.5-9b",
+    "proposal_candidate_count": 1,
+    "proposal_material_requirements": [
+      "PRECHECK"
+    ],
+    "selection_token_count_calls": 15,
+    "scientific_capability_credit": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "comparison_to_rank12": {
+    "rank12_workflow_run_id": 37729003096,
+    "rank12_failure": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "rank12_old_timeout_s": 300,
+    "rank12_inferred_total_prompt_tokens_approx": 7142,
+    "rank12_scientific_task_quality_evaluated": false,
+    "preflight_input_tokens": 7203,
+    "preflight_input_scale_ge_rank12_inferred_scale": true,
+    "preflight_completed_inside_exact_policy_deadline": true,
+    "observed_failure_class_closed_by_live_counterexample": true
+  },
+  "verification_layers": {
+    "planner_and_preflight_tests": "23_OF_23_PASS_ON_EACH_OF_TWO_INDEPENDENT_SPRITES__46_TOTAL",
+    "controller_integration_tests": "17_OF_17_PASS_ON_V6_CLOSURE_ON_INDEPENDENT_SPRITE",
+    "live_rank12_class_transport": "PASS"
+  },
+  "rank13_effect": {
+    "prior_lock_condition_satisfied": true,
+    "rank13_task_exposed": false,
+    "rank13_task_started": false,
+    "rank13_execution_authority_active": false,
+    "consequence": "RANK13_MAY_NOW_BE_CONSIDERED_FOR_A_SEPARATE_EXACT_ONE_SLOT_AUTHORITY_TRANSITION__THIS_PREFLIGHT_ITSELF_DOES_NOT_AUTHORIZE_OR_START_IT"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_LIVE_PREFLIGHT_PROVES_SCIENTIFIC_TASK_SUCCESS",
+    "NO_CLAIM_LIVE_PREFLIGHT_EARNS_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_RANK12_REPLAY",
+    "NO_RANK13_TASK_EXPOSURE",
+    "NO_RANK13_EXECUTION_AUTHORITY_FROM_THIS_RECEIPT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_task_exposure_delta": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
