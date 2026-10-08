@@ -63,6 +63,16 @@ def _resolve_work(
     learning._write_state(state, state_path)
 
 
+SUCCESS_ADAPTER_FRONTIER_PATHS = (
+    "canonical/runtime/r3_bound_success_adapter_v1.py",
+    "canonical/runtime/r3_raw_success_adapter_v1.py",
+)
+SUCCESS_VERIFICATION_AUTHORITY_PATHS = (
+    "canonical/runtime/r3_independent_learning_verifier_v1.py",
+    "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
+    "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
+)
+# Preserve historical full-frontier ordering so existing full digests remain stable.
 SUCCESS_LEARNING_FRONTIER_PATHS = (
     "canonical/runtime/r3_bound_success_adapter_v1.py",
     "canonical/runtime/r3_independent_learning_verifier_v1.py",
@@ -81,6 +91,8 @@ def _enqueue_success_verification_frontier_expansion(
     blocked_work_id: str,
     observation_id: str,
     frontier_sha256: str,
+    adapter_frontier_sha256: str,
+    verification_authority_sha256: str,
 ) -> str:
     """Persist a non-replaying cross-root acquisition handoff for a missing verifier."""
     return learning._enqueue_improvement(
@@ -95,6 +107,8 @@ def _enqueue_success_verification_frontier_expansion(
             "blocked_success_work_id": blocked_work_id,
             "observation_id": observation_id,
             "verification_frontier_sha256": frontier_sha256,
+            "adapter_frontier_sha256": adapter_frontier_sha256,
+            "verification_authority_sha256": verification_authority_sha256,
             "required_capability_class": (
                 "INDEPENDENT_READONLY_SUCCESS_VERIFIER_OR_ADAPTER"
             ),
@@ -107,14 +121,14 @@ def _enqueue_success_verification_frontier_expansion(
     )
 
 
-def _owned_success_learning_frontier_sha256(
+def _frontier_sha256(
+    paths: Sequence[str],
     *,
     repo_root: str | Path = ROOT,
 ) -> str:
-    """Digest the exact owned code that can adapt + verify retained successes."""
     root = Path(repo_root).resolve(strict=True)
     rows: list[dict[str, str]] = []
-    for relative in SUCCESS_LEARNING_FRONTIER_PATHS:
+    for relative in paths:
         target = (root / relative).resolve(strict=True)
         try:
             target.relative_to(root)
@@ -135,53 +149,91 @@ def _owned_success_learning_frontier_sha256(
     return sha256(raw).hexdigest()
 
 
-def _activate_owned_success_learning_frontier(
+def _owned_success_learning_frontier_sha256(
     *,
-    expected_frontier_sha256: str,
+    repo_root: str | Path = ROOT,
+) -> str:
+    return _frontier_sha256(
+        SUCCESS_LEARNING_FRONTIER_PATHS,
+        repo_root=repo_root,
+    )
+
+
+def _owned_success_adapter_frontier_sha256(
+    *,
+    repo_root: str | Path = ROOT,
+) -> str:
+    return _frontier_sha256(
+        SUCCESS_ADAPTER_FRONTIER_PATHS,
+        repo_root=repo_root,
+    )
+
+
+def _owned_success_verification_authority_sha256(
+    *,
+    repo_root: str | Path = ROOT,
+) -> str:
+    return _frontier_sha256(
+        SUCCESS_VERIFICATION_AUTHORITY_PATHS,
+        repo_root=repo_root,
+    )
+
+def _activate_owned_success_adapter_frontier(
+    *,
+    expected_adapter_frontier_sha256: str,
+    expected_verification_authority_sha256: str,
     repo_root: str | Path = ROOT,
 ) -> dict[str, Any]:
-    """Load the exact newly observed owned verifier frontier before it may reopen work.
+    """Activate new candidate adapters without allowing the acquirer to rewrite its judge."""
+    for value, label in (
+        (expected_adapter_frontier_sha256, "EXPECTED_ADAPTER_FRONTIER_SHA256"),
+        (expected_verification_authority_sha256, "EXPECTED_VERIFICATION_AUTHORITY_SHA256"),
+    ):
+        if not isinstance(value, str) or len(value) != 64:
+            raise ImprovementDriverError(label + "_INVALID")
 
-    Source-byte changes are not runtime activation. Python caches imported modules,
-    so a changed verifier/adapter file must be reloaded before the new frontier can
-    become effective in this process.
-    """
-    if not isinstance(expected_frontier_sha256, str) or len(expected_frontier_sha256) != 64:
-        raise ImprovementDriverError("EXPECTED_SUCCESS_FRONTIER_SHA256_INVALID")
+    authority_before = _owned_success_verification_authority_sha256(
+        repo_root=repo_root,
+    )
+    if authority_before != expected_verification_authority_sha256:
+        raise ImprovementDriverError(
+            "SUCCESS_VERIFICATION_AUTHORITY_CHANGED_BEFORE_ADAPTER_ACTIVATION"
+        )
 
     importlib.invalidate_caches()
     from canonical.runtime import r3_bound_success_adapter_v1 as bound_success_adapter
     from canonical.runtime import r3_raw_success_adapter_v1 as raw_success_adapter
-    from canonical.runtime import r3_bound_success_checkpoint_verifier_v1 as bound_success_verifier
-    from canonical.runtime import r3_raw_success_checkpoint_verifier_v1 as raw_success_verifier
-    from canonical.runtime import r3_independent_learning_verifier_v1 as independent_verifier
 
     modules = (
         bound_success_adapter,
         raw_success_adapter,
-        bound_success_verifier,
-        raw_success_verifier,
-        independent_verifier,
     )
     activated: list[str] = []
     for module in modules:
         reloaded = importlib.reload(module)
         activated.append(str(reloaded.__name__))
 
-    after = _owned_success_learning_frontier_sha256(repo_root=repo_root)
-    if after != expected_frontier_sha256:
+    adapter_after = _owned_success_adapter_frontier_sha256(repo_root=repo_root)
+    authority_after = _owned_success_verification_authority_sha256(
+        repo_root=repo_root,
+    )
+    if adapter_after != expected_adapter_frontier_sha256:
         raise ImprovementDriverError(
-            "SUCCESS_VERIFICATION_FRONTIER_CHANGED_DURING_ACTIVATION"
+            "SUCCESS_ADAPTER_FRONTIER_CHANGED_DURING_ACTIVATION"
+        )
+    if authority_after != expected_verification_authority_sha256:
+        raise ImprovementDriverError(
+            "SUCCESS_VERIFICATION_AUTHORITY_CHANGED_DURING_ADAPTER_ACTIVATION"
         )
     return {
         "schema": SCHEMA,
-        "status": "SUCCESS_VERIFICATION_FRONTIER_ACTIVATED",
+        "status": "SUCCESS_ADAPTER_FRONTIER_ACTIVATED__VERIFICATION_AUTHORITY_UNCHANGED",
         "pass": True,
-        "frontier_sha256": after,
+        "adapter_frontier_sha256": adapter_after,
+        "verification_authority_sha256": authority_after,
         "activated_modules": activated,
         "terminal_authority": False,
     }
-
 
 def _park_success_work(
     work: Mapping[str, Any],
@@ -189,6 +241,7 @@ def _park_success_work(
     observation_id: str,
     frontier_sha256: str,
     state_path: str | Path,
+    repo_root: str | Path,
 ) -> None:
     """Park a success only relative to the exact currently owned verifier frontier.
 
@@ -206,7 +259,15 @@ def _park_success_work(
         raise ImprovementDriverError("SUCCESS_WORK_NOT_PENDING:" + wid)
     row["status"] = "PARKED"
     row["parked_reason"] = "NO_CURRENT_OWNED_VERIFICATION_PATH"
+    adapter_frontier_sha256 = _owned_success_adapter_frontier_sha256(
+        repo_root=repo_root,
+    )
+    verification_authority_sha256 = _owned_success_verification_authority_sha256(
+        repo_root=repo_root,
+    )
     row["verification_frontier_sha256"] = frontier_sha256
+    row["adapter_frontier_sha256"] = adapter_frontier_sha256
+    row["verification_authority_sha256"] = verification_authority_sha256
     row["parked_observations"] = int(row.get("observations", 0))
     row["epistemic_nonlearnability_proved"] = False
     row["observational_inseparability_proved"] = False
@@ -222,6 +283,8 @@ def _park_success_work(
             "OWNED_SUCCESS_ADAPTER_RETURNED_NO_CANDIDATE"
         )
         observation["learning_disposition_frontier_sha256"] = frontier_sha256
+        observation["adapter_frontier_sha256"] = adapter_frontier_sha256
+        observation["verification_authority_sha256"] = verification_authority_sha256
         observation["epistemic_nonlearnability_proved"] = False
         observation["observational_inseparability_proved"] = False
         observation["frontier_expansion_required"] = True
@@ -232,6 +295,8 @@ def _park_success_work(
         blocked_work_id=wid,
         observation_id=observation_id,
         frontier_sha256=frontier_sha256,
+        adapter_frontier_sha256=adapter_frontier_sha256,
+        verification_authority_sha256=verification_authority_sha256,
     )
     row["frontier_expansion_work_id"] = expansion_work_id
     if isinstance(observation, dict):
@@ -1178,6 +1243,7 @@ def advance_once(
                         observation_id=observation_id,
                         frontier_sha256=reactivation["frontier_sha256"],
                         state_path=state_path,
+                        repo_root=repo_root,
                     )
                     return {
                         "schema": SCHEMA,
