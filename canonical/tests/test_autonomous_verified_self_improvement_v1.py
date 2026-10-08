@@ -611,7 +611,14 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "verified_skill_reuse_authorized": False,
             "verified_executable_skill": None,
         }
-        with mock.patch.object(loop.solver_v12, "run", return_value=solved) as run_mock:
+        with (
+            mock.patch.object(
+                loop,
+                "reauthenticate_skill_record",
+                side_effect=lambda skill, **_: {"pass": True, "verified_skill": skill},
+            ),
+            mock.patch.object(loop.solver_v12, "run", return_value=solved) as run_mock,
+        ):
             out = loop.run_learning_episode(
                 self._reuse_problem(),
                 state_path=path,
@@ -656,9 +663,16 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "verified_skill_reuse_authorized": False,
             "verified_executable_skill": None,
         }
-        with mock.patch.object(
-            loop.solver_v12, "run", side_effect=[failed, solved]
-        ) as run_mock:
+        with (
+            mock.patch.object(
+                loop,
+                "reauthenticate_skill_record",
+                side_effect=lambda skill, **_: {"pass": True, "verified_skill": skill},
+            ),
+            mock.patch.object(
+                loop.solver_v12, "run", side_effect=[failed, solved]
+            ) as run_mock,
+        ):
             out = loop.run_learning_episode(
                 self._reuse_problem(),
                 state_path=path,
@@ -696,7 +710,14 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "counterexamples": [],
             "attempts": [],
         }
-        with mock.patch.object(loop.solver_v12, "run", return_value=failed) as run_mock:
+        with (
+            mock.patch.object(
+                loop,
+                "reauthenticate_skill_record",
+                side_effect=lambda skill, **_: {"pass": True, "verified_skill": skill},
+            ),
+            mock.patch.object(loop.solver_v12, "run", return_value=failed) as run_mock,
+        ):
             out = loop.run_learning_episode(
                 self._reuse_problem(),
                 state_path=path,
@@ -735,7 +756,14 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "counterexamples": [],
             "attempts": [],
         }
-        with mock.patch.object(loop.solver_v12, "run", return_value=failed):
+        with (
+            mock.patch.object(
+                loop,
+                "reauthenticate_skill_record",
+                side_effect=lambda skill, **_: {"pass": True, "verified_skill": skill},
+            ),
+            mock.patch.object(loop.solver_v12, "run", return_value=failed),
+        ):
             out = loop.run_learning_episode(
                 self._reuse_problem(),
                 state_path=path,
