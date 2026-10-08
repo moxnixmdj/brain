@@ -1,8 +1,8 @@
 {
-  "schema": "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1",
+  "schema": "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V2",
   "date": "2026-10-08",
-  "status": "PASS__R1_STRUCTURAL_LIVE_OWNERSHIP_AND_UNIVERSAL_INVOCATION_CLOSURE",
-  "branch": "r1-refresh-universal-invocation-closure-20261008",
+  "status": "PASS__R1_V3_SINGLE_FRONT_DOOR__LIVE_OWNERSHIP_84__UNIVERSAL_INVOCATION_84",
+  "branch": "r1-reconcile-ownership-invocation-v2-20261008",
   "exact_blobs": {
     "ownership_manifest": {
       "path": "canonical/governance/LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1.json",
@@ -18,7 +18,19 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "bf57e5d6aa1dfd3fb7323138d2a658393f9dded4"
+      "git_blob_sha": "68ee5a9d21bd5b47c50b83d97785064bdf64c0ce"
+    },
+    "subordinate_live_runtime": {
+      "path": "canonical/runtime/live_brain_runtime_v1.py",
+      "git_blob_sha": "a7c8ad109471ea2f6d004474d556c6693c5b2033"
+    },
+    "fabric_tests": {
+      "path": "canonical/tests/test_unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "da3d5ec2f8d839856a6ccb140e9e2c1af006be89"
+    },
+    "live_runtime_tests": {
+      "path": "canonical/tests/test_live_brain_runtime_v1.py",
+      "git_blob_sha": "c1376f9b7361061d948fa5039351ddfa4330ad71"
     },
     "ownership_tests": {
       "path": "canonical/tests/test_live_capability_ownership_v1.py",
@@ -30,7 +42,15 @@
     },
     "workflow": {
       "path": ".github/workflows/verify-unified-cognitive-fabric-v1.yml",
-      "git_blob_sha": "ba7d766b3257b234c1d00a38cda2ba8bfa8dc61a"
+      "git_blob_sha": "8cc9425a9c7e0fc532fa7427be5c1ef3bba79093"
+    },
+    "activation": {
+      "path": "canonical/governance/LIVE_BRAIN_RUNTIME_V1_ACTIVATION_20261008_V1.json",
+      "git_blob_sha": "40a55028183fa0c121c234e499580ad71f4e9d2f"
+    },
+    "v3_front_door_replay": {
+      "path": "canonical/verification/R1_SINGLE_CANONICAL_FRONT_DOOR_REPLAY_20261008_V3.json",
+      "git_blob_sha": "61ff49a00e13fcde4fcc4ba1c94f972121b57a46"
     },
     "bound_registry": {
       "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
@@ -44,6 +64,13 @@
       "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
       "git_blob_sha": "78ef7174fd7cdebb24f97882e8c325a5164f18cb"
     }
+  },
+  "architecture": {
+    "canonical_public_entrypoint": "canonical.runtime.unified_cognitive_fabric_v1.run",
+    "subordinate_runtime_entrypoint": "canonical.runtime.live_brain_runtime_v1.run",
+    "subordinate_runtime_public_authority": false,
+    "universal_identity_mode": "LIVE_CAPABILITY",
+    "one_canonical_public_front_door": true
   },
   "ownership_replay": {
     "fabric_engine_count": 19,
@@ -83,9 +110,9 @@
   },
   "independent_execution": {
     "carrier": "SPRITES",
-    "sprite_name": "brain-live-integrated-v1-run-20261008",
-    "collision_safe_ownership_replay": "PASS",
-    "universal_invocation_coverage_84": "PASS"
+    "ownership_collision_safe_replay": "PASS",
+    "universal_invocation_coverage_84": "PASS",
+    "v3_exact_changed_source_compile_and_activation_parse": "PASS"
   },
   "boundary": {
     "r1_structural_closure": true,
