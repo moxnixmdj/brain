@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_FINITE_SYMBOLIC_COVER_CHECKED_PROOF_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_BYTE_FINITE_FORMULA_CHECKER_VERIFIED__NO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/finite_symbolic_cover_proof_checker_v1.py",
+    "git_blob_sha": "b4af9e4542480f3542698181b499dec9df7de6b5",
+    "test_path": "canonical/tests/test_finite_symbolic_cover_proof_checker_v1.py",
+    "test_git_blob_sha": "6fe0a117d193016ff8d4008a51a1e759b79b2e8b",
+    "branch": "research/finite-symbolic-cover-checked-proof-20261008-v1"
+  },
+  "checker_semantics": {
+    "domain": "ALL_2_POWER_K_ASSIGNMENTS_OF_K_DECLARED_BOOLEAN_VARIABLES",
+    "max_variables": 12,
+    "max_assignments": 4096,
+    "max_routes": 64,
+    "max_total_ast_nodes": 512,
+    "functions": [
+      "literal_boolean",
+      "variable_lookup",
+      "negation",
+      "conjunction",
+      "disjunction"
+    ],
+    "positive_proof": "FOR_EACH_IN_SCOPE_BOOLEAN_ASSIGNMENT__SOME_ROUTE_ADMISSION_IS_TRUE__AND_EVERY_ADMITTED_ROUTE_IMPLIES_ITS_DECLARED_ADEQUACY_FORMULA",
+    "negative_proof": "FIRST_CONSTRUCTIVE_WITNESS_OF_UNSOUND_ADMISSION_OR_UNCOVERED_DECLARED_SCOPE",
+    "source_proof": "EXECUTED_ENUMERATION_OVER_THE_EXACT_SUPPLIED_BOOLEAN_FORMULAS__NOT_CALLER_SUCCESS_FLAGS",
+    "scope_vacuity_allowed": false
+  },
+  "remote_verification": {
+    "provider": "SPRITES",
+    "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+    "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+    "root": "/home/sprite/finite_checked_cover_20261008",
+    "exact_git_blob_hashes_verified": 2,
+    "direct_test_functions_passed": 16,
+    "randomized_independently_structured_reference_oracle_cases_passed": 256,
+    "maximum_finite_world_assignment_test_passed": 4096,
+    "stdout": [
+      "EXACT_GIT_BLOB_MATCH 2",
+      "DIRECT_TEST_FUNCTIONS_PASSED 16",
+      "RANDOMIZED_INDEPENDENT_ORACLE_256_CASES_PASS"
+    ]
+  },
+  "critical_boundaries": [
+    "DOES_NOT_PROVE_THAT_DECLARED_FINITE_SCOPE_EQUALS_OPUS_5_5_TERMINAL_CONTEXT_UNIVERSE",
+    "DOES_NOT_PROVE_THAT_SUPPLIED_ADEQUACY_FORMULA_MATCHES_REAL_TASK_QUALITY",
+    "DOES_NOT_PROVE_ROUTE_EXECUTION_OR_OWNERSHIP",
+    "NOT_A_FORMAL_MACHINE_CHECKED_PROOF_OF_PYTHON_IMPLEMENTATION_CORRECTNESS",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT",
+    "NO_PRIVATE_BENCHMARK_MATCHED_SCORE_OR_TARGET_STRENGTH_PROOF"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_replays": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
