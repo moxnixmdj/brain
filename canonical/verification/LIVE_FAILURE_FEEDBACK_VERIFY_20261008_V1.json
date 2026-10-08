@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_FAILURE_FEEDBACK_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS_12_OF_12",
+  "branch": "live-brain-closed-loop-failure-feedback-20261008",
+  "exact_blobs": {
+    "runtime": "1a09e3598a18772b9e996fca6e19978dee7e882d",
+    "tests": "b7e4cfaba788c05bba728e6930229941503d5f3a"
+  },
+  "isolated_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "tests_run": 12,
+    "tests_passed": 12,
+    "tests_failed": 0
+  },
+  "proved": [
+    "GENERIC_SOLVER_LEARNING_BEHAVIOR_PRESERVED",
+    "DECISION_EXECUTION_LEARNING_BEHAVIOR_PRESERVED",
+    "COMPILED_BOUND_FAILURE_FEEDS_R3_DIAGNOSIS",
+    "RAW_BOUND_FAILURE_FEEDS_R3_DIAGNOSIS",
+    "SPECIALIZED_FAILURE_FEEDS_R3_DIAGNOSIS",
+    "NON_EPISODIC_SUCCESS_CANNOT_SELF_PROMOTE"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
