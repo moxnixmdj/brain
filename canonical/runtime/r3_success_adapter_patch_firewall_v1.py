@@ -41,6 +41,11 @@ ALLOWED_FROM_IMPORT_MODULES = frozenset({
     "canonical.runtime.raw_goal_archive_acceptance_v1",
 })
 SAFE_BUILTIN_CALLS = frozenset({
+    "Exception",
+    "KeyError",
+    "RuntimeError",
+    "TypeError",
+    "ValueError",
     "all",
     "any",
     "bool",
