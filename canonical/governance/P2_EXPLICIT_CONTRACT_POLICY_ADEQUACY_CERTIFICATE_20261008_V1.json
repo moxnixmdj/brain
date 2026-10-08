@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_POLICY_ADEQUACY_CERTIFICATE_V1",
+  "date": "2026-10-08",
+  "policy_id": "P2_INFORMATION_SAFE_EXPLICIT_CONTRACT_TOP_LAW_POLICY_V1",
+  "policy_condition": {
+    "op": "ATOM",
+    "id": "P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1"
+  },
+  "policy_condition_sha256": "9a45870a73c8d2f69db2e96f3a5c784a14309c38781f1b9463136def0f0280f2",
+  "adequacy_proved": true,
+  "brain_owned": true,
+  "load_bearing_constraints_preserved": true,
+  "status": "NORMALIZED_EXISTING_P2_EXPLICIT_CONTRACT_TOP_LAW_ADEQUACY__NO_SCOPE_WIDENING__ZERO_TERMINAL_CREDIT",
+  "exact_policy": {
+    "path": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+    "git_blob_sha": "ea8057b0eadac210c4f4378298df93ed233c5824"
+  },
+  "adequacy_authenticator": {
+    "path": "canonical/runtime/p2_top_law_policy_adequacy_authenticator_v1.py",
+    "git_blob_sha": "ceb8f383c0760fd9d67b967e6edf528d6d6eff37",
+    "two_sprite_replay": "PASS_ON_BOTH_SPRITES_WITH_EXACT_POLICY_BLOB"
+  },
+  "adequacy_authority": {
+    "path": "canonical/governance/P2_EXPLICIT_SEMANTIC_CONTRACT_UNIVERSAL_TOP_LAW_20261007_V1.json",
+    "git_blob_sha": "decd0d46538a213f2e169c00c83fae09191a7ed3"
+  },
+  "independent_theorem_verification": {
+    "path": "canonical/verification/P2_EXPLICIT_SEMANTIC_CONTRACT_TOP_LAW_CONNECTOR_VERIFY_20261007_V1.json",
+    "git_blob_sha": "8375f545ff35ce519719467596bdf1bc15453174"
+  },
+  "selected_class": "P2_PROFESSIONAL_EXPLICIT_SEMANTIC_CONTRACT_ALL_FINITE_TASKS_V1",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "meaning": "IF_AND_ONLY_IF_A_CONTEXT_IS_SOUNDLY_PROVED_TO_BE_IN_THE_BOUND_P2_EXPLICIT_CONTRACT_SELECTED_CLASS__THE_EXACT_BRAIN_POLICY_IS_ADEQUATE_AT_THE_PROVED_OBJECTIVE_TOP_FOR_PLAN_SELECTION_IN_THAT_CLASS",
+  "membership_self_certified": false,
+  "hard_nonclaims": [
+    "NO_CLAIM_P2_EXPLICIT_CONTRACT_MEMBERSHIP_HOLDS_FOR_ALL_PROFESSIONAL_CONTEXTS",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLAIM",
+    "NO_AA_BRIEFCASE_OR_GDPVAL_CLOSURE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
