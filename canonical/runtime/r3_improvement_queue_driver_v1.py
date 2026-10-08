@@ -436,6 +436,46 @@ def _internal_failure_repair(
     )
 
 
+ATTEMPT_BACKOFF_KINDS = {
+    "VERIFY_SKILL_CANDIDATE",
+    "VERIFY_EPISODE",
+    "REPAIR_FAILURE_CLASS",
+    "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+    "SEEK_VERIFIED_SCOPE_GENERALIZATION",
+}
+
+
+def _attempt_already_consumed_current_evidence(work: Mapping[str, Any]) -> bool:
+    if str(work.get("kind") or "") not in ATTEMPT_BACKOFF_KINDS:
+        return False
+    last = work.get("last_attempt_observations")
+    if last is None:
+        return False
+    return int(last) >= int(work.get("observations", 0))
+
+
+def _record_failed_action_attempt(
+    work_id: str,
+    out: Mapping[str, Any],
+    *,
+    state_path: str | Path,
+) -> None:
+    learning._record_improvement_attempt(
+        work_id,
+        status=str(out.get("status") or "IMPROVEMENT_ACTION_FAILED"),
+        reason=(
+            str(
+                out.get("reason")
+                or out.get("verification_error")
+                or out.get("autonomous_replay_reason")
+                or ""
+            ).strip()
+            or None
+        ),
+        state_path=state_path,
+    )
+
+
 def advance_once(
     *,
     state_path: str | Path = learning.DEFAULT_STATE_PATH,
@@ -462,6 +502,13 @@ def advance_once(
     for work in pending:
         kind = str(work.get("kind") or "")
         wid = str(work.get("work_id") or "")
+        if _attempt_already_consumed_current_evidence(work):
+            blockers.append({
+                "work_id": wid,
+                "kind": kind,
+                "blocker": "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
+            })
+            continue
         try:
             if kind == "VERIFY_SKILL_CANDIDATE":
                 if skill_verification_provider is None:
@@ -473,7 +520,15 @@ def advance_once(
                     repo_root=repo_root,
                     skill_verification_provider=skill_verification_provider,
                 )
-                return {**out, "progress": out.get("pass") is True, "blockers_skipped": blockers}
+                failed = out.get("pass") is not True
+                if failed:
+                    _record_failed_action_attempt(wid, out, state_path=state_path)
+                return {
+                    **out,
+                    "progress": out.get("pass") is True,
+                    "attempt_backoff_recorded": failed,
+                    "blockers_skipped": blockers,
+                }
 
             if kind == "VERIFY_EPISODE":
                 if episode_verification_provider is None:
@@ -490,18 +545,17 @@ def advance_once(
                     episode_verification_provider=episode_verification_provider,
                     skill_verification_provider=skill_verification_provider,
                 )
-                return {**out, "progress": out.get("pass") is True, "blockers_skipped": blockers}
+                failed = out.get("pass") is not True
+                if failed:
+                    _record_failed_action_attempt(wid, out, state_path=state_path)
+                return {
+                    **out,
+                    "progress": out.get("pass") is True,
+                    "attempt_backoff_recorded": failed,
+                    "blockers_skipped": blockers,
+                }
 
             if kind == "REPAIR_FAILURE_CLASS":
-                observations = int(work.get("observations", 0))
-                last_attempt = work.get("last_attempt_observations")
-                if last_attempt is not None and int(last_attempt) >= observations:
-                    blockers.append({
-                        "work_id": wid,
-                        "kind": kind,
-                        "blocker": "REPAIR_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
-                    })
-                    continue
                 if failure_repair_provider is None:
                     repaired = _internal_failure_repair(
                         work,
@@ -541,6 +595,7 @@ def advance_once(
                     "progress": repaired_pass,
                     "work_id": wid,
                     "repair": deepcopy(dict(repaired)),
+                    "attempt_backoff_recorded": not repaired_pass,
                     "blockers_skipped": blockers,
                     "terminal_authority": False,
                 }
@@ -560,7 +615,15 @@ def advance_once(
                     episode_verification_provider=episode_verification_provider,
                     skill_verification_provider=skill_verification_provider,
                 )
-                return {**out, "progress": out.get("pass") is True, "blockers_skipped": blockers}
+                failed = out.get("pass") is not True
+                if failed:
+                    _record_failed_action_attempt(wid, out, state_path=state_path)
+                return {
+                    **out,
+                    "progress": out.get("pass") is True,
+                    "attempt_backoff_recorded": failed,
+                    "blockers_skipped": blockers,
+                }
 
             if kind == "REVERIFY_QUARANTINED_SKILL":
                 blockers.append({
@@ -584,7 +647,15 @@ def advance_once(
                     repo_root=repo_root,
                     skill_verification_provider=skill_verification_provider,
                 )
-                return {**out, "progress": out.get("pass") is True, "blockers_skipped": blockers}
+                failed = out.get("pass") is not True
+                if failed:
+                    _record_failed_action_attempt(wid, out, state_path=state_path)
+                return {
+                    **out,
+                    "progress": out.get("pass") is True,
+                    "attempt_backoff_recorded": failed,
+                    "blockers_skipped": blockers,
+                }
 
             if kind == "COLLECT_MATCHING_VERIFIED_EPISODE":
                 blockers.append({
@@ -596,7 +667,7 @@ def advance_once(
 
             blockers.append({"work_id": wid, "kind": kind, "blocker": "UNSUPPORTED_IMPROVEMENT_KIND"})
         except Exception as exc:
-            return {
+            failure = {
                 "schema": SCHEMA,
                 "status": "IMPROVEMENT_ACTION_EXCEPTION",
                 "pass": False,
@@ -604,9 +675,12 @@ def advance_once(
                 "work_id": wid,
                 "kind": kind,
                 "reason": type(exc).__name__ + ":" + str(exc),
+                "attempt_backoff_recorded": True,
                 "blockers_skipped": blockers,
                 "terminal_authority": False,
             }
+            _record_failed_action_attempt(wid, failure, state_path=state_path)
+            return failure
 
     return {
         "schema": SCHEMA,
@@ -643,10 +717,10 @@ def drain(
         )
         actions.append(result)
         if result.get("progress") is not True:
-            if result.get("status") == "IMPROVEMENT_REPAIR_ATTEMPT_DID_NOT_CLOSE_ORIGINAL_OBLIGATION":
-                # The failed repair was just persisted with observation-bound
-                # backoff. Continue once so the next scheduler pass can skip it
-                # and advance unrelated actionable compounding work immediately.
+            if result.get("attempt_backoff_recorded") is True:
+                # The failed attempt is now suppressed until its evidence
+                # observation count changes. Continue immediately so a rejected
+                # verifier/adapter item cannot starve unrelated compounding work.
                 continue
             break
     final_state = learning.load_state(state_path)
