@@ -5,7 +5,7 @@
   "terminal_objective":"PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "supersedes":{
     "path":"canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V1.json",
-    "git_blob_sha":"423e0d2186974dfe3356c73621bab1dfc039"
+    "git_blob_sha":"423e0d2186974dfe335b6366c73621bab1dfc039"
   },
   "sources":{
     "current_primitive_frontier":{"path":"canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json","git_blob_sha":"8340829830dc81095abd4d643a8be6894a39f2f3"},
