@@ -14,13 +14,16 @@ from fractions import Fraction
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_V1"
-MISSION_OBJECTIVE = "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE"\nMILESTONE = "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE"
+MISSION_OBJECTIVE = "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE"
+MILESTONE = "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE"
+OPTION_PRESERVATION_POLICY = "canonical/governance/CURRENT_OPTION_PRESERVING_OPTIMIZATION.json"
 CAPABILITY_LEARNING_LOOP = (
     "SOLVE",
     "VERIFY",
     "EXTRACT_MECHANISM",
     "GENERALIZE",
     "COMPRESS",
+    "PRESERVE_OPTIONS",
     "REUSE_CHEAPER",
 )
 ALLOWED_BENCHMARK_ROLES = frozenset(
@@ -128,6 +131,8 @@ def rank_work(work: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
         "mission_objective": MISSION_OBJECTIVE,
         "milestone": MILESTONE,
+        "option_preservation_policy": OPTION_PRESERVATION_POLICY,
+        "optimization_rule": "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
         "capability_learning_loop": list(CAPABILITY_LEARNING_LOOP),
         "ranked": [
             {
@@ -146,6 +151,7 @@ def rank_work(work: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         "capability_credit_delta": 0,
         "ownership_credit_delta": 0,
         "terminal_credit_delta": 0,
+        "physical_deletion_authority": False,
     }
 
 
@@ -158,6 +164,10 @@ def _metrics(raw: Mapping[str, Any]) -> dict[str, Fraction]:
 
 
 def _dominates(a: Mapping[str, Any], b: Mapping[str, Any]) -> bool:
+    a_contract = _s(a.get("semantic_contract_sha256"))
+    b_contract = _s(b.get("semantic_contract_sha256"))
+    if a_contract and b_contract and a_contract != b_contract:
+        return False
     am, bm = _metrics(a), _metrics(b)
     weak = all(am[k] >= bm[k] for k in _BENEFITS) and all(am[k] <= bm[k] for k in _COSTS)
     strict = any(am[k] > bm[k] for k in _BENEFITS) or any(am[k] < bm[k] for k in _COSTS)
@@ -182,8 +192,16 @@ def update_pareto_frontier(
                 "reason": "DOMINATED_BY_EXISTING_FRONTIER",
                 "dominated_by": _s(incumbent.get("capability_id")),
                 "frontier": list(frontier),
+                "preserve_candidate_evidence": True,
+                "dominated_means_deleted": False,
+                "physical_deletion_authority": False,
+                "option_preservation_policy": OPTION_PRESERVATION_POLICY,
             }
     removed = [_s(x.get("capability_id")) for x in frontier if _dominates(candidate, x)]
+    # "removed" is strictly active-frontier retirement. The implementation,
+    # semantic contract, evidence, and reconstruction state remain preserved.
+    # Permanent destruction is governed separately by
+    # option_preserving_capability_optimizer_v1.
     kept = [dict(x) for x in frontier if not _dominates(candidate, x)]
     kept.append(dict(candidate))
     kept.sort(key=lambda x: _s(x.get("capability_id")))
@@ -191,5 +209,9 @@ def update_pareto_frontier(
         "admitted": True,
         "reason": "NONDOMINATED_VERIFIED_REUSABLE_CAPABILITY",
         "removed_dominated": removed,
+        "retired_from_active_frontier": removed,
+        "dominated_means_deleted": False,
+        "physical_deletion_authority": False,
+        "option_preservation_policy": OPTION_PRESERVATION_POLICY,
         "frontier": kept,
     }

@@ -10,5 +10,9 @@
   "opus_5_5_role": "FIRST_FRONTIER_CHECKPOINT_NOT_TERMINAL_OBJECTIVE",
   "current_r2_decision_intelligence": {
     "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
-  }
+  },
+  "current_option_preserving_optimization": {
+    "path": "canonical/governance/CURRENT_OPTION_PRESERVING_OPTIMIZATION.json"
+  },
+  "optimization_precedence": "EFFICIENCY_OPTIMIZATION_MUST_PRESERVE_SEMANTIC_CAPABILITY_FUTURE_OPTION_VALUE_AND_RECONSTRUCTIBILITY__CURRENT_DOMINANCE_IS_NOT_DELETION_AUTHORITY"
 }
