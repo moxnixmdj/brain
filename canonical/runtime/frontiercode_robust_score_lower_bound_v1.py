@@ -23,6 +23,13 @@ from typing import Any, Mapping
 SCHEMA = "PROJECT_BRAIN_FRONTIERCODE_ROBUST_SCORE_LOWER_BOUND_V1"
 
 
+def _plain(d: Decimal) -> str:
+    """Canonical non-exponent decimal string with insignificant zeros removed."""
+    if d == 0:
+        return "0"
+    return format(d.normalize(), "f")
+
+
 def _d(value: Any, label: str, errors: list[str]) -> Decimal | None:
     try:
         d = Decimal(str(value))
@@ -158,7 +165,7 @@ def evaluate(payload: Any) -> dict[str, Any]:
             "group_id": gid,
             "multiplicity": multiplicity,
             "all_blockers_pass_proved": blockers_proved and blocker_receipt_ok,
-            "certified_score_lower_bound_fraction": str(certified_lb),
+            "certified_score_lower_bound_fraction": _plain(certified_lb),
         })
 
     if expected_cells and total_multiplicity != expected_cells:
@@ -195,9 +202,9 @@ def evaluate(payload: Any) -> dict[str, Any]:
         "trials_per_task": trials_per_task,
         "expected_cell_count": expected_cells,
         "covered_cell_count": total_multiplicity,
-        "target_score_fraction": str(target) if target is not None else None,
-        "robust_score_lower_bound_fraction": str(lower_bound),
-        "robust_score_lower_bound_percent": str(lower_bound * Decimal("100")),
+        "target_score_fraction": _plain(target) if target is not None else None,
+        "robust_score_lower_bound_fraction": _plain(lower_bound),
+        "robust_score_lower_bound_percent": _plain(lower_bound * Decimal("100")),
         "target_met_by_robust_lower_bound": threshold_met,
         "groups": normalized_groups,
         "errors": sorted(set(errors)),
