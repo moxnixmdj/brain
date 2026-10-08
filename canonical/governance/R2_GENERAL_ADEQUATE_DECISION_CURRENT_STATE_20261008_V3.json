@@ -29,7 +29,7 @@
       "stage": "LIVE_AUTO_ROUTE",
       "state": "LIVE",
       "runtime": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "1cdf45d56b5ae574f00498636ff46ac428086177",
+      "git_blob_sha": "fe3369393e3df12ab3fa4a8a5ecae5ae091a575a",
       "effect": "AUTO_TASK_ID_PLUS_GOAL_ENTERS_ADEQUATE_DECISION_INSTEAD_OF_BYPASSING_R2"
     },
     {
@@ -86,5 +86,6 @@
   "accounting": {
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "reconciled_against_main_sha": "0bd3675e6d3e9e23b241cdf13d3c123fd882f875"
 }
