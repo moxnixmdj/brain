@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_R3_CURRENT_EVIDENCE_DISPOSITION_PUBLIC_RUNNER_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_CURRENT_DRIVER_EVIDENCE_BOUND_PARK_AND_REOPEN",
+  "subject": {
+    "branch": "r3-current-evidence-disposition-v2-20261008",
+    "head": "0e75b60494397665f54460468e107c96c6a78796",
+    "path": "canonical/runtime/r3_improvement_queue_driver_v1.py",
+    "git_blob_sha": "2a0f33604ddc49f312f7bdc5c4feadc817790692"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "r3-current-evidence-disposition-capsule-20261008",
+    "workflow": ".github/workflows/verify-r3-current-evidence-disposition.yml",
+    "workflow_commit": "f9248ac074410c5e8e2858c2c9d66cabe20c950e",
+    "run_id": 37784424151,
+    "job_id": 113335399057,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_CURRENT_SOURCE_GIT_BLOB_BOUND",
+    "EXACT_CURRENT_SOURCE_COMPILES",
+    "UNSUPPORTED_DEFAULT_SUCCESS_ADAPTATION_PARKS_CURRENT_EVIDENCE",
+    "UNCHANGED_OWNED_VERIFIER_FRONTIER_DOES_NOT_RETRY_PARKED_WORK",
+    "OWNED_VERIFIER_FRONTIER_CHANGE_REOPENS_PARKED_WORK",
+    "EXTERNAL_VERIFICATION_AUTHORITY_REOPENS_PARKED_WORK",
+    "PARKING_DOES_NOT_CLAIM_PERMANENT_NONLEARNABILITY",
+    "PARKED_DISPOSITION_DOES_NOT_STARVE_UNRELATED_ACTIONABLE_WORK"
+  ],
+  "nonclaims": [
+    "Does not prove every external effect is independently observable.",
+    "Does not independently execute the complete private Brain repository.",
+    "Does not grant capability ownership or terminal authority."
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}

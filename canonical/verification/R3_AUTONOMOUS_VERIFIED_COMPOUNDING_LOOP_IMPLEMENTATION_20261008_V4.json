@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V4",
+  "date": "2026-10-08",
+  "status": "R3_CONTROL_LOOP_CLOSED_OVER_CURRENTLY_OBSERVABLE_EVIDENCE__UNOBSERVABLE_EFFECTS_FAIL_CLOSED_AND_PARKED",
+  "subject_branch": "r3-current-evidence-disposition-v2-20261008",
+  "subject_head_before_receipts": "0e75b60494397665f54460468e107c96c6a78796",
+  "root": "R3_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_LOOP",
+  "current_live_blobs": {
+    "autonomous_self_improvement": "0b0bcf1d2f58fa10f20785c9b86bdb757fdaf2d7",
+    "improvement_queue_driver": "2a0f33604ddc49f312f7bdc5c4feadc817790692",
+    "independent_learning_verifier": "4695fc73904cbe5bf3f8bb58eca8055270e6cdf1",
+    "bound_success_adapter": "8c73e1ab3486df9ed56fff778ec35401720eb1e7",
+    "bound_success_checkpoint_verifier": "dc1412451d3dbc6747fd51388137a3ac1bba0d4b",
+    "queue_driver_tests": "2abef83ade6df52ff562c5dea7da244fe61de231"
+  },
+  "closed_paths": {
+    "failure_experience_to_causal_repair": true,
+    "safe_autonomous_replay": true,
+    "unsafe_effect_replay_blocked": true,
+    "non_effectful_episode_recomputation": true,
+    "exact_skill_recomputation": true,
+    "structural_non_effectful_scope_generalization": true,
+    "bounded_filesystem_effect_readback": true,
+    "compiled_bound_checkpoint_and_artifact_readback": true,
+    "durable_episode_and_skill_reauthentication": true,
+    "counterexample_quarantine_and_safe_recovery": true,
+    "pareto_replacement_and_permanent_reuse": true,
+    "current_evidence_nonlearnability_disposition": true,
+    "parked_work_reopens_on_new_observation": true,
+    "parked_work_reopens_on_owned_verifier_frontier_change": true,
+    "parked_work_reopens_on_external_authority": true,
+    "no_same_evidence_retry_loop": true
+  },
+  "experience_terminal_control_states": [
+    "INDEPENDENTLY_VERIFIED_EPISODE_OR_SKILL_PROMOTED",
+    "FAILURE_CLASS_REPAIRED_OR_EVIDENCE_BOUND_BACKOFF",
+    "COUNTEREXAMPLE_QUARANTINED_OR_SAFELY_CONTRACTED",
+    "WAITING_FOR_SPECIFIC_NEW_VERIFIED_EVIDENCE",
+    "PARKED__PROVED_NONLEARNABLE_FROM_CURRENT_RETAINED_EVIDENCE_AND_CURRENT_VERIFIER_FRONTIER"
+  ],
+  "semantics_of_parked": {
+    "permanent_nonlearnability_claimed": false,
+    "claim": "No admissible currently owned verification path can promote this exact retained success evidence.",
+    "reopen_conditions": [
+      "NEW_OBSERVATION_EVIDENCE",
+      "OWNED_SUCCESS_LEARNING_VERIFIER_FRONTIER_CHANGES",
+      "EXTERNAL_EPISODE_VERIFIER_OR_SUCCESS_ADAPTER_BECOMES_AVAILABLE"
+    ]
+  },
+  "independent_evidence": [
+    {
+      "path": "canonical/verification/R3_CURRENT_EVIDENCE_DISPOSITION_PUBLIC_RUNNER_VERIFICATION_20261008_V1.json",
+      "run_id": 37784424151,
+      "job_id": 113335399057,
+      "conclusion": "success",
+      "exact_driver_blob": "2a0f33604ddc49f312f7bdc5c4feadc817790692"
+    },
+    {
+      "path": "canonical/verification/R3_EFFECTFUL_READBACK_PUBLIC_RUNNER_VERIFICATION_20261008_V1.json",
+      "conclusion": "success",
+      "scope": "BOUNDED_FILESYSTEM_EFFECT_READBACK"
+    },
+    {
+      "path": "canonical/verification/R3_BOUND_SUCCESS_READONLY_LEARNING_VERIFY_20261008_V1.json",
+      "conclusion": "success",
+      "scope": "COMPILED_BOUND_CHECKPOINT_AND_DURABLE_ARTIFACT_READBACK"
+    }
+  ],
+  "residual": {
+    "class": "EFFECT_OBSERVABILITY_OR_EXTERNAL_RECEIPT_BOUNDARY",
+    "statement": "An arbitrary real-world side effect cannot be independently learned from after the fact when no re-readable state, durable artifact, independently authenticated receipt, or other sound observation channel exists.",
+    "classification": "EPISTEMIC_REALITY_BOUNDARY_NOT_R3_SCHEDULER_OR_RETRY_BUG",
+    "brain_behavior": "FAIL_CLOSED_AND_PARK_EXACT_CURRENT_EVIDENCE; REOPEN_AUTOMATICALLY_WHEN_EVIDENCE_OR_VERIFIER_AUTHORITY_CHANGES",
+    "examples_still_outside_current_owned_readback": [
+      "NON_READABLE_EXTERNAL_SERVICE_MUTATION_WITHOUT_SIGNED_RECEIPT",
+      "IRREVERSIBLE_PHYSICAL_EFFECT_WITHOUT_INDEPENDENT_SENSOR_OR_RECEIPT",
+      "PRIVATE_REMOTE_EFFECT_WHERE_NO_CONFIDENTIAL_READBACK_AUTHORITY_EXISTS"
+    ]
+  },
+  "current_truth": "R3 NOW HAS A CLOSED CONTROL POLICY FOR EVERY OBSERVED EXPERIENCE UNDER ITS CURRENT EVIDENCE: VERIFY_AND_REUSE, REPAIR, QUARANTINE, WAIT_FOR_SPECIFIC_EVIDENCE, OR PARK_WITHOUT_PERMANENT_IMPOSSIBILITY_CLAIMS. THE REMAINING UNIVERSAL LIMIT IS WHETHER REALITY EXPOSES INDEPENDENT EVIDENCE FOR A PARTICULAR EFFECT.",
+  "incremental_spend_usd": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
