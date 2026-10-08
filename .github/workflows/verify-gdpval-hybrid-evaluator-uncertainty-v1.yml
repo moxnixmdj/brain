@@ -1,0 +1,27 @@
+name: Verify GDPval Hybrid Evaluator Uncertainty V1
+
+on:
+  push:
+    branches:
+      - proof/gdpval-hybrid-evaluator-uncertainty-20261008-v1
+  pull_request:
+    paths:
+      - "canonical/governance/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_20261008_V1.json"
+      - "canonical/runtime/gdpval_hybrid_evaluator_uncertainty_v1.py"
+      - "canonical/tests/test_gdpval_hybrid_evaluator_uncertainty_v1.py"
+      - ".github/workflows/verify-gdpval-hybrid-evaluator-uncertainty-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run exact rational certificate tests
+        run: python -m pytest -q canonical/tests/test_gdpval_hybrid_evaluator_uncertainty_v1.py
