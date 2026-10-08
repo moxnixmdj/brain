@@ -1,33 +1,33 @@
 {
   "schema": "PROJECT_BRAIN_P3_BOUND_BINARY_REAL_CONTEXT_MEMBERSHIP_TWO_SPRITE_VERIFICATION_V1",
   "date": "2026-10-08",
-  "status": "PASS_11_OF_11_ON_TWO_SPRITES__PARAMETERIZED_REAL_CONTEXT_MEMBERSHIP_PREDICATE__ZERO_TERMINAL_CREDIT",
+  "status": "PASS_13_OF_13_ON_TWO_SPRITES__FULL_SOURCE_SEMANTIC_COVERAGE__PARAMETERIZED_REAL_CONTEXT_MEMBERSHIP_PREDICATE__ZERO_TERMINAL_CREDIT",
   "runtime": {
     "path": "canonical/runtime/p3_bound_binary_real_context_membership_v1.py",
-    "git_blob_sha": "8079ad67228e5cd3ce1af4f47d3ce7d1b030f14e",
-    "sha256": "a52996bdf7f33dc78e09a974e3fd0c8070b011cb9d847f08042fb7ff3bf53aa0",
-    "commit_sha": "ef3a273d9fc6969de8adb987f5662e996cde6967"
+    "git_blob_sha": "2b9832ae4efa3c4fc30119034ecbc9b509263d35",
+    "sha256": "37b0428b0fdcee159c4facd611def7b7eeddeb78918719791f57bbd1ee9db464",
+    "commit_sha": "e684c2d6333f25c5ae7e49e83666ade8e924ccb8"
   },
   "tests": {
     "path": "canonical/tests/test_p3_bound_binary_real_context_membership_v1.py",
-    "git_blob_sha": "f67c5f465bba300f23bab02d3a10d75840c233ac",
-    "sha256": "5cfef2fdffedeb188c5087c8bf81427fe2973d1dfd9fb4f8c3bd6b99561f0a35",
-    "commit_sha": "ed7dfd3baec0b0d1b4b66fbf1ced9688216ad79a"
+    "git_blob_sha": "322b2ff0e5f40f5b218f098eeff52356e396803f",
+    "sha256": "705f5bddd225b333cc02457ddb7d88c918ba7c85bd3b9e7adceba1b8a1affffe",
+    "commit_sha": "bb4694c4a6ace11bde4dfd9edac418bdb471ba8c"
   },
   "verification": [
     {
       "provider": "Sprites",
       "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
       "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
-      "tests_passed": 11,
-      "tests_run": 11
+      "tests_passed": 13,
+      "tests_run": 13
     },
     {
       "provider": "Sprites",
       "sprite": "brain-trace-parametricity-v1-verify",
       "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
-      "tests_passed": 11,
-      "tests_run": 11
+      "tests_passed": 13,
+      "tests_run": 13
     }
   ],
   "checked_properties": [
@@ -39,13 +39,17 @@
     "OBJECTIVE_DRIFT_REQUIRES_NEW_AUTHORITY_RECEIPT",
     "OUT_OF_CELL_SEMANTIC_FIELD_REJECTED",
     "BINARY_CELL_SHAPE_STILL_ENFORCED",
-    "NO_POLICY_DB_U_OR_TERMINAL_AUTHORITY_ESCALATION"
+    "NO_POLICY_DB_U_OR_TERMINAL_AUTHORITY_ESCALATION",
+    "ALL_NONWHITESPACE_SOURCE_TEXT_SEMANTICALLY_CLASSIFIED_BY_EACH_EXTRACTOR",
+    "NONRISKY_AMBIGUOUS_OR_UNCLASSIFIED_SOURCE_TAIL_FAILS_CLOSED"
   ],
   "proved": {
     "executable_parameterized_membership_predicate": true,
     "real_context_semantic_scope_complete_on_pass": true,
     "source_authorization_verified_on_pass": true,
-    "top_law_eligible_on_pass": true
+    "top_law_eligible_on_pass": true,
+    "complete_source_semantic_coverage_verified_on_pass": true,
+    "no_load_bearing_semantic_requirement_outside_exact_binary_contract_on_pass": true
   },
   "hard_boundaries": [
     "MEMBERSHIP_ONLY",
