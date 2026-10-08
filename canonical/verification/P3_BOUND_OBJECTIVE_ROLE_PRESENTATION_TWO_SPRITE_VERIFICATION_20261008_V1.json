@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_P3_BOUND_OBJECTIVE_ROLE_PRESENTATION_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_10_OF_10_ON_TWO_SPRITES__OBJECTIVE_ROLE_ORDER_COMPILES_TO_EXISTING_EXPLICIT_SELECTION_ORDER_TOP_LAW__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py",
+    "git_blob_sha": "da4da391280a985f6d90028b12c9cdb0ef0aaf46"
+  },
+  "tests": {
+    "path": "canonical/tests/test_p3_bounded_objective_role_presentation_compiler_v1.py",
+    "git_blob_sha": "4bacd175f66994e566ad1fa621bc05ebb058f1e4"
+  },
+  "reused_exact_dependencies": [
+    {"path":"canonical/runtime/p3_bounded_objective_role_relevance_v1.py","git_blob_sha":"d8977024955a22003c6bcde9d54c40cad68e44b7"},
+    {"path":"canonical/runtime/bound_capabilities/objective_claim_operand_binding.py","git_blob_sha":"48fd058430d8d361fc75beced567c7b6d1166531"},
+    {"path":"canonical/runtime/synthesis_certified_visible_support_policy_v2.py","git_blob_sha":"14c7b3f99b6c28b3f28b5356e13907f843f5ee91"},
+    {"path":"canonical/runtime/bounded_claim_support.py","git_blob_sha":"197246a50ace8c16b945def9edb1357fb317c393"},
+    {"path":"canonical/runtime/synthesis_grounded_expression_ir_v1.py","git_blob_sha":"0709b7d43a069eaa9eb3240df28789a9107a36db"}
+  ],
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "h100-real-image-v1",
+      "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+      "tests_passed": 10,
+      "tests_run": 10
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-root3-current-byte-replay-20261007-v1",
+      "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "tests_passed": 10,
+      "tests_run": 10
+    }
+  ],
+  "proved": [
+    "BOTH_EXACT_BINARY_OBJECTIVE_ROLE_CLAIMS_ARE_INCLUDED_ONLY_AFTER_THE_EXISTING_VERIFIED_POSITIVE_RELEVANCE_CELL_PASSES",
+    "CALLER_SUPPLIED_INCLUDE_AND_CALLER_SUPPLIED_CLAIM_ORDER_ARE_REJECTED",
+    "INPUT_CLAIM_LIST_ORDER_CANNOT_OVERRIDE_OBJECTIVE_ROLE_ORDER",
+    "REVERSING_THE_EXPLICIT_OBJECTIVE_OPERAND_ROLES_REVERSES_THE_COMPILED_PRESENTATION_ORDER",
+    "EXTRA_CLAIMS_REQUIRED_CLAIMS_AMBIGUOUS_ROLE_EVIDENCE_AND_UNVERIFIED_EVIDENCE_FAIL_CLOSED",
+    "THE_EXISTING_EXPLICIT_SELECTION_ORDER_TOP_LAW_RUNTIME_PRESERVES_SUPPORT_PROVENANCE_CONFLICTS_TYPED_AUDIENCE_CONSTRAINTS_EXACT_ORDER_ZERO_SELECTED_DROP_AND_ZERO_NEW_MATERIAL_CLAIMS",
+    "NO_AUTHORITY_ESCALATION"
+  ],
+  "causal_reduction": {
+    "closed_mechanical_question": "HOW_TO_CONSTRUCT_AN_OBJECTIVE_ROLE_PRESERVING_PRESENTATION_POLICY_AFTER_THE_BOUND_POSITIVE_RELEVANCE_PASS",
+    "remaining_semantic_question": "WHETHER_THE_REAL_CONTEXT_HAS_ANY_LOAD_BEARING_PRESENTATION_SEMANTICS_OUTSIDE_THE_DECLARED_EXPLICIT_SELECTION_ORDER_SUPPORT_CONFLICT_PROVENANCE_AND_TYPED_AUDIENCE_CELL"
+  },
+  "boundaries": [
+    "NO_SELF_CERTIFIED_REAL_CONTEXT_SCOPE_COMPLETENESS",
+    "NO_GENERAL_PRESENTATION_ADEQUACY",
+    "NO_GENERAL_OPTIONAL_RELEVANCE",
+    "NO_POLICY_ADEQUACY_DB_ADMISSION_U_SUBTRACTION_U_EMPTY_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
