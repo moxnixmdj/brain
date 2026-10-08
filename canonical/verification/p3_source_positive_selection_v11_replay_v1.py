@@ -21,6 +21,15 @@ stub.evaluate=lambda payload: {
 }
 sys.modules["canonical.runtime.source_positive_adequacy_db_admission_v1"]=stub
 
+v10_stub=types.ModuleType("canonical.runtime.p3_real_context_v3_admission_v10")
+v10_stub.evaluate=lambda payload,repo_root=None: {
+    "pass":False,
+    "nonbinding_capacity_reason":"CAPACITY_BINDING_REQUIRES_RELEVANCE_POLICY",
+    "terminal_authority":False,
+    "terminal_credit_delta":0,
+}
+sys.modules["canonical.runtime.p3_real_context_v3_admission_v10"]=v10_stub
+
 import canonical.tests.test_p3_source_positive_selection_cell_v1 as cell
 import canonical.tests.test_p3_real_context_v3_admission_v11 as front
 
