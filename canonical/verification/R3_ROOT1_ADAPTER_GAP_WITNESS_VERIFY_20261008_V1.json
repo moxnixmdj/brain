@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_R3_ROOT1_ADAPTER_GAP_WITNESS_VERIFY_20261008_V1",
   "date": "2026-10-08",
-  "status": "INDEPENDENT_SPRITE_PASS__EXACT_PUBLIC_CAPSULE_BLOBS__6_OF_6_FOCUSED_TESTS_PASS__ZERO_CREDIT",
+  "status": "INDEPENDENT_SPRITE_PASS__CURRENT_R3_V10_COMPOSITION__14_BLOB_BINDINGS__6_OF_6_FOCUSED_TESTS_PASS__ZERO_CREDIT",
   "subject": {
     "repository": "moxnixmdj/brain",
     "pull_request": 3350,
@@ -13,7 +13,7 @@
     "repository": "moxnixmdj/verification-capsule-runner",
     "pull_request": 2433,
     "branch": "verify-r3-root1-adapter-gap-3350",
-    "head_sha": "83201d8ab41f3bfb4ff3316ac777c663c056a5ae",
+    "head_sha": "f03c57dacb3f05a125105adaaa5866605757e329",
     "capsule_path": "capsules/r3_root1_adapter_gap_3350",
     "exact_blob_binding_pass_count": 14
   },
@@ -49,5 +49,16 @@
   "accounting": {
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
+  },
+  "composition_replay": {
+    "current_main_head_observed": "8b082a3900d2d9e1f9884123dee1b9157a46a094",
+    "current_r3_v10_learning_blob": "84d78909e7282f50a43c589a28a988d0f3f7b9ce",
+    "pr_driver_blob": "1f0b45a405a9c35b2cf00a1c5d8e93c0fac14251",
+    "all_other_bound_dependencies_matched_original_capsule": true,
+    "exact_blob_binding_pass_count": 14,
+    "focused_tests_run": 6,
+    "focused_failures": 0,
+    "focused_errors": 0,
+    "conclusion": "success"
   }
 }
