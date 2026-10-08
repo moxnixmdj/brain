@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PROOF_CARRYING_DOMINANCE_SPRITE_VERIFICATION_V1",
   "date": "2026-10-08",
-  "status": "INDEPENDENT_REMOTE_REPLAY_PASS__16_OF_16__ZERO_TERMINAL_CREDIT",
+  "status": "INDEPENDENT_REMOTE_REPLAY_PASS__18_OF_18__ZERO_TERMINAL_CREDIT",
   "subject": "AA_BRIEFCASE_CURRENT_EPOCH_PROOF_CARRYING_DOMINANCE_ROUTE",
   "executor": {
     "kind": "SPRITE_REMOTE_ISOLATED_RUNTIME",
@@ -12,7 +12,7 @@
   "source_blobs": {
     "dominance_runtime": {
       "path": "canonical/runtime/aa_briefcase_scope_complete_dominance_v1.py",
-      "git_blob_sha": "f7db24d0f4e89bb19eb489463092849fd5e572f7"
+      "git_blob_sha": "4afbcae9d8356a0b3ec93ba323a1a795fee17748"
     },
     "disjunctive_bridge_v3": {
       "path": "canonical/runtime/aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
@@ -24,7 +24,7 @@
     },
     "dominance_tests": {
       "path": "canonical/tests/test_aa_briefcase_scope_complete_dominance_v1.py",
-      "git_blob_sha": "d25ecd7b315befd2e0f7e047642d0d7b5706b64a"
+      "git_blob_sha": "ccbc9d3006e07a2f0b77aa80f7d65b59aeff597a"
     },
     "bridge_v3_tests": {
       "path": "canonical/tests/test_aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
@@ -45,8 +45,8 @@
   },
   "execution": {
     "command": "python3 -m unittest -v canonical.tests.test_aa_briefcase_scope_complete_dominance_v1 canonical.tests.test_aa_briefcase_current_epoch_noninferiority_bridge_v3 canonical.tests.test_aa_briefcase_current_epoch_result_bridge_v2",
-    "tests_run": 16,
-    "tests_passed": 16,
+    "tests_run": 18,
+    "tests_passed": 18,
     "failures": 0,
     "errors": 0,
     "result": "OK"
@@ -57,7 +57,9 @@
     "FEWER THAN 91 UNIQUE PRIVATE TASK IDS IS REJECTED",
     "CHECK-ID SET ROOT DRIFT IS REJECTED",
     "M ROUTE WITHOUT COMPLETE MONOTONE-CLASS VERIFICATION IS REJECTED",
-    "U ROUTE OPUS_WIN IS REJECTED",
+    "PAIRWISE U ROUTE OPUS_WIN IS REJECTED",
+    "BINARY RUBRIC U ROUTE REJECTS BRAIN_FAIL WHEN OPUS_PASS",
+    "BINARY RUBRIC U ROUTE ACCEPTS BRAIN_FAIL OPUS_FAIL AS NONINFERIOR",
     "MATCHED CURRENT-EPOCH ELO BELOW 1807 FAILS",
     "MATCHED CURRENT-EPOCH ELO AT 1807 PASSES",
     "ONE DIRECT-DOMINANCE RESULT MULTIPLEXES BOTH AA-BRIEFCASE PREDICATE ALIASES",
