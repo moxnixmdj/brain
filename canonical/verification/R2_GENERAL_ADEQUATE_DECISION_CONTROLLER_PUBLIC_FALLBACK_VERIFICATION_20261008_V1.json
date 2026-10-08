@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GENERAL_ADEQUATE_DECISION_CONTROLLER_PUBLIC_FALLBACK_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_SOURCE_AND_TEST_BLOBS_INDEPENDENTLY_VERIFIED_ON_CANONICAL_PUBLIC_FALLBACK_CARRIER",
+  "subject": {
+    "private_repository": "moxnixmdj/brain",
+    "private_pull_request": 3186,
+    "controller_path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+    "controller_git_blob_sha": "17eef307a00a5bd581fcd983263e0780ec7b0841",
+    "test_path": "canonical/tests/test_general_adequate_decision_controller_v1.py",
+    "test_git_blob_sha": "836e0730c4019654c64b6c2a19656d1efa0ec1e1"
+  },
+  "primary_carrier": {
+    "mechanism": "PRIVATE_GITHUB_ACTIONS",
+    "workflow_run_id": 37759551985,
+    "job_id": 113252354527,
+    "conclusion": "failure",
+    "observed_job_step_count": 0,
+    "classification": "CARRIER_FAILURE_BEFORE_TEST_EXECUTION__NOT_CODE_FAILURE"
+  },
+  "fallback_carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "public_pull_request": 2432,
+    "verification_head_sha": "f58c5081fd31c7f48522cb77be62e0393ec99987",
+    "workflow_name": "Verify R2 controller PR3186 V1",
+    "workflow_run_id": 37760038880,
+    "job_id": 113253947149,
+    "job_conclusion": "success",
+    "merged_verification_commit": "ed8fc15db9bfbfa836de05251f28083ca4172051",
+    "exact_blob_binding_verified": true,
+    "exact_controller_tests_passed": true
+  },
+  "verified_properties": [
+    "MISSING_DECISION_CONTEXT_FAILS_OPEN",
+    "GOAL_TO_DECISION_BINDING_REQUIRED_BEFORE_POLICY_REASONING",
+    "ADEQUATE_GROUNDED_EXPRESSION_DOES_NOT_SELF_CERTIFY_ACTUAL_GOAL_SATISFACTION",
+    "INDEPENDENT_ACTUAL_GOAL_ACCEPTANCE_CLOSES_GROUNDED_REALIZATION",
+    "ONLY_SELECTED_POLICY_CHANGING_INFORMATION_IS_REQUESTED",
+    "MISSING_SELECTED_INFORMATION_RETURNS_EXACT_NEXT_INFORMATION_REQUEST",
+    "INFORMATION_PROVIDER_CANNOT_SELF_AUTHORIZE_SEMANTIC_TRUTH",
+    "EFFECTFUL_POLICY_EXECUTION_REQUIRES_INDEPENDENT_POLICY_TO_EXECUTION_BINDING",
+    "VERIFIED_EXECUTION_DOES_NOT_SELF_CERTIFY_ACTUAL_GOAL_SATISFACTION",
+    "INDEPENDENT_ACTUAL_GOAL_ACCEPTANCE_CLOSES_VERIFIED_EXECUTION",
+    "GOAL_SATISFACTION_RECEIPT_IS_EXACT_CONTENT_BOUND_AND_TAMPER_EVIDENT"
+  ],
+  "authority": {
+    "proves_controller_test_suite_passes_for_exact_bound_blobs": true,
+    "proves_global_open_world_R2_coverage": false,
+    "proves_U_empty": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  },
+  "incremental_spend_usd": 0
+}
