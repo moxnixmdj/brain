@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_R2_RAW_SOURCE_PROOF_MATERIAL_INTEGRATION_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS__41_CHECKS__PROVIDER_TRUTH_AUTHORITY_REMOVED_FOR_RAW_SOURCE_MATERIAL_PATH",
+  "branch": "r2-source-proof-reuse-20261008",
+  "exact_blobs": {
+    "adapter": "90cf4e0f7ccdec8ae228852bf36513ae4a12cf92",
+    "controller": "e25e1b37623e51978703022034339e1fdc369d74",
+    "adapter_tests": "f008718e58d6f2a973323594eb6a93a9804d7361",
+    "integration_tests": "4fcdf503e9e272aa404d9379fd757b0b400da914"
+  },
+  "isolated_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "new_adapter_and_integration": {
+      "passed": 7,
+      "total": 7
+    },
+    "existing_controller_regression": {
+      "passed": 24,
+      "total": 24
+    },
+    "existing_selected_truth_regression": {
+      "passed": 10,
+      "total": 10
+    }
+  },
+  "proved": [
+    "INFORMATION_PROVIDER_CAN_SUPPLY_RAW_SOURCE_AND_FACT_BYTES_WITHOUT_DECLARING_TRUTH",
+    "BRAIN_DETERMINISTICALLY_COMPILES_BOTH_BOOLEAN_CLAIM_CANDIDATES",
+    "EXISTING_SOURCE_ALIGNED_CHECKER_RECOMPUTES_TRUTH",
+    "EXISTING_SOURCE_ALIGNED_CHECKER_RECOMPUTES_CANONICAL_PREDICATE_IDENTITY",
+    "FORGED_SELECTED_PREDICATE_LABEL_CANNOT_INHERIT_SOURCE_TRUTH",
+    "PROVIDER_TRUTH_FIELD_IN_RAW_MATERIAL_IS_REJECTED",
+    "LEGACY_FULL_TRUTH_PAYLOAD_PATH_REMAINS_COMPATIBLE",
+    "GENERAL_ADEQUATE_DECISION_CONTROLLER_REGRESSION_REMAINS_PASSING"
+  ],
+  "boundary": [
+    "SOURCE_PROOF_FRAGMENT_REMAINS_BOUNDED",
+    "OUT_OF_FRAGMENT_SOURCE_FORMS_REMAIN_UNKNOWN",
+    "NO_POLICY_ADEQUACY_FROM_SOURCE_TRUTH_ALONE",
+    "NO_GOAL_SATISFACTION_FROM_SOURCE_TRUTH_ALONE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
