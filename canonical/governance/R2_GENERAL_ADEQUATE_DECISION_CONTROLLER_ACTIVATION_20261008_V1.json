@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GENERAL_ADEQUATE_DECISION_CONTROLLER_ACTIVATION_V1",
+  "date": "2026-10-08",
+  "status": "LIVE_GENERAL_DECISION_CONTROL_LAW_BOUND__MINIMUM_INFORMATION_AND_VERIFIED_EXECUTION_COMPOSED__OPEN_WORLD_COVERAGE_NOT_CLAIMED",
+  "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE_INCOMPLETE",
+  "objective": "CONVERT_RAW_GOAL_PLUS_WORLD_CONSTRAINTS_AND_UNCERTAINTY_INTO_AN_AUTHENTICATED_ADEQUATE_ACTION_WITH_MINIMUM_POLICY_CHANGING_INFORMATION_AND_VERIFIED_GOAL_SATISFACTION",
+  "runtime": {
+    "controller": "canonical/runtime/general_adequate_decision_controller_v1.py",
+    "raw_goal_contract": "canonical/runtime/lossless_raw_task_contract_v1.py",
+    "decision_front_door": "canonical/runtime/p3_real_context_v3_admission_v12.py",
+    "minimum_information_loop": "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py",
+    "policy_adequacy_kernel": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+    "adaptive_execution": "canonical/runtime/universal_verified_adaptive_solver_v12.py"
+  },
+  "live_control_law": [
+    "PRESERVE_THE_RAW_GOAL_LOSSLESSLY_AS_ACCEPTANCE_OBLIGATIONS",
+    "REQUIRE_AN_INDEPENDENT_CONTENT_ADDRESSED_BINDING_FROM_THE_RAW_GOAL_TO_THE_DECISION_SEMANTIC_CONTEXT",
+    "ASK_FIRST_WHETHER_ONE_AUTHENTICATED_BRAIN_OWNED_POLICY_IS_ADEQUATE_ACROSS_EVERY_SURVIVING_SOUND_SEMANTIC_MODEL",
+    "IF_NOT__SELECT_ONLY_THE_CHEAPEST_DECLARED_POLICY_CHANGING_DISCRIMINATOR",
+    "ACQUIRE_ONLY_THE_SOURCE_BOUND_TRUTH_NEEDED_FOR_THAT_SELECTED_DISCRIMINATOR",
+    "RERUN_POLICY_ADEQUACY_AFTER_EACH_PROVED_OBSERVATION",
+    "REALIZE_THE_CERTIFIED_POLICY_DIRECTLY_WHEN_THE_GROUNDED_REALIZATION_CELL_IS_THE_ACTION",
+    "OTHERWISE_REQUIRE_AN_INDEPENDENT_CONTENT_ADDRESSED_SELECTED_POLICY_TO_EXECUTION_BINDING_AND_EXECUTE_THROUGH_UNIVERSAL_SOLVER_V12",
+    "MARK_GOAL_SATISFACTION_ONLY_AFTER_AN_INDEPENDENT_CONTENT_ADDRESSED_ACCEPTANCE_BINDING_PROVES_THE_EXACT_RAW_GOAL_SELECTED_POLICY_REALIZATION_AND_ALL_LOAD_BEARING_CONSTRAINTS",
+    "RETURN_THE_EXACT_MISSING_EDGE_ON_EVERY_OPEN_OR_UNPROVED_CASE"
+  ],
+  "authority_boundaries": {
+    "routing_is_success_authority": false,
+    "information_provider_is_semantic_truth_authority": false,
+    "proposal_provider_is_execution_authority": false,
+    "capability_expander_is_effect_authority": false,
+    "p3_policy_selection_self_certifies_goal_semantics": false,
+    "universal_solver_effect_success_self_certifies_policy_realization": false,
+    "global_terminal_authority_granted": false,
+    "verified_execution_self_certifies_actual_goal_satisfaction": false
+  },
+  "root_reduction": {
+    "architectural_control_loop_missing": false,
+    "minimum_policy_changing_information_selection_missing": false,
+    "authenticated_common_policy_selection_missing": false,
+    "verified_adaptive_execution_loop_missing": false,
+    "remaining_coverage_edges": [
+      "GOAL_TO_DECISION_SEMANTIC_BINDING_COVERAGE",
+      "POSITIVE_POLICY_ADEQUACY_CERTIFICATE_COVERAGE",
+      "SOURCE_ALIGNED_SELECTED_PREDICATE_PROOF_COVERAGE",
+      "SELECTED_POLICY_TO_EXECUTION_BINDING_COVERAGE_FOR_EFFECTFUL_ACTIONS",
+      "INDEPENDENT_ACTUAL_GOAL_SATISFACTION_ACCEPTANCE_BINDING_COVERAGE",
+      "TOTAL_SOUND_ADAPTIVE_COVER_PLUS_WELL_FOUNDED_PROGRESS_AND_RESOURCE_POTENTIAL_IF_UNIVERSAL_OPEN_WORLD_PROOF_IS_REQUIRED"
+    ]
+  },
+  "relation_to_adaptive_fixed_point": {
+    "theorem": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V1.json",
+    "implemented_now": "THE_LIVE_CONTROLLER_REALIZES_THE_TERMINAL_COMMON_POLICY_OR_SELECTED_MINIMUM_INFORMATION_BRANCH_STRUCTURE_FOR_CURRENTLY_BOUND_REGIONS",
+    "not_yet_proved": "A_TOTAL_SOUND_ALPHA_GAMMA_COVER_WITH_AUTHENTICATED_TERMINAL_OR_STRICTLY_PROGRESSING_EDGE_FOR_EVERY_USEFUL_OPEN_WORLD_CONTEXT"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_NATURAL_LANGUAGE_SEMANTIC_COMPILATION_IS_SCOPE_COMPLETE",
+    "NO_CLAIM_POLICY_ADEQUACY_CERTIFICATE_COVERAGE_IS_SCOPE_COMPLETE",
+    "NO_CLAIM_SOURCE_ALIGNED_TRUTH_PROOF_COVERAGE_IS_SCOPE_COMPLETE",
+    "NO_CLAIM_EVERY_USEFUL_REAL_WORLD_ACTION_ALREADY_HAS_AN_AUTHENTICATED_EXECUTION_BINDING",
+    "NO_CLAIM_EVERY_ADEQUATE_POLICY_REALIZATION_ALREADY_HAS_AN_INDEPENDENT_ACTUAL_GOAL_SATISFACTION_VERIFIER",
+    "NO_CLAIM_GLOBAL_R2_OPEN_WORLD_CLOSURE",
+    "NO_U_EMPTY_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
