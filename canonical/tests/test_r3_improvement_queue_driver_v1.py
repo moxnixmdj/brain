@@ -805,6 +805,7 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             "pass": False,
             "progress": False,
             "work_id": "repair",
+            "attempt_backoff_recorded": True,
             "terminal_authority": False,
         }
         advanced_other = {
