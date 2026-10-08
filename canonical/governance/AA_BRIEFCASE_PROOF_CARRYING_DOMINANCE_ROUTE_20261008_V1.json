@@ -78,6 +78,10 @@
     "minimal_owner_attestation_verification": {
       "path": "canonical/verification/AA_BRIEFCASE_MINIMAL_OWNER_ATTESTATION_SPRITE_VERIFICATION_20261008_V1.json",
       "git_blob_sha": "eb9ab40ee986bc3853abfdc000ae6869ca656c83"
+    },
+    "owner_attestation_request_contract": {
+      "path": "canonical/governance/AA_BRIEFCASE_OWNER_ATTESTATION_REQUEST_CONTRACT_20261008_V1.json",
+      "git_blob_sha": "83dad38eacd849ea09385c21425f1701d8e0b05e"
     }
   },
   "per_check_certification": {
@@ -208,5 +212,7 @@
       "external_information": "ONE INDEPENDENT OR OWNER-VERIFIED COMPARABLE CURRENT-EPOCH BRAIN ELO RECEIPT",
       "numeric_elo_reconstruction_required": true
     }
-  ]
+  ],
+  "external_receipt_request_ready": true,
+  "external_receipt_request_sent": false
 }
