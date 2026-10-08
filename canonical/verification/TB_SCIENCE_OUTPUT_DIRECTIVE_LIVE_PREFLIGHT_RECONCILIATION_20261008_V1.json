@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_OUTPUT_DIRECTIVE_LIVE_PREFLIGHT_RECONCILIATION_V1",
+  "date": "2026-10-08",
+  "status": "LIVE_LOCAL_QWEN_ZERO_BENCHMARK_EXPOSURE_PASS__EXPLICIT_OUTPUT_CONTROL_END_TO_END_VERIFIED__RANK12_PRECONDITION_SATISFIED__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2416,
+    "workflow_run_id": 37724821890,
+    "workflow_job_id": 113140481790,
+    "head_sha": "bb12cf52d8ba5804fa4290db6bc4d963c668a533",
+    "artifact_id": 11528115607,
+    "artifact_name": "tb-science-output-directive-live-preflight-v1",
+    "artifact_digest": "sha256:d2e057a994afa9bb684a7e47cdbd5ef1f4d7c9a488f9cbcddc1e625798cf5329",
+    "workflow_conclusion": "success"
+  },
+  "exact_route": {
+    "agent_git_blob_sha": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "planner_git_blob_sha": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "closure_manifest_git_blob_sha": "cf9cc9fb8830eda991c71381a523b8f67caedaa7",
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c"
+  },
+  "synthetic_task": {
+    "goal": "Create a plain text file containing exactly BRAIN_OK and no other text. Write the result to /tmp/brain_output_probe.txt.",
+    "expected_output_path": "/tmp/brain_output_probe.txt",
+    "expected_output_content": "BRAIN_OK",
+    "brain_mandated_deliverables": {
+      "BRAIN_DELIVERABLE_01": "/tmp/brain_output_probe.txt"
+    },
+    "result_status": "SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER",
+    "cycles": 4,
+    "output_path_exists": true,
+    "output_content_exact": true,
+    "resolved_requirements": [
+      "BRAIN_DELIVERABLE_01"
+    ],
+    "task_completion_claimed": false
+  },
+  "verified": {
+    "exact_repaired_carrier_gate": true,
+    "clean_pinned_llama_cpp_build": true,
+    "exact_qwen_model_hash": true,
+    "local_cognition_endpoint_healthy": true,
+    "real_local_planner_used": true,
+    "explicit_output_requirement_controlled_completion": true,
+    "fresh_benchmark_task_exposure": 0,
+    "terminal_bench_task_content_loaded": false,
+    "terminal_bench_slot_consumed": false,
+    "incremental_spend_usd": 0
+  },
+  "consequence": "THE_EXACT_REPAIRED_CURRENT_CARRIER_HAS_SATISFIED_THE_LEDGER_V11_ZERO_EXPOSURE_END_TO_END_PREFLIGHT_CONDITION__RANK12_MAY_ADVANCE_TO_SEPARATE_ONE_SHOT_AUTHORITY_PREPARATION__NO_TASK_EXECUTION_AUTHORIZED_BY_THIS_RECEIPT",
+  "execution_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
