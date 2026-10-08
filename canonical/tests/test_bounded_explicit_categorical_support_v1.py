@@ -113,3 +113,9 @@ def test_reflexive_negative_subset_never_supported():
     ])
     assert out["status"]=="UNRESOLVED" and out["relation"]=="UNKNOWN",out
     assert out["terminal_authority"] is False
+
+
+def test_quantified_member_surface_is_outside_categorical_grammar():
+    out=parse_relation("Every canary is a member of Bird.")
+    assert out["status"]=="UNRESOLVED"
+    assert out["claim_in_scope"] is False
