@@ -13,13 +13,29 @@
     "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V2.json"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V3.json",
+    "git_blob_sha": "4a38f7d7d97eb58251287002e6ef6ced9519ebd1"
+  },
+  "direct_adequacy": {
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
+    "activation_git_blob_sha": "9d5eeec149113ebdb1683ceef36458ea0f8baec8",
+    "exact_cell_count": 2,
+    "latest_verification_path": "canonical/verification/R2_EXACT_LITERAL_DIRECT_ADEQUACY_VERIFICATION_20261008_V2.json",
+    "latest_verification_git_blob_sha": "d1db07583df752d45f9e939143d86260bf5b3166"
+  },
+  "fixed_point_information_policy": {
+    "minimum_policy_changing_information": true,
+    "policy_cover_observations_accumulate_monotonically": true,
+    "existing_observation_binding_mutation_forbidden": true
   },
   "judgment_model_policy": {
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY",
+  "primary_primitive_state": "OPEN",
+  "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
-  "external_closed_model_dependency": false
+  "external_closed_model_dependency": false,
+  "global_open_world_closure_claimed": false
 }
