@@ -1,16 +1,22 @@
 {
   "schema": "PROJECT_BRAIN_R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V7",
   "date": "2026-10-08",
-  "status": "R3_CONTROL_LOOP_SUFFICIENTLY_CLOSED__CURRENT_BYTES_RESEALED__EXECUTABLE_CROSS_ROOT_HANDOFF",
-  "subject_main_head_before_receipt": "d5245d72db387d3c488cf67d65fbff0a675db096",
+  "status": "R3_CONTROL_LOOP_SUFFICIENTLY_CLOSED__CURRENT_BYTES__EXECUTABLE_FRONTIER_HANDOFF__IMMUTABLE_VERIFICATION_AUTHORITY",
+  "subject_main_head": "c9c649fdb7956a038bafcbd56095be9490f97613",
   "root": "R3_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_LOOP",
   "exact_live_blobs": {
     "canonical/runtime/autonomous_verified_self_improvement_v1.py": "ea80a2f32142448b86816e169b6aeb7875d0f583",
-    "canonical/runtime/r3_improvement_queue_driver_v1.py": "d0164f0b48ac4db6a6c7e406d4750a080423781e",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "9f50f3faae4f99926d983649ad1d644ec66767c2",
     "canonical/runtime/r3_independent_learning_verifier_v1.py": "b38b5315ef79a215976144866514cb2a95076c9e",
     "canonical/runtime/r3_bound_success_adapter_v1.py": "8c73e1ab3486df9ed56fff778ec35401720eb1e7",
+    "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py": "dc1412451d3dbc6747fd51388137a3ac1bba0d4b",
     "canonical/runtime/r3_raw_success_adapter_v1.py": "80a2599a31501db18754e913b763254966b4923e",
+    "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py": "3afceda23369a23b2619aabdc8a06f4e749be6c5",
     "canonical/runtime/unified_cognitive_fabric_v1.py": "876e32b049062d6ae7a7cb36036e78d0c423f2b1"
+  },
+  "exact_regression_blobs": {
+    "canonical/tests/test_r3_improvement_queue_driver_v1.py": "d9b3862185f9fb6ac4e3894fdf4ca5f63e94b89d",
+    "canonical/tests/test_r3_improvement_cycle_fabric_v1.py": "2cd0a5e278e3eb0b9a76ff7f77bea68f401faaeb"
   },
   "closure": {
     "experience_capture": true,
@@ -37,16 +43,22 @@
     "starvation_prevention": true,
     "unsupported_success_truthful_parking": true,
     "verifier_frontier_gap_creates_durable_cross_root_handoff": true,
-    "frontier_handoff_executable_when_acquisition_provider_available": true,
-    "provider_self_certification_without_frontier_change_rejected": true,
-    "same_provider_same_frontier_acquisition_retry_backoff": true,
+    "frontier_acquisition_handoff_is_executable_when_provider_is_supplied": true,
+    "provider_success_cannot_self_certify_frontier_change": true,
+    "adapter_frontier_change_requires_runtime_activation_before_reopen": true,
+    "activated_adapter_modules_bound_to_exact_repository_origins": true,
+    "verification_authority_partitioned_from_adapter_frontier": true,
+    "acquisition_cannot_rewrite_verification_authority": true,
+    "external_adapter_cannot_override_changed_verification_authority": true,
     "original_success_replay_forbidden_for_frontier_acquisition": true,
-    "parked_success_reopens_only_after_verified_frontier_change_or_external_authority": true
+    "parked_success_reopens_only_after_admitted_active_frontier_change_or_external_verification_authority": true
   },
   "total_disposition": {
     "verified_learnable_experience": "VERIFY__GENERALIZE_WHEN_PROVED__COMPRESS__PARETO_ADMIT__REUSE",
     "failed_experience": "DIAGNOSE__REPAIR_OR_INVENT__REPLAY_ONLY_IF_SAFE__VERIFY_OR_REJECT",
-    "success_with_current_verifier_gap": "PARK__EMIT_EXECUTABLE_ROOT1_ACQUISITION_HANDOFF__REOPEN_ONLY_AFTER_OWNED_FRONTIER_CHANGE_OR_EXTERNAL_AUTHORITY",
+    "success_with_current_adapter_gap": "PARK__EMIT_R1_ADAPTER_ACQUISITION_HANDOFF__EXECUTE_PROVIDER_IF_AVAILABLE__RECOMPUTE_BYTES__ACTIVATE_EXACT_ORIGIN_ADAPTERS__REOPEN_ONLY_IF_VERIFICATION_AUTHORITY_IS_UNCHANGED",
+    "success_with_external_verification_authority": "REOPEN_ONLY_WHEN_EXTERNAL_VERIFICATION_AUTHORITY_IS_EXPLICITLY_SUPPLIED",
+    "attempted_verifier_authority_rewrite": "REJECT__KEEP_SUCCESS_PARKED__DO_NOT_ACTIVATE_OR_PROMOTE",
     "genuinely_observationally_indistinguishable_evidence": "WAIT_FOR_NEW_DISTINGUISHING_EVIDENCE_ONLY_AFTER_INSEPARABILITY_IS_ACTUALLY_PROVED",
     "counterexample_to_learned_skill": "QUARANTINE__CONTRACT_SCOPE_OR_REVERIFY__DO_NOT_BLINDLY_REUSE"
   },
@@ -57,17 +69,19 @@
       "FAIL_CLOSED_VERIFICATION_AND_PROMOTION",
       "GENERALIZATION_COMPRESSION_PARETO_AND_REUSE",
       "DETECTION_OF_VERIFICATION_FRONTIER_GAPS",
-      "DURABLE_NONREPLAYING_ROOT1_HANDOFF",
-      "EXECUTION_OF_SUPPLIED_VERIFIER_FRONTIER_ACQUISITION_PROVIDER",
-      "INDEPENDENT_RECOMPUTATION_OF_OWNED_VERIFIER_FRONTIER_AFTER_PROVIDER_RETURN",
-      "AUTOMATIC_REOPEN_ONLY_AFTER_FRONTIER_CHANGE"
+      "NONREPLAYING_HANDOFF",
+      "EXECUTION_OF_A_SUPPLIED_FRONTIER_ACQUISITION_PROVIDER",
+      "INDEPENDENT_RECOMPUTATION_OF_OWNED_FRONTIER_BYTES",
+      "EXACT_REPOSITORY_ORIGIN_BINDING_AND_RUNTIME_ADAPTER_ACTIVATION",
+      "IMMUTABILITY_OF_EXISTING_VERIFICATION_AUTHORITY_DURING_ADAPTER_ACQUISITION",
+      "AUTOMATIC_REOPEN_AFTER_ADMITTED_ACTIVE_FRONTIER_CHANGE"
     ],
     "root1_owns": [
-      "SUPPLY_OR_BIND_A_VERIFIED_ACQUISITION_WORKER_CAPABLE_OF_CONSTRUCTING_OR_ACQUIRING_THE_MISSING_INDEPENDENT_READONLY_VERIFIER_OR_ADAPTER"
+      "SUPPLY_OR_CONSTRUCT_A_MISSING_INDEPENDENTLY_VERIFIABLE_READONLY_SUCCESS_ADAPTER_CAPABILITY"
     ],
-    "canonical_default_root1_acquisition_provider_present": false,
     "boundary_is_not_a_success_claim_for_root1": true,
-    "r3_does_not_treat_provider_self_report_as_authority": true
+    "canonical_default_root1_acquisition_provider_present": false,
+    "no_default_universal_root1_provider_claim": true
   },
   "evidence_boundary": {
     "theorem": "R3_OBSERVABILITY_BOUNDARY_THEOREM_20261008_V1",
@@ -76,56 +90,56 @@
     "missing_current_adapter_does_not_prove_identical_evidence": true,
     "information_theoretic_nonlearnability_requires_actual_observational_inseparability_proof": true
   },
-  "supersedes": {
-    "document": "canonical/verification/R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V6.json",
-    "reason": "V6 exact queue-driver and Unified Fabric blob bindings became stale after executable frontier-handoff integration.",
-    "preserved": [
-      "TRUTHFUL_OBSERVABILITY_BOUNDARY",
-      "FAIL_CLOSED_PROMOTION",
-      "PARK_AND_REOPEN",
-      "BOUND_AND_RAW_READBACK",
-      "AUTONOMOUS_QUEUE_DRAIN",
-      "NO_SAME_EVIDENCE_RETRY",
-      "EXPLICIT_ROOT1_BOUNDARY"
-    ],
-    "newly_bound_in_v7": [
-      "CURRENT_R3_DRIVER_BLOB",
-      "CURRENT_UNIFIED_FABRIC_BLOB",
-      "EXECUTABLE_FRONTIER_ACQUISITION_PROVIDER_INTERFACE",
-      "FRONTIER_BYTE_CHANGE_REQUIRED_FOR_REOPEN",
-      "ACQUISITION_SELF_CERTIFICATION_REJECTION"
-    ]
-  },
   "verification_receipts": {
-    "executable_frontier_handoff": {
-      "path": "canonical/verification/R3_EXECUTABLE_VERIFICATION_FRONTIER_HANDOFF_VERIFY_20261008_V1.json",
-      "result": "24_OF_24_FOCUSED_TESTS_PASS"
+    "executable_frontier_handoff_current_bytes": {
+      "path": "canonical/verification/R3_VERIFICATION_FRONTIER_HANDOFF_VERIFY_20261008_V2.json",
+      "git_blob_sha": "0baf85900c74807539bd53d646f15554d33b6eb9",
+      "result": "26_OF_26_DRIVER_PASS__4_OF_4_FABRIC_WIRING_PASS"
     },
     "observability_truth_repair": {
       "path": "canonical/verification/R3_OBSERVABILITY_TRUTH_BOUNDARY_REPAIR_VERIFY_20261008_V1.json",
-      "result": "17_OF_17_PASS"
-    },
-    "prior_frontier_handoff": {
-      "path": "canonical/verification/R3_VERIFICATION_FRONTIER_HANDOFF_VERIFY_20261008_V1.json",
-      "result": "18_OF_18_PASS"
+      "preserved_from_v6": true
     }
   },
   "verification_truth": {
-    "queue_driver_focused_suite": "20_OF_20_PASS_ON_EXECUTABLE_HANDOFF_BYTES",
+    "queue_driver_focused_suite": "26_OF_26_PASS_ON_CURRENT_DRIVER_BYTES",
     "fabric_forwarding_suite": "4_OF_4_PASS_ON_EXACT_CURRENT_FABRIC_AND_TEST_BYTES_WITH_IMPORT_BOUNDARY_STUBS",
+    "queue_driver_py_compile": "PASS",
     "private_github_actions": "ZERO_STEP_RUNNER_FAILURES__NO_CODE_VERDICT",
     "current_runtime_blobs_explicitly_bound": true
   },
+  "supersedes": {
+    "document": "canonical/verification/R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V6.json",
+    "reasons": [
+      "V6_BINDS_PRE_EXECUTABLE_HANDOFF_QUEUE_DRIVER_BYTES",
+      "V6_BINDS_PRE_CURRENT_FABRIC_BYTES",
+      "CURRENT_DRIVER_ADDS_RUNTIME_ADAPTER_ACTIVATION_BEFORE_REOPEN",
+      "CURRENT_DRIVER_ADDS_EXACT_REPOSITORY_MODULE_ORIGIN_BINDING",
+      "CURRENT_DRIVER_ADDS_ADAPTER_FRONTIER_AND_VERIFICATION_AUTHORITY_PARTITION",
+      "CURRENT_DRIVER_REJECTS_VERIFICATION_AUTHORITY_REWRITE_DURING_ACQUISITION",
+      "V7_BINDS_CURRENT_REGRESSION_BYTES_AND_FRESH_ISOLATED_EXECUTION_EVIDENCE"
+    ],
+    "preserved_from_v6": [
+      "OBSERVABILITY_THEOREM",
+      "FAIL_CLOSED_PROMOTION",
+      "PARK_AND_REOPEN_MECHANISM",
+      "BOUND_AND_RAW_READBACK_PATHS",
+      "AUTONOMOUS_QUEUE_DRAIN",
+      "NO_SAME_EVIDENCE_RETRY",
+      "ROOT1_CROSS_ROOT_BOUNDARY"
+    ]
+  },
   "hard_nonclaims": [
     "NO_CLAIM_ALL_REALITY_IS_OBSERVABLE",
-    "NO_CLAIM_EVERY_MISSING_VERIFIER_CAPABILITY_IS_ACQUIRABLE",
-    "NO_CLAIM_ROOT1_ALREADY_SUPPLIES_A_DEFAULT_ACQUISITION_PROVIDER",
+    "NO_CLAIM_EVERY_MISSING_SUCCESS_ADAPTER_IS_AUTOMATICALLY_CONSTRUCTIBLE",
+    "NO_CLAIM_AN_ACQUISITION_PROVIDER_IS_AUTOMATICALLY_AVAILABLE_FOR_EVERY_FRONTIER_GAP",
     "NO_CLAIM_ROOT1_IS_CLOSED_BY_THIS_R3_RESULT",
+    "NO_CLAIM_VERIFICATION_AUTHORITY_CAN_BE_CHANGED_BY_ADAPTER_ACQUISITION",
     "NO_CLAIM_ARBITRARY_OPEN_WORLD_SUCCESS_CAN_BE_CERTIFIED_WITHOUT_DISTINGUISHING_EVIDENCE",
     "NO_SELF_CERTIFICATION",
     "NO_TERMINAL_GOAL_CREDIT"
   ],
-  "current_truth": "R3 ITSELF HAS A FAIL_CLOSED COMPOUNDING CONTROL LOOP OVER AVAILABLE EVIDENCE AND CAPABILITIES, INCLUDING AN EXECUTABLE CROSS_ROOT VERIFIER_FRONTIER_ACQUISITION INTERFACE. WHEN AN ACQUISITION PROVIDER IS SUPPLIED, R3 RECOMPUTES THE OWNED FRONTIER BYTES AND REOPENS PARKED SUCCESS ONLY IF THE FRONTIER ACTUALLY CHANGED. CANONICAL RUNTIME DOES NOT YET SUPPLY A DEFAULT ROOT1 ACQUISITION PROVIDER; THAT PROVIDER CAPABILITY REMAINS A ROOT1 RESPONSIBILITY, NOT AN R3 PROMOTION OR VERIFICATION GAP.",
+  "current_truth": "R3 HAS A CURRENT-BYTE, FAIL-CLOSED AUTONOMOUS COMPOUNDING CONTROL LOOP OVER EXPERIENCE FOR WHICH DISTINGUISHING EVIDENCE AND VERIFICATION AUTHORITY EXIST. WHEN THE OWNED SUCCESS-ADAPTER FRONTIER IS INSUFFICIENT, R3 PARKS THE EXPERIENCE, EMITS A NONREPLAYING ROOT1 HANDOFF, CAN EXECUTE A SUPPLIED ACQUISITION WORKER, RECOMPUTES THE OWNED FRONTIER ITSELF, REQUIRES EXACT-REPOSITORY RUNTIME ACTIVATION, FORBIDS CHANGES TO VERIFICATION AUTHORITY, AND REOPENS LEARNING ONLY AFTER THAT ADMITTED ACTIVE FRONTIER CHANGE. CONSTRUCTION OR SUPPLY OF A MISSING ADAPTER REMAINS A ROOT1 RESPONSIBILITY; UNOBSERVABLE REALITY REMAINS AN INFORMATION BOUNDARY.",
   "incremental_spend_usd": 0,
   "terminal_authority": false,
   "terminal_credit_delta": 0
