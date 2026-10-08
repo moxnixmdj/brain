@@ -685,6 +685,83 @@ def _extract_policy_gap(decision: Mapping[str, Any]) -> dict[str, Any] | None:
     selected_policy_id = loop_detail.get("selected_policy_id")
     if not isinstance(selected_policy_id, str) or not selected_policy_id:
         selected_policy_id = loop.get("selected_policy_id")
+
+    cegar = loop_detail.get("cegar")
+    cegar = cegar if isinstance(cegar, Mapping) else {}
+    authenticated_rows = cegar.get("authenticated_policy_adequacy", [])
+    rejected_rows = cegar.get("rejected_policy_adequacy_bindings", [])
+
+    authenticated_policy_ids: list[str] = []
+    if isinstance(authenticated_rows, list):
+        for row in authenticated_rows:
+            if not isinstance(row, Mapping):
+                continue
+            policy_id = row.get("policy_id")
+            if (
+                isinstance(policy_id, str)
+                and policy_id
+                and policy_id not in authenticated_policy_ids
+            ):
+                authenticated_policy_ids.append(policy_id)
+
+    rejected_policy_candidates: list[dict[str, Any]] = []
+    if isinstance(rejected_rows, list):
+        for row in rejected_rows:
+            if not isinstance(row, Mapping):
+                continue
+            policy_id = row.get("policy_id")
+            if not isinstance(policy_id, str) or not policy_id:
+                continue
+            compact = {"policy_id": policy_id}
+            reason = row.get("reason")
+            if isinstance(reason, str) and reason:
+                compact["reason"] = reason
+            rejected_policy_candidates.append(compact)
+
+    search_context = {
+        "authenticated_policy_ids": sorted(authenticated_policy_ids),
+        "rejected_policy_candidates": sorted(
+            rejected_policy_candidates,
+            key=lambda row: (row["policy_id"], row.get("reason", "")),
+        ),
+        "certified_common_policies": deepcopy(
+            cegar.get("certified_common_policies")
+            if isinstance(cegar.get("certified_common_policies"), list)
+            else []
+        ),
+        "uncovered_models": deepcopy(
+            cegar.get("uncovered_models")
+            if isinstance(cegar.get("uncovered_models"), list)
+            else []
+        ),
+        "conflicting_policy_region_witness": deepcopy(
+            cegar.get("conflicting_policy_region_witness")
+            if isinstance(cegar.get("conflicting_policy_region_witness"), list)
+            else None
+        ),
+        "selected_discriminator": deepcopy(
+            cegar.get("selected_discriminator")
+            if isinstance(cegar.get("selected_discriminator"), Mapping)
+            else None
+        ),
+        "alternative_resolving_discriminators": deepcopy(
+            cegar.get("alternative_resolving_discriminators")
+            if isinstance(cegar.get("alternative_resolving_discriminators"), list)
+            else []
+        ),
+        "decision_basis": deepcopy(
+            cegar.get("decision_basis")
+            if isinstance(cegar.get("decision_basis"), list)
+            else []
+        ),
+        "surviving_model_count": (
+            cegar.get("surviving_model_count")
+            if isinstance(cegar.get("surviving_model_count"), int)
+            and not isinstance(cegar.get("surviving_model_count"), bool)
+            else None
+        ),
+    }
+
     return {
         "loop_status": status,
         "loop_reason": loop.get("reason"),
@@ -696,6 +773,7 @@ def _extract_policy_gap(decision: Mapping[str, Any]) -> dict[str, Any] | None:
             else None
         ),
         "loop_detail": deepcopy(dict(loop_detail)),
+        "search_context": search_context,
     }
 
 
@@ -1065,9 +1143,12 @@ def run(
                         "required_artifact": policy_gap["required_artifact"],
                         "selected_policy_id": policy_gap.get("selected_policy_id"),
                         "loop_detail": policy_gap.get("loop_detail", {}),
+                        "search_context": policy_gap.get("search_context", {}),
                         "preferred_resolution_order": [
+                            "REPAIR_OR_REUSE_EXISTING_DECLARED_POLICY_BEFORE_INVENTION",
                             "CERTIFY_ONE_COMMON_BRAIN_OWNED_POLICY_IF_POSSIBLE",
                             "OTHERWISE_ADD_ONLY_ONE_POLICY_CHANGING_DISCRIMINATOR",
+                            "INVENT_A_NEW_POLICY_ONLY_IF_THE_CURRENT_AUTHENTICATED_SET_CANNOT_COVER_THE_CONFLICT_WITNESS",
                             "DO_NOT_BUILD_A_COMPLETE_WORLD_MODEL_UNLESS_REQUIRED",
                         ],
                         "policy_adequacy_authority": False,
