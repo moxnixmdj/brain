@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_R3_RUNTIME_FRONTIER_ACTIVATION_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__R3_RUNTIME_FRONTIER_ACTIVATION_AND_ORIGIN_BINDING__24_OF_24_FOCUSED_TESTS",
+  "subject_main_head_before_receipt": "2ff76a9aa8f6e5982e83e823fef9034abc1f74ea",
+  "exact_blobs": {
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "fab007cecb7053f9a2b82eb185ce833669d45db5",
+    "canonical/tests/test_r3_improvement_queue_driver_v1.py": "9e930361679a9de2706f94b1b87a33f3ee1824ab"
+  },
+  "isolated_verification": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "compile": "PASS",
+    "queue_driver_suite": {
+      "tests_run": 24,
+      "tests_passed": 24,
+      "tests_failed": 0,
+      "tests_errors": 0
+    }
+  },
+  "proved": {
+    "frontier_source_byte_change_alone_cannot_reopen_learning": true,
+    "activation_failure_keeps_success_parked": true,
+    "exact_frontier_modules_reload_before_reopen": true,
+    "module_origin_must_equal_exact_hashed_repo_path_before_reload": true,
+    "module_origin_must_equal_exact_hashed_repo_path_after_reload": true,
+    "different_checkout_or_pythonpath_origin_is_rejected": true,
+    "frontier_digest_rechecked_after_reload": true,
+    "provider_self_report_is_not_activation_authority": true,
+    "effect_replay_added": false,
+    "promotion_authority_granted": false,
+    "terminal_authority_granted": false
+  },
+  "activated_frontier_modules": [
+    "canonical.runtime.r3_bound_success_adapter_v1",
+    "canonical.runtime.r3_raw_success_adapter_v1",
+    "canonical.runtime.r3_bound_success_checkpoint_verifier_v1",
+    "canonical.runtime.r3_raw_success_checkpoint_verifier_v1",
+    "canonical.runtime.r3_independent_learning_verifier_v1"
+  ],
+  "truthful_boundary": {
+    "canonical_default_root1_acquisition_provider_present": false,
+    "arbitrary_dynamic_plugin_registration_claimed": false,
+    "root1_provider_availability_remains_cross_root": true
+  },
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
