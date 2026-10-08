@@ -8,6 +8,10 @@ from canonical.tests.test_aa_briefcase_scope_complete_dominance_v1 import (
     certificate,
     target,
 )
+from canonical.tests.test_aa_briefcase_minimal_owner_attestation_v1 import (
+    statement,
+    sig,
+)
 
 
 def score_result(score=1807):
@@ -38,6 +42,24 @@ class T(unittest.TestCase):
         self.assertFalse(out["official_owner_elo_claimed"])
         self.assertTrue(out["single_result_reused_across_predicates"])
         self.assertFalse(out["historical_epoch_rewritten"])
+
+    def test_minimal_owner_attestation_passes_both_aliases(self):
+        s = statement()
+        out = compile_current_epoch_noninferiority(
+            target(),
+            {
+                "mode": "MINIMAL_OWNER_ATTESTATION",
+                "payload": {
+                    "statement": s,
+                    "signature_verification": sig(s),
+                },
+            },
+        )
+        self.assertEqual(out["predicate_results"], {p: True for p in PREDICATES})
+        self.assertEqual(out["comparison_route"], "MINIMAL_OWNER_ATTESTATION")
+        self.assertFalse(out["numeric_elo_reconstruction_required"])
+        self.assertFalse(out["numeric_comparable_elo_used"])
+        self.assertFalse(out["official_owner_elo_claimed"])
 
     def test_score_route_still_works(self):
         out = compile_current_epoch_noninferiority(
