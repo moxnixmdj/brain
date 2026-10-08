@@ -211,17 +211,139 @@ class R3BoundSuccessReadonlyLearningV1Tests(unittest.TestCase):
             self.assertFalse(out["pass"])
             self.assertIn("DURABLE_ARTIFACT_HASH_MISMATCH", out["reason"])
 
-    def test_adapter_rejects_non_compiled_bound_success(self):
+    def test_adapter_rejects_raw_bound_without_complete_semantic_acceptance(self):
         with TemporaryDirectory() as td:
             root = Path(td)
             observation, replay, _ = self.material(root)
             replay["mode"] = "raw_bound"
+            observation["proof_capsule"]["material"]["semantic_acceptance_complete"] = False
             self.assertIsNone(
                 adapter.adapt(
                     {"observation": observation, "replay_context": replay},
                     repo_root=root,
                 )
             )
+
+    def test_semantically_accepted_raw_bound_success_adapts_and_reverifies(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            cid = "archive.tar_gz.create_from_manifest"
+            action = {
+                "type": "invoke_capability",
+                "args": {
+                    "capability_id": cid,
+                    "manifest_path": "manifest.json",
+                    "output_path": "bundle.tar.gz",
+                },
+            }
+            finish = {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}}
+            plan_sha = astra_runtime._controller_plan_sha256([action, finish])
+            raw_result = {
+                "output_verified": True,
+                "output_path": "bundle.tar.gz",
+                "output_sha256": "a" * 64,
+            }
+            checkpoint = {
+                "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+                "mission_id": "raw-task",
+                "step_id": "live-raw-goal-controller",
+                "plan_sha256": plan_sha,
+                "status": "COMPLETE",
+                "completed_actions": [
+                    {"cycle": 0, "plan": action, "result": raw_result},
+                    {"cycle": 1, "plan": finish, "result": {"summary": "RAW_GOAL_COMPLETE"}},
+                ],
+            }
+            checkpoint_path = root / "checkpoint.json"
+            checkpoint_path.write_text(json.dumps(checkpoint), encoding="utf-8")
+            acceptance = {
+                "schema": "PROJECT_BRAIN_RAW_GOAL_ARCHIVE_ACCEPTANCE_V1",
+                "pass": True,
+                "status": "PASS__EXACT_RAW_GOAL_ARCHIVE_ACCEPTED",
+                "goal_sha256": "b" * 64,
+                "task_contract_sha256": "c" * 64,
+                "accepted_obligation_ids": ["o1"],
+                "verified_output_path": "bundle.tar.gz",
+                "verified_output_sha256": "a" * 64,
+                "verified_archive_members": ["manifest.json"],
+                "semantic_acceptance_complete": True,
+                "acceptance_scope": "EXACT_ARCHIVE_MANIFEST_VERIFICATION_PATHS_GOAL_ONLY",
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+            observation = {
+                "observation_id": "observation:raw",
+                "proof_capsule": {
+                    "schema": "PROJECT_BRAIN_SUCCESS_PROOF_CAPSULE_V1",
+                    "material": {
+                        "source_schema": "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1",
+                        "source_status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+                        "task_id": "raw-task",
+                        "selected_plan": [cid],
+                        "controller_checkpoint": {
+                            "path": "checkpoint.json",
+                            "plan_sha256": plan_sha,
+                        },
+                        "semantic_acceptance_complete": True,
+                        "raw_goal_sha256": "b" * 64,
+                        "raw_task_contract_sha256": "c" * 64,
+                        "raw_acceptance_obligation_count": 1,
+                        "accepted_raw_obligation_ids": ["o1"],
+                        "compiled_capability_id": cid,
+                        "raw_goal_acceptance": acceptance,
+                    },
+                },
+            }
+            replay = {
+                "mode": "raw_bound",
+                "request": {
+                    "task_id": "raw-task",
+                    "goal": (
+                        "Create a tar.gz archive from the manifest manifest.json, "
+                        "including all its verification_paths files, and save it to bundle.tar.gz."
+                    ),
+                },
+            }
+            registry = {
+                cid: {
+                    "status": "VERIFIED_BOUND_CAPABILITY",
+                    "requires": ["manifest.json.available"],
+                    "provides": ["archive.tar_gz.create_from_manifest"],
+                    "incremental_spend_usd": 0,
+                }
+            }
+            with mock.patch.object(adapter, "load_verified_registry", return_value=registry):
+                adapted = adapter.adapt(
+                    {"observation": observation, "replay_context": replay},
+                    repo_root=root,
+                )
+            self.assertIsInstance(adapted, dict)
+            self.assertEqual(
+                adapted["problem"]["verification_kind"],
+                adapter.RAW_BOUND_VERIFICATION_KIND,
+            )
+            solver = adapted["solver_output"]
+            recomputed_contract = {
+                "pass": True,
+                "task_sha256": "b" * 64,
+                "task_contract_sha256": "c" * 64,
+            }
+            with (
+                mock.patch.object(verifier, "load_verified_registry", return_value=registry),
+                mock.patch.object(verifier, "compile_contract", return_value=recomputed_contract),
+                mock.patch.object(verifier, "verify_raw_acceptance", return_value=acceptance),
+            ):
+                out = verifier.verify_material(
+                    problem=adapted["problem"],
+                    episode=solver["current_episode"],
+                    trace=solver["trace"],
+                    fact_capsule_head_hash=solver["state_capsule_head_hash"],
+                    value_capsule_head_hash=solver["value_capsule_head_hash"],
+                    repo_root=root,
+                )
+            self.assertTrue(out["pass"], out)
+            self.assertFalse(out["execution_replayed"])
+            self.assertTrue(out["effect_outcomes_reverified"])
 
     def test_standard_episode_authenticator_accepts_bound_readback_receipt(self):
         with TemporaryDirectory() as td:
