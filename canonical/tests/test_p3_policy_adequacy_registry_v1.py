@@ -130,6 +130,7 @@ class P3PolicyAdequacyRegistryV1Tests(unittest.TestCase):
             {
                 "decision_basis": [P2_ATOM],
                 "formal_source_constraints": [x],
+                "proposed_refinements": [x],
             }
         )
         self.assertTrue(out["pass"], out)
