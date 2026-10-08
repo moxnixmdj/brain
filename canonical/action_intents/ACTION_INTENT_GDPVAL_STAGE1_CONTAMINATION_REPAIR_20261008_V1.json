@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_CONTAMINATION_REPAIR_PRECOMMIT_V1",
+  "date": "2026-10-08",
+  "status": "PRECOMMITTED_BEFORE_REPLACEMENT_PDF_TASK_SELECTION_OR_PROMPT_READ__ZERO_CREDIT",
+  "objective": "Repair the contamination of the September-30 professional-work stage-1 task set without cherry-picking or reading replacement task content.",
+  "prior_selection": {
+    "source_commit": "4246451c6203d2a2dc21e1b58feef0f473c64641",
+    "classes": ["XLSX", "PPTX", "TEXT_CONFIG"],
+    "state": "ALL_THREE_ORIGINAL_SELECTED_TASKS_SPENT_FOR_FRESH_PROMOTION_EVIDENCE_AFTER_TASK_SPECIFIC_RUBRIC_OR_MODEL_OUTPUT_SURFACES_WERE_EXPOSED_DURING_2026_10_08_LOOKUP"
+  },
+  "independent_metadata_reselection": {
+    "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2412,
+    "workflow_run_id": 37716850930,
+    "artifact_id": 11524296001,
+    "artifact_digest": "sha256:debc580f74b082b4dae4ea6643440ff0f8fc980dfe38116c0f609994c62a58f6",
+    "original_selector_exact_replay": true,
+    "replacement_xlsx_task_id": "17111c03-aac7-45c2-857d-c06d8223d6ad",
+    "replacement_pptx_task_id": "9a0d8d36-6233-4c76-9107-0d1f783c7340",
+    "text_config_candidate_count_after_exclusions": 0
+  },
+  "third_class_repair": {
+    "class": "PDF",
+    "why": "TEXT_CONFIG is exhausted under the frozen rule. Current Brain main now has independently verified from-scratch Markdown-to-PDF generation with semantic readback, plus bounded native PDF editing; PDF is therefore a current Brain-owned artifact mechanism suitable for cheap stage-1 falsification.",
+    "generation_evidence_commit": "8d6f6a4f2f2f97d2d9429a5c3c4b44ebf86f0fd6",
+    "native_edit_evidence_commit": "84d823378edd5d08cb0faf203f4c0dd37d5ef2b1"
+  },
+  "replacement_pdf_selection_rule": "Among the current public GDPval population, excluding the original four contaminated exclusions plus all three newly exposed September-30 stage-1 task IDs, restrict to tasks with <=3 reference files, 1-2 deliverable files, and at least one .pdf deliverable; choose the task with lexicographically smallest SHA256(task_id). Selection may inspect only task_id, sector, occupation, reference_files filenames/count, and deliverable_files filenames/count/extensions.",
+  "content_firewall_before_freeze": {
+    "prompt": "FORBIDDEN",
+    "rubric": "FORBIDDEN",
+    "gold_deliverable_content": "FORBIDDEN",
+    "prior_model_submission": "FORBIDDEN"
+  },
+  "repaired_stage1_classes": ["XLSX", "PPTX", "PDF"],
+  "stage1_credit": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
