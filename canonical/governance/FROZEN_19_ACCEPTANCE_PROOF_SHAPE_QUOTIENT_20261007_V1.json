@@ -262,12 +262,16 @@
       "current_matched_epoch_target_percent": 54.64,
       "current_owner_model": "Claude Opus 5.5",
       "current_owner_reasoning_effort": "medium",
-      "current_owner_harness": "claude-code",
       "current_owner_subset": "main",
       "current_owner_subset_task_count": 100,
       "historical_frozen_target_percent": 54.4,
       "owner_target_binding": "canonical/evidence/FRONTIERCODE_OPUS55_CURRENT_OWNER_TARGET_REFRESH_20261008_V1.json",
-      "rule": "CURRENT_EPOCH_BRAIN_RESULT_MAY_BE_COMPARED_TO_54_64_ONLY_IF_FRONTIERCODE_1_1_MAIN_TASK_POPULATION_HARNESS_GRADING_REVISION_AND_CONFIGURATION_ARE_MATCHED__54_4_REMAINS_THE_HISTORICAL_FROZEN_PREDICATE_VALUE__A_STRONGER_SCOPE_COMPLETE_PROOF_PREEMPTS_EITHER_SCALAR_ROUTE"
+      "rule": "CURRENT_EPOCH_BRAIN_RESULT_MAY_BE_COMPARED_TO_54_64_ONLY_IF_FRONTIERCODE_1_1_MAIN_TASK_POPULATION_GRADING_REVISION_SCORE_AGGREGATION_INTERNET_POLICY_AND_AN_OWNER_ADMISSIBLE_OR_SEPARATELY_PROVED_PROTOCOL_EQUIVALENT_BRAIN_HARNESS_CONFIGURATION_ARE MATCHED__LITERAL_CLAUDE_CODE_IDENTITY_IS_NOT_REQUIRED__54_4_REMAINS_THE_HISTORICAL_FROZEN_PREDICATE_VALUE__A_STRONGER_SCOPE_COMPLETE_PROOF_PREEMPTS_EITHER_SCALAR_ROUTE",
+      "current_owner_reference_harness": "claude-code",
+      "literal_same_harness_as_opus_required": false,
+      "brain_harness_requirement": "OWNER_ADMISSIBLE_OR_SEPARATELY_PROVED_PROTOCOL_EQUIVALENT",
+      "brain_harness_admissibility_currently_proved": false,
+      "harness_comparability_binding": "canonical/governance/FRONTIERCODE_HARNESS_COMPARABILITY_TRUTH_REPAIR_20261008_V1.json"
     }
   }
 }
