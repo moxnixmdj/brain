@@ -299,7 +299,7 @@ class R3BoundSuccessReadonlyLearningV1Tests(unittest.TestCase):
                     return_value={"candidate": True},
                 ),
             ):
-                out = driver.advance_once(state_path=state_path, repo_root=Path(td))
+                out = driver.advance_once(state_path=state_path, repo_root=driver.ROOT)
             self.assertTrue(out["pass"], out)
             self.assertTrue(out["progress"], out)
             provider = adapt_work.call_args.kwargs["success_episode_adapter_provider"]
