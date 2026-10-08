@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_R2_TRANSACTIONAL_TABULAR_DIRECT_ADEQUACY_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS__BOUNDED_TRANSACTIONAL_SQLITE_XLSX_ADEQUACY_FAMILY__COMPOSED_WITH_DOCX",
+  "branch": "r2-tabular-direct-adequacy-rebase-20261008",
+  "base_main_commit": "76faa3919e0c6e080dfb59b66e67e34c36e0e50b",
+  "exact_blobs": {
+    "tabular_runtime": "07fa3fd50913f08cb20997dcc8b316f841719f23",
+    "tabular_tests": "2ff807595404423a9194c230e071e93b54811e83",
+    "direct_runtime": "2c30b38ae33fddce27d24955b8a29a5c0881f397",
+    "direct_tests": "0f2603de23766266cc69395beba25d51044ce73e",
+    "docx_neighbor_runtime": "631fcf2aa82d090d1f3ade6199829f060b000937",
+    "docx_neighbor_tests": "f7590a66458d1cc96982a1ea3b6a746c7aa62abb",
+    "bound_capability_registry": "545e6b405e59a77d4fc22049e3e86a286843f63d",
+    "live_integrated_brain": "efb8dabf727d0fd98617f19fae96e85ec1c70003",
+    "lossless_raw_task_contract": "d54d5a2f7efa76b653d288f4f53da4883644baa6",
+    "goal_compiler": "960e347cf6db2ad755899809dbe182e2e455c8b7"
+  },
+  "isolated_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "tabular_standalone": {
+      "passed": 8,
+      "total": 8
+    },
+    "docx_neighbor": {
+      "passed": 5,
+      "total": 5
+    },
+    "composed_direct_dispatcher": {
+      "passed": 18,
+      "total": 18
+    },
+    "real_direct_semantic_replay": {
+      "sqlite": {
+        "pass": true,
+        "route_id": "DIRECT_ADEQUACY::TRANSACTIONAL_TABULAR_ARTIFACT_FAMILY_V1",
+        "producer_capability_id": "sqlite.table.create_from_json_records",
+        "verifier_capability_id": "sqlite.table.verify_against_json_records",
+        "producer_independent_verifier": true,
+        "verified_rows": 1,
+        "producer_sha256": "bf686579783bdf37e3d5e6793a786cff6eae584b6a66956e1e47b948555f3405",
+        "verifier_sha256": "bf686579783bdf37e3d5e6793a786cff6eae584b6a66956e1e47b948555f3405",
+        "semantic_acceptance_complete": true,
+        "actual_goal_satisfaction_verified": true,
+        "direct_adequacy_authority": true,
+        "retry_by_other_route_authorized": false
+      },
+      "xlsx": {
+        "pass": true,
+        "route_id": "DIRECT_ADEQUACY::TRANSACTIONAL_TABULAR_ARTIFACT_FAMILY_V1",
+        "producer_capability_id": "xlsx.table.create_from_json_records",
+        "verifier_capability_id": "xlsx.table.verify_against_json_records",
+        "producer_independent_verifier": true,
+        "verified_rows": 2,
+        "producer_sha256": "06a5a0fd7f54d8e02dd321766844349f2601403ef36f3a08443b9be5b4ea3c56",
+        "verifier_sha256": "06a5a0fd7f54d8e02dd321766844349f2601403ef36f3a08443b9be5b4ea3c56",
+        "semantic_acceptance_complete": true,
+        "actual_goal_satisfaction_verified": true,
+        "direct_adequacy_authority": true,
+        "retry_by_other_route_authorized": false
+      }
+    }
+  },
+  "provenance_boundary": {
+    "functional_semantic_replay_on_isolated_carrier": true,
+    "supplier_package_provenance_requalified": false,
+    "supplier_package_authority_source": "INHERITED_EXISTING_VERIFIED_BOUND_CAPABILITY_REGISTRY",
+    "reason": "THE_ISOLATED_CARRIER_USED_AVAILABLE_UBUNTU_PACKAGE_REVISIONS_FOR_REAL_REPLAY;THIS_RECEIPT DOES_NOT REPLACE THE EXISTING SUPPLIER-PACKAGE QUALIFICATION EVIDENCE"
+  },
+  "github_actions": {
+    "predecessor_pr_run_id": 37795996405,
+    "predecessor_attempts": 2,
+    "predecessor_head_sha": "0fa5d478d2a7d043da8d17a0984593c5697e3798",
+    "predecessor_classification": "FAILED_BEFORE_ANY_EXECUTED_STEP__NO_LOGS_OR_ARTIFACTS__NOT_CODE_EVIDENCE",
+    "exact_rebased_head_actions_credit": false
+  },
+  "proved": [
+    "EXACT_SQLITE_AND_XLSX_TABULAR_GRAMMARS_ONLY",
+    "EXACT_RAW_GOAL_SCOPED_POLICY_IDENTITY",
+    "ALREADY_VERIFIED_BOUND_PRODUCER_AND_INDEPENDENT_VERIFIER_IDENTITIES_REQUIRED",
+    "ONE_REPOSITORY_LOCAL_OUTPUT_TRANSACTION",
+    "FAILED_EXECUTION_OR_ACCEPTANCE_RESTORES_OR_REMOVES_OUTPUT",
+    "PRODUCER_AND_VERIFIER_MUST_BIND_THE_SAME_ACTUAL_ARTIFACT_HASH",
+    "DECLARED_COLUMNS_AND_ROW_COUNTS_MUST_MATCH_INDEPENDENT_ACCEPTANCE",
+    "SQLITE_TABLE_AND_SELECTED_STATUS_VALUE_MUST_MATCH_DECLARED_GOAL",
+    "ALL_LOSSLESS_RAW_OBLIGATIONS_ACCEPTED_ONLY_AFTER_FULL_PROOF",
+    "MATCHED_ROUTE_FAILURE_CANNOT_FALL_THROUGH_TO_ALTERNATE_EXECUTION",
+    "TABULAR_FAMILY_COMPOSES_WITH_EXISTING_DOCX_AND_CODEC_DIRECT_FAMILIES"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_TABULAR_ADEQUACY",
+    "NO_GENERAL_DATABASE_OR_SPREADSHEET_SEMANTIC_CLOSURE",
+    "NO_EXTERNAL_OR_IRREVERSIBLE_EFFECT_AUTHORITY",
+    "NO_SUPPLIER_PACKAGE_PROVENANCE_REQUALIFICATION_BY_THIS_RECEIPT",
+    "NO_GLOBAL_OPEN_WORLD_R2_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
