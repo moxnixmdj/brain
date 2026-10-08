@@ -125,6 +125,103 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertIn("UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12", out["surfaces"])
         self.assertIn("AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1", out["surfaces"])
 
+
+    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
+    @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
+    def test_compiled_bound_failure_is_durably_diagnosed(self, bound, integrate):
+        failure = {
+            "pass": False,
+            "status": "FAIL__CAPABILITY_OR_TASK_CONTRACT_GAP",
+            "failure_class": "MISSING_CAPABILITY_OR_COMPILED_TASK_CONTRACT",
+        }
+        bound.return_value = failure
+        integrate.return_value = {
+            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "pass": False,
+        }
+        out = brain.run({
+            "mode": "compiled_bound",
+            "task_id": "b-fail",
+            "initial_facts": [],
+            "target_effects": ["X"],
+        })
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["learning"]["status"],
+            "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+        )
+        integrate.assert_called_once_with(failure, state_path=None)
+
+    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
+    @patch("canonical.runtime.live_brain_runtime_v1._raw_bound_run")
+    def test_raw_bound_failure_is_durably_diagnosed(self, raw_bound, integrate):
+        failure = {
+            "pass": False,
+            "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+            "failure_class": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
+        }
+        raw_bound.return_value = failure
+        integrate.return_value = {
+            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "pass": False,
+        }
+        out = brain.run({
+            "mode": "raw_bound",
+            "request": {"task_id": "r-fail", "goal": "unknown"},
+        })
+        self.assertFalse(out["pass"])
+        integrate.assert_called_once_with(failure, state_path=None)
+
+    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
+    @patch("canonical.runtime.live_brain_runtime_v1._p3")
+    def test_specialized_failure_is_durably_diagnosed(self, p3, integrate):
+        p3.return_value = {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
+        }
+        integrate.return_value = {
+            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "pass": False,
+        }
+        out = brain.run({
+            "mode": "specialized",
+            "surface": "P3_REAL_CONTEXT_V12",
+            "payload": {"x": 1},
+        })
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["learning"]["status"],
+            "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+        )
+        observed = integrate.call_args.args[0]
+        self.assertFalse(observed["pass"])
+        self.assertEqual(
+            observed["reason"],
+            "SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
+        )
+
+    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
+    @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
+    def test_plain_success_without_verified_episode_is_not_promoted(self, bound, integrate):
+        bound.return_value = {
+            "pass": True,
+            "status": "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED",
+        }
+        out = brain.run({
+            "mode": "compiled_bound",
+            "task_id": "b-ok",
+            "initial_facts": [],
+            "target_effects": ["X"],
+        })
+        self.assertTrue(out["pass"])
+        self.assertEqual(
+            out["learning"]["status"],
+            "SUCCESS_OBSERVED__NO_VERIFIED_LEARNING_ARTIFACT",
+        )
+        self.assertFalse(out["learning"]["permanent_reuse_authorized"])
+        integrate.assert_not_called()
+
     def test_unknown_mode_fails_closed(self):
         out = brain.run({"mode": "invented"})
         self.assertFalse(out["pass"])
