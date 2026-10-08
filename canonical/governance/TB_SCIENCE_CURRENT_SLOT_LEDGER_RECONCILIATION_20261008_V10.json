@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_V10",
+  "date": "2026-10-08",
+  "status": "CURRENT_POST_RANK11_AUTHORITY_PREEXPOSURE__RANK11_UNTOUCHED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V9.json",
+    "git_blob_sha": "82edae7eeb3e5ea5e30fc9f239c1d95faf9d089d"
+  },
+  "authority_activation": {
+    "intent": {
+      "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK11_ONE_SHOT_20261008_V1.json",
+      "git_blob_sha": "91d29a0de0df505af85b8a0d3050cb3fce1e9dc1"
+    },
+    "authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK11_ONE_SLOT_EXECUTION_AUTHORITY_20261008_V1.json",
+      "git_blob_sha": "cdb7d5c6fe7fa028b557077a694346e64bafc434"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/TB_SCIENCE_RANK11_ACTIVE_AUTHORITY_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "4f3fcd9df21b793bcf719de8db709b6dad829324"
+    },
+    "merge_commit": "9dda31e1ab39ae8aba97a63048ff66cfedf12412"
+  },
+  "current_counts": {
+    "consumed_slots": 10,
+    "consumed_successes": 0,
+    "consumed_final_failures": 10,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 77,
+    "maximum_possible_successes_remaining": 200,
+    "minimum_required_success_rate_over_remaining_slots": 0.62,
+    "pass_still_mathematically_reachable": true,
+    "next_untouched_slot": {
+      "ledger_schedule_rank": 11,
+      "frozen_manifest_schedule_order": 10,
+      "slot_id": "terminal-bench-science/supraglacial-lake-classification::trial-0",
+      "task_digest": "sha256:4a57227f84340ff6e245c3f2efeb8dfb6fb44a89713223d8742433dd569f9e3a"
+    }
+  },
+  "rank11": {
+    "authority_active": true,
+    "action_intent_active": true,
+    "authority_independently_verified": true,
+    "execution_claim_active": false,
+    "public_activation_armed": false,
+    "task_started": false,
+    "result_present": false,
+    "slot_id": "terminal-bench-science/supraglacial-lake-classification::trial-0",
+    "task_digest": "sha256:4a57227f84340ff6e245c3f2efeb8dfb6fb44a89713223d8742433dd569f9e3a",
+    "rule": "RANK11_MAY_NOT_START_UNTIL_A_SEPARATE_EXACT_RUNNER_EXECUTION_CLAIM_AND_ARM_LAST_ACTIVATION_ARE_BOUND_AND_PREEXPOSURE_GATES_PASS"
+  },
+  "repaired_route": {
+    "agent_git_blob_sha": "99d6ba6edcfad425e4cb940e5b7b2ccd99f6cdab",
+    "planner_git_blob_sha": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "planner_timeout_s": 300,
+    "closure_manifest_git_blob_sha": "5c03f885c747e921265da4934783cf107d7de641",
+    "timeout300_verification_git_blob_sha": "72218ad1f50d8b29a273d7f32118ffb1d9cfb2b5",
+    "benchmark_task_exposure": 0
+  },
+  "hard_nonclaims": [
+    "NO_RANK11_TASK_START",
+    "NO_RANK11_RESULT",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
