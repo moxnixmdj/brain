@@ -96,6 +96,107 @@ def _verify_receipts(result: Mapping[str, Any], *, sandbox: Path) -> list[dict[s
     return checked
 
 
+def _readback_sandbox(effect_root: str | Path, rel: str) -> Path:
+    """Resolve an existing effect sandbox without creating or mutating anything."""
+    raw_root = Path(effect_root)
+    if raw_root.is_symlink():
+        raise EffectExecutionError("EFFECT_ROOT_SYMLINK_REJECTED")
+    root = raw_root.resolve(strict=True)
+    if not root.is_dir():
+        raise EffectExecutionError("EFFECT_ROOT_NOT_DIRECTORY")
+    safe_rel = _safe_rel(rel)
+    cursor = root
+    for part in PurePosixPath(safe_rel).parts:
+        cursor = cursor / part
+        if cursor.is_symlink():
+            raise EffectExecutionError("EFFECT_READBACK_PATH_SYMLINK_REJECTED")
+    sandbox = cursor.resolve(strict=True)
+    try:
+        sandbox.relative_to(root)
+    except ValueError as exc:
+        raise EffectExecutionError("EFFECT_READBACK_SANDBOX_ESCAPES_ROOT") from exc
+    if not sandbox.is_dir():
+        raise EffectExecutionError("EFFECT_READBACK_SANDBOX_NOT_DIRECTORY")
+    return sandbox
+
+
+def verify_outcome_readback(
+    *,
+    outcome: Mapping[str, Any],
+    expected_effect_outcome_sha256: str,
+    effect_root: str | Path,
+) -> dict[str, Any]:
+    """Independently re-read a recorded bounded filesystem effect without replaying it."""
+    try:
+        if not isinstance(outcome, Mapping):
+            raise EffectExecutionError("RECORDED_EFFECT_OUTCOME_INVALID")
+        expected_fields = {
+            "executor_id",
+            "tool_id",
+            "sandbox_rel",
+            "receipts",
+            "proposal_sha256",
+            "pack_git_blob_sha",
+            "prior_verification",
+        }
+        if set(outcome) != expected_fields:
+            raise EffectExecutionError("RECORDED_EFFECT_OUTCOME_FIELDS_INVALID")
+        if outcome.get("executor_id") != EXECUTOR_ID:
+            raise EffectExecutionError("RECORDED_EFFECT_EXECUTOR_INVALID")
+        tool_id = outcome.get("tool_id")
+        if tool_id not in ALLOWED_TOOL_IDS:
+            raise EffectExecutionError("RECORDED_EFFECT_TOOL_NOT_ALLOWED")
+        expected_digest = str(expected_effect_outcome_sha256 or "")
+        if len(expected_digest) != 64 or any(ch not in "0123456789abcdef" for ch in expected_digest):
+            raise EffectExecutionError("EXPECTED_EFFECT_OUTCOME_SHA256_INVALID")
+
+        sandbox_rel = _safe_rel(outcome.get("sandbox_rel"))
+        sandbox = _readback_sandbox(effect_root, sandbox_rel)
+        checked = _verify_receipts(
+            {"receipts": outcome.get("receipts")},
+            sandbox=sandbox,
+        )
+        reconstructed = {
+            "executor_id": EXECUTOR_ID,
+            "tool_id": tool_id,
+            "sandbox_rel": sandbox_rel,
+            "receipts": checked,
+            "proposal_sha256": outcome.get("proposal_sha256"),
+            "pack_git_blob_sha": outcome.get("pack_git_blob_sha"),
+            "prior_verification": outcome.get("prior_verification"),
+        }
+        actual_digest = sha256(
+            json.dumps(
+                reconstructed,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest()
+        if actual_digest != expected_digest:
+            raise EffectExecutionError("EFFECT_OUTCOME_DIGEST_MISMATCH")
+
+        return {
+            "schema": SCHEMA,
+            "status": "PASS__RECORDED_EFFECT_READBACK_REVERIFIED",
+            "pass": True,
+            "effect_outcome_sha256": actual_digest,
+            "outcome": reconstructed,
+            "readback_only": True,
+            "effect_replayed": False,
+            "terminal_authority": False,
+        }
+    except Exception as exc:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "errors": [type(exc).__name__ + ":" + str(exc)],
+            "readback_only": True,
+            "effect_replayed": False,
+            "terminal_authority": False,
+        }
+
+
 def execute(
     *,
     executor_id: str,
@@ -135,6 +236,14 @@ def execute(
             "tool_id": tool_id,
             "sandbox_rel": sandbox_rel,
             "receipts": checked,
+            "proposal_sha256": sha256(
+                json.dumps(
+                    proposal,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    ensure_ascii=False,
+                ).encode("utf-8")
+            ).hexdigest(),
             "pack_git_blob_sha": result.get("pack_git_blob_sha"),
             "prior_verification": result.get("prior_verification"),
         }
