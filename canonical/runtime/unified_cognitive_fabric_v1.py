@@ -10,9 +10,7 @@ from pathlib import Path
 from typing import Any, Callable, Mapping
 
 from canonical.runtime import live_integrated_brain_v1 as live_brain
-from canonical.runtime import general_adequate_decision_controller_v1 as adequate_decision
 from canonical.runtime import p3_real_context_v3_admission_v12 as p3
-from canonical.runtime import universal_verified_adaptive_solver_v12 as adaptive_solver
 from canonical.runtime import autonomous_verified_self_improvement_v1 as self_improvement
 from canonical.runtime import live_brain_runtime_v1 as live_runtime
 from canonical.runtime import h100_verified_capability_registry_v8 as h100_inference
@@ -33,11 +31,11 @@ SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
 ROOT = Path(__file__).resolve().parents[2]
 
 ENGINE_DESCRIPTORS = {
-    "RAW_GOAL": "live_integrated_brain_v1.run_raw_goal",
-    "COMPILED_TASK": "live_integrated_brain_v1.run",
-    "ADEQUATE_DECISION": "general_adequate_decision_controller_v1.run",
+    "RAW_GOAL": "live_brain_runtime_v1.run(raw_bound)",
+    "COMPILED_TASK": "live_brain_runtime_v1.run(compiled_bound)",
+    "ADEQUATE_DECISION": "live_brain_runtime_v1.run(decision)",
     "P3": "p3_real_context_v3_admission_v12.evaluate",
-    "ADAPTIVE_SOLVER": "universal_verified_adaptive_solver_v12.run",
+    "ADAPTIVE_SOLVER": "live_brain_runtime_v1.run(generic)",
     "LEARNING_EPISODE": "autonomous_verified_self_improvement_v1.run_learning_episode",
     "BOUND_CAPABILITY": "verified_bound_capability_execution_adapter_v1.execute",
     "H100_INFERENCE": "h100_verified_capability_registry_v8",
@@ -60,8 +58,40 @@ CROSS_ROOT_BOUNDARIES = (
 )
 
 
+CANONICAL_PUBLIC_ENTRYPOINT = "canonical.runtime.unified_cognitive_fabric_v1.run"
+SUBORDINATE_RUNTIME_ENTRYPOINT = "canonical.runtime.live_brain_runtime_v1.run"
+
+
 class CognitiveFabricError(ValueError):
     pass
+
+
+def _unwrap_subordinate_runtime(wrapper: Mapping[str, Any], inner_key: str) -> dict[str, Any]:
+    """Preserve the fabric's legacy inner-result contract without losing R3/repair state."""
+    if not isinstance(wrapper, Mapping):
+        raise CognitiveFabricError("SUBORDINATE_RUNTIME_RESULT_NOT_OBJECT")
+    inner = wrapper.get(inner_key)
+    if not isinstance(inner, Mapping):
+        return deepcopy(dict(wrapper))
+
+    out = deepcopy(dict(inner))
+    repaired = wrapper.get("pass") is True and inner.get("pass") is not True
+    if repaired:
+        out["pre_repair_status"] = inner.get("status")
+        out["status"] = wrapper.get("status")
+        out["pass"] = True
+
+    out["_live_runtime"] = {
+        "status": wrapper.get("status"),
+        "learning": deepcopy(wrapper.get("learning")),
+        "reuse_first": wrapper.get("reuse_first") is True,
+        "reused_skill_id": wrapper.get("reused_skill_id"),
+        "auto_repair_attempted": wrapper.get("auto_repair_attempted") is True,
+        "automatic_repair": deepcopy(wrapper.get("automatic_repair")),
+        "canonical_public_entrypoint": CANONICAL_PUBLIC_ENTRYPOINT,
+        "subruntime_entrypoint": SUBORDINATE_RUNTIME_ENTRYPOINT,
+    }
+    return out
 
 
 def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
@@ -164,7 +194,11 @@ def catalog() -> dict[str, Any]:
         "current_live_ownership_ontology_complete": ownership["provider_coverage_complete"],
         "r1_structural_closure": ownership["r1_structural_closure"],
         "known_r1_residuals": list(KNOWN_R1_RESIDUALS),
+        "known_unified_fabric_residuals": list(KNOWN_R1_RESIDUALS),
         "cross_root_boundaries": list(CROSS_ROOT_BOUNDARIES),
+        "canonical_public_entrypoint": CANONICAL_PUBLIC_ENTRYPOINT,
+        "subordinate_runtime_entrypoint": SUBORDINATE_RUNTIME_ENTRYPOINT,
+        "subordinate_runtime_public_authority": False,
         "single_front_door": True,
         "all_historical_brain_capabilities_unified": False,
         "terminal_authority": False,
@@ -199,30 +233,82 @@ def run(
             raise CognitiveFabricError("MODE_INVALID:" + mode)
 
         if mode == "RAW_GOAL":
-            out = live_brain.run_raw_goal(payload)
-        elif mode == "COMPILED_TASK":
-            out = live_brain.run(payload)
-        elif mode == "ADEQUATE_DECISION":
-            out = adequate_decision.run(
-                payload,
+            wrapped = live_runtime.run(
+                {
+                    "mode": "raw_bound",
+                    "request": deepcopy(dict(payload)),
+                    "state_path": options.get("state_path"),
+                    "learn": options.get("learn", True) is not False,
+                    "auto_repair": options.get("auto_repair", True) is not False,
+                    "repair_components": options.get("repair_components") or (),
+                },
                 repo_root=ROOT,
                 information_provider=information_provider,
                 proposal_provider=proposal_provider,
                 capability_expander=capability_expander,
             )
+            out = _unwrap_subordinate_runtime(wrapped, "raw_result")
+        elif mode == "COMPILED_TASK":
+            wrapped = live_runtime.run(
+                {
+                    "mode": "compiled_bound",
+                    "request": deepcopy(dict(payload)),
+                    "state_path": options.get("state_path"),
+                    "learn": options.get("learn", True) is not False,
+                    "auto_repair": options.get("auto_repair", True) is not False,
+                    "repair_components": options.get("repair_components") or (),
+                },
+                repo_root=ROOT,
+                information_provider=information_provider,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+            )
+            out = _unwrap_subordinate_runtime(wrapped, "raw_result")
+        elif mode == "ADEQUATE_DECISION":
+            wrapped = live_runtime.run(
+                {
+                    "mode": "decision",
+                    "request": deepcopy(dict(payload)),
+                    "state_path": options.get("state_path"),
+                    "known_absent_invalidators": options.get("known_absent_invalidators") or (),
+                    "learn": options.get("learn", True) is not False,
+                    "auto_repair": options.get("auto_repair", True) is not False,
+                    "repair_components": options.get("repair_components") or (),
+                },
+                repo_root=ROOT,
+                information_provider=information_provider,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+            )
+            out = _unwrap_subordinate_runtime(wrapped, "decision_output")
         elif mode == "P3":
             out = p3.evaluate(payload, repo_root=ROOT)
         elif mode == "ADAPTIVE_SOLVER":
-            out = adaptive_solver.run(
-                payload,
+            wrapped = live_runtime.run(
+                {
+                    "mode": "generic",
+                    "problem": deepcopy(dict(payload)),
+                    "state_path": options.get("state_path"),
+                    "episode_id": str(options.get("episode_id") or payload.get("task_id") or "fabric-episode"),
+                    "scope_id": str(options.get("scope_id") or "unified-cognitive-fabric"),
+                    "active_invalidators": options.get("active_invalidators") or (),
+                    "known_absent_invalidators": options.get("known_absent_invalidators") or (),
+                    "learn": options.get("learn", True) is not False,
+                    "auto_repair": options.get("auto_repair", True) is not False,
+                    "repair_components": options.get("repair_components") or (),
+                    "solver_kwargs": {
+                        "proposal_provider_id": str(options.get("proposal_provider_id") or "HOST_GENERAL_COGNITION_SUBSTRATE"),
+                        "proposal_provider_max_candidates": int(options.get("proposal_provider_max_candidates", 4)),
+                        "capability_expander_id": str(options.get("capability_expander_id") or "HOST_CAPABILITY_EXPANDER"),
+                        "max_capability_expansions": int(options.get("max_capability_expansions", 4)),
+                    },
+                },
                 repo_root=ROOT,
+                information_provider=information_provider,
                 proposal_provider=proposal_provider,
                 capability_expander=capability_expander,
-                proposal_provider_id=str(options.get("proposal_provider_id") or "HOST_GENERAL_COGNITION_SUBSTRATE"),
-                proposal_provider_max_candidates=int(options.get("proposal_provider_max_candidates", 4)),
-                capability_expander_id=str(options.get("capability_expander_id") or "HOST_CAPABILITY_EXPANDER"),
-                max_capability_expansions=int(options.get("max_capability_expansions", 4)),
             )
+            out = _unwrap_subordinate_runtime(wrapped, "solver_output")
         elif mode == "H100_INFERENCE":
             operation = str(payload.get("operation") or "").strip().upper()
             if operation == "SNAPSHOT":
