@@ -651,6 +651,27 @@ def integrate_solver_output(
                 ),
                 resolved_by=sid,
             )
+            if _s(verified_skill.get("scope_relation")) == "EXACT":
+                _enqueue_improvement(
+                    state,
+                    kind="SEEK_VERIFIED_SCOPE_GENERALIZATION",
+                    priority=60,
+                    identity={"family_id": family, "skill_id": sid},
+                    payload={
+                        "family_id": family,
+                        "skill_id": sid,
+                        "source_scopes": sorted(source_scopes),
+                        "postconditions": postconditions,
+                        "required_result": "INDEPENDENTLY_VERIFIED_PROVEN_SUPERSET_SKILL",
+                    },
+                )
+            else:
+                _resolve_improvements(
+                    state,
+                    kind="SEEK_VERIFIED_SCOPE_GENERALIZATION",
+                    predicate=lambda work: work.get("identity", {}).get("family_id") == family,
+                    resolved_by=sid,
+                )
             admitted_ids = [
                 str(x.get("capability_id"))
                 for x in skill_admission.get("frontier", [])
