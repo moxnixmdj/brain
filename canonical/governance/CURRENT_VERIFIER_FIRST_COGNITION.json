@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_VERIFIER_FIRST_COGNITION_POINTER_V1",
   "date": "2026-10-08",
-  "status": "ACTIVE_PENDING_FINAL_INDEPENDENT_VERIFICATION_BINDING",
+  "status": "ACTIVE_CORE_INDEPENDENTLY_VERIFIED_WITH_EXPLICIT_LIVE_CARRIER_BOUNDARY",
   "policy": {
     "path": "canonical/governance/VERIFIER_FIRST_PROOF_CARRYING_COGNITION_20261008_V1.json"
   },
@@ -20,5 +20,9 @@
   "live_runtime": {
     "path": "canonical/runtime/live_brain_runtime_v1.py"
   },
-  "core_law": "VERIFIER_FIRST__PROOF_CARRYING__NON_SELF_CERTIFYING"
+  "core_law": "VERIFIER_FIRST__PROOF_CARRYING__NON_SELF_CERTIFYING",
+  "verification": {
+    "path": "canonical/verification/VERIFIER_FIRST_PROOF_CARRYING_COGNITION_VERIFY_20261008_V1.json",
+    "status": "PASS__CORE_VERIFIER_FIRST_COGNITION__R2_28_OF_28__R3_2_OF_2__LIVE_BRIDGE_PASS__FULL_LIVE_CARRIER_INCOMPLETE"
+  }
 }
