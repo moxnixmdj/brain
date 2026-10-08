@@ -36,6 +36,7 @@ from canonical.runtime.executable_skill_program_v7 import (
 )
 from canonical.runtime.executable_skill_verification_authenticator_v1 import (
     authenticate_and_verify as authenticate_skill_verification,
+    reauthenticate_record as reauthenticate_skill_record,
 )
 from canonical.runtime.universal_solver_episode_verification_authenticator_v1 import (
     authenticate as authenticate_episode_verification,
@@ -487,6 +488,8 @@ def _candidate_from_verified_skill(skill: Mapping[str, Any]) -> dict[str, Any]:
         "scope_relation",
         "scope_predicate",
         "verification_receipt",
+        "verification_binding",
+        "independent_verifier_id",
         "verified_skill",
         "reuse_authorized",
         "candidate_only",
@@ -1417,6 +1420,7 @@ def _select_active_skill(
     state: Mapping[str, Any],
     *,
     scope_id: str,
+    repo_root: str | Path = ROOT,
     known_absent_invalidators: Sequence[str] = (),
 ) -> dict[str, Any] | None:
     """Select a durable verified skill only when its exact executable skeleton fits.
@@ -1464,6 +1468,12 @@ def _select_active_skill(
         if not isinstance(skill, Mapping):
             continue
         if skill.get("verified_skill") is not True or skill.get("reuse_authorized") is not True:
+            continue
+        authority = reauthenticate_skill_record(skill, repo_root=repo_root)
+        if authority.get("pass") is not True:
+            continue
+        skill = authority.get("verified_skill")
+        if not isinstance(skill, Mapping):
             continue
         relation = _s(skill.get("scope_relation"))
         source_scopes = set(_items(skill.get("source_scopes")))
@@ -1904,6 +1914,7 @@ def run_learning_episode(
         problem,
         state,
         scope_id=scope,
+        repo_root=repo_root,
         known_absent_invalidators=known_absent_invalidators,
     )
     reuse_attempt = None
