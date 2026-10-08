@@ -33,6 +33,14 @@ def parse_manifest():
                     },
                 },
             },
+            {
+                "source_path": "week/scenario_note.txt",
+                "source_sha256": "c" * 64,
+                "parsed": {
+                    "format": "txt",
+                    "text": "Scenario sensitivity note for planning."
+                },
+            },
         ],
     }
 
@@ -93,8 +101,7 @@ class T(unittest.TestCase):
         sweep = discover_candidates(parse_manifest())
         review = review_for(sweep)
         low = next((c for c in sweep["candidates"] if not c["high_signal"]), None)
-        if low is None:
-            self.skipTest("fixture produced only high-signal candidates")
+        self.assertIsNotNone(low)
         row = next(r for r in review["rows"] if r["candidate_id"] == low["candidate_id"])
         row["action"] = "CONTEXT_ONLY"
         row.pop("target_ids", None)
