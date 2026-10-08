@@ -75,6 +75,7 @@ def _empty_state() -> dict[str, Any]:
         "skills": {},
         "pareto_frontiers": {},
         "failures": {},
+        "reuse": {},
         "stats": {
             "verified_episode_count": 0,
             "verified_skill_count": 0,
@@ -92,7 +93,8 @@ def load_state(path: str | Path = DEFAULT_STATE_PATH) -> dict[str, Any]:
     if not isinstance(doc, Mapping) or doc.get("schema") != STATE_SCHEMA:
         raise SelfImprovementError("SELF_IMPROVEMENT_STATE_SCHEMA_INVALID")
     state = deepcopy(dict(doc))
-    for key in ("episodes", "skills", "pareto_frontiers", "failures", "stats"):
+    state.setdefault("reuse", {})
+    for key in ("episodes", "skills", "pareto_frontiers", "failures", "reuse", "stats"):
         if not isinstance(state.get(key), Mapping):
             raise SelfImprovementError("SELF_IMPROVEMENT_STATE_FIELD_INVALID:" + key)
     return state
@@ -353,6 +355,181 @@ def _prior_verified_episodes(
     return out
 
 
+
+def _effect_may_have_occurred(out: Mapping[str, Any]) -> bool:
+    trace = out.get("trace")
+    if not isinstance(trace, Sequence) or isinstance(trace, (str, bytes)):
+        return False
+    return any(
+        isinstance(row, Mapping) and bool(row.get("effect_outcome_sha256"))
+        for row in trace
+    )
+
+
+def _select_active_skill(
+    problem: Mapping[str, Any],
+    state: Mapping[str, Any],
+    *,
+    scope_id: str,
+    known_absent_invalidators: Sequence[str] = (),
+) -> dict[str, Any] | None:
+    """Select a durable verified skill only when its exact executable skeleton fits.
+
+    V1 reuse is deliberately conservative:
+    - current scope must be one of the independently verified source scopes;
+    - every stored invalidator must be explicitly known absent;
+    - current capability ids and requires/provides must exactly match every skill step;
+    - the skill preconditions must already hold and its postconditions must cover
+      the current target effects.
+
+    This makes a stored skill a planning compression hint, never semantic authority.
+    The ordinary V10 effect semantics and execution verification still run.
+    """
+    if not isinstance(problem, Mapping):
+        raise SelfImprovementError("PROBLEM_NOT_OBJECT")
+    if not isinstance(known_absent_invalidators, Sequence) or isinstance(
+        known_absent_invalidators, (str, bytes)
+    ):
+        raise SelfImprovementError("KNOWN_ABSENT_INVALIDATORS_INVALID")
+
+    initial = set(_items(problem.get("initial_facts")))
+    targets = set(_items(problem.get("target_effects")))
+    absent = set(_items(known_absent_invalidators))
+    raw_caps = problem.get("capabilities")
+    if not isinstance(raw_caps, Sequence) or isinstance(raw_caps, (str, bytes)):
+        return None
+
+    cap_by_id: dict[str, Mapping[str, Any]] = {}
+    for cap in raw_caps:
+        if not isinstance(cap, Mapping):
+            return None
+        cid = _s(cap.get("id"))
+        if not cid or cid in cap_by_id:
+            return None
+        cap_by_id[cid] = cap
+
+    candidates: list[tuple[tuple[Any, ...], dict[str, Any]]] = []
+    for sid, record in state.get("skills", {}).items():
+        if not isinstance(record, Mapping) or record.get("active") is not True:
+            continue
+        skill = record.get("skill")
+        if not isinstance(skill, Mapping):
+            continue
+        if skill.get("verified_skill") is not True or skill.get("reuse_authorized") is not True:
+            continue
+        if scope_id not in _items(skill.get("source_scopes")):
+            continue
+        invalidators = set(_items(skill.get("invalidators")))
+        if not invalidators.issubset(absent):
+            continue
+        if not set(_items(skill.get("preconditions"))).issubset(initial):
+            continue
+        if not targets.issubset(set(_items(skill.get("postconditions")))):
+            continue
+
+        steps = skill.get("steps")
+        if not isinstance(steps, Sequence) or isinstance(steps, (str, bytes)) or not steps:
+            continue
+        available = set(initial)
+        op_ids: list[str] = []
+        valid = True
+        for raw_step in steps:
+            if not isinstance(raw_step, Mapping):
+                valid = False
+                break
+            op = _s(raw_step.get("op"))
+            cap = cap_by_id.get(op)
+            if cap is None or op in op_ids:
+                valid = False
+                break
+            step_inputs = set(_items(raw_step.get("inputs")))
+            step_outputs = set(_items(raw_step.get("outputs")))
+            if step_inputs != set(_items(cap.get("requires"))):
+                valid = False
+                break
+            if step_outputs != set(_items(cap.get("provides"))):
+                valid = False
+                break
+            if not step_inputs.issubset(available):
+                valid = False
+                break
+            available.update(step_outputs)
+            op_ids.append(op)
+        if not valid or not targets.issubset(available):
+            continue
+
+        metrics = record.get("pareto_metrics")
+        if not isinstance(metrics, Mapping):
+            metrics = {}
+        rank = (
+            int(metrics.get("latency", len(op_ids))),
+            int(metrics.get("compute", len(op_ids))),
+            int(metrics.get("memory", 0)),
+            -int(metrics.get("reliability", 0)),
+            str(sid),
+        )
+        candidates.append(
+            (
+                rank,
+                {
+                    "skill_id": str(sid),
+                    "skill": deepcopy(dict(skill)),
+                    "operation_ids": op_ids,
+                },
+            )
+        )
+
+    if not candidates:
+        return None
+    candidates.sort(key=lambda item: item[0])
+    return candidates[0][1]
+
+
+def _restrict_problem_to_skill(
+    problem: Mapping[str, Any],
+    selected: Mapping[str, Any],
+) -> dict[str, Any]:
+    op_ids = list(selected.get("operation_ids") or [])
+    wanted = set(op_ids)
+    raw_caps = problem.get("capabilities")
+    if not isinstance(raw_caps, Sequence) or isinstance(raw_caps, (str, bytes)):
+        raise SelfImprovementError("PROBLEM_CAPABILITIES_INVALID")
+    by_id = {
+        _s(cap.get("id")): deepcopy(dict(cap))
+        for cap in raw_caps
+        if isinstance(cap, Mapping) and _s(cap.get("id")) in wanted
+    }
+    if set(by_id) != wanted:
+        raise SelfImprovementError("ACTIVE_SKILL_CAPABILITY_SET_CHANGED")
+    derived = deepcopy(dict(problem))
+    derived["capabilities"] = [by_id[cid] for cid in op_ids]
+    derived["max_solver_cycles"] = min(
+        int(problem.get("max_solver_cycles", 256)),
+        len(op_ids) + 2,
+    )
+    return derived
+
+
+def _record_reuse_result(
+    *,
+    state_path: str | Path,
+    skill_id: str,
+    success: bool,
+    effect_may_have_occurred: bool,
+) -> None:
+    state = load_state(state_path)
+    row = dict(state["reuse"].get(skill_id) or {})
+    row["attempts"] = int(row.get("attempts", 0)) + 1
+    row["successes"] = int(row.get("successes", 0)) + (1 if success else 0)
+    row["pre_effect_failures"] = int(row.get("pre_effect_failures", 0)) + (
+        1 if (not success and not effect_may_have_occurred) else 0
+    )
+    row["effectful_failures"] = int(row.get("effectful_failures", 0)) + (
+        1 if (not success and effect_may_have_occurred) else 0
+    )
+    state["reuse"][skill_id] = row
+    _write_state(state, state_path)
+
 def run_learning_episode(
     problem: Mapping[str, Any],
     *,
@@ -366,8 +543,15 @@ def run_learning_episode(
     episode_verification_binding: Mapping[str, Any] | None = None,
     skill_verification_binding: Mapping[str, Any] | None = None,
     resume_binding: Mapping[str, Any] | None = None,
+    known_absent_invalidators: Sequence[str] = (),
 ) -> dict[str, Any]:
-    """Run V10 using durable prior verified episodes, then integrate the result."""
+    """Run verified learned routes first, then fall back safely to full V10 search.
+
+    A learned route is used only as a planning compression overlay. V10 still
+    authenticates semantics and verifies execution. If a reuse attempt fails after
+    any verified effect may already have occurred, full-search fallback is blocked
+    to prevent blind replay.
+    """
     eid = _s(episode_id)
     scope = _s(scope_id)
     if not eid or not scope:
@@ -375,6 +559,75 @@ def run_learning_episode(
 
     state = load_state(state_path)
     prior = _prior_verified_episodes(state, scope_id=scope, episode_id=eid)
+    selected = _select_active_skill(
+        problem,
+        state,
+        scope_id=scope,
+        known_absent_invalidators=known_absent_invalidators,
+    )
+    reuse_attempt = None
+
+    if selected is not None:
+        learned_problem = _restrict_problem_to_skill(problem, selected)
+        reuse_out = solver_v10.run(
+            learned_problem,
+            proposal_packets=proposal_packets,
+            repo_root=repo_root,
+            resolved_semantics_bindings=resolved_semantics_bindings,
+            effect_root=effect_root,
+            episode_id=eid,
+            scope_id=scope,
+            episode_verification_binding=episode_verification_binding,
+            prior_verified_episode_records=prior,
+            skill_verification_binding=skill_verification_binding,
+            resume_binding=resume_binding,
+        )
+        effectful = _effect_may_have_occurred(reuse_out)
+        _record_reuse_result(
+            state_path=state_path,
+            skill_id=selected["skill_id"],
+            success=reuse_out.get("pass") is True,
+            effect_may_have_occurred=effectful,
+        )
+        reuse_attempt = {
+            "skill_id": selected["skill_id"],
+            "operation_ids": list(selected["operation_ids"]),
+            "pass": reuse_out.get("pass") is True,
+            "effect_may_have_occurred": effectful,
+            "status": reuse_out.get("status"),
+        }
+        if reuse_out.get("pass") is True:
+            integrated = integrate_solver_output(reuse_out, state_path=state_path)
+            return {
+                "schema": SCHEMA,
+                "status": integrated["status"],
+                "pass": True,
+                "solver_output": reuse_out,
+                "learning": integrated,
+                "prior_verified_episode_count_used": len(prior),
+                "reuse_first": True,
+                "reused_skill_id": selected["skill_id"],
+                "reuse_attempt": reuse_attempt,
+                "fallback_used": False,
+                "terminal_authority": False,
+            }
+        if effectful:
+            integrated = integrate_solver_output(reuse_out, state_path=state_path)
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL_CLOSED__LEARNED_ROUTE_EFFECT_OCCURRED__NO_BLIND_REPLAY",
+                "pass": False,
+                "solver_output": reuse_out,
+                "learning": integrated,
+                "prior_verified_episode_count_used": len(prior),
+                "reuse_first": True,
+                "reused_skill_id": selected["skill_id"],
+                "reuse_attempt": reuse_attempt,
+                "fallback_used": False,
+                "fallback_blocked_effect_may_have_occurred": True,
+                "terminal_authority": False,
+            }
+
     out = solver_v10.run(
         problem,
         proposal_packets=proposal_packets,
@@ -396,5 +649,9 @@ def run_learning_episode(
         "solver_output": out,
         "learning": integrated,
         "prior_verified_episode_count_used": len(prior),
+        "reuse_first": selected is not None,
+        "reused_skill_id": selected["skill_id"] if selected is not None else None,
+        "reuse_attempt": reuse_attempt,
+        "fallback_used": selected is not None,
         "terminal_authority": False,
     }
