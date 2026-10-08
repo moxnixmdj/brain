@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_R2_TYPED_JSON_TRANSFORM_DIRECT_ADEQUACY_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__V18_REBASED_TYPED_JSON_TRANSFORM_FAMILY__DIRECT_REGRESSION_15_OF_15__FAMILY_AND_INTEGRATION_6_OF_6__MUTATION_FALSIFIER_PASS__LIVE_SEMANTIC_CROSSCHECK_2_OF_2__ZERO_CREDIT",
+  "subject": {
+    "family_runtime": {
+      "path": "canonical/runtime/r2_typed_json_transform_direct_adequacy_v1.py",
+      "git_blob_sha": "6c89b82321525689b27fd08b730a19567b864fe7"
+    },
+    "direct_router": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "5fae2670ece87b161abf251abf5b52e08c579851"
+    },
+    "family_tests": {
+      "path": "canonical/tests/test_r2_typed_json_transform_direct_adequacy_v1.py",
+      "git_blob_sha": "8ac550b00ff65c4d4aeda763ab24cc2bcf507a2c"
+    },
+    "integration_tests": {
+      "path": "canonical/tests/test_r2_typed_json_transform_direct_integration_v1.py",
+      "git_blob_sha": "91544c51b2ca53fadade2e2ec04e47ee32cade62"
+    },
+    "base_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V18"
+  },
+  "admitted_semantics": {
+    "input": "ONE_REPOSITORY_LOCAL_JSON_ARRAY_OF_OBJECTS",
+    "spec_schema": "PROJECT_BRAIN_TYPED_JSON_TRANSFORM_V1",
+    "operations": [
+      "select_eq",
+      "sort_by",
+      "project",
+      "take"
+    ],
+    "max_operations": 16,
+    "producer_capability_id": "json.query.jq",
+    "producer_execution": "VERIFIED_BOUND_CAPABILITY_EXECUTION_ADAPTER",
+    "independent_acceptance": "PYTHON_STDLIB_FULL_TRANSFORM_RECOMPUTATION",
+    "source_immutability_required": true,
+    "spec_immutability_required": true,
+    "transactional_output": true
+  },
+  "remote_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "current_v18_direct_router_regression": "15_OF_15_PASS",
+    "new_family_plus_router_integration": "6_OF_6_PASS",
+    "transient_source_mutation_falsifier": {
+      "status": "FAIL_CLOSED",
+      "transaction_rolled_back": true,
+      "preexisting_output_restored_byte_for_byte": true
+    }
+  },
+  "live_semantic_crosscheck": {
+    "jq_version": "1.8.1",
+    "cases": "2_OF_2_EXACT_SEMANTIC_EQUALITY_WITH_PYTHON_REFERENCE",
+    "case_1": "SELECT_EQ_THEN_ASCENDING_SORT_THEN_PROJECT_THEN_TAKE",
+    "case_2": "DESCENDING_NESTED_SORT_THEN_PROJECT_THEN_TAKE",
+    "registry_pinned_jq_version": "1.7.1-3ubuntu0.24.04.2",
+    "exact_registry_pinned_jq_binary_replayed": false,
+    "reason": "EXACT_UPDATE_PACKAGE_NOT_AVAILABLE_AT_THE_ORDINARY_UBUNTU_ARCHIVE_ENDPOINTS_PROBED_ON_THIS_CARRIER",
+    "existing_registry_independent_verification_reused": true
+  },
+  "v18_preservation": {
+    "markdown_pdf_route_preserved": true,
+    "canonical_v18_verification_path": "canonical/verification/R2_MARKDOWN_PDF_DIRECT_ADEQUACY_VERIFY_20261008_V2.json",
+    "canonical_v18_verification_git_blob_sha": "a89b7710298a84651874dcb8b975cbe05ac0709a",
+    "canonical_v18_current_main_regression": "34_OF_34_PASS",
+    "warm_verifier_full_v18_replay_completed": false,
+    "warm_verifier_blocker": "PRE_V18_GOAL_COMPILER_IMAGE__CONNECTOR_REFUSED_LOCAL_EXACT_COMPILER_PATCH",
+    "code_regression_inferred_from_that_blocker": false
+  },
+  "proved": [
+    "EXACT_TYPED_GOAL_AND_SPEC_PREFLIGHT_IS_SIDE_EFFECT_FREE",
+    "UNSUPPORTED_SPEC_OPERATIONS_FAIL_CLOSED",
+    "JQ_PRODUCER_EXECUTION_IS_CONTENT_ADDRESSED_BY_THE_BOUND_EXECUTION_ADAPTER",
+    "SUCCESS_REQUIRES_PRODUCER_INDEPENDENT_PYTHON_REFERENCE_RECOMPUTATION",
+    "SOURCE_AND_SPEC_BYTES_MUST_REMAIN_IMMUTABLE",
+    "MATCHED_FAILURE_ROLLS_BACK_THE_SINGLE_DECLARED_OUTPUT",
+    "MATCHED_FAILURE_CANNOT_FALL_THROUGH_TO_ANOTHER_DIRECT_ROUTE",
+    "ALL_LOSSLESS_RAW_GOAL_OBLIGATIONS_MUST_BE_ACCEPTED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_JQ_FILTERS_ARE_COVERED",
+    "NO_CLAIM_INPUTS_OTHER_THAN_BOUNDED_JSON_ARRAYS_OF_OBJECTS_ARE_COVERED",
+    "NO_CLAIM_EXACT_REGISTRY_PINNED_JQ_BINARY_WAS_REPLAYED_ON_THIS_CARRIER",
+    "NO_CLAIM_OPEN_WORLD_R2_COVERAGE_IS_COMPLETE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

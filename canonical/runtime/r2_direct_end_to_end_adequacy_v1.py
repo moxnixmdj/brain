@@ -25,6 +25,7 @@ from canonical.runtime import r2_docx_json_direct_adequacy_v1 as docx_json_adequ
 from canonical.runtime import r2_typed_decision_direct_adequacy_v1 as typed_decision_adequacy
 from canonical.runtime import r2_visual_code_direct_adequacy_v1 as visual_code_adequacy
 from canonical.runtime import r2_markdown_pdf_direct_adequacy_v1 as markdown_pdf_adequacy
+from canonical.runtime import r2_typed_json_transform_direct_adequacy_v1 as typed_json_transform_adequacy
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -39,6 +40,7 @@ DOCX_JSON_ROUTE_ID = "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1"
 TYPED_DECISION_ROUTE_ID = "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1"
 VISUAL_CODE_ROUTE_ID = "DIRECT_ADEQUACY::VISUAL_CODE_QR_CODE128_FAMILY_V1"
 MARKDOWN_PDF_ROUTE_ID = "DIRECT_ADEQUACY::PLAIN_MARKDOWN_PDF_FAMILY_V1"
+TYPED_JSON_TRANSFORM_ROUTE_ID = "DIRECT_ADEQUACY::TYPED_JSON_TRANSFORM_FAMILY_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -96,6 +98,13 @@ ROUTES = {
         "preflight": "r2_markdown_pdf_direct_adequacy_v1.preflight",
         "executor": "r2_markdown_pdf_direct_adequacy_v1.run",
         "acceptance": "SOURCE_HASH_STABILITY_PLUS_PRODUCER_INDEPENDENT_PYPDF_VISIBLE_TEXT_READBACK",
+    },
+    TYPED_JSON_TRANSFORM_ROUTE_ID: {
+        "capability_id": "json.query.jq",
+        "scope": "EXACT_TYPED_LOCAL_JSON_ARRAY_TRANSFORMS__SELECT_EQ_SORT_BY_PROJECT_TAKE",
+        "preflight": "r2_typed_json_transform_direct_adequacy_v1.preflight",
+        "executor": "r2_typed_json_transform_direct_adequacy_v1.run",
+        "acceptance": "PRODUCER_INDEPENDENT_PYTHON_STDLIB_FULL_TRANSFORM_RECOMPUTATION",
     },
     VISUAL_CODE_ROUTE_ID: {
         "capability_id": "DYNAMIC_VERIFIED_BOUND_VISUAL_CODE_PRODUCER",
@@ -179,6 +188,29 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "output_path": literal_json["output_path"],
             "records_sha256": literal_json["records_sha256"],
             "semantic_scope": ROUTES[LITERAL_JSON_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
+    typed_json_transform = typed_json_transform_adequacy.preflight(request)
+    if typed_json_transform.get("matched") is True:
+        if typed_json_transform.get("status") == "FAIL_CLOSED":
+            return {
+                **_base("FAIL_CLOSED", passed=False),
+                "matched": True,
+                "route_id": TYPED_JSON_TRANSFORM_ROUTE_ID,
+                "reason": typed_json_transform.get("reason"),
+            }
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": TYPED_JSON_TRANSFORM_ROUTE_ID,
+            "capability_id": typed_json_transform.get("capability_id"),
+            "policy_id": typed_json_transform.get("policy_id"),
+            "goal_sha256": typed_json_transform.get("goal_sha256"),
+            "spec_path": typed_json_transform.get("spec_path"),
+            "input_path": typed_json_transform.get("input_path"),
+            "output_path": typed_json_transform.get("output_path"),
+            "semantic_scope": ROUTES[TYPED_JSON_TRANSFORM_ROUTE_ID]["scope"],
             "preflight_execution_authority": False,
         }
 
@@ -351,6 +383,52 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
     pf = preflight(request)
     if pf.get("matched") is not True:
         return pf
+
+    if pf["route_id"] == TYPED_JSON_TRANSFORM_ROUTE_ID:
+        transform_result = typed_json_transform_adequacy.run(request)
+        if transform_result.get("pass") is not True:
+            return {
+                **_base(
+                    str(
+                        transform_result.get("status")
+                        or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"
+                    ),
+                    passed=False,
+                ),
+                "matched": True,
+                "route_id": pf["route_id"],
+                "capability_id": pf.get("capability_id"),
+                "goal_sha256": pf.get("goal_sha256"),
+                "execution_attempted": True,
+                "retry_by_other_route_authorized": False,
+                "typed_json_transform_adequacy": deepcopy(dict(transform_result)),
+                "reason": transform_result.get("reason"),
+            }
+        return {
+            **_base("PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED", passed=True),
+            "matched": True,
+            "route_id": pf["route_id"],
+            "capability_id": transform_result.get("capability_id"),
+            "selected_policy_id": transform_result.get("selected_policy_id"),
+            "goal_sha256": transform_result.get("goal_sha256"),
+            "semantic_scope": pf["semantic_scope"],
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "accepted_raw_obligation_ids": list(
+                transform_result.get("accepted_raw_obligation_ids") or []
+            ),
+            "raw_acceptance_obligation_count": transform_result.get(
+                "raw_acceptance_obligation_count"
+            ),
+            "acceptance_receipt": deepcopy(
+                dict(transform_result.get("acceptance_receipt") or {})
+            ),
+            "raw_result": deepcopy(dict(transform_result)),
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "authority_boundary": transform_result.get("authority_boundary"),
+        }
 
     if pf["route_id"] == MARKDOWN_PDF_ROUTE_ID:
         markdown_pdf_result = markdown_pdf_adequacy.run(request)
