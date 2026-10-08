@@ -43,10 +43,10 @@ _SUBCLASS = re.compile(
 )
 
 _UNSAFE_TERM_PREFIX = re.compile(
-    r"^(?:every|all|any|each|no|some|most|many|few|either|neither|this|that|these|those|he|she|it|they|we|you|i)\\b",
+    r"^(?:every|all|any|each|no|some|most|many|few|either|neither|this|that|these|those|he|she|it|they|we|you|i)\b",
     re.I,
 )
-_UNSAFE_TERM_BODY = re.compile(r"\\b(?:and|or|nor)\\b|[;/]", re.I)
+_UNSAFE_TERM_BODY = re.compile(r"\b(?:and|or|nor)\b|[;/]", re.I)
 
 def _term(value: Any) -> str | None:
     raw=" ".join(str(value if value is not None else "").strip().split())
