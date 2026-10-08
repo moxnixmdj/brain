@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GOAL_SCOPED_GROUNDED_FRONTIER_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS__ISOLATED_EXACT_BYTE_GOAL_SCOPE_REPLAY__10_OF_10",
+  "subject": {
+    "grounded_frontier": {
+      "path": "canonical/runtime/r2_grounded_candidate_policy_frontier_v1.py",
+      "git_blob_sha": "1959fb77c8f2ebc628e8c34fff47f577271b0d11"
+    },
+    "grounded_frontier_regression": {
+      "path": "canonical/tests/test_r2_grounded_candidate_policy_frontier_v1.py",
+      "git_blob_sha": "9750cf81c29b2abc49bb7ec65cc9368adae765a2"
+    },
+    "live_runtime": {
+      "path": "canonical/runtime/live_brain_runtime_v1.py",
+      "git_blob_sha": "20bdc305a9da26fa49c8c5b94bb9720b8aead020"
+    },
+    "live_runtime_regression": {
+      "path": "canonical/tests/test_live_brain_runtime_v1.py",
+      "git_blob_sha": "e6ff9976d28ccf4aa0b39016e0506a7e062c6e92"
+    },
+    "controller_regression": {
+      "path": "canonical/tests/test_general_adequate_decision_controller_v1.py",
+      "git_blob_sha": "3394a417efbdcf8b57ba81815a7f99d283034e03"
+    }
+  },
+  "isolated_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-r2-grounded-frontier-verify-20261008",
+    "sprite_id": "sprite-87368f21-5869-452d-b326-b420f5e99347",
+    "working_directory": "/home/sprite/actual",
+    "result": "PASS_10_OF_10"
+  },
+  "verified_properties": [
+    "KNOWN_VERIFIED_BOUND_CAPABILITY_STILL_GROUNDS_TO_A_CANDIDATE_POLICY",
+    "GROUNDED_POLICY_IDENTITY_IS_BOUND_TO_SHA256_OF_EXACT_RAW_GOAL_BYTES",
+    "SAME_CAPABILITY_WITH_DISTINCT_RAW_GOALS_PRODUCES_DISTINCT_POLICY_IDENTITIES",
+    "GOAL_SCOPING_DOES_NOT_GRANT_POLICY_ADEQUACY_AUTHORITY",
+    "GOAL_SCOPING_DOES_NOT_GRANT_SEMANTIC_TRUTH_AUTHORITY",
+    "GOAL_SCOPING_DOES_NOT_GRANT_EXECUTION_AUTHORITY",
+    "LIVE_REPAIR_PARSER_ACCEPTS_GOAL_SCOPED_POLICY_IDENTITIES",
+    "LEGACY_GROUNDED_POLICY_IDENTITIES_REMAIN_PARSEABLE_FOR_RECORDED_FAILURES",
+    "EXACT_RAW_GOAL_HASH_SURVIVES_COMPACT_POLICY_REPAIR_CONTEXT",
+    "SAME_CAPABILITY_WITH_DISTINCT_RAW_GOALS_PRODUCES_DISTINCT_ADEQUACY_REPAIR_TARGETS"
+  ],
+  "authority_consequence": {
+    "cross_goal_policy_identity_reuse_forbidden": true,
+    "positive_adequacy_coverage_credit_delta": 0,
+    "execution_authority": false,
+    "semantic_truth_authority": false,
+    "policy_adequacy_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_NEW_POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+    "NO_CLAIM_FULL_CANONICAL_TEST_SUITE_REPLAY",
+    "NO_CLAIM_OPEN_WORLD_POSITIVE_ACTION_COVERAGE_COMPLETE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
