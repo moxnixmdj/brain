@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "policy_id": "P2_INFORMATION_SAFE_EXPLICIT_CONTRACT_TOP_LAW_POLICY_V1",
+  "subject_git_blob_sha": "48dc83f2dd10aa2b6564c12262a646c84917a614",
+  "pass": true,
+  "status": "NORMALIZATION_VERIFIED_FROM_EXISTING_P2_TOP_LAW_PLUS_TWO_SPRITE_EXACT_AUTHENTICATOR_REPLAY__ZERO_SCOPE_WIDENING__ZERO_TERMINAL_CREDIT",
+  "exact_replay": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "result": "PASS__INDEPENDENTLY_VERIFIED_P2_TOP_LAW_POLICY_ADEQUACY_BOUND"
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "result": "PASS__INDEPENDENTLY_VERIFIED_P2_TOP_LAW_POLICY_ADEQUACY_BOUND"
+    }
+  ],
+  "exact_bound_inputs": {
+    "authenticator": {
+      "path": "canonical/runtime/p2_top_law_policy_adequacy_authenticator_v1.py",
+      "git_blob_sha": "ceb8f383c0760fd9d67b967e6edf528d6d6eff37"
+    },
+    "policy": {
+      "path": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+      "git_blob_sha": "ea8057b0eadac210c4f4378298df93ed233c5824"
+    },
+    "theorem": {
+      "path": "canonical/governance/P2_EXPLICIT_SEMANTIC_CONTRACT_UNIVERSAL_TOP_LAW_20261007_V1.json",
+      "git_blob_sha": "decd0d46538a213f2e169c00c83fae09191a7ed3"
+    },
+    "theorem_verification": {
+      "path": "canonical/verification/P2_EXPLICIT_SEMANTIC_CONTRACT_TOP_LAW_CONNECTOR_VERIFY_20261007_V1.json",
+      "git_blob_sha": "8375f545ff35ce519719467596bdf1bc15453174"
+    }
+  },
+  "verified": [
+    "THE_NORMALIZED_CERTIFICATE_PRESERVES_THE_EXACT_POLICY_ID",
+    "THE_NORMALIZED_CERTIFICATE_PRESERVES_THE_EXACT_POLICY_CONDITION_P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1",
+    "THE_EXACT_POLICY_BLOB_MATCHES_THE_THEOREM_BOUND_POLICY_BLOB",
+    "THE_EXISTING_P2_TOP_LAW_THEOREM_AND_ITS_INDEPENDENT_VERIFICATION_PASS_AUTHENTICATOR_CHECKS_ON_BOTH_SPRITES",
+    "THE_NORMALIZATION_ADDS_NO_MEMBERSHIP_SCOPE_OR_TERMINAL_CLAIM"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_PROFESSIONAL_SCOPE_COVER",
+    "NO_CLAIM_MEMBERSHIP_ATOM_IS_UNIVERSALLY_TRUE",
+    "NO_AA_BRIEFCASE_GDPVAL_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
