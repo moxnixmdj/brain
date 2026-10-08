@@ -116,6 +116,7 @@ def _verify_episode_work(
         prior_verified_episode_records=prior,
         generalization_episode_records=generalization,
         repo_root=repo_root,
+        effect_root=payload.get("effect_root"),
         episode_verification_provider=episode_verification_provider,
         skill_verification_provider=skill_verification_provider,
     )
