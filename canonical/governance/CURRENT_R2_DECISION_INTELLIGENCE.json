@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-08",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V21_THIRTEEN_DIRECT_ROUTES__TEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V22_FOURTEEN_DIRECT_ROUTES__ELEVEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -18,18 +18,18 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V21.json",
-    "git_blob_sha": "325b7ee1138bee3b3a08404c950c3a0782f369fe"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V22.json",
+    "git_blob_sha": "d50ad6d83aac76622e63b23001b9f2f42741e9f7"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V9.json",
-    "activation_git_blob_sha": "863ca7f1216c88ab6e8c6a315de0605238953cf9",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V10.json",
+    "activation_git_blob_sha": "f0e93250c840510697cf93453e44e736d349b203",
     "exact_cell_count": 3,
-    "bounded_family_count": 10,
-    "current_route_count": 13,
-    "current_activation_status": "THREE_EXACT_CELLS_PLUS_TEN_BOUNDED_FAMILIES",
+    "bounded_family_count": 11,
+    "current_route_count": 14,
+    "current_activation_status": "THREE_EXACT_CELLS_PLUS_ELEVEN_BOUNDED_FAMILIES",
     "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
-    "direct_runtime_git_blob_sha": "42b2710bd71021d198debb20194aac4ad46204f4",
+    "direct_runtime_git_blob_sha": "6eeab02898398e2f509c971e194722bf096ba546",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -70,11 +70,16 @@
         "path": "canonical/verification/R2_PYPI_PROVENANCE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
         "git_blob_sha": "16108ce6af5439f3685c53f3f0453f50aa0df8f6",
         "status": "PASS__PYPI_PROVENANCE_FAMILY__BRANCH_REGRESSION_22_OF_22__REAL_PYPDF_WHEEL_REDOWNLOAD_HASH_CONVERGENCE__ZERO_CREDIT"
+      },
+      {
+        "path": "canonical/verification/R2_EXACT_EVIDENCE_CLAIM_SUPPORT_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "bac9c5365981585db8fa6afcca7204c46a3394d1",
+        "status": "PASS__EXACT_GROUNDED_EVIDENCE_CLAIM_SUPPORT__BRANCH_REGRESSION_24_OF_24__ACTUAL_PRODUCER_DIRECT_REPLAY_PASS__TAMPER_NEGATIVE_PASS__ZERO_CREDIT"
       }
     ],
-    "latest_verification_path": "canonical/verification/R2_PYPI_PROVENANCE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
-    "latest_verification_git_blob_sha": "16108ce6af5439f3685c53f3f0453f50aa0df8f6",
-    "latest_verification_status": "PASS__PYPI_PROVENANCE_FAMILY__BRANCH_REGRESSION_22_OF_22__REAL_PYPDF_WHEEL_REDOWNLOAD_HASH_CONVERGENCE__ZERO_CREDIT"
+    "latest_verification_path": "canonical/verification/R2_EXACT_EVIDENCE_CLAIM_SUPPORT_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "latest_verification_git_blob_sha": "bac9c5365981585db8fa6afcca7204c46a3394d1",
+    "latest_verification_status": "PASS__EXACT_GROUNDED_EVIDENCE_CLAIM_SUPPORT__BRANCH_REGRESSION_24_OF_24__ACTUAL_PRODUCER_DIRECT_REPLAY_PASS__TAMPER_NEGATIVE_PASS__ZERO_CREDIT"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
@@ -101,7 +106,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__THIRTEEN_DIRECT_ROUTES__TEN_BOUNDED_FAMILIES__VERIFIED_CAPABILITY_ESCAPE_LIVE__STATE_KEYED_OBSERVATION_AND_CANONICAL_PYPI_PROVENANCE_LIVE",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__FOURTEEN_DIRECT_ROUTES__ELEVEN_BOUNDED_FAMILIES__VERIFIED_CAPABILITY_ESCAPE_LIVE__EXTERNAL_OBSERVATION_PROVENANCE_AND_EXACT_EVIDENCE_CLAIM_SUPPORT_LIVE",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -238,7 +243,7 @@
   "sufficient_closure": {
     "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V7.json",
     "git_blob_sha": "c78a157335c90864b01edffc03b8e19e1fc48f58",
-    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__TEN_BOUNDED_DIRECT_FAMILIES_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
+    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__ELEVEN_BOUNDED_DIRECT_FAMILIES_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
     "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY"
   },
   "policy_adequacy_capability_escape": {
@@ -411,5 +416,21 @@
     "all_four_hashes_equal": true,
     "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
     "global_supply_chain_provenance_claimed": false
+  },
+  "exact_evidence_claim_support_direct_adequacy": {
+    "path": "canonical/runtime/r2_exact_evidence_claim_support_direct_adequacy_v1.py",
+    "git_blob_sha": "1ee84b6e1fd4dad3296d034315936e21b2d6c658",
+    "verification_path": "canonical/verification/R2_EXACT_EVIDENCE_CLAIM_SUPPORT_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "verification_git_blob_sha": "bac9c5365981585db8fa6afcca7204c46a3394d1",
+    "route_id": "DIRECT_ADEQUACY::EXACT_GROUNDED_EVIDENCE_CLAIM_SUPPORT_FAMILY_V1",
+    "producer_capability_id": "evidence.claim_relation.generic_units.stdlib",
+    "branch_regression": "24_OF_24_PASS",
+    "actual_producer_direct_replay_pass": true,
+    "inherited_live_source_qualification_domains": [
+      "sqlite.org",
+      "rfc-editor.org"
+    ],
+    "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
+    "semantic_entailment_claimed": false
   }
 }
