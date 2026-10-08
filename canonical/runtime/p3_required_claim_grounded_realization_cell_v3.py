@@ -15,6 +15,7 @@ from typing import Any, Mapping
 
 from canonical.runtime.selected_support_truth_certificate_v5 import evaluate as support_truth
 from canonical.runtime import synthesis_grounded_expression_ir_v1 as realizer
+from canonical.runtime.synthesis_certified_visible_support_policy_v3 import INPUT_SCHEMA as V3_INPUT_SCHEMA
 
 SCHEMA="PROJECT_BRAIN_P3_REQUIRED_CLAIM_GROUNDED_REALIZATION_CELL_V3"
 _REQUIRED_CONSTRAINTS={
@@ -32,6 +33,38 @@ def _fail(reason:str,**detail:Any)->dict[str,Any]:
     }
     if detail: out["detail"]=detail
     return out
+
+# A positive admission may not silently project away requirements that can
+# change the required answer. This is a syntactic contract boundary, not proof
+# that every real-world user requirement has been represented upstream.
+_ALLOWED_PUBLIC_FIELDS = {"schema", "task"}
+_ALLOWED_TASK_FIELDS = {
+    "claims", "evidence", "audience_profile", "required_uncertainty_units",
+    "claim_order", "title",
+}
+_ALLOWED_CLAIM_FIELDS = {"claim_id", "text", "required", "include"}
+
+
+def validate_v3_contract_surface(public: Mapping[str, Any]) -> str | None:
+    """Reject unknown semantic obligations before any P3 positive route."""
+    if not isinstance(public, Mapping):
+        return "V3_INPUT_REQUIRED"
+    if public.get("schema") != V3_INPUT_SCHEMA:
+        return "V3_INPUT_SCHEMA_INVALID"
+    if set(public) - _ALLOWED_PUBLIC_FIELDS:
+        return "UNMODELED_V3_INPUT_FIELDS"
+    task = public.get("task")
+    if not isinstance(task, Mapping):
+        return "TASK_REQUIRED"
+    if set(task) - _ALLOWED_TASK_FIELDS:
+        return "UNMODELED_TASK_REQUIREMENTS"
+    claims = task.get("claims")
+    if isinstance(claims, list):
+        for row in claims:
+            if isinstance(row, Mapping) and set(row) - _ALLOWED_CLAIM_FIELDS:
+                return "UNMODELED_CLAIM_REQUIREMENTS"
+    return None
+
 
 def _support_provenance(evidence:list[Mapping[str,Any]], ids:set[str])->list[dict[str,str]]:
     out=[];seen=set()
@@ -65,6 +98,9 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
     public=payload.get("v3_input")
     if not isinstance(public,Mapping):
         return _fail("V3_INPUT_REQUIRED")
+    surface_failure=validate_v3_contract_surface(public)
+    if surface_failure is not None:
+        return _fail(surface_failure)
     task=public.get("task")
     if not isinstance(task,Mapping):
         return _fail("TASK_REQUIRED")
