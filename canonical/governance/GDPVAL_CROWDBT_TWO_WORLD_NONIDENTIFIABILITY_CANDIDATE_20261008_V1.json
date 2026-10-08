@@ -1,0 +1,16 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_CROWDBT_TWO_WORLD_NONIDENTIFIABILITY_CANDIDATE_V1",
+  "date":"2026-10-08",
+  "status":"CANDIDATE__EXECUTABLE_INFORMATION_LOWER_BOUND__ZERO_CREDIT_PENDING_INDEPENDENT_REPLAY",
+  "claim":"Holding fixed a public-compatible GDPval-AA v2.1 Crowd-BT structure, there exist two extensions that agree on the currently disclosed pre-Brain scoring structure and differ only in previously unobserved Brain pairwise judge outcomes, yet reverse Brain-vs-Opus ordering.",
+  "purpose":"Prove that exact scoring reconstruction, judge-quality recovery, or Elo algebra alone cannot decide Brain >= Opus before Brain-specific owner outcomes or a sound stronger target-relation bridge are bound.",
+  "runtime":"canonical/runtime/gdpval_crowdbt_two_world_nonidentifiability_v1.py",
+  "test":"canonical/tests/test_gdpval_crowdbt_two_world_nonidentifiability_v1.py",
+  "hard_nonclaims":[
+    "NO_CLAIM_THE_SYNTHETIC_GRAPH_IS_THE_REAL_AA_GRAPH",
+    "NO_CLAIM_THE_SYNTHETIC_JUDGE_QUALITIES_EQUAL_OWNER_FITS",
+    "NO_CLAIM_GDPVAL_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
