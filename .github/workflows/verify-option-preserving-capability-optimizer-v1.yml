@@ -1,0 +1,60 @@
+name: verify-option-preserving-capability-optimizer-v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/option_preserving_capability_optimizer_v1.py"
+      - "canonical/runtime/capability_first_scheduler_v1.py"
+      - "canonical/tests/test_option_preserving_capability_optimizer_v1.py"
+      - "canonical/tests/test_capability_first_scheduler_v1.py"
+      - "canonical/governance/OPTION_PRESERVING_CAPABILITY_OPTIMIZATION_20261008_V1.json"
+      - "canonical/governance/CURRENT_OPTION_PRESERVING_OPTIMIZATION.json"
+      - "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V1.json"
+      - "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
+      - "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json"
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+      - ".github/workflows/verify-option-preserving-capability-optimizer-v1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/option_preserving_capability_optimizer_v1.py"
+      - "canonical/runtime/capability_first_scheduler_v1.py"
+      - "canonical/tests/test_option_preserving_capability_optimizer_v1.py"
+      - "canonical/tests/test_capability_first_scheduler_v1.py"
+      - "canonical/governance/OPTION_PRESERVING_CAPABILITY_OPTIMIZATION_20261008_V1.json"
+      - "canonical/governance/CURRENT_OPTION_PRESERVING_OPTIMIZATION.json"
+      - "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V1.json"
+      - "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
+      - "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json"
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+      - ".github/workflows/verify-option-preserving-capability-optimizer-v1.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile exact runtime files
+        run: |
+          python -m py_compile canonical/runtime/option_preserving_capability_optimizer_v1.py
+          python -m py_compile canonical/runtime/capability_first_scheduler_v1.py
+      - name: Run option-preservation regression suite
+        run: python -m unittest canonical.tests.test_option_preserving_capability_optimizer_v1 canonical.tests.test_capability_first_scheduler_v1 -v
+      - name: Validate governance JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for p in (
+              "canonical/governance/OPTION_PRESERVING_CAPABILITY_OPTIMIZATION_20261008_V1.json",
+              "canonical/governance/CURRENT_OPTION_PRESERVING_OPTIMIZATION.json",
+              "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V1.json",
+              "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+              "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+              "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+          ):
+              json.loads(Path(p).read_text())
+          PY
