@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENCE_EXTERNAL_METHOD_TRANSFER_CANDIDATE_V1",
+  "date": "2026-10-08",
+  "status": "EXTERNAL_SOURCE_METHOD_CANDIDATE__NO_TARGET_REPLAY__NO_ACCEPTANCE_CREDIT",
+  "target_obligation": "TB_SCIENCE_GE_58_7",
+  "exact_problem": "Seek reusable zero-incremental-cost scientific-agent execution methods without contaminating frozen Terminal-Bench-Science evaluation or changing its frozen comparator protocol.",
+  "source": {
+    "repository": "https://github.com/synthetic-sciences/openscience",
+    "architecture": "https://github.com/synthetic-sciences/openscience/blob/main/ARCHITECTURE.md",
+    "license": "https://github.com/synthetic-sciences/openscience/blob/main/LICENSE",
+    "benchmarks": "https://github.com/synthetic-sciences/benchmarks-openscience",
+    "benchmark_caveat": "https://www.openscience.sh/benchmark",
+    "benchmark_owner_leaderboard": "https://www.terminal-bench-science.ai/",
+    "anthropic_reported_58_7_reference": "https://www.techgeum.com/blog/ai/claude-opus-5-5"
+  },
+  "observed_public_source_claims": {
+    "code_license": "Apache-2.0 (requires preserving appropriate licensing and notice)",
+    "claimed_terminal_bench_science_success": "53/70 (75.7%), provider-reported, not verified as exact comparable to frozen 210-trial Brain protocol",
+    "reported_runner": "Harbor on Modal, GPT-6 Astra lead, GPT-6 Sol xhigh workers",
+    "publisher_caveat_date": "2026-10-01",
+    "publisher_caveat": "Publisher acknowledged evaluation setup and comparison issues, pending corrected reruns.",
+    "public_leaderboard_opus55": "63.3% public run, distinct from 58.7% Anthropic reported launch evaluation; do not cross-transport as interchangeable"
+  },
+  "safe_method_candidates": [
+    {
+      "component": "on-demand scientifically scoped skills",
+      "transfer": "Reuse Apache-licensed generic skill-index architecture only after inspecting exact dependency/license provenance; do not import benchmark task solutions or heldout traces",
+      "possible_effect": "Reduce domain/tool lookup gaps, unmeasured"
+    },
+    {
+      "component": "research capability job lifecycle",
+      "transfer": "Adapt explicit doctor/setup/plan/start/status/wait/logs/artifacts/verify/cancel/retry/release state machine to an existing Brain-owned carrier where required",
+      "possible_effect": "Prevent evidence loss and control-plane failure, unmeasured"
+    },
+    {
+      "component": "task and verification separation",
+      "transfer": "Keep original native Harbor scorer and exact frozen task acceptance authoritative, not proposal-verifier success or self-reported external score",
+      "possible_effect": "Preserve evidentiary truth, not performance credit"
+    }
+  ],
+  "current_brain_overlap": {
+    "agent": "canonical/runtime/harbor_science_agent_v1.py",
+    "agent_blob": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "local_planner": "canonical/runtime/harbor_science_planner_v1.py",
+    "local_planner_blob": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "existing_behavior": [
+      "Brain-owned action selection",
+      "bounded planner proposals",
+      "explicit output directive binding",
+      "post-action validation",
+      "external native-task verifier remains acceptance authority"
+    ]
+  },
+  "critical_nontransport": [
+    "OpenScience self-reported aggregate is not Brain-owned matched outcome",
+    "Use of GPT-6 Astra and GPT-6 Sol workers is not a zero-model-cost or model-independent proof",
+    "Modal/cloud run may incur incremental spend",
+    "October 1 public report acknowledges some comparisons were flawed",
+    "Public 63.3 and frozen 58.7 refer to different sources/protocol contexts",
+    "Reading task-specific solution traces before frozen heldout tests contaminates acceptance evidence",
+    "No component is proven to raise actual Brain success probability without controlled benchmark-free verification"
+  ],
+  "exact_next_admissible_action": "BEFORE_ANY SCIENCE CONTROLLER CHANGE, IDENTIFY A GENUINE MISSING CONTROL-LIFECYCLE CAPABILITY NOT ALREADY PRESENT, INSPECT SOURCE LICENSE/DEPENDENCIES AND PIN BY CONTENT, VERIFY ON NONBENCHMARK SYNTHETIC TASKS, KEEP FROZEN RANK12 UNEXPOSED. DO NOT REPLACE COMPARATOR OR COUNT EXTERNAL SCORE.",
+  "incremental_spend_usd": 0,
+  "task_solution_traces_read": 0,
+  "target_task_exposures": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
