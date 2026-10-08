@@ -332,6 +332,26 @@ def _run_coupling(
         better, worse = extra_pair
         if worse in target_ids and better in brain_ids:
             edges.add((worse, better))
+    if not edges:
+        # The older kernel treats an empty declared edge set as malformed.
+        # Here it is a valid exact unresolved case: no target mass can legally
+        # be transported to Brain support under the authenticated order.
+        return {
+            "schema": "PROJECT_BRAIN_HIDDEN_EVALUATOR_MONOTONE_COUPLING_RESULT_V1",
+            "status": "FAIL_CLOSED",
+            "theorem": "DOMINANCE_PRESERVING_COUPLING_IMPLIES_NONINFERIORITY_FOR_ALL_BOUNDED_ORDER_MONOTONE_UTILITIES",
+            "max_coupled_mass": "0",
+            "coupling": [],
+            "material_order_certificate": "AUTHENTICATED_BY_WRAPPER",
+            "universal_monotone_utility_noninferiority": False,
+            "observational_equivalence_required": None,
+            "terminal_authority": False,
+            "promotion_authority": False,
+            "acceptance_credit_delta": 0,
+            "family_credit_delta": 0,
+            "capability_credit_delta": 0,
+            "ownership_credit_delta": 0,
+        }
     return coupling_solve({
         "target_distribution": target,
         "brain_distribution": brain,
