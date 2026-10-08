@@ -7,6 +7,9 @@ on:
       - "canonical/runtime/r3_improvement_queue_driver_v1.py"
       - "canonical/runtime/r3_quarantine_recovery_v1.py"
       - "canonical/runtime/r3_independent_learning_verifier_v1.py"
+      - "canonical/runtime/universal_bound_capability_carrier_v1.py"
+      - "canonical/runtime/bound_capability_execution_verifier_v1.py"
+      - "canonical/tests/test_bound_capability_execution_verifier_v1.py"
       - "canonical/runtime/r3_bound_success_adapter_v1.py"
       - "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py"
       - "canonical/tests/test_r3_independent_learning_verifier_v1.py"
@@ -37,6 +40,9 @@ on:
       - "canonical/runtime/r3_improvement_queue_driver_v1.py"
       - "canonical/runtime/r3_quarantine_recovery_v1.py"
       - "canonical/runtime/r3_independent_learning_verifier_v1.py"
+      - "canonical/runtime/universal_bound_capability_carrier_v1.py"
+      - "canonical/runtime/bound_capability_execution_verifier_v1.py"
+      - "canonical/tests/test_bound_capability_execution_verifier_v1.py"
       - "canonical/runtime/r3_bound_success_adapter_v1.py"
       - "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py"
       - "canonical/tests/test_r3_independent_learning_verifier_v1.py"
@@ -73,6 +79,8 @@ jobs:
           canonical/runtime/r3_improvement_queue_driver_v1.py
           canonical/runtime/r3_quarantine_recovery_v1.py
           canonical/runtime/r3_independent_learning_verifier_v1.py
+          canonical/runtime/universal_bound_capability_carrier_v1.py
+          canonical/runtime/bound_capability_execution_verifier_v1.py
           canonical/runtime/r3_bound_success_adapter_v1.py
           canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py
           canonical/runtime/executable_skill_program_v7.py
@@ -91,6 +99,21 @@ jobs:
         run: python -m unittest canonical.tests.test_r3_quarantine_recovery_v1 -v
       - name: Run R3 independent learning-verifier suite
         run: python -m unittest canonical.tests.test_r3_independent_learning_verifier_v1 -v
+      - name: Run bound execution verifier contract suite
+        run: |
+          python - <<'PY'
+          from canonical.tests import test_bound_capability_execution_verifier_v1 as t
+          tests = [
+              t.test_exact_recomputed_execution_trace_passes,
+              t.test_executor_cannot_swap_planned_action,
+              t.test_failed_expectation_cannot_mint_target_effect,
+              t.test_missing_target_producing_step_fails,
+              t.test_executor_cannot_insert_undeclared_extra_step,
+          ]
+          for fn in tests:
+              fn()
+          print(f"PASS_COUNT={len(tests)}")
+          PY
       - name: Run R3 bound-success read-only learning suite
         run: python -m unittest canonical.tests.test_r3_bound_success_readonly_learning_v1 -v
       - name: Run R3 repair replay regression suite
