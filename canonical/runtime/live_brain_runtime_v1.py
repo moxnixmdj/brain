@@ -881,6 +881,27 @@ def _observe_runtime_outcome(
     )
 
 
+def observe_runtime_outcome(
+    out: Mapping[str, Any],
+    *,
+    state_path: str | Path | None = None,
+    learn: bool = True,
+    surface: str = "LIVE_RUNTIME",
+) -> dict[str, Any] | None:
+    """Public fail-closed observation bridge for canonical fabric surfaces.
+
+    This exposes R3 observation without exposing promotion authority. Callers
+    should pass a bounded structural summary, not raw secrets or opaque payloads.
+    """
+    return _observe_runtime_outcome(
+        out,
+        state_path=state_path,
+        learn=learn,
+        retry_context=None,
+        surface=surface,
+    )
+
+
 def _h100(operation: str, payload: Mapping[str, Any]) -> Any:
     from canonical.runtime import h100_verified_capability_registry_v8 as module
     if operation == "registry_snapshot":
