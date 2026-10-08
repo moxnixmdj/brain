@@ -58,6 +58,12 @@ def validate_v3_contract_surface(public: Mapping[str, Any]) -> str | None:
         return "TASK_REQUIRED"
     if set(task) - _ALLOWED_TASK_FIELDS:
         return "UNMODELED_TASK_REQUIREMENTS"
+    # A named audience profile can itself encode omitted semantic obligations.
+    # This bounded route accepts only the marker for an explicitly specified
+    # format contract; no name-based profile interpretation is provided here.
+    profile = task.get("audience_profile")
+    if isinstance(profile, Mapping) and profile.get("profile_id") != "EXPLICIT":
+        return "AUDIENCE_PROFILE_SEMANTICS_UNMODELED"
     claims = task.get("claims")
     if isinstance(claims, list):
         for row in claims:
