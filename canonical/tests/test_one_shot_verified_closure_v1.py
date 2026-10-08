@@ -110,13 +110,13 @@ class OneShotVerifiedClosureTests(unittest.TestCase):
             "next_improvement_action": None,
         }
         with (
-            mock.patch.object(closure.r2, "run", return_value=decision),
+            mock.patch.object(closure.r2, "run", return_value=decision) as r2_run,
             mock.patch.object(closure.r3, "drain", return_value=tick) as drain,
             mock.patch.object(closure, "_state_fingerprint", side_effect=["s0", "s0"]),
         ):
             closure.run({"task_id": "t", "goal": "g"}, state_path=state)
         self.assertIsNotNone(drain.call_args.kwargs["verification_frontier_acquisition_provider"])
-        r2_kwargs = closure.r2.run.call_args.kwargs
+        r2_kwargs = r2_run.call_args.kwargs
         self.assertIsNotNone(r2_kwargs["information_provider"])
         self.assertIsNotNone(r2_kwargs["proposal_provider"])
         self.assertIsNotNone(r2_kwargs["capability_expander"])
