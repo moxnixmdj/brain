@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__11_OF_11__SEMANTIC_DECOMPOSITION_UNVERIFIED__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/gdpval_hybrid_evaluator_uncertainty_v1.py",
+      "git_blob_sha": "7adf19997ec90913fb70e618eb4e3adda055deac"
+    },
+    "tests": {
+      "path": "canonical/tests/test_gdpval_hybrid_evaluator_uncertainty_v1.py",
+      "git_blob_sha": "48cbd01d300d887b0214afb02f81e36aca195a80"
+    },
+    "governance": {
+      "path": "canonical/governance/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_20261008_V1.json",
+      "git_blob_sha": "1b61fa4eb98e0039a46f349d31da725bb02c16e0"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-evaluator-family-v1-verify",
+    "sprite_id": "sprite-61c81061-88c8-46d9-bf90-19d48a607c29",
+    "working_directory": "/tmp/gdpval_hybrid_verify"
+  },
+  "replay": {
+    "dependency_installation": false,
+    "pytest_available": false,
+    "runner": "ZERO_DEPENDENCY_DIRECT_TEST_FUNCTION_DRIVER",
+    "tests_passed": 11,
+    "tests_total": 11,
+    "failures": []
+  },
+  "verified_mechanics": [
+    "POSITIVE_ROBUST_MARGIN_CERTIFICATE_PASSES",
+    "UNPROVED_DECOMPOSITION_FAILS_CLOSED",
+    "PUBLIC_RUBRIC_ONLY_SEMANTIC_CLASS_IS_FIREWALLED",
+    "NONINDEPENDENT_DECOMPOSITION_RECEIPT_FAILS_CLOSED",
+    "NONZERO_MASS_DIFFERENCE_VECTOR_FAILS_CLOSED",
+    "NEGATIVE_K_CONE_DIRECTION_FAILS_DUAL_MEMBERSHIP",
+    "NONORTHOGONAL_LINEALITY_FAILS_EVEN_WITH_LARGE_NOMINAL_MARGIN",
+    "BOUNDED_UNCERTAINTY_CAN_BE_ABSORBED_BY_SUFFICIENT_CERTIFIED_MARGIN",
+    "EXCESS_BOUNDED_UNCERTAINTY_FAILS",
+    "EMPTY_BOUNDED_SET_REDUCES_TO_ZERO_ADJUSTMENT",
+    "DIMENSION_MISMATCH_FAILS_CLOSED"
+  ],
+  "verification_boundary": [
+    "THIS_REPLAY_PROVES_RUNTIME_AND_TEST_MECHANICS_ONLY.",
+    "IT_DOES_NOT_PROVE_THE_TRUE_CURRENT_GDPVAL_OWNER_EVALUATOR_IS_CONTAINED_IN_ANY_PROPOSED_u0_PLUS_CONE_K_PLUS_CONV_B_PLUS_SPAN_L_DECOMPOSITION.",
+    "IT_DOES_NOT_PROVE_ANY_PUBLIC_RUBRIC_DIRECTION_IS_OWNER_MONOTONE_OR_BOUNDED.",
+    "IT_DOES_NOT_BIND_CURRENT_BRAIN_OR_OPUS55_220_TASK_DIFFERENCE_VECTORS.",
+    "NO_GDPVAL_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT."
+  ],
+  "github_actions_context": {
+    "repository_wide_contemporaneous_actions_failures_observed": true,
+    "candidate_jobs_produced_no_step_or_log_payload": true,
+    "interpretation": "DO_NOT_CLASSIFY_THE_GITHUB_ACTIONS_FAILURE_AS_A_RUNTIME_TEST_FAILURE_WITHOUT_STEP_LEVEL_EVIDENCE"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "gdpval_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
