@@ -302,6 +302,74 @@ class VerifiedRepairReplayLoopV1Tests(unittest.TestCase):
             state["failures"][fid]["retry_capsules"][retry_sha]["resolved"]
         )
 
+
+    def test_new_primitive_targets_original_generic_obligation_effects(self):
+        path = self.temp_state()
+        retry = {
+            "mode": "generic",
+            "problem": {
+                "task_id": "generic-missing",
+                "initial_facts": ["A"],
+                "target_effects": ["REAL_TARGET_X", "REAL_TARGET_Y"],
+                "capabilities": [],
+            },
+            "episode_id": "generic-missing",
+            "scope_id": "scope",
+            "learn": True,
+        }
+        seeded = learning.integrate_solver_output(
+            FAILURE,
+            state_path=path,
+            retry_context=retry,
+        )
+        fid = seeded["diagnosis"]["failure_fingerprint"]
+        retry_sha = seeded["retry_capsule_sha256"]
+        missing = {
+            "pass": False,
+            "classification": "NEW_PRIMITIVE_REQUIRED",
+            "missing_required_effects": ["repair.capability.available"],
+        }
+        invented_expander = mock.Mock(name="brain_owned_expander")
+        solver_out = {
+            "pass": True,
+            "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+            "expanded_capability_ids": ["invented-real-targets"],
+            "capability_expansion_attempts": [{
+                "status": "EXPANSION_ADMITTED",
+                "admitted": [{"capability_id": "invented-real-targets"}],
+                "rejected": [],
+            }],
+        }
+        with (
+            mock.patch.object(brain, "_causal_synthesize", return_value=missing),
+            mock.patch.object(brain, "_v12_run", return_value=solver_out) as execute,
+        ):
+            out = brain.execute_failure_repair_cycle(
+                {
+                    "failure_fingerprint": fid,
+                    "retry_capsule_sha256": retry_sha,
+                    "components": [],
+                    "initial_facts": ["A"],
+                },
+                state_path=path,
+                capability_expander=invented_expander,
+            )
+
+        self.assertTrue(out["pass"], out)
+        first_problem = execute.call_args_list[0].args[0]
+        self.assertEqual(
+            first_problem["target_effects"],
+            ["REAL_TARGET_X", "REAL_TARGET_Y"],
+        )
+        self.assertEqual(
+            out["invention_target_source"],
+            "STORED_ORIGINAL_OBLIGATION_TARGET_EFFECTS",
+        )
+        self.assertEqual(
+            out["invention_target_effects"],
+            ["REAL_TARGET_X", "REAL_TARGET_Y"],
+        )
+
     def test_missing_executable_binding_never_reaches_v12(self):
         path = self.temp_state()
         fid, retry_sha, _ = self.seed_failure(path)

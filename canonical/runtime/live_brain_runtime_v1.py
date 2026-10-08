@@ -315,6 +315,30 @@ def execute_failure_repair_cycle(
             required_effect = str(synthesized.get("required_repair_effect") or "").strip()
             if not required_effect:
                 return _fail("NEW_PRIMITIVE_REPAIR_EFFECT_MISSING")
+            invention_targets = [required_effect]
+            invention_target_source = "REPAIR_CLASS_META_EFFECT"
+            if required_effect == "repair.capability.available":
+                retry_context = retry.get("context")
+                if isinstance(retry_context, Mapping):
+                    retry_mode = str(retry_context.get("mode") or "").strip()
+                    concrete = None
+                    if retry_mode == "generic":
+                        raw_problem = retry_context.get("problem")
+                        if isinstance(raw_problem, Mapping):
+                            concrete = raw_problem.get("target_effects")
+                    elif retry_mode == "compiled_bound":
+                        raw_request = retry_context.get("request")
+                        if isinstance(raw_request, Mapping):
+                            concrete = raw_request.get("target_effects")
+                    if isinstance(concrete, Sequence) and not isinstance(concrete, (str, bytes)):
+                        normalized = sorted({
+                            str(effect).strip()
+                            for effect in concrete
+                            if isinstance(effect, str) and str(effect).strip()
+                        })
+                        if normalized:
+                            invention_targets = normalized
+                            invention_target_source = "STORED_ORIGINAL_OBLIGATION_TARGET_EFFECTS"
             fingerprint_prefix = fingerprint[:16]
             problem = {
                 "task_id": str(
@@ -327,7 +351,7 @@ def execute_failure_repair_cycle(
                     )
                 ),
                 "initial_facts": list(request.get("initial_facts") or []),
-                "target_effects": [required_effect],
+                "target_effects": invention_targets,
                 "capabilities": [],
                 "max_solver_cycles": min(int(request.get("max_solver_cycles", 64)), 256),
             }
@@ -388,6 +412,14 @@ def execute_failure_repair_cycle(
             )
         repair_record = {
             "required_repair_effect": synthesized["required_repair_effect"],
+            "invention_target_effects": (
+                list(problem.get("target_effects") or [])
+                if invention_mode else [synthesized["required_repair_effect"]]
+            ),
+            "invention_target_source": (
+                invention_target_source
+                if invention_mode else "EXISTING_REPAIR_ARCHITECTURE"
+            ),
             "repair_mode": (
                 "V12_AUTHENTICATED_CAPABILITY_EXPANSION"
                 if invention_mode
@@ -427,6 +459,14 @@ def execute_failure_repair_cycle(
                 "V12_AUTHENTICATED_CAPABILITY_EXPANSION"
                 if invention_mode
                 else "EXISTING_VERIFIED_COMPONENT_ARCHITECTURE"
+            ),
+            "invention_target_effects": (
+                list(problem.get("target_effects") or [])
+                if invention_mode else [synthesized["required_repair_effect"]]
+            ),
+            "invention_target_source": (
+                invention_target_source
+                if invention_mode else "EXISTING_REPAIR_ARCHITECTURE"
             ),
             "repair_problem": problem,
             "repair_execution": repair_execution,
