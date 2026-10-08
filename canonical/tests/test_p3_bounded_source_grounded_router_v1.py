@@ -69,7 +69,7 @@ def test_caller_verified_bit_has_no_authority():
     p["v3_input"]["task"]["evidence"][1]["verified"]=False
     out=evaluate(p)
     assert out["pass"] is True
-    for row in out["p3_receipt"]["closed_cell_receipt"]["v3_result"]["render_trace"]:
+    for row in out["p3_receipt"]["route_receipt"]["v3_result"]["render_trace"]:
         assert row["provenance"]
 
 
