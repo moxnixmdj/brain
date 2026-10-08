@@ -367,6 +367,21 @@ def execute_failure_repair_cycle(
             state_path=path,
             retry_capsule_sha256=request.get("retry_capsule_sha256"),
         )
+        if (
+            request.get("autonomous") is True
+            and retry.get("autonomous_replay_authorized") is not True
+        ):
+            return {
+                "schema": SCHEMA,
+                "status": "AUTONOMOUS_REPAIR_BLOCKED__REPLAY_NOT_PROVED_SAFE",
+                "pass": False,
+                "failure_fingerprint": fingerprint,
+                "retry_capsule_sha256": retry["retry_capsule_sha256"],
+                "autonomous_replay_reason": retry.get("autonomous_replay_reason"),
+                "capability_promotion_authority": False,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
         synthesized = synthesize_failure_repair(request, state_path=path)
         invention_mode = False
         if synthesized.get("pass") is not True:
@@ -704,6 +719,7 @@ def _auto_repair_live_failure(
         ],
         "solver_kwargs": deepcopy(dict(request.get("repair_solver_kwargs") or {})),
         "learn": True,
+        "autonomous": True,
     }
     repaired = execute_failure_repair_cycle(
         repair_request,
