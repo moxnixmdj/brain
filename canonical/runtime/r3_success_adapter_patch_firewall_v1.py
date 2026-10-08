@@ -56,9 +56,12 @@ def _resolve_owned_file(root: Path, relative: str) -> Path:
     rel = Path(relative)
     if rel.is_absolute() or ".." in rel.parts:
         raise AdapterPatchFirewallError("PATH_INVALID:" + relative)
-    target = (root / rel).resolve(strict=True)
+    unresolved = root / rel
+    if unresolved.is_symlink():
+        raise AdapterPatchFirewallError("TARGET_SYMLINK_FORBIDDEN:" + relative)
+    target = unresolved.resolve(strict=True)
     target.relative_to(root)
-    if not target.is_file() or target.is_symlink():
+    if not target.is_file():
         raise AdapterPatchFirewallError("TARGET_NOT_REGULAR_OWNED_FILE:" + relative)
     return target
 
@@ -171,6 +174,22 @@ def apply_candidate(
     tmp = target.with_name(target.name + ".candidate.tmp")
 
     try:
+        if _digest_bytes(target.read_bytes()) != validation["base_sha256"]:
+            return _fail(
+                "TARGET_CHANGED_AFTER_VALIDATION",
+                path=relative,
+                target_rolled_back=False,
+            )
+        verification_prewrite = _verification_snapshot(root)
+        if verification_prewrite != verification_before:
+            return _fail(
+                "VERIFICATION_AUTHORITY_CHANGED_AFTER_VALIDATION",
+                path=relative,
+                target_rolled_back=False,
+                verification_authority_before=verification_before,
+                verification_authority_prewrite=verification_prewrite,
+            )
+
         tmp.write_bytes(new_bytes)
         os.chmod(tmp, old_mode)
         if _digest_bytes(tmp.read_bytes()) != validation["content_sha256"]:
