@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_SEMANTIC_ADEQUACY_TAIL_REALITY_CLASS_TRUTH_REPAIR_20261008_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE_SCHEDULER_TRUTH_REPAIR__FINANCE_SEMANTIC_ADEQUACY_TAIL_IS_ZERO_REALITY_INTERNAL_WORK_UNTIL_SHARED_SEMANTIC_FIXED_POINT__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "prior_reality_cut": {
+      "path": "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V8.json",
+      "git_blob_sha": "8f328ecf3d69ec67bdb8619758ef733f6d633f4a"
+    },
+    "finance_shared_escape_dependency": {
+      "path": "canonical/governance/FINANCE_UNCOVERED_SCOPE_SHARED_ESCAPE_DEPENDENCY_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "09751874b99db02b30f9904fad9ad74b3befb9c7"
+    },
+    "finance_shared_semantic_residual": {
+      "path": "canonical/governance/FINANCE_SHARED_SEMANTIC_RESIDUAL_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "d9453733ac28a205305129ac7b80e6ea1b692815"
+    },
+    "finance_source_semantic_gate": {
+      "path": "canonical/governance/FINANCE_PROOF_CARRYING_SOURCE_SEMANTIC_GATE_20261007_V1.json",
+      "git_blob_sha": "f43ddf33a63659ce6a853b9f3d75de0b7b1e5d66"
+    }
+  },
+  "contradiction": {
+    "v8_classification": "FINANCE_SEMANTIC_ADEQUACY_TAIL_IS_LISTED_AS_A_POSITIVE_REALITY_CLASS_AND_L3_IS_MARKED_PROVIDER_WAIT",
+    "later_bound_finance_rule": "FRESH_TARGET_INFORMATION_REQUIRED_BEFORE_SHARED_SEMANTIC_FIXED_POINT_IS_FALSE__WORK_ONLY_SHARED_POLICY_RELEVANT_SEMANTIC_COMPLETENESS_OR_DIRECT_E2E_ADEQUACY_ROOT",
+    "resolution": "REMOVE_FINANCE_SEMANTIC_ADEQUACY_TAIL_FROM_POSITIVE_REALITY_WAKE_ACCOUNTING__KEEP_FINANCE_INDEX_FINANCE_AGENT_V2_AND_MYSTERYMECHANISM_L3_REALITY_WAKES_UNCHANGED"
+  },
+  "repaired_projection": {
+    "prior_positive_reality_class_count": 14,
+    "corrected_positive_reality_class_count": 13,
+    "removed_positive_reality_class": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "add_non_positive_reality_open_class": {
+      "id": "FINANCE_SEMANTIC_ADEQUACY_ZERO_REALITY_TAIL",
+      "rule": "REUSE_BOUND_FINANCE_ROUTE_SOURCE_GATE_COMMON_POLICY_AND_SHARED_R2_ADEQUACY_LOOP__NO_PROVIDER_OR_TARGET_REALITY_WAKE_UNTIL_ZERO_REALITY_FIXED_POINT_OR_CONSTRUCTIVE_COUNTEREVIDENCE"
+    },
+    "lane_count_change": 0,
+    "minimum_lane_count_change": 0,
+    "l3_remaining_positive_reality_classes": [
+      "FINANCE_INDEX",
+      "FINANCE_AGENT_V2",
+      "MYSTERYMECHANISM_INTRINSIC"
+    ],
+    "finance_family_closed": false,
+    "finance_uncovered_scope_atom_closed": false,
+    "terminal_credit_delta": 0
+  },
+  "scheduler": [
+    "DO_NOT_SCHEDULE_PROVIDER_WAIT_FOR_FINANCE_SEMANTIC_ADEQUACY_TAIL.",
+    "RUN_SHARED_R2_POLICY_ADEQUACY_OR_DIRECT_END_TO_END_CERTIFICATE_SEARCH_FIRST.",
+    "PRESERVE_PROVIDER_OR_TARGET_REALITY_WAKES_FOR_FINANCE_INDEX_AND_FINANCE_AGENT_V2_PUBLIC_BAR_OBLIGATIONS.",
+    "REOPEN_TARGET_INFORMATION_FOR_THE_SEMANTIC_TAIL_ONLY_IF_ZERO_REALITY_FIXED_POINT_LEAVES_A_CONSTRUCTIVE_TARGET_RELATIVE_RESIDUAL."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_FINANCE_UNCOVERED_SCOPE_AUDIT_IS_CLOSED.",
+    "NO_CLAIM_FINANCE_INDEX_OR_FINANCE_AGENT_V2_PUBLIC_BARS_ARE_CLOSED.",
+    "NO_CLAIM_ARBITRARY_FINANCE_LANGUAGE_SEMANTICS_IS_SOLVED.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
