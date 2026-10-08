@@ -42,6 +42,7 @@ POLICY_EXECUTION_VERIFY_SCHEMA = "PROJECT_BRAIN_POLICY_EXECUTION_BINDING_INDEPEN
 GOAL_SATISFACTION_SCHEMA = "PROJECT_BRAIN_GOAL_SATISFACTION_BINDING_V1"
 GOAL_SATISFACTION_VERIFY_SCHEMA = "PROJECT_BRAIN_GOAL_SATISFACTION_BINDING_INDEPENDENT_VERIFICATION_V1"
 MAX_INFORMATION_ROUNDS = 16
+MAX_POLICY_REPAIR_ROUNDS = 8
 
 
 class DecisionControllerError(ValueError):
@@ -781,6 +782,156 @@ def _extract_policy_gap(decision: Mapping[str, Any]) -> dict[str, Any] | None:
     }
 
 
+
+def _merge_policy_repair(
+    decision_payload: dict[str, Any],
+    provided: Mapping[str, Any],
+) -> list[str]:
+    """Merge zero-authority repair candidates; downstream P3 re-authenticates all authority."""
+    if not isinstance(provided, Mapping):
+        raise DecisionControllerError("POLICY_REPAIR_PROVIDER_RESULT_NOT_OBJECT")
+    allowed = {
+        "schema",
+        "source_id",
+        "policy_conditions",
+        "policy_adequacy_bindings",
+        "source_positive_selection_contracts",
+        "discriminators",
+    }
+    extra = set(provided) - allowed
+    if extra:
+        raise DecisionControllerError(
+            "UNMODELED_POLICY_REPAIR_FIELDS:" + ",".join(sorted(extra))
+        )
+    schema = provided.get("schema")
+    if schema is not None and schema != "PROJECT_BRAIN_R2_POLICY_REPAIR_RESPONSE_V1":
+        raise DecisionControllerError("POLICY_REPAIR_RESPONSE_SCHEMA_INVALID")
+
+    loop = decision_payload.get("bound_relevance_cegar_loop")
+    if not isinstance(loop, dict):
+        raise DecisionControllerError("POLICY_REPAIR_BOUND_RELEVANCE_LOOP_REQUIRED")
+    problem = loop.get("cegar_problem")
+    if not isinstance(problem, dict):
+        raise DecisionControllerError("POLICY_REPAIR_CEGAR_PROBLEM_REQUIRED")
+
+    changed: list[str] = []
+
+    incoming_conditions = provided.get("policy_conditions")
+    if incoming_conditions is not None:
+        if not isinstance(incoming_conditions, Mapping):
+            raise DecisionControllerError("POLICY_REPAIR_POLICY_CONDITIONS_NOT_MAPPING")
+        target = problem.setdefault("policy_conditions", {})
+        if not isinstance(target, dict):
+            raise DecisionControllerError("POLICY_REPAIR_EXISTING_POLICY_CONDITIONS_INVALID")
+        for policy_id, condition in sorted(incoming_conditions.items()):
+            if not isinstance(policy_id, str) or not policy_id or not isinstance(condition, Mapping):
+                raise DecisionControllerError("POLICY_REPAIR_POLICY_CONDITION_INVALID")
+            candidate = deepcopy(dict(condition))
+            prior = target.get(policy_id)
+            if prior is None:
+                target[policy_id] = candidate
+                changed.append("policy_conditions:" + policy_id)
+            elif prior != candidate:
+                raise DecisionControllerError(
+                    "POLICY_REPAIR_POLICY_CONDITION_CONFLICT:" + policy_id
+                )
+
+    incoming_bindings = provided.get("policy_adequacy_bindings")
+    if incoming_bindings is not None:
+        if not isinstance(incoming_bindings, Mapping):
+            raise DecisionControllerError("POLICY_REPAIR_ADEQUACY_BINDINGS_NOT_MAPPING")
+        policies = problem.get("policy_conditions")
+        if not isinstance(policies, Mapping):
+            raise DecisionControllerError("POLICY_REPAIR_POLICY_CONDITIONS_REQUIRED")
+        target = problem.setdefault("policy_adequacy_bindings", {})
+        if not isinstance(target, dict):
+            raise DecisionControllerError("POLICY_REPAIR_EXISTING_ADEQUACY_BINDINGS_INVALID")
+        for policy_id, binding in sorted(incoming_bindings.items()):
+            if (
+                not isinstance(policy_id, str)
+                or not policy_id
+                or policy_id not in policies
+                or not isinstance(binding, Mapping)
+            ):
+                raise DecisionControllerError(
+                    "POLICY_REPAIR_ADEQUACY_BINDING_POLICY_INVALID:" + str(policy_id)
+                )
+            candidate = deepcopy(dict(binding))
+            prior = target.get(policy_id)
+            if prior is None:
+                target[policy_id] = candidate
+                changed.append("policy_adequacy_bindings:" + policy_id)
+            elif prior != candidate:
+                raise DecisionControllerError(
+                    "POLICY_REPAIR_ADEQUACY_BINDING_CONFLICT:" + policy_id
+                )
+
+    incoming_selection = provided.get("source_positive_selection_contracts")
+    if incoming_selection is not None:
+        if not isinstance(incoming_selection, Mapping):
+            raise DecisionControllerError("POLICY_REPAIR_SELECTION_CONTRACTS_NOT_MAPPING")
+        policies = problem.get("policy_conditions")
+        if not isinstance(policies, Mapping):
+            raise DecisionControllerError("POLICY_REPAIR_POLICY_CONDITIONS_REQUIRED")
+        target = loop.setdefault("source_positive_selection_contracts", {})
+        if not isinstance(target, dict):
+            raise DecisionControllerError("POLICY_REPAIR_EXISTING_SELECTION_CONTRACTS_INVALID")
+        for policy_id, contract in sorted(incoming_selection.items()):
+            if (
+                not isinstance(policy_id, str)
+                or not policy_id
+                or policy_id not in policies
+                or not isinstance(contract, Mapping)
+            ):
+                raise DecisionControllerError(
+                    "POLICY_REPAIR_SELECTION_CONTRACT_POLICY_INVALID:" + str(policy_id)
+                )
+            candidate = deepcopy(dict(contract))
+            prior = target.get(policy_id)
+            if prior is None:
+                target[policy_id] = candidate
+                changed.append("source_positive_selection_contracts:" + policy_id)
+            elif prior != candidate:
+                raise DecisionControllerError(
+                    "POLICY_REPAIR_SELECTION_CONTRACT_CONFLICT:" + policy_id
+                )
+
+    incoming_discriminators = provided.get("discriminators")
+    if incoming_discriminators is not None:
+        if (
+            not isinstance(incoming_discriminators, Sequence)
+            or isinstance(incoming_discriminators, (str, bytes))
+        ):
+            raise DecisionControllerError("POLICY_REPAIR_DISCRIMINATORS_NOT_SEQUENCE")
+        target = problem.setdefault("discriminators", [])
+        if not isinstance(target, list):
+            raise DecisionControllerError("POLICY_REPAIR_EXISTING_DISCRIMINATORS_INVALID")
+        by_id = {
+            row.get("discriminator_id"): row
+            for row in target
+            if isinstance(row, Mapping) and isinstance(row.get("discriminator_id"), str)
+        }
+        for row in incoming_discriminators:
+            if not isinstance(row, Mapping):
+                raise DecisionControllerError("POLICY_REPAIR_DISCRIMINATOR_NOT_OBJECT")
+            discriminator_id = row.get("discriminator_id")
+            if not isinstance(discriminator_id, str) or not discriminator_id:
+                raise DecisionControllerError("POLICY_REPAIR_DISCRIMINATOR_ID_INVALID")
+            candidate = deepcopy(dict(row))
+            prior = by_id.get(discriminator_id)
+            if prior is None:
+                target.append(candidate)
+                by_id[discriminator_id] = candidate
+                changed.append("discriminators:" + discriminator_id)
+            elif dict(prior) != candidate:
+                raise DecisionControllerError(
+                    "POLICY_REPAIR_DISCRIMINATOR_CONFLICT:" + discriminator_id
+                )
+
+    if not changed:
+        raise DecisionControllerError("POLICY_REPAIR_PROVIDER_NO_PROGRESS")
+    return changed
+
 def _append_truth_payload(
     decision_payload: dict[str, Any],
     predicate_id: str,
@@ -843,12 +994,17 @@ def run(
     | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    policy_repair_provider: Callable[
+        [Mapping[str, Any], int, Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
     execution_provider: Callable[..., Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     root = Path(repo_root) if repo_root is not None else ROOT
     try:
         if not isinstance(request, Mapping):
             raise DecisionControllerError("REQUEST_NOT_OBJECT")
+        if policy_repair_provider is not None and not callable(policy_repair_provider):
+            raise DecisionControllerError("POLICY_REPAIR_PROVIDER_NOT_CALLABLE")
         allowed = {
             "task_id",
             "goal",
@@ -1108,6 +1264,7 @@ def run(
         cover_observation_bindings = deepcopy(dict(initial_cover_observations))
 
         information_trace: list[dict[str, Any]] = []
+        policy_repair_trace: list[dict[str, Any]] = []
         decision = None
         for round_index in range(max_rounds + 1):
             decision = evaluate_p3(working, repo_root=root)
@@ -1342,6 +1499,40 @@ def run(
                         "semantic_truth_authority": False,
                         "terminal_authority": False,
                     }
+                    if (
+                        policy_repair_provider is not None
+                        and len(policy_repair_trace) < MAX_POLICY_REPAIR_ROUNDS
+                        and round_index < max_rounds
+                    ):
+                        repair_index = len(policy_repair_trace)
+                        provided = policy_repair_provider(
+                            policy_request,
+                            repair_index,
+                            deepcopy(working),
+                        )
+                        record = {
+                            "round": repair_index,
+                            "loop_status": policy_gap["loop_status"],
+                            "required_artifact": policy_gap["required_artifact"],
+                            "provider_returned_payload": isinstance(provided, Mapping),
+                            "provider_authority": False,
+                            "policy_adequacy_authority": False,
+                            "semantic_truth_authority": False,
+                        }
+                        if provided is not None and not isinstance(provided, Mapping):
+                            raise DecisionControllerError(
+                                "POLICY_REPAIR_PROVIDER_RESULT_NOT_OBJECT"
+                            )
+                        if isinstance(provided, Mapping):
+                            changed = _merge_policy_repair(working, provided)
+                            record["status"] = "REPAIR_CANDIDATES_MERGED_FOR_REAUTHENTICATION"
+                            record["changed_fields"] = changed
+                            record["response_sha256"] = _digest(dict(provided))
+                            policy_repair_trace.append(record)
+                            continue
+                        record["status"] = "NO_REPAIR_RETURNED"
+                        policy_repair_trace.append(record)
+
                     return _open(
                         str(policy_gap["loop_status"]),
                         task_id=task_id,
@@ -1351,6 +1542,7 @@ def run(
                         next_policy_request=policy_request,
                         decision_result=decision,
                         information_trace=information_trace,
+                        policy_repair_trace=policy_repair_trace,
                         goal_to_decision_binding=goal_binding,
                     )
                 return _open(
