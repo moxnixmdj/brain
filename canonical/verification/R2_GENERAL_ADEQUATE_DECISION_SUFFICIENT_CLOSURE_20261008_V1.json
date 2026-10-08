@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_V1",
   "date": "2026-10-08",
-  "status": "MECHANISM_CLOSED__UNIVERSAL_TOTALITY_REDUCED_TO_OBSERVABILITY_OR_COMMON_SAFE_ACTION",
+  "status": "SUPPLEMENTAL_DERIVATION_ONLY__AUTHORITATIVE_V6_MECHANISM_CLOSURE_ALREADY_EXISTS",
   "objective": "Map (goal, world, constraints, uncertainty) to an adequate action with minimum decision-changing information, verified execution, and independent actual-goal acceptance.",
   "closure_law": {
     "statement": "For any two admissible world states w1 and w2 that remain indistinguishable under all authenticated observations available to the decision process, a universally adequate controller exists only if their adequate-action sets intersect (including a safe defer/abstain action when that itself satisfies the goal). If the adequate-action sets are disjoint, some authenticated observation capable of separating the states is information-theoretically necessary.",
@@ -76,10 +76,21 @@
     "NO CLAIM THAT UNKNOWN SEMANTICS MAY BE INVENTED",
     "NO CLAIM THAT PROVIDER OUTPUT CARRIES SEMANTIC OR ADEQUACY AUTHORITY",
     "NO CLAIM THAT EXECUTION SUCCESS ALONE PROVES GOAL SATISFACTION",
-    "NO GLOBAL TERMINAL CREDIT FROM THIS SYNTHESIS ARTIFACT"
+    "NO GLOBAL TERMINAL CREDIT FROM THIS SYNTHESIS ARTIFACT",
+    "NO_REPLACEMENT_OF_AUTHORITATIVE_R2_V6_MECHANISM_CLOSURE",
+    "NO_NEW_AUTHORITY_FROM_THIS_SUPPLEMENTAL_DERIVATION"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
+  },
+  "authority_role": "SUPPLEMENTAL_DERIVATION_ONLY",
+  "authoritative_closure": {
+    "path": "canonical/governance/R2_ADEQUACY_OR_ABSTAIN_MECHANISM_CLOSURE_20261008_V1.json",
+    "git_blob_sha": "d0fb6e7992d2aa08223280dc6bd4930467c513ba",
+    "verification_path": "canonical/verification/R2_V6_MECHANISM_CLOSURE_AUTHORITY_VERIFY_20261008_V2.json",
+    "verification_git_blob_sha": "65d2f07b5c5dab79ecd92ccdac7a72668665e602",
+    "current_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "rule": "THIS_SUPPLEMENTAL_DERIVATION_MUST_NOT_OVERRIDE_OR_COMPETE_WITH_THE_AUTHORITATIVE_V6_CLOSURE"
   }
 }
