@@ -5,13 +5,18 @@ on:
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
+      - "canonical/runtime/live_brain_runtime_v1.py"
+      - "canonical/tests/test_live_brain_runtime_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
   push:
     branches:
-      - "r3-autonomous-self-improvement-v1-20261008"
+      - "main"
+      - "r3-compounding-ratchet-v2-20261008"
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
+      - "canonical/runtime/live_brain_runtime_v1.py"
+      - "canonical/tests/test_live_brain_runtime_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
 
 jobs:
@@ -24,4 +29,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Run R3 regression suite
-        run: python -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v
+        run: |
+          python -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v
+          python -m unittest canonical.tests.test_live_brain_runtime_v1 -v
+          python -m py_compile canonical/runtime/autonomous_verified_self_improvement_v1.py canonical/runtime/live_brain_runtime_v1.py
