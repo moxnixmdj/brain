@@ -30,6 +30,8 @@ from canonical.runtime.r2_existing_policy_cover_observation_reuse_v1 import (
     discover as discover_existing_cover_observation,
 )
 from canonical.runtime import r2_grounded_candidate_policy_frontier_v1 as grounded_policy_frontier
+from canonical.runtime.verifier_compiler_v1 import compile_verifier_plan
+from canonical.runtime.proof_carrying_outcome_v1 import build_proof_carrying_outcome
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_CONTROLLER_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -806,6 +808,42 @@ def _append_truth_payload(
         raise DecisionControllerError("EXISTING_TRUTH_PAYLOAD_INVALID")
 
 
+def _acceptance_proof_fields(
+    *,
+    raw_contract: Mapping[str, Any],
+    verifier_plan: Mapping[str, Any],
+    selected_policy_id: str,
+    realization: Mapping[str, Any],
+    goal_satisfaction: Mapping[str, Any],
+    candidate_text: str | None = None,
+) -> dict[str, Any]:
+    proof = build_proof_carrying_outcome(
+        raw_contract=raw_contract,
+        verifier_plan=verifier_plan,
+        selected_policy_id=selected_policy_id,
+        realization=realization,
+        goal_satisfaction_binding=goal_satisfaction,
+        candidate_text=candidate_text,
+    )
+    if proof.get("pass") is not True:
+        raise DecisionControllerError(
+            "PROOF_CARRYING_OUTCOME_BUILD_FAILED:"
+            + str(proof.get("reason") or "UNKNOWN")
+        )
+    return {
+        "verifier_plan": deepcopy(dict(verifier_plan)),
+        "proof_carrying_outcome": proof,
+        "raw_goal_acceptance": proof,
+        "raw_goal_sha256": proof["raw_goal_sha256"],
+        "raw_acceptance_obligation_count": proof[
+            "raw_acceptance_obligation_count"
+        ],
+        "accepted_raw_obligation_ids": list(
+            proof["accepted_raw_obligation_ids"]
+        ),
+    }
+
+
 def _open(
     status: str,
     *,
@@ -814,6 +852,7 @@ def _open(
     raw_contract: Mapping[str, Any],
     **extra: Any,
 ) -> dict[str, Any]:
+    verifier_plan = compile_verifier_plan(raw_contract)
     return {
         "schema": SCHEMA,
         "status": status,
@@ -824,6 +863,7 @@ def _open(
         "raw_source_coverage_complete": (
             raw_contract.get("nonwhitespace_source_coverage_complete") is True
         ),
+        "verifier_plan": verifier_plan,
         "semantic_acceptance_complete": False,
         "actual_goal_satisfaction_verified": False,
         "terminal_authority": False,
@@ -895,6 +935,8 @@ def run(
                 "incremental_spend_usd": 0,
             }
 
+        verifier_plan = compile_verifier_plan(raw_contract)
+
         decision_payload = request.get("decision_payload")
         full_binding_supplied = isinstance(
             request.get("goal_to_decision_binding"), Mapping
@@ -964,6 +1006,13 @@ def run(
                         goal_satisfaction_binding=goal_satisfaction,
                         specialist_adequacy_authority=specialist_adequacy,
                     )
+                proof_fields = _acceptance_proof_fields(
+                    raw_contract=raw_contract,
+                    verifier_plan=verifier_plan,
+                    selected_policy_id=selected_policy_id,
+                    realization=realization,
+                    goal_satisfaction=goal_satisfaction,
+                )
                 return {
                     "schema": SCHEMA,
                     "status": (
@@ -985,6 +1034,7 @@ def run(
                     "action": realization,
                     "realization": realization,
                     "goal_satisfaction_binding": goal_satisfaction,
+                    **proof_fields,
                     "specialist_adequacy_authority": specialist_adequacy,
                     "information_trace": [],
                     "minimum_information_rounds_used": 0,
@@ -1478,6 +1528,14 @@ def run(
                     information_trace=information_trace,
                     goal_to_decision_binding=goal_binding,
                 )
+            proof_fields = _acceptance_proof_fields(
+                raw_contract=raw_contract,
+                verifier_plan=verifier_plan,
+                selected_policy_id=selected_policy_id,
+                realization=realization,
+                goal_satisfaction=goal_satisfaction,
+                candidate_text=rendered,
+            )
             return {
                 "schema": SCHEMA,
                 "status": "PASS__GOAL_BOUND_ADEQUATE_DECISION_REALIZED_AND_ACCEPTANCE_VERIFIED",
@@ -1495,6 +1553,7 @@ def run(
                 "action": rendered,
                 "realization": realization,
                 "goal_satisfaction_binding": goal_satisfaction,
+                **proof_fields,
                 "information_trace": information_trace,
                 "minimum_information_rounds_used": len(information_trace),
                 "semantic_acceptance_complete": True,
@@ -1589,6 +1648,13 @@ def run(
                 policy_execution_binding=execution_binding,
             )
 
+        proof_fields = _acceptance_proof_fields(
+            raw_contract=raw_contract,
+            verifier_plan=verifier_plan,
+            selected_policy_id=selected_policy_id,
+            realization=realization,
+            goal_satisfaction=goal_satisfaction,
+        )
         return {
             "schema": SCHEMA,
             "status": "PASS__GOAL_BOUND_ADEQUATE_POLICY_EXECUTED_AND_ACCEPTANCE_VERIFIED",
@@ -1606,6 +1672,7 @@ def run(
             "execution_result": execution,
             "realization": realization,
             "goal_satisfaction_binding": goal_satisfaction,
+            **proof_fields,
             "information_trace": information_trace,
             "minimum_information_rounds_used": len(information_trace),
             "semantic_acceptance_complete": True,
