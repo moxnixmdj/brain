@@ -1115,7 +1115,15 @@ def _observe_runtime_outcome(
         return None
 
     if out.get("pass") is not True:
-        return _integrate_learning(out, state_path=state_path, retry_context=retry_context)
+        observed = deepcopy(dict(out))
+        policy_repair_context = _compact_policy_repair_context(observed)
+        if policy_repair_context is not None:
+            observed["policy_repair_context"] = policy_repair_context
+        return _integrate_learning(
+            observed,
+            state_path=state_path,
+            retry_context=retry_context,
+        )
 
     learning_keys = {
         "current_episode_verified",
