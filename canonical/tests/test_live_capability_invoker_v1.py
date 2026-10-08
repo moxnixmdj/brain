@@ -66,3 +66,5 @@ class LiveCapabilityInvokerV1Tests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+# CI replay marker: exact current R1 universal invocation integration.
