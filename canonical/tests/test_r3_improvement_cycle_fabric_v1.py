@@ -66,7 +66,11 @@ class R3ImprovementCycleFabricTests(unittest.TestCase):
                 success_episode_adapter_provider=adapter,
             )
         self.assertTrue(out["inner_pass"], out)
-        self.assertEqual(out["episode_compounding_tick"], tick)
+        self.assertEqual(out["compounding_tick"], tick)
+        self.assertEqual(
+            out["episode_compounding_tick"]["status"],
+            "MERGED_INTO_UNIFIED_COMPOUNDING_TICK",
+        )
         drain.assert_called_once()
         kwargs = drain.call_args.kwargs
         self.assertIs(kwargs["episode_verification_provider"], verifier)
