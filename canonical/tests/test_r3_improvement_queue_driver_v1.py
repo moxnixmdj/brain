@@ -412,6 +412,52 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertEqual(work["payload"]["value_capsule_head_hash"], "value")
         self.assertEqual(work["payload"]["effect_root"], "/private/effects")
 
+    def test_deferred_episode_verification_forwards_effect_root_to_readback(self):
+        path = self.temp_state()
+        work = {
+            "work_id": "verify:effectful",
+            "kind": "VERIFY_EPISODE",
+            "payload": {
+                "episode": {"episode_id": "ep", "scope_id": "scope"},
+                "problem": {
+                    "task_id": "task",
+                    "initial_facts": [],
+                    "target_effects": ["goal"],
+                    "capabilities": [],
+                },
+                "trace": [{"capability_id": "write"}],
+                "fact_capsule_head_hash": "fact",
+                "value_capsule_head_hash": "value",
+                "effect_root": "/private/effects",
+            },
+        }
+        promoted = {
+            "pass": True,
+            "current_episode_verified": True,
+            "current_episode": work["payload"]["episode"],
+        }
+        with (
+            mock.patch.object(
+                driver.learning,
+                "_post_execution_independent_verification",
+                return_value=promoted,
+            ) as verify,
+            mock.patch.object(
+                driver.learning,
+                "integrate_solver_output",
+                return_value={"status": "VERIFIED_EPISODE_PERMANENTLY_RECORDED"},
+            ),
+        ):
+            out = driver._verify_episode_work(
+                work,
+                state_path=path,
+                repo_root=Path("."),
+                episode_verification_provider=mock.Mock(),
+                skill_verification_provider=mock.Mock(),
+            )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(verify.call_args.kwargs["effect_root"], "/private/effects")
+
     def test_scope_generalization_runs_through_canonical_driver(self):
         path = self.temp_state()
         verified_skill = {
