@@ -52,6 +52,8 @@ def certificate():
                 "route": "U_DIRECT_TARGET_RELATION",
                 "load_bearing": True,
                 "target_relation_receipt_sha256": "3" * 64,
+                "relation_kind": "PAIRWISE_PREFERENCE",
+                "judge_panel_class": "PAIRWISE_PANEL",
                 "matched_pairwise_semantics_verified": True,
                 "outcome": "TIE",
             })
@@ -95,6 +97,32 @@ class T(unittest.TestCase):
         u["outcome"] = "OPUS_WIN"
         with self.assertRaisesRegex(DominanceCertificateError, "U_OPUS_WIN_OR_INVALID"):
             verify_scope_complete_dominance(target(), c)
+
+    def test_rubric_opus_strictly_better_fails(self):
+        c = certificate()
+        u = next(x for x in c["checks"] if x["route"] == "U_DIRECT_TARGET_RELATION")
+        u.pop("matched_pairwise_semantics_verified")
+        u.pop("outcome")
+        u["relation_kind"] = "BINARY_RUBRIC"
+        u["judge_panel_class"] = "RUBRIC_PANEL"
+        u["matched_rubric_semantics_verified"] = True
+        u["brain_pass"] = False
+        u["opus_pass"] = True
+        with self.assertRaisesRegex(DominanceCertificateError, "U_RUBRIC_OPUS_STRICTLY_BETTER"):
+            verify_scope_complete_dominance(target(), c)
+
+    def test_rubric_fail_fail_is_noninferior(self):
+        c = certificate()
+        u = next(x for x in c["checks"] if x["route"] == "U_DIRECT_TARGET_RELATION")
+        u.pop("matched_pairwise_semantics_verified")
+        u.pop("outcome")
+        u["relation_kind"] = "BINARY_RUBRIC"
+        u["judge_panel_class"] = "RUBRIC_PANEL"
+        u["matched_rubric_semantics_verified"] = True
+        u["brain_pass"] = False
+        u["opus_pass"] = False
+        out = verify_scope_complete_dominance(target(), c)
+        self.assertEqual(out["status"], "PASS_SCOPE_COMPLETE_CURRENT_EPOCH_DOMINANCE")
 
     def test_missing_task_fails(self):
         c = certificate()
