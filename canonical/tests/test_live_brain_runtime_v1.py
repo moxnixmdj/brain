@@ -222,6 +222,106 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertFalse(out["learning"]["permanent_reuse_authorized"])
         integrate.assert_not_called()
 
+
+    @patch("canonical.runtime.live_brain_runtime_v1._causal_synthesize")
+    @patch("canonical.runtime.live_brain_runtime_v1._learning_module")
+    def test_failure_fingerprint_compiles_to_minimum_causal_repair_search(self, learning_module, synthesize):
+        class L:
+            DEFAULT_STATE_PATH = "/tmp/repair-state.json"
+            @staticmethod
+            def load_state(path):
+                return {
+                    "failures": {
+                        "fp:verify": {
+                            "repair_class": "OBTAIN_OR_REPAIR_INDEPENDENT_VERIFICATION",
+                            "count": 3,
+                        }
+                    }
+                }
+        learning_module.return_value = L
+        synthesize.return_value = {
+            "pass": True,
+            "classification": "ARCHITECTURE_FOUND",
+            "winner": {"components": ["independent-verifier"]},
+        }
+        components = [{
+            "id": "independent-verifier",
+            "kind": "VERIFIER",
+            "requires": [],
+            "provides": ["repair.independent_verification.available"],
+            "verified": True,
+            "brain_owned": True,
+            "donor_independent": True,
+            "cost": {"wall_clock": 1, "incremental_spend_usd": 0},
+        }]
+        out = brain.run({
+            "mode": "repair_synthesis",
+            "failure_fingerprint": "fp:verify",
+            "components": components,
+        })
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["required_repair_effect"],
+            "repair.independent_verification.available",
+        )
+        self.assertTrue(out["candidate_only"])
+        manifest = synthesize.call_args.args[0]
+        self.assertEqual(
+            manifest["target"]["required_effects"],
+            ["repair.independent_verification.available"],
+        )
+        self.assertEqual(manifest["components"], components)
+
+    @patch("canonical.runtime.live_brain_runtime_v1._causal_synthesize")
+    @patch("canonical.runtime.live_brain_runtime_v1._learning_module")
+    def test_missing_repair_provider_emits_new_primitive_required(self, learning_module, synthesize):
+        class L:
+            DEFAULT_STATE_PATH = "/tmp/repair-state.json"
+            @staticmethod
+            def load_state(path):
+                return {
+                    "failures": {
+                        "fp:cap": {
+                            "repair_class": "ACQUIRE_COMPOSE_OR_INVENT_VERIFIABLE_CAPABILITY",
+                            "count": 1,
+                        }
+                    }
+                }
+        learning_module.return_value = L
+        synthesize.return_value = {
+            "pass": False,
+            "classification": "NEW_PRIMITIVE_REQUIRED",
+            "missing_required_effects": ["repair.capability.available"],
+        }
+        out = brain.run({
+            "mode": "repair_synthesis",
+            "failure_fingerprint": "fp:cap",
+            "components": [],
+        })
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["causal_synthesis"]["classification"],
+            "NEW_PRIMITIVE_REQUIRED",
+        )
+        self.assertEqual(out["required_repair_effect"], "repair.capability.available")
+        self.assertFalse(out["execution_authority"])
+
+    @patch("canonical.runtime.live_brain_runtime_v1._learning_module")
+    def test_unknown_failure_fingerprint_fails_closed(self, learning_module):
+        class L:
+            DEFAULT_STATE_PATH = "/tmp/repair-state.json"
+            @staticmethod
+            def load_state(path):
+                return {"failures": {}}
+        learning_module.return_value = L
+        out = brain.run({
+            "mode": "repair_synthesis",
+            "failure_fingerprint": "missing",
+            "components": [],
+        })
+        self.assertFalse(out["pass"])
+        self.assertIn("FAILURE_FINGERPRINT_UNKNOWN", out["reason"])
+
     def test_unknown_mode_fails_closed(self):
         out = brain.run({"mode": "invented"})
         self.assertFalse(out["pass"])
