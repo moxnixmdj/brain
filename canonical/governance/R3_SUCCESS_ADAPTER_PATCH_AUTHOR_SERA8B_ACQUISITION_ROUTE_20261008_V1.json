@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_R3_SUCCESS_ADAPTER_PATCH_AUTHOR_SERA8B_ACQUISITION_ROUTE_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE__PUBLIC_OPEN_SOURCE_SOFTWARE_ENGINEERING_DONOR_IDENTIFIED__ZERO_CREDIT__INTERNALIZATION_AND_EXACT_ADAPTER_AUTHOR_QUALIFICATION_UNPROVED",
+  "target_root": "R1_CAPABILITY_ACQUISITION",
+  "target_primitive": "R3_SUCCESS_ADAPTER_PATCH_AUTHOR",
+  "upstream_gap": {
+    "compiler": "canonical/runtime/r3_root1_adapter_gap_witness_v1.py",
+    "proved_state": "PASS__ROOT1_CONSTRUCTIVE_R3_ADAPTER_AUTHORING_GAP_ESTABLISHED__NO_CURRENT_BOUND_ACQUISITION_ROUTE",
+    "required_behavior": "Author or bind a candidate R3 success adapter for an exact retained success while modifying only the owned success-adapter frontier and leaving independent verification authority unchanged."
+  },
+  "candidate_route": {
+    "route_id": "SERA8B_SOFTWARE_ENGINEERING_AGENT__R3_SUCCESS_ADAPTER_PATCH_AUTHOR_CANDIDATE",
+    "donor": "allenai/SERA-8B",
+    "artifact_repository": "https://huggingface.co/allenai/SERA-8B",
+    "pinned_weight_upload_revision": "30be3bd8084af613e8a1730158bacf8ddb83e87e",
+    "observed_current_repository_head_short": "359cef1",
+    "license": "apache-2.0",
+    "model_class": "OPEN_SOURCE_CODING_AGENT",
+    "parameter_class": "8B",
+    "observed_repository_size_gb_decimal": 16.4,
+    "inference_framework": "vLLM",
+    "published_context_length_tokens": 32768,
+    "published_swe_bench_verified_resolve_rate_percent": 31.7,
+    "published_swe_bench_verified_stddev_percentage_points": 0.9,
+    "published_evaluation_repetitions": 3,
+    "published_training_artifact_availability": {
+      "weights_public": true,
+      "code_public": true,
+      "data_public": true
+    }
+  },
+  "public_source_evidence": [
+    {
+      "url": "https://huggingface.co/allenai/SERA-8B",
+      "supports": [
+        "APACHE_2_0_LICENSE",
+        "8B_OPEN_SOURCE_CODING_AGENT",
+        "31_7_PERCENT_SWE_BENCH_VERIFIED",
+        "32K_CONTEXT",
+        "VLLM_INFERENCE",
+        "CODE_AND_DATA_PUBLIC"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/allenai/SERA-8B/tree/main",
+      "supports": [
+        "OBSERVED_16_4_GB_REPOSITORY",
+        "PUBLIC_MODEL_SHARDS_AND_CONFIGURATION"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/allenai/SERA-8B/commit/30be3bd8084af613e8a1730158bacf8ddb83e87e",
+      "supports": [
+        "EXACT_WEIGHT_UPLOAD_REVISION"
+      ]
+    }
+  ],
+  "causal_match": {
+    "why_this_route_is_relevant": [
+      "THE_MISSING_ROOT1_PRIMITIVE_IS_SOURCE_PATCH_AUTHORSHIP_FOR_R3_SUCCESS_ADAPTERS.",
+      "SERA_8B_IS_EXPLICITLY_TRAINED_AS_A_SOFTWARE_ENGINEERING_AGENT_RATHER_THAN_A_GENERIC_TEXT_MODEL.",
+      "THE_PUBLISHED_SWE_BENCH_VERIFIED_RESULT_IS_DIRECT_EVIDENCE_OF_REPOSITORY_LEVEL_CODE_REPAIR_BEHAVIOR.",
+      "THE_DONOR_IS_SMALLER_AND_MORE_SPECIALIZED_THAN_THE_ALREADY_KNOWN_27B_GENERAL_QWEN_SEMANTIC_ROUTE."
+    ],
+    "what_is_not_yet_proved": [
+      "THE_DONOR_CAN_AUTHOR_THE_EXACT_R3_SUCCESS_ADAPTER_PATCH_CONTRACT.",
+      "THE_EXACT_PINNED_BYTES_FIT_AN_AVAILABLE_ZERO_INCREMENTAL_SPEND_EXECUTION_CARRIER.",
+      "ANY_QUANTIZED_OR_TRANSFORMED_VARIANT_PRESERVES_PATCH_AUTHOR_CAPABILITY.",
+      "THE_DONOR_CAN_BE_SAFELY_WRAPPED_SO_THAT_IT_MODIFIES_ONLY_SUCCESS_ADAPTER_FILES.",
+      "THE_GENERATED_PATCH_PASSES_THE_EXISTING_INDEPENDENT_R3_VERIFIER_AND_ORIGINAL_SUCCESS_REPLAY."
+    ]
+  },
+  "authority_firewall": {
+    "candidate_generation_authority": true,
+    "source_patch_execution_authority": false,
+    "verification_authority": false,
+    "promotion_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false,
+    "immutable_verification_paths": [
+      "canonical/runtime/r3_independent_learning_verifier_v1.py",
+      "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
+      "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py"
+    ],
+    "mutable_candidate_scope_if_qualified": [
+      "canonical/runtime/r3_bound_success_adapter_v1.py",
+      "canonical/runtime/r3_raw_success_adapter_v1.py"
+    ]
+  },
+  "minimum_next_actions": [
+    "INDEPENDENTLY_VERIFY_THE_PINNED_MODEL_ARTIFACT_MANIFEST_LICENSE_AND_PUBLISHED_SOFTWARE_ENGINEERING_RESULT.",
+    "PROVE_A_ZERO_INCREMENTAL_SPEND_EXECUTION_FIT_FOR_THE_EXACT_PINNED_BYTES_OR_DECLARE_A_TRANSFORMED_VARIANT_AS_A_NEW_UNQUALIFIED_SUBJECT.",
+    "FREEZE_A_THIN_CANDIDATE_ONLY_PATCH_AUTHOR_WRAPPER_THAT_CANNOT_WRITE_VERIFIER_OR_CHECKPOINT_AUTHORITY_FILES.",
+    "RUN_NONTERMINAL_R3_ADAPTER_AUTHOR_QUALIFICATION_ON_SYNTHETIC_OR_ALREADY_EXPOSED_SUCCESS_ADAPTER_GAPS.",
+    "REQUIRE_PY_COMPILE_FOCUSED_ADAPTER_TESTS_INDEPENDENT_R3_VERIFIER_AND_ORIGINAL_SUCCESS_REPLAY_BEFORE_ADMITTING_ANY_GENERATED_ADAPTER.",
+    "ONLY_AFTER_ALL_GATES_PASS_REGISTER_A_VERIFIED_ACQUISITION_ROUTE_FOR_R3_SUCCESS_ADAPTER_PATCH_AUTHOR_AND_BIND_IT_AS_THE_DEFAULT_R3_FRONTIER_ACQUISITION_PROVIDER."
+  ],
+  "root1_route_status": {
+    "route_status": "CANDIDATE_ONLY",
+    "independent_verified": false,
+    "exact_byte_bound": false,
+    "content_addressed": false,
+    "target_brain_owned_configuration": false,
+    "internalizable": "CANDIDATE__PUBLIC_ARTIFACT_EXISTS",
+    "executable": "UNPROVED_ON_ZERO_SPEND_CARRIER",
+    "source_admission_verified": false,
+    "future_use_requires_capability_rediscovery": true,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_R3_SUCCESS_ADAPTER_PATCH_AUTHOR_IS_OWNED.",
+    "NO_CLAIM_SERA8B_IS_AN_ADMISSIBLE_ROOT1_ACQUISITION_ROUTE_YET.",
+    "NO_CLAIM_SERA8B_FITS_CURRENT_AVAILABLE_ZERO_COST_COMPUTE.",
+    "NO_CLAIM_A_QUANTIZED_OR_OFFLOADED_VARIANT_INHERITS_THE_PUBLISHED_RESULT.",
+    "NO_CLAIM_ANY_R3_ADAPTER_HAS_BEEN_GENERATED_INSTALLED_VERIFIED_OR_PROMOTED.",
+    "NO_CHANGE_TO_R3_VERIFICATION_AUTHORITY.",
+    "NO_CAPABILITY_OWNERSHIP_ACCEPTANCE_FAMILY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
