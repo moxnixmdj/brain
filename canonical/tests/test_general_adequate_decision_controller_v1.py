@@ -161,6 +161,88 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
         self.assertFalse(binding["semantic_authority"])
         self.assertFalse(binding["semantic_completeness_claimed"])
 
+    def test_opaque_bootstrap_injects_verified_grounded_candidates_without_adequacy(self):
+        raw = {
+            "pass": True,
+            "task_contract_sha256": "contract-grounded",
+            "task_sha256": "goal-sha",
+            "nonwhitespace_source_coverage_complete": True,
+            "acceptance_contract": {
+                "obligations": [{"obligation_id": "RAWREQ:o1"}]
+            },
+        }
+        observed = {}
+        frontier = {
+            "pass": True,
+            "status": "PASS__VERIFIED_GROUNDING_EXPOSED_AS_UNTRUSTED_POLICY_FRONTIER",
+            "policy_conditions": {
+                "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest": {"op": "TRUE"}
+            },
+            "policy_adequacy_authority": False,
+            "semantic_truth_authority": False,
+        }
+
+        def p3(payload, *, repo_root=None):
+            observed.update(payload)
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED",
+                "reason": "BOUND_RELEVANCE_CEGAR_LOOP_UNSATISFIED",
+                "detail": {
+                    "loop_result": {
+                        "pass": False,
+                        "status": "OPEN__POSITIVE_POLICY_ADEQUACY_CERTIFICATE_REQUIRED",
+                        "reason": "NO_AUTHENTICATED_POLICY_ADEQUACY",
+                        "detail": {
+                            "cegar": {
+                                "decision_basis": list(
+                                    payload["bound_relevance_cegar_loop"][
+                                        "cegar_problem"
+                                    ]["decision_basis"]
+                                ),
+                                "rejected_policy_adequacy_bindings": [{
+                                    "policy_id": "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest",
+                                    "reason": "ADEQUACY_BINDING_MISSING",
+                                }],
+                            }
+                        },
+                    }
+                },
+            }
+
+        with patch.object(controller, "compile_contract", return_value=raw), \
+             patch.object(
+                 controller.grounded_policy_frontier,
+                 "propose",
+                 return_value=frontier,
+             ), \
+             patch.object(controller, "evaluate_p3", side_effect=p3):
+            out = controller.run({
+                "task_id": "R2-GROUNDED-FRONTIER",
+                "goal": "Audit the Python tests with unittest.",
+            })
+
+        problem = observed["bound_relevance_cegar_loop"]["cegar_problem"]
+        self.assertEqual(
+            problem["policy_conditions"],
+            frontier["policy_conditions"],
+        )
+        self.assertEqual(problem["policy_adequacy_bindings"], {})
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["next_required_edge"],
+            "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+        )
+        self.assertEqual(
+            out["next_policy_request"]["search_context"][
+                "rejected_policy_candidates"
+            ][0]["policy_id"],
+            "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest",
+        )
+        self.assertFalse(out["semantic_acceptance_complete"])
+        self.assertFalse(out["actual_goal_satisfaction_verified"])
+
+
     def test_goal_binding_is_required_before_policy_reasoning(self):
         request = self._base_request()
         request.pop("goal_to_decision_binding")

@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GROUNDED_POLICY_FRONTIER_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS__14_OF_14__EXACT_BRANCH_BYTES",
+  "branch": "r2-grounded-policy-frontier-final-20261008",
+  "exact_blobs": {
+    "frontier": "7004bcfa278579933818b73dcb9d04bde2e48e06",
+    "controller": "29872fc55a5ec577feea769cc919dc889899c2bd"
+  },
+  "isolated_replay": {
+    "carrier": "brain-r2-grounded-frontier-verify-20261008",
+    "sprite_id": "sprite-87368f21-5869-452d-b326-b420f5e99347",
+    "checks_passed": 14,
+    "checks_total": 14
+  },
+  "verified_seam": [
+    "KNOWN_BRAIN_OWNED_BOUND_CAPABILITY_BECOMES_POLICY_HYPOTHESIS",
+    "UNKNOWN_GOAL_REMAINS_UNRESOLVED",
+    "AMBIGUOUS_GROUNDING_PRESERVES_ALL_CANDIDATES",
+    "P3_RECEIVES_GROUNDED_POLICY_CONDITIONS",
+    "NO_POLICY_ADEQUACY_BINDING_IS_INJECTED",
+    "NEXT_EDGE_LOCALIZES_TO_AUTHENTICATED_POSITIVE_POLICY_ADEQUACY",
+    "SEMANTIC_ACCEPTANCE_REMAINS_FALSE",
+    "ACTUAL_GOAL_SATISFACTION_REMAINS_FALSE"
+  ],
+  "inherited_verified_components": [
+    "PLAIN_GOAL_BOUND_GROUNDING_V1",
+    "PLAIN_GOAL_BOUND_GROUNDING_INDEPENDENT_VERIFIER",
+    "P3_ROBUST_POLICY_ADEQUACY_CEGAR_V1"
+  ],
+  "ci_note": "Focused GitHub Actions job failed before runner steps were assigned; zero-step carrier failure is not used as code-failure evidence.",
+  "hard_nonclaims": [
+    "GROUNDING_IS_NOT_POLICY_ADEQUACY",
+    "POLICY_HYPOTHESES_HAVE_NO_EXECUTION_AUTHORITY",
+    "UNKNOWN_LANGUAGE_MEANING_IS_NOT_INVENTED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "transplant": {
+    "base_main_sha": "d22104fdebeb9226e9dd279e1ced8233b113810f",
+    "exact_runtime_blobs_preserved": true,
+    "note": "Load-bearing runtime blobs are identical to the isolated replayed bytes."
+  }
+}
