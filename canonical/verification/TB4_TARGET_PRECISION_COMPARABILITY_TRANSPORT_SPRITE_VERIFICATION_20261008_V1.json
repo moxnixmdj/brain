@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_TARGET_PRECISION_COMPARABILITY_TRANSPORT_SPRITE_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SPRITE_REPLAY_PASS__PRECISION_REFINEMENT_CREATES_NO_NEW_ROUTE_COMPARABILITY_PREMISE__GENERAL_SANDBOX_INVARIANCE_NOT_CLAIMED__ZERO_CREDIT",
+  "subject": {
+    "brain_pull_request": 3148,
+    "candidate_path": "canonical/governance/TB4_TARGET_PRECISION_COMPARABILITY_TRANSPORT_CANDIDATE_20261008_V1.json",
+    "candidate_git_blob_sha": "35e87a1dcd67d8a04f658c6e88872cdc8a63b5ba",
+    "candidate_utf8_sha256": "1bb0cdd50c80fce2b55934a78f8a97e2b7ef1915b6e57d1b9a67a52934cf8c9c"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-objective-pass-lock-v1-verify",
+    "sprite_id": "sprite-64f51750-7c85-4715-9c30-a6bb89f60a24",
+    "workspace": "/tmp/tb4_transport"
+  },
+  "exact_input_bytes": {
+    "same_owner_precision_verification_sha256": "ba7e0d10104f517b1f4c4d03fab9a8694f53203a129af029e88ddcabf06a9dcf",
+    "target_envelope_sha256": "cd76161bce40c89b717a7c861d2ad814a57ad582ac84b11ec0afe98548e70707",
+    "terminal_protocol_sha256": "f9d7acf3e05af05d08fafff66ec34f161259fe936890896cf5c6f033b1e96216",
+    "source_audit_sha256": "5ce11a8f7bbacf4fe53a5cdda397df4209fd8e63cd68f20d96fe68d8d768ea36",
+    "verifier_script_sha256": "dde0282b74940d3c420b23f4dcc975547114537d24949936ef1deb550223cd59"
+  },
+  "verified": {
+    "target_model": "Claude Opus 5.5",
+    "historical_tb4_owner_bar_percent": 66.4,
+    "same_owner_run_detailed_percent": 66.36,
+    "same_exact_owner_pdf_relation_independently_verified": true,
+    "preexisting_brain_tb4_route_comparability_admission": true,
+    "preexisting_brain_tb4_clean_case_execution_authority": true,
+    "precision_refinement_changes_task_population": false,
+    "precision_refinement_changes_scorer": false,
+    "precision_refinement_changes_brain_route": false,
+    "precision_refinement_changes_action_authority": false,
+    "new_comparability_premise_created_only_by_precision_refinement": false,
+    "general_sandbox_provider_invariance_proved": false,
+    "brain_tb4_acceptance_proved": false,
+    "verdict": "PASS"
+  },
+  "logical_conclusion": "WITHIN_THE_FROZEN_BRAIN_TB4_ACCEPTANCE_PROTOCOL__THE_ALREADY_ADMITTED_BRAIN_ROUTE_REMAINS_THE_ROUTE_FOR_A_COMPARABLE_TB4_SCORE_WHEN_THE_SAME_OPUS55_OWNER_BAR_IS_REFINED_FROM_ITS_ONE_DECIMAL_66_4_ALIAS_TO_ITS_INDEPENDENTLY_VERIFIED_TWO_DECIMAL_66_36_VALUE__NO_NEW_COMPARABILITY_DUTY_ARISES_SOLELY_FROM_THAT_PRECISION_REFINEMENT",
+  "remaining_atomic_blocker_after_precision_repair": "OBTAIN_AT_LEAST_219_DISTINCT_CREDITABLE_SUCCESS_RECEIPTS_UNDER_THE_ALREADY_ADMITTED_ROUTE_OR_CLOSE_CODING_TB4_GE_66_4_WITH_A_SEPARATELY_ADMISSIBLE_SCOPE_COMPLETE_STRONGER_PROOF",
+  "hard_nonclaims": [
+    "NO_GENERAL_SANDBOX_PROVIDER_INVARIANCE_THEOREM",
+    "NO_CLAIM_BRAIN_AGENT_EQUALS_CLAUDE_CODE",
+    "NO_BRAIN_TB4_SCORE",
+    "NO_TB4_ACCEPTANCE_PROMOTION",
+    "NO_TERMINAL_CASES_CONSUMED",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
