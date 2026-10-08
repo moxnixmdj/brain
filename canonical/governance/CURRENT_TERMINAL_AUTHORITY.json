@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34",
-  "date": "2026-10-07",
-  "status": "ACTIVE_FAIL_CLOSED_ONE_TERMINAL_ACCEPTANCE_ROOT__UNIVERSAL_COVER_OR_FROZEN_PROTOCOL_ROUTE__TERMINAL_FALSE",
-  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "date": "2026-10-08",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_FIXED_POINT_SCHEDULER_BOUND",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
       "path": "canonical/governance/UNIVERSAL_ESCAPE_RESOLVER_V2_ACTIVATION_20261007_V1.json",
@@ -878,6 +878,20 @@
       "path": "canonical/evidence/GDPVAL_AA_PUBLIC_PAIRWISE_BOUNDARY_REFRESH_20261008_V1.json",
       "git_blob_sha": "7a4ac9a77f1a5d451374dd36dd77ba83ad41a2ed",
       "status": "FRESH_PUBLIC_OWNER_AND_OPEN_SOURCE_BOUNDARY_REFRESH__PAIRWISE_STRUCTURE_BOUND__EXACT_OWNER_PREFERENCE_RELATION_STILL_UNBOUND__ZERO_TERMINAL_CREDIT"
+    },
+    "current_mission_objective": {
+      "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "git_blob_sha": "0fb2d4e5f369ef937946d7ad8815764b439c1d11",
+      "status": "ACTIVE_ULTIMATE_MISSION_OBJECTIVE_AUTHORITY"
+    },
+    "current_r2_decision_intelligence": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "4c30fe665372af5c3c4c94f0b8907703871c85ab",
+      "scheduler_cut": {
+        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json",
+        "git_blob_sha": "e13a3440b0ce581a574b584faecfd70ef1a4167d"
+      },
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__SUPERSEDES_HISTORICAL_ROOT2_SCHEDULER_PROJECTIONS_FOR_R2_EXECUTION"
     }
   },
   "live_truth": {
@@ -1026,7 +1040,7 @@
     "gdpval_imperative_population_reexecution_complete": true,
     "gdpval_structural_acceptance_lane_bound": true,
     "gdpval_structural_acceptance_is_serial_prerequisite_to_target_relative_scoring": false,
-    "gdpval_owner_layer_target_relative_route_currently_awake": true,
+    "gdpval_owner_layer_target_relative_route_currently_awake": false,
     "gdpval_direct_target_model_generation_required": false,
     "gdpval_brain_owner_elo_score_bound": false,
     "gdpval_target_relation_bridge_bound": false,
@@ -1370,7 +1384,13 @@
     "tb_science_rank12_public_epoch_current": true,
     "tb_science_rank12_execution_claim_active": false,
     "tb_science_rank12_public_activation_armed": false,
-    "tb_science_rank12_authority_consumed": false
+    "tb_science_rank12_authority_consumed": false,
+    "gdpval_owner_layer_target_relative_route_state": "EXTERNAL_REQUIRED_SLEEP",
+    "gdpval_owner_layer_wake_authority": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json",
+    "opus_5_5_is_global_terminal_objective": false,
+    "opus_5_5_is_frontier_checkpoint": true,
+    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5",
+    "historical_root2_scheduler_fields_currently_authoritative": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2035,5 +2055,27 @@
       "path": "canonical/verification/OPTION_PRESERVING_CAPABILITY_OPTIMIZER_INDEPENDENT_VERIFICATION_20261008_V1.json",
       "status": "PASS__OPTION_PRESERVING_OPTIMIZER_AND_SCHEDULER_REGRESSION__16_OF_16__GOVERNANCE_PASS"
     }
-  }
+  },
+  "checkpoint_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective_precedence": {
+    "authoritative_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "authoritative_git_blob_sha": "0fb2d4e5f369ef937946d7ad8815764b439c1d11",
+    "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "mission_terminality": "OPEN_ENDED_CAPABILITY_OPTIMIZATION",
+    "opus_5_5_role": "FIRST_FRONTIER_CHECKPOINT_NOT_TERMINAL_OBJECTIVE",
+    "legacy_opus_terminal_fields_role": "CHECKPOINT_LEDGER_ONLY__NOT_GLOBAL_MISSION_SCHEDULING_AUTHORITY"
+  },
+  "r2_scheduler_precedence": {
+    "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_authority_git_blob_sha": "4c30fe665372af5c3c4c94f0b8907703871c85ab",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json",
+    "current_scheduler_git_blob_sha": "e13a3440b0ce581a574b584faecfd70ef1a4167d",
+    "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
+    "general_mechanism_missing": false,
+    "enumerated_active_zero_reality_cell_count": 0,
+    "enumerated_external_required_sleep_cell_count": 2,
+    "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
+    "rule": "CURRENT_R2_POINTER_AND_ITS_CONTENT_ADDRESSED_SCHEDULER_CUT_HAVE_PRECEDENCE_OVER_ALL_HISTORICAL_ROOT2_OR_OPUS_CHECKPOINT_SCHEDULER_FIELDS_IN_THIS_LEDGER"
+  },
+  "pointer_revision": 35
 }
