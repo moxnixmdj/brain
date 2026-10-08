@@ -53,8 +53,12 @@ def certify(*,repo_root:str|Path)->dict[str,Any]:
             raise ValueError("CURRENT_REFERENCE_DRIFT")
         if t.get("benchmark")!="AA-Briefcase v1.1" or ct.get("benchmark")!="AA-Briefcase v1.1":
             raise ValueError("BENCHMARK_DRIFT")
-        if route.get("status")!="ACTIVE_CANDIDATE_ROUTE__CURRENT_EPOCH_REFERENCE_1807__BRAIN_SCORE_MISSING__ZERO_CREDIT":
-            raise ValueError("ROUTE_NO_LONGER_SCORE_MISSING")
+        allowed_route_statuses={
+            "ACTIVE_CANDIDATE_ROUTE__CURRENT_EPOCH_REFERENCE_1807__BRAIN_SCORE_MISSING__ZERO_CREDIT",
+            "ACTIVE_CURRENT_BOUNDARY__CURRENT_BYTES_PARITY_INDETERMINATE__NEW_MATCHED_SCORE_OR_NEW_SCOPE_COMPLETE_PROFESSIONAL_QUALITY_PREMISE_REQUIRED__ZERO_CREDIT",
+        }
+        if route.get("status") not in allowed_route_statuses:
+            raise ValueError("ROUTE_SCORE_BOUNDARY_CHANGED")
         if receipts.get("count")!=0:
             raise ValueError("ACTUAL_SCORE_RECEIPT_NOW_EXISTS")
         if stronger.get("bound_certificate_count")!=0:
