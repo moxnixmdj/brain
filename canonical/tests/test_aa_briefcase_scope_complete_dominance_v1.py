@@ -122,6 +122,24 @@ class T(unittest.TestCase):
         out = verify_scope_complete_dominance(target(), c)
         self.assertEqual(out["status"], "PASS_SCOPE_COMPLETE_CURRENT_EPOCH_DOMINANCE")
 
+    def test_actual_owner_assignment_must_be_verified(self):
+        c = certificate()
+        u = next(x for x in c["checks"] if x["route"] == "U_DIRECT_TARGET_RELATION")
+        u["owner_assignment_verified"] = False
+        with self.assertRaisesRegex(DominanceCertificateError, "U_OWNER_ASSIGNMENT_UNVERIFIED"):
+            verify_scope_complete_dominance(target(), c)
+
+    def test_full_panel_requires_three_outcomes(self):
+        c = certificate()
+        u = next(x for x in c["checks"] if x["route"] == "U_DIRECT_TARGET_RELATION")
+        u.pop("owner_assignment_verified")
+        u.pop("outcome")
+        u["assignment_coverage"] = "ALL_BOUND_PANEL_JUDGES"
+        u["panel_complete_verified"] = True
+        u["panel_outcomes"] = ["BRAIN_WIN", "TIE"]
+        with self.assertRaisesRegex(DominanceCertificateError, "U_PAIRWISE_PANEL_OUTCOME_COUNT_INVALID"):
+            verify_scope_complete_dominance(target(), c)
+
     def test_rubric_opus_strictly_better_fails(self):
         c = certificate()
         u = next(x for x in c["checks"] if x["route"] == "U_DIRECT_TARGET_RELATION")
