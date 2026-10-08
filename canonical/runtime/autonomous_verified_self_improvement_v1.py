@@ -120,11 +120,15 @@ def _empty_state() -> dict[str, Any]:
         "pareto_frontiers": {},
         "failures": {},
         "reuse": {},
+        "observations": {},
+        "improvement_queue": {},
         "stats": {
             "verified_episode_count": 0,
             "verified_skill_count": 0,
             "active_skill_count": 0,
             "failure_class_count": 0,
+            "success_observation_count": 0,
+            "pending_improvement_count": 0,
         },
     }
 
@@ -138,7 +142,12 @@ def load_state(path: str | Path = DEFAULT_STATE_PATH) -> dict[str, Any]:
         raise SelfImprovementError("SELF_IMPROVEMENT_STATE_SCHEMA_INVALID")
     state = deepcopy(dict(doc))
     state.setdefault("reuse", {})
-    for key in ("episodes", "skills", "pareto_frontiers", "failures", "reuse", "stats"):
+    state.setdefault("observations", {})
+    state.setdefault("improvement_queue", {})
+    for key in (
+        "episodes", "skills", "pareto_frontiers", "failures", "reuse",
+        "observations", "improvement_queue", "stats",
+    ):
         if not isinstance(state.get(key), Mapping):
             raise SelfImprovementError("SELF_IMPROVEMENT_STATE_FIELD_INVALID:" + key)
     return state
@@ -247,7 +256,152 @@ def _diagnose_failure(out: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _work_id(kind: str, identity: Mapping[str, Any]) -> str:
+    return "work:" + _sha({"kind": _s(kind), "identity": deepcopy(dict(identity))})
+
+
+def _enqueue_improvement(
+    state: dict[str, Any],
+    *,
+    kind: str,
+    priority: int,
+    identity: Mapping[str, Any],
+    payload: Mapping[str, Any],
+) -> str:
+    queue = state.setdefault("improvement_queue", {})
+    if not isinstance(queue, dict):
+        raise SelfImprovementError("IMPROVEMENT_QUEUE_INVALID")
+    wid = _work_id(kind, identity)
+    previous = queue.get(wid)
+    observations = (
+        int(previous.get("observations", 0)) + 1
+        if isinstance(previous, Mapping) else 1
+    )
+    reopen_count = (
+        int(previous.get("reopen_count", 0))
+        + (1 if isinstance(previous, Mapping) and previous.get("status") == "RESOLVED" else 0)
+    )
+    queue[wid] = {
+        "work_id": wid,
+        "kind": _s(kind),
+        "priority": int(priority),
+        "identity": deepcopy(dict(identity)),
+        "payload": deepcopy(dict(payload)),
+        "status": "PENDING",
+        "observations": observations,
+        "reopen_count": reopen_count,
+    }
+    return wid
+
+
+def _resolve_improvements(
+    state: dict[str, Any],
+    *,
+    kind: str,
+    predicate,
+    resolved_by: str,
+) -> list[str]:
+    resolved: list[str] = []
+    queue = state.get("improvement_queue", {})
+    if not isinstance(queue, Mapping):
+        return resolved
+    for wid, raw in queue.items():
+        if not isinstance(raw, dict) or raw.get("status") != "PENDING":
+            continue
+        if raw.get("kind") != kind or not predicate(raw):
+            continue
+        raw["status"] = "RESOLVED"
+        raw["resolved_by"] = _s(resolved_by)
+        resolved.append(str(wid))
+    return sorted(resolved)
+
+
+def _next_improvement_from_state(state: Mapping[str, Any]) -> dict[str, Any] | None:
+    queue = state.get("improvement_queue", {})
+    if not isinstance(queue, Mapping):
+        return None
+    pending = [
+        deepcopy(dict(row))
+        for row in queue.values()
+        if isinstance(row, Mapping) and row.get("status") == "PENDING"
+    ]
+    if not pending:
+        return None
+    pending.sort(
+        key=lambda row: (
+            int(row.get("priority", 10**9)),
+            -int(row.get("observations", 0)),
+            str(row.get("work_id") or ""),
+        )
+    )
+    return pending[0]
+
+
+def next_improvement_action(
+    *,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+) -> dict[str, Any] | None:
+    """Return the highest-priority unresolved compounding action, deterministically."""
+    return _next_improvement_from_state(load_state(state_path))
+
+
+def record_success_observation(
+    out: Mapping[str, Any],
+    *,
+    surface: str,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+) -> dict[str, Any]:
+    """Durably retain a compact success pointer when no verified episode exists.
+
+    Plain runtime successes are not promoted. They become explicit work to build a
+    verifiable episode adapter, preventing successful experience from silently
+    disappearing while preserving the independent-verification boundary.
+    """
+    if not isinstance(out, Mapping) or out.get("pass") is not True:
+        raise SelfImprovementError("SUCCESS_OBSERVATION_REQUIRES_PASSING_OUTPUT")
+    name = _s(surface) or "UNSPECIFIED_RUNTIME_SURFACE"
+    core = {
+        "surface": name,
+        "schema": _s(out.get("schema")) or None,
+        "status": _s(out.get("status")) or None,
+        "output_sha256": _sha(out),
+    }
+    oid = "observation:" + _sha(core)
+    state = load_state(state_path)
+    previous = state["observations"].get(oid)
+    state["observations"][oid] = {
+        **core,
+        "observation_id": oid,
+        "count": int(previous.get("count", 0)) + 1 if isinstance(previous, Mapping) else 1,
+    }
+    work_id = _enqueue_improvement(
+        state,
+        kind="ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+        priority=50,
+        identity={"observation_id": oid},
+        payload={
+            "observation_id": oid,
+            "surface": name,
+            "output_sha256": core["output_sha256"],
+            "required_result": "VERIFIED_EPISODE_OR_PROVED_NONLEARNABLE_SUCCESS",
+        },
+    )
+    _refresh_stats(state)
+    _write_state(state, state_path)
+    return {
+        "schema": SCHEMA,
+        "status": "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
+        "pass": True,
+        "observation_id": oid,
+        "improvement_work_id": work_id,
+        "next_improvement_action": _next_improvement_from_state(state),
+        "permanent_reuse_authorized": False,
+        "terminal_authority": False,
+    }
+
+
 def _refresh_stats(state: dict[str, Any]) -> None:
+    queue = state.get("improvement_queue", {})
     state["stats"] = {
         "verified_episode_count": len(state["episodes"]),
         "verified_skill_count": len(state["skills"]),
@@ -256,6 +410,11 @@ def _refresh_stats(state: dict[str, Any]) -> None:
             if isinstance(row, Mapping) and row.get("active") is True
         ),
         "failure_class_count": len(state["failures"]),
+        "success_observation_count": len(state.get("observations", {})),
+        "pending_improvement_count": sum(
+            1 for row in queue.values()
+            if isinstance(row, Mapping) and row.get("status") == "PENDING"
+        ) if isinstance(queue, Mapping) else 0,
     }
 
 
@@ -300,15 +459,30 @@ def integrate_solver_output(
             ),
             "repair_receipts": repair_receipts,
         }
+        work_id = _enqueue_improvement(
+            state,
+            kind="REPAIR_FAILURE_CLASS",
+            priority=30,
+            identity={"failure_fingerprint": fid},
+            payload={
+                "failure_fingerprint": fid,
+                "repair_class": diagnosis["repair_class"],
+                "status": diagnosis.get("status"),
+                "reason": diagnosis.get("reason"),
+                "retry_capsule_sha256": retry_sha,
+            },
+        )
         _refresh_stats(state)
         _write_state(state, state_path)
         return {
             "schema": SCHEMA,
-            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "status": "FAILURE_DIAGNOSED__REPAIR_QUEUED",
             "pass": False,
             "diagnosis": diagnosis,
             "retry_capsule_sha256": retry_sha,
             "retry_capsule_persisted": retry_sha is not None,
+            "improvement_work_id": work_id,
+            "next_improvement_action": _next_improvement_from_state(state),
             "state_stats": deepcopy(state["stats"]),
             "permanent_reuse_authorized": False,
             "terminal_authority": False,
@@ -327,10 +501,76 @@ def integrate_solver_output(
         episode_key = _episode_key(ep)
         episode_added = episode_key not in state["episodes"]
         state["episodes"][episode_key] = deepcopy(dict(ep))
+        _resolve_improvements(
+            state,
+            kind="VERIFY_EPISODE",
+            predicate=lambda row: (
+                row.get("identity", {}).get("episode_id") == _s(ep.get("episode_id"))
+                and row.get("identity", {}).get("scope_id") == _s(ep.get("scope_id"))
+            ),
+            resolved_by=episode_key,
+        )
+    else:
+        raw_ep = out.get("current_episode")
+        if isinstance(raw_ep, Mapping):
+            _enqueue_improvement(
+                state,
+                kind="VERIFY_EPISODE",
+                priority=20,
+                identity={
+                    "episode_id": _s(raw_ep.get("episode_id")),
+                    "scope_id": _s(raw_ep.get("scope_id")),
+                    "program_sha256": _s(raw_ep.get("program_sha256")),
+                    "trace_sha256": _s(raw_ep.get("trace_sha256")),
+                },
+                payload={
+                    "episode_id": _s(raw_ep.get("episode_id")),
+                    "scope_id": _s(raw_ep.get("scope_id")),
+                    "program_sha256": _s(raw_ep.get("program_sha256")),
+                    "trace_sha256": _s(raw_ep.get("trace_sha256")),
+                    "verification_error": _s(out.get("episode_verification_error")) or None,
+                },
+            )
 
     skill_admission = None
     active_skill_id = None
     verified_skill = out.get("verified_executable_skill")
+    skill_candidate = out.get("skill_candidate")
+    if isinstance(skill_candidate, Mapping) and not isinstance(verified_skill, Mapping):
+        candidate_sha = _s(skill_candidate.get("candidate_sha256"))
+        if candidate_sha:
+            _enqueue_improvement(
+                state,
+                kind="VERIFY_SKILL_CANDIDATE",
+                priority=10,
+                identity={"candidate_sha256": candidate_sha},
+                payload={
+                    "candidate_sha256": candidate_sha,
+                    "source_episode_ids": _items(skill_candidate.get("source_episode_ids")),
+                    "source_scopes": _items(skill_candidate.get("source_scopes")),
+                    "postconditions": _items(skill_candidate.get("postconditions")),
+                },
+            )
+    elif out.get("current_episode_verified") is True and not isinstance(skill_candidate, Mapping):
+        ep = out.get("current_episode")
+        if isinstance(ep, Mapping):
+            _enqueue_improvement(
+                state,
+                kind="COLLECT_MATCHING_VERIFIED_EPISODE",
+                priority=40,
+                identity={
+                    "scope_id": _s(ep.get("scope_id")),
+                    "program_sha256": _s(ep.get("program_sha256")),
+                    "postconditions": _items(ep.get("postconditions")),
+                },
+                payload={
+                    "scope_id": _s(ep.get("scope_id")),
+                    "program_sha256": _s(ep.get("program_sha256")),
+                    "postconditions": _items(ep.get("postconditions")),
+                    "minimum_verified_episode_count": 2,
+                },
+            )
+
     if (
         out.get("verified_skill_reuse_authorized") is True
         and isinstance(verified_skill, Mapping)
@@ -370,6 +610,30 @@ def integrate_solver_output(
 
         if skill_admission.get("admitted") is True:
             active_skill_id = sid
+            _resolve_improvements(
+                state,
+                kind="VERIFY_SKILL_CANDIDATE",
+                predicate=lambda work: work.get("identity", {}).get("candidate_sha256")
+                == _s(verified_skill.get("candidate_sha256")),
+                resolved_by=sid,
+            )
+            _resolve_improvements(
+                state,
+                kind="REVERIFY_QUARANTINED_SKILL",
+                predicate=lambda work: work.get("identity", {}).get("skill_id") == sid,
+                resolved_by=sid,
+            )
+            source_scopes = set(_items(verified_skill.get("source_scopes")))
+            postconditions = _items(verified_skill.get("postconditions"))
+            _resolve_improvements(
+                state,
+                kind="COLLECT_MATCHING_VERIFIED_EPISODE",
+                predicate=lambda work: (
+                    work.get("payload", {}).get("scope_id") in source_scopes
+                    and _items(work.get("payload", {}).get("postconditions")) == postconditions
+                ),
+                resolved_by=sid,
+            )
             admitted_ids = [
                 str(x.get("capability_id"))
                 for x in skill_admission.get("frontier", [])
@@ -402,6 +666,7 @@ def integrate_solver_output(
         "active_skill_id": active_skill_id,
         "skill_admission": deepcopy(skill_admission),
         "state_stats": deepcopy(state["stats"]),
+        "next_improvement_action": _next_improvement_from_state(state),
         "permanent_reuse_authorized": active_skill_id is not None,
         "terminal_authority": False,
     }
@@ -480,6 +745,13 @@ def record_repair_outcome(
     if original_replay_pass:
         capsule["resolved"] = True
         capsule["resolved_by"] = repair_sha
+        _resolve_improvements(
+            state,
+            kind="REPAIR_FAILURE_CLASS",
+            predicate=lambda work: work.get("identity", {}).get("failure_fingerprint") == fid,
+            resolved_by=repair_sha,
+        )
+    _refresh_stats(state)
     _write_state(state, state_path)
     unresolved = sum(
         1 for item in capsules.values()
@@ -676,7 +948,7 @@ def _record_reuse_result(
     skill_id: str,
     success: bool,
     effect_may_have_occurred: bool,
-) -> None:
+) -> dict[str, Any]:
     state = load_state(state_path)
     row = dict(state["reuse"].get(skill_id) or {})
     row["attempts"] = int(row.get("attempts", 0)) + 1
@@ -688,7 +960,40 @@ def _record_reuse_result(
         1 if (not success and effect_may_have_occurred) else 0
     )
     state["reuse"][skill_id] = row
+
+    quarantined = False
+    if not success and effect_may_have_occurred:
+        record = state["skills"].get(skill_id)
+        if isinstance(record, dict):
+            record["active"] = False
+            record["quarantined"] = True
+            record["quarantine_reason"] = "VERIFIED_REUSE_ROUTE_EFFECTFUL_FAILURE_COUNTEREXAMPLE"
+            family = record.get("family_id")
+            frontier = state["pareto_frontiers"].get(family)
+            if isinstance(frontier, Sequence) and not isinstance(frontier, (str, bytes)):
+                state["pareto_frontiers"][family] = [
+                    sid for sid in frontier if sid != skill_id
+                ]
+            quarantined = True
+            _enqueue_improvement(
+                state,
+                kind="REVERIFY_QUARANTINED_SKILL",
+                priority=5,
+                identity={"skill_id": skill_id},
+                payload={
+                    "skill_id": skill_id,
+                    "reason": record["quarantine_reason"],
+                    "required_result": "INDEPENDENT_REVERIFICATION_OR_REPLACEMENT",
+                },
+            )
+
+    _refresh_stats(state)
     _write_state(state, state_path)
+    return {
+        "skill_id": skill_id,
+        "quarantined": quarantined,
+        "next_improvement_action": _next_improvement_from_state(state),
+    }
 
 def run_learning_episode(
     problem: Mapping[str, Any],
@@ -755,7 +1060,7 @@ def run_learning_episode(
         max_capability_expansions=max_capability_expansions,
         )
         effectful = _effect_may_have_occurred(reuse_out)
-        _record_reuse_result(
+        reuse_learning = _record_reuse_result(
             state_path=state_path,
             skill_id=selected["skill_id"],
             success=reuse_out.get("pass") is True,
@@ -767,6 +1072,7 @@ def run_learning_episode(
             "pass": reuse_out.get("pass") is True,
             "effect_may_have_occurred": effectful,
             "status": reuse_out.get("status"),
+            "reuse_learning": reuse_learning,
         }
         if reuse_out.get("pass") is True:
             integrated = integrate_solver_output(reuse_out, state_path=state_path)
