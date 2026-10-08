@@ -40,29 +40,52 @@ ALLOWED_FROM_IMPORT_MODULES = frozenset({
     "canonical.runtime.executable_skill_program_v7",
     "canonical.runtime.raw_goal_archive_acceptance_v1",
 })
-FORBIDDEN_CALL_NAMES = frozenset({
-    "open",
-    "exec",
-    "eval",
-    "compile",
-    "__import__",
-    "input",
-    "breakpoint",
+SAFE_BUILTIN_CALLS = frozenset({
+    "all",
+    "any",
+    "bool",
+    "bytes",
+    "dict",
+    "enumerate",
+    "int",
+    "isinstance",
+    "len",
+    "list",
+    "max",
+    "min",
+    "range",
+    "set",
+    "sorted",
+    "str",
+    "tuple",
 })
-FORBIDDEN_METHOD_CALLS = frozenset({
-    "write_text",
-    "write_bytes",
-    "unlink",
-    "rename",
-    "replace",
-    "mkdir",
-    "rmdir",
-    "touch",
-    "chmod",
-    "chown",
-    "symlink_to",
-    "hardlink_to",
-    "open",
+SAFE_METHOD_CALLS = frozenset({
+    "append",
+    "as_posix",
+    "copy",
+    "decode",
+    "dumps",
+    "encode",
+    "endswith",
+    "get",
+    "hexdigest",
+    "is_absolute",
+    "is_file",
+    "is_symlink",
+    "items",
+    "join",
+    "keys",
+    "loads",
+    "lower",
+    "read_bytes",
+    "relative_to",
+    "resolve",
+    "sort",
+    "split",
+    "startswith",
+    "strip",
+    "upper",
+    "values",
 })
 AUTHORITY_FIELDS = frozenset({
     "verification_authority",
@@ -119,6 +142,26 @@ def _verification_snapshot(root: Path) -> dict[str, str]:
 
 def _validate_source_capabilities(source: str) -> None:
     tree = ast.parse(source)
+    allowed_name_calls = set(SAFE_BUILTIN_CALLS)
+
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            allowed_name_calls.add(node.name)
+        elif isinstance(node, ast.Import):
+            for alias in node.names:
+                if alias.name not in ALLOWED_IMPORT_MODULES:
+                    raise AdapterPatchFirewallError(
+                        "SOURCE_IMPORT_NOT_ALLOWED:" + alias.name
+                    )
+        elif isinstance(node, ast.ImportFrom):
+            module = str(node.module or "")
+            if module not in ALLOWED_FROM_IMPORT_MODULES:
+                raise AdapterPatchFirewallError(
+                    "SOURCE_FROM_IMPORT_NOT_ALLOWED:" + module
+                )
+            for alias in node.names:
+                allowed_name_calls.add(alias.asname or alias.name)
+
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             for alias in node.names:
@@ -132,17 +175,24 @@ def _validate_source_capabilities(source: str) -> None:
                 raise AdapterPatchFirewallError(
                     "SOURCE_FROM_IMPORT_NOT_ALLOWED:" + module
                 )
+        elif isinstance(node, ast.Attribute) and node.attr.startswith("__"):
+            raise AdapterPatchFirewallError(
+                "SOURCE_DUNDER_ATTRIBUTE_NOT_ALLOWED:" + node.attr
+            )
         elif isinstance(node, ast.Call):
-            if isinstance(node.func, ast.Name) and node.func.id in FORBIDDEN_CALL_NAMES:
+            if isinstance(node.func, ast.Name):
+                if node.func.id not in allowed_name_calls:
+                    raise AdapterPatchFirewallError(
+                        "SOURCE_CALL_NOT_ALLOWED:" + node.func.id
+                    )
+            elif isinstance(node.func, ast.Attribute):
+                if node.func.attr not in SAFE_METHOD_CALLS:
+                    raise AdapterPatchFirewallError(
+                        "SOURCE_METHOD_NOT_ALLOWED:" + node.func.attr
+                    )
+            else:
                 raise AdapterPatchFirewallError(
-                    "SOURCE_CALL_NOT_ALLOWED:" + node.func.id
-                )
-            if (
-                isinstance(node.func, ast.Attribute)
-                and node.func.attr in FORBIDDEN_METHOD_CALLS
-            ):
-                raise AdapterPatchFirewallError(
-                    "SOURCE_METHOD_NOT_ALLOWED:" + node.func.attr
+                    "SOURCE_DYNAMIC_CALL_NOT_ALLOWED"
                 )
         elif isinstance(node, ast.Dict):
             for key, value in zip(node.keys, node.values):
