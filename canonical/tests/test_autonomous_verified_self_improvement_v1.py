@@ -69,6 +69,11 @@ def verified_skill(
         "reuse_authorized": True,
         "candidate_only": False,
         "scope_relation": relation,
+        "scope_predicate": (
+            loop.VERIFIED_SUPERSET_SCOPE_PREDICATE
+            if relation == "PROVEN_SUPERSET"
+            else None
+        ),
         "verification_receipt": "SKVR:" + digest_char * 40,
         "acceptance_credit_delta": 0,
         "family_credit_delta": 0,
