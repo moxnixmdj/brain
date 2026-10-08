@@ -45,6 +45,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("TERMINAL_AUTOPILOT", c["engines"])
         self.assertIn("TERMINAL_ROOT", c["engines"])
         self.assertIn("TERMINAL_CLOSURE", c["engines"])
+        self.assertIn("ONE_SHOT_VERIFIED_CLOSURE", c["engines"])
         self.assertIn("OWNERSHIP_CATALOG", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
@@ -466,6 +467,55 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
         self.assertTrue(out["inner_pass"], out)
         self.assertEqual(out["result"]["query_predictions"][0]["prediction_interval"], ["2", "2"])
+
+
+    def test_one_shot_verified_closure_is_canonical_front_door_engine(self):
+        expected = {
+            "schema": "PROJECT_BRAIN_ONE_SHOT_VERIFIED_CLOSURE_V1",
+            "status": "VERIFIED_FIXED_POINT__IRREDUCIBLE_EXTERNAL_INFORMATION_REQUIRED",
+            "pass": True,
+            "fixed_point": True,
+            "terminal_authority": False,
+        }
+        tick = {
+            "schema": "PROJECT_BRAIN_R3_IMPROVEMENT_QUEUE_DRIVER_V1",
+            "status": "IMPROVEMENT_QUEUE_STABLE",
+            "pass": True,
+            "progress_count": 0,
+            "actions": [],
+            "terminal_authority": False,
+        }
+        with (
+            patch(
+                "canonical.runtime.unified_cognitive_fabric_v1.live_runtime.run",
+                return_value=expected,
+            ) as live_run,
+            patch(
+                "canonical.runtime.unified_cognitive_fabric_v1.improvement_driver.drain",
+                return_value=tick,
+            ),
+        ):
+            out = run({
+                "mode": "ONE_SHOT_VERIFIED_CLOSURE",
+                "payload": {},
+                "options": {
+                    "state_path": "state.json",
+                    "max_rounds": 7,
+                    "max_actions_per_round": 5,
+                },
+            })
+
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
+        self.assertEqual(out["mode"], "ONE_SHOT_VERIFIED_CLOSURE")
+        self.assertTrue(out["inner_pass"])
+        self.assertEqual(out["result"], expected)
+        self.assertFalse(out["terminal_authority"])
+        live_run.assert_called_once()
+        args = live_run.call_args.args[0]
+        self.assertEqual(args["mode"], "one_shot_verified_closure")
+        self.assertEqual(args["state_path"], "state.json")
+        self.assertEqual(args["max_rounds"], 7)
+        self.assertEqual(args["max_actions_per_round"], 5)
 
 
 if __name__ == "__main__":
