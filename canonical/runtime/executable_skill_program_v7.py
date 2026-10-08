@@ -12,6 +12,7 @@ from typing import Any, Mapping, Sequence
 
 SCHEMA="PROJECT_BRAIN_EXECUTABLE_SKILL_PROGRAM_V7"
 RELATIONS={"EXACT","PROVEN_SUPERSET"}
+SUPERSET_SCOPE_PREDICATES={"STRUCTURAL_MATCH_V1"}
 
 class ExecutableSkillProgramError(ValueError):
     pass
@@ -152,6 +153,12 @@ def verify_candidate(*,candidate:Mapping[str,Any],verification_receipt:Mapping[s
     relation=_s(r.get("scope_relation"))
     if relation not in RELATIONS:
         raise ExecutableSkillProgramError("CANDIDATE_SCOPE_RELATION_NOT_ADMISSIBLE")
+    scope_predicate=_s(r.get("scope_predicate"))
+    if relation=="PROVEN_SUPERSET":
+        if scope_predicate and scope_predicate not in SUPERSET_SCOPE_PREDICATES:
+            raise ExecutableSkillProgramError("CANDIDATE_SCOPE_PREDICATE_NOT_ADMISSIBLE")
+    elif scope_predicate:
+        raise ExecutableSkillProgramError("EXACT_SCOPE_MAY_NOT_DECLARE_SUPERSET_PREDICATE")
     rid=_s(r.get("receipt_id"))
     if not rid:
         raise ExecutableSkillProgramError("CANDIDATE_RECEIPT_ID_REQUIRED")
@@ -162,6 +169,7 @@ def verify_candidate(*,candidate:Mapping[str,Any],verification_receipt:Mapping[s
         "reuse_authorized":True,
         "candidate_only":False,
         "scope_relation":relation,
+        "scope_predicate":scope_predicate or None,
         "verification_receipt":rid,
         "acceptance_credit_delta":0,
         "family_credit_delta":0,
