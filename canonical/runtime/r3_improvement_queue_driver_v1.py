@@ -66,19 +66,24 @@ def _resolve_work(
 SUCCESS_ADAPTER_FRONTIER_PATHS = (
     "canonical/runtime/r3_bound_success_adapter_v1.py",
     "canonical/runtime/r3_raw_success_adapter_v1.py",
+    "canonical/runtime/r3_direct_r2_success_adapter_v1.py",
+    "canonical/runtime/R3_SUCCESS_ADAPTER_RULES_V1.json",
 )
 SUCCESS_VERIFICATION_AUTHORITY_PATHS = (
     "canonical/runtime/r3_independent_learning_verifier_v1.py",
     "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
     "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
+    "canonical/runtime/r3_direct_r2_success_checkpoint_verifier_v1.py",
 )
-# Preserve historical full-frontier ordering so existing full digests remain stable.
 SUCCESS_LEARNING_FRONTIER_PATHS = (
     "canonical/runtime/r3_bound_success_adapter_v1.py",
     "canonical/runtime/r3_independent_learning_verifier_v1.py",
     "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
     "canonical/runtime/r3_raw_success_adapter_v1.py",
     "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
+    "canonical/runtime/r3_direct_r2_success_adapter_v1.py",
+    "canonical/runtime/r3_direct_r2_success_checkpoint_verifier_v1.py",
+    "canonical/runtime/R3_SUCCESS_ADAPTER_RULES_V1.json",
 )
 
 FRONTIER_EXPANSION_KIND = "EXPAND_SUCCESS_VERIFICATION_FRONTIER"
@@ -240,6 +245,7 @@ def _activate_owned_success_adapter_frontier(
     importlib.invalidate_caches()
     from canonical.runtime import r3_bound_success_adapter_v1 as bound_success_adapter
     from canonical.runtime import r3_raw_success_adapter_v1 as raw_success_adapter
+    from canonical.runtime import r3_direct_r2_success_adapter_v1 as direct_r2_success_adapter
 
     modules = (
         (
@@ -249,6 +255,10 @@ def _activate_owned_success_adapter_frontier(
         (
             raw_success_adapter,
             "canonical/runtime/r3_raw_success_adapter_v1.py",
+        ),
+        (
+            direct_r2_success_adapter,
+            "canonical/runtime/r3_direct_r2_success_adapter_v1.py",
         ),
     )
     activated: list[dict[str, str]] = []
@@ -1239,14 +1249,28 @@ def advance_once(
     if success_episode_adapter_provider is None:
         from canonical.runtime import r3_bound_success_adapter_v1 as bound_success_adapter
         from canonical.runtime import r3_raw_success_adapter_v1 as raw_success_adapter
+        from canonical.runtime import r3_direct_r2_success_adapter_v1 as direct_r2_success_adapter
 
         def _owned_success_adapter(request):
             adapted = bound_success_adapter.adapt(request, repo_root=repo_root)
             if adapted is not None:
                 return adapted
-            return raw_success_adapter.adapt(request, repo_root=repo_root)
+            adapted = raw_success_adapter.adapt(request, repo_root=repo_root)
+            if adapted is not None:
+                return adapted
+            return direct_r2_success_adapter.adapt(request, repo_root=repo_root)
 
         success_episode_adapter_provider = _owned_success_adapter
+
+    if verification_frontier_acquisition_provider is None:
+        from canonical.runtime import r3_success_adapter_rule_acquisition_v1 as native_acquisition
+
+        verification_frontier_acquisition_provider = lambda request: native_acquisition.acquire(
+            request,
+            state_path=state_path,
+            repo_root=repo_root,
+        )
+        verification_frontier_acquisition_provider_id = native_acquisition.PROVIDER_ID
 
     state = learning.load_state(state_path)
     pending = _pending(state)
