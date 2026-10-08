@@ -28,4 +28,18 @@ jobs:
         with:
           python-version: "3.11"
       - name: Run P3 grounded numeric front-door regressions
-        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_p3_real_context_v3_admission_v7
+        id: regressions
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python -m unittest -v canonical.tests.test_p3_real_context_v3_admission_v7 > p3_v7_test_output.txt 2>&1
+          code=$?
+          cat p3_v7_test_output.txt
+          exit $code
+      - name: Upload diagnostic output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p3-v7-diagnostic
+          path: p3_v7_test_output.txt
+          if-no-files-found: error
