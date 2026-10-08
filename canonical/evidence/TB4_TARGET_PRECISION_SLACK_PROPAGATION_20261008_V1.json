@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_TARGET_PRECISION_SLACK_PROPAGATION_CANDIDATE_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_ONLY__CONDITIONAL_ON_TB4_CURRENT_OWNER_TARGET_REFRESH__ZERO_CREDIT",
+  "source_candidate": "canonical/evidence/TB4_OPUS55_CURRENT_OWNER_TARGET_REFRESH_20261008_V1.json",
+  "prior_slack_candidate_pr": 2406,
+  "capacity_formula": "220+5*k",
+  "historical_literal_required_successes": 220,
+  "current_matched_target_required_successes_if_verified": 219,
+  "historical_literal_slack_formula": "5*k",
+  "current_matched_target_slack_formula_if_verified": "1+5*k",
+  "table": [
+    {"k":0,"capacity":220,"historical_slack":0,"current_matched_slack":1},
+    {"k":1,"capacity":225,"historical_slack":5,"current_matched_slack":6},
+    {"k":2,"capacity":230,"historical_slack":10,"current_matched_slack":11},
+    {"k":3,"capacity":235,"historical_slack":15,"current_matched_slack":16},
+    {"k":4,"capacity":240,"historical_slack":20,"current_matched_slack":21}
+  ],
+  "candidate_implications": {
+    "buildkite_xl_pr_3136": "one recovered task implies capacity 225 and conditional current-target slack 6",
+    "omc_resource_pr_3140": "k recovered tasks imply conditional current-target slack 1+5*k"
+  },
+  "hard_nonclaims": [
+    "NO_CURRENT_THRESHOLD_PROMOTION",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_RESOURCE_RECOVERY_CREDIT",
+    "NO_TB4_CASE_EXECUTION"
+  ],
+  "promotion_condition": "PROMOTE_ONLY_AFTER_THE_66_36_CURRENT_OWNER_TARGET_BINDING_IS_INDEPENDENTLY_VERIFIED_AND_ADMITTED"
+}
