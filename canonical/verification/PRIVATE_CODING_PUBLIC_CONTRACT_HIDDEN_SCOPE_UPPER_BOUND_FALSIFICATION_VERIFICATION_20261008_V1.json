@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_PRIVATE_CODING_PUBLIC_CONTRACT_HIDDEN_SCOPE_UPPER_BOUND_FALSIFICATION_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_OWNER_SOURCE_REFETCH_PLUS_WOLFRAM_COUNTERMODEL_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PRIVATE_CODING_PUBLIC_CONTRACT_HIDDEN_SCOPE_UPPER_BOUND_FALSIFICATION_20261008_V1.json",
+    "git_blob_sha": "8959a508a5622c59a59042c0a78caa95f8f70904"
+  },
+  "source_verification": {
+    "provider": "SPRITES",
+    "sprite": "brain-private-benchmark-scope-falsify-verify-20261008-v1",
+    "sprite_id": "sprite-b11f8c12-77f8-43ac-9e72-6daea8f137b0",
+    "owner_pages": [
+      {
+        "url": "https://cognition.com/blog/frontier-code-1.1",
+        "sha256": "38a1fd41c710d9261d16ebf6ea6d64bcc42213005305c058ab5464b56341635e",
+        "checks": {
+          "more_than_1000_grading_criteria_present": true,
+          "main_100_hardest_statement_present": true
+        }
+      },
+      {
+        "url": "https://cognition.com/blog/frontier-code",
+        "sha256": "2f139f3738be6240adc9f8d1678fbe41a235320fccf25b1d0e7a543b164bc1a6",
+        "checks": {
+          "tasks_not_planned_for_public_release_statement_present": true
+        }
+      },
+      {
+        "url": "https://cursor.com/blog/cursorbench",
+        "sha256": "6bc2889c5d8765f1d300247d9352a39cacfa0a4970f79ed1b5fafec90ac12082",
+        "checks": {
+          "internal_eval_suite_based_on_real_cursor_sessions_present": true,
+          "internal_codebase_and_controlled_sources_present": true,
+          "agentic_graders_present": true,
+          "refresh_suite_every_few_months_present": true
+        }
+      },
+      {
+        "url": "https://cursor.com/evals",
+        "sha256": "f91e721aa2af81db4a773637dd89fe750d46e2713eab5d504e14cf7270115a6a",
+        "checks": {
+          "cursorbench_4_0_present": true,
+          "ambiguous_multi_file_real_cursor_sessions_present": true
+        }
+      }
+    ]
+  },
+  "formal_verification": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "formula": "P_IMPLIES_U_WHERE_U_IFF_NOT_R_OR_C",
+    "counterexample_query": "SatisfiabilityInstances[p && r && !c, {p,r,c}]",
+    "counterexample_result": [
+      true,
+      true,
+      false
+    ],
+    "tautology_query": "TautologyQ[Implies[p, Or[Not[r], c]]]",
+    "tautology_result": false,
+    "two_world_result": {
+      "W0": {
+        "P": true,
+        "R": false,
+        "C": false,
+        "U": true
+      },
+      "W1": {
+        "P": true,
+        "R": true,
+        "C": false,
+        "U": false
+      }
+    }
+  },
+  "verified_conclusion": [
+    "THE_SAME_PUBLIC_METHODOLOGY_FACTS_ARE_COMPATIBLE_WITH_A_HIDDEN_WORLD_IN_WHICH_THE_CANDIDATE_PUBLIC_CONTRACT_UPPER_BOUNDS_SCOPE_AND_ANOTHER_IN_WHICH_AN_UNCONSTRAINED_TASK_SPECIFIC_REQUIREMENT_ESCAPES_IT.",
+    "THEREFORE_GENERIC_PUBLIC_METHODOLOGY_FACTS_ALONE_DO_NOT_ENTAIL_HIDDEN_SCOPE_UPPER_BOUND.",
+    "FRONTIERCODE_AND_CURSORBENCH_PUBLIC_OWNER_MATERIALS_LEAVE_MATERIAL_TASK_SPECIFIC_REQUIREMENTS_OR_ACCEPTANCE_DETAILS_HIDDEN.",
+    "THE_FALSIFICATION_APPLIES_ONLY_TO_THE_GENERIC_PUBLIC_CONTRACT_SHORTCUT__NOT_TO_A_GENUINELY_UNIVERSAL_SUPERSET_THEOREM_OR_OWNER_RESULT."
+  ],
+  "hard_nonclaims": [
+    "NO_ASSERTION_ABOUT_WHICH_SPECIFIC_HIDDEN_REQUIREMENTS_EXIST.",
+    "NO_CLAIM_ALL_INTERNAL_SCOPE_SUPERSET_PROOFS_ARE_IMPOSSIBLE.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
