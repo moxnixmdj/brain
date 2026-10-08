@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_P3_SOURCE_POSITIVE_SELECTION_V11_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__14_OF_14_ON_TWO_INDEPENDENT_SPRITES__SOURCE_POSITIVE_SELECTED_POLICY_ROUTE_VERIFIED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "cell": {"path":"canonical/runtime/p3_source_positive_selection_cell_v1.py","git_blob_sha":"9f23acf70293ef4d9b39a0ffe094515eb925801d"},
+    "cell_tests": {"path":"canonical/tests/test_p3_source_positive_selection_cell_v1.py","git_blob_sha":"eb74829cd75cfb8d5c90de862a950ddc2f5f65ab"},
+    "front_door": {"path":"canonical/runtime/p3_real_context_v3_admission_v11.py","git_blob_sha":"118bc3ab56d05edd7daa306966bdc583f3558c3a"},
+    "front_door_tests": {"path":"canonical/tests/test_p3_real_context_v3_admission_v11.py","git_blob_sha":"0210a2273049cd069c236292292a259af4c875db"},
+    "replay": {"path":"canonical/verification/p3_source_positive_selection_v11_replay_v1.py","git_blob_sha":"45bb36d8f8e1c94bd415a52c50f2587bb79689ad"},
+    "governance": {"path":"canonical/governance/P3_SOURCE_POSITIVE_SELECTION_REDUCTION_20261008_V1.json","git_blob_sha":"33e84b64a5ad52a8e41c81cf763ac958ff294804"}
+  },
+  "reused_verified_predecessors": [
+    {"path":"canonical/runtime/source_positive_adequacy_db_admission_v1.py","git_blob_sha":"1febb024c049acf2a0108219d074c31a1f33db26"},
+    {"path":"canonical/runtime/proof_carrying_semantic_refinement_v6.py","git_blob_sha":"646c132fe215a3f0ed7e74eafcc5397942a60d55"},
+    {"path":"canonical/governance/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_THEOREM_20261006_V1.json","git_blob_sha":"8a235f91ad3064714fab3ea73b324487d9b7f8e5"},
+    {"path":"canonical/verification/K6_POSITIVE_ADEQUACY_COVER_CERTIFICATE_SPRITE_VERIFICATION_20261006_V1.json","git_blob_sha":"de91c37808fe53bc133b399ebc7630f2b82bb0e3"}
+  ],
+  "verification": [
+    {
+      "provider":"Sprites",
+      "sprite":"brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id":"sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_passed":14,
+      "tests_run":14
+    },
+    {
+      "provider":"Sprites",
+      "sprite":"brain-trace-parametricity-v1-verify",
+      "sprite_id":"sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_passed":14,
+      "tests_run":14
+    }
+  ],
+  "verified": [
+    "CURRENT_CELL_SOURCE_POSITIVE_SELECTION_CAN_PASS_WITHOUT_ANY_COMPLETE_POLICY_WORLD_PARTITION",
+    "THE_POSITIVE_ADEQUACY_PAYLOAD_MUST_BIND_THE_EXACT_V3_INPUT_AND_EXACT_SELECTED_CLAIM_SET",
+    "THE_INDEPENDENT_SELECTION_RECEIPT_MUST_BIND_THE_SAME_POLICY_V3_INPUT_SELECTED_CLAIMS_AND_POSITIVE_ADEQUACY_PAYLOAD",
+    "THE_SELECTED_POLICY_CANNOT_OMIT_REQUIRED_CLAIMS",
+    "THE_SELECTED_POLICY_CANNOT_EXCEED_THE_EXPLICIT_ITEM_BUDGET",
+    "UNPROVED_SOURCE_POSITIVE_ADEQUACY_FAILS_CLOSED",
+    "V10_POSITIVE_ROUTES_RETAIN_PRECEDENCE",
+    "REJECTED_OBJECTIVE_WEIGHT_DECISION_DEPENDENCY_OR_POLICY_INFLUENCE_AUTHORITY_CANNOT_FALL_THROUGH_TO_V11",
+    "NON_RELEVANCE_FAILURES_CANNOT_BE_SWALLOWED_BY_V11",
+    "UNUSED_SEMANTIC_DIMENSIONS_NEED_NOT_BE_CLASSIFIED_INSIDE_THE_CERTIFIED_CURRENT_CELL",
+    "NO_SOURCE_POLICY_DB_U_OR_TERMINAL_AUTHORITY_ESCALATION"
+  ],
+  "verification_method_boundary": {
+    "v11_bytes": "EXACT_BRANCH_CELL_FRONT_DOOR_TEST_AND_REPLAY_BYTES_EXECUTED_ON_BOTH_SPRITES",
+    "source_positive_predecessor": "CONTROLLED_AT_ITS_ALREADY_VERIFIED_MODULE_INTERFACE_DURING_V11_DELTA_REPLAY_BECAUSE_SELECTED_SPRITE_SNAPSHOTS_PREDATE_ITS_FULL_DEPENDENCY_CHAIN",
+    "v10_predecessor": "CONTROLLED_AT_ITS_ALREADY_VERIFIED MODULE_INTERFACE_DURING_V11_FRONT_DOOR_DELTA_REPLAY",
+    "claim": "THIS_RECEIPT VERIFIES_THE_NEW_V11_COMPOSITION_DELTA__IT_DOES_NOT_REVERIFY_HISTORICAL_PREDECESSOR_IMPLEMENTATIONS"
+  },
+  "causal_effect": {
+    "deleted_as_necessary": "COMPLETE_DECLARED_POLICY_WORLD_PARTITION_FOR_A_REACHED_CURRENT_CAPACITY_BINDING_CONTEXT",
+    "replacement": "SOUND_SOURCE_COMPATIBLE_SEMANTIC_OVERAPPROXIMATION_PLUS_ONE_AUTHENTICATED_SOURCE_PROVED_ADEQUATE_EXACT_SELECTED_POLICY",
+    "remaining": "WHEN_NO_CURRENT_COMMON_POLICY_CAN_BE_SOURCE_PROVED__BIND_ONLY_THE_MINIMUM_POLICY_CHANGING_SELECTED_DISCRIMINATOR_OR_MISSING_POSITIVE_ADEQUACY_FACT"
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_FREE_FORM_SEMANTIC_RELEVANCE",
+    "NO_CLAIM_A_SOURCE_PROVED_COMMON_POLICY_EXISTS_FOR_EVERY_P3_CONTEXT",
+    "NO_GLOBAL_P3_CLOSURE",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd":0,
+    "checks_passed_total":28,
+    "checks_run_total":28,
+    "terminal_credit_delta":0
+  }
+}
