@@ -1878,7 +1878,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "b917fd8911af02e058f23d2d80a6e8c000408bb5"
+      "git_blob_sha": "68ee5a9d21bd5b47c50b83d97785064bdf64c0ce"
     },
     "live_ownership_rule": "LIVE_OWNED_IFF_ADMITTED_BY_ONE_CANONICAL_OWNERSHIP_PROVIDER__UNREGISTERED_AND_SUPERSEDED_REPOSITORY_CODE_IS_NOT_LIVE_OWNED",
     "structural_r1_rule": "EVERY_LIVE_OWNED_CAPABILITY_MUST_HAVE_ONE_DISCOVERABLE_EXECUTABLE_OR_COMPOSABLE_UNIFIED_FABRIC_CARRIER",
@@ -1886,15 +1886,18 @@
     "historical_capability_rule": "HISTORICAL_OR_SUPERSEDED_CAPABILITIES_REQUIRE_EXPLICIT_READMISSION_BEFORE_LIVE_OWNERSHIP",
     "terminal_credit_delta": 0,
     "verification": {
-      "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_V1_SOURCE_REPLAY_20261008_V1.json",
-      "git_blob_sha": "2f131211526a078d4ec1a822d232644f691c53d4",
-      "status": "PASS__LIVE_OWNED_EQUALS_FABRIC_REACHABLE__SOURCE_REPLAY_AND_ISOLATED_EXECUTION"
+      "path": "canonical/verification/R1_SINGLE_CANONICAL_FRONT_DOOR_REPLAY_20261008_V3.json",
+      "git_blob_sha": "61ff49a00e13fcde4fcc4ba1c94f972121b57a46",
+      "status": "PASS__REBASED_CURRENT_MAIN__EXACT_CHANGED_SOURCE_COMPILES__R3_REUSE_REPAIR_CARRIER_BOUND"
     },
     "r1_structural_closure": true,
     "live_owned_capability_count": 83,
     "missing_fabric_carrier_count": 0,
     "full_repo_github_actions_pass": false,
-    "full_repo_github_actions_note": "NOT_LOAD_BEARING_FOR_THE_EXACT_SOURCE_SET_EQUALITY_PROOF__WORKFLOW_RUNNER_AVAILABILITY_IS_SEPARATE"
+    "full_repo_github_actions_note": "BRANCH_CI_NOT_YET_OBSERVED__EXACT_CHANGED_SOURCE_PY_COMPILE_AND_ACTIVATION_JSON_PARSE_PASS",
+    "canonical_public_entrypoint": "canonical.runtime.unified_cognitive_fabric_v1.run",
+    "subordinate_runtime_entrypoint": "canonical.runtime.live_brain_runtime_v1.run",
+    "subordinate_runtime_public_authority": false
   },
   "r1_universal_live_capability_invocation_20261008_v1": {
     "status": "ACTIVE_FAIL_CLOSED_UNIVERSAL_LIVE_CAPABILITY_INVOCATION",
