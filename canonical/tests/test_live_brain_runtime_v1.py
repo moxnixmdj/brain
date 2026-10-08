@@ -206,7 +206,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         }
         bound.return_value = failure
         integrate.return_value = {
-            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "status": "FAILURE_DIAGNOSED__REPAIR_QUEUED",
             "pass": False,
         }
         out = brain.run({
@@ -218,7 +218,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(
             out["learning"]["status"],
-            "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "FAILURE_DIAGNOSED__REPAIR_QUEUED",
         )
         integrate.assert_called_once()
         self.assertEqual(integrate.call_args.kwargs["retry_context"]["mode"], "compiled_bound")
@@ -233,7 +233,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         }
         raw_bound.return_value = failure
         integrate.return_value = {
-            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "status": "FAILURE_DIAGNOSED__REPAIR_QUEUED",
             "pass": False,
         }
         out = brain.run({
@@ -253,7 +253,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "reason": "SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
         }
         integrate.return_value = {
-            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "status": "FAILURE_DIAGNOSED__REPAIR_QUEUED",
             "pass": False,
         }
         out = brain.run({
@@ -264,7 +264,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(
             out["learning"]["status"],
-            "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "FAILURE_DIAGNOSED__REPAIR_QUEUED",
         )
         observed = integrate.call_args.args[0]
         self.assertFalse(observed["pass"])
@@ -405,6 +405,82 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         })
         self.assertFalse(out["pass"])
         self.assertIn("FAILURE_FINGERPRINT_UNKNOWN", out["reason"])
+
+    @patch("canonical.runtime.live_brain_runtime_v1.execute_failure_repair_cycle")
+    @patch("canonical.runtime.live_brain_runtime_v1.run_generic")
+    def test_live_failure_auto_dispatches_verified_repair_when_frontier_is_available(
+        self, generic, repair_cycle
+    ):
+        generic.return_value = {
+            "schema": brain.SCHEMA,
+            "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
+            "pass": False,
+            "learning": {
+                "pass": False,
+                "diagnosis": {"failure_fingerprint": "fp:auto"},
+                "retry_capsule_sha256": "retry:auto",
+            },
+        }
+        repaired_replay = {"pass": True, "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE"}
+        repair_cycle.return_value = {
+            "pass": True,
+            "status": "REPAIR_VERIFIED_BY_ORIGINAL_OBLIGATION_REPLAY",
+            "original_replay": repaired_replay,
+        }
+        component = {
+            "id": "repairer",
+            "verified": True,
+            "brain_owned": True,
+            "donor_independent": True,
+        }
+        out = brain.run({
+            "mode": "generic",
+            "problem": self.problem(),
+            "repair_components": [component],
+        })
+
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["auto_repair_attempted"])
+        self.assertEqual(out["recovered_execution"], repaired_replay)
+        args = repair_cycle.call_args.args[0]
+        self.assertEqual(args["failure_fingerprint"], "fp:auto")
+        self.assertEqual(args["retry_capsule_sha256"], "retry:auto")
+        self.assertEqual(args["components"], [component])
+
+    @patch("canonical.runtime.live_brain_runtime_v1.execute_failure_repair_cycle")
+    @patch("canonical.runtime.live_brain_runtime_v1.run_generic")
+    def test_live_failure_without_repair_authority_fails_closed_but_keeps_exact_work(
+        self, generic, repair_cycle
+    ):
+        generic.return_value = {
+            "schema": brain.SCHEMA,
+            "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
+            "pass": False,
+            "learning": {
+                "pass": False,
+                "diagnosis": {"failure_fingerprint": "fp:blocked"},
+                "retry_capsule_sha256": "retry:blocked",
+            },
+        }
+        out = brain.run({"mode": "generic", "problem": self.problem()})
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["auto_repair"]["status"],
+            "AUTO_REPAIR_BLOCKED__VERIFIED_FRONTIER_OR_CAPABILITY_EXPANDER_REQUIRED",
+        )
+        self.assertEqual(out["auto_repair"]["failure_fingerprint"], "fp:blocked")
+        repair_cycle.assert_not_called()
+
+    def test_replay_payload_strips_auto_repair_control_plane_fields(self):
+        cleaned = brain._replay_request_payload({
+            "task_id": "t",
+            "target_effects": ["x"],
+            "repair_components": [{"id": "r"}],
+            "repair_solver_kwargs": {"x": 1},
+            "auto_repair": True,
+        })
+        self.assertEqual(cleaned, {"task_id": "t", "target_effects": ["x"]})
 
     def test_unknown_mode_fails_closed(self):
         out = brain.run({"mode": "invented"})
