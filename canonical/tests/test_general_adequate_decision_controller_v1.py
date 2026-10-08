@@ -172,12 +172,31 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             },
         }
         observed = {}
+        predicate_id = "R2_POLICY_ADEQUATE::sha256:test"
         frontier = {
             "pass": True,
             "status": "PASS__VERIFIED_GROUNDING_EXPOSED_AS_UNTRUSTED_POLICY_FRONTIER",
             "policy_conditions": {
-                "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest": {"op": "TRUE"}
+                "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest": {
+                    "op": "ATOM",
+                    "id": predicate_id,
+                }
             },
+            "adequacy_predicate_by_policy": {
+                "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest": predicate_id,
+            },
+            "capability_by_policy": {
+                "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest":
+                    "python.tests.audit.unittest",
+            },
+            "decision_basis_additions": [predicate_id],
+            "discriminators": [
+                {
+                    "discriminator_id": "ADEQUACY_QUERY::" + predicate_id,
+                    "formula": {"op": "ATOM", "id": predicate_id},
+                    "cost_units": 1.0,
+                }
+            ],
             "policy_adequacy_authority": False,
             "semantic_truth_authority": False,
         }
@@ -228,6 +247,8 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             frontier["policy_conditions"],
         )
         self.assertEqual(problem["policy_adequacy_bindings"], {})
+        self.assertIn(predicate_id, problem["decision_basis"])
+        self.assertEqual(problem["discriminators"], frontier["discriminators"])
         self.assertFalse(out["pass"])
         self.assertEqual(
             out["next_required_edge"],
@@ -238,6 +259,18 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
                 "rejected_policy_candidates"
             ][0]["policy_id"],
             "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest",
+        )
+        self.assertEqual(
+            out["next_policy_request"]["search_context"][
+                "grounded_candidate_adequacy_predicates"
+            ],
+            frontier["adequacy_predicate_by_policy"],
+        )
+        self.assertEqual(
+            out["next_policy_request"]["search_context"][
+                "grounded_capability_by_policy"
+            ],
+            frontier["capability_by_policy"],
         )
         self.assertFalse(out["semantic_acceptance_complete"])
         self.assertFalse(out["actual_goal_satisfaction_verified"])
