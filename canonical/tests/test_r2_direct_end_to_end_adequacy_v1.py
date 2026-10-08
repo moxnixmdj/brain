@@ -88,5 +88,48 @@ class R2DirectEndToEndAdequacyV1Tests(unittest.TestCase):
         )
 
 
+    def test_exact_literal_preflight_matches_without_execution(self):
+        goal='Respond with exactly "READY_42".'
+        with patch.object(direct.live_bound, "run_raw_goal") as execute:
+            out=direct.preflight({"task_id":"t","goal":goal})
+        self.assertTrue(out["matched"],out)
+        self.assertEqual(out["route_id"],direct.EXACT_LITERAL_ROUTE_ID)
+        self.assertIsNone(out["capability_id"])
+        self.assertFalse(out["preflight_execution_authority"])
+        execute.assert_not_called()
+
+    def test_exact_literal_extra_unmodeled_text_does_not_match(self):
+        out=direct.preflight({
+            "task_id":"t",
+            "goal":'Respond with exactly "READY_42". Then explain why.',
+        })
+        self.assertFalse(out["matched"])
+        self.assertEqual(out["status"],"NO_DIRECT_ADEQUACY_ROUTE")
+
+    @patch.object(direct.live_bound, "run_raw_goal")
+    @patch.object(direct.literal_acceptance, "verify")
+    def test_exact_literal_full_acceptance_is_direct_adequacy(self, verify, execute):
+        goal='Reply with exactly OK.'
+        pf=direct.preflight({"task_id":"t","goal":goal})
+        execute.return_value={
+            "pass":True,
+            "raw_goal_sha256":pf["goal_sha256"],
+            "raw_source_coverage_complete":True,
+        }
+        verify.return_value={
+            "pass":True,
+            "semantic_acceptance_complete":True,
+            "actual_goal_satisfaction_verified":True,
+            "accepted_obligation_ids":["RAWREQ:x"],
+            "required_obligation_count":1,
+        }
+        out=direct.run({"task_id":"t","goal":goal})
+        self.assertTrue(out["pass"],out)
+        self.assertTrue(out["actual_goal_satisfaction_verified"])
+        self.assertEqual(out["selected_policy_id"],direct.EXACT_LITERAL_ROUTE_ID)
+        self.assertFalse(out["retry_by_other_route_authorized"])
+        execute.assert_called_once()
+        verify.assert_called_once()
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
