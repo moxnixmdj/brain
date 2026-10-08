@@ -442,5 +442,118 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertEqual(out["status"], "FAIL_CLOSED")
 
 
+    @patch("canonical.runtime.live_brain_runtime_v1._automatic_failure_repair")
+    @patch("canonical.runtime.live_brain_runtime_v1._active_learning_context")
+    @patch("canonical.runtime.live_brain_runtime_v1._run_learning_episode")
+    def test_generic_failure_automatically_repairs_then_replays_original(
+        self, learning_run, context, automatic_repair
+    ):
+        context.return_value = {
+            "state_path": "/tmp/state.json",
+            "state": {},
+            "prior_verified_episodes": [],
+            "active_verified_skills": [],
+        }
+        failed_solver = {
+            "pass": False,
+            "status": "FAIL__CAPABILITY_OR_TASK_CONTRACT_GAP",
+        }
+        diagnosis = {
+            "pass": False,
+            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "diagnosis": {"failure_fingerprint": "fp:auto"},
+            "retry_capsule_sha256": "retry:auto",
+        }
+        learning_run.return_value = {
+            "pass": False,
+            "solver_output": failed_solver,
+            "learning": diagnosis,
+            "reuse_first": False,
+            "fallback_used": False,
+        }
+        repaired_solver = {"pass": True, "status": "SOLVED__VERIFIED_EPISODE"}
+        automatic_repair.return_value = {
+            "pass": True,
+            "status": "REPAIR_VERIFIED_BY_ORIGINAL_OBLIGATION_REPLAY",
+            "original_replay": {
+                "pass": True,
+                "solver_output": repaired_solver,
+            },
+        }
+        repair_components = [{"id": "verified-repairer"}]
+
+        out = brain.run({
+            "mode": "generic",
+            "problem": self.problem(),
+            "episode_id": "auto",
+            "scope_id": "scope",
+            "repair_components": repair_components,
+        })
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "UNIFIED_GENERIC_EXECUTION_REPAIRED_AND_REPLAYED",
+        )
+        self.assertEqual(out["solver_output"], repaired_solver)
+        self.assertEqual(out["initial_solver_output"], failed_solver)
+        self.assertTrue(out["automatic_repair_attempted"])
+        auto_kwargs = automatic_repair.call_args.kwargs
+        self.assertEqual(auto_kwargs["repair_components"], repair_components)
+        learning_kwargs = learning_run.call_args.kwargs
+        self.assertFalse(learning_kwargs["retry_context"]["auto_repair"])
+
+    @patch("canonical.runtime.live_brain_runtime_v1._automatic_failure_repair")
+    @patch("canonical.runtime.live_brain_runtime_v1._observe_runtime_outcome")
+    @patch("canonical.runtime.live_brain_runtime_v1._decision_run")
+    def test_decision_failure_automatically_repairs_then_replays_original(
+        self, decision, observe, automatic_repair
+    ):
+        failed = {
+            "pass": False,
+            "status": "OPEN__SELECTED_ADEQUATE_POLICY_EXECUTION_UNRESOLVED",
+            "semantic_acceptance_complete": False,
+            "actual_goal_satisfaction_verified": False,
+        }
+        diagnosis = {
+            "pass": False,
+            "diagnosis": {"failure_fingerprint": "fp:decision"},
+            "retry_capsule_sha256": "retry:decision",
+        }
+        decision.return_value = failed
+        observe.return_value = diagnosis
+        repaired_decision = {
+            "pass": True,
+            "status": "PASS__GOAL_BOUND_ADEQUATE_POLICY_EXECUTED_AND_ACCEPTANCE_VERIFIED",
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+        }
+        automatic_repair.return_value = {
+            "pass": True,
+            "status": "REPAIR_VERIFIED_BY_ORIGINAL_OBLIGATION_REPLAY",
+            "original_replay": {
+                "pass": True,
+                "decision_output": repaired_decision,
+            },
+        }
+
+        out = brain.run({
+            "mode": "decision",
+            "request": {"task_id": "d-auto", "goal": "do exact thing"},
+            "repair_components": [{"id": "verified-repairer"}],
+        })
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "UNIFIED_DECISION_EXECUTION_REPAIRED_AND_REPLAYED",
+        )
+        self.assertEqual(out["decision_output"], repaired_decision)
+        self.assertTrue(out["semantic_acceptance_complete"])
+        self.assertTrue(out["actual_goal_satisfaction_verified"])
+        retry_context = observe.call_args.kwargs["retry_context"]
+        self.assertFalse(retry_context["auto_repair"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
