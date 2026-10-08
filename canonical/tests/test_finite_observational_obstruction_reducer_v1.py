@@ -290,3 +290,30 @@ def test_minimum_q_subset_differential_exhaustive_oracle():
             if found is not None:break
         assert found==plan["observation_count"],(trial,found,plan)
         assert len(plan["selected_discriminator_ids"])==found
+
+
+def test_top_level_unknown_requirements_fail_closed_without_false_proof():
+    p=base()
+    p["required_global_policy_score"]="OPUS_PARITY"
+    out=run(p)
+    assert out["pass"] is False,out
+    assert out["reason"]=="UNMODELED_OBSTRUCTION_INPUT_FIELDS"
+    assert out["u_empty_authorized"] is False
+
+
+def test_discriminator_extra_semantic_requirement_fails_closed():
+    p=base()
+    p["discriminators"][0]["must_be_authoritative"]=True
+    out=run(p)
+    assert out["pass"] is False,out
+    assert out["reason"]=="UNMODELED_DISCRIMINATOR_FIELDS"
+    assert out["terminal_credit_delta"]==0
+
+
+def test_nonstring_region_identity_is_not_silently_coerced():
+    p=base()
+    p["region_ids"]=[0,"w1","w2"]
+    out=run(p)
+    assert out["pass"] is False,out
+    assert out["reason"]=="INVALID_INPUT"
+    assert out["terminal_authority"] is False
