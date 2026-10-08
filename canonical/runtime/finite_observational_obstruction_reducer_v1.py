@@ -15,6 +15,7 @@ separate premises.
 """
 from __future__ import annotations
 
+from collections import deque
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
@@ -52,6 +53,84 @@ def _ids(values: Sequence[str], *, label: str) -> tuple[str, ...]:
     if any(not v for v in out) or len(set(out)) != len(out):
         raise ValueError(label + "_INVALID_OR_DUPLICATE")
     return out
+
+
+
+MAX_CORE_SEARCH_STATES = 8192
+
+
+def _smallest_conflict_core(
+    members: Sequence[str], policies: Mapping[str, Mapping[str, Any]]
+) -> dict[str, Any]:
+    """Find minimum-cardinality H subset with no shared declared policy.
+
+    BFS explores intersections of policy-support sets, retaining the shortest
+    route to each distinct intersection. On a state-budget hit, deletion
+    reduction still gives a verified 1-minimal core, never a fake exact minimum.
+    No content/adequacy receipt is authenticated by this structural algorithm.
+    """
+    policy_ids = sorted(policies)
+    full = (1 << len(policy_ids)) - 1
+    region_masks = {
+        r: sum(1 << i for i, pid in enumerate(policy_ids)
+               if r in policies[pid]["regions"])
+        for r in sorted(members)
+    }
+    frontier = deque([(full, ())])
+    seen = {full}
+    exhausted = False
+    while frontier and not exhausted:
+        mask, chosen = frontier.popleft()
+        for region in sorted(members):
+            if region in chosen:
+                continue
+            next_mask = mask & region_masks[region]
+            if next_mask == mask:
+                continue
+            path = chosen + (region,)
+            if next_mask == 0:
+                return {
+                    "region_ids": list(path),
+                    "minimum_cardinality_proved": True,
+                    "irreducible_proved": True,
+                    "checked_intersection_states": len(seen),
+                }
+            if next_mask not in seen:
+                if len(seen) >= MAX_CORE_SEARCH_STATES:
+                    exhausted = True
+                    break
+                seen.add(next_mask)
+                frontier.append((next_mask, path))
+
+    # Monotonic intersection means each remaining region is necessary after
+    # one deletion pass. This is 1-minimal, not necessarily globally minimum.
+    core = sorted(members)
+    for region in list(core):
+        other = [r for r in core if r != region]
+        intersection = full
+        for r in other:
+            intersection &= region_masks[r]
+        if intersection == 0:
+            core.remove(region)
+    remaining = full
+    for region in core:
+        remaining &= region_masks[region]
+    if remaining != 0:
+        raise ValueError("CONFLICT_CORE_INVARIANT_FAILED")
+    for region in core:
+        without = full
+        for other in core:
+            if other != region:
+                without &= region_masks[other]
+        if without == 0:
+            raise ValueError("CONFLICT_CORE_NOT_IRREDUCIBLE")
+    return {
+        "region_ids": core,
+        "minimum_cardinality_proved": False,
+        "irreducible_proved": True,
+        "checked_intersection_states": len(seen),
+        "search_budget_exceeded": exhausted,
+    }
 
 
 def reduce_obstruction(
@@ -150,9 +229,21 @@ def reduce_obstruction(
                 "common_declared_policy_ids": common,
                 "structurally_covered": bool(common),
             }
-            detailed.append(item)
             if not common:
+                core = _smallest_conflict_core(members, policies)
+                without_policy = sorted(
+                    r for r in members
+                    if not any(r in row["regions"] for row in policies.values())
+                )
+                item["smallest_verified_conflict_core"] = core
+                item["regions_with_no_declared_adequate_policy"] = without_policy
+                item["minimum_missing_decision_relevant_primitive"] = (
+                    "PROVE_OR_BUILD_ADEQUATE_POLICY"
+                    if without_policy
+                    else "ADD_TRUTHFUL_DISCRIMINATOR_OR_PROVE_COMMON_ADEQUATE_POLICY"
+                )
                 bad.append(item)
+            detailed.append(item)
 
         base = {
             "schema": SCHEMA,
@@ -160,7 +251,11 @@ def reduce_obstruction(
             "discriminator_count": len(experiments),
             "policy_count": len(policies),
             "final_class_count": len(classes),
-            "declared_q_complete_on_h": True,
+            "declared_q_complete_on_h": False,
+                "declared_q_outcome_domain_total_on_h": True,
+                "q_information_library_complete_proved": False,
+                "policy_adequacy_receipt_bytes_authenticated": False,
+                "policy_receipt_claim_shape_checked": True,
             "policy_certificate_bytes_bound": True,
             "policy_adequacy_semantics_verified": False,
             "global_q_scope_complete": False,
@@ -170,7 +265,14 @@ def reduce_obstruction(
         }
 
         if bad:
-            witness = sorted(bad, key=lambda x: (len(x["region_ids"]), x["region_ids"]))[0]
+            witness = min(
+                bad,
+                key=lambda x: (
+                    len(x["smallest_verified_conflict_core"]["region_ids"]),
+                    len(x["region_ids"]),
+                    x["region_ids"],
+                ),
+            )
             return {
                 **base,
                 "pass": False,
