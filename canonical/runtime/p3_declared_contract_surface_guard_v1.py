@@ -56,8 +56,14 @@ def validate_v3_input(public: Any) -> str | None:
     evidence=task.get("evidence")
     if isinstance(evidence,list):
         for row in evidence:
-            if isinstance(row,Mapping) and set(row)-_ALLOWED_EVIDENCE:
-                return "UNMODELED_EVIDENCE_REQUIREMENTS"
+            if isinstance(row,Mapping):
+                if set(row)-_ALLOWED_EVIDENCE:
+                    return "UNMODELED_EVIDENCE_REQUIREMENTS"
+                prov=row.get("provenance")
+                if isinstance(prov,list):
+                    for unit in prov:
+                        if isinstance(unit,Mapping) and set(unit)-{"source_id","locator"}:
+                            return "UNMODELED_PROVENANCE_REQUIREMENTS"
     return None
 
 
