@@ -786,6 +786,51 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertNotIn("OTHER_PRIVATE_FACT", rendered)
         self.assertNotIn("raw_secret", rendered)
 
+    def test_goal_scoped_grounded_policy_context_preserves_exact_goal_hash(self):
+        goal_sha = "a" * 64
+        policy_id = (
+            "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest"
+            "::RAW_GOAL_SHA256::" + goal_sha
+        )
+        out = brain._compact_policy_repair_context({
+            "decision_output": {
+                "next_policy_request": {
+                    "search_context": {
+                        "rejected_policy_candidates": [
+                            {"policy_id": policy_id, "reason": "missing authority"}
+                        ]
+                    }
+                }
+            }
+        })
+        self.assertEqual(
+            out["grounded_bound_policy_candidates"],
+            [{
+                "policy_id": policy_id,
+                "capability_id": "python.tests.audit.unittest",
+                "raw_goal_sha256": goal_sha,
+            }],
+        )
+
+    def test_same_capability_different_goal_hashes_produce_different_repair_targets(self):
+        def target(goal_sha):
+            policy_id = (
+                "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest"
+                "::RAW_GOAL_SHA256::" + goal_sha
+            )
+            return brain._concretize_policy_adequacy_repair_target(
+                "repair.policy_adequacy_cover.available",
+                {
+                    "selected_policy_id": policy_id,
+                    "grounded_bound_policy_candidates": [{
+                        "policy_id": policy_id,
+                        "capability_id": "python.tests.audit.unittest",
+                        "raw_goal_sha256": goal_sha,
+                    }],
+                },
+            )[0][0]
+        self.assertNotEqual(target("a" * 64), target("b" * 64))
+
     def test_exact_grounded_policy_gap_becomes_one_concrete_adequacy_target(self):
         targets, source = brain._concretize_policy_adequacy_repair_target(
             "repair.policy_adequacy_cover.available",
