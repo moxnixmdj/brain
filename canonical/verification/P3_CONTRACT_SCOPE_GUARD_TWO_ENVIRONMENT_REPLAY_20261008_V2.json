@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_P3_CONTRACT_SCOPE_GUARD_TWO_ENVIRONMENT_REPLAY_20261008_V2",
+  "date": "2026-10-08",
+  "status": "TWO_REMOTE_ENVIRONMENT_FOCUSED_REPLAY_PASS__NONTERMINAL_ZERO_CREDIT",
+  "pr": 3109,
+  "branch": "p3-categorical-support-v1-20261008",
+  "verified_commit": "9aa27a30f3dfa0dafb9551ea7ea5fcc43e07e45d",
+  "findings": {
+    "root_issue": "P3 required-route and V6 real-context admission accepted unsupported schemas and ignored additional task, claim, and input-level normative requirements.",
+    "before_repair": "Four adversarial contract mutation kinds were accepted by both required-route and V6; verified by direct remote execution.",
+    "repair": "Common V3 contract surface validator applied before all V6 positive routes; required-route direct entry checks same validator; V6 rejects unknown outer-level semantic requirements.",
+    "mutation_kinds": [
+      "INVALID_V3_SCHEMA",
+      "UNMODELED_V3_INPUT_FIELDS",
+      "UNMODELED_TASK_REQUIREMENTS",
+      "UNMODELED_CLAIM_REQUIREMENTS",
+      "UNMODELED_REAL_CONTEXT_ADMISSION_FIELDS"
+    ],
+    "implication": "No positive admission when checked contract fields are silently projected away. This does not prove upstream extraction is complete."
+  },
+  "source_blobs": {
+    "canonical/runtime/bounded_explicit_categorical_support_v1.py": "54f1a7a1518dd5b0abe178a51e9d2d4dc6318bbd",
+    "canonical/runtime/selected_support_truth_certificate_v5.py": "2deeeefbd422dcd4a907db1edacc21f024363e26",
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py": "2b8ad18e97f62204c29ee809b7b77e70d1ebef04",
+    "canonical/runtime/p3_real_context_v3_admission_v6.py": "900969988e735c4b5d88c9a7becd20d7354a6019"
+  },
+  "test_blobs": {
+    "canonical/tests/test_bounded_explicit_categorical_support_v1.py": "0e8bc51ab56bbfa16fb07f47740c973eb7b6cbc9",
+    "canonical/tests/test_selected_support_truth_certificate_v5.py": "f324c61ab58f7b7e03bacae15e19a0240624743d",
+    "canonical/tests/test_p3_required_claim_grounded_realization_cell_v3.py": "1a18d2020e4b5e9f7495bf3f31f6f749e59f1d44",
+    "canonical/tests/test_p3_real_context_v3_admission_v6.py": "232b8d76ade27d30e8297571ee9d800da3e7acef"
+  },
+  "verification": [
+    {
+      "environment": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "runner": "runpy, zero-argument test function assertion replay",
+      "passed": 57,
+      "failed": 0
+    },
+    {
+      "environment": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "runner": "independent importlib.util.spec_from_file_location loader and zero-argument assertion replay",
+      "source_ref": "9aa27a30f3dfa0dafb9551ea7ea5fcc43e07e45d",
+      "passed": 57,
+      "failed": 0,
+      "by_suite": {
+        "categorical": 16,
+        "support_truth": 16,
+        "required_realization": 12,
+        "real_context_admission": 13
+      }
+    }
+  ],
+  "additional_previous_differential": {
+    "cases": 400,
+    "finite_models_per_case": 256,
+    "derived_claims_checked": 90,
+    "unsound_claims_observed": 0,
+    "scope": "Random finite-set entailment and proof-path semantics check in initial remote environment"
+  },
+  "limitations": [
+    "Both replays used manual Python assertion-based test runners because pytest was unavailable.",
+    "These are targeted tests, not complete repository CI, evaluator noninferiority or real-target trace coverage.",
+    "Source bytes of pinned tracked files were fetched from Git commit; remote execution is not independent evaluator receipt.",
+    "Unknown contract fields now fail closed; upstream may still omit real required facts before forming the schema.",
+    "Source authorization, policy adequacy, global scope, actual U-empty, ABC and terminal reducer not proved."
+  ],
+  "authority": {
+    "terminal_credit_delta": 0,
+    "source_authorization_verified": false,
+    "policy_adequacy_authority": false,
+    "db_admission_authority": false,
+    "u_empty_authorized": false,
+    "abc_closed_authorized": false,
+    "terminal_authority": false,
+    "pr_merge_approved": false
+  },
+  "current_pr_at_recording": {
+    "head": "9aa27a30f3dfa0dafb9551ea7ea5fcc43e07e45d",
+    "draft": true,
+    "merged": false
+  }
+}
