@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_SUPPORT_TRUTH_V5_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_14_OF_14_ON_TWO_SPRITES__EXACT_SET_MEMBERSHIP_ADDED__ZERO_TERMINAL_CREDIT",
+  "runtime_set_membership": {
+    "path": "canonical/runtime/bounded_set_membership_support_v1.py",
+    "git_blob_sha": "b12c054a04cb902afb5f45b02df021418e576d22"
+  },
+  "runtime_portfolio": {
+    "path": "canonical/runtime/selected_support_truth_certificate_v5.py",
+    "git_blob_sha": "a19d78ba43e604ed38bc1dc4c92e3f4a1025689e"
+  },
+  "tests": {
+    "path": "canonical/tests/test_selected_support_truth_certificate_v5.py",
+    "git_blob_sha": "a99ed84f7df5b3b2927ad89eec9236afa8a43fbb"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "tests_passed": 14,
+      "tests_run": 14
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "tests_passed": 14,
+      "tests_run": 14
+    }
+  ],
+  "newly_owned_effect": "EXACT_POSITIVE_AND_NEGATIVE_SET_MEMBERSHIP_OVER_CONTROLLED_ENTITY_FIELD_VALUE_FACT_SURFACE",
+  "fail_closed_boundaries": [
+    "UNKNOWN_OUTSIDE_EXACT_SET_MEMBERSHIP_GRAMMAR",
+    "NO_ONTOLOGY_SYNONYMY_HIERARCHY_OR_FUZZY_CATEGORY_INFERENCE",
+    "NO_SOURCE_AUTHORIZATION",
+    "NO_POLICY_ADEQUACY",
+    "NO_U_EMPTY_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
