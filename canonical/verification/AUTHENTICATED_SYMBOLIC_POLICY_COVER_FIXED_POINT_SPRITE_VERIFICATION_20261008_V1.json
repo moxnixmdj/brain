@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_AUTHENTICATED_SYMBOLIC_POLICY_COVER_FIXED_POINT_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SPRITE_EXACT_BYTE_ZERO_DEPENDENCY_REPLAY_PASS__10_OF_10__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "research/policy-adequacy-proof-carrying-winning-strategy-20261008-v1",
+    "runtime": {
+      "path": "canonical/runtime/authenticated_symbolic_policy_cover_fixed_point_v1.py",
+      "git_blob_sha": "4522cc98112e1aba791f4697e0e5f7331665a562"
+    },
+    "tests": {
+      "path": "canonical/tests/test_authenticated_symbolic_policy_cover_fixed_point_v1.py",
+      "git_blob_sha": "d16b2cbd06979114db222ca521e6ba0a5394b3cd"
+    },
+    "real_p2_dependencies": {
+      "canonical/runtime/p2_explicit_contract_membership_v1.py": "a6f357d952434692a809382d1cbd41f3c78a2af0",
+      "canonical/runtime/p2_top_law_policy_adequacy_authenticator_v1.py": "ceb8f383c0760fd9d67b967e6edf528d6d6eff37",
+      "canonical/runtime/p2_p3_information_safe_candidate_v2.py": "ea8057b0eadac210c4f4378298df93ed233c5824",
+      "canonical/governance/P2_EXPLICIT_SEMANTIC_CONTRACT_UNIVERSAL_TOP_LAW_20261007_V1.json": "decd0d46538a213f2e169c00c83fae09191a7ed3",
+      "canonical/verification/P2_EXPLICIT_SEMANTIC_CONTRACT_TOP_LAW_CONNECTOR_VERIFY_20261007_V1.json": "8375f545ff35ce519719467596bdf1bc15453174"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+    "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+    "workspace": "/home/sprite/policy_adequacy_fixed_point_v1",
+    "runner": "ZERO_DEPENDENCY_DIRECT_ASSERTION_RUNNER"
+  },
+  "verification": {
+    "exact_git_blobs_verified": 7,
+    "tests_passed": 10,
+    "tests_total": 10,
+    "stdout": [
+      "EXACT_GIT_BLOBS_VERIFIED 7",
+      "REAL_P2_RAW_SOURCE_TO_AUTHENTICATED_POLICY_WIN_PASS",
+      "EXTRA_SEMANTIC_DIMENSION_FAILS_CLOSED",
+      "INDEPENDENT_ZERO_DEP_TESTS_PASS 10"
+    ],
+    "proved_mechanics": [
+      "CALLER_INLINE_ADEQUACY_FLAGS_ARE_REJECTED",
+      "UNKNOWN_POLICY_VERIFIERS_FAIL_CLOSED",
+      "AUTHENTICATED_COMMON_POLICY_CAN_CLOSE_A_SYMBOLIC_BELIEF_REGION",
+      "AUTHENTICATED_SELECTED_SPLIT_CAN_BUILD_A_FINITE_WINNING_TREE",
+      "NO_CURRENT_WIN_IS_UNKNOWN_NOT_IMPOSSIBILITY",
+      "CALLER_INLINE_DISCRIMINATOR_TRUTH_FLAGS_ARE_REJECTED",
+      "CALLER_INLINE_CONSTRAINT_VERIFICATION_FLAGS_ARE_REJECTED",
+      "MINIMAX_SELECTION_PREFERS_LOWER_WORST_CASE_AUTHENTICATED_ROUTE",
+      "STRICT_EXPLICIT_P2_RAW_SOURCE_RECOMPUTES_MEMBERSHIP_AND_REACHES_AUTHENTICATED_TOP_LAW_POLICY",
+      "EXTRA_P2_SEMANTIC_DIMENSION_FAILS_AT_TRUSTED_INGRESS_BEFORE_POLICY_COVER"
+    ]
+  },
+  "current_scope": {
+    "real_end_to_end_positive_subregion_proved": "STRICT_EXPLICIT_P2_JSON_SOURCE_CLASS_ONLY",
+    "general_free_form_ingress_proved": false,
+    "general_selected_discriminator_verifier_registered": false,
+    "global_WIN_TRUE_proved": false,
+    "U_empty": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_POLICY_ADEQUACY_IS_CLOSED",
+    "NO_CLAIM_FREE_FORM_OR_SEMI_STRUCTURED_CONTEXTS_ARE_ADMITTED",
+    "NO_CLAIM_A_GENERAL_PROMOTION_SAFE_SELECTED_DISCRIMINATOR_VERIFIER_EXISTS",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
