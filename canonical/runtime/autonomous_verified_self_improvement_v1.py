@@ -30,7 +30,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.capability_first_scheduler_v1 import update_pareto_frontier
-from canonical.runtime import universal_verified_adaptive_solver_v10 as solver_v10
+from canonical.runtime import universal_verified_adaptive_solver_v12 as solver_v12
 
 SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1"
 STATE_SCHEMA = "PROJECT_BRAIN_SELF_IMPROVEMENT_STATE_V1"
@@ -544,10 +544,16 @@ def run_learning_episode(
     skill_verification_binding: Mapping[str, Any] | None = None,
     resume_binding: Mapping[str, Any] | None = None,
     known_absent_invalidators: Sequence[str] = (),
+    proposal_provider=None,
+    capability_expander=None,
+    proposal_provider_id: str = "HOST_GENERAL_COGNITION_SUBSTRATE",
+    proposal_provider_max_candidates: int = 4,
+    capability_expander_id: str = "HOST_CAPABILITY_EXPANDER",
+    max_capability_expansions: int = 4,
 ) -> dict[str, Any]:
-    """Run verified learned routes first, then fall back safely to full V10 search.
+    """Run verified learned routes first, then fall back safely to full V12 search.
 
-    A learned route is used only as a planning compression overlay. V10 still
+    A learned route is used only as a planning compression overlay. V12 still
     authenticates semantics and verifies execution. If a reuse attempt fails after
     any verified effect may already have occurred, full-search fallback is blocked
     to prevent blind replay.
@@ -569,7 +575,7 @@ def run_learning_episode(
 
     if selected is not None:
         learned_problem = _restrict_problem_to_skill(problem, selected)
-        reuse_out = solver_v10.run(
+        reuse_out = solver_v12.run(
             learned_problem,
             proposal_packets=proposal_packets,
             repo_root=repo_root,
@@ -581,6 +587,12 @@ def run_learning_episode(
             prior_verified_episode_records=prior,
             skill_verification_binding=skill_verification_binding,
             resume_binding=resume_binding,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+        proposal_provider_id=proposal_provider_id,
+        proposal_provider_max_candidates=proposal_provider_max_candidates,
+        capability_expander_id=capability_expander_id,
+        max_capability_expansions=max_capability_expansions,
         )
         effectful = _effect_may_have_occurred(reuse_out)
         _record_reuse_result(
@@ -628,7 +640,7 @@ def run_learning_episode(
                 "terminal_authority": False,
             }
 
-    out = solver_v10.run(
+    out = solver_v12.run(
         problem,
         proposal_packets=proposal_packets,
         repo_root=repo_root,
@@ -640,6 +652,12 @@ def run_learning_episode(
         prior_verified_episode_records=prior,
         skill_verification_binding=skill_verification_binding,
         resume_binding=resume_binding,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+        proposal_provider_id=proposal_provider_id,
+        proposal_provider_max_candidates=proposal_provider_max_candidates,
+        capability_expander_id=capability_expander_id,
+        max_capability_expansions=max_capability_expansions,
     )
     integrated = integrate_solver_output(out, state_path=state_path)
     return {
