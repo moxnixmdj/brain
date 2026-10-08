@@ -548,5 +548,21 @@ class GoalCompilerTests(unittest.TestCase):
         ])
         self.assertTrue(out["clause_coverage_verified"])
 
+    def test_top_level_literal_json_records_compile_deterministically(self):
+        out=compiler.compile_goal(
+            "Create canonical/astra_runtime/tmp/LITERAL_DIRECT.json containing exactly two records with fields id and name: 1 alpha; 2 beta",
+            self.registry(),
+            ROOT,
+        )
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_LITERAL_JSON_RECORDS")
+        self.assertEqual(out["target_effects"],["structured.json.literal_records"])
+        self.assertEqual(out["controller_actions"][0]["type"],"write_json_records")
+        self.assertEqual(
+            out["controller_actions"][0]["args"]["records"],
+            [{"id":1,"name":"alpha"},{"id":2,"name":"beta"}],
+        )
+        self.assertEqual(out["controller_actions"][-1]["type"],"finish")
+        self.assertTrue(out["clause_coverage_verified"])
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
