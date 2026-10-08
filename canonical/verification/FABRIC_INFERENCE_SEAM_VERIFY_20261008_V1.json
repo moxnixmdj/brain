@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_FABRIC_INFERENCE_SEAM_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS_10_OF_10",
+  "branch": "unified-cognitive-fabric-v2-specialized-inference-20261008",
+  "exact_blobs": {
+    "fabric": "86c0b7821304f401b8a41efe9d0d1814cb1817b0",
+    "h100": "a4f952fbf054dbfe4f9617da837b3bf5c3c2e3ab",
+    "polytope": "b3db128a42d9b9620fa73f719ae993dd4bed2107",
+    "interval": "71ede5329f1d18505845d399f0243d76c005118a"
+  },
+  "isolated_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "checks_passed": 10,
+    "checks_total": 10,
+    "h100_entries": 21,
+    "polytope_pass": true,
+    "interval_policy_pass": true,
+    "unknown_operation_fail_closed": true
+  },
+  "nonclaims": [
+    "HISTORICAL_CAPABILITY_CENSUS_NOT_PROVED_COMPLETE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
