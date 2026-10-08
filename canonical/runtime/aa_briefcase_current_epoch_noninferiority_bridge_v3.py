@@ -14,6 +14,9 @@ from canonical.runtime.aa_briefcase_scope_complete_dominance_v1 import (
 from canonical.runtime.aa_briefcase_minimal_owner_attestation_v1 import (
     verify_minimal_owner_attestation,
 )
+from canonical.runtime.aa_briefcase_core_owner_attestation_v2 import (
+    verify_core_owner_attestation,
+)
 
 SCHEMA = "PROJECT_BRAIN_AA_BRIEFCASE_CURRENT_EPOCH_NONINFERIORITY_BRIDGE_V3"
 
@@ -47,7 +50,26 @@ def compile_current_epoch_noninferiority(
     if not isinstance(payload, Mapping):
         raise NoninferiorityBridgeError("EVIDENCE_PAYLOAD_INVALID")
 
-    if mode == "MATCHED_CURRENT_EPOCH_ELO":
+    if mode == "CORE_OWNER_ATTESTATION":
+        statement = payload.get("statement")
+        signature_verification = payload.get("signature_verification")
+        if not isinstance(statement, Mapping) or not isinstance(signature_verification, Mapping):
+            raise NoninferiorityBridgeError("CORE_OWNER_ATTESTATION_PAYLOAD_INVALID")
+        result = verify_core_owner_attestation(
+            current_target,
+            statement,
+            signature_verification,
+        )
+        passed = result["status"] == "PASS_CORE_OWNER_ATTESTATION"
+        route = "CORE_OWNER_ATTESTATION"
+        subject_sha256 = result["subject_sha256"]
+        reference = result["current_owner_reference_elo_context_only"]
+        observed_date = result["target_observed_date"]
+        numeric_comparable_elo_used = False
+        numeric_elo_reconstruction_required = False
+        source_verdict_sha256 = result["verdict_sha256"]
+
+    elif mode == "MATCHED_CURRENT_EPOCH_ELO":
         result = compile_current_epoch_bridge(current_target, payload)
         passed = all(bool(result["predicate_results"][pid]) for pid in PREDICATES)
         route = "MATCHED_CURRENT_EPOCH_ELO"
