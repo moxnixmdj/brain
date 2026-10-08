@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PROJECTION_REQUEST_TIMEOUT_COMPOSED_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "STATIC_EXACT_BYTES_PASS__36_OF_36_ON_TWO_SPRITES__LIVE_CPU_QWEN_PREFLIGHT_REQUIRED__ZERO_CREDIT",
+  "subject": {
+    "agent_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "agent_git_blob_sha": "9b651589733a54b4144aad5c68be7cb8bdd8a8d5",
+    "agent_tests_path": "canonical/tests/test_harbor_science_agent_v1.py",
+    "agent_tests_git_blob_sha": "a11f77a8b1ef70dbd4f505edae0da598a73e6901",
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_git_blob_sha": "cc77666f5d1231c356e36362181f375f7336d514",
+    "planner_tests_path": "canonical/tests/test_harbor_science_planner_v1.py",
+    "planner_tests_git_blob_sha": "e56bd635ea1d6740e365a706e6786765ad7f7739",
+    "closure_path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V6.json",
+    "closure_git_blob_sha": "4072a3fd8c0329e7812a317b0969f0312fd094b6"
+  },
+  "verification": [
+    {
+      "provider": "SPRITES",
+      "name": "brain-root3-current-byte-replay-20261007-v1",
+      "id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "workspace": "/home/sprite/tb_science_output_directive_repair_v1",
+      "tests_passed": 36,
+      "tests_total": 36
+    },
+    {
+      "provider": "SPRITES",
+      "name": "h100-real-image-v1",
+      "id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+      "workspace": "/home/sprite/tb_science_output_directive_repair_v1_independent",
+      "tests_passed": 36,
+      "tests_total": 36
+    }
+  ],
+  "exact_regressions": [
+    "LOSSLESS_RAW_TASK_CONTRACT_RETAINED_IN_BRAIN",
+    "PLANNER_SCOPE_PRESERVES_OBLIGATION_ID_AND_TEXT",
+    "FULL_RAW_GOAL_NOT_DUPLICATED_IN_PLANNER_PROMPT",
+    "VERIFIER_ONLY_SEGMENT_HASH_AND_ACCEPTANCE_METADATA_NOT_SENT_TO_MODEL",
+    "MANDATORY_EXPLICIT_OUTPUT_DELIVERABLES_PRESERVED",
+    "DECLARED_INPUT_SNAPSHOT_PRESERVED",
+    "FULL_ENCODED_REQUEST_BODY_CONTROLS_TIMEOUT_BUDGET",
+    "SMALL_REQUEST_300S_FLOOR",
+    "PROJECTED_RANK12_SCALE_REQUEST_BUDGET_ABOVE_OLD_300S_FAILURE",
+    "900S_FAIL_CLOSED_TIMEOUT_CAP",
+    "ALL_PRIOR_OUTPUT_DIRECTIVE_AND_PLANNER_SAFETY_REGRESSIONS_PASS"
+  ],
+  "failed_predecessor_live_evidence": {
+    "run_id": 37731973885,
+    "artifact_id": 11529992888,
+    "artifact_digest": "sha256:66270f47e9f530b0d3f506c957360d744e57b6641c54811bb0061b9bc49fdb5c",
+    "projected_prompt_tokens": 3416,
+    "projected_prefill_seconds": 280.48,
+    "generation_tokens_before_300s_timeout": 118,
+    "classification": "PROMPT_PROJECTION_HELPED_MATERIALLY_BUT_FIXED_300S_TIMEOUT_REMAINED_CAUSAL"
+  },
+  "live_public_runner_preflight": {
+    "run_id": 37735751571,
+    "required": true,
+    "status": "IN_PROGRESS"
+  },
+  "benchmark_slot_consumed": 0,
+  "execution_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
