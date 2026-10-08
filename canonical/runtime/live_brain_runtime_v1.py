@@ -500,6 +500,75 @@ def execute_failure_repair_cycle(
             repair_context = request.get("repair_context")
             if repair_context is not None and not isinstance(repair_context, Mapping):
                 return _fail("REPAIR_CONTEXT_INVALID")
+
+            if (
+                required_effect == "repair.policy_adequacy_cover.available"
+                and isinstance(repair_context, Mapping)
+            ):
+                raw_pairs = repair_context.get("grounded_bound_policy_candidates")
+                pairs: list[dict[str, str]] = []
+                if isinstance(raw_pairs, Sequence) and not isinstance(
+                    raw_pairs, (str, bytes)
+                ):
+                    for raw in raw_pairs:
+                        if not isinstance(raw, Mapping):
+                            continue
+                        policy_id = str(raw.get("policy_id") or "").strip()
+                        capability_id = str(raw.get("capability_id") or "").strip()
+                        if (
+                            policy_id
+                            and capability_id
+                            and policy_id
+                            == "BOUND_CAPABILITY_POLICY::" + capability_id
+                        ):
+                            pair = {
+                                "policy_id": policy_id,
+                                "capability_id": capability_id,
+                            }
+                            if pair not in pairs:
+                                pairs.append(pair)
+                pairs.sort(key=lambda row: (row["policy_id"], row["capability_id"]))
+
+                selected_policy_id = str(
+                    repair_context.get("selected_policy_id") or ""
+                ).strip()
+                selected_pairs = [
+                    row for row in pairs if row["policy_id"] == selected_policy_id
+                ]
+                if selected_pairs:
+                    pairs = selected_pairs
+
+                if len(pairs) == 1:
+                    pair = pairs[0]
+                    invention_targets = [
+                        "repair.policy_adequacy.prove::"
+                        + hashlib.sha256(
+                            (
+                                pair["policy_id"]
+                                + "|"
+                                + pair["capability_id"]
+                            ).encode("utf-8")
+                        ).hexdigest()
+                    ]
+                    invention_target_source = (
+                        "R2_EXACT_GROUNDED_BOUND_POLICY_ADEQUACY_GAP"
+                    )
+                elif len(pairs) > 1:
+                    pair_digest = hashlib.sha256(
+                        json.dumps(
+                            pairs,
+                            sort_keys=True,
+                            separators=(",", ":"),
+                            ensure_ascii=False,
+                        ).encode("utf-8")
+                    ).hexdigest()
+                    invention_targets = [
+                        "repair.policy_adequacy_cover.prove_one_of::"
+                        + pair_digest
+                    ]
+                    invention_target_source = (
+                        "R2_GROUNDED_BOUND_POLICY_FRONTIER_ADEQUACY_GAP"
+                    )
             problem = {
                 "task_id": str(
                     request.get("repair_task_id")
@@ -692,6 +761,20 @@ def _compact_policy_repair_context(result: Mapping[str, Any]) -> dict[str, Any] 
                 break
     rejected.sort(key=lambda row: (row["policy_id"], row.get("reason", "")))
 
+    grounded_bound_policy_candidates: list[dict[str, str]] = []
+    grounded_prefix = "BOUND_CAPABILITY_POLICY::"
+    for row in rejected:
+        policy_id = str(row.get("policy_id") or "").strip()
+        if not policy_id.startswith(grounded_prefix):
+            continue
+        capability_id = policy_id[len(grounded_prefix):].strip()
+        if not capability_id:
+            continue
+        grounded_bound_policy_candidates.append({
+            "policy_id": policy_id,
+            "capability_id": capability_id,
+        })
+
     uncovered_ids: list[str] = []
     rows = search.get("uncovered_models")
     if isinstance(rows, Sequence) and not isinstance(rows, (str, bytes)):
@@ -752,6 +835,7 @@ def _compact_policy_repair_context(result: Mapping[str, Any]) -> dict[str, Any] 
         "selected_policy_id": str(request.get("selected_policy_id") or "").strip() or None,
         "authenticated_policy_ids": strings(search.get("authenticated_policy_ids")),
         "rejected_policy_candidates": rejected,
+        "grounded_bound_policy_candidates": grounded_bound_policy_candidates,
         "certified_common_policies": strings(search.get("certified_common_policies")),
         "uncovered_model_ids": uncovered_ids,
         "conflicting_policy_region_witness": conflict,
