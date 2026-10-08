@@ -109,15 +109,7 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
                 predicate=loop.VERIFIED_SUPERSET_SCOPE_PREDICATE,
             ),
         )
-        state = {
-            "skills": {
-                "skill:test": {
-                    "active": True,
-                    "skill": verified,
-                    "pareto_metrics": {},
-                }
-            }
-        }
+        sid, state = self.authorized_state(verified)
         problem = {
             "task_id": "t",
             "initial_facts": ["A"],
@@ -149,15 +141,7 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
                 predicate=loop.VERIFIED_SUPERSET_SCOPE_PREDICATE,
             ),
         )
-        state = {
-            "skills": {
-                "skill:test": {
-                    "active": True,
-                    "skill": verified,
-                    "pareto_metrics": {},
-                }
-            }
-        }
+        sid, state = self.authorized_state(verified)
         drifted = {
             "task_id": "t",
             "initial_facts": ["A"],
