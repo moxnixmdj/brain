@@ -1,0 +1,45 @@
+{
+  "schema":"PROJECT_BRAIN_P3_MINIMUM_SEMANTIC_DISCRIMINATOR_SPRITE_VERIFICATION_V1",
+  "date":"2026-10-08",
+  "status":"PASS__EXACT_CORRECTED_INPUTS__9_OF_9__ZERO_TERMINAL_CREDIT",
+  "subject":{
+    "reduction":{"path":"canonical/governance/P3_MINIMUM_SEMANTIC_DISCRIMINATOR_REDUCTION_20261008_V1.json","git_blob_sha":"f955be3b73ac3092fa5984c998b6a7877607713b"},
+    "no_jit_input":{"path":"canonical/governance/P3_POLICY_CHANGING_SEMANTIC_TOURNAMENT_INPUT_20261008_V1.json","git_blob_sha":"b84b8b81ebfa05efa4520dc26f46c5474fa3dee5"},
+    "jit_input":{"path":"canonical/governance/P3_POLICY_CHANGING_SEMANTIC_JIT_INPUT_20261008_V1.json","git_blob_sha":"7496a46caf32a805089b4848e8e91e0ca2d6432c"},
+    "compiler":{"path":"canonical/runtime/tournament_failure_capability_compiler_v1.py","git_blob_sha":"999f075b9d888d35f6e10564aeaf45e0791c4a52"}
+  },
+  "carrier":{
+    "provider":"SPRITES",
+    "name":"brain-root3-current-byte-replay-20261007-v1",
+    "id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace":"/home/sprite/p3_min_semantic_verify"
+  },
+  "verification":{
+    "pass":true,
+    "passed":9,
+    "total":9,
+    "without_discriminator":{
+      "pass":false,
+      "classification":"TOURNAMENT_FAILURE_UNRESOLVED",
+      "minimum_policy_count":2,
+      "minimum_persistent_bits":1,
+      "conflicting_world_pair":["SUPPORTED_AND_DECISION_RELEVANT","NOT_CERTIFIABLY_SUPPORTED_OR_MATERIAL_UNCERTAINTY"]
+    },
+    "with_truthful_jit_discriminator":{
+      "pass":true,
+      "classification":"JIT_DISCRIMINATOR",
+      "minimum_policy_count":2,
+      "minimum_persistent_bits":1,
+      "persistent_state_required":false,
+      "bucket_count":2
+    }
+  },
+  "verified_reduction":"FOR_THE_BOUND_P3_CONFLICT_CELL__A_COMMON_POLICY_IS_NOT CERTIFIED__A_TRUTHFUL_PRECOMMITMENT_POLICY_CHANGING_SEMANTIC_DISCRIMINATOR_IS_SUFFICIENT__THE_ONE_BIT_BOUND_IS_LOCAL_TO_THIS_TWO_CLASS_CELL",
+  "hard_nonclaims":[
+    "NO_CLAIM_ONE_BIT_SOLVES_ALL_P3",
+    "NO_CLAIM_THE_TWO_WORLD_CELL_ENUMERATES_ALL_P3_SEMANTICS",
+    "NO_CLAIM_ACTUAL_OPUS_TARGET_OCCUPANCY",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
