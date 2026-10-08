@@ -103,3 +103,25 @@ def test_transitive_categorical_membership_realized_end_to_end():
     assert out["rendered_text"]=="- Tweety is a member of Animal. [src:REPORT@p1;TAX@p1]"
     receipt=out["support_receipts"][0]["receipt"]
     assert receipt["categorical_receipt"]["support_proof_paths"]==[["E1","E2","E3"]]
+
+
+def test_fails_closed_on_wrong_v3_schema_and_unmodeled_contract_fields():
+    from copy import deepcopy
+    source=payload([req("C1","Revenue growth is at least 10.")],[
+        ev("E1","Report states Revenue growth is 12.")
+    ])
+    variants=[
+        ("wrong_schema","V3_INPUT_SCHEMA_INVALID",lambda p:p["v3_input"].update({"schema":"FORGED"})),
+        ("unknown_input","UNMODELED_V3_INPUT_FIELDS",lambda p:p["v3_input"].update({"hidden_audience_constraints":{"language":"German"}})),
+        ("unknown_task","UNMODELED_TASK_REQUIREMENTS",lambda p:p["v3_input"]["task"].update({"mandatory_semantic_requirement":"Translate to German"})),
+        ("unknown_claim","UNMODELED_CLAIM_REQUIREMENTS",lambda p:p["v3_input"]["task"]["claims"][0].update({"forbid_output":True})),
+    ]
+    for name, reason, mutate in variants:
+        attack=deepcopy(source)
+        mutate(attack)
+        out=evaluate(attack)
+        assert out["pass"] is False,(name,out)
+        assert out["reason"]==reason,(name,out)
+        assert out["p3_contract_cell_authorized"] is False
+        assert out["db_admission_authority"] is False
+        assert out["terminal_authority"] is False
