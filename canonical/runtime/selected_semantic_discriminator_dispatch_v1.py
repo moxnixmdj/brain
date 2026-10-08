@@ -1,8 +1,10 @@
 """Fail-closed automatic semantic discriminator and policy-dispatch adapter.
 
 Reuses the Brain-owned v1 semantic truth checker. Discovers a selected
-boolean result by checking both candidate truth values, then binds an
-optional policy selection to that *recomputed* result. No adequacy,
+boolean result by checking both candidate truth values. The checker-minted,
+source-bound predicate identity is authoritative; caller predicate labels
+remain trace metadata only. It then binds an optional policy selection to
+that *recomputed* result. No adequacy,
 source-authorization, U-subtraction, or terminal credit is emitted.
 """
 from __future__ import annotations
@@ -90,11 +92,23 @@ def evaluate(payload: Mapping[str, Any], policy_map: Mapping[str, str]) -> dict[
         )
 
     truth, certificate = next(iter(results.items()))
-    if certificate.get("predicate_id") != payload.get("predicate_id"):
-        return _fail("CERTIFICATE_PREDICATE_BINDING_MISMATCH")
+    requested_predicate_id = payload.get("predicate_id")
+    if certificate.get("requested_predicate_id") != requested_predicate_id:
+        return _fail("CERTIFICATE_REQUEST_ALIAS_TRACE_MISMATCH")
+    verified_predicate_id = certificate.get("predicate_id")
+    prefix = "source-condition-sha256:"
+    if (
+        not isinstance(verified_predicate_id, str)
+        or not verified_predicate_id.startswith(prefix)
+        or len(verified_predicate_id) != len(prefix) + 64
+        or any(ch not in "0123456789abcdef" for ch in verified_predicate_id[len(prefix):])
+    ):
+        return _fail("CERTIFICATE_SOURCE_PREDICATE_ID_INVALID")
     selected = policy_map[truth]
     input_binding = {
-        "predicate_id": payload.get("predicate_id"),
+        "predicate_id": verified_predicate_id,
+        "requested_predicate_id": requested_predicate_id,
+        "requested_predicate_id_authority": False,
         "target_claim_id": target,
         "source_id": payload["source_id"],
         "source_sha256": hashlib.sha256(payload["source_text"].encode()).hexdigest(),
@@ -107,6 +121,9 @@ def evaluate(payload: Mapping[str, Any], policy_map: Mapping[str, str]) -> dict[
         "pass": True,
         "status": "SELECTED_SEMANTIC_TRUTH_PROVED__POLICY_ROUTE_SELECTED__ADEQUACY_UNVERIFIED",
         "predicate_truth": truth,
+        "predicate_id": verified_predicate_id,
+        "requested_predicate_id": requested_predicate_id,
+        "requested_predicate_id_authority": False,
         "selected_policy_id": selected,
         "input_binding_sha256": _digest(input_binding),
         "input_binding": input_binding,
@@ -117,7 +134,11 @@ def evaluate(payload: Mapping[str, Any], policy_map: Mapping[str, str]) -> dict[
         "u_subtraction_authorized": False,
         "terminal_authority": False,
         "terminal_credit_delta": 0,
-        "boundary": "BRANCH_SELECTION_ONLY__NO_CLAIM_POLICY_IS_ADEQUATE__NO_GLOBAL_SCOPE_OR_TERMINAL_CREDIT",
+        "boundary": (
+            "BRANCH_SELECTION_ONLY__CHECKER_MINTED_SOURCE_PREDICATE_ID_AUTHORITATIVE__"
+            "CALLER_LABEL_NONAUTHORITATIVE__NO_CLAIM_POLICY_IS_ADEQUATE__"
+            "NO_GLOBAL_SCOPE_OR_TERMINAL_CREDIT"
+        ),
     }
 
 
