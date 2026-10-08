@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V2",
+  "date": "2026-10-08",
+  "status": "PASS__R1_V3_SINGLE_FRONT_DOOR__LIVE_OWNERSHIP_84__UNIVERSAL_INVOCATION_84",
+  "branch": "r1-reconcile-ownership-invocation-v2-20261008",
+  "exact_blobs": {
+    "ownership_manifest": {
+      "path": "canonical/governance/LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1.json",
+      "git_blob_sha": "5e28d0850a99f7cbdc2c21afe6b12a09b816f276"
+    },
+    "ownership_runtime": {
+      "path": "canonical/runtime/live_capability_ownership_v1.py",
+      "git_blob_sha": "2e09b9fdbf2095f9723b64f1afd321e67be37941"
+    },
+    "universal_invoker": {
+      "path": "canonical/runtime/live_capability_invoker_v1.py",
+      "git_blob_sha": "c25f6e79d41bdec1d3fe2f6943e68afb6bb854de"
+    },
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "68ee5a9d21bd5b47c50b83d97785064bdf64c0ce"
+    },
+    "subordinate_live_runtime": {
+      "path": "canonical/runtime/live_brain_runtime_v1.py",
+      "git_blob_sha": "a7c8ad109471ea2f6d004474d556c6693c5b2033"
+    },
+    "fabric_tests": {
+      "path": "canonical/tests/test_unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "da3d5ec2f8d839856a6ccb140e9e2c1af006be89"
+    },
+    "live_runtime_tests": {
+      "path": "canonical/tests/test_live_brain_runtime_v1.py",
+      "git_blob_sha": "c1376f9b7361061d948fa5039351ddfa4330ad71"
+    },
+    "ownership_tests": {
+      "path": "canonical/tests/test_live_capability_ownership_v1.py",
+      "git_blob_sha": "5001fe9bde353f34f07757f17120aa9866ae8d21"
+    },
+    "invocation_tests": {
+      "path": "canonical/tests/test_live_capability_invoker_v1.py",
+      "git_blob_sha": "119bdc3ffde1f7f0a32a68e0618a8c3fc89f6ce5"
+    },
+    "workflow": {
+      "path": ".github/workflows/verify-unified-cognitive-fabric-v1.yml",
+      "git_blob_sha": "8cc9425a9c7e0fc532fa7427be5c1ef3bba79093"
+    },
+    "activation": {
+      "path": "canonical/governance/LIVE_BRAIN_RUNTIME_V1_ACTIVATION_20261008_V1.json",
+      "git_blob_sha": "40a55028183fa0c121c234e499580ad71f4e9d2f"
+    },
+    "v3_front_door_replay": {
+      "path": "canonical/verification/R1_SINGLE_CANONICAL_FRONT_DOOR_REPLAY_20261008_V3.json",
+      "git_blob_sha": "61ff49a00e13fcde4fcc4ba1c94f972121b57a46"
+    },
+    "bound_registry": {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "545e6b405e59a77d4fc22049e3e86a286843f63d"
+    },
+    "h100_v8": {
+      "path": "canonical/runtime/h100_verified_capability_registry_v8.py",
+      "git_blob_sha": "a4f952fbf054dbfe4f9617da837b3bf5c3c2e3ab"
+    },
+    "certified_route_registry": {
+      "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
+      "git_blob_sha": "78ef7174fd7cdebb24f97882e8c325a5164f18cb"
+    }
+  },
+  "architecture": {
+    "canonical_public_entrypoint": "canonical.runtime.unified_cognitive_fabric_v1.run",
+    "subordinate_runtime_entrypoint": "canonical.runtime.live_brain_runtime_v1.run",
+    "subordinate_runtime_public_authority": false,
+    "universal_identity_mode": "LIVE_CAPABILITY",
+    "one_canonical_public_front_door": true
+  },
+  "ownership_replay": {
+    "fabric_engine_count": 19,
+    "verified_bound_capability_count": 43,
+    "active_verified_learned_skill_count": 0,
+    "h100_registry_row_count": 21,
+    "h100_live_ownership_identity_count": 21,
+    "certified_admitted_route_count": 1,
+    "total_live_owned_capability_count": 84,
+    "missing_fabric_carrier_count": 0,
+    "live_owned_equals_fabric_reachable": true
+  },
+  "universal_invocation_replay": {
+    "result": "R1_UNIVERSAL_INVOCATION_COVERAGE_84_PASS",
+    "capability_count": 84,
+    "supported_capability_count": 84,
+    "missing_capability_count": 0,
+    "kind_counts": {
+      "ENGINE": 19,
+      "BOUND_CAPABILITY": 43,
+      "H100_VERIFIED_CAPABILITY": 21,
+      "ACTIVE_VERIFIED_LEARNED_SKILL": 0,
+      "CERTIFIED_ROUTE": 1
+    },
+    "single_invocation_api": "unified_cognitive_fabric_v1.run(mode=LIVE_CAPABILITY)",
+    "all_live_owned_capabilities_have_invocation_contract": true
+  },
+  "h100_historical_id_collision": {
+    "capability_id": "CAP_AFFINE_TANH_V1",
+    "row_count": 2,
+    "ownership_identities": [
+      "h100:CAP_AFFINE_TANH_V1@GENERIC_PATCH_SEARCH_TRANSFER_V1",
+      "h100:CAP_AFFINE_TANH_V1@VERIFIED_SAFE_STDLIB_OPERATOR_REFIT"
+    ],
+    "historical_verified_ids_mutated": false,
+    "ambiguity_remaining": false
+  },
+  "independent_execution": {
+    "carrier": "SPRITES",
+    "ownership_collision_safe_replay": "PASS",
+    "universal_invocation_coverage_84": "PASS",
+    "v3_exact_changed_source_compile_and_activation_parse": "PASS"
+  },
+  "boundary": {
+    "r1_structural_closure": true,
+    "arbitrary_raw_language_route_selection_proved": false,
+    "arbitrary_raw_language_route_selection_classification": "R2_SEMANTIC_DECISION_INTELLIGENCE",
+    "historical_repository_capability_completeness_proved": false,
+    "historical_repository_capability_scope": "EXCLUDED_FROM_CURRENT_LIVE_OWNERSHIP_UNLESS_EXPLICITLY_READMITTED"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_RAW_LANGUAGE_ALWAYS_SELECTS_THE_CORRECT_CAPABILITY",
+    "NO_CLAIM_ALL_HISTORICAL_REPOSITORY_CODE_IS_LIVE_OWNED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
