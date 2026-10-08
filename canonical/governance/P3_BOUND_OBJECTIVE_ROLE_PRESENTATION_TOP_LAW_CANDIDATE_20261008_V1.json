@@ -1,13 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_P3_BOUND_OBJECTIVE_ROLE_PRESENTATION_TOP_LAW_CANDIDATE_V1",
   "date": "2026-10-08",
-  "status": "CANDIDATE_MECHANICAL_TOP_LAW_COMPILER__REAL_CONTEXT_SCOPE_MEMBERSHIP_REMAINS_SEPARATE__ZERO_TERMINAL_CREDIT",
+  "status": "VERIFIED_MECHANICAL_TOP_LAW_COMPILER__TWO_SPRITE_EXACT_BYTE_PASS__REAL_CONTEXT_SCOPE_MEMBERSHIP_REMAINS_SEPARATE__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "runtime": {
-    "path": "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py"
+    "path": "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py",
+    "git_blob_sha": "da4da391280a985f6d90028b12c9cdb0ef0aaf46"
   },
   "tests": {
-    "path": "canonical/tests/test_p3_bounded_objective_role_presentation_compiler_v1.py"
+    "path": "canonical/tests/test_p3_bounded_objective_role_presentation_compiler_v1.py",
+    "git_blob_sha": "4bacd175f66994e566ad1fa621bc05ebb058f1e4"
   },
   "composition": [
     "P3_BOUNDED_OBJECTIVE_ROLE_RELEVANCE_V1_PROVES_BOTH_EXACT_BINARY_OBJECTIVE_ROLE_CLAIMS_RELEVANT_AND_EMITS_OBJECTIVE_ROLE_ORDER",
@@ -33,5 +35,9 @@
     "incremental_spend_usd": 0,
     "fresh_target_reality_units_consumed": 0,
     "terminal_credit_delta": 0
+  },
+  "verification": {
+    "path": "canonical/verification/P3_BOUND_OBJECTIVE_ROLE_PRESENTATION_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+    "git_blob_sha": "4f521195430db76f90d2cd7261d7d26db3abce0e"
   }
 }
