@@ -27,6 +27,9 @@ SCHEMA = "PROJECT_BRAIN_FINITE_SYMBOLIC_COVER_REPLAY_V1"
 SPEC_SCHEMA = "PROJECT_BRAIN_FINITE_SYMBOLIC_COVER_SPEC_V1"
 MAX_VARIABLES = 15
 MAX_ROUTES = 64
+MAX_TOTAL_CNF_TOKENS = 1024
+MAX_SCOPE_ID_LENGTH = 256
+MAX_ROUTE_ID_LENGTH = 128
 _IDENTIFIER = re.compile(r"[A-Za-z][A-Za-z0-9_]{0,31}\Z")
 
 
@@ -46,13 +49,22 @@ def _fail(reason: str, **more: Any) -> dict[str, Any]:
     }
 
 
-def _check_cnf(value: Any, variables: set[str]) -> tuple[tuple[str, ...], ...]:
+def _check_cnf(value: Any, variables: set[str], budget: list[int]) -> tuple[tuple[str, ...], ...]:
     if not isinstance(value, list):
         raise ValueError("CNF_MUST_BE_ARRAY")
+    # Count both clauses and literals across every formula before enumeration.
+    # Content-addressing limits bytes, not the cost of re-evaluating formulas
+    # for up to 2**15 worlds. One shared finite token budget bounds that cost.
+    budget[0] += len(value)
+    if budget[0] > MAX_TOTAL_CNF_TOKENS:
+        raise ValueError("CNF_TOKEN_BUDGET_EXCEEDED")
     clauses = []
     for clause in value:
         if not isinstance(clause, list):
             raise ValueError("CNF_CLAUSE_MUST_BE_ARRAY")
+        budget[0] += len(clause)
+        if budget[0] > MAX_TOTAL_CNF_TOKENS:
+            raise ValueError("CNF_TOKEN_BUDGET_EXCEEDED")
         literals = []
         for lit in clause:
             if not isinstance(lit, str) or not lit or (
@@ -84,7 +96,8 @@ def verify(
     Each policy program outputs one Boolean. No Python/user code is executed.
     """
     try:
-        if not isinstance(expected_scope_id, str) or not expected_scope_id:
+        if (not isinstance(expected_scope_id, str) or not expected_scope_id
+                or len(expected_scope_id) > MAX_SCOPE_ID_LENGTH):
             return _fail("EXPECTED_SCOPE_REQUIRED")
         bound = resolve_receipt_bytes(spec_reference, repo_root=repo_root)
         spec = bound["document"]
@@ -97,6 +110,11 @@ def verify(
             "opus55_equivalent", "selected_cover_complete_authorized",
         )):
             return _fail("GLOBAL_AUTHORITY_CLAIM_FORBIDDEN")
+        if set(spec) != {
+            "schema", "scope_id", "variables", "scope_cnf",
+            "expected_output_cnf", "routes",
+        }:
+            return _fail("SPEC_FIELDS_INVALID")
         variables = spec.get("variables")
         if (
             not isinstance(variables, list)
@@ -108,8 +126,9 @@ def verify(
         ):
             return _fail("VARIABLES_INVALID_OR_TOO_LARGE")
         keys = set(variables)
-        in_scope = _check_cnf(spec.get("scope_cnf"), keys)
-        expected = _check_cnf(spec.get("expected_output_cnf"), keys)
+        budget = [0]
+        in_scope = _check_cnf(spec.get("scope_cnf"), keys, budget)
+        expected = _check_cnf(spec.get("expected_output_cnf"), keys, budget)
         routes = spec.get("routes")
         if not isinstance(routes, list) or not 1 <= len(routes) <= MAX_ROUTES:
             return _fail("ROUTES_INVALID_OR_TOO_MANY")
@@ -119,14 +138,17 @@ def verify(
         for row in routes:
             if not isinstance(row, dict):
                 return _fail("ROUTE_NOT_OBJECT")
+            if set(row) != {"route_id", "admission_cnf", "program_output_cnf"}:
+                return _fail("ROUTE_FIELDS_INVALID")
             rid = row.get("route_id")
-            if not isinstance(rid, str) or not rid or rid in ids:
+            if (not isinstance(rid, str) or not rid or
+                    len(rid) > MAX_ROUTE_ID_LENGTH or rid in ids):
                 return _fail("ROUTE_ID_INVALID")
             ids.add(rid)
             compiled.append((
                 rid,
-                _check_cnf(row.get("admission_cnf"), keys),
-                _check_cnf(row.get("program_output_cnf"), keys),
+                _check_cnf(row.get("admission_cnf"), keys, budget),
+                _check_cnf(row.get("program_output_cnf"), keys, budget),
             ))
         checked = 0
         for bits in itertools.product((False, True), repeat=len(variables)):
@@ -173,6 +195,8 @@ def verify(
             "scoped_valuations_checked": checked,
             "total_valuations": 1 << len(variables),
             "route_count": len(compiled),
+            "declared_cnf_tokens_checked": budget[0],
+            "max_cnf_tokens": MAX_TOTAL_CNF_TOKENS,
             "declared_symbolic_scope_covered": True,
             "declared_program_and_acceptance_formula_replayed": True,
             "production_route_implementation_verified": False,
