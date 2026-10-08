@@ -698,9 +698,23 @@ def test_native_specialized_verifier_rejects_external_proposal():
             },
         }],
     }
-    out = solver_v1.run(
-        problem,
-        proposal_packets={"native": [{"candidate": "caller-data"}]},
-    )
+    native_result = {
+        "pass": True,
+        "status": "PASS__NATIVE_SPECIALIZED_OPERATION_EXECUTED",
+        "result": {"status": "VERIFIED_CAPABILITY_REGISTRY_V8_READY"},
+        "read_only": True,
+        "incremental_spend_usd": 0,
+    }
+    with mock.patch.object(
+        solver_v1,
+        "invoke_native_specialized",
+        return_value=native_result,
+    ) as invoke:
+        out = solver_v1.run(
+            problem,
+            proposal_packets={"native": [{"candidate": "caller-data"}]},
+        )
     assert out["pass"] is True, out
     assert out["trace"][0]["proposal_source"] == "DETERMINISTIC_PROPOSAL_FREE_ROUTE"
+    assert out["trace"][0]["accepted_proposal"] == {}
+    invoke.assert_called_once_with("H100_REGISTRY_SNAPSHOT_V8", {})
