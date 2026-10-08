@@ -3,21 +3,20 @@ import tempfile
 import unittest
 from pathlib import Path
 
-import canonical.runtime.proof_carrying_semantic_refinement_v3 as adequacy
-from canonical.runtime.p3_robust_policy_adequacy_cegar_v1 import solve
+import canonical.runtime.p3_robust_policy_adequacy_cegar_v1 as kernel
 
 
 class P3RobustPolicyAdequacyCegarV1Tests(unittest.TestCase):
     def setUp(self):
-        self._old_root = adequacy.ROOT
+        self._old_root = kernel.ROOT
         self._tmp = tempfile.TemporaryDirectory()
         self.root = Path(self._tmp.name)
-        adequacy.ROOT = self.root
+        kernel.ROOT = self.root
         (self.root / "canonical/governance").mkdir(parents=True)
         (self.root / "canonical/verification").mkdir(parents=True)
 
     def tearDown(self):
-        adequacy.ROOT = self._old_root
+        kernel.ROOT = self._old_root
         self._tmp.cleanup()
 
     def _binding(self, policy_id, condition):
@@ -26,9 +25,9 @@ class P3RobustPolicyAdequacyCegarV1Tests(unittest.TestCase):
         gov.write_text(
             json.dumps(
                 {
-                    "schema": adequacy.ADEQUACY_SCHEMA,
+                    "schema": kernel.ADEQUACY_SCHEMA,
                     "policy_id": policy_id,
-                    "policy_condition_sha256": adequacy._condition_sha256(condition),
+                    "policy_condition_sha256": kernel._condition_sha256(condition),
                     "adequacy_proved": True,
                     "brain_owned": True,
                     "load_bearing_constraints_preserved": True,
@@ -37,11 +36,11 @@ class P3RobustPolicyAdequacyCegarV1Tests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        gov_blob = adequacy._git_blob_sha(gov)
+        gov_blob = kernel._git_blob_sha(gov)
         ver.write_text(
             json.dumps(
                 {
-                    "schema": adequacy.VERIFY_SCHEMA,
+                    "schema": kernel.VERIFY_SCHEMA,
                     "policy_id": policy_id,
                     "subject_git_blob_sha": gov_blob,
                     "pass": True,
@@ -54,13 +53,13 @@ class P3RobustPolicyAdequacyCegarV1Tests(unittest.TestCase):
             "adequacy_certificate_path": f"canonical/governance/{policy_id}.json",
             "adequacy_certificate_blob_sha": gov_blob,
             "independent_verification_path": f"canonical/verification/{policy_id}.json",
-            "independent_verification_blob_sha": adequacy._git_blob_sha(ver),
+            "independent_verification_blob_sha": kernel._git_blob_sha(ver),
         }
 
     def test_common_policy_is_proved_over_every_surviving_model(self):
         x = {"op": "ATOM", "id": "x"}
         binding = self._binding("p", x)
-        out = solve(
+        out = kernel.solve(
             {
                 "decision_basis": ["x"],
                 "formal_source_constraints": [x],
@@ -82,7 +81,7 @@ class P3RobustPolicyAdequacyCegarV1Tests(unittest.TestCase):
     def test_exact_one_bit_discriminator_is_selected_when_it_resolves_both_branches(self):
         x = {"op": "ATOM", "id": "x"}
         not_x = {"op": "NOT", "arg": x}
-        out = solve(
+        out = kernel.solve(
             {
                 "decision_basis": ["x"],
                 "policy_conditions": {"p_true": x, "p_false": not_x},
@@ -117,7 +116,7 @@ class P3RobustPolicyAdequacyCegarV1Tests(unittest.TestCase):
 
     def test_missing_adequacy_authentication_blocks_policy_use(self):
         x = {"op": "ATOM", "id": "x"}
-        out = solve(
+        out = kernel.solve(
             {
                 "decision_basis": ["x"],
                 "policy_conditions": {"p": x},
@@ -131,7 +130,7 @@ class P3RobustPolicyAdequacyCegarV1Tests(unittest.TestCase):
 
     def test_policy_cover_hole_blocks_discriminator_selection(self):
         x = {"op": "ATOM", "id": "x"}
-        out = solve(
+        out = kernel.solve(
             {
                 "decision_basis": ["x"],
                 "policy_conditions": {"p_true": x},
@@ -150,7 +149,7 @@ class P3RobustPolicyAdequacyCegarV1Tests(unittest.TestCase):
     def test_unproved_refinement_cannot_shrink_state(self):
         x = {"op": "ATOM", "id": "x"}
         not_x = {"op": "NOT", "arg": x}
-        out = solve(
+        out = kernel.solve(
             {
                 "decision_basis": ["x"],
                 "formal_source_constraints": [],
@@ -166,9 +165,7 @@ class P3RobustPolicyAdequacyCegarV1Tests(unittest.TestCase):
             }
         )
         self.assertEqual(out["surviving_model_count"], 2)
-        self.assertEqual(
-            len(out["semantic_state"]["rejected_refinements"]), 1
-        )
+        self.assertEqual(len(out["semantic_state"]["rejected_refinements"]), 1)
         self.assertEqual(
             out["selected_discriminator"]["discriminator_id"], "observe_x"
         )
@@ -176,7 +173,7 @@ class P3RobustPolicyAdequacyCegarV1Tests(unittest.TestCase):
     def test_cheapest_resolving_discriminator_wins_deterministically(self):
         x = {"op": "ATOM", "id": "x"}
         not_x = {"op": "NOT", "arg": x}
-        out = solve(
+        out = kernel.solve(
             {
                 "decision_basis": ["x"],
                 "policy_conditions": {"p_true": x, "p_false": not_x},
@@ -196,7 +193,7 @@ class P3RobustPolicyAdequacyCegarV1Tests(unittest.TestCase):
         x = {"op": "ATOM", "id": "x"}
         y = {"op": "ATOM", "id": "y"}
         not_x = {"op": "NOT", "arg": x}
-        out = solve(
+        out = kernel.solve(
             {
                 "decision_basis": ["x", "y"],
                 "policy_conditions": {"p_true": x, "p_false": not_x},
@@ -216,6 +213,27 @@ class P3RobustPolicyAdequacyCegarV1Tests(unittest.TestCase):
         )
         self.assertIsNotNone(out["conflicting_policy_region_witness"])
         self.assertFalse(out["terminal_authority"])
+
+    def test_forged_verification_subject_is_rejected(self):
+        x = {"op": "ATOM", "id": "x"}
+        binding = self._binding("p", x)
+        ver = self.root / binding["independent_verification_path"]
+        payload = json.loads(ver.read_text(encoding="utf-8"))
+        payload["subject_git_blob_sha"] = "0" * 40
+        ver.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+        binding["independent_verification_blob_sha"] = kernel._git_blob_sha(ver)
+
+        out = kernel.solve(
+            {
+                "decision_basis": ["x"],
+                "formal_source_constraints": [x],
+                "proposed_refinements": [x],
+                "policy_conditions": {"p": x},
+                "policy_adequacy_bindings": {"p": binding},
+            }
+        )
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertEqual(out["reason"], "NO_AUTHENTICATED_POLICY_ADEQUACY")
 
 
 if __name__ == "__main__":
