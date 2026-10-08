@@ -30,6 +30,7 @@ from canonical.runtime.r2_existing_policy_cover_observation_reuse_v1 import (
     discover as discover_existing_cover_observation,
 )
 from canonical.runtime import r2_grounded_candidate_policy_frontier_v1 as grounded_policy_frontier
+from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as direct_adequacy
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_CONTROLLER_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -902,6 +903,101 @@ def run(
         partial_binding_supplied = isinstance(
             request.get("partial_goal_to_decision_binding"), Mapping
         )
+
+        # Reuse the strongest Brain-owned semantic authority first. Exact direct
+        # cells already prove membership before execution and independently
+        # verify every raw obligation after execution, so forcing them through
+        # the weaker open-ended semantic loop only loses verified capability.
+        #
+        # Explicit caller-supplied decision/execution context disables this
+        # shortcut: in that mode the caller has selected the structured R2 path.
+        if (
+            not isinstance(decision_payload, Mapping)
+            and not full_binding_supplied
+            and not partial_binding_supplied
+            and request.get("execution_problem") is None
+        ):
+            direct_request = {"task_id": task_id, "goal": goal}
+            direct_preflight = direct_adequacy.preflight(direct_request)
+            if not isinstance(direct_preflight, Mapping):
+                raise DecisionControllerError(
+                    "DIRECT_ADEQUACY_PREFLIGHT_RESULT_NOT_OBJECT"
+                )
+            if direct_preflight.get("status") == "FAIL_CLOSED":
+                raise DecisionControllerError(
+                    "DIRECT_ADEQUACY_PREFLIGHT_FAIL_CLOSED:"
+                    + str(direct_preflight.get("reason") or "UNKNOWN")
+                )
+            if direct_preflight.get("matched") is True:
+                direct_result = direct_adequacy.run(direct_request)
+                if not isinstance(direct_result, Mapping):
+                    raise DecisionControllerError(
+                        "DIRECT_ADEQUACY_RESULT_NOT_OBJECT"
+                    )
+                if direct_result.get("pass") is not True:
+                    if direct_result.get("retry_by_other_route_authorized") is not False:
+                        raise DecisionControllerError(
+                            "DIRECT_ADEQUACY_MATCHED_FAILURE_WITH_UNSAFE_FALLTHROUGH"
+                        )
+                    return _open(
+                        str(
+                            direct_result.get("status")
+                            or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"
+                        ),
+                        task_id=task_id,
+                        goal=goal,
+                        raw_contract=raw_contract,
+                        next_required_edge=(
+                            "DIRECT_END_TO_END_ADEQUACY_CELL_VERIFICATION"
+                        ),
+                        direct_adequacy_result=deepcopy(dict(direct_result)),
+                    )
+
+                expected_goal_sha = sha256(goal.encode("utf-8")).hexdigest()
+                selected_policy_id = direct_result.get("selected_policy_id")
+                if (
+                    not isinstance(selected_policy_id, str)
+                    or not selected_policy_id
+                    or direct_result.get("goal_sha256") != expected_goal_sha
+                    or direct_result.get("semantic_acceptance_complete") is not True
+                    or direct_result.get("actual_goal_satisfaction_verified") is not True
+                    or direct_result.get("direct_adequacy_authority") is not True
+                    or direct_result.get("retry_by_other_route_authorized") is not False
+                    or direct_result.get("terminal_authority") is not False
+                ):
+                    raise DecisionControllerError(
+                        "DIRECT_ADEQUACY_PASS_WITH_INVALID_AUTHORITY_BOUNDARY"
+                    )
+
+                return {
+                    "schema": SCHEMA,
+                    "status": "PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED",
+                    "pass": True,
+                    "task_id": task_id,
+                    "goal_sha256": expected_goal_sha,
+                    "raw_task_contract_sha256": raw_contract[
+                        "task_contract_sha256"
+                    ],
+                    "raw_source_coverage_complete": raw_contract[
+                        "nonwhitespace_source_coverage_complete"
+                    ],
+                    "selected_policy_id": selected_policy_id,
+                    "action_kind": "DIRECT_END_TO_END_ADEQUACY_RESULT",
+                    "action": deepcopy(direct_result.get("raw_result")),
+                    "realization": deepcopy(dict(direct_result)),
+                    "direct_adequacy_result": deepcopy(dict(direct_result)),
+                    "information_trace": [],
+                    "minimum_information_rounds_used": 0,
+                    "semantic_acceptance_complete": True,
+                    "actual_goal_satisfaction_verified": True,
+                    "verification_scope": (
+                        "EXACT_PREFLIGHTED_DIRECT_CELL_PLUS_"
+                        "INDEPENDENT_POST_EXECUTION_RAW_OBLIGATION_ACCEPTANCE"
+                    ),
+                    "terminal_authority": False,
+                    "terminal_credit_delta": 0,
+                    "incremental_spend_usd": 0,
+                }
 
         # Before starting open-ended semantic refinement, reuse any exact
         # Brain-owned adequacy region that proves its own raw-source membership.
