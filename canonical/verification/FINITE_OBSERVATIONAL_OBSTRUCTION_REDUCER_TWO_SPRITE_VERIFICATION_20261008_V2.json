@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_FINITE_OBSERVATIONAL_OBSTRUCTION_REDUCER_TWO_SPRITE_VERIFICATION_V2",
+  "date": "2026-10-08",
+  "status": "PASS_13_OF_13_ON_TWO_SPRITES__SELF_CERTIFICATION_HARDENED__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/finite_observational_obstruction_reducer_v1.py",
+    "git_blob_sha": "a5e2fc94bb734d5c4d705df7d89dd78208425d11"
+  },
+  "tests": {
+    "path": "canonical/tests/test_finite_observational_obstruction_reducer_v1.py",
+    "git_blob_sha": "fcb957a7110ba5de40377b7d23a1c33c5a80ac4e"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_passed": 13,
+      "tests_run": 13
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_passed": 13,
+      "tests_run": 13
+    }
+  ],
+  "proved": [
+    "EXACT_FULL_Q_SIGNATURE_EQUIVALENCE_CLASSES_OVER_DECLARED_FINITE_H",
+    "STRUCTURAL_COMMON_POLICY_COVER_CHECK_PER_FINAL_CLASS",
+    "EXACT_UNSPLITTABLE_DECLARED_POLICY_CONFLICT_WITNESS",
+    "DISTINGUISHABLE_REGIONS_NEED_NOT_SHARE_POLICY",
+    "CERTIFICATE_REFERENCES_ARE_BYTE_BOUND",
+    "STALE_CERTIFICATE_BYTES_FAIL_CLOSED",
+    "RECEIPT_SHAPED_SELF_ASSERTIONS_ARE_NOT_PART_OF_THE_AUTHORITY_CONTRACT"
+  ],
+  "boundaries": [
+    "NO_SELF_CERTIFICATION_OF_POLICY_ADEQUACY_SEMANTICS",
+    "NO_CLAIM_DECLARED_Q_IS_GLOBALLY_SCOPE_COMPLETE",
+    "NO_CLAIM_H_COVERS_ALL_REAL_TARGET_SUPPORTED_ESCAPE_STATES",
+    "NO_U_EMPTY_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
