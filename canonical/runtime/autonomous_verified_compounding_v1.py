@@ -235,6 +235,8 @@ def run(problem: Mapping[str, Any], *, repo_root: str | Path,
         episode_id: str, scope_id: str,
         episode_verification_binding: Mapping[str, Any] | None = None,
         candidate_verification_bindings: Mapping[str, Mapping[str, Any]] | None = None,
+        episode_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+        candidate_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
         **solver_kwargs: Any) -> dict[str, Any]:
     """Execute V12, retain only authenticated learning, and reuse verified macros."""
     state, _ = load_state(repo_root=repo_root, state_path=state_path)
@@ -255,10 +257,27 @@ def run(problem: Mapping[str, Any], *, repo_root: str | Path,
     ep = (result.get("current_episode")
           if result.get("pass") is True and result.get("current_episode_verified") is True
           else None)
+    late_auth = None
+    if (ep is None and result.get("pass") is True and episode_verifier is not None
+            and isinstance(result.get("current_episode"), Mapping)):
+        offered = episode_verifier(result)
+        if offered is not None:
+            late_auth = authenticate_episode_verification(
+                offered, problem=result.get("expanded_problem", problem),
+                episode=result["current_episode"], trace=result.get("trace", []),
+                fact_capsule_head_hash=result.get("state_capsule_head_hash", ""),
+                value_capsule_head_hash=result.get("value_capsule_head_hash", ""),
+                repo_root=repo_root,
+            )
+            if late_auth.get("pass") is True:
+                ep = late_auth["authenticated_episode"]
     learning = reconcile(
         repo_root=repo_root, state_path=state_path,
         new_episode=ep,
         failure=result if result.get("pass") is not True else None,
         candidate_verification_bindings=candidate_verification_bindings,
+        candidate_verifier=candidate_verifier,
     )
-    return {**result, "r3_learning": learning}
+    return {**result, "r3_learning": learning,
+            "r3_post_execution_episode_authentication": late_auth,
+            "r3_episode_admitted": ep is not None}
