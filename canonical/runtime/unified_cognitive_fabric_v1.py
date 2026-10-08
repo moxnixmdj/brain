@@ -278,6 +278,44 @@ def run(
                 skill_verification_provider=skill_verification_provider,
             )
             out = _unwrap_live_runtime(wrapped, "raw_result")
+
+            raw_gap_classes = {
+                "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
+                "RAW_GOAL_COMPILED_SHAPE_GAP",
+            }
+            raw_failure_class = (
+                str(out.get("failure_class") or "")
+                if isinstance(out, Mapping)
+                else ""
+            )
+            if raw_failure_class in raw_gap_classes:
+                decision_wrapped = live_runtime.run(
+                    {
+                        "mode": "decision",
+                        "request": deepcopy(dict(payload)),
+                        **dict(options),
+                    },
+                    repo_root=ROOT,
+                    information_provider=information_provider,
+                    proposal_provider=proposal_provider,
+                    capability_expander=capability_expander,
+                    episode_verification_provider=episode_verification_provider,
+                    skill_verification_provider=skill_verification_provider,
+                )
+                decision_out = _unwrap_live_runtime(
+                    decision_wrapped,
+                    "decision_output",
+                )
+                if isinstance(decision_out, Mapping):
+                    decision_out = deepcopy(dict(decision_out))
+                    decision_out["raw_goal_fallback"] = {
+                        "from_mode": "RAW_GOAL",
+                        "from_failure_class": raw_failure_class,
+                        "from_status": out.get("status"),
+                        "to_mode": "ADEQUATE_DECISION",
+                        "semantic_authority_created": False,
+                    }
+                    out = decision_out
         elif mode == "COMPILED_TASK":
             wrapped = live_runtime.run(
                 {"mode": "compiled_bound", "request": deepcopy(dict(payload)), **dict(options)},
