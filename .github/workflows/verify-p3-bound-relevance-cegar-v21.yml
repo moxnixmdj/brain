@@ -1,0 +1,23 @@
+name: Verify P3 bound relevance CEGAR V21
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/p3_bound_relevance_cegar_loop_v1.py
+      - canonical/runtime/p3_real_context_v3_admission_v12.py
+      - canonical/tests/test_p3_bound_relevance_cegar_loop_v1.py
+      - canonical/tests/test_p3_real_context_v3_admission_v12.py
+      - canonical/verification/p3_bound_relevance_cegar_loop_v21_replay_v1.py
+      - .github/workflows/verify-p3-bound-relevance-cegar-v21.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python canonical/verification/p3_bound_relevance_cegar_loop_v21_replay_v1.py
