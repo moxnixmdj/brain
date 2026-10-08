@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import sys
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from canonical.runtime import native_specialized_capability_registry_v1 as native
@@ -21,15 +23,18 @@ class NativeSpecializedCapabilityRegistryV1Tests(unittest.TestCase):
             all(row["incremental_spend_usd"] == 0 for row in snap["operations"])
         )
 
-    @patch(
-        "canonical.runtime.h100_verified_capability_registry_v8.registry_snapshot"
-    )
-    def test_h100_snapshot_executes_through_registered_native_operation(self, snap):
-        snap.return_value = {
-            "status": "VERIFIED_CAPABILITY_REGISTRY_V8_READY",
-            "entry_count": 7,
-        }
-        out = native.invoke("H100_REGISTRY_SNAPSHOT_V8", {})
+    def test_h100_snapshot_executes_through_registered_native_operation(self):
+        fake = SimpleNamespace(
+            registry_snapshot=lambda: {
+                "status": "VERIFIED_CAPABILITY_REGISTRY_V8_READY",
+                "entry_count": 7,
+            }
+        )
+        with patch.dict(
+            sys.modules,
+            {"canonical.runtime.h100_verified_capability_registry_v8": fake},
+        ):
+            out = native.invoke("H100_REGISTRY_SNAPSHOT_V8", {})
         self.assertTrue(out["pass"], out)
         self.assertEqual(
             out["status"],
