@@ -16,7 +16,6 @@ from time import perf_counter_ns
 from typing import Any, Mapping
 
 from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
-from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute
 from canonical.runtime import astra_runtime, goal_compiler
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 from canonical.runtime.raw_goal_archive_acceptance_v1 import verify as verify_raw_archive_acceptance
@@ -140,8 +139,7 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
                 "incremental_spend_usd": 0,
             }
 
-        current = set(initial)
-        execution = []
+        controller_actions = []
         for cid in planned["plan"]:
             entry = registry[cid]
             inputs = capability_inputs.get(cid)
@@ -158,24 +156,82 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
                     "elapsed_ns": perf_counter_ns() - started,
                     "incremental_spend_usd": 0,
                 }
-            out = execute(
-                cid,
-                inputs=dict(inputs),
-                instance_id=cid,
-                requires=list(entry.get("requires") or []),
-                provides=list(entry.get("provides") or []),
-                result_fields=list(entry.get("result_fields") or []),
-            )
-            execution.append(
-                {
+            controller_actions.append({
+                "type": "invoke_verified_bound_capability_adapter",
+                "args": {
                     "capability_id": cid,
-                    "pass": out.get("pass") is True,
-                    "status": out.get("status"),
-                    "composition_capsule_head_hash": out.get("composition_capsule_head_hash"),
-                    "result": out.get("result"),
-                    "errors": out.get("errors"),
-                }
+                    "inputs": dict(inputs),
+                    "instance_id": cid,
+                    "requires": list(entry.get("requires") or []),
+                    "provides": list(entry.get("provides") or []),
+                    "result_fields": list(entry.get("result_fields") or []),
+                },
+                "expect": {"type": "field_equals", "field": "pass", "value": True},
+            })
+        controller_actions.append({
+            "type": "finish",
+            "args": {"summary": "COMPILED_TASK_COMPLETE"},
+        })
+
+        try:
+            controller = astra_runtime.run_goal(
+                {
+                    "id": "live-compiled-task-controller",
+                    "controller_actions": controller_actions,
+                    "max_controller_actions": 64,
+                },
+                {
+                    "mission_id": task_id,
+                    "goal": "execute compiled verified capability task",
+                },
             )
+        except Exception as exc:
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL__VERIFIED_CAPABILITY_EXECUTION",
+                "pass": False,
+                "task_id": task_id,
+                "failure_class": "EXECUTION_OR_BOUND_CONTRACT_FAILURE",
+                "selected_plan": list(planned["plan"]),
+                "reason": type(exc).__name__ + ":" + str(exc),
+                "elapsed_ns": perf_counter_ns() - started,
+                "incremental_spend_usd": 0,
+            }
+
+        trace = controller.get("trace") if isinstance(controller, Mapping) else None
+        if (
+            not isinstance(trace, list)
+            or len(trace) != len(planned["plan"]) + 1
+            or controller.get("returncode") != 0
+            or controller.get("controller_mode") != "MODEL_INDEPENDENT_ACTION_PLAN"
+        ):
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL__VERIFIED_CAPABILITY_EXECUTION",
+                "pass": False,
+                "task_id": task_id,
+                "failure_class": "EXECUTION_OR_BOUND_CONTRACT_FAILURE",
+                "selected_plan": list(planned["plan"]),
+                "controller_execution": controller,
+                "elapsed_ns": perf_counter_ns() - started,
+                "incremental_spend_usd": 0,
+            }
+
+        current = set(initial)
+        execution = []
+        for index, cid in enumerate(planned["plan"]):
+            row = trace[index]
+            out = row.get("result") if isinstance(row, Mapping) else None
+            if not isinstance(out, Mapping):
+                raise LiveBrainError("CONTROLLER_PROMOTED_CAPABILITY_RESULT_MISSING:" + cid)
+            execution.append({
+                "capability_id": cid,
+                "pass": out.get("pass") is True,
+                "status": out.get("status"),
+                "composition_capsule_head_hash": out.get("composition_capsule_head_hash"),
+                "result": out.get("result"),
+                "errors": out.get("errors"),
+            })
             if out.get("pass") is not True:
                 return {
                     "schema": SCHEMA,
@@ -186,10 +242,11 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
                     "capability_id": cid,
                     "selected_plan": list(planned["plan"]),
                     "execution": execution,
+                    "controller_execution": dict(controller),
                     "elapsed_ns": perf_counter_ns() - started,
                     "incremental_spend_usd": 0,
                 }
-            current.update(entry.get("provides") or [])
+            current.update(registry[cid].get("provides") or [])
 
         missing = sorted(set(targets) - current)
         if missing:
@@ -205,6 +262,10 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
             "planner_expanded_states": planned["expanded_states"],
             "verified_registry_capability_count": len(registry),
             "execution": execution,
+            "controller_execution": dict(controller),
+            "controller_checkpoint": controller.get("controller_checkpoint"),
+            "cognition_dependency_class": controller.get("cognition_dependency_class"),
+            "model_dependency_count": controller.get("model_dependency_count"),
             "verified_target_effects": sorted(targets),
             "elapsed_ns": perf_counter_ns() - started,
             "incremental_spend_usd": 0,
