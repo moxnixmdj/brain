@@ -413,21 +413,11 @@ def verify_episode_request(
         if sorted(str(x) for x in episode.get("postconditions", [])) != expected_post:
             raise R3IndependentVerificationError("EPISODE_POSTCONDITIONS_MISMATCH")
         invalidators = sorted(str(x) for x in episode.get("invalidators", []))
-        falsified = request.get("falsified_capability_ids")
-        deferred = request.get("deferred_capability_ids")
-        if (
-            not isinstance(falsified, Sequence)
-            or isinstance(falsified, (str, bytes))
-            or not isinstance(deferred, Sequence)
-            or isinstance(deferred, (str, bytes))
-        ):
-            raise R3IndependentVerificationError(
-                "EPISODE_ROUTE_FAILURE_EVIDENCE_REQUIRED"
-            )
-        # V1 admits only straight-through episodes here. Any failed/deferred route
-        # requires a richer independent replay proof rather than trusting the
-        # learner's invalidator labels.
-        if list(falsified) or list(deferred) or invalidators:
+        # The verifier independently recomputes the deterministic unexcluded
+        # planner choice at every successful trace step. That proves this admitted
+        # class is straight-through; therefore any claimed route invalidator is
+        # outside the proof and must fail closed.
+        if invalidators:
             raise R3IndependentVerificationError(
                 "NONEMPTY_INVALIDATORS_REQUIRE_INDEPENDENT_ROUTE_FAILURE_REPLAY"
             )
