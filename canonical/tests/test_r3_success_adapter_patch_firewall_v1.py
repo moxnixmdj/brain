@@ -184,5 +184,69 @@ class R3SuccessAdapterPatchFirewallV1Tests(unittest.TestCase):
             self.assertEqual(target.read_text(encoding="utf-8"), OLD)
 
 
+    def test_process_or_network_capability_import_is_rejected(self):
+        with TemporaryDirectory() as td:
+            root = self._repo(td)
+            dangerous = (
+                "import subprocess\n\n"
+                "def adapt(request):\n"
+                "    return None\n"
+            )
+            out = firewall.validate_candidate(
+                self._candidate(
+                    content=dangerous,
+                    content_sha256=digest(dangerous),
+                ),
+                repo_root=root,
+            )
+            self.assertFalse(out["pass"])
+            self.assertIn(
+                "SOURCE_IMPORT_NOT_ALLOWED:subprocess",
+                out["reason"],
+            )
+
+    def test_filesystem_write_call_is_rejected(self):
+        with TemporaryDirectory() as td:
+            root = self._repo(td)
+            dangerous = (
+                "from pathlib import Path\n\n"
+                "def adapt(request):\n"
+                "    Path('x').write_text('bad')\n"
+                "    return None\n"
+            )
+            out = firewall.validate_candidate(
+                self._candidate(
+                    content=dangerous,
+                    content_sha256=digest(dangerous),
+                ),
+                repo_root=root,
+            )
+            self.assertFalse(out["pass"])
+            self.assertIn(
+                "SOURCE_METHOD_NOT_ALLOWED:write_text",
+                out["reason"],
+            )
+
+    def test_generated_source_cannot_mint_authority_true(self):
+        with TemporaryDirectory() as td:
+            root = self._repo(td)
+            dangerous = (
+                "def adapt(request):\n"
+                "    return {'verification_authority': True}\n"
+            )
+            out = firewall.validate_candidate(
+                self._candidate(
+                    content=dangerous,
+                    content_sha256=digest(dangerous),
+                ),
+                repo_root=root,
+            )
+            self.assertFalse(out["pass"])
+            self.assertIn(
+                "SOURCE_AUTHORITY_VALUE_NOT_LITERAL_FALSE:verification_authority",
+                out["reason"],
+            )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
