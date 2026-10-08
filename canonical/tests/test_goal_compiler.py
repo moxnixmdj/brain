@@ -535,5 +535,18 @@ class GoalCompilerTests(unittest.TestCase):
         self.assertEqual(out["inputs"]["text"],"PROJECT BRAIN")
         self.assertEqual(out["inputs"]["output_path"],"canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png")
 
+    def test_exact_literal_response_emits_lossless_routing_effect(self):
+        out=compiler.compile_goal(
+            'Reply with exactly "PROJECT_BRAIN_OK".',
+            self.registry(),
+            ROOT,
+        )
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_EXACT_LITERAL_RESPONSE")
+        self.assertEqual(out["target_effects"],["response.exact_literal"])
+        self.assertEqual(out["controller_actions"],[
+            {"type":"finish","args":{"summary":"PROJECT_BRAIN_OK"}}
+        ])
+        self.assertTrue(out["clause_coverage_verified"])
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
