@@ -1865,5 +1865,25 @@
     "rule": "PRIMARY_DEVELOPMENT_PRIORITY_FOLLOWS_CAPABILITY_RESOURCE_PARETO_LEVERAGE__BENCHMARK_ONLY_BOOKKEEPING_IS_DEMOTED_UNLESS_IT_LOCALIZES_VALIDATES_FALSIFIES_OR_CERTIFIES",
     "preserves_terminal_truth": "ACTIVE_FAIL_CLOSED_ONE_TERMINAL_ACCEPTANCE_ROOT__UNIVERSAL_COVER_OR_FROZEN_PROTOCOL_ROUTE__TERMINAL_FALSE",
     "terminal_credit_delta": 0
+  },
+  "live_capability_ownership_20261008_v1": {
+    "status": "ACTIVE_AUTHORITATIVE_LIVE_OWNERSHIP_ONTOLOGY",
+    "governance": {
+      "path": "canonical/governance/LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1.json",
+      "git_blob_sha": "22df0d1c92c6836c91c80423129638ec0fc00473"
+    },
+    "runtime": {
+      "path": "canonical/runtime/live_capability_ownership_v1.py",
+      "git_blob_sha": "6ae0622da537a79a40e9f90c9eee4833791d861f"
+    },
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "b917fd8911af02e058f23d2d80a6e8c000408bb5"
+    },
+    "live_ownership_rule": "LIVE_OWNED_IFF_ADMITTED_BY_ONE_CANONICAL_OWNERSHIP_PROVIDER__UNREGISTERED_AND_SUPERSEDED_REPOSITORY_CODE_IS_NOT_LIVE_OWNED",
+    "structural_r1_rule": "EVERY_LIVE_OWNED_CAPABILITY_MUST_HAVE_ONE_DISCOVERABLE_EXECUTABLE_OR_COMPOSABLE_UNIFIED_FABRIC_CARRIER",
+    "semantic_auto_routing_boundary": "ARBITRARY_RAW_LANGUAGE_TO_CORRECT_ENGINE_SELECTION_REMAINS_R2_AND_IS_NOT_REQUIRED_FOR_R1_STRUCTURAL_CLOSURE",
+    "historical_capability_rule": "HISTORICAL_OR_SUPERSEDED_CAPABILITIES_REQUIRE_EXPLICIT_READMISSION_BEFORE_LIVE_OWNERSHIP",
+    "terminal_credit_delta": 0
   }
 }
