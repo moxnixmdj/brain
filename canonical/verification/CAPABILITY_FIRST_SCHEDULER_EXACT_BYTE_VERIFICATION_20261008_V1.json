@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_EXACT_BYTE_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_RUNTIME_BLOB_MATCH__7_OF_7_SEMANTIC_CHECKS__AUTHORITY_POINTER_BOUND",
+  "branch": "capability-first-scheduler-20261008-v1",
+  "runtime": {
+    "path": "canonical/runtime/capability_first_scheduler_v1.py",
+    "git_blob_sha": "c39bde3c784d2c4da39dfa27581ffbac2aaf6f48",
+    "exact_byte_replay_blob_sha": "c39bde3c784d2c4da39dfa27581ffbac2aaf6f48",
+    "exact_byte_match": true
+  },
+  "checks": {
+    "semantic_checks_passed": 7,
+    "semantic_checks_total": 7,
+    "benchmark_bookkeeping_hard_demoted": true,
+    "capability_build_outprioritizes_milestone_bookkeeping": true,
+    "lower_resource_cost_wins_equal_benefit": true,
+    "allowed_benchmark_roles_remain_eligible": true,
+    "pareto_frontier_admits_verified_reusable_nondominated_capability": true,
+    "benchmark_score_cannot_promote_as_capability": true,
+    "canonical_learning_loop_bound": true
+  },
+  "authority_pointer": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "1bded97ca747b2a84bc47c966c0c76a54a0079dd",
+    "scheduler_status": "ACTIVE_PRIMARY_CAPABILITY_DEVELOPMENT_SCHEDULER",
+    "operational_objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+    "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT",
+    "benchmark_role": "INSTRUMENTATION_NOT_PRODUCT",
+    "terminal_credit_delta": 0
+  },
+  "carrier": {
+    "executable_replay": "CHATGPT_ISOLATED_CONTAINER_FROM_AUTHENTICATED_GITHUB_EXACT_RUNTIME_BYTES",
+    "github_pointer_check": "AUTHENTICATED_GITHUB_CONNECTOR_BRANCH_JSON"
+  },
+  "ci_note": "PR workflow carrier failed before usable test-log artifact; it is not load-bearing for this receipt and is removed rather than preserving a known-red measurement path.",
+  "hard_nonclaims": [
+    "NO_TERMINAL_CREDIT",
+    "NO_CAPABILITY_CREDIT_FROM_SCHEDULER_ACTIVATION_ALONE",
+    "NO_CLAIM_OPUS_5_5_MILESTONE_IS_ALREADY_ACHIEVED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
