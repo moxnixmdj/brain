@@ -176,7 +176,7 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             "pass": True,
             "status": "PASS__VERIFIED_GROUNDING_EXPOSED_AS_UNTRUSTED_POLICY_FRONTIER",
             "policy_conditions": {
-                "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest": {"op": "TRUE"}
+                controller.grounded_policy_frontier.goal_scoped_policy_id("python.tests.audit.unittest", "Audit the Python tests with unittest."): {"op": "TRUE"}
             },
             "policy_adequacy_authority": False,
             "semantic_truth_authority": False,
@@ -201,7 +201,7 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
                                     ]["decision_basis"]
                                 ),
                                 "rejected_policy_adequacy_bindings": [{
-                                    "policy_id": "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest",
+                                    "policy_id": controller.grounded_policy_frontier.goal_scoped_policy_id("python.tests.audit.unittest", "Audit the Python tests with unittest."),
                                     "reason": "ADEQUACY_BINDING_MISSING",
                                 }],
                             }
@@ -237,7 +237,7 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             out["next_policy_request"]["search_context"][
                 "rejected_policy_candidates"
             ][0]["policy_id"],
-            "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest",
+            controller.grounded_policy_frontier.goal_scoped_policy_id("python.tests.audit.unittest", "Audit the Python tests with unittest."),
         )
         self.assertFalse(out["semantic_acceptance_complete"])
         self.assertFalse(out["actual_goal_satisfaction_verified"])
