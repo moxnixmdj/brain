@@ -35,7 +35,10 @@
     "conflict_witness_basis_questions_auto_generated": true,
     "policy_cover_observations_use_truthful_information_provider": true,
     "policy_cover_provider_output_reauthenticated_before_use": true,
-    "policy_cover_executor_fail_closed_preserved": true
+    "policy_cover_executor_fail_closed_preserved": true,
+    "condition_bound_authenticated_adequacy_auto_reused": true,
+    "condition_registry_never_self_certifies_membership": true,
+    "adequacy_evidence_symlink_escape_rejected": true
   },
   "judgment_model_policy": {
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
@@ -76,5 +79,15 @@
     "verification_git_blob_sha": "719c1f7e6509497b85d1d936e42dd9404d7b7b8c",
     "two_distinct_sprite_replays": "6_OF_6_EACH",
     "merged_commit": "87129856f4e7944e11f54d7a388e745951f4ef1a"
+  },
+  "condition_bound_adequacy_reuse": {
+    "runtime_path": "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+    "runtime_git_blob_sha": "7dd0897bec985f294e29b854a32d85df51ddbc77",
+    "p3_kernel_git_blob_sha": "805f9508ed98b57dd092415879e6e38860a02ac0",
+    "verification_path": "canonical/verification/R2_CONDITION_BOUND_P3_ADEQUACY_REUSE_VERIFY_20261008_V1.json",
+    "verification_git_blob_sha": "e34058fd780377f2a6b841db0631d73a930e3a29",
+    "two_distinct_sprite_replays": "18_OF_18_EACH",
+    "merged_commit": "6669bb5cbf498246fdc7741dd7cea1f70ed4b06d",
+    "registered_policy_count": 1
   }
 }
