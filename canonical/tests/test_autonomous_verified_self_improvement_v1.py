@@ -1056,5 +1056,32 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         )
 
 
+    def test_policy_adequacy_gap_is_not_collapsed_into_generic_semantics(self):
+        out = loop._diagnose_failure({
+            "pass": False,
+            "status": "OPEN__POSITIVE_POLICY_ADEQUACY_COVERAGE_REQUIRED",
+            "next_required_edge": "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_COVERAGE",
+        })
+        self.assertEqual(
+            out["repair_class"],
+            "SYNTHESIZE_OR_AUTHENTICATE_POLICY_ADEQUACY_COVER",
+        )
+        self.assertEqual(
+            out["next_required_edge"],
+            "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_COVERAGE",
+        )
+
+    def test_policy_changing_observation_gap_remains_information_acquisition(self):
+        out = loop._diagnose_failure({
+            "pass": False,
+            "status": "OPEN__POLICY_COVER_OBSERVATION_BINDING_REQUIRED",
+            "next_required_edge": "AUTHENTICATED_SELECTED_POLICY_CHANGING_OBSERVATION",
+        })
+        self.assertEqual(
+            out["repair_class"],
+            "RESOLVE_MINIMUM_BLOCKING_INFORMATION_AND_RETRY",
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
