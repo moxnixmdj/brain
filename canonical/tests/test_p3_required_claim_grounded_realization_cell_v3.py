@@ -125,3 +125,15 @@ def test_fails_closed_on_wrong_v3_schema_and_unmodeled_contract_fields():
         assert out["p3_contract_cell_authorized"] is False
         assert out["db_admission_authority"] is False
         assert out["terminal_authority"] is False
+
+
+def test_named_audience_profile_cannot_silently_add_requirements():
+    p=payload([req("C1","Revenue growth is at least 10.")],[
+        ev("E1","Report states Revenue growth is 12.")
+    ])
+    p["v3_input"]["task"]["audience_profile"]["profile_id"]="GERMAN_ONLY"
+    out=evaluate(p)
+    assert out["pass"] is False,out
+    assert out["reason"]=="AUDIENCE_PROFILE_SEMANTICS_UNMODELED",out
+    assert out["p3_contract_cell_authorized"] is False
+    assert out["terminal_credit_delta"]==0
