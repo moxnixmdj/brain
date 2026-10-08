@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_R3_RAW_ACCEPTED_READONLY_LEARNING_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "branch": "r3-raw-accepted-readonly-learning-current-main-20261008",
+  "base_main_sha": "3102990e2db1f56c3e6571137d808dab6b4f3848",
+  "tested_head_sha": "d57488ccb6a9baa1b2536222af483cc98b782bad",
+  "status": "PASS__15_OF_15_FOCUSED_TESTS_PLUS_PY_COMPILE",
+  "verification_environment": {
+    "carrier": "existing isolated Sprite brain-live-integrated-v1-run-20261008",
+    "incremental_spend_usd": 0,
+    "source_authority": false
+  },
+  "commands": [
+    "python3 -m py_compile canonical/runtime/autonomous_verified_self_improvement_v1.py canonical/runtime/r3_raw_success_adapter_v1.py canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py canonical/runtime/r3_independent_learning_verifier_v1.py canonical/runtime/r3_improvement_queue_driver_v1.py",
+    "python3 -m unittest canonical.tests.test_r3_raw_accepted_readonly_learning_v1 -v",
+    "python3 -m unittest canonical.tests.test_r3_bound_success_readonly_learning_v1 -v",
+    "python3 -m unittest canonical.tests.test_r3_independent_learning_verifier_v1.R3IndependentLearningVerifierV1Tests.test_effectful_episode_is_admitted_only_after_independent_byte_readback canonical.tests.test_r3_independent_learning_verifier_v1.R3IndependentLearningVerifierV1Tests.test_effectful_episode_fails_if_readback_bytes_drift canonical.tests.test_r3_independent_learning_verifier_v1.R3IndependentLearningVerifierV1Tests.test_effectful_episode_without_retained_root_fails_closed canonical.tests.test_r3_independent_learning_verifier_v1.R3IndependentLearningVerifierV1Tests.test_non_effectful_episode_reauthenticates_semantics_and_authenticates -v"
+  ],
+  "results": {
+    "raw_accepted_readonly_learning": {
+      "run": 6,
+      "passed": 6,
+      "failed": 0
+    },
+    "compiled_bound_regression": {
+      "run": 5,
+      "passed": 5,
+      "failed": 0
+    },
+    "effect_and_non_effect_regression": {
+      "run": 4,
+      "passed": 4,
+      "failed": 0
+    },
+    "py_compile": "PASS"
+  },
+  "proved": [
+    "semantically complete RAW_BOUND archive success can become an independently authenticated exact-scope R3 episode without replaying the effect",
+    "post-success archive byte drift blocks learning",
+    "RAW_BOUND execution success without complete semantic acceptance remains nonlearnable",
+    "semantic acceptance marked complete without a valid acceptance receipt fails proof capture",
+    "success proof capsules retain exact raw acceptance evidence",
+    "default owned success routing falls through from COMPILED_BOUND adapter to RAW_BOUND accepted adapter",
+    "existing COMPILED_BOUND read-only learning remains passing",
+    "existing bounded effect readback and non-effect verification remain passing"
+  ],
+  "authority_boundary": {
+    "candidate_adapter_authority": false,
+    "independent_verifier_required": true,
+    "standard_episode_authenticator_required": true,
+    "terminal_authority": false,
+    "generalization_authority": false,
+    "execution_replayed": false,
+    "scope": "EXACT semantically accepted raw archive goal only"
+  },
+  "blobs": {
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "b68245b02de1dbe208fb9fffa0d76f7724b2a390",
+    "canonical/runtime/r3_raw_success_adapter_v1.py": "80a2599a31501db18754e913b763254966b4923e",
+    "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py": "3afceda23369a23b2619aabdc8a06f4e749be6c5",
+    "canonical/runtime/r3_independent_learning_verifier_v1.py": "4b772a69cd3703893684416cd0b5336c5980db51",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "ec8ad78cd330a64cf8f21d5a425b9a0944f183b6",
+    "canonical/tests/test_r3_raw_accepted_readonly_learning_v1.py": "ba6619aaf16e588c080ebe7d774d6c70c6f78e6f"
+  }
+}
