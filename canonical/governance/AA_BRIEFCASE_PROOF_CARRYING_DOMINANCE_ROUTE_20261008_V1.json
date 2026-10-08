@@ -39,7 +39,7 @@
     },
     "dominance_runtime": {
       "path": "canonical/runtime/aa_briefcase_scope_complete_dominance_v1.py",
-      "git_blob_sha": "f7db24d0f4e89bb19eb489463092849fd5e572f7"
+      "git_blob_sha": "4afbcae9d8356a0b3ec93ba323a1a795fee17748"
     },
     "disjunctive_bridge_v3": {
       "path": "canonical/runtime/aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
@@ -48,7 +48,7 @@
     "tests": [
       {
         "path": "canonical/tests/test_aa_briefcase_scope_complete_dominance_v1.py",
-        "git_blob_sha": "d25ecd7b315befd2e0f7e047642d0d7b5706b64a"
+        "git_blob_sha": "ccbc9d3006e07a2f0b77aa80f7d65b59aeff597a"
       },
       {
         "path": "canonical/tests/test_aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
@@ -57,7 +57,7 @@
     ],
     "independent_runtime_verification": {
       "path": "canonical/verification/AA_BRIEFCASE_PROOF_CARRYING_DOMINANCE_SPRITE_VERIFICATION_20261008_V1.json",
-      "git_blob_sha": "58d1e5ea1de35e6ed87a921ed10006d74975b968"
+      "git_blob_sha": "66d18fc4358dfe34f4ee73001394cd8781324c37"
     }
   },
   "per_check_certification": {
@@ -73,8 +73,15 @@
     },
     "U_DIRECT_TARGET_RELATION": {
       "admission": "E AND M ARE NOT SOUNDLY AVAILABLE FOR THE CHECK",
-      "pass": "AUTHENTIC MATCHED CURRENT-EPOCH PAIRWISE TARGET RELATION RETURNS BRAIN_WIN OR TIE",
-      "forbidden": "OPUS_WIN"
+      "supported_relations": {
+        "BINARY_RUBRIC": "MATCHED CURRENT-EPOCH SINGLE-SUBMISSION RUBRIC GRADING__BRAIN PASS BIT MUST BE GREATER THAN OR EQUAL TO OPUS PASS BIT",
+        "PAIRWISE_PREFERENCE": "MATCHED CURRENT-EPOCH BLIND PAIRWISE ANALYTICAL-QUALITY OR PRESENTATION RELATION__OUTCOME MUST BE BRAIN_WIN OR TIE"
+      },
+      "panel_binding": "BINARY_RUBRIC MUST USE THE CURRENT RUBRIC PANEL CLASS__PAIRWISE_PREFERENCE MUST USE THE CURRENT PAIRWISE PANEL CLASS",
+      "forbidden": [
+        "BINARY_RUBRIC WITH BRAIN_FAIL AND OPUS_PASS",
+        "PAIRWISE_PREFERENCE WITH OPUS_WIN"
+      ]
     }
   },
   "scope_completeness": {
@@ -119,7 +126,7 @@
     "ONE OMITTED OR DUPLICATED LOAD-BEARING CHECK",
     "ONE E CHECK WITHOUT COMPLETE SEMANTICS OR OBJECTIVE TOP",
     "ONE M CHECK WITHOUT COMPLETE MONOTONE-CLASS PROOF",
-    "ONE U CHECK WITH OPUS_WIN OR UNVERIFIED MATCHED PAIRWISE SEMANTICS",
+    "ONE U CHECK WITH OPUS_WIN__OR BRAIN_FAIL_WHILE_OPUS_PASS ON BINARY RUBRIC__OR UNVERIFIED MATCHED GRADING SEMANTICS",
     "ATTEMPT TO CLAIM AN OFFICIAL OWNER ELO FROM THE DIRECT DOMINANCE ROUTE",
     "ATTEMPT TO REWRITE THE HISTORICAL 1822 EPOCH"
   ],
@@ -137,8 +144,8 @@
     "spend_measurement_available_for_remote_replay": false
   },
   "runtime_verification": {
-    "tests_run": 16,
-    "tests_passed": 16,
+    "tests_run": 18,
+    "tests_passed": 18,
     "failures": 0,
     "executor": "REMOTE_ISOLATED_SPRITE",
     "private_benchmark_cases_consumed": 0,
