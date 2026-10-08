@@ -14,6 +14,7 @@ from canonical.runtime import general_adequate_decision_controller_v1 as adequat
 from canonical.runtime import p3_real_context_v3_admission_v12 as p3
 from canonical.runtime import universal_verified_adaptive_solver_v12 as adaptive_solver
 from canonical.runtime import autonomous_verified_self_improvement_v1 as self_improvement
+from canonical.runtime import live_brain_runtime_v1 as live_runtime
 from canonical.runtime import h100_verified_capability_registry_v8 as h100_inference
 from canonical.runtime import exact_linear_parameter_polytope_v1 as mystery_polytope
 from canonical.runtime import interval_information_frontier_v1 as mystery_information
@@ -41,6 +42,8 @@ ENGINE_DESCRIPTORS = {
     "H100_INFERENCE": "h100_verified_capability_registry_v8",
     "MYSTERY_INFERENCE": "exact_linear_parameter_polytope_v1 + interval_information_frontier_v1",
     "CAPABILITY_SCHEDULER": "capability_first_scheduler_v1.rank_work",
+    "REPAIR_SYNTHESIS": "live_brain_runtime_v1.synthesize_failure_repair",
+    "REPAIR_CYCLE": "live_brain_runtime_v1.execute_failure_repair_cycle",
     "UNIVERSAL_ESCAPE": "universal_escape_resolver_v1.resolve",
     "CERTIFIED_ROUTE": "certificate_gated_selected_route_runtime_entrypoint_v2",
     "TERMINAL_AUTOPILOT": "terminal_autopilot_v1",
@@ -67,6 +70,13 @@ def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
 
     if isinstance(payload.get("work"), list):
         return "CAPABILITY_SCHEDULER"
+
+    if isinstance(payload.get("failure_fingerprint"), str) and isinstance(payload.get("components"), list):
+        has_executable = any(
+            isinstance(row, Mapping) and isinstance(row.get("executable_capability"), Mapping)
+            for row in payload["components"]
+        )
+        return "REPAIR_CYCLE" if has_executable else "REPAIR_SYNTHESIS"
 
     operation = str(payload.get("operation") or "").strip().upper()
     if operation:
@@ -254,6 +264,20 @@ def run(
                 raise CognitiveFabricError("SCHEDULER_WORK_MUST_BE_LIST")
             out = capability_scheduler.rank_work(work)
             out = {"pass": True, **out}
+        elif mode == "REPAIR_SYNTHESIS":
+            out = live_runtime.synthesize_failure_repair(
+                payload,
+                state_path=options.get("state_path"),
+            )
+        elif mode == "REPAIR_CYCLE":
+            out = live_runtime.execute_failure_repair_cycle(
+                payload,
+                repo_root=ROOT,
+                state_path=options.get("state_path"),
+                information_provider=information_provider,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+            )
         elif mode == "UNIVERSAL_ESCAPE":
             out = universal_escape.resolve(**dict(payload))
         elif mode == "CERTIFIED_ROUTE":
