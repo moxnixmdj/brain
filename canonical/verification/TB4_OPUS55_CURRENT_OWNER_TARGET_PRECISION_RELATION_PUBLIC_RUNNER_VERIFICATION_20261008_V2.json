@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_OPUS55_CURRENT_OWNER_TARGET_PRECISION_RELATION_PUBLIC_RUNNER_VERIFICATION_20261008_V2",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SAME_EXACT_OWNER_PDF_CONTAINS_66_4_SUMMARY_ALIAS_AND_66_36_DETAILED_RESULT__ZERO_ACCEPTANCE_CREDIT",
+  "subject": {
+    "brain_pull_request": 3148,
+    "target_predicate": "CODING_TB4_GE_66_4",
+    "historical_summary_alias_percent": 66.4,
+    "current_detailed_owner_percent": 66.36
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2427,
+    "verifier_commit": "1a7433e77e8e2faed0ccce17f6ee3a52f4be37ac",
+    "workflow_run_id": 37747929728,
+    "workflow_run_number": 5,
+    "workflow_job_id": 113213784027,
+    "conclusion": "success",
+    "runner": "ubuntu-24.04"
+  },
+  "owner_source": {
+    "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+    "sha256": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378",
+    "same_exact_bytes_used_for_summary_and_detail": true
+  },
+  "verified": {
+    "same_pdf_contains_terminal_bench_4_summary_alias_66_4": true,
+    "same_pdf_section_8_5_contains_detailed_66_36": true,
+    "task_count": 66,
+    "trials_per_task": 5,
+    "trial_slots": 330,
+    "minimum_successes_for_detailed_66_36": 219,
+    "minimum_successes_for_strict_raw_66_4": 220,
+    "round_219_of_330_to_two_decimals": 66.36,
+    "round_219_of_330_to_one_decimal": 66.4,
+    "round_66_36_to_one_decimal": 66.4
+  },
+  "precision_relation": {
+    "verdict": "PROVED_SAME_OWNER_DOCUMENT_PRECISION_RELATION",
+    "historical_66_4_role": "ONE_DECIMAL_OWNER_SUMMARY_ALIAS",
+    "detailed_66_36_role": "TWO_DECIMAL_OWNER_RESULT",
+    "same_run_identity_supported_by_same_owner_document": true,
+    "consequence": "66_4_AND_66_36_MUST_NOT_BE_TREATED_AS_TWO_INDEPENDENT_OPUS55_TB4_TARGETS_WITHOUT_NEW_CONTRARY_EVIDENCE"
+  },
+  "preserved_owner_setup_facts": {
+    "agent": "Claude Code --bare",
+    "reasoning_effort": "xhigh",
+    "safeguards_enabled": true,
+    "sandbox_provider_caveat_preserved": true
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_TB4_SCORE",
+    "NO_TB4_ACCEPTANCE_PROMOTION",
+    "NO_CLAIM_BRAIN_AGENT_EQUALS_CLAUDE_CODE",
+    "NO_GENERAL_SANDBOX_INVARIANCE_THEOREM",
+    "NO_TERMINAL_CASES_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
