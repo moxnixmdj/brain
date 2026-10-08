@@ -878,6 +878,22 @@
       "path": "canonical/evidence/GDPVAL_AA_PUBLIC_PAIRWISE_BOUNDARY_REFRESH_20261008_V1.json",
       "git_blob_sha": "7a4ac9a77f1a5d451374dd36dd77ba83ad41a2ed",
       "status": "FRESH_PUBLIC_OWNER_AND_OPEN_SOURCE_BOUNDARY_REFRESH__PAIRWISE_STRUCTURE_BOUND__EXACT_OWNER_PREFERENCE_RELATION_STILL_UNBOUND__ZERO_TERMINAL_CREDIT"
+    },
+    "r2_general_adequate_decision_fixed_point_v2": {
+      "activation_path": "canonical/governance/R2_GENERAL_ADEQUATE_DECISION_FIXED_POINT_ACTIVATION_20261008_V2.json",
+      "activation_git_blob_sha": "96f67d92da1cb37d0864c07e687be54b2e59471f",
+      "runtime_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+      "runtime_git_blob_sha": "58c664a05cc580081c78c7e08ec07700f56e2db2",
+      "verification_path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_FIXED_POINT_LOCAL_VERIFICATION_20261008_V2.json",
+      "verification_git_blob_sha": "bc7e59aec2b5f7c74fffa95e534c9f01f2bf9c5b",
+      "status": "LIVE_ADAPTIVE_FIXED_POINT_OVER_V1_FAIL_CLOSED_AUTHORITY__NO_OPEN_WORLD_CLOSURE_CLAIM"
+    },
+    "r2_single_primitive_wake_cut_v2": {
+      "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V2.json",
+      "git_blob_sha": "6f9b39cdab13b446f3399e7eb4bfe3b8ce42bbe9",
+      "verification_path": "canonical/verification/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_V2_CONNECTOR_VERIFICATION_20261008_V1.json",
+      "verification_git_blob_sha": "6c2b818a5fae0141d928f68bb81220b0d7ebb93d",
+      "status": "CURRENT_R2_SCHEDULER__GLOBAL_PRIMITIVE_OPEN__ZERO_ACTIVE_ZERO_REALITY_CELLS"
     }
   },
   "live_truth": {
@@ -1026,7 +1042,14 @@
     "gdpval_imperative_population_reexecution_complete": true,
     "gdpval_structural_acceptance_lane_bound": true,
     "gdpval_structural_acceptance_is_serial_prerequisite_to_target_relative_scoring": false,
-    "gdpval_owner_layer_target_relative_route_currently_awake": true,
+    "gdpval_owner_layer_target_relative_route_currently_awake": false,
+    "gdpval_owner_layer_target_relative_route_state": "EXTERNAL_REQUIRED_SLEEP__WAKE_ONLY_ON_DECLARED_SEPARATOR_OR_STRONGER_CERTIFICATE",
+    "r2_adaptive_fixed_point_controller_live": true,
+    "r2_single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
+    "r2_global_escape_policy_adequacy_closed": false,
+    "r2_active_zero_reality_cell_count": 0,
+    "r2_external_required_sleep_cell_count": 2,
+    "r2_primary_internal_research_authorized": false,
     "gdpval_direct_target_model_generation_required": false,
     "gdpval_brain_owner_elo_score_bound": false,
     "gdpval_target_relation_bridge_bound": false,
