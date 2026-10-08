@@ -53,7 +53,6 @@ def verify_minimal_owner_attestation(
     current_target: Mapping[str, Any],
     statement: Mapping[str, Any],
     signature_bundle: Mapping[str, Any],
-    owner_key_binding: Mapping[str, Any],
 ) -> dict[str, Any]:
     if not isinstance(current_target, Mapping):
         raise OwnerAttestationError("TARGET_INVALID")
@@ -70,12 +69,32 @@ def verify_minimal_owner_attestation(
     if epoch.get("current_epoch_minimum_opus55_target_elo") != reference:
         raise OwnerAttestationError("TARGET_REFERENCE_DRIFT")
 
+    owner_key_binding = current_target.get("owner_attestation_trust_anchor")
+    if not isinstance(owner_key_binding, Mapping):
+        raise OwnerAttestationError("OWNER_TRUST_ANCHOR_MISSING")
+    if owner_key_binding.get("status") != "VERIFIED_OWNER_KEY_BINDING":
+        raise OwnerAttestationError("OWNER_TRUST_ANCHOR_NOT_VERIFIED")
+
     if not isinstance(statement, Mapping):
         raise OwnerAttestationError("STATEMENT_INVALID")
     if statement.get("_type") != STATEMENT_TYPE:
         raise OwnerAttestationError("STATEMENT_TYPE_MISMATCH")
     if statement.get("predicateType") != PREDICATE_TYPE:
         raise OwnerAttestationError("PREDICATE_TYPE_MISMATCH")
+
+    signature_verification = verify_owner_signature(
+        statement,
+        signature_bundle,
+        owner_key_binding,
+    )
+    if signature_verification.get("statement_sha256") != _sha256(statement):
+        raise OwnerAttestationError("SIGNED_STATEMENT_DIGEST_MISMATCH")
+    if signature_verification.get("attestor_is_benchmark_owner_or_authorized_operator") is not True:
+        raise OwnerAttestationError("ATTESTOR_AUTHORITY_NOT_VERIFIED")
+    if signature_verification.get("identity_verified") is not True:
+        raise OwnerAttestationError("ATTESTOR_IDENTITY_NOT_VERIFIED")
+    _hex(signature_verification.get("verification_receipt_sha256"), 64, "SIGNATURE_VERIFICATION_RECEIPT_SHA256")
+
     subject = _one_subject(statement)
 
     predicate = statement.get("predicate")
@@ -106,19 +125,6 @@ def verify_minimal_owner_attestation(
         raise OwnerAttestationError("DIRECT_ATTESTATION_MUST_NOT_CLAIM_OFFICIAL_ELO")
     if predicate.get("historical_1822_epoch_rewritten") is not False:
         raise OwnerAttestationError("HISTORICAL_EPOCH_REWRITE_FORBIDDEN")
-
-    signature_verification = verify_owner_signature(
-        statement,
-        signature_bundle,
-        owner_key_binding,
-    )
-    if signature_verification.get("statement_sha256") != _sha256(statement):
-        raise OwnerAttestationError("SIGNED_STATEMENT_DIGEST_MISMATCH")
-    if signature_verification.get("attestor_is_benchmark_owner_or_authorized_operator") is not True:
-        raise OwnerAttestationError("ATTESTOR_AUTHORITY_NOT_VERIFIED")
-    if signature_verification.get("identity_verified") is not True:
-        raise OwnerAttestationError("ATTESTOR_IDENTITY_NOT_VERIFIED")
-    _hex(signature_verification.get("verification_receipt_sha256"), 64, "SIGNATURE_VERIFICATION_RECEIPT_SHA256")
 
     material = {
         "schema": SCHEMA,
