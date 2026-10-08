@@ -1,4 +1,7 @@
 import json
+from unittest.mock import patch
+
+from canonical.runtime import p2_top_law_policy_adequacy_authenticator_v1 as auth
 
 from canonical.runtime.p2_explicit_contract_membership_v1 import P2
 from canonical.runtime.p2_top_law_policy_adequacy_authenticator_v1 import (
@@ -33,6 +36,16 @@ def test_existing_independent_top_law_authenticates_policy():
     assert out["pass"] is True, out
     assert out["adequacy_proved"] is True
     assert out["policy_condition"] == {"op": "ATOM", "id": MEMBERSHIP_ATOM_ID}
+
+
+def test_membership_recognizer_bytes_are_content_bound():
+    out = authenticate_repository()
+    assert out["pass"] is True, out
+    assert out["membership_recognizer_git_blob_sha"] == auth.MEMBERSHIP_BLOB
+    with patch.object(auth, "MEMBERSHIP_BLOB", "0" * 40):
+        drift = auth.authenticate_repository()
+    assert drift["pass"] is False
+    assert any("BOUND_BLOB_DRIFT:" + auth.MEMBERSHIP_PATH in x for x in drift["errors"])
 
 
 def test_lossless_member_executes_authenticated_top_law_policy():

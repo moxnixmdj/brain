@@ -32,6 +32,8 @@ VERIFY_PATH = "canonical/verification/P2_EXPLICIT_SEMANTIC_CONTRACT_TOP_LAW_CONN
 VERIFY_BLOB = "8375f545ff35ce519719467596bdf1bc15453174"
 POLICY_PATH = "canonical/runtime/p2_p3_information_safe_candidate_v2.py"
 POLICY_BLOB = "ea8057b0eadac210c4f4378298df93ed233c5824"
+MEMBERSHIP_PATH = "canonical/runtime/p2_explicit_contract_membership_v1.py"
+MEMBERSHIP_BLOB = "a6f357d952434692a809382d1cbd41f3c78a2af0"
 
 SELECTED_CLASS = "P2_PROFESSIONAL_EXPLICIT_SEMANTIC_CONTRACT_ALL_FINITE_TASKS_V1"
 BEHAVIOR_ID = "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
@@ -66,6 +68,7 @@ def authenticate_repository() -> dict[str, Any]:
         _, theorem = _read_bound(THEOREM_PATH, THEOREM_BLOB)
         _, verify = _read_bound(VERIFY_PATH, VERIFY_BLOB)
         _read_bound(POLICY_PATH, POLICY_BLOB)
+        _read_bound(MEMBERSHIP_PATH, MEMBERSHIP_BLOB)
         assert theorem is not None and verify is not None
 
         if theorem.get("schema") != "PROJECT_BRAIN_P2_EXPLICIT_SEMANTIC_CONTRACT_UNIVERSAL_TOP_LAW_V1":
@@ -124,6 +127,7 @@ def authenticate_repository() -> dict[str, Any]:
         proof_payload = {
             "policy_id": POLICY_ID,
             "policy_blob": POLICY_BLOB,
+            "membership_recognizer_blob": MEMBERSHIP_BLOB,
             "policy_condition_sha256": policy_condition_sha256(),
             "selected_class": SELECTED_CLASS,
             "behavior_id": BEHAVIOR_ID,
@@ -144,6 +148,8 @@ def authenticate_repository() -> dict[str, Any]:
             "behavior_id": BEHAVIOR_ID,
             "policy_path": POLICY_PATH,
             "policy_git_blob_sha": POLICY_BLOB,
+            "membership_recognizer_path": MEMBERSHIP_PATH,
+            "membership_recognizer_git_blob_sha": MEMBERSHIP_BLOB,
             "theorem_path": THEOREM_PATH,
             "theorem_git_blob_sha": THEOREM_BLOB,
             "independent_verification_path": VERIFY_PATH,
