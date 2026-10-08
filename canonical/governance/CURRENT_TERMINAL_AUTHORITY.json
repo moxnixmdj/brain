@@ -1886,7 +1886,7 @@
     },
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
-      "git_blob_sha": "ef0afd859fa52c73e1056565255d7200fbd54f7b",
+      "git_blob_sha": "2442232fa3b087268ce720cf198e952f5ba115b2",
       "status": "PASS__R1_CURRENT_FRONT_DOOR__OWNERSHIP_84__INVOCATION_84__FULL_EXACT_BLOB_DRIFT_LOCK"
     },
     "live_ownership_rule": "LIVE_OWNED_IFF_ADMITTED_BY_ONE_CANONICAL_OWNERSHIP_PROVIDER__UNREGISTERED_AND_SUPERSEDED_REPOSITORY_CODE_IS_NOT_LIVE_OWNED",
@@ -1956,7 +1956,7 @@
     "missing_invocation_contract_count": 0,
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
-      "git_blob_sha": "ef0afd859fa52c73e1056565255d7200fbd54f7b",
+      "git_blob_sha": "2442232fa3b087268ce720cf198e952f5ba115b2",
       "status": "PASS__R1_CURRENT_FRONT_DOOR__OWNERSHIP_84__INVOCATION_84__FULL_EXACT_BLOB_DRIFT_LOCK"
     },
     "prior_invocation_verification": {
