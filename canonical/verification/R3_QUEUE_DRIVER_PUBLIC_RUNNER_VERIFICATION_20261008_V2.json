@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_R3_QUEUE_DRIVER_PUBLIC_RUNNER_VERIFICATION_20261008_V2",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_CURRENT_QUEUE_DRIVER_CONTROL_FLOW",
+  "subject": {
+    "path": "canonical/runtime/r3_improvement_queue_driver_v1.py",
+    "git_blob_sha": "b548f07b36ed5bf0a3495635046a26049df24f33",
+    "source_head_at_capsule_creation": "c4e0e65802d01d037add0c3c17865c3152e7ba70"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "r3-queue-driver-v2-capsule-20261008",
+    "workflow": ".github/workflows/verify-r3-queue-driver-v2-capsule.yml",
+    "workflow_commit": "c650294392ec8fec4a888087a8c78d7dfd6b24e3",
+    "run_id": 37774433958,
+    "job_id": 113301634144,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_current_source_git_blob_binding": true,
+    "python_compile": true,
+    "evidence_bound_verifier_backoff": true,
+    "identical_evidence_not_retried": true,
+    "new_observation_evidence_reenables_retry": true,
+    "failed_repair_does_not_starve_unrelated_actionable_work": true,
+    "event_waiting_work_does_not_claim_progress": true
+  },
+  "nonclaims": [
+    "Does not independently execute the complete private unified cognitive fabric.",
+    "Does not prove a confidential independent episode verifier exists for arbitrary private evidence.",
+    "Does not grant terminal or capability credit by itself."
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
