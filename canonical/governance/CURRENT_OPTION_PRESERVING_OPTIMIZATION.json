@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_OPTION_PRESERVING_OPTIMIZATION_POINTER_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE",
+  "policy": {
+    "path": "canonical/governance/OPTION_PRESERVING_CAPABILITY_OPTIMIZATION_20261008_V1.json"
+  },
+  "runtime": {
+    "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py"
+  },
+  "invariant": "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
+  "active_dominance_semantics": "RETIRE_FROM_HOT_FRONTIER_ONLY",
+  "physical_delete_requires_separate_proof": true,
+  "new_technology_triggers_cost_model_reextraction": true
+}
