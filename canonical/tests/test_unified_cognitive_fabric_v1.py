@@ -130,6 +130,53 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertTrue(out["inner_pass"])
         self.assertEqual(out["result"]["ranked"][0]["work_id"], "BUILD")
 
+    def test_canonical_front_door_opportunistically_advances_verifier_backed_learning(self):
+        verifier = Mock()
+        tick = {
+            "schema": r3.SCHEMA,
+            "status": "VERIFICATION_QUEUE_ADVANCED",
+            "pass": True,
+            "attempted": 1,
+            "completed": 1,
+        }
+        request = {
+            "mode": "CAPABILITY_SCHEDULER",
+            "payload": {
+                "work": [{
+                    "work_id": "R3-TICK",
+                    "work_type": "CAPABILITY_BUILD",
+                    "expected_capability_gain_lcb": 1,
+                    "expected_efficiency_gain_lcb": 0,
+                    "expected_reliability_gain_lcb": 1,
+                    "reuse_breadth_lcb": 1,
+                    "generalization_lcb": 1,
+                    "success_probability_lcb": 1,
+                    "wall_clock_cost_ub": 1,
+                    "compute_cost_ub": 1,
+                    "memory_cost_ub": 1,
+                    "complexity_cost_ub": 1,
+                }],
+            },
+            "options": {"self_improvement_max_actions": 2},
+        }
+        with patch.object(
+            r3,
+            "advance_verification_queue",
+            return_value=tick,
+        ) as advance:
+            out = run(
+                request,
+                skill_verification_provider=verifier,
+            )
+
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
+        self.assertEqual(out["compounding_tick"], tick)
+        advance.assert_called_once()
+        kwargs = advance.call_args.kwargs
+        self.assertIs(kwargs["skill_verification_provider"], verifier)
+        self.assertEqual(kwargs["max_actions"], 2)
+
+
     def test_auto_universal_escape_route_is_structurally_selected(self):
         out = run({
             "payload": {
