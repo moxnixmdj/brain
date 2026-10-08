@@ -33,9 +33,31 @@ def recover_exact_scope(
     raw_skill = record.get("skill") if isinstance(record, Mapping) else None
     if not skill_id or not isinstance(raw_skill, Mapping):
         raise QuarantineRecoveryError("RECOVERY_SKILL_MISSING")
+    authority = learning.reauthenticate_skill_record(
+        raw_skill,
+        repo_root=repo_root,
+    )
+    authenticated_skill = authority.get("verified_skill")
+    if (
+        authority.get("pass") is not True
+        or not isinstance(authenticated_skill, Mapping)
+        or learning._skill_id(authenticated_skill) != skill_id
+    ):
+        return {
+            "schema": SCHEMA,
+            "status": "RECOVERY_SOURCE_SKILL_AUTHORITY_INVALID",
+            "pass": False,
+            "work_id": work.get("work_id"),
+            "verification_error": authority.get("reason"),
+            "terminal_authority": False,
+        }
 
-    candidate = learning._candidate_from_verified_skill(raw_skill)
-    source_scopes = sorted(str(x).strip() for x in raw_skill.get("source_scopes", []) if isinstance(x, str) and str(x).strip())
+    candidate = learning._candidate_from_verified_skill(authenticated_skill)
+    source_scopes = sorted(
+        str(x).strip()
+        for x in authenticated_skill.get("source_scopes", [])
+        if isinstance(x, str) and str(x).strip()
+    )
     binding = skill_verification_provider({
         "kind": "SKILL_VERIFICATION",
         "candidate": deepcopy(dict(candidate)),
