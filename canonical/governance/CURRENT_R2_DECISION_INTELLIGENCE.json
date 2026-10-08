@@ -14,8 +14,8 @@
     "authority_kernel_git_blob_sha": "29872fc55a5ec577feea769cc919dc889899c2bd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V6.json",
-    "git_blob_sha": "6eee31433fb5b8b5776a45f1f6ac423022497177"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V7.json",
+    "git_blob_sha": "d5d98468d2d82240a17a52a4f9687f3ada28433d"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
@@ -49,7 +49,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__GENERAL_CONTROL_MECHANISM_CLOSED",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__LIVE_GENERAL_CONTROL_LAW_TOTALIZED",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -78,7 +78,7 @@
     "generic_meta_effect_retained_only_when_no_grounded_policy_identity_exists": true,
     "verification_path": "canonical/verification/R2_R3_CONCRETE_GROUNDED_ADEQUACY_TARGET_VERIFY_20261008_V1.json",
     "verification_git_blob_sha": "5b965a06f0ebfded59aacaaa5bb131f61e9abb4b",
-    "live_runtime_git_blob_sha": "63cca29affa97545339161593f3e32a52e40a7e9",
+    "live_runtime_git_blob_sha": "043edf1746b5f8e118df7e7ec514ec25de141ee8",
     "merged_commit": "aecf59ece1140409c171cb7d0824f8085697ad3b"
   },
   "remaining_hard_frontier": [
@@ -157,7 +157,8 @@
     "open_world_completion_claimed": false,
     "verification_path": "canonical/verification/R2_TOTAL_META_ACTION_SUPPLEMENTAL_VERIFY_20261008_V1.json",
     "verification_git_blob_sha": "6afee7e277452ca3946a2b845a313c2507d7ea4e",
-    "isolated_behavior_replay": "7_OF_7_PASS"
+    "isolated_behavior_replay": "7_OF_7_PASS",
+    "live_runtime_git_blob_sha": "043edf1746b5f8e118df7e7ec514ec25de141ee8"
   },
   "control_law_closure": {
     "status": "SUPPLEMENTAL__AUTHORITATIVE_CLOSURE_IS_MECHANISM_CLOSURE_V6",
@@ -167,5 +168,11 @@
     "regression_test_git_blob_sha": "eb40f8ad4a2d1d8785d83cd160c02985d64c732d",
     "remaining_problem_class": "ADEQUACY_COVERAGE_EXPANSION_NOT_GENERAL_MECHANISM",
     "authoritative_field": "mechanism_closure"
+  },
+  "sufficient_closure": {
+    "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V2.json",
+    "git_blob_sha": "6a5dc6ad51fb8a040e03bafb67591c68b5d9102f",
+    "status": "PASS__MECHANISM_CLOSED__LIVE_TOTALIZED_CONTROL_BOUND",
+    "remaining_problem_class": "ADEQUACY_COVERAGE_CAPABILITY_EXPANSION_AND_OBSERVABILITY"
   }
 }
