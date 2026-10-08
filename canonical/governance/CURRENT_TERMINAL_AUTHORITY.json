@@ -886,7 +886,7 @@
     },
     "current_r2_decision_intelligence": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-      "git_blob_sha": "4c30fe665372af5c3c4c94f0b8907703871c85ab",
+      "git_blob_sha": "85ba12ec808d66bba89b2cf37b76704b1db770b0",
       "scheduler_cut": {
         "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json",
         "git_blob_sha": "e13a3440b0ce581a574b584faecfd70ef1a4167d"
@@ -2067,7 +2067,7 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_authority_git_blob_sha": "4c30fe665372af5c3c4c94f0b8907703871c85ab",
+    "current_authority_git_blob_sha": "85ba12ec808d66bba89b2cf37b76704b1db770b0",
     "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json",
     "current_scheduler_git_blob_sha": "e13a3440b0ce581a574b584faecfd70ef1a4167d",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
