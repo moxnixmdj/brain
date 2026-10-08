@@ -1583,6 +1583,7 @@ def _post_execution_independent_verification(
     prior_verified_episode_records: Sequence[Mapping[str, Any]],
     generalization_episode_records: Sequence[Mapping[str, Any]] = (),
     repo_root: str | Path,
+    effect_root: str | Path | None = None,
     episode_verification_provider=None,
     skill_verification_provider=None,
 ) -> dict[str, Any]:
@@ -1595,6 +1596,14 @@ def _post_execution_independent_verification(
     result = deepcopy(dict(out))
     if result.get("pass") is not True:
         return result
+
+    if episode_verification_provider is None:
+        from canonical.runtime import r3_independent_learning_verifier_v1 as independent
+
+        episode_verification_provider = lambda request: independent.verify_episode_request(
+            request,
+            repo_root=repo_root,
+        )
 
     episode = result.get("current_episode")
     if (
@@ -1613,6 +1622,7 @@ def _post_execution_independent_verification(
                 "trace": deepcopy(list(trace)),
                 "fact_capsule_head_hash": _s(result.get("state_capsule_head_hash")),
                 "value_capsule_head_hash": _s(result.get("value_capsule_head_hash")),
+                "effect_root": str(effect_root) if effect_root is not None else None,
             }
             try:
                 binding = episode_verification_provider(deepcopy(request))
@@ -1858,6 +1868,7 @@ def run_learning_episode(
                 prior_verified_episode_records=prior,
                 generalization_episode_records=generalization_prior,
                 repo_root=repo_root,
+                effect_root=effect_root,
                 episode_verification_provider=episode_verification_provider,
                 skill_verification_provider=skill_verification_provider,
             )
@@ -1927,6 +1938,7 @@ def run_learning_episode(
         prior_verified_episode_records=prior,
         generalization_episode_records=generalization_prior,
         repo_root=repo_root,
+        effect_root=effect_root,
         episode_verification_provider=episode_verification_provider,
         skill_verification_provider=skill_verification_provider,
     )
