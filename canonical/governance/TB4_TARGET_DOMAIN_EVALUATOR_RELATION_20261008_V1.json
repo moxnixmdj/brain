@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_TARGET_DOMAIN_EVALUATOR_RELATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "ZERO_CASE_RELATION_SPLIT__TARGET_TASK_DOMAIN_PASS__SCALAR_EVALUATOR_SEMANTICS_PASS__SANDBOX_RESOURCE_RELATION_OPEN__UNIVERSAL_SUCCESS_OPEN__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "objective": "Discharge only the target-domain and scalar-evaluator premises needed by the TB4 task-conditioned dominance route, without reading any TB4 task instruction, solution, or hidden verifier content.",
+  "target_owner": {
+    "system_card_url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+    "section": "8.5 Terminal-Bench 4.0",
+    "observed": {
+      "benchmark_name": "Terminal-Bench 4.0",
+      "task_count": 66,
+      "opus55_score_percent": 66.36,
+      "trials_per_task": 5,
+      "total_trials": 330,
+      "agent": "Claude Code --bare",
+      "reasoning_effort": "xhigh",
+      "standard_error_points": 2.6,
+      "max_effort_score_percent_display": 64.8,
+      "sandbox_provider_may_still_confound_some_tasks": true
+    }
+  },
+  "benchmark_owner_release": {
+    "repository": "harbor-framework/terminal-bench",
+    "release": "v4.0.0",
+    "release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "published_dataset": "terminal-bench/terminal-bench@4.0.0",
+    "release_blog": "https://www.tbench.ai/news/terminal-bench-4-0",
+    "release_semantics": [
+      "V3_0_0_STARTED_WITH_74_TASKS",
+      "V4_0_0_REMOVED_EXACTLY_8_TASKS",
+      "V4_0_0_THEREFORE_HAS_66_TASKS",
+      "V4_0_IS_A_BREAKING_SEMANTIC_VERSION_REQUIRING_RERUN_BECAUSE_TASK_SET_AND_AGENT_ENVIRONMENT_RESOURCES_CHANGED",
+      "V4_0_CALIBRATES_TIMEOUT_CPU_MEMORY_AND_FIXES_TASKS",
+      "OWNER_RUN_COMMAND_IS_HARBOR_RUN_D_TERMINAL_BENCH_TERMINAL_BENCH_AT_4_0_0"
+    ],
+    "canonical_dataset_hash": "sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+    "leaderboard_expected_task_count": 66,
+    "leaderboard_min_trials_per_task": 5
+  },
+  "target_domain_relation": {
+    "state": "PASS__VERSION_REFERENCE_IDENTIFIES_CANONICAL_V4_0_0_TASK_POPULATION",
+    "relation": "TARGET_TERMINAL_BENCH_4_0_TASK_DOMAIN_EQUALS_CANONICAL_TERMINAL_BENCH_V4_0_0_66_TASK_DOMAIN",
+    "proof_basis": [
+      "BENCHMARK_OWNER_DEFINES_TERMINAL_BENCH_4_0_AS_THE_V4_0_0_PUBLISHED_DATASET",
+      "V3_0_0_HAS_74_TASKS_AND_V4_0_0_REMOVES_EXACTLY_8__YIELDING_66",
+      "ANTHROPIC_INDEPENDENTLY_DESCRIBES_TERMINAL_BENCH_4_0_AS_EXACTLY_66_TASKS",
+      "ANTHROPIC_DESCRIBES_THE_SAME_V4_RESOURCE_TIMEOUT_REDESIGN_AS_THE_BENCHMARK_OWNER_RELEASE",
+      "OFFICIAL_LEADERBOARD_STATIC_ANALYSIS_REQUIRES_66_CANONICAL_TASKS"
+    ],
+    "scope_boundary": "PROVES_TASK_POPULATION_VERSION_IDENTITY__DOES_NOT_PROVE_ANTHROPIC_INTERNAL_SANDBOX_PROVIDER_OR_RESOURCE_IMPLEMENTATION_BYTE_IDENTITY"
+  },
+  "official_scalar_evaluator": {
+    "source": "harbor-framework/terminal-bench/leaderboard/src/leaderboard/core/metrics.py",
+    "success_rule": "TRIAL_SUCCESS_IFF_REWARD_GT_0__ERROR_OR_NONE_IS_FAILURE",
+    "accuracy_rule": "100_TIMES_SUCCESSFUL_TRIALS_DIVIDED_BY_TOTAL_TRIALS",
+    "disqualified_trial_rule": "DISQUALIFIED_TRIAL_COUNTS_AS_REWARD_0"
+  },
+  "owner_scalar_semantics_relation": {
+    "state": "PASS__BINARY_SUCCESS_RATE_SEMANTICS",
+    "owner_detailed_score_percent": 66.36,
+    "owner_total_trials": 330,
+    "unique_minimum_integer_success_count": 219,
+    "reconstruction": "ROUND_2DP(100*219/330)=66.36",
+    "owner_reported_standard_error_points": 2.6,
+    "bernoulli_standard_error_at_219_of_330_points": 2.60083401830718,
+    "independent_math_engine": "WOLFRAM_LANGUAGE",
+    "proof_basis": [
+      "DETAILED_SCORE_RECONSTRUCTS_EXACTLY_FROM_219_BINARY_SUCCESSES_OUT_OF_330",
+      "REPORTED_STANDARD_ERROR_2_6_MATCHES_BERNOULLI_BINARY_TRIAL_STANDARD_ERROR_2_600834",
+      "OFFICIAL_TERMINAL_BENCH_ACCURACY_METRIC_IS_BINARY_REWARD_GT_ZERO_SUCCESS_RATE",
+      "ANTHROPIC_CALLS_THE_QUANTITY_THE_TERMINAL_BENCH_4_0_SCORE_AND_REPORTS_TRIAL_COUNTS"
+    ],
+    "scope_boundary": "PROVES_SCALAR_SUCCESS_RATE_SEMANTICS__DOES_NOT_CLAIM_ANTHROPIC_USED_THE_SAME_SCORER_CODE_BYTES"
+  },
+  "public_rerun_corroboration": {
+    "repository_pr": "harbor-framework/terminal-bench#2157",
+    "validation": "66_CANONICAL_TASKS_X_5_TRIALS__DEFAULT_EXECUTION_SETTINGS__STATIC_CHECKS_PASS",
+    "source_job": "https://hub.harborframework.com/jobs/6baeb205-ce06-432b-9264-4403f19eb925",
+    "model": "anthropic/claude-opus-5-5",
+    "agent": "claude-code",
+    "agent_version": "2.1.284",
+    "reasoning_effort": "max",
+    "n_trials": 330,
+    "successes": 214,
+    "accuracy_percent": 64.85,
+    "display_accuracy_percent": 64.8,
+    "owner_system_card_max_effort_display_percent": 64.8,
+    "role": "STRONG_PROTOCOL_COMPARABILITY_CORROBORATION_ONLY__NOT_IDENTITY_OF_THE_SEP22_INTERNAL_XHIGH_RUN"
+  },
+  "remaining_task_conditioned_dominance_premises": {
+    "target_domain_subset_or_equality": "PASS",
+    "evaluator_relation": "PASS_FOR_SCALAR_BINARY_SUCCESS_SEMANTICS",
+    "resource_and_sandbox_semantics_preservation": "OPEN",
+    "universal_brain_success_or_sufficient_lower_bound": "OPEN"
+  },
+  "resource_relation_open_reason": [
+    "ANTHROPIC_EXPLICITLY_STATES_SANDBOX_PROVIDER_CAN_STILL_BE_A_CONFOUNDING_FACTOR_IN_A_FEW_TASKS",
+    "ANTHROPIC_INTERNAL_XHIGH_RUN_SANDBOX_PROVIDER_IDENTITY_IS_NOT_PUBLICLY_BOUND",
+    "BRAIN_BUILDKITE_HARBOR_PROTOCOL_EQUIVALENCE_PROVES_PUBLIC_HARBOR_SEMANTICS_NOT_IDENTITY_TO_ANTHROPIC_INTERNAL_SANDBOX"
+  ],
+  "next_minimum_proof_obligation": "PROVE_A_RESOURCE_ENVIRONMENT_RELATION_STRONG_ENOUGH_THAT_BRAIN_SUCCESS_ON_ITS_BOUND_HARBOR_CARRIER_IMPLIES_SUCCESS_UNDER_THE_TARGET_RELEVANT_TB4_TASK_SEMANTICS__OR_BYPASS_ENVIRONMENT_IDENTITY_WITH_TASK_LEVEL_VERIFIER_ACCEPTANCE_THEOREMS",
+  "hard_nonclaims": [
+    "NO_CLAIM_ANTHROPIC_INTERNAL_XHIGH_JOB_BYTES_ARE_PUBLIC",
+    "NO_CLAIM_ANTHROPIC_INTERNAL_SANDBOX_PROVIDER_EQUALS_BUILDKITE",
+    "NO_UNIVERSAL_BRAIN_SUCCESS_PROOF",
+    "NO_TB4_CASE_EXPOSURE",
+    "NO_TB4_SCORE_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false
+}
