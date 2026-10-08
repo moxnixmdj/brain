@@ -9,6 +9,7 @@ from canonical.tests.test_aa_briefcase_scope_complete_dominance_v1 import (
     target,
 )
 from canonical.tests.test_aa_briefcase_minimal_owner_attestation_v1 import statement
+from canonical.tests.test_aa_briefcase_core_owner_attestation_v2 import statement as core_statement
 from canonical.tests.test_aa_briefcase_owner_signature_verifier_v1 import make_signed
 
 
@@ -43,13 +44,14 @@ class T(unittest.TestCase):
 
     def test_core_owner_attestation_passes_both_aliases(self):
         s = core_statement()
+        bundle, binding = make_signed(s)
         out = compile_current_epoch_noninferiority(
-            target(),
+            target(binding),
             {
                 "mode": "CORE_OWNER_ATTESTATION",
                 "payload": {
                     "statement": s,
-                    "signature_verification": core_sig(s),
+                    "signature_bundle": bundle,
                 },
             },
         )
