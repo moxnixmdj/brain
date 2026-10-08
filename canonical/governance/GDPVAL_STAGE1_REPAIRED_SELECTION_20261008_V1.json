@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_REPAIRED_SELECTION_RECEIPT_V1",
+  "date": "2026-10-08",
+  "status": "REPAIRED_TASK_SET_FROZEN__PROMPTS_UNREAD_FOR_REPLACEMENTS__EXECUTION_CANDIDATE__ZERO_CREDIT",
+  "precommit": {
+    "path": "canonical/action_intents/ACTION_INTENT_GDPVAL_STAGE1_CONTAMINATION_REPAIR_20261008_V1.json",
+    "commit_sha": "c1af9718fc1025181c350875aba245f676870703"
+  },
+  "public_metadata_only_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2412,
+    "workflow_run_id": 37717259531,
+    "workflow_conclusion": "success",
+    "artifact_id": 11524396211,
+    "artifact_digest": "sha256:7e48f0d682a2f1cc97a8d29f7a95110ce3d2649dfac295fd2f67764bbb5ea812",
+    "selector_head_sha": "cab7407e9f3cd93ba2a13722c3a11ac113233727",
+    "original_selection_exact_replay": true
+  },
+  "spent_original_tasks": [
+    "a079d38f-c529-436a-beca-3e291f9e62a3",
+    "be830ca0-b352-4658-a5bd-57139d6780ba",
+    "2c249e0f-4a8c-4f8e-b4f4-6508ba29b34f"
+  ],
+  "repaired_stage1": [
+    {
+      "artifact_class": "XLSX",
+      "task_id": "17111c03-aac7-45c2-857d-c06d8223d6ad",
+      "task_id_sha256": "178b6cfc0794c05751a3633954d41c91a8a3d1a660a205d10c75633480bcef1b",
+      "sector": "Government",
+      "occupation": "Administrative Services Managers",
+      "reference_file_count": 1,
+      "deliverable_file_count": 2,
+      "extensions": [".pdf", ".xlsx"]
+    },
+    {
+      "artifact_class": "PPTX",
+      "task_id": "9a0d8d36-6233-4c76-9107-0d1f783c7340",
+      "task_id_sha256": "1b9a593b3c8a26bfa1e3f84c8969f74737f9abeb2c1627578c9c98f69539c6ec",
+      "sector": "Finance and Insurance",
+      "occupation": "Personal Financial Advisors",
+      "reference_file_count": 0,
+      "deliverable_file_count": 1,
+      "extensions": [".pptx"]
+    },
+    {
+      "artifact_class": "PDF",
+      "task_id": "1bff4551-1d54-4e37-b2e0-d5c3f2ea4a45",
+      "task_id_sha256": "012a5e39a17369bba301a8917a18853cd851245f4df1a723b01933bbe44213a9",
+      "sector": "Government",
+      "occupation": "Recreation Workers",
+      "reference_file_count": 0,
+      "deliverable_file_count": 1,
+      "extensions": [".pdf"]
+    }
+  ],
+  "selection_privacy": {
+    "prompt_used": false,
+    "rubric_used": false,
+    "gold_deliverable_content_used": false,
+    "prior_model_submission_used": false
+  },
+  "next_action": "READ_ONLY_THE_THREE_FROZEN_REPLACEMENT_TASK_PROMPTS_AND_PERMITTED_REFERENCE_FILES__EXECUTE_BRAIN_OWNED_STIRRUP_PROFILE__FREEZE_ALL_OUTPUTS_BEFORE_ANY_RUBRIC_GOLD_JUDGE_FEEDBACK_OR_MODEL_SUBMISSION_INSPECTION",
+  "stage1_capability_credit": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
