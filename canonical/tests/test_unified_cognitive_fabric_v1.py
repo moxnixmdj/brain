@@ -23,6 +23,11 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("H100_INFERENCE", c["engines"])
         self.assertIn("MYSTERY_INFERENCE", c["engines"])
         self.assertIn("CAPABILITY_SCHEDULER", c["engines"])
+        self.assertIn("UNIVERSAL_ESCAPE", c["engines"])
+        self.assertIn("CERTIFIED_ROUTE", c["engines"])
+        self.assertIn("TERMINAL_AUTOPILOT", c["engines"])
+        self.assertIn("TERMINAL_ROOT", c["engines"])
+        self.assertIn("TERMINAL_CLOSURE", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -110,6 +115,36 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertEqual(out["mode"], "CAPABILITY_SCHEDULER")
         self.assertTrue(out["inner_pass"])
         self.assertEqual(out["result"]["ranked"][0]["work_id"], "BUILD")
+
+    def test_auto_universal_escape_route_is_structurally_selected(self):
+        out = run({
+            "payload": {
+                "escape_cell_id": "cell-x",
+                "escape_membership_bound": False,
+                "admission_candidates": {},
+                "v9_args": {},
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "UNIVERSAL_ESCAPE")
+        self.assertFalse(out["inner_pass"])
+
+    def test_terminal_root_dispatches_fail_closed_without_receipt(self):
+        out = run({
+            "mode": "TERMINAL_ROOT",
+            "payload": {},
+        })
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
+        self.assertFalse(out["inner_pass"])
+        self.assertEqual(out["result"]["status"], "FAIL_CLOSED")
+
+    def test_certified_route_preflight_is_available_through_fabric(self):
+        out = run({
+            "mode": "CERTIFIED_ROUTE",
+            "payload": {"operation": "PREFLIGHT"},
+        })
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
+        self.assertIn("result", out)
 
     def test_decision_dispatches(self):
         out = run({
