@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_P3_ROBUST_POLICY_ADEQUACY_CEGAR_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_8_OF_8_ON_TWO_INDEPENDENT_SPRITES__EXACT_BYTES__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+      "git_blob_sha": "c81746a4e9c9bc48a1aafe22cf854632f81698eb"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p3_robust_policy_adequacy_cegar_v1.py",
+      "git_blob_sha": "26d6714a5c11eacb3029c1f10579b696cfcbcf56"
+    },
+    "reused_semantic_kernel": {
+      "path": "canonical/runtime/monotone_semantic_constraint_kernel_v1.py",
+      "git_blob_sha": "8874d89ad852ae118330a50961e61ba9633b00ff"
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-root3-current-byte-replay-20261007-v1",
+      "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "tests_run": 8,
+      "tests_passed": 8,
+      "result": "PASS"
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_run": 8,
+      "tests_passed": 8,
+      "result": "PASS"
+    }
+  ],
+  "proved": [
+    "AUTHENTICATED_COMMON_POLICY_IS_RETURNED_ONLY_WHEN_IT_IS_ADEQUATE_IN_EVERY_SURVIVING_MODEL_OF_THE_CURRENT_FINITE_SOUND_SEMANTIC_STATE",
+    "UNAUTHENTICATED_POLICY_CONDITIONS_CANNOT_ACQUIRE_ADEQUACY_AUTHORITY",
+    "ANY_SURVIVING_MODEL_WITHOUT_AN_AUTHENTICATED_POLICY_FAILS_CLOSED_BEFORE_DISCRIMINATOR_SELECTION",
+    "UNPROVED_REFINEMENTS_CANNOT_SHRINK_THE_SEMANTIC_STATE",
+    "ONE_STEP_DISCRIMINATOR_IS_SELECTED_ONLY_WHEN_EACH_REACHABLE_TRUTH_BRANCH_HAS_A_COMMON_AUTHENTICATED_POLICY",
+    "MINIMUM_COST_IS_EXACT_ONLY_OVER_THE_DECLARED_ONE_STEP_RESOLVING_DISCRIMINATOR_SET",
+    "FORGED_INDEPENDENT_VERIFICATION_SUBJECT_BINDING_IS_REJECTED",
+    "UNRESOLVED_POLICY_REGION_COUNTEREXAMPLES_ARE_PRESERVED",
+    "NO_D_B_U_SUBTRACTION_OR_TERMINAL_AUTHORITY_ESCALATION"
+  ],
+  "github_actions_note": {
+    "run_id": 37741520094,
+    "conclusion": "failure_before_runner_allocation",
+    "runner_id": 0,
+    "steps_executed": 0,
+    "interpretation": "INFRASTRUCTURE_NONEXECUTION__NOT_A_TEST_FAILURE__TWO_SPRITE_REPLAYS_ARE_THE_EXECUTED_VERIFICATION"
+  },
+  "boundary": [
+    "FINITE_BOOLEAN_DECISION_BASIS_ONLY__CURRENT_REUSED_KERNEL_LIMIT_IS_12_ATOMS",
+    "POLICY_ADEQUACY_CERTIFICATES_AND_THEIR_INDEPENDENT_VERIFICATIONS_MUST_ALREADY_EXIST",
+    "DISCRIMINATOR_SELECTION_DOES_NOT_SELF_CERTIFY_OR_OBSERVE_DISCRIMINATOR_TRUTH",
+    "UPSTREAM_SOURCE_AUTHORIZATION_AND_GLOBAL_SCOPE_COMPLETENESS_REMAIN_SEPARATE",
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTICS",
+    "NO_GENERAL_P3_CLOSURE",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
