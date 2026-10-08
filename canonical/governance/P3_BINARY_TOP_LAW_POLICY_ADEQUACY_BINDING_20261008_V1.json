@@ -1,0 +1,13 @@
+{
+  "schema":"PROJECT_BRAIN_POLICY_ADEQUACY_BINDING_V1",
+  "date":"2026-10-08",
+  "policy_id":"P3_BOUND_BINARY_DECISION_GROUNDED_EXPRESSION_POLICY_V1",
+  "policy_condition":{"op":"ATOM","id":"P3_BOUND_BINARY_REAL_CONTEXT_GROUNDED_DECISION_TOP_LAW_V1"},
+  "adequacy_certificate_path":"canonical/governance/P3_BINARY_TOP_LAW_POLICY_ADEQUACY_CERTIFICATE_20261008_V1.json",
+  "adequacy_certificate_blob_sha":"1e9f3b9e56e6d1f6de98720e5787e29c0cf2911b",
+  "independent_verification_path":"canonical/verification/P3_BINARY_TOP_LAW_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261008_V1.json",
+  "independent_verification_blob_sha":"d37ecb489a4ae68b47a59a23dc66d9816c5816b3",
+  "membership_self_certified":false,
+  "terminal_authority":false,
+  "hard_nonclaims":["NO_FREE_FORM_MEMBERSHIP","NO_SCOPE_WIDENING","NO_TERMINAL_CREDIT"]
+}
