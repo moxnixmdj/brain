@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_P3_POLICY_INFLUENCE_NONINTERFERENCE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_CAPACITY_BINDING_RELEVANCE_CLOSURE_MECHANISM__VERIFICATION_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "problem": "P3 V9 fails closed when optional-claim capacity binds and neither explicit objective weights nor an independently verified complete decision-dependency graph supplies selection authority.",
+  "first_principles_repair": "RELEVANCE_IS_DEFINED_BY_POLICY_INFLUENCE__A_DISCRIMINATOR_IS NECESSARY ONLY WHEN DELETING IT MERGES SOURCE_COMPATIBLE WORLDS WHOSE ADEQUATE_POLICY_INTERSECTION_IS_EMPTY.",
+  "theorem": {
+    "worlds": "W is an independently verified sound source-compatible finite overapproximation for the declared cell.",
+    "adequacy": "A(w) is the independently authenticated set of Brain-owned adequate policies for world w.",
+    "partition": "D(w) is the authenticated discriminator vector.",
+    "bucket_condition": "FOR_EVERY_d__INTERSECTION_OVER_w_WITH_D(w)=d_OF_A(w)_IS_NONEMPTY",
+    "commit_rule": "CHOOSE_ONE_DETERMINISTIC_COMMON_POLICY_FROM_THE_CURRENT_AUTHENTICATED_BUCKET",
+    "noninterference": "ANY_RESIDUAL_SEMANTIC_VARIATION_INSIDE_A_BUCKET_CANNOT_CHANGE_THE_COMMITTED_POLICY_BECAUSE_THE_CHOSEN_POLICY_IS_ADEQUATE_IN_EVERY_WORLD_IN_THAT_BUCKET",
+    "relevance_ablation": "DISCRIMINATOR_i_IS_RELEVANT_IFF_REMOVING_i_CAUSES_AT_LEAST_ONE_MERGED_BUCKET_TO_HAVE_EMPTY_COMMON_POLICY_INTERSECTION"
+  },
+  "composition": [
+    "PRESERVE_ALL_V9_POSITIVE_ROUTES",
+    "NEVER_FALL_THROUGH_FROM_REJECTED_EXPLICIT_OBJECTIVE_WEIGHTS_OR_DECISION_DEPENDENCY_AUTHORITY",
+    "TRY_POLICY_INFLUENCE_ONLY_AFTER_V9_RETURNS_CAPACITY_BINDING_REQUIRES_RELEVANCE_POLICY",
+    "REQUIRE_CANONICAL_EXACT_BYTE_BOUND_INDEPENDENT_VERIFICATION_OF_WORLD_OVERAPPROXIMATION_POLICY_ADEQUACY_DISCRIMINATOR_SEMANTICS_CURRENT_VALUES_AND_POLICY_BINDINGS",
+    "VERIFY_EVERY_FULL_DISCRIMINATOR_BUCKET_HAS_A_COMMON_ADEQUATE_POLICY",
+    "DERIVE_RELEVANCE_BITS_BY_DROP_ONE_PARTITION_ABLATION",
+    "REALIZE_ONLY_THE_SELECTED_AUTHENTICATED_POLICY_THROUGH_REQUIRED_CLAIM_GROUNDED_REALIZATION",
+    "KEEP_SOURCE_POLICY_DB_U_AND_TERMINAL_AUTHORITY_ZERO"
+  ],
+  "implementation": {
+    "kernel": "canonical/runtime/p3_policy_influence_relevance_cell_v1.py",
+    "front_door": "canonical/runtime/p3_real_context_v3_admission_v10.py",
+    "kernel_tests": "canonical/tests/test_p3_policy_influence_relevance_cell_v1.py",
+    "front_door_tests": "canonical/tests/test_p3_real_context_v3_admission_v10.py"
+  },
+  "causal_effect_if_verified": {
+    "deleted_requirement": "A_COMPLETE_EXACT_DECISION_DEPENDENCY_GRAPH_IS_THE_ONLY_NON_WEIGHT_ROUTE_FOR_CAPACITY_BINDING_RELEVANCE",
+    "replacement": "ANY_INDEPENDENTLY_AUTHENTICATED_SOUND_POLICY_WORLD_PARTITION_WITH_COMMON_POLICY_BUCKETS_IS_SUFFICIENT",
+    "remaining_root": "CONSTRUCT_OR_AUTHENTICATE_A_SOUND_SOURCE_COMPATIBLE_POLICY_WORLD_OVERAPPROXIMATION_AND_POLICY_ADEQUACY_BINDINGS_FOR_REACHED_REAL_CONTEXTS",
+    "general_free_form_semantic_relevance_required": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_CURRENT_REAL_P3_SCOPE_ALREADY_HAS_SUCH_A_VERIFIED_POLICY_WORLD_CONTRACT",
+    "NO_GENERAL_FREE_FORM_SEMANTIC_RELEVANCE",
+    "NO_GLOBAL_P3_CLOSURE",
+    "NO_SOURCE_AUTHORIZATION_FROM_THIS_MECHANISM_ALONE",
+    "NO_POLICY_ADEQUACY_DB_U_EMPTY_OR_TERMINAL_AUTHORITY_FROM_THIS_MECHANISM_ALONE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
