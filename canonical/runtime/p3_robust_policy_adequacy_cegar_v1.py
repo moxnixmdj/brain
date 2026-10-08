@@ -8,12 +8,15 @@ It never guesses meaning. It either:
 2. identifies the cheapest declared one-bit discriminator whose truthful value
    would make each reachable branch admit a common authenticated policy.
 
-The discriminator selection is a *question selection* result only. This module
-does not self-certify that the discriminator can be truthfully observed, does
-not authorize source semantics, and grants no D_B/U/terminal credit.
+The discriminator result selects a question only. This module does not
+self-certify that the discriminator can be truthfully observed, does not
+authorize source semantics, and grants no D_B/U/terminal credit.
 """
 from __future__ import annotations
 
+from hashlib import sha1, sha256
+import json
+from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.monotone_semantic_constraint_kernel_v1 import (
@@ -22,11 +25,111 @@ from canonical.runtime.monotone_semantic_constraint_kernel_v1 import (
     _valuations,
     compile_state,
 )
-from canonical.runtime.proof_carrying_semantic_refinement_v3 import (
-    _authenticate_policy_adequacy,
-)
 
 SCHEMA = "PROJECT_BRAIN_P3_ROBUST_POLICY_ADEQUACY_CEGAR_V1"
+ROOT = Path(__file__).resolve().parents[2]
+
+ADEQUACY_SCHEMA = "PROJECT_BRAIN_POLICY_ADEQUACY_CERTIFICATE_V1"
+VERIFY_SCHEMA = "PROJECT_BRAIN_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_V1"
+
+
+def _canon(x: Any) -> str:
+    return json.dumps(x, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+
+
+def _condition_sha256(condition: Mapping[str, Any]) -> str:
+    return sha256(_canon(condition).encode("utf-8")).hexdigest()
+
+
+def _git_blob_sha(path: Path) -> str:
+    data = path.read_bytes()
+    return sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+
+
+def _bound_path(raw: Any, *, prefixes: tuple[str, ...]) -> Path:
+    value = str(raw or "").strip()
+    p = Path(value)
+    if not value or p.is_absolute() or ".." in p.parts:
+        raise ValueError("NONCANONICAL_BINDING_PATH")
+    if not any(value.startswith(prefix) for prefix in prefixes):
+        raise ValueError("BINDING_PATH_OUTSIDE_ALLOWED_SCOPE")
+    full = ROOT / p
+    if not full.is_file():
+        raise ValueError("BOUND_FILE_MISSING:" + value)
+    return full
+
+
+def _load_json(path: Path) -> Mapping[str, Any]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, Mapping):
+        raise ValueError("BOUND_JSON_NOT_OBJECT")
+    return value
+
+
+def _authenticate_policy_adequacy(
+    policy_id: str,
+    condition: Mapping[str, Any],
+    binding: Mapping[str, Any] | None,
+) -> tuple[bool, dict[str, Any]]:
+    if not isinstance(binding, Mapping):
+        return False, {"policy_id": policy_id, "reason": "ADEQUACY_BINDING_MISSING"}
+
+    try:
+        adequacy_path = _bound_path(
+            binding.get("adequacy_certificate_path"),
+            prefixes=("canonical/governance/", "canonical/verification/"),
+        )
+        verification_path = _bound_path(
+            binding.get("independent_verification_path"),
+            prefixes=("canonical/verification/",),
+        )
+
+        adequacy_blob = _git_blob_sha(adequacy_path)
+        verification_blob = _git_blob_sha(verification_path)
+        if binding.get("adequacy_certificate_blob_sha") != adequacy_blob:
+            raise ValueError("ADEQUACY_CERTIFICATE_BLOB_DRIFT")
+        if binding.get("independent_verification_blob_sha") != verification_blob:
+            raise ValueError("ADEQUACY_VERIFICATION_BLOB_DRIFT")
+
+        adequacy = _load_json(adequacy_path)
+        verification = _load_json(verification_path)
+        condition_sha = _condition_sha256(condition)
+
+        if adequacy.get("schema") != ADEQUACY_SCHEMA:
+            raise ValueError("ADEQUACY_CERTIFICATE_SCHEMA_INVALID")
+        if adequacy.get("policy_id") != policy_id:
+            raise ValueError("ADEQUACY_POLICY_ID_MISMATCH")
+        if adequacy.get("policy_condition_sha256") != condition_sha:
+            raise ValueError("ADEQUACY_CONDITION_MISMATCH")
+        if adequacy.get("adequacy_proved") is not True:
+            raise ValueError("ADEQUACY_NOT_PROVED")
+        if adequacy.get("brain_owned") is not True:
+            raise ValueError("POLICY_NOT_BRAIN_OWNED")
+        if adequacy.get("load_bearing_constraints_preserved") is not True:
+            raise ValueError("LOAD_BEARING_CONSTRAINTS_NOT_PRESERVED")
+
+        if verification.get("schema") != VERIFY_SCHEMA:
+            raise ValueError("ADEQUACY_VERIFICATION_SCHEMA_INVALID")
+        if verification.get("policy_id") != policy_id:
+            raise ValueError("ADEQUACY_VERIFICATION_POLICY_ID_MISMATCH")
+        if verification.get("subject_git_blob_sha") != adequacy_blob:
+            raise ValueError("ADEQUACY_VERIFICATION_SUBJECT_MISMATCH")
+        if verification.get("pass") is not True:
+            raise ValueError("ADEQUACY_INDEPENDENT_VERIFICATION_NOT_PASS")
+
+        return True, {
+            "policy_id": policy_id,
+            "condition_sha256": condition_sha,
+            "adequacy_certificate_path": str(adequacy_path.relative_to(ROOT)),
+            "adequacy_certificate_blob_sha": adequacy_blob,
+            "independent_verification_path": str(verification_path.relative_to(ROOT)),
+            "independent_verification_blob_sha": verification_blob,
+        }
+    except Exception as exc:
+        return False, {
+            "policy_id": policy_id,
+            "reason": type(exc).__name__ + ":" + str(exc),
+        }
 
 
 def _fail(reason: str, **detail: Any) -> dict[str, Any]:
