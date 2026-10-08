@@ -183,6 +183,131 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertTrue(third["progress"], third)
         repair_after_new_evidence.assert_called_once()
 
+    def test_failed_skill_verification_retries_only_after_new_evidence(self):
+        path = self.temp_state()
+        candidate = {
+            "candidate_sha256": "sha256:" + "f" * 64,
+            "source_episode_ids": ["ep-1", "ep-2"],
+            "source_scopes": ["scope-a"],
+            "steps": [{"index": 0, "op": "solve", "inputs": [], "outputs": ["goal"]}],
+            "preconditions": [],
+            "postconditions": ["goal"],
+            "invalidators": [],
+            "candidate_only": True,
+            "verified_skill": False,
+            "reuse_authorized": False,
+        }
+        identity = {"candidate_sha256": candidate["candidate_sha256"]}
+        payload = {"candidate": candidate}
+        state = learning._empty_state()
+        learning._enqueue_improvement(
+            state,
+            kind="VERIFY_SKILL_CANDIDATE",
+            priority=10,
+            identity=identity,
+            payload=payload,
+        )
+        learning._refresh_stats(state)
+        learning._write_state(state, path)
+
+        provider = mock.Mock(return_value=None)
+        first = driver.advance_once(
+            state_path=path,
+            skill_verification_provider=provider,
+        )
+        second = driver.advance_once(
+            state_path=path,
+            skill_verification_provider=provider,
+        )
+
+        self.assertFalse(first["pass"], first)
+        self.assertTrue(first["attempt_backoff_recorded"], first)
+        self.assertEqual(
+            first["status"],
+            "IMPROVEMENT_PROVIDER_RETURNED_NO_SKILL_BINDING",
+        )
+        self.assertTrue(second["pass"], second)
+        self.assertFalse(second["progress"], second)
+        self.assertEqual(
+            second["blockers"][0]["blocker"],
+            "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
+        )
+        self.assertEqual(provider.call_count, 1)
+
+        state = learning.load_state(path)
+        learning._enqueue_improvement(
+            state,
+            kind="VERIFY_SKILL_CANDIDATE",
+            priority=10,
+            identity=identity,
+            payload=payload,
+        )
+        learning._refresh_stats(state)
+        learning._write_state(state, path)
+
+        third = driver.advance_once(
+            state_path=path,
+            skill_verification_provider=provider,
+        )
+        self.assertFalse(third["pass"], third)
+        self.assertTrue(third["attempt_backoff_recorded"], third)
+        self.assertEqual(provider.call_count, 2)
+
+    def test_failed_verifier_work_does_not_starve_unrelated_queue_items(self):
+        path = self.temp_state()
+        candidate = {
+            "candidate_sha256": "sha256:" + "e" * 64,
+            "source_episode_ids": ["ep-1", "ep-2"],
+            "source_scopes": ["scope-a"],
+            "steps": [{"index": 0, "op": "solve", "inputs": [], "outputs": ["goal"]}],
+            "preconditions": [],
+            "postconditions": ["goal"],
+            "invalidators": [],
+            "candidate_only": True,
+            "verified_skill": False,
+            "reuse_authorized": False,
+        }
+        state = learning._empty_state()
+        learning._enqueue_improvement(
+            state,
+            kind="VERIFY_SKILL_CANDIDATE",
+            priority=10,
+            identity={"candidate_sha256": candidate["candidate_sha256"]},
+            payload={"candidate": candidate},
+        )
+        learning._enqueue_improvement(
+            state,
+            kind="REPAIR_FAILURE_CLASS",
+            priority=30,
+            identity={"failure_fingerprint": "failure"},
+            payload={
+                "failure_fingerprint": "failure",
+                "retry_capsule_sha256": "retry",
+            },
+        )
+        learning._refresh_stats(state)
+        learning._write_state(state, path)
+
+        verifier = mock.Mock(return_value=None)
+        repair = mock.Mock(return_value={"pass": True, "status": "REPAIRED"})
+        out = driver.drain(
+            state_path=path,
+            skill_verification_provider=verifier,
+            failure_repair_provider=repair,
+            max_actions=3,
+        )
+
+        self.assertEqual(verifier.call_count, 1)
+        repair.assert_called_once()
+        self.assertEqual(out["progress_count"], 1, out)
+        self.assertGreaterEqual(len(out["actions"]), 2)
+        self.assertTrue(out["actions"][0]["attempt_backoff_recorded"])
+        self.assertEqual(out["actions"][1]["work_id"], next(
+            row["work_id"]
+            for row in learning.load_state(path)["improvement_queue"].values()
+            if row.get("kind") == "REPAIR_FAILURE_CLASS"
+        ))
+
     def test_delayed_episode_queue_retains_exact_verification_material(self):
         path = self.temp_state()
         episode = {
