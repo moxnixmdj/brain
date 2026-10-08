@@ -35,7 +35,7 @@
     "success_requires_proof_carrying_outcome_build": true,
     "existing_goal_satisfaction_authority_preserved": true,
     "policy_cover_authority_unchanged": true,
-    "learned_judgment_authority_unchanged": false
+    "learned_judgment_remains_advisory_only": true
   },
   "r3_integration": {
     "runtime": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
