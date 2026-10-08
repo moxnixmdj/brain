@@ -1,0 +1,51 @@
+name: verify-unified-live-brain-r1
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: [main]
+    paths:
+      - canonical/runtime/live_brain_runtime_v1.py
+      - canonical/runtime/bound_capability_problem_compiler_v1.py
+      - canonical/governance/LIVE_BRAIN_RUNTIME_V1_ACTIVATION_20261008_V1.json
+      - canonical/tests/test_live_brain_runtime_v1.py
+      - canonical/tests/test_bound_capability_problem_compiler_v1.py
+      - .github/workflows/verify-unified-live-brain-r1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Initialize diagnostics
+        run: : > r1-test-output.txt
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run R1 regressions
+        shell: bash
+        run: |
+          set +e
+          python -m unittest -v \
+            canonical.tests.test_bound_capability_problem_compiler_v1 \
+            canonical.tests.test_live_brain_runtime_v1 \
+            2>&1 | tee r1-test-output.txt
+          code=${PIPESTATUS[0]}
+          exit "$code"
+      - name: Publish failure traceback
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const raw = fs.existsSync('r1-test-output.txt')
+              ? fs.readFileSync('r1-test-output.txt', 'utf8')
+              : 'test output file missing; failure occurred before test execution';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: 'R1 CI failure diagnostics:\n\n```text\n' + raw.slice(-50000) + '\n```'
+            });

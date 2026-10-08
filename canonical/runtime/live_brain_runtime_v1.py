@@ -1,0 +1,514 @@
+"""Unified live cognitive architecture V1.
+
+One public runtime entrypoint over the Brain's already-existing verified mechanisms.
+
+Default routes:
+- raw intent -> R2 general adequate-decision controller (P3 V12 + Universal Solver V12);
+- explicit capability problem -> Universal Verified Adaptive Solver V12;
+- verified execution experience -> R3 autonomous verified self-improvement state;
+- compiled verified-bound tasks -> existing live integrated bound runtime;
+- specialized verified inference systems -> explicit native adapters;
+- capability development work -> capability-first scheduler.
+
+The router does not erase native verification contracts and grants no acceptance,
+ownership, capability-promotion, or terminal authority by itself.
+"""
+from __future__ import annotations
+
+from copy import deepcopy
+from pathlib import Path
+from typing import Any, Callable, Mapping, Sequence
+
+SCHEMA = "PROJECT_BRAIN_UNIFIED_LIVE_COGNITIVE_ARCHITECTURE_V1"
+ROOT = Path(__file__).resolve().parents[2]
+
+SURFACES = (
+    "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
+    "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
+    "AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1",
+    "LIVE_INTEGRATED_BOUND_BRAIN_V1",
+    "P3_REAL_CONTEXT_V12",
+    "H100_VERIFIED_CAPABILITY_REGISTRY_V8",
+    "MYSTERY_SPARSE_SYMBOLIC_V2",
+    "MYSTERY_SEPARABLE_TRANSFORM_V1",
+    "CAPABILITY_FIRST_SCHEDULER_V1",
+)
+
+
+def _fail(reason: str, **extra: Any) -> dict[str, Any]:
+    return {
+        "schema": SCHEMA,
+        "status": "FAIL_CLOSED",
+        "pass": False,
+        "reason": reason,
+        "terminal_authority": False,
+        "capability_promotion_authority": False,
+        "acceptance_credit_delta": 0,
+        "capability_credit_delta": 0,
+        "ownership_credit_delta": 0,
+        "terminal_credit_delta": 0,
+        **extra,
+    }
+
+
+def _v12_run(problem: Mapping[str, Any], *, repo_root: str | Path, kwargs: Mapping[str, Any]) -> dict[str, Any]:
+    from canonical.runtime.universal_verified_adaptive_solver_v12 import run
+    return run(problem, repo_root=repo_root, **dict(kwargs))
+
+
+def _decision_run(
+    request: Mapping[str, Any],
+    *,
+    repo_root: str | Path,
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None,
+) -> dict[str, Any]:
+    from canonical.runtime.general_adequate_decision_controller_v1 import run
+    return run(
+        request,
+        repo_root=repo_root,
+        information_provider=information_provider,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+    )
+
+
+def _learning_module():
+    from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
+    return learning
+
+
+def _skill_plan(problem: Mapping[str, Any], skills: Sequence[Mapping[str, Any]], invalidators: Sequence[str]):
+    from canonical.runtime.verified_skill_macro_planner_v1 import plan_with_skills
+    return plan_with_skills(problem, skills, active_invalidators=invalidators)
+
+
+def _bound_run(request: Mapping[str, Any]) -> dict[str, Any]:
+    from canonical.runtime import live_integrated_brain_v1 as bound
+    return bound.run(request)
+
+
+def _raw_bound_run(request: Mapping[str, Any]) -> dict[str, Any]:
+    from canonical.runtime import live_integrated_brain_v1 as bound
+    return bound.run_raw_goal(request)
+
+
+def _p3(payload: Mapping[str, Any], repo_root: str | Path) -> dict[str, Any]:
+    from canonical.runtime.p3_real_context_v3_admission_v12 import evaluate
+    return evaluate(payload, repo_root=repo_root)
+
+
+def _rank_work(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    from canonical.runtime.capability_first_scheduler_v1 import rank_work
+    return rank_work(rows)
+
+
+def _active_learning_context(state_path: str | Path | None, *, scope_id: str, episode_id: str) -> dict[str, Any]:
+    learning = _learning_module()
+    path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
+    state = learning.load_state(path)
+    prior = []
+    for ep in state.get("episodes", {}).values():
+        if not isinstance(ep, Mapping):
+            continue
+        if str(ep.get("scope_id") or "") != scope_id:
+            continue
+        if str(ep.get("episode_id") or "") == episode_id:
+            continue
+        prior.append(deepcopy(dict(ep)))
+    prior.sort(key=lambda x: (str(x.get("episode_id") or ""), str(x.get("program_sha256") or "")))
+    skills = []
+    for rec in state.get("skills", {}).values():
+        if not isinstance(rec, Mapping) or rec.get("active") is not True:
+            continue
+        skill = rec.get("skill")
+        if isinstance(skill, Mapping):
+            skills.append(deepcopy(dict(skill)))
+    skills.sort(key=lambda x: str(x.get("candidate_sha256") or ""))
+    return {
+        "state_path": path,
+        "state": state,
+        "prior_verified_episodes": prior,
+        "active_verified_skills": skills,
+    }
+
+
+def _integrate_learning(out: Mapping[str, Any], *, state_path: str | Path | None) -> dict[str, Any]:
+    learning = _learning_module()
+    path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
+    return learning.integrate_solver_output(out, state_path=path)
+
+
+def _h100(operation: str, payload: Mapping[str, Any]) -> Any:
+    from canonical.runtime import h100_verified_capability_registry_v8 as module
+    if operation == "registry_snapshot":
+        return module.registry_snapshot()
+    if operation == "resolve":
+        return module.resolve_verified_capability(
+            payload.get("rows") or [],
+            target=str(payload.get("target") or ""),
+            input_name=payload.get("input_name"),
+            exact_nrmse=float(payload.get("exact_nrmse", 1e-8)),
+        )
+    if operation == "predict":
+        return {"status": "PREDICTION_COMPLETE", "prediction": module.predict(
+            payload.get("resolution") or {}, payload.get("point") or {}
+        )}
+    if operation == "invoke":
+        return module.invoke(str(payload.get("capability_id") or ""), payload.get("payload") or {})
+    raise ValueError("H100_OPERATION_INVALID")
+
+
+def _mystery_sparse(operation: str, payload: Mapping[str, Any]) -> Any:
+    from canonical.runtime import mysterymechanism_sparse_symbolic_adapter_v2 as module
+    if operation == "plan_experiments":
+        return module.plan_experiments(payload.get("bounds") or {})
+    if operation == "solve":
+        return module.solve(
+            payload.get("rows") or [],
+            bounds=payload.get("bounds") or {},
+            target=str(payload.get("target") or "out"),
+            fit_threshold=float(payload.get("fit_threshold", 0.05)),
+        )
+    if operation == "choose_final_experiment":
+        return module.choose_final_experiment(
+            payload.get("rows") or [],
+            bounds=payload.get("bounds") or {},
+            target=str(payload.get("target") or "out"),
+            grid_levels=int(payload.get("grid_levels", 5)),
+        )
+    if operation == "sparse_discover":
+        return module.sparse_discover(
+            payload.get("rows") or [],
+            target=str(payload.get("target") or "out"),
+            inputs=payload.get("inputs"),
+            max_depth=int(payload.get("max_depth", 2)),
+            beam_width=int(payload.get("beam_width", 24)),
+            pair_pool=int(payload.get("pair_pool", 18)),
+        )
+    raise ValueError("MYSTERY_SPARSE_OPERATION_INVALID")
+
+
+def _mystery_separable(operation: str, payload: Mapping[str, Any]) -> Any:
+    from canonical.runtime import mysterymechanism_separable_transform_v1 as module
+    if operation == "discover":
+        return module.discover(
+            payload.get("rows") or [],
+            bounds=payload.get("bounds") or {},
+            target=str(payload.get("target") or "out"),
+            validation_index=int(payload.get("validation_index", -1)),
+        )
+    if operation == "predict":
+        return {"status": "PREDICTION_COMPLETE", "prediction": module.predict(
+            payload.get("candidate") or {}, payload.get("point") or {}
+        )}
+    if operation == "serialize":
+        return {"status": "SERIALIZATION_COMPLETE", "expression": module.serialize(payload.get("candidate") or {})}
+    raise ValueError("MYSTERY_SEPARABLE_OPERATION_INVALID")
+
+
+def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
+    bound_count = None
+    bound_error = None
+    try:
+        from canonical.runtime.live_integrated_brain_v1 import load_verified_registry
+        bound_count = len(load_verified_registry())
+    except Exception as exc:
+        bound_error = type(exc).__name__ + ":" + str(exc)
+
+    learning_stats = None
+    learning_error = None
+    try:
+        learning = _learning_module()
+        path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
+        learning_stats = deepcopy(dict(learning.load_state(path).get("stats") or {}))
+    except Exception as exc:
+        learning_error = type(exc).__name__ + ":" + str(exc)
+
+    return {
+        "schema": SCHEMA,
+        "status": "UNIFIED_LIVE_BRAIN_READY",
+        "pass": bound_error is None and learning_error is None,
+        "public_entrypoint": "canonical.runtime.live_brain_runtime_v1.run",
+        "surfaces": list(SURFACES),
+        "default_raw_intent_path": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
+        "default_explicit_execution_path": "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
+        "automatic_verified_experience_integration": True,
+        "active_skill_planning_reuse": True,
+        "verified_bound_capability_count": bound_count,
+        "bound_inventory_error": bound_error,
+        "learning_state_stats": learning_stats,
+        "learning_state_error": learning_error,
+        "native_verification_boundaries_preserved": True,
+        "terminal_authority": False,
+        "capability_promotion_authority": False,
+        "terminal_credit_delta": 0,
+    }
+
+
+def run_generic(
+    problem: Mapping[str, Any],
+    *,
+    repo_root: str | Path = ROOT,
+    state_path: str | Path | None = None,
+    episode_id: str = "episode",
+    scope_id: str = "unified-live-brain",
+    active_invalidators: Sequence[str] = (),
+    learn: bool = True,
+    solver_kwargs: Mapping[str, Any] | None = None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+) -> dict[str, Any]:
+    if not isinstance(problem, Mapping):
+        return _fail("PROBLEM_NOT_OBJECT")
+    try:
+        ctx = _active_learning_context(state_path, scope_id=scope_id, episode_id=episode_id)
+        kwargs = dict(solver_kwargs or {})
+        kwargs.setdefault("episode_id", episode_id)
+        kwargs.setdefault("scope_id", scope_id)
+        kwargs.setdefault("prior_verified_episode_records", ctx["prior_verified_episodes"])
+        if proposal_provider is not None:
+            kwargs["proposal_provider"] = proposal_provider
+        if capability_expander is not None:
+            kwargs["capability_expander"] = capability_expander
+
+        skill_plan = None
+        if ctx["active_verified_skills"]:
+            skill_plan = _skill_plan(problem, ctx["active_verified_skills"], active_invalidators)
+
+        out = _v12_run(problem, repo_root=repo_root, kwargs=kwargs)
+        learning = _integrate_learning(out, state_path=ctx["state_path"]) if learn else None
+        return {
+            "schema": SCHEMA,
+            "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
+            "pass": out.get("pass") is True,
+            "solver": "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
+            "solver_output": out,
+            "learning": learning,
+            "verified_prior_episode_count_reused": len(ctx["prior_verified_episodes"]),
+            "active_verified_skill_count": len(ctx["active_verified_skills"]),
+            "skill_aware_plan": skill_plan,
+            "learning_persistence_enabled": bool(learn),
+            "terminal_authority": False,
+            "capability_promotion_authority": False,
+            "terminal_credit_delta": 0,
+        }
+    except Exception as exc:
+        return _fail("GENERIC_RUNTIME_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
+
+
+def run_decision(
+    request: Mapping[str, Any],
+    *,
+    repo_root: str | Path = ROOT,
+    state_path: str | Path | None = None,
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    learn: bool = True,
+) -> dict[str, Any]:
+    if not isinstance(request, Mapping):
+        return _fail("DECISION_REQUEST_NOT_OBJECT")
+    try:
+        out = _decision_run(
+            request,
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
+        execution = out.get("execution_result")
+        learning = None
+        if learn and isinstance(execution, Mapping):
+            learning = _integrate_learning(execution, state_path=state_path)
+        return {
+            "schema": SCHEMA,
+            "status": "UNIFIED_DECISION_EXECUTION_COMPLETE",
+            "pass": out.get("pass") is True,
+            "decision_controller": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
+            "decision_output": out,
+            "learning": learning,
+            "semantic_acceptance_complete": out.get("semantic_acceptance_complete") is True,
+            "actual_goal_satisfaction_verified": out.get("actual_goal_satisfaction_verified") is True,
+            "terminal_authority": False,
+            "capability_promotion_authority": False,
+            "terminal_credit_delta": 0,
+        }
+    except Exception as exc:
+        return _fail("DECISION_RUNTIME_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
+
+
+def run_specialized(surface: str, payload: Mapping[str, Any], *, repo_root: str | Path = ROOT) -> dict[str, Any]:
+    if not isinstance(payload, Mapping):
+        return _fail("SPECIALIZED_PAYLOAD_NOT_OBJECT")
+    name = str(surface or "").strip()
+    try:
+        if name == "P3_REAL_CONTEXT_V12":
+            raw = _p3(payload, repo_root)
+        elif name == "H100_VERIFIED_CAPABILITY_REGISTRY_V8":
+            raw = _h100(str(payload.get("operation") or ""), payload)
+        elif name == "MYSTERY_SPARSE_SYMBOLIC_V2":
+            raw = _mystery_sparse(str(payload.get("operation") or ""), payload)
+        elif name == "MYSTERY_SEPARABLE_TRANSFORM_V1":
+            raw = _mystery_separable(str(payload.get("operation") or ""), payload)
+        else:
+            return _fail("SPECIALIZED_SURFACE_UNKNOWN:" + name)
+        return {
+            "schema": SCHEMA,
+            "status": "UNIFIED_SPECIALIZED_EXECUTION_COMPLETE",
+            "pass": not (isinstance(raw, Mapping) and str(raw.get("status") or "").startswith("FAIL_CLOSED")),
+            "surface": name,
+            "raw_result": raw,
+            "terminal_authority": False,
+            "capability_promotion_authority": False,
+            "terminal_credit_delta": 0,
+        }
+    except Exception as exc:
+        return _fail("SPECIALIZED_RUNTIME_EXCEPTION:" + type(exc).__name__ + ":" + str(exc), surface=name)
+
+
+def run(
+    request: Mapping[str, Any],
+    *,
+    repo_root: str | Path = ROOT,
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+) -> dict[str, Any]:
+    """The Brain's single public live runtime router."""
+    if not isinstance(request, Mapping):
+        return _fail("REQUEST_NOT_OBJECT")
+
+    mode = str(request.get("mode") or "").strip()
+    if not mode:
+        if isinstance(request.get("goal"), str) and request.get("goal"):
+            mode = "decision"
+        elif isinstance(request.get("problem"), Mapping):
+            mode = "generic"
+        elif all(k in request for k in ("task_id", "initial_facts", "target_effects")):
+            mode = "compiled_bound"
+        else:
+            mode = "inventory"
+
+    if mode == "inventory":
+        return inventory(state_path=request.get("state_path"))
+
+    if mode == "decision":
+        nested = request.get("request")
+        if isinstance(nested, Mapping):
+            payload = nested
+        else:
+            allowed = {
+                "task_id", "goal", "decision_payload", "goal_to_decision_binding",
+                "execution_problem", "policy_execution_binding", "goal_satisfaction_binding",
+                "max_information_rounds", "episode_id", "scope_id",
+            }
+            payload = {k: deepcopy(v) for k, v in request.items() if k in allowed}
+        return run_decision(
+            payload,
+            repo_root=repo_root,
+            state_path=request.get("state_path"),
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+            learn=request.get("learn", True) is not False,
+        )
+
+    if mode == "generic":
+        problem = request.get("problem")
+        if not isinstance(problem, Mapping):
+            return _fail("GENERIC_PROBLEM_REQUIRED")
+        return run_generic(
+            problem,
+            repo_root=repo_root,
+            state_path=request.get("state_path"),
+            episode_id=str(request.get("episode_id") or problem.get("task_id") or "episode"),
+            scope_id=str(request.get("scope_id") or "unified-live-brain"),
+            active_invalidators=request.get("active_invalidators") or (),
+            learn=request.get("learn", True) is not False,
+            solver_kwargs=request.get("solver_kwargs") or {},
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
+
+    if mode == "compiled_bound":
+        nested = request.get("request")
+        payload = nested if isinstance(nested, Mapping) else request
+        raw = _bound_run(payload)
+        return {
+            "schema": SCHEMA,
+            "status": "UNIFIED_BOUND_EXECUTION_COMPLETE",
+            "pass": raw.get("pass") is True,
+            "raw_result": raw,
+            "terminal_authority": False,
+            "capability_promotion_authority": False,
+            "terminal_credit_delta": 0,
+        }
+
+    if mode == "raw_bound":
+        nested = request.get("request")
+        payload = nested if isinstance(nested, Mapping) else request
+        raw = _raw_bound_run(payload)
+        return {
+            "schema": SCHEMA,
+            "status": "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE",
+            "pass": raw.get("pass") is True,
+            "raw_result": raw,
+            "semantic_acceptance_complete": raw.get("semantic_acceptance_complete") is True,
+            "terminal_authority": False,
+            "capability_promotion_authority": False,
+            "terminal_credit_delta": 0,
+        }
+
+    if mode == "development_schedule":
+        work = request.get("work")
+        if not isinstance(work, Sequence) or isinstance(work, (str, bytes)):
+            return _fail("WORK_SEQUENCE_REQUIRED")
+        try:
+            ranked = _rank_work(work)
+            return {
+                "schema": SCHEMA,
+                "status": "UNIFIED_DEVELOPMENT_SCHEDULE_READY",
+                "pass": True,
+                "scheduler_result": ranked,
+                "scheduler_role": "DEVELOPMENT_PRIORITY_NOT_TASK_SUCCESS_AUTHORITY",
+                "execution_authority": False,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+        except Exception as exc:
+            return _fail("DEVELOPMENT_SCHEDULER_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
+
+    if mode == "specialized":
+        return run_specialized(
+            str(request.get("surface") or ""),
+            request.get("payload") or {},
+            repo_root=repo_root,
+        )
+
+    if mode == "skill_plan":
+        problem = request.get("problem")
+        if not isinstance(problem, Mapping):
+            return _fail("SKILL_PLAN_PROBLEM_REQUIRED")
+        try:
+            ctx = _active_learning_context(
+                request.get("state_path"),
+                scope_id=str(request.get("scope_id") or "unified-live-brain"),
+                episode_id=str(request.get("episode_id") or "planning"),
+            )
+            planned = _skill_plan(problem, ctx["active_verified_skills"], request.get("active_invalidators") or ())
+            return {
+                "schema": SCHEMA,
+                "status": "UNIFIED_VERIFIED_SKILL_PLAN_READY",
+                "pass": planned.get("pass") is True,
+                "planner_result": planned,
+                "active_verified_skill_count": len(ctx["active_verified_skills"]),
+                "execution_authority": False,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+        except Exception as exc:
+            return _fail("SKILL_PLANNER_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
+
+    return _fail("MODE_INVALID:" + mode)
