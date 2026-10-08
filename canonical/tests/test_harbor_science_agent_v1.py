@@ -168,6 +168,57 @@ class ScienceAgentTests(unittest.TestCase):
         self.assertNotIn("BRAIN_DELIVERABLE_01",result["resolved_requirements"])
         self.assertNotIn("BRAIN_DELIVERABLE_02",result["resolved_requirements"])
 
+    def test_planner_scope_projection_removes_control_metadata_but_preserves_semantic_text(self):
+        rows=[
+            {
+                "obligation_id":"O1",
+                "segment_sha256":"deadbeef",
+                "text":"Create the required result file.",
+                "acceptance_route_status":"SEMANTIC_RESIDUAL",
+                "acceptance_receipt_required":True,
+            }
+        ]
+        out=s._planner_scope_projection(rows)
+        self.assertEqual(out,[{"id":"O1","text":"Create the required result file."}])
+        encoded=json.dumps(out,sort_keys=True)
+        self.assertNotIn("segment_sha256",encoded)
+        self.assertNotIn("acceptance_route_status",encoded)
+        self.assertNotIn("acceptance_receipt_required",encoded)
+
+    def test_planner_prompt_does_not_duplicate_full_goal_or_verifier_metadata(self):
+        env=Env()
+        seen=[]
+        def capture(prompt, timeout_s=20):
+            seen.append(prompt)
+            return {
+                "text":json.dumps({
+                    "material_requirements":["R1"],
+                    "candidates":[{
+                        "action_id":"a",
+                        "covers":["R1"],
+                        "command":"echo work",
+                        "verify_command":"echo verify",
+                    }],
+                }),
+                "model":"synthetic-fixed-substrate",
+            }
+        goal=(
+            "Read the local inputs. "
+            "Create a result table. "
+            "Write the result to /tmp/projected_result.tsv."
+        )
+        with patch.object(s.science_planner,"plan",capture):
+            asyncio.run(s.run_science_goal(goal,env,max_cycles=1))
+        self.assertEqual(len(seen),1)
+        prompt=seen[0]
+        self.assertNotIn("Goal:",prompt)
+        self.assertNotIn("segment_sha256",prompt)
+        self.assertNotIn("acceptance_route_status",prompt)
+        self.assertNotIn("acceptance_receipt_required",prompt)
+        self.assertIn("TASK_OBLIGATIONS=",prompt)
+        self.assertIn("/tmp/projected_result.tsv",prompt)
+        self.assertLess(prompt.count("Write the result to /tmp/projected_result.tsv."),2)
+
     def test_absolute_output_directive_is_brain_mandated_without_promoting_inputs(self):
         goal=(
             "The lake instances are located in `/root/data/`. "
