@@ -34,6 +34,7 @@ REQUIRED_ENGINE_BINDINGS = {
     "ADAPTIVE_SOLVER": "live_brain_runtime_v1.run(generic)",
     "LEARNING_EPISODE": "autonomous_verified_self_improvement_v1.run_learning_episode",
     "IMPROVEMENT_CYCLE": "r3_improvement_queue_driver_v1.drain",
+    "ONE_SHOT_VERIFIED_CLOSURE": "live_brain_runtime_v1.run(one_shot_verified_closure)",
     "CAPABILITY_SCHEDULER": "capability_first_scheduler_v1.rank_work",
     "REPAIR_SYNTHESIS": "live_brain_runtime_v1.synthesize_failure_repair",
     "REPAIR_CYCLE": "live_brain_runtime_v1.execute_failure_repair_cycle",
