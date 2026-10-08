@@ -1842,6 +1842,23 @@ def run(
             capability_expander=capability_expander,
         )
 
+    if mode == "improvement_fixed_point":
+        from canonical.runtime import r3_verified_fixed_point_driver_v1 as fixed_point
+        try:
+            return fixed_point.run(
+                state_path=request.get("state_path"),
+                repo_root=repo_root,
+                max_rounds=request.get("max_rounds", 16),
+                max_actions_per_round=request.get("max_actions_per_round", 32),
+            )
+        except Exception as exc:
+            return _fail(
+                "R3_FIXED_POINT_DRIVER_EXCEPTION:"
+                + type(exc).__name__
+                + ":"
+                + str(exc)
+            )
+
     if mode == "development_schedule":
         work = request.get("work")
         if not isinstance(work, Sequence) or isinstance(work, (str, bytes)):
