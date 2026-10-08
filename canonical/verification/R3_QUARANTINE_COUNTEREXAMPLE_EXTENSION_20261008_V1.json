@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_R3_QUARANTINE_COUNTEREXAMPLE_EXTENSION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "IMPLEMENTED__FRESH_PRIVATE_EXECUTION_UNAVAILABLE",
+  "implementation_commit": "9481f11b8a8413ae61c104eda95c3eb94770768d",
+  "exact_runtime_blob": "09f347e30b8e7f5ed3dbb66c39640067edbfe807",
+  "implemented": [
+    "effectful learned-skill failure quarantines the skill",
+    "quarantine work binds the causal failure fingerprint",
+    "quarantine work binds the retry-capsule identity when available",
+    "quarantine work binds falsified capability ids and counterexamples",
+    "quarantine work binds the skill family",
+    "an independently verified admitted replacement in the same family resolves the quarantine obligation"
+  ],
+  "independent_evidence": {
+    "queue_driver_receipt": "canonical/verification/R3_QUEUE_DRIVER_PUBLIC_RUNNER_VERIFICATION_20261008_V2.json",
+    "queue_driver_blob": "b548f07b36ed5bf0a3495635046a26049df24f33",
+    "quarantine_runtime_fresh_execution": false,
+    "private_run_id": 37774372696,
+    "private_run_classification": "CARRIER_FAILURE_BEFORE_RUNNER_ASSIGNMENT__NO_CODE_VERDICT"
+  },
+  "rejected_as_incomplete": {
+    "commit": "0a204359bb02e42cba96d42b88f1c6ddfd606f36",
+    "reason": "RECORDS_SCOPE_CONTRACTION_ELIGIBILITY_BUT_DOES_NOT_BY_ITSELF_ADD_A_CANONICAL_VERIFIER_GATED_REVERIFY_QUARANTINED_SKILL_EXECUTION_PATH"
+  },
+  "authority_boundary": {
+    "effectful_counterexample_may_not_be_blindly_replayed": true,
+    "quarantined_skill_may_not_self_reinstate": true,
+    "replacement_requires_independent_verification": true
+  },
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
