@@ -1717,5 +1717,40 @@
     "u_empty": false,
     "terminal": false,
     "terminal_credit_delta": 0
+  },
+  "gdpval_necessary_preference_escape_20261008_v1": {
+    "status": "ACTIVE_STRONGER_GDPVAL_PROOF_ROUTE__OWNER_PROMPT_INDEPENDENT_IF_PREMISES_CLOSE__ZERO_CREDIT",
+    "theorem": {
+      "path": "canonical/governance/GDPVAL_NECESSARY_PREFERENCE_ESCAPE_THEOREM_20261008_V1.json",
+      "git_blob_sha": "7ddea7159898966a3784939e55b42c35d27ea273"
+    },
+    "runtime": {
+      "path": "canonical/runtime/gdpval_necessary_preference_certificate_v1.py",
+      "git_blob_sha": "9ff9ac0592ca642d56e3925a0da1006320aa7b15"
+    },
+    "tests": {
+      "path": "canonical/tests/test_gdpval_necessary_preference_certificate_v1.py",
+      "git_blob_sha": "215f714d1aa7c1ca4263c714a4419714328e13ec",
+      "local_prewrite_result": "10_OF_10_PASS",
+      "independent_replay_required": true
+    },
+    "replacement_rule": "DO_NOT_TREAT_EXACT_OWNER_PROMPT_AS_SERIAL_PREREQUISITE__FIRST_PROVE_TRUE_OWNER_RELATION_CONTAINMENT_IN_A_SOUND_PUBLIC_CONTRACT_ENVELOPE_AND_SCOPE_COMPLETE_NECESSARY_PREFERENCE_OR_TOP_DOMINANCE_OVER_ALL_220_TASKS",
+    "load_bearing_open": [
+      "OWNER_COMPATIBLE_PREFERENCE_ENVELOPE_CONTAINMENT",
+      "220_TASK_DIMENSION_COVER_AND_DOMINANCE_OR_TOP_EVIDENCE",
+      "INDEPENDENT_REPLAY"
+    ],
+    "demoted": [
+      "REPEAT_GENERAL_GDPVAL_METADATA_SEARCH",
+      "EXACT_CROWD_BT_ELO_REPRODUCTION_AS_PRIMARY_ROUTE",
+      "SELF_CERTIFIED_PUBLIC_RUBRIC_TO_OWNER_PREFERENCE_EQUIVALENCE"
+    ],
+    "exact_owner_prompt_bound": false,
+    "exact_owner_prompt_required_if_stronger_route_closes": false,
+    "real_220_necessary_preference_proved": false,
+    "gdpval_closed": false,
+    "terminal": false,
+    "terminal_credit_delta": 0,
+    "gdpval_credit_delta": 0
   }
 }
