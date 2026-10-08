@@ -68,6 +68,7 @@ def recover_exact_scope(
             "verified_skill_reuse_authorized": True,
         },
         state_path=state_path,
+        repo_root=repo_root,
     )
     ok = integrated.get("active_skill_id") == skill_id
     return {
