@@ -687,7 +687,10 @@ def _frontier_acquisition_attempt_consumed(
     """Back off only for the same provider identity and unchanged owned frontier."""
     if str(work.get("kind") or "") != FRONTIER_EXPANSION_KIND:
         return False
-    if int(work.get("last_attempt_observations", -1)) < int(work.get("observations", 0)):
+    last = work.get("last_attempt_observations")
+    if last is None:
+        return False
+    if int(last) < int(work.get("observations", 0)):
         return False
     if str(work.get("last_attempt_provider_id") or "") != provider_id:
         return False
