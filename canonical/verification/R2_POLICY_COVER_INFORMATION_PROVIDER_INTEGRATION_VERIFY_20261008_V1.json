@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_R2_POLICY_COVER_INFORMATION_PROVIDER_INTEGRATION_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_DISTINCT_SPRITE_ISOLATED_INTEGRATION_REPLAYS__6_OF_6_EACH",
+  "scope": "GENERAL_ADEQUATE_DECISION_CONTROLLER_POLICY_COVER_OBSERVATION_ACQUISITION",
+  "exact_blobs": {
+    "canonical/runtime/general_adequate_decision_controller_v1.py": "402dba6618adce3a9bdb0a5dd1d48f8b11c9ea8b",
+    "canonical/tests/test_general_adequate_decision_policy_cover_integration_v1.py": "64ab35b4d4fde23be37b2a39362268c3df09ab7a",
+    ".github/workflows/verify-general-adequate-decision-controller-v1.yml": "8b68d8aa80956422f55cc94c99c086a0a20fdea2"
+  },
+  "replays": [
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-live-integrated-v1-run-20261008",
+      "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+      "tests_run": 6,
+      "tests_passed": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+      "tests_run": 6,
+      "tests_passed": 6,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "proved": [
+    "AUTHENTICATED_POLICY_COVER_OBSERVATION_REQUESTS_CAN_USE_THE_EXISTING_INFORMATION_PROVIDER_CHANNEL_WITHOUT_GRANTING_PROVIDER_AUTHORITY",
+    "ONE_OR_MULTIPLE_POLICY_COVER_OBSERVATION_BINDINGS_CAN_BE_ACQUIRED_AND_REVERIFIED_WITHIN_ONE_CONTROLLER_RUN",
+    "PROVIDER_OUTPUT_REMAINS_CANDIDATE_EVIDENCE_AND_MUST_PASS_THE_EXISTING_CONTENT_ADDRESSED_OBSERVATION_AUTHENTICATOR",
+    "POLICY_COVER_EXECUTOR_FAIL_CLOSED_STATUS_IS_NOT_DOWNGRADED_TO_OPEN",
+    "AUTHENTICATED_POLICY_COVER_SUCCESS_EXITS_THE_P3_INFORMATION_LOOP_AND_REACHES_THE_EXISTING_EXECUTION_AND_FINAL_GOAL_ACCEPTANCE_PATH",
+    "CONTROLLER_CI_NOW_INCLUDES_THE_POLICY_COVER_INTEGRATION_SUITE"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_R2_CLOSURE",
+    "NO_PROVIDER_SEMANTIC_TRUTH_AUTHORITY",
+    "NO_PROVIDER_POLICY_ADEQUACY_AUTHORITY",
+    "NO_PROVIDER_GOAL_SATISFACTION_AUTHORITY",
+    "NO_TERMINAL_CREDIT",
+    "NO_FULL_REPOSITORY_TEST_SUITE_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
