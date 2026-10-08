@@ -264,6 +264,26 @@ def run(
         if mode not in ENGINE_DESCRIPTORS:
             raise CognitiveFabricError("MODE_INVALID:" + mode)
 
+        def _repair_pending(work: Mapping[str, Any]) -> Mapping[str, Any]:
+            payload_row = work.get("payload")
+            if not isinstance(payload_row, Mapping):
+                raise CognitiveFabricError("R3_REPAIR_WORK_PAYLOAD_INVALID")
+            return live_runtime.execute_failure_repair_cycle(
+                {
+                    "failure_fingerprint": payload_row.get("failure_fingerprint"),
+                    "retry_capsule_sha256": payload_row.get("retry_capsule_sha256"),
+                    "components": list(options.get("repair_components") or []),
+                    "solver_kwargs": deepcopy(dict(options.get("repair_solver_kwargs") or {})),
+                    "learn": True,
+                    "autonomous": True,
+                },
+                repo_root=ROOT,
+                state_path=options.get("state_path"),
+                information_provider=information_provider,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+            )
+
         if mode == "RAW_GOAL":
             wrapped = live_runtime.run(
                 {"mode": "raw_bound", "request": deepcopy(dict(payload)), **dict(options)},
@@ -498,25 +518,6 @@ def run(
                 options=invoker_options,
             )
         elif mode == "IMPROVEMENT_CYCLE":
-            def _repair_pending(work: Mapping[str, Any]) -> Mapping[str, Any]:
-                payload_row = work.get("payload")
-                if not isinstance(payload_row, Mapping):
-                    raise CognitiveFabricError("R3_REPAIR_WORK_PAYLOAD_INVALID")
-                return live_runtime.execute_failure_repair_cycle(
-                    {
-                        "failure_fingerprint": payload_row.get("failure_fingerprint"),
-                        "retry_capsule_sha256": payload_row.get("retry_capsule_sha256"),
-                        "components": list(options.get("repair_components") or []),
-                        "solver_kwargs": deepcopy(dict(options.get("repair_solver_kwargs") or {})),
-                        "learn": True,
-                    },
-                    repo_root=ROOT,
-                    state_path=options.get("state_path"),
-                    information_provider=information_provider,
-                    proposal_provider=proposal_provider,
-                    capability_expander=capability_expander,
-                )
-
             out = improvement_driver.drain(
                 state_path=options.get("state_path", self_improvement.DEFAULT_STATE_PATH),
                 repo_root=ROOT,
@@ -570,8 +571,16 @@ def run(
                 max_actions=int(options.get("self_improvement_max_actions", 4)),
             )
 
+        repair_authority_available = (
+            capability_expander is not None
+            or bool(options.get("repair_components"))
+        )
         episode_compounding_tick = None
-        if episode_verification_provider is not None:
+        if (
+            episode_verification_provider is not None
+            or success_episode_adapter_provider is not None
+            or repair_authority_available
+        ):
             episode_compounding_tick = improvement_driver.drain(
                 state_path=options.get(
                     "state_path",
@@ -581,7 +590,9 @@ def run(
                 episode_verification_provider=episode_verification_provider,
                 skill_verification_provider=None,
                 success_episode_adapter_provider=success_episode_adapter_provider,
-                failure_repair_provider=None,
+                failure_repair_provider=(
+                    _repair_pending if repair_authority_available else None
+                ),
                 max_actions=int(options.get("self_improvement_max_actions", 4)),
             )
 
