@@ -13,16 +13,15 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
-from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as direct
 from canonical.runtime.r3_direct_r2_success_adapter_v1 import (
-    RULES_PATH, VERIFICATION_KIND,
+    RULES_PATH, VERIFICATION_KIND, EXACT_LITERAL_ROUTE_ID, LITERAL_JSON_ROUTE_ID,
 )
 
 SCHEMA = "PROJECT_BRAIN_R3_SUCCESS_ADAPTER_RULE_ACQUISITION_V1"
 PROVIDER_ID = "BRAIN_NATIVE_R3_ADAPTER_RULE_ACQUISITION_V1"
 SUPPORTED_ROUTES = frozenset({
-    direct.EXACT_LITERAL_ROUTE_ID,
-    direct.LITERAL_JSON_ROUTE_ID,
+    EXACT_LITERAL_ROUTE_ID,
+    LITERAL_JSON_ROUTE_ID,
 })
 
 
