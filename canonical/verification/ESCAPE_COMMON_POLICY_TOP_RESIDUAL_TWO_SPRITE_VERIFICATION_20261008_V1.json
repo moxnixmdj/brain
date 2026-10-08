@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_COMMON_POLICY_TOP_RESIDUAL_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__10_OF_10_ON_TWO_INDEPENDENT_SPRITES__ZERO_TERMINAL_CREDIT",
+  "branch": "research/universal-residual-unsat-certificate-20261008-v1",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/escape_common_policy_top_residual_v1.py",
+      "git_blob_sha": "484568c69066b4ee369f2931b761220ae93d5ddb"
+    },
+    "tests": {
+      "path": "canonical/tests/test_escape_common_policy_top_residual_v1.py",
+      "git_blob_sha": "bd52036b7a0c1cf14c17a51943896390f9a12f54"
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_passed": 10,
+      "tests_run": 10
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_passed": 10,
+      "tests_run": 10
+    }
+  ],
+  "verified": [
+    "AUTHENTICATED_TRUE_POLICY_CONDITION_YIELDS_UNSAT_TOP_RESIDUAL_ON_DECLARED_BASIS",
+    "NONTAUTOLOGICAL_POLICY_CONDITION_RETURNS_ONE_CONSTRUCTIVE_TOP_COUNTEREXAMPLE",
+    "TAUTOLOGY_WITH_EXPLICIT_FORMULA_STRUCTURE_YIELDS_UNSAT_RESIDUAL",
+    "FORGED_ADEQUACY_BLOB_FAILS_CLOSED",
+    "INDEPENDENT_VERIFICATION_SUBJECT_MISMATCH_FAILS_CLOSED",
+    "ADEQUACY_FALSE_FAILS_CLOSED",
+    "UNKNOWN_SPEC_AUTHORITY_FIELD_FAILS_CLOSED",
+    "DUPLICATE_DECISION_BASIS_FAILS_CLOSED",
+    "OUT_OF_BASIS_POLICY_FORMULA_FAILS_CLOSED",
+    "DIMACS_AND_RESIDUAL_SHA256_ARE_DETERMINISTIC"
+  ],
+  "proved_claim": "FOR_ONE_CONTENT_ADDRESSED_INDEPENDENTLY_VERIFIED_BRAIN_OWNED_POLICY_ADEQUACY_FORMULA_OVER_THE_DECLARED_FINITE_DECISION_BASIS__THE_GATE_EXACTLY_DECIDES_TOP_ENTAILMENT_BY_COMPILING_NOT_PHI_P_TO_DETERMINISTIC_DIMACS_AND_RETURNS_ONE_COUNTEREXAMPLE_VALUATION_WHEN_TOP_DOES_NOT_ENTAIL_PHI_P",
+  "hard_boundaries": [
+    "NO_DECISION_BASIS_COMPLETENESS_PROOF",
+    "NO_DEPLOYMENT_OR_RESOURCE_BINDING_PROOF",
+    "NO_GLOBAL_ESCAPE_SCOPE_PROMOTION",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
