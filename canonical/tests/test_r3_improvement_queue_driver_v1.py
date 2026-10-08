@@ -60,6 +60,42 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         )
         repair.assert_called_once()
 
+    def test_repair_queue_uses_internal_verified_repair_cycle_without_injected_provider(self):
+        path = self.temp_state()
+        self.write_state(
+            path,
+            {
+                "repair": {
+                    "work_id": "repair",
+                    "kind": "REPAIR_FAILURE_CLASS",
+                    "priority": 30,
+                    "identity": {},
+                    "payload": {
+                        "failure_fingerprint": "f",
+                        "retry_capsule_sha256": "r",
+                    },
+                    "status": "PENDING",
+                    "observations": 1,
+                    "reopen_count": 0,
+                }
+            },
+        )
+        with mock.patch.object(
+            driver,
+            "_internal_failure_repair",
+            return_value={"pass": True, "status": "REPAIR_VERIFIED_BY_ORIGINAL_OBLIGATION_REPLAY"},
+        ) as repair:
+            out = driver.advance_once(state_path=path)
+
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["progress"], out)
+        self.assertEqual(
+            out["status"],
+            "IMPROVEMENT_ADVANCED__FAILURE_REPAIR_REPLAY_VERIFIED",
+        )
+        repair.assert_called_once()
+        self.assertEqual(repair.call_args.kwargs["state_path"], path)
+
     def test_delayed_episode_queue_retains_exact_verification_material(self):
         path = self.temp_state()
         episode = {
