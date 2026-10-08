@@ -9,6 +9,8 @@ on:
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
       - "canonical/runtime/live_brain_runtime_v1.py"
       - "canonical/tests/test_live_brain_runtime_v1.py"
+      - "canonical/runtime/unified_cognitive_fabric_v1.py"
+      - "canonical/tests/test_unified_cognitive_fabric_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
   push:
     branches:
@@ -21,6 +23,8 @@ on:
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
       - "canonical/runtime/live_brain_runtime_v1.py"
       - "canonical/tests/test_live_brain_runtime_v1.py"
+      - "canonical/runtime/unified_cognitive_fabric_v1.py"
+      - "canonical/tests/test_unified_cognitive_fabric_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
 
 jobs:
@@ -36,4 +40,5 @@ jobs:
         run: |
           python -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v
           python -m unittest canonical.tests.test_live_brain_runtime_v1 -v
-          python -m py_compile canonical/runtime/autonomous_verified_self_improvement_v1.py canonical/runtime/live_brain_runtime_v1.py
+          python -m unittest canonical.tests.test_unified_cognitive_fabric_v1 -v
+          python -m py_compile canonical/runtime/autonomous_verified_self_improvement_v1.py canonical/runtime/live_brain_runtime_v1.py canonical/runtime/unified_cognitive_fabric_v1.py
