@@ -7,7 +7,10 @@ on:
       - "canonical/runtime/r3_improvement_queue_driver_v1.py"
       - "canonical/runtime/r3_quarantine_recovery_v1.py"
       - "canonical/runtime/r3_independent_learning_verifier_v1.py"
+      - "canonical/runtime/r3_bound_success_adapter_v1.py"
+      - "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py"
       - "canonical/tests/test_r3_independent_learning_verifier_v1.py"
+      - "canonical/tests/test_r3_bound_success_readonly_learning_v1.py"
       - "canonical/runtime/executable_skill_program_v7.py"
       - "canonical/runtime/executable_skill_verification_authenticator_v1.py"
       - "canonical/tests/test_executable_skill_verification_authenticator_v1.py"
@@ -34,7 +37,10 @@ on:
       - "canonical/runtime/r3_improvement_queue_driver_v1.py"
       - "canonical/runtime/r3_quarantine_recovery_v1.py"
       - "canonical/runtime/r3_independent_learning_verifier_v1.py"
+      - "canonical/runtime/r3_bound_success_adapter_v1.py"
+      - "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py"
       - "canonical/tests/test_r3_independent_learning_verifier_v1.py"
+      - "canonical/tests/test_r3_bound_success_readonly_learning_v1.py"
       - "canonical/runtime/executable_skill_program_v7.py"
       - "canonical/runtime/executable_skill_verification_authenticator_v1.py"
       - "canonical/runtime/live_brain_runtime_v1.py"
@@ -67,6 +73,8 @@ jobs:
           canonical/runtime/r3_improvement_queue_driver_v1.py
           canonical/runtime/r3_quarantine_recovery_v1.py
           canonical/runtime/r3_independent_learning_verifier_v1.py
+          canonical/runtime/r3_bound_success_adapter_v1.py
+          canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py
           canonical/runtime/executable_skill_program_v7.py
           canonical/runtime/executable_skill_verification_authenticator_v1.py
           canonical/runtime/live_brain_runtime_v1.py
@@ -83,6 +91,8 @@ jobs:
         run: python -m unittest canonical.tests.test_r3_quarantine_recovery_v1 -v
       - name: Run R3 independent learning-verifier suite
         run: python -m unittest canonical.tests.test_r3_independent_learning_verifier_v1 -v
+      - name: Run R3 bound-success read-only learning suite
+        run: python -m unittest canonical.tests.test_r3_bound_success_readonly_learning_v1 -v
       - name: Run R3 repair replay regression suite
         run: python -m unittest canonical.tests.test_verified_repair_replay_loop_v1 -v
       - name: Run R3 live runtime regression suite
