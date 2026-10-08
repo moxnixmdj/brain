@@ -94,7 +94,7 @@ def _decorate(
         next_action.get("classification_complete") is True
     )
     out["r2_domain_goal_closed"] = (
-        next_action.get("kind") == "VERIFIED_DOMAIN_ACTION"
+        next_action.get("kind") == "COMPLETE_VERIFIED_GOAL"
     )
     return out
 
