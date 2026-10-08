@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_FINITE_SYMBOLIC_COVER_REPLAY_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "EXACT_PINNED_BYTES_REMOTE_TARGETED_REGRESSION_13_OF_13_PASS_ON_TWO_INDEPENDENT_SPRITES__ZERO_TERMINAL_CREDIT",
+  "branch": "research/symbolic-cover-exact-replay-20261008-v1",
+  "source_git_blobs": {
+    "canonical/runtime/finite_symbolic_cover_replay_v1.py": "744b6dc2c26bb15666a89e3cdc43660afb354b95",
+    "canonical/tests/test_finite_symbolic_cover_replay_v1.py": "3b7f01bf3fd9775c51504004e35e0b781adb89d1",
+    "canonical/runtime/effect_broker_receipt_resolver_v2.py": "7f4eeeb19def420d0014631b99c5e2dc3a30592e"
+  },
+  "verifications": [
+    {
+      "provider": "SPRITES",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "executed": "python /home/sprite/run_bound_cover_checks_20261008_v2.py",
+      "sha_pins_verified": 3,
+      "tests_passed": 13,
+      "tests_run": 13
+    },
+    {
+      "provider": "SPRITES",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "executed": "python /home/sprite/run_bound_cover_checks_independent_20261008.py",
+      "sha_pins_verified": 3,
+      "tests_passed": 13,
+      "tests_run": 13
+    }
+  ],
+  "test_details": {
+    "random_seed": 20261008,
+    "differential_generated_boolean_models": 160,
+    "independent_reference_truth_table_implementation": true,
+    "positive_replay_and_counterexample_witness_tests": true,
+    "forged_content_hash_rejected": true,
+    "cross_scope_promotion_rejected": true,
+    "empty_scope_credit_rejected": true,
+    "overlapping_unsound_admission_rejected": true
+  },
+  "proved_claim": "FOR_THE_EXACT_PINNED_FINITE_BOOLEAN_DECLARATION__EXHAUSTIVE_ENUMERATION_CORRECTLY_CHECKS_EVERY_DECLARED_IN_SCOPE_VALUATION_AND_EVERY_ADMITTED_DECLARED_BOOLEAN_ROUTE_PROGRAM_AGAINST_THE_DECLARED_EXPECTED_BOOLEAN_OUTPUT",
+  "unproved": [
+    "THE_DECLARED_BOOLEAN_VOCABULARY_IS_COMPLETE_FOR_TARGET_OPUS55_CONTEXTS",
+    "THE_DECLARED_ACCEPTANCE_PREDICATE_MATCHES_REAL_TARGET_QUALITY_OR_SEMANTICS",
+    "DEPLOYED_BRAIN_POLICY_EXECUTES_THE_DECLARED_BOOLEAN_ROUTE_PROGRAM",
+    "BRAIN_OWNS_AND_PERMANENTLY_PERSISTS_ALL_REQUIRED_CAPABILITIES",
+    "BENCHMARK_OR_FAMILY_ACCEPTANCE_HAS_BEEN_MET",
+    "GLOBAL_U_EMPTY_OR_ABC_OR_D_OR_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "boundary": "DO_NOT_PROMOTE_SYMBOLIC_MODEL_COVER_TO_UNIVERSAL_TARGET_NONINFERIORITY_WITHOUT_INDEPENDENT_SCOPE_FIDELITY_EXECUTABLE_ROUTE_AND_TARGET_ADEQUACY_BINDINGS"
+}
