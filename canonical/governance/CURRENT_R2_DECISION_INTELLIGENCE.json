@@ -14,8 +14,8 @@
     "authority_kernel_git_blob_sha": "402dba6618adce3a9bdb0a5dd1d48f8b11c9ea8b"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V4.json",
-    "git_blob_sha": "7fff8fb0023842c9207a31e36d2150d1cdc1d2e3"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json",
+    "git_blob_sha": "e13a3440b0ce581a574b584faecfd70ef1a4167d"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
@@ -38,7 +38,9 @@
     "policy_cover_executor_fail_closed_preserved": true,
     "condition_bound_authenticated_adequacy_auto_reused": true,
     "condition_registry_never_self_certifies_membership": true,
-    "adequacy_evidence_symlink_escape_rejected": true
+    "adequacy_evidence_symlink_escape_rejected": true,
+    "current_mission_pointer_content_addressed": true,
+    "option_preserving_mission_alignment": true
   },
   "judgment_model_policy": {
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
