@@ -1,0 +1,41 @@
+name: R3 verified skill memory
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+      - "canonical/runtime/r3_verified_skill_memory_v1.py"
+      - "canonical/state/R3_VERIFIED_SKILL_MEMORY_V1.json"
+      - "canonical/tests/test_r3_verified_skill_memory_v1.py"
+      - ".github/workflows/r3-verified-skill-memory-v1.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+      - "canonical/runtime/r3_verified_skill_memory_v1.py"
+      - "canonical/state/R3_VERIFIED_SKILL_MEMORY_V1.json"
+      - "canonical/tests/test_r3_verified_skill_memory_v1.py"
+      - ".github/workflows/r3-verified-skill-memory-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile verified skill memory surface
+        run: >-
+          python -m py_compile
+          canonical/runtime/r3_verified_skill_memory_v1.py
+          canonical/runtime/autonomous_verified_self_improvement_v1.py
+          canonical/tests/test_r3_verified_skill_memory_v1.py
+      - name: Run verified skill memory regression suite
+        run: python -m unittest canonical.tests.test_r3_verified_skill_memory_v1 -v
+      - name: Run R3 queue-kind totality regression
+        run: python -m unittest canonical.tests.test_r3_queue_kind_totality_v1 -v
