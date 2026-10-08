@@ -131,17 +131,122 @@ def authenticate_and_verify(
             candidate=candidate,
             verification_receipt=legacy,
         )
+        receipt_ref = {"path": rr["path"], "git_blob_sha": rr["git_blob_sha"]}
+        verification_ref = {"path": vr["path"], "git_blob_sha": vr["git_blob_sha"]}
+        verified = {
+            **verified,
+            "verification_binding": {
+                "receipt": receipt_ref,
+                "verification": verification_ref,
+            },
+            "independent_verifier_id": verifier_id.strip(),
+        }
         return {
             "schema": SCHEMA,
             "status": "PASS__AUTHENTICATED_VERIFIED_EXECUTABLE_SKILL",
             "pass": True,
             "verified_skill": verified,
-            "receipt": {"path": rr["path"], "git_blob_sha": rr["git_blob_sha"]},
-            "verification": {"path": vr["path"], "git_blob_sha": vr["git_blob_sha"]},
+            "receipt": receipt_ref,
+            "verification": verification_ref,
             "independent_verifier_id": verifier_id.strip(),
             "terminal_authority": False,
         }
     except (Exception, ReceiptResolutionError, ExecutableSkillProgramError) as exc:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": type(exc).__name__ + ":" + str(exc),
+            "terminal_authority": False,
+        }
+
+
+def _candidate_from_verified_record(record: Mapping[str, Any]) -> dict[str, Any]:
+    if not isinstance(record, Mapping):
+        raise SkillVerificationError("VERIFIED_SKILL_RECORD_INVALID")
+    candidate = dict(record)
+    for key in (
+        "scope_relation",
+        "scope_predicate",
+        "verification_receipt",
+        "verification_binding",
+        "independent_verifier_id",
+        "verified_skill",
+        "reuse_authorized",
+        "candidate_only",
+        "acceptance_credit_delta",
+        "family_credit_delta",
+        "capability_credit_delta",
+        "ownership_credit_delta",
+        "promotion_authority",
+        "execution_authority",
+    ):
+        candidate.pop(key, None)
+    candidate["status"] = "EXECUTABLE_SKILL_CANDIDATE_ONLY"
+    candidate["verified_skill"] = False
+    candidate["reuse_authorized"] = False
+    candidate["candidate_only"] = True
+    return candidate
+
+
+def reauthenticate_record(
+    record: Mapping[str, Any],
+    *,
+    repo_root: str | Path,
+) -> dict[str, Any]:
+    """Re-authenticate a durable verified skill against its exact receipt pair."""
+    try:
+        if not isinstance(record, Mapping):
+            raise SkillVerificationError("VERIFIED_SKILL_RECORD_INVALID")
+        if record.get("verified_skill") is not True or record.get("reuse_authorized") is not True:
+            raise SkillVerificationError("VERIFIED_SKILL_RECORD_NOT_REUSABLE")
+        binding = record.get("verification_binding")
+        if not isinstance(binding, Mapping):
+            raise SkillVerificationError("VERIFIED_SKILL_RECORD_BINDING_MISSING")
+        candidate = _candidate_from_verified_record(record)
+        verdict = authenticate_and_verify(
+            candidate,
+            binding,
+            repo_root=repo_root,
+        )
+        if verdict.get("pass") is not True:
+            raise SkillVerificationError(
+                "VERIFIED_SKILL_RECORD_REAUTHENTICATION_FAILED:"
+                + str(verdict.get("reason") or "UNKNOWN")
+            )
+        authenticated = verdict.get("verified_skill")
+        if not isinstance(authenticated, Mapping):
+            raise SkillVerificationError("VERIFIED_SKILL_RECORD_AUTHENTICATED_VALUE_MISSING")
+
+        authority_fields = (
+            "candidate_sha256",
+            "source_episode_ids",
+            "source_episode_receipts",
+            "source_scopes",
+            "steps",
+            "preconditions",
+            "postconditions",
+            "invalidators",
+            "scope_relation",
+            "scope_predicate",
+            "verification_receipt",
+            "verified_skill",
+            "reuse_authorized",
+            "candidate_only",
+        )
+        for key in authority_fields:
+            if record.get(key) != authenticated.get(key):
+                raise SkillVerificationError(
+                    "VERIFIED_SKILL_RECORD_AUTHORITY_FIELD_MISMATCH:" + key
+                )
+        return {
+            "schema": SCHEMA,
+            "status": "PASS__VERIFIED_SKILL_RECORD_REAUTHENTICATED",
+            "pass": True,
+            "verified_skill": dict(authenticated),
+            "terminal_authority": False,
+        }
+    except Exception as exc:
         return {
             "schema": SCHEMA,
             "status": "FAIL_CLOSED",
