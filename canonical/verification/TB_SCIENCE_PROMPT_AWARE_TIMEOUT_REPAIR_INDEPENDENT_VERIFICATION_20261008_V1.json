@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PROMPT_AWARE_TIMEOUT_REPAIR_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_34_OF_34_ON_TWO_SPRITES__EXACT_PLANNER_AND_CONTROLLER_BYTES__ZERO_BENCHMARK_REPLAY__ZERO_CREDIT",
+  "subject": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_git_blob_sha": "5ab07ef638e766ec085ef4f3c2e2f423bcbc09e8",
+    "planner_tests_path": "canonical/tests/test_harbor_science_planner_v1.py",
+    "planner_tests_git_blob_sha": "4e307109555ca5129cf55849ea71a5e4a2d85376",
+    "agent_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "agent_git_blob_sha": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "agent_tests_path": "canonical/tests/test_harbor_science_agent_v1.py",
+    "agent_tests_git_blob_sha": "aab433ff0d0ed576c7f8d04b500c5c4cead473cc",
+    "closure_path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V5.json",
+    "closure_git_blob_sha": "f7ac91bc5a75faf382ba3dc3b12080d99be27447"
+  },
+  "causal_counterexample": {
+    "slot": "terminal-bench-science/clinical-metadata-recovery::trial-0",
+    "workflow_run_id": 37729003096,
+    "exception": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "old_timeout_s": 300,
+    "observed_prefill_tokens": 4714,
+    "observed_prefill_fraction": 0.66,
+    "observed_prefill_tps": 19.64,
+    "inferred_total_prompt_tokens_approx": 7142,
+    "inferred_prefill_time_s_approx": 364,
+    "verifier_result_present": false,
+    "scientific_task_quality_evaluated": false
+  },
+  "repaired_policy": {
+    "minimum_timeout_s": 300,
+    "maximum_timeout_s": 900,
+    "prompt_bytes_per_token_estimate": 4,
+    "prefill_tokens_per_second_floor": 15,
+    "generation_and_transport_margin_s": 180,
+    "rank12_scale_expected_timeout_floor_s": 656,
+    "rule": "EFFECTIVE_TIMEOUT=max(300,requested,ceil(estimated_prompt_tokens/15)+180), capped at 900"
+  },
+  "verification": [
+    {
+      "provider": "SPRITES",
+      "name": "brain-root3-current-byte-replay-20261007-v1",
+      "id": "sprite-5c9d5b63-1140-41a5-b9f6f29db9e",
+      "workspace": "/home/sprite/tb_science_output_directive_repair_v1",
+      "tests_passed": 34,
+      "tests_total": 34
+    },
+    {
+      "provider": "SPRITES",
+      "name": "h100-real-image-v1",
+      "id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+      "workspace": "/home/sprite/tb_science_output_directive_repair_v1_independent",
+      "tests_passed": 34,
+      "tests_total": 34
+    }
+  ],
+  "checked_properties": [
+    "SMALL_PROMPTS_KEEP_300S_FLOOR",
+    "RANK12_SCALE_PROMPT_GETS_TIMEOUT_ABOVE_OBSERVED_PREFILL_TIME",
+    "TIMEOUT_POLICY_CAPS_AT_900S",
+    "PLAN_USES_EFFECTIVE_TIMEOUT_NOT_RAW_REQUEST",
+    "ALL_PREEXISTING_PLANNER_AND_CONTROLLER_TESTS_STILL_PASS"
+  ],
+  "benchmark_task_replays": 0,
+  "execution_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
