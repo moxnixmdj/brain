@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GENERAL_ADEQUATE_DECISION_FIXED_POINT_ACTIVATION_V2",
+  "date": "2026-10-08",
+  "status": "LIVE__UNRESOLVED_R2_EDGES_ARE_NOW_ADAPTIVE_ACQUISITION_STATES__AUTHORITY_REMAINS_V1_FAIL_CLOSED",
+  "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE_INCOMPLETE",
+  "objective": "TURN_EVERY_CURRENT_R2_OPEN_EDGE_INTO_A_BOUNDED_PROGRESS_CHECKED_ACQUISITION_AND_REVERIFICATION_LOOP_WITHOUT_ALLOWING_PROVIDER_SELF_CERTIFICATION",
+  "runtime": {
+    "live_front_door": "canonical/runtime/live_brain_runtime_v1.py",
+    "fixed_point_controller": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py",
+    "proposal_carrier": "existing proposal_provider callback shared with the verified adaptive solver"
+  },
+  "control_law": [
+    "RUN_THE_EXISTING_VERIFIED_R2_V1_CONTROLLER",
+    "IF_V1_CLOSES_RETURN_ONLY_THAT_VERIFIED_SUCCESS",
+    "IF_V1_IS_OPEN_EMIT_A_TYPED_EXACT_UNRESOLVED_EDGE_PACKET",
+    "ALLOW_GENERAL_COGNITION_TO_PROPOSE_ONLY_A_REQUEST_PATCH",
+    "FORBID_TASK_ID_AND_GOAL_MUTATION",
+    "REJECT_UNMODELED_PATCH_FIELDS",
+    "REQUIRE_STRICT_REQUEST_STATE_PROGRESS_AND_REJECT_CYCLES",
+    "RERUN_EVERY_PROPOSED_REPAIR_THROUGH_V1_AUTHORITY_GATES",
+    "BOUND_BOTH_PROVIDER_CANDIDATES_AND_FIXED_POINT_STEPS",
+    "PRESERVE_THE_EXACT_V1_OPEN_STATE_IF_NO_VERIFIED_CLOSURE_EXISTS"
+  ],
+  "authority_boundaries": {
+    "edge_resolver_is_semantic_truth_authority": false,
+    "edge_resolver_is_execution_authority": false,
+    "edge_resolver_is_acceptance_authority": false,
+    "edge_resolver_is_terminal_authority": false,
+    "v1_goal_binding_gates_preserved": true,
+    "v1_policy_adequacy_gates_preserved": true,
+    "v1_execution_binding_gates_preserved": true,
+    "v1_goal_satisfaction_gates_preserved": true
+  },
+  "root_reduction": {
+    "manual_dead_end_on_unknown_r2_edge": false,
+    "unresolved_edge_to_acquisition_loop_missing": false,
+    "provider_self_certification_possible_by_v2": false,
+    "immutable_goal_drift_possible_by_v2_patch": false,
+    "unbounded_resolver_spin_possible": false,
+    "remaining_fundamental_residuals": [
+      "SOUND_GOAL_TO_DECISION_SEMANTIC_BINDING_COVERAGE",
+      "AUTHENTICATED_POLICY_ADEQUACY_COVERAGE",
+      "SOURCE_ALIGNED_TRUTH_PROOF_COVERAGE",
+      "POLICY_TO_EXECUTION_BINDING_COVERAGE",
+      "INDEPENDENT_ACTUAL_GOAL_SATISFACTION_VERIFIER_COVERAGE",
+      "GLOBAL_PROOF_THAT_EVERY_USEFUL_OPEN_WORLD_CONTEXT_HAS_A_SOUND_TERMINAL_OR_STRICTLY_PROGRESSING_EDGE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_OPEN_WORLD_SEMANTICS_ARE_ALREADY_SOLVED",
+    "NO_CLAIM_EVERY_PROVIDER_PROPOSAL_IS_USEFUL",
+    "NO_CLAIM_V2_CAN_MINT_SEMANTIC_OR_ACCEPTANCE_AUTHORITY",
+    "NO_CLAIM_GLOBAL_R2_OPEN_WORLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

@@ -3,7 +3,7 @@
 Subordinate execution/compatibility runtime behind canonical.runtime.unified_cognitive_fabric_v1.run.
 
 Default routes:
-- raw intent -> R2 general adequate-decision controller (P3 V12 + Universal Solver V12);
+- raw intent -> R2 adaptive fixed-point adequate-decision controller V2 over the verified V1 authority kernel;
 - explicit capability problem -> Universal Verified Adaptive Solver V12;
 - verified execution experience -> R3 autonomous verified self-improvement state;
 - compiled verified-bound tasks -> existing live integrated bound runtime;
@@ -25,7 +25,7 @@ SCHEMA = "PROJECT_BRAIN_UNIFIED_LIVE_COGNITIVE_ARCHITECTURE_V1"
 ROOT = Path(__file__).resolve().parents[2]
 
 SURFACES = (
-    "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
+    "GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2",
     "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
     "AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1",
     "LIVE_INTEGRATED_BOUND_BRAIN_V1",
@@ -69,7 +69,7 @@ def _decision_run(
     capability_expander: Callable[..., Mapping[str, Any] | None] | None,
     execution_provider: Callable[..., Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    from canonical.runtime.general_adequate_decision_controller_v1 import run
+    from canonical.runtime.general_adequate_decision_fixed_point_v2 import run
     return run(
         request,
         repo_root=repo_root,
@@ -978,7 +978,7 @@ def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
         "subruntime_entrypoint": "canonical.runtime.live_brain_runtime_v1.run",
         "subruntime_public_authority": False,
         "surfaces": list(SURFACES),
-        "default_raw_intent_path": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
+        "default_raw_intent_path": "GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2",
         "default_explicit_execution_path": "R3_REUSE_FIRST_OVER_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
         "default_learning_scope": "unified-live-brain",
         "automatic_verified_experience_integration": True,
@@ -1203,7 +1203,7 @@ def run_decision(
             "schema": SCHEMA,
             "status": "UNIFIED_DECISION_EXECUTION_COMPLETE",
             "pass": out.get("pass") is True,
-            "decision_controller": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
+            "decision_controller": "GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2",
             "decision_output": out,
             "learning": learning,
             "reuse_first": (
@@ -1335,7 +1335,7 @@ def run(
         else:
             allowed = {
                 "task_id", "goal", "decision_payload", "goal_to_decision_binding",
-                "execution_problem", "policy_execution_binding", "goal_satisfaction_binding",
+                "partial_goal_to_decision_binding", "execution_problem", "policy_execution_binding", "goal_satisfaction_binding",
                 "max_information_rounds", "episode_id", "scope_id",
             }
             payload = {k: deepcopy(v) for k, v in request.items() if k in allowed}
