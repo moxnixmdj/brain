@@ -56,7 +56,7 @@ def main() -> int:
         return 2
 
     title = str(selected["spec"]["title"])
-    safe = re.sub(r"[^A-Za-z0-9 _().-]+", "", title).strip() or "Brand Data Gathering"
+    safe = re.sub(r"[^A-Za-z0-9 _().-]+", "", title).strip(" .") or "Brand Data Gathering"
     output = ws / (safe + ".pdf")
     result = render(selected["spec"], output)
     print(json.dumps({
