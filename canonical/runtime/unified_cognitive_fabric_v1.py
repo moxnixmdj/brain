@@ -135,14 +135,15 @@ def catalog() -> dict[str, Any]:
         "brain_owned_transitive_files": [
             row["path"] for row in closure["brain_owned_transitive_files"]
         ],
-        "current_authority_runtime_census": authority_census,
-        "current_authority_runtime_complete": authority_census["pass"],
-        "current_authority_runtime_missing_count": authority_census[
-            "authority_runtime_missing_count"
+        "authority_pointer_runtime_reachability_census": authority_census,
+        "authority_pointer_runtime_reference_reachability_complete": authority_census["pass"],
+        "authority_pointer_runtime_reference_missing_count": authority_census[
+            "authority_pointer_reference_missing_count"
         ],
-        "current_authority_runtime_missing_paths": authority_census[
-            "authority_runtime_missing_paths"
+        "authority_pointer_runtime_reference_missing_paths": authority_census[
+            "authority_pointer_reference_missing_paths"
         ],
+        "current_live_ownership_set_completeness_proved": False,
         "known_unified_fabric_residuals": list(KNOWN_RESIDUALS),
         "single_front_door": True,
         "all_historical_brain_capabilities_unified": False,

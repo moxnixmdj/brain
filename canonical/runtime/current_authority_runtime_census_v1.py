@@ -1,12 +1,14 @@
-"""Current-authority runtime reachability census for Unified Cognitive Fabric.
+"""Declared authority-pointer runtime reachability census for Unified Cognitive Fabric.
 
-R1 scope is the set of runtime modules explicitly named by the current terminal
-authority pointer, not every superseded historical file. This module compares
-that finite authority-declared set against the Brain-owned transitive Python
-closure of the unified cognitive fabric root.
+CURRENT_TERMINAL_AUTHORITY.json intentionally retains some superseded nested
+references for provenance. Therefore this module does NOT equate every runtime
+path appearing anywhere in that document with a currently live owned capability.
 
-It grants no capability or terminal credit. A missing authority runtime remains
-an explicit R1 integration residual.
+It answers the narrower mechanical question: which runtime paths are referenced
+anywhere in the current authority pointer, and which of those paths are reachable
+from the unified cognitive fabric's Brain-owned transitive Python closure?
+
+This is useful conservative evidence, not a complete ownership census.
 """
 from __future__ import annotations
 
@@ -65,22 +67,27 @@ def run(
     return {
         "schema": SCHEMA,
         "status": (
-            "PASS__ALL_CURRENT_AUTHORITY_RUNTIMES_REACHABLE_FROM_FABRIC"
+            "PASS__ALL_AUTHORITY_POINTER_RUNTIME_REFERENCES_REACHABLE_FROM_FABRIC"
             if not missing
-            else "OPEN__CURRENT_AUTHORITY_RUNTIME_INTEGRATION_RESIDUALS"
+            else "OPEN__AUTHORITY_POINTER_RUNTIME_REFERENCE_REACHABILITY_GAPS"
         ),
         "pass": not missing,
         "authority_pointer_path": authority_path,
         "fabric_root": fabric_root,
-        "authority_declared_runtime_count": len(declared),
-        "authority_declared_runtime_paths": declared,
+        "authority_pointer_runtime_reference_count": len(declared),
+        "authority_pointer_runtime_reference_paths": declared,
         "fabric_transitive_file_count": closure["brain_owned_file_count"],
-        "authority_runtime_reachable_count": len(reachable),
-        "authority_runtime_reachable_paths": reachable,
-        "authority_runtime_missing_count": len(missing),
-        "authority_runtime_missing_paths": missing,
+        "authority_pointer_reference_reachable_count": len(reachable),
+        "authority_pointer_reference_reachable_paths": reachable,
+        "authority_pointer_reference_missing_count": len(missing),
+        "authority_pointer_reference_missing_paths": missing,
+        "current_live_ownership_set_completeness_proved": False,
         "historical_superseded_runtime_completeness_proved": False,
-        "ownership_scope": "CURRENT_AUTHORITY_DECLARED_RUNTIME_PATHS",
+        "scope": "ALL_RUNTIME_PATH_REFERENCES_ANYWHERE_IN_CURRENT_TERMINAL_AUTHORITY_POINTER",
+        "warning": (
+            "POINTER_RETAINED_SUPERSEDED_REFERENCES_MAY_APPEAR_MISSING_WITHOUT_"
+            "IMPLYING_A_LIVE_R1_CAPABILITY_GAP"
+        ),
         "terminal_authority": False,
         "capability_credit_delta": 0,
         "ownership_credit_delta": 0,
