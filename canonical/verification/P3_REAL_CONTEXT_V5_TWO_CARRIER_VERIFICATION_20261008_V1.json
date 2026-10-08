@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_P3_REAL_CONTEXT_V5_TWO_CARRIER_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_CARRIERS__10_OF_10_EACH__THREE_FAST_PATHS_PLUS_FAIL_CLOSED_FALLBACK__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/p3_real_context_v3_admission_v5.py",
+      "git_blob_sha": "e19249d57ac5df8633e6570318b45d4d589a607a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p3_real_context_v3_admission_v5.py",
+      "git_blob_sha": "94c7ebf7d8455824449ca36c5b4af29e00dffbe4"
+    },
+    "structural_cell": {
+      "path": "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py",
+      "git_blob_sha": "66ce574da0cc8098d7aba8bb26bd18e36fe9784e"
+    },
+    "weighted_cell": {
+      "path": "canonical/runtime/p3_explicit_weighted_salience_cell_v1.py",
+      "git_blob_sha": "d06eb50d5247a3ed7bfcc0f10df2c223230bf3b7"
+    },
+    "required_realization_v2": {
+      "path": "canonical/runtime/p3_required_claim_grounded_realization_cell_v2.py",
+      "git_blob_sha": "f930885eb443d0583c87bd06eb71c5d0d1004138"
+    },
+    "semantic_fallback_v2": {
+      "path": "canonical/runtime/p3_real_context_v3_admission_v2.py",
+      "git_blob_sha": "c4728d43a903acb62c6f8c5b0877d99ab12cd844"
+    }
+  },
+  "primary_execution": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "result": {
+      "pass": true,
+      "passed": 10,
+      "total": 10
+    }
+  },
+  "independent_execution": {
+    "provider": "SPRITES",
+    "sprite": "h100-real-image-v1",
+    "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+    "result": {
+      "pass": true,
+      "passed": 10,
+      "total": 10
+    }
+  },
+  "route_order": [
+    "MECHANICALLY_CLOSED_COMMON_POLICY_CELL_V1",
+    "EXPLICIT_WEIGHTED_SALIENCE_CELL_V1",
+    "REQUIRED_SUPPORT_V4_REALIZATION_CELL_V2",
+    "V2_SEMANTIC_FALLBACK"
+  ],
+  "checks": [
+    "STRUCTURAL_PATH_PRECEDENCE",
+    "WEIGHTED_PATH_PRECEDENCE",
+    "NUMERIC_REQUIRED_REALIZATION",
+    "SOURCE_DECLARED_REQUIRED_REALIZATION",
+    "EXACT_ATTESTATION_REQUIRED_REALIZATION",
+    "UNSUPPORTED_REQUIRED_FALLBACK_CLOSED",
+    "NUMERIC_CONFLICT_FALLBACK_CLOSED",
+    "OPTIONAL_WITHOUT_WEIGHTS_FALLBACK_CLOSED",
+    "FORGED_SEMANTIC_CERTIFICATES_DO_NOT_AUTHORIZE",
+    "DB_U_AND_TERMINAL_AUTHORITY_ALWAYS_ZERO"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_P3_SCOPE_COMPLETENESS",
+    "NO_TOP_LAW_PROMOTION_FOR_REQUIRED_REALIZATION_FAST_PATH",
+    "NO_SOURCE_AUTHORIZATION",
+    "NO_DB_ADMISSION_U_SUBTRACTION_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

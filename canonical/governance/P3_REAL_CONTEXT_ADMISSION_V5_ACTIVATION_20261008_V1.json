@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_P3_REAL_CONTEXT_ADMISSION_V5_ACTIVATION_V1",
+  "date": "2026-10-08",
+  "status": "VERIFIED_CURRENT_P3_REAL_CONTEXT_FRONT_DOOR__STRUCTURAL_WEIGHTED_REQUIRED_REALIZATION_THEN_FAIL_CLOSED_FALLBACK__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/p3_real_context_v3_admission_v5.py",
+    "git_blob_sha": "e19249d57ac5df8633e6570318b45d4d589a607a"
+  },
+  "verification": {
+    "path": "canonical/verification/P3_REAL_CONTEXT_V5_TWO_CARRIER_VERIFICATION_20261008_V1.json"
+  },
+  "scheduler_effect": "USE_V5_AS_CURRENT_P3_REAL_CONTEXT_ADMISSION_FRONT_DOOR",
+  "reachable_positive_regions": [
+    "STRUCTURAL_ALL_REQUIRED_BOUNDED_FACT_CELL",
+    "EXPLICIT_WEIGHT_OPTIONAL_SELECTION_CELL",
+    "REQUIRED_ONLY_SUPPORT_V4_GROUNDED_REALIZATION_CELL"
+  ],
+  "next_root": "R3_MEMBERSHIP_TEMPORAL_CAUSAL_OR_OTHER_RELATIONAL_CLAIM_SUPPORT_AND_REMAINING_UNDECLARED_SEMANTICS",
+  "hard_nonclaims": [
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
