@@ -27,6 +27,10 @@ SCHEMA = "PROJECT_BRAIN_FINITE_SYMBOLIC_COVER_REPLAY_V1"
 SPEC_SCHEMA = "PROJECT_BRAIN_FINITE_SYMBOLIC_COVER_SPEC_V1"
 MAX_VARIABLES = 15
 MAX_ROUTES = 64
+MAX_FORMULA_UNITS = 4096
+MAX_EVALUATION_WORK_UNITS = 4_000_000
+TOP_LEVEL_FIELDS = frozenset({"schema", "scope_id", "variables", "scope_cnf", "expected_output_cnf", "routes"})
+ROUTE_FIELDS = frozenset({"route_id", "admission_cnf", "program_output_cnf"})
 _IDENTIFIER = re.compile(r"[A-Za-z][A-Za-z0-9_]{0,31}\Z")
 
 
@@ -46,15 +50,22 @@ def _fail(reason: str, **more: Any) -> dict[str, Any]:
     }
 
 
-def _check_cnf(value: Any, variables: set[str]) -> tuple[tuple[str, ...], ...]:
+def _check_cnf(value: Any, variables: set[str], budget: list[int]) -> tuple[tuple[str, ...], ...]:
     if not isinstance(value, list):
         raise ValueError("CNF_MUST_BE_ARRAY")
     clauses = []
+    budget[0] += 1  # Count each formula, including empty TRUE.
     for clause in value:
+        budget[0] += 1
+        if budget[0] > MAX_FORMULA_UNITS:
+            raise ValueError("CNF_BUDGET_EXCEEDED")
         if not isinstance(clause, list):
             raise ValueError("CNF_CLAUSE_MUST_BE_ARRAY")
         literals = []
         for lit in clause:
+            budget[0] += 1
+            if budget[0] > MAX_FORMULA_UNITS:
+                raise ValueError("CNF_BUDGET_EXCEEDED")
             if not isinstance(lit, str) or not lit or (
                 lit[1:] if lit.startswith("!") else lit
             ) not in variables:
@@ -97,6 +108,8 @@ def verify(
             "opus55_equivalent", "selected_cover_complete_authorized",
         )):
             return _fail("GLOBAL_AUTHORITY_CLAIM_FORBIDDEN")
+        if set(spec) != TOP_LEVEL_FIELDS:
+            return _fail("SPEC_FIELDS_INVALID")
         variables = spec.get("variables")
         if (
             not isinstance(variables, list)
@@ -108,8 +121,9 @@ def verify(
         ):
             return _fail("VARIABLES_INVALID_OR_TOO_LARGE")
         keys = set(variables)
-        in_scope = _check_cnf(spec.get("scope_cnf"), keys)
-        expected = _check_cnf(spec.get("expected_output_cnf"), keys)
+        budget = [0]
+        in_scope = _check_cnf(spec.get("scope_cnf"), keys, budget)
+        expected = _check_cnf(spec.get("expected_output_cnf"), keys, budget)
         routes = spec.get("routes")
         if not isinstance(routes, list) or not 1 <= len(routes) <= MAX_ROUTES:
             return _fail("ROUTES_INVALID_OR_TOO_MANY")
@@ -119,15 +133,24 @@ def verify(
         for row in routes:
             if not isinstance(row, dict):
                 return _fail("ROUTE_NOT_OBJECT")
+            if set(row) != ROUTE_FIELDS:
+                return _fail("ROUTE_FIELDS_INVALID")
             rid = row.get("route_id")
             if not isinstance(rid, str) or not rid or rid in ids:
                 return _fail("ROUTE_ID_INVALID")
             ids.add(rid)
             compiled.append((
                 rid,
-                _check_cnf(row.get("admission_cnf"), keys),
-                _check_cnf(row.get("program_output_cnf"), keys),
+                _check_cnf(row.get("admission_cnf"), keys, budget),
+                _check_cnf(row.get("program_output_cnf"), keys, budget),
             ))
+        if budget[0] > MAX_FORMULA_UNITS:
+            return _fail("CNF_BUDGET_EXCEEDED")
+        estimated_units = (1 << len(variables)) * budget[0]
+        if estimated_units > MAX_EVALUATION_WORK_UNITS:
+            return _fail("EVALUATION_WORK_BUDGET_EXCEEDED",
+                         estimated_work_units=estimated_units,
+                         max_work_units=MAX_EVALUATION_WORK_UNITS)
         checked = 0
         for bits in itertools.product((False, True), repeat=len(variables)):
             valuation = dict(zip(variables, bits))
@@ -173,6 +196,7 @@ def verify(
             "scoped_valuations_checked": checked,
             "total_valuations": 1 << len(variables),
             "route_count": len(compiled),
+            "bounded_evaluation_work_units": estimated_units,
             "declared_symbolic_scope_covered": True,
             "declared_program_and_acceptance_formula_replayed": True,
             "production_route_implementation_verified": False,
