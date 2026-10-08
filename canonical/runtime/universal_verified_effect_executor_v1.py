@@ -241,6 +241,7 @@ def execute(
                     proposal,
                     sort_keys=True,
                     separators=(",", ":"),
+                    ensure_ascii=False,
                 ).encode("utf-8")
             ).hexdigest(),
             "pack_git_blob_sha": result.get("pack_git_blob_sha"),
