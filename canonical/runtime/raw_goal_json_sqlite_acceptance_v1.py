@@ -29,7 +29,8 @@ GRAMMAR=re.compile(
     r"Read (?P<input>canonical/[A-Za-z0-9_./-]+\.json)\. "
     r"Create (?P<output>canonical/[A-Za-z0-9_./-]+\.(?:sqlite|db|sqlite3)) "
     r"as a SQLite table named (?P<table>[A-Za-z_][A-Za-z0-9_]*) "
-    r"with columns (?P<columns>.+?) containing every (?P<status>[A-Z][A-Z0-9_]{3,})\.",
+    r"containing every (?P<status>[A-Z][A-Z0-9_]{3,}) "
+    r"with columns (?P<columns>.+?)\.",
     re.ASCII,
 )
 
