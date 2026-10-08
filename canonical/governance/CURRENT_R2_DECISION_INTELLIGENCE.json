@@ -15,11 +15,12 @@
     "fixed_point_git_blob_sha": "fdb8d6f021e1db8f8b379a7f12ba981bfe6c5fa2",
     "fixed_point_native_control_policy_total": true,
     "fixed_point_regression_test_path": "canonical/tests/test_general_adequate_decision_fixed_point_v2.py",
-    "fixed_point_regression_test_git_blob_sha": "1fa9f605dff0016fe2e8647e3a972e71e419ffa0"
+    "fixed_point_regression_test_git_blob_sha": "1fa9f605dff0016fe2e8647e3a972e71e419ffa0",
+    "git_blob_sha": "fdb8d6f021e1db8f8b379a7f12ba981bfe6c5fa2"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V8.json",
-    "git_blob_sha": "07f60fae7a9193b0ba70e5e4ed33c645a47af3da"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V9.json",
+    "git_blob_sha": "2068b26eb4877ecf09a3b639ca8cedd0906d0383"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
@@ -82,7 +83,7 @@
     "generic_meta_effect_retained_only_when_no_grounded_policy_identity_exists": true,
     "verification_path": "canonical/verification/R2_R3_CONCRETE_GROUNDED_ADEQUACY_TARGET_VERIFY_20261008_V1.json",
     "verification_git_blob_sha": "5b965a06f0ebfded59aacaaa5bb131f61e9abb4b",
-    "live_runtime_git_blob_sha": "043edf1746b5f8e118df7e7ec514ec25de141ee8",
+    "live_runtime_git_blob_sha": "b8f395270d5adf87a1aabb28ff99a938b650c0ef",
     "merged_commit": "aecf59ece1140409c171cb7d0824f8085697ad3b"
   },
   "remaining_hard_frontier": [
@@ -148,8 +149,8 @@
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
     "live_route": "canonical/runtime/live_brain_runtime_v1.py::_decision_run",
-    "live_runtime_git_blob_sha": "043edf1746b5f8e118df7e7ec514ec25de141ee8",
-    "status": "ACTIVE__LIVE_EXTERNAL_META_ACTION_NORMALIZER_OVER_NATIVE_TOTAL_FIXED_POINT_CONTROL",
+    "live_runtime_git_blob_sha": "b8f395270d5adf87a1aabb28ff99a938b650c0ef",
+    "status": "ACTIVE__LIVE_EXTERNAL_META_ACTION_NORMALIZER_OVER_NATIVE_TOTAL_FIXED_POINT_CONTROL__REPAIR_TARGET_INTEGRITY_BOUND",
     "meta_actions": [
       "RETURN_VERIFIED_RESULT",
       "ACQUIRE_MINIMUM_POLICY_CHANGING_INFORMATION",
@@ -164,14 +165,21 @@
     "regression_test_git_blob_sha": "eb40f8ad4a2d1d8785d83cd160c02985d64c732d"
   },
   "control_law_closure": {
-    "status": "CLOSED__FIXED_POINT_NATIVE_TOTAL_NEXT_MOVE_PLUS_LIVE_TOTALIZER",
+    "status": "CLOSED__FIXED_POINT_NATIVE_TOTAL_NEXT_MOVE_PLUS_LIVE_TOTALIZER__REPAIR_TARGET_INTEGRITY_BOUND",
     "remaining_problem_class": "ADEQUACY_COVERAGE_EXPANSION_AND_OBSERVABILITY_NOT_GENERAL_CONTROL_MECHANISM",
     "authoritative_field": "mechanism_closure"
   },
   "sufficient_closure": {
-    "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V3.json",
-    "git_blob_sha": "691c750ea69af19393e630f98a6277846c3aca4b",
-    "status": "PASS__CURRENT_FIXED_POINT_NATIVE_TOTALITY_AND_LIVE_TOTALIZED_ROUTE_BOUND",
+    "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V4.json",
+    "git_blob_sha": "984c992b1bcdf1e9e1d541b1196374353a171bf3",
+    "status": "PASS__CURRENT_FIXED_POINT_NATIVE_TOTALITY_LIVE_TOTALIZED_ROUTE_AND_REPAIR_TARGET_INTEGRITY_BOUND",
     "remaining_problem_class": "ADEQUACY_COVERAGE_CAPABILITY_EXPANSION_AND_OBSERVABILITY"
+  },
+  "latest_integrity_repair": {
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V9.json",
+    "scheduler_cut_git_blob_sha": "2068b26eb4877ecf09a3b639ca8cedd0906d0383",
+    "live_runtime_git_blob_sha": "b8f395270d5adf87a1aabb28ff99a938b650c0ef",
+    "live_runtime_test_git_blob_sha": "5db24c01ae594fd8bbab75683f34b108aa785337",
+    "property": "NON_POLICY_REPAIR_TARGETS_PRESERVED_WHILE_POLICY_ADEQUACY_TARGETS_REMAIN_CONCRETIZED"
   }
 }
