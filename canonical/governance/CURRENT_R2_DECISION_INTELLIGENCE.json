@@ -2,11 +2,18 @@
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-08",
   "status": "ACTIVE",
+  "mission_objective": {
+    "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
+  },
+  "live_front_door": {
+    "path": "canonical/runtime/unified_cognitive_fabric_v1.py"
+  },
   "controller": {
-    "path": "canonical/runtime/general_adequate_decision_controller_v1.py"
+    "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V1.json"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V2.json"
   },
   "judgment_model_policy": {
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
