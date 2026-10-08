@@ -3,9 +3,9 @@ import unittest
 
 from canonical.runtime.aa_briefcase_minimal_owner_attestation_v1 import (
     OwnerAttestationError,
-    _sha256,
     verify_minimal_owner_attestation,
 )
+from canonical.tests.test_aa_briefcase_owner_signature_verifier_v1 import make_signed
 
 
 def target():
@@ -43,21 +43,12 @@ def statement():
     }
 
 
-def sig(s=None):
-    s = s or statement()
-    return {
-        "status": "VERIFIED",
-        "statement_sha256": _sha256(s),
-        "attestor_is_benchmark_owner_or_authorized_operator": True,
-        "identity_verified": True,
-        "verification_receipt_sha256": "e" * 64,
-    }
-
 
 class T(unittest.TestCase):
     def test_minimal_private_attestation_passes_without_private_bytes(self):
         s = statement()
-        out = verify_minimal_owner_attestation(target(), s, sig(s))
+        bundle, binding = make_signed(s)
+        out = verify_minimal_owner_attestation(target(), s, bundle, binding)
         self.assertEqual(out["status"], "PASS_MINIMAL_OWNER_ATTESTATION")
         self.assertTrue(out["scope_complete_current_epoch_noninferiority"])
         self.assertFalse(out["private_task_or_check_contents_required_for_brain_verification"])
@@ -67,42 +58,47 @@ class T(unittest.TestCase):
         s = statement()
         s["predicate"]["target_observed_date"] = "2026-10-07"
         with self.assertRaisesRegex(OwnerAttestationError, "PREDICATE_EPOCH_MISMATCH"):
-            verify_minimal_owner_attestation(target(), s, sig(s))
+            bundle, binding = make_signed(s)
+            verify_minimal_owner_attestation(target(), s, bundle, binding)
 
     def test_protocol_drift_fails(self):
         s = statement()
         s["predicate"]["grading_protocol_manifest_git_blob_sha"] = "0" * 40
         with self.assertRaisesRegex(OwnerAttestationError, "GRADING_PROTOCOL_DRIFT"):
-            verify_minimal_owner_attestation(target(), s, sig(s))
+            bundle, binding = make_signed(s)
+            verify_minimal_owner_attestation(target(), s, bundle, binding)
 
     def test_incomplete_private_scope_fails(self):
         s = statement()
         s["predicate"]["private_scope_complete"] = False
         with self.assertRaisesRegex(OwnerAttestationError, "PRIVATE_SCOPE_NOT_COMPLETE"):
-            verify_minimal_owner_attestation(target(), s, sig(s))
+            bundle, binding = make_signed(s)
+            verify_minimal_owner_attestation(target(), s, bundle, binding)
 
     def test_missing_check_scope_fails(self):
         s = statement()
         s["predicate"]["all_load_bearing_checks_included"] = False
         with self.assertRaisesRegex(OwnerAttestationError, "CHECK_SCOPE_NOT_COMPLETE"):
-            verify_minimal_owner_attestation(target(), s, sig(s))
+            bundle, binding = make_signed(s)
+            verify_minimal_owner_attestation(target(), s, bundle, binding)
 
     def test_negative_attestation_fails(self):
         s = statement()
         s["predicate"]["brain_weakly_dominates_current_opus55"] = False
         with self.assertRaisesRegex(OwnerAttestationError, "NONINFERIORITY_NOT_ATTESTED"):
-            verify_minimal_owner_attestation(target(), s, sig(s))
+            bundle, binding = make_signed(s)
+            verify_minimal_owner_attestation(target(), s, bundle, binding)
 
-    def test_signature_digest_mismatch_fails(self):
+    def test_modified_statement_signature_fails(self):
         s = statement()
-        bad = sig(s)
-        bad["statement_sha256"] = "f" * 64
-        with self.assertRaisesRegex(OwnerAttestationError, "SIGNED_STATEMENT_DIGEST_MISMATCH"):
-            verify_minimal_owner_attestation(target(), s, bad)
+        bundle, binding = make_signed(s)
+        s["predicate"]["brain_weakly_dominates_current_opus55"] = False
+        with self.assertRaisesRegex(Exception, "CRYPTOGRAPHIC_SIGNATURE_INVALID"):
+            verify_minimal_owner_attestation(target(), s, bundle, binding)
 
-    def test_unverified_owner_identity_fails(self):
+    def test_unverified_owner_key_identity_fails(self):
         s = statement()
-        bad = sig(s)
-        bad["attestor_is_benchmark_owner_or_authorized_operator"] = False
-        with self.assertRaisesRegex(OwnerAttestationError, "ATTESTOR_AUTHORITY_NOT_VERIFIED"):
-            verify_minimal_owner_attestation(target(), s, bad)
+        bundle, binding = make_signed(s)
+        binding["identity_verified"] = False
+        with self.assertRaisesRegex(Exception, "OWNER_KEY_IDENTITY_UNVERIFIED"):
+            verify_minimal_owner_attestation(target(), s, bundle, binding)
