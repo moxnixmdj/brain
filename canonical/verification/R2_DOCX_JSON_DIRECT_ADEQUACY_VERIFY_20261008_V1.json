@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__REBASED_SECOND_DOCX_FAMILY__EXACT_BRANCH_CONTROL_REPLAY_12_OF_12__REAL_INDEPENDENT_OOXML_ACCEPTANCE_REPLAY_PASS__PINNED_PRODUCER_FRESH_REPLAY_UNAVAILABLE__ZERO_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/r2_docx_json_direct_adequacy_v1.py",
+    "runtime_git_blob_sha": "27fdb096b00bd5dda21e912a1b740ac79bf35cd4",
+    "direct_router_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+    "direct_router_git_blob_sha": "fce7a71ab75c4a80fdd9891f6f7ff3ae67c462eb"
+  },
+  "bound_current_dependencies": {
+    "goal_compiler": {
+      "path": "canonical/runtime/goal_compiler.py",
+      "git_blob_sha": "960e347cf6db2ad755899809dbe182e2e455c8b7"
+    },
+    "verified_capability_registry": {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "545e6b405e59a77d4fc22049e3e86a286843f63d"
+    },
+    "producer": {
+      "path": "canonical/runtime/bound_capabilities/docx_report_from_json.py",
+      "git_blob_sha": "9667232f07cd1d285ecd598d85d8cdcf3f990701"
+    },
+    "independent_intent_verifier": {
+      "path": "canonical/runtime/bound_capabilities/docx_verify_ooxml_intent.py",
+      "git_blob_sha": "937944128257c10d95038b99dd3d120cd3104ae1"
+    },
+    "independent_ooxml_verifier": {
+      "path": "canonical/runtime/bound_capabilities/docx_verify_ooxml.py",
+      "git_blob_sha": "41c2d9043b65376e13366cbdcd2d35a2cf12b2dc"
+    },
+    "existing_producer_roundtrip_receipt": {
+      "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001__RECEIPT.json",
+      "git_blob_sha": "9800e67bb7a47fd5d88455543dd838059c1cb2b9"
+    }
+  },
+  "exact_branch_tests": {
+    "family_test_path": "canonical/tests/test_r2_docx_json_direct_adequacy_v1.py",
+    "family_test_git_blob_sha": "a5f01bb4832f84cda7cb0706b5ecd1df8f4ec10f",
+    "family_tests_run": 9,
+    "family_tests_passed": 9,
+    "direct_integration_test_path": "canonical/tests/test_r2_docx_direct_integration_v1.py",
+    "direct_integration_test_git_blob_sha": "4296a9694c72cedddda119fa7c3b20d3b2ca9b2e",
+    "direct_integration_tests_run": 3,
+    "direct_integration_tests_passed": 3,
+    "carrier": "SPRITES",
+    "sprite_name": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "isolation_boundary": "EXACT_SUBJECT_AND_TEST_BLOBS_WITH_FAITHFUL_STUBS_FOR_UNRELATED_NEWER_RUNTIME_PLUMBING"
+  },
+  "compiler_probe": {
+    "carrier": "SPRITES",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "result": "PASS",
+    "selected_capability": "docx.document.create_from_json_record",
+    "controller_actions": null,
+    "bound_json_path": "canonical/astra_runtime/tmp/R2_DOCX_DIRECT_SOURCE.json",
+    "bound_output_path": "canonical/astra_runtime/tmp/R2_DOCX_DIRECT.docx",
+    "target_effects": [
+      "docx.document.create_from_json_record"
+    ]
+  },
+  "real_acceptance_replay": {
+    "carrier": "SPRITES",
+    "sprite_name": "brain-root3-current-byte-replay-20261007-v1",
+    "result": "PASS",
+    "artifact_kind": "MINIMAL_REAL_DOCX_ZIP_WITH_WORD_DOCUMENT_XML",
+    "producer_parser_exact_new_grammar": true,
+    "producer_unique_source_record_resolution": true,
+    "independent_verifier_verified": true,
+    "producer_independent_verifier": true,
+    "source_record_verified": true,
+    "source_json_path_equal": true,
+    "intent_source_goal_equal": true,
+    "title_ok": true,
+    "paragraphs_ok": true,
+    "table_ok": true
+  },
+  "transactional_properties_proved_by_exact_branch_tests": [
+    "NEW_DOCX_AND_INTENT_SIDECAR_REMOVED_ON_EXECUTION_FAILURE",
+    "PREEXISTING_DOCX_AND_INTENT_SIDECAR_RESTORED_BYTE_FOR_BYTE",
+    "FORGED_INTENT_SIDECAR_REJECTED_BEFORE_INDEPENDENT_VERIFIER",
+    "INDEPENDENT_VERIFIER_FAILURE_ROLLS_BACK_BOTH_ARTIFACTS",
+    "SOURCE_JSON_MUTATION_DURING_EXECUTION_FAILS_CLOSED",
+    "VERIFIER_DERIVED_SEMANTICS_DIGEST_MUST_EQUAL_PREFLIGHT_SEMANTICS",
+    "MATCHED_EFFECTFUL_ROUTE_FAILURE_NEVER_FALLS_THROUGH_TO_ANOTHER_EXECUTION"
+  ],
+  "verification_boundary": {
+    "fresh_exact_pinned_producer_replay": false,
+    "reason": "AVAILABLE_SPRITES_DO_NOT_HAVE_THE_VERIFIED_PINNED_UBUNTU_PYTHON3_DOCX_1_1_0_DFSG_2_PACKAGE__CURRENT_APT_CANDIDATE_IS_1_2_0_DFSG_3__SUBSTITUTION_WAS_REFUSED",
+    "existing_pinned_producer_independent_verification_reused": true,
+    "fresh_real_acceptance_verifier_replay": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_FRESH_EXECUTION_OF_THE_PINNED_DOCX_PRODUCER_WAS_REPLAYED_IN_THIS_VERIFICATION",
+    "NO_CLAIM_DOCX_GOALS_OUTSIDE_THE_EXACT_JSON_RECORD_REPORT_GRAMMAR_ARE_COVERED",
+    "NO_CLAIM_EXTERNAL_OR_IRREVERSIBLE_EFFECTS_ARE_AUTHORIZED",
+    "NO_CLAIM_GLOBAL_R2_ADEQUACY_COVERAGE_IS_COMPLETE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "rebase_coexistence": {
+    "existing_literal_docx_family": {
+      "runtime_path": "canonical/runtime/r2_docx_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "631fcf2aa82d090d1f3ade6199829f060b000937",
+      "verification_path": "canonical/verification/R2_DOCX_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+      "verification_git_blob_sha": "f47ba33f5d8aed21bd856315380fc5b391a7e314",
+      "scope": "EXACT_TWO_CLAUSE_LITERAL_DOCX_PLUS_INDEPENDENT_OOXML_VERIFICATION_FAMILY"
+    },
+    "new_json_record_docx_family": {
+      "runtime_path": "canonical/runtime/r2_docx_json_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "27fdb096b00bd5dda21e912a1b740ac79bf35cd4",
+      "scope": "EXACT_SINGLE_RECORD_JSON_TO_SEMANTICALLY_VERIFIED_DOCX_REPORT_FAMILY"
+    },
+    "regions_disjoint_by_grammar_and_producer_capability": true,
+    "existing_literal_docx_route_replaced": false
+  }
+}

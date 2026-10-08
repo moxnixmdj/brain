@@ -1,0 +1,28 @@
+name: verify-r2-docx-json-direct-adequacy-v1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/r2_docx_json_direct_adequacy_v1.py
+      - canonical/runtime/r2_direct_end_to_end_adequacy_v1.py
+      - canonical/tests/test_r2_docx_json_direct_adequacy_v1.py
+      - canonical/tests/test_r2_docx_direct_integration_v1.py
+      - canonical/tests/test_r2_direct_end_to_end_adequacy_v1.py
+      - .github/workflows/verify-r2-docx-json-direct-adequacy-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run DOCX direct adequacy regression
+        run: |
+          python -m unittest -v \
+            canonical.tests.test_r2_docx_json_direct_adequacy_v1 \
+            canonical.tests.test_r2_docx_direct_integration_v1 \
+            canonical.tests.test_r2_direct_end_to_end_adequacy_v1

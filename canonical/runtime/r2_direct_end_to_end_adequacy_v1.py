@@ -20,6 +20,7 @@ from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_ac
 from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
 from canonical.runtime import r2_structured_binary_direct_adequacy_v1 as codec_adequacy
 from canonical.runtime import r2_docx_direct_adequacy_v1 as docx_adequacy
+from canonical.runtime import r2_docx_json_direct_adequacy_v1 as docx_json_adequacy
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -29,6 +30,7 @@ EXACT_LITERAL_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1"
 LITERAL_JSON_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1"
 STRUCTURED_BINARY_CODEC_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1"
 DOCX_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1"
+DOCX_JSON_ROUTE_ID = "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -65,6 +67,13 @@ ROUTES = {
         "preflight": "r2_docx_direct_adequacy_v1.preflight",
         "executor": "r2_docx_direct_adequacy_v1.run",
         "acceptance": "EXACT_INTENT_BINDING_PLUS_PRODUCER_INDEPENDENT_STDLIB_OOXML_VERIFICATION",
+    },
+    DOCX_JSON_ROUTE_ID: {
+        "capability_id": "docx.document.create_from_json_record",
+        "scope": "EXACT_SINGLE_RECORD_JSON_TO_SEMANTICALLY_VERIFIED_DOCX_REPORT_FAMILY",
+        "preflight": "r2_docx_json_direct_adequacy_v1.preflight",
+        "executor": "r2_docx_json_direct_adequacy_v1.run",
+        "acceptance": "EXACT_SOURCE_HASH_PLUS_INTENT_BINDING_PLUS_PRODUCER_INDEPENDENT_OOXML_SEMANTIC_REOPEN",
     },
 }
 
@@ -182,6 +191,29 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "preflight_execution_authority": False,
         }
 
+    docx_json = docx_json_adequacy.preflight(request)
+    if docx_json.get("matched") is True:
+        if docx_json.get("status") == "FAIL_CLOSED":
+            return {
+                **_base("FAIL_CLOSED", passed=False),
+                "matched": True,
+                "route_id": DOCX_JSON_ROUTE_ID,
+                "reason": docx_json.get("reason"),
+            }
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": DOCX_JSON_ROUTE_ID,
+            "capability_id": docx_json.get("capability_id"),
+            "policy_id": docx_json.get("policy_id"),
+            "goal_sha256": docx_json.get("goal_sha256"),
+            "json_path": docx_json.get("json_path"),
+            "output_path": docx_json.get("output_path"),
+            "intent_path": docx_json.get("intent_path"),
+            "semantic_scope": ROUTES[DOCX_JSON_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
     return {
         **_base("NO_DIRECT_ADEQUACY_ROUTE", passed=False),
         "matched": False,
@@ -273,6 +305,50 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
             "execution_attempted": True,
             "retry_by_other_route_authorized": False,
             "authority_boundary": docx_result.get("authority_boundary"),
+        }
+
+    if pf["route_id"] == DOCX_JSON_ROUTE_ID:
+        docx_json_result = docx_json_adequacy.run(request)
+        if docx_json_result.get("pass") is not True:
+            return {
+                **_base(
+                    str(
+                        docx_json_result.get("status")
+                        or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"
+                    ),
+                    passed=False,
+                ),
+                "matched": True,
+                "route_id": pf["route_id"],
+                "capability_id": pf.get("capability_id"),
+                "goal_sha256": pf.get("goal_sha256"),
+                "execution_attempted": True,
+                "retry_by_other_route_authorized": False,
+                "docx_json_adequacy": deepcopy(dict(docx_json_result)),
+                "reason": docx_json_result.get("reason"),
+            }
+        return {
+            **_base("PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED", passed=True),
+            "matched": True,
+            "route_id": pf["route_id"],
+            "capability_id": docx_json_result.get("capability_id"),
+            "selected_policy_id": docx_json_result.get("policy_id"),
+            "goal_sha256": docx_json_result.get("goal_sha256"),
+            "semantic_scope": pf["semantic_scope"],
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "accepted_raw_obligation_ids": list(
+                docx_json_result.get("accepted_raw_obligation_ids") or []
+            ),
+            "raw_acceptance_obligation_count": docx_json_result.get(
+                "raw_acceptance_obligation_count"
+            ),
+            "acceptance_receipt": deepcopy(dict(docx_json_result)),
+            "raw_result": deepcopy(dict(docx_json_result.get("raw_result") or {})),
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "authority_boundary": docx_json_result.get("authority_boundary"),
         }
 
     raw = live_bound.run_raw_goal(request)
