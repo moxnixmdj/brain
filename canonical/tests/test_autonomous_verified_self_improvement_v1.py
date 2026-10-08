@@ -442,6 +442,55 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertFalse(state["skills"][weak_id]["active"])
         self.assertEqual(state["skills"][weak_id]["dominated_by"], active["active_skill_id"])
 
+    def test_unauthenticated_frontier_entry_cannot_dominate_new_verified_skill(self):
+        path = self.temp_state()
+        stale = verified_skill(
+            "5",
+            relation="PROVEN_SUPERSET",
+            source_ids=("ep1", "ep2", "ep3"),
+            step_count=1,
+        )
+        stale_sid = self._seed_active_skill(path, stale)
+        fresh = verified_skill(
+            "6",
+            relation="EXACT",
+            source_ids=("ep4", "ep5"),
+            step_count=2,
+        )
+
+        def reauth(skill, **_):
+            if skill.get("candidate_sha256") == stale.get("candidate_sha256"):
+                return {"pass": False, "reason": "STALE_AUTHORITY"}
+            return {"pass": True, "verified_skill": skill}
+
+        with mock.patch.object(
+            loop,
+            "reauthenticate_skill_record",
+            side_effect=reauth,
+        ):
+            admitted = loop.integrate_solver_output(
+                {
+                    "pass": True,
+                    "current_episode_verified": False,
+                    "skill_candidate": fresh,
+                    "verified_skill_reuse_authorized": True,
+                    "verified_executable_skill": fresh,
+                },
+                state_path=path,
+            )
+
+        state = loop.load_state(path)
+        fresh_sid = loop._skill_id(fresh)
+        self.assertEqual(admitted["active_skill_id"], fresh_sid)
+        self.assertTrue(state["skills"][fresh_sid]["active"])
+        self.assertFalse(state["skills"][stale_sid]["active"])
+        self.assertEqual(
+            state["skills"][stale_sid]["authority_invalidated"],
+            "STALE_AUTHORITY",
+        )
+        family = loop._family_id(fresh)
+        self.assertEqual(state["pareto_frontiers"][family], [fresh_sid])
+
     def test_verification_queue_autonomously_promotes_pending_candidate(self):
         path = self.temp_state()
         skill = verified_skill("a", relation="EXACT")
