@@ -19,4 +19,25 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m unittest -v canonical.tests.test_p3_policy_influence_relevance_cell_v1 canonical.tests.test_p3_real_context_v3_admission_v10
+      - name: Run exact V10 tests and capture evidence
+        shell: bash
+        run: |
+          set +e
+          python -m unittest -v canonical.tests.test_p3_policy_influence_relevance_cell_v1 canonical.tests.test_p3_real_context_v3_admission_v10 > p3-v10-test.log 2>&1
+          code=$?
+          echo "$code" > p3-v10-exit-code.txt
+          cat p3-v10-test.log
+          exit 0
+      - name: Upload exact test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p3-v10-test-evidence
+          path: |
+            p3-v10-test.log
+            p3-v10-exit-code.txt
+      - name: Enforce test result
+        shell: bash
+        run: |
+          code=$(cat p3-v10-exit-code.txt)
+          test "$code" = "0"
