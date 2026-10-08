@@ -12,6 +12,7 @@ solves an entire composite request.
 from __future__ import annotations
 
 from copy import deepcopy
+from hashlib import sha256
 import json
 from pathlib import Path
 import re
@@ -55,6 +56,17 @@ def _semantic_goal_tokens(text: str) -> set[str]:
         cleaned,
     )
     return set(grounding._distinctive(grounding._tokens(cleaned)))
+
+
+def _adequacy_predicate_id(goal: str, capability_id: str) -> str:
+    """Stable proposition: this exact Brain-owned capability is adequate for this exact raw goal.
+
+    Naming the proposition does not prove it true. It exists so R2 can ask for the
+    smallest decision-relevant semantic fact instead of demanding that a candidate
+    be globally adequate across every opaque interpretation.
+    """
+    digest = sha256((goal + "\n" + capability_id).encode("utf-8")).hexdigest()
+    return "R2_POLICY_ADEQUATE::sha256:" + digest
 
 
 def _strong_semantic_candidate(row: Mapping[str, Any], semantic_tokens: set[str]) -> bool:
@@ -175,6 +187,8 @@ def propose(goal: str, *, repo_root: str | Path) -> dict[str, Any]:
 
         policy_conditions: dict[str, dict[str, str]] = {}
         capability_by_policy: dict[str, str] = {}
+        adequacy_predicate_by_policy: dict[str, str] = {}
+        discriminators: list[dict[str, Any]] = []
         for row in strong_candidates:
             if not isinstance(row, Mapping):
                 return {
@@ -188,8 +202,20 @@ def propose(goal: str, *, repo_root: str | Path) -> dict[str, Any]:
                     "reason": "GROUNDING_CANDIDATE_ID_INVALID",
                 }
             policy_id = POLICY_PREFIX + capability_id
-            policy_conditions[policy_id] = {"op": "TRUE"}
+            predicate_id = _adequacy_predicate_id(text, capability_id)
+            # The policy is adequate only in semantic worlds where this exact
+            # goal/capability adequacy proposition is true. Grounding proposes
+            # the proposition; it never certifies its truth.
+            policy_conditions[policy_id] = {"op": "ATOM", "id": predicate_id}
             capability_by_policy[policy_id] = capability_id
+            adequacy_predicate_by_policy[policy_id] = predicate_id
+            discriminators.append(
+                {
+                    "discriminator_id": "ADEQUACY_QUERY::" + predicate_id,
+                    "formula": {"op": "ATOM", "id": predicate_id},
+                    "cost_units": 1.0,
+                }
+            )
 
         return {
             **_base(
@@ -203,10 +229,13 @@ def propose(goal: str, *, repo_root: str | Path) -> dict[str, Any]:
             "semantic_goal_tokens": sorted(semantic_tokens),
             "policy_conditions": policy_conditions,
             "capability_by_policy": capability_by_policy,
+            "adequacy_predicate_by_policy": adequacy_predicate_by_policy,
+            "decision_basis_additions": sorted(set(adequacy_predicate_by_policy.values())),
+            "discriminators": discriminators,
             "grounding": deepcopy(dict(result)),
             "robustness_semantics": (
-                "TRUE_MEANS_EACH_CANDIDATE_MUST_BE_PROVED_ADEQUATE_OVER_THE_ENTIRE_"
-                "CURRENT_SOUND_SEMANTIC_OVERAPPROXIMATION_BEFORE_SELECTION"
+                "EACH_CANDIDATE_IS_CONDITIONED_ON_AN_EXPLICIT_EXACT_GOAL_POLICY_"
+                "ADEQUACY_PREDICATE;GROUNDING_NEVER_PROVES_THAT_PREDICATE_TRUE"
             ),
             "ambiguity_preserved": len(policy_conditions) > 1,
             "candidate_only": True,
