@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_R2_GROUNDED_POLICY_FRONTIER_VERIFY_V1",
   "date": "2026-10-08",
   "status": "PASS__14_OF_14__EXACT_BRANCH_BYTES",
-  "branch": "r2-grounded-policy-frontier-rebased-20261008",
+  "branch": "r2-grounded-policy-frontier-final-20261008",
   "exact_blobs": {
     "frontier": "7004bcfa278579933818b73dcb9d04bde2e48e06",
     "controller": "29872fc55a5ec577feea769cc919dc889899c2bd"
@@ -38,5 +38,10 @@
   "accounting": {
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
+  },
+  "transplant": {
+    "base_main_sha": "d22104fdebeb9226e9dd279e1ced8233b113810f",
+    "exact_runtime_blobs_preserved": true,
+    "note": "Load-bearing runtime blobs are identical to the isolated replayed bytes."
   }
 }
