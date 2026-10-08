@@ -44,6 +44,8 @@ def test_exact_recomputed_execution_trace_passes():
     out = verify({"problem": problem()}, {"execution": good_execution()})
     assert out["pass"] is True, out
     assert out["status"] == "VERIFIED"
+    assert isinstance(out["proof_digest"], str)
+    assert len(out["proof_digest"]) == 64
     assert out["verified_output"]["all_target_effects_have_witnesses"] is True
 
 
