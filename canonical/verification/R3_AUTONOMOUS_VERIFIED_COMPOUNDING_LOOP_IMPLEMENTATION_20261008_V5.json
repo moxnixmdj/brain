@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V5",
+  "date": "2026-10-08",
+  "root": "R3_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_LOOP",
+  "status": "SUFFICIENT_CONTROL_LOOP_CLOSURE_UNDER_AVAILABLE_EVIDENCE__UNOBSERVABLE_EFFECTS_PARK_BY_INFORMATION_THEORETIC_NECESSITY",
+  "canonical_main_commit": "7e19abf5478e01cee8901cb0a83c5f4092949a3b",
+  "current_live_blobs": {
+    "autonomous_self_improvement": "ea80a2f32142448b86816e169b6aeb7875d0f583",
+    "improvement_queue_driver": "dd0dc41fcd83899f003e45eddb43c0d8098cfceb",
+    "independent_learning_verifier": "b38b5315ef79a215976144866514cb2a95076c9e",
+    "raw_success_adapter": "80a2599a31501db18754e913b763254966b4923e",
+    "raw_success_checkpoint_verifier": "3afceda23369a23b2619aabdc8a06f4e749be6c5",
+    "bound_success_adapter": "8c73e1ab3486df9ed56fff778ec35401720eb1e7",
+    "bound_success_checkpoint_verifier": "dc1412451d3dbc6747fd51388137a3ac1bba0d4b"
+  },
+  "closed_paths": {
+    "failure_experience_to_causal_repair": true,
+    "safe_autonomous_replay": true,
+    "unsafe_effect_replay_blocked": true,
+    "non_effectful_episode_recomputation": true,
+    "exact_skill_recomputation": true,
+    "structural_non_effectful_scope_generalization": true,
+    "bounded_filesystem_effect_readback": true,
+    "compiled_bound_checkpoint_and_artifact_readback": true,
+    "raw_bound_semantically_accepted_archive_readback": true,
+    "v12_bound_carrier_readback": true,
+    "durable_episode_and_skill_reauthentication": true,
+    "counterexample_quarantine_and_safe_recovery": true,
+    "pareto_replacement_and_permanent_reuse": true,
+    "current_evidence_nonlearnability_disposition": true,
+    "parked_work_reopens_on_new_observation": true,
+    "parked_work_reopens_on_owned_verifier_frontier_change": true,
+    "parked_work_reopens_on_external_authority": true,
+    "raw_verifier_frontier_change_reopens_parked_success": true,
+    "no_same_evidence_retry_loop": true
+  },
+  "experience_control_policy": [
+    "VERIFY_AND_PROMOTE_WHEN_INDEPENDENT_EVIDENCE_IS_SUFFICIENT",
+    "REPAIR_AND_REVERIFY_WHEN_FAILURE_IS_CAUSALLY_ACTIONABLE",
+    "QUARANTINE_OR_CONTRACT_ON_COUNTEREXAMPLE",
+    "WAIT_FOR_SPECIFIC_MATCHING_VERIFIED_EVIDENCE_WHEN_REQUIRED",
+    "PARK_EXACT_CURRENT_EVIDENCE_WHEN_NO_SOUND_CURRENT_VERIFIER_EXISTS",
+    "AUTOMATICALLY_REOPEN_PARKED_WORK_ON_NEW_EVIDENCE_OR_VERIFIER_FRONTIER_CHANGE"
+  ],
+  "newly_closed_in_v5": {
+    "surface": "RAW_BOUND semantic success",
+    "admitted_scope": "exact archive.tar_gz.create_from_manifest raw goal only",
+    "semantic_gate": "semantic_acceptance_complete=true plus valid retained acceptance receipt",
+    "verification": "read-only raw grammar + task-contract + controller checkpoint + current artifact reinspection",
+    "effect_replay": false,
+    "learned_scope": "exact raw-goal SHA-256"
+  },
+  "observability_boundary": {
+    "theorem_path": "canonical/verification/R3_OBSERVABILITY_BOUNDARY_THEOREM_20261008_V1.json",
+    "class": "EFFECT_OBSERVABILITY_BOUNDARY",
+    "statement": "No sound learner can certify an effect from retained evidence that is identical in a success world and a failure world.",
+    "correct_brain_behavior": "PARK_WITHOUT_PERMANENT_IMPOSSIBILITY_CLAIM_AND_REOPEN_ON_NEW_EVIDENCE",
+    "examples": [
+      "non-readable external mutation with no authenticated receipt",
+      "irreversible physical effect with no independent sensor or receipt",
+      "private remote effect with no confidential readback authority"
+    ]
+  },
+  "verification_evidence": [
+    "canonical/verification/R3_RAW_ACCEPTED_READONLY_LEARNING_VERIFY_20261008_V2.json",
+    "canonical/verification/R3_RAW_ACCEPTED_READONLY_LEARNING_VERIFY_20261008_V3.json",
+    "canonical/verification/R3_CURRENT_EVIDENCE_DISPOSITION_PUBLIC_RUNNER_VERIFICATION_20261008_V1.json",
+    "canonical/verification/R3_EFFECTFUL_READBACK_PUBLIC_RUNNER_VERIFICATION_20261008_V1.json",
+    "canonical/verification/R3_BOUND_SUCCESS_READONLY_LEARNING_VERIFY_20261008_V1.json",
+    "canonical/verification/R3_V12_BOUND_CARRIER_LEARNING_SPRITE_VERIFICATION_20261008_V1.json"
+  ],
+  "verification_truth": {
+    "raw_accepted_focused_tests": "6/6 PASS",
+    "current_independent_verifier_suite": "11/11 PASS on verified branch bytes",
+    "private_github_actions_on_pr": "ZERO_STEP_RUNNER_FAILURE_NOT_CODE_VERDICT",
+    "exact_runtime_blobs_preserved_in_merged_main": true
+  },
+  "sufficient_closure_claim": "R3 is sufficiently closed as an autonomous verified self-improvement control loop under the evidence available to it. Remaining nonpromotion cases that lack effect-distinguishing evidence are epistemically unresolvable without new information and are handled by the sound park-and-reopen policy.",
+  "nonclaims": [
+    "Does not claim every real-world effect is observable.",
+    "Does not claim arbitrary external systems provide receipts.",
+    "Does not grant terminal authority.",
+    "Does not claim unrestricted cross-context generalization from exact-scope evidence."
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
