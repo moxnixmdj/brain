@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB4_CURRENT_RESEARCH_FRONTIER_20261008_V1",
   "date": "2026-10-08",
-  "status": "ACTIVE_CURRENT_FRONTIER__SCOPE_SCORING_PROTOCOL_ZERO_SPEND_AND_PER_SLOT_VERIFIER_ACCEPTANCE_CLOSED__SUCCESS_MASS_ONLY_OR_STRONGER_CERTIFICATE_OPEN__ZERO_CASES__ZERO_CREDIT",
+  "status": "ACTIVE_CURRENT_FRONTIER__NONEMPIRICAL_TB4_MACHINERY_CLOSED__EXISTING_EVIDENCE_EXHAUSTED__ONE_CERTIFIED_SUCCESS_SLOT__218_MORE_OR_STRONGER_THRESHOLD_CERTIFICATE_REQUIRED__ZERO_NEW_CASES__ZERO_CREDIT",
   "predicate": "CODING_TB4_GE_66_4",
   "historical_frozen_alias_percent": 66.4,
   "current_owner_detailed_target_candidate_percent": 66.36,
@@ -36,6 +36,15 @@
     "attainability_binding": {
       "path": "canonical/governance/TB4_CURRENT_OWNER_TARGET_ATTAINABILITY_RECOMPILE_20261008_V1.json",
       "git_blob_sha": "c6e1c61e9527bca7f08ba048de84207ff36ae28a"
+    },
+    "existing_success_evidence_scan": {
+      "state": "CLOSED__EXHAUSTIVE_CURRENT_MAIN_CORPUS_SCAN",
+      "binding": {
+        "path": "canonical/governance/TB4_EXISTING_SUCCESS_EVIDENCE_EXHAUSTION_20261008_V1.json"
+      },
+      "scanned_tb4_or_terminal_bench_blobs": 151,
+      "admissible_existing_success_slots": 1,
+      "remaining_to_current_owner_threshold": 218
     }
   },
   "external_wakes": {
@@ -51,11 +60,11 @@
     "credit": 0
   },
   "next_load_bearing_actions": [
-    "SEARCH_EXISTING_BRAIN_EVIDENCE_FOR_ANY_ALREADY_CERTIFIABLE_DISTINCT_TB4_SUCCESS_SLOTS_WITHOUT_REEXECUTION",
-    "SEARCH_FOR_A_SOUND_SCOPE_COMPLETE_THRESHOLD_CERTIFICATE_THAT_PROVES_219_OR_MORE_SUCCESS_SLOTS_WITHOUT_CARDINALITY_INVENTION",
-    "IF_NO_SUCH_INTERNAL_EVIDENCE_OR_CERTIFICATE_EXISTS__CLASSIFY_TB4_AS_REQUIRING_IRREDUCIBLE_NEW_BENCHMARK_OUTCOME_CERTIFICATES",
+    "SEARCH_FOR_A_SOUND_SCOPE_COMPLETE_THRESHOLD_CERTIFICATE_THAT_PROVES_AT_LEAST_219_SUCCESS_SLOTS_WITHOUT_CARDINALITY_INVENTION",
+    "IF_NO_SUCH_STRONGER_CERTIFICATE_EXISTS__TB4_REQUIRES_218_ADDITIONAL_DISTINCT_CERTIFIED_SUCCESS_SLOT_OUTCOMES_BEYOND_THE_EXISTING_WAL_SUCCESS",
+    "DO_NOT_RESEARCH_EXISTING_BRAIN_TB4_SUCCESS_EVIDENCE_AGAIN_UNLESS_CANONICAL_TREE_BYTES_CHANGE",
     "DO_NOT_EXECUTE_IRREVERSIBLE_TB4_TERMINAL_CASES_WITHOUT_EXPLICIT_BENCHMARK_EXECUTION_AUTHORITY",
-    "OPTIONAL_XL_OR_OTHER_RESOURCE_EXPANSION_IS_SECONDARY_SLACK_WORK_NOT_THE_PRIMARY_BLOCKER"
+    "OPTIONAL_RESOURCE_EXPANSION_IS_SECONDARY_TO_OBTAINING_OR_PROVING_THRESHOLD_REACHING_SUCCESS_OUTCOMES"
   ],
   "hard_nonclaims": [
     "NO_TB4_ACCEPTANCE_CREDIT",
@@ -63,7 +72,10 @@
     "NO_REAL_219_SUCCESS_SLOT_SET_PROVED",
     "NO_ONE_TO_FIVE_TRIAL_MULTIPLIER",
     "NO_CLAIM_OWNER_INTERNAL_SANDBOX_EQUALS_BUILDKITE",
-    "NO_IRREVERSIBLE_BENCHMARK_AUTOEXECUTION_AUTHORITY"
+    "NO_IRREVERSIBLE_BENCHMARK_AUTOEXECUTION_AUTHORITY",
+    "NO_CLAIM_CURRENT_SLOT_CAPACITY_220_MEANS_220_OBSERVED_SUCCESSES",
+    "NO_CLAIM_WAL_ONE_SUCCESS_CAN_BE_MULTIPLIED_ACROSS_TRIALS",
+    "NO_CLAIM_EXISTING_REPOSITORY_CONTAINS_MORE_THAN_ONE_ADMISSIBLE_CERTIFIED_TB4_SUCCESS_SLOT"
   ],
   "accounting": {
     "terminal_cases_consumed": 0,
@@ -111,7 +123,7 @@
       "terminal_cases_consumed": 0
     },
     "remaining_load_bearing_premises": [
-      "AT_LEAST_219_DISTINCT_CERTIFIED_SUCCESS_SLOTS_OR_A_SOUND_STRONGER_SCOPE_COMPLETE_THRESHOLD_CERTIFICATE"
+      "AT_LEAST_218_ADDITIONAL_DISTINCT_CERTIFIED_SUCCESS_SLOTS_BEYOND_EXISTING_WAL_SUCCESS_OR_A_SOUND_STRONGER_SCOPE_COMPLETE_THRESHOLD_CERTIFICATE"
     ],
     "deleted_primary_work": [
       "REPROVE_66_TASK_TARGET_DOMAIN_COMPLETENESS",
@@ -119,7 +131,17 @@
       "REBUILD_POST_FREEZE_CERTIFIER_NONINTERFERENCE_FIREWALL",
       "PROVE_ANTHROPIC_INTERNAL_SANDBOX_BYTE_IDENTITY_FOR_A_SLOT_ALREADY_DIRECTLY_ACCEPTED_BY_THE_OFFICIAL_FROZEN_VERIFIER",
       "SEARCH_FOR_A_GENERIC_ONE_TO_FIVE_EMPIRICAL_TRIAL_MULTIPLIER"
-    ]
+    ],
+    "existing_internal_success_evidence": {
+      "state": "CLOSED",
+      "binding": {
+        "path": "canonical/governance/TB4_EXISTING_SUCCESS_EVIDENCE_EXHAUSTION_20261008_V1.json"
+      },
+      "unique_admissible_success_slots": 1,
+      "unique_task": "wal-recovery-ordering",
+      "required_success_slots": 219,
+      "remaining_success_slots_lower_bound": 218
+    }
   },
   "success_slot_certificate": {
     "theorem": {
@@ -152,9 +174,13 @@
     "buildkite_account_zero_incremental_spend_hard_stop": "PASS",
     "exact_recovery_task_identity_binding": "PASS",
     "current_creditable_task_count": 44,
-    "current_creditable_success_slots": 220,
     "required_success_slots": 219,
     "failure_slack_slots": 1,
-    "terminal_cases_consumed": 0
+    "terminal_cases_consumed": 0,
+    "current_creditable_slot_capacity": 220,
+    "current_certified_success_slots": 1,
+    "remaining_certified_success_slots_to_threshold": 218,
+    "capacity_is_not_observed_success": true,
+    "existing_success_task": "wal-recovery-ordering"
   }
 }
