@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_P3_OPTIONAL_RELEVANCE_MINIMUM_INFORMATION_CUT_V1",
+  "date": "2026-10-08",
+  "status": "PROVED_BOUND_CELL_MINIMUM_INFORMATION_SHAPE__ONE_TRUTHFUL_PRECOMMITMENT_RELEVANCE_BIT_SUFFICIENT__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "behavioral_contract": {
+    "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "load_bearing_boundary": "SALIENCE_ORGANIZATION_UNDER_BOUNDED_OUTPUT_IS_RESIDUAL_UNLESS_OBJECTIVE_WEIGHTS_ARE_EXPLICIT"
+  },
+  "compiler": {
+    "path": "canonical/runtime/tournament_failure_capability_compiler_v1.py",
+    "git_blob_sha": "999f075b9d888d35f6e10564aeaf45e0791c4a52"
+  },
+  "no_jit_input": {
+    "path": "canonical/governance/P3_OPTIONAL_RELEVANCE_TOURNAMENT_INPUT_20261008_V1.json",
+    "git_blob_sha": "c33d453bbf8142caa1f8132a11f63df81c9f42d6"
+  },
+  "jit_input": {
+    "path": "canonical/governance/P3_OPTIONAL_RELEVANCE_JIT_INPUT_20261008_V1.json",
+    "git_blob_sha": "22d5bee154769651e5a6aa2e037b1287ffaede68"
+  },
+  "exact_bound_cell": {
+    "worlds": {
+      "OPTIONAL_CLAIM_DECISION_RELEVANT": [
+        "INCLUDE_OPTIONAL_CLAIM"
+      ],
+      "OPTIONAL_CLAIM_IRRELEVANT": [
+        "OMIT_OPTIONAL_CLAIM"
+      ]
+    },
+    "common_policy_exists": false,
+    "minimum_policy_count": 2,
+    "one_minimum_policy_cover": [
+      "INCLUDE_OPTIONAL_CLAIM",
+      "OMIT_OPTIONAL_CLAIM"
+    ],
+    "minimum_information_bits": 1
+  },
+  "constructive_jit_result": {
+    "discriminator": "OPTIONAL_CLAIM_DECISION_RELEVANCE",
+    "outcomes": [
+      "RELEVANT",
+      "IRRELEVANT"
+    ],
+    "RELEVANT_policy": "INCLUDE_OPTIONAL_CLAIM",
+    "IRRELEVANT_policy": "OMIT_OPTIONAL_CLAIM",
+    "available_before_commitment_required": true,
+    "persistent_semantic_state_required": false
+  },
+  "theorem": [
+    "ALWAYS_INCLUDE_IS_NOT_A_COMMON_ADEQUATE_POLICY_BECAUSE_THE_IRRELEVANT_WORLD_REQUIRES_OMISSION_UNDER_THE_BOUND_CONTRACT_CELL",
+    "ALWAYS_OMIT_IS_NOT_A_COMMON_ADEQUATE_POLICY_BECAUSE_THE_DECISION_RELEVANT_WORLD_REQUIRES_INCLUSION",
+    "THEREFORE_AT_LEAST_TWO_POLICY_BUCKETS_ARE_REQUIRED",
+    "CEIL_LOG2_2_EQUALS_1_BIT",
+    "A_TRUTHFUL_BINARY_PRECOMMITMENT_RELEVANCE_DISCRIMINATOR_MAPS_EACH_WORLD_TO_A_BUCKET_WITH_ONE_COMMON_ADEQUATE_POLICY",
+    "THEREFORE_ONE_TRUTHFUL_JIT_BIT_IS_SUFFICIENT_FOR_THIS_BOUND_CELL"
+  ],
+  "next_causal_root": "COMPUTE_OR_AUTHENTICATE_THE_TRUTHFUL_OPTIONAL_CLAIM_DECISION_RELEVANCE_BIT_ON_REACHED_NO_WEIGHT_CONTEXTS__POSITIVE_ONLY_RELEVANCE_RANKING_IS_INSUFFICIENT_TO_AUTHORIZE_OMISSION",
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_SEMANTIC_RELEVANCE_IS_SOLVED",
+    "NO_CLAIM_BM25_NONMATCH_PROVES_IRRELEVANCE",
+    "NO_CLAIM_ONE_BIT_IS_GLOBALLY_SUFFICIENT_FOR_ALL_P3_CONTEXTS",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
