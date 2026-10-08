@@ -31,10 +31,12 @@ except ImportError:
             self.kwargs = kwargs
 
 SCHEMA = "PROJECT_BRAIN_HARBOR_SCIENCE_AGENT_TRACE_V1"
-MAX_CYCLES = 12
+MAX_CYCLES = 32
 MAX_REQUIREMENTS = 16
 MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
+MAX_PROMPT_OBSERVATION_CHARS = 12000
+PROMPT_STREAM_TRUNCATION_LEVELS = (4000, 2000, 1000, 500, 250, 0)
 PLANNER_TIMEOUT_S = 300
 DEFAULT_ACTION_TIMEOUT_S = 1800
 MAX_ACTION_TIMEOUT_S = 7200
@@ -52,6 +54,72 @@ def _action_transport_clean(returncode: int, stdout: Any, stderr: Any) -> bool:
         return False
     text = (str(stdout or "") + "\n" + str(stderr or "")).lower()
     return not any(marker in text for marker in _FATAL_ACTION_STDERR_MARKERS)
+
+def _compact_observation_value(value: Any, *, stream_chars: int, snapshot: bool) -> Any:
+    if isinstance(value, dict):
+        out: dict[str, Any] = {}
+        for key, item in value.items():
+            if key in {"stdout", "stderr"} and isinstance(item, str):
+                if stream_chars <= 0:
+                    out[key] = "[OMITTED_FROM_PLANNER_CONTEXT__FULL_VALUE_PRESERVED_IN_TRACE]"
+                elif len(item) <= stream_chars:
+                    out[key] = item
+                elif snapshot:
+                    out[key] = item[:stream_chars] + "[TRUNCATED_AFTER_PREFIX__FULL_VALUE_PRESERVED_IN_TRACE]"
+                else:
+                    out[key] = "[TRUNCATED_BEFORE_TAIL__FULL_VALUE_PRESERVED_IN_TRACE]" + item[-stream_chars:]
+            else:
+                out[key] = _compact_observation_value(
+                    item, stream_chars=stream_chars, snapshot=snapshot
+                )
+        return out
+    if isinstance(value, list):
+        return [
+            _compact_observation_value(item, stream_chars=stream_chars, snapshot=snapshot)
+            for item in value
+        ]
+    return value
+
+
+def _bounded_observation_json(observations: list[dict[str, Any]]) -> str:
+    snapshots = [
+        row for row in observations
+        if row.get("kind") == "BRAIN_DECLARED_INPUT_SNAPSHOT"
+    ]
+    dynamic = [
+        row for row in observations
+        if row.get("kind") != "BRAIN_DECLARED_INPUT_SNAPSHOT"
+    ]
+    # Keep source snapshots plus the newest dynamic state. Full unabridged values
+    # remain in the trace; only the planner-facing view is compacted.
+    selected = snapshots + dynamic[-6:]
+    for stream_chars in PROMPT_STREAM_TRUNCATION_LEVELS:
+        view = [
+            _compact_observation_value(
+                row,
+                stream_chars=stream_chars,
+                snapshot=row.get("kind") == "BRAIN_DECLARED_INPUT_SNAPSHOT",
+            )
+            for row in selected
+        ]
+        encoded = json.dumps(view, sort_keys=True)
+        if len(encoded) <= MAX_PROMPT_OBSERVATION_CHARS:
+            return encoded
+
+    # Metadata alone can still exceed the budget in a pathological task. Preserve
+    # every declared snapshot identity, then drop oldest dynamic metadata first.
+    for keep_dynamic in range(min(6, len(dynamic)), -1, -1):
+        view = [
+            _compact_observation_value(
+                row, stream_chars=0,
+                snapshot=row.get("kind") == "BRAIN_DECLARED_INPUT_SNAPSHOT",
+            )
+            for row in snapshots + dynamic[-keep_dynamic:] if keep_dynamic else snapshots
+        ]
+        encoded = json.dumps(view, sort_keys=True)
+        if len(encoded) <= MAX_PROMPT_OBSERVATION_CHARS:
+            return encoded
+    raise RuntimeError("SCIENCE_PLANNER_OBSERVATION_METADATA_EXCEEDS_CONTEXT_BUDGET")
 MAX_BRAIN_DELIVERABLES = 16
 _EXPLICIT_SUBMISSION_PATH_RE = re.compile(
     r"(?<![A-Za-z0-9_./-])((?:/app/)?submission/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)"
@@ -351,7 +419,7 @@ def _extract_contract(raw: dict[str, Any], prior_requirements: list[str] | None,
         candidates = _candidate_rows(candidate_rows, set(requirements))
     return requirements, candidates, summary
 
-async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycles: int = 8) -> dict[str, Any]:
+async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycles: int = MAX_CYCLES) -> dict[str, Any]:
     goal = str(goal or "").strip()
     if not goal:
         raise ValueError("SCIENCE_GOAL_REQUIRED")
@@ -399,7 +467,8 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "Use those bytes instead of guessing plant parameters, interfaces, scenarios, or other declared source facts. "
             "These Brain-mandated requirement IDs are part of the frozen contract and may not be omitted. "
             "A candidate claiming one of them must actually create that exact nonempty file; Brain validates it independently.\n"
-            "Recent observations: " + json.dumps(observations[-8:], sort_keys=True)[:30000]
+            "Recent observations (bounded planner view; full values remain in Brain trace): "
+            + _bounded_observation_json(observations)
         )
         planned = science_planner.plan(prompt, timeout_s=PLANNER_TIMEOUT_S)
         raw = science_planner.normalize_proposal_object(
