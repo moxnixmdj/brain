@@ -112,3 +112,12 @@ def test_unchecked_extra_evidence_keeps_categorical_claim_unknown():
     ]))
     assert not out["pass"] and out["predicate_truth"]=="UNKNOWN"
     assert out["unresolved_evidence_ids"]==["E2"]
+
+
+def test_categorical_paraphrase_evidence_keeps_claim_unknown():
+    out=evaluate(p("Tweety is a member of Bird.",[
+      ev("E1","Report states that Tweety is a member of Bird."),
+      ev("E2","Report states that Tweety does not belong to Bird.")
+    ]))
+    assert not out["pass"] and out["predicate_truth"]=="UNKNOWN"
+    assert out["unresolved_evidence_ids"]==["E2"]
