@@ -21,7 +21,7 @@ def score_result(score=1807):
         "brain_score": score,
         "subject_sha256": "a" * 64,
         "matched_current_owner_epoch": True,
-        "target_observed_date": "2026-10-07",
+        "target_observed_date": "2026-10-08",
         "opus55_reference_score": 1807,
     }
 
