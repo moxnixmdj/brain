@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_BOUNDED_PREDICATE_LEXICON_TRUTH_REPAIR_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__17_OF_17_CROSS_MODULE_UNITTEST__PY_COMPILE_PASS__COUNTEREXAMPLE_REJECTED",
+  "classification": "TRUTH_REPAIR_NOT_PROGRESS",
+  "subject_blobs": {
+    "canonical/runtime/bounded_predicate_argument_semantics.py": "c7f190927e31fa2ab32f129b43402e98ea836498",
+    "canonical/tests/test_bounded_predicate_argument_semantics.py": "aaa890bc4de21bc5a48813b501296ddd75ad6e42",
+    "canonical/tests/test_gdpval_semantic_complement_localizer_v2.py": "153d0f10f6bafb30fb8557e91526e99d77cfdb8f",
+    "canonical/runtime/gdpval_semantic_complement_localizer_v2.py": "347607991ccd68c9a27b0afcb56a271f45ed0326",
+    "canonical/runtime/bounded_task_directive_semantics_v1.py": "e3a4c01cc08e7a569692a5d6f03a6feec69934bf"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695"
+  },
+  "counterexample": {
+    "source": "The writing must reflect a thorough understanding of the literature to support clinical education and improvement in practice.",
+    "historical_bad_decomposition": [
+      "The writing must reflect a thorough understanding of the literature to support clinical education",
+      "The writing must improvement in practice."
+    ],
+    "historical_localizer_result": "BOUNDED_COMPOUND_CANDIDATE",
+    "repaired_localizer_result": "DECOMPOSED_BUT_REPARSE_UNRESOLVED",
+    "root_cause": "ACTIVE_MODAL_REGEX_ACCEPTED_ANY_ALPHABETIC_TOKEN_AS_PREDICATE__NOUN_IMPROVEMENT_WAS_FALSELY_ACCEPTED_AS_A_VERB"
+  },
+  "proved": [
+    "ACTIVE_MODAL_PREDICATES_OUTSIDE_THE_EXPLICIT_OWNED_LEXICON_REMAIN_UNRESOLVED",
+    "PASSIVE_PREDICATES_OUTSIDE_THE_EXPLICIT_OWNED_PARTICIPLE_LEXICON_REMAIN_UNRESOLVED",
+    "EXISTING_VERIFIED_WRITE_DELETE_RETRY_SIGNED_AND_CONDITIONAL_FIXTURES_REMAIN_PASSING",
+    "GDPVAL_NOMINAL_SECOND_CONJUNCT_COUNTEREXAMPLE_NO_LONGER_PROMOTES_TO_BOUNDED_COMPOUND_CANDIDATE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FINITE_LEXICON_IS_COMPLETE",
+    "NO_CLAIM_ALL_ENGLISH_VERBS_ARE_CLASSIFIED",
+    "NO_GDPVAL_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_FAMILY_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
