@@ -167,6 +167,22 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "EFFECT_MAY_HAVE_OCCURRED__RECOVERY_OR_EXPLICIT_REPLAY_REQUIRED",
         )
 
+        later_safe_same_context = loop.integrate_solver_output(
+            safe_failure,
+            state_path=path,
+            retry_context={"mode": "generic", "problem": {"task_id": "effectful"}},
+        )
+        later_retry = loop.get_failure_retry_context(
+            later_safe_same_context["diagnosis"]["failure_fingerprint"],
+            state_path=path,
+            retry_capsule_sha256=effectful["retry_capsule_sha256"],
+        )
+        self.assertFalse(later_retry["autonomous_replay_authorized"])
+        self.assertEqual(
+            later_retry["autonomous_replay_reason"],
+            "EFFECT_MAY_HAVE_OCCURRED__RECOVERY_OR_EXPLICIT_REPLAY_REQUIRED",
+        )
+
     def test_repair_resolution_is_bound_to_exact_retry_capsule(self):
         path = self.temp_state()
         failure = {
