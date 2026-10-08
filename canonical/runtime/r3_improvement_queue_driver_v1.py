@@ -66,6 +66,8 @@ SUCCESS_LEARNING_FRONTIER_PATHS = (
     "canonical/runtime/r3_bound_success_adapter_v1.py",
     "canonical/runtime/r3_independent_learning_verifier_v1.py",
     "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
+    "canonical/runtime/r3_raw_success_adapter_v1.py",
+    "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
 )
 
 
