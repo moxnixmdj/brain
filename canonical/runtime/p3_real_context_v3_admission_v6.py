@@ -60,6 +60,8 @@ def _required_boundary_ok(r:Mapping[str,Any])->bool:
 
 def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
     if not isinstance(payload,Mapping):return _fail("PAYLOAD_MAPPING_REQUIRED")
+    if set(payload)-{"context_id","v3_input","objective_weights","semantic_certificates"}:
+        return _fail("UNMODELED_REAL_CONTEXT_ADMISSION_FIELDS")
     context_id=payload.get("context_id")
     if not isinstance(context_id,str) or not context_id.strip():return _fail("CONTEXT_ID_REQUIRED")
     v3_input=payload.get("v3_input")
