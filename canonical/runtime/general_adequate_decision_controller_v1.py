@@ -20,6 +20,9 @@ from typing import Any, Callable, Mapping, Sequence
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 from canonical.runtime.p3_real_context_v3_admission_v12 import evaluate as evaluate_p3
 from canonical.runtime.universal_verified_adaptive_solver_v12 import run as run_universal
+from canonical.runtime.observable_policy_cover_executor_v1 import (
+    evaluate as evaluate_policy_cover,
+)
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_CONTROLLER_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -717,6 +720,8 @@ def run(
             "execution_problem",
             "policy_execution_binding",
             "goal_satisfaction_binding",
+            "policy_cover_observation_bindings",
+            "max_policy_cover_observations",
             "max_information_rounds",
             "episode_id",
             "scope_id",
@@ -834,6 +839,67 @@ def run(
                 break
             gap = _extract_information_gap(decision)
             if gap is None:
+                cover_cfg = working.get("observable_policy_cover")
+                if isinstance(cover_cfg, Mapping):
+                    extra_cover_fields = set(cover_cfg) - {"problem", "cover_binding"}
+                    if extra_cover_fields:
+                        raise DecisionControllerError(
+                            "UNMODELED_OBSERVABLE_POLICY_COVER_FIELDS:"
+                            + ",".join(sorted(extra_cover_fields))
+                        )
+                    cover_result = evaluate_policy_cover(
+                        {
+                            "problem": cover_cfg.get("problem"),
+                            "cover_binding": cover_cfg.get("cover_binding"),
+                            "observation_bindings_by_discriminator_id": request.get(
+                                "policy_cover_observation_bindings", {}
+                            ),
+                            "max_observations": request.get(
+                                "max_policy_cover_observations", 64
+                            ),
+                        },
+                        repo_root=root,
+                    )
+                    if cover_result.get("pass") is True:
+                        cover_policy_id = cover_result.get("selected_policy_id")
+                        if (
+                            not isinstance(cover_policy_id, str)
+                            or not cover_policy_id
+                            or cover_result.get("policy_selection_authorized") is not True
+                            or cover_result.get("selected_policy_adequacy_verified") is not True
+                            or cover_result.get("bound_state_totality_proved") is not True
+                        ):
+                            raise DecisionControllerError(
+                                "POLICY_COVER_PASS_WITHOUT_AUTHORIZED_ADEQUATE_SELECTION"
+                            )
+                        decision = {
+                            "pass": True,
+                            "status": "PASS__R2_AUTHENTICATED_OBSERVABLE_POLICY_COVER",
+                            "route": "OBSERVABLE_POLICY_COVER_EXECUTOR_V1",
+                            "selected_policy_id": cover_policy_id,
+                            "policy_cover_result": cover_result,
+                        }
+                        break
+                    next_observation = cover_result.get("next_observation_request")
+                    return _open(
+                        str(
+                            cover_result.get("status")
+                            or "OPEN__OBSERVABLE_POLICY_COVER_UNRESOLVED"
+                        ),
+                        task_id=task_id,
+                        goal=goal,
+                        raw_contract=raw_contract,
+                        next_required_edge=(
+                            "AUTHENTICATED_SELECTED_POLICY_CHANGING_OBSERVATION"
+                            if isinstance(next_observation, Mapping)
+                            else "AUTHENTICATED_OBSERVABLE_POLICY_COVER"
+                        ),
+                        next_observation_request=next_observation,
+                        decision_result=decision,
+                        policy_cover_result=cover_result,
+                        information_trace=information_trace,
+                        goal_to_decision_binding=goal_binding,
+                    )
                 return _open(
                     "OPEN__ADEQUATE_POLICY_OR_SEMANTIC_COVERAGE_REQUIRED",
                     task_id=task_id,
