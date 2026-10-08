@@ -200,7 +200,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "VERIFY_SKILL_CANDIDATE",
         )
         work = loop.next_improvement_action(state_path=path)
-        self.assertEqual(work["payload"]["candidate"], candidate)
+        self.assertEqual(work["payload"]["candidate"], out["skill_candidate"])
 
     def test_verified_stronger_skill_pareto_replaces_dominated_variant(self):
         path = self.temp_state()
