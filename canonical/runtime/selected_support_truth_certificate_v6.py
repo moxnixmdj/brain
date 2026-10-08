@@ -1,4 +1,4 @@
-"""Selected required-claim support truth certificate v5.
+"""Selected required-claim support truth certificate v6.
 
 Checked support portfolio:
 1. exact arbitrary-proposition attestation/denial;
