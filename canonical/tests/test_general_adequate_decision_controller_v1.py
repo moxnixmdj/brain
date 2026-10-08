@@ -34,7 +34,15 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             "task_contract_sha256": "contract-sha",
             "task_sha256": "goal-sha",
             "nonwhitespace_source_coverage_complete": True,
-            "acceptance_contract": {"obligations": [{"id": "o1"}]},
+            "acceptance_contract": {
+                "obligations": [{
+                    "obligation_id": "RAWREQ:o1",
+                    "segment_sha256": "seg-o1",
+                    "span": [0, 1],
+                    "kind": "RAW_SOURCE_SEGMENT_ACCEPTANCE",
+                }],
+                "required_obligation_ids": ["RAWREQ:o1"],
+            },
         }
 
     @staticmethod
@@ -53,6 +61,11 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             "status": "PASS__ACTUAL_GOAL_SATISFACTION_AUTHENTICATED",
             "policy_id": "policy.p",
             "realization_sha256": "r",
+            "receipt_path": "canonical/verification/goal.json",
+            "receipt_git_blob_sha": "a" * 40,
+            "verification_path": "canonical/verification/goal.verify.json",
+            "verification_git_blob_sha": "b" * 40,
+            "independent_verifier_id": "test-independent-verifier",
         }
 
     @staticmethod
@@ -90,9 +103,10 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             "nonwhitespace_source_coverage_complete": True,
             "acceptance_contract": {
                 "obligations": [
-                    {"obligation_id": "RAWREQ:o1"},
-                    {"obligation_id": "RAWREQ:o2"},
-                ]
+                    {"obligation_id": "RAWREQ:o1", "segment_sha256": "seg-o1", "span": [0, 1], "kind": "RAW_SOURCE_SEGMENT_ACCEPTANCE"},
+                    {"obligation_id": "RAWREQ:o2", "segment_sha256": "seg-o2", "span": [2, 3], "kind": "RAW_SOURCE_SEGMENT_ACCEPTANCE"},
+                ],
+                "required_obligation_ids": ["RAWREQ:o1", "RAWREQ:o2"]
             },
         }
         observed = {}
@@ -134,13 +148,15 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
         raw = {
             "pass": True,
             "task_contract_sha256": "raw-contract-bootstrap",
+            "task_sha256": "goal-sha-bootstrap",
             "nonwhitespace_source_coverage_complete": True,
             "acceptance_contract": {
                 "obligations": [
-                    {"obligation_id": "RAWREQ:a"},
-                    {"obligation_id": "RAWREQ:b"},
-                    {"obligation_id": "RAWREQ:c"},
-                ]
+                    {"obligation_id": "RAWREQ:a", "segment_sha256": "seg-a", "span": [0, 1], "kind": "RAW_SOURCE_SEGMENT_ACCEPTANCE"},
+                    {"obligation_id": "RAWREQ:b", "segment_sha256": "seg-b", "span": [2, 3], "kind": "RAW_SOURCE_SEGMENT_ACCEPTANCE"},
+                    {"obligation_id": "RAWREQ:c", "segment_sha256": "seg-c", "span": [4, 5], "kind": "RAW_SOURCE_SEGMENT_ACCEPTANCE"},
+                ],
+                "required_obligation_ids": ["RAWREQ:a", "RAWREQ:b", "RAWREQ:c"]
             },
         }
         payload, binding = controller._bootstrap_opaque_decision_context(
@@ -628,12 +644,14 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
         raw_contract = {
             "pass": True,
             "task_contract_sha256": "raw-contract-1",
+            "task_sha256": "goal-sha-1",
             "nonwhitespace_source_coverage_complete": True,
             "acceptance_contract": {
                 "obligations": [
-                    {"obligation_id": "RAWREQ:o1"},
-                    {"obligation_id": "RAWREQ:o2"},
-                ]
+                    {"obligation_id": "RAWREQ:o1", "segment_sha256": "seg-o1", "span": [0, 1], "kind": "RAW_SOURCE_SEGMENT_ACCEPTANCE"},
+                    {"obligation_id": "RAWREQ:o2", "segment_sha256": "seg-o2", "span": [2, 3], "kind": "RAW_SOURCE_SEGMENT_ACCEPTANCE"},
+                ],
+                "required_obligation_ids": ["RAWREQ:o1", "RAWREQ:o2"]
             },
         }
         opaque = controller._opaque_goal_atom_id("RAWREQ:o2")
@@ -731,9 +749,11 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
         raw_contract = {
             "pass": True,
             "task_contract_sha256": "raw-contract-2",
+            "task_sha256": "goal-sha-2",
             "nonwhitespace_source_coverage_complete": True,
             "acceptance_contract": {
-                "obligations": [{"obligation_id": "RAWREQ:o1"}]
+                "obligations": [{"obligation_id": "RAWREQ:o1", "segment_sha256": "seg-o1", "span": [0, 1], "kind": "RAW_SOURCE_SEGMENT_ACCEPTANCE"}],
+                "required_obligation_ids": ["RAWREQ:o1"]
             },
         }
         opaque = controller._opaque_goal_atom_id("RAWREQ:o1")
