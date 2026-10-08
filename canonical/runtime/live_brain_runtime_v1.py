@@ -297,17 +297,71 @@ def execute_failure_repair_cycle(
             retry_capsule_sha256=request.get("retry_capsule_sha256"),
         )
         synthesized = synthesize_failure_repair(request, state_path=path)
+        invention_mode = False
         if synthesized.get("pass") is not True:
-            return {
-                **synthesized,
-                "status": "REPAIR_CYCLE_UNRESOLVED_AT_SYNTHESIS",
-                "retry_capsule_sha256": retry["retry_capsule_sha256"],
+            causal = synthesized.get("causal_synthesis")
+            classification = (
+                str(causal.get("classification") or "")
+                if isinstance(causal, Mapping)
+                else ""
+            )
+            if classification != "NEW_PRIMITIVE_REQUIRED" or capability_expander is None:
+                return {
+                    **synthesized,
+                    "status": "REPAIR_CYCLE_UNRESOLVED_AT_SYNTHESIS",
+                    "retry_capsule_sha256": retry["retry_capsule_sha256"],
+                    "capability_expander_available": capability_expander is not None,
+                }
+            required_effect = str(synthesized.get("required_repair_effect") or "").strip()
+            if not required_effect:
+                return _fail("NEW_PRIMITIVE_REPAIR_EFFECT_MISSING")
+            invention_targets = [required_effect]
+            invention_target_source = "REPAIR_CLASS_META_EFFECT"
+            if required_effect == "repair.capability.available":
+                retry_context = retry.get("context")
+                if isinstance(retry_context, Mapping):
+                    retry_mode = str(retry_context.get("mode") or "").strip()
+                    concrete = None
+                    if retry_mode == "generic":
+                        raw_problem = retry_context.get("problem")
+                        if isinstance(raw_problem, Mapping):
+                            concrete = raw_problem.get("target_effects")
+                    elif retry_mode == "compiled_bound":
+                        raw_request = retry_context.get("request")
+                        if isinstance(raw_request, Mapping):
+                            concrete = raw_request.get("target_effects")
+                    if isinstance(concrete, Sequence) and not isinstance(concrete, (str, bytes)):
+                        normalized = sorted({
+                            str(effect).strip()
+                            for effect in concrete
+                            if isinstance(effect, str) and str(effect).strip()
+                        })
+                        if normalized:
+                            invention_targets = normalized
+                            invention_target_source = "STORED_ORIGINAL_OBLIGATION_TARGET_EFFECTS"
+            fingerprint_prefix = fingerprint[:16]
+            problem = {
+                "task_id": str(
+                    request.get("repair_task_id")
+                    or (
+                        "invent-repair-"
+                        + fingerprint_prefix
+                        + "-"
+                        + retry["retry_capsule_sha256"][:12]
+                    )
+                ),
+                "initial_facts": list(request.get("initial_facts") or []),
+                "target_effects": invention_targets,
+                "capabilities": [],
+                "max_solver_cycles": min(int(request.get("max_solver_cycles", 64)), 256),
             }
-        problem = _compile_verified_repair_problem(
-            repair=synthesized,
-            request=request,
-            retry_capsule_sha256=retry["retry_capsule_sha256"],
-        )
+            invention_mode = True
+        else:
+            problem = _compile_verified_repair_problem(
+                repair=synthesized,
+                request=request,
+                retry_capsule_sha256=retry["retry_capsule_sha256"],
+            )
         kwargs = dict(request.get("solver_kwargs") or {})
         kwargs.setdefault("episode_id", "repair-" + retry["retry_capsule_sha256"][:12])
         kwargs.setdefault("scope_id", "verified-repair-loop")
@@ -351,9 +405,33 @@ def execute_failure_repair_cycle(
             capability_expander=capability_expander,
         )
         replay_pass = replay.get("pass") is True
+        winner_components = []
+        if not invention_mode:
+            winner_components = list(
+                synthesized["causal_synthesis"]["winner"]["components"]
+            )
         repair_record = {
             "required_repair_effect": synthesized["required_repair_effect"],
-            "winner_components": list(synthesized["causal_synthesis"]["winner"]["components"]),
+            "invention_target_effects": (
+                list(problem.get("target_effects") or [])
+                if invention_mode else [synthesized["required_repair_effect"]]
+            ),
+            "invention_target_source": (
+                invention_target_source
+                if invention_mode else "EXISTING_REPAIR_ARCHITECTURE"
+            ),
+            "repair_mode": (
+                "V12_AUTHENTICATED_CAPABILITY_EXPANSION"
+                if invention_mode
+                else "EXISTING_VERIFIED_COMPONENT_ARCHITECTURE"
+            ),
+            "winner_components": winner_components,
+            "expanded_capability_ids": list(
+                repair_execution.get("expanded_capability_ids") or []
+            ),
+            "capability_expansion_attempts": deepcopy(
+                list(repair_execution.get("capability_expansion_attempts") or [])
+            ),
             "repair_task_id": problem["task_id"],
             "repair_execution_status": repair_execution.get("status"),
             "repair_execution_pass": True,
@@ -377,6 +455,19 @@ def execute_failure_repair_cycle(
             "failure_fingerprint": fingerprint,
             "retry_capsule_sha256": retry["retry_capsule_sha256"],
             "repair_synthesis": synthesized,
+            "repair_mode": (
+                "V12_AUTHENTICATED_CAPABILITY_EXPANSION"
+                if invention_mode
+                else "EXISTING_VERIFIED_COMPONENT_ARCHITECTURE"
+            ),
+            "invention_target_effects": (
+                list(problem.get("target_effects") or [])
+                if invention_mode else [synthesized["required_repair_effect"]]
+            ),
+            "invention_target_source": (
+                invention_target_source
+                if invention_mode else "EXISTING_REPAIR_ARCHITECTURE"
+            ),
             "repair_problem": problem,
             "repair_execution": repair_execution,
             "repair_learning": repair_learning,
@@ -392,6 +483,98 @@ def execute_failure_repair_cycle(
         }
     except Exception as exc:
         return _fail("REPAIR_CYCLE_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
+
+
+def _auto_repair_live_failure(
+    result: Mapping[str, Any],
+    request: Mapping[str, Any],
+    *,
+    repo_root: str | Path,
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None,
+) -> dict[str, Any]:
+    """Advance a freshly queued R3 repair immediately when a repair frontier exists.
+
+    No repair authority is invented here. Existing verified components and/or the
+    authenticated capability expander are the only execution sources. Successful
+    repair counts only after exact original-obligation replay passes.
+    """
+    out = deepcopy(dict(result))
+    if request.get("auto_repair", True) is False or out.get("pass") is True:
+        return out
+
+    learning = out.get("learning")
+    if not isinstance(learning, Mapping) or learning.get("pass") is not False:
+        return out
+    diagnosis = learning.get("diagnosis")
+    if not isinstance(diagnosis, Mapping):
+        return out
+    fingerprint = str(diagnosis.get("failure_fingerprint") or "").strip()
+    retry_sha = str(learning.get("retry_capsule_sha256") or "").strip()
+    if not fingerprint or not retry_sha:
+        return out
+
+    raw_components = request.get("repair_components")
+    if raw_components is None:
+        components: list[Mapping[str, Any]] = []
+    elif isinstance(raw_components, Sequence) and not isinstance(raw_components, (str, bytes)):
+        components = [
+            deepcopy(dict(row))
+            for row in raw_components
+            if isinstance(row, Mapping)
+        ]
+        if len(components) != len(raw_components):
+            out["auto_repair"] = _fail("AUTO_REPAIR_COMPONENT_FRONTIER_INVALID")
+            return out
+    else:
+        out["auto_repair"] = _fail("AUTO_REPAIR_COMPONENT_FRONTIER_INVALID")
+        return out
+
+    if not components and capability_expander is None:
+        out["auto_repair"] = {
+            "schema": SCHEMA,
+            "status": "AUTO_REPAIR_BLOCKED__VERIFIED_FRONTIER_OR_CAPABILITY_EXPANDER_REQUIRED",
+            "pass": False,
+            "failure_fingerprint": fingerprint,
+            "retry_capsule_sha256": retry_sha,
+            "terminal_authority": False,
+            "capability_promotion_authority": False,
+            "terminal_credit_delta": 0,
+        }
+        return out
+
+    repair_request = {
+        "failure_fingerprint": fingerprint,
+        "retry_capsule_sha256": retry_sha,
+        "components": components,
+        "solver_kwargs": deepcopy(dict(request.get("repair_solver_kwargs") or {})),
+        "learn": True,
+    }
+    repaired = execute_failure_repair_cycle(
+        repair_request,
+        repo_root=repo_root,
+        state_path=request.get("state_path"),
+        information_provider=information_provider,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+    )
+    out["auto_repair"] = repaired
+    out["auto_repair_attempted"] = True
+    if repaired.get("pass") is True:
+        out["pass"] = True
+        out["status"] = str(out.get("status") or "LIVE_EXECUTION") + "__R3_RECOVERED"
+        out["recovered_execution"] = deepcopy(repaired.get("original_replay"))
+        out["r3_original_failure_status"] = result.get("status")
+    return out
+
+
+def _replay_request_payload(payload: Mapping[str, Any]) -> dict[str, Any]:
+    """Strip R3 control-plane fields so exact replay cannot recursively auto-repair."""
+    cleaned = deepcopy(dict(payload))
+    for key in ("repair_components", "repair_solver_kwargs", "auto_repair"):
+        cleaned.pop(key, None)
+    return cleaned
 
 
 def _active_learning_context(state_path: str | Path | None, *, scope_id: str, episode_id: str) -> dict[str, Any]:
@@ -855,7 +1038,7 @@ def run(
                 "max_information_rounds", "episode_id", "scope_id",
             }
             payload = {k: deepcopy(v) for k, v in request.items() if k in allowed}
-        return run_decision(
+        out = run_decision(
             payload,
             repo_root=repo_root,
             state_path=request.get("state_path"),
@@ -864,12 +1047,20 @@ def run(
             capability_expander=capability_expander,
             learn=request.get("learn", True) is not False,
         )
+        return _auto_repair_live_failure(
+            out,
+            request,
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
 
     if mode == "generic":
         problem = request.get("problem")
         if not isinstance(problem, Mapping):
             return _fail("GENERIC_PROBLEM_REQUIRED")
-        return run_generic(
+        out = run_generic(
             problem,
             repo_root=repo_root,
             state_path=request.get("state_path"),
@@ -878,6 +1069,14 @@ def run(
             active_invalidators=request.get("active_invalidators") or (),
             learn=request.get("learn", True) is not False,
             solver_kwargs=request.get("solver_kwargs") or {},
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
+        return _auto_repair_live_failure(
+            out,
+            request,
+            repo_root=repo_root,
+            information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
         )
@@ -892,11 +1091,11 @@ def run(
             learn=request.get("learn", True) is not False,
             retry_context={
                 "mode": "compiled_bound",
-                "request": deepcopy(dict(payload)),
+                "request": _replay_request_payload(payload),
                 "learn": True,
             },
         )
-        return {
+        out = {
             "schema": SCHEMA,
             "status": "UNIFIED_BOUND_EXECUTION_COMPLETE",
             "pass": raw.get("pass") is True,
@@ -906,6 +1105,14 @@ def run(
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
         }
+        return _auto_repair_live_failure(
+            out,
+            request,
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
 
     if mode == "raw_bound":
         nested = request.get("request")
@@ -921,7 +1128,7 @@ def run(
                 "learn": True,
             },
         )
-        return {
+        out = {
             "schema": SCHEMA,
             "status": "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE",
             "pass": raw.get("pass") is True,
@@ -932,6 +1139,14 @@ def run(
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
         }
+        return _auto_repair_live_failure(
+            out,
+            request,
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
 
     if mode == "repair_synthesis":
         nested = request.get("request")
@@ -973,12 +1188,20 @@ def run(
             return _fail("DEVELOPMENT_SCHEDULER_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
 
     if mode == "specialized":
-        return run_specialized(
+        out = run_specialized(
             str(request.get("surface") or ""),
             request.get("payload") or {},
             repo_root=repo_root,
             state_path=request.get("state_path"),
             learn=request.get("learn", True) is not False,
+        )
+        return _auto_repair_live_failure(
+            out,
+            request,
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
         )
 
     if mode == "skill_plan":
