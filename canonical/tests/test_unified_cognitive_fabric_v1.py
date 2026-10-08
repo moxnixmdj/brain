@@ -29,6 +29,14 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             "canonical/runtime/unified_cognitive_fabric_v1.py",
             c["brain_owned_transitive_files"],
         )
+        self.assertGreaterEqual(
+            c["current_authority_runtime_census"]["authority_declared_runtime_count"],
+            1,
+        )
+        self.assertEqual(
+            c["current_authority_runtime_complete"],
+            c["current_authority_runtime_missing_count"] == 0,
+        )
         self.assertNotIn(
             "H100_SPECIALIZED_INFERENCE_REGISTRIES_NOT_YET_EXPOSED_AS_FABRIC_CAPABILITIES",
             c["known_unified_fabric_residuals"],
