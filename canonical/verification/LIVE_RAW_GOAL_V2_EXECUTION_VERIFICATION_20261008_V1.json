@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_RAW_GOAL_V2_EXECUTION_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__PLAIN_ENGLISH_TO_VERIFIED_EXECUTION__5_OF_5",
+  "branch": "live-brain-raw-goal-v2-20261008",
+  "isolated_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+  },
+  "proved_path": [
+    "RAW_PLAIN_LANGUAGE_GOAL",
+    "LOSSLESS_RAW_TASK_OBLIGATION_ENVELOPE",
+    "DETERMINISTIC_GOAL_COMPILER",
+    "EXACT_SELECTED_VERIFIED_BOUND_CAPABILITY",
+    "CAPABILITY_PLANNER",
+    "REAL_CAPABILITY_EXECUTION",
+    "INDEPENDENT_TRACE_REVERIFICATION"
+  ],
+  "live_case": {
+    "task_id": "LIVE_BRAIN_RAW_GOAL_ARCHIVE_001",
+    "selected_capability": "archive.tar_gz.create_from_manifest",
+    "executed": true,
+    "independently_reverified": true,
+    "raw_source_coverage_complete": true,
+    "routing_success_authority": false,
+    "semantic_acceptance_complete": false
+  },
+  "fail_closed_case": {
+    "goal": "Calibrate the neutrino interferometer phase drift.",
+    "outcome": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
+    "invented_capability": false
+  },
+  "verification": {
+    "command": "python3 -m unittest canonical.tests.test_live_integrated_brain_v1 -v",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "elapsed_seconds": 0.033
+  },
+  "next_boundary": "RICHER_MULTI_CAPABILITY_AND_CONTROL_PLAN_BINDING_PLUS_ACCEPTANCE_RECEIPTS_FOR_RAW_OBLIGATIONS",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

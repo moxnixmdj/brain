@@ -17,6 +17,8 @@ from typing import Any, Mapping
 
 from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute
+from canonical.runtime import goal_compiler
+from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 
 SCHEMA = "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -109,6 +111,13 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
             raise LiveBrainError("CAPABILITY_INPUTS_NOT_OBJECT")
 
         registry = load_verified_registry()
+        allowed = request.get("allowed_capability_ids")
+        if allowed is not None:
+            allowed_ids = _tokens(allowed, "ALLOWED_CAPABILITY_IDS", allow_empty=False)
+            unknown = sorted(set(allowed_ids) - set(registry))
+            if unknown:
+                raise LiveBrainError("ALLOWED_CAPABILITY_UNKNOWN:" + ",".join(unknown))
+            registry = {cid: registry[cid] for cid in allowed_ids}
         problem = compile_capability_graph(
             initial_facts=initial,
             target_effects=targets,
@@ -207,6 +216,135 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
             "status": "FAIL_CLOSED",
             "pass": False,
             "failure_class": "INTEGRATION_RUNTIME_ERROR",
+            "reason": type(exc).__name__ + ":" + str(exc),
+            "elapsed_ns": perf_counter_ns() - started,
+            "incremental_spend_usd": 0,
+        }
+
+
+
+def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
+    """Compile one raw plain-language goal into the live verified runtime.
+
+    Raw text is preserved losslessly as acceptance obligations. The deterministic
+    goal compiler may choose routing/execution, but routing never becomes success
+    authority. V1 supports the existing single-capability compiled shape; richer
+    controller/composition shapes fail closed instead of being guessed.
+    """
+    started = perf_counter_ns()
+    try:
+        if not isinstance(request, Mapping):
+            raise LiveBrainError("REQUEST_NOT_OBJECT")
+        task_id = str(request.get("task_id") or "").strip()
+        goal = str(request.get("goal") or "").strip()
+        if not task_id:
+            raise LiveBrainError("TASK_ID_REQUIRED")
+        if not goal:
+            raise LiveBrainError("RAW_GOAL_REQUIRED")
+
+        registry = load_verified_registry()
+        admissible = goal_compiler._platform_admissible_registry(dict(registry))
+        try:
+            compiled = goal_compiler.compile_goal(goal, admissible, ROOT)
+        except goal_compiler.GoalCompilationFailure as exc:
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+                "pass": False,
+                "task_id": task_id,
+                "failure_class": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
+                "compiler_code": exc.code,
+                "compiler_detail": exc.detail,
+                "elapsed_ns": perf_counter_ns() - started,
+                "incremental_spend_usd": 0,
+            }
+
+        if compiled.get("controller_actions") is not None:
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL__COMPILED_CONTROL_PLAN_NOT_BOUND",
+                "pass": False,
+                "task_id": task_id,
+                "failure_class": "LIVE_RUNTIME_COMPOSITION_BINDING_GAP",
+                "compiler_mode": compiled.get("compiler_mode"),
+                "elapsed_ns": perf_counter_ns() - started,
+                "incremental_spend_usd": 0,
+            }
+
+        selected = str(compiled.get("selected_capability") or "").strip()
+        inputs = compiled.get("inputs")
+        targets = compiled.get("target_effects")
+        initial = compiled.get("initial_facts")
+        if (
+            not selected
+            or selected not in admissible
+            or not isinstance(inputs, Mapping)
+            or not isinstance(targets, list)
+            or not targets
+            or not isinstance(initial, list)
+        ):
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL__COMPILED_SHAPE_NOT_EXECUTABLE",
+                "pass": False,
+                "task_id": task_id,
+                "failure_class": "RAW_GOAL_COMPILED_SHAPE_GAP",
+                "compiler_mode": compiled.get("compiler_mode"),
+                "elapsed_ns": perf_counter_ns() - started,
+                "incremental_spend_usd": 0,
+            }
+
+        raw_contract = compile_contract(
+            goal,
+            source_id="user",
+            routing_target_effects=targets,
+        )
+        if raw_contract.get("pass") is not True:
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL__LOSSLESS_RAW_TASK_CONTRACT",
+                "pass": False,
+                "task_id": task_id,
+                "failure_class": "RAW_TASK_OBLIGATION_ENVELOPE_FAILURE",
+                "errors": raw_contract.get("errors"),
+                "elapsed_ns": perf_counter_ns() - started,
+                "incremental_spend_usd": 0,
+            }
+
+        out = run({
+            "task_id": task_id,
+            "initial_facts": list(initial),
+            "target_effects": list(targets),
+            "capability_inputs": {selected: dict(inputs)},
+            "allowed_capability_ids": [selected],
+        })
+        result = dict(out)
+        result["raw_goal"] = goal
+        result["raw_goal_sha256"] = raw_contract["task_sha256"]
+        result["raw_task_contract_sha256"] = raw_contract["task_contract_sha256"]
+        result["raw_acceptance_obligation_count"] = len(
+            raw_contract["acceptance_contract"]["obligations"]
+        )
+        result["raw_source_coverage_complete"] = raw_contract[
+            "nonwhitespace_source_coverage_complete"
+        ]
+        result["compiled_capability_id"] = selected
+        result["compiler_mode"] = compiled.get("compiler_mode")
+        result["routing_success_authority"] = False
+        result["semantic_acceptance_complete"] = False
+        result["elapsed_ns"] = perf_counter_ns() - started
+        if result.get("pass") is True:
+            result["status"] = (
+                "PASS__RAW_GOAL_COMPILED_PLANNED_EXECUTED_REVERIFIED__"
+                "RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
+            )
+        return result
+    except Exception as exc:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "failure_class": "RAW_GOAL_INTEGRATION_RUNTIME_ERROR",
             "reason": type(exc).__name__ + ":" + str(exc),
             "elapsed_ns": perf_counter_ns() - started,
             "incremental_spend_usd": 0,
