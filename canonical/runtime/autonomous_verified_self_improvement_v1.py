@@ -42,6 +42,9 @@ from canonical.runtime.universal_solver_episode_verification_authenticator_v1 im
     authenticate as authenticate_episode_verification,
     reauthenticate_record as reauthenticate_episode_record,
 )
+from canonical.runtime.proof_carrying_outcome_v1 import (
+    verify_proof_carrying_outcome_integrity,
+)
 from canonical.runtime import universal_verified_adaptive_solver_v12 as solver_v12
 
 SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1"
@@ -128,6 +131,60 @@ def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None
     """Retain only bounded execution-proof metadata needed for later read-only verification."""
     if not isinstance(out, Mapping) or out.get("pass") is not True:
         return None
+
+    raw_acceptance = out.get("raw_goal_acceptance")
+    if (
+        isinstance(raw_acceptance, Mapping)
+        and raw_acceptance.get("schema") == "PROJECT_BRAIN_PROOF_CARRYING_OUTCOME_V1"
+    ):
+        integrity = verify_proof_carrying_outcome_integrity(raw_acceptance)
+        if integrity.get("pass") is not True:
+            return None
+        material = {
+            "proof_kind": "R2_PROOF_CARRYING_RAW_GOAL_ACCEPTANCE_V1",
+            "source_schema": _s(out.get("schema")) or None,
+            "source_status": _s(out.get("status")) or None,
+            "task_id": _s(out.get("task_id")) or None,
+            "raw_goal_sha256": _s(out.get("raw_goal_sha256")) or None,
+            "raw_task_contract_sha256": _s(
+                out.get("raw_task_contract_sha256")
+            ) or None,
+            "raw_acceptance_obligation_count": out.get(
+                "raw_acceptance_obligation_count"
+            ),
+            "accepted_raw_obligation_ids": _items(
+                out.get("accepted_raw_obligation_ids")
+            ),
+            "selected_policy_id": _s(
+                raw_acceptance.get("selected_policy_id")
+            ) or None,
+            "proof_carrying_outcome_sha256": _s(
+                raw_acceptance.get("proof_carrying_outcome_sha256")
+            ) or None,
+            "semantic_acceptance_complete": True,
+            "raw_goal_acceptance": deepcopy(dict(raw_acceptance)),
+        }
+        if (
+            material["raw_goal_sha256"] != _s(raw_acceptance.get("raw_goal_sha256"))
+            or material["raw_task_contract_sha256"]
+            != _s(raw_acceptance.get("raw_task_contract_sha256"))
+            or material["raw_acceptance_obligation_count"]
+            != raw_acceptance.get("raw_acceptance_obligation_count")
+            or material["accepted_raw_obligation_ids"]
+            != _items(raw_acceptance.get("accepted_raw_obligation_ids"))
+        ):
+            return None
+        _validate_retry_value(material, path="success_proof")
+        raw = _canon(material).encode("utf-8")
+        if len(raw) > 128_000:
+            raise SelfImprovementError("SUCCESS_PROOF_CAPSULE_TOO_LARGE")
+        return {
+            "schema": "PROJECT_BRAIN_SUCCESS_PROOF_CAPSULE_V1",
+            "sha256": _sha(material),
+            "material": material,
+            "secret_scan": "PASS",
+        }
+
     checkpoint = out.get("controller_checkpoint")
     selected_plan = out.get("selected_plan")
     if not isinstance(checkpoint, Mapping):
