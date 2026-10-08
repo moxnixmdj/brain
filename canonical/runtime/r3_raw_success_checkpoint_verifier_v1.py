@@ -157,7 +157,7 @@ def verify_material(
         retained = problem.get("retained_acceptance")
         if not isinstance(retained, Mapping) or _canon(dict(retained)) != _canon(dict(acceptance)):
             raise ValueError("RAW_ACCEPTANCE_RECEIPT_MISMATCH")
-        if list(problem.get("accepted_obligation_ids") or []) != list(acceptance.get("accepted_obligation_ids") or []):
+        if sorted(problem.get("accepted_obligation_ids") or []) != sorted(acceptance.get("accepted_obligation_ids") or []):
             raise ValueError("RAW_ACCEPTED_OBLIGATION_SET_MISMATCH")
 
         accepted_effect = "raw_goal.accepted.sha256:" + goal_sha
