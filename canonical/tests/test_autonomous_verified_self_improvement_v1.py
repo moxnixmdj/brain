@@ -781,6 +781,204 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             ["scope-a", "scope-b"],
         )
 
+    def test_pending_skill_candidate_is_autonomously_verified_and_promoted(self):
+        path = self.temp_state()
+        candidate = verified_skill("8", relation="EXACT")
+        candidate = loop._candidate_from_verified_skill(candidate)
+        queued = loop.integrate_solver_output(
+            {
+                "pass": True,
+                "current_episode_verified": False,
+                "skill_candidate": candidate,
+                "verified_skill_reuse_authorized": False,
+                "verified_executable_skill": None,
+            },
+            state_path=path,
+        )
+        self.assertEqual(
+            queued["status"],
+            "SKILL_CANDIDATE_AWAITS_INDEPENDENT_VERIFICATION",
+        )
+
+        verified = verified_skill("8", relation="EXACT")
+        provider = mock.Mock(return_value={"binding": "opaque"})
+        with mock.patch.object(
+            loop,
+            "authenticate_skill_verification",
+            return_value={"pass": True, "verified_skill": verified},
+        ) as authenticate:
+            tick = loop.advance_improvement_queue(
+                state_path=path,
+                repo_root=Path("."),
+                skill_verification_provider=provider,
+            )
+
+        self.assertEqual(tick["advanced_count"], 1, tick)
+        provider.assert_called_once()
+        authenticate.assert_called_once()
+        state = loop.load_state(path)
+        sid = loop._skill_id(verified)
+        self.assertTrue(state["skills"][sid]["active"])
+        self.assertFalse(any(
+            row.get("kind") == "VERIFY_SKILL_CANDIDATE"
+            and row.get("status") == "PENDING"
+            for row in state["improvement_queue"].values()
+        ))
+
+    def test_scope_generalization_queue_is_autonomously_verified(self):
+        path = self.temp_state()
+        exact = verified_skill("9", relation="EXACT")
+        integrated = loop.integrate_solver_output(
+            {
+                "pass": True,
+                "current_episode_verified": False,
+                "skill_candidate": exact,
+                "verified_skill_reuse_authorized": True,
+                "verified_executable_skill": exact,
+            },
+            state_path=path,
+        )
+        sid = integrated["active_skill_id"]
+        self.assertIsNotNone(sid)
+        self.assertEqual(
+            loop.next_improvement_action(state_path=path)["kind"],
+            "SEEK_VERIFIED_SCOPE_GENERALIZATION",
+        )
+
+        generalized = verified_skill("9", relation="PROVEN_SUPERSET")
+        provider = mock.Mock(return_value={"binding": "opaque"})
+        with mock.patch.object(
+            loop,
+            "authenticate_skill_verification",
+            return_value={"pass": True, "verified_skill": generalized},
+        ):
+            tick = loop.advance_improvement_queue(
+                state_path=path,
+                repo_root=Path("."),
+                skill_verification_provider=provider,
+            )
+
+        self.assertEqual(tick["advanced_count"], 1, tick)
+        state = loop.load_state(path)
+        self.assertEqual(
+            state["skills"][sid]["skill"]["scope_relation"],
+            "PROVEN_SUPERSET",
+        )
+        self.assertFalse(any(
+            row.get("kind") == "SEEK_VERIFIED_SCOPE_GENERALIZATION"
+            and row.get("status") == "PENDING"
+            for row in state["improvement_queue"].values()
+        ))
+
+    def test_unverified_episode_retains_work_and_is_verified_on_later_tick(self):
+        path = self.temp_state()
+        raw_episode = {
+            "episode_id": "queued-episode",
+            "scope_id": "scope",
+            "steps": [{"index": 0, "op": "solve", "inputs": [], "outputs": ["goal"]}],
+            "preconditions": [],
+            "postconditions": ["goal"],
+            "invalidators": [],
+            "program_sha256": "sha256:" + ("a" * 64),
+            "trace_sha256": "d" * 64,
+        }
+        raw = {
+            "pass": True,
+            "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+            "current_episode": raw_episode,
+            "current_episode_verified": False,
+            "trace": [],
+            "state_capsule_head_hash": "e" * 64,
+            "value_capsule_head_hash": "f" * 64,
+            "skill_candidate": None,
+            "verified_executable_skill": None,
+        }
+        prepared = loop._post_execution_independent_verification(
+            raw,
+            problem={"task_id": "queued"},
+            prior_verified_episode_records=(),
+            repo_root=Path("."),
+            episode_verification_provider=None,
+            skill_verification_provider=None,
+        )
+        self.assertIsInstance(
+            prepared.get("pending_episode_verification_work"),
+            dict,
+        )
+        loop.integrate_solver_output(prepared, state_path=path)
+        work = loop.next_improvement_action(state_path=path)
+        self.assertEqual(work["kind"], "VERIFY_EPISODE")
+        self.assertIsInstance(work["payload"]["verification_work"], dict)
+
+        authenticated = verified_episode("queued-episode")
+        provider = mock.Mock(return_value={"binding": "opaque"})
+        with mock.patch.object(
+            loop,
+            "authenticate_episode_verification",
+            return_value={"pass": True, "authenticated_episode": authenticated},
+        ):
+            tick = loop.advance_improvement_queue(
+                state_path=path,
+                repo_root=Path("."),
+                episode_verification_provider=provider,
+            )
+
+        self.assertEqual(tick["advanced_count"], 1, tick)
+        state = loop.load_state(path)
+        self.assertEqual(state["stats"]["verified_episode_count"], 1)
+        self.assertFalse(any(
+            row.get("kind") == "VERIFY_EPISODE"
+            and row.get("status") == "PENDING"
+            for row in state["improvement_queue"].values()
+        ))
+
+    def test_learning_run_drains_pending_skill_before_reuse_selection(self):
+        path = self.temp_state()
+        candidate = loop._candidate_from_verified_skill(
+            verified_skill("7", relation="EXACT")
+        )
+        loop.integrate_solver_output(
+            {
+                "pass": True,
+                "current_episode_verified": False,
+                "skill_candidate": candidate,
+                "verified_skill_reuse_authorized": False,
+                "verified_executable_skill": None,
+            },
+            state_path=path,
+        )
+        verified = verified_skill("7", relation="EXACT")
+        provider = mock.Mock(return_value={"binding": "opaque"})
+        solved = {
+            "pass": True,
+            "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+            "current_episode_verified": False,
+            "skill_candidate": None,
+            "verified_skill_reuse_authorized": False,
+            "verified_executable_skill": None,
+        }
+        with (
+            mock.patch.object(
+                loop,
+                "authenticate_skill_verification",
+                return_value={"pass": True, "verified_skill": verified},
+            ),
+            mock.patch.object(loop.solver_v12, "run", return_value=solved),
+        ):
+            out = loop.run_learning_episode(
+                self._reuse_problem(),
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="after-queue",
+                scope_id="scope",
+                skill_verification_provider=provider,
+            )
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["improvement_tick"]["advanced_count"], 1)
+        self.assertTrue(out["reuse_first"])
+        self.assertEqual(out["reused_skill_id"], loop._skill_id(verified))
+
     def test_reuse_first_runner_forwards_retry_context_to_failure_integration(self):
         path = self.temp_state()
         failed = {
