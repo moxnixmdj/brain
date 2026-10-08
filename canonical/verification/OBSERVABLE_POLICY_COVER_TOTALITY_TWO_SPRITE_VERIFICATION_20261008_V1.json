@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_OBSERVABLE_POLICY_COVER_TOTALITY_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_12_OF_12_EXACT_CANONICAL_TESTS_ON_TWO_SPRITES__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/observable_policy_cover_totality_gate_v1.py",
+    "git_blob_sha": "63c7c22abf425ae8383d5d1bb79227c62865f72f",
+    "sha256": "79a3acb5fe3085d9cac84324e7c1bd8555304ebbbe9d7533c6579745d4c1d6b8"
+  },
+  "tests": {
+    "path": "canonical/tests/test_observable_policy_cover_totality_gate_v1.py",
+    "git_blob_sha": "f16adcf9cfa0e74a46ffac3e081a8155964a3e75",
+    "sha256": "eb7b72cb9f6d2cdf39e64fb7259219b9ff11be40434c597d383fd19bf2165f73"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_passed": 12,
+      "tests_run": 12
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_passed": 12,
+      "tests_run": 12
+    }
+  ],
+  "covered_checks": [
+    "POSITIVE_COVER_STRICT_REFINEMENT_TREE",
+    "COMMON_POLICY_ZERO_DISCRIMINATOR_STOP",
+    "UNRESOLVED_INDISTINGUISHABLE_DISJOINT_POLICY_CLASS",
+    "FORGED_LIBRARY_COMPLETENESS_REJECTED",
+    "AUTHENTICATED_LIBRARY_COMPLETENESS_NEGATIVE_BOUNDARY_ONLY",
+    "INCOMPLETE_OUTCOME_MAP_FAIL_CLOSED",
+    "UNSOUND_POLICY_RECEIPT_FAIL_CLOSED",
+    "CANONICALIZED_STRUCTURED_OUTCOMES",
+    "CHEAPER_TRUTHFUL_DISCRIMINATOR_OPTIMIZATION",
+    "EQUAL_COST_COMMON_POLICY_TIE_BREAK",
+    "NONFINITE_POLICY_COST_REJECTED",
+    "NONFINITE_DISCRIMINATOR_COST_REJECTED"
+  ],
+  "theorem_conclusion": "BOUND_FINITE_POLICY_RELEVANT_STATE_TOTALITY_IS_EXECUTABLY_VERIFIED__POSITIVE_PROOF_DOES_NOT_REQUIRE_COMPLETE_DISCRIMINATOR_LIBRARY",
+  "boundaries": [
+    "GLOBAL_SCOPE_COMPLETE_PARAMETERIZED_INSTANTIATION_OVER_S_TRACE_NOT_PROVED",
+    "NO_U_EMPTY_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
