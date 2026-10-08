@@ -124,10 +124,79 @@ def _make_retry_capsule(context: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _make_direct_adequacy_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Retain bounded R2 direct-adequacy evidence for read-only R3 adaptation."""
+    if (
+        not isinstance(out, Mapping)
+        or out.get("pass") is not True
+        or out.get("direct_adequacy_authority") is not True
+        or out.get("semantic_acceptance_complete") is not True
+        or out.get("actual_goal_satisfaction_verified") is not True
+    ):
+        return None
+    route_id = _s(out.get("route_id"))
+    goal_sha256 = _s(out.get("goal_sha256"))
+    accepted_ids = _items(out.get("accepted_raw_obligation_ids"))
+    required_count = out.get("raw_acceptance_obligation_count")
+    acceptance = out.get("acceptance_receipt")
+    if (
+        not route_id
+        or len(goal_sha256) != 64
+        or not accepted_ids
+        or not isinstance(required_count, int)
+        or isinstance(required_count, bool)
+        or required_count != len(accepted_ids)
+        or len(set(accepted_ids)) != len(accepted_ids)
+        or not isinstance(acceptance, Mapping)
+    ):
+        raise SelfImprovementError("DIRECT_ADEQUACY_SUCCESS_PROOF_INVALID")
+    material = {
+        "proof_kind": "R2_DIRECT_ADEQUACY_READBACK_V1",
+        "source_schema": _s(out.get("schema")) or None,
+        "source_status": _s(out.get("status")) or None,
+        "route_id": route_id,
+        "capability_id": _s(out.get("capability_id")) or None,
+        "selected_policy_id": _s(out.get("selected_policy_id")) or None,
+        "goal_sha256": goal_sha256,
+        "semantic_scope": _s(out.get("semantic_scope")) or None,
+        "accepted_raw_obligation_ids": accepted_ids,
+        "raw_acceptance_obligation_count": required_count,
+        "acceptance_receipt": deepcopy(dict(acceptance)),
+        "raw_result": (
+            deepcopy(dict(out.get("raw_result")))
+            if isinstance(out.get("raw_result"), Mapping)
+            else None
+        ),
+        "authority_boundary": _s(out.get("authority_boundary")) or None,
+        "input_path": _s(out.get("input_path")) or None,
+        "input_sha256": _s(out.get("input_sha256")) or None,
+        "output_path": _s(out.get("output_path")) or None,
+        "output_sha256": _s(out.get("output_sha256")) or None,
+        "json_path": _s(out.get("json_path")) or None,
+        "source_sha256": _s(out.get("source_sha256")) or None,
+        "intent_path": _s(out.get("intent_path")) or None,
+        "semantic_acceptance_complete": True,
+        "actual_goal_satisfaction_verified": True,
+    }
+    _validate_retry_value(material, path="direct_adequacy_success_proof")
+    raw = _canon(material).encode("utf-8")
+    if len(raw) > 512_000:
+        raise SelfImprovementError("DIRECT_ADEQUACY_SUCCESS_PROOF_TOO_LARGE")
+    return {
+        "schema": "PROJECT_BRAIN_SUCCESS_PROOF_CAPSULE_V1",
+        "sha256": _sha(material),
+        "material": material,
+        "secret_scan": "PASS",
+    }
+
+
 def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None:
     """Retain only bounded execution-proof metadata needed for later read-only verification."""
     if not isinstance(out, Mapping) or out.get("pass") is not True:
         return None
+    direct = _make_direct_adequacy_proof_capsule(out)
+    if direct is not None:
+        return direct
     checkpoint = out.get("controller_checkpoint")
     selected_plan = out.get("selected_plan")
     if not isinstance(checkpoint, Mapping):
