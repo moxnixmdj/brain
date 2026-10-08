@@ -1,0 +1,24 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_SUFFICIENT_CONDITION_COMPILER_CANDIDATE_V1",
+  "date":"2026-10-08",
+  "status":"CANDIDATE__ZERO_CREDIT_PENDING_EXACT_CORPUS_SCAN_AND_INDEPENDENT_REPLAY",
+  "principle":"COMPILE_ONLY_ONE_WAY_SUFFICIENT_CONDITIONS__FALSE_NEGATIVES_ALLOWED__FALSE_POSITIVES_FORBIDDEN",
+  "purpose":"Reduce GDPval semantic burden by proving a stronger executable condition whose PASS implies the original criterion, without requiring full natural-language equivalence.",
+  "runtime":"canonical/runtime/gdpval_sufficient_condition_compiler_v1.py",
+  "tests":"canonical/tests/test_gdpval_sufficient_condition_compiler_v1.py",
+  "initial_rule_families":[
+    "NATIVE_TOP_LEVEL_OR_SECTION_HEADING",
+    "EXACT_WORKSHEET_NAME",
+    "ANCHORED_FORM_OR_SCHEDULE_LINE_NUMERIC_VALUE",
+    "ANCHORED_ANNUAL_RATE_RANGE",
+    "ANCHORED_SCENARIO_DEFAULT_SCALARS"
+  ],
+  "soundness_model":"STRUCTURAL_OR_SAME_UNIT_ANCHOR_COUPLING_IS_STRONGER_THAN_THE_SUPPORTED_NATURAL_LANGUAGE_FORM__NO_EQUIVALENCE_CLAIM",
+  "hard_nonclaims":[
+    "NO_GENERAL_SEMANTIC_PARSER",
+    "NO_PARAPHRASE_ENTAILMENT",
+    "NO_CLAIM_EVERY_PROGRAM_PASS_HAS_YET_BEEN_INDEPENDENTLY_PROVED_SOUND",
+    "NO_GDPVAL_OR_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
