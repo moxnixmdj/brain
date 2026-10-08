@@ -19,6 +19,7 @@ from canonical.runtime import raw_goal_archive_acceptance_v1 as archive_acceptan
 from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_acceptance
 from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
 from canonical.runtime import r2_structured_binary_direct_adequacy_v1 as codec_adequacy
+from canonical.runtime import r2_tabular_artifact_direct_adequacy_v1 as tabular_adequacy
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -27,6 +28,7 @@ ARCHIVE_CAPABILITY_ID = "archive.tar_gz.create_from_manifest"
 EXACT_LITERAL_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1"
 LITERAL_JSON_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1"
 STRUCTURED_BINARY_CODEC_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1"
+TABULAR_ARTIFACT_ROUTE_ID = "DIRECT_ADEQUACY::TABULAR_ARTIFACT_FAMILY_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -56,6 +58,13 @@ ROUTES = {
         "preflight": "r2_structured_binary_direct_adequacy_v1.preflight",
         "executor": "r2_structured_binary_direct_adequacy_v1.run",
         "acceptance": "PRODUCER_INDEPENDENT_CROSS_SUPPLIER_SEMANTIC_DECODE",
+    },
+    TABULAR_ARTIFACT_ROUTE_ID: {
+        "capability_id": "DYNAMIC_VERIFIED_BOUND_TABULAR_PRODUCER",
+        "scope": "EXACT_SINGLE_ACTION_JSON_TO_XLSX_OR_SQLITE_GOAL_FAMILY",
+        "preflight": "r2_tabular_artifact_direct_adequacy_v1.preflight",
+        "executor": "r2_tabular_artifact_direct_adequacy_v1.run",
+        "acceptance": "PRODUCER_INDEPENDENT_SEMANTIC_READBACK_AGAINST_CANONICAL_JSON",
     },
 }
 
@@ -128,6 +137,29 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "preflight_execution_authority": False,
         }
 
+    tabular = tabular_adequacy.preflight(request)
+    if tabular.get("matched") is True:
+        if tabular.get("status") == "FAIL_CLOSED":
+            return {
+                **_base("FAIL_CLOSED", passed=False),
+                "matched": True,
+                "route_id": TABULAR_ARTIFACT_ROUTE_ID,
+                "reason": tabular.get("reason"),
+            }
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": TABULAR_ARTIFACT_ROUTE_ID,
+            "capability_id": tabular.get("capability_id"),
+            "policy_id": tabular.get("policy_id"),
+            "goal_sha256": tabular.get("goal_sha256"),
+            "artifact_kind": tabular.get("artifact_kind"),
+            "json_path": tabular.get("json_path"),
+            "output_path": tabular.get("output_path"),
+            "semantic_scope": ROUTES[TABULAR_ARTIFACT_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
     codec = codec_adequacy.preflight(request)
     if codec.get("matched") is True:
         if codec.get("status") == "FAIL_CLOSED":
@@ -161,6 +193,50 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
     pf = preflight(request)
     if pf.get("matched") is not True:
         return pf
+
+    if pf["route_id"] == TABULAR_ARTIFACT_ROUTE_ID:
+        tabular_result = tabular_adequacy.run(request)
+        if tabular_result.get("pass") is not True:
+            return {
+                **_base(
+                    str(
+                        tabular_result.get("status")
+                        or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"
+                    ),
+                    passed=False,
+                ),
+                "matched": True,
+                "route_id": pf["route_id"],
+                "capability_id": pf.get("capability_id"),
+                "goal_sha256": pf.get("goal_sha256"),
+                "execution_attempted": True,
+                "retry_by_other_route_authorized": False,
+                "tabular_adequacy": deepcopy(dict(tabular_result)),
+                "reason": tabular_result.get("reason"),
+            }
+        return {
+            **_base("PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED", passed=True),
+            "matched": True,
+            "route_id": pf["route_id"],
+            "capability_id": tabular_result.get("capability_id"),
+            "selected_policy_id": tabular_result.get("policy_id"),
+            "goal_sha256": tabular_result.get("goal_sha256"),
+            "semantic_scope": pf["semantic_scope"],
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "accepted_raw_obligation_ids": list(
+                tabular_result.get("accepted_raw_obligation_ids") or []
+            ),
+            "raw_acceptance_obligation_count": tabular_result.get(
+                "raw_acceptance_obligation_count"
+            ),
+            "acceptance_receipt": deepcopy(dict(tabular_result)),
+            "raw_result": deepcopy(dict(tabular_result.get("raw_result") or {})),
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "authority_boundary": tabular_result.get("authority_boundary"),
+        }
 
     if pf["route_id"] == STRUCTURED_BINARY_CODEC_ROUTE_ID:
         codec_result = codec_adequacy.run(request)
