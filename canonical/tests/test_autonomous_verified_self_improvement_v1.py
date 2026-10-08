@@ -262,5 +262,169 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertEqual(kwargs["prior_verified_episode_records"][0]["episode_id"], "ep1")
 
 
+    def _seed_active_skill(self, path, skill):
+        state = loop.load_state(path)
+        sid = loop._skill_id(skill)
+        row = loop._skill_pareto_row(sid, skill)
+        state["skills"][sid] = {
+            "skill": skill,
+            "family_id": loop._family_id(skill),
+            "pareto_metrics": row,
+            "active": True,
+            "dominated_by": None,
+            "compression": {},
+        }
+        state["pareto_frontiers"][loop._family_id(skill)] = [sid]
+        loop._refresh_stats(state)
+        loop._write_state(state, path)
+        return sid
+
+    def _reuse_problem(self):
+        return {
+            "task_id": "reuse-task",
+            "initial_facts": [],
+            "target_effects": ["goal"],
+            "capabilities": [
+                {
+                    "id": "op0",
+                    "requires": [],
+                    "provides": ["x"],
+                    "cost": 1,
+                    "action": {"type": "verified_policy"},
+                },
+                {
+                    "id": "op1",
+                    "requires": ["x"],
+                    "provides": ["goal"],
+                    "cost": 1,
+                    "action": {"type": "verified_policy"},
+                },
+                {
+                    "id": "distractor",
+                    "requires": [],
+                    "provides": ["other"],
+                    "cost": 1,
+                    "action": {"type": "verified_policy"},
+                },
+            ],
+        }
+
+    def test_active_verified_skill_is_automatically_used_as_planning_compression(self):
+        path = self.temp_state()
+        skill = verified_skill("7", relation="EXACT", source_ids=("ep1", "ep2"))
+        sid = self._seed_active_skill(path, skill)
+        solved = {
+            "pass": True,
+            "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+            "current_episode_verified": False,
+            "skill_candidate": None,
+            "verified_skill_reuse_authorized": False,
+            "verified_executable_skill": None,
+        }
+        with mock.patch.object(loop.solver_v10, "run", return_value=solved) as run_mock:
+            out = loop.run_learning_episode(
+                self._reuse_problem(),
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep3",
+                scope_id="scope",
+            )
+
+        self.assertTrue(out["pass"])
+        self.assertTrue(out["reuse_first"])
+        self.assertEqual(out["reused_skill_id"], sid)
+        self.assertFalse(out["fallback_used"])
+        self.assertEqual(run_mock.call_count, 1)
+        learned_problem = run_mock.call_args.args[0]
+        self.assertEqual(
+            [cap["id"] for cap in learned_problem["capabilities"]],
+            ["op0", "op1"],
+        )
+        state = loop.load_state(path)
+        self.assertEqual(state["reuse"][sid]["attempts"], 1)
+        self.assertEqual(state["reuse"][sid]["successes"], 1)
+
+    def test_pre_effect_learned_route_failure_falls_back_to_full_solver(self):
+        path = self.temp_state()
+        skill = verified_skill("8", relation="EXACT", source_ids=("ep1", "ep2"))
+        sid = self._seed_active_skill(path, skill)
+        failed = {
+            "pass": False,
+            "status": "FAIL_CLOSED__PROPOSAL_SEARCH_FAILED",
+            "reason": "no proposal",
+            "trace": [],
+            "falsified_capability_ids": [],
+            "deferred_capability_ids": [],
+            "counterexamples": [],
+            "attempts": [],
+        }
+        solved = {
+            "pass": True,
+            "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+            "current_episode_verified": False,
+            "skill_candidate": None,
+            "verified_skill_reuse_authorized": False,
+            "verified_executable_skill": None,
+        }
+        with mock.patch.object(
+            loop.solver_v10, "run", side_effect=[failed, solved]
+        ) as run_mock:
+            out = loop.run_learning_episode(
+                self._reuse_problem(),
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep3",
+                scope_id="scope",
+            )
+
+        self.assertTrue(out["pass"])
+        self.assertTrue(out["reuse_first"])
+        self.assertTrue(out["fallback_used"])
+        self.assertEqual(out["reused_skill_id"], sid)
+        self.assertEqual(run_mock.call_count, 2)
+        first_problem = run_mock.call_args_list[0].args[0]
+        second_problem = run_mock.call_args_list[1].args[0]
+        self.assertEqual([x["id"] for x in first_problem["capabilities"]], ["op0", "op1"])
+        self.assertEqual(
+            [x["id"] for x in second_problem["capabilities"]],
+            ["op0", "op1", "distractor"],
+        )
+        state = loop.load_state(path)
+        self.assertEqual(state["reuse"][sid]["pre_effect_failures"], 1)
+
+    def test_effectful_learned_route_failure_blocks_blind_fallback(self):
+        path = self.temp_state()
+        skill = verified_skill("9", relation="EXACT", source_ids=("ep1", "ep2"))
+        sid = self._seed_active_skill(path, skill)
+        failed = {
+            "pass": False,
+            "status": "BOUND_SUBPLAN_EFFECT_OUTCOME_UNRESOLVED__RECOVERY_REQUIRED",
+            "reason": "effect may have occurred",
+            "trace": [{"capability_id": "op0", "effect_outcome_sha256": "a" * 64}],
+            "falsified_capability_ids": [],
+            "deferred_capability_ids": [],
+            "counterexamples": [],
+            "attempts": [],
+        }
+        with mock.patch.object(loop.solver_v10, "run", return_value=failed) as run_mock:
+            out = loop.run_learning_episode(
+                self._reuse_problem(),
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep3",
+                scope_id="scope",
+            )
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "FAIL_CLOSED__LEARNED_ROUTE_EFFECT_OCCURRED__NO_BLIND_REPLAY",
+        )
+        self.assertTrue(out["fallback_blocked_effect_may_have_occurred"])
+        self.assertEqual(run_mock.call_count, 1)
+        state = loop.load_state(path)
+        self.assertEqual(state["reuse"][sid]["effectful_failures"], 1)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
