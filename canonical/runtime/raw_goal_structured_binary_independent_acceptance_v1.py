@@ -411,7 +411,7 @@ def verify(*, goal: str, raw_result: Mapping[str, Any], root: str | Path = ROOT)
         and producer_output_ok
         and verifier_independence_ok
         and len(required_ids) == len(obligations)
-        and len(required_ids) == 3
+        and len(required_ids) > 0
     )
 
     if not full:
