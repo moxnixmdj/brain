@@ -421,6 +421,119 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
             "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
         )
 
+    @patch.object(fixed, "repair_basis_discriminator")
+    @patch.object(fixed, "repair_existing_adequacy")
+    @patch.object(fixed, "run_controller")
+    def test_policy_adequacy_gap_uses_capability_expander_before_generic_provider(
+        self, controller, existing_repair, basis_repair
+    ):
+        opened = {
+            **self._open("OPEN__POSITIVE_POLICY_ADEQUACY_CERTIFICATE_REQUIRED"),
+            "next_required_edge": "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+            "next_policy_request": {
+                "schema": "PROJECT_BRAIN_MINIMUM_POLICY_REPAIR_REQUEST_V1",
+                "required_artifact": "POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+                "selected_policy_id": "policy.p",
+                "policy_adequacy_authority": False,
+            },
+        }
+        controller.side_effect = [opened, self._pass()]
+        existing_repair.return_value = {
+            "pass": False,
+            "status": "UNRESOLVED__NO_NEW_EXISTING_POLICY_ADEQUACY_BINDING_DISCOVERED",
+        }
+        basis_repair.return_value = {
+            "pass": False,
+            "status": "NOT_APPLICABLE__NO_CONFLICT_WITNESS_BASIS_REPAIR",
+        }
+        expander = Mock(
+            return_value={
+                "source_id": "owned-capability-expander",
+                "proposal": {
+                    "request_patch": {
+                        "decision_payload": {"context_id": "capability-expanded"}
+                    }
+                },
+            }
+        )
+        provider = Mock()
+
+        out = fixed.run(
+            self._request(),
+            capability_expander=expander,
+            proposal_provider=provider,
+        )
+
+        self.assertTrue(out["pass"], out)
+        provider.assert_not_called()
+        expander.assert_called_once()
+        packet = expander.call_args.args[0]
+        self.assertEqual(
+            packet["schema"],
+            "PROJECT_BRAIN_R2_POLICY_ADEQUACY_CAPABILITY_EXPANSION_REQUEST_V1",
+        )
+        self.assertEqual(
+            packet["next_policy_request"]["required_artifact"],
+            "POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+        )
+        self.assertFalse(packet["expansion_authority"])
+        self.assertFalse(packet["policy_adequacy_authority"])
+        second = controller.call_args_list[1].args[0]
+        self.assertEqual(
+            second["decision_payload"]["context_id"],
+            "capability-expanded",
+        )
+        record = out["r2_fixed_point_trace"][0][
+            "policy_adequacy_capability_expansion"
+        ]
+        self.assertEqual(
+            record["status"],
+            "PROGRESSIVE_POLICY_ADEQUACY_EXPANSION_ACCEPTED_FOR_REVERIFICATION",
+        )
+        self.assertTrue(record["downstream_reverification_required"])
+        self.assertFalse(record["policy_adequacy_authority"])
+
+    @patch.object(fixed, "repair_basis_discriminator")
+    @patch.object(fixed, "repair_existing_adequacy")
+    @patch.object(fixed, "run_controller")
+    def test_capability_expander_cannot_self_certify_policy_adequacy(
+        self, controller, existing_repair, basis_repair
+    ):
+        opened = {
+            **self._open("OPEN__POSITIVE_POLICY_ADEQUACY_CERTIFICATE_REQUIRED"),
+            "next_required_edge": "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+            "next_policy_request": {
+                "schema": "PROJECT_BRAIN_MINIMUM_POLICY_REPAIR_REQUEST_V1",
+                "required_artifact": "POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+                "selected_policy_id": "policy.p",
+                "policy_adequacy_authority": False,
+            },
+        }
+        controller.return_value = opened
+        existing_repair.return_value = {
+            "pass": False,
+            "status": "UNRESOLVED__NO_NEW_EXISTING_POLICY_ADEQUACY_BINDING_DISCOVERED",
+        }
+        basis_repair.return_value = {
+            "pass": False,
+            "status": "NOT_APPLICABLE__NO_CONFLICT_WITNESS_BASIS_REPAIR",
+        }
+        expander = Mock(return_value={"pass": True, "status": "I_SAY_ADEQUATE"})
+
+        out = fixed.run(self._request(), capability_expander=expander)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["r2_fixed_point_status"],
+            "OPEN__R2_EDGE_RESOLVER_UNAVAILABLE",
+        )
+        record = out["r2_fixed_point_trace"][0][
+            "policy_adequacy_capability_expansion"
+        ]
+        self.assertEqual(record["status"], "CANDIDATE_REJECTED")
+        self.assertEqual(record["reason"], "REQUEST_PATCH_REQUIRED")
+        self.assertFalse(record["policy_adequacy_authority"])
+
     @patch.object(fixed, "run_controller")
     def test_provider_pass_claim_cannot_bypass_controller(self, controller):
         controller.return_value = self._open()
