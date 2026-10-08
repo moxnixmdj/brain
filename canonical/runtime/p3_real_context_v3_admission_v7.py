@@ -13,7 +13,6 @@ from __future__ import annotations
 
 from typing import Any, Mapping
 
-from canonical.runtime.p3_real_context_v3_admission_v6 import evaluate as evaluate_v6
 from canonical.runtime.p3_audience_grounded_numeric_synthesis_v1 import (
     UnresolvedEvidence,
     solve as solve_grounded_numeric,
@@ -43,24 +42,6 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             "reason": "PAYLOAD_MAPPING_REQUIRED",
             **_boundary(),
         }
-
-    try:
-        prior = evaluate_v6(payload)
-    except Exception as exc:
-        prior = {
-            "schema": SCHEMA,
-            "pass": False,
-            "status": "FAIL_CLOSED",
-            "reason": "V6_PREDECESSOR_EXCEPTION",
-            "detail": {"exception_type": type(exc).__name__, "detail_text": str(exc)[:160]},
-            **_boundary(),
-        }
-    if prior.get("pass") is True:
-        out = dict(prior)
-        out["schema"] = SCHEMA
-        out["v6_preserved_positive_route"] = True
-        out["grounded_numeric_fast_path_pass"] = False
-        return out
 
     candidate = payload.get("grounded_numeric_input")
     if isinstance(candidate, Mapping):
@@ -128,9 +109,21 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
                 ),
             }
 
+    try:
+        from canonical.runtime.p3_real_context_v3_admission_v6 import evaluate as evaluate_v6
+        prior = evaluate_v6(payload)
+    except Exception as exc:
+        prior = {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "V6_PREDECESSOR_EXCEPTION",
+            "detail": {"exception_type": type(exc).__name__, "detail_text": str(exc)[:160]},
+            **_boundary(),
+        }
     out = dict(prior)
     out["schema"] = SCHEMA
-    out["v6_preserved_positive_route"] = False
+    out["v6_preserved_positive_route"] = bool(prior.get("pass") is True)
     out["grounded_numeric_fast_path_pass"] = False
     return out
 
