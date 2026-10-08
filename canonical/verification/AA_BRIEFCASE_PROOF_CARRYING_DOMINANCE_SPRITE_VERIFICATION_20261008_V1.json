@@ -72,7 +72,9 @@
     "NO FAMILY CAPABILITY OWNERSHIP OR TERMINAL CREDIT"
   ],
   "accounting": {
-    "incremental_spend_usd_claimed": 0,
+    "new_sprite_created": false,
+    "incremental_spend_usd": null,
+    "spend_measurement_available": false,
     "fresh_target_model_queries": 0,
     "private_benchmark_cases_consumed": 0,
     "terminal_credit_delta": 0
