@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_OPUS55_CURRENT_OWNER_TARGET_REFRESH_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_REMOTE_LIVE_OWNER_REPLAY_PASS_12_OF_12__ZERO_ACCEPTANCE_CREDIT",
+  "subject_branch": "obs/frontiercode-owner-target-refresh-20261008-v1",
+  "exact_blobs": {
+    "evidence": "a2c192e341877133bf47d0b7d057e051c46d33b9",
+    "quotient": "dc90e3fc1efc26f45409c6a240826d35c897b7a5"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-scope-cover-v1-verify",
+    "sprite_id": "sprite-d5d24558-e690-4f9b-acda-589284eb3ac1",
+    "workspace": "/tmp/frontier_refresh"
+  },
+  "owner_source": {
+    "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+    "live_raw_sha256": "913a7befb74bf6facf490099cbe982dc17972ee5c4a5ff859eb918d2c5e4d3bf"
+  },
+  "verified": [
+    "OWNER_JSON_RAW_SHA256_MATCHES_BOUND_EVIDENCE",
+    "V1_1_MAIN_TASK_COUNT_IS_100",
+    "V1_1_EXTENDED_TASK_COUNT_IS_150",
+    "CLAUDE_OPUS_5_5_HARNESS_IS_CLAUDE_CODE",
+    "BEST_MAIN_SCORE_EFFORT_IS_MEDIUM",
+    "BEST_MAIN_NEW_SCORE_IS_EXACTLY_0_5464",
+    "MEDIUM_MAIN_PASS_RATE_IS_EXACTLY_0_596",
+    "HISTORICAL_FROZEN_PREDICATE_CODING_FRONTIERCODE_GE_54_4_IS_PRESERVED",
+    "QUOTIENT_CURRENT_MATCHED_TARGET_IS_54_64_PERCENT",
+    "QUOTIENT_HISTORICAL_TARGET_VALUE_IS_54_4_PERCENT",
+    "QUOTIENT_HARNESS_BINDING_IS_CLAUDE_CODE",
+    "PUBLIC_COMPLETE_MAIN_TASK_AND_PER_TASK_RUBRIC_MANIFEST_NONCLAIMS_ARE_PRESERVED"
+  ],
+  "conclusion": "CURRENT_OWNER_OPUS55_FRONTIERCODE_1_1_MAIN_SCORE_TARGET_IS_54_64_PERCENT_AT_MEDIUM_EFFORT__54_4_REMAINS_HISTORICAL_FROZEN_PREDICATE_VALUE__CURRENT_MATCHED_COMPARISON_REQUIRES_MATCHED_TASK_POPULATION_HARNESS_GRADING_REVISION_AND_CONFIGURATION",
+  "hard_nonclaims": [
+    "NO_BRAIN_FRONTIERCODE_RESULT",
+    "NO_FRONTIERCODE_ACCEPTANCE_CREDIT",
+    "NO_COMPLETE_TARGET_TASK_MANIFEST",
+    "NO_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
