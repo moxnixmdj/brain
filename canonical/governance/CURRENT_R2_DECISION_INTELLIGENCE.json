@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-08",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V18_TEN_DIRECT_ROUTES__SEVEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V19_ELEVEN_DIRECT_ROUTES__EIGHT_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -18,18 +18,18 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V18.json",
-    "git_blob_sha": "b45d662b29b2933f01050f1b7438687959bd5e0d"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V19.json",
+    "git_blob_sha": "1f2e03f997f427be3137a90c5d5bfe3f91f3c582"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V6.json",
-    "activation_git_blob_sha": "a614bcbae357088c87e5e147a0cca9fa24151995",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V7.json",
+    "activation_git_blob_sha": "38768b4b9e09185e5889a34deddee782ce67be77",
     "exact_cell_count": 3,
-    "bounded_family_count": 7,
-    "current_route_count": 10,
-    "current_activation_status": "THREE_EXACT_CELLS_PLUS_SEVEN_BOUNDED_FAMILIES",
+    "bounded_family_count": 8,
+    "current_route_count": 11,
+    "current_activation_status": "THREE_EXACT_CELLS_PLUS_EIGHT_BOUNDED_FAMILIES",
     "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
-    "direct_runtime_git_blob_sha": "23747316537884718933a61403b7be5383c1242c",
+    "direct_runtime_git_blob_sha": "5fae2670ece87b161abf251abf5b52e08c579851",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -55,11 +55,16 @@
         "path": "canonical/verification/R2_MARKDOWN_PDF_DIRECT_ADEQUACY_VERIFY_20261008_V2.json",
         "git_blob_sha": "a89b7710298a84651874dcb8b975cbe05ac0709a",
         "status": "PASS__FINAL_REBASED_MARKDOWN_PDF_FAMILY__CURRENT_MAIN_REGRESSION_34_OF_34__PUBLIC_REAL_BYTE_PASS"
+      },
+      {
+        "path": "canonical/verification/R2_TYPED_JSON_TRANSFORM_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "8b560061f0e41b2c0587d872eceac75c2c006b9b",
+        "status": "PASS__V18_REBASED_TYPED_JSON_TRANSFORM_FAMILY__DIRECT_REGRESSION_15_OF_15__FAMILY_AND_INTEGRATION_6_OF_6__MUTATION_FALSIFIER_PASS__LIVE_SEMANTIC_CROSSCHECK_2_OF_2__ZERO_CREDIT"
       }
     ],
-    "latest_verification_path": "canonical/verification/R2_MARKDOWN_PDF_DIRECT_ADEQUACY_VERIFY_20261008_V2.json",
-    "latest_verification_git_blob_sha": "a89b7710298a84651874dcb8b975cbe05ac0709a",
-    "latest_verification_status": "PASS__FINAL_REBASED_MARKDOWN_PDF_FAMILY__CURRENT_MAIN_REGRESSION_34_OF_34__PUBLIC_REAL_BYTE_PASS"
+    "latest_verification_path": "canonical/verification/R2_TYPED_JSON_TRANSFORM_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "latest_verification_git_blob_sha": "8b560061f0e41b2c0587d872eceac75c2c006b9b",
+    "latest_verification_status": "PASS__V18_REBASED_TYPED_JSON_TRANSFORM_FAMILY__DIRECT_REGRESSION_15_OF_15__FAMILY_AND_INTEGRATION_6_OF_6__MUTATION_FALSIFIER_PASS__LIVE_SEMANTIC_CROSSCHECK_2_OF_2__ZERO_CREDIT"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
@@ -86,7 +91,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__NINE_DIRECT_ROUTES__SIX_BOUNDED_FAMILIES__VERIFIED_CAPABILITY_ESCAPE_LIVE__GOAL_SCOPED_POLICY_IDENTITIES_INDEPENDENTLY_REPLAYED",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__ELEVEN_DIRECT_ROUTES__EIGHT_BOUNDED_FAMILIES__VERIFIED_CAPABILITY_ESCAPE_LIVE__GOAL_SCOPED_POLICY_IDENTITIES_INDEPENDENTLY_REPLAYED",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -223,7 +228,7 @@
   "sufficient_closure": {
     "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V7.json",
     "git_blob_sha": "c78a157335c90864b01edffc03b8e19e1fc48f58",
-    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__SEVEN_BOUNDED_DIRECT_FAMILIES_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
+    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__EIGHT_BOUNDED_DIRECT_FAMILIES_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
     "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY"
   },
   "policy_adequacy_capability_escape": {
@@ -342,6 +347,28 @@
     "public_real_byte_run_id": 37808591307,
     "public_real_byte_job_id": 113419266807,
     "exact_plain_semantic_subset_only": true,
+    "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
+    "global_coverage_claimed": false
+  },
+  "typed_json_transform_direct_adequacy": {
+    "path": "canonical/runtime/r2_typed_json_transform_direct_adequacy_v1.py",
+    "git_blob_sha": "6c89b82321525689b27fd08b730a19567b864fe7",
+    "verification_path": "canonical/verification/R2_TYPED_JSON_TRANSFORM_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "verification_git_blob_sha": "8b560061f0e41b2c0587d872eceac75c2c006b9b",
+    "route_id": "DIRECT_ADEQUACY::TYPED_JSON_TRANSFORM_FAMILY_V1",
+    "producer_capability_id": "json.query.jq",
+    "independent_verifier": "python_stdlib_reference_transform",
+    "supported_operations": [
+      "select_eq",
+      "sort_by",
+      "project",
+      "take"
+    ],
+    "direct_router_regression": "15_OF_15_PASS",
+    "family_plus_integration": "6_OF_6_PASS",
+    "mutation_falsifier_pass": true,
+    "live_semantic_crosscheck": "2_OF_2_PASS",
+    "exact_registry_pinned_jq_binary_replayed": false,
     "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
     "global_coverage_claimed": false
   }
