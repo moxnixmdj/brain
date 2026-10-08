@@ -1150,11 +1150,40 @@ def integrate_solver_output(
         frontier_rows = []
         for old_sid in existing_ids:
             old = state["skills"].get(old_sid)
-            if not isinstance(old, Mapping):
+            if not isinstance(old, dict):
                 continue
             old_skill = old.get("skill")
-            if isinstance(old_skill, Mapping):
-                frontier_rows.append(_skill_pareto_row(old_sid, old_skill))
+            if not isinstance(old_skill, Mapping):
+                old["active"] = False
+                old["authority_invalidated"] = "STORED_SKILL_MISSING"
+                continue
+            old_authority = reauthenticate_skill_record(
+                old_skill,
+                repo_root=repo_root,
+            )
+            authenticated_old = old_authority.get("verified_skill")
+            valid_old = (
+                old_authority.get("pass") is True
+                and isinstance(authenticated_old, Mapping)
+            )
+            if valid_old:
+                try:
+                    valid_old = (
+                        _skill_id(authenticated_old) == str(old_sid)
+                        and _family_id(authenticated_old) == family
+                    )
+                except SelfImprovementError:
+                    valid_old = False
+            if not valid_old:
+                old["active"] = False
+                old["authority_invalidated"] = (
+                    _s(old_authority.get("reason"))
+                    or "STORED_SKILL_ID_OR_FAMILY_MISMATCH"
+                )
+                continue
+            frontier_rows.append(
+                _skill_pareto_row(str(old_sid), authenticated_old)
+            )
 
         skill_admission = update_pareto_frontier(frontier_rows, row)
         previous_record = state["skills"].get(sid)
@@ -1504,6 +1533,15 @@ def _select_active_skill(
         skill = authority.get("verified_skill")
         if not isinstance(skill, Mapping):
             continue
+        try:
+            authenticated_sid = _skill_id(skill)
+            authenticated_family = _family_id(skill)
+        except SelfImprovementError:
+            continue
+        if str(sid) != authenticated_sid:
+            continue
+        if _s(record.get("family_id")) != authenticated_family:
+            continue
         relation = _s(skill.get("scope_relation"))
         source_scopes = set(_items(skill.get("source_scopes")))
         if relation == "EXACT":
@@ -1557,15 +1595,13 @@ def _select_active_skill(
         if not valid or not targets.issubset(available):
             continue
 
-        metrics = record.get("pareto_metrics")
-        if not isinstance(metrics, Mapping):
-            metrics = {}
+        metrics = _skill_pareto_row(authenticated_sid, skill)
         rank = (
-            int(metrics.get("latency", len(op_ids))),
-            int(metrics.get("compute", len(op_ids))),
-            int(metrics.get("memory", 0)),
-            -int(metrics.get("reliability", 0)),
-            str(sid),
+            int(metrics["latency"]),
+            int(metrics["compute"]),
+            int(metrics["memory"]),
+            -int(metrics["reliability"]),
+            authenticated_sid,
         )
         candidates.append(
             (
