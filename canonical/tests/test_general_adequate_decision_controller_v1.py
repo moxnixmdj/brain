@@ -383,6 +383,103 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             policy_request["preferred_resolution_order"],
         )
 
+    def test_policy_repair_provider_merges_candidate_binding_and_retries_p3(self):
+        request = self._base_request()
+        problem = request["decision_payload"]["bound_relevance_cegar_loop"]["cegar_problem"]
+        problem["policy_conditions"] = {"policy.p": {"op": "TRUE"}}
+        problem["policy_adequacy_bindings"] = {}
+        opened = {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "BOUND_RELEVANCE_CEGAR_LOOP_UNSATISFIED",
+            "detail": {
+                "loop_result": {
+                    "pass": False,
+                    "status": "OPEN__POSITIVE_POLICY_ADEQUACY_CERTIFICATE_REQUIRED",
+                    "reason": "NO_AUTHENTICATED_POLICY_ADEQUACY",
+                    "detail": {
+                        "cegar": {
+                            "rejected_policy_adequacy_bindings": [
+                                {"policy_id": "policy.p", "reason": "ADEQUACY_BINDING_MISSING"}
+                            ]
+                        }
+                    },
+                }
+            },
+        }
+        candidate_binding = {
+            "adequacy_certificate_path": "canonical/governance/policy-p.json",
+            "adequacy_certificate_blob_sha": "abc",
+            "independent_verification_path": "canonical/verification/policy-p.json",
+            "independent_verification_blob_sha": "def",
+        }
+        provider = Mock(return_value={
+            "schema": "PROJECT_BRAIN_R2_POLICY_REPAIR_RESPONSE_V1",
+            "policy_adequacy_bindings": {"policy.p": candidate_binding},
+        })
+        observed = []
+
+        def p3(payload, *, repo_root=None):
+            observed.append(json.loads(json.dumps(payload)))
+            return opened if len(observed) == 1 else self._decision_pass()
+
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value=self._goal_binding_pass()), \
+             patch.object(controller, "evaluate_p3", side_effect=p3), \
+             patch.object(
+                 controller,
+                 "_authenticate_goal_satisfaction_binding",
+                 return_value=self._goal_satisfaction_pass(),
+             ):
+            out = controller.run(request, policy_repair_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        provider.assert_called_once()
+        self.assertEqual(len(observed), 2)
+        self.assertEqual(
+            observed[1]["bound_relevance_cegar_loop"]["cegar_problem"][
+                "policy_adequacy_bindings"
+            ]["policy.p"],
+            candidate_binding,
+        )
+        repair_request = provider.call_args.args[0]
+        self.assertEqual(
+            repair_request["required_artifact"],
+            "POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+        )
+        self.assertFalse(repair_request["policy_adequacy_authority"])
+
+    def test_policy_repair_provider_cannot_overwrite_existing_candidate_binding(self):
+        request = self._base_request()
+        problem = request["decision_payload"]["bound_relevance_cegar_loop"]["cegar_problem"]
+        problem["policy_conditions"] = {"policy.p": {"op": "TRUE"}}
+        problem["policy_adequacy_bindings"] = {"policy.p": {"binding": "old"}}
+        opened = {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "BOUND_RELEVANCE_CEGAR_LOOP_UNSATISFIED",
+            "detail": {
+                "loop_result": {
+                    "pass": False,
+                    "status": "OPEN__POSITIVE_POLICY_ADEQUACY_CERTIFICATE_REQUIRED",
+                    "reason": "NO_AUTHENTICATED_POLICY_ADEQUACY",
+                    "detail": {"selected_policy_id": "policy.p", "cegar": {}},
+                }
+            },
+        }
+        provider = Mock(return_value={
+            "schema": "PROJECT_BRAIN_R2_POLICY_REPAIR_RESPONSE_V1",
+            "policy_adequacy_bindings": {"policy.p": {"binding": "new"}},
+        })
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value=self._goal_binding_pass()), \
+             patch.object(controller, "evaluate_p3", return_value=opened):
+            out = controller.run(request, policy_repair_provider=provider)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("POLICY_REPAIR_ADEQUACY_BINDING_CONFLICT", out["reason"])
+
     def test_common_policy_selection_binding_gap_is_not_collapsed_to_generic_semantics(self):
         request = self._base_request()
         opened = {
