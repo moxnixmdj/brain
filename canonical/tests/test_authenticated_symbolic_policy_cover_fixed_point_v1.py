@@ -150,3 +150,81 @@ def test_direct_policy_beats_more_expensive_split(monkeypatch):
     assert out["pass"] is True
     assert out["decision_tree"]["terminal_policy_id"] == "all"
     assert out["minimum_worst_case_resource_bound_units"] == 2.0
+
+
+def test_real_explicit_p2_source_closes_policy_leaf():
+    import json
+    from canonical.runtime.p2_explicit_contract_membership_v1 import P2
+    raw = json.dumps({
+        "contract": P2,
+        "task": {
+            "audience": "executive",
+            "required_topics": ["T1"],
+            "evidence": [{"fact_id": "F1"}],
+            "edit_candidates": [{
+                "id": "E1",
+                "analysis_kind": "quantify",
+                "topic": "T1",
+                "claims": ["F1"],
+                "intended_audience": "executive",
+                "cost": 1,
+            }],
+            "edit_budget": 1,
+        },
+    }, separators=(",", ":"))
+    p = {
+        "decision_basis": ["P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1"],
+        "constraint_checks": [{
+            "constraint_id": "P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1",
+            "verifier_id": "P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1",
+            "input": {"raw_source": raw, "source_id": "task"},
+        }],
+        "policies": [{
+            "policy_id": "P2_INFORMATION_SAFE_EXPLICIT_CONTRACT_TOP_LAW_POLICY_V1",
+            "verifier_id": "P2_TOP_LAW_POLICY_ADEQUACY_AUTHENTICATOR_V1",
+            "cost_units": 1,
+        }],
+        "discriminators": [],
+    }
+    out = m.evaluate(p)
+    assert out["pass"] is True, out
+    assert out["winning_strategy_proved"] is True
+    assert out["root_model_count"] == 1
+    assert out["decision_tree"]["terminal_policy_id"] == "P2_INFORMATION_SAFE_EXPLICIT_CONTRACT_TOP_LAW_POLICY_V1"
+    assert out["u_empty_authorized"] is False
+
+
+def test_extra_p2_semantic_dimension_fails_before_policy_cover():
+    import json
+    from canonical.runtime.p2_explicit_contract_membership_v1 import P2
+    raw = json.dumps({
+        "contract": P2,
+        "task": {
+            "audience": "executive",
+            "required_topics": ["T1"],
+            "evidence": [{"fact_id": "F1"}],
+            "edit_candidates": [{
+                "id": "E1", "analysis_kind": "quantify", "topic": "T1",
+                "claims": ["F1"], "intended_audience": "executive", "cost": 1,
+            }],
+            "edit_budget": 1,
+            "hidden_priority": "CEO preference",
+        },
+    })
+    p = {
+        "decision_basis": ["P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1"],
+        "constraint_checks": [{
+            "constraint_id": "P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1",
+            "verifier_id": "P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1",
+            "input": {"raw_source": raw, "source_id": "task"},
+        }],
+        "policies": [{
+            "policy_id": "P2_INFORMATION_SAFE_EXPLICIT_CONTRACT_TOP_LAW_POLICY_V1",
+            "verifier_id": "P2_TOP_LAW_POLICY_ADEQUACY_AUTHENTICATOR_V1",
+            "cost_units": 1,
+        }],
+        "discriminators": [],
+    }
+    out = m.evaluate(p)
+    assert out["pass"] is False
+    assert out["reason"] == "TRUSTED_CONSTRAINT_VERIFICATION_FAILED"
