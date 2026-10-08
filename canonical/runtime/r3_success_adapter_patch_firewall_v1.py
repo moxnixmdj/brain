@@ -7,6 +7,7 @@ files remain byte-identical.
 """
 from __future__ import annotations
 
+import ast
 from hashlib import sha256
 import os
 from pathlib import Path
@@ -26,6 +27,49 @@ IMMUTABLE_VERIFICATION_PATHS = (
 )
 
 MAX_SOURCE_BYTES = 256 * 1024
+
+ALLOWED_IMPORT_MODULES = frozenset({
+    "json",
+})
+ALLOWED_FROM_IMPORT_MODULES = frozenset({
+    "__future__",
+    "copy",
+    "hashlib",
+    "pathlib",
+    "typing",
+    "canonical.runtime.executable_skill_program_v7",
+    "canonical.runtime.raw_goal_archive_acceptance_v1",
+})
+FORBIDDEN_CALL_NAMES = frozenset({
+    "open",
+    "exec",
+    "eval",
+    "compile",
+    "__import__",
+    "input",
+    "breakpoint",
+})
+FORBIDDEN_METHOD_CALLS = frozenset({
+    "write_text",
+    "write_bytes",
+    "unlink",
+    "rename",
+    "replace",
+    "mkdir",
+    "rmdir",
+    "touch",
+    "chmod",
+    "chown",
+    "symlink_to",
+    "hardlink_to",
+    "open",
+})
+AUTHORITY_FIELDS = frozenset({
+    "verification_authority",
+    "promotion_authority",
+    "acceptance_authority",
+    "terminal_authority",
+})
 
 
 class AdapterPatchFirewallError(ValueError):
@@ -71,6 +115,71 @@ def _verification_snapshot(root: Path) -> dict[str, str]:
         relative: _digest_bytes(_resolve_owned_file(root, relative).read_bytes())
         for relative in IMMUTABLE_VERIFICATION_PATHS
     }
+
+
+def _validate_source_capabilities(source: str) -> None:
+    tree = ast.parse(source)
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                if alias.name not in ALLOWED_IMPORT_MODULES:
+                    raise AdapterPatchFirewallError(
+                        "SOURCE_IMPORT_NOT_ALLOWED:" + alias.name
+                    )
+        elif isinstance(node, ast.ImportFrom):
+            module = str(node.module or "")
+            if module not in ALLOWED_FROM_IMPORT_MODULES:
+                raise AdapterPatchFirewallError(
+                    "SOURCE_FROM_IMPORT_NOT_ALLOWED:" + module
+                )
+        elif isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Name) and node.func.id in FORBIDDEN_CALL_NAMES:
+                raise AdapterPatchFirewallError(
+                    "SOURCE_CALL_NOT_ALLOWED:" + node.func.id
+                )
+            if (
+                isinstance(node.func, ast.Attribute)
+                and node.func.attr in FORBIDDEN_METHOD_CALLS
+            ):
+                raise AdapterPatchFirewallError(
+                    "SOURCE_METHOD_NOT_ALLOWED:" + node.func.attr
+                )
+        elif isinstance(node, ast.Dict):
+            for key, value in zip(node.keys, node.values):
+                if (
+                    isinstance(key, ast.Constant)
+                    and isinstance(key.value, str)
+                    and key.value in AUTHORITY_FIELDS
+                    and not (
+                        isinstance(value, ast.Constant)
+                        and value.value is False
+                    )
+                ):
+                    raise AdapterPatchFirewallError(
+                        "SOURCE_AUTHORITY_VALUE_NOT_LITERAL_FALSE:" + key.value
+                    )
+        elif isinstance(node, (ast.Assign, ast.AnnAssign, ast.NamedExpr)):
+            targets = []
+            value = getattr(node, "value", None)
+            if isinstance(node, ast.Assign):
+                targets = list(node.targets)
+            else:
+                target = getattr(node, "target", None)
+                if target is not None:
+                    targets = [target]
+            for target in targets:
+                if (
+                    isinstance(target, ast.Name)
+                    and target.id in AUTHORITY_FIELDS
+                    and not (
+                        isinstance(value, ast.Constant)
+                        and value.value is False
+                    )
+                ):
+                    raise AdapterPatchFirewallError(
+                        "SOURCE_AUTHORITY_ASSIGNMENT_NOT_LITERAL_FALSE:"
+                        + target.id
+                    )
 
 
 def validate_candidate(
@@ -127,10 +236,15 @@ def validate_candidate(
 
         try:
             compile(content, relative, "exec", dont_inherit=True)
-        except Exception as exc:
+            _validate_source_capabilities(content)
+        except SyntaxError as exc:
             return _fail(
                 "CANDIDATE_SOURCE_SYNTAX_INVALID",
                 syntax_error=type(exc).__name__ + ":" + str(exc),
+            )
+        except AdapterPatchFirewallError as exc:
+            return _fail(
+                "CANDIDATE_SOURCE_CAPABILITY_VIOLATION:" + str(exc)
             )
 
         verification_before = _verification_snapshot(root)
