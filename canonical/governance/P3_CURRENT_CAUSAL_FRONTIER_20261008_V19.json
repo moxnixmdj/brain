@@ -5,7 +5,7 @@
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "supersedes": {
     "path": "canonical/governance/P3_CURRENT_CAUSAL_FRONTIER_20261008_V18.json",
-    "git_blob_sha": "e6b75f796fd98a397e32f9a90a172ca53ff8188a"
+    "git_blob_sha": "e2da80da4703f206bed9d4ddf17527eabdb12489"
   },
   "reconciles": [
     {
@@ -15,7 +15,8 @@
     },
     {
       "path": "canonical/verification/P3_SOURCE_POSITIVE_SELECTION_V11_TWO_SPRITE_VERIFICATION_20261008_V1.json",
-      "role": "TWO_INDEPENDENT_SPRITE_VERIFICATION__28_OF_28_TOTAL_CHECKS"
+      "role": "TWO_INDEPENDENT_SPRITE_VERIFICATION__28_OF_28_TOTAL_CHECKS",
+      "git_blob_sha": "bf33e79d0f84b049e6374b7c9c818d13f3d3f270"
     },
     {
       "path": "canonical/runtime/p3_source_positive_selection_cell_v1.py",
@@ -29,7 +30,7 @@
     },
     {
       "path": "canonical/governance/P3_ROBUST_POLICY_ADEQUACY_CEGAR_ACTIVATION_20261008_V1.json",
-      "git_blob_sha": "5f034252df68e6eb7fe477f346fd9010bc86fddd",
+      "git_blob_sha": "d31c083392134b51d3bb094689e1c7bdfa6f7d68",
       "role": "UPSTREAM_COMMON_POLICY_OR_MINIMUM_ONE_STEP_DISCRIMINATOR_SELECTOR_WHEN_SOURCE_POSITIVE_COMMON_POLICY_IS_NOT_YET_CERTIFIED"
     }
   ],
