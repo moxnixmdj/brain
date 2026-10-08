@@ -873,6 +873,11 @@
       "path": "capsules/tb_science_rank12_20261008_v1/RANK12_EPOCH_V1.json",
       "git_blob_sha": "5426f9db570cfa83d5f96859d2087d11cd6b813a",
       "role": "INERT_PUBLIC_EPOCH__ZERO_RUNS_AUTHORIZED"
+    },
+    "gdpval_public_pairwise_boundary_refresh_20261008_v1": {
+      "path": "canonical/evidence/GDPVAL_AA_PUBLIC_PAIRWISE_BOUNDARY_REFRESH_20261008_V1.json",
+      "git_blob_sha": "7a4ac9a77f1a5d451374dd36dd77ba83ad41a2ed",
+      "status": "FRESH_PUBLIC_OWNER_AND_OPEN_SOURCE_BOUNDARY_REFRESH__PAIRWISE_STRUCTURE_BOUND__EXACT_OWNER_PREFERENCE_RELATION_STILL_UNBOUND__ZERO_TERMINAL_CREDIT"
     }
   },
   "live_truth": {
@@ -1691,6 +1696,25 @@
       "RUN_TERMINAL_CLOSURE_REDUCER"
     ],
     "u_empty_proved": false,
+    "terminal": false,
+    "terminal_credit_delta": 0
+  },
+  "current_escape_reality_refresh_20261008_v1": {
+    "status": "ACTIVE_SCHEDULER_TRUTH_REFRESH__TERMINAL_FALSE",
+    "public_owner_structure_bound": true,
+    "current_opus55_gdpval_aa_v2_1_elo": 1866,
+    "exact_owner_pairwise_judge_prompt_bound": false,
+    "complete_owner_pairwise_preference_relation_bound": false,
+    "free_public_owner_grader_route_bound": false,
+    "primary_route": "PREFER_SCOPE_COMPLETE_BRAIN_SIDE_DOMINANCE_OR_TOP_LAW_CERTIFICATE",
+    "fallback_route": "ONLY_IF_STRONGER_DOMINANCE_FAILS__ACQUIRE_EXACT_OWNER_PAIRWISE_RELATION_OR_RUN_MATCHED_OWNER_EVALUATION_THROUGH_AUTHORIZED_ACCESSIBLE_ROUTE",
+    "demoted": [
+      "REPEAT_GENERAL_GDPVAL_METADATA_SEARCH",
+      "TREAT_JUDGE_PANEL_IDENTITIES_OR_AGGREGATE_ELO_AS_PAIRWISE_RELATION"
+    ],
+    "evidence_path": "canonical/evidence/GDPVAL_AA_PUBLIC_PAIRWISE_BOUNDARY_REFRESH_20261008_V1.json",
+    "evidence_git_blob_sha": "7a4ac9a77f1a5d451374dd36dd77ba83ad41a2ed",
+    "u_empty": false,
     "terminal": false,
     "terminal_credit_delta": 0
   }
