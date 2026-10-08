@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_REPAIR_SYNTHESIS_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS_15_OF_15",
+  "branch": "live-brain-counterexample-repair-synthesis-20261008",
+  "exact_blobs": {
+    "runtime": "23540e7fc80efca78a53e9f9b1190c5b7d952d23",
+    "tests": "c04394173aee765699afef4e8d87ab0c3e5942b0"
+  },
+  "isolated_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "tests_run": 15,
+    "tests_passed": 15,
+    "tests_failed": 0
+  },
+  "inherited_repair_engine": {
+    "runtime": "canonical/runtime/counterexample_guided_causal_architecture_synthesizer_v1.py",
+    "independent_verification": "canonical/verification/COUNTEREXAMPLE_GUIDED_CAUSAL_ARCHITECTURE_SYNTHESIZER_SPRITE_VERIFICATION_20261007_V1.json",
+    "prior_checks_passed": 8
+  },
+  "proved": [
+    "DURABLE_FAILURE_FINGERPRINT_TO_REPAIR_EFFECT",
+    "REPAIR_EFFECT_TO_CAUSAL_ARCHITECTURE_SEARCH",
+    "EXISTING_VERIFIED_COMPONENTS_PREFERRED",
+    "MISSING_PROVIDER_RETURNS_NEW_PRIMITIVE_REQUIRED",
+    "CANDIDATE_REPAIR_HAS_NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
