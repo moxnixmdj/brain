@@ -353,6 +353,52 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
     if pf.get("matched") is not True:
         return pf
 
+    if pf["route_id"] == TYPED_JSON_TRANSFORM_ROUTE_ID:
+        transform_result = typed_json_transform_adequacy.run(request)
+        if transform_result.get("pass") is not True:
+            return {
+                **_base(
+                    str(
+                        transform_result.get("status")
+                        or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"
+                    ),
+                    passed=False,
+                ),
+                "matched": True,
+                "route_id": pf["route_id"],
+                "capability_id": pf.get("capability_id"),
+                "goal_sha256": pf.get("goal_sha256"),
+                "execution_attempted": True,
+                "retry_by_other_route_authorized": False,
+                "typed_json_transform_adequacy": deepcopy(dict(transform_result)),
+                "reason": transform_result.get("reason"),
+            }
+        return {
+            **_base("PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED", passed=True),
+            "matched": True,
+            "route_id": pf["route_id"],
+            "capability_id": transform_result.get("capability_id"),
+            "selected_policy_id": transform_result.get("selected_policy_id"),
+            "goal_sha256": transform_result.get("goal_sha256"),
+            "semantic_scope": pf["semantic_scope"],
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "accepted_raw_obligation_ids": list(
+                transform_result.get("accepted_raw_obligation_ids") or []
+            ),
+            "raw_acceptance_obligation_count": transform_result.get(
+                "raw_acceptance_obligation_count"
+            ),
+            "acceptance_receipt": deepcopy(
+                dict(transform_result.get("acceptance_receipt") or {})
+            ),
+            "raw_result": deepcopy(dict(transform_result)),
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "authority_boundary": transform_result.get("authority_boundary"),
+        }
+
     if pf["route_id"] == VISUAL_CODE_ROUTE_ID:
         visual_result = visual_code_adequacy.run(request)
         if visual_result.get("pass") is not True:
