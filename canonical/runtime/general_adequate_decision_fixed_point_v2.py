@@ -21,6 +21,7 @@ from typing import Any, Callable, Mapping
 from canonical.runtime.general_adequate_decision_controller_v1 import (
     run as run_controller,
 )
+from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as direct_adequacy
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2"
 MAX_FIXED_POINT_STEPS = 16
@@ -209,6 +210,30 @@ def run(
     seen = {_digest(current)}
     trace: list[dict[str, Any]] = []
     prior_candidates: list[dict[str, Any]] = []
+
+    direct_preflight = direct_adequacy.preflight(current)
+    if direct_preflight.get("matched") is True:
+        direct_result = direct_adequacy.run(current)
+        trace.append(
+            {
+                "step": 0,
+                "kind": "DIRECT_END_TO_END_ADEQUACY",
+                "route_id": direct_preflight.get("route_id"),
+                "status": direct_result.get("status"),
+                "pass": direct_result.get("pass") is True,
+                "execution_attempted": direct_result.get("execution_attempted") is True,
+            }
+        )
+        return _decorate(
+            direct_result,
+            fixed_point_status=(
+                "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED"
+                if direct_result.get("pass") is True
+                else "OPEN__R2_MATCHED_DIRECT_ROUTE_DID_NOT_VERIFY"
+            ),
+            steps=0,
+            trace=trace,
+        )
 
     for step in range(max_fixed_point_steps + 1):
         result = run_controller(
