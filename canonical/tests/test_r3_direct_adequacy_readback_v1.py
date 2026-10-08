@@ -126,6 +126,40 @@ class R3DirectAdequacyReadbackV1Tests(unittest.TestCase):
         self.assertFalse(verdict["pass"], verdict)
         self.assertIn("DIRECT_EPISODE_CANDIDATE_MISMATCH", verdict["reason"])
 
+    def test_exact_literal_route_remains_outside_readback_learning_scope(self):
+        changed = deepcopy(self.capsule)
+        changed["material"]["route_id"] = "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1"
+        changed["sha256"] = adapter._sha(changed["material"])
+        out = adapter.adapt(
+            {
+                "kind": "SUCCESS_TO_CANONICAL_EPISODE_CANDIDATE",
+                "observation": {"proof_capsule": changed},
+                "replay_context": {"request": deepcopy(self.request)},
+                "improvement_work_id": "work:literal-unsupported",
+                "authority_requested": "CANDIDATE_ONLY",
+            },
+            repo_root=ROOT,
+        )
+        self.assertIsNone(out)
+
+    def test_structured_binary_route_remains_outside_readback_learning_scope(self):
+        changed = deepcopy(self.capsule)
+        changed["material"]["route_id"] = (
+            "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1"
+        )
+        changed["sha256"] = adapter._sha(changed["material"])
+        out = adapter.adapt(
+            {
+                "kind": "SUCCESS_TO_CANONICAL_EPISODE_CANDIDATE",
+                "observation": {"proof_capsule": changed},
+                "replay_context": {"request": deepcopy(self.request)},
+                "improvement_work_id": "work:codec-unsupported",
+                "authority_requested": "CANDIDATE_ONLY",
+            },
+            repo_root=ROOT,
+        )
+        self.assertIsNone(out)
+
     def test_independent_r3_verifier_emits_authenticated_pair_from_readback(self):
         solver = self.adapted["solver_output"]
         out = independent.verify_episode_request(
