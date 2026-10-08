@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from canonical.runtime import live_brain_runtime_v1 as brain
 
@@ -208,6 +208,9 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             @staticmethod
             def load_state(path):
                 return {"stats": {}}
+            @staticmethod
+            def next_improvement_action(*, state_path):
+                return None
         learning_module.return_value = L
         out = brain.inventory()
         self.assertEqual(out["status"], "UNIFIED_LIVE_BRAIN_READY")
@@ -229,7 +232,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         }
         bound.return_value = failure
         integrate.return_value = {
-            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "status": "FAILURE_DIAGNOSED__REPAIR_QUEUED",
             "pass": False,
         }
         out = brain.run({
@@ -241,7 +244,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(
             out["learning"]["status"],
-            "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "FAILURE_DIAGNOSED__REPAIR_QUEUED",
         )
         integrate.assert_called_once_with(
             failure,
@@ -268,7 +271,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         }
         raw_bound.return_value = failure
         integrate.return_value = {
-            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "status": "FAILURE_DIAGNOSED__REPAIR_QUEUED",
             "pass": False,
         }
         out = brain.run({
@@ -295,7 +298,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "reason": "SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
         }
         integrate.return_value = {
-            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "status": "FAILURE_DIAGNOSED__REPAIR_QUEUED",
             "pass": False,
         }
         out = brain.run({
@@ -306,7 +309,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(
             out["learning"]["status"],
-            "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+            "FAILURE_DIAGNOSED__REPAIR_QUEUED",
         )
         observed = integrate.call_args.args[0]
         self.assertFalse(observed["pass"])
@@ -315,26 +318,37 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
         )
 
-    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
+    @patch("canonical.runtime.live_brain_runtime_v1._learning_module")
     @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
-    def test_plain_success_without_verified_episode_is_not_promoted(self, bound, integrate):
+    def test_plain_success_queues_verifiable_episode_adapter_without_promotion(
+        self, bound, learning_module
+    ):
         bound.return_value = {
             "pass": True,
             "status": "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED",
         }
+        learning = Mock()
+        learning.DEFAULT_STATE_PATH = "/tmp/state.json"
+        learning.record_success_observation.return_value = {
+            "status": "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
+            "pass": True,
+            "permanent_reuse_authorized": False,
+        }
+        learning_module.return_value = learning
         out = brain.run({
             "mode": "compiled_bound",
             "task_id": "b-ok",
             "initial_facts": [],
             "target_effects": ["X"],
+            "state_path": "/tmp/state.json",
         })
         self.assertTrue(out["pass"])
         self.assertEqual(
             out["learning"]["status"],
-            "SUCCESS_OBSERVED__NO_VERIFIED_LEARNING_ARTIFACT",
+            "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
         )
         self.assertFalse(out["learning"]["permanent_reuse_authorized"])
-        integrate.assert_not_called()
+        learning.record_success_observation.assert_called_once()
 
 
     @patch("canonical.runtime.live_brain_runtime_v1._causal_synthesize")
@@ -435,6 +449,82 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         })
         self.assertFalse(out["pass"])
         self.assertIn("FAILURE_FINGERPRINT_UNKNOWN", out["reason"])
+
+    @patch("canonical.runtime.live_brain_runtime_v1.execute_failure_repair_cycle")
+    @patch("canonical.runtime.live_brain_runtime_v1.run_generic")
+    def test_live_failure_auto_dispatches_verified_repair_when_frontier_is_available(
+        self, generic, repair_cycle
+    ):
+        generic.return_value = {
+            "schema": brain.SCHEMA,
+            "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
+            "pass": False,
+            "learning": {
+                "pass": False,
+                "diagnosis": {"failure_fingerprint": "fp:auto"},
+                "retry_capsule_sha256": "retry:auto",
+            },
+        }
+        repaired_replay = {"pass": True, "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE"}
+        repair_cycle.return_value = {
+            "pass": True,
+            "status": "REPAIR_VERIFIED_BY_ORIGINAL_OBLIGATION_REPLAY",
+            "original_replay": repaired_replay,
+        }
+        component = {
+            "id": "repairer",
+            "verified": True,
+            "brain_owned": True,
+            "donor_independent": True,
+        }
+        out = brain.run({
+            "mode": "generic",
+            "problem": self.problem(),
+            "repair_components": [component],
+        })
+
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["auto_repair_attempted"])
+        self.assertEqual(out["recovered_execution"], repaired_replay)
+        request = repair_cycle.call_args.args[0]
+        self.assertEqual(request["failure_fingerprint"], "fp:auto")
+        self.assertEqual(request["retry_capsule_sha256"], "retry:auto")
+        self.assertEqual(request["components"], [component])
+
+    @patch("canonical.runtime.live_brain_runtime_v1.execute_failure_repair_cycle")
+    @patch("canonical.runtime.live_brain_runtime_v1.run_generic")
+    def test_live_failure_without_repair_authority_fails_closed_with_exact_blocker(
+        self, generic, repair_cycle
+    ):
+        generic.return_value = {
+            "schema": brain.SCHEMA,
+            "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
+            "pass": False,
+            "learning": {
+                "pass": False,
+                "diagnosis": {"failure_fingerprint": "fp:blocked"},
+                "retry_capsule_sha256": "retry:blocked",
+            },
+        }
+        out = brain.run({"mode": "generic", "problem": self.problem()})
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["auto_repair"]["status"],
+            "AUTO_REPAIR_BLOCKED__VERIFIED_FRONTIER_OR_CAPABILITY_EXPANDER_REQUIRED",
+        )
+        self.assertEqual(out["auto_repair"]["failure_fingerprint"], "fp:blocked")
+        repair_cycle.assert_not_called()
+
+    def test_replay_payload_strips_auto_repair_control_plane_fields(self):
+        cleaned = brain._replay_request_payload({
+            "task_id": "t",
+            "target_effects": ["x"],
+            "repair_components": [{"id": "r"}],
+            "repair_solver_kwargs": {"x": 1},
+            "auto_repair": True,
+        })
+        self.assertEqual(cleaned, {"task_id": "t", "target_effects": ["x"]})
 
     def test_unknown_mode_fails_closed(self):
         out = brain.run({"mode": "invented"})
