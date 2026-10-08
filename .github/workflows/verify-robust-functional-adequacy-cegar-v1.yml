@@ -25,4 +25,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m unittest -v canonical.tests.test_robust_functional_adequacy_cegar_v1
+      - name: Run exact tests
+        id: tests
+        shell: bash
+        run: |
+          set +e
+          python -m unittest -v canonical.tests.test_robust_functional_adequacy_cegar_v1 > /tmp/robust-functional-cegar-tests.txt 2>&1
+          code=$?
+          cat /tmp/robust-functional-cegar-tests.txt
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit "$code"
+      - name: Upload verifier output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: robust-functional-cegar-verifier-output
+          path: /tmp/robust-functional-cegar-tests.txt
