@@ -25,6 +25,9 @@ from canonical.runtime.monotone_semantic_constraint_kernel_v1 import (
     _valuations,
     compile_state,
 )
+from canonical.runtime.p3_conditioned_policy_adequacy_registry_v1 import (
+    augment_problem as augment_with_conditioned_adequacy,
+)
 
 SCHEMA = "PROJECT_BRAIN_P3_ROBUST_POLICY_ADEQUACY_CEGAR_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -53,7 +56,21 @@ def _bound_path(raw: Any, *, prefixes: tuple[str, ...]) -> Path:
         raise ValueError("NONCANONICAL_BINDING_PATH")
     if not any(value.startswith(prefix) for prefix in prefixes):
         raise ValueError("BINDING_PATH_OUTSIDE_ALLOWED_SCOPE")
-    full = ROOT / p
+
+    base = ROOT.resolve(strict=True)
+    full = base / p
+    for part in [full, *full.parents]:
+        if part == base:
+            continue
+        if part.is_symlink():
+            raise ValueError("BOUND_SYMLINK_FORBIDDEN:" + value)
+
+    resolved = full.resolve(strict=False)
+    if not any(
+        resolved.is_relative_to((base / prefix).resolve(strict=False))
+        for prefix in prefixes
+    ):
+        raise ValueError("BOUND_RESOLVED_PATH_OUTSIDE_ALLOWED_SCOPE:" + value)
     if not full.is_file():
         raise ValueError("BOUND_FILE_MISSING:" + value)
     return full
@@ -203,7 +220,7 @@ def _policy_sets(
     ]
 
 
-def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
+def _solve_augmented(problem: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(problem, Mapping):
         return _fail("PROBLEM_MAPPING_REQUIRED")
 
@@ -448,6 +465,36 @@ def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
+    registry = augment_with_conditioned_adequacy(problem, repo_root=ROOT)
+    if registry.get("pass") is not True:
+        return _fail(
+            "CONDITIONED_POLICY_ADEQUACY_REGISTRY_FAIL_CLOSED",
+            conditioned_policy_adequacy_registry=registry,
+        )
+    result = _solve_augmented(registry["problem"])
+    out = dict(result)
+    out["conditioned_policy_adequacy_registry"] = {
+        "status": registry.get("status"),
+        "registered_policy_count": registry.get("registered_policy_count"),
+        "basis_eligible_policy_count": registry.get("basis_eligible_policy_count"),
+        "injected_policy_ids": list(registry.get("injected_policy_ids") or []),
+        "reused_policy_ids": list(registry.get("reused_policy_ids") or []),
+        "skipped_registered_policies": list(
+            registry.get("skipped_registered_policies") or []
+        ),
+        "membership_self_certified": False,
+        "registry_authority": False,
+    }
+    return out
+
+
 def run(args: Mapping[str, Any] | None = None, root: Any = None) -> dict[str, Any]:
-    del root
-    return solve(args or {})
+    global ROOT
+    old_root = ROOT
+    if root is not None:
+        ROOT = Path(root)
+    try:
+        return solve(args or {})
+    finally:
+        ROOT = old_root
