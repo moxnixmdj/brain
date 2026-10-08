@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_OPUS55_SCORE_PRECISION_TRUTH_REPAIR_CANDIDATE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_ONLY__TARGET_PRECISION_CONFLICT_EXPOSED__NO_CANONICAL_THRESHOLD_MUTATION__ZERO_CREDIT",
+  "objective": "Resolve whether CODING_TB4_GE_66_4 means raw accuracy >= 66.400000% or faithful noninferiority to the underlying Claude Opus 5.5 Terminal-Bench 4.0 result whose detailed system-card value is 66.36% over 330 trials, without weakening the target or silently changing frozen authority.",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "current_frozen_registry": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "predicate_text": "Terminal-Bench 4.0 >= 66.4%",
+    "precision_semantics_explicit": false,
+    "raw_vs_displayed_threshold_explicit": false
+  },
+  "current_conservative_cut": {
+    "path": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "full_population_trial_slots": 330,
+    "current_required_successes": 220,
+    "current_derivation": "219/330=66.3636...<66.4__220/330=66.6666...>=66.4",
+    "interpretation": "TREATS_66_4_AS_EXACT_UNROUNDED_RAW_PERCENT_CUTOFF"
+  },
+  "owner_source_precision_evidence": {
+    "anthropic_launch_page": {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "summary_value_percent": 66.4,
+      "role": "OWNER_PUBLISHED_SUMMARY_ALIAS"
+    },
+    "anthropic_system_card": {
+      "original_pdf_url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+      "section": "8.5 Terminal-Bench 4.0",
+      "detailed_value_percent": 66.36,
+      "task_count": 66,
+      "trials_per_task": 5,
+      "total_trials": 330,
+      "harness": "Claude Code --bare",
+      "effort": "xhigh",
+      "safeguards_enabled": true,
+      "fallback_affected_trial_fraction": 0.10,
+      "role": "OWNER_DETAILED_TARGET_VALUE_AND_RUN_CARDINALITY",
+      "verification_boundary": "EXACT_SOURCE_BYTES_AND_SECTION_TEXT_MUST_BE_INDEPENDENTLY_REFETCHED_OR_CONTENT_ADDRESSED_BEFORE_PROMOTION"
+    }
+  },
+  "arithmetic": {
+    "underlying_owner_target_percent": 66.36,
+    "trial_slots": 330,
+    "successes_218_percent": 66.06060606060606,
+    "successes_219_percent": 66.36363636363636,
+    "successes_220_percent": 66.66666666666667,
+    "minimum_successes_for_raw_ge_66_36": 219,
+    "minimum_successes_for_raw_ge_66_4": 220,
+    "proof_under_owner_detailed_value": "218/330*100=66.060606...<66.36__219/330*100=66.363636...>=66.36",
+    "proof_under_strict_registry_literal": "219/330*100=66.363636...<66.4__220/330*100=66.666666...>=66.4"
+  },
+  "semantic_fork": {
+    "A_FAITHFUL_OPUS55_NONINFERIORITY": {
+      "definition": "BRAIN_RAW_TB4_ACCURACY_GE_OWNER_DETAILED_OPUS55_RAW_RESULT_66_36_PERCENT",
+      "required_successes": 219,
+      "reason": "THE_FROZEN_66_4_LABEL_IS_A_ROUNDED_OWNER_SUMMARY_OF_THE_DETAILED_66_36_RESULT",
+      "effect_if_verified": "CURRENT_44_TASK_220_SLOT_CAPACITY_HAS_ONE_SLOT_OF_FAILURE_SLACK_INSTEAD_OF_ZERO"
+    },
+    "B_STRICT_LITERAL_REGISTRY_BAR": {
+      "definition": "BRAIN_RAW_TB4_ACCURACY_GE_EXACT_NUMERIC_CONSTANT_66_400000_PERCENT",
+      "required_successes": 220,
+      "reason": "TREATS_REGISTRY_TEXT_AS_AN_INTENTIONALLY_STRICTER_RAW_BAR_THAN_OPUS55_DETAILED_RESULT",
+      "effect_if_verified": "KEEP_CURRENT_220_SUCCESS_CUT"
+    }
+  },
+  "truth_repair_rule": "DO_NOT_CHOOSE_A_OR_B_BY_CONVENIENCE__TRACE_THE_REGISTRY_SOURCE_AND_TERMINAL_OBJECTIVE_INTENT__IF_THE_PREDICATE_WAS_CREATED_TO_ENCODE_OPUS55_NONINFERIORITY_FROM_THE_ROUNDED_SUMMARY_VALUE_THEN_BIND_66_36_AS_THE_LOAD_BEARING_TARGET_AND_RECOMPILE_TO_219__IF_66_4_WAS_EXPLICITLY_FROZEN_AS_A_STRICTER_RAW_BAR_PRESERVE_220",
+  "conditional_state_if_A_is_independently_verified": {
+    "creditable_tasks": 44,
+    "executable_slot_capacity": 220,
+    "required_successes": 219,
+    "failure_slack_slots": 1,
+    "attainability_margin_slots": 1,
+    "resource_expansion_still_high_leverage": true,
+    "reason": "ONE_SLOT_SLACK_REPAIRS_ZERO_SLACK_BUT_REMAINS_TOO_BRITTLE_FOR_EMPIRICAL_EXECUTION"
+  },
+  "hard_nonclaims": [
+    "NO_CANONICAL_REGISTRY_EDIT",
+    "NO_CURRENT_220_CUT_REVOCATION",
+    "NO_CLAIM_219_IS_CANONICALLY_AUTHORIZED_BEFORE_SOURCE_AND_INTENT_VERIFICATION",
+    "NO_TB4_CASE_EXECUTION",
+    "NO_SCORE_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
+    "NO_HARNESS_EQUIVALENCE_CLAIM_FROM_NUMERIC_PRECISION_ALONE",
+    "NO_CLAIM_ANTHROPIC_INTERNAL_SETUP_EQUALS_PUBLIC_LEADERBOARD_SETUP"
+  ],
+  "next_verification": [
+    "CONTENT_ADDRESS_OR_INDEPENDENTLY_REFETCH_THE_OWNER_SYSTEM_CARD_SECTION_8_5",
+    "TRACE_THE_CREATION_SOURCE_OF_CODING_TB4_GE_66_4_TO_DETERMINE_IF_66_4_WAS_ROUNDED_TARGET_ALIAS_OR_INTENTIONALLY_STRICT_RAW_BAR",
+    "INDEPENDENTLY_RECOMPUTE_CEIL(0.6636*330)=219_AND_CEIL(0.664*330)=220",
+    "PROMOTE_ONLY_THE_SEMANTIC_SUPPORTED_BY_THE_FROZEN_TERMINAL_OBJECTIVE_AND_SOURCE_PROVENANCE"
+  ],
+  "accounting": {
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
