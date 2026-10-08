@@ -206,6 +206,102 @@ def _verify_skill_work(
     }
 
 
+def _verify_scope_generalization_work(
+    work: Mapping[str, Any],
+    *,
+    state_path: str | Path,
+    repo_root: str | Path,
+    skill_verification_provider,
+) -> dict[str, Any]:
+    """Promote a verified skill to a broader proved scope through one authority path."""
+    payload = work.get("payload")
+    if not isinstance(payload, Mapping):
+        raise ImprovementDriverError("SCOPE_GENERALIZATION_PAYLOAD_INVALID")
+    identity = work.get("identity")
+    skill_id = str(
+        payload.get("skill_id")
+        or (identity.get("skill_id") if isinstance(identity, Mapping) else "")
+        or ""
+    ).strip()
+    if not skill_id:
+        raise ImprovementDriverError("SCOPE_GENERALIZATION_SKILL_ID_MISSING")
+
+    state = learning.load_state(state_path)
+    record = state.get("skills", {}).get(skill_id)
+    raw_skill = record.get("skill") if isinstance(record, Mapping) else None
+    if not isinstance(raw_skill, Mapping):
+        raise ImprovementDriverError("SCOPE_GENERALIZATION_SKILL_MISSING:" + skill_id)
+
+    candidate = learning._candidate_from_verified_skill(raw_skill)
+    predicate = learning.VERIFIED_SUPERSET_SCOPE_PREDICATE
+    binding = skill_verification_provider({
+        "kind": "SKILL_SCOPE_GENERALIZATION_VERIFICATION",
+        "candidate": deepcopy(dict(candidate)),
+        "current_episode": {},
+        "improvement_work_id": work.get("work_id"),
+        "requested_scope_relation": "PROVEN_SUPERSET",
+        "requested_scope_predicate": predicate,
+        "supported_scope_predicates": [predicate],
+    })
+    if binding is None:
+        return {
+            "schema": SCHEMA,
+            "status": "IMPROVEMENT_PROVIDER_RETURNED_NO_SCOPE_GENERALIZATION_BINDING",
+            "pass": False,
+            "work_id": work.get("work_id"),
+            "terminal_authority": False,
+        }
+    if not isinstance(binding, Mapping):
+        raise ImprovementDriverError("SCOPE_GENERALIZATION_PROVIDER_RESULT_INVALID")
+
+    auth = authenticate_skill_verification(candidate, binding, repo_root=repo_root)
+    if auth.get("pass") is not True:
+        return {
+            "schema": SCHEMA,
+            "status": "IMPROVEMENT_ATTEMPT_FAILED_INDEPENDENT_SCOPE_GENERALIZATION",
+            "pass": False,
+            "work_id": work.get("work_id"),
+            "verification_error": auth.get("reason"),
+            "terminal_authority": False,
+        }
+    verified_skill = auth.get("verified_skill")
+    if not isinstance(verified_skill, Mapping):
+        raise ImprovementDriverError("SCOPE_GENERALIZATION_VERIFIED_SKILL_MISSING")
+    if (
+        str(verified_skill.get("scope_relation") or "") != "PROVEN_SUPERSET"
+        or str(verified_skill.get("scope_predicate") or "") != predicate
+    ):
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED__GENERALIZATION_PROOF_NOT_SUPERSET",
+            "pass": False,
+            "work_id": work.get("work_id"),
+            "verification_error": "BOUND_PROVEN_SUPERSET_STRUCTURAL_MATCH_REQUIRED",
+            "terminal_authority": False,
+        }
+
+    integrated = learning.integrate_solver_output(
+        {
+            "pass": True,
+            "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
+            "skill_candidate": deepcopy(dict(candidate)),
+            "verified_executable_skill": deepcopy(dict(verified_skill)),
+            "verified_skill_reuse_authorized": True,
+        },
+        state_path=state_path,
+    )
+    return {
+        "schema": SCHEMA,
+        "status": "IMPROVEMENT_ADVANCED__SCOPE_GENERALIZATION_VERIFIED_AND_PARETO_ADJUDICATED",
+        "pass": True,
+        "work_id": work.get("work_id"),
+        "learning": integrated,
+        "scope_relation": verified_skill.get("scope_relation"),
+        "scope_predicate": verified_skill.get("scope_predicate"),
+        "terminal_authority": False,
+    }
+
+
 def _adapt_success_work(
     work: Mapping[str, Any],
     *,
@@ -404,7 +500,23 @@ def advance_once(
                 })
                 continue
 
-            if kind in {"COLLECT_MATCHING_VERIFIED_EPISODE", "SEEK_VERIFIED_SCOPE_GENERALIZATION"}:
+            if kind == "SEEK_VERIFIED_SCOPE_GENERALIZATION":
+                if skill_verification_provider is None:
+                    blockers.append({
+                        "work_id": wid,
+                        "kind": kind,
+                        "blocker": "SKILL_VERIFICATION_PROVIDER_REQUIRED",
+                    })
+                    continue
+                out = _verify_scope_generalization_work(
+                    work,
+                    state_path=state_path,
+                    repo_root=repo_root,
+                    skill_verification_provider=skill_verification_provider,
+                )
+                return {**out, "progress": out.get("pass") is True, "blockers_skipped": blockers}
+
+            if kind == "COLLECT_MATCHING_VERIFIED_EPISODE":
                 blockers.append({
                     "work_id": wid,
                     "kind": kind,
