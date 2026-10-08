@@ -61,7 +61,10 @@ def _certificate_truth(value: Any, *, predicate_id: str) -> tuple[bool, str]:
         return False, "CERTIFICATE_AUTHORITY_BOUNDARY_INVALID"
     if value.get("terminal_authority") is not False:
         return False, "CERTIFICATE_TERMINAL_AUTHORITY_INVALID"
-    return True, "PASS"
+    # Caller-supplied certificate flags are not independently recomputed
+    # evidence of this quantified semantic completeness proposition.
+    # Fail closed until a trusted source-bound semantic proof verifier exists.
+    return False, "SELECTED_SEMANTIC_COMPLETENESS_NOT_RECOMPUTED"
 
 
 def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
