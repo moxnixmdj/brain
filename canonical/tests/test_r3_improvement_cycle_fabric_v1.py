@@ -30,6 +30,13 @@ class R3ImprovementCycleFabricTests(unittest.TestCase):
         self.assertEqual(out["result"], fake)
         drain.assert_called_once()
         self.assertEqual(drain.call_args.kwargs["max_actions"], 3)
+        self.assertIsNotNone(
+            drain.call_args.kwargs["verification_frontier_acquisition_provider"]
+        )
+        self.assertEqual(
+            drain.call_args.kwargs["verification_frontier_acquisition_provider_id"],
+            "ROOT1_DEFAULT_ACQUISITION_PROVIDER_V1",
+        )
 
     def test_normal_dispatch_auto_drains_episode_compounding_when_verifier_exists(self):
         verifier = object()

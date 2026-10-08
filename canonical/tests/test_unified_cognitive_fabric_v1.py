@@ -33,6 +33,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("TERMINAL_ROOT", c["engines"])
         self.assertIn("TERMINAL_CLOSURE", c["engines"])
         self.assertIn("OWNERSHIP_CATALOG", c["engines"])
+        self.assertIn("ONE_SHOT_VERIFIED_CLOSURE", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -179,6 +180,11 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         kwargs = advance.call_args.kwargs
         self.assertIs(kwargs["skill_verification_provider"], verifier)
         self.assertIsNone(kwargs["failure_repair_provider"])
+        self.assertIsNotNone(kwargs["verification_frontier_acquisition_provider"])
+        self.assertEqual(
+            kwargs["verification_frontier_acquisition_provider_id"],
+            "ROOT1_DEFAULT_ACQUISITION_PROVIDER_V1",
+        )
         self.assertEqual(kwargs["max_actions"], 2)
 
 

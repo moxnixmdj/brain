@@ -29,6 +29,8 @@ from canonical.runtime import certificate_gated_selected_route_runtime_entrypoin
 from canonical.runtime import terminal_autopilot_v1 as terminal_autopilot
 from canonical.runtime import terminal_root_decision_gate_v1 as terminal_root
 from canonical.runtime import terminal_closure_reducer as terminal_closure
+from canonical.runtime import one_shot_verified_closure_v1 as one_shot_closure
+from canonical.runtime import root1_default_acquisition_provider_v1 as root1_default_acquisition
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
@@ -56,6 +58,7 @@ ENGINE_DESCRIPTORS = {
     "OWNERSHIP_CATALOG": "live_capability_ownership_v1.evaluate",
     "LIVE_CAPABILITY": "live_capability_invoker_v1.invoke",
     "LIVE_COMPOSITION": "live_capability_composition_v1.execute",
+    "ONE_SHOT_VERIFIED_CLOSURE": "one_shot_verified_closure_v1.run",
 }
 
 KNOWN_R1_RESIDUALS: tuple[str, ...] = ()
@@ -302,6 +305,14 @@ def run(
         if not isinstance(options, Mapping):
             raise CognitiveFabricError("OPTIONS_NOT_OBJECT")
 
+        if verification_frontier_acquisition_provider is None:
+            verification_frontier_acquisition_provider = (
+                root1_default_acquisition.make_frontier_provider(repo_root=ROOT)
+            )
+            verification_frontier_acquisition_provider_id = (
+                root1_default_acquisition.PROVIDER_ID
+            )
+
         auto_routed = requested_mode in {"", "AUTO"}
         mode = _auto_mode(payload, options) if auto_routed else requested_mode
         if (
@@ -316,7 +327,26 @@ def run(
         if mode not in ENGINE_DESCRIPTORS:
             raise CognitiveFabricError("MODE_INVALID:" + mode)
 
-        if mode == "RAW_GOAL":
+        if mode == "ONE_SHOT_VERIFIED_CLOSURE":
+            out = one_shot_closure.run(
+                payload,
+                repo_root=ROOT,
+                state_path=options.get("state_path", self_improvement.DEFAULT_STATE_PATH),
+                information_provider=information_provider,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+                episode_verification_provider=episode_verification_provider,
+                skill_verification_provider=skill_verification_provider,
+                success_episode_adapter_provider=success_episode_adapter_provider,
+                verification_frontier_acquisition_provider=(
+                    verification_frontier_acquisition_provider
+                ),
+                verification_frontier_acquisition_provider_id=(
+                    verification_frontier_acquisition_provider_id
+                ),
+                max_r3_actions_per_round=int(options.get("max_improvement_actions", 32)),
+            )
+        elif mode == "RAW_GOAL":
             wrapped = live_runtime.run(
                 {"mode": "raw_bound", "request": deepcopy(dict(payload)), **dict(options)},
                 repo_root=ROOT,
@@ -725,7 +755,7 @@ def run(
             autonomous_failure_repair_provider = _autonomous_repair_pending
 
         compounding_tick = None
-        if mode != "IMPROVEMENT_CYCLE":
+        if mode not in {"IMPROVEMENT_CYCLE", "ONE_SHOT_VERIFIED_CLOSURE"}:
             compounding_tick = improvement_driver.drain(
                 state_path=options.get(
                     "state_path",
