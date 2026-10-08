@@ -65,6 +65,55 @@ def _digest(value: Any) -> str:
     return "sha256:" + sha256(_canon(value).encode("utf-8")).hexdigest()
 
 
+
+
+def _next_meta_action(base: Mapping[str, Any]) -> dict[str, Any]:
+    """Map every verified/open/fail-closed controller state to one typed next move.
+
+    This is a control-level totality law only. It does not invent semantic truth,
+    policy adequacy, execution success, or goal satisfaction.
+    """
+    status = str(base.get("status") or "")
+    edge = str(
+        base.get("next_required_edge")
+        or base.get("next_required_effect")
+        or status
+        or "UNSPECIFIED_OPEN_EDGE"
+    )
+
+    if base.get("pass") is True:
+        kind = "RETURN_VERIFIED_GOAL_SATISFACTION"
+    elif status.startswith("FAIL_CLOSED"):
+        kind = "ABSTAIN_FAIL_CLOSED"
+    elif isinstance(base.get("next_information_request"), Mapping):
+        kind = "ACQUIRE_MINIMUM_DECISION_INFORMATION"
+    elif isinstance(base.get("next_observation_request"), Mapping):
+        kind = "ACQUIRE_MINIMUM_DECISION_INFORMATION"
+    elif isinstance(base.get("next_policy_request"), Mapping):
+        kind = "REPAIR_OR_PROVE_POLICY_ADEQUACY"
+    elif "GOAL_SATISFACTION" in edge or "ACCEPTANCE" in edge:
+        kind = "VERIFY_ACTUAL_GOAL_SATISFACTION"
+    elif "EXECUTION" in edge or "REALIZATION" in edge:
+        kind = "BIND_OR_EXECUTE_SELECTED_POLICY"
+    elif "ADEQUACY" in edge or "POLICY" in edge:
+        kind = "REPAIR_OR_PROVE_POLICY_ADEQUACY"
+    elif "INFORMATION" in edge or "TRUTH" in edge or "OBSERVATION" in edge:
+        kind = "ACQUIRE_MINIMUM_DECISION_INFORMATION"
+    else:
+        kind = "RESOLVE_EXACT_OPEN_EDGE"
+
+    return {
+        "kind": kind,
+        "source_status": status or None,
+        "required_edge": edge,
+        "routing_total": True,
+        "semantic_truth_authority": False,
+        "policy_adequacy_authority": False,
+        "execution_authority": False,
+        "acceptance_authority": False,
+        "terminal_authority": False,
+    }
+
 def _decorate(
     base: Mapping[str, Any],
     *,
@@ -82,6 +131,8 @@ def _decorate(
     out["r2_edge_resolver_semantic_truth_authority"] = False
     out["r2_edge_resolver_execution_authority"] = False
     out["r2_edge_resolver_acceptance_authority"] = False
+    out["r2_next_meta_action"] = _next_meta_action(out)
+    out["r2_control_policy_total"] = True
     out.setdefault("terminal_authority", False)
     out.setdefault("terminal_credit_delta", 0)
     out.setdefault("incremental_spend_usd", 0)
@@ -104,6 +155,18 @@ def _fail(reason: str, *, trace: list[dict[str, Any]] | None = None) -> dict[str
         "r2_edge_resolver_semantic_truth_authority": False,
         "r2_edge_resolver_execution_authority": False,
         "r2_edge_resolver_acceptance_authority": False,
+        "r2_next_meta_action": {
+            "kind": "ABSTAIN_FAIL_CLOSED",
+            "source_status": "FAIL_CLOSED",
+            "required_edge": "FAIL_CLOSED",
+            "routing_total": True,
+            "semantic_truth_authority": False,
+            "policy_adequacy_authority": False,
+            "execution_authority": False,
+            "acceptance_authority": False,
+            "terminal_authority": False,
+        },
+        "r2_control_policy_total": True,
         "terminal_authority": False,
         "terminal_credit_delta": 0,
         "incremental_spend_usd": 0,
