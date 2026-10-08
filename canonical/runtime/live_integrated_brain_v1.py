@@ -19,6 +19,7 @@ from canonical.runtime.capability_planner import PlanningFailure, plan_capabilit
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute
 from canonical.runtime import goal_compiler
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
+from canonical.runtime.raw_goal_archive_acceptance_v1 import verify as verify_raw_archive_acceptance
 
 SCHEMA = "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -330,11 +331,42 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
         ]
         result["compiled_capability_id"] = selected
         result["compiler_mode"] = compiled.get("compiler_mode")
+        # Execution success alone is not raw-goal acceptance. For the one
+        # explicit archive semantics currently understood, independently inspect
+        # the artifact and bind all exact source obligations to the receipt.
+        acceptance = None
+        rows = result.get("execution")
+        if (
+            result.get("pass") is True
+            and selected == "archive.tar_gz.create_from_manifest"
+            and isinstance(rows, list)
+            and len(rows) == 1
+        ):
+            acceptance = verify_raw_archive_acceptance(
+                goal=goal,
+                capability_id=selected,
+                inputs=inputs,
+                execution=rows[0],
+                raw_contract=raw_contract,
+                root=ROOT,
+            )
+        result["raw_goal_acceptance"] = acceptance
+        result["accepted_raw_obligation_ids"] = (
+            list(acceptance.get("accepted_obligation_ids") or [])
+            if isinstance(acceptance, Mapping) else []
+        )
         result["routing_success_authority"] = False
-        result["semantic_acceptance_complete"] = False
+        result["semantic_acceptance_complete"] = (
+            isinstance(acceptance, Mapping)
+            and acceptance.get("semantic_acceptance_complete") is True
+            and len(result["accepted_raw_obligation_ids"])
+                == result["raw_acceptance_obligation_count"]
+        )
         result["elapsed_ns"] = perf_counter_ns() - started
         if result.get("pass") is True:
             result["status"] = (
+                "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+                if result["semantic_acceptance_complete"] else
                 "PASS__RAW_GOAL_COMPILED_PLANNED_EXECUTED_REVERIFIED__"
                 "RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
             )
