@@ -1015,6 +1015,12 @@ def integrate_solver_output(
                 frontier_rows.append(_skill_pareto_row(old_sid, old_skill))
 
         skill_admission = update_pareto_frontier(frontier_rows, row)
+        previous_record = state["skills"].get(sid)
+        preserved_counterexample_scopes = (
+            _items(previous_record.get("generalization_counterexample_scopes"))
+            if isinstance(previous_record, Mapping)
+            else []
+        )
         record = {
             "skill": deepcopy(dict(verified_skill)),
             "family_id": family,
@@ -1029,6 +1035,11 @@ def integrate_solver_output(
                 ),
             },
         }
+        if preserved_counterexample_scopes:
+            record["generalization_counterexample_scopes"] = preserved_counterexample_scopes
+            record["generalization_repromotion_blocked"] = True
+            if _s(verified_skill.get("scope_relation")) == "EXACT":
+                record["recovered_from_quarantine_by_scope_contraction"] = True
         state["skills"][sid] = record
         _resolve_improvements(
             state,
@@ -1062,7 +1073,7 @@ def integrate_solver_output(
                 and _s(verified_skill.get("scope_predicate"))
                 == VERIFIED_SUPERSET_SCOPE_PREDICATE
             )
-            if not verified_generalization:
+            if not verified_generalization and not preserved_counterexample_scopes:
                 _enqueue_improvement(
                     state,
                     kind="SEEK_VERIFIED_SCOPE_GENERALIZATION",
@@ -1075,6 +1086,13 @@ def integrate_solver_output(
                         "postconditions": postconditions,
                         "required_result": "INDEPENDENTLY_VERIFIED_PROVEN_SUPERSET_SKILL",
                     },
+                )
+            elif not verified_generalization:
+                _resolve_improvements(
+                    state,
+                    kind="SEEK_VERIFIED_SCOPE_GENERALIZATION",
+                    predicate=lambda work: work.get("identity", {}).get("skill_id") == sid,
+                    resolved_by=sid + ":GENERALIZATION_BLOCKED_BY_COUNTEREXAMPLE",
                 )
             else:
                 _resolve_improvements(
@@ -1440,6 +1458,7 @@ def _record_reuse_result(
     skill_id: str,
     success: bool,
     effect_may_have_occurred: bool,
+    scope_id: str | None = None,
 ) -> dict[str, Any]:
     state = load_state(state_path)
     row = dict(state["reuse"].get(skill_id) or {})
@@ -1460,6 +1479,28 @@ def _record_reuse_result(
             record["active"] = False
             record["quarantined"] = True
             record["quarantine_reason"] = "VERIFIED_REUSE_ROUTE_EFFECTFUL_FAILURE_COUNTEREXAMPLE"
+            raw_skill = record.get("skill")
+            source_scopes = (
+                set(_items(raw_skill.get("source_scopes")))
+                if isinstance(raw_skill, Mapping)
+                else set()
+            )
+            relation = (
+                _s(raw_skill.get("scope_relation"))
+                if isinstance(raw_skill, Mapping)
+                else ""
+            )
+            counterexample_scope = _s(scope_id)
+            scope_contraction_safe = (
+                relation == "PROVEN_SUPERSET"
+                and bool(counterexample_scope)
+                and counterexample_scope not in source_scopes
+            )
+            if scope_contraction_safe:
+                prior = set(_items(record.get("generalization_counterexample_scopes")))
+                prior.add(counterexample_scope)
+                record["generalization_counterexample_scopes"] = sorted(prior)
+                record["generalization_repromotion_blocked"] = True
             family = record.get("family_id")
             frontier = state["pareto_frontiers"].get(family)
             if isinstance(frontier, Sequence) and not isinstance(frontier, (str, bytes)):
@@ -1476,6 +1517,10 @@ def _record_reuse_result(
                     "skill_id": skill_id,
                     "reason": record["quarantine_reason"],
                     "required_result": "INDEPENDENT_REVERIFICATION_OR_REPLACEMENT",
+                    "counterexample_scope_id": counterexample_scope or None,
+                    "source_scopes": sorted(source_scopes),
+                    "previous_scope_relation": relation or None,
+                    "scope_contraction_safe": scope_contraction_safe,
                 },
             )
 
@@ -1750,6 +1795,7 @@ def run_learning_episode(
             skill_id=selected["skill_id"],
             success=reuse_out.get("pass") is True,
             effect_may_have_occurred=effectful,
+            scope_id=scope,
         )
         reuse_attempt = {
             "skill_id": selected["skill_id"],
