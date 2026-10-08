@@ -459,6 +459,100 @@ def run(
                 seen.add(candidate_digest)
                 continue
 
+        # After deterministic reuse/repair is exhausted, an explicit policy
+        # adequacy gap may require a genuinely new verifiable capability. Give
+        # the existing capability expander a first-class escape path here. The
+        # expander has zero authority: it can only propose a normal request_patch,
+        # and the complete patched request must be re-run through the V1 authority
+        # kernel before it can influence a policy choice.
+        if isinstance(policy_request, Mapping) and capability_expander is not None:
+            expansion_packet = {
+                "schema": (
+                    "PROJECT_BRAIN_R2_POLICY_ADEQUACY_CAPABILITY_EXPANSION_REQUEST_V1"
+                ),
+                "proposal_kind": "R2_POLICY_ADEQUACY_CAPABILITY_EXPANSION",
+                "step": step,
+                "task_id": current.get("task_id"),
+                "goal": current.get("goal"),
+                "goal_sha256": result.get("goal_sha256"),
+                "current_request_sha256": _digest(current),
+                "unresolved_status": result.get("status"),
+                "next_required_edge": result.get("next_required_edge"),
+                "next_policy_request": deepcopy(dict(policy_request)),
+                "allowed_request_patch_fields": sorted(MUTABLE_REQUEST_FIELDS),
+                "immutable_request_fields": sorted(IMMUTABLE_REQUEST_FIELDS),
+                "required_response_shape": {
+                    "request_patch": (
+                        "mapping containing only allowed_request_patch_fields"
+                    )
+                },
+                "expansion_authority": False,
+                "semantic_truth_authority": False,
+                "policy_adequacy_authority": False,
+                "execution_authority": False,
+                "acceptance_authority": False,
+                "terminal_authority": False,
+            }
+            expansion_record: dict[str, Any] = {
+                "request_sha256": _digest(expansion_packet),
+                "expansion_authority": False,
+                "semantic_truth_authority": False,
+                "policy_adequacy_authority": False,
+                "terminal_authority": False,
+            }
+            try:
+                generated = capability_expander(
+                    expansion_packet,
+                    step,
+                    deepcopy(current),
+                )
+            except Exception as exc:
+                expansion_record["status"] = "EXPANDER_EXCEPTION"
+                expansion_record["reason"] = type(exc).__name__ + ":" + str(exc)
+            else:
+                if generated is None:
+                    expansion_record["status"] = "NO_EXPANSION"
+                elif not isinstance(generated, Mapping):
+                    expansion_record["status"] = "CANDIDATE_REJECTED"
+                    expansion_record["reason"] = "EXPANDER_RESULT_NOT_OBJECT"
+                else:
+                    candidate, source_id = _normalize_provider_candidate(generated)
+                    merged, error = _merge_candidate(current, candidate)
+                    if error is not None or merged is None:
+                        expansion_record["status"] = "CANDIDATE_REJECTED"
+                        expansion_record["source_id"] = source_id
+                        expansion_record["reason"] = error
+                    else:
+                        candidate_digest = _digest(merged)
+                        if candidate_digest == _digest(current):
+                            expansion_record["status"] = "CANDIDATE_REJECTED"
+                            expansion_record["source_id"] = source_id
+                            expansion_record["reason"] = "NO_PROGRESS"
+                        elif candidate_digest in seen:
+                            expansion_record["status"] = "CANDIDATE_REJECTED"
+                            expansion_record["source_id"] = source_id
+                            expansion_record["reason"] = "FIXED_POINT_CYCLE_DETECTED"
+                        else:
+                            expansion_record["status"] = (
+                                "PROGRESSIVE_POLICY_ADEQUACY_EXPANSION_"
+                                "ACCEPTED_FOR_REVERIFICATION"
+                            )
+                            expansion_record["source_id"] = source_id
+                            expansion_record["candidate_request_sha256"] = (
+                                candidate_digest
+                            )
+                            expansion_record[
+                                "downstream_reverification_required"
+                            ] = True
+                            trace[-1][
+                                "policy_adequacy_capability_expansion"
+                            ] = expansion_record
+                            current = merged
+                            seen.add(candidate_digest)
+                            continue
+
+            trace[-1]["policy_adequacy_capability_expansion"] = expansion_record
+
         if proposal_provider is None:
             return _decorate(
                 result,
