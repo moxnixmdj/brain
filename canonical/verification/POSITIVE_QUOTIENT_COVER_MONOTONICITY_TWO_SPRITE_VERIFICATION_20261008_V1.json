@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_POSITIVE_QUOTIENT_COVER_MONOTONICITY_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_BUILTIN_THEOREM_PLUS_6_OF_6_EXTENDED_ON_TWO_SPRITES__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/positive_quotient_cover_monotonicity_v1.py",
+    "git_blob_sha": "ac78e3f1e93795658e5c732ccd1186a6bf68ad56",
+    "sha256": "0203fd9ae84c488ef6627a197e87b7ac931e5d2516ce22f858a7d26bb15e2a70",
+    "commit_sha": "28bdf79dd9b58d9b415e9dbb903f608ba3fe2c81"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "builtin_theorem_pass": true,
+      "extended_checks": "6_OF_6_PASS"
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "builtin_theorem_pass": true,
+      "extended_checks": "6_OF_6_PASS"
+    }
+  ],
+  "checked_properties": [
+    "ZERO_DISCRIMINATOR_COMMON_POLICY_POSITIVE_COVER",
+    "PARTIAL_DISCRIMINATOR_SUBSET_POSITIVE_COVER",
+    "ADDING_DISCRIMINATORS_REFINES_CLASSES_WITHOUT_DESTROYING_EXISTING_POSITIVE_COVER",
+    "UNCOVERED_CLASS_WITH_INCOMPLETE_Q_REMAINS_UNKNOWN_NOT_IMPOSSIBLE",
+    "ONE_ADDITIONAL_DISCRIMINATOR_CAN_REPAIR_PRIOR_UNKNOWN",
+    "MALFORMED_DISCRIMINATOR_DOMAIN_FAILS_CLOSED",
+    "UNKNOWN_POLICY_REFERENCE_FAILS_CLOSED"
+  ],
+  "theorem_conclusion": "POSITIVE_POLICY_COVER_DOES_NOT_REQUIRE_DISCRIMINATOR_LIBRARY_COMPLETENESS",
+  "boundaries": [
+    "SCOPE_COMPLETENESS_OF_REGION_SET_NOT_PROVED",
+    "ADEQUACY_RECEIPT_TRUTH_NOT_SELF_CERTIFIED",
+    "BRAIN_OWNERSHIP_NOT_SELF_CERTIFIED",
+    "NO_NEGATIVE_IMPOSSIBILITY_AUTHORITY",
+    "NO_U_EMPTY_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
