@@ -445,6 +445,7 @@ def _observe_runtime_outcome(
     state_path: str | Path | None,
     learn: bool,
     retry_context: Mapping[str, Any] | None = None,
+    surface: str = "LIVE_RUNTIME",
 ) -> dict[str, Any] | None:
     """Feed every live failure into R3 while keeping success promotion fail-closed.
 
@@ -472,12 +473,13 @@ def _observe_runtime_outcome(
     if any(key in out for key in learning_keys):
         return _integrate_learning(out, state_path=state_path, retry_context=retry_context)
 
-    return {
-        "status": "SUCCESS_OBSERVED__NO_VERIFIED_LEARNING_ARTIFACT",
-        "pass": True,
-        "permanent_reuse_authorized": False,
-        "terminal_authority": False,
-    }
+    learning = _learning_module()
+    path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
+    return learning.record_success_observation(
+        out,
+        surface=surface,
+        state_path=path,
+    )
 
 
 def _h100(operation: str, payload: Mapping[str, Any]) -> Any:
@@ -617,7 +619,6 @@ def run_generic(
         if ctx["active_verified_skills"]:
             skill_plan = _skill_plan(problem, ctx["active_verified_skills"], active_invalidators)
 
-        out = _v12_run(problem, repo_root=repo_root, kwargs=kwargs)
         retry_context = {
             "mode": "generic",
             "problem": deepcopy(dict(problem)),
@@ -626,10 +627,50 @@ def run_generic(
             "active_invalidators": list(active_invalidators),
             "learn": True,
         }
-        learning = (
-            _integrate_learning(out, state_path=ctx["state_path"], retry_context=retry_context)
-            if learn else None
-        )
+
+        loop_out = None
+        if learn and ctx["active_verified_skills"]:
+            learning_module = _learning_module()
+            loop_out = learning_module.run_learning_episode(
+                problem,
+                repo_root=repo_root,
+                state_path=ctx["state_path"],
+                proposal_packets=kwargs.get("proposal_packets"),
+                resolved_semantics_bindings=kwargs.get("resolved_semantics_bindings"),
+                effect_root=kwargs.get("effect_root"),
+                episode_id=episode_id,
+                scope_id=scope_id,
+                episode_verification_binding=kwargs.get("episode_verification_binding"),
+                skill_verification_binding=kwargs.get("skill_verification_binding"),
+                resume_binding=kwargs.get("resume_binding"),
+                known_absent_invalidators=active_invalidators,
+                proposal_provider=kwargs.get("proposal_provider"),
+                capability_expander=kwargs.get("capability_expander"),
+                proposal_provider_id=kwargs.get(
+                    "proposal_provider_id", "HOST_GENERAL_COGNITION_SUBSTRATE"
+                ),
+                proposal_provider_max_candidates=int(
+                    kwargs.get("proposal_provider_max_candidates", 4)
+                ),
+                capability_expander_id=kwargs.get(
+                    "capability_expander_id", "HOST_CAPABILITY_EXPANDER"
+                ),
+                max_capability_expansions=int(kwargs.get("max_capability_expansions", 4)),
+                retry_context=retry_context,
+            )
+            out = loop_out["solver_output"]
+            learning = loop_out["learning"]
+        else:
+            out = _v12_run(problem, repo_root=repo_root, kwargs=kwargs)
+            learning = (
+                _integrate_learning(
+                    out,
+                    state_path=ctx["state_path"],
+                    retry_context=retry_context,
+                )
+                if learn else None
+            )
+
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
@@ -637,9 +678,17 @@ def run_generic(
             "solver": "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
             "solver_output": out,
             "learning": learning,
-            "verified_prior_episode_count_reused": len(ctx["prior_verified_episodes"]),
+            "verified_prior_episode_count_reused": (
+                loop_out.get("prior_verified_episode_count_used", 0)
+                if isinstance(loop_out, Mapping)
+                else len(ctx["prior_verified_episodes"])
+            ),
             "active_verified_skill_count": len(ctx["active_verified_skills"]),
             "skill_aware_plan": skill_plan,
+            "reuse_first": bool(loop_out and loop_out.get("reuse_first")),
+            "reused_skill_id": loop_out.get("reused_skill_id") if loop_out else None,
+            "reuse_attempt": loop_out.get("reuse_attempt") if loop_out else None,
+            "fallback_used": bool(loop_out and loop_out.get("fallback_used")),
             "learning_persistence_enabled": bool(learn),
             "terminal_authority": False,
             "capability_promotion_authority": False,
@@ -677,10 +726,12 @@ def run_decision(
         }
         learning = None
         if learn and isinstance(execution, Mapping):
-            learning = _integrate_learning(
+            learning = _observe_runtime_outcome(
                 execution,
                 state_path=state_path,
+                learn=True,
                 retry_context=retry_context,
+                surface="DECISION_EXECUTION",
             )
         elif learn and out.get("pass") is not True:
             learning = _observe_runtime_outcome(
@@ -747,6 +798,7 @@ def run_specialized(
                 "payload": deepcopy(dict(payload)),
                 "learn": True,
             },
+            surface="SPECIALIZED:" + name,
         )
         return {
             "schema": SCHEMA,
