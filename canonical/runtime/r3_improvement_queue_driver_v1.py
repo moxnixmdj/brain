@@ -401,6 +401,7 @@ def _adapt_success_work(
     integrated = learning.integrate_solver_output(
         verified,
         state_path=state_path,
+        repo_root=repo_root,
         verification_problem=problem,
     )
     resolved_by = str(integrated.get("episode_key") or "VERIFIED_SUCCESS_EPISODE")
