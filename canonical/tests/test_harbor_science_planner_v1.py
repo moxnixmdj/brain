@@ -102,7 +102,9 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(len(body["tools"]),1)
         self.assertEqual(body["tools"][0]["function"]["name"],p.TOOL_NAME)
         self.assertEqual(body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["maxItems"],1)
+        self.assertEqual(body["tools"][0]["function"]["parameters"]["properties"]["material_requirements"]["maxItems"],p.MAX_MODEL_REQUIREMENTS)
         candidate_schema=body["tools"][0]["function"]["parameters"]["properties"]["candidates"]["items"]["properties"]
+        self.assertEqual(candidate_schema["covers"]["maxItems"],p.MAX_COVERS)
         self.assertNotIn("maxLength",candidate_schema["command"])
         self.assertNotIn("maxLength",candidate_schema["verify_command"])
         self.assertGreaterEqual(p.MAX_TOOL_COMPLETION_TOKENS,4096)
