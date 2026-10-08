@@ -175,7 +175,56 @@ class R3IndependentLearningVerifierV1Tests(unittest.TestCase):
             self.assertEqual(auth["verified_skill"]["scope_relation"], "EXACT")
             self.assertTrue(auth["verified_skill"]["reuse_authorized"])
 
-    def test_skill_worker_refuses_superset_request(self):
+    def test_non_effectful_structural_superset_is_independently_proved(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "canonical" / "runtime").mkdir(parents=True)
+            authenticated = []
+            for eid, scope in (("ep-1", "scope-a"), ("ep-2", "scope-b")):
+                problem, episode, trace, request = self.material(
+                    episode_id=eid,
+                    scope_id=scope,
+                )
+                binding = worker.verify_episode_request(request, repo_root=root)
+                auth = authenticate_episode(
+                    binding,
+                    problem=problem,
+                    episode=episode,
+                    trace=trace,
+                    fact_capsule_head_hash=request["fact_capsule_head_hash"],
+                    value_capsule_head_hash=request["value_capsule_head_hash"],
+                    repo_root=root,
+                )
+                self.assertTrue(auth["pass"], auth)
+                authenticated.append(auth["authenticated_episode"])
+
+            state_path = root / "state.json"
+            state_path.write_text(
+                json.dumps({"episodes": {"one": authenticated[0], "two": authenticated[1]}}),
+                encoding="utf-8",
+            )
+            candidate = induce_candidate(authenticated)
+            binding = worker.verify_skill_request(
+                {
+                    "kind": "SKILL_SCOPE_GENERALIZATION_VERIFICATION",
+                    "candidate": candidate,
+                    "requested_scope_relation": "PROVEN_SUPERSET",
+                    "requested_scope_predicate": "STRUCTURAL_MATCH_V1",
+                    "supported_scope_predicates": ["STRUCTURAL_MATCH_V1"],
+                },
+                repo_root=root,
+                state_path=state_path,
+            )
+            self.assertIsInstance(binding, dict)
+            auth = authenticate_skill(candidate, binding, repo_root=root)
+            self.assertTrue(auth["pass"], auth)
+            self.assertEqual(auth["verified_skill"]["scope_relation"], "PROVEN_SUPERSET")
+            self.assertEqual(
+                auth["verified_skill"]["scope_predicate"],
+                "STRUCTURAL_MATCH_V1",
+            )
+
+    def test_scope_worker_rejects_unadmitted_generalization_predicate(self):
         with TemporaryDirectory() as td:
             root = Path(td)
             state_path = root / "state.json"
@@ -185,6 +234,8 @@ class R3IndependentLearningVerifierV1Tests(unittest.TestCase):
                     "kind": "SKILL_SCOPE_GENERALIZATION_VERIFICATION",
                     "candidate": {"candidate_only": True},
                     "requested_scope_relation": "PROVEN_SUPERSET",
+                    "requested_scope_predicate": "ANYTHING_MATCHES",
+                    "supported_scope_predicates": ["STRUCTURAL_MATCH_V1"],
                 },
                 repo_root=root,
                 state_path=state_path,
