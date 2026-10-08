@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_P3_NAMED_CONTAINER_EQUIVALENCE_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_CARRIERS__6_OF_6_EACH__BOUNDED_NAMED_SPREADSHEET_CONTAINER_EQUIVALENCE__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/bounded_named_container_equivalence_v1.py",
+      "git_blob_sha": "30d20f72d628ef42089799de0a3b4ec36ed7711a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_bounded_named_container_equivalence_v1.py",
+      "git_blob_sha": "02c8bb953200bf47631ea7b115581ab627744b80"
+    },
+    "governance": {
+      "path": "canonical/governance/P3_NAMED_CONTAINER_EQUIVALENCE_CELL_20261008_V1.json"
+    }
+  },
+  "source_counterexample": {
+    "task_id": "83d10b06-26d1-4636-a32c-23f92c57f30b",
+    "source_requirement": "Include your workings in a second tab titled ‘Sample Size Calculation’.",
+    "rubric_criterion": "The workbook contains a worksheet named exactly 'Sample Size Calculation' (case-insensitive, ignoring surrounding spaces)."
+  },
+  "primary_execution": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "result": {
+      "pass": true,
+      "passed": 6,
+      "total": 6
+    }
+  },
+  "independent_execution": {
+    "provider": "SPRITES",
+    "sprite": "h100-real-image-v1",
+    "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+    "method": "DIRECT_ASSERTION_REPLAY_WITH_STANDARD_INTERPRETER__PYTEST_NOT_INSTALLED",
+    "result": {
+      "pass": true,
+      "passed": 6,
+      "total": 6
+    }
+  },
+  "verified_effects": [
+    "TAB_SHEET_WORKSHEET_NORMALIZE_TO_ONE_BOUNDED_CONTAINER_TYPE",
+    "EXPLICIT_QUOTED_TITLE_CASEFOLD_AND_WHITESPACE_NORMALIZATION",
+    "MATCHING_EXPLICIT_NAMED_CONTAINER_EXISTENCE_RELATION_PROVED",
+    "TITLE_MISMATCH_REJECTED",
+    "UNQUOTED_GENERAL_PARAPHRASE_REMAINS_UNKNOWN",
+    "NO_CONTENT_OR_ORDERING_AUTHORITY_ESCALATION"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_PARAPHRASE_NLI",
+    "NO_WORKINGS_CONTENT_EQUIVALENCE",
+    "NO_SECOND_TAB_ORDERING_EQUIVALENCE",
+    "NO_WHOLE_GDPVAL_TASK_CLOSURE",
+    "NO_GENERAL_P3_CLOSURE",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
