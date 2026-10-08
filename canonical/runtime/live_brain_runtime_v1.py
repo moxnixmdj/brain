@@ -1377,9 +1377,25 @@ def run_decision(
         }
 
         learning = None
+        semantic_learning = None
         if isinstance(learned, Mapping):
             learning = learned.get("learning")
-        elif learn:
+
+        if (
+            learn
+            and out.get("pass") is True
+            and isinstance(out.get("proof_carrying_outcome"), Mapping)
+        ):
+            semantic_learning = _observe_runtime_outcome(
+                out,
+                state_path=state_path,
+                learn=True,
+                retry_context=retry_context,
+                surface="DECISION:R2_GENERAL_ADEQUATE_DECISION",
+            )
+            if learning is None:
+                learning = semantic_learning
+        elif learn and not isinstance(learned, Mapping):
             learning = _observe_runtime_outcome(
                 out,
                 state_path=state_path,
@@ -1395,6 +1411,7 @@ def run_decision(
             "decision_controller": "GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2",
             "decision_output": out,
             "learning": learning,
+            "semantic_acceptance_learning": semantic_learning,
             "reuse_first": (
                 learned.get("reuse_first") is True
                 if isinstance(learned, Mapping) else False
