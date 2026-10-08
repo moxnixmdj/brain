@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_P3_MECHANICALLY_CLOSED_COMMON_POLICY_CELL_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__324_LOCAL_CHECKS__8_POSITIVE_CELLS__300_RANDOM_NEGATIVE_PERTURBATIONS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py",
+      "git_blob_sha": "66ce574da0cc8098d7aba8bb26bd18e36fe9784e"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p3_mechanically_closed_common_policy_cell_v1.py",
+      "git_blob_sha": "f8db6ea990206ea83e424685afb9c28b21d686d0"
+    },
+    "dependencies": {
+      "v3": "cd81b812f30b46b9889826adbc39df8690bdb40d",
+      "v2": "14c7b3f99b6c28b3f28b5356e13907f843f5ee91",
+      "grounded_realizer": "0709b7d43a069eaa9eb3240df28789a9107a36db",
+      "bounded_support": "197246a50ace8c16b945def9edb1357fb317c393"
+    }
+  },
+  "execution": {
+    "provider": "LOCAL_ISOLATED_PYTHON",
+    "result": {
+      "pass": true,
+      "checks": 324,
+      "positive_cells": 8,
+      "random_negative": 300
+    },
+    "exact_runtime_git_blob_match": true,
+    "exact_test_git_blob_match": true
+  },
+  "proved_scope": [
+    "ALL_CLAIMS_REQUIRED",
+    "INPUT_ORDER_ONLY",
+    "ALL_BOUNDED_CLAIM_EVIDENCE_RELATIONS_RESOLVED",
+    "NO_CONFLICT_RELATION",
+    "EXPLICIT_EMPTY_REQUIRED_UNCERTAINTY_SET",
+    "FULL_EXPLICIT_SUPPORTED_RENDER_CONSTRAINT_SET",
+    "NO_UNMODELED_AUDIENCE_PROFILE_FIELDS"
+  ],
+  "consequence": "THIS_NARROW_FORMAL_SUBCELL_HAS_NO_REMAINING_SELECTION_ORDER_OR_CONFLICT_UNCERTAINTY_DEGREE_OF_FREEDOM__V3_COMMON_POLICY_MEMBERSHIP_CAN_BE_CHECKED_MECHANICALLY",
+  "hard_nonclaims": [
+    "NO_SOURCE_AUTHORIZATION_PROOF",
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_GENERAL_AUDIENCE_ADAPTATION",
+    "NO_GENERAL_REAL_CONTEXT_ADMISSION",
+    "NO_DB_ADMISSION_AUTHORITY",
+    "NO_U_SUBTRACTION_AUTHORITY",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
