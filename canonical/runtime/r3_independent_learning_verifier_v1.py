@@ -19,7 +19,10 @@ Current admitted scope:
 
 Effectful episodes are never replayed. The currently owned filesystem-effect
 class is verified by independent post-execution readback from the retained effect
-root. Any effect without such a re-readable root remains fail-closed.
+root. V12 BOUND_CAPABILITY_EXECUTION_V1 carrier rows are admitted only when the
+stored accepted inner execution can be independently recomputed by the Brain-owned
+bound verifier without invoking the capability again. Any other effect without
+an independent readback/recomputation path remains fail-closed.
 
 No terminal, capability, ownership, or execution authority is granted here.
 """
@@ -78,6 +81,9 @@ STRUCTURAL_MATCH_SCOPE_PREDICATE = "STRUCTURAL_MATCH_V1"
 NON_EFFECTFUL_VERIFICATION_BASIS = "SEPARATE_R3_EVIDENCE_RECOMPUTATION_WORKER"
 EFFECTFUL_READBACK_VERIFICATION_BASIS = (
     "SEPARATE_R3_EVIDENCE_RECOMPUTATION_PLUS_EFFECT_READBACK_V1"
+)
+BOUND_CARRIER_VERIFICATION_BASIS = (
+    "SEPARATE_R3_BOUND_CARRIER_ACCEPTED_EXECUTION_RECOMPUTATION_V1"
 )
 
 
@@ -345,6 +351,7 @@ def _reverify_non_effectful_trace(
     expected_steps: list[dict[str, Any]] = []
     current_facts = sorted(str(x) for x in problem.get("initial_facts", []))
     effectful_trace = False
+    bound_carrier_effectful_trace = False
 
     for expected_cycle, raw_row in enumerate(trace):
         if not isinstance(raw_row, Mapping):
@@ -376,6 +383,7 @@ def _reverify_non_effectful_trace(
             raise R3IndependentVerificationError("ACTION_CONTRACT_DIGEST_MISMATCH:" + cid)
         action_type = str(action.get("type") or "")
         has_effect_outcome = bool(row.get("effect_outcome_sha256"))
+        bound_carrier_effect = False
         if action_type == "verified_effect_tool":
             if not has_effect_outcome:
                 raise R3IndependentVerificationError(
@@ -389,7 +397,19 @@ def _reverify_non_effectful_trace(
             )
             effectful_trace = True
         elif has_effect_outcome:
-            raise R3IndependentVerificationError("EFFECT_OUTCOME_ON_NON_EFFECT_ACTION")
+            bound_carrier_effect = (
+                row.get("bound_capability_carrier_authenticated") is True
+                and str(action.get("verifier_id") or "").strip()
+                    == "BOUND_CAPABILITY_EXECUTION_V1"
+            )
+            if not bound_carrier_effect:
+                raise R3IndependentVerificationError(
+                    "EFFECT_OUTCOME_ON_NON_EFFECT_ACTION"
+                )
+        elif row.get("bound_capability_carrier_authenticated") is True:
+            raise R3IndependentVerificationError(
+                "BOUND_CARRIER_AUTHENTICATION_WITHOUT_EFFECT_OUTCOME"
+            )
 
         pair = {
             "receipt": row.get("effect_semantics_receipt"),
@@ -477,6 +497,43 @@ def _reverify_non_effectful_trace(
         if _canon(verdict.get("verified_output")) != _canon(row.get("verified_output")):
             raise R3IndependentVerificationError("VERIFIED_OUTPUT_MISMATCH:" + cid)
 
+        if bound_carrier_effect:
+            effect_outcome = row.get("effect_outcome")
+            execution = proposal.get("execution")
+            if not isinstance(effect_outcome, Mapping):
+                raise R3IndependentVerificationError(
+                    "BOUND_CARRIER_EFFECT_OUTCOME_INVALID:" + cid
+                )
+            if not isinstance(execution, Mapping):
+                raise R3IndependentVerificationError(
+                    "BOUND_CARRIER_ACCEPTED_EXECUTION_MISSING:" + cid
+                )
+            inner_trace = execution.get("trace")
+            if (
+                not isinstance(inner_trace, Sequence)
+                or isinstance(inner_trace, (str, bytes))
+                or not inner_trace
+            ):
+                raise R3IndependentVerificationError(
+                    "BOUND_CARRIER_INNER_TRACE_INVALID:" + cid
+                )
+            expected_outcome = {
+                "carrier_schema": "PROJECT_BRAIN_UNIVERSAL_BOUND_CAPABILITY_CARRIER_V1",
+                "execution_verification": deepcopy(dict(verdict)),
+                "inner_execution_sha256": v1._digest(execution),
+                "executed_nonfinish_action_count": max(len(inner_trace) - 1, 0),
+            }
+            if _canon(effect_outcome) != _canon(expected_outcome):
+                raise R3IndependentVerificationError(
+                    "BOUND_CARRIER_EFFECT_OUTCOME_RECOMPUTATION_MISMATCH:" + cid
+                )
+            if row.get("effect_outcome_sha256") != v1._digest(expected_outcome):
+                raise R3IndependentVerificationError(
+                    "BOUND_CARRIER_EFFECT_OUTCOME_DIGEST_MISMATCH:" + cid
+                )
+            effectful_trace = True
+            bound_carrier_effectful_trace = True
+
         provides = sorted(str(x) for x in cap.get("provides", []))
         semantic_effects = sorted(
             str(x)
@@ -531,6 +588,7 @@ def _reverify_non_effectful_trace(
         "target_verdict": target_verdict,
         "effectful_trace": effectful_trace,
         "effect_outcomes_reverified": effectful_trace,
+        "bound_carrier_effectful_trace": bound_carrier_effectful_trace,
     }
 
 
@@ -661,7 +719,9 @@ def verify_episode_request(
             "behavior_verified": True,
             "exact_byte_bound": True,
             "verification_basis": (
-                EFFECTFUL_READBACK_VERIFICATION_BASIS
+                BOUND_CARRIER_VERIFICATION_BASIS
+                if recomputed.get("bound_carrier_effectful_trace")
+                else EFFECTFUL_READBACK_VERIFICATION_BASIS
                 if recomputed["effectful_trace"]
                 else "DETERMINISTIC_ACCEPTED_PROPOSAL_REEXECUTION_AND_CAPSULE_REBUILD"
             ),
@@ -680,8 +740,13 @@ def verify_episode_request(
             ),
             "non_effectful_trace": not bool(recomputed["effectful_trace"]),
             "independent_verifier_id": INDEPENDENT_VERIFIER_ID,
+            "bound_carrier_effectful_trace": bool(
+                recomputed.get("bound_carrier_effectful_trace")
+            ),
             "verification_basis": (
-                EFFECTFUL_READBACK_VERIFICATION_BASIS
+                BOUND_CARRIER_VERIFICATION_BASIS
+                if recomputed.get("bound_carrier_effectful_trace")
+                else EFFECTFUL_READBACK_VERIFICATION_BASIS
                 if recomputed["effectful_trace"]
                 else NON_EFFECTFUL_VERIFICATION_BASIS
             ),
