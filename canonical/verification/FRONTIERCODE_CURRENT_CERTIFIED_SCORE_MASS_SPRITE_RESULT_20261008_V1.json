@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_CURRENT_CERTIFIED_SCORE_MASS_SPRITE_RESULT_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_REMOTE_COMPILER_RESULT__CURRENT_CERTIFIED_ROBUST_SCORE_LOWER_BOUND_ZERO__ZERO_ACCEPTANCE_CREDIT",
+  "subject_branch": "obs/frontiercode-current-score-mass-20261008-v1",
+  "exact_blobs": {
+    "runtime": "4cb782c91165a6aa5b28e1636879c7046efbd5f9",
+    "input": "dbfbf988f5036a21454c1e42442ab6ab832954cb"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-scope-cover-v1-verify",
+    "sprite_id": "sprite-d5d24558-e690-4f9b-acda-589284eb3ac1",
+    "workspace": "/tmp/fc_current"
+  },
+  "result": {
+    "pass": true,
+    "task_count": 100,
+    "trials_per_task": 5,
+    "expected_cell_count": 500,
+    "covered_cell_count": 500,
+    "robust_score_lower_bound_fraction": 0,
+    "robust_score_lower_bound_percent": 0,
+    "target_score_fraction": 0.5464,
+    "target_met_by_robust_lower_bound": false,
+    "errors": []
+  },
+  "interpretation": [
+    "CURRENT_BRAIN_EVIDENCE_CERTIFIES_NO_POSITIVE_FRONTIERCODE_SCORE_MASS",
+    "THIS_IS_AN_EPISTEMIC_LOWER_BOUND_NOT_AN_ESTIMATE_OF_ACTUAL_BRAIN_SCORE",
+    "A_ZERO_CERTIFIED_LOWER_BOUND_DOES_NOT_IMPLY_ZERO_ACTUAL_PERFORMANCE_OR_CAPABILITY_FAILURE",
+    "ANY_POSITIVE_DIRECT_SCORE_PROGRESS_NOW_REQUIRES_NEW_BLOCKER_GATED_PASSED_WEIGHT_EVIDENCE_OR_AN_OWNER_RESULT",
+    "A_SCOPE_COMPLETE_STRONGER_PROOF_BYPASSES_THE_SCORE_ROUTE_ENTIRELY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_ACTUAL_FRONTIERCODE_SCORE_IS_ZERO",
+    "NO_CAPABILITY_FAILURE_CLAIM",
+    "NO_FRONTIERCODE_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
