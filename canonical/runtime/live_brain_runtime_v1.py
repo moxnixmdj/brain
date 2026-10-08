@@ -877,6 +877,7 @@ def _observe_runtime_outcome(
         out,
         surface=surface,
         state_path=path,
+        replay_context=retry_context,
     )
 
 
