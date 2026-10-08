@@ -1,10 +1,10 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V10",
+  "schema": "PROJECT_BRAIN_CURRENT_MAIN_TERMINAL_REALITY_STATUS_V11",
   "status": "CURRENT_MAIN_TERMINAL_NOT_REAL",
-  "checked_by": "CHATGPT_DIRECT_POST_TOURNAMENT_COMPILER_SOUNDNESS_REBIND",
+  "checked_by": "CHATGPT_DIRECT_POST_TB_SCIENCE_RANK11_CAUSAL_RECONCILIATION",
   "source_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-  "source_authority_blob_sha": "b7b1f4a12c32bea1d979fb6b921d19eb37ef620a",
-  "source_authority_commit_sha": "c4ed72952a325f6f7bd4470c06f851c028fd2bcb",
+  "source_authority_blob_sha": "0c168c4682c4631a9d9b76f329d111389f32872a",
+  "source_authority_commit_sha": "7f2231f968dda5234500e55372916dc88b2486ed",
   "phase": "FROZEN_PROTOCOL_CLOSURE_WITH_COEQUAL_UNIVERSAL_COVER_ROUTE",
   "live_research_root_count": 1,
   "live_research_root": "PROVE_NOT_X_OR_CLOSE_THE_13_INDEPENDENT_ACCEPTANCE_EVIDENCE_OBLIGATIONS",
@@ -23,7 +23,12 @@
     "primary_acceptance_proof_engine_count": 3,
     "new_target_reality_units_consumed": 0,
     "incremental_spend_usd": 0,
-    "fully_terminally_closed_family_count": 7
+    "fully_terminally_closed_family_count": 7,
+    "tb_science_consumed_slots": 11,
+    "tb_science_successes": 0,
+    "tb_science_final_failures": 11,
+    "tb_science_next_untouched_rank": 12,
+    "tb_science_output_directive_repair_independent_tests": "17_OF_17_PASS_ON_SECOND_SPRITE"
   },
   "remaining_terminal_conditions": [
     "CLOSE_THE_13_INDEPENDENT_OPEN_ACCEPTANCE_EVIDENCE_OBLIGATIONS_OR_SOUNDLY_DISCHARGE_THEM_BY_STRONGER_SCOPE_COMPLETE_PROOFS",
@@ -38,7 +43,15 @@
     "final_donor_deletion_cleanroom_pass": true,
     "proof_bundle_frozen": false,
     "terminal_closure_reducer_achieved": false,
-    "terminal": false
+    "terminal": false,
+    "tb_science_rank11_final_zero": true,
+    "tb_science_rank11_verifier_reached": true,
+    "tb_science_rank11_required_output_missing": true,
+    "tb_science_rank11_scientific_classification_quality_evaluated": false,
+    "tb_science_rank11_replay_forbidden": true,
+    "tb_science_output_directive_control_repair_verified": true,
+    "tb_science_rank12_locked": true,
+    "tb_science_acceptance_closed": false
   },
   "anti_bureaucracy": {
     "primary_scheduler_object_count": 1,
