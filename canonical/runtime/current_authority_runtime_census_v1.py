@@ -20,7 +20,7 @@ from typing import Any, Mapping
 from canonical.runtime.brain_owned_python_closure_census_v1 import census
 
 SCHEMA = "PROJECT_BRAIN_CURRENT_AUTHORITY_RUNTIME_CENSUS_V1"
-RUNTIME_PATH_RE = re.compile(r"^canonical/runtime/[^\\\"'\\s]+\\.py$")
+RUNTIME_PATH_RE = re.compile(r"^canonical/runtime/[^\"'\s]+\.py$")
 
 
 def _runtime_paths(value: Any) -> set[str]:
