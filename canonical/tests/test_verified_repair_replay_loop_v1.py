@@ -343,6 +343,11 @@ class VerifiedRepairReplayLoopV1Tests(unittest.TestCase):
         with (
             mock.patch.object(brain, "_causal_synthesize", return_value=missing),
             mock.patch.object(brain, "_v12_run", return_value=solver_out) as execute,
+            mock.patch.object(
+                brain,
+                "_replay_retry_context",
+                return_value={"pass": True, "status": "PASS__ORIGINAL_OBLIGATION"},
+            ),
         ):
             out = brain.execute_failure_repair_cycle(
                 {
@@ -391,6 +396,145 @@ class VerifiedRepairReplayLoopV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertIn("REPAIR_COMPONENT_EXECUTABLE_BINDING_REQUIRED", out["reason"])
         execute.assert_not_called()
+
+
+    def test_original_replay_disables_recursive_auto_repair_and_keeps_state(self):
+        path = self.temp_state()
+        context = {
+            "mode": "generic",
+            "problem": {
+                "task_id": "replay",
+                "initial_facts": [],
+                "target_effects": ["goal"],
+                "capabilities": [],
+            },
+            "learn": True,
+        }
+        with mock.patch.object(
+            brain,
+            "run",
+            return_value={"pass": False, "status": "STILL_FAILED"},
+        ) as replay:
+            brain._replay_retry_context(
+                context,
+                repo_root=Path("."),
+                information_provider=None,
+                proposal_provider=None,
+                capability_expander=None,
+                state_path=path,
+            )
+        forwarded = replay.call_args.args[0]
+        self.assertIs(forwarded["auto_repair"], False)
+        self.assertEqual(forwarded["state_path"], str(path))
+        self.assertNotIn("auto_repair", context)
+
+    def test_generic_failure_automatically_enters_verified_repair_cycle_once(self):
+        path = self.temp_state()
+        fingerprint = "f" * 64
+        retry_sha = "a" * 64
+        learned = {
+            "pass": False,
+            "solver_output": dict(FAILURE),
+            "learning": {
+                "pass": False,
+                "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+                "diagnosis": {"failure_fingerprint": fingerprint},
+                "retry_capsule_sha256": retry_sha,
+            },
+            "prior_verified_episode_count_used": 0,
+            "reuse_first": False,
+            "reused_skill_id": None,
+            "reuse_attempt": None,
+            "fallback_used": False,
+        }
+        ctx = {
+            "state_path": path,
+            "state": {},
+            "prior_verified_episodes": [],
+            "active_verified_skills": [],
+        }
+        repaired = {
+            "pass": True,
+            "status": "REPAIR_VERIFIED_BY_ORIGINAL_OBLIGATION_REPLAY",
+            "failure_fingerprint": fingerprint,
+            "retry_capsule_sha256": retry_sha,
+        }
+        problem = {
+            "task_id": "auto-repair",
+            "initial_facts": ["seed"],
+            "target_effects": ["goal"],
+            "capabilities": [],
+        }
+        expander = mock.Mock(name="expander")
+        with (
+            mock.patch.object(brain, "_active_learning_context", return_value=ctx),
+            mock.patch.object(brain, "_run_learning_episode", return_value=learned),
+            mock.patch.object(
+                brain,
+                "execute_failure_repair_cycle",
+                return_value=repaired,
+            ) as repair,
+        ):
+            out = brain.run_generic(
+                problem,
+                state_path=path,
+                capability_expander=expander,
+            )
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["status"], "UNIFIED_GENERIC_EXECUTION_REPAIRED")
+        self.assertTrue(out["auto_repair_attempted"])
+        self.assertEqual(out["automatic_repair"], repaired)
+        repair.assert_called_once()
+        repair_request = repair.call_args.args[0]
+        self.assertEqual(repair_request["failure_fingerprint"], fingerprint)
+        self.assertEqual(repair_request["retry_capsule_sha256"], retry_sha)
+        self.assertEqual(repair_request["initial_facts"], ["seed"])
+        self.assertIs(repair.call_args.kwargs["capability_expander"], expander)
+
+    def test_auto_repair_can_be_explicitly_disabled_without_losing_diagnosis(self):
+        path = self.temp_state()
+        learned = {
+            "pass": False,
+            "solver_output": dict(FAILURE),
+            "learning": {
+                "pass": False,
+                "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
+                "diagnosis": {"failure_fingerprint": "f" * 64},
+                "retry_capsule_sha256": "a" * 64,
+            },
+            "prior_verified_episode_count_used": 0,
+            "reuse_first": False,
+            "reused_skill_id": None,
+            "reuse_attempt": None,
+            "fallback_used": False,
+        }
+        ctx = {
+            "state_path": path,
+            "state": {},
+            "prior_verified_episodes": [],
+            "active_verified_skills": [],
+        }
+        with (
+            mock.patch.object(brain, "_active_learning_context", return_value=ctx),
+            mock.patch.object(brain, "_run_learning_episode", return_value=learned),
+            mock.patch.object(brain, "execute_failure_repair_cycle") as repair,
+        ):
+            out = brain.run_generic(
+                {
+                    "task_id": "no-auto-repair",
+                    "initial_facts": [],
+                    "target_effects": ["goal"],
+                    "capabilities": [],
+                },
+                state_path=path,
+                auto_repair=False,
+            )
+
+        self.assertFalse(out["pass"])
+        self.assertFalse(out["auto_repair_attempted"])
+        self.assertIsNone(out["automatic_repair"])
+        repair.assert_not_called()
 
 
 if __name__ == "__main__":
