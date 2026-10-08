@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_POST_FREEZE_CERTIFIER_NONINTERFERENCE_SPRITE_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SPRITE_PASS__POST_FREEZE_CERTIFIER_INFORMATION_FLOW_FIREWALL__9_TESTS_PLUS_GATE_MUTATION_SUBTESTS__ZERO_CREDIT",
+  "subject": {
+    "branch": "tb4-post-freeze-certifier-noninterference-20261008-v1",
+    "manifest_path": "canonical/governance/TB4_POST_FREEZE_CERTIFIER_NONINTERFERENCE_CANDIDATE_20261008_V1.json",
+    "manifest_git_blob_sha": "6b4e182db0079f3d0a86518214a67adc79ef5fd3",
+    "runtime_path": "canonical/runtime/tb4_post_freeze_certifier_gate_v1.py",
+    "runtime_git_blob_sha": "6a19947e85447f8a13fb1a807bd4fef384654e15",
+    "tests_path": "canonical/tests/test_tb4_post_freeze_certifier_gate_v1.py",
+    "tests_git_blob_sha": "37ce36d19b57ca73a6e36c2a9202192f6d971d78"
+  },
+  "exact_utf8_sha256": {
+    "manifest": "7a4894afca97f1035e638dd6b8d2e257f25b1278e73832c7f32c6283f62349ef",
+    "runtime": "8c0924c60b5b50994fc51f7686c4ae4264334cca3c30e0c9cd3b141107ecc864",
+    "tests": "3319e1944fcaa7b1ef619a43c76035f80648378392ecfbaf15be80d5f4f52d51"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-objective-pass-lock-v1-verify",
+    "sprite_id": "sprite-64f51750-7c85-4715-9c30-a6bb89f60a24",
+    "workspace": "/tmp/tb4_certifier"
+  },
+  "verification": {
+    "command": "PYTHONPATH=/tmp/tb4_certifier python3 -m unittest -v canonical.tests.test_tb4_post_freeze_certifier_gate_v1",
+    "tests_run": 9,
+    "tests_failed": 0,
+    "result": "PASS",
+    "mutations_covered": [
+      "EVERY_REQUIRED_TRUE_GATE_FORCED_FALSE",
+      "EVERY_REQUIRED_FALSE_GATE_FORCED_TRUE",
+      "EVALUATOR_TO_ACTOR_CHANNEL_OPEN",
+      "CERTIFIER_TO_ACTOR_SAME_TASK_CHANNEL_OPEN",
+      "CERTIFIER_MUTATES_FROZEN_OUTPUT",
+      "PROOF_FEEDS_BACK_TO_ACTOR_SAME_TASK",
+      "CERTIFIER_EXPOSURE_BEFORE_ACTOR_WRITE_CLOSE",
+      "INVALID_OUTPUT_HASH"
+    ]
+  },
+  "verified_semantic_boundary": {
+    "post_freeze_certifier_may_read_evaluator_without_causal_effect_on_frozen_output_if_firewall_passes": true,
+    "actor_may_read_hidden_verifier": false,
+    "same_task_replay_after_verifier_exposure": false,
+    "proof_counts_as_trial_receipts": false,
+    "stronger_proof_acceptance_requires_separate_compiler": true
+  },
+  "logical_effect": "ESTABLISHES_A_FAIL_CLOSED_INFORMATION_FLOW_SHAPE_FOR_POST_FREEZE_TB4_PROOF_CERTIFICATION__DOES_NOT_ESTABLISH_UNIVERSAL_SUCCESS_OR_ACCEPTANCE",
+  "remaining_stronger_proof_obligations": [
+    "TARGET_DOMAIN_COVERAGE_OR_THRESHOLD_MASS_COVERAGE",
+    "EVALUATOR_RELATION_PROOF",
+    "RESOURCE_SEMANTICS_PRESERVATION",
+    "UNIVERSAL_SUCCESS_OR_THRESHOLD_REACHING_LOWER_BOUND_PROOF"
+  ],
+  "hard_nonclaims": [
+    "NO_TB4_ACCEPTANCE_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PERMISSION_FOR_ACTOR_VERIFIER_LEAKAGE",
+    "NO_PERMISSION_FOR_SAME_TASK_REPAIR_REPLAY",
+    "NO_CLAIM_ANY_CURRENT_TB4_TASK_HAS_A_UNIVERSAL_SUCCESS_CERTIFICATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

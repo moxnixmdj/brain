@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_POST_FREEZE_CERTIFIER_NONINTERFERENCE_CANDIDATE_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE__POST_FREEZE_CERTIFIER_INFORMATION_FLOW_FIREWALL__NO_EXECUTION_OR_ACCEPTANCE_CREDIT",
+  "objective": "Permit a proof-only certifier to inspect hidden TB4 verifier semantics after a candidate artifact is irrevocably frozen, while proving that no verifier information can influence the acting Brain configuration, the frozen artifact, or a same-task replay.",
+  "historical_tb4_contract_evidence": [
+    {
+      "commit": "ce67eb200cb6ab7644fb432be46006ed8941fd32",
+      "path": "canonical/action_intents/2026-09-30_VERIFY_MINI_SWE_SUPERPOWERS_NEXTJS_TB4_V1.json",
+      "facts": [
+        "CONFIGURED_COGNITION_MUST_NOT_READ_TESTS_BEFORE_TERMINAL_SUBMISSION",
+        "CONFIGURED_COGNITION_MUST_NOT_READ_TASK_SPECIFIC_VERIFIER_LOGIC",
+        "SUBMIT_EXACTLY_ONCE_TO_UNTOUCHED_INDEPENDENT_VERIFIER"
+      ]
+    },
+    {
+      "commit": "f7ac78d3b6158a4169039961d6d8d1fa9e9a35d7",
+      "path": "canonical/reasoning/2026-09-30_VERIFY_MINI_SWE_SUPERPOWERS_REACT_TB4_V1.json",
+      "facts": [
+        "NO_HIDDEN_VERIFIER_INSPECTION_BEFORE_TERMINAL_SUBMISSION",
+        "RUN_UNTOUCHED_VERIFIER_EXACTLY_ONCE_AFTER_TERMINAL_SUBMISSION",
+        "NO_SAME_TASK_REPLAY_FOR_PROMOTION_AFTER_VERIFIER_EXPOSURE"
+      ]
+    },
+    {
+      "commit": "6319c55f54f56a4e46b1a35d0705a02f272c6bf6",
+      "path": "canonical/capabilities/opus55/REACT_LEAD_FORM_TB4_VERIFICATION_FAILURE_20260930_V1.json",
+      "facts": [
+        "POST_SUBMISSION_INDEPENDENT_VERIFIER_RESULT_AND_CAUSAL_DEFECT_WERE_RECORDED",
+        "TASK_WAS_MARKED_SPENT",
+        "REPLAY_FOR_PROMOTION_WAS_FORBIDDEN",
+        "ONLY_GENERAL_REPAIR_TO_FUTURE_DISTINCT_TASKS_WAS_ALLOWED"
+      ]
+    }
+  ],
+  "information_flow_model": {
+    "nodes": {
+      "A": "ACTOR_CONFIGURED_BRAIN",
+      "I": "AUTHORIZED_TASK_INPUT_AND_RUNTIME_VISIBLE_STATE",
+      "O": "FROZEN_CONTENT_ADDRESSED_ACTOR_OUTPUT_OR_TRAJECTORY",
+      "E": "HIDDEN_EVALUATOR_OR_VERIFIER_SEMANTICS",
+      "C": "SEPARATE_POST_FREEZE_CERTIFIER",
+      "P": "MACHINE_CHECKABLE_PROOF_OBJECT"
+    },
+    "allowed_edges": [
+      "I_TO_A",
+      "A_TO_O",
+      "O_TO_C",
+      "E_TO_C",
+      "C_TO_P"
+    ],
+    "forbidden_edges": [
+      "E_TO_A",
+      "C_TO_A",
+      "E_TO_O_AFTER_FREEZE",
+      "C_TO_O_AFTER_FREEZE",
+      "P_TO_A_FOR_SAME_TASK",
+      "P_TO_O_FOR_SAME_TASK"
+    ],
+    "temporal_order": "ACTOR_EXECUTION__OUTPUT_HASH_COMMIT__ACTOR_WRITE_CLOSE__THEN_CERTIFIER_EVALUATOR_EXPOSURE",
+    "noninterference_claim": "UNDER_THE_DECLARED_GRAPH_AND_TEMPORAL_ORDER__POST_FREEZE_EVALUATOR_INFORMATION_CANNOT_CAUSALLY_CHANGE_O"
+  },
+  "minimum_gate": {
+    "task_identity_bound": true,
+    "actor_configuration_bound": true,
+    "output_sha256_bound_before_certifier_exposure": true,
+    "actor_write_closed_before_certifier_exposure": true,
+    "hidden_verifier_not_exposed_to_actor": true,
+    "certifier_identity_separate_from_actor": true,
+    "certifier_cannot_mutate_actor_output": true,
+    "certifier_to_actor_same_task_channel": false,
+    "same_task_replay_after_certifier_exposure": false,
+    "proof_object_is_post_hoc_only": true,
+    "proof_object_grants_no_trial_receipt_credit": true,
+    "stronger_proof_promotion_requires_separate_acceptance_compiler": true
+  },
+  "legal_effect_if_verified": [
+    "POST_FREEZE_CERTIFIER_INSPECTION_DOES_NOT_RETROACTIVELY_CONTAMINATE_THE_ALREADY_FROZEN_ACTOR_OUTPUT",
+    "CERTIFIER_MAY_BUILD_A_PROOF_OBJECT_FROM_FROZEN_OUTPUT_PLUS_EVALUATOR_SEMANTICS",
+    "ACTOR_MAY_NOT_RECEIVE_THE_HIDDEN_VERIFIER_OR_CERTIFIER_PROOF_FOR_SAME_TASK_REPAIR",
+    "SAME_TASK_REPLAY_REMAINS_FORBIDDEN",
+    "ANY_ACCEPTANCE_EFFECT_MUST_FLOW_THROUGH_A_SEPARATELY_ADMISSIBLE_STRONGER_PROOF_COMPILER"
+  ],
+  "hard_nonclaims": [
+    "NO_PERMISSION_FOR_ACTOR_TO_READ_HIDDEN_VERIFIER_LOGIC",
+    "NO_PERMISSION_TO_REPAIR_AND_REPLAY_THE_SAME_TASK",
+    "NO_CLAIM_A_POST_FREEZE_PROOF_COUNTS_AS_FIVE_TRIAL_RECEIPTS",
+    "NO_CLAIM_UNIVERSAL_TB4_SUCCESS_IS_ALREADY_PROVED",
+    "NO_TB4_ACCEPTANCE_CREDIT",
+    "NO_EXECUTION_AUTHORITY"
+  ],
+  "runtime": "canonical/runtime/tb4_post_freeze_certifier_gate_v1.py",
+  "tests": "canonical/tests/test_tb4_post_freeze_certifier_gate_v1.py",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
