@@ -68,12 +68,12 @@ class ExactRationalSymbolicFeatureTests(unittest.TestCase):
         out = compile_one(tree, [{"x": "1", "y": "0"}], intercept=False)
         self.assertFalse(out["pass"])
         self.assertEqual(out["reason"], "EXACT_FEATURE_EVALUATION_FAILED")
-        self.assertIn("SAFE_DIV_ZERO", out["detail"])
+        self.assertIn("SAFE_DIV_ZERO", out["detail"]["detail"])
 
     def test_reciprocal_zero_fails_closed(self):
         out = compile_one(unary("reciprocal", var("x")), [{"x": "0"}], intercept=False)
         self.assertFalse(out["pass"])
-        self.assertIn("RECIPROCAL_ZERO", out["detail"])
+        self.assertIn("RECIPROCAL_ZERO", out["detail"]["detail"])
 
     def test_fractional_power_operator_is_explicitly_unsupported(self):
         out = compile_one(
@@ -83,17 +83,17 @@ class ExactRationalSymbolicFeatureTests(unittest.TestCase):
         )
         self.assertFalse(out["pass"])
         self.assertEqual(out["reason"], "TREE_BINDING_FAILED")
-        self.assertIn("UNSUPPORTED_OR_INVALID_OPERATOR:pow_abs_1_3", out["detail"])
+        self.assertIn("UNSUPPORTED_OR_INVALID_OPERATOR:pow_abs_1_3", out["detail"]["detail"])
 
     def test_binary_float_input_is_rejected(self):
         out = compile_one(var("x"), [{"x": 0.5}], intercept=False)
         self.assertFalse(out["pass"])
-        self.assertIn("EXACT_RATIONAL_STRING_OR_INT_REQUIRED", out["detail"])
+        self.assertIn("EXACT_RATIONAL_STRING_OR_INT_REQUIRED", out["detail"]["detail"])
 
     def test_missing_variable_fails_closed(self):
         out = compile_one(var("x"), [{"y": "1"}], intercept=False)
         self.assertFalse(out["pass"])
-        self.assertIn("MISSING_VARIABLES:x", out["detail"])
+        self.assertIn("MISSING_VARIABLES:x", out["detail"]["detail"])
 
     def test_query_features_and_zero_credit(self):
         out = compile_basis(
