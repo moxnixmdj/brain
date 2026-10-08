@@ -2082,7 +2082,7 @@
   },
   "pointer_revision": 35,
   "current_verifier_first_cognition_20261008_v1": {
-    "status": "ACTIVE_PENDING_FRESH_REBASE_VERIFICATION",
+    "status": "ACTIVE_CORE_INDEPENDENTLY_VERIFIED_ON_REBASED_MAIN",
     "pointer": {
       "path": "canonical/governance/CURRENT_VERIFIER_FIRST_COGNITION.json"
     },
@@ -2106,6 +2106,11 @@
     },
     "acceptance_authority_from_proof_carrying_outcome": false,
     "capability_promotion_authority_from_proof_carrying_outcome": false,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "verification": {
+      "path": "canonical/verification/VERIFIER_FIRST_PROOF_CARRYING_COGNITION_VERIFY_20261008_V2.json",
+      "status": "PASS__REBASED_VERIFIER_FIRST_CORE__R2_28_OF_28__R3_2_OF_2__LIVE_BRIDGE_1_OF_1__FULL_LIVE_CARRIER_NOT_CLAIMED"
+    },
+    "full_live_runtime_suite_pass_claimed": false
   }
 }
