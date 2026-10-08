@@ -19,6 +19,9 @@
     "common_policy_gate": {
       "path": "canonical/runtime/common_policy_decision_region_gate_v1.py",
       "git_blob_sha": "a26e3b26d917fcf110a856eb762c4f68e8f40002"
+    },
+    "independent_two_sprite_verification": {
+      "path": "canonical/verification/OBSERVABLE_POLICY_COVER_TOTALITY_TWO_SPRITE_VERIFICATION_20261008_V1.json"
     }
   },
   "definitions": {
@@ -62,7 +65,7 @@
     "runtime_deployed": true,
     "adversarial_tests_committed": true,
     "bound_finite_state_reduction_available": true,
-    "independent_public_replay_passed": false,
+    "independent_public_replay_passed": true,
     "scope_complete_parameterized_instantiation_over_S_TRACE": false,
     "U_empty": false,
     "D_finality_closed": false,
