@@ -354,7 +354,7 @@ class ScienceAgentTests(unittest.TestCase):
             env.commands,
         )
         self.assertEqual(len(seen_prompts),1)
-        self.assertIn("Brain-declared authoritative local inputs",seen_prompts[0])
+        self.assertIn("DECLARED_INPUTS=",seen_prompts[0])
         self.assertIn("/app/spec/plant_model.md",seen_prompts[0])
         self.assertIn("BRAIN_DECLARED_INPUT_SNAPSHOT",seen_prompts[0])
 
