@@ -4,13 +4,29 @@ on:
     branches: [main, p3-robust-adequacy-cegar-v1]
     paths:
       - canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py
+      - canonical/runtime/p3_policy_adequacy_registry_v1.py
       - canonical/tests/test_p3_robust_policy_adequacy_cegar_v1.py
+      - canonical/tests/test_p3_policy_adequacy_registry_v1.py
+      - canonical/governance/P2_EXPLICIT_TOP_LAW_POLICY_ADEQUACY_CERTIFICATE_20261008_V1.json
+      - canonical/governance/P2_EXPLICIT_TOP_LAW_POLICY_ADEQUACY_BINDING_20261008_V1.json
+      - canonical/verification/P2_EXPLICIT_TOP_LAW_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261008_V1.json
+      - canonical/governance/P3_BINARY_TOP_LAW_POLICY_ADEQUACY_CERTIFICATE_20261008_V1.json
+      - canonical/governance/P3_BINARY_TOP_LAW_POLICY_ADEQUACY_BINDING_20261008_V1.json
+      - canonical/verification/P3_BINARY_TOP_LAW_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261008_V1.json
       - .github/workflows/verify-p3-robust-adequacy-cegar-v1.yml
   pull_request:
     branches: [main]
     paths:
       - canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py
+      - canonical/runtime/p3_policy_adequacy_registry_v1.py
       - canonical/tests/test_p3_robust_policy_adequacy_cegar_v1.py
+      - canonical/tests/test_p3_policy_adequacy_registry_v1.py
+      - canonical/governance/P2_EXPLICIT_TOP_LAW_POLICY_ADEQUACY_CERTIFICATE_20261008_V1.json
+      - canonical/governance/P2_EXPLICIT_TOP_LAW_POLICY_ADEQUACY_BINDING_20261008_V1.json
+      - canonical/verification/P2_EXPLICIT_TOP_LAW_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261008_V1.json
+      - canonical/governance/P3_BINARY_TOP_LAW_POLICY_ADEQUACY_CERTIFICATE_20261008_V1.json
+      - canonical/governance/P3_BINARY_TOP_LAW_POLICY_ADEQUACY_BINDING_20261008_V1.json
+      - canonical/verification/P3_BINARY_TOP_LAW_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261008_V1.json
       - .github/workflows/verify-p3-robust-adequacy-cegar-v1.yml
   workflow_dispatch:
 permissions:
@@ -23,4 +39,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m unittest -v canonical.tests.test_p3_robust_policy_adequacy_cegar_v1
+      - run: |
+          python -m unittest -v \
+            canonical.tests.test_p3_robust_policy_adequacy_cegar_v1 \
+            canonical.tests.test_p3_policy_adequacy_registry_v1
