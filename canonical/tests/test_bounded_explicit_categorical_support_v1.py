@@ -119,3 +119,17 @@ def test_quantified_member_surface_is_outside_categorical_grammar():
     out=parse_relation("Every canary is a member of Bird.")
     assert out["status"]=="UNRESOLVED"
     assert out["claim_in_scope"] is False
+
+
+def test_namespaced_terms_are_not_misread_as_source_prefixes():
+    out=parse_relation("ex:Tweety is a member of ex:Bird.")
+    assert out["status"]=="RESOLVED",out
+    assert out["subject"]=="ex:tweety"
+    assert out["category"]=="ex:bird"
+    assert out["source"] is None
+
+    prefixed=parse_relation("Taxonomy: ex:Canary is a subclass of ex:Bird.")
+    assert prefixed["status"]=="RESOLVED",prefixed
+    assert prefixed["subclass"]=="ex:canary"
+    assert prefixed["superclass"]=="ex:bird"
+    assert prefixed["source"]=="Taxonomy"
