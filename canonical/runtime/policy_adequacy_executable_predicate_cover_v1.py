@@ -37,7 +37,7 @@ P2_PREDICATE_VERIFY_BLOB = "12026e8fcc5d0669f5f41aeb8b74059b7608bb70"
 
 def _git_blob(path: str) -> str:
     data=(ROOT/path).read_bytes()
-    return hashlib.sha1(b"blob "+str(len(data)).encode()+b"\\0"+data).hexdigest()
+    return hashlib.sha1(b"blob "+str(len(data)).encode()+b"\0"+data).hexdigest()
 
 
 def _fail(reason: str, **detail: Any) -> dict[str, Any]:
