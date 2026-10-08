@@ -18,19 +18,31 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V14.json",
-    "git_blob_sha": "b8112c997e7b0926c7aa708c0b60f38fc9ac9b32"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V15.json",
+    "git_blob_sha": "2070834575805ac05eafddc9d085892876856be7"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V2.json",
-    "activation_git_blob_sha": "f450789a8e4a3440e5b35339aa0ba3ba87d45ef5",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V3.json",
+    "activation_git_blob_sha": "1eb9dcdfd43f0b91edf77871bc1699af436970e1",
     "exact_cell_count": 3,
-    "latest_verification_path": "canonical/verification/R2_DOCX_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
-    "latest_verification_git_blob_sha": "f47ba33f5d8aed21bd856315380fc5b391a7e314",
-    "bounded_family_count": 2,
+    "latest_verification_path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "latest_verification_git_blob_sha": "2ed67b97a6a20338fee346af3e4339823176f24a",
+    "bounded_family_count": 3,
     "current_activation_status": "THREE_EXACT_CELLS_PLUS_TWO_TRANSACTIONAL_FAMILIES",
     "current_route_count": 5,
-    "latest_verification_status": "PASS__BOUNDED_TRANSACTIONAL_DOCX_ADEQUACY_FAMILY"
+    "latest_verification_status": "PASS__BOUNDED_TRANSACTIONAL_DOCX_ADEQUACY_FAMILY",
+    "route_count": 6,
+    "json_record_docx_family": {
+      "route_id": "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1",
+      "capability_id": "docx.document.create_from_json_record",
+      "runtime_path": "canonical/runtime/r2_docx_json_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "27fdb096b00bd5dda21e912a1b740ac79bf35cd4",
+      "verification_path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+      "verification_git_blob_sha": "2ed67b97a6a20338fee346af3e4339823176f24a",
+      "isolated_replay": "9_OF_9_FAMILY__3_OF_3_DIRECT_INTEGRATION",
+      "real_ooxml_acceptance_replay": true,
+      "fresh_pinned_producer_replay_claimed": false
+    }
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
