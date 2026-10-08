@@ -110,6 +110,7 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
         out["structural_rule_id"] = matches[0].get("rule_id")
         out["candidate_only"] = True
         out["execution_authority"] = False
+        out["verification_authority"] = False
         out["promotion_authority"] = False
         out["terminal_authority"] = False
         return out
