@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_OWNER_EVALUATION_ACCESS_REFRESH_20261008_V1",
+  "date": "2026-10-08",
+  "status": "FIRST_PARTY_OWNER_EVALUATION_OPEN_TO_MODEL_CREATORS__PUBLIC_SELF_SERVICE_INTAKE_NOT_IDENTIFIED__BRAIN_ELIGIBILITY_AND_COST_UNPROVED__ZERO_CREDIT",
+  "benchmark": "FrontierCode 1.1",
+  "target_predicate": "CODING_FRONTIERCODE_GE_54_4",
+  "refines": "canonical/verification/FRONTIERCODE_CURSORBENCH_OWNER_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+  "first_party_sources": [
+    {
+      "url": "https://cognition.com/blog/frontier-code",
+      "observed": "OWNER_STATES_TASKS_WILL_NOT_BE_PUBLICLY_RELEASED_TO_AVOID_CONTAMINATION_AND_EVALUATION_IS_OPEN_TO_MODEL_CREATORS"
+    },
+    {
+      "url": "https://cognition.com/frontiercode",
+      "observed": "CURRENT_LEADERBOARD_AND_METHODS_PUBLIC__NO_CUSTOM_SYSTEM_SUBMISSION_CONTROL_IDENTIFIED"
+    },
+    {
+      "url": "https://cognition.com/demo",
+      "observed": "GENERIC_DEVIN_DEMO_PAGE__NOT_IDENTIFIED_AS_FRONTIERCODE_EVALUATION_INTAKE"
+    }
+  ],
+  "public_intake_search": {
+    "dedicated_submission_url_found": false,
+    "dedicated_submission_email_found": false,
+    "self_serve_external_model_upload_found": false,
+    "conclusion": "OWNER_EVALUATION_ACCESS_EXISTS_IN_PRINCIPLE_BUT_PUBLIC_INTAKE_MECHANICS_ARE_NOT_IDENTIFIED"
+  },
+  "route_state": {
+    "owner_evaluation_access_in_principle": "ESTABLISHED_BY_FIRST_PARTY",
+    "public_exact_self_run": "NOT_ESTABLISHED",
+    "brain_configured_system_eligibility": "UNPROVED",
+    "owner_admissible_brain_harness_configuration": "UNPROVED",
+    "incremental_cost_usd": "UNPROVED",
+    "intake_channel": "UNIDENTIFIED_FROM_PUBLIC_OWNER_PAGES",
+    "execution_authority": false
+  },
+  "minimum_missing_owner_facts": [
+    "EXACT_FRONTIERCODE_EVALUATION_INTAKE_CHANNEL",
+    "BRAIN_CONFIGURED_SYSTEM_ELIGIBILITY",
+    "OWNER_ACCEPTED_BRAIN_HARNESS_OR_ADAPTER_INTERFACE",
+    "ZERO_INCREMENTAL_COST_COMPATIBILITY",
+    "CURRENT_1_1_MAIN_CONFIGURATION_BINDING"
+  ],
+  "scheduling": {
+    "direct_owner_route_priority": "HIGH_IF_ZERO_COST_ELIGIBILITY_AND_INTAKE_CAN_BE_BOUND",
+    "public_self_run_search": "DEMOTED",
+    "stronger_scope_complete_proof": "REMAINS_PARALLEL_ROUTE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_COGNITION_WILL_EVALUATE_BRAIN",
+    "NO_CLAIM_OWNER_EVALUATION_IS_FREE",
+    "NO_CLAIM_A_PUBLIC_SELF_SERVICE_SUBMISSION_INTERFACE_EXISTS",
+    "NO_BRAIN_FRONTIERCODE_RESULT",
+    "NO_FRONTIERCODE_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
