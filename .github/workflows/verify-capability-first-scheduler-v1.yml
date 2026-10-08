@@ -1,0 +1,22 @@
+name: verify-capability-first-scheduler-v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/capability_first_scheduler_v1.py"
+      - "canonical/tests/test_capability_first_scheduler_v1.py"
+      - "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V1.json"
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+      - ".github/workflows/verify-capability-first-scheduler-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify capability-first scheduler
+        run: python -m unittest canonical.tests.test_capability_first_scheduler_v1 -v
