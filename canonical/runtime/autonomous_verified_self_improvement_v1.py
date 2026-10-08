@@ -798,6 +798,83 @@ def advance_verification_queue(
     }
 
 
+def record_owned_direct_success_observation(
+    out: Mapping[str, Any],
+    *,
+    surface: str,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+) -> dict[str, Any]:
+    """Retain direct owned-capability success without manufacturing adapter debt.
+
+    The canonical direct Fabric surfaces dispatch capabilities that are already
+    owned and reusable. When such a success emits no verified episode / skill
+    evidence, the observation is still useful telemetry, but there is no new
+    executable-capability artifact to adapt. This disposition is deliberately
+    narrower than a nonlearnability claim: future executions that emit admissible
+    learning evidence still flow through the normal verifier-gated path.
+    """
+    if not isinstance(out, Mapping) or out.get("pass") is not True:
+        raise SelfImprovementError(
+            "DIRECT_SUCCESS_OBSERVATION_REQUIRES_PASSING_OUTPUT"
+        )
+    name = _s(surface)
+    if not name.startswith("UNIFIED_FABRIC_DIRECT_"):
+        raise SelfImprovementError("DIRECT_SUCCESS_SURFACE_NOT_CANONICAL_DIRECT")
+
+    core = {
+        "surface": name,
+        "schema": _s(out.get("schema")) or None,
+        "status": _s(out.get("status")) or None,
+        "output_sha256": _sha(out),
+        "learning_disposition": (
+            "NO_NEW_EXECUTABLE_CAPABILITY_EVIDENCE_FROM_OWNED_DIRECT_SURFACE"
+        ),
+    }
+    oid = "observation:" + _sha(core)
+    state = load_state(state_path)
+    previous = state["observations"].get(oid)
+    state["observations"][oid] = {
+        **core,
+        "observation_id": oid,
+        "count": int(previous.get("count", 0)) + 1
+        if isinstance(previous, Mapping)
+        else 1,
+        "replay_capsule": None,
+        "replay_capsule_sha256": None,
+        "proof_capsule": None,
+        "proof_capsule_sha256": None,
+        "learning_disposition_reason": (
+            "DIRECT_SURFACE_EXECUTED_ALREADY_OWNED_CAPABILITY_WITHOUT_"
+            "EPISODE_OR_SKILL_EVIDENCE"
+        ),
+        "frontier_expansion_required": False,
+        "permanent_nonlearnability_claimed": False,
+        "existing_capability_authority_unchanged": True,
+        "no_new_capability_delta_claim_scope": (
+            "BOUNDED_DIRECT_EXECUTION_OBSERVATION_ONLY"
+        ),
+    }
+    _refresh_stats(state)
+    _write_state(state, state_path)
+    return {
+        "schema": SCHEMA,
+        "status": (
+            "SUCCESS_OBSERVED__OWNED_DIRECT_EXECUTION__"
+            "NO_NEW_EXECUTABLE_CAPABILITY_EVIDENCE"
+        ),
+        "pass": True,
+        "observation_id": oid,
+        "improvement_work_id": None,
+        "next_improvement_action": _next_improvement_from_state(state),
+        "new_improvement_work_enqueued": False,
+        "frontier_expansion_required": False,
+        "permanent_nonlearnability_claimed": False,
+        "permanent_reuse_authorized": False,
+        "existing_capability_authority_unchanged": True,
+        "terminal_authority": False,
+    }
+
+
 def record_success_observation(
     out: Mapping[str, Any],
     *,
