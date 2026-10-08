@@ -61,18 +61,15 @@ def compile_current_epoch_noninferiority(
     elif mode == "MINIMAL_OWNER_ATTESTATION":
         statement = payload.get("statement")
         signature_bundle = payload.get("signature_bundle")
-        owner_key_binding = payload.get("owner_key_binding")
         if (
             not isinstance(statement, Mapping)
             or not isinstance(signature_bundle, Mapping)
-            or not isinstance(owner_key_binding, Mapping)
         ):
             raise NoninferiorityBridgeError("OWNER_ATTESTATION_PAYLOAD_INVALID")
         result = verify_minimal_owner_attestation(
             current_target,
             statement,
             signature_bundle,
-            owner_key_binding,
         )
         passed = result["status"] == "PASS_MINIMAL_OWNER_ATTESTATION"
         route = "MINIMAL_OWNER_ATTESTATION"
