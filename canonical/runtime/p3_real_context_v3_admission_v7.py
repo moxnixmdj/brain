@@ -109,6 +109,17 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
                 ),
             }
 
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "GROUNDED_NUMERIC_ROUTE_UNRESOLVED",
+            "route_reason": result.get("reason"),
+            "v6_preserved_positive_route": False,
+            "grounded_numeric_fast_path_pass": False,
+            **_boundary(),
+        }
+
     try:
         from canonical.runtime.p3_real_context_v3_admission_v6 import evaluate as evaluate_v6
         prior = evaluate_v6(payload)
