@@ -31,6 +31,7 @@ from canonical.runtime import r2_pypi_provenance_direct_adequacy_v1 as pypi_prov
 from canonical.runtime import r2_exact_evidence_claim_support_direct_adequacy_v1 as exact_claim_support_adequacy
 from canonical.runtime import r2_explicit_numeric_comparison_direct_adequacy_v1 as numeric_comparison_adequacy
 from canonical.runtime import r2_unit_normalized_numeric_comparison_direct_adequacy_v1 as unit_normalized_comparison_adequacy
+from canonical.runtime import r2_knowledge_consistency_direct_adequacy_v1 as knowledge_consistency_adequacy
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -51,6 +52,7 @@ PYPI_PROVENANCE_ROUTE_ID = "DIRECT_ADEQUACY::PYPI_PINNED_ARTIFACT_PROVENANCE_FAM
 EXACT_CLAIM_SUPPORT_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_GROUNDED_EVIDENCE_CLAIM_SUPPORT_FAMILY_V1"
 NUMERIC_COMPARISON_ROUTE_ID = "DIRECT_ADEQUACY::EXPLICIT_GROUNDED_NUMERIC_COMPARISON_FAMILY_V1"
 UNIT_NORMALIZED_COMPARISON_ROUTE_ID = "DIRECT_ADEQUACY::UNIT_NORMALIZED_GROUNDED_NUMERIC_COMPARISON_FAMILY_V1"
+KNOWLEDGE_CONSISTENCY_ROUTE_ID = "DIRECT_ADEQUACY::PROVENANCE_KNOWLEDGE_CONSISTENCY_FAMILY_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -151,6 +153,13 @@ ROUTES = {
         "executor": "r2_unit_normalized_numeric_comparison_direct_adequacy_v1.run",
         "acceptance": "INHERITED_VERIFIED_ROLE_BINDING_PLUS_DUAL_EXACT_RATIONAL_UNIT_CONVERSION_AND_PREDICATE_RECOMPUTATION",
     },
+    KNOWLEDGE_CONSISTENCY_ROUTE_ID: {
+        "capability_id": "knowledge.consistency.assess",
+        "scope": "PROVENANCE_BEARING_EXTERNAL_JSON_VALUE_CONSISTENCY_OVER_DISTINCT_URL_AND_JSON_PATH_IDENTITIES",
+        "preflight": "r2_knowledge_consistency_direct_adequacy_v1.preflight",
+        "executor": "r2_knowledge_consistency_direct_adequacy_v1.run",
+        "acceptance": "PRODUCER_INDEPENDENT_EVIDENCE_CONTRACT_SOURCE_IDENTITY_CANONICAL_VALUE_FRESHNESS_AND_STATUS_RECOMPUTATION",
+    },
     VISUAL_CODE_ROUTE_ID: {
         "capability_id": "DYNAMIC_VERIFIED_BOUND_VISUAL_CODE_PRODUCER",
         "scope": "EXACT_QUOTED_ASCII_PAYLOAD_TO_QR_OR_CODE128_PNG_GOAL_FAMILY",
@@ -233,6 +242,30 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "output_path": literal_json["output_path"],
             "records_sha256": literal_json["records_sha256"],
             "semantic_scope": ROUTES[LITERAL_JSON_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
+    knowledge_consistency = knowledge_consistency_adequacy.preflight(request)
+    if knowledge_consistency.get("matched") is True:
+        if knowledge_consistency.get("status") == "FAIL_CLOSED":
+            return {
+                **_base("FAIL_CLOSED", passed=False),
+                "matched": True,
+                "route_id": KNOWLEDGE_CONSISTENCY_ROUTE_ID,
+                "reason": knowledge_consistency.get("reason"),
+            }
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": KNOWLEDGE_CONSISTENCY_ROUTE_ID,
+            "capability_id": knowledge_consistency.get("capability_id"),
+            "policy_id": knowledge_consistency.get("policy_id"),
+            "goal_sha256": knowledge_consistency.get("goal_sha256"),
+            "manifest_path": knowledge_consistency.get("manifest_path"),
+            "evidence_paths": knowledge_consistency.get("evidence_paths"),
+            "max_age_s": knowledge_consistency.get("max_age_s"),
+            "output_path": knowledge_consistency.get("output_path"),
+            "semantic_scope": ROUTES[KNOWLEDGE_CONSISTENCY_ROUTE_ID]["scope"],
             "preflight_execution_authority": False,
         }
 
@@ -548,6 +581,52 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
     pf = preflight(request)
     if pf.get("matched") is not True:
         return pf
+
+    if pf["route_id"] == KNOWLEDGE_CONSISTENCY_ROUTE_ID:
+        consistency_result = knowledge_consistency_adequacy.run(request)
+        if consistency_result.get("pass") is not True:
+            return {
+                **_base(
+                    str(
+                        consistency_result.get("status")
+                        or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"
+                    ),
+                    passed=False,
+                ),
+                "matched": True,
+                "route_id": pf["route_id"],
+                "capability_id": pf.get("capability_id"),
+                "goal_sha256": pf.get("goal_sha256"),
+                "execution_attempted": True,
+                "retry_by_other_route_authorized": False,
+                "knowledge_consistency_adequacy": deepcopy(dict(consistency_result)),
+                "reason": consistency_result.get("reason"),
+            }
+        return {
+            **_base("PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED", passed=True),
+            "matched": True,
+            "route_id": pf["route_id"],
+            "capability_id": consistency_result.get("capability_id"),
+            "selected_policy_id": consistency_result.get("selected_policy_id"),
+            "goal_sha256": consistency_result.get("goal_sha256"),
+            "semantic_scope": pf["semantic_scope"],
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "accepted_raw_obligation_ids": list(
+                consistency_result.get("accepted_raw_obligation_ids") or []
+            ),
+            "raw_acceptance_obligation_count": consistency_result.get(
+                "raw_acceptance_obligation_count"
+            ),
+            "acceptance_receipt": deepcopy(
+                dict(consistency_result.get("acceptance_receipt") or {})
+            ),
+            "raw_result": deepcopy(dict(consistency_result)),
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "authority_boundary": consistency_result.get("authority_boundary"),
+        }
 
     if pf["route_id"] == UNIT_NORMALIZED_COMPARISON_ROUTE_ID:
         unit_result = unit_normalized_comparison_adequacy.run(request)
