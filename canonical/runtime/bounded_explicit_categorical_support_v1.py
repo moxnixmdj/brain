@@ -42,8 +42,19 @@ _SUBCLASS = re.compile(
     re.I,
 )
 
-def _norm(value: Any) -> str:
-    return " ".join(str(value if value is not None else "").strip().split()).casefold()
+_UNSAFE_TERM_PREFIX = re.compile(
+    r"^(?:every|all|any|each|no|some|most|many|few|either|neither|this|that|these|those|he|she|it|they|we|you|i)\\b",
+    re.I,
+)
+_UNSAFE_TERM_BODY = re.compile(r"\\b(?:and|or|nor)\\b|[;/]", re.I)
+
+def _term(value: Any) -> str | None:
+    raw=" ".join(str(value if value is not None else "").strip().split())
+    if not raw:
+        return None
+    if _UNSAFE_TERM_PREFIX.search(raw) or _UNSAFE_TERM_BODY.search(raw) or " is " in raw.casefold():
+        return None
+    return raw.casefold()
 
 def parse_relation(text: str, *, default_source: str | None = None) -> dict[str, Any]:
     if not isinstance(text, str) or not text.strip():
