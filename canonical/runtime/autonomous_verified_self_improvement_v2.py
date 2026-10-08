@@ -29,6 +29,7 @@ SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V2"
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_STATE_PATH = v1.DEFAULT_STATE_PATH
 load_state = v1.load_state
+solver_v12 = v1.solver_v12
 
 RepairProvider = Callable[[Mapping[str, Any], int], Mapping[str, Any] | None]
 
