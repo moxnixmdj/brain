@@ -1,0 +1,27 @@
+name: R3 autonomous self-improvement verification
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+      - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
+      - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
+  push:
+    branches:
+      - "r3-autonomous-self-improvement-v1-20261008"
+    paths:
+      - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+      - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
+      - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
+
+jobs:
+  verify-r3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run R3 regression suite
+        run: python -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v
