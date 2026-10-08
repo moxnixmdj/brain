@@ -9,6 +9,10 @@ import sys
 import tempfile
 import types
 
+ROOT=pathlib.Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0,str(ROOT))
+
 stub=types.ModuleType("canonical.runtime.p3_real_context_v3_admission_v9")
 state={"mode":"capacity"}
 
@@ -25,7 +29,7 @@ def eval_v9(payload, repo_root=None):
 stub.evaluate=eval_v9
 sys.modules["canonical.runtime.p3_real_context_v3_admission_v9"]=stub
 
-path=pathlib.Path(__file__).resolve().parents[1]/"runtime"/"p3_real_context_v3_admission_v10.py"
+path=ROOT/"canonical"/"runtime"/"p3_real_context_v3_admission_v10.py"
 spec=importlib.util.spec_from_file_location("canonical.runtime.p3_real_context_v3_admission_v10",path)
 m=importlib.util.module_from_spec(spec)
 sys.modules[spec.name]=m
