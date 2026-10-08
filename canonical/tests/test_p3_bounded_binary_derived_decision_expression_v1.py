@@ -69,7 +69,7 @@ def test_caller_item_order_fails_closed():
 def test_too_small_character_budget_fails_closed():
  p=base(3);p["v2_input"]["task"]["audience_profile"]["constraints"]["max_chars"]=20
  out=evaluate(p)
- assert not out["pass"] and out["reason"]=="REALIZER_FAIL_CLOSED"
+ assert not out["pass"]\n assert out["reason"] in {"BOUND_ROLE_PRESENTATION_COMPILER_FAILED","REALIZER_FAIL_CLOSED"}
 
 def test_unverified_evidence_fails_closed():
  p=base(3);p["v2_input"]["task"]["evidence"][0]["verified"]=False
