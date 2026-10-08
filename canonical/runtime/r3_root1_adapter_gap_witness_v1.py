@@ -9,6 +9,7 @@ from typing import Any, Mapping, Sequence
 from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
 from canonical.runtime import r3_bound_success_adapter_v1 as bound_adapter
 from canonical.runtime import r3_raw_success_adapter_v1 as raw_adapter
+from canonical.runtime import r3_direct_adequacy_success_adapter_v1 as direct_adapter
 from canonical.runtime import root1_acquisition_closure_controller_v3 as root1
 
 SCHEMA = "PROJECT_BRAIN_R3_ROOT1_ADAPTER_GAP_WITNESS_V1"
@@ -19,11 +20,13 @@ REQUIRED_PRIMITIVE = "R3_SUCCESS_ADAPTER_PATCH_AUTHOR"
 SUCCESS_ADAPTER_FRONTIER_PATHS = (
     "canonical/runtime/r3_bound_success_adapter_v1.py",
     "canonical/runtime/r3_raw_success_adapter_v1.py",
+    "canonical/runtime/r3_direct_adequacy_success_adapter_v1.py",
 )
 SUCCESS_VERIFICATION_AUTHORITY_PATHS = (
     "canonical/runtime/r3_independent_learning_verifier_v1.py",
     "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
     "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
+    "canonical/runtime/r3_direct_adequacy_readback_verifier_v1.py",
 )
 
 
@@ -96,7 +99,7 @@ def compile_gap(
     """Compile one parked R3 adapter miss into constructive Root1 gap evidence.
 
     This function grants no acquisition or promotion authority. It proves only the
-    currently bound fact: the exact retained success cannot be adapted by either
+    currently bound fact: the exact retained success cannot be adapted by any
     owned success adapter under the unchanged adapter/verifier frontier, and no
     acquisition provider is currently bound to this handoff.
     """
@@ -203,7 +206,15 @@ def compile_gap(
             adapter_request,
             repo_root=repo_root,
         )
-        if isinstance(bound_candidate, Mapping) or isinstance(raw_candidate, Mapping):
+        direct_candidate = direct_adapter.adapt(
+            adapter_request,
+            repo_root=repo_root,
+        )
+        if (
+            isinstance(bound_candidate, Mapping)
+            or isinstance(raw_candidate, Mapping)
+            or isinstance(direct_candidate, Mapping)
+        ):
             return _fail(
                 "OWNED_ADAPTER_CANDIDATE_NOW_AVAILABLE__ROOT1_GAP_NOT_ESTABLISHED"
             )
