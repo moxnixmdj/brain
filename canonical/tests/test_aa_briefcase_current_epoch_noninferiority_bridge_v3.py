@@ -45,13 +45,12 @@ class T(unittest.TestCase):
         s = statement()
         bundle, binding = make_signed(s)
         out = compile_current_epoch_noninferiority(
-            target(),
+            target(binding),
             {
                 "mode": "MINIMAL_OWNER_ATTESTATION",
                 "payload": {
                     "statement": s,
                     "signature_bundle": bundle,
-                    "owner_key_binding": binding,
                 },
             },
         )
