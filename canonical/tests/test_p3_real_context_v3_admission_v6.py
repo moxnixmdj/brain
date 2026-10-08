@@ -142,3 +142,15 @@ def test_common_contract_guard_blocks_field_projection_on_every_route():
         assert out["reason"]==reason,(name,out)
         assert out["p3_contract_cell_authorized"] is False
         assert out["terminal_credit_delta"]==0
+
+
+def test_unmodeled_top_level_requirement_fails_closed():
+    source={"context_id":"x","v3_input":base([
+        req("A","Revenue growth is at least 10.")
+    ],[ev("E","Report states Revenue growth is 12.")])}
+    source["external_semantic_requirement"]="Translate output to German"
+    out=evaluate(source)
+    assert out["pass"] is False,out
+    assert out["reason"]=="UNMODELED_REAL_CONTEXT_ADMISSION_FIELDS"
+    assert out["p3_contract_cell_authorized"] is False
+    assert out["terminal_authority"] is False
