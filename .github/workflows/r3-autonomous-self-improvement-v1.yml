@@ -17,6 +17,7 @@ on:
       - "canonical/tests/test_live_brain_runtime_v1.py"
       - "canonical/runtime/unified_cognitive_fabric_v1.py"
       - "canonical/tests/test_unified_cognitive_fabric_v1.py"
+      - "canonical/tests/test_r3_improvement_cycle_fabric_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
   push:
     branches:
@@ -37,6 +38,7 @@ on:
       - "canonical/tests/test_live_brain_runtime_v1.py"
       - "canonical/runtime/unified_cognitive_fabric_v1.py"
       - "canonical/tests/test_unified_cognitive_fabric_v1.py"
+      - "canonical/tests/test_r3_improvement_cycle_fabric_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
 
 jobs:
@@ -69,3 +71,5 @@ jobs:
         run: python -m unittest canonical.tests.test_live_brain_runtime_v1 -v
       - name: Run R3 unified fabric regression suite
         run: python -m unittest canonical.tests.test_unified_cognitive_fabric_v1 -v
+      - name: Run R3 fabric improvement-cycle integration suite
+        run: python -m unittest canonical.tests.test_r3_improvement_cycle_fabric_v1 -v
