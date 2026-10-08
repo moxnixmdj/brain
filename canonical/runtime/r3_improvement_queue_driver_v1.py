@@ -301,6 +301,44 @@ def _adapt_success_work(
     }
 
 
+def _internal_failure_repair(
+    work: Mapping[str, Any],
+    *,
+    state_path: str | Path,
+    repo_root: str | Path,
+) -> dict[str, Any]:
+    """Use the Brain's own verified repair/replay cycle as the default R3 worker."""
+    payload = work.get("payload")
+    if not isinstance(payload, Mapping):
+        raise ImprovementDriverError("FAILURE_REPAIR_PAYLOAD_INVALID")
+    fingerprint = str(payload.get("failure_fingerprint") or "").strip()
+    retry_sha = str(payload.get("retry_capsule_sha256") or "").strip()
+    if not fingerprint:
+        raise ImprovementDriverError("FAILURE_REPAIR_FINGERPRINT_MISSING")
+    if not retry_sha:
+        return {
+            "schema": SCHEMA,
+            "status": "IMPROVEMENT_REPAIR_BLOCKED__REPLAY_CAPSULE_REQUIRED",
+            "pass": False,
+            "failure_fingerprint": fingerprint,
+            "terminal_authority": False,
+        }
+
+    from canonical.runtime import live_brain_runtime_v1 as live_brain
+
+    return live_brain.execute_failure_repair_cycle(
+        {
+            "failure_fingerprint": fingerprint,
+            "retry_capsule_sha256": retry_sha,
+            "components": [],
+            "initial_facts": [],
+            "learn": True,
+        },
+        repo_root=repo_root,
+        state_path=state_path,
+    )
+
+
 def advance_once(
     *,
     state_path: str | Path = learning.DEFAULT_STATE_PATH,
@@ -359,9 +397,13 @@ def advance_once(
 
             if kind == "REPAIR_FAILURE_CLASS":
                 if failure_repair_provider is None:
-                    blockers.append({"work_id": wid, "kind": kind, "blocker": "VERIFIED_FAILURE_REPAIR_PROVIDER_REQUIRED"})
-                    continue
-                repaired = failure_repair_provider(deepcopy(dict(work)))
+                    repaired = _internal_failure_repair(
+                        work,
+                        state_path=state_path,
+                        repo_root=repo_root,
+                    )
+                else:
+                    repaired = failure_repair_provider(deepcopy(dict(work)))
                 if not isinstance(repaired, Mapping):
                     raise ImprovementDriverError("FAILURE_REPAIR_PROVIDER_RESULT_INVALID")
                 return {
