@@ -718,3 +718,15 @@ def test_native_specialized_verifier_rejects_external_proposal():
     assert out["trace"][0]["proposal_source"] == "DETERMINISTIC_PROPOSAL_FREE_ROUTE"
     assert out["trace"][0]["accepted_proposal"] == {}
     invoke.assert_called_once_with("H100_REGISTRY_SNAPSHOT_V8", {})
+
+
+def test_native_specialized_verifier_has_immutable_effect_success_condition():
+    from canonical.runtime import universal_verified_adaptive_solver_v2 as solver_v2
+    from canonical.runtime.native_specialized_capability_registry_v1 import (
+        SUCCESS_CONDITION,
+    )
+
+    assert (
+        solver_v2.SUCCESS_CONDITIONS["NATIVE_SPECIALIZED_OPERATION_V1"]
+        == SUCCESS_CONDITION
+    )
