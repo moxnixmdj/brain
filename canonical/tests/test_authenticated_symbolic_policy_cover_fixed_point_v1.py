@@ -28,7 +28,8 @@ def test_inline_adequacy_flags_are_not_input_contract():
     }]
     out = m.evaluate(p)
     assert out["pass"] is False
-    assert out["reason"] == "POLICY_FIELDS_INVALID"
+    assert out["status"].startswith("UNRESOLVED")
+    assert out["rejected_policy_candidates"][0]["reason"] == "POLICY_FIELDS_INVALID"
 
 
 def test_unknown_policy_verifier_fails_closed():
@@ -36,7 +37,8 @@ def test_unknown_policy_verifier_fails_closed():
     p["policies"] = [policy("p", "FORGED")]
     out = m.evaluate(p)
     assert out["pass"] is False
-    assert out["reason"] == "TRUSTED_POLICY_VERIFICATION_FAILED"
+    assert out["status"].startswith("UNRESOLVED")
+    assert out["rejected_policy_candidates"][0]["reason"] == "TRUSTED_POLICY_VERIFICATION_FAILED"
 
 
 def test_common_authenticated_policy_wins_from_true(monkeypatch):
@@ -109,7 +111,8 @@ def test_inline_discriminator_truth_flags_are_rejected(monkeypatch):
     })
     out = m.evaluate(p)
     assert out["pass"] is False
-    assert out["reason"] == "DISCRIMINATOR_FIELDS_INVALID"
+    assert out["status"].startswith("UNRESOLVED")
+    assert out["rejected_discriminator_candidates"][0]["reason"] == "DISCRIMINATOR_FIELDS_INVALID"
 
 
 def test_untrusted_constraint_flags_have_no_surface():
@@ -330,3 +333,43 @@ def test_selected_semantic_observation_unknown_fragment_fails_closed(monkeypatch
     out = m.evaluate(p)
     assert out["pass"] is False
     assert out["reason"] == "TRUSTED_CONSTRAINT_VERIFICATION_FAILED"
+
+
+def test_forged_optional_policy_cannot_poison_valid_positive_cover(monkeypatch):
+    p = payload()
+    p["policies"] = [
+        policy("good"),
+        {
+            "policy_id": "forged",
+            "verifier_id": "X",
+            "cost_units": 1,
+            "adequacy_proved": True,
+        },
+    ]
+    monkeypatch.setattr(m, "_policy_verifier", lambda vid, pid: {
+        "pass": True, "policy_id": pid, "policy_condition": {"op": "TRUE"},
+        "adequacy_proved": True, "brain_owned": True, "proof_digest": pid,
+    })
+    out = m.evaluate(p)
+    assert out["pass"] is True, out
+    assert out["decision_tree"]["terminal_policy_id"] == "good"
+    assert out["rejected_policy_candidates"][0]["reason"] == "POLICY_FIELDS_INVALID"
+
+
+def test_forged_optional_discriminator_cannot_poison_valid_common_policy(monkeypatch):
+    p = payload()
+    p["policies"] = [policy("good")]
+    p["discriminators"] = [{
+        "discriminator_id": "forged",
+        "verifier_id": "X",
+        "cost_units": 1,
+        "truthful": True,
+    }]
+    monkeypatch.setattr(m, "_policy_verifier", lambda vid, pid: {
+        "pass": True, "policy_id": pid, "policy_condition": {"op": "TRUE"},
+        "adequacy_proved": True, "brain_owned": True, "proof_digest": pid,
+    })
+    out = m.evaluate(p)
+    assert out["pass"] is True, out
+    assert out["decision_tree"]["terminal_policy_id"] == "good"
+    assert out["rejected_discriminator_candidates"][0]["reason"] == "DISCRIMINATOR_FIELDS_INVALID"
