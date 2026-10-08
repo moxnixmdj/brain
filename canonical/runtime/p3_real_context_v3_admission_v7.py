@@ -1,4 +1,4 @@
-"""P3 real-context admission v6.
+"""P3 real-context admission v7.
 
 Preserves every V6 positive route unchanged. If V6 fails closed, retries the
 required-only grounded-realization cell using support V6, which adds bounded
