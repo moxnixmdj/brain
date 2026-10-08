@@ -9,9 +9,8 @@ from typing import Any, Mapping, Sequence
 from canonical.runtime.executable_skill_program_v7 import program_digest, normalize_steps
 from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_acceptance
 from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
-from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as direct
 from canonical.runtime.r3_direct_r2_success_adapter_v1 import (
-    VERIFICATION_KIND, RULES_PATH,
+    VERIFICATION_KIND, RULES_PATH, EXACT_LITERAL_ROUTE_ID, LITERAL_JSON_ROUTE_ID,
 )
 
 SCHEMA = "PROJECT_BRAIN_R3_DIRECT_R2_SUCCESS_CHECKPOINT_VERIFIER_V1"
@@ -64,8 +63,8 @@ def verify_material(
             raise ValueError("VERIFICATION_KIND_INVALID")
         route_id = str(problem.get("route_id") or "")
         if route_id not in {
-            direct.EXACT_LITERAL_ROUTE_ID,
-            direct.LITERAL_JSON_ROUTE_ID,
+            EXACT_LITERAL_ROUTE_ID,
+            LITERAL_JSON_ROUTE_ID,
         }:
             raise ValueError("DIRECT_R2_ROUTE_NOT_ADMITTED")
 
@@ -78,7 +77,7 @@ def verify_material(
         if not isinstance(raw_result, Mapping) or not isinstance(retained, Mapping):
             raise ValueError("DIRECT_R2_RETAINED_MATERIAL_INVALID")
 
-        if route_id == direct.EXACT_LITERAL_ROUTE_ID:
+        if route_id == EXACT_LITERAL_ROUTE_ID:
             acceptance = literal_acceptance.verify(goal=goal, raw_result=raw_result)
             non_effectful = True
             artifact_readback = False
