@@ -19,7 +19,7 @@ from canonical.runtime import raw_goal_archive_acceptance_v1 as archive_acceptan
 from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_acceptance
 from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
 from canonical.runtime import r2_structured_binary_direct_adequacy_v1 as codec_adequacy
-from canonical.runtime import r2_docx_direct_adequacy_v1 as docx_adequacy
+from canonical.runtime import r2_structured_table_direct_adequacy_v1 as table_adequacy
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -28,7 +28,7 @@ ARCHIVE_CAPABILITY_ID = "archive.tar_gz.create_from_manifest"
 EXACT_LITERAL_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1"
 LITERAL_JSON_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1"
 STRUCTURED_BINARY_CODEC_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1"
-DOCX_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1"
+STRUCTURED_TABLE_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_TABLE_ARTIFACT_FAMILY_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -59,12 +59,12 @@ ROUTES = {
         "executor": "r2_structured_binary_direct_adequacy_v1.run",
         "acceptance": "PRODUCER_INDEPENDENT_CROSS_SUPPLIER_SEMANTIC_DECODE",
     },
-    DOCX_ROUTE_ID: {
-        "capability_id": "docx.document.create.python_docx",
-        "scope": "EXACT_TWO_CLAUSE_LITERAL_DOCX_PLUS_INDEPENDENT_OOXML_VERIFICATION_FAMILY",
-        "preflight": "r2_docx_direct_adequacy_v1.preflight",
-        "executor": "r2_docx_direct_adequacy_v1.run",
-        "acceptance": "EXACT_INTENT_BINDING_PLUS_PRODUCER_INDEPENDENT_STDLIB_OOXML_VERIFICATION",
+    STRUCTURED_TABLE_ROUTE_ID: {
+        "capability_id": "DYNAMIC_VERIFIED_STRUCTURED_TABLE_PRODUCER",
+        "scope": "EXACT_JSON_RECORDS_TO_XLSX_OR_SQLITE_GOAL_FAMILY",
+        "preflight": "r2_structured_table_direct_adequacy_v1.preflight",
+        "executor": "r2_structured_table_direct_adequacy_v1.run",
+        "acceptance": "PRODUCER_INDEPENDENT_SOURCE_JSON_SEMANTIC_VERIFICATION",
     },
 }
 
@@ -160,25 +160,26 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "preflight_execution_authority": False,
         }
 
-    docx = docx_adequacy.preflight(request)
-    if docx.get("matched") is True:
-        if docx.get("status") == "FAIL_CLOSED":
+    table = table_adequacy.preflight(request)
+    if table.get("matched") is True:
+        if table.get("status") == "FAIL_CLOSED":
             return {
                 **_base("FAIL_CLOSED", passed=False),
                 "matched": True,
-                "route_id": DOCX_ROUTE_ID,
-                "reason": docx.get("reason"),
+                "route_id": STRUCTURED_TABLE_ROUTE_ID,
+                "reason": table.get("reason"),
             }
         return {
             **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
             "matched": True,
-            "route_id": DOCX_ROUTE_ID,
-            "capability_id": docx.get("producer_capability_id"),
-            "policy_id": docx.get("policy_id"),
-            "goal_sha256": docx.get("goal_sha256"),
-            "output_path": docx.get("output_path"),
-            "intent_path": docx.get("intent_path"),
-            "semantic_scope": ROUTES[DOCX_ROUTE_ID]["scope"],
+            "route_id": STRUCTURED_TABLE_ROUTE_ID,
+            "capability_id": table.get("capability_id"),
+            "policy_id": table.get("policy_id"),
+            "goal_sha256": table.get("goal_sha256"),
+            "format": table.get("format"),
+            "json_path": table.get("json_path"),
+            "output_path": table.get("output_path"),
+            "semantic_scope": ROUTES[STRUCTURED_TABLE_ROUTE_ID]["scope"],
             "preflight_execution_authority": False,
         }
 
@@ -234,12 +235,12 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
             "authority_boundary": codec_result.get("authority_boundary"),
         }
 
-    if pf["route_id"] == DOCX_ROUTE_ID:
-        docx_result = docx_adequacy.run(request)
-        if docx_result.get("pass") is not True:
+    if pf["route_id"] == STRUCTURED_TABLE_ROUTE_ID:
+        table_result = table_adequacy.run(request)
+        if table_result.get("pass") is not True:
             return {
                 **_base(
-                    str(docx_result.get("status") or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"),
+                    str(table_result.get("status") or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"),
                     passed=False,
                 ),
                 "matched": True,
@@ -248,31 +249,31 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
                 "goal_sha256": pf.get("goal_sha256"),
                 "execution_attempted": True,
                 "retry_by_other_route_authorized": False,
-                "docx_adequacy": deepcopy(dict(docx_result)),
-                "reason": docx_result.get("reason"),
+                "table_adequacy": deepcopy(dict(table_result)),
+                "reason": table_result.get("reason"),
             }
         return {
             **_base("PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED", passed=True),
             "matched": True,
             "route_id": pf["route_id"],
-            "capability_id": docx_result.get("capability_id"),
-            "selected_policy_id": docx_result.get("policy_id"),
-            "goal_sha256": docx_result.get("goal_sha256"),
+            "capability_id": table_result.get("capability_id"),
+            "selected_policy_id": table_result.get("policy_id"),
+            "goal_sha256": table_result.get("goal_sha256"),
             "semantic_scope": pf["semantic_scope"],
             "semantic_acceptance_complete": True,
             "actual_goal_satisfaction_verified": True,
             "direct_adequacy_authority": True,
             "accepted_raw_obligation_ids": list(
-                docx_result.get("accepted_raw_obligation_ids") or []
+                table_result.get("accepted_raw_obligation_ids") or []
             ),
-            "raw_acceptance_obligation_count": docx_result.get(
+            "raw_acceptance_obligation_count": table_result.get(
                 "raw_acceptance_obligation_count"
             ),
-            "acceptance_receipt": deepcopy(dict(docx_result)),
-            "raw_result": deepcopy(dict(docx_result.get("raw_result") or {})),
+            "acceptance_receipt": deepcopy(dict(table_result)),
+            "raw_result": deepcopy(dict(table_result.get("raw_result") or {})),
             "execution_attempted": True,
             "retry_by_other_route_authorized": False,
-            "authority_boundary": docx_result.get("authority_boundary"),
+            "authority_boundary": table_result.get("authority_boundary"),
         }
 
     raw = live_bound.run_raw_goal(request)
