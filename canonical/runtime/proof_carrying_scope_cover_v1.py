@@ -137,12 +137,15 @@ def evaluate(payload: Any) -> dict[str, Any]:
         if cell.get("external_target_capability_provider") is not False:
             local.append("EXTERNAL_TARGET_CAPABILITY_PROVIDER_NOT_EXCLUDED")
 
-        cert_errors_before = len(errors)
-        cert = _receipt(cell.get("adequacy_certificate"), f"ADEQUACY_CERTIFICATE:{cid}", errors)
+        cert_errors: list[str] = []
+        cert = _receipt(
+            cell.get("adequacy_certificate"),
+            f"ADEQUACY_CERTIFICATE:{cid}",
+            cert_errors,
+        )
         if isinstance(cert, Mapping) and cert.get("adequate_for_entire_cell") is not True:
-            errors.append(f"ADEQUACY_CERTIFICATE_NOT_WHOLE_CELL:{cid}")
-        # Mirror newly-added receipt errors into this cell's local view.
-        local.extend(errors[cert_errors_before:])
+            cert_errors.append("ADEQUACY_CERTIFICATE_NOT_WHOLE_CELL")
+        local.extend(cert_errors)
 
         for e in local:
             errors.append(f"CELL:{cid}:{e}")
