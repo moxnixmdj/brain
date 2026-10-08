@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_R1_SINGLE_CANONICAL_FRONT_DOOR_REPLAY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_CHANGED_SOURCE_COMPILES__CANONICAL_FRONT_DOOR_BINDING_ESTABLISHED__FULL_RUNTIME_SUITE_PENDING_CI",
+  "branch": "r1-single-canonical-front-door-20261008-v1",
+  "canonical_public_entrypoint": "canonical.runtime.unified_cognitive_fabric_v1.run",
+  "subordinate_runtime_entrypoint": "canonical.runtime.live_brain_runtime_v1.run",
+  "structural_change": {
+    "duplicate_public_router_claim_removed": true,
+    "raw_goal_through_subruntime": true,
+    "compiled_task_through_subruntime": true,
+    "adequate_decision_through_subruntime": true,
+    "adaptive_solver_through_subruntime": true,
+    "r3_reuse_and_repair_preserved_on_fabric_execution_paths": true
+  },
+  "exact_blobs": {
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "1aa2a6999f36c1490ed2b0b5408f4a3615299e75"
+    },
+    "subordinate_runtime": {
+      "path": "canonical/runtime/live_brain_runtime_v1.py",
+      "git_blob_sha": "97e0afa14488b6e0c005ec1e16a303c177914a56"
+    },
+    "fabric_tests": {
+      "path": "canonical/tests/test_unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "602d81fb33d87bdae4a32827490348ff34964758"
+    },
+    "runtime_tests": {
+      "path": "canonical/tests/test_live_brain_runtime_v1.py",
+      "git_blob_sha": "f926b712920522f9a822ab4d6aa55c9d7e88ff6b"
+    },
+    "activation": {
+      "path": "canonical/governance/LIVE_BRAIN_RUNTIME_V1_ACTIVATION_20261008_V1.json",
+      "git_blob_sha": "1dc5312ffd9fe49b9349aa8b16768a82727043fd"
+    },
+    "workflow": {
+      "path": ".github/workflows/verify-unified-cognitive-fabric-v1.yml",
+      "git_blob_sha": "ffd2105779eab51cbb9b438a53c25142853cb909"
+    }
+  },
+  "isolated_verification": {
+    "carrier": "SPRITES",
+    "sprite_name": "brain-live-runtime-v1-verify-20261008",
+    "python_compile_changed_files_pass": true,
+    "activation_json_parse_pass": true,
+    "full_runtime_unittest_pass": false,
+    "full_runtime_unittest_status": "PENDING_GITHUB_CI"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_RAW_LANGUAGE_SEMANTIC_ROUTING_COMPLETE",
+    "NO_CLAIM_ALL_HISTORICAL_REPOSITORY_CAPABILITIES_ARE_LIVE",
+    "NO_FULL_RUNTIME_SUITE_PASS_CLAIM_BEFORE_CI",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
