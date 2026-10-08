@@ -61,6 +61,10 @@ from canonical.runtime.authenticated_complete_pareto_comparator_v1 import (
 from canonical.runtime.lossless_raw_task_acceptance_gate_v1 import (
     verify as verify_lossless_raw_task_acceptance,
 )
+from canonical.runtime.native_specialized_capability_registry_v1 import (
+    SUCCESS_CONDITION as NATIVE_SPECIALIZED_SUCCESS_CONDITION,
+    invoke as invoke_native_specialized,
+)
 
 SCHEMA = "PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V1"
 
@@ -373,6 +377,62 @@ def _verify_bound_goal_plan(payload: Mapping[str, Any], proposal: Mapping[str, A
     }
 
 
+def _verify_native_specialized(
+    payload: Mapping[str, Any],
+    proposal: Mapping[str, Any],
+) -> dict[str, Any]:
+    if proposal:
+        return {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "NATIVE_SPECIALIZED_PROPOSAL_MUST_BE_EMPTY",
+            "proof_digest": _digest({"payload": payload, "proposal": proposal}),
+            "verified_output": None,
+        }
+    if not isinstance(payload, Mapping) or set(payload) != {"operation_id", "args"}:
+        return {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "NATIVE_SPECIALIZED_VERIFIER_PAYLOAD_INVALID",
+            "proof_digest": _digest(payload),
+            "verified_output": None,
+        }
+    try:
+        out = invoke_native_specialized(
+            str(payload.get("operation_id") or ""),
+            payload.get("args") or {},
+        )
+    except Exception as exc:
+        return {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": type(exc).__name__ + ":" + str(exc),
+            "proof_digest": _digest({
+                "operation_id": payload.get("operation_id"),
+                "error": type(exc).__name__ + ":" + str(exc),
+            }),
+            "verified_output": None,
+        }
+    ok = (
+        isinstance(out, Mapping)
+        and out.get("pass") is True
+        and out.get("status") == "PASS__NATIVE_SPECIALIZED_OPERATION_EXECUTED"
+        and out.get("read_only") is True
+        and float(out.get("incremental_spend_usd", 1)) == 0
+    )
+    return {
+        "pass": ok,
+        "status": "VERIFIED" if ok else "FAIL_CLOSED",
+        "reason": None if ok else str(out.get("status") or "NATIVE_SPECIALIZED_OPERATION_FAILED"),
+        "proof_digest": _digest(out),
+        "verified_output": {"result": deepcopy(out.get("result"))} if ok else None,
+        "verifier_success_condition": (
+            NATIVE_SPECIALIZED_SUCCESS_CONDITION if ok else None
+        ),
+        "detail": out,
+    }
+
+
 Verifier = Callable[[Mapping[str, Any], Mapping[str, Any]], dict[str, Any]]
 
 BUILTIN_VERIFIERS: dict[str, Verifier] = {
@@ -389,6 +449,7 @@ BUILTIN_VERIFIERS: dict[str, Verifier] = {
     "BOUND_CAPABILITY_EXECUTION_V1": verify_bound_capability_execution,
     "RAW_TASK_ACCEPTANCE_V1": verify_lossless_raw_task_acceptance,
     "AUTHENTICATED_COMPLETE_PARETO_V1": verify_authenticated_complete_pareto,
+    "NATIVE_SPECIALIZED_OPERATION_V1": _verify_native_specialized,
 }
 
 PROPOSAL_FREE_VERIFIERS = {
@@ -396,6 +457,7 @@ PROPOSAL_FREE_VERIFIERS = {
     "STRUCTURED_METHOD_EXPRESSION_AST_V2",
     "BOUND_GOAL_PLAN_V1",
     "AUTHENTICATED_COMPLETE_PARETO_V1",
+    "NATIVE_SPECIALIZED_OPERATION_V1",
 }
 
 
