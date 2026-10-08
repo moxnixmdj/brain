@@ -65,7 +65,14 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             },
         ])
         self.assertEqual(out["ranked"][0]["work_id"], "GENERALIZE_RELEVANCE_CEGAR")
-        self.assertEqual(out["milestone"], "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT")
+        self.assertEqual(
+            out["milestone"],
+            "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
+        )
+        self.assertEqual(
+            out["mission_objective"],
+            "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+        )
 
     def test_lower_resource_cost_wins_when_benefit_equal(self):
         common = {
@@ -171,7 +178,17 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         activation = json.loads((ROOT / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V1.json").read_text())
         pointer = json.loads((ROOT / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json").read_text())
         self.assertEqual(activation["status"], "ACTIVE_PRIMARY_CAPABILITY_DEVELOPMENT_SCHEDULER")
-        self.assertEqual(activation["terminal_milestone"], "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT")
+        self.assertEqual(
+            activation["terminal_milestone"],
+            "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
+        )
+        self.assertEqual(
+            activation["terminal_objective"],
+            "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+        )
+        self.assertFalse(
+            activation["r2_judgment_model_policy"]["external_closed_model_dependency"]
+        )
         self.assertEqual(
             pointer["capability_first_scheduler_20261008_v1"]["status"],
             "ACTIVE_PRIMARY_CAPABILITY_DEVELOPMENT_SCHEDULER",
