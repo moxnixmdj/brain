@@ -649,6 +649,138 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         )
 
 
+    def test_success_observation_retains_digest_checked_replay_capsule(self):
+        path = self.temp_state()
+        replay_context = {
+            "mode": "compiled_bound",
+            "request": {
+                "task_id": "success-replay",
+                "initial_facts": ["seed"],
+                "target_effects": ["goal"],
+            },
+            "learn": True,
+        }
+        result = loop.record_success_observation(
+            {"pass": True, "schema": "X", "status": "PASS", "value": 9},
+            surface="TEST_SURFACE",
+            state_path=path,
+            replay_context=replay_context,
+        )
+        self.assertTrue(result["replayable"])
+        recovered = loop.get_success_replay_context(
+            result["observation_id"],
+            state_path=path,
+        )
+        self.assertEqual(recovered["context"], replay_context)
+        self.assertTrue(recovered["replay_authorized"])
+        self.assertEqual(
+            recovered["replay_capsule_sha256"],
+            result["replay_capsule_sha256"],
+        )
+        state = loop.load_state(path)
+        work = loop.next_improvement_action(state_path=path)
+        self.assertTrue(work["payload"]["replayable"])
+        self.assertEqual(
+            work["payload"]["replay_capsule_sha256"],
+            result["replay_capsule_sha256"],
+        )
+
+    def test_success_replay_capsule_rejects_sensitive_context(self):
+        path = self.temp_state()
+        with self.assertRaisesRegex(
+            loop.SelfImprovementError,
+            "RETRY_CONTEXT_SENSITIVE_KEY_REJECTED",
+        ):
+            loop.record_success_observation(
+                {"pass": True, "schema": "X", "status": "PASS"},
+                surface="TEST_SURFACE",
+                state_path=path,
+                replay_context={
+                    "mode": "compiled_bound",
+                    "request": {"task_id": "x", "api_key": "do-not-persist"},
+                },
+            )
+
+    def test_post_execution_induces_cross_scope_candidate_from_exact_same_program(self):
+        steps = [{"index": 0, "op": "solve", "inputs": [], "outputs": ["goal"]}]
+        from canonical.runtime.executable_skill_program_v7 import program_digest
+        digest = program_digest(
+            steps=steps,
+            preconditions=[],
+            postconditions=["goal"],
+            invalidators=[],
+        )
+
+        def episode(eid, scope):
+            return {
+                "episode_id": eid,
+                "scope_id": scope,
+                "steps": steps,
+                "preconditions": [],
+                "postconditions": ["goal"],
+                "invalidators": [],
+                "program_sha256": digest,
+                "verification_receipt": {
+                    "independent_verified": True,
+                    "exact_byte_bound": True,
+                    "conclusion": "success",
+                    "behavior_verified": True,
+                    "episode_id": eid,
+                    "scope_id": scope,
+                    "program_sha256": digest,
+                    "receipt_id": "EPVR:" + eid,
+                },
+                "verification_binding": {
+                    "receipt": {"path": "r-" + eid, "git_blob_sha": "1" * 40},
+                    "verification": {"path": "v-" + eid, "git_blob_sha": "2" * 40},
+                },
+                "problem_sha256": "b" * 64,
+                "trace_sha256": ("c" if eid == "prior" else "d") * 64,
+                "fact_capsule_head_hash": "e" * 64,
+                "value_capsule_head_hash": "f" * 64,
+            }
+
+        prior = episode("prior", "scope-a")
+        current = episode("current", "scope-b")
+        solved = {
+            "pass": True,
+            "status": "SOLVED__VERIFIED_EPISODE",
+            "current_episode": current,
+            "current_episode_verified": True,
+            "trace": [],
+            "skill_candidate": None,
+            "verified_executable_skill": None,
+        }
+
+        provider = mock.Mock(return_value=None)
+        with mock.patch.object(
+            loop,
+            "reauthenticate_episode_record",
+            side_effect=lambda record, repo_root: {
+                "pass": True,
+                "authenticated_episode": record,
+            },
+        ):
+            out = loop._post_execution_independent_verification(
+                solved,
+                problem={"task_id": "x"},
+                prior_verified_episode_records=[],
+                generalization_episode_records=[prior],
+                repo_root=Path("."),
+                skill_verification_provider=provider,
+            )
+
+        self.assertTrue(out["cross_scope_candidate_induced"], out)
+        self.assertEqual(out["candidate_source_scopes"], ["scope-a", "scope-b"])
+        candidate = out["skill_candidate"]
+        self.assertEqual(candidate["source_scopes"], ["scope-a", "scope-b"])
+        self.assertFalse(candidate["reuse_authorized"])
+        provider.assert_called_once()
+        self.assertEqual(
+            provider.call_args.args[0]["candidate"]["source_scopes"],
+            ["scope-a", "scope-b"],
+        )
+
     def test_reuse_first_runner_forwards_retry_context_to_failure_integration(self):
         path = self.temp_state()
         failed = {
