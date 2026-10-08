@@ -1736,8 +1736,8 @@
     },
     "replacement_rule": "DO_NOT_TREAT_EXACT_OWNER_PROMPT_AS_SERIAL_PREREQUISITE__FIRST_PROVE_TRUE_OWNER_RELATION_CONTAINMENT_IN_A_SOUND_PUBLIC_CONTRACT_ENVELOPE_AND_SCOPE_COMPLETE_NECESSARY_PREFERENCE_OR_TOP_DOMINANCE_OVER_ALL_220_TASKS",
     "load_bearing_open": [
-      "VALID_CURRENT_OWNER_CONTAINMENT_PROOF_CLASS_WITH_INDEPENDENT_SEMANTIC_VERIFICATION",
-      "220_TASK_DIMENSION_COVER_AND_DOMINANCE_OR_TOP_EVIDENCE",
+      "ONE_DECISIVE_CURRENT_OWNER_RELATION_SEPARATOR_CLASS_OR_EVALUATOR_INDEPENDENT_BYPASS",
+      "220_TASK_SCOPE_COMPLETE_DOMINANCE_OR_TOP_EVIDENCE_IF_USING_NECESSARY_PREFERENCE_ROUTE",
       "INDEPENDENT_REPLAY"
     ],
     "demoted": [
@@ -1786,5 +1786,42 @@
     "terminal": false,
     "terminal_credit_delta": 0,
     "gdpval_credit_delta": 0
+  },
+  "gdpval_evaluation_law_minimum_information_cut_20261008_v1": {
+    "status": "ACTIVE_TWO_WORLD_NONIDENTIFIABILITY_CUT__PUBLIC_METADATA_BRANCH_DEMOTED__ZERO_CREDIT",
+    "governance": {
+      "path": "canonical/governance/GDPVAL_EVALUATION_LAW_MINIMUM_INFORMATION_CUT_20261008_V1.json",
+      "git_blob_sha": "7bf8b2ffc8186e14380da080e5a9832a2fd9a2a8"
+    },
+    "runtime": {
+      "path": "canonical/runtime/gdpval_evaluation_law_information_cut_v1.py",
+      "git_blob_sha": "f23697b302faa69cb959989d2a1fbd5eef33b6b9"
+    },
+    "tests": {
+      "path": "canonical/tests/test_gdpval_evaluation_law_information_cut_v1.py",
+      "git_blob_sha": "3c782e4e25c91586f7b2873f91641850f736f97b",
+      "local_result": "10_OF_10_PASS",
+      "independent_replay_required": true
+    },
+    "current_bound_public_information_entails_brain_noninferiority": false,
+    "current_bound_public_information_entails_opus_superiority": false,
+    "minimum_separator_form": "ONE_AUTHENTIC_FACT_OR_STRONGER_CERTIFICATE_THAT_EXCLUDES_AT_LEAST_ONE_PUBLICLY_INDISTINGUISHABLE_OWNER_RELATION_WORLD",
+    "preferred_separator_order": [
+      "GENERAL_CURRENT_PREFERENCE_LAW_OR_RESTRICTED_OWNER_CLASS",
+      "EVALUATOR_INDEPENDENT_SCOPE_COMPLETE_DOMINANCE_OR_TOP_CERTIFICATE",
+      "TARGET_TRAJECTORY_LAW_EQUALITY",
+      "TASK_LOCAL_AUTHENTIC_OWNER_OUTCOME"
+    ],
+    "dormant_until_new_information": [
+      "GENERAL_GDPVAL_METADATA_SEARCH",
+      "CROWD_BT_DESCRIPTION_SEARCH",
+      "AGGREGATE_ELO_RECONSTRUCTION",
+      "HISTORICAL_V1_PROMPT_REUSE",
+      "UNVERIFIED_THIRD_PARTY_GRADER_SEARCH"
+    ],
+    "gdpval_closed": false,
+    "terminal": false,
+    "gdpval_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
 }
