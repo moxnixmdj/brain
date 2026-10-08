@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_R2_UNIT_NORMALIZED_NUMERIC_COMPARISON_DIRECT_ADEQUACY_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__UNIT_NORMALIZED_GROUNDED_NUMERIC_COMPARISON__BRANCH_REGRESSION_27_OF_27__ACTUAL_EQ_FALSE_GT_AND_THRESHOLD_REPLAYS_PASS__ZERO_CREDIT",
+  "subject": {
+    "family_runtime": {
+      "path": "canonical/runtime/r2_unit_normalized_numeric_comparison_direct_adequacy_v1.py",
+      "git_blob_sha": "2cc68f8c9d52255f4d09a9f5ea93985ca49a0506"
+    },
+    "direct_router": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "343bc5cb19982aff21a0270af12e56f98a843694"
+    },
+    "family_tests": {
+      "path": "canonical/tests/test_r2_unit_normalized_numeric_comparison_direct_adequacy_v1.py",
+      "git_blob_sha": "7757425a0ae5ff5f2c04d8c27eccbf53cd2ab608"
+    },
+    "integration_tests": {
+      "path": "canonical/tests/test_r2_unit_normalized_numeric_comparison_direct_integration_v1.py",
+      "git_blob_sha": "f6fbdb57f6668a650ea61a2cfc9bdf1076bc939b"
+    }
+  },
+  "admitted_semantics": {
+    "input": "ONE_REPOSITORY_LOCAL_VERIFIED_GENERIC_V2_GROUNDED_EVIDENCE_EXTRACTION",
+    "objective_binding": "EXPLICIT_BOUNDED_COMPARISON_OBJECTIVE_QUOTED_IN_RAW_GOAL",
+    "semantic_role_binding_authority": "INHERITED_FROM_INDEPENDENTLY_QUALIFIED_BOUNDED_OBJECTIVE_BINDER",
+    "unit_conversion_scope": "EXPLICIT_ENUMERATED_MULTIPLICATIVE_UNIT_SURFACES_WITH_SHARED_DIMENSION_ONLY",
+    "dimensions": [
+      "length",
+      "time",
+      "mass",
+      "force",
+      "power",
+      "energy",
+      "pressure",
+      "voltage",
+      "current",
+      "frequency",
+      "speed"
+    ],
+    "operators": [
+      "GT",
+      "LT",
+      "GTE",
+      "LTE",
+      "EQ",
+      "NE",
+      "ABS_DIFF_LTE"
+    ],
+    "producer_arithmetic": "fractions.Fraction",
+    "independent_arithmetic": "MANUAL_DECIMAL_TO_INTEGER_RATIO_PLUS_CROSS_MULTIPLICATION",
+    "false_predicates_are_valid_verified_outputs": true,
+    "transactional_output": true
+  },
+  "focused_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "family_plus_integration_plus_direct_router": "27_OF_27_PASS",
+    "cross_unit_equality": "36_km_per_h_EQ_10_m_per_s__PASS_TRUE",
+    "cross_unit_false_predicate": "36_km_per_h_GT_10_m_per_s__PASS_FALSE",
+    "converted_threshold": "36_km_per_h_AND_9_5_m_per_s_DIFF_LTE_1_m_per_s__PASS_TRUE",
+    "force_conversion": "1_2_kN_EQ_1200_N__PASS_TRUE",
+    "incompatible_dimension_negative": "PASS_FAIL_CLOSED",
+    "same_unit_deferral_negative": "PASS_FAIL_CLOSED",
+    "affine_temperature_negative": "PASS_FAIL_CLOSED",
+    "multiple_convertible_values_negative": "PASS_FAIL_CLOSED"
+  },
+  "inherited_role_binding_qualification": {
+    "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+    "exact_producer_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+    "public_run_id": 36686583882,
+    "independent_full_surface_cross_domain_oracle": "PASS"
+  },
+  "hard_nonclaims": [
+    "NO_AFFINE_TEMPERATURE_CONVERSION_AUTHORITY",
+    "NO_ARBITRARY_UNIT_ALIAS_OR_DIMENSION_INFERENCE_AUTHORITY",
+    "NO_GENERAL_COMPOUND_UNIT_ALGEBRA_AUTHORITY",
+    "NO_GENERAL_NATURAL_LANGUAGE_PARAPHRASE_OR_SEMANTIC_ENTAILMENT_AUTHORITY",
+    "NO_FACTUAL_CORRECTNESS_CAUSALITY_EVIDENCE_QUALITY_SUFFICIENCY_OR_SOURCE_INDEPENDENCE_AUTHORITY",
+    "NO_CLAIM_THE_DIRECT_REPLAYS_USED_LIVE_EXTERNAL_SOURCES",
+    "NO_CLAIM_OPEN_WORLD_R2_COVERAGE_IS_COMPLETE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
