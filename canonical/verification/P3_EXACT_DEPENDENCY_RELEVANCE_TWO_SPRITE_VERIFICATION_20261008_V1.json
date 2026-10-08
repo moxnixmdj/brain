@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_P3_EXACT_DEPENDENCY_RELEVANCE_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_4_OF_4_ON_TWO_SPRITES__EXACT_COMPLETE_DECISION_DEPENDENCY_GRAPH_YIELDS_PRECOMMITMENT_RELEVANCE_BITS__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py",
+    "git_blob_sha": "69a1c2fce5d48d3a0d6251090017addd31681258"
+  },
+  "tests": {
+    "path": "canonical/tests/test_p3_exact_dependency_relevance_cell_v1.py",
+    "git_blob_sha": "92d312f81f13942f297657cf7298bd2632158a47"
+  },
+  "reused_verified_theorem": {
+    "runtime": {
+      "path": "canonical/runtime/goal_dependency_delta_v4.py",
+      "git_blob_sha": "383658603320862aeaf55ee35c991ef9c37c0aaf"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/UNIVERSAL_LEARNING_OPEN_WORLD_V4_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "8ed4f50303645921458b8429728ffca2c2ce293a"
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "tests_passed": 4,
+      "tests_run": 4
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "tests_passed": 4,
+      "tests_run": 4
+    }
+  ],
+  "proved": [
+    "OPTIONAL_CLAIM_IN_EXACT_REACHABLE_DECISION_DEPENDENCY_CONE_CLASSIFIED_RELEVANT",
+    "OPTIONAL_CLAIM_OUTSIDE_EXACT_COMPLETE_DECISION_DEPENDENCY_CONE_CLASSIFIED_IRRELEVANT",
+    "RELEVANT_OPTIONAL_CLAIM_INCLUDED_AND_GRAPH_PROVED_IRRELEVANT_OPTIONAL_CLAIM_OMITTED_BEFORE_REALIZATION",
+    "INCOMPLETE_DECISION_GRAPH_FAILS_CLOSED",
+    "DEPENDENCY_DIGEST_DRIFT_FAILS_CLOSED",
+    "NO_AUTHORITY_ESCALATION"
+  ],
+  "boundary": [
+    "REQUIRES_INDEPENDENT_EXACT_BYTE_BOUND_COMPLETE_DECISION_RELEVANCE_GRAPH_FOR_CURRENT_CLAIM_ID_UNIVERSE",
+    "DOES_NOT_CREATE_THAT_GRAPH_FROM_FREE_FORM_LANGUAGE",
+    "NO_GENERAL_SEMANTIC_RELEVANCE",
+    "NO_GLOBAL_P3_U_EMPTY_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
