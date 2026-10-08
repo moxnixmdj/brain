@@ -10,6 +10,7 @@ from canonical.runtime import autonomous_verified_self_improvement_v1 as learnin
 from canonical.runtime import r3_direct_adequacy_success_adapter_v1 as adapter
 from canonical.runtime import r3_direct_adequacy_readback_verifier_v1 as verifier
 from canonical.runtime import r3_improvement_queue_driver_v1 as driver
+from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_acceptance
 
 
 class R3DirectAdequacyLearningV1Tests(unittest.TestCase):
@@ -87,15 +88,14 @@ class R3DirectAdequacyLearningV1Tests(unittest.TestCase):
             "retained_direct_proof": material,
         }
         with mock.patch.object(
-            verifier.direct,
+            literal_acceptance,
             "preflight",
             return_value={
                 "matched": True,
-                "route_id": verifier.direct.EXACT_LITERAL_ROUTE_ID,
                 "goal_sha256": problem["goal_sha256"],
             },
         ), mock.patch.object(
-            verifier.literal_acceptance,
+            literal_acceptance,
             "verify",
             return_value={
                 "pass": True,
