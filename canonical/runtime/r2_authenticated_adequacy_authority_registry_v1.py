@@ -98,6 +98,8 @@ def _p2_candidate(raw_source: str | bytes, source_id: str) -> tuple[dict[str, An
         or adequacy.get("adequacy_proved") is not True
         or adequacy.get("brain_owned") is not True
         or adequacy.get("load_bearing_constraints_preserved") is not True
+        or not isinstance(adequacy.get("membership_recognizer_git_blob_sha"), str)
+        or not adequacy.get("membership_recognizer_git_blob_sha")
         or result.get("terminal_authority") is not False
         or policy_result.get("terminal_authority") is not False
     ):
