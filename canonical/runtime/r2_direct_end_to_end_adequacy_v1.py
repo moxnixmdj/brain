@@ -18,6 +18,7 @@ from canonical.runtime import live_integrated_brain_v1 as live_bound
 from canonical.runtime import raw_goal_archive_acceptance_v1 as archive_acceptance
 from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_acceptance
 from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
+from canonical.runtime import raw_goal_structured_binary_independent_acceptance_v1 as structured_binary_acceptance
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -25,6 +26,7 @@ ARCHIVE_ROUTE_ID = "DIRECT_ADEQUACY::ARCHIVE_MANIFEST_TAR_GZ_V1"
 ARCHIVE_CAPABILITY_ID = "archive.tar_gz.create_from_manifest"
 EXACT_LITERAL_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1"
 LITERAL_JSON_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1"
+STRUCTURED_BINARY_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_BINARY_INDEPENDENT_ROUNDTRIP_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -47,6 +49,13 @@ ROUTES = {
         "preflight": "raw_goal_literal_json_acceptance_v1.preflight",
         "executor": "live_integrated_brain_v1.run_raw_goal",
         "acceptance": "raw_goal_literal_json_acceptance_v1.verify",
+    },
+    STRUCTURED_BINARY_ROUTE_ID: {
+        "capability_id": None,
+        "scope": "STRICT_LITERAL_JSON_TO_STRUCTURED_BINARY_WITH_CROSS_SUPPLIER_INDEPENDENT_SEMANTIC_ROUNDTRIP_ONLY",
+        "preflight": "raw_goal_structured_binary_independent_acceptance_v1.preflight",
+        "executor": "live_integrated_brain_v1.run_raw_goal",
+        "acceptance": "raw_goal_structured_binary_independent_acceptance_v1.verify",
     },
 }
 
@@ -116,6 +125,22 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "output_path": literal_json["output_path"],
             "records_sha256": literal_json["records_sha256"],
             "semantic_scope": ROUTES[LITERAL_JSON_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
+    structured_binary = structured_binary_acceptance.preflight(goal)
+    if structured_binary.get("matched") is True:
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": STRUCTURED_BINARY_ROUTE_ID,
+            "capability_id": structured_binary["producer_capability_id"],
+            "goal_sha256": structured_binary["goal_sha256"],
+            "source_path": structured_binary["source_path"],
+            "binary_path": structured_binary["binary_path"],
+            "format": structured_binary["format"],
+            "records_sha256": structured_binary["records_sha256"],
+            "semantic_scope": ROUTES[STRUCTURED_BINARY_ROUTE_ID]["scope"],
             "preflight_execution_authority": False,
         }
 
@@ -190,6 +215,30 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
             and accepted.get("semantic_acceptance_complete") is True
             and accepted.get("actual_goal_satisfaction_verified") is True
             and accepted.get("artifact_exact") is True
+            and isinstance(accepted_ids, list)
+            and isinstance(required_count, int)
+            and not isinstance(required_count, bool)
+            and required_count > 0
+            and len(accepted_ids) == required_count
+            and len(set(accepted_ids)) == required_count
+            and raw.get("raw_goal_sha256") == pf["goal_sha256"]
+        )
+    elif pf["route_id"] == STRUCTURED_BINARY_ROUTE_ID:
+        accepted = structured_binary_acceptance.verify(
+            goal=str(request["goal"]), raw_result=raw
+        )
+        accepted_ids = accepted.get("accepted_obligation_ids")
+        required_count = accepted.get("required_obligation_count")
+        full = (
+            raw.get("pass") is True
+            and isinstance(accepted, Mapping)
+            and accepted.get("pass") is True
+            and accepted.get("semantic_acceptance_complete") is True
+            and accepted.get("actual_goal_satisfaction_verified") is True
+            and accepted.get("source_exact") is True
+            and accepted.get("binary_present") is True
+            and accepted.get("producer_output_verified") is True
+            and accepted.get("independent_semantic_verification_verified") is True
             and isinstance(accepted_ids, list)
             and isinstance(required_count, int)
             and not isinstance(required_count, bool)
