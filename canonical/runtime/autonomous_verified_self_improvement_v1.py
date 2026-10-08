@@ -585,6 +585,10 @@ def run_learning_episode(
         active_skills,
         active_invalidators=active_invalidators,
     )
+    active_skill_records = [
+        deepcopy(dict(state["skills"][_skill_id(skill)]))
+        for skill in active_skills
+    ]
     prior = _prior_verified_episodes(state, scope_id=scope, episode_id=eid)
     out = solver_v10.run(
         problem,
@@ -598,7 +602,8 @@ def run_learning_episode(
         prior_verified_episode_records=prior,
         skill_verification_binding=skill_verification_binding,
         resume_binding=resume_binding,
-        preferred_capability_order=preferred,
+        verified_skill_records=active_skill_records,
+        active_skill_invalidators=list(active_invalidators),
     )
     integrated = integrate_solver_output(
         out,
