@@ -24,6 +24,7 @@ from canonical.runtime import r2_docx_direct_adequacy_v1 as docx_adequacy
 from canonical.runtime import r2_docx_json_direct_adequacy_v1 as docx_json_adequacy
 from canonical.runtime import r2_typed_decision_direct_adequacy_v1 as typed_decision_adequacy
 from canonical.runtime import r2_visual_code_direct_adequacy_v1 as visual_code_adequacy
+from canonical.runtime import r2_typed_json_transform_direct_adequacy_v1 as typed_json_transform_adequacy
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -37,6 +38,7 @@ DOCX_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1"
 DOCX_JSON_ROUTE_ID = "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1"
 TYPED_DECISION_ROUTE_ID = "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1"
 VISUAL_CODE_ROUTE_ID = "DIRECT_ADEQUACY::VISUAL_CODE_QR_CODE128_FAMILY_V1"
+TYPED_JSON_TRANSFORM_ROUTE_ID = "DIRECT_ADEQUACY::TYPED_JSON_TRANSFORM_FAMILY_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
