@@ -56,9 +56,72 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertEqual(out["work_id"], "repair")
         self.assertEqual(
             out["blockers_skipped"][0]["blocker"],
-            "SKILL_VERIFICATION_PROVIDER_REQUIRED",
+            "LEGACY_SKILL_VERIFICATION_MATERIAL_INCOMPLETE",
         )
         repair.assert_called_once()
+
+    def test_owned_independent_episode_verifier_is_default_when_host_provider_missing(self):
+        path = self.temp_state()
+        episode = {
+            "episode_id": "ep",
+            "scope_id": "scope",
+            "steps": [{"index": 0, "op": "x", "inputs": [], "outputs": ["goal"]}],
+            "preconditions": [],
+            "postconditions": ["goal"],
+            "invalidators": [],
+            "program_sha256": "sha256:" + "a" * 64,
+        }
+        self.write_state(
+            path,
+            {
+                "episode": {
+                    "work_id": "episode",
+                    "kind": "VERIFY_EPISODE",
+                    "priority": 20,
+                    "identity": {},
+                    "payload": {
+                        "episode": episode,
+                        "problem": {
+                            "task_id": "t",
+                            "initial_facts": [],
+                            "target_effects": ["goal"],
+                            "capabilities": [],
+                        },
+                        "trace": [],
+                        "fact_capsule_head_hash": "f" * 64,
+                        "value_capsule_head_hash": "v" * 64,
+                    },
+                    "status": "PENDING",
+                    "observations": 1,
+                    "reopen_count": 0,
+                }
+            },
+        )
+        binding = {"receipt": {"path": "x", "git_blob_sha": "x"}}
+        with (
+            mock.patch(
+                "canonical.runtime.r3_independent_learning_verifier_v1.verify_episode_request",
+                return_value=binding,
+            ) as owned_verifier,
+            mock.patch.object(
+                driver,
+                "_verify_episode_work",
+                return_value={
+                    "schema": driver.SCHEMA,
+                    "status": "IMPROVEMENT_ADVANCED__EPISODE_VERIFIED",
+                    "pass": True,
+                    "work_id": "episode",
+                    "terminal_authority": False,
+                },
+            ) as verify_work,
+        ):
+            out = driver.advance_once(state_path=path)
+
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["progress"], out)
+        provider = verify_work.call_args.kwargs["episode_verification_provider"]
+        self.assertEqual(provider({"kind": "EPISODE_VERIFICATION"}), binding)
+        owned_verifier.assert_called_once()
 
     def test_repair_queue_uses_internal_verified_repair_cycle_without_injected_provider(self):
         path = self.temp_state()

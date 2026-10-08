@@ -486,6 +486,25 @@ def advance_once(
     failure_repair_provider: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Execute the highest-priority *actionable* pending improvement exactly once."""
+    # Missing host providers are not treated as missing capability when the Brain
+    # owns a proof-producing worker for the admitted scope. External providers
+    # still override these defaults; the existing authenticators remain the sole
+    # promotion authority.
+    if episode_verification_provider is None or skill_verification_provider is None:
+        from canonical.runtime import r3_independent_learning_verifier_v1 as independent
+
+        if episode_verification_provider is None:
+            episode_verification_provider = lambda request: independent.verify_episode_request(
+                request,
+                repo_root=repo_root,
+            )
+        if skill_verification_provider is None:
+            skill_verification_provider = lambda request: independent.verify_skill_request(
+                request,
+                repo_root=repo_root,
+                state_path=state_path,
+            )
+
     state = learning.load_state(state_path)
     pending = _pending(state)
     blockers: list[dict[str, Any]] = []
@@ -511,6 +530,14 @@ def advance_once(
             continue
         try:
             if kind == "VERIFY_SKILL_CANDIDATE":
+                payload = work.get("payload") if isinstance(work.get("payload"), Mapping) else {}
+                if not isinstance(payload.get("candidate"), Mapping):
+                    blockers.append({
+                        "work_id": wid,
+                        "kind": kind,
+                        "blocker": "LEGACY_SKILL_VERIFICATION_MATERIAL_INCOMPLETE",
+                    })
+                    continue
                 if skill_verification_provider is None:
                     blockers.append({"work_id": wid, "kind": kind, "blocker": "SKILL_VERIFICATION_PROVIDER_REQUIRED"})
                     continue
