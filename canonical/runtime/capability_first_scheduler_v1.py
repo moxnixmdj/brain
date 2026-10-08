@@ -10,7 +10,9 @@ or terminal credit by itself.
 """
 from __future__ import annotations
 
+import json
 from fractions import Fraction
+from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_V1"
@@ -44,6 +46,61 @@ WORK_TYPES = frozenset(
     }
 )
 
+LOAD_BEARING_PRIMARY_LANE = "LOAD_BEARING_PRIMARY"
+SECONDARY_CAPABILITY_LANE = "SECONDARY_CAPABILITY"
+CURRENT_TERMINAL_AUTHORITY = (
+    Path(__file__).resolve().parents[1] / "governance" / "CURRENT_TERMINAL_AUTHORITY.json"
+)
+
+
+def _ids(raw: Mapping[str, Any], key: str) -> list[str]:
+    value = raw.get(key, [])
+    if value is None:
+        return []
+    if not isinstance(value, list) or not all(isinstance(x, str) and _s(x) for x in value):
+        raise CapabilityFirstSchedulerError(key.upper() + "_INVALID")
+    return sorted(set(_s(x) for x in value))
+
+
+def _current_open_obligation_count() -> int:
+    """Read the current independent load-bearing acceptance count fail-closed."""
+    try:
+        doc = json.loads(CURRENT_TERMINAL_AUTHORITY.read_text(encoding="utf-8"))
+        live = doc.get("live_truth", {})
+        value = live.get("independent_open_acceptance_obligations")
+        if isinstance(value, int) and not isinstance(value, bool) and value >= 0:
+            return value
+    except Exception:
+        pass
+    # Unknown current authority is not permission to schedule generic side work.
+    raise CapabilityFirstSchedulerError("CURRENT_OPEN_OBLIGATION_COUNT_UNAVAILABLE")
+
+
+def _load_bearing_score(raw: Mapping[str, Any]) -> Fraction:
+    discharge = _f(
+        raw.get("expected_obligation_discharge_lcb", 0),
+        "expected_obligation_discharge_lcb",
+    )
+    unlock = _f(
+        raw.get("expected_obligation_unlock_lcb", 0),
+        "expected_obligation_unlock_lcb",
+    )
+    success = _f(raw.get("success_probability_lcb", 0), "success_probability_lcb")
+    if success > 1:
+        raise CapabilityFirstSchedulerError("SUCCESS_PROBABILITY_LCB_GT_ONE")
+    wall = _f(raw.get("wall_clock_cost_ub", 0), "wall_clock_cost_ub")
+    if wall <= 0:
+        raise CapabilityFirstSchedulerError("WALL_CLOCK_COST_MUST_BE_POSITIVE")
+    return (discharge + unlock) * success / wall
+
+
+def _has_load_bearing_path(raw: Mapping[str, Any]) -> bool:
+    return bool(
+        _ids(raw, "open_obligation_ids")
+        or _ids(raw, "constructive_gap_for_open_obligation_ids")
+        or raw.get("scope_complete_discharge") is True
+    )
+
 
 class CapabilityFirstSchedulerError(ValueError):
     pass
@@ -65,10 +122,22 @@ def _f(x: Any, name: str) -> Fraction:
     return out
 
 
-def _eligible(raw: Mapping[str, Any]) -> tuple[bool, str]:
+def _eligible(
+    raw: Mapping[str, Any], checkpoint_open_obligation_count: int
+) -> tuple[bool, str]:
     work_type = _s(raw.get("work_type"))
     if work_type not in WORK_TYPES:
         raise CapabilityFirstSchedulerError("WORK_TYPE_INVALID")
+
+    if checkpoint_open_obligation_count > 0:
+        lane = _s(raw.get("scheduling_lane"))
+        if lane != LOAD_BEARING_PRIMARY_LANE:
+            return False, "DEMOTED_NON_LOAD_BEARING_WHILE_OPEN_OBLIGATIONS"
+        if not _has_load_bearing_path(raw):
+            return False, "DEMOTED_NO_CAUSAL_PATH_TO_OPEN_OBLIGATION"
+        if _load_bearing_score(raw) <= 0:
+            return False, "DEMOTED_ZERO_EXPECTED_LOAD_BEARING_YIELD"
+
     if work_type != "BENCHMARK_INSTRUMENTATION":
         return True, "ELIGIBLE"
     role = _s(raw.get("benchmark_role"))
@@ -97,7 +166,20 @@ def _score(raw: Mapping[str, Any]) -> Fraction:
     return (capability + efficiency + reliability) * breadth * generalization * success / costs
 
 
-def rank_work(work: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+def rank_work(
+    work: Sequence[Mapping[str, Any]],
+    *,
+    checkpoint_open_obligation_count: int | None = None,
+) -> dict[str, Any]:
+    if checkpoint_open_obligation_count is None:
+        checkpoint_open_obligation_count = _current_open_obligation_count()
+    if (
+        isinstance(checkpoint_open_obligation_count, bool)
+        or not isinstance(checkpoint_open_obligation_count, int)
+        or checkpoint_open_obligation_count < 0
+    ):
+        raise CapabilityFirstSchedulerError("CHECKPOINT_OPEN_OBLIGATION_COUNT_INVALID")
+
     rows: list[dict[str, Any]] = []
     seen: set[str] = set()
     for raw in work:
@@ -107,13 +189,26 @@ def rank_work(work: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         if work_id in seen:
             raise CapabilityFirstSchedulerError("WORK_ID_DUPLICATE:" + work_id)
         seen.add(work_id)
-        eligible, eligibility = _eligible(raw)
-        score = _score(raw) if eligible else Fraction(0)
+        eligible, eligibility = _eligible(raw, checkpoint_open_obligation_count)
+        if eligible:
+            score = (
+                _load_bearing_score(raw)
+                if checkpoint_open_obligation_count > 0
+                else _score(raw)
+            )
+        else:
+            score = Fraction(0)
         rows.append(
             {
                 "work_id": work_id,
                 "work_type": _s(raw.get("work_type")),
                 "benchmark_role": _s(raw.get("benchmark_role")) or None,
+                "scheduling_lane": _s(raw.get("scheduling_lane")) or None,
+                "open_obligation_ids": _ids(raw, "open_obligation_ids"),
+                "constructive_gap_for_open_obligation_ids": _ids(
+                    raw, "constructive_gap_for_open_obligation_ids"
+                ),
+                "scope_complete_discharge": raw.get("scope_complete_discharge") is True,
                 "eligibility": eligibility,
                 "priority_score_fraction": score,
             }
@@ -125,12 +220,26 @@ def rank_work(work: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
             x["work_id"],
         )
     )
+    gate_active = checkpoint_open_obligation_count > 0
     return {
         "schema": SCHEMA,
-        "status": "CAPABILITY_FIRST_RANKING",
-        "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+        "status": (
+            "LOAD_BEARING_PRIMARY_RANKING"
+            if gate_active
+            else "CAPABILITY_FIRST_RANKING"
+        ),
+        "objective": (
+            "MAXIMIZE_EXPECTED_INDEPENDENT_LOAD_BEARING_OBLIGATION_DISCHARGE_OR_UNLOCK_PER_WALL_CLOCK"
+            if gate_active
+            else "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE"
+        ),
         "mission_objective": MISSION_OBJECTIVE,
         "milestone": MILESTONE,
+        "checkpoint_open_obligation_count": checkpoint_open_obligation_count,
+        "load_bearing_primary_gate_active": gate_active,
+        "primary_admission_rule": (
+            "WHILE_OPEN_OBLIGATIONS_EXIST__PRIMARY_WORK_REQUIRES_EXPLICIT_CAUSAL_PATH_TO_OPEN_OBLIGATION_AND_POSITIVE_EXPECTED_LOAD_BEARING_YIELD"
+        ),
         "option_preservation_policy": OPTION_PRESERVATION_POLICY,
         "optimization_rule": "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
         "capability_learning_loop": list(CAPABILITY_LEARNING_LOOP),
@@ -140,6 +249,12 @@ def rank_work(work: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
                 "work_id": row["work_id"],
                 "work_type": row["work_type"],
                 "benchmark_role": row["benchmark_role"],
+                "scheduling_lane": row["scheduling_lane"],
+                "open_obligation_ids": row["open_obligation_ids"],
+                "constructive_gap_for_open_obligation_ids": row[
+                    "constructive_gap_for_open_obligation_ids"
+                ],
+                "scope_complete_discharge": row["scope_complete_discharge"],
                 "eligibility": row["eligibility"],
                 "priority_score": str(row["priority_score_fraction"]),
             }
@@ -153,6 +268,11 @@ def rank_work(work: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         "terminal_credit_delta": 0,
         "physical_deletion_authority": False,
     }
+
+
+def rank_live_work(work: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """Canonical primary scheduler entrypoint bound to current authority truth."""
+    return rank_work(work, checkpoint_open_obligation_count=_current_open_obligation_count())
 
 
 _BENEFITS = ("capability", "generalization", "reliability")
