@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_P3_REAL_CONTEXT_V3_CLOSED_CELL_FASTPATH_LOCAL_COMPOSITION_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_WRAPPER_AND_TEST_BLOBS__8_OF_8__DEPENDENCIES_BOUND__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/p3_real_context_v3_admission_v3.py",
+      "git_blob_sha": "a5c797bfdb86579e57c7efc299f847c958b58721"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p3_real_context_v3_admission_v3.py",
+      "git_blob_sha": "0405cc946b8c72003de0d20a4be40a5412509a6d"
+    },
+    "dependencies": {
+      "mechanically_closed_cell": {
+        "path": "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py",
+        "git_blob_sha": "66ce574da0cc8098d7aba8bb26bd18e36fe9784e",
+        "independent_verification": {
+          "path": "canonical/verification/P3_MECHANICALLY_CLOSED_COMMON_POLICY_CELL_VERIFICATION_20261008_V1.json",
+          "git_blob_sha": "6da0ac697351684cf399b290c00b9b83e129810a"
+        }
+      },
+      "fail_closed_v2_fallback": {
+        "path": "canonical/runtime/p3_real_context_v3_admission_v2.py",
+        "git_blob_sha": "c4728d43a903acb62c6f8c5b0877d99ab12cd844"
+      }
+    }
+  },
+  "execution": {
+    "provider": "CHATGPT_INCLUDED_LOCAL_PYTHON",
+    "exact_runtime_git_blob_match": true,
+    "exact_test_git_blob_match": true,
+    "dependency_mode": "INTERFACE_FAITHFUL_LOCAL_SUBSTITUTION_ONLY__UPSTREAM_CLOSED_CELL_HAS_SEPARATE_EXACT_BYTE_324_CHECK_VERIFICATION",
+    "result": {
+      "pass": true,
+      "passed": 8,
+      "total": 8
+    },
+    "checks": [
+      "CLOSED_CELL_REACHABLE_WITHOUT_SEMANTIC_CERTIFICATES",
+      "FORGED_SEMANTIC_CERTIFICATES_IRRELEVANT_ON_CLOSED_PATH",
+      "OPTIONAL_CLAIM_EXITS_TO_FAIL_CLOSED_V2",
+      "NONEMPTY_UNCERTAINTY_EXITS_FAST_PATH",
+      "SEMANTIC_REORDERING_EXITS_FAST_PATH",
+      "UNMODELED_AUDIENCE_SEMANTICS_EXIT_FAST_PATH",
+      "V2_FALLBACK_DOES_NOT_PROMOTE_SYNTHETIC_TRUE_CERTIFICATES",
+      "CLOSED_RECEIPT_CANNOT_MINT_DB_U_OR_TERMINAL_AUTHORITY"
+    ]
+  },
+  "verified_effect": "THE_ALREADY_VERIFIED_MECHANICALLY_CLOSED_P3_COMMON_POLICY_CELL_IS_REACHABLE_THROUGH_A_REAL_CONTEXT_ADMISSION_ADAPTER_WITHOUT_FABRICATED_SEMANTIC_CERTIFICATES__ALL_OTHER_CONTEXTS_FALL_BACK_TO_THE_EXISTING_FAIL_CLOSED_V2_ROUTE",
+  "hard_nonclaims": [
+    "NO_CLAIM_FULL_DEPENDENCY_STACK_WAS_REEXECUTED_BY_THIS_LOCAL_COMPOSITION_CHECK",
+    "NO_SOURCE_AUTHORIZATION_PROOF",
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_GENERAL_REAL_CONTEXT_ADMISSION",
+    "NO_POLICY_ADEQUACY_DB_U_SUBTRACTION_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
