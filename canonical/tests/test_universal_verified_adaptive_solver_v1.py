@@ -1,3 +1,6 @@
+from unittest import mock
+
+from canonical.runtime import universal_verified_adaptive_solver_v1 as solver_v1
 from canonical.runtime.universal_verified_adaptive_solver_v1 import run
 
 
@@ -625,3 +628,79 @@ def test_failed_bound_packet_cannot_launder_source_label_onto_later_raw_proposal
     assert out["trace"][0]["proposal_source"] == "UNBOUND_EXTERNAL_PROPOSAL"
     assert out["trace"][0]["proposal_source_id"] is None
     assert out["rejected_proposals"][0]["proposal_source"] == "GENERAL_COGNITION_SUBSTRATE:bound-substrate"
+
+
+def test_native_specialized_operation_is_proposal_free_and_builtin_only():
+    problem = {
+        "initial_facts": [],
+        "target_effects": ["NATIVE_READY"],
+        "capabilities": [{
+            "id": "native",
+            "requires": [],
+            "provides": ["NATIVE_READY"],
+            "cost": 1,
+            "result_fields": ["result"],
+            "action": {
+                "type": "verified_policy",
+                "verifier_id": "NATIVE_SPECIALIZED_OPERATION_V1",
+                "verifier_payload": {
+                    "operation_id": "H100_REGISTRY_SNAPSHOT_V8",
+                    "args": {},
+                },
+                "effect_contract": {
+                    "effects": ["NATIVE_READY"],
+                    "verifier_success_condition": "NATIVE_SPECIALIZED_OPERATION_PASS",
+                },
+            },
+        }],
+    }
+    native_result = {
+        "pass": True,
+        "status": "PASS__NATIVE_SPECIALIZED_OPERATION_EXECUTED",
+        "result": {
+            "status": "VERIFIED_CAPABILITY_REGISTRY_V8_READY",
+            "entry_count": 17,
+        },
+        "read_only": True,
+        "incremental_spend_usd": 0,
+    }
+    with mock.patch.object(
+        solver_v1,
+        "invoke_native_specialized",
+        return_value=native_result,
+    ) as invoke:
+        out = solver_v1.run(problem)
+
+    assert out["pass"] is True, out
+    assert out["status"] == "SOLVED__ALL_TARGET_EFFECTS_VERIFIED"
+    assert out["trace"][0]["verifier_id"] == "NATIVE_SPECIALIZED_OPERATION_V1"
+    assert out["trace"][0]["verified_output"]["result"]["entry_count"] == 17
+    invoke.assert_called_once_with("H100_REGISTRY_SNAPSHOT_V8", {})
+
+
+def test_native_specialized_verifier_rejects_external_proposal():
+    problem = {
+        "initial_facts": [],
+        "target_effects": ["NATIVE_READY"],
+        "capabilities": [{
+            "id": "native",
+            "requires": [],
+            "provides": ["NATIVE_READY"],
+            "cost": 1,
+            "result_fields": ["result"],
+            "action": {
+                "type": "verified_policy",
+                "verifier_id": "NATIVE_SPECIALIZED_OPERATION_V1",
+                "verifier_payload": {
+                    "operation_id": "H100_REGISTRY_SNAPSHOT_V8",
+                    "args": {},
+                },
+            },
+        }],
+    }
+    out = solver_v1.run(
+        problem,
+        proposal_packets={"native": [{"candidate": "caller-data"}]},
+    )
+    assert out["pass"] is True, out
+    assert out["trace"][0]["proposal_source"] == "DETERMINISTIC_PROPOSAL_FREE_ROUTE"
