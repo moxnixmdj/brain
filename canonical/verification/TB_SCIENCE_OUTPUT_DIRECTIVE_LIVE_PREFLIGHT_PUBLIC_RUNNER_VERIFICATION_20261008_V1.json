@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_OUTPUT_DIRECTIVE_LIVE_PREFLIGHT_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PUBLIC_RUNNER_PASS__REAL_LOCAL_QWEN_PLANNER__EXPLICIT_OUTPUT_CREATED_VERIFIED_AND_RESOLVED__ZERO_BENCHMARK_EXPOSURE__ZERO_CREDIT",
+  "subject": {
+    "agent_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "agent_git_blob_sha": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_git_blob_sha": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "closure_path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V4.json",
+    "closure_git_blob_sha": "cf9cc9fb8830eda991c71381a523b8f67caedaa7"
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2416,
+    "workflow_run_id": 37724821890,
+    "workflow_job_id": 113140481790,
+    "head_branch": "preflight/tb-science-output-directive-live-v1",
+    "head_sha": "bb12cf52d8ba5804fa4290db6bc4d963c668a533",
+    "conclusion": "success",
+    "artifact_id": 11528115607,
+    "artifact_name": "tb-science-output-directive-live-preflight-v1",
+    "artifact_digest": "sha256:d2e057a994afa9bb684a7e47cdbd5ef1f4d7c9a488f9cbcddc1e625798cf5329"
+  },
+  "synthetic_task": {
+    "benchmark_task": false,
+    "prompt": "Create a plain text file containing exactly BRAIN_OK and no other text. Write the result to /tmp/brain_output_probe.txt.",
+    "required_output": "/tmp/brain_output_probe.txt",
+    "expected_content": "BRAIN_OK"
+  },
+  "observed": {
+    "brain_mandated_deliverables": {
+      "BRAIN_DELIVERABLE_01": "/tmp/brain_output_probe.txt"
+    },
+    "path_exists": true,
+    "path_content": "BRAIN_OK",
+    "resolved_requirements": [
+      "BRAIN_DELIVERABLE_01"
+    ],
+    "status": "SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER",
+    "task_completion_claimed": false,
+    "cycles": 4,
+    "fresh_benchmark_task_exposure": 0,
+    "incremental_spend_usd": 0
+  },
+  "verified": {
+    "exact_repaired_carrier_gate_pass": true,
+    "pinned_llama_cpp_build_pass": true,
+    "exact_qwen_model_hash_pass": true,
+    "local_cognition_endpoint_pass": true,
+    "repaired_output_directive_control_path_end_to_end_pass": true,
+    "rank12_unlock_condition_from_ledger_v11_satisfied": true
+  },
+  "consequence": "RANK12_MAY_ADVANCE_TO_SEPARATE_NONEXECUTABLE_AUTHORITY_CANDIDATE_AND_INDEPENDENT_EXACT_BYTE_VERIFICATION__NO_TASK_EXECUTION_IS_AUTHORIZED_BY_THIS_RECEIPT",
+  "execution_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
