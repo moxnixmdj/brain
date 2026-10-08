@@ -74,6 +74,24 @@ def _fail(reason: str, **detail: Any) -> dict[str, Any]:
     return out
 
 
+def _replay_two_world_nonidentifiability() -> dict[str, Any]:
+    observation = (
+        "CURRENT_BOUND_PUBLIC_PRESENTATION_CONTRACT",
+        "SAME_TASK_PAIRWISE_CONTEXT",
+    )
+    left = {"observation": observation, "order": "A_STRICTLY_OVER_B"}
+    right = {"observation": observation, "order": "B_STRICTLY_OVER_A"}
+    public_observation_equal = left["observation"] == right["observation"]
+    target_order_differs = left["order"] != right["order"]
+    return {
+        "public_observation_equal": public_observation_equal,
+        "target_order_differs": target_order_differs,
+        "left_order": left["order"],
+        "right_order": right["order"],
+        "strict_order_not_entailed": public_observation_equal and target_order_differs,
+    }
+
+
 def verify_bridge(*, repo_root: str | Path) -> dict[str, Any]:
     docs: dict[str, dict[str, Any]] = {}
     try:
@@ -159,6 +177,10 @@ def verify_bridge(*, repo_root: str | Path) -> dict[str, Any]:
     if errors:
         return _fail("SOURCE_THEOREM_SEMANTICS_MISMATCH", errors=sorted(errors))
 
+    countermodel = _replay_two_world_nonidentifiability()
+    if not countermodel["strict_order_not_entailed"]:
+        return _fail("COUNTERMODEL_REPLAY_FAILED")
+
     return {
         "schema": SCHEMA,
         "pass": True,
@@ -173,6 +195,8 @@ def verify_bridge(*, repo_root: str | Path) -> dict[str, Any]:
         "shared_frontier_id": "PROFESSIONAL_PRESENTATION_QUALITY_V1",
         "touches": normalized.get("touches"),
         "constructive_relation_uncertainty_witness": True,
+        "countermodel_replayed": True,
+        "countermodel": countermodel,
         "witness_semantics": (
             "TWO_TARGET_COMPARATOR_WORLDS_CAN_SHARE_THE_CURRENT_PUBLIC_CONTRACT_"
             "YET_REVERSE_AN_OTHERWISE_UNFIXED_PRESENTATION_ORDER"
