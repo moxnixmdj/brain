@@ -456,6 +456,50 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertIn("FAILURE_FINGERPRINT_UNKNOWN", out["reason"])
 
+    @patch("canonical.runtime.live_brain_runtime_v1.synthesize_failure_repair")
+    @patch("canonical.runtime.live_brain_runtime_v1._learning_module")
+    def test_autonomous_repair_refuses_retry_not_proved_safe(
+        self, learning_module, synthesize
+    ):
+        class L:
+            DEFAULT_STATE_PATH = "/tmp/r3-autonomous-repair-safety.json"
+
+            @staticmethod
+            def get_failure_retry_context(fid, state_path, retry_capsule_sha256=None):
+                return {
+                    "failure_fingerprint": fid,
+                    "retry_capsule_sha256": "r" * 64,
+                    "context": {
+                        "mode": "generic",
+                        "problem": {"task_id": "effectful"},
+                    },
+                    "autonomous_replay_authorized": False,
+                    "autonomous_replay_reason": (
+                        "EFFECT_MAY_HAVE_OCCURRED__RECOVERY_OR_EXPLICIT_REPLAY_REQUIRED"
+                    ),
+                    "resolved": False,
+                }
+
+        learning_module.return_value = L
+        out = brain.execute_failure_repair_cycle(
+            {
+                "failure_fingerprint": "fp:effectful",
+                "retry_capsule_sha256": "r" * 64,
+                "components": [],
+                "autonomous": True,
+            }
+        )
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "AUTONOMOUS_REPAIR_BLOCKED__REPLAY_NOT_PROVED_SAFE",
+        )
+        self.assertEqual(
+            out["autonomous_replay_reason"],
+            "EFFECT_MAY_HAVE_OCCURRED__RECOVERY_OR_EXPLICIT_REPLAY_REQUIRED",
+        )
+        synthesize.assert_not_called()
+
     @patch("canonical.runtime.live_brain_runtime_v1.execute_failure_repair_cycle")
     @patch("canonical.runtime.live_brain_runtime_v1.run_generic")
     def test_live_failure_auto_dispatches_verified_repair_when_frontier_is_available(
@@ -496,6 +540,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertEqual(request["failure_fingerprint"], "fp:auto")
         self.assertEqual(request["retry_capsule_sha256"], "retry:auto")
         self.assertEqual(request["components"], [component])
+        self.assertTrue(request["autonomous"])
 
     @patch("canonical.runtime.live_brain_runtime_v1.execute_failure_repair_cycle")
     @patch("canonical.runtime.live_brain_runtime_v1.run_generic")
