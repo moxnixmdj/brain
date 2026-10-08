@@ -10,6 +10,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  issues: write
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -29,3 +30,19 @@ jobs:
           name: r2-general-adequate-decision-controller-test-output
           path: r2-test-output.txt
           if-no-files-found: warn
+
+      - name: Surface R2 failure diagnostics
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const raw = fs.existsSync('r2-test-output.txt')
+              ? fs.readFileSync('r2-test-output.txt', 'utf8')
+              : 'R2 test output missing before publication';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: 'R2 CI failure diagnostics:\n\n```text\n' + raw.slice(-50000) + '\n```'
+            });
