@@ -215,6 +215,93 @@ class VerifiedRepairReplayLoopV1Tests(unittest.TestCase):
             state["failures"][fid]["retry_capsules"][retry_sha]["resolved"]
         )
 
+
+    def test_new_primitive_required_without_expander_remains_unresolved(self):
+        path = self.temp_state()
+        fid, retry_sha, _ = self.seed_failure(path)
+        missing = {
+            "pass": False,
+            "classification": "NEW_PRIMITIVE_REQUIRED",
+            "missing_required_effects": ["repair.capability.available"],
+            "next_action": "SYNTHESIZE_OR_ACQUIRE_ONLY_THE_LISTED_MISSING_CAUSAL_EFFECTS_THEN_RERUN",
+        }
+        with mock.patch.object(brain, "_causal_synthesize", return_value=missing):
+            out = brain.execute_failure_repair_cycle(
+                {
+                    "failure_fingerprint": fid,
+                    "retry_capsule_sha256": retry_sha,
+                    "components": [],
+                    "initial_facts": [],
+                },
+                state_path=path,
+            )
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "REPAIR_CYCLE_UNRESOLVED_AT_SYNTHESIS")
+        self.assertFalse(out["capability_expander_available"])
+
+    def test_new_primitive_required_uses_authenticated_v12_expansion_then_replays(self):
+        path = self.temp_state()
+        fid, retry_sha, _ = self.seed_failure(path)
+        missing = {
+            "pass": False,
+            "classification": "NEW_PRIMITIVE_REQUIRED",
+            "missing_required_effects": ["repair.capability.available"],
+            "next_action": "SYNTHESIZE_OR_ACQUIRE_ONLY_THE_LISTED_MISSING_CAUSAL_EFFECTS_THEN_RERUN",
+        }
+        invented_expander = mock.Mock(name="brain_owned_expander")
+        solver_out = {
+            "pass": True,
+            "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+            "expanded_capability_ids": ["invented-repair-capability"],
+            "capability_expansion_attempts": [{
+                "status": "EXPANSION_ADMITTED",
+                "admitted": [{"capability_id": "invented-repair-capability"}],
+                "rejected": [],
+            }],
+        }
+        with (
+            mock.patch.object(brain, "_causal_synthesize", return_value=missing),
+            mock.patch.object(brain, "_v12_run", return_value=solver_out) as execute,
+            mock.patch.object(
+                brain,
+                "_raw_bound_run",
+                return_value={"pass": True, "status": "PASS__ORIGINAL_OBLIGATION"},
+            ),
+        ):
+            out = brain.execute_failure_repair_cycle(
+                {
+                    "failure_fingerprint": fid,
+                    "retry_capsule_sha256": retry_sha,
+                    "components": [],
+                    "initial_facts": [],
+                },
+                state_path=path,
+                capability_expander=invented_expander,
+            )
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["repair_mode"],
+            "V12_AUTHENTICATED_CAPABILITY_EXPANSION",
+        )
+        call = execute.call_args
+        problem = call.args[0]
+        kwargs = call.kwargs["kwargs"]
+        self.assertEqual(problem["capabilities"], [])
+        self.assertEqual(
+            problem["target_effects"],
+            ["repair.capability.available"],
+        )
+        self.assertIs(kwargs["capability_expander"], invented_expander)
+        self.assertEqual(
+            out["repair_receipt"]["original_replay_pass"],
+            True,
+        )
+        state = learning.load_state(path)
+        self.assertTrue(
+            state["failures"][fid]["retry_capsules"][retry_sha]["resolved"]
+        )
+
     def test_missing_executable_binding_never_reaches_v12(self):
         path = self.temp_state()
         fid, retry_sha, _ = self.seed_failure(path)
