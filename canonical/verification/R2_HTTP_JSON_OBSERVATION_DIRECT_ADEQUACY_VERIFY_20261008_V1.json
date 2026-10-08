@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_R2_HTTP_JSON_OBSERVATION_DIRECT_ADEQUACY_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__HTTP_JSON_OBSERVATION_FAMILY__BRANCH_REGRESSION_22_OF_22__PUBLIC_REAL_OBSERVATION_PASS__HISTORICAL_HASH_REPRODUCED__ZERO_CREDIT",
+  "subject": {
+    "family_runtime": {
+      "path": "canonical/runtime/r2_http_json_observation_direct_adequacy_v1.py",
+      "git_blob_sha": "a633bb191ec27493bee30eb8ba6f9f800e97a427"
+    },
+    "direct_router": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "93802c3b0c7b9da3d835057b4435a11f09be86db"
+    },
+    "family_tests": {
+      "path": "canonical/tests/test_r2_http_json_observation_direct_adequacy_v1.py",
+      "git_blob_sha": "c9a54accd0dfdb537c1f82095c16e5f3e85e2e64"
+    },
+    "integration_tests": {
+      "path": "canonical/tests/test_r2_http_json_observation_direct_integration_v1.py",
+      "git_blob_sha": "b4c93965c294eb56119bdf75465f1f9d9bb3cb91"
+    }
+  },
+  "admitted_semantics": {
+    "input": "ONE_REPOSITORY_LOCAL_JSON_STATE_FILE_WITH_ONE_UNIQUE_NAMED_HTTPS_URL",
+    "producer_capability_id": "http.json.fetch_from_state",
+    "producer_adapter": "http_json_fetch",
+    "independent_verifier": "curl",
+    "acceptance": "PARSED_JSON_SEMANTIC_EQUALITY",
+    "source_immutability_required": true,
+    "transactional_output": true,
+    "external_effect_class": "READ_ONLY_HTTPS_OBSERVATION"
+  },
+  "focused_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "family_plus_integration_plus_direct_router": "22_OF_22_PASS"
+  },
+  "real_public_observation": {
+    "requested_url": "https://pypi.org/pypi/pypdf/6.19.0/json",
+    "producer_final_url": "https://pypi.org/pypi/pypdf/6.19.0/json",
+    "independent_final_url": "https://pypi.org/pypi/pypdf/6.19.0/json",
+    "semantic_json_equal": true,
+    "output_sha256": "9eca4c2315cec5fcb72f58ed96752dabd6711ba84603eb53160caa19eefe8c7f",
+    "registry_historical_verified_sha256": "9eca4c2315cec5fcb72f58ed96752dabd6711ba84603eb53160caa19eefe8c7f",
+    "historical_hash_reproduced": true
+  },
+  "proved": [
+    "EXACT_RAW_GOAL_BINDS_ONLY_A_URL_KEY_ALREADY_PRESENT_IN_REPOSITORY_LOCAL_STATE",
+    "ARBITRARY_URLS_ARE_NOT_ACCEPTED_BY_THIS_DIRECT_FAMILY",
+    "PRODUCER_EXECUTION_IS_BOUND_TO_THE_VERIFIED_HTTP_JSON_FETCH_ADAPTER",
+    "SUCCESS_REQUIRES_PRODUCER_INDEPENDENT_CURL_REFETCH_AND_PARSED_JSON_EQUALITY",
+    "STATE_BYTES_MUST_REMAIN_IMMUTABLE",
+    "MATCHED_FAILURE_ROLLS_BACK_THE_DECLARED_OUTPUT",
+    "MATCHED_FAILURE_CANNOT_FALL_THROUGH_TO_OTHER_DIRECT_ROUTES",
+    "ALL_LOSSLESS_RAW_GOAL_OBLIGATIONS_MUST_BE_ACCEPTED"
+  ],
+  "hard_nonclaims": [
+    "NO_WRITE_OR_MUTATING_NETWORK_AUTHORITY",
+    "NO_CREDENTIAL_OR_BROWSER_INTERACTION_AUTHORITY",
+    "NO_ARBITRARY_URL_AUTHORITY",
+    "NO_CLAIM_ALL_EXTERNAL_OBSERVABILITY_IS_SOLVED",
+    "NO_CLAIM_OPEN_WORLD_R2_COVERAGE_IS_COMPLETE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
