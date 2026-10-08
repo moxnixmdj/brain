@@ -381,6 +381,99 @@ def _verify_skill_work(
     }
 
 
+def _reverify_quarantined_skill_work(
+    work: Mapping[str, Any],
+    *,
+    state_path: str | Path,
+    repo_root: str | Path,
+    skill_verification_provider,
+) -> dict[str, Any]:
+    """Reverify a quarantined reusable skill without granting self-reinstatement."""
+    wid = str(work.get("work_id") or "")
+    identity = work.get("identity")
+    skill_id = (
+        str(identity.get("skill_id") or "")
+        if isinstance(identity, Mapping) else ""
+    )
+    state = r3.load_state(state_path)
+    record = state.get("skills", {}).get(skill_id)
+    if not isinstance(record, Mapping):
+        return {
+            "pass": False,
+            "status": "REVERIFY_SKILL_BLOCKED__SKILL_RECORD_MISSING",
+            "work_id": wid,
+        }
+    skill = record.get("skill")
+    if not isinstance(skill, Mapping):
+        return {
+            "pass": False,
+            "status": "REVERIFY_SKILL_BLOCKED__SKILL_INVALID",
+            "work_id": wid,
+        }
+
+    candidate = deepcopy(dict(skill))
+    candidate["status"] = "EXECUTABLE_SKILL_CANDIDATE_ONLY"
+    candidate["verified_skill"] = False
+    candidate["reuse_authorized"] = False
+    candidate["candidate_only"] = True
+    candidate.pop("verification_receipt", None)
+    candidate.pop("execution_authority", None)
+
+    sources = _source_episodes(state, candidate)
+    request = {
+        "kind": "SKILL_VERIFICATION",
+        "candidate": deepcopy(candidate),
+        "current_episode": deepcopy(sources[-1]) if sources else {},
+    }
+    binding = skill_verification_provider(deepcopy(request))
+    if binding is None:
+        return {
+            "pass": False,
+            "status": "REVERIFY_SKILL_PROVIDER_RETURNED_NO_BINDING",
+            "work_id": wid,
+        }
+    if not isinstance(binding, Mapping):
+        return {
+            "pass": False,
+            "status": "REVERIFY_SKILL_PROVIDER_RESULT_INVALID",
+            "work_id": wid,
+        }
+
+    auth = r3.authenticate_skill_verification(candidate, binding, repo_root=repo_root)
+    if auth.get("pass") is not True:
+        return {
+            "pass": False,
+            "status": "REVERIFY_SKILL_AUTHENTICATION_FAILED",
+            "reason": str(auth.get("reason") or ""),
+            "work_id": wid,
+        }
+    verified = auth.get("verified_skill")
+    if not isinstance(verified, Mapping):
+        return {
+            "pass": False,
+            "status": "REVERIFY_SKILL_AUTHENTICATOR_OUTPUT_INVALID",
+            "work_id": wid,
+        }
+
+    integrated = r3.integrate_solver_output(
+        {
+            "pass": True,
+            "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
+            "skill_candidate": candidate,
+            "verified_executable_skill": deepcopy(dict(verified)),
+            "verified_skill_reuse_authorized": verified.get("reuse_authorized") is True,
+        },
+        state_path=state_path,
+    )
+    return {
+        "pass": True,
+        "status": "REVERIFY_QUARANTINED_SKILL_COMPLETED",
+        "work_id": wid,
+        "learning": integrated,
+        "permanent_reuse_authorized": integrated.get("permanent_reuse_authorized") is True,
+    }
+
+
 def advance_improvement_queue(
     *,
     state_path: str | Path = r3.DEFAULT_STATE_PATH,
@@ -417,7 +510,7 @@ def advance_improvement_queue(
                 if isinstance(evidence, Mapping) and isinstance(evidence.get(wid), Mapping):
                     selected = work
                     break
-            if kind == "VERIFY_SKILL_CANDIDATE" and skill_verification_provider is not None:
+            if kind in {"VERIFY_SKILL_CANDIDATE", "REVERIFY_QUARANTINED_SKILL"} and skill_verification_provider is not None:
                 selected = work
                 break
         if selected is None:
@@ -432,6 +525,13 @@ def advance_improvement_queue(
                     state_path=state_path,
                     repo_root=repo_root,
                     episode_verification_provider=episode_verification_provider,
+                    skill_verification_provider=skill_verification_provider,
+                )
+            elif selected.get("kind") == "REVERIFY_QUARANTINED_SKILL":
+                result = _reverify_quarantined_skill_work(
+                    selected,
+                    state_path=state_path,
+                    repo_root=repo_root,
                     skill_verification_provider=skill_verification_provider,
                 )
             else:
