@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_P3_OPTIONAL_RELEVANCE_MINIMUM_INFORMATION_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__CANONICAL_BYTES_REPLAYED_ON_TWO_SPRITES__NO_COMMON_POLICY__ONE_BIT_JIT_SUFFICIENT__ZERO_TERMINAL_CREDIT",
+  "cut": {
+    "path": "canonical/governance/P3_OPTIONAL_RELEVANCE_MINIMUM_INFORMATION_CUT_20261008_V1.json",
+    "git_blob_sha": "8506b0a05be2ee4dea489f9640d8ce1099a143a2"
+  },
+  "compiler": {
+    "path": "canonical/runtime/tournament_failure_capability_compiler_v1.py",
+    "git_blob_sha": "999f075b9d888d35f6e10564aeaf45e0791c4a52"
+  },
+  "inputs": {
+    "no_jit": {
+      "path": "canonical/governance/P3_OPTIONAL_RELEVANCE_TOURNAMENT_INPUT_20261008_V1.json",
+      "git_blob_sha": "c33d453bbf8142caa1f8132a11f63df81c9f42d6"
+    },
+    "with_jit": {
+      "path": "canonical/governance/P3_OPTIONAL_RELEVANCE_JIT_INPUT_20261008_V1.json",
+      "git_blob_sha": "22d5bee154769651e5a6aa2e037b1287ffaede68"
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "no_jit_classification": "TOURNAMENT_FAILURE_UNRESOLVED",
+      "no_jit_minimum_policy_count": 2,
+      "no_jit_minimum_persistent_bits": 1,
+      "with_jit_classification": "JIT_DISCRIMINATOR",
+      "with_jit_pass": true
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "no_jit_classification": "TOURNAMENT_FAILURE_UNRESOLVED",
+      "no_jit_minimum_policy_count": 2,
+      "no_jit_minimum_persistent_bits": 1,
+      "with_jit_classification": "JIT_DISCRIMINATOR",
+      "with_jit_pass": true
+    }
+  ],
+  "exact_conclusion": "FOR_THE_BOUND_OPTIONAL_CLAIM_NO_WEIGHT_CELL__NO_COMMON_POLICY_EXISTS__MINIMUM_POLICY_COVER_SIZE_IS_2__ONE_TRUTHFUL_PRECOMMITMENT_RELEVANCE_BIT_IS_SUFFICIENT",
+  "hard_nonclaims": [
+    "NO_GENERAL_RELEVANCE_SOLVER",
+    "NO_BM25_NEGATIVE_RELEVANCE_AUTHORITY",
+    "NO_GLOBAL_P3_CLOSURE",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
