@@ -9,6 +9,7 @@ on:
       - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
       - "canonical/tests/test_verified_repair_replay_loop_v1.py"
+      - "canonical/tests/test_live_brain_runtime_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
   push:
     branches:
@@ -21,6 +22,7 @@ on:
       - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
       - "canonical/tests/test_verified_repair_replay_loop_v1.py"
+      - "canonical/tests/test_live_brain_runtime_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
 
 jobs:
@@ -38,3 +40,5 @@ jobs:
         run: python -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v
       - name: Run R3 repair replay regression suite
         run: python -m unittest canonical.tests.test_verified_repair_replay_loop_v1 -v
+      - name: Run R3 live control-plane regression suite
+        run: python -m unittest canonical.tests.test_live_brain_runtime_v1 -v
