@@ -58,6 +58,10 @@
     "independent_runtime_verification": {
       "path": "canonical/verification/AA_BRIEFCASE_PROOF_CARRYING_DOMINANCE_SPRITE_VERIFICATION_20261008_V1.json",
       "git_blob_sha": "8ccde666ce403c668e8a2c9aaab109740aed4c13"
+    },
+    "current_external_receipt_route_audit": {
+      "path": "canonical/evidence/AA_BRIEFCASE_CURRENT_EXTERNAL_RECEIPT_ROUTE_AUDIT_20261008_V1.json",
+      "git_blob_sha": "4a670c8e798c99ba926c64be11d0fb1bc7205769"
     }
   },
   "per_check_certification": {
@@ -159,5 +163,11 @@
     "executor": "REMOTE_ISOLATED_SPRITE",
     "private_benchmark_cases_consumed": 0,
     "conclusion": "ROUTE_MECHANICS_AND_FAIL_CLOSED_INVARIANTS_PASS__REAL_PRIVATE_SCOPE_RECEIPT_STILL_REQUIRED"
+  },
+  "external_receipt_route": {
+    "discovered_self_service_official_aa_briefcase_endpoint": false,
+    "discovered_public_path": "ARTIFICIAL_ANALYSIS_CUSTOM_BENCHMARKING_CONTACT",
+    "sufficiency": "UNPROVED__MUST_EXPLICITLY PRODUCE CURRENT_EPOCH_SCOPE_COMPLETE_AA_BRIEFCASE_RECEIPT_OR OWNER-EQUIVALENT DIRECT-DOMINANCE ATTESTATION",
+    "third_party_aa_style_scores_accepted": false
   }
 }
