@@ -1,4 +1,11 @@
 """Deterministic exact-function replay for P3 policy-influence V10 kernel tests."""
+from pathlib import Path
+import sys
+
+ROOT=Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0,str(ROOT))
+
 import canonical.tests.test_p3_policy_influence_relevance_cell_v1 as m
 
 tests=[(n,f) for n,f in vars(m).items() if n.startswith("test_") and callable(f)]
