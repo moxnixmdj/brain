@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_R3_POST_V10_COVERAGE_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__DIRECT_R2_SUCCESS_RETENTION__CONSTRUCTIVE_ROOT1_ADAPTER_GAP__CURRENT_BYTES",
+  "subject_main_head": "e65a9fc837bc82c2470c67106b7e8202ae7f117e",
+  "exact_blobs": {
+    "canonical/runtime/live_brain_runtime_v1.py": "1e8a384aefec147ba42de233f30f4154c98df0f3",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "1f0b45a405a9c35b2cf00a1c5d8e93c0fac14251",
+    "canonical/runtime/r3_root1_adapter_gap_witness_v1.py": "d57767f2b0fac0dac1f112dc5dcaf1f9957e2dd9",
+    "canonical/tests/test_r3_direct_decision_success_observation_v1.py": "08aab82ae530378b9f82c3f00afadeb634a41a5e",
+    "canonical/tests/test_r3_root1_adapter_gap_witness_v1.py": "06aaee9c6a3cc25b4cb8d12175f72806583cef61",
+    "canonical/tests/test_r3_root1_adapter_gap_driver_v1.py": "ad7b7ea7050d17d2456ac5b3bfcd4985c037bec9",
+    "canonical/tests/test_r3_improvement_queue_driver_v1.py": "d9b3862185f9fb6ac4e3894fdf4ca5f63e94b89d"
+  },
+  "verification": {
+    "isolated_carrier": "brain-live-integrated-v1-run-20261008",
+    "direct_r2_success_observation": "3_OF_3_PASS",
+    "constructive_gap_focused": "6_OF_6_PASS",
+    "combined_focused": "9_OF_9_PASS",
+    "current_queue_driver": "26_OF_26_PASS",
+    "prior_current_integrator_and_self_improvement": "34_OF_34_PASS",
+    "prior_current_direct_fabric_experience": "5_OF_5_PASS"
+  },
+  "independently_verified_prior_receipt": {
+    "path": "canonical/verification/R3_ROOT1_ADAPTER_GAP_WITNESS_VERIFY_20261008_V1.json",
+    "git_blob_sha": "323a7f658d09b1d748798e5f1a09472b7126ba3c",
+    "result": "6_OF_6_FOCUSED_TESTS_PASS__14_EXACT_BLOB_BINDINGS"
+  },
+  "proved": {
+    "verified_direct_r2_decision_success_is_not_silently_dropped": true,
+    "learn_false_disables_direct_r2_success_observation": true,
+    "non_direct_r2_success_does_not_duplicate_learning_observation": true,
+    "proof_bearing_owned_adapter_miss_can_be_compiled_to_constructive_root1_gap": true,
+    "root1_minimum_missing_primitive_is_exactly": "R3_SUCCESS_ADAPTER_PATCH_AUTHOR",
+    "proofless_success_does_not_fabricate_constructive_gap": true,
+    "stale_adapter_frontier_fails_closed": true,
+    "already_available_owned_adapter_blocks_gap_claim": true,
+    "bound_acquisition_provider_blocks_gap_compiler_authority": true,
+    "original_success_replay_required_for_gap_compilation": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_R3_SUCCESS_ADAPTER_PATCH_AUTHOR_IS_ALREADY_OWNED",
+    "NO_CLAIM_A_DEFAULT_ACQUISITION_ROUTE_EXISTS",
+    "NO_CLAIM_ARBITRARY_DIRECT_SUCCESS_IS_AUTOMATICALLY_LEARNABLE",
+    "NO_CLAIM_ROOT1_IS_CLOSED",
+    "NO_SELF_CERTIFICATION",
+    "NO_TERMINAL_GOAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
