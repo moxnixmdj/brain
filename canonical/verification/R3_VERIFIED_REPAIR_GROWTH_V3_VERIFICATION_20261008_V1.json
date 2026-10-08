@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_R3_VERIFIED_REPAIR_GROWTH_V3_VERIFICATION_20261008_V1",
   "date": "2026-10-08",
-  "status": "PASS__R3_V3_INTEGRATION_11_OF_11__PENDING_FULL_REPOSITORY_CI",
+  "status": "PASS__R3_V3_REAL_V12_INTEGRATION__R3_11_OF_11__V12_3_OF_3",
   "subject_branch": "r3-verified-repair-growth-v3-20261008",
   "subject_commit_before_evidence": "5842c5fe6630374754cb6dac762417855c43b749",
   "isolated_carrier": {
@@ -10,11 +10,22 @@
     "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
   },
   "verification": {
-    "command": "python3 -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v",
-    "tests_run": 11,
-    "tests_passed": 11,
-    "tests_failed": 0,
-    "elapsed_seconds": 1.072
+    "isolated_carrier_command": "python3 -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v",
+    "r3_tests_run": 11,
+    "r3_tests_passed": 11,
+    "r3_tests_failed": 0,
+    "r3_elapsed_seconds": 0.017,
+    "real_v12_dependency_graph": true,
+    "v12_native_test_style": "PYTEST_STYLE_FUNCTIONS",
+    "v12_execution_method": "DIRECT_FUNCTION_HARNESS_WITH_FRESH_TEMP_DIRECTORY_PER_TEST_BECAUSE_PYTEST_IS_NOT_INSTALLED_ON_THE_EXISTING_SPRITE",
+    "v12_tests": [
+      "test_zero_graph_can_expand_and_solve",
+      "test_unauthenticated_expansion_is_not_admitted",
+      "test_value_dependent_dynamic_expansion_waits_for_bound_semantics"
+    ],
+    "v12_tests_run": 3,
+    "v12_tests_passed": 3,
+    "v12_tests_failed": 0
   },
   "newly_proved_integration_behaviors": [
     "R3 forwards proposal generation into Universal Solver V12",
@@ -35,11 +46,19 @@
     "no unverified expansion is promoted or cached"
   ],
   "verification_boundary": {
-    "isolated_replay": "V12 MODULE STUBBED; R3 CALL/STATE/PERSISTENCE LOGIC EXECUTED",
-    "next_verification": "FULL_REPOSITORY_PR_CI_WITH_REAL_V12"
+    "isolated_replay": "REAL_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12_AND_TRANSITIVE_RUNTIME_DEPENDENCIES_MATERIALIZED_FROM_EXACT_BRANCH_BYTES",
+    "pytest_dependency": "NOT_INSTALLED__NATIVE_TEST_FUNCTIONS_EXECUTED_DIRECTLY_WITH_EQUIVALENT_TMP_PATH_FIXTURE",
+    "claim": "VERIFIES_R3_V3_CALL_STATE_PERSISTENCE_AND_REHYDRATION_LOGIC_AGAINST_REAL_V12_PLUS_V12S_OWN_AUTHENTICATED_EXPANSION_CONTRACT_TESTS"
   },
   "accounting": {
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "full_real_v12_properties": [
+    "ZERO_CAPABILITY_GRAPH_CAN_REQUEST_EXPANSION_ADMIT_AN_EXACT_TASK_BOUND_INDEPENDENTLY_VERIFIED_CAPABILITY_AND_SOLVE",
+    "UNAUTHENTICATED_EXPANSION_IS_REJECTED_AND_CANNOT_ENTER_TRUSTED_STATE",
+    "VALUE_DEPENDENT_DYNAMIC_EXPANSION_IS_REJECTED_UNTIL_RESOLVED_SEMANTICS_ARE_BOUND",
+    "R3_PERSISTS_ONLY_V12_AUTHENTICATED_EXPANSION_ROWS",
+    "R3_REHYDRATES_AUTHENTICATED_REPAIRS_ONLY_FOR_THE_EXACT_TASK_CONTRACT"
+  ]
 }
