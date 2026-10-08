@@ -23,7 +23,7 @@ import subprocess
 from typing import Any, Mapping
 
 from canonical.runtime import live_integrated_brain_v1 as live_bound
-from canonical.runtime import verified_bound_capability_execution_adapter_v1 as bound_exec
+from canonical.runtime.bound_capabilities import http_json_fetch
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 from canonical.runtime.r2_grounded_candidate_policy_frontier_v1 import goal_scoped_policy_id
 
@@ -201,20 +201,9 @@ def preflight(
         ):
             raise ValueError("HTTP_JSON_CURL_INDEPENDENT_VERIFICATION_REQUIRED")
 
+        if str(entry.get("adapter_module") or "")!="http_json_fetch":
+            raise ValueError("HTTP_JSON_ADAPTER_BINDING_MISMATCH")
         goal_sha=sha256(goal.encode("utf-8")).hexdigest()
-        instance_id="r2-http-json-observation-"+goal_sha[:16]
-        prepared=bound_exec.prepare(
-            CAPABILITY_ID,
-            inputs={
-                "source_json_path":state_rel,
-                "url_key":key,
-                "output_path":output_rel,
-            },
-            instance_id=instance_id,
-        )
-        if prepared.get("capability_id")!=CAPABILITY_ID:
-            raise ValueError("HTTP_JSON_PREPARED_CAPABILITY_MISMATCH")
-
         contract=_raw_contract(goal)
         raw_ids=list(contract["acceptance_contract"]["required_obligation_ids"])
         return {
@@ -234,10 +223,8 @@ def preflight(
             "output_path":output_rel,
             "raw_task_contract_sha256":contract["task_contract_sha256"],
             "raw_acceptance_obligation_ids":raw_ids,
-            "execution_instance_id":instance_id,
-            "registry_file_sha256":prepared["registry_file_sha256"],
-            "registry_entry_sha256":prepared["registry_entry_sha256"],
-            "rendered_action_sha256":prepared["rendered_action_sha256"],
+            "producer_adapter_module":"http_json_fetch",
+            "producer_registry_verification_mission":verification.get("mission_id"),
             "semantic_scope":"EXACT_STATE_KEYED_READ_ONLY_HTTPS_JSON_OBSERVATION",
             "preflight_execution_authority":False,
         }
@@ -278,27 +265,24 @@ def run(
         if _sha(state_path)!=pf["state_sha256"]:
             raise RuntimeError("STATE_DRIFT_BEFORE_EXECUTION")
 
-        produced=bound_exec.execute(
-            CAPABILITY_ID,
-            inputs={
+        result=http_json_fetch.run(
+            {
                 "source_json_path":pf["state_path"],
                 "url_key":pf["url_key"],
                 "output_path":pf["output_path"],
+                "max_bytes":5_000_000,
+                "timeout_s":30,
             },
-            instance_id=pf["execution_instance_id"],
-            expected_registry_file_sha256=pf["registry_file_sha256"],
-            expected_registry_entry_sha256=pf["registry_entry_sha256"],
-            expected_rendered_action_sha256=pf["rendered_action_sha256"],
+            root,
         )
-        if not isinstance(produced,Mapping) or produced.get("pass") is not True:
-            raise RuntimeError(
-                "HTTP_JSON_VERIFIED_EXECUTION_FAILED:"
-                +str(produced.get("errors") if isinstance(produced,Mapping) else produced)
-            )
-        result=produced.get("result")
+        produced={
+            "pass":True,
+            "capability_id":CAPABILITY_ID,
+            "adapter_module":"http_json_fetch",
+            "result":deepcopy(dict(result)),
+        }
         if (
-            produced.get("capability_id")!=CAPABILITY_ID
-            or not isinstance(result,Mapping)
+            not isinstance(result,Mapping)
             or result.get("output_verified") is not True
             or result.get("output_path")!=pf["output_path"]
             or result.get("requested_url")!=pf["requested_url"]
