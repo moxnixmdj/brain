@@ -911,6 +911,7 @@ def integrate_solver_output(
     repo_root: str | Path = ROOT,
     retry_context: Mapping[str, Any] | None = None,
     verification_problem: Mapping[str, Any] | None = None,
+    verification_effect_root: str | Path | None = None,
 ) -> dict[str, Any]:
     """Persist only independently verified learning and update Pareto reuse state."""
     if not isinstance(out, Mapping):
@@ -1060,6 +1061,11 @@ def integrate_solver_output(
                     ),
                     "fact_capsule_head_hash": _s(out.get("state_capsule_head_hash")),
                     "value_capsule_head_hash": _s(out.get("value_capsule_head_hash")),
+                    "effect_root": (
+                        str(verification_effect_root)
+                        if verification_effect_root is not None
+                        else None
+                    ),
                 },
             )
 
@@ -1756,6 +1762,7 @@ def _post_execution_independent_verification(
     repo_root: str | Path,
     episode_verification_provider=None,
     skill_verification_provider=None,
+    effect_root: str | Path | None = None,
 ) -> dict[str, Any]:
     """Complete the independent-verifier handshake after execution, without replay.
 
@@ -1784,6 +1791,7 @@ def _post_execution_independent_verification(
                 "trace": deepcopy(list(trace)),
                 "fact_capsule_head_hash": _s(result.get("state_capsule_head_hash")),
                 "value_capsule_head_hash": _s(result.get("value_capsule_head_hash")),
+                "effect_root": str(effect_root) if effect_root is not None else None,
             }
             try:
                 binding = episode_verification_provider(deepcopy(request))
@@ -2032,6 +2040,7 @@ def run_learning_episode(
                 repo_root=repo_root,
                 episode_verification_provider=episode_verification_provider,
                 skill_verification_provider=skill_verification_provider,
+                effect_root=effect_root,
             )
             integrated = integrate_solver_output(
                 reuse_out,
@@ -2039,6 +2048,7 @@ def run_learning_episode(
                 repo_root=repo_root,
                 retry_context=retry_context,
                 verification_problem=learned_problem,
+                verification_effect_root=effect_root,
             )
             return {
                 "schema": SCHEMA,
@@ -2060,6 +2070,7 @@ def run_learning_episode(
                 repo_root=repo_root,
                 retry_context=retry_context,
                 verification_problem=learned_problem,
+                verification_effect_root=effect_root,
             )
             return {
                 "schema": SCHEMA,
@@ -2103,6 +2114,7 @@ def run_learning_episode(
         repo_root=repo_root,
         episode_verification_provider=episode_verification_provider,
         skill_verification_provider=skill_verification_provider,
+        effect_root=effect_root,
     )
     integrated = integrate_solver_output(
         out,
@@ -2110,6 +2122,7 @@ def run_learning_episode(
         repo_root=repo_root,
         retry_context=retry_context,
         verification_problem=problem,
+        verification_effect_root=effect_root,
     )
     return {
         "schema": SCHEMA,
