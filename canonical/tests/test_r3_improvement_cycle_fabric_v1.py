@@ -1,0 +1,56 @@
+from __future__ import annotations
+
+import unittest
+from unittest import mock
+
+from canonical.runtime import unified_cognitive_fabric_v1 as fabric
+
+
+class R3ImprovementCycleFabricTests(unittest.TestCase):
+    def test_canonical_fabric_exposes_improvement_cycle(self):
+        fake = {
+            "schema": "PROJECT_BRAIN_R3_IMPROVEMENT_QUEUE_DRIVER_V1",
+            "status": "IMPROVEMENT_QUEUE_STABLE",
+            "pass": True,
+            "progress_count": 0,
+            "actions": [],
+            "terminal_authority": False,
+        }
+        with mock.patch.object(fabric.improvement_driver, "drain", return_value=fake) as drain:
+            out = fabric.run(
+                {
+                    "mode": "IMPROVEMENT_CYCLE",
+                    "payload": {},
+                    "options": {"max_improvement_actions": 3},
+                }
+            )
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
+        self.assertEqual(out["mode"], "IMPROVEMENT_CYCLE")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(out["result"], fake)
+        drain.assert_called_once()
+        self.assertEqual(drain.call_args.kwargs["max_actions"], 3)
+
+    def test_success_adapter_provider_reaches_driver(self):
+        adapter = object()
+        fake = {
+            "schema": "PROJECT_BRAIN_R3_IMPROVEMENT_QUEUE_DRIVER_V1",
+            "status": "IMPROVEMENT_QUEUE_STABLE",
+            "pass": True,
+            "progress_count": 0,
+            "actions": [],
+            "terminal_authority": False,
+        }
+        with mock.patch.object(fabric.improvement_driver, "drain", return_value=fake) as drain:
+            fabric.run(
+                {"mode": "IMPROVEMENT_CYCLE", "payload": {}, "options": {}},
+                success_episode_adapter_provider=adapter,
+            )
+        self.assertIs(
+            drain.call_args.kwargs["success_episode_adapter_provider"],
+            adapter,
+        )
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

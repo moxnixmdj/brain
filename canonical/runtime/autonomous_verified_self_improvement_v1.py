@@ -795,6 +795,7 @@ def integrate_solver_output(
     *,
     state_path: str | Path = DEFAULT_STATE_PATH,
     retry_context: Mapping[str, Any] | None = None,
+    verification_problem: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Persist only independently verified learning and update Pareto reuse state."""
     if not isinstance(out, Mapping):
@@ -906,6 +907,15 @@ def integrate_solver_output(
                     "program_sha256": _s(raw_ep.get("program_sha256")),
                     "trace_sha256": _s(raw_ep.get("trace_sha256")),
                     "verification_error": _s(out.get("episode_verification_error")) or None,
+                    "episode": deepcopy(dict(raw_ep)),
+                    "trace": deepcopy(list(out.get("trace") or [])),
+                    "problem": (
+                        deepcopy(dict(verification_problem))
+                        if isinstance(verification_problem, Mapping)
+                        else None
+                    ),
+                    "fact_capsule_head_hash": _s(out.get("state_capsule_head_hash")),
+                    "value_capsule_head_hash": _s(out.get("value_capsule_head_hash")),
                 },
             )
 
@@ -1736,7 +1746,12 @@ def run_learning_episode(
                 episode_verification_provider=episode_verification_provider,
                 skill_verification_provider=skill_verification_provider,
             )
-            integrated = integrate_solver_output(reuse_out, state_path=state_path, retry_context=retry_context)
+            integrated = integrate_solver_output(
+                reuse_out,
+                state_path=state_path,
+                retry_context=retry_context,
+                verification_problem=learned_problem,
+            )
             return {
                 "schema": SCHEMA,
                 "status": integrated["status"],
@@ -1751,7 +1766,12 @@ def run_learning_episode(
                 "terminal_authority": False,
             }
         if effectful:
-            integrated = integrate_solver_output(reuse_out, state_path=state_path, retry_context=retry_context)
+            integrated = integrate_solver_output(
+                reuse_out,
+                state_path=state_path,
+                retry_context=retry_context,
+                verification_problem=learned_problem,
+            )
             return {
                 "schema": SCHEMA,
                 "status": "FAIL_CLOSED__LEARNED_ROUTE_EFFECT_OCCURRED__NO_BLIND_REPLAY",
@@ -1795,7 +1815,12 @@ def run_learning_episode(
         episode_verification_provider=episode_verification_provider,
         skill_verification_provider=skill_verification_provider,
     )
-    integrated = integrate_solver_output(out, state_path=state_path, retry_context=retry_context)
+    integrated = integrate_solver_output(
+        out,
+        state_path=state_path,
+        retry_context=retry_context,
+        verification_problem=problem,
+    )
     return {
         "schema": SCHEMA,
         "status": integrated["status"],

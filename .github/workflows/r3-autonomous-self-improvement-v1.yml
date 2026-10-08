@@ -4,12 +4,14 @@ on:
   pull_request:
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+      - "canonical/runtime/r3_improvement_queue_driver_v1.py"
       - "canonical/runtime/executable_skill_program_v7.py"
       - "canonical/runtime/executable_skill_verification_authenticator_v1.py"
       - "canonical/runtime/live_brain_runtime_v1.py"
       - "canonical/runtime/universal_verified_adaptive_solver_v12.py"
       - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
+      - "canonical/tests/test_r3_improvement_queue_driver_v1.py"
       - "canonical/tests/test_r3_verified_cross_scope_generalization_v1.py"
       - "canonical/tests/test_verified_repair_replay_loop_v1.py"
       - "canonical/tests/test_live_brain_runtime_v1.py"
@@ -22,12 +24,14 @@ on:
       - "r3-final-ci-gate-20261008"
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+      - "canonical/runtime/r3_improvement_queue_driver_v1.py"
       - "canonical/runtime/executable_skill_program_v7.py"
       - "canonical/runtime/executable_skill_verification_authenticator_v1.py"
       - "canonical/runtime/live_brain_runtime_v1.py"
       - "canonical/runtime/universal_verified_adaptive_solver_v12.py"
       - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
+      - "canonical/tests/test_r3_improvement_queue_driver_v1.py"
       - "canonical/tests/test_r3_verified_cross_scope_generalization_v1.py"
       - "canonical/tests/test_verified_repair_replay_loop_v1.py"
       - "canonical/tests/test_live_brain_runtime_v1.py"
@@ -48,6 +52,7 @@ jobs:
         run: >-
           python -m py_compile
           canonical/runtime/autonomous_verified_self_improvement_v1.py
+          canonical/runtime/r3_improvement_queue_driver_v1.py
           canonical/runtime/executable_skill_program_v7.py
           canonical/runtime/executable_skill_verification_authenticator_v1.py
           canonical/runtime/live_brain_runtime_v1.py
@@ -56,6 +61,8 @@ jobs:
         run: python -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v
       - name: Run R3 verified cross-scope generalization suite
         run: python -m unittest canonical.tests.test_r3_verified_cross_scope_generalization_v1 -v
+      - name: Run R3 queue-driver regression suite
+        run: python -m unittest canonical.tests.test_r3_improvement_queue_driver_v1 -v
       - name: Run R3 repair replay regression suite
         run: python -m unittest canonical.tests.test_verified_repair_replay_loop_v1 -v
       - name: Run R3 live runtime regression suite
