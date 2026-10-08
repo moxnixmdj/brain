@@ -59,7 +59,15 @@ def _empty() -> dict[str, Any]:
             "skills": [], "failures": []}
 
 
-def load_state(*, repo_root: str | Path, state_path: str | Path) -> tuple[dict[str, Any], bytes | None]:
+def _require_independence(kind: str, record: Mapping[str, Any],
+                          independent_authority: Callable[[str, Mapping[str, Any]], bool] | None) -> None:
+    if independent_authority is None or independent_authority(kind, record) is not True:
+        raise CompoundingError("INDEPENDENT_EXECUTION_NOT_AUTHENTICATED:" + kind)
+
+
+def load_state(*, repo_root: str | Path, state_path: str | Path,
+               independent_authority: Callable[[str, Mapping[str, Any]], bool] | None = None
+               ) -> tuple[dict[str, Any], bytes | None]:
     path = _state_path(repo_root, state_path)
     original = path.read_bytes() if path.is_file() else None
     try:
@@ -73,6 +81,7 @@ def load_state(*, repo_root: str | Path, state_path: str | Path) -> tuple[dict[s
             raise CompoundingError("LEARNING_STATE_INVALID:" + key)
     seen_episodes: set[str] = set()
     for ep in state["episodes"]:
+        _require_independence("episode", ep, independent_authority)
         verdict = reauthenticate_record(ep, repo_root=repo_root)
         if verdict.get("pass") is not True:
             raise CompoundingError("STORED_EPISODE_REAUTH_FAILED:" + str(verdict.get("reason")))
@@ -109,6 +118,7 @@ def load_state(*, repo_root: str | Path, state_path: str | Path) -> tuple[dict[s
         sha = candidate.get("candidate_sha256")
         if sha not in stored_candidates or stored_candidates[sha] != candidate:
             raise CompoundingError("STORED_SKILL_CANDIDATE_NOT_ADMITTED")
+        _require_independence("skill", item, independent_authority)
         verdict = authenticate_and_verify(candidate, binding, repo_root=repo_root)
         if verdict.get("pass") is not True:
             raise CompoundingError("STORED_SKILL_REAUTH_FAILED:" + str(verdict.get("reason")))
@@ -170,11 +180,14 @@ def _induce_all(state: dict[str, Any]) -> int:
 def reconcile(*, repo_root: str | Path, state_path: str | Path,
               candidate_verification_bindings: Mapping[str, Mapping[str, Any]] | None = None,
               candidate_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+              independent_authority: Callable[[str, Mapping[str, Any]], bool] | None = None,
               new_episode: Mapping[str, Any] | None = None,
               failure: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Ingest a solver episode or failure; promote only independently verified skills."""
-    state, original = load_state(repo_root=repo_root, state_path=state_path)
+    state, original = load_state(repo_root=repo_root, state_path=state_path,
+                                 independent_authority=independent_authority)
     if new_episode is not None:
+        _require_independence("episode", new_episode, independent_authority)
         verdict = reauthenticate_record(new_episode, repo_root=repo_root)
         if verdict.get("pass") is not True:
             raise CompoundingError("NEW_EPISODE_REAUTH_FAILED:" + str(verdict.get("reason")))
@@ -209,13 +222,15 @@ def reconcile(*, repo_root: str | Path, state_path: str | Path,
                 bindings[digest] = offered
         if digest not in bindings:
             continue
+        _require_independence("skill", {"candidate": candidate, "binding": bindings[digest]}, independent_authority)
         verdict = authenticate_and_verify(candidate, bindings[digest], repo_root=repo_root)
         if verdict.get("pass") is not True:
             raise CompoundingError("CANDIDATE_VERIFICATION_FAILED:" + str(verdict.get("reason")))
         state["skills"].append({"candidate": candidate, "binding": dict(bindings[digest])})
         verified.add(digest)
         promoted += 1
-    if _canon(state) != _canon(load_state(repo_root=repo_root, state_path=state_path)[0]):
+    if _canon(state) != _canon(load_state(repo_root=repo_root, state_path=state_path,
+                                          independent_authority=independent_authority)[0]):
         _save(state, original=original, repo_root=repo_root, state_path=state_path)
     return {
         "schema": SCHEMA, "status": "RECONCILED__GATED_COMPOUNDING",
@@ -237,9 +252,11 @@ def run(problem: Mapping[str, Any], *, repo_root: str | Path,
         candidate_verification_bindings: Mapping[str, Mapping[str, Any]] | None = None,
         episode_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
         candidate_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+        independent_authority: Callable[[str, Mapping[str, Any]], bool] | None = None,
         **solver_kwargs: Any) -> dict[str, Any]:
     """Execute V12, retain only authenticated learning, and reuse verified macros."""
-    state, _ = load_state(repo_root=repo_root, state_path=state_path)
+    state, _ = load_state(repo_root=repo_root, state_path=state_path,
+                          independent_authority=independent_authority)
     if any(ep["episode_id"] == episode_id for ep in state["episodes"]):
         raise CompoundingError("EPISODE_ID_ALREADY_RECORDED")
     forbidden = {"prior_verified_episode_records", "verified_skill_records",
@@ -277,6 +294,7 @@ def run(problem: Mapping[str, Any], *, repo_root: str | Path,
         failure=result if result.get("pass") is not True else None,
         candidate_verification_bindings=candidate_verification_bindings,
         candidate_verifier=candidate_verifier,
+        independent_authority=independent_authority,
     )
     return {**result, "r3_learning": learning,
             "r3_post_execution_episode_authentication": late_auth,
