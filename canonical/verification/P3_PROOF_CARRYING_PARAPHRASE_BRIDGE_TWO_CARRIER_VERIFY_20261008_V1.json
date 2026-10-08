@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_P3_PROOF_CARRYING_PARAPHRASE_BRIDGE_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_CARRIERS__17_OF_17_EACH__ZERO_TERMINAL_CREDIT",
+  "research_branch": "research/p3-proof-carrying-paraphrase-v1",
+  "subject": {
+    "entailment_runtime": {"path":"canonical/runtime/proof_carrying_proposition_entailment_v1.py","git_blob_sha":"60596c63159785a6bcb7e9437a02cb8a8e0543fd"},
+    "support_truth_v5": {"path":"canonical/runtime/selected_support_truth_certificate_v5.py","git_blob_sha":"979dbb024e98ee29c86cbfa97a5f4cb94dd1bd10"},
+    "entailment_tests": {"path":"canonical/tests/test_proof_carrying_proposition_entailment_v1.py","git_blob_sha":"73639d55c1f579c62acafee3338982886b6a7f77"},
+    "support_truth_tests": {"path":"canonical/tests/test_selected_support_truth_certificate_v5.py","git_blob_sha":"56456a3a5f1b92ca59f1b40340f8a94fe9379b8e"}
+  },
+  "primary_execution": {
+    "provider":"SPRITES",
+    "sprite":"brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "mode":"FULL_BRAIN_TREE_WITH_EXACT_BRANCH_BLOBS_OVERLAID",
+    "result":{"passed":17,"failed":0}
+  },
+  "independent_execution": {
+    "provider":"SPRITES",
+    "sprite":"brain-tbscience-v18-authority-verify-20261007-v1",
+    "sprite_id":"sprite-712e57be-f9ab-4d02-a590-62d84addd99e",
+    "mode":"MINIMAL_EXACT_BLOB_CAPSULE_WITH_ZERO_DEPENDENCY_ASSERT_RUNNER",
+    "result":{"passed":17,"failed":0},
+    "note":"PYTEST_NOT_INSTALLED_ON_CARRIER__PLAIN_ASSERT_TEST_FUNCTIONS_EXECUTED_BY_ZERO_DEPENDENCY_RUNNER"
+  },
+  "verified_properties": [
+    "CONTENT_ADDRESSED_RELATION_AND_VERIFICATION_RECEIPTS_ARE_RECOMPUTED",
+    "TEST_ONLY_SEMANTIC_RELATIONS_ARE_REJECTED_IN_PRODUCTION_MODE",
+    "BLOB_MISMATCH_AND_ENDPOINT_REUSE_FAIL_CLOSED",
+    "UNSUPPORTED_TRANSFORMATION_KINDS_RETURN_UNKNOWN",
+    "CHAIN_MUST_TERMINATE_AT_EXACT_CLAIM",
+    "EXISTING_SOURCE_DECLARED_EQUIVALENCE_ATTESTATION_NUMERIC_AND_FACT_GRAMMARS_HAVE_PRECEDENCE",
+    "CALLER_SEMANTIC_PROOF_CANNOT_OVERRIDE_AN_EXISTING_NUMERIC_SUPPORT_OR_CONFLICT_RESULT",
+    "UNRESOLVED_PARAPHRASE_STAYS_UNKNOWN_WITHOUT_A_VERIFIED_CHAIN",
+    "VERIFIED_TEST_RELATION_CAN_CLOSE_A_PREVIOUSLY_UNKNOWN_WHOLE_PROPOSITION_CELL",
+    "NO_SOURCE_POLICY_DB_U_OR_TERMINAL_AUTHORITY_ESCALATION"
+  ],
+  "remaining_real_activation_requirement": "BIND_REAL_PRODUCTION_SEMANTIC_RELATION_RECEIPTS_AND_INDEPENDENT_VERIFICATIONS_FOR_ACTUAL_P3_POLICY_CHANGING_COUNTEREXAMPLES",
+  "hard_nonclaims": [
+    "NO_REAL_P3_PARAPHRASE_CELL_CLOSED_BY_THE_SYNTHETIC_TEST_FIXTURE",
+    "NO_GENERAL_NLI",
+    "NO_GLOBAL_P3_CLOSURE",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
