@@ -9,11 +9,14 @@ Current admitted scope:
 - non-effectful Universal Solver episodes whose accepted proposals can be
   deterministically rechecked by the Brain-owned built-in verifiers;
 - exact-scope executable-skill candidates recomputed from already authenticated
-  source episodes.
+  source episodes;
+- PROVEN_SUPERSET planning-scope claims only for STRUCTURAL_MATCH_V1 when every
+  source episode was independently proved non-effectful, the candidate is exact
+  re-induction, and its program is structurally closed. Reuse still passes the
+  runtime structural guard and fresh V12 execution verification.
 
 Effectful episodes are intentionally not replayed. Without an independently
 re-readable effect root in the verification request, they remain fail-closed.
-Likewise this worker never manufactures PROVEN_SUPERSET scope claims.
 
 No terminal, capability, ownership, or execution authority is granted here.
 """
