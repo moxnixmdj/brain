@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_P3_CURRENT_CAUSAL_FRONTIER_20261008_V15",
+  "date": "2026-10-08",
+  "status": "ACTIVE_CONCURRENCY_RECONCILIATION__V14_BOUND_BINARY_MECHANICS_PRESERVED__V8_IS_CURRENT_FRONT_DOOR__SEMANTIC_SCOPE_MEMBERSHIP_REMAINS_OPEN__ZERO_TERMINAL_CREDIT",
+  "reconciles": [
+    {
+      "path": "canonical/governance/P3_CURRENT_CAUSAL_FRONTIER_20261008_V14.json",
+      "git_blob_sha": "8560e50d18bb103cd059b2c765f4a5c86070c838",
+      "role": "BOUND_BINARY_CELL_MECHANICAL_CLOSURE_AND_REMAINING_SCOPE_ROOT"
+    },
+    {
+      "path": "canonical/runtime/p3_real_context_v3_admission_v8.py",
+      "git_blob_sha": "3c2dbc056ec86424a5455a41ab552d2160f14eea",
+      "role": "CURRENT_FRONT_DOOR_WITH_FAIL_CLOSED_EXPLICIT_SELECTION_AUTHORITY"
+    },
+    {
+      "path": "canonical/verification/P3_REAL_CONTEXT_V8_EXPLICIT_AUTHORITY_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "0097b3670ffc2c890858f1af49846849b20713bb",
+      "role": "CURRENT_FRONT_DOOR_EXACT_BYTE_VERIFICATION"
+    }
+  ],
+  "current_front_door": "canonical/runtime/p3_real_context_v3_admission_v8.py",
+  "preserved_v14_truth": {
+    "bound_binary_positive_optional_relevance_verified": true,
+    "objective_role_order_verified": true,
+    "binary_decision_derivation_verified": true,
+    "derived_decision_expression_verified_for_declared_bounded_format_cell": true,
+    "real_context_top_law_scope_membership_authenticated": false,
+    "policy_adequacy_closed_for_bound_binary_cell": false
+  },
+  "v8_additional_truth": {
+    "undeclared_contract_fields_fail_closed": true,
+    "nonexplicit_named_audience_profile_semantics_fail_closed": true,
+    "explicit_objective_weights_are_binding_when_supplied": true,
+    "exact_decision_dependency_contract_is_binding_when_supplied": true,
+    "simultaneous_explicit_selection_authorities_without_precedence_proof_fail_closed": true,
+    "declared_contract_surface_semantic_completeness_proved": false
+  },
+  "current_single_bound_root": "AUTHENTICATE_SEMANTIC_COMPLETENESS_OF_THE_AUTHORITATIVE_REAL_CONTEXT_CONTRACT_FOR_THE_BOUND_BINARY_CELL__SYNTACTIC_SURFACE_CLOSURE_FROM_V8_IS_NECESSARY_BUT_NOT_SUFFICIENT",
+  "minimum_information_cut": {
+    "missing_fact": "AUTHORITATIVE_INGRESS_OR_LOSSLESS_SOURCE_TO_CONTRACT_EVIDENCE_THAT_NO_UNDECLARED_LOAD_BEARING_SEMANTIC_REQUIREMENT_CAN_CHANGE_THE_BOUND_POLICY",
+    "self_certification_permitted": false,
+    "accepted_routes": [
+      "CONTENT_BOUND_UPSTREAM_TASK_INGRESS_AUTHORITY_EXPLICITLY_DECLARES_THE_NORMALIZED_CONTRACT_EXHAUSTIVE",
+      "SOURCE_CONTRACT_COMPLETENESS_V2_PROVES_LOSSLESS_SOURCE_COVERAGE_PLUS_INDEPENDENT_SEMANTIC_DECOMPOSITION_CONSENSUS_AND_TRACEABILITY_TO_THE_NORMALIZED_REQUIREMENTS"
+    ],
+    "rejected_shortcuts": [
+      "ABSENCE_OF_UNKNOWN_JSON_FIELDS_ALONE",
+      "SOLVER_ASSERTS_ITS_OWN_INPUT_IS_COMPLETE",
+      "SYNTHESIS_SCOPE_CERTIFICATE_OVEREXTENSION_TO_WHOLE_INPUT_DOMAIN"
+    ]
+  },
+  "scheduler_rules": [
+    "USE_V8_AS_THE_ONLY_CURRENT_P3_FRONT_DOOR.",
+    "DO_NOT_REOPEN_BOUND_BINARY_RELEVANCE_ORDER_DECISION_DERIVATION_OR_DECISION_EXPRESSION_MECHANICS.",
+    "DO_NOT_TREAT_V8_SURFACE_GUARD_AS_SEMANTIC_COMPLETENESS.",
+    "FOR_THE_BOUND_BINARY_CELL_ACQUIRE_ONLY_THE_AUTHORITATIVE_SCOPE_MEMBERSHIP_RECEIPT_OR_A_LOSSLESS_SOURCE_TO_CONTRACT_COMPLETENESS_PROOF.",
+    "GLOBAL_U_SCHEDULER_MAY_BYPASS_THIS_LOCAL_ROOT_IF_A_STRONGER_SOUND_SCOPE_COMPLETE_POSITIVE_COVER_CLOSES_FIRST."
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_P3_CLOSURE",
+    "NO_SELF_CERTIFIED_SEMANTIC_COMPLETENESS",
+    "NO_POLICY_ADEQUACY_DB_ADMISSION_U_SUBTRACTION_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "whole_p3_closed": false,
+  "u_empty_proved": false,
+  "terminal": false,
+  "terminal_credit_delta": 0
+}
