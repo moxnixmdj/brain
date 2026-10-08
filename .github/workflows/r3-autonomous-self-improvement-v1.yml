@@ -4,19 +4,24 @@ on:
   pull_request:
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+      - "canonical/runtime/live_brain_runtime_v1.py"
       - "canonical/runtime/universal_verified_adaptive_solver_v12.py"
       - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
+      - "canonical/tests/test_live_brain_runtime_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
   push:
     branches:
       - "main"
       - "r3-autonomous-self-improvement-v1-20261008"
+      - "r3-autonomous-repair-closure-20261008"
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+      - "canonical/runtime/live_brain_runtime_v1.py"
       - "canonical/runtime/universal_verified_adaptive_solver_v12.py"
       - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
+      - "canonical/tests/test_live_brain_runtime_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
 
 jobs:
@@ -28,5 +33,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Run R3 regression suite
-        run: python -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v
+      - name: Compile R3 live runtime
+        run: python -m py_compile canonical/runtime/autonomous_verified_self_improvement_v1.py canonical/runtime/live_brain_runtime_v1.py
+      - name: Run R3 regression suites
+        run: python -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 canonical.tests.test_live_brain_runtime_v1 -v
