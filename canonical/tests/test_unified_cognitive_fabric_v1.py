@@ -12,6 +12,19 @@ from canonical.runtime.unified_cognitive_fabric_v1 import catalog, run
 
 
 class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
+    def setUp(self):
+        self._state_tmp = tempfile.TemporaryDirectory()
+        self._state_patch = patch.object(
+            r3,
+            "DEFAULT_STATE_PATH",
+            Path(self._state_tmp.name) / "SELF_IMPROVEMENT_STATE_V1.json",
+        )
+        self._state_patch.start()
+
+    def tearDown(self):
+        self._state_patch.stop()
+        self._state_tmp.cleanup()
+
     def test_catalog_exposes_single_front_door(self):
         c = catalog()
         self.assertEqual(c["status"], "LIVE_FEDERATED_COGNITIVE_FABRIC")
