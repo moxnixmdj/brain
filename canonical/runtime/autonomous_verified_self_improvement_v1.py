@@ -44,6 +44,7 @@ from canonical.runtime.universal_solver_episode_verification_authenticator_v1 im
 from canonical.runtime import universal_verified_adaptive_solver_v12 as solver_v12
 
 SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1"
+VERIFIED_SUPERSET_SCOPE_PREDICATE = "STRUCTURAL_MATCH_V1"
 STATE_SCHEMA = "PROJECT_BRAIN_SELF_IMPROVEMENT_STATE_V1"
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_STATE_PATH = ROOT / "canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json"
@@ -213,12 +214,16 @@ def _skill_pareto_row(skill_id: str, skill: Mapping[str, Any]) -> dict[str, Any]
             raise SelfImprovementError("VERIFIED_SKILL_STEP_INVALID")
         io_width += len(_items(step.get("inputs"))) + len(_items(step.get("outputs")))
 
+    generalized = (
+        relation == "PROVEN_SUPERSET"
+        and _s(skill.get("scope_predicate")) == VERIFIED_SUPERSET_SCOPE_PREDICATE
+    )
     return {
         "capability_id": skill_id,
         "reusable_capability": True,
         "independently_verified": True,
         "capability": len(_items(skill.get("postconditions"))),
-        "generalization": 2 if relation == "PROVEN_SUPERSET" else 1,
+        "generalization": 2 if generalized else 1,
         "reliability": len(source_ids),
         "latency": len(steps),
         "compute": len(steps),
@@ -709,7 +714,12 @@ def integrate_solver_output(
                 ),
                 resolved_by=sid,
             )
-            if _s(verified_skill.get("scope_relation")) == "EXACT":
+            verified_generalization = (
+                _s(verified_skill.get("scope_relation")) == "PROVEN_SUPERSET"
+                and _s(verified_skill.get("scope_predicate"))
+                == VERIFIED_SUPERSET_SCOPE_PREDICATE
+            )
+            if not verified_generalization:
                 _enqueue_improvement(
                     state,
                     kind="SEEK_VERIFIED_SCOPE_GENERALIZATION",
@@ -929,7 +939,9 @@ def _select_active_skill(
     """Select a durable verified skill only when its exact executable skeleton fits.
 
     V1 reuse is deliberately conservative:
-    - current scope must be one of the independently verified source scopes;
+    - EXACT skills remain limited to independently verified source scopes;
+    - PROVEN_SUPERSET skills may cross scope only when independent verification
+      binds STRUCTURAL_MATCH_V1;
     - every stored invalidator must be explicitly known absent;
     - current capability ids and requires/provides must exactly match every skill step;
     - the skill preconditions must already hold and its postconditions must cover
@@ -970,7 +982,19 @@ def _select_active_skill(
             continue
         if skill.get("verified_skill") is not True or skill.get("reuse_authorized") is not True:
             continue
-        if scope_id not in _items(skill.get("source_scopes")):
+        relation = _s(skill.get("scope_relation"))
+        source_scopes = set(_items(skill.get("source_scopes")))
+        if relation == "EXACT":
+            if scope_id not in source_scopes:
+                continue
+        elif relation == "PROVEN_SUPERSET":
+            # Historical/unbound superset receipts remain source-scope-only.
+            # Cross-scope reuse is authorized only by an independently bound,
+            # machine-defined structural predicate.
+            if _s(skill.get("scope_predicate")) != VERIFIED_SUPERSET_SCOPE_PREDICATE:
+                if scope_id not in source_scopes:
+                    continue
+        else:
             continue
         invalidators = set(_items(skill.get("invalidators")))
         if not invalidators.issubset(absent):
@@ -1266,6 +1290,7 @@ def _post_execution_independent_verification(
             "kind": "SKILL_VERIFICATION",
             "candidate": deepcopy(dict(candidate)),
             "current_episode": deepcopy(dict(result.get("current_episode") or {})),
+            "supported_scope_predicates": [VERIFIED_SUPERSET_SCOPE_PREDICATE],
         }
         try:
             binding = skill_verification_provider(deepcopy(request))
