@@ -20,20 +20,24 @@ class R2GroundedCandidatePolicyFrontierV1Tests(unittest.TestCase):
             out["status"],
             "PASS__VERIFIED_GROUNDING_EXPOSED_AS_UNTRUSTED_POLICY_FRONTIER",
         )
-        self.assertIn(
-            "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest",
-            out["policy_conditions"],
+        policy_id = frontier.goal_scoped_policy_id(
+            "python.tests.audit.unittest",
+            "Audit the Python tests with unittest and report passed failed and skipped counts.",
         )
-        self.assertEqual(
-            out["policy_conditions"][
-                "BOUND_CAPABILITY_POLICY::python.tests.audit.unittest"
-            ],
-            {"op": "TRUE"},
-        )
+        self.assertIn(policy_id, out["policy_conditions"])
+        self.assertEqual(out["policy_conditions"][policy_id], {"op": "TRUE"})
+        self.assertEqual(out["policy_identity_scope"], "EXACT_RAW_GOAL_SHA256")
         self.assertFalse(out["policy_adequacy_authority"])
         self.assertFalse(out["semantic_truth_authority"])
         self.assertFalse(out["execution_authority"])
         self.assertTrue(out["candidate_only"])
+
+    def test_same_capability_is_distinct_policy_for_distinct_raw_goals(self):
+        a = frontier.goal_scoped_policy_id("python.tests.audit.unittest", "goal a")
+        b = frontier.goal_scoped_policy_id("python.tests.audit.unittest", "goal b")
+        self.assertNotEqual(a, b)
+        self.assertTrue(a.startswith(frontier.POLICY_PREFIX + "python.tests.audit.unittest"))
+        self.assertTrue(b.startswith(frontier.POLICY_PREFIX + "python.tests.audit.unittest"))
 
     def test_unknown_goal_stays_unresolved_instead_of_inventing_policy(self):
         out = frontier.propose(
