@@ -205,13 +205,40 @@ def evaluate(
     if errors:
         return _fail("SOURCE_CONTRACT_NOT_SCOPE_COMPLETE", errors=sorted(set(errors)))
 
-    # After semantic consensus passes, any extractor may be used as the exact
-    # consensus signature because boundaries, kind, and fingerprint are equal.
+    # Strengthen the generic compiler for this membership proof: every
+    # non-whitespace source character, not only lexically risky text, must be
+    # semantically classified by every extractor. This prevents an apparently
+    # "informative" tail from silently carrying a load-bearing audience,
+    # uncertainty, or decision requirement outside the structured contract.
     extractor_ids = sorted(str(x) for x in extractors)
     if len(extractor_ids) < 2:
         return _fail("INDEPENDENT_SEMANTIC_EXTRACTORS_LT_2")
+    atom_by_id = {a.atom_id: a for a in atoms}
+    for extractor_id in extractor_ids:
+        covered = {aid: set() for aid in atom_by_id}
+        for unit in extractors[extractor_id]:
+            if not isinstance(unit, Mapping):
+                return _fail("SEMANTIC_UNIT_INVALID", extractor_id=extractor_id)
+            aid = unit.get("atom_id")
+            start = unit.get("start")
+            end = unit.get("end")
+            if aid not in atom_by_id or type(start) is not int or type(end) is not int:
+                return _fail("SEMANTIC_UNIT_RANGE_INVALID", extractor_id=extractor_id)
+            if start < 0 or end <= start or end > len(atom_by_id[aid].text):
+                return _fail("SEMANTIC_UNIT_RANGE_INVALID", extractor_id=extractor_id)
+            covered[aid].update(range(start, end))
+            if unit.get("kind") == "AMBIGUOUS":
+                return _fail("OPEN_SEMANTIC_AMBIGUITY", extractor_id=extractor_id)
+        for aid, atom in atom_by_id.items():
+            required_positions = {i for i, ch in enumerate(atom.text) if not ch.isspace()}
+            if not required_positions.issubset(covered[aid]):
+                return _fail("SEMANTIC_SOURCE_TEXT_NOT_FULLY_COVERED", extractor_id=extractor_id, atom_id=aid)
+
+    # After semantic consensus passes, any extractor may be used as the exact
+    # consensus signature because boundaries, kind, and fingerprint are equal.
     reference_units = extractors[extractor_ids[0]]
     unit_fingerprint: dict[str, str] = {}
+    unit_kind: dict[str, str] = {}
     unit_seen_count: dict[str, int] = {}
     from canonical.runtime.source_contract_compiler import semantic_unit_id
 
@@ -228,6 +255,7 @@ def evaluate(
         if not isinstance(fp, str) or not fp:
             return _fail("REFERENCE_SEMANTIC_FINGERPRINT_MISSING")
         unit_fingerprint[sid] = fp
+        unit_kind[sid] = str(unit.get("kind"))
         unit_seen_count[sid] = 0
 
     requirement_ids: set[str] = set()
@@ -277,6 +305,13 @@ def evaluate(
     duplicate_units = sorted(sid for sid, count in unit_seen_count.items() if count > 1)
     if duplicate_units:
         return _fail("SEMANTIC_UNIT_MULTI_REQUIREMENT_BINDING", unit_ids=duplicate_units)
+    operative_kinds = {"BEHAVIOR", "ENVIRONMENT", "RESOURCE", "SOURCE_BOUNDARY", "EVALUATION"}
+    unbound_operative = sorted(
+        sid for sid, kind in unit_kind.items()
+        if kind in operative_kinds and unit_seen_count.get(sid, 0) != 1
+    )
+    if unbound_operative:
+        return _fail("OPERATIVE_SEMANTIC_UNIT_NOT_EXACTLY_BOUND", unit_ids=unbound_operative)
 
     expression = evaluate_expression({"objective": objective, "v2_input": public})
     if expression.get("pass") is not True:
@@ -302,6 +337,9 @@ def evaluate(
         "selected_class_membership_authenticated": True,
         "real_context_semantic_scope_complete": True,
         "source_authorization_verified": True,
+        "complete_source_semantic_coverage_verified": True,
+        "no_open_semantic_ambiguity": True,
+        "no_load_bearing_semantic_requirement_outside_exact_binary_contract": True,
         "top_law_eligible": True,
         "structured_contract_sha256": structured_contract_sha256,
         "projection_hashes": projection_hashes,
