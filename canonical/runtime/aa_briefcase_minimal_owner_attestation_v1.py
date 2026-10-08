@@ -4,6 +4,10 @@ import hashlib
 import json
 from typing import Any, Mapping, Sequence
 
+from canonical.runtime.aa_briefcase_owner_signature_verifier_v1 import (
+    verify_owner_signature,
+)
+
 SCHEMA = "PROJECT_BRAIN_AA_BRIEFCASE_MINIMAL_OWNER_ATTESTATION_V1"
 STATEMENT_TYPE = "https://in-toto.io/Statement/v1"
 PREDICATE_TYPE = "https://project-brain.local/attestation/aa-briefcase-current-epoch-noninferiority/v1"
@@ -48,7 +52,8 @@ def _one_subject(statement: Mapping[str, Any]) -> Mapping[str, Any]:
 def verify_minimal_owner_attestation(
     current_target: Mapping[str, Any],
     statement: Mapping[str, Any],
-    signature_verification: Mapping[str, Any],
+    signature_bundle: Mapping[str, Any],
+    owner_key_binding: Mapping[str, Any],
 ) -> dict[str, Any]:
     if not isinstance(current_target, Mapping):
         raise OwnerAttestationError("TARGET_INVALID")
@@ -102,10 +107,11 @@ def verify_minimal_owner_attestation(
     if predicate.get("historical_1822_epoch_rewritten") is not False:
         raise OwnerAttestationError("HISTORICAL_EPOCH_REWRITE_FORBIDDEN")
 
-    if not isinstance(signature_verification, Mapping):
-        raise OwnerAttestationError("SIGNATURE_VERIFICATION_INVALID")
-    if signature_verification.get("status") != "VERIFIED":
-        raise OwnerAttestationError("SIGNATURE_NOT_VERIFIED")
+    signature_verification = verify_owner_signature(
+        statement,
+        signature_bundle,
+        owner_key_binding,
+    )
     if signature_verification.get("statement_sha256") != _sha256(statement):
         raise OwnerAttestationError("SIGNED_STATEMENT_DIGEST_MISMATCH")
     if signature_verification.get("attestor_is_benchmark_owner_or_authorized_operator") is not True:
