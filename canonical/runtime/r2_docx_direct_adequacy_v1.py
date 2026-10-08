@@ -30,12 +30,21 @@ from canonical.runtime import docx_goal_compiler
 from canonical.runtime import live_integrated_brain_v1 as live_bound
 from canonical.runtime.bound_capabilities import docx_verify_ooxml_intent
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
-from canonical.runtime.r2_grounded_candidate_policy_frontier_v1 import goal_scoped_policy_id
 
 SCHEMA = "PROJECT_BRAIN_R2_DOCX_DIRECT_ADEQUACY_V1"
 ROOT = Path(__file__).resolve().parents[2]
 PRODUCER = "docx.document.create.python_docx"
 VERIFIER = "docx.document.verify.intent_ooxml"
+POLICY_PREFIX = "BOUND_CAPABILITY_POLICY::"
+GOAL_SCOPE_MARKER = "::RAW_GOAL_SHA256::"
+
+
+def _goal_scoped_policy_id(capability_id: str, goal: str) -> str:
+    cid = str(capability_id or "").strip()
+    text = str(goal or "").strip()
+    if not cid or not text:
+        raise ValueError("CAPABILITY_ID_AND_GOAL_REQUIRED")
+    return POLICY_PREFIX + cid + GOAL_SCOPE_MARKER + sha256(text.encode("utf-8")).hexdigest()
 
 _CREATION = re.compile(
     r"^Create (?P<output>canonical/[A-Za-z0-9_.\-/]+\.docx) "
@@ -235,7 +244,7 @@ def preflight(request: Mapping[str, Any], *, repo_root: str | Path = ROOT) -> di
             "expected": expected,
             "producer_capability_id": PRODUCER,
             "verifier_capability_id": VERIFIER,
-            "policy_id": goal_scoped_policy_id(PRODUCER, goal),
+            "policy_id": _goal_scoped_policy_id(PRODUCER, goal),
             "routing_target_effects": targets,
             "raw_contract": contract,
             "raw_task_contract_sha256": contract["task_contract_sha256"],
