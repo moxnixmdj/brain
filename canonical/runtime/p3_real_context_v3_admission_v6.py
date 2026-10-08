@@ -15,7 +15,10 @@ from typing import Any, Mapping
 
 from canonical.runtime.p3_mechanically_closed_common_policy_cell_v1 import evaluate as evaluate_closed_cell
 from canonical.runtime.p3_explicit_weighted_salience_cell_v1 import evaluate as evaluate_weighted_cell
-from canonical.runtime.p3_required_claim_grounded_realization_cell_v3 import evaluate as evaluate_required_realization
+from canonical.runtime.p3_required_claim_grounded_realization_cell_v3 import (
+    evaluate as evaluate_required_realization,
+    validate_v3_contract_surface,
+)
 from canonical.runtime.p3_real_context_v3_admission_v2 import evaluate as evaluate_v2
 
 SCHEMA="PROJECT_BRAIN_P3_REAL_CONTEXT_V3_ADMISSION_V6"
@@ -61,6 +64,8 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
     if not isinstance(context_id,str) or not context_id.strip():return _fail("CONTEXT_ID_REQUIRED")
     v3_input=payload.get("v3_input")
     if not isinstance(v3_input,Mapping):return _fail("V3_INPUT_REQUIRED")
+    contract_failure=validate_v3_contract_surface(v3_input)
+    if contract_failure is not None:return _fail(contract_failure)
 
     closed=evaluate_closed_cell({"v3_input":v3_input})
     if closed.get("pass") is True:
