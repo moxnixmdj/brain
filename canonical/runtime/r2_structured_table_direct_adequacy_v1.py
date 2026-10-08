@@ -81,6 +81,10 @@ def _inside(root: Path, rel: str) -> Path:
     return p
 
 
+def _sha(path: Path) -> str:
+    return sha256(path.read_bytes()).hexdigest()
+
+
 def _match(goal: str) -> tuple[str, re.Match[str]] | None:
     m = XLSX_GRAMMAR.fullmatch(goal)
     if m is not None:
@@ -173,6 +177,7 @@ def preflight(request: Mapping[str, Any], *, repo_root: str | Path = ROOT) -> di
             "format": fmt,
             "json_path": json_path,
             "output_path": output_path,
+            "source_sha256": _sha(source),
             "columns": [x.strip() for x in match.group("columns").split(",")],
             "table_name": match.groupdict().get("table"),
             "status_value": match.groupdict().get("status"),
@@ -223,6 +228,7 @@ def run(
         return pf
 
     root = Path(repo_root).resolve()
+    source = _inside(root, str(pf["json_path"]))
     destination = _inside(root, str(pf["output_path"]))
     existed = destination.exists()
     prior = destination.read_bytes() if existed else None
@@ -245,12 +251,13 @@ def run(
             or raw.get("raw_goal_sha256") != pf["goal_sha256"]
             or raw.get("raw_source_coverage_complete") is not True
             or not destination.is_file()
+            or _sha(source) != pf["source_sha256"]
         ):
             _restore(destination, existed, prior)
             return {
                 **_base("FAIL_CLOSED"),
                 "matched": True,
-                "reason": "EXECUTION_IDENTITY_OR_OUTPUT_BINDING_MISMATCH",
+                "reason": "EXECUTION_IDENTITY_OUTPUT_OR_SOURCE_IMMUTABILITY_MISMATCH",
                 "transaction_rolled_back": True,
             }
 
@@ -288,6 +295,7 @@ def run(
             "format": pf["format"],
             "json_path": pf["json_path"],
             "output_path": pf["output_path"],
+            "source_sha256": pf["source_sha256"],
             "accepted_raw_obligation_ids": accepted_ids,
             "raw_acceptance_obligation_count": len(accepted_ids),
             "semantic_acceptance_complete": True,
@@ -301,6 +309,7 @@ def run(
                 "ONLY_EXACT_JSON_RECORDS_TO_XLSX_OR_SQLITE_GRAMMARS;"
                 "ONE_REPOSITORY_LOCAL_OUTPUT;VERIFIED_BOUND_PRODUCER;"
                 "PRODUCER_INDEPENDENT_SOURCE_JSON_SEMANTIC_VERIFICATION;"
+                "SOURCE_BYTES_IMMUTABLE;"
                 "NO_EXTERNAL_OR_IRREVERSIBLE_EFFECT_AUTHORITY"
             ),
         }
