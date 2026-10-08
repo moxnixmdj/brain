@@ -1,12 +1,28 @@
 from __future__ import annotations
 
+import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import Mock, patch
 
+from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
 from canonical.runtime import live_brain_runtime_v1 as brain
 
 
 class UnifiedLiveBrainV1Tests(unittest.TestCase):
+    def setUp(self):
+        self._state_tmp = tempfile.TemporaryDirectory()
+        self._state_patch = patch.object(
+            learning,
+            "DEFAULT_STATE_PATH",
+            Path(self._state_tmp.name) / "SELF_IMPROVEMENT_STATE_V1.json",
+        )
+        self._state_patch.start()
+
+    def tearDown(self):
+        self._state_patch.stop()
+        self._state_tmp.cleanup()
+
     def problem(self):
         return {
             "task_id": "t1",
