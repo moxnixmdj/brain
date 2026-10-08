@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_SEMANTIC_DISCRIMINATOR_DISPATCH_ACTIVATION_V1",
+  "date": "2026-10-08",
+  "status": "VERIFIED_EXECUTABLE_SCOPE_BOUNDED_SELECTED_SEMANTIC_DISPATCH__ZERO_TERMINAL_CREDIT",
+  "objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "runtime": {
+    "path": "canonical/runtime/selected_semantic_discriminator_dispatch_v1.py",
+    "git_blob_sha": "59b4c27870689e37fdf9af072c116e282be8daff"
+  },
+  "tests": {
+    "path": "canonical/tests/test_selected_semantic_discriminator_dispatch_v1.py",
+    "git_blob_sha": "746206302b6027507e269238f0f9ac709a666847"
+  },
+  "verification": {
+    "path": "canonical/verification/SELECTED_SEMANTIC_DISCRIMINATOR_DISPATCH_SPRITE_VERIFICATION_20261008_V1.json",
+    "git_blob_sha": "2ba1fa1db57cdd46e54307dc6f4247e9dd493002"
+  },
+  "depends_on": {
+    "path": "canonical/runtime/selected_semantic_truth_certificate_v1.py",
+    "git_blob_sha": "8e6c03547460fc2a27bc18147a873639be678210"
+  },
+  "owned_effect": "IN_ALREADY_SOUND_RAW_TYPED_DEFINED_TERM_SEMANTIC_FRAGMENT__AUTOMATICALLY_RECOMPUTES_BINARY_SEMANTIC_TRUTH_USING_TRUSTED_CHECKER_AND_BINDS_SELECTED_DECISION_WITH_PROVENANCE__WITHOUT_CALLER_TRUTH_GUESS",
+  "execution_interface": "canonical.runtime.selected_semantic_discriminator_dispatch_v1.run",
+  "next_causal_root": "EXTEND_SOUND_SOURCE_ALIGNED_SEMANTIC_PROOF_COVERAGE_TO_ACTUAL_REACHED_P3_CONFLICT_CELLS_THAT_CURRENTLY_RETURN_UNKNOWN__THEN_INDEPENDENTLY_BIND_POLICY_ADEQUACY_AND_COMPLETENESS",
+  "hard_nonclaims": [
+    "NO_GENERAL_NL_SEMANTIC_CAPABILITY_CLAIM",
+    "NO_POLICY_ADEQUACY_FROM_SEMANTIC_TRUTH",
+    "NO_SOURCE_AUTHORIZATION_PROVED_BY_BRANCH_SELECTION",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
