@@ -64,7 +64,30 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         )
         self.assertFalse(c["all_historical_brain_capabilities_unified"])
 
-    def test_raw_goal_dispatches(self):
+    @patch("canonical.runtime.unified_cognitive_fabric_v1.live_runtime.run")
+    def test_raw_goal_compilation_gap_falls_through_to_adequate_decision(self, runtime_run):
+        runtime_run.side_effect = [
+            {
+                "pass": False,
+                "status": "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE",
+                "raw_result": {
+                    "pass": False,
+                    "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+                    "failure_class": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
+                },
+                "learning": {"pass": False},
+            },
+            {
+                "pass": False,
+                "status": "UNIFIED_DECISION_EXECUTION_COMPLETE",
+                "decision_output": {
+                    "pass": False,
+                    "status": "OPEN__ADEQUATE_POLICY_OR_SEMANTIC_COVERAGE_REQUIRED",
+                    "goal_binding_mode": "OPAQUE_BOOTSTRAP_BY_CONSTRUCTION",
+                },
+                "learning": {"pass": False},
+            },
+        ]
         out = run({
             "mode": "RAW_GOAL",
             "payload": {
@@ -75,8 +98,52 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         })
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
         self.assertFalse(out["inner_pass"])
-        self.assertEqual(out["result"]["failure_class"], "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP")
-        self.assertEqual(out["result"]["_live_runtime"]["subruntime_entrypoint"], "canonical.runtime.live_brain_runtime_v1.run")
+        self.assertEqual(
+            out["result"]["status"],
+            "OPEN__ADEQUATE_POLICY_OR_SEMANTIC_COVERAGE_REQUIRED",
+        )
+        self.assertEqual(
+            out["result"]["raw_goal_fallback"]["from_failure_class"],
+            "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
+        )
+        self.assertEqual(
+            out["result"]["raw_goal_fallback"]["to_mode"],
+            "ADEQUATE_DECISION",
+        )
+        self.assertFalse(
+            out["result"]["raw_goal_fallback"]["semantic_authority_created"]
+        )
+        self.assertEqual(runtime_run.call_count, 2)
+        self.assertEqual(runtime_run.call_args_list[0].args[0]["mode"], "raw_bound")
+        self.assertEqual(runtime_run.call_args_list[1].args[0]["mode"], "decision")
+
+    @patch("canonical.runtime.unified_cognitive_fabric_v1.live_runtime.run")
+    def test_raw_goal_execution_failure_does_not_fall_through_to_semantics(self, runtime_run):
+        runtime_run.return_value = {
+            "pass": False,
+            "status": "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE",
+            "raw_result": {
+                "pass": False,
+                "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+                "failure_class": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE",
+            },
+            "learning": {"pass": False},
+        }
+        out = run({
+            "mode": "RAW_GOAL",
+            "payload": {
+                "task_id": "FABRIC-RAW-EXEC-FAIL-001",
+                "goal": "Execute a known bounded action.",
+            },
+            "options": {"learn": False, "auto_repair": False},
+        })
+        self.assertFalse(out["inner_pass"])
+        self.assertEqual(
+            out["result"]["failure_class"],
+            "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE",
+        )
+        self.assertNotIn("raw_goal_fallback", out["result"])
+        runtime_run.assert_called_once()
 
     def test_auto_raw_goal_route_is_structurally_selected(self):
         out = run({
@@ -217,17 +284,18 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertTrue(out["result"]["live_owned_equals_fabric_reachable"])
         self.assertTrue(out["result"]["r1_structural_closure"])
 
-    def test_decision_dispatches(self):
+    def test_decision_dispatches_with_opaque_bootstrap_instead_of_missing_context(self):
         out = run({
             "mode": "ADEQUATE_DECISION",
             "payload": {
                 "task_id": "FABRIC-DECISION-OPEN-001",
                 "goal": "Choose the adequate action.",
             },
+            "options": {"learn": False, "auto_repair": False},
         })
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
         self.assertFalse(out["inner_pass"])
-        self.assertEqual(out["result"]["status"], "OPEN__DECISION_CONTEXT_REQUIRED")
+        self.assertNotEqual(out["result"]["status"], "OPEN__DECISION_CONTEXT_REQUIRED")
 
     @patch("canonical.runtime.unified_cognitive_fabric_v1.live_runtime.run")
     def test_adaptive_solver_delegates_through_r3_reuse_repair_runtime(self, runtime_run):
