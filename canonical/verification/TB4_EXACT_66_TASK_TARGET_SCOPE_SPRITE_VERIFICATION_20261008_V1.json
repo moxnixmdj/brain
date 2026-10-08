@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_EXACT_66_TASK_TARGET_SCOPE_SPRITE_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SPRITE_PASS__EXACT_66_OF_66_TOP_LEVEL_TASK_IDENTITIES_MATCH_FROZEN_OFFICIAL_RELEASE__ZERO_TASK_CONTENT_EXPOSURE__ZERO_CREDIT",
+  "subject": {
+    "branch": "tb4-exact-target-scope-20261008-v1",
+    "candidate_path": "canonical/evidence/TB4_EXACT_66_TASK_TARGET_SCOPE_20261008_V1.json",
+    "candidate_git_blob_sha": "cc18e607aa403906944deaf5097751fc3e1f1015",
+    "candidate_utf8_sha256": "98dacfa365876384173d3e9146d234029f4c994f646d06396b9cfdc2cf1c3e75"
+  },
+  "official_source": {
+    "repository": "harbor-framework/terminal-bench",
+    "release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "endpoint": "https://api.github.com/repos/harbor-framework/terminal-bench/contents/tasks?ref=452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "retrieval_scope": "TOP_LEVEL_TASKS_DIRECTORY_METADATA_ONLY"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-objective-pass-lock-v1-verify",
+    "sprite_id": "sprite-64f51750-7c85-4715-9c30-a6bb89f60a24",
+    "workspace": "/tmp/tb4_scope"
+  },
+  "verification": {
+    "verifier_script_sha256": "a346661184d1a5a2bcb838629ea3655d46db12bde4c2de48522754924ca97662",
+    "task_directory_count": 66,
+    "exact_candidate_list_match": true,
+    "normalized_task_tree_list_sha256": "aa6a957581d89a063906eecaaf45c9020803fe9451a996a2a7d0c22e13d08179",
+    "only_non_directory_entries": [
+      {
+        "name": "README.md",
+        "git_blob_sha": "c5abc9dd6a3792fb14883d122bd940035ac8f697",
+        "type": "file"
+      },
+      {
+        "name": "dataset.toml",
+        "git_blob_sha": "f93d1456609f74dfae967cd6c0d8ef4b5b057f3a",
+        "type": "file"
+      }
+    ],
+    "scope_basis": "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+    "complete_target_case_set": true,
+    "target_domain_subset_proved": true,
+    "task_contents_read": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "verdict": "PASS"
+  },
+  "task_conditioned_dominance_effect": {
+    "domain_subset_proved": true,
+    "premise_closed": "TARGET_DOMAIN_COVERAGE",
+    "remaining_premises": [
+      "EVALUATOR_RELATION_PROOF",
+      "RESOURCE_SEMANTICS_PRESERVATION",
+      "UNIVERSAL_SUCCESS_OR_THRESHOLD_REACHING_LOWER_BOUND_PROOF"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_TASK_INSTRUCTION_SOLUTION_TEST_OR_VERIFIER_CONTENT_EXPOSED",
+    "NO_TB4_SUCCESS_PROOF",
+    "NO_TB4_SCORE",
+    "NO_TB4_ACCEPTANCE_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_RESOURCE_ADMISSIBILITY_CLAIM_FOR_ALL_66_TASKS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
