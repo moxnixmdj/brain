@@ -9,11 +9,14 @@ on:
       - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
       - "canonical/tests/test_verified_repair_replay_loop_v1.py"
+      - "canonical/tests/test_live_brain_runtime_v1.py"
+      - "canonical/runtime/unified_cognitive_fabric_v1.py"
+      - "canonical/tests/test_unified_cognitive_fabric_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
   push:
     branches:
       - "main"
-      - "r3-autonomous-self-improvement-v1-20261008"
+      - "r3-final-ci-gate-20261008"
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
       - "canonical/runtime/live_brain_runtime_v1.py"
@@ -21,6 +24,9 @@ on:
       - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
       - "canonical/tests/test_verified_repair_replay_loop_v1.py"
+      - "canonical/tests/test_live_brain_runtime_v1.py"
+      - "canonical/runtime/unified_cognitive_fabric_v1.py"
+      - "canonical/tests/test_unified_cognitive_fabric_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
 
 jobs:
@@ -33,8 +39,12 @@ jobs:
         with:
           python-version: "3.11"
       - name: Compile R3 live control surface
-        run: python -m py_compile canonical/runtime/autonomous_verified_self_improvement_v1.py canonical/runtime/live_brain_runtime_v1.py
+        run: python -m py_compile canonical/runtime/autonomous_verified_self_improvement_v1.py canonical/runtime/live_brain_runtime_v1.py canonical/runtime/unified_cognitive_fabric_v1.py
       - name: Run R3 learning regression suite
         run: python -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v
       - name: Run R3 repair replay regression suite
         run: python -m unittest canonical.tests.test_verified_repair_replay_loop_v1 -v
+      - name: Run R3 live runtime regression suite
+        run: python -m unittest canonical.tests.test_live_brain_runtime_v1 -v
+      - name: Run R3 unified fabric regression suite
+        run: python -m unittest canonical.tests.test_unified_cognitive_fabric_v1 -v
