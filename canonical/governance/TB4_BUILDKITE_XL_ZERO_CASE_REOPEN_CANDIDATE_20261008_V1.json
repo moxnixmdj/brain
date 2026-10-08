@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_TB4_BUILDKITE_XL_ZERO_CASE_REOPEN_CANDIDATE_20261008_V1",
   "date": "2026-10-08",
-  "status": "CANDIDATE_ONLY__PROVIDER_ACCESS_FACT_OPEN__ZERO_TERMINAL_CASES__ZERO_CREDIT",
-  "objective": "Test exactly one information-positive fact: whether the existing Buildkite All Access Trial organization can receive zero-cost access to LINUX_AMD64_16X64, thereby reopening terminal-bench/live-database-cutover without executing any TB4 acceptance case.",
+  "status": "CANDIDATE_ONLY__PRIOR_SLACK_THEOREM_REUSED__PROVIDER_ACCESS_FACT_OPEN__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "objective": "Reuse the prior TB4 slack-expansion theorem and test exactly one information-positive fact: whether the existing Buildkite All Access Trial organization can receive zero-cost access to LINUX_AMD64_16X64, thereby recovering terminal-bench/live-database-cutover without executing any TB4 acceptance case.",
   "target_predicate": "CODING_TB4_GE_66_4",
   "frozen_authority": {
     "minimum_recovery_cut": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
@@ -12,6 +12,14 @@
     "current_projected_ceiling_successes": 220,
     "required_successes": 220,
     "trials_per_task": 5
+  },
+  "reused_prior_solution": {
+    "pull_request": 2406,
+    "title": "Create TB4 threshold slack by carrier scope expansion",
+    "head_commit": "f412a6e76a4b25ee404e193dd383cac46bc0710e",
+    "canonicalized": false,
+    "reused_theorem": "FOR_K_ADDITIONAL_RECOVERED_RESOURCE_EXCLUDED_TASKS__SUCCESS_CEILING_EQUALS_220_PLUS_5K__SLACK_EQUALS_5K",
+    "truth_boundary": "PR2406_IS_PRIOR_CANDIDATE_WORK_AND_IS_NOT_TREATED_AS_CURRENT_CANONICAL_AUTHORITY"
   },
   "candidate_ninth_task": {
     "task": "terminal-bench/live-database-cutover",
@@ -28,7 +36,7 @@
     },
     {
       "url": "https://buildkite.com/docs/platform/limits",
-      "fact": "ALL_ACCESS_TRIAL_DEFAULT_LINUX_CONCURRENCY_IS_24_VCPU__ALL_ACCESS_TRIAL_LIMITS_CAN_BE_INCREASED_ON_REQUEST__4000_LINUX_VCPU_MINUTES_INCLUDED"
+      "fact": "ALL_ACCESS_TRIAL_DEFAULT_LINUX_CONCURRENCY_IS_24_VCPU__ALL_ACCESS_TRIAL_HOSTED_AGENT_LIMITS_CAN_BE_INCREASED_ON_REQUEST__4000_LINUX_VCPU_MINUTES_INCLUDED"
     },
     {
       "url": "https://buildkite.com/pricing/",
@@ -44,7 +52,7 @@
     "required_realized_success_fraction_over_225": 0.9777777777777777,
     "proof": "(36+8+1)*5=225__AND__225-220=5"
   },
-  "single_missing_information_fact": "EXISTING_ALL_ACCESS_TRIAL_CAN_USE_LINUX_AMD64_16X64_AT_ZERO_INCREMENTAL_SPEND_WITH_INCLUDED_TRIAL_VCPU_MINUTES_AND_HARD_STOP_BEFORE_ANY_CHARGE",
+  "single_missing_information_fact": "EXISTING_ALL_ACCESS_TRIAL_CAN_USE_LINUX_AMD64_16X64_AT_ZERO_INCREMENTAL_SPEND_WITH_INCLUDED_OR_ZERO_COST_INCREASED_TRIAL_VCPU_MINUTES_AND_HARD_STOP_BEFORE_ANY_CHARGE",
   "decision_rule": {
     "if_true": [
       "RUN_ZERO_CASE_XL_RESOURCE_PREFLIGHT_ONLY",
@@ -61,14 +69,14 @@
     ]
   },
   "hard_rules": [
-    "NO_TB4_ACCEPTANCE_CASE_EXECUTION_FROM_THIS CANDIDATE",
-    "NO_CLAIM_XL_IS_ENABLED_BEFORE PROVIDER_OR_ACCOUNT RECEIPT",
+    "NO_TB4_ACCEPTANCE_CASE_EXECUTION_FROM_THIS_CANDIDATE",
+    "NO_CLAIM_XL_IS_ENABLED_BEFORE_PROVIDER_OR_ACCOUNT_RECEIPT",
     "NO_PAID_ENTERPRISE_ACTIVATION",
     "NO_CREDIT_CARD",
     "NO_AUTOMATIC_PAID_OVERAGE",
     "ZERO_INCREMENTAL_SPEND",
     "NO_SCORE_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
-    "PROVIDER_REPLY_OR_ACCOUNT OBSERVATION MUST BE CONTENT-ADDRESSED BEFORE ANY RECOMPILE"
+    "PROVIDER_REPLY_OR_ACCOUNT_OBSERVATION_MUST_BE_CONTENT_ADDRESSED_BEFORE_ANY_RECOMPILE"
   ],
   "accounting": {
     "terminal_cases_consumed": 0,
