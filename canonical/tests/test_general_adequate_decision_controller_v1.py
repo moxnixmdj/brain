@@ -82,15 +82,84 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             },
         }
 
-    def test_missing_decision_context_stays_open(self):
-        with patch.object(controller, "compile_contract", return_value=self._raw_contract()):
+    def test_missing_decision_context_bootstraps_lossless_opaque_overapproximation(self):
+        raw = {
+            "pass": True,
+            "task_contract_sha256": "contract-sha",
+            "task_sha256": "goal-sha",
+            "nonwhitespace_source_coverage_complete": True,
+            "acceptance_contract": {
+                "obligations": [
+                    {"obligation_id": "RAWREQ:o1"},
+                    {"obligation_id": "RAWREQ:o2"},
+                ]
+            },
+        }
+        observed = {}
+
+        def p3(payload, *, repo_root=None):
+            observed.update(payload)
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED",
+                "reason": "AUTHENTICATED_POLICY_COVER_INCOMPLETE",
+            }
+
+        with patch.object(controller, "compile_contract", return_value=raw), \
+             patch.object(controller, "evaluate_p3", side_effect=p3):
             out = controller.run(
                 {"task_id": "R2_TEST_MISSING_CONTEXT", "goal": "Choose the adequate action."}
             )
+
         self.assertFalse(out["pass"])
-        self.assertEqual(out["status"], "OPEN__DECISION_CONTEXT_REQUIRED")
+        self.assertEqual(out["status"], "OPEN__ADEQUATE_POLICY_OR_SEMANTIC_COVERAGE_REQUIRED")
+        binding = out["goal_to_decision_binding"]
+        self.assertEqual(binding["status"], "PASS__OPAQUE_GOAL_CONTEXT_BOOTSTRAPPED_BY_CONSTRUCTION")
+        self.assertEqual(binding["opaque_remainder_obligation_count"], 2)
+        self.assertTrue(binding["sound_overapproximation_only"])
+        self.assertFalse(binding["semantic_completeness_claimed"])
+        basis = observed["bound_relevance_cegar_loop"]["cegar_problem"]["decision_basis"]
+        self.assertEqual(
+            set(basis),
+            {
+                controller._opaque_goal_atom_id("RAWREQ:o1"),
+                controller._opaque_goal_atom_id("RAWREQ:o2"),
+            },
+        )
         self.assertFalse(out["semantic_acceptance_complete"])
         self.assertFalse(out["actual_goal_satisfaction_verified"])
+
+
+    def test_opaque_bootstrap_helper_preserves_every_raw_obligation_without_semantic_claim(self):
+        raw = {
+            "pass": True,
+            "task_contract_sha256": "raw-contract-bootstrap",
+            "nonwhitespace_source_coverage_complete": True,
+            "acceptance_contract": {
+                "obligations": [
+                    {"obligation_id": "RAWREQ:a"},
+                    {"obligation_id": "RAWREQ:b"},
+                    {"obligation_id": "RAWREQ:c"},
+                ]
+            },
+        }
+        payload, binding = controller._bootstrap_opaque_decision_context(
+            task_id="opaque-bootstrap-test",
+            goal="Do something with three unknown requirements.",
+            raw_contract=raw,
+        )
+        basis = payload["bound_relevance_cegar_loop"]["cegar_problem"]["decision_basis"]
+        expected = [
+            controller._opaque_goal_atom_id("RAWREQ:a"),
+            controller._opaque_goal_atom_id("RAWREQ:b"),
+            controller._opaque_goal_atom_id("RAWREQ:c"),
+        ]
+        self.assertEqual(basis, expected)
+        self.assertEqual(binding["raw_obligation_count"], 3)
+        self.assertEqual(binding["opaque_remainder_obligation_count"], 3)
+        self.assertTrue(binding["all_raw_obligations_represented"])
+        self.assertFalse(binding["semantic_authority"])
+        self.assertFalse(binding["semantic_completeness_claimed"])
 
     def test_goal_binding_is_required_before_policy_reasoning(self):
         request = self._base_request()
