@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V7",
+  "date": "2026-10-08",
+  "status": "R3_CONTROL_LOOP_SUFFICIENTLY_CLOSED__CURRENT_BYTES_RESEALED__EXECUTABLE_CROSS_ROOT_HANDOFF",
+  "subject_main_head_before_receipt": "4c451e1d8606a49f583372f9cea8eda9c389e08c",
+  "root": "R3_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_LOOP",
+  "exact_live_blobs": {
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "ea80a2f32142448b86816e169b6aeb7875d0f583",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "d0164f0b48ac4db6a6c7e406d4750a080423781e",
+    "canonical/runtime/r3_independent_learning_verifier_v1.py": "b38b5315ef79a215976144866514cb2a95076c9e",
+    "canonical/runtime/r3_bound_success_adapter_v1.py": "8c73e1ab3486df9ed56fff778ec35401720eb1e7",
+    "canonical/runtime/r3_raw_success_adapter_v1.py": "80a2599a31501db18754e913b763254966b4923e",
+    "canonical/runtime/unified_cognitive_fabric_v1.py": "876e32b049062d6ae7a7cb36036e78d0c423f2b1"
+  },
+  "closure": {
+    "experience_capture": true,
+    "causal_failure_diagnosis": true,
+    "durable_failure_deduplication": true,
+    "repair_synthesis": true,
+    "invention_route_for_failed_execution": true,
+    "autonomous_replay_only_when_proved_safe": true,
+    "original_obligation_replay_required_for_repair_closure": true,
+    "verified_episode_persistence": true,
+    "bounded_effect_readback_without_replay": true,
+    "compiled_bound_success_readback": true,
+    "raw_bound_success_readback": true,
+    "v12_bound_carrier_episode_reverification_without_effect_replay": true,
+    "skill_induction": true,
+    "independent_skill_verification": true,
+    "cross_scope_generalization_only_after_proof": true,
+    "quarantine_and_recovery": true,
+    "pareto_replacement": true,
+    "permanent_reuse": true,
+    "durable_improvement_queue": true,
+    "automatic_queue_drain_on_canonical_dispatch": true,
+    "same_evidence_retry_backoff": true,
+    "starvation_prevention": true,
+    "unsupported_success_truthful_parking": true,
+    "verifier_frontier_gap_creates_durable_cross_root_handoff": true,
+    "frontier_handoff_executable_when_acquisition_provider_available": true,
+    "provider_self_certification_without_frontier_change_rejected": true,
+    "same_provider_same_frontier_acquisition_retry_backoff": true,
+    "original_success_replay_forbidden_for_frontier_acquisition": true,
+    "parked_success_reopens_only_after_verified_frontier_change_or_external_authority": true
+  },
+  "total_disposition": {
+    "verified_learnable_experience": "VERIFY__GENERALIZE_WHEN_PROVED__COMPRESS__PARETO_ADMIT__REUSE",
+    "failed_experience": "DIAGNOSE__REPAIR_OR_INVENT__REPLAY_ONLY_IF_SAFE__VERIFY_OR_REJECT",
+    "success_with_current_verifier_gap": "PARK__EMIT_EXECUTABLE_ROOT1_ACQUISITION_HANDOFF__REOPEN_ONLY_AFTER_OWNED_FRONTIER_CHANGE_OR_EXTERNAL_AUTHORITY",
+    "genuinely_observationally_indistinguishable_evidence": "WAIT_FOR_NEW_DISTINGUISHING_EVIDENCE_ONLY_AFTER_INSEPARABILITY_IS_ACTUALLY_PROVED",
+    "counterexample_to_learned_skill": "QUARANTINE__CONTRACT_SCOPE_OR_REVERIFY__DO_NOT_BLINDLY_REUSE"
+  },
+  "cross_root_boundary": {
+    "r3_owns": [
+      "EXPERIENCE_CAPTURE_AND_CAUSAL_DIAGNOSIS",
+      "DURABLE_IMPROVEMENT_SCHEDULING",
+      "FAIL_CLOSED_VERIFICATION_AND_PROMOTION",
+      "GENERALIZATION_COMPRESSION_PARETO_AND_REUSE",
+      "DETECTION_OF_VERIFICATION_FRONTIER_GAPS",
+      "DURABLE_NONREPLAYING_ROOT1_HANDOFF",
+      "EXECUTION_OF_SUPPLIED_VERIFIER_FRONTIER_ACQUISITION_PROVIDER",
+      "INDEPENDENT_RECOMPUTATION_OF_OWNED_VERIFIER_FRONTIER_AFTER_PROVIDER_RETURN",
+      "AUTOMATIC_REOPEN_ONLY_AFTER_FRONTIER_CHANGE"
+    ],
+    "root1_owns": [
+      "SUPPLY_OR_BIND_A_VERIFIED_ACQUISITION_WORKER_CAPABLE_OF_CONSTRUCTING_OR_ACQUIRING_THE_MISSING_INDEPENDENT_READONLY_VERIFIER_OR_ADAPTER"
+    ],
+    "canonical_default_root1_acquisition_provider_present": false,
+    "boundary_is_not_a_success_claim_for_root1": true,
+    "r3_does_not_treat_provider_self_report_as_authority": true
+  },
+  "evidence_boundary": {
+    "theorem": "R3_OBSERVABILITY_BOUNDARY_THEOREM_20261008_V1",
+    "theorem_valid": true,
+    "identical_evidence_cannot_soundly_distinguish_success_and_failure": true,
+    "missing_current_adapter_does_not_prove_identical_evidence": true,
+    "information_theoretic_nonlearnability_requires_actual_observational_inseparability_proof": true
+  },
+  "supersedes": {
+    "document": "canonical/verification/R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V6.json",
+    "reason": "V6 exact queue-driver and Unified Fabric blob bindings became stale after executable frontier-handoff integration.",
+    "preserved": [
+      "TRUTHFUL_OBSERVABILITY_BOUNDARY",
+      "FAIL_CLOSED_PROMOTION",
+      "PARK_AND_REOPEN",
+      "BOUND_AND_RAW_READBACK",
+      "AUTONOMOUS_QUEUE_DRAIN",
+      "NO_SAME_EVIDENCE_RETRY",
+      "EXPLICIT_ROOT1_BOUNDARY"
+    ],
+    "newly_bound_in_v7": [
+      "CURRENT_R3_DRIVER_BLOB",
+      "CURRENT_UNIFIED_FABRIC_BLOB",
+      "EXECUTABLE_FRONTIER_ACQUISITION_PROVIDER_INTERFACE",
+      "FRONTIER_BYTE_CHANGE_REQUIRED_FOR_REOPEN",
+      "ACQUISITION_SELF_CERTIFICATION_REJECTION"
+    ]
+  },
+  "verification_receipts": {
+    "executable_frontier_handoff": {
+      "path": "canonical/verification/R3_EXECUTABLE_VERIFICATION_FRONTIER_HANDOFF_VERIFY_20261008_V1.json",
+      "result": "24_OF_24_FOCUSED_TESTS_PASS"
+    },
+    "observability_truth_repair": {
+      "path": "canonical/verification/R3_OBSERVABILITY_TRUTH_BOUNDARY_REPAIR_VERIFY_20261008_V1.json",
+      "result": "17_OF_17_PASS"
+    },
+    "prior_frontier_handoff": {
+      "path": "canonical/verification/R3_VERIFICATION_FRONTIER_HANDOFF_VERIFY_20261008_V1.json",
+      "result": "18_OF_18_PASS"
+    }
+  },
+  "verification_truth": {
+    "queue_driver_focused_suite": "20_OF_20_PASS_ON_EXECUTABLE_HANDOFF_BYTES",
+    "fabric_forwarding_suite": "4_OF_4_PASS_ON_EXACT_CURRENT_FABRIC_AND_TEST_BYTES_WITH_IMPORT_BOUNDARY_STUBS",
+    "private_github_actions": "ZERO_STEP_RUNNER_FAILURES__NO_CODE_VERDICT",
+    "current_runtime_blobs_explicitly_bound": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_REALITY_IS_OBSERVABLE",
+    "NO_CLAIM_EVERY_MISSING_VERIFIER_CAPABILITY_IS_ACQUIRABLE",
+    "NO_CLAIM_ROOT1_ALREADY_SUPPLIES_A_DEFAULT_ACQUISITION_PROVIDER",
+    "NO_CLAIM_ROOT1_IS_CLOSED_BY_THIS_R3_RESULT",
+    "NO_CLAIM_ARBITRARY_OPEN_WORLD_SUCCESS_CAN_BE_CERTIFIED_WITHOUT_DISTINGUISHING_EVIDENCE",
+    "NO_SELF_CERTIFICATION",
+    "NO_TERMINAL_GOAL_CREDIT"
+  ],
+  "current_truth": "R3 ITSELF HAS A FAIL_CLOSED COMPOUNDING CONTROL LOOP OVER AVAILABLE EVIDENCE AND CAPABILITIES, INCLUDING AN EXECUTABLE CROSS_ROOT VERIFIER_FRONTIER_ACQUISITION INTERFACE. WHEN AN ACQUISITION PROVIDER IS SUPPLIED, R3 RECOMPUTES THE OWNED FRONTIER BYTES AND REOPENS PARKED SUCCESS ONLY IF THE FRONTIER ACTUALLY CHANGED. CANONICAL RUNTIME DOES NOT YET SUPPLY A DEFAULT ROOT1 ACQUISITION PROVIDER; THAT PROVIDER CAPABILITY REMAINS A ROOT1 RESPONSIBILITY, NOT AN R3 PROMOTION OR VERIFICATION GAP.",
+  "incremental_spend_usd": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
