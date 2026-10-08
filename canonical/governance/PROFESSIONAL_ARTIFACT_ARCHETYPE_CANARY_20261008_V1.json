@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_ARCHETYPE_CANARY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "RESEARCH_CANDIDATE__ZERO_CREDIT_PENDING_REPLAY_AND_FROZEN_POSTHOC_EVALUATION",
+  "branch": "research/gdpval-owned-execution-cut-v1",
+  "purpose": "Create the first legitimate Brain-dependent GDPval artifact without exposing rubrics or gold deliverables to candidate generation.",
+  "archetype": "BRAND_DISTRIBUTOR_ONBOARDING_QUESTIONNAIRE_V1",
+  "professional_source_basis": [
+    "https://www.spscommerce.com/retailers/vendor-onboarding/",
+    "https://www.spscommerce.com/products/",
+    "https://community.spscommerce.com/wp-content/uploads/2025/01/Drop_Ship_Vendor_Guide_v3.0_-Sept-2024.pdf"
+  ],
+  "candidate_input_firewall": [
+    "TASK_PROMPT_ALLOWED",
+    "OFFICIAL_REFERENCE_FILES_ALLOWED",
+    "PUBLIC_PROFESSIONAL_KNOWLEDGE_ALLOWED",
+    "RUBRIC_JSON_FORBIDDEN",
+    "RUBRIC_PRETTY_FORBIDDEN",
+    "GOLD_DELIVERABLES_FORBIDDEN",
+    "COMMUNITY_OR_OTHER_MODEL_OUTPUTS_FORBIDDEN"
+  ],
+  "renderer": "PURE_STDLIB_FIXED_THREE_PAGE_TEXT_PDF",
+  "hard_nonclaims": [
+    "NO_CLAIM_GDPVAL_AA_ELO_IS_PROVED",
+    "NO_CLAIM_THIS_SINGLE_ARCHETYPE_COVERS_OTHER_GDPVAL_TASKS",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT_BEFORE_CANDIDATE_HASH_FREEZE_AND_POSTHOC_EVALUATION",
+    "NO_CLAIM_PUBLIC_PROFESSIONAL_SOURCE_SET_IS COMPLETE"
+  ],
+  "accounting": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
