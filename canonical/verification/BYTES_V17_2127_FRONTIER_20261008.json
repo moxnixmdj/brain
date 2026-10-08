@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V17_2127_FRONTIER",
+  "date": "2026-10-08",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "status": "PASS_EXACT_GIT_BLOB_MULTI_CARRIER_VERIFICATION",
+  "source": {
+    "path": "canonical/runtime/bytes_v17_single_artifact_compact.py",
+    "git_blob_sha": "2dbbcd45623bced4662b08c34382831fda0c76ec",
+    "raw_bytes": 4514,
+    "raw_sha256": "6a28ba4cd227f39d01b4e269323478763245b557a4b1f8847fbab25104bab1ee"
+  },
+  "encoding": {
+    "format": "RAW_LZMA1",
+    "dict_size": 4096,
+    "lc": 0,
+    "lp": 0,
+    "pb": 0,
+    "mode": "NORMAL",
+    "match_finder": "BT2",
+    "nice_len": 64,
+    "payload_bytes": 2127,
+    "payload_sha256": "e4d5d2d94180cb1ec3c2b6d14892d4fdf0ad2971fbb09a2f3ab8f5b1ec530327",
+    "tested_configurations": 2700,
+    "roundtrip_exact": true
+  },
+  "verification": {
+    "primary_replay": {
+      "carrier": "brain-root3-current-byte-replay-20261007-v1",
+      "closed_check": "PASS",
+      "equation_basis_edges": 932,
+      "exact_basis_match_v16": true,
+      "signature_classes": 200,
+      "frozen_regressions": "27_OF_27_PASS",
+      "scalar_differential_cases": 210740
+    },
+    "independent_replay": {
+      "carrier": "brain-live-integrated-v1-run-20261008",
+      "exact_git_blob_replay": "PASS",
+      "equation_basis_edges": 932,
+      "exact_basis_match_v16": true,
+      "signature_classes": 200,
+      "encoding_hash_roundtrip": "PASS"
+    }
+  },
+  "comparison": {
+    "v16_bytes": 2165,
+    "v17_bytes": 2127,
+    "saved_bytes": 38,
+    "saved_percent": 1.7551963048498844
+  },
+  "changes": [
+    "ZIP_BASED_LINEAR_SYSTEM_ROW_ACCUMULATION",
+    "RANGE_BASED_WORD_GENERATOR",
+    "RANGE2_TAIL_PARITY_ENUMERATION",
+    "SHORTER_DICT_VALUES_MATERIALIZATION",
+    "UNION_FIND_RECURSIVE_ROOT",
+    "REMOVE_REDUNDANT_EQUAL_ROOT_UNION_GUARD",
+    "DICT_BACKED_EXPRESSION_DEDUP_MEMBERSHIP"
+  ],
+  "limits": [
+    "PYTHON_RUNTIME_NOT_COUNTED",
+    "LZMA_DECODER_NOT_COUNTED",
+    "FINITE_FROZEN_DSL_ONLY",
+    "NO_GLOBAL_MINIMUM_DESCRIPTION_PROOF",
+    "ZERO_TERMINAL_GOAL_CREDIT"
+  ]
+}
