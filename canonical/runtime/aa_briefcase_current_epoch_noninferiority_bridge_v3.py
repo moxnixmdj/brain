@@ -52,13 +52,13 @@ def compile_current_epoch_noninferiority(
 
     if mode == "CORE_OWNER_ATTESTATION":
         statement = payload.get("statement")
-        signature_verification = payload.get("signature_verification")
-        if not isinstance(statement, Mapping) or not isinstance(signature_verification, Mapping):
+        signature_bundle = payload.get("signature_bundle")
+        if not isinstance(statement, Mapping) or not isinstance(signature_bundle, Mapping):
             raise NoninferiorityBridgeError("CORE_OWNER_ATTESTATION_PAYLOAD_INVALID")
         result = verify_core_owner_attestation(
             current_target,
             statement,
-            signature_verification,
+            signature_bundle,
         )
         passed = result["status"] == "PASS_CORE_OWNER_ATTESTATION"
         route = "CORE_OWNER_ATTESTATION"
