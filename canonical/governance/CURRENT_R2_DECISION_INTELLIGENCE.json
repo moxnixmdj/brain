@@ -10,7 +10,8 @@
   },
   "controller": {
     "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
-    "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py"
+    "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py",
+    "authority_kernel_git_blob_sha": "402dba6618adce3a9bdb0a5dd1d48f8b11c9ea8b"
   },
   "scheduler_cut": {
     "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V4.json",
@@ -31,7 +32,10 @@
     "exact_p3_policy_gap_preserved": true,
     "verified_cegar_frontier_exposed_to_repair": true,
     "existing_adequacy_evidence_auto_reused": true,
-    "conflict_witness_basis_questions_auto_generated": true
+    "conflict_witness_basis_questions_auto_generated": true,
+    "policy_cover_observations_use_truthful_information_provider": true,
+    "policy_cover_provider_output_reauthenticated_before_use": true,
+    "policy_cover_executor_fail_closed_preserved": true
   },
   "judgment_model_policy": {
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
@@ -66,5 +70,11 @@
     "NEW_SOURCE_ALIGNED_PROOF_PRIMITIVE_WHEN_THE_SINGLE_SELECTED_POLICY_CHANGING_PREDICATE_IS_UNKNOWN",
     "FRESH_EXTERNAL_REALITY_WHEN_THE_SELECTED_FACT_IS_NOT_PRESENT_IN_CURRENT_AUTHENTIC_SOURCES",
     "GENUINELY_NEW_R3_PRIMITIVE_REQUIRES_A_VERIFIABLE_CAPABILITY_EXPANSION_PATH"
-  ]
+  ],
+  "policy_cover_information_provider_integration": {
+    "verification_path": "canonical/verification/R2_POLICY_COVER_INFORMATION_PROVIDER_INTEGRATION_VERIFY_20261008_V1.json",
+    "verification_git_blob_sha": "719c1f7e6509497b85d1d936e42dd9404d7b7b8c",
+    "two_distinct_sprite_replays": "6_OF_6_EACH",
+    "merged_commit": "87129856f4e7944e11f54d7a388e745951f4ef1a"
+  }
 }
