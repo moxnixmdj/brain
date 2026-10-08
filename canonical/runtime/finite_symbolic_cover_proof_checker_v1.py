@@ -97,7 +97,7 @@ def check(problem: Mapping[str, Any]) -> dict[str, Any]:
     scope_id = problem["scope_id"]
     names = problem["variables"]
     routes = problem["routes"]
-    if type(scope_id) is not str or not scope_id.strip():
+    if type(scope_id) is not str or not scope_id.strip() or len(scope_id) > 256:
         return _result("FAIL_CLOSED", reason="SCOPE_ID_INVALID")
     if (type(names) is not list or not 1 <= len(names) <= MAX_VARS
             or any(type(n) is not str or _NAME.fullmatch(n) is None for n in names)
@@ -115,7 +115,7 @@ def check(problem: Mapping[str, Any]) -> dict[str, Any]:
             if not isinstance(row, Mapping) or set(row) != {"route_id", "admission", "adequacy"}:
                 raise MalformedFormula("ROUTE_FIELDS_INVALID")
             rid = row["route_id"]
-            if type(rid) is not str or not rid.strip() or rid in seen:
+            if type(rid) is not str or not rid.strip() or len(rid) > 128 or rid in seen:
                 raise MalformedFormula("ROUTE_ID_INVALID_OR_DUPLICATE")
             seen.add(rid)
             normalized.append((
