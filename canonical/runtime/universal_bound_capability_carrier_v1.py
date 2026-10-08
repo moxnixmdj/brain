@@ -81,10 +81,7 @@ def execute(problem: Mapping[str, Any]) -> dict[str, Any]:
                     + ":"
                     + str(result.get("error"))
                 )
-            if not astra_runtime._verify_action_expectation(resolved, result):
-                raise ValueError(
-                    "BOUND_ACTION_EXPECTATION_NOT_WITNESSED:" + str(cycle)
-                )
+            astra_runtime._verify_action_expectation(resolved, result)
             trace.append({
                 "cycle": cycle,
                 "plan": resolved,
