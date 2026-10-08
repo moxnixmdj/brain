@@ -6,10 +6,12 @@ from pathlib import Path
 import tarfile
 from tempfile import TemporaryDirectory
 import unittest
+from unittest import mock
 
 from canonical.runtime import astra_runtime, goal_compiler
 from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
 from canonical.runtime import r3_independent_learning_verifier_v1 as independent
+from canonical.runtime import r3_improvement_queue_driver_v1 as driver
 from canonical.runtime import r3_raw_success_adapter_v1 as adapter
 from canonical.runtime.live_integrated_brain_v1 import load_verified_registry
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
@@ -225,6 +227,50 @@ class R3RawAcceptedReadonlyLearningV1Tests(unittest.TestCase):
                     repo_root=root,
                 )
             )
+
+    def test_default_success_router_falls_through_to_raw_adapter(self):
+        with TemporaryDirectory() as td:
+            state_path = Path(td) / "state.json"
+            state = learning._empty_state()
+            learning._enqueue_improvement(
+                state,
+                kind="ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+                priority=50,
+                identity={"surface": "RAW_BOUND"},
+                payload={
+                    "observation_id": "observation:raw",
+                    "required_result": "VERIFIED_EPISODE_OR_PROVED_NONLEARNABLE_SUCCESS",
+                },
+            )
+            learning._refresh_stats(state)
+            learning._write_state(state, state_path)
+            with (
+                mock.patch.object(
+                    driver,
+                    "_adapt_success_work",
+                    return_value={
+                        "schema": driver.SCHEMA,
+                        "status": "IMPROVEMENT_ADVANCED__SUCCESS_BECAME_VERIFIED_EPISODE",
+                        "pass": True,
+                        "work_id": "x",
+                        "terminal_authority": False,
+                    },
+                ) as adapt_work,
+                mock.patch(
+                    "canonical.runtime.r3_bound_success_adapter_v1.adapt",
+                    return_value=None,
+                ) as bound_adapt,
+                mock.patch(
+                    "canonical.runtime.r3_raw_success_adapter_v1.adapt",
+                    return_value={"raw_candidate": True},
+                ) as raw_adapt,
+            ):
+                out = driver.advance_once(state_path=state_path, repo_root=Path(td))
+                self.assertTrue(out["pass"], out)
+                provider = adapt_work.call_args.kwargs["success_episode_adapter_provider"]
+                self.assertEqual(provider({"kind": "probe"}), {"raw_candidate": True})
+                bound_adapt.assert_called_once()
+                raw_adapt.assert_called_once()
 
     def test_semantically_complete_success_without_receipt_fails_proof_capture(self):
         with self.assertRaises(learning.SelfImprovementError):
