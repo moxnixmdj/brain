@@ -247,7 +247,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "counterexamples": [],
             "attempts": [],
         }
-        with mock.patch.object(loop.solver_v10, "run", return_value=solver_out) as run_mock:
+        with mock.patch.object(loop.solver_v12, "run", return_value=solver_out) as run_mock:
             result = loop.run_learning_episode(
                 {"task_id": "t", "initial_facts": [], "target_effects": ["goal"], "capabilities": []},
                 state_path=path,
@@ -321,7 +321,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "verified_skill_reuse_authorized": False,
             "verified_executable_skill": None,
         }
-        with mock.patch.object(loop.solver_v10, "run", return_value=solved) as run_mock:
+        with mock.patch.object(loop.solver_v12, "run", return_value=solved) as run_mock:
             out = loop.run_learning_episode(
                 self._reuse_problem(),
                 state_path=path,
@@ -367,7 +367,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "verified_executable_skill": None,
         }
         with mock.patch.object(
-            loop.solver_v10, "run", side_effect=[failed, solved]
+            loop.solver_v12, "run", side_effect=[failed, solved]
         ) as run_mock:
             out = loop.run_learning_episode(
                 self._reuse_problem(),
@@ -406,7 +406,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "counterexamples": [],
             "attempts": [],
         }
-        with mock.patch.object(loop.solver_v10, "run", return_value=failed) as run_mock:
+        with mock.patch.object(loop.solver_v12, "run", return_value=failed) as run_mock:
             out = loop.run_learning_episode(
                 self._reuse_problem(),
                 state_path=path,
@@ -424,6 +424,201 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertEqual(run_mock.call_count, 1)
         state = loop.load_state(path)
         self.assertEqual(state["reuse"][sid]["effectful_failures"], 1)
+
+
+    def test_capability_expander_is_forwarded_into_v12_repair_loop(self):
+        path = self.temp_state()
+        solved = {
+            "pass": True,
+            "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+            "current_episode_verified": False,
+            "skill_candidate": None,
+            "verified_skill_reuse_authorized": False,
+            "verified_executable_skill": None,
+            "expanded_capability_ids": [],
+            "capability_expansion_attempts": [],
+            "falsified_capability_ids": [],
+        }
+        expander = mock.Mock(return_value=None)
+        proposal_provider = mock.Mock(return_value=None)
+        problem = {
+            "task_id": "repair-forwarding",
+            "initial_facts": [],
+            "target_effects": ["goal"],
+            "capabilities": [],
+        }
+        with mock.patch.object(loop.solver_v12, "run", return_value=solved) as run_mock:
+            out = loop.run_learning_episode(
+                problem,
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep",
+                scope_id="scope",
+                proposal_provider=proposal_provider,
+                capability_expander=expander,
+                proposal_provider_id="test-proposer",
+                proposal_provider_max_candidates=2,
+                capability_expander_id="test-expander",
+                max_capability_expansions=3,
+            )
+
+        self.assertTrue(out["pass"])
+        self.assertTrue(out["capability_expander_enabled"])
+        kwargs = run_mock.call_args.kwargs
+        self.assertIs(kwargs["capability_expander"], expander)
+        self.assertIs(kwargs["proposal_provider"], proposal_provider)
+        self.assertEqual(kwargs["proposal_provider_id"], "test-proposer")
+        self.assertEqual(kwargs["proposal_provider_max_candidates"], 2)
+        self.assertEqual(kwargs["capability_expander_id"], "test-expander")
+        self.assertEqual(kwargs["max_capability_expansions"], 3)
+
+    def test_authenticated_v12_expansion_is_persisted_and_rehydrated(self):
+        path = self.temp_state()
+        base_problem = {
+            "task_id": "repair-cache",
+            "initial_facts": [],
+            "target_effects": ["goal"],
+            "capabilities": [],
+        }
+        repair_cap = {
+            "id": "repair.capability",
+            "requires": [],
+            "provides": ["goal"],
+            "cost": 1,
+            "action": {"type": "verified_policy"},
+            "effect_semantics_binding": {
+                "receipt": {"path": "canonical/verification/repair.json", "git_blob_sha": "1" * 40},
+                "verification": {"path": "canonical/verification/repair-verify.json", "git_blob_sha": "2" * 40},
+            },
+        }
+        repaired = {
+            "pass": True,
+            "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+            "current_episode_verified": False,
+            "skill_candidate": None,
+            "verified_skill_reuse_authorized": False,
+            "verified_executable_skill": None,
+            "expanded_capability_ids": ["repair.capability"],
+            "expanded_problem": {**base_problem, "capabilities": [repair_cap]},
+            "falsified_capability_ids": [],
+            "capability_expansion_attempts": [
+                {
+                    "status": "EXPANSION_ADMITTED",
+                    "admitted": [
+                        {
+                            "capability_id": "repair.capability",
+                            "effect_semantics_receipt": {
+                                "path": "canonical/verification/repair.json",
+                                "git_blob_sha": "1" * 40,
+                            },
+                            "effect_semantics_verification": {
+                                "path": "canonical/verification/repair-verify.json",
+                                "git_blob_sha": "2" * 40,
+                            },
+                        }
+                    ],
+                }
+            ],
+        }
+        later = {
+            "pass": True,
+            "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+            "current_episode_verified": False,
+            "skill_candidate": None,
+            "verified_skill_reuse_authorized": False,
+            "verified_executable_skill": None,
+            "expanded_capability_ids": [],
+            "capability_expansion_attempts": [],
+            "falsified_capability_ids": [],
+        }
+
+        with mock.patch.object(
+            loop.solver_v12, "run", side_effect=[repaired, later]
+        ) as run_mock:
+            first = loop.run_learning_episode(
+                base_problem,
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep1",
+                scope_id="scope",
+                capability_expander=mock.Mock(return_value=None),
+            )
+            second = loop.run_learning_episode(
+                base_problem,
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep2",
+                scope_id="scope",
+            )
+
+        self.assertEqual(first["persisted_expansion_count"], 1)
+        self.assertEqual(first["invalidated_expansion_count"], 0)
+        self.assertEqual(second["rehydrated_expansion_count"], 1)
+        second_problem = run_mock.call_args_list[1].args[0]
+        self.assertEqual(
+            [row["id"] for row in second_problem["capabilities"]],
+            ["repair.capability"],
+        )
+        state = loop.load_state(path)
+        key = loop._task_contract_key(base_problem)
+        self.assertEqual(
+            [row["id"] for row in state["expanded_capabilities"][key]["capabilities"]],
+            ["repair.capability"],
+        )
+
+    def test_falsified_cached_expansion_is_evicted_permanently(self):
+        path = self.temp_state()
+        base_problem = {
+            "task_id": "repair-cache-falsified",
+            "initial_facts": [],
+            "target_effects": ["goal"],
+            "capabilities": [],
+        }
+        repair_cap = {
+            "id": "repair.capability",
+            "requires": [],
+            "provides": ["goal"],
+            "cost": 1,
+            "action": {"type": "verified_policy"},
+            "effect_semantics_binding": {
+                "receipt": {"path": "canonical/verification/repair.json", "git_blob_sha": "1" * 40},
+                "verification": {"path": "canonical/verification/repair-verify.json", "git_blob_sha": "2" * 40},
+            },
+        }
+        state = loop.load_state(path)
+        key = loop._task_contract_key(base_problem)
+        state["expanded_capabilities"][key] = {
+            "task_contract_key": key,
+            "capabilities": [repair_cap],
+        }
+        loop._write_state(state, path)
+
+        falsified = {
+            "pass": False,
+            "status": "CAPABILITY_DISCOVERY_REQUIRED__ALL_DECLARED_ROUTES_FALSIFIED_OR_UNREACHABLE",
+            "reason": "verified counterexample",
+            "trace": [],
+            "attempts": [],
+            "counterexamples": [{"capability_id": "repair.capability"}],
+            "falsified_capability_ids": ["repair.capability"],
+            "deferred_capability_ids": [],
+            "expanded_capability_ids": [],
+            "capability_expansion_attempts": [],
+        }
+        with mock.patch.object(loop.solver_v12, "run", return_value=falsified):
+            out = loop.run_learning_episode(
+                base_problem,
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep",
+                scope_id="scope",
+            )
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["rehydrated_expansion_count"], 1)
+        self.assertEqual(out["invalidated_expansion_count"], 1)
+        state = loop.load_state(path)
+        self.assertNotIn(key, state["expanded_capabilities"])
 
 
 if __name__ == "__main__":
