@@ -17,23 +17,32 @@ from typing import Any
 from canonical.runtime.harbor_command_policy import MAX_COMMAND_CHARS
 
 ENDPOINT = "http://127.0.0.1:8080/v1/chat/completions"
+TOKEN_COUNT_ENDPOINT = "http://127.0.0.1:8080/v1/chat/completions/input_tokens"
 MODEL = "brain-qwen3.5-9b"
 TOOL_NAME = "submit_science_proposal"
 MAX_RESPONSE_BYTES = 100_000
 MAX_TOOL_COMPLETION_TOKENS = 4096
 MIN_TIMEOUT_S = 300
-MAX_TIMEOUT_S = 900
-PROMPT_BYTES_PER_TOKEN_ESTIMATE = 4
+MAX_TIMEOUT_S = 1200
+TOKEN_COUNT_TIMEOUT_S = 60
 PREFILL_TOKENS_PER_SECOND_FLOOR = 15
 GENERATION_AND_TRANSPORT_MARGIN_S = 180
 
 
-def effective_timeout_s(prompt: str, requested_timeout_s: int) -> int:
-    if (not isinstance(requested_timeout_s, int) or isinstance(requested_timeout_s, bool) or not 1 <= requested_timeout_s <= MAX_TIMEOUT_S):
+def effective_timeout_s(input_tokens: int, requested_timeout_s: int) -> int:
+    if (
+        not isinstance(input_tokens, int)
+        or isinstance(input_tokens, bool)
+        or input_tokens < 1
+    ):
+        raise SciencePlannerError("SCIENCE_PLANNER_INPUT_TOKEN_COUNT_INVALID")
+    if (
+        not isinstance(requested_timeout_s, int)
+        or isinstance(requested_timeout_s, bool)
+        or not 1 <= requested_timeout_s <= MAX_TIMEOUT_S
+    ):
         raise SciencePlannerError("SCIENCE_PLANNER_TIMEOUT_INVALID")
-    prompt_bytes = len(str(prompt or "").encode("utf-8"))
-    estimated_prompt_tokens = max(1, math.ceil(prompt_bytes / PROMPT_BYTES_PER_TOKEN_ESTIMATE))
-    prompt_floor = math.ceil(estimated_prompt_tokens / PREFILL_TOKENS_PER_SECOND_FLOOR)
+    prompt_floor = math.ceil(input_tokens / PREFILL_TOKENS_PER_SECOND_FLOOR)
     required = prompt_floor + GENERATION_AND_TRANSPORT_MARGIN_S
     return min(MAX_TIMEOUT_S, max(MIN_TIMEOUT_S, requested_timeout_s, required))
 
@@ -107,6 +116,74 @@ class SciencePlannerError(RuntimeError):
     pass
 
 
+def _request_payload(prompt: str) -> dict[str, Any]:
+    return {
+        "model": MODEL,
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    "You are an optional proposal source inside Project Brain. "
+                    "Use the provided submit_science_proposal tool exactly once. "
+                    "Return exactly one terse candidate action per proposal. Use short requirement IDs, "
+                    f"keep command and verify_command under {MAX_COMMAND_CHARS} characters each, and use no explanatory prose. "
+                    "Never claim execution or finish authority."
+                ),
+            },
+            {"role": "user", "content": prompt},
+        ],
+        "tools": [TOOL],
+        "tool_choice": "required",
+        "parallel_tool_calls": False,
+        "temperature": 0,
+        "max_tokens": MAX_TOOL_COMPLETION_TOKENS,
+        "stream": False,
+    }
+
+
+def count_input_tokens(payload: dict[str, Any]) -> int:
+    body = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        TOKEN_COUNT_ENDPOINT,
+        data=body,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=TOKEN_COUNT_TIMEOUT_S) as response:
+            status = int(getattr(response, "status", 200))
+            if status != 200:
+                raise SciencePlannerError(
+                    f"SCIENCE_PLANNER_TOKEN_COUNT_HTTP_STATUS:{status}"
+                )
+            raw = response.read(MAX_RESPONSE_BYTES + 1)
+        if len(raw) > MAX_RESPONSE_BYTES:
+            raise SciencePlannerError("SCIENCE_PLANNER_TOKEN_COUNT_RESPONSE_TOO_LARGE")
+        try:
+            data = json.loads(raw.decode("utf-8", "replace"))
+        except Exception as exc:
+            raise SciencePlannerError(
+                "SCIENCE_PLANNER_TOKEN_COUNT_RESPONSE_JSON_INVALID"
+            ) from exc
+        value = data.get("input_tokens") if isinstance(data, dict) else None
+        if (
+            not isinstance(value, int)
+            or isinstance(value, bool)
+            or value < 1
+        ):
+            raise SciencePlannerError("SCIENCE_PLANNER_INPUT_TOKEN_COUNT_INVALID")
+        return value
+    except SciencePlannerError:
+        raise
+    except Exception as exc:
+        raise SciencePlannerError(
+            "SCIENCE_PLANNER_TOKEN_COUNT_ROUTE_FAILED:"
+            + type(exc).__name__
+            + ":"
+            + str(exc)
+        ) from exc
+
+
 def extract_json_object(text: Any) -> dict[str, Any]:
     raw = str(text or "").strip()
     try:
@@ -174,30 +251,11 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
     prompt = str(prompt or "")
     if not prompt.strip():
         raise SciencePlannerError("SCIENCE_PLANNER_PROMPT_REQUIRED")
-    timeout_s = effective_timeout_s(prompt, timeout_s)
+    payload = _request_payload(prompt)
+    input_tokens = count_input_tokens(payload)
+    timeout_s = effective_timeout_s(input_tokens, timeout_s)
 
-    body = json.dumps({
-        "model": MODEL,
-        "messages": [
-            {
-                "role": "system",
-                "content": (
-                    "You are an optional proposal source inside Project Brain. "
-                    "Use the provided submit_science_proposal tool exactly once. "
-                    "Return exactly one terse candidate action per proposal. Use short requirement IDs, "
-                    f"keep command and verify_command under {MAX_COMMAND_CHARS} characters each, and use no explanatory prose. "
-                    "Never claim execution or finish authority."
-                ),
-            },
-            {"role": "user", "content": prompt},
-        ],
-        "tools": [TOOL],
-        "tool_choice": "required",
-        "parallel_tool_calls": False,
-        "temperature": 0,
-        "max_tokens": MAX_TOOL_COMPLETION_TOKENS,
-        "stream": False,
-    }).encode("utf-8")
+    body = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(
         ENDPOINT,
         data=body,
@@ -240,9 +298,12 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
             "text": text,
             "model": str(data.get("model") or MODEL),
             "duration_s": round(time.monotonic() - started, 3),
+            "input_tokens": input_tokens,
+            "effective_timeout_s": timeout_s,
             "errors": [],
-            "transport": "PINNED_LOCAL_QWEN_LLAMA_CPP_TOOL_CALL",
+            "transport": "PINNED_LOCAL_QWEN_LLAMA_CPP_TOOL_CALL__EXACT_SERVER_TOKEN_COUNT",
             "endpoint": ENDPOINT,
+            "token_count_endpoint": TOKEN_COUNT_ENDPOINT,
         }
     except SciencePlannerError:
         raise
