@@ -5,9 +5,13 @@ on:
     branches: [main]
     paths:
       - canonical/runtime/live_brain_runtime_v1.py
+      - canonical/runtime/native_specialized_capability_registry_v1.py
+      - canonical/runtime/universal_verified_adaptive_solver_v1.py
+      - canonical/runtime/universal_verified_adaptive_solver_v2.py
       - canonical/runtime/bound_capability_problem_compiler_v1.py
       - canonical/governance/LIVE_BRAIN_RUNTIME_V1_ACTIVATION_20261008_V1.json
       - canonical/tests/test_live_brain_runtime_v1.py
+      - canonical/tests/test_native_specialized_capability_registry_v1.py
       - canonical/tests/test_bound_capability_problem_compiler_v1.py
       - .github/workflows/verify-unified-live-brain-r1.yml
   workflow_dispatch:
@@ -30,6 +34,7 @@ jobs:
           set +e
           python -m unittest -v \
             canonical.tests.test_bound_capability_problem_compiler_v1 \
+            canonical.tests.test_native_specialized_capability_registry_v1 \
             canonical.tests.test_live_brain_runtime_v1 \
             2>&1 | tee r1-test-output.txt
           code=${PIPESTATUS[0]}
