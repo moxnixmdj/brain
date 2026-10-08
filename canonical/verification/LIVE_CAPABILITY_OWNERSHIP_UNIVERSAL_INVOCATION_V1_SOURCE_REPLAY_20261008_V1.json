@@ -1,8 +1,8 @@
 {
-  "schema": "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V2",
+  "schema": "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V3",
   "date": "2026-10-08",
-  "status": "PASS__R1_V3_SINGLE_FRONT_DOOR__LIVE_OWNERSHIP_84__UNIVERSAL_INVOCATION_84",
-  "branch": "r1-reconcile-ownership-invocation-v2-20261008",
+  "status": "PASS__R1_V3_SINGLE_FRONT_DOOR__LIVE_OWNERSHIP_84__UNIVERSAL_INVOCATION_84__AUTHORITY_DRIFT_GUARD_ARMED",
+  "branch": "r1-authority-drift-guard-20261008",
   "exact_blobs": {
     "ownership_manifest": {
       "path": "canonical/governance/LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1.json",
@@ -10,7 +10,7 @@
     },
     "ownership_runtime": {
       "path": "canonical/runtime/live_capability_ownership_v1.py",
-      "git_blob_sha": "2e09b9fdbf2095f9723b64f1afd321e67be37941"
+      "git_blob_sha": "91ab17c659547d39337c9b76d1019c297a959d38"
     },
     "universal_invoker": {
       "path": "canonical/runtime/live_capability_invoker_v1.py",
@@ -34,7 +34,7 @@
     },
     "ownership_tests": {
       "path": "canonical/tests/test_live_capability_ownership_v1.py",
-      "git_blob_sha": "5001fe9bde353f34f07757f17120aa9866ae8d21"
+      "git_blob_sha": "82015489992c6ae4096a5e4793d23fcd2ff5a082"
     },
     "invocation_tests": {
       "path": "canonical/tests/test_live_capability_invoker_v1.py",
@@ -131,5 +131,11 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "drift_guard": {
+    "runtime": "canonical.runtime.live_capability_ownership_v1._authority_binding_check",
+    "policy": "R1_CLOSURE_FAILS_CLOSED_IF_CURRENT_AUTHORITY_DIRECT_BINDINGS_OR_ANY_RECEIPT_EXACT_BLOB_DRIFTS",
+    "current_exact_binding_expected": true,
+    "tampered_hash_expected_result": "FAIL_CLOSED__R1_AUTHORITY_OR_RECEIPT_DRIFT"
   }
 }
