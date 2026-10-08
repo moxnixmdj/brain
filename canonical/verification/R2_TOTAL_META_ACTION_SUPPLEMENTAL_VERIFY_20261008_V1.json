@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_R2_TOTAL_META_ACTION_SUPPLEMENTAL_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__ISOLATED_TOTALIZER_BEHAVIOR__7_OF_7__SUPPLEMENTAL_ONLY",
+  "exact_blobs": {
+    "totalizer": "675d1d4a3df3fcff4c8eb14947610389832103ea",
+    "regression_test": "eb40f8ad4a2d1d8785d83cd160c02985d64c732d",
+    "authoritative_live_runtime_restored": "63cca29affa97545339161593f3e32a52e40a7e9"
+  },
+  "performed_now": {
+    "syntax_compile": true,
+    "isolated_unittest": "7_OF_7_PASS",
+    "cases": [
+      "VERIFIED_GOAL_SATISFACTION_RETURNS_RESULT",
+      "PASS_WITHOUT_GOAL_SATISFACTION_ABSTAINS",
+      "INFORMATION_EDGE_ACQUIRES_MINIMUM_INFORMATION",
+      "BINDING_GAP_ACQUIRES_AUTHORITY_BINDING",
+      "POLICY_GAP_REPAIRS_ADEQUACY_COVER",
+      "UNKNOWN_GAP_ABSTAINS",
+      "WRAPPER_ADDS_NO_EXECUTION_SEMANTIC_OR_TERMINAL_AUTHORITY"
+    ]
+  },
+  "authority": {
+    "live_authority": false,
+    "supplemental_view_only": true,
+    "authoritative_r2_closure": "CURRENT_R2_DECISION_INTELLIGENCE.mechanism_closure",
+    "open_world_completion_claimed": false
+  },
+  "hard_nonclaims": [
+    "NO_FULL_CANONICAL_RUNTIME_SUITE_REPLAY",
+    "NO_REPLACEMENT_OF_V6_MECHANISM_CLOSURE",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_SEMANTIC_TRUTH_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
