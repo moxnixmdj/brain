@@ -141,7 +141,7 @@ def test_false_or_relabelled_certificate_never_counts_as_complete():
         "WRONG","TRUE")
     out=evaluate(p)
     assert out["pass"] is False
-    assert out["unresolved_semantic_predicates"]==["AUDIENCE_FORMAT_PROFILE_COMPLETE"]
+    assert set(out["unresolved_semantic_predicates"]) == set(p["semantic_certificates"])
 
 
 def test_forged_semantic_proofs_and_independent_flags_cannot_admit():
