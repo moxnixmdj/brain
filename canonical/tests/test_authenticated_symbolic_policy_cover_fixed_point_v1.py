@@ -228,3 +228,105 @@ def test_extra_p2_semantic_dimension_fails_before_policy_cover():
     out = m.evaluate(p)
     assert out["pass"] is False
     assert out["reason"] == "TRUSTED_CONSTRAINT_VERIFICATION_FAILED"
+
+
+SOURCE_BOUND_EXPOSURE_PREDICATE = (
+    "source-condition-sha256:"
+    "81c85c5049fd41b89e9d090f3970422280f8096a4d044124760ffc511e84407b"
+)
+SOURCE_BOUND_POLICY = (
+    "Total exposure means exposure_amount. "
+    "Apply Rule A unless Total exposure is at least 125.50."
+)
+
+
+def _selected_fact(value):
+    import json
+    return json.dumps({
+        "schema_id": "FINANCE_TYPED_CONTEXT_V1",
+        "fields": {
+            "exposure_amount": {"type": "DECIMAL_STRING", "value": value}
+        },
+    }, separators=(",", ":"))
+
+
+def _selected_observation_payload(value):
+    return {
+        "decision_basis": [SOURCE_BOUND_EXPOSURE_PREDICATE],
+        "constraint_checks": [{
+            "constraint_id": SOURCE_BOUND_EXPOSURE_PREDICATE,
+            "verifier_id": "SELECTED_SEMANTIC_TRUTH_OBSERVATION_V1",
+            "input": {
+                "source_text": SOURCE_BOUND_POLICY,
+                "source_id": "policy",
+                "fact_source": _selected_fact(value),
+                "fact_source_id": "case-facts",
+            },
+        }],
+        "policies": [
+            {"policy_id": "p_false", "verifier_id": "TEST_POLICY", "cost_units": 1},
+            {"policy_id": "p_true", "verifier_id": "TEST_POLICY", "cost_units": 1},
+        ],
+        "discriminators": [],
+    }
+
+
+def test_real_selected_semantic_true_observation_refines_to_true_policy(monkeypatch):
+    def pv(vid, pid):
+        atom = {"op": "ATOM", "id": SOURCE_BOUND_EXPOSURE_PREDICATE}
+        cond = atom if pid == "p_true" else {"op": "NOT", "arg": atom}
+        return {
+            "pass": True, "policy_id": pid, "policy_condition": cond,
+            "adequacy_proved": True, "brain_owned": True, "proof_digest": pid,
+        }
+    monkeypatch.setattr(m, "_policy_verifier", pv)
+    out = m.evaluate(_selected_observation_payload("130.00"))
+    assert out["pass"] is True, out
+    assert out["root_model_count"] == 1
+    assert out["decision_tree"]["terminal_policy_id"] == "p_true"
+    assert out["accepted_constraint_proofs"][0]["verifier_id"] == "SELECTED_SEMANTIC_TRUTH_OBSERVATION_V1"
+
+
+def test_real_selected_semantic_false_observation_refines_to_false_policy(monkeypatch):
+    def pv(vid, pid):
+        atom = {"op": "ATOM", "id": SOURCE_BOUND_EXPOSURE_PREDICATE}
+        cond = atom if pid == "p_true" else {"op": "NOT", "arg": atom}
+        return {
+            "pass": True, "policy_id": pid, "policy_condition": cond,
+            "adequacy_proved": True, "brain_owned": True, "proof_digest": pid,
+        }
+    monkeypatch.setattr(m, "_policy_verifier", pv)
+    out = m.evaluate(_selected_observation_payload("100.00"))
+    assert out["pass"] is True, out
+    assert out["root_model_count"] == 1
+    assert out["decision_tree"]["terminal_policy_id"] == "p_false"
+
+
+def test_selected_semantic_observation_rejects_forged_predicate_identity(monkeypatch):
+    p = _selected_observation_payload("130.00")
+    forged = "source-condition-sha256:" + "0" * 64
+    p["decision_basis"] = [forged]
+    p["constraint_checks"][0]["constraint_id"] = forged
+    p["policies"] = [{"policy_id": "p", "verifier_id": "TEST_POLICY", "cost_units": 1}]
+    monkeypatch.setattr(m, "_policy_verifier", lambda vid, pid: {
+        "pass": True, "policy_id": pid, "policy_condition": {"op": "TRUE"},
+        "adequacy_proved": True, "brain_owned": True, "proof_digest": "p",
+    })
+    out = m.evaluate(p)
+    assert out["pass"] is False
+    assert out["reason"] == "TRUSTED_CONSTRAINT_VERIFICATION_FAILED"
+
+
+def test_selected_semantic_observation_unknown_fragment_fails_closed(monkeypatch):
+    p = _selected_observation_payload("130.00")
+    p["constraint_checks"][0]["input"]["source_text"] = (
+        "Total exposure means exposure_amount. "
+        "Apply Rule A unless Aggregate exposure is at least 125.50."
+    )
+    monkeypatch.setattr(m, "_policy_verifier", lambda vid, pid: {
+        "pass": True, "policy_id": pid, "policy_condition": {"op": "TRUE"},
+        "adequacy_proved": True, "brain_owned": True, "proof_digest": "p",
+    })
+    out = m.evaluate(p)
+    assert out["pass"] is False
+    assert out["reason"] == "TRUSTED_CONSTRAINT_VERIFICATION_FAILED"
