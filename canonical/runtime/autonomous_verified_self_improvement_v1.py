@@ -378,7 +378,7 @@ def record_success_observation(
         state,
         kind="ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
         priority=50,
-        identity={"observation_id": oid},
+        identity={"surface": name, "schema": core["schema"]},
         payload={
             "observation_id": oid,
             "surface": name,
@@ -463,7 +463,10 @@ def integrate_solver_output(
             state,
             kind="REPAIR_FAILURE_CLASS",
             priority=30,
-            identity={"failure_fingerprint": fid},
+            identity={
+                "failure_fingerprint": fid,
+                "retry_capsule_sha256": retry_sha,
+            },
             payload={
                 "failure_fingerprint": fid,
                 "repair_class": diagnosis["repair_class"],
@@ -507,6 +510,8 @@ def integrate_solver_output(
             predicate=lambda row: (
                 row.get("identity", {}).get("episode_id") == _s(ep.get("episode_id"))
                 and row.get("identity", {}).get("scope_id") == _s(ep.get("scope_id"))
+                and row.get("identity", {}).get("program_sha256") == _s(ep.get("program_sha256"))
+                and row.get("identity", {}).get("trace_sha256") == _s(ep.get("trace_sha256"))
             ),
             resolved_by=episode_key,
         )
@@ -539,6 +544,18 @@ def integrate_solver_output(
     if isinstance(skill_candidate, Mapping) and not isinstance(verified_skill, Mapping):
         candidate_sha = _s(skill_candidate.get("candidate_sha256"))
         if candidate_sha:
+            candidate_scopes = set(_items(skill_candidate.get("source_scopes")))
+            candidate_postconditions = _items(skill_candidate.get("postconditions"))
+            _resolve_improvements(
+                state,
+                kind="COLLECT_MATCHING_VERIFIED_EPISODE",
+                predicate=lambda work: (
+                    work.get("payload", {}).get("scope_id") in candidate_scopes
+                    and _items(work.get("payload", {}).get("postconditions"))
+                    == candidate_postconditions
+                ),
+                resolved_by=candidate_sha,
+            )
             _enqueue_improvement(
                 state,
                 kind="VERIFY_SKILL_CANDIDATE",
@@ -748,7 +765,10 @@ def record_repair_outcome(
         _resolve_improvements(
             state,
             kind="REPAIR_FAILURE_CLASS",
-            predicate=lambda work: work.get("identity", {}).get("failure_fingerprint") == fid,
+            predicate=lambda work: (
+                work.get("identity", {}).get("failure_fingerprint") == fid
+                and work.get("identity", {}).get("retry_capsule_sha256") == retry_sha
+            ),
             resolved_by=repair_sha,
         )
     _refresh_stats(state)
@@ -815,7 +835,7 @@ def _select_active_skill(
       the current target effects.
 
     This makes a stored skill a planning compression hint, never semantic authority.
-    The ordinary V10 effect semantics and execution verification still run.
+    The ordinary V12 effect semantics and execution verification still run.
     """
     if not isinstance(problem, Mapping):
         raise SelfImprovementError("PROBLEM_NOT_OBJECT")
