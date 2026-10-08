@@ -93,7 +93,7 @@ class Tests(unittest.TestCase):
     def test_ambiguous_role_evidence_fails_closed(self):
         p=base()
         p["v2_input"]["task"]["evidence"].append({
-          "evidence_id":"E3","text":"AISI type 304 stainless steel has another conductivity observation.",
+          "evidence_id":"E3","text":"Thermal conductivity of AISI type 304 stainless steel is 17 W/mK.",
           "verified":True,"provenance":[{"source_id":"S3","locator":"p3"}]})
         out=evaluate(p)
         self.assertFalse(out["pass"])
