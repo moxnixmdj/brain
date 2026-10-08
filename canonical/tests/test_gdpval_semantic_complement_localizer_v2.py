@@ -18,6 +18,13 @@ class GDPvalSemanticComplementLocalizerV2Tests(unittest.TestCase):
         x = _compound_candidate("The report must include revenue or expenses.")
         self.assertNotEqual(x["status"], "BOUNDED_COMPOUND_CANDIDATE")
 
+    def test_nominal_second_conjunct_is_not_promoted(self):
+        x = _compound_candidate(
+            "The writing must reflect a thorough understanding of the literature "
+            "to support clinical education and improvement in practice."
+        )
+        self.assertEqual(x["status"], "DECOMPOSED_BUT_REPARSE_UNRESOLVED")
+
     def test_complete_population_guard_fails_closed(self):
         out = localize_rows([])
         self.assertEqual(out["status"], "FAIL_CLOSED")
