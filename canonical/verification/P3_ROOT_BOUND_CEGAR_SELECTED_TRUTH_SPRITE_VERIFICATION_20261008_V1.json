@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_P3_ROOT_BOUND_CEGAR_SELECTED_TRUTH_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_8_OF_8__ROOT_BOUND_SELECTED_TRUTH_RECOMPILE__EXACT_BLOBS_9_OF_9__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "research/p3-cegar-selected-truth-bridge-20261008-v1",
+    "root_contract": {
+      "path": "canonical/runtime/p3_selected_truth_root_contract_v1.py",
+      "git_blob_sha": "48e28211b14c404c09c596417df6232f96495cae"
+    },
+    "root_bound_wrapper": {
+      "path": "canonical/runtime/p3_root_bound_cegar_selected_truth_v1.py",
+      "git_blob_sha": "b97d8340a1df31233dea857c003ccf70f60e1159"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p3_root_bound_cegar_selected_truth_v1.py",
+      "git_blob_sha": "60359419b05819216762233ca12b759ea79dced9"
+    },
+    "selected_truth_bridge": {
+      "path": "canonical/runtime/p3_cegar_selected_truth_bridge_v1.py",
+      "git_blob_sha": "23ffdb4b2f7afd1a5e349bb4b5af34367d8e57a3"
+    },
+    "stable_predicate_identity": {
+      "path": "canonical/runtime/selected_semantic_predicate_identity_v1.py",
+      "git_blob_sha": "44998c7c8bf2896f0fa32ef040c999a5abab05f1"
+    },
+    "robust_cegar": {
+      "path": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+      "git_blob_sha": "c81746a4e9c9bc48a1aafe22cf854632f81698eb"
+    },
+    "selected_truth_dispatch": {
+      "path": "canonical/runtime/selected_semantic_discriminator_dispatch_v1.py",
+      "git_blob_sha": "d35bd976bcadbf56f370d333e9e968bd3d4c39e8"
+    },
+    "selected_truth_certificate": {
+      "path": "canonical/runtime/selected_semantic_truth_certificate_v1.py",
+      "git_blob_sha": "18202653b4b6d1ef6434c851ab7d2a314365082c"
+    },
+    "typed_fact_compiler": {
+      "path": "canonical/runtime/authoritative_typed_context_compiler_v1.py",
+      "git_blob_sha": "3f2751424076a69168bd0b1cb22e9c2d42920a01"
+    }
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/p3_cegar_truth_bridge_verify_v1"
+  },
+  "verification": {
+    "tests_run": 8,
+    "tests_passed": 8,
+    "failures": 0,
+    "errors": 0,
+    "exact_git_blobs_verified": 9,
+    "proved": [
+      "ROOT_TASK_POLICY_AND_FACT_SOURCES_ARE_LOSSLESSLY_BOUND_FROM_STRICT_EXPLICIT_ROOT_BYTES",
+      "ROOT_TASK_AUTHORITY_REMAINS_AN_UPSTREAM_TRUST_ROOT_AND_IS_NOT_SELF_PROVED",
+      "TRUE_SELECTED_DISCRIMINATOR_RECOMPILES_TO_THE_AUTHENTICATED_TRUE_BRANCH_POLICY",
+      "FALSE_SELECTED_DISCRIMINATOR_RECOMPILES_TO_THE_AUTHENTICATED_FALSE_BRANCH_POLICY",
+      "CHANGED_ROOT_POLICY_SOURCE_CANNOT_REUSE_OLD_STABLE_PREDICATE_IDENTITY",
+      "DUPLICATE_ROOT_JSON_KEYS_FAIL_CLOSED",
+      "EXTRA_ROOT_SEMANTIC_FIELDS_FAIL_CLOSED",
+      "MISSING_OR_WRONG_TYPED_PREDICATE_FIELD_FAILS_BEFORE_DISCRIMINATOR_EVALUATION"
+    ]
+  },
+  "effect": {
+    "selected_discriminator_truth_bound_to_root_sources_for_checked_fragment": true,
+    "selected_discriminator_evaluator_preconditions_verified_for_admitted_root_class": true,
+    "source_authorization_verified_relative_to_root_task": true,
+    "root_task_authority_self_proved": false,
+    "branch_policy_adequacy_scope_complete_globally": false,
+    "u_empty": false,
+    "terminal": false
+  },
+  "remaining_policy_adequacy_root": "SCOPE_COMPLETE_AUTHENTICATED_POLICY_ADEQUACY_COVER__CHILD_POLICY_ADEQUACY_MUST_BE_DERIVED_FROM_REAL_TOP_LAW_OR_OTHER_SOUND_OBJECTIVE_SEMANTICS_NOT_TEST_FIXTURES",
+  "hard_nonclaims": [
+    "NO_CLAIM_ROOT_TASK_BYTES_EQUAL_USER_INTENT_FROM_INSIDE_THE_SOLVER",
+    "NO_CLAIM_GENERAL_FREE_FORM_SOURCE_AUTHORIZATION",
+    "NO_CLAIM_GENERAL_SELECTED_DISCRIMINATOR_PROOF_COVERAGE",
+    "NO_CLAIM_SCOPE_COMPLETE_AUTHENTICATED_POLICY_ADEQUACY_COVER",
+    "NO_DB_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
