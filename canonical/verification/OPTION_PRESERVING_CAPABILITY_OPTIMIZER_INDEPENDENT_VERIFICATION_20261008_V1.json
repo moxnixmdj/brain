@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_OPTION_PRESERVING_CAPABILITY_OPTIMIZER_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__OPTION_PRESERVING_OPTIMIZER_AND_SCHEDULER_REGRESSION__16_OF_16__GOVERNANCE_PASS",
+  "subject_head_before_receipt": "a483c91e6039e6010c5f6dd5d580315671abb035",
+  "exact_blobs": {
+    "optimizer_runtime": {
+      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+      "git_blob_sha": "a0f23296d401216b4d9277ad3fbf838b2017a13f"
+    },
+    "scheduler_runtime": {
+      "path": "canonical/runtime/capability_first_scheduler_v1.py",
+      "git_blob_sha": "29e98ade0d85a360895fabc58c3e870a833649de"
+    },
+    "optimizer_tests": {
+      "path": "canonical/tests/test_option_preserving_capability_optimizer_v1.py",
+      "git_blob_sha": "6035e12126b711e42abfba1a2b8977dca6db762a"
+    },
+    "scheduler_tests": {
+      "path": "canonical/tests/test_capability_first_scheduler_v1.py",
+      "git_blob_sha": "ef822f88dcf4f7f80c509907e7276ea985a83f9c"
+    },
+    "policy": {
+      "path": "canonical/governance/OPTION_PRESERVING_CAPABILITY_OPTIMIZATION_20261008_V1.json",
+      "git_blob_sha": "7084b8b9678ac27048b573c45836d4574f3755eb"
+    },
+    "scheduler_activation": {
+      "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V1.json",
+      "git_blob_sha": "05f9cef7aafb4ddfabb414935d6b88e03229fec5"
+    },
+    "mission_objective": {
+      "path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
+    }
+  },
+  "carrier": {
+    "type": "SPRITES",
+    "sprite": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "exact_branch_files_materialized": true
+  },
+  "verification": {
+    "python_compile_optimizer": true,
+    "python_compile_scheduler": true,
+    "unittest_command": "python -m unittest canonical.tests.test_option_preserving_capability_optimizer_v1 canonical.tests.test_capability_first_scheduler_v1 -v",
+    "tests_run": 16,
+    "failures": 0,
+    "errors": 0,
+    "return_code": 0,
+    "governance_semantic_assertions": "PASS"
+  },
+  "verified_properties": [
+    "CURRENT_DOMINANCE_RETIRES_BUT_DOES_NOT_DELETE",
+    "DISTINCT_SUBSTRATE_OPTION_REMAINS_WARM",
+    "DIFFERENT_SEMANTIC_CONTRACTS_DO_NOT_DOMINATE",
+    "PERMANENT_DELETION_FAILS_CLOSED_WITHOUT_FUTURE_OPTION_PROOF",
+    "PERMANENT_DELETION_ELIGIBILITY_REQUIRES_COMPLETE_INDEPENDENT_PROOF",
+    "NEW_COST_MODEL_CAN_REACTIVATE_PREVIOUS_IMPLEMENTATION",
+    "DOMINATED_SCHEDULER_CANDIDATE_EVIDENCE_IS_PRESERVED",
+    "SCHEDULER_HAS_NO_PHYSICAL_DELETION_AUTHORITY",
+    "CAPABILITY_LEARNING_LOOP_INCLUDES_PRESERVE_OPTIONS",
+    "MISSION_SCHEDULER_AND_TERMINAL_AUTHORITY_OPTION_PRESERVATION_SEMANTICS_RECONCILED"
+  ],
+  "github_actions_boundary": {
+    "observed": "WORKFLOWS_FAILED_BEFORE_ANY_STEP_EXECUTION",
+    "code_result": false,
+    "authority_from_github_actions": false
+  },
+  "hard_nonclaims": [
+    "NO_FULL_REPOSITORY_SUITE_CLAIM",
+    "NO_CLAIM_FUTURE_TECHNOLOGY_IS_PREDICTABLE",
+    "NO_PHYSICAL_DELETION_PERFORMED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
