@@ -65,6 +65,7 @@ def _decision_run(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None,
+    execution_provider: Callable[..., Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     from canonical.runtime.general_adequate_decision_controller_v1 import run
     return run(
@@ -73,6 +74,7 @@ def _decision_run(
         information_provider=information_provider,
         proposal_provider=proposal_provider,
         capability_expander=capability_expander,
+        execution_provider=execution_provider,
     )
 
 
@@ -530,6 +532,53 @@ def _integrate_learning(
     )
 
 
+def _run_learning_episode(
+    problem: Mapping[str, Any],
+    *,
+    repo_root: str | Path,
+    state_path: str | Path | None,
+    episode_id: str,
+    scope_id: str,
+    retry_context: Mapping[str, Any] | None = None,
+    known_absent_invalidators: Sequence[str] = (),
+    solver_kwargs: Mapping[str, Any] | None = None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+) -> dict[str, Any]:
+    """Execute through R3 so verified learned routes can control the live path."""
+    learning = _learning_module()
+    path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
+    kwargs = dict(solver_kwargs or {})
+    controlled = {
+        "repo_root",
+        "state_path",
+        "episode_id",
+        "scope_id",
+        "retry_context",
+        "known_absent_invalidators",
+        "proposal_provider",
+        "capability_expander",
+        "prior_verified_episode_records",
+    }
+    conflicts = sorted(set(kwargs) & controlled)
+    if conflicts:
+        raise ValueError(
+            "R3_LIVE_EXECUTION_CONTROLLED_KWARGS:" + ",".join(conflicts)
+        )
+    return learning.run_learning_episode(
+        problem,
+        repo_root=repo_root,
+        state_path=path,
+        episode_id=episode_id,
+        scope_id=scope_id,
+        retry_context=retry_context,
+        known_absent_invalidators=known_absent_invalidators,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+        **kwargs,
+    )
+
+
 def _observe_runtime_outcome(
     out: Mapping[str, Any],
     *,
@@ -664,8 +713,10 @@ def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
         "public_entrypoint": "canonical.runtime.live_brain_runtime_v1.run",
         "surfaces": list(SURFACES),
         "default_raw_intent_path": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
-        "default_explicit_execution_path": "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
+        "default_explicit_execution_path": "R3_REUSE_FIRST_OVER_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
+        "default_learning_scope": "unified-live-brain",
         "automatic_verified_experience_integration": True,
+        "verified_skill_execution_reuse_first": True,
         "active_skill_planning_reuse": True,
         "verified_bound_capability_count": bound_count,
         "bound_inventory_error": bound_error,
@@ -686,6 +737,7 @@ def run_generic(
     episode_id: str = "episode",
     scope_id: str = "unified-live-brain",
     active_invalidators: Sequence[str] = (),
+    known_absent_invalidators: Sequence[str] = (),
     learn: bool = True,
     solver_kwargs: Mapping[str, Any] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
@@ -694,50 +746,106 @@ def run_generic(
     if not isinstance(problem, Mapping):
         return _fail("PROBLEM_NOT_OBJECT")
     try:
-        ctx = _active_learning_context(state_path, scope_id=scope_id, episode_id=episode_id)
+        ctx = _active_learning_context(
+            state_path,
+            scope_id=scope_id,
+            episode_id=episode_id,
+        )
+        skill_plan = None
+        if ctx["active_verified_skills"]:
+            skill_plan = _skill_plan(
+                problem,
+                ctx["active_verified_skills"],
+                active_invalidators,
+            )
+
+        if learn:
+            learned = _run_learning_episode(
+                problem,
+                repo_root=repo_root,
+                state_path=ctx["state_path"],
+                episode_id=episode_id,
+                scope_id=scope_id,
+                retry_context={
+                    "mode": "generic",
+                    "problem": deepcopy(dict(problem)),
+                    "episode_id": episode_id,
+                    "scope_id": scope_id,
+                    "active_invalidators": list(active_invalidators),
+                    "known_absent_invalidators": list(known_absent_invalidators),
+                    "learn": True,
+                },
+                known_absent_invalidators=known_absent_invalidators,
+                solver_kwargs=solver_kwargs,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+            )
+            out = learned.get("solver_output")
+            if not isinstance(out, Mapping):
+                raise ValueError("R3_SOLVER_OUTPUT_MISSING")
+            return {
+                "schema": SCHEMA,
+                "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
+                "pass": learned.get("pass") is True,
+                "solver": "R3_REUSE_FIRST_OVER_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
+                "solver_output": out,
+                "learning": learned.get("learning"),
+                "verified_prior_episode_count_reused": learned.get(
+                    "prior_verified_episode_count_used", 0
+                ),
+                "active_verified_skill_count": len(ctx["active_verified_skills"]),
+                "skill_aware_plan": skill_plan,
+                "reuse_first": learned.get("reuse_first") is True,
+                "reused_skill_id": learned.get("reused_skill_id"),
+                "reuse_attempt": learned.get("reuse_attempt"),
+                "fallback_used": learned.get("fallback_used") is True,
+                "fallback_blocked_effect_may_have_occurred": (
+                    learned.get("fallback_blocked_effect_may_have_occurred") is True
+                ),
+                "learning_persistence_enabled": True,
+                "terminal_authority": False,
+                "capability_promotion_authority": False,
+                "terminal_credit_delta": 0,
+            }
+
         kwargs = dict(solver_kwargs or {})
         kwargs.setdefault("episode_id", episode_id)
         kwargs.setdefault("scope_id", scope_id)
-        kwargs.setdefault("prior_verified_episode_records", ctx["prior_verified_episodes"])
+        kwargs.setdefault(
+            "prior_verified_episode_records",
+            ctx["prior_verified_episodes"],
+        )
         if proposal_provider is not None:
             kwargs["proposal_provider"] = proposal_provider
         if capability_expander is not None:
             kwargs["capability_expander"] = capability_expander
-
-        skill_plan = None
-        if ctx["active_verified_skills"]:
-            skill_plan = _skill_plan(problem, ctx["active_verified_skills"], active_invalidators)
-
         out = _v12_run(problem, repo_root=repo_root, kwargs=kwargs)
-        retry_context = {
-            "mode": "generic",
-            "problem": deepcopy(dict(problem)),
-            "episode_id": episode_id,
-            "scope_id": scope_id,
-            "active_invalidators": list(active_invalidators),
-            "learn": True,
-        }
-        learning = (
-            _integrate_learning(out, state_path=ctx["state_path"], retry_context=retry_context)
-            if learn else None
-        )
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
             "pass": out.get("pass") is True,
             "solver": "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
             "solver_output": out,
-            "learning": learning,
-            "verified_prior_episode_count_reused": len(ctx["prior_verified_episodes"]),
+            "learning": None,
+            "verified_prior_episode_count_reused": len(
+                ctx["prior_verified_episodes"]
+            ),
             "active_verified_skill_count": len(ctx["active_verified_skills"]),
             "skill_aware_plan": skill_plan,
-            "learning_persistence_enabled": bool(learn),
+            "reuse_first": False,
+            "reused_skill_id": None,
+            "reuse_attempt": None,
+            "fallback_used": False,
+            "fallback_blocked_effect_may_have_occurred": False,
+            "learning_persistence_enabled": False,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
         }
     except Exception as exc:
-        return _fail("GENERIC_RUNTIME_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
+        return _fail(
+            "GENERIC_RUNTIME_EXCEPTION:" + type(exc).__name__ + ":" + str(exc)
+        )
 
 
 def run_decision(
@@ -748,31 +856,66 @@ def run_decision(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    known_absent_invalidators: Sequence[str] = (),
     learn: bool = True,
 ) -> dict[str, Any]:
     if not isinstance(request, Mapping):
         return _fail("DECISION_REQUEST_NOT_OBJECT")
     try:
+        bound_request = deepcopy(dict(request))
+        bound_request.setdefault("scope_id", "unified-live-brain")
+        learning_holder: dict[str, Any] = {}
+
+        def learned_execution_provider(
+            problem: Mapping[str, Any],
+            *,
+            repo_root: str | Path,
+            episode_id: str,
+            scope_id: str,
+            proposal_provider=None,
+            capability_expander=None,
+        ) -> Mapping[str, Any]:
+            learned = _run_learning_episode(
+                problem,
+                repo_root=repo_root,
+                state_path=state_path,
+                episode_id=episode_id,
+                scope_id=scope_id,
+                retry_context={
+                    "mode": "decision",
+                    "request": deepcopy(dict(bound_request)),
+                    "known_absent_invalidators": list(known_absent_invalidators),
+                    "learn": True,
+                },
+                known_absent_invalidators=known_absent_invalidators,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+            )
+            learning_holder["result"] = learned
+            solver_output = learned.get("solver_output")
+            if not isinstance(solver_output, Mapping):
+                raise ValueError("R3_DECISION_SOLVER_OUTPUT_MISSING")
+            return solver_output
+
         out = _decision_run(
-            request,
+            bound_request,
             repo_root=repo_root,
             information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
+            execution_provider=learned_execution_provider if learn else None,
         )
-        execution = out.get("execution_result")
+        learned = learning_holder.get("result")
         retry_context = {
             "mode": "decision",
-            "request": deepcopy(dict(request)),
+            "request": deepcopy(dict(bound_request)),
+            "known_absent_invalidators": list(known_absent_invalidators),
             "learn": True,
         }
+
         learning = None
-        if learn and isinstance(execution, Mapping):
-            learning = _integrate_learning(
-                execution,
-                state_path=state_path,
-                retry_context=retry_context,
-            )
+        if isinstance(learned, Mapping):
+            learning = learned.get("learning")
         elif learn and out.get("pass") is not True:
             learning = _observe_runtime_outcome(
                 out,
@@ -780,6 +923,7 @@ def run_decision(
                 learn=True,
                 retry_context=retry_context,
             )
+
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_DECISION_EXECUTION_COMPLETE",
@@ -787,14 +931,40 @@ def run_decision(
             "decision_controller": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
             "decision_output": out,
             "learning": learning,
-            "semantic_acceptance_complete": out.get("semantic_acceptance_complete") is True,
-            "actual_goal_satisfaction_verified": out.get("actual_goal_satisfaction_verified") is True,
+            "reuse_first": (
+                learned.get("reuse_first") is True
+                if isinstance(learned, Mapping) else False
+            ),
+            "reused_skill_id": (
+                learned.get("reused_skill_id")
+                if isinstance(learned, Mapping) else None
+            ),
+            "reuse_attempt": (
+                learned.get("reuse_attempt")
+                if isinstance(learned, Mapping) else None
+            ),
+            "fallback_used": (
+                learned.get("fallback_used") is True
+                if isinstance(learned, Mapping) else False
+            ),
+            "fallback_blocked_effect_may_have_occurred": (
+                learned.get("fallback_blocked_effect_may_have_occurred") is True
+                if isinstance(learned, Mapping) else False
+            ),
+            "semantic_acceptance_complete": (
+                out.get("semantic_acceptance_complete") is True
+            ),
+            "actual_goal_satisfaction_verified": (
+                out.get("actual_goal_satisfaction_verified") is True
+            ),
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
         }
     except Exception as exc:
-        return _fail("DECISION_RUNTIME_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
+        return _fail(
+            "DECISION_RUNTIME_EXCEPTION:" + type(exc).__name__ + ":" + str(exc)
+        )
 
 
 def run_specialized(
@@ -898,6 +1068,7 @@ def run(
             information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
+            known_absent_invalidators=request.get("known_absent_invalidators") or (),
             learn=request.get("learn", True) is not False,
         )
 
@@ -912,6 +1083,7 @@ def run(
             episode_id=str(request.get("episode_id") or problem.get("task_id") or "episode"),
             scope_id=str(request.get("scope_id") or "unified-live-brain"),
             active_invalidators=request.get("active_invalidators") or (),
+            known_absent_invalidators=request.get("known_absent_invalidators") or (),
             learn=request.get("learn", True) is not False,
             solver_kwargs=request.get("solver_kwargs") or {},
             proposal_provider=proposal_provider,

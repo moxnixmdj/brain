@@ -703,6 +703,7 @@ def run_learning_episode(
     episode_verification_binding: Mapping[str, Any] | None = None,
     skill_verification_binding: Mapping[str, Any] | None = None,
     resume_binding: Mapping[str, Any] | None = None,
+    retry_context: Mapping[str, Any] | None = None,
     known_absent_invalidators: Sequence[str] = (),
     proposal_provider=None,
     capability_expander=None,
@@ -769,7 +770,7 @@ def run_learning_episode(
             "status": reuse_out.get("status"),
         }
         if reuse_out.get("pass") is True:
-            integrated = integrate_solver_output(reuse_out, state_path=state_path)
+            integrated = integrate_solver_output(reuse_out, state_path=state_path, retry_context=retry_context)
             return {
                 "schema": SCHEMA,
                 "status": integrated["status"],
@@ -784,7 +785,7 @@ def run_learning_episode(
                 "terminal_authority": False,
             }
         if effectful:
-            integrated = integrate_solver_output(reuse_out, state_path=state_path)
+            integrated = integrate_solver_output(reuse_out, state_path=state_path, retry_context=retry_context)
             return {
                 "schema": SCHEMA,
                 "status": "FAIL_CLOSED__LEARNED_ROUTE_EFFECT_OCCURRED__NO_BLIND_REPLAY",
@@ -819,7 +820,7 @@ def run_learning_episode(
         capability_expander_id=capability_expander_id,
         max_capability_expansions=max_capability_expansions,
     )
-    integrated = integrate_solver_output(out, state_path=state_path)
+    integrated = integrate_solver_output(out, state_path=state_path, retry_context=retry_context)
     return {
         "schema": SCHEMA,
         "status": integrated["status"],

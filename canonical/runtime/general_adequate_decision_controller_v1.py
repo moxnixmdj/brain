@@ -389,6 +389,7 @@ def run(
     | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    execution_provider: Callable[..., Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     root = Path(repo_root) if repo_root is not None else ROOT
     try:
@@ -662,7 +663,8 @@ def run(
                 policy_execution_binding=execution_binding,
             )
 
-        execution = run_universal(
+        executor = execution_provider or run_universal
+        execution = executor(
             execution_problem,
             repo_root=root,
             episode_id=str(request.get("episode_id") or task_id),
@@ -670,6 +672,8 @@ def run(
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
         )
+        if not isinstance(execution, Mapping):
+            raise DecisionControllerError("EXECUTION_PROVIDER_RESULT_NOT_OBJECT")
         if execution.get("pass") is not True:
             return _open(
                 "OPEN__SELECTED_ADEQUATE_POLICY_EXECUTION_UNRESOLVED",
