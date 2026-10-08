@@ -12,7 +12,7 @@ def _goal():
     return (
         "Read canonical/tmp/SOURCE.json. "
         "Create canonical/tmp/OUT.sqlite as a SQLite table named records "
-        "with columns capability_id, name, status, and count containing every READY_STATUS."
+        "containing every READY_STATUS with columns capability_id, name, status, and count."
     )
 
 def _source():
