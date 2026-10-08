@@ -21,6 +21,7 @@ from canonical.runtime import interval_information_frontier_v1 as mystery_inform
 from canonical.runtime import capability_first_scheduler_v1 as capability_scheduler
 from canonical.runtime.brain_owned_python_closure_census_v1 import census as closure_census
 from canonical.runtime.current_authority_runtime_census_v1 import run as authority_runtime_census
+from canonical.runtime import live_capability_ownership_v1 as live_ownership
 from canonical.runtime import universal_escape_resolver_v1 as universal_escape
 from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
 from canonical.runtime import terminal_autopilot_v1 as terminal_autopilot
@@ -49,11 +50,13 @@ ENGINE_DESCRIPTORS = {
     "TERMINAL_AUTOPILOT": "terminal_autopilot_v1",
     "TERMINAL_ROOT": "terminal_root_decision_gate_v1.evaluate",
     "TERMINAL_CLOSURE": "terminal_closure_reducer",
+    "OWNERSHIP_CATALOG": "live_capability_ownership_v1.evaluate",
 }
 
-KNOWN_RESIDUALS = (
-    "AUTO_ROUTE_NOT_SCOPE_COMPLETE_FOR_ALL_COGNITIVE_PAYLOADS",
-    "HISTORICAL_CAPABILITY_CENSUS_NOT_YET_PROVED_COMPLETE",
+KNOWN_R1_RESIDUALS: tuple[str, ...] = ()
+CROSS_ROOT_BOUNDARIES = (
+    "ARBITRARY_RAW_LANGUAGE_TO_CORRECT_ENGINE_SELECTION_REMAINS_R2_SEMANTIC_DECISION_INTELLIGENCE",
+    "HISTORICAL_SUPERSEDED_REPOSITORY_CAPABILITY_CENSUS_IS_OUTSIDE_CURRENT_LIVE_OWNERSHIP_SCOPE",
 )
 
 
@@ -131,6 +134,7 @@ def catalog() -> dict[str, Any]:
         ["canonical/runtime/unified_cognitive_fabric_v1.py"],
     )
     authority_census = authority_runtime_census(ROOT)
+    ownership = live_ownership.evaluate(ENGINE_DESCRIPTORS)
     return {
         "schema": SCHEMA,
         "status": "LIVE_FEDERATED_COGNITIVE_FABRIC",
@@ -153,8 +157,14 @@ def catalog() -> dict[str, Any]:
         "authority_pointer_runtime_reference_missing_paths": authority_census[
             "authority_pointer_reference_missing_paths"
         ],
-        "current_live_ownership_set_completeness_proved": False,
-        "known_unified_fabric_residuals": list(KNOWN_RESIDUALS),
+        "live_capability_ownership": ownership,
+        "live_owned_capability_count": ownership["live_owned_capability_count"],
+        "live_owned_capability_ids": ownership["live_owned_capability_ids"],
+        "live_owned_equals_fabric_reachable": ownership["live_owned_equals_fabric_reachable"],
+        "current_live_ownership_ontology_complete": ownership["provider_coverage_complete"],
+        "r1_structural_closure": ownership["r1_structural_closure"],
+        "known_r1_residuals": list(KNOWN_R1_RESIDUALS),
+        "cross_root_boundaries": list(CROSS_ROOT_BOUNDARIES),
         "single_front_door": True,
         "all_historical_brain_capabilities_unified": False,
         "terminal_authority": False,
@@ -168,6 +178,8 @@ def run(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
 ) -> dict[str, Any]:
     try:
         if not isinstance(request, Mapping):
@@ -185,6 +197,15 @@ def run(
 
         auto_routed = requested_mode in {"", "AUTO"}
         mode = _auto_mode(payload, options) if auto_routed else requested_mode
+        if (
+            auto_routed
+            and mode == "ADAPTIVE_SOLVER"
+            and (
+                episode_verification_provider is not None
+                or skill_verification_provider is not None
+            )
+        ):
+            mode = "LEARNING_EPISODE"
         if mode not in ENGINE_DESCRIPTORS:
             raise CognitiveFabricError("MODE_INVALID:" + mode)
 
@@ -344,6 +365,8 @@ def run(
                 }
             else:
                 raise CognitiveFabricError("TERMINAL_CLOSURE_OPERATION_INVALID:" + operation)
+        elif mode == "OWNERSHIP_CATALOG":
+            out = live_ownership.evaluate(ENGINE_DESCRIPTORS)
         elif mode == "LEARNING_EPISODE":
             out = self_improvement.run_learning_episode(
                 payload,
@@ -356,6 +379,8 @@ def run(
                 scope_id=str(options.get("scope_id") or "scope"),
                 episode_verification_binding=options.get("episode_verification_binding"),
                 skill_verification_binding=options.get("skill_verification_binding"),
+                episode_verification_provider=episode_verification_provider,
+                skill_verification_provider=skill_verification_provider,
                 resume_binding=options.get("resume_binding"),
                 known_absent_invalidators=options.get("known_absent_invalidators", ()),
                 proposal_provider=proposal_provider,
