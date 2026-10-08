@@ -18,15 +18,17 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V11.json",
-    "git_blob_sha": "3350fd3fe7829f326722af0428a3359df14dd1b7"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V12.json",
+    "git_blob_sha": "166fb0d4f8be5adb9d5ba831036e0a396ede0171"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
-    "activation_git_blob_sha": "d3a0ba90534e1f5bcc4b871e30af6e8cd9a7d9c6",
+    "activation_git_blob_sha": "12a7fb2dd1f898836f31572be241be9c14f99776",
     "exact_cell_count": 3,
     "latest_verification_path": "canonical/verification/R2_LITERAL_JSON_DIRECT_ADEQUACY_VERIFICATION_20261008_V1.json",
-    "latest_verification_git_blob_sha": "88351bafa9dab6b77f18646a6b5518828170c544"
+    "latest_verification_git_blob_sha": "88351bafa9dab6b77f18646a6b5518828170c544",
+    "bounded_family_count": 1,
+    "current_activation_status": "THREE_EXACT_CELLS_PLUS_ONE_TRANSACTIONAL_CODEC_FAMILY"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
@@ -53,7 +55,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__VERIFIED_CAPABILITY_ESCAPE_LIVE__GOAL_SCOPED_POLICY_IDENTITIES_RECONCILED",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__VERIFIED_CAPABILITY_ESCAPE_LIVE__GOAL_SCOPED_POLICY_IDENTITIES_INDEPENDENTLY_REPLAYED",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -82,8 +84,10 @@
     "generic_meta_effect_retained_only_when_no_grounded_policy_identity_exists": true,
     "verification_path": "canonical/verification/R2_R3_CONCRETE_GROUNDED_ADEQUACY_TARGET_VERIFY_20261008_V1.json",
     "verification_git_blob_sha": "5b965a06f0ebfded59aacaaa5bb131f61e9abb4b",
-    "live_runtime_git_blob_sha": "b8f395270d5adf87a1aabb28ff99a938b650c0ef",
-    "merged_commit": "aecf59ece1140409c171cb7d0824f8085697ad3b"
+    "live_runtime_git_blob_sha": "20bdc305a9da26fa49c8c5b94bb9720b8aead020",
+    "merged_commit": "aecf59ece1140409c171cb7d0824f8085697ad3b",
+    "goal_scoped_policy_identity_preserved": true,
+    "goal_scoped_repair_target_isolated_replay": "10_OF_10_PASS"
   },
   "remaining_hard_frontier": [
     "NEW_POLICY_OR_STRONGER_ADEQUACY_EVIDENCE_WHEN_NO_EXISTING_CERTIFICATE_OR_COMPOSABLE_REPAIR_COVERS_THE_REACHED_STATE",
@@ -142,18 +146,22 @@
     "regression_test_path": "canonical/tests/test_r2_grounded_candidate_policy_frontier_v1.py",
     "regression_test_git_blob_sha": "9750cf81c29b2abc49bb7ec65cc9368adae765a2",
     "policy_identity_scope": "EXACT_RAW_GOAL_SHA256",
-    "verification_path": "canonical/governance/R2_GOAL_SCOPED_GROUNDED_FRONTIER_AUTHORITY_RECONCILIATION_20261008_V1.json",
-    "verification_git_blob_sha": "d3009fcf9be4146307e3856ba042aaa5a8abe01e",
-    "verification_status": "MONOTONIC_SAFETY_RECONCILED__INDEPENDENT_REPLAY_NOT_CLAIMED",
-    "status": "ACTIVE__GOAL_SCOPED_CANDIDATE_ONLY__POLICY_ADEQUACY_AUTHORITY_FALSE"
+    "verification_path": "canonical/verification/R2_GOAL_SCOPED_GROUNDED_FRONTIER_INDEPENDENT_VERIFY_20261008_V1.json",
+    "verification_git_blob_sha": "a9d7e98c85c4af7b991158f0019164929193fe83",
+    "verification_status": "PASS__ISOLATED_EXACT_BYTE_GOAL_SCOPE_REPLAY__10_OF_10",
+    "status": "ACTIVE__GOAL_SCOPED_CANDIDATE_ONLY__POLICY_ADEQUACY_AUTHORITY_FALSE",
+    "authority_reconciliation_path": "canonical/governance/R2_GOAL_SCOPED_GROUNDED_FRONTIER_AUTHORITY_RECONCILIATION_20261008_V1.json",
+    "authority_reconciliation_git_blob_sha": "d3009fcf9be4146307e3856ba042aaa5a8abe01e",
+    "independent_replay_claimed": true,
+    "positive_adequacy_coverage_credit_delta": 0
   },
   "control_mechanism_status": "CLOSED__TOTAL_FAIL_CLOSED_ADEQUACY_OR_ABSTAIN_CONTROL",
-  "remaining_problem_class": "ADEQUACY_COVERAGE_AND_OBSERVABILITY__CAPABILITY_EXPANSION_PATH_NOW_LIVE",
+  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__GOAL_SCOPE_SAFETY_VERIFIED",
   "control_law_totalizer": {
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
     "live_route": "canonical/runtime/live_brain_runtime_v1.py::_decision_run",
-    "live_runtime_git_blob_sha": "b8f395270d5adf87a1aabb28ff99a938b650c0ef",
+    "live_runtime_git_blob_sha": "20bdc305a9da26fa49c8c5b94bb9720b8aead020",
     "status": "ACTIVE__LIVE_EXTERNAL_META_ACTION_NORMALIZER_OVER_NATIVE_TOTAL_FIXED_POINT_CONTROL",
     "meta_actions": [
       "RETURN_VERIFIED_RESULT",
@@ -173,7 +181,8 @@
     "remaining_problem_class": "ADEQUACY_COVERAGE_EXPANSION_AND_OBSERVABILITY_NOT_GENERAL_CONTROL_MECHANISM",
     "authoritative_field": "mechanism_closure",
     "goal_scoped_grounded_frontier_authority_reconciled": true,
-    "goal_scoped_frontier_independent_replay_claimed": false
+    "goal_scoped_frontier_independent_replay_claimed": true,
+    "goal_scoped_frontier_isolated_replay": "10_OF_10_PASS"
   },
   "sufficient_closure": {
     "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V6.json",
@@ -189,5 +198,23 @@
     "merged_commit": "ef9816f296bdad0a7afb528376c7c432fe61395f",
     "isolated_replay": "30_OF_30_PASS",
     "authority": "ZERO__REQUEST_PATCH_ONLY__FULL_V1_REVERIFICATION_REQUIRED"
+  },
+  "goal_scoped_grounded_frontier_independent_verification": {
+    "path": "canonical/verification/R2_GOAL_SCOPED_GROUNDED_FRONTIER_INDEPENDENT_VERIFY_20261008_V1.json",
+    "git_blob_sha": "a9d7e98c85c4af7b991158f0019164929193fe83",
+    "isolated_carrier": "brain-r2-grounded-frontier-verify-20261008",
+    "isolated_replay": "10_OF_10_PASS",
+    "proves": [
+      "EXACT_RAW_GOAL_SCOPED_POLICY_IDENTITY",
+      "CROSS_GOAL_POLICY_IDENTITY_SEPARATION",
+      "LEGACY_REPAIR_TRACE_PARSE_COMPATIBILITY",
+      "RAW_GOAL_HASH_PRESERVATION_IN_REPAIR_CONTEXT",
+      "CROSS_GOAL_ADEQUACY_REPAIR_TARGET_SEPARATION"
+    ],
+    "does_not_prove": [
+      "POSITIVE_POLICY_ADEQUACY",
+      "OPEN_WORLD_COVERAGE_COMPLETENESS",
+      "TERMINAL_SUCCESS"
+    ]
   }
 }
