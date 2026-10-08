@@ -2080,5 +2080,32 @@
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA"
   },
-  "pointer_revision": 35
+  "pointer_revision": 35,
+  "current_verifier_first_cognition_20261008_v1": {
+    "status": "ACTIVE_PENDING_FRESH_REBASE_VERIFICATION",
+    "pointer": {
+      "path": "canonical/governance/CURRENT_VERIFIER_FIRST_COGNITION.json"
+    },
+    "policy": {
+      "path": "canonical/governance/VERIFIER_FIRST_PROOF_CARRYING_COGNITION_20261008_V1.json"
+    },
+    "verifier_compiler": {
+      "path": "canonical/runtime/verifier_compiler_v1.py"
+    },
+    "proof_carrying_outcome": {
+      "path": "canonical/runtime/proof_carrying_outcome_v1.py"
+    },
+    "r2_controller": {
+      "path": "canonical/runtime/general_adequate_decision_controller_v1.py"
+    },
+    "r3_runtime": {
+      "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+    },
+    "live_runtime": {
+      "path": "canonical/runtime/live_brain_runtime_v1.py"
+    },
+    "acceptance_authority_from_proof_carrying_outcome": false,
+    "capability_promotion_authority_from_proof_carrying_outcome": false,
+    "terminal_credit_delta": 0
+  }
 }
