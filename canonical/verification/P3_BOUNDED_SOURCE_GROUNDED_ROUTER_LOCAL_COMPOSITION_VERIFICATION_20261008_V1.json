@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_P3_BOUNDED_SOURCE_GROUNDED_ROUTER_LOCAL_COMPOSITION_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_RUNTIME_AND_TEST_BLOBS__11_OF_11__V4_AND_SOURCE_SET_BOUND__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/p3_bounded_source_grounded_router_v1.py",
+      "git_blob_sha": "c2c28ac2c166b8dc559aabbb1001e3543f893c03"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p3_bounded_source_grounded_router_v1.py",
+      "git_blob_sha": "09878b4cfea228144a92a5c7861bf68693e0f5fa"
+    },
+    "dependencies": {
+      "bounded_source_set_gate": {
+        "path": "canonical/runtime/bounded_task_source_set_gate_v1.py",
+        "git_blob_sha": "4b42b32ed68b588a354716c6dd53391a23314f41"
+      },
+      "bounded_source_set_law": {
+        "path": "canonical/governance/BOUNDED_TASK_SOURCE_SET_NO_OMISSION_LAW_20261007_V1.json",
+        "git_blob_sha": "27a4f0ec2e1ffe100b1807815be3655abd5c058a"
+      },
+      "p3_v4_front_door": {
+        "path": "canonical/runtime/p3_real_context_v3_admission_v4.py",
+        "git_blob_sha": "c2e7dac809f0d127c287906dc4780152970d6a03"
+      },
+      "p3_v4_verification": {
+        "path": "canonical/verification/P3_REAL_CONTEXT_V4_TWO_CARRIER_VERIFICATION_20261008_V1.json",
+        "git_blob_sha": "a998a9301d35aa7508fc74fe023056df57e12385"
+      }
+    }
+  },
+  "execution": {
+    "provider": "CHATGPT_INCLUDED_LOCAL_PYTHON",
+    "exact_runtime_git_blob_match": true,
+    "exact_test_git_blob_match": true,
+    "dependency_mode": "INTERFACE_FAITHFUL_LOCAL_COMPOSITION__BOUND_DEPENDENCIES_HAVE_SEPARATE_REPOSITORY_VERIFICATION",
+    "result": {
+      "pass": true,
+      "passed": 11,
+      "total": 11
+    },
+    "checks": [
+      "CALLER_VERIFIED_BIT_HAS_ZERO_AUTHORITY",
+      "ALL_DECLARED_SOURCES_REQUIRED",
+      "UNDECLARED_SOURCE_REJECTED",
+      "EVIDENCE_MUST_EQUAL_EXACT_DECLARED_SOURCE_BYTES",
+      "HIDDEN_SECOND_FACT_REJECTED",
+      "DECLARED_SOURCE_MUST_BE_EVIDENCED_EXACTLY_ONCE",
+      "CONFLICTING_DECLARED_SOURCE_DOES_NOT_PASS_POSITIVE_CELL",
+      "MECHANICALLY_CLOSED_CELL_REACHABLE_AFTER_GROUNDING",
+      "EXPLICIT_WEIGHT_CELL_REACHABLE_AFTER_GROUNDING",
+      "OPTIONAL_CONTEXT_WITHOUT_WEIGHTS_FAILS_CLOSED",
+      "EXTERNAL_AUTHORITY_NEVER_INFERRED_FROM_DECLARED_MANIFEST"
+    ]
+  },
+  "verified_effect": "WITHIN_AN_EXPLICIT_FINITE_TASK_SOURCE_MANIFEST_WHOSE_EVERY_SOURCE_IS_ONE_NORMALIZED_FACT_UNIT__THE_ROUTER_RECOMPUTES_EVIDENCE_VERIFICATION_FROM_ONE_TO_ONE_EXACT_SOURCE_BYTES_AND_FEEDS_ONLY_THE_VERIFIED_P3_V4_FAST_PATHS__CALLER_VERIFIED_FLAGS_CANNOT_CREATE_TRUST",
+  "hard_nonclaims": [
+    "NO_CLAIM_DECLARED_TASK_MANIFEST_IS_GLOBALLY_AUTHORITY_COMPLETE",
+    "NO_EXTERNAL_PUBLISHER_OR_PRIMARY_SOURCE_AUTHORITY_PROOF",
+    "NO_MULTI_FACT_OR_BINARY_SOURCE_PARSER_COVERAGE",
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTICS_OR_HIDDEN_UNCERTAINTY_DISCOVERY",
+    "NO_POLICY_ADEQUACY_DB_U_SUBTRACTION_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
