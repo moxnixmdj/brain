@@ -173,6 +173,29 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "preflight_execution_authority": False,
         }
 
+    visual_code = visual_code_adequacy.preflight(request)
+    if visual_code.get("matched") is True:
+        if visual_code.get("status") == "FAIL_CLOSED":
+            return {
+                **_base("FAIL_CLOSED", passed=False),
+                "matched": True,
+                "route_id": VISUAL_CODE_ROUTE_ID,
+                "reason": visual_code.get("reason"),
+            }
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": VISUAL_CODE_ROUTE_ID,
+            "capability_id": visual_code.get("capability_id"),
+            "policy_id": visual_code.get("policy_id"),
+            "goal_sha256": visual_code.get("goal_sha256"),
+            "format": visual_code.get("format"),
+            "payload_sha256": visual_code.get("payload_sha256"),
+            "output_path": visual_code.get("output_path"),
+            "semantic_scope": ROUTES[VISUAL_CODE_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
     typed_decision = typed_decision_adequacy.preflight(request)
     if typed_decision.get("matched") is True:
         if typed_decision.get("status") == "FAIL_CLOSED":
