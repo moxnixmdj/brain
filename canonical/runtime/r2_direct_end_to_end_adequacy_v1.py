@@ -12,12 +12,16 @@ from __future__ import annotations
 
 from copy import deepcopy
 from hashlib import sha256
+from pathlib import Path
 from typing import Any, Mapping
 
 from canonical.runtime import live_integrated_brain_v1 as live_bound
 from canonical.runtime import raw_goal_archive_acceptance_v1 as archive_acceptance
 from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_acceptance
 from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
+from canonical.runtime import raw_goal_python_test_audit_acceptance_v1 as python_test_acceptance
+from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
+from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -25,6 +29,9 @@ ARCHIVE_ROUTE_ID = "DIRECT_ADEQUACY::ARCHIVE_MANIFEST_TAR_GZ_V1"
 ARCHIVE_CAPABILITY_ID = "archive.tar_gz.create_from_manifest"
 EXACT_LITERAL_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1"
 LITERAL_JSON_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1"
+PYTHON_TEST_AUDIT_ROUTE_ID = "DIRECT_ADEQUACY::PYTHON_UNITTEST_AUDIT_V1"
+PYTHON_TEST_AUDIT_CAPABILITY_ID = "python.tests.audit.unittest"
+ROOT = Path(__file__).resolve().parents[2]
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -47,6 +54,16 @@ ROUTES = {
         "preflight": "raw_goal_literal_json_acceptance_v1.preflight",
         "executor": "live_integrated_brain_v1.run_raw_goal",
         "acceptance": "raw_goal_literal_json_acceptance_v1.verify",
+    },
+    PYTHON_TEST_AUDIT_ROUTE_ID: {
+        "capability_id": PYTHON_TEST_AUDIT_CAPABILITY_ID,
+        "scope": (
+            "EXACT_PYTHON_UNITTEST_ROOT_PATTERN_EPHEMERAL_REPORT_AND_"
+            "TESTS_PASSED_FAILED_ERRORS_SKIPPED_COUNTS"
+        ),
+        "preflight": "raw_goal_python_test_audit_acceptance_v1.preflight",
+        "executor": "verified_bound_capability_execution_adapter_v1.execute",
+        "acceptance": "raw_goal_python_test_audit_acceptance_v1.verify",
     },
 }
 
@@ -119,6 +136,25 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "preflight_execution_authority": False,
         }
 
+    python_audit = python_test_acceptance.preflight(goal)
+    if python_audit.get("matched") is True and python_audit.get("pass") is True:
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": PYTHON_TEST_AUDIT_ROUTE_ID,
+            "capability_id": PYTHON_TEST_AUDIT_CAPABILITY_ID,
+            "goal_sha256": python_audit["goal_sha256"],
+            "bound_inputs": deepcopy(dict(python_audit["bound_inputs"])),
+            "semantic_scope": ROUTES[PYTHON_TEST_AUDIT_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+    if python_audit.get("status") == "FAIL_CLOSED":
+        return {
+            **_base("FAIL_CLOSED", passed=False),
+            "matched": False,
+            "reason": python_audit.get("reason"),
+        }
+
     return {
         **_base("NO_DIRECT_ADEQUACY_ROUTE", passed=False),
         "matched": False,
@@ -129,6 +165,83 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
     pf = preflight(request)
     if pf.get("matched") is not True:
         return pf
+
+    if pf["route_id"] == PYTHON_TEST_AUDIT_ROUTE_ID:
+        raw_contract = compile_contract(
+            str(request["goal"]),
+            source_id="r2-direct-python-test-audit:" + str(request["task_id"]),
+            routing_target_effects=[python_test_acceptance.ROUTING_EFFECT],
+        )
+        if raw_contract.get("pass") is not True:
+            return {
+                **_base("FAIL_CLOSED", passed=False),
+                "reason": "LOSSLESS_RAW_TASK_CONTRACT_COMPILATION_FAILED",
+                "matched": True,
+                "route_id": pf["route_id"],
+                "raw_contract": raw_contract,
+            }
+        execution = execute_bound(
+            PYTHON_TEST_AUDIT_CAPABILITY_ID,
+            inputs=pf["bound_inputs"],
+            instance_id="r2.direct.python_test_audit",
+        )
+        accepted = python_test_acceptance.verify(
+            goal=str(request["goal"]),
+            inputs=pf["bound_inputs"],
+            execution=execution,
+            raw_contract=raw_contract,
+            root=ROOT,
+        )
+        accepted_ids = accepted.get("accepted_obligation_ids")
+        required_count = accepted.get("required_obligation_count")
+        full = (
+            execution.get("pass") is True
+            and accepted.get("pass") is True
+            and accepted.get("semantic_acceptance_complete") is True
+            and accepted.get("actual_goal_satisfaction_verified") is True
+            and isinstance(accepted_ids, list)
+            and isinstance(required_count, int)
+            and not isinstance(required_count, bool)
+            and required_count > 0
+            and len(accepted_ids) == required_count
+            and len(set(accepted_ids)) == required_count
+            and accepted.get("goal_sha256") == pf["goal_sha256"]
+        )
+        if not full:
+            return {
+                **_base("OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY", passed=False),
+                "matched": True,
+                "route_id": pf["route_id"],
+                "capability_id": pf["capability_id"],
+                "goal_sha256": pf["goal_sha256"],
+                "execution_attempted": True,
+                "retry_by_other_route_authorized": False,
+                "raw_result": deepcopy(dict(execution)),
+                "acceptance_receipt": deepcopy(dict(accepted)),
+                "reason": "FULL_RAW_OBLIGATION_ACCEPTANCE_NOT_VERIFIED",
+            }
+        return {
+            **_base("PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED", passed=True),
+            "matched": True,
+            "route_id": pf["route_id"],
+            "capability_id": pf["capability_id"],
+            "selected_policy_id": pf["route_id"],
+            "goal_sha256": pf["goal_sha256"],
+            "semantic_scope": pf["semantic_scope"],
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "accepted_raw_obligation_ids": list(accepted_ids),
+            "raw_acceptance_obligation_count": required_count,
+            "acceptance_receipt": deepcopy(dict(accepted)),
+            "raw_result": deepcopy(dict(execution)),
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "authority_boundary": (
+                "ADEQUACY_IS_PROVED_ONLY_FOR_THE_EXACT_PREFLIGHTED_CELL_AND_ONLY_AFTER_"
+                "INDEPENDENT_FRESH_TEST_EXECUTION_COVERS_EVERY_RAW_OBLIGATION"
+            ),
+        }
 
     raw = live_bound.run_raw_goal(request)
     if not isinstance(raw, Mapping):
