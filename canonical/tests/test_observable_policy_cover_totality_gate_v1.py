@@ -167,3 +167,64 @@ def test_dict_outcomes_are_canonicalized_not_order_sensitive():
     out = evaluate(p)
     assert out["pass"] is False
     assert out["unresolved_observational_classes"] == [["w0", "w1"]]
+
+
+def test_cheaper_truthful_discriminator_beats_available_common_policy():
+    p = base()
+    p["policies"].append({
+        "policy_id": "p_all",
+        "adequate_world_ids": ["w0", "w1", "w2"],
+        "cost_units": 100,
+        "adequacy_receipt": receipt(
+            policy_id="p_all",
+            policy_adequate_on_every_listed_world=True,
+            brain_owned=True,
+            deployed_exact=True,
+            resource_bound_proved=True,
+        ),
+    })
+    p["discriminators"][0]["cost_units"] = 1
+    out = evaluate(p)
+    assert out["pass"] is True
+    assert out["minimum_worst_case_resource_bound_units"] == 3.0
+    assert out["decision_tree"]["discriminator_id"] == "d"
+    assert out["terminal_credit_delta"] == 0
+
+
+def test_equal_cost_prefers_common_adequate_policy_without_observation():
+    p = base()
+    p["policies"].append({
+        "policy_id": "p_all",
+        "adequate_world_ids": ["w0", "w1", "w2"],
+        "cost_units": 3,
+        "adequacy_receipt": receipt(
+            policy_id="p_all",
+            policy_adequate_on_every_listed_world=True,
+            brain_owned=True,
+            deployed_exact=True,
+            resource_bound_proved=True,
+        ),
+    })
+    p["discriminators"][0]["cost_units"] = 1
+    out = evaluate(p)
+    assert out["pass"] is True
+    assert out["decision_tree"]["terminal_policy_id"] == "p_all"
+    assert out["minimum_worst_case_resource_bound_units"] == 3.0
+
+
+def test_nonfinite_or_unrepresentable_policy_cost_fails_closed():
+    for cost in (float("nan"), float("inf"), float("-inf"), 10**1000):
+        p = base()
+        p["policies"][0]["cost_units"] = cost
+        out = evaluate(p)
+        assert out["pass"] is False
+        assert out["reason"] == "POLICY_COST_INVALID"
+
+
+def test_nonfinite_discriminator_cost_fails_closed():
+    for cost in (float("nan"), float("inf"), float("-inf")):
+        p = base()
+        p["discriminators"][0]["cost_units"] = cost
+        out = evaluate(p)
+        assert out["pass"] is False
+        assert out["reason"] == "DISCRIMINATOR_COST_INVALID"
