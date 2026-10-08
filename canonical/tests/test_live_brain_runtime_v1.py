@@ -38,13 +38,15 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "fallback_used": False,
         }
 
+        episode_verifier = Mock()
+        skill_verifier = Mock()
         out = brain.run({
             "mode": "generic",
             "problem": self.problem(),
             "episode_id": "new",
             "scope_id": "scope",
             "known_absent_invalidators": ["inv.old"],
-        })
+        }, episode_verification_provider=episode_verifier, skill_verification_provider=skill_verifier)
 
         self.assertTrue(out["pass"], out)
         self.assertEqual(
@@ -66,6 +68,8 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             kwargs["retry_context"]["known_absent_invalidators"],
             ["inv.old"],
         )
+        self.assertIs(kwargs["episode_verification_provider"], episode_verifier)
+        self.assertIs(kwargs["skill_verification_provider"], skill_verifier)
 
     @patch("canonical.runtime.live_brain_runtime_v1._active_learning_context")
     @patch("canonical.runtime.live_brain_runtime_v1._v12_run")
