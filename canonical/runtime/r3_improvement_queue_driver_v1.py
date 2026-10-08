@@ -643,6 +643,11 @@ def drain(
         )
         actions.append(result)
         if result.get("progress") is not True:
+            if result.get("status") == "IMPROVEMENT_REPAIR_ATTEMPT_DID_NOT_CLOSE_ORIGINAL_OBLIGATION":
+                # The failed repair was just persisted with observation-bound
+                # backoff. Continue once so the next scheduler pass can skip it
+                # and advance unrelated actionable compounding work immediately.
+                continue
             break
     final_state = learning.load_state(state_path)
     return {
