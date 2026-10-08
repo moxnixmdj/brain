@@ -159,6 +159,109 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "unified-live-brain",
         )
 
+    @patch("canonical.runtime.live_brain_runtime_v1._observe_runtime_outcome")
+    @patch("canonical.runtime.live_brain_runtime_v1._decision_run")
+    def test_direct_r2_proof_carrying_success_is_observed_by_r3(self, decision, observe):
+        acceptance = {
+            "schema": "PROJECT_BRAIN_PROOF_CARRYING_OUTCOME_V1",
+            "pass": True,
+            "status": "PASS__PROOF_CARRYING_OUTCOME_OBLIGATION_COMPLETE",
+        }
+        verified = {
+            "pass": True,
+            "status": "PASS__GOAL_BOUND_AUTHENTICATED_SPECIALIST_POLICY_REALIZED_AND_ACCEPTANCE_VERIFIED",
+            "task_id": "d-direct",
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "raw_goal_acceptance": acceptance,
+        }
+        decision.return_value = verified
+        observe.return_value = {
+            "pass": True,
+            "status": "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
+            "proof_available": True,
+        }
+
+        out = brain.run({
+            "task_id": "d-direct",
+            "goal": "return the verified direct result",
+            "learn": True,
+        })
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["learning"]["status"],
+            "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
+        )
+        self.assertEqual(
+            out["semantic_acceptance_learning"]["status"],
+            "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
+        )
+        observe.assert_called_once()
+        self.assertEqual(
+            observe.call_args.kwargs["surface"],
+            "DECISION:R2_GENERAL_ADEQUATE_DECISION",
+        )
+
+    @patch("canonical.runtime.live_brain_runtime_v1._observe_runtime_outcome")
+    @patch("canonical.runtime.live_brain_runtime_v1._decision_run")
+    @patch("canonical.runtime.live_brain_runtime_v1._run_learning_episode")
+    def test_solver_backed_r2_success_retains_final_semantic_acceptance_separately(
+        self, learning_run, decision, observe
+    ):
+        execution = {"pass": True, "status": "SOLVED__VERIFIED_EPISODE"}
+
+        def decision_side_effect(request, **kwargs):
+            provider = kwargs["execution_provider"]
+            provider(
+                self.problem(),
+                repo_root=brain.ROOT,
+                episode_id="d-semantic",
+                scope_id=request["scope_id"],
+                proposal_provider=None,
+                capability_expander=None,
+            )
+            return {
+                "pass": True,
+                "status": "PASS__GOAL_BOUND_ADEQUATE_POLICY_EXECUTED_AND_ACCEPTANCE_VERIFIED",
+                "semantic_acceptance_complete": True,
+                "actual_goal_satisfaction_verified": True,
+                "raw_goal_acceptance": {
+                    "schema": "PROJECT_BRAIN_PROOF_CARRYING_OUTCOME_V1",
+                    "pass": True,
+                },
+            }
+
+        decision.side_effect = decision_side_effect
+        learning_run.return_value = {
+            "pass": True,
+            "solver_output": execution,
+            "learning": {"status": "SOLVER_LEVEL_VERIFIED_LEARNING"},
+            "reuse_first": False,
+            "reused_skill_id": None,
+            "reuse_attempt": None,
+            "fallback_used": False,
+        }
+        observe.return_value = {
+            "pass": True,
+            "status": "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
+            "proof_available": True,
+        }
+
+        out = brain.run({
+            "task_id": "d-semantic",
+            "goal": "execute and satisfy the exact goal",
+            "learn": True,
+        })
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["learning"]["status"], "SOLVER_LEVEL_VERIFIED_LEARNING")
+        self.assertEqual(
+            out["semantic_acceptance_learning"]["status"],
+            "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
+        )
+        observe.assert_called_once()
+
     @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
     def test_compiled_bound_route_is_behind_same_front_door(self, bound):
         bound.return_value = {"pass": True, "status": "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED"}
