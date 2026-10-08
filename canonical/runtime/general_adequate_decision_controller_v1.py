@@ -160,6 +160,62 @@ def _opaque_goal_atom_id(obligation_id: str) -> str:
     return "GOALOPAQUE::" + sha256(obligation_id.encode("utf-8")).hexdigest()
 
 
+def _bootstrap_opaque_decision_context(
+    *,
+    task_id: str,
+    goal: str,
+    raw_contract: Mapping[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Create a sound zero-semantic-authority starting context.
+
+    Every raw obligation is represented only by its deterministic opaque atom.
+    This claims no interpretation. It merely moves an arbitrary goal from
+    "no decision context" into the existing refinement machinery without losing
+    any load-bearing source obligation.
+    """
+    obligation_ids = _raw_obligation_ids(raw_contract)
+    opaque_atoms = [_opaque_goal_atom_id(oid) for oid in obligation_ids]
+    if not opaque_atoms:
+        raise DecisionControllerError("OPAQUE_BOOTSTRAP_REQUIRES_RAW_OBLIGATIONS")
+    payload = {
+        "context_id": "opaque-bootstrap:" + sha256(
+            (task_id + "\n" + goal + "\n" + str(raw_contract.get("task_contract_sha256") or "")).encode("utf-8")
+        ).hexdigest(),
+        "v3_input": {
+            "task": {
+                "claims": [],
+                "raw_task_contract_sha256": raw_contract.get("task_contract_sha256"),
+                "opaque_goal_bootstrap": True,
+            }
+        },
+        "bound_relevance_cegar_loop": {
+            "cegar_problem": {
+                "decision_basis": opaque_atoms,
+                "formal_source_constraints": [],
+            },
+            "truth_payloads_by_discriminator_id": {},
+            "truth_payloads_by_predicate_id": {},
+            "source_positive_selection_contracts": {},
+        },
+    }
+    binding = {
+        "pass": True,
+        "status": "PASS__OPAQUE_GOAL_CONTEXT_BOOTSTRAPPED_BY_CONSTRUCTION",
+        "goal_sha256": sha256(goal.encode("utf-8")).hexdigest(),
+        "raw_task_contract_sha256": raw_contract.get("task_contract_sha256"),
+        "decision_payload_sha256": _digest(payload),
+        "raw_obligation_count": len(obligation_ids),
+        "opaque_remainder_obligation_count": len(obligation_ids),
+        "opaque_atom_ids": opaque_atoms,
+        "all_raw_obligations_represented": True,
+        "sound_overapproximation_only": True,
+        "semantic_completeness_claimed": False,
+        "semantic_authority": False,
+        "construction_rule": "ONE_DETERMINISTIC_OPAQUE_ATOM_PER_RAW_OBLIGATION",
+    }
+    return payload, binding
+
+
 def _decision_basis_from_payload(decision_payload: Mapping[str, Any]) -> set[str]:
     loop = decision_payload.get("bound_relevance_cegar_loop")
     if not isinstance(loop, Mapping):
@@ -697,14 +753,12 @@ def run(
             }
 
         decision_payload = request.get("decision_payload")
+        opaque_bootstrap_binding = None
         if not isinstance(decision_payload, Mapping):
-            return _open(
-                "OPEN__DECISION_CONTEXT_REQUIRED",
+            decision_payload, opaque_bootstrap_binding = _bootstrap_opaque_decision_context(
                 task_id=task_id,
                 goal=goal,
                 raw_contract=raw_contract,
-                next_required_edge="AUTHENTICATED_GOAL_TO_DECISION_CONTEXT",
-                reason="NO_SOUND_SEMANTIC_DECISION_CONTEXT_BOUND_TO_RAW_GOAL",
             )
         working = deepcopy(dict(decision_payload))
 
@@ -714,10 +768,17 @@ def run(
         partial_binding_supplied = isinstance(
             request.get("partial_goal_to_decision_binding"), Mapping
         )
+        if opaque_bootstrap_binding is not None and (
+            full_binding_supplied or partial_binding_supplied
+        ):
+            raise DecisionControllerError("OPAQUE_BOOTSTRAP_BINDING_MODE_CONFLICT")
         if full_binding_supplied and partial_binding_supplied:
             raise DecisionControllerError("GOAL_BINDING_MODE_AMBIGUOUS")
 
-        if full_binding_supplied:
+        if opaque_bootstrap_binding is not None:
+            goal_binding = opaque_bootstrap_binding
+            goal_binding_mode = "OPAQUE_BOOTSTRAP_BY_CONSTRUCTION"
+        elif full_binding_supplied:
             goal_binding = _authenticate_goal_binding(
                 request.get("goal_to_decision_binding"),
                 goal=goal,
