@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_BOUNDED_SUPPORT_TRUTH_CERTIFICATE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_CARRIERS__13_OF_13_EACH__CONTENT_ADDRESSED_REQUIRED_CLAIM_SUPPORT_TRUTH__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/selected_bounded_support_truth_certificate_v1.py",
+      "git_blob_sha": "894e2ab8d7861f3b382119842807c1c3ddbd991f"
+    },
+    "tests": {
+      "path": "canonical/tests/test_selected_bounded_support_truth_certificate_v1.py",
+      "git_blob_sha": "76acdfda589ea10c5275497bee6860d855ade49d"
+    },
+    "bounded_support_dependency": {
+      "path": "canonical/runtime/bounded_claim_support.py",
+      "git_blob_sha": "197246a50ace8c16b945def9edb1357fb317c393"
+    }
+  },
+  "primary_execution": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "result": {
+      "pass": true,
+      "passed": 13,
+      "total": 13
+    }
+  },
+  "independent_execution": {
+    "provider": "SPRITES",
+    "sprite": "h100-real-image-v1",
+    "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+    "result": {
+      "pass": true,
+      "passed": 13,
+      "total": 13
+    }
+  },
+  "verified_effects": [
+    "STRUCTURALLY_REQUIRED_CLAIM_ONLY",
+    "AT_LEAST_ONE_BOUNDED_SUPPORT_AND_ZERO_BOUNDED_CONFLICTS_PROVES_TRUE",
+    "NO_SUPPORT_OR_ANY_CONFLICT_PROVES_FALSE",
+    "OUTSIDE_BOUNDED_FACT_GRAMMAR_RETURNS_UNKNOWN",
+    "CALLER_ALIAS_RELABEL_DOES_NOT_CHANGE_VERIFIED_PREDICATE_ID",
+    "EVIDENCE_CHANGE_CHANGES_OBSERVATION_BINDING_NOT_PREDICATE_IDENTITY",
+    "CLAIM_CHANGE_CHANGES_PREDICATE_IDENTITY",
+    "EVIDENCE_ORDER_DOES_NOT_CHANGE_BINDING",
+    "CALLER_INCLUDE_RELEVANCE_SUPPORT_METADATA_FORBIDDEN",
+    "UNVERIFIED_OR_DUPLICATE_EVIDENCE_FAILS_CLOSED",
+    "TRUE_FALSE_POLICY_BRANCH_RECOMPUTED_FROM_RELATIONS"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_INFERENCE",
+    "NO_OPTIONAL_CLAIM_RELEVANCE_AUTHORITY",
+    "NO_SOURCE_AUTHORIZATION",
+    "NO_POLICY_ADEQUACY",
+    "NO_DB_ADMISSION_AUTHORITY",
+    "NO_U_SUBTRACTION_AUTHORITY",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
