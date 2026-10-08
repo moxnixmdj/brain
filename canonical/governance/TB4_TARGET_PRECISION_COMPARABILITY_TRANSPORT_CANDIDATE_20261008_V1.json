@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_TARGET_PRECISION_COMPARABILITY_TRANSPORT_CANDIDATE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE__PRECISION_ONLY_TARGET_REFINEMENT_PRESERVES_PREEXISTING_TB4_ROUTE_COMPARABILITY__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "claim": "THE_66_4_TO_66_36_REFINEMENT_CHANGES_ONLY_NUMERIC_PRECISION_OF_THE_SAME_OPUS55_TB4_BAR__IT_DOES_NOT_CHANGE_TASK_POPULATION_SCORER_BRAIN_ROUTE_OR_PREEXISTING_COMPARABILITY_ADMISSION",
+  "historical_target_authority": {
+    "target_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "target_envelope_git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+    "acceptance_rule": "BRAIN_CONFIGURED_CAPABILITY_MUST_EQUAL_OR_EXCEED_OPUS_5_5_ON_RELEVANT_USEFUL_CONDITIONS",
+    "tb4_public_bar_percent": 66.4,
+    "primary_source": "https://www.anthropic.com/claude-opus-5-5"
+  },
+  "historical_protocol_authority": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "f8b661abf7cb1b628aa14d966658394b80093879",
+    "family": "ADVANCED_AGENTIC_CODING",
+    "proof_mode": "PUBLIC_FIXED_BARS_CONJUNCTION",
+    "tb4_acceptance_literal": "Terminal-Bench 4.0 >= 66.4%"
+  },
+  "preexisting_route_comparability_admission": {
+    "path": "canonical/governance/ACCEPTANCE_PUBLIC_BAR_CAPABILITY_SOURCE_AUDIT_V2.json",
+    "git_blob_sha": "c43c6347ca4e7e9a92cff66f6f98b10fa7d7a9ed",
+    "route_id": "TERMINAL_BENCH_4_MINI_SWE_SUPERPOWERS_SESSION_ROUTE",
+    "brain_candidate_bound": true,
+    "brain_owned_operative_configuration": true,
+    "promotion_evaluates_brain_configured_system": true,
+    "benchmark_harness_zero_cost": true,
+    "scorer_frozen": true,
+    "disposition": "ADMISSIBLE_FOR_CLEAN_ACCEPTANCE_EXECUTION__ZERO_CAPABILITY_CREDIT_UNTIL_FROZEN_TB4_BAR_RESULT",
+    "next_literal": "EXECUTE_DISTINCT_FRESH_TERMINAL_BENCH_4_CASES_UNDER_THE_BOUND_CONFIGURED_ROUTE__NO_REPLAY__ESTABLISH_COMPARABLE_SCORE_GE_66_4",
+    "interpretation": "THE_FROZEN_GOVERNANCE_ALREADY_TREATS_THE_BRAIN_AGENT_CONFIGURATION_AS_THE_SYSTEM_UNDER_TEST_AND_AUTHORIZES_IT_TO_ESTABLISH_A_COMPARABLE_TB4_PUBLIC_BAR_SCORE"
+  },
+  "precision_refinement_evidence": {
+    "path": "canonical/verification/TB4_OPUS55_CURRENT_OWNER_TARGET_REFRESH_PUBLIC_RUNNER_VERIFICATION_20261008_V1.json",
+    "owner_pdf_sha256": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378",
+    "owner_detailed_percent": 66.36,
+    "task_count": 66,
+    "trials_per_task": 5,
+    "total_trials": 330,
+    "minimum_successes": 219,
+    "display_rounding": "219_OF_330_IS_66_36_AT_TWO_DECIMALS_AND_66_4_AT_ONE_DECIMAL"
+  },
+  "transport_theorem": {
+    "premises": [
+      "OLD_ROUTE_R_WAS_INDEPENDENTLY_ADMITTED_TO_ESTABLISH_A_COMPARABLE_SCORE_AGAINST_TB4_BAR_B",
+      "B_EQUALS_THE_ROUNDED_ONE_DECIMAL_REPRESENTATION_OF_THE_SAME_OWNER_RUN_WHOSE_DETAILED_VALUE_IS_B_PRIME",
+      "THE_PRECISION_REPAIR_CHANGES_ONLY_B_TO_B_PRIME",
+      "R_TASK_POPULATION_SCORER_TOOL_AUTHORITY_AND_BRAIN_OPERATIVE_CONFIGURATION_ARE_UNCHANGED"
+    ],
+    "conclusion": "NO_NEW_ROUTE_COMPARABILITY_PREMISE_IS_CREATED_BY_REPLACING_ROUNDED_B_WITH_DETAILED_B_PRIME",
+    "formal_shape": "COMPARABLE(R,B,T,S) AND SAME_RUN(B,B_PRIME) AND B_PRIME_LE_B_AT_RAW_THRESHOLD_PRECISION AND UNCHANGED(R,T,S) IMPLIES COMPARABLE(R,B_PRIME,T,S)",
+    "scope": "PRECISION_REFINEMENT_ONLY__DOES_NOT_PROVE_GENERAL_SANDBOX_PROVIDER_INVARIANCE"
+  },
+  "current_official_leaderboard_corroboration_non_load_bearing": {
+    "repository": "harbor-framework/terminal-bench",
+    "path": "leaderboard/submissions/2026-09-30-anthropic-claude-opus-5-5-max-claude-code.json",
+    "git_blob_sha": "13c3d1f05578cad6b181639db3752147b12b458c",
+    "reasoning_effort": "max",
+    "n_trials": 330,
+    "successes": 214,
+    "accuracy_percent": 64.85,
+    "display_accuracy_percent": 64.8,
+    "owner_system_card_internal_max_display_percent": 64.8,
+    "role": "CORROBORATION_THAT_PUBLIC_TB4_ENVIRONMENT_DOES_NOT_SHOW_A_GROSS_MAX_EFFORT_SCORE_SHIFT__NOT_USED_TO_PROVE_XHIGH_SANDBOX_INVARIANCE"
+  },
+  "adjudication_if_verified": {
+    "delete_from_precision_recompile_residuals": [
+      "NEW_SCALAR_COMPARABILITY_PREMISE_CREATED_SOLELY_BY_66_4_TO_66_36_PRECISION_REFINEMENT"
+    ],
+    "preserve": [
+      "ALL_PREEXISTING_TB4_ROUTE_AND_CASE_CLEANLINESS_RULES",
+      "NO_REPLAY",
+      "FROZEN_BRAIN_CONFIGURATION",
+      "IMMUTABLE_REWARD_GREATER_THAN_ZERO_SUCCESS_RECEIPTS",
+      "TARGET_REACHING_LOWER_BOUND_OR_SEPARATELY_ADMISSIBLE_STRONGER_PROOF"
+    ],
+    "remaining_atomic_empirical_blocker": "OBTAIN_AT_LEAST_219_DISTINCT_CREDITABLE_SUCCESS_RECEIPTS_UNDER_THE_ALREADY_ADMITTED_ROUTE_OR_CLOSE_WITH_A_SEPARATELY_ADMISSIBLE_SCOPE_COMPLETE_STRONGER_PROOF"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CLAUDE_CODE_BARE_EQUALS_THE_BRAIN_AGENT",
+    "NO_GENERAL_SANDBOX_PROVIDER_INVARIANCE_THEOREM",
+    "NO_TB4_SCORE",
+    "NO_TB4_ACCEPTANCE_PROMOTION",
+    "NO_TERMINAL_CASES_CONSUMED",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
