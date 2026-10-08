@@ -1,0 +1,33 @@
+{
+  "schema":"PROJECT_BRAIN_P3_REAL_CONTEXT_V3_ADMISSION_V2_SPRITE_VERIFICATION_V1",
+  "date":"2026-10-08",
+  "status":"PASS__EXACT_CANDIDATE_BYTES__7_OF_7__BROAD_NEGATIVE_PREMISE_DELETED__ZERO_TERMINAL_CREDIT",
+  "subject":{
+    "runtime":{"path":"canonical/runtime/p3_real_context_v3_admission_v2.py","git_blob_sha":"2cbebbe9611fdaaab9fd214a47cb0f8624029ffc"},
+    "tests":{"path":"canonical/tests/test_p3_real_context_v3_admission_v2.py","git_blob_sha":"623229aea7b4e792f3211e4786e0d50bf11efcef"},
+    "activation":{"path":"canonical/governance/P3_REAL_CONTEXT_V3_ADMISSION_V2_ACTIVATION_20261008_V1.json","git_blob_sha":"d63d49df0217720ea328656fdb014b3c27acd3c4"}
+  },
+  "carrier":{
+    "provider":"SPRITES",
+    "name":"brain-root3-current-byte-replay-20261007-v1",
+    "id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace":"/home/sprite/p3_v3_admission_v2_replay"
+  },
+  "verification":{
+    "pass":true,
+    "passed":7,
+    "total":7,
+    "checks":[
+      "THREE_SEMANTIC_BINDINGS_PLUS_V3_CLOSE_ALL_SIX_DIMENSION_MEMBERSHIP",
+      "UNCERTAINTY_COMPLETENESS_IS_ONE_FINITE_SELECTED_PREDICATE",
+      "SELECTION_ORDER_DECISION_RELEVANCE_IS_ONE_FINITE_SELECTED_PREDICATE",
+      "AUDIENCE_AND_FORMAT_SHARE_ONE_PROFILE_COMPLETENESS_PREDICATE",
+      "BROAD_NO_OUTSIDE_SEMANTICS_PREDICATE_IS_NOT_REQUIRED",
+      "MECHANICAL_V3_FAILURE_CANNOT_BE_BYPASSED",
+      "FALSE_OR_RELABELLED_CERTIFICATE_DOES_NOT_COUNT"
+    ]
+  },
+  "verified_reduction":"THE_OPEN_ENDED_NEGATIVE_SEMANTIC_PREMISE_IS_REPLACED_BY_THREE_FINITE_POLICY_CHANGING_CONTEXT_PREDICATES_PLUS_THE_ACTUAL_V3_MECHANICAL_AUDIT.",
+  "hard_nonclaims":["NO_U_EMPTY","NO_ABC_CLOSED","NO_D_FINALITY","NO_TERMINAL_CREDIT"],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
