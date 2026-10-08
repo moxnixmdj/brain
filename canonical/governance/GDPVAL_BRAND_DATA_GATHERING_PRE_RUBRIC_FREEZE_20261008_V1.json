@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PRE_RUBRIC_CANARY_FREEZE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "FROZEN_BEFORE_ANY_TASK_RUBRIC_OR_GOLD_INSPECTION__ZERO_CREDIT",
+  "task_id": "b3573f20-5d3e-4954-948f-9461fda693d2",
+  "candidate": {
+    "artifact_name": "Brand Data Gathering.pdf",
+    "artifact_sha256": "e1cc517d4ec109a0225bc2c238f5ca08d0611726dc11b59633ad17d67b4bbc93",
+    "artifact_bytes": 8620,
+    "page_count": 3,
+    "question_count": 41
+  },
+  "input": {
+    "prompt_sha256": "93d2735b5f9d9976a8bbef80edd6d9b476d5005e30ef582affd460f9de9dcf01",
+    "reference_file_count": 0,
+    "allowed_inputs": [
+      "task.prompt",
+      "task.reference_files",
+      "public_professional_practice_sources"
+    ],
+    "rubric_or_gold_input_count": 0,
+    "community_or_other_model_output_input_count": 0
+  },
+  "generator": {
+    "archetype": "BRAND_DISTRIBUTOR_ONBOARDING_QUESTIONNAIRE_V1",
+    "renderer": "PURE_STDLIB_FIXED_THREE_PAGE_TEXT_PDF",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "branch": "research/gdpval-owned-execution-cut-v1",
+    "filename_normalization_commit": "d59b5e938b6820dae48b409cca20e4664ddbc7e6"
+  },
+  "firewall": [
+    "AFTER_THIS_FREEZE_TASK_RUBRIC_AND_GOLD_MAY_BE_USED_ONLY_FOR_POSTHOC_EVALUATION",
+    "NO_CANDIDATE_MUTATION_MAY_RECEIVE_CREDIT_FROM_POST_FREEZE_TASK_RUBRIC_OR_GOLD_INFORMATION",
+    "ANY_REVISED_CANDIDATE_MUST_DECLARE_CONTAMINATION_STATUS_AND_USE_ONLY_PREAUTHORIZED_NONBENCHMARK_KNOWLEDGE"
+  ],
+  "accounting": {
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  }
+}
