@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_PROPOSITION_RELATION_RECEIPT_V1",
+  "relation_id": "TEST_RELEASE_LAUNCH_EQUIVALENCE",
+  "premise": "The product's commercial release occurred in June.",
+  "hypothesis": "The product launched in June.",
+  "relation": "ENTAILS",
+  "scope": "TEST_FIXTURE_ONLY",
+  "semantic_authority_source": {
+    "source_id": "TEST_FIXTURE",
+    "locator": "synthetic"
+  },
+  "hard_nonclaims": [
+    "TEST_FIXTURE_ONLY__NO_REAL_WORLD_SEMANTIC_AUTHORITY"
+  ]
+}
