@@ -3,13 +3,14 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from pathlib import PurePosixPath
+from pathlib import Path, PurePosixPath
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_AA_BRIEFCASE_LOSSLESS_TASK_INGRESS_V1"
 TASK_ID = re.compile(r"^[A-Za-z0-9_.:-]{1,160}$")
+SECTION_ID = re.compile(r"^[A-Za-z0-9_.:-]{1,80}$")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
-MAX_TASK_BYTES = 2_000_000
+MAX_SECTION_BYTES = 2_000_000
 
 
 class IngressError(ValueError):
@@ -17,7 +18,7 @@ class IngressError(ValueError):
 
 
 def _canon(value: Any) -> bytes:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode()
 
 
 def _sha(value: bytes) -> str:
@@ -37,12 +38,81 @@ def _safe_rel(value: Any, label: str) -> str:
 def _unique_strings(value: Any, label: str) -> list[str]:
     if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or not value:
         raise IngressError(label + "_INVALID")
-    out = []
-    for item in value:
-        out.append(_safe_rel(item, label + "_MEMBER"))
+    out = [_safe_rel(item, label + "_MEMBER") for item in value]
     if len(out) != len(set(out)):
         raise IngressError(label + "_DUPLICATE")
     return out
+
+
+def _section_atoms(section_id: str, text: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    if not SECTION_ID.fullmatch(section_id):
+        raise IngressError("SECTION_ID_INVALID:" + section_id)
+    if not isinstance(text, str) or not text.strip():
+        raise IngressError("SECTION_TEXT_INVALID:" + section_id)
+    raw = text.encode("utf-8")
+    if len(raw) > MAX_SECTION_BYTES:
+        raise IngressError("SECTION_TOO_LARGE:" + section_id)
+    lines = text.splitlines(keepends=True)
+    atoms = []
+    byte_cursor = 0
+    for line_number, line in enumerate(lines, 1):
+        encoded = line.encode("utf-8")
+        start = byte_cursor
+        byte_cursor += len(encoded)
+        if not line.strip():
+            continue
+        exact = line.rstrip("\r\n")
+        material = f"{section_id}\0{line_number}\0{start}\0{byte_cursor}\0{exact}".encode("utf-8")
+        atoms.append({
+            "obligation_id": "AAO:" + _sha(material),
+            "section_id": section_id,
+            "line_number": line_number,
+            "byte_start": start,
+            "byte_end": byte_cursor,
+            "text": exact,
+            "text_sha256": _sha(exact.encode("utf-8")),
+        })
+    if not atoms:
+        raise IngressError("SECTION_HAS_NO_NONEMPTY_OBLIGATIONS:" + section_id)
+    meta = {
+        "section_id": section_id,
+        "raw_sha256": _sha(raw),
+        "size_bytes": len(raw),
+        "nonempty_line_count": len(atoms),
+    }
+    return atoms, meta
+
+
+def inventory_source_roots(source_roots: Mapping[str, str | Path]) -> list[dict[str, Any]]:
+    if not isinstance(source_roots, Mapping) or not source_roots:
+        raise IngressError("SOURCE_ROOTS_REQUIRED")
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for logical_root in sorted(source_roots):
+        if logical_root not in {"shared", "week"}:
+            raise IngressError("SOURCE_ROOT_LABEL_INVALID:" + str(logical_root))
+        root = Path(source_roots[logical_root]).resolve()
+        if not root.is_dir():
+            raise IngressError("SOURCE_ROOT_NOT_DIRECTORY:" + logical_root)
+        for path in sorted(root.rglob("*")):
+            if path.is_symlink():
+                raise IngressError("SOURCE_SYMLINK_FORBIDDEN:" + str(path))
+            if not path.is_file():
+                continue
+            rel_inner = path.relative_to(root).as_posix()
+            logical = _safe_rel(logical_root + "/" + rel_inner, "SOURCE_PATH")
+            if logical in seen:
+                raise IngressError("SOURCE_PATH_DUPLICATE:" + logical)
+            seen.add(logical)
+            raw = path.read_bytes()
+            rows.append({
+                "path": logical,
+                "sha256": _sha(raw),
+                "size_bytes": len(raw),
+            })
+    if not rows:
+        raise IngressError("NO_MOUNTED_SOURCE_FILES")
+    return rows
 
 
 def compile_ingress(bundle: Mapping[str, Any]) -> dict[str, Any]:
@@ -55,9 +125,19 @@ def compile_ingress(bundle: Mapping[str, Any]) -> dict[str, Any]:
     task_text = bundle.get("task_text")
     if not isinstance(task_text, str) or not task_text.strip():
         raise IngressError("TASK_TEXT_INVALID")
-    raw = task_text.encode("utf-8")
-    if len(raw) > MAX_TASK_BYTES:
-        raise IngressError("TASK_TEXT_TOO_LARGE")
+
+    context_sections = bundle.get("context_sections") or {}
+    if not isinstance(context_sections, Mapping):
+        raise IngressError("CONTEXT_SECTIONS_INVALID")
+    sections: list[tuple[str, str]] = []
+    for sid in sorted(context_sections):
+        if sid == "task_brief":
+            raise IngressError("TASK_BRIEF_SECTION_RESERVED")
+        value = context_sections[sid]
+        if not isinstance(sid, str) or not isinstance(value, str):
+            raise IngressError("CONTEXT_SECTION_INVALID")
+        sections.append((sid, value))
+    sections.append(("task_brief", task_text))
 
     deliverables = _unique_strings(bundle.get("deliverables"), "DELIVERABLES")
 
@@ -81,44 +161,52 @@ def compile_ingress(bundle: Mapping[str, Any]) -> dict[str, Any]:
             raise IngressError("SOURCE_SIZE_INVALID:" + path)
         sources.append({"path": path, "sha256": digest, "size_bytes": size, "required": True})
 
-    lines = task_text.splitlines(keepends=True)
-    obligations = []
-    byte_cursor = 0
-    for line_number, line in enumerate(lines, 1):
-        encoded = line.encode("utf-8")
-        start = byte_cursor
-        byte_cursor += len(encoded)
-        if not line.strip():
-            continue
-        exact = line.rstrip("\r\n")
-        atom_material = f"{line_number}\0{start}\0{byte_cursor}\0{exact}".encode("utf-8")
-        obligations.append({
-            "obligation_id": "AAO:" + _sha(atom_material),
-            "line_number": line_number,
-            "byte_start": start,
-            "byte_end": byte_cursor,
-            "text": exact,
-            "text_sha256": _sha(exact.encode("utf-8")),
-        })
-
-    if not obligations:
-        raise IngressError("NO_NONEMPTY_TASK_OBLIGATIONS")
+    obligations: list[dict[str, Any]] = []
+    section_manifest = []
+    for sid, text in sections:
+        atoms, meta = _section_atoms(sid, text)
+        obligations.extend(atoms)
+        section_manifest.append(meta)
 
     material = {
         "schema": SCHEMA,
         "task_id": task_id,
-        "raw_task_sha256": _sha(raw),
-        "raw_task_size_bytes": len(raw),
+        "raw_task_sha256": next(x["raw_sha256"] for x in section_manifest if x["section_id"] == "task_brief"),
+        "context_sections": section_manifest,
+        "context_set_sha256": _sha(_canon(section_manifest)),
         "deliverables": sorted(deliverables),
         "source_files": sorted(sources, key=lambda x: x["path"]),
         "obligations": obligations,
         "obligation_count": len(obligations),
         "source_count": len(sources),
         "deliverable_count": len(deliverables),
-        "all_nonempty_task_lines_preserved_exactly": True,
+        "all_nonempty_context_and_task_lines_preserved_exactly": True,
         "all_declared_source_files_preserved_by_path_hash_and_size": True,
         "semantic_completeness_claimed": False,
         "hidden_rubric_information_used": False,
         "terminal_authority": False,
     }
     return {**material, "ingress_sha256": _sha(_canon(material))}
+
+
+def compile_harness_ingress(
+    *,
+    task_id: str,
+    scenario_overview: str,
+    week_overview: str,
+    task_brief: str,
+    deliverables: Sequence[str],
+    shared_root: str | Path,
+    week_root: str | Path,
+) -> dict[str, Any]:
+    source_files = inventory_source_roots({"shared": shared_root, "week": week_root})
+    return compile_ingress({
+        "task_id": task_id,
+        "task_text": task_brief,
+        "context_sections": {
+            "scenario_overview": scenario_overview,
+            "week_overview": week_overview,
+        },
+        "deliverables": list(deliverables),
+        "source_files": source_files,
+    })
