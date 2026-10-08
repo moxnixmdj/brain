@@ -66,13 +66,11 @@ def test_malformed_formula_fails_closed():
 def test_real_catalog_admits_only_repository_checked_executable_predicates():
     accepted, rejected = _trusted_catalog()
     p3 = [x for x in accepted if x["condition"] == {"op": "ATOM", "id": P3_ATOM}]
+    p2 = [x for x in accepted if x["condition"] == {"op": "ATOM", "id": P2_ATOM}]
     assert p3, (accepted, rejected)
+    assert p2, (accepted, rejected)
     assert all(x["trusted_provenance"].startswith("canonical.runtime.") for x in accepted)
-    # P2 adequacy exists, but observability/executable membership is deliberately separate.
-    assert any(
-        x.get("reason") == "ADEQUACY_AUTHENTICATED_BUT_EXECUTABLE_MEMBERSHIP_PREDICATE_NOT_BOUND"
-        for x in rejected
-    ), rejected
+    assert not any(x.get("candidate") == "P2" for x in rejected), rejected
 
 
 def test_universal_production_entry_point_never_turns_incomplete_cover_into_negative_claim():
@@ -83,3 +81,7 @@ def test_universal_production_entry_point_never_turns_incomplete_cover_into_nega
     assert out["terminal_credit_delta"] == 0
     if not out["pass"]:
         assert out["negative_capability_failure_authorized"] is False
+        assert out["uncovered_abstract_valuations"] == [{
+            P2_ATOM: False,
+            P3_ATOM: False,
+        }]
