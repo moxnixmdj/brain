@@ -1015,6 +1015,7 @@ def run_learning_episode(
     proposal_provider_max_candidates: int = 4,
     capability_expander_id: str = "HOST_CAPABILITY_EXPANDER",
     max_capability_expansions: int = 4,
+    retry_context: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Run verified learned routes first, then fall back safely to full V12 search.
 
@@ -1075,7 +1076,7 @@ def run_learning_episode(
             "reuse_learning": reuse_learning,
         }
         if reuse_out.get("pass") is True:
-            integrated = integrate_solver_output(reuse_out, state_path=state_path)
+            integrated = integrate_solver_output(reuse_out, state_path=state_path, retry_context=retry_context)
             return {
                 "schema": SCHEMA,
                 "status": integrated["status"],
@@ -1090,7 +1091,7 @@ def run_learning_episode(
                 "terminal_authority": False,
             }
         if effectful:
-            integrated = integrate_solver_output(reuse_out, state_path=state_path)
+            integrated = integrate_solver_output(reuse_out, state_path=state_path, retry_context=retry_context)
             return {
                 "schema": SCHEMA,
                 "status": "FAIL_CLOSED__LEARNED_ROUTE_EFFECT_OCCURRED__NO_BLIND_REPLAY",
@@ -1125,7 +1126,7 @@ def run_learning_episode(
         capability_expander_id=capability_expander_id,
         max_capability_expansions=max_capability_expansions,
     )
-    integrated = integrate_solver_output(out, state_path=state_path)
+    integrated = integrate_solver_output(out, state_path=state_path, retry_context=retry_context)
     return {
         "schema": SCHEMA,
         "status": integrated["status"],
