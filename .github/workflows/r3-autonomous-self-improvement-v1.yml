@@ -23,6 +23,7 @@ on:
       - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
       - "canonical/tests/test_r3_improvement_queue_driver_v1.py"
+      - "canonical/tests/test_r3_queue_kind_totality_v1.py"
       - "canonical/tests/test_r3_quarantine_recovery_v1.py"
       - "canonical/tests/test_r3_verified_cross_scope_generalization_v1.py"
       - "canonical/tests/test_verified_repair_replay_loop_v1.py"
@@ -55,6 +56,7 @@ on:
       - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
       - "canonical/tests/test_r3_improvement_queue_driver_v1.py"
+      - "canonical/tests/test_r3_queue_kind_totality_v1.py"
       - "canonical/tests/test_r3_quarantine_recovery_v1.py"
       - "canonical/tests/test_r3_verified_cross_scope_generalization_v1.py"
       - "canonical/tests/test_verified_repair_replay_loop_v1.py"
@@ -97,6 +99,8 @@ jobs:
         run: python -m unittest canonical.tests.test_r3_verified_cross_scope_generalization_v1 -v
       - name: Run R3 queue-driver regression suite
         run: python -m unittest canonical.tests.test_r3_improvement_queue_driver_v1 -v
+      - name: Run R3 durable queue-kind totality suite
+        run: python -m unittest canonical.tests.test_r3_queue_kind_totality_v1 -v
       - name: Run R3 quarantine recovery regression suite
         run: python -m unittest canonical.tests.test_r3_quarantine_recovery_v1 -v
       - name: Run R3 independent learning-verifier suite
