@@ -10,6 +10,7 @@ from canonical.tests.test_aa_briefcase_scope_complete_dominance_v1 import (
 )
 from canonical.tests.test_aa_briefcase_minimal_owner_attestation_v1 import statement
 from canonical.tests.test_aa_briefcase_core_owner_attestation_v2 import statement as core_statement
+from canonical.tests.test_aa_briefcase_official_github_publication_v1 import publication
 from canonical.tests.test_aa_briefcase_owner_signature_verifier_v1 import make_signed
 
 
@@ -41,6 +42,20 @@ class T(unittest.TestCase):
         self.assertFalse(out["official_owner_elo_claimed"])
         self.assertTrue(out["single_result_reused_across_predicates"])
         self.assertFalse(out["historical_epoch_rewritten"])
+
+    def test_official_github_publication_passes_both_aliases(self):
+        out = compile_current_epoch_noninferiority(
+            target(),
+            {
+                "mode": "OFFICIAL_GITHUB_PUBLICATION",
+                "payload": {"publication": publication()},
+            },
+        )
+        self.assertEqual(out["predicate_results"], {p: True for p in PREDICATES})
+        self.assertEqual(out["comparison_route"], "OFFICIAL_GITHUB_PUBLICATION")
+        self.assertFalse(out["numeric_elo_reconstruction_required"])
+        self.assertFalse(out["numeric_comparable_elo_used"])
+        self.assertFalse(out["official_owner_elo_claimed"])
 
     def test_core_owner_attestation_passes_both_aliases(self):
         s = core_statement()
