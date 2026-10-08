@@ -247,7 +247,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "counterexamples": [],
             "attempts": [],
         }
-        with mock.patch.object(loop.solver_v10, "run", return_value=solver_out) as run_mock:
+        with mock.patch.object(loop.solver_v12, "run", return_value=solver_out) as run_mock:
             result = loop.run_learning_episode(
                 {"task_id": "t", "initial_facts": [], "target_effects": ["goal"], "capabilities": []},
                 state_path=path,
@@ -321,7 +321,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "verified_skill_reuse_authorized": False,
             "verified_executable_skill": None,
         }
-        with mock.patch.object(loop.solver_v10, "run", return_value=solved) as run_mock:
+        with mock.patch.object(loop.solver_v12, "run", return_value=solved) as run_mock:
             out = loop.run_learning_episode(
                 self._reuse_problem(),
                 state_path=path,
@@ -367,7 +367,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "verified_executable_skill": None,
         }
         with mock.patch.object(
-            loop.solver_v10, "run", side_effect=[failed, solved]
+            loop.solver_v12, "run", side_effect=[failed, solved]
         ) as run_mock:
             out = loop.run_learning_episode(
                 self._reuse_problem(),
@@ -406,7 +406,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "counterexamples": [],
             "attempts": [],
         }
-        with mock.patch.object(loop.solver_v10, "run", return_value=failed) as run_mock:
+        with mock.patch.object(loop.solver_v12, "run", return_value=failed) as run_mock:
             out = loop.run_learning_episode(
                 self._reuse_problem(),
                 state_path=path,

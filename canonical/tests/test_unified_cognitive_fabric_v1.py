@@ -28,6 +28,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("TERMINAL_AUTOPILOT", c["engines"])
         self.assertIn("TERMINAL_ROOT", c["engines"])
         self.assertIn("TERMINAL_CLOSURE", c["engines"])
+        self.assertIn("OWNERSHIP_CATALOG", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -44,7 +45,11 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             c["authority_pointer_runtime_reference_reachability_complete"],
             c["authority_pointer_runtime_reference_missing_count"] == 0,
         )
-        self.assertFalse(c["current_live_ownership_set_completeness_proved"])
+        self.assertTrue(c["current_live_ownership_ontology_complete"], c)
+        self.assertTrue(c["live_owned_equals_fabric_reachable"], c)
+        self.assertTrue(c["r1_structural_closure"], c)
+        self.assertEqual(c["known_r1_residuals"], [])
+        self.assertFalse(c["all_historical_brain_capabilities_unified"])
         self.assertNotIn(
             "H100_SPECIALIZED_INFERENCE_REGISTRIES_NOT_YET_EXPOSED_AS_FABRIC_CAPABILITIES",
             c["known_unified_fabric_residuals"],
@@ -148,6 +153,16 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         })
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
         self.assertIn("result", out)
+
+    def test_ownership_catalog_dispatches_and_structurally_closes_r1(self):
+        out = run({
+            "mode": "OWNERSHIP_CATALOG",
+            "payload": {},
+        })
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertTrue(out["result"]["live_owned_equals_fabric_reachable"])
+        self.assertTrue(out["result"]["r1_structural_closure"])
 
     def test_decision_dispatches(self):
         out = run({

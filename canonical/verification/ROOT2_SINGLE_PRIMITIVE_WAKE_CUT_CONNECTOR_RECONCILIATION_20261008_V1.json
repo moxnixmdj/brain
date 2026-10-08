@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_CONNECTOR_RECONCILIATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__CONTENT_ADDRESSED_SOURCE_RECONCILIATION__NOT_INDEPENDENT_RUNTIME_EXECUTION__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V1.json",
+    "git_blob_sha": "423e0d2186974dfe335b6366c73621bab1dfc039"
+  },
+  "exact_sources": {
+    "current_primitive_frontier": {
+      "path": "canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json",
+      "git_blob_sha": "8340829830dc81095abd4d643a8be6894a39f2f3"
+    },
+    "gdpval_information_cut": {
+      "path": "canonical/governance/GDPVAL_EVALUATION_LAW_MINIMUM_INFORMATION_CUT_20261008_V1.json",
+      "git_blob_sha": "7bf8b2ffc8186e14380da080e5a9832a2fd9a2a8"
+    },
+    "finance_tail_truth_repair": {
+      "path": "canonical/governance/FINANCE_SEMANTIC_ADEQUACY_TAIL_REALITY_CLASS_TRUTH_REPAIR_20261008_V1.json",
+      "git_blob_sha": "641ab1c3a988b4a589747cbdb7c9428a2fc11e5c"
+    },
+    "superseded_root2_wake_activation": {
+      "path": "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V4_ACTIVATION_V1.json",
+      "git_blob_sha": "ce39a0e558c4a75a3b36d49442985332147df5b1"
+    }
+  },
+  "recomputed_checks": {
+    "current_single_live_primitive_count_is_one": true,
+    "current_frontier_reduces_to_escape_policy_or_observational_policy_cover": true,
+    "gdpval_general_public_metadata_search_is_exhausted_under_current_bound_sources": true,
+    "gdpval_evaluator_independent_scope_complete_dominance_is_an_admissible_separator_class": true,
+    "finance_semantic_adequacy_tail_removed_from_positive_reality_wake_accounting": true,
+    "finance_provider_wait_for_semantic_tail_forbidden_before_zero_reality_fixed_point": true,
+    "new_cut_marks_gdpval_external_required_sleep": true,
+    "new_cut_marks_finance_semantic_tail_zero_reality_active": true,
+    "prior_root2_v4_activation_had_scheduling_authority": true
+  },
+  "conclusion": "THE_NEW_ROOT2_CUT_IS_A_SOURCE_PRESERVING_SCHEDULER_RECONCILIATION_OF_NEWER_AUTHORITY__IT_DOES_NOT_CLOSE_ESCAPE_POLICY_ADEQUACY_OR_CHANGE_ACCEPTANCE_CREDIT.",
+  "verification_boundary": [
+    "THIS_RECEIPT_RECOMPUTES_DECLARED SOURCE STATES THROUGH THE GITHUB CONNECTOR.",
+    "IT_IS_NOT AN INDEPENDENT EXECUTION OF A NEW RUNTIME.",
+    "IT DOES NOT PROVE GDPVAL NONINFERIORITY.",
+    "IT DOES NOT PROVE FINANCE SEMANTIC ADEQUACY.",
+    "IT DOES NOT AUTHORIZE FRESH REALITY EXECUTION."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

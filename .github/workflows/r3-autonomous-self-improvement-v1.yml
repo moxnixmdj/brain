@@ -4,13 +4,18 @@ on:
   pull_request:
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+      - "canonical/runtime/universal_verified_adaptive_solver_v12.py"
+      - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
   push:
     branches:
+      - "main"
       - "r3-autonomous-self-improvement-v1-20261008"
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
+      - "canonical/runtime/universal_verified_adaptive_solver_v12.py"
+      - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
 
