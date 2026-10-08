@@ -21,6 +21,7 @@ from canonical.runtime.brain_owned_python_closure_census_v1 import census as clo
 from canonical.runtime.current_authority_runtime_census_v1 import run as authority_runtime_census
 from canonical.runtime import live_capability_ownership_v1 as live_ownership
 from canonical.runtime import live_capability_invoker_v1 as live_invoker
+from canonical.runtime import r1_live_architecture_closure_gate_v1 as r1_closure_gate
 from canonical.runtime import universal_escape_resolver_v1 as universal_escape
 from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
 from canonical.runtime import terminal_autopilot_v1 as terminal_autopilot
@@ -167,8 +168,20 @@ def catalog() -> dict[str, Any]:
     authority_census = authority_runtime_census(ROOT)
     ownership = live_ownership.evaluate(ENGINE_DESCRIPTORS)
     invocation = live_invoker.coverage(ownership["live_owned_capability_ids"])
-    r1_closed = bool(ownership["r1_structural_closure"] and invocation["pass"])
-    r1_residuals = [] if r1_closed else ["LIVE_OWNED_CAPABILITY_UNIVERSAL_INVOCATION_COVERAGE_GAP"]
+    architecture_gate = r1_closure_gate.evaluate(
+        ENGINE_DESCRIPTORS,
+        ownership=ownership,
+        invocation=invocation,
+        subruntime_surfaces=live_runtime.SURFACES,
+        canonical_public_entrypoint=CANONICAL_PUBLIC_ENTRYPOINT,
+        subordinate_runtime_entrypoint=SUBORDINATE_RUNTIME_ENTRYPOINT,
+    )
+    r1_closed = bool(
+        ownership["r1_structural_closure"]
+        and invocation["pass"]
+        and architecture_gate["pass"]
+    )
+    r1_residuals = list(architecture_gate["errors"])
     return {
         "schema": SCHEMA,
         "status": "LIVE_FEDERATED_COGNITIVE_FABRIC",
@@ -198,6 +211,8 @@ def catalog() -> dict[str, Any]:
         "current_live_ownership_ontology_complete": ownership["provider_coverage_complete"],
         "live_capability_invocation_coverage": invocation,
         "all_live_owned_capabilities_universally_invocable": invocation["pass"],
+        "r1_live_architecture_closure_gate": architecture_gate,
+        "r1_drift_locked": architecture_gate["pass"],
         "r1_structural_closure": r1_closed,
         "known_r1_residuals": r1_residuals,
         "known_unified_fabric_residuals": r1_residuals,
