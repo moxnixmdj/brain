@@ -646,6 +646,59 @@ def _extract_information_gap(decision: Mapping[str, Any]) -> dict[str, Any] | No
     }
 
 
+def _extract_policy_gap(decision: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Recover the exact unresolved P3 adequacy edge without inventing semantics."""
+    detail = decision.get("detail")
+    if not isinstance(detail, Mapping):
+        return None
+    loop = detail.get("loop_result")
+    if not isinstance(loop, Mapping):
+        return None
+    status = loop.get("status")
+    edges = {
+        "OPEN__COMMON_POLICY_SELECTION_BINDING_REQUIRED": (
+            "EXACT_SOURCE_POSITIVE_SELECTION_CONTRACT_FOR_CERTIFIED_COMMON_POLICY",
+            "SOURCE_POSITIVE_SELECTION_CONTRACT",
+        ),
+        "OPEN__COMMON_POLICY_EXACT_REALIZATION_BINDING_UNSATISFIED": (
+            "REPAIR_EXACT_SOURCE_POSITIVE_SELECTION_BINDING",
+            "SOURCE_POSITIVE_SELECTION_BINDING_REPAIR",
+        ),
+        "OPEN__POSITIVE_POLICY_ADEQUACY_CERTIFICATE_REQUIRED": (
+            "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+            "POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+        ),
+        "OPEN__POSITIVE_POLICY_ADEQUACY_COVERAGE_REQUIRED": (
+            "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_COVERAGE",
+            "POSITIVE_POLICY_ADEQUACY_COVERAGE",
+        ),
+        "OPEN__POLICY_CHANGING_DISCRIMINATOR_OR_STRONGER_ADEQUACY_REQUIRED": (
+            "ONE_POLICY_CHANGING_DISCRIMINATOR_OR_STRONGER_POSITIVE_ADEQUACY",
+            "POLICY_CHANGING_DISCRIMINATOR_OR_STRONGER_ADEQUACY",
+        ),
+    }
+    spec = edges.get(status)
+    if spec is None:
+        return None
+    loop_detail = loop.get("detail")
+    loop_detail = loop_detail if isinstance(loop_detail, Mapping) else {}
+    selected_policy_id = loop_detail.get("selected_policy_id")
+    if not isinstance(selected_policy_id, str) or not selected_policy_id:
+        selected_policy_id = loop.get("selected_policy_id")
+    return {
+        "loop_status": status,
+        "loop_reason": loop.get("reason"),
+        "next_required_edge": spec[0],
+        "required_artifact": spec[1],
+        "selected_policy_id": (
+            selected_policy_id
+            if isinstance(selected_policy_id, str) and selected_policy_id
+            else None
+        ),
+        "loop_detail": deepcopy(dict(loop_detail)),
+    }
+
+
 def _append_truth_payload(
     decision_payload: dict[str, Any],
     predicate_id: str,
@@ -997,6 +1050,38 @@ def run(
                         next_observation_request=next_observation,
                         decision_result=decision,
                         policy_cover_result=cover_result,
+                        information_trace=information_trace,
+                        goal_to_decision_binding=goal_binding,
+                    )
+                policy_gap = _extract_policy_gap(decision)
+                if policy_gap is not None:
+                    policy_request = {
+                        "schema": "PROJECT_BRAIN_MINIMUM_POLICY_REPAIR_REQUEST_V1",
+                        "task_id": task_id,
+                        "goal_sha256": sha256(goal.encode("utf-8")).hexdigest(),
+                        "decision_payload_sha256": _digest(working),
+                        "loop_status": policy_gap["loop_status"],
+                        "reason": policy_gap.get("loop_reason"),
+                        "required_artifact": policy_gap["required_artifact"],
+                        "selected_policy_id": policy_gap.get("selected_policy_id"),
+                        "loop_detail": policy_gap.get("loop_detail", {}),
+                        "preferred_resolution_order": [
+                            "CERTIFY_ONE_COMMON_BRAIN_OWNED_POLICY_IF_POSSIBLE",
+                            "OTHERWISE_ADD_ONLY_ONE_POLICY_CHANGING_DISCRIMINATOR",
+                            "DO_NOT_BUILD_A_COMPLETE_WORLD_MODEL_UNLESS_REQUIRED",
+                        ],
+                        "policy_adequacy_authority": False,
+                        "semantic_truth_authority": False,
+                        "terminal_authority": False,
+                    }
+                    return _open(
+                        str(policy_gap["loop_status"]),
+                        task_id=task_id,
+                        goal=goal,
+                        raw_contract=raw_contract,
+                        next_required_edge=str(policy_gap["next_required_edge"]),
+                        next_policy_request=policy_request,
+                        decision_result=decision,
                         information_trace=information_trace,
                         goal_to_decision_binding=goal_binding,
                     )
