@@ -28,6 +28,7 @@ from canonical.runtime import r2_markdown_pdf_direct_adequacy_v1 as markdown_pdf
 from canonical.runtime import r2_typed_json_transform_direct_adequacy_v1 as typed_json_transform_adequacy
 from canonical.runtime import r2_http_json_observation_direct_adequacy_v1 as http_json_observation_adequacy
 from canonical.runtime import r2_pypi_provenance_direct_adequacy_v1 as pypi_provenance_adequacy
+from canonical.runtime import r2_exact_evidence_claim_support_direct_adequacy_v1 as exact_claim_support_adequacy
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -45,6 +46,7 @@ MARKDOWN_PDF_ROUTE_ID = "DIRECT_ADEQUACY::PLAIN_MARKDOWN_PDF_FAMILY_V1"
 TYPED_JSON_TRANSFORM_ROUTE_ID = "DIRECT_ADEQUACY::TYPED_JSON_TRANSFORM_FAMILY_V1"
 HTTP_JSON_OBSERVATION_ROUTE_ID = "DIRECT_ADEQUACY::STATE_KEYED_HTTPS_JSON_OBSERVATION_FAMILY_V1"
 PYPI_PROVENANCE_ROUTE_ID = "DIRECT_ADEQUACY::PYPI_PINNED_ARTIFACT_PROVENANCE_FAMILY_V1"
+EXACT_CLAIM_SUPPORT_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_GROUNDED_EVIDENCE_CLAIM_SUPPORT_FAMILY_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -123,6 +125,13 @@ ROUTES = {
         "preflight": "r2_pypi_provenance_direct_adequacy_v1.preflight",
         "executor": "r2_pypi_provenance_direct_adequacy_v1.run",
         "acceptance": "PRODUCER_INDEPENDENT_CURL_METADATA_AND_WHEEL_HASH_REPRODUCTION",
+    },
+    EXACT_CLAIM_SUPPORT_ROUTE_ID: {
+        "capability_id": "evidence.claim_relation.generic_units.stdlib",
+        "scope": "EXACT_NORMALIZED_SUBSTRING_SUPPORT_OVER_INTEGRITY_CHECKED_GROUNDED_EVIDENCE_UNITS",
+        "preflight": "r2_exact_evidence_claim_support_direct_adequacy_v1.preflight",
+        "executor": "r2_exact_evidence_claim_support_direct_adequacy_v1.run",
+        "acceptance": "PRODUCER_INDEPENDENT_EVIDENCE_INTEGRITY_AND_EXACT_MATCH_SET_RECOMPUTATION",
     },
     VISUAL_CODE_ROUTE_ID: {
         "capability_id": "DYNAMIC_VERIFIED_BOUND_VISUAL_CODE_PRODUCER",
@@ -206,6 +215,29 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "output_path": literal_json["output_path"],
             "records_sha256": literal_json["records_sha256"],
             "semantic_scope": ROUTES[LITERAL_JSON_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
+    exact_claim_support = exact_claim_support_adequacy.preflight(request)
+    if exact_claim_support.get("matched") is True:
+        if exact_claim_support.get("status") == "FAIL_CLOSED":
+            return {
+                **_base("FAIL_CLOSED", passed=False),
+                "matched": True,
+                "route_id": EXACT_CLAIM_SUPPORT_ROUTE_ID,
+                "reason": exact_claim_support.get("reason"),
+            }
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": EXACT_CLAIM_SUPPORT_ROUTE_ID,
+            "capability_id": exact_claim_support.get("capability_id"),
+            "policy_id": exact_claim_support.get("policy_id"),
+            "goal_sha256": exact_claim_support.get("goal_sha256"),
+            "extraction_path": exact_claim_support.get("extraction_path"),
+            "claim_text": exact_claim_support.get("claim_text"),
+            "output_path": exact_claim_support.get("output_path"),
+            "semantic_scope": ROUTES[EXACT_CLAIM_SUPPORT_ROUTE_ID]["scope"],
             "preflight_execution_authority": False,
         }
 
@@ -447,6 +479,52 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
     pf = preflight(request)
     if pf.get("matched") is not True:
         return pf
+
+    if pf["route_id"] == EXACT_CLAIM_SUPPORT_ROUTE_ID:
+        claim_result = exact_claim_support_adequacy.run(request)
+        if claim_result.get("pass") is not True:
+            return {
+                **_base(
+                    str(
+                        claim_result.get("status")
+                        or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"
+                    ),
+                    passed=False,
+                ),
+                "matched": True,
+                "route_id": pf["route_id"],
+                "capability_id": pf.get("capability_id"),
+                "goal_sha256": pf.get("goal_sha256"),
+                "execution_attempted": True,
+                "retry_by_other_route_authorized": False,
+                "exact_claim_support_adequacy": deepcopy(dict(claim_result)),
+                "reason": claim_result.get("reason"),
+            }
+        return {
+            **_base("PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED", passed=True),
+            "matched": True,
+            "route_id": pf["route_id"],
+            "capability_id": claim_result.get("capability_id"),
+            "selected_policy_id": claim_result.get("selected_policy_id"),
+            "goal_sha256": claim_result.get("goal_sha256"),
+            "semantic_scope": pf["semantic_scope"],
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "accepted_raw_obligation_ids": list(
+                claim_result.get("accepted_raw_obligation_ids") or []
+            ),
+            "raw_acceptance_obligation_count": claim_result.get(
+                "raw_acceptance_obligation_count"
+            ),
+            "acceptance_receipt": deepcopy(
+                dict(claim_result.get("acceptance_receipt") or {})
+            ),
+            "raw_result": deepcopy(dict(claim_result)),
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "authority_boundary": claim_result.get("authority_boundary"),
+        }
 
     if pf["route_id"] == PYPI_PROVENANCE_ROUTE_ID:
         provenance_result = pypi_provenance_adequacy.run(request)
