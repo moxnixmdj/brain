@@ -1,0 +1,12 @@
+{
+  "schema": "P3_GROUNDED_AUDIENCE_NUMERIC_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS__12_UNIT_TESTS__212_SECOND_CARRIER_CHECKS__ZERO_TERMINAL_CREDIT",
+  "runtime_sha": "041a3ffe1d770ee5711df9f875207f0f0f8fd789",
+  "tests_sha": "850b234fae5f15a2996ebda5b876930c6a732e94",
+  "independent_script_sha": "0872f4e57ebe18433447a5e9f8c382ebcf4cdafe",
+  "primary_sprite": "brain-root3-current-byte-replay-20261007-v1",
+  "secondary_sprite": "h100-real-image-v1",
+  "scope": "TYPED_DECIMAL_EVIDENCE_AND_EXPLICIT_AUDIENCE_PRIORITY_ONLY",
+  "terminal_credit_delta": 0
+}
