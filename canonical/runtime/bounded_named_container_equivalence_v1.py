@@ -23,6 +23,10 @@ _SOURCE_PATTERNS = (
         re.I,
     ),
     re.compile(
+        r"""\b(?:create|add|provide)\s+(?:a\s+)?(?:tab|sheet|worksheet)\s+(?:titled|named|called)\s+[\"'‘’“”](?P<title>[^\"'‘’“”]+)[\"'‘’“”]""",
+        re.I,
+    ),
+    re.compile(
         r"""\b(?:tab|sheet|worksheet)\s*\d*\s*:\s*.*?\b(?:titled|named|called)\s+[\"'‘’“”](?P<title>[^\"'‘’“”]+)[\"'‘’“”]""",
         re.I,
     ),
