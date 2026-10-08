@@ -135,6 +135,42 @@ def _owned_success_learning_frontier_sha256(
     return sha256(raw).hexdigest()
 
 
+def _assert_owned_success_module_origin(
+    module: Any,
+    *,
+    relative_path: str,
+    repo_root: str | Path = ROOT,
+) -> dict[str, str]:
+    """Bind an imported frontier module to the exact repository file being hashed."""
+    root = Path(repo_root).resolve(strict=True)
+    target = (root / relative_path).resolve(strict=True)
+    try:
+        target.relative_to(root)
+    except ValueError as exc:
+        raise ImprovementDriverError(
+            "SUCCESS_FRONTIER_MODULE_PATH_ESCAPES_REPOSITORY:" + relative_path
+        ) from exc
+
+    raw_origin = getattr(module, "__file__", None)
+    if not isinstance(raw_origin, str) or not raw_origin.strip():
+        raise ImprovementDriverError(
+            "SUCCESS_FRONTIER_MODULE_ORIGIN_MISSING:" + relative_path
+        )
+    origin = Path(raw_origin).resolve(strict=True)
+    if origin != target:
+        raise ImprovementDriverError(
+            "SUCCESS_FRONTIER_MODULE_ORIGIN_MISMATCH:"
+            + relative_path
+            + ":"
+            + str(origin)
+        )
+    return {
+        "module": str(getattr(module, "__name__", "") or ""),
+        "relative_path": relative_path,
+        "origin": str(origin),
+    }
+
+
 def _activate_owned_success_learning_frontier(
     *,
     expected_frontier_sha256: str,
@@ -157,16 +193,42 @@ def _activate_owned_success_learning_frontier(
     from canonical.runtime import r3_independent_learning_verifier_v1 as independent_verifier
 
     modules = (
-        bound_success_adapter,
-        raw_success_adapter,
-        bound_success_verifier,
-        raw_success_verifier,
-        independent_verifier,
+        (
+            bound_success_adapter,
+            "canonical/runtime/r3_bound_success_adapter_v1.py",
+        ),
+        (
+            raw_success_adapter,
+            "canonical/runtime/r3_raw_success_adapter_v1.py",
+        ),
+        (
+            bound_success_verifier,
+            "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
+        ),
+        (
+            raw_success_verifier,
+            "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
+        ),
+        (
+            independent_verifier,
+            "canonical/runtime/r3_independent_learning_verifier_v1.py",
+        ),
     )
-    activated: list[str] = []
-    for module in modules:
+    activated: list[dict[str, str]] = []
+    for module, relative_path in modules:
+        _assert_owned_success_module_origin(
+            module,
+            relative_path=relative_path,
+            repo_root=repo_root,
+        )
         reloaded = importlib.reload(module)
-        activated.append(str(reloaded.__name__))
+        activated.append(
+            _assert_owned_success_module_origin(
+                reloaded,
+                relative_path=relative_path,
+                repo_root=repo_root,
+            )
+        )
 
     after = _owned_success_learning_frontier_sha256(repo_root=repo_root)
     if after != expected_frontier_sha256:
@@ -178,7 +240,7 @@ def _activate_owned_success_learning_frontier(
         "status": "SUCCESS_VERIFICATION_FRONTIER_ACTIVATED",
         "pass": True,
         "frontier_sha256": after,
-        "activated_modules": activated,
+        "activated_module_bindings": activated,
         "terminal_authority": False,
     }
 
