@@ -19,7 +19,20 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  module-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: categorical-leaf
+            module: canonical.tests.test_bounded_explicit_categorical_support_v1
+          - label: support-v5
+            module: canonical.tests.test_selected_support_truth_certificate_v5
+          - label: realization-v3
+            module: canonical.tests.test_p3_required_claim_grounded_realization_cell_v3
+          - label: admission-v6
+            module: canonical.tests.test_p3_real_context_v3_admission_v6
+    name: test-${{ matrix.label }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -27,82 +40,53 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Execute tests and persist verdict
+      - name: Execute module tests
+        env:
+          TEST_MODULE: ${{ matrix.module }}
         run: |
           PYTHONPATH=. python - <<'PY'
-          import importlib, traceback
-          report=[]
-          failures=[]
-          modules=[
-              "canonical.tests.test_bounded_explicit_categorical_support_v1",
-              "canonical.tests.test_selected_support_truth_certificate_v5",
-              "canonical.tests.test_p3_required_claim_grounded_realization_cell_v3",
-              "canonical.tests.test_p3_real_context_v3_admission_v6",
-          ]
-          count=0
-          for name in modules:
-              try:
-                  mod=importlib.import_module(name)
-              except Exception:
-                  failures.append((name,"<IMPORT>",traceback.format_exc()))
-                  continue
-              for attr in sorted(vars(mod)):
-                  fn=getattr(mod,attr)
-                  if attr.startswith("test_") and callable(fn):
-                      try:
-                          fn()
-                          count+=1
-                          report.append(f"PASS {name} {attr}")
-                      except Exception:
-                          failures.append((name,attr,traceback.format_exc()))
-          try:
-              from canonical.runtime.selected_support_truth_certificate_v5 import evaluate
-              payload={
-                "predicate_id":"BOUNDARY",
-                "claim":{"claim_id":"C","text":"Tweety is a member of Animal.","required":True},
-                "evidence":[
-                  {"evidence_id":"E1","text":"Report states that Tweety is a member of Canary.","verified":True,
-                   "provenance":[{"source_id":"REPORT","locator":"p1"}]},
-                  {"evidence_id":"E2","text":"Taxonomy states Canary is a subclass of Animal.","verified":True,
-                   "provenance":[{"source_id":"TAXONOMY","locator":"p1"}]},
-                ],
-              }
-              out=evaluate(payload)
-              assert out["pass"] is True
-              for field in (
-                  "source_authorization_verified","policy_adequacy_authority",
-                  "db_admission_authority","u_subtraction_authority","terminal_authority"
-              ):
-                  assert out[field] is False,(field,out[field])
-              assert out["terminal_credit_delta"]==0
-              report.append("PASS AUTHORITY_BOUNDARY")
-          except Exception:
-              failures.append(("authority","boundary",traceback.format_exc()))
-          report.append(f"TOTAL_EXECUTED_PASS {count}")
-          if count < 20:
-              failures.append(("runner","count",f"TOO_FEW_TESTS_EXECUTED:{count}"))
-          if failures:
-              report.append(f"FAILURE_COUNT {len(failures)}")
-              for name,attr,tb in failures:
-                  report.extend(["",f"FAIL {name} {attr}",tb])
-              status="FAIL"
-          else:
-              status="PASS"
-          open("categorical-test-report.txt","w",encoding="utf-8").write("\n".join(report)+"\n")
-          open("categorical-test-status.txt","w",encoding="utf-8").write(status+"\n")
-          print("\n".join(report))
-          print("VERDICT",status)
+          import importlib, os
+          name=os.environ["TEST_MODULE"]
+          mod=importlib.import_module(name)
+          tests=[(n,getattr(mod,n)) for n in sorted(vars(mod)) if n.startswith("test_") and callable(getattr(mod,n))]
+          if not tests:
+              raise SystemExit("NO_TESTS_DISCOVERED:"+name)
+          for attr,fn in tests:
+              fn()
+              print("PASS",name,attr)
+          print("TOTAL_PASS",len(tests))
           PY
-      - name: Upload diagnostic report
-        if: always()
-        uses: actions/upload-artifact@v4
+
+  authority-boundary:
+    name: test-authority-boundary
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          name: p3-categorical-test-report
-          path: |
-            categorical-test-report.txt
-            categorical-test-status.txt
-          if-no-files-found: error
-      - name: Enforce verdict
-        if: always()
+          python-version: "3.12"
+      - name: Assert zero authority
         run: |
-          test "$(cat categorical-test-status.txt)" = "PASS"
+          PYTHONPATH=. python - <<'PY'
+          from canonical.runtime.selected_support_truth_certificate_v5 import evaluate
+          payload={
+            "predicate_id":"BOUNDARY",
+            "claim":{"claim_id":"C","text":"Tweety is a member of Animal.","required":True},
+            "evidence":[
+              {"evidence_id":"E1","text":"Report states that Tweety is a member of Canary.","verified":True,
+               "provenance":[{"source_id":"REPORT","locator":"p1"}]},
+              {"evidence_id":"E2","text":"Taxonomy states Canary is a subclass of Animal.","verified":True,
+               "provenance":[{"source_id":"TAXONOMY","locator":"p1"}]},
+            ],
+          }
+          out=evaluate(payload)
+          assert out["pass"] is True,out
+          for field in (
+              "source_authorization_verified","policy_adequacy_authority",
+              "db_admission_authority","u_subtraction_authority","terminal_authority"
+          ):
+              assert out[field] is False,(field,out[field])
+          assert out["terminal_credit_delta"]==0
+          print("AUTHORITY_BOUNDARY_PASS")
+          PY
