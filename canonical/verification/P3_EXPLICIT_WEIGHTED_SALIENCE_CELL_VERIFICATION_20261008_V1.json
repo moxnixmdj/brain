@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_P3_EXPLICIT_WEIGHTED_SALIENCE_CELL_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_CARRIERS__617_OF_617_EACH__600_RANDOM_EXHAUSTIVE_CROSSCHECKS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/p3_explicit_weighted_salience_cell_v1.py",
+      "git_blob_sha": "d06eb50d5247a3ed7bfcc0f10df2c223230bf3b7"
+    },
+    "verifier": {
+      "path": "canonical/verification/p3_explicit_weighted_salience_cell_replay_v1.py",
+      "git_blob_sha": "a6d2278dab31f351a82436d987b0ed48160cbffd"
+    },
+    "dependencies": {
+      "bounded_claim_support": "197246a50ace8c16b945def9edb1357fb317c393",
+      "synthesis_v2": "14c7b3f99b6c28b3f28b5356e13907f843f5ee91",
+      "synthesis_v3": "cd81b812f30b46b9889826adbc39df8690bdb40d",
+      "grounded_realizer": "0709b7d43a069eaa9eb3240df28789a9107a36db"
+    }
+  },
+  "primary_execution": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/p3_real_context_trust_gate_v1",
+    "result": {
+      "pass": true,
+      "checks": 617,
+      "random_exhaustive_crosschecks": 600,
+      "directed_positive": 8,
+      "adversarial_fail_closed": 9
+    }
+  },
+  "independent_execution": {
+    "provider": "SPRITES",
+    "sprite": "h100-real-image-v1",
+    "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+    "workspace": "/home/sprite/p3_weighted_independent_v1",
+    "result": {
+      "pass": true,
+      "checks": 617,
+      "random_exhaustive_crosschecks": 600,
+      "directed_positive": 8,
+      "adversarial_fail_closed": 9
+    }
+  },
+  "exact_mechanism": [
+    "ALL_REQUIRED_CLAIMS_MANDATORY",
+    "OPTIONAL_CLAIMS_SELECTED_ONLY_FROM_POSITIVE_EXPLICIT_INTEGER_OBJECTIVE_WEIGHT",
+    "MAXIMIZE_TOTAL_SELECTED_WEIGHT_UNDER_MAX_ITEMS_CAPACITY",
+    "DETERMINISTIC_TIEBREAK_BY_CLAIM_ID",
+    "ORDER_SELECTED_CLAIMS_BY_DESCENDING_WEIGHT_THEN_ID",
+    "FULL_BOUNDED_SUPPORT_GRAPH_RESOLVED_BEFORE_SELECTION",
+    "ANY_CONFLICT_OR_HIDDEN_UNCERTAINTY_FAILS_CLOSED",
+    "CALLER_INCLUDE_AND_CALLER_ORDER_FORBIDDEN"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_SEMANTIC_RELEVANCE",
+    "NO_HIDDEN_UNCERTAINTY_DISCOVERY",
+    "NO_SOURCE_AUTHORIZATION",
+    "NO_GENERAL_AUDIENCE_MEANING",
+    "NO_DB_ADMISSION_AUTHORITY",
+    "NO_U_SUBTRACTION_AUTHORITY",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
