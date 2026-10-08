@@ -90,6 +90,7 @@ from canonical.runtime.executable_skill_verification_authenticator_v1 import (
 from canonical.runtime.universal_bound_capability_carrier_v1 import (
     execute as execute_bound_capability_subplan,
 )
+from canonical.runtime.verified_skill_macro_planner_v1 import plan_with_skills
 
 SCHEMA = "PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V10"
 
@@ -262,6 +263,72 @@ def _finish(
     }
 
 
+def _verified_skill_preference(
+    problem: Mapping[str, Any],
+    records: Sequence[Mapping[str, Any]],
+    *,
+    active_invalidators: Sequence[str],
+    repo_root: str | Path,
+) -> tuple[dict[str, Any] | None, list[str]]:
+    """Re-authenticate durable skills and compile a safe preferred route.
+
+    Raw capability-order hints are deliberately forbidden. The preference exists
+    only when the exact stored skill is reconstructed from its content-addressed
+    verification pair and the verified-skill macro planner accepts it for this
+    exact problem and current invalidators.
+    """
+    if not isinstance(records, Sequence) or isinstance(records, (str, bytes)):
+        raise ValueError("VERIFIED_SKILL_RECORDS_INVALID")
+    if not isinstance(active_invalidators, Sequence) or isinstance(
+        active_invalidators, (str, bytes)
+    ):
+        raise ValueError("ACTIVE_SKILL_INVALIDATORS_INVALID")
+    verified_skills: list[dict[str, Any]] = []
+    for i, record in enumerate(records):
+        if not isinstance(record, Mapping):
+            raise ValueError("VERIFIED_SKILL_RECORD_INVALID:" + str(i))
+        candidate = record.get("candidate")
+        stored_skill = record.get("skill")
+        binding = record.get("verification_binding")
+        if not isinstance(candidate, Mapping):
+            raise ValueError("VERIFIED_SKILL_RECORD_CANDIDATE_MISSING:" + str(i))
+        if not isinstance(stored_skill, Mapping):
+            raise ValueError("VERIFIED_SKILL_RECORD_SKILL_MISSING:" + str(i))
+        if not isinstance(binding, Mapping):
+            raise ValueError("VERIFIED_SKILL_RECORD_BINDING_MISSING:" + str(i))
+        auth = authenticate_skill_verification(
+            candidate,
+            binding,
+            repo_root=repo_root,
+        )
+        if auth.get("pass") is not True:
+            raise ValueError(
+                "VERIFIED_SKILL_RECORD_REAUTHENTICATION_FAILED:"
+                + str(i)
+                + ":"
+                + str(auth.get("reason") or "UNKNOWN")
+            )
+        verified = auth.get("verified_skill")
+        if not isinstance(verified, Mapping):
+            raise ValueError("VERIFIED_SKILL_RECORD_REAUTHENTICATED_SKILL_MISSING:" + str(i))
+        if v1._digest(verified) != v1._digest(stored_skill):
+            raise ValueError("VERIFIED_SKILL_RECORD_DRIFT:" + str(i))
+        verified_skills.append(deepcopy(dict(verified)))
+
+    if not verified_skills:
+        return None, []
+    preview = plan_with_skills(
+        problem,
+        verified_skills,
+        active_invalidators=active_invalidators,
+    )
+    if preview.get("pass") is not True:
+        return preview, []
+    if not list(preview.get("used_verified_skill_macros") or []):
+        return preview, []
+    return preview, [str(x) for x in preview.get("expanded_execution_plan") or []]
+
+
 def run(
     problem: Mapping[str, Any],
     *,
@@ -275,7 +342,8 @@ def run(
     prior_verified_episode_records: Sequence[Mapping[str, Any]] = (),
     skill_verification_binding: Mapping[str, Any] | None = None,
     resume_binding: Mapping[str, Any] | None = None,
-    preferred_capability_order: Sequence[str] = (),
+    verified_skill_records: Sequence[Mapping[str, Any]] = (),
+    active_skill_invalidators: Sequence[str] = (),
 ) -> dict[str, Any]:
     try:
         if not isinstance(problem, Mapping):
@@ -294,18 +362,12 @@ def run(
             prior_verified_episode_records, (str, bytes)
         ):
             return _fail("PRIOR_VERIFIED_EPISODE_RECORDS_INVALID")
-        if not isinstance(preferred_capability_order, Sequence) or isinstance(
-            preferred_capability_order, (str, bytes)
-        ):
-            return _fail("PREFERRED_CAPABILITY_ORDER_INVALID")
-        preferred: list[str] = []
-        for raw_cid in preferred_capability_order:
-            cid = v4._tok(raw_cid, "PREFERRED_CAPABILITY_ID")
-            if cid not in caps:
-                return _fail("PREFERRED_CAPABILITY_UNKNOWN:" + cid)
-            if cid in preferred:
-                return _fail("PREFERRED_CAPABILITY_DUPLICATE:" + cid)
-            preferred.append(cid)
+        skill_plan_preview, preferred = _verified_skill_preference(
+            problem,
+            verified_skill_records,
+            active_invalidators=active_skill_invalidators,
+            repo_root=repo_root,
+        )
         episode_id = v4._tok(episode_id, "EPISODE_ID")
         scope_id = v4._tok(scope_id, "SCOPE_ID")
 
@@ -397,6 +459,7 @@ def run(
                         "fact_capsule_head_hash": resume_auth["fact_capsule_head_hash"],
                         "value_capsule_head_hash": resume_auth["value_capsule_head_hash"],
                     }
+                finished["verified_skill_plan_preview"] = skill_plan_preview
                 finished["preferred_capability_order"] = list(preferred)
                 finished["preferred_capability_ids_used"] = list(preferred_used)
                 return finished
