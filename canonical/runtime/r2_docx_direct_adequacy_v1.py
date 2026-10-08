@@ -187,13 +187,31 @@ def preflight(request: Mapping[str, Any], *, repo_root: str | Path = ROOT) -> di
 
         producer_entry = registry.get(PRODUCER)
         verifier_entry = registry.get(VERIFIER)
+        producer_verification = (
+            producer_entry.get("verification") if isinstance(producer_entry, Mapping) else None
+        )
+        verifier_verification = (
+            verifier_entry.get("verification") if isinstance(verifier_entry, Mapping) else None
+        )
+        sidecar_extension = (
+            producer_verification.get("intent_sidecar_extension")
+            if isinstance(producer_verification, Mapping)
+            else None
+        )
         if (
             not isinstance(producer_entry, Mapping)
             or producer_entry.get("status") != "VERIFIED_BOUND_CAPABILITY"
-            or (producer_entry.get("verification") or {}).get("independently_verified_by") != VERIFIER
+            or not isinstance(producer_verification, Mapping)
+            or producer_verification.get("independently_verified_by") != "docx.document.verify.ooxml"
+            or not isinstance(sidecar_extension, Mapping)
+            or sidecar_extension.get("independently_reparsed") is not True
+            or sidecar_extension.get("raw_intent_persisted") is not True
             or not isinstance(verifier_entry, Mapping)
             or verifier_entry.get("status") != "VERIFIED_BOUND_CAPABILITY"
-            or (verifier_entry.get("verification") or {}).get("producer_independent") is not True
+            or verifier_entry.get("adapter_module") != "docx_verify_ooxml_intent"
+            or not isinstance(verifier_verification, Mapping)
+            or verifier_verification.get("independently_verified") is not True
+            or (verifier_entry.get("source") or {}).get("type") != "python_stdlib"
         ):
             raise ValueError("DOCX_REGISTRY_INDEPENDENCE_BINDING_INVALID")
 
