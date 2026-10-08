@@ -158,6 +158,44 @@ class LiveIntegratedBrainV1Tests(unittest.TestCase):
         manifest.unlink()
         source.unlink()
 
+    def test_compound_raw_goal_executes_through_live_controller_with_checkpoint(self):
+        temp_dir = ROOT / "canonical/astra_runtime/tmp/live-integrated-brain-v1-compound"
+        temp_dir.mkdir(parents=True, exist_ok=True)
+        first = temp_dir / "one.json"
+        second = temp_dir / "two.json"
+        checkpoint = (
+            ROOT / "canonical/astra_runtime/state/"
+            "LIVE_BRAIN_RAW_GOAL_COMPOUND_001__live-raw-goal-controller__CONTROLLER_CHECKPOINT.json"
+        )
+        for path in (first, second, checkpoint):
+            if path.exists():
+                path.unlink()
+
+        first_rel = str(first.relative_to(ROOT)).replace("\\", "/")
+        second_rel = str(second.relative_to(ROOT)).replace("\\", "/")
+        goal = (
+            f"Create {first_rel} containing exactly one record with fields id and value: alpha 1. "
+            f"Then create {second_rel} containing exactly one record with fields id and value: beta 2."
+        )
+        result = run_raw_goal({
+            "task_id": "LIVE_BRAIN_RAW_GOAL_COMPOUND_001",
+            "goal": goal,
+        })
+        self.assertTrue(result["pass"], result)
+        self.assertGreaterEqual(result["controller_action_count"], 3)
+        self.assertEqual(result["cognition_dependency_class"], "MODEL_INDEPENDENT")
+        self.assertEqual(result["model_dependency_count"], 0)
+        self.assertTrue(result["controller_checkpoint"])
+        self.assertTrue(first.is_file())
+        self.assertTrue(second.is_file())
+        self.assertEqual(json.loads(first.read_text(encoding="utf-8")), [{"id": "alpha", "value": 1}])
+        self.assertEqual(json.loads(second.read_text(encoding="utf-8")), [{"id": "beta", "value": 2}])
+        self.assertFalse(result["semantic_acceptance_complete"])
+
+        for path in (first, second, checkpoint):
+            if path.exists():
+                path.unlink()
+
     def test_unknown_plain_english_goal_fails_as_compilation_gap(self):
         result = run_raw_goal({
             "task_id": "LIVE_BRAIN_RAW_GOAL_UNKNOWN_001",
