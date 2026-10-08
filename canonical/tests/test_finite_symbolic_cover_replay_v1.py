@@ -113,3 +113,77 @@ def test_restricted_scope_is_explicit():
     assert out["pass"] is True
     assert out["scoped_valuations_checked"] == 2
     assert out["total_valuations"] == 4
+
+
+def test_seeded_differential_against_independent_truth_table_interpreter():
+    """Independently enumerate random CNFs, then compare pass/fail/witness."""
+    import itertools
+    import random
+    rng=random.Random(20261008)
+
+    def independent_eval(cnf, valuation):
+        if not cnf:
+            return True
+        for clause in cnf:
+            matched=False
+            for atom in clause:
+                name=atom.lstrip("!")
+                is_positive=not atom.startswith("!")
+                matched=matched or (valuation[name] == is_positive)
+            if not matched:
+                return False
+        return True
+
+    def random_formula(keys):
+        return [[rng.choice(keys) if rng.random() < .5
+                 else "!" + rng.choice(keys)
+                 for _ in range(rng.randrange(0, 4))]
+                for _ in range(rng.randrange(0, 4))]
+
+    for _case in range(160):
+        keys=["v"+str(i) for i in range(rng.randrange(1, 6))]
+        problem={
+            "schema": "PROJECT_BRAIN_FINITE_SYMBOLIC_COVER_SPEC_V1",
+            "scope_id": SCOPE,
+            "variables": keys,
+            "scope_cnf": random_formula(keys),
+            "expected_output_cnf": random_formula(keys),
+            "routes": [
+                {"route_id": "route"+str(i),
+                 "admission_cnf": random_formula(keys),
+                 "program_output_cnf": random_formula(keys)}
+                for i in range(rng.randrange(1, 5))
+            ],
+        }
+        ground="PASS"
+        for bits in itertools.product((False, True), repeat=len(keys)):
+            valuation=dict(zip(keys,bits))
+            if not independent_eval(problem["scope_cnf"],valuation):
+                continue
+            if ground == "PASS":
+                ground="PASS_WITH_SCOPE"
+            admitted=False
+            for route in problem["routes"]:
+                if not independent_eval(route["admission_cnf"],valuation):
+                    continue
+                admitted=True
+                if independent_eval(route["program_output_cnf"],valuation) != independent_eval(problem["expected_output_cnf"],valuation):
+                    ground="ADMITTED_ROUTE_OUTPUT_MISMATCH"
+                    break
+            if ground=="ADMITTED_ROUTE_OUTPUT_MISMATCH":
+                break
+            if not admitted:
+                ground="UNCOVERED_SCOPED_VALUATION"
+                break
+        if ground=="PASS":
+            expected="EMPTY_DECLARED_SCOPE_NOT_CREDITABLE"
+        elif ground=="PASS_WITH_SCOPE":
+            expected="PASS"
+        else:
+            expected=ground
+        output=run(problem)
+        actual="PASS" if output["pass"] else output["reason"]
+        assert actual==expected, (problem,expected,output)
+        if actual in {"UNCOVERED_SCOPED_VALUATION","ADMITTED_ROUTE_OUTPUT_MISMATCH"}:
+            val=output["failing_valuation"]
+            assert independent_eval(problem["scope_cnf"],val)
