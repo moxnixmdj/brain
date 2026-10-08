@@ -1,0 +1,36 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_RUBRIC_TO_OWNER_NONIMPLICATION_VERIFICATION_20261008_V1",
+  "date":"2026-10-08",
+  "status":"PASS__PRIMARY_2_OF_2__INDEPENDENT_DIRECT_REPLAY_PASS__ZERO_CREDIT",
+  "subject":{
+    "runtime_path":"canonical/runtime/gdpval_rubric_owner_nonimplication_v1.py",
+    "candidate_path":"canonical/governance/GDPVAL_RUBRIC_TO_OWNER_NONIMPLICATION_CANDIDATE_20261008_V1.json",
+    "premise_path":"canonical/governance/GDPVAL_AA_V21_OWNER_JUDGE_PUBLIC_SURFACE_20261007_V1.json",
+    "premise_git_blob_sha":"85d534b4b1134ffb4fc3ad05465ae64495741f28"
+  },
+  "primary_execution":{
+    "provider":"SPRITES",
+    "carrier":"brain-root3-current-byte-replay-20261007-v1",
+    "result":"2 passed in 0.02s"
+  },
+  "independent_execution":{
+    "provider":"SPRITES",
+    "carrier":"brain-heldout003-one-shot",
+    "method":"DIRECT_IMPORT_AND_ASSERTIONS",
+    "result":"INDEPENDENT_RUBRIC_NONIMPLICATION_PASS"
+  },
+  "verified":{
+    "same_public_rubric_state_can_be_held_fixed":true,
+    "owner_pairwise_prompt_remains_unbound_in_bound_surface":true,
+    "owner_presentation_recipe_remains_unbound_in_bound_surface":true,
+    "two_extensions_reverse_pairwise_outcome":true,
+    "rubric_only_scope_completion_not_sufficient_for_owner_pairwise_noninferiority":true
+  },
+  "consequence":"DELETE_FULL_10453_RUBRIC_FORMALIZATION_AS_A_STANDALONE_GDPVAL_AA_CLOSURE_ROUTE__KEEP_ONLY_AS_CAPABILITY_EVIDENCE_OR_INPUT_TO_A_SEPARATELY_PROVED_OWNER_RELATION_BRIDGE",
+  "hard_nonclaims":[
+    "NO_CLAIM_REAL_OWNER_PANEL_IGNORES_PUBLIC_RUBRICS",
+    "NO_CLAIM_RUBRIC_WORK_HAS_ZERO_CAPABILITY_VALUE",
+    "NO_GDPVAL_OR_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
