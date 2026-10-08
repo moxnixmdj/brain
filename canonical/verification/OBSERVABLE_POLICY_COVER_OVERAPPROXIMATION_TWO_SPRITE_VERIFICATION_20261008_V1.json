@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_OBSERVABLE_POLICY_COVER_OVERAPPROXIMATION_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_6_OF_6_ON_TWO_SPRITES__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/observable_policy_cover_overapproximation_gate_v2.py",
+    "git_blob_sha": "14cc1b384312cda86f44c17d6d01a7b4ba1f81b5",
+    "sha256": "3f6b72418cca4a00cc2d0d23784c4b836488144bc47dda56253e405e46039ca6"
+  },
+  "tests": {
+    "path": "canonical/tests/test_observable_policy_cover_overapproximation_gate_v2.py",
+    "git_blob_sha": "3764645e2284eba86e59d4fd8f26e15f23ded50b",
+    "sha256": "4f2f1aa86fae6fe6bf9ff09ffb4f0f7d43b0fd4f9c6a1889ce19397009d8b49a"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "tests_passed": 6,
+      "tests_run": 6
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "tests_passed": 6,
+      "tests_run": 6
+    }
+  ],
+  "checked": [
+    "POSITIVE_SOUND_OVERAPPROXIMATION_COVER",
+    "SPURIOUS_UNCOVERED_REGION_REMAINS_UNKNOWN",
+    "INVALID_OVERAPPROXIMATION_RECEIPT_FAIL_CLOSED",
+    "INVALID_POLICY_RECEIPT_FAIL_CLOSED",
+    "TRUTHFUL_DISCRIMINATOR_COVER_OVER_OVERAPPROXIMATION",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "terminal_credit_delta": 0
+}
