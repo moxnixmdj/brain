@@ -42,6 +42,9 @@ on:
       - "main"
       - "r3-final-ci-gate-20261008"
     paths:
+      - "canonical/runtime/root1_default_acquisition_provider_v1.py"
+      - "canonical/runtime/one_shot_verified_closure_v1.py"
+      - "canonical/tests/test_one_shot_verified_closure_v1.py"
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
       - "canonical/runtime/r3_improvement_queue_driver_v1.py"
       - "canonical/runtime/r3_quarantine_recovery_v1.py"
