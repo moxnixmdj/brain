@@ -94,8 +94,58 @@ def verify(
             return _unresolved("PROMOTED_CAPABILITY_EXECUTION_NOT_VERIFIED")
         if execution.get("capability_id") != capability_id:
             return _unresolved("EXECUTION_CAPABILITY_ID_MISMATCH")
+
         if not execution.get("composition_capsule_head_hash"):
-            return _unresolved("INDEPENDENT_TRACE_PROOF_MISSING")
+            if execution.get("execution_proof_type") != "MODEL_INDEPENDENT_CONTROLLER_TRACE_V1":
+                return _unresolved("INDEPENDENT_TRACE_PROOF_MISSING")
+            trace = execution.get("controller_trace")
+            plan_sha = execution.get("controller_plan_sha256")
+            if (
+                not isinstance(trace, list)
+                or len(trace) != 2
+                or not isinstance(plan_sha, str)
+                or len(plan_sha) != 64
+            ):
+                return _unresolved("CONTROLLER_TRACE_PROOF_INVALID")
+            expected_actions = [
+                {
+                    "type": "invoke_capability",
+                    "args": {
+                        "capability_id": capability_id,
+                        "manifest_path": manifest_rel,
+                        "output_path": output_rel,
+                    },
+                    "expect": {
+                        "type": "field_equals",
+                        "field": "output_verified",
+                        "value": True,
+                    },
+                },
+                {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}},
+            ]
+            observed_actions = []
+            for index, row in enumerate(trace):
+                if (
+                    not isinstance(row, Mapping)
+                    or row.get("cycle") != index
+                    or not isinstance(row.get("plan"), Mapping)
+                    or not isinstance(row.get("result"), Mapping)
+                ):
+                    return _unresolved("CONTROLLER_TRACE_RECORD_INVALID")
+                observed_actions.append(dict(row["plan"]))
+            if observed_actions != expected_actions:
+                return _unresolved("CONTROLLER_TRACE_ACTION_BINDING_MISMATCH")
+            canonical = json.dumps(
+                expected_actions,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=False,
+            ).encode("utf-8")
+            if hashlib.sha256(canonical).hexdigest() != plan_sha:
+                return _unresolved("CONTROLLER_TRACE_PLAN_HASH_MISMATCH")
+            if trace[-1]["result"].get("summary") != "RAW_GOAL_COMPLETE":
+                return _unresolved("CONTROLLER_TRACE_FINISH_INVALID")
+
         result = execution.get("result")
         if not isinstance(result, Mapping) or result.get("output_verified") is not True:
             return _unresolved("CAPABILITY_OUTPUT_PROOF_MISSING")

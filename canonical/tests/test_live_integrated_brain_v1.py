@@ -108,6 +108,13 @@ class LiveIntegratedBrainV1Tests(unittest.TestCase):
             "archive.tar_gz.create_from_manifest",
         )
         self.assertEqual(result["selected_plan"], ["archive.tar_gz.create_from_manifest"])
+        self.assertEqual(result["cognition_dependency_class"], "MODEL_INDEPENDENT")
+        self.assertEqual(result["model_dependency_count"], 0)
+        self.assertTrue(result["controller_checkpoint"]["plan_sha256"])
+        self.assertEqual(
+            result["execution"][0]["execution_proof_type"],
+            "MODEL_INDEPENDENT_CONTROLLER_TRACE_V1",
+        )
         self.assertTrue(result["raw_source_coverage_complete"])
         self.assertGreaterEqual(result["raw_acceptance_obligation_count"], 1)
         self.assertFalse(result["routing_success_authority"])
@@ -143,6 +150,13 @@ class LiveIntegratedBrainV1Tests(unittest.TestCase):
         })
         self.assertTrue(result["pass"], result)
         self.assertTrue(result["semantic_acceptance_complete"], result)
+        self.assertEqual(result["cognition_dependency_class"], "MODEL_INDEPENDENT")
+        self.assertEqual(result["model_dependency_count"], 0)
+        self.assertTrue(result["controller_checkpoint"]["plan_sha256"])
+        self.assertEqual(
+            result["execution"][0]["execution_proof_type"],
+            "MODEL_INDEPENDENT_CONTROLLER_TRACE_V1",
+        )
         self.assertEqual(
             result["status"], "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
         )
