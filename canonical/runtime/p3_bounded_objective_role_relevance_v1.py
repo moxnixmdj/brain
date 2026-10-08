@@ -88,6 +88,23 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
         by_text.setdefault(text.casefold(),[]).append(item)
         evidence_bindings.append(item)
 
+    left_role_evidence=[
+        row for row in evidence_bindings
+        if left_phrase.casefold() in row["text"].casefold()
+    ]
+    right_role_evidence=[
+        row for row in evidence_bindings
+        if right_phrase.casefold() in row["text"].casefold()
+    ]
+    if len(left_role_evidence)!=1 or len(right_role_evidence)!=1:
+        return _fail(
+            "OBJECTIVE_ROLE_BINDING_UNRESOLVED",
+            left_role_evidence_count=len(left_role_evidence),
+            right_role_evidence_count=len(right_role_evidence),
+        )
+    if left_role_evidence[0]["evidence_id"]==right_role_evidence[0]["evidence_id"]:
+        return _fail("OBJECTIVE_ROLE_BINDING_UNRESOLVED")
+
     optional=[]
     required=[]
     seen_cids:set[str]=set()
