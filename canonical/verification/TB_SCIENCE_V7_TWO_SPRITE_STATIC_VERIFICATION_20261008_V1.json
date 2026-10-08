@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_V7_TWO_SPRITE_STATIC_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__38_OF_38_ON_TWO_SPRITES__EXACT_V7_BYTES__LIVE_CPU_QWEN_PREFLIGHT_REQUIRED__ZERO_CREDIT",
+  "subject": {
+    "agent_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "agent_git_blob_sha": "884ffe310aa66670a68b6596418f0e22d5f18d5c",
+    "agent_tests_path": "canonical/tests/test_harbor_science_agent_v1.py",
+    "agent_tests_git_blob_sha": "6340b17f761d94c2b68e8b3ac46e7c0219463ab2",
+    "planner_path": "canonical/runtime/harbor_science_planner_v1.py",
+    "planner_git_blob_sha": "0698ed709431b553a43da5f21999d3834ac7cf8e",
+    "planner_tests_path": "canonical/tests/test_harbor_science_planner_v1.py",
+    "planner_tests_git_blob_sha": "5227b3d73f6d57d7585b0cbf7049da0fc0a88e15",
+    "closure_path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V7.json",
+    "closure_git_blob_sha": "2deec394a125003c375927daa2b8df81ff61c69b"
+  },
+  "verification": [
+    {
+      "provider": "SPRITES",
+      "name": "brain-root3-current-byte-replay-20261007-v1",
+      "id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "workspace": "/home/sprite/tb_science_output_directive_repair_v1",
+      "tests_passed": 38,
+      "tests_total": 38
+    },
+    {
+      "provider": "SPRITES",
+      "name": "h100-real-image-v1",
+      "id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+      "workspace": "/home/sprite/tb_science_output_directive_repair_v1_independent",
+      "tests_passed": 38,
+      "tests_total": 38
+    }
+  ],
+  "new_cardinality_properties": [
+    "MAX_MODEL_REQUIREMENTS_16",
+    "MAX_BRAIN_DELIVERABLES_16",
+    "MAX_REQUIREMENTS_EXACTLY_32",
+    "SIXTEEN_MODEL_REQUIREMENTS_PLUS_ONE_MANDATORY_DELIVERABLE_ACCEPTED",
+    "SIXTEEN_MODEL_REQUIREMENTS_PLUS_SIXTEEN_MANDATORY_DELIVERABLES_ACCEPTED",
+    "PLANNER_MATERIAL_REQUIREMENTS_SCHEMA_REMAINS_MAX_16",
+    "PLANNER_CANDIDATE_COVERS_SCHEMA_EXPANDS_TO_MAX_32"
+  ],
+  "inherited_properties": [
+    "SEMANTIC_PROMPT_PROJECTION",
+    "FULL_LOSSLESS_CONTRACT_RETAINED_INSIDE_BRAIN",
+    "FULL_ENCODED_REQUEST_TIMEOUT_BUDGET",
+    "EXPLICIT_ABSOLUTE_OUTPUT_BINDING",
+    "FAIL_CLOSED_COMMAND_AND_VERIFICATION_GATES"
+  ],
+  "predecessor_live_counterexample": {
+    "run_id": 37735751571,
+    "failure": "SCIENCE_REQUIREMENTS_WITH_MANDATORY_OVERFLOW",
+    "transport_timeout": false,
+    "complete_model_proposal_reached": true
+  },
+  "live_public_runner_preflight": {
+    "run_id": 37737093201,
+    "required": true,
+    "status": "IN_PROGRESS"
+  },
+  "benchmark_slot_consumed": 0,
+  "execution_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
