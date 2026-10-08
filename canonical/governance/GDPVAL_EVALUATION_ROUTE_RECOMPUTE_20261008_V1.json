@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_EVALUATION_ROUTE_RECOMPUTE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "RESEARCH_ROUTE_RECOMPUTE__ZERO_CREDIT",
+  "objective": "Prove Brain >= Opus 5.5 on the frozen GDPval professional-work target relation with minimum new information and zero incremental spend.",
+  "verified_research_facts": [
+    "DIRECT_CROWD_BT_ORIENTATION_MIRROR_RUNTIME_PRIMARY_EXACT_BLOB_REPLAY_8_OF_8_PASS",
+    "DIRECT_CROWD_BT_MARGIN_RUNTIME_PRIMARY_EXACT_BLOB_REPLAY_6_OF_6_PASS",
+    "GENERIC_BOUNDED_MIXTURE_RUNTIME_PRIMARY_EXACT_BLOB_REPLAY_6_OF_6_PASS",
+    "ARTIFICIAL_ANALYSIS_PUBLIC_METHOD_BINDS_BALANCED_THEN_ACTIVE_PAIR_SAMPLING_RANDOM_A_B_ANONYMIZATION_COARSE_CONTEXT_ASSEMBLY_TIE_HANDLING_PANEL_IDENTITIES_CROWD_BT_MLE_ANCHOR_AND_SANDWICH_CI",
+    "NO_PUBLIC_FITTED_ANNOTATOR_QUALITY_VALUES_OR_RAW_OWNER_PAIRWISE_GRAPH_FOUND_ON_CURRENT_OWNER_METHODOLOGY_OR_LEADERBOARD_SURFACE"
+  ],
+  "information_lower_bound": {
+    "identity": "P_CROWD(p,eta)=P_CROWD(1-p,1-eta)",
+    "consequence": "MORE_DIRECT_BRAIN_VS_OPUS_VOTES_ALONE_CANNOT_IDENTIFY_THE_CROWD_BT_STRENGTH_SIGN_WHILE_LOAD_BEARING_ANNOTATOR_ORIENTATION_REMAINS_UNBOUND",
+    "forbidden_scheduler_action": "DO_NOT_ACCUMULATE_DIRECT_PAIRWISE_VOTES_AS_THE_PRIMARY_SIGN_IDENTIFICATION_ROUTE_WITHOUT_CALIBRATION_ORIENTATION_INFORMATION"
+  },
+  "ranked_routes": [
+    {
+      "rank": 1,
+      "id": "STRUCTURAL_SCOPE_COMPLETE_TARGET_RELATION_BRIDGE",
+      "reason": "Can delete owner eta, raw graph, assignment state, and exact numeric Elo if a stronger scope-complete professional-work relation is actually proved.",
+      "current_blocker": "P3_GENERAL_SEMANTIC_POLICY_ADEQUACY_AND_REMAINING_GDPVAL_SCOPE_COMPLETE_QUALITY_RELATION"
+    },
+    {
+      "rank": 2,
+      "id": "PRIMITIVE_OWNER_PAIRWISE_DOMINANCE",
+      "reason": "Bypasses Crowd-BT eta and historical graph entirely.",
+      "current_blockers": [
+        "BRAIN_COMPLETE_220_SUBMISSIONS",
+        "OPUS55_REFERENCE_SUBMISSIONS_OR_OWNER_EQUIVALENT",
+        "SOUND_OWNER_PAIRWISE_ACCEPTANCE_PROGRAM/PRESENTATION",
+        "ZERO_SPEND_OWNER_PANEL_OR_EQUIVALENT_RECEIPTS"
+      ],
+      "note": "Existing universal no-Opus-win route is sound but stronger than necessary."
+    },
+    {
+      "rank": 3,
+      "id": "DIRECT_CROWD_BT_MARGIN_WITH_ORIENTATION",
+      "reason": "Allows Opus wins and needs only aggregate per-judge margins once load-bearing eta orientation/calibration is bound.",
+      "current_blocker": "GDPVAL_PANEL_ETA_ORIENTATION_OR_OTHER_SOUND_CALIBRATION_FACT"
+    },
+    {
+      "rank": 4,
+      "id": "EXACT_OWNER_ELO_RECONSTRUCTION",
+      "reason": "Most information-expensive route; keep only as fallback.",
+      "current_blockers": [
+        "RAW_OWNER_EPOCH_GRAPH_OR_EQUIVALENT_FIT_STATE",
+        "FITTED_ANNOTATOR_QUALITY_VALUES",
+        "EXACT_LOAD_BEARING_OWNER_PROMPT/PARSER/PRESENTATION_DETAILS",
+        "OPTIMIZER/REGULARIZATION_AND_CI_CONVENTIONS_IF_NUMERIC_IDENTITY_REQUIRES_THEM"
+      ]
+    }
+  ],
+  "deleted_work": [
+    "GENERIC_SEARCH_FOR_PANEL_IDENTITIES",
+    "GENERIC_SEARCH_FOR_CROWD_BT_FAMILY",
+    "GENERIC_SEARCH_FOR_ANONYMIZATION_RULE",
+    "GENERIC_SEARCH_FOR_PAIR_SAMPLING_STRATEGY",
+    "DIRECT_VOTE_ACCUMULATION_WITHOUT_eta_ORIENTATION",
+    "RECONSTRUCT_FULL_HISTORICAL_ELO_GRAPH_BEFORE_TRYING_STRONGER_RELATION_ROUTES"
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM GDPVAL IS CLOSED.",
+    "NO CLAIM eta ORIENTATION IS PUBLIC.",
+    "NO CLAIM THE RESEARCH BRANCH HAS INDEPENDENT_SECOND_CARRIER_VERIFICATION.",
+    "NO TERMINAL CREDIT."
+  ],
+  "research_branch": "research/robust-evaluator-mixture-v1",
+  "accounting": {"incremental_spend_usd": 0, "terminal_credit_delta": 0}
+}
