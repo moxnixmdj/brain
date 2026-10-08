@@ -173,4 +173,4 @@ jobs:
             canonical/astra_runtime/artifacts/TERMINAL_U_RACE_RESULT_20261007_V1.json
             canonical/same_identity_worker/state/SI-TERMINAL-U-RACE-20261007-V1.json
             canonical/same_identity_worker/evidence/SI-TERMINAL-U-RACE-20261007-V1__*.json
-# retrigger_terminal_u_root_20261008_0152_cairo
+# retrigger_terminal_u_root_20261008_0212_cairo
