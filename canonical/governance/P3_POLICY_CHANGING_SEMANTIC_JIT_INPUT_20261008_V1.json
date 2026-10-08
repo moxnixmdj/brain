@@ -2,35 +2,37 @@
   "schema": "PROJECT_BRAIN_P3_POLICY_CHANGING_SEMANTIC_TOURNAMENT_INPUT_V1",
   "date": "2026-10-08",
   "scope": "CONCRETE_P3_CERTIFICATION_CONFLICT_CELL__NOT_GLOBAL_P3_WORLD_ENUMERATION",
-  "cell": {
-    "id": "P3_REQUIRED_CLAIM_SUPPORT_RELEVANCE_OUTSIDE_CURRENT_CERTIFIED_FRAGMENT",
-    "worlds": [
-      {
-        "id": "SUPPORTED_AND_DECISION_RELEVANT",
-        "adequate_actions": [
-          "ASSERT_REQUIRED_CLAIM_AS_SUPPORTED_WITH_PROVENANCE"
-        ]
-      },
-      {
-        "id": "NOT_CERTIFIABLY_SUPPORTED_OR_MATERIAL_UNCERTAINTY",
-        "adequate_actions": [
-          "DO_NOT_ASSERT_REQUIRED_CLAIM_AS_SUPPORTED__PRESERVE_UNCERTAINTY_OR_SEEK_EVIDENCE"
-        ]
-      }
-    ],
-    "jit_discriminator": {
-      "available_before_commitment": true,
-      "world_to_value": {
-        "SUPPORTED_AND_DECISION_RELEVANT": "SUPPORTED",
-        "NOT_CERTIFIABLY_SUPPORTED_OR_MATERIAL_UNCERTAINTY": "NOT_SUPPORTED_OR_UNCERTAIN"
-      }
-    }
-  },
   "hard_nonclaims": [
     "NO_CLAIM_THE_TWO_WORLDS_ENUMERATE_ALL_P3_SEMANTICS",
     "NO_CLAIM_ONE_BIT_SOLVES_ALL_P3",
     "NO_CLAIM_ACTUAL_TARGET_SUPPORT_FOR_EITHER_WORLD_IS_PROVED_BY_THIS_ABSTRACT_CELL",
     "THIS_INPUT_CLASSIFIES_THE_REPAIR_SHAPE_FOR_THE_BOUND_CONFLICT_CELL_ONLY"
   ],
-  "mode": "CONSTRUCTIVE_JIT_DISCRIMINATOR"
+  "mode": "CONSTRUCTIVE_JIT_DISCRIMINATOR",
+  "cells": [
+    {
+      "id": "P3_REQUIRED_CLAIM_SUPPORT_RELEVANCE_OUTSIDE_CURRENT_CERTIFIED_FRAGMENT",
+      "worlds": [
+        {
+          "id": "SUPPORTED_AND_DECISION_RELEVANT",
+          "adequate_actions": [
+            "ASSERT_REQUIRED_CLAIM_AS_SUPPORTED_WITH_PROVENANCE"
+          ]
+        },
+        {
+          "id": "NOT_CERTIFIABLY_SUPPORTED_OR_MATERIAL_UNCERTAINTY",
+          "adequate_actions": [
+            "DO_NOT_ASSERT_REQUIRED_CLAIM_AS_SUPPORTED__PRESERVE_UNCERTAINTY_OR_SEEK_EVIDENCE"
+          ]
+        }
+      ],
+      "jit_discriminator": {
+        "available_before_commitment": true,
+        "world_to_value": {
+          "SUPPORTED_AND_DECISION_RELEVANT": "SUPPORTED",
+          "NOT_CERTIFIABLY_SUPPORTED_OR_MATERIAL_UNCERTAINTY": "NOT_SUPPORTED_OR_UNCERTAIN"
+        }
+      }
+    }
+  ]
 }
