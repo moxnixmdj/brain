@@ -91,5 +91,13 @@
     "two_distinct_sprite_replays": "18_OF_18_EACH",
     "merged_commit": "6669bb5cbf498246fdc7741dd7cea1f70ed4b06d",
     "registered_policy_count": 1
+  },
+  "terminal_authority_reconciliation": {
+    "current_terminal_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "verification_path": "canonical/verification/R2_CURRENT_TERMINAL_AUTHORITY_RECONCILIATION_VERIFICATION_20261008_V2.json",
+    "merged_commit": "2c5d65ccab53f5e8cafbc7356d62aaf60fc1a642",
+    "two_distinct_sprite_replays": "4_OF_4_EACH",
+    "historical_root2_scheduler_authority_revoked": true,
+    "gdpval_owner_layer_state": "EXTERNAL_REQUIRED_SLEEP"
   }
 }
