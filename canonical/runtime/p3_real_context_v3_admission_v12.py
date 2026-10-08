@@ -25,7 +25,7 @@ _STRONGER={
     "policy_influence_contract","source_positive_selection_contract",
 }
 _LOOP_FIELDS={
-    "cegar_problem","truth_payloads_by_discriminator_id",
+    "cegar_problem","truth_payloads_by_discriminator_id","truth_payloads_by_predicate_id",
     "source_positive_selection_contracts","max_refinement_steps",
 }
 
