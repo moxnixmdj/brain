@@ -35,6 +35,8 @@ MUTABLE_REQUEST_FIELDS = frozenset(
         "execution_problem",
         "policy_execution_binding",
         "goal_satisfaction_binding",
+        "policy_cover_observation_bindings",
+        "max_policy_cover_observations",
         "max_information_rounds",
         "episode_id",
         "scope_id",
@@ -135,6 +137,9 @@ def _edge_request(
         ),
         "next_information_request": deepcopy(
             unresolved.get("next_information_request")
+        ),
+        "next_observation_request": deepcopy(
+            unresolved.get("next_observation_request")
         ),
         "unresolved_output": deepcopy(dict(unresolved)),
         "allowed_request_patch_fields": sorted(MUTABLE_REQUEST_FIELDS),
