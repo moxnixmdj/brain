@@ -155,6 +155,63 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "unified-live-brain",
         )
 
+    @patch("canonical.runtime.live_brain_runtime_v1._compile_native_specialized")
+    @patch("canonical.runtime.live_brain_runtime_v1._active_learning_context")
+    @patch("canonical.runtime.live_brain_runtime_v1._run_learning_episode")
+    def test_native_specialized_instances_enter_graph_before_r3_planning(
+        self, learning_run, context, compile_native
+    ):
+        instance = {
+            "instance_id": "h100-snapshot",
+            "operation_id": "H100_REGISTRY_SNAPSHOT_V8",
+            "requires": [],
+            "provides": ["H100_READY"],
+            "args": {},
+        }
+        compiled = {
+            "task_id": "t1",
+            "initial_facts": [],
+            "target_effects": ["DONE"],
+            "capabilities": [{
+                "id": "h100-snapshot",
+                "requires": [],
+                "provides": ["H100_READY"],
+            }],
+        }
+        compile_native.return_value = compiled
+        context.return_value = {
+            "state_path": "/tmp/state.json",
+            "state": {},
+            "prior_verified_episodes": [],
+            "active_verified_skills": [],
+        }
+        learning_run.return_value = {
+            "pass": True,
+            "solver_output": {"pass": True, "status": "SOLVED__VERIFIED_EPISODE"},
+            "learning": {"status": "EPISODE_AWAITS_INDEPENDENT_VERIFICATION"},
+            "prior_verified_episode_count_used": 0,
+            "reuse_first": False,
+            "reused_skill_id": None,
+            "reuse_attempt": None,
+            "fallback_used": False,
+        }
+
+        original = self.problem()
+        out = brain.run({
+            "mode": "generic",
+            "problem": original,
+            "native_specialized_instances": [instance],
+        })
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["native_specialized_instance_count"], 1)
+        compile_native.assert_called_once_with(original, [instance])
+        self.assertIs(learning_run.call_args.args[0], compiled)
+        self.assertEqual(
+            learning_run.call_args.kwargs["retry_context"]["problem"],
+            compiled,
+        )
+
     @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
     def test_compiled_bound_route_is_behind_same_front_door(self, bound):
         bound.return_value = {"pass": True, "status": "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED"}
@@ -217,6 +274,16 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertIn("AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1", out["surfaces"])
         self.assertTrue(out["verified_skill_execution_reuse_first"])
         self.assertEqual(out["default_learning_scope"], "unified-live-brain")
+        self.assertTrue(out["native_specialized_composition_enabled"])
+        self.assertEqual(out["native_specialized_operation_count"], 11)
+        self.assertIn(
+            "NATIVE_SPECIALIZED_CAPABILITY_REGISTRY_V1",
+            out["surfaces"],
+        )
+        self.assertIn(
+            "H100_REGISTRY_SNAPSHOT_V8",
+            out["native_specialized_operation_ids"],
+        )
 
 
     @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
