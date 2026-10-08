@@ -821,7 +821,16 @@ def _run_learning_episode(
         raise ValueError(
             "R3_LIVE_EXECUTION_CONTROLLED_KWARGS:" + ",".join(conflicts)
         )
-    return learning.run_learning_episode(
+    from canonical.runtime import r3_improvement_worker_v1 as improvement_worker
+
+    pre_worker = improvement_worker.advance_improvement_queue(
+        state_path=path,
+        repo_root=repo_root,
+        episode_verification_provider=episode_verification_provider,
+        skill_verification_provider=skill_verification_provider,
+    )
+
+    result = learning.run_learning_episode(
         problem,
         repo_root=repo_root,
         state_path=path,
@@ -835,6 +844,28 @@ def _run_learning_episode(
         skill_verification_provider=skill_verification_provider,
         **kwargs,
     )
+
+    solver_output = result.get("solver_output")
+    captured = improvement_worker.capture_pending_episode_evidence(
+        solver_output if isinstance(solver_output, Mapping) else None,
+        problem=problem,
+        state_path=path,
+        retry_context=retry_context,
+    )
+    post_worker = improvement_worker.advance_improvement_queue(
+        state_path=path,
+        repo_root=repo_root,
+        episode_verification_provider=episode_verification_provider,
+        skill_verification_provider=skill_verification_provider,
+    )
+
+    result = deepcopy(dict(result))
+    result["improvement_worker"] = {
+        "pre_execution": pre_worker,
+        "evidence_capture": captured,
+        "post_execution": post_worker,
+    }
+    return result
 
 
 def _observe_runtime_outcome(
