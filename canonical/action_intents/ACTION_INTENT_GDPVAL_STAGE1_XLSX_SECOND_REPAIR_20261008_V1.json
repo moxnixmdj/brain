@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_XLSX_SECOND_REPAIR_PRECOMMIT_V1",
+  "date": "2026-10-08",
+  "status": "PRECOMMITTED_BEFORE_SECOND_XLSX_RESELECTION__ZERO_CREDIT",
+  "cause": "The first repaired XLSX task 17111c03-aac7-45c2-857d-c06d8223d6ad became spent when a search-result surface exposed task-specific rubric and prior-model-output snippets during prompt retrieval. It is forbidden for fresh stage-1 evidence.",
+  "preserved_clean_frozen_tasks": {
+    "PPTX": "9a0d8d36-6233-4c76-9107-0d1f783c7340",
+    "PDF": "1bff4551-1d54-4e37-b2e0-d5c3f2ea4a45"
+  },
+  "additional_exclusion": "17111c03-aac7-45c2-857d-c06d8223d6ad",
+  "xlsx_reselection_rule": "Reuse the already-verified September-30 XLSX classification and filtering rule. Exclude the original four contaminated exclusions, all three original September-30 stage-1 selected tasks, and 17111c03-aac7-45c2-857d-c06d8223d6ad. Among remaining tasks with <=3 reference files, 1-2 deliverable files, and .xlsx in deliverable extensions, choose lexicographically smallest SHA256(task_id). Inspect metadata only: task_id, sector, occupation, reference_files filenames/count, deliverable_files filenames/count/extensions.",
+  "prompt_retrieval_rule_after_freeze": "Do not web-search the frozen replacement task ID. Open the known prompt-only Stanford Collaborative Gym URL directly as https://cogym.saltlab.stanford.edu/tasks/<task_id>. Retrieve permitted reference files only from the OpenAI GDPval reference_files URL named by the metadata/task page. Do not open dataset viewers or third-party submission datasets.",
+  "stage1_capability_credit": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
