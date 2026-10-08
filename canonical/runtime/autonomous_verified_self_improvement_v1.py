@@ -596,6 +596,11 @@ def integrate_solver_output(
                     "program_sha256": _s(raw_ep.get("program_sha256")),
                     "trace_sha256": _s(raw_ep.get("trace_sha256")),
                     "verification_error": _s(out.get("episode_verification_error")) or None,
+                    "verification_work": (
+                        deepcopy(dict(out["pending_episode_verification_work"]))
+                        if isinstance(out.get("pending_episode_verification_work"), Mapping)
+                        else None
+                    ),
                 },
             )
 
@@ -1140,6 +1145,348 @@ def _record_reuse_result(
         "next_improvement_action": _next_improvement_from_state(state),
     }
 
+def _candidate_from_verified_skill(skill: Mapping[str, Any]) -> dict[str, Any]:
+    candidate = deepcopy(dict(skill))
+    candidate["status"] = "EXECUTABLE_SKILL_CANDIDATE_ONLY"
+    candidate["verified_skill"] = False
+    candidate["reuse_authorized"] = False
+    candidate["candidate_only"] = True
+    candidate["promotion_authority"] = False
+    candidate.pop("scope_relation", None)
+    candidate.pop("verification_receipt", None)
+    return candidate
+
+
+def _record_improvement_attempt(
+    work_id: str,
+    *,
+    state_path: str | Path,
+    status: str,
+    detail: str | None = None,
+) -> None:
+    state = load_state(state_path)
+    queue = state.get("improvement_queue", {})
+    row = queue.get(work_id) if isinstance(queue, Mapping) else None
+    if not isinstance(row, dict):
+        return
+    row["attempt_count"] = int(row.get("attempt_count", 0)) + 1
+    row["last_attempt_status"] = _s(status)
+    row["last_attempt_detail"] = _s(detail) or None
+    _refresh_stats(state)
+    _write_state(state, state_path)
+
+
+def advance_improvement_queue(
+    *,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+    repo_root: str | Path = ROOT,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
+    max_actions: int = 8,
+) -> dict[str, Any]:
+    """Consume actionable queued learning work without weakening verification.
+
+    The queue may contain work that genuinely requires future experience or a
+    verifier that is not currently present. Such work remains pending. Work is
+    advanced only through the same independent authenticators used on the live
+    execution path.
+    """
+    limit = max(1, min(int(max_actions), 64))
+    attempted: set[str] = set()
+    actions: list[dict[str, Any]] = []
+
+    for _ in range(limit):
+        state = load_state(state_path)
+        queue = state.get("improvement_queue", {})
+        if not isinstance(queue, Mapping):
+            raise SelfImprovementError("IMPROVEMENT_QUEUE_INVALID")
+        pending = [
+            deepcopy(dict(row))
+            for row in queue.values()
+            if isinstance(row, Mapping)
+            and row.get("status") == "PENDING"
+            and _s(row.get("work_id")) not in attempted
+        ]
+        pending.sort(
+            key=lambda row: (
+                int(row.get("priority", 10**9)),
+                -int(row.get("observations", 0)),
+                _s(row.get("work_id")),
+            )
+        )
+
+        work = None
+        for row in pending:
+            kind = _s(row.get("kind"))
+            payload = row.get("payload")
+            if not isinstance(payload, Mapping):
+                continue
+            if (
+                kind == "VERIFY_EPISODE"
+                and episode_verification_provider is not None
+                and isinstance(payload.get("verification_work"), Mapping)
+            ):
+                work = row
+                break
+            if (
+                kind in {
+                    "VERIFY_SKILL_CANDIDATE",
+                    "REVERIFY_QUARANTINED_SKILL",
+                    "SEEK_VERIFIED_SCOPE_GENERALIZATION",
+                }
+                and skill_verification_provider is not None
+            ):
+                work = row
+                break
+        if work is None:
+            break
+
+        work_id = _s(work.get("work_id"))
+        attempted.add(work_id)
+        kind = _s(work.get("kind"))
+        payload = deepcopy(dict(work.get("payload") or {}))
+
+        try:
+            if kind == "VERIFY_EPISODE":
+                request = payload.get("verification_work")
+                if not isinstance(request, Mapping):
+                    raise SelfImprovementError("QUEUED_EPISODE_VERIFICATION_WORK_MISSING")
+                binding = episode_verification_provider(deepcopy(dict(request)))
+                if binding is not None and not isinstance(binding, Mapping):
+                    raise SelfImprovementError(
+                        "EPISODE_VERIFICATION_PROVIDER_RESULT_INVALID"
+                    )
+                if not isinstance(binding, Mapping):
+                    _record_improvement_attempt(
+                        work_id,
+                        state_path=state_path,
+                        status="BLOCKED",
+                        detail="EPISODE_VERIFICATION_PROVIDER_RETURNED_NO_BINDING",
+                    )
+                    actions.append({
+                        "work_id": work_id,
+                        "kind": kind,
+                        "advanced": False,
+                        "status": "BLOCKED__NO_EPISODE_VERIFICATION_BINDING",
+                    })
+                    continue
+                problem = request.get("problem")
+                episode = request.get("episode")
+                trace = request.get("trace")
+                if not isinstance(problem, Mapping) or not isinstance(episode, Mapping):
+                    raise SelfImprovementError("QUEUED_EPISODE_VERIFICATION_INPUT_INVALID")
+                if not isinstance(trace, Sequence) or isinstance(trace, (str, bytes)):
+                    raise SelfImprovementError("QUEUED_EPISODE_TRACE_INVALID")
+                auth = authenticate_episode_verification(
+                    binding,
+                    problem=problem,
+                    episode=episode,
+                    trace=trace,
+                    fact_capsule_head_hash=_s(request.get("fact_capsule_head_hash")),
+                    value_capsule_head_hash=_s(request.get("value_capsule_head_hash")),
+                    repo_root=repo_root,
+                )
+                if auth.get("pass") is not True:
+                    _record_improvement_attempt(
+                        work_id,
+                        state_path=state_path,
+                        status="BLOCKED",
+                        detail=_s(auth.get("reason")) or "EPISODE_AUTHENTICATION_FAILED",
+                    )
+                    actions.append({
+                        "work_id": work_id,
+                        "kind": kind,
+                        "advanced": False,
+                        "status": "BLOCKED__EPISODE_AUTHENTICATION_FAILED",
+                    })
+                    continue
+
+                authenticated_episode = auth.get("authenticated_episode")
+                if not isinstance(authenticated_episode, Mapping):
+                    raise SelfImprovementError("AUTHENTICATED_EPISODE_MISSING")
+                current_episode_id = _s(authenticated_episode.get("episode_id"))
+                current_state = load_state(state_path)
+                generalization = [
+                    deepcopy(dict(ep))
+                    for ep in current_state.get("episodes", {}).values()
+                    if isinstance(ep, Mapping)
+                    and _s(ep.get("episode_id")) != current_episode_id
+                ]
+                verified_out = {
+                    "pass": True,
+                    "status": "SOLVED__VERIFIED_EPISODE",
+                    "current_episode": deepcopy(dict(authenticated_episode)),
+                    "current_episode_verified": True,
+                    "trace": deepcopy(list(trace)),
+                    "state_capsule_head_hash": _s(request.get("fact_capsule_head_hash")),
+                    "value_capsule_head_hash": _s(request.get("value_capsule_head_hash")),
+                    "skill_candidate": None,
+                    "verified_executable_skill": None,
+                }
+                verified_out = _post_execution_independent_verification(
+                    verified_out,
+                    problem=problem,
+                    prior_verified_episode_records=(),
+                    generalization_episode_records=generalization,
+                    repo_root=repo_root,
+                    episode_verification_provider=None,
+                    skill_verification_provider=skill_verification_provider,
+                )
+                integrated = integrate_solver_output(
+                    verified_out,
+                    state_path=state_path,
+                )
+                actions.append({
+                    "work_id": work_id,
+                    "kind": kind,
+                    "advanced": True,
+                    "status": integrated.get("status"),
+                })
+                continue
+
+            candidate = None
+            provider_kind = kind
+            if kind == "VERIFY_SKILL_CANDIDATE":
+                raw_candidate = payload.get("candidate")
+                if isinstance(raw_candidate, Mapping):
+                    candidate = deepcopy(dict(raw_candidate))
+            else:
+                skill_id = _s(payload.get("skill_id"))
+                if not skill_id:
+                    skill_id = _s(work.get("identity", {}).get("skill_id"))
+                current_state = load_state(state_path)
+                record = current_state.get("skills", {}).get(skill_id)
+                current_skill = (
+                    record.get("skill")
+                    if isinstance(record, Mapping) else None
+                )
+                if isinstance(current_skill, Mapping):
+                    candidate = _candidate_from_verified_skill(current_skill)
+
+            if not isinstance(candidate, Mapping):
+                raise SelfImprovementError("QUEUED_SKILL_CANDIDATE_MISSING")
+
+            provider_request = {
+                "kind": provider_kind,
+                "candidate": deepcopy(dict(candidate)),
+                "required_scope_relation": (
+                    "PROVEN_SUPERSET"
+                    if kind == "SEEK_VERIFIED_SCOPE_GENERALIZATION"
+                    else None
+                ),
+                "work_id": work_id,
+            }
+            binding = skill_verification_provider(deepcopy(provider_request))
+            if binding is not None and not isinstance(binding, Mapping):
+                raise SelfImprovementError("SKILL_VERIFICATION_PROVIDER_RESULT_INVALID")
+            if not isinstance(binding, Mapping):
+                _record_improvement_attempt(
+                    work_id,
+                    state_path=state_path,
+                    status="BLOCKED",
+                    detail="SKILL_VERIFICATION_PROVIDER_RETURNED_NO_BINDING",
+                )
+                actions.append({
+                    "work_id": work_id,
+                    "kind": kind,
+                    "advanced": False,
+                    "status": "BLOCKED__NO_SKILL_VERIFICATION_BINDING",
+                })
+                continue
+
+            auth = authenticate_skill_verification(
+                candidate,
+                binding,
+                repo_root=repo_root,
+            )
+            if auth.get("pass") is not True:
+                _record_improvement_attempt(
+                    work_id,
+                    state_path=state_path,
+                    status="BLOCKED",
+                    detail=_s(auth.get("reason")) or "SKILL_AUTHENTICATION_FAILED",
+                )
+                actions.append({
+                    "work_id": work_id,
+                    "kind": kind,
+                    "advanced": False,
+                    "status": "BLOCKED__SKILL_AUTHENTICATION_FAILED",
+                })
+                continue
+            verified = auth.get("verified_skill")
+            if not isinstance(verified, Mapping):
+                raise SelfImprovementError("AUTHENTICATED_VERIFIED_SKILL_MISSING")
+            if (
+                kind == "SEEK_VERIFIED_SCOPE_GENERALIZATION"
+                and _s(verified.get("scope_relation")) != "PROVEN_SUPERSET"
+            ):
+                _record_improvement_attempt(
+                    work_id,
+                    state_path=state_path,
+                    status="BLOCKED",
+                    detail="PROVEN_SUPERSET_RELATION_NOT_VERIFIED",
+                )
+                actions.append({
+                    "work_id": work_id,
+                    "kind": kind,
+                    "advanced": False,
+                    "status": "BLOCKED__PROVEN_SUPERSET_NOT_VERIFIED",
+                })
+                continue
+
+            integrated = integrate_solver_output(
+                {
+                    "pass": True,
+                    "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
+                    "current_episode_verified": False,
+                    "skill_candidate": deepcopy(dict(candidate)),
+                    "verified_executable_skill": deepcopy(dict(verified)),
+                    "verified_skill_reuse_authorized": bool(
+                        verified.get("reuse_authorized")
+                    ),
+                },
+                state_path=state_path,
+            )
+            actions.append({
+                "work_id": work_id,
+                "kind": kind,
+                "advanced": True,
+                "status": integrated.get("status"),
+            })
+        except Exception as exc:
+            detail = type(exc).__name__ + ":" + str(exc)
+            _record_improvement_attempt(
+                work_id,
+                state_path=state_path,
+                status="BLOCKED",
+                detail=detail,
+            )
+            actions.append({
+                "work_id": work_id,
+                "kind": kind,
+                "advanced": False,
+                "status": "BLOCKED__IMPROVEMENT_ACTION_FAILED",
+                "detail": detail,
+            })
+
+    state = load_state(state_path)
+    advanced = sum(1 for row in actions if row.get("advanced") is True)
+    return {
+        "schema": SCHEMA,
+        "status": (
+            "IMPROVEMENT_QUEUE_ADVANCED"
+            if advanced else "IMPROVEMENT_QUEUE_NO_ACTIONABLE_PROGRESS"
+        ),
+        "pass": True,
+        "advanced_count": advanced,
+        "attempted_count": len(actions),
+        "actions": actions,
+        "next_improvement_action": _next_improvement_from_state(state),
+        "state_stats": deepcopy(state.get("stats") or {}),
+        "terminal_authority": False,
+    }
+
+
 def _post_execution_independent_verification(
     out: Mapping[str, Any],
     *,
@@ -1161,6 +1508,26 @@ def _post_execution_independent_verification(
         return result
 
     episode = result.get("current_episode")
+    if (
+        result.get("current_episode_verified") is not True
+        and isinstance(episode, Mapping)
+    ):
+        trace = result.get("trace")
+        if isinstance(trace, Sequence) and not isinstance(trace, (str, bytes)):
+            verification_work = {
+                "kind": "EPISODE_VERIFICATION",
+                "problem": deepcopy(dict(problem)),
+                "episode": deepcopy(dict(episode)),
+                "trace": deepcopy(list(trace)),
+                "fact_capsule_head_hash": _s(result.get("state_capsule_head_hash")),
+                "value_capsule_head_hash": _s(result.get("value_capsule_head_hash")),
+            }
+            try:
+                _validate_retry_value(verification_work)
+                result["pending_episode_verification_work"] = verification_work
+            except SelfImprovementError as exc:
+                result["pending_episode_verification_work_error"] = str(exc)
+
     if (
         result.get("current_episode_verified") is not True
         and isinstance(episode, Mapping)
@@ -1197,6 +1564,7 @@ def _post_execution_independent_verification(
                         result["current_episode"] = auth["authenticated_episode"]
                         result["current_episode_verified"] = True
                         result["episode_verification_error"] = None
+                        result.pop("pending_episode_verification_work", None)
                     else:
                         result["episode_verification_error"] = _s(auth.get("reason"))
                 else:
@@ -1365,6 +1733,15 @@ def run_learning_episode(
     if not eid or not scope:
         raise SelfImprovementError("EPISODE_ID_AND_SCOPE_REQUIRED")
 
+    improvement_tick = None
+    if episode_verification_provider is not None or skill_verification_provider is not None:
+        improvement_tick = advance_improvement_queue(
+            state_path=state_path,
+            repo_root=repo_root,
+            episode_verification_provider=episode_verification_provider,
+            skill_verification_provider=skill_verification_provider,
+        )
+
     state = load_state(state_path)
     prior = _prior_verified_episodes(state, scope_id=scope, episode_id=eid)
     generalization_prior = _all_prior_verified_episodes(state, episode_id=eid)
@@ -1434,6 +1811,7 @@ def run_learning_episode(
                 "reused_skill_id": selected["skill_id"],
                 "reuse_attempt": reuse_attempt,
                 "fallback_used": False,
+                "improvement_tick": deepcopy(improvement_tick),
                 "terminal_authority": False,
             }
         if effectful:
@@ -1450,6 +1828,7 @@ def run_learning_episode(
                 "reuse_attempt": reuse_attempt,
                 "fallback_used": False,
                 "fallback_blocked_effect_may_have_occurred": True,
+                "improvement_tick": deepcopy(improvement_tick),
                 "terminal_authority": False,
             }
 
@@ -1493,5 +1872,6 @@ def run_learning_episode(
         "reused_skill_id": selected["skill_id"] if selected is not None else None,
         "reuse_attempt": reuse_attempt,
         "fallback_used": selected is not None,
+        "improvement_tick": deepcopy(improvement_tick),
         "terminal_authority": False,
     }
