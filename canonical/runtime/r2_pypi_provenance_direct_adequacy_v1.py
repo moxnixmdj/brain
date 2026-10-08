@@ -379,7 +379,6 @@ def run(
             raise RuntimeError("INDEPENDENT_PYPI_PROVENANCE_VERIFICATION_FAILED")
         required_report={
             "capability_id":pf["audited_capability_id"],
-            "audited_capability_id":pf["audited_capability_id"],
             "project":pf["project"],
             "pinned_version":pf["version"],
             "wheel_filename":pf["wheel_filename"],
