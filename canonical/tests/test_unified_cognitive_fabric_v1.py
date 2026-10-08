@@ -22,6 +22,13 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("LEARNING_EPISODE", c["engines"])
         self.assertIn("H100_INFERENCE", c["engines"])
         self.assertIn("MYSTERY_INFERENCE", c["engines"])
+        self.assertIn("CAPABILITY_SCHEDULER", c["engines"])
+        self.assertGreater(c["brain_owned_transitive_file_count"], 1)
+        self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
+        self.assertIn(
+            "canonical/runtime/unified_cognitive_fabric_v1.py",
+            c["brain_owned_transitive_files"],
+        )
         self.assertNotIn(
             "H100_SPECIALIZED_INFERENCE_REGISTRIES_NOT_YET_EXPOSED_AS_FABRIC_CAPABILITIES",
             c["known_unified_fabric_residuals"],
@@ -43,6 +50,58 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
         self.assertFalse(out["inner_pass"])
         self.assertEqual(out["result"]["failure_class"], "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP")
+
+    def test_auto_raw_goal_route_is_structurally_selected(self):
+        out = run({
+            "payload": {
+                "task_id": "FABRIC-AUTO-RAW-001",
+                "goal": "Calibrate the neutrino interferometer phase drift.",
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "RAW_GOAL")
+        self.assertEqual(out["requested_mode"], "AUTO")
+
+    def test_auto_compiled_task_route_is_structurally_selected(self):
+        out = run({
+            "payload": {
+                "task_id": "FABRIC-AUTO-COMPILED-001",
+                "initial_facts": [],
+                "target_effects": ["effect.that.does.not.exist"],
+                "capability_inputs": {},
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "COMPILED_TASK")
+
+    def test_auto_ambiguous_payload_fails_closed(self):
+        out = run({"payload": {"mystery": "unmodeled"}})
+        self.assertFalse(out["pass"])
+        self.assertIn("AUTO_ROUTE_AMBIGUOUS_OR_UNMODELED", out["reason"])
+
+    def test_capability_scheduler_is_inside_fabric(self):
+        out = run({
+            "payload": {
+                "work": [{
+                    "work_id": "BUILD",
+                    "work_type": "CAPABILITY_BUILD",
+                    "expected_capability_gain_lcb": 1,
+                    "expected_efficiency_gain_lcb": 0,
+                    "expected_reliability_gain_lcb": 1,
+                    "reuse_breadth_lcb": 1,
+                    "generalization_lcb": 1,
+                    "success_probability_lcb": "1",
+                    "wall_clock_cost_ub": 1,
+                    "compute_cost_ub": 1,
+                    "memory_cost_ub": 1,
+                    "complexity_cost_ub": 1,
+                }],
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "CAPABILITY_SCHEDULER")
+        self.assertTrue(out["inner_pass"])
+        self.assertEqual(out["result"]["ranked"][0]["work_id"], "BUILD")
 
     def test_decision_dispatches(self):
         out = run({
