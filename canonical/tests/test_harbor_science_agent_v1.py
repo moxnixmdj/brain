@@ -58,8 +58,41 @@ class ScienceAgentTests(unittest.TestCase):
         with patch.object(s.science_planner, "plan", capture):
             result=asyncio.run(s.run_science_goal("synthetic science goal",env,max_cycles=1))
         self.assertEqual(seen,[s.PLANNER_TIMEOUT_S])
-        self.assertEqual(s.PLANNER_TIMEOUT_S,300)
+        self.assertEqual(s.PLANNER_TIMEOUT_S,600)
         self.assertEqual(result["status"],"SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER")
+
+    def test_planner_prompt_keeps_semantics_once_and_compacts_acceptance_metadata(self):
+        env=Env()
+        seen=[]
+        unique="UNIQUE_SEMANTIC_ATOM_7F91C2"
+        goal=(
+            "Create alpha for "+unique+".\n"
+            "Write the result to /tmp/semantic_probe.txt."
+        )
+        def capture(prompt, timeout_s=20):
+            seen.append((prompt,timeout_s))
+            return {
+                "text":json.dumps({
+                    "material_requirements":["R1"],
+                    "candidates":[{
+                        "action_id":"a",
+                        "covers":["R1"],
+                        "command":"echo work",
+                        "verify_command":"echo verify"
+                    }]
+                }),
+                "model":"synthetic-fixed-substrate",
+            }
+        with patch.object(s.science_planner, "plan", capture):
+            asyncio.run(s.run_science_goal(goal,env,max_cycles=1))
+        self.assertEqual(len(seen),1)
+        prompt,timeout_s=seen[0]
+        self.assertEqual(timeout_s,600)
+        self.assertEqual(prompt.count(unique),1,prompt)
+        self.assertIn("Brain lossless raw-task acceptance summary",prompt)
+        self.assertIn('"required_obligation_count"',prompt)
+        self.assertNotIn("Brain lossless raw-task obligations (non-droppable",prompt)
+        self.assertIn("Use the Goal text as authoritative semantic scope",prompt)
 
     def test_brain_selects_max_verified_requirement_coverage(self):
         env,result=self.run_goal([
