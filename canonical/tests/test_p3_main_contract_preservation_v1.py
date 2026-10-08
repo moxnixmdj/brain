@@ -63,6 +63,7 @@ def test_unmodeled_input_contract_requirements_fail_all_positive_routes():
         ("task","UNMODELED_TASK_REQUIREMENTS",lambda p:p["v3_input"]["task"].update({"must_translate":"German"})),
         ("claim","UNMODELED_CLAIM_REQUIREMENTS",lambda p:p["v3_input"]["task"]["claims"][0].update({"must_not_show":True})),
         ("evidence","UNMODELED_EVIDENCE_REQUIREMENTS",lambda p:p["v3_input"]["task"]["evidence"][0].update({"authority_condition":"human_review"})),
+        ("provenance","UNMODELED_PROVENANCE_REQUIREMENTS",lambda p:p["v3_input"]["task"]["evidence"][0]["provenance"][0].update({"must_not_cite":True})),
         ("audience","AUDIENCE_PROFILE_SEMANTICS_UNMODELED",lambda p:p["v3_input"]["task"]["audience_profile"].update({"profile_id":"GERMAN_ONLY"})),
         ("profile","UNMODELED_AUDIENCE_PROFILE_FIELDS",lambda p:p["v3_input"]["task"]["audience_profile"].update({"must_translate":"German"})),
         ("render","UNMODELED_RENDER_REQUIREMENTS",lambda p:p["v3_input"]["task"]["audience_profile"]["constraints"].update({"language":"de"})),
