@@ -436,6 +436,123 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertIn("FAILURE_FINGERPRINT_UNKNOWN", out["reason"])
 
+
+    @patch("canonical.runtime.live_brain_runtime_v1._replay_retry_context")
+    @patch("canonical.runtime.live_brain_runtime_v1._owned_raw_capability_acquisition")
+    @patch("canonical.runtime.live_brain_runtime_v1.synthesize_failure_repair")
+    @patch("canonical.runtime.live_brain_runtime_v1._learning_module")
+    def test_raw_new_primitive_uses_owned_acquisition_then_original_replay(
+        self, learning_module, synthesize, acquire, replay
+    ):
+        class L:
+            DEFAULT_STATE_PATH = "/tmp/owned-acquisition-state.json"
+            @staticmethod
+            def get_failure_retry_context(fid, state_path, retry_capsule_sha256=None):
+                return {
+                    "failure_fingerprint": fid,
+                    "retry_capsule_sha256": "r" * 64,
+                    "context": {
+                        "mode": "raw_bound",
+                        "request": {"task_id": "raw-gap", "goal": "encode this as cbor"},
+                        "learn": True,
+                    },
+                    "resolved": False,
+                }
+            @staticmethod
+            def record_repair_outcome(*args, **kwargs):
+                return {"retry_instance_resolved": kwargs["original_replay_pass"]}
+
+        learning_module.return_value = L
+        synthesize.return_value = {
+            "pass": False,
+            "required_repair_effect": "repair.capability.available",
+            "causal_synthesis": {
+                "pass": False,
+                "classification": "NEW_PRIMITIVE_REQUIRED",
+                "missing_required_effects": ["repair.capability.available"],
+            },
+        }
+        acquire.return_value = {
+            "pass": True,
+            "status": "OWNED_RAW_CAPABILITY_ACQUISITION_EXECUTED",
+            "mission_id": "LIVE-BRAIN-AUTO-ACQUIRE-ABC",
+            "origin_mission_sha256": "a" * 64,
+            "auto_acquisition": {"status": "VERIFIED_AND_PROMOTED"},
+        }
+        replay.return_value = {"pass": True, "status": "PASS__ORIGINAL_OBLIGATION"}
+
+        out = brain.execute_failure_repair_cycle(
+            {
+                "failure_fingerprint": "fp:raw",
+                "retry_capsule_sha256": "r" * 64,
+                "components": [],
+            },
+            capability_expander=None,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "REPAIR_VERIFIED_BY_OWNED_ACQUISITION_AND_ORIGINAL_REPLAY",
+        )
+        self.assertEqual(out["repair_mode"], "OWNED_RAW_CAPABILITY_ACQUISITION")
+        acquire.assert_called_once()
+        replay.assert_called_once()
+        self.assertEqual(
+            replay.call_args.kwargs["state_path"],
+            L.DEFAULT_STATE_PATH,
+        )
+
+    @patch("canonical.runtime.live_brain_runtime_v1._owned_raw_capability_acquisition")
+    @patch("canonical.runtime.live_brain_runtime_v1.synthesize_failure_repair")
+    @patch("canonical.runtime.live_brain_runtime_v1._learning_module")
+    def test_owned_raw_acquisition_failure_stays_unresolved(
+        self, learning_module, synthesize, acquire
+    ):
+        class L:
+            DEFAULT_STATE_PATH = "/tmp/owned-acquisition-state.json"
+            @staticmethod
+            def get_failure_retry_context(fid, state_path, retry_capsule_sha256=None):
+                return {
+                    "failure_fingerprint": fid,
+                    "retry_capsule_sha256": "r" * 64,
+                    "context": {
+                        "mode": "raw_bound",
+                        "request": {"task_id": "raw-gap", "goal": "unknown capability"},
+                        "learn": True,
+                    },
+                    "resolved": False,
+                }
+
+        learning_module.return_value = L
+        synthesize.return_value = {
+            "pass": False,
+            "required_repair_effect": "repair.capability.available",
+            "causal_synthesis": {
+                "pass": False,
+                "classification": "NEW_PRIMITIVE_REQUIRED",
+            },
+        }
+        acquire.return_value = {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "NO_COMPATIBLE_SUPPLIER_CONTRACT",
+        }
+
+        out = brain.execute_failure_repair_cycle(
+            {
+                "failure_fingerprint": "fp:raw",
+                "retry_capsule_sha256": "r" * 64,
+                "components": [],
+            },
+            capability_expander=None,
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "REPAIR_CYCLE_UNRESOLVED_AT_OWNED_ACQUISITION",
+        )
+        self.assertTrue(out["owned_raw_acquisition_available"])
+
     def test_unknown_mode_fails_closed(self):
         out = brain.run({"mode": "invented"})
         self.assertFalse(out["pass"])
