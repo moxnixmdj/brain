@@ -1916,8 +1916,17 @@
     },
     "rule": "EVERY_LIVE_OWNED_CAPABILITY_IDENTITY_MUST_BE_CLASSIFIABLE_AND_DISPATCHABLE_THROUGH_UNIFIED_COGNITIVE_FABRIC_LIVE_CAPABILITY_OR_FAIL_CLOSED",
     "semantic_selection_boundary": "CAPABILITY_SELECTION_FROM_ARBITRARY_INTENT_REMAINS_R2",
-    "verification_status": "PY_COMPILE_PASS__GITHUB_ACTIONS_PR_REPLAY_IN_PROGRESS",
+    "verification_status": "PASS__EXACT_SOURCE_ISOLATED_R1_INVOCATION_REPLAY",
     "verification_pr": 3223,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "current_live_owned_capability_count": 84,
+    "universal_invocation_contract_coverage_count": 84,
+    "missing_invocation_contract_count": 0,
+    "verification": {
+      "path": "canonical/verification/R1_UNIVERSAL_LIVE_CAPABILITY_INVOCATION_VERIFICATION_20261008_V1.json",
+      "status": "PASS__EXACT_SOURCE_ISOLATED_R1_INVOCATION_REPLAY",
+      "github_actions_run_id": 37768830791,
+      "github_actions_note": "INFRASTRUCTURE_RUNNER_FAILURE__ZERO_STEPS_EXECUTED__NOT_COUNTED_AS_CODE_FAILURE"
+    }
   }
 }
