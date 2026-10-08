@@ -102,7 +102,7 @@ def test_transitive_categorical_membership_realized_end_to_end():
     assert out["pass"],out
     assert out["rendered_text"]=="- Tweety is a member of Animal. [src:REPORT@p1;TAX@p1]"
     receipt=out["support_receipts"][0]["receipt"]
-    assert receipt["categorical_receipt"]["support_proof_paths"]==[["E1","E2","E3"]]
+    assert receipt["categorical_support_receipt"]["support_proof_paths"]==[["E1","E2","E3"]]
 
 
 def test_fails_closed_on_wrong_v3_schema_and_unmodeled_contract_fields():
