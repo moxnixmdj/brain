@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE_PRIMARY_CAPABILITY_DEVELOPMENT_SCHEDULER",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "operational_objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+  "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT",
+  "scheduler_runtime": "canonical/runtime/capability_first_scheduler_v1.py",
+  "canonical_learning_loop": [
+    "SOLVE",
+    "VERIFY",
+    "EXTRACT_MECHANISM",
+    "GENERALIZE",
+    "COMPRESS",
+    "REUSE_CHEAPER"
+  ],
+  "benchmark_policy": {
+    "role": "INSTRUMENTATION_NOT_PRODUCT",
+    "allowed_load_bearing_roles": [
+      "CAPABILITY_DEFECT_LOCALIZATION",
+      "NEW_CAPABILITY_VALIDATION",
+      "CAPABILITY_CLAIM_FALSIFICATION",
+      "MILESTONE_CERTIFICATION"
+    ],
+    "demoted_role": "BOOKKEEPING",
+    "rule": "BENCHMARK_WORK_WITHOUT_ACTIONABLE_CAPABILITY_INFORMATION_OR_MILESTONE_CERTIFICATION_MUST_NOT_OUTRANK_REUSABLE_CAPABILITY_BUILDING"
+  },
+  "promotion_policy": {
+    "reusable_capability_required": true,
+    "independent_verification_required": true,
+    "frontier": "PARETO_OVER_CAPABILITY_GENERALIZATION_RELIABILITY_LATENCY_COMPUTE_MEMORY_INCREMENTAL_SPEND",
+    "benchmark_pass_alone_is_capability_promotion": false
+  },
+  "current_high_leverage_conversion": [
+    {
+      "source": "P3_EXECUTABLE_RELEVANCE_CEGAR_V21",
+      "target_reusable_capability": "DECISION_RELEVANCE_MINIMUM_INFORMATION_ROBUST_POLICY_LOOP",
+      "class": "CAPABILITY_BUILD"
+    },
+    {
+      "source": "MYSTERYMECHANISM_EXACT_AND_NOISY_INFERENCE",
+      "target_reusable_capability": "HYPOTHESIS_SET_INFERENCE_IDENTIFIABILITY_AND_MINIMAX_QUERY_ENGINE",
+      "class": "CAPABILITY_BUILD"
+    },
+    {
+      "source": "CURSORBENCH_FRONTIERCODE_SHARED_SPECIFICATION_SEMANTIC_SUCCESSOR",
+      "target_reusable_capability": "GENERAL_SPECIFICATION_TO_ACCEPTANCE_POLICY_REASONING",
+      "class": "CAPABILITY_BUILD"
+    }
+  ],
+  "demoted_current_patterns": [
+    "REPEATED_TARGET_EPOCH_BOOKKEEPING_WITHOUT_CAPABILITY_DELTA",
+    "HIDDEN_EVALUATOR_RECONSTRUCTION_WITHOUT_CAPABILITY_DEFECT_LOCALIZATION",
+    "SCORE_LOWER_BOUND_REFINEMENT_WITHOUT_NEW_CAPABILITY_EVIDENCE"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_CREDIT_FROM_THIS_SCHEDULER",
+    "NO_CAPABILITY_CREDIT_FROM_PRIORITY_SCORE_ALONE",
+    "NO_BENCHMARK_PASS_IS_TREATED_AS_A_REUSABLE_CAPABILITY",
+    "OPUS_5_5_MILESTONE_IS_PRESERVED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
