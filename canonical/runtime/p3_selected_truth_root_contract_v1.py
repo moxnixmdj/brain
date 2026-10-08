@@ -87,6 +87,20 @@ def compile_root_task(raw_task: str | bytes) -> dict[str, Any]:
         if typed.get("status") != "COMPILED":
             raise RootContractError("FACT_SOURCE_TYPED_CONTEXT_NOT_COMPILED")
 
+        descriptor = identity.get("descriptor")
+        if not isinstance(descriptor, Mapping):
+            raise RootContractError("PREDICATE_DESCRIPTOR_MISSING")
+        field_name = descriptor.get("field_name")
+        field_type = descriptor.get("field_type")
+        typed_fields = (typed.get("typed_context") or {}).get("fields")
+        if not isinstance(typed_fields, Mapping):
+            raise RootContractError("TYPED_FIELDS_MISSING")
+        field_row = typed_fields.get(field_name)
+        if not isinstance(field_row, Mapping):
+            raise RootContractError("PREDICATE_FIELD_NOT_PRESENT_IN_FACT_SOURCE")
+        if field_row.get("type") != field_type:
+            raise RootContractError("PREDICATE_FIELD_TYPE_MISMATCH")
+
         root_sha = _sha_bytes(raw)
         source_sha = sha256(source_text.encode("utf-8")).hexdigest()
         fact_sha = sha256(fact_source.encode("utf-8")).hexdigest()
@@ -119,6 +133,7 @@ def compile_root_task(raw_task: str | bytes) -> dict[str, Any]:
             "root_binding_receipt_sha256": sha256(receipt_material).hexdigest(),
             "root_task_source_binding_verified": True,
             "source_authorization_verified_relative_to_root_task": True,
+            "selected_discriminator_evaluator_preconditions_verified": True,
             "root_task_authority_self_proved": False,
             "terminal_authority": False,
             "terminal_credit_delta": 0,
