@@ -82,6 +82,84 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             },
         }
 
+    def test_verified_direct_adequacy_preempts_open_semantic_refinement(self):
+        goal = 'Reply with exactly "READY_42".'
+        goal_sha = controller.sha256(goal.encode("utf-8")).hexdigest()
+        direct_result = {
+            "pass": True,
+            "status": "PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED",
+            "selected_policy_id": "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1",
+            "goal_sha256": goal_sha,
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "retry_by_other_route_authorized": False,
+            "terminal_authority": False,
+            "raw_result": {"pass": True, "response": "READY_42"},
+        }
+
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(
+                 controller.direct_adequacy,
+                 "preflight",
+                 return_value={
+                     "pass": False,
+                     "status": "DIRECT_ADEQUACY_ROUTE_MATCHED",
+                     "matched": True,
+                 },
+             ), \
+             patch.object(controller.direct_adequacy, "run", return_value=direct_result) as run_direct, \
+             patch.object(controller, "discover_authenticated_adequacy") as specialist, \
+             patch.object(controller, "evaluate_p3") as p3:
+            out = controller.run({"task_id": "R2_DIRECT_FRONTDOOR", "goal": goal})
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["status"], "PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED")
+        self.assertTrue(out["semantic_acceptance_complete"])
+        self.assertTrue(out["actual_goal_satisfaction_verified"])
+        self.assertEqual(out["minimum_information_rounds_used"], 0)
+        self.assertFalse(out["terminal_authority"])
+        run_direct.assert_called_once_with({"task_id": "R2_DIRECT_FRONTDOOR", "goal": goal})
+        specialist.assert_not_called()
+        p3.assert_not_called()
+
+    def test_matched_direct_adequacy_failure_never_falls_through(self):
+        goal = 'Reply with exactly "READY_42".'
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(
+                 controller.direct_adequacy,
+                 "preflight",
+                 return_value={
+                     "pass": False,
+                     "status": "DIRECT_ADEQUACY_ROUTE_MATCHED",
+                     "matched": True,
+                 },
+             ), \
+             patch.object(
+                 controller.direct_adequacy,
+                 "run",
+                 return_value={
+                     "pass": False,
+                     "status": "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY",
+                     "retry_by_other_route_authorized": False,
+                     "actual_goal_satisfaction_verified": False,
+                     "terminal_authority": False,
+                 },
+             ), \
+             patch.object(controller, "discover_authenticated_adequacy") as specialist, \
+             patch.object(controller, "evaluate_p3") as p3:
+            out = controller.run({"task_id": "R2_DIRECT_FAIL", "goal": goal})
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY")
+        self.assertEqual(
+            out["next_required_edge"],
+            "DIRECT_END_TO_END_ADEQUACY_CELL_VERIFICATION",
+        )
+        self.assertFalse(out["actual_goal_satisfaction_verified"])
+        specialist.assert_not_called()
+        p3.assert_not_called()
+
     def test_missing_decision_context_bootstraps_lossless_opaque_overapproximation(self):
         raw = {
             "pass": True,
