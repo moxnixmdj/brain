@@ -65,10 +65,10 @@ def parse_relation(text: str, *, default_source: str | None = None) -> dict[str,
 
     m = _MEMBER.fullmatch(body)
     if m:
-        subject = _norm(m.group("subject"))
-        category = _norm(m.group("category"))
+        subject = _term(m.group("subject"))
+        category = _term(m.group("category"))
         if not subject or not category:
-            return {"schema": SCHEMA, "status": "FAIL_CLOSED", "reason": "EMPTY_CATEGORICAL_SLOT"}
+            return {"schema": SCHEMA, "status": "UNRESOLVED", "reason": "UNSAFE_OR_CONTEXT_DEPENDENT_CATEGORICAL_TERM", "claim_in_scope": False, "terminal_authority": False}
         return {
             "schema": SCHEMA,
             "status": "RESOLVED",
@@ -83,10 +83,10 @@ def parse_relation(text: str, *, default_source: str | None = None) -> dict[str,
 
     m = _SUBCLASS.fullmatch(body)
     if m:
-        sub = _norm(m.group("sub"))
-        sup = _norm(m.group("super"))
+        sub = _term(m.group("sub"))
+        sup = _term(m.group("super"))
         if not sub or not sup:
-            return {"schema": SCHEMA, "status": "FAIL_CLOSED", "reason": "EMPTY_CATEGORICAL_SLOT"}
+            return {"schema": SCHEMA, "status": "UNRESOLVED", "reason": "UNSAFE_OR_CONTEXT_DEPENDENT_CATEGORICAL_TERM", "claim_in_scope": False, "terminal_authority": False}
         return {
             "schema": SCHEMA,
             "status": "RESOLVED",
