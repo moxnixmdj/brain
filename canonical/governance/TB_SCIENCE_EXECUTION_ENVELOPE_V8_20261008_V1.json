@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_EXECUTION_ENVELOPE_V8",
+  "date": "2026-10-08",
+  "status": "CANDIDATE__ZERO_EXPOSURE_EXECUTION_ENVELOPE_REPAIR__TWO_SPRITE_TEST_PASS__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V7.json",
+    "git_blob_sha": "cc24730fcdf83cd87a02dd73ff5eb619dd81af66"
+  },
+  "repaired_runtime": {
+    "agent": {
+      "path": "canonical/runtime/harbor_science_agent_v1.py",
+      "git_blob_sha": "5e851d884b9784c6dc6fc9f83c08c502e41c3bdc"
+    },
+    "planner": {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "715aee168f02cb4abff961849b2b26709eef2e64"
+    }
+  },
+  "repaired_failure_classes": [
+    "RAW_TASK_TEXT_DUPLICATED_IN_PLANNER_CONTEXT__REPLACED_BY_EXACT_GOAL_SPAN_QUOTIENT",
+    "PLANNER_SCHEMA_HARD_MAX_ONE_CANDIDATE__REPLACED_BY_BOUNDED_FOUR_CANDIDATE_PROPOSAL",
+    "ONE_ACTION_PER_PREFILL__REPLACED_BY_DEPENDENCY_GATED_MULTI_ACTION_EXECUTION",
+    "FIXED_180_SECOND_ACTION_AND_VERIFY_DEADLINE__REPLACED_BY_BRAIN_BOUNDED_PER_ACTION_DEADLINES",
+    "OVERLAPPING_ALTERNATIVE_WASTE__SKIP_AFTER_RESIDUAL_REQUIREMENT_RESOLVES"
+  ],
+  "execution_policy": {
+    "max_candidates_per_planner_proposal": 4,
+    "default_action_timeout_s": 1800,
+    "max_action_timeout_s": 7200,
+    "default_verify_timeout_s": 600,
+    "max_verify_timeout_s": 3600,
+    "dependency_rule": "CANDIDATE_EXECUTES_ONLY_IF_ALL_DEPENDS_ON_ACTIONS_VERIFIED",
+    "promotion_rule": "COVERAGE_PROMOTES_ONLY_AFTER_ACTION_TRANSPORT_CLEAN_AND_VERIFY_ZERO_AND_ANY_BRAIN_DELIVERABLE_CHECKS_PASS",
+    "redundancy_rule": "CANDIDATE_WITH_NO_CURRENT_RESIDUAL_COVERAGE_IS_NOT_EXECUTED",
+    "semantic_scope_rule": "GOAL_TEXT_REMAINS_EXACT_AUTHORITY__OBLIGATION_QUOTIENT_BINDS_ID_SHA_SEGMENT_INDEX_AND_EXACT_SPAN"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_EXECUTION_ENVELOPE_V8_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+    "status": "PASS_44_OF_44_ON_EACH_OF_TWO_INDEPENDENT_SPRITES"
+  },
+  "rank13": {
+    "task_started": false,
+    "execution_authority_from_this_candidate": false,
+    "benchmark_exposure_from_this_candidate": 0,
+    "rule": "DO_NOT_START_RANK13_FROM_THIS_CANDIDATE_ALONE"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_task_exposure_delta": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
