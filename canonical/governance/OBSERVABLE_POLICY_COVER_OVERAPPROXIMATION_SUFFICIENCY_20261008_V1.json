@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_OBSERVABLE_POLICY_COVER_OVERAPPROXIMATION_SUFFICIENCY_V1",
+  "date": "2026-10-08",
+  "status": "PROVED_POSITIVE_ROUTE_REDUCTION__SOUND_OVERAPPROXIMATION_SUFFICES__ZERO_TERMINAL_CREDIT",
+  "sources": {
+    "positive_overapproximation": "canonical/governance/POSITIVE_ADEQUACY_OVERAPPROXIMATION_SUFFICIENCY_20261007_V1.json",
+    "top_initialization": "canonical/governance/TOP_SEMANTIC_OVERAPPROXIMATION_SOUNDNESS_TRUTH_REPAIR_20261007_V1.json",
+    "runtime": {
+      "path": "canonical/runtime/observable_policy_cover_overapproximation_gate_v2.py",
+      "git_blob_sha": "14cc1b384312cda86f44c17d6d01a7b4ba1f81b5"
+    },
+    "tests": {
+      "path": "canonical/tests/test_observable_policy_cover_overapproximation_gate_v2.py",
+      "git_blob_sha": "3764645e2284eba86e59d4fd8f26e15f23ded50b"
+    }
+  },
+  "theorem": {
+    "premise": "W_TRUE_SUBSET_OR_EQUAL_M_OVER_AND_THE_AUTHENTICATED_ADAPTIVE_POLICY_TREE_COVERS_EVERY_MEMBER_OF_M_OVER",
+    "conclusion": "THE_SAME_TREE_COVERS_EVERY_TRUE_WORLD_IN_W_TRUE",
+    "exact_true_world_set_completeness_required_for_positive_proof": false,
+    "failure_over_M_OVER_authorizes_real_world_impossibility": false
+  },
+  "scheduler_effect": [
+    "DELETE_EXACT_TRUE_WORLD_ENUMERATION_AS_A_POSITIVE_COVER_PREREQUISITE.",
+    "START_FROM_THE_COARSEST_SOUND_OVERAPPROXIMATION_AND_REFINE_ONLY_IF_POSITIVE_COVER_FAILS.",
+    "A_FAILURE_ON_A_SOUND_OVERAPPROXIMATION_IS_UNKNOWN_NOT A TARGET FAILURE."
+  ],
+  "current_truth": {
+    "top_sound_overapproximation_available": true,
+    "global_positive_overapproximation_cover_proved": false,
+    "U_empty": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_OVERAPPROXIMATION_ALREADY_HAS_A_GLOBAL_PASSING_POLICY_COVER.",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
