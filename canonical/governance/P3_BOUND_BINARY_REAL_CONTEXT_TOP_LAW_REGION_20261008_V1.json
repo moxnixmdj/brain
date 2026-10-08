@@ -39,7 +39,7 @@
     },
     "source_contract_compiler_verification": {
       "path": "canonical/verification/SOURCE_CONTRACT_COMPLETENESS_V2_VERIFICATION_20261002_V1.json",
-      "git_blob_sha": "f7d4f1e9d5dc5fb5f3d9d1efee1287f9385cb7ef"
+      "git_blob_sha": "dba285299fda831a8a3bd93ea10f8fb7b7a0cced"
     }
   },
   "theorem": {
