@@ -280,5 +280,74 @@ class NativeSpecializedCapabilityRegistryV1Tests(unittest.TestCase):
             solver_v4._validate_structural_effect_contract(cap)
 
 
+    def test_v1_executes_native_operation_as_proposal_free_builtin(self):
+        from canonical.runtime import universal_verified_adaptive_solver_v1 as solver_v1
+
+        problem = {
+            "initial_facts": [],
+            "target_effects": ["NATIVE_READY"],
+            "capabilities": [{
+                "id": "native",
+                "requires": [],
+                "provides": ["NATIVE_READY"],
+                "cost": 1,
+                "result_fields": ["result"],
+                "action": {
+                    "type": "verified_policy",
+                    "verifier_id": "NATIVE_SPECIALIZED_OPERATION_V1",
+                    "verifier_payload": {
+                        "operation_id": "H100_REGISTRY_SNAPSHOT_V8",
+                        "args": {},
+                    },
+                    "effect_contract": {
+                        "effects": ["NATIVE_READY"],
+                        "verifier_success_condition": native.SUCCESS_CONDITION,
+                    },
+                },
+            }],
+        }
+        native_result = {
+            "pass": True,
+            "status": "PASS__NATIVE_SPECIALIZED_OPERATION_EXECUTED",
+            "result": {
+                "status": "VERIFIED_CAPABILITY_REGISTRY_V8_READY",
+                "entry_count": 17,
+            },
+            "read_only": True,
+            "incremental_spend_usd": 0,
+        }
+        with patch.object(
+            solver_v1,
+            "invoke_native_specialized",
+            return_value=native_result,
+        ) as invoke:
+            out = solver_v1.run(
+                problem,
+                proposal_packets={"native": [{"candidate": "ignored"}]},
+            )
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["trace"][0]["proposal_source"],
+            "DETERMINISTIC_PROPOSAL_FREE_ROUTE",
+        )
+        self.assertEqual(out["trace"][0]["accepted_proposal"], {})
+        self.assertEqual(
+            out["trace"][0]["verified_output"]["result"]["entry_count"],
+            17,
+        )
+        invoke.assert_called_once_with("H100_REGISTRY_SNAPSHOT_V8", {})
+
+    def test_v2_binds_native_verifier_to_immutable_success_condition(self):
+        from canonical.runtime import universal_verified_adaptive_solver_v2 as solver_v2
+
+        self.assertEqual(
+            solver_v2.SUCCESS_CONDITIONS[
+                "NATIVE_SPECIALIZED_OPERATION_V1"
+            ],
+            native.SUCCESS_CONDITION,
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
