@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_R3_BOUND_SUCCESS_READONLY_LEARNING_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS__COMPILED_BOUND_SUCCESS_READONLY_LEARNING__14_OF_14",
+  "branch": "r3-bound-success-readonly-learning-v2-20261008",
+  "exact_blobs": {
+    "adapter": "8c73e1ab3486df9ed56fff778ec35401720eb1e7",
+    "checkpoint_verifier": "dc1412451d3dbc6747fd51388137a3ac1bba0d4b",
+    "independent_verifier": "4695fc73904cbe5bf3f8bb58eca8055270e6cdf1",
+    "queue_driver": "7c0068d0d8dff5b6c78ff9810089c8ee93300ad1",
+    "focused_tests": "0866cbacff6e32294d05b66809344c5a6ae7ae9c"
+  },
+  "isolated_carrier": {
+    "name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "focused_checks": {
+      "passed": 5,
+      "total": 5
+    },
+    "existing_independent_verifier_checks": {
+      "passed": 9,
+      "total": 9
+    }
+  },
+  "verified": [
+    "COMPILED_BOUND_SUCCESS_ADAPTS_WITHOUT_EFFECT_REPLAY",
+    "CONTROLLER_CHECKPOINT_REAUTHENTICATED",
+    "CURRENT_PROMOTED_REGISTRY_BINDINGS_REAUTHENTICATED",
+    "EMBEDDED_BOUND_TRACE_REVERIFIED",
+    "COMPOSITION_CAPSULE_HEAD_REVERIFIED",
+    "HASHED_DURABLE_ARTIFACT_READBACK_REQUIRED",
+    "POST_SUCCESS_ARTIFACT_TAMPERING_REJECTED",
+    "STANDARD_R3_EPISODE_AUTHENTICATOR_ACCEPTS_READBACK_RECEIPT",
+    "INTERNAL_SUCCESS_ADAPTER_IS_DEFAULT_QUEUE_PATH",
+    "RAW_BOUND_AND_OTHER_UNSUPPORTED_SUCCESS_SURFACES_REMAIN_FAIL_CLOSED",
+    "EXISTING_NON_EFFECTFUL_EPISODE_VERIFICATION_PRESERVED",
+    "EXISTING_BOUNDED_FILESYSTEM_EFFECT_READBACK_PRESERVED"
+  ],
+  "scope_boundary": {
+    "admitted_surface": "COMPILED_BOUND",
+    "required_evidence": "MODEL_INDEPENDENT_CONTROLLER_CHECKPOINT_PLUS_CURRENT_REGISTRY_BINDING_PLUS_BOUND_TRACE_PROOF_PLUS_HASHED_DURABLE_ARTIFACT_READBACK",
+    "effect_replay": false,
+    "unsupported_effects": "REMAIN_QUEUED_OR_FAIL_CLOSED"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
