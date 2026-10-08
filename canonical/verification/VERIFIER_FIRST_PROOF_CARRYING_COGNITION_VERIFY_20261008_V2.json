@@ -1,0 +1,131 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFIER_FIRST_PROOF_CARRYING_COGNITION_VERIFY_20261008_V2",
+  "date": "2026-10-08",
+  "status": "PASS__REBASED_VERIFIER_FIRST_CORE__R2_28_OF_28__R3_2_OF_2__LIVE_BRIDGE_1_OF_1__FULL_LIVE_CARRIER_NOT_CLAIMED",
+  "exact_blobs": {
+    "verifier_compiler": {
+      "path": "canonical/runtime/verifier_compiler_v1.py",
+      "git_blob_sha": "e29f7b2055474549dff3751a21ea149a9d497330"
+    },
+    "proof_carrying_outcome": {
+      "path": "canonical/runtime/proof_carrying_outcome_v1.py",
+      "git_blob_sha": "44cb9f0f94ebcda89cf6ebbeb8784205cbfbb18e"
+    },
+    "r2_controller": {
+      "path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+      "git_blob_sha": "f9084944e733ce2610f12bd9be1f65f36364e1cd"
+    },
+    "r3_runtime": {
+      "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+      "git_blob_sha": "67fb115167338c1bfb7a769c5ae0d2a500f6d242"
+    },
+    "live_runtime": {
+      "path": "canonical/runtime/live_brain_runtime_v1.py",
+      "git_blob_sha": "bd0d16cab5abe7b26b28e37ad83be93fc321323f"
+    },
+    "verifier_tests": {
+      "path": "canonical/tests/test_verifier_first_acceptance_v1.py",
+      "git_blob_sha": "cc2b13c3607a0ad3a35b0e95bd091637b7aaa298"
+    },
+    "r3_bridge_tests": {
+      "path": "canonical/tests/test_r3_proof_carrying_outcome_bridge_v1.py",
+      "git_blob_sha": "0f84ef1b2c40204beeb70e91e8900fea39a1169c"
+    },
+    "r2_regression": {
+      "path": "canonical/tests/test_general_adequate_decision_controller_v1.py",
+      "git_blob_sha": "d5f6b7f45def5f5d923b5221a936013462271ea7"
+    },
+    "live_regression": {
+      "path": "canonical/tests/test_live_brain_runtime_v1.py",
+      "git_blob_sha": "0b7e377a6017290dba2e824d883dbe52360226ec"
+    },
+    "governance": {
+      "path": "canonical/governance/VERIFIER_FIRST_PROOF_CARRYING_COGNITION_20261008_V1.json",
+      "git_blob_sha": "9de9b183bd276ccbce80f15f2ade7e871503b37f"
+    },
+    "current_r2_pointer": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "b453e6144c06cbba36fcae9d765f304eed4246e9"
+    }
+  },
+  "base_reconciliation": {
+    "base_main_at_rebase": "2d1c16a5813a074cd488c73e71e210675f6ca015",
+    "preserved_recent_main_changes": [
+      "R2_EXISTING_AUTHENTICATED_POLICY_COVER_OBSERVATION_REUSE",
+      "R2_CHECKER_OWNED_RAW_SOURCE_TRUTH_ACQUISITION",
+      "R2_NON_SELF_STALING_CURRENT_POINTER_AUTHORITY",
+      "R3_CURRENT_EVIDENCE_DISPOSITION_AND_PARKED_SUCCESS_HANDLING",
+      "R3_VERIFIED_V12_BOUND_CARRIER_LEARNING"
+    ],
+    "stale_branch_overwrite_used": false
+  },
+  "replays": [
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-live-integrated-v1-run-20261008",
+      "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+      "scope": "REBASED_R2_CONTROLLER_PLUS_VERIFIER_CORE",
+      "tests_run": 28,
+      "tests_passed": 28,
+      "failures": 0,
+      "errors": 0,
+      "exact_rebased_branch_bytes": true,
+      "environment_boundary": "ISOLATED_R2_REPLAY_TREE_REQUIRED_A_NON_AUTHORITATIVE_NO_MATCH_IMPORT_SHIM_ONLY_FOR_THE_AUTHENTICATED_ADEQUACY_REGISTRY_IMPORT_CLOSURE__NO_REGISTRY_INTEGRATION_CREDIT_FROM_THIS_REPLAY"
+    },
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-live-integrated-v1-run-20261008",
+      "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+      "scope": "REBASED_R3_PROOF_CARRYING_OUTCOME_RETENTION",
+      "tests_run": 2,
+      "tests_passed": 2,
+      "failures": 0,
+      "errors": 0,
+      "exact_rebased_branch_bytes": true
+    },
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+      "scope": "EXACT_DIRECT_R2_SUCCESS_TO_R3_LIVE_BRIDGE",
+      "tests_run": 1,
+      "tests_passed": 1,
+      "failures": 0,
+      "errors": 0,
+      "exact_rebased_live_runtime_and_test_bytes": true
+    }
+  ],
+  "prior_full_live_carrier_observation": {
+    "exact_live_runtime_blob_sha": "bd0d16cab5abe7b26b28e37ad83be93fc321323f",
+    "exact_live_test_blob_sha": "0b7e377a6017290dba2e824d883dbe52360226ec",
+    "tests_discovered": 26,
+    "tests_passed": 24,
+    "patch_specific_bridge_test": "PASS",
+    "remaining_legacy_tests": 2,
+    "remaining_reason": "VERIFIER_IMAGE_MISSING_UNRELATED_HISTORICAL_TRANSITIVE_R3_SOLVER_JUDGMENT_DEPENDENCY_CHAIN",
+    "code_failure_inferred": false,
+    "full_live_suite_claimed": false
+  },
+  "proved": [
+    "EVERY_PRODUCTION_SHAPED_RAW_ACCEPTANCE_OBLIGATION_HAS_AN_EXPLICIT_VERIFIER_ROUTE",
+    "STRUCTURAL_CHECKERS_ARE_SUPPLEMENTAL_AND_NON_AUTHORITATIVE",
+    "ALL_THREE_R2_SUCCESS_ROUTES_REQUIRE_AN_OBLIGATION_COMPLETE_PROOF_CARRYING_OUTCOME",
+    "PROOF_CARRYING_OUTCOME_DERIVES_FROM_EXISTING_AUTHENTICATED_GOAL_SATISFACTION_AND_HAS_NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "DIRECT_VERIFIED_R2_SUCCESS_CAN_BE_RETAINED_BY_R3_AS_BOUNDED_PROOF_EVIDENCE_AND_QUEUED_FOR_ADAPTATION_WITHOUT_AUTOMATIC_PROMOTION",
+    "LATEST_R2_AND_R3_MAIN_CHANGES_WERE_PRESERVED_DURING_REBASE"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_OPEN_WORLD_VERIFIER_COMPLETENESS",
+    "NO_FULL_LIVE_RUNTIME_SUITE_PASS_CLAIM",
+    "NO_AUTHENTICATED_ADEQUACY_REGISTRY_INTEGRATION_CLAIM_FROM_SHIMMED_R2_UNIT_REPLAY",
+    "NO_AUTOMATIC_SKILL_PROMOTION",
+    "NO_TERMINAL_OR_CAPABILITY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
