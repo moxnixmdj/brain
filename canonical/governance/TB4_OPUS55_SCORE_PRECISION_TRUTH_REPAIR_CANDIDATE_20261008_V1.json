@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB4_OPUS55_SCORE_PRECISION_TRUTH_REPAIR_CANDIDATE_20261008_V1",
   "date": "2026-10-08",
-  "status": "CANDIDATE_ONLY__TARGET_PRECISION_CONFLICT_EXPOSED__NO_CANONICAL_THRESHOLD_MUTATION__ZERO_CREDIT",
+  "status": "CANDIDATE_ONLY__PROVENANCE_TRACE_SUPPORTS_FAITHFUL_66_36_TARGET__NO_CANONICAL_THRESHOLD_MUTATION__ZERO_CREDIT",
   "objective": "Resolve whether CODING_TB4_GE_66_4 means raw accuracy >= 66.400000% or faithful noninferiority to the underlying Claude Opus 5.5 Terminal-Bench 4.0 result whose detailed system-card value is 66.36% over 330 trials, without weakening the target or silently changing frozen authority.",
   "target_predicate": "CODING_TB4_GE_66_4",
   "current_frozen_registry": {
@@ -9,6 +9,20 @@
     "predicate_text": "Terminal-Bench 4.0 >= 66.4%",
     "precision_semantics_explicit": false,
     "raw_vs_displayed_threshold_explicit": false
+  },
+  "provenance_trace": {
+    "target_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "target_model": "Claude Opus 5.5",
+    "acceptance_rule": "BRAIN_CONFIGURED_CAPABILITY_MUST_EQUAL_OR_EXCEED_OPUS_5_5_ON_RELEVANT_USEFUL_CONDITIONS",
+    "target_envelope_primary_source_includes": "https://www.anthropic.com/claude-opus-5-5",
+    "target_envelope_tb4_value": 66.4,
+    "terminal_protocol_path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "terminal_protocol_authority": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "tb4_acceptance_binding_creation_commit": "a960a3edee0cf0c73a585ed7c94bef6802b2bcf5",
+    "tb4_acceptance_binding_behavior": "INHERITS_THE_STRING_TERMINAL_BENCH_4_0_GE_66_4_PERCENT_FROM_THE_TERMINAL_PROTOCOL",
+    "strict_raw_66_400000_intent_found": false,
+    "extra_safety_margin_above_opus_result_found": false,
+    "provisional_interpretation": "THE_66_4_VALUE_ENTERED_BRAIN_AS_AN_OPUS55_PUBLIC_BAR_ALIAS_FROM_THE_OWNER_SUMMARY_SOURCE__NOT_AS_A_SEPARATELY_DERIVED_STRICT_RAW_CUTOFF"
   },
   "current_conservative_cut": {
     "path": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -46,6 +60,8 @@
     "successes_220_percent": 66.66666666666667,
     "minimum_successes_for_raw_ge_66_36": 219,
     "minimum_successes_for_raw_ge_66_4": 220,
+    "owner_detailed_score_identifies_success_count_under_binary_tb4_accuracy": 219,
+    "owner_detailed_score_reconstruction": "ROUND(100*219/330,2)=66.36",
     "proof_under_owner_detailed_value": "218/330*100=66.060606...<66.36__219/330*100=66.363636...>=66.36",
     "proof_under_strict_registry_literal": "219/330*100=66.363636...<66.4__220/330*100=66.666666...>=66.4"
   },
@@ -53,17 +69,28 @@
     "A_FAITHFUL_OPUS55_NONINFERIORITY": {
       "definition": "BRAIN_RAW_TB4_ACCURACY_GE_OWNER_DETAILED_OPUS55_RAW_RESULT_66_36_PERCENT",
       "required_successes": 219,
-      "reason": "THE_FROZEN_66_4_LABEL_IS_A_ROUNDED_OWNER_SUMMARY_OF_THE_DETAILED_66_36_RESULT",
+      "reason": "THE_TARGET_ENVELOPE_OBJECTIVE_IS_EQUAL_OR_EXCEED_OPUS55_AND_66_4_IS_THE_ROUNDED_OWNER_SUMMARY_ALIAS_OF_THE_DETAILED_66_36_RESULT",
       "effect_if_verified": "CURRENT_44_TASK_220_SLOT_CAPACITY_HAS_ONE_SLOT_OF_FAILURE_SLACK_INSTEAD_OF_ZERO"
     },
     "B_STRICT_LITERAL_REGISTRY_BAR": {
       "definition": "BRAIN_RAW_TB4_ACCURACY_GE_EXACT_NUMERIC_CONSTANT_66_400000_PERCENT",
       "required_successes": 220,
-      "reason": "TREATS_REGISTRY_TEXT_AS_AN_INTENTIONALLY_STRICTER_RAW_BAR_THAN_OPUS55_DETAILED_RESULT",
+      "reason": "WOULD_REQUIRE_EVIDENCE_THAT_BRAIN_INTENTIONALLY_FROZE_A_STRICTER_RAW_BAR_THAN_THE_ACTUAL_OPUS55_RESULT",
       "effect_if_verified": "KEEP_CURRENT_220_SUCCESS_CUT"
     }
   },
-  "truth_repair_rule": "DO_NOT_CHOOSE_A_OR_B_BY_CONVENIENCE__TRACE_THE_REGISTRY_SOURCE_AND_TERMINAL_OBJECTIVE_INTENT__IF_THE_PREDICATE_WAS_CREATED_TO_ENCODE_OPUS55_NONINFERIORITY_FROM_THE_ROUNDED_SUMMARY_VALUE_THEN_BIND_66_36_AS_THE_LOAD_BEARING_TARGET_AND_RECOMPILE_TO_219__IF_66_4_WAS_EXPLICITLY_FROZEN_AS_A_STRICTER_RAW_BAR_PRESERVE_220",
+  "provisional_resolution": {
+    "preferred_semantic": "A_FAITHFUL_OPUS55_NONINFERIORITY",
+    "confidence_basis": [
+      "CANONICAL_TARGET_ENVELOPE_ACCEPTANCE_RULE_IS_EQUAL_OR_EXCEED_OPUS55",
+      "CANONICAL_TARGET_ENVELOPE_PRIMARY_SOURCE_IS_ANTHROPIC_OWNER_SUMMARY",
+      "66_4_APPEARS_IN_TARGET_ENVELOPE_AS_OPUS55_PUBLIC_BAR_VALUE",
+      "DETAILED_OWNER_SECTION_REPORTS_66_36_OVER_330_TRIALS",
+      "NO_REPOSITORY_EVIDENCE_FOUND_FOR_AN_INTENTIONAL_EXTRA_0_04_POINT_RAW_MARGIN"
+    ],
+    "promotion_blocker": "INDEPENDENT_CONTENT_ADDRESSED_OWNER_SOURCE_VERIFICATION_AND_CURRENT_AUTHORITY_RECOMPILE"
+  },
+  "truth_repair_rule": "DO_NOT_CHOOSE_A_OR_B_BY_CONVENIENCE__THE_PROVENANCE_TRACE_CURRENTLY_SUPPORTS_A__PROMOTE_A_ONLY_AFTER_INDEPENDENT_SOURCE_VERIFICATION__PRESERVE_B_ONLY_IF_NEW_EVIDENCE_PROVES_66_4_WAS_INTENTIONALLY_FROZEN_AS_A_STRICTER_RAW_BAR",
   "conditional_state_if_A_is_independently_verified": {
     "creditable_tasks": 44,
     "executable_slot_capacity": 220,
@@ -76,7 +103,7 @@
   "hard_nonclaims": [
     "NO_CANONICAL_REGISTRY_EDIT",
     "NO_CURRENT_220_CUT_REVOCATION",
-    "NO_CLAIM_219_IS_CANONICALLY_AUTHORIZED_BEFORE_SOURCE_AND_INTENT_VERIFICATION",
+    "NO_CLAIM_219_IS_CANONICALLY_AUTHORIZED_BEFORE_INDEPENDENT_SOURCE_VERIFICATION",
     "NO_TB4_CASE_EXECUTION",
     "NO_SCORE_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
     "NO_HARNESS_EQUIVALENCE_CLAIM_FROM_NUMERIC_PRECISION_ALONE",
@@ -84,9 +111,9 @@
   ],
   "next_verification": [
     "CONTENT_ADDRESS_OR_INDEPENDENTLY_REFETCH_THE_OWNER_SYSTEM_CARD_SECTION_8_5",
-    "TRACE_THE_CREATION_SOURCE_OF_CODING_TB4_GE_66_4_TO_DETERMINE_IF_66_4_WAS_ROUNDED_TARGET_ALIAS_OR_INTENTIONALLY_STRICT_RAW_BAR",
-    "INDEPENDENTLY_RECOMPUTE_CEIL(0.6636*330)=219_AND_CEIL(0.664*330)=220",
-    "PROMOTE_ONLY_THE_SEMANTIC_SUPPORTED_BY_THE_FROZEN_TERMINAL_OBJECTIVE_AND_SOURCE_PROVENANCE"
+    "INDEPENDENTLY_VERIFY_THE_INTERNAL_PROVENANCE_CHAIN_TARGET_ENVELOPE_TO_TERMINAL_PROTOCOL_TO_TB4_BINDING",
+    "INDEPENDENTLY_RECOMPUTE_219_AND_220_THRESHOLD_ARITHMETIC",
+    "IF_VERIFIED_RECOMPILE_TB4_ATTAINABILITY_WITH_REQUIRED_SUCCESSES_219_WHILE_PRESERVING_ALL_OTHER_FROZEN_RULES"
   ],
   "accounting": {
     "terminal_cases_consumed": 0,
