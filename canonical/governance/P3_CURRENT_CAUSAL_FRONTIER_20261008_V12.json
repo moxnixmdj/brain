@@ -18,8 +18,9 @@
       "role": "TWO_SPRITE_EXACT_BYTE_VERIFICATION"
     },
     {
-      "path": "canonical/verification/P3_REAL_CONTEXT_V7_DEPENDENCY_RELEVANCE_TWO_SPRITE_VERIFICATION_20261008_V1.json",
-      "role": "CURRENT_V7_FRONT_DOOR_VERIFICATION"
+      "path": "canonical/verification/P3_REAL_CONTEXT_V7_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+      "role": "CURRENT_V7_FRONT_DOOR_VERIFICATION",
+      "git_blob_sha": "f3cbe4d799e355cb68f430bb171a9b12856f1fc8"
     }
   ],
   "behavioral_contract": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
