@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_P3_REAL_CONTEXT_V7_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_3_OF_3_ON_TWO_SPRITES__EXACT_DEPENDENCY_RELEVANCE_ROUTE_LIVE_BEHIND_V6__ZERO_TERMINAL_CREDIT",
+  "front_door": {
+    "path": "canonical/runtime/p3_real_context_v3_admission_v7.py",
+    "git_blob_sha": "7085b469ae443186eb0bcab7064bc17f9a745eb4"
+  },
+  "tests": {
+    "path": "canonical/tests/test_p3_real_context_v3_admission_v7.py",
+    "git_blob_sha": "1e25ad4739e9a9d81d713bc033d4567814f8002c"
+  },
+  "dependency_cell_verification": {
+    "path": "canonical/verification/P3_EXACT_DEPENDENCY_RELEVANCE_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+    "git_blob_sha": "cc5e6b54da8d4975644ac8b8b4e911cee9ab8f4b"
+  },
+  "minimum_information_verification": {
+    "path": "canonical/verification/P3_OPTIONAL_RELEVANCE_MINIMUM_INFORMATION_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+    "git_blob_sha": "82dc26cd54bf9608ba508f1cf65e2d16a36e7086"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "tests_passed": 3,
+      "tests_run": 3
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "tests_passed": 3,
+      "tests_run": 3
+    }
+  ],
+  "behavior": [
+    "ALL_V6_POSITIVE_ROUTES_KEEP_PRECEDENCE",
+    "V7_TRIES_EXACT_DEPENDENCY_RELEVANCE_ONLY_AFTER_V6_FAILS",
+    "EXACT_GRAPH_ROUTE_PRODUCES_PRECOMMITMENT_RELEVANCE_BITS_AND_GROUNDED_OUTPUT",
+    "NO_AUTHORITY_ESCALATION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_NO_WEIGHT_P3_CONTEXTS_HAVE_A_COMPLETE_DECISION_RELEVANCE_GRAPH",
+    "NO_GENERAL_SEMANTIC_RELEVANCE",
+    "NO_GLOBAL_P3_CLOSURE",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
