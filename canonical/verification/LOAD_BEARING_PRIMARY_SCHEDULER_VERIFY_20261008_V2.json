@@ -1,0 +1,10 @@
+{
+  "schema": "PROJECT_BRAIN_LOAD_BEARING_PRIMARY_SCHEDULER_VERIFY_20261008_V2",
+  "status": "PASS__16_OF_16_UNITTEST__PY_COMPILE_PASS",
+  "runtime_git_blob_sha": "b6878df39fc22813b93f5c35a2db36cd4297441d",
+  "test_git_blob_sha": "e1e555cf669e540742033835c2121d0eb9e0d787",
+  "activation_git_blob_sha": "52e125eae3fdcd099a5b563c6ef64954c2af2850",
+  "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
