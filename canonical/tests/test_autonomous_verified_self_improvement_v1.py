@@ -1400,7 +1400,10 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         integrate.assert_called_once_with(
             failed,
             state_path=path,
+            repo_root=Path("."),
             retry_context=retry_context,
+            verification_problem=self._reuse_problem(),
+            verification_effect_root=None,
         )
 
 
