@@ -11,11 +11,15 @@
   "controller": {
     "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py",
-    "authority_kernel_git_blob_sha": "29872fc55a5ec577feea769cc919dc889899c2bd"
+    "authority_kernel_git_blob_sha": "29872fc55a5ec577feea769cc919dc889899c2bd",
+    "fixed_point_git_blob_sha": "fdb8d6f021e1db8f8b379a7f12ba981bfe6c5fa2",
+    "fixed_point_native_control_policy_total": true,
+    "fixed_point_regression_test_path": "canonical/tests/test_general_adequate_decision_fixed_point_v2.py",
+    "fixed_point_regression_test_git_blob_sha": "1fa9f605dff0016fe2e8647e3a972e71e419ffa0"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V7.json",
-    "git_blob_sha": "d5d98468d2d82240a17a52a4f9687f3ada28433d"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V8.json",
+    "git_blob_sha": "07f60fae7a9193b0ba70e5e4ed33c645a47af3da"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
@@ -49,7 +53,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__LIVE_GENERAL_CONTROL_LAW_TOTALIZED",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__FIXED_POINT_NATIVE_TOTAL_CONTROL_PLUS_LIVE_TOTALIZER",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -138,13 +142,14 @@
     "verification_path": "canonical/verification/R2_GROUNDED_FRONTIER_PRECISION_RECALL_VERIFY_20261008_V1.json",
     "status": "ACTIVE__CANDIDATE_ONLY__POLICY_ADEQUACY_AUTHORITY_FALSE"
   },
-  "control_mechanism_status": "CLOSED_AS_ADEQUACY_OR_ABSTAIN",
+  "control_mechanism_status": "CLOSED__TOTAL_FAIL_CLOSED_ADEQUACY_OR_ABSTAIN_CONTROL",
   "remaining_problem_class": "ADEQUACY_COVERAGE_CAPABILITY_EXPANSION_AND_OBSERVABILITY_NOT_DECISION_LOOP_DESIGN",
   "control_law_totalizer": {
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
-    "live_route": "NOT_LIVE_BOUND__V6_MECHANISM_CLOSURE_REMAINS_AUTHORITY",
-    "status": "SUPPLEMENTAL_EXPLICIT_META_ACTION_VIEW__NOT_LIVE_AUTHORITY",
+    "live_route": "canonical/runtime/live_brain_runtime_v1.py::_decision_run",
+    "live_runtime_git_blob_sha": "043edf1746b5f8e118df7e7ec514ec25de141ee8",
+    "status": "ACTIVE__LIVE_EXTERNAL_META_ACTION_NORMALIZER_OVER_NATIVE_TOTAL_FIXED_POINT_CONTROL",
     "meta_actions": [
       "RETURN_VERIFIED_RESULT",
       "ACQUIRE_MINIMUM_POLICY_CHANGING_INFORMATION",
@@ -155,24 +160,18 @@
     "execution_authority": false,
     "semantic_truth_authority": false,
     "open_world_completion_claimed": false,
-    "verification_path": "canonical/verification/R2_TOTAL_META_ACTION_SUPPLEMENTAL_VERIFY_20261008_V1.json",
-    "verification_git_blob_sha": "6afee7e277452ca3946a2b845a313c2507d7ea4e",
-    "isolated_behavior_replay": "7_OF_7_PASS",
-    "live_runtime_git_blob_sha": "043edf1746b5f8e118df7e7ec514ec25de141ee8"
+    "regression_test_path": "canonical/tests/test_general_adequate_decision_totalized_v1.py",
+    "regression_test_git_blob_sha": "eb40f8ad4a2d1d8785d83cd160c02985d64c732d"
   },
   "control_law_closure": {
-    "status": "SUPPLEMENTAL__AUTHORITATIVE_CLOSURE_IS_MECHANISM_CLOSURE_V6",
-    "activation_path": "canonical/governance/R2_TOTAL_META_ACTION_CONTROL_LAW_CLOSURE_20261008_V1.json",
-    "activation_git_blob_sha": "ccff8eb2af5e872e549fdc945bff66c47d988b4e",
-    "regression_test_path": "canonical/tests/test_general_adequate_decision_totalized_v1.py",
-    "regression_test_git_blob_sha": "eb40f8ad4a2d1d8785d83cd160c02985d64c732d",
-    "remaining_problem_class": "ADEQUACY_COVERAGE_EXPANSION_NOT_GENERAL_MECHANISM",
+    "status": "CLOSED__FIXED_POINT_NATIVE_TOTAL_NEXT_MOVE_PLUS_LIVE_TOTALIZER",
+    "remaining_problem_class": "ADEQUACY_COVERAGE_EXPANSION_AND_OBSERVABILITY_NOT_GENERAL_CONTROL_MECHANISM",
     "authoritative_field": "mechanism_closure"
   },
   "sufficient_closure": {
-    "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V2.json",
-    "git_blob_sha": "6a5dc6ad51fb8a040e03bafb67591c68b5d9102f",
-    "status": "PASS__MECHANISM_CLOSED__LIVE_TOTALIZED_CONTROL_BOUND",
+    "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V3.json",
+    "git_blob_sha": "691c750ea69af19393e630f98a6277846c3aca4b",
+    "status": "PASS__CURRENT_FIXED_POINT_NATIVE_TOTALITY_AND_LIVE_TOTALIZED_ROUTE_BOUND",
     "remaining_problem_class": "ADEQUACY_COVERAGE_CAPABILITY_EXPANSION_AND_OBSERVABILITY"
   }
 }
