@@ -1,14 +1,16 @@
 {
-  "schema":"PROJECT_BRAIN_GDPVAL_CROWDBT_TWO_WORLD_NONIDENTIFIABILITY_CANDIDATE_V1",
+  "schema":"PROJECT_BRAIN_GDPVAL_CROWDBT_TWO_WORLD_NONIDENTIFIABILITY_CANDIDATE_V2",
   "date":"2026-10-08",
-  "status":"CANDIDATE__EXECUTABLE_INFORMATION_LOWER_BOUND__ZERO_CREDIT_PENDING_INDEPENDENT_REPLAY",
-  "claim":"Holding fixed a public-compatible GDPval-AA v2.1 Crowd-BT structure, there exist two extensions that agree on the currently disclosed pre-Brain scoring structure and differ only in previously unobserved Brain pairwise judge outcomes, yet reverse Brain-vs-Opus ordering.",
-  "purpose":"Prove that exact scoring reconstruction, judge-quality recovery, or Elo algebra alone cannot decide Brain >= Opus before Brain-specific owner outcomes or a sound stronger target-relation bridge are bound.",
+  "status":"CANDIDATE__ANALYTIC_INFORMATION_LOWER_BOUND__ZERO_CREDIT_PENDING_INDEPENDENT_REPLAY",
+  "supersedes":"PROJECT_BRAIN_GDPVAL_CROWDBT_TWO_WORLD_NONIDENTIFIABILITY_CANDIDATE_V1",
+  "claim":"For any fixed panel qualities eta_j in (1/2,1], Crowd-BT comparison likelihood is strictly monotone in the Brain-minus-Opus rating difference. Two extensions that preserve the same pre-Brain scoring world and differ only in previously unobserved Brain pairwise outcomes can therefore reverse the Brain-vs-Opus ordering.",
+  "purpose":"Delete scoring-reconstruction-only work as a purported closure route. Exact owner-scoring algebra cannot infer unseen Brain judgments. Closure requires Brain-specific owner outcomes or a sound stronger target-relation bridge.",
+  "proof_identity":"q_eta(d)=(1-eta)+(2*eta-1)*sigmoid(d)",
   "runtime":"canonical/runtime/gdpval_crowdbt_two_world_nonidentifiability_v1.py",
   "test":"canonical/tests/test_gdpval_crowdbt_two_world_nonidentifiability_v1.py",
   "hard_nonclaims":[
-    "NO_CLAIM_THE_SYNTHETIC_GRAPH_IS_THE_REAL_AA_GRAPH",
-    "NO_CLAIM_THE_SYNTHETIC_JUDGE_QUALITIES_EQUAL_OWNER_FITS",
+    "NO_CLAIM_THE_CHOSEN_ETA_VALUES_EQUAL_ARTIFICIAL_ANALYSIS_FITTED_VALUES",
+    "NO_CLAIM_EITHER_EXTENSION_IS_THE_REAL_AA_EPOCH",
     "NO_CLAIM_GDPVAL_IS_CLOSED",
     "NO_TERMINAL_CREDIT"
   ],
