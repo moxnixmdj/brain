@@ -31,8 +31,8 @@ def test_no_independent_proof_no_learning(tmp_path):
         "pass": True, "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
         "current_episode_verified": False, "current_episode": episode("e1"),
     }):
-        out = r3.run(independent_authority=TRUSTED_FOR_UNIT_TESTS, 
-            {"task_id": "t"}, repo_root=tmp_path, episode_id="e1", scope_id="s",
+        out = r3.run(
+            {"task_id": "t"}, repo_root=tmp_path, independent_authority=TRUSTED_FOR_UNIT_TESTS, episode_id="e1", scope_id="s",
         )
     assert out["r3_learning"]["episodes_retained"] == 0
     assert out["r3_learning"]["new_verified_skills"] == 0
@@ -107,7 +107,7 @@ def test_stored_episode_reauthenticated_before_solver_execution(tmp_path):
         r3.reconcile(independent_authority=TRUSTED_FOR_UNIT_TESTS, repo_root=tmp_path, state_path=path, new_episode=episode("e1"))
     with patch.object(r3.solver, "run") as execute:
         with pytest.raises(r3.CompoundingError, match="STORED_EPISODE_REAUTH_FAILED"):
-            r3.run(independent_authority=TRUSTED_FOR_UNIT_TESTS, {"task_id": "next"}, repo_root=tmp_path,
+            r3.run({"task_id": "next"}, repo_root=tmp_path, independent_authority=TRUSTED_FOR_UNIT_TESTS,
                    state_path=path, episode_id="e2", scope_id="s")
         execute.assert_not_called()
 
@@ -155,7 +155,7 @@ def test_solver_receives_only_authenticated_prior_episodes(tmp_path):
         with patch.object(r3.solver, "run", return_value={
             "pass": False, "status": "NEED_MORE_EVIDENCE", "attempts": [],
         }) as spy:
-            result = r3.run(independent_authority=TRUSTED_FOR_UNIT_TESTS, {"task_id": "current"}, repo_root=tmp_path,
+            result = r3.run({"task_id": "current"}, repo_root=tmp_path, independent_authority=TRUSTED_FOR_UNIT_TESTS,
                             state_path=path, episode_id="new", scope_id="scopeA")
         assert result["pass"] is False
         ids = [e["episode_id"] for e in spy.call_args.kwargs["prior_verified_episode_records"]]
@@ -176,8 +176,8 @@ def test_configured_episode_verifier_can_admit_only_authenticated_pair(tmp_path)
         with patch.object(r3, "authenticate_episode_verification",
                           return_value={"pass": True, "authenticated_episode": episode("new")}) as authenticator:
             with patch.object(r3, "reauthenticate_record", return_value={"pass": True}):
-                result = r3.run(independent_authority=TRUSTED_FOR_UNIT_TESTS, 
-                    {"task_id": "t"}, repo_root=tmp_path,
+                result = r3.run(
+                    {"task_id": "t"}, repo_root=tmp_path, independent_authority=TRUSTED_FOR_UNIT_TESTS,
                     episode_id="new", scope_id="s",
                     episode_verifier=lambda solved: offered,
                 )
@@ -196,8 +196,8 @@ def test_configured_verifier_rejection_does_not_promote(tmp_path):
     with patch.object(r3.solver, "run", return_value=outcome):
         with patch.object(r3, "authenticate_episode_verification",
                           return_value={"pass": False, "reason": "NO_PROOF"}):
-            result = r3.run(independent_authority=TRUSTED_FOR_UNIT_TESTS, 
-                {"task_id": "t"}, repo_root=tmp_path,
+            result = r3.run(
+                {"task_id": "t"}, repo_root=tmp_path, independent_authority=TRUSTED_FOR_UNIT_TESTS,
                 episode_id="new", scope_id="s",
                 episode_verifier=lambda solved: {"receipt": {}, "verification": {}},
             )
