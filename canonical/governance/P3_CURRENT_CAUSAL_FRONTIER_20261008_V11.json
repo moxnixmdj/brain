@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_P3_CURRENT_CAUSAL_FRONTIER_20261008_V11",
+  "date": "2026-10-08",
+  "status": "ACTIVE_POST_BOUNDED_BINARY_OBJECTIVE_ROLE_RELEVANCE__GENERAL_P3_OPEN__ZERO_TERMINAL_CREDIT",
+  "predecessor": {
+    "path": "canonical/governance/P3_CURRENT_CAUSAL_FRONTIER_20261008_V10.json",
+    "git_blob_sha": "b1d619eb12d2ab971069aa6ddcddf59429a81bbb"
+  },
+  "behavioral_contract": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+  "contract_reached_scope": [
+    "PROFESSIONAL_KNOWLEDGE_WORK",
+    "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+    "AGENTIC_SCIENTIFIC_RESEARCH",
+    "FINANCIAL_ANALYSIS",
+    "COMMUNICATION_AND_SYNTHESIS"
+  ],
+  "current_front_door": "canonical/runtime/p3_real_context_v3_admission_v6.py",
+  "newly_verified_relevance_subregion": {
+    "activation": {
+      "path": "canonical/governance/P3_BOUNDED_OBJECTIVE_ROLE_RELEVANCE_ACTIVATION_20261008_V1.json"
+    },
+    "semantics": "EXPLICIT_BINARY_NUMERIC_COMPARISON__EXACTLY_TWO_OPTIONAL_CLAIMS__UNIQUE_EXACT_VERIFIED_EVIDENCE_ROLE_ANCHORS",
+    "optional_relevance_complete": true,
+    "presentation_organization_complete": false,
+    "policy_adequacy_complete": false
+  },
+  "causal_result": {
+    "general_common_policy_without_relevance_information_proved": false,
+    "general_optional_relevance_closed": false,
+    "lexical_bm25_promoted_to_semantic_relevance": false,
+    "bound_binary_role_subregion_relevance_closed": true,
+    "next_policy_changing_unknown_for_bound_subregion": "PRESENTATION_ORGANIZATION_ADEQUACY_WITHOUT_EXPLICIT_OBJECTIVE_WEIGHTS",
+    "next_policy_changing_unknown_outside_bound_subregion": "OPTIONAL_RELEVANCE_OR_STRONGER_COMMON_POLICY_CERTIFICATE"
+  },
+  "current_frontier_order": [
+    "PRESENTATION_ORGANIZATION_ADEQUACY_FOR_BOUND_BINARY_OBJECTIVE_ROLE_SUBREGION",
+    "OPTIONAL_RELEVANCE_WITHOUT_EXPLICIT_OBJECTIVE_WEIGHTS_OUTSIDE_BOUND_BINARY_ROLE_SUBREGION",
+    "GENERAL_CONFLICT_AND_NONFACTUAL_UNCERTAINTY_REALIZATION",
+    "UNMODELED_AUDIENCE_MEANING_AND_OPEN_AUDIENCE_ADAPTATION",
+    "UPSTREAM_SOURCE_AUTHORIZATION_OR_SEMANTIC_EXTRACTION",
+    "R3_TEMPORAL_CAUSAL_AND_OTHER_RELATIONAL_CLAIMS__ONLY_WHEN_BOUND_REACHED",
+    "UNDECLARED_PARAPHRASE_OR_LOGICAL_ENTAILMENT__ONLY_WHEN_BOUND_REACHED",
+    "GENERAL_STRUCTURED_OR_MULTIMODAL_EVIDENCE_AND_OUTPUT_FORMS"
+  ],
+  "next_action": "FOR_BOUND_BINARY_ROLE_CONTEXTS__TEST_ONE_OBJECTIVE_ROLE_PRESERVING_COMMON_ORGANIZATION_POLICY_BEFORE_ACQUIRING_ANY_MORE_SEMANTICS__FOR_OTHER_CONTEXTS_REUSE_ONLY_SOUND_OBJECTIVE_RELEVANCE_CERTIFICATES__NEVER_PROMOTE_LEXICAL_BM25_SCORE_TO_GENERAL_SEMANTIC_RELEVANCE",
+  "whole_p3_closed": false,
+  "u_empty_proved": false,
+  "terminal": false,
+  "terminal_credit_delta": 0
+}
