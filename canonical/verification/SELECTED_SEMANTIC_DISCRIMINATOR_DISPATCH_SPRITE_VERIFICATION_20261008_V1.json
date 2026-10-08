@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_SEMANTIC_DISCRIMINATOR_DISPATCH_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__15_OF_15_TESTS__SCOPED_SOURCE_ALIGNED_POLICY_DISPATCH__ZERO_TERMINAL_CREDIT",
+  "carrier": {
+    "provider": "SPRITES",
+    "name": "brain-root3-current-byte-replay-20261007-v1",
+    "id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/selected_semantic_truth_replay_v1"
+  },
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/selected_semantic_discriminator_dispatch_v1.py",
+      "git_blob_sha": "59b4c27870689e37fdf9af072c116e282be8daff"
+    },
+    "tests": {
+      "path": "canonical/tests/test_selected_semantic_discriminator_dispatch_v1.py",
+      "git_blob_sha": "746206302b6027507e269238f0f9ac709a666847"
+    },
+    "trusted_semantic_truth_checker": {
+      "path": "canonical/runtime/selected_semantic_truth_certificate_v1.py",
+      "git_blob_sha": "8e6c03547460fc2a27bc18147a873639be678210"
+    }
+  },
+  "test_command": "python -m pytest -q canonical/tests/test_selected_semantic_discriminator_dispatch_v1.py canonical/tests/test_selected_semantic_truth_certificate_v1.py",
+  "verification": {
+    "pass": true,
+    "passed": 15,
+    "total": 15,
+    "new_adapter_tests": 10,
+    "prior_truth_checker_regression_tests": 5
+  },
+  "effects": [
+    "DETERMINISTIC_TWO_HYPOTHESIS_CHECK_RECOMPUTES_SELECTED_BOOLEAN_FROM_AUTHENTICATED_SOURCE_ALIGNED_CHECKER",
+    "EXACT_TRUE_FALSE_BRANCH_POLICY_ID_SELECTED_WITH_CERTIFICATE_AND_CONTENT_DIGEST",
+    "REJECTS_CALLER_SUPPLIED_TRUTH_AND_UNSUPPORTED_SEMANTIC_FORMS",
+    "OUT_OF_FRAGMENT_AND_MALFORMED_FACTS_FAIL_CLOSED",
+    "REPOSITORY_RUNNER_WRITES_RECEIPT_WITHOUT_TERMINAL_CREDIT",
+    "RUNNER_BLOCKS_PATH_ESCAPES_AND_INPUT_OVERWRITE"
+  ],
+  "scope_boundary": "EXACT_VERIFIED_DEFINED_TERM_RAW_TYPED_UNLESS_FRAGMENT_ONLY__NO_GENERAL_NL_ENTAILMENT",
+  "hard_nonclaims": [
+    "NO_SOURCE_AUTHORIZATION_CREDIT",
+    "NO_POLICY_ADEQUACY",
+    "NO_U_SUBTRACTION",
+    "NO_ABC_CLOSED",
+    "NO_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
