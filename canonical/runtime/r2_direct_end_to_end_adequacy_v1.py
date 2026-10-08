@@ -182,6 +182,29 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "preflight_execution_authority": False,
         }
 
+    typed_json_transform = typed_json_transform_adequacy.preflight(request)
+    if typed_json_transform.get("matched") is True:
+        if typed_json_transform.get("status") == "FAIL_CLOSED":
+            return {
+                **_base("FAIL_CLOSED", passed=False),
+                "matched": True,
+                "route_id": TYPED_JSON_TRANSFORM_ROUTE_ID,
+                "reason": typed_json_transform.get("reason"),
+            }
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": TYPED_JSON_TRANSFORM_ROUTE_ID,
+            "capability_id": typed_json_transform.get("capability_id"),
+            "policy_id": typed_json_transform.get("policy_id"),
+            "goal_sha256": typed_json_transform.get("goal_sha256"),
+            "spec_path": typed_json_transform.get("spec_path"),
+            "input_path": typed_json_transform.get("input_path"),
+            "output_path": typed_json_transform.get("output_path"),
+            "semantic_scope": ROUTES[TYPED_JSON_TRANSFORM_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
     visual_code = visual_code_adequacy.preflight(request)
     if visual_code.get("matched") is True:
         if visual_code.get("status") == "FAIL_CLOSED":
