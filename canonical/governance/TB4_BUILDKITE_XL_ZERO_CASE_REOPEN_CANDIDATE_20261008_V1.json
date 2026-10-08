@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_BUILDKITE_XL_ZERO_CASE_REOPEN_CANDIDATE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_ONLY__PROVIDER_ACCESS_FACT_OPEN__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "objective": "Test exactly one information-positive fact: whether the existing Buildkite All Access Trial organization can receive zero-cost access to LINUX_AMD64_16X64, thereby reopening terminal-bench/live-database-cutover without executing any TB4 acceptance case.",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "frozen_authority": {
+    "minimum_recovery_cut": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+    "current_resource_reopen": "canonical/governance/TB4_BUILDKITE_RESOURCE_REOPEN_BINDING_20261006_V1.json",
+    "current_creditable_tasks": 36,
+    "current_minimum_recovered_tasks": 8,
+    "current_projected_ceiling_successes": 220,
+    "required_successes": 220,
+    "trials_per_task": 5
+  },
+  "candidate_ninth_task": {
+    "task": "terminal-bench/live-database-cutover",
+    "declared_cpus": 16,
+    "declared_memory_mb": 16384,
+    "declared_storage_mb": 20480,
+    "declared_gpus": 0,
+    "selection_basis": "RESOURCE_METADATA_ONLY__NO_TASK_INSTRUCTION_SOLUTION_OR_VERIFIER_CONTENT"
+  },
+  "provider_primary_source_facts": [
+    {
+      "url": "https://buildkite.com/docs/agent/buildkite-hosted/linux",
+      "fact": "LINUX_AMD64_16X64_EXISTS_AS_EXTRA_LARGE_WITH_16_VCPU_64_GB_MEMORY_284_GB_DISK__XL_IS_ENTERPRISE_GATED_AND_SUPPORT_CAN_BE_CONTACTED_TO_REQUEST_ACCESS"
+    },
+    {
+      "url": "https://buildkite.com/docs/platform/limits",
+      "fact": "ALL_ACCESS_TRIAL_DEFAULT_LINUX_CONCURRENCY_IS_24_VCPU__ALL_ACCESS_TRIAL_LIMITS_CAN_BE_INCREASED_ON_REQUEST__4000_LINUX_VCPU_MINUTES_INCLUDED"
+    },
+    {
+      "url": "https://buildkite.com/pricing/",
+      "fact": "ALL_ACCESS_TRIAL_REQUIRES_NO_CREDIT_CARD_AND_INCLUDES_A_DEDICATED_DEVELOPER_SUCCESS_ENGINEER"
+    }
+  ],
+  "conditional_score_math": {
+    "if_xl_access_is_zero_cost_and_protocol_admissible": true,
+    "creditable_tasks": 45,
+    "maximum_success_slots": 225,
+    "required_success_slots": 220,
+    "failure_slack_slots": 5,
+    "required_realized_success_fraction_over_225": 0.9777777777777777,
+    "proof": "(36+8+1)*5=225__AND__225-220=5"
+  },
+  "single_missing_information_fact": "EXISTING_ALL_ACCESS_TRIAL_CAN_USE_LINUX_AMD64_16X64_AT_ZERO_INCREMENTAL_SPEND_WITH_INCLUDED_TRIAL_VCPU_MINUTES_AND_HARD_STOP_BEFORE_ANY_CHARGE",
+  "decision_rule": {
+    "if_true": [
+      "RUN_ZERO_CASE_XL_RESOURCE_PREFLIGHT_ONLY",
+      "VERIFY_USABLE_MEMORY_DISK_DOCKER_AND_16_CPU_CONTAINER_LIMIT",
+      "VERIFY_PROTOCOL_EQUIVALENCE_FOR_LIVE_DATABASE_CUTOVER_WITHOUT_TASK_CONTENT_EXPOSURE",
+      "RECOMPILE_TB4_ATTAINABILITY_TO_225_CEILING",
+      "DO_NOT_AWARD_SCORE_CREDIT_FROM_ROUTE_BINDING"
+    ],
+    "if_false": [
+      "KILL_BUILDKITE_XL_CPU_SLACK_ROUTE",
+      "PRESERVE_EXISTING_220_CEILING",
+      "DO_NOT_REOPEN_GENERIC_CPU_CARRIER_SEARCH_WITHOUT_NEW_EVIDENCE",
+      "MOVE_ONLY_TO_GPU_SLACK_OR_STRONGER_SCOPE_COMPLETE_CODING_DOMINANCE"
+    ]
+  },
+  "hard_rules": [
+    "NO_TB4_ACCEPTANCE_CASE_EXECUTION_FROM_THIS CANDIDATE",
+    "NO_CLAIM_XL_IS_ENABLED_BEFORE PROVIDER_OR_ACCOUNT RECEIPT",
+    "NO_PAID_ENTERPRISE_ACTIVATION",
+    "NO_CREDIT_CARD",
+    "NO_AUTOMATIC_PAID_OVERAGE",
+    "ZERO_INCREMENTAL_SPEND",
+    "NO_SCORE_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT",
+    "PROVIDER_REPLY_OR_ACCOUNT OBSERVATION MUST BE CONTENT-ADDRESSED BEFORE ANY RECOMPILE"
+  ],
+  "accounting": {
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
