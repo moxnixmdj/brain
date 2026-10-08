@@ -264,7 +264,11 @@ def run(
         if mode not in ENGINE_DESCRIPTORS:
             raise CognitiveFabricError("MODE_INVALID:" + mode)
 
-        def _repair_pending(work: Mapping[str, Any]) -> Mapping[str, Any]:
+        def _repair_pending(
+            work: Mapping[str, Any],
+            *,
+            autonomous: bool = True,
+        ) -> Mapping[str, Any]:
             payload_row = work.get("payload")
             if not isinstance(payload_row, Mapping):
                 raise CognitiveFabricError("R3_REPAIR_WORK_PAYLOAD_INVALID")
@@ -275,7 +279,7 @@ def run(
                     "components": list(options.get("repair_components") or []),
                     "solver_kwargs": deepcopy(dict(options.get("repair_solver_kwargs") or {})),
                     "learn": True,
-                    "autonomous": True,
+                    "autonomous": bool(autonomous),
                 },
                 repo_root=ROOT,
                 state_path=options.get("state_path"),
@@ -524,7 +528,9 @@ def run(
                 episode_verification_provider=episode_verification_provider,
                 skill_verification_provider=skill_verification_provider,
                 success_episode_adapter_provider=success_episode_adapter_provider,
-                failure_repair_provider=_repair_pending,
+                failure_repair_provider=(
+                    lambda work: _repair_pending(work, autonomous=False)
+                ),
                 max_actions=int(options.get("max_improvement_actions", 4)),
             )
         elif mode == "LEARNING_EPISODE":
