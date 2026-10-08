@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V16_2165_FRONTIER",
+  "date": "2026-10-08",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "status": "PASS_EXACT_GIT_BLOB_DUAL_CARRIER_VERIFICATION",
+  "source": {
+    "path": "canonical/runtime/bytes_v16_single_artifact_compact.py",
+    "git_blob_sha": "7ce57c337436a93627fa3ab5234345305c8e3f06",
+    "raw_bytes": 4577,
+    "raw_sha256": "bd3ff160221a96a13c02229e3cb2980b2319734da81146c960a8702ca0b09e08"
+  },
+  "encoding": {
+    "format": "RAW_LZMA1",
+    "dict_size": 4096,
+    "lc": 0,
+    "lp": 0,
+    "pb": 0,
+    "mode": "NORMAL",
+    "match_finder": "BT2",
+    "nice_len": 64,
+    "payload_bytes": 2165,
+    "payload_sha256": "17ffe3c45cc3fcb4f39cb52f0c87174fb536f32c2b7caef73cc69d03a0b218f5",
+    "tested_configurations": 2700,
+    "roundtrip_exact": true
+  },
+  "verification": {
+    "independent_sprite": {
+      "name": "brain-root3-current-byte-replay-20261007-v1",
+      "id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "exact_git_blob_check": "PASS_932_EDGES",
+      "encoding_hash_roundtrip": "PASS"
+    },
+    "h100_discovery_carrier": {
+      "name": "h100-real-image-v1",
+      "candidate_raw_sha256": "bd3ff160221a96a13c02229e3cb2980b2319734da81146c960a8702ca0b09e08",
+      "exact_source_identity_to_git_blob": true,
+      "closed_check": "PASS",
+      "exact_equation_basis_vs_v15": true,
+      "frozen_regressions": "27_OF_27_PASS",
+      "pointwise_programs": 820,
+      "scalar_cases": 210740,
+      "signature_classes_candidate": 200,
+      "signature_classes_v15": 200,
+      "signature_partition_bijection": true
+    }
+  },
+  "comparison": {
+    "v15_bytes": 2549,
+    "v16_bytes": 2165,
+    "saved_bytes": 384,
+    "saved_percent": 15.064731267163594
+  },
+  "limits": [
+    "PYTHON_RUNTIME_NOT_COUNTED",
+    "LZMA_DECODER_NOT_COUNTED",
+    "FINITE_FROZEN_DSL_ONLY",
+    "NO_GLOBAL_MINIMUM_DESCRIPTION_PROOF",
+    "ZERO_TERMINAL_GOAL_CREDIT"
+  ]
+}
