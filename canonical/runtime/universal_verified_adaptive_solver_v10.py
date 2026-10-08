@@ -275,6 +275,7 @@ def run(
     prior_verified_episode_records: Sequence[Mapping[str, Any]] = (),
     skill_verification_binding: Mapping[str, Any] | None = None,
     resume_binding: Mapping[str, Any] | None = None,
+    preferred_capability_order: Sequence[str] = (),
 ) -> dict[str, Any]:
     try:
         if not isinstance(problem, Mapping):
@@ -293,6 +294,18 @@ def run(
             prior_verified_episode_records, (str, bytes)
         ):
             return _fail("PRIOR_VERIFIED_EPISODE_RECORDS_INVALID")
+        if not isinstance(preferred_capability_order, Sequence) or isinstance(
+            preferred_capability_order, (str, bytes)
+        ):
+            return _fail("PREFERRED_CAPABILITY_ORDER_INVALID")
+        preferred: list[str] = []
+        for raw_cid in preferred_capability_order:
+            cid = v4._tok(raw_cid, "PREFERRED_CAPABILITY_ID")
+            if cid not in caps:
+                return _fail("PREFERRED_CAPABILITY_UNKNOWN:" + cid)
+            if cid in preferred:
+                return _fail("PREFERRED_CAPABILITY_DUPLICATE:" + cid)
+            preferred.append(cid)
         episode_id = v4._tok(episode_id, "EPISODE_ID")
         scope_id = v4._tok(scope_id, "SCOPE_ID")
 
@@ -349,6 +362,8 @@ def run(
             value_capsule = initialize_value_capsule(problem)
         pending: list[dict[str, Any]] = []
         cycle_offset = len(trace)
+        preferred_index = 0
+        preferred_used: list[str] = []
 
         max_cycles = int(problem.get("max_solver_cycles", 256))
         if max_cycles < 1 or max_cycles > 10000:
@@ -382,6 +397,8 @@ def run(
                         "fact_capsule_head_hash": resume_auth["fact_capsule_head_hash"],
                         "value_capsule_head_hash": resume_auth["value_capsule_head_hash"],
                     }
+                finished["preferred_capability_order"] = list(preferred)
+                finished["preferred_capability_ids_used"] = list(preferred_used)
                 return finished
 
             planning_problem = v4._filtered_problem(problem, current, excluded)
@@ -394,6 +411,28 @@ def run(
             if not plan.get("plan"):
                 break
             cid = str(plan["plan"][0])
+
+            # A verified learned skill may provide a preferred route order. This
+            # changes selection only, never verification authority: the chosen
+            # capability must still be a declared capability in this exact
+            # problem, have its prerequisites currently satisfied, and pass the
+            # ordinary V10 execution and effect-semantics checks below.
+            while preferred_index < len(preferred):
+                preferred_cid = preferred[preferred_index]
+                preferred_cap = caps[preferred_cid]
+                preferred_provides = set(
+                    v4._tokens(preferred_cap.get("provides", []), "PREFERRED_PROVIDES")
+                )
+                if preferred_cid in excluded or preferred_provides.issubset(set(current)):
+                    preferred_index += 1
+                    continue
+                preferred_requires = set(
+                    v4._tokens(preferred_cap.get("requires", []), "PREFERRED_REQUIRES")
+                )
+                if preferred_requires.issubset(set(current)):
+                    cid = preferred_cid
+                break
+
             cap = caps[cid]
 
             resolved_action = resolve_effect_results(
@@ -559,6 +598,9 @@ def run(
                 current = sorted(set(current) | set(row["new_verified_facts"]))
                 trace.append(row)
                 deferred.discard(cid)
+                if preferred_index < len(preferred) and cid == preferred[preferred_index]:
+                    preferred_used.append(cid)
+                    preferred_index += 1
                 continue
 
             if isinstance(bound_carrier, Mapping) and bound_carrier.get("effect_may_have_occurred") is True:
