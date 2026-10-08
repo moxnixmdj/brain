@@ -159,6 +159,52 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "unified-live-brain",
         )
 
+    @patch("canonical.runtime.live_brain_runtime_v1._observe_runtime_outcome")
+    @patch("canonical.runtime.live_brain_runtime_v1._decision_run")
+    def test_direct_r2_success_is_observed_by_r3(self, decision, observe):
+        verified = {
+            "pass": True,
+            "status": "PASS__GOAL_BOUND_AUTHENTICATED_SPECIALIST_POLICY_REALIZED_AND_ACCEPTANCE_VERIFIED",
+            "task_id": "d-direct",
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "proof_carrying_outcome": {
+                "pass": True,
+                "status": "PASS__PROOF_CARRYING_OUTCOME_OBLIGATION_COMPLETE",
+            },
+        }
+        decision.return_value = verified
+        observe.return_value = {
+            "pass": True,
+            "status": "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
+            "proof_available": True,
+        }
+
+        out = brain.run({
+            "task_id": "d-direct",
+            "goal": "return the verified direct result",
+            "learn": True,
+        })
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["learning"]["status"],
+            "SUCCESS_OBSERVED__VERIFIABLE_EPISODE_ADAPTER_QUEUED",
+        )
+        observe.assert_called_once()
+        args, kwargs = observe.call_args
+        self.assertEqual(args[0], verified)
+        self.assertTrue(kwargs["learn"])
+        self.assertEqual(
+            kwargs["surface"],
+            "DECISION:R2_GENERAL_ADEQUATE_DECISION",
+        )
+        self.assertEqual(kwargs["retry_context"]["mode"], "decision")
+        self.assertEqual(
+            kwargs["retry_context"]["request"]["task_id"],
+            "d-direct",
+        )
+
     @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
     def test_compiled_bound_route_is_behind_same_front_door(self, bound):
         bound.return_value = {"pass": True, "status": "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED"}
