@@ -8,6 +8,8 @@ silently turning a TODO into a capability claim.
 from __future__ import annotations
 
 from copy import deepcopy
+from hashlib import sha256
+import json
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
@@ -58,6 +60,127 @@ def _resolve_work(
     row["resolved_by"] = str(resolved_by or "").strip() or "R3_QUEUE_DRIVER"
     learning._refresh_stats(state)
     learning._write_state(state, state_path)
+
+
+SUCCESS_LEARNING_FRONTIER_PATHS = (
+    "canonical/runtime/r3_bound_success_adapter_v1.py",
+    "canonical/runtime/r3_independent_learning_verifier_v1.py",
+    "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
+)
+
+
+def _owned_success_learning_frontier_sha256(
+    *,
+    repo_root: str | Path = ROOT,
+) -> str:
+    """Digest the exact owned code that can adapt + verify retained successes."""
+    root = Path(repo_root).resolve(strict=True)
+    rows: list[dict[str, str]] = []
+    for relative in SUCCESS_LEARNING_FRONTIER_PATHS:
+        target = (root / relative).resolve(strict=True)
+        try:
+            target.relative_to(root)
+        except ValueError as exc:
+            raise ImprovementDriverError(
+                "SUCCESS_LEARNING_FRONTIER_PATH_ESCAPES_REPOSITORY"
+            ) from exc
+        rows.append({
+            "path": relative,
+            "sha256": sha256(target.read_bytes()).hexdigest(),
+        })
+    raw = json.dumps(
+        rows,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    return sha256(raw).hexdigest()
+
+
+def _park_success_work(
+    work: Mapping[str, Any],
+    *,
+    observation_id: str,
+    frontier_sha256: str,
+    state_path: str | Path,
+) -> None:
+    """Park a success only relative to the exact currently owned verifier frontier.
+
+    PARKED is deliberately not RESOLVED. New evidence reopens it through the normal
+    enqueue path; a verifier-frontier change or an injected external authority also
+    reactivates it automatically.
+    """
+    wid = str(work.get("work_id") or "").strip()
+    if not wid:
+        raise ImprovementDriverError("SUCCESS_WORK_ID_MISSING")
+    state = learning.load_state(state_path)
+    queue = state.get("improvement_queue", {})
+    row = queue.get(wid) if isinstance(queue, Mapping) else None
+    if not isinstance(row, dict) or row.get("status") != "PENDING":
+        raise ImprovementDriverError("SUCCESS_WORK_NOT_PENDING:" + wid)
+    row["status"] = "PARKED"
+    row["parked_reason"] = "NO_ADMISSIBLE_CURRENT_OWNED_VERIFICATION_PATH"
+    row["verification_frontier_sha256"] = frontier_sha256
+    row["parked_observations"] = int(row.get("observations", 0))
+
+    observations = state.get("observations", {})
+    observation = observations.get(observation_id) if isinstance(observations, Mapping) else None
+    if isinstance(observation, dict):
+        observation["learning_disposition"] = (
+            "PROVED_NONLEARNABLE_FROM_CURRENT_RETAINED_EVIDENCE"
+        )
+        observation["learning_disposition_reason"] = (
+            "OWNED_SUCCESS_ADAPTER_RETURNED_NO_CANDIDATE"
+        )
+        observation["learning_disposition_frontier_sha256"] = frontier_sha256
+        observation["permanent_nonlearnability_claimed"] = False
+
+    learning._refresh_stats(state)
+    learning._write_state(state, state_path)
+
+
+def _reactivate_parked_successes(
+    *,
+    state_path: str | Path,
+    repo_root: str | Path,
+    external_authority_available: bool,
+) -> dict[str, Any]:
+    """Reopen parked success work when its evidence/verifier boundary changes."""
+    frontier = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    state = learning.load_state(state_path)
+    queue = state.get("improvement_queue", {})
+    reopened: list[str] = []
+    if isinstance(queue, Mapping):
+        for wid, raw in queue.items():
+            if (
+                not isinstance(raw, dict)
+                or raw.get("status") != "PARKED"
+                or raw.get("kind") != "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE"
+            ):
+                continue
+            if (
+                external_authority_available
+                or raw.get("verification_frontier_sha256") != frontier
+            ):
+                raw["status"] = "PENDING"
+                raw["reopen_count"] = int(raw.get("reopen_count", 0)) + 1
+                raw["reactivated_by"] = (
+                    "EXTERNAL_VERIFICATION_AUTHORITY_AVAILABLE"
+                    if external_authority_available
+                    else "OWNED_VERIFICATION_FRONTIER_CHANGED"
+                )
+                raw["previous_verification_frontier_sha256"] = raw.get(
+                    "verification_frontier_sha256"
+                )
+                raw["verification_frontier_sha256"] = frontier
+                reopened.append(str(wid))
+    if reopened:
+        learning._refresh_stats(state)
+        learning._write_state(state, state_path)
+    return {
+        "frontier_sha256": frontier,
+        "reopened_work_ids": sorted(reopened),
+    }
 
 
 def _episode_pools(
@@ -509,6 +632,16 @@ def advance_once(
     failure_repair_provider: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Execute the highest-priority *actionable* pending improvement exactly once."""
+    external_episode_verifier = episode_verification_provider is not None
+    external_success_adapter = success_episode_adapter_provider is not None
+    reactivation = _reactivate_parked_successes(
+        state_path=state_path,
+        repo_root=repo_root,
+        external_authority_available=(
+            external_episode_verifier or external_success_adapter
+        ),
+    )
+
     # Missing host providers are not treated as missing capability when the Brain
     # owns a proof-producing worker for the admitted scope. External providers
     # still override these defaults; the existing authenticators remain the sole
@@ -669,6 +802,42 @@ def advance_once(
                     episode_verification_provider=episode_verification_provider,
                     skill_verification_provider=skill_verification_provider,
                 )
+                if (
+                    out.get("status")
+                    == "IMPROVEMENT_PROVIDER_RETURNED_NO_SUCCESS_ADAPTATION"
+                    and not external_success_adapter
+                    and not external_episode_verifier
+                ):
+                    payload = (
+                        work.get("payload")
+                        if isinstance(work.get("payload"), Mapping)
+                        else {}
+                    )
+                    observation_id = str(payload.get("observation_id") or "").strip()
+                    _park_success_work(
+                        work,
+                        observation_id=observation_id,
+                        frontier_sha256=reactivation["frontier_sha256"],
+                        state_path=state_path,
+                    )
+                    return {
+                        "schema": SCHEMA,
+                        "status": (
+                            "IMPROVEMENT_PARKED__"
+                            "PROVED_NONLEARNABLE_FROM_CURRENT_RETAINED_EVIDENCE"
+                        ),
+                        "pass": True,
+                        "progress": False,
+                        "disposition_recorded": True,
+                        "work_id": wid,
+                        "observation_id": observation_id,
+                        "verification_frontier_sha256": reactivation[
+                            "frontier_sha256"
+                        ],
+                        "permanent_nonlearnability_claimed": False,
+                        "blockers_skipped": blockers,
+                        "terminal_authority": False,
+                    }
                 failed = out.get("pass") is not True
                 if failed:
                     _record_failed_action_attempt(wid, out, state_path=state_path)
@@ -789,10 +958,13 @@ def drain(
         )
         actions.append(result)
         if result.get("progress") is not True:
-            if result.get("attempt_backoff_recorded") is True:
-                # The failed attempt is now suppressed until its evidence
-                # observation count changes. Continue immediately so a rejected
-                # verifier/adapter item cannot starve unrelated compounding work.
+            if (
+                result.get("attempt_backoff_recorded") is True
+                or result.get("disposition_recorded") is True
+            ):
+                # Failed attempts back off until evidence changes. A parked success
+                # is terminal only for the exact current retained evidence +
+                # verifier frontier. Neither may starve unrelated compounding work.
                 continue
             break
     final_state = learning.load_state(state_path)
