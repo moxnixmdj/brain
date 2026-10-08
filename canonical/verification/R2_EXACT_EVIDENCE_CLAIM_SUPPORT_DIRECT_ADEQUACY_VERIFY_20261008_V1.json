@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_R2_EXACT_EVIDENCE_CLAIM_SUPPORT_DIRECT_ADEQUACY_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_GROUNDED_EVIDENCE_CLAIM_SUPPORT__BRANCH_REGRESSION_24_OF_24__ACTUAL_PRODUCER_DIRECT_REPLAY_PASS__TAMPER_NEGATIVE_PASS__ZERO_CREDIT",
+  "subject": {
+    "family_runtime": {
+      "path": "canonical/runtime/r2_exact_evidence_claim_support_direct_adequacy_v1.py",
+      "git_blob_sha": "1ee84b6e1fd4dad3296d034315936e21b2d6c658"
+    },
+    "direct_router": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "6eeab02898398e2f509c971e194722bf096ba546"
+    },
+    "family_tests": {
+      "path": "canonical/tests/test_r2_exact_evidence_claim_support_direct_adequacy_v1.py",
+      "git_blob_sha": "03516165e75ea125cd0fdcd3844b666f95760166"
+    },
+    "integration_tests": {
+      "path": "canonical/tests/test_r2_exact_evidence_claim_support_direct_integration_v1.py",
+      "git_blob_sha": "ee05028dbe8e9d45e7ae75f4e0df2e9ca163bb0a"
+    }
+  },
+  "admitted_semantics": {
+    "input": "ONE_REPOSITORY_LOCAL_VERIFIED_GENERIC_V2_GROUNDED_EVIDENCE_EXTRACTION",
+    "claim_binding": "EXACT_QUOTED_CLAIM_EMBEDDED_IN_RAW_GOAL",
+    "producer_capability_id": "evidence.claim_relation.generic_units.stdlib",
+    "producer_adapter": "generic_evidence_claim_relation",
+    "producer_mode": "VERBATIM_SUPPORT",
+    "independent_acceptance": "RECOMPUTE_EVIDENCE_UNIT_HASH_OFFSET_BINDINGS_AND_EXACT_NORMALIZED_SUBSTRING_MATCH_SET",
+    "positive_goal_only": true,
+    "transactional_output": true
+  },
+  "focused_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "family_plus_integration_plus_direct_router": "24_OF_24_PASS",
+    "tampered_evidence_hash_negative": "PASS_FAIL_CLOSED",
+    "absent_claim_preflight_negative": "PASS_FAIL_CLOSED",
+    "producer_match_mismatch_negative": "PASS_ROLLBACK"
+  },
+  "actual_producer_direct_replay": {
+    "status": "PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED",
+    "actual_goal_satisfaction_verified": true,
+    "producer_status": "EXACT_TEXT_SUPPORT_VERIFIED",
+    "independent_match_count": 1,
+    "evidence_fixture_class": "INTEGRITY_VALID_SYNTHETIC_GENERIC_V2_EXTRACTION",
+    "live_external_source_claimed": false
+  },
+  "inherited_live_producer_qualification": {
+    "capability_receipt": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
+    "exact_producer_blob": "d66a7eb30774f66160b698d8082947776888293d",
+    "public_run_id": 36682488104,
+    "independent_oracle": "PASS",
+    "fresh_live_domains": [
+      "sqlite.org",
+      "rfc-editor.org"
+    ],
+    "negative_controls": [
+      "PARAPHRASE_REJECTION",
+      "TAMPERED_GENERIC_V2_UNIT_REJECTION"
+    ]
+  },
+  "proved": [
+    "RAW_GOAL_EXACTLY_BINDS_THE_QUOTED_CLAIM_EXTRACTION_AND_OUTPUT",
+    "SUCCESS_REQUIRES_CLAIM_ACTUALLY_PRESENT_IN_ALREADY_GROUNDED_EVIDENCE",
+    "EVIDENCE_UNIT_TEXT_HASH_PAGE_HASH_VISIBLE_HASH_OFFSETS_AND_UNIT_ID_BINDINGS_ARE_INDEPENDENTLY_RECOMPUTED",
+    "PRODUCER_AND_INDEPENDENT_VERIFIER_MUST_RETURN_THE_SAME_MATCHING_EVIDENCE_UNIT_SET",
+    "EXTRACTION_BYTES_MUST_REMAIN_IMMUTABLE",
+    "MATCHED_FAILURE_ROLLS_BACK_THE_DECLARED_OUTPUT",
+    "MATCHED_FAILURE_CANNOT_FALL_THROUGH_TO_ANOTHER_DIRECT_ROUTE"
+  ],
+  "hard_nonclaims": [
+    "NO_PARAPHRASE_OR_SEMANTIC_ENTAILMENT_AUTHORITY",
+    "NO_FACTUAL_CORRECTNESS_CAUSALITY_EVIDENCE_QUALITY_SUFFICIENCY_OR_SOURCE_INDEPENDENCE_AUTHORITY",
+    "NO_CLAIM_THE_FRESH_DIRECT_REPLAY_USED_A_LIVE_EXTERNAL_SOURCE",
+    "NO_CLAIM_OPEN_WORLD_R2_COVERAGE_IS_COMPLETE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
