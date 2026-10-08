@@ -243,5 +243,11 @@ class R3IndependentLearningVerifierV1Tests(unittest.TestCase):
             self.assertIsNone(out)
 
 
+# Keep the effectful readback cases inside the already-wired R3 verifier suite.
+from canonical.tests.test_r3_effectful_learning_readback_v1 import (
+    R3EffectfulLearningReadbackV1Tests,
+)
+
+
 if __name__ == "__main__":
     unittest.main()
