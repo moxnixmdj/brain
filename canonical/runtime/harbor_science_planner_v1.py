@@ -23,18 +23,27 @@ MAX_RESPONSE_BYTES = 100_000
 MAX_TOOL_COMPLETION_TOKENS = 4096
 MIN_TIMEOUT_S = 300
 MAX_TIMEOUT_S = 900
-PROMPT_BYTES_PER_TOKEN_ESTIMATE = 4
-PREFILL_TOKENS_PER_SECOND_FLOOR = 15
+REQUEST_BYTES_PER_TOKEN_ESTIMATE = 2
+PREFILL_TOKENS_PER_SECOND_FLOOR = 10
 GENERATION_AND_TRANSPORT_MARGIN_S = 180
 
 
-def effective_timeout_s(prompt: str, requested_timeout_s: int) -> int:
-    if (not isinstance(requested_timeout_s, int) or isinstance(requested_timeout_s, bool) or not 1 <= requested_timeout_s <= MAX_TIMEOUT_S):
+def effective_timeout_s(request_body: bytes, requested_timeout_s: int) -> int:
+    if (
+        not isinstance(requested_timeout_s, int)
+        or isinstance(requested_timeout_s, bool)
+        or not 1 <= requested_timeout_s <= MAX_TIMEOUT_S
+    ):
         raise SciencePlannerError("SCIENCE_PLANNER_TIMEOUT_INVALID")
-    prompt_bytes = len(str(prompt or "").encode("utf-8"))
-    estimated_prompt_tokens = max(1, math.ceil(prompt_bytes / PROMPT_BYTES_PER_TOKEN_ESTIMATE))
-    prompt_floor = math.ceil(estimated_prompt_tokens / PREFILL_TOKENS_PER_SECOND_FLOOR)
-    required = prompt_floor + GENERATION_AND_TRANSPORT_MARGIN_S
+    if not isinstance(request_body, (bytes, bytearray)) or not request_body:
+        raise SciencePlannerError("SCIENCE_PLANNER_REQUEST_BODY_REQUIRED")
+    estimated_request_tokens = max(
+        1, math.ceil(len(request_body) / REQUEST_BYTES_PER_TOKEN_ESTIMATE)
+    )
+    prefill_floor = math.ceil(
+        estimated_request_tokens / PREFILL_TOKENS_PER_SECOND_FLOOR
+    )
+    required = prefill_floor + GENERATION_AND_TRANSPORT_MARGIN_S
     return min(MAX_TIMEOUT_S, max(MIN_TIMEOUT_S, requested_timeout_s, required))
 
 TOOL = {
@@ -174,8 +183,6 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
     prompt = str(prompt or "")
     if not prompt.strip():
         raise SciencePlannerError("SCIENCE_PLANNER_PROMPT_REQUIRED")
-    timeout_s = effective_timeout_s(prompt, timeout_s)
-
     body = json.dumps({
         "model": MODEL,
         "messages": [
@@ -198,6 +205,7 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
         "max_tokens": MAX_TOOL_COMPLETION_TOKENS,
         "stream": False,
     }).encode("utf-8")
+    timeout_s = effective_timeout_s(body, timeout_s)
     req = urllib.request.Request(
         ENDPOINT,
         data=body,
