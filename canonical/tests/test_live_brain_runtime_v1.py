@@ -990,6 +990,34 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         )
         self.assertNotIn("valuation", str(request["repair_context"]))
 
+    def test_one_shot_verified_closure_mode_routes_verified_supervisor(self):
+        expected = {
+            "schema": "PROJECT_BRAIN_ONE_SHOT_VERIFIED_CLOSURE_V1",
+            "status": "VERIFIED_FIXED_POINT__IRREDUCIBLE_EXTERNAL_INFORMATION_REQUIRED",
+            "pass": True,
+            "fixed_point": True,
+            "terminal_authority": False,
+        }
+        with patch(
+            "canonical.runtime.one_shot_verified_closure_v1.run",
+            return_value=expected,
+        ) as closure_run:
+            out = brain.run({
+                "mode": "one_shot_verified_closure",
+                "state_path": "state.json",
+                "max_rounds": 7,
+                "max_actions_per_round": 5,
+            })
+
+        self.assertEqual(out, expected)
+        closure_run.assert_called_once()
+        kwargs = closure_run.call_args.kwargs
+        self.assertEqual(kwargs["repo_root"], brain.ROOT)
+        self.assertEqual(kwargs["state_path"], "state.json")
+        self.assertEqual(kwargs["max_rounds"], 7)
+        self.assertEqual(kwargs["max_actions_per_round"], 5)
+        self.assertFalse(out["terminal_authority"])
+
     def test_unknown_mode_fails_closed(self):
         out = brain.run({"mode": "invented"})
         self.assertFalse(out["pass"])
