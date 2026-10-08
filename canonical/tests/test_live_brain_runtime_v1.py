@@ -578,6 +578,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "repair_components": [{"id": "r"}],
             "repair_solver_kwargs": {"x": 1},
             "auto_repair": True,
+            "autonomous": True,
         })
         self.assertEqual(cleaned, {"task_id": "t", "target_effects": ["x"]})
 
