@@ -636,6 +636,8 @@ def _run_learning_episode(
     solver_kwargs: Mapping[str, Any] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
 ) -> dict[str, Any]:
     """Execute through R3 so verified learned routes can control the live path."""
     learning = _learning_module()
@@ -650,6 +652,8 @@ def _run_learning_episode(
         "known_absent_invalidators",
         "proposal_provider",
         "capability_expander",
+        "episode_verification_provider",
+        "skill_verification_provider",
         "prior_verified_episode_records",
     }
     conflicts = sorted(set(kwargs) & controlled)
@@ -667,6 +671,8 @@ def _run_learning_episode(
         known_absent_invalidators=known_absent_invalidators,
         proposal_provider=proposal_provider,
         capability_expander=capability_expander,
+        episode_verification_provider=episode_verification_provider,
+        skill_verification_provider=skill_verification_provider,
         **kwargs,
     )
 
@@ -839,6 +845,8 @@ def run_generic(
     solver_kwargs: Mapping[str, Any] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
 ) -> dict[str, Any]:
     if not isinstance(problem, Mapping):
         return _fail("PROBLEM_NOT_OBJECT")
@@ -876,6 +884,8 @@ def run_generic(
                 solver_kwargs=solver_kwargs,
                 proposal_provider=proposal_provider,
                 capability_expander=capability_expander,
+                episode_verification_provider=episode_verification_provider,
+                skill_verification_provider=skill_verification_provider,
             )
             out = learned.get("solver_output")
             if not isinstance(out, Mapping):
@@ -953,6 +963,8 @@ def run_decision(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
     known_absent_invalidators: Sequence[str] = (),
     learn: bool = True,
 ) -> dict[str, Any]:
@@ -987,6 +999,8 @@ def run_decision(
                 known_absent_invalidators=known_absent_invalidators,
                 proposal_provider=proposal_provider,
                 capability_expander=capability_expander,
+                episode_verification_provider=episode_verification_provider,
+                skill_verification_provider=skill_verification_provider,
             )
             learning_holder["result"] = learned
             solver_output = learned.get("solver_output")
@@ -1129,6 +1143,8 @@ def run(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
 ) -> dict[str, Any]:
     """The Brain's single public live runtime router."""
     if not isinstance(request, Mapping):
@@ -1166,6 +1182,8 @@ def run(
             information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
+            episode_verification_provider=episode_verification_provider,
+            skill_verification_provider=skill_verification_provider,
             known_absent_invalidators=request.get("known_absent_invalidators") or (),
             learn=request.get("learn", True) is not False,
         )
@@ -1194,6 +1212,8 @@ def run(
             solver_kwargs=request.get("solver_kwargs") or {},
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
+            episode_verification_provider=episode_verification_provider,
+            skill_verification_provider=skill_verification_provider,
         )
         return _auto_repair_live_failure(
             out,
