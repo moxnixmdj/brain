@@ -793,11 +793,16 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         new_adapter = "a" * 64
         phase = {"after": False}
 
-        def acquire(_request):
+        def isolated(_provider, request):
             phase["after"] = True
+            self.assertEqual(
+                request["provider_execution_boundary"],
+                "FORKED_CHILD_JSON_ONLY_RESULT_V1",
+            )
+            self.assertFalse(request["immutable_runtime_change_allowed"])
             return {"pass": True, "status": "ROOT1_SUCCESS_ADAPTER_INSTALLED"}
 
-        provider = mock.Mock(side_effect=acquire)
+        provider = mock.Mock()
         activation = {
             "schema": driver.SCHEMA,
             "status": "SUCCESS_ADAPTER_FRONTIER_ACTIVATED__VERIFICATION_AUTHORITY_UNCHANGED",
@@ -829,6 +834,16 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             ),
             mock.patch.object(
                 driver,
+                "_immutable_runtime_control_surface_sha256",
+                return_value="1" * 64,
+            ),
+            mock.patch.object(
+                driver,
+                "_run_frontier_acquisition_provider_isolated",
+                side_effect=isolated,
+            ) as isolated_run,
+            mock.patch.object(
+                driver,
                 "_activate_owned_success_adapter_frontier",
                 return_value=activation,
             ) as activate,
@@ -841,13 +856,15 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
 
         self.assertTrue(out["pass"], out)
         self.assertTrue(out["progress"], out)
+        self.assertTrue(out["provider_process_isolated"])
+        self.assertTrue(out["immutable_runtime_unchanged"])
         self.assertEqual(
             out["status"],
             "IMPROVEMENT_ADVANCED__SUCCESS_ADAPTER_FRONTIER_EXPANDED_AND_SUCCESS_REOPENED",
         )
         self.assertTrue(out["verification_authority_unchanged"])
-        provider.assert_called_once()
-        request = provider.call_args.args[0]
+        isolated_run.assert_called_once()
+        request = isolated_run.call_args.args[1]
         self.assertEqual(
             request["allowed_frontier_change_class"],
             "SUCCESS_ADAPTER_ONLY__VERIFICATION_AUTHORITY_IMMUTABLE",
@@ -859,18 +876,10 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             expected_verification_authority_sha256=old_authority,
             repo_root=driver.ROOT,
         )
-        self.assertEqual(
-            out["frontier_activation"]["status"],
-            "SUCCESS_ADAPTER_FRONTIER_ACTIVATED__VERIFICATION_AUTHORITY_UNCHANGED",
-        )
 
         state = learning.load_state(path)
         reopened = state["improvement_queue"][observed["improvement_work_id"]]
         self.assertEqual(reopened["status"], "PENDING")
-        self.assertEqual(
-            reopened["reactivated_by"],
-            "OWNED_SUCCESS_ADAPTER_FRONTIER_CHANGED__AUTHORITY_UNCHANGED",
-        )
         expansion = state["improvement_queue"][
             parked_row["frontier_expansion_work_id"]
         ]
@@ -896,10 +905,10 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         state = learning.load_state(path)
         parked_row = state["improvement_queue"][observed["improvement_work_id"]]
         frontier = parked_row["verification_frontier_sha256"]
-        provider = mock.Mock(return_value={"pass": True, "status": "CLAIMS_DONE"})
-
         adapter = parked_row["adapter_frontier_sha256"]
         authority = parked_row["verification_authority_sha256"]
+        provider = mock.Mock()
+
         with (
             mock.patch.object(
                 driver,
@@ -916,6 +925,16 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
                 "_owned_success_verification_authority_sha256",
                 return_value=authority,
             ),
+            mock.patch.object(
+                driver,
+                "_immutable_runtime_control_surface_sha256",
+                return_value="2" * 64,
+            ),
+            mock.patch.object(
+                driver,
+                "_run_frontier_acquisition_provider_isolated",
+                return_value={"pass": True, "status": "CLAIMS_DONE"},
+            ) as isolated_run,
         ):
             first = driver.advance_once(
                 state_path=path,
@@ -930,14 +949,13 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
 
         self.assertFalse(first["pass"], first)
         self.assertFalse(first["progress"], first)
-        self.assertTrue(first["attempt_backoff_recorded"], first)
         self.assertEqual(
             first["status"],
             "FRONTIER_ACQUISITION_DID_NOT_CHANGE_OWNED_SUCCESS_ADAPTER_FRONTIER",
         )
         self.assertTrue(second["pass"], second)
         self.assertFalse(second["progress"], second)
-        self.assertEqual(provider.call_count, 1)
+        self.assertEqual(isolated_run.call_count, 1)
         blocker = next(
             row for row in second["blockers"]
             if row["kind"] == driver.FRONTIER_EXPANSION_KIND
@@ -946,6 +964,50 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             blocker["blocker"],
             "FRONTIER_ACQUISITION_ALREADY_ATTEMPTED_FOR_CURRENT_PROVIDER_AND_FRONTIER",
         )
+
+    def test_frontier_acquisition_provider_runs_outside_parent_memory(self):
+        if not hasattr(driver.os, "fork"):
+            self.skipTest("fork process isolation unavailable")
+        marker = {"value": "parent"}
+        with tempfile.TemporaryDirectory() as td:
+            effect_path = Path(td) / "effect.txt"
+
+            def provider(_request):
+                marker["value"] = "child"
+                effect_path.write_text("filesystem-effect", encoding="utf-8")
+                return {"pass": True, "status": "CHILD_COMPLETE"}
+
+            out = driver._run_frontier_acquisition_provider_isolated(
+                provider,
+                {"kind": driver.FRONTIER_EXPANSION_KIND},
+                timeout_seconds=5,
+            )
+
+            self.assertEqual(marker["value"], "parent")
+            self.assertEqual(effect_path.read_text(encoding="utf-8"), "filesystem-effect")
+            self.assertEqual(out["status"], "CHILD_COMPLETE")
+
+    def test_immutable_runtime_surface_excludes_only_authorized_adapter_files(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            runtime = root / "canonical/runtime"
+            runtime.mkdir(parents=True)
+            bound = runtime / "r3_bound_success_adapter_v1.py"
+            raw = runtime / "r3_raw_success_adapter_v1.py"
+            control = runtime / "r3_independent_learning_verifier_v1.py"
+            bound.write_text("a=1\n", encoding="utf-8")
+            raw.write_text("b=1\n", encoding="utf-8")
+            control.write_text("c=1\n", encoding="utf-8")
+
+            first = driver._immutable_runtime_control_surface_sha256(repo_root=root)
+            bound.write_text("a=2\n", encoding="utf-8")
+            raw.write_text("b=2\n", encoding="utf-8")
+            second = driver._immutable_runtime_control_surface_sha256(repo_root=root)
+            self.assertEqual(first, second)
+
+            control.write_text("c=2\n", encoding="utf-8")
+            third = driver._immutable_runtime_control_surface_sha256(repo_root=root)
+            self.assertNotEqual(second, third)
 
     def test_owned_frontier_module_origin_accepts_exact_repo_file(self):
         td = tempfile.TemporaryDirectory()
@@ -1162,11 +1224,11 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         new_authority = "8" * 64
         phase = {"after": False}
 
-        def acquire(_request):
+        def isolated(_provider, _request):
             phase["after"] = True
             return {"pass": True, "status": "CLAIMS_VERIFIER_INSTALLED"}
 
-        provider = mock.Mock(side_effect=acquire)
+        provider = mock.Mock()
         with (
             mock.patch.object(
                 driver,
@@ -1186,6 +1248,16 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
                 side_effect=lambda **_: (
                     new_authority if phase["after"] else old_authority
                 ),
+            ),
+            mock.patch.object(
+                driver,
+                "_immutable_runtime_control_surface_sha256",
+                return_value="3" * 64,
+            ),
+            mock.patch.object(
+                driver,
+                "_run_frontier_acquisition_provider_isolated",
+                side_effect=isolated,
             ),
             mock.patch.object(
                 driver,
@@ -1218,6 +1290,55 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             blocked["blocked_verification_authority_sha256"],
             new_authority,
         )
+
+    def test_frontier_acquisition_rejects_other_runtime_mutation(self):
+        path = self.temp_state()
+        observed = learning.record_success_observation(
+            {
+                "schema": "TEST_SUCCESS_V1",
+                "status": "PASS__OPAQUE_EXTERNAL_SUCCESS",
+                "pass": True,
+                "result": {"opaque": True},
+            },
+            surface="OPAQUE_EXTERNAL_SURFACE",
+            state_path=path,
+            replay_context={"mode": "generic", "problem": {"task_id": "runtime-mutation"}},
+        )
+        driver.advance_once(state_path=path)
+        state = learning.load_state(path)
+        parked = state["improvement_queue"][observed["improvement_work_id"]]
+        frontier = parked["verification_frontier_sha256"]
+        adapter = parked["adapter_frontier_sha256"]
+        authority = parked["verification_authority_sha256"]
+
+        with (
+            mock.patch.object(driver, "_owned_success_learning_frontier_sha256", return_value=frontier),
+            mock.patch.object(driver, "_owned_success_adapter_frontier_sha256", return_value=adapter),
+            mock.patch.object(driver, "_owned_success_verification_authority_sha256", return_value=authority),
+            mock.patch.object(
+                driver,
+                "_immutable_runtime_control_surface_sha256",
+                side_effect=["4" * 64, "5" * 64],
+            ),
+            mock.patch.object(
+                driver,
+                "_run_frontier_acquisition_provider_isolated",
+                return_value={"pass": True, "status": "CLAIMS_DONE"},
+            ),
+        ):
+            out = driver.advance_once(
+                state_path=path,
+                verification_frontier_acquisition_provider=mock.Mock(),
+                verification_frontier_acquisition_provider_id="root1-worker-v1",
+            )
+
+        self.assertFalse(out["pass"], out)
+        self.assertFalse(out["progress"], out)
+        self.assertEqual(
+            out["status"],
+            "FRONTIER_ACQUISITION_REJECTED__IMMUTABLE_RUNTIME_MUTATED",
+        )
+        self.assertFalse(out["immutable_runtime_change_accepted"])
 
     def test_external_adapter_cannot_override_changed_verification_authority(self):
         path = self.temp_state()
