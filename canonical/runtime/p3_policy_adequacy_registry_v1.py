@@ -24,7 +24,7 @@ _REGISTRY = {
     "P2_INFORMATION_SAFE_EXPLICIT_CONTRACT_TOP_LAW_POLICY_V1": {
         "condition": {"op": "ATOM", "id": "P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1"},
         "binding_path": "canonical/governance/P2_EXPLICIT_TOP_LAW_POLICY_ADEQUACY_BINDING_20261008_V1.json",
-        "binding_blob_sha": "e9c5b5b8b21dd24d1f03777cd1c29eaac7e40760",
+        "binding_blob_sha": "1f3fee512979ef5346d03bd7a8bc7f0659ed90d4",
     },
     "P3_BOUND_BINARY_DECISION_GROUNDED_EXPRESSION_POLICY_V1": {
         "condition": {
