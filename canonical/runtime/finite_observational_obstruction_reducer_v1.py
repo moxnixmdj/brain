@@ -1,24 +1,28 @@
 """Exact finite observational obstruction reducer.
 
 Given a finite reached decision-region set H, a declared complete-on-H discriminator
-library Q, and authenticated-positive policy adequacy regions P, compute the final
-observational equivalence classes induced by all Q signatures and prove either:
+library Q, and DECLARED policy adequacy regions P with byte-bound certificate
+references, compute the final observational equivalence classes induced by all Q
+signatures and prove either:
 
-1. every final class is covered by at least one declared policy region; or
+1. every final class is structurally covered by at least one declared policy region; or
 2. return one exact unsplittable class with empty declared common-policy cover.
 
-This module proves only the finite structural proposition over its declared H/P/Q.
-It does not self-certify that Q is globally complete, that policy adequacy receipts
-are semantically true, or that H covers all real target-supported escape states.
+This kernel never treats a certificate-shaped flag as proof. It authenticates the
+referenced certificate bytes only. The semantic truth of each adequacy certificate,
+global Q completeness, and coverage of real target-supported escape states remain
+separate premises.
 """
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
+from pathlib import Path
 from typing import Any
 
+from canonical.runtime.effect_broker_receipt_resolver_v2 import resolve_receipt_bytes
 from canonical.runtime.finite_identifiability import Experiment, equivalence_classes
 
-SCHEMA = "PROJECT_BRAIN_FINITE_OBSERVATIONAL_OBSTRUCTION_REDUCER_V1"
+SCHEMA = "PROJECT_BRAIN_FINITE_OBSERVATIONAL_OBSTRUCTION_REDUCER_V2"
 
 
 def _fail(reason: str, **detail: Any) -> dict[str, Any]:
@@ -28,7 +32,9 @@ def _fail(reason: str, **detail: Any) -> dict[str, Any]:
         "status": "FAIL_CLOSED",
         "reason": reason,
         "declared_q_complete_on_h": False,
-        "all_final_observational_classes_covered": False,
+        "all_final_observational_classes_structurally_covered": False,
+        "policy_certificate_bytes_bound": False,
+        "policy_adequacy_semantics_verified": False,
         "global_q_scope_complete": False,
         "u_empty_authorized": False,
         "terminal_authority": False,
@@ -48,10 +54,15 @@ def _ids(values: Sequence[str], *, label: str) -> tuple[str, ...]:
     return out
 
 
-def reduce_obstruction(payload: Mapping[str, Any]) -> dict[str, Any]:
+def reduce_obstruction(
+    payload: Mapping[str, Any],
+    *,
+    repo_root: str | Path,
+) -> dict[str, Any]:
     try:
         if not isinstance(payload, Mapping):
             return _fail("PAYLOAD_MAPPING_REQUIRED")
+        root = Path(repo_root).resolve(strict=True)
 
         regions = _ids(payload.get("region_ids"), label="REGION_IDS")
         region_set = set(regions)
@@ -87,9 +98,11 @@ def reduce_obstruction(payload: Mapping[str, Any]) -> dict[str, Any]:
         for i, row in enumerate(p_rows):
             if not isinstance(row, Mapping):
                 return _fail("POLICY_NOT_OBJECT", index=i)
+            if set(row) != {"policy_id", "adequate_region_ids", "adequacy_certificate_ref"}:
+                return _fail("POLICY_FIELDS_INVALID", index=i)
             pid = row.get("policy_id")
             covered = row.get("adequate_region_ids")
-            receipt = row.get("adequacy_receipt")
+            ref = row.get("adequacy_certificate_ref")
             if not isinstance(pid, str) or not pid or pid in policies:
                 return _fail("POLICY_ID_INVALID_OR_DUPLICATE", index=i)
             if not isinstance(covered, Sequence) or isinstance(covered, (str, bytes)):
@@ -97,23 +110,22 @@ def reduce_obstruction(payload: Mapping[str, Any]) -> dict[str, Any]:
             covered_set = set(covered)
             if any(not isinstance(x, str) or not x for x in covered) or not covered_set <= region_set:
                 return _fail("POLICY_REGION_SET_OUT_OF_DOMAIN", policy_id=pid)
-            if not isinstance(receipt, Mapping):
-                return _fail("POLICY_ADEQUACY_RECEIPT_REQUIRED", policy_id=pid)
-            if (
-                not isinstance(receipt.get("path"), str)
-                or not receipt.get("path")
-                or not isinstance(receipt.get("git_blob_sha"), str)
-                or len(receipt.get("git_blob_sha")) != 40
-                or receipt.get("independent_verified") is not True
-                or receipt.get("exact_byte_bound") is not True
-                or receipt.get("conclusion") != "success"
-                or receipt.get("policy_adequacy_region_sound") is not True
-            ):
-                return _fail("POLICY_ADEQUACY_RECEIPT_INVALID", policy_id=pid)
+            if not isinstance(ref, Mapping):
+                return _fail("POLICY_ADEQUACY_CERTIFICATE_REF_REQUIRED", policy_id=pid)
+            try:
+                bound = resolve_receipt_bytes(ref, repo_root=root)
+            except Exception as exc:
+                return _fail(
+                    "POLICY_ADEQUACY_CERTIFICATE_BINDING_INVALID",
+                    policy_id=pid,
+                    exception_type=type(exc).__name__,
+                    detail_text=str(exc)[:160],
+                )
             policies[pid] = {
                 "regions": covered_set,
-                "receipt_path": receipt["path"],
-                "receipt_blob": receipt["git_blob_sha"],
+                "certificate_path": bound["path"],
+                "certificate_git_blob_sha": bound["git_blob_sha"],
+                "certificate_byte_sha256": bound["byte_sha256"],
             }
 
         classes = equivalence_classes(regions, experiments)
@@ -135,56 +147,54 @@ def reduce_obstruction(payload: Mapping[str, Any]) -> dict[str, Any]:
             item = {
                 "region_ids": members,
                 "full_q_signature": signature,
-                "common_adequate_policy_ids": common,
-                "covered": bool(common),
+                "common_declared_policy_ids": common,
+                "structurally_covered": bool(common),
             }
             detailed.append(item)
             if not common:
                 bad.append(item)
 
-        if bad:
-            witness = sorted(bad, key=lambda x: (len(x["region_ids"]), x["region_ids"]))[0]
-            return {
-                "schema": SCHEMA,
-                "pass": False,
-                "status": "UNSPLITTABLE_POLICY_CONFLICT_CLASS_FOUND",
-                "reason": "FINAL_OBSERVATIONAL_CLASS_HAS_NO_COMMON_DECLARED_ADEQUATE_POLICY",
-                "region_count": len(regions),
-                "discriminator_count": len(experiments),
-                "policy_count": len(policies),
-                "final_class_count": len(classes),
-                "uncovered_final_class_count": len(bad),
-                "counterexample_class": witness,
-                "declared_q_complete_on_h": True,
-                "all_final_observational_classes_covered": False,
-                "global_q_scope_complete": False,
-                "u_empty_authorized": False,
-                "terminal_authority": False,
-                "terminal_credit_delta": 0,
-                "boundary": (
-                    "EXACT_STRUCTURAL_COUNTEREXAMPLE_OVER_DECLARED_FINITE_H_P_Q_ONLY;"
-                    "NO_CLAIM_Q_IS_GLOBALLY_SCOPE_COMPLETE_OR_POLICY_RECEIPT_SEMANTICS_ARE_TRUE"
-                ),
-            }
-
-        return {
+        base = {
             "schema": SCHEMA,
-            "pass": True,
-            "status": "PASS__ALL_DECLARED_FINAL_OBSERVATIONAL_CLASSES_HAVE_COMMON_POLICY",
             "region_count": len(regions),
             "discriminator_count": len(experiments),
             "policy_count": len(policies),
             "final_class_count": len(classes),
-            "classes": detailed,
             "declared_q_complete_on_h": True,
-            "all_final_observational_classes_covered": True,
+            "policy_certificate_bytes_bound": True,
+            "policy_adequacy_semantics_verified": False,
             "global_q_scope_complete": False,
             "u_empty_authorized": False,
             "terminal_authority": False,
             "terminal_credit_delta": 0,
+        }
+
+        if bad:
+            witness = sorted(bad, key=lambda x: (len(x["region_ids"]), x["region_ids"]))[0]
+            return {
+                **base,
+                "pass": False,
+                "status": "UNSPLITTABLE_DECLARED_POLICY_CONFLICT_CLASS_FOUND",
+                "reason": "FINAL_OBSERVATIONAL_CLASS_HAS_NO_COMMON_DECLARED_POLICY_REGION",
+                "uncovered_final_class_count": len(bad),
+                "counterexample_class": witness,
+                "all_final_observational_classes_structurally_covered": False,
+                "boundary": (
+                    "EXACT_STRUCTURAL_COUNTEREXAMPLE_OVER_DECLARED_FINITE_H_P_Q_ONLY;"
+                    "ADEQUACY_CERTIFICATE_BYTES_ARE_BOUND_BUT_SEMANTIC_TRUTH_IS_NOT_SELF_CERTIFIED"
+                ),
+            }
+
+        return {
+            **base,
+            "pass": True,
+            "status": "PASS__ALL_DECLARED_FINAL_OBSERVATIONAL_CLASSES_STRUCTURALLY_COVERED",
+            "classes": detailed,
+            "all_final_observational_classes_structurally_covered": True,
             "boundary": (
                 "EXACT_ONLY_OVER_DECLARED_FINITE_H_P_Q;"
-                "GLOBAL_SCOPE_COMPLETENESS_AND_SEMANTIC_RECEIPT_TRUTH_REMAIN_EXTERNAL_PREMISES"
+                "BYTE_BOUND_CERTIFICATE_REFERENCES_DO_NOT_SELF_PROVE_ADEQUACY_SEMANTICS;"
+                "GLOBAL_SCOPE_COMPLETENESS_REMAINS_EXTERNAL"
             ),
         }
     except Exception as exc:
