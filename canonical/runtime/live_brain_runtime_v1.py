@@ -560,11 +560,13 @@ def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
         bound_error = type(exc).__name__ + ":" + str(exc)
 
     learning_stats = None
+    next_improvement = None
     learning_error = None
     try:
         learning = _learning_module()
         path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
         learning_stats = deepcopy(dict(learning.load_state(path).get("stats") or {}))
+        next_improvement = learning.next_improvement_action(state_path=path)
     except Exception as exc:
         learning_error = type(exc).__name__ + ":" + str(exc)
 
@@ -581,6 +583,7 @@ def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
         "verified_bound_capability_count": bound_count,
         "bound_inventory_error": bound_error,
         "learning_state_stats": learning_stats,
+        "next_improvement_action": next_improvement,
         "learning_state_error": learning_error,
         "native_verification_boundaries_preserved": True,
         "terminal_authority": False,
