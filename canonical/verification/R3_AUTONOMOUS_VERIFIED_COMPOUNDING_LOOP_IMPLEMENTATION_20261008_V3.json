@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V3",
+  "date": "2026-10-08",
+  "status": "R3_CONTROL_LOOP_STRUCTURALLY_CLOSED__UNIVERSAL_CONFIDENTIAL_INDEPENDENT_VERIFICATION_CARRIER_EXTERNAL",
+  "subject_head": "508268e6e99ee774acb11e0d30655da6f72128d7",
+  "root": "R3_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_LOOP",
+  "live_mechanisms": {
+    "experience_capture": true,
+    "failure_fingerprinting_and_deduplication": true,
+    "causal_repair_synthesis": true,
+    "autonomous_safe_replay_only": true,
+    "replay_safety_monotonic": true,
+    "original_obligation_replay_required": true,
+    "capability_expansion_path": true,
+    "verified_episode_persistence": true,
+    "delayed_episode_verification_material_retained": true,
+    "skill_candidate_induction": true,
+    "cross_scope_generalization": true,
+    "independent_skill_verification": true,
+    "pareto_replacement": true,
+    "permanent_reuse": true,
+    "durable_priority_improvement_queue": true,
+    "queue_executes_on_every_canonical_dispatch": true,
+    "evidence_bound_attempt_backoff": true,
+    "failed_item_starvation_prevention": true,
+    "success_observation_replay_capsules": true,
+    "success_to_episode_adapter_route": true,
+    "fail_closed_without_required_independent_authority": true
+  },
+  "exact_live_blobs": {
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "a41bfe984fa1f60e8466780fcb349a555d2a667a",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "b548f07b36ed5bf0a3495635046a26049df24f33",
+    "canonical/runtime/live_brain_runtime_v1.py": "21ae3dc7514c4728729fa9dd7e6616e0fff11d7e",
+    "canonical/runtime/unified_cognitive_fabric_v1.py": "77213208ef8760a04ae7f3003a6db59b3f1d05eb",
+    "canonical/tests/test_r3_improvement_queue_driver_v1.py": "05ac076788eb91dea54969ab6a25c7873c9b1437",
+    ".github/workflows/r3-autonomous-self-improvement-v1.yml": "b78b265704534fe2df6c0e5a1a27963df2c6ca09"
+  },
+  "independent_execution_evidence": {
+    "exact_queue_driver_public_runner_receipt": "canonical/verification/R3_QUEUE_DRIVER_PUBLIC_RUNNER_VERIFICATION_20261008_V1.json",
+    "public_run_id": 37770735506,
+    "public_job_id": 113289392228,
+    "public_conclusion": "success",
+    "exact_verified_driver_blob": "1a049b263856f52687bdf22010640c3fdbd67c8b",
+    "limitation": "PUBLIC_RECEIPT_VERIFIES_THE_EARLIER_QUEUE_DRIVER_CONTROL_FLOW_BLOB; SUBSEQUENT_LIVE_BLOB_EXTENSIONS_REQUIRE_FRESH_FULL_PRIVATE_OR_DISCLOSABLE_CAPSULE_EXECUTION"
+  },
+  "latest_private_carrier_attempts": [
+    {
+      "head": "d95a4a39466e8684aa65224c51de7c44b8c80652",
+      "workflow_run_id": 37774162904,
+      "conclusion": "failure",
+      "classification": "CARRIER_FAILURE_BEFORE_RUNNER_ASSIGNMENT__NO_CODE_VERDICT"
+    },
+    {
+      "head": "0d89e3a9e8a5c3b14b84f600be485e8160ec6e6f",
+      "workflow_run_id": 37774108031,
+      "job_id": 113300553818,
+      "steps_executed": 0,
+      "conclusion": "failure",
+      "classification": "CARRIER_FAILURE_BEFORE_RUNNER_ASSIGNMENT__NO_CODE_VERDICT"
+    }
+  ],
+  "carrier_truth": {
+    "public_zero_cost_carrier": "moxnixmdj/verification-capsule-runner",
+    "public_carrier_status": "VERIFIED_ZERO_INCREMENTAL_SPEND_FOR_DISCLOSABLE_CAPSULES",
+    "public_carrier_confidentiality_limit": "NO_SECRETS_PRIVATE_HELDOUT_DATA_OR_UNNECESSARY_PRIVATE_BRAIN_CONTENT",
+    "private_brain_actions_status": "DEGRADED__RUNNER_UNASSIGNED",
+    "universal_confidential_independent_verification_available": false
+  },
+  "authority_boundary": {
+    "executor_self_certification_forbidden": true,
+    "episode_promotion_requires_independent_verification": true,
+    "skill_promotion_requires_independent_verification": true,
+    "effectful_autonomous_replay_requires_positive_safety_proof": true,
+    "carrier_failure_not_code_failure": true,
+    "pending_unverifiable_work_must_remain_pending_or_fail_closed": true
+  },
+  "residual": {
+    "class": "EXTERNAL_VERIFICATION_CARRIER_AVAILABILITY",
+    "statement": "For arbitrary successful non-solver experience, including sensitive/private effects, the Brain can capture, queue, adapt, and request verification but cannot universally mint durable independently authenticated learning evidence unless a confidential independent verification carrier/provider is actually available.",
+    "not_a_missing_r3_algorithm": true,
+    "exact_goal_impact": "Blocks universal operational closure of experience-to-permanent-reuse for cases whose evidence cannot be safely sent to the public zero-cost carrier."
+  },
+  "current_truth": "THE_R3_CONTROL_PLANE_IS_NOW_EXECUTABLE_AND_AUTONOMOUS_OVER_AVAILABLE_VERIFIER_REPAIR_AND_ADAPTER_AUTHORITIES. THE_REMAINING UNIVERSAL BOUNDARY IS THE REAL AVAILABILITY OF CONFIDENTIAL INDEPENDENT VERIFICATION FOR PRIVATE OR SENSITIVE EVIDENCE; THE SYSTEM FAILS CLOSED RATHER THAN SELF_CERTIFYING.",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
