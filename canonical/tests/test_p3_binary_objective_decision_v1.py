@@ -67,7 +67,7 @@ class Tests(unittest.TestCase):
         p["claims"][1]["text"]=p["evidence"][1]["text"]
         out=evaluate(p)
         self.assertFalse(out["pass"])
-        self.assertEqual(out["reason"],"OBJECTIVE_RELATION_BINDING_FAILED")
+        self.assertEqual(out["reason"],"OBJECTIVE_RELATION_NOT_BOUND")
 
     def test_unverified_evidence_fails_closed(self):
         p=base();p["evidence"][0]["verified"]=False
