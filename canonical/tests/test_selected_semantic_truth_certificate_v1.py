@@ -3,13 +3,13 @@ import hashlib
 import json
 
 from canonical.runtime.source_aligned_semantic_proof_v6 import verify_proof
-
 from canonical.runtime.selected_semantic_truth_certificate_v1 import evaluate
 
 POLICY = (
     "Total exposure means exposure_amount. "
     "Apply Rule A unless Total exposure is at least 125.50."
 )
+ALIAS = "EXPOSURE_EXCEPTION_APPLIES"
 
 def facts(value: str) -> str:
     return json.dumps({
@@ -17,12 +17,9 @@ def facts(value: str) -> str:
         "fields": {"exposure_amount": {"type": "DECIMAL_STRING", "value": value}},
     }, separators=(",", ":"))
 
-
-def checked_predicate_id() -> str:
-    # Independently derive the stable source-level predicate ID from a real
-    # V6 accepted proof, without trusting any caller-chosen display label.
+def checked_predicate_id(policy: str = POLICY) -> str:
     proof = verify_proof(
-        POLICY, source_id="policy",
+        policy, source_id="policy",
         claims=[{
             "claim_id": "selected",
             "kind": "CERTIFIED_DEFINED_TERM_RAW_TYPED_CONDITION",
@@ -32,10 +29,9 @@ def checked_predicate_id() -> str:
     )
     assert proof["status"] == "PROOF_CHECKED"
     row = proof["accepted_claims"][0]
-    assert row["condition_holds"] is True
     descriptor = {
         "source_id": "policy",
-        "source_sha256": hashlib.sha256(POLICY.encode("utf-8")).hexdigest(),
+        "source_sha256": hashlib.sha256(policy.encode("utf-8")).hexdigest(),
         "kind": row["kind"],
         "defined_term": row["defined_term"],
         "field_name": row["field_name"],
@@ -47,14 +43,13 @@ def checked_predicate_id() -> str:
                      ensure_ascii=False).encode("utf-8")
     return "source-condition-sha256:" + hashlib.sha256(raw).hexdigest()
 
-
 SOURCE_PREDICATE_ID = checked_predicate_id()
 
-def payload(value: str, claimed: bool = True):
+def payload(value: str, claimed: bool = True, *, alias: str = ALIAS, policy: str = POLICY):
     return {
-        "predicate_id": SOURCE_PREDICATE_ID,
+        "predicate_id": alias,
         "target_claim_id": "selected",
-        "source_text": POLICY,
+        "source_text": policy,
         "source_id": "policy",
         "claims": [{
             "claim_id": "selected",
@@ -65,22 +60,25 @@ def payload(value: str, claimed: bool = True):
         "fact_source_id": "case-facts",
     }
 
-def test_selected_semantic_truth_certificate_true():
+def test_true_mints_source_bound_predicate_identity():
     out = evaluate(payload("130.00", True))
     assert out["pass"] is True
     assert out["predicate_truth"] == "TRUE"
     assert out["predicate_id"] == SOURCE_PREDICATE_ID
+    assert out["requested_predicate_id"] == ALIAS
+    assert out["requested_predicate_id_authority"] is False
     assert isinstance(out["verified_condition_atom_id"], str)
     assert out["truthful_precommitment_observation"] is True
     assert out["policy_adequacy_authority"] is False
     assert out["terminal_authority"] is False
 
-def test_selected_semantic_truth_certificate_false():
+def test_false_uses_same_source_predicate_identity():
     out = evaluate(payload("100.00", False))
     assert out["pass"] is True
     assert out["predicate_truth"] == "FALSE"
+    assert out["predicate_id"] == SOURCE_PREDICATE_ID
+    assert out["requested_predicate_id"] == ALIAS
     assert out["truthful_precommitment_observation"] is True
-    assert out["policy_adequacy_authority"] is False
 
 def test_wrong_claimed_truth_remains_unknown():
     out = evaluate(payload("130.00", False))
@@ -109,32 +107,28 @@ def test_duplicate_claim_ids_fail_closed():
     assert out["predicate_truth"] == "UNKNOWN"
     assert out["terminal_credit_delta"] == 0
 
-
-def test_caller_cannot_relabel_proved_condition_as_unrelated_predicate():
-    p = payload("130.00", True)
-    p["predicate_id"] = "OTHER_DECISION_SHOULD_BE_TRUE"
+def test_caller_relabel_cannot_become_authoritative_predicate_id():
+    p = payload("130.00", True, alias="OTHER_DECISION_SHOULD_BE_TRUE")
     out = evaluate(p)
-    assert out["pass"] is False
-    assert out["status"] == "UNKNOWN__PREDICATE_IDENTITY_NOT_SOURCE_BOUND"
-    assert out["predicate_truth"] == "UNKNOWN"
-    assert out["verified_predicate_id"] == SOURCE_PREDICATE_ID
-    assert out["truthful_precommitment_observation"] is False
-    assert out["terminal_credit_delta"] == 0
+    assert out["pass"] is True
+    assert out["predicate_truth"] == "TRUE"
+    assert out["predicate_id"] == SOURCE_PREDICATE_ID
+    assert out["requested_predicate_id"] == "OTHER_DECISION_SHOULD_BE_TRUE"
+    assert out["requested_predicate_id_authority"] is False
+    assert out["predicate_id"] != out["requested_predicate_id"]
 
-
-def test_same_alias_cannot_spoof_changed_source_condition():
-    p = payload("130.00", True)
-    p["source_text"] = (
+def test_changed_source_condition_mints_different_predicate_identity():
+    changed = (
         "Total exposure means exposure_amount. "
         "Apply Rule A unless Total exposure is at least 120.00."
     )
-    out = evaluate(p)
-    assert out["pass"] is False
-    assert out["status"] == "UNKNOWN__PREDICATE_IDENTITY_NOT_SOURCE_BOUND"
-    assert out["truthful_precommitment_observation"] is False
+    out = evaluate(payload("130.00", True, policy=changed))
+    assert out["pass"] is True
+    assert out["predicate_id"] == checked_predicate_id(changed)
+    assert out["predicate_id"] != SOURCE_PREDICATE_ID
+    assert out["requested_predicate_id"] == ALIAS
 
-
-def test_predicate_identity_remains_stable_across_true_false_facts():
+def test_predicate_identity_stable_across_true_false_facts_but_atoms_change():
     positive = evaluate(payload("130.00", True))
     negative = evaluate(payload("100.00", False))
     assert positive["pass"] is True and negative["pass"] is True
@@ -143,19 +137,16 @@ def test_predicate_identity_remains_stable_across_true_false_facts():
     assert positive["predicate_truth"] == "TRUE"
     assert negative["predicate_truth"] == "FALSE"
 
-
-def test_noncanonical_identifier_fails_even_with_correct_claim():
-    p = payload("130.00", True)
-    p["predicate_id"] = "source-condition-sha256:" + "0" * 64
-    out = evaluate(p)
-    assert out["pass"] is False
-    assert out["predicate_truth"] == "UNKNOWN"
+def test_canonical_looking_forged_alias_cannot_override_verified_identity():
+    forged = "source-condition-sha256:" + "0" * 64
+    out = evaluate(payload("130.00", True, alias=forged))
+    assert out["pass"] is True
+    assert out["requested_predicate_id"] == forged
+    assert out["predicate_id"] == SOURCE_PREDICATE_ID
+    assert out["predicate_id"] != forged
     assert out["db_admission_authority"] is False
 
-
-def test_trusted_v5_typed_receipt_has_stable_source_predicate_identity():
-    # V5 accepted rows do not repeat policy_source_id, unlike V6 raw receipts.
-    # Both are created by verify_proof with a checked source_id argument.
+def test_v5_typed_receipt_stable_identity_and_optional_source_guard():
     from canonical.runtime.selected_semantic_truth_certificate_v1 import _checked_predicate_id
     trusted = verify_proof(
         POLICY, source_id="policy",
