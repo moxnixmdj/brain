@@ -501,13 +501,14 @@ def execute_failure_repair_cycle(
             if repair_context is not None and not isinstance(repair_context, Mapping):
                 return _fail("REPAIR_CONTEXT_INVALID")
 
-            (
-                invention_targets,
-                invention_target_source,
-            ) = _concretize_policy_adequacy_repair_target(
-                required_effect,
-                repair_context if isinstance(repair_context, Mapping) else None,
-            )
+            if required_effect == "repair.policy_adequacy_cover.available":
+                (
+                    invention_targets,
+                    invention_target_source,
+                ) = _concretize_policy_adequacy_repair_target(
+                    required_effect,
+                    repair_context if isinstance(repair_context, Mapping) else None,
+                )
             problem = {
                 "task_id": str(
                     request.get("repair_task_id")
