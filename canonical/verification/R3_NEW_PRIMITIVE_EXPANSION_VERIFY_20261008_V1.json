@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_R3_NEW_PRIMITIVE_EXPANSION_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS_8_OF_8",
+  "branch": "r3-new-primitive-v12-expansion-20261008",
+  "exact_blobs": {
+    "runtime": "5ac6866eb89af22e6116b4471ca1cfb30ee02d02",
+    "tests": "6074c6e7bcc19dbc44cb751068257ef53fdee2f0"
+  },
+  "isolated_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0
+  },
+  "proved": [
+    "NEW_PRIMITIVE_REQUIRED_WITHOUT_EXPANDER_REMAINS_UNRESOLVED",
+    "NEW_PRIMITIVE_REQUIRED_WITH_EXPANDER_ROUTES_TO_V12",
+    "V12_RECEIVES_EMPTY_CAPABILITY_SET_AND_REQUIRED_REPAIR_EFFECT",
+    "ORIGINAL_OBLIGATION_REPLAY_REQUIRED_BEFORE_RESOLUTION",
+    "EXISTING_REPAIR_COMPONENT_PATH_PRESERVED"
+  ],
+  "inherited_boundary": "UNIVERSAL_SOLVER_V12_AUTHENTICATES_EXPANDED_CAPABILITY_VERIFIER_AND_EFFECT_SEMANTICS_BEFORE_ADMISSION",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
