@@ -43,6 +43,13 @@ class LiveIntegratedBrainV1Tests(unittest.TestCase):
         self.assertEqual(result["status"], "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED")
         self.assertEqual(result["selected_plan"], [cid])
         self.assertTrue(result["execution"][0]["composition_capsule_head_hash"])
+        self.assertEqual(result["cognition_dependency_class"], "MODEL_INDEPENDENT")
+        self.assertEqual(result["model_dependency_count"], 0)
+        self.assertTrue(result["controller_checkpoint"]["plan_sha256"])
+        self.assertEqual(
+            result["controller_execution"]["controller_mode"],
+            "MODEL_INDEPENDENT_ACTION_PLAN",
+        )
         self.assertTrue(output.is_file())
 
         output.unlink()
