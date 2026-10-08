@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SHARED_STYLE_HIDDEN_EVALUATOR_BOUNDARY_TWO_CARRIER_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_CARRIERS__4_OF_4_EACH__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/gdpval_shared_style_hidden_evaluator_boundary_v1.py",
+      "git_blob_sha": "eb7bcf203b04907050fe8d28936f9d4c39a89bcf"
+    },
+    "tests": {
+      "path": "canonical/tests/test_gdpval_shared_style_hidden_evaluator_boundary_v1.py",
+      "git_blob_sha": "fe697430ee809c2cb9a019021e257beb0b4a0892"
+    },
+    "governance": {
+      "path": "canonical/governance/GDPVAL_SHARED_STYLE_HIDDEN_EVALUATOR_BOUNDARY_20261008_V1.json",
+      "git_blob_sha": "1a2a54a783eccbb9d6c6b716d9690f6445e6509f"
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "h100-real-image-v1",
+      "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+      "method": "EXACT_BRANCH_BLOBS__DIRECT_TEST_FUNCTION_RUNNER",
+      "passed": 4,
+      "total": 4
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-root3-current-byte-replay-20261007-v1",
+      "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+      "method": "EXACT_BRANCH_BLOBS__PYTEST",
+      "passed": 4,
+      "total": 4
+    }
+  ],
+  "verified": [
+    "DISTINCT_DETERMINISTIC_OUTCOMES_NOT_UNIVERSALLY_ORDERED_UNDER_UNRESTRICTED_HIDDEN_STYLE_UTILITY",
+    "IDENTICAL_OUTCOME_LAWS_UNIVERSALLY_TIED",
+    "DISTRIBUTIONAL_DIFFERENCE_PRODUCES_DISTINGUISHING_INDICATOR_UTILITY",
+    "NO_SEMANTIC_OWNER_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_REAL_OWNER_STYLE_UTILITY_IS_UNRESTRICTED",
+    "NO_CLAIM_SOURCE_CONSTRAINED_STYLE_SUBCLASSES_CANNOT_CLOSE",
+    "NO_GDPVAL_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
