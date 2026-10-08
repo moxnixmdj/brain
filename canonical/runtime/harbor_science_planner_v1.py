@@ -161,7 +161,7 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
     if (
         not isinstance(timeout_s, int)
         or isinstance(timeout_s, bool)
-        or not 1 <= timeout_s <= 300
+        or not 1 <= timeout_s <= 600
     ):
         raise SciencePlannerError("SCIENCE_PLANNER_TIMEOUT_INVALID")
 
