@@ -143,8 +143,8 @@
   "control_law_totalizer": {
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
-    "live_route": "canonical/runtime/live_brain_runtime_v1.py::_decision_run",
-    "status": "ACTIVE__TOTAL_META_ACTION_OVER_AUTHENTICATED_R2_OUTPUTS",
+    "live_route": "NOT_LIVE_BOUND__V6_MECHANISM_CLOSURE_REMAINS_AUTHORITY",
+    "status": "SUPPLEMENTAL_EXPLICIT_META_ACTION_VIEW__NOT_LIVE_AUTHORITY",
     "meta_actions": [
       "RETURN_VERIFIED_RESULT",
       "ACQUIRE_MINIMUM_POLICY_CHANGING_INFORMATION",
@@ -157,11 +157,12 @@
     "open_world_completion_claimed": false
   },
   "control_law_closure": {
-    "status": "CLOSED__GENERAL_CONTROL_MECHANISM_TOTALIZED",
+    "status": "SUPPLEMENTAL__AUTHORITATIVE_CLOSURE_IS_MECHANISM_CLOSURE_V6",
     "activation_path": "canonical/governance/R2_TOTAL_META_ACTION_CONTROL_LAW_CLOSURE_20261008_V1.json",
     "activation_git_blob_sha": "ccff8eb2af5e872e549fdc945bff66c47d988b4e",
     "regression_test_path": "canonical/tests/test_general_adequate_decision_totalized_v1.py",
     "regression_test_git_blob_sha": "eb40f8ad4a2d1d8785d83cd160c02985d64c732d",
-    "remaining_problem_class": "ADEQUACY_COVERAGE_EXPANSION_NOT_GENERAL_MECHANISM"
+    "remaining_problem_class": "ADEQUACY_COVERAGE_EXPANSION_NOT_GENERAL_MECHANISM",
+    "authoritative_field": "mechanism_closure"
   }
 }
