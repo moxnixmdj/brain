@@ -1,0 +1,24 @@
+name: verify-r2-terminal-authority-reconciliation-v1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/CURRENT_TERMINAL_AUTHORITY.json
+      - canonical/governance/CURRENT_MISSION_OBJECTIVE.json
+      - canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json
+      - canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json
+      - canonical/tests/test_current_terminal_authority_r2_reconciliation_v1.py
+      - .github/workflows/verify-r2-terminal-authority-reconciliation-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run R2 terminal authority reconciliation test
+        run: python -m unittest -v canonical.tests.test_current_terminal_authority_r2_reconciliation_v1
