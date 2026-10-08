@@ -696,6 +696,15 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         )
         self.assertTrue(out["owned_raw_acquisition_available"])
 
+
+    def test_policy_adequacy_repair_class_has_distinct_causal_effect(self):
+        self.assertEqual(
+            brain._REPAIR_EFFECT_BY_CLASS[
+                "SYNTHESIZE_OR_AUTHENTICATE_POLICY_ADEQUACY_COVER"
+            ],
+            "repair.policy_adequacy_cover.available",
+        )
+
     def test_unknown_mode_fails_closed(self):
         out = brain.run({"mode": "invented"})
         self.assertFalse(out["pass"])

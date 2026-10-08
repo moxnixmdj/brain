@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_R2_R3_ADEQUACY_REPAIR_BRIDGE_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS_4_OF_4",
+  "branch": "r2-r3-adequacy-repair-bridge-v1",
+  "exact_blobs": {
+    "r3": "8dfe40b7e4fc5d9d5ba43cc524fc32a677d7a9c8",
+    "live_runtime": "2cf264f880deeb94ebb120224351c19443a45c29"
+  },
+  "isolated_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "checks_run": 4,
+    "checks_passed": 4
+  },
+  "proved": [
+    "EXPLICIT_POLICY_ADEQUACY_GAP_HAS_DISTINCT_REPAIR_CLASS",
+    "POLICY_ADEQUACY_REPAIR_EFFECT_IS_EXPLICIT",
+    "POLICY_CHANGING_OBSERVATION_GAP_REMAINS_INFORMATION_ACQUISITION",
+    "GENERIC_SEMANTIC_GAP_REMAINS_SEMANTIC_REPAIR"
+  ],
+  "hard_nonclaims": [
+    "NO_ADEQUACY_COVER_SELF_CERTIFICATION",
+    "NO_CLAIM_GENERAL_R2_COVERAGE_COMPLETE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}

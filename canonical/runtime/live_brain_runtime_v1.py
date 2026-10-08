@@ -118,6 +118,7 @@ def _causal_synthesize(manifest: Mapping[str, Any]) -> dict[str, Any]:
 _REPAIR_EFFECT_BY_CLASS = {
     "ACQUIRE_COMPOSE_OR_INVENT_VERIFIABLE_CAPABILITY": "repair.capability.available",
     "BIND_AND_INDEPENDENTLY_VERIFY_EFFECT_SEMANTICS": "repair.effect_semantics.verified",
+    "SYNTHESIZE_OR_AUTHENTICATE_POLICY_ADEQUACY_COVER": "repair.policy_adequacy_cover.available",
     "OBTAIN_OR_REPAIR_INDEPENDENT_VERIFICATION": "repair.independent_verification.available",
     "RECOVER_FROM_OBSERVED_EFFECT_WITHOUT_BLIND_REPLAY": "repair.safe_recovery.available",
     "REPLACE_FALSIFIED_ROUTE": "repair.verified_route_replacement.available",
