@@ -208,6 +208,38 @@ def compile_gap(
                 "OWNED_ADAPTER_CANDIDATE_NOW_AVAILABLE__ROOT1_GAP_NOT_ESTABLISHED"
             )
 
+        registry_path = (
+            Path(repo_root).resolve(strict=True)
+            / "canonical"
+            / "runtime"
+            / "BOUND_CAPABILITY_REGISTRY_V1.json"
+        )
+        registry_raw = registry_path.read_bytes()
+        registry_doc = json.loads(registry_raw.decode("utf-8"))
+        registry_caps = (
+            registry_doc.get("capabilities")
+            if isinstance(registry_doc, Mapping)
+            else None
+        )
+        if not isinstance(registry_caps, Mapping):
+            return _fail("BOUND_CAPABILITY_REGISTRY_INVALID")
+        exact_owned = sorted(
+            str(capability_id)
+            for capability_id, row in registry_caps.items()
+            if isinstance(row, Mapping)
+            and row.get("status") == "VERIFIED_BOUND_CAPABILITY"
+            and REQUIRED_PRIMITIVE in {
+                str(effect)
+                for effect in (row.get("provides") or [])
+                if isinstance(effect, str)
+            }
+        )
+        if exact_owned:
+            return _fail(
+                "EXACT_ADAPTER_AUTHORING_PRIMITIVE_ALREADY_VERIFIED_OWNED",
+                verified_capability_ids=exact_owned,
+            )
+
         witness_core = {
             "blocked_success_work_id": blocked_id,
             "frontier_handoff_work_id": wid,
@@ -217,6 +249,9 @@ def compile_gap(
             "replay_capsule_sha256": replay.get("replay_capsule_sha256"),
             "adapter_frontier_sha256": adapter_sha,
             "verification_authority_sha256": authority_sha,
+            "bound_capability_registry_sha256": hashlib.sha256(
+                registry_raw
+            ).hexdigest(),
             "required_primitive": REQUIRED_PRIMITIVE,
         }
         witness_id = "r3-root1-adapter-gap:" + _sha(witness_core)
@@ -237,7 +272,7 @@ def compile_gap(
             "witness": witness_core,
             "currently_bound_frontier_acquisition_provider_present": False,
             "current_owned_adapter_frontier_exhausted_for_witness": True,
-            "generic_bound_capability_registry_code_authoring_route_proved": False,
+            "exact_required_primitive_verified_owned": False,
             "claim_scope": (
                 "CURRENT_BOUND_R3_SUCCESS_ADAPTER_FRONTIER_AND_CURRENTLY_BOUND_"
                 "ACQUISITION_PROVIDER_SET_ONLY"
