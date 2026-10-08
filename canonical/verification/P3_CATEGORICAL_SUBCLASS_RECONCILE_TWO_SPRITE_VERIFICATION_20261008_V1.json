@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_P3_CATEGORICAL_SUBCLASS_RECONCILE_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "EXACT_CHANGED_BLOBS_VERIFIED__PRIMARY_41_OF_41__SECONDARY_19_OF_19__ZERO_TERMINAL_CREDIT",
+  "branch": "feature/p3-categorical-subclass-reconcile-20261008-v1",
+  "purpose": "Extend current verified P3 support V5/V6 with explicit member/instance/subclass/subset closure while preserving already-promoted exact set-membership and numeric routes.",
+  "changed_blobs": {
+    "canonical/runtime/bounded_explicit_categorical_support_v1.py": "663545f4ad4275191c352f4431414996509941d5",
+    "canonical/runtime/selected_support_truth_certificate_v5.py": "485df3635f11f8dd1fa3ff50d0f51c2f0b6acd24",
+    "canonical/tests/test_bounded_explicit_categorical_support_v1.py": "633bf3e320038de8aed026099998cd0e0b29bc34",
+    "canonical/tests/test_p3_categorical_subclass_reconcile_v1.py": "526a001d4708a74ea8e694f3ef08f3cf86cfd947"
+  },
+  "verification": [
+    {
+      "provider": "SPRITES",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "workspace": "/home/sprite/p3-categorical-reconcile-exact-20261008",
+      "tests_passed": 41,
+      "tests_total": 41,
+      "changed_blob_matches": 4
+    },
+    {
+      "provider": "SPRITES",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "workspace": "/home/sprite/p3-categorical-reconcile-second-20261008",
+      "tests_passed": 19,
+      "tests_total": 19
+    }
+  ],
+  "preserved_regressions": [
+    "CURRENT_SET_MEMBERSHIP_V1_ROUTE_PASSES_UNCHANGED",
+    "CURRENT_NUMERIC_RELATION_V1_ROUTE_PASSES_UNCHANGED",
+    "CURRENT_V6_FRONT_DOOR_CONSUMES_NEW_CATEGORICAL_SUPPORT_WITHOUT_AUTHORITY_ESCALATION"
+  ],
+  "added_semantics": [
+    "EXPLICIT_MEMBER_OR_INSTANCE_RELATION",
+    "EXPLICIT_SUBCLASS_OR_SUBSET_RELATION",
+    "POSITIVE_SUBCLASS_TRANSITIVE_CLOSURE",
+    "POSITIVE_MEMBERSHIP_UPWARD_PROPAGATION",
+    "NEGATIVE_MEMBERSHIP_DOWNWARD_PROPAGATION_ONLY",
+    "PROVENANCE_CARRYING_PROOF_PATHS",
+    "UNKNOWN_OUTSIDE_CHECKED_GRAMMAR"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_PARAPHRASE_OR_NLI",
+    "NO_TEMPORAL_OR_CAUSAL_RELATION_CLOSURE",
+    "NO_WHOLE_P3_CLOSURE",
+    "NO_SOURCE_AUTHORIZATION_OR_POLICY_ADEQUACY_PROMOTION",
+    "NO_DB_ADMISSION_OR_U_SUBTRACTION",
+    "NO_U_EMPTY_ABC_D_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
