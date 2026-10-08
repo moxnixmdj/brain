@@ -84,7 +84,7 @@ OPERATIONS: dict[str, dict[str, Any]] = {
 
 
 def _token(value: Any, label: str) -> str:
-    if not isinstance(value, str) or not value.strip() or "\\x00" in value:
+    if not isinstance(value, str) or not value.strip() or chr(0) in value:
         raise NativeSpecializedCapabilityError(label + "_INVALID")
     return value.strip()
 
