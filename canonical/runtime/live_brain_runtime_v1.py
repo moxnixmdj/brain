@@ -33,6 +33,7 @@ SURFACES = (
     "MYSTERY_SEPARABLE_TRANSFORM_V1",
     "CAPABILITY_FIRST_SCHEDULER_V1",
     "COUNTEREXAMPLE_GUIDED_CAUSAL_ARCHITECTURE_SYNTHESIZER_V1",
+    "VERIFIED_REPAIR_REPLAY_LOOP_V1",
 )
 
 
@@ -194,6 +195,205 @@ def synthesize_failure_repair(
         return _fail("REPAIR_SYNTHESIS_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
 
 
+def _compile_verified_repair_problem(
+    *,
+    repair: Mapping[str, Any],
+    request: Mapping[str, Any],
+    retry_capsule_sha256: str,
+) -> dict[str, Any]:
+    synthesis = repair.get("causal_synthesis")
+    if not isinstance(synthesis, Mapping) or synthesis.get("pass") is not True:
+        raise ValueError("REPAIR_SYNTHESIS_NOT_EXECUTABLE")
+    winner = synthesis.get("winner")
+    if not isinstance(winner, Mapping):
+        raise ValueError("REPAIR_WINNER_MISSING")
+    ids = winner.get("components")
+    components = request.get("components")
+    if not isinstance(ids, Sequence) or isinstance(ids, (str, bytes)) or not ids:
+        raise ValueError("REPAIR_WINNER_COMPONENTS_INVALID")
+    if not isinstance(components, Sequence) or isinstance(components, (str, bytes)):
+        raise ValueError("REPAIR_COMPONENT_FRONTIER_REQUIRED")
+    by_id = {
+        str(row.get("id") or ""): row
+        for row in components
+        if isinstance(row, Mapping) and str(row.get("id") or "")
+    }
+    selected = []
+    for cid in ids:
+        cid = str(cid)
+        source = by_id.get(cid)
+        if not isinstance(source, Mapping):
+            raise ValueError("REPAIR_WINNER_COMPONENT_SOURCE_MISSING:" + cid)
+        if source.get("verified") is not True or source.get("brain_owned") is not True or source.get("donor_independent") is not True:
+            raise ValueError("REPAIR_COMPONENT_AUTHORITY_INVALID:" + cid)
+        costs = source.get("cost") or {}
+        if not isinstance(costs, Mapping) or float(costs.get("incremental_spend_usd", 0)) != 0:
+            raise ValueError("REPAIR_COMPONENT_NONZERO_SPEND:" + cid)
+        executable = source.get("executable_capability")
+        if not isinstance(executable, Mapping):
+            raise ValueError("REPAIR_COMPONENT_EXECUTABLE_BINDING_REQUIRED:" + cid)
+        if str(executable.get("id") or "") != cid:
+            raise ValueError("REPAIR_COMPONENT_EXECUTABLE_ID_MISMATCH:" + cid)
+        if sorted(executable.get("requires") or []) != sorted(source.get("requires") or []):
+            raise ValueError("REPAIR_COMPONENT_REQUIRES_MISMATCH:" + cid)
+        if sorted(executable.get("provides") or []) != sorted(source.get("provides") or []):
+            raise ValueError("REPAIR_COMPONENT_PROVIDES_MISMATCH:" + cid)
+        selected.append(deepcopy(dict(executable)))
+    fingerprint = str(repair.get("failure_fingerprint") or "")
+    task_id = str(request.get("repair_task_id") or (
+        "repair-" + fingerprint[:16] + "-" + retry_capsule_sha256[:12]
+    ))
+    return {
+        "task_id": task_id,
+        "initial_facts": list(request.get("initial_facts") or []),
+        "target_effects": [str(repair["required_repair_effect"])],
+        "capabilities": selected,
+        "max_solver_cycles": min(int(request.get("max_solver_cycles", 64)), 256),
+    }
+
+
+def _replay_retry_context(
+    context: Mapping[str, Any],
+    *,
+    repo_root: str | Path,
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None,
+) -> dict[str, Any]:
+    if not isinstance(context, Mapping):
+        return _fail("RETRY_CONTEXT_NOT_OBJECT")
+    mode = str(context.get("mode") or "")
+    if mode in {"repair_synthesis", "repair_cycle"}:
+        return _fail("RETRY_CONTEXT_REPAIR_RECURSION_FORBIDDEN")
+    return run(
+        deepcopy(dict(context)),
+        repo_root=repo_root,
+        information_provider=information_provider,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+    )
+
+
+def execute_failure_repair_cycle(
+    request: Mapping[str, Any],
+    *,
+    repo_root: str | Path = ROOT,
+    state_path: str | Path | None = None,
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+) -> dict[str, Any]:
+    if not isinstance(request, Mapping):
+        return _fail("REPAIR_REQUEST_NOT_OBJECT")
+    try:
+        learning = _learning_module()
+        path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
+        fingerprint = str(request.get("failure_fingerprint") or "").strip()
+        if not fingerprint:
+            return _fail("FAILURE_FINGERPRINT_REQUIRED")
+        retry = learning.get_failure_retry_context(
+            fingerprint,
+            state_path=path,
+            retry_capsule_sha256=request.get("retry_capsule_sha256"),
+        )
+        synthesized = synthesize_failure_repair(request, state_path=path)
+        if synthesized.get("pass") is not True:
+            return {
+                **synthesized,
+                "status": "REPAIR_CYCLE_UNRESOLVED_AT_SYNTHESIS",
+                "retry_capsule_sha256": retry["retry_capsule_sha256"],
+            }
+        problem = _compile_verified_repair_problem(
+            repair=synthesized,
+            request=request,
+            retry_capsule_sha256=retry["retry_capsule_sha256"],
+        )
+        kwargs = dict(request.get("solver_kwargs") or {})
+        kwargs.setdefault("episode_id", "repair-" + retry["retry_capsule_sha256"][:12])
+        kwargs.setdefault("scope_id", "verified-repair-loop")
+        if proposal_provider is not None:
+            kwargs["proposal_provider"] = proposal_provider
+        if capability_expander is not None:
+            kwargs["capability_expander"] = capability_expander
+        repair_execution = _v12_run(problem, repo_root=repo_root, kwargs=kwargs)
+        repair_learning = _observe_runtime_outcome(
+            repair_execution,
+            state_path=path,
+            learn=request.get("learn", True) is not False,
+            retry_context={
+                "mode": "generic",
+                "problem": deepcopy(problem),
+                "episode_id": kwargs["episode_id"],
+                "scope_id": kwargs["scope_id"],
+                "learn": True,
+            },
+        )
+        if repair_execution.get("pass") is not True:
+            return {
+                "schema": SCHEMA,
+                "status": "REPAIR_EXECUTION_FAILED_VERIFICATION",
+                "pass": False,
+                "failure_fingerprint": fingerprint,
+                "retry_capsule_sha256": retry["retry_capsule_sha256"],
+                "repair_synthesis": synthesized,
+                "repair_problem": problem,
+                "repair_execution": repair_execution,
+                "repair_learning": repair_learning,
+                "terminal_authority": False,
+                "capability_promotion_authority": False,
+                "terminal_credit_delta": 0,
+            }
+        replay = _replay_retry_context(
+            retry["context"],
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
+        replay_pass = replay.get("pass") is True
+        repair_record = {
+            "required_repair_effect": synthesized["required_repair_effect"],
+            "winner_components": list(synthesized["causal_synthesis"]["winner"]["components"]),
+            "repair_task_id": problem["task_id"],
+            "repair_execution_status": repair_execution.get("status"),
+            "repair_execution_pass": True,
+            "original_replay_status": replay.get("status"),
+            "original_replay_pass": replay_pass,
+        }
+        recorded = learning.record_repair_outcome(
+            fingerprint,
+            retry_capsule_sha256=retry["retry_capsule_sha256"],
+            repair_record=repair_record,
+            original_replay_pass=replay_pass,
+            state_path=path,
+        )
+        return {
+            "schema": SCHEMA,
+            "status": (
+                "REPAIR_VERIFIED_BY_ORIGINAL_OBLIGATION_REPLAY"
+                if replay_pass else "REPAIR_EFFECT_VERIFIED__ORIGINAL_FAILURE_PERSISTS"
+            ),
+            "pass": replay_pass,
+            "failure_fingerprint": fingerprint,
+            "retry_capsule_sha256": retry["retry_capsule_sha256"],
+            "repair_synthesis": synthesized,
+            "repair_problem": problem,
+            "repair_execution": repair_execution,
+            "repair_learning": repair_learning,
+            "original_replay": replay,
+            "repair_receipt": recorded,
+            "permanent_reuse_authorized": bool(
+                isinstance(repair_learning, Mapping)
+                and repair_learning.get("permanent_reuse_authorized") is True
+            ),
+            "capability_promotion_authority": False,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
+    except Exception as exc:
+        return _fail("REPAIR_CYCLE_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
+
+
 def _active_learning_context(state_path: str | Path | None, *, scope_id: str, episode_id: str) -> dict[str, Any]:
     learning = _learning_module()
     path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
@@ -224,10 +424,19 @@ def _active_learning_context(state_path: str | Path | None, *, scope_id: str, ep
     }
 
 
-def _integrate_learning(out: Mapping[str, Any], *, state_path: str | Path | None) -> dict[str, Any]:
+def _integrate_learning(
+    out: Mapping[str, Any],
+    *,
+    state_path: str | Path | None,
+    retry_context: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     learning = _learning_module()
     path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
-    return learning.integrate_solver_output(out, state_path=path)
+    return learning.integrate_solver_output(
+        out,
+        state_path=path,
+        retry_context=retry_context,
+    )
 
 
 def _observe_runtime_outcome(
@@ -235,6 +444,7 @@ def _observe_runtime_outcome(
     *,
     state_path: str | Path | None,
     learn: bool,
+    retry_context: Mapping[str, Any] | None = None,
 ) -> dict[str, Any] | None:
     """Feed every live failure into R3 while keeping success promotion fail-closed.
 
@@ -250,7 +460,7 @@ def _observe_runtime_outcome(
         return None
 
     if out.get("pass") is not True:
-        return _integrate_learning(out, state_path=state_path)
+        return _integrate_learning(out, state_path=state_path, retry_context=retry_context)
 
     learning_keys = {
         "current_episode_verified",
@@ -260,7 +470,7 @@ def _observe_runtime_outcome(
         "verified_skill_reuse_authorized",
     }
     if any(key in out for key in learning_keys):
-        return _integrate_learning(out, state_path=state_path)
+        return _integrate_learning(out, state_path=state_path, retry_context=retry_context)
 
     return {
         "status": "SUCCESS_OBSERVED__NO_VERIFIED_LEARNING_ARTIFACT",
@@ -408,7 +618,18 @@ def run_generic(
             skill_plan = _skill_plan(problem, ctx["active_verified_skills"], active_invalidators)
 
         out = _v12_run(problem, repo_root=repo_root, kwargs=kwargs)
-        learning = _integrate_learning(out, state_path=ctx["state_path"]) if learn else None
+        retry_context = {
+            "mode": "generic",
+            "problem": deepcopy(dict(problem)),
+            "episode_id": episode_id,
+            "scope_id": scope_id,
+            "active_invalidators": list(active_invalidators),
+            "learn": True,
+        }
+        learning = (
+            _integrate_learning(out, state_path=ctx["state_path"], retry_context=retry_context)
+            if learn else None
+        )
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
@@ -449,14 +670,24 @@ def run_decision(
             capability_expander=capability_expander,
         )
         execution = out.get("execution_result")
+        retry_context = {
+            "mode": "decision",
+            "request": deepcopy(dict(request)),
+            "learn": True,
+        }
         learning = None
         if learn and isinstance(execution, Mapping):
-            learning = _integrate_learning(execution, state_path=state_path)
+            learning = _integrate_learning(
+                execution,
+                state_path=state_path,
+                retry_context=retry_context,
+            )
         elif learn and out.get("pass") is not True:
             learning = _observe_runtime_outcome(
                 out,
                 state_path=state_path,
                 learn=True,
+                retry_context=retry_context,
             )
         return {
             "schema": SCHEMA,
@@ -510,6 +741,12 @@ def run_specialized(
             observation,
             state_path=state_path,
             learn=learn,
+            retry_context={
+                "mode": "specialized",
+                "surface": name,
+                "payload": deepcopy(dict(payload)),
+                "learn": True,
+            },
         )
         return {
             "schema": SCHEMA,
@@ -598,6 +835,11 @@ def run(
             raw,
             state_path=request.get("state_path"),
             learn=request.get("learn", True) is not False,
+            retry_context={
+                "mode": "compiled_bound",
+                "request": deepcopy(dict(payload)),
+                "learn": True,
+            },
         )
         return {
             "schema": SCHEMA,
@@ -618,6 +860,11 @@ def run(
             raw,
             state_path=request.get("state_path"),
             learn=request.get("learn", True) is not False,
+            retry_context={
+                "mode": "raw_bound",
+                "request": deepcopy(dict(payload)),
+                "learn": True,
+            },
         )
         return {
             "schema": SCHEMA,
@@ -637,6 +884,18 @@ def run(
         return synthesize_failure_repair(
             payload,
             state_path=request.get("state_path"),
+        )
+
+    if mode == "repair_cycle":
+        nested = request.get("request")
+        payload = nested if isinstance(nested, Mapping) else request
+        return execute_failure_repair_cycle(
+            payload,
+            repo_root=repo_root,
+            state_path=request.get("state_path"),
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
         )
 
     if mode == "development_schedule":

@@ -36,6 +36,10 @@ SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1"
 STATE_SCHEMA = "PROJECT_BRAIN_SELF_IMPROVEMENT_STATE_V1"
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_STATE_PATH = ROOT / "canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json"
+SENSITIVE_RETRY_KEY_PARTS = (
+    "password", "passwd", "secret", "api_key", "apikey", "authorization",
+    "cookie", "credential", "access_token", "refresh_token", "private_key",
+)
 
 
 class SelfImprovementError(ValueError):
@@ -65,6 +69,46 @@ def _items(value: Any) -> list[str]:
     if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
         return []
     return sorted({_s(x) for x in value if _s(x)})
+
+
+def _validate_retry_value(value: Any, *, path: str = "retry", depth: int = 0) -> None:
+    if depth > 32:
+        raise SelfImprovementError("RETRY_CONTEXT_TOO_DEEP:" + path)
+    if value is None or isinstance(value, (bool, int, float, str)):
+        return
+    if isinstance(value, Mapping):
+        for key, item in value.items():
+            if not isinstance(key, str):
+                raise SelfImprovementError("RETRY_CONTEXT_KEY_NOT_STRING:" + path)
+            lowered = key.lower().replace("-", "_")
+            if any(part in lowered for part in SENSITIVE_RETRY_KEY_PARTS):
+                raise SelfImprovementError("RETRY_CONTEXT_SENSITIVE_KEY_REJECTED:" + path + "." + key)
+            _validate_retry_value(item, path=path + "." + key, depth=depth + 1)
+        return
+    if isinstance(value, Sequence) and not isinstance(value, (str, bytes, bytearray)):
+        for i, item in enumerate(value):
+            _validate_retry_value(item, path=f"{path}[{i}]", depth=depth + 1)
+        return
+    raise SelfImprovementError("RETRY_CONTEXT_VALUE_TYPE_INVALID:" + path + ":" + type(value).__name__)
+
+
+def _make_retry_capsule(context: Mapping[str, Any]) -> dict[str, Any]:
+    if not isinstance(context, Mapping):
+        raise SelfImprovementError("RETRY_CONTEXT_NOT_OBJECT")
+    _validate_retry_value(context)
+    copied = deepcopy(dict(context))
+    raw = _canon(copied).encode("utf-8")
+    if len(raw) > 1_000_000:
+        raise SelfImprovementError("RETRY_CONTEXT_TOO_LARGE")
+    digest = _sha(copied)
+    return {
+        "schema": "PROJECT_BRAIN_FAILURE_RETRY_CAPSULE_V1",
+        "sha256": digest,
+        "context": copied,
+        "secret_scan": "PASS",
+        "replay_authorized": True,
+        "resolved": False,
+    }
 
 
 def _empty_state() -> dict[str, Any]:
@@ -219,6 +263,7 @@ def integrate_solver_output(
     out: Mapping[str, Any],
     *,
     state_path: str | Path = DEFAULT_STATE_PATH,
+    retry_context: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Persist only independently verified learning and update Pareto reuse state."""
     if not isinstance(out, Mapping):
@@ -230,7 +275,31 @@ def integrate_solver_output(
         fid = diagnosis["failure_fingerprint"]
         previous = state["failures"].get(fid)
         count = int(previous.get("count", 0)) + 1 if isinstance(previous, Mapping) else 1
-        state["failures"][fid] = {**diagnosis, "count": count}
+        retry_capsules = {}
+        repair_receipts = {}
+        if isinstance(previous, Mapping):
+            if isinstance(previous.get("retry_capsules"), Mapping):
+                retry_capsules = deepcopy(dict(previous["retry_capsules"]))
+            if isinstance(previous.get("repair_receipts"), Mapping):
+                repair_receipts = deepcopy(dict(previous["repair_receipts"]))
+        retry_sha = None
+        if retry_context is not None:
+            capsule = _make_retry_capsule(retry_context)
+            retry_sha = capsule["sha256"]
+            prior_capsule = retry_capsules.get(retry_sha)
+            if isinstance(prior_capsule, Mapping) and prior_capsule.get("resolved") is True:
+                capsule["resolved"] = True
+                capsule["resolved_by"] = prior_capsule.get("resolved_by")
+            retry_capsules[retry_sha] = capsule
+        state["failures"][fid] = {
+            **diagnosis,
+            "count": count,
+            "retry_capsules": retry_capsules,
+            "last_retry_capsule_sha256": retry_sha or (
+                previous.get("last_retry_capsule_sha256") if isinstance(previous, Mapping) else None
+            ),
+            "repair_receipts": repair_receipts,
+        }
         _refresh_stats(state)
         _write_state(state, state_path)
         return {
@@ -238,6 +307,8 @@ def integrate_solver_output(
             "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
             "pass": False,
             "diagnosis": diagnosis,
+            "retry_capsule_sha256": retry_sha,
+            "retry_capsule_persisted": retry_sha is not None,
             "state_stats": deepcopy(state["stats"]),
             "permanent_reuse_authorized": False,
             "terminal_authority": False,
@@ -332,6 +403,95 @@ def integrate_solver_output(
         "skill_admission": deepcopy(skill_admission),
         "state_stats": deepcopy(state["stats"]),
         "permanent_reuse_authorized": active_skill_id is not None,
+        "terminal_authority": False,
+    }
+
+
+def get_failure_retry_context(
+    failure_fingerprint: str,
+    *,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+    retry_capsule_sha256: str | None = None,
+) -> dict[str, Any]:
+    fid = _s(failure_fingerprint)
+    if not fid:
+        raise SelfImprovementError("FAILURE_FINGERPRINT_REQUIRED")
+    state = load_state(state_path)
+    record = state.get("failures", {}).get(fid)
+    if not isinstance(record, Mapping):
+        raise SelfImprovementError("FAILURE_FINGERPRINT_UNKNOWN:" + fid)
+    capsules = record.get("retry_capsules")
+    if not isinstance(capsules, Mapping) or not capsules:
+        raise SelfImprovementError("FAILURE_RETRY_CAPSULE_MISSING:" + fid)
+    wanted = _s(retry_capsule_sha256) if retry_capsule_sha256 is not None else _s(record.get("last_retry_capsule_sha256"))
+    if not wanted:
+        wanted = sorted(str(k) for k in capsules)[-1]
+    capsule = capsules.get(wanted)
+    if not isinstance(capsule, Mapping):
+        raise SelfImprovementError("FAILURE_RETRY_CAPSULE_UNKNOWN:" + wanted)
+    context = capsule.get("context")
+    if not isinstance(context, Mapping):
+        raise SelfImprovementError("FAILURE_RETRY_CONTEXT_INVALID:" + wanted)
+    if capsule.get("replay_authorized") is not True or capsule.get("secret_scan") != "PASS":
+        raise SelfImprovementError("FAILURE_RETRY_CAPSULE_NOT_AUTHORIZED:" + wanted)
+    if _sha(context) != wanted:
+        raise SelfImprovementError("FAILURE_RETRY_CAPSULE_DIGEST_MISMATCH:" + wanted)
+    return {
+        "failure_fingerprint": fid,
+        "retry_capsule_sha256": wanted,
+        "context": deepcopy(dict(context)),
+        "resolved": capsule.get("resolved") is True,
+        "resolved_by": capsule.get("resolved_by"),
+    }
+
+
+def record_repair_outcome(
+    failure_fingerprint: str,
+    *,
+    retry_capsule_sha256: str,
+    repair_record: Mapping[str, Any],
+    original_replay_pass: bool,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+) -> dict[str, Any]:
+    if not isinstance(repair_record, Mapping):
+        raise SelfImprovementError("REPAIR_RECORD_NOT_OBJECT")
+    fid = _s(failure_fingerprint)
+    retry_sha = _s(retry_capsule_sha256)
+    state = load_state(state_path)
+    failure = state.get("failures", {}).get(fid)
+    if not isinstance(failure, dict):
+        raise SelfImprovementError("FAILURE_FINGERPRINT_UNKNOWN:" + fid)
+    capsules = failure.get("retry_capsules")
+    if not isinstance(capsules, dict) or retry_sha not in capsules:
+        raise SelfImprovementError("FAILURE_RETRY_CAPSULE_UNKNOWN:" + retry_sha)
+    repair = deepcopy(dict(repair_record))
+    repair_sha = _sha(repair)
+    receipts = failure.setdefault("repair_receipts", {})
+    if not isinstance(receipts, dict):
+        raise SelfImprovementError("FAILURE_REPAIR_RECEIPTS_INVALID")
+    receipts[repair_sha] = {
+        "sha256": repair_sha,
+        "repair": repair,
+        "original_replay_pass": bool(original_replay_pass),
+    }
+    capsule = capsules[retry_sha]
+    if not isinstance(capsule, dict):
+        raise SelfImprovementError("FAILURE_RETRY_CAPSULE_INVALID:" + retry_sha)
+    if original_replay_pass:
+        capsule["resolved"] = True
+        capsule["resolved_by"] = repair_sha
+    _write_state(state, state_path)
+    unresolved = sum(
+        1 for item in capsules.values()
+        if isinstance(item, Mapping) and item.get("resolved") is not True
+    )
+    return {
+        "failure_fingerprint": fid,
+        "retry_capsule_sha256": retry_sha,
+        "repair_receipt_sha256": repair_sha,
+        "original_replay_pass": bool(original_replay_pass),
+        "retry_instance_resolved": capsule.get("resolved") is True,
+        "unresolved_retry_instance_count": unresolved,
         "terminal_authority": False,
     }
 

@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFIED_REPAIR_REPLAY_LOOP_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__6_OF_6_FOCUSED_REPAIR_LOOP_TESTS",
+  "branch": "r3-verified-repair-replay-loop-20261008",
+  "base_commit": "93f75f18e3005735b8a870f879169eda1fda8c97",
+  "isolated_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+  },
+  "verification": {
+    "command": "python3 -m unittest canonical.tests.test_verified_repair_replay_loop_v1 -v",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "elapsed_seconds": 0.009,
+    "py_compile": "PASS"
+  },
+  "proved": [
+    "FAILURES_CAN_PERSIST_CONTENT_ADDRESSED_RETRY_CAPSULES",
+    "RETRY_CAPSULES_REJECT_OBVIOUS_SECRET_BEARING_KEYS",
+    "REPAIR_RESOLUTION_IS_PER_RETRY_INSTANCE_NOT_PER_FAILURE_CLASS",
+    "REPAIR_COMPONENT_EXECUTION_REQUIRES_EXACT_EXECUTABLE_BINDING",
+    "REPAIR_EFFECT_SUCCESS_IS_INSUFFICIENT_WITHOUT_ORIGINAL_OBLIGATION_REPLAY_PASS",
+    "ORIGINAL_OBLIGATION_REPLAY_PASS_MARKS_ONLY_THAT_RETRY_INSTANCE_RESOLVED"
+  ],
+  "authority_boundary": {
+    "repair_execution": "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
+    "repair_generalization": "EXISTING_R3_EPISODE_AND_SKILL_VERIFICATION_GATES",
+    "self_certification_allowed": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
