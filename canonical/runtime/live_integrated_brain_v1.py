@@ -17,7 +17,7 @@ from typing import Any, Mapping
 
 from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute
-from canonical.runtime import goal_compiler
+from canonical.runtime import astra_runtime, goal_compiler
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 from canonical.runtime.raw_goal_archive_acceptance_v1 import verify as verify_raw_archive_acceptance
 
@@ -260,16 +260,121 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
                 "incremental_spend_usd": 0,
             }
 
-        if compiled.get("controller_actions") is not None:
+        controller_actions = compiled.get("controller_actions")
+        routing_targets = list(compiled.get("target_effects") or [])
+        if not routing_targets:
+            for part in compiled.get("compiled_parts") or []:
+                if isinstance(part, Mapping):
+                    for effect in part.get("target_effects") or []:
+                        if isinstance(effect, str) and effect and effect not in routing_targets:
+                            routing_targets.append(effect)
+
+        raw_contract = compile_contract(
+            goal,
+            source_id="user",
+            routing_target_effects=routing_targets,
+        )
+        if raw_contract.get("pass") is not True:
             return {
                 "schema": SCHEMA,
-                "status": "FAIL__COMPILED_CONTROL_PLAN_NOT_BOUND",
+                "status": "FAIL__LOSSLESS_RAW_TASK_CONTRACT",
                 "pass": False,
                 "task_id": task_id,
-                "failure_class": "LIVE_RUNTIME_COMPOSITION_BINDING_GAP",
-                "compiler_mode": compiled.get("compiler_mode"),
+                "failure_class": "RAW_TASK_OBLIGATION_ENVELOPE_FAILURE",
+                "errors": raw_contract.get("errors"),
                 "elapsed_ns": perf_counter_ns() - started,
                 "incremental_spend_usd": 0,
+            }
+
+        if controller_actions is not None:
+            if (
+                not isinstance(controller_actions, list)
+                or not controller_actions
+                or len(controller_actions) > 64
+                or any(not isinstance(action, Mapping) for action in controller_actions)
+            ):
+                return {
+                    "schema": SCHEMA,
+                    "status": "FAIL__COMPILED_CONTROL_PLAN_INVALID",
+                    "pass": False,
+                    "task_id": task_id,
+                    "failure_class": "LIVE_RUNTIME_COMPOSITION_CONTRACT_INVALID",
+                    "compiler_mode": compiled.get("compiler_mode"),
+                    "elapsed_ns": perf_counter_ns() - started,
+                    "incremental_spend_usd": 0,
+                }
+            try:
+                controller = astra_runtime.run_goal(
+                    {
+                        "id": "live-raw-goal-controller",
+                        "controller_actions": [dict(action) for action in controller_actions],
+                        "max_controller_actions": 64,
+                    },
+                    {
+                        "mission_id": task_id,
+                        "goal": goal,
+                    },
+                )
+            except Exception as exc:
+                return {
+                    "schema": SCHEMA,
+                    "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+                    "pass": False,
+                    "task_id": task_id,
+                    "failure_class": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE",
+                    "compiler_mode": compiled.get("compiler_mode"),
+                    "reason": type(exc).__name__ + ":" + str(exc),
+                    "elapsed_ns": perf_counter_ns() - started,
+                    "incremental_spend_usd": 0,
+                }
+            passed = (
+                isinstance(controller, Mapping)
+                and controller.get("returncode") == 0
+                and controller.get("controller_mode") == "MODEL_INDEPENDENT_ACTION_PLAN"
+                and isinstance(controller.get("final_summary"), str)
+                and bool(controller.get("final_summary").strip())
+            )
+            return {
+                "schema": SCHEMA,
+                "status": (
+                    "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__"
+                    "RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
+                    if passed else "FAIL__LIVE_CONTROLLER_RESULT_INVALID"
+                ),
+                "pass": passed,
+                "task_id": task_id,
+                "raw_goal": goal,
+                "raw_goal_sha256": raw_contract["task_sha256"],
+                "raw_task_contract_sha256": raw_contract["task_contract_sha256"],
+                "raw_acceptance_obligation_count": len(
+                    raw_contract["acceptance_contract"]["obligations"]
+                ),
+                "raw_source_coverage_complete": raw_contract[
+                    "nonwhitespace_source_coverage_complete"
+                ],
+                "compiler_mode": compiled.get("compiler_mode"),
+                "compiled_part_count": len(compiled.get("compiled_parts") or []),
+                "controller_action_count": len(controller_actions),
+                "controller_execution": dict(controller) if isinstance(controller, Mapping) else controller,
+                "controller_checkpoint": (
+                    controller.get("controller_checkpoint")
+                    if isinstance(controller, Mapping) else None
+                ),
+                "cognition_dependency_class": (
+                    controller.get("cognition_dependency_class")
+                    if isinstance(controller, Mapping) else None
+                ),
+                "model_dependency_count": (
+                    controller.get("model_dependency_count")
+                    if isinstance(controller, Mapping) else None
+                ),
+                "routing_success_authority": False,
+                "semantic_acceptance_complete": False,
+                "accepted_raw_obligation_ids": [],
+                "elapsed_ns": perf_counter_ns() - started,
+                "incremental_spend_usd": 0,
+                "benchmark_specific": False,
+                "terminal_credit_delta": 0,
             }
 
         selected = str(compiled.get("selected_capability") or "").strip()
@@ -291,23 +396,6 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
                 "task_id": task_id,
                 "failure_class": "RAW_GOAL_COMPILED_SHAPE_GAP",
                 "compiler_mode": compiled.get("compiler_mode"),
-                "elapsed_ns": perf_counter_ns() - started,
-                "incremental_spend_usd": 0,
-            }
-
-        raw_contract = compile_contract(
-            goal,
-            source_id="user",
-            routing_target_effects=targets,
-        )
-        if raw_contract.get("pass") is not True:
-            return {
-                "schema": SCHEMA,
-                "status": "FAIL__LOSSLESS_RAW_TASK_CONTRACT",
-                "pass": False,
-                "task_id": task_id,
-                "failure_class": "RAW_TASK_OBLIGATION_ENVELOPE_FAILURE",
-                "errors": raw_contract.get("errors"),
                 "elapsed_ns": perf_counter_ns() - started,
                 "incremental_spend_usd": 0,
             }
