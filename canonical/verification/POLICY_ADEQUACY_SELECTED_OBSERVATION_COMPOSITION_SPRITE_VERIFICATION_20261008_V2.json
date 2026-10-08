@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_POLICY_ADEQUACY_SELECTED_OBSERVATION_COMPOSITION_SPRITE_VERIFICATION_V2",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SPRITE_EXACT_BYTE_COMPOSITION_PASS__38_OF_38__OPTIONAL_CANDIDATE_QUARANTINE_VERIFIED__ZERO_TERMINAL_CREDIT",
+  "supersedes": {
+    "path": "canonical/verification/POLICY_ADEQUACY_SELECTED_OBSERVATION_COMPOSITION_SPRITE_VERIFICATION_20261008_V1.json"
+  },
+  "subject": {
+    "branch": "research/policy-adequacy-proof-carrying-winning-strategy-20261008-v1",
+    "fixed_point_runtime": {
+      "path": "canonical/runtime/authenticated_symbolic_policy_cover_fixed_point_v1.py",
+      "git_blob_sha": "3ca9921e081ed6764af5ae9362d7be2b325be604"
+    },
+    "fixed_point_tests": {
+      "path": "canonical/tests/test_authenticated_symbolic_policy_cover_fixed_point_v1.py",
+      "git_blob_sha": "f71bc124e2b04d40563d325912dc5fa2b2fed912"
+    },
+    "selected_semantic_runtime": {
+      "path": "canonical/runtime/selected_semantic_truth_certificate_v1.py",
+      "git_blob_sha": "18202653b4b6d1ef6434c851ab7d2a314365082c"
+    },
+    "selected_dispatch_runtime": {
+      "path": "canonical/runtime/selected_semantic_discriminator_dispatch_v1.py",
+      "git_blob_sha": "d35bd976bcadbf56f370d333e9e968bd3d4c39e8"
+    },
+    "semantic_checker": {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v6.py",
+      "git_blob_sha": "d82bffda32c1e493e79dfe824ebc1e080b991d9c"
+    },
+    "selected_semantic_tests": {
+      "truth": "0134a7e7238fda65741ea480fe60ba09697b6933",
+      "dispatch": "6f077152756bf4dd86f1972a033c75b1f26f3979"
+    },
+    "p2_real_path_dependencies": {
+      "canonical/runtime/p2_explicit_contract_membership_v1.py": "a6f357d952434692a809382d1cbd41f3c78a2af0",
+      "canonical/runtime/p2_top_law_policy_adequacy_authenticator_v1.py": "ceb8f383c0760fd9d67b967e6edf528d6d6eff37",
+      "canonical/runtime/p2_p3_information_safe_candidate_v2.py": "ea8057b0eadac210c4f4378298df93ed233c5824",
+      "canonical/governance/P2_EXPLICIT_SEMANTIC_CONTRACT_UNIVERSAL_TOP_LAW_20261007_V1.json": "decd0d46538a213f2e169c00c83fae09191a7ed3",
+      "canonical/verification/P2_EXPLICIT_SEMANTIC_CONTRACT_TOP_LAW_CONNECTOR_VERIFY_20261007_V1.json": "8375f545ff35ce519719467596bdf1bc15453174"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/selected_semantic_truth_replay_v1"
+  },
+  "verification": {
+    "exact_git_blobs_verified": 12,
+    "tests_passed": 38,
+    "tests_total": 38,
+    "proved": [
+      "CURRENT_SELECTED_SEMANTIC_TRUTH_AND_DISPATCH_BYTES_REPLAY_CLEANLY",
+      "CALLER_PREDICATE_LABEL_CANNOT_OVERRIDE_CHECKER_MINTED_SOURCE_BOUND_IDENTITY",
+      "CALLER_SUPPLIED_TRUTH_IS_REJECTED",
+      "SOURCE_BOUND_TRUE_OBSERVATION_NARROWS_SYMBOLIC_BELIEF_TO_THE_TRUE_BRANCH",
+      "SOURCE_BOUND_FALSE_OBSERVATION_NARROWS_SYMBOLIC_BELIEF_TO_THE_FALSE_BRANCH",
+      "FORGED_CANONICAL_LOOKING_PREDICATE_ID_CANNOT_ENTER_THE_FIXED_POINT",
+      "OUT_OF_FRAGMENT_SELECTED_SEMANTICS_RETURN_UNKNOWN_AND_FAIL_CLOSED",
+      "STRICT_EXPLICIT_P2_RAW_SOURCE_TO_AUTHENTICATED_POLICY_WIN_REMAINS_PASSING",
+      "CALLER_INLINE_LOAD_BEARING_CONSTRAINT_FLAGS_REMAIN_REJECTED",
+      "UNVERIFIED_OPTIONAL_POLICY_CANDIDATES_ARE_QUARANTINED_NOT_TRUSTED",
+      "UNVERIFIED_OPTIONAL_DISCRIMINATOR_CANDIDATES_ARE_QUARANTINED_NOT_TRUSTED",
+      "A_VALID_POSITIVE_COMMON_POLICY_COVER_SURVIVES_IRRELEVANT_FORGED_OPTIONAL_CANDIDATES"
+    ]
+  },
+  "positive_monotonicity": {
+    "rule": "OPTIONAL_CANDIDATE_FAILURE_CANNOT_INVALIDATE_AN_INDEPENDENTLY_AUTHENTICATED_POSITIVE_COVER__BAD_CANDIDATES_ARE_EXCLUDED_FROM_THE_CERTIFIED_RELATION",
+    "load_bearing_exception": "A_REQUESTED_CURRENT_STATE_CONSTRAINT_IS_NOT_OPTIONAL__IF_ITS_TRUSTED_VERIFIER_FAILS_THE_CURRENT_BELIEF_REFINEMENT_FAILS_CLOSED",
+    "negative_boundary": "REJECTED_CANDIDATES_DO_NOT_PROVE_THOSE_POLICIES_OR_DISCRIMINATORS_FALSE_OR_IMPOSSIBLE"
+  },
+  "current_residual": [
+    "POSITIVE_POLICY_ADEQUACY_CERTIFICATE_COVERAGE_FOR_REACHED_CONTEXTS_NOT_ALREADY_CLOSED",
+    "SOURCE_ALIGNED_PROOF_PRIMITIVE_COVERAGE_FOR_CEGAR_SELECTED_PREDICATES_THAT_CURRENTLY_RETURN_UNKNOWN",
+    "BIND_SELECTED_SOURCE_BYTES_TO_THE_UPSTREAM_TASK_OR_EVALUATION_ROOT_CONTRACT_WHERE_NOT_ALREADY_OWNED",
+    "NONFACTUAL_CONFLICT_AUDIENCE_AND_MULTIMODAL_SELECTED_PREDICATES_OUTSIDE_CURRENT_VERIFIED_FRAGMENTS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_SELECTED_PREDICATE_PROOF_COVERAGE_IS_SCOPE_COMPLETE",
+    "NO_CLAIM_POLICY_ADEQUACY_COVERAGE_IS_SCOPE_COMPLETE",
+    "NO_CLAIM_UPSTREAM_ROOT_TASK_AUTHORITY_CAN_BE_SELF_PROVED_BY_THE_SOLVER",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
