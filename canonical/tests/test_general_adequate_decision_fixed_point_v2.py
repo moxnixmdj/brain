@@ -39,6 +39,81 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
             "incremental_spend_usd": 0,
         }
 
+
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed.direct_adequacy, "run")
+    @patch.object(fixed, "run_controller")
+    def test_exact_direct_adequacy_closes_before_semantic_loop(
+        self, controller, direct_run, preflight
+    ):
+        preflight.return_value = {
+            "matched": True,
+            "route_id": "DIRECT_ADEQUACY::TEST",
+        }
+        direct_run.return_value = {
+            "pass": True,
+            "status": "PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED",
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "execution_attempted": True,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
+        out = fixed.run(self._request())
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["r2_fixed_point_status"],
+            "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED",
+        )
+        self.assertEqual(out["r2_fixed_point_steps"], 0)
+        controller.assert_not_called()
+        direct_run.assert_called_once()
+
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed.direct_adequacy, "run")
+    @patch.object(fixed, "run_controller")
+    def test_matched_direct_route_failure_never_retries_semantic_path(
+        self, controller, direct_run, preflight
+    ):
+        preflight.return_value = {
+            "matched": True,
+            "route_id": "DIRECT_ADEQUACY::TEST",
+        }
+        direct_run.return_value = {
+            "pass": False,
+            "status": "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY",
+            "semantic_acceptance_complete": False,
+            "actual_goal_satisfaction_verified": False,
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
+        out = fixed.run(self._request())
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["r2_fixed_point_status"],
+            "OPEN__R2_MATCHED_DIRECT_ROUTE_DID_NOT_VERIFY",
+        )
+        controller.assert_not_called()
+        direct_run.assert_called_once()
+
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed, "run_controller")
+    def test_unmatched_direct_route_preserves_v1_fixed_point_path(
+        self, controller, preflight
+    ):
+        preflight.return_value = {
+            "pass": False,
+            "status": "NO_DIRECT_ADEQUACY_ROUTE",
+            "matched": False,
+        }
+        controller.return_value = self._open()
+        out = fixed.run(self._request())
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "OPEN__DECISION_CONTEXT_REQUIRED")
+        controller.assert_called_once()
+
     @patch.object(fixed, "run_controller")
     def test_without_resolver_preserves_exact_v1_open_state(self, controller):
         controller.return_value = self._open()
