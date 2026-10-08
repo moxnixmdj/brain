@@ -16,6 +16,8 @@ ownership, capability-promotion, or terminal authority by itself.
 from __future__ import annotations
 
 from copy import deepcopy
+import hashlib
+import json
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
@@ -254,6 +256,93 @@ def _compile_verified_repair_problem(
     }
 
 
+def _owned_raw_capability_acquisition(
+    *,
+    goal: str,
+    failure_fingerprint: str,
+    retry_capsule_sha256: str,
+    repo_root: str | Path,
+) -> dict[str, Any]:
+    text = str(goal or "").strip()
+    if not text:
+        return _fail("OWNED_ACQUISITION_RAW_GOAL_REQUIRED")
+    root = Path(repo_root).resolve()
+    missions = root / "canonical" / "astra_runtime" / "missions"
+    missions.mkdir(parents=True, exist_ok=True)
+    digest = hashlib.sha256(
+        (
+            str(failure_fingerprint).strip()
+            + "|"
+            + str(retry_capsule_sha256).strip()
+            + "|"
+            + text
+        ).encode("utf-8")
+    ).hexdigest()
+    mission_id = "LIVE-BRAIN-AUTO-ACQUIRE-" + digest[:16].upper()
+    rel = Path("canonical/astra_runtime/missions") / (
+        mission_id.replace("-", "_") + ".json"
+    )
+    path = root / rel
+    mission_doc = {
+        "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+        "mission_id": mission_id,
+        "goal": text,
+        "constraints": {
+            "incremental_spend_usd": 0,
+            "generated_by": "live_brain_runtime_v1",
+            "purpose": "raw capability gap acquisition and verified replay",
+        },
+    }
+    raw = (json.dumps(mission_doc, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    if path.exists():
+        if path.read_bytes() != raw:
+            return _fail("OWNED_ACQUISITION_ORIGIN_MISSION_HASH_CONFLICT")
+    else:
+        tmp = path.with_suffix(path.suffix + ".tmp")
+        tmp.write_bytes(raw)
+        tmp.replace(path)
+
+    from canonical.runtime import astra_runtime
+
+    mission = deepcopy(mission_doc)
+    mission["_runtime_mission_path"] = rel.as_posix()
+    try:
+        result = astra_runtime.run_goal({"goal_ref": "goal"}, mission)
+    except Exception as exc:
+        return _fail(
+            "OWNED_RAW_CAPABILITY_ACQUISITION_FAILED:"
+            + type(exc).__name__
+            + ":"
+            + str(exc)
+        )
+    if not isinstance(result, Mapping):
+        return _fail("OWNED_RAW_CAPABILITY_ACQUISITION_RESULT_NOT_OBJECT")
+    promoted = result.get("auto_acquisition")
+    return {
+        "schema": SCHEMA,
+        "status": (
+            "OWNED_RAW_CAPABILITY_ACQUISITION_EXECUTED"
+            if isinstance(promoted, Mapping)
+            else "OWNED_RAW_GOAL_REPLAY_EXECUTED_WITHOUT_NEW_PROMOTION"
+        ),
+        "pass": bool(
+            result.get("returncode") == 0
+            or result.get("verified") is True
+            or result.get("pass") is True
+        ),
+        "mission_id": mission_id,
+        "origin_mission_path": rel.as_posix(),
+        "origin_mission_sha256": hashlib.sha256(raw).hexdigest(),
+        "auto_acquisition": (
+            deepcopy(dict(promoted)) if isinstance(promoted, Mapping) else None
+        ),
+        "result": deepcopy(dict(result)),
+        "capability_promotion_authority": False,
+        "terminal_authority": False,
+        "terminal_credit_delta": 0,
+    }
+
+
 def _replay_retry_context(
     context: Mapping[str, Any],
     *,
@@ -316,13 +405,99 @@ def execute_failure_repair_cycle(
                 if isinstance(causal, Mapping)
                 else ""
             )
-            if classification != "NEW_PRIMITIVE_REQUIRED" or capability_expander is None:
+            if classification != "NEW_PRIMITIVE_REQUIRED":
                 return {
                     **synthesized,
                     "status": "REPAIR_CYCLE_UNRESOLVED_AT_SYNTHESIS",
                     "retry_capsule_sha256": retry["retry_capsule_sha256"],
                     "capability_expander_available": capability_expander is not None,
+                    "owned_raw_acquisition_available": False,
                 }
+
+            retry_context = retry.get("context")
+            retry_mode = (
+                str(retry_context.get("mode") or "").strip()
+                if isinstance(retry_context, Mapping)
+                else ""
+            )
+            if capability_expander is None and retry_mode == "raw_bound":
+                raw_request = (
+                    retry_context.get("request")
+                    if isinstance(retry_context, Mapping)
+                    else None
+                )
+                raw_goal = (
+                    str(raw_request.get("goal") or "").strip()
+                    if isinstance(raw_request, Mapping)
+                    else ""
+                )
+                acquisition = _owned_raw_capability_acquisition(
+                    goal=raw_goal,
+                    failure_fingerprint=fingerprint,
+                    retry_capsule_sha256=retry["retry_capsule_sha256"],
+                    repo_root=repo_root,
+                )
+                if acquisition.get("pass") is not True:
+                    return {
+                        **synthesized,
+                        "status": "REPAIR_CYCLE_UNRESOLVED_AT_OWNED_ACQUISITION",
+                        "retry_capsule_sha256": retry["retry_capsule_sha256"],
+                        "capability_expander_available": False,
+                        "owned_raw_acquisition_available": True,
+                        "owned_raw_acquisition": acquisition,
+                    }
+                replay = _replay_retry_context(
+                    retry_context,
+                    repo_root=repo_root,
+                    information_provider=information_provider,
+                    proposal_provider=proposal_provider,
+                    capability_expander=None,
+                    state_path=path,
+                )
+                replay_pass = replay.get("pass") is True
+                recorded = learning.record_repair_outcome(
+                    fingerprint,
+                    retry_capsule_sha256=retry["retry_capsule_sha256"],
+                    repair_record={
+                        "repair_mode": "OWNED_RAW_CAPABILITY_ACQUISITION",
+                        "acquisition_mission_id": acquisition.get("mission_id"),
+                        "origin_mission_sha256": acquisition.get("origin_mission_sha256"),
+                        "auto_acquisition": deepcopy(acquisition.get("auto_acquisition")),
+                        "original_replay_status": replay.get("status"),
+                        "original_replay_pass": replay_pass,
+                    },
+                    original_replay_pass=replay_pass,
+                    state_path=path,
+                )
+                return {
+                    "schema": SCHEMA,
+                    "status": (
+                        "REPAIR_VERIFIED_BY_OWNED_ACQUISITION_AND_ORIGINAL_REPLAY"
+                        if replay_pass
+                        else "OWNED_ACQUISITION_COMPLETED__ORIGINAL_FAILURE_PERSISTS"
+                    ),
+                    "pass": replay_pass,
+                    "failure_fingerprint": fingerprint,
+                    "retry_capsule_sha256": retry["retry_capsule_sha256"],
+                    "repair_synthesis": synthesized,
+                    "repair_mode": "OWNED_RAW_CAPABILITY_ACQUISITION",
+                    "owned_raw_acquisition": acquisition,
+                    "original_replay": replay,
+                    "repair_receipt": recorded,
+                    "capability_promotion_authority": False,
+                    "terminal_authority": False,
+                    "terminal_credit_delta": 0,
+                }
+
+            if capability_expander is None:
+                return {
+                    **synthesized,
+                    "status": "REPAIR_CYCLE_UNRESOLVED_AT_SYNTHESIS",
+                    "retry_capsule_sha256": retry["retry_capsule_sha256"],
+                    "capability_expander_available": False,
+                    "owned_raw_acquisition_available": retry_mode == "raw_bound",
+                }
+
             required_effect = str(synthesized.get("required_repair_effect") or "").strip()
             if not required_effect:
                 return _fail("NEW_PRIMITIVE_REPAIR_EFFECT_MISSING")
