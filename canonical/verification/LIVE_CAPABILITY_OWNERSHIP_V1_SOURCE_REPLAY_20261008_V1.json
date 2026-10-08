@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_V1_SOURCE_REPLAY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__LIVE_OWNED_EQUALS_FABRIC_REACHABLE__SOURCE_REPLAY_AND_ISOLATED_EXECUTION",
+  "branch": "r1-live-ownership-ontology-20261008",
+  "exact_blobs": {
+    "ownership_manifest": {
+      "path": "canonical/governance/LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1.json",
+      "git_blob_sha": "22df0d1c92c6836c91c80423129638ec0fc00473"
+    },
+    "ownership_runtime": {
+      "path": "canonical/runtime/live_capability_ownership_v1.py",
+      "git_blob_sha": "2e09b9fdbf2095f9723b64f1afd321e67be37941"
+    },
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "b917fd8911af02e058f23d2d80a6e8c000408bb5"
+    },
+    "ownership_tests": {
+      "path": "canonical/tests/test_live_capability_ownership_v1.py",
+      "git_blob_sha": "5001fe9bde353f34f07757f17120aa9866ae8d21"
+    },
+    "workflow": {
+      "path": ".github/workflows/verify-unified-cognitive-fabric-v1.yml",
+      "git_blob_sha": "71d880487de3ff08ba1d2541231d9ca3d24f7eb0"
+    },
+    "h100_v8": {
+      "path": "canonical/runtime/h100_verified_capability_registry_v8.py",
+      "git_blob_sha": "a4f952fbf054dbfe4f9617da837b3bf5c3c2e3ab"
+    },
+    "bound_registry": {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "545e6b405e59a77d4fc22049e3e86a286843f63d"
+    },
+    "certified_route_registry": {
+      "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
+      "git_blob_sha": "78ef7174fd7cdebb24f97882e8c325a5164f18cb"
+    }
+  },
+  "provider_replay": {
+    "fabric_engine_count": 18,
+    "verified_bound_capability_count": 43,
+    "active_verified_learned_skill_count": 0,
+    "h100_registry_row_count": 21,
+    "h100_live_ownership_identity_count": 21,
+    "certified_admitted_route_count": 1,
+    "total_live_owned_capability_count": 83,
+    "missing_fabric_carrier_count": 0,
+    "live_owned_equals_fabric_reachable": true
+  },
+  "h100_historical_id_collision": {
+    "capability_id": "CAP_AFFINE_TANH_V1",
+    "row_count": 2,
+    "mechanisms": [
+      {
+        "route": "GENERIC_PATCH_SEARCH_TRANSFER_V1",
+        "kind": "PARAMETRIC_PATCH"
+      },
+      {
+        "route": "VERIFIED_SAFE_STDLIB_OPERATOR_REFIT",
+        "kind": "PARAMETRIC_STDLIB_OPERATOR"
+      }
+    ],
+    "resolution": "PRESERVE_HISTORICAL_VERIFIED_IDS__DISAMBIGUATE_LIVE_OWNERSHIP_ID_BY_ROUTE",
+    "ambiguity_remaining": false
+  },
+  "isolated_execution": {
+    "carrier": "SPRITES",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "result": "R1_OWNERSHIP_COLLISION_SAFE_REPLAY_PASS",
+    "python_compile_pass": true,
+    "json_parse_pass": true,
+    "collision_safe_ownership_replay_pass": true
+  },
+  "boundary": {
+    "r1_structural_closure": true,
+    "arbitrary_raw_language_route_selection_proved": false,
+    "arbitrary_raw_language_route_selection_classification": "R2_SEMANTIC_DECISION_INTELLIGENCE",
+    "historical_repository_capability_completeness_proved": false,
+    "historical_repository_capability_scope": "EXCLUDED_FROM_CURRENT_LIVE_OWNERSHIP_UNLESS_EXPLICITLY_READMITTED"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_RAW_LANGUAGE_ALWAYS_SELECTS_THE_CORRECT_ENGINE",
+    "NO_CLAIM_ALL_HISTORICAL_REPOSITORY_CODE_IS_LIVE_OWNED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
