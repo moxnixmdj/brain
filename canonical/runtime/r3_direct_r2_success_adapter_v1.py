@@ -14,14 +14,14 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from canonical.runtime.executable_skill_program_v7 import program_digest
-from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as direct
-
 SCHEMA = "PROJECT_BRAIN_R3_DIRECT_R2_SUCCESS_ADAPTER_V1"
 VERIFICATION_KIND = "DIRECT_R2_READONLY_ACCEPTANCE_V1"
 RULES_PATH = "canonical/runtime/R3_SUCCESS_ADAPTER_RULES_V1.json"
+EXACT_LITERAL_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1"
+LITERAL_JSON_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1"
 SUPPORTED_ROUTES = frozenset({
-    direct.EXACT_LITERAL_ROUTE_ID,
-    direct.LITERAL_JSON_ROUTE_ID,
+    EXACT_LITERAL_ROUTE_ID,
+    LITERAL_JSON_ROUTE_ID,
 })
 
 
