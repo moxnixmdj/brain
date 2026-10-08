@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_R3_QUEUE_KIND_TOTALITY_AUDIT_20261008_V3",
+  "date": "2026-10-08",
+  "status": "PASS__CURRENT_SOURCE_DERIVED_R3_QUEUE_KIND_TOTALITY",
+  "base_main_commit": "b8c99ce3260e364ae6f1bfcc6611b6f4128c4219",
+  "exact_blobs": {
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "ea80a2f32142448b86816e169b6aeb7875d0f583",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "9f50f3faae4f99926d983649ad1d644ec66767c2",
+    "canonical/runtime/unified_cognitive_fabric_v1.py": "876e32b049062d6ae7a7cb36036e78d0c423f2b1",
+    "canonical/tests/test_r3_improvement_queue_driver_v1.py": "d9b3862185f9fb6ac4e3894fdf4ca5f63e94b89d",
+    "canonical/tests/test_r3_queue_kind_totality_v1.py": "028ab353c6802f1075f524c758a3d180f71bdf5f",
+    ".github/workflows/r3-autonomous-self-improvement-v1.yml": "62d120097e9effda78b33d718eab22eb5ad86475"
+  },
+  "durable_queue_kinds": [
+    "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+    "COLLECT_MATCHING_VERIFIED_EPISODE",
+    "EXPAND_SUCCESS_VERIFICATION_FRONTIER",
+    "REPAIR_FAILURE_CLASS",
+    "REVERIFY_QUARANTINED_SKILL",
+    "SEEK_VERIFIED_SCOPE_GENERALIZATION",
+    "VERIFY_EPISODE",
+    "VERIFY_SKILL_CANDIDATE"
+  ],
+  "proved": {
+    "producer_set_is_ast_derived_from_enqueue_calls": true,
+    "consumer_set_is_ast_derived_from_driver_dispositions": true,
+    "produced_set_equals_consumed_set": true,
+    "future_unhandled_durable_kind_fails_regression": true,
+    "totality_test_is_bound_into_r3_ci": true
+  },
+  "execution_evidence": {
+    "carrier": "SPRITE",
+    "queue_driver_suite": "26_OF_26_PASS",
+    "queue_kind_totality_suite": "1_OF_1_PASS",
+    "incremental_spend_usd": 0
+  },
+  "relationship_to_v9": {
+    "closure_document": "canonical/verification/R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V9.json",
+    "v9_not_falsified": true,
+    "strengthened": "QUEUE_KIND_TOTALITY_NOW_CONTINUOUSLY_MACHINE_CHECKED_FROM_SOURCE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ROOT1_DEFAULT_ACQUISITION_PROVIDER_EXISTS",
+    "NO_CLAIM_EVERY_MISSING_ADAPTER_OR_VERIFIER_IS_ACQUIRABLE",
+    "NO_TERMINAL_GOAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
