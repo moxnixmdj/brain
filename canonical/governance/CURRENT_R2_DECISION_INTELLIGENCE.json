@@ -11,7 +11,7 @@
   "controller": {
     "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py",
-    "authority_kernel_git_blob_sha": "402dba6618adce3a9bdb0a5dd1d48f8b11c9ea8b"
+    "authority_kernel_git_blob_sha": "7e25ed6ee5ff2c5c40ccddd074b999c4f3e2719b"
   },
   "scheduler_cut": {
     "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json",
@@ -40,7 +40,10 @@
     "condition_registry_never_self_certifies_membership": true,
     "adequacy_evidence_symlink_escape_rejected": true,
     "current_mission_pointer_content_addressed": true,
-    "option_preserving_mission_alignment": true
+    "option_preserving_mission_alignment": true,
+    "existing_authenticated_policy_cover_observation_auto_reuse": true,
+    "conflicting_authenticated_policy_cover_observations_fail_closed": true,
+    "external_information_provider_after_existing_observation_reuse_only": true
   },
   "judgment_model_policy": {
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
@@ -99,5 +102,14 @@
     "two_distinct_sprite_replays": "4_OF_4_EACH",
     "historical_root2_scheduler_authority_revoked": true,
     "gdpval_owner_layer_state": "EXTERNAL_REQUIRED_SLEEP"
+  },
+  "policy_cover_existing_observation_reuse": {
+    "activation_path": "canonical/governance/R2_EXISTING_POLICY_COVER_OBSERVATION_REUSE_ACTIVATION_20261008_V1.json",
+    "activation_git_blob_sha": "92f9b92e370ac98c774b5e548c651d4921248000",
+    "verification_path": "canonical/verification/R2_EXISTING_POLICY_COVER_OBSERVATION_REUSE_VERIFY_20261008_V2.json",
+    "verification_git_blob_sha": "cf10f1ed27e19767ca76f3892e0ef2d1b8448403",
+    "focused_replay": "4_STANDALONE_PLUS_8_CONTROLLER_INTEGRATION_PASS",
+    "base_scheduler": "V5",
+    "global_frontier_changed": false
   }
 }
