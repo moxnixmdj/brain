@@ -907,6 +907,7 @@ def integrate_solver_output(
     out: Mapping[str, Any],
     *,
     state_path: str | Path = DEFAULT_STATE_PATH,
+    repo_root: str | Path = ROOT,
     retry_context: Mapping[str, Any] | None = None,
     verification_problem: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -1006,6 +1007,16 @@ def integrate_solver_output(
         receipt = ep.get("verification_receipt")
         if not isinstance(binding, Mapping) or not isinstance(receipt, Mapping):
             raise SelfImprovementError("VERIFIED_EPISODE_AUTHORITY_MISSING")
+        episode_authority = reauthenticate_episode_record(ep, repo_root=repo_root)
+        if episode_authority.get("pass") is not True:
+            raise SelfImprovementError(
+                "VERIFIED_EPISODE_REAUTHENTICATION_FAILED:"
+                + _s(episode_authority.get("reason"))
+            )
+        authenticated_ep = episode_authority.get("authenticated_episode")
+        if not isinstance(authenticated_ep, Mapping):
+            raise SelfImprovementError("VERIFIED_EPISODE_REAUTHENTICATED_VALUE_MISSING")
+        ep = authenticated_ep
         episode_key = _episode_key(ep)
         episode_added = episode_key not in state["episodes"]
         state["episodes"][episode_key] = deepcopy(dict(ep))
@@ -1055,6 +1066,23 @@ def integrate_solver_output(
     active_skill_id = None
     verified_skill = out.get("verified_executable_skill")
     skill_candidate = out.get("skill_candidate")
+    if (
+        out.get("verified_skill_reuse_authorized") is True
+        and isinstance(verified_skill, Mapping)
+    ):
+        skill_authority = reauthenticate_skill_record(
+            verified_skill,
+            repo_root=repo_root,
+        )
+        if skill_authority.get("pass") is not True:
+            raise SelfImprovementError(
+                "VERIFIED_SKILL_REAUTHENTICATION_FAILED:"
+                + _s(skill_authority.get("reason"))
+            )
+        authenticated_skill = skill_authority.get("verified_skill")
+        if not isinstance(authenticated_skill, Mapping):
+            raise SelfImprovementError("VERIFIED_SKILL_REAUTHENTICATED_VALUE_MISSING")
+        verified_skill = authenticated_skill
     if isinstance(skill_candidate, Mapping) and not isinstance(verified_skill, Mapping):
         candidate_sha = _s(skill_candidate.get("candidate_sha256"))
         if candidate_sha:
@@ -1971,6 +1999,7 @@ def run_learning_episode(
             integrated = integrate_solver_output(
                 reuse_out,
                 state_path=state_path,
+                repo_root=repo_root,
                 retry_context=retry_context,
                 verification_problem=learned_problem,
             )
