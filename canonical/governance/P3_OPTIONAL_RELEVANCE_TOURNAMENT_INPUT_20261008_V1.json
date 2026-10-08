@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_P3_OPTIONAL_RELEVANCE_TOURNAMENT_INPUT_V1",
+  "date": "2026-10-08",
+  "scope": "BEHAVIORAL_CONTRACT_DERIVED_OPTIONAL_RELEVANCE_CELL__NO_GLOBAL_P3_ENUMERATION",
+  "mode": "COMMON_POLICY_FALSIFICATION",
+  "cells": [
+    {
+      "id": "P3_OPTIONAL_CLAIM_RELEVANCE_WITHOUT_EXPLICIT_WEIGHTS",
+      "worlds": [
+        {"id": "OPTIONAL_CLAIM_DECISION_RELEVANT", "adequate_actions": ["INCLUDE_OPTIONAL_CLAIM"]},
+        {"id": "OPTIONAL_CLAIM_IRRELEVANT", "adequate_actions": ["OMIT_OPTIONAL_CLAIM"]}
+      ]
+    }
+  ]
+}
