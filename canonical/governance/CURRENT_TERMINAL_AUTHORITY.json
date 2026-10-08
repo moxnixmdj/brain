@@ -1886,8 +1886,8 @@
     },
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
-      "git_blob_sha": "3079672b6419fe7a6772bf01f77d3f7ae87f916f",
-      "status": "PASS__R1_V3_SINGLE_FRONT_DOOR__LIVE_OWNERSHIP_84__UNIVERSAL_INVOCATION_84"
+      "git_blob_sha": "ef0afd859fa52c73e1056565255d7200fbd54f7b",
+      "status": "PASS__R1_CURRENT_FRONT_DOOR__OWNERSHIP_84__INVOCATION_84__FULL_EXACT_BLOB_DRIFT_LOCK"
     },
     "live_ownership_rule": "LIVE_OWNED_IFF_ADMITTED_BY_ONE_CANONICAL_OWNERSHIP_PROVIDER__UNREGISTERED_AND_SUPERSEDED_REPOSITORY_CODE_IS_NOT_LIVE_OWNED",
     "structural_r1_rule": "EVERY_LIVE_OWNED_CAPABILITY_MUST_BE_DISCOVERABLE_AND_HAVE_ONE_DETERMINISTIC_FAIL_CLOSED_INVOCATION_CONTRACT_THROUGH_UNIFIED_COGNITIVE_FABRIC",
@@ -1917,9 +1917,16 @@
     "subordinate_runtime_public_authority": false,
     "r1_closure_gate": {
       "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
-      "git_blob_sha": "a7d02b26ff0f8e15cecac356b58e548d8837afd1",
-      "rule": "R1_CLOSURE_MUST_FAIL_CLOSED_ON_FRONT_DOOR_SUBRUNTIME_ENGINE_ACTIVATION_OR_AUTHORITY_DRIFT"
-    }
+      "git_blob_sha": "36c8c781aa3769ab9d54e5bbdfef7faedaddebe8",
+      "rule": "R1_CLOSURE_FAILS_CLOSED_ON_FRONT_DOOR_SUBRUNTIME_ENGINE_ACTIVATION_AUTHORITY_RECEIPT_OR_EXACT_BLOB_DRIFT"
+    },
+    "r1_drift_lock_verification": {
+      "path": "canonical/verification/R1_LIVE_ARCHITECTURE_DRIFT_LOCK_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "74d5e16e1c7213ef38028ca66575ca821b1b4195",
+      "status": "PASS__R1_LIVE_ARCHITECTURE_CLOSED_AND_DRIFT_LOCKED"
+    },
+    "r1_drift_locked": true,
+    "full_exact_blob_drift_lock": true
   },
   "r1_universal_live_capability_invocation_20261008_v1": {
     "status": "ACTIVE_FAIL_CLOSED_UNIVERSAL_LIVE_CAPABILITY_INVOCATION__V3_FRONT_DOOR_BOUND",
@@ -1937,7 +1944,7 @@
     },
     "workflow": {
       "path": ".github/workflows/verify-unified-cognitive-fabric-v1.yml",
-      "git_blob_sha": "8cc9425a9c7e0fc532fa7427be5c1ef3bba79093"
+      "git_blob_sha": "e83b098dc248ff8ffc5de1ad67668346bdf1b4c1"
     },
     "rule": "EVERY_LIVE_OWNED_CAPABILITY_IDENTITY_MUST_BE_CLASSIFIABLE_AND_DISPATCHABLE_THROUGH_UNIFIED_COGNITIVE_FABRIC_LIVE_CAPABILITY_OR_FAIL_CLOSED",
     "semantic_selection_boundary": "CAPABILITY_SELECTION_FROM_ARBITRARY_INTENT_REMAINS_R2",
@@ -1949,8 +1956,8 @@
     "missing_invocation_contract_count": 0,
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
-      "git_blob_sha": "3079672b6419fe7a6772bf01f77d3f7ae87f916f",
-      "status": "PASS__R1_V3_SINGLE_FRONT_DOOR__LIVE_OWNERSHIP_84__UNIVERSAL_INVOCATION_84"
+      "git_blob_sha": "ef0afd859fa52c73e1056565255d7200fbd54f7b",
+      "status": "PASS__R1_CURRENT_FRONT_DOOR__OWNERSHIP_84__INVOCATION_84__FULL_EXACT_BLOB_DRIFT_LOCK"
     },
     "prior_invocation_verification": {
       "path": "canonical/verification/R1_UNIVERSAL_LIVE_CAPABILITY_INVOCATION_VERIFICATION_20261008_V1.json",
@@ -1958,7 +1965,14 @@
     },
     "r1_closure_gate": {
       "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
-      "git_blob_sha": "a7d02b26ff0f8e15cecac356b58e548d8837afd1"
-    }
+      "git_blob_sha": "a7d02b26ff0f8e15cecac356b58e548d8837afd1",
+      "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
+    },
+    "r1_drift_lock_verification": {
+      "path": "canonical/verification/R1_LIVE_ARCHITECTURE_DRIFT_LOCK_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "74d5e16e1c7213ef38028ca66575ca821b1b4195",
+      "status": "PASS__R1_LIVE_ARCHITECTURE_CLOSED_AND_DRIFT_LOCKED"
+    },
+    "full_exact_blob_drift_lock": "ENFORCED_BY_R1_LIVE_ARCHITECTURE_CLOSURE_GATE_V1"
   }
 }
