@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_EVALUATOR_IDENTIFIED_SET_DOMINANCE_CANDIDATE_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_INTERMEDIATE_HIDDEN_EVALUATOR_ROUTE__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "objective": "Fill the sound gap between proved restricted hidden-evaluator classes and the arbitrary-hidden exact-law-equality fallback by computing exact noninferiority bounds over an independently justified finite admissible evaluator-world set.",
+  "runtime": {
+    "path": "canonical/runtime/evaluator_identified_set_dominance_v1.py"
+  },
+  "proposed_v7_route": {
+    "id": "R_PARTIALLY_IDENTIFIED_HIDDEN",
+    "position": "AFTER_M_HIDDEN_RESTRICTED_MONOTONE_AND_BEFORE_U_ARBITRARY_OR_UNCLASSIFIED_HIDDEN",
+    "premise": "A_SEPARATE_CONTENT_ADDRESSED_SEMANTIC_PROOF_ESTABLISHES_THAT_THE_SUPPLIED_FINITE_EVALUATOR_WORLD_SET_EXHAUSTS_ALL_CURRENTLY_ADMISSIBLE_LOAD_BEARING_EVALUATOR_SEMANTICS_FOR_THE_CONTEXT",
+    "certificate": "EXACT_IDENTIFIED_DELTA_INTERVAL_OVER_ALL_ADMISSIBLE_WORLDS",
+    "pass_rule": "LOWER_DELTA_GE_0",
+    "fail_rule": "UPPER_DELTA_LT_0",
+    "unknown_rule": "LOWER_DELTA_LT_0_AND_UPPER_DELTA_GE_0"
+  },
+  "minimum_information_extension": {
+    "mechanism": "Partition the admissible world set by candidate observable facts and rank facts whose possible observations most reduce unresolved sign ambiguity.",
+    "soundness_boundary": "QUERY_RANKING_DOES_NOT_ASSERT_THE_FACT_IS_ACCESSIBLE_TRUE_COMPLETE_OR_CHEAP__IT_ONLY_MEASURES_DECISION_REFINEMENT_INSIDE_THE_BOUND_WORLD_SET"
+  },
+  "first_principles_effect": [
+    "DO_NOT_REQUIRE_EXACT_HIDDEN_EVALUATOR_PARAMETERS_WHEN_EVERY_COMPATIBLE_PARAMETERIZATION_ALREADY_IMPLIES_BRAIN_NONINFERIORITY",
+    "DO_NOT_LABEL_UNKNOWN_AS_GENERIC_PRIVACY_BLOCKER__RETURN_EXPLICIT_PASS_AND_FAIL_COMPATIBLE_WORLDS",
+    "WHEN_UNKNOWN__SEARCH_FOR_THE_SMALLEST_OBSERVABLE_FACT_THAT_PARTITIONS_THE_COMPATIBLE_WORLD_SET_INTO_DECISIVE_BRANCHES",
+    "PRESERVE_U_EXACT_LAW_EQUALITY_AS_THE_FALLBACK_WHEN_NO_SOUND_FINITE_OR_RESTRICTED_WORLD_SET_COMPLETENESS_PROOF_EXISTS"
+  ],
+  "candidate_applications": {
+    "GDPVAL_AA_V2_1": "Represent only independently bounded judge/reference/harness uncertainty; if the worst compatible world still places Brain no worse than Opus, hidden owner details are irrelevant. Otherwise emit the load-bearing residual fact.",
+    "CURSORBENCH_4_0": "Do not fabricate a small world set from high-level public descriptions. Unless a sound completeness restriction appears, remain on U or use the separately verified stronger scope-complete capability replacement route."
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_GDPVAL_UNCERTAINTY_SET_IS_ALREADY FINITELY COMPLETE",
+    "NO_CLAIM_CURSORBENCH_PRIVATE_EVALUATOR_IS_FINITELY_IDENTIFIED",
+    "NO_CLAIM_THIS_RUNTIME_PROVES_WORLD_SET_COMPLETENESS",
+    "NO_V7_ROUTER_ACTIVATION_YET",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
