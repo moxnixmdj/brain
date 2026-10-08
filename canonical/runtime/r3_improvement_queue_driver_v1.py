@@ -258,8 +258,12 @@ def _reactivate_parked_successes(
     repo_root: str | Path,
     external_authority_available: bool,
 ) -> dict[str, Any]:
-    """Reopen parked success work when its evidence/verifier boundary changes."""
+    """Reopen only on safe adapter-frontier change or explicit external authority."""
     frontier = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    adapter_frontier = _owned_success_adapter_frontier_sha256(repo_root=repo_root)
+    verification_authority = _owned_success_verification_authority_sha256(
+        repo_root=repo_root,
+    )
     state = learning.load_state(state_path)
     queue = state.get("improvement_queue", {})
     reopened: list[str] = []
@@ -273,23 +277,46 @@ def _reactivate_parked_successes(
                 or raw.get("kind") != "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE"
             ):
                 continue
-            if (
-                external_authority_available
-                or raw.get("verification_frontier_sha256") != frontier
+            stored_adapter = str(raw.get("adapter_frontier_sha256") or "")
+            stored_authority = str(raw.get("verification_authority_sha256") or "")
+            if not stored_adapter or not stored_authority:
+                # Legacy parked rows predate the authority partition. Initialize the
+                # partition fail-closed instead of treating an unknown historical
+                # change as verified acquisition.
+                raw["adapter_frontier_sha256"] = adapter_frontier
+                raw["verification_authority_sha256"] = verification_authority
+                raw["verification_frontier_sha256"] = frontier
+                raw["frontier_partition_initialized_fail_closed"] = True
+                if not external_authority_available:
+                    continue
+                stored_adapter = adapter_frontier
+                stored_authority = verification_authority
+
+            authority_unchanged = stored_authority == verification_authority
+            adapter_changed = stored_adapter != adapter_frontier
+            if external_authority_available or (
+                authority_unchanged and adapter_changed
             ):
                 raw["status"] = "PENDING"
                 raw["reopen_count"] = int(raw.get("reopen_count", 0)) + 1
                 raw["reactivated_by"] = (
                     "EXTERNAL_VERIFICATION_AUTHORITY_AVAILABLE"
                     if external_authority_available
-                    else "OWNED_VERIFICATION_FRONTIER_CHANGED"
+                    else "OWNED_SUCCESS_ADAPTER_FRONTIER_CHANGED__AUTHORITY_UNCHANGED"
                 )
                 raw["previous_verification_frontier_sha256"] = raw.get(
                     "verification_frontier_sha256"
                 )
                 raw["verification_frontier_sha256"] = frontier
+                raw["adapter_frontier_sha256"] = adapter_frontier
+                raw["verification_authority_sha256"] = verification_authority
+                raw.pop("verification_authority_change_blocked", None)
+                raw.pop("blocked_verification_authority_sha256", None)
                 reopened.append(str(wid))
                 reopened_by[str(wid)] = str(raw["reactivated_by"])
+            elif stored_authority != verification_authority:
+                raw["verification_authority_change_blocked"] = True
+                raw["blocked_verification_authority_sha256"] = verification_authority
 
         if reopened_by:
             for handoff_id, handoff in list(queue.items()):
@@ -316,6 +343,8 @@ def _reactivate_parked_successes(
         learning._write_state(state, state_path)
     return {
         "frontier_sha256": frontier,
+        "adapter_frontier_sha256": adapter_frontier,
+        "verification_authority_sha256": verification_authority,
         "reopened_work_ids": sorted(reopened),
         "resolved_frontier_handoff_work_ids": sorted(resolved_frontier_handoffs),
     }
