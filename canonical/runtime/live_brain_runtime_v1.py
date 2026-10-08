@@ -267,8 +267,14 @@ def _replay_retry_context(
     mode = str(context.get("mode") or "")
     if mode in {"repair_synthesis", "repair_cycle"}:
         return _fail("RETRY_CONTEXT_REPAIR_RECURSION_FORBIDDEN")
+    replay_context = deepcopy(dict(context))
+    # A repair is accepted only by replaying the original obligation. That replay
+    # must not recursively launch another repair cycle if the repair was
+    # insufficient; one observed failure therefore causes at most one automatic
+    # repair attempt per live invocation.
+    replay_context["auto_repair"] = False
     return run(
-        deepcopy(dict(context)),
+        replay_context,
         repo_root=repo_root,
         information_provider=information_provider,
         proposal_provider=proposal_provider,
@@ -485,6 +491,66 @@ def execute_failure_repair_cycle(
         }
     except Exception as exc:
         return _fail("REPAIR_CYCLE_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
+
+
+def _automatic_failure_repair(
+    learning_result: Mapping[str, Any] | None,
+    *,
+    repo_root: str | Path,
+    state_path: str | Path | None,
+    initial_facts: Sequence[str] = (),
+    repair_components: Sequence[Mapping[str, Any]] = (),
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    enabled: bool = True,
+) -> dict[str, Any] | None:
+    """Turn a persisted live failure directly into one verified repair/replay cycle.
+
+    This is the missing R3 control edge. It consumes only a failure already
+    admitted by the durable learning layer, so it cannot invent a fingerprint or
+    bypass retry-capsule integrity. The repair engine remains fail-closed and only
+    reports success after the original obligation itself replays successfully.
+    """
+    if not enabled or not isinstance(learning_result, Mapping):
+        return None
+    if learning_result.get("pass") is not False:
+        return None
+    diagnosis = learning_result.get("diagnosis")
+    if not isinstance(diagnosis, Mapping):
+        return None
+    fingerprint = str(diagnosis.get("failure_fingerprint") or "").strip()
+    retry_sha = str(learning_result.get("retry_capsule_sha256") or "").strip()
+    if not fingerprint or not retry_sha:
+        return None
+    if not isinstance(repair_components, Sequence) or isinstance(
+        repair_components, (str, bytes)
+    ):
+        return _fail("AUTO_REPAIR_COMPONENT_FRONTIER_INVALID")
+    normalized_components = []
+    for row in repair_components:
+        if not isinstance(row, Mapping):
+            return _fail("AUTO_REPAIR_COMPONENT_NOT_OBJECT")
+        normalized_components.append(deepcopy(dict(row)))
+    facts = [
+        str(x).strip()
+        for x in initial_facts
+        if isinstance(x, str) and str(x).strip()
+    ]
+    return execute_failure_repair_cycle(
+        {
+            "failure_fingerprint": fingerprint,
+            "retry_capsule_sha256": retry_sha,
+            "components": normalized_components,
+            "initial_facts": facts,
+            "learn": True,
+        },
+        repo_root=repo_root,
+        state_path=state_path,
+        information_provider=information_provider,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+    )
 
 
 def _active_learning_context(state_path: str | Path | None, *, scope_id: str, episode_id: str) -> dict[str, Any]:
@@ -716,6 +782,8 @@ def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
         "default_explicit_execution_path": "R3_REUSE_FIRST_OVER_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
         "default_learning_scope": "unified-live-brain",
         "automatic_verified_experience_integration": True,
+        "automatic_verified_failure_repair_replay": True,
+        "bounded_auto_repair_attempts_per_live_invocation": 1,
         "verified_skill_execution_reuse_first": True,
         "active_skill_planning_reuse": True,
         "verified_bound_capability_count": bound_count,
@@ -739,6 +807,8 @@ def run_generic(
     active_invalidators: Sequence[str] = (),
     known_absent_invalidators: Sequence[str] = (),
     learn: bool = True,
+    auto_repair: bool = True,
+    repair_components: Sequence[Mapping[str, Any]] = (),
     solver_kwargs: Mapping[str, Any] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
@@ -783,10 +853,28 @@ def run_generic(
             out = learned.get("solver_output")
             if not isinstance(out, Mapping):
                 raise ValueError("R3_SOLVER_OUTPUT_MISSING")
+            automatic_repair = _automatic_failure_repair(
+                learned.get("learning"),
+                repo_root=repo_root,
+                state_path=ctx["state_path"],
+                initial_facts=problem.get("initial_facts") or (),
+                repair_components=repair_components,
+                information_provider=None,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+                enabled=auto_repair,
+            )
+            repaired = (
+                isinstance(automatic_repair, Mapping)
+                and automatic_repair.get("pass") is True
+            )
             return {
                 "schema": SCHEMA,
-                "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
-                "pass": learned.get("pass") is True,
+                "status": (
+                    "UNIFIED_GENERIC_EXECUTION_REPAIRED"
+                    if repaired else "UNIFIED_GENERIC_EXECUTION_COMPLETE"
+                ),
+                "pass": learned.get("pass") is True or repaired,
                 "solver": "R3_REUSE_FIRST_OVER_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
                 "solver_output": out,
                 "learning": learned.get("learning"),
@@ -803,6 +891,8 @@ def run_generic(
                     learned.get("fallback_blocked_effect_may_have_occurred") is True
                 ),
                 "learning_persistence_enabled": True,
+                "auto_repair_attempted": automatic_repair is not None,
+                "automatic_repair": automatic_repair,
                 "terminal_authority": False,
                 "capability_promotion_authority": False,
                 "terminal_credit_delta": 0,
@@ -858,6 +948,8 @@ def run_decision(
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
     known_absent_invalidators: Sequence[str] = (),
     learn: bool = True,
+    auto_repair: bool = True,
+    repair_components: Sequence[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
     if not isinstance(request, Mapping):
         return _fail("DECISION_REQUEST_NOT_OBJECT")
@@ -924,10 +1016,34 @@ def run_decision(
                 retry_context=retry_context,
             )
 
+        execution_problem = bound_request.get("execution_problem")
+        repair_initial_facts = (
+            execution_problem.get("initial_facts") or ()
+            if isinstance(execution_problem, Mapping) else ()
+        )
+        automatic_repair = _automatic_failure_repair(
+            learning,
+            repo_root=repo_root,
+            state_path=state_path,
+            initial_facts=repair_initial_facts,
+            repair_components=repair_components,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+            enabled=auto_repair,
+        )
+        repaired = (
+            isinstance(automatic_repair, Mapping)
+            and automatic_repair.get("pass") is True
+        )
+
         return {
             "schema": SCHEMA,
-            "status": "UNIFIED_DECISION_EXECUTION_COMPLETE",
-            "pass": out.get("pass") is True,
+            "status": (
+                "UNIFIED_DECISION_EXECUTION_REPAIRED"
+                if repaired else "UNIFIED_DECISION_EXECUTION_COMPLETE"
+            ),
+            "pass": out.get("pass") is True or repaired,
             "decision_controller": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
             "decision_output": out,
             "learning": learning,
@@ -956,7 +1072,10 @@ def run_decision(
             ),
             "actual_goal_satisfaction_verified": (
                 out.get("actual_goal_satisfaction_verified") is True
+                or repaired
             ),
+            "auto_repair_attempted": automatic_repair is not None,
+            "automatic_repair": automatic_repair,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -1070,6 +1189,8 @@ def run(
             capability_expander=capability_expander,
             known_absent_invalidators=request.get("known_absent_invalidators") or (),
             learn=request.get("learn", True) is not False,
+            auto_repair=request.get("auto_repair", True) is not False,
+            repair_components=request.get("repair_components") or (),
         )
 
     if mode == "generic":
@@ -1085,6 +1206,8 @@ def run(
             active_invalidators=request.get("active_invalidators") or (),
             known_absent_invalidators=request.get("known_absent_invalidators") or (),
             learn=request.get("learn", True) is not False,
+            auto_repair=request.get("auto_repair", True) is not False,
+            repair_components=request.get("repair_components") or (),
             solver_kwargs=request.get("solver_kwargs") or {},
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
