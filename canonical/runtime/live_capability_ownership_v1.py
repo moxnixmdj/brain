@@ -11,6 +11,7 @@ It does not claim arbitrary-language semantic routing completeness.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from copy import deepcopy
 from pathlib import Path
@@ -25,6 +26,7 @@ SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_V1"
 MANIFEST_SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1"
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_PATH = ROOT / "canonical/governance/LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1.json"
+AUTHORITY_PATH = ROOT / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
 
 EXPECTED_PROVIDERS = (
     "FABRIC_ENGINES",
@@ -56,6 +58,147 @@ def _load_manifest(path: str | Path = MANIFEST_PATH) -> dict[str, Any]:
     if tuple(sorted(providers)) != tuple(sorted(EXPECTED_PROVIDERS)):
         raise LiveOwnershipError("OWNERSHIP_PROVIDER_SET_DRIFT")
     return deepcopy(dict(doc))
+
+
+def _git_blob_sha(path: str | Path) -> str:
+    p = Path(path)
+    raw = p.read_bytes()
+    prefix = ("blob " + str(len(raw)) + "\0").encode("ascii")
+    return hashlib.sha1(prefix + raw).hexdigest()
+
+
+def _authority_binding_check(
+    *,
+    repo_root: str | Path = ROOT,
+    authority_path: str | Path = AUTHORITY_PATH,
+) -> dict[str, Any]:
+    root = Path(repo_root).resolve()
+    pointer_path = Path(authority_path)
+    if not pointer_path.is_absolute():
+        pointer_path = (root / pointer_path).resolve()
+    doc = json.loads(pointer_path.read_text(encoding="utf-8"))
+    if not isinstance(doc, Mapping):
+        raise LiveOwnershipError("CURRENT_TERMINAL_AUTHORITY_NOT_OBJECT")
+
+    ownership = doc.get("live_capability_ownership_20261008_v1")
+    invocation = doc.get("r1_universal_live_capability_invocation_20261008_v1")
+    if not isinstance(ownership, Mapping):
+        raise LiveOwnershipError("LIVE_OWNERSHIP_AUTHORITY_NODE_MISSING")
+    if not isinstance(invocation, Mapping):
+        raise LiveOwnershipError("LIVE_INVOCATION_AUTHORITY_NODE_MISSING")
+
+    expected = (
+        (ownership, "governance", "canonical/governance/LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1.json"),
+        (ownership, "runtime", "canonical/runtime/live_capability_ownership_v1.py"),
+        (ownership, "invoker", "canonical/runtime/live_capability_invoker_v1.py"),
+        (ownership, "unified_fabric", "canonical/runtime/unified_cognitive_fabric_v1.py"),
+        (ownership, "subordinate_runtime", "canonical/runtime/live_brain_runtime_v1.py"),
+        (ownership, "activation", "canonical/governance/LIVE_BRAIN_RUNTIME_V1_ACTIVATION_20261008_V1.json"),
+        (
+            ownership,
+            "verification",
+            "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
+        ),
+        (invocation, "runtime", "canonical/runtime/live_capability_invoker_v1.py"),
+        (invocation, "unified_fabric", "canonical/runtime/unified_cognitive_fabric_v1.py"),
+        (invocation, "regression", "canonical/tests/test_live_capability_invoker_v1.py"),
+        (invocation, "workflow", ".github/workflows/verify-unified-cognitive-fabric-v1.yml"),
+        (
+            invocation,
+            "verification",
+            "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
+        ),
+    )
+
+    checked: list[dict[str, Any]] = []
+    mismatches: list[dict[str, Any]] = []
+    for node, field, expected_path in expected:
+        binding = node.get(field)
+        if not isinstance(binding, Mapping):
+            mismatches.append({"field": field, "reason": "BINDING_NOT_OBJECT"})
+            continue
+        path = str(binding.get("path") or "")
+        declared = str(binding.get("git_blob_sha") or "")
+        if path != expected_path:
+            mismatches.append({
+                "field": field,
+                "reason": "PATH_MISMATCH",
+                "expected_path": expected_path,
+                "declared_path": path,
+            })
+            continue
+        candidate = (root / path).resolve()
+        if root not in candidate.parents or not candidate.is_file():
+            mismatches.append({"field": field, "reason": "BOUND_FILE_MISSING", "path": path})
+            continue
+        actual = _git_blob_sha(candidate)
+        row = {"field": field, "path": path, "declared_git_blob_sha": declared, "actual_git_blob_sha": actual}
+        checked.append(row)
+        if declared != actual:
+            mismatches.append({**row, "reason": "GIT_BLOB_SHA_MISMATCH"})
+
+    if ownership.get("canonical_public_entrypoint") != "canonical.runtime.unified_cognitive_fabric_v1.run":
+        mismatches.append({"field": "canonical_public_entrypoint", "reason": "PUBLIC_ENTRYPOINT_DRIFT"})
+    if ownership.get("subordinate_runtime_public_authority") is not False:
+        mismatches.append({"field": "subordinate_runtime_public_authority", "reason": "SUBRUNTIME_AUTHORITY_DRIFT"})
+
+    verification = ownership.get("verification")
+    receipt_path = (
+        str(verification.get("path") or "")
+        if isinstance(verification, Mapping)
+        else ""
+    )
+    receipt = None
+    if receipt_path:
+        rp = (root / receipt_path).resolve()
+        if root in rp.parents and rp.is_file():
+            raw_receipt = json.loads(rp.read_text(encoding="utf-8"))
+            if isinstance(raw_receipt, Mapping):
+                receipt = raw_receipt
+    if not isinstance(receipt, Mapping):
+        mismatches.append({"field": "verification.exact_blobs", "reason": "VERIFICATION_RECEIPT_INVALID"})
+    else:
+        exact = receipt.get("exact_blobs")
+        if not isinstance(exact, Mapping):
+            mismatches.append({"field": "verification.exact_blobs", "reason": "EXACT_BLOBS_NOT_OBJECT"})
+        else:
+            for name, binding in sorted(exact.items()):
+                if not isinstance(binding, Mapping):
+                    mismatches.append({"field": "receipt:" + str(name), "reason": "BINDING_NOT_OBJECT"})
+                    continue
+                path = str(binding.get("path") or "")
+                declared = str(binding.get("git_blob_sha") or "")
+                candidate = (root / path).resolve()
+                if (
+                    not path
+                    or root not in candidate.parents
+                    or not candidate.is_file()
+                ):
+                    mismatches.append({"field": "receipt:" + str(name), "reason": "BOUND_FILE_MISSING", "path": path})
+                    continue
+                actual = _git_blob_sha(candidate)
+                row = {
+                    "field": "receipt:" + str(name),
+                    "path": path,
+                    "declared_git_blob_sha": declared,
+                    "actual_git_blob_sha": actual,
+                }
+                checked.append(row)
+                if declared != actual:
+                    mismatches.append({**row, "reason": "GIT_BLOB_SHA_MISMATCH"})
+
+    passed = not mismatches
+    return {
+        "pass": passed,
+        "status": (
+            "PASS__R1_AUTHORITY_AND_RECEIPT_BINDINGS_CURRENT"
+            if passed
+            else "FAIL_CLOSED__R1_AUTHORITY_OR_RECEIPT_DRIFT"
+        ),
+        "checked_binding_count": len(checked),
+        "mismatch_count": len(mismatches),
+        "mismatches": mismatches,
+    }
 
 
 def _h100_owned_ids(entries: list[Mapping[str, Any]]) -> tuple[list[str], list[dict[str, Any]]]:
@@ -119,6 +262,7 @@ def evaluate(
     *,
     manifest_path: str | Path = MANIFEST_PATH,
     self_improvement_state_path: str | Path = self_improvement.DEFAULT_STATE_PATH,
+    authority_path: str | Path = AUTHORITY_PATH,
 ) -> dict[str, Any]:
     if not isinstance(engine_descriptors, Mapping) or not engine_descriptors:
         raise LiveOwnershipError("ENGINE_DESCRIPTORS_REQUIRED")
@@ -230,15 +374,24 @@ def evaluate(
     )
     owned_ids = sorted(ids)
     equality = not missing_carriers and discoverable == owned_ids
+    authority_binding = _authority_binding_check(
+        repo_root=ROOT,
+        authority_path=authority_path,
+    )
+    closure = equality and authority_binding["pass"] is True
 
     return {
         "schema": SCHEMA,
         "status": (
-            "PASS__LIVE_OWNED_EQUALS_FABRIC_REACHABLE"
-            if equality
-            else "FAIL_CLOSED__LIVE_OWNERSHIP_FABRIC_DIVERGENCE"
+            "PASS__LIVE_OWNED_EQUALS_FABRIC_REACHABLE__AUTHORITY_CURRENT"
+            if closure
+            else (
+                "FAIL_CLOSED__R1_AUTHORITY_OR_RECEIPT_DRIFT"
+                if equality
+                else "FAIL_CLOSED__LIVE_OWNERSHIP_FABRIC_DIVERGENCE"
+            )
         ),
-        "pass": equality,
+        "pass": closure,
         "manifest_status": manifest["status"],
         "ownership_default": manifest["default"],
         "provider_count": len(EXPECTED_PROVIDERS),
@@ -250,10 +403,12 @@ def evaluate(
         "missing_carrier_modes": missing_carriers,
         "live_owned_equals_fabric_reachable": equality,
         "provider_coverage_complete": equality,
+        "authority_binding": authority_binding,
+        "authority_binding_current": authority_binding["pass"],
         "unregistered_repository_code_live_owned": False,
         "historical_repository_capability_completeness_proved": False,
         "arbitrary_raw_language_route_selection_proved": False,
-        "r1_structural_closure": equality,
+        "r1_structural_closure": closure,
         "terminal_authority": False,
         "capability_credit_delta": 0,
         "ownership_credit_delta": 0,
