@@ -55,6 +55,13 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             terminal["objective_precedence"]["opus_5_5_role"],
             mission["opus_5_5_role"],
         )
+        self.assertEqual(
+            terminal["authoritative_sources"]["current_r2_decision_intelligence"][
+                "pointer_semantics"
+            ],
+            "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__"
+            "IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
+        )
         self.assertNotEqual(
             terminal["checkpoint_objective"],
             terminal["terminal_objective"],
@@ -70,7 +77,8 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             bound["path"],
             "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
         )
-        self.assertEqual(bound["git_blob_sha"], blob_sha(R2))
+        self.assertNotIn("git_blob_sha", bound)
+        self.assertTrue(bound["mutable_pointer_blob_is_not_load_bearing"])
         self.assertEqual(
             bound["scheduler_cut"]["path"],
             "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json",
@@ -98,6 +106,18 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         self.assertEqual(
             cut["current_cell_classifications"]["GDPVAL_AA_OWNER_LAYER"]["state"],
             "EXTERNAL_REQUIRED_SLEEP",
+        )
+        self.assertTrue(
+            terminal["r2_scheduler_precedence"]["current_authority_pointer_mutable"]
+        )
+        self.assertTrue(
+            terminal["r2_scheduler_precedence"][
+                "current_authority_pointer_blob_is_not_load_bearing"
+            ]
+        )
+        self.assertNotIn(
+            "current_authority_git_blob_sha",
+            terminal["r2_scheduler_precedence"],
         )
         self.assertFalse(
             terminal["r2_scheduler_precedence"][

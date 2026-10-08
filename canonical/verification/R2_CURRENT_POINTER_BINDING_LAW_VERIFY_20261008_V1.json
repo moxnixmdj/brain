@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_R2_CURRENT_POINTER_BINDING_LAW_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_DISTINCT_SPRITE_REPLAYS__4_OF_4_EACH__MUTABLE_POINTER_SELF_STALING_REMOVED",
+  "exact_blobs": {
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "1533800521042597845687d0e90099b996b64e70",
+    "canonical/governance/CURRENT_MISSION_OBJECTIVE.json": "0fb2d4e5f369ef937946d7ad8815764b439c1d11",
+    "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json_observed_not_load_bearing": "85ba12ec808d66bba89b2cf37b76704b1db770b0",
+    "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json": "e13a3440b0ce581a574b584faecfd70ef1a4167d",
+    "canonical/tests/test_current_terminal_authority_r2_reconciliation_v1.py": "141588b3dc4d67e32a320f883875b9e8deeee170"
+  },
+  "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
+  "replays": [
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-live-integrated-v1-run-20261008",
+      "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+      "tests_run": 4,
+      "tests_passed": 4,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-mm-functional-cegar-verify2-20261008",
+      "sprite_id": "sprite-7bd17231-0b9b-4a35-abc2-defe0e0a2c22",
+      "tests_run": 4,
+      "tests_passed": 4,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "proved": [
+    "CURRENT_R2_POINTER_PATH_IDENTITY_REMAINS_AUTHORITATIVE_WITHOUT_A_LOAD_BEARING_POINTER_BLOB_HASH",
+    "IMMUTABLE_V5_SCHEDULER_REMAINS_CONTENT_ADDRESSED",
+    "CURRENT_MISSION_OBJECTIVE_REMAINS_CONTENT_ADDRESSED",
+    "FUTURE_CURRENT_R2_METADATA_UPDATES_CANNOT_BY_THEMSELVES_STALE_CURRENT_TERMINAL_AUTHORITY",
+    "GDPVAL_SLEEP_AND_OPUS_CHECKPOINT_DISTINCTIONS_REMAIN_PRESERVED"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_R2_CLOSURE",
+    "NO_WEAKENING_OF_IMMUTABLE_AUTHORITY_HASH_BINDINGS",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
