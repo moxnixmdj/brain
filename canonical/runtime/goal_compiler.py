@@ -4906,6 +4906,7 @@ def _compile_exact_literal_response_goal(goal):
     return {
       "schema":"PROJECT_BRAIN_COMPILED_EXACT_LITERAL_RESPONSE_V1",
       "compiler_mode":"DETERMINISTIC_EXACT_LITERAL_RESPONSE",
+      "target_effects":["response.exact_literal"],
       "clauses":[text],
       "compiled_parts":[{
         "index":0,
