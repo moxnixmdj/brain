@@ -363,9 +363,9 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
 
     def test_governance_activation_and_terminal_pointer_are_bound(self):
-        activation = json.loads((ROOT / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V1.json").read_text())
+        activation = json.loads((ROOT / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V2.json").read_text())
         pointer = json.loads((ROOT / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json").read_text())
-        self.assertEqual(activation["status"], "ACTIVE_PRIMARY_CAPABILITY_DEVELOPMENT_SCHEDULER")
+        self.assertEqual(activation["status"], "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER")
         self.assertEqual(
             activation["terminal_milestone"],
             "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
@@ -384,10 +384,9 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         self.assertFalse(
             activation["option_preservation"]["physical_deletion_authority_from_scheduler"]
         )
-        self.assertEqual(
-            pointer["capability_first_scheduler_20261008_v1"]["status"],
-            "ACTIVE_PRIMARY_CAPABILITY_DEVELOPMENT_SCHEDULER",
-        )
+        self.assertGreater(pointer["live_truth"]["independent_open_acceptance_obligations"], 0)
+        self.assertEqual(activation["canonical_primary_entrypoint"], "rank_live_work")
+        self.assertTrue(activation["primary_work_gate"]["fail_closed_if_authority_unreadable"])
 
 
 if __name__ == "__main__":
