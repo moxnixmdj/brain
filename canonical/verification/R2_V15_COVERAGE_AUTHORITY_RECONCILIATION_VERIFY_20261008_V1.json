@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V15_COVERAGE_AUTHORITY_RECONCILIATION_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_BLOB_RECONCILIATION__SEVEN_ROUTES__FOUR_TRANSACTIONAL_FAMILIES__OPEN_WORLD_COVERAGE_STILL_OPEN__ZERO_CREDIT",
+  "merged_runtime_subject": {
+    "commit": "d5245d72db387d3c488cf67d65fbff0a675db096",
+    "direct_runtime": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "4da3aade6ee049f5a0fd0bf942deb183e276368d"
+    },
+    "structured_table_runtime": {
+      "path": "canonical/runtime/r2_structured_table_direct_adequacy_v1.py",
+      "git_blob_sha": "2db9a7b10fab4410e08f8f59a8f414817b4f51c3"
+    }
+  },
+  "authority_subjects": {
+    "activation_v3": {
+      "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V3.json",
+      "git_blob_sha": "3f63cc0398ebf900981992f71e92790ca19b1f20"
+    },
+    "scheduler_v15": {
+      "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V15.json",
+      "git_blob_sha": "22440996a64fd99e86a66f00c1b20ab34206beca"
+    },
+    "current_r2": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "1bb37c3bf2a0945fc90175b502c923946380ba8a"
+    },
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "df08b0fe130eb4f96dd35f6bcb599ddcd3c15a08"
+    },
+    "structured_table_verification": {
+      "path": "canonical/verification/R2_STRUCTURED_TABLE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+      "git_blob_sha": "786bf330876f558b08be368f97525a198fcdd060"
+    }
+  },
+  "reconciled_truth": {
+    "current_route_count": 7,
+    "exact_cell_count": 3,
+    "bounded_transactional_family_count": 4,
+    "families": [
+      "STRUCTURED_BINARY_CODEC",
+      "LITERAL_DOCX",
+      "JSON_RECORD_DOCX",
+      "STRUCTURED_TABLE_XLSX_SQLITE"
+    ],
+    "general_control_mechanism_closed_as_adequacy_or_abstain": true,
+    "global_open_world_positive_action_coverage_complete": false,
+    "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY",
+    "single_live_primitive": "ESCAPE_POLICY_ADEQUACY"
+  },
+  "evidence": {
+    "structured_table_exact_branch_remote_replay": "10_OF_10_PASS",
+    "docx_json_exact_branch_control_replay": "12_OF_12_PASS",
+    "docx_json_real_independent_acceptance_replay": true,
+    "current_direct_runtime_contains_all_seven_routes": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GLOBAL_OPEN_WORLD_ADEQUACY_COVERAGE_IS_COMPLETE",
+    "NO_CLAIM_OBSERVABILITY_IS_COMPLETE",
+    "NO_CLAIM_GENERAL_NATURAL_LANGUAGE_SEMANTIC_CLOSURE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
