@@ -1,0 +1,20 @@
+name: Verify robust functional adequacy CEGAR v1
+on:
+  pull_request:
+    paths:
+      - canonical/runtime/robust_functional_adequacy_cegar_v1.py
+      - canonical/tests/test_robust_functional_adequacy_cegar_v1.py
+      - canonical/governance/MYSTERYMECHANISM_ROBUST_FUNCTIONAL_ADEQUACY_CEGAR_20261008_V1.json
+      - .github/workflows/verify-robust-functional-adequacy-cegar-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_robust_functional_adequacy_cegar_v1
