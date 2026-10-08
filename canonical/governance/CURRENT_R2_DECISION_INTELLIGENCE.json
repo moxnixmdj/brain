@@ -154,7 +154,10 @@
     ],
     "execution_authority": false,
     "semantic_truth_authority": false,
-    "open_world_completion_claimed": false
+    "open_world_completion_claimed": false,
+    "verification_path": "canonical/verification/R2_TOTAL_META_ACTION_SUPPLEMENTAL_VERIFY_20261008_V1.json",
+    "verification_git_blob_sha": "6afee7e277452ca3946a2b845a313c2507d7ea4e",
+    "isolated_behavior_replay": "7_OF_7_PASS"
   },
   "control_law_closure": {
     "status": "SUPPLEMENTAL__AUTHORITATIVE_CLOSURE_IS_MECHANISM_CLOSURE_V6",
