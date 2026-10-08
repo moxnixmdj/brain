@@ -27,6 +27,8 @@ GOAL_BINDING_SCHEMA = "PROJECT_BRAIN_GOAL_TO_DECISION_CONTEXT_BINDING_V1"
 GOAL_BINDING_VERIFY_SCHEMA = "PROJECT_BRAIN_GOAL_TO_DECISION_CONTEXT_BINDING_INDEPENDENT_VERIFICATION_V1"
 POLICY_EXECUTION_SCHEMA = "PROJECT_BRAIN_POLICY_EXECUTION_BINDING_V1"
 POLICY_EXECUTION_VERIFY_SCHEMA = "PROJECT_BRAIN_POLICY_EXECUTION_BINDING_INDEPENDENT_VERIFICATION_V1"
+GOAL_SATISFACTION_SCHEMA = "PROJECT_BRAIN_GOAL_SATISFACTION_BINDING_V1"
+GOAL_SATISFACTION_VERIFY_SCHEMA = "PROJECT_BRAIN_GOAL_SATISFACTION_BINDING_INDEPENDENT_VERIFICATION_V1"
 MAX_INFORMATION_ROUNDS = 16
 
 
@@ -208,6 +210,97 @@ def _authenticate_policy_execution_binding(
         }
 
 
+def _authenticate_goal_satisfaction_binding(
+    binding: Mapping[str, Any] | None,
+    *,
+    goal: str,
+    selected_policy_id: str,
+    realization: Mapping[str, Any],
+    repo_root: Path,
+) -> dict[str, Any]:
+    """Authenticate the final semantic acceptance edge.
+
+    Adequate-policy selection and mechanically verified realization are necessary
+    but not sufficient to claim that the caller's original goal was actually
+    satisfied. This gate binds an independently verified acceptance receipt to the
+    exact raw goal, selected policy, and realized output/execution object.
+    """
+    if not isinstance(binding, Mapping):
+        return {"pass": False, "status": "OPEN__GOAL_SATISFACTION_BINDING_REQUIRED"}
+    try:
+        receipt, receipt_path, receipt_blob = _bound_json(
+            binding.get("receipt"),
+            repo_root=repo_root,
+            prefixes=("canonical/governance/", "canonical/verification/"),
+        )
+        verification, verification_path, verification_blob = _bound_json(
+            binding.get("verification"),
+            repo_root=repo_root,
+            prefixes=("canonical/verification/",),
+        )
+        goal_sha = sha256(goal.encode("utf-8")).hexdigest()
+        realization_sha = _digest(realization)
+        if receipt.get("schema") != GOAL_SATISFACTION_SCHEMA:
+            raise DecisionControllerError("GOAL_SATISFACTION_SCHEMA_INVALID")
+        if receipt.get("goal_sha256") != goal_sha:
+            raise DecisionControllerError("GOAL_SATISFACTION_GOAL_MISMATCH")
+        if receipt.get("policy_id") != selected_policy_id:
+            raise DecisionControllerError("GOAL_SATISFACTION_POLICY_MISMATCH")
+        if receipt.get("realization_sha256") != realization_sha:
+            raise DecisionControllerError("GOAL_SATISFACTION_REALIZATION_MISMATCH")
+        for field in (
+            "goal_satisfaction_proved",
+            "all_load_bearing_constraints_satisfied",
+            "acceptance_relation_bound",
+        ):
+            if receipt.get(field) is not True:
+                raise DecisionControllerError(
+                    "GOAL_SATISFACTION_PREMISE_UNPROVED:" + field
+                )
+        if verification.get("schema") != GOAL_SATISFACTION_VERIFY_SCHEMA:
+            raise DecisionControllerError("GOAL_SATISFACTION_VERIFY_SCHEMA_INVALID")
+        if verification.get("subject_git_blob_sha") != receipt_blob:
+            raise DecisionControllerError("GOAL_SATISFACTION_VERIFY_SUBJECT_MISMATCH")
+        if verification.get("goal_sha256") != goal_sha:
+            raise DecisionControllerError("GOAL_SATISFACTION_VERIFY_GOAL_MISMATCH")
+        if verification.get("policy_id") != selected_policy_id:
+            raise DecisionControllerError("GOAL_SATISFACTION_VERIFY_POLICY_MISMATCH")
+        if verification.get("realization_sha256") != realization_sha:
+            raise DecisionControllerError("GOAL_SATISFACTION_VERIFY_REALIZATION_MISMATCH")
+        for field in (
+            "pass",
+            "independent_verified",
+            "goal_satisfaction_verified",
+            "acceptance_relation_verified",
+            "load_bearing_constraints_verified",
+        ):
+            if verification.get(field) is not True:
+                raise DecisionControllerError(
+                    "GOAL_SATISFACTION_VERIFY_PREMISE_UNPROVED:" + field
+                )
+        verifier_id = verification.get("independent_verifier_id")
+        if not isinstance(verifier_id, str) or not verifier_id.strip():
+            raise DecisionControllerError("GOAL_SATISFACTION_INDEPENDENT_VERIFIER_ID_MISSING")
+        return {
+            "pass": True,
+            "status": "PASS__ACTUAL_GOAL_SATISFACTION_AUTHENTICATED",
+            "goal_sha256": goal_sha,
+            "policy_id": selected_policy_id,
+            "realization_sha256": realization_sha,
+            "receipt_path": receipt_path,
+            "receipt_git_blob_sha": receipt_blob,
+            "verification_path": verification_path,
+            "verification_git_blob_sha": verification_blob,
+            "independent_verifier_id": verifier_id.strip(),
+        }
+    except Exception as exc:
+        return {
+            "pass": False,
+            "status": "FAIL_CLOSED__GOAL_SATISFACTION_BINDING_INVALID",
+            "reason": type(exc).__name__ + ":" + str(exc),
+        }
+
+
 def _extract_information_gap(decision: Mapping[str, Any]) -> dict[str, Any] | None:
     detail = decision.get("detail")
     if not isinstance(detail, Mapping):
@@ -308,6 +401,7 @@ def run(
             "goal_to_decision_binding",
             "execution_problem",
             "policy_execution_binding",
+            "goal_satisfaction_binding",
             "max_information_rounds",
             "episode_id",
             "scope_id",
@@ -486,9 +580,38 @@ def run(
                     information_trace=information_trace,
                     goal_to_decision_binding=goal_binding,
                 )
+            realization = {
+                "kind": "GROUNDED_DECISION_EXPRESSION",
+                "policy_id": selected_policy_id,
+                "rendered_text": rendered,
+                "decision_result_sha256": _digest(decision),
+            }
+            goal_satisfaction = _authenticate_goal_satisfaction_binding(
+                request.get("goal_satisfaction_binding"),
+                goal=goal,
+                selected_policy_id=selected_policy_id,
+                realization=realization,
+                repo_root=root,
+            )
+            if goal_satisfaction.get("pass") is not True:
+                return _open(
+                    str(
+                        goal_satisfaction.get("status")
+                        or "OPEN__GOAL_SATISFACTION_BINDING_REQUIRED"
+                    ),
+                    task_id=task_id,
+                    goal=goal,
+                    raw_contract=raw_contract,
+                    next_required_edge="INDEPENDENT_ACTUAL_GOAL_SATISFACTION_VERIFICATION",
+                    decision_result=decision,
+                    realization=realization,
+                    goal_satisfaction_binding=goal_satisfaction,
+                    information_trace=information_trace,
+                    goal_to_decision_binding=goal_binding,
+                )
             return {
                 "schema": SCHEMA,
-                "status": "PASS__GOAL_BOUND_ADEQUATE_DECISION_REALIZED",
+                "status": "PASS__GOAL_BOUND_ADEQUATE_DECISION_REALIZED_AND_ACCEPTANCE_VERIFIED",
                 "pass": True,
                 "task_id": task_id,
                 "goal_sha256": sha256(goal.encode("utf-8")).hexdigest(),
@@ -501,6 +624,8 @@ def run(
                 "selected_policy_id": selected_policy_id,
                 "action_kind": "GROUNDED_DECISION_EXPRESSION",
                 "action": rendered,
+                "realization": realization,
+                "goal_satisfaction_binding": goal_satisfaction,
                 "information_trace": information_trace,
                 "minimum_information_rounds_used": len(information_trace),
                 "semantic_acceptance_complete": True,
@@ -561,9 +686,40 @@ def run(
                 policy_execution_binding=execution_binding,
             )
 
+        realization = {
+            "kind": "VERIFIED_POLICY_EXECUTION",
+            "policy_id": selected_policy_id,
+            "execution_result": execution,
+        }
+        goal_satisfaction = _authenticate_goal_satisfaction_binding(
+            request.get("goal_satisfaction_binding"),
+            goal=goal,
+            selected_policy_id=selected_policy_id,
+            realization=realization,
+            repo_root=root,
+        )
+        if goal_satisfaction.get("pass") is not True:
+            return _open(
+                str(
+                    goal_satisfaction.get("status")
+                    or "OPEN__GOAL_SATISFACTION_BINDING_REQUIRED"
+                ),
+                task_id=task_id,
+                goal=goal,
+                raw_contract=raw_contract,
+                next_required_edge="INDEPENDENT_ACTUAL_GOAL_SATISFACTION_VERIFICATION",
+                decision_result=decision,
+                execution_result=execution,
+                realization=realization,
+                goal_satisfaction_binding=goal_satisfaction,
+                information_trace=information_trace,
+                goal_to_decision_binding=goal_binding,
+                policy_execution_binding=execution_binding,
+            )
+
         return {
             "schema": SCHEMA,
-            "status": "PASS__GOAL_BOUND_ADEQUATE_POLICY_EXECUTED_AND_VERIFIED",
+            "status": "PASS__GOAL_BOUND_ADEQUATE_POLICY_EXECUTED_AND_ACCEPTANCE_VERIFIED",
             "pass": True,
             "task_id": task_id,
             "goal_sha256": sha256(goal.encode("utf-8")).hexdigest(),
@@ -576,6 +732,8 @@ def run(
             "selected_policy_id": selected_policy_id,
             "policy_execution_binding": execution_binding,
             "execution_result": execution,
+            "realization": realization,
+            "goal_satisfaction_binding": goal_satisfaction,
             "information_trace": information_trace,
             "minimum_information_rounds_used": len(information_trace),
             "semantic_acceptance_complete": True,
