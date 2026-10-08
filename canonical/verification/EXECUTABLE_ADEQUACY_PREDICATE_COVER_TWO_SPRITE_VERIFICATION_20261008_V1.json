@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_ADEQUACY_PREDICATE_COVER_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_6_OF_6_ON_TWO_SPRITES__P2_AND_P3_EXECUTABLE_ADEQUACY_PREDICATE_CATALOG_BOUND__CURRENT_UNIVERSAL_RESIDUAL_EXACTLY_NEITHER_P2_NOR_P3__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "theorem": {
+      "path": "canonical/governance/EXECUTABLE_ADEQUACY_PREDICATE_COVER_THEOREM_20261008_V1.json",
+      "git_blob_sha": "6f12b0956443adb95de8853dc25aae9d52a9acd5"
+    },
+    "runtime": {
+      "path": "canonical/runtime/policy_adequacy_executable_predicate_cover_v1.py",
+      "git_blob_sha": "1ea193aefa3668de817b535eb7551bf9723b1146"
+    },
+    "tests": {
+      "path": "canonical/tests/test_policy_adequacy_executable_predicate_cover_v1.py",
+      "git_blob_sha": "b8b9ee4db3c4561200e77e3d1c873dccef6c4f1f"
+    },
+    "p2_predicate_verification": {
+      "path": "canonical/verification/P2_EXECUTABLE_MEMBERSHIP_PREDICATE_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "12026e8fcc5d0669f5f41aeb8b74059b7608bb70"
+    },
+    "p3_region_verifier": {
+      "path": "canonical/runtime/p3_binary_explicit_top_law_region_verifier_v1.py",
+      "git_blob_sha": "da871727e5939b5c190e9c383d6c361642168b80"
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_run": 6,
+      "tests_passed": 6,
+      "result": "PASS"
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_run": 6,
+      "tests_passed": 6,
+      "result": "PASS"
+    }
+  ],
+  "proved_for_current_catalog": {
+    "trusted_executable_policy_predicate_count": 2,
+    "predicates": [
+      "P2_STRICT_EXPLICIT_SOURCE_TOP_LAW_MEMBERSHIP_V1",
+      "P3_STRICT_EXPLICIT_BINARY_TOP_LAW_MEMBERSHIP_V1"
+    ],
+    "caller_scope_narrowing_accepted": false,
+    "initial_scope": "TRUE",
+    "abstract_boolean_model_count": 4,
+    "covered_abstract_model_count": 3,
+    "uncovered_abstract_model_count": 1,
+    "current_uncovered_abstract_valuation": {
+      "P2_STRICT_EXPLICIT_SOURCE_TOP_LAW_MEMBERSHIP_V1": false,
+      "P3_STRICT_EXPLICIT_BINARY_TOP_LAW_MEMBERSHIP_V1": false
+    },
+    "current_residual_formula": "NOT_P2_STRICT_EXPLICIT_SOURCE_TOP_LAW_MEMBERSHIP_AND_NOT_P3_STRICT_EXPLICIT_BINARY_TOP_LAW_MEMBERSHIP",
+    "negative_capability_failure_authorized": false
+  },
+  "verified_properties": [
+    "COMPLEMENTARY_SOUND_EXECUTABLE_POLICY_PREDICATES_CAN_CLOSE_TRUE_WITHOUT_A_SEPARATE_DISCRIMINATOR",
+    "ONE_SIDED_INCOMPLETE_PREDICATE_RETURNS_EXACT_ABSTRACT_RESIDUAL_NOT_CAPABILITY_FAILURE",
+    "FALSE_NEGATIVES_FOR_ONE_POLICY_REGION_ARE_HARMLESS_WHEN_ANOTHER_SOUND_POLICY_PREDICATE_COVERS_THE_REMAINDER",
+    "MALFORMED_FORMULAS_FAIL_CLOSED",
+    "REAL_CATALOG_ADMITS_ONLY_HARD_WIRED_REPOSITORY_CHECKED_EXECUTABLE_POLICY_PREDICATES",
+    "UNIVERSAL_PRODUCTION_ENTRY_NEVER_TURNS_INCOMPLETE_COVER_INTO_NEGATIVE_CAPABILITY_CLAIM"
+  ],
+  "interpretation": {
+    "separate_selected_discriminator_eliminated_for_current_p2_p3_subroutes": true,
+    "reason": "THE_EXECUTABLE_ADEQUACY_MEMBERSHIP_PREDICATE_ITSELF_IS_THE_SELECTION_OBSERVATION",
+    "global_policy_adequacy_closed": false,
+    "next_only_positive_residual": "COVER_OR_SOUNDLY_EXCLUDE_THE_NEITHER_P2_NOR_P3_ABSTRACT_REGION_WITH_ADDITIONAL_EXECUTABLE_SOUND_POLICY_PREDICATES_OR_TRUSTED_SCOPE_REFINEMENT"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_NEITHER_P2_NOR_P3_ABSTRACT_VALUATION_IS_REALIZABLE.",
+    "NO_CLAIM_THE_NEITHER_P2_NOR_P3_ABSTRACT_VALUATION_IS_EMPTY.",
+    "NO_CLAIM_FREE_FORM_PROFESSIONAL_OR_SYNTHESIS_CONTEXTS_ARE_CLOSED.",
+    "NO_CLAIM_CURRENT_TWO_PREDICATE_CATALOG_COVERS_ALL_OPUS55_RELEVANT_CONTEXTS.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
