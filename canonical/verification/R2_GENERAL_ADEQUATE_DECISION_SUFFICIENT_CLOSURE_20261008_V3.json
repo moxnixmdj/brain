@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_V3",
+  "date": "2026-10-08",
+  "status": "PASS__MECHANISM_CLOSED__FIXED_POINT_NATIVE_META_ACTION_TOTALITY_PLUS_LIVE_TOTALIZED_ROUTE_BOUND__COVERAGE_AND_OBSERVABILITY_OPEN",
+  "objective": "Map (goal, world, constraints, uncertainty) to an adequate action with minimum decision-changing information, verified execution, and independent actual-goal acceptance.",
+  "closure_law": {
+    "statement": "For any two admissible world states w1 and w2 that remain indistinguishable under all authenticated observations available to the decision process, a universally adequate controller exists only if their adequate-action sets intersect (including a safe defer/abstain action when that itself satisfies the goal). If the adequate-action sets are disjoint, some authenticated observation capable of separating the states is information-theoretically necessary.",
+    "consequence": "The correct general algorithm is not to guess missing semantics or build a complete world model. It is to preserve the raw goal losslessly, maintain sound uncertainty, acquire only policy-changing discriminators, authenticate policy adequacy, bind the selected policy to execution, execute, and independently verify actual goal satisfaction. When a required discriminator is unavailable, the only truthful result is the exact unresolved edge.",
+    "goal_not_weakened": true
+  },
+  "implemented_loop": [
+    "LOSSLESS_RAW_GOAL_AND_CONSTRAINT_CAPTURE",
+    "AUTHENTICATED_FULL_OR_SOUND_PARTIAL_GOAL_TO_DECISION_BINDING_WITH_OPAQUE_REMAINDERS",
+    "GROUNDED_CANDIDATE_POLICY_DISCOVERY_WITHOUT_SELF_AUTHORITY",
+    "DECISION_RELEVANT_UNCERTAINTY_LOCALIZATION",
+    "MINIMUM_POLICY_CHANGING_INFORMATION_ACQUISITION",
+    "REUSE_FIRST_DETERMINISTIC_POLICY_ADEQUACY_REPAIR",
+    "BASIS_DISCRIMINATOR_REFINEMENT",
+    "PROGRESS_CHECKED_FIXED_POINT_EDGE_RESOLUTION_WITH_PROVIDER_ZERO_AUTHORITY",
+    "AUTHENTICATED_POLICY_ADEQUACY_SELECTION",
+    "AUTHENTICATED_POLICY_TO_EXECUTION_BINDING",
+    "VERIFIED_EXECUTION",
+    "INDEPENDENT_ACTUAL_GOAL_SATISFACTION_BINDING"
+  ],
+  "current_main_exact_blobs": {
+    "general_controller": "29872fc55a5ec577feea769cc919dc889899c2bd",
+    "general_controller_tests": "463c35b27c2659376a967b545c6b0414655791bc",
+    "fixed_point": "fdb8d6f021e1db8f8b379a7f12ba981bfe6c5fa2",
+    "fixed_point_tests": "1fa9f605dff0016fe2e8647e3a972e71e419ffa0",
+    "grounded_frontier": "0d13e7c5fe5e8ce5bf8430e1741765d0c57e9b0b",
+    "grounded_frontier_tests": "1557c2bf63f4ad48c6373266b070a1957a473bbd",
+    "live_brain_runtime": "043edf1746b5f8e118df7e7ec514ec25de141ee8",
+    "direct_end_to_end_adequacy": "6072e724ac19b780d16040db664ce745384e3f8e",
+    "totalized_controller": "675d1d4a3df3fcff4c8eb14947610389832103ea",
+    "totalized_controller_tests": "eb40f8ad4a2d1d8785d83cd160c02985d64c732d"
+  },
+  "bound_verification_evidence": [
+    {
+      "path": "canonical/verification/R2_DETERMINISTIC_REPAIR_LADDER_VERIFY_20261008_V1.json",
+      "git_blob_sha": "0b8488d4246944813fa03a67adf3af59eef215ff",
+      "proves": "50_OF_50_EXACT_REUSE_FIRST_REPAIR_AND_FIXED_POINT_CHECKS; CURRENT_FIXED_POINT_BLOB_BOUND"
+    },
+    {
+      "path": "canonical/verification/R2_GROUNDED_POLICY_FRONTIER_VERIFY_20261008_V1.json",
+      "git_blob_sha": "b50377cd1715a273c441017ebdce0d77b09170e7",
+      "proves": "EXACT_CURRENT_CONTROLLER_BLOB_SEAM_FOR_GROUNDED_POLICY_FRONTIER_TRANSPLANT"
+    },
+    {
+      "path": "canonical/verification/R2_GROUNDED_FRONTIER_PRECISION_RECALL_VERIFY_20261008_V1.json",
+      "git_blob_sha": "26535682f30f41ac5179bccfc953d8280e20ab3d",
+      "proves": "CURRENT_GROUNDED_FRONTIER_PRECISION_RECALL_REPAIR_WITH_UNKNOWN_GOAL_ABSTENTION"
+    },
+    {
+      "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_CONTROLLER_PUBLIC_FALLBACK_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "2ed72de0ae347e1be520fe7e15eabb007e95620f",
+      "proves": "BASE_CONTROLLER_END_TO_END_AUTHORITY_BOUNDARIES_AND_ACTUAL_GOAL_ACCEPTANCE_ON_EXACT_VERIFIED_ANCESTOR_BLOBS"
+    }
+  ],
+  "sufficient_solution": {
+    "decision_rule": "ACT_ONLY_WHEN_ONE_POLICY_IS_ADEQUATE_FOR_EVERY_CURRENTLY_POSSIBLE_AUTHENTICATED_STATE; OTHERWISE_ACQUIRE_THE_CHEAPEST_AVAILABLE_OBSERVATION_THAT_CAN_CHANGE_POLICY_SELECTION; IF_NO_SUCH_OBSERVATION_OR_COMMON_ADEQUATE_ACTION_EXISTS, RETURN_THE_EXACT_OPEN_EDGE_WITHOUT_FALSE_SUCCESS.",
+    "information_rule": "REQUEST_NO_INFORMATION_THAT_CANNOT_CHANGE_THE_ADEQUATE_POLICY_OR_VERIFY_GOAL_SATISFACTION.",
+    "execution_rule": "NO_POLICY_SELECTION_GRANTS_EXECUTION_AUTHORITY; EXECUTION_REQUIRES AN AUTHENTICATED POLICY_TO_EXECUTION BINDING AND VERIFIED EFFECTS.",
+    "verification_rule": "EXECUTION_SUCCESS_IS_NOT GOAL SUCCESS; ACTUAL GOAL SATISFACTION MUST BE INDEPENDENTLY CONTENT_BOUND_AND VERIFIED.",
+    "extension_rule": "NEW SEMANTICS, SOURCES, POLICIES, OR CAPABILITIES ENTER ONLY AS ZERO_AUTHORITY CANDIDATES AND MUST REENTER THE EXISTING VERIFICATION KERNEL.",
+    "totalization_rule": "FIXED_POINT_NATIVE_NEXT_META_ACTION_IS_TOTAL_OVER_ITS_VERIFIED_OUTPUTS__LIVE_TOTALIZER_NORMALIZES_THE_EXTERNAL_META_ACTION_SURFACE__NEITHER LAYER ADDS SEMANTIC EXECUTION ADEQUACY OR ACCEPTANCE AUTHORITY"
+  },
+  "remaining_boundary": {
+    "not_a_controller_design_gap": true,
+    "items": [
+      "FRESH_EXTERNAL_REALITY_NOT_PRESENT_IN_ANY_AUTHENTICATED_SOURCE",
+      "SEMANTIC_DISTINCTIONS_FOR_WHICH_NO_SOUND_BINDING_OR_DISCRIMINATOR_EXISTS_YET",
+      "NEW_POLICY_OR_CAPABILITY_WHEN NO EXISTING OR COMPOSABLE ADEQUATE POLICY COVERS THE REACHED STATE",
+      "INFORMATION_THEORETICALLY_UNOBSERVABLE STATES WITH DISJOINT ADEQUATE_ACTION SETS"
+    ],
+    "meaning": "These are coverage/observability boundaries. They cannot be eliminated by a better decision rule alone. Each reached boundary must be closed by adding authenticated evidence, a valid discriminator, a common robust action, or a verified capability.",
+    "not_a_control_law_totality_gap": true
+  },
+  "hard_nonclaims": [
+    "NO CLAIM THAT EVERY FACT ABOUT THE OPEN WORLD IS ALREADY OBSERVABLE",
+    "NO CLAIM THAT UNKNOWN SEMANTICS MAY BE INVENTED",
+    "NO CLAIM THAT PROVIDER OUTPUT CARRIES SEMANTIC OR ADEQUACY AUTHORITY",
+    "NO CLAIM THAT EXECUTION SUCCESS ALONE PROVES GOAL SATISFACTION",
+    "NO GLOBAL TERMINAL CREDIT FROM THIS SYNTHESIS ARTIFACT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "supersedes": {
+    "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V2.json",
+    "git_blob_sha": "6a5dc6ad51fb8a040e03bafb67591c68b5d9102f",
+    "reason": "FIXED_POINT_GAINED_NATIVE_TOTAL_NEXT_META_ACTION_CONTROL_AFTER_V2__REBIND_CURRENT_MAIN_EXACT_BYTES"
+  },
+  "live_totalized_route": {
+    "live_runtime_path": "canonical/runtime/live_brain_runtime_v1.py",
+    "live_runtime_git_blob_sha": "043edf1746b5f8e118df7e7ec514ec25de141ee8",
+    "totalizer_path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
+    "totalizer_git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
+    "regression_test_path": "canonical/tests/test_general_adequate_decision_totalized_v1.py",
+    "regression_test_git_blob_sha": "eb40f8ad4a2d1d8785d83cd160c02985d64c732d",
+    "meta_action_totality": "EXACTLY_ONE_OF_RETURN_VERIFIED_RESULT__ACQUIRE_MINIMUM_INFORMATION__ACQUIRE_REQUIRED_AUTHORITY_BINDING__REPAIR_OR_EXPAND_VERIFIABLE_ADEQUACY_COVER__ABSTAIN_FAIL_CLOSED"
+  },
+  "native_fixed_point_totality": {
+    "runtime_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "runtime_git_blob_sha": "fdb8d6f021e1db8f8b379a7f12ba981bfe6c5fa2",
+    "regression_test_path": "canonical/tests/test_general_adequate_decision_fixed_point_v2.py",
+    "regression_test_git_blob_sha": "1fa9f605dff0016fe2e8647e3a972e71e419ffa0",
+    "property": "EVERY_DECORATED_VERIFIED_OPEN_OR_FAIL_CLOSED_RESULT_EXPOSES_ONE_TYPED_NON_AUTHORITATIVE_NEXT_META_ACTION"
+  }
+}
