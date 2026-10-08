@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_R2_STRUCTURED_BINARY_DIRECT_ADEQUACY_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS__BOUNDED_CODEC_ADEQUACY_FAMILY",
+  "branch": "r2-structured-binary-direct-adequacy-20261008",
+  "exact_blobs": {
+    "codec_runtime": "d3d687fbd1d049b1162520f96c7ba4fb57927f42",
+    "direct_runtime": "92d46eff9d78ad6616a2cbc6d9bde1c8d5813332"
+  },
+  "isolated_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "codec_checks_passed": 9,
+    "direct_integration_checks_passed": 7
+  },
+  "real_registry": {
+    "eligible_independently_verified_codec_count": 4,
+    "capability_ids": [
+      "auto.npm.dfinity-cbor",
+      "auto.npm.msgpack-msgpack",
+      "auto.pypi.bson-modern",
+      "auto.pypi.msgpack"
+    ]
+  },
+  "proved": [
+    "EXACT_CODEC_GOAL_GRAMMAR_ONLY",
+    "VERIFIED_BOUND_CODEC_REQUIRED",
+    "PRODUCER_INDEPENDENT_CROSS_SUPPLIER_SEMANTIC_DECODE_REQUIRED",
+    "EXACT_SOURCE_JSON_SEMANTICS_REQUIRED",
+    "ONE_REPOSITORY_LOCAL_OUTPUT_TRANSACTION",
+    "FAILED_ACCEPTANCE_RESTORES_OR_REMOVES_OUTPUT",
+    "SUCCESS_BINDS_ALL_RAW_OBLIGATIONS",
+    "FAILED_MATCHED_ROUTE_CANNOT_FALL_THROUGH_TO_ALTERNATE_EXECUTION"
+  ],
+  "github_actions_note": "PRIVATE_RUNNER_FAILED_BEFORE_STEPS;NOT_USED_AS_CODE_EVIDENCE",
+  "hard_nonclaims": [
+    "NO_GENERAL_LANGUAGE_ADEQUACY",
+    "NO_EXTERNAL_OR_IRREVERSIBLE_EFFECT_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}

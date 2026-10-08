@@ -172,5 +172,85 @@ class R2DirectEndToEndAdequacyV1Tests(unittest.TestCase):
         self.assertEqual(out["selected_policy_id"],direct.LITERAL_JSON_ROUTE_ID)
         self.assertFalse(out["retry_by_other_route_authorized"])
 
+
+    @patch.object(direct.codec_adequacy, "preflight")
+    def test_structured_binary_family_is_reachable_from_direct_preflight(self, codec_preflight):
+        codec_preflight.return_value = {
+            "matched": True,
+            "status": "DIRECT_CODEC_ADEQUACY_ROUTE_MATCHED",
+            "capability_id": "auto.npm.msgpack-msgpack",
+            "policy_id": "BOUND_CAPABILITY_POLICY::codec::goal",
+            "goal_sha256": "g" * 64,
+            "format": "msgpack",
+            "json_path": "canonical/source.json",
+            "output_path": "canonical/out.msgpack",
+        }
+        out = direct.preflight({"task_id": "codec", "goal": "not another direct grammar"})
+        self.assertTrue(out["matched"], out)
+        self.assertEqual(out["route_id"], direct.STRUCTURED_BINARY_CODEC_ROUTE_ID)
+        self.assertEqual(out["capability_id"], "auto.npm.msgpack-msgpack")
+        self.assertFalse(out["preflight_execution_authority"])
+
+    @patch.object(direct.codec_adequacy, "run")
+    @patch.object(direct.codec_adequacy, "preflight")
+    def test_structured_binary_verified_acceptance_becomes_direct_adequacy(
+        self, codec_preflight, codec_run
+    ):
+        codec_preflight.return_value = {
+            "matched": True,
+            "status": "DIRECT_CODEC_ADEQUACY_ROUTE_MATCHED",
+            "capability_id": "auto.npm.msgpack-msgpack",
+            "policy_id": "BOUND_CAPABILITY_POLICY::codec::goal",
+            "goal_sha256": "g" * 64,
+            "format": "msgpack",
+            "json_path": "canonical/source.json",
+            "output_path": "canonical/out.msgpack",
+        }
+        codec_run.return_value = {
+            "pass": True,
+            "status": "PASS__TRANSACTIONAL_STRUCTURED_BINARY_POLICY_ADEQUACY_VERIFIED",
+            "capability_id": "auto.npm.msgpack-msgpack",
+            "policy_id": "BOUND_CAPABILITY_POLICY::codec::goal",
+            "goal_sha256": "g" * 64,
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "accepted_raw_obligation_ids": ["RAWREQ:x"],
+            "raw_acceptance_obligation_count": 1,
+            "raw_result": {"pass": True},
+            "authority_boundary": "bounded codec family",
+        }
+        out = direct.run({"task_id": "codec", "goal": "not another direct grammar"})
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["direct_adequacy_authority"])
+        self.assertTrue(out["actual_goal_satisfaction_verified"])
+        self.assertEqual(out["selected_policy_id"], "BOUND_CAPABILITY_POLICY::codec::goal")
+        codec_run.assert_called_once()
+
+    @patch.object(direct.codec_adequacy, "run")
+    @patch.object(direct.codec_adequacy, "preflight")
+    def test_structured_binary_acceptance_failure_never_falls_through_to_other_execution(
+        self, codec_preflight, codec_run
+    ):
+        codec_preflight.return_value = {
+            "matched": True,
+            "status": "DIRECT_CODEC_ADEQUACY_ROUTE_MATCHED",
+            "capability_id": "auto.npm.msgpack-msgpack",
+            "policy_id": "BOUND_CAPABILITY_POLICY::codec::goal",
+            "goal_sha256": "g" * 64,
+            "format": "msgpack",
+            "json_path": "canonical/source.json",
+            "output_path": "canonical/out.msgpack",
+        }
+        codec_run.return_value = {
+            "pass": False,
+            "status": "OPEN__INDEPENDENT_CODEC_ACCEPTANCE_DID_NOT_VERIFY",
+            "transaction_rolled_back": True,
+        }
+        with patch.object(direct.live_bound, "run_raw_goal") as legacy_execute:
+            out = direct.run({"task_id": "codec", "goal": "not another direct grammar"})
+        self.assertFalse(out["pass"])
+        self.assertFalse(out["retry_by_other_route_authorized"])
+        legacy_execute.assert_not_called()
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
