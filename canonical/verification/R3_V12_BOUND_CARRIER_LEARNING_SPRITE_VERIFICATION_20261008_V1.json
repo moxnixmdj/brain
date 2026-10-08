@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_R3_V12_BOUND_CARRIER_LEARNING_SPRITE_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__V12_BOUND_CARRIER_LEARNING__16_OF_16",
+  "branch": "r3-v12-bound-carrier-learning-v2-20261008",
+  "subject_commit_before_evidence": "a9578511f1b2eb5f57672c7fa7b22c903dd691a5",
+  "exact_blobs": {
+    "bound_carrier": "33a11b962799d219d5340a61e8b7d864ddaa327b",
+    "bound_execution_verifier": "2bc99699ec721e4b0ef239340e0c220370811e6f",
+    "r3_independent_learning_verifier": "330ddeb166c535c3c0afafd38a328e39369e53e6",
+    "bound_verifier_tests": "f9ae082dc0ca50d7a4ed7c7f60e7c69c00a081ca",
+    "r3_learning_verifier_tests": "29f587695aafa2c8550eec4b8ab13eeff18a3e7b",
+    "r3_ci_gate": "45072f0370dc944ea5265981cfc17869be946975"
+  },
+  "isolated_carrier": {
+    "name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "r3_independent_learning_verifier": {
+      "passed": 11,
+      "total": 11
+    },
+    "bound_execution_verifier_contract": {
+      "passed": 5,
+      "total": 5
+    },
+    "py_compile": {
+      "passed": 5,
+      "total": 5
+    }
+  },
+  "verified": [
+    "V12_BOUND_CARRIER_SUCCESS_EXPECTATION_CONTRACT_FIXED",
+    "BOUND_CAPABILITY_EXECUTION_V1_EMITS_64_HEX_PROOF_DIGEST_FOR_STATE_LINEAGE",
+    "V12_BOUND_CARRIER_EPISODE_ACCEPTED_ONLY_AFTER_RECOMPUTING_STORED_ACCEPTED_INNER_EXECUTION",
+    "BOUND_CARRIER_EFFECT_OUTCOME_DIGEST_RECOMPUTED",
+    "BOUND_CARRIER_EFFECT_OUTCOME_TAMPER_REJECTED",
+    "EPISODE_VERIFICATION_DOES_NOT_REPLAY_BOUND_CAPABILITY_EFFECT",
+    "EXISTING_NON_EFFECTFUL_EPISODE_VERIFICATION_PRESERVED",
+    "EXISTING_FILESYSTEM_EFFECT_READBACK_VERIFICATION_PRESERVED",
+    "BOUND_CARRIER_EPISODES_REMAIN_EFFECTFUL_AND_ARE_NOT_ELIGIBLE_FOR_NON_EFFECTFUL_STRUCTURAL_SUPERSET_GENERALIZATION"
+  ],
+  "boundary": {
+    "effect_replay": false,
+    "admitted_outer_verifier": "BOUND_CAPABILITY_EXECUTION_V1",
+    "carrier_authentication_required": true,
+    "cross_scope_generalization": "NOT_GRANTED_BY_THIS_CHANGE",
+    "unsupported_effect_classes": "FAIL_CLOSED"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
