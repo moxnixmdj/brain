@@ -429,6 +429,7 @@ def _internal_failure_repair(
             "components": [],
             "initial_facts": [],
             "learn": True,
+            "autonomous": True,
         },
         repo_root=repo_root,
         state_path=state_path,
@@ -493,6 +494,15 @@ def advance_once(
 
             if kind == "REPAIR_FAILURE_CLASS":
                 if failure_repair_provider is None:
+                    observations = int(work.get("observations", 0))
+                    last_attempt = work.get("last_attempt_observations")
+                    if last_attempt is not None and int(last_attempt) >= observations:
+                        blockers.append({
+                            "work_id": wid,
+                            "kind": kind,
+                            "blocker": "REPAIR_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
+                        })
+                        continue
                     repaired = _internal_failure_repair(
                         work,
                         state_path=state_path,
@@ -502,15 +512,33 @@ def advance_once(
                     repaired = failure_repair_provider(deepcopy(dict(work)))
                 if not isinstance(repaired, Mapping):
                     raise ImprovementDriverError("FAILURE_REPAIR_PROVIDER_RESULT_INVALID")
+                repaired_pass = repaired.get("pass") is True
+                if not repaired_pass:
+                    learning._record_improvement_attempt(
+                        wid,
+                        status=str(
+                            repaired.get("status")
+                            or "IMPROVEMENT_REPAIR_ATTEMPT_DID_NOT_CLOSE_ORIGINAL_OBLIGATION"
+                        ),
+                        reason=(
+                            str(
+                                repaired.get("reason")
+                                or repaired.get("autonomous_replay_reason")
+                                or ""
+                            ).strip()
+                            or None
+                        ),
+                        state_path=state_path,
+                    )
                 return {
                     "schema": SCHEMA,
                     "status": (
                         "IMPROVEMENT_ADVANCED__FAILURE_REPAIR_REPLAY_VERIFIED"
-                        if repaired.get("pass") is True
+                        if repaired_pass
                         else "IMPROVEMENT_REPAIR_ATTEMPT_DID_NOT_CLOSE_ORIGINAL_OBLIGATION"
                     ),
-                    "pass": repaired.get("pass") is True,
-                    "progress": repaired.get("pass") is True,
+                    "pass": repaired_pass,
+                    "progress": repaired_pass,
                     "work_id": wid,
                     "repair": deepcopy(dict(repaired)),
                     "blockers_skipped": blockers,
