@@ -259,6 +259,56 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
             "POLICY_COVER_OBSERVATION_BINDING_MUTATION_FORBIDDEN:d1",
         )
 
+    @patch.object(fixed, "repair_existing_adequacy")
+    @patch.object(fixed, "run_controller")
+    def test_existing_adequacy_evidence_is_reused_without_external_provider(
+        self, controller, automatic
+    ):
+        opened = {
+            **self._open("OPEN__POSITIVE_POLICY_ADEQUACY_CERTIFICATE_REQUIRED"),
+            "next_required_edge": "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+            "next_policy_request": {
+                "schema": "PROJECT_BRAIN_MINIMUM_POLICY_REPAIR_REQUEST_V1",
+                "required_artifact": "POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+                "selected_policy_id": "policy.p",
+                "policy_adequacy_authority": False,
+            },
+        }
+        controller.side_effect = [opened, self._pass()]
+        automatic.return_value = {
+            "pass": True,
+            "status": "PASS__EXISTING_POLICY_ADEQUACY_BINDINGS_DISCOVERED_FOR_REVERIFICATION",
+            "request_patch": {
+                "decision_payload": {
+                    "context_id": "auto-reused",
+                    "bound_relevance_cegar_loop": {
+                        "cegar_problem": {
+                            "policy_adequacy_bindings": {
+                                "policy.p": {"adequacy_certificate_path": "canonical/governance/p.json"}
+                            }
+                        }
+                    },
+                }
+            },
+            "added_policy_ids": ["policy.p"],
+            "repair_authority": False,
+        }
+
+        out = fixed.run(self._request())
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(controller.call_count, 2)
+        automatic.assert_called_once()
+        second = controller.call_args_list[1].args[0]
+        self.assertEqual(second["decision_payload"]["context_id"], "auto-reused")
+        auto_trace = out["r2_fixed_point_trace"][0][
+            "automatic_existing_adequacy_repair"
+        ]
+        self.assertTrue(auto_trace["pass"])
+        self.assertEqual(auto_trace["added_policy_ids"], ["policy.p"])
+        self.assertFalse(auto_trace["repair_authority"])
+        self.assertTrue(auto_trace["downstream_reverification_required"])
+
     @patch.object(fixed, "run_controller")
     def test_exact_policy_repair_request_reaches_resolver(self, controller):
         opened = {
