@@ -6,6 +6,8 @@ on:
       - canonical/runtime/p3_real_context_v3_admission_v10.py
       - canonical/tests/test_p3_policy_influence_relevance_cell_v1.py
       - canonical/tests/test_p3_real_context_v3_admission_v10.py
+      - canonical/verification/p3_policy_influence_v10_kernel_replay_v1.py
+      - canonical/verification/p3_policy_influence_v10_compositional_replay_v1.py
       - canonical/governance/P3_POLICY_INFLUENCE_NONINTERFERENCE_20261008_V1.json
       - .github/workflows/verify-p3-policy-influence-v10.yml
   workflow_dispatch:
@@ -19,25 +21,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Run exact V10 tests and capture evidence
-        shell: bash
-        run: |
-          set +e
-          python -m unittest -v canonical.tests.test_p3_policy_influence_relevance_cell_v1 canonical.tests.test_p3_real_context_v3_admission_v10 > p3-v10-test.log 2>&1
-          code=$?
-          echo "$code" > p3-v10-exit-code.txt
-          cat p3-v10-test.log
-          exit 0
-      - name: Upload exact test evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: p3-v10-test-evidence
-          path: |
-            p3-v10-test.log
-            p3-v10-exit-code.txt
-      - name: Enforce test result
-        shell: bash
-        run: |
-          code=$(cat p3-v10-exit-code.txt)
-          test "$code" = "0"
+      - name: Replay exact V10 kernel tests
+        run: python canonical/verification/p3_policy_influence_v10_kernel_replay_v1.py
+      - name: Replay isolated V10 routing delta
+        run: python canonical/verification/p3_policy_influence_v10_compositional_replay_v1.py
