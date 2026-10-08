@@ -97,7 +97,7 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
         obligation_ids = material.get("accepted_raw_obligation_ids")
         if not isinstance(obligation_ids, list) or not obligation_ids:
             return None
-        if obligation_ids != list(acceptance.get("accepted_obligation_ids") or []):
+        if sorted(obligation_ids) != sorted(acceptance.get("accepted_obligation_ids") or []):
             return None
         if material.get("raw_acceptance_obligation_count") != len(obligation_ids):
             return None
