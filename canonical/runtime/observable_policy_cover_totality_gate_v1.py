@@ -23,6 +23,7 @@ from __future__ import annotations
 
 from functools import lru_cache
 import json
+import math
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_OBSERVABLE_POLICY_COVER_TOTALITY_GATE_V1"
@@ -61,6 +62,15 @@ def _auth_receipt(
         if value.get(key) != expected:
             return False, label + "_RECEIPT_INVALID:" + key
     return True, None
+
+
+def _valid_cost(value: Any) -> bool:
+    if not isinstance(value, (int, float)) or isinstance(value, bool):
+        return False
+    try:
+        return value >= 0 and math.isfinite(float(value))
+    except (OverflowError, ValueError):
+        return False
 
 
 def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
@@ -127,11 +137,7 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
         member_set = frozenset(members)
         if not member_set.issubset(universe):
             return _fail("POLICY_REGION_OUTSIDE_WORLD_SET", policy_id=pid)
-        if (
-            not isinstance(cost, (int, float))
-            or isinstance(cost, bool)
-            or cost < 0
-        ):
+        if not _valid_cost(cost):
             return _fail("POLICY_COST_INVALID", policy_id=pid)
         ok, reason = _auth_receipt(
             row.get("adequacy_receipt"),
@@ -164,11 +170,7 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
             return _fail("DISCRIMINATOR_ID_INVALID", index=i)
         if not isinstance(outcomes, Mapping) or set(outcomes) != set(universe):
             return _fail("DISCRIMINATOR_OUTCOME_MAP_INCOMPLETE", discriminator_id=did)
-        if (
-            not isinstance(cost, (int, float))
-            or isinstance(cost, bool)
-            or cost < 0
-        ):
+        if not _valid_cost(cost):
             return _fail("DISCRIMINATOR_COST_INVALID", discriminator_id=did)
         ok, reason = _auth_receipt(
             row.get("truth_safety_receipt"),
@@ -217,18 +219,20 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
 
     @lru_cache(maxsize=None)
     def solve(state: frozenset[str]):
+        # A common adequate policy is a valid *candidate*, not necessarily the
+        # minimum-cost choice. A truthful observation can make cheaper policies
+        # sufficient in its resulting states.
         covers = common_policies(state)
+        best = None
         if covers:
             best_policy = min(covers, key=lambda pid: (policy_costs[pid], pid))
-            return {
+            best = {
                 "possible": True,
                 "worst_cost": policy_costs[best_policy],
                 "policy_id": best_policy,
                 "discriminator_id": None,
                 "children": (),
             }
-
-        best = None
         for did in sorted(obs):
             parts = partition(state, did)
             if len(parts) <= 1:
@@ -244,10 +248,17 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
                 "discriminator_id": did,
                 "children": tuple((tuple(sorted(part)), child) for part, child in zip(parts, children)),
             }
-            if best is None or (candidate["worst_cost"], did) < (
-                best["worst_cost"],
-                str(best["discriminator_id"]),
+            if (
+                best is None
+                or candidate["worst_cost"] < best["worst_cost"]
+                or (
+                    candidate["worst_cost"] == best["worst_cost"]
+                    and best["discriminator_id"] is not None
+                    and did < best["discriminator_id"]
+                )
             ):
+                # Prefer a direct adequate policy when costs tie; it requires
+                # no additional observation and is already independently bound.
                 best = candidate
         if best is not None:
             return best
