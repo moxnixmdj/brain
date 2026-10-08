@@ -1895,5 +1895,29 @@
     "missing_fabric_carrier_count": 0,
     "full_repo_github_actions_pass": false,
     "full_repo_github_actions_note": "NOT_LOAD_BEARING_FOR_THE_EXACT_SOURCE_SET_EQUALITY_PROOF__WORKFLOW_RUNNER_AVAILABILITY_IS_SEPARATE"
+  },
+  "r1_universal_live_capability_invocation_20261008_v1": {
+    "status": "ACTIVE_FAIL_CLOSED_UNIVERSAL_LIVE_CAPABILITY_INVOCATION",
+    "runtime": {
+      "path": "canonical/runtime/live_capability_invoker_v1.py",
+      "git_blob_sha": "c25f6e79d41bdec1d3fe2f6943e68afb6bb854de"
+    },
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "bf57e5d6aa1dfd3fb7323138d2a658393f9dded4"
+    },
+    "regression": {
+      "path": "canonical/tests/test_live_capability_invoker_v1.py",
+      "git_blob_sha": "119bdc3ffde1f7f0a32a68e0618a8c3fc89f6ce5"
+    },
+    "workflow": {
+      "path": ".github/workflows/verify-unified-cognitive-fabric-v1.yml",
+      "git_blob_sha": "ba7d766b3257b234c1d00a38cda2ba8bfa8dc61a"
+    },
+    "rule": "EVERY_LIVE_OWNED_CAPABILITY_IDENTITY_MUST_BE_CLASSIFIABLE_AND_DISPATCHABLE_THROUGH_UNIFIED_COGNITIVE_FABRIC_LIVE_CAPABILITY_OR_FAIL_CLOSED",
+    "semantic_selection_boundary": "CAPABILITY_SELECTION_FROM_ARBITRARY_INTENT_REMAINS_R2",
+    "verification_status": "PY_COMPILE_PASS__GITHUB_ACTIONS_PR_REPLAY_IN_PROGRESS",
+    "verification_pr": 3223,
+    "terminal_credit_delta": 0
   }
 }
