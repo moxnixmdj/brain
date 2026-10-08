@@ -767,7 +767,7 @@ def _auto_repair_live_failure(
 def _replay_request_payload(payload: Mapping[str, Any]) -> dict[str, Any]:
     """Strip R3 control-plane fields so exact replay cannot recursively auto-repair."""
     cleaned = deepcopy(dict(payload))
-    for key in ("repair_components", "repair_solver_kwargs", "auto_repair"):
+    for key in ("repair_components", "repair_solver_kwargs", "auto_repair", "autonomous"):
         cleaned.pop(key, None)
     return cleaned
 
