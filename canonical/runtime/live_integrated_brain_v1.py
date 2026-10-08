@@ -260,13 +260,66 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
             }
 
         if compiled.get("controller_actions") is not None:
+            actions = compiled["controller_actions"]
+            if (
+                not isinstance(actions, list)
+                or not actions
+                or len(actions) > 64
+                or not all(isinstance(action, dict) for action in actions)
+                or actions[-1].get("type") != "finish"
+            ):
+                raise LiveBrainError("COMPILED_CONTROLLER_ACTIONS_INVALID")
+
+            # Routing is not success authority. Bind the *whole* unmodified
+            # source goal to its acceptance obligations before any execution.
+            raw_contract = compile_contract(
+                goal, source_id="user", routing_target_effects=[]
+            )
+            if raw_contract.get("pass") is not True:
+                raise LiveBrainError("LOSSLESS_RAW_TASK_CONTRACT_INVALID")
+            from canonical.runtime import astra_runtime
+            # Reuse the existing controller, verifier, durable continuation,
+            # and result-reference machinery. Never synthesize another engine.
+            controller = astra_runtime._run_compiled_plain_goal(
+                {"id": task_id, "max_controller_actions": len(actions)},
+                {"mission_id": task_id},
+                goal,
+                compiled,
+            )
+            succeeded = (
+                isinstance(controller, Mapping)
+                and controller.get("returncode") == 0
+                and isinstance(controller.get("trace"), list)
+                and len(controller["trace"]) == len(actions)
+                and all(
+                    row.get("plan", {}).get("type") == action.get("type")
+                    for row, action in zip(controller["trace"], actions)
+                )
+            )
             return {
                 "schema": SCHEMA,
-                "status": "FAIL__COMPILED_CONTROL_PLAN_NOT_BOUND",
-                "pass": False,
+                "status": (
+                    "PASS__RAW_COMPOUND_ACTIONS_EXECUTED__RAW_ACCEPTANCE_OPEN"
+                    if succeeded else "FAIL__COMPOUND_EXECUTION_NOT_VERIFIED"
+                ),
+                "pass": succeeded,
                 "task_id": task_id,
-                "failure_class": "LIVE_RUNTIME_COMPOSITION_BINDING_GAP",
+                "raw_goal": goal,
+                "raw_goal_sha256": raw_contract["task_sha256"],
+                "raw_task_contract_sha256": raw_contract["task_contract_sha256"],
+                "raw_acceptance_obligation_count": len(
+                    raw_contract["acceptance_contract"]["obligations"]
+                ),
+                "raw_source_coverage_complete": raw_contract[
+                    "nonwhitespace_source_coverage_complete"
+                ],
                 "compiler_mode": compiled.get("compiler_mode"),
+                "selected_plan": [a.get("type") for a in actions],
+                "execution": controller,
+                "routing_success_authority": False,
+                "semantic_acceptance_complete": False,
+                "terminal_credit_delta": 0,
+                "ownership_credit_delta": 0,
                 "elapsed_ns": perf_counter_ns() - started,
                 "incremental_spend_usd": 0,
             }
