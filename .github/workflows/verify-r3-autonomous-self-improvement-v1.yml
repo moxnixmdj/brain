@@ -1,0 +1,28 @@
+name: verify-r3-autonomous-self-improvement-v1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/autonomous_verified_self_improvement_v1.py
+      - canonical/runtime/universal_verified_adaptive_solver_v10.py
+      - canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json
+      - canonical/tests/test_autonomous_verified_self_improvement_v1.py
+      - canonical/tests/test_universal_verified_adaptive_solver_v10.py
+      - .github/workflows/verify-r3-autonomous-self-improvement-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run R3 and V10 regression suite
+        run: |
+          python -m pytest -q \
+            canonical/tests/test_autonomous_verified_self_improvement_v1.py \
+            canonical/tests/test_universal_verified_adaptive_solver_v10.py
