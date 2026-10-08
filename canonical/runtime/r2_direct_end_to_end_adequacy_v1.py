@@ -18,6 +18,7 @@ from canonical.runtime import live_integrated_brain_v1 as live_bound
 from canonical.runtime import raw_goal_archive_acceptance_v1 as archive_acceptance
 from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_acceptance
 from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
+from canonical.runtime import r2_structured_binary_direct_adequacy_v1 as codec_adequacy
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -25,6 +26,7 @@ ARCHIVE_ROUTE_ID = "DIRECT_ADEQUACY::ARCHIVE_MANIFEST_TAR_GZ_V1"
 ARCHIVE_CAPABILITY_ID = "archive.tar_gz.create_from_manifest"
 EXACT_LITERAL_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1"
 LITERAL_JSON_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1"
+STRUCTURED_BINARY_CODEC_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -47,6 +49,13 @@ ROUTES = {
         "preflight": "raw_goal_literal_json_acceptance_v1.preflight",
         "executor": "live_integrated_brain_v1.run_raw_goal",
         "acceptance": "raw_goal_literal_json_acceptance_v1.verify",
+    },
+    STRUCTURED_BINARY_CODEC_ROUTE_ID: {
+        "capability_id": "DYNAMIC_VERIFIED_BOUND_CODEC",
+        "scope": "EXACT_SINGLE_ACTION_JSON_TO_STRUCTURED_BINARY_GOAL_FAMILY",
+        "preflight": "r2_structured_binary_direct_adequacy_v1.preflight",
+        "executor": "r2_structured_binary_direct_adequacy_v1.run",
+        "acceptance": "PRODUCER_INDEPENDENT_CROSS_SUPPLIER_SEMANTIC_DECODE",
     },
 }
 
@@ -119,6 +128,29 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "preflight_execution_authority": False,
         }
 
+    codec = codec_adequacy.preflight(request)
+    if codec.get("matched") is True:
+        if codec.get("status") == "FAIL_CLOSED":
+            return {
+                **_base("FAIL_CLOSED", passed=False),
+                "matched": True,
+                "route_id": STRUCTURED_BINARY_CODEC_ROUTE_ID,
+                "reason": codec.get("reason"),
+            }
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": STRUCTURED_BINARY_CODEC_ROUTE_ID,
+            "capability_id": codec.get("capability_id"),
+            "policy_id": codec.get("policy_id"),
+            "goal_sha256": codec.get("goal_sha256"),
+            "format": codec.get("format"),
+            "json_path": codec.get("json_path"),
+            "output_path": codec.get("output_path"),
+            "semantic_scope": ROUTES[STRUCTURED_BINARY_CODEC_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
     return {
         **_base("NO_DIRECT_ADEQUACY_ROUTE", passed=False),
         "matched": False,
@@ -129,6 +161,47 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
     pf = preflight(request)
     if pf.get("matched") is not True:
         return pf
+
+    if pf["route_id"] == STRUCTURED_BINARY_CODEC_ROUTE_ID:
+        codec_result = codec_adequacy.run(request)
+        if codec_result.get("pass") is not True:
+            return {
+                **_base(
+                    str(codec_result.get("status") or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"),
+                    passed=False,
+                ),
+                "matched": True,
+                "route_id": pf["route_id"],
+                "capability_id": pf.get("capability_id"),
+                "goal_sha256": pf.get("goal_sha256"),
+                "execution_attempted": True,
+                "retry_by_other_route_authorized": False,
+                "codec_adequacy": deepcopy(dict(codec_result)),
+                "reason": codec_result.get("reason"),
+            }
+        return {
+            **_base("PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED", passed=True),
+            "matched": True,
+            "route_id": pf["route_id"],
+            "capability_id": codec_result.get("capability_id"),
+            "selected_policy_id": codec_result.get("policy_id"),
+            "goal_sha256": codec_result.get("goal_sha256"),
+            "semantic_scope": pf["semantic_scope"],
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "accepted_raw_obligation_ids": list(
+                codec_result.get("accepted_raw_obligation_ids") or []
+            ),
+            "raw_acceptance_obligation_count": codec_result.get(
+                "raw_acceptance_obligation_count"
+            ),
+            "acceptance_receipt": deepcopy(dict(codec_result)),
+            "raw_result": deepcopy(dict(codec_result.get("raw_result") or {})),
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "authority_boundary": codec_result.get("authority_boundary"),
+        }
 
     raw = live_bound.run_raw_goal(request)
     if not isinstance(raw, Mapping):
