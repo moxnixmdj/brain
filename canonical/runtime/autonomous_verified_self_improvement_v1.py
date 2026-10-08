@@ -181,11 +181,14 @@ def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None
             "source_type",
             "producer_id",
         )
+        receipt = out.get("acceptance_receipt")
+        receipt_map = receipt if isinstance(receipt, Mapping) else {}
         for key in safe_identity_fields:
             value = out.get(key)
-            if isinstance(value, (str, int, bool)) or value is None:
-                if value is not None:
-                    material[key] = value
+            if value is None:
+                value = receipt_map.get(key)
+            if isinstance(value, (str, int, bool)) and value is not None:
+                material[key] = value
 
         _validate_retry_value(material, path="success_proof")
         raw = _canon(material).encode("utf-8")
