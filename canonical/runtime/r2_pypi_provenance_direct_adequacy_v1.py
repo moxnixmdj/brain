@@ -136,7 +136,7 @@ def _selection_semantics(selection:Any)->dict[str,str]:
     if "/" in filename or "\\" in filename or not filename.endswith(".whl"):
         raise ValueError("PYPI_WHEEL_FILENAME_INVALID")
     return {
-        "capability_id":cid,
+        "audited_capability_id":cid,
         "project":project,
         "version":version,
         "wheel_filename":filename,
@@ -348,7 +348,7 @@ def run(
             not isinstance(producer,Mapping)
             or producer.get("verified") is not True
             or producer.get("report_path")!=pf["report_path"]
-            or producer.get("capability_id")!=pf["capability_id"]
+            or producer.get("capability_id")!=pf["audited_capability_id"]
             or producer.get("recorded_hash")!=pf["recorded_hash"]
             or producer.get("live_metadata_hash")!=pf["recorded_hash"]
             or producer.get("downloaded_artifact_hash")!=pf["recorded_hash"]
@@ -378,7 +378,8 @@ def run(
         ):
             raise RuntimeError("INDEPENDENT_PYPI_PROVENANCE_VERIFICATION_FAILED")
         required_report={
-            "capability_id":pf["capability_id"],
+            "capability_id":pf["audited_capability_id"],
+            "audited_capability_id":pf["audited_capability_id"],
             "project":pf["project"],
             "pinned_version":pf["version"],
             "wheel_filename":pf["wheel_filename"],
