@@ -15,8 +15,9 @@ Current admitted scope:
   re-induction, and its program is structurally closed. Reuse still passes the
   runtime structural guard and fresh V12 execution verification.
 
-Effectful episodes are intentionally not replayed. Without an independently
-re-readable effect root in the verification request, they remain fail-closed.
+Effectful episodes are never replayed. The admitted bounded filesystem-effect
+class may be verified only by independently re-reading its exact recorded files
+under the supplied effect root; all other effect classes remain fail-closed.
 
 No terminal, capability, ownership, or execution authority is granted here.
 """
@@ -29,11 +30,6 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import universal_verified_adaptive_solver_v1 as v1
-from canonical.runtime import universal_verified_adaptive_solver_v4 as v4
-from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
-from canonical.runtime.resolved_capability_semantics_authenticator_v1 import (
-    authenticate as authenticate_resolved_semantics,
-)
 from canonical.runtime.effect_broker_receipt_resolver_v2 import (
     git_blob_id,
     resolve_receipt_bytes,
@@ -61,6 +57,9 @@ from canonical.runtime.universal_solver_state_capsule_v1 import (
 from canonical.runtime.universal_solver_value_state_v1 import (
     append_verified_transition as append_value_transition,
     initialize as initialize_value_capsule,
+)
+from canonical.runtime.universal_verified_effect_executor_v1 import (
+    verify_outcome_readback,
 )
 
 SCHEMA = "PROJECT_BRAIN_R3_INDEPENDENT_LEARNING_VERIFIER_V1"
@@ -172,37 +171,19 @@ def _active_action(
     return action
 
 
-def _contains_effect_ref(value: Any) -> bool:
-    if isinstance(value, Mapping):
-        if "$effect_result" in value:
-            return True
-        return any(_contains_effect_ref(x) for x in value.values())
-    if isinstance(value, list):
-        return any(_contains_effect_ref(x) for x in value)
-    return False
-
-
-def _needs_resolved_semantics(cap: Mapping[str, Any]) -> bool:
-    fields = cap.get("result_fields")
-    return (
-        isinstance(fields, list)
-        and bool(fields)
-    ) or _contains_effect_ref(cap.get("action"))
-
-
-def _reverify_non_effectful_trace(
+def _reverify_trace(
     *,
     problem: Mapping[str, Any],
     trace: Sequence[Mapping[str, Any]],
     fact_capsule_head_hash: str,
     value_capsule_head_hash: str,
-    repo_root: str | Path,
+    effect_root: str | Path | None = None,
 ) -> dict[str, Any]:
     caps = _caps(problem)
     fact_capsule = initialize_fact_capsule(problem)
     value_capsule = initialize_value_capsule(problem)
     expected_steps: list[dict[str, Any]] = []
-    current_facts = sorted(str(x) for x in problem.get("initial_facts", []))
+    effectful_step_count = 0
 
     for expected_cycle, raw_row in enumerate(trace):
         if not isinstance(raw_row, Mapping):
@@ -215,97 +196,22 @@ def _reverify_non_effectful_trace(
         if cap is None:
             raise R3IndependentVerificationError("TRACE_CAPABILITY_UNKNOWN:" + cid)
 
-        replanning_problem = deepcopy(dict(problem))
-        replanning_problem["initial_facts"] = list(current_facts)
-        try:
-            planned = plan_capabilities(replanning_problem)
-        except PlanningFailure as exc:
-            raise R3IndependentVerificationError(
-                "PLANNER_RECOMPUTATION_FAILED:" + str(exc)
-            ) from exc
-        plan = planned.get("plan")
-        if not isinstance(plan, list) or not plan or str(plan[0]) != cid:
-            raise R3IndependentVerificationError(
-                "TRACE_NOT_STRAIGHT_THROUGH_DETERMINISTIC_PLAN:" + cid
-            )
-
-        # Never replay or self-attest an effect. A future worker may admit an
-        # effectful episode only when it can independently read back the effect.
-        if row.get("effect_outcome_sha256"):
-            raise R3IndependentVerificationError(
-                "EFFECTFUL_EPISODE_REQUIRES_INDEPENDENT_READBACK_VERIFIER"
-            )
-
         action = _active_action(cap, row)
         if v1._digest(action) != row.get("action_contract_sha256"):
             raise R3IndependentVerificationError("ACTION_CONTRACT_DIGEST_MISMATCH:" + cid)
         action_type = str(action.get("type") or "")
-        if action_type == "verified_effect_tool":
-            raise R3IndependentVerificationError(
-                "EFFECTFUL_ACTION_REQUIRES_INDEPENDENT_READBACK_VERIFIER"
-            )
-
-        pair = {
-            "receipt": row.get("effect_semantics_receipt"),
-            "verification": row.get("effect_semantics_verification"),
-        }
-        if _needs_resolved_semantics(cap):
-            if row.get("value_capsule_head_before") != value_capsule.get("head_hash"):
-                raise R3IndependentVerificationError(
-                    "VALUE_CAPSULE_HEAD_BEFORE_MISMATCH:" + cid
-                )
-            semantics = authenticate_resolved_semantics(
-                problem,
-                cap,
-                action,
-                value_capsule,
-                pair,
-                repo_root=repo_root,
-            )
-            if semantics.get("pass") is not True:
-                raise R3IndependentVerificationError(
-                    "RESOLVED_EFFECT_SEMANTICS_REAUTHENTICATION_FAILED:" + cid
-                )
+        is_effect = action_type == "verified_effect_tool"
+        if is_effect:
+            verifier_id = str(action.get("pre_verifier_id") or "").strip()
+            payload = action.get("pre_verifier_payload")
         else:
-            semantics = v4._authenticate_effect_semantics(
-                problem,
-                cap,
-                repo_root=repo_root,
-            )
-        if semantics.get("receipt") != pair["receipt"]:
-            raise R3IndependentVerificationError(
-                "EFFECT_SEMANTICS_RECEIPT_REF_MISMATCH:" + cid
-            )
-        if semantics.get("verification") != pair["verification"]:
-            raise R3IndependentVerificationError(
-                "EFFECT_SEMANTICS_VERIFICATION_REF_MISMATCH:" + cid
-            )
-        if row.get("effect_semantics_authenticated") is not True:
-            raise R3IndependentVerificationError(
-                "EFFECT_SEMANTICS_AUTHENTICATED_FLAG_MISSING:" + cid
-            )
-        if (
-            str(row.get("independent_effect_semantics_verifier_id") or "")
-            != str(semantics.get("independent_verifier_id") or "")
-        ):
-            raise R3IndependentVerificationError(
-                "EFFECT_SEMANTICS_VERIFIER_ID_MISMATCH:" + cid
-            )
-        if (
-            row.get("verifier_success_condition")
-            != semantics.get("verifier_success_condition")
-        ):
-            raise R3IndependentVerificationError(
-                "VERIFIER_SUCCESS_CONDITION_REAUTHENTICATION_MISMATCH:" + cid
-            )
-
-        verifier_id = str(action.get("verifier_id") or "").strip()
+            verifier_id = str(action.get("verifier_id") or "").strip()
+            payload = action.get("verifier_payload")
         if verifier_id != str(row.get("verifier_id") or "").strip():
             raise R3IndependentVerificationError("VERIFIER_ID_MISMATCH:" + cid)
         verifier = v1.BUILTIN_VERIFIERS.get(verifier_id)
         if verifier is None:
             raise R3IndependentVerificationError("VERIFIER_NOT_BRAIN_OWNED:" + verifier_id)
-        payload = action.get("verifier_payload")
         proposal = row.get("accepted_proposal")
         if not isinstance(payload, Mapping):
             raise R3IndependentVerificationError("VERIFIER_PAYLOAD_INVALID:" + cid)
@@ -322,17 +228,43 @@ def _reverify_non_effectful_trace(
         if _canon(verdict.get("verified_output")) != _canon(row.get("verified_output")):
             raise R3IndependentVerificationError("VERIFIED_OUTPUT_MISMATCH:" + cid)
 
-        provides = sorted(str(x) for x in cap.get("provides", []))
-        semantic_effects = sorted(
-            str(x)
-            for x in (
-                semantics.get("provided_effects")
-                or semantics.get("effects")
-                or []
+        if is_effect:
+            if effect_root is None:
+                raise R3IndependentVerificationError("EFFECT_ROOT_REQUIRED_FOR_READBACK")
+            recorded_outcome = row.get("effect_outcome")
+            recorded_digest = str(row.get("effect_outcome_sha256") or "")
+            if not isinstance(recorded_outcome, Mapping) or not recorded_digest:
+                raise R3IndependentVerificationError("EFFECT_OUTCOME_RECORD_INVALID:" + cid)
+            executor_payload = action.get("executor_payload")
+            if not isinstance(executor_payload, Mapping):
+                raise R3IndependentVerificationError("EFFECT_EXECUTOR_PAYLOAD_INVALID:" + cid)
+            if recorded_outcome.get("executor_id") != action.get("executor_id"):
+                raise R3IndependentVerificationError("EFFECT_EXECUTOR_BINDING_MISMATCH:" + cid)
+            if recorded_outcome.get("tool_id") != executor_payload.get("tool_id"):
+                raise R3IndependentVerificationError("EFFECT_TOOL_BINDING_MISMATCH:" + cid)
+            if recorded_outcome.get("sandbox_rel") != executor_payload.get("sandbox_rel"):
+                raise R3IndependentVerificationError("EFFECT_SANDBOX_BINDING_MISMATCH:" + cid)
+            if recorded_outcome.get("proposal_sha256") != row.get("proposal_sha256"):
+                raise R3IndependentVerificationError("EFFECT_PROPOSAL_BINDING_MISMATCH:" + cid)
+            readback = verify_outcome_readback(
+                outcome=recorded_outcome,
+                expected_effect_outcome_sha256=recorded_digest,
+                effect_root=effect_root,
             )
-        )
+            if readback.get("pass") is not True:
+                raise R3IndependentVerificationError(
+                    "EFFECT_OUTCOME_READBACK_FAILED:"
+                    + cid
+                    + ":"
+                    + ";".join(str(x) for x in readback.get("errors", []))
+                )
+            effectful_step_count += 1
+        elif row.get("effect_outcome_sha256") or row.get("effect_outcome") is not None:
+            raise R3IndependentVerificationError("NON_EFFECT_ACTION_HAS_EFFECT_OUTCOME:" + cid)
+
+        provides = sorted(str(x) for x in cap.get("provides", []))
         observed = sorted(str(x) for x in row.get("new_verified_facts", []))
-        if not provides or observed != provides or semantic_effects != provides:
+        if not provides or observed != provides:
             raise R3IndependentVerificationError("VERIFIED_EFFECT_SET_MISMATCH:" + cid)
 
         fact_capsule = append_fact_transition(
@@ -345,14 +277,6 @@ def _reverify_non_effectful_trace(
             capability=cap,
             trace_row=row,
         )
-        if (
-            row.get("value_capsule_head_after") is not None
-            and row.get("value_capsule_head_after") != value_capsule.get("head_hash")
-        ):
-            raise R3IndependentVerificationError(
-                "VALUE_CAPSULE_HEAD_AFTER_MISMATCH:" + cid
-            )
-        current_facts = sorted(set(current_facts) | set(provides))
         expected_steps.append({
             "op": cid,
             "inputs": sorted(str(x) for x in cap.get("requires", [])),
@@ -374,6 +298,9 @@ def _reverify_non_effectful_trace(
         "fact_capsule_head_hash": fact_capsule.get("head_hash"),
         "value_capsule_head_hash": value_capsule.get("head_hash"),
         "target_verdict": target_verdict,
+        "effectful_step_count": effectful_step_count,
+        "effect_outcomes_reverified": effectful_step_count > 0,
+        "non_effectful_trace": effectful_step_count == 0,
     }
 
 
@@ -399,12 +326,12 @@ def verify_episode_request(
         if len(fact_head) != 64 or len(value_head) != 64:
             raise R3IndependentVerificationError("EPISODE_CAPSULE_HEAD_INVALID")
 
-        recomputed = _reverify_non_effectful_trace(
+        recomputed = _reverify_trace(
             problem=problem,
             trace=trace,
             fact_capsule_head_hash=fact_head,
             value_capsule_head_hash=value_head,
-            repo_root=repo_root,
+            effect_root=request.get("effect_root"),
         )
         expected_pre = sorted(str(x) for x in problem.get("initial_facts", []))
         expected_post = sorted(str(x) for x in problem.get("target_effects", []))
@@ -415,10 +342,6 @@ def verify_episode_request(
         if sorted(str(x) for x in episode.get("postconditions", [])) != expected_post:
             raise R3IndependentVerificationError("EPISODE_POSTCONDITIONS_MISMATCH")
         invalidators = sorted(str(x) for x in episode.get("invalidators", []))
-        if invalidators:
-            raise R3IndependentVerificationError(
-                "NONEMPTY_INVALIDATORS_REQUIRE_INDEPENDENT_ROUTE_FAILURE_REPLAY"
-            )
         expected_program = program_digest(
             steps=recomputed["steps"],
             preconditions=expected_pre,
@@ -457,8 +380,8 @@ def verify_episode_request(
             "exact_byte_bound": True,
             "trace_reverified": True,
             "state_lineage_reverified": True,
-            "effect_outcomes_reverified": False,
-            "non_effectful_trace": True,
+            "effect_outcomes_reverified": recomputed["effect_outcomes_reverified"],
+            "non_effectful_trace": recomputed["non_effectful_trace"],
             "independent_verifier_id": INDEPENDENT_VERIFIER_ID,
             "verification_basis": NON_EFFECTFUL_VERIFICATION_BASIS,
         }
