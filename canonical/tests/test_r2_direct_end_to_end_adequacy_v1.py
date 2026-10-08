@@ -131,5 +131,46 @@ class R2DirectEndToEndAdequacyV1Tests(unittest.TestCase):
         execute.assert_called_once()
         verify.assert_called_once()
 
+    def test_literal_json_preflight_matches_without_execution(self):
+        goal=(
+            "Create canonical/astra_runtime/tmp/R2_LITERAL.json containing exactly "
+            "two records with fields id and name: 1 alpha; 2 beta"
+        )
+        with patch.object(direct.live_bound,"run_raw_goal") as execute:
+            out=direct.preflight({"task_id":"t","goal":goal})
+        self.assertTrue(out["matched"],out)
+        self.assertEqual(out["route_id"],direct.LITERAL_JSON_ROUTE_ID)
+        self.assertEqual(
+            out["output_path"],
+            "canonical/astra_runtime/tmp/R2_LITERAL.json",
+        )
+        execute.assert_not_called()
+
+    @patch.object(direct.live_bound,"run_raw_goal")
+    @patch.object(direct.literal_json_acceptance,"verify")
+    def test_literal_json_full_acceptance_is_direct_adequacy(self,verify,execute):
+        goal=(
+            "Create canonical/astra_runtime/tmp/R2_LITERAL.json containing exactly "
+            "one record with fields id and name: 1 alpha"
+        )
+        pf=direct.preflight({"task_id":"t","goal":goal})
+        execute.return_value={
+            "pass":True,
+            "raw_goal_sha256":pf["goal_sha256"],
+        }
+        verify.return_value={
+            "pass":True,
+            "semantic_acceptance_complete":True,
+            "actual_goal_satisfaction_verified":True,
+            "artifact_exact":True,
+            "accepted_obligation_ids":["RAWREQ:x"],
+            "required_obligation_count":1,
+        }
+        out=direct.run({"task_id":"t","goal":goal})
+        self.assertTrue(out["pass"],out)
+        self.assertTrue(out["actual_goal_satisfaction_verified"])
+        self.assertEqual(out["selected_policy_id"],direct.LITERAL_JSON_ROUTE_ID)
+        self.assertFalse(out["retry_by_other_route_authorized"])
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
