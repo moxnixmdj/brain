@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_R2_TYPED_DECISION_DIRECT_ADEQUACY_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__CURRENT_PRODUCER_REVERIFIED_8_OF_8__DIRECT_FAMILY_6_OF_6__ROUTER_INTEGRATION_3_OF_3__REAL_LIVE_BOUND_AND_DIRECT_ROUTER_REPLAY_PASS__ZERO_CREDIT",
+  "exact_bytes": {
+    "route": {
+      "path": "canonical/runtime/r2_typed_decision_direct_adequacy_v1.py",
+      "sha": "b63addc0f0afb8c75185284061ab34c215001582"
+    },
+    "router": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "sha": "3742a77199ba76da5efe213fbaa5edf03345cf34"
+    },
+    "family_test": {
+      "path": "canonical/tests/test_r2_typed_decision_direct_adequacy_v1.py",
+      "sha": "a1f0750c874d1d16a4b2d999b8b36533426d24f7"
+    },
+    "integration_test": {
+      "path": "canonical/tests/test_r2_typed_decision_direct_integration_v1.py",
+      "sha": "7ea99c85e3a7d6a803f11bd3e62e5f1020a1285e"
+    },
+    "producer": {
+      "path": "canonical/runtime/bound_capabilities/evidence_decision_synthesis.py",
+      "sha": "d7c73c24d2038c40bfb38ea6f10749a15a2d5415"
+    },
+    "verifier": {
+      "path": "canonical/runtime/bound_capabilities/evidence_decision_verify.py",
+      "sha": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+    },
+    "goal_compiler": {
+      "path": "canonical/runtime/goal_compiler.py",
+      "sha": "960e347cf6db2ad755899809dbe182e2e455c8b7"
+    },
+    "live_bound": {
+      "path": "canonical/runtime/live_integrated_brain_v1.py",
+      "sha": "efb8dabf727d0fd98617f19fae96e85ec1c70003"
+    }
+  },
+  "current_producer_reverification": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "producer_blob": "d7c73c24d2038c40bfb38ea6f10749a15a2d5415",
+    "verifier_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929",
+    "passed": 8,
+    "total": 8,
+    "accepted": [
+      "DECIDED",
+      "CONFLICTED",
+      "INSUFFICIENT",
+      "NO_ADMISSIBLE_ALTERNATIVE",
+      "DUPLICATE_INDEPENDENCE_GROUP_MAX_WEIGHT"
+    ],
+    "rejected": [
+      "FORGED_SELECTED_ALTERNATIVE__SELECTED_ALTERNATIVE_MISMATCH",
+      "FORGED_RANKING__NUMERIC_FIELD_MISMATCH",
+      "MUTATED_INPUT__INPUT_HASH_MISMATCH"
+    ],
+    "old_receipt_producer_blob": "7690b26800b2701dac9e187a92c5561d79d831dd",
+    "current_change_from_old_receipt": "RUN_RESULT_METADATA_ONLY__ADDED_INPUT_PATH__DECISION_ALGORITHM_UNCHANGED"
+  },
+  "focused_route_tests": {
+    "family_tests": "6_OF_6_PASS",
+    "router_integration": "3_OF_3_PASS",
+    "integration_dependency_note": "UNRELATED_LEGACY_DIRECT_ROUTE_MODULES_WERE_STUBBED_ONLY_FOR_FOCUSED_ROUTER_IMPORT_AND_NO_FALLTHROUGH_ASSERTION"
+  },
+  "real_replays": {
+    "live_bound_route": {
+      "pass": true,
+      "status": "PASS__TRANSACTIONAL_TYPED_DECISION_POLICY_ADEQUACY_VERIFIED",
+      "model_dependency_count": 0,
+      "producer_independent_verifier": true,
+      "actual_goal_satisfaction_verified": true
+    },
+    "direct_router": {
+      "pass": true,
+      "route_id": "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1",
+      "status": "PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED",
+      "selected_alternative": "REUSE",
+      "direct_adequacy_authority": true,
+      "producer_independent_verifier": true
+    }
+  },
+  "proved": [
+    "EXACT_TYPED_DECISION_RAW_GOAL_DETERMINISTICALLY_BINDS_DECISION_SYNTHESIS_TYPED_STDLIB",
+    "SOURCE_TYPED_DECISION_JSON_BYTES_ARE_SHA256_BOUND_AND_MUTATION_FAILS_CLOSED",
+    "CURRENT_PRODUCER_BYTES_REMAIN_SEMANTICALLY_VERIFIABLE_BY_THE_UNCHANGED_PRODUCER_INDEPENDENT_VERIFIER",
+    "SUCCESS_REQUIRES_FULL_INDEPENDENT_RECOMPUTATION_OF_STATUS_SELECTED_ALTERNATIVE_AND_DECISION_RELEVANT_RANKING_VALUES",
+    "FORGED_SELECTION_FORGED_RANKING_AND_CHANGED_INPUT_ARE_REJECTED",
+    "ONE_REPOSITORY_LOCAL_OUTPUT_IS_TRANSACTIONAL_AND_ROLLED_BACK_ON_FAILURE",
+    "MATCHED_TYPED_DECISION_FAILURE_CANNOT_FALL_THROUGH_TO_ANOTHER_DIRECT_ROUTE",
+    "REAL_LIVE_BOUND_AND_DIRECT_ROUTER_REPLAYS_PASS_WITH_MODEL_DEPENDENCY_COUNT_ZERO"
+  ],
+  "hard_nonclaims": [
+    "NO_ARBITRARY_NATURAL_LANGUAGE_DECISION_INTERPRETATION",
+    "NO_CLAIM_TYPED_INPUT_EVIDENCE_IS_TRUE_MERELY_BECAUSE_IT_IS_WELL_FORMED",
+    "NO_CLAIM_THE_FIXED_DECISION_POLICY_IS_UNIVERSALLY_OPTIMAL",
+    "NO_EXTERNAL_OR_IRREVERSIBLE_EFFECT_AUTHORITY",
+    "NO_GLOBAL_OPEN_WORLD_R2_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
