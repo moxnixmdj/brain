@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_P3_BOUNDED_OBJECTIVE_ROLE_RELEVANCE_ACTIVATION_V2",
+  "date": "2026-10-08",
+  "status": "VERIFIED_BRAIN_OWNED_POSITIVE_RELEVANCE_BIT_SUBREGION__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/p3_bounded_objective_role_relevance_v1.py",
+    "git_blob_sha": "d8977024955a22003c6bcde9d54c40cad68e44b7"
+  },
+  "verification": {
+    "path": "canonical/verification/P3_BOUNDED_OBJECTIVE_ROLE_RELEVANCE_TWO_SPRITE_VERIFICATION_20261008_V2.json"
+  },
+  "minimum_information_cut": {
+    "path": "canonical/governance/P3_OPTIONAL_RELEVANCE_MINIMUM_INFORMATION_CUT_20261008_V1.json",
+    "git_blob_sha": "8506b0a05be2ee4dea489f9640d8ce1099a143a2"
+  },
+  "owned_effect": "FOR_EXPLICIT_BINARY_NUMERIC_COMPARISON_OBJECTIVES_WITH_EXACTLY_TWO_OPTIONAL_CLAIMS_AND_UNIQUE_EXACT_VERIFIED_EVIDENCE_ROLE_ANCHORS__EMIT_THE_TRUTHFUL_PRECOMMITMENT_RELEVANCE_OUTCOME_RELEVANT_FOR_BOTH_OPTIONAL_CLAIMS",
+  "composition_with_minimum_information_cut": {
+    "cut_requirement": "ONE_TRUTHFUL_PRECOMMITMENT_RELEVANCE_BIT_SELECTS_INCLUDE_VS_OMIT_IN_THE_BOUND_HARD_CELL",
+    "supplied_outcome": "RELEVANT",
+    "selected_action": "INCLUDE_OPTIONAL_CLAIM",
+    "supplied_for": "BOTH_EXACT_BOUND_LEFT_RIGHT_OBJECTIVE_ROLE_CLAIMS",
+    "negative_outcome_supplied": false,
+    "persistent_semantic_state_required": false
+  },
+  "scheduler_effect": [
+    "TRY_THIS_CERTIFICATE_FIRST_ON_REACHED_NO_WEIGHT_BINARY_COMPARISON_CONTEXTS.",
+    "ON_PASS__THE_OPTIONAL_RELEVANCE_BIT_IS_NOT_OPEN_FOR_THE_TWO_BOUND_ROLE_CLAIMS__INCLUDE_THEM_AND_MOVE_TO_PRESENTATION_ORGANIZATION_ADEQUACY.",
+    "ON_FAIL__DO_NOT_INFER_IRRELEVANCE__CONTINUE_WITH_THE_CURRENT_MINIMUM_RELEVANCE_INFORMATION_ROOT.",
+    "DO_NOT_PROMOTE_BM25_OR_LEXICAL_NONMATCH_TO_NEGATIVE_SEMANTIC_RELEVANCE."
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_OPTIONAL_RELEVANCE_CLOSURE",
+    "NO_NEGATIVE_RELEVANCE_AUTHORITY",
+    "NO_GENERAL_P3_CLOSURE",
+    "NO_POLICY_ADEQUACY_DB_ADMISSION_U_SUBTRACTION_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
