@@ -99,6 +99,7 @@ def evaluate(payload: Any) -> dict[str, Any]:
     total_multiplicity = 0
     numerator = Decimal("0")
     normalized_groups = []
+    seen_group_ids: set[str] = set()
 
     for i, row in enumerate(groups):
         local: list[str] = []
@@ -110,6 +111,10 @@ def evaluate(payload: Any) -> dict[str, Any]:
         if not isinstance(gid, str) or not gid.strip():
             local.append("GROUP_ID_INVALID")
             gid = f"INVALID::{i}"
+        elif gid in seen_group_ids:
+            local.append("GROUP_ID_DUPLICATE")
+        else:
+            seen_group_ids.add(gid)
 
         multiplicity = row.get("multiplicity")
         if not isinstance(multiplicity, int) or isinstance(multiplicity, bool) or multiplicity <= 0:
