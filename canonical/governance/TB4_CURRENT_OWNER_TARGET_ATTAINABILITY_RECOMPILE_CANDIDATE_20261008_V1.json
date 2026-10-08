@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CURRENT_OWNER_TARGET_ATTAINABILITY_RECOMPILE_CANDIDATE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE__CURRENT_OWNER_66_36_TARGET_RESOURCE_ATTAINABLE_BY_ONE_SLOT__EMPIRICAL_THRESHOLD_RESULT_ABSENT__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "historical_predicate_value_percent": 66.4,
+  "current_precise_owner_target_candidate_percent": 66.36,
+  "current_precise_owner_target_verification": {
+    "path": "canonical/verification/TB4_OPUS55_CURRENT_OWNER_TARGET_REFRESH_PUBLIC_RUNNER_VERIFICATION_20261008_V1.json",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pull_request": 2427,
+    "workflow_run_id": 37746540483,
+    "workflow_job_id": 113209248006,
+    "verifier_commit": "04d9ad29e898b78eb2ba2486d6a7762319a8f69f",
+    "conclusion": "success",
+    "owner_pdf_sha256": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378"
+  },
+  "inherited_verified_route_premises": {
+    "recovery_task_identity_binding": {
+      "path": "canonical/governance/TB4_RECOVERY_TASK_IDENTITY_BINDING_20261006_V1.json",
+      "git_blob_sha": "b010a8bf7ece899230e259b46a8459922ab4d956",
+      "exact_recovered_task_count": 8
+    },
+    "buildkite_protocol_equivalence": {
+      "path": "canonical/governance/TB4_BUILDKITE_PROTOCOL_EQUIVALENCE_BINDING_20261006_V1.json",
+      "git_blob_sha": "7b94ae5bee70406870ab3e43d1e3e61c7eb6b7b9",
+      "closed": true
+    },
+    "buildkite_zero_spend_hard_stop": {
+      "path": "canonical/governance/TB4_BUILDKITE_ZERO_SPEND_HARD_STOP_BINDING_20261006_V1.json",
+      "git_blob_sha": "ab9189847c148c16026dcd9dcc08f8a51333d0c0",
+      "closed": true
+    },
+    "clean_case_source_gate": {
+      "path": "canonical/verification/CODING_TB4_SOURCE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "3467eb97bcfaf4adad444c5d6f210d6ccd75220a",
+      "pass": true,
+      "clean_case_execution_authority": true
+    }
+  },
+  "attainability_recompile": {
+    "base_creditable_tasks": 36,
+    "recovered_creditable_tasks": 8,
+    "current_creditable_tasks": 44,
+    "trials_per_task": 5,
+    "executable_slot_capacity": 220,
+    "historical_strict_literal_required_successes": 220,
+    "current_precise_owner_required_successes": 219,
+    "current_precise_owner_margin_slots": 1,
+    "current_precise_owner_resource_attainability_state": "ATTAINABLE",
+    "inequality": "220_GE_219",
+    "arithmetic": "(36+8)*5=220__AND__CEIL(0.6636*330)=219__AND__220-219=1"
+  },
+  "what_changed": {
+    "resource_capacity": "UNCHANGED_AT_220",
+    "target_precision": "OWNER_DETAILED_66_36_VERIFIED",
+    "required_success_count_for_CURRENT_MATCHED_OWNER_NONINFERIORITY": "220_TO_219",
+    "old_zero_slack_statement_for_current_matched_owner_target": "REVOKED_CONDITIONALLY_PENDING_COMPARABILITY_ADJUDICATION",
+    "historical_strict_66_4_raw_cut": "PRESERVED_FOR_PROVENANCE"
+  },
+  "remaining_load_bearing_premises": [
+    "SCALAR_COMPARABILITY_OF_BRAIN_TB4_ROUTE_TO_THE_OWNER_66_36_SETUP_UNDER_THE_FROZEN_ACCEPTANCE_PROTOCOL",
+    "THRESHOLD_REACHING_IMMUTABLE_SUCCESS_RECEIPTS_OR_A_SEPARATELY_ADMISSIBLE_SCOPE_COMPLETE_STRONGER_PROOF"
+  ],
+  "execution_policy": {
+    "do_not_execute_from_this_candidate": true,
+    "reason": "ONE_SLOT_MARGIN_IS_MATHEMATICALLY_ATTAINABLE_BUT_EMPIRICALLY_BRITTLE_AND_COMPARABILITY_REMAINS_UNADJUDICATED",
+    "resource_expansion_remains_high_leverage": true,
+    "conditional_slack_formula_with_k_additional_recovered_tasks": "1+5*k"
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_TB4_SCORE",
+    "NO_TB4_ACCEPTANCE_PREDICATE_PROMOTION",
+    "NO_CLAIM_219_SUCCESS_RECEIPTS_EXIST",
+    "NO_CLAIM_CLAUDE_CODE_BARE_EQUALS_THE_BRAIN_AGENT_CONFIGURATION",
+    "NO_CLAIM_OWNER_SANDBOX_EQUALS_BUILDKITE",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CASES_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_recompile_verification_required": true
+}
