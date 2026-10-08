@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_P3_CURRENT_CAUSAL_FRONTIER_20261008_V16",
+  "date": "2026-10-08",
+  "status": "ACTIVE_POST_FULL_SOURCE_BOUND_BINARY_MEMBERSHIP_AND_NONBINDING_CAPACITY_RELEVANCE__V9_CURRENT_FRONT_DOOR__GENERAL_P3_OPEN__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "supersedes": {
+    "path": "canonical/governance/P3_CURRENT_CAUSAL_FRONTIER_20261008_V15.json",
+    "git_blob_sha": "ca6d4bab0702931a371a2d4cf1ffdefecab4769d"
+  },
+  "reconciles": [
+    {
+      "path": "canonical/governance/P3_BOUND_BINARY_REAL_CONTEXT_TOP_LAW_REGION_20261008_V1.json",
+      "git_blob_sha": "d08588ce7e4d248e82c48c62941ee9bcf0b934c8",
+      "role": "CURRENT_PARAMETERIZED_REAL_CONTEXT_TOP_LAW_REGION_FOR_EXACT_BOUND_BINARY_CONTEXTS"
+    },
+    {
+      "path": "canonical/verification/P3_BOUND_BINARY_REAL_CONTEXT_MEMBERSHIP_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "91d7882632f687147b2e9e9f51e6d7444f2f6672",
+      "role": "13_OF_13_TWO_SPRITE_FULL_SOURCE_SEMANTIC_MEMBERSHIP_VERIFICATION"
+    },
+    {
+      "path": "canonical/runtime/p3_real_context_v3_admission_v9.py",
+      "git_blob_sha": "2faf2a638e047ce40a1c169f3d2677d2a3a3d426",
+      "role": "CURRENT_FRONT_DOOR_SUCCESSOR_PRESERVING_V8_EXPLICIT_AUTHORITY_AND_ADDING_NONBINDING_CAPACITY_COMMON_POLICY"
+    },
+    {
+      "path": "canonical/verification/P3_NONBINDING_CAPACITY_V9_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "2eac2de2a55e94e279ae02fd425f01cc3a0429bc",
+      "role": "TWO_SPRITE_EXACT_CELL_AND_V9_DELTA_COMPOSITION_VERIFICATION"
+    }
+  ],
+  "current_front_door": "canonical/runtime/p3_real_context_v3_admission_v9.py",
+  "current_front_door_git_blob_sha": "2faf2a638e047ce40a1c169f3d2677d2a3a3d426",
+  "newly_preserved_truth": {
+    "bound_binary_real_context_membership_runtime_git_blob_sha": "2b9832ae4efa3c4fc30119034ecbc9b509263d35",
+    "bound_binary_full_source_semantic_membership_verified": true,
+    "bound_binary_parameterized_top_law_region_bound": true,
+    "bound_binary_region_adds_only_recognizer_passing_contexts_to_D_B": true,
+    "nonbinding_capacity_optional_relevance_mechanically_closed": true,
+    "nonbinding_capacity_rule": "IF_ALL_SUPPORTED_SAFE_CLAIMS_FIT_EXPLICIT_MAX_ITEMS__INCLUDE_ALL_SUPPORTED_CLAIMS__NO_SALIENCE_RANKING_IS_REQUIRED",
+    "nonbinding_capacity_cell_source_authorization_verified": false,
+    "nonbinding_capacity_cell_policy_adequacy_authority": false,
+    "capacity_binding_optional_relevance_closed_without_explicit_or_verified_selection_authority": false,
+    "whole_p3_closed": false,
+    "u_empty_proved": false,
+    "terminal": false
+  },
+  "frontier_reduction": {
+    "deleted_as_primary_mechanical_gap": "OPTIONAL_RELEVANCE_WHEN_ALL_SUPPORTED_SAFE_CLAIMS_FIT_THE_EXPLICIT_ITEM_BUDGET",
+    "reason": "THE_POLICY_CHOICE_COLLAPSES_TO_ONE_COMMON_POLICY__ALL_SUPPORTED_SAFE_CLAIMS_FIT__SO_NO_WEIGHT_OR_RANKING_CAN_CHANGE_THE_SAFE_INCLUSION_SET",
+    "still_open": [
+      "OPTIONAL_RELEVANCE_WHEN_CAPACITY_BINDS_AND_NO_EXPLICIT_OBJECTIVE_WEIGHTS_OR_INDEPENDENTLY_VERIFIED_DECISION_DEPENDENCY_AUTHORITY_EXISTS",
+      "AUTHORITATIVE_SOURCE_OR_SCOPE_MEMBERSHIP_FOR_NONBINARY_OR_OTHERWISE_UNRECOGNIZED_REAL_CONTEXTS",
+      "POLICY_ADEQUACY_FOR_CONTEXTS_NOT_ALREADY_INSIDE_A_BOUND_TOP_LAW_REGION",
+      "GENERAL_CONFLICT_AND_NONFACTUAL_UNCERTAINTY_REALIZATION_OUTSIDE_VERIFIED_CELLS",
+      "UNMODELED_AUDIENCE_MEANING_AND_OPEN_AUDIENCE_ADAPTATION",
+      "GENERAL_STRUCTURED_OR_MULTIMODAL_EVIDENCE_AND_OUTPUT_FORMS"
+    ]
+  },
+  "current_scheduler": [
+    "USE_V9_AS_THE_CURRENT_P3_FRONT_DOOR.",
+    "PRESERVE_V8_RULES__EXPLICIT_OBJECTIVE_WEIGHTS_AND_EXACT_VERIFIED_DECISION_DEPENDENCY_CONTRACTS_ARE_BINDING_AND_MUST_NOT_FALL_THROUGH_TO_WEAKER_IMPLICIT_SELECTION.",
+    "FOR_NO_EXPLICIT_SELECTION_AUTHORITY__TRY_THE_NONBINDING_CAPACITY_COMMON_POLICY_CELL_BEFORE_ANY_GENERAL_RELEVANCE_BUILD.",
+    "IF_CAPACITY_BINDS__DO_NOT_INVENT_LEXICAL_OR_HIDDEN_SALIENCE_WEIGHTS__REQUIRE_AN_EXPLICIT_OR_INDEPENDENTLY_VERIFIED_POLICY_CHANGING_SELECTION_AUTHORITY_OR_A_STRONGER_COMMON_POLICY_PROOF.",
+    "FOR_EXACT_BOUND_BINARY_CONTEXTS__USE_THE_FULL_SOURCE_SEMANTIC_MEMBERSHIP_RECOGNIZER_AND_PARAMETERIZED_TOP_LAW_REGION__DO_NOT_REOPEN_BINARY_RELEVANCE_ORDER_DECISION_OR_EXPRESSION_MECHANICS.",
+    "DO_NOT_PROMOTE_THE_NONBINDING_CAPACITY_CELL_TO_D_B_FROM_ITS_OWN_PASS__SOURCE_AUTHORIZATION_AND_POLICY_ADEQUACY_REMAIN_SEPARATE.",
+    "GLOBAL_U_SCHEDULER_MAY_BYPASS_LOCAL_P3_RESIDUALS_IF_A_STRONGER_SOUND_SCOPE_COMPLETE_POSITIVE_COVER_CLOSES_FIRST."
+  ],
+  "accounting": {
+    "newly_verified_runtime_cells": 1,
+    "newly_verified_front_door_delta": 1,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_SEMANTIC_RELEVANCE",
+    "NO_GENERAL_P3_CLOSURE",
+    "NO_CLAIM_NONBINDING_CAPACITY_CELL_ALONE_PROVES_SOURCE_AUTHORIZATION_OR_POLICY_ADEQUACY",
+    "NO_CLAIM_CAPACITY_BINDING_RELEVANCE_IS_SOLVED_WITHOUT_A_SOUND_SELECTION_AUTHORITY",
+    "NO_GENERAL_AUDIENCE_MEANING_CLAIM",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "whole_p3_closed": false,
+  "u_empty_proved": false,
+  "terminal": false,
+  "terminal_credit_delta": 0
+}
