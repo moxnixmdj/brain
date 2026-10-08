@@ -335,5 +335,106 @@ class R2DirectEndToEndAdequacyV1Tests(unittest.TestCase):
         self.assertFalse(out["retry_by_other_route_authorized"])
         legacy_execute.assert_not_called()
 
+
+    @patch.object(direct.tabular_adequacy, "preflight")
+    @patch.object(direct.docx_adequacy, "preflight")
+    @patch.object(direct.codec_adequacy, "preflight")
+    def test_tabular_family_is_reachable_from_direct_preflight(
+        self, codec_preflight, docx_preflight, tabular_preflight
+    ):
+        codec_preflight.return_value = {"matched": False, "status": "NOT_APPLICABLE"}
+        docx_preflight.return_value = {"matched": False, "status": "NOT_APPLICABLE"}
+        tabular_preflight.return_value = {
+            "matched": True,
+            "status": "DIRECT_TABULAR_ADEQUACY_ROUTE_MATCHED",
+            "producer_capability_id": "sqlite.table.create_from_json_records",
+            "verifier_capability_id": "sqlite.table.verify_against_json_records",
+            "policy_id": "BOUND_CAPABILITY_POLICY::sqlite::goal",
+            "goal_sha256": "t" * 64,
+            "kind": "sqlite",
+            "json_path": "canonical/source.json",
+            "output_path": "canonical/out.sqlite",
+        }
+        out = direct.preflight({"task_id": "tabular", "goal": "bounded tabular goal"})
+        self.assertTrue(out["matched"], out)
+        self.assertEqual(out["route_id"], direct.TABULAR_ARTIFACT_ROUTE_ID)
+        self.assertEqual(out["capability_id"], "sqlite.table.create_from_json_records")
+        self.assertEqual(
+            out["verifier_capability_id"],
+            "sqlite.table.verify_against_json_records",
+        )
+        self.assertFalse(out["preflight_execution_authority"])
+
+    @patch.object(direct.tabular_adequacy, "run")
+    @patch.object(direct.tabular_adequacy, "preflight")
+    @patch.object(direct.docx_adequacy, "preflight")
+    @patch.object(direct.codec_adequacy, "preflight")
+    def test_tabular_verified_acceptance_becomes_direct_adequacy(
+        self, codec_preflight, docx_preflight, tabular_preflight, tabular_run
+    ):
+        codec_preflight.return_value = {"matched": False, "status": "NOT_APPLICABLE"}
+        docx_preflight.return_value = {"matched": False, "status": "NOT_APPLICABLE"}
+        tabular_preflight.return_value = {
+            "matched": True,
+            "status": "DIRECT_TABULAR_ADEQUACY_ROUTE_MATCHED",
+            "producer_capability_id": "xlsx.table.create_from_json_records",
+            "verifier_capability_id": "xlsx.table.verify_against_json_records",
+            "policy_id": "BOUND_CAPABILITY_POLICY::xlsx::goal",
+            "goal_sha256": "t" * 64,
+            "kind": "xlsx",
+            "json_path": "canonical/source.json",
+            "output_path": "canonical/out.xlsx",
+        }
+        tabular_run.return_value = {
+            "pass": True,
+            "status": "PASS__TRANSACTIONAL_TABULAR_POLICY_ADEQUACY_VERIFIED",
+            "producer_capability_id": "xlsx.table.create_from_json_records",
+            "verifier_capability_id": "xlsx.table.verify_against_json_records",
+            "policy_id": "BOUND_CAPABILITY_POLICY::xlsx::goal",
+            "goal_sha256": "t" * 64,
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "accepted_raw_obligation_ids": ["RAWREQ:x"],
+            "raw_acceptance_obligation_count": 1,
+            "authority_boundary": "bounded tabular family",
+        }
+        out = direct.run({"task_id": "tabular", "goal": "bounded tabular goal"})
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["direct_adequacy_authority"])
+        self.assertTrue(out["actual_goal_satisfaction_verified"])
+        self.assertEqual(out["selected_policy_id"], "BOUND_CAPABILITY_POLICY::xlsx::goal")
+        tabular_run.assert_called_once()
+
+    @patch.object(direct.tabular_adequacy, "run")
+    @patch.object(direct.tabular_adequacy, "preflight")
+    @patch.object(direct.docx_adequacy, "preflight")
+    @patch.object(direct.codec_adequacy, "preflight")
+    def test_tabular_acceptance_failure_never_falls_through_to_other_execution(
+        self, codec_preflight, docx_preflight, tabular_preflight, tabular_run
+    ):
+        codec_preflight.return_value = {"matched": False, "status": "NOT_APPLICABLE"}
+        docx_preflight.return_value = {"matched": False, "status": "NOT_APPLICABLE"}
+        tabular_preflight.return_value = {
+            "matched": True,
+            "status": "DIRECT_TABULAR_ADEQUACY_ROUTE_MATCHED",
+            "producer_capability_id": "sqlite.table.create_from_json_records",
+            "verifier_capability_id": "sqlite.table.verify_against_json_records",
+            "policy_id": "BOUND_CAPABILITY_POLICY::sqlite::goal",
+            "goal_sha256": "t" * 64,
+            "kind": "sqlite",
+            "json_path": "canonical/source.json",
+            "output_path": "canonical/out.sqlite",
+        }
+        tabular_run.return_value = {
+            "pass": False,
+            "status": "OPEN__INDEPENDENT_TABULAR_ACCEPTANCE_DID_NOT_VERIFY",
+            "transaction_rolled_back": True,
+        }
+        with patch.object(direct.live_bound, "run_raw_goal") as legacy_execute:
+            out = direct.run({"task_id": "tabular", "goal": "bounded tabular goal"})
+        self.assertFalse(out["pass"])
+        self.assertFalse(out["retry_by_other_route_authorized"])
+        legacy_execute.assert_not_called()
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
