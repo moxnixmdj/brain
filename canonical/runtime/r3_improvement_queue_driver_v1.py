@@ -493,16 +493,16 @@ def advance_once(
                 return {**out, "progress": out.get("pass") is True, "blockers_skipped": blockers}
 
             if kind == "REPAIR_FAILURE_CLASS":
+                observations = int(work.get("observations", 0))
+                last_attempt = work.get("last_attempt_observations")
+                if last_attempt is not None and int(last_attempt) >= observations:
+                    blockers.append({
+                        "work_id": wid,
+                        "kind": kind,
+                        "blocker": "REPAIR_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
+                    })
+                    continue
                 if failure_repair_provider is None:
-                    observations = int(work.get("observations", 0))
-                    last_attempt = work.get("last_attempt_observations")
-                    if last_attempt is not None and int(last_attempt) >= observations:
-                        blockers.append({
-                            "work_id": wid,
-                            "kind": kind,
-                            "blocker": "REPAIR_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
-                        })
-                        continue
                     repaired = _internal_failure_repair(
                         work,
                         state_path=state_path,
