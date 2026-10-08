@@ -67,9 +67,15 @@ def evaluate(payload:Mapping[str,Any],*,repo_root:str|Path|None=None)->dict[str,
     if set(payload)-_ALLOWED_PAYLOAD_FIELDS:
         return _fail("UNMODELED_REAL_CONTEXT_ADMISSION_FIELDS")
 
+    has_weights="objective_weights" in payload
+    has_dependency="decision_dependency_contract" in payload
+
     context_id=payload.get("context_id")
-    if not isinstance(context_id,str) or not context_id.strip():
+    if context_id is not None and (not isinstance(context_id,str) or not context_id.strip()):
+        return _fail("CONTEXT_ID_INVALID")
+    if not has_dependency and context_id is None:
         return _fail("CONTEXT_ID_REQUIRED")
+
     public=payload.get("v3_input")
     if not isinstance(public,Mapping):
         return _fail("V3_INPUT_REQUIRED")
@@ -77,8 +83,6 @@ def evaluate(payload:Mapping[str,Any],*,repo_root:str|Path|None=None)->dict[str,
     if contract_failure is not None:
         return _fail(contract_failure)
 
-    has_weights="objective_weights" in payload
-    has_dependency="decision_dependency_contract" in payload
     if has_weights and has_dependency:
         return _fail("MULTIPLE_EXPLICIT_SELECTION_AUTHORITIES_WITHOUT_PRECEDENCE_PROOF")
 
