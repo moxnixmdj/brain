@@ -1,0 +1,35 @@
+{
+  "schema":"PROJECT_BRAIN_P3_SELECTED_SEMANTIC_TRUTH_CERTIFICATE_SPRITE_VERIFICATION_V1",
+  "date":"2026-10-08",
+  "status":"PASS__EXACT_CANDIDATE_BYTES__5_OF_5__REAL_V6_DEPENDENCY_CHAIN__ZERO_TERMINAL_CREDIT",
+  "subject":{
+    "runtime":{"path":"canonical/runtime/selected_semantic_truth_certificate_v1.py","git_blob_sha":"8e6c03547460fc2a27bc18147a873639be678210"},
+    "tests":{"path":"canonical/tests/test_selected_semantic_truth_certificate_v1.py","git_blob_sha":"0faf102711c5aa0ce98a1a55a2223b71d6654707"},
+    "activation":{"path":"canonical/governance/P3_SELECTED_SEMANTIC_TRUTH_CERTIFICATE_ACTIVATION_20261008_V1.json","git_blob_sha":"daa3f8d151b42e3717cb3d386f1d9ea4cc7d91b0"},
+    "trusted_checker":{"path":"canonical/runtime/source_aligned_semantic_proof_v6.py","git_blob_sha":"d82bffda32c1e493e79dfe824ebc1e080b991d9c"}
+  },
+  "carrier":{
+    "provider":"SPRITES",
+    "name":"brain-root3-current-byte-replay-20261007-v1",
+    "id":"sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace":"/home/sprite/selected_semantic_truth_replay_v1"
+  },
+  "verification":{
+    "pass":true,
+    "passed":5,
+    "total":5,
+    "checks":[
+      "TRUE_PREDICATE_EMITS_TRUTHFUL_PRECOMMITMENT_TRUE",
+      "FALSE_PREDICATE_EMITS_TRUTHFUL_PRECOMMITMENT_FALSE",
+      "WRONG_CLAIMED_TRUTH_RETURNS_UNKNOWN",
+      "UNPROVED_PARAPHRASE_RETURNS_UNKNOWN",
+      "DUPLICATE_CLAIM_IDS_FAIL_CLOSED"
+    ]
+  },
+  "verified_boundary":[
+    "SEMANTIC_TRUTH_CERTIFICATE_DOES_NOT_SELF_CERTIFY_POLICY_ADEQUACY",
+    "UNKNOWN_IS_PRESERVED_OUTSIDE_THE_CHECKED_FRAGMENT",
+    "NO_DB_U_EMPTY_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
