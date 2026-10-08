@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_FINITE_ABSTRACTION_COVER_LIFT_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_12_OF_12_ON_TWO_SPRITES__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/finite_abstraction_cover_lift_v1.py",
+    "git_blob_sha": "30f1b57357b4b1861b7007235c8f4ddd60784226",
+    "sha256": "5cf6c84378c9442287505b8468ff90a6282000a65b5850bad7929813a2601da4",
+    "commit_sha": "a49aabe588c54ce098a184a22b6a51dd707296fc"
+  },
+  "tests": {
+    "path": "canonical/tests/test_finite_abstraction_cover_lift_v1.py",
+    "git_blob_sha": "3cb2788b4720d5d3518931a8d1968605d8a26a36",
+    "sha256": "3b1fb00a455e22d8b152cea2f2a7e0bea60919b72394a4ab590a2ed247f3e519",
+    "commit_sha": "14809f067a5342d2990908e29ae495adadca3909"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_passed": 12,
+      "tests_run": 12
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_passed": 12,
+      "tests_run": 12
+    }
+  ],
+  "proved": {
+    "declared_concrete_scope_to_abstract_policy_cover": true,
+    "constructive_uncovered_concrete_witness": true,
+    "constructive_admitted_but_inadequate_witness": true,
+    "abstraction_predicates_derived_from_concrete_formulas": true,
+    "fail_closed_on_stale_blob_unknown_fields_scope_swap_and_unknown_literals": true
+  },
+  "boundaries": [
+    "DECLARED_FINITE_CONCRETE_BOOLEAN_SCOPE_ONLY",
+    "NO_CLAIM_DECLARED_CONCRETE_SCOPE_EQUALS_REAL_S_TRACE",
+    "NO_PRODUCTION_ROUTE_ADEQUACY_CLAIM",
+    "NO_OPUS55_SCOPE_COMPLETENESS",
+    "NO_U_EMPTY_AUTHORITY",
+    "NO_ABC_CLOSURE_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
