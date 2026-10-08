@@ -135,6 +135,100 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertEqual(work["payload"]["fact_capsule_head_hash"], "fact")
         self.assertEqual(work["payload"]["value_capsule_head_hash"], "value")
 
+    def test_scope_generalization_runs_through_canonical_driver(self):
+        path = self.temp_state()
+        verified_skill = {
+            "schema": "PROJECT_BRAIN_EXECUTABLE_SKILL_PROGRAM_V7",
+            "status": "VERIFIED_EXECUTABLE_SKILL",
+            "source_episode_ids": ["ep-1", "ep-2"],
+            "source_scopes": ["scope-a"],
+            "steps": [{"index": 0, "op": "solve", "inputs": [], "outputs": ["goal"]}],
+            "preconditions": [],
+            "postconditions": ["goal"],
+            "invalidators": [],
+            "candidate_sha256": "sha256:" + "7" * 64,
+            "verified_skill": True,
+            "reuse_authorized": True,
+            "candidate_only": False,
+            "scope_relation": "EXACT",
+            "verification_receipt": "SKVR:old",
+        }
+        sid = learning._skill_id(verified_skill)
+        family = learning._family_id(verified_skill)
+        state = learning._empty_state()
+        state["skills"][sid] = {
+            "skill": verified_skill,
+            "family_id": family,
+            "pareto_metrics": learning._skill_pareto_row(sid, verified_skill),
+            "active": True,
+            "dominated_by": None,
+            "compression": {},
+        }
+        state["pareto_frontiers"][family] = [sid]
+        learning._enqueue_improvement(
+            state,
+            kind="SEEK_VERIFIED_SCOPE_GENERALIZATION",
+            priority=60,
+            identity={"family_id": family, "skill_id": sid},
+            payload={
+                "family_id": family,
+                "skill_id": sid,
+                "source_scopes": ["scope-a"],
+                "postconditions": ["goal"],
+                "required_result": "INDEPENDENTLY_VERIFIED_PROVEN_SUPERSET_SKILL",
+            },
+        )
+        learning._refresh_stats(state)
+        learning._write_state(state, path)
+
+        promoted = {
+            **verified_skill,
+            "scope_relation": "PROVEN_SUPERSET",
+            "scope_predicate": learning.VERIFIED_SUPERSET_SCOPE_PREDICATE,
+            "verification_receipt": "SKVR:new",
+        }
+        provider = mock.Mock(return_value={"binding": "content-addressed"})
+        with (
+            mock.patch.object(
+                driver,
+                "authenticate_skill_verification",
+                return_value={"pass": True, "verified_skill": promoted},
+            ),
+            mock.patch.object(
+                driver.learning,
+                "integrate_solver_output",
+                return_value={
+                    "pass": True,
+                    "status": "VERIFIED_SKILL_PERMANENTLY_ADMITTED_FOR_REUSE",
+                    "active_skill_id": sid,
+                },
+            ) as integrate,
+        ):
+            out = driver.advance_once(
+                state_path=path,
+                skill_verification_provider=provider,
+            )
+
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["progress"], out)
+        self.assertEqual(
+            out["status"],
+            "IMPROVEMENT_ADVANCED__SCOPE_GENERALIZATION_VERIFIED_AND_PARETO_ADJUDICATED",
+        )
+        request = provider.call_args.args[0]
+        self.assertEqual(
+            request["kind"],
+            "SKILL_SCOPE_GENERALIZATION_VERIFICATION",
+        )
+        self.assertEqual(request["requested_scope_relation"], "PROVEN_SUPERSET")
+        self.assertEqual(
+            request["requested_scope_predicate"],
+            learning.VERIFIED_SUPERSET_SCOPE_PREDICATE,
+        )
+        self.assertTrue(request["candidate"]["candidate_only"])
+        self.assertNotIn("scope_relation", request["candidate"])
+        integrate.assert_called_once()
+
     def test_event_waiting_work_does_not_claim_progress(self):
         path = self.temp_state()
         self.write_state(
