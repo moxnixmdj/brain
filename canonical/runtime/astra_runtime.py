@@ -4318,6 +4318,26 @@ def _goal_action(action):
           "verifier_integrity":evidence.get("verifier_integrity"),
           "attempt_count":evidence.get("attempt_count"),
         }
+    if typ=="invoke_verified_bound_capability_adapter":
+        from canonical.runtime import verified_bound_capability_execution_adapter_v1 as promoted_bound
+        capability_id=str(args.get("capability_id") or "")
+        inputs=args.get("inputs")
+        if not capability_id or not isinstance(inputs,dict):
+            return {
+              "type":typ,"pass":False,
+              "errors":["PROMOTED_BOUND_CONTROLLER_ARGS_INVALID"],
+            }
+        return promoted_bound.execute(
+            capability_id,
+            inputs=inputs,
+            instance_id=args.get("instance_id"),
+            requires=args.get("requires"),
+            provides=args.get("provides"),
+            result_fields=args.get("result_fields"),
+            expected_registry_file_sha256=args.get("expected_registry_file_sha256"),
+            expected_registry_entry_sha256=args.get("expected_registry_entry_sha256"),
+            expected_rendered_action_sha256=args.get("expected_rendered_action_sha256"),
+        )
     if typ=="invoke_capability":
         return _invoke_bound_capability(args)
     if typ=="assert_text_contains_json_keys":
@@ -4496,6 +4516,25 @@ def _controller_checkpoint_record_valid(record):
         if isinstance(raw,str) and raw:
             checks.append((raw,result.get("sha256")))
 
+    if typ=="invoke_verified_bound_capability_adapter":
+        if (
+            result.get("pass") is not True
+            or not isinstance(result.get("composition_capsule_head_hash"),str)
+            or not result.get("composition_capsule_head_hash")
+        ):
+            return False
+        inner=result.get("result")
+        if not isinstance(inner,dict):
+            return False
+        for path_key,hash_key in (
+            ("output_path","output_sha256"),
+            ("screenshot_path","screenshot_sha256"),
+            ("xlsx_path","xlsx_sha256"),
+        ):
+            raw=inner.get(path_key)
+            if isinstance(raw,str) and raw:
+                checks.append((raw,inner.get(hash_key)))
+
     for raw,expected_hash in checks:
         try:
             p=_safe_repo_path(raw)
@@ -4579,7 +4618,7 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","extract_labeled_fields_from_rendered_source","assert_labeled_fields_against_fresh_source","resolve_authority_identity","assert_authority_identity","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assess_knowledge_consistency","materialize_supported_knowledge","assert_knowledge_status","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec","verify_with_independent_npm_codec",
+      "read_file","list_tree","search_text","http_get","extract_labeled_fields_from_rendered_source","assert_labeled_fields_against_fresh_source","resolve_authority_identity","assert_authority_identity","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assess_knowledge_consistency","materialize_supported_knowledge","assert_knowledge_status","assert_json_knowledge","write_json_records","invoke_verified_bound_capability_adapter","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec","verify_with_independent_npm_codec",
       "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","derive_grouped_records","assert_grouped_derived_records","select_ranked_record","assert_ranked_record","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
