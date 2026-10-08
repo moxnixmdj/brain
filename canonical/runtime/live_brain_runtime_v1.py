@@ -261,14 +261,19 @@ def _replay_retry_context(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None,
+    state_path: str | Path | None = None,
 ) -> dict[str, Any]:
     if not isinstance(context, Mapping):
         return _fail("RETRY_CONTEXT_NOT_OBJECT")
     mode = str(context.get("mode") or "")
     if mode in {"repair_synthesis", "repair_cycle"}:
         return _fail("RETRY_CONTEXT_REPAIR_RECURSION_FORBIDDEN")
+    replay_context = deepcopy(dict(context))
+    replay_context["auto_repair"] = False
+    if state_path is not None:
+        replay_context["state_path"] = str(state_path)
     return run(
-        deepcopy(dict(context)),
+        replay_context,
         repo_root=repo_root,
         information_provider=information_provider,
         proposal_provider=proposal_provider,
@@ -405,6 +410,7 @@ def execute_failure_repair_cycle(
             information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
+            state_path=path,
         )
         replay_pass = replay.get("pass") is True
         winner_components = []
@@ -546,10 +552,30 @@ def _auto_repair_live_failure(
         }
         return out
 
+    mode = str(request.get("mode") or "").strip()
+    nested = request.get("request")
+    source = nested if isinstance(nested, Mapping) else request
+    repair_initial_facts = source.get("initial_facts") or ()
+    if mode == "generic":
+        raw_problem = request.get("problem")
+        if isinstance(raw_problem, Mapping):
+            repair_initial_facts = raw_problem.get("initial_facts") or ()
+    elif mode == "decision":
+        decision = request.get("request")
+        decision = decision if isinstance(decision, Mapping) else request
+        execution_problem = decision.get("execution_problem")
+        if isinstance(execution_problem, Mapping):
+            repair_initial_facts = execution_problem.get("initial_facts") or ()
+
     repair_request = {
         "failure_fingerprint": fingerprint,
         "retry_capsule_sha256": retry_sha,
         "components": components,
+        "initial_facts": [
+            str(x).strip()
+            for x in repair_initial_facts
+            if isinstance(x, str) and str(x).strip()
+        ],
         "solver_kwargs": deepcopy(dict(request.get("repair_solver_kwargs") or {})),
         "learn": True,
     }
