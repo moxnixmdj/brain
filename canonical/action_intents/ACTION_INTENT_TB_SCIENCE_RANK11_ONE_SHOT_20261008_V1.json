@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK11_ACTION_INTENT_V1",
+  "date": "2026-10-08",
+  "status": "READY_AFTER_EXACT_CURRENT_EPOCH_RECHECK__ONE_SHOT__ZERO_SPEND",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/supraglacial-lake-classification::trial-0",
+    "digest": "sha256:4a57227f84340ff6e245c3f2efeb8dfb6fb44a89713223d8742433dd569f9e3a",
+    "rank": 11
+  },
+  "exact_route": {
+    "agent": "99d6ba6edcfad425e4cb940e5b7b2ccd99f6cdab",
+    "planner": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "raw_task_contract": "d54d5a2f7efa76b653d288f4f53da4883644baa6",
+    "raw_task_localizer": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76"
+  },
+  "current_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V9.json",
+    "git_blob_sha": "82edae7eeb3e5ea5e30fc9f239c1d95faf9d089d"
+  },
+  "preexposure_proofs": {
+    "timeout300_current_closure": {
+      "path": "canonical/verification/TB_SCIENCE_TIMEOUT300_CURRENT_CLOSURE_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "72218ad1f50d8b29a273d7f32118ffb1d9cfb2b5"
+    },
+    "transitive_runtime_closure_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V3.json",
+      "git_blob_sha": "5c03f885c747e921265da4934783cf107d7de641"
+    },
+    "rank11_candidate_verification": {
+      "path": "canonical/verification/TB_SCIENCE_RANK11_AUTHORITY_CANDIDATE_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "7f3d731a09b564ebc758502349b8a206e91b9182"
+    }
+  },
+  "public_epoch": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base": "terminal-execution-v1",
+    "path": "capsules/tb_science_rank11_20261008_v1/RANK11_EPOCH_V1.json",
+    "git_blob_sha": "659b11f3ffe42c5c24025727145baf3c220719e8",
+    "epoch_id": "TBSCI-RANK11-20261008-E1",
+    "merged_commit": "84d30932c408e6a346dc6baf120bfca73c13c67c"
+  },
+  "controls": {
+    "attempts": 1,
+    "retries": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "current_public_epoch_must_match_immediately_before_task_start": true,
+    "exact_carrier_blob_identity_required": true,
+    "agent_and_planner_import_required_before_task_start": true,
+    "precheck_failure_consumes_slot": false,
+    "after_task_start_result_is_final": true,
+    "after_task_start_missing_or_zero_verifier_result_counts_as_final_zero": true
+  },
+  "current_truth": {
+    "prior_consumed_slots": 10,
+    "prior_successes": 0,
+    "prior_final_failures": 10,
+    "rank10_timeout_failure_class_repaired_and_zero_exposure_verified": true,
+    "exact_repaired_carrier_closure_verified": true,
+    "task_started": false,
+    "result_present": false
+  },
+  "credit": false
+}

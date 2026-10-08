@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK11_ACTIVE_AUTHORITY_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SPRITE_PASS__EXACT_ACTIVE_AUTHORITY_AND_INTENT__ZERO_BENCHMARK_EXPOSURE__ZERO_CREDIT",
+  "subject": {
+    "authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK11_ONE_SLOT_EXECUTION_AUTHORITY_20261008_V1.json",
+      "git_blob_sha": "cdb7d5c6fe7fa028b557077a694346e64bafc434"
+    },
+    "intent": {
+      "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK11_ONE_SHOT_20261008_V1.json",
+      "git_blob_sha": "91d29a0de0df505af85b8a0d3050cb3fce1e9dc1"
+    }
+  },
+  "bindings": {
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261007_V9.json",
+      "git_blob_sha": "82edae7eeb3e5ea5e30fc9f239c1d95faf9d089d"
+    },
+    "terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "27d179c9bb28274bcc6dbc14215caee22bfedb6c"
+    },
+    "closure": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V3.json",
+      "git_blob_sha": "5c03f885c747e921265da4934783cf107d7de641"
+    },
+    "timeout300_verification": {
+      "path": "canonical/verification/TB_SCIENCE_TIMEOUT300_CURRENT_CLOSURE_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "72218ad1f50d8b29a273d7f32118ffb1d9cfb2b5"
+    },
+    "candidate_verification": {
+      "path": "canonical/verification/TB_SCIENCE_RANK11_AUTHORITY_CANDIDATE_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "7f3d731a09b564ebc758502349b8a206e91b9182"
+    },
+    "terminal_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    },
+    "public_epoch": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "base": "terminal-execution-v1",
+      "path": "capsules/tb_science_rank11_20261008_v1/RANK11_EPOCH_V1.json",
+      "git_blob_sha": "659b11f3ffe42c5c24025727145baf3c220719e8"
+    }
+  },
+  "verified": {
+    "exact_blob_matches": true,
+    "slot_id": "terminal-bench-science/supraglacial-lake-classification::trial-0",
+    "task_digest": "sha256:4a57227f84340ff6e245c3f2efeb8dfb6fb44a89713223d8742433dd569f9e3a",
+    "schedule_rank": 11,
+    "public_epoch_run_attempts_authorized": 0,
+    "rank11_task_started": false,
+    "rank11_result_present": false,
+    "exact_slot_count": 1,
+    "attempts": 1,
+    "retries": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "precheck_failure_consumes_slot": false,
+    "benchmark_task_exposure": 0
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "brain-root3-current-byte-replay-20261007-v1",
+    "id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/tb_science_rank11_active_authority_verify"
+  },
+  "consequence": "SAFE_TO_MERGE_ACTIVE_BRAIN_AUTHORITY__NO_TASK_EXECUTION_EXISTS_UNTIL_SEPARATE_PUBLIC_ONE_USE_LEASE_AND_ARM_LAST_TRIGGER_ARE_BOUND",
+  "execution_authority_verification": true,
+  "benchmark_task_exposure": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
