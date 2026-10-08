@@ -1,4 +1,4 @@
-"""P3 required-claim grounded realization cell v3.
+"""P3 required-claim grounded realization cell v4.
 
 A narrow positive synthesis cell for tasks where every claim is structurally required,
 selection/order are therefore fixed, support truth is recomputed by the verified V6
