@@ -397,6 +397,7 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             out,
             state_path=path,
             verification_problem=problem,
+            verification_effect_root="/private/effects",
         )
         state = learning.load_state(path)
         work = next(
@@ -409,6 +410,7 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertEqual(work["payload"]["trace"], out["trace"])
         self.assertEqual(work["payload"]["fact_capsule_head_hash"], "fact")
         self.assertEqual(work["payload"]["value_capsule_head_hash"], "value")
+        self.assertEqual(work["payload"]["effect_root"], "/private/effects")
 
     def test_scope_generalization_runs_through_canonical_driver(self):
         path = self.temp_state()
