@@ -10,10 +10,10 @@
     },
     "authenticated_policy_cover_fixed_point": {
       "path": "canonical/runtime/authenticated_symbolic_policy_cover_fixed_point_v1.py",
-      "git_blob_sha": "965b45c8776110d0500e995cb24cd1561f991d2f"
+      "git_blob_sha": "3ca9921e081ed6764af5ae9362d7be2b325be604"
     },
     "selected_observation_composition_verification": {
-      "path": "canonical/verification/POLICY_ADEQUACY_SELECTED_OBSERVATION_COMPOSITION_SPRITE_VERIFICATION_20261008_V1.json"
+      "path": "canonical/verification/POLICY_ADEQUACY_SELECTED_OBSERVATION_COMPOSITION_SPRITE_VERIFICATION_20261008_V2.json"
     }
   },
   "separation": {
@@ -48,9 +48,10 @@
   ],
   "current_boundary": {
     "strict_p2_root_to_policy_path": "OWNED_AND_INDEPENDENTLY_COMPOSED_ON_RESEARCH_BRANCH",
-    "selected_semantic_checker_current_bytes": "INDEPENDENTLY_REPLAYED_22_OF_22_AND_COMPOSED_IN_36_OF_36_SUITE",
+    "selected_semantic_checker_current_bytes": "INDEPENDENTLY_REPLAYED_22_OF_22_AND_COMPOSED_IN_38_OF_38_SUITE",
     "arbitrary_selected_fact_source_root_binding": "NOT_YET_GENERALIZED__REMAINS_INGRESS_OR_HARNESS_SPECIFIC",
-    "global_policy_adequacy_closed": false
+    "global_policy_adequacy_closed": false,
+    "optional_candidate_quarantine": "VERIFIED__BAD_OPTIONAL_POLICY_OR_DISCRIMINATOR_CANDIDATES_CANNOT_POISON_A_VALID_POSITIVE_COVER"
   },
   "hard_nonclaims": [
     "NO_CLAIM_AN_UPSTREAM_INGRESS_CAN_BE_SELF_AUTHENTICATED_BY_THE_SOLVER",
