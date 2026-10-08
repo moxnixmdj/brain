@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_P3_BINARY_EXPLICIT_CONTRACT_MEMBERSHIP_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_20_OF_20_ON_TWO_SPRITES__LOSSLESS_EXPLICIT_ROOT_SOURCE_CLASS__NO_SEMANTIC_SELF_CERTIFICATION__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/p3_binary_explicit_contract_membership_v1.py",
+    "git_blob_sha": "ca24d891210fb6d885a959c26a9da3451a8b67c7",
+    "sha256": "9a2107116a1dea0f4ff64a9b298d0ac3b39dd00710b73947cd9e84e53afda438",
+    "commit_sha": "c8ce7a435094c332b64cdfa16edacbb8d04f7ce7"
+  },
+  "tests": {
+    "path": "canonical/tests/test_p3_binary_explicit_contract_membership_v1.py",
+    "git_blob_sha": "e3a815c692aff2f508b45f7796e7013175ebcca9",
+    "sha256": "0cc40426533951b4c162ae9559bbe384aa9a9901a3556f8872312e6323a40420",
+    "commit_sha": "def721d575ed4d7e3aeccec0554c1d0b004866ac"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_passed": 20,
+      "tests_run": 20
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_passed": 20,
+      "tests_run": 20
+    }
+  ],
+  "proved": [
+    "ROOT_TASK_BYTES_MUST_BE_STRICT_JSON_WITH_EXACT_P3_BINARY_CONTRACT_FIELDS",
+    "DUPLICATE_JSON_KEYS_REJECTED",
+    "EXTRA_TOP_TASK_CLAIM_EVIDENCE_PROFILE_OR_CONSTRAINT_FIELDS_REJECTED",
+    "EXACTLY_TWO_OPTIONAL_CLAIMS_AND_TWO_VERIFIED_EVIDENCE_ROWS_REQUIRED",
+    "EXPLICIT_TYPED_AUDIENCE_AND_BOUND_FORMAT_SURFACE_REQUIRED",
+    "VERIFIED_BINARY_GROUNDED_EXPRESSION_POLICY_RECOMPUTED_FROM_THE_PARSED_BYTES",
+    "NO_CALLER_MEMBERSHIP_FLAG_OR_SEMANTIC_EXTRACTOR_ACCEPTED",
+    "MEMBERSHIP_RECEIPT_DERIVED_FROM_ROOT_SOURCE_AND_NORMALIZED_CONTRACT_BYTES"
+  ],
+  "root_boundary": "THE_UPSTREAM_TASK_BYTES_ARE_THE_UNAVOIDABLE_ROOT_OF_TRUST__THE_COMPILER_PROVES_LOSSLESS_MEMBERSHIP_RELATIVE_TO_THOSE_BYTES_AND_DOES_NOT CLAIM_TO_PROVE_USER_INTENT_FROM_ITS_OWN_INPUT",
+  "hard_nonclaims": [
+    "NO_FREE_FORM_NATURAL_LANGUAGE_SCOPE_MEMBERSHIP",
+    "NO_CLAIM_UPSTREAM_ROOT_TASK_BYTES_EQUAL_USER_INTENT_FROM_INSIDE_THE_COMPILER",
+    "NO_POLICY_ADEQUACY_DB_U_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}

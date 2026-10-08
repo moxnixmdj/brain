@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_P3_BINARY_EXPLICIT_TOP_LAW_REGION_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_ON_TWO_SPRITES__STRICT_EXPLICIT_P3_BINARY_PARAMETERIZED_TOP_LAW_REGION_VERIFIED__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "region": {
+      "path": "canonical/governance/P3_BOUND_BINARY_REAL_CONTEXT_TOP_LAW_REGION_20261008_V1.json",
+      "git_blob_sha": "e367ff0a5734e2430b0b5476bf073b4688c410e1"
+    },
+    "verifier": {
+      "path": "canonical/runtime/p3_binary_explicit_top_law_region_verifier_v1.py",
+      "git_blob_sha": "da871727e5939b5c190e9c383d6c361642168b80",
+      "sha256": "7af19ee0a143cccb42f7c6c13e9496a308c9ab02ff8605d283a84e5db969d0af"
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "result": "PASS"
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "result": "PASS"
+    }
+  ],
+  "verified": {
+    "exact_region_bytes": true,
+    "explicit_membership_20_of_20_two_sprite_receipt": true,
+    "binary_expression_11_of_11_two_sprite_receipt": true,
+    "no_caller_membership_flag_or_semantic_extractor": true,
+    "old_self_certifying_membership_route_promotion_invalidated": true,
+    "explicit_selection_order_top_law_common_policy": true,
+    "target_comparator_required": false,
+    "p3_required_checks_imply_synthesis_contract_success": true,
+    "parameterized_D_B_region_candidate": true,
+    "free_form_p3_closed": false,
+    "whole_p3_closed": false,
+    "u_empty": false,
+    "terminal": false
+  },
+  "root_boundary": "UPSTREAM_ROOT_TASK_BYTES_REMAIN_THE_UNAVOIDABLE_ROOT_OF_TRUST__NO_SOLVER_SELF_PROOF_OF_USER_INTENT",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
