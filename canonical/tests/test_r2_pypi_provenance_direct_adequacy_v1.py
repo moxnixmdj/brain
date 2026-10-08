@@ -36,7 +36,7 @@ class R2PypiProvenanceDirectAdequacyV1Tests(unittest.TestCase):
         def fake(*args,**kwargs):
             report={
               "schema":"PROJECT_BRAIN_PYPI_PROVENANCE_AUDIT_V1",
-              "capability_id":pf["capability_id"],
+              "capability_id":pf["audited_capability_id"],
               "project":pf["project"],
               "pinned_version":pf["version"],
               "wheel_filename":pf["wheel_filename"],
@@ -49,7 +49,7 @@ class R2PypiProvenanceDirectAdequacyV1Tests(unittest.TestCase):
             OUT.write_text(json.dumps(report),encoding="utf-8")
             return {
               "verified":True,"report_path":pf["report_path"],
-              "capability_id":pf["capability_id"],
+              "capability_id":pf["audited_capability_id"],
               "recorded_hash":pf["recorded_hash"],
               "live_metadata_hash":pf["recorded_hash"],
               "downloaded_artifact_hash":pf["recorded_hash"]
@@ -73,7 +73,7 @@ class R2PypiProvenanceDirectAdequacyV1Tests(unittest.TestCase):
         OUT.write_bytes(b'{"old":true}')
         def fake(*args,**kwargs):
             report={
-              "capability_id":pf["capability_id"],"project":pf["project"],
+              "capability_id":pf["audited_capability_id"],"project":pf["project"],
               "pinned_version":pf["version"],"wheel_filename":pf["wheel_filename"],
               "recorded_hash":pf["recorded_hash"],"live_metadata_hash":pf["recorded_hash"],
               "downloaded_artifact_hash":pf["recorded_hash"],"metadata_url":pf["metadata_url"],
@@ -82,7 +82,7 @@ class R2PypiProvenanceDirectAdequacyV1Tests(unittest.TestCase):
             OUT.write_text(json.dumps(report),encoding="utf-8")
             return {
               "verified":True,"report_path":pf["report_path"],
-              "capability_id":pf["capability_id"],
+              "capability_id":pf["audited_capability_id"],
               "recorded_hash":pf["recorded_hash"],
               "live_metadata_hash":pf["recorded_hash"],
               "downloaded_artifact_hash":pf["recorded_hash"]
