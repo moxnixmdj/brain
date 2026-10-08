@@ -252,5 +252,89 @@ class R2DirectEndToEndAdequacyV1Tests(unittest.TestCase):
         self.assertFalse(out["retry_by_other_route_authorized"])
         legacy_execute.assert_not_called()
 
+
+    @patch.object(direct.table_adequacy, "preflight")
+    def test_structured_table_family_is_reachable_from_direct_preflight(self, table_preflight):
+        table_preflight.return_value = {
+            "matched": True,
+            "status": "DIRECT_STRUCTURED_TABLE_ADEQUACY_ROUTE_MATCHED",
+            "capability_id": "xlsx.table.create_from_json_records",
+            "policy_id": "BOUND_CAPABILITY_POLICY::table::goal",
+            "goal_sha256": "t" * 64,
+            "format": "xlsx",
+            "json_path": "canonical/source.json",
+            "output_path": "canonical/out.xlsx",
+        }
+        with patch.object(direct.codec_adequacy, "preflight", return_value={"matched": False}):
+            out = direct.preflight({"task_id": "table", "goal": "not another direct grammar"})
+        self.assertTrue(out["matched"], out)
+        self.assertEqual(out["route_id"], direct.STRUCTURED_TABLE_ROUTE_ID)
+        self.assertEqual(out["capability_id"], "xlsx.table.create_from_json_records")
+        self.assertFalse(out["preflight_execution_authority"])
+
+    @patch.object(direct.table_adequacy, "run")
+    @patch.object(direct.table_adequacy, "preflight")
+    def test_structured_table_verified_acceptance_becomes_direct_adequacy(
+        self, table_preflight, table_run
+    ):
+        table_preflight.return_value = {
+            "matched": True,
+            "status": "DIRECT_STRUCTURED_TABLE_ADEQUACY_ROUTE_MATCHED",
+            "capability_id": "sqlite.table.create_from_json_records",
+            "policy_id": "BOUND_CAPABILITY_POLICY::table::goal",
+            "goal_sha256": "t" * 64,
+            "format": "sqlite",
+            "json_path": "canonical/source.json",
+            "output_path": "canonical/out.sqlite",
+        }
+        table_run.return_value = {
+            "pass": True,
+            "status": "PASS__TRANSACTIONAL_STRUCTURED_TABLE_POLICY_ADEQUACY_VERIFIED",
+            "capability_id": "sqlite.table.create_from_json_records",
+            "policy_id": "BOUND_CAPABILITY_POLICY::table::goal",
+            "goal_sha256": "t" * 64,
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "accepted_raw_obligation_ids": ["RAWREQ:x"],
+            "raw_acceptance_obligation_count": 1,
+            "raw_result": {"pass": True},
+            "authority_boundary": "bounded table family",
+        }
+        with patch.object(direct.codec_adequacy, "preflight", return_value={"matched": False}):
+            out = direct.run({"task_id": "table", "goal": "not another direct grammar"})
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["direct_adequacy_authority"])
+        self.assertTrue(out["actual_goal_satisfaction_verified"])
+        self.assertEqual(out["selected_policy_id"], "BOUND_CAPABILITY_POLICY::table::goal")
+        table_run.assert_called_once()
+
+    @patch.object(direct.table_adequacy, "run")
+    @patch.object(direct.table_adequacy, "preflight")
+    def test_structured_table_failure_never_falls_through_to_other_execution(
+        self, table_preflight, table_run
+    ):
+        table_preflight.return_value = {
+            "matched": True,
+            "status": "DIRECT_STRUCTURED_TABLE_ADEQUACY_ROUTE_MATCHED",
+            "capability_id": "xlsx.table.create_from_json_records",
+            "policy_id": "BOUND_CAPABILITY_POLICY::table::goal",
+            "goal_sha256": "t" * 64,
+            "format": "xlsx",
+            "json_path": "canonical/source.json",
+            "output_path": "canonical/out.xlsx",
+        }
+        table_run.return_value = {
+            "pass": False,
+            "status": "OPEN__INDEPENDENT_TABLE_ACCEPTANCE_DID_NOT_VERIFY",
+            "transaction_rolled_back": True,
+        }
+        with patch.object(direct.codec_adequacy, "preflight", return_value={"matched": False}):
+            with patch.object(direct.live_bound, "run_raw_goal") as legacy_execute:
+                out = direct.run({"task_id": "table", "goal": "not another direct grammar"})
+        self.assertFalse(out["pass"])
+        self.assertFalse(out["retry_by_other_route_authorized"])
+        legacy_execute.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
