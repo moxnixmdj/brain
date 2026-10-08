@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_POLICY_COVER_MINIMAX_OPTIMALITY_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_EXACT_BYTES_REMOTE_SPRITE_TESTS_PASS__NO_TERMINAL_CREDIT",
+  "purpose": "Restore actual minimum worst-case resource choice between a certified common policy and safely distinguishing before choosing specialized certified policies.",
+  "subject": {
+    "runtime_path": "canonical/runtime/observable_policy_cover_totality_gate_v1.py",
+    "runtime_git_blob_sha": "63c7c22abf425ae8383d5d1bb79227c62865f72f",
+    "test_path": "canonical/tests/test_observable_policy_cover_totality_gate_v1.py",
+    "test_git_blob_sha": "f16adcf9cfa0e74a46ffac3e081a8155964a3e75",
+    "oracle_test_path": "canonical/tests/test_observable_policy_cover_minimax_oracle_v1.py",
+    "oracle_test_git_blob_sha": "dea0a8f9dd089ab4760d8049b413df53c944cfc9",
+    "branch": "research/policy-cover-minimax-optimality-20261008-v1"
+  },
+  "verification": {
+    "provider": "SPRITES",
+    "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+    "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+    "remote_workspace": "/home/sprite/independent_policy_cover_20261008",
+    "python_version": "3.14.4",
+    "exact_git_blob_hashes_verified": [
+      "runtime",
+      "test",
+      "oracle_test"
+    ],
+    "existing_and_new_unit_tests_pass": 12,
+    "independent_bottom_up_oracle_cases_pass": 160,
+    "independent_bottom_up_oracle_cases_total": 160,
+    "oracle_seed": 849193,
+    "oracle_world_count": 3,
+    "oracle_model_range": "1-to-5 policies, 0-to-4 discriminators, integer costs, deterministic sampled regions and outcomes",
+    "observed_stdout": [
+      "EXACT_GIT_BLOBS_VERIFIED 2",
+      "EXISTING_PLUS_NEW_TESTS_PASS 12",
+      "INDEPENDENT_BOTTOM_UP_ORACLE_CASES_PASS 160",
+      "ALL_CHECKS_PASSED",
+      "EXACT_ORACLE_TEST_BLOB_VERIFIED dea0a8f9dd089ab4760d8049b413df53c944cfc9",
+      "PERSISTENT_INDEPENDENT_ORACLE_160_OF_160_PASS"
+    ]
+  },
+  "scope_limits": [
+    "NO proof of finite-world scope completeness outside caller-provided authenticated receipt",
+    "NO independent validation of semantic adequacy certificates or receipt provenance from this test run",
+    "NO global minimum runtime claim beyond declared additive worst-case cost model and enumerated finite decisions",
+    "NO full-repository regression suite executed",
+    "NO new target-model evaluation, benchmark score, external evidence, U-empty, D-finality, capability credit or terminal credit"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_replay_count": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
