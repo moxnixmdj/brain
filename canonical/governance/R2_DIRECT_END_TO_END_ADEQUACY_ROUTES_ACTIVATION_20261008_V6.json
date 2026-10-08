@@ -1,0 +1,204 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_V6",
+  "date": "2026-10-08",
+  "status": "ACTIVE_LIVE_DIRECT_ADEQUACY_ROUTE_LAYER__THREE_EXACT_CELLS_PLUS_SEVEN_BOUNDED_FAMILIES",
+  "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE_INCOMPLETE",
+  "runtime": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+  "controller": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+  "rule": [
+    "PURE_EXACT_PREFLIGHT_MUST_MATCH_BEFORE_ANY_EFFECT",
+    "MATCHED_ROUTE_EXECUTES_AT_MOST_ONCE",
+    "SUCCESS_REQUIRES_INDEPENDENT_POST_EXECUTION_ACCEPTANCE_OF_EVERY_RAW_OBLIGATION",
+    "PARTIAL_ACCEPTANCE_IS_NOT_ADEQUACY",
+    "MATCHED_ROUTE_FAILURE_MUST_NOT_RETRY_THROUGH_ANOTHER_POLICY_PATH",
+    "UNMATCHED_GOALS_FALL_THROUGH_TO_THE_EXISTING_R2_FIXED_POINT_LOOP",
+    "TRANSACTIONAL_FAMILY_ROUTES_MAY_COMMIT_ONLY_AFTER_PRODUCER_INDEPENDENT_SEMANTIC_ACCEPTANCE__FAILURE_RESTORES_OR_REMOVES_THE_DECLARED_REPOSITORY_LOCAL_OUTPUT",
+    "DOCX_FAMILY_COMMITS_ONLY_AFTER_EXACT_RAW_INTENT_SIDECAR_BINDING_AND_PRODUCER_INDEPENDENT_STDLIB_OOXML_SEMANTIC_VERIFICATION",
+    "DOCX_JSON_FAMILY_COMMITS_ONLY_AFTER_SOURCE_HASH_STABILITY_EXACT_INTENT_BINDING_AND_PRODUCER_INDEPENDENT_OOXML_SEMANTIC_VERIFICATION",
+    "STRUCTURED_TABLE_FAMILY_COMMITS_ONLY_AFTER_SOURCE_HASH_STABILITY_AND_PRODUCER_INDEPENDENT_JSON_TO_XLSX_OR_SQLITE_SEMANTIC_READBACK",
+    "VISUAL_CODE_FAMILY_COMMITS_ONLY_AFTER_EXACT_QUOTED_PAYLOAD_BINDING_TRANSACTIONAL_PNG_EXECUTION_AND_PRODUCER_INDEPENDENT_ZBAR_SEMANTIC_DECODE_EQUALS_THE_EXACT_PAYLOAD",
+    "MARKDOWN_PDF_FAMILY_COMMITS_ONLY_AFTER_SOURCE_HASH_STABILITY_AND_PRODUCER_INDEPENDENT_PYPDF_VISIBLE_TEXT_READBACK_EQUALS_THE_EXACT_DECLARED_PLAIN_SEMANTIC_SOURCE_PROJECTION"
+  ],
+  "current_routes": [
+    {
+      "route_id": "DIRECT_ADEQUACY::ARCHIVE_MANIFEST_TAR_GZ_V1",
+      "capability_id": "archive.tar_gz.create_from_manifest",
+      "preflight": "raw_goal_archive_acceptance_v1.GRAMMAR.fullmatch",
+      "acceptance": "raw_goal_archive_acceptance_v1.verify",
+      "scope": "EXACT_ARCHIVE_MANIFEST_VERIFICATION_PATHS_GOAL_ONLY"
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1",
+      "capability_id": null,
+      "preflight": "raw_goal_exact_literal_acceptance_v1.preflight",
+      "acceptance": "raw_goal_exact_literal_acceptance_v1.verify",
+      "scope": "STRICT_REPLY_OR_RESPOND_WITH_EXACTLY_LITERAL_GOAL_ONLY"
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1",
+      "capability_id": null,
+      "preflight": "raw_goal_literal_json_acceptance_v1.preflight",
+      "acceptance": "raw_goal_literal_json_acceptance_v1.verify",
+      "scope": "STRICT_LITERAL_JSON_RECORDS_TO_CANONICAL_REPOSITORY_PATH_ONLY"
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1",
+      "capability_id": "DYNAMIC_VERIFIED_BOUND_CODEC",
+      "runtime": "canonical/runtime/r2_structured_binary_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "d3d687fbd1d049b1162520f96c7ba4fb57927f42",
+      "preflight": "EXACT_SINGLE_ACTION_JSON_TO_CBOR_MSGPACK_OR_BSON_GRAMMAR_PLUS_VERIFIED_GOAL_COMPILATION",
+      "acceptance": "PRODUCER_INDEPENDENT_CROSS_SUPPLIER_DECODE_MUST_EQUAL_EXACT_SOURCE_JSON",
+      "transaction": "ONE_REPOSITORY_LOCAL_OUTPUT_FILE__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_SINGLE_ACTION_JSON_TO_STRUCTURED_BINARY_GOAL_FAMILY",
+      "current_verified_capability_count": 4,
+      "verification": {
+        "path": "canonical/verification/R2_STRUCTURED_BINARY_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "16947dbae01230fe3739d8016dcdb63c10e17675",
+        "isolated_checks": 16
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1",
+      "capability_id": "docx.document.create.python_docx",
+      "runtime": "canonical/runtime/r2_docx_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "631fcf2aa82d090d1f3ade6199829f060b000937",
+      "preflight": "EXACT_TWO_CLAUSE_LITERAL_DOCX_GRAMMAR_PLUS_CURRENT_DETERMINISTIC_COMPILER_CHAIN",
+      "acceptance": "EXACT_INTENT_SIDECAR_BINDING_PLUS_PRODUCER_INDEPENDENT_STDLIB_OOXML_SEMANTIC_VERIFICATION",
+      "transaction": "DOCX_PLUS_INTENT_SIDECAR__ROLLBACK_BOTH_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_TWO_CLAUSE_LITERAL_DOCX_PLUS_INDEPENDENT_REOPEN_VERIFY_FAMILY",
+      "current_verified_capability_count": 1,
+      "verification": {
+        "path": "canonical/verification/R2_DOCX_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "f47ba33f5d8aed21bd856315380fc5b391a7e314",
+        "isolated_standalone_checks": 5,
+        "isolated_modified_surface_checks": 20
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1",
+      "capability_id": "docx.document.create_from_json_record",
+      "runtime": "canonical/runtime/r2_docx_json_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "27fdb096b00bd5dda21e912a1b740ac79bf35cd4",
+      "preflight": "EXACT_SINGLE_RECORD_JSON_TO_DOCX_REPORT_GRAMMAR_PLUS_CURRENT_DETERMINISTIC_COMPILER_BINDING",
+      "acceptance": "SOURCE_HASH_STABILITY_PLUS_EXACT_INTENT_BINDING_PLUS_PRODUCER_INDEPENDENT_OOXML_SEMANTIC_REOPEN",
+      "transaction": "DOCX_PLUS_INTENT_SIDECAR__ROLLBACK_BOTH_ON_ANY_EXECUTION_BINDING_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_SINGLE_RECORD_JSON_TO_SEMANTICALLY_VERIFIED_DOCX_REPORT_FAMILY",
+      "current_verified_capability_count": 1,
+      "verification": {
+        "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "2ed67b97a6a20338fee346af3e4339823176f24a",
+        "exact_branch_control_replay": "12_OF_12_PASS",
+        "fresh_real_acceptance_verifier_replay": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::STRUCTURED_TABLE_ARTIFACT_FAMILY_V1",
+      "capability_id": "DYNAMIC_VERIFIED_BOUND_STRUCTURED_TABLE",
+      "runtime": "canonical/runtime/r2_structured_table_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "2db9a7b10fab4410e08f8f59a8f414817b4f51c3",
+      "preflight": "EXACT_JSON_RECORDS_TO_XLSX_OR_SQLITE_GRAMMAR_PLUS_CURRENT_VERIFIED_PRODUCER_BINDING",
+      "acceptance": "SOURCE_HASH_STABILITY_PLUS_PRODUCER_INDEPENDENT_SEMANTIC_READBACK_AGAINST_CANONICAL_JSON",
+      "transaction": "ONE_REPOSITORY_LOCAL_OUTPUT_FILE__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_SINGLE_ACTION_JSON_RECORDS_TO_XLSX_OR_SQLITE_GOAL_FAMILY",
+      "current_verified_capability_count": 2,
+      "verification": {
+        "path": "canonical/verification/R2_STRUCTURED_TABLE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "786bf330876f558b08be368f97525a198fcdd060",
+        "focused_remote_replay": "10_OF_10_PASS",
+        "fresh_isolated_carrier_claimed": false
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1",
+      "capability_id": "decision.synthesis.typed.stdlib",
+      "verifier_capability_id": "decision.synthesis.verify.stdlib",
+      "runtime": "canonical/runtime/r2_typed_decision_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "fae1ff72fb5b1369e3fae43ed468ba879fb24f5a",
+      "preflight": "EXACT_TYPED_DECISION_REPOSITORY_LOCAL_JSON_GOAL_GRAMMAR_PLUS_PROJECT_BRAIN_TYPED_DECISION_PROBLEM_V1_SCHEMA",
+      "acceptance": "LOSSLESS_RAW_GOAL_OBLIGATION_COVERAGE_PLUS_SOURCE_SHA_STABILITY_PLUS_PRODUCER_INDEPENDENT_FULL_DECISION_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_OUTPUT_FILE__RESTORE_PREEXISTING_BYTES_OR_REMOVE_NEW_OUTPUT_ON_ANY_EXECUTION_OR_VERIFICATION_FAILURE",
+      "scope": "EXACT_REPOSITORY_LOCAL_TYPED_DECISION_PROBLEM_TO_INDEPENDENTLY_VERIFIED_DECISION_RESULT",
+      "current_verified_capability_count": 2,
+      "verification": {
+        "path": "canonical/verification/R2_TYPED_DECISION_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "f804ec785bdac98855c520c7d275bcd0cda2ed99",
+        "standalone_family_replay": "4_OF_4_PASS",
+        "focused_route_integration": "1_OF_1_PASS"
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::VISUAL_CODE_QR_CODE128_FAMILY_V1",
+      "capability_id": "DYNAMIC_VERIFIED_BOUND_VISUAL_CODE_PRODUCER",
+      "runtime": "canonical/runtime/r2_visual_code_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "59f574d5e6726330f29bc41bf2afeb2044c7f7ea",
+      "preflight": "EXACT_QUOTED_ASCII_PAYLOAD_TO_QR_OR_CODE128_PNG_GRAMMAR_PLUS_VERIFIED_PRODUCER_BINDING",
+      "acceptance": "PRODUCER_INDEPENDENT_ZBARIMG_DECODE_MUST_EQUAL_THE_EXACT_QUOTED_PAYLOAD",
+      "transaction": "ONE_REPOSITORY_LOCAL_PNG_OUTPUT__RESTORE_PREEXISTING_BYTES_OR_REMOVE_NEW_OUTPUT_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_QUOTED_ASCII_PAYLOAD_TO_QR_OR_CODE128_PNG_GOAL_FAMILY",
+      "current_verified_producer_member_count": 2,
+      "independent_verifier_capability_id": "image.code.decode.zbarimg",
+      "verification": {
+        "path": "canonical/verification/R2_VISUAL_CODE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "b40830a085a813963134890ed4bb3248082ab802",
+        "focused_remote_replay": "11_OF_11_PASS",
+        "exact_pinned_producer_replay_qr": true,
+        "exact_pinned_producer_replay_code128": true,
+        "exact_pinned_zbarimg_replay": false,
+        "fresh_live_independent_semantic_decode_replay": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::PLAIN_MARKDOWN_PDF_FAMILY_V1",
+      "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+      "verifier_capability_id": "pdf.extract.text.pypdf",
+      "runtime": "canonical/runtime/r2_markdown_pdf_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "5b2c1b2ac72952006bc257b5fda379dbeebd2d21",
+      "compiler": "canonical/runtime/goal_compiler.py",
+      "compiler_git_blob_sha": "983126e65544efa098870afb8cc69898652dcc4c",
+      "preflight": "EXACT_REPOSITORY_LOCAL_MARKDOWN_TO_PDF_GRAMMAR_PLUS_ASCII_PLAIN_SEMANTIC_SUBSET_PLUS_VERIFIED_PRODUCER_BINDING",
+      "acceptance": "SOURCE_HASH_STABILITY_PLUS_PRODUCER_INDEPENDENT_PYPDF_VISIBLE_TEXT_READBACK_MUST_EQUAL_EXACT_SOURCE_SEMANTIC_PROJECTION",
+      "transaction": "ONE_REPOSITORY_LOCAL_PDF_OUTPUT__RESTORE_PREEXISTING_BYTES_OR_REMOVE_NEW_OUTPUT_ON_ANY_EXECUTION_BINDING_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_REPOSITORY_LOCAL_PLAIN_SEMANTIC_MARKDOWN_TO_PDF",
+      "current_verified_capability_count": 2,
+      "verification": {
+        "path": "canonical/verification/R2_MARKDOWN_PDF_DIRECT_ADEQUACY_VERIFY_20261008_V2.json",
+        "git_blob_sha": "a89b7710298a84651874dcb8b975cbe05ac0709a",
+        "current_main_regression": "34_OF_34_PASS",
+        "public_real_byte_run_id": 37808591307,
+        "public_real_byte_job_id": 113419266807,
+        "public_real_byte_result": "PASS"
+      }
+    }
+  ],
+  "expansion_law": "ADD_A_ROUTE_ONLY_WHEN_BOTH_AN_EXACT_SIDE_EFFECT_FREE_PREFLIGHT_AND_AN_INDEPENDENT_FULL_RAW_OBLIGATION_ACCEPTANCE_VERIFIER_EXIST",
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_CLOSURE",
+    "NO_CLAIM_UNMATCHED_GOALS_ARE_INADEQUATE",
+    "NO_CLAIM_EXECUTION_SUCCESS_ALONE_IS_GOAL_SUCCESS",
+    "NO_CLAIM_THE_CODEC_FAMILY_GENERALIZES_BEYOND_THE_EXACT_DECLARED_GRAMMAR_OR_TO_EXTERNAL_IRREVERSIBLE_EFFECTS",
+    "NO_CLAIM_THE_DOCX_FAMILY_GENERALIZES_BEYOND_THE_EXACT_TWO_CLAUSE_GRAMMAR_OR_TO_EXTERNAL_IRREVERSIBLE_EFFECTS",
+    "NO_TERMINAL_CREDIT",
+    "NO_CLAIM_THE_DOCX_JSON_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_JSON_RECORD_REPORT_GRAMMAR",
+    "NO_CLAIM_THE_STRUCTURED_TABLE_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_XLSX_AND_SQLITE_GRAMMARS",
+    "NO_CLAIM_THE_TYPED_DECISION_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_TYPED_INPUT_AND_GOAL_GRAMMAR",
+    "NO_CLAIM_THE_VISUAL_CODE_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_QUOTED_ASCII_QR_AND_CODE128_GRAMMARS",
+    "NO_CLAIM_THE_MARKDOWN_PDF_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_ASCII_HEADINGS_AND_PLAIN_PARAGRAPH_SEMANTIC_SUBSET_OR_PROVES_LAYOUT_OR_PROFESSIONAL_QUALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "current_route_count": 10,
+  "exact_cell_count": 3,
+  "route_expansion_note": "THREE_EXACT_CELLS_PLUS_SEVEN_BOUNDED_FAMILIES_ACTIVE__CODEC__LITERAL_DOCX__JSON_RECORD_DOCX__STRUCTURED_TABLE__TYPED_EVIDENCE_DECISION__VISUAL_CODE_QR_CODE128__PLAIN_SEMANTIC_MARKDOWN_PDF__EVERY_ROUTE_REQUIRES_EXACT_PREFLIGHT_FULL_RAW_ACCEPTANCE_AND_MATCHED_FAILURE_NO_FALLTHROUGH",
+  "runtime_binding": {
+    "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+    "git_blob_sha": "23747316537884718933a61403b7be5383c1242c"
+  },
+  "bounded_family_count": 7,
+  "supersedes": {
+    "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V5.json",
+    "git_blob_sha": "00e7e58b9ad17b9b56ec34b2c9d4d505fea4faa1",
+    "reason": "ADD_VERIFIED_TRANSACTIONAL_PLAIN_SEMANTIC_MARKDOWN_TO_PDF_DIRECT_ADEQUACY_FAMILY_AND_FIX_EXACT_MARKDOWN_PDF_COMPILER_AMBIGUITY"
+  }
+}

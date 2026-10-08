@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-08",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V17_NINE_DIRECT_ROUTES__SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V18_TEN_DIRECT_ROUTES__SEVEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -18,18 +18,18 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V17.json",
-    "git_blob_sha": "5e8b8a5a0ed0236a7d2fc57f38a17a94b5f49bdb"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V18.json",
+    "git_blob_sha": "b45d662b29b2933f01050f1b7438687959bd5e0d"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V5.json",
-    "activation_git_blob_sha": "00e7e58b9ad17b9b56ec34b2c9d4d505fea4faa1",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V6.json",
+    "activation_git_blob_sha": "a614bcbae357088c87e5e147a0cca9fa24151995",
     "exact_cell_count": 3,
-    "bounded_family_count": 6,
-    "current_route_count": 9,
-    "current_activation_status": "THREE_EXACT_CELLS_PLUS_SIX_BOUNDED_FAMILIES",
+    "bounded_family_count": 7,
+    "current_route_count": 10,
+    "current_activation_status": "THREE_EXACT_CELLS_PLUS_SEVEN_BOUNDED_FAMILIES",
     "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
-    "direct_runtime_git_blob_sha": "b93a4ae8876773c7f71bbb764c71440c412a716c",
+    "direct_runtime_git_blob_sha": "23747316537884718933a61403b7be5383c1242c",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -50,11 +50,16 @@
         "path": "canonical/verification/R2_VISUAL_CODE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
         "git_blob_sha": "b40830a085a813963134890ed4bb3248082ab802",
         "status": "PASS__EXACT_BRANCH_CONTROL_REPLAY_11_OF_11__PINNED_PRODUCER_REPLAY_BOTH_FORMATS__INDEPENDENT_LIVE_DECODE_EXACT__ZERO_CREDIT"
+      },
+      {
+        "path": "canonical/verification/R2_MARKDOWN_PDF_DIRECT_ADEQUACY_VERIFY_20261008_V2.json",
+        "git_blob_sha": "a89b7710298a84651874dcb8b975cbe05ac0709a",
+        "status": "PASS__FINAL_REBASED_MARKDOWN_PDF_FAMILY__CURRENT_MAIN_REGRESSION_34_OF_34__PUBLIC_REAL_BYTE_PASS"
       }
     ],
-    "latest_verification_path": "canonical/verification/R2_VISUAL_CODE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
-    "latest_verification_git_blob_sha": "b40830a085a813963134890ed4bb3248082ab802",
-    "latest_verification_status": "PASS__EXACT_BRANCH_CONTROL_REPLAY_11_OF_11__PINNED_PRODUCER_REPLAY_BOTH_FORMATS__INDEPENDENT_LIVE_DECODE_EXACT__ZERO_CREDIT"
+    "latest_verification_path": "canonical/verification/R2_MARKDOWN_PDF_DIRECT_ADEQUACY_VERIFY_20261008_V2.json",
+    "latest_verification_git_blob_sha": "a89b7710298a84651874dcb8b975cbe05ac0709a",
+    "latest_verification_status": "PASS__FINAL_REBASED_MARKDOWN_PDF_FAMILY__CURRENT_MAIN_REGRESSION_34_OF_34__PUBLIC_REAL_BYTE_PASS"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
@@ -218,7 +223,7 @@
   "sufficient_closure": {
     "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V7.json",
     "git_blob_sha": "c78a157335c90864b01edffc03b8e19e1fc48f58",
-    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__SIX_BOUNDED_DIRECT_FAMILIES_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
+    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__SEVEN_BOUNDED_DIRECT_FAMILIES_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
     "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY"
   },
   "policy_adequacy_capability_escape": {
@@ -320,6 +325,23 @@
     "exact_pinned_producer_replay_qr": true,
     "exact_pinned_producer_replay_code128": true,
     "exact_pinned_zbarimg_replay": false,
+    "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
+    "global_coverage_claimed": false
+  },
+  "markdown_pdf_direct_adequacy": {
+    "path": "canonical/runtime/r2_markdown_pdf_direct_adequacy_v1.py",
+    "git_blob_sha": "5b2c1b2ac72952006bc257b5fda379dbeebd2d21",
+    "compiler_path": "canonical/runtime/goal_compiler.py",
+    "compiler_git_blob_sha": "983126e65544efa098870afb8cc69898652dcc4c",
+    "verification_path": "canonical/verification/R2_MARKDOWN_PDF_DIRECT_ADEQUACY_VERIFY_20261008_V2.json",
+    "verification_git_blob_sha": "a89b7710298a84651874dcb8b975cbe05ac0709a",
+    "route_id": "DIRECT_ADEQUACY::PLAIN_MARKDOWN_PDF_FAMILY_V1",
+    "producer_capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+    "independent_verifier_capability_id": "pdf.extract.text.pypdf",
+    "current_main_regression": "34_OF_34_PASS",
+    "public_real_byte_run_id": 37808591307,
+    "public_real_byte_job_id": 113419266807,
+    "exact_plain_semantic_subset_only": true,
     "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
     "global_coverage_claimed": false
   }

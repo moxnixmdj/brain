@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_R2_MARKDOWN_PDF_DIRECT_ADEQUACY_VERIFY_20261008_V2",
+  "date": "2026-10-08",
+  "status": "PASS__FINAL_REBASED_MARKDOWN_PDF_FAMILY__CURRENT_MAIN_REGRESSION_34_OF_34__PUBLIC_REAL_BYTE_PASS",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r2-markdown-pdf-direct-adequacy-v2-20261008",
+    "head_before_receipt": "760cee86bc85bdfa19728692ac87c690d1fec0db",
+    "exact_blobs": {
+      "canonical/runtime/goal_compiler.py": "983126e65544efa098870afb8cc69898652dcc4c",
+      "canonical/runtime/r2_markdown_pdf_direct_adequacy_v1.py": "5b2c1b2ac72952006bc257b5fda379dbeebd2d21",
+      "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py": "23747316537884718933a61403b7be5383c1242c",
+      "canonical/tests/test_r2_markdown_pdf_direct_adequacy_v1.py": "11e99382bbba19346c1df69fde047f3f7ebdc4d8",
+      "canonical/tests/test_r2_markdown_pdf_direct_integration_v1.py": "aec1ff7a15e5198d980cac8e294143de6c5af6be",
+      "canonical/runtime/bound_capabilities/pandoc_weasyprint.py": "1d7e867bb4837b7589d8346c85fe97db4c1166be",
+      "canonical/runtime/bound_capabilities/pdf_pypdf.py": "b63f658d269078f37f8a67be31ce4993b6cf3fcc"
+    }
+  },
+  "supersedes": {
+    "path": "canonical/verification/R2_MARKDOWN_PDF_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "reason": "V1 bound the pre-visual-code compiler/router ancestry; V2 binds the final rebased current-main bytes."
+  },
+  "bounded_family": {
+    "route_id": "DIRECT_ADEQUACY::PLAIN_MARKDOWN_PDF_FAMILY_V1",
+    "scope": "EXACT_REPOSITORY_LOCAL_PLAIN_SEMANTIC_MARKDOWN_TO_PDF",
+    "source_subset": "ASCII headings plus plain paragraph lines only",
+    "producer_capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+    "verifier_capability_id": "pdf.extract.text.pypdf",
+    "transaction": "ONE_REPOSITORY_LOCAL_OUTPUT__ROLLBACK_UNLESS_INDEPENDENT_VISIBLE_TEXT_ACCEPTANCE_PASSES"
+  },
+  "isolated_current_main_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "suites": [
+      "canonical.tests.test_r2_direct_end_to_end_adequacy_v1",
+      "canonical.tests.test_r2_visual_code_direct_adequacy_v1",
+      "canonical.tests.test_r2_visual_code_direct_integration_v1",
+      "canonical.tests.test_r2_markdown_pdf_direct_adequacy_v1",
+      "canonical.tests.test_r2_markdown_pdf_direct_integration_v1"
+    ],
+    "tests_run": 34,
+    "passed": 34,
+    "failed": 0,
+    "errors": 0
+  },
+  "independent_public_real_byte_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "r2-markdown-pdf-direct-adequacy-20261008",
+    "workflow": ".github/workflows/verify-r2-markdown-pdf-direct.yml",
+    "final_workflow_head": "8c862d7b83b77f68e25403d505303908b84b8e93",
+    "run_id": 37808591307,
+    "job_id": 113419266807,
+    "conclusion": "success",
+    "exact_bound_blobs": {
+      "canonical/runtime/r2_markdown_pdf_direct_adequacy_v1.py": "5b2c1b2ac72952006bc257b5fda379dbeebd2d21",
+      "canonical/runtime/goal_compiler.py": "983126e65544efa098870afb8cc69898652dcc4c",
+      "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py": "23747316537884718933a61403b7be5383c1242c",
+      "canonical/runtime/bound_capabilities/pandoc_weasyprint.py": "1d7e867bb4837b7589d8346c85fe97db4c1166be",
+      "canonical/runtime/bound_capabilities/pdf_pypdf.py": "b63f658d269078f37f8a67be31ce4993b6cf3fcc"
+    },
+    "observed_dependencies": {
+      "pandoc": "3.1.3",
+      "weasyprint": "61.1",
+      "pypdf": "6.19.0"
+    },
+    "verified": [
+      "EXACT_FINAL_REBASED_PRIVATE_BLOB_BINDING",
+      "REAL_PANDOC_WEASYPRINT_PDF_GENERATION",
+      "SOURCE_BYTES_IMMUTABLE",
+      "PRODUCER_INDEPENDENT_PYPDF_READBACK",
+      "EXACT_VISIBLE_TEXT_PROJECTION_MATCH",
+      "SEMANTIC_MISMATCH_NEGATIVE_CONTROL_REJECTED"
+    ]
+  },
+  "compiler_truth": {
+    "falsifier_before_fix": "EXACT_MARKDOWN_TO_PDF_GOAL_TIED_PDF_EXTRACTOR_CAPABILITIES_IN_GENERIC_SCORING",
+    "final_mode": "DETERMINISTIC_EXACT_MARKDOWN_PDF_CONVERSION",
+    "generic_scoring_bypass_for_exact_family": true
+  },
+  "hard_nonclaims": [
+    "NO_ARBITRARY_MARKDOWN_SEMANTIC_CLOSURE",
+    "NO_PDF_LAYOUT_TYPOGRAPHY_LINK_IMAGE_OCR_OR_PROFESSIONAL_QUALITY_AUTHORITY",
+    "NO_GENERAL_NATURAL_LANGUAGE_CLOSURE",
+    "NO_GLOBAL_R2_COVERAGE_CLAIM",
+    "NO_TERMINAL_GOAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
