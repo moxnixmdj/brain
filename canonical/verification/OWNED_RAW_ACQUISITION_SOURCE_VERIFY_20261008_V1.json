@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_OWNED_RAW_ACQUISITION_SOURCE_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "SOURCE_REVIEW_PASS__CI_ZERO_JOBS",
+  "branch": "live-brain-owned-raw-acquisition-v2-20261008",
+  "subject": {
+    "runtime_sha": "1e788aa3f4cb0c658aa7077a9bf3c3387a04f9cf",
+    "tests_sha": "9f226eb085e1373c497acc30fe481e04ed482d04"
+  },
+  "verified_by_source_review": [
+    "RAW_BOUND_NEW_PRIMITIVE_WITHOUT_HOST_EXPANDER_HAS_OWNED_ACQUISITION_FALLBACK",
+    "GENERATED_ORIGIN_MISSION_IS_CONTENT_ADDRESSED_AND_IMMUTABLE",
+    "OWNED_ACQUISITION_REUSES_EXISTING_ASTRA_DISCOVER_VERIFY_PROMOTE_REPLAN_PATH",
+    "ORIGINAL_STORED_OBLIGATION_REPLAY_REQUIRED_BEFORE_RETRY_RESOLUTION",
+    "GENERIC_ABSTRACT_GAPS_STILL_REQUIRE_AUTHENTICATED_V12_EXPANDER",
+    "ACQUISITION_FAILURE_REMAINS_FAIL_CLOSED"
+  ],
+  "ci": {
+    "workflow_run_id": 37767463148,
+    "jobs_created": 0,
+    "execution_evidence": false
+  },
+  "main_intervening_changes": {
+    "compared_from": "457ef10e4f03e08aa0172d1077eba702dae22107",
+    "compared_to": "d2f5e4375f4210c1bd0075c1213d043c33b5dae2",
+    "live_runtime_touched": false,
+    "live_runtime_test_touched": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_TEST_SUITE_EXECUTED",
+    "NO_CLAIM_OWNED_ACQUISITION_SUPPORTS_ARBITRARY_CAPABILITY_CLASSES",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
