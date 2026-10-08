@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_EVALUATION_LAW_LOCAL_EXACT_BLOB_REPLAY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "LOCAL_EXACT_GIT_BLOB_REPLAY_PASS__45_OF_45__NOT_INDEPENDENT_CI__ZERO_CREDIT",
+  "scope": {
+    "runtime_files": [
+      {"path":"canonical/runtime/gdpval_arbitrary_hidden_evaluator_boundary_v1.py","git_blob_sha":"b5fc086510798ac39470834f5c27c309b9646365"},
+      {"path":"canonical/runtime/gdpval_crowdbt_unseen_entrant_identifiability_v1.py","git_blob_sha":"0c481581c6eee925ca6205e574fd29c0c8a9fba4"},
+      {"path":"canonical/runtime/gdpval_evaluator_escape_trichotomy_v1.py","git_blob_sha":"0827daf8c91b9756c5de0a04852007b94bfb4c6e"},
+      {"path":"canonical/runtime/gdpval_necessary_dominance_certificate_v1.py","git_blob_sha":"da381f04e2ae2c99d155b7bf9a381997971b3b9b"},
+      {"path":"canonical/runtime/gdpval_public_information_separator_v1.py","git_blob_sha":"5fc5ed9575cc8ca02364e4edf8e5c96633d02c65"}
+    ],
+    "test_files": [
+      {"path":"canonical/tests/test_gdpval_arbitrary_hidden_evaluator_boundary_v1.py","git_blob_sha":"a50af455e456237d049a4ee185b84e5a9cc13fe7","tests":7},
+      {"path":"canonical/tests/test_gdpval_crowdbt_unseen_entrant_identifiability_v1.py","git_blob_sha":"a8d671c7de960923acc46aee116945dd0c010496","tests":7},
+      {"path":"canonical/tests/test_gdpval_evaluator_escape_trichotomy_v1.py","git_blob_sha":"cf1c3bed5457012da5c81ed600ad8f7b91e715a2","tests":9},
+      {"path":"canonical/tests/test_gdpval_necessary_dominance_certificate_v1.py","git_blob_sha":"31562e5cea968a9934490ccd1192a2e598f6c84a","tests":12},
+      {"path":"canonical/tests/test_gdpval_public_information_separator_v1.py","git_blob_sha":"8c5764f3723e73662d3354eb380fbac042b2956b","tests":10}
+    ]
+  },
+  "execution": {
+    "runner": "python -m unittest discover -v canonical/tests -p test_gdpval_*_v1.py",
+    "tests_run": 45,
+    "failures": 0,
+    "errors": 0,
+    "exit_code": 0,
+    "conclusion": "PASS"
+  },
+  "environment_note": "A NON-GDPVAL ARTIFACT_TOOL SPREADSHEET WARMUP ERROR WAS EMITTED DURING PYTHON STARTUP; IT DID NOT AFFECT UNITTEST EXECUTION OR EXIT STATUS.",
+  "verified_behavior": [
+    "E_M_U_ROUTER_FAILS_CLOSED_WITHOUT_REQUIRED 220-SCOPE RECEIPTS",
+    "PUBLIC-WORDING MONOTONICITY IS NOT ACCEPTED AS AN M PROOF",
+    "PARTIAL U EQUALITY IS REJECTED",
+    "NECESSARY-DOMINANCE ROUTE REQUIRES OWNER-ENVELOPE SOUNDNESS AND BASIS COMPLETENESS",
+    "CROWDBT INCUMBENT-ONLY STATE LEAVES UNSEEN BRAIN STRENGTH UNIDENTIFIED",
+    "UNEQUAL OWNER-VISIBLE LAWS PRODUCE A SEPARATING BLIND JUDGE IN THE FINITE-LAW CONSTRUCTION",
+    "ALL RUNTIMES PRESERVE TERMINAL_CREDIT_DELTA_ZERO"
+  ],
+  "boundary": [
+    "LOCAL REPLAY IS NOT INDEPENDENT CI OR AN EXTERNAL VERIFICATION CARRIER",
+    "STRUCTURAL UNIT TESTS DO NOT AUTHENTICATE EMPIRICAL OWNER EVALUATOR PREMISES",
+    "NO GDPVAL ACCEPTANCE OR TERMINAL CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
