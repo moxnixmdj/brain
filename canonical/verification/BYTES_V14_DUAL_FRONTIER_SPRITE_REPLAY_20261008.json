@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V14_DUAL_FRONTIER_20261008",
+  "date": "2026-10-08",
+  "scope_lock": "BYTES_RESEARCH_ONLY",
+  "status": "INDEPENDENT_EXACT_GIT_BLOB_REPLAY_PASS",
+  "baseline_v13_fixed_decoder_bytes": 2615,
+  "variants": [
+    {
+      "name": "compact",
+      "path": "canonical/runtime/bytes_v14_single_artifact_compact_v14.py",
+      "git_blob_sha": "16d222fa1f7a36d585d4042b7ee64f19f6026feb",
+      "raw_bytes": 5951,
+      "raw_sha256": "6217085ae64049fdd5f72bb78ff2d22149879c3a356ef71e40ab1caed489ed55",
+      "fixed_decoder_payload_bytes": 2609,
+      "payload_sha256": "4b31cea90155484788e6a609e9d451d8f0892d6312c036ae5bc11b74b26bc705",
+      "tail_bound_check": "independently_executed_external_audit"
+    },
+    {
+      "name": "self_auditing",
+      "path": "canonical/runtime/bytes_v14_single_artifact_selfaudit_v14.py",
+      "git_blob_sha": "0aed11c46f751a8e2ec4532d59881919bd6950f5",
+      "raw_bytes": 6001,
+      "raw_sha256": "69f119eea24690d9b247cc10bdbeee0529e9d60dd70cc07de6b54a9eccd4146e",
+      "fixed_decoder_payload_bytes": 2627,
+      "payload_sha256": "0a6a74865098a85a165acad6e191bea1c740d18b7ae4a108f076fe9464d20da2",
+      "tail_bound_check": "executed_inside_check"
+    }
+  ],
+  "carrier": {
+    "provider": "SPRITES",
+    "name": "h100-real-image-v1",
+    "id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3"
+  },
+  "tests_per_variant": {
+    "existing_closed_checker": "PASS",
+    "exact_congruence_edge_basis_vs_v13": "MATCH",
+    "frozen_expression": 6,
+    "frozen_scalar": 9,
+    "frozen_sequence": 12,
+    "total_regressions": 27,
+    "pointwise_programs": 820,
+    "scalar_differential_cases": 210740,
+    "symbolic_interval_cells": 1292,
+    "tail_bound_violations": 0,
+    "lossless_fixed_decoder_roundtrip": "PASS"
+  },
+  "encoding": {
+    "format": "RAW_LZMA1",
+    "dict_size": 8192,
+    "lc": 0,
+    "lp": 0,
+    "pb": 0,
+    "mode": "NORMAL",
+    "match_finder": "BT2",
+    "nice_len": 32
+  },
+  "accounting_limits": [
+    "PYTHON_RUNTIME_AND_DECODER_NOT_COUNTED",
+    "SMALL_MODEL_DERIVATION_REMAINS_RELIANT_ON_SYMBOLIC_TRANSLATION_RULES",
+    "FINITE_DECLARED_DSL_ONLY",
+    "NOT_A_GLOBAL_MINIMUM_DESCRIPTION_PROOF",
+    "ZERO_TERMINAL_GOAL_CREDIT"
+  ]
+}
