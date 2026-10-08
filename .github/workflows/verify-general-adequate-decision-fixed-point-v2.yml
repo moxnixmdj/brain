@@ -5,7 +5,11 @@ on:
     paths:
       - canonical/runtime/general_adequate_decision_fixed_point_v2.py
       - canonical/runtime/r2_direct_end_to_end_adequacy_v1.py
+      - canonical/runtime/goal_compiler.py
+      - canonical/runtime/raw_goal_exact_literal_acceptance_v1.py
       - canonical/tests/test_r2_direct_end_to_end_adequacy_v1.py
+      - canonical/tests/test_goal_compiler.py
+      - canonical/tests/test_raw_goal_exact_literal_acceptance_v1.py
       - canonical/runtime/live_brain_runtime_v1.py
       - canonical/tests/test_general_adequate_decision_fixed_point_v2.py
       - canonical/tests/test_live_brain_runtime_v1.py
