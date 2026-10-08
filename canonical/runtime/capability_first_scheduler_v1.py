@@ -14,7 +14,7 @@ from fractions import Fraction
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_V1"
-MILESTONE = "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT"
+MISSION_OBJECTIVE = "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE"\nMILESTONE = "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE"
 CAPABILITY_LEARNING_LOOP = (
     "SOLVE",
     "VERIFY",
@@ -126,6 +126,7 @@ def rank_work(work: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         "schema": SCHEMA,
         "status": "CAPABILITY_FIRST_RANKING",
         "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+        "mission_objective": MISSION_OBJECTIVE,
         "milestone": MILESTONE,
         "capability_learning_loop": list(CAPABILITY_LEARNING_LOOP),
         "ranked": [

@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE",
+  "controller": {
+    "path": "canonical/runtime/general_adequate_decision_controller_v1.py"
+  },
+  "scheduler_cut": {
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V1.json"
+  },
+  "judgment_model_policy": {
+    "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
+  },
+  "primary_primitive": "ESCAPE_POLICY_ADEQUACY",
+  "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
+  "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
+  "external_closed_model_dependency": false
+}
