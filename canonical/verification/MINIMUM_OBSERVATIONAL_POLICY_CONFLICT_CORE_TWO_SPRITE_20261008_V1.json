@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_MINIMUM_OBSERVATIONAL_POLICY_CONFLICT_CORE_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "EXACT_PINNED_TWO_SPRITE_FOCUSED_REPLAY_18_OF_18_EACH__ZERO_TERMINAL_CREDIT",
+  "source_commit": "4b36b925ef84cf6347d35ada2fa397bfbbf9a151",
+  "source_blobs": {
+    "canonical/runtime/finite_observational_obstruction_reducer_v1.py": "4e860b76604185596e46fbb2ef5d08f56b302e52",
+    "canonical/tests/test_finite_observational_obstruction_reducer_v1.py": "20ea629a3232c0482c448a3b616563e4ef203f4a",
+    "canonical/runtime/finite_identifiability.py": "c2bf32dd1e22f00a2fa08b043aa8275a07c05bed",
+    "canonical/runtime/effect_broker_receipt_resolver_v2.py": "7f4eeeb19def420d0014631b99c5e2dc3a30592e"
+  },
+  "method": {
+    "premise": "Finite declared reached H, declared Q outcomes total on H, declared policy adequacy region memberships P, independently byte-bound certificate objects; actual semantic adequacy remains unproved",
+    "calculation": "BFS over intersections of declared policy support sets to find minimum-cardinality common-policy obstruction; bounded state budget 8192; deterministic verified 1-minimal deletion fallback",
+    "root_cause_split": [
+      "NO_DECLARED_ADEQUATE_POLICY_FOR_AN_INDIVIDUAL_REGION",
+      "DECLARED_INDIVIDUALLY_ADEQUATE_POLICIES_EXIST_BUT_FINAL_Q_CLASS_HAS_NO_COMMON_POLICY"
+    ],
+    "positive_receipt_boundary": "Content authenticates the referenced certificate bytes; no independent adequacy semantics proof, no target scope proof"
+  },
+  "verification": [
+    {
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "test_runner": "Python importlib pinned assertion functions, no pytest",
+      "passed": 18,
+      "failed": 0
+    },
+    {
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "test_runner": "Independent Python importlib pinned assertion functions, no pytest",
+      "passed": 18,
+      "failed": 0
+    }
+  ],
+  "differential": {
+    "cases": 140,
+    "oracle": "Independent exhaustive combinatorial search over each generated <=7 region, <=5 policy model",
+    "all_minimum_sizes_matched": true,
+    "verified_irreducible_fallback_example": "14 region, 14 policy state-space budget overflow returned 1-minimal core, not false exact minimum"
+  },
+  "authority": {
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "policy_adequacy_semantics_verified": false,
+    "real_target_scope_complete": false,
+    "global_q_information_complete": false,
+    "u_empty_authorized": false,
+    "terminal_authority": false,
+    "ready_for_terminal_merger": false
+  },
+  "next_required": "Bind authenticated actual policy adequacy semantics and target scope completeness, then independent replay and terminal reducer"
+}
