@@ -14,7 +14,7 @@ from typing import Any
 
 SCHEMA = "BRAIN_SOURCE_BOUND_SHARED_MODAL_AND_V1"
 
-_MODAL = re.compile(r"\b(must|shall|required to|is required to)\b", re.I)
+_MODAL = re.compile(r"\b(must|shall|should|required to|is required to)\b", re.I)
 _AND = re.compile(r"\s+and\s+", re.I)
 _AMBIGUOUS = re.compile(
     r"\b(unless|except|excepting|either|neither|respectively|former|latter|"
