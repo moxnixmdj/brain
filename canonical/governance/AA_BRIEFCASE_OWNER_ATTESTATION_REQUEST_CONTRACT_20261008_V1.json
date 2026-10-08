@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_OWNER_ATTESTATION_REQUEST_CONTRACT_V1",
+  "date": "2026-10-08",
+  "status": "READY_EXTERNAL_REQUEST_CONTRACT__NO_REQUEST_SENT__ZERO_TERMINAL_CREDIT",
+  "purpose": "ALLOW THE AA_BRIEFCASE OWNER OR AN AUTHORIZED EVALUATION OPERATOR TO PROVE CURRENT-EPOCH BRAIN NONINFERIORITY WITHOUT DISCLOSING PRIVATE BENCHMARK CONTENT.",
+  "requested_evaluation": {
+    "benchmark": "AA-Briefcase v1.1",
+    "comparator": "Claude Opus 5.5 (Max, Default Fallback)",
+    "requirement": "EVALUATE THE CONTENT-ADDRESSED BRAIN SUBJECT ON THE COMPLETE CURRENT SCORED PRIVATE AA_BRIEFCASE SCOPE AND DETERMINE WHETHER BRAIN WEAKLY DOMINATES THE CURRENT OPUS55 REFERENCE ON EVERY LOAD-BEARING GRADING RELATION.",
+    "accepted_terminal_relation": "BRAIN_WEAKLY_DOMINATES_CURRENT_OPUS55"
+  },
+  "preferred_response_format": {
+    "type": "SIGNED_ATTESTATION",
+    "preferred_container": "in-toto Statement v1 carried in a DSSE/Sigstore-compatible envelope",
+    "semantically_equivalent_signed_format_acceptable": true,
+    "required_core_claims": [
+      "BRAIN SUBJECT DIGEST",
+      "AA_BRIEFCASE_V1_1 IDENTITY",
+      "CURRENT OWNER EPOCH IDENTITY OR DATE",
+      "CURRENT OPUS55 MAX DEFAULT-FALLBACK COMPARATOR IDENTITY",
+      "COMPLETE SCORED PRIVATE SCOPE WAS USED",
+      "ALL LOAD-BEARING GRADING RELATIONS WERE INCLUDED",
+      "BRAIN WEAKLY DOMINATES CURRENT OPUS55"
+    ],
+    "requested_audit_commitments": [
+      "PRIVATE TASK POPULATION SHA256 OR EQUIVALENT OPAQUE COMMITMENT",
+      "LOAD-BEARING CHECK POPULATION SHA256 OR EQUIVALENT OPAQUE COMMITMENT",
+      "OPUS REFERENCE SUBJECT SHA256 OR EQUIVALENT OPAQUE COMMITMENT",
+      "CURRENT GRADING-PROTOCOL MANIFEST IDENTITY OR HASH"
+    ],
+    "privacy": "NO PRIVATE TASK TEXT RUBRIC TEXT CHECK IDS OR PER-CHECK VERDICTS NEED TO BE DISCLOSED."
+  },
+  "preferred_in_toto_predicate": {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "brain-aa-briefcase-candidate",
+        "digest": {
+          "sha256": "<BRAIN_SUBJECT_SHA256>"
+        }
+      }
+    ],
+    "predicateType": "https://project-brain.local/attestation/aa-briefcase-current-epoch-noninferiority/v1",
+    "predicate": {
+      "benchmark": "AA-Briefcase v1.1",
+      "target_model": "Claude Opus 5.5 (Max, Default Fallback)",
+      "target_observed_date": "2026-10-08",
+      "grading_protocol_manifest_git_blob_sha": "5c77f294e09d4933e3a3175c46af225b414f4702",
+      "task_count": 91,
+      "private_task_population_sha256": "<OPAQUE_SHA256>",
+      "load_bearing_check_population_sha256": "<OPAQUE_SHA256>",
+      "opus_reference_subject_sha256": "<OPAQUE_SHA256>",
+      "private_scope_complete": true,
+      "all_load_bearing_checks_included": true,
+      "brain_weakly_dominates_current_opus55": true,
+      "official_owner_elo_claimed": false,
+      "historical_1822_epoch_rewritten": false
+    }
+  },
+  "alternatives_if_owner_cannot_issue_scope_complete_attestation": [
+    "DETAILED SCOPE-COMPLETE E_M_U RECEIPT OVER PRIVATE CHECKS",
+    "ONE MATCHED CURRENT-EPOCH INDEPENDENT OR OWNER-VERIFIED BRAIN ELO RECEIPT"
+  ],
+  "explicitly_not_requested": [
+    "PRIVATE TASK CONTENT",
+    "PRIVATE RUBRIC CONTENT",
+    "PRIVATE CHECK IDENTIFIERS",
+    "PER-CHECK JUDGE TRANSCRIPTS",
+    "HISTORICAL 1822 EPOCH RECONSTRUCTION",
+    "A SECOND AA_BRIEFCASE RUN FOR THE SECOND FAMILY ALIAS"
+  ],
+  "hard_nonclaims": [
+    "NO REQUEST HAS BEEN SENT.",
+    "NO CLAIM THE OWNER SUPPORTS IN_TOTO OR DSSE.",
+    "NO CLAIM THE OWNER WILL ISSUE THE ATTESTATION.",
+    "NO CLAIM THE SERVICE WOULD BE FREE.",
+    "NO ACCEPTANCE OR TERMINAL CREDIT."
+  ]
+}
