@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_ROBUST_POLICY_ADEQUACY_CEGAR_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__5_OF_5_ON_TWO_INDEPENDENT_SPRITES__REAL_CROSS_DOMAIN_COVER_HOLE_REPRODUCED__ZERO_TERMINAL_CREDIT",
+  "branch": "research/universal-residual-unsat-certificate-20261008-v1",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/robust_policy_adequacy_cegar_v1.py",
+      "git_blob_sha": "be36a7c934ab9c1b110bc945395ee6d03fde47b1"
+    },
+    "tests": {
+      "path": "canonical/tests/test_robust_policy_adequacy_cegar_v1.py",
+      "git_blob_sha": "44eb0127f889afa705201062316966f7562aa067"
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_passed": 5,
+      "tests_run": 5
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_passed": 5,
+      "tests_run": 5
+    }
+  ],
+  "verified": [
+    "COMMON_POLICY_FIRST_IS_PRESERVED",
+    "POLICY_COVER_HOLE_RETURNS_EXACT_UNCOVERED_MODEL",
+    "ONE_STEP_DISCRIMINATOR_IS_SELECTED_ONLY_WHEN_EVERY_SURVIVING_MODEL_HAS_AT_LEAST_ONE_AUTHENTICATED_POLICY",
+    "MISSING_ADEQUACY_AUTHENTICATION_FAILS_CLOSED",
+    "UNPROVED_REFINEMENT_CANNOT_SHRINK_THE_SOUND_TOP_OVERAPPROXIMATION"
+  ],
+  "real_cross_domain_probe": {
+    "semantic_state": "TOP_OVER_TWO_REAL_POLICY_MEMBERSHIP_ATOMS",
+    "authenticated_policies": [
+      "SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_POLICY_V1",
+      "P2_INFORMATION_SAFE_EXPLICIT_CONTRACT_TOP_LAW_POLICY_V1"
+    ],
+    "rejected_policy_adequacy_bindings": 0,
+    "result": "AUTHENTICATED_POLICY_COVER_INCOMPLETE",
+    "exact_uncovered_model": {
+      "SYNTHESIS_TYPED_VISIBLE_SUPPORT_COMMON_POLICY_TOP_LAW_V1": false,
+      "P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1": false
+    },
+    "interpretation": "THE_CURRENT_REAL_AUTHENTICATED_POLICY_INVENTORY_HAS_NO_CERTIFIED_POLICY_FOR_THIS_MODEL__A_DISCRIMINATOR_ALONE_CANNOT_CLOSE_A_POLICY_COVER_HOLE"
+  },
+  "capability_effect": {
+    "source_mechanism": "P3_ROBUST_POLICY_ADEQUACY_CEGAR_V1",
+    "generalized_capability": "DECISION_RELEVANCE_MINIMUM_INFORMATION_ROBUST_POLICY_LOOP",
+    "reusable_across_domains": true,
+    "benchmark_specific": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TWO_POLICY_INVENTORY_IS_COMPLETE",
+    "NO_CLAIM_THE_UNCOVERED_BOOLEAN_MODEL_CORRESPONDS_TO_A_REACHABLE_REAL_TARGET_CONTEXT_WITHOUT_SEPARATE_SCOPE_FIDELITY",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
