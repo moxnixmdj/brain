@@ -105,6 +105,42 @@ class R2VisualCodeDirectAdequacyV1Tests(unittest.TestCase):
             out["raw_acceptance_obligation_count"],
         )
 
+    @patch.object(visual.bound_exec, "execute")
+    def test_code128_verified_execution_adapter_commits_after_exact_decode(self, execute):
+        pf = visual.preflight({"task_id": "code128-pass", "goal": BAR_GOAL})
+        self.assertTrue(pf["matched"], pf)
+        self.assertEqual(pf["execution_mode"], "VERIFIED_BOUND_EXECUTION_ADAPTER")
+
+        def fake_execute(*args, **kwargs):
+            BAR.write_bytes(b"\x89PNG\r\n\x1a\nproducer")
+            return {
+                "pass": True,
+                "capability_id": pf["capability_id"],
+                "registry_file_sha256": pf["registry_file_sha256"],
+                "registry_entry_sha256": pf["registry_entry_sha256"],
+                "rendered_action_sha256": pf["rendered_action_sha256"],
+                "result": {
+                    "output_path": pf["output_path"],
+                    "output_verified": True,
+                },
+            }
+
+        execute.side_effect = fake_execute
+        out = visual.run(
+            {"task_id": "code128-pass", "goal": BAR_GOAL},
+            verifier_provider=lambda p: {
+                "verified": True,
+                "producer_independent": True,
+                "supplier_packages_disjoint": True,
+                "decoded_payload": p["payload"],
+            },
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["format"], "CODE128")
+        self.assertEqual(out["execution_mode"], "VERIFIED_BOUND_EXECUTION_ADAPTER")
+        self.assertTrue(out["transaction_committed"])
+        self.assertTrue(out["actual_goal_satisfaction_verified"])
+
     @patch.object(visual.live_bound, "run_raw_goal")
     def test_wrong_decoded_payload_rolls_back_new_artifact(self, execute):
         pf = visual.preflight({"task_id": "qr-mismatch", "goal": QR_GOAL})
