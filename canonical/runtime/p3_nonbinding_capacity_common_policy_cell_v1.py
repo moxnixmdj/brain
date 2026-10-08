@@ -18,6 +18,7 @@ from typing import Any, Mapping
 
 from canonical.runtime import bounded_claim_support as support
 from canonical.runtime import synthesis_certified_visible_support_policy_v3 as v3
+from canonical.runtime.p3_v3_contract_surface_guard_v1 import validate_v3_contract_surface
 
 SCHEMA = "PROJECT_BRAIN_P3_NONBINDING_CAPACITY_COMMON_POLICY_CELL_V1"
 _REQUIRED_CONSTRAINTS = {
@@ -52,6 +53,9 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
     public = payload.get("v3_input")
     if not isinstance(public, Mapping):
         return _fail("V3_INPUT_REQUIRED")
+    surface_failure = validate_v3_contract_surface(public)
+    if surface_failure is not None:
+        return _fail(surface_failure)
     task = public.get("task")
     if not isinstance(task, Mapping):
         return _fail("TASK_REQUIRED")
