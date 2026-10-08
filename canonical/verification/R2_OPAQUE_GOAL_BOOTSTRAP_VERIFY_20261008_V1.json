@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_R2_OPAQUE_GOAL_BOOTSTRAP_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS_9_OF_9",
+  "branch": "r2-opaque-goal-bootstrap-20261008",
+  "exact_runtime_blob": "42172c29270c25b36ffb4a0f5de4b6955143bd0d",
+  "isolated_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "checks_run": 9,
+    "checks_passed": 9
+  },
+  "proved": [
+    "ARBITRARY_RAW_GOAL_CAN_ENTER_R2_WITHOUT_PREAUTHORED_DECISION_CONTEXT",
+    "EVERY_RAW_OBLIGATION_IS_PRESERVED_AS_ONE_DETERMINISTIC_OPAQUE_ATOM",
+    "OPAQUE_BOOTSTRAP_CLAIMS_NO_SEMANTIC_AUTHORITY",
+    "OPAQUE_BOOTSTRAP_CLAIMS_NO_SEMANTIC_COMPLETENESS",
+    "BOOTSTRAP_ADVANCES_TO_REAL_POLICY_OR_SEMANTIC_COVERAGE_EDGE",
+    "NO_GOAL_SUCCESS_OR_TERMINAL_CREDIT_IS_CREATED"
+  ],
+  "ci_note": "GitHub Actions job failed before step execution; isolated exact-byte replay is load-bearing.",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
