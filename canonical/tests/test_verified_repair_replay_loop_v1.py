@@ -475,16 +475,22 @@ class VerifiedRepairReplayLoopV1Tests(unittest.TestCase):
                 return_value=repaired,
             ) as repair,
         ):
-            out = brain.run_generic(
-                problem,
-                state_path=path,
+            out = brain.run(
+                {
+                    "mode": "generic",
+                    "problem": problem,
+                    "state_path": str(path),
+                },
                 capability_expander=expander,
             )
 
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["status"], "UNIFIED_GENERIC_EXECUTION_REPAIRED")
+        self.assertEqual(
+            out["status"],
+            "UNIFIED_GENERIC_EXECUTION_COMPLETE__R3_RECOVERED",
+        )
         self.assertTrue(out["auto_repair_attempted"])
-        self.assertEqual(out["automatic_repair"], repaired)
+        self.assertEqual(out["auto_repair"], repaired)
         repair.assert_called_once()
         repair_request = repair.call_args.args[0]
         self.assertEqual(repair_request["failure_fingerprint"], fingerprint)
@@ -520,20 +526,24 @@ class VerifiedRepairReplayLoopV1Tests(unittest.TestCase):
             mock.patch.object(brain, "_run_learning_episode", return_value=learned),
             mock.patch.object(brain, "execute_failure_repair_cycle") as repair,
         ):
-            out = brain.run_generic(
+            out = brain.run(
                 {
-                    "task_id": "no-auto-repair",
-                    "initial_facts": [],
-                    "target_effects": ["goal"],
-                    "capabilities": [],
+                    "mode": "generic",
+                    "problem": {
+                        "task_id": "no-auto-repair",
+                        "initial_facts": [],
+                        "target_effects": ["goal"],
+                        "capabilities": [],
+                    },
+                    "state_path": str(path),
+                    "auto_repair": False,
                 },
-                state_path=path,
-                auto_repair=False,
             )
 
         self.assertFalse(out["pass"])
-        self.assertFalse(out["auto_repair_attempted"])
-        self.assertIsNone(out["automatic_repair"])
+        self.assertEqual(out["learning"], learned["learning"])
+        self.assertNotIn("auto_repair_attempted", out)
+        self.assertNotIn("auto_repair", out)
         repair.assert_not_called()
 
 
