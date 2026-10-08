@@ -42,12 +42,14 @@ class RobustFunctionalAdequacyCegarTests(unittest.TestCase):
     def test_common_law_certifies_at_threshold(self):
         out = solve(base())
         self.assertTrue(out["pass"], out)
-        self.assertTrue(out["common_law_certified"])
+        self.assertFalse(out["common_law_certified"])
+        self.assertTrue(out["conditional_common_law_proved"])
+        self.assertFalse(out["upstream_authentication_performed"])
         self.assertEqual(out["selected_candidate_id"], "h1")
         self.assertEqual(out["selected_worst_case_loss_upper_bound"], "1/10")
         self.assertEqual(
             out["status"],
-            "PASS__COMMON_LAW_ROBUSTLY_ADEQUATE_ON_DECLARED_COMPLETE_COVER",
+            "CONDITIONAL_PASS__COMMON_LAW_ROBUSTLY_ADEQUATE_IF_DECLARED_PREMISES_ARE_AUTHENTIC",
         )
 
     def test_minimax_candidate_beats_lower_average_candidate(self):
@@ -144,6 +146,9 @@ class RobustFunctionalAdequacyCegarTests(unittest.TestCase):
         self.assertTrue(out["pass"], out)
         self.assertFalse(out["execution_authority"])
         self.assertFalse(out["promotion_authority"])
+        self.assertFalse(out["common_law_certified"])
+        self.assertTrue(out["conditional_common_law_proved"])
+        self.assertFalse(out["upstream_authentication_performed"])
         self.assertEqual(out["acceptance_credit_delta"], 0)
         self.assertEqual(out["family_credit_delta"], 0)
         self.assertEqual(out["capability_credit_delta"], 0)
