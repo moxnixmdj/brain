@@ -614,7 +614,10 @@ def verify_episode_request(
         if len(fact_head) != 64 or len(value_head) != 64:
             raise R3IndependentVerificationError("EPISODE_CAPSULE_HEAD_INVALID")
 
-        if problem.get("verification_kind") == bound_success_verifier.VERIFICATION_KIND:
+        if problem.get("verification_kind") in {
+            bound_success_verifier.VERIFICATION_KIND,
+            bound_success_verifier.RAW_BOUND_VERIFICATION_KIND,
+        }:
             verdict = bound_success_verifier.verify_material(
                 problem=problem,
                 episode=episode,
@@ -663,7 +666,12 @@ def verify_episode_request(
                 "verification_basis": verdict.get("verification_basis"),
             }
             return _emit_pair(
-                stem="episode-bound-success",
+                stem=(
+                    "episode-raw-bound-success"
+                    if problem.get("verification_kind")
+                    == bound_success_verifier.RAW_BOUND_VERIFICATION_KIND
+                    else "episode-bound-success"
+                ),
                 receipt=receipt,
                 verification_core=verification,
                 repo_root=repo_root,
