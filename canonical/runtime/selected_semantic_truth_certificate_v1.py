@@ -6,10 +6,13 @@ TRUE/FALSE/UNKNOWN observation suitable for the existing Tournament/minimax
 information machinery.
 
 It does not prove policy adequacy, target acceptance, U-empty, or terminality.
+A caller-selected predicate ID must equal the stable identity derived from the
+checker-verified source condition; arbitrary aliases cannot inherit its truth.
 """
 from __future__ import annotations
 
 import hashlib
+import json
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.source_aligned_semantic_proof_v6 import verify_proof
@@ -35,6 +38,33 @@ def _fail(reason: str, **detail: Any) -> dict[str, Any]:
         out["detail"] = detail
     return out
 
+
+def _checked_predicate_id(row: Mapping[str, Any], source_id: str, source_sha256: str) -> str | None:
+    """Stable semantic identity from checker-produced source condition, not caller labels.
+
+    The typed-context digest and condition_atom_id vary per observed case, so
+    neither can serve as a stable precommitment *predicate* identity.
+    """
+    if row.get("kind") not in {
+        "CERTIFIED_DEFINED_TERM_TYPED_CONDITION",
+        "CERTIFIED_DEFINED_TERM_RAW_TYPED_CONDITION",
+    }:
+        return None
+    atom = row.get("condition_atom_id")
+    if not isinstance(atom, str) or not atom:
+        return None
+    fields = ("defined_term", "field_name", "field_type", "operator", "literal")
+    if any(not isinstance(row.get(k), str) or not row[k] for k in fields):
+        return None
+    # V6 raw-fact receipts carry this field; V5 typed receipts bind the
+    # source through verify_proof(source_id=...) without repeating it in-row.
+    if "policy_source_id" in row and row.get("policy_source_id") != source_id:
+        return None
+    descriptor = {"source_id": source_id, "source_sha256": source_sha256,
+                  "kind": row["kind"], **{k: row[k] for k in fields}}
+    material = json.dumps(descriptor, sort_keys=True, separators=(",", ":"),
+                          ensure_ascii=False).encode("utf-8")
+    return "source-condition-sha256:" + hashlib.sha256(material).hexdigest()
 
 def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(payload, Mapping):
@@ -116,6 +146,28 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             "terminal_credit_delta": 0,
         }
 
+    source_sha256 = hashlib.sha256(source_text.encode("utf-8")).hexdigest()
+    checked_predicate_id = _checked_predicate_id(row, source_id, source_sha256)
+    if checked_predicate_id is None or predicate_id != checked_predicate_id:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "UNKNOWN__PREDICATE_IDENTITY_NOT_SOURCE_BOUND",
+            "reason": "REQUESTED_PREDICATE_DOES_NOT_MATCH_CHECKER_AUTHENTICATED_SOURCE_CONDITION",
+            "predicate_truth": "UNKNOWN",
+            "requested_predicate_id": predicate_id,
+            "verified_predicate_id": checked_predicate_id,
+            "target_claim_id": target_claim_id,
+            "source_id": source_id,
+            "source_sha256": source_sha256,
+            "truthful_precommitment_observation": False,
+            "policy_adequacy_authority": False,
+            "db_admission_authority": False,
+            "u_empty_authority": False,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
+
     return {
         "schema": SCHEMA,
         "pass": True,
@@ -127,6 +179,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         "source_id": source_id,
         "source_sha256": hashlib.sha256(source_text.encode("utf-8")).hexdigest(),
         "accepted_claim": dict(row),
+        "verified_condition_atom_id": row["condition_atom_id"],
         "source_proof": proof,
         "policy_adequacy_authority": False,
         "db_admission_authority": False,
