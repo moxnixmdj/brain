@@ -15,7 +15,7 @@ import json
 import os
 from pathlib import Path
 import tempfile
-from typing import Any, Mapping
+from typing import Any, Callable, Mapping
 
 from canonical.runtime import universal_verified_adaptive_solver_v12 as solver
 from canonical.runtime import executable_skill_program_v7 as skill_program
