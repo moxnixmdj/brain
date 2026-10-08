@@ -187,3 +187,51 @@ def test_seeded_differential_against_independent_truth_table_interpreter():
         if actual in {"UNCOVERED_SCOPED_VALUATION","ADMITTED_ROUTE_OUTPUT_MISMATCH"}:
             val=output["failing_valuation"]
             assert independent_eval(problem["scope_cnf"],val)
+
+
+def test_unknown_top_level_fields_fail_closed():
+    p=spec()
+    p["unrecognized_quality_assertion"]=True
+    assert run(p)["reason"]=="SPEC_FIELDS_INVALID"
+
+
+def test_unknown_route_fields_fail_closed():
+    p=spec()
+    p["routes"][0]["independent_verified"]=True
+    assert run(p)["reason"]=="ROUTE_FIELDS_INVALID"
+
+
+def test_formula_clause_literal_resource_budget():
+    p=spec()
+    p["scope_cnf"]=[["x"] for _ in range(2100)]
+    r=run(p)
+    assert r["pass"] is False
+    assert r["reason"]=="SPEC_BINDING_OR_REPLAY_INVALID"
+    assert "CNF_BUDGET_EXCEEDED" in r["detail"]
+    assert r["terminal_credit_delta"]==0
+
+
+def test_declared_work_bound_blocks_excessive_truth_table():
+    p=spec()
+    p["variables"]=["v"+str(i) for i in range(15)]
+    p["scope_cnf"]=[]
+    p["expected_output_cnf"]=[]
+    p["routes"]=[{"route_id":"r"+str(i), "admission_cnf":[], "program_output_cnf":[]}
+                 for i in range(64)]
+    out=run(p)
+    assert out["reason"]=="EVALUATION_WORK_BUDGET_EXCEEDED"
+    assert out["estimated_work_units"] > out["max_work_units"]
+    assert out["u_empty_authorized"] is False
+
+
+def test_maximum_boolean_domain_is_accepted_when_work_small():
+    p=spec()
+    p["variables"]=["v"+str(i) for i in range(15)]
+    p["scope_cnf"]=[]
+    p["expected_output_cnf"]=[]
+    p["routes"]=[{"route_id":"all", "admission_cnf":[], "program_output_cnf":[]}]
+    out=run(p)
+    assert out["pass"] is True, out
+    assert out["total_valuations"]==32768
+    assert out["bounded_evaluation_work_units"] <= 4_000_000
+    assert out["global_scope_complete"] is False
