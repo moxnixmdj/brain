@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_XLSX_THIRD_REPAIR_PRECOMMIT_V1",
+  "date": "2026-10-08",
+  "status": "PRECOMMITTED_BEFORE_THIRD_XLSX_RESELECTION_OR_SAFE_BUNDLE_EXTRACTION__ZERO_CREDIT",
+  "cause": "The second repaired XLSX task bb863dd9-31c2-4f64-911a-ce11f457143b became spent when external filename lookup surfaced task-specific rubric or prior-model-output material. It is forbidden for fresh stage-1 evidence.",
+  "additional_exclusion": "bb863dd9-31c2-4f64-911a-ce11f457143b",
+  "preserved_clean_frozen_tasks": {
+    "PPTX": "9a0d8d36-6233-4c76-9107-0d1f783c7340",
+    "PDF": "1bff4551-1d54-4e37-b2e0-d5c3f2ea4a45"
+  },
+  "xlsx_reselection_rule": "Reuse the independently replayed September-30 XLSX classifier and constraints. Exclude the original four contaminated exclusions, all three original September-30 selected tasks, 17111c03-aac7-45c2-857d-c06d8223d6ad, and bb863dd9-31c2-4f64-911a-ce11f457143b. Among remaining tasks with <=3 reference files, 1-2 deliverable files, and .xlsx in deliverable extensions, choose lexicographically smallest SHA256(task_id).",
+  "safe_bundle_rule": {
+    "selection_phase_fields": [
+      "task_id",
+      "sector",
+      "occupation",
+      "reference_files",
+      "reference_file_urls",
+      "deliverable_files"
+    ],
+    "post_selection_allowed_fields": [
+      "task_id",
+      "sector",
+      "occupation",
+      "prompt",
+      "reference_files",
+      "reference_file_urls",
+      "deliverable_files"
+    ],
+    "forbidden_fields": [
+      "rubric_pretty",
+      "rubric_json",
+      "deliverable_file_urls",
+      "deliverable_file_hf_uris"
+    ],
+    "download_policy": "DOWNLOAD_ONLY_URLS_FROM_SELECTED_ROW_reference_file_urls__HOST_AND_PATH_MUST_MATCH_HUGGINGFACE_OPENAI_GDPVAL_reference_files_PREFIX",
+    "artifact_output": "TASK_JSON_WITH_PROMPT_AND_SAFE_METADATA_PLUS_DECLARED_REFERENCE_FILE_BYTES_ONLY",
+    "log_policy": "DO_NOT_PRINT_PROMPT_OR_REFERENCE_CONTENT_TO_WORKFLOW_LOGS"
+  },
+  "post_bundle_rule": "After public-verifier artifact is content-addressed, consume only that artifact. Do not web-search the selected task ID, prompt fragments, or reference filenames before output freeze.",
+  "stage1_capability_credit": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
