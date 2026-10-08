@@ -513,6 +513,18 @@ def run(
                 raise CognitiveFabricError("BOUND_CAPABILITY_INPUTS_NOT_OBJECT")
             out = execute_bound(capability_id, inputs=dict(inputs))
 
+        compounding_tick = None
+        if skill_verification_provider is not None:
+            compounding_tick = self_improvement.advance_verification_queue(
+                state_path=options.get(
+                    "state_path",
+                    self_improvement.DEFAULT_STATE_PATH,
+                ),
+                repo_root=ROOT,
+                skill_verification_provider=skill_verification_provider,
+                max_actions=int(options.get("self_improvement_max_actions", 4)),
+            )
+
         return {
             "schema": SCHEMA,
             "status": "FABRIC_DISPATCH_COMPLETE",
@@ -523,6 +535,7 @@ def run(
             "inner_pass": bool(isinstance(out, Mapping) and out.get("pass") is True),
             "inner_status": out.get("status") if isinstance(out, Mapping) else None,
             "result": deepcopy(dict(out)) if isinstance(out, Mapping) else out,
+            "compounding_tick": deepcopy(compounding_tick),
             "single_front_door": True,
             "terminal_authority": False,
             "terminal_credit_delta": 0,
