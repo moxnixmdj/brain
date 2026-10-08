@@ -420,10 +420,10 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertEqual(result["active_verified_skill_count_reauthenticated"], 1)
         self.assertTrue(result["verified_skill_reuse_attempted"])
         self.assertEqual(result["preferred_capability_order"], ["op0", "op1"])
-        self.assertEqual(
-            run_mock.call_args.kwargs["preferred_capability_order"],
-            ["op0", "op1"],
-        )
+        records = run_mock.call_args.kwargs["verified_skill_records"]
+        self.assertEqual(len(records), 1)
+        self.assertEqual(records[0]["skill"]["candidate_sha256"], skill["candidate_sha256"])
+        self.assertEqual(run_mock.call_args.kwargs["active_skill_invalidators"], [])
 
     def test_tampered_active_skill_fails_closed_before_solver_execution(self):
         path = self.temp_state()
