@@ -68,16 +68,23 @@ def compile_next_action(result: Any) -> dict[str, Any]:
         result.get("pass") is True
         and result.get("actual_goal_satisfaction_verified") is True
     ):
-        payload = (
-            result.get("action")
-            if result.get("action") is not None
-            else result.get("realization")
+        # This function runs *after* the verified domain action/result already
+        # satisfied the goal. The next control action must therefore complete
+        # the task, never replay an effectful action. Preserve the verified
+        # realization only as a receipt for downstream consumers.
+        receipt = (
+            result.get("realization")
+            if result.get("realization") is not None
+            else result.get("action")
         )
+        if receipt is None and isinstance(result.get("raw_result"), Mapping):
+            receipt = result.get("raw_result")
         return _base(
-            "VERIFIED_DOMAIN_ACTION",
+            "COMPLETE_VERIFIED_GOAL",
             result,
-            verified_action_available=True,
-            action=deepcopy(payload),
+            verified_result_available=receipt is not None,
+            verified_result=deepcopy(receipt),
+            execute_domain_action=False,
             requires_reverification=False,
         )
 
