@@ -901,6 +901,53 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             "FRONTIER_ACQUISITION_ALREADY_ATTEMPTED_FOR_CURRENT_PROVIDER_AND_FRONTIER",
         )
 
+    def test_owned_frontier_module_origin_accepts_exact_repo_file(self):
+        td = tempfile.TemporaryDirectory()
+        self.addCleanup(td.cleanup)
+        root = Path(td.name)
+        relative = "canonical/runtime/r3_bound_success_adapter_v1.py"
+        target = root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text("# exact frontier module\n", encoding="utf-8")
+        module = mock.Mock()
+        module.__file__ = str(target)
+        module.__name__ = "canonical.runtime.r3_bound_success_adapter_v1"
+
+        out = driver._assert_owned_success_module_origin(
+            module,
+            relative_path=relative,
+            repo_root=root,
+        )
+
+        self.assertEqual(out["relative_path"], relative)
+        self.assertEqual(out["origin"], str(target.resolve()))
+
+    def test_owned_frontier_module_origin_rejects_different_checkout(self):
+        td = tempfile.TemporaryDirectory()
+        self.addCleanup(td.cleanup)
+        root = Path(td.name) / "expected"
+        other = Path(td.name) / "other"
+        relative = "canonical/runtime/r3_bound_success_adapter_v1.py"
+        expected = root / relative
+        actual = other / relative
+        expected.parent.mkdir(parents=True, exist_ok=True)
+        actual.parent.mkdir(parents=True, exist_ok=True)
+        expected.write_text("# expected\n", encoding="utf-8")
+        actual.write_text("# wrong checkout\n", encoding="utf-8")
+        module = mock.Mock()
+        module.__file__ = str(actual)
+        module.__name__ = "canonical.runtime.r3_bound_success_adapter_v1"
+
+        with self.assertRaisesRegex(
+            driver.ImprovementDriverError,
+            "SUCCESS_FRONTIER_MODULE_ORIGIN_MISMATCH",
+        ):
+            driver._assert_owned_success_module_origin(
+                module,
+                relative_path=relative,
+                repo_root=root,
+            )
+
     def test_owned_frontier_change_must_activate_before_reopen(self):
         path = self.temp_state()
         observed = learning.record_success_observation(
