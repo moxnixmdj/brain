@@ -400,25 +400,113 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
                 "incremental_spend_usd": 0,
             }
 
-        out = run({
-            "task_id": task_id,
-            "initial_facts": list(initial),
-            "target_effects": list(targets),
-            "capability_inputs": {selected: dict(inputs)},
-            "allowed_capability_ids": [selected],
-        })
-        result = dict(out)
-        result["raw_goal"] = goal
-        result["raw_goal_sha256"] = raw_contract["task_sha256"]
-        result["raw_task_contract_sha256"] = raw_contract["task_contract_sha256"]
-        result["raw_acceptance_obligation_count"] = len(
-            raw_contract["acceptance_contract"]["obligations"]
-        )
-        result["raw_source_coverage_complete"] = raw_contract[
-            "nonwhitespace_source_coverage_complete"
+        entry = admissible[selected]
+        action = goal_compiler._render_template(entry["action_template"], dict(inputs))
+        controller_actions = [
+            action,
+            {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}},
         ]
-        result["compiled_capability_id"] = selected
-        result["compiler_mode"] = compiled.get("compiler_mode")
+        try:
+            controller = astra_runtime.run_goal(
+                {
+                    "id": "live-raw-goal-controller",
+                    "controller_actions": controller_actions,
+                    "max_controller_actions": 64,
+                },
+                {
+                    "mission_id": task_id,
+                    "goal": goal,
+                },
+            )
+        except Exception as exc:
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+                "pass": False,
+                "task_id": task_id,
+                "failure_class": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE",
+                "compiled_capability_id": selected,
+                "compiler_mode": compiled.get("compiler_mode"),
+                "reason": type(exc).__name__ + ":" + str(exc),
+                "elapsed_ns": perf_counter_ns() - started,
+                "incremental_spend_usd": 0,
+            }
+
+        trace = controller.get("trace") if isinstance(controller, Mapping) else None
+        first_trace = trace[0] if isinstance(trace, list) and trace else None
+        first_result = (
+            first_trace.get("result")
+            if isinstance(first_trace, Mapping)
+            and isinstance(first_trace.get("result"), Mapping)
+            else None
+        )
+        checkpoint = (
+            controller.get("controller_checkpoint")
+            if isinstance(controller, Mapping)
+            and isinstance(controller.get("controller_checkpoint"), Mapping)
+            else {}
+        )
+        passed = (
+            isinstance(controller, Mapping)
+            and controller.get("returncode") == 0
+            and controller.get("controller_mode") == "MODEL_INDEPENDENT_ACTION_PLAN"
+            and isinstance(controller.get("final_summary"), str)
+            and bool(controller.get("final_summary").strip())
+            and isinstance(first_result, Mapping)
+        )
+        execution_row = {
+            "capability_id": selected,
+            "pass": passed,
+            "status": (
+                "PASS__MODEL_INDEPENDENT_CONTROLLER_ACTION"
+                if passed else "FAIL__MODEL_INDEPENDENT_CONTROLLER_ACTION"
+            ),
+            "result": dict(first_result) if isinstance(first_result, Mapping) else None,
+            "execution_proof_type": "MODEL_INDEPENDENT_CONTROLLER_TRACE_V1",
+            "controller_plan_sha256": checkpoint.get("plan_sha256"),
+            "controller_trace": list(trace) if isinstance(trace, list) else [],
+        }
+        result = {
+            "schema": SCHEMA,
+            "status": (
+                "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__"
+                "RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
+                if passed else "FAIL__LIVE_CONTROLLER_RESULT_INVALID"
+            ),
+            "pass": passed,
+            "task_id": task_id,
+            "selected_plan": [selected],
+            "verified_registry_capability_count": len(admissible),
+            "execution": [execution_row],
+            "controller_execution": dict(controller) if isinstance(controller, Mapping) else controller,
+            "controller_checkpoint": dict(checkpoint),
+            "cognition_dependency_class": (
+                controller.get("cognition_dependency_class")
+                if isinstance(controller, Mapping) else None
+            ),
+            "model_dependency_count": (
+                controller.get("model_dependency_count")
+                if isinstance(controller, Mapping) else None
+            ),
+            "raw_goal": goal,
+            "raw_goal_sha256": raw_contract["task_sha256"],
+            "raw_task_contract_sha256": raw_contract["task_contract_sha256"],
+            "raw_acceptance_obligation_count": len(
+                raw_contract["acceptance_contract"]["obligations"]
+            ),
+            "raw_source_coverage_complete": raw_contract[
+                "nonwhitespace_source_coverage_complete"
+            ],
+            "compiled_capability_id": selected,
+            "compiler_mode": compiled.get("compiler_mode"),
+            "routing_success_authority": False,
+            "semantic_acceptance_complete": False,
+            "accepted_raw_obligation_ids": [],
+            "elapsed_ns": perf_counter_ns() - started,
+            "incremental_spend_usd": 0,
+            "benchmark_specific": False,
+            "terminal_credit_delta": 0,
+        }
         # Execution success alone is not raw-goal acceptance. For the one
         # explicit archive semantics currently understood, independently inspect
         # the artifact and bind all exact source obligations to the receipt.
