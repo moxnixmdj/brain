@@ -187,3 +187,16 @@ def test_invalid_explicit_objective_weights_never_fall_through():
         assert out["v3_admission_authorized"] is False
         assert out["p3_contract_cell_authorized"] is False
         assert out["terminal_authority"] is False
+
+
+def test_named_audience_profile_fails_before_any_positive_route():
+    p={"context_id":"x","v3_input":base([
+        req("A","Revenue growth is 12.")
+    ],[ev("E","Report states Revenue growth is 12.")])}
+    p["v3_input"]["task"]["audience_profile"]["profile_id"]="GERMAN_ONLY"
+    out=evaluate(p)
+    assert out["pass"] is False,out
+    assert out["reason"]=="AUDIENCE_PROFILE_SEMANTICS_UNMODELED",out
+    assert out["p3_contract_cell_authorized"] is False
+    assert out["v3_admission_authorized"] is False
+    assert out["terminal_credit_delta"]==0
