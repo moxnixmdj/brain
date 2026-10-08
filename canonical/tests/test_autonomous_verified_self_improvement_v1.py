@@ -251,6 +251,60 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "COLLECT_MATCHING_VERIFIED_EPISODE",
         )
 
+    def test_forged_verified_episode_flag_cannot_persist_without_reauthentication(self):
+        path = self.temp_state()
+        ep = verified_episode("forged-episode")
+        out = {
+            "pass": True,
+            "status": "SOLVED__VERIFIED_EPISODE",
+            "current_episode_verified": True,
+            "current_episode": ep,
+            "skill_candidate": None,
+            "verified_skill_reuse_authorized": False,
+            "verified_executable_skill": None,
+        }
+        with mock.patch.object(
+            loop,
+            "reauthenticate_episode_record",
+            return_value={"pass": False, "reason": "FORGED_BINDING"},
+        ):
+            with self.assertRaisesRegex(
+                loop.SelfImprovementError,
+                "VERIFIED_EPISODE_REAUTHENTICATION_FAILED",
+            ):
+                loop.integrate_solver_output(out, state_path=path)
+
+        state = loop.load_state(path)
+        self.assertEqual(state["stats"]["verified_episode_count"], 0)
+        self.assertEqual(state["episodes"], {})
+
+    def test_forged_verified_skill_flag_cannot_enter_pareto_state(self):
+        path = self.temp_state()
+        skill = verified_skill("f", relation="EXACT")
+        out = {
+            "pass": True,
+            "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
+            "current_episode_verified": False,
+            "skill_candidate": skill,
+            "verified_skill_reuse_authorized": True,
+            "verified_executable_skill": skill,
+        }
+        with mock.patch.object(
+            loop,
+            "reauthenticate_skill_record",
+            return_value={"pass": False, "reason": "FORGED_BINDING"},
+        ):
+            with self.assertRaisesRegex(
+                loop.SelfImprovementError,
+                "VERIFIED_SKILL_REAUTHENTICATION_FAILED",
+            ):
+                loop.integrate_solver_output(out, state_path=path)
+
+        state = loop.load_state(path)
+        self.assertEqual(state["stats"]["verified_skill_count"], 0)
+        self.assertEqual(state["stats"]["active_skill_count"], 0)
+        self.assertEqual(state["skills"], {})
+
     def test_unverified_candidate_never_gets_permanent_reuse(self):
         path = self.temp_state()
         out = {
@@ -642,6 +696,45 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
                 },
             ],
         }
+
+    def test_unreauthenticated_active_skill_is_invisible_to_reuse_planner(self):
+        path = self.temp_state()
+        skill = verified_skill("1", relation="EXACT", source_ids=("ep1", "ep2"))
+        self._seed_active_skill(path, skill)
+        solved = {
+            "pass": True,
+            "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+            "current_episode_verified": False,
+            "skill_candidate": None,
+            "verified_skill_reuse_authorized": False,
+            "verified_executable_skill": None,
+        }
+        with (
+            mock.patch.object(
+                loop,
+                "reauthenticate_skill_record",
+                return_value={"pass": False, "reason": "LEGACY_OR_TAMPERED"},
+            ) as reauth,
+            mock.patch.object(loop.solver_v12, "run", return_value=solved) as run_mock,
+        ):
+            out = loop.run_learning_episode(
+                self._reuse_problem(),
+                state_path=path,
+                repo_root=Path("."),
+                episode_id="ep3",
+                scope_id="scope",
+            )
+
+        self.assertTrue(out["pass"], out)
+        self.assertFalse(out["reuse_first"], out)
+        self.assertIsNone(out["reused_skill_id"])
+        self.assertEqual(run_mock.call_count, 1)
+        full_problem = run_mock.call_args.args[0]
+        self.assertEqual(
+            [x["id"] for x in full_problem["capabilities"]],
+            ["op0", "op1", "distractor"],
+        )
+        reauth.assert_called_once()
 
     def test_active_verified_skill_is_automatically_used_as_planning_compression(self):
         path = self.temp_state()
