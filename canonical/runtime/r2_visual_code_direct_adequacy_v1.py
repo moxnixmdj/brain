@@ -21,6 +21,7 @@ from typing import Any, Callable, Mapping
 
 from canonical.runtime import goal_compiler
 from canonical.runtime import live_integrated_brain_v1 as live_bound
+from canonical.runtime import verified_bound_capability_execution_adapter_v1 as bound_exec
 from canonical.runtime.bound_capabilities import cli_command
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 from canonical.runtime.r2_grounded_candidate_policy_frontier_v1 import goal_scoped_policy_id
@@ -141,23 +142,50 @@ def preflight(
         admissible = goal_compiler._platform_admissible_registry(dict(registry))
         producer, verifier = _verified_pair(admissible, fmt)
 
-        compiled = goal_compiler.compile_goal(goal, admissible, root)
-        if compiled.get("controller_actions") is not None:
-            raise ValueError("COMPOUND_CONTROLLER_NOT_ALLOWED")
-        if compiled.get("selected_capability") != producer_id:
-            raise ValueError(
-                "VISUAL_CODE_PRODUCER_SELECTION_MISMATCH:"
-                + str(compiled.get("selected_capability"))
+        if fmt == "QR":
+            compiled = goal_compiler.compile_goal(goal, admissible, root)
+            if compiled.get("controller_actions") is not None:
+                raise ValueError("COMPOUND_CONTROLLER_NOT_ALLOWED")
+            if compiled.get("selected_capability") != producer_id:
+                raise ValueError(
+                    "VISUAL_CODE_PRODUCER_SELECTION_MISMATCH:"
+                    + str(compiled.get("selected_capability"))
+                )
+            inputs = compiled.get("inputs")
+            if not isinstance(inputs, Mapping):
+                raise ValueError("COMPILED_INPUTS_INVALID")
+            if inputs.get("text") != payload or inputs.get("output_path") != output_path:
+                raise ValueError("COMPILED_PAYLOAD_OR_OUTPUT_BINDING_MISMATCH")
+            targets = compiled.get("target_effects")
+            if not isinstance(targets, list) or not targets:
+                raise ValueError("COMPILED_TARGETS_INVALID")
+            execution_binding = {
+                "execution_mode": "LIVE_RAW_GOAL",
+                "execution_instance_id": None,
+                "registry_file_sha256": None,
+                "registry_entry_sha256": None,
+                "rendered_action_sha256": None,
+            }
+        else:
+            instance_id = (
+                "r2-visual-code-"
+                + sha256((producer_id + "\n" + goal).encode("utf-8")).hexdigest()[:16]
             )
-        inputs = compiled.get("inputs")
-        if not isinstance(inputs, Mapping):
-            raise ValueError("COMPILED_INPUTS_INVALID")
-        if inputs.get("text") != payload or inputs.get("output_path") != output_path:
-            raise ValueError("COMPILED_PAYLOAD_OR_OUTPUT_BINDING_MISMATCH")
-
-        targets = compiled.get("target_effects")
-        if not isinstance(targets, list) or not targets:
-            raise ValueError("COMPILED_TARGETS_INVALID")
+            prepared = bound_exec.prepare(
+                producer_id,
+                inputs={"text": payload, "output_path": output_path},
+                instance_id=instance_id,
+            )
+            targets = prepared.get("provides")
+            if not isinstance(targets, list) or not targets:
+                raise ValueError("BOUND_EXECUTION_TARGETS_INVALID")
+            execution_binding = {
+                "execution_mode": "VERIFIED_BOUND_EXECUTION_ADAPTER",
+                "execution_instance_id": instance_id,
+                "registry_file_sha256": prepared["registry_file_sha256"],
+                "registry_entry_sha256": prepared["registry_entry_sha256"],
+                "rendered_action_sha256": prepared["rendered_action_sha256"],
+            }
         contract = compile_contract(
             goal,
             source_id="user",
@@ -181,6 +209,7 @@ def preflight(
             "producer_packages": sorted(_packages(producer)),
             "verifier_packages": sorted(_packages(verifier)),
             "output_path": output_path,
+            **execution_binding,
             "raw_contract": contract,
             "raw_task_contract_sha256": contract["task_contract_sha256"],
             "acceptance_obligation_count": len(
@@ -253,8 +282,43 @@ def run(
     prior = destination.read_bytes() if existed else None
 
     try:
-        raw = live_bound.run_raw_goal(request)
-        if not isinstance(raw, Mapping) or raw.get("pass") is not True:
+        if pf["execution_mode"] == "LIVE_RAW_GOAL":
+            raw = live_bound.run_raw_goal(request)
+            execution_ok = (
+                isinstance(raw, Mapping)
+                and raw.get("pass") is True
+                and raw.get("compiled_capability_id") == pf["capability_id"]
+                and raw.get("raw_goal_sha256") == pf["goal_sha256"]
+                and raw.get("raw_source_coverage_complete") is True
+            )
+        elif pf["execution_mode"] == "VERIFIED_BOUND_EXECUTION_ADAPTER":
+            raw = bound_exec.execute(
+                pf["capability_id"],
+                inputs={
+                    "text": pf["payload"],
+                    "output_path": pf["output_path"],
+                },
+                instance_id=pf["execution_instance_id"],
+                expected_registry_file_sha256=pf["registry_file_sha256"],
+                expected_registry_entry_sha256=pf["registry_entry_sha256"],
+                expected_rendered_action_sha256=pf["rendered_action_sha256"],
+            )
+            execution_ok = (
+                isinstance(raw, Mapping)
+                and raw.get("pass") is True
+                and raw.get("capability_id") == pf["capability_id"]
+                and raw.get("registry_file_sha256") == pf["registry_file_sha256"]
+                and raw.get("registry_entry_sha256") == pf["registry_entry_sha256"]
+                and raw.get("rendered_action_sha256") == pf["rendered_action_sha256"]
+                and isinstance(raw.get("result"), Mapping)
+                and raw["result"].get("output_path") == pf["output_path"]
+                and raw["result"].get("output_verified") is True
+            )
+        else:
+            raw = None
+            execution_ok = False
+
+        if not execution_ok:
             _restore(destination, existed, prior)
             return {
                 **_base("OPEN__TRANSACTIONAL_VISUAL_CODE_EXECUTION_DID_NOT_VERIFY"),
@@ -266,17 +330,14 @@ def run(
             }
 
         if (
-            raw.get("compiled_capability_id") != pf["capability_id"]
-            or raw.get("raw_goal_sha256") != pf["goal_sha256"]
-            or raw.get("raw_source_coverage_complete") is not True
-            or not destination.is_file()
+            not destination.is_file()
             or not destination.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
         ):
             _restore(destination, existed, prior)
             return {
                 **_base("FAIL_CLOSED"),
                 "matched": True,
-                "reason": "EXECUTION_IDENTITY_OR_PNG_OUTPUT_BINDING_MISMATCH",
+                "reason": "PNG_OUTPUT_BINDING_MISMATCH",
                 "transaction_rolled_back": True,
             }
 
@@ -315,6 +376,7 @@ def run(
             "goal_sha256": pf["goal_sha256"],
             "raw_task_contract_sha256": pf["raw_task_contract_sha256"],
             "format": pf["format"],
+            "execution_mode": pf["execution_mode"],
             "payload_sha256": pf["payload_sha256"],
             "output_path": pf["output_path"],
             "accepted_raw_obligation_ids": accepted_ids,
