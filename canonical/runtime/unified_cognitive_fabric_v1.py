@@ -559,31 +559,36 @@ def run(
             out = execute_bound(capability_id, inputs=dict(inputs))
 
         compounding_tick = None
-        if skill_verification_provider is not None:
-            compounding_tick = self_improvement.advance_verification_queue(
-                state_path=options.get(
-                    "state_path",
-                    self_improvement.DEFAULT_STATE_PATH,
-                ),
-                repo_root=ROOT,
-                skill_verification_provider=skill_verification_provider,
-                max_actions=int(options.get("self_improvement_max_actions", 4)),
+        if (
+            mode != "IMPROVEMENT_CYCLE"
+            and (
+                episode_verification_provider is not None
+                or skill_verification_provider is not None
+                or success_episode_adapter_provider is not None
             )
-
-        episode_compounding_tick = None
-        if episode_verification_provider is not None:
-            episode_compounding_tick = improvement_driver.drain(
+        ):
+            compounding_tick = improvement_driver.drain(
                 state_path=options.get(
                     "state_path",
                     self_improvement.DEFAULT_STATE_PATH,
                 ),
                 repo_root=ROOT,
                 episode_verification_provider=episode_verification_provider,
-                skill_verification_provider=None,
+                skill_verification_provider=skill_verification_provider,
                 success_episode_adapter_provider=success_episode_adapter_provider,
                 failure_repair_provider=None,
                 max_actions=int(options.get("self_improvement_max_actions", 4)),
             )
+
+        episode_compounding_tick = (
+            {
+                "status": "MERGED_INTO_UNIFIED_COMPOUNDING_TICK",
+                "pass": True,
+                "terminal_authority": False,
+            }
+            if compounding_tick is not None
+            else None
+        )
 
         return {
             "schema": SCHEMA,
