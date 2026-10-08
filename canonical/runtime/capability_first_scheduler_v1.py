@@ -126,6 +126,7 @@ def rank_work(work: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         "schema": SCHEMA,
         "status": "CAPABILITY_FIRST_RANKING",
         "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+        "mission_objective": MISSION_OBJECTIVE,
         "milestone": MILESTONE,
         "capability_learning_loop": list(CAPABILITY_LEARNING_LOOP),
         "ranked": [
