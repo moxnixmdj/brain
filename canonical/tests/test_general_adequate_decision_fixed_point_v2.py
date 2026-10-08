@@ -195,6 +195,71 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         self.assertEqual(second["max_policy_cover_observations"], 8)
 
     @patch.object(fixed, "run_controller")
+    def test_multi_observation_cover_accumulates_without_erasing_prior_evidence(self, controller):
+        def open_for(discriminator):
+            return {
+                **self._open("OPEN__POLICY_COVER_OBSERVATION_BINDING_REQUIRED"),
+                "next_required_edge": "AUTHENTICATED_SELECTED_POLICY_CHANGING_OBSERVATION",
+                "next_observation_request": {
+                    "schema": "PROJECT_BRAIN_POLICY_COVER_OBSERVATION_REQUEST_V1",
+                    "state_id": "state-1",
+                    "discriminator_id": discriminator,
+                    "surviving_world_ids": ["w1", "w2"],
+                    "observation_authority": False,
+                },
+            }
+
+        controller.side_effect = [open_for("d1"), open_for("d2"), self._pass()]
+
+        def provider(packet, index, prior):
+            discriminator = packet["next_observation_request"]["discriminator_id"]
+            return {
+                "request_patch": {
+                    "policy_cover_observation_bindings": {
+                        discriminator: {
+                            "receipt": {"path": discriminator + "-r", "git_blob_sha": "a"},
+                            "verification": {"path": discriminator + "-v", "git_blob_sha": "b"},
+                        }
+                    }
+                }
+            }
+
+        out = fixed.run(
+            self._request(),
+            proposal_provider=provider,
+            provider_max_candidates=1,
+        )
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(controller.call_count, 3)
+        final_request = controller.call_args_list[2].args[0]
+        self.assertEqual(
+            set(final_request["policy_cover_observation_bindings"]),
+            {"d1", "d2"},
+        )
+
+    def test_existing_policy_cover_observation_binding_cannot_be_rewritten(self):
+        current = {
+            **self._request(),
+            "policy_cover_observation_bindings": {
+                "d1": {"receipt": {"path": "old"}}
+            },
+        }
+        candidate = {
+            "request_patch": {
+                "policy_cover_observation_bindings": {
+                    "d1": {"receipt": {"path": "new"}}
+                }
+            }
+        }
+        merged, error = fixed._merge_candidate(current, candidate)
+        self.assertIsNone(merged)
+        self.assertEqual(
+            error,
+            "POLICY_COVER_OBSERVATION_BINDING_MUTATION_FORBIDDEN:d1",
+        )
+
+    @patch.object(fixed, "run_controller")
     def test_provider_pass_claim_cannot_bypass_controller(self, controller):
         controller.return_value = self._open()
         provider = Mock(return_value={"pass": True, "status": "I_SAY_DONE"})
