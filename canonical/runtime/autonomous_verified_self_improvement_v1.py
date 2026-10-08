@@ -168,6 +168,16 @@ def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None
         "cognition_dependency_class": _s(out.get("cognition_dependency_class")) or None,
         "model_dependency_count": out.get("model_dependency_count"),
         "semantic_acceptance_complete": out.get("semantic_acceptance_complete") is True,
+        "raw_goal_sha256": _s(out.get("raw_goal_sha256")) or None,
+        "raw_task_contract_sha256": _s(out.get("raw_task_contract_sha256")) or None,
+        "raw_acceptance_obligation_count": out.get("raw_acceptance_obligation_count"),
+        "accepted_raw_obligation_ids": _items(out.get("accepted_raw_obligation_ids")),
+        "compiled_capability_id": _s(out.get("compiled_capability_id")) or None,
+        "raw_goal_acceptance": (
+            deepcopy(dict(out.get("raw_goal_acceptance")))
+            if isinstance(out.get("raw_goal_acceptance"), Mapping)
+            else None
+        ),
     }
     _validate_retry_value(material, path="success_proof")
     raw = _canon(material).encode("utf-8")
