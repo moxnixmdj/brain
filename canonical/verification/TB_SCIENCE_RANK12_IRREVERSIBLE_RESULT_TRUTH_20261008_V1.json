@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK12_IRREVERSIBLE_RESULT_TRUTH_V1",
+  "date": "2026-10-08",
+  "status": "RANK12_CONSUMED__FINAL_ZERO__PLANNER_TIMEOUT_DURING_PROMPT_PREFILL__NO_VERIFIER_RESULT__NO_SCIENTIFIC_QUALITY_INFERENCE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/clinical-metadata-recovery::trial-0",
+    "ledger_schedule_rank": 12,
+    "task_digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8"
+  },
+  "execution": {
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2420,
+    "workflow_run_id": 37729003096,
+    "workflow_job_id": 113153995536,
+    "workflow_head_sha": "dd85ae95762809733d98a79a1302cab27e143371",
+    "github_sha_from_receipt": "33e4432cf5e513d3178f89412ab34a2e6bb7633b",
+    "artifact_id": 11529089208,
+    "artifact_name": "tb-science-clinical-metadata-recovery-trial-0-rank12-v1",
+    "artifact_digest": "sha256:549b84756524f7eeafe8faf1f9b3d9b4edea118c914a7d3b58d3272d4f5f0f4f",
+    "workflow_conclusion": "success",
+    "execution_authority_consumed": true,
+    "rerun_credit": false,
+    "reward": 0
+  },
+  "exact_bindings": {
+    "authority_blob": "732b00c707a1e5b1ef6cf39ed85c5bd1abb557a9",
+    "intent_blob": "fb808faaa65cab15434349522052de84d27f4376",
+    "ledger_v12_blob": "35456bbbeb8e80708a5e413b28b4ee2ab43c2a16",
+    "epoch_blob": "5426f9db570cfa83d5f96859d2087d11cd6b813a",
+    "agent_at_execution_blob": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "planner_at_execution_blob": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "closure_manifest_at_execution_blob": "cf9cc9fb8830eda991c71381a523b8f67caedaa7",
+    "repair_verification_blob": "7a11ec5b0b7d7506f17f1d22f5b04b6e96d354c5",
+    "live_output_preflight_blob": "d8de49aa3f8fd7d1ffbf39e16505e62241652722",
+    "storage_preflight_blob": "9dfdbd1cf6988f5585fd4ff18e59b7a2d9f87cf3"
+  },
+  "result_hashes_sha256": {
+    "trial_result": "032421f346842debcc8309600b859da54188e3572d43ec6ce357c19318ce6a2f",
+    "job_result": "55abdbb312fee64541718d02ef440fe66a52af85cd18e91f54d1a94aa9e56296"
+  },
+  "observed_result": {
+    "verifier_result_present": false,
+    "receipt_errors": [
+      "NO_TRIAL_RESULT_WITH_VERIFIER_REWARD"
+    ],
+    "exception_type": "SciencePlannerError",
+    "exception_message": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "planner_timeout_s": 300,
+    "local_server_observed_prompt_progress": [
+      {
+        "tokens": 618,
+        "progress": 0.09,
+        "elapsed_s": 30.04,
+        "tokens_per_second": 20.58
+      },
+      {
+        "tokens": 2666,
+        "progress": 0.37,
+        "elapsed_s": 132.21,
+        "tokens_per_second": 20.17
+      },
+      {
+        "tokens": 4714,
+        "progress": 0.66,
+        "elapsed_s": 239.98,
+        "tokens_per_second": 19.64
+      }
+    ],
+    "local_server_cancel_time_s_approx": 334.64,
+    "inferred_prompt_tokens_approx": 7142,
+    "inferred_prefill_time_s_at_observed_rate_approx": 364,
+    "required_output_missing_as_consequence": "/root/results/recovered_metadata.tsv",
+    "scientific_task_quality_evaluated": false
+  },
+  "causal_classification": {
+    "infrastructure_failure": false,
+    "storage_failure": false,
+    "output_directive_regression": false,
+    "verifier_reached": false,
+    "planner_transport_timeout": true,
+    "planner_timeout_below_observed_prefill_requirement": true,
+    "task_capability_negative_evidence": false,
+    "root_cause": "FIXED_300_SECOND_PLANNER_HTTP_DEADLINE_WAS_SHORTER_THAN_PROMPT_PREFILL_TIME_ON_THE_BOUND_CPU_ROUTE",
+    "tournament_failure_law_effect": "ADMIT_MINIMUM_PROMPT_SIZE_AWARE_TIMEOUT_REPAIR__DO_NOT_INFER_SCIENTIFIC_REASONING_DEFICIT"
+  },
+  "repair": {
+    "planner_git_blob_sha": "5ab07ef638e766ec085ef4f3c2e2f423bcbc09e8",
+    "closure_manifest_path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V5.json",
+    "closure_manifest_git_blob_sha": "f7ac91bc5a75faf382ba3dc3b12080d99be27447",
+    "independent_verification_path": "canonical/verification/TB_SCIENCE_PROMPT_AWARE_TIMEOUT_REPAIR_INDEPENDENT_VERIFICATION_20261008_V1.json",
+    "independent_verification_git_blob_sha": "59463cf27253759da967d21a0adff64661806b52",
+    "replay_of_consumed_slot_forbidden": true
+  },
+  "hard_nonclaims": [
+    "NO_RANK12_RETRY_OR_REPLACEMENT",
+    "NO_CLAIM_THE_REPAIRED_ROUTE_WOULD_HAVE_PASSED_RANK12",
+    "NO_CLAIM_SCIENTIFIC_TASK_QUALITY_WAS_MEASURED",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_delta": 1,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
