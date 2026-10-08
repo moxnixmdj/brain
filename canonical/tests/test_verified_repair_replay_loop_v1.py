@@ -216,7 +216,7 @@ class VerifiedRepairReplayLoopV1Tests(unittest.TestCase):
         )
 
 
-    def test_new_primitive_required_without_expander_remains_unresolved(self):
+    def test_raw_new_primitive_without_expander_tries_owned_acquisition_then_stays_unresolved(self):
         path = self.temp_state()
         fid, retry_sha, _ = self.seed_failure(path)
         missing = {
@@ -225,7 +225,19 @@ class VerifiedRepairReplayLoopV1Tests(unittest.TestCase):
             "missing_required_effects": ["repair.capability.available"],
             "next_action": "SYNTHESIZE_OR_ACQUIRE_ONLY_THE_LISTED_MISSING_CAUSAL_EFFECTS_THEN_RERUN",
         }
-        with mock.patch.object(brain, "_causal_synthesize", return_value=missing):
+        acquisition_failure = {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "OWNED_RAW_CAPABILITY_ACQUISITION_FAILED:TEST",
+        }
+        with (
+            mock.patch.object(brain, "_causal_synthesize", return_value=missing),
+            mock.patch.object(
+                brain,
+                "_owned_raw_capability_acquisition",
+                return_value=acquisition_failure,
+            ) as acquire,
+        ):
             out = brain.execute_failure_repair_cycle(
                 {
                     "failure_fingerprint": fid,
@@ -236,8 +248,14 @@ class VerifiedRepairReplayLoopV1Tests(unittest.TestCase):
                 state_path=path,
             )
         self.assertFalse(out["pass"])
-        self.assertEqual(out["status"], "REPAIR_CYCLE_UNRESOLVED_AT_SYNTHESIS")
+        self.assertEqual(
+            out["status"],
+            "REPAIR_CYCLE_UNRESOLVED_AT_OWNED_ACQUISITION",
+        )
         self.assertFalse(out["capability_expander_available"])
+        self.assertTrue(out["owned_raw_acquisition_available"])
+        self.assertEqual(out["owned_raw_acquisition"], acquisition_failure)
+        acquire.assert_called_once()
 
     def test_new_primitive_required_uses_authenticated_v12_expansion_then_replays(self):
         path = self.temp_state()
