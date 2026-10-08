@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V6_MECHANISM_CLOSURE_AUTHORITY_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS__LIVE_GITHUB_CONTENT_ADDRESSED_AUTHORITY_COHERENCE__11_OF_11",
+  "subject": "R2_ADEQUACY_OR_ABSTAIN_MECHANISM_CLOSURE_AND_V6_CURRENT_AUTHORITY",
+  "exact_blobs": {
+    "current_r2_pointer": "ea499a94e20a6509bce9976cf6b90f164db4ed9d",
+    "scheduler_v6": "6eee31433fb5b8b5776a45f1f6ac423022497177",
+    "mechanism_closure": "d0fb6e7992d2aa08223280dc6bd4930467c513ba",
+    "current_terminal_authority": "6e224a5b783694a87558725bc8e4656e97d28601",
+    "controller": "29872fc55a5ec577feea769cc919dc889899c2bd",
+    "grounded_candidate_frontier": "0d13e7c5fe5e8ce5bf8430e1741765d0c57e9b0b",
+    "coherence_regression_test": "981adf629214d49bb51b66cdc94f23c125bacf44"
+  },
+  "checks": {
+    "pointer_controller_matches_live": true,
+    "pointer_scheduler_matches_live": true,
+    "pointer_scheduler_is_v6": true,
+    "v6_controller_matches_live": true,
+    "v6_frontier_matches_live": true,
+    "v6_closure_matches_live": true,
+    "terminal_scheduler_matches_live": true,
+    "terminal_scheduler_is_v6": true,
+    "mechanism_closed_as_adequacy_or_abstain": true,
+    "open_world_positive_action_coverage_not_overclaimed": true,
+    "decisive_unobservable_reality_requires_abstention_or_information_acquisition": true
+  },
+  "inherited_behavioral_evidence": [
+    "canonical/verification/R2_GROUNDED_FRONTIER_PRECISION_RECALL_VERIFY_20261008_V1.json",
+    "canonical/verification/R2_EXISTING_POLICY_COVER_OBSERVATION_REUSE_VERIFY_20261008_V3.json",
+    "canonical/verification/R2_POLICY_COVER_INFORMATION_PROVIDER_INTEGRATION_VERIFY_20261008_V1.json",
+    "canonical/verification/R2_CONDITION_BOUND_P3_ADEQUACY_REUSE_VERIFY_20261008_V1.json",
+    "canonical/verification/R2_DETERMINISTIC_REPAIR_LADDER_VERIFY_20261008_V1.json"
+  ],
+  "verification_scope": {
+    "performed_now": "LIVE_GITHUB_BLOB_AND_AUTHORITY_CHAIN_COHERENCE",
+    "runtime_suite_reexecuted_now": false,
+    "reason": "NO_FALSE_CLAIM_OF_RUNTIME_REPLAY__EXISTING_CONTENT_ADDRESSED_BEHAVIORAL_VERIFICATIONS_REMAIN_BOUND_AS_INHERITED_EVIDENCE"
+  },
+  "result": {
+    "general_mechanism_missing": false,
+    "universal_control_semantics_closed": true,
+    "universal_positive_action_coverage_closed": false,
+    "remaining_frontier": "VERIFIED_ADEQUACY_COVERAGE_CAPABILITY_EXPANSION_AND_OBSERVABILITY"
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_OPEN_WORLD_POSITIVE_ACTION_CLOSURE",
+    "NO_OMNISCIENCE",
+    "NO_NEW_RUNTIME_REPLAY_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
