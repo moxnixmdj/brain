@@ -298,6 +298,163 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         self.assertFalse(state["skills"][weak_id]["active"])
         self.assertEqual(state["skills"][weak_id]["dominated_by"], active["active_skill_id"])
 
+    def test_verification_queue_autonomously_promotes_pending_candidate(self):
+        path = self.temp_state()
+        skill = verified_skill("a", relation="EXACT")
+        candidate = loop._candidate_from_verified_skill(skill)
+        loop.integrate_solver_output(
+            {
+                "pass": True,
+                "status": "SOLVED__SKILL_CANDIDATE_READY",
+                "current_episode_verified": False,
+                "skill_candidate": candidate,
+                "verified_skill_reuse_authorized": False,
+                "verified_executable_skill": None,
+            },
+            state_path=path,
+        )
+        provider = mock.Mock(
+            return_value={"receipt": {"path": "r"}, "verification": {"path": "v"}}
+        )
+        with mock.patch.object(
+            loop,
+            "authenticate_skill_verification",
+            return_value={
+                "pass": True,
+                "verified_skill": skill,
+                "status": "PASS__AUTHENTICATED_VERIFIED_EXECUTABLE_SKILL",
+            },
+        ):
+            tick = loop.advance_verification_queue(
+                state_path=path,
+                repo_root=Path("."),
+                skill_verification_provider=provider,
+                max_actions=1,
+            )
+
+        self.assertEqual(tick["attempted"], 1, tick)
+        self.assertEqual(tick["completed"], 1, tick)
+        sid = loop._skill_id(skill)
+        state = loop.load_state(path)
+        self.assertTrue(state["skills"][sid]["active"])
+        self.assertFalse(any(
+            row.get("kind") == "VERIFY_SKILL_CANDIDATE"
+            and row.get("status") == "PENDING"
+            for row in state["improvement_queue"].values()
+        ))
+        provider.assert_called_once()
+        self.assertEqual(provider.call_args.args[0]["kind"], "SKILL_VERIFICATION")
+
+    def test_verification_queue_upgrades_same_skill_to_bound_superset_without_self_deactivation(self):
+        path = self.temp_state()
+        exact = verified_skill("b", relation="EXACT")
+        first = loop.integrate_solver_output(
+            {
+                "pass": True,
+                "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
+                "current_episode_verified": False,
+                "skill_candidate": exact,
+                "verified_skill_reuse_authorized": True,
+                "verified_executable_skill": exact,
+            },
+            state_path=path,
+        )
+        sid = first["active_skill_id"]
+        self.assertIsNotNone(sid)
+        generalized = {
+            **exact,
+            "scope_relation": "PROVEN_SUPERSET",
+            "scope_predicate": loop.VERIFIED_SUPERSET_SCOPE_PREDICATE,
+        }
+        provider = mock.Mock(
+            return_value={"receipt": {"path": "r"}, "verification": {"path": "v"}}
+        )
+        with mock.patch.object(
+            loop,
+            "authenticate_skill_verification",
+            return_value={
+                "pass": True,
+                "verified_skill": generalized,
+                "status": "PASS__AUTHENTICATED_VERIFIED_EXECUTABLE_SKILL",
+            },
+        ):
+            tick = loop.advance_verification_queue(
+                state_path=path,
+                repo_root=Path("."),
+                skill_verification_provider=provider,
+                max_actions=1,
+            )
+
+        self.assertEqual(tick["completed"], 1, tick)
+        state = loop.load_state(path)
+        self.assertTrue(state["skills"][sid]["active"], state["skills"][sid])
+        self.assertEqual(
+            state["skills"][sid]["skill"]["scope_predicate"],
+            loop.VERIFIED_SUPERSET_SCOPE_PREDICATE,
+        )
+        self.assertEqual(state["skills"][sid]["pareto_metrics"]["generalization"], 2)
+        self.assertFalse(any(
+            row.get("kind") == "SEEK_VERIFIED_SCOPE_GENERALIZATION"
+            and row.get("status") == "PENDING"
+            for row in state["improvement_queue"].values()
+        ))
+        request = provider.call_args.args[0]
+        self.assertEqual(request["kind"], "SKILL_SCOPE_GENERALIZATION_VERIFICATION")
+        self.assertEqual(request["requested_scope_relation"], "PROVEN_SUPERSET")
+        self.assertEqual(
+            request["requested_scope_predicate"],
+            loop.VERIFIED_SUPERSET_SCOPE_PREDICATE,
+        )
+
+    def test_failed_queue_verification_is_not_hammered_without_new_evidence(self):
+        path = self.temp_state()
+        skill = verified_skill("c", relation="EXACT")
+        candidate = loop._candidate_from_verified_skill(skill)
+        episode = {
+            "pass": True,
+            "status": "SOLVED__SKILL_CANDIDATE_READY",
+            "current_episode_verified": False,
+            "skill_candidate": candidate,
+            "verified_skill_reuse_authorized": False,
+            "verified_executable_skill": None,
+        }
+        loop.integrate_solver_output(episode, state_path=path)
+        provider = mock.Mock(
+            return_value={"receipt": {"path": "r"}, "verification": {"path": "v"}}
+        )
+        rejected = {
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "independent proof absent",
+        }
+        with mock.patch.object(
+            loop,
+            "authenticate_skill_verification",
+            return_value=rejected,
+        ):
+            first = loop.advance_verification_queue(
+                state_path=path,
+                repo_root=Path("."),
+                skill_verification_provider=provider,
+            )
+            second = loop.advance_verification_queue(
+                state_path=path,
+                repo_root=Path("."),
+                skill_verification_provider=provider,
+            )
+            loop.integrate_solver_output(episode, state_path=path)
+            third = loop.advance_verification_queue(
+                state_path=path,
+                repo_root=Path("."),
+                skill_verification_provider=provider,
+            )
+
+        self.assertEqual(first["attempted"], 1)
+        self.assertEqual(second["attempted"], 0)
+        self.assertEqual(third["attempted"], 1)
+        self.assertEqual(provider.call_count, 2)
+
+
     def test_learning_run_automatically_reuses_prior_verified_episodes(self):
         path = self.temp_state()
         state = loop.load_state(path)
