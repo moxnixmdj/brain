@@ -147,6 +147,42 @@ class P3PolicyAdequacyRegistryV1Tests(unittest.TestCase):
             out["policy_adequacy_registry"]["injected_policy_ids"],
         )
 
+    def test_p3_authenticates_every_registered_cell_when_membership_is_proved(self):
+        cases = [
+            (
+                P2_ATOM,
+                "P2_INFORMATION_SAFE_EXPLICIT_CONTRACT_TOP_LAW_POLICY_V1",
+            ),
+            (
+                P3_BINARY_ATOM,
+                "P3_BOUND_BINARY_DECISION_GROUNDED_EXPRESSION_POLICY_V1",
+            ),
+            (
+                SYNTHESIS_ATOM,
+                "SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_POLICY_V1",
+            ),
+        ]
+        for basis_atom, expected_policy_id in cases:
+            with self.subTest(policy_id=expected_policy_id):
+                x = atom(basis_atom)
+                out = p3.solve(
+                    {
+                        "decision_basis": [basis_atom],
+                        "formal_source_constraints": [x],
+                        "proposed_refinements": [x],
+                    }
+                )
+                self.assertTrue(out["pass"], out)
+                self.assertEqual(
+                    out["status"],
+                    "COMMON_POLICY_CERTIFIED_ACROSS_ALL_SURVIVING_MODELS",
+                )
+                self.assertEqual(out["selected_policy_id"], expected_policy_id)
+                self.assertIn(
+                    expected_policy_id,
+                    out["policy_adequacy_registry"]["injected_policy_ids"],
+                )
+
     def test_registry_presence_does_not_self_certify_membership(self):
         out = p3.solve({"decision_basis": [P2_ATOM]})
         self.assertFalse(out["pass"])
