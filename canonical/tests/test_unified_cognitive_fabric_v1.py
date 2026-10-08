@@ -160,9 +160,8 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             },
             "options": {"self_improvement_max_actions": 2},
         }
-        with patch.object(
-            r3,
-            "advance_verification_queue",
+        with patch(
+            "canonical.runtime.unified_cognitive_fabric_v1.improvement_driver.drain",
             return_value=tick,
         ) as advance:
             out = run(
@@ -172,9 +171,14 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
 
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
         self.assertEqual(out["compounding_tick"], tick)
+        self.assertEqual(
+            out["episode_compounding_tick"]["status"],
+            "MERGED_INTO_UNIFIED_COMPOUNDING_TICK",
+        )
         advance.assert_called_once()
         kwargs = advance.call_args.kwargs
         self.assertIs(kwargs["skill_verification_provider"], verifier)
+        self.assertIsNone(kwargs["failure_repair_provider"])
         self.assertEqual(kwargs["max_actions"], 2)
 
 
