@@ -134,6 +134,7 @@ def _verify_episode_work(
     integrated = learning.integrate_solver_output(
         verified,
         state_path=state_path,
+        repo_root=repo_root,
         verification_problem=problem,
     )
     return {
@@ -195,6 +196,7 @@ def _verify_skill_work(
             "verified_skill_reuse_authorized": bool(verified_skill.get("reuse_authorized")),
         },
         state_path=state_path,
+        repo_root=repo_root,
     )
     return {
         "schema": SCHEMA,
@@ -289,6 +291,7 @@ def _verify_scope_generalization_work(
             "verified_skill_reuse_authorized": True,
         },
         state_path=state_path,
+        repo_root=repo_root,
     )
     return {
         "schema": SCHEMA,
