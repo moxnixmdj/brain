@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_EXACT_LINEAR_PARAMETER_POLYTOPE_PUBLIC_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__11_OF_11_COMMITTED_TESTS__5_OF_5_FRESH_CANARY_GROUPS__ZERO_CREDIT",
+  "subject": {
+    "brain_pull_request": 3163,
+    "exact_blobs": {
+      "canonical/runtime/exact_linear_parameter_polytope_v1.py": "b3db128a42d9b9620fa73f719ae993dd4bed2107",
+      "canonical/tests/test_exact_linear_parameter_polytope_v1.py": "74edb668d071964040e952cb307b243d4cae0250",
+      "canonical/governance/MYSTERYMECHANISM_EXACT_LINEAR_PARAMETER_POLYTOPE_20261008_V1.json": "093a778d1e72dffe40bd619eb2444e40b787969e"
+    }
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2428,
+    "merged_commit": "6d4ab9885d286d7fde7f1fdb742bbbe49bc46730",
+    "workflow_run_id": 37745936701,
+    "workflow_job_id": 113207310358,
+    "conclusion": "success",
+    "exact_committed_tests_passed": 11,
+    "fresh_independent_canary_groups_passed": 5
+  },
+  "verified_properties": [
+    "EXACT_RATIONAL_INPUT_BINDING",
+    "FULL_RANK_BOUNDEDNESS_GATE",
+    "EXACT_VERTEX_ENUMERATION",
+    "EXACT_NOISY_LINEAR_PREDICTION_INTERVALS",
+    "INFEASIBLE_OBSERVATIONS_FAIL_CLOSED",
+    "BINARY_FLOATS_REJECTED_FROM_PROOF_PATH",
+    "FEATURE_SEMANTICS_AND_NOISE_SOUNDNESS_GATES_ENFORCED",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_TERMINAL_CREDIT"
+  ],
+  "theorem_boundary": "EXACT_SET_MEMBERSHIP_ONLY_FOR_SUPPLIED_LINEAR_IN_COEFFICIENT_FEATURE_MODEL__FEATURE_SEMANTICS_OBSERVATION_INTERVAL_SOUNDNESS_AND_FAMILY_COVERAGE_REMAIN_REQUIRED_PREMISES__NO_PRIVATE_MYSTERYMECHANISM_SCORE",
+  "next_required": [
+    "EXACT_OR_SOUNDLY_ENCLOSED_SYMBOLIC_FEATURE_EVALUATION",
+    "BOUND_OBSERVATION_NOISE_CONTRACT_OR_FAIL_CLOSED",
+    "FINITE_FAMILY_OR_PARAMETER_CELL_COVERAGE_FOR_CLAIMED_SUBREGION",
+    "COMPOSE_WITH_INTERVAL_INFORMATION_FRONTIER_FOR_ADAPTIVE_QUERY_SELECTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
