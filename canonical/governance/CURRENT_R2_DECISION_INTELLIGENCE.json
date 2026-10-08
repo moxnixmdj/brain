@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-08",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V15_SEVEN_DIRECT_ROUTES__FOUR_TRANSACTIONAL_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V16_EIGHT_DIRECT_ROUTES__FIVE_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -18,18 +18,18 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V15.json",
-    "git_blob_sha": "22440996a64fd99e86a66f00c1b20ab34206beca"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V16.json",
+    "git_blob_sha": "597cb68d60a6a65cb7b13d3dce293ac72c00e8fe"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V3.json",
-    "activation_git_blob_sha": "3f63cc0398ebf900981992f71e92790ca19b1f20",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V4.json",
+    "activation_git_blob_sha": "4805a45c284c7ff9d6c4edb4bacd662904142f4e",
     "exact_cell_count": 3,
-    "bounded_family_count": 4,
-    "current_route_count": 7,
-    "current_activation_status": "THREE_EXACT_CELLS_PLUS_FOUR_TRANSACTIONAL_FAMILIES",
+    "bounded_family_count": 5,
+    "current_route_count": 8,
+    "current_activation_status": "THREE_EXACT_CELLS_PLUS_FIVE_BOUNDED_FAMILIES",
     "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
-    "direct_runtime_git_blob_sha": "4da3aade6ee049f5a0fd0bf942deb183e276368d",
+    "direct_runtime_git_blob_sha": "290db8a0ac3bb26599f46fc367502d2ad370f49a",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -40,11 +40,16 @@
         "path": "canonical/verification/R2_STRUCTURED_TABLE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
         "git_blob_sha": "786bf330876f558b08be368f97525a198fcdd060",
         "status": "PASS__EXACT_CURRENT_RUNTIME_BYTES__FOCUSED_REMOTE_REPLAY_10_OF_10__ZERO_CREDIT"
+      },
+      {
+        "path": "canonical/verification/R2_TYPED_DECISION_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "f804ec785bdac98855c520c7d275bcd0cda2ed99",
+        "status": "PASS__EXACT_TYPED_DECISION_FAMILY__REMOTE_STANDALONE_4_OF_4__FOCUSED_ROUTE_INTEGRATION_1_OF_1__ZERO_CREDIT"
       }
     ],
-    "latest_verification_path": "canonical/verification/R2_STRUCTURED_TABLE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
-    "latest_verification_git_blob_sha": "786bf330876f558b08be368f97525a198fcdd060",
-    "latest_verification_status": "PASS__EXACT_CURRENT_RUNTIME_BYTES__FOCUSED_REMOTE_REPLAY_10_OF_10__ZERO_CREDIT"
+    "latest_verification_path": "canonical/verification/R2_TYPED_DECISION_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "latest_verification_git_blob_sha": "f804ec785bdac98855c520c7d275bcd0cda2ed99",
+    "latest_verification_status": "PASS__EXACT_TYPED_DECISION_FAMILY__REMOTE_STANDALONE_4_OF_4__FOCUSED_ROUTE_INTEGRATION_1_OF_1__ZERO_CREDIT"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
@@ -71,7 +76,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__FIVE_DIRECT_ROUTES__TWO_TRANSACTIONAL_FAMILIES__VERIFIED_CAPABILITY_ESCAPE_LIVE__GOAL_SCOPED_POLICY_IDENTITIES_INDEPENDENTLY_REPLAYED",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__EIGHT_DIRECT_ROUTES__FIVE_BOUNDED_FAMILIES__VERIFIED_CAPABILITY_ESCAPE_LIVE__GOAL_SCOPED_POLICY_IDENTITIES_INDEPENDENTLY_REPLAYED",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -208,7 +213,7 @@
   "sufficient_closure": {
     "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V7.json",
     "git_blob_sha": "c78a157335c90864b01edffc03b8e19e1fc48f58",
-    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__FOUR_TRANSACTIONAL_DIRECT_FAMILIES_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
+    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__FIVE_BOUNDED_DIRECT_FAMILIES_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
     "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY"
   },
   "policy_adequacy_capability_escape": {
@@ -278,6 +283,20 @@
     "source_immutability_bound": true,
     "focused_remote_replay": "10_OF_10_PASS",
     "fresh_isolated_carrier_claimed": false,
+    "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
+    "global_coverage_claimed": false
+  },
+  "typed_decision_direct_adequacy": {
+    "path": "canonical/runtime/r2_typed_decision_direct_adequacy_v1.py",
+    "git_blob_sha": "fae1ff72fb5b1369e3fae43ed468ba879fb24f5a",
+    "verification_path": "canonical/verification/R2_TYPED_DECISION_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "verification_git_blob_sha": "f804ec785bdac98855c520c7d275bcd0cda2ed99",
+    "route_id": "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1",
+    "producer_capability_id": "decision.synthesis.typed.stdlib",
+    "independent_verifier_capability_id": "decision.synthesis.verify.stdlib",
+    "standalone_replay": "4_OF_4_PASS",
+    "focused_route_integration": "1_OF_1_PASS",
+    "exact_goal_family_only": true,
     "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
     "global_coverage_claimed": false
   }

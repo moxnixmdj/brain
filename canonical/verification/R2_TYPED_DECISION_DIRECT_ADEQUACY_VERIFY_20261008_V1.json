@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_R2_TYPED_DECISION_DIRECT_ADEQUACY_VERIFY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__EXACT_TYPED_DECISION_FAMILY__REMOTE_STANDALONE_4_OF_4__FOCUSED_ROUTE_INTEGRATION_1_OF_1__ZERO_CREDIT",
+  "subject": {
+    "family_runtime": {
+      "path": "canonical/runtime/r2_typed_decision_direct_adequacy_v1.py",
+      "git_blob_sha": "fae1ff72fb5b1369e3fae43ed468ba879fb24f5a"
+    },
+    "direct_runtime": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "290db8a0ac3bb26599f46fc367502d2ad370f49a"
+    },
+    "producer": {
+      "path": "canonical/runtime/bound_capabilities/evidence_decision_synthesis.py",
+      "git_blob_sha": "d7c73c24d2038c40bfb38ea6f10749a15a2d5415"
+    },
+    "independent_verifier": {
+      "path": "canonical/runtime/bound_capabilities/evidence_decision_verify.py",
+      "git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+    },
+    "family_tests": {
+      "path": "canonical/tests/test_r2_typed_decision_direct_adequacy_v1.py",
+      "git_blob_sha": "ebf5efdaf5a169a84ea22518211e6bc6cc09187f"
+    },
+    "integration_test": {
+      "path": "canonical/tests/test_r2_typed_decision_direct_integration_v1.py",
+      "git_blob_sha": "8485beac0972d24db4a26814ddc586918a0dbf88"
+    }
+  },
+  "replay": {
+    "carrier": "brain-root3-current-byte-replay-20261007-v1",
+    "carrier_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "exact_current_dependency_bytes_synced": [
+      {
+        "path": "canonical/runtime/lossless_raw_task_contract_v1.py",
+        "git_blob_sha": "d54d5a2f7efa76b653d288f4f53da4883644baa6"
+      },
+      {
+        "path": "canonical/runtime/explicit_requirement_index_v2.py",
+        "git_blob_sha": "30629b10fdbf3c337eb3252c043ec13123ca66a1"
+      },
+      {
+        "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+        "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+      },
+      {
+        "path": "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+        "git_blob_sha": "3f08b2703723537e5a146346eead6a387424687f"
+      }
+    ],
+    "standalone_family_replay": "4_OF_4_PASS",
+    "standalone_checks": [
+      "PURE_EXACT_PREFLIGHT",
+      "REAL_END_TO_END_PRODUCER_PLUS_INDEPENDENT_RECOMPUTATION",
+      "FORCED_VERIFIER_FAILURE_ROLLBACK",
+      "OUT_OF_SCOPE_REJECTION"
+    ],
+    "focused_route_integration": "1_OF_1_PASS",
+    "focused_integration_result": "PASS_ROUTE_INTEGRATION_8_ROUTES",
+    "focused_integration_isolation_note": "THE_SEVEN_UNTOUCHED_DIRECT_ROUTE_MODULES_WERE_STUBBED_AS_NO_MATCH_ON_THE_OLDER_VERIFIER_CARRIER; THE_NEW_TYPED_DECISION_FAMILY_PRODUCER_VERIFIER_AND_LOSSLESS_RAW_GOAL_STACK_EXECUTED_REAL_CURRENT_BYTES.",
+    "fresh_full_current_runtime_replay_claimed": false
+  },
+  "proved": [
+    "EXACT_TYPED_DECISION_GOAL_PREFLIGHT_IS_SIDE_EFFECT_FREE",
+    "INPUT_TYPED_DECISION_SCHEMA_AND_SOURCE_BYTES_ARE_BOUND_BEFORE_EXECUTION",
+    "BRAIN_OWNED_DETERMINISTIC_TYPED_DECISION_PRODUCER_EXECUTES_AT_MOST_ONCE",
+    "SEPARATELY_IMPLEMENTED_PRODUCER_INDEPENDENT_VERIFIER_RECOMPUTES_DECISION_RELEVANT_VALUES",
+    "SOURCE_INPUT_SHA256_REMAINS_STABLE_THROUGH_EXECUTION_AND_VERIFICATION",
+    "SUCCESS_ACCEPTS_EVERY_LOSSLESS_RAW_GOAL_OBLIGATION",
+    "FORCED_VERIFIER_FAILURE_RESTORES_PREEXISTING_OUTPUT_BYTES_OR_REMOVES_NEW_OUTPUT",
+    "MATCHED_ROUTE_FAILURE_FORBIDS_FALLTHROUGH_TO_OTHER_POLICY_PATHS",
+    "DIRECT_ROUTE_LAYER_EXPOSES_EIGHT_ROUTES_WITH_TYPED_DECISION_AS_THE_EIGHTH"
+  ],
+  "coverage_delta": {
+    "new_direct_route": "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1",
+    "new_verified_capabilities": [
+      "decision.synthesis.typed.stdlib",
+      "decision.synthesis.verify.stdlib"
+    ],
+    "semantic_scope": "EXACT_REPOSITORY_LOCAL_TYPED_DECISION_PROBLEM_TO_INDEPENDENTLY_VERIFIED_DECISION_RESULT",
+    "global_open_world_coverage_complete": false,
+    "general_control_mechanism_missing": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_NATURAL_LANGUAGE_SEMANTIC_CLOSURE",
+    "NO_CLAIM_TYPED_DECISION_FAMILY_APPLIES_OUTSIDE_THE_EXACT_DECLARED_GOAL_GRAMMAR_AND_TYPED_INPUT_SCHEMA",
+    "NO_CLAIM_FULL_CURRENT_RUNTIME_REPLAY_ON_THE_OLDER_CARRIER",
+    "NO_CLAIM_OPEN_WORLD_POSITIVE_ACTION_COVERAGE_IS_COMPLETE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

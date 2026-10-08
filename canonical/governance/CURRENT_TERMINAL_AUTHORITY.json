@@ -887,10 +887,10 @@
     "current_r2_decision_intelligence": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "scheduler_cut": {
-        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V15.json",
-        "git_blob_sha": "22440996a64fd99e86a66f00c1b20ab34206beca"
+        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V16.json",
+        "git_blob_sha": "597cb68d60a6a65cb7b13d3dce293ac72c00e8fe"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V15_SEVEN_DIRECT_ROUTES__FOUR_TRANSACTIONAL_ADEQUACY_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V16_EIGHT_DIRECT_ROUTES__FIVE_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     }
@@ -2073,8 +2073,8 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V15.json",
-    "current_scheduler_git_blob_sha": "22440996a64fd99e86a66f00c1b20ab34206beca",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V16.json",
+    "current_scheduler_git_blob_sha": "597cb68d60a6a65cb7b13d3dce293ac72c00e8fe",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
@@ -2085,5 +2085,5 @@
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA"
   },
-  "pointer_revision": 39
+  "pointer_revision": 40
 }
