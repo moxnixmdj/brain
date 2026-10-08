@@ -11,6 +11,7 @@ TARGET_SCHEMA = "PROJECT_BRAIN_AA_BRIEFCASE_OPUS55_CURRENT_OWNER_TARGET_V1"
 EXPECTED_BENCHMARK = "AA-Briefcase v1.1"
 EXPECTED_MODEL = "Claude Opus 5.5 (Max, Default Fallback)"
 EXPECTED_TASK_COUNT = 91
+EXPECTED_GRADING_PROTOCOL_BLOB_SHA = "5c77f294e09d4933e3a3175c46af225b414f4702"
 
 ROUTES = {
     "E_EXPLICIT_COMPLETE",
@@ -160,6 +161,8 @@ def verify_scope_complete_dominance(
     _hex64(certificate.get("private_task_population_sha256"), "PRIVATE_TASK_POPULATION_SHA256")
     _hex64(certificate.get("scope_manifest_sha256"), "SCOPE_MANIFEST_SHA256")
     _hex64(certificate.get("verification_receipt_sha256"), "VERIFICATION_RECEIPT_SHA256")
+    if certificate.get("grading_protocol_manifest_git_blob_sha") != EXPECTED_GRADING_PROTOCOL_BLOB_SHA:
+        raise DominanceCertificateError("GRADING_PROTOCOL_MANIFEST_DRIFT")
 
     task_count = certificate.get("task_count")
     if task_count != EXPECTED_TASK_COUNT:
@@ -215,6 +218,7 @@ def verify_scope_complete_dominance(
         "check_id_set_sha256": certificate["check_id_set_sha256"],
         "task_id_set_sha256": certificate["task_id_set_sha256"],
         "verification_receipt_sha256": certificate["verification_receipt_sha256"],
+        "grading_protocol_manifest_git_blob_sha": certificate["grading_protocol_manifest_git_blob_sha"],
         "brain_weakly_dominates_current_opus55_on_every_load_bearing_check": True,
         "numeric_elo_reconstruction_required": False,
         "official_owner_elo_claimed": False,
