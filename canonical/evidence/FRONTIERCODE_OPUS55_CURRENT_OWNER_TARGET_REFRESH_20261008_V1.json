@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_OPUS55_CURRENT_OWNER_TARGET_REFRESH_V1",
+  "date": "2026-10-08",
+  "status": "OWNER_PUBLIC_TARGET_TUPLE_BOUND__CURRENT_OPUS55_MAIN_SCORE_54_64_PERCENT__HISTORICAL_FROZEN_PREDICATE_54_4_PRESERVED__ZERO_CREDIT",
+  "benchmark": "FrontierCode 1.1",
+  "frozen_predicate_id": "CODING_FRONTIERCODE_GE_54_4",
+  "owner_sources": {
+    "leaderboard_page": {
+      "url": "https://cognition.com/frontiercode",
+      "observed": "FRONTIERCODE_1_1_CURRENT__MAIN_AND_EXTENDED_SUBSETS__CLAUDE_OPUS_5_5_PRESENT"
+    },
+    "public_data": {
+      "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+      "raw_sha256": "913a7befb74bf6facf490099cbe982dc17972ee5c4a5ff859eb918d2c5e4d3bf",
+      "top_level_key": "v1_1"
+    },
+    "owner_homepage": {
+      "url": "https://cognition.com/",
+      "observed": "FRONTIERCODE_1_1_MAIN__OPUS_5_5_MEDIUM__54_6_PERCENT"
+    }
+  },
+  "current_owner_target": {
+    "model": "Claude Opus 5.5",
+    "reasoning_effort": "medium",
+    "subset": "main",
+    "subset_task_count": 100,
+    "harness": "claude-code",
+    "score_field": "new_score",
+    "exact_score_fraction": 0.5464,
+    "exact_score_percent": 54.64,
+    "owner_display_percent": 54.6,
+    "pass_rate_field": "correct",
+    "pass_rate_fraction": 0.596,
+    "pass_rate_percent": 59.6,
+    "flagged_rate": 0,
+    "tokens_average": 18519,
+    "cost_average_usd": 0.8016,
+    "duration_average_minutes": 6.34,
+    "tool_calls_average": 35.1,
+    "steps_average": 64,
+    "target_reference_harness": "claude-code",
+    "brain_literal_same_harness_required": false,
+    "brain_harness_comparability_rule": "OWNER_ADMISSIBLE_OR_SEPARATELY_PROVED_PROTOCOL_EQUIVALENT",
+    "brain_harness_admissibility_currently_proved": false
+  },
+  "all_opus55_main_rows": {
+    "low": {
+      "score_percent": 47.3,
+      "pass_rate_percent": 51.75
+    },
+    "medium": {
+      "score_percent": 54.64,
+      "pass_rate_percent": 59.6
+    },
+    "high": {
+      "score_percent": 53.99,
+      "pass_rate_percent": 58.9
+    },
+    "xhigh": {
+      "score_percent": 51.42,
+      "pass_rate_percent": 56.8
+    },
+    "max": {
+      "score_percent": 54.43,
+      "pass_rate_percent": 60
+    }
+  },
+  "owner_reporting_rule": "OWNER_METHODOLOGY_REPORTS_EACH_MODEL_AT_ITS_BEST_PERFORMING_REASONING_LEVEL_FOR_THE_SCORE_METRIC__THEREFORE_CURRENT_OPUS55_TARGET_IS_MEDIUM_54_64_PERCENT_NOT_MAX_54_43_PERCENT",
+  "epoch_reconciliation": {
+    "historical_frozen_predicate_percent": 54.4,
+    "current_owner_target_percent": 54.64,
+    "rule": "PRESERVE_THE_FROZEN_PREDICATE_ID_FOR_PROVENANCE__A_CURRENT_MATCHED_BRAIN_EXECUTION_MAY_COMPARE_TO_54_64_ONLY_WHEN_FRONTIERCODE_1_1_MAIN_TASK_POPULATION_GRADING_REVISION_SCORE_AGGREGATION_INTERNET_POLICY_AND_AN_OWNER_ADMISSIBLE_OR_SEPARATELY_PROVED_PROTOCOL_EQUIVALENT_BRAIN_HARNESS_CONFIGURATION_ARE_MATCHED__LITERAL_CLAUDE_CODE_IDENTITY_IS_NOT_REQUIRED__A_SCOPE_COMPLETE_STRONGER_PROOF_PREEMPTS_THE_SCALAR_ROUTE"
+  },
+  "task_population_boundary": {
+    "main_count_public": 100,
+    "extended_count_public": 150,
+    "complete_main_task_manifest_public": false,
+    "per_task_rubric_manifest_public": false,
+    "consequence": "PUBLIC_OWNER_DATA_BINDS_TARGET_SCORE_HARNESS_AND_SUBSET_SIZE_BUT_DOES_NOT_BY_ITSELF_CLOSE_DATASET_OR_HIDDEN_RUBRIC_SCOPE_COMPARABILITY"
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_FRONTIERCODE_RESULT",
+    "NO_FRONTIERCODE_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_54_64_CAN_BE_COMPARED_TO_A_BRAIN_RESULT_FROM_A_DIFFERENT_TASK_POPULATION_HARNESS_GRADING_REVISION_OR_CONFIGURATION",
+    "NO_CLAIM_THE_PUBLIC_OWNER_DATA_EXPOSES_THE_COMPLETE_100_TASK_MAIN_MANIFEST",
+    "NO_TERMINAL_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "harness_comparability_binding": "canonical/governance/FRONTIERCODE_HARNESS_COMPARABILITY_TRUTH_REPAIR_20261008_V1.json"
+}

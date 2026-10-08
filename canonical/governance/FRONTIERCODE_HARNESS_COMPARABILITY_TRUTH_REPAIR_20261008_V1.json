@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_HARNESS_COMPARABILITY_TRUTH_REPAIR_V1",
+  "date": "2026-10-08",
+  "status": "OWNER_PUBLIC_DATA_FALSIFIES_LITERAL_SAME_HARNESS_REQUIREMENT__OWNER_ADMISSIBLE_OR_PROTOCOL_EQUIVALENT_HARNESS_REMAINS_LOAD_BEARING__ZERO_CREDIT",
+  "benchmark": "FrontierCode 1.1",
+  "owner_source": {
+    "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+    "raw_sha256": "913a7befb74bf6facf490099cbe982dc17972ee5c4a5ff859eb918d2c5e4d3bf",
+    "key": "v1_1.harness"
+  },
+  "observed_harness_families": {
+    "claude-code": [
+      "Claude Opus 5.5",
+      "Claude Sonnet 5.5",
+      "Claude Haiku 5.5",
+      "Claude Fable 5",
+      "Claude Opus 4.8",
+      "Claude Sonnet 5",
+      "Claude Opus 4.7",
+      "Claude Opus 5",
+      "Claude Opus 4.6",
+      "Claude Sonnet 4.6",
+      "Claude Fable 5.1"
+    ],
+    "codex": [
+      "GPT-6 Sol",
+      "GPT-6 Luna",
+      "GPT-5.6 Sol",
+      "GPT-5.5",
+      "GPT-5.6 Terra",
+      "GPT-5.6 Luna",
+      "GPT-5.4-mini",
+      "GPT-6 Astra",
+      "GPT-6.1 Sol"
+    ],
+    "chisel": [
+      "SWE-1.7",
+      "SWE-1.6",
+      "Gemini 3.6 Flash",
+      "Gemini 3.7 Flash",
+      "DeepSeek V4 Flash 0731",
+      "Mistral 3.5 Medium",
+      "DeepSeek V4 Pro 0813",
+      "GLM 5.3",
+      "GLM 5.3 Flash",
+      "Nemotron 3 Ultra",
+      "Gemini 3.8 Flash"
+    ],
+    "devin": [
+      "SWE-2"
+    ],
+    "cursor-cli": [
+      "Composer 2.5"
+    ],
+    "grok-build": [
+      "Grok 4.5",
+      "Grok 4.6",
+      "Grok 4.7"
+    ],
+    "mini-swe-agent": [
+      "Kimi K2.7",
+      "GLM 5.2",
+      "DeepSeek V4 Pro",
+      "MiniMax M3",
+      "Inkling",
+      "Qwen 3.7 Plus",
+      "Kimi K3"
+    ]
+  },
+  "counterexample": {
+    "claim_under_attack": "ALL_COMPARABLE_FRONTIERCODE_SYSTEMS_MUST_USE_THE_SAME_LITERAL_HARNESS_AS_OPUS_5_5",
+    "owner_data_counterexample": "OWNER_LEADERBOARD_COMPARES_MULTIPLE_MODEL_HARNESS_COMBINATIONS_UNDER_ONE_FRONTIERCODE_1_1_RESULT_TABLE",
+    "conclusion": "LITERAL_HARNESS_IDENTITY_TO_CLAUDE_CODE_IS_NOT_A_NECESSARY_OWNER_COMPARABILITY_INVARIANT"
+  },
+  "corrected_comparability_rule": {
+    "target_reference": "CLAUDE_OPUS_5_5_MEDIUM_ON_CLAUDE_CODE__54_64_PERCENT_MAIN_SCORE",
+    "brain_requirement": "BRAIN_MUST_USE_AN_OWNER_ADMISSIBLE_OR_SEPARATELY_PROVED_PROTOCOL_EQUIVALENT_HARNESS_CONFIGURATION_UNDER_THE_SAME_FRONTIERCODE_1_1_MAIN_TASK_POPULATION_GRADING_REVISION_INTERNET_POLICY_AND_SCORE_AGGREGATION_RULES__LITERAL_CLAUDE_CODE_IDENTITY_IS_NOT_REQUIRED",
+    "unresolved_fact": "EXACT_OWNER_ADMISSIBILITY_OR_PROTOCOL_EQUIVALENCE_OF_A_BRAIN_SPECIFIC_HARNESS_ROUTE_REMAINS_UNPROVED_WITHOUT_AN_OWNER_ROUTE_OR_STRONGER_SCOPE_COMPLETE_PROOF"
+  },
+  "consequence": {
+    "deleted_blocker": "LITERAL_SAME_HARNESS_AS_OPUS_5_5",
+    "surviving_blocker": "OWNER_ADMISSIBLE_OR_PROTOCOL_EQUIVALENT_BRAIN_HARNESS_ROUTE",
+    "stronger_proof_route": "SCOPE_COMPLETE_STRONGER_PROOF_PREEMPTS_HARNESS_COMPARABILITY_AND_SCORE_EXECUTION",
+    "acceptance_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_CURRENT_BRAIN_HARNESS_IS_OWNER_ADMISSIBLE_FOR_FRONTIERCODE",
+    "NO_CLAIM_OWNER_WOULD_ACCEPT_AN_ARBITRARY_THIRD_PARTY_HARNESS",
+    "NO_BRAIN_FRONTIERCODE_RESULT",
+    "NO_FRONTIERCODE_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
