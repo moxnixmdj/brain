@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_R3_AUTONOMOUS_REPAIR_CLOSURE_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__LIVE_AUTONOMOUS_REPAIR_REGRESSION_20_OF_20",
+  "subject_branch": "r3-autonomous-repair-closure-20261008",
+  "subject_commit": "27a721e51fcfc23bd3803541041ace70f7e7fcaa",
+  "verified_files": [
+    "canonical/runtime/live_brain_runtime_v1.py",
+    "canonical/tests/test_live_brain_runtime_v1.py",
+    ".github/workflows/r3-autonomous-self-improvement-v1.yml"
+  ],
+  "isolated_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13"
+  },
+  "verification": {
+    "compile_command": "python3 -m py_compile canonical/runtime/live_brain_runtime_v1.py canonical/tests/test_live_brain_runtime_v1.py",
+    "compile_passed": true,
+    "test_command": "python3 -m unittest canonical.tests.test_live_brain_runtime_v1 -v",
+    "tests_run": 20,
+    "tests_passed": 20,
+    "tests_failed": 0,
+    "elapsed_seconds": 0.007
+  },
+  "proved_behaviors": [
+    "live generic execution runs through R3 verified reuse-first execution",
+    "replayable live failures automatically trigger the verified repair cycle when a verified repair frontier or authenticated capability expander is available",
+    "automatic repair is not credited as success unless original-obligation replay passes",
+    "automatic repair fails closed when no verified repair substrate is available",
+    "compiled-bound failures use the same automatic repair closure",
+    "repair replay forcibly disables nested automatic repair, including historical retry capsules",
+    "successful non-learning outputs are not promoted into reusable capability authority"
+  ],
+  "verification_boundary": {
+    "automatic_repair_bridge": "ORCHESTRATION_ONLY__NO_SELF_CERTIFICATION",
+    "new_primitive_invention": "REQUIRES_AUTHENTICATED_CAPABILITY_EXPANDER_WHEN_NO_VERIFIED_REPAIR_COMPONENT_EXISTS",
+    "cross_scope_generalization": "UNCHANGED_FAIL_CLOSED__NO_NEW_SCOPE_CERTIFICATE_WAS_INVENTED",
+    "claim": "THIS_RECEIPT VERIFIES LIVE AUTOMATIC REPAIR ORCHESTRATION AND REGRESSION BEHAVIOR; IT DOES NOT CLAIM UNIVERSAL OPEN-WORLD INVENTION OR UNSOUND CROSS-SCOPE GENERALIZATION"
+  },
+  "accounting": {
+    "terminal_credit_delta": 0,
+    "capability_promotion_credit_delta": 0
+  }
+}
