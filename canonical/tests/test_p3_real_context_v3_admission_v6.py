@@ -120,3 +120,25 @@ def test_categorical_required_realization_fast_path():
     assert out["p3_contract_cell_authorized"] is True
     assert out["top_law_eligible"] is False
     assert out["terminal_authority"] is False
+
+
+def test_common_contract_guard_blocks_field_projection_on_every_route():
+    from copy import deepcopy
+    # Numeric semantic route bypassed the legacy V3 fact grammar in V6.
+    source={"context_id":"x","v3_input":base([
+        req("A","Revenue growth is at least 10.")
+    ],[ev("E","Report states Revenue growth is 12.")])}
+    variants=[
+        ("wrong_schema","V3_INPUT_SCHEMA_INVALID",lambda p:p["v3_input"].update({"schema":"FORGED"})),
+        ("unknown_input","UNMODELED_V3_INPUT_FIELDS",lambda p:p["v3_input"].update({"hidden_audience_constraints":{"language":"German"}})),
+        ("unknown_task","UNMODELED_TASK_REQUIREMENTS",lambda p:p["v3_input"]["task"].update({"mandatory_semantic_requirement":"Translate to German"})),
+        ("unknown_claim","UNMODELED_CLAIM_REQUIREMENTS",lambda p:p["v3_input"]["task"]["claims"][0].update({"forbid_output":True})),
+    ]
+    for name, reason, mutate in variants:
+        attack=deepcopy(source)
+        mutate(attack)
+        out=evaluate(attack)
+        assert out["pass"] is False,(name,out)
+        assert out["reason"]==reason,(name,out)
+        assert out["p3_contract_cell_authorized"] is False
+        assert out["terminal_credit_delta"]==0
