@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_P3_REAL_CONTEXT_V4_TWO_CARRIER_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__TWO_CARRIERS__8_OF_8_EACH__STRUCTURAL_PLUS_WEIGHTED_FAST_PATHS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/p3_real_context_v3_admission_v4.py",
+      "git_blob_sha": "c2e7dac809f0d127c287906dc4780152970d6a03"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p3_real_context_v3_admission_v4.py",
+      "git_blob_sha": "6f681d0862fd5d7fa89d1bff80dca042b1e3a7e3"
+    },
+    "dependencies": {
+      "mechanically_closed_cell": "66ce574da0cc8098d7aba8bb26bd18e36fe9784e",
+      "explicit_weighted_cell": "d06eb50d5247a3ed7bfcc0f10df2c223230bf3b7",
+      "v2_fail_closed_fallback": "c4728d43a903acb62c6f8c5b0877d99ab12cd844"
+    }
+  },
+  "primary_execution": {
+    "provider": "SPRITES",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "result": {
+      "pass": true,
+      "passed": 8,
+      "total": 8
+    }
+  },
+  "independent_execution": {
+    "provider": "SPRITES",
+    "sprite": "h100-real-image-v1",
+    "sprite_id": "sprite-68a466f6-88d5-493d-93f3-2b85377836a3",
+    "result": {
+      "pass": true,
+      "passed": 8,
+      "total": 8
+    }
+  },
+  "checks": [
+    "STRUCTURAL_FAST_PATH_STILL_WINS",
+    "WEIGHTED_FAST_PATH_SELECTS_EXACT_OPTIMUM",
+    "CHANGING_ONLY_WEIGHTS_CAUSALLY_CHANGES_SELECTION",
+    "MISSING_WEIGHTS_FALL_BACK_FAIL_CLOSED",
+    "CONFLICTS_EXIT_WEIGHTED_FAST_PATH",
+    "CALLER_INCLUDE_CANNOT_OVERRIDE_OPTIMIZER",
+    "FORGED_SEMANTIC_CERTIFICATES_DO_NOT_AUTHORIZE_FALLBACK",
+    "FAST_PATHS_NEVER_MINT_DB_U_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_SOURCE_AUTHORIZATION_PROOF",
+    "NO_GENERAL_SEMANTIC_RELEVANCE",
+    "NO_GENERAL_HIDDEN_UNCERTAINTY_DISCOVERY",
+    "NO_GENERAL_AUDIENCE_MEANING",
+    "NO_DB_ADMISSION_AUTHORITY",
+    "NO_U_SUBTRACTION_AUTHORITY",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

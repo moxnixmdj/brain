@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_P3_REAL_CONTEXT_ADMISSION_V4_ACTIVATION_V1",
+  "date": "2026-10-08",
+  "status": "VERIFIED_TWO_STAGE_DETERMINISTIC_FAST_PATH_PLUS_FAIL_CLOSED_SEMANTIC_FALLBACK__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/p3_real_context_v3_admission_v4.py",
+    "git_blob_sha": "c2e7dac809f0d127c287906dc4780152970d6a03"
+  },
+  "verification": {
+    "path": "canonical/verification/P3_REAL_CONTEXT_V4_TWO_CARRIER_VERIFICATION_20261008_V1.json"
+  },
+  "route_order": [
+    "MECHANICALLY_CLOSED_COMMON_POLICY_CELL_V1",
+    "EXPLICIT_WEIGHTED_SALIENCE_CELL_V1_WHEN_OBJECTIVE_WEIGHTS_SUPPLIED",
+    "V2_FAIL_CLOSED_SEMANTIC_FALLBACK"
+  ],
+  "scheduler_effect": "USE_V4_AS_CURRENT_P3_REAL_CONTEXT_ADMISSION_FRONT_DOOR",
+  "next_root": "CONFLICT_OR_HIDDEN_UNCERTAINTY_DISCOVERY__UNEXPLICIT_RELEVANCE_WEIGHTS__UNMODELED_AUDIENCE_MEANING",
+  "hard_nonclaims": [
+    "NO_GENERAL_P3_CLOSURE",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
