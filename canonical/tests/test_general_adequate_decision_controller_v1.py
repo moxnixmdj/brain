@@ -394,5 +394,242 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             )
 
 
+    def test_partial_goal_binding_can_preserve_unknown_goal_remainder_opaquely(self):
+        goal = "Do the useful thing while preserving every unknown requirement."
+        raw_contract = {
+            "pass": True,
+            "task_contract_sha256": "raw-contract-1",
+            "nonwhitespace_source_coverage_complete": True,
+            "acceptance_contract": {
+                "obligations": [
+                    {"obligation_id": "RAWREQ:o1"},
+                    {"obligation_id": "RAWREQ:o2"},
+                ]
+            },
+        }
+        opaque = controller._opaque_goal_atom_id("RAWREQ:o2")
+        decision_payload = {
+            "context_id": "ctx",
+            "v3_input": {"task": {}},
+            "bound_relevance_cegar_loop": {
+                "cegar_problem": {
+                    "decision_basis": ["SEM:o1", opaque],
+                },
+                "truth_payloads_by_discriminator_id": {},
+                "truth_payloads_by_predicate_id": {},
+                "source_positive_selection_contracts": {},
+            },
+        }
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            gov = root / "canonical/governance"
+            ver = root / "canonical/verification"
+            gov.mkdir(parents=True)
+            ver.mkdir(parents=True)
+
+            receipt_path = gov / "partial_goal.json"
+            verify_path = ver / "partial_goal_verify.json"
+            goal_sha = controller.sha256(goal.encode("utf-8")).hexdigest()
+            decision_sha = controller._digest(decision_payload)
+            receipt = {
+                "schema": controller.PARTIAL_GOAL_BINDING_SCHEMA,
+                "goal_sha256": goal_sha,
+                "decision_payload_sha256": decision_sha,
+                "raw_task_contract_sha256": raw_contract["task_contract_sha256"],
+                "binding_proved": True,
+                "all_raw_obligations_represented": True,
+                "sound_overapproximation_proved": True,
+                "load_bearing_constraints_preserved": True,
+                "fully_semantically_bound_obligation_ids": ["RAWREQ:o1"],
+                "semantic_atom_ids_by_obligation": {
+                    "RAWREQ:o1": ["SEM:o1"],
+                },
+                "opaque_remainder_atom_ids": {
+                    "RAWREQ:o2": opaque,
+                },
+            }
+            receipt_path.write_text(
+                json.dumps(receipt, sort_keys=True), encoding="utf-8"
+            )
+            receipt_blob = controller._git_blob_sha(receipt_path)
+            verification = {
+                "schema": controller.PARTIAL_GOAL_BINDING_VERIFY_SCHEMA,
+                "subject_git_blob_sha": receipt_blob,
+                "goal_sha256": goal_sha,
+                "decision_payload_sha256": decision_sha,
+                "raw_task_contract_sha256": raw_contract["task_contract_sha256"],
+                "pass": True,
+                "independent_verified": True,
+                "representation_completeness_verified": True,
+                "semantic_atom_mapping_verified": True,
+                "opaque_remainder_completeness_verified": True,
+                "sound_overapproximation_verified": True,
+                "load_bearing_constraints_verified": True,
+            }
+            verify_path.write_text(
+                json.dumps(verification, sort_keys=True), encoding="utf-8"
+            )
+            binding = {
+                "receipt": {
+                    "path": "canonical/governance/partial_goal.json",
+                    "git_blob_sha": receipt_blob,
+                },
+                "verification": {
+                    "path": "canonical/verification/partial_goal_verify.json",
+                    "git_blob_sha": controller._git_blob_sha(verify_path),
+                },
+            }
+            out = controller._authenticate_partial_goal_binding(
+                binding,
+                goal=goal,
+                decision_payload=decision_payload,
+                raw_contract=raw_contract,
+                repo_root=root,
+            )
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "PASS__PARTIAL_GOAL_CONTEXT_SOUND_OVERAPPROXIMATION_AUTHENTICATED",
+        )
+        self.assertEqual(out["fully_semantically_bound_obligation_count"], 1)
+        self.assertEqual(out["opaque_remainder_obligation_count"], 1)
+        self.assertTrue(out["sound_overapproximation_only"])
+        self.assertFalse(out["semantic_completeness_claimed"])
+
+    def test_partial_goal_binding_fails_if_opaque_remainder_is_not_in_decision_basis(self):
+        goal = "Keep the unparsed requirement alive."
+        raw_contract = {
+            "pass": True,
+            "task_contract_sha256": "raw-contract-2",
+            "nonwhitespace_source_coverage_complete": True,
+            "acceptance_contract": {
+                "obligations": [{"obligation_id": "RAWREQ:o1"}]
+            },
+        }
+        opaque = controller._opaque_goal_atom_id("RAWREQ:o1")
+        decision_payload = {
+            "context_id": "ctx",
+            "v3_input": {"task": {}},
+            "bound_relevance_cegar_loop": {
+                "cegar_problem": {"decision_basis": ["OTHER"]},
+                "truth_payloads_by_discriminator_id": {},
+                "truth_payloads_by_predicate_id": {},
+                "source_positive_selection_contracts": {},
+            },
+        }
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            gov = root / "canonical/governance"
+            ver = root / "canonical/verification"
+            gov.mkdir(parents=True)
+            ver.mkdir(parents=True)
+            receipt_path = gov / "partial_goal.json"
+            verify_path = ver / "partial_goal_verify.json"
+            goal_sha = controller.sha256(goal.encode("utf-8")).hexdigest()
+            decision_sha = controller._digest(decision_payload)
+            receipt = {
+                "schema": controller.PARTIAL_GOAL_BINDING_SCHEMA,
+                "goal_sha256": goal_sha,
+                "decision_payload_sha256": decision_sha,
+                "raw_task_contract_sha256": raw_contract["task_contract_sha256"],
+                "binding_proved": True,
+                "all_raw_obligations_represented": True,
+                "sound_overapproximation_proved": True,
+                "load_bearing_constraints_preserved": True,
+                "fully_semantically_bound_obligation_ids": [],
+                "semantic_atom_ids_by_obligation": {},
+                "opaque_remainder_atom_ids": {"RAWREQ:o1": opaque},
+            }
+            receipt_path.write_text(
+                json.dumps(receipt, sort_keys=True), encoding="utf-8"
+            )
+            receipt_blob = controller._git_blob_sha(receipt_path)
+            verification = {
+                "schema": controller.PARTIAL_GOAL_BINDING_VERIFY_SCHEMA,
+                "subject_git_blob_sha": receipt_blob,
+                "goal_sha256": goal_sha,
+                "decision_payload_sha256": decision_sha,
+                "raw_task_contract_sha256": raw_contract["task_contract_sha256"],
+                "pass": True,
+                "independent_verified": True,
+                "representation_completeness_verified": True,
+                "semantic_atom_mapping_verified": True,
+                "opaque_remainder_completeness_verified": True,
+                "sound_overapproximation_verified": True,
+                "load_bearing_constraints_verified": True,
+            }
+            verify_path.write_text(
+                json.dumps(verification, sort_keys=True), encoding="utf-8"
+            )
+            binding = {
+                "receipt": {
+                    "path": "canonical/governance/partial_goal.json",
+                    "git_blob_sha": receipt_blob,
+                },
+                "verification": {
+                    "path": "canonical/verification/partial_goal_verify.json",
+                    "git_blob_sha": controller._git_blob_sha(verify_path),
+                },
+            }
+            out = controller._authenticate_partial_goal_binding(
+                binding,
+                goal=goal,
+                decision_payload=decision_payload,
+                raw_contract=raw_contract,
+                repo_root=root,
+            )
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "FAIL_CLOSED__PARTIAL_GOAL_TO_DECISION_BINDING_INVALID",
+        )
+        self.assertIn(
+            "PARTIAL_GOAL_REPRESENTATION_OUTSIDE_DECISION_BASIS",
+            out["reason"],
+        )
+
+    def test_controller_can_enter_policy_reasoning_with_sound_partial_goal_binding(self):
+        request = self._base_request()
+        request.pop("goal_to_decision_binding")
+        request["partial_goal_to_decision_binding"] = {
+            "receipt": {},
+            "verification": {},
+        }
+        request["goal_satisfaction_binding"] = {"receipt": {}, "verification": {}}
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(
+                 controller,
+                 "_authenticate_partial_goal_binding",
+                 return_value={
+                     "pass": True,
+                     "status": "PASS__PARTIAL_GOAL_CONTEXT_SOUND_OVERAPPROXIMATION_AUTHENTICATED",
+                 },
+             ), \
+             patch.object(controller, "evaluate_p3", return_value=self._decision_pass()) as p3, \
+             patch.object(
+                 controller,
+                 "_authenticate_goal_satisfaction_binding",
+                 return_value=self._goal_satisfaction_pass(),
+             ):
+            out = controller.run(request)
+        self.assertTrue(out["pass"], out)
+        p3.assert_called_once()
+        self.assertTrue(out["actual_goal_satisfaction_verified"])
+
+    def test_controller_rejects_ambiguous_full_and_partial_goal_binding_modes(self):
+        request = self._base_request()
+        request["partial_goal_to_decision_binding"] = {
+            "receipt": {},
+            "verification": {},
+        }
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()):
+            out = controller.run(request)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("GOAL_BINDING_MODE_AMBIGUOUS", out["reason"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
