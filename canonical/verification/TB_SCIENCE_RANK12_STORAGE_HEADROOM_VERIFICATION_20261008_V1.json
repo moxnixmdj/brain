@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK12_STORAGE_HEADROOM_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PUBLIC_RUNNER_ZERO_BENCHMARK_EXPOSURE_PASS__POST_EXACT_QWEN_STORAGE_HEADROOM_SUFFICIENT__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "rank12_slot": {
+    "id": "terminal-bench-science/clinical-metadata-recovery::trial-0",
+    "rank": 12,
+    "digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8",
+    "declared_task_storage_bytes": 10737418240
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37725615457,
+    "workflow_job_id": 113142971353,
+    "head_sha": "5b15f90fcb9e759cada84323b71a5c4ceffa09ba",
+    "artifact_id": 11527474005,
+    "artifact_name": "tb-science-rank12-storage-preflight-v1",
+    "artifact_digest": "sha256:5eb25d9d60f9a047f6247af64316148b1c2ecca1ff2ebe7e7bc4842edf419752"
+  },
+  "exact_measurement": {
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "qwen_model_file_bytes": 5060174144,
+    "post_model_total_bytes": 154894188544,
+    "post_model_used_bytes": 67623383040,
+    "post_model_free_bytes": 87254028288,
+    "free_minus_rank12_declared_task_storage_bytes": 76516610048,
+    "declared_task_storage_fits_arithmetically_after_model": true,
+    "declared_task_storage_plus_2GiB_headroom_fits": true,
+    "extracted_receipt_sha256": "5f1a12c2ed8268df6b2a0d5efe08cf29c191f9f7673fd18c02ce1c7a8793cfac"
+  },
+  "conclusion": "CURRENT_PUBLIC_RUNNER_CLASS_HAS_AMPLE_POST_MODEL_STORAGE_FOR_RANK12_DECLARED_10_GIB_TASK_STORAGE_PLUS_2_GIB_MARGIN__STORAGE_IS_NOT_A_RANK12_PREEXPOSURE_BLOCKER",
+  "benchmark_task_exposure": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_RANK12_TASK_CONTENT_READ",
+    "NO_RANK12_EXECUTION_AUTHORITY",
+    "NO_CLAIM_STORAGE_SUFFICIENCY_IMPLIES_TASK_SUCCESS",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
