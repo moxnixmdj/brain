@@ -8,10 +8,8 @@ from canonical.tests.test_aa_briefcase_scope_complete_dominance_v1 import (
     certificate,
     target,
 )
-from canonical.tests.test_aa_briefcase_minimal_owner_attestation_v1 import (
-    statement,
-    sig,
-)
+from canonical.tests.test_aa_briefcase_minimal_owner_attestation_v1 import statement
+from canonical.tests.test_aa_briefcase_owner_signature_verifier_v1 import make_signed
 
 
 def score_result(score=1807):
@@ -45,13 +43,15 @@ class T(unittest.TestCase):
 
     def test_minimal_owner_attestation_passes_both_aliases(self):
         s = statement()
+        bundle, binding = make_signed(s)
         out = compile_current_epoch_noninferiority(
             target(),
             {
                 "mode": "MINIMAL_OWNER_ATTESTATION",
                 "payload": {
                     "statement": s,
-                    "signature_verification": sig(s),
+                    "signature_bundle": bundle,
+                    "owner_key_binding": binding,
                 },
             },
         )
