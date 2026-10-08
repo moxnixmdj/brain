@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_ACCEPTANCE_RELATION_TOP_REDUCTION_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_4_OF_4_ON_TWO_SPRITES__O_Q_SCOPE_COMPLETENESS_DEMOTED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/UNIVERSAL_ACCEPTANCE_RELATION_TOP_REDUCTION_20261008_V1.json",
+      "git_blob_sha": "478f38e9a746e9db99767dd03376481834decd51"
+    },
+    "runtime": {
+      "path": "canonical/runtime/universal_acceptance_relation_top_reduction_v1.py",
+      "git_blob_sha": "cefe795ccac312e08b7ec171314dde58db5d813d"
+    },
+    "tests": {
+      "path": "canonical/tests/test_universal_acceptance_relation_top_reduction_v1.py",
+      "git_blob_sha": "0c0595b52a873eb7611a3665ad20a13e3f27c719"
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_run": 4,
+      "tests_passed": 4
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_run": 4,
+      "tests_passed": 4,
+      "exact_branch_blobs_reloaded_before_test": true
+    }
+  ],
+  "verified": {
+    "all_six_canonical_source_blobs_exact": true,
+    "relation_top_sound_initialization": true,
+    "objective_qualitative_taxonomy_not_required_for_sound_initialization": true,
+    "monotone_proof_carrying_refinement_preserves_truth": true,
+    "adaptive_only_live_premise_is_escape_progress_totality": true,
+    "common_policy_over_top_proved": false,
+    "escape_progress_totality_proved": false,
+    "u_empty": false,
+    "abc_closed": false,
+    "terminal": false
+  },
+  "consequence": "DELETE_O_Q_SCOPE_COMPLETENESS_AS_A_LOAD_BEARING_UNIVERSAL_PROOF_PREREQUISITE__KEEP_ONLY_AS_OPTIONAL_PLANNING_HEURISTIC__CONTINUE_ON_ESCAPE_PROGRESS_TOTALITY",
+  "hard_nonclaims": [
+    "NO_COMMON_POLICY_OVER_TOP_PROOF",
+    "NO_ESCAPE_PROGRESS_TOTALITY_PROOF",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
