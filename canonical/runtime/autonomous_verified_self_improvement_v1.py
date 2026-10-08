@@ -1450,6 +1450,7 @@ def _record_reuse_result(
     effect_may_have_occurred: bool,
     failure_output: Mapping[str, Any] | None = None,
     retry_context: Mapping[str, Any] | None = None,
+    counterexample_scope_id: str | None = None,
 ) -> dict[str, Any]:
     state = load_state(state_path)
     row = dict(state["reuse"].get(skill_id) or {})
@@ -1503,6 +1504,7 @@ def _record_reuse_result(
                     "falsified_capability_ids": diagnosis.get("falsified_capability_ids", []),
                     "counterexamples": diagnosis.get("counterexamples", []),
                     "retry_capsule_sha256": retry_capsule_sha256,
+                    "counterexample_scope_id": _s(counterexample_scope_id) or None,
                     "required_result": (
                         "INDEPENDENT_REVERIFICATION_OR_VERIFIED_FAMILY_REPLACEMENT"
                     ),
@@ -1782,6 +1784,7 @@ def run_learning_episode(
             effect_may_have_occurred=effectful,
             failure_output=(reuse_out if reuse_out.get("pass") is not True else None),
             retry_context=retry_context,
+            counterexample_scope_id=scope,
         )
         reuse_attempt = {
             "skill_id": selected["skill_id"],
