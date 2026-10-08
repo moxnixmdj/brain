@@ -10,6 +10,11 @@ from canonical.runtime import universal_verified_adaptive_solver_v1 as v1
 from canonical.runtime import universal_verified_adaptive_solver_v3 as v3
 from canonical.runtime import universal_verified_adaptive_solver_v4 as v4
 from canonical.runtime.universal_verified_adaptive_solver_v2 import SUCCESS_CONDITIONS
+from canonical.runtime.typed_acceptance_program_v1 import PROGRAM_SCHEMA
+from canonical.runtime.universal_verified_effect_executor_v1 import (
+    EXECUTOR_ID as VERIFIED_EFFECT_EXECUTOR_ID,
+    execute as execute_verified_effect,
+)
 from canonical.runtime.executable_skill_program_v7 import induce_candidate, program_digest
 from canonical.runtime.executable_skill_verification_authenticator_v1 import (
     authenticate_and_verify as authenticate_skill,
@@ -187,6 +192,189 @@ class R3IndependentLearningVerifierV1Tests(unittest.TestCase):
         }
         return problem, episode, trace, request
 
+    def effectful_material(
+        self,
+        root: Path,
+        *,
+        episode_id: str = "ep-effect",
+        scope_id: str = "scope-effect",
+    ):
+        candidate_values = {"name": "Alice", "score": 0.75, "passed": True}
+        program = {
+            "schema": PROGRAM_SCHEMA,
+            "fields": [
+                {
+                    "id": "name",
+                    "type": "enum",
+                    "dimension": "identity",
+                    "source": "candidate",
+                },
+                {
+                    "id": "score",
+                    "type": "number",
+                    "dimension": "score",
+                    "source": "candidate",
+                },
+                {
+                    "id": "passed",
+                    "type": "boolean",
+                    "dimension": "dimensionless",
+                    "source": "candidate",
+                },
+            ],
+            "accept_when": {"op": "ref", "id": "passed"},
+        }
+        verifier_payload = {"program": program, "trusted_values": {}}
+        action = {
+            "type": "verified_effect_tool",
+            "pre_verifier_id": "TYPED_ACCEPTANCE_PROGRAM_V1",
+            "pre_verifier_payload": verifier_payload,
+            "executor_id": VERIFIED_EFFECT_EXECUTOR_ID,
+            "executor_payload": {
+                "tool_id": "JSON_RECEIPT_WRITER_V1",
+                "sandbox_rel": "effect-episode",
+            },
+            "effect_contract": {
+                "effects": ["artifact.written"],
+                "verifier_success_condition": SUCCESS_CONDITIONS[
+                    "TYPED_ACCEPTANCE_PROGRAM_V1"
+                ],
+            },
+        }
+        cap = {
+            "id": "cap.effect",
+            "requires": [],
+            "provides": ["artifact.written"],
+            "result_fields": [],
+            "action": action,
+        }
+        problem = {
+            "task_id": "r3-effectful-readback-test",
+            "initial_facts": [],
+            "target_effects": ["artifact.written"],
+            "capabilities": [cap],
+        }
+
+        semantic_core = {
+            "capability_id": "cap.effect",
+            "task_contract_sha256": v4.task_contract_sha256(problem),
+            "requires": [],
+            "verifier_id": "TYPED_ACCEPTANCE_PROGRAM_V1",
+            "verifier_payload_sha256": v4._digest(verifier_payload),
+            "verifier_success_condition": SUCCESS_CONDITIONS[
+                "TYPED_ACCEPTANCE_PROGRAM_V1"
+            ],
+            "provided_effects": ["artifact.written"],
+        }
+        receipt_doc = {
+            "schema": v3.BINDING_SCHEMA,
+            **semantic_core,
+            "pass": True,
+            "claim": "BUILTIN_VERIFIER_PASS_IMPLIES_EXACT_PROVIDED_EFFECTS",
+        }
+        receipt_ref = self._write_doc(
+            root,
+            "evidence/cap-effect.receipt.json",
+            receipt_doc,
+        )
+        verification_doc = {
+            "schema": v3.BINDING_VERIFY_SCHEMA,
+            **semantic_core,
+            "subject_git_blob_sha": receipt_ref["git_blob_sha"],
+            "pass": True,
+            "independent_verified": True,
+            "implication_semantics_verified": True,
+            "independent_verifier_id": "TEST_INDEPENDENT_SEMANTICS_VERIFIER",
+        }
+        verification_ref = self._write_doc(
+            root,
+            "evidence/cap-effect.verification.json",
+            verification_doc,
+        )
+        cap["effect_semantics_binding"] = {
+            "receipt": receipt_ref,
+            "verification": verification_ref,
+        }
+
+        proposal = {"candidate_values": candidate_values}
+        verdict = v1.BUILTIN_VERIFIERS["TYPED_ACCEPTANCE_PROGRAM_V1"](
+            verifier_payload,
+            proposal,
+        )
+        self.assertTrue(verdict["pass"], verdict)
+
+        effect_root = root / "effect-root"
+        effect = execute_verified_effect(
+            executor_id=VERIFIED_EFFECT_EXECUTOR_ID,
+            executor_payload=action["executor_payload"],
+            proposal=proposal,
+            effect_root=effect_root,
+        )
+        self.assertTrue(effect["pass"], effect)
+
+        initial_value = init_value(problem)
+        trace = [{
+            "cycle": 0,
+            "capability_id": "cap.effect",
+            "verifier_id": "TYPED_ACCEPTANCE_PROGRAM_V1",
+            "action_contract_sha256": v1._digest(action),
+            "packet_index": 0,
+            "proposal_sha256": v1._digest(proposal),
+            "proposal_source": "TEST",
+            "proposal_request_sha256": None,
+            "proposal_packet_sha256": None,
+            "proposal_source_id": None,
+            "verdict_status": verdict["status"],
+            "proof_digest": verdict["proof_digest"],
+            "accepted_proposal": proposal,
+            "action_type": "verified_effect_tool",
+            "verified_output": verdict["verified_output"],
+            "effect_outcome": effect["outcome"],
+            "effect_outcome_sha256": effect["effect_outcome_sha256"],
+            "verifier_success_condition": SUCCESS_CONDITIONS[
+                "TYPED_ACCEPTANCE_PROGRAM_V1"
+            ],
+            "semantic_authentication_schema": None,
+            "effect_semantics_receipt": receipt_ref,
+            "effect_semantics_verification": verification_ref,
+            "effect_semantics_authenticated": True,
+            "independent_effect_semantics_verifier_id": (
+                "TEST_INDEPENDENT_SEMANTICS_VERIFIER"
+            ),
+            "new_verified_facts": ["artifact.written"],
+            "resolved_action": action,
+            "value_capsule_head_before": initial_value["head_hash"],
+        }]
+        fact = append_fact(init_fact(problem), capability=cap, trace_row=trace[0])
+        value = append_value(initial_value, capability=cap, trace_row=trace[0])
+        trace[0]["value_capsule_head_after"] = value["head_hash"]
+
+        steps = [{"op": "cap.effect", "inputs": [], "outputs": ["artifact.written"]}]
+        episode = {
+            "episode_id": episode_id,
+            "scope_id": scope_id,
+            "steps": steps,
+            "preconditions": [],
+            "postconditions": ["artifact.written"],
+            "invalidators": [],
+            "program_sha256": program_digest(
+                steps=steps,
+                preconditions=[],
+                postconditions=["artifact.written"],
+                invalidators=[],
+            ),
+        }
+        request = {
+            "kind": "EPISODE_VERIFICATION",
+            "problem": problem,
+            "episode": episode,
+            "trace": trace,
+            "fact_capsule_head_hash": fact["head_hash"],
+            "value_capsule_head_hash": value["head_hash"],
+            "effect_root": str(effect_root),
+        }
+        return problem, episode, trace, request, effect_root
+
     def _authenticate_material(self, root: Path, *, episode_id: str, scope_id: str):
         problem, episode, trace, request = self.material(
             root,
@@ -252,12 +440,47 @@ class R3IndependentLearningVerifierV1Tests(unittest.TestCase):
             )
             self.assertIsNone(worker.verify_episode_request(request, repo_root=root))
 
-    def test_effectful_episode_is_not_self_replayed_or_self_attested(self):
+    def test_effectful_episode_is_admitted_only_after_independent_byte_readback(self):
         with TemporaryDirectory() as td:
             root = Path(td)
-            _, _, _, request = self.material(root)
-            request["trace"][0]["effect_outcome_sha256"] = "e" * 64
-            request["trace"][0]["effect_outcome"] = {"pretend": "effect"}
+            problem, episode, trace, request, _ = self.effectful_material(root)
+            binding = worker.verify_episode_request(request, repo_root=root)
+            self.assertIsInstance(binding, dict)
+            auth = authenticate_episode(
+                binding,
+                problem=problem,
+                episode=episode,
+                trace=trace,
+                fact_capsule_head_hash=request["fact_capsule_head_hash"],
+                value_capsule_head_hash=request["value_capsule_head_hash"],
+                repo_root=root,
+            )
+            self.assertTrue(auth["pass"], auth)
+            self.assertTrue(auth["effect_outcomes_reverified"])
+            verification_doc = worker.resolve_receipt_bytes(
+                binding["verification"],
+                repo_root=root,
+            )["document"]
+            self.assertFalse(verification_doc["non_effectful_trace"])
+            self.assertEqual(
+                verification_doc["verification_basis"],
+                worker.EFFECTFUL_READBACK_VERIFICATION_BASIS,
+            )
+
+    def test_effectful_episode_fails_if_readback_bytes_drift(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            _, _, _, request, effect_root = self.effectful_material(root)
+            target = effect_root / "effect-episode" / "receipts" / "result.json"
+            self.assertTrue(target.is_file())
+            target.write_bytes(target.read_bytes() + b"\n")
+            self.assertIsNone(worker.verify_episode_request(request, repo_root=root))
+
+    def test_effectful_episode_without_retained_root_fails_closed(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            _, _, _, request, _ = self.effectful_material(root)
+            request.pop("effect_root")
             self.assertIsNone(worker.verify_episode_request(request, repo_root=root))
 
     def test_exact_skill_is_verified_only_from_reauthenticated_source_episodes(self):
