@@ -981,19 +981,19 @@ def run(
                         specialist_adequacy_authority=specialist_adequacy,
                     )
                 proof_carrying_outcome = build_proof_carrying_outcome(
-                raw_contract=raw_contract,
-                verifier_plan=verifier_plan,
-                selected_policy_id=selected_policy_id,
-                realization=realization,
-                goal_satisfaction_binding=goal_satisfaction,
-                candidate_text=None,
-            )
-            if proof_carrying_outcome.get("pass") is not True:
-                raise DecisionControllerError(
-                    "PROOF_CARRYING_OUTCOME_BUILD_FAILED:"
-                    + str(proof_carrying_outcome.get("reason") or "")
+                    raw_contract=raw_contract,
+                    verifier_plan=verifier_plan,
+                    selected_policy_id=selected_policy_id,
+                    realization=realization,
+                    goal_satisfaction_binding=goal_satisfaction,
+                    candidate_text=None,
                 )
-            return {
+                if proof_carrying_outcome.get("pass") is not True:
+                    raise DecisionControllerError(
+                        "PROOF_CARRYING_OUTCOME_BUILD_FAILED:"
+                        + str(proof_carrying_outcome.get("reason") or "")
+                    )
+                return {
                     "schema": SCHEMA,
                     "status": (
                         "PASS__GOAL_BOUND_AUTHENTICATED_SPECIALIST_POLICY_"
@@ -1014,6 +1014,8 @@ def run(
                     "action": realization,
                     "realization": realization,
                     "goal_satisfaction_binding": goal_satisfaction,
+                    "verifier_plan": verifier_plan,
+                    "proof_carrying_outcome": proof_carrying_outcome,
                     "specialist_adequacy_authority": specialist_adequacy,
                     "information_trace": [],
                     "minimum_information_rounds_used": 0,
@@ -1450,19 +1452,6 @@ def run(
                 selected_policy_id=selected_policy_id,
                 realization=realization,
                 goal_satisfaction_binding=goal_satisfaction,
-                candidate_text=None,
-            )
-            if proof_carrying_outcome.get("pass") is not True:
-                raise DecisionControllerError(
-                    "PROOF_CARRYING_OUTCOME_BUILD_FAILED:"
-                    + str(proof_carrying_outcome.get("reason") or "")
-                )
-            proof_carrying_outcome = build_proof_carrying_outcome(
-                raw_contract=raw_contract,
-                verifier_plan=verifier_plan,
-                selected_policy_id=selected_policy_id,
-                realization=realization,
-                goal_satisfaction_binding=goal_satisfaction,
                 candidate_text=rendered,
             )
             if proof_carrying_outcome.get("pass") is not True:
@@ -1581,6 +1570,20 @@ def run(
                 information_trace=information_trace,
                 goal_to_decision_binding=goal_binding,
                 policy_execution_binding=execution_binding,
+            )
+
+        proof_carrying_outcome = build_proof_carrying_outcome(
+            raw_contract=raw_contract,
+            verifier_plan=verifier_plan,
+            selected_policy_id=selected_policy_id,
+            realization=realization,
+            goal_satisfaction_binding=goal_satisfaction,
+            candidate_text=None,
+        )
+        if proof_carrying_outcome.get("pass") is not True:
+            raise DecisionControllerError(
+                "PROOF_CARRYING_OUTCOME_BUILD_FAILED:"
+                + str(proof_carrying_outcome.get("reason") or "")
             )
 
         return {
