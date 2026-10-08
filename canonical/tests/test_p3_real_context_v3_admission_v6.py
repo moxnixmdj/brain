@@ -154,3 +154,36 @@ def test_unmodeled_top_level_requirement_fails_closed():
     assert out["reason"]=="UNMODELED_REAL_CONTEXT_ADMISSION_FIELDS"
     assert out["p3_contract_cell_authorized"] is False
     assert out["terminal_authority"] is False
+
+
+def test_explicit_weights_override_structural_common_policy():
+    p={"context_id":"x","v3_input":base([
+        req("A","Revenue growth is 12."),
+        req("B","Margin rate is 8."),
+    ],[
+        ev("E1","Report states Revenue growth is 12."),
+        ev("E2","Report states Margin rate is 8."),
+    ]),"objective_weights":{"A":1,"B":100}}
+    out=evaluate(p)
+    assert out["pass"],out
+    assert out["route"]=="EXPLICIT_WEIGHTED_SALIENCE_CELL_V1",out
+    assert out["selected_claim_ids"]==["A","B"]
+    assert out["claim_order"]==["B","A"],out
+    assert out["terminal_credit_delta"]==0
+
+
+def test_invalid_explicit_objective_weights_never_fall_through():
+    p={"context_id":"x","v3_input":base([
+        req("A","Revenue growth is 12."),
+        req("B","Margin rate is 8."),
+    ],[
+        ev("E1","Report states Revenue growth is 12."),
+        ev("E2","Report states Margin rate is 8."),
+    ])}
+    for bad in (None, [], {"A":1}, {"A":1,"B":"not an integer"}):
+        out=evaluate({**p,"objective_weights":bad})
+        assert not out["pass"],(bad,out)
+        assert out["reason"] in {"OBJECTIVE_WEIGHTS_INVALID","OBJECTIVE_WEIGHTS_UNSATISFIED"}
+        assert out["v3_admission_authorized"] is False
+        assert out["p3_contract_cell_authorized"] is False
+        assert out["terminal_authority"] is False
