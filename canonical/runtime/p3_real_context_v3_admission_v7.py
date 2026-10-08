@@ -44,7 +44,17 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             **_boundary(),
         }
 
-    prior = evaluate_v6(payload)
+    try:
+        prior = evaluate_v6(payload)
+    except Exception as exc:
+        prior = {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "V6_PREDECESSOR_EXCEPTION",
+            "detail": {"exception_type": type(exc).__name__, "detail_text": str(exc)[:160]},
+            **_boundary(),
+        }
     if prior.get("pass") is True:
         out = dict(prior)
         out["schema"] = SCHEMA
