@@ -401,6 +401,7 @@ def _adapt_success_work(
     integrated = learning.integrate_solver_output(
         verified,
         state_path=state_path,
+        repo_root=repo_root,
         verification_problem=problem,
     )
     resolved_by = str(integrated.get("episode_key") or "VERIFIED_SUCCESS_EPISODE")
@@ -528,6 +529,13 @@ def advance_once(
                 state_path=state_path,
             )
 
+    if success_episode_adapter_provider is None:
+        from canonical.runtime import r3_bound_success_adapter_v1 as bound_success_adapter
+        success_episode_adapter_provider = lambda request: bound_success_adapter.adapt(
+            request,
+            repo_root=repo_root,
+        )
+
     state = learning.load_state(state_path)
     pending = _pending(state)
     blockers: list[dict[str, Any]] = []
@@ -651,9 +659,6 @@ def advance_once(
                 }
 
             if kind == "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE":
-                if success_episode_adapter_provider is None:
-                    blockers.append({"work_id": wid, "kind": kind, "blocker": "SUCCESS_EPISODE_ADAPTER_PROVIDER_REQUIRED"})
-                    continue
                 if episode_verification_provider is None:
                     blockers.append({"work_id": wid, "kind": kind, "blocker": "EPISODE_VERIFICATION_PROVIDER_REQUIRED"})
                     continue
