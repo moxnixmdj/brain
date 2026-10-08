@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_R3_VERIFIED_REPAIR_GROWTH_V3_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__R3_V3_INTEGRATION_11_OF_11__PENDING_FULL_REPOSITORY_CI",
+  "subject_branch": "r3-verified-repair-growth-v3-20261008",
+  "subject_commit_before_evidence": "5842c5fe6630374754cb6dac762417855c43b749",
+  "isolated_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+  },
+  "verification": {
+    "command": "python3 -m unittest canonical.tests.test_autonomous_verified_self_improvement_v1 -v",
+    "tests_run": 11,
+    "tests_passed": 11,
+    "tests_failed": 0,
+    "elapsed_seconds": 1.072
+  },
+  "newly_proved_integration_behaviors": [
+    "R3 forwards proposal generation into Universal Solver V12",
+    "R3 forwards bounded capability expansion into Universal Solver V12",
+    "only V12 expansions carrying authenticated admission evidence are durably cached",
+    "authenticated expanded capability rows are rehydrated automatically for the same exact task contract on later runs",
+    "all V1 and V2 episode, skill, Pareto, reuse-first, and no-blind-replay regressions remain green"
+  ],
+  "exact_task_contract_cache_key": [
+    "task_id",
+    "initial_facts",
+    "target_effects"
+  ],
+  "authority_boundary": [
+    "capability expander suggestions have zero authority",
+    "V12 authenticates exact task binding and independent effect-semantics receipts before admission",
+    "R3 persists only capability ids present in V12 authenticated-admission records",
+    "no unverified expansion is promoted or cached"
+  ],
+  "verification_boundary": {
+    "isolated_replay": "V12 MODULE STUBBED; R3 CALL/STATE/PERSISTENCE LOGIC EXECUTED",
+    "next_verification": "FULL_REPOSITORY_PR_CI_WITH_REAL_V12"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
