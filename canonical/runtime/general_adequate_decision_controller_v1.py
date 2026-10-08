@@ -1062,6 +1062,15 @@ def run(
         ):
             raise DecisionControllerError("MAX_INFORMATION_ROUNDS_INVALID")
 
+        initial_cover_observations = request.get(
+            "policy_cover_observation_bindings", {}
+        )
+        if not isinstance(initial_cover_observations, Mapping):
+            raise DecisionControllerError(
+                "POLICY_COVER_OBSERVATION_BINDINGS_NOT_OBJECT"
+            )
+        cover_observation_bindings = deepcopy(dict(initial_cover_observations))
+
         information_trace: list[dict[str, Any]] = []
         decision = None
         for round_index in range(max_rounds + 1):
@@ -1078,59 +1087,170 @@ def run(
                             "UNMODELED_OBSERVABLE_POLICY_COVER_FIELDS:"
                             + ",".join(sorted(extra_cover_fields))
                         )
-                    cover_result = evaluate_policy_cover(
-                        {
-                            "problem": cover_cfg.get("problem"),
-                            "cover_binding": cover_cfg.get("cover_binding"),
-                            "observation_bindings_by_discriminator_id": request.get(
-                                "policy_cover_observation_bindings", {}
-                            ),
-                            "max_observations": request.get(
-                                "max_policy_cover_observations", 64
-                            ),
-                        },
-                        repo_root=root,
-                    )
-                    if cover_result.get("pass") is True:
-                        cover_policy_id = cover_result.get("selected_policy_id")
-                        if (
-                            not isinstance(cover_policy_id, str)
-                            or not cover_policy_id
-                            or cover_result.get("policy_selection_authorized") is not True
-                            or cover_result.get("selected_policy_adequacy_verified") is not True
-                            or cover_result.get("bound_state_totality_proved") is not True
-                        ):
-                            raise DecisionControllerError(
-                                "POLICY_COVER_PASS_WITHOUT_AUTHORIZED_ADEQUATE_SELECTION"
-                            )
-                        decision = {
-                            "pass": True,
-                            "status": "PASS__R2_AUTHENTICATED_OBSERVABLE_POLICY_COVER",
-                            "route": "OBSERVABLE_POLICY_COVER_EXECUTOR_V1",
-                            "selected_policy_id": cover_policy_id,
-                            "policy_cover_result": cover_result,
-                        }
-                        break
-                    next_observation = cover_result.get("next_observation_request")
-                    return _open(
-                        str(
+                    while True:
+                        cover_result = evaluate_policy_cover(
+                            {
+                                "problem": cover_cfg.get("problem"),
+                                "cover_binding": cover_cfg.get("cover_binding"),
+                                "observation_bindings_by_discriminator_id": (
+                                    cover_observation_bindings
+                                ),
+                                "max_observations": request.get(
+                                    "max_policy_cover_observations", 64
+                                ),
+                            },
+                            repo_root=root,
+                        )
+                        if cover_result.get("pass") is True:
+                            cover_policy_id = cover_result.get("selected_policy_id")
+                            if (
+                                not isinstance(cover_policy_id, str)
+                                or not cover_policy_id
+                                or cover_result.get("policy_selection_authorized") is not True
+                                or cover_result.get("selected_policy_adequacy_verified") is not True
+                                or cover_result.get("bound_state_totality_proved") is not True
+                            ):
+                                raise DecisionControllerError(
+                                    "POLICY_COVER_PASS_WITHOUT_AUTHORIZED_ADEQUATE_SELECTION"
+                                )
+                            decision = {
+                                "pass": True,
+                                "status": "PASS__R2_AUTHENTICATED_OBSERVABLE_POLICY_COVER",
+                                "route": "OBSERVABLE_POLICY_COVER_EXECUTOR_V1",
+                                "selected_policy_id": cover_policy_id,
+                                "policy_cover_result": cover_result,
+                            }
+                            break
+
+                        cover_status = str(
                             cover_result.get("status")
                             or "OPEN__OBSERVABLE_POLICY_COVER_UNRESOLVED"
-                        ),
-                        task_id=task_id,
-                        goal=goal,
-                        raw_contract=raw_contract,
-                        next_required_edge=(
-                            "AUTHENTICATED_SELECTED_POLICY_CHANGING_OBSERVATION"
-                            if isinstance(next_observation, Mapping)
-                            else "AUTHENTICATED_OBSERVABLE_POLICY_COVER"
-                        ),
-                        next_observation_request=next_observation,
-                        decision_result=decision,
-                        policy_cover_result=cover_result,
-                        information_trace=information_trace,
-                        goal_to_decision_binding=goal_binding,
-                    )
+                        )
+                        if cover_status.startswith("FAIL_CLOSED"):
+                            raise DecisionControllerError(
+                                "POLICY_COVER_EXECUTOR_FAIL_CLOSED:" + cover_status
+                            )
+
+                        next_observation = cover_result.get("next_observation_request")
+                        if not isinstance(next_observation, Mapping):
+                            return _open(
+                                cover_status,
+                                task_id=task_id,
+                                goal=goal,
+                                raw_contract=raw_contract,
+                                next_required_edge="AUTHENTICATED_OBSERVABLE_POLICY_COVER",
+                                next_observation_request=None,
+                                decision_result=decision,
+                                policy_cover_result=cover_result,
+                                information_trace=information_trace,
+                                goal_to_decision_binding=goal_binding,
+                            )
+
+                        if information_provider is None:
+                            return _open(
+                                cover_status,
+                                task_id=task_id,
+                                goal=goal,
+                                raw_contract=raw_contract,
+                                next_required_edge=(
+                                    "AUTHENTICATED_SELECTED_POLICY_CHANGING_OBSERVATION"
+                                ),
+                                next_observation_request=next_observation,
+                                decision_result=decision,
+                                policy_cover_result=cover_result,
+                                information_trace=information_trace,
+                                goal_to_decision_binding=goal_binding,
+                            )
+
+                        discriminator_id = next_observation.get("discriminator_id")
+                        if not isinstance(discriminator_id, str) or not discriminator_id:
+                            raise DecisionControllerError(
+                                "POLICY_COVER_OBSERVATION_REQUEST_DISCRIMINATOR_INVALID"
+                            )
+                        observation_request = {
+                            **deepcopy(dict(next_observation)),
+                            "request_kind": (
+                                "AUTHENTICATED_POLICY_COVER_OBSERVATION_BINDING"
+                            ),
+                            "information_authority": False,
+                            "semantic_truth_authority": False,
+                            "acceptance_authority": False,
+                            "terminal_authority": False,
+                        }
+                        provider_index = len(information_trace)
+                        provided = information_provider(
+                            observation_request,
+                            provider_index,
+                        )
+                        information_trace.append(
+                            {
+                                "round": provider_index,
+                                "kind": "POLICY_COVER_OBSERVATION",
+                                "discriminator_id": discriminator_id,
+                                "provider_returned_payload": isinstance(
+                                    provided, Mapping
+                                ),
+                                "provider_authority": False,
+                            }
+                        )
+                        if not isinstance(provided, Mapping):
+                            return _open(
+                                "OPEN__POLICY_COVER_OBSERVATION_BINDING_REQUIRED",
+                                task_id=task_id,
+                                goal=goal,
+                                raw_contract=raw_contract,
+                                next_required_edge=(
+                                    "AUTHENTICATED_SELECTED_POLICY_CHANGING_OBSERVATION"
+                                ),
+                                next_observation_request=next_observation,
+                                decision_result=decision,
+                                policy_cover_result=cover_result,
+                                information_trace=information_trace,
+                                goal_to_decision_binding=goal_binding,
+                            )
+
+                        candidate_binding = provided.get("observation_binding")
+                        if candidate_binding is None:
+                            candidate_binding = provided
+                        if not isinstance(candidate_binding, Mapping):
+                            return _open(
+                                "OPEN__POLICY_COVER_OBSERVATION_BINDING_REQUIRED",
+                                task_id=task_id,
+                                goal=goal,
+                                raw_contract=raw_contract,
+                                next_required_edge=(
+                                    "AUTHENTICATED_SELECTED_POLICY_CHANGING_OBSERVATION"
+                                ),
+                                next_observation_request=next_observation,
+                                decision_result=decision,
+                                policy_cover_result=cover_result,
+                                information_trace=information_trace,
+                                goal_to_decision_binding=goal_binding,
+                            )
+
+                        existing_binding = cover_observation_bindings.get(
+                            discriminator_id
+                        )
+                        candidate_binding = deepcopy(dict(candidate_binding))
+                        if (
+                            existing_binding is not None
+                            and existing_binding != candidate_binding
+                        ):
+                            raise DecisionControllerError(
+                                "POLICY_COVER_OBSERVATION_BINDING_MUTATION_FORBIDDEN:"
+                                + discriminator_id
+                            )
+                        if existing_binding == candidate_binding:
+                            raise DecisionControllerError(
+                                "POLICY_COVER_OBSERVATION_PROVIDER_NO_PROGRESS:"
+                                + discriminator_id
+                            )
+                        cover_observation_bindings[discriminator_id] = (
+                            candidate_binding
+                        )
+
+                    if isinstance(decision, Mapping) and decision.get("pass") is True:
+                        break
                 policy_gap = _extract_policy_gap(decision)
                 if policy_gap is not None:
                     policy_request = {
