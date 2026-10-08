@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GENERAL_ADEQUATE_DECISION_FIXED_POINT_LOCAL_VERIFICATION_V2",
+  "date": "2026-10-08",
+  "subject": {
+    "pull_request": 3237,
+    "head_sha": "02f56c87d89229548b2bc05aa965417e522a0ffe",
+    "fixed_point_runtime": {
+      "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+      "git_blob_sha": "58c664a05cc580081c78c7e08ec07700f56e2db2"
+    },
+    "fixed_point_tests": {
+      "path": "canonical/tests/test_general_adequate_decision_fixed_point_v2.py",
+      "git_blob_sha": "cc160ca119f74ab92bfaa8da41d2d355581ff33e"
+    },
+    "live_runtime": {
+      "path": "canonical/runtime/live_brain_runtime_v1.py",
+      "git_blob_sha": "fd1451b17138c2df5f408e45dbe462d844a2d0bb"
+    },
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "d3e7a3fe93cde1aded11404f482496be86387003"
+    }
+  },
+  "isolated_exact_blob_verification": {
+    "git_blob_sha_reproduction_passed": true,
+    "python_source_blob_match": true,
+    "python_test_blob_match": true,
+    "unittest_command": "python -m unittest canonical.tests.test_general_adequate_decision_fixed_point_v2 -v",
+    "tests_run": 7,
+    "failures": 0,
+    "errors": 0,
+    "return_code": 0,
+    "status": "PASS__EXACT_R2_V2_FIXED_POINT_FALSIFICATION_SUITE"
+  },
+  "private_actions_carrier": {
+    "workflow_run_id": 37770545059,
+    "job_id": 113288769031,
+    "workflow_name": "verify-general-adequate-decision-fixed-point-v2",
+    "conclusion": "failure",
+    "observed_steps": null,
+    "logs_available": false,
+    "classification": "CARRIER_FAILURE_BEFORE_TEST_EXECUTION__NOT_CODE_FAILURE"
+  },
+  "exact_diff_integration_checks": {
+    "live_runtime_imports_v2_fixed_point": true,
+    "live_runtime_reports_v2_surface": true,
+    "live_runtime_preserves_partial_goal_binding_field": true,
+    "auto_task_id_plus_goal_routes_to_adequate_decision": true,
+    "explicit_raw_goal_route_retained": true
+  },
+  "verified_properties": [
+    "V1_OPEN_STATE_IS_PRESERVED_WITHOUT_EDGE_RESOLVER",
+    "PROGRESSIVE_PROVIDER_PATCH_IS_REVERIFIED_BY_V1_BEFORE_SUCCESS",
+    "PROVIDER_PASS_CLAIM_CANNOT_BYPASS_V1",
+    "GOAL_MUTATION_PATCH_IS_REJECTED",
+    "LATER_PROVIDER_CANDIDATE_CAN_REPLACE_AN_INVALID_CANDIDATE",
+    "REPEATED_NO_PROGRESS_PATCH_CANNOT_SPIN",
+    "FIXED_POINT_STEP_BOUND_FAILS_OPEN_WITHOUT_FALSE_GOAL_SUCCESS"
+  ],
+  "authority": {
+    "proves_fixed_point_core_exact_blob_tests_pass": true,
+    "proves_private_actions_carrier_healthy": false,
+    "proves_full_repository_suite_passes": false,
+    "proves_global_open_world_r2_closure": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "incremental_spend_usd": 0
+}

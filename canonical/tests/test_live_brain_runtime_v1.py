@@ -221,7 +221,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertEqual(out["public_entrypoint"], "canonical.runtime.unified_cognitive_fabric_v1.run")
         self.assertEqual(out["subruntime_entrypoint"], "canonical.runtime.live_brain_runtime_v1.run")
         self.assertFalse(out["subruntime_public_authority"])
-        self.assertIn("GENERAL_ADEQUATE_DECISION_CONTROLLER_V1", out["surfaces"])
+        self.assertIn("GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2", out["surfaces"])
         self.assertIn("UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12", out["surfaces"])
         self.assertIn("AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1", out["surfaces"])
         self.assertTrue(out["verified_skill_execution_reuse_first"])

@@ -78,7 +78,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertEqual(out["result"]["failure_class"], "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP")
         self.assertEqual(out["result"]["_live_runtime"]["subruntime_entrypoint"], "canonical.runtime.live_brain_runtime_v1.run")
 
-    def test_auto_raw_goal_route_is_structurally_selected(self):
+    def test_auto_raw_goal_enters_r2_decision_fixed_point(self):
         out = run({
             "payload": {
                 "task_id": "FABRIC-AUTO-RAW-001",
@@ -86,8 +86,9 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             },
         })
         self.assertTrue(out["auto_routed"])
-        self.assertEqual(out["mode"], "RAW_GOAL")
+        self.assertEqual(out["mode"], "ADEQUATE_DECISION")
         self.assertEqual(out["requested_mode"], "AUTO")
+        self.assertEqual(out["result"].get("r2_fixed_point_status"), "OPEN__R2_EDGE_RESOLVER_UNAVAILABLE")
 
     def test_auto_compiled_task_route_is_structurally_selected(self):
         out = run({
