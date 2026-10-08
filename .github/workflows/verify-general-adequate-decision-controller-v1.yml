@@ -1,0 +1,21 @@
+name: verify-general-adequate-decision-controller-v1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/general_adequate_decision_controller_v1.py
+      - canonical/tests/test_general_adequate_decision_controller_v1.py
+      - canonical/governance/R2_GENERAL_ADEQUATE_DECISION_CONTROLLER_ACTIVATION_20261008_V1.json
+      - .github/workflows/verify-general-adequate-decision-controller-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python3 -m unittest canonical.tests.test_general_adequate_decision_controller_v1 -v
