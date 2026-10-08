@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK12_ONE_SLOT_EXECUTION_AUTHORITY_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE_ONE_SLOT_AUTHORITY__PUBLIC_EXECUTION_LEASE_NOT_YET_PUBLISHED__TASK_NOT_STARTED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/clinical-metadata-recovery::trial-0",
+    "schedule_rank": 12,
+    "digest": "sha256:5ba8f9cb6fb5da7afa90e83b7a34917de4baedb07fdeaec016fed27e48d551e8"
+  },
+  "intent": {
+    "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK12_ONE_SHOT_20261008_V1.json",
+    "git_blob_sha": "fb808faaa65cab15434349522052de84d27f4376"
+  },
+  "candidate": {
+    "path": "canonical/governance/TB_SCIENCE_RANK12_ONE_SLOT_EXECUTION_AUTHORITY_CANDIDATE_20261008_V1.json",
+    "git_blob_sha": "c495b513fb6088a3df6340b77c6b1dfffef9c6c4",
+    "verification_blob": "1b39b24444c49d158a81bc2704f39a8de227913e"
+  },
+  "public_epoch": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base_commit": "88c3f76be396494a2594130e09974e9d18b6b5a3",
+    "epoch_path": "capsules/tb_science_rank12_20261008_v1/RANK12_EPOCH_V1.json",
+    "epoch_blob": "5426f9db570cfa83d5f96859d2087d11cd6b813a",
+    "epoch_run_attempts_authorized": 0
+  },
+  "exact_route": {
+    "agent_blob": "7ce3fd53df4577929bfc046dc397fe0f12bce5c0",
+    "planner_blob": "01d859c8f27b317893027e693c9aa49e833a256f",
+    "raw_task_contract_blob": "d54d5a2f7efa76b653d288f4f53da4883644baa6",
+    "raw_task_localizer_blob": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76",
+    "carrier_closure_blob": "cf9cc9fb8830eda991c71381a523b8f67caedaa7",
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c"
+  },
+  "preflight_evidence": {
+    "live_output_preflight_blob": "d8de49aa3f8fd7d1ffbf39e16505e62241652722",
+    "storage_headroom_blob": "9dfdbd1cf6988f5585fd4ff18e59b7a2d9f87cf3",
+    "repaired_route_verification_blob": "7a11ec5b0b7d7506f17f1d22f5b04b6e96d354c5",
+    "current_ledger_blob": "1db8e637ad3dfec5d4ac432c78a86ec1371eb006",
+    "terminal_manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b"
+  },
+  "controls": {
+    "attempts_authorized": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "public_execution_claim_required": true,
+    "exact_public_epoch_required": true,
+    "exact_runtime_blob_identity_required": true,
+    "current_epoch_recheck_required_immediately_before_task_start": true,
+    "post_model_storage_gate_required": true,
+    "minimum_post_model_free_bytes": 12884901888,
+    "precheck_failure_consumes_slot": false,
+    "post_start_result_irreversible": true,
+    "final_non_success_counts_zero": true
+  },
+  "state": {
+    "execution_claim_active": false,
+    "public_activation_armed": false,
+    "task_started": false,
+    "result_present": false,
+    "authority_consumed": false
+  },
+  "execution_authority": true,
+  "fresh_reality_authority": true,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_RANK12_TASK_CONTENT_READ_YET",
+    "NO_RANK12_TASK_START_YET",
+    "NO_ACCEPTANCE_CREDIT_BEFORE_FROZEN_VERIFIER_RESULT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
