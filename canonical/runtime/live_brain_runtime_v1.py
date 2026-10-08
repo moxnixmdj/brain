@@ -32,6 +32,7 @@ SURFACES = (
     "MYSTERY_SPARSE_SYMBOLIC_V2",
     "MYSTERY_SEPARABLE_TRANSFORM_V1",
     "CAPABILITY_FIRST_SCHEDULER_V1",
+    "COUNTEREXAMPLE_GUIDED_CAUSAL_ARCHITECTURE_SYNTHESIZER_V1",
 )
 
 
@@ -102,6 +103,95 @@ def _p3(payload: Mapping[str, Any], repo_root: str | Path) -> dict[str, Any]:
 def _rank_work(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     from canonical.runtime.capability_first_scheduler_v1 import rank_work
     return rank_work(rows)
+
+
+def _causal_synthesize(manifest: Mapping[str, Any]) -> dict[str, Any]:
+    from canonical.runtime.counterexample_guided_causal_architecture_synthesizer_v1 import synthesize
+    return synthesize(deepcopy(dict(manifest)))
+
+
+_REPAIR_EFFECT_BY_CLASS = {
+    "ACQUIRE_COMPOSE_OR_INVENT_VERIFIABLE_CAPABILITY": "repair.capability.available",
+    "BIND_AND_INDEPENDENTLY_VERIFY_EFFECT_SEMANTICS": "repair.effect_semantics.verified",
+    "OBTAIN_OR_REPAIR_INDEPENDENT_VERIFICATION": "repair.independent_verification.available",
+    "RECOVER_FROM_OBSERVED_EFFECT_WITHOUT_BLIND_REPLAY": "repair.safe_recovery.available",
+    "REPLACE_FALSIFIED_ROUTE": "repair.verified_route_replacement.available",
+    "RESOLVE_MINIMUM_BLOCKING_INFORMATION_AND_RETRY": "repair.blocking_information.resolved",
+    "LOCALIZE_CAUSAL_FAILURE_AND_GENERATE_MINIMAL_REPAIR": "repair.causal_localization.complete",
+}
+
+
+def synthesize_failure_repair(
+    request: Mapping[str, Any],
+    *,
+    state_path: str | Path | None = None,
+) -> dict[str, Any]:
+    """Compile one durable R3 failure class into minimum causal architecture search.
+
+    Component semantics remain caller-declared and are independently filtered by
+    the existing synthesizer. This bridge does not guess that any Brain component
+    provides a repair effect.
+    """
+    if not isinstance(request, Mapping):
+        return _fail("REPAIR_REQUEST_NOT_OBJECT")
+    fingerprint = str(request.get("failure_fingerprint") or "").strip()
+    components = request.get("components")
+    if not fingerprint:
+        return _fail("FAILURE_FINGERPRINT_REQUIRED")
+    if not isinstance(components, Sequence) or isinstance(components, (str, bytes)):
+        return _fail("REPAIR_COMPONENT_FRONTIER_REQUIRED")
+
+    try:
+        learning = _learning_module()
+        path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
+        state = learning.load_state(path)
+        diagnosis = state.get("failures", {}).get(fingerprint)
+        if not isinstance(diagnosis, Mapping):
+            return _fail("FAILURE_FINGERPRINT_UNKNOWN:" + fingerprint)
+
+        repair_class = str(diagnosis.get("repair_class") or "").strip()
+        repair_effect = _REPAIR_EFFECT_BY_CLASS.get(repair_class)
+        if repair_effect is None:
+            return _fail("REPAIR_CLASS_UNMAPPED:" + repair_class)
+
+        max_components = int(request.get("max_components", 12))
+        top_k = int(request.get("top_k", 8))
+        initial_facts = request.get("initial_facts") or []
+        if not isinstance(initial_facts, Sequence) or isinstance(initial_facts, (str, bytes)):
+            return _fail("REPAIR_INITIAL_FACTS_INVALID")
+
+        manifest = {
+            "initial_facts": list(initial_facts),
+            "components": deepcopy(list(components)),
+            "counterexamples": deepcopy(list(request.get("counterexamples") or [])),
+            "allow_candidate_components": request.get("allow_candidate_components") is True,
+            "target": {
+                "required_effects": [repair_effect],
+                "max_components": max_components,
+                "top_k": top_k,
+            },
+        }
+        synthesis = _causal_synthesize(manifest)
+        return {
+            "schema": SCHEMA,
+            "status": (
+                "REPAIR_ARCHITECTURE_FOUND"
+                if synthesis.get("pass") is True
+                else "REPAIR_ARCHITECTURE_UNRESOLVED"
+            ),
+            "pass": synthesis.get("pass") is True,
+            "failure_fingerprint": fingerprint,
+            "repair_class": repair_class,
+            "required_repair_effect": repair_effect,
+            "causal_synthesis": synthesis,
+            "candidate_only": True,
+            "execution_authority": False,
+            "capability_promotion_authority": False,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
+    except Exception as exc:
+        return _fail("REPAIR_SYNTHESIS_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
 
 
 def _active_learning_context(state_path: str | Path | None, *, scope_id: str, episode_id: str) -> dict[str, Any]:
@@ -540,6 +630,14 @@ def run(
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
         }
+
+    if mode == "repair_synthesis":
+        nested = request.get("request")
+        payload = nested if isinstance(nested, Mapping) else request
+        return synthesize_failure_repair(
+            payload,
+            state_path=request.get("state_path"),
+        )
 
     if mode == "development_schedule":
         work = request.get("work")
