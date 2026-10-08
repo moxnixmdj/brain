@@ -259,6 +259,16 @@ def classify_support(
                 "terminal_authority": False,
             }
         positive_path = _shortest_path(subclass_edges, sub, sup)
+        if sub == sup:
+            # Reflexive inclusion is logically true, but this support checker
+            # must still return provenance before a grounded claim can be
+            # asserted. Count only an explicit self-edge as evidence.
+            self_edges = sorted(
+                evidence_id
+                for nxt, evidence_id in subclass_edges.get(sub, [])
+                if nxt == sup
+            )
+            positive_path = [self_edges[0]] if self_edges else None
         negative_paths = []
         for a, b, eid in neg_subclass:
             # A !subset B, A subset X, Y subset B imply X !subset Y.
