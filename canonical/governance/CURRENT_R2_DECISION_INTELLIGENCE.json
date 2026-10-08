@@ -18,8 +18,8 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V12.json",
-    "git_blob_sha": "166fb0d4f8be5adb9d5ba831036e0a396ede0171"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V13.json",
+    "git_blob_sha": "0a16f157fd3a9e3912728c9392e2f089dc14c3d5"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
@@ -86,10 +86,15 @@
     "generic_meta_effect_retained_only_when_no_grounded_policy_identity_exists": true,
     "verification_path": "canonical/verification/R2_R3_CONCRETE_GROUNDED_ADEQUACY_TARGET_VERIFY_20261008_V1.json",
     "verification_git_blob_sha": "5b965a06f0ebfded59aacaaa5bb131f61e9abb4b",
-    "live_runtime_git_blob_sha": "20bdc305a9da26fa49c8c5b94bb9720b8aead020",
+    "live_runtime_git_blob_sha": "a1d3f7b456633b09ad1e8b028826c1da993f7693",
     "merged_commit": "aecf59ece1140409c171cb7d0824f8085697ad3b",
     "goal_scoped_policy_identity_preserved": true,
-    "goal_scoped_repair_target_isolated_replay": "10_OF_10_PASS"
+    "goal_scoped_repair_target_isolated_replay": "10_OF_10_PASS",
+    "durable_grounded_policy_repair_context": true,
+    "durable_context_merge_commit": "08aace1050bf3871893d8f1b5965be4bcf2d04c8",
+    "durable_context_verification_path": "canonical/verification/R2_CODEC_DURABLE_RUNTIME_AUTHORITY_RECONCILIATION_VERIFY_20261008_V1.json",
+    "durable_context_verification_git_blob_sha": "a1100dfe069ecf75c1631805b6db62d0effef5df",
+    "durable_context_exact_current_full_runtime_replay_claimed": false
   },
   "remaining_hard_frontier": [
     "NEW_POLICY_OR_STRONGER_ADEQUACY_EVIDENCE_WHEN_NO_EXISTING_CERTIFICATE_OR_COMPOSABLE_REPAIR_COVERS_THE_REACHED_STATE",
@@ -163,7 +168,7 @@
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
     "live_route": "canonical/runtime/live_brain_runtime_v1.py::_decision_run",
-    "live_runtime_git_blob_sha": "20bdc305a9da26fa49c8c5b94bb9720b8aead020",
+    "live_runtime_git_blob_sha": "a1d3f7b456633b09ad1e8b028826c1da993f7693",
     "status": "ACTIVE__LIVE_EXTERNAL_META_ACTION_NORMALIZER_OVER_NATIVE_TOTAL_FIXED_POINT_CONTROL",
     "meta_actions": [
       "RETURN_VERIFIED_RESULT",
@@ -187,9 +192,9 @@
     "goal_scoped_frontier_isolated_replay": "10_OF_10_PASS"
   },
   "sufficient_closure": {
-    "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V6.json",
-    "git_blob_sha": "9db44e98fc9374cd341e4aabfdf7b8032bffe7f3",
-    "status": "ACTIVE__V5_CONTROL_AND_CAPABILITY_ESCAPE_PRESERVED__GOAL_SCOPED_FRONTIER_BYTES_RECONCILED__NO_NEW_INDEPENDENT_REPLAY_CLAIM",
+    "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V7.json",
+    "git_blob_sha": "c78a157335c90864b01edffc03b8e19e1fc48f58",
+    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__CODEC_FAMILY_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
     "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY"
   },
   "policy_adequacy_capability_escape": {
@@ -218,5 +223,16 @@
       "OPEN_WORLD_COVERAGE_COMPLETENESS",
       "TERMINAL_SUCCESS"
     ]
+  },
+  "durable_grounded_policy_repair_context": {
+    "live_runtime_git_blob_sha": "a1d3f7b456633b09ad1e8b028826c1da993f7693",
+    "regression_test_path": "canonical/tests/test_r2_r3_durable_policy_repair_context_v2.py",
+    "regression_test_git_blob_sha": "273187c712ec7a704ac706d67c7ec1691505ae5e",
+    "merge_commit": "08aace1050bf3871893d8f1b5965be4bcf2d04c8",
+    "verification_path": "canonical/verification/R2_CODEC_DURABLE_RUNTIME_AUTHORITY_RECONCILIATION_VERIFY_20261008_V1.json",
+    "verification_git_blob_sha": "a1100dfe069ecf75c1631805b6db62d0effef5df",
+    "focused_mechanism_replay": "5_OF_5_ON_EXISTING_FULL_R3_RUNTIME_ANCESTRY",
+    "exact_current_full_runtime_replay_claimed": false,
+    "authority_added": false
   }
 }
