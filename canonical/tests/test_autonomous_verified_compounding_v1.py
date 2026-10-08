@@ -156,3 +156,64 @@ def test_solver_receives_only_authenticated_prior_episodes(tmp_path):
         assert result["pass"] is False
         ids = [e["episode_id"] for e in spy.call_args.kwargs["prior_verified_episode_records"]]
         assert ids == ["old"]
+
+
+def test_configured_episode_verifier_can_admit_only_authenticated_pair(tmp_path):
+    offered = {"receipt": {"path": "external-r.json"},
+               "verification": {"path": "external-v.json"}}
+    outcome = {
+        "pass": True, "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+        "current_episode_verified": False, "current_episode": episode("new"),
+        "trace": [], "state_capsule_head_hash": "a" * 64,
+        "value_capsule_head_hash": "b" * 64,
+        "expanded_problem": {"task_id": "t", "capabilities": []},
+    }
+    with patch.object(r3.solver, "run", return_value=outcome):
+        with patch.object(r3, "authenticate_episode_verification",
+                          return_value={"pass": True, "authenticated_episode": episode("new")}) as authenticator:
+            with patch.object(r3, "reauthenticate_record", return_value={"pass": True}):
+                result = r3.run(
+                    {"task_id": "t"}, repo_root=tmp_path,
+                    episode_id="new", scope_id="s",
+                    episode_verifier=lambda solved: offered,
+                )
+    authenticator.assert_called_once()
+    assert result["r3_episode_admitted"] is True
+    assert result["r3_learning"]["episodes_retained"] == 1
+
+
+def test_configured_verifier_rejection_does_not_promote(tmp_path):
+    outcome = {
+        "pass": True, "status": "SOLVED__EPISODE_VERIFICATION_REQUIRED",
+        "current_episode_verified": False, "current_episode": episode("new"),
+        "trace": [], "state_capsule_head_hash": "a" * 64,
+        "value_capsule_head_hash": "b" * 64,
+    }
+    with patch.object(r3.solver, "run", return_value=outcome):
+        with patch.object(r3, "authenticate_episode_verification",
+                          return_value={"pass": False, "reason": "NO_PROOF"}):
+            result = r3.run(
+                {"task_id": "t"}, repo_root=tmp_path,
+                episode_id="new", scope_id="s",
+                episode_verifier=lambda solved: {"receipt": {}, "verification": {}},
+            )
+    assert result["r3_episode_admitted"] is False
+    assert result["r3_learning"]["episodes_retained"] == 0
+
+
+def test_configured_candidate_verifier_is_automatically_consulted(tmp_path):
+    path = "canonical/learning/state.json"
+    with patch.object(r3, "reauthenticate_record", return_value={"pass": True}):
+        r3.reconcile(repo_root=tmp_path, state_path=path, new_episode=episode("a"))
+        with patch.object(r3, "authenticate_and_verify", return_value={
+            "pass": True, "verified_skill": {}
+        }):
+            result = r3.reconcile(
+                repo_root=tmp_path, state_path=path, new_episode=episode("b"),
+                candidate_verifier=lambda candidate: {
+                    "receipt": {"path": "external-1"},
+                    "verification": {"path": "external-2"},
+                },
+            )
+            assert result["new_candidates"] == 1
+            assert result["new_verified_skills"] == 1
