@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_P3_BOUNDED_OBJECTIVE_ROLE_RELEVANCE_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_7_OF_7_ON_TWO_SPRITES__EXACT_BINARY_OBJECTIVE_ROLE_RELEVANCE_ONLY__ZERO_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/p3_bounded_objective_role_relevance_v1.py",
+    "git_blob_sha": "d15bd27b528f98a72048223272136fe6a3fc655f"
+  },
+  "tests": {
+    "path": "canonical/tests/test_p3_bounded_objective_role_relevance_v1.py",
+    "git_blob_sha": "81ad0115f26ad7c4ada2b7653f239b51775a38e4"
+  },
+  "dependency": {
+    "path": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py",
+    "git_blob_sha": "48fd058430d8d361fc75beced567c7b6d1166531"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_passed": 7,
+      "tests_run": 7
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_passed": 7,
+      "tests_run": 7
+    }
+  ],
+  "proved": [
+    "EXPLICIT_BINARY_NUMERIC_COMPARISON_OBJECTIVE_IS_PARSED_BY_THE_EXISTING_VERIFIED_OBJECTIVE_ROLE_BINDER",
+    "EXACTLY_TWO_OPTIONAL_CLAIMS_MUST_MAP_BIJECTIVELY_TO_LEFT_AND_RIGHT_OBJECTIVE_OPERAND_PHRASES",
+    "EACH_OPTIONAL_CLAIM_MUST_EXACTLY_EQUAL_ONE_VERIFIED_PROVENANCE_BOUND_EVIDENCE_UNIT",
+    "EACH_OBJECTIVE_ROLE_MUST_HAVE_EXACTLY_ONE_VERIFIED_EVIDENCE_ANCHOR",
+    "AMBIGUOUS_DUPLICATE_ROLE_EVIDENCE_FAILS_CLOSED",
+    "UNSUPPORTED_OBJECTIVE_GRAMMAR_UNMAPPED_CLAIMS_EXTRA_OPTIONALS_AND_UNVERIFIED_EVIDENCE_FAIL_CLOSED",
+    "REQUIRED_CLAIMS_DO_NOT_AFFECT_THE_NARROW_OPTIONAL_ROLE_RELEVANCE_CERTIFICATE"
+  ],
+  "boundaries": [
+    "NO_GENERAL_SEMANTIC_RELEVANCE",
+    "NO_GENERAL_SALIENCE_OR_PRESENTATION_ORDER_ADEQUACY",
+    "NO_SOURCE_AUTHORIZATION",
+    "NO_POLICY_ADEQUACY_OR_DB_ADMISSION",
+    "NO_U_SUBTRACTION_U_EMPTY_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
