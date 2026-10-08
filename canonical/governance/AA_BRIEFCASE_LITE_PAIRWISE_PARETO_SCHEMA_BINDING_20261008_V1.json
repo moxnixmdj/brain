@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_LITE_PAIRWISE_PARETO_SCHEMA_BINDING_V1",
+  "date": "2026-10-08",
+  "status": "RESEARCH_STRUCTURAL_BINDING__PUBLIC_LITE_ONLY__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "public_surface": {
+    "dataset": "ArtificialAnalysis/AA-Briefcase-Lite",
+    "official_scored_scope_relation": "DEMONSTRATIVE_NONSCORING_PUBLIC_FIFTH_SCENARIO",
+    "task_count": 4,
+    "pairwise_check_count": 8,
+    "pairwise_check_ids": [
+      "W1-T1-AQ-01",
+      "W1-T1-P-01",
+      "W1-T2-AQ-01",
+      "W1-T2-P-01",
+      "W1-T3-AQ-01",
+      "W1-T3-P-01",
+      "W1-T4-AQ-01",
+      "W1-T4-P-01"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/ArtificialAnalysis/AA-Briefcase-Lite/viewer/checks/train",
+      "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
+    ]
+  },
+  "observed_comparator_schema": {
+    "check_types": [
+      "AQ",
+      "P"
+    ],
+    "score_1_orientation": "OUTPUT_A_STRONGER",
+    "score_0_orientation": "OUTPUT_B_STRONGER",
+    "shared_rule": "WINNER_IS_STRONGER_ACROSS_THE_LISTED_TASK_SPECIFIC_DIMENSIONS_OR_STRICTLY_STRONGER_ON_AT_LEAST_ONE_WITH_NO_REGRESSION_ON_THE_OTHERS",
+    "task_specific_dimensions": true,
+    "comparator_class": "SYMMETRIC_PARETO_OR_NO_REGRESSION_PAIRWISE_COMPARISON",
+    "observed_on_all_8_released_pairwise_checks": true
+  },
+  "theorem_candidate": {
+    "statement": "FOR_ANY_CHECK_USING_THIS_EXACT_COMPARATOR_SCHEMA__IF_BRAIN_IS_NO_WORSE_THAN_TARGET_ON_EVERY_CHECK_DIMENSION_AND_STRICTLY_BETTER_ON_AT_LEAST_ONE__THE_CHECK_CANNOT_PREFER_TARGET.",
+    "connection_to_existing_brain_theory": [
+      "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json",
+      "canonical/runtime/hidden_evaluator_top_support_dominance_v1.py"
+    ],
+    "potential_effect_if_private_scope_schema_and_dimensions_are_independently_bound": "THE_PAIRWISE_JUDGE_MODEL_IDENTITY_WEIGHTS_AND_TARGET_DISTRIBUTION_BECOME_NON_LOAD_BEARING_FOR_CELLS_WHERE_BRAIN_TOP_SUPPORT_DOMINANCE_IS_SCOPE_COMPLETE."
+  },
+  "exact_current_information_cut": {
+    "public_lite_comparator_algebra_bound": true,
+    "private_scored_task_dimension_sets_bound": false,
+    "private_scored_pairwise_schema_identity_to_lite_bound": false,
+    "private_scored_scope_top_support_proved": false,
+    "owner_or_independent_brain_score_receipt": false
+  },
+  "next_information_that_can_change_Q_status": [
+    "OWNER_OR_INDEPENDENT_PROOF_THAT_PRIVATE_SCORED_AQ_AND_PRESENTATION_CHECKS_USE_THE_SAME_PARETO_NO_REGRESSION_COMPARATOR_SCHEMA",
+    "COMPLETE_PRIVATE_SCORED_TASK_SPECIFIC_DIMENSION_SETS_OR_A_STRONGER_UNIVERSAL_PROFESSIONAL_QUALITY_ORDER_THAT_SOUNDLY_COVERS_THEM",
+    "SCOPE_COMPLETE_BRAIN_TOP_SUPPORT_RECEIPT_OVER_THOSE_DIMENSIONS",
+    "OR_A_MATCHED_OWNER_OR_INDEPENDENT_AA_BRIEFCASE_SCORE_RECEIPT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_LITE_CHECKS_ARE_OFFICIAL_SCORING_TASKS.",
+    "NO_CLAIM_THE_PRIVATE_FOUR_SCORED_SCENARIOS_USE_IDENTICAL_CHECK_ALGEBRA.",
+    "NO_CLAIM_THE_PRIVATE_TASK_SPECIFIC_QUALITY_DIMENSIONS_ARE_KNOWN.",
+    "NO_CLAIM_BRAIN_DOMINATES_OPUS55_ON_ANY_AA_BRIEFCASE_PAIRWISE_CHECK.",
+    "NO_AA_BRIEFCASE_SCORE_ACCEPTANCE_U_EMPTY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
