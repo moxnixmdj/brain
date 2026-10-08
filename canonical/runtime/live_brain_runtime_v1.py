@@ -497,6 +497,9 @@ def execute_failure_repair_cycle(
                             invention_targets = normalized
                             invention_target_source = "STORED_ORIGINAL_OBLIGATION_TARGET_EFFECTS"
             fingerprint_prefix = fingerprint[:16]
+            repair_context = request.get("repair_context")
+            if repair_context is not None and not isinstance(repair_context, Mapping):
+                return _fail("REPAIR_CONTEXT_INVALID")
             problem = {
                 "task_id": str(
                     request.get("repair_task_id")
@@ -512,6 +515,8 @@ def execute_failure_repair_cycle(
                 "capabilities": [],
                 "max_solver_cycles": min(int(request.get("max_solver_cycles", 64)), 256),
             }
+            if isinstance(repair_context, Mapping):
+                problem["repair_context"] = deepcopy(dict(repair_context))
             invention_mode = True
         else:
             problem = _compile_verified_repair_problem(
@@ -643,6 +648,131 @@ def execute_failure_repair_cycle(
         return _fail("REPAIR_CYCLE_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
 
 
+def _compact_policy_repair_context(result: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Keep only causal policy-frontier structure needed by same-dispatch repair."""
+    if not isinstance(result, Mapping):
+        return None
+    decision = result.get("decision_output")
+    source = decision if isinstance(decision, Mapping) else result
+    request = source.get("next_policy_request")
+    if not isinstance(request, Mapping):
+        return None
+    search = request.get("search_context")
+    search = search if isinstance(search, Mapping) else {}
+
+    def strings(value: Any, limit: int = 128) -> list[str]:
+        if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+            return []
+        out: list[str] = []
+        for item in value:
+            if not isinstance(item, str) or not item.strip():
+                continue
+            token = item.strip()
+            if token not in out:
+                out.append(token)
+            if len(out) >= limit:
+                break
+        return sorted(out)
+
+    rejected: list[dict[str, Any]] = []
+    rows = search.get("rejected_policy_candidates")
+    if isinstance(rows, Sequence) and not isinstance(rows, (str, bytes)):
+        for raw in rows:
+            if not isinstance(raw, Mapping):
+                continue
+            policy_id = str(raw.get("policy_id") or "").strip()
+            if not policy_id:
+                continue
+            row = {"policy_id": policy_id}
+            reason = str(raw.get("reason") or "").strip()
+            if reason:
+                row["reason"] = reason[:512]
+            rejected.append(row)
+            if len(rejected) >= 128:
+                break
+    rejected.sort(key=lambda row: (row["policy_id"], row.get("reason", "")))
+
+    uncovered_ids: list[str] = []
+    rows = search.get("uncovered_models")
+    if isinstance(rows, Sequence) and not isinstance(rows, (str, bytes)):
+        for raw in rows:
+            model_id = (
+                str(raw.get("model_id") or "").strip()
+                if isinstance(raw, Mapping)
+                else str(raw or "").strip()
+            )
+            if model_id and model_id not in uncovered_ids:
+                uncovered_ids.append(model_id)
+            if len(uncovered_ids) >= 256:
+                break
+    uncovered_ids.sort()
+
+    conflict: list[dict[str, Any]] = []
+    rows = search.get("conflicting_policy_region_witness")
+    if isinstance(rows, Sequence) and not isinstance(rows, (str, bytes)):
+        for raw in rows:
+            if not isinstance(raw, Mapping):
+                continue
+            model_id = str(raw.get("model_id") or "").strip()
+            if not model_id:
+                continue
+            conflict.append({
+                "model_id": model_id,
+                "adequate_policy_ids": strings(raw.get("adequate_policy_ids"), 64),
+            })
+            if len(conflict) >= 16:
+                break
+
+    def discriminator(raw: Any) -> dict[str, Any] | None:
+        if not isinstance(raw, Mapping):
+            return None
+        did = str(raw.get("discriminator_id") or "").strip()
+        if not did:
+            return None
+        row: dict[str, Any] = {"discriminator_id": did}
+        cost = raw.get("cost_units")
+        if isinstance(cost, (int, float)) and not isinstance(cost, bool):
+            row["cost_units"] = cost
+        return row
+
+    alternatives: list[dict[str, Any]] = []
+    rows = search.get("alternative_resolving_discriminators")
+    if isinstance(rows, Sequence) and not isinstance(rows, (str, bytes)):
+        for raw in rows:
+            row = discriminator(raw)
+            if row is not None:
+                alternatives.append(row)
+            if len(alternatives) >= 64:
+                break
+
+    context = {
+        "schema": "PROJECT_BRAIN_R2_POLICY_REPAIR_CONTEXT_V1",
+        "loop_status": str(request.get("loop_status") or "").strip() or None,
+        "required_artifact": str(request.get("required_artifact") or "").strip() or None,
+        "selected_policy_id": str(request.get("selected_policy_id") or "").strip() or None,
+        "authenticated_policy_ids": strings(search.get("authenticated_policy_ids")),
+        "rejected_policy_candidates": rejected,
+        "certified_common_policies": strings(search.get("certified_common_policies")),
+        "uncovered_model_ids": uncovered_ids,
+        "conflicting_policy_region_witness": conflict,
+        "selected_discriminator": discriminator(search.get("selected_discriminator")),
+        "alternative_resolving_discriminators": alternatives,
+        "surviving_model_count": (
+            search.get("surviving_model_count")
+            if isinstance(search.get("surviving_model_count"), int)
+            and not isinstance(search.get("surviving_model_count"), bool)
+            else None
+        ),
+    }
+    if not any(
+        value not in (None, [], {})
+        for key, value in context.items()
+        if key != "schema"
+    ):
+        return None
+    return context
+
+
 def _auto_repair_live_failure(
     result: Mapping[str, Any],
     request: Mapping[str, Any],
@@ -709,6 +839,7 @@ def _auto_repair_live_failure(
         if isinstance(execution_problem, Mapping):
             repair_initial_facts = execution_problem.get("initial_facts") or ()
 
+    repair_context = _compact_policy_repair_context(out)
     repair_request = {
         "failure_fingerprint": fingerprint,
         "retry_capsule_sha256": retry_sha,
@@ -722,6 +853,8 @@ def _auto_repair_live_failure(
         "learn": True,
         "autonomous": True,
     }
+    if repair_context is not None:
+        repair_request["repair_context"] = repair_context
     repaired = execute_failure_repair_cycle(
         repair_request,
         repo_root=repo_root,

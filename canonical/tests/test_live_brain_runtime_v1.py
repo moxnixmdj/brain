@@ -705,6 +705,113 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "repair.policy_adequacy_cover.available",
         )
 
+
+    def test_policy_repair_context_is_compact_and_drops_raw_model_valuations(self):
+        out = brain._compact_policy_repair_context({
+            "decision_output": {
+                "next_policy_request": {
+                    "loop_status": "OPEN__POSITIVE_POLICY_ADEQUACY_COVERAGE_REQUIRED",
+                    "required_artifact": "POSITIVE_POLICY_ADEQUACY_COVERAGE",
+                    "selected_policy_id": "p0",
+                    "search_context": {
+                        "authenticated_policy_ids": ["p1", "p0"],
+                        "rejected_policy_candidates": [
+                            {"policy_id": "p2", "reason": "missing authority", "raw_secret": "drop"},
+                        ],
+                        "certified_common_policies": [],
+                        "uncovered_models": [
+                            {"model_id": "m1", "valuation": {"PRIVATE_RAW_FACT": True}},
+                        ],
+                        "conflicting_policy_region_witness": [
+                            {
+                                "model_id": "m1",
+                                "valuation": {"PRIVATE_RAW_FACT": True},
+                                "adequate_policy_ids": ["p0"],
+                            },
+                            {
+                                "model_id": "m2",
+                                "valuation": {"OTHER_PRIVATE_FACT": False},
+                                "adequate_policy_ids": ["p1"],
+                            },
+                        ],
+                        "selected_discriminator": {
+                            "discriminator_id": "d1",
+                            "formula": {"atom": "PRIVATE_RAW_FACT"},
+                            "cost_units": 1,
+                        },
+                        "alternative_resolving_discriminators": [
+                            {
+                                "discriminator_id": "d2",
+                                "formula": {"atom": "OTHER_PRIVATE_FACT"},
+                                "cost_units": 2,
+                            },
+                        ],
+                        "decision_basis": ["PRIVATE_RAW_FACT", "OTHER_PRIVATE_FACT"],
+                        "surviving_model_count": 2,
+                    },
+                },
+            },
+        })
+        self.assertEqual(out["authenticated_policy_ids"], ["p0", "p1"])
+        self.assertEqual(out["uncovered_model_ids"], ["m1"])
+        self.assertEqual(
+            out["conflicting_policy_region_witness"],
+            [
+                {"model_id": "m1", "adequate_policy_ids": ["p0"]},
+                {"model_id": "m2", "adequate_policy_ids": ["p1"]},
+            ],
+        )
+        self.assertEqual(
+            out["selected_discriminator"],
+            {"discriminator_id": "d1", "cost_units": 1},
+        )
+        rendered = str(out)
+        self.assertNotIn("PRIVATE_RAW_FACT", rendered)
+        self.assertNotIn("OTHER_PRIVATE_FACT", rendered)
+        self.assertNotIn("raw_secret", rendered)
+
+    @patch("canonical.runtime.live_brain_runtime_v1.execute_failure_repair_cycle")
+    def test_same_dispatch_auto_repair_receives_compact_policy_frontier(self, repair):
+        repair.return_value = {"pass": False, "status": "REPAIR_PENDING"}
+        result = {
+            "pass": False,
+            "status": "UNIFIED_DECISION_EXECUTION_COMPLETE",
+            "learning": {
+                "pass": False,
+                "diagnosis": {"failure_fingerprint": "fp:policy"},
+                "retry_capsule_sha256": "r" * 64,
+            },
+            "decision_output": {
+                "next_policy_request": {
+                    "loop_status": "OPEN__POSITIVE_POLICY_ADEQUACY_COVERAGE_REQUIRED",
+                    "required_artifact": "POSITIVE_POLICY_ADEQUACY_COVERAGE",
+                    "search_context": {
+                        "authenticated_policy_ids": ["p0"],
+                        "uncovered_models": [{"model_id": "m-gap", "valuation": {"x": True}}],
+                    },
+                },
+            },
+        }
+        out = brain._auto_repair_live_failure(
+            result,
+            {"mode": "decision", "repair_components": []},
+            repo_root=brain.ROOT,
+            information_provider=None,
+            proposal_provider=None,
+            capability_expander=None,
+        )
+        self.assertTrue(out["auto_repair_attempted"])
+        request = repair.call_args.args[0]
+        self.assertEqual(
+            request["repair_context"]["authenticated_policy_ids"],
+            ["p0"],
+        )
+        self.assertEqual(
+            request["repair_context"]["uncovered_model_ids"],
+            ["m-gap"],
+        )
+        self.assertNotIn("valuation", str(request["repair_context"]))
+
     def test_unknown_mode_fails_closed(self):
         out = brain.run({"mode": "invented"})
         self.assertFalse(out["pass"])
