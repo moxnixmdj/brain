@@ -1398,7 +1398,10 @@
     "r2_live_decision_control_law_totalized": true,
     "r2_fixed_point_native_control_policy_total": true,
     "primary_scheduler_load_bearing_gate_active": true,
-    "primary_scheduler_goal_velocity_objective": "MAXIMIZE_EXPECTED_INDEPENDENT_LOAD_BEARING_OBLIGATION_DISCHARGE_OR_UNLOCK_PER_WALL_CLOCK"
+    "primary_scheduler_goal_velocity_objective": "MAXIMIZE_EXPECTED_INDEPENDENT_LOAD_BEARING_OBLIGATION_DISCHARGE_OR_UNLOCK_PER_WALL_CLOCK",
+    "primary_pr_admission_bound_to_current_open_obligations": true,
+    "primary_pr_admission_trusted_base_enforcement_active": true,
+    "direct_main_write_load_bearing_admission_enforced": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2088,7 +2091,7 @@
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA"
   },
-  "pointer_revision": 46,
+  "pointer_revision": 47,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2109,6 +2112,34 @@
     "ranking_rule": "(EXPECTED_OBLIGATION_DISCHARGE_LCB+EXPECTED_OBLIGATION_UNLOCK_LCB)*SUCCESS_PROBABILITY_LCB/WALL_CLOCK_COST_UB",
     "generic_capability_work_while_open": "DEMOTED_UNLESS_LOAD_BEARING",
     "post_checkpoint_rule": "REVERT_TO_REUSABLE_VERIFIED_CAPABILITY_RESOURCE_PARETO_OPTIMIZATION",
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "load_bearing_primary_pr_admission_20261008_v1": {
+    "status": "ACTIVE_TRUSTED_BASE_PR_ADMISSION__CURRENT_13_INDEPENDENT_OPEN_OBLIGATIONS_BOUND",
+    "helper": {
+      "path": "execution_guard/load_bearing_primary_admission.py",
+      "git_blob_sha": "21fa45aa775ca5d51e5f2d3fec7ab9d3da01eabf"
+    },
+    "runner": {
+      "path": "execution_guard/enforce_load_bearing_primary_pr.py",
+      "git_blob_sha": "66b648e8cbb8f0e3425ff2d9eb4131b300cea544"
+    },
+    "workflow": {
+      "path": ".github/workflows/load-bearing-primary-admission.yml",
+      "git_blob_sha": "dbacbe35d0642d34ab4f83f6bfaeef2fd355ffcb"
+    },
+    "quotient": {
+      "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
+      "git_blob_sha": "b20c5cd6965f7ea7e5ca019d1e828ac6eced042c",
+      "independent_open_obligation_count": 13
+    },
+    "verification": {
+      "path": "canonical/verification/LOAD_BEARING_PRIMARY_PR_ADMISSION_VERIFY_20261008_V1.json",
+      "status": "8_OF_8_UNITTEST_PASS__PY_COMPILE_PASS"
+    },
+    "admission_rule": "SENSITIVE_PR_REQUIRES_EXACTLY_ONE_ACTION_INTENT_AND_LOAD_BEARING_PRIMARY_BINDING_TO_CURRENT_OPEN_OBLIGATION_OR_CONSTRUCTIVE_GAP_OR_SCOPE_COMPLETE_ROUTE_WITH_POSITIVE_CONSERVATIVE_EXPECTED_YIELD",
+    "direct_main_write_boundary": "NOT_ENFORCED_BY_THIS_PR_GATE__NO_BRANCH_PROTECTION_CLAIM",
     "terminal_credit_delta": 0,
     "incremental_spend_usd": 0
   }
