@@ -123,6 +123,71 @@ def _constraint_verifier(
     constraint_id: str,
     verifier_input: Any,
 ) -> dict[str, Any]:
+    if verifier_id == "SELECTED_SEMANTIC_TRUTH_OBSERVATION_V1":
+        if not isinstance(verifier_input, Mapping) or set(verifier_input) != {
+            "source_text", "source_id", "fact_source", "fact_source_id"
+        }:
+            return {
+                "pass": False,
+                "reason": "SELECTED_SEMANTIC_OBSERVATION_INPUT_INVALID",
+                "verifier_id": verifier_id,
+                "constraint_id": constraint_id,
+            }
+        from canonical.runtime.selected_semantic_discriminator_dispatch_v1 import evaluate as dispatch
+        payload = {
+            "predicate_id": constraint_id,
+            "target_claim_id": "selected",
+            "source_text": verifier_input.get("source_text"),
+            "source_id": verifier_input.get("source_id"),
+            "claims": [{
+                "claim_id": "selected",
+                "kind": "CERTIFIED_DEFINED_TERM_RAW_TYPED_CONDITION",
+            }],
+            "fact_source": verifier_input.get("fact_source"),
+            "fact_source_id": verifier_input.get("fact_source_id"),
+        }
+        out = dispatch(payload, {"TRUE": "__OBS_TRUE__", "FALSE": "__OBS_FALSE__"})
+        if out.get("pass") is not True:
+            return {
+                "pass": False,
+                "reason": "SELECTED_SEMANTIC_OBSERVATION_NOT_PROVED",
+                "verifier_id": verifier_id,
+                "constraint_id": constraint_id,
+                "raw_status": out.get("status"),
+                "raw_reason": out.get("reason"),
+            }
+        if out.get("predicate_id") != constraint_id:
+            return {
+                "pass": False,
+                "reason": "SELECTED_SEMANTIC_PREDICATE_ID_MISMATCH",
+                "verifier_id": verifier_id,
+                "constraint_id": constraint_id,
+                "verified_predicate_id": out.get("predicate_id"),
+            }
+        truth = out.get("predicate_truth")
+        atom = {"op": "ATOM", "id": constraint_id}
+        if truth == "TRUE":
+            formula = atom
+        elif truth == "FALSE":
+            formula = {"op": "NOT", "arg": atom}
+        else:
+            return {
+                "pass": False,
+                "reason": "SELECTED_SEMANTIC_OBSERVATION_UNKNOWN",
+                "verifier_id": verifier_id,
+                "constraint_id": constraint_id,
+            }
+        return {
+            "pass": True,
+            "constraint_id": constraint_id,
+            "constraint_formula": formula,
+            "proof_digest": out.get("input_binding_sha256"),
+            "verifier_id": verifier_id,
+            "predicate_truth": truth,
+            "source_sha256": (out.get("input_binding") or {}).get("source_sha256"),
+            "fact_source_sha256": (out.get("input_binding") or {}).get("fact_source_sha256"),
+        }
+
     if verifier_id == "P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1":
         if constraint_id != "P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1":
             return {
