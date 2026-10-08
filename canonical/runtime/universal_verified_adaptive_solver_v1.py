@@ -23,6 +23,7 @@ semantically authorized; carrier/outcome verification remains separate.
 from __future__ import annotations
 
 from hashlib import sha256
+from pathlib import Path
 import base64
 import json
 from typing import Any, Callable, Mapping, Sequence
@@ -834,6 +835,10 @@ def run(
                 "effect_outcome_sha256": effect_result.get("effect_outcome_sha256") if isinstance(effect_result, Mapping) else None,
                 "new_verified_facts": sorted(set(new_facts)),
             }
+            if is_effect:
+                completed_record["effect_root_sha256"] = _digest(
+                    str(Path(effect_root).resolve())
+                )
             try:
                 state_capsule = append_state_transition(
                     state_capsule,

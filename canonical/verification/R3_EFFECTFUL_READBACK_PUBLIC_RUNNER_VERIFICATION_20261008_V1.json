@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_R3_EFFECTFUL_READBACK_PUBLIC_RUNNER_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PASS__CURRENT_BOUNDED_EFFECT_READBACK_CORE_INDEPENDENTLY_EXECUTED",
+  "subject_pr": 3273,
+  "source_head": "8fde0bbc2350aa7a848d4b9fca62040c9e773ccc",
+  "exact_blobs": {
+    "canonical/runtime/r3_independent_learning_verifier_v1.py": "493f2b8147877178d2c87c34a9d9b8bcbaaf39c0",
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "2069c0ac5b80a49ef926c3da66abad9f46727b76",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "5939334bd80c3fa3902ab538929870cd28690677",
+    "canonical/runtime/universal_verified_adaptive_solver_v1.py": "c04095ca5aeecc2906c569134bf150d6e7975943",
+    "canonical/tests/test_r3_independent_learning_verifier_v1.py": "cc82ebe4d4843d7e2f8f6cadd29750f19d0bcb72",
+    "canonical/tests/test_r3_improvement_queue_driver_v1.py": "04ee80623c18559972c37ea8ad8a38e74a7a15e2"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "r3-effectful-readback-capsule-20261008",
+    "workflow": ".github/workflows/verify-r3-effectful-readback-capsule.yml",
+    "workflow_commit": "b87cff5e8b7cbc3280ea0b9c9da485c60afca22e",
+    "run_id": 37780810181,
+    "job_id": 113323148119,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_PUBLISHED_SOURCE_BLOB_BINDING",
+    "PYTHON_SYNTAX_COMPILE",
+    "MATCHING_EFFECT_ROOT_AND_BYTES_ACCEPTED",
+    "ONE_BYTE_POST_EXECUTION_DRIFT_REJECTED",
+    "MATCHING_BYTES_AT_WRONG_EFFECT_ROOT_REJECTED",
+    "MISSING_EFFECT_ROOT_REJECTED",
+    "SOLVER_TRACE_BINDS_EFFECT_ROOT_IDENTITY",
+    "R3_RETENTION_PATH_PRESERVES_EFFECT_ROOT"
+  ],
+  "private_ci": {
+    "status": "CARRIER_FAILURE_BEFORE_RUNNER_ASSIGNMENT__NO_CODE_VERDICT",
+    "r3_run_id": 37780380485,
+    "r3_job_id": 113321684160,
+    "steps_executed": 0
+  },
+  "scope_boundary": {
+    "admitted_effect_class": "CURRENT_BRAIN_OWNED_BOUNDED_FILESYSTEM_VERIFIED_EFFECT_TOOL_CLASS",
+    "admitted_tool_ids": [
+      "JSON_RECEIPT_WRITER_V1",
+      "JSONL_LEDGER_APPEND_V1"
+    ],
+    "arbitrary_network_or_external_service_effects": false,
+    "effectful_structural_superset_generalization": false,
+    "exact_scope_learning_after_authenticated_effect_readback": true
+  },
+  "nonclaims": [
+    "The public capsule does not publish or execute the private queue-driver file.",
+    "The full private Brain repository is not independently executed by this public run.",
+    "No authority is granted for arbitrary non-readable external effects.",
+    "No self-certification or terminal capability credit is granted by this receipt."
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}

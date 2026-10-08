@@ -123,6 +123,55 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertEqual(provider({"kind": "EPISODE_VERIFICATION"}), binding)
         owned_verifier.assert_called_once()
 
+    def test_delayed_episode_worker_forwards_retained_effect_root(self):
+        path = self.temp_state()
+        learning._write_state(learning._empty_state(), path)
+        work = {
+            "work_id": "episode-effect",
+            "kind": "VERIFY_EPISODE",
+            "payload": {
+                "episode": {
+                    "episode_id": "ep",
+                    "scope_id": "scope",
+                    "steps": [{"op": "x", "inputs": [], "outputs": ["goal"]}],
+                    "preconditions": [],
+                    "postconditions": ["goal"],
+                    "invalidators": [],
+                    "program_sha256": "sha256:" + "a" * 64,
+                },
+                "problem": {
+                    "task_id": "t",
+                    "initial_facts": [],
+                    "target_effects": ["goal"],
+                    "capabilities": [],
+                },
+                "trace": [],
+                "fact_capsule_head_hash": "f" * 64,
+                "value_capsule_head_hash": "v" * 64,
+                "effect_root": "/private/effect-root",
+            },
+        }
+        with mock.patch.object(
+            learning,
+            "_post_execution_independent_verification",
+            return_value={
+                "current_episode_verified": False,
+                "post_execution_episode_verification_error": "expected-test-stop",
+            },
+        ) as verify:
+            out = driver._verify_episode_work(
+                work,
+                state_path=path,
+                repo_root=driver.ROOT,
+                episode_verification_provider=object(),
+                skill_verification_provider=None,
+            )
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(
+            verify.call_args.kwargs["effect_root"],
+            "/private/effect-root",
+        )
+
     def test_repair_queue_uses_internal_verified_repair_cycle_without_injected_provider(self):
         path = self.temp_state()
         self.write_state(
@@ -397,6 +446,7 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             out,
             state_path=path,
             verification_problem=problem,
+            verification_effect_root="/secure/effect-root",
         )
         state = learning.load_state(path)
         work = next(
@@ -409,6 +459,7 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
         self.assertEqual(work["payload"]["trace"], out["trace"])
         self.assertEqual(work["payload"]["fact_capsule_head_hash"], "fact")
         self.assertEqual(work["payload"]["value_capsule_head_hash"], "value")
+        self.assertEqual(work["payload"]["effect_root"], "/secure/effect-root")
 
     def test_scope_generalization_runs_through_canonical_driver(self):
         path = self.temp_state()

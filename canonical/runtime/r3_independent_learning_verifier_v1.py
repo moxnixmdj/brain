@@ -6,8 +6,10 @@ skill authenticators, but only after independently recomputing evidence already
 recorded by the solver.
 
 Current admitted scope:
-- non-effectful Universal Solver episodes whose accepted proposals can be
-  deterministically rechecked by the Brain-owned built-in verifiers;
+- Universal Solver episodes whose accepted proposals can be deterministically
+  rechecked by the Brain-owned built-in verifiers; bounded filesystem effects are
+  admitted only when their exact effect root is retained and every recorded file
+  receipt is independently re-read byte-for-byte;
 - exact-scope executable-skill candidates recomputed from already authenticated
   source episodes;
 - PROVEN_SUPERSET planning-scope claims only for STRUCTURAL_MATCH_V1 when every
@@ -15,8 +17,9 @@ Current admitted scope:
   re-induction, and its program is structurally closed. Reuse still passes the
   runtime structural guard and fresh V12 execution verification.
 
-Effectful episodes are intentionally not replayed. Without an independently
-re-readable effect root in the verification request, they remain fail-closed.
+Effectful episodes are never replayed. The currently owned filesystem-effect
+class is verified by independent post-execution readback from the retained effect
+root. Any effect without such a re-readable root remains fail-closed.
 
 No terminal, capability, ownership, or execution authority is granted here.
 """
@@ -25,7 +28,7 @@ from __future__ import annotations
 from copy import deepcopy
 from hashlib import sha256
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import universal_verified_adaptive_solver_v1 as v1
@@ -33,6 +36,10 @@ from canonical.runtime import universal_verified_adaptive_solver_v4 as v4
 from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
 from canonical.runtime.resolved_capability_semantics_authenticator_v1 import (
     authenticate as authenticate_resolved_semantics,
+)
+from canonical.runtime.universal_verified_effect_executor_v1 import (
+    ALLOWED_TOOL_IDS as VERIFIED_EFFECT_TOOL_IDS,
+    EXECUTOR_ID as VERIFIED_EFFECT_EXECUTOR_ID,
 )
 from canonical.runtime.effect_broker_receipt_resolver_v2 import (
     git_blob_id,
@@ -68,6 +75,9 @@ INDEPENDENT_VERIFIER_ID = "R3_INDEPENDENT_EVIDENCE_RECOMPUTATION_V1"
 DEFAULT_RECEIPT_DIR = "canonical/runtime/r3_learning_verification_receipts"
 STRUCTURAL_MATCH_SCOPE_PREDICATE = "STRUCTURAL_MATCH_V1"
 NON_EFFECTFUL_VERIFICATION_BASIS = "SEPARATE_R3_EVIDENCE_RECOMPUTATION_WORKER"
+EFFECTFUL_READBACK_VERIFICATION_BASIS = (
+    "SEPARATE_R3_EVIDENCE_RECOMPUTATION_PLUS_EFFECT_READBACK_V1"
+)
 
 
 class R3IndependentVerificationError(ValueError):
@@ -190,6 +200,135 @@ def _needs_resolved_semantics(cap: Mapping[str, Any]) -> bool:
     ) or _contains_effect_ref(cap.get("action"))
 
 
+def _safe_effect_rel(value: Any, label: str) -> str:
+    if not isinstance(value, str) or not value or "\\" in value or "\x00" in value:
+        raise R3IndependentVerificationError(label + "_INVALID")
+    path = PurePosixPath(value)
+    if path.is_absolute() or any(part in {"", ".", ".."} for part in path.parts):
+        raise R3IndependentVerificationError(label + "_NOT_CANONICAL")
+    return path.as_posix()
+
+
+def _reverify_effect_outcome(
+    *,
+    cap: Mapping[str, Any],
+    row: Mapping[str, Any],
+    action: Mapping[str, Any],
+    effect_root: str | Path | None,
+) -> None:
+    if effect_root is None or not str(effect_root).strip():
+        raise R3IndependentVerificationError(
+            "EFFECTFUL_EPISODE_REQUIRES_INDEPENDENT_READBACK_ROOT"
+        )
+    if action.get("type") != "verified_effect_tool":
+        raise R3IndependentVerificationError("EFFECT_OUTCOME_ON_NON_EFFECT_ACTION")
+
+    outcome = row.get("effect_outcome")
+    digest = row.get("effect_outcome_sha256")
+    if not isinstance(outcome, Mapping) or not isinstance(digest, str):
+        raise R3IndependentVerificationError("EFFECT_OUTCOME_BINDING_MISSING")
+    if set(outcome) != {
+        "executor_id",
+        "tool_id",
+        "sandbox_rel",
+        "receipts",
+        "pack_git_blob_sha",
+        "prior_verification",
+    }:
+        raise R3IndependentVerificationError("EFFECT_OUTCOME_FIELDS_INVALID")
+    if _sha(dict(outcome)) != digest:
+        raise R3IndependentVerificationError("EFFECT_OUTCOME_DIGEST_MISMATCH")
+
+    executor_payload = action.get("executor_payload")
+    if not isinstance(executor_payload, Mapping):
+        raise R3IndependentVerificationError("EFFECT_EXECUTOR_PAYLOAD_INVALID")
+    if set(executor_payload) != {"tool_id", "sandbox_rel"}:
+        raise R3IndependentVerificationError("EFFECT_EXECUTOR_PAYLOAD_FIELDS_INVALID")
+    if action.get("executor_id") != VERIFIED_EFFECT_EXECUTOR_ID:
+        raise R3IndependentVerificationError("EFFECT_EXECUTOR_ID_NOT_ADMITTED")
+    if outcome.get("executor_id") != VERIFIED_EFFECT_EXECUTOR_ID:
+        raise R3IndependentVerificationError("EFFECT_OUTCOME_EXECUTOR_ID_MISMATCH")
+
+    tool_id = str(executor_payload.get("tool_id") or "")
+    if tool_id not in VERIFIED_EFFECT_TOOL_IDS or outcome.get("tool_id") != tool_id:
+        raise R3IndependentVerificationError("EFFECT_TOOL_ID_MISMATCH")
+    sandbox_rel = _safe_effect_rel(
+        executor_payload.get("sandbox_rel"),
+        "EFFECT_SANDBOX_REL",
+    )
+    if outcome.get("sandbox_rel") != sandbox_rel:
+        raise R3IndependentVerificationError("EFFECT_SANDBOX_REL_MISMATCH")
+
+    root_raw = Path(effect_root)
+    if not root_raw.exists() or root_raw.is_symlink():
+        raise R3IndependentVerificationError("EFFECT_ROOT_NOT_STABLE_DIRECTORY")
+    root = root_raw.resolve(strict=True)
+    if not root.is_dir():
+        raise R3IndependentVerificationError("EFFECT_ROOT_NOT_DIRECTORY")
+    if row.get("effect_root_sha256") != v1._digest(str(root)):
+        raise R3IndependentVerificationError("EFFECT_ROOT_BINDING_MISMATCH")
+    sandbox = (root / Path(*PurePosixPath(sandbox_rel).parts)).resolve(strict=True)
+    try:
+        sandbox.relative_to(root)
+    except ValueError as exc:
+        raise R3IndependentVerificationError("EFFECT_SANDBOX_ESCAPES_ROOT") from exc
+    if not sandbox.is_dir():
+        raise R3IndependentVerificationError("EFFECT_SANDBOX_NOT_DIRECTORY")
+
+    receipts = outcome.get("receipts")
+    if not isinstance(receipts, list) or not receipts:
+        raise R3IndependentVerificationError("EFFECT_RECEIPTS_MISSING")
+    for index, receipt in enumerate(receipts):
+        if not isinstance(receipt, Mapping) or set(receipt) != {
+            "op",
+            "path",
+            "sha256",
+            "bytes",
+        }:
+            raise R3IndependentVerificationError(
+                "EFFECT_RECEIPT_FIELDS_INVALID:" + str(index)
+            )
+        if receipt.get("op") not in {"WRITE_JSON", "APPEND_JSONL", "RETURN_SHA256"}:
+            raise R3IndependentVerificationError(
+                "EFFECT_RECEIPT_OP_INVALID:" + str(index)
+            )
+        rel = _safe_effect_rel(receipt.get("path"), "EFFECT_RECEIPT_PATH")
+        expected_sha = receipt.get("sha256")
+        expected_bytes = receipt.get("bytes")
+        if (
+            not isinstance(expected_sha, str)
+            or len(expected_sha) != 64
+            or not all(ch in "0123456789abcdef" for ch in expected_sha)
+        ):
+            raise R3IndependentVerificationError(
+                "EFFECT_RECEIPT_SHA256_INVALID:" + str(index)
+            )
+        if (
+            isinstance(expected_bytes, bool)
+            or not isinstance(expected_bytes, int)
+            or expected_bytes < 0
+        ):
+            raise R3IndependentVerificationError(
+                "EFFECT_RECEIPT_BYTES_INVALID:" + str(index)
+            )
+        target = (sandbox / Path(*PurePosixPath(rel).parts)).resolve(strict=True)
+        try:
+            target.relative_to(sandbox)
+        except ValueError as exc:
+            raise R3IndependentVerificationError(
+                "EFFECT_RECEIPT_TARGET_ESCAPES_SANDBOX"
+            ) from exc
+        if not target.is_file():
+            raise R3IndependentVerificationError(
+                "EFFECT_RECEIPT_TARGET_NOT_FILE:" + rel
+            )
+        raw = target.read_bytes()
+        if len(raw) != expected_bytes or sha256(raw).hexdigest() != expected_sha:
+            raise R3IndependentVerificationError(
+                "EFFECT_RECEIPT_READBACK_MISMATCH:" + rel
+            )
+
+
 def _reverify_non_effectful_trace(
     *,
     problem: Mapping[str, Any],
@@ -197,12 +336,14 @@ def _reverify_non_effectful_trace(
     fact_capsule_head_hash: str,
     value_capsule_head_hash: str,
     repo_root: str | Path,
+    effect_root: str | Path | None = None,
 ) -> dict[str, Any]:
     caps = _caps(problem)
     fact_capsule = initialize_fact_capsule(problem)
     value_capsule = initialize_value_capsule(problem)
     expected_steps: list[dict[str, Any]] = []
     current_facts = sorted(str(x) for x in problem.get("initial_facts", []))
+    effectful_trace = False
 
     for expected_cycle, raw_row in enumerate(trace):
         if not isinstance(raw_row, Mapping):
@@ -229,21 +370,25 @@ def _reverify_non_effectful_trace(
                 "TRACE_NOT_STRAIGHT_THROUGH_DETERMINISTIC_PLAN:" + cid
             )
 
-        # Never replay or self-attest an effect. A future worker may admit an
-        # effectful episode only when it can independently read back the effect.
-        if row.get("effect_outcome_sha256"):
-            raise R3IndependentVerificationError(
-                "EFFECTFUL_EPISODE_REQUIRES_INDEPENDENT_READBACK_VERIFIER"
-            )
-
         action = _active_action(cap, row)
         if v1._digest(action) != row.get("action_contract_sha256"):
             raise R3IndependentVerificationError("ACTION_CONTRACT_DIGEST_MISMATCH:" + cid)
         action_type = str(action.get("type") or "")
+        has_effect_outcome = bool(row.get("effect_outcome_sha256"))
         if action_type == "verified_effect_tool":
-            raise R3IndependentVerificationError(
-                "EFFECTFUL_ACTION_REQUIRES_INDEPENDENT_READBACK_VERIFIER"
+            if not has_effect_outcome:
+                raise R3IndependentVerificationError(
+                    "EFFECTFUL_ACTION_MISSING_VERIFIED_OUTCOME"
+                )
+            _reverify_effect_outcome(
+                cap=cap,
+                row=row,
+                action=action,
+                effect_root=effect_root,
             )
+            effectful_trace = True
+        elif has_effect_outcome:
+            raise R3IndependentVerificationError("EFFECT_OUTCOME_ON_NON_EFFECT_ACTION")
 
         pair = {
             "receipt": row.get("effect_semantics_receipt"),
@@ -299,13 +444,22 @@ def _reverify_non_effectful_trace(
                 "VERIFIER_SUCCESS_CONDITION_REAUTHENTICATION_MISMATCH:" + cid
             )
 
-        verifier_id = str(action.get("verifier_id") or "").strip()
+        verifier_id = str(
+            action.get("pre_verifier_id")
+            if action_type == "verified_effect_tool"
+            else action.get("verifier_id")
+            or ""
+        ).strip()
         if verifier_id != str(row.get("verifier_id") or "").strip():
             raise R3IndependentVerificationError("VERIFIER_ID_MISMATCH:" + cid)
         verifier = v1.BUILTIN_VERIFIERS.get(verifier_id)
         if verifier is None:
             raise R3IndependentVerificationError("VERIFIER_NOT_BRAIN_OWNED:" + verifier_id)
-        payload = action.get("verifier_payload")
+        payload = (
+            action.get("pre_verifier_payload")
+            if action_type == "verified_effect_tool"
+            else action.get("verifier_payload")
+        )
         proposal = row.get("accepted_proposal")
         if not isinstance(payload, Mapping):
             raise R3IndependentVerificationError("VERIFIER_PAYLOAD_INVALID:" + cid)
@@ -374,6 +528,8 @@ def _reverify_non_effectful_trace(
         "fact_capsule_head_hash": fact_capsule.get("head_hash"),
         "value_capsule_head_hash": value_capsule.get("head_hash"),
         "target_verdict": target_verdict,
+        "effectful_trace": effectful_trace,
+        "effect_outcomes_reverified": effectful_trace,
     }
 
 
@@ -405,6 +561,7 @@ def verify_episode_request(
             fact_capsule_head_hash=fact_head,
             value_capsule_head_hash=value_head,
             repo_root=repo_root,
+            effect_root=request.get("effect_root"),
         )
         expected_pre = sorted(str(x) for x in problem.get("initial_facts", []))
         expected_post = sorted(str(x) for x in problem.get("target_effects", []))
@@ -446,7 +603,11 @@ def verify_episode_request(
             "conclusion": "success",
             "behavior_verified": True,
             "exact_byte_bound": True,
-            "verification_basis": "DETERMINISTIC_ACCEPTED_PROPOSAL_REEXECUTION_AND_CAPSULE_REBUILD",
+            "verification_basis": (
+                EFFECTFUL_READBACK_VERIFICATION_BASIS
+                if recomputed["effectful_trace"]
+                else "DETERMINISTIC_ACCEPTED_PROPOSAL_REEXECUTION_AND_CAPSULE_REBUILD"
+            ),
         }
         verification = {
             "schema": EPISODE_VERIFY_SCHEMA,
@@ -457,10 +618,16 @@ def verify_episode_request(
             "exact_byte_bound": True,
             "trace_reverified": True,
             "state_lineage_reverified": True,
-            "effect_outcomes_reverified": False,
-            "non_effectful_trace": True,
+            "effect_outcomes_reverified": bool(
+                recomputed["effect_outcomes_reverified"]
+            ),
+            "non_effectful_trace": not bool(recomputed["effectful_trace"]),
             "independent_verifier_id": INDEPENDENT_VERIFIER_ID,
-            "verification_basis": NON_EFFECTFUL_VERIFICATION_BASIS,
+            "verification_basis": (
+                EFFECTFUL_READBACK_VERIFICATION_BASIS
+                if recomputed["effectful_trace"]
+                else NON_EFFECTFUL_VERIFICATION_BASIS
+            ),
         }
         return _emit_pair(
             stem="episode",
