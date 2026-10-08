@@ -154,6 +154,18 @@ def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None
                 ),
             })
 
+    raw_acceptance = out.get("raw_goal_acceptance")
+    retained_raw_acceptance = None
+    if out.get("semantic_acceptance_complete") is True:
+        if not isinstance(raw_acceptance, Mapping):
+            raise SelfImprovementError("SEMANTICALLY_ACCEPTED_SUCCESS_MISSING_ACCEPTANCE_RECEIPT")
+        if (
+            raw_acceptance.get("pass") is not True
+            or raw_acceptance.get("semantic_acceptance_complete") is not True
+        ):
+            raise SelfImprovementError("SEMANTICALLY_ACCEPTED_SUCCESS_RECEIPT_INVALID")
+        retained_raw_acceptance = deepcopy(dict(raw_acceptance))
+
     material = {
         "source_schema": _s(out.get("schema")) or None,
         "source_status": _s(out.get("status")) or None,
@@ -168,6 +180,11 @@ def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None
         "cognition_dependency_class": _s(out.get("cognition_dependency_class")) or None,
         "model_dependency_count": out.get("model_dependency_count"),
         "semantic_acceptance_complete": out.get("semantic_acceptance_complete") is True,
+        "raw_goal_sha256": _s(out.get("raw_goal_sha256")) or None,
+        "raw_task_contract_sha256": _s(out.get("raw_task_contract_sha256")) or None,
+        "raw_acceptance_obligation_count": out.get("raw_acceptance_obligation_count"),
+        "accepted_raw_obligation_ids": _items(out.get("accepted_raw_obligation_ids")),
+        "raw_goal_acceptance": retained_raw_acceptance,
     }
     _validate_retry_value(material, path="success_proof")
     raw = _canon(material).encode("utf-8")
