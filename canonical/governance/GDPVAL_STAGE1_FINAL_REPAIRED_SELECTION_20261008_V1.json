@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_FINAL_REPAIRED_SELECTION_RECEIPT_V1",
+  "date": "2026-10-08",
+  "status": "FINAL_REPAIRED_STAGE1_TASK_SET_FROZEN__ZERO_CREDIT",
+  "selection_chain": {
+    "original_selection_commit": "4246451c6203d2a2dc21e1b58feef0f473c64641",
+    "first_repair_precommit": "c1af9718fc1025181c350875aba245f676870703",
+    "second_xlsx_repair_precommit": "872c68a1f2d67248e58b19dfd7b34ab965d62fa3",
+    "public_verifier_run_id": 37717656426,
+    "public_verifier_head_sha": "7ccc1379b27ed0383f709ef99f550b377b28317e",
+    "artifact_id": 11524930273,
+    "artifact_digest": "sha256:990d297d07058176cd8a2dd488bca7ce0e8c6c79d6c06e5ee3f04582ebb42b2f",
+    "original_selector_exact_replay": true,
+    "first_repaired_xlsx_exact_replay": true
+  },
+  "spent_tasks": [
+    "a079d38f-c529-436a-beca-3e291f9e62a3",
+    "be830ca0-b352-4658-a5bd-57139d6780ba",
+    "2c249e0f-4a8c-4f8e-b4f4-6508ba29b34f",
+    "17111c03-aac7-45c2-857d-c06d8223d6ad"
+  ],
+  "final_repaired_stage1": {
+    "XLSX": {
+      "task_id": "bb863dd9-31c2-4f64-911a-ce11f457143b",
+      "task_id_sha256": "19028054c2b90b3a8d4c3ee78076118745cbe3f358b69502e8788a4ac65ef397",
+      "candidate_count_at_selection": 48,
+      "reference_file_count": 2,
+      "deliverable_file_count": 1,
+      "extensions": [".xlsx"]
+    },
+    "PPTX": {
+      "task_id": "9a0d8d36-6233-4c76-9107-0d1f783c7340",
+      "task_id_sha256": "1b9a593b3c8a26bfa1e3f84c8969f74737f9abeb2c1627578c9c98f69539c6ec",
+      "reference_file_count": 0,
+      "deliverable_file_count": 1,
+      "extensions": [".pptx"]
+    },
+    "PDF": {
+      "task_id": "1bff4551-1d54-4e37-b2e0-d5c3f2ea4a45",
+      "task_id_sha256": "012a5e39a17369bba301a8917a18853cd851245f4df1a723b01933bbe44213a9",
+      "reference_file_count": 0,
+      "deliverable_file_count": 1,
+      "extensions": [".pdf"]
+    }
+  },
+  "content_retrieval_firewall": "OPEN_ONLY_DIRECT_STANFORD_COLLABORATIVE_GYM_TASK_URLS_FOR_FROZEN_IDS__NO_ID_SEARCH__NO_CURRENT_DATASET_VIEWERS__NO_THIRD_PARTY_SUBMISSION_DATASETS__REFERENCE_FILES_ONLY_FROM_TASK_DECLARED_REFERENCE_URLS",
+  "stage1_capability_credit": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
