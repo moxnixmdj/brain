@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_DIRECT_CROWD_BT_MARGIN_BRIDGE_CANDIDATE_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION_AND_REAL_ETA_ORIENTATION_RECEIPTS",
+  "purpose": "Strictly weaken the existing GDPval direct universal-no-Opus-win certificate while preserving a sound direct Crowd-BT noninferiority theorem.",
+  "public_math_basis": {
+    "crowd_bt_probability": "p_j(z)=eta_j*sigma(z)+(1-eta_j)*(1-sigma(z))",
+    "reflection": "p_j(-z)=1-p_j(z)",
+    "likelihood_reflection": "L(z)-L(-z)=SUM_j[(wins_j-losses_j)*logit(p_j(z))]",
+    "consequence": "IF eta_j>1/2 FOR EVERY JUDGE AND wins_j>=losses_j FOR EVERY JUDGE, THEN NO NEGATIVE DIRECT-STRENGTH OPTIMUM CAN OUTSCORE ITS POSITIVE REFLECTION; THE DIRECT MLE DIFFERENCE IS NONNEGATIVE."
+  },
+  "strict_improvement_over_existing_bridge": {
+    "old_required": "FOR_EVERY_TASK_AND_EVERY_BOUND_JUDGE__NO_OPUS_WIN",
+    "new_sufficient_condition": "LOSSES_ARE_ALLOWED__ONLY_EACH_JUDGE_AGGREGATE_BRAIN_WIN_COUNT_MUST_BE_AT_LEAST_ITS_LOSS_COUNT_ON_THE_FROZEN_DIRECT_SET",
+    "still_not_removed": [
+      "SOUND OWNER-SEMANTIC OR STRONGER DIRECT-RELATION BRIDGE",
+      "BRAIN SUBMISSIONS",
+      "COMPARATOR SUBMISSIONS OR EQUIVALENT REFERENCE ARTIFACTS",
+      "JUDGE EXECUTION OR EQUIVALENT RECEIPTS",
+      "SCOPE-COMPLETENESS PROOF"
+    ]
+  },
+  "new_minimum_missing_fact": {
+    "id": "GDPVAL_PANEL_ETA_ORIENTATION",
+    "statement": "For each bound GDPval-AA v2.1 pairwise judge, fitted Crowd-BT annotator quality eta_j is strictly greater than 1/2 for the frozen comparison epoch, or a sound theorem makes the same orientation conclusion unnecessary.",
+    "current_public_status": "NOT_BOUND_FROM_ARTIFICIAL_ANALYSIS_PUBLIC_METHODOLOGY_AS_OF_2026-10-08",
+    "why_load_bearing": "Without knowing which side of 1/2 eta_j lies on, a judge's observed win margin can mathematically reverse sign in the Crowd-BT likelihood."
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ARTIFICIAL_ANALYSIS_PUBLICLY_PUBLISHES eta_j VALUES.",
+    "NO_CLAIM eta_j>1/2 IS CURRENTLY PROVED FOR ALL THREE GDPVAL JUDGES.",
+    "NO_CLAIM THIS REPRODUCES THE OFFICIAL 1866 OPUS ELO.",
+    "NO_CLAIM THE EXACT OWNER PAIRWISE PROMPT IS PUBLIC.",
+    "NO_GDPVAL_OR_TERMINAL_CREDIT."
+  ],
+  "runtime": "canonical/runtime/gdpval_direct_crowd_bt_margin_v1.py",
+  "tests": "canonical/tests/test_gdpval_direct_crowd_bt_margin_v1.py",
+  "accounting": {"incremental_spend_usd": 0, "terminal_credit_delta": 0}
+}
