@@ -261,23 +261,14 @@ def _replay_retry_context(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None,
-    state_path: str | Path | None = None,
 ) -> dict[str, Any]:
     if not isinstance(context, Mapping):
         return _fail("RETRY_CONTEXT_NOT_OBJECT")
     mode = str(context.get("mode") or "")
     if mode in {"repair_synthesis", "repair_cycle"}:
         return _fail("RETRY_CONTEXT_REPAIR_RECURSION_FORBIDDEN")
-    replay_context = deepcopy(dict(context))
-    # A repair is accepted only by replaying the original obligation. That replay
-    # must not recursively launch another repair cycle if the repair was
-    # insufficient; one observed failure therefore causes at most one automatic
-    # repair attempt per live invocation.
-    replay_context["auto_repair"] = False
-    if state_path is not None:
-        replay_context["state_path"] = str(state_path)
     return run(
-        replay_context,
+        deepcopy(dict(context)),
         repo_root=repo_root,
         information_provider=information_provider,
         proposal_provider=proposal_provider,
@@ -414,7 +405,6 @@ def execute_failure_repair_cycle(
             information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
-            state_path=path,
         )
         replay_pass = replay.get("pass") is True
         winner_components = []
@@ -497,64 +487,96 @@ def execute_failure_repair_cycle(
         return _fail("REPAIR_CYCLE_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
 
 
-def _automatic_failure_repair(
-    learning_result: Mapping[str, Any] | None,
+def _auto_repair_live_failure(
+    result: Mapping[str, Any],
+    request: Mapping[str, Any],
     *,
     repo_root: str | Path,
-    state_path: str | Path | None,
-    initial_facts: Sequence[str] = (),
-    repair_components: Sequence[Mapping[str, Any]] = (),
-    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
-    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
-    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
-    enabled: bool = True,
-) -> dict[str, Any] | None:
-    """Turn a persisted live failure directly into one verified repair/replay cycle.
+    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None,
+) -> dict[str, Any]:
+    """Advance a freshly queued R3 repair immediately when a repair frontier exists.
 
-    This is the missing R3 control edge. It consumes only a failure already
-    admitted by the durable learning layer, so it cannot invent a fingerprint or
-    bypass retry-capsule integrity. The repair engine remains fail-closed and only
-    reports success after the original obligation itself replays successfully.
+    No repair authority is invented here. Existing verified components and/or the
+    authenticated capability expander are the only execution sources. Successful
+    repair counts only after exact original-obligation replay passes.
     """
-    if not enabled or not isinstance(learning_result, Mapping):
-        return None
-    if learning_result.get("pass") is not False:
-        return None
-    diagnosis = learning_result.get("diagnosis")
+    out = deepcopy(dict(result))
+    if request.get("auto_repair", True) is False or out.get("pass") is True:
+        return out
+
+    learning = out.get("learning")
+    if not isinstance(learning, Mapping) or learning.get("pass") is not False:
+        return out
+    diagnosis = learning.get("diagnosis")
     if not isinstance(diagnosis, Mapping):
-        return None
+        return out
     fingerprint = str(diagnosis.get("failure_fingerprint") or "").strip()
-    retry_sha = str(learning_result.get("retry_capsule_sha256") or "").strip()
+    retry_sha = str(learning.get("retry_capsule_sha256") or "").strip()
     if not fingerprint or not retry_sha:
-        return None
-    if not isinstance(repair_components, Sequence) or isinstance(
-        repair_components, (str, bytes)
-    ):
-        return _fail("AUTO_REPAIR_COMPONENT_FRONTIER_INVALID")
-    normalized_components = []
-    for row in repair_components:
-        if not isinstance(row, Mapping):
-            return _fail("AUTO_REPAIR_COMPONENT_NOT_OBJECT")
-        normalized_components.append(deepcopy(dict(row)))
-    facts = [
-        str(x).strip()
-        for x in initial_facts
-        if isinstance(x, str) and str(x).strip()
-    ]
-    return execute_failure_repair_cycle(
-        {
+        return out
+
+    raw_components = request.get("repair_components")
+    if raw_components is None:
+        components: list[Mapping[str, Any]] = []
+    elif isinstance(raw_components, Sequence) and not isinstance(raw_components, (str, bytes)):
+        components = [
+            deepcopy(dict(row))
+            for row in raw_components
+            if isinstance(row, Mapping)
+        ]
+        if len(components) != len(raw_components):
+            out["auto_repair"] = _fail("AUTO_REPAIR_COMPONENT_FRONTIER_INVALID")
+            return out
+    else:
+        out["auto_repair"] = _fail("AUTO_REPAIR_COMPONENT_FRONTIER_INVALID")
+        return out
+
+    if not components and capability_expander is None:
+        out["auto_repair"] = {
+            "schema": SCHEMA,
+            "status": "AUTO_REPAIR_BLOCKED__VERIFIED_FRONTIER_OR_CAPABILITY_EXPANDER_REQUIRED",
+            "pass": False,
             "failure_fingerprint": fingerprint,
             "retry_capsule_sha256": retry_sha,
-            "components": normalized_components,
-            "initial_facts": facts,
-            "learn": True,
-        },
+            "terminal_authority": False,
+            "capability_promotion_authority": False,
+            "terminal_credit_delta": 0,
+        }
+        return out
+
+    repair_request = {
+        "failure_fingerprint": fingerprint,
+        "retry_capsule_sha256": retry_sha,
+        "components": components,
+        "solver_kwargs": deepcopy(dict(request.get("repair_solver_kwargs") or {})),
+        "learn": True,
+    }
+    repaired = execute_failure_repair_cycle(
+        repair_request,
         repo_root=repo_root,
-        state_path=state_path,
+        state_path=request.get("state_path"),
         information_provider=information_provider,
         proposal_provider=proposal_provider,
         capability_expander=capability_expander,
     )
+    out["auto_repair"] = repaired
+    out["auto_repair_attempted"] = True
+    if repaired.get("pass") is True:
+        out["pass"] = True
+        out["status"] = str(out.get("status") or "LIVE_EXECUTION") + "__R3_RECOVERED"
+        out["recovered_execution"] = deepcopy(repaired.get("original_replay"))
+        out["r3_original_failure_status"] = result.get("status")
+    return out
+
+
+def _replay_request_payload(payload: Mapping[str, Any]) -> dict[str, Any]:
+    """Strip R3 control-plane fields so exact replay cannot recursively auto-repair."""
+    cleaned = deepcopy(dict(payload))
+    for key in ("repair_components", "repair_solver_kwargs", "auto_repair"):
+        cleaned.pop(key, None)
+    return cleaned
 
 
 def _active_learning_context(state_path: str | Path | None, *, scope_id: str, episode_id: str) -> dict[str, Any]:
@@ -614,6 +636,8 @@ def _run_learning_episode(
     solver_kwargs: Mapping[str, Any] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
 ) -> dict[str, Any]:
     """Execute through R3 so verified learned routes can control the live path."""
     learning = _learning_module()
@@ -628,6 +652,8 @@ def _run_learning_episode(
         "known_absent_invalidators",
         "proposal_provider",
         "capability_expander",
+        "episode_verification_provider",
+        "skill_verification_provider",
         "prior_verified_episode_records",
     }
     conflicts = sorted(set(kwargs) & controlled)
@@ -645,6 +671,8 @@ def _run_learning_episode(
         known_absent_invalidators=known_absent_invalidators,
         proposal_provider=proposal_provider,
         capability_expander=capability_expander,
+        episode_verification_provider=episode_verification_provider,
+        skill_verification_provider=skill_verification_provider,
         **kwargs,
     )
 
@@ -655,6 +683,7 @@ def _observe_runtime_outcome(
     state_path: str | Path | None,
     learn: bool,
     retry_context: Mapping[str, Any] | None = None,
+    surface: str = "LIVE_RUNTIME",
 ) -> dict[str, Any] | None:
     """Feed every live failure into R3 while keeping success promotion fail-closed.
 
@@ -682,12 +711,13 @@ def _observe_runtime_outcome(
     if any(key in out for key in learning_keys):
         return _integrate_learning(out, state_path=state_path, retry_context=retry_context)
 
-    return {
-        "status": "SUCCESS_OBSERVED__NO_VERIFIED_LEARNING_ARTIFACT",
-        "pass": True,
-        "permanent_reuse_authorized": False,
-        "terminal_authority": False,
-    }
+    learning = _learning_module()
+    path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
+    return learning.record_success_observation(
+        out,
+        surface=surface,
+        state_path=path,
+    )
 
 
 def _h100(operation: str, payload: Mapping[str, Any]) -> Any:
@@ -768,11 +798,13 @@ def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
         bound_error = type(exc).__name__ + ":" + str(exc)
 
     learning_stats = None
+    next_improvement = None
     learning_error = None
     try:
         learning = _learning_module()
         path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
         learning_stats = deepcopy(dict(learning.load_state(path).get("stats") or {}))
+        next_improvement = learning.next_improvement_action(state_path=path)
     except Exception as exc:
         learning_error = type(exc).__name__ + ":" + str(exc)
 
@@ -786,13 +818,12 @@ def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
         "default_explicit_execution_path": "R3_REUSE_FIRST_OVER_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
         "default_learning_scope": "unified-live-brain",
         "automatic_verified_experience_integration": True,
-        "automatic_verified_failure_repair_replay": True,
-        "bounded_auto_repair_attempts_per_live_invocation": 1,
         "verified_skill_execution_reuse_first": True,
         "active_skill_planning_reuse": True,
         "verified_bound_capability_count": bound_count,
         "bound_inventory_error": bound_error,
         "learning_state_stats": learning_stats,
+        "next_improvement_action": next_improvement,
         "learning_state_error": learning_error,
         "native_verification_boundaries_preserved": True,
         "terminal_authority": False,
@@ -811,11 +842,11 @@ def run_generic(
     active_invalidators: Sequence[str] = (),
     known_absent_invalidators: Sequence[str] = (),
     learn: bool = True,
-    auto_repair: bool = True,
-    repair_components: Sequence[Mapping[str, Any]] = (),
     solver_kwargs: Mapping[str, Any] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
 ) -> dict[str, Any]:
     if not isinstance(problem, Mapping):
         return _fail("PROBLEM_NOT_OBJECT")
@@ -853,32 +884,16 @@ def run_generic(
                 solver_kwargs=solver_kwargs,
                 proposal_provider=proposal_provider,
                 capability_expander=capability_expander,
+                episode_verification_provider=episode_verification_provider,
+                skill_verification_provider=skill_verification_provider,
             )
             out = learned.get("solver_output")
             if not isinstance(out, Mapping):
                 raise ValueError("R3_SOLVER_OUTPUT_MISSING")
-            automatic_repair = _automatic_failure_repair(
-                learned.get("learning"),
-                repo_root=repo_root,
-                state_path=ctx["state_path"],
-                initial_facts=problem.get("initial_facts") or (),
-                repair_components=repair_components,
-                information_provider=None,
-                proposal_provider=proposal_provider,
-                capability_expander=capability_expander,
-                enabled=auto_repair,
-            )
-            repaired = (
-                isinstance(automatic_repair, Mapping)
-                and automatic_repair.get("pass") is True
-            )
             return {
                 "schema": SCHEMA,
-                "status": (
-                    "UNIFIED_GENERIC_EXECUTION_REPAIRED"
-                    if repaired else "UNIFIED_GENERIC_EXECUTION_COMPLETE"
-                ),
-                "pass": learned.get("pass") is True or repaired,
+                "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
+                "pass": learned.get("pass") is True,
                 "solver": "R3_REUSE_FIRST_OVER_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
                 "solver_output": out,
                 "learning": learned.get("learning"),
@@ -895,8 +910,6 @@ def run_generic(
                     learned.get("fallback_blocked_effect_may_have_occurred") is True
                 ),
                 "learning_persistence_enabled": True,
-                "auto_repair_attempted": automatic_repair is not None,
-                "automatic_repair": automatic_repair,
                 "terminal_authority": False,
                 "capability_promotion_authority": False,
                 "terminal_credit_delta": 0,
@@ -950,10 +963,10 @@ def run_decision(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
     known_absent_invalidators: Sequence[str] = (),
     learn: bool = True,
-    auto_repair: bool = True,
-    repair_components: Sequence[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
     if not isinstance(request, Mapping):
         return _fail("DECISION_REQUEST_NOT_OBJECT")
@@ -986,6 +999,8 @@ def run_decision(
                 known_absent_invalidators=known_absent_invalidators,
                 proposal_provider=proposal_provider,
                 capability_expander=capability_expander,
+                episode_verification_provider=episode_verification_provider,
+                skill_verification_provider=skill_verification_provider,
             )
             learning_holder["result"] = learned
             solver_output = learned.get("solver_output")
@@ -1020,34 +1035,10 @@ def run_decision(
                 retry_context=retry_context,
             )
 
-        execution_problem = bound_request.get("execution_problem")
-        repair_initial_facts = (
-            execution_problem.get("initial_facts") or ()
-            if isinstance(execution_problem, Mapping) else ()
-        )
-        automatic_repair = _automatic_failure_repair(
-            learning,
-            repo_root=repo_root,
-            state_path=state_path,
-            initial_facts=repair_initial_facts,
-            repair_components=repair_components,
-            information_provider=information_provider,
-            proposal_provider=proposal_provider,
-            capability_expander=capability_expander,
-            enabled=auto_repair,
-        )
-        repaired = (
-            isinstance(automatic_repair, Mapping)
-            and automatic_repair.get("pass") is True
-        )
-
         return {
             "schema": SCHEMA,
-            "status": (
-                "UNIFIED_DECISION_EXECUTION_REPAIRED"
-                if repaired else "UNIFIED_DECISION_EXECUTION_COMPLETE"
-            ),
-            "pass": out.get("pass") is True or repaired,
+            "status": "UNIFIED_DECISION_EXECUTION_COMPLETE",
+            "pass": out.get("pass") is True,
             "decision_controller": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
             "decision_output": out,
             "learning": learning,
@@ -1076,10 +1067,7 @@ def run_decision(
             ),
             "actual_goal_satisfaction_verified": (
                 out.get("actual_goal_satisfaction_verified") is True
-                or repaired
             ),
-            "auto_repair_attempted": automatic_repair is not None,
-            "automatic_repair": automatic_repair,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -1097,11 +1085,6 @@ def run_specialized(
     repo_root: str | Path = ROOT,
     state_path: str | Path | None = None,
     learn: bool = True,
-    auto_repair: bool = True,
-    repair_components: Sequence[Mapping[str, Any]] = (),
-    information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
-    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
-    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     if not isinstance(payload, Mapping):
         return _fail("SPECIALIZED_PAYLOAD_NOT_OBJECT")
@@ -1136,34 +1119,15 @@ def run_specialized(
                 "payload": deepcopy(dict(payload)),
                 "learn": True,
             },
-        )
-        automatic_repair = _automatic_failure_repair(
-            learning,
-            repo_root=repo_root,
-            state_path=state_path,
-            initial_facts=(),
-            repair_components=repair_components,
-            information_provider=information_provider,
-            proposal_provider=proposal_provider,
-            capability_expander=capability_expander,
-            enabled=auto_repair,
-        )
-        repaired = (
-            isinstance(automatic_repair, Mapping)
-            and automatic_repair.get("pass") is True
+            surface="SPECIALIZED:" + name,
         )
         return {
             "schema": SCHEMA,
-            "status": (
-                "UNIFIED_SPECIALIZED_EXECUTION_REPAIRED"
-                if repaired else "UNIFIED_SPECIALIZED_EXECUTION_COMPLETE"
-            ),
-            "pass": passed or repaired,
+            "status": "UNIFIED_SPECIALIZED_EXECUTION_COMPLETE",
+            "pass": passed,
             "surface": name,
             "raw_result": raw,
             "learning": learning,
-            "auto_repair_attempted": automatic_repair is not None,
-            "automatic_repair": automatic_repair,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -1179,6 +1143,8 @@ def run(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
 ) -> dict[str, Any]:
     """The Brain's single public live runtime router."""
     if not isinstance(request, Mapping):
@@ -1209,24 +1175,32 @@ def run(
                 "max_information_rounds", "episode_id", "scope_id",
             }
             payload = {k: deepcopy(v) for k, v in request.items() if k in allowed}
-        return run_decision(
+        out = run_decision(
             payload,
             repo_root=repo_root,
             state_path=request.get("state_path"),
             information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
+            episode_verification_provider=episode_verification_provider,
+            skill_verification_provider=skill_verification_provider,
             known_absent_invalidators=request.get("known_absent_invalidators") or (),
             learn=request.get("learn", True) is not False,
-            auto_repair=request.get("auto_repair", True) is not False,
-            repair_components=request.get("repair_components") or (),
+        )
+        return _auto_repair_live_failure(
+            out,
+            request,
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
         )
 
     if mode == "generic":
         problem = request.get("problem")
         if not isinstance(problem, Mapping):
             return _fail("GENERIC_PROBLEM_REQUIRED")
-        return run_generic(
+        out = run_generic(
             problem,
             repo_root=repo_root,
             state_path=request.get("state_path"),
@@ -1235,9 +1209,17 @@ def run(
             active_invalidators=request.get("active_invalidators") or (),
             known_absent_invalidators=request.get("known_absent_invalidators") or (),
             learn=request.get("learn", True) is not False,
-            auto_repair=request.get("auto_repair", True) is not False,
-            repair_components=request.get("repair_components") or (),
             solver_kwargs=request.get("solver_kwargs") or {},
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+            episode_verification_provider=episode_verification_provider,
+            skill_verification_provider=skill_verification_provider,
+        )
+        return _auto_repair_live_failure(
+            out,
+            request,
+            repo_root=repo_root,
+            information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
         )
@@ -1252,40 +1234,28 @@ def run(
             learn=request.get("learn", True) is not False,
             retry_context={
                 "mode": "compiled_bound",
-                "request": deepcopy(dict(payload)),
+                "request": _replay_request_payload(payload),
                 "learn": True,
             },
         )
-        automatic_repair = _automatic_failure_repair(
-            learning,
-            repo_root=repo_root,
-            state_path=request.get("state_path"),
-            initial_facts=payload.get("initial_facts") or (),
-            repair_components=request.get("repair_components") or (),
-            information_provider=information_provider,
-            proposal_provider=proposal_provider,
-            capability_expander=capability_expander,
-            enabled=request.get("auto_repair", True) is not False,
-        )
-        repaired = (
-            isinstance(automatic_repair, Mapping)
-            and automatic_repair.get("pass") is True
-        )
-        return {
+        out = {
             "schema": SCHEMA,
-            "status": (
-                "UNIFIED_BOUND_EXECUTION_REPAIRED"
-                if repaired else "UNIFIED_BOUND_EXECUTION_COMPLETE"
-            ),
-            "pass": raw.get("pass") is True or repaired,
+            "status": "UNIFIED_BOUND_EXECUTION_COMPLETE",
+            "pass": raw.get("pass") is True,
             "raw_result": raw,
             "learning": learning,
-            "auto_repair_attempted": automatic_repair is not None,
-            "automatic_repair": automatic_repair,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
         }
+        return _auto_repair_live_failure(
+            out,
+            request,
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
 
     if mode == "raw_bound":
         nested = request.get("request")
@@ -1297,43 +1267,29 @@ def run(
             learn=request.get("learn", True) is not False,
             retry_context={
                 "mode": "raw_bound",
-                "request": deepcopy(dict(payload)),
+                "request": _replay_request_payload(payload),
                 "learn": True,
             },
         )
-        automatic_repair = _automatic_failure_repair(
-            learning,
-            repo_root=repo_root,
-            state_path=request.get("state_path"),
-            initial_facts=payload.get("initial_facts") or (),
-            repair_components=request.get("repair_components") or (),
-            information_provider=information_provider,
-            proposal_provider=proposal_provider,
-            capability_expander=capability_expander,
-            enabled=request.get("auto_repair", True) is not False,
-        )
-        repaired = (
-            isinstance(automatic_repair, Mapping)
-            and automatic_repair.get("pass") is True
-        )
-        return {
+        out = {
             "schema": SCHEMA,
-            "status": (
-                "UNIFIED_RAW_BOUND_EXECUTION_REPAIRED"
-                if repaired else "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE"
-            ),
-            "pass": raw.get("pass") is True or repaired,
+            "status": "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE",
+            "pass": raw.get("pass") is True,
             "raw_result": raw,
             "learning": learning,
-            "semantic_acceptance_complete": (
-                raw.get("semantic_acceptance_complete") is True or repaired
-            ),
-            "auto_repair_attempted": automatic_repair is not None,
-            "automatic_repair": automatic_repair,
+            "semantic_acceptance_complete": raw.get("semantic_acceptance_complete") is True,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
         }
+        return _auto_repair_live_failure(
+            out,
+            request,
+            repo_root=repo_root,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
 
     if mode == "repair_synthesis":
         nested = request.get("request")
@@ -1375,14 +1331,17 @@ def run(
             return _fail("DEVELOPMENT_SCHEDULER_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
 
     if mode == "specialized":
-        return run_specialized(
+        out = run_specialized(
             str(request.get("surface") or ""),
             request.get("payload") or {},
             repo_root=repo_root,
             state_path=request.get("state_path"),
             learn=request.get("learn", True) is not False,
-            auto_repair=request.get("auto_repair", True) is not False,
-            repair_components=request.get("repair_components") or (),
+        )
+        return _auto_repair_live_failure(
+            out,
+            request,
+            repo_root=repo_root,
             information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
