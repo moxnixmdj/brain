@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_R3_RAW_ACCEPTED_READONLY_LEARNING_VERIFICATION_V3",
+  "date": "2026-10-08",
+  "branch": "r3-raw-accepted-readonly-learning-v3-20261008",
+  "base_main_sha": "f0c336bbc1f009e90a69f063f84976b4ed626ef9",
+  "branch_head_sha": "06e9b16f2e8713962fed1d864c06d5b5f8557641",
+  "status": "PASS__VERIFIED_BLOBS_REPLAYED_ON_NON_OVERLAPPING_CURRENT_MAIN",
+  "source_verification": "canonical/verification/R3_RAW_ACCEPTED_READONLY_LEARNING_VERIFY_20261008_V2.json",
+  "carry_forward_basis": {
+    "tested_runtime_and_test_blobs_identical_to_v2": true,
+    "intervening_main_changes_overlap_r3_runtime_or_test_delta": false,
+    "intervening_main_scope": "R2 runtime/tests/workflow plus R3 V12 verification receipt only",
+    "incremental_spend_usd": 0
+  },
+  "verified_results_carried_forward": {
+    "raw_accepted_readonly_learning": {
+      "run": 6,
+      "passed": 6,
+      "failed": 0
+    },
+    "current_independent_verifier_full_suite": {
+      "run": 11,
+      "passed": 11,
+      "failed": 0
+    },
+    "py_compile": "PASS",
+    "unrelated_baseline_drift_reproduced_on_unmodified_base": true
+  },
+  "exact_verified_blobs": {
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "ea80a2f32142448b86816e169b6aeb7875d0f583",
+    "canonical/runtime/r3_raw_success_adapter_v1.py": "80a2599a31501db18754e913b763254966b4923e",
+    "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py": "3afceda23369a23b2619aabdc8a06f4e749be6c5",
+    "canonical/runtime/r3_independent_learning_verifier_v1.py": "b38b5315ef79a215976144866514cb2a95076c9e",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "dd0dc41fcd83899f003e45eddb43c0d8098cfceb",
+    "canonical/tests/test_r3_raw_accepted_readonly_learning_v1.py": "cdaf15a3a4d5210efb1f04f8f12b9fb5f0abbbec"
+  },
+  "scope": {
+    "surface": "RAW_BOUND",
+    "admission": "semantic_acceptance_complete=true",
+    "capability": "archive.tar_gz.create_from_manifest",
+    "learned_scope": "EXACT raw-goal SHA-256 only",
+    "effect_replay": false,
+    "generalization_authority": false,
+    "terminal_authority": false,
+    "global_r3_closure_claim": false
+  }
+}
