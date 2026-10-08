@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_V7",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_CURRENT_14_FILE_CLOSURE__PROJECTION_PLUS_FULL_REQUEST_TIMEOUT_PLUS_COMPOSITIONALLY_CLOSED_REQUIREMENT_CAPACITY__LIVE_PREFLIGHT_PENDING__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V6.json",
+    "git_blob_sha": "4072a3fd8c0329e7812a317b0969f0312fd094b6"
+  },
+  "delta": {
+    "changed_runtime_files": [
+      "canonical/runtime/harbor_science_agent_v1.py",
+      "canonical/runtime/harbor_science_planner_v1.py"
+    ],
+    "old_agent_git_blob_sha": "9b651589733a54b4144aad5c68be7cb8bdd8a8d5",
+    "new_agent_git_blob_sha": "884ffe310aa66670a68b6596418f0e22d5f18d5c",
+    "old_planner_git_blob_sha": "cc77666f5d1231c356e36362181f375f7336d514",
+    "new_planner_git_blob_sha": "0698ed709431b553a43da5f21999d3834ac7cf8e",
+    "semantic_change": [
+      "PRESERVE_V6_SEMANTIC_PROMPT_PROJECTION",
+      "PRESERVE_V6_FULL_REQUEST_TIMEOUT_BUDGET",
+      "DECLARE_MAX_MODEL_REQUIREMENTS_16",
+      "DECLARE_MAX_BRAIN_DELIVERABLES_16",
+      "SET_INTERNAL_MAX_REQUIREMENTS_TO_THE_EXACT_COMPOSITIONAL_BOUND_32",
+      "ALLOW_CANDIDATE_COVERS_UP_TO_32_WHILE_MODEL_MATERIAL_REQUIREMENTS_REMAIN_CAPPED_AT_16"
+    ],
+    "other_12_closure_files_unchanged": true
+  },
+  "causal_basis": {
+    "v6_live_preflight_run_id": 37735751571,
+    "v6_live_artifact_id": 11532500422,
+    "v6_live_artifact_digest": "sha256:305c4c0ad0eef4e21e6cc98eff71c2afd5d0bc1300db76395d0586afbda4871e",
+    "v6_prompt_tokens": 3420,
+    "v6_prompt_eval_seconds": 99.40217,
+    "v6_generated_tokens": 2791,
+    "v6_generation_seconds": 312.35454,
+    "v6_total_model_seconds": 411.7567,
+    "v6_transport_timeout_observed": false,
+    "v6_failure": "SCIENCE_REQUIREMENTS_WITH_MANDATORY_OVERFLOW",
+    "exact_counterexample": {
+      "model_material_requirements_count": 16,
+      "model_material_requirements_schema_max": 16,
+      "brain_mandatory_deliverables_count": 1,
+      "old_internal_max_requirements": 16,
+      "resulting_total": 17
+    },
+    "conclusion": "V6_PROVED_PROJECTION_PLUS_TIMEOUT_REPAIR_LIVE_ENOUGH_TO_REACH_A_COMPLETE_PROPOSAL__THE_NEXT_FAILURE_IS_AN_INTERNAL_CARDINALITY_INVARIANT_BUG__V7_CLOSES_THE_EXACT_SUM_OF_THE_TWO_PREEXISTING_BOUNDED_REQUIREMENT_SOURCES"
+  },
+  "closure": [
+    {
+      "path": "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+      "git_blob_sha": "3f08b2703723537e5a146346eead6a387424687f"
+    },
+    {
+      "path": "canonical/runtime/bounded_predicate_argument_semantics.py",
+      "git_blob_sha": "8303231779d6fe8c7fb740e3bbaa492914d4eba9"
+    },
+    {
+      "path": "canonical/runtime/explicit_requirement_index_v2.py",
+      "git_blob_sha": "30629b10fdbf3c337eb3252c043ec13123ca66a1"
+    },
+    {
+      "path": "canonical/runtime/harbor_command_policy.py",
+      "git_blob_sha": "a525773417291c7a4841bf35e1baff5370350d0d"
+    },
+    {
+      "path": "canonical/runtime/harbor_environment_transport.py",
+      "git_blob_sha": "ec46f648214a37bb16025d5ef2593efdf59f0d79"
+    },
+    {
+      "path": "canonical/runtime/harbor_science_agent_v1.py",
+      "git_blob_sha": "884ffe310aa66670a68b6596418f0e22d5f18d5c"
+    },
+    {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "0698ed709431b553a43da5f21999d3834ac7cf8e"
+    },
+    {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+    },
+    {
+      "path": "canonical/runtime/lossless_raw_task_contract_v1.py",
+      "git_blob_sha": "d54d5a2f7efa76b653d288f4f53da4883644baa6"
+    },
+    {
+      "path": "canonical/runtime/raw_task_acceptance_residual_localizer_v1.py",
+      "git_blob_sha": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_acceptance_program_v1.py",
+      "git_blob_sha": "742c183cccc2ec4bb5f94e88048590e2991dacd4"
+    },
+    {
+      "path": "canonical/runtime/source_contract_compiler.py",
+      "git_blob_sha": "ba53b1f1a3c1d8e63c906eb4952c7e9b6aef1231"
+    },
+    {
+      "path": "canonical/runtime/structured_method_expression_ast_candidate_v2.py",
+      "git_blob_sha": "7623f68bab3c1b207e237389841a4b688e509ff3"
+    },
+    {
+      "path": "canonical/runtime/typed_acceptance_program_v1.py",
+      "git_blob_sha": "7fd2e575bd2d5c36f48c713f15177d5b0d7e68c5"
+    }
+  ],
+  "closure_file_count": 14,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "benchmark_task_replay": 0,
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "hard_nonclaims": [
+    "NO_RANK12_ACCEPTANCE_REPLAY",
+    "NO_RANK13_EXECUTION_AUTHORITY",
+    "NO_CLAIM_V7_SOLVES_A_SCIENCE_TASK",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
