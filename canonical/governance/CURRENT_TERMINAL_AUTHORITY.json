@@ -1884,6 +1884,16 @@
     "structural_r1_rule": "EVERY_LIVE_OWNED_CAPABILITY_MUST_HAVE_ONE_DISCOVERABLE_EXECUTABLE_OR_COMPOSABLE_UNIFIED_FABRIC_CARRIER",
     "semantic_auto_routing_boundary": "ARBITRARY_RAW_LANGUAGE_TO_CORRECT_ENGINE_SELECTION_REMAINS_R2_AND_IS_NOT_REQUIRED_FOR_R1_STRUCTURAL_CLOSURE",
     "historical_capability_rule": "HISTORICAL_OR_SUPERSEDED_CAPABILITIES_REQUIRE_EXPLICIT_READMISSION_BEFORE_LIVE_OWNERSHIP",
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "verification": {
+      "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_V1_SOURCE_REPLAY_20261008_V1.json",
+      "git_blob_sha": "2f131211526a078d4ec1a822d232644f691c53d4",
+      "status": "PASS__LIVE_OWNED_EQUALS_FABRIC_REACHABLE__SOURCE_REPLAY_AND_ISOLATED_EXECUTION"
+    },
+    "r1_structural_closure": true,
+    "live_owned_capability_count": 83,
+    "missing_fabric_carrier_count": 0,
+    "full_repo_github_actions_pass": false,
+    "full_repo_github_actions_note": "NOT_LOAD_BEARING_FOR_THE_EXACT_SOURCE_SET_EQUALITY_PROOF__WORKFLOW_RUNNER_AVAILABILITY_IS_SEPARATE"
   }
 }
