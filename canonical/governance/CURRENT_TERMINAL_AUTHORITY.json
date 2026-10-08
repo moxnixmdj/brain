@@ -1809,7 +1809,7 @@
     "preferred_separator_order": [
       "GENERAL_CURRENT_PREFERENCE_LAW_OR_RESTRICTED_OWNER_CLASS",
       "EVALUATOR_INDEPENDENT_SCOPE_COMPLETE_DOMINANCE_OR_TOP_CERTIFICATE",
-      "TARGET_TRAJECTORY_LAW_EQUALITY",
+      "GDPVAL_COMPLETE_EVALUATOR_FACING_QUOTIENT_LAW_EQUALITY",
       "TASK_LOCAL_AUTHENTIC_OWNER_OUTCOME"
     ],
     "dormant_until_new_information": [
@@ -1819,6 +1819,33 @@
       "HISTORICAL_V1_PROMPT_REUSE",
       "UNVERIFIED_THIRD_PARTY_GRADER_SEARCH"
     ],
+    "gdpval_closed": false,
+    "terminal": false,
+    "gdpval_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "gdpval_evaluator_facing_quotient_u_route_20261008_v1": {
+    "status": "ACTIVE_CONDITIONAL_U_ROUTE_COMPRESSION__PRIVATE_TRAJECTORY_OVERCOMPLETION_DELETED_IF_QUOTIENT_PREMISES_CLOSE__ZERO_CREDIT",
+    "governance": {
+      "path": "canonical/governance/GDPVAL_EVALUATOR_FACING_QUOTIENT_U_ROUTE_20261008_V1.json",
+      "git_blob_sha": "0ca5160b40d9d378688b480b2972a7ee334a1655"
+    },
+    "runtime": {
+      "path": "canonical/runtime/gdpval_evaluator_facing_quotient_u_route_v1.py",
+      "git_blob_sha": "713ed6d55071bfdf6ec2c50f1f0b05a4ab342426"
+    },
+    "tests": {
+      "path": "canonical/tests/test_gdpval_evaluator_facing_quotient_u_route_v1.py",
+      "git_blob_sha": "4246b8d09a6712e3af7aef888ce408275eeca85a",
+      "local_result": "10_OF_10_PASS",
+      "independent_replay_required": true
+    },
+    "generic_u_requirement": "FULL_PRIVATE_TARGET_TRAJECTORY_LAW_EQUALITY",
+    "gdpval_compressed_u_requirement": "COMPLETE_EVALUATOR_FACING_QUOTIENT_LAW_EQUALITY_PER_TASK",
+    "complete_quotient_proved": false,
+    "complete_opus55_quotient_law_bound": false,
+    "quotient_law_equality_proved": false,
+    "exact_hidden_prompt_required_for_conditional_u_route": false,
     "gdpval_closed": false,
     "terminal": false,
     "gdpval_credit_delta": 0,
