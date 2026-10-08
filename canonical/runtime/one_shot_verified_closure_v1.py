@@ -181,10 +181,22 @@ def classify_residual(
     pending: list[Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     if not blockers:
+        if pending:
+            return {
+                "class": "UNCLASSIFIED_UNRESOLVED_WORK",
+                "internally_solvable_gap_remaining": True,
+                "external_or_new_evidence_required": False,
+                "irreducible_external_information_proved": False,
+                "internal_blockers": [
+                    "UNCLASSIFIED_UNRESOLVED_WORK_WITHOUT_BLOCKER_CERTIFICATE"
+                ],
+                "evidence_blockers": [],
+            }
         return {
             "class": "NONE",
             "internally_solvable_gap_remaining": False,
             "external_or_new_evidence_required": False,
+            "irreducible_external_information_proved": False,
             "internal_blockers": [],
             "evidence_blockers": [],
         }
@@ -273,6 +285,7 @@ def classify_residual(
         "class": cls,
         "internally_solvable_gap_remaining": bool(internal),
         "external_or_new_evidence_required": bool(evidence) and not bool(internal),
+        "irreducible_external_information_proved": False,
         "internal_blockers": sorted(internal),
         "evidence_blockers": sorted(evidence),
     }
@@ -379,20 +392,27 @@ def run(
                 "rounds_executed": round_index + 1,
                 "transcript": transcript,
                 "residual": classify_residual([], pending=[]),
+                "verified_goal_satisfied_or_irreducible_external_only": True,
+                "irreducible_external_information_proved": False,
                 "terminal_authority": False,
             }
 
         if not changed and int(drained.get("progress_count", 0)) == 0:
             residual = classify_residual(blockers, pending=pending)
             internal = residual["internally_solvable_gap_remaining"]
+            external_proved = (
+                residual.get("irreducible_external_information_proved") is True
+            )
+            if internal:
+                status = "OPEN__INTERNAL_SOLVABLE_GAP_REMAINS"
+            elif external_proved:
+                status = "VERIFIED_FIXED_POINT__IRREDUCIBLE_EXTERNAL_INFORMATION_REQUIRED"
+            else:
+                status = "OPEN__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED__IRREDUCIBILITY_NOT_PROVED"
             return {
                 "schema": SCHEMA,
-                "status": (
-                    "OPEN__INTERNAL_SOLVABLE_GAP_REMAINS"
-                    if internal
-                    else "VERIFIED_FIXED_POINT__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED"
-                ),
-                "pass": not internal,
+                "status": status,
+                "pass": (not internal) and external_proved,
                 "fixed_point": True,
                 "closure_class": residual["class"],
                 "initial_frontier_digest": initial["digest"],
@@ -401,6 +421,10 @@ def run(
                 "rounds_executed": round_index + 1,
                 "transcript": transcript,
                 "residual": residual,
+                "verified_goal_satisfied_or_irreducible_external_only": (
+                    (not internal) and external_proved
+                ),
+                "irreducible_external_information_proved": external_proved,
                 "terminal_authority": False,
             }
 

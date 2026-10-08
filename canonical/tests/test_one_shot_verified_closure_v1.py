@@ -103,7 +103,7 @@ class OneShotClosureTests(unittest.TestCase):
         self.assertEqual(out["status"], "OPEN__INTERNAL_SOLVABLE_GAP_REMAINS")
         self.assertTrue(out["residual"]["internally_solvable_gap_remaining"])
 
-    def test_external_evidence_only_fixed_point_passes(self):
+    def test_external_evidence_only_fixed_point_stays_open_without_irreducibility_proof(self):
         pending = [{"work_id": "w2", "kind": "COLLECT_MATCHING_VERIFIED_EPISODE"}]
         snaps = [
             self._snap("a", pending),
@@ -129,11 +129,39 @@ class OneShotClosureTests(unittest.TestCase):
             },
         ):
             out = closure.run(repo_root=".", state_path="state.json")
-        self.assertTrue(out["pass"])
+        self.assertFalse(out["pass"])
         self.assertEqual(
             out["status"],
-            "VERIFIED_FIXED_POINT__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED",
+            "OPEN__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED__IRREDUCIBILITY_NOT_PROVED",
         )
+        self.assertFalse(out["irreducible_external_information_proved"])
+
+    def test_pending_without_blocker_certificate_fails_closed_as_internal(self):
+        pending = [{"work_id": "w-unclassified", "kind": "VERIFY_EPISODE"}]
+        snaps = [
+            self._snap("a", pending),
+            self._snap("a", pending),
+            self._snap("a", pending),
+        ]
+        with patch.object(closure, "frontier_snapshot", side_effect=snaps), patch.object(
+            closure.r3,
+            "drain",
+            return_value={
+                "status": "IMPROVEMENT_QUEUE_STABLE",
+                "pass": True,
+                "progress_count": 0,
+                "actions": [],
+            },
+        ):
+            out = closure.run(repo_root=".", state_path="state.json")
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "OPEN__INTERNAL_SOLVABLE_GAP_REMAINS")
+        self.assertEqual(out["residual"]["class"], "UNCLASSIFIED_UNRESOLVED_WORK")
+        self.assertIn(
+            "UNCLASSIFIED_UNRESOLVED_WORK_WITHOUT_BLOCKER_CERTIFICATE",
+            out["residual"]["internal_blockers"],
+        )
+        self.assertFalse(out["irreducible_external_information_proved"])
 
     def test_rejects_false_progress(self):
         pending = [{"work_id": "w3", "kind": "VERIFY_EPISODE"}]
@@ -237,11 +265,12 @@ class OneShotClosureTests(unittest.TestCase):
             },
         ):
             out = closure.run(repo_root=".", state_path="state.json")
-        self.assertTrue(out["pass"])
+        self.assertFalse(out["pass"])
         self.assertEqual(
             out["status"],
-            "VERIFIED_FIXED_POINT__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED",
+            "OPEN__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED__IRREDUCIBILITY_NOT_PROVED",
         )
+        self.assertFalse(out["irreducible_external_information_proved"])
         self.assertIn(
             "NEW_EXPERIENCE_REQUIRED__HISTORICAL_SUCCESS_NOT_REPLAYABLE",
             out["residual"]["evidence_blockers"],
