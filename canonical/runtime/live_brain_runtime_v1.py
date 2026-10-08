@@ -385,19 +385,33 @@ def run_generic(
     episode_id: str = "episode",
     scope_id: str = "unified-live-brain",
     active_invalidators: Sequence[str] = (),
+    known_absent_skill_invalidators: Sequence[str] = (),
     learn: bool = True,
     solver_kwargs: Mapping[str, Any] | None = None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
+    """Run the generic live Brain through R3 whenever learning is enabled.
+
+    R3 owns durable episode reuse, verified-skill reuse-first execution,
+    authenticated V12 repair growth, repair persistence, falsification eviction,
+    and learning integration. Direct V12 remains available when learning is
+    explicitly disabled.
+    """
     if not isinstance(problem, Mapping):
         return _fail("PROBLEM_NOT_OBJECT")
     try:
         ctx = _active_learning_context(state_path, scope_id=scope_id, episode_id=episode_id)
         kwargs = dict(solver_kwargs or {})
-        kwargs.setdefault("episode_id", episode_id)
-        kwargs.setdefault("scope_id", scope_id)
-        kwargs.setdefault("prior_verified_episode_records", ctx["prior_verified_episodes"])
+        for reserved in (
+            "repo_root",
+            "state_path",
+            "episode_id",
+            "scope_id",
+            "prior_verified_episode_records",
+            "known_absent_invalidators",
+        ):
+            kwargs.pop(reserved, None)
         if proposal_provider is not None:
             kwargs["proposal_provider"] = proposal_provider
         if capability_expander is not None:
@@ -407,26 +421,65 @@ def run_generic(
         if ctx["active_verified_skills"]:
             skill_plan = _skill_plan(problem, ctx["active_verified_skills"], active_invalidators)
 
+        if learn:
+            learning_module = _learning_module()
+            r3 = learning_module.run_learning_episode(
+                problem,
+                repo_root=repo_root,
+                state_path=ctx["state_path"],
+                episode_id=episode_id,
+                scope_id=scope_id,
+                known_absent_invalidators=known_absent_skill_invalidators,
+                **kwargs,
+            )
+            out = r3.get("solver_output")
+            if not isinstance(out, Mapping):
+                return _fail("R3_SOLVER_OUTPUT_MISSING")
+            learning = r3.get("learning")
+            return {
+                "schema": SCHEMA,
+                "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
+                "pass": out.get("pass") is True,
+                "solver": "AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1__UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
+                "solver_output": out,
+                "learning": learning,
+                "r3_loop_status": r3.get("status"),
+                "verified_prior_episode_count_reused": r3.get(
+                    "prior_verified_episode_count_used", 0
+                ),
+                "active_verified_skill_count": len(ctx["active_verified_skills"]),
+                "skill_aware_plan": skill_plan,
+                "reused_skill_id": r3.get("reused_skill_id"),
+                "rehydrated_expansion_count": r3.get("rehydrated_expansion_count", 0),
+                "persisted_expansion_count": r3.get("persisted_expansion_count", 0),
+                "invalidated_expansion_count": r3.get("invalidated_expansion_count", 0),
+                "learning_persistence_enabled": True,
+                "terminal_authority": False,
+                "capability_promotion_authority": False,
+                "terminal_credit_delta": 0,
+            }
+
+        kwargs.setdefault("episode_id", episode_id)
+        kwargs.setdefault("scope_id", scope_id)
+        kwargs.setdefault("prior_verified_episode_records", ctx["prior_verified_episodes"])
         out = _v12_run(problem, repo_root=repo_root, kwargs=kwargs)
-        learning = _integrate_learning(out, state_path=ctx["state_path"]) if learn else None
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
             "pass": out.get("pass") is True,
             "solver": "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
             "solver_output": out,
-            "learning": learning,
+            "learning": None,
             "verified_prior_episode_count_reused": len(ctx["prior_verified_episodes"]),
             "active_verified_skill_count": len(ctx["active_verified_skills"]),
             "skill_aware_plan": skill_plan,
-            "learning_persistence_enabled": bool(learn),
+            "learning_persistence_enabled": False,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
         }
     except Exception as exc:
         return _fail("GENERIC_RUNTIME_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
-
 
 def run_decision(
     request: Mapping[str, Any],
