@@ -96,6 +96,7 @@ def evaluate_support(claim_text:str,evidence:Sequence[Mapping[str,Any]])->dict[s
     base_facts:dict[tuple[str,str,str],set[str]]={}
     rules:list[dict[str,Any]]=[]
     unresolved:list[str]=[]
+    malformed_rule_ids:list[str]=[]
     rule_count=0
 
     for i,row in enumerate(evidence):
@@ -111,7 +112,7 @@ def evaluate_support(claim_text:str,evidence:Sequence[Mapping[str,Any]])->dict[s
             rules.append({"evidence_id":eid,**rule})
             continue
         if rule.get("rule_in_scope") is True:
-            unresolved.append(eid)
+            malformed_rule_ids.append(eid)
             continue
 
         fact=facts.parse_fact(text,default_source=eid)
@@ -121,6 +122,13 @@ def evaluate_support(claim_text:str,evidence:Sequence[Mapping[str,Any]])->dict[s
         key=_fact_key(fact["fact"])
         base_facts.setdefault(key,set()).add(eid)
 
+    if malformed_rule_ids:
+        return {
+            "schema":SCHEMA,"status":"UNRESOLVED","relation":"UNKNOWN",
+            "reason":"MALFORMED_EXPLICIT_HORN_RULE_EVIDENCE",
+            "claim_in_scope":True,"unresolved_evidence_ids":sorted(malformed_rule_ids),
+            "terminal_authority":False,
+        }
     if rule_count==0:
         return {
             "schema":SCHEMA,"status":"UNRESOLVED","relation":"UNKNOWN",
