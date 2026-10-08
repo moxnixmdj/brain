@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+from unittest.mock import Mock, patch
 from pathlib import Path
 
 from canonical.runtime import autonomous_verified_self_improvement_v1 as r3
@@ -28,6 +29,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("TERMINAL_AUTOPILOT", c["engines"])
         self.assertIn("TERMINAL_ROOT", c["engines"])
         self.assertIn("TERMINAL_CLOSURE", c["engines"])
+        self.assertIn("OWNERSHIP_CATALOG", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -44,7 +46,11 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             c["authority_pointer_runtime_reference_reachability_complete"],
             c["authority_pointer_runtime_reference_missing_count"] == 0,
         )
-        self.assertFalse(c["current_live_ownership_set_completeness_proved"])
+        self.assertTrue(c["current_live_ownership_ontology_complete"], c)
+        self.assertTrue(c["live_owned_equals_fabric_reachable"], c)
+        self.assertTrue(c["r1_structural_closure"], c)
+        self.assertEqual(c["known_r1_residuals"], [])
+        self.assertFalse(c["all_historical_brain_capabilities_unified"])
         self.assertNotIn(
             "H100_SPECIALIZED_INFERENCE_REGISTRIES_NOT_YET_EXPOSED_AS_FABRIC_CAPABILITIES",
             c["known_unified_fabric_residuals"],
@@ -149,6 +155,16 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
         self.assertIn("result", out)
 
+    def test_ownership_catalog_dispatches_and_structurally_closes_r1(self):
+        out = run({
+            "mode": "OWNERSHIP_CATALOG",
+            "payload": {},
+        })
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertTrue(out["result"]["live_owned_equals_fabric_reachable"])
+        self.assertTrue(out["result"]["r1_structural_closure"])
+
     def test_decision_dispatches(self):
         out = run({
             "mode": "ADEQUATE_DECISION",
@@ -163,6 +179,39 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
 
     def test_r3_uses_current_solver_v12(self):
         self.assertIs(r3.solver_v12, solver_v12)
+
+    @patch("canonical.runtime.unified_cognitive_fabric_v1.self_improvement.run_learning_episode")
+    def test_auto_solver_with_independent_verifier_provider_routes_through_r3(
+        self, learning_run
+    ):
+        learning_run.return_value = {
+            "pass": True,
+            "status": "VERIFIED_SKILL_PERMANENTLY_ADMITTED_FOR_REUSE",
+        }
+        episode_verifier = Mock()
+        skill_verifier = Mock()
+        out = run(
+            {
+                "mode": "AUTO",
+                "payload": {
+                    "task_id": "FABRIC-R3-AUTO-001",
+                    "initial_facts": [],
+                    "target_effects": ["DONE"],
+                    "capabilities": [],
+                },
+                "options": {
+                    "episode_id": "ep",
+                    "scope_id": "scope",
+                },
+            },
+            episode_verification_provider=episode_verifier,
+            skill_verification_provider=skill_verifier,
+        )
+        self.assertEqual(out["mode"], "LEARNING_EPISODE")
+        self.assertTrue(out["auto_routed"])
+        kwargs = learning_run.call_args.kwargs
+        self.assertIs(kwargs["episode_verification_provider"], episode_verifier)
+        self.assertIs(kwargs["skill_verification_provider"], skill_verifier)
 
     def test_learning_episode_persists_failure_diagnosis(self):
         with tempfile.TemporaryDirectory() as td:
