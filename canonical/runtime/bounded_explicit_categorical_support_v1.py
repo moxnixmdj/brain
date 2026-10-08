@@ -29,7 +29,7 @@ SCHEMA = "PROJECT_BRAIN_BOUNDED_EXPLICIT_CATEGORICAL_SUPPORT_V1"
 _PREFIXES = (
     re.compile(r"^(?P<source>.+?)\s+reports\s+that\s+(?P<body>.+)$", re.I),
     re.compile(r"^(?P<source>.+?)\s+states\s+that\s+(?P<body>.+)$", re.I),
-    re.compile(r"^(?P<source>[^:]+):\s*(?P<body>.+)$", re.I),
+    re.compile(r"^(?P<source>[^:]+):\s+(?P<body>.+)$", re.I),
 )
 
 _TERM = r"[A-Za-z][A-Za-z0-9_:' -]{0,160}?"
