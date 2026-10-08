@@ -168,6 +168,43 @@ class ScienceAgentTests(unittest.TestCase):
         self.assertNotIn("BRAIN_DELIVERABLE_01",result["resolved_requirements"])
         self.assertNotIn("BRAIN_DELIVERABLE_02",result["resolved_requirements"])
 
+    def test_absolute_output_directive_is_brain_mandated_without_promoting_inputs(self):
+        goal=(
+            "The lake instances are located in `/root/data/`. "
+            "Use `/root/labeling_protocol.md`. "
+            "Write your classifications to `/results/predictions.csv` with columns lake_id,label."
+        )
+        self.assertEqual(
+            s._brain_mandated_deliverables(goal),
+            {"BRAIN_DELIVERABLE_01":"/results/predictions.csv"},
+        )
+
+    def test_absolute_output_directive_blocks_rank11_false_submission_ready_shape(self):
+        env=Env()
+        outputs=[{
+            "material_requirements":["labeling_protocol.md"],
+            "candidates":[{
+                "action_id":"read_protocol",
+                "covers":["labeling_protocol.md"],
+                "command":"echo protocol",
+                "verify_command":"echo verify"
+            }]
+        }]
+        goal=(
+            "The lake instances are located in /root/data/. "
+            "The class definitions are in /root/labeling_protocol.md. "
+            "Write your classifications to /results/predictions.csv with columns lake_id,label."
+        )
+        with patch.object(s.science_planner, "plan", planner(outputs)):
+            result=asyncio.run(s.run_science_goal(goal,env,max_cycles=1))
+        self.assertEqual(
+            result["brain_mandated_deliverables"],
+            {"BRAIN_DELIVERABLE_01":"/results/predictions.csv"},
+        )
+        self.assertIn("BRAIN_DELIVERABLE_01",result["material_requirements"])
+        self.assertNotIn("BRAIN_DELIVERABLE_01",result["resolved_requirements"])
+        self.assertEqual(result["status"],"BLOCKED_MAX_CYCLES_NO_BRAIN_AUTHORIZED_FINISH")
+
     def test_brain_deliverable_cover_requires_real_nonempty_file(self):
         env=Env()
         outputs=[{
