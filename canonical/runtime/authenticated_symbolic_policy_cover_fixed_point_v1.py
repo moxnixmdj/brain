@@ -27,7 +27,7 @@ OPS = {"TRUE", "FALSE", "ATOM", "NOT", "AND", "OR", "IMPLIES", "XOR"}
 _TOP_FIELDS = frozenset({"decision_basis", "constraint_checks", "policies", "discriminators"})
 _POLICY_FIELDS = frozenset({"policy_id", "verifier_id", "cost_units"})
 _DISCRIMINATOR_FIELDS = frozenset({"discriminator_id", "verifier_id", "cost_units"})
-_CONSTRAINT_FIELDS = frozenset({"constraint_id", "verifier_id"})
+_CONSTRAINT_FIELDS = frozenset({"constraint_id", "verifier_id", "input"})
 
 
 def _fail(reason: str, **detail: Any) -> dict[str, Any]:
@@ -118,8 +118,48 @@ def _not(a: Mapping[str, Any]) -> dict[str, Any]:
     return {"op": "NOT", "arg": dict(a)}
 
 
-def _constraint_verifier(verifier_id: str, constraint_id: str) -> dict[str, Any]:
-    # No production trusted ingress constraint verifier is registered yet.
+def _constraint_verifier(
+    verifier_id: str,
+    constraint_id: str,
+    verifier_input: Any,
+) -> dict[str, Any]:
+    if verifier_id == "P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1":
+        if constraint_id != "P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1":
+            return {
+                "pass": False,
+                "reason": "P2_CONSTRAINT_ID_MISMATCH",
+                "verifier_id": verifier_id,
+                "constraint_id": constraint_id,
+            }
+        if not isinstance(verifier_input, Mapping) or set(verifier_input) != {"raw_source", "source_id"}:
+            return {
+                "pass": False,
+                "reason": "P2_CONSTRAINT_INPUT_INVALID",
+                "verifier_id": verifier_id,
+                "constraint_id": constraint_id,
+            }
+        from canonical.runtime.p2_explicit_contract_membership_v1 import compile_membership
+        out = compile_membership(
+            verifier_input.get("raw_source"),
+            source_id=verifier_input.get("source_id"),
+        )
+        if out.get("pass") is not True:
+            return {
+                "pass": False,
+                "reason": "P2_EXPLICIT_MEMBERSHIP_REJECTED",
+                "verifier_id": verifier_id,
+                "constraint_id": constraint_id,
+                "raw_status": out.get("status"),
+                "errors": out.get("errors", []),
+            }
+        return {
+            "pass": True,
+            "constraint_id": constraint_id,
+            "constraint_formula": {"op": "ATOM", "id": "P2_EXPLICIT_CONTRACT_MEMBERSHIP_V1"},
+            "proof_digest": out.get("membership_receipt"),
+            "verifier_id": verifier_id,
+            "raw_source_sha256": out.get("raw_source_sha256"),
+        }
     return {
         "pass": False,
         "reason": "TRUSTED_CONSTRAINT_VERIFIER_NOT_REGISTERED",
@@ -204,7 +244,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         vid = row.get("verifier_id")
         if not isinstance(cid, str) or not cid or not isinstance(vid, str) or not vid:
             return _fail("CONSTRAINT_ID_OR_VERIFIER_INVALID", index=i)
-        proof = _constraint_verifier(vid, cid)
+        proof = _constraint_verifier(vid, cid, row.get("input"))
         if proof.get("pass") is not True:
             return _fail("TRUSTED_CONSTRAINT_VERIFICATION_FAILED", index=i, verifier_id=vid)
         phi = proof.get("constraint_formula")
