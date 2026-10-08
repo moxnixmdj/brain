@@ -18,15 +18,18 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V11.json",
-    "git_blob_sha": "3350fd3fe7829f326722af0428a3359df14dd1b7"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V12.json",
+    "git_blob_sha": "970997b76983873002fe13b49a8cc4bb7f0fda79"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V1.json",
-    "activation_git_blob_sha": "d3a0ba90534e1f5bcc4b871e30af6e8cd9a7d9c6",
+    "activation_git_blob_sha": "12a7fb2dd1f898836f31572be241be9c14f99776",
+    "current_route_count": 4,
     "exact_cell_count": 3,
-    "latest_verification_path": "canonical/verification/R2_LITERAL_JSON_DIRECT_ADEQUACY_VERIFICATION_20261008_V1.json",
-    "latest_verification_git_blob_sha": "88351bafa9dab6b77f18646a6b5518828170c544"
+    "bounded_family_count": 1,
+    "latest_verification_path": "canonical/verification/R2_STRUCTURED_BINARY_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "latest_verification_git_blob_sha": "16947dbae01230fe3739d8016dcdb63c10e17675",
+    "latest_verification_status": "PASS__BOUNDED_CODEC_ADEQUACY_FAMILY"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
@@ -53,7 +56,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__VERIFIED_CAPABILITY_ESCAPE_LIVE__GOAL_SCOPED_POLICY_IDENTITIES_RECONCILED",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__VERIFIED_CAPABILITY_ESCAPE_LIVE__GOAL_SCOPED_POLICY_IDENTITIES_RECONCILED__TRANSACTIONAL_DIRECT_CODEC_FAMILY_BOUND",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -148,7 +151,7 @@
     "status": "ACTIVE__GOAL_SCOPED_CANDIDATE_ONLY__POLICY_ADEQUACY_AUTHORITY_FALSE"
   },
   "control_mechanism_status": "CLOSED__TOTAL_FAIL_CLOSED_ADEQUACY_OR_ABSTAIN_CONTROL",
-  "remaining_problem_class": "ADEQUACY_COVERAGE_AND_OBSERVABILITY__CAPABILITY_EXPANSION_PATH_NOW_LIVE",
+  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__DIRECT_TRANSACTIONAL_CODEC_FAMILY_EXPANDED",
   "control_law_totalizer": {
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
