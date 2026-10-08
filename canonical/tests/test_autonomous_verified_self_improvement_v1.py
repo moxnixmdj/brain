@@ -235,7 +235,12 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "verified_skill_reuse_authorized": False,
             "verified_executable_skill": None,
         }
-        integrated = loop.integrate_solver_output(out, state_path=path)
+        with mock.patch.object(
+            loop,
+            "reauthenticate_episode_record",
+            return_value={"pass": True, "authenticated_episode": ep},
+        ):
+            integrated = loop.integrate_solver_output(out, state_path=path)
         state = loop.load_state(path)
 
         self.assertTrue(integrated["episode_added"])
@@ -275,17 +280,22 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
     def test_verified_stronger_skill_pareto_replaces_dominated_variant(self):
         path = self.temp_state()
         first_skill = verified_skill("3", relation="EXACT", source_ids=("ep1", "ep2"))
-        first = loop.integrate_solver_output(
-            {
-                "pass": True,
-                "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
-                "current_episode_verified": False,
-                "skill_candidate": first_skill,
-                "verified_skill_reuse_authorized": True,
-                "verified_executable_skill": first_skill,
-            },
-            state_path=path,
-        )
+        with mock.patch.object(
+            loop,
+            "reauthenticate_skill_record",
+            return_value={"pass": True, "verified_skill": first_skill},
+        ):
+            first = loop.integrate_solver_output(
+                {
+                    "pass": True,
+                    "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
+                    "current_episode_verified": False,
+                    "skill_candidate": first_skill,
+                    "verified_skill_reuse_authorized": True,
+                    "verified_executable_skill": first_skill,
+                },
+                state_path=path,
+            )
         self.assertTrue(first["permanent_reuse_authorized"])
         first_id = first["active_skill_id"]
         self.assertEqual(
@@ -298,17 +308,22 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             relation="PROVEN_SUPERSET",
             source_ids=("ep1", "ep2", "ep3"),
         )
-        second = loop.integrate_solver_output(
-            {
-                "pass": True,
-                "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
-                "current_episode_verified": False,
-                "skill_candidate": stronger,
-                "verified_skill_reuse_authorized": True,
-                "verified_executable_skill": stronger,
-            },
-            state_path=path,
-        )
+        with mock.patch.object(
+            loop,
+            "reauthenticate_skill_record",
+            return_value={"pass": True, "verified_skill": stronger},
+        ):
+            second = loop.integrate_solver_output(
+                {
+                    "pass": True,
+                    "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
+                    "current_episode_verified": False,
+                    "skill_candidate": stronger,
+                    "verified_skill_reuse_authorized": True,
+                    "verified_executable_skill": stronger,
+                },
+                state_path=path,
+            )
         state = loop.load_state(path)
         second_id = second["active_skill_id"]
 
@@ -333,27 +348,37 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             source_ids=("ep1", "ep2", "ep3"),
             step_count=1,
         )
-        active = loop.integrate_solver_output(
-            {
-                "pass": True,
-                "current_episode_verified": False,
-                "skill_candidate": strong,
-                "verified_skill_reuse_authorized": True,
-                "verified_executable_skill": strong,
-            },
-            state_path=path,
-        )
+        with mock.patch.object(
+            loop,
+            "reauthenticate_skill_record",
+            return_value={"pass": True, "verified_skill": strong},
+        ):
+            active = loop.integrate_solver_output(
+                {
+                    "pass": True,
+                    "current_episode_verified": False,
+                    "skill_candidate": strong,
+                    "verified_skill_reuse_authorized": True,
+                    "verified_executable_skill": strong,
+                },
+                state_path=path,
+            )
         weak = verified_skill("6", relation="EXACT", source_ids=("ep1", "ep2"), step_count=2)
-        rejected = loop.integrate_solver_output(
-            {
-                "pass": True,
-                "current_episode_verified": False,
-                "skill_candidate": weak,
-                "verified_skill_reuse_authorized": True,
-                "verified_executable_skill": weak,
-            },
-            state_path=path,
-        )
+        with mock.patch.object(
+            loop,
+            "reauthenticate_skill_record",
+            return_value={"pass": True, "verified_skill": weak},
+        ):
+            rejected = loop.integrate_solver_output(
+                {
+                    "pass": True,
+                    "current_episode_verified": False,
+                    "skill_candidate": weak,
+                    "verified_skill_reuse_authorized": True,
+                    "verified_executable_skill": weak,
+                },
+                state_path=path,
+            )
         state = loop.load_state(path)
         weak_id = "skill:" + "6" * 64
 
@@ -381,14 +406,21 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         provider = mock.Mock(
             return_value={"receipt": {"path": "r"}, "verification": {"path": "v"}}
         )
-        with mock.patch.object(
-            loop,
-            "authenticate_skill_verification",
-            return_value={
-                "pass": True,
-                "verified_skill": skill,
-                "status": "PASS__AUTHENTICATED_VERIFIED_EXECUTABLE_SKILL",
-            },
+        with (
+            mock.patch.object(
+                loop,
+                "authenticate_skill_verification",
+                return_value={
+                    "pass": True,
+                    "verified_skill": skill,
+                    "status": "PASS__AUTHENTICATED_VERIFIED_EXECUTABLE_SKILL",
+                },
+            ),
+            mock.patch.object(
+                loop,
+                "reauthenticate_skill_record",
+                return_value={"pass": True, "verified_skill": skill},
+            ),
         ):
             tick = loop.advance_verification_queue(
                 state_path=path,
@@ -413,17 +445,22 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
     def test_verification_queue_upgrades_same_skill_to_bound_superset_without_self_deactivation(self):
         path = self.temp_state()
         exact = verified_skill("b", relation="EXACT")
-        first = loop.integrate_solver_output(
-            {
-                "pass": True,
-                "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
-                "current_episode_verified": False,
-                "skill_candidate": exact,
-                "verified_skill_reuse_authorized": True,
-                "verified_executable_skill": exact,
-            },
-            state_path=path,
-        )
+        with mock.patch.object(
+            loop,
+            "reauthenticate_skill_record",
+            return_value={"pass": True, "verified_skill": exact},
+        ):
+            first = loop.integrate_solver_output(
+                {
+                    "pass": True,
+                    "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
+                    "current_episode_verified": False,
+                    "skill_candidate": exact,
+                    "verified_skill_reuse_authorized": True,
+                    "verified_executable_skill": exact,
+                },
+                state_path=path,
+            )
         sid = first["active_skill_id"]
         self.assertIsNotNone(sid)
         generalized = {
@@ -434,14 +471,21 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
         provider = mock.Mock(
             return_value={"receipt": {"path": "r"}, "verification": {"path": "v"}}
         )
-        with mock.patch.object(
-            loop,
-            "authenticate_skill_verification",
-            return_value={
-                "pass": True,
-                "verified_skill": generalized,
-                "status": "PASS__AUTHENTICATED_VERIFIED_EXECUTABLE_SKILL",
-            },
+        with (
+            mock.patch.object(
+                loop,
+                "authenticate_skill_verification",
+                return_value={
+                    "pass": True,
+                    "verified_skill": generalized,
+                    "status": "PASS__AUTHENTICATED_VERIFIED_EXECUTABLE_SKILL",
+                },
+            ),
+            mock.patch.object(
+                loop,
+                "reauthenticate_skill_record",
+                return_value={"pass": True, "verified_skill": generalized},
+            ),
         ):
             tick = loop.advance_verification_queue(
                 state_path=path,
