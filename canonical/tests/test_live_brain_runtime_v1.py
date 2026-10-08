@@ -15,20 +15,19 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             "capabilities": [],
         }
 
-    @patch("canonical.runtime.live_brain_runtime_v1._active_learning_context")
-    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
-    @patch("canonical.runtime.live_brain_runtime_v1._v12_run")
-    def test_generic_path_reuses_verified_experience_and_integrates_new_experience(
-        self, solver, integrate, context
-    ):
-        context.return_value = {
-            "state_path": "/tmp/state.json",
-            "state": {},
-            "prior_verified_episodes": [{"episode_id": "old"}],
-            "active_verified_skills": [],
+    @patch("canonical.runtime.live_brain_runtime_v1._run_learning_episode")
+    def test_generic_path_executes_through_r3_reuse_first(self, learning_run):
+        learning_run.return_value = {
+            "pass": True,
+            "status": "VERIFIED_SKILL_PERMANENTLY_ADMITTED_FOR_REUSE",
+            "solver_output": {"pass": True, "status": "SOLVED__VERIFIED_EPISODE"},
+            "learning": {"status": "VERIFIED_SKILL_PERMANENTLY_ADMITTED_FOR_REUSE"},
+            "prior_verified_episode_count_used": 2,
+            "reuse_first": True,
+            "reused_skill_id": "skill:abc",
+            "reuse_attempt": {"pass": True},
+            "fallback_used": False,
         }
-        solver.return_value = {"pass": True, "status": "SOLVED__VERIFIED_EPISODE"}
-        integrate.return_value = {"status": "VERIFIED_EPISODE_PERSISTED__MORE_EVIDENCE_NEEDED_FOR_SKILL"}
 
         out = brain.run({
             "mode": "generic",
@@ -38,31 +37,75 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         })
 
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["verified_prior_episode_count_reused"], 1)
-        kwargs = solver.call_args.kwargs["kwargs"]
-        self.assertEqual(kwargs["prior_verified_episode_records"], [{"episode_id": "old"}])
-        self.assertEqual(kwargs["episode_id"], "new")
-        integrate.assert_called_once_with(solver.return_value, state_path="/tmp/state.json")
+        self.assertEqual(out["verified_prior_episode_count_reused"], 2)
+        self.assertTrue(out["reuse_first"])
+        self.assertEqual(out["reused_skill_id"], "skill:abc")
+        self.assertFalse(out["fallback_used"])
+        self.assertEqual(
+            out["solver"],
+            "R3_REUSE_FIRST_OVER_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
+        )
+        learning_run.assert_called_once()
+
+    @patch("canonical.runtime.live_brain_runtime_v1._v12_run")
+    def test_generic_can_explicitly_disable_learning_and_use_plain_v12(self, solver):
+        solver.return_value = {"pass": True, "status": "SOLVED__VERIFIED_EPISODE"}
+        out = brain.run({
+            "mode": "generic",
+            "problem": self.problem(),
+            "learn": False,
+            "episode_id": "plain",
+            "scope_id": "scope",
+        })
+        self.assertTrue(out["pass"], out)
+        self.assertFalse(out["learning_persistence_enabled"])
+        self.assertFalse(out["reuse_first"])
+        solver.assert_called_once()
 
     @patch("canonical.runtime.live_brain_runtime_v1._decision_run")
-    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
-    def test_raw_goal_defaults_to_r2_and_feeds_verified_execution_to_r3(self, integrate, decision):
+    @patch("canonical.runtime.live_brain_runtime_v1._run_learning_episode")
+    def test_raw_goal_defaults_to_r2_and_uses_r3_as_execution_carrier(self, learning_run, decision):
         execution = {"pass": True, "status": "SOLVED__VERIFIED_EPISODE"}
-        decision.return_value = {
+
+        def decision_side_effect(request, **kwargs):
+            provider = kwargs["execution_provider"]
+            self.assertTrue(callable(provider))
+            observed = provider(
+                self.problem(),
+                repo_root=brain.ROOT,
+                episode_id="d1",
+                scope_id="general-adequate-decision",
+                proposal_provider=None,
+                capability_expander=None,
+            )
+            self.assertEqual(observed, execution)
+            return {
+                "pass": True,
+                "status": "PASS__GOAL_BOUND_ADEQUATE_POLICY_EXECUTED_AND_ACCEPTANCE_VERIFIED",
+                "execution_result": execution,
+                "semantic_acceptance_complete": True,
+                "actual_goal_satisfaction_verified": True,
+            }
+
+        decision.side_effect = decision_side_effect
+        learning_run.return_value = {
             "pass": True,
-            "status": "PASS__GOAL_BOUND_ADEQUATE_POLICY_EXECUTED_AND_ACCEPTANCE_VERIFIED",
-            "execution_result": execution,
-            "semantic_acceptance_complete": True,
-            "actual_goal_satisfaction_verified": True,
+            "solver_output": execution,
+            "learning": {"status": "VERIFIED_EPISODE_PERSISTED__MORE_EVIDENCE_NEEDED_FOR_SKILL"},
+            "reuse_first": True,
+            "reused_skill_id": "skill:xyz",
+            "reuse_attempt": {"pass": True},
+            "fallback_used": False,
         }
-        integrate.return_value = {"status": "VERIFIED_EPISODE_PERSISTED__MORE_EVIDENCE_NEEDED_FOR_SKILL"}
 
         out = brain.run({"task_id": "d1", "goal": "do the exact thing"})
         self.assertTrue(out["pass"], out)
         self.assertTrue(out["semantic_acceptance_complete"])
         self.assertTrue(out["actual_goal_satisfaction_verified"])
+        self.assertTrue(out["reuse_first"])
+        self.assertEqual(out["reused_skill_id"], "skill:xyz")
         decision.assert_called_once()
-        integrate.assert_called_once_with(execution, state_path=None)
+        learning_run.assert_called_once()
 
     @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
     def test_compiled_bound_route_is_behind_same_front_door(self, bound):
@@ -124,103 +167,7 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
         self.assertIn("GENERAL_ADEQUATE_DECISION_CONTROLLER_V1", out["surfaces"])
         self.assertIn("UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12", out["surfaces"])
         self.assertIn("AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1", out["surfaces"])
-
-
-    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
-    @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
-    def test_compiled_bound_failure_is_durably_diagnosed(self, bound, integrate):
-        failure = {
-            "pass": False,
-            "status": "FAIL__CAPABILITY_OR_TASK_CONTRACT_GAP",
-            "failure_class": "MISSING_CAPABILITY_OR_COMPILED_TASK_CONTRACT",
-        }
-        bound.return_value = failure
-        integrate.return_value = {
-            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
-            "pass": False,
-        }
-        out = brain.run({
-            "mode": "compiled_bound",
-            "task_id": "b-fail",
-            "initial_facts": [],
-            "target_effects": ["X"],
-        })
-        self.assertFalse(out["pass"])
-        self.assertEqual(
-            out["learning"]["status"],
-            "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
-        )
-        integrate.assert_called_once_with(failure, state_path=None)
-
-    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
-    @patch("canonical.runtime.live_brain_runtime_v1._raw_bound_run")
-    def test_raw_bound_failure_is_durably_diagnosed(self, raw_bound, integrate):
-        failure = {
-            "pass": False,
-            "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
-            "failure_class": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
-        }
-        raw_bound.return_value = failure
-        integrate.return_value = {
-            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
-            "pass": False,
-        }
-        out = brain.run({
-            "mode": "raw_bound",
-            "request": {"task_id": "r-fail", "goal": "unknown"},
-        })
-        self.assertFalse(out["pass"])
-        integrate.assert_called_once_with(failure, state_path=None)
-
-    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
-    @patch("canonical.runtime.live_brain_runtime_v1._p3")
-    def test_specialized_failure_is_durably_diagnosed(self, p3, integrate):
-        p3.return_value = {
-            "pass": False,
-            "status": "FAIL_CLOSED",
-            "reason": "SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
-        }
-        integrate.return_value = {
-            "status": "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
-            "pass": False,
-        }
-        out = brain.run({
-            "mode": "specialized",
-            "surface": "P3_REAL_CONTEXT_V12",
-            "payload": {"x": 1},
-        })
-        self.assertFalse(out["pass"])
-        self.assertEqual(
-            out["learning"]["status"],
-            "FAILURE_DIAGNOSED__REPAIR_NOT_SELF_CERTIFIED",
-        )
-        observed = integrate.call_args.args[0]
-        self.assertFalse(observed["pass"])
-        self.assertEqual(
-            observed["reason"],
-            "SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
-        )
-
-    @patch("canonical.runtime.live_brain_runtime_v1._integrate_learning")
-    @patch("canonical.runtime.live_brain_runtime_v1._bound_run")
-    def test_plain_success_without_verified_episode_is_not_promoted(self, bound, integrate):
-        bound.return_value = {
-            "pass": True,
-            "status": "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED",
-        }
-        out = brain.run({
-            "mode": "compiled_bound",
-            "task_id": "b-ok",
-            "initial_facts": [],
-            "target_effects": ["X"],
-        })
-        self.assertTrue(out["pass"])
-        self.assertEqual(
-            out["learning"]["status"],
-            "SUCCESS_OBSERVED__NO_VERIFIED_LEARNING_ARTIFACT",
-        )
-        self.assertFalse(out["learning"]["permanent_reuse_authorized"])
-        integrate.assert_not_called()
+        self.assertTrue(out["verified_skill_execution_reuse_first"])
 
     def test_unknown_mode_fails_closed(self):
         out = brain.run({"mode": "invented"})

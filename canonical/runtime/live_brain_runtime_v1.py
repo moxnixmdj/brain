@@ -63,6 +63,7 @@ def _decision_run(
     information_provider: Callable[[Mapping[str, Any], int], Mapping[str, Any] | None] | None,
     proposal_provider: Callable[..., Mapping[str, Any] | None] | None,
     capability_expander: Callable[..., Mapping[str, Any] | None] | None,
+    execution_provider: Callable[..., Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     from canonical.runtime.general_adequate_decision_controller_v1 import run
     return run(
@@ -71,6 +72,7 @@ def _decision_run(
         information_provider=information_provider,
         proposal_provider=proposal_provider,
         capability_expander=capability_expander,
+        execution_provider=execution_provider,
     )
 
 
@@ -140,44 +142,46 @@ def _integrate_learning(out: Mapping[str, Any], *, state_path: str | Path | None
     return learning.integrate_solver_output(out, state_path=path)
 
 
-def _observe_runtime_outcome(
-    out: Mapping[str, Any],
+def _run_learning_episode(
+    problem: Mapping[str, Any],
     *,
+    repo_root: str | Path,
     state_path: str | Path | None,
-    learn: bool,
-) -> dict[str, Any] | None:
-    """Feed every live failure into R3 while keeping success promotion fail-closed.
-
-    Failed outcomes are always useful causal evidence and may be fingerprinted /
-    deduplicated without granting capability authority. Successful non-solver
-    actions are merely observed; they are never persisted as reusable learning
-    unless they already carry the verified episode / skill machinery expected by
-    autonomous_verified_self_improvement_v1.
-    """
-    if not learn:
-        return None
-    if not isinstance(out, Mapping):
-        return None
-
-    if out.get("pass") is not True:
-        return _integrate_learning(out, state_path=state_path)
-
-    learning_keys = {
-        "current_episode_verified",
-        "current_episode",
-        "skill_candidate",
-        "verified_executable_skill",
-        "verified_skill_reuse_authorized",
+    episode_id: str,
+    scope_id: str,
+    active_invalidators: Sequence[str] = (),
+    solver_kwargs: Mapping[str, Any] | None = None,
+    proposal_provider: Callable[..., Mapping[str, Any] | None] | None = None,
+    capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
+) -> dict[str, Any]:
+    """Use R3 as the execution path so verified learning actually affects execution."""
+    learning = _learning_module()
+    path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
+    kwargs = dict(solver_kwargs or {})
+    controlled = {
+        "repo_root",
+        "state_path",
+        "episode_id",
+        "scope_id",
+        "known_absent_invalidators",
+        "proposal_provider",
+        "capability_expander",
+        "prior_verified_episode_records",
     }
-    if any(key in out for key in learning_keys):
-        return _integrate_learning(out, state_path=state_path)
-
-    return {
-        "status": "SUCCESS_OBSERVED__NO_VERIFIED_LEARNING_ARTIFACT",
-        "pass": True,
-        "permanent_reuse_authorized": False,
-        "terminal_authority": False,
-    }
+    conflicts = sorted(set(kwargs) & controlled)
+    if conflicts:
+        raise ValueError("LEARNING_EXECUTION_CONTROLLED_KWARGS:" + ",".join(conflicts))
+    return learning.run_learning_episode(
+        problem,
+        repo_root=repo_root,
+        state_path=path,
+        episode_id=episode_id,
+        scope_id=scope_id,
+        known_absent_invalidators=active_invalidators,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+        **kwargs,
+    )
 
 
 def _h100(operation: str, payload: Mapping[str, Any]) -> Any:
@@ -275,6 +279,7 @@ def inventory(*, state_path: str | Path | None = None) -> dict[str, Any]:
         "default_raw_intent_path": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
         "default_explicit_execution_path": "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
         "automatic_verified_experience_integration": True,
+        "verified_skill_execution_reuse_first": True,
         "active_skill_planning_reuse": True,
         "verified_bound_capability_count": bound_count,
         "bound_inventory_error": bound_error,
@@ -303,33 +308,62 @@ def run_generic(
     if not isinstance(problem, Mapping):
         return _fail("PROBLEM_NOT_OBJECT")
     try:
-        ctx = _active_learning_context(state_path, scope_id=scope_id, episode_id=episode_id)
+        if learn:
+            learned = _run_learning_episode(
+                problem,
+                repo_root=repo_root,
+                state_path=state_path,
+                episode_id=episode_id,
+                scope_id=scope_id,
+                active_invalidators=active_invalidators,
+                solver_kwargs=solver_kwargs,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+            )
+            out = learned.get("solver_output")
+            if not isinstance(out, Mapping):
+                raise ValueError("R3_SOLVER_OUTPUT_MISSING")
+            return {
+                "schema": SCHEMA,
+                "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
+                "pass": learned.get("pass") is True,
+                "solver": "R3_REUSE_FIRST_OVER_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
+                "solver_output": out,
+                "learning": learned.get("learning"),
+                "verified_prior_episode_count_reused": learned.get(
+                    "prior_verified_episode_count_used", 0
+                ),
+                "reuse_first": learned.get("reuse_first") is True,
+                "reused_skill_id": learned.get("reused_skill_id"),
+                "reuse_attempt": learned.get("reuse_attempt"),
+                "fallback_used": learned.get("fallback_used") is True,
+                "learning_persistence_enabled": True,
+                "terminal_authority": False,
+                "capability_promotion_authority": False,
+                "terminal_credit_delta": 0,
+            }
+
         kwargs = dict(solver_kwargs or {})
         kwargs.setdefault("episode_id", episode_id)
         kwargs.setdefault("scope_id", scope_id)
-        kwargs.setdefault("prior_verified_episode_records", ctx["prior_verified_episodes"])
         if proposal_provider is not None:
             kwargs["proposal_provider"] = proposal_provider
         if capability_expander is not None:
             kwargs["capability_expander"] = capability_expander
-
-        skill_plan = None
-        if ctx["active_verified_skills"]:
-            skill_plan = _skill_plan(problem, ctx["active_verified_skills"], active_invalidators)
-
         out = _v12_run(problem, repo_root=repo_root, kwargs=kwargs)
-        learning = _integrate_learning(out, state_path=ctx["state_path"]) if learn else None
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_GENERIC_EXECUTION_COMPLETE",
             "pass": out.get("pass") is True,
             "solver": "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
             "solver_output": out,
-            "learning": learning,
-            "verified_prior_episode_count_reused": len(ctx["prior_verified_episodes"]),
-            "active_verified_skill_count": len(ctx["active_verified_skills"]),
-            "skill_aware_plan": skill_plan,
-            "learning_persistence_enabled": bool(learn),
+            "learning": None,
+            "verified_prior_episode_count_reused": 0,
+            "reuse_first": False,
+            "reused_skill_id": None,
+            "reuse_attempt": None,
+            "fallback_used": False,
+            "learning_persistence_enabled": False,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -351,30 +385,52 @@ def run_decision(
     if not isinstance(request, Mapping):
         return _fail("DECISION_REQUEST_NOT_OBJECT")
     try:
+        learning_holder: dict[str, Any] = {}
+
+        def learned_execution_provider(
+            problem: Mapping[str, Any],
+            *,
+            repo_root: str | Path,
+            episode_id: str,
+            scope_id: str,
+            proposal_provider=None,
+            capability_expander=None,
+        ) -> Mapping[str, Any]:
+            learned = _run_learning_episode(
+                problem,
+                repo_root=repo_root,
+                state_path=state_path,
+                episode_id=episode_id,
+                scope_id=scope_id,
+                proposal_provider=proposal_provider,
+                capability_expander=capability_expander,
+            )
+            learning_holder["result"] = learned
+            solver_output = learned.get("solver_output")
+            if not isinstance(solver_output, Mapping):
+                raise ValueError("R3_DECISION_SOLVER_OUTPUT_MISSING")
+            return solver_output
+
         out = _decision_run(
             request,
             repo_root=repo_root,
             information_provider=information_provider,
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
+            execution_provider=learned_execution_provider if learn else None,
         )
-        execution = out.get("execution_result")
-        learning = None
-        if learn and isinstance(execution, Mapping):
-            learning = _integrate_learning(execution, state_path=state_path)
-        elif learn and out.get("pass") is not True:
-            learning = _observe_runtime_outcome(
-                out,
-                state_path=state_path,
-                learn=True,
-            )
+        learned = learning_holder.get("result")
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_DECISION_EXECUTION_COMPLETE",
             "pass": out.get("pass") is True,
             "decision_controller": "GENERAL_ADEQUATE_DECISION_CONTROLLER_V1",
             "decision_output": out,
-            "learning": learning,
+            "learning": learned.get("learning") if isinstance(learned, Mapping) else None,
+            "reuse_first": learned.get("reuse_first") is True if isinstance(learned, Mapping) else False,
+            "reused_skill_id": learned.get("reused_skill_id") if isinstance(learned, Mapping) else None,
+            "reuse_attempt": learned.get("reuse_attempt") if isinstance(learned, Mapping) else None,
+            "fallback_used": learned.get("fallback_used") is True if isinstance(learned, Mapping) else False,
             "semantic_acceptance_complete": out.get("semantic_acceptance_complete") is True,
             "actual_goal_satisfaction_verified": out.get("actual_goal_satisfaction_verified") is True,
             "terminal_authority": False,
@@ -385,14 +441,7 @@ def run_decision(
         return _fail("DECISION_RUNTIME_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
 
 
-def run_specialized(
-    surface: str,
-    payload: Mapping[str, Any],
-    *,
-    repo_root: str | Path = ROOT,
-    state_path: str | Path | None = None,
-    learn: bool = True,
-) -> dict[str, Any]:
+def run_specialized(surface: str, payload: Mapping[str, Any], *, repo_root: str | Path = ROOT) -> dict[str, Any]:
     if not isinstance(payload, Mapping):
         return _fail("SPECIALIZED_PAYLOAD_NOT_OBJECT")
     name = str(surface or "").strip()
@@ -407,27 +456,12 @@ def run_specialized(
             raw = _mystery_separable(str(payload.get("operation") or ""), payload)
         else:
             return _fail("SPECIALIZED_SURFACE_UNKNOWN:" + name)
-        passed = not (
-            isinstance(raw, Mapping)
-            and str(raw.get("status") or "").startswith("FAIL_CLOSED")
-        )
-        observation = deepcopy(dict(raw)) if isinstance(raw, Mapping) else {
-            "status": "SPECIALIZED_RESULT",
-            "result": raw,
-        }
-        observation["pass"] = passed
-        learning = _observe_runtime_outcome(
-            observation,
-            state_path=state_path,
-            learn=learn,
-        )
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_SPECIALIZED_EXECUTION_COMPLETE",
-            "pass": passed,
+            "pass": not (isinstance(raw, Mapping) and str(raw.get("status") or "").startswith("FAIL_CLOSED")),
             "surface": name,
             "raw_result": raw,
-            "learning": learning,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -504,17 +538,11 @@ def run(
         nested = request.get("request")
         payload = nested if isinstance(nested, Mapping) else request
         raw = _bound_run(payload)
-        learning = _observe_runtime_outcome(
-            raw,
-            state_path=request.get("state_path"),
-            learn=request.get("learn", True) is not False,
-        )
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_BOUND_EXECUTION_COMPLETE",
             "pass": raw.get("pass") is True,
             "raw_result": raw,
-            "learning": learning,
             "terminal_authority": False,
             "capability_promotion_authority": False,
             "terminal_credit_delta": 0,
@@ -524,17 +552,11 @@ def run(
         nested = request.get("request")
         payload = nested if isinstance(nested, Mapping) else request
         raw = _raw_bound_run(payload)
-        learning = _observe_runtime_outcome(
-            raw,
-            state_path=request.get("state_path"),
-            learn=request.get("learn", True) is not False,
-        )
         return {
             "schema": SCHEMA,
             "status": "UNIFIED_RAW_BOUND_EXECUTION_COMPLETE",
             "pass": raw.get("pass") is True,
             "raw_result": raw,
-            "learning": learning,
             "semantic_acceptance_complete": raw.get("semantic_acceptance_complete") is True,
             "terminal_authority": False,
             "capability_promotion_authority": False,
@@ -565,8 +587,6 @@ def run(
             str(request.get("surface") or ""),
             request.get("payload") or {},
             repo_root=repo_root,
-            state_path=request.get("state_path"),
-            learn=request.get("learn", True) is not False,
         )
 
     if mode == "skill_plan":
