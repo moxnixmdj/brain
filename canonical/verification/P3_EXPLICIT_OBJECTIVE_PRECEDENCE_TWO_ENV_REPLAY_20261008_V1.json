@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_P3_EXPLICIT_OBJECTIVE_PRECEDENCE_TWO_ENV_REPLAY_20261008_V1",
+  "date": "2026-10-08",
+  "status": "PINNED_59_OF_59_TWO_ENV_TARGETED_ASSERTION_REPLAY_PASS__ZERO_TERMINAL_CREDIT",
+  "pr": 3109,
+  "verified_commit": "762fb0c158afd37121342406a78af7c4c30fc8de",
+  "incident": "When all claims were mandatory, V6 incorrectly chose input-order structural shortcut before explicit objective_weights, allowing success without honoring weighted order.",
+  "before": {
+    "weights": {
+      "A": 1,
+      "B": 100
+    },
+    "structural_output_order": [
+      "A",
+      "B"
+    ],
+    "weighted_required_order": [
+      "B",
+      "A"
+    ],
+    "incorrect_route": "MECHANICALLY_CLOSED_COMMON_POLICY_CELL_V1"
+  },
+  "repair": "Explicit objective contract takes precedence over unweighted structural route; absent or invalid supplied weights must fail closed without fallback.",
+  "source_blobs": {
+    "canonical/runtime/p3_real_context_v3_admission_v6.py": "18f45c8040f2a1f1d40f919ae18263177f893583",
+    "canonical/tests/test_p3_real_context_v3_admission_v6.py": "41c7da4b1d60578df6364b84647091318566db1b"
+  },
+  "verification": [
+    {
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "passed": 59,
+      "failed": 0,
+      "runner": "Direct Python runpy assertion replay, pytest unavailable"
+    },
+    {
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "passed": 59,
+      "failed": 0,
+      "runner": "Independent Python importlib assertion replay, pytest unavailable"
+    }
+  ],
+  "adversarial_regressions": [
+    "test_explicit_weights_override_structural_common_policy",
+    "test_invalid_explicit_objective_weights_never_fall_through"
+  ],
+  "boundary": {
+    "real_world_policy_adequacy_verified": false,
+    "source_authorization_verified": false,
+    "universal_scope_complete": false,
+    "u_empty_authorized": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0,
+    "merge_approved": false
+  },
+  "limitations": [
+    "Manual targeted tests only, not complete CI or matched Opus evaluator.",
+    "A passing test does not prove universal target coverage or adequacy.",
+    "This record is scoped to explicit weighted P3 route semantics on pinned commit."
+  ]
+}
