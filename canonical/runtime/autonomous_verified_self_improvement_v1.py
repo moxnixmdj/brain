@@ -308,6 +308,22 @@ def _enqueue_improvement(
         "status": "PENDING",
         "observations": observations,
         "reopen_count": reopen_count,
+        "attempt_count": (
+            int(previous.get("attempt_count", 0))
+            if isinstance(previous, Mapping) else 0
+        ),
+        "last_attempt_observations": (
+            previous.get("last_attempt_observations")
+            if isinstance(previous, Mapping) else None
+        ),
+        "last_attempt_status": (
+            previous.get("last_attempt_status")
+            if isinstance(previous, Mapping) else None
+        ),
+        "last_attempt_reason": (
+            previous.get("last_attempt_reason")
+            if isinstance(previous, Mapping) else None
+        ),
     }
     return wid
 
@@ -361,6 +377,300 @@ def next_improvement_action(
 ) -> dict[str, Any] | None:
     """Return the highest-priority unresolved compounding action, deterministically."""
     return _next_improvement_from_state(load_state(state_path))
+
+
+def _candidate_from_verified_skill(skill: Mapping[str, Any]) -> dict[str, Any]:
+    """Recover the immutable candidate payload underlying a verified skill."""
+    if not isinstance(skill, Mapping):
+        raise SelfImprovementError("VERIFIED_SKILL_NOT_OBJECT")
+    candidate = deepcopy(dict(skill))
+    for key in (
+        "scope_relation",
+        "scope_predicate",
+        "verification_receipt",
+        "verified_skill",
+        "reuse_authorized",
+        "candidate_only",
+        "acceptance_credit_delta",
+        "family_credit_delta",
+        "capability_credit_delta",
+        "ownership_credit_delta",
+        "promotion_authority",
+        "execution_authority",
+    ):
+        candidate.pop(key, None)
+    candidate["status"] = "EXECUTABLE_SKILL_CANDIDATE_ONLY"
+    candidate["verified_skill"] = False
+    candidate["reuse_authorized"] = False
+    candidate["candidate_only"] = True
+    return candidate
+
+
+def _record_improvement_attempt(
+    work_id: str,
+    *,
+    status: str,
+    reason: str | None,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+) -> None:
+    state = load_state(state_path)
+    queue = state.get("improvement_queue", {})
+    row = queue.get(_s(work_id)) if isinstance(queue, Mapping) else None
+    if not isinstance(row, dict) or row.get("status") != "PENDING":
+        return
+    row["attempt_count"] = int(row.get("attempt_count", 0)) + 1
+    row["last_attempt_observations"] = int(row.get("observations", 0))
+    row["last_attempt_status"] = _s(status) or "ATTEMPTED"
+    row["last_attempt_reason"] = _s(reason) or None
+    _refresh_stats(state)
+    _write_state(state, state_path)
+
+
+def advance_verification_queue(
+    *,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+    repo_root: str | Path = ROOT,
+    skill_verification_provider=None,
+    max_actions: int = 4,
+) -> dict[str, Any]:
+    """Consume safe verifier-backed compounding work without replaying effects.
+
+    Only already-produced skill evidence is handled here. External-effect replay
+    remains in its dedicated guarded repair paths. The independent verifier and
+    existing authenticator remain the sole authority for promotion.
+    """
+    if isinstance(max_actions, bool) or int(max_actions) < 1:
+        raise SelfImprovementError("MAX_ACTIONS_INVALID")
+    max_actions = int(max_actions)
+    if skill_verification_provider is None:
+        state = load_state(state_path)
+        return {
+            "schema": SCHEMA,
+            "status": "VERIFICATION_QUEUE_BLOCKED__INDEPENDENT_SKILL_VERIFIER_UNAVAILABLE",
+            "pass": False,
+            "attempted": 0,
+            "completed": 0,
+            "next_improvement_action": _next_improvement_from_state(state),
+            "terminal_authority": False,
+        }
+
+    supported = {
+        "VERIFY_SKILL_CANDIDATE",
+        "SEEK_VERIFIED_SCOPE_GENERALIZATION",
+    }
+    attempted = 0
+    completed = 0
+    results: list[dict[str, Any]] = []
+
+    while attempted < max_actions:
+        state = load_state(state_path)
+        queue = state.get("improvement_queue", {})
+        eligible: list[dict[str, Any]] = []
+        if isinstance(queue, Mapping):
+            for raw in queue.values():
+                if not isinstance(raw, Mapping) or raw.get("status") != "PENDING":
+                    continue
+                if _s(raw.get("kind")) not in supported:
+                    continue
+                observations = int(raw.get("observations", 0))
+                last_attempt = raw.get("last_attempt_observations")
+                if last_attempt is not None and int(last_attempt) >= observations:
+                    continue
+                eligible.append(deepcopy(dict(raw)))
+        eligible.sort(
+            key=lambda row: (
+                int(row.get("priority", 10**9)),
+                -int(row.get("observations", 0)),
+                _s(row.get("work_id")),
+            )
+        )
+        if not eligible:
+            break
+
+        work = eligible[0]
+        work_id = _s(work.get("work_id"))
+        kind = _s(work.get("kind"))
+        payload = work.get("payload")
+        if not isinstance(payload, Mapping):
+            _record_improvement_attempt(
+                work_id,
+                status="FAIL_CLOSED",
+                reason="IMPROVEMENT_PAYLOAD_INVALID",
+                state_path=state_path,
+            )
+            attempted += 1
+            results.append({
+                "work_id": work_id,
+                "kind": kind,
+                "pass": False,
+                "status": "FAIL_CLOSED",
+                "reason": "IMPROVEMENT_PAYLOAD_INVALID",
+            })
+            continue
+
+        candidate: Mapping[str, Any] | None = None
+        request_kind = "SKILL_VERIFICATION"
+        requested_relation = None
+        requested_predicate = None
+        if kind == "VERIFY_SKILL_CANDIDATE":
+            raw_candidate = payload.get("candidate")
+            if isinstance(raw_candidate, Mapping):
+                candidate = deepcopy(dict(raw_candidate))
+        elif kind == "SEEK_VERIFIED_SCOPE_GENERALIZATION":
+            skill_id = _s(
+                payload.get("skill_id")
+                or work.get("identity", {}).get("skill_id")
+            )
+            record = state.get("skills", {}).get(skill_id)
+            raw_skill = record.get("skill") if isinstance(record, Mapping) else None
+            if isinstance(raw_skill, Mapping):
+                candidate = _candidate_from_verified_skill(raw_skill)
+                request_kind = "SKILL_SCOPE_GENERALIZATION_VERIFICATION"
+                requested_relation = "PROVEN_SUPERSET"
+                requested_predicate = VERIFIED_SUPERSET_SCOPE_PREDICATE
+
+        if not isinstance(candidate, Mapping):
+            _record_improvement_attempt(
+                work_id,
+                status="FAIL_CLOSED",
+                reason="VERIFICATION_CANDIDATE_UNAVAILABLE",
+                state_path=state_path,
+            )
+            attempted += 1
+            results.append({
+                "work_id": work_id,
+                "kind": kind,
+                "pass": False,
+                "status": "FAIL_CLOSED",
+                "reason": "VERIFICATION_CANDIDATE_UNAVAILABLE",
+            })
+            continue
+
+        request = {
+            "kind": request_kind,
+            "work_id": work_id,
+            "candidate": deepcopy(dict(candidate)),
+            "supported_scope_predicates": [VERIFIED_SUPERSET_SCOPE_PREDICATE],
+        }
+        if requested_relation is not None:
+            request["requested_scope_relation"] = requested_relation
+            request["requested_scope_predicate"] = requested_predicate
+
+        attempted += 1
+        try:
+            binding = skill_verification_provider(deepcopy(request))
+            if not isinstance(binding, Mapping):
+                _record_improvement_attempt(
+                    work_id,
+                    status="BLOCKED__VERIFIER_RETURNED_NO_BINDING",
+                    reason=None,
+                    state_path=state_path,
+                )
+                results.append({
+                    "work_id": work_id,
+                    "kind": kind,
+                    "pass": False,
+                    "status": "BLOCKED__VERIFIER_RETURNED_NO_BINDING",
+                })
+                continue
+
+            auth = authenticate_skill_verification(
+                candidate,
+                binding,
+                repo_root=repo_root,
+            )
+            if auth.get("pass") is not True:
+                reason = _s(auth.get("reason")) or "INDEPENDENT_SKILL_VERIFICATION_FAILED"
+                _record_improvement_attempt(
+                    work_id,
+                    status="FAIL_CLOSED__INDEPENDENT_VERIFICATION_REJECTED",
+                    reason=reason,
+                    state_path=state_path,
+                )
+                results.append({
+                    "work_id": work_id,
+                    "kind": kind,
+                    "pass": False,
+                    "status": "FAIL_CLOSED__INDEPENDENT_VERIFICATION_REJECTED",
+                    "reason": reason,
+                })
+                continue
+
+            verified = auth.get("verified_skill")
+            if not isinstance(verified, Mapping):
+                raise SelfImprovementError("AUTHENTICATED_VERIFIED_SKILL_MISSING")
+            if kind == "SEEK_VERIFIED_SCOPE_GENERALIZATION":
+                if (
+                    _s(verified.get("scope_relation")) != "PROVEN_SUPERSET"
+                    or _s(verified.get("scope_predicate"))
+                    != VERIFIED_SUPERSET_SCOPE_PREDICATE
+                ):
+                    _record_improvement_attempt(
+                        work_id,
+                        status="FAIL_CLOSED__GENERALIZATION_PROOF_NOT_SUPERSET",
+                        reason="BOUND_PROVEN_SUPERSET_STRUCTURAL_MATCH_REQUIRED",
+                        state_path=state_path,
+                    )
+                    results.append({
+                        "work_id": work_id,
+                        "kind": kind,
+                        "pass": False,
+                        "status": "FAIL_CLOSED__GENERALIZATION_PROOF_NOT_SUPERSET",
+                        "reason": "BOUND_PROVEN_SUPERSET_STRUCTURAL_MATCH_REQUIRED",
+                    })
+                    continue
+
+            integrated = integrate_solver_output(
+                {
+                    "pass": True,
+                    "status": "SOLVED__VERIFIED_EXECUTABLE_SKILL_READY",
+                    "current_episode_verified": False,
+                    "skill_candidate": deepcopy(dict(candidate)),
+                    "verified_executable_skill": deepcopy(dict(verified)),
+                    "verified_skill_reuse_authorized": True,
+                },
+                state_path=state_path,
+            )
+            completed += 1
+            results.append({
+                "work_id": work_id,
+                "kind": kind,
+                "pass": True,
+                "status": _s(integrated.get("status")),
+                "active_skill_id": integrated.get("active_skill_id"),
+                "scope_relation": verified.get("scope_relation"),
+                "scope_predicate": verified.get("scope_predicate"),
+            })
+        except Exception as exc:
+            reason = type(exc).__name__ + ":" + str(exc)
+            _record_improvement_attempt(
+                work_id,
+                status="FAIL_CLOSED__VERIFICATION_QUEUE_EXCEPTION",
+                reason=reason,
+                state_path=state_path,
+            )
+            results.append({
+                "work_id": work_id,
+                "kind": kind,
+                "pass": False,
+                "status": "FAIL_CLOSED__VERIFICATION_QUEUE_EXCEPTION",
+                "reason": reason,
+            })
+
+    state = load_state(state_path)
+    return {
+        "schema": SCHEMA,
+        "status": (
+            "VERIFICATION_QUEUE_ADVANCED"
+            if completed else "VERIFICATION_QUEUE_NO_PROMOTION"
+        ),
+        "pass": True,
+        "attempted": attempted,
+        "completed": completed,
+        "results": results,
+        "next_improvement_action": _next_improvement_from_state(state),
+        "terminal_authority": False,
+    }
 
 
 def record_success_observation(
@@ -661,7 +971,11 @@ def integrate_solver_output(
         family = _family_id(verified_skill)
         row = _skill_pareto_row(sid, verified_skill)
 
-        existing_ids = list(state["pareto_frontiers"].get(family, []))
+        existing_ids = [
+            old_sid
+            for old_sid in state["pareto_frontiers"].get(family, [])
+            if old_sid != sid
+        ]
         frontier_rows = []
         for old_sid in existing_ids:
             old = state["skills"].get(old_sid)
@@ -687,22 +1001,22 @@ def integrate_solver_output(
             },
         }
         state["skills"][sid] = record
+        _resolve_improvements(
+            state,
+            kind="VERIFY_SKILL_CANDIDATE",
+            predicate=lambda work: work.get("identity", {}).get("candidate_sha256")
+            == _s(verified_skill.get("candidate_sha256")),
+            resolved_by=sid,
+        )
+        _resolve_improvements(
+            state,
+            kind="REVERIFY_QUARANTINED_SKILL",
+            predicate=lambda work: work.get("identity", {}).get("skill_id") == sid,
+            resolved_by=sid,
+        )
 
         if skill_admission.get("admitted") is True:
             active_skill_id = sid
-            _resolve_improvements(
-                state,
-                kind="VERIFY_SKILL_CANDIDATE",
-                predicate=lambda work: work.get("identity", {}).get("candidate_sha256")
-                == _s(verified_skill.get("candidate_sha256")),
-                resolved_by=sid,
-            )
-            _resolve_improvements(
-                state,
-                kind="REVERIFY_QUARANTINED_SKILL",
-                predicate=lambda work: work.get("identity", {}).get("skill_id") == sid,
-                resolved_by=sid,
-            )
             source_scopes = set(_items(verified_skill.get("source_scopes")))
             postconditions = _items(verified_skill.get("postconditions"))
             _resolve_improvements(
