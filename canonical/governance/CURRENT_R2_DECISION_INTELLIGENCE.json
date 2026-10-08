@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-08",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V24_SIXTEEN_DIRECT_ROUTES__THIRTEEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V25_SEVENTEEN_DIRECT_ROUTES__FOURTEEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -18,18 +18,18 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V24.json",
-    "git_blob_sha": "346bb16b107864fa2097c4ccccaf79ef3b62155d"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V25.json",
+    "git_blob_sha": "0979455a5e238db49d98fc77fb3f71a78773619e"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V12.json",
-    "activation_git_blob_sha": "7fcb7a19296db133835e9e9fca81fa32b15ddacc",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261008_V13.json",
+    "activation_git_blob_sha": "1d86a017929b70729e17837477d210b8db9f80df",
     "exact_cell_count": 3,
-    "bounded_family_count": 13,
-    "current_route_count": 16,
-    "current_activation_status": "THREE_EXACT_CELLS_PLUS_THIRTEEN_BOUNDED_FAMILIES",
+    "bounded_family_count": 14,
+    "current_route_count": 17,
+    "current_activation_status": "THREE_EXACT_CELLS_PLUS_FOURTEEN_BOUNDED_FAMILIES",
     "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
-    "direct_runtime_git_blob_sha": "343bc5cb19982aff21a0270af12e56f98a843694",
+    "direct_runtime_git_blob_sha": "696eb2728947a0d6ad149ecfa28f5b78ca382463",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -85,11 +85,16 @@
         "path": "canonical/verification/R2_UNIT_NORMALIZED_NUMERIC_COMPARISON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
         "git_blob_sha": "a0555c2fc891393f4da377a375efdb882977f9bc",
         "status": "PASS__UNIT_NORMALIZED_GROUNDED_NUMERIC_COMPARISON__BRANCH_REGRESSION_27_OF_27__ACTUAL_EQ_FALSE_GT_AND_THRESHOLD_REPLAYS_PASS__ZERO_CREDIT"
+      },
+      {
+        "path": "canonical/verification/R2_KNOWLEDGE_CONSISTENCY_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "99cceec24f88ce9842a73760d51f98e63eb55fa7",
+        "status": "PASS__PROVENANCE_KNOWLEDGE_CONSISTENCY__BRANCH_REGRESSION_25_OF_25__SUPPORTED_CONFLICTED_STALE_REPLAYS_PASS__ZERO_CREDIT"
       }
     ],
-    "latest_verification_path": "canonical/verification/R2_UNIT_NORMALIZED_NUMERIC_COMPARISON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
-    "latest_verification_git_blob_sha": "a0555c2fc891393f4da377a375efdb882977f9bc",
-    "latest_verification_status": "PASS__UNIT_NORMALIZED_GROUNDED_NUMERIC_COMPARISON__BRANCH_REGRESSION_27_OF_27__ACTUAL_EQ_FALSE_GT_AND_THRESHOLD_REPLAYS_PASS__ZERO_CREDIT"
+    "latest_verification_path": "canonical/verification/R2_KNOWLEDGE_CONSISTENCY_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "latest_verification_git_blob_sha": "99cceec24f88ce9842a73760d51f98e63eb55fa7",
+    "latest_verification_status": "PASS__PROVENANCE_KNOWLEDGE_CONSISTENCY__BRANCH_REGRESSION_25_OF_25__SUPPORTED_CONFLICTED_STALE_REPLAYS_PASS__ZERO_CREDIT"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
@@ -116,7 +121,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__SIXTEEN_DIRECT_ROUTES__THIRTEEN_BOUNDED_FAMILIES__VERIFIED_CAPABILITY_ESCAPE_LIVE__EXTERNAL_OBSERVATION_PROVENANCE_EXACT_CLAIM_EXPLICIT_NUMERIC_AND_MULTIPLICATIVE_UNIT_NORMALIZED_COMPARISON_LIVE",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__SEVENTEEN_DIRECT_ROUTES__FOURTEEN_BOUNDED_FAMILIES__VERIFIED_CAPABILITY_ESCAPE_LIVE__KNOWLEDGE_CONSISTENCY_CONFLICT_FRESHNESS_ASSESSMENT_LIVE",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -253,7 +258,7 @@
   "sufficient_closure": {
     "path": "canonical/verification/R2_GENERAL_ADEQUATE_DECISION_SUFFICIENT_CLOSURE_20261008_V7.json",
     "git_blob_sha": "c78a157335c90864b01edffc03b8e19e1fc48f58",
-    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__THIRTEEN_BOUNDED_DIRECT_FAMILIES_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
+    "status": "ACTIVE__CONTROL_CLOSED__GOAL_SCOPED_REPLAYED__FOURTEEN_BOUNDED_DIRECT_FAMILIES_ACTIVE__DURABLE_REPAIR_CONTEXT_LIVE__COVERAGE_AND_OBSERVABILITY_OPEN",
     "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY"
   },
   "policy_adequacy_capability_escape": {
@@ -501,5 +506,26 @@
     "actual_threshold_conversion_pass": true,
     "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
     "affine_or_general_unit_algebra_claimed": false
+  },
+  "knowledge_consistency_direct_adequacy": {
+    "path": "canonical/runtime/r2_knowledge_consistency_direct_adequacy_v1.py",
+    "git_blob_sha": "14c87718111c4fc235eb697624a98b2a95fa8968",
+    "verification_path": "canonical/verification/R2_KNOWLEDGE_CONSISTENCY_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "verification_git_blob_sha": "99cceec24f88ce9842a73760d51f98e63eb55fa7",
+    "route_id": "DIRECT_ADEQUACY::PROVENANCE_KNOWLEDGE_CONSISTENCY_FAMILY_V1",
+    "producer_capability_id": "knowledge.consistency.assess",
+    "terminal_outcomes": [
+      "SUPPORTED",
+      "CONFLICTED",
+      "STALE",
+      "INSUFFICIENT"
+    ],
+    "branch_regression": "25_OF_25_PASS",
+    "supported_replay_pass": true,
+    "conflicted_replay_pass": true,
+    "stale_replay_pass": true,
+    "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
+    "factual_truth_claimed": false,
+    "organizational_independence_claimed": false
   }
 }
