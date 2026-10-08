@@ -1,0 +1,37 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_CROWDBT_TWO_WORLD_NONIDENTIFIABILITY_VERIFICATION_20261008_V1",
+  "date":"2026-10-08",
+  "status":"PASS__PRIMARY_4_OF_4__INDEPENDENT_4_ASSERTIONS__ZERO_CREDIT",
+  "subject":{
+    "runtime_path":"canonical/runtime/gdpval_crowdbt_two_world_nonidentifiability_v1.py",
+    "test_path":"canonical/tests/test_gdpval_crowdbt_two_world_nonidentifiability_v1.py",
+    "candidate_path":"canonical/governance/GDPVAL_CROWDBT_TWO_WORLD_NONIDENTIFIABILITY_CANDIDATE_20261008_V1.json"
+  },
+  "primary_execution":{
+    "provider":"SPRITES",
+    "carrier":"brain-root3-current-byte-replay-20261007-v1",
+    "result":"4 passed in 0.02s"
+  },
+  "independent_execution":{
+    "provider":"SPRITES",
+    "carrier":"brain-heldout003-one-shot",
+    "pytest_available":false,
+    "method":"DIRECT_IMPORT_AND_FOUR_ASSERTIONS",
+    "result":"INDEPENDENT_PASS_4_ASSERTIONS"
+  },
+  "verified":{
+    "crowd_bt_eta_gt_half_implies_positive_preference_slope":true,
+    "all_brain_win_extension_orders_brain_above_opus":true,
+    "all_opus_win_extension_orders_brain_below_opus":true,
+    "same_judge_quality_values_used_in_both_extensions":true,
+    "only_deliberate_world_difference_is_unobserved_brain_pairwise_outcomes":true,
+    "public_pre_brain_scoring_surface_alone_does_not_identify_brain_ge_opus":true
+  },
+  "consequence":"DELETE_SCORING_RECONSTRUCTION_ONLY_AS_A_CLOSURE_ROUTE__REQUIRE_BRAIN_SPECIFIC_OWNER_OUTCOMES_OR_SOUND_STRONGER_TARGET_RELATION_BRIDGE",
+  "hard_nonclaims":[
+    "NO_CLAIM_SYNTHETIC_ETA_VALUES_EQUAL_REAL_OWNER_FITS",
+    "NO_CLAIM_EITHER_EXTENSION_IS_REAL",
+    "NO_GDPVAL_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
