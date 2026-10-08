@@ -1262,16 +1262,6 @@ def advance_once(
 
         success_episode_adapter_provider = _owned_success_adapter
 
-    if verification_frontier_acquisition_provider is None:
-        from canonical.runtime import r3_success_adapter_rule_acquisition_v1 as native_acquisition
-
-        verification_frontier_acquisition_provider = lambda request: native_acquisition.acquire(
-            request,
-            state_path=state_path,
-            repo_root=repo_root,
-        )
-        verification_frontier_acquisition_provider_id = native_acquisition.PROVIDER_ID
-
     state = learning.load_state(state_path)
     pending = _pending(state)
     blockers: list[dict[str, Any]] = []
@@ -1519,7 +1509,23 @@ def advance_once(
 
             if kind == FRONTIER_EXPANSION_KIND:
                 payload = work.get("payload")
-                if verification_frontier_acquisition_provider is None:
+                acquisition_provider = verification_frontier_acquisition_provider
+                acquisition_provider_id = verification_frontier_acquisition_provider_id
+                if acquisition_provider is None:
+                    from canonical.runtime import r3_success_adapter_rule_acquisition_v1 as native_acquisition
+
+                    if native_acquisition.can_acquire(
+                        work,
+                        state_path=state_path,
+                    ):
+                        acquisition_provider = lambda request: native_acquisition.acquire(
+                            request,
+                            state_path=state_path,
+                            repo_root=repo_root,
+                        )
+                        acquisition_provider_id = native_acquisition.PROVIDER_ID
+
+                if acquisition_provider is None:
                     from canonical.runtime import r3_root1_adapter_gap_witness_v1 as root1_gap
 
                     compiled_gap = root1_gap.compile_gap(
@@ -1561,8 +1567,8 @@ def advance_once(
                     work,
                     state_path=state_path,
                     repo_root=repo_root,
-                    provider=verification_frontier_acquisition_provider,
-                    provider_id=verification_frontier_acquisition_provider_id,
+                    provider=acquisition_provider,
+                    provider_id=acquisition_provider_id,
                 )
                 return {
                     **out,
