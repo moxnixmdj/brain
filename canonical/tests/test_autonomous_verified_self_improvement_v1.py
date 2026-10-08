@@ -811,6 +811,7 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
                 state_path=path,
                 repo_root=Path("."),
                 skill_verification_provider=provider,
+                max_actions=1,
             )
 
         self.assertEqual(tick["advanced_count"], 1, tick)
