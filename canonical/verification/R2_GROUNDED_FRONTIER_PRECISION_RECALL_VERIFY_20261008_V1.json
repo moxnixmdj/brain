@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GROUNDED_FRONTIER_PRECISION_RECALL_VERIFY_V1",
+  "date": "2026-10-08",
+  "status": "PASS__REAL_CURRENT_REGISTRY__5_OF_5",
+  "branch": "r2-grounded-frontier-precision-recall-20261008",
+  "exact_blobs": {
+    "runtime": "0d13e7c5fe5e8ce5bf8430e1741765d0c57e9b0b",
+    "tests": "1557c2bf63f4ad48c6373266b070a1957a473bbd"
+  },
+  "isolated_carrier": {
+    "name": "brain-r2-grounded-frontier-verify-20261008",
+    "sprite_id": "sprite-87368f21-5869-452d-b326-b420f5e99347"
+  },
+  "real_registry_probe": {
+    "known_python_test_audit": [
+      "python.tests.audit.unittest"
+    ],
+    "binary_serialization": [
+      "auto.npm.dfinity-cbor",
+      "auto.npm.msgpack-msgpack",
+      "auto.pypi.bson-modern",
+      "auto.pypi.msgpack"
+    ],
+    "multi_clause_status": "NOT_APPLICABLE__MULTI_CLAUSE_OR_EMPTY",
+    "unknown_goal_status": "NOT_APPLICABLE__NO_GROUNDED_BOUND_CAPABILITY"
+  },
+  "verified_properties": [
+    "POLICY_DISCOVERY_DOES_NOT_REQUIRE_EXECUTION_INPUT_BINDABILITY",
+    "PATH_AND_URL_BYTES_DO_NOT_CREATE_ACTION_SEMANTIC_MATCHES",
+    "WEAK_PATH_DERIVED_FALSE_POSITIVES_ARE_FILTERED",
+    "KNOWN_OWNED_CAPABILITY_RECALL_RESTORED",
+    "AMBIGUITY_PRESERVED",
+    "MULTI_CLAUSE_COLLAPSE_FORBIDDEN",
+    "UNKNOWN_GOALS_STILL_ABSTAIN"
+  ],
+  "hard_nonclaims": [
+    "SEMANTIC_GROUNDING_IS_CANDIDATE_GENERATION_ONLY",
+    "NO_POLICY_ADEQUACY_AUTHORITY",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

@@ -14,8 +14,10 @@ from __future__ import annotations
 from copy import deepcopy
 import json
 from pathlib import Path
+import re
 from typing import Any, Mapping
 
+from canonical.runtime import goal_compiler
 from canonical.runtime.bound_capabilities import plain_goal_bound_grounding as grounding
 from canonical.runtime.bound_capabilities import plain_goal_bound_grounding_verify as grounding_verify
 
@@ -39,6 +41,56 @@ def _base(status: str, *, passed: bool) -> dict[str, Any]:
     }
 
 
+def _semantic_goal_tokens(text: str) -> set[str]:
+    """Return action-intent tokens while excluding binding-only path/URL bytes."""
+    cleaned = re.sub(r"https?://[^\s)\]}>]+", " ", str(text or ""))
+    cleaned = re.sub(
+        r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",
+        " ",
+        cleaned,
+    )
+    cleaned = re.sub(
+        r"(?<![A-Za-z0-9_])(?:[A-Za-z0-9_.-]+\.[A-Za-z0-9]{1,8})(?![A-Za-z0-9_])",
+        " ",
+        cleaned,
+    )
+    return set(grounding._distinctive(grounding._tokens(cleaned)))
+
+
+def _strong_semantic_candidate(row: Mapping[str, Any], semantic_tokens: set[str]) -> bool:
+    lexical = row.get("lexical") or {}
+    if not isinstance(lexical, Mapping):
+        return False
+
+    def goal_hits(field: str) -> list[tuple[str, str]]:
+        raw = lexical.get(field) or []
+        out: list[tuple[str, str]] = []
+        if not isinstance(raw, list):
+            return out
+        for pair in raw:
+            if (
+                isinstance(pair, list)
+                and len(pair) == 2
+                and isinstance(pair[0], str)
+                and isinstance(pair[1], str)
+                and pair[0] in semantic_tokens
+            ):
+                out.append((pair[0], pair[1]))
+        return out
+
+    provides_hits = goal_hits("matched_provides")
+    keyword_hits = goal_hits("matched_keywords")
+    identity_hits = goal_hits("matched_identity")
+    matched = {a for a, _ in provides_hits + keyword_hits + identity_hits}
+    coverage = len(matched) / max(1, len(semantic_tokens))
+
+    # An output/effect match is strong enough by itself. Otherwise require two
+    # independent semantic identity/keyword hits with meaningful goal coverage.
+    return bool(provides_hits) or (
+        len(keyword_hits) + len(identity_hits) >= 2 and coverage >= 0.34
+    )
+
+
 def propose(goal: str, *, repo_root: str | Path) -> dict[str, Any]:
     root = Path(repo_root).resolve()
     text = str(goal or "").strip()
@@ -46,7 +98,6 @@ def propose(goal: str, *, repo_root: str | Path) -> dict[str, Any]:
         return {**_base("FAIL_CLOSED", passed=False), "reason": "GOAL_REQUIRED"}
 
     try:
-        result = grounding.run({"goal": text}, root)
         registry_doc = json.loads(
             (root / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").read_text(
                 encoding="utf-8"
@@ -58,6 +109,15 @@ def propose(goal: str, *, repo_root: str | Path) -> dict[str, Any]:
                 **_base("FAIL_CLOSED", passed=False),
                 "reason": "BOUND_CAPABILITY_REGISTRY_INVALID",
             }
+        registry = goal_compiler._platform_admissible_registry(dict(registry))
+        # Candidate policy discovery is semantic proposal generation, not
+        # execution. Requiring all runtime inputs to be bound here causes false
+        # negatives; bindability is enforced later before execution.
+        result = grounding.ground(
+            text,
+            dict(registry),
+            enforce_bindability=False,
+        )
         verified, reason = grounding_verify.verify(text, result, registry)
         if not verified:
             return {
@@ -91,9 +151,31 @@ def propose(goal: str, *, repo_root: str | Path) -> dict[str, Any]:
                 "candidate_policy_count": 0,
             }
 
+        semantic_tokens = _semantic_goal_tokens(text)
+        strong_candidates = [
+            row
+            for row in candidates
+            if isinstance(row, Mapping)
+            and _strong_semantic_candidate(row, semantic_tokens)
+        ]
+        discarded_weak_candidate_ids = sorted(
+            str(row.get("capability_id") or "")
+            for row in candidates
+            if isinstance(row, Mapping)
+            and row not in strong_candidates
+            and str(row.get("capability_id") or "")
+        )
+        if not strong_candidates:
+            return {
+                **_base("NOT_APPLICABLE__NO_STRONG_GROUNDED_BOUND_CAPABILITY", passed=False),
+                "grounding": deepcopy(dict(result)),
+                "candidate_policy_count": 0,
+                "discarded_weak_candidate_ids": discarded_weak_candidate_ids,
+            }
+
         policy_conditions: dict[str, dict[str, str]] = {}
         capability_by_policy: dict[str, str] = {}
-        for row in candidates:
+        for row in strong_candidates:
             if not isinstance(row, Mapping):
                 return {
                     **_base("FAIL_CLOSED", passed=False),
@@ -117,6 +199,8 @@ def propose(goal: str, *, repo_root: str | Path) -> dict[str, Any]:
             "grounding_verified": True,
             "grounding_model_dependency_count": result.get("model_dependency_count"),
             "candidate_policy_count": len(policy_conditions),
+            "discarded_weak_candidate_ids": discarded_weak_candidate_ids,
+            "semantic_goal_tokens": sorted(semantic_tokens),
             "policy_conditions": policy_conditions,
             "capability_by_policy": capability_by_policy,
             "grounding": deepcopy(dict(result)),
