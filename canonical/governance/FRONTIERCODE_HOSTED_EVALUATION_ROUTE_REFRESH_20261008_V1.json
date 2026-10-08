@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_HOSTED_EVALUATION_ROUTE_REFRESH_V1",
+  "date": "2026-10-08",
+  "status": "ACTIVE__INDEPENDENT_SPRITE_OWNER_REFETCH_PASS__HOSTED_EVALUATION_REQUESTABLE__PUBLIC_SELF_RUN_UNAVAILABLE__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "CODING_FRONTIERCODE_GE_54_4",
+  "canonical_base_commit": "933062014149668e63c9094e6e3d334dad287471",
+  "historical_boundary": {
+    "path": "canonical/verification/FRONTIERCODE_CURSORBENCH_OWNER_ROUTE_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "git_blob_sha": "26c1f813503c156e818499b2e6fe4fdb00d40c05",
+    "preserved_fact": "NO_PUBLIC_EXACT_SELF_RUN_ESTABLISHED",
+    "repaired_interpretation": "LACK_OF_PUBLIC_SELF_RUN_DOES_NOT_IMPLY_OWNER_HOSTED_EVALUATION_IS_UNAVAILABLE"
+  },
+  "public_owner_evidence": {
+    "frontiercode_introduction": {
+      "url": "https://cognition.com/blog/frontier-code",
+      "publisher": "Cognition",
+      "retrieved_date": "2026-10-08",
+      "owner_statement": "we are opening up our evaluation to all model creators",
+      "supports": [
+        "OWNER_HOSTED_EVALUATION_IS_REQUESTABLE_IN_PRINCIPLE",
+        "TASK_RELEASE_IS_NOT_REQUIRED_FOR_OWNER_HOSTED_EVALUATION"
+      ]
+    },
+    "current_leaderboard": {
+      "url": "https://cognition.com/frontiercode",
+      "publisher": "Cognition",
+      "retrieved_date": "2026-10-08",
+      "supports": [
+        "FRONTIERCODE_1_1_IS_CURRENT_PUBLIC_EVALUATION_SURFACE",
+        "OWNER_CONTINUES_TO_PUBLISH_MODEL_RESULTS",
+        "PUBLIC_INTERACTIVE_SAMPLE_DOES_NOT_ESTABLISH_PUBLIC_FULL_SELF_RUN"
+      ]
+    }
+  },
+  "route_truth": {
+    "public_exact_self_run": false,
+    "full_task_release_public": false,
+    "owner_hosted_evaluation_requestable": true,
+    "exact_submission_channel_publicly_bound": false,
+    "zero_incremental_cost_terms_bound": false,
+    "current_brain_result_receipt_exists": false,
+    "stronger_scope_complete_proof_remains_admissible": true
+  },
+  "scheduling_repair": {
+    "delete": [
+      "INTERPRET_OWNER_EVALUATION_AS_GLOBALLY_UNAVAILABLE",
+      "TREAT_PUBLIC_SELF_RUN_ABSENCE_AS_OWNER_HOSTED_EVAL_ABSENCE"
+    ],
+    "preserve": [
+      "NO_PUBLIC_TASK_RELEASE_ASSUMPTION",
+      "NO_PUBLIC_SELF_RUN_ASSUMPTION",
+      "NO_SCORE_OR_ACCEPTANCE_CREDIT_WITHOUT_A_VALID_RESULT_OR_STRONGER_PROOF",
+      "HARD_ZERO_INCREMENTAL_SPEND"
+    ],
+    "external_route": "REQUEST_COGNITION_HOSTED_FRONTIERCODE_1_1_MAIN_EVALUATION_TERMS_AND_SUBMISSION_CONTRACT",
+    "external_route_admission": "DO_NOT_EXECUTE_SCORE_BEARING_EVALUATION_UNLESS_ZERO_INCREMENTAL_COST_AND_EXACT_TARGET_TUPLE_COMPATIBILITY_ARE_BOUND",
+    "parallel_internal_route": "CONTINUE_SCOPE_SUPERSET_OR_TASK_CONDITIONED_DOMINANCE_CERTIFICATE_SYNTHESIS"
+  },
+  "target_tuple_firewall": {
+    "path": "canonical/governance/OPUS55_SCORE_TARGET_TUPLE_BINDINGS_20261005_V1.json",
+    "rule": "THIS_ROUTE_REFRESH_DOES_NOT_CHANGE_THE_FROZEN_FRONTIERCODE_TARGET_TUPLE_OR_THRESHOLD"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_COGNITION_WILL_ACCEPT_THIS_SPECIFIC_BRAIN_SYSTEM_WITHOUT_REVIEW",
+    "NO_CLAIM_THE_HOSTED_EVALUATION_IS_FREE",
+    "NO_CLAIM_THE_EXACT_REQUEST_CHANNEL_OR_SUBMISSION_FORMAT_IS_PUBLICLY_DOCUMENTED",
+    "NO_CLAIM_A_BRAIN_FRONTIERCODE_RESULT_EXISTS",
+    "NO_CHANGE_TO_THE_FROZEN_54_4_ACCEPTANCE_TARGET",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": false,
+  "next": "BIND_EXACT_REQUEST_CHANNEL_SUBMISSION_CONTRACT_AND_ZERO_COST_TERMS_IF_AVAILABLE__IN_PARALLEL_CONTINUE_SCOPE_SUPERSET_OR_TASK_CONDITIONED_DOMINANCE_CERTIFICATE_SYNTHESIS",
+  "independent_verification": {
+    "path": "canonical/verification/FRONTIERCODE_HOSTED_EVALUATION_ROUTE_REFRESH_SPRITE_VERIFICATION_20261008_V1.json",
+    "git_blob_sha": "cafab889a697a0c17e1e54ef3d78da6d141cf702",
+    "status": "INDEPENDENT_SPRITE_PUBLIC_OWNER_REFETCH_PASS__HOSTED_EVALUATION_REQUESTABLE__PUBLIC_TASK_RELEASE_ABSENT__ZERO_CREDIT"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_HOSTED_EVALUATION_ROUTE_REFRESH_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SPRITE_PUBLIC_OWNER_REFETCH_PASS__HOSTED_EVALUATION_REQUESTABLE__PUBLIC_TASK_RELEASE_ABSENT__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/FRONTIERCODE_HOSTED_EVALUATION_ROUTE_REFRESH_20261008_V1.json",
+    "git_blob_sha": "3f938b842e7cbb2cd7ec9cafc26e341724d764f0",
+    "branch": "research/frontiercode-hosted-eval-route-refresh-20261008-v1"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-frontiercode-route-refresh-verify-20261008-v1",
+    "sprite_id": "sprite-516155ae-ce43-4477-bba9-ea126ee41fa1"
+  },
+  "owner_refetch": [
+    {
+      "url": "https://cognition.com/blog/frontier-code",
+      "sha256": "2f139f3738be6240adc9f8d1678fbe41a235320fccf25b1d0e7a543b164bc1a6",
+      "checks": {
+        "hosted_evaluation_open_to_model_creators_statement_present": true,
+        "tasks_not_planned_for_public_release_statement_present": true
+      }
+    },
+    {
+      "url": "https://cognition.com/frontiercode",
+      "sha256": "b29d15bff7e1022a613dffd4dedf97c125b3fd038c8dcd3bf24f57bea51508e1",
+      "checks": {
+        "frontiercode_1_1_surface_present": true
+      }
+    }
+  ],
+  "verified": [
+    "COGNITION_PUBLICLY_STATES_THAT_ITS_FRONTIERCODE_EVALUATION_IS_OPEN_TO_MODEL_CREATORS",
+    "COGNITION_PUBLICLY_STATES_THAT_FRONTIERCODE_TASKS_ARE_NOT_PLANNED_FOR_PUBLIC_RELEASE",
+    "CURRENT_FRONTIERCODE_1_1_SURFACE_REMAINS_PUBLICLY_PRESENT",
+    "PUBLIC_SELF_RUN_ABSENCE_DOES_NOT_ENTAIL_OWNER_HOSTED_EVALUATION_UNAVAILABILITY"
+  ],
+  "boundaries": [
+    "NO_EXACT_REQUEST_CHANNEL_OR_SUBMISSION_FORMAT_WAS_PUBLICLY_BOUND",
+    "NO_ZERO_COST_TERM_WAS_FOUND_OR_INFERRED",
+    "NO_BRAIN_RESULT_WAS_OBTAINED",
+    "NO_TARGET_THRESHOLD_OR_TARGET_TUPLE_CHANGED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "scheduling_conclusion": "RECLASSIFY_FRONTIERCODE_EXTERNAL_ROUTE_FROM_OWNER_EVALUATION_UNAVAILABLE_TO_OWNER_HOSTED_EVALUATION_REQUESTABLE_WITH_TERMS_AND_SUBMISSION_CONTRACT_UNBOUND__KEEP_STRONGER_INTERNAL_PROOF_ROUTE_ACTIVE_IN_PARALLEL",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
