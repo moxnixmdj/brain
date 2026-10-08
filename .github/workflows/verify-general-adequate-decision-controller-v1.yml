@@ -6,6 +6,9 @@ on:
       - canonical/runtime/general_adequate_decision_controller_v1.py
       - canonical/tests/test_general_adequate_decision_controller_v1.py
       - canonical/governance/R2_GENERAL_ADEQUATE_DECISION_CONTROLLER_ACTIVATION_20261008_V1.json
+      - canonical/runtime/finance_semantic_zero_reality_fixed_point_v1.py
+      - canonical/tests/test_finance_semantic_zero_reality_fixed_point_v1.py
+      - canonical/governance/FINANCE_SEMANTIC_ZERO_REALITY_FIXED_POINT_20261008_V1.json
       - .github/workflows/verify-general-adequate-decision-controller-v1.yml
   workflow_dispatch:
 permissions:
@@ -21,7 +24,7 @@ jobs:
       - name: Run R2 falsification suite
         run: |
           set -o pipefail
-          python3 -m unittest canonical.tests.test_general_adequate_decision_controller_v1 -v 2>&1 | tee r2-test-output.txt
+          python3 -m unittest             canonical.tests.test_general_adequate_decision_controller_v1             canonical.tests.test_finance_semantic_zero_reality_fixed_point_v1             -v 2>&1 | tee r2-test-output.txt
       - name: Publish verification output
         if: always()
         uses: actions/upload-artifact@v4
