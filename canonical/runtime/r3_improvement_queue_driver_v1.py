@@ -678,6 +678,153 @@ def _attempt_already_consumed_current_evidence(work: Mapping[str, Any]) -> bool:
     return int(last) >= int(work.get("observations", 0))
 
 
+def _frontier_acquisition_attempt_consumed(
+    work: Mapping[str, Any],
+    *,
+    provider_id: str,
+    repo_root: str | Path,
+) -> bool:
+    """Back off only for the same provider identity and unchanged owned frontier."""
+    if str(work.get("kind") or "") != FRONTIER_EXPANSION_KIND:
+        return False
+    last = work.get("last_attempt_observations")
+    if last is None:
+        return False
+    if int(last) < int(work.get("observations", 0)):
+        return False
+    if str(work.get("last_attempt_provider_id") or "") != provider_id:
+        return False
+    current = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    return str(work.get("last_attempt_frontier_sha256") or "") == current
+
+
+def _record_frontier_acquisition_attempt(
+    work_id: str,
+    *,
+    provider_id: str,
+    frontier_sha256: str,
+    status: str,
+    reason: str | None,
+    state_path: str | Path,
+) -> None:
+    learning._record_improvement_attempt(
+        work_id,
+        status=status,
+        reason=reason,
+        state_path=state_path,
+    )
+    state = learning.load_state(state_path)
+    queue = state.get("improvement_queue", {})
+    row = queue.get(work_id) if isinstance(queue, Mapping) else None
+    if not isinstance(row, dict):
+        raise ImprovementDriverError("IMPROVEMENT_WORK_UNKNOWN:" + work_id)
+    row["last_attempt_provider_id"] = provider_id
+    row["last_attempt_frontier_sha256"] = frontier_sha256
+    learning._refresh_stats(state)
+    learning._write_state(state, state_path)
+
+
+def _execute_frontier_acquisition(
+    work: Mapping[str, Any],
+    *,
+    state_path: str | Path,
+    repo_root: str | Path,
+    provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None],
+    provider_id: str,
+) -> dict[str, Any]:
+    payload = work.get("payload")
+    if not isinstance(payload, Mapping):
+        raise ImprovementDriverError("FRONTIER_EXPANSION_PAYLOAD_INVALID")
+    wid = str(work.get("work_id") or "").strip()
+    before = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    request = {
+        "kind": FRONTIER_EXPANSION_KIND,
+        "improvement_work_id": wid,
+        "blocked_success_work_id": payload.get("blocked_success_work_id"),
+        "observation_id": payload.get("observation_id"),
+        "verification_frontier_sha256": before,
+        "required_capability_class": payload.get("required_capability_class"),
+        "boundary_root": payload.get("boundary_root"),
+        "replay_original_success": False,
+        "candidate_generation_authority": False,
+        "promotion_authority": False,
+        "terminal_authority": False,
+    }
+    result = provider(deepcopy(request))
+    if not isinstance(result, Mapping):
+        status = "FRONTIER_ACQUISITION_PROVIDER_RETURNED_NO_RESULT"
+        _record_frontier_acquisition_attempt(
+            wid,
+            provider_id=provider_id,
+            frontier_sha256=before,
+            status=status,
+            reason=status,
+            state_path=state_path,
+        )
+        return {
+            "schema": SCHEMA,
+            "status": status,
+            "pass": False,
+            "progress": False,
+            "work_id": wid,
+            "attempt_backoff_recorded": True,
+            "terminal_authority": False,
+        }
+
+    after = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    if after == before:
+        status = "FRONTIER_ACQUISITION_DID_NOT_CHANGE_OWNED_VERIFICATION_FRONTIER"
+        reason = str(result.get("reason") or result.get("status") or status)
+        _record_frontier_acquisition_attempt(
+            wid,
+            provider_id=provider_id,
+            frontier_sha256=before,
+            status=status,
+            reason=reason,
+            state_path=state_path,
+        )
+        return {
+            "schema": SCHEMA,
+            "status": status,
+            "pass": False,
+            "progress": False,
+            "work_id": wid,
+            "provider_result": deepcopy(dict(result)),
+            "verification_frontier_sha256_before": before,
+            "verification_frontier_sha256_after": after,
+            "attempt_backoff_recorded": True,
+            "terminal_authority": False,
+        }
+
+    reactivation = _reactivate_parked_successes(
+        state_path=state_path,
+        repo_root=repo_root,
+        external_authority_available=False,
+    )
+    blocked = str(payload.get("blocked_success_work_id") or "")
+    reopened = set(reactivation.get("reopened_work_ids") or [])
+    if blocked not in reopened:
+        raise ImprovementDriverError(
+            "FRONTIER_CHANGED_BUT_BLOCKED_SUCCESS_NOT_REOPENED:" + blocked
+        )
+    return {
+        "schema": SCHEMA,
+        "status": "IMPROVEMENT_ADVANCED__VERIFICATION_FRONTIER_EXPANDED_AND_SUCCESS_REOPENED",
+        "pass": True,
+        "progress": True,
+        "work_id": wid,
+        "blocked_success_work_id": blocked,
+        "provider_result": deepcopy(dict(result)),
+        "verification_frontier_sha256_before": before,
+        "verification_frontier_sha256_after": after,
+        "reopened_work_ids": sorted(reopened),
+        "resolved_frontier_handoff_work_ids": reactivation.get(
+            "resolved_frontier_handoff_work_ids"
+        ) or [],
+        "terminal_authority": False,
+    }
+
+
 def _record_failed_action_attempt(
     work_id: str,
     out: Mapping[str, Any],
@@ -708,6 +855,12 @@ def advance_once(
     skill_verification_provider=None,
     success_episode_adapter_provider=None,
     failure_repair_provider: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
+    verification_frontier_acquisition_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    verification_frontier_acquisition_provider_id: str = (
+        "HOST_VERIFICATION_FRONTIER_ACQUISITION_PROVIDER"
+    ),
 ) -> dict[str, Any]:
     """Execute the highest-priority *actionable* pending improvement exactly once."""
     external_episode_verifier = episode_verification_provider is not None
@@ -767,6 +920,17 @@ def advance_once(
     for work in pending:
         kind = str(work.get("kind") or "")
         wid = str(work.get("work_id") or "")
+        if _frontier_acquisition_attempt_consumed(
+            work,
+            provider_id=verification_frontier_acquisition_provider_id,
+            repo_root=repo_root,
+        ):
+            blockers.append({
+                "work_id": wid,
+                "kind": kind,
+                "blocker": "FRONTIER_ACQUISITION_ALREADY_ATTEMPTED_FOR_CURRENT_PROVIDER_AND_FRONTIER",
+            })
+            continue
         if _attempt_already_consumed_current_evidence(work):
             blockers.append({
                 "work_id": wid,
@@ -986,23 +1150,35 @@ def advance_once(
 
             if kind == FRONTIER_EXPANSION_KIND:
                 payload = work.get("payload")
-                blockers.append({
-                    "work_id": wid,
-                    "kind": kind,
-                    "blocker": "ROOT1_VERIFICATION_CAPABILITY_ACQUISITION_REQUIRED",
-                    "boundary_root": (
-                        payload.get("boundary_root")
-                        if isinstance(payload, Mapping)
-                        else "R1_CAPABILITY_ACQUISITION"
-                    ),
-                    "required_capability_class": (
-                        payload.get("required_capability_class")
-                        if isinstance(payload, Mapping)
-                        else None
-                    ),
-                    "replay_original_success": False,
-                })
-                continue
+                if verification_frontier_acquisition_provider is None:
+                    blockers.append({
+                        "work_id": wid,
+                        "kind": kind,
+                        "blocker": "ROOT1_VERIFICATION_CAPABILITY_ACQUISITION_REQUIRED",
+                        "boundary_root": (
+                            payload.get("boundary_root")
+                            if isinstance(payload, Mapping)
+                            else "R1_CAPABILITY_ACQUISITION"
+                        ),
+                        "required_capability_class": (
+                            payload.get("required_capability_class")
+                            if isinstance(payload, Mapping)
+                            else None
+                        ),
+                        "replay_original_success": False,
+                    })
+                    continue
+                out = _execute_frontier_acquisition(
+                    work,
+                    state_path=state_path,
+                    repo_root=repo_root,
+                    provider=verification_frontier_acquisition_provider,
+                    provider_id=verification_frontier_acquisition_provider_id,
+                )
+                return {
+                    **out,
+                    "blockers_skipped": blockers,
+                }
 
             if kind == "COLLECT_MATCHING_VERIFIED_EPISODE":
                 blockers.append({
@@ -1048,6 +1224,12 @@ def drain(
     skill_verification_provider=None,
     success_episode_adapter_provider=None,
     failure_repair_provider: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
+    verification_frontier_acquisition_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    verification_frontier_acquisition_provider_id: str = (
+        "HOST_VERIFICATION_FRONTIER_ACQUISITION_PROVIDER"
+    ),
     max_actions: int = 4,
 ) -> dict[str, Any]:
     if isinstance(max_actions, bool) or not isinstance(max_actions, int) or max_actions < 1 or max_actions > 32:
@@ -1061,6 +1243,12 @@ def drain(
             skill_verification_provider=skill_verification_provider,
             success_episode_adapter_provider=success_episode_adapter_provider,
             failure_repair_provider=failure_repair_provider,
+            verification_frontier_acquisition_provider=(
+                verification_frontier_acquisition_provider
+            ),
+            verification_frontier_acquisition_provider_id=(
+                verification_frontier_acquisition_provider_id
+            ),
         )
         actions.append(result)
         if result.get("progress") is not True:

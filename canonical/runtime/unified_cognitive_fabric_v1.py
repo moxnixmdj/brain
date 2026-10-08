@@ -240,6 +240,12 @@ def run(
     episode_verification_provider=None,
     skill_verification_provider=None,
     success_episode_adapter_provider=None,
+    verification_frontier_acquisition_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    verification_frontier_acquisition_provider_id: str = (
+        "HOST_VERIFICATION_FRONTIER_ACQUISITION_PROVIDER"
+    ),
 ) -> dict[str, Any]:
     try:
         if not isinstance(request, Mapping):
@@ -594,6 +600,12 @@ def run(
                 skill_verification_provider=skill_verification_provider,
                 success_episode_adapter_provider=success_episode_adapter_provider,
                 failure_repair_provider=_repair_pending,
+                verification_frontier_acquisition_provider=(
+                    verification_frontier_acquisition_provider
+                ),
+                verification_frontier_acquisition_provider_id=(
+                    verification_frontier_acquisition_provider_id
+                ),
                 max_actions=int(options.get("max_improvement_actions", 4)),
             )
         elif mode == "LEARNING_EPISODE":
@@ -666,6 +678,12 @@ def run(
                 skill_verification_provider=skill_verification_provider,
                 success_episode_adapter_provider=success_episode_adapter_provider,
                 failure_repair_provider=autonomous_failure_repair_provider,
+                verification_frontier_acquisition_provider=(
+                    verification_frontier_acquisition_provider
+                ),
+                verification_frontier_acquisition_provider_id=(
+                    verification_frontier_acquisition_provider_id
+                ),
                 max_actions=int(options.get("self_improvement_max_actions", 4)),
             )
 
