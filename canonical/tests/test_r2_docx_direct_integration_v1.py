@@ -7,7 +7,7 @@ from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as direct
 
 
 class R2DocxDirectIntegrationV1Tests(unittest.TestCase):
-    @patch.object(direct.docx_adequacy, "preflight")
+    @patch.object(direct.docx_json_adequacy, "preflight")
     def test_docx_family_is_reachable_from_direct_preflight(self, preflight):
         preflight.return_value = {
             "matched": True,
@@ -30,8 +30,8 @@ class R2DocxDirectIntegrationV1Tests(unittest.TestCase):
         )
         self.assertFalse(out["preflight_execution_authority"])
 
-    @patch.object(direct.docx_adequacy, "run")
-    @patch.object(direct.docx_adequacy, "preflight")
+    @patch.object(direct.docx_json_adequacy, "run")
+    @patch.object(direct.docx_json_adequacy, "preflight")
     def test_verified_docx_family_becomes_direct_adequacy(
         self, preflight, run_docx
     ):
@@ -70,8 +70,8 @@ class R2DocxDirectIntegrationV1Tests(unittest.TestCase):
         )
         self.assertFalse(out["retry_by_other_route_authorized"])
 
-    @patch.object(direct.docx_adequacy, "run")
-    @patch.object(direct.docx_adequacy, "preflight")
+    @patch.object(direct.docx_json_adequacy, "run")
+    @patch.object(direct.docx_json_adequacy, "preflight")
     def test_docx_failure_never_falls_through_to_legacy_execution(
         self, preflight, run_docx
     ):
