@@ -887,10 +887,10 @@
     "current_r2_decision_intelligence": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "scheduler_cut": {
-        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V13.json",
-        "git_blob_sha": "0a16f157fd3a9e3912728c9392e2f089dc14c3d5"
+        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V14.json",
+        "git_blob_sha": "b8112c997e7b0926c7aa708c0b60f38fc9ac9b32"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V13_DURABLE_GROUNDED_REPAIR_CONTEXT_BOUND__GOAL_SCOPE_REPLAY_AND_TRANSACTIONAL_CODEC_DIRECT_ADEQUACY_PRESERVED__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V14_FIVE_DIRECT_ROUTES__TWO_TRANSACTIONAL_ADEQUACY_FAMILIES__DURABLE_GROUNDED_REPAIR_CONTEXT_BOUND__GOAL_SCOPE_REPLAY_PRESERVED__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     }
@@ -1390,7 +1390,7 @@
     "gdpval_owner_layer_wake_authority": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V9.json",
     "opus_5_5_is_global_terminal_objective": false,
     "opus_5_5_is_frontier_checkpoint": true,
-    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V13",
+    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V14",
     "historical_root2_scheduler_fields_currently_authoritative": false,
     "r2_general_control_mechanism_closed_as_adequacy_or_abstain": true,
     "r2_open_world_positive_action_coverage_complete": false,
@@ -2073,8 +2073,8 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V13.json",
-    "current_scheduler_git_blob_sha": "0a16f157fd3a9e3912728c9392e2f089dc14c3d5",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V14.json",
+    "current_scheduler_git_blob_sha": "b8112c997e7b0926c7aa708c0b60f38fc9ac9b32",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
@@ -2085,5 +2085,5 @@
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA"
   },
-  "pointer_revision": 37
+  "pointer_revision": 38
 }
