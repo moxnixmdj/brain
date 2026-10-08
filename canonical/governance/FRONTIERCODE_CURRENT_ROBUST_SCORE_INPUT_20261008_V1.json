@@ -1,0 +1,13 @@
+{
+  "target_score_fraction": 0.5464,
+  "task_count": 100,
+  "trials_per_task": 5,
+  "groups": [
+    {
+      "group_id": "CURRENT_UNBOUND_FRONTIERCODE_MAIN_500",
+      "multiplicity": 500,
+      "all_blockers_pass_proved": false,
+      "passed_rubric_weight_lower_bound": 0
+    }
+  ]
+}
