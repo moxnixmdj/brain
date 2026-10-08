@@ -90,6 +90,11 @@ class R3QuarantineRecoveryV1Tests(unittest.TestCase):
                 "canonical.runtime.r3_quarantine_recovery_v1.authenticate_skill_verification",
                 return_value={"pass": True, "verified_skill": exact},
             ),
+            mock.patch.object(
+                learning,
+                "reauthenticate_skill_record",
+                side_effect=lambda skill, **_: {"pass": True, "verified_skill": skill},
+            ),
         ):
             out = driver.advance_once(state_path=path)
 
