@@ -38,6 +38,15 @@ class ProfessionalPresentationRelationCutBridgeTests(unittest.TestCase):
             out["shared_frontier_id"], "PROFESSIONAL_PRESENTATION_QUALITY_V1"
         )
 
+    def test_two_world_nonidentifiability_is_replayed_not_merely_asserted(self):
+        out = verify_bridge(repo_root=ROOT)
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["countermodel_replayed"])
+        self.assertEqual(out["countermodel"]["public_observation_equal"], True)
+        self.assertEqual(out["countermodel"]["left_order"], "A_STRICTLY_OVER_B")
+        self.assertEqual(out["countermodel"]["right_order"], "B_STRICTLY_OVER_A")
+        self.assertTrue(out["countermodel"]["strict_order_not_entailed"])
+
     def test_minimum_separator_classes_are_only_load_bearing_moves(self):
         out = verify_bridge(repo_root=ROOT)
         self.assertTrue(out["pass"], out)
