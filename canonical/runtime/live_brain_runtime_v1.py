@@ -657,6 +657,37 @@ def execute_failure_repair_cycle(
         return _fail("REPAIR_CYCLE_EXCEPTION:" + type(exc).__name__ + ":" + str(exc))
 
 
+def _parse_grounded_bound_policy_id(policy_id: str) -> dict[str, str] | None:
+    """Parse legacy or exact-raw-goal-scoped grounded policy identities."""
+    prefix = "BOUND_CAPABILITY_POLICY::"
+    marker = "::RAW_GOAL_SHA256::"
+    raw = str(policy_id or "").strip()
+    if not raw.startswith(prefix):
+        return None
+    suffix = raw[len(prefix):]
+    if marker not in suffix:
+        capability_id = suffix.strip()
+        return (
+            {"policy_id": raw, "capability_id": capability_id}
+            if capability_id
+            else None
+        )
+    capability_id, goal_sha = suffix.rsplit(marker, 1)
+    capability_id = capability_id.strip()
+    goal_sha = goal_sha.strip().lower()
+    if (
+        not capability_id
+        or len(goal_sha) != 64
+        or any(ch not in "0123456789abcdef" for ch in goal_sha)
+    ):
+        return None
+    return {
+        "policy_id": raw,
+        "capability_id": capability_id,
+        "raw_goal_sha256": goal_sha,
+    }
+
+
 def _compact_policy_repair_context(result: Mapping[str, Any]) -> dict[str, Any] | None:
     """Keep only causal policy-frontier structure needed by same-dispatch repair."""
     if not isinstance(result, Mapping):
@@ -702,18 +733,13 @@ def _compact_policy_repair_context(result: Mapping[str, Any]) -> dict[str, Any] 
     rejected.sort(key=lambda row: (row["policy_id"], row.get("reason", "")))
 
     grounded_bound_policy_candidates: list[dict[str, str]] = []
-    grounded_prefix = "BOUND_CAPABILITY_POLICY::"
     for row in rejected:
-        policy_id = str(row.get("policy_id") or "").strip()
-        if not policy_id.startswith(grounded_prefix):
+        parsed = _parse_grounded_bound_policy_id(
+            str(row.get("policy_id") or "").strip()
+        )
+        if parsed is None:
             continue
-        capability_id = policy_id[len(grounded_prefix):].strip()
-        if not capability_id:
-            continue
-        grounded_bound_policy_candidates.append({
-            "policy_id": policy_id,
-            "capability_id": capability_id,
-        })
+        grounded_bound_policy_candidates.append(parsed)
 
     uncovered_ids: list[str] = []
     rows = search.get("uncovered_models")
@@ -818,15 +844,13 @@ def _concretize_policy_adequacy_repair_target(
                 continue
             policy_id = str(raw.get("policy_id") or "").strip()
             capability_id = str(raw.get("capability_id") or "").strip()
+            parsed = _parse_grounded_bound_policy_id(policy_id)
             if (
-                policy_id
+                parsed is not None
                 and capability_id
-                and policy_id == "BOUND_CAPABILITY_POLICY::" + capability_id
+                and parsed["capability_id"] == capability_id
             ):
-                pair = {
-                    "policy_id": policy_id,
-                    "capability_id": capability_id,
-                }
+                pair = dict(parsed)
                 if pair not in pairs:
                     pairs.append(pair)
     pairs.sort(key=lambda row: (row["policy_id"], row["capability_id"]))
