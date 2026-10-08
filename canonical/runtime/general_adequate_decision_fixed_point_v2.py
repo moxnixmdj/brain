@@ -141,6 +141,9 @@ def _edge_request(
         "next_observation_request": deepcopy(
             unresolved.get("next_observation_request")
         ),
+        "next_policy_request": deepcopy(
+            unresolved.get("next_policy_request")
+        ),
         "unresolved_output": deepcopy(dict(unresolved)),
         "allowed_request_patch_fields": sorted(MUTABLE_REQUEST_FIELDS),
         "immutable_request_fields": sorted(IMMUTABLE_REQUEST_FIELDS),
