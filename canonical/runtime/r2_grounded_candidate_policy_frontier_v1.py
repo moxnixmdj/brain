@@ -12,6 +12,7 @@ solves an entire composite request.
 from __future__ import annotations
 
 from copy import deepcopy
+from hashlib import sha256
 import json
 from pathlib import Path
 import re
@@ -23,6 +24,16 @@ from canonical.runtime.bound_capabilities import plain_goal_bound_grounding_veri
 
 SCHEMA = "PROJECT_BRAIN_R2_GROUNDED_CANDIDATE_POLICY_FRONTIER_V1"
 POLICY_PREFIX = "BOUND_CAPABILITY_POLICY::"
+GOAL_SCOPE_MARKER = "::RAW_GOAL_SHA256::"
+
+
+def goal_scoped_policy_id(capability_id: str, goal: str) -> str:
+    """Bind a grounded policy hypothesis to the exact raw goal bytes."""
+    cid = str(capability_id or "").strip()
+    text = str(goal or "").strip()
+    if not cid or not text:
+        raise ValueError("CAPABILITY_ID_AND_GOAL_REQUIRED")
+    return POLICY_PREFIX + cid + GOAL_SCOPE_MARKER + sha256(text.encode("utf-8")).hexdigest()
 
 
 def _base(status: str, *, passed: bool) -> dict[str, Any]:
@@ -187,7 +198,7 @@ def propose(goal: str, *, repo_root: str | Path) -> dict[str, Any]:
                     **_base("FAIL_CLOSED", passed=False),
                     "reason": "GROUNDING_CANDIDATE_ID_INVALID",
                 }
-            policy_id = POLICY_PREFIX + capability_id
+            policy_id = goal_scoped_policy_id(capability_id, text)
             policy_conditions[policy_id] = {"op": "TRUE"}
             capability_by_policy[policy_id] = capability_id
 
@@ -201,12 +212,15 @@ def propose(goal: str, *, repo_root: str | Path) -> dict[str, Any]:
             "candidate_policy_count": len(policy_conditions),
             "discarded_weak_candidate_ids": discarded_weak_candidate_ids,
             "semantic_goal_tokens": sorted(semantic_tokens),
+            "raw_goal_sha256": sha256(text.encode("utf-8")).hexdigest(),
+            "policy_identity_scope": "EXACT_RAW_GOAL_SHA256",
             "policy_conditions": policy_conditions,
             "capability_by_policy": capability_by_policy,
             "grounding": deepcopy(dict(result)),
             "robustness_semantics": (
-                "TRUE_MEANS_EACH_CANDIDATE_MUST_BE_PROVED_ADEQUATE_OVER_THE_ENTIRE_"
-                "CURRENT_SOUND_SEMANTIC_OVERAPPROXIMATION_BEFORE_SELECTION"
+                "TRUE_MEANS_EACH_GOAL_SCOPED_CANDIDATE_MUST_BE_PROVED_ADEQUATE_OVER_"
+                "THE_ENTIRE_CURRENT_SOUND_SEMANTIC_OVERAPPROXIMATION_FOR_THE_EXACT_RAW_GOAL_"
+                "IDENTITY_BEFORE_SELECTION"
             ),
             "ambiguity_preserved": len(policy_conditions) > 1,
             "candidate_only": True,
