@@ -2030,6 +2030,10 @@
       "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py"
     },
     "physical_deletion_requires_separate_proof": true,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "verification": {
+      "path": "canonical/verification/OPTION_PRESERVING_CAPABILITY_OPTIMIZER_INDEPENDENT_VERIFICATION_20261008_V1.json",
+      "status": "PASS__OPTION_PRESERVING_OPTIMIZER_AND_SCHEDULER_REGRESSION__16_OF_16__GOVERNANCE_PASS"
+    }
   }
 }
