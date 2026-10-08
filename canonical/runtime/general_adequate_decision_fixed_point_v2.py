@@ -22,6 +22,9 @@ from canonical.runtime.general_adequate_decision_controller_v1 import (
     run as run_controller,
 )
 from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as direct_adequacy
+from canonical.runtime.r2_existing_policy_adequacy_repair_v1 import (
+    repair as repair_existing_adequacy,
+)
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2"
 MAX_FIXED_POINT_STEPS = 16
@@ -291,18 +294,62 @@ def run(
                 trace=trace,
             )
 
-        if proposal_provider is None:
-            return _decorate(
-                result,
-                fixed_point_status="OPEN__R2_EDGE_RESOLVER_UNAVAILABLE",
-                steps=step,
-                trace=trace,
-            )
-
         if step >= max_fixed_point_steps:
             return _decorate(
                 result,
                 fixed_point_status="OPEN__R2_FIXED_POINT_STEP_BOUND_EXHAUSTED",
+                steps=step,
+                trace=trace,
+            )
+
+        policy_request = result.get("next_policy_request")
+        if isinstance(policy_request, Mapping):
+            automatic = repair_existing_adequacy(
+                current,
+                policy_request,
+                repo_root=repo_root,
+            )
+            trace[-1]["automatic_existing_adequacy_repair"] = {
+                "status": automatic.get("status"),
+                "pass": automatic.get("pass") is True,
+                "added_policy_ids": deepcopy(automatic.get("added_policy_ids", [])),
+                "repair_authority": False,
+            }
+            if automatic.get("status") == "FAIL_CLOSED":
+                return _fail(
+                    "BUILTIN_EXISTING_ADEQUACY_REPAIR_FAIL_CLOSED:"
+                    + str(automatic.get("reason") or "UNKNOWN"),
+                    trace=trace,
+                )
+            if automatic.get("pass") is True:
+                candidate = {"request_patch": automatic.get("request_patch")}
+                merged, error = _merge_candidate(current, candidate)
+                if error is not None or merged is None:
+                    return _fail(
+                        "BUILTIN_EXISTING_ADEQUACY_REPAIR_PATCH_INVALID:"
+                        + str(error),
+                        trace=trace,
+                    )
+                candidate_digest = _digest(merged)
+                if candidate_digest == _digest(current) or candidate_digest in seen:
+                    return _fail(
+                        "BUILTIN_EXISTING_ADEQUACY_REPAIR_NO_PROGRESS",
+                        trace=trace,
+                    )
+                trace[-1]["automatic_existing_adequacy_repair"][
+                    "candidate_request_sha256"
+                ] = candidate_digest
+                trace[-1]["automatic_existing_adequacy_repair"][
+                    "downstream_reverification_required"
+                ] = True
+                current = merged
+                seen.add(candidate_digest)
+                continue
+
+        if proposal_provider is None:
+            return _decorate(
+                result,
+                fixed_point_status="OPEN__R2_EDGE_RESOLVER_UNAVAILABLE",
                 steps=step,
                 trace=trace,
             )
