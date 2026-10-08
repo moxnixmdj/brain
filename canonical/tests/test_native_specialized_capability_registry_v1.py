@@ -174,5 +174,85 @@ class NativeSpecializedCapabilityRegistryV1Tests(unittest.TestCase):
             )
 
 
+    def test_compiled_native_node_consumes_only_provenance_bound_verified_value(self):
+        from canonical.runtime.universal_solver_value_state_v1 import (
+            append_verified_transition,
+            initialize,
+            resolve_effect_results,
+        )
+
+        producer = {
+            "id": "resolver",
+            "requires": [],
+            "provides": ["RESOLVED"],
+            "result_fields": ["result"],
+            "action": {"type": "verified_policy"},
+        }
+        capsule = initialize({
+            "initial_facts": [],
+            "target_effects": ["RESOLVED"],
+            "capabilities": [producer],
+        })
+        capsule = append_verified_transition(
+            capsule,
+            capability=producer,
+            trace_row={
+                "cycle": 0,
+                "capability_id": "resolver",
+                "verified_output": {
+                    "result": {
+                        "status": "LIBRARY_HIT__VERIFY_BEFORE_USE",
+                        "match": {"capability_id": "CAP_TEST"},
+                    }
+                },
+                "effect_outcome": None,
+                "proof_digest": "proof",
+                "proposal_sha256": "proposal",
+                "action_contract_sha256": "action",
+                "verifier_id": "TEST",
+            },
+        )
+
+        compiled = native.compile_into_problem(
+            {
+                "task_id": "compose-values",
+                "initial_facts": [],
+                "target_effects": ["PREDICTED"],
+                "capabilities": [],
+            },
+            [{
+                "instance_id": "predict",
+                "operation_id": "H100_PREDICT_VERIFIED_CAPABILITY_V8",
+                "requires": ["RESOLVED"],
+                "provides": ["PREDICTED"],
+                "args": {
+                    "resolution": {
+                        "$effect_result": {
+                            "effect": "RESOLVED",
+                            "field": "result",
+                        }
+                    },
+                    "point": {"x": 1.0},
+                },
+            }],
+        )
+        cap = compiled["capabilities"][0]
+        resolved = resolve_effect_results(
+            capsule,
+            capability=cap,
+            template=cap["action"],
+        )
+        self.assertEqual(
+            resolved["verifier_payload"]["args"]["resolution"]["match"][
+                "capability_id"
+            ],
+            "CAP_TEST",
+        )
+        self.assertNotIn(
+            "$effect_result",
+            repr(resolved["verifier_payload"]["args"]),
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
