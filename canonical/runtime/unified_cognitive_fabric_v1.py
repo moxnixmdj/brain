@@ -6,6 +6,7 @@ adequate-decision, adaptive-solving, P3, and self-improvement systems.
 from __future__ import annotations
 
 from copy import deepcopy
+import json
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
@@ -29,7 +30,10 @@ from canonical.runtime import certificate_gated_selected_route_runtime_entrypoin
 from canonical.runtime import terminal_autopilot_v1 as terminal_autopilot
 from canonical.runtime import terminal_root_decision_gate_v1 as terminal_root
 from canonical.runtime import terminal_closure_reducer as terminal_closure
-from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
+from canonical.runtime.verified_bound_capability_execution_adapter_v1 import (
+    execute as execute_bound,
+    inspect as inspect_bound,
+)
 from canonical.runtime import semantic_ambiguity_control_v1 as semantic_ambiguity
 from canonical.runtime import semantic_relation_control_v1 as semantic_relation
 from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
@@ -297,6 +301,107 @@ def catalog() -> dict[str, Any]:
     }
 
 
+SEMANTIC_VERIFIER_EFFECT_ROLES = {
+    "semantic.authority.receipt.verified": "OEWN_DECISION_MANIFEST_AUTHORITY",
+    "semantic.evidence.receipt.verified": "OEWN_SENSE_OBSERVATION_EVIDENCE",
+}
+
+
+def _bound_semantic_receipt_verifier(
+    capability_id: Any,
+    *,
+    required_effect: str,
+):
+    """Compile one serializable bound capability ID into a verifier callback.
+
+    Execution ownership is not semantic authority. Admission requires an exact
+    verified bound capability whose declared effect and frozen role match the
+    requested semantic verifier role.
+    """
+    cid = str(capability_id or "").strip()
+    if not cid.startswith("bound:") or len(cid) <= len("bound:"):
+        raise CognitiveFabricError(
+            "SEMANTIC_VERIFIER_CAPABILITY_MUST_USE_BOUND_NAMESPACE"
+        )
+    local_id = cid.split(":", 1)[1]
+    expected_role = SEMANTIC_VERIFIER_EFFECT_ROLES.get(required_effect)
+    if expected_role is None:
+        raise CognitiveFabricError(
+            "SEMANTIC_VERIFIER_REQUIRED_EFFECT_UNKNOWN:" + required_effect
+        )
+    inspected = inspect_bound(local_id)
+    entry = inspected.get("entry")
+    if not isinstance(entry, Mapping):
+        raise CognitiveFabricError("SEMANTIC_VERIFIER_BOUND_ENTRY_MISSING:" + cid)
+    provides = {str(x) for x in (entry.get("provides") or [])}
+    if required_effect not in provides:
+        raise CognitiveFabricError(
+            "SEMANTIC_VERIFIER_CAPABILITY_ROLE_MISMATCH:"
+            + cid
+            + ":"
+            + required_effect
+        )
+    template = entry.get("action_template")
+    args = template.get("args") if isinstance(template, Mapping) else None
+    if (
+        not isinstance(args, Mapping)
+        or args.get("capability_id") != local_id
+        or args.get("role") != expected_role
+    ):
+        raise CognitiveFabricError(
+            "SEMANTIC_VERIFIER_FROZEN_ROLE_BINDING_INVALID:" + cid
+        )
+
+    def _verify(receipt: Mapping[str, Any]) -> Mapping[str, Any]:
+        if not isinstance(receipt, Mapping):
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED",
+                "reason": "SEMANTIC_RECEIPT_NOT_OBJECT",
+                "terminal_authority": False,
+            }
+        try:
+            receipt_json = json.dumps(
+                dict(receipt),
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=False,
+                allow_nan=False,
+            )
+        except Exception as exc:
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED",
+                "reason": "SEMANTIC_RECEIPT_NOT_CANONICAL_JSON:"
+                + type(exc).__name__,
+                "terminal_authority": False,
+            }
+        executed = execute_bound(
+            local_id,
+            inputs={"receipt_json": receipt_json},
+        )
+        if not isinstance(executed, Mapping) or executed.get("pass") is not True:
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED",
+                "reason": "SEMANTIC_VERIFIER_BOUND_CAPABILITY_EXECUTION_FAILED",
+                "verifier_capability_id": cid,
+                "terminal_authority": False,
+            }
+        native = executed.get("result")
+        if not isinstance(native, Mapping):
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED",
+                "reason": "SEMANTIC_VERIFIER_NATIVE_RESULT_MISSING",
+                "verifier_capability_id": cid,
+                "terminal_authority": False,
+            }
+        return deepcopy(dict(native))
+
+    return _verify
+
+
 def run(
     request: Mapping[str, Any],
     *,
@@ -451,15 +556,47 @@ def run(
         elif mode == "SEMANTIC_RELATION":
             out = semantic_relation.resolve(payload)
         elif mode == "OEWN_DECISION_SENSE":
+            authority_verifier = semantic_authority_verifier
+            evidence_verifier = semantic_evidence_verifier
+            authority_verifier_id = str(
+                payload.get("authority_verifier_capability_id") or ""
+            ).strip()
+            evidence_verifier_id = str(
+                payload.get("evidence_verifier_capability_id") or ""
+            ).strip()
+            if authority_verifier is None and authority_verifier_id:
+                authority_verifier = _bound_semantic_receipt_verifier(
+                    authority_verifier_id,
+                    required_effect="semantic.authority.receipt.verified",
+                )
+            if evidence_verifier is None and evidence_verifier_id:
+                evidence_verifier = _bound_semantic_receipt_verifier(
+                    evidence_verifier_id,
+                    required_effect="semantic.evidence.receipt.verified",
+                )
             out = oewn_decision_sense.resolve(
                 sense_universe=payload.get("sense_universe"),
                 decision_manifest=payload.get("decision_manifest"),
                 authority_receipt=payload.get("authority_receipt"),
-                authority_verifier=semantic_authority_verifier,
+                authority_verifier=authority_verifier,
                 evidence_receipts=payload.get("evidence_receipts"),
-                evidence_verifier=semantic_evidence_verifier,
+                evidence_verifier=evidence_verifier,
                 ambiguity_owner=str(payload.get("ambiguity_owner") or "SYSTEM_MODEL"),
             )
+            if isinstance(out, Mapping) and (
+                authority_verifier_id or evidence_verifier_id
+            ):
+                out = deepcopy(dict(out))
+                out["semantic_verifier_transport"] = {
+                    "authority_verifier_capability_id": (
+                        authority_verifier_id or None
+                    ),
+                    "evidence_verifier_capability_id": (
+                        evidence_verifier_id or None
+                    ),
+                    "execution_ownership_is_semantic_authority": False,
+                    "role_gated_by_bound_capability_effect": True,
+                }
         elif mode == "CAPABILITY_SCHEDULER":
             work = payload.get("work")
             if not isinstance(work, list):
