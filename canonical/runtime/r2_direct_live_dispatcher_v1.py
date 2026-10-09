@@ -156,6 +156,9 @@ def load_state(
         "run_callable",
         "declared_route_count",
         "declared_route_ids",
+        "authority_activation_path",
+        "authority_activation_git_blob_sha",
+        "runtime_closure",
     ):
         if field not in baseline:
             raise DirectLiveDispatcherError(
@@ -180,6 +183,95 @@ def load_state(
         prefix="canonical/runtime/",
         label="R2_DIRECT_LIVE_BASELINE_RUNTIME",
     )
+
+    activation_path = _verify_blob(
+        root,
+        baseline.get("authority_activation_path"),
+        baseline.get("authority_activation_git_blob_sha"),
+        prefix="canonical/governance/",
+        label="R2_DIRECT_LIVE_BASELINE_ACTIVATION",
+    )
+    activation = _load_json(
+        activation_path,
+        label="R2_DIRECT_LIVE_BASELINE_ACTIVATION",
+    )
+    activation_rows = activation.get("current_routes")
+    if not isinstance(activation_rows, list) or not activation_rows:
+        raise DirectLiveDispatcherError(
+            "R2_DIRECT_LIVE_BASELINE_ACTIVATION_ROUTES_INVALID"
+        )
+    activation_ids: list[str] = []
+    for index, raw in enumerate(activation_rows):
+        if not isinstance(raw, Mapping):
+            raise DirectLiveDispatcherError(
+                "R2_DIRECT_LIVE_BASELINE_ACTIVATION_ROUTE_NOT_OBJECT:"
+                + str(index)
+            )
+        route_id = str(raw.get("route_id") or "")
+        if not route_id:
+            raise DirectLiveDispatcherError(
+                "R2_DIRECT_LIVE_BASELINE_ACTIVATION_ROUTE_ID_REQUIRED:"
+                + str(index)
+            )
+        activation_ids.append(route_id)
+        runtime_rel = raw.get("runtime")
+        runtime_sha = raw.get("runtime_git_blob_sha")
+        if runtime_rel is not None or runtime_sha is not None:
+            if not isinstance(runtime_rel, str) or not isinstance(runtime_sha, str):
+                raise DirectLiveDispatcherError(
+                    "R2_DIRECT_LIVE_BASELINE_ACTIVATION_RUNTIME_BINDING_INVALID:"
+                    + route_id
+                )
+            _verify_blob(
+                root,
+                runtime_rel,
+                runtime_sha,
+                prefix="canonical/runtime/",
+                label=(
+                    "R2_DIRECT_LIVE_BASELINE_ACTIVATION_ROUTE_RUNTIME_"
+                    + route_id
+                ),
+            )
+    if len(activation_ids) != len(set(activation_ids)):
+        raise DirectLiveDispatcherError(
+            "R2_DIRECT_LIVE_BASELINE_ACTIVATION_ROUTE_ID_DUPLICATE"
+        )
+    if (
+        set(activation_ids) != set(declared_ids)
+        or len(activation_ids) != declared_count
+    ):
+        raise DirectLiveDispatcherError(
+            "R2_DIRECT_LIVE_BASELINE_ACTIVATION_ROUTE_SET_MISMATCH"
+        )
+
+    closure = baseline.get("runtime_closure")
+    if not isinstance(closure, list) or not closure:
+        raise DirectLiveDispatcherError(
+            "R2_DIRECT_LIVE_BASELINE_RUNTIME_CLOSURE_INVALID"
+        )
+    closure_paths: list[str] = []
+    for index, raw in enumerate(closure):
+        if not isinstance(raw, Mapping):
+            raise DirectLiveDispatcherError(
+                "R2_DIRECT_LIVE_BASELINE_CLOSURE_ROW_INVALID:" + str(index)
+            )
+        rel = str(raw.get("path") or "")
+        _verify_blob(
+            root,
+            rel,
+            raw.get("git_blob_sha"),
+            prefix="canonical/runtime/",
+            label="R2_DIRECT_LIVE_BASELINE_CLOSURE",
+        )
+        closure_paths.append(rel)
+    if len(closure_paths) != len(set(closure_paths)):
+        raise DirectLiveDispatcherError(
+            "R2_DIRECT_LIVE_BASELINE_CLOSURE_PATH_DUPLICATE"
+        )
+    if str(baseline.get("runtime_path")) not in set(closure_paths):
+        raise DirectLiveDispatcherError(
+            "R2_DIRECT_LIVE_BASELINE_RUNTIME_NOT_IN_CLOSURE"
+        )
 
     dynamic = state.get("dynamic_routes")
     if not isinstance(dynamic, list):
