@@ -897,6 +897,10 @@
     "frontiercode_owner_evaluation_access_refresh_20261009_v2": {
       "path": "canonical/governance/FRONTIERCODE_OWNER_EVALUATION_ACCESS_REFRESH_20261009_V2.json",
       "git_blob_sha": "2142821c2b443ea9bb1dfbe0a4dabd6e59a09b6b"
+    },
+    "frontiercode_owner_intake_routing_inquiry_20261009_v1": {
+      "path": "canonical/action_intents/FRONTIERCODE_OWNER_INTAKE_ROUTING_INQUIRY_20261009_V1.json",
+      "git_blob_sha": "e8f3b3d2aa334e002e4258c10b95ec15f569d90b"
     }
   },
   "live_truth": {
@@ -1423,7 +1427,15 @@
     "frontiercode_owner_admissible_brain_harness_bound": false,
     "frontiercode_zero_incremental_cost_terms_bound": false,
     "frontiercode_direct_owner_route_executable": false,
-    "frontiercode_current_classification": "INTERNAL_UNSOLVED__PENDING_ACQUISITION"
+    "frontiercode_current_classification": "INTERNAL_UNSOLVED__PENDING_ACQUISITION",
+    "frontiercode_owner_routing_inquiry_sent": true,
+    "frontiercode_owner_response_pending": true,
+    "frontiercode_exact_intake_channel_bound": false,
+    "frontiercode_brain_eligibility_bound": false,
+    "frontiercode_accepted_harness_or_adapter_bound": false,
+    "frontiercode_zero_cost_terms_bound": false,
+    "frontiercode_execution_authority": false,
+    "frontiercode_acquisition_state": "INTERNAL_UNSOLVED__PENDING_OWNER_INFORMATION"
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2416,6 +2428,19 @@
       "ZERO_INCREMENTAL_COST_TERMS"
     ],
     "externality_proved": false,
+    "execution_authority": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "frontiercode_owner_inquiry_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/action_intents/FRONTIERCODE_OWNER_INTAKE_ROUTING_INQUIRY_20261009_V1.json",
+      "git_blob_sha": "e8f3b3d2aa334e002e4258c10b95ec15f569d90b"
+    },
+    "result": "NONCOMMITTING_OWNER_ROUTING_INQUIRY_SENT__RESPONSE_PENDING",
+    "paid_commitment_authorized": false,
+    "score_bearing_evaluation_requested": false,
+    "incremental_spend_usd": 0,
     "execution_authority": false,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
