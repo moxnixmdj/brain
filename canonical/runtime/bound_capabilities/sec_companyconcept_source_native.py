@@ -381,5 +381,6 @@ def run(args: Mapping[str, Any], root: Any) -> dict[str, Any]:
         "custom_taxonomy_covered": False,
         "raw_prose_wsd_claimed": False,
         "terminal_authority": False,
-        "output_verified": True,
+        "output_verified": False,
+        "independent_verification_required": True,
     }
