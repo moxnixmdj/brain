@@ -287,7 +287,7 @@ def evaluate(problem:Mapping[str,Any])->dict[str,Any]:
         if scope_consistency_errors:
             return {
                 "schema":SCHEMA,
-                "status":"FAIL_CLOSED__MODELED_EFFECT_OUTSIDE_PROVED_SOURCE_SCOPE",
+                "status":"FAIL_CLOSED__MODELED_EFFECTS_INCONSISTENT_WITH_SOURCE_PROOF",
                 "pass":False,
                 "case_id":case_id,
                 "query_target_id":target,
