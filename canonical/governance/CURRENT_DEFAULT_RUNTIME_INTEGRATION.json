@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_DEFAULT_RUNTIME_INTEGRATION_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE__V57_BASELINE_PLUS_VERIFIED_V20_SUCCESSOR__STABLE_DYNAMIC_ROUTE_ADMISSION__AUTO_ONE_SHOT_FALLBACK__ZERO_TERMINAL_CREDIT",
+  "binding_semantics": "MUTABLE_CURRENT_PATH_IDENTITY__IMMUTABLE_LOAD_BEARING_DESCENDANTS_GIT_BLOB_BOUND",
+  "canonical_front_door": {
+    "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+    "git_blob_sha": "5eaea605c4e441ef33180bd76a951a9f973dc40f",
+    "auto_raw_goal_primary_mode": "ADEQUATE_DECISION",
+    "auto_one_shot_fallback_live": true,
+    "auto_one_shot_trigger": "AUTO_ADEQUATE_DECISION_UNRESOLVED__USER_CLARIFICATION_EXCLUDED",
+    "exact_original_decision_replay_required": true,
+    "externality_pass_is_not_task_success": true
+  },
+  "r2_default_route_runtime": {
+    "stable_wrapper_path": "canonical/runtime/r2_direct_live_admission_v1.py",
+    "stable_wrapper_git_blob_sha": "c995e4cad77e68268e18b059c97f00936283e6b6",
+    "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "fixed_point_controller_git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f",
+    "v57_activation_baseline": {
+      "runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v19.py",
+      "runtime_git_blob_sha": "39e7a6b7298b17d55e7bda551d6125c1f1c4000e",
+      "route_count": 39,
+      "role": "FROZEN_V57_ACTIVATION_AND_SCHEDULER_BASELINE__NOT_DEFAULT_RUNTIME_SOURCE_SELECTOR"
+    },
+    "verified_successor": {
+      "runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v20.py",
+      "runtime_git_blob_sha": "3a52b91efbfc9ca3c54fb6ffcb3b0cc270ab4699",
+      "adds_route_count": 1,
+      "static_default_route_count_before_dynamic": 40,
+      "verification_path": "canonical/verification/R2_COMPOSITIONAL_NATURAL_EFFECT_LATTICE_V20_VERIFY_20261009_V1.json",
+      "verification_git_blob_sha": "fa2e2b9e206cf3b2d168d0fc83e3e645d253aa46",
+      "verification_status": "VERIFIED_ISOLATED_CHANGED_AND_COMPATIBILITY_SURFACE__47_OF_47_PASS",
+      "fallback_preserved": "V19_EXACT_FALLBACK_FOR_NONMATCHING_REQUESTS"
+    },
+    "dynamic_admission": {
+      "current_pointer_path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
+      "pointer_path_identity_authoritative": true,
+      "current_manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V1.json",
+      "current_manifest_git_blob_sha": "f610fc1275a9241794328d649bcd507a44cdbab7",
+      "current_dynamic_route_count": 0,
+      "future_verified_route_requires_new_vN_source": false,
+      "collision_policy": "UNIQUE_DYNAMIC_MATCH_AND_NO_V20_MATCH_OR_SEMANTIC_OPEN__ELSE_FAIL_CLOSED"
+    }
+  },
+  "one_shot_fallback": {
+    "runtime_path": "canonical/runtime/one_shot_reality_closure_v2.py",
+    "runtime_git_blob_sha": "e4eb89ab3872a79837afd0e2a4bbc3f777b7a807",
+    "role": "AUTO_FALLBACK_AFTER_NORMAL_R2_DECISION__NOT_PRIMARY_ROUTER",
+    "fixed_point_success_required_before_replay": true,
+    "proven_externality_does_not_authorize_task_success": true,
+    "explicit_adequate_decision_auto_fallback": false,
+    "user_clarification_auto_fallback": false
+  },
+  "invariants": [
+    "NORMAL_AUTO_RAW_GOAL_ENTERS_ADEQUATE_DECISION_FIRST",
+    "V57_ACTIVATION_AND_SCHEDULER_BASELINE_REMAINS_39_ROUTE_SNAPSHOT",
+    "VERIFIED_V20_IS_THE_STATIC_DEFAULT_ROUTE_BACKEND_BEHIND_STABLE_WRAPPER",
+    "FUTURE_VERIFIED_ROUTES_ENTER_THROUGH_PROOF_CARRYING_DYNAMIC_ADMISSION_WITHOUT_NEW_VN_ROUTER_SOURCE",
+    "DYNAMIC_ROUTE_OVERLAP_WITH_V20_OR_OTHER_DYNAMIC_ROUTE_FAILS_CLOSED",
+    "ONE_SHOT_AUTO_FALLBACK_NEVER_CONVERTS_EXTERNALITY_PROOF_INTO_TASK_SUCCESS",
+    "TASK_SUCCESS_AFTER_ONE_SHOT_REQUIRES_EXACT_DECISION_REPLAY_PASS"
+  ],
+  "nonclaims": [
+    "NO_CLAIM_V57_SCHEDULER_SNAPSHOT_ROUTE_COUNT_CHANGED",
+    "NO_CLAIM_OPEN_WORLD_SEMANTIC_COMPLETENESS",
+    "NO_CLAIM_ARBITRARY_CAPABILITY_SYNTHESIS_CLOSED",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
