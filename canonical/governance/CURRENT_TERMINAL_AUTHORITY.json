@@ -944,6 +944,15 @@
         "status": "PASS__25_OF_25_REMOTE_BEHAVIORAL_AND_REGRESSION_TESTS__EXACT_V40_REBASED_BYTES__ZERO_TERMINAL_CREDIT"
       },
       "note": "EXACT_COMPLETE_BOUNDED_DENOTATION_SET_RELATIONS_ONLY__SOURCE_SCOPE_AND_COMPLETENESS_AUTHORITY_REMAIN_SEPARATE"
+    },
+    "cursorbench_scope_completeness_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_4_0_SCOPE_COMPLETENESS_RECEIPT_V1.json",
+      "git_blob_sha": "7401589da3b30954104145dc4959e534ab8cd641",
+      "independent_verification": {
+        "path": "canonical/verification/CURSORBENCH_4_0_SCOPE_COMPLETENESS_RECEIPT_INTEGRATION_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "baaaf4d676e1c7517f0238fd1d606673d99d23be"
+      },
+      "note": "SCOPE_ONLY__POSITIVE_ADEQUACY_DOMINANCE_EVALUATOR_RELATION_SCORE_AND_ACCEPTANCE_REMAIN_OPEN__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1493,7 +1502,13 @@
     "r2_source_backed_cross_document_residual_top_bound": true,
     "r2_cross_document_residual_top_proof_obligations_exposed_to_resolver": true,
     "r2_cross_document_residual_top_hints_have_semantic_truth_authority": false,
-    "r2_cross_document_residual_top_hints_have_terminal_authority": false
+    "r2_cross_document_residual_top_hints_have_terminal_authority": false,
+    "cursorbench_scope_completeness_proved": true,
+    "cursorbench_scope_complete_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "cursorbench_hidden_task_enumeration_required_for_scope": false,
+    "cursorbench_public_taxonomy_completeness_required_for_scope": false,
+    "cursorbench_positive_adequacy_cover_closed": false,
+    "cursorbench_dominance_closed": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2193,7 +2208,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 67,
+  "pointer_revision": 68,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2660,6 +2675,19 @@
     "primary_internal_unsolved_count": 1,
     "information_theoretic_externality_proved": false,
     "terminal_remains_false": true,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_scope_completeness_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_4_0_SCOPE_COMPLETENESS_RECEIPT_V1.json",
+      "git_blob_sha": "7401589da3b30954104145dc4959e534ab8cd641"
+    },
+    "verification": {
+      "path": "canonical/verification/CURSORBENCH_4_0_SCOPE_COMPLETENESS_RECEIPT_INTEGRATION_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "baaaf4d676e1c7517f0238fd1d606673d99d23be"
+    },
+    "result": "CURSORBENCH_4_0_SCOPE_COMPLETENESS_CLOSED__POSITIVE_ADEQUACY_AND_LATER_V4_CERTIFICATION_OPEN",
+    "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
 }
