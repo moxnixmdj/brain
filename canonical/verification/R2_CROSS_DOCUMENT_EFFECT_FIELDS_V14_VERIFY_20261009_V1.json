@@ -1,0 +1,180 @@
+{
+  "schema": "PROJECT_BRAIN_R2_CROSS_DOCUMENT_EFFECT_FIELDS_V14_VERIFY_V1",
+  "date": "2026-10-09",
+  "branch": "r2-effect-fields-v14-current2",
+  "branch_base_main_sha": "aaee23df2ddc657ce25b0cbc3f04d8c8fa504d9f",
+  "observed_current_main_sha": "51fb38efd33db1adeb20320ccb16582e43f336ed",
+  "capability": "QUERY_RELATIVE_INDEPENDENT_DOCUMENT_EFFECT_FIELD_REFINEMENT",
+  "status": "VERIFIED_ISOLATED_FULL_STACK__199_OF_199_PASS",
+  "theorem": {
+    "effect_existence_and_target": "SOURCE_PROVED_QUERY_TARGET_EFFECT_ID_INVENTORY_ANCHORS_THE_FINITE_EFFECT_ID_SET_AND_QUERY_TARGET",
+    "independent_coordinates": [
+      "effect_class",
+      "value",
+      "conditions",
+      "valid_from",
+      "valid_until",
+      "supersedes"
+    ],
+    "initial_state": "EVERY_UNPROVED_REQUIRED_COORDINATE_IS_TOP",
+    "refinement_law": "ONLY_SOURCE_ALIGNED_V9_FIELD_PROOFS_OR_A_STRONGER_V8_COMPLETE_RELATION_MAY_SHRINK_TOP",
+    "rejection_law": "ABSENT_REJECTED_OR_CONTRADICTORY_CLAIMS_NEVER_NARROW_TOP",
+    "partial_law": "FIVE_OF_SIX_PROVED_FIELDS_LEAVE_THE_SIXTH_FIELD_EXACTLY_TOP",
+    "assembly_law": "ALL_REQUIRED_FIELDS_MUST_BE_EXACT_THEN_THE_COMPLETE_EFFECT_IS_REVALIDATED_BY_THE_EXECUTION_CALCULUS_BEFORE_FINITE_WORLDSET_ADMISSION",
+    "target_consistency": "OPTIONAL_TARGET_ID_FIELD_MUST_EQUAL_THE_TARGET_ANCHORED_BY_THE_EFFECT_ID_INVENTORY",
+    "stronger_proof_law": "V8_COMPLETE_RELATION_REMAINS_A_SHORTCUT_BUT_ANY_V9_FIELD_PROOF_MUST_AGREE_WITH_IT",
+    "provenance_law": "FIELD_ASSEMBLED_SOURCE_LOCATOR_IS_DERIVED_FROM_SOURCE_ALIGNED_INVENTORY_AND_FIELD_EVIDENCE_NOT_CALLER_SUPPLIED",
+    "semantic_edge_interop": "V9_FIELD_ATOMS_CAN_FEED_SOURCE_ALIGNED_SEMANTIC_EDGE_AUTHORITY_AS_A_PLUGGABLE_SOURCE_PROOF_VERIFIER_WITHOUT_GAINING_EXECUTION_ACCEPTANCE_OR_TERMINAL_AUTHORITY",
+    "answer_law": "RETURN_A_VALUE_ONLY_AFTER_INDEPENDENT_FIELD_LATTICE_RECOMPUTATION_AND_FINITE_WORLDSET_CLOSURE"
+  },
+  "exact_changed_blobs": {
+    "canonical/runtime/certified_document_effect_field_v1.py": "b6823b61cede03fa90d39fe1a0d9c65efbc1843f",
+    "canonical/runtime/cross_document_effect_semantic_lattice_v2.py": "53a4d53bf7fd6500c3562bbc6f238c617c165824",
+    "canonical/runtime/cross_document_effect_semantic_lattice_verify_v2.py": "cae739f446f677579821470f73be8913354ead7d",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "7abd0a21dce07d877457309788b6d5bf13d9620e",
+    "canonical/runtime/r2_cross_document_effect_field_lattice_direct_adequacy_v1.py": "ae8c6a42f5b7879298123d2314b38eea18d6f908",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v14.py": "cf7c391c92264675d2082693e9161e7229225ba8",
+    "canonical/runtime/source_aligned_semantic_proof_v9.py": "a97ef4118070dec517b829b457e93bd64df2bce9",
+    "canonical/runtime/source_explicit_semantic_claim_autofill_v2.py": "7cba497279a646e3ccefee6138b4a87066ce0db7",
+    "canonical/tests/test_cross_document_effect_semantic_lattice_v2.py": "6a99243419ca4c95501c1296c9d87c64ffc0f441",
+    "canonical/tests/test_general_adequate_decision_fixed_point_v2.py": "6f2b29b59eac46a9d59c6ea8e4ef44b885f5a24c",
+    "canonical/tests/test_r2_cross_document_effect_field_lattice_direct_v1.py": "7df818ac256198802e0412535e61e1f1039869c2",
+    "canonical/tests/test_r2_direct_end_to_end_adequacy_v14.py": "f742fd2a4c8f5a50af23fe1a9cab49ecf9b2c0fe",
+    "canonical/tests/test_source_aligned_semantic_proof_v9.py": "56ed303476a6f740ef5c21c7c0c62a60a61ea3e2",
+    "canonical/tests/test_source_explicit_semantic_claim_autofill_v2.py": "0cacefd6dcf06d49cf9a796d92f43b88c0f0f5c2",
+    "canonical/tests/test_v14_source_aligned_semantic_edge_interop_v1.py": "4bc467d235193c74eada9429a3f4448854e126b6"
+  },
+  "isolated_verification": {
+    "sprite": "brain-r2-grounded-frontier-verify-20261008",
+    "core_effect_calculus": {
+      "passed": 6,
+      "failed": 0
+    },
+    "typed_effect_direct_route": {
+      "passed": 4,
+      "failed": 0
+    },
+    "correlated_effect_worldset": {
+      "passed": 11,
+      "failed": 0
+    },
+    "source_aligned_v7_scope_inventory": {
+      "passed": 10,
+      "failed": 0
+    },
+    "residual_top_frontier": {
+      "passed": 8,
+      "failed": 0
+    },
+    "byte_source_coverage_gate": {
+      "passed": 12,
+      "failed": 0
+    },
+    "combined_source_residual_frontier": {
+      "passed": 7,
+      "failed": 0
+    },
+    "source_aligned_v8_complete_relation": {
+      "passed": 8,
+      "failed": 0
+    },
+    "explicit_autofill_v1": {
+      "passed": 5,
+      "failed": 0
+    },
+    "semantic_lattice_v1": {
+      "passed": 13,
+      "failed": 0
+    },
+    "source_aligned_v9_fields": {
+      "passed": 8,
+      "failed": 0
+    },
+    "explicit_autofill_v2": {
+      "passed": 5,
+      "failed": 0
+    },
+    "semantic_field_lattice_v2": {
+      "passed": 12,
+      "failed": 0
+    },
+    "v14_field_lattice_direct_route": {
+      "passed": 4,
+      "failed": 0
+    },
+    "v13_complete_relation_direct_route": {
+      "passed": 5,
+      "failed": 0
+    },
+    "v10_worldset_route": {
+      "passed": 7,
+      "failed": 0
+    },
+    "v11_residual_route": {
+      "passed": 8,
+      "failed": 0
+    },
+    "v12_combined_route": {
+      "passed": 10,
+      "failed": 0
+    },
+    "v13_router": {
+      "passed": 3,
+      "failed": 0
+    },
+    "v14_router": {
+      "passed": 3,
+      "failed": 0
+    },
+    "fixed_point_v14": {
+      "passed": 29,
+      "failed": 0
+    },
+    "source_aligned_semantic_edge_authority": {
+      "passed": 11,
+      "failed": 0
+    },
+    "semantic_relation_entailment_dag": {
+      "passed": 8,
+      "failed": 0
+    },
+    "v14_semantic_edge_interop": {
+      "passed": 2,
+      "failed": 0
+    },
+    "total_passed": 199,
+    "total_failed": 0
+  },
+  "main_only_changes_after_branch_base": {
+    "commits_observed": 8,
+    "files": [
+      "canonical/evidence/CURSORBENCH_PUBLIC_SCORING_SEMANTICS_EVIDENCE_20261009_V1.json",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "canonical/governance/CURSORBENCH_ROUTE_A_PUBLIC_SCORING_BLOCKER_REDUCTION_20261009_V1.json",
+      "canonical/tests/test_current_terminal_cursorbench_public_scoring_reduction_v1.py",
+      "canonical/tests/test_cursorbench_route_a_public_scoring_blocker_reduction_v1.py",
+      "canonical/verification/CURSORBENCH_ROUTE_A_PUBLIC_SCORING_BLOCKER_REDUCTION_INDEPENDENT_VERIFICATION_20261009_V1.json"
+    ],
+    "overlap_with_v14_or_cross_document_runtime": false
+  },
+  "nonclaims": [
+    "NO_GLOBAL_ARBITRARY_NATURAL_LANGUAGE_TO_EFFECT_FIELD_EXTRACTION_CLOSURE",
+    "NO_UNPROVED_EFFECT_FIELD",
+    "NO_CROSS_FIELD_INFERENCE_BEFORE_ALL_REQUIRED_COORDINATES_ARE_EXACT",
+    "NO_IMPLICIT_PRECEDENCE_INFERENCE",
+    "NO_EXTERNAL_WORLD_TRUTH",
+    "NO_TERMINAL_CREDIT_FROM_TEST_PASS_COUNT"
+  ],
+  "architectural_result": [
+    "MONOLITHIC_EFFECT_RELATION_TOP_IS_REFINED_INTO_INDEPENDENT_FIELD_TOP_COORDINATES",
+    "EXACT_MISSING_SEMANTIC_FIELD_IS_NOW_THE_RESOLVER_OBLIGATION",
+    "FULL_RELATION_PROOFS_AND_FIELD_PROOFS_COEXIST_WITH_CONFLICTS_FAILING_CLOSED",
+    "V9_FIELD_PROOFS_INTEROPERATE_WITH_THE_NEW_SOURCE_ALIGNED_SEMANTIC_EDGE_AUTHORITY",
+    "V14_PRESERVES_V13_AS_NONINTERCEPTED_FALLBACK"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
