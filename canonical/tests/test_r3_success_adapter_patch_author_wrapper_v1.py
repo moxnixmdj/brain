@@ -5,6 +5,7 @@ from tempfile import TemporaryDirectory
 import unittest
 
 from canonical.runtime import r3_root1_adapter_gap_witness_v1 as gap_witness
+from canonical.runtime import r3_success_adapter_author_context_v1 as author_context
 from canonical.runtime import r3_success_adapter_patch_author_wrapper_v1 as wrapper
 from canonical.runtime import r3_success_adapter_patch_firewall_v1 as firewall
 
@@ -27,6 +28,24 @@ def _fixture(root: Path) -> None:
 
 
 def _gap(root: Path) -> dict:
+    redacted = author_context.compile_context(
+        {
+            "proof_capsule_sha256": "a" * 64,
+            "material": {
+                "source_schema": "TEST_SUCCESS",
+                "source_status": "PASS",
+                "selected_plan": ["test.capability"],
+                "verified_target_effects": ["test.effect"],
+            },
+        },
+        {
+            "replay_capsule_sha256": "b" * 64,
+            "context": {
+                "mode": "specialized",
+                "request": {"task_id": "t", "goal": "SECRET_GOAL"},
+            },
+        },
+    )
     adapter_sha = gap_witness._frontier_sha256(
         gap_witness.SUCCESS_ADAPTER_FRONTIER_PATHS,
         repo_root=root,
@@ -48,6 +67,7 @@ def _gap(root: Path) -> dict:
         "witness": {
             "adapter_frontier_sha256": adapter_sha,
             "verification_authority_sha256": authority_sha,
+            "adapter_author_context_sha256": redacted["context_sha256"],
         },
         "gap_evidence": {
             "required_behavior": (
@@ -55,6 +75,7 @@ def _gap(root: Path) -> dict:
                 "independent verification authority."
             )
         },
+        "adapter_author_context": redacted,
         "adapter_frontier_sha256": adapter_sha,
         "verification_authority_sha256": authority_sha,
     }
@@ -87,6 +108,20 @@ class R3SuccessAdapterPatchAuthorWrapperV1Tests(unittest.TestCase):
         rendered = repr(packet)
         self.assertIn("old bound", rendered)
         self.assertIn("old raw", rendered)
+        self.assertIn("adapter_author_context", packet)
+        self.assertEqual(
+            packet["adapter_author_context_sha256"],
+            packet["adapter_author_context"]["context_sha256"],
+        )
+        self.assertEqual(
+            packet["adapter_author_context"]["replay"]["mode"],
+            "specialized",
+        )
+        self.assertIn(
+            "goal",
+            packet["adapter_author_context"]["replay"]["request_keys"],
+        )
+        self.assertNotIn("SECRET_GOAL", rendered)
         self.assertNotIn("IMMUTABLE_VERIFIER_SECRET_MARKER", rendered)
         self.assertEqual(
             packet["immutable_verification_paths"],
@@ -95,6 +130,19 @@ class R3SuccessAdapterPatchAuthorWrapperV1Tests(unittest.TestCase):
         self.assertFalse(packet["patch_application_authority"])
         self.assertFalse(packet["source_write_authority"])
         self.assertFalse(packet["verification_authority"])
+
+    def test_missing_redacted_author_context_fails_closed(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            _fixture(root)
+            gap = _gap(root)
+            gap.pop("adapter_author_context")
+            out = wrapper.build_author_packet(gap, repo_root=root)
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["reason"],
+            "COMPILED_GAP_AUTHOR_CONTEXT_MISSING_OR_INVALID",
+        )
 
     def test_stale_adapter_frontier_fails_before_authoring(self):
         with TemporaryDirectory() as td:
