@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINAL_DECISION_VERIFY_CERTIFICATE_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "status": "PASS__TWO_CARRIERS__CERTIFICATE_AND_EPOCH_IDENTICAL__ROUTE_D_FINAL__LIVE_FRONT_DOOR_BINDING_OPEN__ZERO_CURRENT_OWNERSHIP_CREDIT",
+  "capability_id": "bound:decision.synthesis.verify.stdlib",
+  "certificate": {
+    "path": "canonical/verification/D_FINAL_DECISION_VERIFY_CERTIFICATE_CANDIDATE_20261009_V1.json",
+    "certificate_sha256": "090d08fd8d2945cbdef685c6d401ba0c5cc5e482fcf637f821da5dcc3cc91802",
+    "material_closure_root": "e74911d0128ab7356902ad3d56be87a4fbdc9ceafa0a2d5e7427dbe766ba3109",
+    "policy_sha256": "a39902b2a0c49b2dde625e513e87bb2400e7bd3306017686a9ee8df8ab61a359",
+    "execution_epoch_sha256": "71d97000449339a6436cf4ac6b8aedaea051447bb6ca6b066ea450ac64fd087b"
+  },
+  "carrier_1": {
+    "provider": "SPRITES",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "result": "PASS",
+    "observed_certificate_sha256": "090d08fd8d2945cbdef685c6d401ba0c5cc5e482fcf637f821da5dcc3cc91802",
+    "observed_policy_sha256": "a39902b2a0c49b2dde625e513e87bb2400e7bd3306017686a9ee8df8ab61a359",
+    "observed_material_closure_root": "e74911d0128ab7356902ad3d56be87a4fbdc9ceafa0a2d5e7427dbe766ba3109",
+    "observed_epoch_sha256": "71d97000449339a6436cf4ac6b8aedaea051447bb6ca6b066ea450ac64fd087b"
+  },
+  "carrier_2": {
+    "provider": "SPRITES",
+    "name": "brain-r3-root1-gap-verify-20261008",
+    "id": "sprite-91472ada-4fea-4536-9558-7a7e3da49928",
+    "result": "PASS",
+    "observed_certificate_sha256": "090d08fd8d2945cbdef685c6d401ba0c5cc5e482fcf637f821da5dcc3cc91802",
+    "observed_policy_sha256": "a39902b2a0c49b2dde625e513e87bb2400e7bd3306017686a9ee8df8ab61a359",
+    "observed_material_closure_root": "e74911d0128ab7356902ad3d56be87a4fbdc9ceafa0a2d5e7427dbe766ba3109",
+    "observed_epoch_sha256": "71d97000449339a6436cf4ac6b8aedaea051447bb6ca6b066ea450ac64fd087b"
+  },
+  "independence": {
+    "distinct_carrier_ids": true,
+    "certificate_identity_equal": true,
+    "policy_identity_equal": true,
+    "material_closure_identity_equal": true,
+    "execution_epoch_identity_equal": true
+  },
+  "truth_boundary": {
+    "route_d_final": true,
+    "live_front_door_bound": false,
+    "current_live_d_final_owned": false,
+    "reason": "THE_CERTIFIED_ROUTE_EXISTS_AND_VERIFIES_BUT_THE_CANONICAL_LIVE_CAPABILITY_FRONT_DOOR_HAS_NOT_YET_BEEN_SWITCHED_TO_THIS_ROUTE"
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "ownership": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
