@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V36",
   "date": "2026-10-09",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V60_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__EXECUTABLE_REFINEMENT_STRUCTURAL_ANTI_BYPASS__RUNTIME_BYTE_BINDING_COHERENT__EXECUTABLE_REFINEMENT_SEMANTIC_CLOSURE_OPEN",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V60_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__EXECUTABLE_REFINEMENT_STRUCTURAL_ANTI_BYPASS__RUNTIME_BYTE_BINDING_COHERENT__EXECUTABLE_REFINEMENT_SEMANTIC_CLOSURE_OPEN__FINITE_DOMAIN_SEMANTIC_REFINEMENT_PROOF_ROUTE_VERIFIED__RUNTIME_CENSUS_PENDING",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -1336,7 +1336,7 @@
     },
     "executable_refinement_terminal_dependency_graph": {
       "path": "canonical/governance/CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1.json",
-      "git_blob_sha": "531b9a395f59c37a105a47252182de34d55825ec",
+      "git_blob_sha": "21d6e379a8b188eef1084f4de8d14c43f639e82d",
       "note": "STRUCTURAL_DEPENDENCY_INVENTORY__GRAPH_COMPLETENESS_NOT_SELF_PROVED__ZERO_TERMINAL_CREDIT"
     },
     "executable_refinement_structural_verifier": {
@@ -1363,6 +1363,18 @@
       "path": "canonical/verification/CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS_REBASED_VERIFY_20261009_V1.json",
       "git_blob_sha": "b51d107ce4230a60db2866a3e519a3d9c840eb59",
       "note": "EXACT_REBASED_GIT_TREE_CENSUS__ZERO_DRIFT_ZERO_MISSING_ZERO_CONFLICTS__BYTE_COHERENCE_ONLY"
+    },
+    "finite_exhaustive_refinement_checker": {
+      "path": "canonical/runtime/finite_exhaustive_refinement_checker_v1.py",
+      "git_blob_sha": "3f8082f94144489aebcc607e6373baaffff4d46e",
+      "proof_class": "EXHAUSTIVE_FINITE_DOMAIN_TRACE_REFINEMENT",
+      "scope": "EXACT_DECLARED_FINITE_INPUT_DOMAIN",
+      "note": "CHECKS_CONTENT_ADDRESSED_ABSTRACT_SPEC_CONCRETE_IMPLEMENTATION_AND_INDEPENDENT_EXHAUSTIVE_TRACE__DOES_NOT_EXECUTE_CONCRETE_CODE"
+    },
+    "finite_exhaustive_refinement_checker_verification": {
+      "path": "canonical/verification/FINITE_EXHAUSTIVE_REFINEMENT_CHECKER_SPRITE_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "5562af00848068d331fbd48c03486030a22635d4",
+      "note": "EXACT_BLOBS__PY_COMPILE_PASS__12_OF_12_UNITTEST_PASS__ZERO_TERMINAL_CREDIT"
     }
   },
   "live_truth": {
@@ -2185,10 +2197,10 @@
     "creditable_selected_route_refinement_admission_enforced": true,
     "repository_wide_executable_refinement_closed": false,
     "non_selected_runtime_executable_refinement_coverage_closed": false,
-    "executable_refinement_semantic_proof_route_closed": false,
+    "executable_refinement_semantic_proof_route_closed": true,
     "executable_refinement_missing_is_external_impossibility": false,
-    "current_authority_runtime_byte_binding_coherence": true,
-    "current_authority_runtime_binding_classification": "PASS__CURRENT_RUNTIME_BYTE_BINDINGS_COHERENT__SEMANTIC_REFINEMENT_AND_R1_FULL_LIFECYCLE_REPLAY_SEPARATE",
+    "current_authority_runtime_byte_binding_coherence": false,
+    "current_authority_runtime_binding_classification": "INTERNAL_RECHECK_REQUIRED__FINITE_REFINEMENT_CHECKER_ADDED_AS_CURRENT_RUNTIME_DEPENDENCY__EXACT_TREE_CENSUS_PENDING",
     "current_authority_runtime_drift_is_external_impossibility": false,
     "r1_current_byte_drift_lock_valid": false,
     "current_authority_runtime_binding_reference_count": 50,
@@ -2199,7 +2211,12 @@
     "current_authority_runtime_drift_unique_path_count": 0,
     "current_authority_runtime_missing_blob_binding_count": 0,
     "current_authority_runtime_missing_file_count": 0,
-    "current_authority_runtime_conflicting_path_count": 0
+    "current_authority_runtime_conflicting_path_count": 0,
+    "executable_refinement_finite_domain_semantic_proof_route_verified": true,
+    "executable_refinement_semantic_proof_route_scope": "EXACT_DECLARED_FINITE_INPUT_DOMAIN_ONLY",
+    "executable_refinement_general_open_world_semantic_proof_route_closed": false,
+    "executable_refinement_liveness_proof_route_closed": false,
+    "terminal_executable_refinement_gap_closed": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2369,7 +2386,10 @@
     "NO_CLAIM_STRUCTURAL_FRAMEWORK_REPLAY_PROVES_SEMANTIC_EXECUTABLE_REFINEMENT.",
     "NO_CLAIM_RUNTIME_BYTE_REBIND_PROVES_RUNTIME_SEMANTICS_OR_TERMINALITY.",
     "NO_CLAIM_CURRENT_UNIFIED_FABRIC_DEFAULT_RUNTIME_REPLAY_REPROVES_FULL_R1_LIFECYCLE_CLOSURE.",
-    "NO_CLAIM_BYTE_BINDING_COHERENCE_IS_TRUE_UNTIL_POST_REBIND_TREE_CENSUS_PASSES."
+    "NO_CLAIM_BYTE_BINDING_COHERENCE_IS_TRUE_UNTIL_POST_REBIND_TREE_CENSUS_PASSES.",
+    "NO_CLAIM_FINITE_EXHAUSTIVE_TRACE_REFINEMENT_GENERALIZES_OUTSIDE_THE_DECLARED_FINITE_DOMAIN.",
+    "NO_CLAIM_FINITE_EXHAUSTIVE_TRACE_REFINEMENT_PROVES_LIVENESS.",
+    "NO_CLAIM_FINITE_EXHAUSTIVE_TRACE_REFINEMENT_CLOSES_REPOSITORY_WIDE_EXECUTABLE_REFINEMENT."
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -2918,7 +2938,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 111,
+  "pointer_revision": 112,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4166,17 +4186,20 @@
     "terminal_dependency_graph_bound": true,
     "creditable_route_anti_bypass_guard_implemented": true,
     "structural_framework_execution_verified": true,
-    "semantic_proof_route_closed": false,
+    "semantic_proof_route_closed": true,
     "non_selected_runtime_refinement_coverage_closed": false,
     "runtime_byte_rebind_proof_bound": true,
-    "current_authority_runtime_byte_binding_coherence": true,
-    "current_authority_runtime_binding_census_pending": false,
+    "current_authority_runtime_byte_binding_coherence": false,
+    "current_authority_runtime_binding_census_pending": true,
     "external_impossibility_claimed": false,
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0,
     "current_authority_runtime_binding_census_verified": true,
     "current_authority_runtime_drift_reference_count": 0,
     "current_authority_runtime_missing_blob_binding_count": 0,
-    "current_authority_runtime_conflicting_path_count": 0
+    "current_authority_runtime_conflicting_path_count": 0,
+    "semantic_proof_route_scope": "EXACT_DECLARED_FINITE_INPUT_DOMAIN_ONLY",
+    "general_open_world_semantic_proof_route_closed": false,
+    "liveness_proof_route_closed": false
   }
 }
