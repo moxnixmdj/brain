@@ -93,6 +93,7 @@ class TerminalAutopilotTests(unittest.TestCase):
                 for x in out["dispatch"]
                 if x["kind"] == "ROUTE_RACE"
             }
+            self.assertIn("ADAPTIVE_ESCAPE_PROGRESS_TOTALITY", routes)
             self.assertIn("SCOPE_COMPLETE_UNIVERSAL_COVER", routes)
             self.assertIn("OBJECTIVE_ACCEPTANCE_COMMON_LAW", routes)
             self.assertNotIn("CODING_TRIAD_SCOPE_COMPLETE_COVER", routes)
@@ -146,6 +147,7 @@ class TerminalAutopilotTests(unittest.TestCase):
                 for x in out["dispatch"]
                 if x["kind"] == "ROUTE_RACE"
             }
+            self.assertIn("ADAPTIVE_ESCAPE_PROGRESS_TOTALITY", routes)
             self.assertIn("SCOPE_COMPLETE_UNIVERSAL_COVER", routes)
 
     def test_repo_mode_allows_science_intent_only_with_live_authority(self):
@@ -172,7 +174,7 @@ class TerminalAutopilotTests(unittest.TestCase):
             self.assertEqual(len(built["blockers"]), 0)
 
 
-    def test_repo_mode_penalizes_unproved_universal_route_by_verified_missing_premises(self):
+    def test_repo_mode_ranks_verified_adaptive_escape_progress_route_first(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             q = root / "canonical/governance"
@@ -181,6 +183,9 @@ class TerminalAutopilotTests(unittest.TestCase):
                 json.dumps({"independent_open_obligations": OPEN}), encoding="utf-8")
             (q / "CURRENT_TERMINAL_AUTHORITY.json").write_text(json.dumps({
                 "live_truth": {
+                    "adaptive_terminal_or_progress_cover_theorem_bound": True,
+                    "adaptive_terminal_policy_safety_premise_bound": True,
+                    "current_escape_progress_totality_proved": False,
                     "generator_basis_scope_complete_proved": False,
                     "generator_transforms_abc_preserving_proved": False,
                     "generator_closure_equals_trace_scope_proved": False,
@@ -189,6 +194,19 @@ class TerminalAutopilotTests(unittest.TestCase):
 
             built = build_manifest_from_repo(root, max_concurrency=1)
             by_id = {row["id"]: row for row in built["routes"]}
+
+            adaptive = by_id["ADAPTIVE_ESCAPE_PROGRESS_TOTALITY"]
+            self.assertEqual(adaptive["estimated_wall_clock_units"], 1.0)
+            self.assertEqual(
+                adaptive["missing_verified_premises"],
+                ["current_escape_progress_totality_proved"],
+            )
+            self.assertEqual(
+                adaptive["wall_clock_basis"],
+                "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND",
+            )
+            self.assertEqual(set(adaptive["can_discharge"]), set(OPEN))
+
             universal = by_id["SCOPE_COMPLETE_UNIVERSAL_COVER"]
             self.assertEqual(universal["estimated_wall_clock_units"], 3.0)
             self.assertEqual(
@@ -199,33 +217,16 @@ class TerminalAutopilotTests(unittest.TestCase):
                     "generator_closure_equals_trace_scope_proved",
                 },
             )
-            self.assertEqual(
-                universal["wall_clock_basis"],
-                "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND",
-            )
 
             objective = by_id["OBJECTIVE_ACCEPTANCE_COMMON_LAW"]
             self.assertEqual(objective["estimated_wall_clock_units"], 4.0)
-            self.assertEqual(
-                set(objective["missing_verified_premises"]),
-                {
-                    "objective_acceptance_common_law_brain_routes_exactly_bound",
-                    "objective_acceptance_common_law_relations_exactly_bound",
-                    "objective_acceptance_common_law_brain_bounds_at_target_or_top_proved",
-                    "objective_acceptance_common_law_scope_completeness_proved",
-                },
-            )
-            self.assertEqual(
-                objective["wall_clock_basis"],
-                "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND",
-            )
 
             out = plan(built)
             self.assertEqual(len(out["dispatch"]), 1)
             self.assertEqual(out["dispatch"][0]["kind"], "ROUTE_RACE")
             self.assertEqual(
                 out["dispatch"][0]["route_id"],
-                "SCOPE_COMPLETE_UNIVERSAL_COVER",
+                "ADAPTIVE_ESCAPE_PROGRESS_TOTALITY",
             )
 
 
@@ -269,7 +270,11 @@ class TerminalAutopilotTests(unittest.TestCase):
             built = build_manifest_from_repo(root)
             self.assertTrue(built["one_shot_attack_graph"])
             by_id = {row["id"]: row for row in built["routes"]}
-            self.assertEqual(len(by_id), 6)
+            self.assertEqual(len(by_id), 7)
+            self.assertEqual(
+                set(by_id["ADAPTIVE_ESCAPE_PROGRESS_TOTALITY"]["can_discharge"]),
+                set(OPEN),
+            )
             self.assertEqual(
                 set(by_id["SCOPE_COMPLETE_UNIVERSAL_COVER"]["can_discharge"]),
                 set(OPEN),
@@ -294,6 +299,7 @@ class TerminalAutopilotTests(unittest.TestCase):
             self.assertEqual(
                 rankable,
                 {
+                    "ADAPTIVE_ESCAPE_PROGRESS_TOTALITY",
                     "SCOPE_COMPLETE_UNIVERSAL_COVER",
                     "OBJECTIVE_ACCEPTANCE_COMMON_LAW",
                 },
