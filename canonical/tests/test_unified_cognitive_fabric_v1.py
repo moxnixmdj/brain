@@ -48,6 +48,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("OWNERSHIP_CATALOG", c["engines"])
         self.assertIn("SEMANTIC_AMBIGUITY", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
+        self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -211,6 +212,53 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             "CURRENT_DECISION_SUBSTITUTION",
         )
         self.assertFalse(out["result"]["proved_facts"]["semantic_identity"])
+
+
+    def test_auto_semantic_relation_task_equivalence_without_global_synonymy(self):
+        out = run({
+            "payload": {
+                "expression_a": "reserve buffer",
+                "expression_b": "liquidity cushion",
+                "required_relation": "TASK_EQUIVALENCE",
+                "evidence": {},
+                "task_terminal_rows": [
+                    {
+                        "raw_id": "A",
+                        "signature_complete": True,
+                        "terminal_signature": {"action": "REDUCE", "threshold": 10},
+                    },
+                    {
+                        "raw_id": "B",
+                        "signature_complete": True,
+                        "terminal_signature": {"action": "REDUCE", "threshold": 10},
+                    },
+                ],
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["strongest_proved_relation"],
+            "TASK_EQUIVALENT",
+        )
+
+    def test_auto_semantic_relation_similarity_never_becomes_equivalence(self):
+        out = run({
+            "payload": {
+                "expression_a": "reserve buffer",
+                "expression_b": "liquidity cushion",
+                "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+                "evidence": {"embedding_similarity": 0.999},
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertFalse(out["inner_pass"])
+        self.assertEqual(
+            out["result"]["reason"],
+            "UNSAFE_SIMILARITY_EVIDENCE_CANNOT_GRANT_SEMANTIC_RELATION",
+        )
 
     def test_capability_scheduler_is_inside_fabric(self):
         out = run({
