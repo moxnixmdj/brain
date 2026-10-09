@@ -1,0 +1,13 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINALITY_POLICY_V1",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "semantic_version": "2026-10-09-live-v1",
+  "scope": "LIVE_FRONT_DOOR",
+  "spatial_law": "CHILD_AUTHORITY_MAY_ONLY_SHRINK",
+  "temporal_law": "SAME_EPOCH_AUTHORITY_MAY_NOT_WIDEN",
+  "material_law": "LOAD_BEARING_BYTES_MUST_MATCH_EXACT_GIT_BLOBS",
+  "knowledge_law": "UNDECLARED_EXTERNAL_KNOWLEDGE_OR_CAPABILITY_CHANNELS_FORBIDDEN",
+  "effect_law": "UNDECLARED_MATERIAL_EFFECT_CHANNELS_FORBIDDEN",
+  "revoked_certificate_sha256": [],
+  "policy_sha256": "eceb3f27c47ae4c0ac452e595f00b0d7d89fb895b5740e2a1d8c456847e994b1"
+}
