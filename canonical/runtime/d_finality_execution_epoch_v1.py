@@ -263,6 +263,10 @@ def verify_certificate(
     )
 
 
+def has_active_epoch() -> bool:
+    return _ACTIVE_EPOCH.get() is not None
+
+
 def current_epoch() -> DExecutionEpoch:
     epoch = _ACTIVE_EPOCH.get()
     if epoch is None:
