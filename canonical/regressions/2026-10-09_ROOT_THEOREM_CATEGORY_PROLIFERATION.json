@@ -9,7 +9,11 @@
     "FALSE_SUCCESS_WITHOUT_ROOT_LOCALIZATION_OR_BINDING_REOPEN",
     "META_MECHANISM_WITH_ZERO_ROOT_DELTA_AND_ZERO_PROOF_COST_DELTA",
     "MUTATION_SCORE_ONE_TREATED_AS_UNIVERSAL_PROOF",
-    "ARCHITECTURE_SELF_CHECK_TREATED_AS_TERMINAL_CREDIT"
+    "ARCHITECTURE_SELF_CHECK_TREATED_AS_TERMINAL_CREDIT",
+    "STALE_MISSION_POINTER_BLOB_ACCEPTED_AS_CURRENT_R4",
+    "ROOT_THEOREM_PRESENT_IN_REPO_BUT_NOT_BOUND_IN_LIVE_AUTHORITY",
+    "BOOLEAN_ROOT_ASSERTION_SELF_AUTHENTICATES_TERMINAL_CREDIT",
+    "FALSE_SUCCESS_IMMEDIATELY_CREATES_NEW_ROOT_BEFORE_R4_BINDING_REOPEN"
   ],
   "seeds": [
     {
@@ -41,9 +45,29 @@
       "id": "REDUNDANT_META",
       "input": "root_gap=false,proof_cost_reduction=0",
       "expect": "REJECT_REDUNDANT_META_MECHANISM"
+    },
+    {
+      "id": "R4_STALE_MISSION_POINTER",
+      "input": "authority mission blob != current mission blob",
+      "expect": "FAIL_CLOSED__R4_LIVE_BINDING_DRIFT"
+    },
+    {
+      "id": "R4_MISSING_LIVE_ROOT_BINDING",
+      "input": "live authority omits content-addressed root binding",
+      "expect": "FAIL_CLOSED__R4_LIVE_BINDING_DRIFT"
+    },
+    {
+      "id": "R4_STALE_ROOT_BINDING",
+      "input": "binding manifest root blob != current root theorem blob",
+      "expect": "FAIL_CLOSED__R4_LIVE_BINDING_DRIFT"
     }
   ],
   "runtime": "canonical/runtime/root_theorem_falsifier_v1.py",
   "tests": "canonical/tests/test_root_theorem_falsifier_v1.py",
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "enforcement": {
+    "live_binding_runtime": "canonical/runtime/root_theorem_live_binding_v1.py",
+    "live_binding_tests": "canonical/tests/test_root_theorem_live_binding_v1.py",
+    "live_binding_verification": "canonical/verification/R4_LIVE_AUTHORITY_BINDING_VERIFICATION_20261009_V1.json"
+  }
 }
