@@ -2,8 +2,9 @@
 
 V5 preserves V4 and routes semantic-edge field proofs through the Brain-owned relation registry via
 source_aligned_semantic_proof_v12. Edge-derived fields refine TOP only when the
-caller supplies a relation_verifier that independently recomputes the scoped
-entailment DAG. Without that verifier, those claims stay rejected/TOP.
+scoped entailment DAG is independently recomputed by either an explicit caller
+verifier or the Brain-owned supported-proof registry. Unsupported evidence
+without a verifier remains rejected/TOP.
 
 For every effect ID in a source-proved query-target inventory:
 - target_id is anchored by that inventory;
@@ -24,7 +25,7 @@ from hashlib import sha256
 import json
 from typing import Any, Callable, Mapping, Sequence
 
-from canonical.runtime.source_aligned_semantic_proof_v11 import verify_proof
+from canonical.runtime.source_aligned_semantic_proof_v12 import verify_proof
 from canonical.runtime.source_semantic_claim_autofill_v3 import (
     synthesize_missing_claims,
 )
