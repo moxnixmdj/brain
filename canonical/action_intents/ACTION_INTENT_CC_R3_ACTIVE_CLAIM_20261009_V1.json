@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CC_R3_ACTIVE_CLAIM_20261009_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_PROOF_ONLY__ZERO_CREDIT",
+  "canonical_base_commit": "f1e70ddb77cabd07e323733a1cfd0f508694d3e0",
+  "action_kind": "FREEZE_EXACT_CHECKPOINT_CLAIM_AND_ATTACK_CC_R3",
+  "claim_id": "b90441f2ddd0a4075c5cdf3c0989eec164398a5d4a40859318adeb6de199d4af",
+  "claim_kind": "CHECKPOINT_ACCEPTANCE",
+  "mission_blob_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
+  "scope_sha256": "e7461e484491196b40ebf88b7840fe17fb464be83f7a74d13363cd0427c665c9",
+  "target_predicate_sha256": "24820adb64697831d6ef7b13ea471c6f23a6fc1b995a7f15deb3f65963b8c0ba",
+  "semantics_sha256": "23f751d176aab576fb26b0d7fdf5a12b8763c02230525ee1ae30ebc1006aa856",
+  "epoch": "2026-10-09-CCRT-R3-CLAIM-V1",
+  "authority_id": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_CHECKPOINT_OBJECTIVE",
+  "objective": "Bind one exact checkpoint claim, then prove U empty or emit a claim-bound R3 witness.",
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
