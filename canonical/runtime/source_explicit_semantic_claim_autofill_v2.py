@@ -63,6 +63,39 @@ def synthesize_missing_claims(
     if len(existing_claims)>MAX_COMBINED_CLAIMS:
         return _fail("EXISTING_CLAIM_COUNT_EXCEEDS_BOUND")
 
+    occupied=set()
+    existing_relation_effect_ids=set()
+    existing_dimension_effect_ids=set()
+    block_all_dimensions=False
+    block_all_relations_from_dimensions=False
+    all_existing_ids=set()
+    for row in existing_claims:
+        if not isinstance(row,Mapping):
+            continue
+        cid=row.get("claim_id")
+        if isinstance(cid,str) and cid:
+            all_existing_ids.add(cid)
+        kind=row.get("kind")
+        if kind=="CERTIFIED_DOCUMENT_EFFECT_RELATION":
+            effect=row.get("effect")
+            eid=effect.get("effect_id") if isinstance(effect,Mapping) else None
+            if isinstance(eid,str) and eid.strip():
+                existing_relation_effect_ids.add(eid.strip())
+            else:
+                block_all_dimensions=True
+        elif kind=="CERTIFIED_DOCUMENT_EFFECT_DIMENSION":
+            eid=row.get("effect_id"); dim=row.get("dimension")
+            if (
+                isinstance(eid,str) and eid.strip()
+                and isinstance(dim,str) and dim in _ALLOWED_DIMS
+            ):
+                eid=eid.strip()
+                occupied.add((eid,dim))
+                existing_dimension_effect_ids.add(eid)
+            else:
+                block_all_dimensions=True
+                block_all_relations_from_dimensions=True
+
     base=synthesize_v1(
         source_text,
         source_id=source_id,
@@ -71,36 +104,39 @@ def synthesize_missing_claims(
     if base.get("pass") is not True:
         return _fail("V1_AUTOFILL_FAIL_CLOSED:"+str(base.get("reason") or "UNKNOWN"))
 
-    base_rows=list(base.get("synthesized_claims") or [])
-    occupied=set()
-    block_all=False
-    all_ids=set()
-    for row in list(existing_claims)+base_rows:
+    raw_base_rows=list(base.get("synthesized_claims") or [])
+    base_rows=[]
+    for row in raw_base_rows:
         if not isinstance(row,Mapping):
             continue
+        if row.get("kind")=="CERTIFIED_DOCUMENT_EFFECT_RELATION":
+            effect=row.get("effect")
+            eid=effect.get("effect_id") if isinstance(effect,Mapping) else None
+            if block_all_relations_from_dimensions:
+                continue
+            if isinstance(eid,str) and eid in existing_dimension_effect_ids:
+                continue
+        base_rows.append(dict(row))
+
+    all_ids=set(all_existing_ids)
+    for row in base_rows:
         cid=row.get("claim_id")
         if isinstance(cid,str) and cid:
             all_ids.add(cid)
-        if row.get("kind")!="CERTIFIED_DOCUMENT_EFFECT_DIMENSION":
-            continue
-        eid=row.get("effect_id"); dim=row.get("dimension")
-        if (
-            isinstance(eid,str) and eid.strip()
-            and isinstance(dim,str) and dim in _ALLOWED_DIMS
-        ):
-            occupied.add((eid.strip(),dim))
-        else:
-            block_all=True
 
     parsed=parse_effect_dimensions(source_text,source=source_id)
     dimension_rows=[]
-    if not block_all and parsed.get("status")=="PARSED":
+    if not block_all_dimensions and parsed.get("status")=="PARSED":
         for row in parsed.get("dimensions") or []:
             if not isinstance(row,Mapping):
                 continue
             eid=str(row.get("effect_id") or "")
             dim=str(row.get("dimension") or "")
-            if not eid or dim not in _ALLOWED_DIMS or (eid,dim) in occupied:
+            if not eid or dim not in _ALLOWED_DIMS:
+                continue
+            if eid in existing_relation_effect_ids:
+                continue
+            if (eid,dim) in occupied:
                 continue
             claim={
                 "claim_id":_claim_id(source_id,eid,dim,row.get("value")),
@@ -123,7 +159,9 @@ def synthesize_missing_claims(
         "primitive":"CERTIFIED_DOCUMENT_EFFECT_DIMENSION",
         "parse_status":parsed.get("status"),
         "parse_reason":parsed.get("reason"),
-        "autofill_blocked_by_malformed_existing_dimension_claim":block_all,
+        "autofill_blocked_by_malformed_existing_dimension_or_relation_claim":block_all_dimensions,
+        "existing_relation_effect_ids_block_dimension_autofill":sorted(existing_relation_effect_ids),
+        "existing_dimension_effect_ids_block_relation_autofill":sorted(existing_dimension_effect_ids),
     })
     return {
         "schema":SCHEMA,
@@ -132,7 +170,8 @@ def synthesize_missing_claims(
         "source_id":source_id,
         "source_text_sha256":sha256(source_text.encode("utf-8")).hexdigest(),
         "existing_claim_count":len(existing_claims),
-        "v1_synthesized_claim_count":len(base_rows),
+        "v1_synthesized_claim_count_raw":len(raw_base_rows),
+        "v1_synthesized_claim_count_retained":len(base_rows),
         "dimension_synthesized_claim_count":len(dimension_rows),
         "synthesized_claim_count":len(synthesized),
         "combined_claim_count":len(existing_claims)+len(synthesized),
@@ -140,6 +179,7 @@ def synthesize_missing_claims(
         "diagnostics":diagnostics,
         "fills_omissions_only":True,
         "caller_claim_replacement_allowed":False,
+        "overlapping_relation_dimension_repair_allowed":False,
         "semantic_truth_authority":False,
         "execution_authority":False,
         "acceptance_authority":False,
