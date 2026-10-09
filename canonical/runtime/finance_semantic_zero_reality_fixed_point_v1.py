@@ -21,6 +21,19 @@ def _blob(path:Path)->str:
 def _load(rel:str):
     return json.loads((ROOT/rel).read_text(encoding="utf-8"))
 
+def _norm(value)->str:
+    raw=str(value or "").upper()
+    out=[]
+    last_sep=False
+    for ch in raw:
+        if ch.isalnum():
+            out.append(ch)
+            last_sep=False
+        elif not last_sep:
+            out.append("_")
+            last_sep=True
+    return "".join(out).strip("_")
+
 def evaluate()->dict:
     errors=[]
     for rel,want in EXPECTED.items():
@@ -49,10 +62,10 @@ def evaluate()->dict:
         errors.append("POLICY_QUOTIENT_REMAINING_BOUNDARY_DRIFT")
 
     falsified=(counter.get("proof") or {}).get("universal_adequacy_falsified") or []
-    joined=" ".join(str(x) for x in falsified)
+    joined=_norm(" ".join(str(x) for x in falsified))
     if "A_TWO_WORLD_COUNTERMODEL_EXISTS" not in joined:
         errors.append("TWO_WORLD_COUNTERMODEL_MISSING")
-    if "PROTOCOL ACCEPTANCE DIFFERS" not in joined:
+    if "PROTOCOL_ACCEPTANCE_DIFFERS" not in joined:
         errors.append("COUNTERMODEL_POLICY_RELEVANCE_MISSING")
 
     residual=(source_gate.get("remaining_finance_direct_residual") or {})
@@ -62,7 +75,7 @@ def evaluate()->dict:
     open_semantics=(shared.get("surviving_semantic_boundary") or {}).get("not_yet_universally_owned") or []
     if not open_semantics:
         errors.append("SHARED_SEMANTIC_RESIDUAL_UNEXPECTEDLY_EMPTY")
-    shared_theorem=str((shared.get("theorem") or {}).get("statement") or "")
+    shared_theorem=_norm((shared.get("theorem") or {}).get("statement") or "")
     if "DIRECT_END_TO_END_CERTIFICATE" not in shared_theorem:
         errors.append("SHARED_E2E_ESCAPE_ROUTE_MISSING")
 
