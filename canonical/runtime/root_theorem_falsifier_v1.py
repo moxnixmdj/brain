@@ -80,8 +80,13 @@ def _git_blob_sha(path: Path) -> str:
 def evaluate_canonical_registry_authority() -> Dict[str, Any]:
     try:
         registry = json.loads(ROOT_REGISTRY_PATH.read_text(encoding="utf-8"))
-        mission_sha = _git_blob_sha(MISSION_PATH)
-    except (OSError, json.JSONDecodeError) as exc:
+        mission_pointer = json.loads(MISSION_PATH.read_text(encoding="utf-8"))
+        authority_rel = (mission_pointer.get("authoritative_source") or {}).get("path")
+        if not isinstance(authority_rel, str) or not authority_rel:
+            raise ValueError("MISSION_AUTHORITY_PATH_MISSING")
+        authority_path = REPO_ROOT / authority_rel
+        mission_authority_sha = _git_blob_sha(authority_path)
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
         return {
             "status": "UNKNOWN_FAIL_CLOSED",
             "authorized": None,
@@ -91,7 +96,8 @@ def evaluate_canonical_registry_authority() -> Dict[str, Any]:
 
     checked = validate_root_registry(
         registry,
-        current_mission_blob_sha=mission_sha,
+        current_mission_pointer=mission_pointer,
+        current_mission_authority_blob_sha=mission_authority_sha,
     )
     if checked["pass"]:
         for slot in registry.get("certificate_slots", []):
