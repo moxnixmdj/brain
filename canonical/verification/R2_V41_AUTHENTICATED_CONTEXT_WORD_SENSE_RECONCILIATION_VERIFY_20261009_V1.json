@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V41_AUTHENTICATED_CONTEXT_WORD_SENSE_RECONCILIATION_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_BRANCH_BLOBS__R2_V41_LIVE_PROJECTION_COHERENCE_19_OF_19__ZERO_TERMINAL_CREDIT",
+  "subject_branch": "r2-v41",
+  "subject_head": "91bc7cd0fb91f5c1b3417dda0360c561714db647",
+  "exact_blobs": {
+    "scheduler_cut": "3707e31ef8ed5905a994bfc49651d2c2cacef722",
+    "current_r2": "0a129d3f37b723782d4017412f8d7fae0795e136",
+    "current_terminal_authority": "b9201c9954b3221893485feaa5f4eb0dd3c0fe10",
+    "activation": "e639b9f351edc47a0003d53beabbbf74a86398b8",
+    "bridge_verification": "5f51275b334da56bbce5718ed9587095566a9374",
+    "bridge_runtime": "7fb56a8318d774098812a19b5a0544ee8dea930f"
+  },
+  "checks": {
+    "exact_blob_identities": 3,
+    "v41_schema_and_status": 2,
+    "scheduler_path_and_hash_cross_binding": 4,
+    "direct_route_and_family_counts_preserved": 2,
+    "primary_internal_residual_preserved": 2,
+    "bridge_runtime_activation_and_verification_bound": 3,
+    "terminal_credit_zero_and_terminal_false": 2,
+    "terminal_r2_status_matches_current_pointer": 1,
+    "total": 19,
+    "pass": 19
+  },
+  "frontier_effect": {
+    "closed_bounded_subregion": "CONTEXT_WORD_SENSE_WHEN_AUTHORIZED_RAW_TYPED_CONTEXT_AND_AN_AUTHENTICATED_SCOPE_COMPLETE_FINITE_CONCEPT_REGISTRY_ARE_BOTH_AVAILABLE",
+    "remains_internal_unsolved": [
+      "CONTEXT_SOURCE_OR_FIELD_SEMANTICS_AUTHORITY_NOT_BOUND",
+      "SCOPE_COMPLETE_CONCEPT_REGISTRY_AUTHORITY_NOT_BOUND",
+      "OPEN_WORLD_ONTOLOGY_MAPPING_WITHOUT_PROVED_COMPLETE_REGISTRY",
+      "AMBIGUOUS_OR_IMPLICIT_COREFERENCE_OUTSIDE_VERIFIED_STRUCTURAL_FORMS",
+      "NONEXPLICIT_SEMANTIC_RELATION_PROOF_OUTSIDE_VERIFIED_BOUNDED_KERNEL",
+      "GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
