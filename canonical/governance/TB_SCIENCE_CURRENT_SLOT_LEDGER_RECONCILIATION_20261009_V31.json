@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V31",
+  "date": "2026-10-09",
+  "status": "CURRENT_POST_RANK16_FINAL_ZERO__SIXTEEN_CONSUMED__V10_ROBUSTNESS_REPAIR_MERGED__RANK17_UNREAD_UNAUTHORIZED__ZERO_ACCEPTANCE_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V30.json",
+    "git_blob_sha": "7e46f2a5c0c418a4d3be4360c8a85b7be7611abb"
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+  },
+  "rank16_final_reconciliation": {
+    "path": "canonical/governance/TB_SCIENCE_RANK16_FINAL_EXECUTION_RECONCILIATION_20261009_V1.json",
+    "git_blob_sha": "92e610734b70921bbcbd78557208be0af23b8744"
+  },
+  "rank16_final_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK16_FINAL_EXECUTION_VERIFY_20261009_V1.json",
+    "git_blob_sha": "d7fd3eca6d8f8a22958d0a081f4ce6e024806299"
+  },
+  "current_counts": {
+    "consumed_slots": 16,
+    "consumed_successes": 0,
+    "consumed_final_failures": 16,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 71,
+    "maximum_possible_successes_remaining": 194,
+    "minimum_required_success_rate_over_remaining_slots": 0.6391752577319587,
+    "pass_still_mathematically_reachable": true,
+    "next_unconsumed_slot": {
+      "ledger_schedule_rank": 17,
+      "frozen_manifest_schedule_order": 16,
+      "task_rank": 16,
+      "slot_id": "terminal-bench-science/variable-star-vetting::trial-0",
+      "task_digest": "sha256:51bf2b9d8e87a428772d92c6765d83ad3edc7c24283d2ff75af5f050aaee0c67"
+    }
+  },
+  "rank16": {
+    "authority_v1_historical": true,
+    "task_read": true,
+    "task_started": true,
+    "execution_authority_consumed": true,
+    "benchmark_trials_consumed": 1,
+    "reward": 0,
+    "result": "FINAL_ZERO",
+    "workflow_run_id": 37948159650,
+    "logical_attempt_id": "c7feaa1fac90c9bde92480bf3fddfa858069b08267d7a35f01b919e864c5fb8e",
+    "exact_prestart_input_tokens": 2939,
+    "exact_reserved_completion_tokens": 4096,
+    "exact_server_context_tokens": 16384,
+    "exact_context_headroom_tokens": 9349,
+    "exact_raw_task_obligation_count": 40,
+    "start_cas_acquired": true,
+    "final_failure_class": "BENCHMARK_REWARD_ZERO_AFTER_COMPLETE_HARNESS_EXECUTION",
+    "causal_repeat_class": "IDENTICAL_KNOWN_NONPROMOTED_EFFECT_REEXECUTED_ACROSS_PLANNER_CYCLES",
+    "latest_verified_journal_sequence": 29,
+    "rerun_authority": false,
+    "replacement_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "successor_runtime": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "execution_base_merge_commit": "efc5409027e69e2c523b63a90de09a12094af58d",
+    "agent_v10_git_blob_sha": "0e5b3ee96cbe7560ab62287573e40e6f79bc147b",
+    "planner_v5_git_blob_sha": "050bbae7c38900023fc4110070a48e8e50c161ee",
+    "evidence_store_v1_git_blob_sha": "57373f94e4f8ad64f071a2e55ff04d49074d39d5",
+    "rank16_retroactive_credit": false,
+    "future_surface_reseal_required": true
+  },
+  "rank17": {
+    "slot_id": "terminal-bench-science/variable-star-vetting::trial-0",
+    "task_digest": "sha256:51bf2b9d8e87a428772d92c6765d83ad3edc7c24283d2ff75af5f050aaee0c67",
+    "task_read": false,
+    "task_started": false,
+    "execution_authority_consumed": false,
+    "benchmark_trials_consumed": 0,
+    "fresh_execution_authority": false,
+    "fresh_task_read_authority": false,
+    "required_runtime_agent_git_blob_sha": "0e5b3ee96cbe7560ab62287573e40e6f79bc147b",
+    "required_runtime_planner_git_blob_sha": "050bbae7c38900023fc4110070a48e8e50c161ee",
+    "required_evidence_store_git_blob_sha": "57373f94e4f8ad64f071a2e55ff04d49074d39d5",
+    "next_action": "CREATE_FRESH_RANK17_ONE_SLOT_AUTHORITY_BOUND_TO_V31_AND_V10__THEN_ZERO_EXPOSURE_PUBLIC_RESEAL__ONLY_THEN_ONE_FILE_ACTIVATION"
+  },
+  "scheduler": [
+    "DO_NOT_RERUN_RANK16.",
+    "DO_NOT_GRANT_RANK16_TERMINAL_OR_ACCEPTANCE_CREDIT.",
+    "USE_V10_AGENT_V5_PLANNER_AND_CONTENT_ADDRESSED_EVIDENCE_STORE_AS_MINIMUM_SUCCESSOR_RUNTIME_FOR_ANY_FUTURE_TB_SCIENCE_SURFACE.",
+    "RANK17_TASK_BYTES_REMAIN_UNREAD_UNTIL_FRESH_AUTHORITY_AND_ZERO_EXPOSURE_RESEAL_PASS.",
+    "RANK17_SURFACE_MUST_PRESERVE_V6_DURABLE_START_CAS_AGENT_READY_CAUSAL_JOURNAL_AND_UNCERTAIN_EFFECT_NO_REPLAY_INVARIANTS.",
+    "RANK17_SURFACE_MUST_PRESERVE_CROSS_CYCLE_NONPROMOTED_EFFECT_REPEAT_SUPPRESSION.",
+    "PRECHECK_FAILURE_BEFORE_DURABLE_START_DOES_NOT_CONSUME_SLOT.",
+    "AFTER_DURABLE_START_ANY_FINAL_NON_SUCCESS_IS_IRREVERSIBLE_ZERO_WITH_NO_REPLAY_OR_REPLACEMENT.",
+    "ONE_SLOT_SUCCESS_CANNOT_GRANT_AGGREGATE_TB_SCIENCE_ACCEPTANCE_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 1,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 1,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
