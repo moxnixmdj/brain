@@ -367,3 +367,16 @@ def resolve(
             passed=False,
             reason=type(exc).__name__ + ":" + str(exc),
         )
+
+
+
+def validate_registry(registry: Mapping[str, Any]) -> dict[str, Any]:
+    """Public canonical registry normalization used by authority adapters.
+
+    This exposes the exact existing validator without widening its authority.
+    It performs no authentication; callers must still bind an independent
+    authority receipt through resolve(...).
+    """
+    if not isinstance(registry, Mapping):
+        raise ConceptUniverseError("REGISTRY_REQUIRED")
+    return _validate_registry(registry)
