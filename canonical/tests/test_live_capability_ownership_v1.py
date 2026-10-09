@@ -9,7 +9,7 @@ from canonical.runtime import live_capability_ownership_v1 as o
 
 def test_manifest_is_fail_closed_provider_ontology():
     manifest = o._load_manifest()
-    assert manifest["default"] == "NOT_LIVE_OWNED_UNLESS_ADMITTED_BY_ONE_PROVIDER"
+    assert manifest["default"] == "NOT_LIVE_OWNED_UNLESS_D_FINAL_CERTIFIED"
     assert set(manifest["providers"]) == set(o.EXPECTED_PROVIDERS)
 
 
@@ -49,7 +49,7 @@ def test_active_skill_selector_rejects_unverified_active_skill():
         raise AssertionError("expected fail-closed active skill rejection")
 
 
-def test_empty_dynamic_skill_state_is_valid_provider():
+def test_empty_dynamic_skill_state_is_structurally_valid_but_ownership_is_d_final_gated():
     with tempfile.TemporaryDirectory() as td:
         state_path = Path(td) / "state.json"
         state_path.write_text(json.dumps({
@@ -77,14 +77,18 @@ def test_empty_dynamic_skill_state_is_valid_provider():
             },
             self_improvement_state_path=state_path,
         )
-        # Other direct engine modes may be absent from this synthetic descriptor set,
-        # but every provider carrier above is present.
-        assert out["pass"] is True
-        assert out["live_owned_equals_fabric_reachable"] is True
         assert out["providers"]["ACTIVE_VERIFIED_LEARNED_SKILLS"]["count"] == 0
-        assert out["live_admitted_capability_count"] == out["live_owned_capability_count"]
-        assert out["live_admitted_capability_ids"] == out["live_owned_capability_ids"]
-        assert out["live_d_final_owned_capability_count"] == 0
-        assert out["live_d_final_owned_capability_ids"] == []
-        assert out["missing_d_certificate_count"] == out["live_admitted_capability_count"]
-        assert out["d_finality_coverage_complete"] is False
+        assert out["structurally_admitted_equals_fabric_reachable"] is True
+        assert set(out["live_owned_capability_ids"]).issubset(
+            set(out["live_admitted_capability_ids"])
+        )
+        assert out["live_owned_capability_count"] <= out["live_admitted_capability_count"]
+        assert (
+            out["live_owned_capability_count"] + out["d_final_missing_capability_count"]
+            == out["live_admitted_capability_count"]
+        )
+        assert out["experimental_execution_without_ownership_permitted"] is True
+        if out["d_final_missing_capability_count"]:
+            assert out["pass"] is False
+            assert out["r1_structural_closure"] is False
+            assert out["d_final_coverage_complete"] is False
