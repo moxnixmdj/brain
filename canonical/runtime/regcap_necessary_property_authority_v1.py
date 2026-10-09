@@ -20,8 +20,8 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from canonical.runtime.pinned_https_source_fragment_authority_v1 import (
-    verify_pack,
+from canonical.runtime.https_source_fragment_projection_authority_v2 import (
+    verify_projection_pack,
 )
 from canonical.runtime.semantic_relation_entailment_dag_v1 import (
     RECEIPT_SCHEMA as EDGE_RECEIPT_SCHEMA,
@@ -31,7 +31,7 @@ SCHEMA = "PROJECT_BRAIN_REGCAP_NECESSARY_PROPERTY_AUTHORITY_V1"
 REQUEST_SCHEMA = "PROJECT_BRAIN_REGCAP_NECESSARY_PROPERTY_REQUEST_V1"
 PACK_SCHEMA = "PROJECT_BRAIN_REGCAP_NECESSARY_PROPERTY_SOURCE_PACK_V1"
 PACK_PATH = "canonical/evidence/REGCAP_NECESSARY_PROPERTY_SOURCE_PACK_V1.json"
-PACK_GIT_BLOB_SHA = "7df4f9a37eb2b1efc8350221d7a94b73fb0ed9fe"
+PACK_GIT_BLOB_SHA = "086bda8b0dd3b178f4af7747ce4a0a86e2c8e523"
 SCOPE_ID = "REGCAP_BIS_RBC30_2027_AND_FSB_TLAC_2015_V1"
 
 CCOB = "REGCAP::CCOB"
@@ -43,6 +43,10 @@ RULES = {
         "BIS_BASEL_RBC30_2023_11_08_EFFECTIVE_2027_01_01",
         ("CCOB_LOSS_DRAWDOWN",),
     ),
+    (CCOB, "DISPOSITION::LOSS_ABSORPTION"): (
+        "BIS_BASEL_RBC30_2023_11_08_EFFECTIVE_2027_01_01",
+        ("CCOB_LOSS_DRAWDOWN",),
+    ),
     (CCOB, "COMPOSITION::CET1"): (
         "BIS_BASEL_RBC30_2023_11_08_EFFECTIVE_2027_01_01",
         ("CCOB_CET1_ABOVE_MINIMUM",),
@@ -50,6 +54,10 @@ RULES = {
     (CCOB, "POSITION::ABOVE_REGULATORY_MINIMUM"): (
         "BIS_BASEL_RBC30_2023_11_08_EFFECTIVE_2027_01_01",
         ("CCOB_CET1_ABOVE_MINIMUM",),
+    ),
+    (CCYB, "DISPOSITION::LOSS_ABSORPTION"): (
+        "BIS_BASEL_RBC30_2023_11_08_EFFECTIVE_2027_01_01",
+        ("CCYB_FULLY_LOSS_ABSORBING_CAPITAL",),
     ),
     (CCYB, "DOMAIN::MACRO_FINANCIAL"): (
         "BIS_BASEL_RBC30_2023_11_08_EFFECTIVE_2027_01_01",
@@ -76,6 +84,10 @@ RULES = {
         ("TLAC_GSIB_SCOPE",),
     ),
     (TLAC, "FUNCTION::LOSS_ABSORPTION"): (
+        "FSB_TLAC_2015_11_09",
+        ("TLAC_LOSS_RECAP_RESOLUTION",),
+    ),
+    (TLAC, "DISPOSITION::LOSS_ABSORPTION"): (
         "FSB_TLAC_2015_11_09",
         ("TLAC_LOSS_RECAP_RESOLUTION",),
     ),
@@ -220,7 +232,7 @@ def verify_property_request(
         checked = load_pack(repo_root=repo_root)
         source_id, fragment_ids = rule
         source_pack = checked["sources_by_id"][source_id]
-        source_result = verify_pack(source_pack)
+        source_result = verify_projection_pack(source_pack)
         if source_result.get("pass") is not True:
             return _base(
                 "FAIL_CLOSED",
