@@ -118,5 +118,14 @@
     "domain_semantic_closure": false,
     "domain_execution_closure": false,
     "terminal_credit_delta": 0
+  },
+  "professional_quality_r7_causal_factorization": {
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R7_CAUSAL_RESIDUAL_FACTORIZATION_20261009_V1.json",
+    "verification_git_blob_sha": "a0fd23bf4c83e03be501e476bc118371f94a466d",
+    "reused_existing_causal_infrastructure": true,
+    "open_domain_leaf_count": 4,
+    "root_closed": false,
+    "next_required_edge": "PROFESSIONAL_EDIT_CAUSAL_CERTIFICATE_FOR_REAL_EXECUTION_OUTCOME_VERSION_DOSE_COMPOUND_ATTRIBUTION_AND_SEQUENCE_INTERACTION",
+    "terminal_credit_delta": 0
   }
 }
