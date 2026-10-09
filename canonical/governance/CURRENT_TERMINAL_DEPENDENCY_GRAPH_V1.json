@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1",
+  "date": "2026-10-09",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "nodes": [
+    {
+      "id": "EXECUTABLE_REFINEMENT_FRAMEWORK",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "STRUCTURAL_BINDING_VERIFIER_EXISTS_ON_BRANCH__EXECUTION_TESTS_AND_SEMANTIC_REFINEMENT_RECEIPT_NOT_YET_PROMOTED"
+    },
+    {
+      "id": "router-deployment-canary",
+      "kind": "ROUTE",
+      "lifecycle": "IMPLEMENTED",
+      "creditable": false,
+      "terminal_authority": false,
+      "implementation": {
+        "path": "canonical/runtime/router_deployment_canary_v1.py",
+        "git_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2"
+      },
+      "refinement": {
+        "status": "UNRESOLVED",
+        "certificate": {
+          "path": "canonical/governance/ROUTER_DEPLOYMENT_CANARY_EXECUTABLE_REFINEMENT_20261009_V1.json",
+          "git_blob_sha": "620385303adacb594694f46b0c42dd694eb680fc"
+        },
+        "verification_receipt": null
+      },
+      "live_authority_status": "UNRESOLVED",
+      "note": "NONCREDITABLE_CANARY__STRUCTURAL_BINDING_ONLY__NO_REFINEMENT_OR_TERMINAL_CREDIT"
+    },
+    {
+      "id": "ALL_CREDITABLE_LIVE_ROUTES_EXECUTABLE_REFINEMENT",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "GENERAL_LIVE_ROUTE_REFINEMENT_COVERAGE_NOT_PROVED"
+    },
+    {
+      "id": "TERMINAL_DEPENDENCY_GRAPH_GENERATOR_COVERAGE",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "GRAPH_ENUMERATION_DOES_NOT_PROVE_OPEN_WORLD_COMPLETENESS"
+    }
+  ],
+  "terminal_closure": false,
+  "terminal_credit_delta": 0
+}
