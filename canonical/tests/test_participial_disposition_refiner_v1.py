@@ -8,7 +8,7 @@ from canonical.runtime.bounded_participial_disposition_v1 import (
     SEMANTIC_ATOM,
     verify_span,
 )
-from canonical.runtime.source_aligned_semantic_proof_v10 import verify_proof
+from canonical.runtime.source_aligned_participial_disposition_proof_v1 import verify_proof
 from canonical.runtime.source_aligned_semantic_edge_authority_v1 import (
     CONCEPT_SEMANTICS_RECEIPT_SCHEMA,
     prove,
