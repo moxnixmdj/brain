@@ -15,16 +15,17 @@ def compiled_request() -> dict:
         "schema": "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_REQUEST_V1",
         "status": "PASS__MINIMUM_STRUCTURAL_DISTINGUISHING_EVIDENCE_REQUEST_READY",
         "pass": True,
-        "minimum_missing_obligation_count": 3,
+        "minimum_missing_obligation_count": 4,
         "candidate_evidence_bundles": [
             {
                 "route": "CHECKPOINTED_VERIFIED_EXECUTION",
                 "missing_obligations": [
                     "NONEMPTY_SELECTED_PLAN",
+                    "NONEMPTY_VERIFIED_TARGET_EFFECT_SET",
                     "CONTROLLER_CHECKPOINT_BOUND",
-                    "ALL_EXECUTION_ROWS_PASS",
+                    "EXECUTION_COUNT_MATCHES_SELECTED_PLAN_AND_NONZERO",
                 ],
-                "missing_obligation_count": 3,
+                "missing_obligation_count": 4,
             }
         ],
     }
@@ -32,12 +33,8 @@ def compiled_request() -> dict:
     return out
 
 
-def candidate_output(task_id: str = "task-1") -> dict:
+def evidence_fields() -> dict:
     return {
-        "schema": "TEST_SUCCESS",
-        "status": "PASS__TEST",
-        "pass": True,
-        "task_id": task_id,
         "selected_plan": ["cap.a"],
         "verified_target_effects": ["effect.done"],
         "controller_checkpoint": {
@@ -52,16 +49,20 @@ def candidate_output(task_id: str = "task-1") -> dict:
                 "composition_capsule_head_hash": "c" * 64,
             }
         ],
-        "terminal_authority": False,
     }
 
 
-def provider_result(*, request_sha: str | None = None, task_id: str = "task-1") -> dict:
+def provider_result(
+    *,
+    request_sha: str | None = None,
+    evidence: dict | None = None,
+) -> dict:
     return {
         "schema": acquisition.CANDIDATE_SCHEMA,
         "pass": True,
         "request_sha256": request_sha or compiled_request()["request_sha256"],
-        "candidate_success_output": candidate_output(task_id),
+        "route": "CHECKPOINTED_VERIFIED_EXECUTION",
+        "evidence": evidence if evidence is not None else evidence_fields(),
         "provider_truth_authority": False,
         "verification_authority": False,
         "promotion_authority": False,
@@ -74,7 +75,15 @@ class R3DistinguishingEvidenceAcquisitionV1Tests(unittest.TestCase):
     def _success_patches(self):
         proof = {
             "proof_capsule_sha256": "sha256:" + "1" * 64,
-            "material": {"task_id": "task-1"},
+            "material": {
+                "source_schema": "TEST_SUCCESS",
+                "source_status": "PASS__TEST",
+                "task_id": "task-1",
+                "selected_plan": [],
+                "verified_target_effects": [],
+                "controller_checkpoint": None,
+                "execution": [],
+            },
         }
         replay = {
             "replay_capsule_sha256": "sha256:" + "2" * 64,
@@ -109,10 +118,10 @@ class R3DistinguishingEvidenceAcquisitionV1Tests(unittest.TestCase):
             patch.object(acquisition.learning, "record_success_observation", return_value=recorded),
         )
 
-    def test_provider_candidate_is_reingested_only_as_unverified_success(self):
+    def test_requested_evidence_is_merged_into_retained_subject_then_reingested(self):
         provider = Mock(return_value=provider_result())
         patches = self._success_patches()
-        with patches[0], patches[1], patches[2], patches[3], patches[4], patches[5] as record:
+        with patches[0], patches[1], patches[2] as proof_builder, patches[3], patches[4], patches[5] as record:
             out = acquisition.acquire(
                 compiled_request(),
                 observation_id="observation:source",
@@ -125,12 +134,22 @@ class R3DistinguishingEvidenceAcquisitionV1Tests(unittest.TestCase):
         self.assertTrue(out["pass"], out)
         self.assertTrue(out["progress"])
         self.assertEqual(out["new_observation_id"], "observation:new")
-        self.assertFalse(out["verification_authority"])
-        self.assertFalse(out["promotion_authority"])
+        self.assertEqual(out["selected_route"], "CHECKPOINTED_VERIFIED_EXECUTION")
+        self.assertEqual(
+            out["accepted_evidence_keys"],
+            sorted(evidence_fields()),
+        )
         request = provider.call_args.args[0]
         self.assertFalse(request["provider_contract"]["provider_truth_authority"])
         self.assertFalse(request["provider_contract"]["provider_verification_authority"])
         self.assertFalse(request["provider_contract"]["automatic_effectful_replay_authorized"])
+        self.assertTrue(
+            request["provider_contract"]["complete_success_subject_may_not_be_replaced"]
+        )
+        merged = proof_builder.call_args.args[0]
+        self.assertEqual(merged["task_id"], "task-1")
+        self.assertEqual(merged["selected_plan"], ["cap.a"])
+        self.assertEqual(merged["verified_target_effects"], ["effect.done"])
         record.assert_called_once()
         self.assertEqual(
             record.call_args.kwargs["surface"],
@@ -155,7 +174,7 @@ class R3DistinguishingEvidenceAcquisitionV1Tests(unittest.TestCase):
         )
         provider.assert_not_called()
 
-    def test_stale_request_digest_is_rejected_before_reingestion(self):
+    def test_stale_provider_request_digest_is_rejected_before_reingestion(self):
         provider = Mock(
             return_value=provider_result(request_sha="sha256:" + "f" * 64)
         )
@@ -192,6 +211,41 @@ class R3DistinguishingEvidenceAcquisitionV1Tests(unittest.TestCase):
         )
         record.assert_not_called()
 
+    def test_unrequested_task_identity_replacement_is_rejected(self):
+        evidence = evidence_fields()
+        evidence["task_id"] = "other-task"
+        with patch.object(acquisition.learning, "record_success_observation") as record:
+            out = acquisition.acquire(
+                compiled_request(),
+                observation_id="observation:source",
+                state_path=Path("/tmp/r3-test-state.json"),
+                provider=lambda _request: provider_result(evidence=evidence),
+                provider_id="TEST_PROVIDER",
+            )
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["reason"],
+            "DISTINGUISHING_EVIDENCE_UNREQUESTED_FIELDS_REJECTED",
+        )
+        self.assertEqual(out["unrequested_fields"], ["task_id"])
+        record.assert_not_called()
+
+    def test_unrequested_proof_field_is_rejected(self):
+        evidence = evidence_fields()
+        evidence["raw_goal_acceptance"] = {"pass": True}
+        out = acquisition.acquire(
+            compiled_request(),
+            observation_id="observation:source",
+            state_path=Path("/tmp/r3-test-state.json"),
+            provider=lambda _request: provider_result(evidence=evidence),
+            provider_id="TEST_PROVIDER",
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["reason"],
+            "DISTINGUISHING_EVIDENCE_UNREQUESTED_FIELDS_REJECTED",
+        )
+
     def test_candidate_that_does_not_reduce_gap_is_rejected(self):
         patches = self._success_patches()
         unchanged = {
@@ -201,7 +255,7 @@ class R3DistinguishingEvidenceAcquisitionV1Tests(unittest.TestCase):
         }
         next_request = {
             "pass": True,
-            "minimum_missing_obligation_count": 3,
+            "minimum_missing_obligation_count": 4,
         }
         with patches[0], patches[1], patches[2], patches[3], patch.object(
             acquisition.reducer,
@@ -226,6 +280,38 @@ class R3DistinguishingEvidenceAcquisitionV1Tests(unittest.TestCase):
         )
         record.assert_not_called()
 
+    def test_strictly_smaller_evidence_gap_is_reingested_but_not_verified(self):
+        patches = self._success_patches()
+        unchanged = {
+            "pass": True,
+            "admissible_repair_classes": [reducer.NEW_EVIDENCE],
+            "must_acquire_new_distinguishing_evidence": True,
+        }
+        next_request = {
+            "pass": True,
+            "minimum_missing_obligation_count": 3,
+        }
+        with patches[0], patches[1], patches[2], patches[3], patch.object(
+            acquisition.reducer,
+            "reduce_author_context",
+            return_value=unchanged,
+        ), patch.object(
+            acquisition.request_compiler,
+            "compile_request",
+            return_value=next_request,
+        ), patches[5] as record:
+            out = acquisition.acquire(
+                compiled_request(),
+                observation_id="observation:source",
+                state_path=Path("/tmp/r3-test-state.json"),
+                provider=lambda _request: provider_result(),
+                provider_id="TEST_PROVIDER",
+            )
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["progress"])
+        self.assertFalse(out["verification_authority"])
+        record.assert_called_once()
+
     def test_queue_routes_evidence_only_gap_to_evidence_provider_not_adapter_provider(self):
         work = {
             "work_id": "work:frontier",
@@ -249,6 +335,7 @@ class R3DistinguishingEvidenceAcquisitionV1Tests(unittest.TestCase):
             "distinguishing_evidence_request": compiled_request(),
         }
         provider = Mock()
+        adapter_provider = Mock()
         acquired = {
             "schema": acquisition.SCHEMA,
             "status": "PASS__DISTINGUISHING_EVIDENCE_CANDIDATE_REINGESTED",
@@ -292,7 +379,7 @@ class R3DistinguishingEvidenceAcquisitionV1Tests(unittest.TestCase):
                 state_path=Path("/tmp/r3-test-state.json"),
                 distinguishing_evidence_provider=provider,
                 distinguishing_evidence_provider_id="EVIDENCE_PROVIDER",
-                verification_frontier_acquisition_provider=Mock(),
+                verification_frontier_acquisition_provider=adapter_provider,
             )
         self.assertTrue(out["pass"], out)
         self.assertTrue(out["progress"])
@@ -301,6 +388,7 @@ class R3DistinguishingEvidenceAcquisitionV1Tests(unittest.TestCase):
             acquire_call.call_args.kwargs["provider"],
             provider,
         )
+        adapter_provider.assert_not_called()
         resolve.assert_called_once()
 
     def test_fabric_forwards_evidence_provider_to_improvement_cycle(self):
