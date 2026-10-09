@@ -28,23 +28,32 @@ class RealityClosureV2IntegrationTests(unittest.TestCase):
             self.assertFalse(out["pass"], out)
             self.assertEqual(
                 out["status"],
-                "OPEN__CAPABILITY_SYNTHESIS_PROVIDER_REQUIRED",
+                "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT_PROVIDER_REQUIRED",
             )
             self.assertEqual(
                 out["gap_contract"]["gap_class"],
-                "CONSTRUCTIVE_CAPABILITY_GAP",
+                "PENDING_ACQUISITION_OR_EXPERIMENT",
             )
             self.assertEqual(
                 out["transcript"][0]["closure_status"],
-                "OPEN__INTERNAL_UNSOLVED_R2_GAP_REMAINS",
+                "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
             )
-            internal = out["gap_contract"]["basis"]["internal_blockers"]
+            basis = out["gap_contract"]["basis"]
+            self.assertEqual(basis["constructive_internal_blockers"], [])
+            self.assertEqual(basis["r2_acquisition_request_count"], 1)
+            self.assertEqual(
+                basis["evidence_blockers"],
+                ["R2_PENDING_ACQUISITION:FINANCE_SEMANTIC_ADEQUACY_TAIL"],
+            )
+            request = basis["r2_acquisition_requests"][0]
+            self.assertEqual(request["cell_id"], "FINANCE_SEMANTIC_ADEQUACY_TAIL")
+            self.assertFalse(request["full_benchmark_default"])
             self.assertTrue(
-                any(
-                    str(blocker).startswith("R2_CURRENT_INTERNAL_UNSOLVED:")
-                    for blocker in internal
-                ),
-                out,
+                request["broad_acquisition_forbidden_without_minimality_proof"]
+            )
+            self.assertEqual(
+                out["gap_contract"]["constructive_capability_contract_count"],
+                0,
             )
             self.assertFalse(out["terminal_authority"])
 
