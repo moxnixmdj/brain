@@ -57,7 +57,7 @@ def _fail(reason: str, **extra: Any) -> dict[str, Any]:
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 
 
-def _receipt(value: Any, *, relation: str) -> bool:
+def _receipt(value: Any, *, relation: str, scope_sha256: str) -> bool:
     if not isinstance(value, Mapping) or value.get("verified") is not True:
         return False
     if value.get("relation") != relation:
@@ -76,6 +76,7 @@ def _receipt(value: Any, *, relation: str) -> bool:
         verifier
         and _SHA256.fullmatch(evidence_sha)
         and _SHA256.fullmatch(scope_sha)
+        and scope_sha == scope_sha256
     )
 
 
@@ -126,6 +127,10 @@ def prove(problem: Mapping[str, Any]) -> dict[str, Any]:
     if requirement not in REQUIREMENTS:
         return _fail("REQUIRED_RELATION_INVALID")
 
+    scope_sha256 = str(problem.get("scope_sha256") or "").strip()
+    if _SHA256.fullmatch(scope_sha256) is None:
+        return _fail("SCOPE_SHA256_REQUIRED")
+
     evidence = problem.get("evidence") or {}
     if not isinstance(evidence, Mapping):
         return _fail("EVIDENCE_NOT_OBJECT")
@@ -145,26 +150,37 @@ def prove(problem: Mapping[str, Any]) -> dict[str, Any]:
     counter_a_to_b = _receipt(
         evidence.get("counterexample_a_substituted_for_b"),
         relation="COUNTEREXAMPLE_A_FOR_B",
+        scope_sha256=scope_sha256,
     )
     counter_b_to_a = _receipt(
         evidence.get("counterexample_b_substituted_for_a"),
         relation="COUNTEREXAMPLE_B_FOR_A",
+        scope_sha256=scope_sha256,
     )
 
     explicit_eq = _receipt(
         evidence.get("explicit_source_equivalence"),
         relation=REL_EQUIVALENT,
+        scope_sha256=scope_sha256,
     )
     concept = evidence.get("authenticated_concept_binding")
     same_concept = (
         isinstance(concept, Mapping)
-        and _receipt(concept, relation=REL_EQUIVALENT)
+        and _receipt(concept, relation=REL_EQUIVALENT, scope_sha256=scope_sha256)
         and isinstance(concept.get("a_concept_id"), str)
         and concept.get("a_concept_id")
         and concept.get("a_concept_id") == concept.get("b_concept_id")
     )
-    a_to_b = _receipt(evidence.get("entailment_a_to_b"), relation=REL_A_ENTAILS_B)
-    b_to_a = _receipt(evidence.get("entailment_b_to_a"), relation=REL_B_ENTAILS_A)
+    a_to_b = _receipt(
+        evidence.get("entailment_a_to_b"),
+        relation=REL_A_ENTAILS_B,
+        scope_sha256=scope_sha256,
+    )
+    b_to_a = _receipt(
+        evidence.get("entailment_b_to_a"),
+        relation=REL_B_ENTAILS_A,
+        scope_sha256=scope_sha256,
+    )
 
     positive_exact = explicit_eq or same_concept or (a_to_b and b_to_a)
 
@@ -228,6 +244,7 @@ def prove(problem: Mapping[str, Any]) -> dict[str, Any]:
         "expression_a": a,
         "expression_b": b,
         "required_relation": requirement,
+        "scope_sha256": scope_sha256,
         "strongest_proved_relation": relation,
         "proof_basis": basis,
         "task_equivalent": task_eq,
