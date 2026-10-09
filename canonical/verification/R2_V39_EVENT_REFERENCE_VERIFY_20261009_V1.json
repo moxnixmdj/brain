@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V39_EVENT_REFERENCE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__BOUNDED_DEMONSTRATIVE_EVENT_REFERENCE__EXACT_CONTENT_13_OF_13__COMPILE_4_OF_4__ZERO_CREDIT",
+  "exact_blobs": {
+    "canonical/runtime/finance_event_reference_resolve_v1.py": "3547320aab99d4274099943709b0e1f131f31612",
+    "canonical/runtime/finance_event_reference_verify_v1.py": "b67451ac6daa902176a3241c345c78996cacdd11",
+    "canonical/runtime/r2_finance_event_reference_direct_adequacy_v1.py": "5b486f753a53c6e8deac614bdafd36a9a414cfc1",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v9.py": "6ea47bafa39bf666b789f3b8dca2090aad9699c1",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "a3a8af0872ccb6f69b0f154aed02b2471d9ddf7c"
+  },
+  "verification": {
+    "producer_independent_behavior": "7_OF_7_PASS",
+    "direct_route": "3_OF_3_PASS",
+    "successor_router": "3_OF_3_PASS",
+    "compile": "4_OF_4_PASS",
+    "exact_git_blob_hash_match": true
+  },
+  "finite_lexical_bridge": {
+    "validate": "validation",
+    "operate": "operation",
+    "process": "process"
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_EVENT_SEMANTICS",
+    "NO_GENERAL_COREFERENCE_OR_SYNONYMY",
+    "NO_CONTEXT_DEPENDENT_WORD_SENSE_OR_ONTOLOGY",
+    "NO_GENERAL_CROSS_DOCUMENT_OR_EXTERNAL_FACT_TRUTH",
+    "NO_REMOTE_SPRITE_REPLAY_CLAIM_FOR_V39",
+    "NO_FINANCE_FAMILY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
