@@ -21,7 +21,7 @@ from typing import Any, Callable, Mapping
 from canonical.runtime.general_adequate_decision_controller_v1 import (
     run as run_controller,
 )
-from canonical.runtime import r2_direct_end_to_end_adequacy_v4 as direct_adequacy
+from canonical.runtime import r2_direct_end_to_end_adequacy_v5 as direct_adequacy
 from canonical.runtime.r2_existing_policy_adequacy_repair_v1 import (
     repair as repair_existing_adequacy,
 )
