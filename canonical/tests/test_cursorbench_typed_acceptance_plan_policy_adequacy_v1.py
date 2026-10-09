@@ -132,3 +132,17 @@ def test_region_condition_excludes_unknown_transform_semantics_from_adequacy_cla
     assert "GENERATED_OBLIGATIONS_ARE_COMPLETE_FOR_EVERY_MATERIAL_INDEPENDENTLY_KNOWABLE_FAILURE_MODE_IN_THE_BOUND_REGION" in reqs
     assert cert["membership_self_certified"] is False
     assert cert["adequacy_self_certified"] is False
+
+def test_unknown_transform_runtime_pass_does_not_self_certify_region_membership():
+    # The lower-level runtime is intentionally generic and cannot infer semantic
+    # applicability. An unknown transform kind generates no table obligations,
+    # so an independent check can make the raw gate pass. That is exactly why
+    # the adequacy certificate requires externally authenticated region
+    # membership and refuses self-certification.
+    out = assess(_model("NOT_A_BOUND_TRANSFORM_KIND", []))
+    assert out["pass"] is True
+
+    cert = json.loads(CERT.read_text(encoding="utf-8"))
+    assert "EVERY_TRANSFORM_KIND_IS_ONE_OF_THE_EXACT_RUNTIME_SUPPORTED_KINDS" in cert["policy_condition"]["requirements"]
+    assert cert["membership_self_certified"] is False
+    assert cert["hard_nonclaims"][1] == "NO_CLAIM_ARBITRARY_NATURAL_LANGUAGE_SPECIFICATIONS_ARE_TYPED_CORRECTLY"
