@@ -68,6 +68,10 @@ class OneShotClosureTests(unittest.TestCase):
             out["status"],
             "VERIFIED_INTERNAL_FIXED_POINT__IMPROVEMENT_QUEUE_EMPTY",
         )
+        self.assertFalse(out["goal_satisfaction_proved"])
+        self.assertFalse(out["terminal_closure_proved"])
+        self.assertFalse(out["verified_goal_satisfied_or_irreducible_external_only"])
+        self.assertFalse(out["irreducible_external_information_proved"])
 
     def test_internal_root1_gap_remains_open(self):
         pending = [{"work_id": "w1", "kind": "EXPAND_SUCCESS_VERIFICATION_FRONTIER"}]
