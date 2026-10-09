@@ -86,3 +86,44 @@ def test_mismatched_semantic_goal_contract_cannot_redefine_task():
     )
     assert out["pass"] is False
     assert any("SEMANTIC_GOAL_CONTRACT_HASH_MISMATCH" in x for x in out["errors"])
+
+def _covered_nonwhitespace_positions(text, obligations):
+    covered = set()
+    for row in obligations:
+        start, end = row["span"]
+        for pos in range(start, end):
+            if not text[pos].isspace():
+                covered.add(pos)
+    return covered
+
+
+def test_punctuation_only_runs_are_lossless_acceptance_segments():
+    text = "!!!\nCreate the artifact.\n...\nVerify it???\n???"
+    out = compile_contract(
+        text,
+        source_id="user",
+        routing_target_effects=["artifact.created"],
+    )
+    assert out["pass"] is True, out
+    obligations = out["acceptance_contract"]["obligations"]
+    expected = {i for i, ch in enumerate(text) if not ch.isspace()}
+    assert _covered_nonwhitespace_positions(text, obligations) == expected
+    segments = [row["text"] for row in obligations]
+    assert "!!!" in segments
+    assert "..." in segments
+    assert "???" in segments
+
+
+def test_adjacent_punctuation_boundary_never_drops_source_characters():
+    text = "Do A...   !!!\nDo B?!?   ???"
+    out = compile_contract(
+        text,
+        source_id="user",
+        routing_target_effects=["task.executed"],
+    )
+    assert out["pass"] is True, out
+    obligations = out["acceptance_contract"]["obligations"]
+    expected = {i for i, ch in enumerate(text) if not ch.isspace()}
+    assert _covered_nonwhitespace_positions(text, obligations) == expected
+    assert out["nonwhitespace_source_coverage_complete"] is True
+
