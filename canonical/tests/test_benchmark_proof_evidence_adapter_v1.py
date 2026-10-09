@@ -53,3 +53,10 @@ def test_adapter_rejects_kernel_with_promotion_authority():
 def test_receipt_must_be_content_addressed():
     out = adapt(verdict(), {"path": "x", "git_blob_sha": "bad"}, registry())
     assert out["pass"] is False
+
+def test_wrong_registry_schema_is_rejected():
+    r = registry()
+    r["schema"] = "OTHER"
+    out = adapt(verdict(), RECEIPT, r)
+    assert out["pass"] is False
+    assert "FROZEN_REGISTRY_SCHEMA_MISMATCH" in out["errors"]
