@@ -1,15 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_ONE_SHOT_GLOBAL_INVARIANT_REGRESSION_FIX_20261009_V1",
   "date": "2026-10-09",
-  "status": "PASS__EXACT_BYTES__40_OF_40__GLOBAL_TRUTHFUL_OPEN_STATE",
+  "status": "PASS__EXACT_BYTES_14_OF_14__40_OF_40__GLOBAL_TRUTHFUL_OPEN_STATE__V43_AUTHORITY_OVERLAY",
   "subject": {
     "repository": "moxnixmdj/brain",
     "frozen_main": "f59d5ee07b6d2b783db9460ecd45785828c95a39",
     "candidate_branch": "closure-global-invariant-fix-20261009",
-    "candidate_test_blob_sha": "6fab5fa4a4311eee6eb2cad4fc3d0903e89344d8"
+    "candidate_test_blob_sha": "6fab5fa4a4311eee6eb2cad4fc3d0903e89344d8",
+    "current_main_authority_overlay": "56970f570cd18bb24b0ddb69a211ed5327a0ecc5"
   },
   "exact_blob_binding": {
-    "result": "PASS__12_OF_12",
+    "result": "PASS__14_OF_14",
     "blobs": {
       "canonical/runtime/information_theoretic_externality_gate_v1.py": "008e3b8e43ba26336eee71092a67a13c02b19e1c",
       "canonical/runtime/r3_historical_failure_irreducibility_v1.py": "180dbd3ce28b797cd613c0ef0e3fe9f68bc9073b",
@@ -22,7 +23,9 @@
       "canonical/tests/test_r3_historical_failure_irreducibility_v1.py": "66ce88fcf545adfb8231f248acea3b1572a1a40d",
       "canonical/tests/test_one_shot_verified_closure_v1.py": "e6a6269887ddaf1d115ef5bf0227398f7a357553",
       "canonical/tests/test_one_shot_reality_closure_v2.py": "05f046e45282dd7ab602dec1d68b25abd06cf3d5",
-      "canonical/tests/test_one_shot_reality_closure_v2_integration.py": "6fab5fa4a4311eee6eb2cad4fc3d0903e89344d8"
+      "canonical/tests/test_one_shot_reality_closure_v2_integration.py": "6fab5fa4a4311eee6eb2cad4fc3d0903e89344d8",
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "7a986e442b06d4baeed235202b7a26291077decb",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "15b03a367e1229bc6bf9326012469a721779bbed"
     }
   },
   "independent_carrier": {
@@ -40,7 +43,9 @@
     "information_theoretic_externality_proved": false,
     "terminal_authority": false,
     "global_truthful_open_state": true,
-    "invariant": "EMPTY_R3_QUEUE_MUST_NOT_HIDE_CURRENT_R2_INTERNAL_GAP"
+    "invariant": "EMPTY_R3_QUEUE_MUST_NOT_HIDE_CURRENT_R2_INTERNAL_GAP",
+    "current_r2_version": "V43",
+    "current_main_authority_overlay_verified": true
   },
   "correction": {
     "stale_expectation": "EMPTY_R3_STATE_IMPLIES_GLOBAL_ONE_SHOT_PASS",
