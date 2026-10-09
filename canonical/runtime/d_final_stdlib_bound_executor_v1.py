@@ -134,6 +134,10 @@ def inspect(capability_id: str) -> dict[str, Any]:
         raise DFinalStdlibBoundError("BOUND_CAPABILITY_NOT_VERIFIED:" + cid)
     if float(entry.get("incremental_spend_usd", 0)) != 0:
         raise DFinalStdlibBoundError("BOUND_CAPABILITY_NONZERO_COST:" + cid)
+    source = entry.get("source")
+    if not isinstance(source, Mapping):
+        raise DFinalStdlibBoundError("BOUND_CAPABILITY_SOURCE_INVALID:" + cid)
+    dependency = _verify_stdlib_source(source)
     verification = entry.get("verification")
     if not isinstance(verification, Mapping) or not verification:
         raise DFinalStdlibBoundError("BOUND_CAPABILITY_VERIFICATION_MISSING:" + cid)
@@ -147,10 +151,6 @@ def inspect(capability_id: str) -> dict[str, Any]:
     action_template = entry.get("action_template")
     if not isinstance(action_template, Mapping) or action_template.get("type") != "invoke_capability":
         raise DFinalStdlibBoundError("BOUND_CAPABILITY_ACTION_TEMPLATE_INVALID:" + cid)
-    source = entry.get("source")
-    if not isinstance(source, Mapping):
-        raise DFinalStdlibBoundError("BOUND_CAPABILITY_SOURCE_INVALID:" + cid)
-    dependency = _verify_stdlib_source(source)
     return {
         "capability_id": cid,
         "entry": deepcopy(dict(entry)),
