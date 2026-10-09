@@ -79,11 +79,11 @@ def _scope_id(source_id: str, text: str, match: re.Match[str]) -> tuple[str, tup
     left = _trim(text, 0, match.start())
     right = _trim(text, match.end(), len(text))
     material = (
-        f"{source_id}\\0{match.start()}\\0{match.end()}\\0CONDITIONAL_UNLESS\\0"
+        f"{source_id}\0{match.start()}\0{match.end()}\0CONDITIONAL_UNLESS\0"
         f"{text[match.start():match.end()].lower()}"
     )
     operator_id = "OP-" + sha256(material.encode("utf-8")).hexdigest()[:20]
-    scope_raw = f"{source_id}\\0UNLESS\\0{operator_id}\\0{(left, right)!r}".encode("utf-8")
+    scope_raw = f"{source_id}\0UNLESS\0{operator_id}\0{(left, right)!r}".encode("utf-8")
     return "SCOPE-" + sha256(scope_raw).hexdigest()[:20], left, right
 
 
