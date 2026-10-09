@@ -59,7 +59,7 @@ def v3_certificate(lower=0.70, target=0.578):
 
 def base():
     identity = {
-        "benchmark_id": "CURSORBENCH",
+        "benchmark_id": "CURSORBENCH_4_0",
         "benchmark_version": "4.0",
         "target_id": "OPUS_5_5_MAX",
         "harness_hash": "h1",
