@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_POLICY_ADEQUACY_CERTIFICATE_V1",
+  "date": "2026-10-09",
+  "policy_id": "BRAIN_AUTHENTICATED_ADAPTIVE_CAPABILITY_EXPANSION_SOLVER_V1",
+  "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+  "family": "ADVANCED_AGENTIC_CODING",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "status": "AUTHENTICATED_CONDITIONAL_CONSTRUCTIVE_POSITIVE_ADEQUACY_REGION_CANDIDATE__ZERO_BENCHMARK_CREDIT",
+  "policy_condition": {
+    "op": "AND",
+    "args": [
+      {"op": "ATOM", "id": "CODING_ADAPTIVE_TASK_TARGET_CONTRACT_BOUND_V1"},
+      {"op": "ATOM", "id": "CODING_ADAPTIVE_FINITE_EXPANSION_WITNESS_V1"},
+      {"op": "ATOM", "id": "CODING_ADAPTIVE_EXPANDED_CAPABILITY_SEMANTICS_AUTHENTICATED_V1"},
+      {"op": "ATOM", "id": "CODING_ADAPTIVE_STEP_VERIFIERS_TOTAL_SOUND_COMPLETE_V1"},
+      {"op": "ATOM", "id": "CODING_ADAPTIVE_PROPOSAL_WITNESS_WITHIN_BUDGET_V1"},
+      {"op": "ATOM", "id": "CODING_ADAPTIVE_EFFECT_OUTCOME_VERIFIED_V1"},
+      {"op": "ATOM", "id": "CODING_ADAPTIVE_CYCLE_EXPANSION_BUDGET_SUFFICIENT_V1"},
+      {"op": "ATOM", "id": "CODING_ADAPTIVE_PRETERMINAL_INFORMATION_ADMISSIBLE_V1"}
+    ]
+  },
+  "policy_condition_sha256": "0dcc79f0fbec83ca19381ca8dd4c0a82e68aff65437e33e3a8d308143926e15b",
+  "exact_policy": {
+    "path": "canonical/runtime/universal_verified_adaptive_solver_v12.py",
+    "git_blob_sha": "e85b4127a7cf53124114db89c651a22cdc51ee53"
+  },
+  "exact_sources": {
+    "theorem": {
+      "path": "canonical/governance/CODING_AUTHENTICATED_ADAPTIVE_EXPANSION_CONSTRUCTIVE_ADEQUACY_THEOREM_20261009_V1.json",
+      "git_blob_sha": "71ff721bdf6f6c625ff9c847aad05fab5eb25a0e"
+    },
+    "v12_runtime_test": {
+      "path": "canonical/tests/test_universal_verified_adaptive_solver_v12.py",
+      "git_blob_sha": "1f6ed89cc8409f59cd3148c9e3bd824bc282a5de"
+    },
+    "v11_proposal_test": {
+      "path": "canonical/tests/test_universal_verified_adaptive_solver_v11.py",
+      "git_blob_sha": "eb836368bb33f6dcbd72f39d65c214391e780ee5"
+    }
+  },
+  "adequacy_theorem": {
+    "id": "CODING_AUTHENTICATED_ADAPTIVE_EXPANSION_ALL_MEMBERS_LIVENESS_V1",
+    "mode": "FORMAL_ALL_MEMBERS",
+    "constructive_liveness": true,
+    "requires_initial_static_complete_route": false,
+    "allows_open_candidate_proposal_domain": true,
+    "empirical_generalization_used": false
+  },
+  "adequacy_proved": true,
+  "brain_owned": true,
+  "load_bearing_constraints_preserved": true,
+  "membership_self_certified": false,
+  "target_membership_proved": false,
+  "whole_behavior_adequacy": false,
+  "whole_cursorbench_adequacy": false,
+  "hard_nonclaims": [
+    "NO_CONDITION_ATOM_TRUTH_CREATED_BY_THIS_CERTIFICATE",
+    "NO_PRIVATE_CURSORBENCH_CONTEXT_MEMBERSHIP",
+    "NO_CLAIM_EVERY_CODING_TASK_HAS_A_FINITE_AUTHENTICATED_EXPANSION_WITNESS",
+    "NO_WHOLE_SPECIFICATION_RESIDUAL_CLOSURE",
+    "NO_CURSORBENCH_SCORE_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
