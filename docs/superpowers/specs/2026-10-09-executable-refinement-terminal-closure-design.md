@@ -354,3 +354,12 @@ During TDD, the first verifier design exposed a self-certification flaw: caller-
 A route may reach `REFINEMENT_VERIFIED` or `VERIFIED_LIVE` only when a future supported proof class is mechanically checked by the trusted verifier and emits `refinement_verified: true`. Differential tests, source hashes, declarations, and attestation remain evidence but are not refinement proof.
 
 This correction strengthens the design. The current highest-dominance unresolved leaf is `terminal-live-paths-executable-refinement`, not a falsely closed bounded route.
+
+
+## Promotion-boundary correction: immutable truth before hot-pointer projection
+
+The live `CURRENT_TERMINAL_AUTHORITY.json` is a high-contention mutable pointer that changes concurrently with unrelated work. This feature therefore does **not** modify that pointer before exact branch verification.
+
+Instead it publishes `canonical/governance/EXECUTABLE_REFINEMENT_CURRENT_TRUTH_20261009_V1.json`, an immutable content-addressed truth fragment that binds the framework, anti-bypass gate, graph, falsifier, bounded structural certificates, open frontier, and zero-credit nonclaims.
+
+After exact full-repository verification and any required independent replay, promotion consists of a minimal current-main-relative update that projects this already-verified truth fragment into the then-current terminal pointer. This separates proof/evidence construction from mutable authority publication and avoids repeated stale-pointer rebases.
