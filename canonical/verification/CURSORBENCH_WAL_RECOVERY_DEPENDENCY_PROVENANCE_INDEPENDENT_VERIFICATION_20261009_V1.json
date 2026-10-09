@@ -1,0 +1,21 @@
+{
+  "audit_id": "audit:wal-recovery-ordering-dependency-provenance-v1",
+  "builder_output_derivation_labels_truthful": true,
+  "dependency_labels_source_verified": true,
+  "dependency_provenance_projection_sha256": "db0f9f9db699dd7effd2bff4b4ea28a2e0e9059812806898c27bf3f4f4642d28",
+  "independence_relevant_edges_complete": true,
+  "independent_audit_result_sha256": "397c04d80887184ecbaf095a2e8f29df52fce308bfaaeb997c1522a1c52c3483",
+  "independent_verified": true,
+  "independent_verifier_id": "sprite-literal-source-and-provenance-audit-v1",
+  "information_boundary_atom_verified": false,
+  "no_undeclared_nonraw_dependencies": true,
+  "pass": true,
+  "producer_id": "brain-wal-acceptance-producer-v1",
+  "provenance_labels_authorized": true,
+  "schema": "PROJECT_BRAIN_TYPED_ACCEPTANCE_DEPENDENCY_PROVENANCE_INDEPENDENT_VERIFICATION_V1",
+  "source_authority_completeness_verified": true,
+  "subject_git_blob_sha": "8c48fa17e8d8b27fe75925403e5067968eef61a0",
+  "subject_model_sha256": "642157445ee9cf869fcfc9020c4ab18ed216844f78a2f72119b313eab9b706b6",
+  "terminal_authority": false,
+  "verification_method": "INDEPENDENT_AUDIT"
+}
