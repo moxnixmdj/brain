@@ -64,6 +64,7 @@
     "region_is_a_conditional_subregion_of_surviving_behavior": true,
     "current_hidden_cursorbench_task_membership_proved": false
   },
+  "adequacy_proved": true,
   "membership_self_certified": false,
   "adequacy_self_certified": false,
   "brain_owned": true,
