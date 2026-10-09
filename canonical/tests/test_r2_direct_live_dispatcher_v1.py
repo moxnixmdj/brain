@@ -84,6 +84,20 @@ class R2DirectLiveDispatcherV1Tests(unittest.TestCase):
             "canonical/runtime/fake_baseline.py",
             BASELINE_OVERLAP if overlap else BASELINE,
         )
+        helper_sha = self.write(
+            "canonical/runtime/fake_baseline_helper.py",
+            "VALUE = 1\n",
+        )
+        activation = {
+            "schema": "TEST_ACTIVATION_V1",
+            "status": "ACTIVE_TEST",
+            "current_routes": [{"route_id": "BASE"}],
+        }
+        activation_text = json.dumps(activation, indent=2, sort_keys=True) + "\n"
+        activation_sha = self.write(
+            "canonical/governance/fake_activation.json",
+            activation_text,
+        )
         routes = []
         if dynamic:
             dynamic_sha = self.write("canonical/runtime/fake_dynamic.py", DYNAMIC)
@@ -122,6 +136,18 @@ class R2DirectLiveDispatcherV1Tests(unittest.TestCase):
                 "run_callable": "run",
                 "declared_route_count": 1,
                 "declared_route_ids": ["BASE"],
+                "authority_activation_path": "canonical/governance/fake_activation.json",
+                "authority_activation_git_blob_sha": activation_sha,
+                "runtime_closure": [
+                    {
+                        "path": "canonical/runtime/fake_baseline.py",
+                        "git_blob_sha": baseline_sha,
+                    },
+                    {
+                        "path": "canonical/runtime/fake_baseline_helper.py",
+                        "git_blob_sha": helper_sha,
+                    },
+                ],
             },
             "dynamic_routes": routes,
             "terminal_authority": False,
@@ -225,6 +251,32 @@ class R2DirectLiveDispatcherV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertIn("CURRENT_LIVE_STATE_TARGET_BLOB_MISMATCH", out["reason"])
+
+    def test_baseline_transitive_runtime_drift_fails_closed(self):
+        pointer = self.install_state()
+        helper = self.root / "canonical/runtime/fake_baseline_helper.py"
+        helper.write_text("VALUE = 2\n", encoding="utf-8")
+        out = live.preflight(
+            {"task_id": "t", "goal": "base"},
+            repo_root=self.root,
+            pointer_path=pointer,
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("R2_DIRECT_LIVE_BASELINE_CLOSURE_BLOB_MISMATCH", out["reason"])
+
+    def test_baseline_activation_drift_fails_closed(self):
+        pointer = self.install_state()
+        activation = self.root / "canonical/governance/fake_activation.json"
+        activation.write_text(activation.read_text(encoding="utf-8") + " ", encoding="utf-8")
+        out = live.preflight(
+            {"task_id": "t", "goal": "base"},
+            repo_root=self.root,
+            pointer_path=pointer,
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("R2_DIRECT_LIVE_BASELINE_ACTIVATION_BLOB_MISMATCH", out["reason"])
 
     def test_catalog_declares_future_route_growth_source_edit_free(self):
         pointer = self.install_state(dynamic=True)
