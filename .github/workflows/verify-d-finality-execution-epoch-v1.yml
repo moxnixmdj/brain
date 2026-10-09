@@ -6,7 +6,12 @@ on:
       - 'canonical/runtime/d_finality_execution_epoch_v1.py'
       - 'canonical/tests/test_d_finality_execution_epoch_v1.py'
       - 'canonical/runtime/d_finality_coverage_gate_v1.py'
+      - 'canonical/runtime/d_finality_zero_ambient_frontdoor_v1.py'
+      - 'canonical/runtime/d_finality_zero_ambient_child_v1.py'
+      - 'canonical/runtime/d_final_stdlib_bound_executor_v1.py'
       - 'canonical/tests/test_d_finality_coverage_gate_v1.py'
+      - 'canonical/tests/test_d_finality_zero_ambient_frontdoor_v1.py'
+      - 'canonical/tests/d_final_decision_verify_physical_canary_v1.py'
       - 'canonical/governance/CURRENT_D_FINALITY_COVERAGE_RESIDUAL_20261009_V1.json'
       - 'canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json'
       - '.github/workflows/verify-d-finality-execution-epoch-v1.yml'
@@ -32,7 +37,13 @@ jobs:
           python3 -m unittest \
             canonical.tests.test_d_finality_execution_epoch_v1 \
             canonical.tests.test_d_finality_coverage_gate_v1 \
+            canonical.tests.test_d_finality_zero_ambient_frontdoor_v1 \
             -v
+
+      - name: Run physical zero-ambient decision-verifier canary
+        run: |
+          set -euo pipefail
+          python3 canonical/tests/d_final_decision_verify_physical_canary_v1.py
 
       - name: Compile exact runtime and tests
         run: |
@@ -41,7 +52,12 @@ jobs:
             canonical/runtime/d_finality_execution_epoch_v1.py \
             canonical/tests/test_d_finality_execution_epoch_v1.py \
             canonical/runtime/d_finality_coverage_gate_v1.py \
-            canonical/tests/test_d_finality_coverage_gate_v1.py
+            canonical/tests/test_d_finality_coverage_gate_v1.py \
+            canonical/runtime/d_finality_zero_ambient_frontdoor_v1.py \
+            canonical/runtime/d_finality_zero_ambient_child_v1.py \
+            canonical/runtime/d_final_stdlib_bound_executor_v1.py \
+            canonical/tests/test_d_finality_zero_ambient_frontdoor_v1.py \
+            canonical/tests/d_final_decision_verify_physical_canary_v1.py
 
       - name: Parse governance evidence
         run: |
@@ -56,5 +72,8 @@ jobs:
           git hash-object canonical/tests/test_d_finality_execution_epoch_v1.py
           git hash-object canonical/runtime/d_finality_coverage_gate_v1.py
           git hash-object canonical/tests/test_d_finality_coverage_gate_v1.py
+          git hash-object canonical/runtime/d_finality_zero_ambient_frontdoor_v1.py
+          git hash-object canonical/runtime/d_finality_zero_ambient_child_v1.py
+          git hash-object canonical/tests/d_final_decision_verify_physical_canary_v1.py
           git hash-object canonical/governance/CURRENT_D_FINALITY_COVERAGE_RESIDUAL_20261009_V1.json
           git rev-parse HEAD
