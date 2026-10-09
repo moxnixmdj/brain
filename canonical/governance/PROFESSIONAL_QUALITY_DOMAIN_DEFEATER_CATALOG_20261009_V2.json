@@ -12,7 +12,8 @@
         "INTENT_SPECIFICATION_CLOSURE",
         "AGENDA_CONSIDERATION_SET",
         "GOAL_PROXY_SEPARATION",
-        "CLAIM_SCOPE_TYPING"
+        "CLAIM_SCOPE_TYPING",
+        "RISK_POLICY_AUTHORITY"
       ]
     },
     {
@@ -33,7 +34,8 @@
         "MULTISCALE_EMERGENT_QUALITY",
         "DELIVERY_REALIZATION_FIDELITY",
         "HIDDEN_CHANNEL_OBSERVABILITY",
-        "EXACT_SUBJECT_BINDING"
+        "EXACT_SUBJECT_BINDING",
+        "CONTEXT_COMPLETENESS_AND_TRUNCATION"
       ]
     },
     {
@@ -57,7 +59,8 @@
         "REFERENCE_POINT_BASELINE_CONTAMINATION",
         "ANCHOR_PROVENANCE",
         "ANCHOR_MEMORIZATION",
-        "JUDGE_ARTIFACT_INTERACTION"
+        "JUDGE_ARTIFACT_INTERACTION",
+        "BASE_RATE_AND_SPECTRUM_VALIDITY"
       ]
     },
     {
@@ -69,7 +72,10 @@
         "GROUNDING_REGRESS_CLOSURE",
         "SEMANTIC_CLAIM_TYPING",
         "INFERENCE_RULE_CLOSURE",
-        "PROBABILITY_SEMANTICS"
+        "PROBABILITY_SEMANTICS",
+        "JOINT_ASSURANCE_MULTIPLICITY",
+        "EVIDENCE_PACKET_COMPLETENESS",
+        "EVIDENCE_AUTHENTICITY"
       ]
     },
     {
@@ -124,7 +130,9 @@
         "GROUND_CONFLICT",
         "MODEL_MULTIPLICITY_RASHOMON",
         "ANALYSIS_MULTIVERSE",
-        "DECISION_CLOSURE"
+        "DECISION_CLOSURE",
+        "JOINT_ASSURANCE_MULTIPLICITY",
+        "OPTIONAL_STOPPING_AND_SEQUENTIAL_INFERENCE"
       ]
     },
     {
@@ -137,7 +145,8 @@
         "META_EVALUATOR_ROUTER_SELECTION",
         "EVALUATION_AWARENESS",
         "ACQUIRED_CONTAMINATION",
-        "REWARD_GAMING"
+        "REWARD_GAMING",
+        "FAIL_OPEN_AND_REPEATED_TESTING"
       ]
     },
     {
@@ -153,11 +162,13 @@
         "BOUNDED_INQUIRY",
         "META_CONTROLLER_CRITICAL_PATH",
         "COVERAGE_COMPLETENESS",
-        "NONVACUITY"
+        "NONVACUITY",
+        "EXECUTION_FAILURE_SEMANTICS",
+        "DEPENDENCY_INVALIDATION"
       ]
     }
   ],
-  "challenge_count": 70,
+  "challenge_count": 80,
   "challenges": [
     {
       "id": "C01_GOAL_SUBSTITUTION",
@@ -815,6 +826,114 @@
         "R5_EVALUATOR_REFERENCE"
       ],
       "attack": "Evaluator preference is driven by stylistic presentation more strongly than the target content-quality construct.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C71_JOINT_ASSURANCE_MULTIPLICITY",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Each branch has an apparently acceptable marginal uncertainty or error guarantee, but the conjunction is certified without controlling root-level multiplicity, dependence or simultaneous false-certification risk.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C72_UNGROUNDED_RISK_TOLERANCE",
+      "root_ids": [
+        "R1_TARGET_SPECIFICATION",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "The system invents a false-certification tolerance, loss ordering or decision threshold without target-authorized grounding, making an arbitrary risk appetite appear objective.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C73_BASE_RATE_PRECISION_LAUNDERING",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Benchmark precision, PPV or calibration is transplanted to the release population despite materially different excellence prevalence, selection stage or difficulty spectrum.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C74_EXECUTION_FAILURE_FAIL_OPEN",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "A verifier, evidence acquisition, renderer or evaluation run crashes, times out or never executes, and absence of a result is treated as a pass, stale evidence is reused, or authority falls back to a weaker route.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C75_STALE_CERT_AFTER_DEPENDENCY_CHANGE",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Artifact, evaluator, reference, policy, dependency or environment changes after certification but descendant claims are not invalidated and reopened.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C76_SELECTIVE_EVIDENCE_PACKET",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "The evaluator receives a selectively chosen subset of available admissible evidence because it favors the incumbent, while omitted unfavorable evidence would change the decision.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C77_PROVENANCE_OR_RECEIPT_FORGERY",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Fabricated or spoofed source metadata, evaluator identity, artifact binding, provenance receipt or evidence record is admitted as terminal support.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C78_CONTEXT_TRUNCATION_OBLIGATION_DROP",
+      "root_ids": [
+        "R1_TARGET_SPECIFICATION",
+        "R3_REALIZATION_OBSERVATION",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Context-window, parser, extraction or transport truncation silently drops a material requirement or artifact region and the remaining partial view is certified as complete.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C79_FALLBACK_EVALUATOR_SCOPE_WEAKENING",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "The primary qualified evaluator is unavailable and an out-of-scope or weaker fallback is silently substituted while preserving the same certification authority.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Fresh or repeated evaluations are sampled or peeked at until a favorable threshold is crossed while fixed-sample uncertainty or error guarantees are reported as though only one test occurred.",
       "status": "OPEN",
       "terminal_pass_forbidden": true
     }
