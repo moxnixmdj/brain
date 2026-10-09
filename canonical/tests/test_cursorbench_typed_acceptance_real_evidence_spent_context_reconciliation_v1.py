@@ -26,6 +26,11 @@ def test_spent_context_real_evidence_is_bound_without_cursorbench_credit():
     assert j["deduction"]["transfer_from_this_terminal_bench_context_to_all_cursorbench_v5_contexts_proved"] is False
     assert j["deduction"]["cursorbench_positive_adequacy_cover_closed"] is False
     assert j["deduction"]["cursorbench_threshold_met"] is False
+    assert j["current_main_runtime_replay"]["all_atom_gates_pass"] is True
+    assert j["current_main_runtime_replay"]["p3_pass"] is True
+    assert j["current_main_runtime_replay"]["selected_policy_id"]=="BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1"
+    assert j["current_main_runtime_replay"]["source_authorization_verified"] is False
+    assert j["current_main_runtime_replay"]["terminal_authority"] is False
     assert j["accounting"]["acceptance_credit_delta"]==0
     assert j["accounting"]["terminal_credit_delta"]==0
 
@@ -37,6 +42,7 @@ def test_all_content_addressed_subjects_are_exact():
         j["runtime_gate"],
         j["hidden_audit"],
         j["p3_composition"],
+        j["current_main_runtime_replay"],
         j["real_evidence_bundles"]["source_coverage"]["receipt"],
         j["real_evidence_bundles"]["source_coverage"]["verification"],
         j["real_evidence_bundles"]["dependency_provenance"]["receipt"],
