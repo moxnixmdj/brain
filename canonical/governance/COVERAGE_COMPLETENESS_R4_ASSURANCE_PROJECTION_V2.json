@@ -8,7 +8,7 @@
   },
   "certificate_pointer": {
     "path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
-    "git_blob_sha": "b5ecc5a30abd046fb4f034e9ac1972ebdcf73c66"
+    "git_blob_sha": "eace743c6cb2399dd1c1bc35d8678bba8a74d415"
   },
   "gates": {
     "representation_closure": {
@@ -16,7 +16,7 @@
       "closed": true
     },
     "proof_closure": {
-      "status": "OPEN_ACTIVE_FROZEN_CLAIM_NOT_YET_BOUND__THEN_EXACT_THREE_CERTIFICATE_SLOTS",
+      "status": "ACTIVE_FROZEN_CLAIM_BOUND__THREE_CC_ROOT_CERTIFICATES_OPEN",
       "closed": false,
       "open_root_ids": [
         "CC_R1_REALITY_CONTAINMENT_V1",
@@ -24,8 +24,7 @@
         "CC_R3_TERMINAL_CLOSURE_V1"
       ],
       "forbidden_inference": "NO_SHORT_ALIAS_OR_LEGACY_R2_R3_RECEIPT_CAN_CLOSE_A_CC_ROOT_SLOT",
-      "active_claim": null,
-      "prerequisite": "FREEZE_ONE_ALLOWED_CLAIM_AND_BIND_REGISTRY_BEFORE_ANY_ROOT_SLOT_CAN_BE_PROVED_CURRENT"
+      "active_claim": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa"
     },
     "execution_closure": {
       "status": "OPEN",
@@ -40,14 +39,13 @@
   },
   "r4_closed": false,
   "exact_next_order": [
-    "FREEZE_EXACT_ALLOWED_CERTIFICATION_CLAIM_FOR_CC_ROOT_REGISTRY",
-    "ATTACK_CC_R3_TERMINAL_CLOSURE_FOR_THAT_EXACT_CLAIM_WITH_U_EMPTY_OR_COUNTEREXAMPLE_PROOF",
+    "ATTACK_CC_R3_TERMINAL_CLOSURE_FOR_ACTIVE_CLAIM_WITH_U_EMPTY_OR_COUNTEREXAMPLE_PROOF",
     "ATTACK_CC_R1_REALITY_CONTAINMENT_FOR_SAME_CLAIM",
     "ATTACK_CC_R2_MISSION_SOUNDNESS_FOR_SAME_CLAIM",
     "ONLY_AFTER_ALL_THREE_SAME_CLAIM_ROOT_CERTIFICATES_EXIST_BIND_PROOF_TO_REALIZATION",
     "THEN_RUN_INDEPENDENT_ADVERSARIAL_CLOSURE"
   ],
-  "scheduling_note": "CC_R3_REMAINS_FIRST_SET_ROOT_AFTER_THE_MANDATORY_ACTIVE_CLAIM_FREEZE__CLAIM_FREEZE_IS_R4_SOUNDNESS_PREREQUISITE_NOT_A_NEW_ROOT",
+  "scheduling_note": "ACTIVE_FROZEN_CLAIM_IS_BOUND__CC_R3_IS_NOW_THE_FIRST_SET_ROOT",
   "hard_nonclaims": [
     "NO_CC_ROOT_CERTIFICATE_PROVED",
     "NO_R4_CLOSURE",
