@@ -1087,6 +1087,33 @@
       "path": "canonical/verification/R2_V52_V14_V15_AUTHORITY_RECONCILIATION_VERIFY_20261009_V1.json",
       "git_blob_sha": "0a4ea360fb8aa97b42383bf690001bb233ec32ca",
       "note": "V14_FIELD_LATTICE_PLUS_V15_BOUNDED_COREFERENCE_AUTHORITY_COHERENT__29_OF_29__ZERO_TERMINAL_CREDIT"
+    },
+    "cursorbench_source_coverage_atoms_mechanism_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_SOURCE_COVERAGE_ATOMS_ACTIVATION_20261009_V1.json",
+      "git_blob_sha": "2008028041450cdba9a8ad291d56d64c6a1429bf",
+      "independent_verification": {
+        "path": "canonical/verification/CURSORBENCH_SOURCE_COVERAGE_ATOMS_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "cc0795464a18326643c11494bcc7a93144ccd9b9"
+      },
+      "note": "ONE_REAL_SOURCE_COVERAGE_BINDING_CAN_PROVE_TYPED_SEMANTICS_PLUS_FAILURE_MODE_COMPLETENESS_FOR_THE_EXACT_MODEL__REAL_RECEIPT_STILL_MISSING__ZERO_CREDIT"
+    },
+    "cursorbench_preverifier_information_boundary_mechanism_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_PREVERIFIER_INFORMATION_BOUNDARY_ATOM_ACTIVATION_20261009_V1.json",
+      "git_blob_sha": "821b3714c444992177eec6ef8e1cc69630a2efaf",
+      "independent_verification": {
+        "path": "canonical/verification/CURSORBENCH_PREVERIFIER_INFORMATION_BOUNDARY_ATOM_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "8a9f85f2a18e7c861bca950ba8b6e3f18c63d94f"
+      },
+      "note": "NO_HIDDEN_VERIFIER_ACCESS_ATOM_MECHANISM_VERIFIED__REAL_TARGET_CONTEXT_RECEIPT_STILL_MISSING__ZERO_CREDIT"
+    },
+    "cursorbench_dependency_provenance_mechanism_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_DEPENDENCY_PROVENANCE_ATOM_ACTIVATION_20261009_V1.json",
+      "git_blob_sha": "3691f7e499146b6e42c9608fe585d1c7a5779f55",
+      "independent_verification": {
+        "path": "canonical/verification/CURSORBENCH_DEPENDENCY_PROVENANCE_ATOM_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "59daf292a30f83557dfb05dcf1f72670a1d3b85d"
+      },
+      "note": "DEPENDENCY_PROVENANCE_ATOM_MECHANISM_VERIFIED__REAL_TARGET_CONTEXT_RECEIPT_STILL_MISSING__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1649,7 +1676,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "BIND_CURSORBENCH_4_0_METRIC_CONTINUITY_PER_TASK_SCORE_CONTRIBUTION_AND_AGGREGATION_DENOMINATOR_OR_EQUIVALENT_LOWER_BOUND_AUTHORITY__OTHERWISE_CONTINUE_ROUTE_B",
+    "cursorbench_next_proof_object": "ACQUIRE_THREE_REAL_SAME_MODEL_TARGET_RELEVANT_EVIDENCE_BUNDLES__SOURCE_COVERAGE__DEPENDENCY_PROVENANCE__PREVERIFIER_INFORMATION_BOUNDARY__DO_NOT_BUILD_NEW_ATOM_MECHANISMS__PREEMPT_IF_ROUTE_A_SCORING_AUTHORITY_APPEARS",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -1752,7 +1779,26 @@
     "cursorbench_dependency_provenance_malformed_binding_state": "FAIL_CLOSED",
     "r2_cross_document_effect_field_lattice_bound": true,
     "r2_bounded_coreference_ambiguity_control_bound": true,
-    "r2_bounded_coreference_ambiguity_antecedent_identity_authority": false
+    "r2_bounded_coreference_ambiguity_antecedent_identity_authority": false,
+    "cursorbench_source_coverage_atoms_mechanism_verified": true,
+    "cursorbench_source_coverage_atoms_mechanism_proves_when_real_binding_exists": [
+      "SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1",
+      "SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1"
+    ],
+    "cursorbench_source_coverage_real_receipt_bound": false,
+    "cursorbench_typed_semantics_atom_truth_proved": false,
+    "cursorbench_failure_mode_completeness_atom_truth_proved": false,
+    "cursorbench_preverifier_information_boundary_atom_mechanism_verified": true,
+    "cursorbench_preverifier_information_boundary_real_receipt_bound": false,
+    "cursorbench_no_hidden_verifier_access_atom_truth_proved": false,
+    "cursorbench_all_remaining_typed_acceptance_atom_mechanisms_available": true,
+    "cursorbench_remaining_typed_acceptance_mechanism_gap_count": 0,
+    "cursorbench_remaining_typed_acceptance_real_evidence_bundle_count": 3,
+    "cursorbench_remaining_typed_acceptance_real_evidence_bundles": [
+      "SOURCE_COVERAGE_BINDING_FOR_TYPED_SEMANTICS_PLUS_FAILURE_MODE_COMPLETENESS",
+      "DEPENDENCY_PROVENANCE_BINDING_FOR_EXACT_MODEL",
+      "PREVERIFIER_INFORMATION_BOUNDARY_BINDING_FOR_EXACT_MODEL"
+    ]
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2452,7 +2498,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 83,
+  "pointer_revision": 84,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3205,6 +3251,23 @@
     "frozen_atomic_predicates_proved": 18,
     "frozen_atomic_predicates_unresolved": 20,
     "terminal_remains_false": true,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_all_atom_mechanisms_reconciliation_20261009_v1": {
+    "result": "ALL_FOUR_REMAINING_ATOMS_HAVE_VERIFIED_PROOF_MECHANISMS__REAL_TRUTH_STILL_REQUIRES_THREE_SAME_MODEL_EVIDENCE_BUNDLES",
+    "structurally_internalized_atom": "SPEC_ACCEPT_SUPPORTED_TRANSFORM_KINDS_ONLY_V1",
+    "source_coverage_atoms": [
+      "SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1",
+      "SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1"
+    ],
+    "separate_receipt_atoms": [
+      "SPEC_ACCEPT_DEPENDENCY_PROVENANCE_TRUTH_V1",
+      "SPEC_ACCEPT_NO_HIDDEN_VERIFIER_ACCESS_V1"
+    ],
+    "mechanism_gap_count": 0,
+    "real_evidence_bundle_count": 3,
+    "real_atom_truth_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
