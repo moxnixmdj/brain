@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V50_FIBO_BASEL_DESIGNATION_RECONCILIATION_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__TWO_CARRIER_5_OF_5_EACH__EXACT_V50_CURRENT_R2_AND_TERMINAL_POINTER_BINDING__ZERO_TERMINAL_CREDIT",
+  "branch": "r2-v50-fibo-basel-designation-reconcile-20261009",
+  "base_main": "d68edc958a0765e72f3763ca6f55a187f54b4178",
+  "exact_bound_blobs": {
+    "scheduler_v49": "bb7df134a969d52dfee603c8ea16b9653ab11eba",
+    "scheduler_v50": "7b1226ca98b81437563789abe565c11ae77a4db0",
+    "current_r2_v50": "23eb6ec578de165aa66c8a01971d360cd618a7d0",
+    "current_terminal_authority_v50": "98815b12c1872d9255d6c485ae2c7057172ea521",
+    "reconciliation_test": "c15e0b1d6c2ac4fcf98c966e70990a3ed5087e86",
+    "basel_authority_runtime": "f30b189d68d500042aaed28f6cd4ae5279daecf4",
+    "basel_authority_evidence": "ae11a0ddca613b25b7df37b1a3f99ade0836f6ee",
+    "basel_authority_verification": "101ae642a20adff27c4ac956caf79d83a3ab46fa",
+    "basel_authority_reconciliation": "fc3c11720b35a4de56430b66cd1f1b1c24e36f5f"
+  },
+  "tdd": {
+    "red": {
+      "verified": true,
+      "result": "1_PASS_4_ERRORS",
+      "expected_failure": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V50.json missing before implementation",
+      "unrelated_failure_observed": false
+    },
+    "green": {
+      "assertions": 5,
+      "passed": 5,
+      "failed": 0,
+      "errors": 0
+    }
+  },
+  "independent_replays": [
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-live-integrated-v1-run-20261008",
+      "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+      "result": "5_OF_5_PASS"
+    },
+    {
+      "carrier": "SPRITES",
+      "sprite_name": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+      "result": "5_OF_5_PASS"
+    }
+  ],
+  "invariants": {
+    "v50_supersedes_exact_v49_blob": true,
+    "old_core7_only_wake_removed": true,
+    "combined_core7_plus_basel_fragment_wake_present": true,
+    "direct_route_count_preserved_33": true,
+    "bounded_family_count_preserved_30": true,
+    "primary_finance_unsolved_cell_count_preserved_1": true,
+    "basel_fragment_added_as_non_direct_verified_semantic_subregion": true,
+    "current_r2_binds_exact_v50_blob": true,
+    "current_r2_binds_exact_basel_authority_artifacts": true,
+    "current_terminal_binds_exact_current_r2_and_v50_blobs": true,
+    "open_world_ontology_boundary_preserved": true,
+    "contextual_identity_from_label_or_abbreviation_remains_false": true,
+    "terminal_false_preserved": true
+  },
+  "semantic_delta": {
+    "before_wake": "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND_OUTSIDE_VERIFIED_FIBO_Q2_2026_CORE7_SCOPE",
+    "after_wake": "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND_OUTSIDE_VERIFIED_FIBO_Q2_2026_CORE7_AND_BASEL_III_DESIGNATION_FRAGMENT_SCOPES",
+    "newly_reused_scope": "FIBO_Q2_2026_EU_SECURITIES_RESTRICTIONS_BASEL_III_DESIGNATIONS",
+    "global_finance_semantic_tail_closed": false,
+    "open_world_ontology_closed": false
+  },
+  "accounting": {
+    "direct_route_count_delta": 0,
+    "bounded_family_count_delta": 0,
+    "primary_unsolved_cell_count_delta": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CCOB_TLAC_OR_MREL_IS_CLOSED_BY_THIS_RECONCILIATION",
+    "NO_CLAIM_LABEL_OR_ABBREVIATION_EQUALS_CONTEXTUAL_IDENTITY",
+    "NO_CLAIM_FULL_FIBO_IMPORT_OR_OPEN_WORLD_FINANCE_ONTOLOGY_COMPLETENESS",
+    "NO_NEW_DIRECT_ADEQUACY_POLICY_ACCEPTANCE_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_authority": false
+}
