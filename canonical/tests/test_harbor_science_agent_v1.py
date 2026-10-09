@@ -115,6 +115,67 @@ class ScienceAgentTests(unittest.TestCase):
         )
         self.assertTrue(all(r["acceptance_receipt_required"] for r in rows))
 
+    def test_planner_obligation_view_is_one_to_one_span_reconstructible_and_compact(self):
+        goal=" ".join(f"Create item{i:03d}." for i in range(80))
+        contract,localized,rows=s._compile_lossless_task_scope(goal)
+        view=s._planner_obligation_view(goal,contract,rows)
+        self.assertEqual(view["contract_sha256"],contract["task_contract_sha256"])
+        self.assertEqual(view["count"],80)
+        self.assertEqual(len(view["rows"]),80)
+        self.assertTrue(view["all_rows_require_acceptance_receipt"])
+        self.assertEqual(view["row_schema"],["segment_index","start","end","route"])
+        encoded=json.dumps(view,sort_keys=True,separators=(",",":"))
+        for full,compact in zip(rows,view["rows"]):
+            index,start,end,route=compact
+            self.assertEqual(index,full["segment_index"])
+            self.assertEqual([start,end],full["span"])
+            self.assertEqual(
+                __import__("hashlib").sha256(goal[start:end].encode("utf-8")).hexdigest(),
+                full["segment_sha256"],
+            )
+            self.assertNotIn(full["obligation_id"],encoded)
+            self.assertNotIn(full["segment_sha256"],encoded)
+            expected="O" if full["acceptance_route_status"]=="OBJECTIVE_ACCEPTANCE_ROUTE_AVAILABLE" else "S"
+            self.assertEqual(route,expected)
+        verbose=json.dumps(rows,sort_keys=True,separators=(",",":"))
+        self.assertLess(len(encoded),len(verbose)//3)
+
+    def test_planner_obligation_view_fails_closed_on_tampered_span_identity(self):
+        goal="Create alpha. Create beta."
+        contract,localized,rows=s._compile_lossless_task_scope(goal)
+        tampered=[dict(row) for row in rows]
+        tampered[0]["span"]=[0,1]
+        with self.assertRaisesRegex(RuntimeError,"SEGMENT_HASH_MISMATCH"):
+            s._planner_obligation_view(goal,contract,tampered)
+
+    def test_live_planner_prompt_uses_compact_obligation_index_not_repeated_hashes(self):
+        env=Env()
+        seen=[]
+        def capture(prompt,timeout_s=20):
+            seen.append(prompt)
+            return {
+                "text":json.dumps({
+                    "material_requirements":["R1"],
+                    "candidates":[{
+                        "action_id":"a",
+                        "covers":["R1"],
+                        "command":"echo work",
+                        "verify_command":"echo verify",
+                    }],
+                }),
+                "model":"synthetic-fixed-substrate",
+            }
+        goal=" ".join(f"Create item{i:03d}." for i in range(80))
+        with patch.object(s.science_planner,"plan",capture):
+            result=asyncio.run(s.run_science_goal(goal,env,max_cycles=1))
+        self.assertEqual(result["raw_task_required_obligation_count"],80)
+        self.assertEqual(len(seen),1)
+        self.assertIn('"row_schema":["segment_index","start","end","route"]',seen[0])
+        self.assertIn('"count":80',seen[0])
+        self.assertNotIn("RAWREQ:",seen[0])
+        contract,localized,rows=s._compile_lossless_task_scope(goal)
+        self.assertTrue(all(row["segment_sha256"] not in seen[0] for row in rows))
+
     def test_submission_ready_never_claims_raw_task_acceptance(self):
         env,result=self.run_goal([{
             "material_requirements":["R1"],

@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_LOSSLESS_PROMPT_COMPACTION_CANDIDATE_20261009_V1",
+  "date": "2026-10-09",
+  "status": "CANDIDATE__ZERO_AUTHORITY__PUBLIC_SYNTHETIC_VERIFICATION_REQUIRED",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "exact_delta": {
+    "runtime_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "predecessor_runtime_blob": "16e8ab7918c4f8d052698282dddf674b54a23016",
+    "candidate_runtime_blob": "066728adce1fb89f370737cab1878a218100bf6c",
+    "test_path": "canonical/tests/test_harbor_science_agent_v1.py",
+    "predecessor_test_blob": "b2c06c40424745092569aefa068ecff5a7df67ce",
+    "candidate_test_blob": "8c50a76ec944e6cc75524ad34b08f82e2efcf2a7"
+  },
+  "invariant": {
+    "exact_goal_text_unchanged": true,
+    "full_content_addressed_acceptance_contract_unchanged": true,
+    "obligation_cardinality_unchanged": true,
+    "obligation_order_unchanged": true,
+    "exact_goal_span_per_obligation_preserved": true,
+    "route_class_per_obligation_preserved": true,
+    "acceptance_receipt_requirement_preserved": true,
+    "individual_obligation_id_and_segment_hash_removed_from_model_prompt_only": true,
+    "individual_segment_hash_recomputed_from_exact_goal_span_before_compact_emission": true,
+    "verifier_authority_unchanged": true,
+    "terminal_authority_unchanged": true
+  },
+  "compact_view": {
+    "row_schema": [
+      "segment_index",
+      "start",
+      "end",
+      "route"
+    ],
+    "route_legend": {
+      "O": "OBJECTIVE_ACCEPTANCE_ROUTE_AVAILABLE",
+      "S": "SEMANTIC_ADJUDICATION_REQUIRED"
+    },
+    "contract_sha256_included_once": true,
+    "count_included_once": true,
+    "all_rows_require_acceptance_receipt": true
+  },
+  "required_verification": [
+    "FULL_EXISTING_HARBOR_SCIENCE_AGENT_TEST_SUITE_PASS",
+    "80_OBLIGATION_ONE_TO_ONE_RECONSTRUCTIBILITY_PASS",
+    "TAMPERED_SPAN_FAIL_CLOSED",
+    "LIVE_SYNTHETIC_AGENT_PROMPT_CONTAINS_NO_RAWREQ_IDS_OR_SEGMENT_HASHES",
+    "NO_BENCHMARK_TASK_READ"
+  ],
+  "execution_authority": false,
+  "task_read_authority": false,
+  "task_start_authority": false,
+  "promotion_authority": false,
+  "benchmark_task_exposure": 0,
+  "benchmark_trials_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}

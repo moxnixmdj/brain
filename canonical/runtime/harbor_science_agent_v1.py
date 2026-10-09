@@ -6,6 +6,7 @@ coverage state, and finish authority. No benchmark-specific task content lives h
 """
 from __future__ import annotations
 
+from hashlib import sha256
 import json
 import re
 import shlex
@@ -238,6 +239,81 @@ def _compile_lossless_task_scope(goal: str) -> tuple[dict[str, Any], dict[str, A
         })
     return contract, localization, prompt_rows
 
+_PLANNER_ROUTE_CODE = {
+    "OBJECTIVE_ACCEPTANCE_ROUTE_AVAILABLE": "O",
+    "SEMANTIC_ADJUDICATION_REQUIRED": "S",
+}
+
+
+def _planner_obligation_view(
+    goal: str,
+    task_contract: dict[str, Any],
+    rows: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Losslessly compress model-facing obligation routing metadata.
+
+    The exact Goal remains the semantic reference. The full content-addressed
+    acceptance contract remains Brain-owned out-of-band authority. This view
+    carries one row per obligation as [segment_index,start,end,route_code].
+    """
+    if not isinstance(goal, str) or not goal:
+        raise RuntimeError("SCIENCE_PLANNER_OBLIGATION_VIEW_GOAL_INVALID")
+    contract_sha = str(task_contract.get("task_contract_sha256") or "")
+    if len(contract_sha) != 64:
+        raise RuntimeError("SCIENCE_PLANNER_OBLIGATION_VIEW_CONTRACT_SHA_INVALID")
+    acceptance = task_contract.get("acceptance_contract") or {}
+    required = acceptance.get("required_obligation_ids") or []
+    if not isinstance(required, list) or not required:
+        raise RuntimeError("SCIENCE_PLANNER_OBLIGATION_VIEW_REQUIRED_IDS_INVALID")
+    if len(rows) != len(required):
+        raise RuntimeError("SCIENCE_PLANNER_OBLIGATION_VIEW_CARDINALITY_MISMATCH")
+
+    compact: list[list[Any]] = []
+    observed_ids: list[str] = []
+    for expected_index, row in enumerate(rows):
+        if not isinstance(row, dict):
+            raise RuntimeError("SCIENCE_PLANNER_OBLIGATION_VIEW_ROW_INVALID")
+        oid = str(row.get("obligation_id") or "")
+        observed_ids.append(oid)
+        index = row.get("segment_index")
+        span = row.get("span")
+        segment_sha = str(row.get("segment_sha256") or "")
+        status = str(row.get("acceptance_route_status") or "")
+        if index != expected_index:
+            raise RuntimeError("SCIENCE_PLANNER_OBLIGATION_VIEW_INDEX_DRIFT")
+        if (
+            not isinstance(span, list)
+            or len(span) != 2
+            or any(not isinstance(x, int) or isinstance(x, bool) for x in span)
+        ):
+            raise RuntimeError("SCIENCE_PLANNER_OBLIGATION_VIEW_SPAN_INVALID")
+        start, end = span
+        if not (0 <= start < end <= len(goal)):
+            raise RuntimeError("SCIENCE_PLANNER_OBLIGATION_VIEW_SPAN_OUT_OF_RANGE")
+        if len(segment_sha) != 64 or sha256(goal[start:end].encode("utf-8")).hexdigest() != segment_sha:
+            raise RuntimeError("SCIENCE_PLANNER_OBLIGATION_VIEW_SEGMENT_HASH_MISMATCH")
+        if row.get("acceptance_receipt_required") is not True:
+            raise RuntimeError("SCIENCE_PLANNER_OBLIGATION_VIEW_RECEIPT_REQUIREMENT_MISSING")
+        code = _PLANNER_ROUTE_CODE.get(status)
+        if code is None:
+            raise RuntimeError("SCIENCE_PLANNER_OBLIGATION_VIEW_ROUTE_STATUS_INVALID")
+        compact.append([index, start, end, code])
+
+    if observed_ids != required:
+        raise RuntimeError("SCIENCE_PLANNER_OBLIGATION_VIEW_REQUIRED_ID_ORDER_MISMATCH")
+    return {
+        "contract_sha256": contract_sha,
+        "count": len(compact),
+        "row_schema": ["segment_index", "start", "end", "route"],
+        "route_legend": {
+            "O": "OBJECTIVE_ACCEPTANCE_ROUTE_AVAILABLE",
+            "S": "SEMANTIC_ADJUDICATION_REQUIRED",
+        },
+        "all_rows_require_acceptance_receipt": True,
+        "rows": compact,
+    }
+
+
 def _nonempty_strings(value: Any, *, maximum: int, field: str) -> list[str]:
     if not isinstance(value, list) or not value or len(value) > maximum:
         raise RuntimeError(f"SCIENCE_{field}_INVALID")
@@ -358,6 +434,9 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         raise ValueError("SCIENCE_GOAL_REQUIRED")
     max_cycles = max(1, min(int(max_cycles), MAX_CYCLES))
     raw_task_contract, raw_task_localization, raw_task_obligations = _compile_lossless_task_scope(goal)
+    planner_obligation_view = _planner_obligation_view(
+        goal, raw_task_contract, raw_task_obligations
+    )
     brain_deliverables = _brain_mandated_deliverables(goal)
     mandatory_requirement_ids = list(brain_deliverables)
     requirements: list[str] | None = None
@@ -388,10 +467,11 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "independent verification resolves every frozen material requirement. finish_summary is optional "
             "descriptive metadata only and never execution or finish authority. "
             f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
-            "Brain lossless raw-task obligation quotient (non-droppable; exact text is the Goal span above): "
-            + json.dumps(raw_task_obligations, sort_keys=True)
-            + "\nEvery raw obligation remains acceptance-pending until exact candidate-bound independent acceptance exists. "
-            "Use Goal[span[0]:span[1]] as the authoritative obligation text; IDs and covers are routing metadata only.\n"
+            "Brain lossless raw-task compact obligation index (non-droppable; exact text is the Goal span above): "
+            + json.dumps(planner_obligation_view, sort_keys=True, separators=(",", ":"))
+            + "\nEvery compact row corresponds one-to-one with a Brain-owned acceptance obligation and remains acceptance-pending "
+            "until exact candidate-bound independent acceptance exists. Use Goal[start:end] as the authoritative obligation text; "
+            "the compact row index/span/route fields are routing metadata only.\n"
             "Brain-declared authoritative local inputs: "
             + json.dumps(declared_inputs, sort_keys=True)
             + "\nBrain-mandated explicit deliverables (requirement ID -> path): "

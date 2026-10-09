@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TB_SCIENCE_LOSSLESS_PROMPT_COMPACTION_20261009_V1",
+  "date": "2026-10-09",
+  "action_id": "TB_SCIENCE_LOSSLESS_MODEL_FACING_OBLIGATION_VIEW_COMPACTION",
+  "status": "ACTIVE_INTENT__INTERNAL_REPAIR_CANDIDATE__NO_TASK_READ_AUTHORITY__ZERO_CREDIT",
+  "canonical_base_commit": "dc474112ae7c0052c97de1f472b35bf24153c3df",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "target_obligation": "TB_SCIENCE_GE_58_7",
+  "action_kind": "REPAIR_CAPABILITY",
+  "causal_blocker": "RANK14_V2_EXACT_PRESTART_INPUT_17500_PLUS_4096_RESERVE_EXCEEDS_16384_BY_5212__87_OF_87_OBLIGATIONS_ARE_SEMANTIC_RESIDUALS__DECLARED_INPUT_COUNT_ZERO__VERBOSE_MODEL_FACING_ROUTING_METADATA_DUPLICATES_CONTENT_ADDRESSED_IDS_AND_HASHES",
+  "highest_leverage_now": true,
+  "selected_repair": "PRESERVE_EXACT_GOAL_AND_FULL_BRAIN_OWNED_ACCEPTANCE_CONTRACT__MODEL_FACING_VIEW_USES_ONE_ROW_PER_OBLIGATION_AS_SEGMENT_INDEX_START_END_ROUTE_CODE__RECOMPUTE_SEGMENT_HASH_FROM_GOAL_SPAN_BEFORE_EMISSION",
+  "stop_condition": "SYNTHETIC_80_PLUS_OBLIGATION_REPLAY_PROVES_ONE_TO_ONE_RECONSTRUCTIBILITY_NO_HASH_OR_ID_DUPLICATION_AND_EXISTING_AGENT_REGRESSION_PASSES__THEN_FRESH_RANK14_PRESTART_READ_MAY_MEASURE_EXACT_TOKEN_COUNT",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/13",
+    "success_probability_lcb": "0.9",
+    "wall_clock_cost_ub": "1"
+  },
+  "evidence": {
+    "rank14_v2_truth_path": "canonical/verification/TB_SCIENCE_RANK14_V2_PRESTART_RESULT_TRUTH_20261009_V1.json",
+    "rank14_v2_truth_git_blob_sha": "d284f4824f7f448b25e5e6f1aa810aa99d05f69f",
+    "measured_input_tokens": 17500,
+    "reserved_completion_tokens": 4096,
+    "server_context_tokens": 16384,
+    "deficit_tokens": 5212,
+    "raw_task_obligation_count": 87,
+    "objective_route_obligation_count": 0,
+    "semantic_residual_obligation_count": 87,
+    "declared_input_count": 0
+  },
+  "safety": {
+    "benchmark_task_content_embedded": false,
+    "benchmark_task_read_authority": false,
+    "task_start_authority": false,
+    "benchmark_trials_consumed_delta": 0,
+    "verification_authority_change": false,
+    "acceptance_contract_change": false,
+    "incremental_spend_usd_max": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
