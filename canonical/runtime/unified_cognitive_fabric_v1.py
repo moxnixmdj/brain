@@ -304,6 +304,61 @@ def catalog() -> dict[str, Any]:
     }
 
 
+
+def _run_adequate_decision_engine(
+    payload: Mapping[str, Any],
+    options: Mapping[str, Any],
+    *,
+    information_provider=None,
+    proposal_provider=None,
+    capability_expander=None,
+    episode_verification_provider=None,
+    skill_verification_provider=None,
+) -> dict[str, Any]:
+    """Execute the canonical decision engine path used for initial dispatch and replay."""
+    wrapped = live_runtime.run(
+        {"mode": "decision", "request": deepcopy(dict(payload)), **dict(options)},
+        repo_root=ROOT,
+        information_provider=information_provider,
+        proposal_provider=proposal_provider,
+        capability_expander=capability_expander,
+        episode_verification_provider=episode_verification_provider,
+        skill_verification_provider=skill_verification_provider,
+    )
+    return _unwrap_live_runtime(wrapped, "decision_output")
+
+
+def _decision_requires_user_information(out: Mapping[str, Any]) -> bool:
+    if out.get("ask_user_required") is True:
+        return True
+    if str(out.get("action") or "").strip() == "ASK_USER_MINIMUM_CLARIFICATION":
+        return True
+    request = out.get("next_information_request")
+    if isinstance(request, Mapping) and request.get("user_only") is True:
+        return True
+    return False
+
+
+def _auto_one_shot_summary(closure: Mapping[str, Any]) -> dict[str, Any]:
+    gap = closure.get("gap_contract")
+    return {
+        "attempted": True,
+        "closure_pass": closure.get("pass") is True,
+        "closure_status": closure.get("status"),
+        "fixed_point": closure.get("fixed_point") is True,
+        "gap_class": (
+            gap.get("gap_class")
+            if isinstance(gap, Mapping)
+            else None
+        ),
+        "proven_external": (
+            closure.get("status") == "PASS__PROVEN_INFORMATION_THEORETICALLY_EXTERNAL"
+        ),
+        "terminal_authority": False,
+    }
+
+
+
 def run(
     request: Mapping[str, Any],
     *,
@@ -426,16 +481,15 @@ def run(
             )
             out = _unwrap_live_runtime(wrapped, "raw_result")
         elif mode == "ADEQUATE_DECISION":
-            wrapped = live_runtime.run(
-                {"mode": "decision", "request": deepcopy(dict(payload)), **dict(options)},
-                repo_root=ROOT,
+            out = _run_adequate_decision_engine(
+                payload,
+                options,
                 information_provider=information_provider,
                 proposal_provider=proposal_provider,
                 capability_expander=capability_expander,
                 episode_verification_provider=episode_verification_provider,
                 skill_verification_provider=skill_verification_provider,
             )
-            out = _unwrap_live_runtime(wrapped, "decision_output")
         elif mode == "P3":
             out = p3.evaluate(payload, repo_root=ROOT)
         elif mode == "ADAPTIVE_SOLVER":
@@ -813,6 +867,66 @@ def run(
                 raise CognitiveFabricError("BOUND_CAPABILITY_INPUTS_NOT_OBJECT")
             out = execute_bound(capability_id, inputs=dict(inputs))
 
+        auto_one_shot = None
+        if (
+            auto_routed
+            and mode == "ADEQUATE_DECISION"
+            and isinstance(out, Mapping)
+            and out.get("pass") is not True
+            and options.get("auto_one_shot_closure", True) is not False
+            and not _decision_requires_user_information(out)
+        ):
+            closure = one_shot_reality_closure.run(
+                repo_root=ROOT,
+                state_path=options.get("state_path"),
+                verification_frontier_acquisition_provider=(
+                    verification_frontier_acquisition_provider
+                ),
+                verification_frontier_acquisition_provider_id=(
+                    verification_frontier_acquisition_provider_id
+                ),
+                failure_repair_provider=one_shot_failure_repair_provider,
+                externality_certificate_provider=(
+                    one_shot_externality_certificate_provider
+                ),
+                capability_synthesis_provider=(
+                    one_shot_capability_synthesis_provider
+                ),
+                evidence_acquisition_provider=(
+                    one_shot_evidence_acquisition_provider
+                ),
+                max_repair_rounds=int(options.get("one_shot_max_repair_rounds", 8)),
+                v1_max_rounds=int(options.get("one_shot_v1_max_rounds", 64)),
+                v1_max_actions_per_round=int(
+                    options.get("one_shot_v1_max_actions_per_round", 32)
+                ),
+            )
+            auto_one_shot = _auto_one_shot_summary(closure)
+            if (
+                closure.get("pass") is True
+                and closure.get("status")
+                == "PASS__PROOF_CARRYING_REALITY_CLOSURE_FIXED_POINT"
+            ):
+                replay = _run_adequate_decision_engine(
+                    payload,
+                    options,
+                    information_provider=information_provider,
+                    proposal_provider=proposal_provider,
+                    capability_expander=capability_expander,
+                    episode_verification_provider=episode_verification_provider,
+                    skill_verification_provider=skill_verification_provider,
+                )
+                auto_one_shot["replay_attempted"] = True
+                auto_one_shot["replay_pass"] = replay.get("pass") is True
+                auto_one_shot["replay_status"] = replay.get("status")
+                out = deepcopy(dict(replay))
+            else:
+                auto_one_shot["replay_attempted"] = False
+                auto_one_shot["replay_pass"] = False
+            if isinstance(out, Mapping):
+                out = deepcopy(dict(out))
+                out["_auto_one_shot_closure"] = deepcopy(auto_one_shot)
+
         direct_learning = None
         direct_learning_error = None
         if (
@@ -919,6 +1033,7 @@ def run(
             ),
             "compounding_tick": deepcopy(compounding_tick),
             "episode_compounding_tick": deepcopy(episode_compounding_tick),
+            "auto_one_shot_closure": deepcopy(auto_one_shot),
             "single_front_door": True,
             "terminal_authority": False,
             "terminal_credit_delta": 0,
