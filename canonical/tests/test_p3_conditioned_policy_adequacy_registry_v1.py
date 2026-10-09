@@ -22,9 +22,9 @@ def atom():
 class P3ConditionedPolicyAdequacyRegistryV1Tests(unittest.TestCase):
     def test_catalog_contains_synthesis_and_typed_acceptance_cells(self):
         out = registry.catalog()
-        self.assertEqual(out["policy_count"], 3)
+        self.assertEqual(out["policy_count"], 4)
         by_id = {row["policy_id"]: row for row in out["policies"]}
-        self.assertIn("BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1", by_id)
+        self.assertIn("BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1", by_id)\n        self.assertIn("BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1", by_id)
         self.assertEqual(by_id[POLICY]["condition"], atom())
         self.assertIn(
             "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
