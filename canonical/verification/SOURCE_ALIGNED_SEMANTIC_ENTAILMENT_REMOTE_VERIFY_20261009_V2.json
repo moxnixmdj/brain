@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_SOURCE_ALIGNED_SEMANTIC_ENTAILMENT_REMOTE_VERIFY_20261009_V2",
+  "date": "2026-10-09",
+  "status": "PASS__47_OF_47_REMOTE_V43_COMPATIBILITY_TESTS__EXACT_V44_CANDIDATE_BYTES__ZERO_TERMINAL_CREDIT",
+  "subject_branch": "fix/r2-v44-source-aligned-entailment-20261009",
+  "carrier": {
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/source-entailment-verify"
+  },
+  "exact_candidate_blobs": {
+    "canonical/runtime/source_aligned_semantic_entailment_v1.py": "855f7d6cff2333bdaf19ca01317a164e81b98534",
+    "canonical/runtime/semantic_relation_control_v1.py": "eeafd9b2898a65ee0aafe519b035d1d79fed0fea",
+    "canonical/tests/test_source_aligned_semantic_entailment_v1.py": "b85befa7b226ad82e1fc8f57c00356eee7d8fc4a",
+    "canonical/tests/test_semantic_relation_control_source_entailment_v1.py": "83c7fe011338226c79bcec4918cba2129ee74abc"
+  },
+  "replay": {
+    "tests_run": 47,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS",
+    "includes_v43_reconciliation_tests": 6
+  },
+  "proved": [
+    "DIRECT_CHECKED_SOURCE_INCLUSION",
+    "TRANSITIVE_CROSS_SOURCE_ENTAILMENT_COMPOSITION",
+    "MUTUAL_CHECKED_DIRECTIONS_YIELD_SCOPED_LOGICAL_EQUIVALENCE_NOT_IDENTITY",
+    "ONE_WAY_ENTAILMENT_DOES_NOT_BECOME_EQUIVALENCE",
+    "SOURCE_COUNTEREXAMPLE_DISPROVES_DIRECTION",
+    "WITHIN_SOURCE_PROOF_COUNTEREXAMPLE_CONFLICT_FAILS_CLOSED",
+    "BOUNDED_POSITIVE_SOURCE_COUNTEREXAMPLE_CROSS_CHANNEL_CONFLICT_FAILS_CLOSED",
+    "SOURCE_POSITIVE_BOUNDED_COUNTEREXAMPLE_CROSS_CHANNEL_CONFLICT_FAILS_CLOSED",
+    "SEMANTIC_NONIDENTITY_CAN_STILL_BE_CURRENT_DECISION_SUBSTITUTION",
+    "V43_SEMANTIC_STACK_RECONCILIATION_REMAINS_GREEN"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_ENTAILMENT_CLAIM",
+    "NO_OPEN_WORLD_SYNONYMY_CLAIM",
+    "NO_GENERAL_WORD_SENSE_CLAIM",
+    "NO_SOURCE_FACTUAL_AUTHORITY_CLAIM",
+    "NO_NEW_DIRECT_ROUTE_OR_FINANCE_SUBREGION_COUNT_CREDIT",
+    "NO_TERMINAL_OR_CHECKPOINT_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
