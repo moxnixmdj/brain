@@ -8,8 +8,10 @@ from canonical.runtime.source_aligned_definitional_entailment_v1 import (
     CONCEPT_DEFINITION_AUTHORITY_SCHEMA,
     SOURCE_ATOM_AUTHORITY_SCHEMA,
     SOURCE_COMPLETENESS_AUTHORITY_SCHEMA,
+    RELATION_EDGE_AUTHORITY_SCHEMA,
     definition_sha256,
     prove,
+    verify_relation_edge,
 )
 
 
@@ -250,6 +252,75 @@ class Tests(unittest.TestCase):
         )
         self.assertFalse(out["pass"])
         self.assertIn("SOURCE_COMPLETENESS_CONTAINS_UNPROVED_ATOMS", out["reason"])
+
+    def test_entails_edge_receipt_is_compatible_with_relation_dag_contract(self):
+        definition = concept_definition()
+        out = verify_relation_edge(
+            {
+                "relation": "ENTAILS",
+                "source_id": LEFT,
+                "target_id": RIGHT,
+                "scope_id": SCOPE,
+                "raw_span": RAW,
+                "raw_source_id": SOURCE_ID,
+                "source_atom_receipts": atom_receipts(*definition["definition_atoms"]),
+                "concept_definition_receipt": {"candidate": True},
+            },
+            source_atom_verifier=source_atom_verifier,
+            concept_definition_verifier=concept_definition_verifier,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["schema"], RELATION_EDGE_AUTHORITY_SCHEMA)
+        self.assertEqual(out["relation"], "ENTAILS")
+        self.assertEqual(out["source_id"], LEFT)
+        self.assertEqual(out["target_id"], RIGHT)
+        self.assertTrue(out["source_semantics_authenticated"])
+        self.assertTrue(out["target_semantics_authenticated"])
+        self.assertTrue(out["relation_semantics_authenticated"])
+        self.assertEqual(len(out["evidence_sha256"]), 64)
+        self.assertEqual(len(out["receipt_sha256"]), 64)
+
+    def test_not_entails_edge_requires_complete_source_countermodel(self):
+        definition = concept_definition()
+        proved = definition["definition_atoms"][:-1]
+        out = verify_relation_edge(
+            {
+                "relation": "NOT_ENTAILS",
+                "source_id": LEFT,
+                "target_id": RIGHT,
+                "scope_id": SCOPE,
+                "raw_span": RAW,
+                "raw_source_id": SOURCE_ID,
+                "source_atom_receipts": atom_receipts(*proved),
+                "concept_definition_receipt": {"candidate": True},
+                "source_completeness_receipt": {"source_atom_ids": proved},
+            },
+            source_atom_verifier=source_atom_verifier,
+            concept_definition_verifier=concept_definition_verifier,
+            source_completeness_verifier=source_completeness_verifier,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["relation"], "NOT_ENTAILS")
+
+    def test_not_entails_edge_without_source_completeness_is_not_authorized(self):
+        definition = concept_definition()
+        proved = definition["definition_atoms"][:-1]
+        out = verify_relation_edge(
+            {
+                "relation": "NOT_ENTAILS",
+                "source_id": LEFT,
+                "target_id": RIGHT,
+                "scope_id": SCOPE,
+                "raw_span": RAW,
+                "raw_source_id": SOURCE_ID,
+                "source_atom_receipts": atom_receipts(*proved),
+                "concept_definition_receipt": {"candidate": True},
+            },
+            source_atom_verifier=source_atom_verifier,
+            concept_definition_verifier=concept_definition_verifier,
+        )
+        self.assertFalse(out["pass"])
+        self.assertIn("RELATION_NOT_PROVED", out["reason"])
 
     def test_no_terminal_or_acceptance_authority(self):
         definition = concept_definition()
