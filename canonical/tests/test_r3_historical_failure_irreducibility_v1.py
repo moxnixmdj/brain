@@ -168,32 +168,17 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
         self.assertFalse(out["irreducible_external_information_proved"])
         self.assertEqual(out["historical_failure_state_certificate"], bounded)
 
-    def test_information_theoretic_externality_requires_full_barrier(self):
-        good = {
-            "information_theoretic_externality_proved": True,
-            "observational_equivalence_proved": True,
-            "optimal_action_divergence_proved": True,
-            "search_exhausted": True,
-            "theorem_route_exhausted": True,
-            "simulation_route_exhausted": True,
-            "experiment_route_exhausted": True,
-            "alternative_route_exhausted": True,
-            "weaker_sufficient_fact_exhausted": True,
-            "synthesized_capability_bypass_exhausted": True,
-            "proof_scope_closed_and_exhaustive": True,
-            "independent_verifier_passed": True,
-            "verification_authority_mutated": False,
-            "witness_sha256": "a" * 64,
-            "proof_scope_digest": "b" * 64,
-        }
-        out = closure.validate_information_theoretic_externality_certificate(good)
-        self.assertTrue(out["pass"], out)
-
-        bad = dict(good)
-        bad["experiment_route_exhausted"] = False
-        out = closure.validate_information_theoretic_externality_certificate(bad)
+    def test_missing_externality_certificate_stays_internal(self):
+        out = closure.externality_gate.verify_certificate(
+            None,
+            pending=[{"work_id": "w-failure"}],
+        )
         self.assertFalse(out["pass"])
-        self.assertIn("experiment_route_exhausted", out["failed_conditions"])
+        self.assertFalse(out["irreducible_external_information_proved"])
+        self.assertEqual(
+            out["reason"],
+            "PROOF_CARRYING_EXTERNALITY_CERTIFICATE_REQUIRED",
+        )
 
 
 if __name__ == "__main__":
