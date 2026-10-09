@@ -3,6 +3,7 @@ import json
 import unittest
 
 from canonical.runtime import cross_document_effect_behavioral_abstraction_v1 as b
+from canonical.runtime import cross_document_effect_behavioral_abstraction_verify_v1 as bv
 
 
 def field_line(eid, field, value):
@@ -47,6 +48,7 @@ class CrossDocumentEffectBehavioralAbstractionV1Tests(unittest.TestCase):
         self.assertEqual(out["effective_value"],"10")
         ignored={(x["effect_id"],x["field"]) for x in out["ignored_top_fields"]}
         self.assertIn(("A.t","effect_class"),ignored)
+        self.assertTrue(bv.verify(problem(a),out)["verified"])
 
     def test_unknown_weaker_effect_is_irrelevant_under_exact_applicable_global_dominator(self):
         a=doc("A","A.t",fields={
@@ -81,6 +83,7 @@ class CrossDocumentEffectBehavioralAbstractionV1Tests(unittest.TestCase):
         )
         kinds=[x["kind"] for x in out["next_behavioral_obligations"]]
         self.assertIn("PROVE_EFFECT_VALUE",kinds)
+        self.assertTrue(bv.verify(problem(a),out)["verified"])
 
     def test_unknown_applicability_remains_open_when_it_can_remove_only_effect(self):
         a=doc("A","A.t",fields={
