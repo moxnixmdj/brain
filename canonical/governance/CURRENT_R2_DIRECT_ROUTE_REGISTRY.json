@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_R2_DIRECT_ROUTE_REGISTRY_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_CURRENT_R2_DIRECT_ROUTE_SELECTION_METADATA_POINTER",
+  "binding_semantics": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__IMMUTABLE_TARGET_GIT_BLOB_BOUND",
+  "role": "LEGACY_PRECEDENCE_METADATA_ONLY__DEPLOYABLE_UNIVERSE_COMES_FROM_CURRENT_R2_ACTIVATION",
+  "target": {
+    "path": "canonical/governance/R2_DIRECT_ROUTE_REGISTRY_20261009_V4.json",
+    "git_blob_sha": "a28294b064a33c5b33cabb490b865e6c25a0fc45",
+    "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_REGISTRY_V1"
+  },
+  "incremental_spend_usd": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
