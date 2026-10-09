@@ -1,0 +1,12 @@
+{
+  "schema":"PROJECT_BRAIN_COVERAGE_SELECTED_CONTEXT_ABC_CLAIM_CORE_V2",
+  "claim_kind":"BOUNDED_SUBGOAL",
+  "mission_blob_sha":"52b98f8019938fa7d8164e6a47e359ffb0faeb6a",
+  "scope_sha256":"ef7eb39d620c514336bb0e6d5c03e9ba430ef95d10a1a08a1c3fa3cff1c0882d",
+  "target_predicate_sha256":"9f0362ae35ee8d155da1c450bb4c4cc65b1d5caf603f940c937158a18af641cd",
+  "semantics_sha256":"8b9f61628986df066ac43bd75d6f8d35f7255b8ce0914b02090c45bf0d94d421",
+  "epoch":"CURRENT_TERMINAL_AUTHORITY_POINTER_REVISION_102",
+  "authority_id":"CURRENT_TERMINAL_AUTHORITY_REVISION_102",
+  "claim_id":"64d51d45da21da95cf9f8182e759a068d2f388e6eda92659f8683f14b815cadc",
+  "terminal_credit_delta":0
+}
