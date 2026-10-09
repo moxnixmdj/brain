@@ -131,7 +131,8 @@ class R3RealCrossScopeReuseV1Tests(unittest.TestCase):
             state_path = work / "SELF_IMPROVEMENT_STATE.json"
             receipt_dir = work.relative_to(ROOT).as_posix() + "/receipts"
             providers = _providers(state_path, receipt_dir)
-            packets = {CAPABILITY_ID: [{"candidate": {"answer": 7}}]}
+            def proposer(request, index, prior):
+                return {"candidate": {"answer": 7}}
 
             first = live.run_generic(
                 _problem(work / "a", task_id=f"cross-scope-{token}-a"),
