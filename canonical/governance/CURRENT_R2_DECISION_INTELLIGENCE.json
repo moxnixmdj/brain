@@ -1558,5 +1558,41 @@
     "candidate_universe_completeness_added": false,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "regcap_contextual_default_domain_mapping": {
+    "status": "BOUND__DEFAULT_DOMAIN_MAPPING_AUTO_HARVESTS_VERIFIED_CCOB_CCYB_TLAC_CONTEXT_FACTS__RELATION_TRUTH_AND_IDENTITY_REMAIN_SEPARATE",
+    "runtime_path": "canonical/runtime/domain_mapping_truth_certificate_v1.py",
+    "runtime_git_blob_sha": "d73c911d1715dd4f6adfc859d2eb40ac9367d63b",
+    "contextual_producer_path": "canonical/runtime/source_aligned_regcap_context_proof_v1.py",
+    "contextual_producer_git_blob_sha": "f3839d74edc305606caa692f1a8a75588c160921",
+    "reconciliation_path": "canonical/governance/R2_REGCAP_CONTEXTUAL_DEFAULT_ROUTE_RECONCILIATION_20261009_V2.json",
+    "reconciliation_git_blob_sha": "f2934e55e6a6e9f54f978bce1a350e287eba09d6",
+    "verification_path": "canonical/verification/R2_REGCAP_CONTEXTUAL_DEFAULT_ROUTE_VERIFY_20261009_V3.json",
+    "verification_git_blob_sha": "9ad112a04c73344fa6056fbf25c0fa5ff3d27238",
+    "public_capsule_result": "PASS",
+    "semantic_context_fact_authority": true,
+    "semantic_relation_truth_authority": "UNCHANGED_EXISTING_RELATION_PROVER_ONLY",
+    "concept_identity_authority": false,
+    "policy_adequacy_authority": false,
+    "finance_semantic_tail_closed": false,
+    "terminal_credit_delta": 0
+  },
+  "regcap_context_atom_truth_dispatch": {
+    "status": "BOUND__EXPLICIT_TRUTH_KIND_FOR_POSITIVE_SOURCE_BOUND_CCOB_CCYB_TLAC_CONTEXT_ATOMS__ABSENCE_REMAINS_UNKNOWN",
+    "truth_kind": "REGCAP_CONTEXT_ATOM",
+    "truth_certificate_path": "canonical/runtime/regcap_context_atom_truth_certificate_v1.py",
+    "truth_certificate_git_blob_sha": "3e35f67ee88f7337569774835890efc54cdc734d",
+    "semantic_dispatch_path": "canonical/runtime/semantic_truth_dispatch_v1.py",
+    "semantic_dispatch_git_blob_sha": "70dffa9e5719ad1ec01ab6ea5d8ad88a57ddcc88",
+    "reconciliation_path": "canonical/governance/R2_REGCAP_CONTEXT_ATOM_TRUTH_DISPATCH_RECONCILIATION_20261009_V1.json",
+    "reconciliation_git_blob_sha": "569ca5dd849e5a5571065ad34fcea3744330ee79",
+    "verification_path": "canonical/verification/REGCAP_CONTEXT_ATOM_TRUTH_DISPATCH_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "644a4397e74ffd5f1bcfabdbc34a1197ecc2d8e7",
+    "semantic_truth_authority": "POSITIVE_BOUND_ATOM_ONLY",
+    "negative_truth_from_absence_authorized": false,
+    "concept_identity_authority": false,
+    "policy_adequacy_authority": false,
+    "finance_semantic_tail_closed": false,
+    "terminal_credit_delta": 0
   }
 }
