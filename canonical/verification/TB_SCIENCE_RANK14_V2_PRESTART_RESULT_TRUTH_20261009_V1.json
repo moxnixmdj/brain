@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_V2_PRESTART_RESULT_TRUTH_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PREEXPOSURE_ABORT_NONCONSUMING__TOKEN_BUDGET_EXCEEDED__87_OBLIGATIONS__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/inverse-lithography::trial-0",
+    "schedule_rank": 14,
+    "digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530"
+  },
+  "public_execution": {
+    "workflow_run_id": 37883115054,
+    "workflow_job_id": 113667060389,
+    "artifact_id": 11594389122,
+    "artifact_zip_sha256": "dc0ea326361f870960042bd14586f9214c71bcc9b24727ecc4dcdc17cef0d96c",
+    "conclusion": "success",
+    "harbor_step": "skipped"
+  },
+  "exact_prestart_measurement": {
+    "instruction_sha256": "0a5b758ec1933d8fb2cb2d736dcb6a365c239a16aa2c1158fd0f0487231eade1",
+    "raw_task_contract_sha256": "f6dee2c763339de1ee4bd3ebe9e34be2c9fdb33b7a456fbec532890367f08bdf",
+    "first_cycle_prompt_sha256": "86e71a0004ef529243c2b1dd98871208d2eec59c0affb27f0176a45444d60d9a",
+    "raw_task_obligation_count": 87,
+    "objective_route_obligation_count": 0,
+    "semantic_residual_obligation_count": 87,
+    "declared_input_count": 0,
+    "declared_output_count": 1,
+    "brain_mandated_deliverable_count": 1,
+    "input_tokens": 17500,
+    "reserved_completion_tokens": 4096,
+    "required_context_tokens": 21596,
+    "server_context_tokens": 16384,
+    "context_headroom_tokens": -5212,
+    "deficit_tokens": 5212
+  },
+  "execution_truth": {
+    "historical_task_read_before_v2": true,
+    "task_read_under_v2": true,
+    "task_started": false,
+    "execution_authority_consumed": false,
+    "benchmark_trials_consumed": 0,
+    "reward": null,
+    "result_hashes": {},
+    "rerun_credit": false
+  },
+  "causal_classification": "PROMPT_REPRESENTATION_RESOURCE_OVERHEAD__NOT_LOSSLESS_OBLIGATION_CARDINALITY_FAILURE__NOT_MODEL_REASONING_FAILURE__NOT_VERIFIER_FAILURE",
+  "next_repair_requirement": "PRESERVE_EXACT_GOAL_AND_ALL_87_ACCEPTANCE_OBLIGATIONS_WHILE_REDUCING_MODEL_FACING_DUPLICATE_ROUTING_METADATA_BY_AT_LEAST_5213_TOKENS_OR_VERIFY_A_LARGER_ZERO_COST_CONTEXT_CARRIER",
+  "hard_nonclaims": [
+    "NO_RANK14_TASK_START",
+    "NO_RANK14_SLOT_CONSUMPTION",
+    "NO_SCIENTIFIC_TASK_QUALITY_EVIDENCE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "benchmark_trials_consumed_delta": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

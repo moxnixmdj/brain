@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V18",
+  "date": "2026-10-09",
+  "status": "CURRENT_POST_RANK14_V2_NONCONSUMING_TOKEN_GUARD__THIRTEEN_CONSUMED__RANK14_REPAIR_REQUIRED__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V17.json",
+    "git_blob_sha": "b57989db7874cad9fa13306a0a1e0f9f2dcc42fe"
+  },
+  "rank14_v2_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK14_V2_PRESTART_RESULT_TRUTH_20261009_V1.json",
+    "git_blob_sha": "d284f4824f7f448b25e5e6f1aa810aa99d05f69f"
+  },
+  "current_counts": {
+    "consumed_slots": 13,
+    "consumed_successes": 0,
+    "consumed_final_failures": 13,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 74,
+    "maximum_possible_successes_remaining": 197,
+    "minimum_required_success_rate_over_remaining_slots": 0.6294416243654822,
+    "pass_still_mathematically_reachable": true,
+    "next_unconsumed_slot": {
+      "ledger_schedule_rank": 14,
+      "frozen_manifest_schedule_order": 13,
+      "slot_id": "terminal-bench-science/inverse-lithography::trial-0",
+      "task_digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530"
+    }
+  },
+  "rank14": {
+    "authority_v2_historical": true,
+    "v2_execution_claim_retired": true,
+    "task_read_history": true,
+    "task_started": false,
+    "execution_authority_consumed": false,
+    "benchmark_trials_consumed": 0,
+    "exact_prestart_input_tokens": 17500,
+    "exact_reserved_completion_tokens": 4096,
+    "exact_server_context_tokens": 16384,
+    "exact_context_deficit_tokens": 5212,
+    "exact_raw_task_obligation_count": 87,
+    "declared_input_count": 0,
+    "current_blocker": "LOSSLESS_MODEL_FACING_PROMPT_REPRESENTATION_EXCEEDS_VERIFIED_16K_CONTEXT",
+    "next_action": "INTERNAL_LOSSLESS_PROMPT_REPRESENTATION_COMPACTION_THEN_FRESH_ZERO_EXPOSURE_OR_FRESH_LEASE_PRESTART_PROOF",
+    "fresh_execution_authority": false,
+    "fresh_task_read_authority": false
+  },
+  "scheduler": [
+    "DO_NOT_RERUN_V2_CLAIM.",
+    "DO_NOT_DROP_OR_MERGE_ANY_OF_THE_87_ACCEPTANCE_OBLIGATIONS.",
+    "PRESERVE_THE_EXACT_GOAL_TEXT_AS_THE_FINAL_SEMANTIC_REFERENCE.",
+    "REMOVE_ONLY_DUPLICATE_MODEL_FACING_ROUTING_METADATA_OR_VERIFY_A_STRONGER_ZERO_COST_CONTEXT_CARRIER.",
+    "RANK14_REMAINS_UNCONSUMED UNTIL HARBOR TASK STARTS."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
