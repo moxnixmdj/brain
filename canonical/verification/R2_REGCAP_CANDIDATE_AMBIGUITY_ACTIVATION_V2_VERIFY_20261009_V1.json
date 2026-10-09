@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_R2_REGCAP_CANDIDATE_AMBIGUITY_ACTIVATION_V2_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__ACTIVATION_V2_EXACT_BYTES__49_OF_49__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "activation_path": "canonical/governance/R2_REGCAP_CANDIDATE_AMBIGUITY_CONTROL_ACTIVATION_20261009_V2.json",
+    "activation_git_blob_sha": "24df5284c37477da65b36978ad91939d045eb7af",
+    "activation_test_path": "canonical/tests/test_r2_regcap_candidate_ambiguity_activation_v2.py",
+    "activation_test_git_blob_sha": "9d29e9f9f25e9145638d4261edca3da4c541c27e",
+    "composition_verify_path": "canonical/verification/R2_REGCAP_MATRIX_DISCRIMINATOR_COMPOSITION_VERIFY_20261009_V1.json",
+    "composition_verify_git_blob_sha": "a62293bccdbdf02f8adb1822a421ae195705dc5b"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/regcap_projection_verify",
+    "log_sha256": "a81558701bd144f3c5e70260ac3c7c47e59c871fb06cd4bf1b1d92275078f3d6"
+  },
+  "result": {
+    "py_compile": "PASS",
+    "tests_run": 49,
+    "failures": 0,
+    "errors": 0,
+    "overall_rc": 0
+  },
+  "proved": [
+    "ACTIVATION_BINDS_RELEASABILITY_CLASS_AS_THE_AUTHENTICATED_ONE_STEP_DISCRIMINATOR_ONLY_FOR_THE_COMPLETE_BOUND_THREE_RIVAL_SCOPE",
+    "OBSERVATION_TRUTH_REMAINS_TO_BE_ACQUIRED",
+    "CONCEPT_IDENTITY_IS_NOT_ASSUMED_BEFORE_OBSERVATION",
+    "OPEN_WORLD_CANDIDATE_COMPLETENESS_REMAINS_FALSE",
+    "R2_PRIMARY_INTERNAL_UNSOLVED_COUNT_DELTA_REMAINS_ZERO",
+    "MISSING_DISCRIMINATOR_OBSERVATION_REMAINS_INTERNAL_UNSOLVED_PENDING_ACQUISITION_OR_EXPERIMENT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
