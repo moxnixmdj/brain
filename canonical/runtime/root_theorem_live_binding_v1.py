@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from canonical.runtime.coverage_root_namespace_guard_v1 import validate_bridge_document
+from canonical.runtime.coverage_claim_root_certificate_registry_guard_v1 import validate as validate_claim_root_registry
 
 MISSION_PATH = "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
 THEOREM_PATH = "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json"
@@ -24,6 +25,10 @@ CARRIER_PATH = "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json
 CARRIER_RUNTIME_PATH = "canonical/runtime/mission_carrier_factorization_v1.py"
 CARRIER_TESTS_PATH = "canonical/tests/test_mission_carrier_factorization_v1.py"
 CLAIM_SCOPE_PATH = "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json"
+CLAIM_ROOT_POINTER_PATH = "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json"
+CLAIM_ROOT_REGISTRY_PATH = "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_ROOT_CERTIFICATE_REGISTRY_V1.json"
+CLAIM_ROOT_GUARD_PATH = "canonical/runtime/coverage_claim_root_certificate_registry_guard_v1.py"
+CLAIM_ROOT_TESTS_PATH = "canonical/tests/test_coverage_claim_root_certificate_registry_guard_v1.py"
 
 
 def git_blob_sha(data: bytes) -> str:
@@ -57,6 +62,12 @@ def validate_documents(
     carrier_tests_blob_sha: str,
     claim_scope: Mapping[str, Any],
     claim_scope_blob_sha: str,
+    claim_root_pointer: Mapping[str, Any],
+    claim_root_pointer_blob_sha: str,
+    claim_root_registry: Mapping[str, Any],
+    claim_root_registry_blob_sha: str,
+    claim_root_guard_blob_sha: str,
+    claim_root_tests_blob_sha: str,
 ) -> dict[str, Any]:
     errors: list[str] = []
 
@@ -138,6 +149,27 @@ def validate_documents(
         claim_carrier.get("global_open_ended_mission_completion_derivable") is False,
     )
 
+    registry_check = validate_claim_root_registry(
+        claim_root_registry,
+        current_mission_blob_sha=mission_blob_sha,
+        current_claim_scope_blob_sha=claim_scope_blob_sha,
+    )
+    if not registry_check.get("pass"):
+        errors.extend("CLAIM_ROOT_REGISTRY_" + e for e in registry_check.get("errors", []))
+
+    pointer_registry = claim_root_pointer.get("registry") or {}
+    pointer_guard = claim_root_pointer.get("guard") or {}
+    pointer_tests = claim_root_pointer.get("tests") or {}
+    _fail(errors, "CLAIM_ROOT_POINTER_REGISTRY_PATH_DRIFT", pointer_registry.get("path") == CLAIM_ROOT_REGISTRY_PATH)
+    _fail(errors, "CLAIM_ROOT_POINTER_REGISTRY_BLOB_STALE", pointer_registry.get("git_blob_sha") == claim_root_registry_blob_sha)
+    _fail(errors, "CLAIM_ROOT_POINTER_GUARD_PATH_DRIFT", pointer_guard.get("path") == CLAIM_ROOT_GUARD_PATH)
+    _fail(errors, "CLAIM_ROOT_POINTER_GUARD_BLOB_STALE", pointer_guard.get("git_blob_sha") == claim_root_guard_blob_sha)
+    _fail(errors, "CLAIM_ROOT_POINTER_TESTS_PATH_DRIFT", pointer_tests.get("path") == CLAIM_ROOT_TESTS_PATH)
+    _fail(errors, "CLAIM_ROOT_POINTER_TESTS_BLOB_STALE", pointer_tests.get("git_blob_sha") == claim_root_tests_blob_sha)
+    _fail(errors, "CLAIM_ROOT_POINTER_NONZERO_PROVED", claim_root_pointer.get("proved") == registry_check.get("proved_root_certificate_count"))
+    _fail(errors, "CLAIM_ROOT_POINTER_NONZERO_OPEN", claim_root_pointer.get("open") == registry_check.get("open_root_certificate_count"))
+    _fail(errors, "CLAIM_ROOT_POINTER_GLOBAL_CLOSURE_ENABLED", claim_root_pointer.get("r4_proof_closure") is False)
+
     root_ref = binding.get("root_theorem") or {}
     _fail(errors, "BINDING_ROOT_PATH_DRIFT", root_ref.get("path") == THEOREM_PATH)
     _fail(errors, "BINDING_ROOT_BLOB_STALE", root_ref.get("git_blob_sha") == root_theorem_blob_sha)
@@ -156,6 +188,12 @@ def validate_documents(
     _fail(errors, "BINDING_CLAIM_SCOPE_PATH_MISSING", claim_ref.get("path") == CLAIM_SCOPE_PATH)
     _fail(errors, "BINDING_CLAIM_SCOPE_BLOB_STALE", claim_ref.get("git_blob_sha") == claim_scope_blob_sha)
 
+    claim_root_ref = binding.get("claim_root_certificate_authority") or {}
+    _fail(errors, "BINDING_CLAIM_ROOT_POINTER_PATH_DRIFT", claim_root_ref.get("path") == CLAIM_ROOT_POINTER_PATH)
+    _fail(errors, "BINDING_CLAIM_ROOT_POINTER_BLOB_STALE", claim_root_ref.get("git_blob_sha") == claim_root_pointer_blob_sha)
+    _fail(errors, "BINDING_CLAIM_ROOT_REGISTRY_PATH_DRIFT", (claim_root_ref.get("registry") or {}).get("path") == CLAIM_ROOT_REGISTRY_PATH)
+    _fail(errors, "BINDING_CLAIM_ROOT_REGISTRY_BLOB_STALE", (claim_root_ref.get("registry") or {}).get("git_blob_sha") == claim_root_registry_blob_sha)
+
     sources = authority.get("authoritative_sources") or {}
     live_ref = sources.get("coverage_completeness_root_theorem_r1_r4") or {}
     _fail(errors, "LIVE_AUTHORITY_ROOT_BINDING_MISSING", live_ref.get("path") == BINDING_PATH)
@@ -163,6 +201,11 @@ def validate_documents(
     namespace_authority = sources.get("coverage_root_namespace_bridge") or {}
     _fail(errors, "LIVE_AUTHORITY_ROOT_NAMESPACE_MISSING", namespace_authority.get("path") == NAMESPACE_PATH)
     _fail(errors, "LIVE_AUTHORITY_ROOT_NAMESPACE_BLOB_STALE", namespace_authority.get("git_blob_sha") == namespace_bridge_blob_sha)
+    claim_root_live_ref = sources.get("coverage_claim_root_certificate_registry") or {}
+    _fail(errors, "LIVE_AUTHORITY_CLAIM_ROOT_POINTER_MISSING", claim_root_live_ref.get("path") == CLAIM_ROOT_POINTER_PATH)
+    _fail(errors, "LIVE_AUTHORITY_CLAIM_ROOT_POINTER_BLOB_STALE", claim_root_live_ref.get("git_blob_sha") == claim_root_pointer_blob_sha)
+    _fail(errors, "LIVE_AUTHORITY_CLAIM_ROOT_REGISTRY_BLOB_STALE", (claim_root_live_ref.get("registry") or {}).get("git_blob_sha") == claim_root_registry_blob_sha)
+
     claim_live_ref = sources.get("coverage_completeness_claim_scope") or {}
     _fail(errors, "LIVE_AUTHORITY_CLAIM_SCOPE_MISSING", claim_live_ref.get("path") == CLAIM_SCOPE_PATH)
     _fail(errors, "LIVE_AUTHORITY_CLAIM_SCOPE_BLOB_STALE", claim_live_ref.get("git_blob_sha") == claim_scope_blob_sha)
@@ -176,6 +219,7 @@ def validate_documents(
         "claim_completeness_closed_claimed": False,
         "carrier_factorization_closed_claimed": False,
         "global_mission_completion_derivable": False,
+        "claim_root_registry_current": not errors,
     }
 
 
@@ -189,6 +233,10 @@ def validate_repo(root: Path) -> dict[str, Any]:
     carrier_runtime_path = root / CARRIER_RUNTIME_PATH
     carrier_tests_path = root / CARRIER_TESTS_PATH
     claim_scope_path = root / CLAIM_SCOPE_PATH
+    claim_root_pointer_path = root / CLAIM_ROOT_POINTER_PATH
+    claim_root_registry_path = root / CLAIM_ROOT_REGISTRY_PATH
+    claim_root_guard_path = root / CLAIM_ROOT_GUARD_PATH
+    claim_root_tests_path = root / CLAIM_ROOT_TESTS_PATH
 
     mission_bytes = mission_path.read_bytes()
     theorem_bytes = theorem_path.read_bytes()
@@ -196,6 +244,8 @@ def validate_repo(root: Path) -> dict[str, Any]:
     namespace_bridge_bytes = namespace_bridge_path.read_bytes()
     carrier_bytes = carrier_path.read_bytes()
     claim_scope_bytes = claim_scope_path.read_bytes()
+    claim_root_pointer_bytes = claim_root_pointer_path.read_bytes()
+    claim_root_registry_bytes = claim_root_registry_path.read_bytes()
 
     return validate_documents(
         mission=load_json(mission_path),
@@ -213,4 +263,10 @@ def validate_repo(root: Path) -> dict[str, Any]:
         carrier_tests_blob_sha=git_blob_sha(carrier_tests_path.read_bytes()),
         claim_scope=load_json(claim_scope_path),
         claim_scope_blob_sha=git_blob_sha(claim_scope_bytes),
+        claim_root_pointer=load_json(claim_root_pointer_path),
+        claim_root_pointer_blob_sha=git_blob_sha(claim_root_pointer_bytes),
+        claim_root_registry=load_json(claim_root_registry_path),
+        claim_root_registry_blob_sha=git_blob_sha(claim_root_registry_bytes),
+        claim_root_guard_blob_sha=git_blob_sha(claim_root_guard_path.read_bytes()),
+        claim_root_tests_blob_sha=git_blob_sha(claim_root_tests_path.read_bytes()),
     )
