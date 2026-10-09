@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_4_0_STRICT_EXTERNALITY_ATTEMPT_20261009_V1",
+  "date": "2026-10-09",
+  "status": "CANDIDATE__STRICT_EXTERNALITY_NOT_PROVED__WHOLE_PREDICATE_INTERNAL_UNSOLVED__ZERO_CREDIT",
+  "predicate_id": "CODING_CURSORBENCH_GE_57_8",
+  "answer": "STRICT_INFORMATION_THEORETIC_EXTERNALITY_NOT_PROVED",
+  "already_proved": [
+    "CURSORBENCH_SCOPE_COMPLETENESS_IS_CLOSED",
+    "PUBLIC_AND_OWNER_BOUND_DATA_DO_NOT_IDENTIFY_THE_BRAIN_PRIVATE_CURSORBENCH_SCORE"
+  ],
+  "missing_strict_premises": [
+    "ALL_INTERNAL_BYPASS_CLASSES_FALSIFIED",
+    "ALTERNATIVE_SCOPE_COMPLETE_POLICY_ADEQUACY_ROUTE_FALSIFIED",
+    "EXACT_CURSORBENCH_PROTOCOL_ADMISSIBLE_WORLD_PAIR_PROVED",
+    "PROOF_CARRYING_EXTERNALITY_CERTIFICATE_VERIFIED"
+  ],
+  "current_classification": {
+    "public_score_route": "PROVED_NONIDENTIFIABLE",
+    "whole_predicate": "INTERNAL_UNSOLVED",
+    "information_theoretic_externality_proved": false,
+    "active_internal_missing_object": "SCOPE_COMPLETE_AUTHENTICATED_BRAIN_OWNED_POSITIVE_POLICY_ADEQUACY_CERTIFICATE"
+  },
+  "scheduler_effect": [
+    "DO_NOT_CLASSIFY_CURSORBENCH_AS_EXTERNAL_WITHOUT_A_FUTURE_CERTIFICATE_THAT_PASSES_THE_STRICT_GATE",
+    "PRESERVE_POSITIVE_POLICY_ADEQUACY_AS_ACTIVE_INTERNAL_WORK",
+    "DO_NOT_TREAT_PUBLIC_SCORE_NONIDENTIFIABILITY_AS_PROOF_THAT_STRONGER_INTERNAL_THEOREM_ROUTES_FAIL",
+    "REQUIRE_EXACT_TARGET_PROTOCOL_ADMISSIBILITY_BEFORE_ANY_PRIVATE_WORLD_PAIR_CAN_BECOME_LOAD_BEARING_EXTERNALITY_EVIDENCE"
+  ],
+  "hard_nonclaims": [
+    "NO_CURSORBENCH_SCORE",
+    "NO_CURSORBENCH_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_POSITIVE_ADEQUACY_IS_SOLVED",
+    "NO_CLAIM_FUTURE_EXTERNALITY_PROOF_IS_IMPOSSIBLE",
+    "NO_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
