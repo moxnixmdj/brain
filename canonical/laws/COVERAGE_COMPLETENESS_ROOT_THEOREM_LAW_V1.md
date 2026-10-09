@@ -215,6 +215,31 @@ Therefore a naked boolean such as `proof_chain_trustworthy = true` is never suff
 
 This is load-bearing. If R1 proves `r -> p1`, R3 proves `p2 -> g2`, and R2 proves `g3 -> a` under unrelated bindings, all three local implications can be true while `r -> a` is false. Set-inclusion transitivity is authorized only after exact binding coherence is established.
 
+
+## R4 canonical certificate authority
+
+Exact binding coherence is necessary but not sufficient. R1, R2, and R3 acquire proof authority only through the canonical coverage-completeness root certificate registry.
+
+The authoritative registry is:
+
+- `canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json`
+- validated by `canonical/runtime/coverage_root_certificate_registry_guard_v1.py`.
+
+Four-root closure therefore additionally requires:
+
+1. the registry validates against the current authoritative mission source;
+2. all three canonical root IDs are present exactly once;
+3. every root slot is `PROVED_CURRENT`;
+4. each proved slot binds a content-addressed certificate and independent verification object;
+5. the referenced certificate and verification bytes match their claimed Git blob identities;
+6. the registry reports `r4_proof_closure = true`.
+
+Locally supplied objects containing `status = PROVED` have zero authority by themselves.
+
+The registry binds the stable authoritative mission source, not incidental mutable fields in `CURRENT_MISSION_OBJECTIVE.json`. The current pointer must still identify the same authoritative mission source and real objective. Auxiliary pointer churn therefore cannot silently invalidate or silently redefine mission semantics.
+
+If the canonical registry has any open root certificate obligation, R4 is not closed even when local test fixtures make R1, R2, and R3 individually true.
+
 ## Nonclaims
 
 This law:
