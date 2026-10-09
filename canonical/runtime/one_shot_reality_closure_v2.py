@@ -645,14 +645,54 @@ def _validate_provider_receipt(
     if not isinstance(result, Mapping):
         raise RealityClosureError(provider_kind + "_PROVIDER_RETURNED_NO_RECEIPT")
     receipt = deepcopy(dict(result))
-    if receipt.get("pass") is not True:
-        raise RealityClosureError(provider_kind + "_PROVIDER_DID_NOT_PASS")
     if not _valid_sha256(receipt.get("receipt_sha256")):
         raise RealityClosureError(provider_kind + "_RECEIPT_SHA256_INVALID")
-    if receipt.get("frontier_changed") is not True:
-        raise RealityClosureError(provider_kind + "_CLAIMED_SUCCESS_WITHOUT_FRONTIER_CHANGE")
     if receipt.get("verification_authority_mutated") is not False:
         raise RealityClosureError(provider_kind + "_VERIFICATION_AUTHORITY_MUTATION_FORBIDDEN")
+
+    if provider_kind == "EVIDENCE_ACQUISITION":
+        attempted = (
+            receipt.get("reuse_or_acquisition_attempted") is True
+            or receipt.get("acquisition_or_experiment_attempted") is True
+            or receipt.get("existing_verified_receipt_reused") is True
+        )
+        if not attempted:
+            raise RealityClosureError("EVIDENCE_ACQUISITION_OR_REUSE_ATTEMPT_NOT_PROVED")
+        if not _valid_sha256(receipt.get("evidence_trace_sha256")):
+            raise RealityClosureError("EVIDENCE_ACQUISITION_TRACE_SHA256_INVALID")
+        if receipt.get("pass") is not True:
+            if receipt.get("pass") is not False:
+                raise RealityClosureError("EVIDENCE_ACQUISITION_PASS_BOOLEAN_REQUIRED")
+            if receipt.get("frontier_changed") is True:
+                raise RealityClosureError(
+                    "EVIDENCE_ACQUISITION_OPEN_ATTEMPT_CANNOT_CLAIM_FRONTIER_CHANGE"
+                )
+            return receipt
+        if receipt.get("frontier_changed") is not True:
+            raise RealityClosureError(
+                "EVIDENCE_ACQUISITION_CLAIMED_SUCCESS_WITHOUT_FRONTIER_CHANGE"
+            )
+        if not (
+            receipt.get("acquisition_or_experiment_attempted") is True
+            or receipt.get("existing_verified_receipt_reused") is True
+        ):
+            raise RealityClosureError(
+                "EVIDENCE_ACQUISITION_SUCCESS_WITHOUT_ACQUISITION_OR_VERIFIED_REUSE"
+            )
+        if (
+            receipt.get("existing_verified_receipt_reused") is True
+            and receipt.get("new_reality_consumed") is True
+            and receipt.get("acquisition_or_experiment_attempted") is not True
+        ):
+            raise RealityClosureError(
+                "EVIDENCE_REUSE_CANNOT_FALSELY_CLAIM_NEW_REALITY_CONSUMPTION"
+            )
+        return receipt
+
+    if receipt.get("pass") is not True:
+        raise RealityClosureError(provider_kind + "_PROVIDER_DID_NOT_PASS")
+    if receipt.get("frontier_changed") is not True:
+        raise RealityClosureError(provider_kind + "_CLAIMED_SUCCESS_WITHOUT_FRONTIER_CHANGE")
     if provider_kind == "CAPABILITY_SYNTHESIS":
         if receipt.get("reuse_or_search_trace_complete") is not True:
             raise RealityClosureError("CAPABILITY_SYNTHESIS_SEARCH_BEFORE_CODE_NOT_PROVED")
@@ -665,11 +705,6 @@ def _validate_provider_receipt(
             raise RealityClosureError("CAPABILITY_SYNTHESIS_VERIFIER_REQUIRED")
         if receipt.get("verifier_passed") is not True:
             raise RealityClosureError("CAPABILITY_SYNTHESIS_VERIFIER_DID_NOT_PASS")
-    if provider_kind == "EVIDENCE_ACQUISITION":
-        if receipt.get("acquisition_or_experiment_attempted") is not True:
-            raise RealityClosureError("EVIDENCE_ACQUISITION_ATTEMPT_NOT_PROVED")
-        if not _valid_sha256(receipt.get("evidence_trace_sha256")):
-            raise RealityClosureError("EVIDENCE_ACQUISITION_TRACE_SHA256_INVALID")
     return receipt
 
 
@@ -802,6 +837,25 @@ def run(
                 }),
                 provider_kind="EVIDENCE_ACQUISITION",
             )
+            if receipt.get("pass") is not True:
+                transcript[-1]["provider_receipt_sha256"] = receipt["receipt_sha256"]
+                transcript[-1]["provider_kind"] = gap_class
+                transcript[-1]["provider_open_status"] = receipt.get("status")
+                return {
+                    "schema": SCHEMA,
+                    "status": (
+                        "OPEN__INTERNAL_UNSOLVED__EVIDENCE_ACQUISITION_ATTEMPTED__"
+                        "NO_VERIFIED_POLICY_CHANGING_WITNESS"
+                    ),
+                    "pass": False,
+                    "fixed_point": False,
+                    "gap_contract": contract,
+                    "decision_sufficient_contract": decision_contract,
+                    "minimum_information_contract": minimum_information_contract,
+                    "provider_receipt": receipt,
+                    "transcript": transcript,
+                    "terminal_authority": False,
+                }
         elif gap_class == "PROVEN_INFORMATION_THEORETICALLY_EXTERNAL":
             return {
                 "schema": SCHEMA,
