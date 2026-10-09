@@ -28,7 +28,7 @@
     }
   },
   "theorem": {
-    "pure_set_claim": "R1 AND R2 AND R3 => B_real SUBSETEQ G_real",
+    "pure_set_claim": "FOR_EACH_FROZEN_CLAIM_C__R1(C)_AND_R2(C)_AND_R3(C)_IMPLIES_B_REAL(C)_SUBSETEQ_G_REAL(C)",
     "proof_rule": "SET_INCLUSION_TRANSITIVITY",
     "r4_role": "OPERATIONAL_AUTHORITY_FOR_THE_ASSERTED_PREMISES__NOT_A_FOURTH_SET_INCLUSION",
     "terminal_success_requires": [
@@ -37,7 +37,8 @@
       "R3",
       "R4"
     ],
-    "current_terminal_success_asserted": false
+    "current_terminal_success_asserted": false,
+    "global_open_ended_mission_completion_derivable": false
   },
   "root_mapping": {
     "R1": [
@@ -127,7 +128,11 @@
     "R4_REQUIRES_CANONICAL_ROOT_CERTIFICATE_REGISTRY_AUTHORITY",
     "LOCAL_PROVED_STATUS_HAS_ZERO_AUTHORITY_WITHOUT_CANONICAL_REGISTRY",
     "ROOT_CERTIFICATE_AND_INDEPENDENT_VERIFICATION_BYTES_MUST_MATCH_CLAIMED_GIT_BLOB_IDS",
-    "MISSION_BINDING_USES_AUTHORITATIVE_MISSION_SOURCE_NOT_INCIDENTAL_POINTER_CHURN"
+    "MISSION_BINDING_USES_AUTHORITATIVE_MISSION_SOURCE_NOT_INCIDENTAL_POINTER_CHURN",
+    "FOUR_ROOT_THEOREM_IS_FROZEN_CLAIM_SCOPED",
+    "GLOBAL_ROOT_SLOTS_HAVE_ZERO_R4_AUTHORITY_AFTER_CLAIM_REGISTRY_V2",
+    "CROSS_CLAIM_CERTIFICATE_INHERITANCE_FORBIDDEN_WITHOUT_PRESERVATION_PROOF",
+    "FINITE_CLAIM_CLOSURE_NEVER_IMPLIES_OPEN_ENDED_GLOBAL_MISSION_COMPLETION"
   ],
   "new_e_admission": {
     "default": "REJECT_AS_PEER_ARCHITECTURE",
@@ -185,6 +190,14 @@
       {
         "id": "M_R4_ROOT_CERTIFICATE_CONTENT_ADDRESS_MISMATCH",
         "expected": "R4_CANONICAL_REGISTRY_INVALID"
+      },
+      {
+        "id": "M_R4_CROSS_CLAIM_CERTIFICATE_REUSE",
+        "expected": "R4_CLAIM_NOT_REGISTERED"
+      },
+      {
+        "id": "M_GLOBAL_SLOT_USED_FOR_CLAIM_AUTHORITY",
+        "expected": "REJECT_NO_R4_AUTHORITY"
       }
     ],
     "mutation_score_semantics": "DIAGNOSTIC_ONLY__NEVER_UNIVERSAL_COMPLETENESS_PROOF"
@@ -194,12 +207,13 @@
     "pure_boolean_valuations_checked": 16,
     "counterexamples_with_R1_R2_R3": 0,
     "each_of_R1_R2_R3_individually_load_bearing": true,
-    "local_test_count": 28,
+    "local_test_count": 35,
     "local_test_failures": 0,
     "scope": "ARCHITECTURE_LOGIC_ONLY__NOT_CURRENT_MISSION_CLOSURE",
     "r4_cross_binding_counterexample_count": 3,
     "r4_cross_binding_symbolic_engine": "WOLFRAM_LANGUAGE",
-    "current_registry_state": "PASS__0_PROVED__3_OPEN__R4_PROOF_CLOSURE_FALSE"
+    "current_registry_state": "PASS__0_PROVED__3_OPEN__R4_PROOF_CLOSURE_FALSE",
+    "claim_registry_state": "PASS__0_REGISTERED__0_CLOSED__GLOBAL_COMPLETION_FALSE"
   },
   "reconciliation": {
     "current_base_commit": "b1e19d7a45f96a40aadba95c17b712e406af0965",
@@ -210,7 +224,7 @@
       "status": "CLOSED_AS_SUPERSEDED_LIVE_INTEGRATION_VEHICLE",
       "preserve_evidence": true
     },
-    "active_pr": 3816
+    "active_pr": 3829
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -298,26 +312,40 @@
     "zero_credit": true
   },
   "r4_canonical_certificate_authority": {
-    "status": "REQUIRED_FOR_FOUR_ROOT_CLOSURE",
-    "registry_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
-    "registry_git_blob_sha": "19c62ecd1d60066b79ad143c3a8ef877b7cd80d3",
-    "guard_path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
-    "guard_git_blob_sha": "cb08524f6703b00567e1bfb41cf32321d0b46258",
-    "current_authority_manifest": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+    "status": "REQUIRED_FOR_CLAIM_LEVEL_FOUR_ROOT_CLOSURE",
+    "registry_path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_CERTIFICATE_REGISTRY_V2.json",
+    "guard_path": "canonical/runtime/coverage_root_claim_registry_guard_v2.py",
+    "current_authority_manifest": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_CLAIM_CERTIFICATES.json",
     "canonical_root_ids": [
       "CC_R1_REALITY_CONTAINMENT_V1",
       "CC_R2_MISSION_SOUNDNESS_V1",
       "CC_R3_TERMINAL_CLOSURE_V1"
     ],
-    "current_proved": 0,
-    "current_open": 3,
-    "current_r4_proof_closure": false,
+    "registered_claims": 0,
+    "closed_claims": 0,
+    "global_mission_completion_derivable": false,
     "local_status_proved_is_authority": false,
-    "content_address_verification_required": true,
+    "exact_claim_lookup_required": true,
+    "v1_global_registry_authority": false,
     "mission_binding": {
       "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
       "authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
       "authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
     }
+  },
+  "claim_parameterization": {
+    "required": true,
+    "quantification": "FOR_EACH_FROZEN_CERTIFICATION_CLAIM_C",
+    "exact_binding_fields": [
+      "claim_id",
+      "scope_sha256",
+      "semantics_sha256",
+      "carrier_schema_id",
+      "mission_id",
+      "epoch_id",
+      "canonical_generation"
+    ],
+    "cross_claim_transport": "FORBIDDEN_WITHOUT_EXPLICIT_PRESERVATION_PROOF_AND_REISSUANCE",
+    "finite_claim_closure_implies_global_mission_completion": false
   }
 }
