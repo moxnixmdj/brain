@@ -99,6 +99,7 @@ def _complete_bundle_and_proposal():
     from canonical.runtime.semantic_operator_counterfactuals import (
         extract_semantic_operators,
         generate_counterfactual_obligations,
+        expected_disposition_for_counterfactual_kind,
     )
 
     text = TEXT
@@ -141,11 +142,10 @@ def _complete_bundle_and_proposal():
         operator_bindings.append(row)
     scenarios = []
     for obligation in generate_counterfactual_obligations(text, source=source):
-        disposition_value = (
-            "DISAMBIGUATE"
-            if obligation.counterfactual_kind == "ANY_SEMANTICS_MUST_BE_DISAMBIGUATED"
-            else ("ACCEPT" if "ACCEPT" in obligation.counterfactual_kind else "REJECT")
+        disposition_value = expected_disposition_for_counterfactual_kind(
+            obligation.counterfactual_kind
         )
+        assert disposition_value is not None
         scenarios.append({
             "operator_id": obligation.operator_id,
             "counterfactual_kind": obligation.counterfactual_kind,
