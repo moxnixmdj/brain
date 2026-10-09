@@ -21,8 +21,8 @@
   },
   "uvck": {
     "current_pointer_path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-    "expected_pointer_git_blob_sha": "2adee7bb282cd01ce7b62f69c8f093268a891753",
-    "new_primitive_is_new_semantic_root": false
+    "new_primitive_is_new_semantic_root": false,
+    "mutable_pointer_binding": "PATH_IDENTITY_ONLY__IMMUTABLE_UVCK_ARTIFACTS_ARE_HASH_BOUND_IN_THE_SEMANTIC_GOVERNANCE_OBJECT"
   },
   "activation": {
     "live_default": false,
