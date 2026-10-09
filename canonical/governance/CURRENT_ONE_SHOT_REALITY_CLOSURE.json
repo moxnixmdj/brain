@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__DECISION_SUFFICIENT_AND_MINIMUM_INFORMATION_GATES_LOAD_BEARING__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__TERMINAL_TRUTH_FRONTIER_RECONCILED__NOT_LIVE_DEFAULT",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__DECISION_SUFFICIENT_AND_MINIMUM_INFORMATION_GATES_LOAD_BEARING__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_TERMINAL_FRONTIER_R2_V34_BOUND__NOT_LIVE_DEFAULT",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
     "git_blob_sha": "f7e42025aa80d2ae18e752262b4f5cb933d0ba39"
@@ -56,12 +56,21 @@
     "path": "canonical/governance/R3_ZERO_RESIDUAL_TERMINAL_TRUTH_RECONCILIATION_20261009_V1.json",
     "git_blob_sha": "28ca3e3e120388bf4d8c05690c153499738026c5",
     "terminal_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-    "terminal_authority_git_blob_sha_after_reconciliation": "e30fee34e3ace236b5e18b2b013ffc07827bf2b7",
+    "terminal_authority_git_blob_sha_after_reconciliation": "49c59d53f403fa945dc2b05cb2e31a149ba3caeb",
     "r3_is_current_terminal_blocker": false,
     "terminal_remains_false": true,
-    "current_r2_remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__ONE_PRIMARY_KNOWN_FINANCE_CELL__OPEN_WORLD_NOT_CLOSED",
-    "next_primary_root": "PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
-    "terminal_credit_delta": 0
+    "current_r2_remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_IMPLICIT_OR_AMBIGUOUS_REFERENCE__SYNONYMY__CONTEXT_DEPENDENT_WORD_SENSE__ONTOLOGY_OR_DOMAIN_MAPPING__CROSS_DOCUMENT_BINDING_WITHOUT_EXPLICIT_TASK_SOURCE_ROLES_OR_WITH_NON_LITERAL_NON_TYPED_SEMANTICS__OR_EXTERNAL_FACT_AUTHENTICATION__OPEN_WORLD_NOT_CLOSED",
+    "next_primary_root": "PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE__CURRENT_R2_V34_NARROWED_FINANCE_SEMANTIC_TAIL",
+    "terminal_credit_delta": 0,
+    "current_r2_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V34.json",
+    "current_r2_scheduler_git_blob_sha": "bd5935cc67a94e3de462d407615e3a5c005194bf",
+    "current_r2_direct_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V20.json",
+    "current_r2_direct_activation_git_blob_sha": "cf96a43ae8f3c4842b8ecc660ed5738a13f88cf0",
+    "verified_finance_positive_subregion_count": 6,
+    "direct_route_count": 24,
+    "bounded_family_count": 21,
+    "terminal": false
   },
   "live_r3_fixed_point": {
     "path": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json",
