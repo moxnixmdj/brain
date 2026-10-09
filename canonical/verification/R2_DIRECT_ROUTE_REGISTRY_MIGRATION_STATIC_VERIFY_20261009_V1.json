@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_REGISTRY_MIGRATION_STATIC_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__STATIC_CURRENTNESS_AND_EXACT_BLOB_BINDING__RUNTIME_REPLAY_NOT_EXECUTED",
+  "verification_class": "STATIC_CONNECTOR_EXACT_BLOB_AND_AUTHORITY_CURRENTNESS",
+  "base_main_sha": "cdaf34390044be78b0ef8ec34112089976a7fa4e",
+  "base_main_tree_sha": "3eb8da8a4a8a864d95651b69fb0981608918ff9a",
+  "candidate_bindings": {
+    "registry": {
+      "path": "canonical/governance/R2_DIRECT_ROUTE_REGISTRY_20261009_V1.json",
+      "git_blob_sha": "059fb710c0404144c5a44d621c8e6f30f53c7c73"
+    },
+    "current_pointer": {
+      "path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_REGISTRY.json",
+      "git_blob_sha": "8355d5e00ad34741e335dd1553dc962eed996929",
+      "load_bearing_identity": "CANONICAL_PATH_NOT_POINTER_BLOB"
+    },
+    "dispatcher": {
+      "path": "canonical/runtime/r2_direct_route_registry_v1.py",
+      "git_blob_sha": "7961190b8349a567629e880866654475d69c2d10"
+    },
+    "closure_gate": {
+      "path": "canonical/runtime/r2_direct_route_live_integration_closure_v1.py",
+      "git_blob_sha": "4822e1d0ead880f3cc6e333b575b1795b28fb116"
+    },
+    "fixed_point_controller": {
+      "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+      "git_blob_sha": "538903ef11a015acd784e075d3efb705c7c4f897"
+    },
+    "current_r2_candidate": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "4ce93fc45663e713b84ed27721213325e53bec51"
+    }
+  },
+  "checks": {
+    "current_route_count": 28,
+    "route_runtime_exact_blob_checks": 28,
+    "bound_verification_exact_blob_checks": 25,
+    "route_runtime_binding_errors": 0,
+    "bound_verification_binding_errors": 0,
+    "immutable_registry_target_blob_match": true,
+    "current_pointer_binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
+    "current_r2_activation_preserved": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V23.json",
+    "current_r2_activation_git_blob_sha_preserved": "933b12e60a8e4843a47999dbe5f7c15d060a16b3",
+    "latest_main_delta_touches_r2_migration_inputs": false,
+    "terminal_authority_current_r2_pointer_blob_load_bearing": false,
+    "historical_v38_runtime_hashes_current_authority": false
+  },
+  "not_executed": {
+    "python_compile": true,
+    "unittest_replay": true,
+    "canonical_front_door_runtime_replay": true,
+    "reason": "HARD_ZERO_INCREMENTAL_SPEND_GUARD__PRIVATE_REPO_GITHUB_HOSTED_ACTIONS_NOT_TRIGGERED__NO_PROVEN_PRIVATE_READ_PATH_TO_PUBLIC_ZERO_COST_RUNNER"
+  },
+  "truth_boundary": [
+    "STATIC_EXACT_BLOB_AND_AUTHORITY_CURRENTNESS_PROVED",
+    "NO_CLAIM_PYTHON_TEST_SUITE_EXECUTED",
+    "NO_CLAIM_RUNTIME_BEHAVIORAL_EQUIVALENCE_INDEPENDENTLY_REPLAYED",
+    "NO_OPEN_WORLD_SEMANTIC_COVERAGE_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "independent_verification": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
