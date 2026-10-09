@@ -1,7 +1,7 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V36",
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V37",
   "date": "2026-10-09",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V53_AND_CODING_V3_PROJECTION_BOUND",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V53_AND_CODING_V3_PROJECTION_BOUND__EXECUTABLE_REFINEMENT_FRONTIER_EXPLICIT",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -1206,6 +1206,37 @@
         "git_blob_sha": "d9b1b08ebc882a8d9c21a062dc07e027cb530679"
       },
       "note": "CURRENT_TYPED_SPECIALIST_COVERS_EXACTLY_ONE_OF_THIRTY_TWO_UNCONSTRAINED_FIVE_ATOM_VALUATIONS__BRANCH_LOCAL_ONLY__ZERO_CREDIT"
+    },
+    "executable_refinement_framework_20261009_v1": {
+      "verifier": {
+        "path": "canonical/runtime/executable_refinement_verifier_v1.py",
+        "git_blob_sha": "13618667e6f87b29b1e56ceeb8947c51d64de683"
+      },
+      "creditable_route_gate": {
+        "path": "canonical/runtime/creditable_route_refinement_gate_v1.py",
+        "git_blob_sha": "58602558b3a6ef81e9c6dcaf28cbc61eb0b1d70d"
+      },
+      "dependency_graph_guard": {
+        "path": "canonical/runtime/terminal_dependency_graph_guard_v1.py",
+        "git_blob_sha": "7ee3988dc393965f83994fba70cd1903e7e2aa7c"
+      },
+      "dependency_graph": {
+        "path": "canonical/governance/CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1.json",
+        "git_blob_sha": "b4fc9176f5e463e2352c437708dfe4dc75898368"
+      },
+      "router_canary_binding": {
+        "path": "canonical/governance/ROUTER_DEPLOYMENT_CANARY_EXECUTABLE_REFINEMENT_20261009_V1.json",
+        "git_blob_sha": "d430de0c6ed47b1d18737a5261c345b7546896c9"
+      },
+      "semantic_edge_binding": {
+        "path": "canonical/governance/BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_20261009_V1.json",
+        "git_blob_sha": "c5f9b7af3b4c804ca0913789ab3acdb0b0f3eb4a"
+      },
+      "gated_entrypoint": {
+        "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+        "git_blob_sha": "c4f3ed3ea767a8930789f2426484fbce710d8f14"
+      },
+      "note": "STRUCTURAL_BINDING_AND_ANTI_BYPASS_FRAMEWORK_ONLY__NO_MECHANICALLY_CHECKED_EXECUTABLE_REFINEMENT_PROOF_CLASS__ZERO_TERMINAL_CREDIT"
     }
   },
   "live_truth": {
@@ -1951,7 +1982,17 @@
     "r2_regcap_candidate_ambiguity_minimum_information_control_bound": true,
     "r2_regcap_global_loss_cushion_identity_closed": false,
     "r2_regcap_open_world_ontology_closed": false,
-    "r2_regcap_missing_context_is_external_impossibility": false
+    "r2_regcap_missing_context_is_external_impossibility": false,
+    "executable_refinement_framework_bound": true,
+    "router_canary_structural_refinement_binding_bound": true,
+    "router_canary_refinement_verified": false,
+    "brain_owned_semantic_edge_structural_refinement_binding_bound": true,
+    "brain_owned_semantic_edge_bounded_refinement_verified": false,
+    "repository_wide_executable_refinement_closed": false,
+    "all_creditable_live_routes_refinement_verified": false,
+    "terminal_executable_refinement_gap_closed": false,
+    "executable_refinement_missing_is_external_impossibility": false,
+    "declarative_refinement_boolean_is_promotion_authority": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -3621,6 +3662,23 @@
     "finance_semantic_tail_closed": false,
     "global_phrase_identity_claimed": false,
     "open_world_ontology_complete": false,
+    "terminal_credit_delta": 0
+  },
+  "executable_refinement_reconciliation_20261009_v1": {
+    "status": "FRAMEWORK_BOUND__MECHANICAL_REFINEMENT_PROOF_CLASS_STILL_OPEN__TERMINAL_FALSE",
+    "highest_dominance_open_leaf": "MECHANICALLY_CHECKED_MODEL_TO_EXECUTABLE_REFINEMENT_FOR_TERMINAL_LOAD_BEARING_PATHS",
+    "closed": [
+      "CONTENT_ADDRESSED_REFINEMENT_CERTIFICATE_STRUCTURE",
+      "DECLARATIVE_SELF_CERTIFICATION_REJECTED",
+      "TERMINAL_DEPENDENCY_GRAPH_ANTI_BYPASS_RULE",
+      "CREDITABLE_ROUTE_GATE_REQUIRES_REFINEMENT_VERIFIED_TRUE"
+    ],
+    "open": [
+      "NO_SUPPORTED_PROOF_CLASS_CURRENTLY_EMITS_REFINEMENT_VERIFIED_TRUE",
+      "ROUTER_CANARY_HAS_ONLY_STRUCTURAL_BINDING_AND_DIFFERENTIAL_EVIDENCE",
+      "SEMANTIC_EDGE_HAS_ONLY_STRUCTURAL_BINDING_AND_EXISTING_TEST_EVIDENCE",
+      "REPOSITORY_WIDE_EXECUTABLE_REFINEMENT_IS_NOT_CLOSED"
+    ],
     "terminal_credit_delta": 0
   }
 }
