@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_R2_REGCAP_CONTEXT_SELECTION_DIRECT_ADEQUACY_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_REBASED_BRANCH_BYTES__10_OF_10_DIRECT_ROUTE_TESTS__LIVE_CCYB_END_TO_END_PASS__V21_SEAM_PASS__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r2-regcap-contextual-direct-v1-20261009-sol2",
+    "exact_blobs": {
+      "canonical/runtime/regcap_context_selection_verify_v1.py": "1615baeae685e15a71059bbfb1f4302e548791aa",
+      "canonical/runtime/regcap_context_selection_v1.py": "038cd25a42e65036015d8b2761efd137b8c9db73",
+      "canonical/runtime/r2_regcap_context_selection_direct_adequacy_v1.py": "15235328d0a82575bfe22bd456a1ba724e1822fe",
+      "canonical/runtime/r2_direct_end_to_end_adequacy_v21.py": "ae33b57e649c15c3bd69df39dfcc8409561f3180",
+      "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "2b8a8699400293d521ead2b8534ca617bd00f6f8",
+      "canonical/tests/test_r2_regcap_context_selection_direct_adequacy_v1.py": "569e04a9e7f392099937756c1604ca2d3e46424d",
+      "canonical/tests/test_r2_regcap_context_selection_v21_seam_v1.py": "d1fd1c4b30967653aa96bebac182220087bc13d5"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/regcap_direct_v1_verify",
+    "assembly": "CURRENT_MAIN_SEMANTIC_DEPENDENCIES_PLUS_EXACT_REBASED_BRANCH_SUBJECT_BYTES"
+  },
+  "verification": {
+    "py_compile": {
+      "status": "PASS",
+      "files": [
+        "canonical/runtime/regcap_context_selection_verify_v1.py",
+        "canonical/runtime/regcap_context_selection_v1.py",
+        "canonical/runtime/r2_regcap_context_selection_direct_adequacy_v1.py",
+        "canonical/runtime/r2_direct_end_to_end_adequacy_v21.py",
+        "canonical/runtime/general_adequate_decision_fixed_point_v2.py"
+      ]
+    },
+    "direct_route_suite": {
+      "result": "PASS",
+      "tests_run": 10,
+      "failures": 0,
+      "errors": 0
+    },
+    "deterministic_three_case_replay": {
+      "CCOB": "PASS__REGCAP::CCOB__INDEPENDENT_VERIFY_TRUE",
+      "CCYB": "PASS__REGCAP::CCYB__INDEPENDENT_VERIFY_TRUE",
+      "TLAC": "PASS__REGCAP::TLAC__INDEPENDENT_VERIFY_TRUE"
+    },
+    "live_primary_source_end_to_end": {
+      "case": "CCYB_RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES",
+      "status": "PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED",
+      "selected_concept_id": "REGCAP::CCYB",
+      "semantic_acceptance_complete": true,
+      "actual_goal_satisfaction_verified": true,
+      "global_phrase_identity_authority": false,
+      "open_world_candidate_set_complete": false
+    },
+    "transactional_falsifier": {
+      "forced_stage": "OUTPUT_READBACK_INDEPENDENT_REVERIFICATION",
+      "result": "PASS__FAILURE_DETECTED__PREEXISTING_OUTPUT_RESTORED_BYTE_FOR_BYTE"
+    },
+    "v21_seam": {
+      "result": "PASS",
+      "checks": [
+        "UNRELATED_REQUEST_DELEGATES_TO_V20",
+        "MATCHED_REGCAP_ROUTE_PRECEDES_V20",
+        "REGCAP_SEMANTIC_OPEN_PRECEDES_V20",
+        "FIXED_POINT_SOURCE_IMPORTS_V21"
+      ],
+      "v20_test_boundary": "STUBBED_ONLY_FOR_ROUTER_FALLBACK_CALL_SHAPE",
+      "full_v20_dependency_cone_replay_claimed": false
+    }
+  },
+  "proved": [
+    "AN_EXPLICIT_TASK_UNIVERSE_OF_CCOB_CCYB_TLAC_CAN_BE_CLOSED_BY_BOUNDED_CONTEXT_SIGNATURES_WITHOUT_CLAIMING_OPEN_WORLD_COMPLETENESS",
+    "CCOB_2_5_PERCENT_CET1_ABOVE_REGULATORY_MINIMUM_CONTEXT_SELECTS_CCOB_WITHIN_THE_EXPLICIT_THREE_RIVAL_TASK",
+    "CCYB_RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES_CONTEXT_SELECTS_CCYB_WITHIN_THE_EXPLICIT_THREE_RIVAL_TASK",
+    "G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION_CONTEXT_SELECTS_TLAC_WITHIN_THE_EXPLICIT_THREE_RIVAL_TASK",
+    "PRODUCER_AND_INDEPENDENT_VERIFIER_USE_DIFFERENT_CONTEXT_REPARSE_PATHS",
+    "TAMPERED_SELECTED_CONCEPT_IS_REJECTED",
+    "GENERIC_OR_MULTIPLE_DESCRIPTOR_CONTEXTS_REMAIN_OPEN",
+    "FORCED_POST_WRITE_VERIFICATION_FAILURE_ROLLS_BACK_TRANSACTIONALLY",
+    "LIVE_PRIMARY_SOURCE_MATRIX_AUTHENTICATION_PASSES_ON_CURRENT_BIS_FSB_SOURCES",
+    "V21_PRESERVES_V20_FALLBACK_AND_EXPOSES_SEMANTIC_OPEN_STATES",
+    "GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2_IS_REBOUND_TO_V21",
+    "NO_GLOBAL_PHRASE_SYNONYMY_OR_OPEN_WORLD_CANDIDATE_COMPLETENESS_IS_GRANTED"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_REGULATORY_CAPITAL_WORD_SENSE_RESOLUTION",
+    "NO_CANDIDATE_COMPLETENESS_BEYOND_THE_EXPLICIT_CCOB_CCYB_TLAC_TASK_UNIVERSE",
+    "NO_GLOBAL_loss-absorbing_cushion_IDENTITY",
+    "NO_MREL_OR_OTHER_REGCAP_CONCEPT_COVERAGE",
+    "NO_FULL_HISTORICAL_V20_OR_FIXED_POINT_REGRESSION_SUITE_REPLAY_ON_THIS_CARRIER",
+    "NO_POLICY_AUTHORITY_BEYOND_THE_EXACT_DIRECT_TASK",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
