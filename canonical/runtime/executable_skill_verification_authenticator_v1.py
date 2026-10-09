@@ -115,10 +115,10 @@ def authenticate_and_verify(
         for key, value in required_verify.items():
             if vd.get(key) != value:
                 raise SkillVerificationError("SKILL_VERIFY_CLAIM_INVALID:" + key)
-        verifier_id = vd.get("independent_verifier_id")
-        if not isinstance(verifier_id, str) or not verifier_id:
+        raw_verifier_id = vd.get("independent_verifier_id")
+        if not isinstance(raw_verifier_id, str) or not raw_verifier_id.strip():
             raise SkillVerificationError("SKILL_INDEPENDENT_VERIFIER_ID_MISSING")
-        verifier_id = verifier_id
+        verifier_id = raw_verifier_id.strip()
         if verifier_id not in ADMITTED_INDEPENDENT_VERIFIER_IDS:
             raise SkillVerificationError(
                 "SKILL_INDEPENDENT_VERIFIER_NOT_ADMITTED:" + verifier_id
