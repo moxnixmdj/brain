@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_SHOT_R2_COVERAGE_BRIDGE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__ONE_SHOT_R2_COVERAGE_BRIDGE__11_OF_11_PLUS_R3_ADJACENT_8_OF_8__ZERO_TERMINAL_CREDIT",
+  "base_main_head": "fbf67ce2740a3efa3ccef0b5fc475d24eab3ca45",
+  "carrier": {
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "role": "ISOLATED_REMOTE_VERIFICATION_CARRIER"
+  },
+  "exact_branch_blobs": {
+    "canonical/runtime/one_shot_verified_closure_v1.py": "48a8e8153a50f894e65d0481a6c4e2a9e28eb967",
+    "canonical/tests/test_one_shot_r2_coverage_bridge_v1.py": "19fae82d7986889d7028d84f46c295f3632180c9"
+  },
+  "proven": [
+    "FRONTIER_SNAPSHOT_NOW_TYPES_CURRENT_R2_INTERNAL_RESIDUALS",
+    "EMPTY_R3_QUEUE_WITH_LIVE_R2_RESIDUAL_IS_NOT_GLOBAL_INTERNAL_CLOSURE",
+    "R2_COVERAGE_PROVIDER_GETS_ZERO_SEMANTIC_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "PROVIDER_PASS_CLAIM_WITHOUT_CURRENT_R2_BYTE_CHANGE_GETS_NO_CREDIT",
+    "CURRENT_R2_BYTE_CHANGE_WITHOUT_TYPED_RESIDUAL_CHANGE_GETS_NO_CREDIT",
+    "AUTHORITY_AND_TYPED_RESIDUAL_CHANGE_REENTERS_FIXED_POINT_FOR_RECHECK",
+    "CURRENT_V35_FINANCE_SEMANTIC_ADEQUACY_TAIL_IS_VISIBLE_TO_ONE_SHOT"
+  ],
+  "replay": {
+    "py_compile": "PASS__2_OF_2",
+    "one_shot_and_bridge_tests": {
+      "tests_run": 11,
+      "failures": 0,
+      "errors": 0,
+      "result": "PASS"
+    },
+    "adjacent_r3_tests": {
+      "tests_run": 8,
+      "failures": 0,
+      "errors": 0,
+      "result": "PASS"
+    }
+  },
+  "current_v35_observation": {
+    "r3_improvement_queue": "EMPTY_AT_LAST_DURABLE_SPRITE_CHECK",
+    "r2_internal_residual": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "expected_no_provider_status": "OPEN__R2_INTERNAL_UNSOLVED_GAP_REMAINS"
+  },
+  "hard_nonclaims": [
+    "NO_DEFAULT_R2_COVERAGE_PROVIDER_IS_ADDED_BY_THIS_CHANGE",
+    "NO_CLAIM_CURRENT_FINANCE_RESIDUAL_IS_SOLVED",
+    "NO_CLAIM_OPEN_WORLD_R2_COVERAGE_IS_COMPLETE",
+    "NO_CLAIM_GLOBAL_GOAL_IS_TERMINAL",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
