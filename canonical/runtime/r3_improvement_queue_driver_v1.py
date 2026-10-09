@@ -66,6 +66,7 @@ def _resolve_work(
 SUCCESS_ADAPTER_FRONTIER_PATHS = (
     "canonical/runtime/r3_bound_success_adapter_v1.py",
     "canonical/runtime/r3_raw_success_adapter_v1.py",
+    "canonical/runtime/r3_checkpoint_reconstruction_success_adapter_v1.py",
     "canonical/runtime/r3_structural_bound_success_adapter_v1.py",
     "canonical/runtime/R3_STRUCTURAL_BOUND_ADAPTER_RULES_V1.json",
 )
@@ -81,6 +82,7 @@ SUCCESS_LEARNING_FRONTIER_PATHS = (
     "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
     "canonical/runtime/r3_raw_success_adapter_v1.py",
     "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
+    "canonical/runtime/r3_checkpoint_reconstruction_success_adapter_v1.py",
     "canonical/runtime/r3_structural_bound_success_adapter_v1.py",
     "canonical/runtime/R3_STRUCTURAL_BOUND_ADAPTER_RULES_V1.json",
 )
@@ -247,6 +249,7 @@ def _activate_owned_success_adapter_frontier(
     importlib.invalidate_caches()
     from canonical.runtime import r3_bound_success_adapter_v1 as bound_success_adapter
     from canonical.runtime import r3_raw_success_adapter_v1 as raw_success_adapter
+    from canonical.runtime import r3_checkpoint_reconstruction_success_adapter_v1 as checkpoint_success_adapter
     from canonical.runtime import r3_structural_bound_success_adapter_v1 as structural_success_adapter
 
     modules = (
@@ -257,6 +260,10 @@ def _activate_owned_success_adapter_frontier(
         (
             raw_success_adapter,
             "canonical/runtime/r3_raw_success_adapter_v1.py",
+        ),
+        (
+            checkpoint_success_adapter,
+            "canonical/runtime/r3_checkpoint_reconstruction_success_adapter_v1.py",
         ),
         (
             structural_success_adapter,
@@ -1492,6 +1499,7 @@ def advance_once(
     if success_episode_adapter_provider is None:
         from canonical.runtime import r3_bound_success_adapter_v1 as bound_success_adapter
         from canonical.runtime import r3_raw_success_adapter_v1 as raw_success_adapter
+        from canonical.runtime import r3_checkpoint_reconstruction_success_adapter_v1 as checkpoint_success_adapter
         from canonical.runtime import r3_structural_bound_success_adapter_v1 as structural_success_adapter
 
         def _owned_success_adapter(request):
@@ -1499,6 +1507,9 @@ def advance_once(
             if adapted is not None:
                 return adapted
             adapted = raw_success_adapter.adapt(request, repo_root=repo_root)
+            if adapted is not None:
+                return adapted
+            adapted = checkpoint_success_adapter.adapt(request, repo_root=repo_root)
             if adapted is not None:
                 return adapted
             return structural_success_adapter.adapt(request, repo_root=repo_root)
