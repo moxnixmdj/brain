@@ -45,6 +45,15 @@ class PromoteR2DirectLiveRouteV1Tests(unittest.TestCase):
             (self.root / rel).mkdir(parents=True, exist_ok=True)
 
         baseline_sha = self.write_text("canonical/runtime/fake_baseline.py", BASELINE)
+        activation = {
+            "schema": "TEST_ACTIVATION_V1",
+            "status": "ACTIVE_TEST",
+            "current_routes": [{"route_id": "BASE"}],
+        }
+        activation_sha = self.write_json(
+            "canonical/governance/fake_activation.json",
+            activation,
+        )
         state = {
             "schema": live.STATE_SCHEMA,
             "status": "ACTIVE_R2_DIRECT_LIVE_STATE",
@@ -56,6 +65,14 @@ class PromoteR2DirectLiveRouteV1Tests(unittest.TestCase):
                 "run_callable": "run",
                 "declared_route_count": 1,
                 "declared_route_ids": ["BASE"],
+                "authority_activation_path": "canonical/governance/fake_activation.json",
+                "authority_activation_git_blob_sha": activation_sha,
+                "runtime_closure": [
+                    {
+                        "path": "canonical/runtime/fake_baseline.py",
+                        "git_blob_sha": baseline_sha,
+                    }
+                ],
             },
             "dynamic_routes": [],
             "terminal_authority": False,
