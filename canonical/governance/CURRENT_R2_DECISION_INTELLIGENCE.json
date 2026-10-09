@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V38__TWENTY_EIGHT_DIRECT_ROUTES__TWENTY_FIVE_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_TEN_VERIFIED_SUBREGIONS",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V39__TWENTY_EIGHT_DIRECT_ROUTES__TWENTY_FIVE_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__DECISION_RELATIVE_SEMANTIC_RELATION_CONTROL_BOUND__AFTER_TEN_VERIFIED_SUBREGIONS",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -18,8 +18,8 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V38.json",
-    "git_blob_sha": "3da601384b017f2e6ac63e74e3e31dce26bfb1df"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V39.json",
+    "git_blob_sha": "a3de442ce7838ba43bc5550b596ad2aade446f13"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V23.json",
@@ -270,7 +270,7 @@
     "positive_adequacy_coverage_credit_delta": 0
   },
   "control_mechanism_status": "CLOSED__TOTAL_FAIL_CLOSED_ADEQUACY_OR_ABSTAIN_CONTROL",
-  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__INFERRED_SYNONYMY__CONTEXT_WORD_SENSE__ONTOLOGY_DOMAIN_MAPPING__GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION__OPEN_WORLD_NOT_CLOSED",
+  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__DECISION_RELEVANT_NONEXPLICIT_SEMANTIC_RELATION_PROOF_BEYOND_EXACT_SOURCE_DECLARATIONS_OR_COMPLETE_TERMINAL_SIGNATURE_EQUIVALENCE__CONTEXT_WORD_SENSE__AUTHENTICATED_ONTOLOGY_OR_DOMAIN_MAPPING__GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION__OPEN_WORLD_NOT_CLOSED",
   "control_law_totalizer": {
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
@@ -821,5 +821,18 @@
     "implicit_pair_inference_claimed": false,
     "general_coreference_closed": false,
     "global_open_world_closure_claimed": false
+  },
+  "semantic_relation_frontier": {
+    "control_path": "canonical/runtime/semantic_relation_control_v1.py",
+    "activation_path": "canonical/governance/DECISION_RELATIVE_SEMANTIC_RELATION_CONTROL_ACTIVATION_20261009_V1.json",
+    "verification_path": "canonical/verification/DECISION_RELATIVE_SEMANTIC_RELATION_REMOTE_VERIFY_20261009_V1.json",
+    "merged_commit": "a113f85f93c95cd5358dc4f8aaec5be1686808ee",
+    "verification": "19_OF_19_FOCUSED_PLUS_21_OF_21_ADJACENT_PASS",
+    "old_binary_synonymy_target_replaced": true,
+    "global_inferred_synonymy_closed": false,
+    "current_decision_substitution_on_complete_terminal_signatures": true,
+    "exact_source_declared_scoped_equivalence": true,
+    "similarity_is_semantic_authority": false,
+    "terminal_credit_delta": 0
   }
 }
