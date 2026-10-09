@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from canonical.runtime.harbor_environment_transport import (
     HarborEnvironmentTransport,
     HarborTransportError,
+    MAX_EXEC_TIMEOUT_S,
     execute_predeclared_action,
 )
 
@@ -34,6 +35,16 @@ class HarborEnvironmentTransportTests(unittest.TestCase):
             self.assertEqual(r.stdout,"hello")
             self.assertEqual(env.commands[0][1],{"timeout_sec":9})
         asyncio.run(run())
+
+    def test_exec_timeout_boundary_matches_exported_authority(self):
+        async def run():
+            env=FakeEnvironment()
+            t=HarborEnvironmentTransport(env)
+            await t.exec("printf hello",timeout_sec=MAX_EXEC_TIMEOUT_S)
+            with self.assertRaisesRegex(HarborTransportError,"TIMEOUT_INVALID"):
+                await t.exec("printf hello",timeout_sec=MAX_EXEC_TIMEOUT_S+1)
+        asyncio.run(run())
+        self.assertEqual(MAX_EXEC_TIMEOUT_S,3600)
 
     def test_read_and_write_actions(self):
         async def run():
