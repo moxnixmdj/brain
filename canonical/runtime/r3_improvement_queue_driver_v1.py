@@ -1127,6 +1127,23 @@ def _internal_failure_repair(
     if not fingerprint:
         raise ImprovementDriverError("FAILURE_REPAIR_FINGERPRINT_MISSING")
     if not retry_sha:
+        retired = learning.retire_orphaned_failure_repair_work(
+            fingerprint,
+            state_path=state_path,
+            work_id=str(work.get("work_id") or ""),
+        )
+        if retired.get("pass") is True:
+            return {
+                "schema": SCHEMA,
+                "status": "IMPROVEMENT_ADVANCED__ORPHANED_FAILURE_TELEMETRY_RETIRED",
+                "pass": True,
+                "failure_fingerprint": fingerprint,
+                "orphan_telemetry_retired": True,
+                "original_failure_repaired": False,
+                "terminal_obligation_established": False,
+                "retirement": deepcopy(dict(retired)),
+                "terminal_authority": False,
+            }
         return {
             "schema": SCHEMA,
             "status": "IMPROVEMENT_REPAIR_BLOCKED__REPLAY_CAPSULE_REQUIRED",
@@ -1624,17 +1641,27 @@ def advance_once(
                         ),
                         state_path=state_path,
                     )
+                orphan_retired = repaired.get("orphan_telemetry_retired") is True
                 return {
                     "schema": SCHEMA,
                     "status": (
-                        "IMPROVEMENT_ADVANCED__FAILURE_REPAIR_REPLAY_VERIFIED"
-                        if repaired_pass
-                        else "IMPROVEMENT_REPAIR_ATTEMPT_DID_NOT_CLOSE_ORIGINAL_OBLIGATION"
+                        "IMPROVEMENT_ADVANCED__ORPHANED_FAILURE_TELEMETRY_RETIRED"
+                        if orphan_retired
+                        else (
+                            "IMPROVEMENT_ADVANCED__FAILURE_REPAIR_REPLAY_VERIFIED"
+                            if repaired_pass
+                            else "IMPROVEMENT_REPAIR_ATTEMPT_DID_NOT_CLOSE_ORIGINAL_OBLIGATION"
+                        )
                     ),
                     "pass": repaired_pass,
                     "progress": repaired_pass,
                     "work_id": wid,
                     "repair": deepcopy(dict(repaired)),
+                    "original_failure_repaired": (
+                        repaired.get("original_failure_repaired")
+                        if orphan_retired
+                        else repaired_pass
+                    ),
                     "attempt_backoff_recorded": not repaired_pass,
                     "blockers_skipped": blockers,
                     "terminal_authority": False,
