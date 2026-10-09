@@ -11,8 +11,10 @@ from canonical.runtime.semantic_relation_entailment_dag_v1 import (
 )
 from canonical.runtime.source_aligned_semantic_edge_authority_v1 import (
     CONCEPT_SEMANTICS_RECEIPT_SCHEMA,
+    EVIDENCE_SCHEMA as EDGE_EVIDENCE_SCHEMA,
     SOURCE_COMPLETENESS_RECEIPT_SCHEMA,
     prove,
+    verify_edge_evidence,
 )
 
 
@@ -249,37 +251,64 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["status"], "UNKNOWN__ENTAILMENT_NOT_PROVED")
         self.assertFalse(out["nonentailment_authority"])
 
-    def test_edge_receipt_is_accepted_by_existing_entailment_dag(self):
+    def test_recomputing_edge_evidence_is_accepted_by_existing_entailment_dag(self):
         formula = atom("LOSS_ABSORPTION")
-        out = prove(
-            RAW,
-            source_id=SOURCE,
-            scope_id=SCOPE,
-            target_concept_id=TARGET,
-            direction="SOURCE_TO_TARGET",
-            source_claims=[],
-            target_formula=formula,
-            concept_semantics_receipt={"candidate": True},
+        envelope = {
+            "schema": EDGE_EVIDENCE_SCHEMA,
+            "raw_span": RAW,
+            "source_id": SOURCE,
+            "scope_id": SCOPE,
+            "target_concept_id": TARGET,
+            "direction": "SOURCE_TO_TARGET",
+            "source_claims": [],
+            "target_formula": formula,
+            "concept_semantics_receipt": {"candidate": True},
+        }
+        verifier = lambda value: verify_edge_evidence(
+            value,
             concept_semantics_verifier=concept_verifier(formula),
             source_proof_verifier=source_verifier([atom("LOSS_ABSORPTION")]),
         )
-        self.assertTrue(out["pass"], out)
-        receipt = out["edge_receipt"]
+        receipt = verifier(envelope)
+        self.assertIsNotNone(receipt)
         evidence = {
             "schema": EVIDENCE_SCHEMA,
             "scope_id": SCOPE,
             "left_id": receipt["source_id"],
             "right_id": receipt["target_id"],
-            "entailment_receipts": [receipt],
+            "entailment_receipts": [envelope],
             "counterexample_receipts": [],
         }
         dag = prove_dag(
             evidence,
             expected_evidence_sha256=evidence_sha256(evidence),
-            relation_verifier=lambda value: value,
+            relation_verifier=verifier,
         )
         self.assertTrue(dag["pass"], dag)
         self.assertTrue(dag["left_entails_right"])
+
+    def test_tampered_edge_evidence_cannot_be_authenticated(self):
+        formula = atom("LOSS_ABSORPTION")
+        envelope = {
+            "schema": EDGE_EVIDENCE_SCHEMA,
+            "raw_span": RAW,
+            "source_id": SOURCE,
+            "scope_id": SCOPE,
+            "target_concept_id": TARGET,
+            "direction": "SOURCE_TO_TARGET",
+            "source_claims": [],
+            "target_formula": conj(
+                atom("LOSS_ABSORPTION"),
+                atom("UNPROVED_EXTRA"),
+            ),
+            "concept_semantics_receipt": {"candidate": True},
+        }
+        receipt = verify_edge_evidence(
+            envelope,
+            concept_semantics_verifier=concept_verifier(formula),
+            source_proof_verifier=source_verifier([atom("LOSS_ABSORPTION")]),
+        )
+        self.assertIsNone(receipt)
 
     def test_default_v8_source_checker_can_supply_real_source_literal_constraint(self):
         raw = "ABC"
