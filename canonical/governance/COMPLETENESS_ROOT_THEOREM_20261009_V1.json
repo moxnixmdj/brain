@@ -1,0 +1,160 @@
+{
+  "schema": "PROJECT_BRAIN_COMPLETENESS_ROOT_THEOREM_20261009_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_META_CONTROL_SPEC__R1_R4_CONSOLIDATED__FALSIFICATION_FIRST__ZERO_TERMINAL_CREDIT",
+  "purpose": "Freeze completeness architecture to four roots; route future work to falsification, refinement, or proof-cost reduction instead of root proliferation.",
+  "terminal_objective_binding": {
+    "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE"
+  },
+  "semantic_objects": {
+    "B_real": "ACTUAL_MISSION_RELEVANT_BEHAVIORS",
+    "B_plus": "CONSERVATIVE_UPPER_ENVELOPE_OF_POSSIBLE_BEHAVIORS",
+    "G_minus": "BEHAVIORS_DEFINITELY_ACCEPTABLE_UNDER_AUTHORIZED_MISSION",
+    "G_real": "ACTUAL_AUTHORIZED_MISSION_ACCEPTANCE_SET"
+  },
+  "roots": {
+    "R1_REALITY_CONTAINMENT": {
+      "claim": "B_real_SUBSET_B_plus",
+      "failure_witness": "EXISTS_b__b_IN_B_real_AND_b_NOT_IN_B_plus"
+    },
+    "R2_MISSION_SOUNDNESS": {
+      "claim": "G_minus_SUBSET_G_real",
+      "failure_witness": "EXISTS_b__b_IN_G_minus_AND_b_NOT_IN_G_real"
+    },
+    "R3_TERMINAL_CLOSURE": {
+      "claim": "B_plus_SUBSET_G_minus",
+      "failure_witness": "EXISTS_b__b_IN_B_plus_AND_b_NOT_IN_G_minus"
+    },
+    "R4_PROOF_AUTHORITY": {
+      "claim": "R1_R2_R3_CERTIFICATES_ARE_CURRENT_WELL_FOUNDED_CONSISTENCY_SAFE_SEMANTICALLY_SOUND_AND_BOUND_TO_REALIZATION",
+      "failure_witness": "ANY_STALE_CIRCULAR_INCONSISTENT_UNSOUND_UNBOUND_OR_BYPASSED_LOAD_BEARING_PROOF_PATH"
+    }
+  },
+  "terminal_theorem": {
+    "premises": [
+      "R1_REALITY_CONTAINMENT",
+      "R2_MISSION_SOUNDNESS",
+      "R3_TERMINAL_CLOSURE",
+      "R4_PROOF_AUTHORITY"
+    ],
+    "semantic_derivation": "B_real_SUBSET_B_plus_SUBSET_G_minus_SUBSET_G_real",
+    "conclusion": "B_real_SUBSET_G_real",
+    "terminal_rule": "TERMINAL_SUCCESS_ONLY_WITH_CURRENT_LOAD_BEARING_CERTIFICATES_FOR_ALL_FOUR_ROOTS_AND_NO_OPEN_COUNTERMODEL"
+  },
+  "new_e_admission": {
+    "new_root_required_only_if": "CONCRETE_COUNTERMODEL_SHOWS_R1_R2_R3_R4_ALL_HOLD_WHILE_B_real_SUBSET_G_real_IS_FALSE",
+    "otherwise": "MAP_TO_EXISTING_ROOT_OR_CAPABILITY_CLOSURE",
+    "unknown_does_not_create_root": true,
+    "proof_search_failure_does_not_mean_falsehood": true
+  },
+  "mechanism_admission": {
+    "allow_if": [
+      "CLOSES_OR_FALSIFIES_A_DEMONSTRATED_ROOT_OBLIGATION",
+      "MATERIALLY_REDUCES_PROOF_OR_WALL_CLOCK_COST_WITHOUT_WEAKENING_TRUTH"
+    ],
+    "otherwise": "DEMOTE_FROM_CANONICAL_ARCHITECTURE",
+    "no_mechanism_from_missing_proof_alone": true
+  },
+  "dashboards": {
+    "SOUNDNESS_CLOSURE": "CAN_FALSE_TERMINAL_SUCCESS_STILL_BE_AUTHORIZED",
+    "CAPABILITY_CLOSURE": "CAN_THE_BRAIN_EFFICIENTLY_CONSTRUCT_OR_PROVE_THE_RIGHT_RESULT_WHEN_IT_EXISTS"
+  },
+  "existing_machinery_projection": {
+    "R1_REALITY_CONTAINMENT": [
+      "BOUNDARY_REALIZATION",
+      "IMPLEMENTATION_REFINEMENT",
+      "GENERALIZED_BEHAVIOR_CARRIER",
+      "SOUND_WORLD_SEMANTICS",
+      "COMPLETE_MEDIATION",
+      "REALITY_ANCHORING"
+    ],
+    "R2_MISSION_SOUNDNESS": [
+      "MISSION_AUTHORITY",
+      "MISSION_SEMANTICS_ENVELOPE",
+      "PROXY_MISSION_BINDING",
+      "EPISTEMIC_NONINTERFERENCE",
+      "AUTHORIZED_SCOPE"
+    ],
+    "R3_TERMINAL_CLOSURE": [
+      "SUBSET_OR_COUNTEREXAMPLE",
+      "U_OR_FRONTIER_DEPLETION",
+      "VIABILITY_WINNING_FINALITY_WHEN_REQUIRED",
+      "MISSION_SPECIFIC_TARGET_DOMINANCE_COMPOSITION_OWNERSHIP"
+    ],
+    "R4_PROOF_AUTHORITY": [
+      "TYPED_CERTIFICATES",
+      "WELL_FOUNDED_DEPENDENCIES",
+      "PREMISE_CONSISTENCY",
+      "CALCULUS_SOUNDNESS",
+      "GENESIS_TRUST",
+      "BYTES_TO_SEMANTICS",
+      "PROOF_TO_USE",
+      "PROOF_OBLIGATION_COVERAGE_AS_CAPABILITY"
+    ]
+  },
+  "falsification_campaign": {
+    "priority": "ATTACK_ROOTS_BEFORE_INVENTING_MECHANISMS",
+    "seeded_mutations": [
+      [
+        "M1_OMIT_REAL_BEHAVIOR",
+        "R1_REALITY_CONTAINMENT"
+      ],
+      [
+        "M2_ADD_UNPROVED_GOOD",
+        "R2_MISSION_SOUNDNESS"
+      ],
+      [
+        "M3_TERMINAL_WITH_OPEN_FRONTIER",
+        "R3_TERMINAL_CLOSURE"
+      ],
+      [
+        "M4_STALE_CERTIFICATE",
+        "R4_PROOF_AUTHORITY"
+      ],
+      [
+        "M5_CIRCULAR_PROOF",
+        "R4_PROOF_AUTHORITY"
+      ],
+      [
+        "M6_INCONSISTENT_PREMISES",
+        "R4_PROOF_AUTHORITY"
+      ],
+      [
+        "M7_UNSOUND_RULE",
+        "R4_PROOF_AUTHORITY"
+      ],
+      [
+        "M8_UNAUTHORIZED_SCOPE_NARROWING",
+        "R2_MISSION_SOUNDNESS"
+      ],
+      [
+        "M9_UNKNOWN_AS_IMPOSSIBLE",
+        "R1_REALITY_CONTAINMENT"
+      ],
+      [
+        "M10_PROOF_TIMEOUT_AS_FALSE",
+        "CAPABILITY_CLOSURE"
+      ]
+    ]
+  },
+  "current_activation": {
+    "meta_control_bound": true,
+    "R1_closed_claimed": false,
+    "R2_closed_claimed": false,
+    "R3_closed_claimed": false,
+    "R4_closed_claimed": false,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_ROOT_IS_GLOBALLY_CLOSED_BY_THIS_CONSOLIDATION.",
+    "NO_CLAIM_OPEN_WORLD_COVERAGE_IS_COMPLETE.",
+    "NO_CLAIM_PROOF_SEARCH_FAILURE_IS_FALSEHOOD_OR_EXTERNAL_IMPOSSIBILITY.",
+    "NO_CLAIM_OLDER_MISSION_SPECIFIC_INVARIANTS_ARE_DELETED.",
+    "NO_TERMINAL_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
