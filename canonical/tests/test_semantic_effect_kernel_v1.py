@@ -209,6 +209,24 @@ class SemanticEffectKernelBehaviorTests(unittest.TestCase):
         self.assertEqual(K.active_effect_ids(reopened), [effect["effect_id"]])
         self.assertEqual(reopened["discharged_effects"], [])
 
+    def test_transport_rejects_forged_prior_discharge_history(self):
+        problem = ambiguity_problem(same_terminal_result=True)
+        effect = self.effect(problem=problem)
+        value = K.make_value("x", context_version="ctx-v1", effects=[effect])
+        cert = K.issue_discharge_certificate(
+            effect,
+            proof_kind="AMBIGUITY_TERMINALLY_IRRELEVANT_V1",
+            proof_problem=problem,
+        )
+        clean = K.discharge_effect(value, effect["effect_id"], cert)
+        forged = dict(clean)
+        forged["discharged_effects"] = [dict(clean["discharged_effects"][0])]
+        forged["discharged_effects"][0]["certificate"] = dict(cert)
+        forged["discharged_effects"][0]["certificate"]["proof_digest"] = "0" * 64
+        verdict = K.verify_transport(inputs=[forged], output=forged)
+        self.assertFalse(verdict["pass"])
+        self.assertEqual(verdict["status"], "FAIL_CLOSED__INVALID_DISCHARGE_HISTORY")
+
     def test_transport_verifier_detects_silent_effect_loss(self):
         effect = self.effect()
         incoming = K.make_value("x", context_version="ctx-v1", effects=[effect])
