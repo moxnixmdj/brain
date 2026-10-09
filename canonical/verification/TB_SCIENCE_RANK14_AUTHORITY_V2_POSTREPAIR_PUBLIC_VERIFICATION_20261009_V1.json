@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_AUTHORITY_V2_POSTREPAIR_PUBLIC_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__POSTREPAIR_NONEXECUTABLE_AUTHORITY_CANDIDATE__V10_EXACT__ZERO_EXPOSURE",
+  "candidate": {
+    "path": "canonical/governance/TB_SCIENCE_RANK14_ONE_SLOT_EXECUTION_AUTHORITY_CANDIDATE_20261009_V2.json",
+    "git_blob_sha": "614eeefce5987e1574dbdfa2eb0c749251fe51af"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-tbscience-rank14-authority-v2-postrepair-20261009",
+    "head_sha": "90fe7c12932ed6120a1c3d783414b6d64d225019",
+    "workflow_run_id": 37882572264,
+    "workflow_job_id": 113665342446,
+    "artifact_id": 11595167512,
+    "artifact_zip_sha256": "70eb26597f6c0dbc27a6e3c452fdc8ee3a0884f16cf3149e91b9690ea2b45493",
+    "authority_receipt_sha256": "ea236d9e9642f0a7be181687123d57eee30cd9cee39df35d41c5f3cdf667f219",
+    "closure_receipt_sha256": "960eda9e5ea2f7ca58e1ee89dbf28d33650856cb3ab478cea3875db17db3f11e",
+    "conclusion": "success"
+  },
+  "verified_truth": {
+    "historical_task_read": true,
+    "task_started": false,
+    "execution_authority_consumed": false,
+    "benchmark_trials_consumed": 0,
+    "agent_blob": "16e8ab7918c4f8d052698282dddf674b54a23016",
+    "planner_blob": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "v10_manifest_blob": "ae37559320105277e017ff17af7c3dbeae2f9c27",
+    "closure_file_count": 15,
+    "missing_paths": 0,
+    "mismatched_paths": 0,
+    "unresolved_dynamic_imports": 0
+  },
+  "benchmark_task_exposure_delta": 0,
+  "benchmark_trials_consumed_delta": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
