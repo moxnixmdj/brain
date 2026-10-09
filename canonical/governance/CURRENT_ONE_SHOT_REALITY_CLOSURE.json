@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__STRICT_EXTERNALITY_LAW_VERIFIED__LIVE_STATE_REPLAY_PENDING_ACQUISITION__NOT_LIVE_DEFAULT",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__STRICT_EXTERNALITY_LAW_VERIFIED__R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__NOT_LIVE_DEFAULT",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
     "git_blob_sha": "b304e9f5857044d2e1e28a3d5122140d38dc1069"
@@ -12,9 +12,9 @@
     "role": "LOAD_BEARING_INNER_FIXED_POINT__HISTORICAL_STATE_INSUFFICIENCY_ONLY__INFORMATION_THEORETIC_EXTERNALITY_REQUIRES_SEPARATE_PROOF"
   },
   "verification": {
-    "path": "canonical/verification/STRICT_ACQUISITION_ROUTING_LIVE_REPLAY_20261009_V1.json",
-    "git_blob_sha": "a7220aed246a7de7aa3b6e2747fe941f4dd4839d",
-    "status": "PASS__30_OF_30__LIVE_STATE_COPY_ROUTES_TO_PENDING_ACQUISITION_NOT_SYNTHESIS"
+    "path": "canonical/verification/R3_REPLAY_PROVENANCE_REPAIR_20261009_V1.json",
+    "git_blob_sha": "54cd12f1736d49c67a031c3aba401ea0d2491216",
+    "status": "PASS__R3_ORPHAN_REPAIR_OBLIGATION_ELIMINATED_WITHOUT_FALSE_REPAIR_CLAIM"
   },
   "authority": {
     "callable_as_verified_orchestrator": true,
@@ -28,30 +28,34 @@
     "live_r3_fixed_point_verified": true,
     "information_theoretic_externality_gate_verified": true,
     "historical_replay_absence_is_terminal_externality": false,
-    "pending_acquisition_is_not_external_impossibility": true
+    "pending_acquisition_is_not_external_impossibility": true,
+    "orphan_failure_telemetry_is_not_terminal_obligation": true,
+    "current_r3_internal_unsolved": false
   },
   "next_load_bearing_roots": [
-    "RUN_CURRENT_PENDING_ACQUISITION_OR_EXPERIMENT_THROUGH_SEARCH_SIMULATION_EXPERIMENT_OR_MINIMUM_EVIDENCE_ACQUISITION__DO_NOT_LABEL_EXTERNAL",
-    "PRODUCE_EXACT_IDENTITY_ZERO_EXPOSURE_16384_CONTEXT_CAPACITY_RECEIPT_BEFORE_TB_SCIENCE_RANK14",
-    "KEEP_CONSTRUCTIVE_CAPABILITY_SYNTHESIS_PROVIDER_READY_FOR_NEW_INTERNAL_CONSTRUCTIVE_CONTRACTS",
-    "CONTINUE_R2_POSITIVE_ADEQUACY_AND_CHECKPOINT_TRUTH_CLOSURE"
+    "RECOMPUTE_CURRENT_TERMINAL_TRUTH_FRONTIER_AFTER_R3_RESIDUAL_ELIMINATION",
+    "PRODUCE_EXACT_IDENTITY_ZERO_EXPOSURE_16384_CONTEXT_CAPACITY_RECEIPT_BEFORE_TB_SCIENCE_RANK14_ONLY_IF_STILL_ON_CURRENT_TERMINAL_FRONTIER",
+    "CONTINUE_ONLY_CURRENT_LOAD_BEARING_R2_OR_TERMINAL_TRUTH_CLOSURE",
+    "KEEP_STRICT_EXTERNALITY_PROOF_GATE_AND_REPLAY_PROVENANCE_INVARIANT_LOAD_BEARING"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
   },
   "live_r3_fixed_point": {
-    "path": "canonical/verification/STRICT_ACQUISITION_ROUTING_LIVE_REPLAY_20261009_V1.json",
-    "status": "PASS__30_OF_30__LIVE_STATE_COPY_ROUTES_TO_PENDING_ACQUISITION_NOT_SYNTHESIS",
-    "source_state_sha256": "44499f10a12b10fe13a71959819eda03ec99d9e628866f5b53b41fe258592c2f",
-    "v1_status": "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
-    "v2_status": "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT_PROVIDER_REQUIRED",
-    "gap_class": "PENDING_ACQUISITION_OR_EXPERIMENT",
-    "required_action": "SEARCH_SIMULATE_EXPERIMENT_OR_ACQUIRE_MINIMUM_NEEDED_EVIDENCE",
-    "information_theoretic_externality_proved": false,
-    "constructive_internal_blockers": [],
-    "evidence_blockers": [
-      "NEW_EXPERIENCE_REQUIRED__HISTORICAL_FAILURE_REPLAY_CAPSULE_MISSING"
-    ]
+    "path": "canonical/verification/R3_REPLAY_PROVENANCE_REPAIR_20261009_V1.json",
+    "git_blob_sha": "54cd12f1736d49c67a031c3aba401ea0d2491216",
+    "status": "PASS__R3_ORPHAN_REPAIR_OBLIGATION_ELIMINATED_WITHOUT_FALSE_REPAIR_CLAIM",
+    "result_sha256": "25bc366c08d730f6e0c35599b8fcfa2cb215e4b88a4f733acce06377d50c3293",
+    "closure_status": "PASS__PROOF_CARRYING_REALITY_CLOSURE_FIXED_POINT",
+    "v1_status": "VERIFIED_INTERNAL_FIXED_POINT__IMPROVEMENT_QUEUE_EMPTY",
+    "residual_class": "NONE",
+    "pending_improvement_count_after": 0,
+    "internal_unsolved_after": false,
+    "historical_failure_retained": true,
+    "original_failure_repaired": false,
+    "terminal_obligation_established": false,
+    "repairability": "ORPHANED_TELEMETRY__NO_REPLAY_CONTEXT",
+    "provenance_gap": "RETRY_CONTEXT_MISSING_AT_SOURCE"
   }
 }
