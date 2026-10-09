@@ -12,6 +12,11 @@ from canonical.runtime import r2_regcap_context_selection_direct_adequacy_v1 as 
 from canonical.runtime import r2_direct_end_to_end_adequacy_v21 as v21
 from canonical.runtime import general_adequate_decision_fixed_point_v2 as fp
 from canonical.runtime import regcap_necessary_property_authority_v1 as regcap
+from canonical.runtime import regcap_contrastive_discriminator_matrix_v1 as matrix
+
+ROOT = Path(__file__).resolve().parents[2]
+_ORIGINAL_COMPUTE = producer.compute
+_ORIGINAL_VERIFY = verifier.verify
 
 
 def fake_projection(pack):
@@ -70,7 +75,15 @@ def goal(inp="canonical/tmp/regcap_context_case.json", out="canonical/tmp/regcap
     )
 
 
+def seed_authority(root: Path):
+    source = ROOT / matrix.PACK_PATH
+    target = root / matrix.PACK_PATH
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(source.read_bytes())
+
+
 def write_case(root: Path, text: str):
+    seed_authority(root)
     p = root / "canonical/tmp/regcap_context_case.json"
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(case(text)), encoding="utf-8")
@@ -78,7 +91,7 @@ def write_case(root: Path, text: str):
 
 
 def compute_fake(c, *, repo_root=None):
-    return producer.compute(
+    return _ORIGINAL_COMPUTE(
         c,
         repo_root=repo_root,
         projection_verifier=fake_projection,
@@ -86,7 +99,7 @@ def compute_fake(c, *, repo_root=None):
 
 
 def verify_fake(c, result, *, repo_root=None):
-    return verifier.verify(
+    return _ORIGINAL_VERIFY(
         c,
         result,
         repo_root=repo_root,
