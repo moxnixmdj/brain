@@ -1,5 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_CERTIFICATE_V1",
+  "proof_class": "DECLARATIVE_BOUNDING",
   "subject_id": "router-deployment-canary",
   "abstract_spec": {
     "path": "canonical/governance/ROUTER_DEPLOYMENT_CANARY_ABSTRACT_SPEC_20261009_V1.json",
