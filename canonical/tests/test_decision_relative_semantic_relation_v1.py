@@ -3,8 +3,15 @@ import unittest
 from canonical.runtime.decision_relative_semantic_relation_v1 import prove
 
 
-def receipt():
-    return {"verified": True}
+def receipt(relation, source_kind="CHECKED_PROOF_DAG"):
+    return {
+        "verified": True,
+        "relation": relation,
+        "source_kind": source_kind,
+        "verifier_id": "verifier:test",
+        "evidence_sha256": "e" * 64,
+        "scope_sha256": "s" * 64,
+    }
 
 
 def terminal_rows(a, b):
@@ -20,7 +27,7 @@ class Tests(unittest.TestCase):
             "expression_a": "reserve buffer",
             "expression_b": "liquidity cushion",
             "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
-            "evidence": {"explicit_source_equivalence": receipt()},
+            "evidence": {"explicit_source_equivalence": receipt("EXACT_EQUIVALENT", "EXPLICIT_SOURCE_DEFINITION")},
         })
         self.assertTrue(out["pass"], out)
         self.assertEqual(out["strongest_proved_relation"], "EXACT_EQUIVALENT")
@@ -32,7 +39,7 @@ class Tests(unittest.TestCase):
             "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
             "evidence": {
                 "authenticated_concept_binding": {
-                    "verified": True,
+                    **receipt("EXACT_EQUIVALENT", "AUTHENTICATED_ONTOLOGY"),
                     "a_concept_id": "REGCAP:42",
                     "b_concept_id": "REGCAP:42",
                 }
@@ -47,8 +54,8 @@ class Tests(unittest.TestCase):
             "expression_b": "B",
             "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
             "evidence": {
-                "entailment_a_to_b": receipt(),
-                "entailment_b_to_a": receipt(),
+                "entailment_a_to_b": receipt("A_ENTAILS_B"),
+                "entailment_b_to_a": receipt("B_ENTAILS_A"),
             },
         })
         self.assertTrue(out["pass"])
@@ -59,7 +66,7 @@ class Tests(unittest.TestCase):
             "expression_a": "CET1 capital",
             "expression_b": "regulatory capital",
             "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
-            "evidence": {"entailment_a_to_b": receipt()},
+            "evidence": {"entailment_a_to_b": receipt("A_ENTAILS_B")},
         })
         self.assertFalse(out["pass"])
         self.assertEqual(out["strongest_proved_relation"], "A_ENTAILS_B")
@@ -68,8 +75,8 @@ class Tests(unittest.TestCase):
         out = prove({
             "expression_a": "CET1 capital",
             "expression_b": "regulatory capital",
-            "required_relation": "A_SUBSTITUTABLE_FOR_B",
-            "evidence": {"entailment_a_to_b": receipt()},
+            "required_relation": "A_ENTAILS_B_REQUIRED",
+            "evidence": {"entailment_a_to_b": receipt("A_ENTAILS_B")},
         })
         self.assertTrue(out["pass"])
         self.assertEqual(out["strongest_proved_relation"], "A_ENTAILS_B")
@@ -82,7 +89,7 @@ class Tests(unittest.TestCase):
             "evidence": {
                 "entailment_a_to_b": receipt(),
                 "entailment_b_to_a": receipt(),
-                "counterexample_a_substituted_for_b": receipt(),
+                "counterexample_a_substituted_for_b": receipt("COUNTEREXAMPLE_A_FOR_B", "CHECKED_COUNTEREXAMPLE"),
             },
         })
         self.assertFalse(out["pass"])
@@ -114,6 +121,16 @@ class Tests(unittest.TestCase):
                 {"action": "REDUCE"},
                 {"action": "HOLD"},
             ),
+        })
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["strongest_proved_relation"], "UNKNOWN")
+
+    def test_bare_verified_boolean_is_not_semantic_proof(self):
+        out = prove({
+            "expression_a": "A",
+            "expression_b": "B",
+            "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+            "evidence": {"explicit_source_equivalence": {"verified": True}},
         })
         self.assertFalse(out["pass"])
         self.assertEqual(out["strongest_proved_relation"], "UNKNOWN")
