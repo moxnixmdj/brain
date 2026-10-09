@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__DECISION_SUFFICIENT_AND_MINIMUM_INFORMATION_GATES_LOAD_BEARING__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__NOT_LIVE_DEFAULT",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__DECISION_SUFFICIENT_AND_MINIMUM_INFORMATION_GATES_LOAD_BEARING__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__TERMINAL_TRUTH_FRONTIER_RECONCILED__NOT_LIVE_DEFAULT",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
     "git_blob_sha": "f7e42025aa80d2ae18e752262b4f5cb933d0ba39"
@@ -40,7 +40,7 @@
     "verifier_authority_mutation_from_synthesis_or_acquisition": false
   },
   "next_load_bearing_roots": [
-    "RECOMPUTE_CURRENT_TERMINAL_TRUTH_FRONTIER_FROM_ACTUAL_LIVE_R3_ZERO_RESIDUAL_STATE",
+    "FOLLOW_CURRENT_TERMINAL_AUTHORITY__R3_NOT_CURRENT_BLOCKER__PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
     "ROUTE_EVERY_CONSTRUCTIVE_GAP_THROUGH_DECISION_SUFFICIENT_CONTRACT_BEFORE_SYNTHESIS",
     "ROUTE_EVERY_EVIDENCE_GAP_THROUGH_MINIMUM_POLICY_CHANGING_INFORMATION_CONTRACT_BEFORE_ACQUISITION",
     "PRODUCE_EXACT_IDENTITY_ZERO_EXPOSURE_16384_CONTEXT_CAPACITY_RECEIPT_BEFORE_TB_SCIENCE_RANK14_ONLY_IF_STILL_ON_CURRENT_TERMINAL_FRONTIER",
@@ -51,6 +51,16 @@
     "terminal_credit_delta": 0,
     "decision_sufficient_gate_credit_delta": 0,
     "minimum_information_gate_credit_delta": 0
+  },
+  "terminal_truth_frontier_reconciliation": {
+    "path": "canonical/governance/R3_ZERO_RESIDUAL_TERMINAL_TRUTH_RECONCILIATION_20261009_V1.json",
+    "git_blob_sha": "0c62b690139c1b58c76485101bb10e74941afff5",
+    "terminal_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "terminal_authority_git_blob_sha_after_reconciliation": "7238409b9350207a58f5240d6d2f01f429c104f6",
+    "r3_is_current_terminal_blocker": false,
+    "terminal_remains_false": true,
+    "next_primary_root": "PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
+    "terminal_credit_delta": 0
   },
   "live_r3_fixed_point": {
     "path": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json",
