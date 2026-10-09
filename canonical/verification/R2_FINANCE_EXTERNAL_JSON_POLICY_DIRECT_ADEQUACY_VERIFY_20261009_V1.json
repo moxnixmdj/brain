@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_EXTERNAL_JSON_POLICY_DIRECT_ADEQUACY_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__STATE_KEYED_INDEPENDENTLY_REFETCHED_EXTERNAL_JSON_FINANCE_POLICY__COMPOSITION_22_OF_22__INHERITS_HTTP_REAL_OBSERVATION_22_OF_22__ZERO_CREDIT",
+  "branch": "r2-v35-externalfact",
+  "exact_blobs": {
+    "canonical/runtime/finance_external_json_policy_v1.py": "1ae08f7b96c5a889682510976ed183708e7cd30a",
+    "canonical/runtime/finance_external_json_policy_verify_v1.py": "012a428b48af8a588da18c9059b017239b59a9f0",
+    "canonical/runtime/r2_finance_external_json_policy_direct_adequacy_v1.py": "6ad117814488685418f4e090b924a59bcb89ea9f",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v5.py": "b1ea3108fdce66451a6471610b6a9b0da2ed0213",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "f8e99fd92dbea95116f8153d450bb53d290a883c",
+    "canonical/tests/test_r2_finance_external_json_policy_direct_adequacy_v1.py": "ce38ca87682f6ea67513dae9a9bf2495b19b3698"
+  },
+  "inherited_observation_authority": {
+    "runtime_path": "canonical/runtime/r2_http_json_observation_direct_adequacy_v1.py",
+    "verification_path": "canonical/verification/R2_HTTP_JSON_OBSERVATION_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+    "verification_git_blob_sha": "1b612143fb95e841f098bb88fee5967dc2b8400f",
+    "verification_status": "PASS__HTTP_JSON_OBSERVATION_FAMILY__BRANCH_REGRESSION_22_OF_22__PUBLIC_REAL_OBSERVATION_PASS__HISTORICAL_HASH_REPRODUCED__ZERO_CREDIT",
+    "semantics": "STATE_KEYED_READ_ONLY_HTTPS_JSON_PRODUCER_PLUS_INDEPENDENT_CURL_REFETCH_AND_PARSED_JSON_EQUALITY"
+  },
+  "composition_verification": {
+    "carrier": {
+      "provider": "SPRITES",
+      "sprite": "brain-live-integrated-v1-run-20261008",
+      "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+    },
+    "checks_passed": 22,
+    "checks_run": 22,
+    "covered": [
+      "DECIMAL_TRUE_SELECTS_TRUE_ACTION",
+      "DECIMAL_FALSE_SELECTS_FALSE_ACTION",
+      "BOOLEAN_POLICY",
+      "POLICY_OUTPUT_TAMPER_REJECTED",
+      "NONSTRING_DECIMAL_REJECTED",
+      "IDENTICAL_ACTIONS_REJECTED",
+      "DIRECT_PREFLIGHT_MATCHES_WITHOUT_OUTPUT_SIDE_EFFECT",
+      "DIRECT_ROUTE_INHERITS_PRODUCER_INDEPENDENT_HTTP_RECEIPT",
+      "DIRECT_TRUE_AND_FALSE_ACTIONS_PASS",
+      "ENDPOINT_AUTHORITY_AND_EXTERNAL_WORLD_TRUTH_REMAIN_FALSE",
+      "MISSING_PRODUCER_INDEPENDENCE_IN_HTTP_RECEIPT_FAILS",
+      "FINAL_AND_OBSERVATION_OUTPUTS_ROLL_BACK_TO_PRIOR_BYTES",
+      "V5_MATCHED_PREFLIGHT_AND_RUN_USE_NEW_ROUTE",
+      "V5_NONMATCHING_PREFLIGHT_AND_RUN_FALL_BACK_TO_V4",
+      "V5_ROUTE_INVENTORY_IS_V4_PLUS_ONE"
+    ]
+  },
+  "fixed_point_patch": {
+    "status": "STATIC_SINGLE_IMPORT_LINE_ONLY",
+    "from": "r2_direct_end_to_end_adequacy_v4",
+    "to": "r2_direct_end_to_end_adequacy_v5",
+    "collateral_runtime_edits": 0
+  },
+  "proves": [
+    "A_STATE_KEYED_HTTPS_JSON_OBSERVATION_ALREADY_ACCEPTED_BY_THE_VERIFIED_HTTP_ROUTE_CAN_DRIVE_AN_EXACT_BOOLEAN_OR_DECIMAL_FINANCE_POLICY",
+    "THE_POLICY_TRANSFORM_IS_INDEPENDENTLY_RECOMPUTED_AFTER_THE_PRODUCER_INDEPENDENT_HTTP_SEMANTIC_REFETCH",
+    "OBSERVATION_AND_FINAL_OUTPUTS_ARE_TRANSACTIONALLY_ROLLED_BACK_ON_POST_OBSERVATION_POLICY_FAILURE",
+    "V5_PRESERVES_V4_FOR_ALL_NONMATCHING_REQUESTS"
+  ],
+  "boundary": [
+    "THE_CONFIGURED_ENDPOINT_RESPONSE_IS_OBSERVED_AND_INDEPENDENTLY_REFETCHED_BUT_ENDPOINT_AUTHORITY_IS_NOT_PROVED",
+    "NO_GLOBAL_EXTERNAL_WORLD_TRUTH_CAUSALITY_COMPLETENESS_OR_SOURCE_INDEPENDENCE_CLAIM",
+    "ONLY_EXACT_JSON_PATH_BOOLEAN_OR_DECIMAL_PREDICATES_AND_EXPLICIT_TWO_ACTION_POLICY",
+    "NO_GENERAL_EXTERNAL_FACT_AUTHENTICATION",
+    "NO_FINANCE_FAMILY_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
