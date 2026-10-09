@@ -13,6 +13,7 @@ authority outside this grammar.
 """
 from __future__ import annotations
 
+from datetime import date
 from hashlib import sha256
 import json
 import re
@@ -96,6 +97,11 @@ def compile_sentence(
 
         groups=match.groupdict()
         value=_scalar(groups["value"])
+        raw_date=groups.get("date")
+        if raw_date is not None:
+            parsed_date=date.fromisoformat(raw_date)
+            if parsed_date.isoformat()!=raw_date:
+                raise ValueError("EFFECTIVE_DATE_INVALID")
         condition={}
         if effect_class=="EXCEPTION":
             condition={groups["cond"]:_scalar(groups["cval"])}
