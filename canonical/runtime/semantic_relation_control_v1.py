@@ -472,7 +472,7 @@ def resolve(
             "scope_id": scope_id,
             "required_relation": required,
             "explicit_equivalence": explicit,
-        "shared_concept_identity": shared_concept,
+            "shared_concept_identity": shared_concept,
             "terminal_authority": False,
             "terminal_credit_delta": 0,
         }
@@ -585,6 +585,7 @@ def resolve(
             "current_decision_substitution": task_equivalent,
         },
         "explicit_equivalence": explicit,
+        "shared_concept_identity": shared_concept,
         "terminal_equivalence": terminal,
         "bounded_extension_proof": bounded,
         "required_relation_disproved": disproved,
