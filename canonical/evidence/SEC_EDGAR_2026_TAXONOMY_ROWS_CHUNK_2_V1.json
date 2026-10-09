@@ -1,0 +1,186 @@
+{
+  "schema": "PROJECT_BRAIN_SEC_EDGAR_2026_TAXONOMY_ROWS_CHUNK_V1",
+  "chunk_index": 2,
+  "rows": [
+    {
+      "family": "EXCH",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/exch/2026/exch-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/exch/2026"
+    },
+    {
+      "family": "FFD",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/ffd/2026/ffd-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/ffd/2026"
+    },
+    {
+      "family": "FND",
+      "version": "2026q3",
+      "origin": "SEC_XBRL",
+      "path": "/fnd/2026q3/fnd-2026q3_lab.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/fnd-lab/2026q3"
+    },
+    {
+      "family": "FND",
+      "version": "2026q3",
+      "origin": "SEC_XBRL",
+      "path": "/fnd/2026q3/fnd-2026q3.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/fnd/2026q3"
+    },
+    {
+      "family": "FND",
+      "version": "2026q3",
+      "origin": "SEC_XBRL",
+      "path": "/fnd/2026q3/fnd-cef-2026q3_pre.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/fnd-cef-pre/2026q3"
+    },
+    {
+      "family": "FND",
+      "version": "2026q3",
+      "origin": "SEC_XBRL",
+      "path": "/fnd/2026q3/fnd-cef-2026q3.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/fnd-cef/2026q3"
+    },
+    {
+      "family": "FND",
+      "version": "2026q3",
+      "origin": "SEC_XBRL",
+      "path": "/fnd/2026q3/fnd-oef-2026q3.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/fnd-oef/2026q3"
+    },
+    {
+      "family": "FND",
+      "version": "2026q3",
+      "origin": "SEC_XBRL",
+      "path": "/fnd/2026q3/fnd-uit-2026q3.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/fnd-uit/2026q3"
+    },
+    {
+      "family": "FND",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/fnd/2026/fnd-2026_lab.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/fnd-lab/2026"
+    },
+    {
+      "family": "FND",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/fnd/2026/fnd-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/fnd/2026"
+    },
+    {
+      "family": "FND",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/fnd/2026/fnd-cef-2026_pre.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/fnd-cef-pre/2026"
+    },
+    {
+      "family": "FND",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/fnd/2026/fnd-cef-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/fnd-cef/2026"
+    },
+    {
+      "family": "FND",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/fnd/2026/fnd-oef-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/fnd-oef/2026"
+    },
+    {
+      "family": "FND",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/fnd/2026/fnd-uit-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/fnd-uit/2026"
+    },
+    {
+      "family": "NAICS",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/naics/2026/naics-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/naics/2026"
+    },
+    {
+      "family": "OEF",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/oef/2026/oef-2026_cal.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/oef-cal/2026"
+    },
+    {
+      "family": "OEF",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/oef/2026/oef-2026_lab.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/oef-lab/2026"
+    },
+    {
+      "family": "OEF",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/oef/2026/oef-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/oef/2026"
+    }
+  ]
+}
