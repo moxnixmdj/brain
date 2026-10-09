@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_R4_CONTENT_ADDRESSED_LIVE_BINDING__ZERO_CREDIT",
+  "mission_objective": {
+    "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "git_blob_sha": "52b98f8019938fa7d8164e6a47e359ffb0faeb6a",
+    "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE"
+  },
+  "checkpoint_objective": {
+    "id": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "role": "FIRST_FRONTIER_CHECKPOINT_NOT_TERMINAL_OBJECTIVE"
+  },
+  "root_theorem": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+    "git_blob_sha": "9204ccd694141f9bb61abf9f50e5480590ca3757"
+  },
+  "falsifier": {
+    "path": "canonical/runtime/root_theorem_falsifier_v1.py",
+    "git_blob_sha": "1415fccadccef6a865adce2a14b9494b60bfc2ce",
+    "tests_path": "canonical/tests/test_root_theorem_falsifier_v1.py",
+    "tests_git_blob_sha": "4a1775a48290d1522e61ac2e041a0a72f5ef3ed1"
+  },
+  "live_binding_validator": {
+    "path": "canonical/runtime/root_theorem_live_binding_v1.py",
+    "git_blob_sha": "f7f54ea111fe79644a0f42a7b43434854f8f4d49",
+    "tests_path": "canonical/tests/test_root_theorem_live_binding_v1.py",
+    "tests_git_blob_sha": "c819926be272c1d21fa987906336e88461a93de1"
+  },
+  "terminal_authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "required_authoritative_source_key": "coverage_completeness_root_theorem_r1_r4",
+    "required_mission_blob_sha": "52b98f8019938fa7d8164e6a47e359ffb0faeb6a",
+    "fail_closed_on_absence_or_drift": true
+  },
+  "harvested_mutation_classes": [
+    "STALE_CERTIFICATE_OR_BINDING",
+    "CIRCULAR_PROOF",
+    "INCONSISTENT_PREMISES",
+    "UNSOUND_INFERENCE_RULE",
+    "UNAUTHORIZED_SCOPE_NARROWING",
+    "UNKNOWN_AS_IMPOSSIBLE",
+    "PROOF_TIMEOUT_AS_FALSEHOOD"
+  ],
+  "hard_rules": [
+    "THIS_MANIFEST_CAN_NEVER_GRANT_TERMINAL_CREDIT",
+    "BOOLEAN_ROOT_ASSERTIONS_ARE_NOT_SELF_AUTHENTICATING",
+    "FALSE_SUCCESS_REOPENS_R4_AND_SEMANTIC_BINDINGS_BEFORE_ANY_NEW_ROOT",
+    "MISSION_POINTER_DRIFT_IS_R4_FAILURE",
+    "ROOT_THEOREM_ARTIFACT_DRIFT_IS_R4_FAILURE"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
