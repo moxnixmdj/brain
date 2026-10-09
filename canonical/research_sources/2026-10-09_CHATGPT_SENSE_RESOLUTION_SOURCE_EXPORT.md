@@ -997,7 +997,8 @@ $$
 P(profit)=0.91
 $$
 
-$$P(collateral)=0.09.
+$$
+P(collateral)=0.09.
 $$
 
 A conventional system says:
@@ -1996,7 +1997,8 @@ And this gives us a much better theoretical guarantee:
 $$
 \boxed{
 \text{We do not need to know every possible meaning in advance.}
-}$$
+}
+$$
 
 We only need an exhaustive **partition**, which is trivial once `RESIDUAL` is defined, and a refinement process capable of exposing any unresolved distinction that can actually affect the goal.
 
@@ -2995,6 +2997,7 @@ Whenever semantics materially affects an answer, attach an internal object like:
 SEMANTIC_CERTIFICATE {
     variable: m17
     source: "Margin increased."
+
     goal:
         determine_profitability_improvement
 
@@ -3995,6 +3998,7 @@ For the original sentence, `"Margin increased."`, the system can remain semantic
 That is the version I would now treat as the **canonical solution** for this specific problem.
 
 ---
+
 **Sources:**
 
 - [A Type-coherent, Expressive Representation as an Initial Step to Language Understanding - ACL Anthology](https://aclanthology.org/W19-0402/?utm_source=chatgpt.com)
@@ -4994,6 +4998,7 @@ Difference:
 profit-margin:
     relates_to(revenue)
     relates_to(cost)
+
 collateral-margin:
     relates_to(position)
     relates_to(broker/collateral)
@@ -5992,7 +5997,8 @@ we compute:
 
 $$
 \boxed{
-\text{resolve only ambiguity lying on the current answer's dependency slice}}
+\text{resolve only ambiguity lying on the current answer's dependency slice}
+}
 $$
 
 This is the same conceptual advantage program slicing brought to debugging and verification.
@@ -6991,6 +6997,7 @@ profit_related = FALSE
 ```
 
 Compute:
+
 ```text
 Δ(A,B) =
 {
@@ -7990,6 +7997,7 @@ $$
 then $e$ **does influence $q$** and the graph is incomplete.
 
 So dependency correctness itself becomes falsifiable.
+
 ---
 
 # We should distinguish two completely different failures
@@ -8990,6 +8998,7 @@ while preserving:
 That combination may be semantically incoherent.
 
 So instead define the admissible-world set:
+
 $$
 \mathcal W(E)=
 \{w:w\models E_{\text{hard}}\}
@@ -9988,7 +9997,8 @@ That is better. We can turn existing scattered successes into one compounding ca
 >
 > 
 >
-> **Searched 1 website**>
+> **Searched 1 website**
+>
 > 
 >
 > **Inspected semantic authority and capability registry patterns**
