@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V35_EXPLICIT_ALIAS_FINANCE_COVERAGE_RECONCILIATION_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__V35_ROUTE_INVENTORY_25_OF_25__SEVEN_FINANCE_SUBREGIONS__ONE_PRIMARY_INTERNAL_RESIDUAL__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r2-v35-governance-reconcile-20261009",
+    "purpose": "Promote only the already verified explicit alias Finance slice and reconcile the current V5 router/scheduler authority."
+  },
+  "exact_runtime_frontier": {
+    "direct_router_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v5.py",
+    "direct_router_git_blob_sha": "16794162259dec4495970cd2bae9dd39d1b3df73",
+    "fixed_point_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "fixed_point_git_blob_sha": "f8e99fd92dbea95116f8153d450bb53d290a883c",
+    "alias_runtime_path": "canonical/runtime/r2_finance_explicit_alias_unless_direct_adequacy_v1.py",
+    "alias_runtime_git_blob_sha": "a46eb2d7038060cd773c0f1b060dc340387b6254",
+    "alias_producer_git_blob_sha": "3b44d625c16c0bc201104ec79525c59b9dba8b36",
+    "alias_verifier_git_blob_sha": "7d0ff43736a32006c55b67e9390098b224369eeb"
+  },
+  "route_verification": {
+    "path": "canonical/verification/R2_FINANCE_EXPLICIT_ALIAS_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+    "git_blob_sha": "9beaa80af044dbf6d6eeef48386a35d180fba18f",
+    "status": "PASS__EXPLICIT_ALIAS_FINANCE_UNLESS_DIRECT_ADEQUACY__V5_OVER_V34__10_OF_10_FOCUSED__4_OF_4_INTEGRATION__20_OF_20_FIXED_POINT_REGRESSION__ZERO_CREDIT",
+    "focused": "10_OF_10_PASS",
+    "integration": "4_OF_4_PASS",
+    "fixed_point_regression": "20_OF_20_PASS",
+    "py_compile": "6_OF_6_PASS"
+  },
+  "activation": {
+    "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V21.json",
+    "git_blob_sha": "af347d8e3d8209392dd339f4407a4785d0cf2c28",
+    "declared_route_count": 25,
+    "actual_route_count": 25,
+    "exact_cell_count": 3,
+    "bounded_family_count": 22,
+    "counts_consistent": true
+  },
+  "scheduler": {
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V35.json",
+    "git_blob_sha": "81aff9b94b8375d615c7f25f57686c14e9a2a120",
+    "primary_internal_unsolved_cell_count": 1,
+    "primary_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "verified_finance_subregion_count": 7,
+    "remaining_boundary": "FINANCE_CONTEXTS_REQUIRING_IMPLICIT_OR_AMBIGUOUS_REFERENCE__INFERRED_SYNONYMY__GENERAL_COREFERENCE__CONTEXT_DEPENDENT_WORD_SENSE__ONTOLOGY_OR_DOMAIN_CONCEPT_MAPPING__GENERAL_CROSS_DOCUMENT_SEMANTIC_BINDING_BEYOND_EXACT_CONTENT_ADDRESSED_JSON_BINDING__OR_EXTERNAL_FACT_AUTHENTICATION"
+  },
+  "proved_delta": {
+    "closed_subregion": "EXPLICIT_REFERS_TO_OR_IS_DEFINED_AS_ALIAS_TO_EXACT_LATER_UNLESS_REFERENCE_WITH_TYPED_BOOLEAN_OR_DECIMAL_CONDITION",
+    "previous_verified_finance_subregions": 6,
+    "current_verified_finance_subregions": 7,
+    "previous_direct_route_count": 24,
+    "current_direct_route_count": 25,
+    "primary_internal_unsolved_cell_count_before": 1,
+    "primary_internal_unsolved_cell_count_after": 1,
+    "residual_eliminated": false,
+    "residual_narrowed": true
+  },
+  "remaining_internal_unsolved": [
+    "IMPLICIT_OR_AMBIGUOUS_REFERENCE",
+    "INFERRED_SYNONYMY",
+    "GENERAL_COREFERENCE",
+    "CONTEXT_DEPENDENT_WORD_SENSE",
+    "ONTOLOGY_OR_DOMAIN_CONCEPT_MAPPING",
+    "GENERAL_CROSS_DOCUMENT_SEMANTIC_BINDING_BEYOND_EXACT_CONTENT_ADDRESSED_JSON_BINDING",
+    "EXTERNAL_FACT_AUTHENTICATION"
+  ],
+  "terminal_truth": {
+    "terminal": false,
+    "finance_family_closed": false,
+    "open_world_positive_adequacy_closed": false,
+    "information_theoretic_externality_proved_for_remaining_finance_residual": false,
+    "next_primary_root": "CONTINUE_FINANCE_SEMANTIC_ADEQUACY_TAIL_ON_THE_V35_NARROWED_BOUNDARY_ONLY"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  }
+}
