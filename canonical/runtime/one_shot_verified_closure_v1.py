@@ -63,6 +63,50 @@ def _sha(value: Any) -> str:
     return sha256(_canon(value)).hexdigest()
 
 
+GLOBAL_EXTERNALITY_REQUIRED_FLAGS = (
+    "all_internal_derivation_routes_exhausted_or_impossible",
+    "all_search_routes_exhausted_or_impossible",
+    "all_synthesis_routes_exhausted_or_impossible",
+    "all_bypass_routes_exhausted_or_impossible",
+    "weaker_sufficient_information_ruled_out",
+)
+
+
+def _validate_global_externality_certificate(
+    certificate: Mapping[str, Any] | None,
+    *,
+    request_sha256: str,
+) -> tuple[bool, list[str]]:
+    """Require an explicit, request-bound proof before global externality.
+
+    Bounded evidence that the *current durable state* lacks replay context is not
+    enough. Global externality additionally requires proof that internal
+    derivation/search/synthesis/bypass routes cannot distinguish two worlds that
+    demand different correct actions.
+    """
+    errors: list[str] = []
+    if not isinstance(certificate, Mapping):
+        return False, ["GLOBAL_EXTERNALITY_CERTIFICATE_MISSING"]
+    if certificate.get("pass") is not True:
+        errors.append("GLOBAL_EXTERNALITY_CERTIFICATE_NOT_PASS")
+    if certificate.get("request_sha256") != request_sha256:
+        errors.append("GLOBAL_EXTERNALITY_REQUEST_BINDING_MISMATCH")
+    if certificate.get("global_external_information_absence_proved") is not True:
+        errors.append("GLOBAL_EXTERNAL_INFORMATION_ABSENCE_NOT_PROVED")
+    for flag in GLOBAL_EXTERNALITY_REQUIRED_FLAGS:
+        if certificate.get(flag) is not True:
+            errors.append("GLOBAL_EXTERNALITY_REQUIRED_FLAG_FALSE:" + flag)
+    witness = certificate.get("indistinguishable_worlds_witness")
+    if not isinstance(witness, Mapping):
+        errors.append("INDISTINGUISHABLE_WORLDS_WITNESS_MISSING")
+    else:
+        if witness.get("same_observation") is not True:
+            errors.append("INDISTINGUISHABLE_WORLDS_SAME_OBSERVATION_NOT_PROVED")
+        if witness.get("different_required_action") is not True:
+            errors.append("INDISTINGUISHABLE_WORLDS_DIFFERENT_ACTION_NOT_PROVED")
+    return not errors, sorted(set(errors))
+
+
 def _safe_file_digest(root: Path, relative: str) -> dict[str, Any]:
     rel = Path(relative)
     if rel.is_absolute() or ".." in rel.parts:
@@ -284,7 +328,7 @@ def classify_residual(
     if internal:
         cls = "INTERNAL_SOLVABLE_OR_CONSTRUCTIVE_GAP"
     else:
-        cls = "NEW_INFORMATION_OR_EXPERIENCE_REQUIRED"
+        cls = "PENDING_INFORMATION_ACQUISITION_OR_INTERNAL_RECOVERY"
     return {
         "class": cls,
         "internally_solvable_gap_remaining": bool(internal),
@@ -307,6 +351,9 @@ def run(
     ),
     failure_repair_provider: Callable[
         [Mapping[str, Any]], Mapping[str, Any]
+    ] | None = None,
+    global_externality_certificate_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
     ] | None = None,
     max_rounds: int = 64,
     max_actions_per_round: int = 32,
@@ -396,7 +443,9 @@ def run(
                 "rounds_executed": round_index + 1,
                 "transcript": transcript,
                 "residual": classify_residual([], pending=[]),
-                "verified_goal_satisfied_or_irreducible_external_only": True,
+                "goal_satisfaction_proved": False,
+                "terminal_closure_proved": False,
+                "verified_goal_satisfied_or_irreducible_external_only": False,
                 "irreducible_external_information_proved": False,
                 "terminal_authority": False,
             }
@@ -435,18 +484,75 @@ def run(
                     )
                 )
                 if strict_external_failure_certificate.get("pass") is True:
-                    residual["irreducible_external_information_proved"] = True
-                    residual["irreducible_external_certificate"] = deepcopy(
+                    # This certificate is deliberately bounded to the current
+                    # retained historical failure state. It does NOT prove that
+                    # the Brain cannot recover the needed information by some
+                    # other search, derivation, synthesis, experiment, or bypass.
+                    residual[
+                        "bounded_current_state_replay_information_requirement_proved"
+                    ] = True
+                    residual["bounded_current_state_replay_certificate"] = deepcopy(
                         strict_external_failure_certificate
                     )
-                    residual["irreducible_external_boundary"] = (
+                    residual["bounded_current_state_replay_boundary"] = (
                         "EXACT_HISTORICAL_FAILURE_REPLAY_CONTEXT_IS_ABSENT_FROM_"
-                        "CURRENT_DURABLE_R3_STATE__NEW_EXTERNAL_REPLAY_INFORMATION_"
-                        "OR_NEW_REPLAYABLE_FAILURE_EXPERIENCE_REQUIRED"
+                        "CURRENT_DURABLE_R3_STATE"
                     )
-            external_proved = (
-                residual.get("irreducible_external_information_proved") is True
-            )
+
+            global_externality_certificate = None
+            global_externality_errors: list[str] = []
+            external_proved = False
+            if not internal and residual.get("external_or_new_evidence_required") is True:
+                global_externality_request = {
+                    "schema": SCHEMA,
+                    "purpose": "PROVE_GLOBAL_EXTERNALITY_ONLY_AFTER_INTERNAL_ROUTES_EXHAUSTED",
+                    "pending": deepcopy(pending),
+                    "blockers": deepcopy(blockers),
+                    "initial_frontier_digest": initial["digest"],
+                    "final_frontier_digest": after["digest"],
+                    "bounded_historical_evidence_certificate": deepcopy(
+                        bounded_historical_certificate
+                    ),
+                    "bounded_historical_failure_certificate": deepcopy(
+                        strict_external_failure_certificate
+                    ),
+                }
+                request_sha256 = _sha(global_externality_request)
+                global_externality_request["request_sha256"] = request_sha256
+                if global_externality_certificate_provider is not None:
+                    try:
+                        supplied = global_externality_certificate_provider(
+                            deepcopy(global_externality_request)
+                        )
+                        if isinstance(supplied, Mapping):
+                            global_externality_certificate = deepcopy(dict(supplied))
+                    except Exception as exc:
+                        global_externality_errors.append(
+                            "GLOBAL_EXTERNALITY_PROVIDER_EXCEPTION:"
+                            + type(exc).__name__
+                            + ":"
+                            + str(exc)
+                        )
+                valid, validation_errors = _validate_global_externality_certificate(
+                    global_externality_certificate,
+                    request_sha256=request_sha256,
+                )
+                global_externality_errors.extend(validation_errors)
+                external_proved = valid
+                residual["global_externality_request_sha256"] = request_sha256
+                residual["global_externality_proof_errors"] = sorted(
+                    set(global_externality_errors)
+                )
+                if external_proved:
+                    residual["irreducible_external_information_proved"] = True
+                    residual["irreducible_external_certificate"] = deepcopy(
+                        global_externality_certificate
+                    )
+                    residual["irreducible_external_boundary"] = (
+                        "GLOBAL_INFORMATION_THEORETIC_EXTERNALITY_PROVED__"
+                        "INTERNAL_SEARCH_DERIVATION_SYNTHESIS_BYPASS_EXHAUSTED__"
+                        "INDISTINGUISHABLE_WORLDS_REQUIRE_DIFFERENT_ACTIONS"
+                    )
             if internal:
                 status = "OPEN__INTERNAL_SOLVABLE_GAP_REMAINS"
             elif external_proved:
@@ -468,12 +574,20 @@ def run(
                 "verified_goal_satisfied_or_irreducible_external_only": (
                     (not internal) and external_proved
                 ),
+                "goal_satisfaction_proved": False,
+                "terminal_closure_proved": external_proved,
                 "irreducible_external_information_proved": external_proved,
                 "bounded_historical_evidence_certificate": deepcopy(
                     bounded_historical_certificate
                 ),
                 "strict_external_failure_certificate": deepcopy(
                     strict_external_failure_certificate
+                ),
+                "global_externality_certificate": deepcopy(
+                    global_externality_certificate
+                ),
+                "global_externality_proof_errors": sorted(
+                    set(global_externality_errors)
                 ),
                 "terminal_authority": False,
             }
