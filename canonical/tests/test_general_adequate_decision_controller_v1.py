@@ -330,8 +330,13 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
              patch.object(controller, "evaluate_p3", return_value=self._information_open(predicate_id)):
             out = controller.run(request)
         self.assertFalse(out["pass"])
-        self.assertEqual(out["status"], "OPEN__MINIMUM_POLICY_CHANGING_INFORMATION_REQUIRED")
+        self.assertEqual(out["status"], "OPEN__USER_MINIMUM_CLARIFICATION_REQUIRED")
         self.assertEqual(out["next_information_request"]["predicate_id"], predicate_id)
+        self.assertEqual(
+            out["next_information_request"]["acquisition_plan"]["action"],
+            "ASK_USER_MINIMUM_CLARIFICATION",
+        )
+        self.assertFalse(out["next_information_request"]["external_research_authorized"])
         self.assertFalse(out["actual_goal_satisfaction_verified"])
 
     def test_positive_adequacy_gap_is_preserved_as_exact_policy_repair(self):
