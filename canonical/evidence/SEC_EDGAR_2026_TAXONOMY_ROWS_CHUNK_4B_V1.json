@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_SEC_EDGAR_2026_TAXONOMY_ROWS_CHUNK_V1",
+  "chunk_index": "4B",
+  "rows": [
+    {
+      "family": "US GAAP",
+      "version": "2026",
+      "origin": "FASB_XBRL",
+      "path": "/srt/2026/elts/srt-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "fasb.org/srt/2026"
+    },
+    {
+      "family": "US GAAP",
+      "version": "2026",
+      "origin": "FASB_XBRL",
+      "path": "/srt/2026/elts/srt-roles-2026.xsd",
+      "code": "SCH",
+      "role": "Roles/Arcroles",
+      "allowed": "0",
+      "namespace_id": "fasb.org/srt-roles/2026"
+    },
+    {
+      "family": "US GAAP",
+      "version": "2026",
+      "origin": "FASB_XBRL",
+      "path": "/srt/2026/elts/srt-types-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "0",
+      "namespace_id": "fasb.org/srt-types/2026"
+    },
+    {
+      "family": "US GAAP",
+      "version": "2026",
+      "origin": "FASB_XBRL",
+      "path": "/us-gaap/2026/ebp/elts/us-gaap-ebp-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "fasb.org/us-gaap-ebp/2026"
+    },
+    {
+      "family": "US GAAP",
+      "version": "2026",
+      "origin": "FASB_XBRL",
+      "path": "/us-gaap/2026/elts/us-gaap-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "fasb.org/us-gaap/2026"
+    },
+    {
+      "family": "US GAAP",
+      "version": "2026",
+      "origin": "FASB_XBRL",
+      "path": "/us-gaap/2026/elts/us-roles-2026.xsd",
+      "code": "SCH",
+      "role": "Roles/Arcroles",
+      "allowed": "0",
+      "namespace_id": "fasb.org/us-roles/2026"
+    },
+    {
+      "family": "US GAAP",
+      "version": "2026",
+      "origin": "FASB_XBRL",
+      "path": "/us-gaap/2026/elts/us-types-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "0",
+      "namespace_id": "fasb.org/us-types/2026"
+    }
+  ]
+}
