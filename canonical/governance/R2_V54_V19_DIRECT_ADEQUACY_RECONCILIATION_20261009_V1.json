@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V54_V19_DIRECT_ADEQUACY_RECONCILIATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "BOUND__V19_LIVE__THIRTY_NINE_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__EXACT_NYFED_CCOB_DIRECT_ACTION_ADDED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS__ZERO_TERMINAL_CREDIT",
+  "sources": {
+    "activation": {
+      "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V28.json",
+      "git_blob_sha": "4c43b4bf98811365b4d870835b0161b052fbc54e"
+    },
+    "scheduler": {
+      "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V52.json",
+      "git_blob_sha": "8e812332297a0563670f4bdc4e3f30ecdfccb484"
+    },
+    "fixed_point": {
+      "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+      "git_blob_sha": "7c6b28754fa8851f220395df1615dd6afe193b3a"
+    },
+    "router": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v19.py",
+      "git_blob_sha": "39e7a6b7298b17d55e7bda551d6125c1f1c4000e"
+    },
+    "source_bound_route": {
+      "path": "canonical/runtime/r2_source_bound_regcap_identity_direct_adequacy_v1.py",
+      "git_blob_sha": "5f2a66317c4f557dc3106304bd4f9c9dc985a731"
+    },
+    "verification": {
+      "path": "canonical/verification/R2_SOURCE_BOUND_REGCAP_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+      "git_blob_sha": "00dc359634d2798cabcf3ba3d6074b5cc18e8423"
+    }
+  },
+  "reconciliation": {
+    "v15_route_count": 35,
+    "post_v15_added_routes": [
+      "DIRECT_ADEQUACY::CROSS_DOCUMENT_NATURAL_EFFECT_LATTICE_V3",
+      "DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_EDGE_LATTICE_V4",
+      "DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_LATTICE_V5",
+      "DIRECT_ADEQUACY::SOURCE_BOUND_REGCAP_IDENTITY_NYFED_CCOB_V1"
+    ],
+    "current_route_count": 39,
+    "exact_cell_count": 3,
+    "bounded_family_count": 36,
+    "count_coherent": true,
+    "primary_internal_unsolved_cell_count": 1,
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "finance_global_tail_closed": false,
+    "new_positive_action_scope": "EXACT_AUTHENTICATED_NYFED_SOURCE_CONTEXT_LOSS_ABSORBING_CUSHION_TO_CCOB_ONLY"
+  },
+  "verification_boundary": {
+    "new_route_core_mechanism": "5_OF_5_PASS",
+    "v19_routing_seam": "3_OF_3_PASS",
+    "exact_python_compilation": "PASS",
+    "live_two_fetch_nyfed_replay": "PASS",
+    "full_historical_fixed_point_regression_executed": false,
+    "github_actions_failure": "PRE_RUNNER_ZERO_STEPS_NOT_A_TEST_FAILURE"
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_LOSS_ABSORBING_CUSHION_SYNONYMY",
+    "NO_OPEN_WORLD_REGULATORY_CAPITAL_ONTOLOGY_CLOSURE",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_GLOBAL_R2_CLOSURE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
