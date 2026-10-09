@@ -887,10 +887,10 @@
     "current_r2_decision_intelligence": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "scheduler_cut": {
-        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V26.json",
-        "git_blob_sha": "efd8f2eb19918d3f1523b4cd6c6d4ed327d5c147"
+        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V33.json",
+        "git_blob_sha": "52a3af5046761bac2f5aff1c583d6d0241647a7d"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V26_EIGHTEEN_DIRECT_ROUTES__FIFTEEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V33__TWENTY_THREE_DIRECT_ROUTES__TWENTY_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_FIVE_VERIFIED_SUBREGIONS",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     }
@@ -1390,7 +1390,7 @@
     "gdpval_owner_layer_wake_authority": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V9.json",
     "opus_5_5_is_global_terminal_objective": false,
     "opus_5_5_is_frontier_checkpoint": true,
-    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V26",
+    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V33",
     "historical_root2_scheduler_fields_currently_authoritative": false,
     "r2_general_control_mechanism_closed_as_adequacy_or_abstain": true,
     "r2_open_world_positive_action_coverage_complete": false,
@@ -1403,7 +1403,14 @@
     "primary_pr_admission_trusted_base_enforcement_active": false,
     "direct_main_write_load_bearing_admission_enforced": false,
     "primary_pr_admission_trusted_base_validation_defined": true,
-    "primary_pr_admission_required_status_check_enforced": false
+    "primary_pr_admission_required_status_check_enforced": false,
+    "r2_direct_adequacy_route_count": 23,
+    "r2_direct_adequacy_exact_cell_count": 3,
+    "r2_direct_adequacy_bounded_family_count": 20,
+    "r2_verified_finance_positive_subregion_count": 5,
+    "r2_primary_internal_unsolved_count": 1,
+    "r2_primary_internal_unsolved_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "r2_dormant_alternative_route_count": 1
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2097,7 +2104,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 58,
+  "pointer_revision": 59,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2251,6 +2258,26 @@
     "external_fact_authentication_closed": false,
     "finance_family_closed": false,
     "terminal_remains_false": true,
+    "terminal_credit_delta": 0
+  },
+  "r2_v33_live_projection_reconciliation": {
+    "status": "RECONCILED__CURRENT_R2_AND_LIVE_TERMINAL_PROJECTIONS_BIND_V33",
+    "current_r2_status": "ACTIVE_CURRENT_R2_AUTHORITY__V33__TWENTY_THREE_DIRECT_ROUTES__TWENTY_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_FIVE_VERIFIED_SUBREGIONS",
+    "scheduler_cut": {
+      "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V33.json",
+      "git_blob_sha": "52a3af5046761bac2f5aff1c583d6d0241647a7d"
+    },
+    "direct_adequacy": {
+      "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V19.json",
+      "activation_git_blob_sha": "a62cfd2f117cd334febdbe9e447401b0f03e0327",
+      "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v3.py",
+      "direct_runtime_git_blob_sha": "0f461952b61249c1e038e942eafe8f3e776f85f7",
+      "route_count": 23,
+      "exact_cell_count": 3,
+      "bounded_family_count": 20
+    },
+    "finance_verified_positive_subregion_count": 5,
+    "primary_remaining_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "terminal_credit_delta": 0
   }
 }
