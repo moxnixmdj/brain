@@ -33,6 +33,7 @@ from canonical.runtime.verified_bound_capability_execution_adapter_v1 import exe
 from canonical.runtime import semantic_ambiguity_control_v1 as semantic_ambiguity
 from canonical.runtime import semantic_relation_control_v1 as semantic_relation
 from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
+from canonical.runtime import one_shot_reality_closure_v2 as one_shot_reality_closure
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -62,6 +63,7 @@ ENGINE_DESCRIPTORS = {
     "SEMANTIC_AMBIGUITY": "semantic_ambiguity_control_v1.decide",
     "SEMANTIC_RELATION": "semantic_relation_control_v1.resolve",
     "OEWN_DECISION_SENSE": "oewn_decision_sense_control_v1.resolve",
+    "ONE_SHOT_REALITY_CLOSURE": "one_shot_reality_closure_v2.run",
 }
 
 KNOWN_R1_RESIDUALS: tuple[str, ...] = ()
@@ -314,6 +316,10 @@ def run(
     verification_frontier_acquisition_provider_id: str = (
         "HOST_VERIFICATION_FRONTIER_ACQUISITION_PROVIDER"
     ),
+    one_shot_failure_repair_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    one_shot_externality_certificate_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    one_shot_capability_synthesis_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    one_shot_evidence_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     try:
         if not isinstance(request, Mapping):
@@ -376,6 +382,32 @@ def run(
                 skill_verification_provider=skill_verification_provider,
             )
             out = _unwrap_live_runtime(wrapped, "decision_output")
+        elif mode == "ONE_SHOT_REALITY_CLOSURE":
+            out = one_shot_reality_closure.run(
+                repo_root=ROOT,
+                state_path=options.get("state_path"),
+                verification_frontier_acquisition_provider=(
+                    verification_frontier_acquisition_provider
+                ),
+                verification_frontier_acquisition_provider_id=(
+                    verification_frontier_acquisition_provider_id
+                ),
+                failure_repair_provider=one_shot_failure_repair_provider,
+                externality_certificate_provider=(
+                    one_shot_externality_certificate_provider
+                ),
+                capability_synthesis_provider=(
+                    one_shot_capability_synthesis_provider
+                ),
+                evidence_acquisition_provider=(
+                    one_shot_evidence_acquisition_provider
+                ),
+                max_repair_rounds=int(options.get("one_shot_max_repair_rounds", 8)),
+                v1_max_rounds=int(options.get("one_shot_v1_max_rounds", 64)),
+                v1_max_actions_per_round=int(
+                    options.get("one_shot_v1_max_actions_per_round", 32)
+                ),
+            )
         elif mode == "P3":
             out = p3.evaluate(payload, repo_root=ROOT)
         elif mode == "ADAPTIVE_SOLVER":
@@ -787,7 +819,7 @@ def run(
             autonomous_failure_repair_provider = _autonomous_repair_pending
 
         compounding_tick = None
-        if mode != "IMPROVEMENT_CYCLE":
+        if mode not in {"IMPROVEMENT_CYCLE", "ONE_SHOT_REALITY_CLOSURE"}:
             compounding_tick = improvement_driver.drain(
                 state_path=options.get(
                     "state_path",
