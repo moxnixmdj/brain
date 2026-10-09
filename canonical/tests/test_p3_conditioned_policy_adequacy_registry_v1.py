@@ -20,11 +20,15 @@ def atom():
 
 
 class P3ConditionedPolicyAdequacyRegistryV1Tests(unittest.TestCase):
-    def test_catalog_contains_existing_synthesis_cell_only(self):
+    def test_catalog_contains_synthesis_and_typed_acceptance_cells(self):
         out = registry.catalog()
-        self.assertEqual(out["policy_count"], 1)
-        self.assertEqual(out["policies"][0]["policy_id"], POLICY)
-        self.assertEqual(out["policies"][0]["condition"], atom())
+        self.assertEqual(out["policy_count"], 2)
+        by_id = {row["policy_id"]: row for row in out["policies"]}
+        self.assertEqual(by_id[POLICY]["condition"], atom())
+        self.assertEqual(
+            by_id["BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1"]["condition"],
+            {"op": "ATOM", "id": "CURSORBENCH_TYPED_ACCEPTANCE_PLAN_REGION_V1"},
+        )
         self.assertFalse(out["membership_self_certified"])
 
     def test_unrelated_basis_injects_nothing(self):
