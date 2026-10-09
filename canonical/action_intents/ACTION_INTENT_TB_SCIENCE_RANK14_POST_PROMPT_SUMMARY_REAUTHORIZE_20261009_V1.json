@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TB_SCIENCE_RANK14_POST_PROMPT_SUMMARY_REAUTHORIZE_20261009_V1",
+  "date": "2026-10-09",
+  "action_id": "TB_SCIENCE_RANK14_POST_PROMPT_SUMMARY_REAUTHORIZE_V3",
+  "status": "ACTIVE_INTENT__FRESH_NONCONSUMING_PRESTART_TOKEN_FIT_PROOF_THEN_ONE_SLOT_EXECUTION_ONLY_IF_FIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "target_obligation": "TB_SCIENCE_GE_58_7",
+  "causal_blocker": "V2_PRESTART_MEASURED_5212_TOKEN_DEFICIT__LOSSLESS_MODEL_FACING_METADATA_REPRESENTATION_REPAIRED_AND_V11_CLOSURE_VERIFIED__EXACT_NEW_TOKEN_FIT_UNPROVED",
+  "exact_slot": {
+    "id": "terminal-bench-science/inverse-lithography::trial-0",
+    "schedule_rank": 14,
+    "digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530"
+  },
+  "current_truth": {
+    "ledger_v18_blob": "566a3756392ee2d4cc41947b66617acbc6f6ce92",
+    "consumed_slots": 13,
+    "task_started": false,
+    "execution_authority_consumed": false,
+    "benchmark_trials_consumed": 0,
+    "prior_exact_input_tokens": 17500,
+    "prior_exact_context_deficit_tokens": 5212,
+    "raw_task_obligations": 87
+  },
+  "repaired_route": {
+    "agent_blob": "d397324f411d002bdbdca348aaad708b5b40c9c2",
+    "planner_blob": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "planner_manifest_summary_verification_blob": "721c78aabac58565afa37d734705d652073d99ae",
+    "v11_closure_blob": "1172b57ac436d64027d06fb4897878ae274febb1",
+    "v11_closure_verification_blob": "d1b3bc55c2ead9137a2368337eb58d96e9b44a17",
+    "context_repair_verification_blob": "8b8cdc3fc112bd0a253af795fb79c0f641b8b3b4",
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "server_context_tokens": 16384,
+    "reserved_completion_tokens": 4096
+  },
+  "law": [
+    "PUBLIC_STATIC_AUTHORITY_VERIFICATION_BEFORE_ACTIVATION",
+    "FRESH_PUBLIC_EPOCH_AND_EXECUTION_CLAIM_REQUIRED",
+    "FRESH_EXACT_DIGEST_PINNED_TASK_READ_ONLY_UNDER_NEW_LEASE",
+    "TASK_START_ONLY_IF_NEW_EXACT_INPUT_TOKENS_PLUS_4096_LE_16384",
+    "ANY_PRESTART_FAILURE_IS_NONCONSUMING",
+    "AFTER_TASK_START_RESULT_IS_IRREVERSIBLE_AND_NO_RETRY"
+  ],
+  "expected_frontier_change": "PROVE_OR_FALSIFY_EXACT_16K_FIT_AFTER_LOSSLESS_METADATA_REPAIR__IF_FIT_START_EXACT_ONE_SLOT__IF_NOT_FIT_REPAIR_NEXT_INTERNAL_PROMPT_COST_WITH_SLOT_UNCONSUMED",
+  "accounting": {
+    "incremental_spend_usd_max": 0,
+    "benchmark_trials_consumed_delta_before_task_start": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
