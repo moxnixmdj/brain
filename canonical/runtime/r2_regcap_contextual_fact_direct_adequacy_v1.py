@@ -20,7 +20,7 @@ SCHEMA = "PROJECT_BRAIN_R2_REGCAP_CONTEXTUAL_FACT_DIRECT_ADEQUACY_V1"
 ROUTE_ID = "DIRECT_ADEQUACY::REGCAP_BOUNDED_CONTEXTUAL_FACT_EXTRACTION_V1"
 CAPABILITY_ID = "finance.regcap.contextual_fact.extract.source_aligned"
 ROOT = Path(__file__).resolve().parents[2]
-PATH_RE = r"canonical/[A-Za-z0-9_.\\-/]+"
+PATH_RE = r"canonical/[A-Za-z0-9_./-]+"
 GRAMMAR = re.compile(
     r"^Extract verified regulatory-capital contextual facts from (?P<source>"
     + PATH_RE
