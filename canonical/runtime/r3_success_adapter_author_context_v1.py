@@ -13,7 +13,16 @@ import re
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_R3_SUCCESS_ADAPTER_AUTHOR_CONTEXT_V1"
-_SAFE_SYMBOL = re.compile(r"^[A-Za-z0-9_.:/=-]{1,160}$")
+_PLAIN_ENUMS = {
+    "generic",
+    "specialized",
+    "compiled_bound",
+    "raw_bound",
+    "decision",
+    "DETERMINISTIC_ONLY",
+    "MODEL_ASSISTED",
+    "MODEL_DEPENDENT",
+}
 _ALLOWED_REQUEST_KEYS = (
     "task_id",
     "goal",
@@ -68,11 +77,11 @@ def context_sha256(value: Mapping[str, Any]) -> str:
     return _digest(base)
 
 
-def _symbol(value: Any) -> str | None:
+def _symbol(value: Any, *, allow_plain_enum: bool = False) -> str | None:
     raw = str(value or "").strip()
     if not raw:
         return None
-    if _SAFE_SYMBOL.fullmatch(raw):
+    if allow_plain_enum and raw in _PLAIN_ENUMS:
         return raw
     return "sha256:" + sha256(raw.encode("utf-8")).hexdigest()
 
@@ -154,7 +163,7 @@ def compile_context(
         "status": "PASS__REDACTED_ADAPTER_AUTHOR_CONTEXT_READY",
         "pass": True,
         "replay": {
-            "mode": _symbol(context.get("mode")),
+            "mode": _symbol(context.get("mode"), allow_plain_enum=True),
             "request_keys": request_keys,
             "request_shape": request_shape,
         },
@@ -176,7 +185,8 @@ def compile_context(
             "execution_rows": execution_rows,
             "execution_count": len(execution_rows),
             "cognition_dependency_class": _symbol(
-                material.get("cognition_dependency_class")
+                material.get("cognition_dependency_class"),
+                allow_plain_enum=True,
             ),
             "model_dependency_count": (
                 material.get("model_dependency_count")
