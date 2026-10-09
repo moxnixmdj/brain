@@ -11,7 +11,7 @@
     "root_theorem": "4e2a77fc661a386f1affb4297ec9739a583872eb",
     "live_binding": "ef9bc78cb6ffeaebfe7d45ac413f9a42fa0e98fb",
     "claim_scope": "907c2935f7a6aeaf69e9288219fd94b36f58e8b2",
-    "terminal_authority": "af118cbe3692a4e8628ee8f200e60544865e13eb",
+    "terminal_authority": "2c23cab9def45ad8e36b7c07f657b022b820b959",
     "falsifier": "d3fbf6e5e7434aef89002594cedb3263858cdc9c",
     "falsifier_tests": "624123c130e9619219bc7fbd7aa2becc769f88de",
     "r4_binding_tests": "4dde83a2ab994c82d78dcb1a0a1887ba0b51f298",
@@ -55,8 +55,9 @@
     "ownership_credit_delta": 0
   },
   "rebase": {
-    "parent_main": "b1e19d7a45f96a40aadba95c17b712e406af0965",
-    "mission_pointer_changed": true,
+    "parent_main": "461c30bde072db63b946b4671e61eafaaa3c8276",
+    "mission_pointer_changed": false,
+    "authority_pointer_changed": true,
     "reconciled": true
   }
 }
