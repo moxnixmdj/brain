@@ -15,6 +15,7 @@ from typing import Any, Mapping, Sequence
 SCHEMA = "PROJECT_BRAIN_D_FINALITY_COVERAGE_GATE_V1"
 REGISTRY_SCHEMA = "PROJECT_BRAIN_D_FINALITY_CERTIFICATE_REGISTRY_V1"
 _HEX64 = re.compile(r"^[0-9a-f]{64}$")
+_HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
 
 class DFinalityCoverageError(ValueError):
@@ -38,6 +39,13 @@ def _ids(value: Any, label: str) -> list[str]:
 def _hex64(value: Any, label: str) -> str:
     text = str(value or "").lower()
     if not _HEX64.fullmatch(text):
+        raise DFinalityCoverageError(label + "_INVALID")
+    return text
+
+
+def _hex40(value: Any, label: str) -> str:
+    text = str(value or "").lower()
+    if not _HEX40.fullmatch(text):
         raise DFinalityCoverageError(label + "_INVALID")
     return text
 
@@ -74,11 +82,11 @@ def evaluate(
             continue
 
         d_cert = _hex64(raw.get("d_certificate_sha256"), "D_CERTIFICATE_SHA256")
-        material_cert = _hex64(
-            raw.get("material_certificate_sha256"), "MATERIAL_CERTIFICATE_SHA256"
+        material_theorem = _hex40(
+            raw.get("member_material_theorem_git_blob_sha"), "MEMBER_MATERIAL_THEOREM_GIT_BLOB_SHA"
         )
-        provider_theorem = _hex64(
-            raw.get("provider_theorem_sha256"), "PROVIDER_THEOREM_SHA256"
+        provider_theorem = _hex40(
+            raw.get("provider_theorem_git_blob_sha"), "PROVIDER_THEOREM_GIT_BLOB_SHA"
         )
         policy = _hex64(raw.get("policy_sha256"), "POLICY_SHA256")
         epoch = _hex64(raw.get("execution_epoch_sha256"), "EXECUTION_EPOCH_SHA256")
@@ -96,8 +104,8 @@ def evaluate(
         by_id[cid] = {
             "capability_id": cid,
             "d_certificate_sha256": d_cert,
-            "material_certificate_sha256": material_cert,
-            "provider_theorem_sha256": provider_theorem,
+            "member_material_theorem_git_blob_sha": material_theorem,
+            "provider_theorem_git_blob_sha": provider_theorem,
             "policy_sha256": policy,
             "execution_epoch_sha256": epoch,
             "material_closure_root": closure,
