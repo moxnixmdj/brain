@@ -12,7 +12,7 @@
     "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py",
     "authority_kernel_git_blob_sha": "29872fc55a5ec577feea769cc919dc889899c2bd",
-    "fixed_point_git_blob_sha": "7c6585e800369331ad0f061afd23568fd0cb341b",
+    "fixed_point_git_blob_sha": "fbb8d2f694054a71012348a1617c14084c492bab",
     "fixed_point_native_control_policy_total": true,
     "fixed_point_regression_test_path": "canonical/tests/test_general_adequate_decision_fixed_point_v2.py",
     "fixed_point_regression_test_git_blob_sha": "934a04632483fd517cbfa34394b27c73038365e1"
@@ -29,8 +29,8 @@
     "bounded_family_count": 30,
     "current_route_count": 33,
     "current_activation_status": "THREE_EXACT_CELLS_PLUS_THIRTY_BOUNDED_FAMILIES",
-    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v13.py",
-    "direct_runtime_git_blob_sha": "6784e7274d640c7f75659d4dab9237188ea784d1",
+    "direct_runtime_path": "canonical/runtime/r2_direct_route_registry_v1.py",
+    "direct_runtime_git_blob_sha": "d0bd1af8c2e0ebb51e65bf400920892accb9542e",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -142,7 +142,14 @@
     "latest_verification_git_blob_sha": "7e4ea72a141c92b70867e133c55a85b01a66e999",
     "latest_verification_status": "PASS__RUNTIME_REPLAY_AND_INDEPENDENT_SMOKES__ZERO_TERMINAL_CREDIT",
     "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
-    "fixed_point_controller_git_blob_sha": "2f0ac068357869279ab3362c80d6fae976ce38b3"
+    "fixed_point_controller_git_blob_sha": "fbb8d2f694054a71012348a1617c14084c492bab",
+    "current_route_selection_metadata_pointer": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_REGISTRY.json",
+    "current_dynamic_admissions_pointer": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
+    "future_route_source_edit_required": false,
+    "future_route_registry_edit_required": false,
+    "legacy_v1_to_v13_runtime_chain_load_bearing": false,
+    "selection_semantics": "V13_CURRENT_THIRTY_THREE_ROUTE_PRECEDENCE_PRESERVED_BY_CONTENT_ADDRESSED_METADATA__FUTURE_PROOF_CARRYING_ROUTES_UNIQUE_MATCH_FAIL_CLOSED",
+    "dynamic_route_collision_policy": "FAIL_CLOSED_UNLESS_EXPLICIT_EQUIVALENCE_OR_DOMINANCE_AUTHORITY"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
