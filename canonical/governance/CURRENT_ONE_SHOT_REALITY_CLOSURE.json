@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_R2_V56_AND_CODING_V3_PROJECTION_BOUND__INFRASTRUCTURE_FAILURES_INTERNAL_AND_RETRYABLE__DYNAMIC_CURRENT_PROJECTION__FINAL_CLEANROOM_GATE_BOUND__AUTO_DEFAULT_FALLBACK_LIVE__EXACT_DECISION_REPLAY_REQUIRED",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_R2_V56_AND_CODING_V3_PROJECTION_BOUND__INFRASTRUCTURE_FAILURES_INTERNAL_AND_RETRYABLE__DYNAMIC_CURRENT_PROJECTION__FINAL_CLEANROOM_GATE_BOUND__AUTO_DEFAULT_FALLBACK_LIVE__PROOF_CARRYING_DIRECT_ROUTE_AUTO_PROMOTION_LIVE__EXACT_DECISION_REPLAY_REQUIRED",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
-    "git_blob_sha": "e4eb89ab3872a79837afd0e2a4bbc3f777b7a807"
+    "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
   },
   "predecessor": {
     "path": "canonical/runtime/one_shot_verified_closure_v1.py",
@@ -271,7 +271,7 @@
     "status": "LAST_VERIFIED_SNAPSHOT__NONAUTHORITATIVE_FOR_MOVING_R2_AND_TERMINAL__DYNAMIC_PROJECTION_REQUIRED",
     "source_main_head": "0e7899926a61ca41c866e95debbf801cac69cd64",
     "one_shot_v1_runtime_git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
-    "one_shot_v2_runtime_git_blob_sha": "e4eb89ab3872a79837afd0e2a4bbc3f777b7a807",
+    "one_shot_v2_runtime_git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec",
     "current_r2_pointer_git_blob_sha": "07120fcb2b9ceebb065849122f5a685dd85d7ec6",
     "current_terminal_authority_git_blob_sha": "3f8207f72bf0685883253924c9089dbda0bda1f0",
     "current_terminal_authority_pointer_revision": 96,
@@ -321,5 +321,16 @@
   "default_runtime_integration": {
     "path": "canonical/governance/CURRENT_DEFAULT_RUNTIME_INTEGRATION.json",
     "pointer_semantics": "MUTABLE_CURRENT_PATH_IDENTITY_AUTHORITATIVE"
+  },
+  "direct_route_auto_promotion": {
+    "status": "LIVE__OPTIONAL_SYNTHESIS_RECEIPT_TO_BRAIN_OWNED_DYNAMIC_ADMISSION_PROMOTION__ZERO_TERMINAL_CREDIT",
+    "provider_authority": false,
+    "candidate_field": "r2_direct_route_candidate_path",
+    "independent_receipt_field": "r2_direct_route_independent_receipt_path",
+    "promoter_path": "canonical/runtime/promote_r2_direct_route_v1.py",
+    "verification_authority_mutation_allowed": false,
+    "fixed_point_reentry_required": true,
+    "exact_task_replay_required": true,
+    "externality_is_not_task_success": true
   }
 }

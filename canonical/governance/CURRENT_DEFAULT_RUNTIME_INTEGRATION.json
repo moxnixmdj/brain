@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEFAULT_RUNTIME_INTEGRATION_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE__CURRENT_R2_ACTIVATION_BASELINE_PLUS_VERIFIED_V21_BACKEND__STABLE_DYNAMIC_ROUTE_ADMISSION__AUTO_ONE_SHOT_FALLBACK__ZERO_TERMINAL_CREDIT",
+  "status": "ACTIVE__CURRENT_R2_ACTIVATION_BASELINE_PLUS_VERIFIED_V21_BACKEND__STABLE_DYNAMIC_ROUTE_ADMISSION__AUTO_ONE_SHOT_FALLBACK__PROOF_CARRYING_SYNTHESIS_TO_LIVE_ROUTE_PROMOTION__ZERO_TERMINAL_CREDIT",
   "binding_semantics": "MUTABLE_CURRENT_PATH_IDENTITY__IMMUTABLE_LOAD_BEARING_DESCENDANTS_GIT_BLOB_BOUND",
   "canonical_front_door": {
     "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
@@ -52,12 +52,25 @@
   },
   "one_shot_fallback": {
     "runtime_path": "canonical/runtime/one_shot_reality_closure_v2.py",
-    "runtime_git_blob_sha": "e4eb89ab3872a79837afd0e2a4bbc3f777b7a807",
+    "runtime_git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec",
     "role": "AUTO_FALLBACK_AFTER_NORMAL_R2_DECISION__NOT_PRIMARY_ROUTER",
     "fixed_point_success_required_before_replay": true,
     "proven_externality_does_not_authorize_task_success": true,
     "explicit_adequate_decision_auto_fallback": false,
-    "user_clarification_auto_fallback": false
+    "user_clarification_auto_fallback": false,
+    "verified_direct_route_auto_promotion": {
+      "live": true,
+      "provider_deployment_authority": false,
+      "required_provider_fields": [
+        "r2_direct_route_candidate_path",
+        "r2_direct_route_independent_receipt_path"
+      ],
+      "promoter_path": "canonical/runtime/promote_r2_direct_route_v1.py",
+      "promoter_role": "BRAIN_OWNED_EXACT_CANDIDATE_AND_INDEPENDENT_RECEIPT_REVALIDATION_BEFORE_LIVE_ADMISSION",
+      "verification_authority_mutation_allowed": false,
+      "fixed_point_reentry_required": true,
+      "exact_original_decision_replay_required": true
+    }
   },
   "invariants": [
     "NORMAL_AUTO_RAW_GOAL_ENTERS_ADEQUATE_DECISION_FIRST",
@@ -66,7 +79,10 @@
     "FUTURE_VERIFIED_ROUTES_ENTER_THROUGH_PROOF_CARRYING_DYNAMIC_ADMISSION_WITHOUT_NEW_VN_ROUTER_SOURCE",
     "DYNAMIC_ROUTE_OVERLAP_WITH_V21_OR_OTHER_DYNAMIC_ROUTE_FAILS_CLOSED",
     "ONE_SHOT_AUTO_FALLBACK_NEVER_CONVERTS_EXTERNALITY_PROOF_INTO_TASK_SUCCESS",
-    "TASK_SUCCESS_AFTER_ONE_SHOT_REQUIRES_EXACT_DECISION_REPLAY_PASS"
+    "TASK_SUCCESS_AFTER_ONE_SHOT_REQUIRES_EXACT_DECISION_REPLAY_PASS",
+    "CAPABILITY_SYNTHESIS_PROVIDER_CANNOT_SELF_PROMOTE_DIRECT_ROUTE",
+    "OPTIONAL_DIRECT_ROUTE_PROPOSAL_REQUIRES_BRAIN_OWNED_PROMOTER_REVALIDATION",
+    "PROMOTED_ROUTE_STILL_REQUIRES_FIXED_POINT_REENTRY_AND_EXACT_TASK_REPLAY"
   ],
   "nonclaims": [
     "NO_CLAIM_CURRENT_R2_SCHEDULER_SNAPSHOT_ROUTE_COUNT_CHANGED",
