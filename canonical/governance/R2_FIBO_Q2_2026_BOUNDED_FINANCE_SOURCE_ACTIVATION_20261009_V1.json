@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FIBO_Q2_2026_BOUNDED_FINANCE_SOURCE_ACTIVATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE__PINNED_FIBO_Q2_2026_CORE7_SOURCE_CONVENTION_SCOPE_BOUND__GENERIC_FINANCE_SOURCE_WAKE_REFINED__GLOBAL_FINANCE_TAIL_OPEN__ZERO_TERMINAL_CREDIT",
+  "upstream": {
+    "repository": "edmcouncil/fibo",
+    "release_tag": "master_2026Q2",
+    "commit_sha": "f59157fe156e3d91b1c045222d0a7dc06b7d78a2"
+  },
+  "evidence": {
+    "path": "canonical/evidence/FIBO_Q2_2026_CORE_FINANCE_BOUNDED_SOURCE_V1.json",
+    "git_blob_sha": "5849e1fdd68b5883deaa0fbd6146f2b9aea9729a",
+    "class_count": 253,
+    "direct_entailment_edge_count": 177,
+    "source_file_count": 7
+  },
+  "runtime": {
+    "path": "canonical/runtime/fibo_q2_2026_bounded_finance_authority_v1.py",
+    "git_blob_sha": "1ff1143aa2d659db76020b22c6f30313d81f23e3",
+    "semantic_relation_control_path": "canonical/runtime/semantic_relation_control_v1.py",
+    "semantic_relation_control_git_blob_sha": "13aa27ea19cefd8ce6059f037ff5491402d9fa68",
+    "entailment_dag_path": "canonical/runtime/semantic_relation_entailment_dag_v1.py",
+    "entailment_dag_git_blob_sha": "3e092ba1581f674c1302288b2800771a81b5bb02"
+  },
+  "verification": {
+    "path": "canonical/verification/FIBO_Q2_2026_BOUNDED_FINANCE_AUTHORITY_VERIFY_20261009_V2.json",
+    "git_blob_sha": "a872f8f64584b1704a19a6dee63f25f67567dea7",
+    "focused_replay": "9_OF_9_PASS",
+    "independent_xml_reextraction": true
+  },
+  "wake_refinement": {
+    "from": "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND",
+    "to": "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND_OUTSIDE_VERIFIED_FIBO_Q2_2026_CORE7_SCOPE",
+    "satisfied_scope": "ALL_DEFINED_LABELED_OWL_CLASSES_AND_ALL_DIRECT_RDFS_SUBCLASSOF_RESOURCE_EDGES_WHOSE_ENDPOINTS_ARE_INSIDE_THE_EXACT_SEVEN_FILE_MANIFEST",
+    "reason": "PINNED_PACK_AUTHENTICATES_FINITE_CONTENT_ADDRESSED_FINANCE_VOCABULARY_AND_DIRECTIONAL_SUBCLASS_GRAPH_ONLY_IN_DECLARED_SCOPE"
+  },
+  "authority_boundary": {
+    "exact_class_iri_source_authority": true,
+    "exact_declared_label_source_authority": true,
+    "direct_subclass_entailment_source_authority": true,
+    "transitive_subclass_entailment_via_existing_dag": true,
+    "label_to_contextual_identity_authority": false,
+    "missing_path_to_non_entailment_authority": false,
+    "imported_ontology_closure_complete": false,
+    "open_world_finance_ontology_complete": false,
+    "policy_adequacy_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
