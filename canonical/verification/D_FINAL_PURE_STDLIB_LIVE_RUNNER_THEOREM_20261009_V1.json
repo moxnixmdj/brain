@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINAL_PURE_STDLIB_LIVE_RUNNER_THEOREM_V1",
+  "date": "2026-10-09",
+  "status": "VERIFIED_TWO_CARRIER_LIVE_ZERO_AMBIENT_RUNNER__DECISION_VERIFIER__ZERO_EFFECTS",
+  "capability_id": "bound:decision.synthesis.verify.stdlib",
+  "runner_git_blob_sha": "df6755ae794bf8607a0b8c21db57dbd7fd8721b4",
+  "bridge_git_blob_sha": "025a544e55219617a9ff90f0cb81554425614762",
+  "provider_git_blob_sha": "e2d0992f84da629358ae1ee5406c23d5f21c26c2",
+  "launcher_git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8",
+  "registry_entry_sha256": "bf45f7e92d29a32fee4b2c40481a593e1c9f3b3e5b04f3da529fac5d0c5ec2c6",
+  "replay_1": {
+    "carrier": "brain-live-runtime-v1-verify-20261008",
+    "result": "PASS__PURE_STDLIB_EXECUTED_ZERO_AMBIENT",
+    "fresh_nonce_sha256": "5826aa09fd078b3f73f19c809d0e785e22f2b15eb22c50814545e9c704c96190",
+    "namespace_policy_sha256": "11895ab8683736130b3f8859242fc992b9a27f94f1a544fbdaa4e3919815f52f",
+    "broker_sha256": "3e495839348db5e935fa42973ce046963afcf9e8400d96e4fc5bf002e563f828",
+    "inner_pass": true,
+    "inner_verified": true,
+    "inner_trace_pass": true,
+    "material_effects_committed": 0
+  },
+  "replay_2": {
+    "carrier": "brain-r3-root1-gap-verify-20261008",
+    "result": "PASS__PURE_STDLIB_EXECUTED_ZERO_AMBIENT",
+    "fresh_nonce_sha256": "48105ef63a84f610be2aaa19099499f1c719f42823814729351624c32123ef07",
+    "namespace_policy_sha256": "7ec17ce8b40fa7f2fa174da5f9cce63d7deb512c1f8b2ddd9088c8e6f74f9810",
+    "broker_sha256": "9bef7e06325e166bf34b55cd0430a5a66932591bf6fe6f9e21c25649d27abb54",
+    "inner_pass": true,
+    "inner_verified": true,
+    "inner_trace_pass": true,
+    "material_effects_committed": 0
+  },
+  "conclusion": "SELECTED_DECISION_VERIFIER_EXECUTES_ON_FRESH_INPUTS_INSIDE_ZERO_AMBIENT_NAMESPACE_AND_RETURNS_TYPED_VERIFIED_RESULT_WITH_ZERO_HOST_EFFECTS",
+  "hard_nonclaims": [
+    "NO_EFFECTFUL_BOUND_ROW_CLOSED",
+    "NO_GLOBAL_89_ROW_D_FINALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
