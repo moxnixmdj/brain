@@ -96,6 +96,26 @@ _REGISTRY = {
         ),
         "binding_blob_sha": "25a8c91580a9d2409b30806f4eae4b77e31dab65",
     }
+,
+    "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1": {
+        "condition": {
+            "op": "AND",
+            "args": [
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_CANDIDATE_SET_FINITE_V1"},
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_INTERPRETATION_SET_SOUND_COMPLETE_V1"},
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_ORACLE_TOTAL_V1"},
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_ORACLE_SOUND_COMPLETE_PER_INTERPRETATION_V1"},
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_COMMON_VALID_MEMBER_EXISTS_V1"},
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_CALL_BUDGET_SUFFICIENT_V1"},
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_ORACLE_PRETERMINAL_ADMISSIBLE_V1"},
+            ],
+        },
+        "binding_path": (
+            "canonical/governance/"
+            "CODING_ROBUST_FINITE_MULTI_INTERPRETATION_POLICY_ADEQUACY_BINDING_20261009_V1.json"
+        ),
+        "binding_blob_sha": "e0ad6e10b3c538baaf59439e23d7db84383edcee",
+    }
 
 }
 
