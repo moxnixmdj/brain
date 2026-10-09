@@ -11,7 +11,7 @@ EXPECTED={
 "canonical/governance/FINANCE_DIRECT_ROUTE_SOURCE_COVERAGE_TRUTH_REPAIR_20261007_V1.json":"b760bdf4b68c51261d6513b232baaf5339089c8f",
 "canonical/governance/FINANCE_PROOF_CARRYING_SOURCE_SEMANTIC_GATE_20261007_V1.json":"f43ddf33a63659ce6a853b9f3d75de0b7b1e5d66",
 "canonical/governance/FINANCE_SHARED_SEMANTIC_RESIDUAL_RECONCILIATION_20261007_V1.json":"d9453733ac28a205305129ac7b80e6ea1b692815",
-"canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V1.json":"423e0d2186974dfe335b6366c73621bab1dfc039",
+"canonical/verification/R2_STRICT_EXTERNALITY_RECLASSIFICATION_20261009_V1.json":"8919cd98397586027bbf711cfced58c8c3d62e45",
 }
 
 def _blob(path:Path)->str:
@@ -20,6 +20,19 @@ def _blob(path:Path)->str:
 
 def _load(rel:str):
     return json.loads((ROOT/rel).read_text(encoding="utf-8"))
+
+def _norm(value)->str:
+    raw=str(value or "").upper()
+    out=[]
+    last_sep=False
+    for ch in raw:
+        if ch.isalnum():
+            out.append(ch)
+            last_sep=False
+        elif not last_sep:
+            out.append("_")
+            last_sep=True
+    return "".join(out).strip("_")
 
 def evaluate()->dict:
     errors=[]
@@ -38,7 +51,7 @@ def evaluate()->dict:
     counter=_load("canonical/governance/FINANCE_DIRECT_ROUTE_SOURCE_COVERAGE_TRUTH_REPAIR_20261007_V1.json")
     source_gate=_load("canonical/governance/FINANCE_PROOF_CARRYING_SOURCE_SEMANTIC_GATE_20261007_V1.json")
     shared=_load("canonical/governance/FINANCE_SHARED_SEMANTIC_RESIDUAL_RECONCILIATION_20261007_V1.json")
-    root2=_load("canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V1.json")
+    strict=_load("canonical/verification/R2_STRICT_EXTERNALITY_RECLASSIFICATION_20261009_V1.json")
     fixed=_load(FIXED)
 
     eq=str((quotient.get("definitions") or {}).get("equivalence") or "")
@@ -49,10 +62,10 @@ def evaluate()->dict:
         errors.append("POLICY_QUOTIENT_REMAINING_BOUNDARY_DRIFT")
 
     falsified=(counter.get("proof") or {}).get("universal_adequacy_falsified") or []
-    joined=" ".join(str(x) for x in falsified)
+    joined=_norm(" ".join(str(x) for x in falsified))
     if "A_TWO_WORLD_COUNTERMODEL_EXISTS" not in joined:
         errors.append("TWO_WORLD_COUNTERMODEL_MISSING")
-    if "PROTOCOL ACCEPTANCE DIFFERS" not in joined:
+    if "PROTOCOL_ACCEPTANCE_DIFFERS" not in joined:
         errors.append("COUNTERMODEL_POLICY_RELEVANCE_MISSING")
 
     residual=(source_gate.get("remaining_finance_direct_residual") or {})
@@ -62,32 +75,49 @@ def evaluate()->dict:
     open_semantics=(shared.get("surviving_semantic_boundary") or {}).get("not_yet_universally_owned") or []
     if not open_semantics:
         errors.append("SHARED_SEMANTIC_RESIDUAL_UNEXPECTEDLY_EMPTY")
-    shared_theorem=str((shared.get("theorem") or {}).get("statement") or "")
+    shared_theorem=_norm((shared.get("theorem") or {}).get("statement") or "")
     if "DIRECT_END_TO_END_CERTIFICATE" not in shared_theorem:
         errors.append("SHARED_E2E_ESCAPE_ROUTE_MISSING")
 
-    finance=(root2.get("current_cell_classifications") or {}).get("FINANCE_SEMANTIC_ADEQUACY_TAIL") or {}
-    if finance.get("state")!="ZERO_REALITY_ACTIVE":
-        errors.append("ROOT2_FINANCE_PRESTATE_DRIFT")
-    if "DIRECT_E2E_CERTIFICATE_SEARCH" not in str(finance.get("next") or ""):
-        errors.append("ROOT2_FINANCE_NEXT_ROUTE_DRIFT")
+    finance=(strict.get("tested_cells") or {}).get("FINANCE_SEMANTIC_ADEQUACY_TAIL") or {}
+    if finance.get("gate_pass") is not False:
+        errors.append("STRICT_EXTERNALITY_FINANCE_GATE_PASS_DRIFT")
+    if finance.get("irreducible_external_information_proved") is not False:
+        errors.append("STRICT_EXTERNALITY_FINANCE_PROOF_DRIFT")
+    if finance.get("reason")!="PROOF_CARRYING_EXTERNALITY_CERTIFICATE_REQUIRED":
+        errors.append("STRICT_EXTERNALITY_FINANCE_REASON_DRIFT")
+    if finance.get("new_classification")!="INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT":
+        errors.append("STRICT_EXTERNALITY_FINANCE_CLASSIFICATION_DRIFT")
 
     theorem=fixed.get("theorem") or {}
     conclusion=str(theorem.get("conclusion") or "")
     if "POLICY_ADEQUACY_QUOTIENT_DOES_NOT_REMOVE_THE_TWO_WORLD_COUNTERMODEL" not in conclusion:
         errors.append("FIXED_POINT_CONCLUSION_DRIFT")
     scheduler=fixed.get("scheduler_delta") or {}
-    if scheduler.get("finance_semantic_adequacy_tail_state")!="EXTERNAL_REQUIRED_SLEEP":
-        errors.append("FIXED_POINT_SCHEDULER_STATE_INVALID")
+    legacy_state=scheduler.get("finance_semantic_adequacy_tail_state")
+    if legacy_state!="EXTERNAL_REQUIRED_SLEEP":
+        errors.append("FIXED_POINT_LEGACY_SCHEDULER_STATE_DRIFT")
 
     return {
         "schema":SCHEMA,
-        "status":"PASS__FINANCE_SEMANTIC_ZERO_REALITY_FIXED_POINT__WAKE_GATED__ZERO_CREDIT" if not errors else "FAIL_CLOSED",
+        "status":(
+            "PASS__FINANCE_SEMANTIC_ZERO_REALITY_FIXED_POINT__"
+            "STRICT_EXTERNALITY_RECONCILED__ZERO_CREDIT"
+            if not errors else "FAIL_CLOSED"
+        ),
         "pass":not errors,
         "errors":errors,
         "two_world_countermodel_preserved_by_policy_quotient":not errors,
         "zero_reality_internal_recomputation_exhausted":not errors,
-        "finance_semantic_adequacy_tail_state":"EXTERNAL_REQUIRED_SLEEP" if not errors else "UNRESOLVED",
+        "finance_semantic_adequacy_tail_state":(
+            "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT"
+            if not errors else "UNRESOLVED"
+        ),
+        "pending_acquisition_or_experiment_required":not errors,
+        "information_theoretic_externality_proved":False,
+        "irreducible_external_information_proved":False,
+        "legacy_scheduler_state":legacy_state,
+        "legacy_scheduler_state_authoritative":False,
         "root2_globally_closed":False,
         "terminal_credit_delta":0,
     }
