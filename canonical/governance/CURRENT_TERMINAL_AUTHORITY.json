@@ -1385,6 +1385,25 @@
       "global_semantic_identity_authority": false,
       "open_world_ontology_complete": false,
       "terminal_credit_delta": 0
+    },
+    "cursorbench_five_region_frontier_20261009_v1": {
+      "projection": {
+        "path": "canonical/governance/CODING_SHARED_SPECIFICATION_COVERAGE_ONLY_SUCCESSOR_20261009_V4.json",
+        "git_blob_sha": "36b0ead6db10f6aabb6ac8f873cceefbff16ca46"
+      },
+      "complement": {
+        "path": "canonical/governance/CURSORBENCH_FIVE_REGION_COMPLEMENT_NONIDENTIFIABILITY_20261009_V1.json",
+        "git_blob_sha": "ef09eb272c9a3380574734ff244b22314b43fafd"
+      },
+      "independent_verification": {
+        "path": "canonical/verification/CURSORBENCH_FIVE_REGION_COMPLEMENT_NONIDENTIFIABILITY_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "cf93e68182a48cbf629f6c39a127b3c804b08d80"
+      },
+      "reconciliation_candidate": {
+        "path": "canonical/governance/CURSORBENCH_FIVE_REGION_TERMINAL_RECONCILIATION_20261009_V1.json",
+        "git_blob_sha": "b47efd8db7ad799e503545ff4c41cb1890e52309"
+      },
+      "note": "FIVE_AUTHENTICATED_CONSTRUCTIVE_CODING_REGIONS__34_DISTINCT_ATOMS__PRIVATE_CURSORBENCH_MEMBERSHIP_AND_WHOLE_COVER_STILL_OPEN__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1947,7 +1966,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "AUTHENTICATE_A_GENUINELY_BROADER_CONSTRUCTIVE_REGION_OR_ACQUIRE_TARGET_MEMBERSHIP_EVIDENCE_OR_ROUTE_A_SCORE_AUTHORITY__DO_NOT_REPEAT_STATIC_THREE_REGION_COMPLEMENT_ELIMINATION",
+    "cursorbench_next_proof_object": "ACQUIRE_TARGET_RELEVANT_MEMBERSHIP_OWNER_GRADER_OR_SCORE_AUTHORITY_FOR_THE_FIVE_EXISTING_REGIONS__ONLY_ADD_A_SIXTH_REGION_IF_IT_STRICTLY_ADDS_HIGH_YIELD_ADEQUACY_INFORMATION",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -2215,15 +2234,22 @@
       "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1",
       "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1"
     ],
-    "cursorbench_current_constructive_region_union_count": 3,
-    "cursorbench_current_constructive_region_union_distinct_condition_atom_count": 18,
+    "cursorbench_current_constructive_region_union_count": 5,
+    "cursorbench_current_constructive_region_union_distinct_condition_atom_count": 34,
     "cursorbench_three_region_complement_nonidentifiability_proved": true,
     "cursorbench_current_static_evidence_identifies_three_region_complement_emptiness": false,
     "cursorbench_actual_three_region_complement_empty_claimed": false,
     "cursorbench_actual_three_region_complement_nonempty_claimed": false,
     "r2_regcap_authenticated_bounded_context_truth_bound": true,
     "r2_regcap_bounded_context_truth_global_semantic_identity_authority": false,
-    "r2_regcap_bounded_context_truth_open_world_candidate_universe_complete": false
+    "r2_regcap_bounded_context_truth_open_world_candidate_universe_complete": false,
+    "cursorbench_five_region_complement_nonidentifiability_proved": true,
+    "cursorbench_current_static_evidence_identifies_five_region_complement_emptiness": false,
+    "cursorbench_actual_five_region_complement_empty_claimed": false,
+    "cursorbench_actual_five_region_complement_nonempty_claimed": false,
+    "cursorbench_three_region_frontier_superseded": true,
+    "cursorbench_five_region_private_membership_proved": false,
+    "cursorbench_five_region_whole_positive_cover_proved": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2929,7 +2955,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 113,
+  "pointer_revision": 114,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4279,6 +4305,29 @@
     "bounded_family_count": 36,
     "primary_internal_unsolved_count": 1,
     "terminal_remains_false": true,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_five_region_hotpointer_reconciliation_20261009_v1": {
+    "source_projection": {
+      "path": "canonical/governance/CODING_SHARED_SPECIFICATION_COVERAGE_ONLY_SUCCESSOR_20261009_V4.json",
+      "git_blob_sha": "36b0ead6db10f6aabb6ac8f873cceefbff16ca46"
+    },
+    "source_complement": {
+      "path": "canonical/governance/CURSORBENCH_FIVE_REGION_COMPLEMENT_NONIDENTIFIABILITY_20261009_V1.json",
+      "git_blob_sha": "ef09eb272c9a3380574734ff244b22314b43fafd"
+    },
+    "verification": {
+      "path": "canonical/verification/CURSORBENCH_FIVE_REGION_COMPLEMENT_NONIDENTIFIABILITY_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "cf93e68182a48cbf629f6c39a127b3c804b08d80"
+    },
+    "result": "HOT_POINTER_RECONCILED_FROM_THREE_REGION_18_ATOM_FRONTIER_TO_FIVE_REGION_34_ATOM_FRONTIER",
+    "prior_constructive_region_count": 3,
+    "current_constructive_region_count": 5,
+    "prior_distinct_condition_atom_count": 18,
+    "current_distinct_condition_atom_count": 34,
+    "private_cursorbench_membership_delta": 0,
+    "whole_positive_cover_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
