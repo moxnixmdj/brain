@@ -120,6 +120,8 @@ _WORD_EXISTS_EXACT = (
     r"(?:The )?submission includes a Word document file with a \.docx extension[.]?",
     r"A Word document \(\.docx\) is attached as the deliverable[.]?",
     r"At least one Microsoft Word \.docx file is provided as the deliverable[.]?",
+    r"Submission is provided as a Microsoft Word \(\.docx\) document[.]?",
+    r"(?:The )?(?:final )?deliverable is (?:provided as )?a (?:Microsoft Word|Word) document with (?:a |the )?\.docx extension[.]?",
 )
 
 _WORD_EXISTS_SUBSET = (
@@ -144,6 +146,7 @@ _XLSX_EXISTS_EXACT = (
     r"Deliverable is (?:provided as )?an Excel (?:file|workbook file|spreadsheet)(?: \(\.xlsx\))?[.]?",
     r"An Excel workbook \(\.xlsx\) is present in the deliverable files[.]?",
     r"The spreadsheet deliverable is an Excel workbook in \.xlsx format[.]?",
+    r"Provides an Excel workbook \(\.xlsx\) in the deliverable[.]?",
 )
 
 _XLSX_EXISTS_SUBSET = (
