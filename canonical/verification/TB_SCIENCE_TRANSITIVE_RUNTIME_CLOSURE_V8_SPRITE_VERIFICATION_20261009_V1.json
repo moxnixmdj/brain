@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_V8_SPRITE_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__49_OF_49_UNITTEST__4_OF_4_PREDICATE_COUNTERCHECK__15_FILE_TRANSITIVE_CLOSURE_EXACT__ZERO_BENCHMARK_EXPOSURE",
+  "subject": {
+    "closure_manifest_path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261009_V8.json",
+    "exact_agent_blob": "5e851d884b9784c6dc6fc9f83c08c502e41c3bdc",
+    "exact_planner_blob": "715aee168f02cb4abff961849b2b26709eef2e64",
+    "exact_predicate_blob": "c7f190927e31fa2ab32f129b43402e98ea836498",
+    "newly_required_directive_blob": "e3a4c01cc08e7a569692a5d6f03a6feec69934bf"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "tbscience-v8-envelope-verify-20261008-v1",
+    "id": "sprite-69dbb63e-6568-4016-a43e-089e86ce2aba",
+    "workspace": "/home/sprite/tbscience_v8"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "controller_planner_multi_action_unittest": {
+      "passed": 49,
+      "total": 49,
+      "failed": 0,
+      "errors": 0
+    },
+    "predicate_truth_repair_counterchecks": {
+      "passed": 4,
+      "total": 4
+    },
+    "transitive_closure": {
+      "status": "PASS__CARRIER_CONTAINS_EXACT_TRANSITIVE_RUNTIME_CLOSURE",
+      "closure_file_count": 15,
+      "unresolved_dynamic_imports": 0,
+      "missing_paths": 0,
+      "mismatched_paths": 0,
+      "carrier_execution_authority": true,
+      "benchmark_execution_authority": false
+    }
+  },
+  "discovered_and_repaired": {
+    "stale_claim": "TB_SCIENCE_V7_14_FILE_TRANSITIVE_CLOSURE_REMAINS_CURRENT",
+    "falsified_by": "CURRENT_BOUNDED_PREDICATE_ARGUMENT_SEMANTICS_IMPORTS_BOUNDED_TASK_DIRECTIVE_SEMANTICS_V1",
+    "repair": "PROMOTE_EXACT_15_FILE_TRANSITIVE_CLOSURE_WITH_CURRENT_V8_AND_TRUTH_REPAIR_BYTES"
+  },
+  "benchmark_task_exposure": 0,
+  "benchmark_trials_executed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
