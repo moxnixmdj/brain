@@ -22,7 +22,11 @@ def evaluate_legacy(payload: Mapping[str, Any]) -> dict[str, Any]:
     return legacy_evaluate(payload)
 
 
-def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
+def evaluate(
+    payload: Mapping[str, Any],
+    *,
+    relation_edge_verifier=None,
+) -> dict[str, Any]:
     if not isinstance(payload, Mapping):
         return {
             "schema": SCHEMA,
@@ -39,7 +43,10 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
     if kind is None:
         return evaluate_legacy(payload)
     if kind == "DOMAIN_MAPPING_RELATION":
-        return evaluate_domain_mapping(payload)
+        return evaluate_domain_mapping(
+            payload,
+            relation_edge_verifier=relation_edge_verifier,
+        )
     return {
         "schema": SCHEMA,
         "pass": False,
