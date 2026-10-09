@@ -626,6 +626,22 @@
       "top_refinement_authority": "ONLY_INDEPENDENTLY_SOURCE_ALIGNED_PROOFS_MAY_SHRINK_TOP",
       "unproved_relation_or_precedence_remains_top": true,
       "terminal_credit_delta": 0
+    },
+    "fibo_q2_2026_basel_designation_authority": {
+      "reconciliation_path": "canonical/governance/FIBO_Q2_2026_BASEL_DESIGNATION_AUTHORITY_RECONCILIATION_20261009_V1.json",
+      "reconciliation_git_blob_sha": "fc3c11720b35a4de56430b66cd1f1b1c24e36f5f",
+      "runtime_path": "canonical/runtime/fibo_q2_2026_basel_designation_authority_v1.py",
+      "runtime_git_blob_sha": "f30b189d68d500042aaed28f6cd4ae5279daecf4",
+      "evidence_path": "canonical/evidence/FIBO_Q2_2026_BASEL_DESIGNATIONS_V1.json",
+      "evidence_git_blob_sha": "ae11a0ddca613b25b7df37b1a3f99ade0836f6ee",
+      "verification_path": "canonical/verification/FIBO_Q2_2026_BASEL_DESIGNATION_AUTHORITY_VERIFY_20261009_V1.json",
+      "verification_git_blob_sha": "101ae642a20adff27c4ac956caf79d83a3ab46fa",
+      "scope_id": "FIBO_Q2_2026_EU_SECURITIES_RESTRICTIONS_BASEL_III_DESIGNATIONS",
+      "explicit_designation_member_count": 4,
+      "contextual_identity_from_surface_authority": false,
+      "open_world_finance_ontology_complete": false,
+      "policy_adequacy_authority": false,
+      "terminal_credit_delta": 0
     }
   },
   "current_cell_classifications": {
@@ -654,7 +670,7 @@
         "NEW_SCOPE_COMPLETE_SOUND_FINANCE_INTERPRETATION_OR_CONSTRAINT_BOUND",
         "NEW_COMMON_POLICY_ADEQUACY_CERTIFICATE_ROBUST_TO_THE_SURVIVING_COUNTERMODEL",
         "NEW_DIRECT_END_TO_END_FINANCE_ADEQUACY_CERTIFICATE",
-        "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND_OUTSIDE_VERIFIED_FIBO_Q2_2026_CORE7_SCOPE",
+        "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND_OUTSIDE_VERIFIED_FIBO_Q2_2026_CORE7_AND_BASEL_III_DESIGNATION_FRAGMENT_SCOPES",
         "NEW_AUTHENTICATED_CONTEXT_SOURCE_AND_FIELD_SEMANTICS_BINDING_OUTSIDE_VERIFIED_SEC_STANDARD_XBRL_COMPANYCONCEPT_SCOPE",
         "NEW_AUTHENTICATED_COMPLETE_BOUNDED_DENOTATION_EXTENSION_OR_SET_RELATION_EVIDENCE",
         "NEW_EXACT_OEWN_RELEASE_RELATIVE_SENSE_UNIVERSE_FOR_A_POLICY_CHANGING_LEMMA",
@@ -739,6 +755,14 @@
           "contextual_word_sense_from_label_equality": false,
           "open_world_ontology_complete": false,
           "policy_adequacy_authority": false
+        },
+        {
+          "id": "FIBO_Q2_2026_BASEL_III_DESIGNATION_SOURCE_AUTHORITY",
+          "state": "CLOSED_FOR_EXACT_PINNED_FRAGMENT__FOUR_EXPLICIT_BASEL_III_DESIGNATION_MEMBERS_AND_INSTANCE_OF_RELATIONS",
+          "verification": "canonical/verification/FIBO_Q2_2026_BASEL_DESIGNATION_AUTHORITY_VERIFY_20261009_V1.json",
+          "direct_adequacy_route": false,
+          "contextual_identity_from_surface_authority": false,
+          "policy_adequacy_authority": false
         }
       ],
       "decision_relative_sense_control": {
@@ -781,6 +805,15 @@
           "runtime_git_blob_sha": "1ff1143aa2d659db76020b22c6f30313d81f23e3",
           "verification_path": "canonical/verification/FIBO_Q2_2026_BOUNDED_FINANCE_AUTHORITY_VERIFY_20261009_V2.json",
           "verification_git_blob_sha": "a872f8f64584b1704a19a6dee63f25f67567dea7",
+          "global_finance_semantic_tail_closed": false
+        },
+        {
+          "condition": "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND",
+          "status": "SATISFIED__BOUNDED_FIBO_BASEL_III_DESIGNATION_FRAGMENT__GENERIC_WAKE_REFINED_NOT_GLOBALLY_DELETED",
+          "scope": "FIBO_Q2_2026_EU_SECURITIES_RESTRICTIONS_BASEL_III_DESIGNATIONS",
+          "reconciliation_path": "canonical/governance/FIBO_Q2_2026_BASEL_DESIGNATION_AUTHORITY_RECONCILIATION_20261009_V1.json",
+          "reconciliation_git_blob_sha": "fc3c11720b35a4de56430b66cd1f1b1c24e36f5f",
+          "verification_git_blob_sha": "101ae642a20adff27c4ac956caf79d83a3ab46fa",
           "global_finance_semantic_tail_closed": false
         }
       ],
@@ -977,7 +1010,14 @@
       "direct_route_count_delta": 0,
       "bounded_family_count_delta": 0,
       "primary_unsolved_cell_count_delta": 0,
-      "terminal_credit_delta": 0
+      "terminal_credit_delta": 0,
+      "fibo_basel_designation_authority": {
+        "reconciliation_git_blob_sha": "fc3c11720b35a4de56430b66cd1f1b1c24e36f5f",
+        "verification_git_blob_sha": "101ae642a20adff27c4ac956caf79d83a3ab46fa",
+        "scheduler_wake_refined": true,
+        "primary_unsolved_cell_count_delta": 0,
+        "terminal_credit_delta": 0
+      }
     }
   },
   "semantic_relation_frontier_reconciliation": {
