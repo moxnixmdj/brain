@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_V11",
+  "date": "2026-10-09",
+  "status": "CURRENT_15_FILE_CLOSURE__RANK14_PLANNER_MANIFEST_SUMMARY_REPAIR__ZERO_BENCHMARK_TRIAL_CONSUMPTION__ZERO_CREDIT",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261009_V10.json",
+    "git_blob_sha": "ae37559320105277e017ff17af7c3dbeae2f9c27"
+  },
+  "causal_delta": {
+    "changed_file_count": 1,
+    "changed_file": {
+      "path": "canonical/runtime/harbor_science_agent_v1.py",
+      "old_git_blob_sha": "16e8ab7918c4f8d052698282dddf674b54a23016",
+      "new_git_blob_sha": "d397324f411d002bdbdca348aaad708b5b40c9c2"
+    },
+    "reason": "PRESERVE_EXACT_GOAL_AND_ALL_RAW_ACCEPTANCE_OBLIGATIONS_WHILE_REPLACING_DUPLICATE_MODEL_FACING_RAWREQ_ROW_DUMP_WITH_ONE_CONTENT_ADDRESSED_MANIFEST_SUMMARY"
+  },
+  "roots": [
+    "canonical/runtime/harbor_science_agent_v1.py",
+    "canonical/runtime/harbor_science_planner_v1.py",
+    "canonical/runtime/lossless_raw_task_contract_v1.py",
+    "canonical/runtime/raw_task_acceptance_residual_localizer_v1.py"
+  ],
+  "closure": [
+    {
+      "path": "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+      "git_blob_sha": "3f08b2703723537e5a146346eead6a387424687f"
+    },
+    {
+      "path": "canonical/runtime/bounded_predicate_argument_semantics.py",
+      "git_blob_sha": "c7f190927e31fa2ab32f129b43402e98ea836498"
+    },
+    {
+      "path": "canonical/runtime/bounded_task_directive_semantics_v1.py",
+      "git_blob_sha": "e3a4c01cc08e7a569692a5d6f03a6feec69934bf"
+    },
+    {
+      "path": "canonical/runtime/explicit_requirement_index_v2.py",
+      "git_blob_sha": "30629b10fdbf3c337eb3252c043ec13123ca66a1"
+    },
+    {
+      "path": "canonical/runtime/harbor_command_policy.py",
+      "git_blob_sha": "a525773417291c7a4841bf35e1baff5370350d0d"
+    },
+    {
+      "path": "canonical/runtime/harbor_environment_transport.py",
+      "git_blob_sha": "ec46f648214a37bb16025d5ef2593efdf59f0d79"
+    },
+    {
+      "path": "canonical/runtime/harbor_science_agent_v1.py",
+      "git_blob_sha": "d397324f411d002bdbdca348aaad708b5b40c9c2"
+    },
+    {
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "git_blob_sha": "58964dc8d6b5eed5c202081cd800035c791eeb1d"
+    },
+    {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+    },
+    {
+      "path": "canonical/runtime/lossless_raw_task_contract_v1.py",
+      "git_blob_sha": "d54d5a2f7efa76b653d288f4f53da4883644baa6"
+    },
+    {
+      "path": "canonical/runtime/raw_task_acceptance_residual_localizer_v1.py",
+      "git_blob_sha": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_acceptance_program_v1.py",
+      "git_blob_sha": "742c183cccc2ec4bb5f94e88048590e2991dacd4"
+    },
+    {
+      "path": "canonical/runtime/source_contract_compiler.py",
+      "git_blob_sha": "ba53b1f1a3c1d8e63c906eb4952c7e9b6aef1231"
+    },
+    {
+      "path": "canonical/runtime/structured_method_expression_ast_candidate_v2.py",
+      "git_blob_sha": "7623f68bab3c1b207e237389841a4b688e509ff3"
+    },
+    {
+      "path": "canonical/runtime/typed_acceptance_program_v1.py",
+      "git_blob_sha": "7fd2e575bd2d5c36f48c713f15177d5b0d7e68c5"
+    }
+  ],
+  "closure_file_count": 15,
+  "unresolved_dynamic_imports": [],
+  "carrier_execution_authority": true,
+  "benchmark_execution_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "benchmark_task_exposure": 0,
+  "benchmark_trials_executed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "independent_verification": {
+    "pending": false,
+    "public_runner_branch": "verify-tbscience-r14-planner-manifest-summary-v1",
+    "head_sha": "1a32e99ac747da46a1da4b6e94b5bc2f019d529a",
+    "workflow_run_id": 37884076260,
+    "workflow_job_id": 113670044897,
+    "artifact_id": 11595895805,
+    "artifact_zip_sha256": "68655709b0d110895138ae50e6b33463a90f5569fa0ced5f59f506a5d90ae5f0",
+    "result": "PASS__V11_15_FILE_TRANSITIVE_CLOSURE_EXACT__PLANNER_MANIFEST_SUMMARY_REPAIR__ZERO_EXPOSURE",
+    "benchmark_task_exposure": 0,
+    "benchmark_trials_executed": 0
+  },
+  "hard_nonclaims": [
+    "NO_RANK14_TASK_START",
+    "NO_RANK14_SLOT_CONSUMPTION",
+    "NO_CLAIM_V11_CLOSURE_PROVES_THE_EXACT_RANK14_PLANNER_PROMPT_FITS_16K",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
