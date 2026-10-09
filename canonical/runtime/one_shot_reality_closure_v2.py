@@ -6,9 +6,11 @@ machine-checkable contracts:
 
 * CONSTRUCTIVE_CAPABILITY_GAP: must be handed to a synthesis/acquisition
   provider that changes the verified frontier without changing verifier authority.
-* STRICT_EXTERNAL_INFORMATION_GAP: may be handed to a reality acquisition
-  provider only after V1 proves the exact residual irreducibly requires external
-  information.
+* PENDING_ACQUISITION_OR_EXPERIMENT: missing information/experience that may
+  still be obtained by search, simulation, experiment, or replay acquisition.
+* PROVEN_INFORMATION_THEORETICALLY_EXTERNAL: terminal only after V1 validates
+  an independently verified indistinguishability proof and exhausts all internal
+  bypass classes. Current-state absence alone is never enough.
 
 Provider success is never accepted on assertion alone. A provider must return
 a content-addressed receipt and the next V1 pass must observe a frontier digest
@@ -29,6 +31,17 @@ SCHEMA = "PROJECT_BRAIN_ONE_SHOT_REALITY_CLOSURE_V2"
 GAP_SCHEMA = "PROJECT_BRAIN_PROOF_CARRYING_GAP_CONTRACT_V1"
 CONTEXT_GATE_SCHEMA = "PROJECT_BRAIN_CONTEXT_CAPACITY_REPAIR_GATE_V1"
 SEMANTIC_WORK_SCHEMA = "PROJECT_BRAIN_CONSTRUCTIVE_SEMANTIC_WORK_CONTRACT_V1"
+
+REQUIRED_ATTEMPT_ORDER = (
+    "REUSE_EXISTING_CAPABILITY",
+    "SEARCH_CANONICAL_BRAIN",
+    "SEARCH_EXTERNAL_KNOWLEDGE",
+    "DERIVE_OR_COMPOSE",
+    "INVENT_MINIMUM_MISSING_MECHANISM",
+    "CODE_MINIMUM_TRANSFORM_IF_NECESSARY",
+    "EXECUTE",
+    "VERIFY_WITH_UNCHANGED_AUTHORITY",
+)
 
 _HEX = set("0123456789abcdef")
 
@@ -171,12 +184,60 @@ def _constructive_capability_contracts(
             "schema": "PROJECT_BRAIN_CONSTRUCTIVE_CAPABILITY_CONTRACT_V1",
             "contract_id": "constructive:" + _sha(basis),
             "basis": basis,
+            "required_attempt_order": list(REQUIRED_ATTEMPT_ORDER),
+            "search_before_new_code_required": True,
+            "minimum_missing_transform_only": True,
+            "verifier_generated_or_reused_with_solution": True,
             "verification_authority_mutation_allowed": False,
             "self_verification_allowed": False,
             "promotion_authority": False,
             "terminal_authority": False,
         })
     return out
+
+
+def _shared_cause_candidates(
+    contracts: Sequence[Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    """Find exact shared-cause keys before launching per-obligation work."""
+    groups: dict[tuple[str, str], list[str]] = {}
+    for raw in contracts:
+        contract = dict(raw)
+        basis = contract.get("basis")
+        basis = basis if isinstance(basis, Mapping) else {}
+        cid = _s(contract.get("contract_id"))
+        for field in (
+            "boundary_root",
+            "required_capability_class",
+            "repair_class",
+            "surface",
+        ):
+            value = _s(basis.get(field)).strip()
+            if value:
+                groups.setdefault((field, value), []).append(cid)
+    out = []
+    for (field, value), ids in groups.items():
+        unique_ids = sorted(set(ids))
+        if len(unique_ids) < 2:
+            continue
+        basis = {
+            "shared_field": field,
+            "shared_value": value,
+            "obligation_ids": unique_ids,
+            "terminal_obligations_reached": len(unique_ids),
+        }
+        out.append({
+            "candidate_id": "shared-cause:" + _sha(basis),
+            **basis,
+        })
+    return sorted(
+        out,
+        key=lambda row: (
+            -row["terminal_obligations_reached"],
+            row["shared_field"],
+            row["shared_value"],
+        ),
+    )
 
 
 def certify_context_capacity_repair(
@@ -296,17 +357,17 @@ def compile_gap_contract(
     )
 
     if row.get("pass") is True and not internal:
-        gap_class = "NONE"
+        if external_proved:
+            gap_class = "PROVEN_INFORMATION_THEORETICALLY_EXTERNAL"
+        else:
+            gap_class = "NONE"
         required_action = "NONE"
     elif internal:
         gap_class = "CONSTRUCTIVE_CAPABILITY_GAP"
         required_action = "SYNTHESIZE_OR_ACQUIRE_VERIFIABLE_CAPABILITY"
-    elif evidence and external_proved:
-        gap_class = "STRICT_EXTERNAL_INFORMATION_GAP"
-        required_action = "ACQUIRE_MINIMUM_POLICY_CHANGING_INFORMATION"
     elif evidence:
-        gap_class = "EXTERNALITY_NOT_PROVED"
-        required_action = "PROVE_EXTERNALITY_OR_RECLASSIFY_AS_CONSTRUCTIVE"
+        gap_class = "PENDING_ACQUISITION_OR_EXPERIMENT"
+        required_action = "SEARCH_SIMULATE_EXPERIMENT_OR_ACQUIRE_MINIMUM_NEEDED_EVIDENCE"
     else:
         gap_class = "UNCLASSIFIED_OPEN_GAP"
         required_action = "FAIL_CLOSED_AND_REFINE_GAP_CONTRACT"
@@ -321,9 +382,17 @@ def compile_gap_contract(
         "internal_blockers": internal,
         "evidence_blockers": evidence,
         "irreducible_external_information_proved": external_proved,
+        "information_theoretic_externality_proved": (
+            residual.get("information_theoretic_externality_proved") is True
+        ),
+        "internal_unsolved": residual.get("internal_unsolved") is True,
+        "pending_acquisition_or_experiment_required": (
+            residual.get("pending_acquisition_or_experiment_required") is True
+        ),
     }
     semantic_work = [deepcopy(dict(x)) for x in pending_work]
     constructive_contracts = _constructive_capability_contracts(semantic_work)
+    shared_causes = _shared_cause_candidates(constructive_contracts)
     return {
         "schema": GAP_SCHEMA,
         "gap_class": gap_class,
@@ -334,6 +403,12 @@ def compile_gap_contract(
         "pending_semantic_work_digest": _sha(semantic_work),
         "constructive_capability_contracts": constructive_contracts,
         "constructive_capability_contract_count": len(constructive_contracts),
+        "shared_cause_candidates": shared_causes,
+        "shared_cause_candidate_count": len(shared_causes),
+        "required_attempt_order": list(REQUIRED_ATTEMPT_ORDER),
+        "search_before_new_code_required": True,
+        "minimum_missing_transform_only": True,
+        "verifier_generated_or_reused_with_solution": True,
         "verification_authority_mutation_allowed": False,
         "terminal_credit": False,
     }
@@ -391,6 +466,23 @@ def _validate_provider_receipt(
         raise RealityClosureError(provider_kind + "_CLAIMED_SUCCESS_WITHOUT_FRONTIER_CHANGE")
     if receipt.get("verification_authority_mutated") is not False:
         raise RealityClosureError(provider_kind + "_VERIFICATION_AUTHORITY_MUTATION_FORBIDDEN")
+    if provider_kind == "CAPABILITY_SYNTHESIS":
+        if receipt.get("reuse_or_search_trace_complete") is not True:
+            raise RealityClosureError("CAPABILITY_SYNTHESIS_SEARCH_BEFORE_CODE_NOT_PROVED")
+        if receipt.get("new_code_written") is True:
+            if receipt.get("pre_code_search_exhausted") is not True:
+                raise RealityClosureError("CAPABILITY_SYNTHESIS_PRE_CODE_SEARCH_NOT_EXHAUSTED")
+            if receipt.get("minimal_missing_transform_only") is not True:
+                raise RealityClosureError("CAPABILITY_SYNTHESIS_NOT_MINIMUM_MISSING_TRANSFORM")
+        if receipt.get("verifier_generated_or_reused") is not True:
+            raise RealityClosureError("CAPABILITY_SYNTHESIS_VERIFIER_REQUIRED")
+        if receipt.get("verifier_passed") is not True:
+            raise RealityClosureError("CAPABILITY_SYNTHESIS_VERIFIER_DID_NOT_PASS")
+    if provider_kind == "EVIDENCE_ACQUISITION":
+        if receipt.get("acquisition_or_experiment_attempted") is not True:
+            raise RealityClosureError("EVIDENCE_ACQUISITION_ATTEMPT_NOT_PROVED")
+        if not _valid_sha256(receipt.get("evidence_trace_sha256")):
+            raise RealityClosureError("EVIDENCE_ACQUISITION_TRACE_SHA256_INVALID")
     return receipt
 
 
@@ -401,7 +493,9 @@ def run(
     verification_frontier_acquisition_provider=None,
     verification_frontier_acquisition_provider_id="ONE_SHOT_ROOT1_ACQUISITION_PROVIDER",
     failure_repair_provider=None,
+    information_theoretic_externality_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     capability_synthesis_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    evidence_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     reality_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     max_repair_rounds: int = 8,
     v1_max_rounds: int = 64,
@@ -427,6 +521,9 @@ def run(
                 verification_frontier_acquisition_provider_id
             ),
             "failure_repair_provider": failure_repair_provider,
+            "information_theoretic_externality_provider": (
+                information_theoretic_externality_provider
+            ),
             "max_rounds": v1_max_rounds,
             "max_actions_per_round": v1_max_actions_per_round,
         }
@@ -491,25 +588,26 @@ def run(
                 capability_synthesis_provider(deepcopy(contract)),
                 provider_kind="CAPABILITY_SYNTHESIS",
             )
-        elif gap_class == "STRICT_EXTERNAL_INFORMATION_GAP":
-            if reality_acquisition_provider is None:
+        elif gap_class == "PENDING_ACQUISITION_OR_EXPERIMENT":
+            if evidence_acquisition_provider is None:
                 return {
                     "schema": SCHEMA,
-                    "status": "OPEN__STRICT_EXTERNAL_REALITY_PROVIDER_REQUIRED",
+                    "status": "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT_PROVIDER_REQUIRED",
                     "pass": False,
                     "gap_contract": contract,
                     "transcript": transcript,
                     "terminal_authority": False,
                 }
             receipt = _validate_provider_receipt(
-                reality_acquisition_provider(deepcopy(contract)),
-                provider_kind="REALITY_ACQUISITION",
+                evidence_acquisition_provider(deepcopy(contract)),
+                provider_kind="EVIDENCE_ACQUISITION",
             )
-        elif gap_class == "EXTERNALITY_NOT_PROVED":
+        elif gap_class == "PROVEN_INFORMATION_THEORETICALLY_EXTERNAL":
             return {
                 "schema": SCHEMA,
-                "status": "OPEN__EXTERNALITY_NOT_PROVED__NO_REALITY_ACQUISITION_AUTHORIZED",
-                "pass": False,
+                "status": "PASS__PROVEN_INFORMATION_THEORETICALLY_EXTERNAL",
+                "pass": True,
+                "fixed_point": True,
                 "gap_contract": contract,
                 "transcript": transcript,
                 "terminal_authority": False,
