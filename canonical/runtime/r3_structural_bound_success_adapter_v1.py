@@ -21,7 +21,7 @@ from canonical.runtime import autonomous_verified_self_improvement_v1 as learnin
 from canonical.runtime import r3_bound_success_adapter_v1 as bound
 
 SCHEMA = "PROJECT_BRAIN_R3_STRUCTURAL_BOUND_SUCCESS_ADAPTER_V1"
-RULES_PATH = "canonical/runtime/R3_STRUCTURAL_BOUND_ADAPTER_RULES_V1"
+RULES_PATH = "canonical/runtime/R3_STRUCTURAL_BOUND_ADAPTER_RULES_V1.json"
 PROFILE_REPLAY_TARGETS = "REPLAY_TARGET_EFFECTS_V1"
 PROFILE_PROOF_TARGETS = "PROOF_VERIFIED_TARGET_EFFECTS_V1"
 NORMALIZATION_PROFILES = (
