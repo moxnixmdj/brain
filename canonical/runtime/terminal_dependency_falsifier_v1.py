@@ -61,7 +61,9 @@ def _declared_families(node: Mapping[str, Any]) -> tuple[list[str] | None, str |
     if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
         return None, "ATTACK_FAMILIES_INVALID"
     rows = [str(x).strip() for x in value]
-    if not rows or any(not x for x in rows) or len(rows) != len(set(rows)):
+    # Empty is an explicit "applicability unknown" state. It is projected as
+    # an unresolved obligation below, never as a pass.
+    if any(not x for x in rows) or len(rows) != len(set(rows)):
         return None, "ATTACK_FAMILIES_INVALID"
     unsupported = [x for x in rows if x not in FAMILIES]
     if unsupported:
