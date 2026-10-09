@@ -6,6 +6,7 @@ import unittest
 
 from canonical.runtime import cross_document_effect_hypothesis_worldset_v1 as w
 from canonical.runtime import cross_document_effect_source_coverage_gate_v1 as g
+from canonical.runtime import cross_document_effect_source_coverage_gate_verify_v1 as gv
 
 
 def _canon(x):
@@ -128,6 +129,7 @@ class CrossDocumentEffectSourceCoverageGateV1Tests(unittest.TestCase):
         self.assertEqual(out["effective_value"],"8")
         self.assertTrue(out["source_byte_coverage_complete"])
         self.assertTrue(out["finite_effect_hypothesis_completeness_proved"])
+        self.assertTrue(gv.verify(_capsule(problem),out)["verified"])
 
     def test_unknown_source_region_blocks_even_when_finite_worldset_agrees(self):
         problem=_problem(small=True)
@@ -137,6 +139,7 @@ class CrossDocumentEffectSourceCoverageGateV1Tests(unittest.TestCase):
         self.assertEqual(out["open_unknown_region_count"],1)
         self.assertTrue(out["source_byte_coverage_complete"])
         self.assertFalse(out["finite_effect_hypothesis_completeness_proved"])
+        self.assertTrue(gv.verify(_capsule(problem,open_tail=True),out)["verified"])
 
     def test_closed_source_but_outcome_changing_effect_ambiguity_remains_open(self):
         problem=_problem(small=False,ambiguous_b=True)
@@ -148,6 +151,7 @@ class CrossDocumentEffectSourceCoverageGateV1Tests(unittest.TestCase):
             out["worldset_result"]["minimum_discriminator_slots"],
             ["B.effect"],
         )
+        self.assertTrue(gv.verify(_capsule(problem),out)["verified"])
 
     def test_unbound_worldset_slot_fails_closed(self):
         problem=_problem()
