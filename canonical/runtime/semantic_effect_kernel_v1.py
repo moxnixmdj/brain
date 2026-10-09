@@ -280,8 +280,7 @@ def _run_proof(
 
 def _certificate_id(effect: Mapping[str, Any], proof_kind: str, problem_sha: str, proof_digest: str) -> str:
     return "SEM-CERT-" + _sha({
-        "effect_id": effect["effect_id"],
-        "context_version": effect["context_version"],
+        "effect_sha256": _sha(effect),
         "proof_kind": proof_kind,
         "proof_problem_sha256": problem_sha,
         "proof_digest": proof_digest,
@@ -443,21 +442,31 @@ def compose_value(
     context = next(iter(contexts))
     active: dict[str, dict[str, Any]] = {}
     discharged_by_cert: dict[str, dict[str, Any]] = {}
+    seen_effects: dict[str, dict[str, Any]] = {}
+
+    def register_effect(effect: Mapping[str, Any]) -> None:
+        eid = effect["effect_id"]
+        prior = seen_effects.get(eid)
+        if prior is not None and prior != effect:
+            raise SemanticEffectError("EFFECT_ID_CONTENT_CONFLICT:" + eid)
+        seen_effects[eid] = dict(effect)
+
     for value in rows:
         for effect in value["active_effects"]:
-            prior = active.get(effect["effect_id"])
-            if prior is not None and prior != effect:
-                raise SemanticEffectError("EFFECT_ID_CONTENT_CONFLICT:" + effect["effect_id"])
+            register_effect(effect)
             active[effect["effect_id"]] = effect
         for record in value["discharged_effects"]:
+            effect = record["effect"]
+            register_effect(effect)
             cid = record["certificate"]["certificate_id"]
+            prior_record = discharged_by_cert.get(cid)
+            if prior_record is not None and prior_record != record:
+                raise SemanticEffectError("CERTIFICATE_ID_CONTENT_CONFLICT:" + cid)
             discharged_by_cert[cid] = record
     for effect in _effect_map(_seq(introduced_effects, "INTRODUCED_EFFECTS")).values():
         if effect["context_version"] != context:
             raise SemanticEffectError("INTRODUCED_EFFECT_CONTEXT_MISMATCH:" + effect["effect_id"])
-        prior = active.get(effect["effect_id"])
-        if prior is not None and prior != effect:
-            raise SemanticEffectError("EFFECT_ID_CONTENT_CONFLICT:" + effect["effect_id"])
+        register_effect(effect)
         active[effect["effect_id"]] = effect
     if active:
         discharged_by_cert = {
