@@ -116,6 +116,154 @@ class OptionPreservingCapabilityOptimizerV1Tests(unittest.TestCase):
         self.assertTrue(out["physical_deletion_authorized"])
         self.assertFalse(out["mutation_performed"])
 
+
+    def test_dominated_default_is_replaced_but_preserved_for_replay(self):
+        slow = cap("slow", latency=10, compute=10, memory=10)
+        fast = cap("fast", latency=1, compute=1, memory=1)
+        out = o.select_effective_for_scope(
+            [slow, fast],
+            default_capability_id="slow",
+        )
+        self.assertTrue(out["pass"])
+        self.assertEqual(out["global_preferred_default_capability_id"], "fast")
+        self.assertEqual(out["effective_capability_id"], "fast")
+        self.assertEqual(
+            out["default_transition"],
+            "OBJECTIVELY_DOMINATED_INCUMBENT_REPLACED",
+        )
+        retired = {row["capability_id"]: row for row in out["retired"]}
+        self.assertIn("slow", retired)
+        self.assertTrue(retired["slow"]["knowledge_preservation_required"])
+        self.assertFalse(retired["slow"]["physical_deletion_authorized"])
+
+    def test_explicit_scoped_override_can_replay_retired_without_global_revert(self):
+        slow = cap("slow", latency=10, compute=10, memory=10)
+        fast = cap("fast", latency=1, compute=1, memory=1)
+        out = o.select_effective_for_scope(
+            [slow, fast],
+            default_capability_id="slow",
+            override={
+                "requested_capability_id": "slow",
+                "scope_id": "task:123",
+                "explicit_user_request": True,
+                "restore_after_scope": True,
+            },
+        )
+        self.assertTrue(out["pass"])
+        self.assertTrue(out["override_active"])
+        self.assertEqual(out["effective_capability_id"], "slow")
+        self.assertTrue(out["requested_capability_was_preserved_retired"])
+        self.assertEqual(out["global_preferred_default_capability_id"], "fast")
+        self.assertFalse(out["global_frontier_mutated_by_override"])
+        self.assertFalse(out["override_persists_after_scope"])
+        self.assertFalse(out["override_can_self_promote"])
+
+    def test_next_scope_without_override_returns_to_improved_default(self):
+        slow = cap("slow", latency=10, compute=10, memory=10)
+        fast = cap("fast", latency=1, compute=1, memory=1)
+        first = o.select_effective_for_scope(
+            [slow, fast],
+            default_capability_id="slow",
+            override={
+                "requested_capability_id": "slow",
+                "scope_id": "task:123",
+                "explicit_user_request": True,
+                "restore_after_scope": True,
+            },
+        )
+        second = o.select_effective_for_scope(
+            [slow, fast],
+            default_capability_id=first["global_preferred_default_capability_id"],
+        )
+        self.assertEqual(first["effective_capability_id"], "slow")
+        self.assertEqual(second["effective_capability_id"], "fast")
+        self.assertFalse(second["override_active"])
+
+    def test_implicit_or_persistent_override_fails_closed(self):
+        slow = cap("slow", latency=10, compute=10, memory=10)
+        fast = cap("fast", latency=1, compute=1, memory=1)
+        with self.assertRaises(o.OptionPreservationError):
+            o.select_effective_for_scope(
+                [slow, fast],
+                default_capability_id="slow",
+                override={
+                    "requested_capability_id": "slow",
+                    "scope_id": "task:123",
+                    "explicit_user_request": False,
+                    "restore_after_scope": True,
+                },
+            )
+        with self.assertRaises(o.OptionPreservationError):
+            o.select_effective_for_scope(
+                [slow, fast],
+                default_capability_id="slow",
+                override={
+                    "requested_capability_id": "slow",
+                    "scope_id": "task:123",
+                    "explicit_user_request": True,
+                    "restore_after_scope": False,
+                },
+            )
+
+    def test_scoped_override_cannot_cross_semantic_contract(self):
+        a = cap("a", semantic="sha256:a")
+        b = cap("b", semantic="sha256:b")
+        with self.assertRaises(o.OptionPreservationError):
+            o.select_effective_for_scope(
+                [a, b],
+                default_capability_id="a",
+                override={
+                    "requested_capability_id": "b",
+                    "scope_id": "task:cross-contract",
+                    "explicit_user_request": True,
+                    "restore_after_scope": True,
+                },
+            )
+
+    def test_multiple_nondominated_replacements_do_not_trigger_arbitrary_default(self):
+        old = cap(
+            "old",
+            capability=1,
+            generalization=1,
+            reliability=1,
+            latency=10,
+            compute=10,
+            memory=10,
+        )
+        better_capability = cap(
+            "better-capability",
+            capability=2,
+            generalization=1,
+            reliability=1,
+            latency=5,
+            compute=10,
+            memory=10,
+        )
+        better_generalization = cap(
+            "better-generalization",
+            capability=1,
+            generalization=2,
+            reliability=1,
+            latency=10,
+            compute=5,
+            memory=10,
+        )
+        out = o.select_effective_for_scope(
+            [old, better_capability, better_generalization],
+            default_capability_id="old",
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "OPEN__TASK_PREFERENCE_REQUIRED_ACROSS_NONDOMINATED_FRONTIER",
+        )
+        self.assertIsNone(out["global_preferred_default_capability_id"])
+        self.assertEqual(
+            out["global_active_capability_ids"],
+            ["better-capability", "better-generalization"],
+        )
+        self.assertIsNone(out["effective_capability_id"])
+
     def test_new_cost_model_can_reactivate_old_implementation(self):
         a = cap(
             "a",
