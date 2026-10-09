@@ -10,7 +10,7 @@ def receipt(relation, source_kind="CHECKED_PROOF_DAG"):
         "source_kind": source_kind,
         "verifier_id": "verifier:test",
         "evidence_sha256": "e" * 64,
-        "scope_sha256": "s" * 64,
+        "scope_sha256": "1" * 64,
     }
 
 
@@ -87,8 +87,8 @@ class Tests(unittest.TestCase):
             "expression_b": "liquidity cushion",
             "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
             "evidence": {
-                "entailment_a_to_b": receipt(),
-                "entailment_b_to_a": receipt(),
+                "entailment_a_to_b": receipt("A_ENTAILS_B"),
+                "entailment_b_to_a": receipt("B_ENTAILS_A"),
                 "counterexample_a_substituted_for_b": receipt("COUNTEREXAMPLE_A_FOR_B", "CHECKED_COUNTEREXAMPLE"),
             },
         })
