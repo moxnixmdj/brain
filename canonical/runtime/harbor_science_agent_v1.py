@@ -419,18 +419,11 @@ def _extract_contract(raw: dict[str, Any], prior_requirements: list[str] | None,
         if len(requirements) > MAX_REQUIREMENTS:
             raise RuntimeError("SCIENCE_REQUIREMENTS_WITH_MANDATORY_OVERFLOW")
     else:
+        # Brain owns the requirement set after the first successful freeze.
+        # Later substrate material_requirements are non-authoritative metadata:
+        # they cannot add, remove, reorder, or fatal-abort Brain requirements.
+        # Candidate covers below remain validated strictly against this frozen set.
         requirements = list(prior_requirements)
-        if "material_requirements" in raw:
-            repeated = _nonempty_strings(
-                raw.get("material_requirements"),
-                maximum=MAX_REQUIREMENTS,
-                field="MATERIAL_REQUIREMENTS",
-            )
-            for requirement_id in mandatory:
-                if requirement_id not in repeated:
-                    repeated.append(requirement_id)
-            if repeated != requirements:
-                raise RuntimeError("SCIENCE_REQUIREMENTS_MUTATED_AFTER_FREEZE")
     summary = raw.get("finish_summary")
     if summary is not None:
         if not isinstance(summary, str) or not summary.strip():
