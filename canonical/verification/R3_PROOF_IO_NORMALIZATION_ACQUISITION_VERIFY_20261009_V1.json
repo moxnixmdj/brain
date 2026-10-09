@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_R3_PROOF_IO_NORMALIZATION_ACQUISITION_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__PROOF_BACKED_INITIAL_AND_TARGET_EFFECT_NORMALIZATION_ACQUIRED_WITH_IMMUTABLE_VERIFIER_AUTHORITY__ZERO_TERMINAL_CREDIT",
+  "tested_main_head": "2647fd8b44f520dad5baecc9f182b40b696c50a3",
+  "tested_branch": "r3-proof-io-normalization-20261009",
+  "tested_branch_head": "b3bd209334ba37d145a7f98ce7397122d674fd0b",
+  "carrier": {
+    "name": "brain-r3-root1-gap-verify-20261008",
+    "id": "sprite-91472ada-4fea-4536-9558-7a7e3da49928"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "tests_run": 11,
+    "failures": 0,
+    "errors": 0,
+    "loaded_canonical_files_audited": 110,
+    "git_blob_mismatches": 0,
+    "missing_expected_blobs": 0
+  },
+  "proved": [
+    "BOUND_SUCCESS_OUTPUT_RETAINS_VERIFIED_INITIAL_FACTS",
+    "SUCCESS_PROOF_CAPSULE_RETAINS_VERIFIED_INITIAL_FACTS",
+    "OLD_TARGET_ONLY_NORMALIZATION_REJECTS_REPLAY_WITH_UNREACHABLE_PRECONDITIONS",
+    "NEW_PROOF_IO_PROFILE_RECOVERS_EXACT_INITIAL_FACTS_AND_TARGET_EFFECTS",
+    "CONFLICTING_REPLAY_INITIAL_FACTS_FAIL_CLOSED",
+    "STRUCTURAL_RULE_ACQUISITION_CHANGES_ADAPTER_FRONTIER_ONLY",
+    "VERIFICATION_AUTHORITY_REMAINS_UNCHANGED",
+    "ALL_THREE_EXISTING_REAL_COMPOUNDING_FAMILIES_REMAIN_PASSING"
+  ],
+  "changed_paths": [
+    "canonical/runtime/live_integrated_brain_v1.py",
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+    "canonical/runtime/r3_bound_success_adapter_v1.py",
+    "canonical/runtime/r3_structural_bound_success_adapter_v1.py",
+    "canonical/tests/test_r3_structural_bound_acquisition_v1.py",
+    "canonical/tests/test_r3_third_family_decision_compounding_cycle_v1.py"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_SUCCESS_ADAPTER_PATCH_AUTHORSHIP_IS_CLOSED",
+    "NO_CLAIM_CROSS_SCOPE_GENERALIZATION",
+    "NO_CLAIM_OPEN_WORLD_COMPOUNDING_SCALE",
+    "NO_OPUS_CHECKPOINT_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
