@@ -890,7 +890,7 @@
         "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V45.json",
         "git_blob_sha": "61864ecb3e9be0643bbcd21ed31d35bee7cd2458"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V45__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__SOURCE_BACKED_CROSS_DOCUMENT_RESIDUAL_TOP_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V46__THIRTY_THREE_DIRECT_ROUTES__THIRTY_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__QUERY_RELATIVE_BYTE_COVERAGE_AND_CERTIFIED_RAW_CROSS_DOCUMENT_EFFECT_SENTENCES_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     },
@@ -1455,9 +1455,9 @@
     "direct_main_write_load_bearing_admission_enforced": false,
     "primary_pr_admission_trusted_base_validation_defined": true,
     "primary_pr_admission_required_status_check_enforced": false,
-    "r2_direct_adequacy_route_count": 31,
+    "r2_direct_adequacy_route_count": 33,
     "r2_direct_adequacy_exact_cell_count": 3,
-    "r2_direct_adequacy_bounded_family_count": 28,
+    "r2_direct_adequacy_bounded_family_count": 30,
     "r2_verified_finance_positive_subregion_count": 10,
     "r2_primary_internal_unsolved_count": 1,
     "r2_primary_internal_unsolved_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
@@ -1493,7 +1493,11 @@
     "r2_source_backed_cross_document_residual_top_bound": true,
     "r2_cross_document_residual_top_proof_obligations_exposed_to_resolver": true,
     "r2_cross_document_residual_top_hints_have_semantic_truth_authority": false,
-    "r2_cross_document_residual_top_hints_have_terminal_authority": false
+    "r2_cross_document_residual_top_hints_have_terminal_authority": false,
+    "r2_query_relative_byte_cross_document_source_top_bound": true,
+    "r2_certified_raw_cross_document_effect_sentences_bound": true,
+    "r2_raw_cross_document_bundle_direct_compilation_bound": true,
+    "r2_arbitrary_raw_language_effect_semantics_globally_closed": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2184,7 +2188,7 @@
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_POINTER_AND_V45_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__TEN_VERIFIED_FINANCE_SUBREGIONS__ALREADY_VERIFIED_BOUNDED_CONCEPT_REGISTRY_WAKE_IS_DISCHARGED_AND_MUST_NOT_BE_REACQUIRED__AUTHENTICATED_SCOPED_LOCAL_ENTAILMENT_DAG_IS_A_SOUND_NONCOMPLETE_UNIVERSE_ROUTE__OEWN_DECISION_SENSE_AND_GENERAL_CROSS_DOCUMENT_EFFECT_WORLDS_REMAIN_BOUND__ONE_GENUINE_FINANCE_SEMANTIC_RESIDUAL_REMAINS_INTERNAL_UNSOLVED__GDPVAL_DORMANT",
+    "rule": "CURRENT_R2_V46_POINTER_AND_V45_CONTENT_ADDRESSED_SCHEDULER_CUT_HAVE_PRECEDENCE__THIRTY_THREE_DIRECT_ROUTES__THIRTY_BOUNDED_FAMILIES__TEN_VERIFIED_FINANCE_SUBREGIONS__CERTIFIED_RAW_CROSS_DOCUMENT_DEFINE_REPLACE_EXCEPTION_OVERRIDE_SENTENCES_BOUND__UNRECOGNIZED_NONWHITESPACE_CROSS_DOCUMENT_BYTES_REMAIN_TOP__ALREADY_VERIFIED_BOUNDED_CONCEPT_REGISTRY_WAKE_IS_DISCHARGED_AND_MUST_NOT_BE_REACQUIRED__AUTHENTICATED_SCOPED_LOCAL_ENTAILMENT_DAG_IS_A_SOUND_NONCOMPLETE_UNIVERSE_ROUTE__OEWN_DECISION_SENSE_AND_GENERAL_CROSS_DOCUMENT_EFFECT_WORLDS_REMAIN_BOUND__ONE_GENUINE_FINANCE_SEMANTIC_RESIDUAL_REMAINS_INTERNAL_UNSOLVED__GDPVAL_DORMANT",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
@@ -2659,6 +2663,30 @@
     "active_wake_condition_count": 11,
     "primary_internal_unsolved_count": 1,
     "information_theoretic_externality_proved": false,
+    "terminal_remains_false": true,
+    "terminal_credit_delta": 0
+  },
+  "r2_v46_certified_raw_cross_document_reconciliation": {
+    "status": "RECONCILED__CURRENT_R2_V46_AND_TERMINAL_PRECEDENCE_BIND_CERTIFIED_RAW_CROSS_DOCUMENT_EFFECT_SENTENCES__V45_SCHEDULER_CUT_UNCHANGED__TERMINAL_STILL_FALSE",
+    "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_candidate_git_blob_sha": "de73f711a894643956c29440cc66c4e24253bcf1",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V45.json",
+    "scheduler_cut_git_blob_sha": "61864ecb3e9be0643bbcd21ed31d35bee7cd2458",
+    "direct_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V26.json",
+    "direct_activation_git_blob_sha": "623be9172bfda91e442e5f16a4e2cbad53c36af4",
+    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v13.py",
+    "direct_runtime_git_blob_sha": "f4b6339815a43da58f9324a1407ccb966fb0353b",
+    "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "fixed_point_controller_git_blob_sha": "d337643b9714a8f4646752fcca6f92768b582925",
+    "v12_verification_path": "canonical/verification/R2_CROSS_DOCUMENT_SOURCE_RESIDUAL_V12_VERIFY_20261009_V1.json",
+    "v12_verification_git_blob_sha": "77261e0a7becc2156ff7f9d214f6441b602826c4",
+    "v13_verification_path": "canonical/verification/R2_CERTIFIED_RAW_CROSS_DOCUMENT_EFFECT_SENTENCES_V13_VERIFY_20261009_V1.json",
+    "v13_verification_git_blob_sha": "91d0de3c743e33e8481c650cefd52e4e5a9984cd",
+    "route_count": 33,
+    "exact_cell_count": 3,
+    "bounded_family_count": 30,
+    "certified_raw_effect_sentence_grammar_bound": true,
+    "arbitrary_raw_language_effect_semantics_globally_closed": false,
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
   }
