@@ -135,6 +135,7 @@ def resolve_for_capability(
       "policy_sha256":policy_sha,
       "execution_epoch_sha256":epoch.epoch_sha256,
       "material_closure_root":epoch.material_closure_root,
+      "registry_row":dict(row),
       "certificate":cert,
       "policy":policy,
     }
