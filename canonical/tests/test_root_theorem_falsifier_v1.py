@@ -114,10 +114,11 @@ def test_current_canonical_registry_is_authoritatively_open():
     assert len(out["registry"]["open_root_ids"]) == 3
 
 
-def test_four_roots_without_exact_binding_refine():
+def test_four_roots_without_exact_binding_are_not_closed():
     out = evaluate_root_closure({"R1": True, "R2": True, "R3": True, "R4": True})
-    assert out["status"] == "REFINE"
-    assert out["roots"]["R4"] is None
+    assert out["status"] == "ROOT_NOT_CLOSED"
+    assert out["roots"]["R4"] is False
+    assert out["failed_roots"] == ["R4"]
 
 
 def test_root_unknown_plus_open_registry_is_not_closed():
