@@ -112,6 +112,8 @@ def solve(problem:Mapping[str,Any],*,repo_root:str|Path)->dict[str,Any]:
         status=str(out.get("status") or "")
         if out.get("pass") is True and out.get("common_policy_certified") is True:
             return _base("PASS__COMMON_VERIFIED_POLICY_COVERS_ALL_SEMANTIC_CANDIDATES",True,selected_policy_id=out.get("selected_policy_id"),common_policy_ids=list(out.get("certified_common_policies") or []),candidate_count=len(candidates),candidate_universe_authenticated=True,candidate_universe_authority=auth,policy_adequacy_authority=True,semantic_identity_required=False,terminal_signature_required=False,p3_result=out)
+        if status=="FAIL_CLOSED":
+            return _base("FAIL_CLOSED__SEMANTIC_POLICY_COVER_AUTHORITY_OR_COVER_INVALID",False,candidate_count=len(candidates),candidate_universe_authenticated=True,candidate_universe_authority=auth,semantic_identity_required=False,terminal_signature_required=False,reason=out.get("reason"),p3_result=out)
         if status=="UNRESOLVED__MINIMUM_ONE_STEP_POLICY_CHANGING_DISCRIMINATOR_SELECTED":
             selected=out.get("selected_discriminator") or {}
             return _base("OPEN__MINIMUM_POLICY_CHANGING_SEMANTIC_DISCRIMINATOR_SELECTED",False,next_observation_id=selected.get("discriminator_id"),minimum_information_cost_units=selected.get("cost_units"),candidate_count=len(candidates),candidate_universe_authenticated=True,candidate_universe_authority=auth,policy_adequacy_authority=False,semantic_identity_required=False,terminal_signature_required=False,truthful_observation_required=True,p3_result=out)
