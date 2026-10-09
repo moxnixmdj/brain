@@ -42,7 +42,7 @@ class TestR2V56TerminalOneShotCoherence(unittest.TestCase):
         self.assertTrue(one["authority"]["dynamic_current_projection"]["authoritative_for_moving_r2_and_terminal"])
         self.assertFalse(one["authority"]["static_projection_snapshots_authoritative"])
         self.assertFalse(one["current_projection_refresh_20261009"]["snapshot_authoritative"])
-        self.assertFalse(one["current_main_v56_projection_reconciliation"]["terminal_remains_false"])
+        self.assertTrue(one["current_main_v56_projection_reconciliation"]["terminal_remains_false"])
         self.assertEqual(one["accounting"]["terminal_credit_delta"],0)
 
 if __name__=="__main__":
