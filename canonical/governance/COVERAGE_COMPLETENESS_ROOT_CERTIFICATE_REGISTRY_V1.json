@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_OPEN_REGISTRY__SINGLE_FROZEN_CLAIM_REQUIRED_BEFORE_ANY_PROVED_SLOT__THREE_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
+  "status": "ACTIVE_FROZEN_CLAIM_BOUND__THREE_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
   "namespace": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOTS_V1",
   "mission_binding": {
     "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
@@ -72,7 +72,17 @@
     "terminal_credit_delta": 0
   },
   "registry_scope": "SINGLE_ACTIVE_FROZEN_CERTIFICATION_CLAIM_AT_A_TIME",
-  "active_claim": null,
+  "active_claim": {
+    "claim_kind": "CHECKPOINT_ACCEPTANCE",
+    "mission_blob_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
+    "scope_sha256": "e7461e484491196b40ebf88b7840fe17fb464be83f7a74d13363cd0427c665c9",
+    "target_predicate_sha256": "24820adb64697831d6ef7b13ea471c6f23a6fc1b995a7f15deb3f65963b8c0ba",
+    "semantics_sha256": "23f751d176aab576fb26b0d7fdf5a12b8763c02230525ee1ae30ebc1006aa856",
+    "epoch": "2026-10-09-CCRT-R3-CLAIM-V1",
+    "authority_id": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_CHECKPOINT_OBJECTIVE",
+    "terminal_credit_delta": 0,
+    "claim_id": "b90441f2ddd0a4075c5cdf3c0989eec164398a5d4a40859318adeb6de199d4af"
+  },
   "claim_binding_policy": {
     "claim_scope_law": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
     "claim_guard": "canonical/runtime/coverage_claim_scope_guard_v1.py",
@@ -92,5 +102,9 @@
     "no_cross_claim_root_certificate_transport": true,
     "no_global_open_ended_mission_claim": true
   },
-  "next": "FREEZE_ONE_VALID_CERTIFICATION_CLAIM__THEN_PROVE_OR_FALSIFY_CC_R3_CC_R1_CC_R2_FOR_THAT_EXACT_CLAIM__NO_GLOBAL_OR_CROSS_CLAIM_PROMOTION"
+  "next": "ATTACK_CC_R3_TERMINAL_CLOSURE_FOR_ACTIVE_CLAIM__PROVE_U_EMPTY_OR_RECORD_CLAIM_BOUND_COUNTEREXAMPLE",
+  "active_claim_descriptor": {
+    "path": "canonical/governance/CC_ACTIVE_FROZEN_CLAIM_20261009_V1.json",
+    "git_blob_sha": "44978d22ee2f1aa8797a7a2314863c13c9efc663"
+  }
 }
