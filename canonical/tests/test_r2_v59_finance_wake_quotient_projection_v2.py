@@ -4,7 +4,7 @@ ROOT=Path(__file__).resolve().parents[2]
 P={"q":"canonical/governance/R2_FINANCE_SEMANTIC_WAKE_INFORMATION_QUOTIENT_20261009_V3.json","s":"canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V56.json","r":"canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json","o":"canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json","t":"canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"}
 E={"q":"62dc4ad2309f392aba22982952cc83484d68092c","s":"63bced83808aa1b0d8277e8aba39dec641ffc185","r":"697e19eaa32dba6c55e6964b78cdf850fec65bac","o":"9013467a7c25ec7a5fb0b7e1b47057c42fcfd8a0","t":"7586707fcf98655b068ab6392e82e7c06eb900b1"}
 def b(p):
- d=p.read_bytes(); h=hashlib.sha1(); h.update(b"blob "+str(len(d)).encode()+b"\\0"+d); return h.hexdigest()
+ d=p.read_bytes(); h=hashlib.sha1(); h.update(b"blob "+str(len(d)).encode()+b"\0"+d); return h.hexdigest()
 def L(k):
  p=ROOT/P[k]; assert b(p)==E[k],(k,b(p),E[k]); return json.loads(p.read_text())
 def test_latest_main_v59_projection():
