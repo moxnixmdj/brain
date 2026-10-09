@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from canonical.runtime.p3_robust_policy_adequacy_cegar_v1 import solve as solve_cegar
-from canonical.runtime.selected_semantic_truth_certificate_v1 import evaluate as evaluate_truth
+from canonical.runtime.semantic_truth_dispatch_v1 import evaluate as evaluate_truth
 from canonical.runtime.p3_source_positive_selection_cell_v1 import evaluate as evaluate_selection
 
 SCHEMA="PROJECT_BRAIN_P3_BOUND_RELEVANCE_CEGAR_LOOP_V1"
