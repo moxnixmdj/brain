@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_REPAIRED_ONE_SLOT_AUTHORITY_CANDIDATE_V2",
+  "date": "2026-10-09",
+  "status": "NONEXECUTABLE_CANDIDATE__V17_LEDGER__REPAIRED_AGENT__V10_CLOSURE_BOUND__RANK14_UNCONSUMED__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/inverse-lithography::trial-0",
+    "ledger_schedule_rank": 14,
+    "frozen_manifest_schedule_order": 13,
+    "digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530"
+  },
+  "source_bindings": {
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V17.json",
+      "git_blob_sha": "c8e9720e3f53c0eb483552c902b7841821f335b0"
+    },
+    "repair_verification": {
+      "path": "canonical/verification/TB_SCIENCE_RANK14_LOSSLESS_OBLIGATION_CAP_REPAIR_VERIFY_20261009_V1.json",
+      "git_blob_sha": "6e8e3938b00e3fe39e38ac4a1b38a21eeb25c96f"
+    },
+    "repaired_runtime_closure": {
+      "carrier_repository": "moxnixmdj/verification-capsule-runner",
+      "carrier_branch": "verify-tbscience-rank14-v10-closure-20261009",
+      "manifest_git_blob_sha": "ae37559320105277e017ff17af7c3dbeae2f9c27",
+      "public_verification_run_id": 37881878913,
+      "public_verification_artifact_id": 11594617475
+    },
+    "context_repair": {
+      "path": "canonical/verification/TB_SCIENCE_CONTEXT16K_SCOPED_TIMEOUT_REPAIR_FINAL_VERIFICATION_20261009_V2.json",
+      "git_blob_sha": "8b8cdc3fc112bd0a253af795fb79c0f641b8b3b4"
+    },
+    "terminal_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    }
+  },
+  "exact_route": {
+    "agent_blob": "16e8ab7918c4f8d052698282dddf674b54a23016",
+    "planner_blob": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "v10_closure_blob": "ae37559320105277e017ff17af7c3dbeae2f9c27",
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "server_context_tokens": 16384,
+    "reserved_max_output_tokens": 4096,
+    "transitive_runtime_file_count": 15
+  },
+  "verified_preconditions": {
+    "consumed_slots": 13,
+    "next_unconsumed_rank": 14,
+    "rank14_task_was_read_in_prior_prestart": true,
+    "rank14_task_started": false,
+    "rank14_trial_consumed": false,
+    "prior_prestart_abort_nonconsuming": true,
+    "false_obligation_ceiling_repaired": true,
+    "repaired_runtime_closure_verified": true,
+    "pass_still_mathematically_reachable": true
+  },
+  "controls": {
+    "exact_slot_count": 1,
+    "attempts_after_task_start": 1,
+    "retries_after_task_start": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "fresh_public_execution_claim_required": true,
+    "fresh_exact_public_epoch_required": true,
+    "exact_runtime_blob_identity_required": true,
+    "current_epoch_recheck_required_immediately_before_task_start": true,
+    "task_read_authority_required_before_fresh_read": true,
+    "exact_planner_token_budget_gate_required_after_read_before_start": true,
+    "token_budget_rule": "INPUT_TOKENS_PLUS_4096_MUST_BE_LE_16384",
+    "precheck_failure_consumes_slot": false,
+    "after_task_start_result_is_irreversible": true,
+    "after_task_start_missing_or_zero_verifier_result_counts_as_final_zero": true
+  },
+  "execution_authority": false,
+  "task_read_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_EXECUTION_AUTHORITY_FROM_THIS_CANDIDATE",
+    "NO_CLAIM_REPAIRED_PROMPT_FITS_16K",
+    "NO_RANK14_TASK_START",
+    "NO_RANK14_RESULT",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
