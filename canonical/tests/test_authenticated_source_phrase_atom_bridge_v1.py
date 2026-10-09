@@ -4,6 +4,11 @@ import hashlib
 import json
 import unittest
 
+from canonical.runtime import semantic_relation_control_v1
+from canonical.runtime.semantic_relation_entailment_dag_v1 import (
+    EVIDENCE_SCHEMA as DAG_EVIDENCE_SCHEMA,
+    evidence_sha256 as dag_evidence_sha256,
+)
 from canonical.runtime.authenticated_source_phrase_atom_bridge_v1 import (
     AUTHORITY_SCHEMA,
     LEXICON_SCHEMA,
@@ -15,6 +20,7 @@ from canonical.runtime.source_aligned_definitional_entailment_v1 import (
     CONCEPT_DEFINITION_AUTHORITY_SCHEMA,
     definition_sha256,
     prove,
+    verify_relation_edge,
 )
 
 
@@ -286,6 +292,71 @@ class Tests(unittest.TestCase):
             relation["strongest_proved_relation"],
             "LEFT_ENTAILS_RIGHT",
         )
+
+    def test_full_phrase_to_relation_controller_chain(self):
+        value = lexicon()
+        bridge = resolve(
+            raw_span=RAW,
+            source_id=SOURCE_ID,
+            scope_id=SCOPE,
+            lexicon=value,
+            authority_receipt={"candidate": True},
+            authority_verifier=authority_verifier_for(value),
+        )
+
+        def atom_verifier(receipt):
+            return verify_source_atom_receipt(
+                receipt,
+                raw_span=RAW,
+                source_id=SOURCE_ID,
+                scope_id=SCOPE,
+                lexicon=value,
+                authority_receipt={"candidate": True},
+                authority_verifier=authority_verifier_for(value),
+            )
+
+        edge = {
+            "relation": "ENTAILS",
+            "source_id": "mention:loss-absorbing-cushion",
+            "target_id": "CCOB",
+            "scope_id": SCOPE,
+            "raw_span": RAW,
+            "raw_source_id": SOURCE_ID,
+            "source_atom_receipts": bridge["source_atom_receipts"],
+            "concept_definition_receipt": {"candidate": True},
+        }
+
+        def edge_verifier(receipt):
+            return verify_relation_edge(
+                receipt,
+                source_atom_verifier=atom_verifier,
+                concept_definition_verifier=concept_definition_verifier,
+            )
+
+        dag = {
+            "schema": DAG_EVIDENCE_SCHEMA,
+            "scope_id": SCOPE,
+            "left_id": edge["source_id"],
+            "right_id": edge["target_id"],
+            "entailment_receipts": [edge],
+            "counterexample_receipts": [],
+        }
+        out = semantic_relation_control_v1.resolve(
+            {
+                "left_id": edge["source_id"],
+                "right_id": edge["target_id"],
+                "left_surface": "loss-absorbing cushion",
+                "right_surface": "capital conservation buffer",
+                "scope_id": SCOPE,
+                "required_relation": "LEFT_ENTAILS_RIGHT",
+                "entailment_dag_evidence": dag,
+                "expected_entailment_dag_sha256": dag_evidence_sha256(dag),
+            },
+            relation_edge_verifier=edge_verifier,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["strongest_proved_relation"], "LEFT_ENTAILS_RIGHT")
+        self.assertFalse(out["terminal_authority"])
 
 
 if __name__ == "__main__":
