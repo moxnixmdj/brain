@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK13_ONE_SLOT_EXECUTION_AUTHORITY_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_ONE_SLOT_AUTHORITY__PUBLIC_EXECUTION_LEASE_NOT_YET_PUBLISHED__TASK_NOT_STARTED",
+  "status": "ACTIVE_ONE_SLOT_AUTHORITY__CURRENT_DRIFT_AND_V22_GUARDS_BOUND__PUBLIC_EXECUTION_LEASE_NOT_YET_PUBLISHED__TASK_NOT_STARTED",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "predicate": "TB_SCIENCE_GE_58_7",
   "slot": {
@@ -11,7 +11,7 @@
   },
   "intent": {
     "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK13_ONE_SHOT_20261009_V1.json",
-    "git_blob_sha": "a61c51ddd22346bc2cc39e09c6b68a5b5149c186"
+    "git_blob_sha": "71da798999dc3b183291b1005405b695de1328df"
   },
   "candidate": {
     "path": "canonical/governance/TB_SCIENCE_RANK13_ONE_SLOT_EXECUTION_AUTHORITY_CANDIDATE_20261009_V1.json",
@@ -45,7 +45,8 @@
     "terminal_manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
     "v8_envelope_blob": "5126d3838d9f4d6dc38ce953a1c57acf7cd86879",
     "v8_two_sprite_verification_blob": "ab4531a5efb4dd0034f499eeeb5bbcd226f7ebb5",
-    "predicate_truth_repair_verification_blob": "3e2ef7d047df58e05122fdf49b83b8ea188852f2"
+    "predicate_truth_repair_verification_blob": "3e2ef7d047df58e05122fdf49b83b8ea188852f2",
+    "current_drift_guard_intent_blob": "71da798999dc3b183291b1005405b695de1328df"
   },
   "resource_envelope": {
     "declared_cpus": 2,
