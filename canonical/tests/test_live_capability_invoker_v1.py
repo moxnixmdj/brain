@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import tempfile
 import unittest
+from types import SimpleNamespace
+from unittest import mock
 from pathlib import Path
 
 from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
@@ -146,6 +148,89 @@ class LiveCapabilityInvokerV1Tests(unittest.TestCase):
         })
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertIn("OWNED_CAPABILITY_ID_KIND_UNKNOWN", out["reason"])
+
+
+    def test_active_d_epoch_never_uses_legacy_bound_executor(self):
+        with mock.patch.object(invoker, "_active_d_epoch_or_none", return_value=object()), \
+             mock.patch.object(invoker, "_invoke_bound_under_d_epoch", return_value={"pass": True, "status": "D"}), \
+             mock.patch.object(invoker, "execute_bound", side_effect=AssertionError("legacy executor must not run")):
+            out = invoker.invoke(
+                "bound:archive.tar_gz.create_from_manifest",
+                {"manifest_path": "m.json", "output_path": "o.tar.gz"},
+                engine_runner=lambda *_: {},
+            )
+        self.assertTrue(out["pass"])
+        self.assertEqual(out["result"]["status"], "D")
+
+    def test_no_d_epoch_preserves_legacy_bound_executor(self):
+        with mock.patch.object(invoker, "_active_d_epoch_or_none", return_value=None), \
+             mock.patch.object(invoker, "execute_bound", return_value={"pass": True, "status": "LEGACY"}) as legacy, \
+             mock.patch.object(invoker, "_invoke_bound_under_d_epoch", side_effect=AssertionError("D path must not run")):
+            out = invoker.invoke(
+                "bound:archive.tar_gz.create_from_manifest",
+                {"manifest_path": "m.json", "output_path": "o.tar.gz"},
+                engine_runner=lambda *_: {},
+            )
+        self.assertTrue(out["pass"])
+        self.assertEqual(out["result"]["status"], "LEGACY")
+        legacy.assert_called_once()
+
+    def test_d_epoch_contract_hash_must_match_registry_entry(self):
+        epoch = SimpleNamespace(
+            capability_contract_sha256="a" * 64,
+            material_bindings=tuple(),
+        )
+        with mock.patch.object(invoker.d_epoch, "require_capability", return_value=epoch), \
+             mock.patch.object(invoker.d_epoch, "require_material", return_value=None), \
+             mock.patch.object(
+                 invoker.d_stdlib_provider,
+                 "inspect",
+                 return_value={
+                     "registry_entry_sha256": "b" * 64,
+                     "entry": {
+                         "source": {"adapter_path": "canonical/runtime/bound_capabilities/archive_tarfile.py"},
+                         "adapter_module": "archive_tarfile",
+                     },
+                 },
+             ):
+            with self.assertRaisesRegex(
+                invoker.LiveCapabilityInvocationError,
+                "D_EPOCH_CAPABILITY_CONTRACT_MISMATCH",
+            ):
+                invoker._invoke_bound_under_d_epoch(
+                    "bound:archive.tar_gz.create_from_manifest",
+                    "archive.tar_gz.create_from_manifest",
+                    {},
+                )
+
+    def test_d_epoch_requires_adapter_blob_in_material_closure(self):
+        contract = "a" * 64
+        epoch = SimpleNamespace(
+            capability_contract_sha256=contract,
+            material_bindings=tuple(),
+        )
+        with mock.patch.object(invoker.d_epoch, "require_capability", return_value=epoch), \
+             mock.patch.object(invoker.d_epoch, "require_material", return_value=None), \
+             mock.patch.object(
+                 invoker.d_stdlib_provider,
+                 "inspect",
+                 return_value={
+                     "registry_entry_sha256": contract,
+                     "entry": {
+                         "source": {"adapter_path": "canonical/runtime/bound_capabilities/archive_tarfile.py"},
+                         "adapter_module": "archive_tarfile",
+                     },
+                 },
+             ):
+            with self.assertRaisesRegex(
+                invoker.LiveCapabilityInvocationError,
+                "D_EPOCH_ADAPTER_NOT_BOUND",
+            ):
+                invoker._invoke_bound_under_d_epoch(
+                    "bound:archive.tar_gz.create_from_manifest",
+                    "archive.tar_gz.create_from_manifest",
+                    {},
+                )
 
 
 if __name__ == "__main__":
