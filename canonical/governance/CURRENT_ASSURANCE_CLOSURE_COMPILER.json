@@ -84,5 +84,17 @@
     "domain_execution_closure_proved": false,
     "live_default_credit": false,
     "terminal_credit_delta": 0
+  },
+  "current_generation_independent_replay": {
+    "verification_path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10",
+    "pinned_main_commit": "2c522681dcd895d30786eefefa4e6c21693d5720",
+    "result": "PYCOMPILE_PASS__18_OF_18_PASS",
+    "runtime_git_blob_sha": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8",
+    "professional_quality_known_defeaters_bound": 80,
+    "full_private_repo_regression": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false,
+    "terminal_credit_delta": 0
   }
 }
