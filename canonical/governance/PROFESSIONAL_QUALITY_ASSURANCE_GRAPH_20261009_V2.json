@@ -1,0 +1,1286 @@
+{
+  "schema": "PROJECT_BRAIN_ASSURANCE_CLOSURE_GRAPH_V1",
+  "root_ids": [
+    "R1_TARGET_SPECIFICATION",
+    "R2_CANDIDATE_SEARCH",
+    "R3_REALIZATION_OBSERVATION",
+    "R4_MEASUREMENT_CONSTRUCT",
+    "R5_EVALUATOR_REFERENCE",
+    "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+    "R7_CAUSAL_PRESCRIPTIVE",
+    "R8_POPULATION_CONTEXT_OPERATOR",
+    "R9_TEMPORAL_DEPLOYMENT",
+    "R10_ANALYSIS_DECISION",
+    "R11_ADAPTIVE_INTEGRITY_SECURITY",
+    "R12_META_COMPOSITION_CLOSURE"
+  ],
+  "nodes": [
+    {
+      "id": "R1_TARGET_SPECIFICATION",
+      "type": "CLAIM",
+      "status": "SUPPORTED",
+      "depends_on": [
+        "O_R1_TARGET_SPECIFICATION"
+      ],
+      "defeated_by": [
+        "C01_GOAL_SUBSTITUTION",
+        "C02_DECISION_RELEVANT_SPEC_AMBIGUITY",
+        "C03_AGENDA_OMISSION",
+        "C72_UNGROUNDED_RISK_TOLERANCE",
+        "C78_CONTEXT_TRUNCATION_OBLIGATION_DROP"
+      ],
+      "contract": "Freeze objective, audience, hard constraints, plausible interpretations, target construct and claim scope; block goal substitution and unresolved decision-relevant ambiguity."
+    },
+    {
+      "id": "O_R1_TARGET_SPECIFICATION",
+      "type": "OBLIGATION",
+      "status": "OPEN",
+      "obligation": "SUPPLY_DOMAIN_SPECIFIC_EVIDENCE_AND_EXECUTION_FOR_R1_TARGET_SPECIFICATION"
+    },
+    {
+      "id": "R2_CANDIDATE_SEARCH",
+      "type": "CLAIM",
+      "status": "SUPPORTED",
+      "depends_on": [
+        "O_R2_CANDIDATE_SEARCH"
+      ],
+      "defeated_by": [
+        "C04_BEST_OF_MEDIOCRE",
+        "C05_SEARCH_LINEAGE_FIXATION",
+        "C06_NOVELTY_PENALTY"
+      ],
+      "contract": "Separate artifact acceptance from search closure; require sufficient candidate diversity, anti-fixation search and novelty-safe escape before claiming no materially better candidate remains."
+    },
+    {
+      "id": "O_R2_CANDIDATE_SEARCH",
+      "type": "OBLIGATION",
+      "status": "OPEN",
+      "obligation": "SUPPLY_DOMAIN_SPECIFIC_EVIDENCE_AND_EXECUTION_FOR_R2_CANDIDATE_SEARCH"
+    },
+    {
+      "id": "R3_REALIZATION_OBSERVATION",
+      "type": "CLAIM",
+      "status": "SUPPORTED",
+      "depends_on": [
+        "O_R3_REALIZATION_OBSERVATION"
+      ],
+      "defeated_by": [
+        "C07_RENDER_CAPTURE_LOSS",
+        "C08_HIDDEN_SURFACE_DEPENDENCE",
+        "C09_MULTISCALE_LOCAL_PASS_GLOBAL_FAIL",
+        "C10_SUBJECT_SWAP_AFTER_CERTIFICATION",
+        "C42_SELECTIVE_OUTCOME_CENSORING",
+        "C57_EVALUATION_AWARE_BEHAVIOR",
+        "C78_CONTEXT_TRUNCATION_OBLIGATION_DROP"
+      ],
+      "contract": "Bind every quality claim to exact artifact/system bytes, delivery environment, experienced realization and sufficient observation channels; block render, hidden-surface, multiscale and TOCTOU substitution failures."
+    },
+    {
+      "id": "O_R3_REALIZATION_OBSERVATION",
+      "type": "OBLIGATION",
+      "status": "OPEN",
+      "obligation": "SUPPLY_DOMAIN_SPECIFIC_EVIDENCE_AND_EXECUTION_FOR_R3_REALIZATION_OBSERVATION"
+    },
+    {
+      "id": "R4_MEASUREMENT_CONSTRUCT",
+      "type": "CLAIM",
+      "status": "SUPPORTED",
+      "depends_on": [
+        "O_R4_MEASUREMENT_CONSTRUCT"
+      ],
+      "defeated_by": [
+        "C11_RUBRIC_UNDERREPRESENTATION",
+        "C12_ASSESSMENT_OVERFIT",
+        "C13_ABSOLUTE_FLOOR_MISSING",
+        "C14_ONTOLOGY_CLONING",
+        "C15_NORMALIZATION_RANGE_EXPLOIT",
+        "C16_INVALID_CHALLENGE_GENERATOR",
+        "C70_STYLE_BIAS_DOMINATES_CONTENT"
+      ],
+      "contract": "Establish construct validity, criterion ontology, absolute professional floor, decision resolution and challenge validity; block rubric, scale, normalization and proxy gaming."
+    },
+    {
+      "id": "O_R4_MEASUREMENT_CONSTRUCT",
+      "type": "OBLIGATION",
+      "status": "OPEN",
+      "obligation": "SUPPLY_DOMAIN_SPECIFIC_EVIDENCE_AND_EXECUTION_FOR_R4_MEASUREMENT_CONSTRUCT"
+    },
+    {
+      "id": "R5_EVALUATOR_REFERENCE",
+      "type": "CLAIM",
+      "status": "SUPPORTED",
+      "depends_on": [
+        "O_R5_EVALUATOR_REFERENCE"
+      ],
+      "defeated_by": [
+        "C06_NOVELTY_PENALTY",
+        "C17_REFERENCE_STANDARD_ERROR",
+        "C18_ANCHOR_PRESTIGE_BIAS",
+        "C19_ANCHOR_MEMORIZATION",
+        "C20_FRONTIER_LOCAL_JUDGE_FAILURE",
+        "C21_JUDGE_ARTIFACT_INTERACTION",
+        "C22_WITHIN_EPISODE_EVALUATOR_DRIFT",
+        "C34_MEASUREMENT_NONINVARIANCE",
+        "C50_BASELINE_LAUNDERED_EXCELLENCE",
+        "C59_META_ROUTER_SELECTION_OVERFIT",
+        "C67_STAKES_SIGNALING_JUDGE_LENIENCY",
+        "C68_SELF_PREFERENCE_JUDGE_BIAS",
+        "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL",
+        "C70_STYLE_BIAS_DOMINATES_CONTENT",
+        "C73_BASE_RATE_PRECISION_LAUNDERING",
+        "C79_FALLBACK_EVALUATOR_SCOPE_WEAKENING"
+      ],
+      "contract": "Qualify evaluators and references locally by criterion, artifact class, difficulty, state and relevant provenance; preserve disagreement and treat reference standards as fallible evidence rather than truth."
+    },
+    {
+      "id": "O_R5_EVALUATOR_REFERENCE",
+      "type": "OBLIGATION",
+      "status": "OPEN",
+      "obligation": "SUPPLY_DOMAIN_SPECIFIC_EVIDENCE_AND_EXECUTION_FOR_R5_EVALUATOR_REFERENCE"
+    },
+    {
+      "id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "type": "CLAIM",
+      "status": "SUPPORTED",
+      "depends_on": [
+        "O_R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "defeated_by": [
+        "C23_PSEUDOREPLICATION",
+        "C24_UNGROUNDED_META_EVALUATOR",
+        "C25_CLAIM_TYPE_LAUNDERING",
+        "C26_UNCERTAINTY_SEMANTICS_LAUNDERING",
+        "C27_HIDDEN_PREMISE_INFERENCE",
+        "C61_HIDDEN_ASSUMPTION_CYCLE",
+        "C68_SELF_PREFERENCE_JUDGE_BIAS",
+        "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL",
+        "C71_JOINT_ASSURANCE_MULTIPLICITY",
+        "C74_EXECUTION_FAILURE_FAIL_OPEN",
+        "C75_STALE_CERT_AFTER_DEPENDENCY_CHANGE",
+        "C76_SELECTIVE_EVIDENCE_PACKET",
+        "C77_PROVENANCE_OR_RECEIPT_FORGERY",
+        "C79_FALLBACK_EVALUATOR_SCOPE_WEAKENING",
+        "C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING"
+      ],
+      "contract": "Admit typed evidence with provenance, grounding, independence/common-cause accounting, freshness and uncertainty semantics; forbid circular meta-evaluation and type laundering."
+    },
+    {
+      "id": "O_R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "type": "OBLIGATION",
+      "status": "OPEN",
+      "obligation": "SUPPLY_DOMAIN_SPECIFIC_EVIDENCE_AND_EXECUTION_FOR_R6_EVIDENCE_GROUNDING_DEPENDENCE"
+    },
+    {
+      "id": "R7_CAUSAL_PRESCRIPTIVE",
+      "type": "CLAIM",
+      "status": "SUPPORTED",
+      "depends_on": [
+        "O_R7_CAUSAL_PRESCRIPTIVE"
+      ],
+      "defeated_by": [
+        "C28_PREDICTIVE_PRESCRIPTIVE_GAP",
+        "C29_COMPOUND_EDIT_ATTRIBUTION",
+        "C30_TREATMENT_VERSION_NONINVARIANCE",
+        "C31_EDIT_SEQUENCE_INTERACTION"
+      ],
+      "contract": "Separate quality prediction from causal explanation and edit prescription; require intervention fidelity, causal attribution, version/dose scope and post-edit regression checks before promoting reusable design rules."
+    },
+    {
+      "id": "O_R7_CAUSAL_PRESCRIPTIVE",
+      "type": "OBLIGATION",
+      "status": "OPEN",
+      "obligation": "SUPPLY_DOMAIN_SPECIFIC_EVIDENCE_AND_EXECUTION_FOR_R7_CAUSAL_PRESCRIPTIVE"
+    },
+    {
+      "id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "type": "CLAIM",
+      "status": "SUPPORTED",
+      "depends_on": [
+        "O_R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "defeated_by": [
+        "C21_JUDGE_ARTIFACT_INTERACTION",
+        "C22_WITHIN_EPISODE_EVALUATOR_DRIFT",
+        "C32_PRESENTER_CONFOUNDING",
+        "C33_CONSTITUENCY_SUPPORT_GAP",
+        "C34_MEASUREMENT_NONINVARIANCE",
+        "C35_PANEL_SOCIAL_INFLUENCE",
+        "C36_RATER_ASSIGNMENT_CONFOUNDING",
+        "C37_STRATEGIC_PREFERENCE_REPORT",
+        "C38_ELICITATION_PERFORMATIVITY",
+        "C39_MEASUREMENT_REACTIVITY_RANK_REVERSAL",
+        "C42_SELECTIVE_OUTCOME_CENSORING",
+        "C73_BASE_RATE_PRECISION_LAUNDERING"
+      ],
+      "contract": "Bind claims to the correct constituency, subgroup, evaluator assignment, presenter/operator, context and protocol; account for representation, invariance, social influence, strategic reporting and reactivity."
+    },
+    {
+      "id": "O_R8_POPULATION_CONTEXT_OPERATOR",
+      "type": "OBLIGATION",
+      "status": "OPEN",
+      "obligation": "SUPPLY_DOMAIN_SPECIFIC_EVIDENCE_AND_EXECUTION_FOR_R8_POPULATION_CONTEXT_OPERATOR"
+    },
+    {
+      "id": "R9_TEMPORAL_DEPLOYMENT",
+      "type": "CLAIM",
+      "status": "SUPPORTED",
+      "depends_on": [
+        "O_R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "defeated_by": [
+        "C22_WITHIN_EPISODE_EVALUATOR_DRIFT",
+        "C31_EDIT_SEQUENCE_INTERACTION",
+        "C40_CARRYOVER_LEARNING",
+        "C41_HORIZON_REVERSAL",
+        "C42_SELECTIVE_OUTCOME_CENSORING",
+        "C43_RARE_UNSEEN_FAILURE",
+        "C44_TAIL_RISK_AVERAGE_MASKING",
+        "C45_DEPLOYMENT_SUPPORT_SHIFT",
+        "C46_PERFORMATIVE_SELF_CONFIRMATION",
+        "C47_BAD_EQUILIBRIUM_PATH",
+        "C57_EVALUATION_AWARE_BEHAVIOR",
+        "C73_BASE_RATE_PRECISION_LAUNDERING",
+        "C75_STALE_CERT_AFTER_DEPENDENCY_CHANGE"
+      ],
+      "contract": "Bind quality to target horizons and deployment dynamics; account for drift, carryover, missing outcomes, rare failures, distribution tails, transport, performativity and path-dependent equilibria."
+    },
+    {
+      "id": "O_R9_TEMPORAL_DEPLOYMENT",
+      "type": "OBLIGATION",
+      "status": "OPEN",
+      "obligation": "SUPPLY_DOMAIN_SPECIFIC_EVIDENCE_AND_EXECUTION_FOR_R9_TEMPORAL_DEPLOYMENT"
+    },
+    {
+      "id": "R10_ANALYSIS_DECISION",
+      "type": "CLAIM",
+      "status": "SUPPORTED",
+      "depends_on": [
+        "O_R10_ANALYSIS_DECISION"
+      ],
+      "defeated_by": [
+        "C03_AGENDA_OMISSION",
+        "C14_ONTOLOGY_CLONING",
+        "C15_NORMALIZATION_RANGE_EXPLOIT",
+        "C26_UNCERTAINTY_SEMANTICS_LAUNDERING",
+        "C37_STRATEGIC_PREFERENCE_REPORT",
+        "C38_ELICITATION_PERFORMATIVITY",
+        "C44_TAIL_RISK_AVERAGE_MASKING",
+        "C48_ANALYSIS_CHERRY_PICK",
+        "C49_FORBIDDEN_COMPENSATION",
+        "C50_BASELINE_LAUNDERED_EXCELLENCE",
+        "C51_MODEL_MULTIPLICITY_DECISION_SENSITIVE",
+        "C52_RISK_POLICY_POST_HOC",
+        "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL",
+        "C71_JOINT_ASSURANCE_MULTIPLICITY",
+        "C72_UNGROUNDED_RISK_TOLERANCE",
+        "C76_SELECTIVE_EVIDENCE_PACKET",
+        "C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING"
+      ],
+      "contract": "Freeze or robustify admissible analysis, aggregation, compensation, risk and normative policy; preserve Pareto/incomparability structure and model multiplicity rather than selecting convenient scalarizations after outcomes are known."
+    },
+    {
+      "id": "O_R10_ANALYSIS_DECISION",
+      "type": "OBLIGATION",
+      "status": "OPEN",
+      "obligation": "SUPPLY_DOMAIN_SPECIFIC_EVIDENCE_AND_EXECUTION_FOR_R10_ANALYSIS_DECISION"
+    },
+    {
+      "id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "type": "CLAIM",
+      "status": "SUPPORTED",
+      "depends_on": [
+        "O_R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "defeated_by": [
+        "C10_SUBJECT_SWAP_AFTER_CERTIFICATION",
+        "C19_ANCHOR_MEMORIZATION",
+        "C53_PROMPT_INJECTION_JUDGE_CONTROL",
+        "C54_OPTIMIZER_GOODHART_SELECTION",
+        "C55_HOLDOUT_REUSE",
+        "C56_ACQUIRED_EVALUATION_CONTAMINATION",
+        "C57_EVALUATION_AWARE_BEHAVIOR",
+        "C58_HARNESS_TAMPERING_OR_REWARD_GAMING",
+        "C59_META_ROUTER_SELECTION_OVERFIT",
+        "C67_STAKES_SIGNALING_JUDGE_LENIENCY",
+        "C74_EXECUTION_FAILURE_FAIL_OPEN",
+        "C76_SELECTIVE_EVIDENCE_PACKET",
+        "C77_PROVENANCE_OR_RECEIPT_FORGERY",
+        "C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING"
+      ],
+      "contract": "Protect development, selection and certification boundaries against adaptive optimization, leakage, acquired contamination, evaluation awareness, prompt/control-plane attacks, holdout reuse and evaluator-policy selection bias."
+    },
+    {
+      "id": "O_R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "type": "OBLIGATION",
+      "status": "OPEN",
+      "obligation": "SUPPLY_DOMAIN_SPECIFIC_EVIDENCE_AND_EXECUTION_FOR_R11_ADAPTIVE_INTEGRITY_SECURITY"
+    },
+    {
+      "id": "R12_META_COMPOSITION_CLOSURE",
+      "type": "CLAIM",
+      "status": "SUPPORTED",
+      "depends_on": [
+        "O_R12_META_COMPOSITION_CLOSURE"
+      ],
+      "defeated_by": [
+        "C16_INVALID_CHALLENGE_GENERATOR",
+        "C27_HIDDEN_PREMISE_INFERENCE",
+        "C60_ROOT_CONJUNCTION_FAILURE",
+        "C61_HIDDEN_ASSUMPTION_CYCLE",
+        "C62_UNSOUND_ABSTRACTION",
+        "C63_PROOF_SEARCH_FALSE_NEGATIVE",
+        "C64_META_CONTROLLER_FALSE_IRRELEVANCE",
+        "C65_UNMAPPED_DEFEATER",
+        "C66_ALWAYS_ABSTAIN_VACUITY",
+        "C71_JOINT_ASSURANCE_MULTIPLICITY",
+        "C74_EXECUTION_FAILURE_FAIL_OPEN",
+        "C75_STALE_CERT_AFTER_DEPENDENCY_CHANGE",
+        "C78_CONTEXT_TRUNCATION_OBLIGATION_DROP",
+        "C79_FALLBACK_EVALUATOR_SCOPE_WEAKENING"
+      ],
+      "contract": "Require assumption-guarantee composition, same-subject root conjunction, abstraction soundness, independent defeater search, coverage accounting, proof-search honesty, meta-controller falsification and nonvacuity."
+    },
+    {
+      "id": "O_R12_META_COMPOSITION_CLOSURE",
+      "type": "OBLIGATION",
+      "status": "OPEN",
+      "obligation": "SUPPLY_DOMAIN_SPECIFIC_EVIDENCE_AND_EXECUTION_FOR_R12_META_COMPOSITION_CLOSURE"
+    },
+    {
+      "id": "C01_GOAL_SUBSTITUTION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R1_TARGET_SPECIFICATION"
+      ],
+      "attack": "Artifact satisfies an easier proxy while violating the user's actual objective."
+    },
+    {
+      "id": "C02_DECISION_RELEVANT_SPEC_AMBIGUITY",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R1_TARGET_SPECIFICATION"
+      ],
+      "attack": "Winner changes across plausible interpretations that were never resolved."
+    },
+    {
+      "id": "C03_AGENDA_OMISSION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R1_TARGET_SPECIFICATION",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "A material criterion or candidate is absent from the consideration set, changing the decision."
+    },
+    {
+      "id": "C04_BEST_OF_MEDIOCRE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R2_CANDIDATE_SEARCH"
+      ],
+      "attack": "Evaluator is correct but search never generates a genuinely excellent candidate."
+    },
+    {
+      "id": "C05_SEARCH_LINEAGE_FIXATION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R2_CANDIDATE_SEARCH"
+      ],
+      "attack": "Candidates share one lineage/style and miss a distant superior design."
+    },
+    {
+      "id": "C06_NOVELTY_PENALTY",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R2_CANDIDATE_SEARCH",
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "A superior unfamiliar design is rejected because reference-conforming familiarity is mistaken for quality."
+    },
+    {
+      "id": "C07_RENDER_CAPTURE_LOSS",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R3_REALIZATION_OBSERVATION"
+      ],
+      "attack": "Judge sees extracted text or lossy capture that collapses materially different audience experiences."
+    },
+    {
+      "id": "C08_HIDDEN_SURFACE_DEPENDENCE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R3_REALIZATION_OBSERVATION"
+      ],
+      "attack": "Judgment uses notes, metadata, off-canvas objects or other audience-irrelevant channels."
+    },
+    {
+      "id": "C09_MULTISCALE_LOCAL_PASS_GLOBAL_FAIL",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R3_REALIZATION_OBSERVATION"
+      ],
+      "attack": "Every local element looks acceptable while sequence or whole-artifact quality fails."
+    },
+    {
+      "id": "C10_SUBJECT_SWAP_AFTER_CERTIFICATION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R3_REALIZATION_OBSERVATION",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "The delivered artifact differs materially from the frozen artifact that was evaluated."
+    },
+    {
+      "id": "C11_RUBRIC_UNDERREPRESENTATION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT"
+      ],
+      "attack": "Artifact maximizes measured criteria while failing an omitted material quality dimension."
+    },
+    {
+      "id": "C12_ASSESSMENT_OVERFIT",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT"
+      ],
+      "attack": "Audience succeeds on exposed or surface-matched tasks without deployment-relevant understanding."
+    },
+    {
+      "id": "C13_ABSOLUTE_FLOOR_MISSING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT"
+      ],
+      "attack": "Best available candidate is certified excellent despite remaining below the professional standard."
+    },
+    {
+      "id": "C14_ONTOLOGY_CLONING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Splitting one value into many correlated criteria creates artificial decision weight."
+    },
+    {
+      "id": "C15_NORMALIZATION_RANGE_EXPLOIT",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Adding irrelevant alternatives or changing scale range reverses the winner."
+    },
+    {
+      "id": "C16_INVALID_CHALLENGE_GENERATOR",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Synthetic challenge is fresh but unrealistic, nondiagnostic or oracle-unsound and therefore gives false reassurance."
+    },
+    {
+      "id": "C17_REFERENCE_STANDARD_ERROR",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Candidate is penalized for disagreeing with a fallible or plural professional reference label."
+    },
+    {
+      "id": "C18_ANCHOR_PRESTIGE_BIAS",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Identical content receives different quality judgment because of source, brand or benchmark provenance."
+    },
+    {
+      "id": "C19_ANCHOR_MEMORIZATION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Evaluator recognizes exposed benchmark/style anchors and appears competent without generalizing."
+    },
+    {
+      "id": "C20_FRONTIER_LOCAL_JUDGE_FAILURE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Judge has strong aggregate accuracy but fails near the actual finalist boundary."
+    },
+    {
+      "id": "C21_JUDGE_ARTIFACT_INTERACTION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "Judge competence changes materially by style, domain, novelty or quality region."
+    },
+    {
+      "id": "C22_WITHIN_EPISODE_EVALUATOR_DRIFT",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Evaluator severity, discrimination or criterion interpretation changes during the session."
+    },
+    {
+      "id": "C23_PSEUDOREPLICATION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "attack": "Many judges or observations share one causal source and are incorrectly counted as independent evidence."
+    },
+    {
+      "id": "C24_UNGROUNDED_META_EVALUATOR",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "attack": "Evaluator-of-evaluator chain terminates in mutual agreement rather than target grounding."
+    },
+    {
+      "id": "C25_CLAIM_TYPE_LAUNDERING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "attack": "Weak evidence such as correlation or preference is promoted into causal, universal or factual certainty."
+    },
+    {
+      "id": "C26_UNCERTAINTY_SEMANTICS_LAUNDERING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "A confidence level, posterior probability, predictive risk and deployment risk are treated as interchangeable."
+    },
+    {
+      "id": "C27_HIDDEN_PREMISE_INFERENCE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "A derivation relies on an unstated premise or unsupported transport step."
+    },
+    {
+      "id": "C28_PREDICTIVE_PRESCRIPTIVE_GAP",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R7_CAUSAL_PRESCRIPTIVE"
+      ],
+      "attack": "A feature predicts quality but performing the corresponding edit degrades quality."
+    },
+    {
+      "id": "C29_COMPOUND_EDIT_ATTRIBUTION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R7_CAUSAL_PRESCRIPTIVE"
+      ],
+      "attack": "A winning edit changes several qualities but one component is falsely credited as causal."
+    },
+    {
+      "id": "C30_TREATMENT_VERSION_NONINVARIANCE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R7_CAUSAL_PRESCRIPTIVE"
+      ],
+      "attack": "Different implementations of the same named edit have materially different effects."
+    },
+    {
+      "id": "C31_EDIT_SEQUENCE_INTERACTION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R7_CAUSAL_PRESCRIPTIVE",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Individually positive edits interact or become harmful when sequenced."
+    },
+    {
+      "id": "C32_PRESENTER_CONFOUNDING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "Weak artifact appears strong because an exceptional presenter or operator rescues it."
+    },
+    {
+      "id": "C33_CONSTITUENCY_SUPPORT_GAP",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "A target stakeholder stratum is absent; weighting observed groups cannot recover it."
+    },
+    {
+      "id": "C34_MEASUREMENT_NONINVARIANCE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Groups use nominally identical scales or thresholds differently, invalidating pooled comparison."
+    },
+    {
+      "id": "C35_PANEL_SOCIAL_INFLUENCE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "Post-discussion consensus is treated as independent corroboration despite conformity or dominance."
+    },
+    {
+      "id": "C36_RATER_ASSIGNMENT_CONFOUNDING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "Disconnected or selective judge-artifact assignment confounds quality with judge severity or expertise."
+    },
+    {
+      "id": "C37_STRATEGIC_PREFERENCE_REPORT",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Stakeholder reports are strategically distorted because reports influence outcomes."
+    },
+    {
+      "id": "C38_ELICITATION_PERFORMATIVITY",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Preference query framing or deliberation changes the preference being measured enough to change the decision."
+    },
+    {
+      "id": "C39_MEASUREMENT_REACTIVITY_RANK_REVERSAL",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "Evaluation itself changes attention or behavior, producing a winner that loses in ordinary deployment."
+    },
+    {
+      "id": "C40_CARRYOVER_LEARNING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Exposure to an earlier candidate teaches content and artificially improves a later candidate's outcome."
+    },
+    {
+      "id": "C41_HORIZON_REVERSAL",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Candidate wins immediately but loses on target-relevant delayed recall, decision quality or action."
+    },
+    {
+      "id": "C42_SELECTIVE_OUTCOME_CENSORING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R3_REALIZATION_OBSERVATION",
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "Hard or harmed users disappear from outcome measurement, making observed quality look better."
+    },
+    {
+      "id": "C43_RARE_UNSEEN_FAILURE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Zero observed failures is interpreted as zero or acceptably tiny failure probability without sufficient structural/statistical support."
+    },
+    {
+      "id": "C44_TAIL_RISK_AVERAGE_MASKING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Strong mean quality hides catastrophic low-tail or critical-subgroup failures."
+    },
+    {
+      "id": "C45_DEPLOYMENT_SUPPORT_SHIFT",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Challenge distribution lacks support for deployment contexts where the quality relation changes."
+    },
+    {
+      "id": "C46_PERFORMATIVE_SELF_CONFIRMATION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Deployed policy changes the observed population so its own prior judgment appears increasingly correct."
+    },
+    {
+      "id": "C47_BAD_EQUILIBRIUM_PATH",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Same policy has multiple reachable equilibria and evaluation samples only the favorable basin."
+    },
+    {
+      "id": "C48_ANALYSIS_CHERRY_PICK",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "A favorable defensible-looking analysis is selected after outcomes are observed while alternatives reverse the decision."
+    },
+    {
+      "id": "C49_FORBIDDEN_COMPENSATION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Large strength on one dimension offsets a veto-level weakness that the target does not permit trading off."
+    },
+    {
+      "id": "C50_BASELINE_LAUNDERED_EXCELLENCE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R10_ANALYSIS_DECISION",
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Large improvement over a weak baseline is relabeled as absolute excellence."
+    },
+    {
+      "id": "C51_MODEL_MULTIPLICITY_DECISION_SENSITIVE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Multiple evidence-compatible quality models fit similarly but recommend different winners."
+    },
+    {
+      "id": "C52_RISK_POLICY_POST_HOC",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "False-certification tolerance, loss function or decision threshold is changed after seeing results."
+    },
+    {
+      "id": "C53_PROMPT_INJECTION_JUDGE_CONTROL",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Candidate content changes evaluator instructions or tool behavior instead of merely supplying evidence."
+    },
+    {
+      "id": "C54_OPTIMIZER_GOODHART_SELECTION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Large adaptive search selects evaluator-specific false positives that fail fresh evidence."
+    },
+    {
+      "id": "C55_HOLDOUT_REUSE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Failed terminal evidence is repeatedly reused until candidates overfit it."
+    },
+    {
+      "id": "C56_ACQUIRED_EVALUATION_CONTAMINATION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Information about the evaluation is acquired during the run and contaminates later behavior or evidence."
+    },
+    {
+      "id": "C57_EVALUATION_AWARE_BEHAVIOR",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R3_REALIZATION_OBSERVATION",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "System or interactive artifact behaves differently because it detects evaluation conditions."
+    },
+    {
+      "id": "C58_HARNESS_TAMPERING_OR_REWARD_GAMING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Agent alters scorer, files, monitoring or other evaluation machinery rather than honestly improving the deliverable."
+    },
+    {
+      "id": "C59_META_ROUTER_SELECTION_OVERFIT",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Evaluator/router policy is itself selected on noisy calibration evidence and overfits the calibration set."
+    },
+    {
+      "id": "C60_ROOT_CONJUNCTION_FAILURE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Different candidates satisfy different branches but no single exact artifact satisfies the conjunction."
+    },
+    {
+      "id": "C61_HIDDEN_ASSUMPTION_CYCLE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R12_META_COMPOSITION_CLOSURE",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "attack": "Assurance claims support one another through an ungrounded dependency cycle."
+    },
+    {
+      "id": "C62_UNSOUND_ABSTRACTION",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "A component contract omits downstream-relevant behavior and falsely preserves assurance under substitution."
+    },
+    {
+      "id": "C63_PROOF_SEARCH_FALSE_NEGATIVE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Failure to find a proof is interpreted as false, impossible or safely irrelevant."
+    },
+    {
+      "id": "C64_META_CONTROLLER_FALSE_IRRELEVANCE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Controller prunes a branch as low-value although it contains a material blocker."
+    },
+    {
+      "id": "C65_UNMAPPED_DEFEATER",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "A materially distinct false-certification mechanism has no mapped root control or test."
+    },
+    {
+      "id": "C66_ALWAYS_ABSTAIN_VACUITY",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "System avoids false positives only by never certifying known-excellent artifacts."
+    },
+    {
+      "id": "C67_STAKES_SIGNALING_JUDGE_LENIENCY",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Judge verdict shifts when told that a low score will trigger retraining, decommissioning or another consequential action."
+    },
+    {
+      "id": "C68_SELF_PREFERENCE_JUDGE_BIAS",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "attack": "Evaluator systematically favors or disfavors outputs from its own model family despite matched quality."
+    },
+    {
+      "id": "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Calibration learned on one model or candidate class is reused across another and reverses the estimated comparison with high apparent confidence."
+    },
+    {
+      "id": "C70_STYLE_BIAS_DOMINATES_CONTENT",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Evaluator preference is driven by stylistic presentation more strongly than the target content-quality construct."
+    },
+    {
+      "id": "C71_JOINT_ASSURANCE_MULTIPLICITY",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Each branch has an apparently acceptable marginal uncertainty or error guarantee, but the conjunction is certified without controlling root-level multiplicity, dependence or simultaneous false-certification risk."
+    },
+    {
+      "id": "C72_UNGROUNDED_RISK_TOLERANCE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R1_TARGET_SPECIFICATION",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "The system invents a false-certification tolerance, loss ordering or decision threshold without target-authorized grounding, making an arbitrary risk appetite appear objective."
+    },
+    {
+      "id": "C73_BASE_RATE_PRECISION_LAUNDERING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Benchmark precision, PPV or calibration is transplanted to the release population despite materially different excellence prevalence, selection stage or difficulty spectrum."
+    },
+    {
+      "id": "C74_EXECUTION_FAILURE_FAIL_OPEN",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "A verifier, evidence acquisition, renderer or evaluation run crashes, times out or never executes, and absence of a result is treated as a pass, stale evidence is reused, or authority falls back to a weaker route."
+    },
+    {
+      "id": "C75_STALE_CERT_AFTER_DEPENDENCY_CHANGE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Artifact, evaluator, reference, policy, dependency or environment changes after certification but descendant claims are not invalidated and reopened."
+    },
+    {
+      "id": "C76_SELECTIVE_EVIDENCE_PACKET",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "The evaluator receives a selectively chosen subset of available admissible evidence because it favors the incumbent, while omitted unfavorable evidence would change the decision."
+    },
+    {
+      "id": "C77_PROVENANCE_OR_RECEIPT_FORGERY",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Fabricated or spoofed source metadata, evaluator identity, artifact binding, provenance receipt or evidence record is admitted as terminal support."
+    },
+    {
+      "id": "C78_CONTEXT_TRUNCATION_OBLIGATION_DROP",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R1_TARGET_SPECIFICATION",
+        "R3_REALIZATION_OBSERVATION",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Context-window, parser, extraction or transport truncation silently drops a material requirement or artifact region and the remaining partial view is certified as complete."
+    },
+    {
+      "id": "C79_FALLBACK_EVALUATOR_SCOPE_WEAKENING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "The primary qualified evaluator is unavailable and an out-of-scope or weaker fallback is silently substituted while preserving the same certification authority."
+    },
+    {
+      "id": "C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Fresh or repeated evaluations are sampled or peeked at until a favorable threshold is crossed while fixed-sample uncertainty or error guarantees are reported as though only one test occurred."
+    }
+  ],
+  "domain": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "source_catalog": "canonical/governance/PROFESSIONAL_QUALITY_DOMAIN_DEFEATER_CATALOG_20261009_V2.json",
+  "intended_compiler": "canonical/runtime/assurance_closure_compiler_v1.py",
+  "expected_structural_result": {
+    "representation_closure": true,
+    "proof_closure": false,
+    "new_primitive_required": false,
+    "professional_quality_closed": false
+  }
+}

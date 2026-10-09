@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "CURRENT_UVCK_V2_CANDIDATE__DEFEATER_ORDER_SOUNDNESS_REPAIRED__PRIMARY_10_OF_10__INDEPENDENT_STRUCTURAL_11_OF_11__DOMAIN_REPRESENTABILITY_16_OF_16__R2_FIXED_POINT_29_OF_29__R2_SHADOW_22_OF_22__NOT_LIVE_DEFAULT",
+  "status": "CURRENT_UVCK_V2_CANDIDATE__DEFEATER_ORDER_SOUNDNESS_REPAIRED__PROFESSIONAL_QUALITY_80_KNOWN_DEFEATERS_BOUND__DOMAIN_SEMANTIC_AND_EXECUTION_CLOSURE_STILL_OPEN__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
@@ -71,5 +71,18 @@
     "status": "PASS__EXACT_BLOBS__PYCOMPILE__11_OF_11__ZERO_CREDIT",
     "semantic_law": "SUPPORTED_DEFEATER_DOMINATES_UNRESOLVED_DEFEATERS_INDEPENDENT_OF_DECLARED_ORDER"
   },
-  "live_default": false
+  "live_default": false,
+  "latest_known_domain_defeater_binding": {
+    "family": "PROFESSIONAL_QUALITY",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_80_DEFEATER_UVCK_REPLAY_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "c054e9362ce382889e9cca62bdb69e11cea19644",
+    "known_defeater_count": 80,
+    "assurance_root_count": 12,
+    "exact_known_defeaters_bound": true,
+    "unknown_defeater_completeness_proved": false,
+    "domain_semantic_closure_proved": false,
+    "domain_execution_closure_proved": false,
+    "live_default_credit": false,
+    "terminal_credit_delta": 0
+  }
 }
