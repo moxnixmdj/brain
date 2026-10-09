@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_SEMANTIC_WAKE_INFORMATION_QUOTIENT_REMOTE_VERIFY_V2",
+  "date": "2026-10-09",
+  "status": "PASS__INDEPENDENT_CURRENT_V58_EXACT_BYTES__PY_COMPILE_PASS__1_OF_1_ASSERTION_PASS__ZERO_CREDIT",
+  "subjects": {
+    "quotient": {
+      "path": "canonical/governance/R2_FINANCE_SEMANTIC_WAKE_INFORMATION_QUOTIENT_20261009_V2.json",
+      "git_blob_sha": "bb58795676f23e621d191cb9a30a5394a29c8ef6"
+    },
+    "scheduler": {
+      "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V56.json",
+      "git_blob_sha": "1adc7e890100c5278b298dcf4fbec196e6c472ae"
+    },
+    "test": {
+      "path": "canonical/tests/test_r2_finance_semantic_wake_information_quotient_v2.py",
+      "git_blob_sha": "6e1f1952d9423c1d22fc22553af4a88c9879a3d7"
+    },
+    "prestate_r2": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "d45b5cdc0e0bbbfb44d88c37a5761776afbcf5fd"
+    },
+    "prestate_scheduler": {
+      "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V55.json",
+      "git_blob_sha": "a7c04b0ceb3b28deacfa078c11e70e7841445d78"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "working_directory": "/home/sprite/verify-r2-v59-finance-wake-quotient",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "py_compile_pass": true,
+    "assertions_run": 1,
+    "assertions_passed": 1,
+    "assertions_failed": 0,
+    "concrete_wake_conditions": 11,
+    "decision_effect_classes": 3,
+    "current_v58_contextual_regcap_gains_preserved": true,
+    "finance_semantic_tail_closed": false,
+    "information_theoretic_externality_proved": false,
+    "execution_log_sha256": "0a269c525901cb01a8b625e62885e5315fcdba4cf668609ffa6b173d9de50eb4"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
