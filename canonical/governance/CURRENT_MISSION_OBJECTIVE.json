@@ -13,7 +13,7 @@
   },
   "current_assurance_closure_compiler": {
     "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-    "git_blob_sha": "b8c0197777c39df200508a52f1923293db53aacd",
+    "git_blob_sha": "d530f480e5c49cd494729250bbcabf0ab0af74fb",
     "status": "CURRENT_UVCK_V2_CANDIDATE__DEFEATER_ORDER_SOUNDNESS_REPAIRED__PROFESSIONAL_QUALITY_80_KNOWN_DEFEATERS_BOUND__DOMAIN_SEMANTIC_AND_EXECUTION_CLOSURE_STILL_OPEN__NOT_LIVE_DEFAULT",
     "terminal_authority": false
   },
