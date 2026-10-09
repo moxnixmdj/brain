@@ -13,6 +13,12 @@ ACTION_INTENT_DIR = "canonical/action_intents"
 CURRENT_AUTHORITY = "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
 SCIENCE_OBLIGATION = "TB_SCIENCE_GE_58_7"
 
+ADAPTIVE_ESCAPE_PROGRESS_VERIFIED_PREMISES = (
+    "adaptive_terminal_or_progress_cover_theorem_bound",
+    "adaptive_terminal_policy_safety_premise_bound",
+    "current_escape_progress_totality_proved",
+)
+
 UNIVERSAL_ROUTE_VERIFIED_PREMISES = (
     "generator_basis_scope_complete_proved",
     "generator_transforms_abc_preserving_proved",
@@ -27,6 +33,13 @@ OBJECTIVE_COMMON_LAW_VERIFIED_PREMISES = (
 )
 
 ONE_SHOT_ROUTE_RACES = (
+    {
+        "id": "ADAPTIVE_ESCAPE_PROGRESS_TOTALITY",
+        "can_discharge": "__ALL_OPEN__",
+        "estimated_wall_clock_units": 1.0,
+        "proof_class": "ADAPTIVE_TERMINAL_OR_STRICT_PROGRESS_COVER",
+        "verified_prerequisite_truth_keys": ADAPTIVE_ESCAPE_PROGRESS_VERIFIED_PREMISES,
+    },
     {
         "id": "SCOPE_COMPLETE_UNIVERSAL_COVER",
         "can_discharge": "__ALL_OPEN__",
