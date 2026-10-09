@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V12_INSTANCE",
+  "action_id": "TERMINAL_FAMILY_IDENTITY_COMPLETENESS_20261009_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_PROOF_ONLY__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "259143c7bd4756b409387d3f93200ef241379f37",
+  "capability_target": "OPUS_5_5_CHECKPOINT_CLAIM_COMPLETENESS",
+  "action_kind": "TERMINAL_REQUIRED_FAMILY_IDENTITY_COMPLETENESS_REPAIR",
+  "causal_blocker": "TERMINAL_CLOSURE_REDUCER_CHECKS_19_UNIQUE_FAMILY_IDS_BUT_NOT_EQUALITY_TO_THE_FROZEN_19_TARGET_FAMILY_UNIVERSE",
+  "blocker_lease_key": "CCRT::R1_R4::CHECKPOINT_FAMILY_IDENTITY::20261009",
+  "expected_parent_frontier_change": "NO_TERMINAL_CREDIT__DELETE_SAME_CARDINALITY_FAMILY_SUBSTITUTION_ESCAPE",
+  "theory_invariants": {
+    "global_mission_remains_open_ended": true,
+    "checkpoint_family_universe_is_finite_and_frozen": true,
+    "target_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "target_envelope_blob": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+    "unknown_fails_closed": true,
+    "no_fresh_target_reality": true
+  },
+  "recursive_obs": {
+    "duplicate_open_prs_reconciled": "PR_666_IS_STAGE_A_AND_MIRROR_REPAIR_NOT_THIS_TERMINAL_FAMILY_IDENTITY_DEFECT",
+    "selected_route": "PATCH_EXISTING_TERMINAL_CLOSURE_REDUCER_AND_MANIFEST__NO_NEW_AGGREGATOR",
+    "new_root_required": false
+  },
+  "behavioral_contract": {
+    "behavior_id": "EXACT_TERMINAL_TARGET_FAMILY_IDENTITY_V1",
+    "required_output_or_action": "TERMINAL_REDUCER_REQUIRES_MANIFEST_FAMILY_ID_SET_EQUAL_TO_CONTENT_ADDRESSED_TARGET_ENVELOPE_FAMILY_ID_SET",
+    "success_condition": "SAME_COUNT_SUBSTITUTION_MISSING_REQUIRED_FAMILY_OR_EXTRA_INVENTED_FAMILY_FAILS_CLOSED",
+    "failure_condition": "A_19_ROW_MANIFEST_WITH_WRONG_FAMILY_IDENTITY_CAN_ACHIEVE_TERMINAL_TRUE",
+    "terminal_consequence": "CLOSE_CHECKPOINT_CLAIM_OMISSION_ROUTE_ONLY",
+    "scope": "OPUS55_CHECKPOINT_ONLY__NOT_GLOBAL_OPEN_ENDED_MISSION"
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "CARDINALITY_19_PLUS_UNIQUENESS_IS_INSUFFICIENT__EXACT_TARGET_IDENTITY_SET_MUST_BE_BOUND",
+    "falsification_condition": "REPLACE_ONE_REQUIRED_ID_WITH_FAKE_ID_KEEPING_COUNT_19_AND_REDUCER_DOES_NOT_FAIL",
+    "critical_path_relation": "CHECKPOINT_CLAIM_COMPLETENESS_SUBORDINATE_TO_R1_R4"
+  },
+  "reality_query_admission": {
+    "verdict": "NO_REALITY_QUERY_REQUIRED",
+    "fresh_reality_units": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
