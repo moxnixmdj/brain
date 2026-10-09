@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINAL_STDLIB_PROVIDER_MATERIAL_MANIFEST_V1",
+  "date": "2026-10-09",
+  "status": "CANDIDATE_EXACT_MATERIAL_CLOSURE",
+  "provider": "D_FINAL_STDLIB_BOUND_EXECUTOR_V1",
+  "materials": [
+    {
+      "path": "canonical/runtime/d_final_stdlib_bound_executor_v1.py",
+      "git_blob_sha": "6d064ee1a01cfde7de80df65e3e0ea3a87d35ed4"
+    },
+    {
+      "path": "canonical/tests/test_d_final_stdlib_bound_executor_v1.py",
+      "git_blob_sha": "13e287b67f5e082e50faeb035e1eca8e702019da"
+    },
+    {
+      "path": "canonical/runtime/bound_capability_execution_verifier_v1.py",
+      "git_blob_sha": "2bc99699ec721e4b0ef239340e0c220370811e6f"
+    },
+    {
+      "path": "canonical/runtime/capability_planner.py",
+      "git_blob_sha": "629766f8a1194fd298e0809b64a5e9c5a39fa3ea"
+    },
+    {
+      "path": "canonical/runtime/capability_execution_trace_capsule_v1.py",
+      "git_blob_sha": "75faca7736d75f7e5385952ecb16240731bcdb7e"
+    },
+    {
+      "path": "canonical/runtime/composition_state_capsule_v1.py",
+      "git_blob_sha": "6337298b4804307315308689fbeb65692c67980d"
+    },
+    {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/archive_tarfile.py",
+      "git_blob_sha": "2ae62c04ef495d855ca8d46263b4cf05110b5648"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/evidence_decision_verify.py",
+      "git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+    }
+  ],
+  "excluded_by_design": [
+    "canonical/runtime/astra_runtime.py",
+    "APT",
+    "PYPI",
+    "NPM",
+    "SYSTEM_TOOL_EXECUTION",
+    "RUNTIME_NATIVE_ACTIONS",
+    "NETWORK_ACQUISITION"
+  ],
+  "claim_boundary": "PROVIDER_KERNEL_FOR_PYTHON_STDLIB_REGISTRY_ROWS_ONLY",
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "ownership": false,
+    "terminal": false
+  }
+}
