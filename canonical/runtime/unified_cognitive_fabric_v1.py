@@ -33,6 +33,7 @@ from canonical.runtime.verified_bound_capability_execution_adapter_v1 import exe
 from canonical.runtime import semantic_ambiguity_control_v1 as semantic_ambiguity
 from canonical.runtime import semantic_relation_control_v1 as semantic_relation
 from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
+from canonical.runtime import finance_bounded_concept_registry_verify_v1 as finance_concept_verify
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -449,9 +450,20 @@ def run(
         elif mode == "SEMANTIC_AMBIGUITY":
             out = semantic_ambiguity.decide(payload)
         elif mode == "SEMANTIC_RELATION":
+            concept_verifier = semantic_authority_verifier
+            concept_claim = payload.get("shared_concept_identity_receipt")
+            if (
+                concept_verifier is None
+                and isinstance(concept_claim, Mapping)
+                and concept_claim.get("schema") == finance_concept_verify.CLAIM_SCHEMA
+            ):
+                concept_verifier = lambda value: finance_concept_verify.verify_claim(
+                    value,
+                    repo_root=ROOT,
+                )
             out = semantic_relation.resolve(
                 payload,
-                concept_identity_verifier=semantic_authority_verifier,
+                concept_identity_verifier=concept_verifier,
             )
         elif mode == "OEWN_DECISION_SENSE":
             out = oewn_decision_sense.resolve(
