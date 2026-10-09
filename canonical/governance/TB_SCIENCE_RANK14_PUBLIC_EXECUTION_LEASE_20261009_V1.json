@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_PUBLIC_EXECUTION_LEASE_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_PUBLIC_ONE_SHOT_LEASE_PUBLISHED__WORKFLOW_RUN_ATTEMPT_1_ACTIVE__ZERO_ACCEPTANCE_AND_TERMINAL_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/inverse-lithography::trial-0",
+    "schedule_rank": 14,
+    "task_digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530"
+  },
+  "brain_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK14_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V1.json",
+    "git_blob_sha": "208f86419377dfe46059fa5b7b99aaec2f36a6f1",
+    "execution_authority": true
+  },
+  "public_carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base_ref": "terminal-execution-v1",
+    "base_sha": "f9f2628d6482074001b83240e01ee546de3e2b8e",
+    "head_ref": "execute/tb-science-rank14-20261009-v1",
+    "head_sha": "7cc859c52477fe2a48aa83616278cd9094db909a",
+    "pull_request": 2451,
+    "pull_request_merged": false,
+    "activation_path": "capsules/tb_science_rank14_20261009_v1/ACTIVATE_RANK14_PR.json",
+    "activation_git_blob_sha": "21346a4d022e606e755a047dadc377ac50a78fe5",
+    "workflow_path": ".github/workflows/execute-tb-science-rank14-20261009-v1.yml",
+    "workflow_git_blob_sha": "2dbdbd1f5b6f71234010ec7848c14a6b8414ba5e",
+    "workflow_run_id": 37880547075,
+    "workflow_job_id": 113659002581,
+    "run_attempt": 1
+  },
+  "lease_effect": {
+    "public_execution_lease_published": true,
+    "exact_activation_present": true,
+    "task_read_authority_available_only_inside_exact_guarded_workflow": true,
+    "task_start_requires_prestart_token_budget_pass": true,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "post_start_result_irreversible": true
+  },
+  "observation_boundary": {
+    "lease_publication_proves_task_started": false,
+    "lease_publication_proves_result": false,
+    "execution_run_final_conclusion_bound": false,
+    "acceptance_credit": false,
+    "terminal_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
