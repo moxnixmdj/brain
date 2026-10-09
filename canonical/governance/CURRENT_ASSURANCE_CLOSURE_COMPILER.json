@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "CURRENT_UVCK_V2_CANDIDATE__PRIMARY_10_OF_10__INDEPENDENT_STRUCTURAL_11_OF_11__DOMAIN_REPRESENTABILITY_16_OF_16__R2_FIXED_POINT_29_OF_29__R2_SHADOW_22_OF_22__NOT_LIVE_DEFAULT",
+  "status": "CURRENT_UVCK_V2_CANDIDATE__DEFEATER_ORDER_SOUNDNESS_REPAIRED__PRIMARY_10_OF_10__INDEPENDENT_STRUCTURAL_11_OF_11__DOMAIN_REPRESENTABILITY_16_OF_16__R2_FIXED_POINT_29_OF_29__R2_SHADOW_22_OF_22__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
   },
   "runtime": {
     "path": "canonical/runtime/assurance_closure_compiler_v1.py",
-    "git_blob_sha": "a52d62d63aeb50a6bbb613c37ec76d1c86327b12"
+    "git_blob_sha": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8"
   },
   "tests": {
     "path": "canonical/tests/test_assurance_closure_compiler_v1.py",
@@ -64,5 +64,12 @@
   },
   "terminal_authority": false,
   "terminal_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "latest_soundness_repair": {
+    "path": "canonical/verification/UVCK_V2_DEFEATER_ORDER_VERIFY_20261009_V1.json",
+    "git_blob_sha": "1c3428b10a1205e928a87f41a7c16a8a3d17b7ca",
+    "status": "PASS__EXACT_BLOBS__PYCOMPILE__11_OF_11__ZERO_CREDIT",
+    "semantic_law": "SUPPORTED_DEFEATER_DOMINATES_UNRESOLVED_DEFEATERS_INDEPENDENT_OF_DECLARED_ORDER"
+  },
+  "live_default": false
 }
