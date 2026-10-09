@@ -19,6 +19,7 @@ from canonical.runtime import certificate_gated_selected_route_runtime_entrypoin
 from canonical.runtime import h100_verified_capability_registry_v8 as h100
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
+from canonical.runtime.d_finality_stdlib_bound_executor_v1 import execute as execute_d_stdlib_bound
 
 SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_INVOKER_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -285,7 +286,11 @@ def _invoke_impl(
         }
 
     if kind == "BOUND_CAPABILITY":
-        out = execute_bound(local_id, inputs=dict(payload))
+        out = (
+            execute_d_stdlib_bound(local_id, inputs=dict(payload))
+            if d_finality.has_active_epoch()
+            else execute_bound(local_id, inputs=dict(payload))
+        )
         return {
             "schema": SCHEMA,
             "status": "PASS__EXACT_BOUND_CAPABILITY_DISPATCHED"
