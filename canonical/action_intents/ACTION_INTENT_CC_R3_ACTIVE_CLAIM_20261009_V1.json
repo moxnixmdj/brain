@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "CC_R3_ACTIVE_CLAIM_20261009_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_PROOF_ONLY__ZERO_CREDIT",
+  "status": "COMPLETED_PROOF_ONLY__ACTIVE_CLAIM_BOUND__CC_R3_COUNTEREXAMPLE_FROZEN__ZERO_CREDIT",
   "canonical_base_commit": "f1e70ddb77cabd07e323733a1cfd0f508694d3e0",
   "action_kind": "FREEZE_EXACT_CHECKPOINT_CLAIM_AND_ATTACK_CC_R3",
   "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
@@ -17,5 +17,24 @@
   "accounting": {
     "fresh_reality_units_consumed": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "outputs": {
+    "claim": "canonical/governance/CC_ACTIVE_FROZEN_CLAIM_20261009_V1.json",
+    "runtime": "canonical/runtime/cc_r3_counterexample_v1.py",
+    "tests": "canonical/tests/test_cc_r3_counterexample_v1.py",
+    "counterexample": "canonical/verification/CC_R3_COUNTEREXAMPLE_20261009_V1.json",
+    "verification": "canonical/verification/CC_R3_ACTIVE_CLAIM_COUNTEREXAMPLE_VERIFY_20261009_V1.json",
+    "regression": "canonical/regressions/2026-10-09_CC_R3_OPEN_ACCEPTANCE_COUNTEREXAMPLE.json",
+    "reasoning": "canonical/reasoning/2026-10-09_CC_R3_ACTIVE_CLAIM_COUNTEREXAMPLE_V1.json",
+    "pull_request": 3853
+  },
+  "result": {
+    "frozen_family_count": 19,
+    "open_acceptance_family_count": 12,
+    "witness_family": "ADVANCED_AGENTIC_CODING",
+    "u_empty": false,
+    "cc_r3_proved": false,
+    "terminal_credit_delta": 0
+  },
+  "next_action": "RESOLVE_ACTIVE_R3_WITNESS_FRONTIER_BEFORE_R1_R2_TERMINAL_SUCCESS_WORK"
 }
