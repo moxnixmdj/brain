@@ -119,6 +119,7 @@ def evaluate(
         "pass": passed,
         "live_admitted_capability_count": len(live),
         "d_final_owned_capability_count": len(covered),
+        "d_final_owned_capability_ids": covered,
         "missing_d_certificate_count": len(missing),
         "missing_d_certificate_ids": missing,
         "stale_nonlive_certificate_count": len(stale),
