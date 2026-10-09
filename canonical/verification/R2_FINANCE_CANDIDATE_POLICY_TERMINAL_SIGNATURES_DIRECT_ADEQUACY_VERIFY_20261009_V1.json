@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_CANDIDATE_POLICY_TERMINAL_SIGNATURES_DIRECT_ADEQUACY_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_BRANCH_COMPILE__TWO_INDEPENDENT_CARRIERS_9_OF_9_EACH__ZERO_TERMINAL_CREDIT",
+  "route_id": "DIRECT_ADEQUACY::FINANCE_CANDIDATE_POLICY_TERMINAL_SIGNATURES_V1",
+  "subjects": {
+    "producer": {
+      "path": "canonical/runtime/finance_candidate_policy_terminal_signatures_v1.py",
+      "git_blob_sha": "6082ef61cb1e7d36b8635c4fb2081759df903896"
+    },
+    "independent_verifier": {
+      "path": "canonical/runtime/finance_candidate_policy_terminal_signatures_verify_v1.py",
+      "git_blob_sha": "c5b274a7a3f4d91706fc9ed014704eecf4877d17"
+    },
+    "direct_route": {
+      "path": "canonical/runtime/r2_finance_candidate_policy_terminal_signatures_direct_adequacy_v1.py",
+      "git_blob_sha": "c376488bffa0fff860152c6aeed509751ad8cb7c"
+    },
+    "focused_tests": {
+      "path": "canonical/tests/test_finance_candidate_policy_terminal_signatures_v1.py",
+      "git_blob_sha": "7e9cf46d573d5ad50a1e164455b3e17a886271e4"
+    }
+  },
+  "verification": {
+    "compile_pass": true,
+    "first_carrier": {
+      "name": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+      "workspace": "/home/sprite/finance-candidate-terminal-signatures-v1",
+      "tests_run": 9,
+      "tests_passed": 9,
+      "tests_failed": 0
+    },
+    "independent_carrier": {
+      "name": "brain-cursorbench-evidence-audit-20261009",
+      "sprite_id": "sprite-6e0179c2-a171-4378-bf57-db21fdf6bc5a",
+      "workspace": "/home/sprite/finance-candidate-terminal-signatures-independent",
+      "source": "EXACT_GITHUB_BRANCH_BYTES",
+      "compile_pass": true,
+      "tests_run": 9,
+      "tests_passed": 9,
+      "tests_failed": 0
+    },
+    "proved": [
+      "NORMALIZED_UNLESS_CANDIDATE_REPLAY_DERIVES_COMPLETE_TERMINAL_SIGNATURES_RELATIVE_TO_DECLARED_CANDIDATE_SET",
+      "NORMALIZED_IF_CANDIDATE_REPLAY_DERIVES_COMPLETE_TERMINAL_SIGNATURES_RELATIVE_TO_DECLARED_CANDIDATE_SET",
+      "TERMINALLY_EQUIVALENT_CANDIDATES_COLLAPSE_TO_ONE_CLASS",
+      "TERMINALLY_DISTINCT_CANDIDATES_REMAIN_DISTINCT",
+      "TAMPERED_TERMINAL_SIGNATURE_IS_REJECTED",
+      "NON_BOOLEAN_CANDIDATE_FACT_FAILS_CLOSED",
+      "SCOPE_MISMATCH_FAILS_CLOSED",
+      "DIRECT_ROUTE_EXECUTES_AND_INDEPENDENTLY_VERIFIES",
+      "PREFLIGHT_IS_EFFECT_FREE",
+      "MATCHED_INVALID_CASE_FAILS_CLOSED_NOT_NOT_APPLICABLE"
+    ]
+  },
+  "boundaries": {
+    "declared_candidate_set_semantic_completeness_claimed": false,
+    "candidate_fact_truth_inferred": false,
+    "open_world_coreference_closed": false,
+    "general_finance_semantics_closed": false,
+    "verification_authority_mutated": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
