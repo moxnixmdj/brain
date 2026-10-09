@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK17_RAW_TASK_PUNCTUATION_REPAIR_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__GENERIC_LOSSLESS_PUNCTUATION_COVERAGE_REPAIR__EXACT_FAILURE_SHAPE_REPRODUCED_AND_CLOSED__PUBLIC_RESEAL_STILL_REQUIRED__ZERO_CREDIT",
+  "source_failure": {
+    "path": "canonical/verification/TB_SCIENCE_RANK17_V6_PREEXPOSURE_ABORT_TRUTH_20261009_V1.json",
+    "git_blob_sha": "7bb8e234fbe4458c9a1e97c82aba2becfa1c895e",
+    "missing_positions": [
+      396,
+      397,
+      398
+    ]
+  },
+  "public_repair": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2538,
+    "head_sha": "c72c629e908179a84a7de2043f233ddd8f18a1db",
+    "base_sha": "cf92959c2ea183843753cfeeb8278fe986f51e66",
+    "exact_blobs": {
+      "lossless_raw_task_contract_v1": "de5fbd7af64303d5e6d4ecb8f8a16199bcf18da9",
+      "explicit_requirement_index_v2": "72dce62beb82e304299e8df74db3af6d6994befb",
+      "punctuation_regression_test": "1ed5160a49f9d8942ae840cb277ad26dd9cef099",
+      "agent_v11_verifier_workflow": "a95e70ff75b1d3176a925bf227d87f33349701ca"
+    }
+  },
+  "verified_behavior": [
+    "PUNCTUATION_ONLY_RUNS_ARE_EXACT_RAW_SOURCE_SEGMENTS",
+    "EVERY_NONWHITESPACE_POSITION_IS_COVERED",
+    "LOSSLESS_RAW_TASK_AND_EXPLICIT_REQUIREMENT_SEGMENTATION_REMAIN_IDENTICAL",
+    "STRUCTURED_REQUIREMENT_SEGMENT_INDEX_ALIGNMENT_IS_PRESERVED",
+    "ORDINARY_SENTENCE_SEGMENTATION_REGRESSION_REMAINS_STABLE",
+    "THE_EXACT_SYNTHETIC_396_397_398_MISSING_POSITION_SHAPE_PASSES"
+  ],
+  "public_verification_runs": [
+    {
+      "run_id": 37964944319,
+      "name": "Verify TB-Science Agent V11 typed schema grounding",
+      "conclusion": "success",
+      "includes_new_regression": true
+    },
+    {
+      "run_id": 37964945373,
+      "name": "Verify TB-Science execution ratchet v1",
+      "conclusion": "success"
+    },
+    {
+      "run_id": 37964944005,
+      "name": "Verify Rank15 V6 final robust reseal",
+      "conclusion": "success"
+    }
+  ],
+  "expected_stale_closure_signal": {
+    "run_id": 37964944937,
+    "name": "Verify TB-Science rank15 zero-exposure carrier",
+    "conclusion": "failure",
+    "classification": "EXPECTED_FIXED_HASH_TRANSITIVE_CLOSURE_REJECTION_AFTER_RUNTIME_DEPENDENCY_CHANGE",
+    "consequence": "DO_NOT_IGNORE__FRESH_PROOF_CARRYING_RESEAL_REQUIRED_BEFORE_LIVE_EXECUTION"
+  },
+  "security_and_scope": {
+    "benchmark_task_solution_logic_added": false,
+    "rank17_start_cas_created": false,
+    "rank17_benchmark_trial_consumed": false,
+    "execution_authority_granted_by_repair": false,
+    "task_read_authority_granted_by_repair": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "pass": true
+}
