@@ -61,6 +61,9 @@ class ScienceAgentTests(unittest.TestCase):
             result=asyncio.run(s.run_science_goal("synthetic science goal",env,max_cycles=1))
         self.assertEqual(seen,[s.PLANNER_TIMEOUT_S])
         self.assertEqual(s.PLANNER_TIMEOUT_S,300)
+        self.assertEqual(s.MAX_ACTION_TIMEOUT_S,3600)
+        self.assertEqual(s.MAX_VERIFY_TIMEOUT_S,3600)
+        self.assertEqual(s.MAX_ACTION_TIMEOUT_S,s.science_planner.MAX_EXEC_TIMEOUT_S)
         self.assertEqual(result["status"],"SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER")
 
     def test_brain_selects_max_verified_requirement_coverage(self):
