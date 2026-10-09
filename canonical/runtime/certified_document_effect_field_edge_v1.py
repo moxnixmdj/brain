@@ -51,6 +51,12 @@ def _token(value:Any,name:str)->str:
     return cleaned
 
 
+def _mention_id(source_id:str,scope_id:str,raw_span:str)->str:
+    return "MENTION:"+sha256(
+        (source_id+"\n"+scope_id+"\n"+raw_span).encode("utf-8")
+    ).hexdigest()
+
+
 def field_concept_id(
     *,
     scope_id:str,
@@ -84,6 +90,9 @@ def prove_field(
     relation_verifier:Callable[[Mapping[str,Any]],Mapping[str,Any]|None]|None,
 )->dict[str,Any]:
     try:
+        source=_token(source_id,"SOURCE_ID")
+        if not isinstance(raw_span,str) or not raw_span.strip():
+            raise ValueError("RAW_SPAN_REQUIRED")
         scope=_token(scope_id,"SCOPE_ID")
         eid=_token(effect_id,"EFFECT_ID")
         fld=_token(field,"FIELD")
@@ -132,9 +141,12 @@ def prove_field(
                 "terminal_authority":False,
             }
 
+        expected_mention=_mention_id(source,scope,raw_span)
         bad=[]
         if dag.get("scope_id")!=scope:
             bad.append("SCOPE_ID")
+        if dag.get("left_id")!=expected_mention:
+            bad.append("LEFT_SOURCE_MENTION_ID")
         if dag.get("right_id")!=concept_id:
             bad.append("RIGHT_FIELD_CONCEPT_ID")
         if dag.get("left_entails_right") is not True:
@@ -166,7 +178,9 @@ def prove_field(
             "field":fld,
             "value":normalized,
             "field_concept_id":concept_id,
-            "source_semantic_node_id":dag.get("left_id"),
+            "source_id":source,
+            "raw_span_sha256":sha256(raw_span.encode("utf-8")).hexdigest(),
+            "source_semantic_node_id":expected_mention,
             "dag_evidence_sha256":evidence_sha256(dag_evidence),
             "left_to_right_path":dag.get("left_to_right_path"),
             "relation_semantics_recomputed":True,
@@ -189,7 +203,8 @@ def prove_field(
             "acceptance_authority":False,
             "terminal_authority":False,
             "boundary":(
-                "FIELD_PROOF_RELATIVE_TO_INDEPENDENTLY_RECOMPUTED_SCOPED_"
+                "FIELD_PROOF_BOUND_TO_EXACT_SOURCE_SPAN_MENTION_AND_"
+                "INDEPENDENTLY_RECOMPUTED_SCOPED_"
                 "ENTAILMENT_DAG__NO_RELATION_VERIFIER_MEANS_NO_FIELD_PROOF__"
                 "NO_RAW_LANGUAGE_EXTRACTION_AUTHORITY"
             ),
