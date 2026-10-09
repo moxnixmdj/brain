@@ -13,7 +13,7 @@
   "source_bindings": {
     "ledger": {
       "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V17.json",
-      "commit_sha": "d43ac7b0d0bc82facacced5047b74dee7f95dbc8"
+      "git_blob_sha": "c8e9720e3f53c0eb483552c902b7841821f335b0"
     },
     "repair_verification": {
       "path": "canonical/verification/TB_SCIENCE_RANK14_LOSSLESS_OBLIGATION_CAP_REPAIR_VERIFY_20261009_V1.json",
