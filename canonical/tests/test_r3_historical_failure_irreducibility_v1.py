@@ -60,7 +60,7 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
         state_path.write_text(json.dumps(state), encoding="utf-8")
         return state_path, state, wid, fid
 
-    def test_exact_generic_unreplayable_failure_proves_external_information_required(self):
+    def test_exact_generic_unreplayable_failure_proves_current_state_insufficiency_only(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             state_path, state, wid, fid = self._fixture(root)
@@ -68,7 +68,10 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
             with patch.object(cert, "_learning_module", return_value=fake):
                 out = cert.certify(wid, state_path=state_path, repo_root=root)
         self.assertTrue(out["pass"], out)
-        self.assertTrue(out["irreducible_external_information_proved"])
+        self.assertFalse(out["irreducible_external_information_proved"])
+        self.assertFalse(out["information_theoretic_externality_proved"])
+        self.assertTrue(out["current_durable_state_insufficiency_proved"])
+        self.assertEqual(out["classification"], "PENDING_ACQUISITION_OR_EXPERIMENT")
         self.assertEqual(out["failure_fingerprint"], fid)
         self.assertTrue(out["future_evidence_reopens"])
         self.assertFalse(out["permanent_nonrepairability_claimed"])
@@ -96,7 +99,7 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
                 out = cert.certify(wid, state_path=state_path, repo_root=root)
         self.assertFalse(out["pass"])
 
-    def test_one_shot_accepts_only_explicit_strict_failure_certificate(self):
+    def test_historical_failure_certificate_never_grants_external_terminal_pass(self):
         pending = [{
             "work_id": "w-failure",
             "kind": "REPAIR_FAILURE_CLASS",
@@ -107,28 +110,35 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
                 "repair_class": cert.SUPPORTED_REPAIR_CLASS,
             },
         }]
+
         def snap(digest):
             return {
                 "schema": closure.SCHEMA,
                 "digest": digest,
                 "state_sha256": "state-" + digest,
                 "payload": {
-                    "state_file": {"path": "state.json", "sha256": "state-" + digest, "bytes": 1},
+                    "state_file": {
+                        "path": "state.json",
+                        "sha256": "state-" + digest,
+                        "bytes": 1,
+                    },
                     "files": [],
                     "pending": pending,
                     "stats": {},
                 },
             }
+
         snaps = [snap("a"), snap("a"), snap("a")]
         blocker = {
             "work_id": "w-failure",
             "kind": "REPAIR_FAILURE_CLASS",
             "blocker": "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
         }
-        strict = {
+        bounded = {
             "pass": True,
-            "status": "PASS__ALL_PENDING_FAILURE_WORK_REQUIRES_EXTERNAL_REPLAY_INFORMATION",
-            "irreducible_external_information_proved": True,
+            "status": "PASS__CURRENT_STATE_ONLY",
+            "irreducible_external_information_proved": False,
+            "current_durable_state_insufficiency_proved": True,
         }
         with patch.object(closure, "frontier_snapshot", side_effect=snaps), \
              patch.object(closure.r3, "drain", return_value={
@@ -137,17 +147,38 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
                  "progress_count": 0,
                  "actions": [{"blockers": [blocker]}],
              }), \
-             patch.object(closure.historical_evidence, "certify_pending_set", return_value={"pass": False}), \
-             patch.object(closure.historical_failure, "certify_pending_set", return_value=strict):
+             patch.object(
+                 closure.historical_evidence,
+                 "certify_pending_set",
+                 return_value={"pass": False},
+             ), \
+             patch.object(
+                 closure.historical_failure,
+                 "certify_pending_set",
+                 return_value=bounded,
+             ):
             out = closure.run(repo_root=".", state_path="state.json")
-        self.assertTrue(out["pass"], out)
+
+        self.assertFalse(out["pass"], out)
         self.assertTrue(out["fixed_point"])
         self.assertEqual(
             out["status"],
-            "VERIFIED_FIXED_POINT__IRREDUCIBLE_EXTERNAL_INFORMATION_REQUIRED",
+            "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
         )
-        self.assertTrue(out["irreducible_external_information_proved"])
-        self.assertEqual(out["strict_external_failure_certificate"], strict)
+        self.assertFalse(out["irreducible_external_information_proved"])
+        self.assertEqual(out["historical_failure_state_certificate"], bounded)
+
+    def test_missing_externality_certificate_stays_internal(self):
+        out = closure.externality_gate.verify_certificate(
+            None,
+            pending=[{"work_id": "w-failure"}],
+        )
+        self.assertFalse(out["pass"])
+        self.assertFalse(out["irreducible_external_information_proved"])
+        self.assertEqual(
+            out["reason"],
+            "PROOF_CARRYING_EXTERNALITY_CERTIFICATE_REQUIRED",
+        )
 
 
 if __name__ == "__main__":

@@ -7,8 +7,8 @@ The operation stops only when one of these conditions is proved on the current
 state/provider frontier:
 1. the improvement queue is empty;
 2. every remaining work item is non-actionable and the residual class is typed;
-3. an explicit strict certificate proves the exact residual requires information
-   absent from current durable state;
+3. a proof-carrying information-theoretic certificate proves that the exact
+   residual cannot be resolved by any admitted internal route;
 4. a claimed-progress invariant is violated, in which case it fails closed.
 """
 from __future__ import annotations
@@ -23,12 +23,14 @@ from canonical.runtime import autonomous_verified_self_improvement_v1 as learnin
 from canonical.runtime import r3_improvement_queue_driver_v1 as r3
 from canonical.runtime import r3_historical_evidence_irreducibility_v1 as historical_evidence
 from canonical.runtime import r3_historical_failure_irreducibility_v1 as historical_failure
+from canonical.runtime import information_theoretic_externality_gate_v1 as externality_gate
 
 SCHEMA = "PROJECT_BRAIN_ONE_SHOT_VERIFIED_CLOSURE_V1"
 
 LOAD_BEARING_PATHS = (
     "canonical/runtime/autonomous_verified_self_improvement_v1.py",
     "canonical/runtime/r3_improvement_queue_driver_v1.py",
+    "canonical/runtime/information_theoretic_externality_gate_v1.py",
     "canonical/runtime/live_brain_runtime_v1.py",
     "canonical/runtime/unified_cognitive_fabric_v1.py",
     "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
@@ -191,6 +193,8 @@ def classify_residual(
                 "internally_solvable_gap_remaining": True,
                 "external_or_new_evidence_required": False,
                 "irreducible_external_information_proved": False,
+                "internal_unsolved": True,
+                "pending_acquisition_or_experiment_required": False,
                 "internal_blockers": [
                     "UNCLASSIFIED_UNRESOLVED_WORK_WITHOUT_BLOCKER_CERTIFICATE"
                 ],
@@ -201,6 +205,8 @@ def classify_residual(
             "internally_solvable_gap_remaining": False,
             "external_or_new_evidence_required": False,
             "irreducible_external_information_proved": False,
+            "internal_unsolved": False,
+            "pending_acquisition_or_experiment_required": False,
             "internal_blockers": [],
             "evidence_blockers": [],
         }
@@ -283,12 +289,17 @@ def classify_residual(
 
     if internal:
         cls = "INTERNAL_SOLVABLE_OR_CONSTRUCTIVE_GAP"
+    elif evidence:
+        cls = "PENDING_ACQUISITION_OR_EXPERIMENT"
     else:
-        cls = "NEW_INFORMATION_OR_EXPERIENCE_REQUIRED"
+        cls = "NONE"
+    pending_acquisition = bool(evidence) and not bool(internal)
     return {
         "class": cls,
         "internally_solvable_gap_remaining": bool(internal),
-        "external_or_new_evidence_required": bool(evidence) and not bool(internal),
+        "internal_unsolved": bool(internal or evidence),
+        "pending_acquisition_or_experiment_required": pending_acquisition,
+        "external_or_new_evidence_required": pending_acquisition,
         "irreducible_external_information_proved": False,
         "internal_blockers": sorted(internal),
         "evidence_blockers": sorted(evidence),
@@ -307,6 +318,9 @@ def run(
     ),
     failure_repair_provider: Callable[
         [Mapping[str, Any]], Mapping[str, Any]
+    ] | None = None,
+    externality_certificate_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
     ] | None = None,
     max_rounds: int = 64,
     max_actions_per_round: int = 32,
@@ -396,7 +410,8 @@ def run(
                 "rounds_executed": round_index + 1,
                 "transcript": transcript,
                 "residual": classify_residual([], pending=[]),
-                "verified_goal_satisfied_or_irreducible_external_only": True,
+                "verified_goal_satisfied_or_irreducible_external_only": False,
+                "internal_improvement_queue_closed": True,
                 "irreducible_external_information_proved": False,
                 "terminal_authority": False,
             }
@@ -405,7 +420,7 @@ def run(
             residual = classify_residual(blockers, pending=pending)
             internal = residual["internally_solvable_gap_remaining"]
             bounded_historical_certificate = None
-            strict_external_failure_certificate = None
+            historical_failure_state_certificate = None
             if (
                 not internal
                 and residual.get("external_or_new_evidence_required") is True
@@ -427,32 +442,94 @@ def run(
                         "EVIDENCE_OR_NEW_REPLAYABLE_EXPERIENCE"
                     )
 
-                strict_external_failure_certificate = (
+                historical_failure_state_certificate = (
                     historical_failure.certify_pending_set(
                         pending,
                         state_path=state_path,
                         repo_root=repo_root,
                     )
                 )
-                if strict_external_failure_certificate.get("pass") is True:
-                    residual["irreducible_external_information_proved"] = True
-                    residual["irreducible_external_certificate"] = deepcopy(
-                        strict_external_failure_certificate
+                if historical_failure_state_certificate.get("pass") is True:
+                    residual["historical_replay_information_absence_proved"] = True
+                    residual["historical_replay_information_certificate"] = deepcopy(
+                        historical_failure_state_certificate
                     )
-                    residual["irreducible_external_boundary"] = (
+                    residual["historical_replay_information_boundary"] = (
                         "EXACT_HISTORICAL_FAILURE_REPLAY_CONTEXT_IS_ABSENT_FROM_"
-                        "CURRENT_DURABLE_R3_STATE__NEW_EXTERNAL_REPLAY_INFORMATION_"
-                        "OR_NEW_REPLAYABLE_FAILURE_EXPERIENCE_REQUIRED"
+                        "CURRENT_DURABLE_R3_STATE__THIS_IS_SUPPORTING_EVIDENCE_ONLY_"
+                        "AND_DOES_NOT_PROVE_INFORMATION_THEORETIC_EXTERNALITY"
                     )
-            external_proved = (
-                residual.get("irreducible_external_information_proved") is True
+
+            externality_certificate = None
+            externality_provider_error = None
+            if (
+                not internal
+                and residual.get("external_or_new_evidence_required") is True
+                and externality_certificate_provider is not None
+            ):
+                request = {
+                    "schema": SCHEMA,
+                    "request": "PROVE_INFORMATION_THEORETIC_EXTERNALITY",
+                    "pending": deepcopy(list(pending)),
+                    "residual": deepcopy(residual),
+                    "bounded_historical_evidence_certificate": deepcopy(
+                        bounded_historical_certificate
+                    ),
+                    "historical_failure_state_certificate": deepcopy(
+                        historical_failure_state_certificate
+                    ),
+                }
+                try:
+                    candidate = externality_certificate_provider(request)
+                    if isinstance(candidate, Mapping):
+                        externality_certificate = deepcopy(dict(candidate))
+                except Exception as exc:
+                    externality_provider_error = type(exc).__name__ + ":" + str(exc)
+
+            externality_verification = externality_gate.verify_certificate(
+                externality_certificate,
+                pending=pending,
             )
-            if internal:
-                status = "OPEN__INTERNAL_SOLVABLE_GAP_REMAINS"
+            residual["externality_verification"] = deepcopy(
+                externality_verification
+            )
+            if externality_provider_error is not None:
+                residual["externality_provider_error"] = externality_provider_error
+
+            external_proved = (
+                externality_verification.get(
+                    "irreducible_external_information_proved"
+                )
+                is True
+            )
+            residual["irreducible_external_information_proved"] = external_proved
+            if external_proved:
+                residual["irreducible_external_certificate"] = deepcopy(
+                    externality_certificate
+                )
+            elif not internal:
+                internal = True
+                if residual.get("pending_acquisition_or_experiment_required") is True:
+                    residual["class"] = "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT"
+                else:
+                    residual["class"] = "INTERNAL_UNSOLVED__EXTERNALITY_NOT_PROVED"
+                residual["internally_solvable_gap_remaining"] = True
+                residual["internal_unsolved"] = True
+                residual["external_or_new_evidence_required"] = False
+                blockers_now = set(residual.get("internal_blockers") or [])
+                blockers_now.add(
+                    "EXTERNALITY_NOT_PROVED__CONTINUE_INTERNAL_SEARCH_SYNTHESIS_OR_BYPASS"
+                )
+                residual["internal_blockers"] = sorted(blockers_now)
+
+            if internal and residual.get("pending_acquisition_or_experiment_required") is True:
+                status = "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT"
+            elif internal:
+                status = "OPEN__INTERNAL_UNSOLVED_GAP_REMAINS"
             elif external_proved:
-                status = "VERIFIED_FIXED_POINT__IRREDUCIBLE_EXTERNAL_INFORMATION_REQUIRED"
+                status = "VERIFIED_FIXED_POINT__PROVED_INFORMATION_THEORETICALLY_EXTERNAL"
             else:
-                status = "OPEN__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED__IRREDUCIBILITY_NOT_PROVED"
+                status = "OPEN__INTERNAL_UNSOLVED_GAP_REMAINS"
             return {
                 "schema": SCHEMA,
                 "status": status,
@@ -472,8 +549,11 @@ def run(
                 "bounded_historical_evidence_certificate": deepcopy(
                     bounded_historical_certificate
                 ),
-                "strict_external_failure_certificate": deepcopy(
-                    strict_external_failure_certificate
+                "historical_failure_state_certificate": deepcopy(
+                    historical_failure_state_certificate
+                ),
+                "information_theoretic_externality_verification": deepcopy(
+                    externality_verification
                 ),
                 "terminal_authority": False,
             }
