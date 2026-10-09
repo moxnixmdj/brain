@@ -1018,6 +1018,87 @@ def _refresh_stats(state: dict[str, Any]) -> None:
     }
 
 
+def _retire_orphaned_failure_work_in_state(
+    state: dict[str, Any],
+    failure_fingerprint: str,
+    *,
+    work_id: str | None = None,
+) -> list[str]:
+    """Retire repair work that never had enough provenance to be a repair obligation."""
+    fid = _s(failure_fingerprint)
+    failure = state.get("failures", {}).get(fid)
+    if not isinstance(failure, dict):
+        return []
+    capsules = failure.get("retry_capsules")
+    if isinstance(capsules, Mapping) and capsules:
+        return []
+
+    failure["repairability"] = "ORPHANED_TELEMETRY__NO_REPLAY_CONTEXT"
+    failure["terminal_obligation_established"] = False
+    failure["original_failure_repaired"] = False
+    failure["provenance_gap"] = "RETRY_CONTEXT_MISSING_AT_SOURCE"
+
+    queue = state.get("improvement_queue", {})
+    if not isinstance(queue, dict):
+        return []
+    retired: list[str] = []
+    for wid, row in queue.items():
+        if not isinstance(row, dict):
+            continue
+        if work_id is not None and str(wid) != str(work_id):
+            continue
+        if row.get("kind") != "REPAIR_FAILURE_CLASS":
+            continue
+        identity = row.get("identity") if isinstance(row.get("identity"), Mapping) else {}
+        payload = row.get("payload") if isinstance(row.get("payload"), Mapping) else {}
+        row_fid = _s(identity.get("failure_fingerprint") or payload.get("failure_fingerprint"))
+        retry_sha = _s(identity.get("retry_capsule_sha256") or payload.get("retry_capsule_sha256"))
+        if row_fid != fid or retry_sha:
+            continue
+        if row.get("status") not in {"PENDING", "PARKED"}:
+            continue
+        row["status"] = "RESOLVED"
+        row["resolved_by"] = "ORPHANED_TELEMETRY__NO_REPLAY_CONTEXT"
+        row["resolved_without_repair"] = True
+        row["terminal_obligation_established"] = False
+        row["original_failure_repaired"] = False
+        retired.append(str(wid))
+    return sorted(retired)
+
+
+def retire_orphaned_failure_repair_work(
+    failure_fingerprint: str,
+    *,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+    work_id: str | None = None,
+) -> dict[str, Any]:
+    """Migrate legacy context-free repair work without claiming the failure was repaired."""
+    state = load_state(state_path)
+    fid = _s(failure_fingerprint)
+    retired = _retire_orphaned_failure_work_in_state(
+        state,
+        fid,
+        work_id=work_id,
+    )
+    _refresh_stats(state)
+    _write_state(state, state_path)
+    return {
+        "schema": SCHEMA,
+        "status": (
+            "ORPHANED_FAILURE_TELEMETRY_RETIRED"
+            if retired
+            else "NO_ORPHANED_FAILURE_REPAIR_WORK_RETIRED"
+        ),
+        "pass": bool(retired),
+        "failure_fingerprint": fid,
+        "retired_work_ids": retired,
+        "orphan_telemetry_retired": bool(retired),
+        "original_failure_repaired": False,
+        "terminal_obligation_established": False,
+        "terminal_authority": False,
+    }
+
+
 def integrate_solver_output(
     out: Mapping[str, Any],
     *,
@@ -1081,6 +1162,32 @@ def integrate_solver_output(
             ),
             "repair_receipts": repair_receipts,
         }
+        if retry_context is None:
+            retired = _retire_orphaned_failure_work_in_state(state, fid)
+            failure_record = state["failures"][fid]
+            failure_record["repairability"] = "ORPHANED_TELEMETRY__NO_REPLAY_CONTEXT"
+            failure_record["terminal_obligation_established"] = False
+            failure_record["original_failure_repaired"] = False
+            failure_record["provenance_gap"] = "RETRY_CONTEXT_MISSING_AT_SOURCE"
+            _refresh_stats(state)
+            _write_state(state, state_path)
+            return {
+                "schema": SCHEMA,
+                "status": "FAILURE_DIAGNOSED__ORPHANED_TELEMETRY__NO_REPAIR_OBLIGATION_CREATED",
+                "pass": False,
+                "diagnosis": diagnosis,
+                "retry_capsule_sha256": None,
+                "retry_capsule_persisted": False,
+                "improvement_work_id": None,
+                "retired_legacy_orphan_work_ids": retired,
+                "orphan_telemetry_only": True,
+                "terminal_obligation_established": False,
+                "source_repair_required": True,
+                "source_repair_reason": "RETRY_CONTEXT_MISSING_AT_SOURCE",
+                "state_stats": deepcopy(state["stats"]),
+                "permanent_reuse_authorized": False,
+                "terminal_authority": False,
+            }
         work_id = _enqueue_improvement(
             state,
             kind="REPAIR_FAILURE_CLASS",
