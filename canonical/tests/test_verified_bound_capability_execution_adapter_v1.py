@@ -23,6 +23,7 @@ def test_verified_stdlib_archive_entry_is_admissible_for_execution():
     assert out["entry"]["incremental_spend_usd"] == 0
     assert len(out["registry_file_sha256"]) == 64
     assert len(out["registry_entry_sha256"]) == 64
+    assert len(out["adapter_git_blob_sha"]) == 40
 
 
 def test_execute_manifest_archive_through_promoted_registry_and_reverify_trace(tmp_path, monkeypatch):
@@ -97,6 +98,7 @@ def test_execute_uses_one_frozen_registry_entry_without_reread(monkeypatch):
             "entry": dict(frozen_entry),
             "registry_file_sha256": "1" * 64,
             "registry_entry_sha256": "2" * 64,
+            "adapter_git_blob_sha": "3" * 40,
         }
 
     monkeypatch.setattr(subject, "inspect", fake_inspect)
