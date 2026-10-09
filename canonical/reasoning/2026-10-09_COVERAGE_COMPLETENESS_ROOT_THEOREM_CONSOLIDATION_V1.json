@@ -13,7 +13,7 @@
     "ZERO_TERMINAL_ACCEPTANCE_OWNERSHIP_CREDIT"
   ],
   "current_base": {
-    "main_commit": "cf1bb9b70251d05883ada9a5c9689dffc2ca9201",
+    "main_commit": "0dac48cab2ae3334e6d00bf35d0c2a988b29aa42",
     "canonical_pointer_sha": "9a9debe3466d25e743feff44c083b2b75ba2f839",
     "current_terminal_authority_sha": "959908dde4c539d3f04870476fae65d1f2abf094",
     "goal_gate_sha": "797411f55a84d599651fa4d47874ad1538c4399d",
