@@ -96,30 +96,22 @@
     "role": "FROZEN_CLAIM_INDEX_FOR_R1_R4_AND_CARRIER_FACTORIZATION__ZERO_CREDIT"
   },
   "currentness_repair": {
-    "pr": 3853,
-    "reason": "EXACT_FROZEN_CHECKPOINT_CLAIM_ACTIVATED_FOR_CC_ROOT_REGISTRY",
+    "pr": 3845,
+    "reason": "MISSION_ROOT_THEOREM_CLAIM_SCOPE_AND_ROOT_CERTIFICATE_REGISTRY_BINDINGS_REFRESHED_TO_CURRENT_BYTES",
     "terminal_credit_delta": 0
   },
   "root_certificate_registry_precondition": {
     "registry_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
-    "registry_git_blob_sha": "65eeca96cdf48c0d4bc404efb3b705c348e7cd75",
+    "registry_git_blob_sha": "fa395c54a9f5c7d93eff01dd8ccf28575c0a0361",
     "current_pointer_path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
-    "current_pointer_git_blob_sha": "188f8b17fdc3fea0bc3dfd28f0ed2f31bc727800",
+    "current_pointer_git_blob_sha": "b5ecc5a30abd046fb4f034e9ac1972ebdcf73c66",
     "guard_path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
     "guard_git_blob_sha": "508df599e111e9aec47cbd175ce4f760299da786",
     "tests_path": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
     "tests_git_blob_sha": "7944f9c4fa46de905f7f6976b9dd2968f174733c",
-    "active_claim": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
+    "active_claim": null,
     "role": "R4_PROOF_CLOSURE_REQUIRES_EXACT_FROZEN_CLAIM_BEFORE_ANY_PROVED_CC_ROOT_SLOT",
     "current_root_certificates_proved": 0,
-    "r4_proof_closure": false,
-    "current_root_falsifications": {
-      "CC_R3_TERMINAL_CLOSURE_V1": {
-        "path": "canonical/verification/CC_R3_COUNTEREXAMPLE_20261009_V1.json",
-        "git_blob_sha": "bf6e8ef01894350c5d51abe53038cea315984ea3",
-        "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
-        "u_empty": false
-      }
-    }
+    "r4_proof_closure": false
   }
 }
