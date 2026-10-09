@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_R4_CONTENT_ADDRESSED_LIVE_BINDING_VERIFIED_CURRENT_BYTES__ZERO_CREDIT",
+  "status": "ACTIVE_R4_LIVE_BINDING__CHECKPOINT_FAMILY_IDENTITY_CONTENT_BOUND__ZERO_CREDIT",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
     "git_blob_sha": "2b37b3185e03b55678d7d394c8d29202a4b3ab48",
@@ -25,9 +25,9 @@
   },
   "live_binding_validator": {
     "path": "canonical/runtime/root_theorem_live_binding_v1.py",
-    "git_blob_sha": "66d51675929d1f57e65186fb9aec898082a88eab",
+    "git_blob_sha": "652e5676d36c8a3820bb3a6a55796bc772772004",
     "tests_path": "canonical/tests/test_root_theorem_live_binding_v1.py",
-    "tests_git_blob_sha": "4f882479f521e5cca415ea9ec26fdff96153e2ad"
+    "tests_git_blob_sha": "41a993fab88f419c4e66f01bfb344729fc0a900f"
   },
   "terminal_authority": {
     "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -90,12 +90,34 @@
   },
   "claim_scope_precondition": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
-    "git_blob_sha": "907c2935f7a6aeaf69e9288219fd94b36f58e8b2",
+    "git_blob_sha": "6c5eb6910492a90051e46834a8af46f03a17909e",
     "role": "FROZEN_CLAIM_INDEX_FOR_R1_R4_AND_CARRIER_FACTORIZATION__ZERO_CREDIT"
   },
   "currentness_repair": {
     "pr": 3786,
     "reason": "MISSION_ROOT_THEOREM_FALSIFIER_TEST_AND_VALIDATOR_BYTES_DRIFTED_AFTER_PRIOR_BINDING_FREEZE",
+    "terminal_credit_delta": 0
+  },
+  "checkpoint_claim_aggregator_precondition": {
+    "scope": "OPUS_5_5_CHECKPOINT_ONLY",
+    "reducer": {
+      "path": "canonical/runtime/terminal_closure_reducer.py",
+      "git_blob_sha": "05d366142079f1bc8c3c5234aa049a73ceccd7aa"
+    },
+    "tests": {
+      "path": "canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py",
+      "git_blob_sha": "f1d8a9951d6594781c6af33eba03a7c50c5c0e3a"
+    },
+    "manifest": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "d449a24039d57c7439ca7dea7449d5be26f2d24a"
+    },
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "identity_rule": "MANIFEST_FAMILY_ID_SET_EQUALS_FROZEN_TARGET_ENVELOPE_FAMILY_ID_SET",
+    "global_open_ended_mission_completion_derivable": false,
     "terminal_credit_delta": 0
   }
 }
