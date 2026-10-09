@@ -1,8 +1,11 @@
-"""Proof one typed-acceptance membership atom from the frozen prewave boundary.
+"""Proof one typed-acceptance membership atom from prior independent execution.
 
 This module proves only SPEC_ACCEPT_NO_HIDDEN_VERIFIER_ACCESS_V1 for the exact
-SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001 prewave binding. It does not
-infer arbitrary task isolation and it does not prove any other membership atom.
+bounded SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001 diagnostic route whose
+candidate/suite/test bytes were independently executed on the public runner.
+
+It does not infer arbitrary CursorBench membership and proves no semantic,
+failure-mode-completeness, or dependency-provenance atom.
 """
 from __future__ import annotations
 
@@ -11,25 +14,25 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from canonical.runtime.verify_specification_acceptance_prewave_v1 import (
-    verify as verify_prewave,
-)
-
-SCHEMA = "PROJECT_BRAIN_CURSORBENCH_TYPED_ACCEPTANCE_NO_HIDDEN_VERIFIER_ATOM_PROOF_V1"
+SCHEMA = "PROJECT_BRAIN_CURSORBENCH_TYPED_ACCEPTANCE_NO_HIDDEN_VERIFIER_ATOM_PROOF_V2"
 ATOM_ID = "SPEC_ACCEPT_NO_HIDDEN_VERIFIER_ACCESS_V1"
 ATOM_SEMANTICS = (
     "NO_HIDDEN_VERIFIER_OR_TASK_SPECIFIC_SOLUTION_INFORMATION_WAS_USED_BEFORE_"
     "TERMINAL_AUTHORIZATION"
 )
-BINDING_PATH = (
-    "canonical/governance/"
-    "SPECIFICATION_INDEPENDENT_ACCEPTANCE_PREWAVE_BINDING_V1.json"
+
+EVIDENCE_PATH = (
+    "canonical/verification/"
+    "M0A_RAW_SOURCE_POST_REPAIR_PUBLIC_RUNNER_20261002_V1.json"
 )
-BINDING_BLOB_SHA = "65c2ea78a548b4f4cd12ca6275cbad7ad2e08900"
-PREWAVE_VERIFIER_PATH = (
-    "canonical/runtime/verify_specification_acceptance_prewave_v1.py"
-)
-PREWAVE_VERIFIER_BLOB_SHA = "d9f113f6262c3b90c50169de4052a4a6021d7b75"
+EVIDENCE_BLOB_SHA = "0eef12725a992a5f3377340ee4dcacb65e74b0cc"
+CANDIDATE_PATH = "canonical/runtime/m0a_raw_source_brain_candidate_v2.py"
+CANDIDATE_BLOB_SHA = "0aac96d27068bdad379703c1b0b8a7a32cacb2e2"
+SUITE_PATH = "canonical/runtime/m0a_raw_source_terminal_suite_v2.py"
+SUITE_BLOB_SHA = "63b5daacfa5623c38228d41f6a84e548890d252d"
+TEST_PATH = "canonical/tests/test_m0a_raw_source_terminal_suite_v2.py"
+TEST_BLOB_SHA = "6c4db6c0baa12d067cd277858fd9534cd794f871"
+BEHAVIOR_ID = "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -60,88 +63,172 @@ def _fail(reason: str, **detail: Any) -> dict[str, Any]:
     return out
 
 
+def _safe_exact_file(
+    root: Path,
+    rel: str,
+    expected_sha: str,
+) -> tuple[Path | None, dict[str, Any] | None]:
+    p = Path(rel)
+    if p.is_absolute() or ".." in p.parts:
+        return None, _fail("BOUND_PATH_INVALID", path=rel)
+    target = root / p
+    try:
+        resolved = target.resolve(strict=True)
+        resolved.relative_to(root)
+    except Exception as exc:
+        return None, _fail(
+            "BOUND_PATH_RESOLUTION_FAILED",
+            path=rel,
+            error=type(exc).__name__ + ":" + str(exc),
+        )
+    if target.is_symlink() or not target.is_file():
+        return None, _fail("BOUND_FILE_NOT_REGULAR", path=rel)
+    actual = _git_blob_sha(target)
+    if actual != expected_sha:
+        return None, _fail(
+            "BOUND_FILE_DRIFT",
+            path=rel,
+            expected=expected_sha,
+            actual=actual,
+        )
+    return target, None
+
+
 def verify(
-    binding_ref: Mapping[str, Any],
+    evidence_ref: Mapping[str, Any],
     *,
     repo_root: str | Path | None = None,
 ) -> dict[str, Any]:
-    if not isinstance(binding_ref, Mapping):
-        return _fail("BINDING_REFERENCE_NOT_OBJECT")
-    if binding_ref.get("path") != BINDING_PATH:
-        return _fail("BINDING_PATH_NOT_EXACT_PREWAVE")
-    if binding_ref.get("git_blob_sha") != BINDING_BLOB_SHA:
-        return _fail("BINDING_REFERENCE_SHA_MISMATCH")
+    if not isinstance(evidence_ref, Mapping):
+        return _fail("EVIDENCE_REFERENCE_NOT_OBJECT")
+    if evidence_ref.get("path") != EVIDENCE_PATH:
+        return _fail("EVIDENCE_PATH_NOT_EXACT_INDEPENDENT_RECEIPT")
+    if evidence_ref.get("git_blob_sha") != EVIDENCE_BLOB_SHA:
+        return _fail("EVIDENCE_REFERENCE_SHA_MISMATCH")
 
     try:
         root = (Path(repo_root) if repo_root is not None else ROOT).resolve(strict=True)
-        binding = root / BINDING_PATH
-        verifier = root / PREWAVE_VERIFIER_PATH
-        for path in (binding, verifier):
-            resolved = path.resolve(strict=True)
-            resolved.relative_to(root)
-            if path.is_symlink():
-                return _fail("BOUND_FILE_SYMLINK_FORBIDDEN", path=str(path))
-            if not path.is_file():
-                return _fail("BOUND_FILE_NOT_REGULAR", path=str(path))
+        bound = (
+            (EVIDENCE_PATH, EVIDENCE_BLOB_SHA),
+            (CANDIDATE_PATH, CANDIDATE_BLOB_SHA),
+            (SUITE_PATH, SUITE_BLOB_SHA),
+            (TEST_PATH, TEST_BLOB_SHA),
+        )
+        files: dict[str, Path] = {}
+        for rel, expected in bound:
+            target, error = _safe_exact_file(root, rel, expected)
+            if error is not None or target is None:
+                return error or _fail("BOUND_FILE_UNAVAILABLE", path=rel)
+            files[rel] = target
 
-        actual_binding_sha = _git_blob_sha(binding)
-        if actual_binding_sha != BINDING_BLOB_SHA:
+        receipt = json.loads(files[EVIDENCE_PATH].read_text(encoding="utf-8"))
+        if receipt.get("schema") != (
+            "PROJECT_BRAIN_M0A_RAW_SOURCE_POST_REPAIR_PUBLIC_RUNNER_20261002_V1"
+        ):
+            return _fail("INDEPENDENT_RECEIPT_SCHEMA_INVALID")
+        if receipt.get("behavior_id") != BEHAVIOR_ID:
+            return _fail("INDEPENDENT_RECEIPT_BEHAVIOR_MISMATCH")
+        if not str(receipt.get("status") or "").startswith(
+            "INDEPENDENT_POST_REPAIR_DIAGNOSTIC_PASS__64_OF_64"
+        ):
+            return _fail("INDEPENDENT_RECEIPT_NOT_PASS")
+
+        exact = receipt.get("exact_brain_blobs")
+        if not isinstance(exact, Mapping):
+            return _fail("INDEPENDENT_RECEIPT_BLOB_BINDING_MISSING")
+        expected_bindings = {
+            "candidate": CANDIDATE_BLOB_SHA,
+            "suite": SUITE_BLOB_SHA,
+            "test": TEST_BLOB_SHA,
+        }
+        for key, expected in expected_bindings.items():
+            if exact.get(key) != expected:
+                return _fail(
+                    "INDEPENDENT_RECEIPT_BLOB_BINDING_MISMATCH",
+                    field=key,
+                    expected=expected,
+                    actual=exact.get(key),
+                )
+
+        runner = receipt.get("public_runner")
+        if not isinstance(runner, Mapping) or runner.get("conclusion") != "success":
+            return _fail("INDEPENDENT_PUBLIC_RUNNER_SUCCESS_NOT_BOUND")
+        result = receipt.get("result")
+        if (
+            not isinstance(result, Mapping)
+            or result.get("case_count") != 64
+            or result.get("passed") != 64
+            or result.get("failed") != 0
+        ):
+            return _fail("INDEPENDENT_EXECUTION_RESULT_NOT_64_OF_64")
+
+        test_source = files[TEST_PATH].read_text(encoding="utf-8")
+        required_test_contract = (
+            "test_oracle_never_enters_public_payload",
+            'self.assertNotIn("_oracle",public)',
+            'self.assertNotIn("requirements",public)',
+            "test_candidate_does_not_import_evaluator",
+            'self.assertNotIn("m0a_raw_source_terminal_suite_v2",src)',
+            'self.assertNotIn("_oracle",src)',
+            "test_diagnostic_executes_and_preserves_failures",
+            "suite.run_batch(seed,64,candidate.solve)",
+        )
+        missing_test_contract = [
+            token for token in required_test_contract if token not in test_source
+        ]
+        if missing_test_contract:
             return _fail(
-                "BOUND_PREWAVE_BINDING_DRIFT",
-                expected=BINDING_BLOB_SHA,
-                actual=actual_binding_sha,
+                "BOUND_TEST_DOES_NOT_ENFORCE_INFORMATION_BOUNDARY",
+                missing=missing_test_contract,
             )
-        actual_verifier_sha = _git_blob_sha(verifier)
-        if actual_verifier_sha != PREWAVE_VERIFIER_BLOB_SHA:
+
+        suite_source = files[SUITE_PATH].read_text(encoding="utf-8")
+        required_suite_dataflow = (
+            'def public_task(case: Mapping[str, Any])',
+            '"case_id": case["case_id"]',
+            '"raw_source": case["raw_source"]',
+            "public = public_task(case)",
+            "got = solver(public)",
+        )
+        missing_suite_dataflow = [
+            token for token in required_suite_dataflow if token not in suite_source
+        ]
+        if missing_suite_dataflow:
             return _fail(
-                "BOUND_PREWAVE_VERIFIER_DRIFT",
-                expected=PREWAVE_VERIFIER_BLOB_SHA,
-                actual=actual_verifier_sha,
+                "BOUND_SUITE_PUBLIC_DATAFLOW_NOT_PROVED",
+                missing=missing_suite_dataflow,
             )
 
-        doc = json.loads(binding.read_text(encoding="utf-8"))
-        if doc.get("schema") != "PROJECT_BRAIN_SPECIFICATION_INDEPENDENT_ACCEPTANCE_PREWAVE_BINDING_V1":
-            return _fail("BOUND_PREWAVE_SCHEMA_INVALID")
-        if doc.get("behavior_id") != "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001":
-            return _fail("BOUND_PREWAVE_BEHAVIOR_MISMATCH")
-
-        boundary = doc.get("information_boundary")
-        if not isinstance(boundary, Mapping):
-            return _fail("INFORMATION_BOUNDARY_NOT_OBJECT")
-        if boundary.get("candidate_receives_hidden_oracle") is not False:
-            return _fail("HIDDEN_ORACLE_VISIBLE")
-        if boundary.get("candidate_receives_reference_solution") is not False:
-            return _fail("REFERENCE_SOLUTION_VISIBLE")
-
-        frozen = doc.get("post_freeze_selection_and_accounting")
-        if not isinstance(frozen, Mapping):
-            return _fail("POST_FREEZE_POLICY_NOT_OBJECT")
-        for key in ("adaptive_case_selection", "case_replacement", "tuning_replay"):
-            if frozen.get(key) is not False:
-                return _fail("POST_FREEZE_LEAKAGE_CONTROL_UNPROVED", field=key)
-
-        replay = verify_prewave(root)
-        if replay.get("status") != "PASS" or replay.get("errors"):
-            return _fail("EXACT_PREWAVE_REPLAY_FAILED", replay=replay)
+        candidate_source = files[CANDIDATE_PATH].read_text(encoding="utf-8")
+        if "m0a_raw_source_terminal_suite_v2" in candidate_source:
+            return _fail("CANDIDATE_IMPORTS_HIDDEN_SUITE")
+        if "_oracle" in candidate_source:
+            return _fail("CANDIDATE_REFERENCES_HIDDEN_ORACLE")
 
         return {
             "schema": SCHEMA,
             "pass": True,
-            "status": "PASS__NO_HIDDEN_VERIFIER_ATOM_PROVED_FROM_EXACT_PREWAVE_BOUNDARY",
+            "status": (
+                "PASS__NO_HIDDEN_VERIFIER_ATOM_PROVED_FROM_INDEPENDENT_"
+                "EXECUTED_EXACT_DATAFLOW"
+            ),
             "atom_id": ATOM_ID,
             "atom_semantics": ATOM_SEMANTICS,
             "atom_truth_authorized": True,
-            "proof_basis": "EXACT_CONTENT_ADDRESSED_PREWAVE_INFORMATION_BOUNDARY_REPLAY",
-            "binding_path": BINDING_PATH,
-            "binding_git_blob_sha": actual_binding_sha,
-            "prewave_verifier_path": PREWAVE_VERIFIER_PATH,
-            "prewave_verifier_git_blob_sha": actual_verifier_sha,
-            "prewave_replay": replay,
+            "proof_basis": (
+                "EXACT_CANDIDATE_SUITE_TEST_BYTES__INDEPENDENT_PUBLIC_RUNNER_PASS__"
+                "PUBLIC_TASK_DATAFLOW_EXCLUDES_ORACLE__CANDIDATE_SOURCE_HAS_NO_ORACLE_ROUTE"
+            ),
+            "evidence_path": EVIDENCE_PATH,
+            "evidence_git_blob_sha": EVIDENCE_BLOB_SHA,
+            "candidate_git_blob_sha": CANDIDATE_BLOB_SHA,
+            "suite_git_blob_sha": SUITE_BLOB_SHA,
+            "test_git_blob_sha": TEST_BLOB_SHA,
             "proved_constraint": {"op": "ATOM", "id": ATOM_ID},
             "other_condition_atoms_proved": [],
             "scope_boundary": (
-                "EXACT_FROZEN_SPECIFICATION_ACCEPTANCE_PREWAVE_BINDING_ONLY__"
-                "NO_CLAIM_FOR_ARBITRARY_CURSORBENCH_OR_HARBOR_CONTEXTS"
+                "EXACT_BOUNDED_SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001_"
+                "DIAGNOSTIC_ROUTE_ONLY__NO_ARBITRARY_CURSORBENCH_OR_HARBOR_CLAIM"
             ),
             "membership_self_certified": False,
             "whole_policy_condition_proved": False,
