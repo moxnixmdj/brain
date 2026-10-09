@@ -57,6 +57,14 @@ def _fail(reason:str,**extra:Any)->dict[str,Any]:
     }
 
 
+def supports(raw:Any)->bool:
+    return (
+        isinstance(raw,Mapping)
+        and raw.get("schema")==SCHEMA
+        and raw.get("proof_class")==PROOF_CLASS
+    )
+
+
 def verify(raw:Mapping[str,Any])->dict[str,Any]:
     if not isinstance(raw,Mapping):
         return _fail("EVIDENCE_NOT_OBJECT")
