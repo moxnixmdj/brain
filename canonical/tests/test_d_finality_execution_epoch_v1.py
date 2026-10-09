@@ -47,6 +47,8 @@ class DFinalityExecutionEpochTests(unittest.TestCase):
             "status": "VERIFIED_D_FINAL",
             "capability_id": "engine:A",
             "capability_contract_sha256": d.sha256_json({"contract": "A"}),
+            "substrate_contract": {"kind": "TEST_CPYTHON", "version": "test"},
+            "substrate_contract_sha256": d.sha256_json({"kind": "TEST_CPYTHON", "version": "test"}),
             "policy_sha256": d.policy_sha256(policy),
             "registry_snapshot_root": d.sha256_json({"registry": "frozen"}),
             "state_snapshot_root": d.sha256_json({"state": "frozen"}),
