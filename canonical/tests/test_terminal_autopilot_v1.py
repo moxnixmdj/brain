@@ -171,6 +171,51 @@ class TerminalAutopilotTests(unittest.TestCase):
             self.assertEqual(len(built["blockers"]), 0)
 
 
+    def test_repo_mode_penalizes_unproved_universal_route_by_verified_missing_premises(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            q = root / "canonical/governance"
+            q.mkdir(parents=True)
+            (q / "FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json").write_text(
+                json.dumps({"independent_open_obligations": OPEN}), encoding="utf-8")
+            (q / "CURRENT_TERMINAL_AUTHORITY.json").write_text(json.dumps({
+                "live_truth": {
+                    "generator_basis_scope_complete_proved": False,
+                    "generator_transforms_abc_preserving_proved": False,
+                    "generator_closure_equals_trace_scope_proved": False,
+                }
+            }), encoding="utf-8")
+
+            built = build_manifest_from_repo(root, max_concurrency=1)
+            by_id = {row["id"]: row for row in built["routes"]}
+            universal = by_id["SCOPE_COMPLETE_UNIVERSAL_COVER"]
+            self.assertEqual(universal["estimated_wall_clock_units"], 3.0)
+            self.assertEqual(
+                set(universal["missing_verified_premises"]),
+                {
+                    "generator_basis_scope_complete_proved",
+                    "generator_transforms_abc_preserving_proved",
+                    "generator_closure_equals_trace_scope_proved",
+                },
+            )
+            self.assertEqual(
+                universal["wall_clock_basis"],
+                "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND",
+            )
+
+            out = plan(built)
+            self.assertEqual(len(out["dispatch"]), 1)
+            self.assertEqual(out["dispatch"][0]["kind"], "ROUTE_RACE")
+            self.assertEqual(
+                out["dispatch"][0]["route_id"],
+                "OBJECTIVE_ACCEPTANCE_COMMON_LAW",
+            )
+            self.assertNotEqual(
+                out["dispatch"][0]["route_id"],
+                "SCOPE_COMPLETE_UNIVERSAL_COVER",
+            )
+
+
     def test_repo_mode_installs_one_shot_attack_graph(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
