@@ -23,7 +23,7 @@
       "CERTIFICATE_GATED_SELECTED_ROUTES": 1
     },
     "stdlib_tranche_annotated_count": 19,
-    "member_material_theorem_verified_count": 1
+    "member_material_theorem_verified_count": 2
   },
   "rows": [
     {
@@ -84,7 +84,17 @@
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
-      "adapter_git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+      "adapter_git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929",
+      "member_material_theorem": {
+        "status": "VERIFIED_MEMBER_MATERIAL_THEOREM",
+        "receipt_path": "canonical/verification/D_FINAL_DECISION_VERIFY_MEMBER_THEOREM_20261009_V1.json",
+        "adapter_git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929",
+        "zero_ambient_launcher_git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8",
+        "independent_fresh_replay_count": 2,
+        "donor_network_authority_zero": true,
+        "fresh_challenge_after_cut": true,
+        "tamper_rejection_verified": true
+      }
     },
     {
       "capability_id": "bound:document.convert.markdown_pdf.pandoc_weasyprint",
