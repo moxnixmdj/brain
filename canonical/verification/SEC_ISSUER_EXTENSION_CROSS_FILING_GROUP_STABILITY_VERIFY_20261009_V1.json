@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_SEC_ISSUER_EXTENSION_CROSS_FILING_GROUP_STABILITY_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__BOUNDED_N_FILING_GROUP_STABILITY__PAIRWISE_PLUS_GROUP_17_OF_17__REAL_APPLE_2023_2024_2025_SEC_REPLAY_PASS__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "sec-cross-filing-bounded-group-v2-20261009-sol",
+    "base_main": "824af5655fc91efff3fa59ca470c7b90b0ae3776",
+    "exact_blobs": {
+      "canonical/runtime/sec_issuer_extension_cross_filing_stability_v2.py": "957cbe216cf9350564087ef6766889c49199b9f2",
+      "canonical/tests/test_sec_issuer_extension_cross_filing_stability_v2.py": "cb0b79d49007120d37c0ebfe4002698c5f829aef"
+    }
+  },
+  "independent_carrier": {
+    "name": "sec-cross-filing-stability-verify-20261009-sol",
+    "sprite_id": "sprite-ace3199b-4c26-4965-8518-0b1b21e085a8",
+    "workspace": "/home/sprite/work",
+    "role": "ISOLATED_REMOTE_VERIFICATION_CARRIER"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "combined_pairwise_and_group_assertions": {
+      "result": "PASS",
+      "tests_run": 17,
+      "failures": 0,
+      "errors": 0
+    },
+    "real_sec_group": {
+      "result": "PASS__BOUNDED_GROUP_CROSS_FILING_SEMANTIC_CONTRACT_STABILITY_PROVED",
+      "issuer_cik": "320193",
+      "member_count": 3,
+      "filing_directories": [
+        "000032019323000106",
+        "000032019324000123",
+        "000032019325000079"
+      ],
+      "periods": [
+        "2023-09-30",
+        "2024-09-28",
+        "2025-09-27"
+      ],
+      "concept_local_name": "LesseeOperatingAndFinanceLeaseLiabilityToBePaid",
+      "semantic_signature_sha256": "3ce0b49c226e5e8d2e4c2980cf6153106b990c025538c69c90f2cc82859d43a3",
+      "stability_receipt_sha256": "f4f3573ac5b7cc9ffdfd78abcb2fc350d5c83814e3e2d3d3f0b1ef377dbe1944",
+      "members": [
+        {
+          "period": "2023-09-30",
+          "concept_qname": "{http://www.apple.com/20230930}LesseeOperatingAndFinanceLeaseLiabilityToBePaid",
+          "xsd_sha256": "cfb3e49a01af2843495d4a517210526d9a2235a2a09a8105d2b88ef64539b7b5",
+          "label_sha256": "5f479dc90d9d634d40f99df4b92b48cceb04a2d6177f84007e655c25493ea119"
+        },
+        {
+          "period": "2024-09-28",
+          "concept_qname": "{http://www.apple.com/20240928}LesseeOperatingAndFinanceLeaseLiabilityToBePaid",
+          "xsd_sha256": "3515cfaf75c1b0ec2696425bf907a07b4aae286698e4cf5cf9de54e1270b3b7e",
+          "label_sha256": "49f18c53ee9c1e625339e541c524941b65424323dd33e5466519819f33f6ffc4"
+        },
+        {
+          "period": "2025-09-27",
+          "concept_qname": "{http://www.apple.com/20250927}LesseeOperatingAndFinanceLeaseLiabilityToBePaid",
+          "xsd_sha256": "e697d106fae1543535c634bede6337b8f1ecd987e7655eb91c62913900ab6335",
+          "label_sha256": "9ec8874c0af055946d80061bd5558599c4eb2b56b21e48a4670751097d166118"
+        }
+      ]
+    }
+  },
+  "proved": [
+    "TWO_TO_SIXTY_FOUR_DISTINCT_FILINGS_FROM_ONE_SEC_ISSUER_AND_ONE_EXTENSION_LOCAL_NAME_CAN_BE_CERTIFIED_AS_ONE_BOUNDED_SEMANTIC_CONTRACT_SET_AFTER_EVERY_MEMBER_IS_INDEPENDENTLY_REDERIVED_FROM_RAW_XSD_AND_LABEL_BYTES",
+    "GROUP_EQUALITY_REDUCES_TO_ONE_CANONICAL_SEMANTIC_SIGNATURE_DIGEST_WITH_LINEAR_MEMBER_VERIFICATION_INSTEAD_OF_PAIRWISE_O_N_SQUARED_COMPARISON",
+    "GROUP_DRIFT_RETURNS_EXACT_SIGNATURE_PARTITIONS_AND_DIFFERING_FIELDS_WITHOUT_GENERALIZING_INSTABILITY",
+    "CROSS_ISSUER_DUPLICATE_FILING_AND_LOCAL_NAME_MISMATCH_CASES_FAIL_CLOSED",
+    "TAMPERED_MEMBER_SEMANTIC_JSON_CANNOT_MINT_GROUP_STABILITY",
+    "PAIRWISE_V1_BEHAVIOR_IS_PRESERVED_8_OF_8",
+    "REAL_APPLE_2023_2024_2025_EXTENSION_SEMANTIC_CONTRACT_STABILITY_IS_PROVED_FOR_THE_EXACT_THREE_FILINGS"
+  ],
+  "hard_nonclaims": [
+    "NO_ETERNAL_OR_GLOBAL_CUSTOM_CONCEPT_IDENTITY",
+    "NO_STANDARD_TAXONOMY_EQUIVALENCE",
+    "NO_CROSS_ISSUER_STABILITY",
+    "NO_FUTURE_STABILITY_BEYOND_THE_EXACT_SUPPLIED_FILING_SET",
+    "NO_OPEN_WORLD_FINANCE_SEMANTIC_COMPLETENESS",
+    "NO_POLICY_ADEQUACY_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
