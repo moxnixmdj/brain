@@ -300,14 +300,21 @@ def evaluate(problem:Mapping[str,Any])->dict[str,Any]:
                         "RELATION_TARGET_OUTSIDE_PROVED_SCOPE:"
                         +doc["document_id"]+":"+eid
                     )
+            nonquery_eids=set()
+            for eid,row in relation_by_id.items():
+                if row["effect"]["target_id"]!=target:
+                    nonquery_eids.add(eid)
             for (eid,dim),row in dim_by_key.items():
-                if eid not in idset:
-                    if dim=="target" and row.get("value")!=target:
-                        continue
-                    raise ValueError(
-                        "QUERY_DIMENSION_OUTSIDE_PROVED_INVENTORY:"
-                        +doc["document_id"]+":"+eid+":"+dim
-                    )
+                if dim=="target" and row.get("value")!=target:
+                    nonquery_eids.add(eid)
+
+            for (eid,dim),row in dim_by_key.items():
+                if eid in idset or eid in nonquery_eids:
+                    continue
+                raise ValueError(
+                    "QUERY_DIMENSION_OUTSIDE_PROVED_INVENTORY_WITHOUT_NONQUERY_TARGET_PROOF:"
+                    +doc["document_id"]+":"+eid+":"+dim
+                )
 
             exact=[]
             doc_open=False
