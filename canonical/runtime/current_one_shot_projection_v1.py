@@ -31,6 +31,96 @@ PATHS = {
 
 _VERSION = re.compile(r"(?:^|__)V(\d+)(?:__|$)")
 
+_FINANCE_COMMON_POLICY_WAKE = (
+    "NEW_COMMON_POLICY_ADEQUACY_CERTIFICATE_ROBUST_TO_THE_SURVIVING_COUNTERMODEL"
+)
+_FINANCE_DIRECT_ADEQUACY_WAKE = "NEW_DIRECT_END_TO_END_FINANCE_ADEQUACY_CERTIFICATE"
+_FINANCE_DISCRIMINATOR_WAKES = frozenset(
+    {
+        "NEW_AUTHENTIC_POLICY_CHANGING_SOURCE_OR_CONTEXT_FACT",
+        "NEW_SCOPE_COMPLETE_SOUND_FINANCE_INTERPRETATION_OR_CONSTRAINT_BOUND",
+        "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND_OUTSIDE_VERIFIED_FIBO_Q2_2026_FULL_RELEASE_295_FILE_SCOPE",
+        "NEW_AUTHENTICATED_CONTEXT_SOURCE_AND_FIELD_SEMANTICS_BINDING_OUTSIDE_VERIFIED_SEC_COMPANYCONCEPT_AND_SEC_INLINE_XBRL_STANDARD_FASB_SCOPES",
+        "NEW_AUTHENTICATED_COMPLETE_BOUNDED_DENOTATION_EXTENSION_OR_SET_RELATION_EVIDENCE_OUTSIDE_VERIFIED_FIBO_Q2_2026_FULL_RELEASE_295_FILE_SCOPE",
+        "NEW_TASK_SPECIFIC_OEWN_TERMINAL_SIGNATURE_OR_DISCRIMINATOR_BINDING_FOR_SURVIVING_RELEASE_RELATIVE_SENSES",
+        "NEW_AUTHENTICATED_CONTEXT_OR_RELATION_EVIDENCE_THAT_DISCRIMINATES_SURVIVING_SENSES",
+        "NEW_AUTHENTICATED_OEWN_DECISION_MANIFEST_BINDING_COMPLETE_TERMINAL_SIGNATURES_TO_ALL_RELEASE_RELATIVE_SENSES",
+        "NEW_AUTHENTICATED_SENSE_DISCRIMINATOR_OBSERVATION_RECEIPT",
+    }
+)
+_FINANCE_EFFECT_ORDER = (
+    "COMMON_POLICY_ADEQUACY_BYPASS",
+    "DIRECT_END_TO_END_ADEQUACY_BYPASS",
+    "AUTHENTICATED_WORLD_DISCRIMINATOR_OR_CONSTRAINT",
+)
+
+
+def _finance_wake_effect_projection(r2: dict[str, Any]) -> dict[str, Any]:
+    cells = r2.get("current_cell_classifications")
+    cells = cells if isinstance(cells, dict) else {}
+    cell = cells.get("FINANCE_SEMANTIC_ADEQUACY_TAIL")
+    cell = cell if isinstance(cell, dict) else {}
+    raw_wakes = cell.get("wake_on")
+    if not isinstance(raw_wakes, list):
+        return {
+            "status": "NOT_APPLICABLE__NO_FINANCE_WAKE_LIST",
+            "concrete_wake_condition_count": 0,
+            "decision_effect_class_count": 0,
+            "all_wakes_classified": False,
+            "dedupe_by_effect_class_authorized": False,
+            "effect_groups": {},
+            "unclassified_wakes": [],
+            "preserve_concrete_wake_routes_for_provenance": True,
+            "semantic_truth_authority": False,
+            "policy_adequacy_authority": False,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
+
+    groups: dict[str, list[str]] = {}
+    unclassified: list[str] = []
+    for raw in raw_wakes:
+        wake = str(raw)
+        if wake == _FINANCE_COMMON_POLICY_WAKE:
+            effect = "COMMON_POLICY_ADEQUACY_BYPASS"
+        elif wake == _FINANCE_DIRECT_ADEQUACY_WAKE:
+            effect = "DIRECT_END_TO_END_ADEQUACY_BYPASS"
+        elif wake in _FINANCE_DISCRIMINATOR_WAKES:
+            effect = "AUTHENTICATED_WORLD_DISCRIMINATOR_OR_CONSTRAINT"
+        else:
+            digest = hashlib.sha256(wake.encode("utf-8")).hexdigest()[:16]
+            effect = "UNCLASSIFIED_WAKE::" + digest
+            unclassified.append(wake)
+        groups.setdefault(effect, []).append(wake)
+
+    ordered = [effect for effect in _FINANCE_EFFECT_ORDER if effect in groups]
+    ordered.extend(sorted(effect for effect in groups if effect not in _FINANCE_EFFECT_ORDER))
+    all_classified = not unclassified
+    return {
+        "status": (
+            "PASS__FINANCE_WAKE_EFFECT_QUOTIENT"
+            if all_classified
+            else "FAIL_CLOSED__UNCLASSIFIED_FINANCE_WAKE_PRESERVED_SEPARATELY"
+        ),
+        "concrete_wake_condition_count": len(raw_wakes),
+        "decision_effect_class_count": len(groups),
+        "all_wakes_classified": all_classified,
+        "dedupe_by_effect_class_authorized": all_classified,
+        "preferred_effect_search_order": ordered,
+        "effect_groups": {effect: groups[effect] for effect in ordered},
+        "unclassified_wakes": unclassified,
+        "preserve_concrete_wake_routes_for_provenance": True,
+        "finance_cell_state": cell.get("state"),
+        "information_theoretic_externality_proved": (
+            cell.get("information_theoretic_externality_proved") is True
+        ),
+        "semantic_truth_authority": False,
+        "policy_adequacy_authority": False,
+        "terminal_authority": False,
+        "terminal_credit_delta": 0,
+    }
+
+
 
 def _blob(path: Path) -> str:
     raw = path.read_bytes()
@@ -127,6 +217,7 @@ def evaluate(repo_root: str | Path = ROOT) -> dict[str, Any]:
             "git_blob_sha": actual["r2"],
             "status": r2.get("status"),
             "version": _version_from_status(r2.get("status")),
+            "finance_wake_effect_projection": _finance_wake_effect_projection(r2),
         },
         "current_terminal_authority": {
             "path": PATHS["terminal"],

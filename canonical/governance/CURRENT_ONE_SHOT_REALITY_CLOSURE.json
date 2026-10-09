@@ -107,10 +107,17 @@
     "static_projection_snapshots_authoritative": false,
     "dynamic_current_projection": {
       "path": "canonical/runtime/current_one_shot_projection_v1.py",
-      "git_blob_sha": "cba9d1cb46d40130a3e1c5d4fc70857d6fc25545",
+      "git_blob_sha": "650079f472955d49ab81f28e3d69c5f1d8d5ef4f",
       "authoritative_for_moving_r2_and_terminal": true,
       "stable_v1_v2_pointer_mismatch_fails_closed": true,
-      "snapshot_drift_is_observable_not_failure": true
+      "snapshot_drift_is_observable_not_failure": true,
+      "finance_wake_effect_projection_dynamic": true,
+      "finance_wake_effect_projection_reads_current_r2_at_call_time": true,
+      "finance_wake_effect_dedupe_requires_all_wakes_classified": true,
+      "unclassified_future_wake_preserved_as_distinct_effect_class": true,
+      "concrete_wake_provenance_preserved": true,
+      "finance_wake_effect_projection_semantic_truth_authority": false,
+      "finance_wake_effect_projection_terminal_authority": false
     },
     "current_terminal_authority_git_blob_sha_role": "LAST_VERIFIED_SNAPSHOT_ONLY__DYNAMIC_CURRENT_PROJECTION_IS_CURRENT_AUTHORITY",
     "current_terminal_authority_pointer_revision_role": "LAST_VERIFIED_SNAPSHOT_ONLY__DYNAMIC_CURRENT_PROJECTION_IS_CURRENT_AUTHORITY",
@@ -133,7 +140,10 @@
     "terminal_credit_requires_final_cleanroom_gate": true,
     "cleanroom_may_create_terminal_candidate": false,
     "strict_terminal_closure_current_main_replay_verified": true,
-    "strict_terminal_closure_current_main_source_head": "cbf5d0fa2c70b05072e2607946f9f7e139f67abd"
+    "strict_terminal_closure_current_main_source_head": "cbf5d0fa2c70b05072e2607946f9f7e139f67abd",
+    "dynamic_finance_wake_effect_projection_bound": true,
+    "dynamic_finance_wake_unknowns_fail_closed": true,
+    "static_finance_wake_quotient_snapshots_authoritative": false
   },
   "next_load_bearing_roots": [
     "FOLLOW_CURRENT_TERMINAL_AUTHORITY__R3_NOT_CURRENT_BLOCKER__PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
@@ -288,6 +298,16 @@
     "r3_current_internal_unsolved": false,
     "finance_acceptance_route_split_preserved": true,
     "terminal_remains_false": true,
+    "terminal_credit_delta": 0
+  },
+  "dynamic_finance_wake_effect_projection_reconciliation": {
+    "status": "BOUND_TO_DYNAMIC_CURRENT_PROJECTION__MOVING_R2_RESOLVED_AT_CALL_TIME__UNKNOWN_FUTURE_WAKES_PRESERVED_SEPARATELY__ZERO_CREDIT",
+    "runtime_path": "canonical/runtime/current_one_shot_projection_v1.py",
+    "runtime_git_blob_sha": "650079f472955d49ab81f28e3d69c5f1d8d5ef4f",
+    "current_known_finance_wake_count": 11,
+    "current_known_decision_effect_class_count": 3,
+    "static_r2_snapshot_rebinding_required_after_future_semantic_progress": false,
+    "unknown_wake_deduplication_authorized": false,
     "terminal_credit_delta": 0
   }
 }
