@@ -1162,6 +1162,11 @@
       "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V26.json",
       "git_blob_sha": "043ea9c1904a7fab8bbed04c3fc36eff2c2ee951",
       "note": "CURRENT_TB_SCIENCE_LEDGER__FOURTEEN_CONSUMED__RANK15_UNREAD_UNSTARTED__PUBLIC_V6_FINAL_RESEAL_PENDING"
+    },
+    "cursorbench_route_b_policy_coalescence_truth_repair_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_ROUTE_B_POLICY_COALESCENCE_DISJUNCTION_TRUTH_REPAIR_20261009_V1.json",
+      "git_blob_sha": "2342783490431bc36ba98d81606326192ad2fa69",
+      "note": "THREE_OBJECT_INFORMATION_MINCUT_IS_TYPED_SPECIALIST_BRANCH_LOCAL_NOT_GLOBAL_ROUTE_B_NECESSITY__GLOBAL_SUCCESSOR_IS_SCOPE_COMPLETE_POLICY_COVER_PLUS_CONDITIONAL_MINIMUM_DISCRIMINATOR__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1724,7 +1729,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "PARALLEL_ROUTE_B_INFORMATION_MINCUT__PROVE_TWO_SOURCE_SEMANTIC_OBJECTS_PLUS_ONE_CURRENT_4_0_PRETERMINAL_BOUNDARY_CONTINUITY_FACT__ON_FIRST_REAL_TARGET_CONTEXT_EXECUTE_ALL_BRAIN_CONTROLLED_CAPTURE_AND_AUDIT_WORK",
+    "cursorbench_next_proof_object": "BUILD_OR_FIND_CODING_SPEC_SCOPE_COMPLETE_AUTHENTICATED_POLICY_ADEQUACY_COVER__THEN_RUN_P3_COMMON_POLICY_CEGAR__ONLY_IF_NO_COMMON_POLICY_ACQUIRE_THE_SINGLE_SELECTED_POLICY_CHANGING_DISCRIMINATOR_TRUTH",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -1881,7 +1886,19 @@
     "cursorbench_route_b_cursor_specific_external_owner_fact_count": 1,
     "cursorbench_route_b_semantic_proof_object_count": 2,
     "cursorbench_route_b_dependency_provenance_cursor_specific_external_fact_count": 0,
-    "cursorbench_route_b_brain_controlled_context_work_count": 6
+    "cursorbench_route_b_brain_controlled_context_work_count": 6,
+    "cursorbench_route_b_three_object_mincut_global_necessity": false,
+    "cursorbench_route_b_three_object_mincut_scope": "B_TYPED_SPECIALIST_MEMBERSHIP_BRANCH_ONLY",
+    "cursorbench_route_b_policy_coalescence_disjunction_bound": true,
+    "cursorbench_route_b_global_mandatory_proof_object_count": 1,
+    "cursorbench_route_b_global_mandatory_proof_objects": [
+      "CODING_SPEC_SCOPE_COMPLETE_AUTHENTICATED_POLICY_ADEQUACY_COVER"
+    ],
+    "cursorbench_route_b_conditional_truth_objects": [
+      "SELECTED_POLICY_CHANGING_DISCRIMINATOR_TRUTH__ONLY_IF_NO_COMMON_POLICY_EXISTS"
+    ],
+    "cursorbench_route_b_common_policy_can_bypass_full_semantic_mapping": true,
+    "cursorbench_route_b_common_policy_can_bypass_full_failure_taxonomy": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2581,7 +2598,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 90,
+  "pointer_revision": 91,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3445,6 +3462,18 @@
     "task_read": false,
     "task_started": false,
     "public_v6_final_reseal_pending": true,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_route_b_policy_coalescence_truth_repair_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_ROUTE_B_POLICY_COALESCENCE_DISJUNCTION_TRUTH_REPAIR_20261009_V1.json",
+      "git_blob_sha": "2342783490431bc36ba98d81606326192ad2fa69"
+    },
+    "result": "GLOBAL_THREE_OBJECT_IRREDUCIBILITY_REVOKED__TYPED_SPECIALIST_BRANCH_PRESERVED__GLOBAL_ROUTE_B_FRONTIER_RESTORED_TO_POLICY_COVER_PLUS_CONDITIONAL_DISCRIMINATOR",
+    "prior_global_irreducible_truth_object_count": 3,
+    "current_global_mandatory_proof_object_count": 1,
+    "atom_truth_delta": 0,
+    "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
 }
