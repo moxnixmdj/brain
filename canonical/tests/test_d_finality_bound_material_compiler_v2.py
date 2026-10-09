@@ -153,6 +153,37 @@ class BoundMaterialCompilerV2Tests(unittest.TestCase):
         finally:
             td.cleanup()
 
+    def test_literal_runtime_module_loader_calls_are_member_bound(self):
+        td, root = self._repo()
+        try:
+            self._registry(root, "runtime_loader")
+            (root / "canonical/runtime/goal_compiler.py").write_text(
+                "VALUE=1\n", encoding="utf-8"
+            )
+            (root / "canonical/runtime/bound_capabilities/runtime_loader.py").write_text(
+                "import importlib.util\n"
+                "from pathlib import Path\n"
+                "def _load_runtime_module(root, filename, module_name):\n"
+                "    path=Path(root)/'canonical'/'runtime'/filename\n"
+                "    return importlib.util.spec_from_file_location(module_name,path)\n"
+                "def run(args, root):\n"
+                "    return _load_runtime_module(root,'goal_compiler.py','g')\n",
+                encoding="utf-8",
+            )
+            out = compile_candidate("cap.test", repo_root=root)
+            self.assertEqual(
+                out["status"],
+                "MEMBER_MATERIAL_CLOSURE_CANDIDATE_COMPILED",
+            )
+            paths = {row["path"] for row in out["member"]["materials"]}
+            self.assertIn("canonical/runtime/goal_compiler.py", paths)
+            self.assertIn(
+                "canonical/runtime/goal_compiler.py",
+                out["member"]["dynamic_literal_targets"],
+            )
+        finally:
+            td.cleanup()
+
     def test_source_obligation_stays_member_specific(self):
         td, root = self._repo()
         try:
