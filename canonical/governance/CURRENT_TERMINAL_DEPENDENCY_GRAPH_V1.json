@@ -61,6 +61,19 @@
         "IMPLEMENTATION_REFINEMENT_MISMATCH"
       ],
       "reason": "DECLARED_TRANSITION_PARTITION_AND_TEST_BINDING_EXIST__NO_MECHANICALLY_CHECKED_REFINEMENT_PROOF_CLASS"
+    },
+    {
+      "id": "terminal-live-paths-executable-refinement",
+      "kind": "EXECUTABLE_REFINEMENT",
+      "status": "UNRESOLVED",
+      "binding": null,
+      "failure_families": [
+        "COMPOSITION_MISMATCH",
+        "VERSION_DRIFT",
+        "NOVEL_DIMENSION",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH"
+      ],
+      "reason": "NO_MECHANICALLY_CHECKED_REFINEMENT_PROOF_CLASS_CURRENTLY_CLOSES_ALL_TERMINAL_LOAD_BEARING_EXECUTABLE_PATHS"
     }
   ],
   "routes": [
@@ -86,6 +99,17 @@
         "semantic-edge-executable-refinement"
       ],
       "executable_refinement_leaf_id": "semantic-edge-executable-refinement",
+      "deployment_identity_leaf_id": null
+    },
+    {
+      "id": "terminal-live-execution",
+      "lifecycle": "SPECIFIED",
+      "creditable": false,
+      "terminal_load_bearing": true,
+      "dependency_leaf_ids": [
+        "terminal-live-paths-executable-refinement"
+      ],
+      "executable_refinement_leaf_id": "terminal-live-paths-executable-refinement",
       "deployment_identity_leaf_id": null
     }
   ],
