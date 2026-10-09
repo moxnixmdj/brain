@@ -31,9 +31,9 @@
       "fabric_carrier": "H100_INFERENCE"
     },
     "CERTIFICATE_GATED_SELECTED_ROUTES": {
-      "kind": "CONTENT_ADDRESSED_ROUTE_REGISTRY",
-      "source_path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
-      "selector": "admitted routes accepted by certificate_gated_selected_route_runtime_entrypoint_v2",
+      "kind": "CONTENT_ADDRESSED_CURRENT_ROUTE_REGISTRY",
+      "source_path": "canonical/governance/CURRENT_CERTIFICATE_GATED_SELECTED_ROUTE_REGISTRY.json",
+      "selector": "current pointer target admitted routes accepted by certificate_gated_selected_route_runtime_entrypoint_v5",
       "fabric_carrier": "CERTIFIED_ROUTE"
     }
   },
