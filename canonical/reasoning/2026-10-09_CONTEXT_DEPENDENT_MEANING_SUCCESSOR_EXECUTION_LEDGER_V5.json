@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_20261009_V5",
+  "date": "2026-10-09",
+  "status": "DURABLE_SUCCESSOR_EXECUTION_DELTA_LEDGER__R2_V65_CURRENT_SEMANTIC_RECONCILIATION__ZERO_TERMINAL_CREDIT",
+  "extends": {
+    "path": "canonical/reasoning/2026-10-09_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_V4.json",
+    "git_blob_sha": "033175cb5a993f144e6100ff470b2373842dd3d3"
+  },
+  "events": [
+    {
+      "order": 22,
+      "event": "REUSE_MARKED_MENTION_ROUTE",
+      "result": "R2 V64 already closed the structurally complete typed marked-mention subregion; raw/plain-text coreference remains open."
+    },
+    {
+      "order": 23,
+      "event": "LIVE_DERIVED_TYPED_TERMINAL_ROUTE_DISCOVERED",
+      "result": "Current dynamic admissions advanced from two to three routes. Candidate terminal signatures can now be derived from independently verified typed decision problems in the exact marked scope instead of caller assertions."
+    },
+    {
+      "order": 24,
+      "event": "PROJECT_MREL_NECESSARY_PROPERTIES",
+      "result": "Bound six source-authenticated one-way MREL necessary properties; property-to-MREL reverse classification remains forbidden."
+    },
+    {
+      "order": 25,
+      "event": "BIND_TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION",
+      "result": "Proved loss absorption, recapitalisation, and resolution semantics are shared by TLAC and MREL and therefore cannot identify either concept; an additional identity discriminator is required."
+    },
+    {
+      "order": 26,
+      "event": "ADVANCE_R2_V65_ROOT2_V61",
+      "result": "Updated semantic residual accounting, current dynamic admission count, scheduler precedence, and terminal projection while preserving exactly one primary finance semantic residual.",
+      "verification": "canonical/verification/R2_V65_CURRENT_SEMANTIC_RECONCILIATION_VERIFY_20261009_V1.json",
+      "terminal_credit_delta": 0
+    }
+  ],
+  "next_execution_rule": "READ_CURRENT_R2_V65_ROOT2_V61_AND_ACTION_INTENT_V8__REUSE_THREE_DYNAMIC_ROUTES_MREL_AND_NONSEPARATION_GUARD__SELECT_ONE_SURVIVING_CASE__ACQUIRE_ONLY_MINIMUM_POLICY_CHANGING_AUTHENTICATED_FACT",
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_CONTEXT_DEPENDENT_MEANING_SOLVED",
+    "NO_CLAIM_FINANCE_SEMANTIC_TAIL_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
