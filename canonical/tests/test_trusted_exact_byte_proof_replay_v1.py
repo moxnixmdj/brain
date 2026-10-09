@@ -8,12 +8,15 @@ def _input():
         "contracts": [
             {
                 "instruction_id": "length_constraints:nth_paragraph_first_word",
-                "n": 1,
-                "first_word": "Forbidden",
+                "slots": {
+                    "num_paragraphs": 2,
+                    "nth_paragraph": 1,
+                    "first_word": "Forbidden",
+                },
             },
             {
                 "instruction_id": "keywords:forbidden_words",
-                "forbidden_words": ["Forbidden"],
+                "slots": {"forbidden_words": ["Forbidden"]},
             },
         ]
     }
