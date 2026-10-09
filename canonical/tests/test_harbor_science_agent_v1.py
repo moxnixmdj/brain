@@ -270,15 +270,41 @@ class ScienceAgentTests(unittest.TestCase):
         self.assertNotEqual(result["status"],"FINISHED")
         self.assertEqual(result["resolved_requirements"],[])
 
-    def test_requirements_cannot_mutate_after_first_cycle(self):
+    def test_requirements_redeclaration_after_freeze_is_non_authoritative(self):
         env=Env()
         outputs=[
             {"material_requirements":["R1"],"candidates":[{"action_id":"a","covers":["R1"],"command":"echo ok","verify_command":"verify-bad"}]},
             {"material_requirements":["R2"],"finish_summary":"done"},
         ]
         with patch.object(s.science_planner, "plan", planner(outputs)):
-            with self.assertRaisesRegex(RuntimeError,"REQUIREMENTS_MUTATED"):
+            result=asyncio.run(s.run_science_goal("goal",env,max_cycles=2))
+        self.assertEqual(result["material_requirements"],["R1"])
+        self.assertEqual(result["resolved_requirements"],[])
+        self.assertEqual(result["status"],"BLOCKED_MAX_CYCLES_NO_BRAIN_AUTHORIZED_FINISH")
+        self.assertTrue(any(
+            row.get("kind")=="FINISH_REJECTED" and row.get("reason")=="UNRESOLVED_MATERIAL_REQUIREMENTS"
+            for row in result["trace"]
+        ))
+
+    def test_redeclaration_cannot_authorize_candidate_outside_frozen_requirements(self):
+        env=Env()
+        outputs=[
+            {"material_requirements":["R1"],"candidates":[{"action_id":"a","covers":["R1"],"command":"echo ok","verify_command":"verify-bad"}]},
+            {"material_requirements":["R2"],"candidates":[{"action_id":"b","covers":["R2"],"command":"echo bad","verify_command":"echo verify"}]},
+        ]
+        with patch.object(s.science_planner, "plan", planner(outputs)):
+            with self.assertRaisesRegex(RuntimeError,"COVERAGE_OUTSIDE_CONTRACT"):
                 asyncio.run(s.run_science_goal("goal",env,max_cycles=2))
+
+    def test_malformed_later_requirement_redeclaration_is_ignored(self):
+        frozen=["R1","BRAIN_DELIVERABLE_01"]
+        raw={"material_requirements":{"not":"a list"},"finish_summary":"descriptive"}
+        requirements,candidates,summary=s._extract_contract(
+            raw,frozen,mandatory_requirements=["BRAIN_DELIVERABLE_01"]
+        )
+        self.assertEqual(requirements,frozen)
+        self.assertEqual(candidates,[])
+        self.assertEqual(summary,"descriptive")
 
     def test_command_policy_rejects_network_acquisition(self):
         env=Env()

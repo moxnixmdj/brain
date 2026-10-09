@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENCE_FROZEN_REQUIREMENTS_REPAIR_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__SCIENCE_AGENT_26_OF_26__PY_COMPILE_PASS__ZERO_EXPOSURE",
+  "causal_failure": "SCIENCE_REQUIREMENTS_MUTATED_AFTER_FREEZE",
+  "runtime_blob": "e7e258f567499bd7356c0276d6293aa30dbd338c",
+  "test_blob": "0e3d74c1f0087620e1da747113e5668888a086d0",
+  "result_truth_blob": "d5e5412b086c4e23d853dadcf5c70f07f7344e4d",
+  "verification": {
+    "py_compile": true,
+    "tests_passed": 26,
+    "tests_run": 26
+  },
+  "proven": [
+    "LATER_MATERIAL_REQUIREMENTS_DO_NOT_CHANGE_THE_FROZEN_REQUIREMENT_SET",
+    "LATER_MATERIAL_REQUIREMENTS_DO_NOT_FATAL_ABORT_AN_OTHERWISE_VALID_CYCLE",
+    "CANDIDATE_COVERS_OUTSIDE_THE_FROZEN_REQUIREMENT_SET_STILL_FAIL_CLOSED",
+    "THE_INITIAL_REQUIREMENT_FREEZE_IS_UNCHANGED"
+  ],
+  "scope": "ZERO_BENCHMARK_EXPOSURE__NO_RANK15_EXECUTION",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
