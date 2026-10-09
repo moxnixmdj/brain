@@ -1,0 +1,23 @@
+name: verify-proof-carrying-domain-mapping-v1
+
+on:
+  push:
+    branches:
+      - proof-carrying-domain-mapping-v1-20261009
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile
+        run: |
+          python -m py_compile             canonical/runtime/proof_carrying_domain_mapping_v1.py             canonical/runtime/semantic_relation_control_v1.py             canonical/runtime/bounded_authenticated_concept_universe_v1.py             canonical/runtime/semantic_ambiguity_control_v1.py
+      - name: Focused semantic mapping regressions
+        run: |
+          python -m pytest -q             canonical/tests/test_proof_carrying_domain_mapping_v1.py             canonical/tests/test_semantic_relation_control_v1.py             canonical/tests/test_bounded_authenticated_concept_universe_v1.py             canonical/tests/test_semantic_ambiguity_control_v1.py
