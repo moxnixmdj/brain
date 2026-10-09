@@ -11,6 +11,9 @@ from typing import Any, Mapping
 from canonical.runtime.domain_mapping_truth_certificate_v1 import (
     evaluate as evaluate_domain_mapping,
 )
+from canonical.runtime.regcap_loss_cushion_truth_certificate_v1 import (
+    evaluate as evaluate_regcap_loss_cushion,
+)
 
 SCHEMA = "PROJECT_BRAIN_SEMANTIC_TRUTH_DISPATCH_V1"
 
@@ -40,6 +43,8 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         return evaluate_legacy(payload)
     if kind == "DOMAIN_MAPPING_RELATION":
         return evaluate_domain_mapping(payload)
+    if kind == "REGCAP_LOSS_CUSHION_GROUNDING":
+        return evaluate_regcap_loss_cushion(payload)
     return {
         "schema": SCHEMA,
         "pass": False,

@@ -105,6 +105,56 @@ class Tests(unittest.TestCase):
         }
         self.assertIn("FRAMEWORK_CLASS", ids)
 
+    def test_functional_signature_class_uniquely_separates_three_rivals(self):
+        out = matrix.verify_matrix(
+            repo_root=ROOT,
+            projection_verifier=fake_projection,
+        )
+        self.assertTrue(out["pass"], out)
+        row = next(
+            x for x in out["observations"]
+            if x["observation_id"] == "FUNCTIONAL_SIGNATURE_CLASS"
+        )
+        self.assertEqual(
+            len(set(row["outcomes"].values())),
+            3,
+        )
+        self.assertEqual(
+            row["outcomes"][regcap.CCOB],
+            "DRAWDOWN_AS_LOSSES_ARE_INCURRED",
+        )
+        self.assertEqual(
+            row["outcomes"][regcap.CCYB],
+            "RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES",
+        )
+        self.assertEqual(
+            row["outcomes"][regcap.TLAC],
+            "G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION",
+        )
+
+    def test_structural_signature_class_uniquely_separates_three_rivals(self):
+        out = matrix.verify_matrix(
+            repo_root=ROOT,
+            projection_verifier=fake_projection,
+        )
+        self.assertTrue(out["pass"], out)
+        row = next(
+            x for x in out["observations"]
+            if x["observation_id"] == "STRUCTURAL_SIGNATURE_CLASS"
+        )
+        self.assertEqual(len(set(row["outcomes"].values())), 3)
+        rel = matrix.relative_one_step_discriminators(
+            [regcap.CCOB, regcap.CCYB, regcap.TLAC],
+            repo_root=ROOT,
+            projection_verifier=fake_projection,
+        )
+        ids = {
+            x["observation_id"]
+            for x in rel["one_step_discriminators"]
+        }
+        self.assertIn("FUNCTIONAL_SIGNATURE_CLASS", ids)
+        self.assertIn("STRUCTURAL_SIGNATURE_CLASS", ids)
+
     def test_candidate_outside_matrix_fails_closed(self):
         out = matrix.relative_one_step_discriminators(
             [regcap.CCOB, "REGCAP::MREL"],
