@@ -23,6 +23,7 @@ from typing import Any, Mapping, Sequence
 
 from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
 from canonical.runtime import r3_bound_success_adapter_v1 as bound
+from canonical.runtime import r3_structural_bound_success_adapter_v1 as structural
 
 SCHEMA = "PROJECT_BRAIN_R3_CHECKPOINT_RECONSTRUCTION_SUCCESS_ADAPTER_V1"
 
@@ -87,6 +88,10 @@ def adapt(
         if not isinstance(observation, Mapping) or not isinstance(replay, Mapping):
             return None
         if str(replay.get("mode") or "").strip() in {"compiled_bound", "raw_bound"}:
+            return None
+        # Preserve the already-verified native structural acquisition path.
+        # This adapter is a strict fallback for misses outside that admitted class.
+        if structural.preflight(request, repo_root=repo_root) is not None:
             return None
 
         material = _proof_material(observation)
