@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_OEWN_DECISION_SENSE_CONTROL_VERIFY_20261009_V1",
   "date": "2026-10-09",
-  "status": "PASS__FOCUSED_CONTROL_8_OF_8__LIVE_FABRIC_ROUTE_1_OF_1__PY_COMPILE_PASS__FULL_CATALOG_REPLAY_NOT_CLAIMED",
-  "branch": "r2-oewn-decision-sense-control-v1",
-  "base_commit": "56970f570cd18bb24b0ddb69a211ed5327a0ecc5",
+  "status": "PASS__REBASED_CURRENT_MAIN__FOCUSED_CONTROL_8_OF_8__LIVE_FABRIC_ROUTE_1_OF_1__PY_COMPILE_PASS__FULL_CATALOG_REPLAY_NOT_CLAIMED",
+  "branch": "r2-oewn-decision-sense-control-v1-rebased",
+  "base_commit": "82282c76f5390e03ba83323116edbc38aa9ef859",
   "runtime": {
     "path": "canonical/runtime/oewn_decision_sense_control_v1.py",
     "git_blob_sha": "45be452cff132190b741608040471695fcde4f13"
@@ -57,5 +57,12 @@
     "incremental_spend_usd": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "rebased_exact_byte_replay": {
+    "runtime_git_blob_sha": "45be452cff132190b741608040471695fcde4f13",
+    "fabric_git_blob_sha": "f4d25ef7c7d6bd80514659248850b99ccd8a83f9",
+    "focused_control": "8_OF_8_PASS",
+    "live_fabric_route": "1_OF_1_PASS",
+    "py_compile": "PASS"
   }
 }
