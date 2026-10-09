@@ -1,0 +1,32 @@
+name: Temporary verify science candidate-local rejection
+on:
+  push:
+    branches:
+      - repair/science-candidate-local-rejection-20261009-v2
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run Harbor unit suite
+        shell: bash
+        run: |
+          set +e
+          python -m unittest -v canonical.tests.test_harbor_brain_agent canonical.tests.test_harbor_science_planner_v1 canonical.tests.test_harbor_science_agent_v1 > science-test.log 2>&1
+          rc=$?
+          cat science-test.log
+          printf '%s\n' "$rc" > science-test-exit.txt
+          exit "$rc"
+      - name: Upload exact test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: science-candidate-local-rejection-test-evidence
+          path: |
+            science-test.log
+            science-test-exit.txt
