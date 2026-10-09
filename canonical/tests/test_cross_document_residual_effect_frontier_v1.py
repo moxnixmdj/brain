@@ -171,7 +171,7 @@ class CrossDocumentResidualEffectFrontierV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(
             out["status"],
-            "FAIL_CLOSED__MODELED_EFFECT_OUTSIDE_PROVED_SOURCE_SCOPE",
+            "FAIL_CLOSED__MODELED_EFFECTS_INCONSISTENT_WITH_SOURCE_PROOF",
         )
         self.assertEqual(
             out["scope_consistency_errors"][0]["reason"],
@@ -216,7 +216,7 @@ class CrossDocumentResidualEffectFrontierV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(
             out["status"],
-            "FAIL_CLOSED__MODELED_EFFECT_OUTSIDE_PROVED_SOURCE_SCOPE",
+            "FAIL_CLOSED__MODELED_EFFECTS_INCONSISTENT_WITH_SOURCE_PROOF",
         )
 
     def test_wrong_inventory_claim_does_not_discharge_residual(self):
