@@ -48,6 +48,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("OWNERSHIP_CATALOG", c["engines"])
         self.assertIn("SEMANTIC_AMBIGUITY", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
+        self.assertIn("OEWN_DECISION_SENSE", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -211,6 +212,38 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             "CURRENT_DECISION_SUBSTITUTION",
         )
         self.assertFalse(out["result"]["proved_facts"]["semantic_identity"])
+
+    @patch("canonical.runtime.unified_cognitive_fabric_v1.oewn_decision_sense.resolve")
+    def test_auto_oewn_decision_sense_routes_through_authenticated_control(self, resolver):
+        resolver.return_value = {
+            "schema": "PROJECT_BRAIN_OEWN_DECISION_SENSE_CONTROL_V1",
+            "status": "PASS__OEWN_SENSE_AMBIGUITY_DECISION_SUFFICIENT",
+            "pass": True,
+        }
+        authority_verifier = Mock()
+        evidence_verifier = Mock()
+        out = run(
+            {
+                "payload": {
+                    "sense_universe": {"schema": "synthetic"},
+                    "decision_manifest": {"schema": "synthetic"},
+                    "authority_receipt": {"receipt": "authority"},
+                    "evidence_receipts": [{"receipt": "evidence"}],
+                    "ambiguity_owner": "SYSTEM_MODEL",
+                }
+            },
+            semantic_authority_verifier=authority_verifier,
+            semantic_evidence_verifier=evidence_verifier,
+        )
+        self.assertTrue(out["auto_routed"], out)
+        self.assertEqual(out["mode"], "OEWN_DECISION_SENSE")
+        self.assertTrue(out["inner_pass"], out)
+        kwargs = resolver.call_args.kwargs
+        self.assertIs(kwargs["authority_verifier"], authority_verifier)
+        self.assertIs(kwargs["evidence_verifier"], evidence_verifier)
+        self.assertEqual(kwargs["ambiguity_owner"], "SYSTEM_MODEL")
+        self.assertEqual(kwargs["authority_receipt"], {"receipt": "authority"})
+        self.assertEqual(kwargs["evidence_receipts"], [{"receipt": "evidence"}])
 
     def test_capability_scheduler_is_inside_fabric(self):
         out = run({
