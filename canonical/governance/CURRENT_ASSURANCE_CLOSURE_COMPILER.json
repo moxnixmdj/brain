@@ -108,5 +108,15 @@
     "stale_reference_repair_complete": false,
     "next_required_edge": "REBIND_3_STALE_MUTABLE_EVIDENCE_REFERENCES_AND_REVALIDATE_THEIR_SUPPORT_SCOPE",
     "terminal_credit_delta": 0
+  },
+  "professional_quality_evidence_currentness_v2": {
+    "runtime_path": "canonical/runtime/professional_quality_evidence_currentness_v2.py",
+    "runtime_git_blob_sha": "e7fac5cff2e8add90dc6ec103656ac512efffcb9",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_EVIDENCE_CURRENTNESS_V2_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "cc6b4bf032dfdb40e6168ec97c36724aae4f785c",
+    "result": "21_EXACT_CURRENT__3_CONTRACT_VERIFIED_REBOUND__0_BROKEN",
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false,
+    "terminal_credit_delta": 0
   }
 }
