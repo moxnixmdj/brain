@@ -41,9 +41,23 @@ def _sha(value: Any) -> str:
 
 
 def _sentence(text: str, pos: int) -> tuple[int, int, str]:
-    left = max(text.rfind(".", 0, pos), text.rfind("!", 0, pos), text.rfind("?", 0, pos)) + 1
-    ends = [x for x in (text.find(".", pos), text.find("!", pos), text.find("?", pos)) if x >= 0]
-    right = (min(ends) + 1) if ends else len(text)
+    boundaries = []
+    for i, ch in enumerate(text):
+        if ch not in ".!?":
+            continue
+        if (
+            ch == "."
+            and i > 0
+            and i + 1 < len(text)
+            and text[i - 1].isdigit()
+            and text[i + 1].isdigit()
+        ):
+            continue
+        boundaries.append(i)
+    prior = [i for i in boundaries if i < pos]
+    later = [i for i in boundaries if i >= pos]
+    left = (max(prior) + 1) if prior else 0
+    right = (min(later) + 1) if later else len(text)
     while left < right and text[left].isspace():
         left += 1
     while right > left and text[right - 1].isspace():
