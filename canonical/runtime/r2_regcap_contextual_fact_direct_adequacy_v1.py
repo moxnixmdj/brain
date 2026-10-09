@@ -24,9 +24,9 @@ PATH_RE = r"canonical/[A-Za-z0-9_./-]+"
 GRAMMAR = re.compile(
     r"^Extract verified regulatory-capital contextual facts from (?P<source>"
     + PATH_RE
-    + r"\\.(?:txt|md)) and save them to (?P<output>"
+    + r"\.(?:txt|md)) and save them to (?P<output>"
     + PATH_RE
-    + r"\\.json)\\.?$",
+    + r"\.json)\.?$",
     re.IGNORECASE,
 )
 
