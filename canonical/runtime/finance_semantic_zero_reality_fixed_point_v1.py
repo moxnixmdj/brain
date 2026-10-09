@@ -11,7 +11,7 @@ EXPECTED={
 "canonical/governance/FINANCE_DIRECT_ROUTE_SOURCE_COVERAGE_TRUTH_REPAIR_20261007_V1.json":"b760bdf4b68c51261d6513b232baaf5339089c8f",
 "canonical/governance/FINANCE_PROOF_CARRYING_SOURCE_SEMANTIC_GATE_20261007_V1.json":"f43ddf33a63659ce6a853b9f3d75de0b7b1e5d66",
 "canonical/governance/FINANCE_SHARED_SEMANTIC_RESIDUAL_RECONCILIATION_20261007_V1.json":"d9453733ac28a205305129ac7b80e6ea1b692815",
-"canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V1.json":"423e0d2186974dfe335b6366c73621bab1dfc039",
+"canonical/verification/R2_STRICT_EXTERNALITY_RECLASSIFICATION_20261009_V1.json":"8919cd98397586027bbf711cfced58c8c3d62e45",
 }
 
 def _blob(path:Path)->str:
@@ -38,7 +38,7 @@ def evaluate()->dict:
     counter=_load("canonical/governance/FINANCE_DIRECT_ROUTE_SOURCE_COVERAGE_TRUTH_REPAIR_20261007_V1.json")
     source_gate=_load("canonical/governance/FINANCE_PROOF_CARRYING_SOURCE_SEMANTIC_GATE_20261007_V1.json")
     shared=_load("canonical/governance/FINANCE_SHARED_SEMANTIC_RESIDUAL_RECONCILIATION_20261007_V1.json")
-    root2=_load("canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V1.json")
+    strict=_load("canonical/verification/R2_STRICT_EXTERNALITY_RECLASSIFICATION_20261009_V1.json")
     fixed=_load(FIXED)
 
     eq=str((quotient.get("definitions") or {}).get("equivalence") or "")
@@ -66,11 +66,15 @@ def evaluate()->dict:
     if "DIRECT_END_TO_END_CERTIFICATE" not in shared_theorem:
         errors.append("SHARED_E2E_ESCAPE_ROUTE_MISSING")
 
-    finance=(root2.get("current_cell_classifications") or {}).get("FINANCE_SEMANTIC_ADEQUACY_TAIL") or {}
-    if finance.get("state")!="ZERO_REALITY_ACTIVE":
-        errors.append("ROOT2_FINANCE_PRESTATE_DRIFT")
-    if "DIRECT_E2E_CERTIFICATE_SEARCH" not in str(finance.get("next") or ""):
-        errors.append("ROOT2_FINANCE_NEXT_ROUTE_DRIFT")
+    finance=(strict.get("tested_cells") or {}).get("FINANCE_SEMANTIC_ADEQUACY_TAIL") or {}
+    if finance.get("gate_pass") is not False:
+        errors.append("STRICT_EXTERNALITY_FINANCE_GATE_PASS_DRIFT")
+    if finance.get("irreducible_external_information_proved") is not False:
+        errors.append("STRICT_EXTERNALITY_FINANCE_PROOF_DRIFT")
+    if finance.get("reason")!="PROOF_CARRYING_EXTERNALITY_CERTIFICATE_REQUIRED":
+        errors.append("STRICT_EXTERNALITY_FINANCE_REASON_DRIFT")
+    if finance.get("new_classification")!="INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT":
+        errors.append("STRICT_EXTERNALITY_FINANCE_CLASSIFICATION_DRIFT")
 
     theorem=fixed.get("theorem") or {}
     conclusion=str(theorem.get("conclusion") or "")
