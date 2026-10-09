@@ -2,6 +2,8 @@ import hashlib
 import json
 import pathlib
 import unittest
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from canonical.runtime import d_final_stdlib_bound_executor_v1 as ex
 
@@ -196,6 +198,92 @@ class DFinalStdlibBoundExecutorTests(unittest.TestCase):
         )
         self.assertFalse(bad["pass"])
         self.assertTrue(any("ACTION_EXPECTATION_FAILED:verified" in x for x in bad["errors"]))
+
+    def test_registry_drift_between_prepare_and_second_inspect_fails_before_adapter_load(self):
+        prepared = {
+            "capability_id": "archive.tar_gz.create_from_manifest",
+            "instance_id": "archive.tar_gz.create_from_manifest",
+            "requires": ["manifest.json.available"],
+            "provides": ["archive.tar_gz.create_from_manifest"],
+            "result_fields": [],
+            "inputs": {},
+            "inputs_sha256": "1" * 64,
+            "registry_file_sha256": "2" * 64,
+            "registry_entry_sha256": "3" * 64,
+            "rendered_action": {
+                "type": "invoke_capability",
+                "args": {"capability_id": "archive.tar_gz.create_from_manifest"},
+            },
+            "rendered_action_sha256": "4" * 64,
+            "dependency": {"type": "python_stdlib"},
+        }
+        called = {"value": False}
+
+        def forbidden(entry):
+            called["value"] = True
+            raise AssertionError("adapter load must not occur after registry drift")
+
+        with patch.object(ex, "prepare", lambda *a, **k: dict(prepared)), \
+             patch.object(
+                 ex,
+                 "inspect",
+                 lambda cid: {
+                     "capability_id": cid,
+                     "entry": {"cost": 1},
+                     "registry_file_sha256": "9" * 64,
+                     "registry_entry_sha256": "3" * 64,
+                     "dependency": {"type": "python_stdlib"},
+                 },
+             ), \
+             patch.object(ex, "_load_adapter", forbidden):
+            out = ex.execute("archive.tar_gz.create_from_manifest", inputs={})
+        self.assertFalse(out["pass"])
+        self.assertTrue(
+            any("REGISTRY_FILE_CHANGED_AFTER_PREPARATION" in x for x in out["errors"])
+        )
+        self.assertFalse(called["value"])
+
+    def test_active_d_epoch_uses_exact_checked_adapter_bytes_without_path_reopen(self):
+        cid = "archive.tar_gz.create_from_manifest"
+        entry = ex.inspect(cid)["entry"]
+        adapter = ex.ROOT / "canonical/runtime/bound_capabilities/archive_tarfile.py"
+        rel = adapter.resolve().relative_to(ex.ROOT.resolve()).as_posix()
+        expected = ex.d_finality.git_blob_sha_file(adapter)
+        fake_epoch = SimpleNamespace(material_bindings=((rel, expected),))
+
+        def forbidden_loader(*args, **kwargs):
+            raise AssertionError("importlib path loader reopened adapter during active D epoch")
+
+        with patch.object(ex.d_finality, "has_active_epoch", lambda: True), \
+             patch.object(
+                 ex.d_finality,
+                 "require_material_file_if_active",
+                 lambda *a, **k: fake_epoch,
+             ), \
+             patch.object(ex.d_finality, "current_epoch", lambda: fake_epoch), \
+             patch.object(ex.importlib.util, "spec_from_file_location", forbidden_loader):
+            fn = ex._load_adapter(entry)
+        self.assertTrue(callable(fn))
+
+    def test_active_d_epoch_rejects_adapter_blob_mismatch_before_exec(self):
+        cid = "archive.tar_gz.create_from_manifest"
+        entry = ex.inspect(cid)["entry"]
+        adapter = ex.ROOT / "canonical/runtime/bound_capabilities/archive_tarfile.py"
+        rel = adapter.resolve().relative_to(ex.ROOT.resolve()).as_posix()
+        fake_epoch = SimpleNamespace(material_bindings=((rel, "0" * 40),))
+
+        with patch.object(ex.d_finality, "has_active_epoch", lambda: True), \
+             patch.object(
+                 ex.d_finality,
+                 "require_material_file_if_active",
+                 lambda *a, **k: fake_epoch,
+             ), \
+             patch.object(ex.d_finality, "current_epoch", lambda: fake_epoch):
+            with self.assertRaisesRegex(
+                ex.DFinalStdlibBoundError,
+                "BOUND_CAPABILITY_ADAPTER_CHANGED_AFTER_EPOCH_CHECK",
+            ):
+                ex._load_adapter(entry)
 
 
 if __name__ == "__main__":
