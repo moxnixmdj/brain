@@ -1,14 +1,14 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_POINTER_V1",
-  "date": "2026-10-09",
-  "status": "ACTIVE_CURRENT_R2_DYNAMIC_ADMISSIONS_POINTER",
   "binding_semantics": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__IMMUTABLE_TARGET_GIT_BLOB_BOUND",
+  "date": "2026-10-09",
+  "incremental_spend_usd": 0,
+  "schema": "PROJECT_BRAIN_CURRENT_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_POINTER_V1",
+  "status": "ACTIVE_CURRENT_R2_DYNAMIC_ADMISSIONS_POINTER",
   "target": {
-    "path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V2.json",
-    "git_blob_sha": "18baef636174b1f2f9e2ffb03477966c20baf60d",
+    "git_blob_sha": "8e2418aecd87bbeaece8025d6bbb6c03f52c8b8e",
+    "path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_8e2418aecd87bbea.json",
     "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_V1"
   },
-  "incremental_spend_usd": 0,
   "terminal_authority": false,
   "terminal_credit_delta": 0
 }
