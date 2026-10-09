@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_STRUCTURAL_FRAMEWORK_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "status": "PASS__STRUCTURAL_FRAMEWORK_INDEPENDENT_EXECUTION_VERIFIED__SEMANTIC_REFINEMENT_OPEN",
+  "scope": "EXECUTABLE_REFINEMENT_STRUCTURAL_FRAMEWORK_ONLY",
+  "carrier": {
+    "kind": "SPRITE",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "organization": "mohammad-sadek",
+    "existing_carrier_reused": true,
+    "incremental_spend_usd": 0
+  },
+  "source_branch": "impl-executable-refinement-terminal-closure-20261009",
+  "source_head_observed_before_promotion": "6a2ffd97f4609167b0eecb88f45e345cc8fd41ae",
+  "tested_artifacts": {
+    "executable_refinement_verifier": {
+      "path": "canonical/runtime/executable_refinement_verifier_v1.py",
+      "git_blob_sha": "65569581716d5378929a900fa0a2045e1785fabf"
+    },
+    "terminal_dependency_graph_guard": {
+      "path": "canonical/runtime/terminal_dependency_graph_guard_v1.py",
+      "git_blob_sha": "1af3b33046237f82e1e709dd39d18fae64be4e4c"
+    },
+    "terminal_dependency_falsifier": {
+      "path": "canonical/runtime/terminal_dependency_falsifier_v1.py",
+      "git_blob_sha": "e5e66d514ad2893f5d92c6bf7c3ea3c02bf6962d"
+    },
+    "selected_route_runtime_entrypoint": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "git_blob_sha": "e6cce56b50bea1261fb3473389a28e8263417930"
+    },
+    "terminal_dependency_graph": {
+      "path": "canonical/governance/CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1.json",
+      "git_blob_sha": "b5b561d3aefc312d71ba375eaf662f8415ac033d"
+    }
+  },
+  "executed_checks": [
+    {
+      "name": "executable_refinement_verifier_py_compile",
+      "result": "PASS"
+    },
+    {
+      "name": "executable_refinement_verifier_direct_assertions",
+      "count": 8,
+      "result": "PASS",
+      "checks": [
+        "unknown_schema",
+        "missing_field",
+        "abstract_drift",
+        "concrete_drift",
+        "unknown_transition",
+        "input_unproved",
+        "liveness_required",
+        "valid_receipt"
+      ]
+    },
+    {
+      "name": "terminal_dependency_graph_guard_py_compile",
+      "result": "PASS"
+    },
+    {
+      "name": "terminal_dependency_graph_guard_test_functions",
+      "count": 11,
+      "result": "PASS"
+    },
+    {
+      "name": "selected_route_runtime_entrypoint_py_compile",
+      "result": "PASS"
+    },
+    {
+      "name": "selected_route_refinement_antibypass_direct_assertions",
+      "count": 6,
+      "result": "PASS",
+      "checks": [
+        "missing_binding",
+        "stale_receipt",
+        "unverified_receipt",
+        "subject_mismatch",
+        "route_binding_mismatch",
+        "valid_creditable_binding"
+      ]
+    },
+    {
+      "name": "terminal_dependency_falsifier_py_compile",
+      "result": "PASS"
+    },
+    {
+      "name": "terminal_dependency_falsifier_test_functions",
+      "count": 6,
+      "result": "PASS"
+    },
+    {
+      "name": "current_terminal_dependency_graph_execution",
+      "result": "PASS",
+      "guard_pass": true,
+      "terminal_closure": false,
+      "covered_attack_count": 6,
+      "open_obligation_count": 19
+    }
+  ],
+  "focused_behavior_check_count": 31,
+  "claims": {
+    "structural_binding_verifier_executes_fail_closed": true,
+    "graph_guard_executes_fail_closed": true,
+    "unknown_attack_applicability_remains_explicit": true,
+    "creditable_selected_route_refinement_binding_is_enforced_before_candidate_admission": true,
+    "systematic_falsifier_executes_and_never_claims_open_world_closure": true
+  },
+  "nonclaims": [
+    "NO_CLAIM_STRUCTURAL_BINDING_VERIFIER_SELF_PROVES_SEMANTIC_REFINEMENT.",
+    "NO_CLAIM_ROUTER_CANARY_EXECUTABLE_REFINEMENT_IS_VERIFIED.",
+    "NO_CLAIM_BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_IS_VERIFIED.",
+    "NO_CLAIM_NON_SELECTED_RUNTIME_EXECUTABLE_REFINEMENT_COVERAGE_IS_CLOSED.",
+    "NO_CLAIM_REPOSITORY_WIDE_EXECUTABLE_REFINEMENT_IS_CLOSED.",
+    "NO_CLAIM_TERMINAL_MISSION_IS_CLOSED."
+  ],
+  "semantic_refinement_verified": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
