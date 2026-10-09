@@ -1,0 +1,122 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_MAPPING_PACK_V1",
+  "pack_id": "finance-regulatory-loss-absorption-basel-fsb-20261009-v1",
+  "scope_id": "finance:global-standard-terminology:basel-rbc30-fsb-tlac:2026-10-09",
+  "phrase_lexicon": {
+    "schema": "PROJECT_BRAIN_BOUNDED_SEMANTIC_PHRASE_LEXICON_V1",
+    "lexicon_id": "finance-regulatory-loss-absorption-phrases-20261009-v1",
+    "scope_id": "finance:global-standard-terminology:basel-rbc30-fsb-tlac:2026-10-09",
+    "bounded_finite_lexicon": true,
+    "entries": [
+      {
+        "entry_id": "ccob-rwa-2-5",
+        "surfaces": [
+          "2.5% of RWA"
+        ],
+        "atom_id": "quantity.2_5_percent_RWA"
+      },
+      {
+        "entry_id": "ccob-cet1",
+        "surfaces": [
+          "comprised of Common Equity Tier 1 (CET1)"
+        ],
+        "atom_id": "composition.CET1"
+      },
+      {
+        "entry_id": "ccob-above-minimum",
+        "surfaces": [
+          "above the regulatory minimum capital requirement"
+        ],
+        "atom_id": "position.above_regulatory_minimum"
+      },
+      {
+        "entry_id": "ccob-loss-drawdown",
+        "surfaces": [
+          "drawn down as losses are incurred"
+        ],
+        "atom_id": "function.loss_absorption"
+      },
+      {
+        "entry_id": "tlac-gsib",
+        "surfaces": [
+          "global systemically important banks (G-SIBs)",
+          "global systemically important banks"
+        ],
+        "atom_id": "scope.GSIB"
+      },
+      {
+        "entry_id": "tlac-loss",
+        "surfaces": [
+          "loss-absorbing"
+        ],
+        "atom_id": "function.loss_absorption"
+      },
+      {
+        "entry_id": "tlac-recapitalisation",
+        "surfaces": [
+          "recapitalisation capacity"
+        ],
+        "atom_id": "function.recapitalisation"
+      },
+      {
+        "entry_id": "tlac-resolution",
+        "surfaces": [
+          "available in resolution"
+        ],
+        "atom_id": "regime.resolution"
+      },
+      {
+        "entry_id": "tlac-resources",
+        "surfaces": [
+          "instruments and liabilities"
+        ],
+        "atom_id": "resource.instruments_and_liabilities"
+      }
+    ]
+  },
+  "concept_definitions": [
+    {
+      "scope_id": "finance:global-standard-terminology:basel-rbc30-fsb-tlac:2026-10-09",
+      "concept_id": "BASEL::CAPITAL_CONSERVATION_BUFFER",
+      "definition_kind": "EXACT_CONJUNCTION",
+      "definition_atoms": [
+        "quantity.2_5_percent_RWA",
+        "composition.CET1",
+        "position.above_regulatory_minimum",
+        "function.loss_absorption"
+      ]
+    },
+    {
+      "scope_id": "finance:global-standard-terminology:basel-rbc30-fsb-tlac:2026-10-09",
+      "concept_id": "FSB::TLAC",
+      "definition_kind": "EXACT_CONJUNCTION",
+      "definition_atoms": [
+        "scope.GSIB",
+        "function.loss_absorption",
+        "function.recapitalisation",
+        "regime.resolution",
+        "resource.instruments_and_liabilities"
+      ]
+    }
+  ],
+  "source_refs": [
+    {
+      "authority": "BCBS/BIS",
+      "document": "Basel Framework RBC30 Buffers above the regulatory minimum",
+      "section": "RBC30.1-RBC30.3; current version effective 2019-12-15 as of 2026-10-09",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/rbc/30/inforce/2019-12-15/published/2019-12-15"
+    },
+    {
+      "authority": "BCBS/BIS",
+      "document": "Basel Framework RBC20 Calculation of minimum risk-based capital requirements",
+      "section": "RBC20.1 footnote; current 2026 context",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/rbc/20/inforce/2023-01-01/published/2020-11-26"
+    },
+    {
+      "authority": "FSB",
+      "document": "Total Loss-Absorbing Capacity (TLAC) Principles and Term Sheet",
+      "section": "Standard overview and term sheet",
+      "url": "https://www.fsb.org/2015/11/total-loss-absorbing-capacity-tlac-principles-and-term-sheet-2/"
+    }
+  ]
+}
