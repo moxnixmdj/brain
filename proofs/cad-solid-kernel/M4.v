@@ -77,7 +77,7 @@ Proof.
   move=> hu0 hu1 hv0 hv1 hpos hne.
   apply: dc_val_pos => //.
   - exact: grid_rows_eval_all_pos hu0 hu1 hpos.
-  - by case: grid hne => [|row tl].
+  - by case: grid hpos hne => [|row tl].
 Qed.
 
 Record homogeneous_bezier_patch := {
