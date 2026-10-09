@@ -270,13 +270,20 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
                 )
             successes=[]
             attempts=[]
+            proof_requests=[]
             for candidate_payload in candidates:
                 truth=evaluate_truth(candidate_payload)
+                proof_request=truth.get("minimum_proof_request")
+                if isinstance(proof_request,Mapping):
+                    request=deepcopy(dict(proof_request))
+                    if request not in proof_requests:
+                        proof_requests.append(request)
                 attempts.append({
                     "status":truth.get("status"),
                     "reason":truth.get("reason"),
                     "predicate_id":truth.get("predicate_id"),
                     "predicate_truth":truth.get("predicate_truth"),
+                    "minimum_proof_request_present":isinstance(proof_request,Mapping),
                 })
                 if truth.get("pass") is not True or truth.get("truthful_precommitment_observation") is not True:
                     continue
@@ -307,6 +314,7 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
                     selected_discriminator=selected,
                     predicate_id=atom_id,
                     attempts=attempts,
+                    proof_requests=proof_requests,
                 )
             values={x["predicate_truth"] for x in successes}
             if len(values)!=1:
