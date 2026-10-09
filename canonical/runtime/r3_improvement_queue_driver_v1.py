@@ -1684,8 +1684,8 @@ def _execute_distinguishing_evidence_acquisition(
                 allowed_keys.update(keys)
     if receipt_error is None:
         candidate_keys = set(str(key) for key in candidate_evidence)
-        if not candidate_keys or not candidate_keys.issubset(allowed_keys):
-            receipt_error = "DISTINGUISHING_EVIDENCE_UNREQUESTED_FIELDS_PRESENT"
+        if not candidate_keys or candidate_keys != allowed_keys:
+            receipt_error = "DISTINGUISHING_EVIDENCE_MINIMUM_BUNDLE_INCOMPLETE_OR_EXTRA"
 
     if receipt_error is not None:
         _record_frontier_acquisition_attempt(
@@ -1711,11 +1711,44 @@ def _execute_distinguishing_evidence_acquisition(
     for key, value in candidate_evidence.items():
         merged[str(key)] = deepcopy(value)
     candidate_output = _candidate_output_from_proof_material(merged)
+    candidate_capsule = learning._make_success_proof_capsule(candidate_output)
+    if not isinstance(candidate_capsule, Mapping):
+        status = "DISTINGUISHING_EVIDENCE_CANDIDATE_PROOF_CAPSULE_UNAVAILABLE"
+        _record_frontier_acquisition_attempt(
+            wid,
+            provider_id=attempt_provider_id,
+            frontier_sha256=after_frontier,
+            status=status,
+            reason=status,
+            state_path=state_path,
+        )
+        return {
+            "schema": SCHEMA,
+            "status": status,
+            "pass": False,
+            "progress": False,
+            "work_id": wid,
+            "provider_receipt": receipt,
+            "attempt_backoff_recorded": True,
+            "terminal_authority": False,
+        }
+    try:
+        replay = learning.get_success_replay_context(
+            observation_id,
+            state_path=state_path,
+        )
+        replay_context = (
+            deepcopy(dict(replay.get("context")))
+            if isinstance(replay.get("context"), Mapping)
+            else None
+        )
+    except Exception:
+        replay_context = None
     observed = learning.record_success_observation(
         candidate_output,
         surface="R3_DISTINGUISHING_EVIDENCE_CANDIDATE",
         state_path=state_path,
-        replay_context=None,
+        replay_context=replay_context,
     )
     candidate_observation_id = str(observed.get("observation_id") or "")
     if not candidate_observation_id:
