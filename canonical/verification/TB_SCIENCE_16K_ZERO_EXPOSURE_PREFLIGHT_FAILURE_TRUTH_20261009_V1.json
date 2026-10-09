@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_16K_ZERO_EXPOSURE_PREFLIGHT_FAILURE_TRUTH_V1",
+  "date": "2026-10-09",
+  "status": "CONTEXT_CAPACITY_ACCEPTED__FULL_PLANNER_RESPONSE_TIMED_OUT__RANK14_UNTOUCHED__ZERO_CREDIT",
+  "source": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2444,
+    "workflow_run_id": 37874186980,
+    "workflow_job_id": 113638841979,
+    "workflow_head_sha": "0a7ea25d0e688c0d321464de39d55ed660c47646",
+    "artifact_id": 11592620498,
+    "artifact_name": "tb-science-context-16k-zero-exposure-v1",
+    "artifact_digest": "sha256:224770d5d427139d6f614f49d45d8b8b4738e91aca4887fc5b244d75f38f1c79"
+  },
+  "exact_route": {
+    "planner_blob": "715aee168f02cb4abff961849b2b26709eef2e64",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "server_context_tokens": 16384
+  },
+  "artifact_hashes_sha256": {
+    "CONTEXT_16K_SERVER_log": "366989be20fac96558ae0dbc480daf3cab29c4c411a6285e7b859f21d2583b09",
+    "CONTEXT_16K_RESOURCE_GATE_json": "a4c87ee2d64d0268f495fb90e7ef21b7b50fe836716b41e1207b9b1237509c3a",
+    "CONTEXT_16K_HEALTH_json": "a29ee2b15c494311c52521766e44af56a3ad2248e7a8ab465e5206463c13d288"
+  },
+  "observed": {
+    "server_context_slot_tokens": 16384,
+    "prompt_tokens_processed_by_server": 9455,
+    "prompt_progress": 1,
+    "prompt_truncated": false,
+    "prompt_processing_seconds": 567.57,
+    "observed_prompt_tokens_per_second": 16.66,
+    "generation_started": true,
+    "decoded_tokens_before_client_timeout": 883,
+    "observed_decode_tokens_per_second_approx": 3.66,
+    "client_failure": "SCIENCE_PLANNER_LOCAL_ROUTE_FAILED:TimeoutError:timed out",
+    "context_overflow_observed": false,
+    "rank14_task_exposure": false,
+    "benchmark_task_exposure": 0
+  },
+  "causal_classification": {
+    "prior_rank13_context_defect_reproduced": false,
+    "context_capacity_16384_accepts_more_than_rank13_9202_tokens": true,
+    "full_planner_contract_passed": false,
+    "new_root_cause": "PLANNER_REQUEST_TIMEOUT_BUDGET_EXHAUSTED_AFTER_FULL_PROMPT_PREFILL_AND_883_DECODED_TOKENS",
+    "next_repair": "DISABLE_MODEL_THINKING_PER_REQUEST_ON_PINNED_LLAMA_CPP_CHAT_TEMPLATE__THEN_REPEAT_ZERO_EXPOSURE_GATE",
+    "rank14_may_start": false
+  },
+  "exact_pinned_runtime_support": {
+    "evidence": "PINNED_LLAMA_CPP_SERVER_README_AND_SERVER_COMMON_CPP_ACCEPT_CHAT_TEMPLATE_KWARGS_ENABLE_THINKING_FALSE",
+    "requested_change": "ADD_CHAT_TEMPLATE_KWARGS_ENABLE_THINKING_FALSE_TO_PLANNER_REQUEST_PAYLOAD"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_FULL_16K_PLANNER_PREFLIGHT_PASSED",
+    "NO_RANK14_TASK_CONTENT_READ",
+    "NO_RANK14_TASK_START",
+    "NO_RANK14_EXECUTION_AUTHORITY",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_task_exposure": 0,
+    "rank14_trials_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
