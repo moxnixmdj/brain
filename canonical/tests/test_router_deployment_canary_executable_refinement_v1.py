@@ -22,6 +22,7 @@ def _cert():
 def test_canary_structural_binding_is_valid_but_not_refinement_verified():
     out = verify_certificate(_cert(), repo_root=ROOT)
     assert out["pass"] is True, out
+    assert out["structural_binding_verified"] is True
     assert out["refinement_verified"] is False
     assert out["assurance_level"] == "STRUCTURAL_BINDING_ONLY"
     assert out["terminal_credit_delta"] == 0
@@ -54,12 +55,41 @@ def test_canary_non_mapping_is_type_error():
         invoke([1, 2, 3])
 
 
-def test_canary_binding_drift_fails_closed():
+def test_canary_json_encoding_error_is_not_misclassified_as_success():
+    with pytest.raises(TypeError):
+        invoke({"bad": object()})
+
+
+def test_canary_nan_behavior_matches_runtime_contract():
+    out = invoke({"x": float("nan")})
+    assert out["status"] == "PASS__DETERMINISTIC_CANARY_EXECUTED"
+    assert out["terminal_credit_delta"] == 0
+
+
+def test_canary_concrete_binding_drift_fails_closed():
     cert = _cert()
     cert["concrete_implementation"][0]["git_blob_sha"] = "0" * 40
     out = verify_certificate(cert, repo_root=ROOT)
     assert out["pass"] is False
-    assert out["reason"] == "CONCRETE_IMPLEMENTATION_BLOB_DRIFT"
+    assert out["reason"] == "CONCRETE_IMPLEMENTATION_0_BLOB_DRIFT"
+
+
+def test_canary_abstract_binding_drift_fails_closed():
+    cert = _cert()
+    cert["abstract_spec"]["git_blob_sha"] = "0" * 40
+    out = verify_certificate(cert, repo_root=ROOT)
+    assert out["pass"] is False
+    assert out["reason"] == "ABSTRACT_SPEC_BLOB_DRIFT"
+
+
+def test_canary_declaration_cannot_claim_refinement_authority():
+    cert = _cert()
+    cert["safety_refinement"] = {"proved": True}
+    cert["liveness_refinement"] = {"required": False, "proved": True}
+    out = verify_certificate(cert, repo_root=ROOT)
+    assert out["pass"] is True
+    assert out["refinement_verified"] is False
+    assert out["execution_authority"] is False
 
 
 def test_canary_cannot_claim_terminal_credit():
