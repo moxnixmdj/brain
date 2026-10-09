@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_CURRENT_EVIDENCE_FIXED_POINT_RECONCILIATION_20261009_V2",
+  "date": "2026-10-09",
+  "status": "RECONCILED__NEW_ROUTE_SPLIT_DOES_NOT_CHANGE_EMPTY_COMPONENT_PREMISE_VECTOR__FINANCE_INDEX_WAKE_GATED__ZERO_CREDIT",
+  "target_predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
+  "purpose": "Reconcile the newer Finance acceptance-route split with the already verified deterministic zero-reality fixed point so the scheduler does not repeat unchanged component-bound arithmetic.",
+  "authorities": {
+    "finance_acceptance_route_split": {
+      "path": "canonical/governance/FINANCE_ACCEPTANCE_ROUTE_SPLIT_20261009_V1.json",
+      "git_blob_sha": "09ff2c5368fc9643fd1f1e64f37a1687a3f338f2"
+    },
+    "deterministic_fixed_point": {
+      "path": "canonical/governance/FINANCE_INDEX_DETERMINISTIC_ZERO_REALITY_FIXED_POINT_20261005_V1.json",
+      "git_blob_sha": "18c3a5343079ea3efbd692bb4e72c53e0ae4838d"
+    },
+    "public_transform_saturation": {
+      "path": "canonical/governance/FINANCE_INDEX_PUBLIC_TRANSFORM_ROUTE_SATURATION_20261004_V1.json",
+      "git_blob_sha": "2a831b8632b18fe9e10ed423f131b6ae93d99b77"
+    },
+    "direct_threshold_theorem": {
+      "path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_THEOREM_V1.json",
+      "git_blob_sha": "37f47143f62fe2f59e56d8eca4a64bae18a1ce8b"
+    }
+  },
+  "exact_reconciliation": {
+    "route_split_created_new_normalized_brain_component_lower_bound_receipt": false,
+    "route_split_created_new_component_subscore_floor": false,
+    "route_split_created_new_inner_transform": false,
+    "route_split_created_owner_result_receipt": false,
+    "fixed_point_current_bound_authorities_prove_any_brain_component_lower_bound": false,
+    "fixed_point_current_direct_threshold_certificate_computable": false,
+    "current_receipted_normalized_component_lower_bound_count": 0,
+    "repeat_weighted_lower_bound_compilation_changes_decision_information": false,
+    "direct_threshold_route_remains_valid": true,
+    "direct_threshold_route_currently_executable_to_acceptance": false
+  },
+  "scheduler": {
+    "finance_index_state": "DORMANT_WAKE_GATED__EMPTY_RECEIPTED_COMPONENT_PREMISE_VECTOR",
+    "do_not_repeat": [
+      "REPEAT_FINANCE_WEIGHTED_LOWER_BOUND_COMPILATION_WITH_UNCHANGED_PREMISE_VECTOR",
+      "REPEAT_GENERIC_PUBLIC_SEARCH_FOR_FINANCE_INNER_COMPONENT_TRANSFORM",
+      "ASSIGN_DEFAULT_COMPONENT_FLOORS",
+      "DUPLICATE_ARTIFICIAL_ANALYSIS_OUTREACH"
+    ],
+    "wake_on": [
+      "NEW_INDEPENDENT_NORMALIZED_BRAIN_COMPONENT_LOWER_BOUND_RECEIPT",
+      "NEW_VERIFIED_COMPONENT_SUBSCORE_FLOOR_OR_INNER_TRANSFORM",
+      "ARTIFICIAL_ANALYSIS_RESULT_BEARING_FINANCE_INDEX_OR_COMPONENT_RECEIPT",
+      "MATERIAL_OWNER_METHODOLOGY_OR_API_SCHEMA_CHANGE",
+      "SCOPE_SAFE_STRONGER_PROOF_THAT_DIRECTLY_IMPLIES_FINANCE_ACCOUNTING_INDEX_GE_61"
+    ],
+    "next": "SLEEP_FINANCE_INDEX_UNTIL_ONE_WAKE_CONDITION_CHANGES_THE_PREMISE_VECTOR__DO_NOT_TREAT_EXISTING_EVIDENCE_SATURATION_AS_ACTIVE_WORK"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_FINANCE_INDEX_IS IMPOSSIBLE",
+    "NO_CLAIM_RELEVANT_EVIDENCE_CANNOT_EXIST_OUTSIDE_THE_CURRENT_BOUND_AUTHORITY_SET",
+    "NO_COMPONENT_SCORE_OR_FLOOR_INVENTED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CHECKPOINT_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "checkpoint_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
