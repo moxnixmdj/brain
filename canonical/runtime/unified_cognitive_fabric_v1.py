@@ -564,6 +564,15 @@ def run(
                         state_path=options.get("state_path"),
                         learn=options.get("learn", True) is not False,
                         surface="LIVE_COMPOSITION",
+                        retry_context={
+                            "mode": "fabric_direct",
+                            "request": {
+                                "mode": mode,
+                                "payload": deepcopy(dict(payload)),
+                                "options": {"learn": False},
+                            },
+                            "learn": True,
+                        },
                     )
                     out["learning_observation_error"] = None
                 except Exception as exc:
@@ -694,6 +703,15 @@ def run(
                     state_path=options.get("state_path"),
                     learn=True,
                     surface="UNIFIED_FABRIC_DIRECT_" + mode,
+                    retry_context={
+                        "mode": "fabric_direct",
+                        "request": {
+                            "mode": mode,
+                            "payload": deepcopy(dict(payload)),
+                            "options": {"learn": False},
+                        },
+                        "learn": True,
+                    },
                 )
             except Exception as exc:
                 direct_learning_error = type(exc).__name__ + ":" + str(exc)
