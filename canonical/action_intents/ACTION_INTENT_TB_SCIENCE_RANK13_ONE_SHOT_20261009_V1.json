@@ -1,0 +1,175 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TB_SCIENCE_RANK13_ONE_SHOT_20261009_V2",
+  "date": "2026-10-09",
+  "action_id": "TB_SCIENCE_RANK13_ONE_SLOT_AUTHORITY_ACTIVATION_V2",
+  "status": "ACTIVE_INTENT__BIND_EXISTING_EXTERNAL_RESULT_ONLY__NO_TASK_START",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "c7b2dbc547f8ce3da374a49b483f55df803b60f4",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "target_obligation": "TB_SCIENCE_GE_58_7",
+  "action_kind": "RECONCILE_FRONTIER",
+  "causal_blocker": "TB_SCIENCE_RANK13_LIVE_V8_PREFLIGHT_PASSED__BRAIN_SIDE_ONE_SLOT_AUTHORITY_NOT_YET_BOUND",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::TB_SCIENCE_RANK13_LIVE_V8_PREFLIGHT_PASSED__BRAIN_SIDE_ONE_SLOT_AUTHORITY_NOT_YET_BOUND",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "TB_SCIENCE_RANK13_BRAIN_SIDE_ONE_SLOT_EXECUTION_AUTHORITY_ACTIVATED__TASK_REMAINS_UNSTARTED__ZERO_ACCEPTANCE_AND_TERMINAL_CREDIT",
+  "stop_condition": "EXACT_RANK13_AUTHORITY_BINDS_CURRENT_CANDIDATE_AND_SUCCESSFUL_ZERO_EXPOSURE_V8_RECEIPT__EXECUTION_AUTHORITY_TRUE__TASK_STARTED_FALSE__ZERO_ACCEPTANCE_AND_TERMINAL_CREDIT",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/13",
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": "1"
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "target_truth_obligations": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "proof_state_reachability": "THE_REQUIRED_FRESH_ZERO_EXPOSURE_V8_TRANSPORT_RESULT_ALREADY_EXISTS_AND_PASSED__THIS_ACTION_ONLY_BINDS_THAT_EXISTING_RESULT_INTO_BRAIN_SIDE_PRESTART_AUTHORITY",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "BIND_EXISTING_RANK13_V8_LIVE_RECEIPT_AND_ACTIVATE_PRESTART_AUTHORITY",
+      "falsifier_id": "REJECT_IF_RECEIPT_STATUS_BYTES_MODEL_IDENTITY_ARTIFACT_DIGEST_OR_ZERO_EXPOSURE_CONTRACT_DO_NOT_MATCH_CURRENT_RANK13_CANDIDATE",
+      "decisive_question": "DO_THE_ALREADY_OBSERVED_PUBLIC_RUNNER_RECEIPT_AND_CURRENT_RANK13_CANDIDATE_MATCH EXACTLY ENOUGH TO ACTIVATE BRAIN_SIDE_ONE_SLOT_AUTHORITY WITHOUT STARTING THE TASK",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "THE_ONLY_KNOWN_PRIOR FAILURE CLASS WAS RANK12 PROMPT_PREFILL_TIMEOUT; V8 LIVE PREFLIGHT DIRECTLY EXERCISED THE REPAIRED LONG_PROMPT MULTI_ACTION TRANSPORT AT 7209 TOKENS AND PASSED WITHOUT BENCHMARK EXPOSURE"
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "c7b2dbc547f8ce3da374a49b483f55df803b60f4",
+    "real_outcome": "ACTIVATE_ONLY_THE_ALREADY_JUSTIFIED_BRAIN_SIDE_RANK13_ONE_SLOT_AUTHORITY_SO_THE_NEXT_SEPARATE_STEP_CAN_PUBLISH_AN_EXACT_PUBLIC_EXECUTION_LEASE",
+    "required_capability": "TB_SCIENCE_RANK13_PRESTART_EXECUTION_AUTHORITY_BINDING",
+    "obs_goal": {
+      "real_outcome": "ADVANCE_TB_SCIENCE_GE_58_7_BY_BINDING_EXISTING_VERIFIED_TRANSPORT_EVIDENCE_WITHOUT_CONSUMING_THE_UNTOUCHED_RANK13_TASK",
+      "proxy_goals_deleted": [
+        "DO_NOT_RERUN_THE_ALREADY_SUCCESSFUL_V8_PREFLIGHT",
+        "DO_NOT_START_RANK13_IN_THIS_TRANSACTION",
+        "DO_NOT_CLAIM_ACCEPTANCE_OR_TERMINAL_CREDIT"
+      ],
+      "surviving_necessity": "CURRENT_CANDIDATE_EXPLICITLY_REQUIRES_THE_EXISTING_FRESH_LIVE_V8_RECEIPT_TO_BE_BOUND_BEFORE_BRAIN_SIDE_AUTHORITY_CAN_ACTIVATE"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "CURRENT_RANK13_AUTHORITY_CANDIDATE",
+        "RANK12_ACTIVE_AUTHORITY_PATTERN",
+        "CURRENT_V8_TRANSITIVE_RUNTIME_CLOSURE"
+      ],
+      "external_existing_routes_checked": [
+        "PUBLIC_RUNNER_WORKFLOW_37867504619",
+        "PUBLIC_RECEIPT_BLOB_84e51e8f1079d364275747f8afeb0996453b608d"
+      ],
+      "capability_work_deleted": [
+        "NO_NEW_PLANNER_BUILD",
+        "NO_NEW_MODEL_BUILD",
+        "NO_NEW_TRANSPORT_PROBE",
+        "NO_BENCHMARK_EXECUTION"
+      ],
+      "surviving_gap": "BIND_EXISTING_VERIFIED_RECEIPT_TO_CURRENT_CANDIDATE_AND_ACTIVATE_PRESTART_AUTHORITY"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_CONTROL_PLANE_BINDING_GAP__NOT_A_SCIENTIFIC_CAPABILITY_GAP",
+      "delete_bypass_substitute_options": [
+        "DELETE_DUPLICATE_PREFLIGHT",
+        "REUSE_EXISTING_SUCCESS_RECEIPT",
+        "BYPASS_NEW_REALITY_ACQUISITION",
+        "SUBSTITUTE_RANK12_ACTIVE_AUTHORITY_STRUCTURE_FOR_CONTROL_SHAPE_ONLY"
+      ],
+      "surviving_causal_blocker": "TB_SCIENCE_RANK13_LIVE_V8_PREFLIGHT_PASSED__BRAIN_SIDE_ONE_SLOT_AUTHORITY_NOT_YET_BOUND"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "1_REUSE_EXISTING_SUCCESSFUL_PUBLIC_V8_RECEIPT_AND_CURRENT_CANDIDATE",
+        "2_RERUN_PREFLIGHT_REJECTED_AS_DUPLICATE_REALITY",
+        "3_REBUILD_ROUTE_REJECTED_BECAUSE_CURRENT_ROUTE_ALREADY_PASSED_REQUIRED_GATE"
+      ],
+      "losing_routes_reason": "ALL_ALTERNATIVES_ADD_WALL_CLOCK_OR_NEW_REALITY_WITHOUT_CHANGING_THE_DECISION; THE EXISTING RECEIPT SATISFIES THE CANDIDATE GATE",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NO_NEW_SYNTHETIC_ORACLE_REQUIRED; VERIFY_EXACT_RECEIPT_FIELDS_BLOBS_ARTIFACT_DIGEST_ZERO_EXPOSURE_AND_PRESTART_AUTHORITY_STATE"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "CANDIDATE_RECEIPT_BOUND_FALSE_BLOCKER"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "V8_LONG_PROMPT_TIMEOUT_REPAIR",
+        "V8_MULTI_ACTION_DEPENDENCY_EDGE_TRANSPORT",
+        "15_FILE_TRANSITIVE_RUNTIME_CLOSURE"
+      ],
+      "fresh_reuse_plan": "AFTER_ACTIVE_AUTHORITY_IS_VERIFIED_PUBLISH_ONE_EXACT_PUBLIC_EXECUTION_LEASE; DO_NOT START TASK BEFORE IMMEDIATE CURRENT_EPOCH_REVALIDATION"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "REUSED_CURRENT_MAIN_CANDIDATE_STATIC_VERIFICATION",
+        "REUSED_PUBLIC_RUNNER_SUCCESS_AND_ARTIFACT_DIGEST",
+        "REUSED_RANK12_AUTHORITY_CONTROL_PATTERN"
+      ],
+      "search_stop_decision": "STOPPED_ONCE_THE_EXISTING_PUBLIC_RECEIPT_WAS_PROVED_TO_MATCH_EVERY_CANDIDATE_LIVE_GATE_FIELD; FURTHER SEARCH CANNOT IMPROVE THIS PRESTART_BINDING_DECISION",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REUSE_EXISTING_PUBLIC_V8_RECEIPT",
+      "RERUN_ZERO_EXPOSURE_PREFLIGHT",
+      "REBUILD_OR_REPLACE_CURRENT_V8_ROUTE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RERUN_ZERO_EXPOSURE_PREFLIGHT",
+      "REBUILD_OR_REPLACE_CURRENT_V8_ROUTE",
+      "BENCHMARK_TASK_START_IN_THIS_TRANSACTION"
+    ],
+    "selected_surviving_route": "REUSE_EXISTING_PUBLIC_V8_RECEIPT_AND_ACTIVATE_PRESTART_BRAIN_AUTHORITY",
+    "why_selected_route_is_fastest_sufficient": "THE_REQUIRED_GATE_ALREADY_PASSED ON THE EXACT CURRENT PLANNER COMMAND_POLICY PREFLIGHT MODEL AND LLAMA_CPP IDENTITIES; BINDING IT IS THE MINIMUM SUFFICIENT ZERO_NEW_REALITY_ACTION",
+    "expected_parent_level_state_change": "TB_SCIENCE_RANK13_BRAIN_SIDE_ONE_SLOT_EXECUTION_AUTHORITY_ACTIVATED__TASK_REMAINS_UNSTARTED__ZERO_ACCEPTANCE_AND_TERMINAL_CREDIT",
+    "stop_condition": "EXACT_RANK13_AUTHORITY_BINDS_CURRENT_CANDIDATE_AND_SUCCESSFUL_ZERO_EXPOSURE_V8_RECEIPT__EXECUTION_AUTHORITY_TRUE__TASK_STARTED_FALSE__ZERO_ACCEPTANCE_AND_TERMINAL_CREDIT",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER_ACTION_BINDS_AN_ALREADY_OBSERVED_AND_EXACTLY_MATCHED_EXTERNAL_RESULT; NO_ROUTE_DISCOVERY_OR_NEW_EXECUTION_IS_NEEDED"
+    }
+  },
+  "safety": {
+    "benchmark_task_exposure_authorized": false,
+    "benchmark_trials_consumed": 0,
+    "new_reality_queries_authorized": 0,
+    "incremental_spend_usd_max": 0,
+    "promotion_authority": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

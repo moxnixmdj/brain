@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK13_ONE_SLOT_EXECUTION_AUTHORITY_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_ONE_SLOT_AUTHORITY__CURRENT_DRIFT_AND_V22_INTENT_CONTRACT_BOUND__PUBLIC_EXECUTION_LEASE_NOT_YET_PUBLISHED__TASK_NOT_STARTED",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/dapi-he-alignment::trial-0",
+    "schedule_rank": 13,
+    "digest": "sha256:a4291c3f09b0fc2a1c8713129d3afd1b46929482f6c03df630c25814b53b755e"
+  },
+  "intent": {
+    "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK13_ONE_SHOT_20261009_V1.json",
+    "git_blob_sha": "71da798999dc3b183291b1005405b695de1328df"
+  },
+  "candidate": {
+    "path": "canonical/governance/TB_SCIENCE_RANK13_ONE_SLOT_EXECUTION_AUTHORITY_CANDIDATE_20261009_V1.json",
+    "git_blob_sha": "5d65e6b0491dc53c09e45259d2108b0385ce3e8b",
+    "verification_blob": "2fa0eeaebcbe800404975c922a7198a60a7907f2"
+  },
+  "public_epoch": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base_branch": "terminal-execution-v1",
+    "base_commit": "cc1f22706acecf3f5b3773acef3957adb4885c9f",
+    "epoch_path": "capsules/tb_science_rank13_20261009_v1/RANK13_EPOCH_V1.json",
+    "epoch_blob": "47ba6fe1583b59152860504ab58720ffdb00a1f0",
+    "epoch_run_attempts_authorized": 0
+  },
+  "exact_route": {
+    "agent_blob": "5e851d884b9784c6dc6fc9f83c08c502e41c3bdc",
+    "planner_blob": "715aee168f02cb4abff961849b2b26709eef2e64",
+    "raw_task_contract_blob": "d54d5a2f7efa76b653d288f4f53da4883644baa6",
+    "raw_task_localizer_blob": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76",
+    "carrier_closure_blob": "99240debf7233f97f88deaf76e98f3e01434b799",
+    "carrier_closure_verification_blob": "53dfb7bce0424da1b333aca8ce793ad42071eb3b",
+    "transitive_runtime_file_count": 15,
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c"
+  },
+  "preflight_evidence": {
+    "fresh_v8_multi_action_live_preflight_blob": "51885c6aefb2975619f513ac15150a944d31adeb",
+    "fresh_public_receipt_blob": "84e51e8f1079d364275747f8afeb0996453b608d",
+    "fresh_public_artifact_digest": "sha256:6703bda3c20d16a401dbe6dbcf2ee8f562c8ec8fbb4a81fe0b1a7475a1feb9eb",
+    "current_ledger_blob": "7cd1dbbc29c03ba3d9b14941098abc738b3510d3",
+    "terminal_manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "v8_envelope_blob": "5126d3838d9f4d6dc38ce953a1c57acf7cd86879",
+    "v8_two_sprite_verification_blob": "ab4531a5efb4dd0034f499eeeb5bbcd226f7ebb5",
+    "predicate_truth_repair_verification_blob": "3e2ef7d047df58e05122fdf49b83b8ea188852f2",
+    "current_drift_guard_intent_blob": "71da798999dc3b183291b1005405b695de1328df",
+    "guard_validation": "PASS__TRUSTED_GUARD_DECISION_PREDICATES_REPLAYED__GITHUB_PRIVATE_RUNNER_NOT_ALLOCATED"
+  },
+  "resource_envelope": {
+    "declared_cpus": 2,
+    "declared_memory_mb": 4096,
+    "declared_storage_mb": 10240,
+    "declared_gpus": 0,
+    "declared_build_timeout_sec": 600,
+    "declared_agent_timeout_sec": 28800,
+    "declared_verifier_timeout_sec": 120,
+    "minimum_post_model_free_bytes": 12884901888
+  },
+  "controls": {
+    "attempts_authorized": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "public_execution_claim_required": true,
+    "exact_public_epoch_required": true,
+    "exact_runtime_blob_identity_required": true,
+    "current_epoch_recheck_required_immediately_before_task_start": true,
+    "post_model_storage_gate_required": true,
+    "precheck_failure_consumes_slot": false,
+    "post_start_result_irreversible": true,
+    "final_non_success_counts_zero": true
+  },
+  "state": {
+    "execution_claim_active": false,
+    "public_activation_armed": false,
+    "task_started": false,
+    "result_present": false,
+    "authority_consumed": false
+  },
+  "execution_authority": true,
+  "fresh_reality_authority": true,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_RANK13_TASK_CONTENT_READ_YET",
+    "NO_RANK13_TASK_START_YET",
+    "NO_ACCEPTANCE_CREDIT_BEFORE_FROZEN_VERIFIER_RESULT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
