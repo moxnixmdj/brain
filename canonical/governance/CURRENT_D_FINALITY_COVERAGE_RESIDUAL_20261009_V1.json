@@ -1,15 +1,17 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_D_FINALITY_COVERAGE_RESIDUAL_20261009_V1",
   "date": "2026-10-09",
-  "status": "CURRENT_MAIN_SOURCE_ACCOUNTING__89_LIVE_ADMITTED_IDENTITIES__D_CERTIFICATE_COVERAGE_NOT_YET_COMPILED__ZERO_CREDIT",
+  "status": "CURRENT_SUCCESSOR_SOURCE_ACCOUNTING__89_LIVE_ADMITTED_IDENTITIES__D_ENFORCEMENT_PRIMITIVES_INTEGRATED_AND_INDEPENDENTLY_REPLAYED__89_MEMBER_CERTIFICATES_PENDING__ZERO_CREDIT",
   "current_main": {
-    "commit": "ca3db3c2e9fde06e58e20ac7589d34acc212ef16",
-    "note": "MAIN_CONTINUES_TO_MOVE__LOAD_BEARING_BLOBS_BELOW_ARE_THE_ACCOUNTING_AUTHORITY"
+    "successor_branch": "d-finality-current-v2-20261009",
+    "branch_head_at_rebind": "1d74e547b38529e4c5566028c9cd3c9baacb29a1",
+    "base_main_commit_at_successor_creation": "9f932cf27be05f86b8ffd0342b0d268363182ea7",
+    "note": "LOAD_BEARING_BLOB_BINDINGS_BELOW_ARE_AUTHORITATIVE_IF_MAIN_OR_BRANCH_HEAD_MOVES"
   },
   "exact_sources": {
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "5c660c788d3a65288a619cd8fc98cec9fd40a2c5"
+      "git_blob_sha": "e61cd151101ba0ca12529f79f5d195c044f0d602"
     },
     "bound_registry": {
       "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
@@ -28,6 +30,34 @@
       "default_state_path": "canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json",
       "current_default_state_file_present": false,
       "missing_state_semantics": "load_state_returns_empty_state"
+    },
+    "d_finality_fabric_guard": {
+      "path": "canonical/runtime/d_finality_fabric_guard_v1.py",
+      "git_blob_sha": "e3bf117a7e6499b5383a53603c0bb4b90ab4e427"
+    },
+    "live_capability_invoker": {
+      "path": "canonical/runtime/live_capability_invoker_v1.py",
+      "git_blob_sha": "d48b0a0267e247c5b63326144047f431ba19d0dd"
+    },
+    "live_capability_ownership": {
+      "path": "canonical/runtime/live_capability_ownership_v1.py",
+      "git_blob_sha": "eea3f38defa450c6f7d1f5837828a8018f5007c2"
+    },
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "aa63c156a394d6b221cf8e2b578b5380c05d135a"
+    },
+    "d_execution_epoch": {
+      "path": "canonical/runtime/d_finality_execution_epoch_v1.py",
+      "git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+    },
+    "d_coverage_gate": {
+      "path": "canonical/runtime/d_finality_coverage_gate_v1.py",
+      "git_blob_sha": "3974b89b4d614c9a39c5c71eeb3b1774b21f8e91"
+    },
+    "d_bound_material_compiler": {
+      "path": "canonical/runtime/d_finality_bound_material_compiler_v1.py",
+      "git_blob_sha": "e29722c0ad2869c25ffb148b9fe79603314d5f54"
     }
   },
   "live_admitted_accounting": {
@@ -121,34 +151,45 @@
   },
   "current_D_equation": {
     "live_admitted": 89,
-    "current_d_final_owned": "UNKNOWN_UNTIL_CERTIFICATE_REGISTRY_IS_COMPILED",
-    "required_terminal_condition": "MISSING_D_CERTIFICATE_COUNT_EQUALS_ZERO_FOR_CURRENT_LIVE_ADMITTED_SET",
-    "no_inference": "STRUCTURAL_LIVE_OWNERSHIP_89_DOES_NOT_IMPLY_D_FINAL_OWNERSHIP_89"
+    "current_d_final_owned": 0,
+    "pending_member_d_certificates": 89,
+    "required_terminal_condition": "MISSING_D_CERTIFICATE_COUNT_EQUALS_ZERO_FOR_EXACT_CURRENT_LIVE_ADMITTED_SET_AND_CURRENT_BYTE_DONOR_DELETION_REPLAY_PASSES",
+    "no_inference": "ENFORCEMENT_PRIMITIVE_PASS_DOES_NOT_PROMOTE_ANY_MEMBER_CAPABILITY"
   },
   "implementation_status": {
-    "d_epoch_primitive_pr": 3510,
-    "d_epoch_primitive_independent_sprite_tests": "PASS_10_OF_10_ON_EXACT_BLOBS",
-    "coverage_reducer": "IMPLEMENTED_ON_PR_BRANCH",
-    "coverage_reducer_independent_verification": "OPEN__AVAILABLE_SPRITE_CARRIERS_TRANSPORT_FAILED_DURING_REPLAY",
-    "live_front_door_integration": false,
-    "d_certificate_registry_populated": false
+    "successor_branch": "d-finality-current-v2-20261009",
+    "prior_pr_3510": "SUPERSEDED_BY_CURRENT_MAIN_SUCCESSOR_BRANCH",
+    "d_epoch_primitive_independent_sprite_tests": "PASS_10_OF_10_ON_EXACT_D_EPOCH_BLOBS",
+    "combined_d_primitive_guard_material_suite": "PASS_27_OF_27_ON_SUCCESSOR_EXACT_BLOBS",
+    "py_compile_all_patched_d_runtime_files": "PASS",
+    "stdlib_shadow_attack": "PASS__FORGED_/tmp/json.py_REJECTED",
+    "mid_epoch_registry_drift_attack": "PASS__MATERIAL_CHANGED_DURING_EPOCH_BEFORE_LOAD",
+    "live_invoker_exact_byte_microreplay": "PASS__ALLOWED_MEMBER_EXECUTED__NONMEMBER_REJECTED_BEFORE_DISPATCH",
+    "front_door_guard_integrated": true,
+    "implicit_general_learning_suppressed_in_d_epoch": true,
+    "implicit_composition_learning_suppressed_in_d_epoch": true,
+    "background_compounding_suppressed_in_d_epoch": true,
+    "d_certificate_registry_populated": true,
+    "d_certificate_registry_verified_current_rows": 0,
+    "member_d_finality_complete": false
   },
   "next_minimum_cut": [
-    "INDEPENDENTLY_VERIFY_D_FINALITY_COVERAGE_REDUCER_EXACT_BLOBS",
-    "COMPILE_89_LIVE_IDENTITIES_TO_PROVIDER_THEOREM_PLUS_MEMBER_MATERIAL_CERTIFICATE_ROWS",
-    "START_WITH_PURE_LOCAL_CLASSES_FIRST_TO_MAXIMIZE_CERTIFICATE_MASS_PER_UNIT_WORK",
-    "SEAL_NETWORK_OR_WORLD_IO_BOUND_CAPABILITIES_UNDER_KNOWLEDGE_EFFECT_BROKER_RULES",
-    "THREAD_D_CONTEXT_THROUGH_LIVE_INVOKER_AND_COMPOSITION",
-    "CHANGE_OWNERSHIP_ONTOLOGY_TO_LIVE_D_FINAL_OWNED_EQUALS_LIVE_ADMITTED_INTERSECT_CURRENT_D_FINAL",
-    "ATOMically_ENABLE_OWNERSHIP_AUTHORITATIVE_FRONT_DOOR_GATE_ONLY_WHEN_CURRENT_MISSING_D_CERTIFICATE_COUNT_IS_ZERO",
-    "RUN_CURRENT_BYTE_DONOR_DELETION_CLEANROOM_AND_INDEPENDENT_FINALITY_REPLAY"
+    "COMPILE_EXACT_MATERIAL_CANDIDATES_FOR_9_STDLIB_SIMPLE_LOCAL_ROWS",
+    "INDEPENDENTLY_REPLAY_EACH_MEMBER_ON_FRESH_ADMISSIBLE_INPUT_UNDER_CURRENT_D_EPOCH_AND_DONOR_CUT",
+    "ISSUE_MEMBER_MATERIAL_AND_D_CERTIFICATES_ONLY_AFTER_ZERO_UNDECLARED_DEPENDENCIES",
+    "THEN_CLOSE_4_DYNAMIC_LOCAL_ROWS_WITH_EXACT_DYNAMIC_TARGET_CLOSURE",
+    "CLOSE_SUBPROCESS_LOCAL_WITH_CHILD_AUTHORITY_NONWIDENING_AND_INTERPRETER_BINDING",
+    "CLOSE_WORLD_IO_ROWS_WITH_TYPED_KNOWLEDGE_EFFECT_BROKER_NONSMUGGLING_AND_TRANSCRIPT_REPLAY",
+    "REPEAT_BY_PROVIDER_PROOF_CLASS_FOR_REMAINING_BOUND_H100_ENGINE_AND_SELECTED_ROUTE_IDENTITIES",
+    "RUN_CURRENT_BYTE_GLOBAL_DONOR_DELETION_CLEANROOM",
+    "ENABLE_OWNERSHIP_AUTHORITATIVE_D_GATE_ONLY_WHEN_CURRENT_MISSING_D_CERTIFICATE_COUNT_IS_ZERO"
   ],
   "hard_nonclaims": [
     "NO_CLAIM_89_IDENTITIES_ARE_CURRENTLY_D_FINAL",
-    "NO_CLAIM_36_ADAPTER_CLASSES_ARE_PROVED_EQUIVALENCE_CLASSES",
+    "NO_CLAIM_ENFORCEMENT_PRIMITIVE_TESTS_SUBSTITUTE_FOR_MEMBER_FRESH_REPLAY",
     "NO_CLAIM_PROVIDER_THEOREM_REUSE_REMOVES_MEMBER_MATERIAL_PROOF",
-    "NO_LIVE_OWNERSHIP_CREDIT",
-    "NO_D_CREDIT",
+    "NO_CURRENT_GLOBAL_DONOR_DELETION_CLEANROOM_PASS_ON_SUCCESSOR_BYTES",
+    "NO_LIVE_D_FINAL_OWNERSHIP_CREDIT",
     "NO_TERMINAL_CREDIT"
   ],
   "accounting": {
