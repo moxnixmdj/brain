@@ -38,7 +38,7 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             terminal["schema"],
             "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V37",
         )
-        self.assertEqual(terminal["pointer_revision"], 91)
+        self.assertEqual(terminal["pointer_revision"], 92)
         self.assertEqual(terminal["terminal_objective"], REAL_OBJECTIVE)
         self.assertEqual(
             terminal["objective_precedence"]["authoritative_path"],
