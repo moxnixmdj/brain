@@ -191,6 +191,7 @@ def resolve(
     registry_authority_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     source_semantics_completeness_receipt: Mapping[str, Any] | None = None,
     source_semantics_completeness_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    relation_edge_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     """Resolve only the strongest domain mapping justified by existing proof kernels.
 
@@ -284,7 +285,10 @@ def resolve(
                     raise DomainMappingError("RELATION_RIGHT_ID_MISMATCH:" + cid)
                 if str(problem.get("scope_id") or "") != scope_id:
                     raise DomainMappingError("RELATION_SCOPE_MISMATCH:" + cid)
-                relation_result = semantic_relation.resolve(problem)
+                relation_result = semantic_relation.resolve(
+                    problem,
+                    relation_edge_verifier=relation_edge_verifier,
+                )
 
             row = {
                 "concept_id": cid,
