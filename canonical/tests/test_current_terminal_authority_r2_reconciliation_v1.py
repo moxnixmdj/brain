@@ -234,10 +234,21 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         runtime_binding = terminal["authoritative_sources"][
             "creditable_route_refinement_admission_guard"
         ]
+        historical_runtime_binding = terminal["authoritative_sources"][
+            "creditable_router_context_payload_v2"
+        ]
 
         self.assertEqual(graph_binding["git_blob_sha"], blob_sha(graph_path))
         self.assertEqual(verifier_binding["git_blob_sha"], blob_sha(verifier_path))
         self.assertEqual(runtime_binding["git_blob_sha"], blob_sha(runtime_path))
+        self.assertEqual(
+            historical_runtime_binding["status"],
+            "SUPERSEDED_RUNTIME_BINDING__EVIDENCE_RETAINED",
+        )
+        self.assertEqual(
+            historical_runtime_binding["superseded_by"],
+            "creditable_route_refinement_admission_guard",
+        )
 
         self.assertTrue(
             truth["executable_refinement_structural_binding_framework_present"]
@@ -257,6 +268,19 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             truth["brain_owned_semantic_edge_bounded_refinement_verified"]
         )
         self.assertFalse(truth["repository_wide_executable_refinement_closed"])
+        self.assertTrue(
+            truth["creditable_selected_route_refinement_admission_enforced"]
+        )
+        self.assertEqual(
+            truth["current_selected_route_registry_creditable_row_count"], 0
+        )
+        self.assertTrue(
+            truth["all_current_creditable_selected_routes_refinement_requirement_satisfied"]
+        )
+        self.assertFalse(
+            truth["non_selected_runtime_executable_refinement_coverage_closed"]
+        )
+        self.assertTrue(truth["runtime_binding_precedence_reconciled"])
         self.assertFalse(
             truth["all_creditable_live_routes_refinement_verified"]
         )
@@ -276,6 +300,21 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         )
         self.assertFalse(reconciliation["execution_tests_run"])
         self.assertFalse(reconciliation["independent_replay_run"])
+        self.assertTrue(
+            reconciliation["creditable_selected_route_refinement_admission_enforced"]
+        )
+        self.assertEqual(
+            reconciliation["current_selected_route_registry_creditable_row_count"], 0
+        )
+        self.assertTrue(
+            reconciliation[
+                "all_current_creditable_selected_routes_refinement_requirement_satisfied"
+            ]
+        )
+        self.assertFalse(
+            reconciliation["non_selected_runtime_refinement_coverage_closed"]
+        )
+        self.assertTrue(reconciliation["runtime_binding_precedence_reconciled"])
         self.assertFalse(reconciliation["repository_wide_refinement_closed"])
         self.assertFalse(reconciliation["external_impossibility_claimed"])
         self.assertEqual(reconciliation["terminal_credit_delta"], 0)
@@ -286,6 +325,7 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             "NO_CLAIM_ROUTER_CANARY_EXECUTABLE_REFINEMENT_IS_VERIFIED.",
             "NO_CLAIM_BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_IS_VERIFIED.",
             "NO_CLAIM_REPOSITORY_WIDE_OR_ALL_CREDITABLE_LIVE_ROUTE_EXECUTABLE_REFINEMENT_IS_CLOSED.",
+            "NO_CLAIM_SELECTED_ROUTE_REFINEMENT_ADMISSION_ENFORCEMENT_CLOSES_NON_SELECTED_RUNTIME_EXECUTABLE_REFINEMENT.",
         }
         self.assertTrue(required_nonclaims.issubset(set(terminal["hard_nonclaims"])))
 
