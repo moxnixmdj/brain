@@ -176,6 +176,10 @@ def execute(
         )
         cid = prepared["capability_id"]
         inspected = inspect(cid)
+        if inspected["registry_file_sha256"] != prepared["registry_file_sha256"]:
+            raise BoundExecutionError("REGISTRY_FILE_CHANGED_AFTER_PREPARATION")
+        if inspected["registry_entry_sha256"] != prepared["registry_entry_sha256"]:
+            raise BoundExecutionError("REGISTRY_ENTRY_CHANGED_AFTER_PREPARATION")
         entry = inspected["entry"]
         rendered = prepared["rendered_action"]
         args = rendered["args"]
@@ -196,7 +200,10 @@ def execute(
         ):
             raise BoundExecutionError("RENDERED_ACTION_CHANGED_AFTER_PREPARATION")
 
-        result = astra_runtime._invoke_bound_capability(dict(args))
+        result = astra_runtime._invoke_bound_capability_entry(
+            dict(args),
+            deepcopy(dict(entry)),
+        )
         if not isinstance(result, Mapping):
             raise BoundExecutionError("BOUND_CAPABILITY_RESULT_INVALID")
         astra_runtime._verify_action_expectation(rendered, result)
