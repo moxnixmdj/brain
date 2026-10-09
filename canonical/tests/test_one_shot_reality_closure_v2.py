@@ -81,7 +81,7 @@ class RealityClosureV2Tests(unittest.TestCase):
         self.assertEqual(out["gap_class"], "CONSTRUCTIVE_CAPABILITY_GAP")
         self.assertFalse(out["verification_authority_mutation_allowed"])
 
-    def test_external_acquisition_is_forbidden_without_irreducibility_proof(self):
+    def test_unproved_externality_routes_to_pending_acquisition_not_external(self):
         c = closure(
             status="OPEN",
             evidence=("MISSING_FACT",),
@@ -98,7 +98,37 @@ class RealityClosureV2Tests(unittest.TestCase):
                 },
             )
         self.assertFalse(out["pass"])
-        self.assertIn("EXTERNALITY_NOT_PROVED", out["status"])
+        self.assertIn("PENDING_ACQUISITION_OR_EXPERIMENT", out["status"])
+        self.assertEqual(
+            out["gap_contract"]["gap_class"],
+            "PENDING_ACQUISITION_OR_EXPERIMENT",
+        )
+
+    def test_pending_acquisition_provider_then_verified_closure(self):
+        first = closure(
+            status="OPEN",
+            evidence=("MISSING_FACT",),
+            external=False,
+            initial="i0",
+            final="f0",
+        )
+        second = closure(
+            status="PASS",
+            passed=True,
+            initial="i1",
+            final="f1",
+        )
+        provider = lambda contract: {
+            "pass": True,
+            "frontier_changed": True,
+            "verification_authority_mutated": False,
+            "receipt_sha256": "c" * 64,
+            "acquisition_or_experiment_attempted": True,
+            "evidence_trace_sha256": "9" * 64,
+        }
+        with patch.object(v2.v1, "run", side_effect=[first, second]):
+            out = v2.run(repo_root=".", evidence_acquisition_provider=provider)
+        self.assertTrue(out["pass"], out)
 
     def test_constructive_gap_provider_then_verified_closure(self):
         first = closure(
@@ -118,6 +148,10 @@ class RealityClosureV2Tests(unittest.TestCase):
             "frontier_changed": True,
             "verification_authority_mutated": False,
             "receipt_sha256": "d" * 64,
+            "reuse_or_search_trace_complete": True,
+            "new_code_written": False,
+            "verifier_generated_or_reused": True,
+            "verifier_passed": True,
         }
         with patch.object(v2.v1, "run", side_effect=[first, second]):
             out = v2.run(repo_root=".", capability_synthesis_provider=provider)
@@ -142,6 +176,10 @@ class RealityClosureV2Tests(unittest.TestCase):
             "frontier_changed": True,
             "verification_authority_mutated": False,
             "receipt_sha256": "e" * 64,
+            "reuse_or_search_trace_complete": True,
+            "new_code_written": False,
+            "verifier_generated_or_reused": True,
+            "verifier_passed": True,
         }
         with patch.object(v2.v1, "run", side_effect=[first, second]):
             out = v2.run(repo_root=".", capability_synthesis_provider=provider)
@@ -162,6 +200,56 @@ class RealityClosureV2Tests(unittest.TestCase):
         with patch.object(v2.v1, "run", return_value=first):
             with self.assertRaises(v2.RealityClosureError):
                 v2.run(repo_root=".", capability_synthesis_provider=provider)
+
+    def test_new_code_requires_pre_code_search_minimality_and_verifier(self):
+        first = closure(status="OPEN", internal=("ROOT1_GAP",))
+        provider = lambda contract: {
+            "pass": True,
+            "frontier_changed": True,
+            "verification_authority_mutated": False,
+            "receipt_sha256": "8" * 64,
+            "reuse_or_search_trace_complete": True,
+            "new_code_written": True,
+            "pre_code_search_exhausted": False,
+            "minimal_missing_transform_only": True,
+            "verifier_generated_or_reused": True,
+            "verifier_passed": True,
+        }
+        with patch.object(v2.v1, "run", return_value=first):
+            with self.assertRaisesRegex(
+                v2.RealityClosureError,
+                "PRE_CODE_SEARCH_NOT_EXHAUSTED",
+            ):
+                v2.run(repo_root=".", capability_synthesis_provider=provider)
+
+    def test_shared_cause_candidates_collapse_multiple_obligations(self):
+        pending = []
+        for wid in ("w1", "w2", "w3"):
+            pending.append({
+                "schema": v2.SEMANTIC_WORK_SCHEMA,
+                "work_id": wid,
+                "work_digest": wid.ljust(64, "0"),
+                "kind": "REPAIR_FAILURE_CLASS",
+                "status": "PENDING",
+                "payload": {
+                    "repair_class": "SAME_ROOT_CAUSE",
+                    "boundary_root": "shared.root",
+                },
+            })
+        out = v2.compile_gap_contract(
+            closure(status="OPEN", internal=("ROOT1_GAP",)),
+            pending_work=pending,
+        )
+        self.assertGreaterEqual(out["shared_cause_candidate_count"], 1)
+        self.assertEqual(
+            out["shared_cause_candidates"][0]["terminal_obligations_reached"],
+            3,
+        )
+        self.assertEqual(
+            out["required_attempt_order"][0],
+            "REUSE_EXISTING_CAPABILITY",
+        )
+        self.assertTrue(out["search_before_new_code_required"])
 
     def test_conservative_leverage_uses_probability_lower_bound(self):
         rows = v2.rank_candidates([

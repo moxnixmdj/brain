@@ -99,7 +99,7 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
                 out = cert.certify(wid, state_path=state_path, repo_root=root)
         self.assertFalse(out["pass"])
 
-    def test_one_shot_accepts_only_explicit_strict_failure_certificate(self):
+    def test_historical_failure_certificate_never_grants_external_terminal_pass(self):
         pending = [{
             "work_id": "w-failure",
             "kind": "REPAIR_FAILURE_CLASS",
@@ -110,28 +110,35 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
                 "repair_class": cert.SUPPORTED_REPAIR_CLASS,
             },
         }]
+
         def snap(digest):
             return {
                 "schema": closure.SCHEMA,
                 "digest": digest,
                 "state_sha256": "state-" + digest,
                 "payload": {
-                    "state_file": {"path": "state.json", "sha256": "state-" + digest, "bytes": 1},
+                    "state_file": {
+                        "path": "state.json",
+                        "sha256": "state-" + digest,
+                        "bytes": 1,
+                    },
                     "files": [],
                     "pending": pending,
                     "stats": {},
                 },
             }
+
         snaps = [snap("a"), snap("a"), snap("a")]
         blocker = {
             "work_id": "w-failure",
             "kind": "REPAIR_FAILURE_CLASS",
             "blocker": "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
         }
-        strict = {
+        bounded = {
             "pass": True,
-            "status": "PASS__ALL_PENDING_FAILURE_WORK_REQUIRES_EXTERNAL_REPLAY_INFORMATION",
-            "irreducible_external_information_proved": True,
+            "status": "PASS__CURRENT_STATE_ONLY",
+            "irreducible_external_information_proved": False,
+            "current_durable_state_insufficiency_proved": True,
         }
         with patch.object(closure, "frontier_snapshot", side_effect=snaps), \
              patch.object(closure.r3, "drain", return_value={
@@ -140,17 +147,53 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
                  "progress_count": 0,
                  "actions": [{"blockers": [blocker]}],
              }), \
-             patch.object(closure.historical_evidence, "certify_pending_set", return_value={"pass": False}), \
-             patch.object(closure.historical_failure, "certify_pending_set", return_value=strict):
+             patch.object(
+                 closure.historical_evidence,
+                 "certify_pending_set",
+                 return_value={"pass": False},
+             ), \
+             patch.object(
+                 closure.historical_failure,
+                 "certify_pending_set",
+                 return_value=bounded,
+             ):
             out = closure.run(repo_root=".", state_path="state.json")
-        self.assertTrue(out["pass"], out)
+
+        self.assertFalse(out["pass"], out)
         self.assertTrue(out["fixed_point"])
         self.assertEqual(
             out["status"],
-            "VERIFIED_FIXED_POINT__IRREDUCIBLE_EXTERNAL_INFORMATION_REQUIRED",
+            "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
         )
-        self.assertTrue(out["irreducible_external_information_proved"])
-        self.assertEqual(out["strict_external_failure_certificate"], strict)
+        self.assertFalse(out["irreducible_external_information_proved"])
+        self.assertEqual(out["historical_failure_state_certificate"], bounded)
+
+    def test_information_theoretic_externality_requires_full_barrier(self):
+        good = {
+            "information_theoretic_externality_proved": True,
+            "observational_equivalence_proved": True,
+            "optimal_action_divergence_proved": True,
+            "search_exhausted": True,
+            "theorem_route_exhausted": True,
+            "simulation_route_exhausted": True,
+            "experiment_route_exhausted": True,
+            "alternative_route_exhausted": True,
+            "weaker_sufficient_fact_exhausted": True,
+            "synthesized_capability_bypass_exhausted": True,
+            "proof_scope_closed_and_exhaustive": True,
+            "independent_verifier_passed": True,
+            "verification_authority_mutated": False,
+            "witness_sha256": "a" * 64,
+            "proof_scope_digest": "b" * 64,
+        }
+        out = closure.validate_information_theoretic_externality_certificate(good)
+        self.assertTrue(out["pass"], out)
+
+        bad = dict(good)
+        bad["experiment_route_exhausted"] = False
+        out = closure.validate_information_theoretic_externality_certificate(bad)
+        self.assertFalse(out["pass"])
+        self.assertIn("experiment_route_exhausted", out["failed_conditions"])
 
 
 if __name__ == "__main__":
