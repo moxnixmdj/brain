@@ -33,6 +33,32 @@ def ambiguity_problem(*, same_terminal_result: bool):
     }
 
 
+def identifiability_problem(*, unique_profit: bool):
+    collateral_source_ok = False if unique_profit else True
+    return {
+        "interpretations": [
+            {
+                "id": "profit-margin",
+                "meaning": "profit margin",
+                "consistent_with_source": True,
+                "consistent_with_authorized_context": True,
+                "materially_distinct": True,
+                "discriminator": "revenue/cost relation",
+            },
+            {
+                "id": "collateral-margin",
+                "meaning": "collateral margin",
+                "consistent_with_source": collateral_source_ok,
+                "consistent_with_authorized_context": True,
+                "materially_distinct": True,
+                "discriminator": "broker/collateral relation",
+            },
+        ],
+        "authorized_context_ids": ["doc:1#sentence:2"],
+        "required_interpretation_id": "profit-margin",
+    }
+
+
 @unittest.skipIf(K is None, "semantic effect kernel not implemented yet")
 class SemanticEffectKernelBehaviorTests(unittest.TestCase):
     def effect(self, effect_id="E-margin-profit", prop="profit_related(m17)", problem=None):
@@ -81,6 +107,50 @@ class SemanticEffectKernelBehaviorTests(unittest.TestCase):
             K.issue_discharge_certificate(
                 effect,
                 proof_kind="AMBIGUITY_TERMINALLY_IRRELEVANT_V1",
+                proof_problem=problem,
+            )
+
+    def test_unique_identifiability_certificate_can_discharge_exact_sense_binding(self):
+        problem = identifiability_problem(unique_profit=True)
+        effect = self.effect(
+            "E-sense",
+            "interpretation(m17)=profit-margin",
+            problem,
+        )
+        value = K.make_value("Margin increased.", context_version="ctx-v1", effects=[effect])
+        cert = K.issue_discharge_certificate(
+            effect,
+            proof_kind="IDENTIFIABILITY_UNIQUE_V1",
+            proof_problem=problem,
+        )
+        clean = K.discharge_effect(value, effect["effect_id"], cert)
+        self.assertEqual(K.active_effect_ids(clean), [])
+
+    def test_ambiguous_identifiability_cannot_discharge_sense_binding(self):
+        problem = identifiability_problem(unique_profit=False)
+        effect = self.effect(
+            "E-sense",
+            "interpretation(m17)=profit-margin",
+            problem,
+        )
+        with self.assertRaises(K.SemanticEffectError):
+            K.issue_discharge_certificate(
+                effect,
+                proof_kind="IDENTIFIABILITY_UNIQUE_V1",
+                proof_problem=problem,
+            )
+
+    def test_identifiability_certificate_is_bound_to_required_interpretation(self):
+        problem = identifiability_problem(unique_profit=True)
+        effect = self.effect(
+            "E-sense",
+            "interpretation(m17)=collateral-margin",
+            problem,
+        )
+        with self.assertRaises(K.SemanticEffectError):
+            K.issue_discharge_certificate(
+                effect,
+                proof_kind="IDENTIFIABILITY_UNIQUE_V1",
                 proof_problem=problem,
             )
 
