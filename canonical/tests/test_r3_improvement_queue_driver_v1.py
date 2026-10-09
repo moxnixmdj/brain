@@ -233,6 +233,12 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
                 "retry_capsule_sha256": None,
             },
         )
+        state["improvement_queue"][wid]["attempt_count"] = 2
+        state["improvement_queue"][wid]["observations"] = 2
+        state["improvement_queue"][wid]["last_attempt_observations"] = 2
+        state["improvement_queue"][wid]["last_attempt_status"] = (
+            "IMPROVEMENT_REPAIR_BLOCKED__REPLAY_CAPSULE_REQUIRED"
+        )
         learning._refresh_stats(state)
         learning._write_state(state, path)
 
