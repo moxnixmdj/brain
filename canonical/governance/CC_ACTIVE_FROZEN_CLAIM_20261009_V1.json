@@ -50,12 +50,19 @@
     "carrier_requirement": "MISSION_SUFFICIENT_CLAIM_SCOPED_CARRIER__NO_CROSS_CLAIM_TRANSPORT",
     "terminal_authority": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-      "git_blob_sha": "3b05b142f1991c7d9d2ab9e90c265ed3d3896486"
+      "git_blob_sha": "9cd5e967241a3a7cd7f5ddd6283c9f8ce90dfd69"
     },
     "terminal_predicate": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
     "b_plus_rule": "OPEN_OR_UNKNOWN_FROZEN_ACCEPTANCE_PREDICATE_RETAINS_BOTH_PASS_AND_FAIL_COMPLETIONS_UNTIL_PROVED",
     "g_minus_rule": "ONLY_COMPLETIONS_SATISFYING_ALL_MANDATORY_TERMINAL_PREDICATES_ARE_DEFINITELY_GOOD",
     "unknown_policy": "UNKNOWN_FAILS_CLOSED",
-    "global_open_ended_mission_completion_derivable": false
+    "global_open_ended_mission_completion_derivable": false,
+    "authority_provenance_refresh": {
+      "previous_blob_sha": "3b05b142f1991c7d9d2ab9e90c265ed3d3896486",
+      "current_blob_sha": "9cd5e967241a3a7cd7f5ddd6283c9f8ce90dfd69",
+      "checkpoint_objective_unchanged": true,
+      "terminal_semantics_unchanged": true,
+      "claim_core_unchanged": true
+    }
   }
 }
