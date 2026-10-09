@@ -887,10 +887,10 @@
     "current_r2_decision_intelligence": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "scheduler_cut": {
-        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V43.json",
-        "git_blob_sha": "4fdc6171f14ce3bff684032db734c8c8bace7992"
+        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44.json",
+        "git_blob_sha": "55be062f58a20e13fc32acc47746abb11750f7b7"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V43__TWENTY_EIGHT_DIRECT_ROUTES__TWENTY_FIVE_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__OEWN_RELEASE_SENSE_UNIVERSE_AUTHENTICATED_CONTEXT_TO_CONCEPT_BOUNDED_CONCEPT_UNIVERSE_AND_EXACT_BOUNDED_RELATION_PROOF_BOUND__AFTER_TEN_VERIFIED_SUBREGIONS",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V44__THIRTY_DIRECT_ROUTES__TWENTY_SEVEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__GENERAL_CROSS_DOCUMENT_EFFECT_WORLDS_AND_AUTHENTICATED_OEWN_DECISION_SENSE_CONTROL_BOUND__AFTER_TEN_VERIFIED_FINANCE_SUBREGIONS",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     },
@@ -1441,7 +1441,7 @@
     "gdpval_owner_layer_wake_authority": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V9.json",
     "opus_5_5_is_global_terminal_objective": false,
     "opus_5_5_is_frontier_checkpoint": true,
-    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V43",
+    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44",
     "historical_root2_scheduler_fields_currently_authoritative": false,
     "r2_general_control_mechanism_closed_as_adequacy_or_abstain": true,
     "r2_open_world_positive_action_coverage_complete": false,
@@ -2170,14 +2170,14 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V43.json",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44.json",
     "current_scheduler_git_blob_sha": "4fdc6171f14ce3bff684032db734c8c8bace7992",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_POINTER_AND_V43_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__TEN_VERIFIED_FINANCE_SUBREGIONS__OEWN_RELEASE_RELATIVE_SENSE_UNIVERSE_AUTHENTICATED_CONTEXT_TO_CONCEPT_BOUNDED_CONCEPT_UNIVERSE_DECISION_RELATION_AND_EXACT_BOUNDED_RELATION_PROOF_BOUND__RELEASE_RELATIVE_SENSE_ENUMERATION_CANNOT_SELECT_INTENDED_SENSE_BY_ITSELF__COMPLETE_BOUNDED_DENOTATIONS_CAN_CLOSE_SCOPED_EQUIVALENCE_DIRECTIONAL_ENTAILMENT_OR_COUNTEREXAMPLE_RELATIONS__REMAINING_RESIDUAL_IS_DECISION_DISTINCT_SENSE_SELECTION_WITHOUT_AUTHENTICATED_DISCRIMINATOR__OUT_OF_UNIVERSE_TERMS__UNBOUND_SENSE_OR_CONCEPT_TO_TERMINAL_MAPPING__AMBIGUOUS_COREFERENCE__OPEN_WORLD_ONTOLOGY__GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION__GDPVAL_DORMANT",
+    "rule": "CURRENT_R2_POINTER_AND_V44_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__THIRTY_DIRECT_ROUTES__TEN_VERIFIED_FINANCE_SUBREGIONS__GENERAL_CROSS_DOCUMENT_EFFECT_WORLDS_BOUND__OEWN_RELEASE_RELATIVE_SENSE_ENUMERATION_PLUS_AUTHENTICATED_DECISION_SENSE_CONTROL_BOUND__TERMINALLY_EQUIVALENT_SENSES_NEED_NO_IDENTITY_SELECTION__DECISION_DISTINCT_SENSES_REQUIRE_ONLY_AUTHENTICATED_COMPLETE_TERMINAL_SIGNATURE_AND_MINIMUM_DISCRIMINATOR_EVIDENCE__REMAINING_RESIDUAL_IS_AMBIGUOUS_COREFERENCE_UNBOUND_SEMANTIC_MANIFESTS_NONEXPLICIT_RELATIONS_OPEN_WORLD_ONTOLOGY_UNPROVED_CROSS_DOCUMENT_HYPOTHESIS_COMPLETENESS_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION__GDPVAL_DORMANT",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
@@ -2186,7 +2186,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 65,
+  "pointer_revision": 66,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2382,7 +2382,7 @@
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
   },
-  "live_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V43",
+  "live_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44",
   "r2_v35_live_projection_reconciliation": {
     "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_LIVE_PROJECTIONS_BIND_V35",
     "current_r2_blob_sha": "70cfd4ea77cd54ed321edac7f59abe1aa2ff49ff",
@@ -2551,6 +2551,29 @@
     "general_word_sense_closed": false,
     "open_world_ontology_mapping_closed": false,
     "source_or_scope_completeness_self_authentication": false,
+    "terminal_remains_false": true,
+    "terminal_credit_delta": 0
+  },
+  "r2_v44_semantic_control_reconciliation": {
+    "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_PRECEDENCE_BIND_V44__TERMINAL_STILL_FALSE",
+    "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_candidate_git_blob_sha": "6b4545f42a92ce2049617b635237935bcc0f75fb",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44.json",
+    "scheduler_cut_git_blob_sha": "55be062f58a20e13fc32acc47746abb11750f7b7",
+    "direct_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V24.json",
+    "direct_activation_git_blob_sha": "3a9668be458507e4295e733bc692b65b8ed7a866",
+    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v10.py",
+    "direct_runtime_git_blob_sha": "1a78930ab5536a8db35097eb7e924284b0a0de73",
+    "oewn_decision_sense_runtime_path": "canonical/runtime/oewn_decision_sense_control_v1.py",
+    "oewn_decision_sense_runtime_git_blob_sha": "45be452cff132190b741608040471695fcde4f13",
+    "route_count": 30,
+    "exact_cell_count": 3,
+    "bounded_family_count": 27,
+    "verified_finance_positive_subregion_count": 10,
+    "primary_remaining_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "intended_sense_selection_closed_only_for_authenticated_complete_decision_manifests": true,
+    "general_word_sense_closed": false,
+    "open_world_ontology_mapping_closed": false,
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
   }
