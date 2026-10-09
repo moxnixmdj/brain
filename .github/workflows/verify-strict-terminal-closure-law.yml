@@ -1,0 +1,44 @@
+name: Verify strict terminal closure law
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/one_shot_verified_closure_v1.py"
+      - "canonical/runtime/one_shot_reality_closure_v2.py"
+      - "canonical/runtime/r3_historical_failure_irreducibility_v1.py"
+      - "canonical/tests/test_one_shot_verified_closure_v1.py"
+      - "canonical/tests/test_one_shot_reality_closure_v2.py"
+      - "canonical/tests/test_one_shot_reality_closure_v2_integration.py"
+      - "canonical/tests/test_r3_historical_failure_irreducibility_v1.py"
+      - ".github/workflows/verify-strict-terminal-closure-law.yml"
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/one_shot_verified_closure_v1.py"
+      - "canonical/runtime/one_shot_reality_closure_v2.py"
+      - "canonical/runtime/r3_historical_failure_irreducibility_v1.py"
+      - "canonical/tests/test_one_shot_verified_closure_v1.py"
+      - "canonical/tests/test_one_shot_reality_closure_v2.py"
+      - "canonical/tests/test_one_shot_reality_closure_v2_integration.py"
+      - "canonical/tests/test_r3_historical_failure_irreducibility_v1.py"
+      - ".github/workflows/verify-strict-terminal-closure-law.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  strict-closure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify closure controller and externality barrier
+        run: |
+          python -m unittest \
+            canonical.tests.test_r3_historical_failure_irreducibility_v1 \
+            canonical.tests.test_one_shot_verified_closure_v1 \
+            canonical.tests.test_one_shot_reality_closure_v2 \
+            canonical.tests.test_one_shot_reality_closure_v2_integration \
+            -v
