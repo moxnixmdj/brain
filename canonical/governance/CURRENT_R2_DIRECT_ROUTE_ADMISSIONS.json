@@ -4,8 +4,8 @@
   "status": "ACTIVE_CURRENT_R2_DYNAMIC_ADMISSIONS_POINTER",
   "binding_semantics": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__IMMUTABLE_TARGET_GIT_BLOB_BOUND",
   "target": {
-    "path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V1.json",
-    "git_blob_sha": "f610fc1275a9241794328d649bcd507a44cdbab7",
+    "path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V2.json",
+    "git_blob_sha": "18baef636174b1f2f9e2ffb03477966c20baf60d",
     "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_V1"
   },
   "incremental_spend_usd": 0,
