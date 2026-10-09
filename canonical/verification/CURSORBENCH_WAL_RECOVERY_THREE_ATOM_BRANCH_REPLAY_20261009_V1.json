@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_WAL_RECOVERY_THREE_ATOM_BRANCH_REPLAY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_COMMITTED_EVIDENCE__THREE_EXTERNAL_ATOMS_PROVED__STRUCTURAL_ATOM_PRESERVED__INFORMATION_BOUNDARY_OPEN__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "cursorbench-wal-three-atom-evidence-20261009",
+    "verified_head": "1a8f849c16f301361c03ff60157aab7fc519e506",
+    "test_path": "canonical/tests/test_cursorbench_wal_three_atom_evidence_v1.py",
+    "test_git_blob_sha": "710c0a7e03dc400267aaba126121071f54708e9a"
+  },
+  "exact_artifacts": {
+    "source_contract": {
+      "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_LOSSLESS_SOURCE_CONTRACT_20261009_V1.json",
+      "git_blob_sha": "8cedc22b7c006d00a1ec863c49083b7a95876abe"
+    },
+    "model": {
+      "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_TYPED_ACCEPTANCE_MODEL_20261009_V1.json",
+      "git_blob_sha": "68e2acec46f88ba3461cd277d4e79c6e8cbe50eb"
+    },
+    "source_receipt": {
+      "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_SOURCE_COVERAGE_RECEIPT_20261009_V1.json",
+      "git_blob_sha": "118013f6add21526e6672c1753b7e7cc1f26515d"
+    },
+    "source_verification": {
+      "path": "canonical/verification/CURSORBENCH_WAL_RECOVERY_SOURCE_COVERAGE_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "fbf7b121a61429aa62d2100029ae63c6c07b09a2"
+    },
+    "dependency_receipt": {
+      "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_DEPENDENCY_PROVENANCE_RECEIPT_20261009_V1.json",
+      "git_blob_sha": "8c48fa17e8d8b27fe75925403e5067968eef61a0"
+    },
+    "dependency_verification": {
+      "path": "canonical/verification/CURSORBENCH_WAL_RECOVERY_DEPENDENCY_PROVENANCE_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "cee18c733d26155ad32dada9e248b97dd26b6927"
+    },
+    "independent_audit": {
+      "path": "canonical/verification/CURSORBENCH_WAL_RECOVERY_TYPED_ACCEPTANCE_INDEPENDENT_AUDIT_20261009_V1.json",
+      "git_blob_sha": "9b77700a3f9b3712c9d7cb5d80b7beb46a71f9eb"
+    }
+  },
+  "runtime_bindings": {
+    "source_coverage": "f231bcc0c904625d0508451f8f8accb9a298ba58",
+    "dependency_provenance": "f31a6bdc92435c36f525e6f97bae20938d335992",
+    "supported_transform": "e1982ee2ed0bcf786cbf92dd1348c5b6a5d29f3c",
+    "independent_acceptance_model": "710298c5d7154b5a3c2a4a1700420c40cb2fa55a"
+  },
+  "carrier": {
+    "kind": "REMOTE_SPRITE",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "py_compile": "PASS",
+    "focused_replay": "PASS__3_OF_3"
+  },
+  "proved_atom_ids": [
+    "SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1",
+    "SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1",
+    "SPEC_ACCEPT_DEPENDENCY_PROVENANCE_TRUTH_V1",
+    "SPEC_ACCEPT_SUPPORTED_TRANSFORM_KINDS_ONLY_V1"
+  ],
+  "still_open_atom_ids": [
+    "SPEC_ACCEPT_NO_HIDDEN_VERIFIER_ACCESS_V1"
+  ],
+  "model_gate": {
+    "pass": false,
+    "failed_requirement_ids": [
+      "R13_NO_TASK_SPECIFIC_CHEATING"
+    ],
+    "terminal_submission_authorized_by_model": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_PREVERIFIER_INFORMATION_BOUNDARY_ATOM_PROVED",
+    "NO_CLAIM_HIDDEN_CURSORBENCH_TASK_MEMBERSHIP",
+    "NO_CURSORBENCH_SCORE_LOWER_BOUND",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CHECKPOINT_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "checkpoint_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

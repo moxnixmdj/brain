@@ -1,0 +1,18 @@
+{
+  "audit_id": "audit:wal-recovery-ordering-dependency-provenance-v1",
+  "builder_output_derivation_labels_truthful": true,
+  "dependency_labels_source_verified": true,
+  "dependency_provenance_projection_sha256": "db0f9f9db699dd7effd2bff4b4ea28a2e0e9059812806898c27bf3f4f4642d28",
+  "evidence_basis": {
+    "preterminal_authored_audit_command_git_blob_sha": "65b9a10eed0efcd702c7a347548e7e09ca28ca8c",
+    "raw_instruction_git_blob_sha": "c4f7ec1d37aef5ed1de9db299bbe167240fb9e5d",
+    "terminal_authorization_git_blob_sha": "2c357865381fec58c6290470ff0bb5efa1f7893e"
+  },
+  "independence_relevant_edges_complete": true,
+  "no_undeclared_nonraw_dependencies": true,
+  "producer_id": "brain-wal-acceptance-producer-v1",
+  "provenance_labels_authorized": true,
+  "schema": "PROJECT_BRAIN_TYPED_ACCEPTANCE_DEPENDENCY_PROVENANCE_RECEIPT_V1",
+  "source_authority_complete": true,
+  "subject_model_sha256": "642157445ee9cf869fcfc9020c4ab18ed216844f78a2f72119b313eab9b706b6"
+}

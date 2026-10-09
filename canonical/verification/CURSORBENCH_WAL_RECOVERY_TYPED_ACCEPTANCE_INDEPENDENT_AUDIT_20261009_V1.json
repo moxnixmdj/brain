@@ -1,0 +1,28 @@
+{
+  "dependency_provenance_projection_verified": true,
+  "failure_mode_coverage_complete_for_literal_clause_model": true,
+  "hidden_verifier_or_solution_absence_claimed_by_this_audit": false,
+  "independent_verifier_id": "sprite-literal-source-and-provenance-audit-v1",
+  "information_boundary_atom_claimed": false,
+  "model_assessment_expected_fail_closed_requirement_ids": [
+    "R13_NO_TASK_SPECIFIC_CHEATING"
+  ],
+  "model_check_count": 13,
+  "model_requirement_count": 14,
+  "pass": true,
+  "preterminal_command_blobs_verified": {
+    "1": "6ec70d9760b594d844642ed798016caaa27729c3",
+    "2": "9792e617ce849fbbc3361c608bc856d1be03e5e0",
+    "3": "e468d50190037d85d647d5d5419e2683604cded7",
+    "4": "65b9a10eed0efcd702c7a347548e7e09ca28ca8c",
+    "5": "7c26d96792609cf55bda4f74e97cd89890b0f725",
+    "6": "65b9a10eed0efcd702c7a347548e7e09ca28ca8c"
+  },
+  "schema": "PROJECT_BRAIN_WAL_TYPED_ACCEPTANCE_INDEPENDENT_AUDIT_RESULT_V1",
+  "session_config_blob_verified": "dbb08326ade9b4f9dd099ac504c2f9d8d3954910",
+  "source_contract_replayed_exact": true,
+  "source_mapping_complete_and_literal": true,
+  "source_obligation_count": 35,
+  "terminal_authority": false,
+  "terminal_authorization_blob_verified": "2c357865381fec58c6290470ff0bb5efa1f7893e"
+}
