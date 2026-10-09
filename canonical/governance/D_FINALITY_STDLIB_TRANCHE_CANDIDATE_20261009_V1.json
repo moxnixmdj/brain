@@ -1,0 +1,171 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINALITY_STDLIB_TRANCHE_CANDIDATE_20261009_V1",
+  "date": "2026-10-09",
+  "status": "CANDIDATE_CLASSIFICATION__19_STDLIB_BOUND_ROWS__ZERO_D_CREDIT",
+  "source_bindings": {
+    "bound_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+    "astra_runtime_hardened_branch_blob_sha": "d6b13e959a20dcd1d6b4128946865ae428c2db5a",
+    "universal_invoker_d_epoch_branch_blob_sha": "d48b0a0267e247c5b63326144047f431ba19d0dd",
+    "d_epoch_blob_sha": "0511ca26811e0c4358927174efc0fcea886badac"
+  },
+  "counts": {
+    "total": 19,
+    "simple_local": 9,
+    "dynamic_local": 4,
+    "subprocess_local": 1,
+    "world_io": 5
+  },
+  "classes": {
+    "SIMPLE_LOCAL": {
+      "rows": [
+        {
+          "capability_id": "bound:archive.tar_gz.create_from_manifest",
+          "adapter_git_blob_sha": "2ae62c04ef495d855ca8d46263b4cf05110b5648",
+          "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:docx.document.verify.ooxml",
+          "adapter_git_blob_sha": "41c2d9043b65376e13366cbdcd2d35a2cf12b2dc",
+          "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:python.source.audit.ast",
+          "adapter_git_blob_sha": "f708d51a480f3e49b3c9e4e0c0a34239094228ea",
+          "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:sqlite.table.create_from_json_records",
+          "adapter_git_blob_sha": "d729d19ba5c0808273268426e7450f1db74a5c07",
+          "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:decision.synthesis.typed.stdlib",
+          "adapter_git_blob_sha": "d7c73c24d2038c40bfb38ea6f10749a15a2d5415",
+          "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:decision.synthesis.verify.stdlib",
+          "adapter_git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929",
+          "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:plain_goal.bound_capability.grounding.verify.stdlib",
+          "adapter_git_blob_sha": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8",
+          "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:evidence.claim_relation.generic_units.stdlib",
+          "adapter_git_blob_sha": "d66a7eb30774f66160b698d8082947776888293d",
+          "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:terminal.kstar.root.assess.stdlib",
+          "adapter_git_blob_sha": "c313dfa5f253d0065d56e0c66aae316fea466f03",
+          "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        }
+      ],
+      "required_proof": "SEALED_ROW_PLUS_ADAPTER_PLUS_SHARED_EXECUTOR_CLOSURE_PLUS_DECLARED_CPYTHON_STDLIB_SUBSTRATE_PLUS_FRESH_REPLAY"
+    },
+    "DYNAMIC_LOCAL": {
+      "rows": [
+        {
+          "capability_id": "bound:docx.document.verify.intent_ooxml",
+          "adapter_git_blob_sha": "937944128257c10d95038b99dd3d120cd3104ae1",
+          "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:plain_goal.bound_capability.grounding.stdlib",
+          "adapter_git_blob_sha": "f2d96dd40c01cde214443108fe5f9f372cf04444",
+          "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:source.objective_relevance.rank.bm25",
+          "adapter_git_blob_sha": "380e08142841fbc1e641f017b91f4c0fe5fb5680",
+          "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:evidence.claim_spec.bind.explicit_comparison.stdlib",
+          "adapter_git_blob_sha": "48fd058430d8d361fc75beced567c7b6d1166531",
+          "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        }
+      ],
+      "required_proof": "SIMPLE_LOCAL_PLUS_EXACT_DYNAMIC_LOAD_TARGET_CLOSURE_AND_NO_UNDECLARED_LOAD_TARGET"
+    },
+    "SUBPROCESS_LOCAL": {
+      "rows": [
+        {
+          "capability_id": "bound:python.tests.audit.unittest",
+          "adapter_git_blob_sha": "b6fe40131583587e21f9c1e369679de140349e81",
+          "candidate_proof_class": "STDLIB_SUBPROCESS_LOCAL",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        }
+      ],
+      "required_proof": "SIMPLE_LOCAL_PLUS_CHILD_PROCESS_AUTHORITY_SUBSET_AND_EXECUTABLE_OR_INTERPRETER_BINDING"
+    },
+    "WORLD_IO": {
+      "rows": [
+        {
+          "capability_id": "bound:http.json.fetch_from_state",
+          "adapter_git_blob_sha": "269e7b0f1aee8cac785f7f0e60338a1562a45201",
+          "candidate_proof_class": "STDLIB_WORLD_IO",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:pypi.provenance.audit_live_artifact",
+          "adapter_git_blob_sha": "fd8af415d7846be0f2ff23aa1674df77af504d03",
+          "candidate_proof_class": "STDLIB_WORLD_IO",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:web.release.verify.independent_http",
+          "adapter_git_blob_sha": "126b46cd2cd11dd12bfa16aa0e337349fe0d70bf",
+          "candidate_proof_class": "STDLIB_WORLD_IO",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:source.authority.identity.ror",
+          "adapter_git_blob_sha": "9396ff7169b274af9bbfbe736e004587631e3b05",
+          "candidate_proof_class": "STDLIB_WORLD_IO",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        },
+        {
+          "capability_id": "bound:source.evidence.extract.objective_grounded.stdlib",
+          "adapter_git_blob_sha": "227877b9f7c80c8e810a1042a0bad5c0ed94577d",
+          "candidate_proof_class": "STDLIB_WORLD_IO",
+          "status": "PENDING_D_FINAL_CERTIFICATE"
+        }
+      ],
+      "required_proof": "TYPED_KNOWLEDGE_OR_EFFECT_BROKER_PLUS_NONSMUGGLING_PLUS_COUNTERFACTUAL_TRANSCRIPT_REPLAY"
+    }
+  },
+  "stdlib_hardening": {
+    "change": "PYTHON_STDLIB_MODULE_RESOLUTION_NOW_REQUIRES_TOP_LEVEL_DECLARED_STDLIB_AND_RESOLVED_ORIGIN_OUTSIDE_SITE_PACKAGES",
+    "independent_focused_replay": "PASS_2_OF_2",
+    "shadow_attack": "FORGED_/tmp/json.py_REJECTED"
+  },
+  "rules": [
+    "SOURCE_TYPE_PYTHON_STDLIB_DOES_NOT_IMPLY_NO_WORLD_IO",
+    "NO_CLASSIFICATION_ROW_RECEIVES_D_FINAL_CREDIT",
+    "DYNAMIC_LOAD_REQUIRES_EXACT_TARGET_CLOSURE",
+    "SUBPROCESS_REQUIRES_DESCENDANT_AUTHORITY_NONWIDENING",
+    "WORLD_IO_IS_ALLOWED_ONLY_AS_TYPED_KNOWLEDGE_OR_EFFECT_NOT_AS_HIDDEN_COGNITION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
