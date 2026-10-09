@@ -96,7 +96,7 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
                 out = cert.certify(wid, state_path=state_path, repo_root=root)
         self.assertFalse(out["pass"])
 
-    def test_one_shot_accepts_only_explicit_strict_failure_certificate(self):
+    def test_bounded_historical_failure_certificate_is_not_global_externality(self):
         pending = [{
             "work_id": "w-failure",
             "kind": "REPAIR_FAILURE_CLASS",
@@ -125,10 +125,12 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
             "kind": "REPAIR_FAILURE_CLASS",
             "blocker": "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
         }
-        strict = {
+        bounded = {
             "pass": True,
             "status": "PASS__ALL_PENDING_FAILURE_WORK_REQUIRES_EXTERNAL_REPLAY_INFORMATION",
             "irreducible_external_information_proved": True,
+            "global_external_information_absence_claimed": False,
+            "permanent_nonrepairability_claimed": False,
         }
         with patch.object(closure, "frontier_snapshot", side_effect=snaps), \
              patch.object(closure.r3, "drain", return_value={
@@ -138,8 +140,94 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
                  "actions": [{"blockers": [blocker]}],
              }), \
              patch.object(closure.historical_evidence, "certify_pending_set", return_value={"pass": False}), \
-             patch.object(closure.historical_failure, "certify_pending_set", return_value=strict):
+             patch.object(closure.historical_failure, "certify_pending_set", return_value=bounded):
             out = closure.run(repo_root=".", state_path="state.json")
+        self.assertFalse(out["pass"], out)
+        self.assertTrue(out["fixed_point"])
+        self.assertEqual(
+            out["status"],
+            "OPEN__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED__IRREDUCIBILITY_NOT_PROVED",
+        )
+        self.assertTrue(
+            out["residual"][
+                "bounded_current_state_replay_information_requirement_proved"
+            ]
+        )
+        self.assertFalse(out["irreducible_external_information_proved"])
+        self.assertFalse(out["terminal_closure_proved"])
+        self.assertIsNone(out["global_externality_certificate"])
+        self.assertIn(
+            "GLOBAL_EXTERNALITY_CERTIFICATE_MISSING",
+            out["global_externality_proof_errors"],
+        )
+
+    def test_global_externality_requires_request_bound_route_exhaustion_and_indistinguishability(self):
+        pending = [{
+            "work_id": "w-failure",
+            "kind": "REPAIR_FAILURE_CLASS",
+            "last_attempt_status": "IMPROVEMENT_REPAIR_BLOCKED__REPLAY_CAPSULE_REQUIRED",
+            "last_attempt_reason": None,
+            "payload": {
+                "retry_capsule_sha256": None,
+                "repair_class": cert.SUPPORTED_REPAIR_CLASS,
+            },
+        }]
+        def snap(digest):
+            return {
+                "schema": closure.SCHEMA,
+                "digest": digest,
+                "state_sha256": "state-" + digest,
+                "payload": {
+                    "state_file": {"path": "state.json", "sha256": "state-" + digest, "bytes": 1},
+                    "files": [],
+                    "pending": pending,
+                    "stats": {},
+                },
+            }
+        snaps = [snap("a"), snap("a"), snap("a")]
+        blocker = {
+            "work_id": "w-failure",
+            "kind": "REPAIR_FAILURE_CLASS",
+            "blocker": "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
+        }
+        bounded = {
+            "pass": True,
+            "status": "PASS__ALL_PENDING_FAILURE_WORK_REQUIRES_EXTERNAL_REPLAY_INFORMATION",
+            "irreducible_external_information_proved": True,
+            "global_external_information_absence_claimed": False,
+            "permanent_nonrepairability_claimed": False,
+        }
+
+        def global_externality(req):
+            return {
+                "pass": True,
+                "request_sha256": req["request_sha256"],
+                "global_external_information_absence_proved": True,
+                "all_internal_derivation_routes_exhausted_or_impossible": True,
+                "all_search_routes_exhausted_or_impossible": True,
+                "all_synthesis_routes_exhausted_or_impossible": True,
+                "all_bypass_routes_exhausted_or_impossible": True,
+                "weaker_sufficient_information_ruled_out": True,
+                "indistinguishable_worlds_witness": {
+                    "same_observation": True,
+                    "different_required_action": True,
+                },
+            }
+
+        with patch.object(closure, "frontier_snapshot", side_effect=snaps), \
+             patch.object(closure.r3, "drain", return_value={
+                 "status": "IMPROVEMENT_QUEUE_STABLE",
+                 "pass": True,
+                 "progress_count": 0,
+                 "actions": [{"blockers": [blocker]}],
+             }), \
+             patch.object(closure.historical_evidence, "certify_pending_set", return_value={"pass": False}), \
+             patch.object(closure.historical_failure, "certify_pending_set", return_value=bounded):
+            out = closure.run(
+                repo_root=".",
+                state_path="state.json",
+                global_externality_certificate_provider=global_externality,
+            )
         self.assertTrue(out["pass"], out)
         self.assertTrue(out["fixed_point"])
         self.assertEqual(
@@ -147,7 +235,9 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
             "VERIFIED_FIXED_POINT__IRREDUCIBLE_EXTERNAL_INFORMATION_REQUIRED",
         )
         self.assertTrue(out["irreducible_external_information_proved"])
-        self.assertEqual(out["strict_external_failure_certificate"], strict)
+        self.assertTrue(out["terminal_closure_proved"])
+        self.assertTrue(out["global_externality_certificate"]["pass"])
+        self.assertEqual(out["global_externality_proof_errors"], [])
 
 
 if __name__ == "__main__":
