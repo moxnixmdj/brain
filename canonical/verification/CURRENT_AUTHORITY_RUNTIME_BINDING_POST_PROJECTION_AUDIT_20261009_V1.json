@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_AUTHORITY_RUNTIME_BINDING_POST_PROJECTION_AUDIT_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__TERMINAL_POINTER_REV111_POST_PROJECTION_RUNTIME_BINDINGS_STILL_COHERENT",
+  "repository": "moxnixmdj/brain",
+  "branch": "impl-executable-refinement-terminal-closure-rebased-20261009",
+  "head_sha": "a57585791753de15c0ffe01fbe0954850466fe31",
+  "authority_pointer": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "ad782b088206ef05c79719d3bf9d99a642d300fa",
+    "pointer_revision": 111
+  },
+  "counts": {
+    "runtime_binding_reference_count": 50,
+    "current_binding_count": 48,
+    "superseded_binding_count": 2,
+    "current_unique_runtime_path_count": 42,
+    "drift_count": 0,
+    "missing_blob_binding_count": 0,
+    "missing_runtime_file_count": 0,
+    "conflicting_current_path_count": 0
+  },
+  "result": {
+    "byte_binding_coherence_proved": true,
+    "semantic_refinement_proved": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  }
+}
