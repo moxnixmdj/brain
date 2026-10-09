@@ -8,7 +8,7 @@
   "capability_contract_sha256": "bf45f7e92d29a32fee4b2c40481a593e1c9f3b3e5b04f3da529fac5d0c5ec2c6",
   "policy_sha256": "d9c25144dddd93212eda736ee912a9ebcb85d7deecd28493340dca3d742c45cd",
   "registry_snapshot_root": "8c2ac9bdfd0eacfa11b3af879ff027f50ed54078448ab11cadf0ab6fcce2ed38",
-  "state_snapshot_root": "83692be3b4e6f135292973d93ac1d7c75521b855e70102ec4984096354171150",
+  "state_snapshot_root": "844e0fed7fc2096ea6a784d55aebb64cdf29a7e05734c3e9661c2754d2dadf9f",
   "materials": [
     {
       "path": "canonical/runtime/verified_bound_capability_execution_adapter_v1.py",
