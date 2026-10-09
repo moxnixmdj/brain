@@ -321,6 +321,12 @@ def run(
     verification_frontier_acquisition_provider_id: str = (
         "HOST_VERIFICATION_FRONTIER_ACQUISITION_PROVIDER"
     ),
+    r3_distinguishing_evidence_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    r3_distinguishing_evidence_provider_id: str = (
+        "HOST_R3_DISTINGUISHING_EVIDENCE_PROVIDER"
+    ),
     one_shot_failure_repair_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     one_shot_externality_certificate_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     one_shot_capability_synthesis_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
@@ -767,6 +773,12 @@ def run(
                 verification_frontier_acquisition_provider_id=(
                     verification_frontier_acquisition_provider_id
                 ),
+                distinguishing_evidence_provider=(
+                    r3_distinguishing_evidence_provider
+                ),
+                distinguishing_evidence_provider_id=(
+                    r3_distinguishing_evidence_provider_id
+                ),
                 max_actions=int(options.get("max_improvement_actions", 4)),
             )
         elif mode == "LEARNING_EPISODE":
@@ -870,6 +882,12 @@ def run(
                 ),
                 verification_frontier_acquisition_provider_id=(
                     verification_frontier_acquisition_provider_id
+                ),
+                distinguishing_evidence_provider=(
+                    r3_distinguishing_evidence_provider
+                ),
+                distinguishing_evidence_provider_id=(
+                    r3_distinguishing_evidence_provider_id
                 ),
                 max_actions=int(options.get("self_improvement_max_actions", 4)),
             )
