@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_NORMALIZED_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__NORMALIZED_FINANCE_UNLESS_DIRECT_ADEQUACY__15_OF_15_STDLIB_AND_ROUTER_CHECKS__ZERO_CREDIT",
+  "branch": "r2-finance-normalized-unless-direct-adequacy-20261009",
+  "tested_head": "fd014a2f8448160897515e11c66733d43049e381",
+  "load_bearing_blobs": {
+    "canonical/runtime/finance_normalized_unless_branch_v1.py": "8fb1d23d3c2c56d602f075e01c09d02132a74e2d",
+    "canonical/runtime/finance_normalized_unless_verify_v1.py": "233faeaea7bad6e4525f1d4d09bbc94dda565ba4",
+    "canonical/runtime/r2_finance_normalized_unless_direct_adequacy_v1.py": "eb33e45d31d984a3339d7390827853366eb55ddb",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py": "ab12a8d28991d30e7cd3c8aa9b2255c20bc6f1bf",
+    "canonical/tests/test_r2_finance_normalized_unless_direct_adequacy_v1.py": "e2f4e84a1d2666d2c3d8d7cafe1fd85b4d3fb587"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "working_copy": "/home/sprite/verify-proof-gated-externality"
+  },
+  "verification": {
+    "compile_rc": 0,
+    "stdlib_adversarial_checks_passed": 15,
+    "router_false_exception_branch": "PASS__ORDINARY_BRANCH",
+    "router_true_exception_branch": "PASS__EXCEPTION_BRANCH",
+    "rollback_negative": "PASS",
+    "independent_verifier_tamper_negative": "PASS",
+    "non_boolean_exception_negative": "PASS",
+    "multiple_unless_negative": "PASS"
+  },
+  "proves": [
+    "EXACT_NORMALIZED_SINGLE_UNLESS_SOURCE_STRUCTURE_IS_BOUND_BY_EXISTING_CERTIFIED_SCOPE_PARSER",
+    "EXPLICIT_TYPED_EXCEPTION_APPLIES_BOOLEAN_DETERMINES_THE_SELECTED_BRANCH",
+    "SEPARATE_STDLIB_VERIFIER_RECOMPUTES_UNLESS_BOUNDARY_BRANCH_SPAN_TEXT_AND_HASHES_WITHOUT_IMPORTING_THE_PRODUCER_OR_SCOPE_PARSER",
+    "DIRECT_ROUTE_PRESERVES_SOURCE_BYTES_AND_ROLLS_BACK_OUTPUT_ON_POST_WRITE_VERIFICATION_FAILURE",
+    "R2_DIRECT_END_TO_END_FRONT_DOOR_EXECUTES_BOTH_BOOLEAN_BRANCHES",
+    "NO_MODEL_DEPENDENCY_IS_USED_BY_PRODUCER_OR_VERIFIER"
+  ],
+  "boundary": [
+    "EXCEPTION_APPLIES_TRUTH_IS_EXPLICIT_TYPED_INPUT_AND_IS_NOT_INFERRED_FROM_REALITY",
+    "NO_ARBITRARY_FINANCE_LANGUAGE_SEMANTICS",
+    "NO_RAW_UNSTRUCTURED_FINANCE_SOURCE_COMPLETENESS",
+    "NO_FINANCE_FAMILY_CLOSURE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
