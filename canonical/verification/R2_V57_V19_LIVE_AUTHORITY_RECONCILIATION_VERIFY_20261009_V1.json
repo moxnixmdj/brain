@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V57_V19_LIVE_AUTHORITY_RECONCILIATION_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__PUBLIC_EXACT_BYTE_AUTHORITY_RECONCILIATION__6_OF_6_BLOBS__39_ROUTES__36_BOUNDED_FAMILIES__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "codex/r2-v19-authority-reconcile-current5-20261009",
+    "pull_request": 3701,
+    "exact_blobs": {
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "c40e8e27fe27ad9974e790f7a128bfe76fb7d65a",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "21c43c3b72ce7695e2387cf974ca3261909154a2",
+      "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V28.json": "4ad15d84c046f673c68cbc81d35f842c1adf918c",
+      "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V55.json": "a7c04b0ceb3b28deacfa078c11e70e7841445d78",
+      "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "7c6b28754fa8851f220395df1615dd6afe193b3a",
+      "canonical/runtime/r2_direct_end_to_end_adequacy_v19.py": "39e7a6b7298b17d55e7bda551d6125c1f1c4000e"
+    }
+  },
+  "public_independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2520,
+    "workflow": "Isolated verification dispatcher",
+    "workflow_run_id": 37943856918,
+    "job_id": 113864893307,
+    "conclusion": "success",
+    "python": "3.11",
+    "result": "PASS__PR3701_V57_V19_AUTHORITY_RECONCILIATION",
+    "assertions": {
+      "exact_blob_bindings": "6_OF_6_PASS",
+      "live_controller_import": "V19",
+      "activation_route_count": 39,
+      "bounded_family_count": 36,
+      "v16_to_v19_successor_ids": "4_OF_4_PRESENT",
+      "scheduler_projection": "V55_39_36_PASS",
+      "terminal_projection": "V57_39_36_PASS"
+    }
+  },
+  "private_github_actions": {
+    "classification": "INFRASTRUCTURE_FAILURE_BEFORE_STEP_EXECUTION__NOT_A_TEST_FAILURE",
+    "observed_runs": [
+      37943603557,
+      37943603659,
+      37943603713,
+      37943603746
+    ],
+    "runner_id": 0,
+    "runner_name": "",
+    "steps": [],
+    "full_private_regression_execution_claimed": false
+  },
+  "proved": [
+    "CURRENT_R2_V57_BINDS_EXACT_LIVE_V19_ROUTER_AND_CURRENT_FIXED_POINT_BYTES",
+    "V28_ENUMERATES_39_UNIQUE_DIRECT_ROUTES_AND_ALL_FOUR_VERIFIED_V16_TO_V19_SUCCESSOR_IDS",
+    "V55_SCHEDULER_AND_CURRENT_R2_PROJECT_39_DIRECT_ROUTES_AND_36_BOUNDED_FAMILIES",
+    "CURRENT_TERMINAL_AUTHORITY_PROJECTS_THE_SAME_V57_39_36_STATE",
+    "FIBO_OEWN_SEC_WAKE_REFINEMENTS_ARE_PRESERVED_IN_THE_V55_SCHEDULER_PROJECTION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_FULL_PRIVATE_REPOSITORY_REGRESSION_SUITE_EXECUTED",
+    "NO_CLAIM_OPEN_WORLD_SEMANTIC_COMPLETENESS",
+    "NO_CLAIM_TERMINAL_OBJECTIVE_CLOSED",
+    "NO_TERMINAL_CREDIT_FROM_THIS_VERIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
