@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_R2_V48_FIBO_LIVE_PROJECTION_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__CURRENT_TERMINAL_LIVE_R2_PROJECTION_BINDS_V48__PINNED_FIBO_Q2_2026_BOUNDED_AUTHORITY__ONE_PRIMARY_FINANCE_RESIDUAL__13_ACCEPTANCE_OBLIGATIONS__TERMINAL_FALSE",
+  "terminal_subject_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+  "terminal_subject_git_blob_sha": "cae958d52beb53ba2ea295f103b677c465803ed8",
+  "current_r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+  "current_r2_git_blob_sha": "4d9243b653a5d24cc8485aa631813c0bf255a697",
+  "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V48.json",
+  "scheduler_cut_git_blob_sha": "989d5ed04f1b706cf1f2105d518d768114f68fb7",
+  "r2_reconciliation_verification_path": "canonical/verification/R2_V48_FIBO_BOUNDED_AUTHORITY_RECONCILIATION_VERIFY_20261009_V1.json",
+  "r2_reconciliation_verification_git_blob_sha": "2fb2758f99cb13d2efcc7f55b677a02f66c7d8cc",
+  "fibo_verification_path": "canonical/verification/FIBO_Q2_2026_BOUNDED_FINANCE_AUTHORITY_VERIFY_20261009_V2.json",
+  "fibo_verification_git_blob_sha": "a872f8f64584b1704a19a6dee63f25f67567dea7",
+  "checks": {
+    "terminal_remains_false": true,
+    "u_empty_remains_false": true,
+    "open_acceptance_obligations_remain_13": true,
+    "authoritative_current_r2_status_is_v48": true,
+    "authoritative_scheduler_path_is_v48": true,
+    "authoritative_scheduler_blob_is_v48": true,
+    "live_truth_scheduler_is_v48": true,
+    "live_scheduler_is_v48": true,
+    "precedence_path_is_v48": true,
+    "precedence_blob_is_v48": true,
+    "route_count_31": true,
+    "bounded_family_count_28": true,
+    "one_primary_finance_residual": true,
+    "fibo_authority_bound": true,
+    "fibo_label_identity_not_claimed": true,
+    "fibo_missing_path_non_entailment_not_claimed": true,
+    "fibo_open_world_ontology_not_claimed": true,
+    "fibo_policy_adequacy_not_claimed": true,
+    "global_positive_action_coverage_not_claimed": true,
+    "pointer_revision_72": true
+  },
+  "hard_nonclaims": [
+    "NO_FINANCE_WIDE_SEMANTIC_CLOSURE",
+    "NO_COMPLETE_FIBO_IMPORT_CLOSURE_OR_OPEN_WORLD_FINANCE_ONTOLOGY",
+    "NO_CONTEXTUAL_CONCEPT_IDENTITY_FROM_LABEL_EQUALITY",
+    "NO_NON_ENTAILMENT_FROM_ABSENT_FIBO_PATH",
+    "NO_POLICY_ADEQUACY_OR_ACCEPTANCE_CREDIT_FROM_FIBO_AUTHORITY",
+    "NO_CHANGE_TO_13_OPEN_ACCEPTANCE_OBLIGATIONS",
+    "NO_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
