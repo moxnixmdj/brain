@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "CURRENT_UVCK_V2_CANDIDATE__HARDENED_ISOLATED_10_OF_10_PASS__NO_GATE_SELF_CERTIFICATION__NOT_LIVE_DEFAULT",
+  "status": "CURRENT_UVCK_V2_CANDIDATE__HARDENED__PRIMARY_10_OF_10__INDEPENDENT_STRUCTURAL_11_OF_11__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
@@ -15,11 +15,24 @@
     "git_blob_sha": "0f89c895f8e0f275de2d64cf33f60c8ff09abd4e",
     "isolated_result": "10_OF_10_PASS"
   },
+  "independent_structural_check": {
+    "reference_path": "canonical/runtime/assurance_closure_reference_checker_v1.py",
+    "reference_git_blob_sha": "9aac9d4cd0edfbb7ffde8feac067a8b95a698a05",
+    "comparison_path": "canonical/runtime/assurance_closure_adversary_v1.py",
+    "comparison_git_blob_sha": "63d1c8cc0a63b3a81da1381ce4cfe8815fbe4deb",
+    "tests_path": "canonical/tests/test_assurance_closure_independent_adversary_v1.py",
+    "tests_git_blob_sha": "6a497f5af6bd01c45eb090025d257c37a21135cb",
+    "result": "11_OF_11_MATCH"
+  },
+  "verification": {
+    "path": "canonical/verification/UVCK_V2_ASSURANCE_CLOSURE_VERIFY_20261009_V1.json",
+    "git_blob_sha": "3f2e92a842f3f709eb2ebc9fabaf869206c80a66"
+  },
   "activation": {
     "live_default": false,
     "required_before_promotion": [
       "FULL_CURRENT_MAIN_INTEGRATION_REPLAY",
-      "INDEPENDENT_ADVERSARIAL_DEFEATER_BINDING",
+      "DOMAIN_LEVEL_INDEPENDENT_CHALLENGE_BINDING",
       "CURRENT_POINTER_COHERENCE_VERIFICATION"
     ]
   },
