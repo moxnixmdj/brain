@@ -24,7 +24,8 @@
     },
     "stdlib_tranche_annotated_count": 19,
     "member_material_theorem_verified_count": 2,
-    "verified_d_final_replay_route_count": 2
+    "verified_d_final_replay_route_count": 2,
+    "verified_d_final_route_candidate_count": 1
   },
   "rows": [
     {
@@ -115,6 +116,15 @@
         "policy_sha256": "d9c25144dddd93212eda736ee912a9ebcb85d7deecd28493340dca3d742c45cd",
         "live_front_door_enforced": false,
         "live_ownership_authority": false
+      },
+      "candidate_d_final_route": {
+        "status": "VERIFIED_D_FINAL_ROUTE_NOT_LIVE_BOUND",
+        "certificate_path": "canonical/verification/D_FINAL_DECISION_VERIFY_CERTIFICATE_CANDIDATE_20261009_V1.json",
+        "certificate_sha256": "090d08fd8d2945cbdef685c6d401ba0c5cc5e482fcf637f821da5dcc3cc91802",
+        "execution_epoch_sha256": "71d97000449339a6436cf4ac6b8aedaea051447bb6ca6b066ea450ac64fd087b",
+        "material_closure_root": "e74911d0128ab7356902ad3d56be87a4fbdc9ceafa0a2d5e7427dbe766ba3109",
+        "independent_verification_path": "canonical/verification/D_FINAL_DECISION_VERIFY_CERTIFICATE_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "live_front_door_bound": false
       }
     },
     {
