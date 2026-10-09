@@ -146,5 +146,63 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["terminal_authority"])
 
 
+    def test_unknown_domain_mapping_truth_preserves_proof_request(self):
+        atom = checked_predicate_id(
+            source_id="doc:A",
+            raw_span=RAW,
+            scope_id=SCOPE,
+            target_concept_id=TARGET,
+            required_relation="SEMANTIC_IDENTITY",
+        )
+        truth_payload = {
+            "truth_kind": "DOMAIN_MAPPING_RELATION",
+            "predicate_id": atom,
+            "raw_span": RAW,
+            "source_id": "doc:A",
+            "scope_id": SCOPE,
+            "target_concept_id": TARGET,
+            "required_relation": "SEMANTIC_IDENTITY",
+            "candidate_concepts": [{
+                "concept_id": TARGET,
+                "surface": "capital conservation buffer",
+                "required_atoms": [],
+                "forbidden_atoms": [],
+            }],
+            "relation_problems": {
+                TARGET: {
+                    "required_relation": "SEMANTIC_IDENTITY",
+                    "candidate_relations": [{
+                        "relation": "SIMILAR",
+                        "score": 0.999,
+                        "source": "embedding",
+                    }],
+                }
+            },
+        }
+        payload = {
+            "context_id": "ctx-domain-map-open",
+            "v3_input": {"task": {"claims": []}},
+            "cegar_problem": {"formal_source_constraints": []},
+            "truth_payloads_by_discriminator_id": {},
+            "truth_payloads_by_predicate_id": {atom: truth_payload},
+            "source_positive_selection_contracts": {},
+            "max_refinement_steps": 1,
+        }
+        with patch.object(loop, "solve_cegar", return_value=selected(atom)):
+            out = loop.evaluate(payload)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "OPEN__SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
+        )
+        requests = out["detail"]["proof_requests"]
+        self.assertEqual(len(requests), 1)
+        self.assertEqual(requests[0]["truth_kind"], "DOMAIN_MAPPING_RELATION")
+        self.assertEqual(requests[0]["target_concept_id"], TARGET)
+        self.assertEqual(requests[0]["required_relation"], "SEMANTIC_IDENTITY")
+        self.assertFalse(requests[0]["semantic_truth_authority"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
