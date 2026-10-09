@@ -1,0 +1,22 @@
+{
+  "schema":"PROJECT_BRAIN_TB_SCIENCE_RANK14_AUTHORITY_CANDIDATE_STATIC_VERIFICATION_20261009_V1",
+  "status":"PASS__NONEXECUTABLE_RANK14_CANDIDATE__16384_GATE_STILL_REQUIRED",
+  "pass":true,
+  "independent_carrier":"sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+  "slot_id":"terminal-bench-science/inverse-lithography::trial-0",
+  "task_digest":"sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530",
+  "ledger_schedule_rank":14,
+  "prior_consumed_slots":13,
+  "prior_successes":0,
+  "prior_final_failures":13,
+  "remaining_slots":197,
+  "successes_still_needed":124,
+  "candidate_context_tokens":16384,
+  "rank13_context_overflow_proved":true,
+  "rank13_scientific_quality_evaluated":false,
+  "context_receipt_bound":false,
+  "execution_authority":false,
+  "benchmark_task_exposure":0,
+  "acceptance_credit_delta":0,
+  "terminal_credit_delta":0
+}
