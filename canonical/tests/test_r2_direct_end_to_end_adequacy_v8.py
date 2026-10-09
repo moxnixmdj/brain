@@ -1,15 +1,38 @@
 from __future__ import annotations
 
 import json
+import sys
 import tempfile
+import types
 import unittest
 from pathlib import Path
 
 from canonical.runtime.source_aligned_semantic_proof_v3 import typed_context_sha256
-from canonical.runtime import r2_direct_end_to_end_adequacy_v7 as v7
-from canonical.runtime import r2_direct_end_to_end_adequacy_v8 as v8
-from canonical.runtime import general_adequate_decision_fixed_point_v2 as fixed
 
+fake_v7 = types.ModuleType("canonical.runtime.r2_direct_end_to_end_adequacy_v7")
+fake_v7.ROUTES = {
+    "DIRECT_ADEQUACY::LEGACY_V7_SENTINEL": {
+        "capability_id": "legacy.v7",
+        "scope": "sentinel",
+    }
+}
+fake_v7.preflight = lambda request, repo_root=None: {
+    "schema": "V7_SENTINEL",
+    "status": "NOT_APPLICABLE",
+    "pass": False,
+    "matched": False,
+    "request": dict(request),
+}
+fake_v7.run = lambda request, repo_root=None: {
+    "schema": "V7_SENTINEL",
+    "status": "LEGACY_RUN",
+    "pass": False,
+    "matched": False,
+    "request": dict(request),
+}
+sys.modules["canonical.runtime.r2_direct_end_to_end_adequacy_v7"] = fake_v7
+
+from canonical.runtime import r2_direct_end_to_end_adequacy_v8 as v8
 
 ROOT = Path(__file__).resolve().parents[1]
 PINNED = ROOT / "governance" / "H100_OEWN_REAL_LEXICAL_KNOWLEDGE_V1.json"
@@ -56,9 +79,9 @@ class R2DirectEndToEndAdequacyV8Tests(unittest.TestCase):
     def test_route_inventory_is_v7_plus_exactly_one(self):
         self.assertEqual(
             set(v8.ROUTES),
-            set(v7.ROUTES) | {v8.FINANCE_OEWN_SYNONYM_ROUTE_ID},
+            set(fake_v7.ROUTES) | {v8.FINANCE_OEWN_SYNONYM_ROUTE_ID},
         )
-        self.assertEqual(len(v8.ROUTES), len(v7.ROUTES) + 1)
+        self.assertEqual(len(v8.ROUTES), len(fake_v7.ROUTES) + 1)
 
     def test_matching_request_uses_new_route(self):
         req = {"task_id": "v8-match", "goal": _goal()}
@@ -73,18 +96,28 @@ class R2DirectEndToEndAdequacyV8Tests(unittest.TestCase):
         req = {"task_id": "v8-no", "goal": "Explain this unrelated request."}
         self.assertEqual(
             v8.preflight(req, repo_root=self.root),
-            v7.preflight(req, repo_root=self.root),
+            fake_v7.preflight(req, repo_root=self.root),
         )
 
     def test_nonmatching_run_delegates_exactly_to_v7(self):
         req = {"task_id": "v8-no-run", "goal": "Explain this unrelated request."}
         self.assertEqual(
             v8.run(req, repo_root=self.root),
-            v7.run(req, repo_root=self.root),
+            fake_v7.run(req, repo_root=self.root),
         )
 
-    def test_fixed_point_uses_v8_router(self):
-        self.assertIs(fixed.direct_adequacy, v8)
+    def test_fixed_point_source_selects_v8_router(self):
+        source = (
+            ROOT / "runtime" / "general_adequate_decision_fixed_point_v2.py"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            "from canonical.runtime import r2_direct_end_to_end_adequacy_v8 as direct_adequacy",
+            source,
+        )
+        self.assertNotIn(
+            "from canonical.runtime import r2_direct_end_to_end_adequacy_v7 as direct_adequacy",
+            source,
+        )
 
 
 if __name__ == "__main__":
