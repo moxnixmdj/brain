@@ -145,3 +145,44 @@ def evaluate(
         out["evidence_gaps"] = sorted(set(gaps))
         out["proved_atom_ids"] = [SUPPORTED_TRANSFORM_ATOM_ID]
         return out
+
+
+    proved = {
+        SUPPORTED_TRANSFORM_ATOM_ID,
+        DEPENDENCY_PROVENANCE_ATOM_ID,
+        INFORMATION_BOUNDARY_ATOM_ID,
+        *SOURCE_COVERAGE_ATOM_IDS,
+    }
+
+    try:
+        assessment = assess(dict(model))
+    except Exception as exc:
+        out = _base("FAIL_CLOSED__INDEPENDENT_ACCEPTANCE_ASSESSMENT_INVALID")
+        out["proofs"] = proofs
+        out["proved_atom_ids"] = sorted(proved)
+        out["proof_failures"] = [type(exc).__name__ + ":" + str(exc)]
+        return out
+
+    if assessment.get("terminal_submission_authorized_by_this_gate") is not True:
+        out = _base("BLOCKED__INDEPENDENT_ACCEPTANCE_INCOMPLETE")
+        out["proofs"] = proofs
+        out["proved_atom_ids"] = sorted(proved)
+        out["assessment"] = assessment
+        out["failed_requirements"] = list(assessment.get("failed_requirements") or [])
+        out["counterexample_templates"] = [
+            template
+            for row in (assessment.get("requirements") or [])
+            for template in (row.get("counterexample_templates") or [])
+        ]
+        return out
+
+    out = _base("PASS__PROOF_CARRYING_TYPED_ACCEPTANCE_PREFLIGHT", passed=True)
+    out["proofs"] = proofs
+    out["proved_atom_ids"] = sorted(proved)
+    out["assessment"] = assessment
+    out["preflight_authorized"] = True
+    out["boundary"] = (
+        "THIS_IS_ONLY_A_PROOF_CARRYING_PRETERMINAL_GATE_DECISION;"
+        "CENTRAL_TERMINAL_AUTHORITY_AND_BENCHMARK_ACCEPTANCE_REMAIN_SEPARATE"
+    )
+    return out
