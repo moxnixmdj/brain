@@ -14,7 +14,7 @@ from typing import Any
 
 from canonical.runtime import harbor_science_planner_v1 as science_planner
 from canonical.runtime.harbor_command_policy import validate_environment_command
-from canonical.runtime.harbor_environment_transport import HarborEnvironmentTransport
+from canonical.runtime.harbor_environment_transport import HarborEnvironmentTransport, MAX_EXEC_TIMEOUT_S
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract as compile_raw_task_contract
 from canonical.runtime.raw_task_acceptance_residual_localizer_v1 import localize as localize_raw_task_acceptance
 
@@ -38,9 +38,9 @@ MAX_CANDIDATES = 8
 MAX_OUTPUT_CHARS = 16000
 PLANNER_TIMEOUT_S = 300
 DEFAULT_ACTION_TIMEOUT_S = 1800
-MAX_ACTION_TIMEOUT_S = 7200
+MAX_ACTION_TIMEOUT_S = MAX_EXEC_TIMEOUT_S
 DEFAULT_VERIFY_TIMEOUT_S = 600
-MAX_VERIFY_TIMEOUT_S = 3600
+MAX_VERIFY_TIMEOUT_S = MAX_EXEC_TIMEOUT_S
 
 _FATAL_ACTION_STDERR_MARKERS = (
     "here-document at line",
