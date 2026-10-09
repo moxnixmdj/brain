@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V17",
+  "date": "2026-10-09",
+  "status": "CURRENT_POST_RANK14_NONCONSUMING_PRESTART_ABORT__THIRTEEN_CONSUMED__RANK14_REMAINS_NEXT_UNCONSUMED__LOSSLESS_CAP_REPAIRED__V10_CLOSURE_VERIFIED__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V16.json",
+    "git_blob_sha": "748232e21b081083d353e4f901b8607a32c32b55"
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "current_counts": {
+    "consumed_slots": 13,
+    "consumed_successes": 0,
+    "consumed_final_failures": 13,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 74,
+    "maximum_possible_successes_remaining": 197,
+    "minimum_required_success_rate_over_remaining_slots": 0.6294416243654822,
+    "pass_still_mathematically_reachable": true,
+    "next_unconsumed_slot": {
+      "ledger_schedule_rank": 14,
+      "frozen_manifest_schedule_order": 13,
+      "slot_id": "terminal-bench-science/inverse-lithography::trial-0",
+      "task_digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530"
+    }
+  },
+  "rank14_nonconsuming_prestart_truth": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2451,
+    "workflow_run_id": 37880547075,
+    "workflow_job_id": 113659002581,
+    "artifact_id": 11594189159,
+    "artifact_zip_sha256": "2eb3e507e7970d9e4dd857cef33bdf3709bb801b7991b8dba0246da3df9af424",
+    "task_read": true,
+    "instruction_sha256": "0a5b758ec1933d8fb2cb2d736dcb6a365c239a16aa2c1158fd0f0487231eade1",
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority_consumed": false,
+    "harbor_step_outcome": "skipped",
+    "prestart_guard_status": "PREEXPOSURE_ABORT_NONCONSUMING__TOKEN_GUARD_ERROR",
+    "exact_error": "SCIENCE_RAW_TASK_OBLIGATION_COUNT_INVALID",
+    "reward": null,
+    "terminal_credit_delta": 0
+  },
+  "internal_repair": {
+    "merge_commit": "c327fb4faec87c932a5ac25608d68f645fabbe50",
+    "repaired_agent_blob": "16e8ab7918c4f8d052698282dddf674b54a23016",
+    "repair_verification_path": "canonical/verification/TB_SCIENCE_RANK14_LOSSLESS_OBLIGATION_CAP_REPAIR_VERIFY_20261009_V1.json",
+    "repair_verification_git_blob_sha": "6e8e3938b00e3fe39e38ac4a1b38a21eeb25c96f",
+    "verified_large_obligations": 80,
+    "verified_accounted_obligations": 80,
+    "false_64_obligation_ceiling_removed": true
+  },
+  "repaired_runtime_closure": {
+    "manifest_schema": "PROJECT_BRAIN_TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_V10",
+    "public_runner_branch": "verify-tbscience-rank14-v10-closure-20261009",
+    "manifest_git_blob_sha": "ae37559320105277e017ff17af7c3dbeae2f9c27",
+    "agent_blob": "16e8ab7918c4f8d052698282dddf674b54a23016",
+    "closure_file_count": 15,
+    "unresolved_dynamic_imports": 0,
+    "public_verification_run_id": 37881878913,
+    "public_verification_artifact_id": 11594617475,
+    "public_verification_artifact_zip_sha256": "b8fd0f88c0ff5479872e99d54ba979f40da023f07e0c3798fcc6cc5dd35f900b",
+    "public_verification_status": "PASS__V10_15_FILE_TRANSITIVE_CLOSURE_EXACT__ZERO_EXPOSURE"
+  },
+  "rank14": {
+    "slot_consumed": false,
+    "task_read_historically": true,
+    "task_started": false,
+    "result_present": false,
+    "execution_authority_consumed": false,
+    "fresh_repaired_execution_authority_active": false,
+    "old_v9_authority_reusable": false,
+    "old_v9_authority_reuse_reason": "EXACT_RUNTIME_BLOB_IDENTITY_CHANGED__V1_AUTHORITY_BINDS_OLD_AGENT_AND_V9_CLOSURE",
+    "next_required_transaction": "BIND_AND_INDEPENDENTLY_VERIFY_A_FRESH_EXACT_ONE_SLOT_AUTHORITY_TO_REPAIRED_AGENT_BLOB_16E8AB_AND_V10_CLOSURE__THEN_PUBLISH_A_FRESH_PUBLIC_LEASE__RUN_PRESTART_EXACT_TOKEN_BUDGET_GATE__START_ONLY_IF_GATE_PASSES",
+    "precheck_failure_consumes_slot": false,
+    "retries_after_task_start_authorized": 0
+  },
+  "scheduler": [
+    "DO_NOT_COUNT_RUN_37880547075_AS_A_BENCHMARK_TRIAL_OR_FAILURE.",
+    "DO_NOT_REUSE_THE_V9_BOUND_RANK14_AUTHORITY_AFTER_THE_AGENT_BLOB_CHANGED.",
+    "BIND_REPAIRED_V10_RUNTIME_BYTES_IN_A_FRESH_EXACT_RANK14_AUTHORITY_TRANSACTION.",
+    "AFTER_FRESH_PUBLIC_TASK_READ_AUTHORITY_RECOMPUTE_THE_EXACT_FIRST_CYCLE_PLANNER_TOKEN_BUDGET_AND_ABORT_NONCONSUMING_IF_INPUT_PLUS_4096_EXCEEDS_16384.",
+    "ONLY_TASK_START_CONSUMES_THE_RANK14_SLOT."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_REPAIRED_RANK14_PROMPT_FITS_16K_YET",
+    "NO_RANK14_TASK_START",
+    "NO_RANK14_RESULT",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_delta": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
