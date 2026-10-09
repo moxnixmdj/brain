@@ -66,6 +66,52 @@ def _digest(value: Any) -> str:
 
 
 
+def _direct_semantic_open_hint(
+    direct_preflight: Mapping[str, Any],
+) -> dict[str, Any] | None:
+    """Project an open direct-route state into non-authoritative resolver metadata."""
+    if direct_preflight.get("direct_route_semantic_open") is not True:
+        return None
+    return {
+        "schema": "PROJECT_BRAIN_R2_DIRECT_SEMANTIC_OPEN_HINT_V1",
+        "route_id": direct_preflight.get("route_id"),
+        "status": direct_preflight.get("status"),
+        "effect_status": direct_preflight.get("effect_status"),
+        "minimum_discriminator_slots": deepcopy(
+            direct_preflight.get("minimum_discriminator_slots") or []
+        ),
+        "possible_outcomes": deepcopy(
+            direct_preflight.get("possible_outcomes") or []
+        ),
+        "world_count": direct_preflight.get("world_count"),
+        "blocking_residual_document_ids": deepcopy(
+            direct_preflight.get("blocking_residual_document_ids") or []
+        ),
+        "next_proof_obligations": deepcopy(
+            direct_preflight.get("next_proof_obligations") or []
+        ),
+        "blocking_document_ids": deepcopy(
+            direct_preflight.get("blocking_document_ids") or []
+        ),
+        "blocking_unknown_regions": deepcopy(
+            direct_preflight.get("blocking_unknown_regions") or []
+        ),
+        "query_relative_source_completeness_proved": direct_preflight.get(
+            "query_relative_source_completeness_proved"
+        ),
+        "open_lattice_atoms": deepcopy(
+            direct_preflight.get("open_lattice_atoms") or []
+        ),
+        "query_relative_effect_semantics_finite": direct_preflight.get(
+            "query_relative_effect_semantics_finite"
+        ),
+        "semantic_truth_authority": False,
+        "execution_authority": False,
+        "acceptance_authority": False,
+        "terminal_authority": False,
+    }
+
+
 
 def _next_meta_action(base: Mapping[str, Any]) -> dict[str, Any]:
     """Map every verified/open/fail-closed controller state to one typed next move.
@@ -313,46 +359,7 @@ def run(
     prior_candidates: list[dict[str, Any]] = []
 
     direct_preflight = direct_adequacy.preflight(current, repo_root=repo_root)
-    direct_semantic_hint: dict[str, Any] | None = None
-    if direct_preflight.get("direct_route_semantic_open") is True:
-        direct_semantic_hint = {
-            "schema": "PROJECT_BRAIN_R2_DIRECT_SEMANTIC_OPEN_HINT_V1",
-            "route_id": direct_preflight.get("route_id"),
-            "status": direct_preflight.get("status"),
-            "effect_status": direct_preflight.get("effect_status"),
-            "minimum_discriminator_slots": deepcopy(
-                direct_preflight.get("minimum_discriminator_slots") or []
-            ),
-            "possible_outcomes": deepcopy(
-                direct_preflight.get("possible_outcomes") or []
-            ),
-            "world_count": direct_preflight.get("world_count"),
-            "blocking_residual_document_ids": deepcopy(
-                direct_preflight.get("blocking_residual_document_ids") or []
-            ),
-            "next_proof_obligations": deepcopy(
-                direct_preflight.get("next_proof_obligations") or []
-            ),
-            "blocking_document_ids": deepcopy(
-                direct_preflight.get("blocking_document_ids") or []
-            ),
-            "blocking_unknown_regions": deepcopy(
-                direct_preflight.get("blocking_unknown_regions") or []
-            ),
-            "query_relative_source_completeness_proved": direct_preflight.get(
-                "query_relative_source_completeness_proved"
-            ),
-            "open_lattice_atoms": deepcopy(
-                direct_preflight.get("open_lattice_atoms") or []
-            ),
-            "query_relative_effect_semantics_finite": direct_preflight.get(
-                "query_relative_effect_semantics_finite"
-            ),
-            "semantic_truth_authority": False,
-            "execution_authority": False,
-            "acceptance_authority": False,
-            "terminal_authority": False,
-        }
+    direct_semantic_hint = _direct_semantic_open_hint(direct_preflight)
     if direct_preflight.get("matched") is True:
         direct_result = direct_adequacy.run(current, repo_root=repo_root)
         trace.append(
@@ -377,6 +384,41 @@ def run(
         )
 
     for step in range(max_fixed_point_steps + 1):
+        # Any accepted fixed-point repair mutates `current`. Re-run the direct
+        # adequacy surface on that repaired state before invoking the semantic
+        # controller again. Otherwise a newly closed direct route can remain
+        # stranded behind a stale pre-repair semantic-open hint.
+        if step > 0:
+            direct_preflight = direct_adequacy.preflight(
+                current, repo_root=repo_root
+            )
+            direct_semantic_hint = _direct_semantic_open_hint(direct_preflight)
+            if direct_preflight.get("matched") is True:
+                direct_result = direct_adequacy.run(current, repo_root=repo_root)
+                trace.append(
+                    {
+                        "step": step,
+                        "kind": "DIRECT_END_TO_END_ADEQUACY_REENTRY",
+                        "request_sha256": _digest(current),
+                        "route_id": direct_preflight.get("route_id"),
+                        "status": direct_result.get("status"),
+                        "pass": direct_result.get("pass") is True,
+                        "execution_attempted": (
+                            direct_result.get("execution_attempted") is True
+                        ),
+                    }
+                )
+                return _decorate(
+                    direct_result,
+                    fixed_point_status=(
+                        "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED_AFTER_REPAIR"
+                        if direct_result.get("pass") is True
+                        else "OPEN__R2_REPAIRED_MATCHED_DIRECT_ROUTE_DID_NOT_VERIFY"
+                    ),
+                    steps=step,
+                    trace=trace,
+                )
+
         result = run_controller(
             current,
             repo_root=repo_root,
