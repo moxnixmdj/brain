@@ -4,6 +4,7 @@ import unittest
 
 from canonical.runtime import cross_document_effect_semantic_lattice_v8 as v8
 from canonical.runtime import cross_document_effect_semantic_lattice_v9 as v9
+from canonical.runtime import cross_document_effect_semantic_lattice_verify_v9 as v9v
 from canonical.runtime.partial_effect_query_irrelevance_v1 import prove_inapplicable
 
 def field_line(eid,field,value):
