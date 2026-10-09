@@ -367,6 +367,11 @@ def compile_gap_contract(
     constructive_internal = [
         item for item in internal if item != externality_guard
     ]
+    r2_acquisition_requests = [
+        deepcopy(dict(x))
+        for x in (residual.get("r2_acquisition_requests") or [])
+        if isinstance(x, Mapping)
+    ]
 
     if row.get("pass") is True and not internal:
         if external_proved:
@@ -403,6 +408,8 @@ def compile_gap_contract(
         "internal_unsolved": residual.get("internal_unsolved") is True,
         "pending_acquisition_or_experiment_required": pending_acquisition,
         "constructive_internal_blockers": constructive_internal,
+        "r2_acquisition_requests": r2_acquisition_requests,
+        "r2_acquisition_request_count": len(r2_acquisition_requests),
     }
     semantic_work = [deepcopy(dict(x)) for x in pending_work]
     constructive_contracts = _constructive_capability_contracts(semantic_work)
@@ -455,6 +462,17 @@ def compile_decision_sufficient_contract(
     for item in basis.get("evidence_blockers", []) or []:
         if _s(item):
             policy_requirements.append({"kind": "EVIDENCE_BLOCKER", "value": _s(item)})
+    for request in basis.get("r2_acquisition_requests", []) or []:
+        if not isinstance(request, Mapping):
+            continue
+        policy_requirements.append({
+            "kind": "R2_STRUCTURED_ACQUISITION_REQUEST",
+            "cell_id": request.get("cell_id"),
+            "request_sha256": request.get("request_sha256"),
+            "required_action": request.get("required_action"),
+            "remaining_boundary": request.get("remaining_boundary"),
+            "wake_conditions": deepcopy(list(request.get("wake_conditions") or [])),
+        })
     for contract in constructive:
         cbasis = contract.get("basis")
         cbasis = cbasis if isinstance(cbasis, Mapping) else {}
@@ -508,9 +526,47 @@ def compile_minimum_information_contract(
     basis = gap.get("basis")
     basis = basis if isinstance(basis, Mapping) else {}
     blockers = sorted({_s(x) for x in basis.get("evidence_blockers", []) or [] if _s(x)})
+    structured = [
+        deepcopy(dict(x))
+        for x in (basis.get("r2_acquisition_requests") or [])
+        if isinstance(x, Mapping)
+    ]
     requests = []
-    for blocker in blockers:
+    structured_blockers: set[str] = set()
+    for request in sorted(
+        structured,
+        key=lambda row: (
+            _s(row.get("cell_id")),
+            _s(row.get("request_sha256")),
+        ),
+    ):
+        cell_id = _s(request.get("cell_id"))
+        blocker = "R2_PENDING_ACQUISITION:" + cell_id if cell_id else ""
+        if blocker:
+            structured_blockers.add(blocker)
         row = {
+            "kind": "R2_STRUCTURED_POLICY_CHANGING_ACQUISITION",
+            "blocker": blocker or None,
+            "r2_cell_id": cell_id or None,
+            "source_request_sha256": request.get("request_sha256"),
+            "source_r2_authority_sha256": request.get("source_r2_authority_sha256"),
+            "required_action": request.get("required_action"),
+            "remaining_boundary": request.get("remaining_boundary"),
+            "wake_conditions": deepcopy(list(request.get("wake_conditions") or [])),
+            "required_property": "OBSERVATION_OR_CERTIFICATE_MUST_SATISFY_AT_LEAST_ONE_BOUND_WAKE_CONDITION_AND_CHANGE_OR_CLOSE_THE_EXACT_R2_CELL",
+            "proof_or_existing_receipt_precedes_new_reality": True,
+            "broad_acquisition_forbidden_without_minimality_proof": True,
+            "full_benchmark_default": False,
+        }
+        requests.append({
+            **row,
+            "request_id": "minimum-info:r2:" + _sha(row),
+        })
+    for blocker in blockers:
+        if blocker in structured_blockers:
+            continue
+        row = {
+            "kind": "GENERIC_EVIDENCE_BLOCKER",
             "blocker": blocker,
             "required_property": "OBSERVATION_MUST_BE_CAPABLE_OF_CHANGING_CURRENT_POLICY_OR_CLOSING_EXACT_OBLIGATION",
             "proof_or_existing_receipt_precedes_new_reality": True,
@@ -526,6 +582,10 @@ def compile_minimum_information_contract(
         "decision_contract_sha256": _sha(decision),
         "requests": requests,
         "request_count": len(requests),
+        "structured_r2_request_count": sum(
+            row.get("kind") == "R2_STRUCTURED_POLICY_CHANGING_ACQUISITION"
+            for row in requests
+        ),
         "acquisition_objective": "MINIMIZE_NEW_INFORMATION_SUBJECT_TO_CLOSING_OR_CHANGING_THE_EXACT_CURRENT_DECISION",
         "proof_precedence": [
             "FORMAL_IMPLICATION",
