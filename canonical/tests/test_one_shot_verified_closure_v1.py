@@ -24,6 +24,33 @@ class OneShotClosureTests(unittest.TestCase):
             },
         }
 
+    def test_scalar_remaining_hard_frontier_is_preserved_as_one_item(self):
+        from tempfile import TemporaryDirectory
+        import json
+
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            gov = root / "canonical" / "governance"
+            gov.mkdir(parents=True)
+            target = gov / "CURRENT_R2_DECISION_INTELLIGENCE.json"
+            target.write_text(json.dumps({
+                "status": "OPEN",
+                "primary_primitive": "x",
+                "primary_primitive_state": "OPEN",
+                "remaining_problem_class": "y",
+                "remaining_hard_frontier": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+                "current_cell_classifications": {},
+                "mechanism_closure": {
+                    "universal_positive_action_coverage_closed": False
+                },
+            }), encoding="utf-8")
+            out = closure._canonical_r2_residual(root)
+
+        self.assertEqual(
+            out["remaining_hard_frontier"],
+            ["FINANCE_SEMANTIC_ADEQUACY_TAIL"],
+        )
+
     def test_empty_queue_is_verified_internal_fixed_point(self):
         snaps = [
             self._snap("a", []),
