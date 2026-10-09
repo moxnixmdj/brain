@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[2]
 TERMINAL = ROOT / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
 MISSION = ROOT / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
 R2 = ROOT / "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
-REGCAP_ACTIVATION = ROOT / "canonical/governance/R2_REGCAP_CANDIDATE_AMBIGUITY_CONTROL_ACTIVATION_20261009_V1.json"
+REGCAP_ACTIVATION = ROOT / "canonical/governance/R2_REGCAP_CANDIDATE_AMBIGUITY_CONTROL_ACTIVATION_20261009_V1.json"\nDIRECT_ACTIVATION = ROOT / "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V28.json"
 
 REAL_OBJECTIVE = (
     "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_"
@@ -41,7 +41,7 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         self.assertTrue(
             terminal["schema"].startswith("PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V")
         )
-        self.assertGreaterEqual(terminal["pointer_revision"], 93)
+        self.assertGreaterEqual(terminal["pointer_revision"], 95)
         self.assertEqual(terminal["terminal_objective"], REAL_OBJECTIVE)
         self.assertEqual(
             terminal["objective_precedence"]["authoritative_path"],
@@ -144,36 +144,79 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             precedence["dormant_alternative_route_count"],
             result["dormant_alternative_route_cell_count"],
         )
-        self.assertEqual(result["direct_route_count"], 35)
+        self.assertEqual(result["direct_route_count"], 36)
         self.assertEqual(result["bounded_family_count"], 32)
         self.assertFalse(terminal["live_truth"]["opus_5_5_is_global_terminal_objective"])
         self.assertTrue(terminal["live_truth"]["opus_5_5_is_frontier_checkpoint"])
         self.assertFalse(terminal["live_truth"]["current_escape_policy_adequacy_closed"])
 
-    def test_r2_v53_regcap_routing_precedence_and_nonclaims(self):
+    def test_r2_v54_regcap_routing_precedence_direct_route_and_nonclaims(self):
         terminal = self.load(TERMINAL)
         r2 = self.load(R2)
         activation = self.load(REGCAP_ACTIVATION)
+        direct_activation = self.load(DIRECT_ACTIVATION)
 
-        self.assertIn("__V53__", r2["status"])
-        rec = r2["r2_v53_regcap_semantic_routing_reconciliation"]
+        self.assertIn("__V54__", r2["status"])
+        self.assertEqual(r2["scheduler_result"]["direct_route_count"], 36)
+        self.assertEqual(r2["scheduler_result"]["bounded_family_count"], 32)
+        self.assertEqual(r2["direct_adequacy"]["current_route_count"], 36)
+        self.assertEqual(r2["direct_adequacy"]["exact_cell_count"], 4)
+        self.assertEqual(r2["direct_adequacy"]["bounded_family_count"], 32)
         self.assertEqual(
-            rec["precedence"][:3],
+            r2["direct_adequacy"]["activation_git_blob_sha"],
+            blob_sha(DIRECT_ACTIVATION),
+        )
+        self.assertEqual(len(direct_activation["current_routes"]), 36)
+        self.assertEqual(direct_activation["exact_cell_count"], 4)
+        self.assertEqual(direct_activation["bounded_family_count"], 32)
+        self.assertTrue(direct_activation["count_reconciliation"]["coherent"])
+        self.assertTrue(
+            any(
+                row.get("route_id")
+                == "DIRECT_ADEQUACY::SOURCE_BOUND_REGCAP_IDENTITY_NYFED_CCOB_V1"
+                for row in direct_activation["current_routes"]
+            )
+        )
+
+        rec = r2["r2_v54_regcap_contextual_discriminator_reconciliation"]
+        self.assertEqual(
+            rec["precedence"][:5],
             [
+                "EXACT_SOURCE_BOUND_NYFED_REGCAP_DIRECT_END_TO_END_ADEQUACY_WHEN_GOAL_AND_SOURCE_CONTRACT_MATCH",
                 "EXACT_AUTHENTICATED_SOURCE_BOUND_IDENTITY_WHEN_SOURCE_CONTRACT_MATCHES",
                 "EXACT_AUTHENTICATED_LOCAL_APPOSITIVE_IDENTITY_WHEN_SOURCE_SPAN_CONTRACT_MATCHES",
-                "VERIFIED_PROPERTY_CANDIDATE_DISCOVERY_PLUS_MINIMUM_INFORMATION_AMBIGUITY_CONTROL",
+                "EXACT_AUTHENTICATED_BOUNDED_CONTEXT_DISCRIMINATOR_WHEN_COMPLETE_THREE_RIVAL_SCOPE_AND_CONTEXT_CONTRACT_MATCH",
+                "VERIFIED_PROPERTY_CANDIDATE_DISCOVERY_PLUS_AUTHENTICATED_MATRIX_MINIMUM_INFORMATION_AMBIGUITY_CONTROL",
             ],
         )
+        self.assertTrue(rec["exact_nyfed_direct_adequacy_verified"])
+        self.assertTrue(rec["bounded_context_ccyb_resolution_verified"])
+        self.assertTrue(rec["bounded_context_tlac_resolution_verified"])
+        self.assertFalse(rec["bounded_context_ccob_from_structural_buffer_facts_alone_verified"])
+        self.assertFalse(rec["open_world_identity_closed"])
         self.assertFalse(rec["finance_semantic_tail_closed"])
         self.assertEqual(rec["primary_internal_unsolved_count_before"], 1)
         self.assertEqual(rec["primary_internal_unsolved_count_after"], 1)
+        self.assertEqual(rec["direct_route_count"], 36)
+        self.assertEqual(rec["exact_cell_count"], 4)
+        self.assertEqual(rec["bounded_family_count"], 32)
+
+        self.assertFalse(r2["regcap_source_bound_direct_adequacy"]["global_phrase_identity_authority"])
+        self.assertFalse(
+            r2["regcap_authenticated_matrix_minimum_information_control_v2"][
+                "candidate_universe_complete"
+            ]
+        )
+        self.assertFalse(
+            r2["regcap_bounded_context_discriminator"]["global_phrase_identity_authority"]
+        )
+        self.assertFalse(
+            r2["regcap_bounded_context_discriminator"]["open_world_candidate_set_complete"]
+        )
         self.assertFalse(
             r2["regcap_loss_cushion_source_bound_identity"]["global_phrase_identity_authority"]
         )
-        self.assertFalse(
-            r2["regcap_local_appositive_identity"]["global_alias_authority"]
-        )
+        self.assertFalse(r2["regcap_local_appositive_identity"]["global_alias_authority"])
         self.assertFalse(
             r2["regcap_candidate_ambiguity_minimum_information_control"][
                 "external_impossibility_claimed"
@@ -191,9 +234,18 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         )
 
         truth = terminal["live_truth"]
+        self.assertEqual(truth["r2_direct_adequacy_route_count"], 36)
+        self.assertEqual(truth["r2_direct_adequacy_exact_cell_count"], 4)
+        self.assertEqual(truth["r2_direct_adequacy_bounded_family_count"], 32)
+        self.assertEqual(truth["r2_verified_finance_positive_subregion_count"], 17)
+        self.assertTrue(truth["r2_regcap_source_bound_nyfed_ccob_direct_adequacy_bound"])
         self.assertTrue(truth["r2_regcap_nyfed_loss_cushion_ccob_identity_bound"])
         self.assertTrue(truth["r2_regcap_local_appositive_identity_bound"])
         self.assertTrue(truth["r2_regcap_candidate_ambiguity_minimum_information_control_bound"])
+        self.assertTrue(truth["r2_regcap_authenticated_matrix_minimum_information_control_bound"])
+        self.assertTrue(truth["r2_regcap_bounded_context_discriminator_bound"])
+        self.assertTrue(truth["r2_regcap_context_ccyb_tlac_bound_resolution_verified"])
+        self.assertFalse(truth["r2_regcap_ccob_identity_from_structural_buffer_context_alone_closed"])
         self.assertFalse(truth["r2_regcap_global_loss_cushion_identity_closed"])
         self.assertFalse(truth["r2_regcap_open_world_ontology_closed"])
         self.assertFalse(truth["r2_regcap_missing_context_is_external_impossibility"])
@@ -202,10 +254,10 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             truth["r2_primary_internal_unsolved_cell"],
             "FINANCE_SEMANTIC_ADEQUACY_TAIL",
         )
-        self.assertIn("CURRENT_R2_V53", terminal["status"])
+        self.assertIn("CURRENT_R2_V54", terminal["status"])
         self.assertIn("TERMINAL_FALSE", terminal["status"])
         self.assertEqual(
-            terminal["r2_v53_regcap_semantic_routing_reconciliation_20261009_v1"][
+            terminal["r2_v54_regcap_contextual_discriminator_reconciliation_20261009_v1"][
                 "terminal_credit_delta"
             ],
             0,
