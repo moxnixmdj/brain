@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_ROOT_CERTIFICATE_REGISTRY_V1",
+  "date": "2026-10-09",
+  "status": "BOUND__R1_R2_R3_EXACT_ROOT_STATUS_REGISTRY__ALL_THREE_UNKNOWN__ZERO_CREDIT",
+  "base_main_commit": "199957e2f5b39ccbd3113bedcde53afb6190b597",
+  "mission": {
+    "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "git_blob_sha": "52b98f8019938fa7d8164e6a47e359ffb0faeb6a",
+    "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE"
+  },
+  "root_theorem": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+    "git_blob_sha": "9204ccd694141f9bb61abf9f50e5480590ca3757"
+  },
+  "live_binding": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
+    "git_blob_sha": "65deb3d2e80237f15854dce19d212df9ba262db9"
+  },
+  "roots": {
+    "R1": {
+      "id": "REALITY_CONTAINMENT",
+      "claim": "B_real SUBSETEQ B_plus",
+      "status": "UNKNOWN",
+      "supporting_evidence": [{
+        "path": "canonical/verification/R1_CURRENT_BYTE_LIFECYCLE_RESEAL_20261009_V1.json",
+        "git_blob_sha": "9becd33679c2f839df854c48fb14ead568128646",
+        "proves": "CURRENT_RUNTIME_ARCHITECTURE_AND_86_OF_86_LIFECYCLE_RESEALED",
+        "not_equivalent_to_root_claim": true
+      }],
+      "missing_exact_proof": "CURRENT_MISSION_REALITY_CONTAINMENT__EVERY_REAL_MISSION_RELEVANT_BEHAVIOR_RETAINED_BY_B_PLUS",
+      "falsified": false
+    },
+    "R2": {
+      "id": "MISSION_SOUNDNESS",
+      "claim": "G_minus SUBSETEQ G_real",
+      "status": "UNKNOWN",
+      "supporting_evidence": [{
+        "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+        "git_blob_sha": "6a97c7f13717b5b31a75b6938f1cf55b9398d6d9",
+        "proves": "GENERAL_ADEQUACY_OR_ABSTAIN_CONTROL_MECHANISM_CLOSED_CONDITIONALLY_ON_AUTHENTICATED_SEMANTICS_AND_EVIDENCE",
+        "not_equivalent_to_root_claim": true
+      }],
+      "missing_exact_proof": "CURRENT_MISSION_SOUNDNESS__EVERY_DEFINITELY_GOOD_BEHAVIOR_ACCEPTED_BY_AUTHORIZED_REAL_MISSION",
+      "falsified": false
+    },
+    "R3": {
+      "id": "TERMINAL_CLOSURE",
+      "claim": "B_plus SUBSETEQ G_minus",
+      "status": "UNKNOWN",
+      "supporting_evidence": [
+        {
+          "path": "canonical/governance/R3_ZERO_RESIDUAL_TERMINAL_TRUTH_RECONCILIATION_20261009_V1.json",
+          "git_blob_sha": "28ca3e3e120388bf4d8c05690c153499738026c5",
+          "proves": "R3_INTERNAL_IMPROVEMENT_QUEUE_RESIDUAL_ZERO",
+          "not_equivalent_to_root_claim": true
+        },
+        {
+          "path": "canonical/verification/R3_AUTONOMOUS_VERIFIED_COMPOUNDING_LOOP_IMPLEMENTATION_20261008_V7.json",
+          "git_blob_sha": "feb6d6ca244023cf715074c41fb9bcc1af2e6182",
+          "proves": "R3_CONTROL_LOOP_SUFFICIENTLY_CLOSED_UNDER_AVAILABLE_EVIDENCE",
+          "not_equivalent_to_root_claim": true
+        }
+      ],
+      "counterevidence_to_proved_status": {
+        "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+        "git_blob_sha": "ba1b5eb46f5ac971e9b67980ce4f922bcf8c63c1",
+        "terminal": false,
+        "current_U_empty_proved": false,
+        "independent_open_acceptance_obligations": 13
+      },
+      "missing_exact_proof": "CURRENT_TERMINAL_CLOSURE__EVERY_STILL_POSSIBLE_BEHAVIOR_DEFINITELY_MISSION_ACCEPTABLE",
+      "falsified": false
+    }
+  },
+  "root_status_vector": ["UNKNOWN", "UNKNOWN", "UNKNOWN"],
+  "proof_closure_ready": false,
+  "registry_complete_for_declared_roots": true,
+  "hard_rules": [
+    "UNKNOWN_NEVER_EQUALS_PROVED",
+    "NOT_PROVED_NEVER_EQUALS_FALSE",
+    "SUPPORTING_EVIDENCE_IS_NOT_PROMOTED_TO_A_DIFFERENT_ROOT_PROPOSITION",
+    "ALL_SOURCE_BYTES_ARE_CONTENT_ADDRESSED",
+    "DRIFT_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_R1_ROOT_CLOSURE",
+    "NO_R2_ROOT_CLOSURE",
+    "NO_R3_ROOT_CLOSURE",
+    "NO_R4_ROOT_CLOSURE",
+    "NO_UVCK_LIVE_DEFAULT_PROMOTION",
+    "NO_TERMINAL_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
