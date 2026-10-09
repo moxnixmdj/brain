@@ -7,6 +7,7 @@ from typing import Any, Mapping, Sequence
 
 from canonical.runtime import cross_document_effect_hypothesis_worldset_v1 as worldset
 from canonical.runtime import cross_document_effect_hypothesis_worldset_verify_v1 as worldset_verify
+from canonical.runtime import certified_raw_effect_sentence_v1 as raw_effect_sentence
 
 SCHEMA="PROJECT_BRAIN_CROSS_DOCUMENT_EFFECT_SOURCE_COVERAGE_GATE_VERIFY_V1"
 GATE_SCHEMA="PROJECT_BRAIN_CROSS_DOCUMENT_EFFECT_SOURCE_COVERAGE_GATE_V1"
@@ -153,6 +154,25 @@ def _recompute(capsule:Mapping[str,Any])->dict[str,Any]:
                 if key in bound: raise ValueError("SLOT_BOUND_TWICE")
                 if _canonical_slot(part)!=slots[key]:
                     raise ValueError("SOURCE_SLOT_WORLDSET_MISMATCH")
+                bound.add(key)
+            elif mode=="CERTIFIED_EFFECT_SENTENCE":
+                sid=_token(sid,"SLOT_ID")
+                key=(did,sid)
+                if key not in slots: raise ValueError("SLOT_NOT_IN_WORLDSET")
+                if key in bound: raise ValueError("SLOT_BOUND_TWICE")
+                try:
+                    sentence=part.decode("utf-8")
+                except UnicodeDecodeError as exc:
+                    raise ValueError("CERTIFIED_EFFECT_SENTENCE_UTF8_INVALID") from exc
+                compiled=raw_effect_sentence.compile_sentence(
+                    sentence,
+                    document_id=did,
+                    slot_id=sid,
+                )
+                if compiled.get("pass") is not True:
+                    raise ValueError("CERTIFIED_EFFECT_SENTENCE_NOT_PROVED")
+                if compiled.get("slot")!=slots[key]:
+                    raise ValueError("CERTIFIED_EFFECT_SENTENCE_WORLDSET_MISMATCH")
                 bound.add(key)
             else:
                 raise ValueError("MODE_UNSUPPORTED")
