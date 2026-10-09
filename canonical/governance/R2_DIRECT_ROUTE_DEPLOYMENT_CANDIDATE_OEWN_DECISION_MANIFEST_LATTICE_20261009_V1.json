@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_V1",
+  "date": "2026-10-09",
+  "status": "CANDIDATE__R2_DIRECT_ROUTE_DEPLOYMENT",
+  "route_id": "DIRECT_ADEQUACY::OEWN_DECISION_MANIFEST_LATTICE_V1",
+  "capability_id": "oewn.decision_manifest_lattice.stdlib",
+  "runtime_path": "canonical/runtime/r2_oewn_decision_manifest_lattice_direct_adequacy_v1.py",
+  "runtime_git_blob_sha": "0462ca33280df8bbe521a927b01f4c3e095effc7",
+  "preflight_callable": "preflight",
+  "run_callable": "run",
+  "route_verification_path": "canonical/verification/R2_OEWN_DECISION_MANIFEST_LATTICE_VERIFY_20261009_V1.json",
+  "route_verification_git_blob_sha": "6a42d85a71f1419f64ebc1d61cbaefdc035953a6",
+  "scope": "OEWN_2025_RELEASE_RELATIVE_SOURCE_PROVED_TERMINAL_AND_OBSERVATION_LATTICE__CLOSED_DECISION_SUFFICIENT_CASES_ONLY",
+  "selection_class": "UNIQUE_MATCH_REQUIRED",
+  "deployment_requested": true,
+  "incremental_spend_usd": 0,
+  "verification_authority_mutated": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
