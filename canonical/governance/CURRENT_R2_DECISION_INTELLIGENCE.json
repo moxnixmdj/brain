@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V44__THIRTY_DIRECT_ROUTES__TWENTY_SEVEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__GENERAL_CROSS_DOCUMENT_EFFECT_WORLDS_AND_AUTHENTICATED_OEWN_DECISION_SENSE_CONTROL_BOUND__AFTER_TEN_VERIFIED_FINANCE_SUBREGIONS",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V45__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__SOURCE_BACKED_CROSS_DOCUMENT_RESIDUAL_TOP_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -12,24 +12,24 @@
     "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py",
     "authority_kernel_git_blob_sha": "29872fc55a5ec577feea769cc919dc889899c2bd",
-    "fixed_point_git_blob_sha": "f8e99fd92dbea95116f8153d450bb53d290a883c",
+    "fixed_point_git_blob_sha": "7c6585e800369331ad0f061afd23568fd0cb341b",
     "fixed_point_native_control_policy_total": true,
     "fixed_point_regression_test_path": "canonical/tests/test_general_adequate_decision_fixed_point_v2.py",
-    "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
+    "fixed_point_regression_test_git_blob_sha": "934a04632483fd517cbfa34394b27c73038365e1"
   },
   "scheduler_cut": {
     "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44.json",
     "git_blob_sha": "55be062f58a20e13fc32acc47746abb11750f7b7"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V24.json",
-    "activation_git_blob_sha": "3a9668be458507e4295e733bc692b65b8ed7a866",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V25.json",
+    "activation_git_blob_sha": "1287ba34e3cdaf4717de10c3662d2b9ef28a4a6c",
     "exact_cell_count": 3,
-    "bounded_family_count": 27,
-    "current_route_count": 30,
-    "current_activation_status": "THREE_EXACT_CELLS_PLUS_TWENTY_SEVEN_BOUNDED_FAMILIES",
-    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v10.py",
-    "direct_runtime_git_blob_sha": "1a78930ab5536a8db35097eb7e924284b0a0de73",
+    "bounded_family_count": 28,
+    "current_route_count": 31,
+    "current_activation_status": "THREE_EXACT_CELLS_PLUS_TWENTY_EIGHT_BOUNDED_FAMILIES",
+    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v11.py",
+    "direct_runtime_git_blob_sha": "98fc03a33aa8f051245c8adbb9a0d8d896b0057b",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -130,13 +130,18 @@
         "path": "canonical/verification/R2_V38_PAIR_REFERENCE_VERIFY_20261009_V1.json",
         "git_blob_sha": "5d283287394557520ce709b91c93dd5a25b44083",
         "status": "PASS__EXPLICIT_ORDERED_PAIR_REFERENCE__EXACT_CONTENT_ADDRESSED_13_OF_13__COMPILE_4_OF_4__ZERO_CREDIT"
+      },
+      {
+        "path": "canonical/verification/R2_CROSS_DOCUMENT_RESIDUAL_TOP_VERIFY_20261009_V1.json",
+        "git_blob_sha": "2a175a4190335f407d035cfe676c3caff544d484",
+        "status": "PASS__SOURCE_ALIGNED_V7_RESIDUAL_TOP_V11_AND_FULL_CROSS_DOCUMENT_REGRESSION__77_OF_77"
       }
     ],
-    "latest_verification_path": "canonical/verification/R2_V38_PAIR_REFERENCE_VERIFY_20261009_V1.json",
-    "latest_verification_git_blob_sha": "5d283287394557520ce709b91c93dd5a25b44083",
-    "latest_verification_status": "PASS__EXPLICIT_ORDERED_PAIR_REFERENCE__EXACT_CONTENT_ADDRESSED_13_OF_13__COMPILE_4_OF_4__ZERO_CREDIT",
+    "latest_verification_path": "canonical/verification/R2_CROSS_DOCUMENT_RESIDUAL_TOP_VERIFY_20261009_V1.json",
+    "latest_verification_git_blob_sha": "2a175a4190335f407d035cfe676c3caff544d484",
+    "latest_verification_status": "PASS__SOURCE_ALIGNED_V7_RESIDUAL_TOP_V11_AND_FULL_CROSS_DOCUMENT_REGRESSION__77_OF_77",
     "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
-    "fixed_point_controller_git_blob_sha": "cbc37346e5838b761cbc124b956d6e4e04986594"
+    "fixed_point_controller_git_blob_sha": "7c6585e800369331ad0f061afd23568fd0cb341b"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
@@ -157,13 +162,17 @@
     "option_preserving_mission_alignment": true,
     "existing_authenticated_policy_cover_observation_auto_reuse": true,
     "conflicting_authenticated_policy_cover_observations_fail_closed": true,
-    "external_information_provider_after_existing_observation_reuse_only": true
+    "external_information_provider_after_existing_observation_reuse_only": true,
+    "source_backed_cross_document_residual_top": true,
+    "residual_top_proof_obligations_exposed_to_resolver": true,
+    "residual_top_hints_have_semantic_truth_authority": false,
+    "residual_top_hints_have_terminal_authority": false
   },
   "judgment_model_policy": {
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__TEN_VERIFIED_FINANCE_SUBREGIONS__GENERAL_CROSS_DOCUMENT_EFFECT_WORLDS_AND_AUTHENTICATED_OEWN_DECISION_SENSE_CONTROL_BOUND__GDPVAL_DORMANT",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__SOURCE_BACKED_CROSS_DOCUMENT_RESIDUAL_TOP_BOUND__ARBITRARY_RAW_PROSE_EFFECT_SEMANTICS_NOT_GLOBALLY_CLOSED__GDPVAL_DORMANT",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -270,7 +279,7 @@
     "positive_adequacy_coverage_credit_delta": 0
   },
   "control_mechanism_status": "CLOSED__TOTAL_FAIL_CLOSED_ADEQUACY_OR_ABSTAIN_CONTROL",
-  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__OEWN_SENSE_CASES_WITHOUT_INDEPENDENTLY_AUTHENTICATED_COMPLETE_SENSE_TO_TERMINAL_SIGNATURE_OR_OBSERVATION_OUTCOME_BINDINGS__TERMS_OR_DOMAIN_CONCEPTS_OUTSIDE_PROVED_COMPLETE_LEXICAL_OR_DOMAIN_UNIVERSES__NONEXPLICIT_SEMANTIC_RELATIONS_WITHOUT_COMPLETE_AUTHENTIC_BOUNDED_DENOTATION_OR_PROVABLE_SET_RELATION__OPEN_WORLD_ONTOLOGY_MAPPING_WITHOUT_PROVED_COMPLETE_REGISTRY__CROSS_DOCUMENT_CASES_WITH_UNDECLARED_OR_UNPROVED_HYPOTHESIS_COMPLETENESS_OR_IMPLICIT_PRECEDENCE__STRONGER_EXTERNAL_FACT_AUTHENTICATION_BEYOND_BOUND_OBSERVATION_CHANNELS__OPEN_WORLD_NOT_CLOSED",
+  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__OEWN_SENSE_CASES_WITHOUT_INDEPENDENTLY_AUTHENTICATED_COMPLETE_SENSE_TO_TERMINAL_SIGNATURE_OR_OBSERVATION_OUTCOME_BINDINGS__TERMS_OR_DOMAIN_CONCEPTS_OUTSIDE_PROVED_COMPLETE_LEXICAL_OR_DOMAIN_UNIVERSES__NONEXPLICIT_SEMANTIC_RELATIONS_WITHOUT_COMPLETE_AUTHENTIC_BOUNDED_DENOTATION_OR_PROVABLE_SET_RELATION__OPEN_WORLD_ONTOLOGY_MAPPING_WITHOUT_PROVED_COMPLETE_REGISTRY__CROSS_DOCUMENT_RAW_PROSE_WITHOUT_SOURCE_PROVED_QUERY_TARGET_SCOPE_OR_EXACT_EFFECT_ID_INVENTORY__EFFECT_VALUE_CLASS_CONDITION_OR_IMPLICIT_PRECEDENCE_REMAIN_UNPROVED__STRONGER_EXTERNAL_FACT_AUTHENTICATION_BEYOND_BOUND_OBSERVATION_CHANNELS__OPEN_WORLD_NOT_CLOSED",
   "control_law_totalizer": {
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
