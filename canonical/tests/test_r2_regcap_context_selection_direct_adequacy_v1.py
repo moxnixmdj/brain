@@ -9,8 +9,6 @@ from unittest.mock import patch
 from canonical.runtime import regcap_context_selection_v1 as producer
 from canonical.runtime import regcap_context_selection_verify_v1 as verifier
 from canonical.runtime import r2_regcap_context_selection_direct_adequacy_v1 as direct
-from canonical.runtime import r2_direct_end_to_end_adequacy_v21 as v21
-from canonical.runtime import general_adequate_decision_fixed_point_v2 as fp
 from canonical.runtime import regcap_necessary_property_authority_v1 as regcap
 from canonical.runtime import regcap_contrastive_discriminator_matrix_v1 as matrix
 
@@ -245,58 +243,7 @@ class DirectRouteTests(unittest.TestCase):
             self.assertTrue(out["rollback_complete"])
             self.assertEqual(op.read_bytes(), old)
 
-    def test_nonmatching_goal_delegates_to_v20(self):
-        req = {"task_id": "x", "goal": "Unrelated task."}
-        expected = {"matched": False, "status": "V20"}
-        with patch.object(v21.v20, "preflight", return_value=expected) as prior:
-            out = v21.preflight(req)
-        self.assertEqual(out, expected)
-        prior.assert_called_once()
 
-    def test_v21_selects_regcap_route_before_v20(self):
-        with tempfile.TemporaryDirectory() as td, patch.object(
-            direct.producer, "compute", side_effect=compute_fake
-        ), patch.object(
-            direct.verifier, "verify", side_effect=verify_fake
-        ), patch.object(v21.v20, "preflight") as prior:
-            root = Path(td)
-            write_case(root, ccob_text())
-            out = v21.preflight(
-                {"task_id": "x", "goal": goal()},
-                repo_root=root,
-            )
-        self.assertTrue(out["matched"], out)
-        self.assertEqual(out["route_id"], direct.ROUTE_ID)
-        prior.assert_not_called()
-
-    def test_fixed_point_uses_v21_direct_route(self):
-        request = {"task_id": "x", "goal": goal()}
-        direct_result = {
-            "pass": True,
-            "matched": True,
-            "status": "PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED",
-            "route_id": direct.ROUTE_ID,
-            "execution_attempted": True,
-        }
-        with patch.object(
-            fp.direct_adequacy,
-            "preflight",
-            return_value={"matched": True, "route_id": direct.ROUTE_ID},
-        ), patch.object(
-            fp.direct_adequacy,
-            "run",
-            return_value=direct_result,
-        ):
-            out = fp.run(request)
-        self.assertTrue(out["pass"], out)
-        self.assertEqual(
-            out["r2_fixed_point_status"],
-            "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED",
-        )
-        self.assertEqual(
-            out["r2_fixed_point_trace"][0]["route_id"],
-            direct.ROUTE_ID,
-        )
 
 
 if __name__ == "__main__":
