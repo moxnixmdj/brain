@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_CERTIFICATE_V1",
+  "proof_class": "DECLARATIVE_BOUNDING",
+  "subject_id": "router-deployment-canary",
+  "abstract_spec": {
+    "path": "canonical/governance/ROUTER_DEPLOYMENT_CANARY_ABSTRACT_SPEC_20261009_V1.json",
+    "git_blob_sha": "819a4c7240fbc26fe092b9545e5fd38c1943b8ac",
+    "semantic_version": "ROUTER_DEPLOYMENT_CANARY_ABSTRACT_V1"
+  },
+  "concrete_implementation": [
+    {
+      "path": "canonical/runtime/router_deployment_canary_v1.py",
+      "git_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2"
+    }
+  ],
+  "state_mapping": {
+    "proved": true,
+    "mode": "STATELESS"
+  },
+  "input_binding": {
+    "proved": true,
+    "mode": "CANONICAL_JSON"
+  },
+  "transition_refinement": {
+    "coverage_mode": "DECLARED_FINITE_PARTITION",
+    "unsupported_behavior": "FAIL_CLOSED",
+    "classes": [
+      {
+        "case_id": "PAYLOAD_NON_MAPPING",
+        "kind": "TYPE_ERROR"
+      },
+      {
+        "case_id": "JSON_ENCODING_ERROR",
+        "kind": "TYPE_ERROR"
+      },
+      {
+        "case_id": "PAYLOAD_MAPPING",
+        "kind": "PASS"
+      }
+    ]
+  },
+  "observation_refinement": {
+    "proved": true,
+    "mode": "EXACT_GOAL_PROJECTION"
+  },
+  "nondeterminism_contract": {
+    "proved": true,
+    "mode": "DETERMINISTIC"
+  },
+  "safety_refinement": {
+    "proved": true
+  },
+  "liveness_refinement": {
+    "required": false,
+    "proved": false
+  },
+  "proof_dependencies": [],
+  "terminal_credit_delta": 0
+}
