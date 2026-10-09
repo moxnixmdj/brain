@@ -2014,7 +2014,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "8161b51386aa8e857f86d5e5788a83282cde6f4d"
+      "git_blob_sha": "7c4e4724b2aa347d56a9d6ca7891823ecc197a92"
     },
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
@@ -2088,7 +2088,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "8161b51386aa8e857f86d5e5788a83282cde6f4d"
+      "git_blob_sha": "7c4e4724b2aa347d56a9d6ca7891823ecc197a92"
     },
     "regression": {
       "path": "canonical/tests/test_live_capability_invoker_v1.py",
