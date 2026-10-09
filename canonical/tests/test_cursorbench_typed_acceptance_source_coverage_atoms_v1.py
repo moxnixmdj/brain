@@ -214,8 +214,12 @@ class SourceCoverageAtomsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             m, s = model(), source_contract()
-            s["nonwhitespace_source_coverage_complete"] = False
             binding = write_binding(root, m, s)
+            sp = root / "canonical/governance/source-contract.json"
+            bad = json.loads(sp.read_text(encoding="utf-8"))
+            bad["nonwhitespace_source_coverage_complete"] = False
+            sp.write_text(json.dumps(bad, sort_keys=True), encoding="utf-8")
+            binding["source_contract"]["git_blob_sha"] = git_blob_sha(sp)
             out = verify(m, binding, repo_root=root)
         self.assertFalse(out["pass"])
         self.assertIn("SOURCE_CONTRACT_NONWHITESPACE_COVERAGE_INCOMPLETE", out["errors"][0])
