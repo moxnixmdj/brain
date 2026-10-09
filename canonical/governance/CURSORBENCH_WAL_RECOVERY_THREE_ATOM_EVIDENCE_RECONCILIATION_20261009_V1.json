@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_WAL_RECOVERY_THREE_ATOM_EVIDENCE_RECONCILIATION_V1",
+  "date": "2026-10-09",
+  "status": "VERIFIED_EXACT_WAL_CONTEXT__THREE_EVIDENCE_GATED_ATOMS_PROVED__STRUCTURAL_ATOM_PROVED__INFORMATION_BOUNDARY_OPEN__NO_GLOBAL_CURSORBENCH_MEMBERSHIP_CREDIT",
+  "subject": {
+    "task": "wal-recovery-ordering",
+    "terminal_bench_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "source_task_sha256": "f8e44418b9cb1329b1ac226d88a03c8c9654c496e1a32950ce31d768139a4ad3",
+    "typed_model_sha256": "642157445ee9cf869fcfc9020c4ab18ed216844f78a2f72119b313eab9b706b6",
+    "classification": "VERIFIED_V5_POSITIVE_CODING_CONTEXT__NOT_A_CURSORBENCH_HIDDEN_TASK"
+  },
+  "exact_bindings": {
+    "source_contract": {
+      "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_LOSSLESS_SOURCE_CONTRACT_20261009_V1.json",
+      "git_blob_sha": "8cedc22b7c006d00a1ec863c49083b7a95876abe"
+    },
+    "typed_model": {
+      "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_TYPED_ACCEPTANCE_MODEL_20261009_V1.json",
+      "git_blob_sha": "68e2acec46f88ba3461cd277d4e79c6e8cbe50eb"
+    },
+    "source_coverage_receipt": {
+      "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_SOURCE_COVERAGE_RECEIPT_20261009_V1.json",
+      "git_blob_sha": "118013f6add21526e6672c1753b7e7cc1f26515d"
+    },
+    "source_coverage_verification": {
+      "path": "canonical/verification/CURSORBENCH_WAL_RECOVERY_SOURCE_COVERAGE_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "fbf7b121a61429aa62d2100029ae63c6c07b09a2"
+    },
+    "dependency_provenance_receipt": {
+      "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_DEPENDENCY_PROVENANCE_RECEIPT_20261009_V1.json",
+      "git_blob_sha": "8c48fa17e8d8b27fe75925403e5067968eef61a0"
+    },
+    "dependency_provenance_verification": {
+      "path": "canonical/verification/CURSORBENCH_WAL_RECOVERY_DEPENDENCY_PROVENANCE_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "cee18c733d26155ad32dada9e248b97dd26b6927"
+    },
+    "independent_audit": {
+      "path": "canonical/verification/CURSORBENCH_WAL_RECOVERY_TYPED_ACCEPTANCE_INDEPENDENT_AUDIT_20261009_V1.json",
+      "git_blob_sha": "9b77700a3f9b3712c9d7cb5d80b7beb46a71f9eb"
+    },
+    "committed_replay": {
+      "path": "canonical/verification/CURSORBENCH_WAL_RECOVERY_THREE_ATOM_BRANCH_REPLAY_20261009_V1.json",
+      "git_blob_sha": "2804b791aca93354e3465f7a01f56a6499996e26"
+    }
+  },
+  "exact_source_authority": {
+    "raw_instruction": {
+      "repository": "harbor-framework/terminal-bench",
+      "ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+      "path": "tasks/wal-recovery-ordering/instruction.md",
+      "git_blob_sha": "c4f7ec1d37aef5ed1de9db299bbe167240fb9e5d"
+    },
+    "preterminal_authored_audit_command_git_blob_sha": "65b9a10eed0efcd702c7a347548e7e09ca28ca8c",
+    "terminal_authorization_git_blob_sha": "2c357865381fec58c6290470ff0bb5efa1f7893e",
+    "session_config_git_blob_sha": "dbb08326ade9b4f9dd099ac504c2f9d8d3954910"
+  },
+  "atom_truth_for_this_exact_model": {
+    "SPEC_ACCEPT_SUPPORTED_TRANSFORM_KINDS_ONLY_V1": "PROVED_STRUCTURALLY",
+    "SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1": "PROVED_BY_CONTENT_ADDRESSED_INDEPENDENT_SOURCE_COVERAGE_AUDIT",
+    "SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1": "PROVED_BY_CONTENT_ADDRESSED_INDEPENDENT_SOURCE_COVERAGE_AUDIT",
+    "SPEC_ACCEPT_DEPENDENCY_PROVENANCE_TRUTH_V1": "PROVED_BY_CONTENT_ADDRESSED_INDEPENDENT_PROVENANCE_AUDIT",
+    "SPEC_ACCEPT_NO_HIDDEN_VERIFIER_ACCESS_V1": "OPEN__PRETERMINAL_INFORMATION_BOUNDARY_NOT_INDEPENDENTLY_PROVED"
+  },
+  "model_gate": {
+    "independent_acceptance_pass": false,
+    "failed_requirement_ids": [
+      "R13_NO_TASK_SPECIFIC_CHEATING"
+    ],
+    "terminal_submission_authorized": false,
+    "rule": "THE_OPEN_INFORMATION_BOUNDARY_REMAINS_LOAD_BEARING_AND_CANNOT_BE_INFERRED_FROM_THE_OTHER_FOUR_ATOMS"
+  },
+  "global_cursorbench_transfer": {
+    "transferred": false,
+    "reason": "THE_SUBJECT_IS_A_VERIFIED_TERMINAL_BENCH_V5_POSITIVE_CODING_CONTEXT_NOT_A_CURSORBENCH_HIDDEN_TASK;ATOM_TRUTH_IS_MODEL_AND_CONTEXT_BOUND_UNLESS_A_SEPARATE_TRANSFER_OR_SCOPE_THEOREM_BINDS_IT",
+    "cursorbench_global_atom_truth_delta": 0,
+    "cursorbench_hidden_task_membership_proved": false,
+    "whole_cursorbench_positive_adequacy_proved": false,
+    "whole_cursorbench_dominance_proved": false,
+    "cursorbench_score_lower_bound_proved": false
+  },
+  "reusable_progress": {
+    "exact_wal_context_external_evidence_bundles_closed": [
+      "SOURCE_COVERAGE_BINDING_FOR_TYPED_SEMANTICS_PLUS_FAILURE_MODE_COMPLETENESS",
+      "DEPENDENCY_PROVENANCE_BINDING_FOR_EXACT_MODEL"
+    ],
+    "exact_wal_context_remaining_bundle": [
+      "PREVERIFIER_INFORMATION_BOUNDARY_BINDING_FOR_EXACT_MODEL"
+    ],
+    "reusable_mechanism_template": true,
+    "do_not_repeat_on_same_exact_model": [
+      "LOSSLESS_SOURCE_CONTRACT_COMPILATION",
+      "SOURCE_TO_MODEL_LITERAL_MAPPING_AUDIT",
+      "DEPENDENCY_PROVENANCE_AUDIT"
+    ]
+  },
+  "scheduler": {
+    "current_global_cursorbench_lane": "ROUTE_B_SCOPE_COMPLETE_STRONGER_PROOF",
+    "exact_wal_context_next": "PROVE_PREVERIFIER_INFORMATION_BOUNDARY_WITH_INDEPENDENT_PROVENANCE_OR_KEEP_THIS_CONTEXT_OPEN",
+    "global_next": "BIND_A_CURSORBENCH_TARGET_AUTHORIZED_EXACT_MODEL_OR_A_VALID_SCOPE_TRANSFER_THEOREM__THEN_REUSE_THE_EXISTING_ATOM_MECHANISMS_AND_THIS_AUDIT_TEMPLATE__DO_NOT_TRANSFER_WAL_ATOM_TRUTH_BY_ANALOGY",
+    "route_a_preemption_rule": "REACTIVATE_ONLY_ON_MATERIAL_OWNER_OR_EQUIVALENT_SCORING_SOURCE_DELTA"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_WAL_CONTEXT_IS_A_HIDDEN_CURSORBENCH_TASK",
+    "NO_CLAIM_THE_WAL_ATOM_TRUTHS_TRANSFER_TO_CURSORBENCH_BY_SIMILARITY",
+    "NO_CLAIM_PREVERIFIER_INFORMATION_BOUNDARY_IS_PROVED",
+    "NO_CLAIM_CURSORBENCH_SCORE_LOWER_BOUND_OR_WHOLE_SCOPE_ADEQUACY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CHECKPOINT_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "checkpoint_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
