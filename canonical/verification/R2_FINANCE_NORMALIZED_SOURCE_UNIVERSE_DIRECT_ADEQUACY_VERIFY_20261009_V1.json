@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_NORMALIZED_SOURCE_UNIVERSE_DIRECT_ADEQUACY_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__NORMALIZED_FINANCE_SOURCE_UNIVERSE_DIRECT_ADEQUACY__31_OF_31_BEHAVIORAL_CHECKS__4_OF_4_COMPILE__ZERO_CREDIT",
+  "branch": "finance-normalized-source-universe-v2-20261009",
+  "tested_head": "dbf05f9cbb0e13e63490fad0f11793930c9715fa",
+  "load_bearing_blobs": {
+    "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py": "7530b3717eda4429a7903bf5d317384d727b8de7",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py": "ad6d3c6f7ef33f1bebe5c5d2dc77171762e862aa",
+    "canonical/tests/test_r2_finance_normalized_source_universe_direct_adequacy_v1.py": "438894848db373a6ce11d1c2f218783a9e7650c8",
+    "canonical/tests/test_r2_finance_normalized_source_universe_router_v1.py": "00702ea0aaf72f74afcae6e0317d71ea9b6c91ff"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "working_copy": "/home/sprite/brain"
+  },
+  "verification": {
+    "family_adversarial_checks": "7_OF_7_PASS",
+    "router_integration_checks": "3_OF_3_PASS",
+    "current_direct_router_regression": "15_OF_15_PASS",
+    "existing_v29_finance_unless_compatibility": "6_OF_6_PASS",
+    "compile_checks": "4_OF_4_PASS"
+  },
+  "proves": [
+    "BOTH_FINANCE_LEAVES_HAVE_A_BOUNDED_COMPLETE_NORMALIZED_PACKAGE_DIRECT_ROUTE",
+    "PACKAGE_FIELD_SET_EXACT__UNMODELED_FIELDS_FAIL_CLOSED",
+    "TYPED_EVIDENCE_PARTITIONED_EXACTLY_ONCE_IN_REQUIRED_FINANCE_ROLES",
+    "SUPERVISORY_RULE_AND_EXCEPTION_EXPLICIT",
+    "DOCUMENT_FACT_CROSS_REFERENCE_AND_RECONCILIATION_COVERAGE_EXPLICIT",
+    "PRODUCER_INDEPENDENT_TYPED_DECISION_RECOMPUTATION",
+    "RANKING_EVIDENCE_UNION_EQUALS_NORMALIZED_PACKAGE_EVIDENCE_DOMAIN",
+    "INPUT_IMMUTABLE__OUTPUT_ROLLBACK_ON_FAILURE",
+    "MATCHED_FAILURE_NO_FALLTHROUGH",
+    "V29_UNLESS_ROUTE_COMPATIBLE"
+  ],
+  "boundary": [
+    "NORMALIZED_PACKAGE_IS_TASK_SOURCE_UNIVERSE",
+    "NO_RAW_PROSE_TO_PACKAGE_CORRECTNESS_CLAIM",
+    "NO_RAW_UNSTRUCTURED_SOURCE_COMPLETENESS_CLAIM",
+    "NO_GLOBAL_FINANCE_TAIL_CLOSURE",
+    "NO_OPEN_WORLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
