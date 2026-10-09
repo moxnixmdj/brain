@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_CLAIM_AUTHORIZATION_POLICY_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_CCRT_R2_MISSION_AUTHORIZATION_POLICY__ZERO_CREDIT",
+  "mission_semantic_authority": {
+    "path": "canonical/governance/MISSION_SEMANTIC_AUTHORITY_V1.json",
+    "git_blob_sha": "71822fa590b3733fc00f4f295e3fce284303f820",
+    "mission_semantics_sha256": "4d3d7866ad8ee54606a11791f53519eef15a80700bd5dcc221ec0da676ceb942"
+  },
+  "authorized_issuer": {
+    "authority_id": "PROJECT_BRAIN_REAL_MISSION_OBJECTIVE_V1",
+    "source_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+    "source_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
+  },
+  "receipt_schema": "PROJECT_BRAIN_CCRT_CLAIM_AUTHORIZATION_RECEIPT_V1",
+  "independent_verification_schema": "PROJECT_BRAIN_CCRT_CLAIM_AUTHORIZATION_INDEPENDENT_VERIFICATION_V1",
+  "required_receipt_fields": [
+    "claim_id",
+    "claim_kind",
+    "mission_semantics_sha256",
+    "scope_sha256",
+    "target_predicate_sha256",
+    "semantics_sha256",
+    "epoch",
+    "authority_id",
+    "authorized"
+  ],
+  "required_verification": [
+    "EXACT_AUTHORIZATION_RECEIPT_BLOB_BOUND",
+    "INDEPENDENT_VERIFIED_TRUE",
+    "MISSION_AUTHORIZATION_SEMANTICS_VERIFIED_TRUE",
+    "EXACT_CLAIM_ID_BOUND",
+    "INDEPENDENT_VERIFIER_ID_DISTINCT_FROM_AUTHORITY_ID"
+  ],
+  "hard_rules": [
+    "CONTENT_ADDRESSING_ALONE_IS_NOT_AUTHORIZATION",
+    "AUTHORITY_ID_STRING_ALONE_IS_NOT_AUTHORIZATION",
+    "CLAIM_AUTHORIZATION_MUST_BIND_THE_EXACT_FROZEN_CLAIM",
+    "AUTHORIZATION_AND_INDEPENDENT_VERIFICATION_MUST_BOTH_PASS",
+    "UNAUTHORIZED_STRUCTURALLY_VALID_CLAIM_HAS_ZERO_G_MINUS_AUTHORITY"
+  ],
+  "runtime": "canonical/runtime/coverage_claim_authorization_guard_v1.py",
+  "tests": "canonical/tests/test_coverage_claim_authorization_guard_v1.py",
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
