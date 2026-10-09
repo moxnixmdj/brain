@@ -23,7 +23,8 @@
       "CERTIFICATE_GATED_SELECTED_ROUTES": 1
     },
     "stdlib_tranche_annotated_count": 19,
-    "member_material_theorem_verified_count": 2
+    "member_material_theorem_verified_count": 2,
+    "verified_d_final_replay_route_count": 2
   },
   "rows": [
     {
@@ -40,6 +41,16 @@
         "independent_fresh_replay_count": 2,
         "donor_network_authority_zero": true,
         "fresh_challenge_after_cut": true
+      },
+      "replay_route_certificate": {
+        "status": "VERIFIED_D_FINAL_REPLAY_ROUTE__LIVE_GATE_PENDING",
+        "certificate_path": "canonical/verification/D_FINAL_ARCHIVE_TAR_GZ_REPLAY_CERTIFICATE_20261009_V1.json",
+        "certificate_sha256": "fdfa5782526f4fff476b16b97dda22685ad300ce1f09c6474c1c94520b526397",
+        "execution_epoch_sha256": "b68a90d3c87e3269ac2d0c420941c2afba87858362f9ca48154290bcb84a6a80",
+        "material_closure_root": "f71b81f14eefdae8aa2ca3022359d45aecf627ed42e9ec775d3c6c0ae544c7b0",
+        "policy_sha256": "d9c25144dddd93212eda736ee912a9ebcb85d7deecd28493340dca3d742c45cd",
+        "live_front_door_enforced": false,
+        "live_ownership_authority": false
       }
     },
     {
@@ -94,6 +105,16 @@
         "donor_network_authority_zero": true,
         "fresh_challenge_after_cut": true,
         "tamper_rejection_verified": true
+      },
+      "replay_route_certificate": {
+        "status": "VERIFIED_D_FINAL_REPLAY_ROUTE__LIVE_GATE_PENDING",
+        "certificate_path": "canonical/verification/D_FINAL_DECISION_VERIFY_REPLAY_CERTIFICATE_20261009_V1.json",
+        "certificate_sha256": "1bd9d3ae41a86984cfffc423afe264723d1f664d03530ecb3ba9c7c1dd4f8072",
+        "execution_epoch_sha256": "1b33f35f8135b0af3b097e0cdf2815a96cf636e38a23ad40b2b1e34bb9883692",
+        "material_closure_root": "ff11e4a6e9ea2b340ea617846ee992bd166840903b84972ae46091c9242c3c01",
+        "policy_sha256": "d9c25144dddd93212eda736ee912a9ebcb85d7deecd28493340dca3d742c45cd",
+        "live_front_door_enforced": false,
+        "live_ownership_authority": false
       }
     },
     {
