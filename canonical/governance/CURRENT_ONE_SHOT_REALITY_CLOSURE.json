@@ -92,8 +92,8 @@
     "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
     "current_r2_pointer_git_blob_sha": "07120fcb2b9ceebb065849122f5a685dd85d7ec6",
     "current_terminal_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-    "current_terminal_authority_git_blob_sha": "3f8207f72bf0685883253924c9089dbda0bda1f0",
-    "current_terminal_authority_pointer_revision": 96,
+    "current_terminal_authority_git_blob_sha": "11e6f50f411c1b39aa514d90a810bd2d02e23c2c",
+    "current_terminal_authority_pointer_revision": 97,
     "r2_source_explicit_semantic_autofill_bound": true,
     "r2_unrecognized_prose_remains_semantic_top": true,
     "coding_registered_conditioned_policy_count": 2,
@@ -255,8 +255,8 @@
     "one_shot_v1_runtime_git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
     "one_shot_v2_runtime_git_blob_sha": "e4eb89ab3872a79837afd0e2a4bbc3f777b7a807",
     "current_r2_pointer_git_blob_sha": "07120fcb2b9ceebb065849122f5a685dd85d7ec6",
-    "current_terminal_authority_git_blob_sha": "3f8207f72bf0685883253924c9089dbda0bda1f0",
-    "current_terminal_authority_pointer_revision": 96,
+    "current_terminal_authority_git_blob_sha": "11e6f50f411c1b39aa514d90a810bd2d02e23c2c",
+    "current_terminal_authority_pointer_revision": 97,
     "terminal_credit_delta": 0,
     "infrastructure_failclosed_verified": true,
     "snapshot_authoritative": false
@@ -287,6 +287,16 @@
     "r2_primary_internal_unsolved_count": 1,
     "r3_current_internal_unsolved": false,
     "finance_acceptance_route_split_preserved": true,
+    "terminal_remains_false": true,
+    "terminal_credit_delta": 0
+  },
+  "finance_index_fixed_point_projection_reconciliation_20261009_v2": {
+    "status": "RECONCILED__ONE_SHOT_FRONTDOOR_SEES_TERMINAL_REV97_FINANCE_INDEX_WAKE_GATED_FIXED_POINT__TERMINAL_FALSE__ZERO_CREDIT",
+    "terminal_authority_git_blob_sha": "11e6f50f411c1b39aa514d90a810bd2d02e23c2c",
+    "terminal_authority_pointer_revision": 97,
+    "finance_index_current_bound_component_lower_bound_receipt_count": 0,
+    "finance_index_repeat_existing_evidence_saturation_authorized": false,
+    "independent_open_acceptance_obligations_preserved": 13,
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
   }
