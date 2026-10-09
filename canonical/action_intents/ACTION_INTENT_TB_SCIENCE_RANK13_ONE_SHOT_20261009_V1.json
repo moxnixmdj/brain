@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TB_SCIENCE_RANK13_ONE_SHOT_20261009_V1",
+  "date": "2026-10-09",
+  "action_id": "TB_SCIENCE_RANK13_ONE_SLOT_AUTHORITY_ACTIVATION_V1",
+  "action_kind": "ACTIVATE_EXACT_ONE_SLOT_AUTHORITY_WITHOUT_STARTING_TASK",
+  "highest_leverage_now": true,
+  "target_obligation": "TB_SCIENCE_GE_58_7",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/13",
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": "1"
+  },
+  "safety": {
+    "benchmark_task_exposure_authorized": false,
+    "benchmark_trials_consumed": 0,
+    "incremental_spend_usd_max": 0,
+    "promotion_authority": false,
+    "terminal_credit_delta": 0
+  }
+}
