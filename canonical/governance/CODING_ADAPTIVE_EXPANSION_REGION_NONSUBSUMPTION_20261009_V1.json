@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_ADAPTIVE_EXPANSION_REGION_NONSUBSUMPTION_V1",
+  "date": "2026-10-09",
+  "status": "SIXTH_CONSTRUCTIVE_REGION_NONEMPTY_OUTSIDE_T_F_R_S_V__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "family": "ADVANCED_AGENTIC_CODING",
+  "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+  "new_region": {
+    "symbol": "A",
+    "policy_id": "BRAIN_AUTHENTICATED_ADAPTIVE_CAPABILITY_EXPANSION_SOLVER_V1",
+    "certificate_git_blob_sha": "ec0d127b89350575d999b00eb26553052a0ce626",
+    "atom_count": 8
+  },
+  "prior_regions": {
+    "T": "bddb8f51f6dc91f98759c5c3b92c1257ca8b9577",
+    "F": "458f7362ac3930ba62260585b323fb5c17ce2ff8",
+    "R": "7924c5a4d5e38e1d417d56c8be08575587ed66fd",
+    "S": "d13d46a424eef188a96585710dc4cb4fc9509af8",
+    "V": "74aaced12d62b61d3266a4705a022350a9c7103f"
+  },
+  "witness": {
+    "class": "AUTHENTICATED_ROUTE_DISCOVERY_FROM_EMPTY_INITIAL_CAPABILITY_GRAPH",
+    "initial_capability_count": 0,
+    "target_effects": ["GOAL"],
+    "finite_authenticated_expansion_adds_target_route": true,
+    "proposal_provider_has_authority": false,
+    "accepted_proposal_found_within_bound": true,
+    "effect_semantics_authenticated": true,
+    "effect_outcome_verified": true,
+    "candidate_domain_predeclared_finite": false,
+    "interpretation_set_predeclared_complete": false,
+    "typed_acceptance_model_complete_preexecution": false,
+    "static_route_bound_preexecution": false,
+    "global_visible_complete_acceptance_contract_present": false,
+    "region_truth": {"A": true, "T": false, "F": false, "R": false, "S": false, "V": false}
+  },
+  "executable_support": {
+    "runtime_path": "canonical/runtime/universal_verified_adaptive_solver_v12.py",
+    "runtime_git_blob_sha": "e85b4127a7cf53124114db89c651a22cdc51ee53",
+    "test_path": "canonical/tests/test_universal_verified_adaptive_solver_v12.py",
+    "test_git_blob_sha": "1f6ed89cc8409f59cd3148c9e3bd824bc282a5de",
+    "exact_test": "test_zero_graph_can_expand_and_solve"
+  },
+  "theorem": {
+    "statement": "A_CONTEXT_EXISTS_IN_A_AND_OUTSIDE_T_F_R_S_V__SO_THE_ABSTRACT_CONSTRUCTIVE_REGION_UNION_STRICTLY_EXPANDS_FROM_FIVE_TO_SIX.",
+    "abstract_region_union_strictly_expands": true,
+    "private_cursorbench_membership_implied": false,
+    "whole_cursorbench_cover_implied": false
+  },
+  "hard_nonclaims": [
+    "NO_PRIVATE_CURSORBENCH_TASK_MEMBERSHIP",
+    "NO_CLAIM_ANY_HIDDEN_CURSORBENCH_TASK_LIES_IN_A",
+    "NO_CLAIM_THE_SIX_REGION_UNION_COVERS_CURSORBENCH",
+    "NO_SCORE_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {"incremental_spend_usd": 0, "acceptance_credit_delta": 0, "terminal_credit_delta": 0},
+  "promotion_authority": false,
+  "terminal_authority": false
+}
