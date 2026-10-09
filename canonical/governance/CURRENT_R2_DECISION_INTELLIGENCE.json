@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
-  "date": "2026-10-08",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V26_EIGHTEEN_DIRECT_ROUTES__FIFTEEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_OPEN",
+  "date": "2026-10-09",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__STRICT_EXTERNALITY_RECONCILED__V27__EIGHTEEN_DIRECT_ROUTES__FIFTEEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_INTERNAL_UNSOLVED",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -18,8 +18,8 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V26.json",
-    "git_blob_sha": "efd8f2eb19918d3f1523b4cd6c6d4ed327d5c147"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V27.json",
+    "git_blob_sha": "7e50346423136376c8ba5714dcb10cb4568f36be"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V14.json",
@@ -126,7 +126,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__EIGHTEEN_DIRECT_ROUTES__FIFTEEN_BOUNDED_FAMILIES__VERIFIED_CAPABILITY_ESCAPE_LIVE__KNOWLEDGE_CONSISTENCY_AND_EXACT_ROR_AUTHORITY_IDENTITY_LIVE",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__TWO_CURRENT_CELLS_INTERNAL_UNSOLVED_PENDING_ACQUISITION_OR_EXPERIMENT__VERIFIED_CAPABILITY_ESCAPE_LIVE",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -193,7 +193,7 @@
     "merged_commit": "2c5d65ccab53f5e8cafbc7356d62aaf60fc1a642",
     "two_distinct_sprite_replays": "4_OF_4_EACH",
     "historical_root2_scheduler_authority_revoked": true,
-    "gdpval_owner_layer_state": "EXTERNAL_REQUIRED_SLEEP"
+    "gdpval_owner_layer_state": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT"
   },
   "policy_cover_existing_observation_reuse": {
     "activation_path": "canonical/governance/R2_EXISTING_POLICY_COVER_OBSERVATION_REUSE_ACTIVATION_20261008_V1.json",
@@ -232,7 +232,7 @@
     "positive_adequacy_coverage_credit_delta": 0
   },
   "control_mechanism_status": "CLOSED__TOTAL_FAIL_CLOSED_ADEQUACY_OR_ABSTAIN_CONTROL",
-  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY",
+  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__NO_UNPROVED_EXTERNAL_SLEEP",
   "control_law_totalizer": {
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
@@ -546,5 +546,12 @@
     "worldbank_ror_id": "https://ror.org/02md09461",
     "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
     "organizational_independence_claimed": false
+  },
+  "strict_externality_reconciliation": {
+    "verification_path": "canonical/verification/R2_STRICT_EXTERNALITY_RECLASSIFICATION_20261009_V1.json",
+    "verification_git_blob_sha": "8919cd98397586027bbf711cfced58c8c3d62e45",
+    "unproved_external_sleep_reclassified_count": 2,
+    "information_theoretic_externality_proved_count": 0,
+    "rule": "ONLY_PROOF_CARRYING_EXTERNALITY_CERTIFICATE_MAY_GRANT_TERMINAL_EXTERNAL_CLASSIFICATION"
   }
 }
