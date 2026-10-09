@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CANDIDATE_LOCAL_REJECTION_V9_PUBLIC_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__POST_RANK15_CANDIDATE_LOCAL_FAIL_CLOSED_REPAIR_MERGED__5_OF_5_TARGETED_FALSIFIERS_PASS__ZERO_BENCHMARK_EXPOSURE",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "causal_source": {
+    "path": "canonical/verification/TB_SCIENCE_RANK15_V6_IRREVERSIBLE_RESULT_TRUTH_20261009_V1.json",
+    "git_blob_sha": "a585c98a3acebd51198bc8c2ac4638ef13e98adc",
+    "failure": "SCIENCE_COVERAGE_OUTSIDE_CONTRACT",
+    "classification": "INTERNAL_CONTROLLER_PROTOCOL__UNTRUSTED_CANDIDATE_METADATA_CAUSED_FATAL_CONTROLLER_ABORT_INSTEAD_OF_CANDIDATE_LOCAL_FAIL_CLOSED_REJECTION"
+  },
+  "predecessor_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V29.json",
+    "git_blob_sha": "0c97c84d98ef3ce97025ea6672971f188d5fc566",
+    "consumed_slots": 15,
+    "rank15_result": "FINAL_ZERO",
+    "rank16_task_started": false
+  },
+  "public_repair": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base": "terminal-execution-v1",
+    "pull_request": 2521,
+    "repaired_head_sha": "0d8cbf72bd332aee815541faffb65aea1f286720",
+    "merge_commit": "2e81af0f15a6ebe9886267658697220a7fb439ee",
+    "files": {
+      "agent_v9": {
+        "path": "capsules/tb_science_rank15_20261009_v1/canonical/runtime/harbor_science_agent_v9.py",
+        "git_blob_sha": "c3b9bbc93e070b9974598636ebbb2fd3156581cb"
+      },
+      "falsifier_test": {
+        "path": "capsules/tb_science_rank15_20261009_v1/canonical/tests/test_harbor_science_agent_v9_candidate_local_rejection.py",
+        "git_blob_sha": "ff8ca17898c2b202583fe2ddb65ba76c3d462d53"
+      },
+      "verification_workflow": {
+        "path": ".github/workflows/verify-tb-science-candidate-local-rejection-v9.yml",
+        "git_blob_sha": "3fda11c9c74b5dbaa17e67d07dfd7137c7c92907"
+      }
+    }
+  },
+  "verification_runs": [
+    {
+      "id": 37944602749,
+      "name": "Verify TB-Science candidate-local rejection V9",
+      "conclusion": "success",
+      "exact_head_sha": "0d8cbf72bd332aee815541faffb65aea1f286720",
+      "checks": [
+        "PY_COMPILE_V9_PASS",
+        "EXACT_RANK15_FAILURE_FALSIFIERS_PASS"
+      ]
+    },
+    {
+      "id": 37944603246,
+      "name": "Verify TB-Science rank15 zero-exposure carrier",
+      "conclusion": "success",
+      "exact_head_sha": "0d8cbf72bd332aee815541faffb65aea1f286720",
+      "checks": [
+        "ZERO_EXPOSURE_CARRIER_PROOF_PASS"
+      ]
+    }
+  ],
+  "verified": [
+    "FROZEN_BRAIN_REQUIREMENT_SET_REMAINS_AUTHORITATIVE_AFTER_FIRST_FREEZE",
+    "CANDIDATE_WITH_ANY_UNKNOWN_COVER_ID_IS_REJECTED_LOCALLY_AS_NON_EXECUTABLE_AND_NON_PROMOTABLE",
+    "UNKNOWN_COVER_IDS_ARE_PRESERVED_IN_REJECTION_EVIDENCE_AND_ARE_NOT_INTERSECTED_REWRITTEN_OR_COERCED",
+    "VALID_SIBLING_CANDIDATES_SURVIVE_AN_INVALID_CANDIDATE",
+    "CANDIDATES_DEPENDING_ON_REJECTED_OR_UNKNOWN_ACTIONS_ARE_REJECTED_TRANSITIVELY",
+    "CANDIDATE_LOCAL_COMMAND_OR_FIELD_FAILURE_DOES_NOT_ABORT_VALID_SIBLINGS",
+    "POST_FREEZE_SUBSTRATE_REQUIREMENT_DRIFT_DOES_NOT_MUTATE_THE_FROZEN_REQUIREMENT_SET",
+    "A_LATER_CYCLE_REMAINS_USABLE_AFTER_A_MALFORMED_OPTIONAL_CANDIDATE",
+    "RUNTIME_APPENDS_CANDIDATE_REJECTIONS_TO_TRACE_AND_OBSERVATIONS_AND_DURABLE_JOURNAL_WHEN_PRESENT",
+    "V8_HISTORICAL_RANK15_RUNTIME_REMAINS_UNMODIFIED",
+    "NO_RANK15_RERUN_OR_REPLACEMENT_AUTHORITY_CREATED",
+    "ZERO_BENCHMARK_TASK_EXPOSURE_OCCURRED_DURING_THIS_REPAIR"
+  ],
+  "rank16_effect": {
+    "prerequisite_repair": "SATISFIED",
+    "task_read_authority": false,
+    "task_start_authority": false,
+    "execution_authority": false,
+    "next_required_step": "BUILD_FRESH_RANK16_ZERO_EXPOSURE_AUTHORITY_BINDING_AGENT_V9_AND_ALL_EXISTING_EXECUTION_INVARIANTS_BEFORE_ANY_TASK_READ"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_RANK15_WOULD_HAVE_SUCCEEDED_WITH_V9",
+    "NO_CLAIM_RANK16_WILL_SUCCEED",
+    "NO_TB_SCIENCE_SUCCESS_ACCEPTANCE_FAMILY_OR_TERMINAL_CREDIT",
+    "NO_RANK16_TASK_READ_OR_TASK_START",
+    "NO_RANK15_RETRY_REPLACEMENT_OR_REPLAY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
