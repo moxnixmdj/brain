@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V59_REGCAP_DEFAULT_DOMAIN_RECONCILIATION_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_BRANCH_BYTES__15_OF_15_STRUCTURAL_ASSERTIONS__DIFF_AUDIT_7_R2_PLUS_7_TERMINAL_INTENDED_LEAVES_ONLY__TERMINAL_FALSE__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "successor/r2-v59-regcap-default-domain-reconcile-20261009-v1",
+    "base_main_sha": "99a6b1134b8ad8f2d75429c7953f98da932c6af3",
+    "exact_blobs": {
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "10724bb194ac985fe697e743e72d238fe6ddd872",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "0f5ab6fdf8702355ef356573dd4e611292390adb"
+    }
+  },
+  "verification": {
+    "structural_assertions": {
+      "result": "PASS",
+      "passed": 15,
+      "failed": 0
+    },
+    "leaf_diff_audit": {
+      "r2_changed_leaf_count": 7,
+      "terminal_changed_leaf_count": 7,
+      "unexpected_leaf_count": 0
+    },
+    "r2_version": "V59",
+    "terminal_pointer_revision": 104,
+    "direct_route_count": 39,
+    "bounded_family_count": 36,
+    "scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V55",
+    "primary_internal_unsolved_count": 1,
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "terminal_remains_false": true
+  },
+  "proved": [
+    "REGCAP_CONTEXT_ATOM_TRUTH_DISPATCH_IS_BOUND_IN_CURRENT_R2",
+    "DEFAULT_DOMAIN_MAPPING_RELATION_AUTO_HARVEST_OF_VERIFIED_REGCAP_CONTEXT_FACTS_IS_BOUND_IN_CURRENT_R2",
+    "CALLER_SIDE_REGCAP_CONTEXT_TRUTH_KIND_ORCHESTRATION_IS_NOT_REQUIRED_FOR_DEFAULT_DOMAIN_MAPPING_REFINEMENT",
+    "UNPROVED_DOMAIN_RELATION_TRUTH_REMAINS_UNKNOWN",
+    "SEMANTIC_IDENTITY_AND_CANDIDATE_UNIVERSE_COMPLETENESS_WERE_NOT_ADDED",
+    "DIRECT_ROUTE_COUNT_REMAINS_39",
+    "BOUNDED_FAMILY_COUNT_REMAINS_36",
+    "SCHEDULER_CUT_REMAINS_V55",
+    "FINANCE_SEMANTIC_ADEQUACY_TAIL_REMAINS_THE_SINGLE_PRIMARY_INTERNAL_RESIDUAL",
+    "TERMINAL_POINTER_ADVANCES_TO_104_AND_REMAINS_FALSE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_FINANCE_SEMANTIC_ADEQUACY_TAIL_CLOSED",
+    "NO_CLAIM_GENERAL_FINANCE_WSD_CLOSED",
+    "NO_CLAIM_OPEN_WORLD_CANDIDATE_UNIVERSE_COMPLETE",
+    "NO_CLAIM_NEW_DIRECT_ADEQUACY_ROUTE",
+    "NO_CLAIM_TERMINAL_OBJECTIVE_CLOSED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
