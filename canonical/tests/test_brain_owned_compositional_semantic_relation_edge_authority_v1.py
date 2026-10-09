@@ -6,8 +6,8 @@ import unittest
 from canonical.runtime.bounded_participial_disposition_v1 import SEMANTIC_ATOM
 from canonical.runtime.source_aligned_semantic_edge_authority_v1 import (
     EVIDENCE_SCHEMA,
-    RECEIPT_SCHEMA,
 )
+from canonical.runtime.semantic_relation_entailment_dag_v1 import RECEIPT_SCHEMA
 from canonical.runtime.brain_owned_concept_semantics_authority_v1 import (
     EVIDENCE_SCHEMA as CONCEPT_EVIDENCE_SCHEMA,
 )
