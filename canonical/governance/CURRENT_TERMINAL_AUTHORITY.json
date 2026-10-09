@@ -1137,6 +1137,11 @@
       "path": "canonical/governance/CURSORBENCH_PREVERIFIER_INFORMATION_BOUNDARY_MINCUT_20261009_V1.json",
       "git_blob_sha": "a5c283e8e09f82ff10c9daaeea0951a304bd6e6d",
       "note": "NO_HIDDEN_VERIFIER_BUNDLE_REDUCED_TO_ONE_CURRENT_4_0_PROTOCOL_CONTINUITY_FACT_PLUS_PER_MODEL_BRAIN_INTERNAL_AUDIT__ATOM_TRUTH_STILL_OPEN__ZERO_CREDIT"
+    },
+    "cursorbench_source_coverage_mincut_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_SOURCE_COVERAGE_MINCUT_20261009_V1.json",
+      "git_blob_sha": "ebec2bb7267947360d386e7fda7eabd45eb8e2d6",
+      "note": "SOURCE_COVERAGE_BUNDLE_REDUCED_TO_TWO_GENUINE_SEMANTIC_PROOF_OBJECTS_PLUS_PER_CONTEXT_SOURCE_BOUNDARY_AUDIT__ATOM_TRUTH_STILL_OPEN__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1835,7 +1840,14 @@
     "cursorbench_preverifier_information_boundary_external_protocol_unknown": "CURRENT_CURSORBENCH_4_0_USES_THE_PUBLISHED_PRODUCTION_HARNESS_PRETERMINAL_INFORMATION_BOUNDARY",
     "cursorbench_preverifier_information_boundary_per_model_internal_audit_required": true,
     "cursorbench_preverifier_information_boundary_per_model_internal_audit_external_benchmark_fact": false,
-    "cursorbench_preverifier_information_boundary_next_owner_fact": "EXPLICIT_CURRENT_CURSORBENCH_4_0_PRODUCTION_HARNESS_OR_PRETERMINAL_INPUT_BOUNDARY_CONTINUITY"
+    "cursorbench_preverifier_information_boundary_next_owner_fact": "EXPLICIT_CURRENT_CURSORBENCH_4_0_PRODUCTION_HARNESS_OR_PRETERMINAL_INPUT_BOUNDARY_CONTINUITY",
+    "cursorbench_source_coverage_semantic_proof_object_count": 2,
+    "cursorbench_source_coverage_semantic_proof_objects": [
+      "SC_SEMANTIC_MAPPING_AND_TERMINAL_MEANING",
+      "SC_FAILURE_UNIVERSE_COMPLETENESS"
+    ],
+    "cursorbench_source_coverage_per_context_source_boundary_audit_count": 1,
+    "cursorbench_source_coverage_structural_coverage_mechanism_available": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2535,7 +2547,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 87,
+  "pointer_revision": 88,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3345,6 +3357,18 @@
     "atom_truth_delta": 0,
     "external_protocol_unknown_count": 1,
     "route_b_real_bundle_count_unchanged": 3,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_source_coverage_mincut_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_SOURCE_COVERAGE_MINCUT_20261009_V1.json",
+      "git_blob_sha": "ebec2bb7267947360d386e7fda7eabd45eb8e2d6"
+    },
+    "result": "SOURCE_COVERAGE_REDUCED_TO_TWO_SEMANTIC_PROOF_OBJECTS_PLUS_INTERNAL_OR_CONTEXT_BOUND_STRUCTURAL_AUDIT",
+    "atom_truth_delta": 0,
+    "route_b_real_bundle_count_unchanged": 3,
+    "semantic_proof_object_count": 2,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
