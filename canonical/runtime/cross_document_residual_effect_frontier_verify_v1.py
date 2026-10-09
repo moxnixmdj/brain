@@ -219,7 +219,7 @@ def _expected(problem:Mapping[str,Any])->dict[str,Any]:
 
     if consistency:
         return {
-            "status":"FAIL_CLOSED__MODELED_EFFECT_OUTSIDE_PROVED_SOURCE_SCOPE",
+            "status":"FAIL_CLOSED__MODELED_EFFECTS_INCONSISTENT_WITH_SOURCE_PROOF",
             "pass":False,
             "case_id":case_id,
             "query_target_id":target,
@@ -280,7 +280,7 @@ def verify(problem:Mapping[str,Any],result:Mapping[str,Any])->dict[str,Any]:
             if result.get(key)!=expected.get(key):
                 errors.append("MISMATCH:"+key)
 
-        if expected["status"]=="FAIL_CLOSED__MODELED_EFFECT_OUTSIDE_PROVED_SOURCE_SCOPE":
+        if expected["status"]=="FAIL_CLOSED__MODELED_EFFECTS_INCONSISTENT_WITH_SOURCE_PROOF":
             if result.get("scope_consistency_errors")!=expected.get("scope_consistency_errors"):
                 errors.append("MISMATCH:scope_consistency_errors")
         elif expected["status"]=="OPEN__RESIDUAL_TOP_EFFECT_MAY_CHANGE_QUERY":
