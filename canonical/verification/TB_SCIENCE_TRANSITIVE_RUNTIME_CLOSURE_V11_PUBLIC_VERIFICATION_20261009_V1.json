@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_V11_PUBLIC_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__V11_15_FILE_TRANSITIVE_CLOSURE_EXACT__PLANNER_MANIFEST_SUMMARY_REPAIR__ZERO_EXPOSURE",
+  "manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261009_V11.json",
+    "git_blob_sha": "1172b57ac436d64027d06fb4897878ae274febb1"
+  },
+  "exact_agent_blob": "d397324f411d002bdbdca348aaad708b5b40c9c2",
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-tbscience-r14-planner-manifest-summary-v1",
+    "head_sha": "1a32e99ac747da46a1da4b6e94b5bc2f019d529a",
+    "workflow_run_id": 37884076260,
+    "workflow_job_id": 113670044897,
+    "artifact_id": 11595895805,
+    "artifact_zip_sha256": "68655709b0d110895138ae50e6b33463a90f5569fa0ced5f59f506a5d90ae5f0",
+    "conclusion": "success"
+  },
+  "verification": {
+    "closure_file_count": 15,
+    "missing_paths": 0,
+    "mismatched_paths": 0,
+    "unresolved_dynamic_imports": 0
+  },
+  "benchmark_task_exposure": 0,
+  "benchmark_trials_executed": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_EXACT_RANK14_TOKEN_FIT_PROOF",
+    "NO_RANK14_TASK_START",
+    "NO_RANK14_RESULT",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}
