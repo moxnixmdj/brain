@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V12_INSTANCE",
+  "action_id": "CLAIM_SCOPED_COVERAGE_ROOT_REGISTRY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "COMPLETED_PROOF_ONLY__VERIFIED_CLAIM_SCOPED_ROOT_AUTHORITY__ZERO_TERMINAL_CREDIT",
+  "canonical_base_commit": "f9638dfbe96fb379b4e7cd78ac4eef481cab4da3",
+  "action_kind": "CLAIM_SCOPED_ROOT_CERTIFICATE_REGISTRY_SCHEMA_REPAIR",
+  "causal_blocker": "GLOBAL_ROOT_CERTIFICATE_SLOTS_LACK_THE_EXACT_CLAIM_SCOPE_SEMANTICS_CARRIER_EPOCH_BINDING_REQUIRED_BY_R4_AND_CANNOT_SOUNDLY_AUTHORIZE_CLAIM_SCOPED_ROOT_TRANSITIVITY",
+  "expected_parent_frontier_change": "SUPERSEDE_GLOBAL_SLOT_AUTHORITY_WITH_CLAIM_INDEXED_BUNDLES__NO_GLOBAL_MISSION_COMPLETION_CLAIM",
+  "theory_invariants": {
+    "four_roots_unchanged": true,
+    "theorem_parameterized_by_frozen_claim": true,
+    "exact_binding_coherence_required": true,
+    "canonical_certificate_authority_required": true,
+    "global_open_ended_mission_completion_derivable": false,
+    "zero_incremental_spend": true,
+    "no_fresh_target_reality": true,
+    "no_terminal_acceptance_or_ownership_credit": true
+  },
+  "behavioral_contract": {
+    "behavior_id": "CLAIM_SCOPED_ROOT_CERTIFICATE_AUTHORITY_V2",
+    "required_output_or_action": "R4_AUTHORITY_LOOKUP_MUST_SELECT_ONE_EXACT_REGISTERED_CLAIM_BUNDLE_MATCHING_EXPECTED_BINDING_AND_VALIDATE_ALL_THREE_CANONICAL_ROOT_SLOTS_WITHIN_THAT_BUNDLE",
+    "success_condition": "NO_GLOBAL_OR_CROSS_CLAIM_ROOT_SLOT_CAN_AUTHORIZE_TERMINAL_CLOSURE",
+    "failure_condition": "A_ROOT_PROOF_FROM_CLAIM_A_CAN_SATISFY_THE_R4_CHAIN_FOR_CLAIM_B_OR_A_GLOBAL_SLOT_WITHOUT_CLAIM_BINDING_CAN_CLOSE_R4",
+    "verification_route": "DETERMINISTIC_CROSS_CLAIM_MUTATION_TESTS",
+    "scope": "PROOF_ARCHITECTURE_ONLY"
+  },
+  "prior_work_reused": [
+    "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json",
+    "canonical/runtime/mission_carrier_factorization_v1.py",
+    "canonical/runtime/root_theorem_falsifier_v1.py",
+    "canonical/runtime/coverage_root_certificate_registry_guard_v1.py"
+  ],
+  "rejected_alternatives": [
+    "ADD_R5_CLAIM_SCOPE_ROOT",
+    "KEEP_GLOBAL_ROOT_SLOTS_AS_TERMINAL_AUTHORITY",
+    "ALLOW_CROSS_CLAIM_CERTIFICATE_TRANSPORT_WITHOUT_PRESERVATION_PROOF"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "outputs": {
+    "registry_v2": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_CERTIFICATE_REGISTRY_V2.json",
+    "guard_v2": "canonical/runtime/coverage_root_claim_registry_guard_v2.py",
+    "current_authority": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_CLAIM_CERTIFICATES.json",
+    "root_falsifier": "canonical/runtime/root_theorem_falsifier_v1.py",
+    "tests": [
+      "canonical/tests/test_coverage_root_claim_registry_guard_v2.py",
+      "canonical/tests/test_root_theorem_falsifier_v1.py"
+    ],
+    "law": "canonical/laws/COVERAGE_COMPLETENESS_ROOT_THEOREM_LAW_V1.md",
+    "governance": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+    "verification": "canonical/verification/CLAIM_SCOPED_ROOT_REGISTRY_VERIFICATION_20261009_V1.json",
+    "regression": "canonical/regressions/2026-10-09_CROSS_CLAIM_ROOT_AUTHORITY.json",
+    "reasoning": "canonical/reasoning/2026-10-09_CLAIM_SCOPED_ROOT_REGISTRY_REPAIR_V1.json",
+    "pull_request": 3829
+  },
+  "verification": {
+    "exact_branch_remote_tests": "35_PASSED__0_FAILED",
+    "registered_claims": 0,
+    "closed_claims": 0,
+    "global_mission_completion_derivable": false,
+    "terminal_credit_delta": 0
+  }
+}

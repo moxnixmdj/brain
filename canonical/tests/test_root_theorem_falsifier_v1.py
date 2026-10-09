@@ -106,26 +106,25 @@ def test_synthetic_four_root_receipts_cannot_bypass_open_canonical_registry():
     assert out["terminal_credit"] == 0
 
 
-def test_current_canonical_registry_is_authoritatively_open():
-    out = evaluate_canonical_registry_authority()
-    assert out["status"] == "R4_CANONICAL_ROOT_CERTIFICATES_OPEN"
+def test_exact_unregistered_claim_has_no_canonical_authority():
+    b = exact_binding()
+    out = evaluate_canonical_registry_authority({"expected_binding": b})
+    assert out["status"] == "R4_CLAIM_NOT_REGISTERED"
     assert out["authorized"] is False
-    assert out["registry"]["proved_root_ids"] == []
-    assert len(out["registry"]["open_root_ids"]) == 3
+    assert out["registry"]["registered_claim_count"] == 0
+    assert out["registry"]["closed_claim_count"] == 0
 
 
-def test_four_roots_without_exact_binding_are_not_closed():
+def test_four_roots_without_exact_claim_binding_refine():
     out = evaluate_root_closure({"R1": True, "R2": True, "R3": True, "R4": True})
-    assert out["status"] == "ROOT_NOT_CLOSED"
-    assert out["roots"]["R4"] is False
-    assert out["failed_roots"] == ["R4"]
+    assert out["status"] == "REFINE"
+    assert out["roots"]["R4"] is None
 
 
-def test_root_unknown_plus_open_registry_is_not_closed():
+def test_root_unknown_without_claim_binding_refines():
     out = evaluate_root_closure({"R1": True, "R2": True, "R3": "UNKNOWN", "R4": True})
-    assert out["status"] == "ROOT_NOT_CLOSED"
-    assert "R4" in out["failed_roots"]
-    assert "R3" in out["unknown_roots"]
+    assert out["status"] == "REFINE"
+    assert set(out["unknown_roots"]) == {"R3", "R4"}
     assert out["terminal_credit"] == 0
 
 

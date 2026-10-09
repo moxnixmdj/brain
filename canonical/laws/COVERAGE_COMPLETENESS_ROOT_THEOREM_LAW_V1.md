@@ -216,14 +216,72 @@ Therefore a naked boolean such as `proof_chain_trustworthy = true` is never suff
 This is load-bearing. If R1 proves `r -> p1`, R3 proves `p2 -> g2`, and R2 proves `g3 -> a` under unrelated bindings, all three local implications can be true while `r -> a` is false. Set-inclusion transitivity is authorized only after exact binding coherence is established.
 
 
+
+## Claim parameterization
+
+The four-root theorem is claim-scoped.
+
+For every frozen certification claim (C), define:
+
+- (B_{real}(C))
+- (B^+(C))
+- (G^-(C))
+- (G_{real}(C)).
+
+Then:
+
+```
+R1(C): B_real(C) subseteq B_plus(C)
+R2(C): G_minus(C) subseteq G_real(C)
+R3(C): B_plus(C) subseteq G_minus(C)
+R4(C): trustworthy proof and realization of R1(C), R2(C), R3(C)
+```
+
+and only for that same frozen claim:
+
+```
+R1(C) and R3(C) and R2(C)
+=> B_real(C) subseteq G_real(C)
+```
+
+The claim binding is the exact tuple:
+
+```
+claim_id
+scope_sha256
+semantics_sha256
+carrier_schema_id
+mission_id
+epoch_id
+canonical_generation
+```
+
+A certificate for claim (C_1) has zero authority for (C_2) unless a separate preservation proof justifies re-issuance in the target claim bundle.
+
+The real Project Brain mission is explicitly open-ended. Therefore:
+
+```
+finite claim closure != global mission completion
+```
+
+and no finite set of closed claim bundles proves that the overall mission is terminally complete.
+
+Canonical claim authority is:
+
+- `canonical/governance/COVERAGE_COMPLETENESS_CLAIM_CERTIFICATE_REGISTRY_V2.json`
+- `canonical/runtime/coverage_root_claim_registry_guard_v2.py`
+- `canonical/governance/CURRENT_COVERAGE_COMPLETENESS_CLAIM_CERTIFICATES.json`.
+
+The V1 global-slot registry is historical schema only after V2 activation and has no R4 authority.
+
 ## R4 canonical certificate authority
 
 Exact binding coherence is necessary but not sufficient. R1, R2, and R3 acquire proof authority only through the canonical coverage-completeness root certificate registry.
 
-The authoritative registry is:
+The authoritative registry is claim-scoped:
 
-- `canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json`
-- validated by `canonical/runtime/coverage_root_certificate_registry_guard_v1.py`.
+- `canonical/governance/COVERAGE_COMPLETENESS_CLAIM_CERTIFICATE_REGISTRY_V2.json`
+- validated by `canonical/runtime/coverage_root_claim_registry_guard_v2.py`.
 
 Four-root closure therefore additionally requires:
 

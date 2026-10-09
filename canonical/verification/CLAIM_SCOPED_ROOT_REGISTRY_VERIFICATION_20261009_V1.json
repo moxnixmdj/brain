@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_CLAIM_SCOPED_ROOT_REGISTRY_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "status": "PASS_PROOF_ARCHITECTURE_ONLY__ZERO_TERMINAL_CREDIT",
+  "subject": "claim-scoped coverage completeness root certificate authority",
+  "exact_branch_replay": {
+    "environment": "existing authorized remote verification Sprite temp directory",
+    "new_sprite_created": false,
+    "incremental_spend_usd": 0,
+    "suites": [
+      "canonical/tests/test_root_theorem_falsifier_v1.py",
+      "canonical/tests/test_root_theorem_r4_binding_coherence_v1.py",
+      "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
+      "canonical/tests/test_coverage_root_claim_registry_guard_v2.py"
+    ],
+    "passed": 35,
+    "failed": 0
+  },
+  "verified_properties": [
+    "FOUR_ROOT_AUTHORITY_IS_EXACT_FROZEN_CLAIM_SCOPED",
+    "EXACT_CLAIM_LOOKUP_REJECTS_CROSS_CLAIM_REUSE",
+    "DUPLICATE_CLAIM_ID_WITH_DIFFERENT_SCOPE_FAILS_CLOSED",
+    "CLOSED_CLAIM_REQUIRES_THREE_CANONICAL_ROOT_CERTIFICATES",
+    "CERTIFICATE_AND_INDEPENDENT_VERIFICATION_BYTES_MUST_MATCH_CLAIMED_GIT_BLOB_IDS",
+    "GLOBAL_MISSION_COMPLETION_AUTHORITY_IS_FORBIDDEN",
+    "V1_GLOBAL_SLOT_REGISTRY_HAS_ZERO_R4_AUTHORITY_AFTER_V2",
+    "CURRENT_V2_REGISTRY_HAS_ZERO_REGISTERED_AND_ZERO_CLOSED_CLAIMS"
+  ],
+  "current_state": {
+    "registered_claims": 0,
+    "closed_claims": 0,
+    "global_mission_completion_derivable": false
+  },
+  "nonclaims": [
+    "DOES_NOT_PROVE_ANY_REAL_CLAIM_R1_R2_R3_BUNDLE",
+    "DOES_NOT_CLOSE_R4_FOR_ANY_REAL_CLAIM",
+    "DOES_NOT_COMPLETE_THE_OPEN_ENDED_PROJECT_MISSION"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
