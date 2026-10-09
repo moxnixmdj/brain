@@ -1,0 +1,131 @@
+"""Zero-ambient D-final child bootstrap V1.
+
+Runs only inside zero_ambient_namespace_launcher_v1. It reconstructs the exact
+certified material closure in private /work, activates the supplied canonical
+D epoch, dispatches one already-resolved fabric request, and emits exactly one
+JSON receipt through the inherited broker FD.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import pathlib
+import shutil
+import sys
+from typing import Any, Mapping
+
+SCHEMA="PROJECT_BRAIN_D_FINALITY_ZERO_AMBIENT_CHILD_V1"
+
+
+class ChildError(ValueError):
+    pass
+
+
+def _git_blob(raw: bytes) -> str:
+    return hashlib.sha1(b"blob "+str(len(raw)).encode("ascii")+b"\0"+raw).hexdigest()
+
+
+def _safe_rel(raw: Any) -> pathlib.PurePosixPath:
+    text=str(raw or "").strip()
+    p=pathlib.PurePosixPath(text)
+    if not text or p.is_absolute() or ".." in p.parts:
+        raise ChildError("MATERIAL_PATH_INVALID")
+    return p
+
+
+def _load(path: pathlib.Path, label: str) -> dict[str,Any]:
+    try:
+        doc=json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise ChildError(label+"_JSON_INVALID") from exc
+    if not isinstance(doc,Mapping):
+        raise ChildError(label+"_NOT_OBJECT")
+    return dict(doc)
+
+
+def _emit(value: Mapping[str,Any]) -> None:
+    raw=(json.dumps(value,sort_keys=True,separators=(",",":"),ensure_ascii=False)+"\n").encode("utf-8")
+    fd=int(os.environ["PROJECT_BRAIN_BROKER_FD"])
+    offset=0
+    while offset<len(raw):
+        offset+=os.write(fd,raw[offset:])
+
+
+def main() -> int:
+    try:
+        input_root=pathlib.Path("/input")
+        capsule=input_root/"capsule"
+        manifest=_load(input_root/"manifest.json","MANIFEST")
+        authority=_load(input_root/"authority.json","AUTHORITY")
+        request=_load(input_root/"request.json","REQUEST")
+        if manifest.get("schema")!="PROJECT_BRAIN_D_FINALITY_ZERO_AMBIENT_MANIFEST_V1":
+            raise ChildError("MANIFEST_SCHEMA_INVALID")
+        materials=manifest.get("materials")
+        if not isinstance(materials,list) or not materials:
+            raise ChildError("MATERIALS_INVALID")
+
+        work_root=pathlib.Path("/work/repo")
+        work_root.mkdir(parents=True,exist_ok=True)
+        copied=[]
+        for row in materials:
+            if not isinstance(row,Mapping):
+                raise ChildError("MATERIAL_ROW_INVALID")
+            rel=_safe_rel(row.get("path"))
+            expected=str(row.get("git_blob_sha") or "").lower()
+            src=capsule/pathlib.Path(*rel.parts)
+            dst=work_root/pathlib.Path(*rel.parts)
+            if not src.is_file():
+                raise ChildError("MATERIAL_SOURCE_MISSING:"+str(rel))
+            raw=src.read_bytes()
+            if _git_blob(raw)!=expected:
+                raise ChildError("MATERIAL_INPUT_BLOB_MISMATCH:"+str(rel))
+            dst.parent.mkdir(parents=True,exist_ok=True)
+            dst.write_bytes(raw)
+            if _git_blob(dst.read_bytes())!=expected:
+                raise ChildError("MATERIAL_COPY_BLOB_MISMATCH:"+str(rel))
+            copied.append({"path":str(rel),"git_blob_sha":expected})
+
+        # Certified code wins import precedence. Python is launched with -S, so
+        # ambient third-party site-packages are not admitted by default.
+        sys.path.insert(0,str(work_root))
+        from canonical.runtime import d_finality_execution_epoch_v1 as d_epoch
+        from canonical.runtime import unified_cognitive_fabric_v1 as fabric
+
+        cert=authority.get("certificate")
+        policy=authority.get("policy")
+        cid=str(manifest.get("capability_id") or "").strip()
+        if not isinstance(cert,Mapping) or not isinstance(policy,Mapping) or not cid:
+            raise ChildError("AUTHORITY_INCOMPLETE")
+
+        with d_epoch.activate(cert,policy=policy,repo_root=work_root) as epoch:
+            if epoch.root_capability_id!=cid:
+                raise ChildError("ROOT_CAPABILITY_ID_MISMATCH")
+            result=fabric.run(request)
+
+        if not isinstance(result,Mapping):
+            raise ChildError("FABRIC_RESULT_NOT_OBJECT")
+        receipt={
+          "schema":SCHEMA,
+          "status":"PASS__ZERO_AMBIENT_D_FINAL_DISPATCH_COMPLETE",
+          "pass":True,
+          "capability_id":cid,
+          "execution_epoch_sha256":epoch.epoch_sha256,
+          "material_closure_root":epoch.material_closure_root,
+          "copied_material_count":len(copied),
+          "result":dict(result),
+        }
+        _emit(receipt)
+        return 0
+    except Exception as exc:
+        _emit({
+          "schema":SCHEMA,
+          "status":"FAIL_CLOSED__ZERO_AMBIENT_D_FINAL_CHILD",
+          "pass":False,
+          "reason":type(exc).__name__+":"+str(exc),
+        })
+        return 1
+
+
+if __name__=="__main__":
+    raise SystemExit(main())
