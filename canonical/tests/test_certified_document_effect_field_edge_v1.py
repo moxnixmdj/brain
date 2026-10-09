@@ -1,5 +1,6 @@
 from __future__ import annotations
 import unittest
+from hashlib import sha256
 
 from canonical.runtime.certified_document_effect_field_edge_v1 import (
     field_concept_id,
@@ -46,8 +47,14 @@ def verifier_for(scope, source, target):
 class CertifiedDocumentEffectFieldEdgeV1Tests(unittest.TestCase):
     def setUp(self):
         self.scope="crossdoc:test"
-        self.left="SEMANTIC:SOURCE"
+        self.source="doc:A"
+        self.raw="Threshold is ten."
+        self.left="MENTION:"+sha256(
+            (self.source+"\n"+self.scope+"\n"+self.raw).encode("utf-8")
+        ).hexdigest()
         self.concept=field_concept_id(
+            source_id=self.source,
+            raw_span=self.raw,
             scope_id=self.scope,
             effect_id="A.t",
             field="value",
@@ -57,6 +64,8 @@ class CertifiedDocumentEffectFieldEdgeV1Tests(unittest.TestCase):
     def test_recomputed_entailment_proves_exact_field(self):
         ev=evidence(self.scope,self.left,self.concept)
         out=prove_field(
+            source_id=self.source,
+            raw_span=self.raw,
             scope_id=self.scope,
             effect_id="A.t",
             field="value",
@@ -100,6 +109,28 @@ class CertifiedDocumentEffectFieldEdgeV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"],out)
         self.assertEqual(out["status"],"OPEN__FIELD_ENTAILMENT_NOT_PROVED")
         self.assertIn("RIGHT_FIELD_CONCEPT_ID",out["reason"])
+
+    def test_other_source_mention_cannot_be_borrowed(self):
+        other_left="MENTION:"+sha256(
+            ("doc:B"+"\n"+self.scope+"\n"+"Other source.").encode("utf-8")
+        ).hexdigest()
+        ev=evidence(self.scope,other_left,self.concept)
+        out=prove_field(
+            source_id=self.source,
+            raw_span=self.raw,
+            scope_id=self.scope,
+            effect_id="A.t",
+            field="value",
+            value="10",
+            dag_evidence=ev,
+            expected_dag_sha256=evidence_sha256(ev),
+            relation_verifier=verifier_for(
+                self.scope,other_left,self.concept
+            ),
+        )
+        self.assertFalse(out["pass"],out)
+        self.assertEqual(out["status"],"OPEN__FIELD_ENTAILMENT_NOT_PROVED")
+        self.assertIn("LEFT_SOURCE_MENTION_ID",out["reason"])
 
     def test_tampered_evidence_hash_fails_closed(self):
         ev=evidence(self.scope,self.left,self.concept)
@@ -152,6 +183,8 @@ class CertifiedDocumentEffectFieldEdgeV1Tests(unittest.TestCase):
     def test_invalid_field_value_fails_closed(self):
         ev=evidence(self.scope,self.left,self.concept)
         out=prove_field(
+            source_id=self.source,
+            raw_span=self.raw,
             scope_id=self.scope,
             effect_id="A.t",
             field="effect_class",
