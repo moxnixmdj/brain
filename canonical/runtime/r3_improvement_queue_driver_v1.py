@@ -89,6 +89,12 @@ SUCCESS_LEARNING_FRONTIER_PATHS = (
 
 FRONTIER_EXPANSION_KIND = "EXPAND_SUCCESS_VERIFICATION_FRONTIER"
 FRONTIER_EXPANSION_PRIORITY = 35
+R3_EVIDENCE_ONLY_BLOCKER = (
+    "R3_VERIFICATION_FRONTIER_NEW_DISTINGUISHING_EVIDENCE_REQUIRED"
+)
+R3_EVIDENCE_REQUEST_SCHEMA = (
+    "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_ACQUISITION_REQUEST_V1"
+)
 
 DIRECT_OWNED_OBSERVATION_SCHEMA = "PROJECT_BRAIN_R3_DIRECT_SURFACE_OBSERVATION_V1"
 DIRECT_OWNED_SURFACE_PREFIX = "UNIFIED_FABRIC_DIRECT_"
@@ -128,6 +134,64 @@ def _enqueue_success_verification_frontier_expansion(
             "terminal_authority": False,
         },
     )
+
+
+def _compile_r3_distinguishing_evidence_request(
+    work: Mapping[str, Any],
+    compiled_gap: Mapping[str, Any],
+) -> dict[str, Any] | None:
+    """Compile only the redacted/content-addressed evidence needed by one R3 gap."""
+    reduction = compiled_gap.get("repair_class_reduction")
+    if not isinstance(reduction, Mapping):
+        return None
+    admissible = reduction.get("admissible_repair_classes")
+    if (
+        reduction.get("must_acquire_new_distinguishing_evidence") is not True
+        or admissible != ["NEW_DISTINGUISHING_EVIDENCE"]
+    ):
+        return None
+    witness = compiled_gap.get("witness")
+    if not isinstance(witness, Mapping):
+        return None
+    row = {
+        "schema": R3_EVIDENCE_REQUEST_SCHEMA,
+        "work_id": str(work.get("work_id") or "") or None,
+        "blocked_success_work_id": witness.get("blocked_success_work_id"),
+        "observation_id": witness.get("observation_id"),
+        "witness_id": compiled_gap.get("witness_id"),
+        "proof_capsule_sha256": witness.get("proof_capsule_sha256"),
+        "replay_capsule_sha256": witness.get("replay_capsule_sha256"),
+        "adapter_author_context_sha256": witness.get(
+            "adapter_author_context_sha256"
+        ),
+        "adapter_frontier_sha256": witness.get("adapter_frontier_sha256"),
+        "verification_authority_sha256": witness.get(
+            "verification_authority_sha256"
+        ),
+        "retained_proof_class": reduction.get("retained_proof_class"),
+        "request_kind": "R3_SUCCESS_VERIFICATION_DISTINGUISHING_EVIDENCE",
+        "required_action": (
+            "SEARCH_SIMULATE_EXPERIMENT_OR_ACQUIRE_MINIMUM_NEEDED_EVIDENCE"
+        ),
+        "required_property": (
+            "NEW_EVIDENCE_MUST_DISTINGUISH_THE_EXACT_RETAINED_SUCCESS_ENOUGH_"
+            "TO_ENABLE_NONSELF_REFERENTIAL_VERIFICATION_OR_CLOSE_THE_GAP"
+        ),
+        "proof_or_existing_receipt_precedes_new_reality": True,
+        "broad_acquisition_forbidden_without_minimality_proof": True,
+        "full_benchmark_default": False,
+        "verification_authority_mutation_allowed": False,
+        "terminal_authority": False,
+        "terminal_credit_delta": 0,
+    }
+    raw = json.dumps(
+        row,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    row["request_sha256"] = sha256(raw).hexdigest()
+    return row
 
 
 def _frontier_sha256(
@@ -1856,27 +1920,53 @@ def advance_once(
                         and compiled_gap.get("pass") is True
                         and compiled_gap.get("root1_positive_gap_established") is True
                     )
+                    evidence_request = (
+                        _compile_r3_distinguishing_evidence_request(
+                            work,
+                            compiled_gap,
+                        )
+                        if gap_established
+                        else None
+                    )
+                    evidence_only = isinstance(evidence_request, Mapping)
                     blockers.append({
                         "work_id": wid,
                         "kind": kind,
                         "blocker": (
-                            "ROOT1_CONSTRUCTIVE_R3_VERIFICATION_FRONTIER_GAP__"
-                            "NO_BOUND_ACQUISITION_ROUTE"
-                            if gap_established
-                            else "ROOT1_VERIFICATION_CAPABILITY_ACQUISITION_REQUIRED"
+                            R3_EVIDENCE_ONLY_BLOCKER
+                            if evidence_only
+                            else (
+                                "ROOT1_CONSTRUCTIVE_R3_VERIFICATION_FRONTIER_GAP__"
+                                "NO_BOUND_ACQUISITION_ROUTE"
+                                if gap_established
+                                else "ROOT1_VERIFICATION_CAPABILITY_ACQUISITION_REQUIRED"
+                            )
                         ),
                         "boundary_root": (
-                            payload.get("boundary_root")
-                            if isinstance(payload, Mapping)
-                            else "R1_CAPABILITY_ACQUISITION"
+                            "R3_EVIDENCE_ACQUISITION"
+                            if evidence_only
+                            else (
+                                payload.get("boundary_root")
+                                if isinstance(payload, Mapping)
+                                else "R1_CAPABILITY_ACQUISITION"
+                            )
                         ),
                         "required_capability_class": (
-                            payload.get("required_capability_class")
-                            if isinstance(payload, Mapping)
-                            else None
+                            "NEW_DISTINGUISHING_EVIDENCE"
+                            if evidence_only
+                            else (
+                                payload.get("required_capability_class")
+                                if isinstance(payload, Mapping)
+                                else None
+                            )
                         ),
                         "root1_positive_gap_established": gap_established,
                         "root1_gap_witness": deepcopy(dict(compiled_gap)),
+                        "evidence_acquisition_request": (
+                            deepcopy(dict(evidence_request))
+                            if evidence_only
+                            else None
+                        ),
                         "replay_original_success": False,
                     })
                     continue
