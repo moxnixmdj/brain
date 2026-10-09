@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V58_FINANCE_WAKE_INFORMATION_QUOTIENT_PROJECTION_REMOTE_VERIFY_V2",
+  "date": "2026-10-09",
+  "status": "PASS__INDEPENDENT_EXACT_BRANCH_PROJECTION__NAMESPACE_GUARD_PRESERVED__PY_COMPILE_PASS__1_OF_1_COHERENCE_PASS__ZERO_CREDIT",
+  "subjects": {
+    "quotient": {
+      "path": "canonical/governance/R2_FINANCE_SEMANTIC_WAKE_INFORMATION_QUOTIENT_20261009_V1.json",
+      "git_blob_sha": "cb56e4cda2d8f9fec7f19cb0f82dea1afec1a6ff"
+    },
+    "quotient_verification": {
+      "path": "canonical/verification/R2_FINANCE_SEMANTIC_WAKE_INFORMATION_QUOTIENT_REMOTE_VERIFY_20261009_V1.json",
+      "git_blob_sha": "e89e7b823ab114897c0a63e1e0ec7c2cb2c7545f"
+    },
+    "scheduler": {
+      "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V56.json",
+      "git_blob_sha": "4a2dbec85d6f863f182d8afb2e41cd0afc6b0cd4"
+    },
+    "r2_pointer": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "0145af60a86b82f12968a46f6196e59fff25bf48"
+    },
+    "one_shot_pointer": {
+      "path": "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json",
+      "git_blob_sha": "2647c87c6507e30b2d2d4a752eeeb6a5e9af19e7"
+    },
+    "terminal_pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "630274f98c80a18965e908fd65eb87d4d9e37911"
+    },
+    "projection_test": {
+      "path": "canonical/tests/test_r2_v58_finance_wake_quotient_projection_v2.py",
+      "git_blob_sha": "270ff4a3e4169a62db90e0dd27aaf57ab94ab437"
+    },
+    "namespace_bridge": {
+      "path": "canonical/governance/COVERAGE_ROOT_NAMESPACE_BRIDGE_V1.json",
+      "git_blob_sha": "fd45e0fcfdd238cdae022fc58ce418c9151186f1"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "working_directory": "/home/sprite/verify-r2-v58-finance-wake-projection-v2",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "py_compile_pass": true,
+    "coherence_tests_run": 1,
+    "coherence_tests_passed": 1,
+    "coherence_tests_failed": 0,
+    "current_r2_version": "V58",
+    "scheduler_version": "V56",
+    "terminal_pointer_revision": 103,
+    "root_namespace_collision_guard_preserved": true,
+    "concrete_wake_conditions": 11,
+    "decision_effect_classes": 3,
+    "r2_primary_internal_unsolved_count": 1,
+    "finance_semantic_tail_closed": false,
+    "information_theoretic_externality_proved": false,
+    "terminal": false,
+    "execution_log_sha256": "0a269c525901cb01a8b625e62885e5315fcdba4cf668609ffa6b173d9de50eb4"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
