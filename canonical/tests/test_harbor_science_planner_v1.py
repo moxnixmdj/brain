@@ -146,7 +146,29 @@ class PlannerTests(unittest.TestCase):
         self.assertLessEqual(out,p.MAX_TIMEOUT_S)
 
     def test_exact_token_timeout_caps_inside_fail_closed_envelope(self):
-        self.assertEqual(p.effective_timeout_s(100000,300),p.MAX_TIMEOUT_S)
+        self.assertEqual(
+            p.effective_timeout_s(100000,300),
+            p.LONG_CONTEXT_MAX_TIMEOUT_S,
+        )
+
+    def test_long_context_timeout_envelope_covers_verified_16k_carrier_class(self):
+        self.assertEqual(p.MAX_TIMEOUT_S,900)
+        self.assertEqual(p.PREFILL_TOKENS_PER_SECOND_FLOOR,15)
+        self.assertEqual(p.GENERATION_AND_TRANSPORT_MARGIN_S,180)
+        self.assertEqual(p.LONG_CONTEXT_THRESHOLD_TOKENS,8192)
+        self.assertEqual(p.LONG_CONTEXT_PREFILL_TOKENS_PER_SECOND_FLOOR,8)
+        self.assertEqual(p.LONG_CONTEXT_GENERATION_AND_TRANSPORT_MARGIN_S,240)
+        self.assertEqual(p.LONG_CONTEXT_MAX_TIMEOUT_S,1800)
+        self.assertEqual(p.effective_timeout_s(8192,300),727)
+        self.assertEqual(p.effective_timeout_s(8193,300),1265)
+        self.assertEqual(p.effective_timeout_s(10000,300),1490)
+        max_input_with_reserved_completion=16384-p.MAX_TOOL_COMPLETION_TOKENS-1
+        self.assertEqual(max_input_with_reserved_completion,12287)
+        self.assertEqual(p.effective_timeout_s(max_input_with_reserved_completion,300),1776)
+        self.assertLessEqual(
+            p.effective_timeout_s(max_input_with_reserved_completion,300),
+            p.LONG_CONTEXT_MAX_TIMEOUT_S,
+        )
 
     def test_exact_token_timeout_rejects_invalid_counts(self):
         for value in (0,-1,True,1.5):

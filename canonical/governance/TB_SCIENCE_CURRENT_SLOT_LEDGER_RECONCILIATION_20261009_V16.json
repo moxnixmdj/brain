@@ -1,0 +1,117 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V16",
+  "date": "2026-10-09",
+  "status": "CURRENT_POST_SCOPED_CONTEXT_TIMEOUT_REPAIR_VERIFIED__THIRTEEN_CONSUMED__RANK14_ELIGIBLE_FOR_SEPARATE_AUTHORITY__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V15.json",
+    "git_blob_sha": "8ac981dc3a5386e1c8c083952986fb48e009e418"
+  },
+  "rank13_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK13_IRREVERSIBLE_RESULT_TRUTH_20261009_V1.json",
+    "status": "FINAL_ZERO__REQUEST_CONTEXT_9202_GT_SERVER_CONTEXT_8192__NO_VERIFIER_RESULT",
+    "workflow_run_id": 37870603497,
+    "artifact_id": 11590457344,
+    "git_blob_sha": "14527391610235e78a99d6148545a4098dfbd148"
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "current_counts": {
+    "consumed_slots": 13,
+    "consumed_successes": 0,
+    "consumed_final_failures": 13,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 74,
+    "maximum_possible_successes_remaining": 197,
+    "minimum_required_success_rate_over_remaining_slots": 0.6294416243654822,
+    "pass_still_mathematically_reachable": true,
+    "next_untouched_slot": {
+      "ledger_schedule_rank": 14,
+      "frozen_manifest_schedule_order": 13,
+      "slot_id": "terminal-bench-science/inverse-lithography::trial-0",
+      "task_digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530"
+    }
+  },
+  "rank13_causal_truth": {
+    "task_started": true,
+    "verifier_reached": false,
+    "verifier_reward": 0,
+    "execution_authority_consumed": true,
+    "rerun_forbidden": true,
+    "planner_transport_timeout": false,
+    "planner_request_context_overflow": true,
+    "observed_request_tokens": 9202,
+    "configured_context_tokens": 8192,
+    "scientific_task_quality_evaluated": false,
+    "task_capability_negative_evidence": false,
+    "admitted_deficit_class": "MINIMUM_CONTROL_PLANE_CONTEXT_CAPACITY_FAILURE"
+  },
+  "required_repair_gate": {
+    "context_capacity_floor_strictly_greater_than_tokens": 9202,
+    "server_context_tokens": 16384,
+    "scoped_timeout_threshold_tokens": 8192,
+    "legacy_timeout_policy_preserved_at_or_below_threshold": true,
+    "long_context_timeout_profile": {
+      "prefill_tokens_per_second_floor": 8,
+      "generation_and_transport_margin_s": 240,
+      "max_timeout_s": 1800
+    },
+    "exact_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "exact_llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "exact_planner_blob": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "zero_benchmark_exposure_required": true,
+    "zero_benchmark_exposure_gate_passed": true,
+    "final_verification_path": "canonical/verification/TB_SCIENCE_CONTEXT16K_SCOPED_TIMEOUT_REPAIR_FINAL_VERIFICATION_20261009_V2.json",
+    "final_verification_git_blob_sha": "8b8cdc3fc112bd0a253af795fb79c0f641b8b3b4",
+    "live_gate_workflow_run_id": 37876839032,
+    "observed_input_tokens": 10004,
+    "reserved_max_output_tokens": 4096,
+    "context_headroom_tokens": 2284,
+    "gate_satisfied": true
+  },
+  "rank14": {
+    "authority_active": false,
+    "action_intent_active": false,
+    "task_started": false,
+    "result_present": false,
+    "next_untouched_slot": {
+      "ledger_schedule_rank": 14,
+      "frozen_manifest_schedule_order": 13,
+      "slot_id": "terminal-bench-science/inverse-lithography::trial-0",
+      "task_digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530"
+    },
+    "rule": "RANK14_IS_ELIGIBLE_FOR_A_SEPARATE_EXACT_ONE_SLOT_AUTHORITY_TRANSACTION__DO_NOT_READ_EXPOSE_OR_START_TASK_BEFORE_THAT_AUTHORITY_AND_PUBLIC_LEASE_ARE_ACTIVE__AFTER_TASK_READ_AUTHORITY_USE_A_PRESTART_EXACT_PLANNER_TOKEN_BUDGET_GATE_AND_ABORT_NONCONSUMING_IF_INPUT_PLUS_4096_RESERVE_EXCEEDS_16384",
+    "repair_gate_satisfied": true,
+    "task_read_authority": false,
+    "execution_authority": false
+  },
+  "scheduler": [
+    "NEVER_REPLAY_RANK13.",
+    "THE_SCOPED_16K_CONTEXT_PLUS_LONG_CONTEXT_TIMEOUT_REPAIR PASSED EXACT ZERO_EXPOSURE LIVE VERIFICATION.",
+    "PRESERVE_LEGACY_TIMEOUT_POLICY_AT_AND_BELOW_8192_INPUT_TOKENS.",
+    "NEXT_LOAD_BEARING_STEP_IS_A_SEPARATE_EXACT_RANK14_ONE_SLOT_AUTHORITY_AND_PUBLIC_EXECUTION LEASE.",
+    "BEFORE_RANK14_TASK_START_AFTER_TASK_READ_AUTHORITY_COMPUTE_EXACT_PLANNER_INPUT_TOKENS_AND_ABORT_NONCONSUMING_IF_INPUT_PLUS_4096_RESERVE_EXCEEDS_16384.",
+    "TB_SCIENCE_ACCEPTANCE_REMAINS_OPEN."
+  ],
+  "hard_nonclaims": [
+    "NO_RANK14_TASK_CONTENT_READ_YET",
+    "NO_RANK14_EXECUTION_AUTHORITY_YET",
+    "NO_RANK14_RESULT",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT",
+    "NO_CLAIM_ALL_FUTURE_TASK_PROMPTS_FIT_16K"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_delta": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
