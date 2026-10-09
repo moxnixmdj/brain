@@ -32,7 +32,7 @@ ATOM_GSIB = "SCOPE::G_SIB"
 _WS = re.compile(r"\s+")
 
 _CCOB_RE = re.compile(
-    r"(?is)\b2\.5\s*%\b.{0,120}\b(?:common\s+equity\s+tier\s+1|cet1)\b"
+    r"(?is)\b2\.5\s*%.{0,160}\b(?:common\s+equity\s+tier\s+1|cet1)\b"
     r".{0,160}\babove\s+(?:the\s+)?regulatory\s+minimum(?:\s+capital\s+requirement)?\b"
 )
 
@@ -42,7 +42,7 @@ _CCYB_RE = re.compile(
 )
 
 _TLAC_RE = re.compile(
-    r"(?is)\bloss[-\s]absorbing\s+and\s+recapitalis(?:ation|ation)"
+    r"(?is)\bloss[-\s]absorbing\s+and\s+recapitali[sz]ation"
     r"\s+capacity\b.{0,180}\b(?:available\s+)?in\s+resolution\b"
 )
 
