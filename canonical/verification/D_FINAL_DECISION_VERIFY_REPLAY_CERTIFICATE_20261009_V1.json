@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINALITY_CERTIFICATE_V1",
+  "status": "VERIFIED_D_FINAL",
+  "scope": "CERTIFIED_REPLAY_ROUTE_ONLY",
+  "live_front_door_enforced": false,
+  "live_ownership_authority": false,
+  "capability_id": "bound:decision.synthesis.verify.stdlib",
+  "capability_contract_sha256": "bf45f7e92d29a32fee4b2c40481a593e1c9f3b3e5b04f3da529fac5d0c5ec2c6",
+  "policy_sha256": "d9c25144dddd93212eda736ee912a9ebcb85d7deecd28493340dca3d742c45cd",
+  "registry_snapshot_root": "8c2ac9bdfd0eacfa11b3af879ff027f50ed54078448ab11cadf0ab6fcce2ed38",
+  "state_snapshot_root": "83692be3b4e6f135292973d93ac1d7c75521b855e70102ec4984096354171150",
+  "materials": [
+    {
+      "path": "canonical/runtime/verified_bound_capability_execution_adapter_v1.py",
+      "git_blob_sha": "a24193006070904142d66455b8f6d4c1756036f1"
+    },
+    {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "cbbaa444ec1a70b16593af3c39bfb270c7859d2c"
+    },
+    {
+      "path": "canonical/runtime/bound_capability_execution_verifier_v1.py",
+      "git_blob_sha": "2bc99699ec721e4b0ef239340e0c220370811e6f"
+    },
+    {
+      "path": "canonical/runtime/capability_planner.py",
+      "git_blob_sha": "629766f8a1194fd298e0809b64a5e9c5a39fa3ea"
+    },
+    {
+      "path": "canonical/runtime/capability_execution_trace_capsule_v1.py",
+      "git_blob_sha": "75faca7736d75f7e5385952ecb16240731bcdb7e"
+    },
+    {
+      "path": "canonical/runtime/composition_state_capsule_v1.py",
+      "git_blob_sha": "6337298b4804307315308689fbeb65692c67980d"
+    },
+    {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85"
+    },
+    {
+      "path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+      "git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/evidence_decision_verify.py",
+      "git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+    }
+  ],
+  "material_closure_root": "ff11e4a6e9ea2b340ea617846ee992bd166840903b84972ae46091c9242c3c01",
+  "allowed_capability_ids": [
+    "bound:decision.synthesis.verify.stdlib"
+  ],
+  "allowed_knowledge_channels": [],
+  "allowed_effect_channels": [],
+  "donor_authority_zero": true,
+  "fresh_replay_pass": true,
+  "independent_replay_pass": true,
+  "knowledge_capability_nonsmuggling_pass": true,
+  "undeclared_dependency_count": 0,
+  "declared_substrate": [
+    "CPYTHON_3_X_STDLIB",
+    "LINUX_KERNEL_NAMESPACE_SUBSTRATE",
+    "READ_ONLY_SYSTEM_RUNTIME",
+    "PRIVATE_TMPFS_WORKSPACE"
+  ],
+  "evidence": {
+    "provider_theorem_receipt_git_blob_sha": "569ec7847ddba43117ec6dd0aac3274065d09d3d",
+    "member_theorem_receipt_git_blob_sha": "d770e2aaa988bab70c196e2bbd436891ed17008a",
+    "d_epoch_verifier_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3",
+    "zero_ambient_launcher_git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8",
+    "independent_member_replay_count": 2,
+    "independent_provider_replay_count": 2
+  },
+  "hard_nonclaims": [
+    "NOT_LIVE_FRONT_DOOR_ENFORCED",
+    "NOT_LIVE_D_FINAL_OWNED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "certificate_sha256": "1bd9d3ae41a86984cfffc423afe264723d1f664d03530ecb3ba9c7c1dd4f8072"
+}
