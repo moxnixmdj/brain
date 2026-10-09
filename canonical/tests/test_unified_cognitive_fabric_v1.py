@@ -189,7 +189,6 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
                 "right_id": "liquidity-cushion",
                 "scope_id": "finance:policy:2026",
                 "required_relation": "CURRENT_DECISION_SUBSTITUTION",
-                "proof_records": [],
                 "terminal_signature_rows": [
                     {
                         "raw_id": "reserve-buffer",
