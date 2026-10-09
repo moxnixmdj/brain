@@ -1,22 +1,22 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE__THREE_OPEN_CC_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
+  "status": "ACTIVE__CLAIM_SCOPED_ROOT_CERTIFICATE_AUTHORITY__ZERO_REGISTERED_CLAIMS__ZERO_PROVED__ZERO_CREDIT",
   "mission_binding": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
     "git_blob_sha": "52b98f8019938fa7d8164e6a47e359ffb0faeb6a"
   },
   "registry": {
-    "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
-    "git_blob_sha": "87d154877fd195d4726db46db8a607a02e4dcc31"
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_ROOT_CERTIFICATE_REGISTRY_V1.json",
+    "git_blob_sha": "7fc36797644b16fe14aad02d8786770c53a55328"
   },
   "guard": {
-    "path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
-    "git_blob_sha": "99fcc3dfb8b62266442bd8c596821b74b9b3a777"
+    "path": "canonical/runtime/coverage_claim_root_certificate_registry_guard_v1.py",
+    "git_blob_sha": "895eeded4b183285ddd2783350f27325d6122e2e"
   },
   "tests": {
-    "path": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
-    "git_blob_sha": "7299c578d59c4ce133508eafb329406751dc6078"
+    "path": "canonical/tests/test_coverage_claim_root_certificate_registry_guard_v1.py",
+    "git_blob_sha": "b0e187a51e433738dcfb23edda017932c4dbc883"
   },
   "canonical_root_ids": [
     "CC_R1_REALITY_CONTAINMENT_V1",
@@ -29,8 +29,13 @@
     "R3"
   ],
   "proved": 0,
-  "open": 3,
+  "open": 0,
   "r4_proof_closure": false,
-  "next": "PROVE_OR_FALSIFY_CC_R1_CC_R2_CC_R3_USING_CONTENT_ADDRESSED_MISSION_BOUND_CERTIFICATES__NO_SHORT_LABEL_INHERITANCE",
-  "terminal_credit_delta": 0
+  "next": "REGISTER_FROZEN_CLAIMS_BEFORE_ANY_ROOT_CERTIFICATE_PROMOTION",
+  "terminal_credit_delta": 0,
+  "verification": {
+    "path": "canonical/verification/CCRT_CLAIM_SCOPED_ROOT_CERTIFICATE_REGISTRY_VERIFY_20261009_V1.json",
+    "git_blob_sha": "d01b5d596b8d1995edbe1bf2dca94825495f664a",
+    "status": "PASS__PY_COMPILE__10_OF_10"
+  }
 }
