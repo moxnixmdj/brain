@@ -13,7 +13,8 @@
   },
   "verification": {
     "path": "canonical/verification/ONE_SHOT_R2_STRUCTURED_ACQUISITION_HANDOFF_VERIFY_20261009_V1.json",
-    "status": "PENDING_BRANCH_VERIFICATION_RECEIPT_CREATION__FOCUSED_V1_8_OF_8__V2_20_OF_20__LIVE_V44_HANDOFF_PASS",
+    "git_blob_sha": "3d696ae6691d55a97e1aa97405ad7273c9cff269",
+    "status": "PASS__V1_8_OF_8__V2_20_OF_20__LIVE_V44_STRUCTURED_HANDOFF_PASS__POINTER_COHERENCE_18_OF_18__ZERO_TERMINAL_CREDIT",
     "preserves_live_r3_fixed_point_verification": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json"
   },
   "authority": {
