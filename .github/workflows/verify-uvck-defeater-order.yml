@@ -1,0 +1,23 @@
+name: verify-uvck-defeater-order
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/assurance_closure_compiler_v1.py
+      - canonical/tests/test_assurance_closure_compiler_v1.py
+      - .github/workflows/verify-uvck-defeater-order.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m py_compile canonical/runtime/assurance_closure_compiler_v1.py canonical/tests/test_assurance_closure_compiler_v1.py
+      - run: python -m unittest canonical.tests.test_assurance_closure_compiler_v1 -v
