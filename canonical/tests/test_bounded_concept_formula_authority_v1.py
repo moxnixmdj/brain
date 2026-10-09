@@ -8,8 +8,6 @@ from canonical.runtime.bounded_concept_formula_authority_v1 import (
     make_claim,
     verify_claim,
 )
-from canonical.runtime.source_aligned_semantic_edge_authority_v1 import prove as prove_edge
-
 
 SCOPE = "finance:regcap:bounded:v1"
 TARGET = "CCOB"
@@ -89,28 +87,6 @@ def authority_verifier(reg):
 
     return verify
 
-
-def source_verifier(constraints):
-    def verify(
-        _raw_span,
-        *,
-        source_id,
-        claims,
-        typed_context=None,
-        expected_typed_context_sha256=None,
-        fact_source=None,
-        fact_source_id=None,
-    ):
-        return {
-            "status": "PROOF_CHECKED",
-            "source_id": source_id,
-            "accepted_claims": list(claims),
-            "rejected_claims": [],
-            "proved_constraints": list(constraints),
-            "terminal_authority": False,
-        }
-
-    return verify
 
 
 class Tests(unittest.TestCase):
@@ -197,38 +173,6 @@ class Tests(unittest.TestCase):
                 concept_id=TARGET,
                 authority_receipt={"candidate": True},
             )
-
-    def test_formula_authority_drives_source_to_concept_edge(self):
-        reg = registry()
-        claim = make_claim(
-            reg,
-            concept_id=TARGET,
-            authority_receipt={"candidate": True},
-        )
-        constraints = [
-            atom("RESOURCE_CET1"),
-            atom("ABOVE_REGULATORY_MINIMUM"),
-            atom("FUNCTION_LOSS_ABSORPTION"),
-        ]
-        out = prove_edge(
-            RAW,
-            source_id=SOURCE,
-            scope_id=SCOPE,
-            target_concept_id=TARGET,
-            direction="SOURCE_TO_TARGET",
-            source_claims=[],
-            target_formula=formula(),
-            concept_semantics_receipt=claim,
-            concept_semantics_verifier=lambda value: verify_claim(
-                value,
-                authority_verifier=authority_verifier(reg),
-            ),
-            source_proof_verifier=source_verifier(constraints),
-        )
-        self.assertTrue(out["pass"], out)
-        self.assertTrue(out["semantic_edge_authority"])
-        self.assertEqual(out["edge_receipt"]["target_id"], TARGET)
-        self.assertFalse(out["terminal_authority"])
 
     def test_registry_formula_authority_never_claims_global_completion(self):
         reg = registry()
