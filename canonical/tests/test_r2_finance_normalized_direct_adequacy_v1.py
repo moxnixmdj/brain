@@ -232,3 +232,19 @@ def test_failed_reconciliation_fails_closed():
         result = route.run(_request(src, out), repo_root=ROOT)
         assert result["pass"] is False
         assert "RECONCILIATION_FAILED" in result["reason"]
+
+def test_fixed_point_front_door_uses_finance_normalized_direct_route():
+    from canonical.runtime import general_adequate_decision_fixed_point_v2 as fixed
+
+    TMP.mkdir(parents=True, exist_ok=True)
+    with TemporaryDirectory(dir=TMP) as td:
+        work = Path(td)
+        src = work / "package.json"
+        out = work / "decision.json"
+        _write(src, _supervisory_package())
+        result = fixed.run(_request(src, out), repo_root=ROOT)
+        assert result["pass"] is True, result
+        assert result["r2_fixed_point_status"] == "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED"
+        assert result["route_id"] == route.ROUTE_ID
+        assert result["r2_fixed_point_trace"][0]["kind"] == "DIRECT_END_TO_END_ADEQUACY"
+
