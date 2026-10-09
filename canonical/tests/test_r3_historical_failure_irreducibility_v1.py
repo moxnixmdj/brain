@@ -259,7 +259,7 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
             out = closure.run(
                 repo_root=".",
                 state_path="state.json",
-                information_theoretic_externality_provider=lambda request: boolean_only,
+                externality_certificate_provider=lambda request: boolean_only,
             )
 
         self.assertFalse(out["pass"], out)
