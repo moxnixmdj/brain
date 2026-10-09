@@ -26,4 +26,5 @@ jobs:
           python-version: "3.12"
       - name: Compile reducer
         run: python -m py_compile canonical/runtime/tb_science_postslot_reducer_v1.py
-      - name: Run focused reducer tests\n        run: python canonical/tests/test_tb_science_postslot_reducer_v1.py\n
+      - name: Run focused reducer tests
+        run: python canonical/tests/test_tb_science_postslot_reducer_v1.py
