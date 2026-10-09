@@ -1197,6 +1197,15 @@
       "path": "canonical/verification/TB_SCIENCE_RANK15_V12_PUBLIC_RESEAL_AND_TEST_REPAIR_VERIFY_20261009_V1.json",
       "git_blob_sha": "c27dfbd45a9d2817e4e7e9ae3c4bf9699696f590",
       "note": "PASS__THREE_FRESH_PUBLIC_ZERO_EXPOSURE_GATES__NO_TASK_READ_START_OR_TRIAL"
+    },
+    "coding_typed_specialist_policy_cover_deficit_20261009_v1": {
+      "path": "canonical/governance/CODING_TYPED_SPECIALIST_POLICY_COVER_DEFICIT_20261009_V1.json",
+      "git_blob_sha": "aa76f25888f4a68b392c7840857a3aa362dac1e8",
+      "independent_verification": {
+        "path": "canonical/verification/CODING_TYPED_SPECIALIST_POLICY_COVER_DEFICIT_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "d9b1b08ebc882a8d9c21a062dc07e027cb530679"
+      },
+      "note": "CURRENT_TYPED_SPECIALIST_COVERS_EXACTLY_ONE_OF_THIRTY_TWO_UNCONSTRAINED_FIVE_ATOM_VALUATIONS__BRANCH_LOCAL_ONLY__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1759,7 +1768,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "BUILD_OR_FIND_CODING_SPEC_SCOPE_COMPLETE_AUTHENTICATED_POLICY_ADEQUACY_COVER__THEN_RUN_P3_COMMON_POLICY_CEGAR__ONLY_IF_NO_COMMON_POLICY_ACQUIRE_THE_SINGLE_SELECTED_POLICY_CHANGING_DISCRIMINATOR_TRUTH",
+    "cursorbench_next_proof_object": "FIRST_AUTHENTICATE_A_BROADER_CODING_POLICY_ADEQUACY_REGION_OR_SOURCE_PROVE_CONSTRAINTS_ELIMINATING_CURRENTLY_UNCOVERED_TYPED_MODELS__THEN_RUN_P3_COMMON_POLICY_CEGAR__V5_COMMON_POLICY_CERTIFICATE_REMAINS_HIGHEST_LEVERAGE_BROADER_CANDIDATE",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -1928,7 +1937,15 @@
       "SELECTED_POLICY_CHANGING_DISCRIMINATOR_TRUTH__ONLY_IF_NO_COMMON_POLICY_EXISTS"
     ],
     "cursorbench_route_b_common_policy_can_bypass_full_semantic_mapping": true,
-    "cursorbench_route_b_common_policy_can_bypass_full_failure_taxonomy": true
+    "cursorbench_route_b_common_policy_can_bypass_full_failure_taxonomy": true,
+    "coding_typed_specialist_policy_cover_deficit_proved": true,
+    "coding_typed_specialist_policy_cover_deficit_scope": "B_TYPED_SPECIALIST_MEMBERSHIP_BOOLEAN_LATTICE_ONLY",
+    "coding_typed_specialist_policy_cover_basis_atom_count": 5,
+    "coding_typed_specialist_policy_cover_total_boolean_valuations": 32,
+    "coding_typed_specialist_policy_cover_covered_valuations": 1,
+    "coding_typed_specialist_policy_cover_uncovered_valuations": 31,
+    "coding_current_registry_scope_complete_on_unconstrained_typed_lattice": false,
+    "coding_current_registry_p3_closure_ready_without_new_policy_or_source_constraints": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2628,7 +2645,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 91,
+  "pointer_revision": 92,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3566,6 +3583,22 @@
     "task_read": false,
     "task_started": false,
     "benchmark_trials_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "coding_typed_specialist_policy_cover_deficit_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/CODING_TYPED_SPECIALIST_POLICY_COVER_DEFICIT_20261009_V1.json",
+      "git_blob_sha": "aa76f25888f4a68b392c7840857a3aa362dac1e8"
+    },
+    "verification": {
+      "path": "canonical/verification/CODING_TYPED_SPECIALIST_POLICY_COVER_DEFICIT_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "d9b1b08ebc882a8d9c21a062dc07e027cb530679"
+    },
+    "result": "CURRENT_TYPED_SPECIALIST_REGISTRY_EDGE_PROVABLY_NOT_SCOPE_COMPLETE_ON_UNCONSTRAINED_FIVE_ATOM_LATTICE__P3_CLOSURE_REQUIRES_BROADER_POLICY_OR_STRONGER_SOURCE_CONSTRAINTS_FIRST",
+    "covered_valuations": 1,
+    "uncovered_valuations": 31,
+    "target_realizability_of_uncovered_valuations_claimed": false,
+    "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
 }
