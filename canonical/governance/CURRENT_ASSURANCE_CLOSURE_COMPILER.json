@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "CURRENT_UVCK_V2_CANDIDATE__HARDENED__PRIMARY_10_OF_10__INDEPENDENT_STRUCTURAL_11_OF_11__NOT_LIVE_DEFAULT",
+  "status": "CURRENT_UVCK_V2_CANDIDATE__HARDENED__PRIMARY_10_OF_10__INDEPENDENT_STRUCTURAL_11_OF_11__DOMAIN_REPRESENTABILITY_16_OF_16__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
@@ -24,6 +24,17 @@
     "tests_git_blob_sha": "6a497f5af6bd01c45eb090025d257c37a21135cb",
     "result": "11_OF_11_MATCH"
   },
+  "domain_challenge_registry": {
+    "path": "canonical/runtime/assurance_domain_challenge_registry_v1.py",
+    "git_blob_sha": "62e6bf4be75d5e8a6d9a1bcfb3a3965be29bca08",
+    "tests_path": "canonical/tests/test_assurance_domain_challenge_registry_v1.py",
+    "tests_git_blob_sha": "c714e7ffdf70540d2f4c58890d6955fc3d346f23",
+    "verification_path": "canonical/verification/UVCK_V2_DOMAIN_CHALLENGE_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "15e270c3bb0786bd5459b41a56d919616b7ba37c",
+    "result": "16_OF_16_EXISTING_KERNEL_RESIDUALS",
+    "semantic_truth_closed": false,
+    "execution_closed": false
+  },
   "verification": {
     "path": "canonical/verification/UVCK_V2_ASSURANCE_CLOSURE_VERIFY_20261009_V1.json",
     "git_blob_sha": "3f2e92a842f3f709eb2ebc9fabaf869206c80a66"
@@ -31,9 +42,8 @@
   "activation": {
     "live_default": false,
     "required_before_promotion": [
-      "FULL_CURRENT_MAIN_INTEGRATION_REPLAY",
-      "DOMAIN_LEVEL_INDEPENDENT_CHALLENGE_BINDING",
-      "CURRENT_POINTER_COHERENCE_VERIFICATION"
+      "FULL_PRIVATE_CURRENT_MAIN_INTEGRATION_REPLAY",
+      "DOMAIN_SEMANTIC_AND_EXECUTION_CHALLENGE_BINDING"
     ]
   },
   "terminal_authority": false,
