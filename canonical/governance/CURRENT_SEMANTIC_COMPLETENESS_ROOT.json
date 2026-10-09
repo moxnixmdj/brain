@@ -4,7 +4,7 @@
   "status": "CURRENT_CANDIDATE__UVCK_V2_RECONCILED__REMOTE_8_OF_8_PASS__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/SEMANTIC_COMPLETENESS_ROOT_THEOREM_20261009_V2.json",
-    "git_blob_sha": "55c027579d56672aab59fb863d38e105a46afea4"
+    "git_blob_sha": "985d4c9c62f627c78380dbfda6d78a7b73a5ea5e"
   },
   "adapter": {
     "path": "canonical/runtime/semantic_root_uvck_adapter_v1.py",
@@ -17,7 +17,7 @@
   },
   "verification": {
     "path": "canonical/verification/SEMANTIC_ROOT_UVCK_RECONCILIATION_VERIFY_20261009_V1.json",
-    "git_blob_sha": "c205b00ba44617cf667f7065d905f5a43ab468f2"
+    "git_blob_sha": "e5284d8f043849b17294a96fa58d89707fa9cc3d"
   },
   "uvck": {
     "current_pointer_path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
