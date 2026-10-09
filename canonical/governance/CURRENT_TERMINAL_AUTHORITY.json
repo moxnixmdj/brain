@@ -1292,6 +1292,33 @@
       },
       "authority_boundary": "CONTEXT_FACTS_MAY_REFINE_INFORMATION_STATE__RELATION_TRUTH_IDENTITY_POLICY_ADEQUACY_ACCEPTANCE_AND_TERMINALITY_REMAIN_SEPARATE",
       "terminal_credit_delta": 0
+    },
+    "coding_finite_exact_oracle_constructive_region_20261009_v1": {
+      "theorem": {
+        "path": "canonical/governance/CODING_FINITE_EXACT_ORACLE_CONSTRUCTIVE_ADEQUACY_THEOREM_20261009_V1.json",
+        "git_blob_sha": "ab70e2f74431e4aeac35f4b9d6dea5e501fdb8b6"
+      },
+      "certificate": {
+        "path": "canonical/governance/CODING_FINITE_EXACT_ORACLE_POLICY_ADEQUACY_CERTIFICATE_20261009_V1.json",
+        "git_blob_sha": "458f7362ac3930ba62260585b323fb5c17ce2ff8"
+      },
+      "binding": {
+        "path": "canonical/governance/CODING_FINITE_EXACT_ORACLE_POLICY_ADEQUACY_BINDING_20261009_V1.json",
+        "git_blob_sha": "25a8c91580a9d2409b30806f4eae4b77e31dab65"
+      },
+      "independent_verification": {
+        "path": "canonical/verification/CODING_FINITE_EXACT_ORACLE_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "519dbb806ef112a5861cdc73d01b502fac7b49a9"
+      },
+      "runtime": {
+        "path": "canonical/runtime/coding_finite_candidate_exact_oracle_solver_v1.py",
+        "git_blob_sha": "349d9d1cc0aca5b0ac80d0966d4f5c798010ecd4"
+      },
+      "registry": {
+        "path": "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+        "git_blob_sha": "a19d683f86b01fdf3ed174d35c4e2cc96f8f71fa"
+      },
+      "note": "SECOND_AUTHENTICATED_CONSTRUCTIVE_CODING_REGION__FORMAL_ALL_MEMBERS_LIVENESS_UNDER_SIX_PREEXECUTION_ATOMS__NO_PRIVATE_CURSORBENCH_MEMBERSHIP_OR_WHOLE_COVER"
     }
   },
   "live_truth": {
@@ -1854,7 +1881,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "CONSTRUCTIVE_SCOPE_THEOREM_OR_TARGET_RELEVANT_COMPLETE_ADEQUACY_EVIDENCE__PREEMPT_ON_ROUTE_A_SCORE_AUTHORITY_OR_ACTUAL_CURSORBENCH_TARGET_EVIDENCE__DO_NOT_ADD_POLICY_PLUMBING_WITHOUT_A_NEW_AUTHENTICATED_ADEQUACY_REGION",
+    "cursorbench_next_proof_object": "COVER_OR_ELIMINATE_THE_COMPLEMENT_OF_THE_TWO_AUTHENTICATED_CONSTRUCTIVE_CODING_REGIONS_OVER_THE_CLAIM_RELEVANT_SCOPE__PREEMPT_ON_ROUTE_A_SCORE_AUTHORITY_OR_ACTUAL_CURSORBENCH_TARGET_EVIDENCE",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -1873,7 +1900,7 @@
     "r2_fibo_missing_path_is_non_entailment": false,
     "coding_specification_semantic_control_mechanism_gap": false,
     "coding_specification_registered_conditioned_policy_count": 2,
-    "coding_specification_registered_coding_policy_count": 1,
+    "coding_specification_registered_coding_policy_count": 2,
     "coding_specification_first_missing_object": "CODING_V5_AUTHENTICATED_POSITIVE_ADEQUACY_CERTIFICATE_V1",
     "coding_specification_selected_discriminator_truth_state": "CONDITIONAL_ONLY_AFTER_NO_COMMON_AUTHENTICATED_CODING_POLICY",
     "coding_specification_common_policy_realization_binding_state": "CONDITIONAL_ONLY_AFTER_AUTHENTICATED_COMMON_POLICY_EXISTS",
@@ -1911,7 +1938,7 @@
     "r2_source_explicit_semantic_autofill_bound": true,
     "r2_source_explicit_autofill_replaces_caller_claims": false,
     "r2_unrecognized_prose_remains_semantic_top": true,
-    "coding_specification_registered_coding_specialist_policy_count": 1,
+    "coding_specification_registered_coding_specialist_policy_count": 2,
     "coding_specification_registered_coding_specialist_policy_id": "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
     "coding_specification_specialist_membership_self_certified": false,
     "cursorbench_secondary_zero_synthesis_route": "PROVE_SOURCE_AUTHORIZED_TRUTH_OF_ALL_FIVE_TYPED_ACCEPTANCE_SPECIALIST_ATOMS_FOR_A_REACHED_TARGET_RELEVANT_CONTEXT__THEN_REUSE_EXISTING_REGISTERED_SPECIALIST",
@@ -2095,7 +2122,19 @@
     "cursorbench_route_b_more_internal_mechanism_without_new_adequacy_information_authorized": false,
     "r2_regcap_default_domain_context_harvest_bound": true,
     "r2_regcap_explicit_context_atom_truth_dispatch_bound": true,
-    "r2_regcap_context_fact_authority_does_not_mint_identity": true
+    "r2_regcap_context_fact_authority_does_not_mint_identity": true,
+    "coding_finite_exact_oracle_constructive_region_verified": true,
+    "coding_finite_exact_oracle_policy_id": "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1",
+    "coding_finite_exact_oracle_constructive_liveness_proved": true,
+    "coding_finite_exact_oracle_condition_atom_count": 6,
+    "coding_finite_exact_oracle_target_membership_self_certified": false,
+    "coding_finite_exact_oracle_private_cursorbench_membership_proved": false,
+    "coding_finite_exact_oracle_whole_cursorbench_cover_proved": false,
+    "coding_specification_authenticated_constructive_region_count": 2,
+    "coding_specification_authenticated_constructive_region_policy_ids": [
+      "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
+      "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1"
+    ]
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2801,7 +2840,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 106,
+  "pointer_revision": 107,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3998,6 +4037,18 @@
     "standard_taxonomy_equivalence_added": false,
     "finance_tail_closed": false,
     "terminal_remains_false": true,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "coding_finite_exact_oracle_constructive_region_terminal_reconciliation_20261009_v1": {
+    "result": "SECOND_AUTHENTICATED_CONSTRUCTIVE_CODING_REGION_BOUND__WHOLE_SCOPE_MEMBERSHIP_AND_COVER_REMAIN_OPEN",
+    "policy_id": "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1",
+    "theorem_blob_sha": "ab70e2f74431e4aeac35f4b9d6dea5e501fdb8b6",
+    "independent_verification_blob_sha": "519dbb806ef112a5861cdc73d01b502fac7b49a9",
+    "registered_coding_policy_count_after": 2,
+    "authenticated_constructive_region_count_after": 2,
+    "private_cursorbench_membership_delta": 0,
+    "whole_cursorbench_cover_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
