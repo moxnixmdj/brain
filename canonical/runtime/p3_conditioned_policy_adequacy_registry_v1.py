@@ -7,11 +7,16 @@ current decision basis.
 
 Presence in this registry never proves a condition true. P3 still evaluates
 all surviving models, so false-condition worlds remain uncovered unless an
-accepted source-backed refinement proves the membership condition. One narrow
-exception is structural rather than semantic: when the caller supplies the exact
-current typed acceptance model, this registry may recompute the independently
-verified supported-transform proof and introduce only that one proved atom as a
-formal source constraint plus matching refinement.
+accepted source-backed refinement proves the membership condition.
+
+Two narrow proof-carrying refinements are supported for the typed acceptance
+specialist:
+1. exact model structure may prove the supported-transform atom; and
+2. a content-addressed independently verified pre-verifier information-boundary
+   receipt may prove the no-hidden-verifier-access atom for those exact model
+   bytes.
+
+Neither route proves any other condition atom or whole policy membership.
 """
 from __future__ import annotations
 
