@@ -24,6 +24,8 @@ or terminal authority.
 from __future__ import annotations
 
 from copy import deepcopy
+from hashlib import sha256
+import json
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime.explicit_definition_reference_graph import (
@@ -38,6 +40,7 @@ from canonical.runtime.bounded_semantic_relation_proof_v1 import (
 
 SCHEMA = "PROJECT_BRAIN_DECISION_RELATIVE_SEMANTIC_RELATION_CONTROL_V1"
 CONCEPT_IDENTITY_AUTHORITY_SCHEMA = "PROJECT_BRAIN_SHARED_CONCEPT_IDENTITY_AUTHORITY_RECEIPT_V1"
+TERMINAL_SIGNATURE_AUTHORITY_SCHEMA = "PROJECT_BRAIN_TERMINAL_SIGNATURE_COMPLETENESS_AUTHORITY_RECEIPT_V1"
 _HEX = set("0123456789abcdef")
 
 REQUIRED_RELATIONS = {
@@ -56,6 +59,18 @@ class SemanticRelationError(ValueError):
 def _sha_ok(value: Any) -> bool:
     text = str(value or "").lower()
     return len(text) == 64 and all(ch in _HEX for ch in text)
+
+
+def _canon_sha(value: Any) -> str:
+    return sha256(
+        json.dumps(
+            value,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=False,
+            allow_nan=False,
+        ).encode("utf-8")
+    ).hexdigest()
 
 
 def _shared_concept_identity(
@@ -224,10 +239,90 @@ def _explicit_equivalence(
     }
 
 
+def _terminal_signature_authority(
+    *,
+    scope_id: str,
+    left_id: str,
+    right_id: str,
+    rows: Sequence[Mapping[str, Any]],
+    receipt: Any,
+    verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None,
+) -> dict[str, Any]:
+    if receipt is None:
+        return {
+            "available": True,
+            "proved": False,
+            "reason": "TERMINAL_SIGNATURE_AUTHORITY_RECEIPT_REQUIRED",
+        }
+    if not isinstance(receipt, Mapping) or not callable(verifier):
+        return {
+            "available": True,
+            "proved": False,
+            "reason": "TERMINAL_SIGNATURE_AUTHORITY_RECEIPT_AND_VERIFIER_REQUIRED",
+        }
+
+    by_id = {str(row.get("raw_id") or ""): row for row in rows}
+    if set(by_id) != {left_id, right_id}:
+        return {
+            "available": True,
+            "proved": False,
+            "reason": "TERMINAL_SIGNATURE_AUTHORITY_DOMAIN_MISMATCH",
+        }
+    left_sig = by_id[left_id].get("terminal_signature")
+    right_sig = by_id[right_id].get("terminal_signature")
+    if not isinstance(left_sig, Mapping) or not isinstance(right_sig, Mapping):
+        return {
+            "available": True,
+            "proved": False,
+            "reason": "TERMINAL_SIGNATURE_AUTHORITY_SIGNATURE_INVALID",
+        }
+
+    out = verifier(deepcopy(dict(receipt)))
+    if not isinstance(out, Mapping):
+        return {
+            "available": True,
+            "proved": False,
+            "reason": "TERMINAL_SIGNATURE_AUTHORITY_VERIFIER_RETURNED_NO_RECEIPT",
+        }
+    out = deepcopy(dict(out))
+    required = {
+        "pass": True,
+        "schema": TERMINAL_SIGNATURE_AUTHORITY_SCHEMA,
+        "scope_id": scope_id,
+        "left_id": left_id,
+        "right_id": right_id,
+        "left_terminal_signature_complete": True,
+        "right_terminal_signature_complete": True,
+        "verification_authority_mutated": False,
+        "left_terminal_signature_sha256": _canon_sha(left_sig),
+        "right_terminal_signature_sha256": _canon_sha(right_sig),
+    }
+    bad = [key for key, value in required.items() if out.get(key) != value]
+    if not _sha_ok(out.get("receipt_sha256")):
+        bad.append("receipt_sha256")
+    if bad:
+        return {
+            "available": True,
+            "proved": False,
+            "reason": "TERMINAL_SIGNATURE_AUTHORITY_BINDING_INVALID",
+            "mismatch_fields": sorted(set(bad)),
+            "authority_result": out,
+        }
+    return {
+        "available": True,
+        "proved": True,
+        "reason": "AUTHENTICATED_COMPLETE_TERMINAL_SIGNATURE_PAIR",
+        "authority_result": out,
+    }
+
+
 def _terminal_equivalence(
     left_id: str,
     right_id: str,
+    scope_id: str,
     terminal_rows: Any,
+    authority_receipt: Any,
+    authority_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None,
 ) -> dict[str, Any]:
     if terminal_rows is None:
         return {
@@ -260,6 +355,22 @@ def _terminal_equivalence(
             "available": True,
             "proved": False,
             "reason": "TERMINAL_SIGNATURE_DOMAIN_MUST_BE_EXACT_PAIR",
+        }
+
+    authority = _terminal_signature_authority(
+        scope_id=scope_id,
+        left_id=left_id,
+        right_id=right_id,
+        rows=rows,
+        receipt=authority_receipt,
+        verifier=authority_verifier,
+    )
+    if authority.get("proved") is not True:
+        return {
+            "available": True,
+            "proved": False,
+            "reason": authority.get("reason"),
+            "terminal_signature_authority": authority,
         }
 
     quotient = compile_minimal_quotient(rows)
@@ -322,6 +433,7 @@ def resolve(
     problem: Mapping[str, Any],
     *,
     concept_identity_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    terminal_signature_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     if not isinstance(problem, Mapping):
         return {
@@ -342,6 +454,7 @@ def resolve(
         "required_relation",
         "explicit_definition_sources",
         "terminal_signature_rows",
+        "terminal_signature_authority_receipt",
         "candidate_relations",
         "bounded_extension_evidence",
         "expected_bounded_extension_sha256",
@@ -392,8 +505,26 @@ def resolve(
     terminal = _terminal_equivalence(
         left_id,
         right_id,
+        scope_id,
         problem.get("terminal_signature_rows"),
+        problem.get("terminal_signature_authority_receipt"),
+        terminal_signature_verifier,
     )
+
+    if (
+        terminal.get("available") is True
+        and problem.get("terminal_signature_rows") is not None
+        and terminal.get("terminal_signature_authority", {}).get("proved") is not True
+    ):
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__TERMINAL_SIGNATURE_AUTHORITY_INVALID",
+            "reason": terminal.get("reason"),
+            "terminal_equivalence": terminal,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
 
     shared_concept = _shared_concept_identity(
         scope_id=scope_id,
