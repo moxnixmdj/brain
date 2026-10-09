@@ -17,8 +17,8 @@
     },
     "terminal_authority_candidate": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-      "git_blob_sha": "11303d2dab2baab4378e77e70eabc62174755bcb",
-      "pointer_revision": 101
+      "git_blob_sha": "f89820db00f443cfe4ae2fa603bf7ed5bf4289c3",
+      "pointer_revision": 102
     }
   },
   "canaries": {
