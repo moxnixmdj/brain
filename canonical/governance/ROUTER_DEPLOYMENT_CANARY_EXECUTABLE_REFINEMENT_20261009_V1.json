@@ -1,11 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_CERTIFICATE_V1",
-  "proof_class": "DECLARATIVE_BOUNDING",
   "subject_id": "router-deployment-canary",
   "abstract_spec": {
     "path": "canonical/governance/ROUTER_DEPLOYMENT_CANARY_ABSTRACT_SPEC_20261009_V1.json",
-    "git_blob_sha": "7a491091dddc7f293e26712e0062d8f244b59585",
-    "semantic_version": "PROJECT_BRAIN_ROUTER_DEPLOYMENT_CANARY_ABSTRACT_SPEC_V1"
+    "git_blob_sha": "819a4c7240fbc26fe092b9545e5fd38c1943b8ac",
+    "semantic_version": "ROUTER_DEPLOYMENT_CANARY_ABSTRACT_V1"
   },
   "concrete_implementation": [
     {
@@ -26,12 +25,16 @@
     "unsupported_behavior": "FAIL_CLOSED",
     "classes": [
       {
-        "case_id": "PAYLOAD_MAPPING",
-        "kind": "PASS"
-      },
-      {
         "case_id": "PAYLOAD_NON_MAPPING",
         "kind": "TYPE_ERROR"
+      },
+      {
+        "case_id": "JSON_ENCODING_ERROR",
+        "kind": "TYPE_ERROR"
+      },
+      {
+        "case_id": "PAYLOAD_MAPPING",
+        "kind": "PASS"
       }
     ]
   },
