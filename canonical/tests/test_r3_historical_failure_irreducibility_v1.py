@@ -60,7 +60,7 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
         state_path.write_text(json.dumps(state), encoding="utf-8")
         return state_path, state, wid, fid
 
-    def test_exact_generic_unreplayable_failure_proves_external_information_required(self):
+    def test_exact_generic_unreplayable_failure_proves_current_state_insufficiency_only(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             state_path, state, wid, fid = self._fixture(root)
@@ -68,7 +68,10 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
             with patch.object(cert, "_learning_module", return_value=fake):
                 out = cert.certify(wid, state_path=state_path, repo_root=root)
         self.assertTrue(out["pass"], out)
-        self.assertTrue(out["irreducible_external_information_proved"])
+        self.assertFalse(out["irreducible_external_information_proved"])
+        self.assertFalse(out["information_theoretic_externality_proved"])
+        self.assertTrue(out["current_durable_state_insufficiency_proved"])
+        self.assertEqual(out["classification"], "PENDING_ACQUISITION_OR_EXPERIMENT")
         self.assertEqual(out["failure_fingerprint"], fid)
         self.assertTrue(out["future_evidence_reopens"])
         self.assertFalse(out["permanent_nonrepairability_claimed"])
