@@ -29,6 +29,7 @@ PROFILE="ZERO_AMBIENT_PURE_V1"
 CHILD_PATH="canonical/runtime/d_finality_zero_ambient_child_v1.py"
 FABRIC_PATH="canonical/runtime/unified_cognitive_fabric_v1.py"
 EPOCH_PATH="canonical/runtime/d_finality_execution_epoch_v1.py"
+STDLIB_EXECUTOR_PATH="canonical/runtime/d_final_stdlib_bound_executor_v1.py"
 CONTRACT_SCHEMA="PROJECT_BRAIN_D_CAPABILITY_CONTRACT_V1"
 DYNAMIC_INPUT_SCHEMA="PROJECT_BRAIN_D_DYNAMIC_INPUT_POLICY_V1"
 
@@ -155,6 +156,29 @@ def _stage_dynamic_inputs(
         out.append({"path":rel,"sha256":digest,"bytes":len(data)})
     clean=dict(request)
     clean.pop("d_input_files",None)
+
+    allowed_keys=row.get("allowed_request_keys")
+    if allowed_keys is not None:
+        if not isinstance(allowed_keys,list) or any(
+            not isinstance(x,str) or not x.strip() for x in allowed_keys
+        ):
+            raise ZeroAmbientDFinalError("ALLOWED_REQUEST_KEYS_INVALID")
+        expected=set(str(x).strip() for x in allowed_keys)
+        if set(clean)!=expected:
+            raise ZeroAmbientDFinalError("REQUEST_KEYS_OUTSIDE_CERTIFIED_CONTRACT")
+
+    path_fields=row.get("request_path_fields") or []
+    if not isinstance(path_fields,list) or any(
+        not isinstance(x,str) or not x.strip() for x in path_fields
+    ):
+        raise ZeroAmbientDFinalError("REQUEST_PATH_FIELDS_INVALID")
+    dynamic_paths={x["path"] for x in out}
+    for field in path_fields:
+        value=str(clean.get(field) or "").strip().replace("\\","/")
+        if value not in dynamic_paths:
+            raise ZeroAmbientDFinalError(
+                "REQUEST_PATH_NOT_STAGED_DYNAMIC_INPUT:"+str(field)
+            )
     return out,clean
 
 
@@ -188,9 +212,24 @@ def _prepare_input(
             raise ZeroAmbientDFinalError("MATERIAL_BLOB_DRIFT:"+rel)
         bindings[rel]=expected
 
-    for required in (CHILD_PATH,FABRIC_PATH,EPOCH_PATH):
-        if required not in bindings:
-            raise ZeroAmbientDFinalError("REQUIRED_EXECUTION_MATERIAL_MISSING:"+required)
+    dispatch_kind=str(
+        authority["registry_row"].get("physical_dispatch_kind")
+        or "UNIFIED_FABRIC_V1"
+    )
+    required=[CHILD_PATH,EPOCH_PATH]
+    if dispatch_kind=="UNIFIED_FABRIC_V1":
+        required.append(FABRIC_PATH)
+    elif dispatch_kind=="D_FINAL_STDLIB_BOUND_EXECUTOR_V1":
+        required.append(STDLIB_EXECUTOR_PATH)
+    else:
+        raise ZeroAmbientDFinalError(
+            "PHYSICAL_DISPATCH_KIND_UNSUPPORTED:"+dispatch_kind
+        )
+    for required_path in required:
+        if required_path not in bindings:
+            raise ZeroAmbientDFinalError(
+                "REQUIRED_EXECUTION_MATERIAL_MISSING:"+required_path
+            )
 
     base=pathlib.Path(tempfile.mkdtemp(prefix="brain-d-final-input-"))
     base.chmod(0o755)
@@ -223,6 +262,7 @@ def _prepare_input(
       "dynamic_inputs":dynamic_inputs,
       "material_closure_root":authority["material_closure_root"],
       "execution_epoch_sha256":authority["execution_epoch_sha256"],
+      "physical_dispatch_kind":dispatch_kind,
     }
     _write_json(base/"manifest.json",manifest)
     _write_json(base/"authority.json",{
