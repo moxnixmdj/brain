@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_CC_R3_COUNTEREXAMPLE_RECEIPT_V1",
+  "date": "2026-10-09",
+  "status": "CC_R3_FALSIFIED_CURRENT_EPISTEMIC_ENVELOPE__CLAIM_BOUND__ZERO_CREDIT",
+  "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+  "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
+  "claim_descriptor": {
+    "path": "canonical/governance/CC_ACTIVE_FROZEN_CLAIM_20261009_V1.json",
+    "git_blob_sha": "d4f7068322c5417f806b38ff8b39fe530ccde4ba"
+  },
+  "evidence": {
+    "terminal_manifest": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "b2aae1b51c445ae466e04737e06806801cdc711e",
+      "expected_family_count": 19,
+      "actual_family_count": 19,
+      "open_family_count": 12
+    },
+    "terminal_reducer": {
+      "path": "canonical/runtime/terminal_closure_reducer.py",
+      "git_blob_sha": "27b51e53db5063756ff3046f978c0087fd4a9256",
+      "required_target": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE"
+    }
+  },
+  "witness": {
+    "family_id": "ADVANCED_AGENTIC_CODING",
+    "opus55_acceptance_state": "OPEN",
+    "unresolved": [
+      "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
+    ],
+    "b_plus_membership_reason": "OPEN_ACCEPTANCE_RETAINS_FAIL_COMPLETION_UNDER_FROZEN_CLAIM_SEMANTICS",
+    "not_in_g_minus_reason": "G_MINUS_REQUIRES_ALL_MANDATORY_TERMINAL_PREDICATES_SATISFIED"
+  },
+  "proof": {
+    "rule_1": "OPEN_FAMILY => FAIL_COMPLETION_REMAINS_IN_B_PLUS",
+    "rule_2": "FAIL_COMPLETION_FOR_ANY_MANDATORY_ACCEPTANCE_PREDICATE => COMPLETION_NOT_IN_G_MINUS",
+    "conclusion": "EXISTS_w_IN_B_PLUS_MINUS_G_MINUS",
+    "u_empty": false,
+    "b_plus_subseteq_g_minus": false
+  },
+  "all_current_open_families_count": 12,
+  "cc_r3_proved": false,
+  "next": "REFINE_B_PLUS_OR_EXPAND_G_MINUS_BY_DISCHARGING_CURRENT_OPEN_ACCEPTANCE_FRONTIER__DO_NOT_ATTACK_R1_R2_FOR_TERMINAL_SUCCESS_WHILE_R3_COUNTEREXAMPLE_SURVIVES",
+  "nonclaims": [
+    "DOES_NOT_PROVE_REAL_SYSTEM_FAILURE_ON_ADVANCED_AGENTIC_CODING",
+    "DOES_NOT_PROVE_ANY_OPEN_FAMILY_WILL_FAIL",
+    "PROVES_ONLY_CURRENT_CLAIM_BOUND_R3_CLOSURE_IS_FALSE_UNDER_CONSERVATIVE_EPISTEMIC_ENVELOPE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
