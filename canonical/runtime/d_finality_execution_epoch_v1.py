@@ -172,6 +172,11 @@ def verify_certificate(
         raise DFinalityError("POLICY_NOT_ACTIVE")
 
     actual_policy_sha = policy_sha256(policy)
+    declared_policy_sha = policy.get("policy_sha256")
+    if declared_policy_sha is not None and _hex(
+        declared_policy_sha, 64, "POLICY_SHA256"
+    ) != actual_policy_sha:
+        raise DFinalityError("POLICY_SELF_DIGEST_MISMATCH")
     if _hex(certificate.get("policy_sha256"), 64, "CERTIFICATE_POLICY_SHA256") != actual_policy_sha:
         raise DFinalityError("CERTIFICATE_POLICY_DRIFT")
 
