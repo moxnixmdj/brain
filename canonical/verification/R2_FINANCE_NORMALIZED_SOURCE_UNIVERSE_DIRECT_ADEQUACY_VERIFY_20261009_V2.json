@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_NORMALIZED_SOURCE_UNIVERSE_DIRECT_ADEQUACY_VERIFY_20261009_V2",
+  "date": "2026-10-09",
+  "status": "PASS__V31_REBASED_NORMALIZED_FINANCE_SOURCE_UNIVERSE_DIRECT_ADEQUACY__28_OF_28_BEHAVIORAL__3_OF_3_COMPILE__ZERO_CREDIT",
+  "base_main_commit": "1e954e5be1052d118ca37980549b8f24193a747d",
+  "tested_branch": "r2-fsrc-v31-clean",
+  "tested_head": "5c7c79b624cf7c7449f79e00dcbfbb1ef03e0c90",
+  "load_bearing_blobs": {
+    "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py": "7530b3717eda4429a7903bf5d317384d727b8de7",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v2.py": "f0724b0c0c96fe4fac2aacdfd19b7a9c6a62f737",
+    "canonical/tests/test_r2_finance_normalized_source_universe_direct_adequacy_v1.py": "337d88d2f13a175befbc0305161f80ad3f1f5403"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "working_copy": "/home/sprite/brain"
+  },
+  "verification": {
+    "family_adversarial": "7_OF_7_PASS",
+    "v2_front_door_routing_laws": "4_OF_4_PASS",
+    "exact_v31_v1_fallback_regression": "15_OF_15_PASS",
+    "real_v2_end_to_end_both_finance_leaves": "2_OF_2_PASS",
+    "compile": "3_OF_3_PASS",
+    "route_inventory_after_patch": 22,
+    "existing_v31_route_inventory_before_patch": 21
+  },
+  "proves": [
+    "COMPLETE_NORMALIZED_TYPED_FINANCE_PACKAGES_FOR_BOTH_FROZEN_FINANCE_LEAVES_HAVE_A_BOUNDED_DIRECT_ROUTE",
+    "PACKAGE_FIELD_SET_IS_EXACT_AND_UNKNOWN_FIELDS_FAIL_CLOSED",
+    "ALL_TYPED_DECISION_EVIDENCE_IS_PARTITIONED_EXACTLY_ONCE_ACROSS_REQUIRED_FINANCE_ROLES",
+    "SUPERVISORY_PACKAGES_REQUIRE_RULE_AND_EXCEPTION_EVIDENCE",
+    "DOCUMENT_PACKAGES_REQUIRE_FACT_AND_CROSS_REFERENCE_EVIDENCE_AND_EXACT_RECONCILIATION_BINDINGS",
+    "TYPED_DECISION_OUTPUT_IS_PRODUCER_INDEPENDENTLY_RECOMPUTED",
+    "UNION_OF_RANKING_CONTRIBUTING_EVIDENCE_EQUALS_COMPLETE_PACKAGE_EVIDENCE_DOMAIN",
+    "INPUT_BYTES_REMAIN_IMMUTABLE_AND_OUTPUT_ROLLS_BACK_ON_POST_SYNTHESIS_FAILURE",
+    "V31_NORMALIZED_IF_THEN_ROUTE_RETAINS_PRECEDENCE",
+    "MATCHED_SOURCE_UNIVERSE_FAILURE_NEVER_FALLS_THROUGH",
+    "UNMATCHED_REQUESTS_DELEGATE_EXACTLY_TO_V1",
+    "V31_V1_DIRECT_ROUTER_REGRESSION_REMAINS_15_OF_15_PASS"
+  ],
+  "hard_nonclaims": [
+    "NO_RAW_PROSE_TO_NORMALIZED_PACKAGE_CORRECTNESS_CLAIM",
+    "NO_SYNONYMY_REFERENCE_RESOLUTION_OR_ONTOLOGY_INFERENCE_CLAIM",
+    "NO_CROSS_DOCUMENT_BINDING_CORRECTNESS_CLAIM_BEYOND_EXPLICIT_TYPED_PACKAGE_INPUT",
+    "NO_EXTERNAL_FACT_AUTHENTICATION_CLAIM",
+    "NO_GLOBAL_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_OPEN_WORLD_CLOSURE",
+    "NO_OPUS_CHECKPOINT_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
