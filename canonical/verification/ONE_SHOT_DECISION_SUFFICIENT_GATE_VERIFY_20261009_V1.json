@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_SHOT_DECISION_SUFFICIENT_GATE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__FOCUSED_18_OF_18__CURRENT_V1_ADJACENT_7_OF_7__PY_COMPILE_PASS",
+  "branch": "one-shot-decision-sufficient-gate-20261009",
+  "branch_commits": [
+    "e5a2a6c20199da62a984e8df8b8591dff4000870",
+    "a70931594322c5d2db0d8a6fae52b2e8fd285fdb"
+  ],
+  "base_commit": "a15982ba6eb7ee95fed4b6fa58bbb15cbd4f0f5c",
+  "observed_current_main": "b3d6b4b9a53d09db85c2611536652ed393577e16",
+  "current_main_delta_overlap_with_patch": false,
+  "patch_paths": [
+    "canonical/runtime/one_shot_reality_closure_v2.py",
+    "canonical/tests/test_one_shot_reality_closure_v2.py"
+  ],
+  "verification_carrier": {
+    "sprite": "brain-live-integrated-v1-run-20261008",
+    "exact_current_v1_materialized_from_main": true,
+    "v1_runtime_blob_sha": "87452102d9c6c1d330a1d714763ad078b8f2d103",
+    "v1_test_blob_sha": "bc58a3a997b2b9941374201be18fa59b2e3f153b",
+    "v2_runtime_blob_sha": "f7e42025aa80d2ae18e752262b4f5cb933d0ba39",
+    "v2_test_blob_sha": "05f046e45282dd7ab602dec1d68b25abd06cf3d5"
+  },
+  "checks": {
+    "py_compile": "PASS",
+    "focused_v2": "18_OF_18_PASS",
+    "adjacent_current_v1": "7_OF_7_PASS"
+  },
+  "initial_combined_process_result": {
+    "status": "DISCARDED_AS_TEST_HARNESS_CONTAMINATION",
+    "reason": "V2 test intentionally stubs canonical.runtime.one_shot_verified_closure_v1 in sys.modules; same-process V1 suite therefore imported stub instead of real module."
+  },
+  "guarantees": [
+    "EVERY_OPEN_GAP_RECEIVES_CONTENT_ADDRESSED_DECISION_SUFFICIENT_CONTRACT",
+    "BUILTIN_DECISION_REDUCTION_IS_LOSSLESS_IDENTITY__NO_UNVERIFIED_OMISSION",
+    "FUTURE_COMPRESSION_REQUIRES_OMISSION_CERTIFICATE",
+    "EVIDENCE_ACQUISITION_RECEIVES_DEDUPLICATED_MINIMUM_POLICY_CHANGING_INFORMATION_CONTRACT",
+    "FULL_EMPIRICAL_EVALUATION_REMAINS_LAST",
+    "SYNTHESIS_AND_ACQUISITION_CANNOT_MUTATE_VERIFICATION_AUTHORITY"
+  ],
+  "nonclaims": [
+    "NO_UNIVERSAL_SEMANTIC_COMPRESSION_CLAIM",
+    "NO_OPEN_WORLD_TERMINAL_CLOSURE_CLAIM",
+    "NO_CHECKPOINT_CREDIT",
+    "NO_CLAIM_THAT_ANY CURRENT_EXTERNAL_OBLIGATION_IS NOW SATISFIED"
+  ],
+  "terminal_authority": false,
+  "checkpoint_credit_delta": 0,
+  "acceptance_credit_delta": 0
+}
