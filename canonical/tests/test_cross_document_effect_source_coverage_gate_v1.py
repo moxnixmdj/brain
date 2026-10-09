@@ -7,6 +7,7 @@ import unittest
 from canonical.runtime import cross_document_effect_hypothesis_worldset_v1 as w
 from canonical.runtime import cross_document_effect_source_coverage_gate_v1 as g
 from canonical.runtime import cross_document_effect_source_coverage_gate_verify_v1 as gv
+from canonical.runtime import certified_raw_effect_sentence_v1 as rawc
 
 
 def _canon(x):
@@ -121,7 +122,97 @@ def _capsule(problem,*,open_tail=False):
     }
 
 
+def _raw_sentence_capsule():
+    sentences={
+        "A":"Effect A.t defines threshold as 10.",
+        "B":"Effect B.t replaces A.t on threshold with 12 effective 2026-07-01.",
+        "C":"Effect C.t excepts B.t on threshold with 8 when small = true effective 2026-07-01.",
+    }
+    slots={}
+    docs=[]
+    for did in ("A","B","C"):
+        sid=did+".effect"
+        compiled=rawc.compile_sentence(
+            sentences[did],
+            document_id=did,
+            slot_id=sid,
+        )
+        assert compiled["pass"], compiled
+        slots[did]=compiled["slot"]
+        raw=sentences[did].encode("utf-8")
+        docs.append({
+            "document_id":did,
+            "source_text":sentences[did],
+            "source_sha256":_sha(raw),
+            "coverage_regions":[{
+                "region_id":did+".sentence",
+                "start":0,
+                "end":len(raw),
+                "text_sha256":_sha(raw),
+                "mode":"CERTIFIED_EFFECT_SENTENCE",
+                "slot_id":sid,
+            }],
+        })
+    problem={
+        "schema":w.SCHEMA,
+        "case_id":"raw-sentences",
+        "hypothesis_set_complete":True,
+        "compatibility_constraints_complete":True,
+        "incompatible_hypothesis_sets":[],
+        "documents":[
+            {"document_id":did,"effect_slots":[slots[did]]}
+            for did in ("A","B","C")
+        ],
+        "query":{
+            "target_id":"threshold",
+            "as_of":"2026-08-01",
+            "context":{"small":True},
+        },
+    }
+    return {
+        "schema":g.SCHEMA,
+        "case_id":"raw-sentences",
+        "documents":docs,
+        "worldset_problem":problem,
+    }
+
+
 class CrossDocumentEffectSourceCoverageGateV1Tests(unittest.TestCase):
+
+    def test_certified_effect_sentences_close_three_document_chain(self):
+        cap=_raw_sentence_capsule()
+        out=g.evaluate(cap)
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(out["effective_value"],8)
+        self.assertEqual(out["world_count"],1)
+        self.assertTrue(out["source_byte_coverage_complete"])
+        self.assertTrue(out["finite_effect_hypothesis_completeness_proved"])
+        self.assertTrue(gv.verify(cap,out)["verified"])
+
+    def test_certified_effect_sentence_worldset_mismatch_fails_closed(self):
+        cap=_raw_sentence_capsule()
+        effect=cap["worldset_problem"]["documents"][1]["effect_slots"][0]["hypotheses"][0]["effect"]
+        effect["value"]=13
+        out=g.evaluate(cap)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"],"FAIL_CLOSED")
+        self.assertIn("CERTIFIED_EFFECT_SENTENCE_WORLDSET_MISMATCH",out["reason"])
+
+    def test_unrecognized_text_cannot_be_mislabeled_certified_sentence(self):
+        cap=_raw_sentence_capsule()
+        doc=cap["documents"][1]
+        text="The threshold changes to twelve."
+        raw=text.encode("utf-8")
+        doc["source_text"]=text
+        doc["source_sha256"]=_sha(raw)
+        region=doc["coverage_regions"][0]
+        region["end"]=len(raw)
+        region["text_sha256"]=_sha(raw)
+        out=g.evaluate(cap)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"],"FAIL_CLOSED")
+        self.assertIn("CERTIFIED_EFFECT_SENTENCE_NOT_PROVED",out["reason"])
+
     def test_fully_source_closed_worldset_returns_verified_value(self):
         problem=_problem(small=True)
         out=g.evaluate(_capsule(problem))
