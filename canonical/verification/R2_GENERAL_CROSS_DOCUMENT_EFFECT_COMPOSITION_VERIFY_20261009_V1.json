@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_R2_GENERAL_CROSS_DOCUMENT_EFFECT_COMPOSITION_VERIFY_V1",
   "date": "2026-10-09",
-  "branch": "r2-general-cross-document-effects-v1-current",
-  "pull_request": 3481,
+  "branch": "r2-general-cross-document-effects-v1-current2",
+  "pull_request": 3489,
   "capability": "GENERAL_PROOF_CARRYING_CROSS_DOCUMENT_EFFECT_COMPOSITION",
   "status": "VERIFIED_ISOLATED_COMPOSITION_AND_R2_INTEGRATION__FULL_CURRENT_TREE_CARRIER_NOT_EXECUTED",
   "exact_scope": {
@@ -69,12 +69,14 @@
     "behavioral_failures": 0
   },
   "github_actions": {
-    "run_id": 37893288298,
-    "attempts": 2,
+    "run_id": 37895906205,
+    "attempts": 1,
     "conclusion": "FAILURE_BEFORE_ANY_STEP_EXECUTED",
     "runner_id": 0,
     "steps": [],
-    "classification": "VERIFICATION_CARRIER_FAILURE_NOT_PYTHON_TEST_FAILURE"
+    "head_sha": "ec6e3772f7046709186c0650beca6a1f8cf495d0",
+    "classification": "VERIFICATION_CARRIER_FAILURE_NOT_PYTHON_TEST_FAILURE",
+    "prior_same_shape_run_id": 37893288298
   },
   "nonclaims": [
     "NO_ARBITRARY_RAW_LANGUAGE_EFFECT_EXTRACTION",
@@ -85,5 +87,10 @@
   ],
   "architectural_result": "CROSS_DOCUMENT_INTERACTION_REDUCED_FROM_PAIRWISE_HANDLERS_TO_GENERIC_COMPOSITION_OF_PROOF_CARRYING_EFFECTS",
   "terminal_authority": false,
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "base_main_sha": "593e3b8af63d2d56df7a91c1b8c909599479a413",
+  "ancestry_at_verification": {
+    "behind_by": 0,
+    "ahead_by": 8
+  }
 }
