@@ -193,5 +193,81 @@ class RealityClosureV2IntegrationTests(unittest.TestCase):
 
 
 
+    def test_repeated_failure_rejects_provider_that_skips_reuse_first(self):
+        TMP.mkdir(parents=True, exist_ok=True)
+        with TemporaryDirectory(dir=TMP) as td:
+            state_path = Path(td) / "state.json"
+            learning._write_state(learning._empty_state(), state_path)
+
+            def first_repair(request):
+                return {
+                    "pass": True,
+                    "infrastructure_repaired": True,
+                    "verification_authority_mutated": False,
+                    "receipt_sha256": "6" * 64,
+                    "reuse_first_attempted": False,
+                }
+
+            with patch.object(
+                v2.v1,
+                "run",
+                side_effect=[
+                    RuntimeError("runner unavailable"),
+                    self._solved_closure(initial="i-seed", final="f-seed"),
+                ],
+            ):
+                seeded = v2.run(
+                    repo_root=ROOT,
+                    state_path=state_path,
+                    infrastructure_repair_provider=first_repair,
+                    max_repair_rounds=2,
+                )
+            self.assertTrue(seeded["pass"], seeded)
+
+            seen = []
+            def nonreusing_repair(request):
+                seen.append(request)
+                return {
+                    "pass": True,
+                    "infrastructure_repaired": True,
+                    "verification_authority_mutated": False,
+                    "receipt_sha256": "5" * 64,
+                    "reuse_first_attempted": False,
+                }
+
+            with patch.object(
+                v2.v1,
+                "run",
+                side_effect=RuntimeError("runner unavailable"),
+            ):
+                out = v2.run(
+                    repo_root=ROOT,
+                    state_path=state_path,
+                    infrastructure_repair_provider=nonreusing_repair,
+                    max_repair_rounds=1,
+                )
+
+            state = learning.load_state(state_path)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "OPEN__INTERNAL_UNSOLVED__INFRASTRUCTURE_OR_PROVIDER_FAILURE",
+        )
+        self.assertEqual(len(seen), 1)
+        self.assertTrue(seen[0]["reuse_first_required"])
+        self.assertTrue(seen[0]["prior_verified_repair_receipts"])
+        self.assertTrue(out["learning_obligation"]["reuse_first_required"])
+
+        repair_work = [
+            row for row in state["improvement_queue"].values()
+            if row["kind"] == "REPAIR_FAILURE_CLASS"
+        ]
+        self.assertEqual(len(repair_work), 1)
+        self.assertEqual(repair_work[0]["status"], "PENDING")
+        self.assertGreaterEqual(repair_work[0]["reopen_count"], 1)
+
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
