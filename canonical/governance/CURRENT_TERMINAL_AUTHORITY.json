@@ -694,8 +694,8 @@
     },
     "acceptance_proof_shape_quotient": {
       "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
-      "git_blob_sha": "f19488744db2a2b0d69d8b099f912e5d2b5bae84",
-      "note": "CURRENT_13_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS_AFTER_AGENCY_DENSE_NONCHART_AND_FINANCE_DIRECT_SCOPE_DEPENDENCY_COLLAPSES"
+      "git_blob_sha": "b20c5cd6965f7ea7e5ca019d1e828ac6eced042c",
+      "note": "CURRENT_13_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS_AFTER_AGENCY_DENSE_NONCHART_AND_FINANCE_DIRECT_SCOPE_DEPENDENCY_COLLAPSES__EXACT_CURRENT_QUOTIENT_BYTES"
     },
     "aa_briefcase_opus55_current_owner_target": {
       "path": "canonical/evidence/AA_BRIEFCASE_OPUS55_CURRENT_OWNER_TARGET_20261007_V1.json",
@@ -2840,7 +2840,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 108,
+  "pointer_revision": 109,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4066,6 +4066,18 @@
       "frontiercode_literal_same_harness_required": false,
       "frontiercode_brain_harness_requirement": "OWNER_ADMISSIBLE_OR_SEPARATELY_PROVED_PROTOCOL_EQUIVALENT"
     },
+    "semantic_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "duplicate_authoritative_path_binding_reconciliation_20261009_v1": {
+    "status": "PASS__ONLY_CONTRADICTORY_DUPLICATE_PATH_REBOUND__GENERAL_INVARIANT_ADDED__ZERO_CREDIT",
+    "file_path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
+    "corrected_object_path": "authoritative_sources.acceptance_proof_shape_quotient",
+    "prior_git_blob_sha": "f19488744db2a2b0d69d8b099f912e5d2b5bae84",
+    "current_git_blob_sha": "b20c5cd6965f7ea7e5ca019d1e828ac6eced042c",
+    "contradictory_duplicate_path_count_before": 1,
+    "contradictory_duplicate_path_count_after": 0,
     "semantic_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
