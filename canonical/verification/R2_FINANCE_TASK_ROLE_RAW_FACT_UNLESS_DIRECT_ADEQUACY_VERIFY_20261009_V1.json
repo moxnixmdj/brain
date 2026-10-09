@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_TASK_ROLE_RAW_FACT_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__TASK_ROLE_CROSS_DOCUMENT_FINANCE_UNLESS_DIRECT_ADEQUACY__EXACT_BYTES__PY_COMPILE_5_OF_5__INDEPENDENT_HARNESS_9_OF_9__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "pr": 3448,
+    "branch": "r2-v34-task-role-cross-document-finance-20261009",
+    "verified_head_commit": "9b19829963cf29f8946672e7f34a798a4e3e65fe",
+    "route_id": "DIRECT_ADEQUACY::FINANCE_TASK_ROLE_RAW_FACT_UNLESS_FAMILY_V1"
+  },
+  "exact_blobs": {
+    "canonical/runtime/finance_task_role_raw_fact_unless_branch_v1.py": "4fa8f18402efe08c5553bf019f64abc176429c08",
+    "canonical/runtime/finance_task_role_raw_fact_unless_verify_v1.py": "e38ee6d9e84e8a29c3777aa8a51660145bfedc91",
+    "canonical/runtime/r2_finance_task_role_raw_fact_unless_direct_adequacy_v1.py": "549957867493a342b2b41da27cce34af69a9948e",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v4.py": "20b78cf7343773fa8afaf33674dc2c8c339cd38e",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "9b2978c54712eabd0c7d55919be12be22937a81d"
+  },
+  "reused_exact_dependencies": {
+    "canonical/runtime/bounded_task_source_set_gate_v1.py": "4b42b32ed68b588a354716c6dd53391a23314f41",
+    "canonical/runtime/certified_defined_term_raw_typed_condition_v2.py": "1a9eef8dff77ef36f29c97509b2eedc7df2186b3",
+    "canonical/runtime/authoritative_typed_context_compiler_v1.py": "3f2751424076a69168bd0b1cb22e9c2d42920a01",
+    "canonical/runtime/certified_defined_term_typed_condition_v1.py": "b35a8e56f302a904993dc2e3ef85195e9db2f129",
+    "canonical/runtime/explicit_definition_reference_graph.py": "950f073b35b9d7f42c76c518711462f00e89b262",
+    "canonical/runtime/certified_scope_fragment_v1.py": "daad64c3854a4820f59236c1e1e2beca633d5f01",
+    "canonical/runtime/lossless_raw_task_contract_v1.py": "d54d5a2f7efa76b653d288f4f53da4883644baa6"
+  },
+  "failed_primary_ci_carrier": {
+    "workflow_run_id": 37884554242,
+    "first_job_id": 113671511129,
+    "rerun_job_id": 113671822285,
+    "first_job_steps_executed": 0,
+    "rerun_job_steps_executed": 0,
+    "interpretation": "ORCHESTRATION_FAILURE_ONLY__NO_CODE_FAILURE_EVIDENCE__BYPASSED_NOT_WAIVED"
+  },
+  "independent_exact_byte_capsule": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 2455,
+    "capsule_commit": "96e428ce023007b9817df8a24ecb1ff4092f6561",
+    "carrier": {
+      "name": "brain-live-integrated-v1-run-20261008",
+      "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+      "clone_public_capsule_success": true
+    },
+    "exact_blob_identity_pass": true,
+    "py_compile": {
+      "pass": true,
+      "file_count": 5,
+      "exit_code": 0
+    },
+    "independent_harness": {
+      "pass": true,
+      "test_count": 9,
+      "failures": 0,
+      "errors": 0,
+      "cases": [
+        "BOOLEAN_FACT_SOURCE",
+        "DECIMAL_TRUE_AND_FALSE",
+        "DUPLICATE_JSON_KEY_REJECTED",
+        "FIXED_POINT_STEP_ZERO_REACHES_V4",
+        "PREFLIGHT_SIDE_EFFECT_FREE",
+        "SOURCE_MUTATION_DETECTED",
+        "UNDECLARED_FACT_ROLE_REJECTED",
+        "V4_MATCH_AND_V3_FALLBACK",
+        "TAMPERED_BRANCH_REJECTED"
+      ]
+    }
+  },
+  "proved_scope": {
+    "removed_residual_slice": "CROSS_DOCUMENT_POLICY_TO_RAW_TYPED_FACT_BINDING_WHEN_TASK_RECORD_EXPLICITLY_DESIGNATES_DISTINCT_POLICY_AND_FACT_PATHS_WITHIN_ITS_DECLARED_BOUNDED_SOURCE_SET_AND_POLICY_USES_EXPLICIT_TERM_TO_LITERAL_TYPED_FIELD_UNLESS",
+    "source_role_authority": "TASK_RECORD_EXPLICIT_ROLE_BINDING_ONLY",
+    "raw_fact_interpretation": "EXACT_BYTES_TO_STRICT_TYPED_JSON_CONTEXT",
+    "branch_acceptance": "PRODUCER_INDEPENDENT_RECOMPUTATION",
+    "source_immutability_required": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_IMPLICIT_SOURCE_ROLE_DISCOVERY",
+    "NO_CLAIM_GENERAL_CROSS_DOCUMENT_REFERENCE_RESOLUTION",
+    "NO_CLAIM_SYNONYMY_OR_CONTEXT_DEPENDENT_WORD_SENSE",
+    "NO_CLAIM_ONTOLOGY_OR_DOMAIN_CONCEPT_MAPPING",
+    "NO_CLAIM_TASK_DECLARATION_PROVES_EXTERNAL_WORLD_FACT_AUTHORITY",
+    "NO_CLAIM_EXTERNAL_FACT_AUTHENTICATION",
+    "NO_CLAIM_FINANCE_FAMILY_CLOSED",
+    "NO_CLAIM_OPEN_WORLD_POSITIVE_ADEQUACY_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  }
+}
