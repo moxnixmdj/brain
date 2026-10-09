@@ -68,8 +68,8 @@
     },
     {
       "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
-      "source_id": "FSB_TLAC_2015_11_09",
-      "url": "https://www.fsb.org/2015/11/total-loss-absorbing-capacity-tlac-principles-and-term-sheet/",
+      "source_id": "FSB_TLAC_STANDARD_2015_11_09",
+      "url": "https://www.fsb.org/2015/11/total-loss-absorbing-capacity-tlac-principles-and-term-sheet-2/",
       "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
       "fragments": [
         {
@@ -77,7 +77,15 @@
           "section_anchor": "Total Loss-Absorbing Capacity (TLAC) Principles and Term Sheet",
           "text": "All G-SIB are required to meet a new requirement for Minimum External TLAC alongside minimum regulatory capital requirements set out in the Basel III framework.",
           "max_chars_after_anchor": 12000
-        },
+        }
+      ]
+    },
+    {
+      "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id": "FSB_TLAC_2015_11_09",
+      "url": "https://www.fsb.org/2015/11/total-loss-absorbing-capacity-tlac-principles-and-term-sheet/",
+      "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments": [
         {
           "fragment_id": "TLAC_LOSS_RECAP_RESOLUTION",
           "section_anchor": "Total Loss-Absorbing Capacity (TLAC) Principles and Term Sheet",
