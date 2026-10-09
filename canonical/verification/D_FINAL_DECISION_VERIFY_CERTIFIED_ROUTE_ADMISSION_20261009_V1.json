@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINAL_CERTIFIED_ROUTE_ADMISSION_V1",
+  "status": "PASS__D_FINAL_DECISION_VERIFY_ROUTE_ADMITTED",
+  "date": "2026-10-09",
+  "cell_id": "D_FINAL_BOUND_DECISION_VERIFY_LIVE_V1",
+  "route_id": "d-final-decision-verify-live-v1",
+  "route_path": "canonical/runtime/d_final_decision_verify_certified_route_v1.py",
+  "route_blob_sha": "3430eea0f0313b8d6ac6871a0f3c931f5cb616b1",
+  "creditable": true,
+  "context_digest_sha256": "7a71a0ab6ddc9ccf6b06345031ddf52c9e8d502d13b46e232851b1dead24dec7",
+  "admitted": true,
+  "payload_validator_path": "canonical/runtime/d_final_decision_verify_payload_validator_v1.py",
+  "payload_validator_blob_sha": "099db70ee9a03392748d1788bf9301988f32b81f",
+  "payload_validator_callable": "validate",
+  "rule": "EXACT_CONTEXT_AND_EPHEMERAL_DECISION_PATHS_ONLY",
+  "terminal_authority": false
+}
