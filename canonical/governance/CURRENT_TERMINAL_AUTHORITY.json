@@ -1222,7 +1222,7 @@
       },
       "dependency_graph": {
         "path": "canonical/governance/CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1.json",
-        "git_blob_sha": "b4fc9176f5e463e2352c437708dfe4dc75898368"
+        "git_blob_sha": "769b2f277b41045f8a95ad3a2d0eb2cfaabcdb27"
       },
       "router_canary_binding": {
         "path": "canonical/governance/ROUTER_DEPLOYMENT_CANARY_EXECUTABLE_REFINEMENT_20261009_V1.json",
@@ -1236,7 +1236,11 @@
         "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
         "git_blob_sha": "c4f3ed3ea767a8930789f2426484fbce710d8f14"
       },
-      "note": "STRUCTURAL_BINDING_AND_ANTI_BYPASS_FRAMEWORK_ONLY__NO_MECHANICALLY_CHECKED_EXECUTABLE_REFINEMENT_PROOF_CLASS__ZERO_TERMINAL_CREDIT"
+      "note": "STRUCTURAL_BINDING_AND_ANTI_BYPASS_FRAMEWORK_ONLY__NO_MECHANICALLY_CHECKED_EXECUTABLE_REFINEMENT_PROOF_CLASS__ZERO_TERMINAL_CREDIT",
+      "terminal_dependency_falsifier": {
+        "path": "canonical/runtime/terminal_dependency_falsifier_v1.py",
+        "git_blob_sha": "0e540e2c76f5618593805a09ac0a4dd7ded354bb"
+      }
     }
   },
   "live_truth": {
@@ -3666,7 +3670,7 @@
   },
   "executable_refinement_reconciliation_20261009_v1": {
     "status": "FRAMEWORK_BOUND__MECHANICAL_REFINEMENT_PROOF_CLASS_STILL_OPEN__TERMINAL_FALSE",
-    "highest_dominance_open_leaf": "MECHANICALLY_CHECKED_MODEL_TO_EXECUTABLE_REFINEMENT_FOR_TERMINAL_LOAD_BEARING_PATHS",
+    "highest_dominance_open_leaf": "terminal-live-paths-executable-refinement",
     "closed": [
       "CONTENT_ADDRESSED_REFINEMENT_CERTIFICATE_STRUCTURE",
       "DECLARATIVE_SELF_CERTIFICATION_REJECTED",
@@ -3675,6 +3679,7 @@
     ],
     "open": [
       "NO_SUPPORTED_PROOF_CLASS_CURRENTLY_EMITS_REFINEMENT_VERIFIED_TRUE",
+      "TERMINAL_LIVE_PATHS_EXECUTABLE_REFINEMENT_LEAF_IS_UNRESOLVED",
       "ROUTER_CANARY_HAS_ONLY_STRUCTURAL_BINDING_AND_DIFFERENTIAL_EVIDENCE",
       "SEMANTIC_EDGE_HAS_ONLY_STRUCTURAL_BINDING_AND_EXISTING_TEST_EVIDENCE",
       "REPOSITORY_WIDE_EXECUTABLE_REFINEMENT_IS_NOT_CLOSED"
