@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_OEWN_CONCEPT_POLICY_BRIDGE_REMOTE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_BYTES_9_OF_9__24_OF_24__PY_COMPILE_PASS__ZERO_CREDIT",
+  "subject": {
+    "base_main": "ce46c7eba587a813a8da65e7370fab5a350f4f7d",
+    "branch": "r2-oewn-concept-policy-bridge-20261009",
+    "runtime": {
+      "path": "canonical/runtime/oewn_concept_policy_bridge_v1.py",
+      "git_blob_sha": "8c5111253d19f80a363b08504bc3ce6c4d70f63e"
+    },
+    "tests": {
+      "path": "canonical/tests/test_oewn_concept_policy_bridge_v1.py",
+      "git_blob_sha": "fa71d4ee90627a019263fb78077fa47c685a2d10"
+    }
+  },
+  "exact_blobs": {
+    "canonical/runtime/oewn_concept_policy_bridge_v1.py": "8c5111253d19f80a363b08504bc3ce6c4d70f63e",
+    "canonical/tests/test_oewn_concept_policy_bridge_v1.py": "fa71d4ee90627a019263fb78077fa47c685a2d10",
+    "canonical/runtime/bounded_authenticated_concept_universe_v1.py": "2af90250d6d042646c997cf8c0b49ed7b627ebb7",
+    "canonical/runtime/semantic_ambiguity_control_v1.py": "d9a29eb161a0f3b7e14334857f548e416bb460a0",
+    "canonical/runtime/semantic_information_frontier_v1.py": "b16e2c40dec3030868c37adad880b8601f565e46",
+    "canonical/tests/test_bounded_authenticated_concept_universe_v1.py": "ffc75ea3fb9980d034319c4f4f322b7cf3836349",
+    "canonical/tests/test_authenticated_context_concept_bridge_v1.py": "4aae8eff874b544e9d3d24d66eece0c0a666de75",
+    "canonical/runtime/authenticated_context_concept_bridge_v1.py": "7fb56a8318d774098812a19b5a0544ee8dea930f",
+    "canonical/runtime/authoritative_typed_context_compiler_v1.py": "3f2751424076a69168bd0b1cb22e9c2d42920a01"
+  },
+  "independent_carrier": {
+    "name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "isolated_root": "/home/sprite/verify-oewn-concept-policy"
+  },
+  "verified": [
+    "OEWN_RELEASE_RELATIVE_SENSES_CANNOT_BE_SILENTLY_DELETED",
+    "COMPLETE_MAPPING_DOMAIN_REQUIRED_FOR_EVERY_OEWN_CANDIDATE_SENSE",
+    "UNKNOWN_CONCEPT_LINKS_FAIL_CLOSED",
+    "MAPPING_AUTHORITY_REQUIRED_AND_VERIFICATION_AUTHORITY_MUTATION_REJECTED",
+    "TERMINALLY_EQUIVALENT_SENSES_STOP_WITHOUT_INTENDED_SENSE_IDENTITY",
+    "TERMINALLY_DISTINCT_SENSES_REUSE_EXISTING_EXACT_MINIMAX_DISCRIMINATOR",
+    "UNSEPARABLE_TERMINALLY_DISTINCT_SENSES_REQUIRE_STRONGER_AUTHENTIC_INFORMATION",
+    "OEWN_RELEASE_RELATIVE_ABSENCE_NEVER_BECOMES_OPEN_WORLD_ABSENCE",
+    "ADJACENT_AUTHENTICATED_CONCEPT_AND_CONTEXT_CONTROL_REGRESSIONS_PASS"
+  ],
+  "tests": {
+    "new_bridge": "9_OF_9_PASS",
+    "combined": "24_OF_24_PASS",
+    "py_compile": "PASS"
+  },
+  "frontier_delta": {
+    "closed": [
+      "MISSING_COMPOSITION_FROM_COMPLETE_OEWN_SENSE_UNIVERSE_TO_AUTHENTICATED_BOUNDED_CONCEPT_POLICY_CONTROL",
+      "NEED_TO_IDENTIFY_ONE_GLOBAL_INTENDED_SENSE_WHEN_ALL_SURVIVING_SENSES_ARE_TERMINALLY_EQUIVALENT"
+    ],
+    "remains_internal_unsolved": [
+      "DURABLE_AUTHORITY_TRANSPORT_FOR_REAL_TASK_REGISTRY_SCOPE_CONCEPT_SEMANTICS_AND_OEWN_SENSE_TO_CONCEPT_MAPPING",
+      "ACQUISITION_OF_MINIMUM_AUTHENTIC_REGISTRY_OR_MAPPING_WHEN_NOT_ALREADY_BOUND",
+      "TERMS_OUTSIDE_PROVED_COMPLETE_LEXICAL_OR_DOMAIN_UNIVERSES",
+      "GENERAL_CROSS_DOCUMENT_BINDING_AND_STRONGER_EXTERNAL_FACT_AUTHENTICATION"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_WORD_SENSE_DISAMBIGUATION",
+    "NO_CLAIM_OPEN_WORLD_ONTOLOGY_COMPLETENESS",
+    "NO_CLAIM_LIVE_DIRECT_R2_ROUTE",
+    "NO_ACCEPTANCE_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
