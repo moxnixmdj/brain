@@ -1,9 +1,19 @@
+import hashlib
 import unittest
 
 from canonical.runtime.semantic_relation_control_v1 import resolve
 
 
 SCOPE = "finance:policy:2026"
+
+
+def span(source_id, text, scope=SCOPE):
+    return {
+        "source_id": source_id,
+        "scope_id": scope,
+        "span_text": text,
+        "span_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+    }
 
 
 class Tests(unittest.TestCase):
@@ -226,6 +236,68 @@ class Tests(unittest.TestCase):
         self.assertEqual(
             out["status"],
             "FAIL_CLOSED__EXPLICIT_SOURCE_EVIDENCE_INVALID",
+        )
+
+
+    def test_checked_cross_source_chain_proves_directional_relation(self):
+        out = resolve({
+            "left_id": "reserve-buffer",
+            "right_id": "liquidity-cushion",
+            "left_surface": "reserve buffer",
+            "right_surface": "liquidity cushion",
+            "scope_id": SCOPE,
+            "required_relation": "LEFT_ENTAILS_RIGHT",
+            "source_entailment_spans": [
+                span("doc:A", "Every reserve buffer is a liquidity reserve."),
+                span("doc:B", "Every liquidity reserve is a liquidity cushion."),
+            ],
+        })
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["strongest_proved_relation"],
+            "LEFT_ENTAILS_RIGHT",
+        )
+        self.assertTrue(out["proved_facts"]["left_entails_right"])
+        self.assertFalse(out["proved_facts"]["right_entails_left"])
+
+    def test_mutual_checked_entailment_proves_logical_equivalence_not_identity(self):
+        out = resolve({
+            "left_id": "reserve-buffer",
+            "right_id": "liquidity-cushion",
+            "left_surface": "reserve buffer",
+            "right_surface": "liquidity cushion",
+            "scope_id": SCOPE,
+            "required_relation": "LOGICAL_EQUIVALENCE_IN_SCOPE",
+            "source_entailment_spans": [
+                span("doc:A", "Every reserve buffer is a liquidity reserve."),
+                span("doc:B", "Every liquidity reserve is a liquidity cushion."),
+                span("doc:C", "Every liquidity cushion is a reserve buffer."),
+            ],
+        })
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["strongest_proved_relation"],
+            "LOGICAL_EQUIVALENCE_IN_SCOPE",
+        )
+        self.assertFalse(out["proved_facts"]["semantic_identity"])
+
+    def test_counterexample_conflict_in_source_entailment_fails_closed(self):
+        out = resolve({
+            "left_id": "reserve-buffer",
+            "right_id": "liquidity-cushion",
+            "left_surface": "reserve buffer",
+            "right_surface": "liquidity cushion",
+            "scope_id": SCOPE,
+            "required_relation": "LEFT_ENTAILS_RIGHT",
+            "source_entailment_spans": [
+                span("doc:A", "Every reserve buffer is a liquidity cushion."),
+                span("doc:B", "Some reserve buffer is not a liquidity cushion."),
+            ],
+        })
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "FAIL_CLOSED__SOURCE_ALIGNED_ENTAILMENT_INVALID",
         )
 
     def test_generic_proof_record_field_is_rejected(self):
