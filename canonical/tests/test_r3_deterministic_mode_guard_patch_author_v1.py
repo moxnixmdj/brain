@@ -17,13 +17,20 @@ def _write(root: Path, relative: str, text: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
-def _real_bound_source() -> str:
-    here = Path(__file__).resolve().parents[1] / "runtime" / "r3_bound_success_adapter_v1.py"
-    return here.read_text(encoding="utf-8")
+def _bound_source_fixture() -> str:
+    return (
+        "def adapt(request, *, repo_root):\n"
+        "    replay = request.get('replay_context') or {}\n"
+        + author.OLD_GUARD
+        + "\n"
+        + author.OLD_RETURN
+        + "\n"
+        "    return {'candidate_only': True}\n"
+    )
 
 
 def _fixture(root: Path) -> None:
-    _write(root, firewall.MUTABLE_ADAPTER_PATHS[0], _real_bound_source())
+    _write(root, firewall.MUTABLE_ADAPTER_PATHS[0], _bound_source_fixture())
     _write(root, firewall.MUTABLE_ADAPTER_PATHS[1], "raw adapter\n")
     for path in gap_witness.SUCCESS_ADAPTER_FRONTIER_PATHS:
         target = root / path
