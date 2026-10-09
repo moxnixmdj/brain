@@ -888,5 +888,180 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         self.assertFalse(hint["terminal_authority"])
 
 
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed.direct_adequacy, "run")
+    @patch.object(fixed, "run_controller")
+    def test_progressive_repair_reenters_direct_adequacy_before_second_controller(
+        self, controller, direct_run, preflight
+    ):
+        preflight.side_effect = [
+            {
+                "matched": False,
+                "pass": False,
+                "status": "NOT_APPLICABLE__SEMANTIC_LATTICE_OPEN",
+                "direct_route_semantic_open": True,
+                "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_SEMANTIC_LATTICE_V1",
+                "effect_status": "OPEN__QUERY_RELEVANT_EFFECT_SEMANTIC_TOP_REMAINS",
+                "open_lattice_atoms": [{"dimension": "DOCUMENT_EFFECT_RELATION"}],
+                "next_proof_obligations": [{"kind": "PROVE_COMPLETE_DOCUMENT_EFFECT_RELATION"}],
+            },
+            {
+                "matched": True,
+                "pass": False,
+                "status": "DIRECT_ADEQUACY_ROUTE_MATCHED",
+                "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_SEMANTIC_LATTICE_V1",
+            },
+        ]
+        controller.return_value = self._open()
+        direct_run.return_value = {
+            "pass": True,
+            "status": "PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED",
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "execution_attempted": True,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
+        provider = Mock(
+            return_value={
+                "request_patch": {
+                    "decision_payload": {"context_id": "semantic-repair"}
+                }
+            }
+        )
+
+        out = fixed.run(self._request(), proposal_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["r2_fixed_point_status"],
+            "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED_AFTER_REPAIR",
+        )
+        self.assertEqual(controller.call_count, 1)
+        self.assertEqual(preflight.call_count, 2)
+        direct_run.assert_called_once()
+        self.assertEqual(
+            out["r2_fixed_point_trace"][-1]["kind"],
+            "DIRECT_END_TO_END_ADEQUACY_REENTRY",
+        )
+
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed, "run_controller")
+    def test_progressive_repair_refreshes_direct_semantic_hint(
+        self, controller, preflight
+    ):
+        first_atom = {"dimension": "DOCUMENT_EFFECT_RELATION", "effect_id": "A"}
+        second_atom = {"dimension": "DOCUMENT_EFFECT_RELATION", "effect_id": "B"}
+        preflight.side_effect = [
+            {
+                "matched": False,
+                "pass": False,
+                "status": "OPEN_A",
+                "direct_route_semantic_open": True,
+                "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_SEMANTIC_LATTICE_V1",
+                "open_lattice_atoms": [first_atom],
+                "next_proof_obligations": [{"kind": "PROVE_A"}],
+            },
+            {
+                "matched": False,
+                "pass": False,
+                "status": "OPEN_B",
+                "direct_route_semantic_open": True,
+                "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_SEMANTIC_LATTICE_V1",
+                "open_lattice_atoms": [second_atom],
+                "next_proof_obligations": [{"kind": "PROVE_B"}],
+            },
+        ]
+        controller.side_effect = [self._open(), self._open()]
+        packets = []
+
+        def provider(packet, index, prior):
+            packets.append(packet)
+            if len(packets) == 1:
+                return {
+                    "request_patch": {
+                        "decision_payload": {"context_id": "first-repair"}
+                    }
+                }
+            return None
+
+        out = fixed.run(
+            self._request(),
+            proposal_provider=provider,
+            provider_max_candidates=1,
+        )
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(controller.call_count, 2)
+        self.assertEqual(preflight.call_count, 2)
+        self.assertGreaterEqual(len(packets), 2)
+        self.assertEqual(
+            packets[0]["direct_preflight_hint"]["open_lattice_atoms"],
+            [first_atom],
+        )
+        self.assertEqual(
+            packets[1]["direct_preflight_hint"]["open_lattice_atoms"],
+            [second_atom],
+        )
+        self.assertEqual(
+            packets[1]["direct_preflight_hint"]["next_proof_obligations"],
+            [{"kind": "PROVE_B"}],
+        )
+
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed.direct_adequacy, "run")
+    @patch.object(fixed, "run_controller")
+    def test_repaired_matched_direct_failure_remains_fail_closed(
+        self, controller, direct_run, preflight
+    ):
+        preflight.side_effect = [
+            {
+                "matched": False,
+                "pass": False,
+                "status": "OPEN",
+                "direct_route_semantic_open": True,
+                "route_id": "DIRECT_ADEQUACY::TEST",
+            },
+            {
+                "matched": True,
+                "pass": False,
+                "status": "DIRECT_ADEQUACY_ROUTE_MATCHED",
+                "route_id": "DIRECT_ADEQUACY::TEST",
+            },
+        ]
+        controller.return_value = self._open()
+        direct_run.return_value = {
+            "pass": False,
+            "status": "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY",
+            "semantic_acceptance_complete": False,
+            "actual_goal_satisfaction_verified": False,
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
+        provider = Mock(
+            return_value={
+                "request_patch": {
+                    "decision_payload": {"context_id": "repaired-but-invalid"}
+                }
+            }
+        )
+
+        out = fixed.run(self._request(), proposal_provider=provider)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["r2_fixed_point_status"],
+            "OPEN__R2_REPAIRED_MATCHED_DIRECT_ROUTE_DID_NOT_VERIFY",
+        )
+        self.assertEqual(controller.call_count, 1)
+        self.assertEqual(preflight.call_count, 2)
+        direct_run.assert_called_once()
+        self.assertFalse(
+            out["r2_fixed_point_trace"][-1]["pass"]
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
