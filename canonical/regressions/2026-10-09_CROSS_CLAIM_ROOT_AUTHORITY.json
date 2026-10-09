@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_CROSS_CLAIM_ROOT_AUTHORITY_V1",
+  "date": "2026-10-09",
+  "status": "PERMANENT_FAIL_CLOSED_REGRESSION",
+  "invariant": "R1_R2_R3_CERTIFICATES_HAVE_AUTHORITY_ONLY_INSIDE_ONE_EXACT_FROZEN_CLAIM_BINDING",
+  "forbidden": [
+    "GLOBAL_ROOT_SLOT_CLOSES_R4",
+    "CLAIM_A_CERTIFICATE_SATISFIES_CLAIM_B",
+    "SAME_CLAIM_ID_WITH_DIFFERENT_SCOPE_OR_SEMANTICS_COEXISTS",
+    "FINITE_CLAIM_CLOSURE_IMPLIES_GLOBAL_OPEN_ENDED_MISSION_COMPLETION",
+    "V1_GLOBAL_REGISTRY_REGAINS_R4_AUTHORITY_WITHOUT_EXPLICIT_NEW_THEOREM"
+  ],
+  "enforcement": [
+    "canonical/runtime/coverage_root_claim_registry_guard_v2.py",
+    "canonical/runtime/root_theorem_falsifier_v1.py",
+    "canonical/tests/test_coverage_root_claim_registry_guard_v2.py"
+  ],
+  "terminal_credit_delta": 0
+}
