@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_20261009_V5",
+  "date": "2026-10-09",
+  "status": "DURABLE_SUCCESSOR_EXECUTION_DELTA_LEDGER__R2_V65_MREL_AND_NONSEPARATION_REFINED__ZERO_TERMINAL_CREDIT",
+  "extends": {
+    "path": "canonical/reasoning/2026-10-09_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_V4.json",
+    "git_blob_sha": "033175cb5a993f144e6100ff470b2373842dd3d3"
+  },
+  "events": [
+    {
+      "order": 22,
+      "event": "REUSE_MARKED_MENTION_ROUTE",
+      "result": "R2 V64 already closed the structurally complete typed marked-mention subregion; generic plain-text coreference remains open."
+    },
+    {
+      "order": 23,
+      "event": "PROJECT_MREL_NECESSARY_PROPERTIES",
+      "result": "Bound six one-way source-authenticated MREL necessary properties; reverse classification remains forbidden."
+    },
+    {
+      "order": 24,
+      "event": "BIND_TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION",
+      "result": "Proved the shared loss-absorption/recapitalisation/resolution bundle cannot distinguish TLAC from MREL; future acquisition must seek an identity discriminator instead of repeating that bundle."
+    },
+    {
+      "order": 25,
+      "event": "ADVANCE_R2_V65_ROOT2_V61",
+      "result": "Shrank the finance semantic residual while preserving one primary unsolved cell and zero terminal credit.",
+      "verification": "canonical/verification/R2_V65_MREL_SHARED_SIGNATURE_RECONCILIATION_VERIFY_20261009_V1.json"
+    }
+  ],
+  "next_execution_rule": "READ_R2_V65_ROOT2_V61_ACTION_INTENT_V8__SELECT_ONE_SURVIVING_CASE__AVOID_KNOWN_NONSEPARATING_SIGNATURES__ACQUIRE_ONLY_MINIMUM_POLICY_CHANGING_AUTHENTICATED_FACT",
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_CONTEXT_DEPENDENT_MEANING_SOLVED",
+    "NO_CLAIM_FINANCE_SEMANTIC_TAIL_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
