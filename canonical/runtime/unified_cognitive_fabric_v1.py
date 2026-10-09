@@ -518,6 +518,7 @@ def run(
                 payload,
                 concept_identity_verifier=concept_verifier,
                 terminal_signature_verifier=semantic_authority_verifier,
+                relation_edge_verifier=semantic_authority_verifier,
             )
         elif mode == "OEWN_DECISION_SENSE":
             out = oewn_decision_sense.resolve(
