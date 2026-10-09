@@ -26,6 +26,13 @@ PATHS = {
     "v2": "canonical/runtime/one_shot_reality_closure_v2.py",
     "r2": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
     "terminal": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "default_runtime": "canonical/governance/CURRENT_DEFAULT_RUNTIME_INTEGRATION.json",
+    "live_wrapper": "canonical/runtime/r2_direct_live_admission_v1.py",
+    "fixed_point": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "v19": "canonical/runtime/r2_direct_end_to_end_adequacy_v19.py",
+    "v21": "canonical/runtime/r2_direct_end_to_end_adequacy_v21.py",
+    "dynamic_admissions_pointer": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
+    "dynamic_admissions_manifest": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V1.json",
     "self": "canonical/runtime/current_one_shot_projection_v1.py",
 }
 
@@ -41,6 +48,7 @@ _FINANCE_DISCRIMINATOR_WAKES = frozenset(
         "NEW_SCOPE_COMPLETE_SOUND_FINANCE_INTERPRETATION_OR_CONSTRAINT_BOUND",
         "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND_OUTSIDE_VERIFIED_FIBO_Q2_2026_FULL_RELEASE_295_FILE_SCOPE",
         "NEW_AUTHENTICATED_CONTEXT_SOURCE_AND_FIELD_SEMANTICS_BINDING_OUTSIDE_VERIFIED_SEC_COMPANYCONCEPT_AND_SEC_INLINE_XBRL_STANDARD_FASB_SCOPES",
+        "NEW_AUTHENTICATED_CONTEXT_SOURCE_AND_FIELD_SEMANTICS_BINDING_OUTSIDE_VERIFIED_SEC_COMPANYCONCEPT_SEC_INLINE_XBRL_STANDARD_FASB_AND_SAME_FILING_ISSUER_EXTENSION_DOCUMENTATION_SCOPES",
         "NEW_AUTHENTICATED_COMPLETE_BOUNDED_DENOTATION_EXTENSION_OR_SET_RELATION_EVIDENCE_OUTSIDE_VERIFIED_FIBO_Q2_2026_FULL_RELEASE_295_FILE_SCOPE",
         "NEW_TASK_SPECIFIC_OEWN_TERMINAL_SIGNATURE_OR_DISCRIMINATOR_BINDING_FOR_SURVIVING_RELEASE_RELATIVE_SENSES",
         "NEW_AUTHENTICATED_CONTEXT_OR_RELATION_EVIDENCE_THAT_DISCRIMINATES_SURVIVING_SENSES",
@@ -122,6 +130,162 @@ def _finance_wake_effect_projection(r2: dict[str, Any]) -> dict[str, Any]:
 
 
 
+def _default_runtime_projection(
+    pointer: dict[str, Any],
+    default_runtime: dict[str, Any],
+    admissions_pointer: dict[str, Any],
+    admissions_manifest: dict[str, Any],
+    actual: dict[str, str],
+) -> tuple[dict[str, Any], list[str]]:
+    errors: list[str] = []
+
+    if default_runtime.get("binding_semantics") != (
+        "MUTABLE_CURRENT_PATH_IDENTITY__IMMUTABLE_LOAD_BEARING_DESCENDANTS_GIT_BLOB_BOUND"
+    ):
+        errors.append("DEFAULT_RUNTIME_BINDING_SEMANTICS_INVALID")
+
+    pointer_binding = pointer.get("default_runtime_integration")
+    pointer_binding = pointer_binding if isinstance(pointer_binding, dict) else {}
+    if pointer_binding.get("path") != PATHS["default_runtime"]:
+        errors.append("DEFAULT_RUNTIME_POINTER_PATH_MISMATCH")
+    if pointer_binding.get("pointer_semantics") != "MUTABLE_CURRENT_PATH_IDENTITY_AUTHORITATIVE":
+        errors.append("DEFAULT_RUNTIME_POINTER_SEMANTICS_INVALID")
+
+    runtime = default_runtime.get("r2_default_route_runtime")
+    runtime = runtime if isinstance(runtime, dict) else {}
+    wrapper = runtime.get("stable_wrapper_path")
+    if wrapper != PATHS["live_wrapper"]:
+        errors.append("DEFAULT_RUNTIME_WRAPPER_PATH_MISMATCH")
+    if runtime.get("stable_wrapper_git_blob_sha") != actual["live_wrapper"]:
+        errors.append("DEFAULT_RUNTIME_WRAPPER_BLOB_MISMATCH")
+
+    fixed = runtime.get("fixed_point_controller_path")
+    if fixed != PATHS["fixed_point"]:
+        errors.append("DEFAULT_RUNTIME_FIXED_POINT_PATH_MISMATCH")
+    if runtime.get("fixed_point_controller_git_blob_sha") != actual["fixed_point"]:
+        errors.append("DEFAULT_RUNTIME_FIXED_POINT_BLOB_MISMATCH")
+
+    baseline = runtime.get("current_r2_activation_baseline")
+    baseline = baseline if isinstance(baseline, dict) else {}
+    if baseline.get("authority_pointer_path") != PATHS["r2"]:
+        errors.append("DEFAULT_RUNTIME_BASELINE_POINTER_PATH_MISMATCH")
+    if baseline.get("pointer_path_identity_authoritative") is not True:
+        errors.append("DEFAULT_RUNTIME_BASELINE_POINTER_SEMANTICS_INVALID")
+    if baseline.get("runtime_path") != PATHS["v19"]:
+        errors.append("DEFAULT_RUNTIME_BASELINE_RUNTIME_PATH_MISMATCH")
+    if baseline.get("runtime_git_blob_sha") != actual["v19"]:
+        errors.append("DEFAULT_RUNTIME_BASELINE_RUNTIME_BLOB_MISMATCH")
+    if baseline.get("role") != (
+        "CURRENT_R2_SCHEDULER_AND_ACTIVATION_SNAPSHOT__NOT_DEFAULT_RUNTIME_SOURCE_SELECTOR"
+    ):
+        errors.append("DEFAULT_RUNTIME_BASELINE_ROLE_INVALID")
+
+    backend = runtime.get("verified_static_backend")
+    backend = backend if isinstance(backend, dict) else {}
+    if backend.get("runtime_path") != PATHS["v21"]:
+        errors.append("DEFAULT_RUNTIME_V21_PATH_MISMATCH")
+    if backend.get("runtime_git_blob_sha") != actual["v21"]:
+        errors.append("DEFAULT_RUNTIME_V21_BLOB_MISMATCH")
+    static_count = backend.get("static_default_route_count_before_dynamic")
+    if isinstance(static_count, bool) or not isinstance(static_count, int) or static_count < 0:
+        errors.append("DEFAULT_RUNTIME_STATIC_ROUTE_COUNT_INVALID")
+        static_count = None
+
+    dynamic = runtime.get("dynamic_admission")
+    dynamic = dynamic if isinstance(dynamic, dict) else {}
+    if dynamic.get("current_pointer_path") != PATHS["dynamic_admissions_pointer"]:
+        errors.append("DEFAULT_RUNTIME_DYNAMIC_POINTER_PATH_MISMATCH")
+    if dynamic.get("pointer_path_identity_authoritative") is not True:
+        errors.append("DEFAULT_RUNTIME_DYNAMIC_POINTER_SEMANTICS_INVALID")
+
+    if admissions_pointer.get("binding_semantics") != (
+        "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__IMMUTABLE_TARGET_GIT_BLOB_BOUND"
+    ):
+        errors.append("DYNAMIC_ADMISSIONS_POINTER_BINDING_SEMANTICS_INVALID")
+
+    target = admissions_pointer.get("target")
+    target = target if isinstance(target, dict) else {}
+    if target.get("path") != PATHS["dynamic_admissions_manifest"]:
+        errors.append("DYNAMIC_ADMISSIONS_TARGET_PATH_MISMATCH")
+    if target.get("git_blob_sha") != actual["dynamic_admissions_manifest"]:
+        errors.append("DYNAMIC_ADMISSIONS_TARGET_BLOB_MISMATCH")
+
+    if dynamic.get("current_manifest_path") != PATHS["dynamic_admissions_manifest"]:
+        errors.append("DEFAULT_RUNTIME_DYNAMIC_MANIFEST_PATH_MISMATCH")
+    if dynamic.get("current_manifest_git_blob_sha") != actual["dynamic_admissions_manifest"]:
+        errors.append("DEFAULT_RUNTIME_DYNAMIC_MANIFEST_BLOB_MISMATCH")
+
+    manifest_count = admissions_manifest.get("admission_count")
+    admissions = admissions_manifest.get("admissions")
+    if (
+        isinstance(manifest_count, bool)
+        or not isinstance(manifest_count, int)
+        or manifest_count < 0
+        or not isinstance(admissions, list)
+        or manifest_count != len(admissions)
+    ):
+        errors.append("DYNAMIC_ADMISSIONS_COUNT_INVALID")
+        manifest_count = None
+    if dynamic.get("current_dynamic_route_count") != manifest_count:
+        errors.append("DEFAULT_RUNTIME_DYNAMIC_ROUTE_COUNT_MISMATCH")
+    if admissions_manifest.get("terminal_authority") is not False:
+        errors.append("DYNAMIC_ADMISSIONS_MANIFEST_TERMINAL_AUTHORITY_INVALID")
+    if admissions_manifest.get("terminal_credit_delta") != 0:
+        errors.append("DYNAMIC_ADMISSIONS_MANIFEST_TERMINAL_CREDIT_INVALID")
+
+    if default_runtime.get("terminal_authority") is not False:
+        errors.append("DEFAULT_RUNTIME_TERMINAL_AUTHORITY_INVALID")
+    if default_runtime.get("terminal_credit_delta") != 0:
+        errors.append("DEFAULT_RUNTIME_TERMINAL_CREDIT_INVALID")
+
+    effective_count = (
+        static_count + manifest_count
+        if isinstance(static_count, int) and isinstance(manifest_count, int)
+        else None
+    )
+    return {
+        "path": PATHS["default_runtime"],
+        "git_blob_sha": actual["default_runtime"],
+        "status": default_runtime.get("status"),
+        "scheduler_baseline": {
+            "runtime_path": baseline.get("runtime_path"),
+            "runtime_git_blob_sha": baseline.get("runtime_git_blob_sha"),
+            "activation_route_count": baseline.get("activation_route_count"),
+            "is_default_runtime_source_selector": False,
+        },
+        "stable_wrapper": {
+            "path": PATHS["live_wrapper"],
+            "git_blob_sha": actual["live_wrapper"],
+        },
+        "fixed_point_controller": {
+            "path": PATHS["fixed_point"],
+            "git_blob_sha": actual["fixed_point"],
+        },
+        "effective_static_backend": {
+            "runtime_path": PATHS["v21"],
+            "runtime_git_blob_sha": actual["v21"],
+            "lineage": list(backend.get("lineage") or []),
+            "static_route_count": static_count,
+        },
+        "dynamic_admission": {
+            "pointer_path": PATHS["dynamic_admissions_pointer"],
+            "pointer_git_blob_sha": actual["dynamic_admissions_pointer"],
+            "manifest_path": PATHS["dynamic_admissions_manifest"],
+            "manifest_git_blob_sha": actual["dynamic_admissions_manifest"],
+            "dynamic_route_count": manifest_count,
+            "future_verified_route_requires_new_vN_source": dynamic.get(
+                "future_verified_route_requires_new_vN_source"
+            ),
+        },
+        "effective_known_direct_route_count": effective_count,
+        "scheduler_snapshot_is_default_runtime_source_selector": False,
+        "semantic_truth_authority": False,
+        "policy_adequacy_authority": False,
+        "terminal_authority": False,
+        "terminal_credit_delta": 0,
+    }, errors
+
+
 def _blob(path: Path) -> str:
     raw = path.read_bytes()
     return hashlib.sha1(
@@ -150,6 +314,9 @@ def evaluate(repo_root: str | Path = ROOT) -> dict[str, Any]:
     pointer = _load(targets["pointer"])
     r2 = _load(targets["r2"])
     terminal = _load(targets["terminal"])
+    default_runtime = _load(targets["default_runtime"])
+    admissions_pointer = _load(targets["dynamic_admissions_pointer"])
+    admissions_manifest = _load(targets["dynamic_admissions_manifest"])
 
     actual = {name: _blob(path) for name, path in targets.items()}
     errors: list[str] = []
@@ -188,6 +355,15 @@ def evaluate(repo_root: str | Path = ROOT) -> dict[str, Any]:
     if authority.get("static_projection_snapshots_authoritative") is not False:
         errors.append("STATIC_SNAPSHOTS_MUST_BE_NONAUTHORITATIVE")
 
+    default_runtime_projection, default_runtime_errors = _default_runtime_projection(
+        pointer,
+        default_runtime,
+        admissions_pointer,
+        admissions_manifest,
+        actual,
+    )
+    errors.extend(default_runtime_errors)
+
     snapshot = pointer.get("current_projection_refresh_20261009")
     snapshot = snapshot if isinstance(snapshot, dict) else {}
     terminal_snapshot_sha = str(
@@ -217,8 +393,10 @@ def evaluate(repo_root: str | Path = ROOT) -> dict[str, Any]:
             "git_blob_sha": actual["r2"],
             "status": r2.get("status"),
             "version": _version_from_status(r2.get("status")),
+            "role": "SCHEDULER_AND_ACTIVATION_BASELINE__NOT_DEFAULT_RUNTIME_SOURCE_SELECTOR",
             "finance_wake_effect_projection": _finance_wake_effect_projection(r2),
         },
+        "default_runtime_integration": default_runtime_projection,
         "current_terminal_authority": {
             "path": PATHS["terminal"],
             "git_blob_sha": actual["terminal"],
