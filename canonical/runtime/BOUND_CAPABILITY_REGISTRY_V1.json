@@ -3402,6 +3402,152 @@
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "semantic.authority.receipt.verify.canonical": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [],
+      "result_fields": [
+        "pass",
+        "schema",
+        "receipt_sha256",
+        "admission_verified",
+        "admission_id",
+        "semantic_authority_role",
+        "verification_authority_mutated",
+        "terminal_authority"
+      ],
+      "keywords": [
+        "semantic",
+        "authority",
+        "receipt",
+        "verify",
+        "content",
+        "addressed",
+        "oewn",
+        "admission"
+      ],
+      "adapter_module": "semantic_authority_receipt_verify_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Verifies only exact receipts already present in the fixed canonical semantic-authority admission registry.",
+        "Does not infer semantic truth, repair receipt fields, admit new receipts, or grant terminal authority.",
+        "Exact receipt SHA-256, semantic role, verification artifact path, and verification Git-blob identity must all match one admitted row."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "copy",
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/semantic_authority_receipt_verify_v1.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_SPRITE_VERIFICATION_PASS__7_OF_7",
+        "independently_verified_by": "brain-live-integrated-v1-run-20261008",
+        "exact_producer_blob": "be6cc30939d27bf5bd62c8f5994a342dde164d79",
+        "exact_test_blob": "0f0603cd8c0ab227fb7918aa726a527dd639fee1",
+        "receipt_path": "canonical/verification/SEMANTIC_AUTHORITY_RECEIPT_VERIFIER_REMOTE_VERIFY_20261009_V1.json",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      },
+      "provides": [
+        "semantic.authority.receipt.verified"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "semantic.authority.receipt.verify.canonical",
+          "receipt_json": "${input.receipt_json}",
+          "role": "OEWN_DECISION_MANIFEST_AUTHORITY"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "admission_verified",
+          "value": true
+        }
+      }
+    },
+    "semantic.evidence.receipt.verify.canonical": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [],
+      "result_fields": [
+        "pass",
+        "schema",
+        "receipt_sha256",
+        "admission_verified",
+        "admission_id",
+        "semantic_authority_role",
+        "verification_authority_mutated",
+        "terminal_authority"
+      ],
+      "keywords": [
+        "semantic",
+        "authority",
+        "receipt",
+        "verify",
+        "content",
+        "addressed",
+        "oewn",
+        "admission"
+      ],
+      "adapter_module": "semantic_authority_receipt_verify_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Verifies only exact receipts already present in the fixed canonical semantic-authority admission registry.",
+        "Does not infer semantic truth, repair receipt fields, admit new receipts, or grant terminal authority.",
+        "Exact receipt SHA-256, semantic role, verification artifact path, and verification Git-blob identity must all match one admitted row."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "copy",
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/semantic_authority_receipt_verify_v1.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_SPRITE_VERIFICATION_PASS__7_OF_7",
+        "independently_verified_by": "brain-live-integrated-v1-run-20261008",
+        "exact_producer_blob": "be6cc30939d27bf5bd62c8f5994a342dde164d79",
+        "exact_test_blob": "0f0603cd8c0ab227fb7918aa726a527dd639fee1",
+        "receipt_path": "canonical/verification/SEMANTIC_AUTHORITY_RECEIPT_VERIFIER_REMOTE_VERIFY_20261009_V1.json",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      },
+      "provides": [
+        "semantic.evidence.receipt.verified"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "semantic.evidence.receipt.verify.canonical",
+          "receipt_json": "${input.receipt_json}",
+          "role": "OEWN_SENSE_OBSERVATION_EVIDENCE"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "admission_verified",
+          "value": true
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
