@@ -1,0 +1,35 @@
+name: Verify CursorBench no-hidden-verifier atom reuse
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/cursorbench_typed_acceptance_no_hidden_verifier_atom_v1.py"
+      - "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py"
+      - "canonical/tests/test_cursorbench_typed_acceptance_no_hidden_verifier_atom_v1.py"
+      - "canonical/tests/test_p3_typed_acceptance_structural_atom_auto_refinement_v1.py"
+      - ".github/workflows/verify-cursorbench-no-hidden-verifier-atom-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile exact changed runtimes
+        run: |
+          python -m py_compile \
+            canonical/runtime/cursorbench_typed_acceptance_no_hidden_verifier_atom_v1.py \
+            canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py
+      - name: Run atom and registry regression suites
+        run: |
+          python -m pytest -q \
+            canonical/tests/test_cursorbench_typed_acceptance_no_hidden_verifier_atom_v1.py \
+            canonical/tests/test_p3_typed_acceptance_structural_atom_auto_refinement_v1.py \
+            canonical/tests/test_p3_typed_acceptance_policy_registry_integration_v1.py \
+            canonical/tests/test_p3_conditioned_policy_adequacy_registry_v1.py \
+            canonical/tests/test_specification_acceptance_prewave_v1.py
