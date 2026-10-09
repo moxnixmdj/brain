@@ -1,0 +1,318 @@
+{
+  "all_material_independently_knowable_failure_modes_represented": true,
+  "all_material_terminal_acceptance_semantics_bound": true,
+  "audit_id": "audit:wal-recovery-ordering-source-coverage-v1",
+  "evidence_basis": {
+    "mapping_rule": "EVERY_LOSSLESS_RAW_OBLIGATION_MAPPED__NO_RAW_OBLIGATION_DROPPED",
+    "preterminal_authored_audit_command_git_blob_sha": "65b9a10eed0efcd702c7a347548e7e09ca28ca8c",
+    "raw_instruction_git_blob_sha": "c4f7ec1d37aef5ed1de9db299bbe167240fb9e5d",
+    "terminal_authorization_git_blob_sha": "2c357865381fec58c6290470ff0bb5efa1f7893e"
+  },
+  "failure_mode_coverage": [
+    {
+      "complete_failure_modes": [
+        "SOURCE_IDENTITY_OR_CANARY_MISMATCH"
+      ],
+      "requirement_id": "R00_SOURCE_CANARY"
+    },
+    {
+      "complete_failure_modes": [
+        "REPAIR_SCOPE_OR_IN_PLACE_REQUIREMENT_VIOLATED"
+      ],
+      "requirement_id": "R01_REPAIR_SCOPE"
+    },
+    {
+      "complete_failure_modes": [
+        "REQUIRED_PUBLIC_OR_INTERNAL_API_MISSING"
+      ],
+      "requirement_id": "R02_REQUIRED_APIS"
+    },
+    {
+      "complete_failure_modes": [
+        "FORBIDDEN_DEPENDENCY_CALL_WRITE_OR_TYPING_CONSTRAINT_VIOLATED"
+      ],
+      "requirement_id": "R03_NEGATIVE_CONSTRAINTS"
+    },
+    {
+      "complete_failure_modes": [
+        "RECOVERY_OUTPUT_SCHEMA_ORDER_OR_STATS_CONTRACT_VIOLATED"
+      ],
+      "requirement_id": "R04_RECOVERY_OUTPUT_CONTRACT"
+    },
+    {
+      "complete_failure_modes": [
+        "RECOVERY_DURABLE_PREFIX_GAP_DUPLICATE_OR_ORDER_SEMANTICS_VIOLATED"
+      ],
+      "requirement_id": "R05_RECOVERY_PREFIX_SEMANTICS"
+    },
+    {
+      "complete_failure_modes": [
+        "RECOVERY_INPUT_MUTATION_OR_CROSS_CALL_ALIASING"
+      ],
+      "requirement_id": "R06_RECOVERY_DETACHMENT"
+    },
+    {
+      "complete_failure_modes": [
+        "DURABILITY_ACK_VISIBILITY_OR_LSN_ORDERING_VIOLATED"
+      ],
+      "requirement_id": "R07_DURABLE_VISIBILITY_ORDERING"
+    },
+    {
+      "complete_failure_modes": [
+        "CRASH_SNAPSHOT_SCHEMA_VIOLATED"
+      ],
+      "requirement_id": "R08_CRASH_SNAPSHOT_SCHEMA"
+    },
+    {
+      "complete_failure_modes": [
+        "NESTED_MUTATION_ALIASING_ACROSS_PUBLIC_SURFACES"
+      ],
+      "requirement_id": "R09_DEEP_DETACHMENT_ALL_SURFACES"
+    },
+    {
+      "complete_failure_modes": [
+        "MODERATE_SNAPSHOT_RECOVERY_EFFICIENCY_VIOLATED"
+      ],
+      "requirement_id": "R10_MODERATE_SCALE_EFFICIENCY"
+    },
+    {
+      "complete_failure_modes": [
+        "SEGMENT_MANAGER_STRUCTURE_OR_CLOSED_FIELD_VIOLATED"
+      ],
+      "requirement_id": "R11_INTERNAL_STRUCTURE_PRESERVED"
+    },
+    {
+      "complete_failure_modes": [
+        "TASK_TIME_BUDGET_EXCEEDED"
+      ],
+      "requirement_id": "R12_TIME_BUDGET"
+    },
+    {
+      "complete_failure_modes": [
+        "TASK_SPECIFIC_ONLINE_SOLUTION_OR_HINT_USED"
+      ],
+      "requirement_id": "R13_NO_TASK_SPECIFIC_CHEATING"
+    }
+  ],
+  "failure_mode_universe_complete": true,
+  "producer_id": "brain-wal-acceptance-producer-v1",
+  "schema": "PROJECT_BRAIN_TYPED_ACCEPTANCE_SOURCE_COVERAGE_RECEIPT_V1",
+  "semantic_mapping_complete": true,
+  "source_authority_complete": true,
+  "source_contract_git_blob_sha": "8cedc22b7c006d00a1ec863c49083b7a95876abe",
+  "source_contract_sha256": "880f6faa8e0f5cc2722cffe6a00156672e308e03d8267d39d54c8dccce58a257",
+  "source_model_projection_sha256": "36e77a671871bf6ee323d44ed9aa4e5bfe29d748a430807a63ab317fe1391d9f",
+  "source_obligation_mappings": [
+    {
+      "model_requirement_ids": [
+        "R07_DURABLE_VISIBILITY_ORDERING"
+      ],
+      "source_obligation_id": "RAWREQ:033375aead1dc9e0f5411e605e3a2bdbe4fc928b429b0c750eac79e668b2826a"
+    },
+    {
+      "model_requirement_ids": [
+        "R07_DURABLE_VISIBILITY_ORDERING"
+      ],
+      "source_obligation_id": "RAWREQ:06a5ad24faef40b679d8c0fedcaf2384568dff77fc91d244880403f6da3deb62"
+    },
+    {
+      "model_requirement_ids": [
+        "R02_REQUIRED_APIS"
+      ],
+      "source_obligation_id": "RAWREQ:0c0e2765d3e4bb578310cc648fe4d2d087e8e3cc4354c2c29f8b72ef0b89cfb3"
+    },
+    {
+      "model_requirement_ids": [
+        "R00_SOURCE_CANARY"
+      ],
+      "source_obligation_id": "RAWREQ:1211b15590f39222a2579238ef9ebda248cbfb9cb40d9b1426a14e075a6ffa1a"
+    },
+    {
+      "model_requirement_ids": [
+        "R05_RECOVERY_PREFIX_SEMANTICS"
+      ],
+      "source_obligation_id": "RAWREQ:1d2a4ca54c2a6ca91d36f5b391401a02fc8d4d2177c97ec8ca156ac6bae50e19"
+    },
+    {
+      "model_requirement_ids": [
+        "R10_MODERATE_SCALE_EFFICIENCY"
+      ],
+      "source_obligation_id": "RAWREQ:2147b39f1c081c3636a5a7d73da6187ef5c8fb21fb7e69be9d0dbf14ac73360e"
+    },
+    {
+      "model_requirement_ids": [
+        "R06_RECOVERY_DETACHMENT"
+      ],
+      "source_obligation_id": "RAWREQ:28ed2ca4b01ed72773a2d26e553afc34a8e7512c0a4f142d290fc88b65d6a9c2"
+    },
+    {
+      "model_requirement_ids": [
+        "R02_REQUIRED_APIS"
+      ],
+      "source_obligation_id": "RAWREQ:303374b98d89dc4313a3a00a74c5b19b7669d30722d23ef7e2b8619870124046"
+    },
+    {
+      "model_requirement_ids": [
+        "R08_CRASH_SNAPSHOT_SCHEMA"
+      ],
+      "source_obligation_id": "RAWREQ:37fd421fb427b8c0108b44b751d1031db043a2ef8e3709ef274de1734cb7d1f2"
+    },
+    {
+      "model_requirement_ids": [
+        "R03_NEGATIVE_CONSTRAINTS"
+      ],
+      "source_obligation_id": "RAWREQ:3aa6cba72dfa64e6ae0913fcbdd8d782ce7463b6f6de3e2ba8fdcb3a52d8b010"
+    },
+    {
+      "model_requirement_ids": [
+        "R04_RECOVERY_OUTPUT_CONTRACT"
+      ],
+      "source_obligation_id": "RAWREQ:4676cd79136f91c2c6ebd9b8bd67075889e616ca10c79a3d8189041125636278"
+    },
+    {
+      "model_requirement_ids": [
+        "R02_REQUIRED_APIS"
+      ],
+      "source_obligation_id": "RAWREQ:55d846671e24ff9796b042608d979f0fecbb73c628e045736811294001391dbd"
+    },
+    {
+      "model_requirement_ids": [
+        "R04_RECOVERY_OUTPUT_CONTRACT"
+      ],
+      "source_obligation_id": "RAWREQ:6078181182a77134ea665c2fab82101561237c6168065a5c7aa029c415339257"
+    },
+    {
+      "model_requirement_ids": [
+        "R08_CRASH_SNAPSHOT_SCHEMA"
+      ],
+      "source_obligation_id": "RAWREQ:62837fcc37ab81fdf2f89db250034f07c312c8fef742d2191b255199289fc6dc"
+    },
+    {
+      "model_requirement_ids": [
+        "R02_REQUIRED_APIS"
+      ],
+      "source_obligation_id": "RAWREQ:6904d99c0700b3f0e4c0bb917b1c625191dcbc98af3e476a2858a0e2e1f91215"
+    },
+    {
+      "model_requirement_ids": [
+        "R13_NO_TASK_SPECIFIC_CHEATING"
+      ],
+      "source_obligation_id": "RAWREQ:7a22cc1692f0ceb703613772bcd1e617afa291d4458a68249b19966563a94299"
+    },
+    {
+      "model_requirement_ids": [
+        "R02_REQUIRED_APIS"
+      ],
+      "source_obligation_id": "RAWREQ:864b30d8b13f97a71ab26bce9402d8acfc40a0bd14705701c9076558e3256490"
+    },
+    {
+      "model_requirement_ids": [
+        "R06_RECOVERY_DETACHMENT"
+      ],
+      "source_obligation_id": "RAWREQ:8c5ca0aa7c8fcb0911a153fdbfd43ab8fcfb76e1b936504561338c1e775444c6"
+    },
+    {
+      "model_requirement_ids": [
+        "R03_NEGATIVE_CONSTRAINTS"
+      ],
+      "source_obligation_id": "RAWREQ:8d05f63a429501c59e92680466b242988d96b5c3722c02fcc47549a7ffe83a5e"
+    },
+    {
+      "model_requirement_ids": [
+        "R12_TIME_BUDGET"
+      ],
+      "source_obligation_id": "RAWREQ:8e24c460af07919b4c53695524c1b1836213494f28aa3e2acfe1932cc545111a"
+    },
+    {
+      "model_requirement_ids": [
+        "R00_SOURCE_CANARY"
+      ],
+      "source_obligation_id": "RAWREQ:99f06b08f7a088bc1ffca60a4007e76eecb0381abd7ff25d7d218ba19f388b6c"
+    },
+    {
+      "model_requirement_ids": [
+        "R01_REPAIR_SCOPE"
+      ],
+      "source_obligation_id": "RAWREQ:b34750b21b980d217dd9bf2a2608cca53cdfd5db05e02965bf7f20e9307ea1f3"
+    },
+    {
+      "model_requirement_ids": [
+        "R05_RECOVERY_PREFIX_SEMANTICS"
+      ],
+      "source_obligation_id": "RAWREQ:b46c38810c6fb0c382f079d4d08ef9dfabd94b1312726031422e15a0fb55b713"
+    },
+    {
+      "model_requirement_ids": [
+        "R07_DURABLE_VISIBILITY_ORDERING"
+      ],
+      "source_obligation_id": "RAWREQ:bf69839b5dd08d55d944ccb17611343be06dd715bd7f876add65606b9565421f"
+    },
+    {
+      "model_requirement_ids": [
+        "R11_INTERNAL_STRUCTURE_PRESERVED"
+      ],
+      "source_obligation_id": "RAWREQ:c238c536887ab4b640d01cc8e4205456fe0b0bc4467185cfc7d50d7dc9df0f83"
+    },
+    {
+      "model_requirement_ids": [
+        "R02_REQUIRED_APIS"
+      ],
+      "source_obligation_id": "RAWREQ:c5e7fad2b105d1ed5164732b3e2e414350df47c2e5c8d0d4e6dd5aa882c4ab71"
+    },
+    {
+      "model_requirement_ids": [
+        "R05_RECOVERY_PREFIX_SEMANTICS"
+      ],
+      "source_obligation_id": "RAWREQ:cfafdbd84b0f57b78bd581182727e47b20263003d11f1138897f76b4fe368c5e"
+    },
+    {
+      "model_requirement_ids": [
+        "R09_DEEP_DETACHMENT_ALL_SURFACES"
+      ],
+      "source_obligation_id": "RAWREQ:d8b7edcb634810d64a89c6e227c1258291937538460ea09943d6cab90967dbe3"
+    },
+    {
+      "model_requirement_ids": [
+        "R04_RECOVERY_OUTPUT_CONTRACT"
+      ],
+      "source_obligation_id": "RAWREQ:dc962bf2caea33d34a99ef426a1b370ff56a8bf643980fd9dc6434071da8a007"
+    },
+    {
+      "model_requirement_ids": [
+        "R11_INTERNAL_STRUCTURE_PRESERVED"
+      ],
+      "source_obligation_id": "RAWREQ:df555bd77e4a2d8b75a91c2e0de4ee2bd3911024352d46d76f971c9466e0a8d7"
+    },
+    {
+      "model_requirement_ids": [
+        "R04_RECOVERY_OUTPUT_CONTRACT"
+      ],
+      "source_obligation_id": "RAWREQ:e5e753a7bd3596f56238ff9803bd1685a7dbfecae968962434985856eb9d3cd6"
+    },
+    {
+      "model_requirement_ids": [
+        "R01_REPAIR_SCOPE"
+      ],
+      "source_obligation_id": "RAWREQ:e78cb4da88b91ec0c42955f6679aeb4947dc1ac2850dff878ffbbf548f5b7e9a"
+    },
+    {
+      "model_requirement_ids": [
+        "R07_DURABLE_VISIBILITY_ORDERING"
+      ],
+      "source_obligation_id": "RAWREQ:f795bcb4184555d3f9302e0a5f5802b5309346f05f2f5c6ae541de16520a1200"
+    },
+    {
+      "model_requirement_ids": [
+        "R02_REQUIRED_APIS"
+      ],
+      "source_obligation_id": "RAWREQ:f79fae3d38122c0d651f7401297e2e511d4bc6f8badf98ccde9ef846aa7cde9b"
+    },
+    {
+      "model_requirement_ids": [
+        "R03_NEGATIVE_CONSTRAINTS"
+      ],
+      "source_obligation_id": "RAWREQ:fd4c97b7676024a3f121061bf574292740e36afde1bc66e57352dcc7780a91d3"
+    }
+  ],
+  "subject_model_sha256": "642157445ee9cf869fcfc9020c4ab18ed216844f78a2f72119b313eab9b706b6"
+}
