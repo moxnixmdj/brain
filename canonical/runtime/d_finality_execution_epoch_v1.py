@@ -118,6 +118,9 @@ def policy_sha256(policy: Mapping[str, Any]) -> str:
         raise DFinalityError("POLICY_NOT_OBJECT")
     body = dict(policy)
     body.pop("policy_sha256", None)
+    # Revocation is a mutable deny set, not part of the semantic policy root.
+    # Otherwise revoking one certificate would invalidate every certificate.
+    body.pop("revoked_certificate_sha256", None)
     return sha256_json(body)
 
 
@@ -327,19 +330,19 @@ def child_scope(
     parent = require_capability(capability_id)
     child_caps = frozenset(
         _tokens(
-            parent.allowed_capability_ids if allowed_capability_ids is None else allowed_capability_ids,
+            sorted(parent.allowed_capability_ids) if allowed_capability_ids is None else allowed_capability_ids,
             "CHILD_ALLOWED_CAPABILITY_IDS",
         )
     )
     child_knowledge = frozenset(
         _tokens(
-            parent.allowed_knowledge_channels if allowed_knowledge_channels is None else allowed_knowledge_channels,
+            sorted(parent.allowed_knowledge_channels) if allowed_knowledge_channels is None else allowed_knowledge_channels,
             "CHILD_ALLOWED_KNOWLEDGE_CHANNELS",
         )
     )
     child_effects = frozenset(
         _tokens(
-            parent.allowed_effect_channels if allowed_effect_channels is None else allowed_effect_channels,
+            sorted(parent.allowed_effect_channels) if allowed_effect_channels is None else allowed_effect_channels,
             "CHILD_ALLOWED_EFFECT_CHANNELS",
         )
     )
