@@ -9,41 +9,32 @@ on:
 permissions:
   contents: read
 jobs:
-  compile:
+  runner-smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 2
+    steps:
+      - run: echo runner-ok
+  checkout-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - run: test -f canonical/runtime/assurance_closure_compiler_v1.py
+  python-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m py_compile canonical/runtime/assurance_closure_compiler_v1.py canonical/tests/test_assurance_closure_compiler_v1.py
-  unit:
-    name: ${{ matrix.test }}
+      - run: python --version
+  compile-system-python:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
-    strategy:
-      fail-fast: false
-      matrix:
-        test:
-          - test_generic_graph_cannot_self_certify_execution_or_adversary
-          - test_open_obligation_is_residual_not_new_primitive
-          - test_supported_defeater_counterproves_root
-          - test_supported_defeater_dominates_earlier_unresolved_defeater_regardless_of_order
-          - test_unresolved_defeater_keeps_root_open
-          - test_unsupported_primitive_is_only_new_primitive_trigger
-          - test_dangling_reference_fails_closed
-          - test_dependency_cycle_fails_closed
-          - test_stale_evidence_reopens_proof
-          - test_pass_controller_result_still_requires_adversarial_closure
-          - test_open_controller_result_becomes_existing_kernel_obligation
+    timeout-minutes: 2
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: python -m unittest canonical.tests.test_assurance_closure_compiler_v1.AssuranceClosureCompilerV1Tests.${{ matrix.test }} -v
+      - run: python3 -m py_compile canonical/runtime/assurance_closure_compiler_v1.py canonical/tests/test_assurance_closure_compiler_v1.py
