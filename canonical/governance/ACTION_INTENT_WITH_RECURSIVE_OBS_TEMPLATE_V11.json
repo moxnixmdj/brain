@@ -73,7 +73,8 @@
     "continuous_obs",
     "reality_query_admission",
     "global_terminal_proof_cut",
-    "external_side_effect_admission"
+    "external_side_effect_admission",
+    "external_side_effect"
   ],
   "supersedes": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V10.json",
   "required_deletion_first_order": [
