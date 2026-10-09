@@ -7,7 +7,14 @@
       "id": "EXECUTABLE_REFINEMENT_FRAMEWORK",
       "kind": "LEAF",
       "status": "UNRESOLVED",
-      "note": "STRUCTURAL_BINDING_VERIFIER_EXISTS_ON_BRANCH__EXECUTION_TESTS_AND_SEMANTIC_REFINEMENT_RECEIPT_NOT_YET_PROMOTED"
+      "note": "STRUCTURAL_BINDING_VERIFIER_EXISTS_ON_BRANCH__EXECUTION_TESTS_AND_SEMANTIC_REFINEMENT_RECEIPT_NOT_YET_PROMOTED",
+      "attack_families": [
+        "COMPOSITION_MISMATCH",
+        "VERSION_DRIFT",
+        "RESOURCE_EXHAUSTION",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH",
+        "NOVEL_DIMENSION"
+      ]
     },
     {
       "id": "router-deployment-canary",
@@ -28,7 +35,12 @@
         "verification_receipt": null
       },
       "live_authority_status": "UNRESOLVED",
-      "note": "NONCREDITABLE_CANARY__STRUCTURAL_BINDING_ONLY__NO_REFINEMENT_OR_TERMINAL_CREDIT"
+      "note": "NONCREDITABLE_CANARY__STRUCTURAL_BINDING_ONLY__NO_REFINEMENT_OR_TERMINAL_CREDIT",
+      "attack_families": [
+        "COMPOSITION_MISMATCH",
+        "VERSION_DRIFT",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH"
+      ]
     },
     {
       "id": "brain-owned-semantic-edge-authority",
@@ -49,19 +61,38 @@
         "verification_receipt": null
       },
       "live_authority_status": "UNRESOLVED",
-      "note": "DECLARED_FINITE_BRANCH_PARTITION_AND_WITNESSES_EXIST__NO_EXECUTED_INDEPENDENT_REFINEMENT_RECEIPT__ZERO_TERMINAL_CREDIT"
+      "note": "DECLARED_FINITE_BRANCH_PARTITION_AND_WITNESSES_EXIST__NO_EXECUTED_INDEPENDENT_REFINEMENT_RECEIPT__ZERO_TERMINAL_CREDIT",
+      "attack_families": [
+        "COMPOSITION_MISMATCH",
+        "HIDDEN_STATE",
+        "VERSION_DRIFT",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH"
+      ]
     },
     {
       "id": "ALL_CREDITABLE_LIVE_ROUTES_EXECUTABLE_REFINEMENT",
       "kind": "LEAF",
       "status": "UNRESOLVED",
-      "note": "GENERAL_LIVE_ROUTE_REFINEMENT_COVERAGE_NOT_PROVED"
+      "note": "GENERAL_LIVE_ROUTE_REFINEMENT_COVERAGE_NOT_PROVED",
+      "attack_families": [
+        "QUANTIFIER_SWAP",
+        "COMPOSITION_MISMATCH",
+        "VERSION_DRIFT",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH",
+        "NOVEL_DIMENSION"
+      ]
     },
     {
       "id": "TERMINAL_DEPENDENCY_GRAPH_GENERATOR_COVERAGE",
       "kind": "LEAF",
       "status": "UNRESOLVED",
-      "note": "GRAPH_ENUMERATION_DOES_NOT_PROVE_OPEN_WORLD_COMPLETENESS"
+      "note": "GRAPH_ENUMERATION_DOES_NOT_PROVE_OPEN_WORLD_COMPLETENESS",
+      "attack_families": [
+        "NEGATION",
+        "QUANTIFIER_SWAP",
+        "COMPOSITION_MISMATCH",
+        "NOVEL_DIMENSION"
+      ]
     }
   ],
   "terminal_closure": false,
