@@ -56,6 +56,17 @@ _ALLOWED_MATERIAL_KEYS = (
     "raw_goal_acceptance",
 )
 
+_ALLOWED_EXECUTION_KEYS = (
+    "capability_id",
+    "pass",
+    "status",
+    "composition_capsule_head_hash",
+    "result_sha256",
+    "requires",
+    "provides",
+    "effect_outcome_sha256",
+)
+
 
 def _canon(value: Any) -> str:
     return json.dumps(
@@ -141,10 +152,15 @@ def compile_context(
         ]
 
     execution_rows = []
+    execution_unmodeled_key_count = 0
     if isinstance(execution, Sequence) and not isinstance(execution, (str, bytes, bytearray)):
         for row in execution:
             if not isinstance(row, Mapping):
+                execution_unmodeled_key_count += 1
                 continue
+            execution_unmodeled_key_count += len(
+                [key for key in row if key not in _ALLOWED_EXECUTION_KEYS]
+            )
             execution_rows.append({
                 "capability_id": _symbol(row.get("capability_id")),
                 "pass": row.get("pass") is True,
@@ -152,11 +168,25 @@ def compile_context(
                 "composition_digest_present": bool(
                     str(row.get("composition_capsule_head_hash") or "").strip()
                 ),
+                "result_digest_present": bool(
+                    str(row.get("result_sha256") or "").strip()
+                ),
             })
 
     request_keys = [key for key in _ALLOWED_REQUEST_KEYS if key in request]
     request_shape = {key: _shape(request.get(key)) for key in request_keys}
     material_keys = [key for key in _ALLOWED_MATERIAL_KEYS if key in material]
+    request_unmodeled_key_count = len(
+        [key for key in request if key not in _ALLOWED_REQUEST_KEYS]
+    )
+    material_unmodeled_key_count = len(
+        [key for key in material if key not in _ALLOWED_MATERIAL_KEYS]
+    )
+    structural_view_complete = (
+        request_unmodeled_key_count == 0
+        and material_unmodeled_key_count == 0
+        and execution_unmodeled_key_count == 0
+    )
 
     out = {
         "schema": SCHEMA,
@@ -166,6 +196,7 @@ def compile_context(
             "mode": _symbol(context.get("mode"), allow_plain_enum=True),
             "request_keys": request_keys,
             "request_shape": request_shape,
+            "unmodeled_request_key_count": request_unmodeled_key_count,
         },
         "proof": {
             "material_keys": material_keys,
@@ -184,6 +215,9 @@ def compile_context(
             ),
             "execution_rows": execution_rows,
             "execution_count": len(execution_rows),
+            "unmodeled_material_key_count": material_unmodeled_key_count,
+            "unmodeled_execution_key_count": execution_unmodeled_key_count,
+            "structural_view_complete": structural_view_complete,
             "cognition_dependency_class": _symbol(
                 material.get("cognition_dependency_class"),
                 allow_plain_enum=True,
@@ -238,6 +272,10 @@ def compile_context(
             "model_valuations_exposed": False,
             "verifier_source_exposed": False,
             "only_fixed_protocol_keys_and_sanitized_symbols_exposed": True,
+            "structural_coverage_complete": structural_view_complete,
+            "unmodeled_request_key_count": request_unmodeled_key_count,
+            "unmodeled_material_key_count": material_unmodeled_key_count,
+            "unmodeled_execution_key_count": execution_unmodeled_key_count,
         },
         "candidate_generation_authority": True,
         "source_write_authority": False,

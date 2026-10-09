@@ -45,6 +45,7 @@ class R3SuccessAdapterAuthorContextV1Tests(unittest.TestCase):
                     "goal_text": "TOP_SECRET_GOAL_TEXT",
                     "private_payload": "TOP_SECRET_ACCEPTANCE_PAYLOAD",
                 },
+                "unknown_private_material_name": "DO_NOT_EXPOSE_MATERIAL",
             },
         }
         replay = {
@@ -85,6 +86,11 @@ class R3SuccessAdapterAuthorContextV1Tests(unittest.TestCase):
         self.assertTrue(out["proof"]["semantic_acceptance_complete"])
         self.assertEqual(out["proof"]["accepted_raw_obligation_id_count"], 2)
         self.assertTrue(out["proof"]["raw_goal_acceptance_present"])
+        self.assertEqual(out["replay"]["unmodeled_request_key_count"], 1)
+        self.assertEqual(out["proof"]["unmodeled_material_key_count"], 1)
+        self.assertEqual(out["proof"]["unmodeled_execution_key_count"], 0)
+        self.assertFalse(out["proof"]["structural_view_complete"])
+        self.assertFalse(out["redaction_policy"]["structural_coverage_complete"])
 
         rendered = repr(out)
         for secret in (
@@ -95,6 +101,8 @@ class R3SuccessAdapterAuthorContextV1Tests(unittest.TestCase):
             "PRIVATE_EFFECT",
             "PRIVATE_PATH",
             "DO_NOT_EXPOSE",
+            "DO_NOT_EXPOSE_MATERIAL",
+            "unknown_private_material_name",
             "private/checkpoint/location.json",
             "private-one",
             "private-two",
