@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V59_FINANCE_WAKE_INFORMATION_QUOTIENT_PROJECTION_REMOTE_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__INDEPENDENT_EXACT_BRANCH_PROJECTION__V58_SEMANTIC_GAINS_AND_NAMESPACE_GUARD_PRESERVED__PY_COMPILE_PASS__1_OF_1_COHERENCE_PASS__ZERO_CREDIT",
+  "subjects": {
+    "quotient": {
+      "path": "canonical/governance/R2_FINANCE_SEMANTIC_WAKE_INFORMATION_QUOTIENT_20261009_V2.json",
+      "git_blob_sha": "bb58795676f23e621d191cb9a30a5394a29c8ef6"
+    },
+    "quotient_verification": {
+      "path": "canonical/verification/R2_FINANCE_SEMANTIC_WAKE_INFORMATION_QUOTIENT_REMOTE_VERIFY_20261009_V2.json",
+      "git_blob_sha": "3482b08dc8c2c75122b4620f564aaee993e4a646"
+    },
+    "scheduler": {
+      "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V56.json",
+      "git_blob_sha": "1adc7e890100c5278b298dcf4fbec196e6c472ae"
+    },
+    "r2_pointer": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "f2c982a62a4aab4dd82c77d2cb28eec01716809e"
+    },
+    "one_shot_pointer": {
+      "path": "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json",
+      "git_blob_sha": "566835669259307e87668f029738113b86c39cdf"
+    },
+    "terminal_pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "4ac58e8866f4da3d0f06c7690b1568bf8091cf16"
+    },
+    "projection_test": {
+      "path": "canonical/tests/test_r2_v59_finance_wake_quotient_projection_v1.py",
+      "git_blob_sha": "934e27d3065c10b0e3d4a8de5cb2863283bf4b24"
+    },
+    "namespace_bridge": {
+      "path": "canonical/governance/COVERAGE_ROOT_NAMESPACE_BRIDGE_V1.json",
+      "git_blob_sha": "fd45e0fcfdd238cdae022fc58ce418c9151186f1"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "working_directory": "/home/sprite/verify-r2-v59-finance-wake-projection",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "py_compile_pass": true,
+    "coherence_tests_run": 1,
+    "coherence_tests_passed": 1,
+    "coherence_tests_failed": 0,
+    "current_r2_version": "V59",
+    "scheduler_version": "V56",
+    "terminal_pointer_revision": 104,
+    "current_v58_contextual_regcap_gains_preserved": true,
+    "root_namespace_collision_guard_preserved": true,
+    "concrete_wake_conditions": 11,
+    "decision_effect_classes": 3,
+    "r2_primary_internal_unsolved_count": 1,
+    "finance_semantic_tail_closed": false,
+    "information_theoretic_externality_proved": false,
+    "terminal": false,
+    "execution_log_sha256": "0a269c525901cb01a8b625e62885e5315fcdba4cf668609ffa6b173d9de50eb4"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
