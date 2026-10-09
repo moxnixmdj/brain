@@ -3,6 +3,7 @@ import json
 import unittest
 
 from canonical.runtime import cross_document_effect_dimension_lattice_v1 as l
+from canonical.runtime import cross_document_effect_dimension_lattice_verify_v1 as lv
 from canonical.runtime.certified_document_effect_relation_v1 import parse_effect_relations
 
 
@@ -132,6 +133,7 @@ class CrossDocumentEffectDimensionLatticeV1Tests(unittest.TestCase):
         self.assertEqual(state["effect_class"]["kind"],"EXACT")
         self.assertEqual(state["value"],{"kind":"TOP"})
         self.assertEqual(len(out["open_lattice_atoms"]),5)
+        self.assertTrue(lv.verify(_problem(_doc(\n            "A",inventory=["A.t"],\n            dimensions={"A.t":{"effect_class":"DEFINE"}},\n        )),out)["verified"])
 
     def test_all_independent_dimensions_close_define(self):
         out=l.evaluate(_problem(_doc(
@@ -141,6 +143,7 @@ class CrossDocumentEffectDimensionLatticeV1Tests(unittest.TestCase):
         self.assertTrue(out["pass"],out)
         self.assertEqual(out["effective_value"],"10")
         self.assertEqual(out["open_lattice_atoms"],[])
+        self.assertTrue(lv.verify(_problem(_doc(\n            "A",inventory=["A.t"],dimensions={"A.t":_effect_dims()},\n        )),out)["verified"])
 
     def test_v8_full_relation_still_closes(self):
         relation={
@@ -254,6 +257,7 @@ class CrossDocumentEffectDimensionLatticeV1Tests(unittest.TestCase):
             "OPEN__DIMENSION_LATTICE_FINITE__EFFECT_COMPOSITION_NOT_CLOSED",
         )
         self.assertEqual(set(out["possible_outcomes"]),{"10","11"})
+        self.assertTrue(lv.verify(_problem(a,b),out)["verified"])
 
 
 if __name__=="__main__":
