@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_CCRT_CLAIM_SCOPED_ROOT_CERTIFICATE_REGISTRY_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_BRANCH_BYTES__PY_COMPILE__10_OF_10_CLAIM_SUBSTITUTION_FALSIFIERS__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "ccrt-claim-registry-v2",
+    "exact_blobs": {
+      "canonical/runtime/coverage_claim_root_certificate_registry_guard_v1.py": "895eeded4b183285ddd2783350f27325d6122e2e",
+      "canonical/tests/test_coverage_claim_root_certificate_registry_guard_v1.py": "b0e187a51e433738dcfb23edda017932c4dbc883",
+      "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_ROOT_CERTIFICATE_REGISTRY_V1.json": "7fc36797644b16fe14aad02d8786770c53a55328"
+    }
+  },
+  "independent_carrier": {
+    "sprite": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/ccrt_claim_registry_verify",
+    "dependency_install_performed": false
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "focused_tests": {
+      "result": "PASS",
+      "passed": 10,
+      "failed": 0
+    },
+    "pytest_available": false,
+    "test_runner": "DEPENDENCY_FREE_DISCOVERY_AND_DIRECT_INVOCATION_OF_UNMODIFIED_PLAIN_ASSERT_TEST_FUNCTIONS"
+  },
+  "proved": [
+    "EMPTY_REGISTRY_DOES_NOT_VACUOUSLY_CLOSE_ANY_CLAIM_OR_CHECKPOINT",
+    "ROOT_CERTIFICATE_AUTHORITY_IS_INDEXED_BY_FROZEN_CLAIM_BINDING_AND_CANONICAL_ROOT_ID",
+    "CROSS_SCOPE_SUBSTITUTION_FAILS_CLOSED",
+    "CROSS_SEMANTICS_SUBSTITUTION_FAILS_CLOSED",
+    "STALE_EPOCH_SUBSTITUTION_FAILS_CLOSED",
+    "AUTHORITY_ID_SUBSTITUTION_FAILS_CLOSED",
+    "CERTIFICATE_CANNOT_SELF_VERIFY",
+    "ALL_THREE_ROOTS_MAY_CLOSE_ONLY_THE_EXACT_FROZEN_CLAIM",
+    "CHECKPOINT_GLOBAL_ROOT_AND_OPEN_ENDED_MISSION_COMPLETION_FLAGS_REMAIN_FORBIDDEN"
+  ],
+  "hard_nonclaims": [
+    "NO_CHECKPOINT_CLAIMS_REGISTERED",
+    "NO_CCRT_ROOT_CERTIFICATE_PROVED",
+    "NO_CHECKPOINT_COMPLETION",
+    "NO_GLOBAL_MISSION_COMPLETION",
+    "NO_TERMINAL_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
