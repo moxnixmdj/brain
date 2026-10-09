@@ -18,7 +18,7 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any, Mapping
 
-from canonical.runtime.p3_robust_policy_adequacy_cegar_v1 import solve as solve_cegar
+from canonical.runtime.p3_robust_policy_adequacy_cegar_v2 import solve as solve_cegar
 from canonical.runtime.semantic_truth_dispatch_v1 import evaluate as evaluate_truth
 from canonical.runtime.p3_source_positive_selection_cell_v1 import evaluate as evaluate_selection
 
