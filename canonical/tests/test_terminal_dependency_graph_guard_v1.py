@@ -190,3 +190,26 @@ def test_terminal_closure_cannot_hide_unresolved_leaves(tmp_path):
     out = validate_graph(graph, repo_root=tmp_path)
     assert out["pass"] is False
     assert out["reason"] == "TERMINAL_CLOSURE_WITH_UNRESOLVED_LEAVES"
+
+
+def test_empty_attack_family_set_is_explicitly_unresolved(tmp_path):
+    graph = base_graph(tmp_path)
+    graph["nodes"][0]["status"] = "PROVED"
+    graph["nodes"][0]["attack_families"] = []
+    out = validate_graph(graph, repo_root=tmp_path)
+    assert out["pass"] is True, out
+    assert "FRAMEWORK::ATTACK_APPLICABILITY" in out["unresolved"]
+
+
+def test_terminal_closure_rejects_unknown_attack_applicability(tmp_path):
+    graph = base_graph(tmp_path)
+    graph["nodes"][0]["status"] = "PROVED"
+    graph["nodes"][0]["attack_families"] = []
+    graph["nodes"][1]["refinement"]["status"] = "PROVED"
+    graph["nodes"][1]["live_authority_status"] = "PROVED"
+    graph["nodes"][1]["attack_families"] = ["VERSION_DRIFT"]
+    graph["terminal_closure"] = True
+    out = validate_graph(graph, repo_root=tmp_path)
+    assert out["pass"] is False
+    assert out["reason"] == "TERMINAL_CLOSURE_WITH_UNRESOLVED_LEAVES"
+    assert "FRAMEWORK::ATTACK_APPLICABILITY" in out["unresolved"]
