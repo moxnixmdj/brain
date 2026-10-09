@@ -1,7 +1,6 @@
 import json
+import math
 from pathlib import Path
-
-import pytest
 
 from canonical.runtime.tb_science_postslot_reducer_v1 import (
     TBSciencePostSlotError,
@@ -32,6 +31,15 @@ def receipt(status, reward, *, started=True):
     }
 
 
+def expect_error(label, fn):
+    try:
+        fn()
+    except TBSciencePostSlotError as exc:
+        assert label in str(exc), (label, str(exc))
+    else:
+        raise AssertionError("expected TBSciencePostSlotError:" + label)
+
+
 def test_rank16_final_zero_advances_exactly_to_rank17():
     out = reduce_postslot(LEDGER, receipt("FINAL_ZERO", 0.0), MANIFEST)
     c = out["current_counts"]
@@ -42,7 +50,7 @@ def test_rank16_final_zero_advances_exactly_to_rank17():
     assert c["successes_remaining_for_pass_lock"] == 124
     assert c["additional_failures_before_fail_lock"] == 71
     assert c["maximum_possible_successes_remaining"] == 194
-    assert c["minimum_required_success_rate_over_remaining_slots"] == pytest.approx(124 / 194)
+    assert math.isclose(c["minimum_required_success_rate_over_remaining_slots"], 124 / 194)
     assert c["next_unconsumed_slot"] == {
         "ledger_schedule_rank": 17,
         "frozen_manifest_schedule_order": 16,
@@ -62,7 +70,7 @@ def test_rank16_success_advances_exactly_to_rank17():
     assert c["successes_remaining_for_pass_lock"] == 123
     assert c["additional_failures_before_fail_lock"] == 72
     assert c["maximum_possible_successes_remaining"] == 194
-    assert c["minimum_required_success_rate_over_remaining_slots"] == pytest.approx(123 / 194)
+    assert math.isclose(c["minimum_required_success_rate_over_remaining_slots"], 123 / 194)
 
 
 def test_preexposure_abort_is_nonconsuming_and_does_not_advance():
@@ -79,18 +87,29 @@ def test_preexposure_abort_is_nonconsuming_and_does_not_advance():
 def test_out_of_order_slot_is_rejected():
     r = receipt("FINAL_ZERO", 0.0)
     r["slot_id"] = "terminal-bench-science/variable-star-vetting::trial-0"
-    with pytest.raises(TBSciencePostSlotError, match="RECEIPT_SLOT_OUT_OF_ORDER"):
-        reduce_postslot(LEDGER, r, MANIFEST)
+    expect_error("RECEIPT_SLOT_OUT_OF_ORDER", lambda: reduce_postslot(LEDGER, r, MANIFEST))
 
 
 def test_retry_credit_is_rejected():
     r = receipt("FINAL_ZERO", 0.0)
     r["rerun_credit"] = True
-    with pytest.raises(TBSciencePostSlotError, match="RERUN_CREDIT_MUST_BE_FALSE"):
-        reduce_postslot(LEDGER, r, MANIFEST)
+    expect_error("RERUN_CREDIT_MUST_BE_FALSE", lambda: reduce_postslot(LEDGER, r, MANIFEST))
 
 
 def test_started_nonterminal_receipt_is_rejected():
     r = receipt("POSTSTART_ABORT__IRREVERSIBLE", 0.0)
-    with pytest.raises(TBSciencePostSlotError, match="TERMINAL_RECEIPT_STATUS_INVALID"):
-        reduce_postslot(LEDGER, r, MANIFEST)
+    expect_error("TERMINAL_RECEIPT_STATUS_INVALID", lambda: reduce_postslot(LEDGER, r, MANIFEST))
+
+
+if __name__ == "__main__":
+    tests = [
+        test_rank16_final_zero_advances_exactly_to_rank17,
+        test_rank16_success_advances_exactly_to_rank17,
+        test_preexposure_abort_is_nonconsuming_and_does_not_advance,
+        test_out_of_order_slot_is_rejected,
+        test_retry_credit_is_rejected,
+        test_started_nonterminal_receipt_is_rejected,
+    ]
+    for test in tests:
+        test()
+    print("PASS__TB_SCIENCE_POSTSLOT_REDUCER__6_OF_6")
