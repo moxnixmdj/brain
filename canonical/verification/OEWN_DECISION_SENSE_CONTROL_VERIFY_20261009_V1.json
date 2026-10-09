@@ -64,5 +64,37 @@
     "focused_control": "8_OF_8_PASS",
     "live_fabric_route": "1_OF_1_PASS",
     "py_compile": "PASS"
+  },
+  "github_actions": {
+    "status": "INFRASTRUCTURE_FAILURE_BEFORE_RUNNER_ASSIGNMENT__NO_CODE_EXECUTED",
+    "head_sha": "0a36abe90f3d0d2620a8886a47efa20d053397b8",
+    "runs": [
+      {
+        "name": "verify-unified-cognitive-fabric-v1",
+        "run_id": 37898406549,
+        "job_id": 113715010373,
+        "runner_id": 0,
+        "step_count": 0,
+        "conclusion": "failure"
+      },
+      {
+        "name": "verify-general-adequate-decision-fixed-point-v2",
+        "run_id": 37898406597,
+        "job_id": 113715010671,
+        "runner_id": 0,
+        "step_count": 0,
+        "conclusion": "failure"
+      },
+      {
+        "name": "R3 autonomous self-improvement verification",
+        "run_id": 37898406604,
+        "job_id": 113715010451,
+        "runner_id": 0,
+        "step_count": 0,
+        "conclusion": "failure"
+      }
+    ],
+    "code_failure_inferred": false,
+    "repository_native_execution_claimed": false
   }
 }
