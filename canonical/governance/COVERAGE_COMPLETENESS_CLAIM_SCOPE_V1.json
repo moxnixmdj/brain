@@ -10,7 +10,7 @@
   },
   "root_theorem": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
-    "git_blob_sha": "9204ccd694141f9bb61abf9f50e5480590ca3757"
+    "git_blob_sha": "0825ee841e11e3e439b2c2d530a25de1ae0a1255"
   },
   "claim_semantics": {
     "quantification": "FOR_EACH_FROZEN_CERTIFICATION_CLAIM_C",
@@ -49,11 +49,24 @@
     "NO_GLOBAL_MISSION_COMPLETION",
     "NO_CHECKPOINT_COMPLETION",
     "NO_ROOT_CERTIFICATE_PROMOTION",
-    "NO_TERMINAL_CREDIT"
+    "NO_TERMINAL_CREDIT",
+    "NO_CARRIER_FACTORIZATION_CERTIFICATE_TRANSPORT_ACROSS_UNEQUAL_CLAIM_IDS_WITHOUT_PROOF"
   ],
   "accounting": {
     "fresh_reality_units_consumed": 0,
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
+  },
+  "carrier_factorization": {
+    "carrier_governance_path": "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json",
+    "carrier_governance_git_blob_sha": "3c8da3adfcea2134dadae18634fc4dd7b14b19e7",
+    "quantification": "FOR_EACH_FROZEN_CERTIFICATION_CLAIM_C",
+    "required_same_claim_bindings": [
+      "claim_id",
+      "scope_sha256",
+      "semantics_sha256"
+    ],
+    "transport_rule": "NO_CROSS_CLAIM_FACTORIZATION_TRANSPORT_WITHOUT_EXPLICIT_SCOPE_AND_SEMANTICS_PRESERVATION_PROOF",
+    "global_open_ended_mission_completion_derivable": false
   }
 }

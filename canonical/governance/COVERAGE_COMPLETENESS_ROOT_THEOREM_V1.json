@@ -49,7 +49,8 @@
       "EFFECT_AND_RESOURCE_CONTAINMENT",
       "REALITY_ANCHORING",
       "COMPLETE_MEDIATION_WHERE_USED",
-      "RUNTIME_CONTAINMENT_FALSIFICATION"
+      "RUNTIME_CONTAINMENT_FALSIFICATION",
+      "MISSION_SUFFICIENT_CARRIER_FACTORIZATION"
     ],
     "R2": [
       "MISSION_AUTHORITY",
@@ -78,7 +79,8 @@
       "EXECUTION_REALIZATION",
       "EPOCH_AND_REVISION_BINDING",
       "NON_EQUIVOCATING_AUTHORITY_HISTORY",
-      "EXPLICIT_TRUST_ATOMS"
+      "EXPLICIT_TRUST_ATOMS",
+      "SEMANTIC_CARRIER_BINDING"
     ]
   },
   "statuses": {
@@ -116,7 +118,12 @@
     "ROOT_THEOREM_MUST_BIND_CURRENT_REAL_MISSION_NOT_ONLY_CHECKPOINT_OBJECTIVE",
     "CURRENT_TERMINAL_AUTHORITY_MUST_BIND_CURRENT_MISSION_POINTER_BLOB",
     "CURRENT_TERMINAL_AUTHORITY_MUST_BIND_ROOT_THEOREM_LIVE_BINDING_MANIFEST",
-    "STALE_BINDING_IS_R4_FAILURE_NOT_NEW_ROOT"
+    "STALE_BINDING_IS_R4_FAILURE_NOT_NEW_ROOT",
+    "ROOT_THEOREM_CARRIER_MUST_PRESERVE_ALL_MISSION_RELEVANT_DISTINCTIONS",
+    "FINITE_NO_COUNTEREXAMPLE_IS_NOT_UNIVERSAL_CARRIER_FACTORIZATION_PROOF",
+    "CARRIER_ALIASING_IS_R4_AND_R1_DEFECT_NOT_NEW_ROOT",
+    "CARRIER_FACTORIZATION_CERTIFICATES_ARE_FROZEN_CLAIM_SCOPED",
+    "CROSS_CLAIM_CARRIER_TRANSPORT_REQUIRES_EXPLICIT_SCOPE_AND_SEMANTICS_PRESERVATION_PROOF"
   ],
   "new_e_admission": {
     "default": "REJECT_AS_PEER_ARCHITECTURE",
@@ -192,7 +199,8 @@
     "CURRENT_TERMINAL_GOAL_NOT_CHANGED",
     "CURRENT_ACCEPTANCE_OR_OWNERSHIP_COUNTS_NOT_CHANGED",
     "LIVE_BINDING_REPAIR_DOES_NOT_CLOSE_R4_GLOBALLY",
-    "MISSION_BINDING_REPAIR_DOES_NOT_CLOSE_R1_R2_OR_R3"
+    "MISSION_BINDING_REPAIR_DOES_NOT_CLOSE_R1_R2_OR_R3",
+    "CURRENT_MISSION_CARRIER_FACTORIZATION_NOT_PROVED_BY_THIS_ARTIFACT"
   ],
   "mission_objective_binding": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
@@ -209,5 +217,21 @@
     "validator_path": "canonical/runtime/root_theorem_live_binding_v1.py",
     "test_path": "canonical/tests/test_root_theorem_live_binding_v1.py",
     "fail_closed_on_mission_or_authority_drift": true
+  },
+  "semantic_carrier_precondition": {
+    "path": "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json",
+    "formula": "FOR_ALL_w1_w2__pi(w1)=pi(w2)_IMPLIES_M(w1)=M(w2)",
+    "equivalent_factorization": "EXISTS_M_HAT_SUCH_THAT_M_EQUALS_M_HAT_COMPOSE_pi",
+    "role": "R4_SEMANTIC_BINDING_PRECONDITION_AND_R1_SCOPE_CARRIER_PRECONDITION",
+    "universal_factorization_currently_proved": false,
+    "carrier_element_type": "MISSION_SUFFICIENT_TYPED_SEMANTIC_EVALUATION_OBJECT__NOT_SINGLE_TRACE_BY_DEFAULT",
+    "claim_indexed": true,
+    "claim_factorization": "FOR_ALL_w1_w2_IN_W_C__pi_C(w1)=pi_C(w2)_IMPLIES_M_C(w1)=M_C(w2)",
+    "required_claim_bindings": [
+      "claim_id",
+      "scope_sha256",
+      "semantics_sha256"
+    ],
+    "global_open_ended_mission_completion_derivable": false
   }
 }

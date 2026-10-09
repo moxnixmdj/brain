@@ -1240,8 +1240,13 @@
     },
     "coverage_completeness_root_theorem_r1_r4": {
       "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
-      "git_blob_sha": "57d41d6dd8c0d7cf29eabb4bae07669a2d6086ea",
-      "note": "R1_R4_META_CONTROL_BOUND_TO_CURRENT_REAL_MISSION_CONTENT_ADDRESSED_ARTIFACTS_AND_EXPLICIT_ROOT_NAMESPACE_GUARD__ZERO_TERMINAL_CREDIT"
+      "git_blob_sha": "ae7bd1d657884b9aef78e8dd31a66f92eb2e5f95",
+      "note": "CCRT_R1_R4_META_CONTROL_BOUND_TO_CURRENT_REAL_MISSION__EXPLICIT_ROOT_NAMESPACE__FROZEN_CLAIM_SCOPE__MISSION_SUFFICIENT_SEMANTIC_CARRIER__R4_FAIL_CLOSED__ZERO_CREDIT",
+      "semantic_carrier_precondition": {
+        "path": "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json",
+        "git_blob_sha": "3c8da3adfcea2134dadae18634fc4dd7b14b19e7",
+        "universal_factorization_currently_proved": false
+      }
     },
     "cursorbench_route_b_current_evidence_nonentailment_20261009_v1": {
       "path": "canonical/governance/CURSORBENCH_ROUTE_B_CURRENT_EVIDENCE_NONENTAILMENT_20261009_V1.json",
@@ -1254,12 +1259,12 @@
     },
     "coverage_completeness_claim_scope": {
       "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
-      "git_blob_sha": "0c61f253a1013b564e7a254ba9a3a230f667d6ca",
+      "git_blob_sha": "df3f64759dd1bbf230a40de0695ef514f270f677",
       "guard_path": "canonical/runtime/coverage_claim_scope_guard_v1.py",
       "guard_git_blob_sha": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747",
       "tests_path": "canonical/tests/test_coverage_claim_scope_guard_v1.py",
       "tests_git_blob_sha": "b43a99e3aa9a974eee3130b27354592eda747f76",
-      "note": "R1_R4_CERTIFIES_FROZEN_CLAIM_SOUNDNESS_ONLY__OPEN_ENDED_GLOBAL_MISSION_COMPLETION_NOT_DERIVABLE__ZERO_CREDIT"
+      "note": "CCRT_CERTIFIES_FROZEN_CLAIM_SOUNDNESS_ONLY__CARRIER_FACTORIZATION_BINDS_SAME_CLAIM_SCOPE_AND_SEMANTICS__OPEN_ENDED_GLOBAL_MISSION_COMPLETION_NOT_DERIVABLE__ZERO_CREDIT"
     },
     "coverage_root_namespace_bridge": {
       "path": "canonical/governance/COVERAGE_ROOT_NAMESPACE_BRIDGE_V1.json",
@@ -3945,6 +3950,17 @@
     "current_mission_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
     "current_mission_git_blob_sha": "07038a32598324c7aed88929a09c58bbe28b51a1",
     "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "carrier_factorization_hardening_20261009_v1": {
+    "status": "ACTIVE_R4_PRECONDITION_BOUND__CLAIM_SCOPED__NAMESPACE_GUARDED__UNIVERSAL_FACTORIZATION_NOT_CLAIMED__ZERO_CREDIT",
+    "theorem_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+    "claim_scope_path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
+    "carrier_path": "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json",
+    "namespace_path": "canonical/governance/COVERAGE_ROOT_NAMESPACE_BRIDGE_V1.json",
+    "falsifier_path": "canonical/runtime/mission_carrier_factorization_v1.py",
+    "rule": "CARRIER_ALIASING_REOPENS_CCRT_R4_AND_CCRT_R1__CROSS_CLAIM_TRANSPORT_REQUIRES_PRESERVATION_PROOF__LEGACY_NUMERIC_ROOT_LABELS_HAVE_ZERO_CCRT_EQUIVALENCE_AUTHORITY",
+    "global_mission_completion_derivable": false,
     "terminal_credit_delta": 0
   }
 }
