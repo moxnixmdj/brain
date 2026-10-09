@@ -11,11 +11,10 @@ from canonical.runtime import r3_verification_frontier_repair_reducer_v1 as redu
 
 
 def compiled_request() -> dict:
-    return {
+    out = {
         "schema": "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_REQUEST_V1",
         "status": "PASS__MINIMUM_STRUCTURAL_DISTINGUISHING_EVIDENCE_REQUEST_READY",
         "pass": True,
-        "request_sha256": "sha256:" + "a" * 64,
         "minimum_missing_obligation_count": 3,
         "candidate_evidence_bundles": [
             {
@@ -29,6 +28,8 @@ def compiled_request() -> dict:
             }
         ],
     }
+    out["request_sha256"] = acquisition.request_compiler._digest(out)
+    return out
 
 
 def candidate_output(task_id: str = "task-1") -> dict:
@@ -135,6 +136,24 @@ class R3DistinguishingEvidenceAcquisitionV1Tests(unittest.TestCase):
             record.call_args.kwargs["surface"],
             acquisition.SURFACE,
         )
+
+    def test_forged_compiled_request_digest_is_rejected_before_provider_call(self):
+        request = compiled_request()
+        request["minimum_missing_obligation_count"] = 2
+        provider = Mock()
+        out = acquisition.acquire(
+            request,
+            observation_id="observation:source",
+            state_path=Path("/tmp/r3-test-state.json"),
+            provider=provider,
+            provider_id="TEST_PROVIDER",
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["reason"],
+            "DISTINGUISHING_EVIDENCE_REQUEST_DIGEST_MISMATCH",
+        )
+        provider.assert_not_called()
 
     def test_stale_request_digest_is_rejected_before_reingestion(self):
         provider = Mock(
