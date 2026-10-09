@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_UVCK_V2_DEFEATER_ORDER_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_BLOBS__PYCOMPILE__11_OF_11__ZERO_CREDIT",
+  "runtime_git_blob_sha": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8",
+  "tests_git_blob_sha": "0eba4d1cd42d62a9a6e13830804223300e290e68",
+  "replay": {
+    "carrier_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "py_compile": "PASS",
+    "tests_run": 11,
+    "failures": 0,
+    "errors": 0
+  },
+  "proved": "SUPPORTED_DEFEATER_DOMINATES_OPEN_OR_STALE_DEFEATERS_INDEPENDENT_OF_DECLARED_ORDER",
+  "nonclaims": [
+    "NO_FULL_MAIN_REGRESSION",
+    "NO_DOMAIN_CLOSURE",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
