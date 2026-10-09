@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__PINNED_CURRENT_GENERATION__PYCOMPILE__18_OF_18__ZERO_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "pinned_main_commit": "2c522681dcd895d30786eefefa4e6c21693d5720",
+  "carrier": {
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/uvck-v2-currentgen-2c522681"
+  },
+  "exact_blobs": {
+    "uvck_runtime": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8",
+    "uvck_tests": "0eba4d1cd42d62a9a6e13830804223300e290e68",
+    "professional_quality_tests": "087ee28525723d2be09ce2592024da2ff4b2fe0f",
+    "professional_quality_graph": "03530e29d70206b46b690b33a04c66765ff86ad7",
+    "professional_quality_defeater_catalog": "8b92e5cf76f767054f55414b87014e03d43460b8",
+    "professional_quality_reuse_matrix": "ded969ce9045b80c51b9c0dee9ab7242d99c0b5c"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 18,
+    "tests_passed": 18,
+    "tests_failed": 0,
+    "execution_log_path": "/home/sprite/uvck-v2-currentgen-18.log",
+    "execution_log_sha256": "da47cb366747588b85fc2aa6ed9f1dc42fea146e8a27f5a954399e5273e71858"
+  },
+  "proves": [
+    "SUPPORTED_DEFEATER_DOMINANCE_IS_ORDER_INDEPENDENT_ON_CURRENT_GENERATION",
+    "GENERIC_GRAPH_STILL_CANNOT_SELF_CERTIFY_EXECUTION_OR_ADVERSARIAL_CLOSURE",
+    "ALL_80_DECLARED_PROFESSIONAL_QUALITY_DEFEATERS_BIND_TO_EXISTING_ROOTS",
+    "EACH_DECLARED_PROFESSIONAL_QUALITY_DEFEATER_COUNTERPROVES_WHEN_ACTIVATED",
+    "UNMAPPED_CHALLENGE_FAILS_CLOSED",
+    "KNOWN_PROFESSIONAL_QUALITY_ATTACK_SET_REQUIRES_NO_NEW_UVCK_PRIMITIVE"
+  ],
+  "not_proved": [
+    "UNKNOWN_DEFEATER_COMPLETENESS",
+    "PROFESSIONAL_QUALITY_DOMAIN_PROOF_CLOSURE",
+    "PROFESSIONAL_QUALITY_DOMAIN_EXECUTION_CLOSURE",
+    "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+    "LIVE_DEFAULT_PROMOTION",
+    "TERMINAL_AUTHORITY"
+  ],
+  "next_required_edge": "DOMAIN_SEMANTIC_AND_EXECUTION_EVIDENCE_BINDING_PLUS_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
