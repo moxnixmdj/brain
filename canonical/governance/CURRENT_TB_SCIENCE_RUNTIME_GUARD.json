@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_RUNTIME_GUARD_V1",
+  "date": "2026-10-09",
+  "status": "V11_CANONICAL_REPAIR_VERIFIED__RANK17_TASK_READ_STILL_PROHIBITED",
+  "verification_path": "canonical/verification/TB_SCIENCE_V11_CANONICAL_RUNTIME_MIRROR_VERIFY_20261009_V1.json",
+  "verification_git_blob_sha": "77ab42e2586997eeb54b9d280ffc4fc3af2ae364",
+  "canonical_runtime_version": "V11",
+  "prior_rank17_authority_version": "V2",
+  "prior_rank17_authority_sufficient_for_task_read": false,
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "next": "REBIND_RANK17_AUTHORITY_TO_CURRENT_VERIFIED_RUNTIME_BEFORE_ANY_EXPOSURE",
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
