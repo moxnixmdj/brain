@@ -1237,6 +1237,11 @@
       "path": "canonical/governance/CURSORBENCH_4_0_INFORMATION_BOUNDARY_PUBLIC_SEARCH_SATURATION_20261009_V1.json",
       "git_blob_sha": "953b68f5bdc09f9a4c7c7e47b09864628e172d3f",
       "note": "CURRENT_PUBLIC_OWNER_SEARCH_BOUNDEDLY_SATURATED__ONE_4_0_PROTOCOL_CONTINUITY_FACT_REMAINS_UNBOUND__ZERO_CREDIT"
+    },
+    "cursorbench_target_relevance_scope_cover_reduction_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_TARGET_RELEVANCE_SCOPE_COVER_REDUCTION_20261009_V1.json",
+      "git_blob_sha": "049a1efa0083298e366e0b25b200325eef6b8115",
+      "note": "TARGET_RELEVANCE_REUSES_PROOF_CARRYING_SCOPE_COVER__NON_TARGET_SINGLETONS_CONTRIBUTE_ZERO_DIRECT_CURSORBENCH_COVERAGE__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1799,7 +1804,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "FORMALIZE_AND_VERIFY_SOUND_NONVACUOUS_CURSORBENCH_TARGET_RELEVANCE_OR_SCOPE_COMPLETE_TRANSFER__WAL_AND_TERMINAL_BENCH_CONTEXTS_MUST_NOT_TRANSFER_BY_ANALOGY__REACTIVATE_OWNER_PROTOCOL_SEARCH_ONLY_ON_SOURCE_DELTA",
+    "cursorbench_next_proof_object": "PROVE_A_TARGET_DEFINED_OR_PROOF_CARRYING_SUPERSET_POSITIVE_ADEQUACY_REGION_THAT_ACTUALLY_COVERS_CURSORBENCH_SCOPE__OR_BIND_A_REAL_CURSORBENCH_TARGET_MEMBER__DO_NOT_SPEND_MORE_WORK_ON_WAL_OR_REACT_DIRECT_TRANSFER",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -2024,7 +2029,12 @@
     "cursorbench_preverifier_information_boundary_public_search_scope": "LISTED_CURRENT_PUBLIC_FIRST_PARTY_SURFACES_ONLY__NOT_GLOBAL_NONEXISTENCE",
     "cursorbench_preverifier_information_boundary_owner_fact_state": "OPEN_DORMANT_UNTIL_OWNER_SOURCE_DELTA",
     "cursorbench_public_exact_4_0_task_member_found": false,
-    "cursorbench_public_exact_4_0_task_member_search_state": "BOUNDEDLY_SATURATED_ON_CURRENT_PUBLIC_SOURCES"
+    "cursorbench_public_exact_4_0_task_member_search_state": "BOUNDEDLY_SATURATED_ON_CURRENT_PUBLIC_SOURCES",
+    "cursorbench_target_relevance_canonical_mechanism": "PROOF_CARRYING_SCOPE_COVER_V1",
+    "cursorbench_wal_direct_target_transfer_rejected": true,
+    "cursorbench_react_lead_form_direct_target_transfer_rejected": true,
+    "cursorbench_non_target_singleton_behavioral_analogy_sufficient_for_target_relevance": false,
+    "cursorbench_target_relevance_requires_target_intersection_or_proved_scope_inclusion": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2726,7 +2736,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 98,
+  "pointer_revision": 99,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3815,6 +3825,17 @@
     "result": "ONE_OWNER_PROTOCOL_CONTINUITY_FACT_REMAINS__STATIC_PUBLIC_SEARCH_DORMANT__INTERNAL_TARGET_RELEVANCE_ROUTE_ACTIVE",
     "atom_truth_delta": 0,
     "cursorbench_membership_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_target_relevance_scope_cover_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_TARGET_RELEVANCE_SCOPE_COVER_REDUCTION_20261009_V1.json",
+      "git_blob_sha": "049a1efa0083298e366e0b25b200325eef6b8115"
+    },
+    "result": "NON_TARGET_SINGLETON_DIRECT_TRANSFER_REJECTED__TARGET_RELEVANCE_REDUCED_TO_TARGET_INTERSECTION_OR_SCOPE_INCLUSION",
+    "wal_target_coverage_delta": 0,
+    "react_target_coverage_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
