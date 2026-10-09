@@ -1242,6 +1242,15 @@
       "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
       "git_blob_sha": "65deb3d2e80237f15854dce19d212df9ba262db9",
       "note": "R1_R4_META_CONTROL_BOUND_TO_CURRENT_REAL_MISSION_AND_CONTENT_ADDRESSED_ARTIFACTS__R4_CURRENTNESS_FAILS_CLOSED__ZERO_TERMINAL_CREDIT"
+    },
+    "cursorbench_route_b_current_evidence_nonentailment_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_ROUTE_B_CURRENT_EVIDENCE_NONENTAILMENT_20261009_V1.json",
+      "git_blob_sha": "65ac4b2f23d876d46c27ffc1aedb2cd177718537",
+      "independent_verification": {
+        "path": "canonical/verification/CURSORBENCH_ROUTE_B_CURRENT_EVIDENCE_NONENTAILMENT_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "754cf15499a700c9f70a469262d94a986db7c1b3"
+      },
+      "note": "CURRENT_ROUTE_B_EVIDENCE_ENTAILS_NEITHER_SCOPE_COMPLETE_POSITIVE_COVER_NOR_ITS_FAILURE__ONLY_INFORMATION_CHANGING_ESCAPE_CLASSES_REMAIN__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1804,7 +1813,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "CODING_SPEC_SCOPE_COMPLETE_AUTHENTICATED_POLICY_ADEQUACY_COVER__ACTUAL_CURSORBENCH_TARGET_MEMBERSHIP_EVENT_DRIVEN_ON_OWNER_SOURCE_DELTA__PREEMPT_IF_ROUTE_A_SCORING_AUTHORITY_APPEARS",
+    "cursorbench_next_proof_object": "CONSTRUCTIVE_SCOPE_THEOREM_OR_TARGET_RELEVANT_COMPLETE_ADEQUACY_EVIDENCE__PREEMPT_ON_ROUTE_A_SCORE_AUTHORITY_OR_ACTUAL_CURSORBENCH_TARGET_EVIDENCE__DO_NOT_ADD_POLICY_PLUMBING_WITHOUT_A_NEW_AUTHENTICATED_ADEQUACY_REGION",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -2033,7 +2042,16 @@
     "cursorbench_typed_specialist_public_metadata_transfer_falsified": true,
     "cursorbench_actual_private_target_membership_route": "EVENT_DRIVEN_ONLY_UNDER_CURRENT_OWNER_POLICY",
     "cursorbench_public_task_prompt_repository_search_authorized_now": false,
-    "cursorbench_scope_complete_transfer_from_public_metadata_proved": false
+    "cursorbench_scope_complete_transfer_from_public_metadata_proved": false,
+    "cursorbench_route_b_current_evidence_entails_scope_complete_positive_cover": false,
+    "cursorbench_route_b_current_evidence_entails_scope_complete_cover_failure": false,
+    "cursorbench_route_b_current_evidence_information_underdetermined": true,
+    "cursorbench_route_b_load_bearing_escape_classes": [
+      "CONSTRUCTIVE_SCOPE_THEOREM",
+      "TARGET_RELEVANT_COMPLETE_ADEQUACY_EVIDENCE",
+      "ROUTE_A_SCORE_LOWER_BOUND"
+    ],
+    "cursorbench_route_b_more_internal_mechanism_without_new_adequacy_information_authorized": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -3842,6 +3860,22 @@
       "path": "canonical/governance/CURSORBENCH_TYPED_SPECIALIST_TARGET_MEMBERSHIP_TRANSFER_TERMINAL_RECONCILIATION_20261009_V1.json"
     },
     "result": "PUBLIC_METADATA_TRANSFER_TO_FIVE_ATOM_REGION_FALSIFIED__PRIVATE_TARGET_MEMBERSHIP_EVENT_DRIVEN__INTERNAL_SUCCESSOR_SCOPE_COMPLETE_POLICY_ADEQUACY_COVER",
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_route_b_current_evidence_nonentailment_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_ROUTE_B_CURRENT_EVIDENCE_NONENTAILMENT_20261009_V1.json",
+      "git_blob_sha": "65ac4b2f23d876d46c27ffc1aedb2cd177718537"
+    },
+    "verification": {
+      "path": "canonical/verification/CURSORBENCH_ROUTE_B_CURRENT_EVIDENCE_NONENTAILMENT_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "754cf15499a700c9f70a469262d94a986db7c1b3"
+    },
+    "result": "CURRENT_EVIDENCE_CANNOT_DECIDE_SCOPE_COMPLETE_ROUTE_B_COVER__THREE_ESCAPE_CLASSES_ONLY",
+    "exact_escape_class_count": 3,
+    "route_b_impossible_claimed": false,
+    "route_b_closed_claimed": false,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   },
