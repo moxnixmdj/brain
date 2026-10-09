@@ -662,5 +662,77 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         self.assertEqual(out["r2_next_meta_action"]["kind"], "VERIFY_ACTUAL_GOAL_SATISFACTION")
 
 
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed, "run_controller")
+    def test_direct_semantic_open_hint_reaches_resolver_without_authority(
+        self, controller, preflight
+    ):
+        preflight.return_value = {
+            "matched": False,
+            "pass": False,
+            "status": "NOT_APPLICABLE__TERMINALLY_RELEVANT_EFFECT_AMBIGUITY",
+            "direct_route_semantic_open": True,
+            "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_WORLDSET_V1",
+            "effect_status": "OPEN__TERMINALLY_RELEVANT_EFFECT_AMBIGUITY",
+            "minimum_discriminator_slots": ["B.effect"],
+            "possible_outcomes": ["12", "13"],
+            "world_count": 2,
+        }
+        controller.side_effect = [self._open(), self._pass()]
+        provider = Mock(
+            return_value={
+                "request_patch": {
+                    "decision_payload": {"context_id": "effect-world-resolved"}
+                }
+            }
+        )
+
+        out = fixed.run(self._request(), proposal_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        packet = provider.call_args.args[0]
+        hint = packet["direct_preflight_hint"]
+        self.assertEqual(hint["minimum_discriminator_slots"], ["B.effect"])
+        self.assertEqual(hint["possible_outcomes"], ["12", "13"])
+        self.assertEqual(hint["world_count"], 2)
+        self.assertFalse(hint["semantic_truth_authority"])
+        self.assertFalse(hint["execution_authority"])
+        self.assertFalse(hint["acceptance_authority"])
+        self.assertFalse(hint["terminal_authority"])
+        self.assertEqual(
+            out["r2_fixed_point_trace"][0]["direct_preflight_hint"],
+            hint,
+        )
+
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed, "run_controller")
+    def test_direct_semantic_open_hint_survives_without_resolver(
+        self, controller, preflight
+    ):
+        preflight.return_value = {
+            "matched": False,
+            "pass": False,
+            "status": "NOT_APPLICABLE__TERMINALLY_RELEVANT_EFFECT_AMBIGUITY",
+            "direct_route_semantic_open": True,
+            "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_WORLDSET_V1",
+            "effect_status": "OPEN__TERMINALLY_RELEVANT_EFFECT_AMBIGUITY",
+            "minimum_discriminator_slots": ["B.effect"],
+            "possible_outcomes": ["12", "13"],
+            "world_count": 2,
+        }
+        controller.return_value = self._open()
+
+        out = fixed.run(self._request())
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["r2_fixed_point_status"],
+            "OPEN__R2_EDGE_RESOLVER_UNAVAILABLE",
+        )
+        hint = out["r2_fixed_point_trace"][0]["direct_preflight_hint"]
+        self.assertEqual(hint["minimum_discriminator_slots"], ["B.effect"])
+        self.assertFalse(hint["semantic_truth_authority"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
