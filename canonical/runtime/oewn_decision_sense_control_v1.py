@@ -241,7 +241,7 @@ def _validate_manifest(
     }
     return {
         "manifest": normalized,
-        "manifest_sha256": _sha(normalized),
+        "manifest_sha256": _sha(manifest),
         "sense_bindings_by_id": by_id,
         "observations": observations,
     }
