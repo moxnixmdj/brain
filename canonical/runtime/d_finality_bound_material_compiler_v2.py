@@ -129,6 +129,13 @@ def _canonical_from_import_children(path: Path, root: Path) -> list[Path]:
     return sorted(out, key=lambda p: p.as_posix())
 
 
+def _ast_contains_name(node: ast.AST, name: str) -> bool:
+    return any(
+        isinstance(child, ast.Name) and child.id == name
+        for child in ast.walk(node)
+    )
+
+
 def _literal_sibling_loads(path: Path) -> tuple[list[Path], list[str]]:
     """Find fixed sibling .py loads and unresolved dynamic loader surfaces.
 
@@ -186,6 +193,37 @@ def _literal_sibling_loads(path: Path) -> tuple[list[Path], list[str]]:
                             / value
                         ).resolve()
                         literal_targets.append(target)
+
+            # Fixed sibling helper pattern:
+            #   _load_sibling_runtime_module("capability_planner.py", ...)
+            if (
+                isinstance(fn, ast.Name)
+                and fn.id == "_load_sibling_runtime_module"
+                and len(node.args) >= 1
+                and isinstance(node.args[0], ast.Constant)
+            ):
+                value = node.args[0].value
+                if (
+                    isinstance(value, str)
+                    and value.endswith(".py")
+                    and Path(value).name == value
+                ):
+                    literal_targets.append(path.with_name(value).resolve())
+
+        # Fixed runtime_dir path construction:
+        #   pathlib.Path(runtime_dir) / "goal_compiler.py"
+        if (
+            isinstance(node, ast.BinOp)
+            and isinstance(node.op, ast.Div)
+            and isinstance(node.right, ast.Constant)
+            and isinstance(node.right.value, str)
+            and node.right.value.endswith(".py")
+            and Path(node.right.value).name == node.right.value
+            and _ast_contains_name(node.left, "runtime_dir")
+        ):
+            literal_targets.append(
+                path.with_name(node.right.value).resolve()
+            )
 
     unique = sorted(set(literal_targets), key=lambda p: p.as_posix())
     unresolved: list[str] = []
