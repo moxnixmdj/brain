@@ -1063,5 +1063,60 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         )
 
 
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed, "run_controller")
+    def test_effect_field_top_reaches_resolver_without_authority(
+        self, controller, preflight
+    ):
+        atom = {
+            "document_id": "B",
+            "dimension": "DOCUMENT_EFFECT_FIELD",
+            "effect_id": "B.t",
+            "field": "supersedes",
+            "target_id": "threshold",
+            "state": "TOP",
+            "proof_obligation": {
+                "kind": "PROVE_DOCUMENT_EFFECT_FIELD",
+                "document_id": "B",
+                "source_id": "B",
+                "effect_id": "B.t",
+                "field": "supersedes",
+                "target_id": "threshold",
+            },
+        }
+        preflight.return_value = {
+            "matched": False,
+            "pass": False,
+            "status": "NOT_APPLICABLE__SEMANTIC_LATTICE_OPEN",
+            "direct_route_semantic_open": True,
+            "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_FIELD_LATTICE_V2",
+            "effect_status": "OPEN__QUERY_RELEVANT_EFFECT_FIELD_TOP_REMAINS",
+            "open_lattice_atoms": [atom],
+            "next_proof_obligations": [atom["proof_obligation"]],
+            "minimum_discriminator_slots": [],
+            "possible_outcomes": [],
+            "world_count": None,
+            "query_relative_effect_semantics_finite": False,
+        }
+        controller.side_effect = [self._open(), self._pass()]
+        provider = Mock(return_value={
+            "request_patch": {"decision_payload": {"context_id": "field-proved"}}
+        })
+
+        out = fixed.run(self._request(), proposal_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        hint = provider.call_args.args[0]["direct_preflight_hint"]
+        self.assertEqual(hint["open_lattice_atoms"], [atom])
+        self.assertEqual(
+            hint["next_proof_obligations"], [atom["proof_obligation"]]
+        )
+        self.assertFalse(hint["query_relative_effect_semantics_finite"])
+        self.assertFalse(hint["semantic_truth_authority"])
+        self.assertFalse(hint["execution_authority"])
+        self.assertFalse(hint["acceptance_authority"])
+        self.assertFalse(hint["terminal_authority"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
