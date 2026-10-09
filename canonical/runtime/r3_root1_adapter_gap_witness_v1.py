@@ -17,7 +17,7 @@ from canonical.runtime import root1_acquisition_closure_controller_v3 as root1
 SCHEMA = "PROJECT_BRAIN_R3_ROOT1_ADAPTER_GAP_WITNESS_V1"
 FRONTIER_KIND = "EXPAND_SUCCESS_VERIFICATION_FRONTIER"
 BLOCKED_KIND = "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE"
-REQUIRED_PRIMITIVE = "R3_SUCCESS_ADAPTER_PATCH_AUTHOR"
+REQUIRED_PRIMITIVE = "R3_SUCCESS_VERIFICATION_FRONTIER_EXPANSION"
 
 SUCCESS_ADAPTER_FRONTIER_PATHS = (
     "canonical/runtime/r3_bound_success_adapter_v1.py",
@@ -102,9 +102,15 @@ def compile_gap(
     """Compile one parked R3 adapter miss into constructive Root1 gap evidence.
 
     This function grants no acquisition or promotion authority. It proves only the
-    currently bound fact: the exact retained success cannot be adapted by either
-    owned success adapter under the unchanged adapter/verifier frontier, and no
-    acquisition provider is currently bound to this handoff.
+    currently bound fact: the exact retained success cannot be adapted by any
+    owned verifier-preserving success adapter under the unchanged adapter/verifier
+    frontier, and no acquisition provider is currently bound to this handoff.
+
+    The missing Root1 primitive is intentionally phrased as verification-frontier
+    expansion rather than patch authorship. A sound repair may be a new adapter,
+    a new independently verified read-only verifier, or new distinguishing
+    evidence; this compiler does not prejudge which implementation class is
+    sufficient.
     """
     if not isinstance(work, Mapping):
         return _fail("WORK_NOT_OBJECT")
@@ -292,14 +298,22 @@ def compile_gap(
             "acquisition_routes_accounted": True,
             "unresolved_after_available_acquisition": True,
             "required_behavior": (
-                "Author or bind a candidate R3 success adapter for the exact retained "
-                "success while modifying only the owned success-adapter frontier and "
-                "leaving independent verification authority unchanged."
+                "Expand the verified R3 success-verification frontier for the exact retained "
+                "success without self-certification. The admissible repair may be a "
+                "verifier-preserving adapter, a newly independently verified read-only "
+                "verifier, or new distinguishing evidence."
             ),
             "witness_id": witness_id,
             "witness": witness_core,
             "currently_bound_frontier_acquisition_provider_present": False,
             "current_owned_adapter_frontier_exhausted_for_witness": True,
+            "adapter_patch_authorship_assumed_sufficient": False,
+            "verification_frontier_expansion_required": True,
+            "admissible_repair_classes": [
+                "VERIFIER_PRESERVING_SUCCESS_ADAPTER",
+                "INDEPENDENT_READONLY_SUCCESS_VERIFIER",
+                "NEW_DISTINGUISHING_EVIDENCE",
+            ],
             "exact_required_primitive_verified_owned": False,
             "claim_scope": (
                 "CURRENT_BOUND_R3_SUCCESS_ADAPTER_FRONTIER_AND_CURRENTLY_BOUND_"
@@ -336,7 +350,7 @@ def compile_gap(
         return {
             "schema": SCHEMA,
             "status": (
-                "PASS__ROOT1_CONSTRUCTIVE_R3_ADAPTER_AUTHORING_GAP_ESTABLISHED__"
+                "PASS__ROOT1_CONSTRUCTIVE_R3_VERIFICATION_FRONTIER_GAP_ESTABLISHED__"
                 "NO_CURRENT_BOUND_ACQUISITION_ROUTE"
             ),
             "pass": True,
