@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_THEOREM_V2",
+  "date": "2026-10-09",
+  "status": "ACTIVE_CLAIM_SCOPED_CCRT_V2__MISSION_SEMANTICS_AUTHORIZED__ZERO_TERMINAL_CREDIT",
+  "supersedes_for_current_ccrt_claims": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+  "authority_scope": "CLAIM_SCOPED_PROOF_ARCHITECTURE_ONLY",
+  "mission_semantic_authority": {
+    "path": "canonical/governance/MISSION_SEMANTIC_AUTHORITY_V1.json",
+    "git_blob_sha": "71822fa590b3733fc00f4f295e3fce284303f820",
+    "mission_semantics_sha256": "4d3d7866ad8ee54606a11791f53519eef15a80700bd5dcc221ec0da676ceb942"
+  },
+  "roots": {
+    "R1": {
+      "id": "REALITY_CONTAINMENT",
+      "claim": "B_real[C] SUBSETEQ B_plus[C]"
+    },
+    "R2": {
+      "id": "MISSION_SOUNDNESS",
+      "claim": "G_minus[C] SUBSETEQ G_real[C]"
+    },
+    "R3": {
+      "id": "TERMINAL_CLOSURE_WITHIN_CLAIM",
+      "claim": "B_plus[C] SUBSETEQ G_minus[C]"
+    },
+    "R4": {
+      "id": "PROOF_AND_REALIZATION_TRUST",
+      "claim": "TRUSTWORTHY_PROOF_AND_REALIZATION(R1(C),R2(C),R3(C))",
+      "meta_level": true
+    }
+  },
+  "theorem": {
+    "statement": "FOR_EACH_AUTHORIZED_FROZEN_CLAIM_C__R1(C) AND R2(C) AND R3(C) AND R4(C) => B_real[C] SUBSETEQ G_real[C]",
+    "conclusion_name": "CLAIM_SOUND[C]",
+    "global_open_ended_mission_completion_derivable": false,
+    "proof_rule": "SET_INCLUSION_TRANSITIVITY"
+  },
+  "claim_scope": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V2.json",
+    "git_blob_sha": "9b2949b8288ae47098eada17e97369d4b2133b89",
+    "structural_guard": "canonical/runtime/coverage_claim_scope_guard_v2.py"
+  },
+  "claim_authorization": {
+    "policy_path": "canonical/governance/COVERAGE_CLAIM_AUTHORIZATION_POLICY_V1.json",
+    "policy_git_blob_sha": "10aa7031ba08197c0d3d33b2b6d3777599bbe72e",
+    "guard_path": "canonical/runtime/coverage_claim_authorization_guard_v1.py",
+    "guard_git_blob_sha": "03dc0dea98cc130ecde712f9ac95aa0b442ec93c",
+    "required": true
+  },
+  "r2_inductive_construction": {
+    "theorem_path": "canonical/governance/CCRT_G_MINUS_INDUCTIVE_SOUNDNESS_THEOREM_V1.json",
+    "theorem_git_blob_sha": "bb5388f174c8d15eb26e0f86c45dde4e88eb4fec",
+    "verifier_registry_path": "canonical/governance/CCRT_GOOD_CELL_VERIFIER_REGISTRY_V1.json",
+    "verifier_registry_git_blob_sha": "c75d468ff25c0e24cf074dd646ea19140b0dbaae",
+    "kernel_path": "canonical/runtime/ccrt_good_lower_kernel_v1.py",
+    "kernel_git_blob_sha": "dd687d99b6a5217370d94feb90db781615e9a5fc",
+    "rule": "G_minus_0[C]=EMPTY_SET__ONLY_INDEPENDENTLY_VERIFIED_AUTHORIZED_GOOD_CELLS_MAY_BE_UNIONED",
+    "r2_global_closure_claimed": false
+  },
+  "semantic_carrier_precondition": {
+    "path": "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json",
+    "git_blob_sha": "3c8da3adfcea2134dadae18634fc4dd7b14b19e7",
+    "claim_indexed": true,
+    "universal_factorization_currently_proved": false
+  },
+  "root_namespace_bridge": {
+    "path": "canonical/governance/COVERAGE_ROOT_NAMESPACE_BRIDGE_V1.json",
+    "git_blob_sha": "fd45e0fcfdd238cdae022fc58ce418c9151186f1"
+  },
+  "current_root_claims": {
+    "R1": "NOT_PROVED_BY_THIS_ARTIFACT",
+    "R2": "INDUCTIVE_ADMISSION_MECHANISM_PROVED__CURRENT_GLOBAL_CLAIM_LEDGER_CLOSURE_NOT_ASSERTED",
+    "R3": "NOT_PROVED_BY_THIS_ARTIFACT",
+    "R4": "NOT_GLOBALLY_CLOSED"
+  },
+  "hard_rules": [
+    "STRUCTURAL_CLAIM_SCOPE_NEVER_EQUALS_MISSION_AUTHORIZATION",
+    "MISSION_AUTHORIZATION_REQUIRED_BEFORE_ANY_G_MINUS_ADMISSION",
+    "GOOD_CELL_REQUIRES_ACTUAL_CLAIM_SATISFACTION_AND_INDEPENDENT_SEMANTIC_VERIFICATION",
+    "MISSION_SEMANTICS_BINDING_USES_STABLE_SEMANTIC_AUTHORITY_NOT_INCIDENTAL_POINTER_BYTES",
+    "NO_GLOBAL_OPEN_ENDED_MISSION_COMPLETION_INFERENCE",
+    "ZERO_TERMINAL_CREDIT_FROM_THIS_THEOREM"
+  ],
+  "live_binding": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V2.json",
+    "validator": "canonical/runtime/root_theorem_live_binding_v2.py"
+  },
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
