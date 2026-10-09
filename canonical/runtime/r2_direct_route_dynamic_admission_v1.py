@@ -159,6 +159,9 @@ def validate_candidate(
     capability_id = candidate.get("capability_id")
     if capability_id is not None and not isinstance(capability_id, str):
         raise DynamicAdmissionError("CAPABILITY_ID_INVALID")
+    semantic_open_stops_fallback = candidate.get("semantic_open_stops_fallback")
+    if not isinstance(semantic_open_stops_fallback, bool):
+        raise DynamicAdmissionError("SEMANTIC_OPEN_STOPS_FALLBACK_AUTHORITY_REQUIRED")
     return {
         "route_id": route_id,
         "capability_id": capability_id,
@@ -170,6 +173,7 @@ def validate_candidate(
         "route_verification_git_blob_sha": verification_sha,
         "scope": scope,
         "selection_class": SELECTION_CLASS,
+        "semantic_open_stops_fallback": semantic_open_stops_fallback,
     }
 
 
@@ -196,6 +200,7 @@ def validate_receipt(
         "route_verification_path": candidate["route_verification_path"],
         "route_verification_git_blob_sha": candidate["route_verification_git_blob_sha"],
         "selection_class": SELECTION_CLASS,
+        "semantic_open_stops_fallback": candidate["semantic_open_stops_fallback"],
         "independent_verified": True,
         "preflight_pure_no_effect": True,
         "matched_route_failure_no_fallthrough": True,
@@ -258,6 +263,7 @@ def validate_admission_row(root: Path, row: Mapping[str, Any]) -> dict[str, Any]
         "verification_git_blob_sha": candidate["route_verification_git_blob_sha"],
         "scope": candidate["scope"],
         "selection_class": SELECTION_CLASS,
+        "semantic_open_stops_fallback": candidate["semantic_open_stops_fallback"],
         "active": True,
         "automatic_live_admission": True,
     }
@@ -404,6 +410,7 @@ def compile_admission(
         "independent_receipt_git_blob_sha": receipt_blob,
         "scope": candidate["scope"],
         "selection_class": SELECTION_CLASS,
+        "semantic_open_stops_fallback": candidate["semantic_open_stops_fallback"],
         "active": True,
         "automatic_live_admission": True,
         "collision_policy": "FAIL_CLOSED_ON_ANY_OTHER_DYNAMIC_OR_LEGACY_MATCH",
