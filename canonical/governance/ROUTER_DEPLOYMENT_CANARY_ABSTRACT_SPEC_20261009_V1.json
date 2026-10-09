@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_ROUTER_DEPLOYMENT_CANARY_ABSTRACT_SPEC_V1",
+  "date": "2026-10-09",
+  "subject_id": "router-deployment-canary",
+  "input_contract": {
+    "type": "MAPPING",
+    "encoding": {
+      "kind": "CANONICAL_JSON",
+      "sort_keys": true,
+      "separators": [
+        ",",
+        ":"
+      ],
+      "ensure_ascii": false,
+      "allow_nan": false
+    }
+  },
+  "transition_partition": [
+    {
+      "case_id": "PAYLOAD_MAPPING",
+      "precondition": "INPUT_IS_MAPPING",
+      "outcome": "PASS"
+    },
+    {
+      "case_id": "PAYLOAD_NON_MAPPING",
+      "precondition": "INPUT_IS_NOT_MAPPING",
+      "outcome": "TYPE_ERROR"
+    }
+  ],
+  "success_observation": {
+    "schema": "PROJECT_BRAIN_ROUTER_DEPLOYMENT_CANARY_V1",
+    "status": "PASS__DETERMINISTIC_CANARY_EXECUTED",
+    "payload_sha256": "SHA256(CANONICAL_JSON(payload))",
+    "terminal_result": false,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "nonclaims": [
+    "THIS_SPEC_DOES_NOT_PROVE_REFINEMENT_BY_ITSELF",
+    "THIS_CANARY_IS_NON_CREDITABLE",
+    "THIS_SPEC_DOES_NOT_CLOSE_SELECTED_COVER_OR_TERMINAL"
+  ],
+  "terminal_credit_delta": 0
+}
