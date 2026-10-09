@@ -144,6 +144,19 @@ class R3SuccessAdapterPatchAuthorWrapperV1Tests(unittest.TestCase):
             "COMPILED_GAP_AUTHOR_CONTEXT_MISSING_OR_INVALID",
         )
 
+    def test_tampered_redacted_author_context_fails_closed(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            _fixture(root)
+            gap = _gap(root)
+            gap["adapter_author_context"]["replay"]["mode"] = "raw_bound"
+            out = wrapper.build_author_packet(gap, repo_root=root)
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["reason"],
+            "COMPILED_GAP_AUTHOR_CONTEXT_DIGEST_MISMATCH",
+        )
+
     def test_stale_adapter_frontier_fails_before_authoring(self):
         with TemporaryDirectory() as td:
             root = Path(td)
