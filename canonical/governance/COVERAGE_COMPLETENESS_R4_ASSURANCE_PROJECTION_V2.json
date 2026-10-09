@@ -8,7 +8,7 @@
   },
   "certificate_pointer": {
     "path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
-    "git_blob_sha": "eace743c6cb2399dd1c1bc35d8678bba8a74d415"
+    "git_blob_sha": "188f8b17fdc3fea0bc3dfd28f0ed2f31bc727800"
   },
   "gates": {
     "representation_closure": {
@@ -16,7 +16,7 @@
       "closed": true
     },
     "proof_closure": {
-      "status": "ACTIVE_FROZEN_CLAIM_BOUND__THREE_CC_ROOT_CERTIFICATES_OPEN",
+      "status": "ACTIVE_FROZEN_CLAIM_BOUND__CC_R3_COUNTEREXAMPLE_CURRENT__ROOT_PROOF_CLOSURE_BLOCKED",
       "closed": false,
       "open_root_ids": [
         "CC_R1_REALITY_CONTAINMENT_V1",
@@ -24,7 +24,13 @@
         "CC_R3_TERMINAL_CLOSURE_V1"
       ],
       "forbidden_inference": "NO_SHORT_ALIAS_OR_LEGACY_R2_R3_RECEIPT_CAN_CLOSE_A_CC_ROOT_SLOT",
-      "active_claim": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa"
+      "active_claim": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
+      "current_counterexample": {
+        "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+        "path": "canonical/verification/CC_R3_COUNTEREXAMPLE_20261009_V1.json",
+        "git_blob_sha": "bf6e8ef01894350c5d51abe53038cea315984ea3",
+        "u_empty": false
+      }
     },
     "execution_closure": {
       "status": "OPEN",
@@ -39,13 +45,12 @@
   },
   "r4_closed": false,
   "exact_next_order": [
-    "ATTACK_CC_R3_TERMINAL_CLOSURE_FOR_ACTIVE_CLAIM_WITH_U_EMPTY_OR_COUNTEREXAMPLE_PROOF",
-    "ATTACK_CC_R1_REALITY_CONTAINMENT_FOR_SAME_CLAIM",
-    "ATTACK_CC_R2_MISSION_SOUNDNESS_FOR_SAME_CLAIM",
-    "ONLY_AFTER_ALL_THREE_SAME_CLAIM_ROOT_CERTIFICATES_EXIST_BIND_PROOF_TO_REALIZATION",
-    "THEN_RUN_INDEPENDENT_ADVERSARIAL_CLOSURE"
+    "RESOLVE_CC_R3_COUNTEREXAMPLE_FOR_ACTIVE_CLAIM__SHRINK_B_PLUS_OR_SOUNDLY_EXPAND_G_MINUS",
+    "RECHECK_U_EMPTY_OR_EMIT_NEXT_CC_R3_COUNTEREXAMPLE",
+    "ONLY_AFTER_CC_R3_PROVED_CURRENT_ATTACK_CC_R1_AND_CC_R2_FOR_SAME_CLAIM",
+    "THEN_BIND_PROOF_TO_REALIZATION_AND_RUN_INDEPENDENT_ADVERSARIAL_CLOSURE"
   ],
-  "scheduling_note": "ACTIVE_FROZEN_CLAIM_IS_BOUND__CC_R3_IS_NOW_THE_FIRST_SET_ROOT",
+  "scheduling_note": "CC_R3_HAS_A_CONSTRUCTIVE_ACTIVE_CLAIM_COUNTEREXAMPLE__R1_R2_ARE_NOT_ON_TERMINAL_SUCCESS_CRITICAL_PATH_UNTIL_U_IS_EMPTY",
   "hard_nonclaims": [
     "NO_CC_ROOT_CERTIFICATE_PROVED",
     "NO_R4_CLOSURE",
