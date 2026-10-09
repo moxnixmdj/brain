@@ -147,11 +147,15 @@ class BoundedCoreferenceAmbiguityV1Tests(unittest.TestCase):
             request = {"task_id": "coref-rollback", "goal": goal}
             good = route.preflight(request, repo_root=root)
             self.assertTrue(good["matched"], good)
-            with patch.object(route.verifier, "verify", return_value={
-                "verified": False,
-                "producer_independent": True,
-                "reason": "forced",
-            }):
+            first = route.verifier.verify(self._case(), route.producer.compute(self._case()))
+            with patch.object(route.verifier, "verify", side_effect=[
+                first,
+                {
+                    "verified": False,
+                    "producer_independent": True,
+                    "reason": "forced",
+                },
+            ]):
                 result = route.run(request, repo_root=root)
             self.assertFalse(result["pass"], result)
             self.assertTrue(result["rollback_complete"], result)
