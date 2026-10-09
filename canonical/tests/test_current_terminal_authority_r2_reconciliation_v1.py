@@ -358,3 +358,91 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+    def test_current_runtime_byte_binding_drift_is_fail_closed(self):
+        terminal = self.load(TERMINAL)
+        truth = terminal["live_truth"]
+        reconciliation = terminal[
+            "executable_refinement_terminal_closure_reconciliation_20261009_v1"
+        ]
+
+        verifier = terminal["authoritative_sources"][
+            "current_authority_runtime_binding_census_verifier"
+        ]
+        verifier_path = ROOT / verifier["path"]
+        self.assertEqual(verifier["git_blob_sha"], blob_sha(verifier_path))
+
+        verification = terminal["authoritative_sources"][
+            "current_authority_runtime_binding_census_verification"
+        ]
+        verification_path = ROOT / verification["path"]
+        self.assertEqual(
+            verification["git_blob_sha"], blob_sha(verification_path)
+        )
+
+        evidence = terminal["authoritative_sources"][
+            "current_authority_runtime_binding_connector_census"
+        ]
+        evidence_path = ROOT / evidence["path"]
+        self.assertEqual(evidence["git_blob_sha"], blob_sha(evidence_path))
+
+        self.assertFalse(
+            truth["current_authority_runtime_byte_binding_coherence"]
+        )
+        self.assertEqual(
+            truth["current_authority_runtime_drift_reference_count"], 6
+        )
+        self.assertEqual(
+            truth["current_authority_runtime_drift_unique_path_count"], 5
+        )
+        self.assertEqual(
+            truth["current_authority_runtime_missing_blob_binding_count"], 1
+        )
+        self.assertFalse(
+            truth["current_authority_runtime_drift_is_external_impossibility"]
+        )
+        self.assertFalse(truth["r1_current_byte_drift_lock_valid"])
+
+        self.assertFalse(
+            terminal["live_capability_ownership_20261008_v1"][
+                "r1_drift_locked"
+            ]
+        )
+        self.assertFalse(
+            terminal["live_capability_ownership_20261008_v1"][
+                "r1_structural_closure_current_byte_verified"
+            ]
+        )
+        self.assertFalse(
+            terminal["r1_universal_live_capability_invocation_20261008_v1"][
+                "current_byte_invocation_closure_verified"
+            ]
+        )
+        self.assertFalse(
+            terminal["authoritative_sources"][
+                "terminal_autopilot_executor_v1"
+            ]["current_byte_binding_verified"]
+        )
+        self.assertFalse(
+            terminal["terminal_execution_root"][
+                "current_runtime_gate_binding_verified"
+            ]
+        )
+        self.assertFalse(
+            terminal["current_option_preserving_optimization_20261008_v1"][
+                "current_runtime_blob_binding_verified"
+            ]
+        )
+
+        self.assertTrue(
+            reconciliation[
+                "current_authority_runtime_binding_census_verified"
+            ]
+        )
+        self.assertFalse(
+            reconciliation[
+                "current_authority_runtime_byte_binding_coherence"
+            ]
+        )
+        self.assertEqual(reconciliation["terminal_credit_delta"], 0)
