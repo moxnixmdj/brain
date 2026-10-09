@@ -73,16 +73,21 @@ def test_verifier_tamper_rolls_back(monkeypatch, tmp_path: Path):
     outp.write_text('{"old":true}\n', encoding="utf-8")
     original = outp.read_bytes()
 
-    monkeypatch.setattr(
-        d.verifier,
-        "verify",
-        lambda case, result: {
+    original_verify = d.verifier.verify
+    calls = {"count": 0}
+
+    def fail_only_after_preflight(case, result):
+        calls["count"] += 1
+        if calls["count"] == 1:
+            return original_verify(case, result)
+        return {
             "verified": False,
             "producer_independent": True,
             "model_dependency_count": 0,
             "errors": ["forced"],
-        },
-    )
+        }
+
+    monkeypatch.setattr(d.verifier, "verify", fail_only_after_preflight)
     out = d.run({"task_id": "finance-3", "goal": _goal()}, repo_root=tmp_path)
     assert out["pass"] is False
     assert out["rollback_complete"] is True
