@@ -10,6 +10,7 @@ from canonical.runtime import cross_document_effect_hypothesis_worldset_v1 as w
 from canonical.runtime import cross_document_source_residual_frontier_v1 as c
 from canonical.runtime import r2_cross_document_source_residual_direct_adequacy_v1 as d
 from canonical.runtime import r2_direct_end_to_end_adequacy_v12 as v12
+from canonical.runtime import certified_raw_effect_sentence_v1 as rawc
 
 def _canon(x):
     return json.dumps(x,sort_keys=True,separators=(",",":"),ensure_ascii=False,allow_nan=False)
@@ -89,6 +90,77 @@ def _case(*,ambiguous=False,include_other=False,tails=None,claims=None):
         "worldset_problem":ws,
     }
 
+
+def _raw_sentence_case():
+    sentences={
+        "A":"Effect A.t defines threshold as 10.",
+        "B":"Effect B.t replaces A.t on threshold with 12 effective 2026-07-01.",
+        "C":"Effect C.t excepts B.t on threshold with 8 when small = true effective 2026-07-01.",
+    }
+    slots={}
+    bdocs=[]; rdocs=[]
+    for did in ("A","B","C"):
+        sid=did+".effect"
+        compiled=rawc.compile_sentence(
+            sentences[did],
+            document_id=did,
+            slot_id=sid,
+        )
+        assert compiled["pass"], compiled
+        slots[did]=compiled["slot"]
+        raw=sentences[did].encode("utf-8")
+        bdocs.append({
+            "document_id":did,
+            "source_text":sentences[did],
+            "source_sha256":_sha(raw),
+            "coverage_regions":[{
+                "region_id":did+".sentence",
+                "start":0,
+                "end":len(raw),
+                "text_sha256":_sha(raw),
+                "mode":"CERTIFIED_EFFECT_SENTENCE",
+                "slot_id":sid,
+            }],
+        })
+        rdocs.append({
+            "document_id":did,
+            "source_id":"src:"+did,
+            "source_text":sentences[did],
+            "scope_claim":None,
+            "inventory_claims":[],
+        })
+    ws={
+        "schema":w.SCHEMA,
+        "case_id":"direct-combined",
+        "hypothesis_set_complete":True,
+        "compatibility_constraints_complete":True,
+        "incompatible_hypothesis_sets":[],
+        "documents":[
+            {"document_id":did,"effect_slots":[slots[did]]}
+            for did in ("A","B","C")
+        ],
+        "query":{
+            "target_id":"threshold",
+            "as_of":"2026-08-01",
+            "context":{"small":True},
+        },
+    }
+    return {
+        "schema":c.SCHEMA,
+        "case_id":"direct-combined",
+        "byte_coverage_documents":bdocs,
+        "residual_source_documents":rdocs,
+        "worldset_problem":ws,
+    }
+
+
+def _write_raw_sentences(root:Path):
+    p=root/"canonical/tmp"; p.mkdir(parents=True,exist_ok=True)
+    (p/"case.json").write_text(
+        json.dumps(_raw_sentence_case()),
+        encoding="utf-8",
+    )
+
 def _goal():
     return (
         "Using the source-and-byte-covered cross-document effect case at "
@@ -101,6 +173,19 @@ def _write(root:Path,**kwargs):
     (p/"case.json").write_text(json.dumps(_case(**kwargs)),encoding="utf-8")
 
 class R2CrossDocumentSourceResidualDirectAdequacyV1Tests(unittest.TestCase):
+
+    def test_raw_effect_sentences_execute_end_to_end(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); _write_raw_sentences(root)
+            pf=d.preflight({"task_id":"raw","goal":_goal()},repo_root=root)
+            self.assertTrue(pf["matched"],pf)
+            self.assertTrue(pf["query_relative_source_completeness_proved"])
+            out=d.run({"task_id":"raw","goal":_goal()},repo_root=root)
+            self.assertTrue(out["pass"],out)
+            self.assertEqual(out["effective_value"],8)
+            self.assertEqual(out["world_count"],1)
+            self.assertTrue(out["source_immutability_verified"])
+
     def test_exact_byte_closed_case_matches_and_runs(self):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td); _write(root)
