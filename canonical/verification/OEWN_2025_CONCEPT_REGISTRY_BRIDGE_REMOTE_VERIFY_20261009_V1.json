@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_OEWN_2025_CONCEPT_REGISTRY_BRIDGE_REMOTE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_CANDIDATE_BYTES__7_OF_7_UNIT__REAL_MARGIN_REGISTRY_INTEGRATION__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "base_main_head": "ac18f232b1b5649a6408481c9223ffa7604097cb",
+    "candidate_branch": "oewn-concept-registry-bridge-20261009",
+    "exact_blobs": {
+      "canonical/runtime/oewn_release_concept_registry_v1.py": "034c7bb8177a0c44c2afa0e2e2d3810fcb172b8c",
+      "canonical/tests/test_oewn_release_concept_registry_v1.py": "1d0e41c9b6c1d424e542bd89eb1a02ae36dcf528",
+      "canonical/runtime/oewn_release_sense_universe_v1.py": "7c9cd0e81732f05b02348fbd53d364dd567223f7",
+      "canonical/runtime/bounded_authenticated_concept_universe_v1.py": "2af90250d6d042646c997cf8c0b49ed7b627ebb7"
+    }
+  },
+  "carrier": {
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/verify-oewn-concept-registry",
+    "log_path": "/home/sprite/oewn_concept_registry_verify.log",
+    "log_sha256": "4abbc77ce90c6b1304ce2dea64df3252ce14dbe883dccc9a17d205782106fdfe"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "unit_suite": "PASS__7_OF_7",
+    "real_release_registry": "PASS__MARGIN_NOUN__6_AUTHENTICATED_CONCEPTS",
+    "real_registry_sha256": "0a0589a97a14c6c42df495bb6ab82e342d8b8742bc9d17dff83134bab48eddb7",
+    "unfiltered_real_margin_remains_ambiguous": true,
+    "exact_profit_synset_filter_unique": true,
+    "exact_collateral_synset_filter_unique": true
+  },
+  "proved": [
+    "OEWN_RELEASE_SENSE_UNIVERSE_CAN_BE_DETERMINISTICALLY_COMPILED_TO_EXISTING_BOUNDED_CONCEPT_REGISTRY_SCHEMA",
+    "REGISTRY_AUTHORITY_RECEIPT_IS_RECOMPUTED_FROM_EXACT_OEWN_RELEASE_BYTES_AND_EXACT_REGISTRY",
+    "MODIFIED_REGISTRY_CANNOT_REUSE_THE_SOURCE_DERIVED_RECEIPT",
+    "DISTINCT_OEWN_SENSES_RECEIVE_DISTINCT_LEXICAL_IDENTITY_SIGNATURES_AND_ARE_NEVER_FALSELY_COLLAPSED",
+    "UNFILTERED_MARGIN_STAYS_AMBIGUOUS_ACROSS_ALL_SIX_RELEASE_SENSES",
+    "EXACT_AUTHORIZED_ATTRIBUTE_FILTER_CAN_BIND_ONE_RELEASE_SENSE_WITHOUT_FUZZY_MATCHING"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_AN_ARBITRARY_TASK_CONTEXT_ALREADY_HAS_AN_AUTHORIZED_SYNSET_OR_LEXNAME_BINDING",
+    "NO_CLAIM_LEXICAL_IDENTITY_SIGNATURES_ARE_TASK_LEVEL_TERMINAL_EQUIVALENCE_SIGNATURES",
+    "NO_GENERAL_WORD_SENSE_CLOSURE",
+    "NO_OPEN_WORLD_ENGLISH_OR_ONTOLOGY_COMPLETENESS",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
