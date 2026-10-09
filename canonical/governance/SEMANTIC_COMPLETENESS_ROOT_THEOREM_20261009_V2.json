@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_COMPLETENESS_ROOT_THEOREM_20261009_V2",
+  "date": "2026-10-09",
+  "status": "SEMANTIC_ROOT_THEOREM__UVCK_V2_RECONCILED__NOT_LIVE_DEFAULT__ZERO_TERMINAL_CREDIT",
+  "semantic_roots": {
+    "SR1_REALITY_CONTAINMENT": "B_REAL_SUBSET_B_PLUS",
+    "SR2_MISSION_SOUNDNESS": "G_MINUS_SUBSET_G_REAL",
+    "SR3_TERMINAL_CLOSURE": "B_PLUS_SUBSET_G_MINUS",
+    "SR4_ASSURANCE_AUTHORITY": "SR1_SR2_SR3_CERTIFICATES_ARE_CURRENT_WELL_FOUNDED_CONSISTENCY_SAFE_SEMANTICALLY_SOUND_AND_REALIZATION_BOUND"
+  },
+  "terminal_theorem": {
+    "semantic_chain": "B_REAL_SUBSET_B_PLUS_SUBSET_G_MINUS_SUBSET_G_REAL",
+    "conclusion": "B_REAL_SUBSET_G_REAL"
+  },
+  "uvck_v2_binding": {
+    "governance_path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
+    "governance_git_blob_sha": "e45d6acb3d9726f8a36623337a6f1586dd2641d3",
+    "runtime_path": "canonical/runtime/assurance_closure_compiler_v1.py",
+    "runtime_git_blob_sha": "135eeff03e33083f8140a29a62efd67271ebfb6b",
+    "role": "ASSURANCE_COMPILER_BELOW_SEMANTIC_ROOT_THEOREM"
+  },
+  "novelty_law": {
+    "uvck_new_primitive_is_new_semantic_root": false,
+    "proof_search_failure_is_falsehood": false,
+    "default": "MAP_TO_EXISTING_SEMANTIC_ROOT_OR_CAPABILITY_CLOSURE"
+  },
+  "mechanism_admission": {
+    "requires_root_delta_or_material_proof_cost_reduction": true,
+    "missing_proof_alone_authorizes_new_mechanism": false
+  },
+  "preservation": {
+    "existing_mission_specific_four_invariant_projection_preserved": true,
+    "existing_uvck_v2_preserved": true
+  },
+  "activation": {
+    "live_default": false,
+    "SR1_closed_claimed": false,
+    "SR2_closed_claimed": false,
+    "SR3_closed_claimed": false,
+    "SR4_closed_claimed": false,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_ROOT_CLOSURE_CLAIM",
+    "NO_OPEN_WORLD_CLOSURE_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
