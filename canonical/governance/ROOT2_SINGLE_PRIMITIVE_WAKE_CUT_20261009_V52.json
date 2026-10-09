@@ -917,10 +917,10 @@
     "dormant_alternative_route_cell_count": 1,
     "primary_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER",
-    "state": "GENERAL_CONTROL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__THIRTY_FIVE_DIRECT_ROUTES__THIRTY_TWO_BOUNDED_FAMILIES__V14_FIELD_LATTICE_AND_V15_BOUNDED_COREFERENCE_CONTROL_BOUND__GDPVAL_OWNER_RELATION_DORMANT",
-    "rule": "REUSE_VERIFIED_V15_BOUNDED_COREFERENCE_CONTROL_AND_V14_FIELD_LATTICE_FIRST__THEN_REUSE_PINNED_FIBO_SEC_XBRL_PROOF_CARRYING_DOMAIN_MAPPING_AND_OEWN_CONTROLS__PRESERVE_OPEN_WORLD_RESIDUALS__ACQUIRE_ONLY_MINIMUM_POLICY_CHANGING_EVIDENCE",
-    "direct_route_count": 35,
-    "bounded_family_count": 32
+    "state": "GENERAL_CONTROL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__THIRTY_SEVEN_DIRECT_ROUTES__THIRTY_FOUR_BOUNDED_FAMILIES__V17_STABLE_REGISTRY_DISPATCH__GDPVAL_OWNER_RELATION_DORMANT",
+    "rule": "REUSE_VERIFIED_V17_STABLE_37_ROUTE_DISPATCH_FIRST__THEN_REUSE_PINNED_FIBO_SEC_XBRL_PROOF_CARRYING_DOMAIN_MAPPING_AND_OEWN_CONTROLS__PRESERVE_OPEN_WORLD_RESIDUALS__ACQUIRE_ONLY_MINIMUM_POLICY_CHANGING_EVIDENCE",
+    "direct_route_count": 37,
+    "bounded_family_count": 34
   },
   "deterministic_repair_order": [
     "DIRECT_OR_SELF_AUTHENTICATING_ADEQUACY_FIRST",
@@ -1063,10 +1063,10 @@
     "gdpval_credit_delta": 0
   },
   "reconciliation": {
-    "activation_route_count": 35,
+    "activation_route_count": 37,
     "activation_exact_cell_count": 3,
-    "activation_bounded_family_count": 32,
-    "activation_route_list_count": 35,
+    "activation_bounded_family_count": 34,
+    "activation_route_list_count": 37,
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V27.json",
     "activation_blob_sha": "f4adbb31589c297a2a93a8ca589c6869c83a09fc",
     "verified_finance_positive_subregion_count": 11,
