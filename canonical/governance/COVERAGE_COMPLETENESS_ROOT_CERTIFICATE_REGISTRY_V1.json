@@ -105,7 +105,7 @@
   "next": "RESOLVE_ACTIVE_CC_R3_COUNTEREXAMPLE_FRONTIER__SHRINK_B_PLUS_OR_SOUNDLY_EXPAND_G_MINUS_UNTIL_U_EMPTY_OR_NEW_COUNTEREXAMPLE__DO_NOT_PROMOTE_R3",
   "active_claim_descriptor": {
     "path": "canonical/governance/CC_ACTIVE_FROZEN_CLAIM_20261009_V1.json",
-    "git_blob_sha": "d4f7068322c5417f806b38ff8b39fe530ccde4ba"
+    "git_blob_sha": "9a6141373b9ef087ee7a12413d1afe8cfaefa262"
   },
   "current_root_falsifications": {
     "CC_R3_TERMINAL_CLOSURE_V1": {
