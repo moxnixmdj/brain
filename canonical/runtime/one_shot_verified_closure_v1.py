@@ -420,7 +420,7 @@ def run(
             residual = classify_residual(blockers, pending=pending)
             internal = residual["internally_solvable_gap_remaining"]
             bounded_historical_certificate = None
-            strict_external_failure_certificate = None
+            historical_failure_state_certificate = None
             if (
                 not internal
                 and residual.get("external_or_new_evidence_required") is True
@@ -442,17 +442,17 @@ def run(
                         "EVIDENCE_OR_NEW_REPLAYABLE_EXPERIENCE"
                     )
 
-                strict_external_failure_certificate = (
+                historical_failure_state_certificate = (
                     historical_failure.certify_pending_set(
                         pending,
                         state_path=state_path,
                         repo_root=repo_root,
                     )
                 )
-                if strict_external_failure_certificate.get("pass") is True:
+                if historical_failure_state_certificate.get("pass") is True:
                     residual["historical_replay_information_absence_proved"] = True
                     residual["historical_replay_information_certificate"] = deepcopy(
-                        strict_external_failure_certificate
+                        historical_failure_state_certificate
                     )
                     residual["historical_replay_information_boundary"] = (
                         "EXACT_HISTORICAL_FAILURE_REPLAY_CONTEXT_IS_ABSENT_FROM_"
@@ -475,8 +475,8 @@ def run(
                     "bounded_historical_evidence_certificate": deepcopy(
                         bounded_historical_certificate
                     ),
-                    "strict_historical_failure_certificate": deepcopy(
-                        strict_external_failure_certificate
+                    "historical_failure_state_certificate": deepcopy(
+                        historical_failure_state_certificate
                     ),
                 }
                 try:
@@ -549,8 +549,8 @@ def run(
                 "bounded_historical_evidence_certificate": deepcopy(
                     bounded_historical_certificate
                 ),
-                "strict_external_failure_certificate": deepcopy(
-                    strict_external_failure_certificate
+                "historical_failure_state_certificate": deepcopy(
+                    historical_failure_state_certificate
                 ),
                 "information_theoretic_externality_verification": deepcopy(
                     externality_verification
