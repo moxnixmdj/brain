@@ -68,3 +68,23 @@ def test_missing_external_score_binding_reopens():
     out = reduce_scope(**x)
     assert not out["pass"]
     assert "BENCHMARK_OUTCOME_NOT_BOUND_TO_EXTERNAL_MEASURE" in out["errors"]
+
+def test_governance_theorem_matches_executable_scope_contract():
+    import json
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[2]
+    doc = json.loads(
+        (root / "canonical/governance/CURSORBENCH_4_0_OBSERVABLE_TRACE_SCOPE_LIFT_20261009_V1.json")
+        .read_text(encoding="utf-8")
+    )
+    assert doc["target_predicate"] == "CODING_CURSORBENCH_GE_57_8"
+    assert doc["benchmark"] == "CURSORBENCH_4_0"
+    assert doc["theorem"]["statement"] == "U_CB_SUBSET_OR_EQUAL_S_TRACE"
+    assert doc["theorem"]["scope_complete_basis"] == "UNIVERSAL_FORMAL_SCOPE_PROOF"
+    assert doc["theorem"]["all_admissible_target_inputs_proved"] is True
+    assert doc["theorem"]["formal_completeness"] is True
+    assert doc["theorem"]["public_taxonomy_completeness_required"] is False
+    assert doc["theorem"]["hidden_task_enumeration_required"] is False
+    assert doc["critical_boundary"]["positive_adequacy_cover"] == "OPEN"
+    assert doc["critical_boundary"]["brain_noninferiority"] == "OPEN"
+    assert doc["critical_boundary"]["acceptance"] == "OPEN"
