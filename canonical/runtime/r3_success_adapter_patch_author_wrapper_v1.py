@@ -125,6 +125,8 @@ def build_author_packet(
         context_sha = str(redacted_context.get("context_sha256") or "").strip()
         if not context_sha.startswith("sha256:") or len(context_sha) != 71:
             return _fail("COMPILED_GAP_AUTHOR_CONTEXT_DIGEST_INVALID")
+        if author_context.context_sha256(redacted_context) != context_sha:
+            return _fail("COMPILED_GAP_AUTHOR_CONTEXT_DIGEST_MISMATCH")
         if witness.get("adapter_author_context_sha256") != context_sha:
             return _fail("COMPILED_GAP_AUTHOR_CONTEXT_WITNESS_MISMATCH")
 
