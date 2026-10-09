@@ -351,3 +351,14 @@ Implemented rule:
 - the terminal graph records `terminal-live-paths-executable-refinement` as the highest-dominance unresolved leaf.
 
 Accordingly, Tasks 4-6 are considered correctly executed only as bounded structural binding + anti-bypass enforcement, not as closure of executable refinement. Full closure requires a mechanically checked refinement proof class in a later task.
+
+
+## Promotion implementation correction
+
+Because `CURRENT_TERMINAL_AUTHORITY.json` is being updated concurrently by unrelated Brain work, directly editing it in this feature created repeated merge conflicts. The implementation therefore uses a two-phase promotion protocol:
+
+1. feature branch publishes immutable `EXECUTABLE_REFINEMENT_CURRENT_TRUTH_20261009_V1.json` plus tests;
+2. exact full-repo verification runs against the feature;
+3. only after verification, a tiny promotion commit rebases against the then-current terminal pointer and projects the verified truth fragment.
+
+Until phase 3, `current_terminal_authority_pointer_modified=false`, terminal authority remains false, and all credit deltas remain zero. This supersedes the earlier instruction to edit the hot pointer inside the implementation branch.
