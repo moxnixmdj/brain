@@ -46,6 +46,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("TERMINAL_ROOT", c["engines"])
         self.assertIn("TERMINAL_CLOSURE", c["engines"])
         self.assertIn("OWNERSHIP_CATALOG", c["engines"])
+        self.assertIn("SEMANTIC_AMBIGUITY", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -119,6 +120,65 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         out = run({"payload": {"mystery": "unmodeled"}})
         self.assertFalse(out["pass"])
         self.assertIn("AUTO_ROUTE_AMBIGUOUS_OR_UNMODELED", out["reason"])
+
+
+    def test_auto_semantic_ambiguity_skips_irrelevant_identity_question(self):
+        out = run({
+            "payload": {
+                "ambiguity_owner": "USER_INTENT",
+                "hypothesis_set_complete": True,
+                "worlds": [
+                    {
+                        "world_id": "alice",
+                        "terminal_signature_complete": True,
+                        "terminal_signature": {"action": "SAME"},
+                    },
+                    {
+                        "world_id": "sarah",
+                        "terminal_signature_complete": True,
+                        "terminal_signature": {"action": "SAME"},
+                    },
+                ],
+                "observations": [],
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_AMBIGUITY")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["action"],
+            "CONTINUE_WITHOUT_DISAMBIGUATION",
+        )
+        self.assertFalse(out["result"]["ask_user_required"])
+
+    def test_auto_semantic_underdetermination_asks_only_when_action_differs(self):
+        out = run({
+            "payload": {
+                "ambiguity_owner": "USER_INTENT",
+                "hypothesis_set_complete": True,
+                "worlds": [
+                    {
+                        "world_id": "alice",
+                        "terminal_signature_complete": True,
+                        "terminal_signature": {"recipient": "ALICE"},
+                    },
+                    {
+                        "world_id": "sarah",
+                        "terminal_signature_complete": True,
+                        "terminal_signature": {"recipient": "SARAH"},
+                    },
+                ],
+                "observations": [],
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_AMBIGUITY")
+        self.assertFalse(out["inner_pass"])
+        self.assertTrue(out["result"]["ask_user_required"])
+        self.assertEqual(
+            out["result"]["action"],
+            "ASK_USER_MINIMUM_CLARIFICATION",
+        )
 
     def test_capability_scheduler_is_inside_fabric(self):
         out = run({
