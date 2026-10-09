@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_V1",
+  "date": "2026-10-09",
+  "status": "CANDIDATE__R2_DIRECT_ROUTE_DEPLOYMENT",
+  "route_id": "DIRECT_ADEQUACY::FINANCE_CANDIDATE_POLICY_TERMINAL_SIGNATURES_V1",
+  "capability_id": "finance.candidate_policy.terminal_signatures.stdlib",
+  "runtime_path": "canonical/runtime/r2_finance_candidate_policy_terminal_signatures_direct_adequacy_v1.py",
+  "runtime_git_blob_sha": "c376488bffa0fff860152c6aeed509751ad8cb7c",
+  "preflight_callable": "preflight",
+  "run_callable": "run",
+  "route_verification_path": "canonical/verification/R2_FINANCE_CANDIDATE_POLICY_TERMINAL_SIGNATURES_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+  "route_verification_git_blob_sha": "f5eb66b4cc78ff1d75bebea73f1cfad8d74990c8",
+  "scope": "EXACT_DECLARED_FINITE_CANDIDATE_SET__EXPLICIT_CANDIDATE_BOOLEAN_FACTS__NORMALIZED_IF_OR_UNLESS_POLICY_REPLAY__COMPLETE_TERMINAL_SIGNATURES_RELATIVE_TO_DECLARED_SET",
+  "selection_class": "UNIQUE_MATCH_REQUIRED",
+  "deployment_requested": true,
+  "incremental_spend_usd": 0,
+  "verification_authority_mutated": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
