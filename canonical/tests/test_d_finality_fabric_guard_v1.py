@@ -27,6 +27,8 @@ class DFinalityFabricGuardTests(unittest.TestCase):
             "status": "VERIFIED_D_FINAL",
             "capability_id": allowed[0],
             "capability_contract_sha256": d.sha256_json({"scope": "fabric-guard"}),
+            "substrate_contract": {"kind": "TEST_CPYTHON", "version": "test"},
+            "substrate_contract_sha256": d.sha256_json({"kind": "TEST_CPYTHON", "version": "test"}),
             "policy_sha256": policy["policy_sha256"],
             "registry_snapshot_root": d.sha256_json({"registry": "test"}),
             "state_snapshot_root": d.sha256_json({"state": "test"}),
