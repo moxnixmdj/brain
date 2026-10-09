@@ -40,7 +40,7 @@
     },
     "v1_region_verification": {
       "path": "canonical/verification/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261009_V1.json",
-      "git_blob_sha": "0525504a8907ca54f86ba0a5110583c2b564af58"
+      "git_blob_sha": "8645dca87c5c57d3a6d63299732b32839bcf42d9"
     },
     "behavior_registry": {
       "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V2.json",
