@@ -122,6 +122,18 @@
       "attack_families": [
         "RESOURCE_EXHAUSTION"
       ]
+    },
+    {
+      "id": "CURRENT_AUTHORITY_RUNTIME_BYTE_BINDING_COHERENCE",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "EXACT_BRANCH_CENSUS_FOUND_6_STALE_CURRENT_BINDING_REFERENCES_ACROSS_5_RUNTIME_PATHS_AND_1_CURRENT_RUNTIME_WITHOUT_BLOB_BINDING__DO_NOT_RESEAL_WITHOUT_CURRENT_BYTE_VERIFICATION",
+      "attack_families": [
+        "VERSION_DRIFT",
+        "COMPOSITION_MISMATCH",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH",
+        "NOVEL_DIMENSION"
+      ]
     }
   ],
   "terminal_closure": false,
