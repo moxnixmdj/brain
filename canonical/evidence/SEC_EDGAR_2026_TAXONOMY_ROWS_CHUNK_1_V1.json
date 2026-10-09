@@ -1,0 +1,186 @@
+{
+  "schema": "PROJECT_BRAIN_SEC_EDGAR_2026_TAXONOMY_ROWS_CHUNK_V1",
+  "chunk_index": 1,
+  "rows": [
+    {
+      "family": "CEF",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/cef/2026/cef-2026_pre.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/cef-pre/2026"
+    },
+    {
+      "family": "CEF",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/cef/2026/cef-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/cef/2026"
+    },
+    {
+      "family": "COUNTRY",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/country/2026/country-2026_def.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/country-def/2026"
+    },
+    {
+      "family": "COUNTRY",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/country/2026/country-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/country/2026"
+    },
+    {
+      "family": "CURRENCY",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/currency/2026/currency-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/currency/2026"
+    },
+    {
+      "family": "CYD",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/cyd/2026/cyd-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/cyd/2026"
+    },
+    {
+      "family": "CYD",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/cyd/2026/cyd-6k-sub-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/cyd-6k-sub/2026"
+    },
+    {
+      "family": "CYD",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/cyd/2026/cyd-8k-sub-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/cyd-8k-sub/2026"
+    },
+    {
+      "family": "CYD",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/cyd/2026/cyd-af-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/cyd-af/2026"
+    },
+    {
+      "family": "CYD",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/cyd/2026/cyd-af-sub-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/cyd-af-sub/2026"
+    },
+    {
+      "family": "CYD",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/cyd/2026/cyd-cr-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/cyd-cr/2026"
+    },
+    {
+      "family": "DEI",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/dei/2026/dei-2026_def.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/dei-def/2026"
+    },
+    {
+      "family": "DEI",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/dei/2026/dei-2026_lab.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/dei-lab/2026"
+    },
+    {
+      "family": "DEI",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/dei/2026/dei-2026_pre.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/dei-pre/2026"
+    },
+    {
+      "family": "DEI",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/dei/2026/dei-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/dei/2026"
+    },
+    {
+      "family": "DEI",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/dei/2026/dei-sub-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/dei-sub/2026"
+    },
+    {
+      "family": "ECD",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/ecd/2026/ecd-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/ecd/2026"
+    },
+    {
+      "family": "ECD",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/ecd/2026/ecd-sub-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/ecd-sub/2026"
+    }
+  ]
+}
