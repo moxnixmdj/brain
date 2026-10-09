@@ -1,7 +1,7 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34",
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V35",
   "date": "2026-10-09",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_FIXED_POINT_SCHEDULER_BOUND",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__R2_V35_SEVEN_FINANCE_SUBREGIONS_BOUND__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_FIXED_POINT_SCHEDULER_BOUND",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -2088,23 +2088,24 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V34.json",
-    "current_scheduler_git_blob_sha": "0f78a3060c41ec054898e21d895189caee8eb6d1",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V35.json",
+    "current_scheduler_git_blob_sha": "81aff9b94b8375d615c7f25f57686c14e9a2a120",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_POINTER_AND_V34_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__SIX_VERIFIED_FINANCE_POSITIVE_SUBREGIONS__CURRENT_V4_ROUTE_INVENTORY_24_TOTAL_21_BOUNDED__REMAINING_FINANCE_RESIDUAL_IS_IMPLICIT_OR_AMBIGUOUS_REFERENCE_SYNONYMY_CONTEXT_DEPENDENT_WORD_SENSE_ONTOLOGY_DOMAIN_MAPPING_GENERAL_CROSS_DOCUMENT_SEMANTIC_BINDING_OR_EXTERNAL_FACT_AUTHENTICATION__GDPVAL_DORMANT",
+    "rule": "CURRENT_R2_POINTER_AND_V35_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__SEVEN_VERIFIED_FINANCE_POSITIVE_SUBREGIONS__CURRENT_V5_ROUTE_INVENTORY_25_TOTAL_22_BOUNDED__REMAINING_FINANCE_RESIDUAL_IS_IMPLICIT_OR_AMBIGUOUS_REFERENCE_INFERRED_SYNONYMY_GENERAL_COREFERENCE_CONTEXT_DEPENDENT_WORD_SENSE_ONTOLOGY_DOMAIN_MAPPING_GENERAL_CROSS_DOCUMENT_SEMANTIC_BINDING_BEYOND_EXACT_CONTENT_ADDRESSED_JSON_BINDING_OR_EXTERNAL_FACT_AUTHENTICATION__GDPVAL_DORMANT",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
     "primary_internal_unsolved_pending_acquisition_or_experiment_cell_count": 1,
     "dormant_alternative_route_cell_count": 1,
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
-    "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
+    "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER",
+    "current_authority_git_blob_sha": "d33100d08a83b4fef9bdeb9123673771154fbd34"
   },
-  "pointer_revision": 60,
+  "pointer_revision": 61,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2182,12 +2183,12 @@
   "r3_zero_residual_terminal_reconciliation": {
     "path": "canonical/governance/R3_ZERO_RESIDUAL_TERMINAL_TRUTH_RECONCILIATION_20261009_V1.json",
     "git_blob_sha": "28ca3e3e120388bf4d8c05690c153499738026c5",
-    "status": "RECONCILED__R3_NOT_CURRENT_TERMINAL_BLOCKER__CURRENT_R2_V34_FINANCE_RESIDUAL_AFTER_SIX_VERIFIED_POSITIVE_SUBREGIONS__TERMINAL_OPEN",
+    "status": "RECONCILED__R3_NOT_CURRENT_TERMINAL_BLOCKER__CURRENT_R2_V35_FINANCE_RESIDUAL_AFTER_SEVEN_VERIFIED_POSITIVE_SUBREGIONS__TERMINAL_OPEN",
     "live_r3_internal_residual_zero": true,
     "pending_improvement_count": 0,
     "r3_is_current_terminal_blocker": false,
     "primary_terminal_scheduler_object": "PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
-    "current_r2_remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_IMPLICIT_OR_AMBIGUOUS_REFERENCE_SYNONYMY_CONTEXT_DEPENDENT_WORD_SENSE_ONTOLOGY_DOMAIN_MAPPING_GENERAL_CROSS_DOCUMENT_SEMANTIC_BINDING_OR_EXTERNAL_FACT_AUTHENTICATION__OPEN_WORLD_NOT_CLOSED",
+    "current_r2_remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_IMPLICIT_OR_AMBIGUOUS_REFERENCE__INFERRED_SYNONYMY__GENERAL_COREFERENCE__CONTEXT_DEPENDENT_WORD_SENSE__ONTOLOGY_OR_DOMAIN_MAPPING__GENERAL_CROSS_DOCUMENT_SEMANTIC_BINDING_BEYOND_EXACT_CONTENT_ADDRESSED_JSON_BINDING__OR_EXTERNAL_FACT_AUTHENTICATION__OPEN_WORLD_NOT_CLOSED",
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
   },
@@ -2296,6 +2297,29 @@
     "general_reference_resolution_closed": false,
     "general_ontology_mapping_closed": false,
     "external_fact_authentication_closed": false,
+    "finance_family_closed": false,
+    "terminal_remains_false": true,
+    "terminal_credit_delta": 0
+  },
+  "r2_v35_explicit_alias_finance_coverage": {
+    "status": "VERIFIED_BOUNDED_POSITIVE_ADEQUACY_EXPANSION__TERMINAL_STILL_OPEN",
+    "scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V35.json",
+    "scheduler_git_blob_sha": "81aff9b94b8375d615c7f25f57686c14e9a2a120",
+    "direct_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V21.json",
+    "direct_activation_git_blob_sha": "af347d8e3d8209392dd339f4407a4785d0cf2c28",
+    "route_id": "DIRECT_ADEQUACY::FINANCE_EXPLICIT_ALIAS_TYPED_UNLESS_FAMILY_V1",
+    "route_verification_path": "canonical/verification/R2_FINANCE_EXPLICIT_ALIAS_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+    "route_verification_git_blob_sha": "9beaa80af044dbf6d6eeef48386a35d180fba18f",
+    "reconciliation_verification_path": "canonical/verification/R2_V35_EXPLICIT_ALIAS_FINANCE_COVERAGE_RECONCILIATION_VERIFY_20261009_V1.json",
+    "reconciliation_verification_git_blob_sha": "b8bba6cef90c604968a87f712feb827580d554d1",
+    "explicit_alias_subregion_closed": true,
+    "inferred_synonymy_claimed": false,
+    "general_coreference_claimed": false,
+    "context_dependent_word_sense_claimed": false,
+    "ontology_or_domain_mapping_claimed": false,
+    "general_cross_document_semantics_claimed": false,
+    "external_fact_authentication_claimed": false,
+    "remaining_finance_semantic_residual_closed": false,
     "finance_family_closed": false,
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
