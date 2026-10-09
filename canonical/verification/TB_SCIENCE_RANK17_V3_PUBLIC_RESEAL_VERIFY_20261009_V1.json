@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK17_V3_PUBLIC_RESEAL_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__PUBLIC_RANK17_V3_V11_RESEAL_MERGED__ZERO_EXPOSURE__TASK_READ_RELEASE_ELIGIBLE__ACTIVATION_ABSENT",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "base_branch": "terminal-execution-v1",
+  "reseal_pull_request": 2536,
+  "reseal_merge_commit": "cf92959c2ea183843753cfeeb8278fe986f51e66",
+  "surface": {
+    "path": "execution_guard/CURRENT_TERMINAL_EXECUTION_SURFACE_V1.json",
+    "git_blob_sha": "7b1f5439bd4f6696f5a7c7045f3e46125f438f5f"
+  },
+  "behavior": {
+    "path": "execution_guard/TB_SCIENCE_RANK17_EXECUTION_BEHAVIOR_V3.json",
+    "git_blob_sha": "7640cc4752bc2492adf4368ad340740b3f09515c"
+  },
+  "public_authority": {
+    "path": "capsules/tb_science_rank17_20261009_v3/RANK17_PUBLIC_AUTHORITY_BINDING_V3.json",
+    "git_blob_sha": "28e7fb96c2cdb9dd52afba74dc8a8f43a4afa7fe"
+  },
+  "public_ledger": {
+    "path": "capsules/tb_science_rank17_20261009_v3/RANK17_PUBLIC_LEDGER_BINDING_V31.json",
+    "git_blob_sha": "4fa4c7440043f852bd6c0bff20be37c004128b83"
+  },
+  "epoch": {
+    "path": "capsules/tb_science_rank17_20261009_v3/RANK17_EPOCH_V6.json",
+    "git_blob_sha": "2243995f41c9a43de945406d4b8db6279ce181b9"
+  },
+  "execution_claim": {
+    "path": "capsules/tb_science_rank17_20261009_v3/RANK17_EXECUTION_CLAIM_V6.json",
+    "git_blob_sha": "ef7d505add505581b354b7c9cdb2947f5a8834f9"
+  },
+  "public_runs": [
+    {"run_id": 37961955952, "name": "Verify TB-Science Rank17 V1 zero-exposure reseal", "conclusion": "success"},
+    {"run_id": 37961955914, "name": "Verify TB-Science execution ratchet v1", "conclusion": "success"},
+    {"run_id": 37961955746, "name": "Verify TB-Science Agent V11 typed schema grounding", "conclusion": "success"},
+    {"run_id": 37961955471, "name": "Verify Rank15 V6 final robust reseal", "conclusion": "success"}
+  ],
+  "historical_non_authoritative_check": {
+    "run_id": 37961954973,
+    "name": "Verify TB-Science Rank16 V1 zero-exposure reseal",
+    "conclusion": "failure",
+    "reason": "HISTORICAL_RANK16_SURFACE_EXPECTED_TO_REJECT_CURRENT_RANK17_SURFACE",
+    "rank17_credit_effect": 0
+  },
+  "activation_file_present": false,
+  "rank17_task_read": false,
+  "rank17_task_started": false,
+  "rank17_benchmark_trials_consumed": 0,
+  "task_read_release_eligible": true,
+  "activation_armed": false,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "pass": true
+}
