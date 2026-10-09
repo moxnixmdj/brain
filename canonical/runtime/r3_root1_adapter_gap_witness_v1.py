@@ -12,6 +12,7 @@ from canonical.runtime import r3_raw_success_adapter_v1 as raw_adapter
 from canonical.runtime import r3_checkpoint_reconstruction_success_adapter_v1 as checkpoint_adapter
 from canonical.runtime import r3_structural_bound_success_adapter_v1 as structural_adapter
 from canonical.runtime import r3_success_adapter_author_context_v1 as author_context
+from canonical.runtime import r3_verification_frontier_repair_reducer_v1 as repair_reducer
 from canonical.runtime import root1_acquisition_closure_controller_v3 as root1
 
 SCHEMA = "PROJECT_BRAIN_R3_ROOT1_ADAPTER_GAP_WITNESS_V1"
@@ -180,6 +181,15 @@ def compile_gap(
                 "ADAPTER_AUTHOR_CONTEXT_COMPILATION_FAILED",
                 adapter_author_context=redacted_author_context,
             )
+        repair_reduction = repair_reducer.reduce_author_context(
+            redacted_author_context
+        )
+        if repair_reduction.get("pass") is not True:
+            return _fail(
+                "VERIFICATION_FRONTIER_REPAIR_CLASS_REDUCTION_FAILED",
+                adapter_author_context=redacted_author_context,
+                repair_class_reduction=repair_reduction,
+            )
 
         adapter_sha = _frontier_sha256(
             SUCCESS_ADAPTER_FRONTIER_PATHS,
@@ -309,11 +319,16 @@ def compile_gap(
             "current_owned_adapter_frontier_exhausted_for_witness": True,
             "adapter_patch_authorship_assumed_sufficient": False,
             "verification_frontier_expansion_required": True,
-            "admissible_repair_classes": [
-                "VERIFIER_PRESERVING_SUCCESS_ADAPTER",
-                "INDEPENDENT_READONLY_SUCCESS_VERIFIER",
-                "NEW_DISTINGUISHING_EVIDENCE",
+            "admissible_repair_classes": deepcopy(
+                repair_reduction["admissible_repair_classes"]
+            ),
+            "preferred_repair_order": deepcopy(
+                repair_reduction["preferred_repair_order"]
+            ),
+            "must_acquire_new_distinguishing_evidence": repair_reduction[
+                "must_acquire_new_distinguishing_evidence"
             ],
+            "repair_class_reduction": deepcopy(dict(repair_reduction)),
             "exact_required_primitive_verified_owned": False,
             "claim_scope": (
                 "CURRENT_BOUND_R3_SUCCESS_ADAPTER_FRONTIER_AND_CURRENTLY_BOUND_"
@@ -360,6 +375,7 @@ def compile_gap(
             "witness": witness_core,
             "gap_evidence": gap_evidence,
             "adapter_author_context": redacted_author_context,
+            "repair_class_reduction": repair_reduction,
             "root1_transaction": transaction,
             "adapter_frontier_sha256": adapter_sha,
             "verification_authority_sha256": authority_sha,
