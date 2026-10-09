@@ -88,7 +88,12 @@ def _truth_constraint(atom_id:str, truth:bool)->dict[str,Any]:
     return atom if truth else {"op":"NOT","arg":atom}
 
 
-def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[str,Any]:
+def evaluate(
+    payload:Mapping[str,Any],
+    *,
+    repo_root:str|Path|None=None,
+    relation_edge_verifier=None,
+)->dict[str,Any]:
     if not isinstance(payload,Mapping):
         return _fail("PAYLOAD_MAPPING_REQUIRED")
     allowed={
@@ -271,7 +276,10 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
             successes=[]
             attempts=[]
             for candidate_payload in candidates:
-                truth=evaluate_truth(candidate_payload)
+                truth=evaluate_truth(
+                    candidate_payload,
+                    relation_edge_verifier=relation_edge_verifier,
+                )
                 attempts.append({
                     "status":truth.get("status"),
                     "reason":truth.get("reason"),
