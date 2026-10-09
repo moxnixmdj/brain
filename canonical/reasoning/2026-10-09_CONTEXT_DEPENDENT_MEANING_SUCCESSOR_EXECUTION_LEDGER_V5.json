@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_20261009_V5",
+  "date": "2026-10-09",
+  "status": "DURABLE_SUCCESSOR_EXECUTION_DELTA_LEDGER__R2_V65_MREL_WAKE_REFINED__ZERO_TERMINAL_CREDIT",
+  "extends": {
+    "path": "canonical/reasoning/2026-10-09_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_V4.json",
+    "git_blob_sha": "033175cb5a993f144e6100ff470b2373842dd3d3"
+  },
+  "events": [
+    {
+      "order": 22,
+      "event": "MARKED_MENTION_DYNAMIC_ROUTE_REUSED",
+      "result": "R2 V64 already projected the live structurally complete typed marked-finance mention-universe direct route; generic coreference residual remains only outside that verified scope or where signatures/observations are incomplete."
+    },
+    {
+      "order": 23,
+      "event": "MREL_NECESSARY_PROPERTY_AUTHORITY_DISCOVERED_AFTER_V64_PROJECTION",
+      "result": "Merged current-main MREL one-way authority existed after the V64 projection and therefore had not yet reduced current R2 residual accounting.",
+      "runtime_git_blob_sha": "10d91e251c76695368dc77d3370c30e61f31f09d",
+      "source_pack_git_blob_sha": "2a78747cd4bb342572d8ee9c8e9bde370b8b9500"
+    },
+    {
+      "order": 24,
+      "event": "PROJECT_MREL_AUTHORITY_INTO_R2_V65_ROOT2_V61",
+      "result": "Bound six authenticated MREL necessary properties as a positive subregion; preserved reverse-classification, TLAC/MREL disjointness, unlisted properties, and open-world completeness as unproved.",
+      "verification": "canonical/verification/R2_V65_MREL_WAKE_RECONCILIATION_VERIFY_20261009_V1.json",
+      "structural_falsifiers": "18_OF_18_PASS",
+      "primary_internal_unsolved_count": 1,
+      "terminal_credit_delta": 0
+    }
+  ],
+  "next_execution_rule": "READ_CURRENT_R2_V65_ROOT2_V61_ACTION_INTENT_V8__REUSE_MREL_AND_ALL_OTHER_VERIFIED_SUBREGIONS__SELECT_ONE_CONCRETE_SURVIVING_CASE__ACQUIRE_ONLY_THE_MINIMUM_POLICY_CHANGING_AUTHENTICATED_FACT",
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_CONTEXT_DEPENDENT_MEANING_SOLVED",
+    "NO_CLAIM_FINANCE_SEMANTIC_TAIL_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
