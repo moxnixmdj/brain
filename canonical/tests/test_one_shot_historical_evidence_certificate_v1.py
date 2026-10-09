@@ -1,4 +1,9 @@
-from __future__ import annotations\n\nimport unittest\nfrom unittest.mock import patch\n\nfrom canonical.runtime import one_shot_verified_closure_v1 as closure
+from __future__ import annotations
+
+import unittest
+from unittest.mock import patch
+
+from canonical.runtime import one_shot_verified_closure_v1 as closure
 
 
 class OneShotHistoricalEvidenceCertificateTests(unittest.TestCase):
