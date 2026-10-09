@@ -107,7 +107,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(rows[0]["field"],"value")
         self.assertEqual(rows[0]["value"],"10")
 
-    def test_false_bounded_entailment_leaves_field_top(self):
+    def test_source_disproved_bounded_entailment_fails_closed(self):
         source_id="doc"
         scope="scope:test"
         raw="Threshold amount"
@@ -147,8 +147,11 @@ class Tests(unittest.TestCase):
             "expected_dag_sha256":evidence_sha256(dag),
         }
         out=verify_proof(raw,source_id=source_id,claims=[claim])
-        self.assertEqual(out["status"],"PROOF_CHECKED_WITH_REJECTIONS",out)
-        self.assertEqual(out["accepted_claims"],[])
+        self.assertEqual(out["status"],"FAIL_CLOSED",out)
+        self.assertTrue(any(
+            "DOCUMENT_EFFECT_FIELD_EDGE_FAIL_CLOSED" in item
+            for item in out["errors"]
+        ))
 
     def test_unsupported_registry_class_remains_rejected(self):
         source_id="doc"; scope="scope:test"; raw="Threshold amount"
