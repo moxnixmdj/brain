@@ -23,9 +23,9 @@
   },
   "live_binding_validator": {
     "path": "canonical/runtime/root_theorem_live_binding_v1.py",
-    "git_blob_sha": "fa877d36ccfecff6927db1c150374099f24a4350",
+    "git_blob_sha": "2a9a89e9b94edf275ae50096890d02be01196160",
     "tests_path": "canonical/tests/test_root_theorem_live_binding_v1.py",
-    "tests_git_blob_sha": "85eac9510171c794d2f3ea7c172263e3c45b1312"
+    "tests_git_blob_sha": "330296326d8a53670c2d4022c0ee1a2408c76a3f"
   },
   "terminal_authority": {
     "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -53,7 +53,11 @@
     "MISSION_CARRIER_PRECONDITION_DRIFT_IS_R4_FAILURE",
     "NO_FINITE_WITNESS_SET_WITHOUT_SCOPE_PROOF_MAY_CLOSE_UNIVERSAL_FACTORIZATION",
     "CLAIM_SCOPE_DRIFT_IS_R4_FAILURE",
-    "CARRIER_AND_ROOT_THEOREM_MUST_BIND_THE_SAME_FROZEN_CLAIM_SEMANTICS"
+    "CARRIER_AND_ROOT_THEOREM_MUST_BIND_THE_SAME_FROZEN_CLAIM_SEMANTICS",
+    "CLAIM_ROOT_CERTIFICATE_AUTHORITY_IS_INDEXED_BY_CLAIM_ID_AND_CANONICAL_ROOT_ID",
+    "CROSS_CLAIM_ROOT_CERTIFICATE_SUBSTITUTION_IS_R4_FAILURE",
+    "STALE_CLAIM_ROOT_REGISTRY_POINTER_IS_R4_FAILURE",
+    "EMPTY_CLAIM_REGISTRY_DOES_NOT_IMPLY_CLOSURE"
   ],
   "accounting": {
     "fresh_reality_units_consumed": 0,
@@ -88,5 +92,29 @@
     "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
     "git_blob_sha": "df3f64759dd1bbf230a40de0695ef514f270f677",
     "role": "FROZEN_CLAIM_INDEX_FOR_R1_R4_AND_CARRIER_FACTORIZATION__ZERO_CREDIT"
+  },
+  "claim_root_certificate_authority": {
+    "path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+    "git_blob_sha": "e40a3242e83442590e31a53afa429ecd87b1fe40",
+    "registry": {
+      "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_ROOT_CERTIFICATE_REGISTRY_V1.json",
+      "git_blob_sha": "7fc36797644b16fe14aad02d8786770c53a55328"
+    },
+    "guard": {
+      "path": "canonical/runtime/coverage_claim_root_certificate_registry_guard_v1.py",
+      "git_blob_sha": "895eeded4b183285ddd2783350f27325d6122e2e"
+    },
+    "tests": {
+      "path": "canonical/tests/test_coverage_claim_root_certificate_registry_guard_v1.py",
+      "git_blob_sha": "b0e187a51e433738dcfb23edda017932c4dbc883"
+    },
+    "verification": {
+      "path": "canonical/verification/CCRT_CLAIM_SCOPED_ROOT_CERTIFICATE_REGISTRY_VERIFY_20261009_V1.json",
+      "git_blob_sha": "d01b5d596b8d1995edbe1bf2dca94825495f664a"
+    },
+    "registered_claim_count": 0,
+    "claim_proof_closure_count": 0,
+    "checkpoint_completion": false,
+    "global_open_ended_mission_completion": false
   }
 }

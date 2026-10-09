@@ -1240,7 +1240,7 @@
     },
     "coverage_completeness_root_theorem_r1_r4": {
       "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
-      "git_blob_sha": "ae7bd1d657884b9aef78e8dd31a66f92eb2e5f95",
+      "git_blob_sha": "3b3ab370ccf99015d5773a4440b30fbf29070a72",
       "note": "CCRT_R1_R4_META_CONTROL_BOUND_TO_CURRENT_REAL_MISSION__EXPLICIT_ROOT_NAMESPACE__FROZEN_CLAIM_SCOPE__MISSION_SUFFICIENT_SEMANTIC_CARRIER__R4_FAIL_CLOSED__ZERO_CREDIT",
       "semantic_carrier_precondition": {
         "path": "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json",
@@ -1291,6 +1291,14 @@
         "verification_git_blob_sha": "644a4397e74ffd5f1bcfabdbc34a1197ecc2d8e7"
       },
       "authority_boundary": "CONTEXT_FACTS_MAY_REFINE_INFORMATION_STATE__RELATION_TRUTH_IDENTITY_POLICY_ADEQUACY_ACCEPTANCE_AND_TERMINALITY_REMAIN_SEPARATE",
+      "terminal_credit_delta": 0
+    },
+    "coverage_claim_root_certificate_registry": {
+      "path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+      "git_blob_sha": "e40a3242e83442590e31a53afa429ecd87b1fe40",
+      "registry_git_blob_sha": "7fc36797644b16fe14aad02d8786770c53a55328",
+      "guard_git_blob_sha": "895eeded4b183285ddd2783350f27325d6122e2e",
+      "verification_git_blob_sha": "d01b5d596b8d1995edbe1bf2dca94825495f664a",
       "terminal_credit_delta": 0
     }
   },

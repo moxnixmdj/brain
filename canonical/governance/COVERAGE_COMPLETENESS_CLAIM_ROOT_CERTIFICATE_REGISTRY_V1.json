@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_CLAIM_ROOT_CERTIFICATE_REGISTRY_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_CLAIM_SCOPED_REGISTRY__ZERO_REGISTERED_CLAIMS__ZERO_PROVED__ZERO_CREDIT",
+  "namespace": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOTS_V1",
+  "mission_binding": {
+    "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "git_blob_sha": "52b98f8019938fa7d8164e6a47e359ffb0faeb6a"
+  },
+  "claim_scope_binding": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
+    "git_blob_sha": "df3f64759dd1bbf230a40de0695ef514f270f677"
+  },
+  "identity_rule": "ROOT_CERTIFICATE_AUTHORITY_IS_INDEXED_BY_CLAIM_ID_AND_CANONICAL_ROOT_ID",
+  "canonical_root_ids": [
+    "CC_R1_REALITY_CONTAINMENT_V1",
+    "CC_R2_MISSION_SOUNDNESS_V1",
+    "CC_R3_TERMINAL_CLOSURE_V1"
+  ],
+  "claim_instances": [],
+  "registered_claim_count": 0,
+  "currently_open_root_certificates": 0,
+  "currently_proved_root_certificates": 0,
+  "claim_proof_closure_count": 0,
+  "checkpoint_completion": false,
+  "global_root_closure": false,
+  "global_open_ended_mission_completion": false,
+  "hard_rules": [
+    "NO_CLAIM_INSTANCE_MEANS_NO_ROOT_CERTIFICATE_AUTHORITY__NOT_VACUOUS_CLOSURE",
+    "CERTIFICATE_AND_INDEPENDENT_VERIFICATION_MUST_BIND_THE_EXACT_SAME_FROZEN_CLAIM_CORE",
+    "CROSS_CLAIM_CERTIFICATE_SUBSTITUTION_FAILS_CLOSED",
+    "ROOT_IDENTITY_IS_CLAIM_ID_PLUS_CANONICAL_ROOT_ID",
+    "CLAIM_PROOF_CLOSURE_IS_PER_CLAIM_ONLY",
+    "CHECKPOINT_COMPLETION_REQUIRES_A_SEPARATE_SCOPE_COMPLETE_CHECKPOINT_AGGREGATOR",
+    "GLOBAL_OPEN_ENDED_MISSION_COMPLETION_IS_NOT_DERIVABLE"
+  ],
+  "supersedes_for_current_authority": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
+    "git_blob_sha": "87d154877fd195d4726db46db8a607a02e4dcc31",
+    "reason": "GLOBAL_ROOT_SLOTS_ARE_NOT_SOUND_AFTER_CLAIM_SCOPING__HISTORICAL_ARTIFACT_RETAINED_ONLY"
+  },
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
