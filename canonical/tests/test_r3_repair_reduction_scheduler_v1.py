@@ -43,12 +43,30 @@ class R3RepairReductionSchedulerV1Tests(unittest.TestCase):
 
     def test_evidence_only_reduction_skips_adapter_provider(self):
         path = self._state()
+        evidence_request = {
+            "schema": "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_REQUEST_V1",
+            "status": "PASS__MINIMUM_STRUCTURAL_DISTINGUISHING_EVIDENCE_REQUEST_READY",
+            "pass": True,
+            "request_sha256": "sha256:" + "e" * 64,
+            "candidate_evidence_bundles": [
+                {
+                    "route": "CHECKPOINTED_VERIFIED_EXECUTION",
+                    "missing_obligations": ["CONTROLLER_CHECKPOINT_BOUND"],
+                    "missing_obligation_count": 1,
+                }
+            ],
+            "acquisition_authority": False,
+            "provider_truth_authority": False,
+            "verification_authority": False,
+            "terminal_authority": False,
+        }
         reduction = {
             "pass": True,
             "status": "PASS__VERIFICATION_FRONTIER_REPAIR_CLASSES_REDUCED",
             "admissible_repair_classes": ["NEW_DISTINGUISHING_EVIDENCE"],
             "preferred_repair_order": ["NEW_DISTINGUISHING_EVIDENCE"],
             "must_acquire_new_distinguishing_evidence": True,
+            "distinguishing_evidence_request": evidence_request,
         }
         provider = mock.Mock(return_value={"pass": True})
         with mock.patch.object(
@@ -70,6 +88,46 @@ class R3RepairReductionSchedulerV1Tests(unittest.TestCase):
         )
         self.assertTrue(blocker["adapter_acquisition_provider_skipped"])
         self.assertEqual(blocker["repair_class_reduction"], reduction)
+        self.assertEqual(
+            blocker["distinguishing_evidence_request"],
+            evidence_request,
+        )
+        provider.assert_not_called()
+
+    def test_evidence_only_without_compiled_request_stays_fail_closed(self):
+        path = self._state()
+        reduction = {
+            "pass": True,
+            "status": "PASS__VERIFICATION_FRONTIER_REPAIR_CLASSES_REDUCED",
+            "admissible_repair_classes": ["NEW_DISTINGUISHING_EVIDENCE"],
+            "preferred_repair_order": ["NEW_DISTINGUISHING_EVIDENCE"],
+            "must_acquire_new_distinguishing_evidence": True,
+            "distinguishing_evidence_request": {
+                "schema": "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_REQUEST_V1",
+                "status": "FAIL_CLOSED",
+                "pass": False,
+                "reason": "TEST_REQUEST_NOT_PROVED",
+            },
+        }
+        provider = mock.Mock(return_value={"pass": True})
+        with mock.patch.object(
+            driver,
+            "_current_frontier_repair_reduction",
+            return_value=reduction,
+        ):
+            out = driver.advance_once(
+                state_path=path,
+                verification_frontier_acquisition_provider=provider,
+                verification_frontier_acquisition_provider_id="TEST_PROVIDER",
+            )
+        self.assertTrue(out["pass"], out)
+        self.assertFalse(out["progress"], out)
+        blocker = out["blockers"][0]
+        self.assertEqual(
+            blocker["blocker"],
+            "R3_VERIFICATION_FRONTIER_DISTINGUISHING_EVIDENCE_REQUEST_UNAVAILABLE",
+        )
+        self.assertTrue(blocker["adapter_acquisition_provider_skipped"])
         provider.assert_not_called()
 
     def test_noncanonical_frontier_identity_cannot_produce_pruning_verdict(self):
