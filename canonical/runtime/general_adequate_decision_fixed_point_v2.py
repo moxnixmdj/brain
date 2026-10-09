@@ -306,9 +306,9 @@ def run(
     trace: list[dict[str, Any]] = []
     prior_candidates: list[dict[str, Any]] = []
 
-    direct_preflight = direct_adequacy.preflight(current)
+    direct_preflight = direct_adequacy.preflight(current, repo_root=repo_root)
     if direct_preflight.get("matched") is True:
-        direct_result = direct_adequacy.run(current)
+        direct_result = direct_adequacy.run(current, repo_root=repo_root)
         trace.append(
             {
                 "step": 0,
