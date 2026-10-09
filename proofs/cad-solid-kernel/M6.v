@@ -233,7 +233,7 @@ Proof.
   move=> hq hs hv hne.
   rewrite /deboor_val.
   have hp := run_all_pos q sched vals hq hs hv.
-  have hw := run_nonempty q sched vals hne.
+  have hn := run_nonempty q sched vals hne.
   case Hr: (run_val q sched vals) hp hn => [|x xs] //=.
   by move=> [hx _] _.
 Qed.
