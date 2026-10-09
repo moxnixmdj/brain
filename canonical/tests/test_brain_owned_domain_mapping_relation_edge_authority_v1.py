@@ -5,6 +5,7 @@ import unittest
 from canonical.runtime import brain_owned_domain_mapping_relation_edge_authority_v1 as domain
 from canonical.runtime import brain_owned_semantic_relation_edge_registry_v3 as registry
 from canonical.runtime.semantic_relation_entailment_dag_v1 import RECEIPT_SCHEMA
+from canonical.runtime import brain_owned_semantic_relation_edge_authority_v1 as identity
 
 RAW="loss-absorbing cushion"
 SCOPE="finance:regulatory-capital:2026"
@@ -95,6 +96,41 @@ class RegistryV3Tests(unittest.TestCase):
             "DOMAIN_MAPPING_RELATION",
             registry.supported_proof_classes(),
         )
+
+    def test_registry_lists_all_inherited_and_new_classes(self):
+        self.assertEqual(
+            registry.supported_proof_classes(),
+            [
+                "DOMAIN_MAPPING_RELATION",
+                "EXPLICIT_BOUNDED_EXTENSION",
+                "EXPLICIT_SOURCE_IDENTITY",
+                "SOURCE_IMPLICATION_CLOSURE",
+            ],
+        )
+
+    def test_can_prove_rejects_similarity_only_domain_candidate(self):
+        self.assertTrue(registry.can_prove(raw()))
+        self.assertFalse(registry.can_prove(raw(model_only=True)))
+
+    def test_registry_preserves_explicit_identity(self):
+        evidence={
+            "schema":identity.SCHEMA,
+            "proof_class":identity.PROOF_CLASS,
+            "scope_id":"s",
+            "source_id":"left",
+            "target_id":"right",
+            "source_surface":"reserve buffer",
+            "target_surface":"liquidity cushion",
+            "relation":"ENTAILS",
+            "explicit_definition_sources":[{
+                "source_id":"doc",
+                "scope_id":"s",
+                "source_text":"Reserve buffer means liquidity cushion.",
+            }],
+        }
+        out=registry.verify(evidence)
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(out["proof_class"],"EXPLICIT_SOURCE_IDENTITY")
 
     def test_registry_recomputes_domain_mapping_edge(self):
         out=registry.verify(raw())
