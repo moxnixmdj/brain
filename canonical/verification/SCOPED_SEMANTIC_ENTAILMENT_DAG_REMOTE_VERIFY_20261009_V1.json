@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_SCOPED_SEMANTIC_ENTAILMENT_DAG_REMOTE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__42_OF_42_REMOTE_SEMANTIC_REGRESSION_TESTS__5_OF_5_FABRIC_WIRING_CHECKS__PYCOMPILE_CLEAN__ZERO_TERMINAL_CREDIT",
+  "subject_branch": "fix/semantic-relation-entailment-dag-20261009",
+  "carrier": {
+    "name": "brain-r2-grounded-frontier-verify-20261008",
+    "id": "sprite-87368f21-5869-452d-b326-b420f5e99347",
+    "workspace": "/home/sprite/semantic_entailment_dag_verify"
+  },
+  "exact_blobs": {
+    "canonical/runtime/semantic_relation_entailment_dag_v1.py": "3e092ba1581f674c1302288b2800771a81b5bb02",
+    "canonical/tests/test_semantic_relation_entailment_dag_v1.py": "d9b63985b2cf9484cc743daf9c30c53c8142a7a7",
+    "canonical/runtime/semantic_relation_control_v1.py": "13aa27ea19cefd8ce6059f037ff5491402d9fa68",
+    "canonical/tests/test_semantic_relation_control_entailment_dag_v1.py": "7f3230f976f2e857859ddd9acaff223034d81192",
+    "canonical/runtime/unified_cognitive_fabric_v1.py": "0f6ceb35ec274aedc23e08bb678bbb0f7a13c950"
+  },
+  "replay": {
+    "tests_run": 42,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS",
+    "suites": [
+      "canonical.tests.test_semantic_relation_entailment_dag_v1",
+      "canonical.tests.test_semantic_relation_control_entailment_dag_v1",
+      "canonical.tests.test_semantic_relation_control_v1",
+      "canonical.tests.test_bounded_semantic_relation_proof_v1",
+      "canonical.tests.test_terminal_semantic_quotient_v1"
+    ],
+    "py_compile": "PASS",
+    "fabric_wiring_checks": "5_OF_5_PASS"
+  },
+  "proved": [
+    "DIRECT_AUTHENTICATED_ENTAILMENT_EDGE_PROVES_DIRECTIONAL_RELATION",
+    "TRANSITIVE_AUTHENTICATED_ENTAILMENT_PATH_PROVES_DIRECTIONAL_RELATION_WITHOUT_COMPLETE_UNIVERSE",
+    "MUTUAL_AUTHENTICATED_ENTAILMENT_PATHS_PROVE_LOGICAL_EQUIVALENCE_IN_SCOPE_WITHOUT_SEMANTIC_IDENTITY",
+    "AUTHENTICATED_COUNTEREXAMPLE_DISPROVES_DIRECTIONAL_RELATION",
+    "COUNTEREXAMPLE_CONFLICTING_WITH_PROVED_TRANSITIVE_PATH_FAILS_CLOSED",
+    "SCOPE_MISMATCH_FAILS_CLOSED",
+    "MISSING_RELATION_AUTHORITY_VERIFIER_FAILS_CLOSED",
+    "CONTENT_ADDRESS_MISMATCH_FAILS_CLOSED",
+    "MODEL_SIMILARITY_CANNOT_OVERRIDE_AUTHENTICATED_COUNTEREXAMPLE",
+    "ALL_EXISTING_SEMANTIC_RELATION_BOUNDED_PROOF_AND_TERMINAL_QUOTIENT_REGRESSIONS_PASS",
+    "UNIFIED_FRONT_DOOR_FORWARDS_THE_EXISTING_SEMANTIC_AUTHORITY_VERIFIER_TO_RELATION_EDGES"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_OPEN_WORLD_SYNONYMY_CLOSURE",
+    "NO_SELF_AUTHENTICATION_OF_RELATION_EDGE_SEMANTICS",
+    "NO_GENERAL_NATURAL_LANGUAGE_TO_ENTAILMENT_EDGE_EXTRACTION_CLOSURE",
+    "NO_TERMINAL_OR_CHECKPOINT_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
