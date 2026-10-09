@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_CASE_V1",
+  "id": "2026-10-09_DUPLICATE_EXTERNAL_OWNER_INQUIRY_BEFORE_PRIOR_WORK_REFRESH",
+  "date": "2026-10-09",
+  "status": "PERMANENT_FAIL_CLOSED_REGRESSION",
+  "incident": [
+    "A new FrontierCode owner-routing inquiry was sent before refreshing the complete canonical FrontierCode correspondence state.",
+    "Canonical state already recorded an owner inquiry on 2026-10-03 and follow-up on 2026-10-05 with no reply, plus an EVENT_WAIT_ONLY rule forbidding another unchanged follow-up.",
+    "The new inquiry changed recipient/contact routing and wording but substantially repeated unresolved eligibility, interface, and zero-cost questions.",
+    "The side effect succeeded technically but violated truth-first/no-duplicate optimality because repository PR lease enforcement did not cover a connected-app action executed before a PR existed."
+  ],
+  "prohibited_patterns": [
+    "EXTERNAL_SIDE_EFFECT_BEFORE_CANONICAL_PRIOR_ACTION_SEARCH",
+    "NEW_RECIPIENT_OR_WORDING_TREATED_AS_NEW_CAUSAL_BLOCKER",
+    "REPEAT_UNRESOLVED_INFORMATION_REQUEST_WITHOUT_VERIFIED_MATERIAL_DELTA",
+    "REALITY_QUERY_OUTSIDE_EXACT_MINIMUM_REALITY_CUT",
+    "EVENT_WAIT_ONLY_STATE_IGNORED"
+  ],
+  "required_prevention": [
+    "REFRESH_CURRENT_CANONICAL_TARGET_AND_PRIOR_ACTION_STATE",
+    "COMPUTE_CAUSAL_BLOCKER_LEASE_INDEPENDENT_OF_RECIPIENT_WORDING_OR_ACTION_LABEL",
+    "BLOCK_WHILE_EQUIVALENT_EXTERNAL_ACQUISITION_IS_AWAITING_EVENT",
+    "REOPEN_ONLY_WITH_VERIFIED_POLICY_CHANGING_MATERIAL_DELTA",
+    "REQUIRE_PROPOSED_NEW_QUERY_MEMBERSHIP_IN_EXACT_MINIMUM_REALITY_CUT"
+  ],
+  "enforcement": {
+    "runtime": "canonical/runtime/external_side_effect_admission_v1.py",
+    "tests": "canonical/tests/test_external_side_effect_admission_v1.py",
+    "reused_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
+    "reused_minimum_reality_cut": "canonical/runtime/minimum_reality_cut.py"
+  },
+  "passing_condition": "The FrontierCode Oct-9-style second inquiry is rejected as BLOCKED__DUPLICATE_EXTERNAL_SIDE_EFFECT__EVENT_WAIT_ONLY unless a verified material delta reopens the blocker; merely changing recipient or wording cannot bypass the lease.",
+  "progress_credit": 0
+}
