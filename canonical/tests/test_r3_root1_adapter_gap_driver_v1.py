@@ -10,7 +10,7 @@ from canonical.runtime import r3_root1_adapter_gap_witness_v1 as witness
 
 
 class R3Root1AdapterGapDriverV1Tests(unittest.TestCase):
-    def test_proof_bearing_owned_adapter_miss_surfaces_constructive_root1_gap(self):
+    def test_incomplete_proof_bearing_adapter_miss_routes_to_evidence_acquisition(self):
         with tempfile.TemporaryDirectory() as td:
             state_path = Path(td) / "state.json"
             observed = learning.record_success_observation(
@@ -50,8 +50,24 @@ class R3Root1AdapterGapDriverV1Tests(unittest.TestCase):
             )
             self.assertEqual(
                 blocker["blocker"],
-                "ROOT1_CONSTRUCTIVE_R3_VERIFICATION_FRONTIER_GAP__NO_BOUND_ACQUISITION_ROUTE",
+                driver.R3_EVIDENCE_ONLY_BLOCKER,
             )
+            self.assertEqual(blocker["boundary_root"], "R3_EVIDENCE_ACQUISITION")
+            self.assertEqual(
+                blocker["required_capability_class"],
+                "NEW_DISTINGUISHING_EVIDENCE",
+            )
+            request = blocker["evidence_acquisition_request"]
+            self.assertEqual(request["schema"], driver.R3_EVIDENCE_REQUEST_SCHEMA)
+            self.assertEqual(
+                request["request_kind"],
+                "R3_SUCCESS_VERIFICATION_DISTINGUISHING_EVIDENCE",
+            )
+            self.assertFalse(request["full_benchmark_default"])
+            self.assertTrue(
+                request["broad_acquisition_forbidden_without_minimality_proof"]
+            )
+            self.assertEqual(len(request["request_sha256"]), 64)
             self.assertTrue(blocker["root1_positive_gap_established"])
             gap = blocker["root1_gap_witness"]
             self.assertTrue(gap["pass"], gap)
@@ -74,6 +90,64 @@ class R3Root1AdapterGapDriverV1Tests(unittest.TestCase):
             state = learning.load_state(state_path)
             parked = state["improvement_queue"][observed["improvement_work_id"]]
             self.assertEqual(parked["status"], "PARKED")
+
+    def test_complete_checkpointed_execution_keeps_constructive_root1_gap(self):
+        with tempfile.TemporaryDirectory() as td:
+            state_path = Path(td) / "state.json"
+            learning.record_success_observation(
+                {
+                    "schema": "TEST_COMPLETE_CHECKPOINTED_SUCCESS_V1",
+                    "status": "PASS__CHECKPOINTED_BUT_UNADAPTED",
+                    "pass": True,
+                    "task_id": "complete-gap",
+                    "selected_plan": ["verified.test.capability"],
+                    "verified_target_effects": ["test.effect"],
+                    "controller_checkpoint": {
+                        "path": "canonical/nonexistent-test-checkpoint.json",
+                        "plan_sha256": "c" * 64,
+                    },
+                    "execution": [{
+                        "capability_id": "verified.test.capability",
+                        "pass": True,
+                        "status": "PASS",
+                        "composition_capsule_head_hash": "d" * 64,
+                    }],
+                },
+                surface="COMPLETE_CHECKPOINTED_UNADAPTED_SURFACE",
+                state_path=state_path,
+                replay_context={
+                    "mode": "generic",
+                    "problem": {
+                        "task_id": "complete-gap",
+                        "target_effects": ["test.effect"],
+                    },
+                },
+            )
+            first = driver.advance_once(state_path=state_path)
+            self.assertTrue(first["pass"], first)
+            self.assertFalse(first["progress"], first)
+            second = driver.advance_once(state_path=state_path)
+
+        blocker = next(
+            row
+            for row in second["blockers"]
+            if row["kind"] == driver.FRONTIER_EXPANSION_KIND
+        )
+        self.assertEqual(
+            blocker["blocker"],
+            "ROOT1_CONSTRUCTIVE_R3_VERIFICATION_FRONTIER_GAP__NO_BOUND_ACQUISITION_ROUTE",
+        )
+        self.assertIsNone(blocker["evidence_acquisition_request"])
+        gap = blocker["root1_gap_witness"]
+        self.assertEqual(
+            gap["repair_class_reduction"]["retained_proof_class"],
+            "CHECKPOINTED_VERIFIED_EXECUTION",
+        )
+        self.assertFalse(
+            gap["repair_class_reduction"][
+                "must_acquire_new_distinguishing_evidence"
+            ]
+        )
 
     def test_proofless_success_does_not_fabricate_constructive_root1_gap(self):
         with tempfile.TemporaryDirectory() as td:
@@ -209,8 +283,9 @@ class R3Root1AdapterGapDriverV1Tests(unittest.TestCase):
             )
             self.assertEqual(
                 blocker["blocker"],
-                "ROOT1_CONSTRUCTIVE_R3_VERIFICATION_FRONTIER_GAP__NO_BOUND_ACQUISITION_ROUTE",
+                driver.R3_EVIDENCE_ONLY_BLOCKER,
             )
+            self.assertIsInstance(blocker["evidence_acquisition_request"], dict)
             self.assertTrue(blocker["root1_positive_gap_established"])
 
 
