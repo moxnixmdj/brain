@@ -37,6 +37,7 @@ from canonical.runtime import decision_relative_semantic_relation_v1 as semantic
 from canonical.runtime import decision_relative_semantic_relation_v1 as semantic_relation
 from canonical.runtime import decision_relative_semantic_relation_v1 as semantic_relation
 from canonical.runtime import decision_relative_semantic_relation_v1 as semantic_relation
+from canonical.runtime import decision_relative_semantic_relation_v1 as semantic_relation
 from canonical.runtime import semantic_relation_control_v1 as semantic_relation
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
@@ -65,6 +66,7 @@ ENGINE_DESCRIPTORS = {
     "LIVE_CAPABILITY": "live_capability_invoker_v1.invoke",
     "LIVE_COMPOSITION": "live_capability_composition_v1.execute",
     "SEMANTIC_AMBIGUITY": "semantic_ambiguity_control_v1.decide",
+    "SEMANTIC_RELATION": "decision_relative_semantic_relation_v1.prove",
     "SEMANTIC_RELATION": "decision_relative_semantic_relation_v1.prove",
     "SEMANTIC_RELATION": "decision_relative_semantic_relation_v1.prove",
     "SEMANTIC_RELATION": "decision_relative_semantic_relation_v1.prove",
@@ -157,6 +159,9 @@ def _unwrap_live_runtime(wrapper: Mapping[str, Any], inner_key: str) -> dict[str
 def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
     """Select only structurally unambiguous fabric routes; otherwise fail closed."""
     keys = set(payload)
+
+    if {"expression_a", "expression_b", "required_relation", "scope_sha256"} <= keys:
+        return "SEMANTIC_RELATION"
 
     if {
         "ambiguity_owner",
@@ -497,6 +502,8 @@ def run(
                 raise CognitiveFabricError("MYSTERY_OPERATION_INVALID:" + operation)
         elif mode == "SEMANTIC_AMBIGUITY":
             out = semantic_ambiguity.decide(payload)
+        elif mode == "SEMANTIC_RELATION":
+            out = semantic_relation.prove(payload)
         elif mode == "SEMANTIC_RELATION":
             out = semantic_relation.prove(payload)
         elif mode == "SEMANTIC_RELATION":
