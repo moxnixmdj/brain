@@ -183,6 +183,7 @@ def _independent_registry(
     }
     registry = dict(core)
     registry["registry_sha256"] = _sha(core)
+    registry["source_text"] = source_text
     return registry
 
 
