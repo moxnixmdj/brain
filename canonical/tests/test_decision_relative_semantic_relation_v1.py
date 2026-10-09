@@ -3,14 +3,17 @@ import unittest
 from canonical.runtime.decision_relative_semantic_relation_v1 import prove
 
 
-def receipt(relation, source_kind="CHECKED_PROOF_DAG"):
+SCOPE = "1" * 64
+
+
+def receipt(relation, source_kind="CHECKED_PROOF_DAG", scope=SCOPE):
     return {
         "verified": True,
         "relation": relation,
         "source_kind": source_kind,
         "verifier_id": "verifier:test",
         "evidence_sha256": "e" * 64,
-        "scope_sha256": "1" * 64,
+        "scope_sha256": scope,
     }
 
 
@@ -27,6 +30,7 @@ class Tests(unittest.TestCase):
             "expression_a": "reserve buffer",
             "expression_b": "liquidity cushion",
             "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+            "scope_sha256": SCOPE,
             "evidence": {"explicit_source_equivalence": receipt("EXACT_EQUIVALENT", "EXPLICIT_SOURCE_DEFINITION")},
         })
         self.assertTrue(out["pass"], out)
@@ -37,6 +41,7 @@ class Tests(unittest.TestCase):
             "expression_a": "reserve buffer",
             "expression_b": "liquidity cushion",
             "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+            "scope_sha256": SCOPE,
             "evidence": {
                 "authenticated_concept_binding": {
                     **receipt("EXACT_EQUIVALENT", "AUTHENTICATED_ONTOLOGY"),
@@ -53,6 +58,7 @@ class Tests(unittest.TestCase):
             "expression_a": "A",
             "expression_b": "B",
             "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+            "scope_sha256": SCOPE,
             "evidence": {
                 "entailment_a_to_b": receipt("A_ENTAILS_B"),
                 "entailment_b_to_a": receipt("B_ENTAILS_A"),
@@ -66,6 +72,7 @@ class Tests(unittest.TestCase):
             "expression_a": "CET1 capital",
             "expression_b": "regulatory capital",
             "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+            "scope_sha256": SCOPE,
             "evidence": {"entailment_a_to_b": receipt("A_ENTAILS_B")},
         })
         self.assertFalse(out["pass"])
@@ -76,6 +83,7 @@ class Tests(unittest.TestCase):
             "expression_a": "CET1 capital",
             "expression_b": "regulatory capital",
             "required_relation": "A_ENTAILS_B_REQUIRED",
+            "scope_sha256": SCOPE,
             "evidence": {"entailment_a_to_b": receipt("A_ENTAILS_B")},
         })
         self.assertTrue(out["pass"])
@@ -86,6 +94,7 @@ class Tests(unittest.TestCase):
             "expression_a": "reserve buffer",
             "expression_b": "liquidity cushion",
             "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+            "scope_sha256": SCOPE,
             "evidence": {
                 "entailment_a_to_b": receipt("A_ENTAILS_B"),
                 "entailment_b_to_a": receipt("B_ENTAILS_A"),
@@ -101,6 +110,7 @@ class Tests(unittest.TestCase):
             "expression_a": "reserve buffer",
             "expression_b": "liquidity cushion",
             "required_relation": "TASK_EQUIVALENCE",
+            "scope_sha256": SCOPE,
             "evidence": {},
             "task_terminal_rows": terminal_rows(
                 {"threshold": 10, "action": "REDUCE"},
@@ -116,6 +126,7 @@ class Tests(unittest.TestCase):
             "expression_a": "reserve buffer",
             "expression_b": "liquidity cushion",
             "required_relation": "TASK_EQUIVALENCE",
+            "scope_sha256": SCOPE,
             "evidence": {},
             "task_terminal_rows": terminal_rows(
                 {"action": "REDUCE"},
@@ -130,7 +141,25 @@ class Tests(unittest.TestCase):
             "expression_a": "A",
             "expression_b": "B",
             "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+            "scope_sha256": SCOPE,
             "evidence": {"explicit_source_equivalence": {"verified": True}},
+        })
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["strongest_proved_relation"], "UNKNOWN")
+
+    def test_scope_mismatch_cannot_promote_relation(self):
+        out = prove({
+            "expression_a": "A",
+            "expression_b": "B",
+            "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+            "scope_sha256": SCOPE,
+            "evidence": {
+                "explicit_source_equivalence": receipt(
+                    "EXACT_EQUIVALENT",
+                    "EXPLICIT_SOURCE_DEFINITION",
+                    scope="2" * 64,
+                )
+            },
         })
         self.assertFalse(out["pass"])
         self.assertEqual(out["strongest_proved_relation"], "UNKNOWN")
@@ -140,6 +169,7 @@ class Tests(unittest.TestCase):
             "expression_a": "reserve buffer",
             "expression_b": "liquidity cushion",
             "required_relation": "ANY_SOUND_RELATION",
+            "scope_sha256": SCOPE,
             "evidence": {"embedding_similarity": 0.99},
         })
         self.assertFalse(out["pass"])
@@ -153,7 +183,8 @@ class Tests(unittest.TestCase):
             "expression_a": "A",
             "expression_b": "B",
             "required_relation": "TASK_EQUIVALENCE",
-            "evidence": {"entailment_a_to_b": receipt()},
+            "scope_sha256": SCOPE,
+            "evidence": {"entailment_a_to_b": receipt("A_ENTAILS_B")},
             "task_terminal_rows": terminal_rows({"action": "X"}, {"action": "X"}),
         })
         self.assertTrue(out["pass"])
