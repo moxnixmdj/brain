@@ -449,7 +449,10 @@ def run(
         elif mode == "SEMANTIC_AMBIGUITY":
             out = semantic_ambiguity.decide(payload)
         elif mode == "SEMANTIC_RELATION":
-            out = semantic_relation.resolve(payload)
+            out = semantic_relation.resolve(
+                payload,
+                concept_identity_verifier=semantic_authority_verifier,
+            )
         elif mode == "OEWN_DECISION_SENSE":
             out = oewn_decision_sense.resolve(
                 sense_universe=payload.get("sense_universe"),
