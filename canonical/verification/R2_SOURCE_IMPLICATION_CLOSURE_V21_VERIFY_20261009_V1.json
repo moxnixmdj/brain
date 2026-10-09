@@ -3,7 +3,7 @@
   "date": "2026-10-09",
   "branch": "r2-source-implication-closure-v21-current2",
   "merge_base_main_sha": "6adcfbdb90fbd32b401cd3463bdb96188637d085",
-  "observed_main_sha": "5cfae120d8c8b6b5837cb9b5a069996f944ad0a5",
+  "observed_main_sha": "44b1c48e66565c48ee8ababfb90ab365a122af15",
   "capability": "BRAIN_OWNED_NONEXPLICIT_DIRECTIONAL_SEMANTIC_ENTAILMENT_BY_SOURCE_IMPLICATION_CLOSURE",
   "status": "VERIFIED_ISOLATED_CHANGED_SURFACE__47_OF_47_PASS__TWO_NEWER_GOVERNANCE_ONLY_COMMITS_NONOVERLAP",
   "theorem": {
@@ -55,12 +55,20 @@
     "regression": "UNSUPPORTED_MODEL_SIMILARITY_NOW_REMAINS_SEMANTICALLY_OPEN_AND_DOES_NOT_GAIN_AUTHORITY_OR_POISON_THE_ROUTE"
   },
   "current_main_nonoverlap_lease": {
-    "behind_by": 2,
+    "behind_by": 15,
+    "main_only_commit_count": 15,
     "newer_main_files": [
       "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-      "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
+      "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "canonical/runtime/r2_regcap_contextual_fact_direct_adequacy_v1.py",
+      "canonical/runtime/regcap_contextual_fact_independent_verify_v1.py",
+      "canonical/tests/test_r2_regcap_contextual_fact_direct_adequacy_v1.py",
+      "canonical/verification/R2_REGCAP_CONTEXTUAL_FACT_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+      "canonical/verification/R2_V59_REGCAP_ENTRY_SURFACE_ADMISSION_VERIFY_20261009_V2.json"
     ],
-    "overlap_with_v21_runtime_fixed_point_or_tests": false
+    "overlap_with_v21_v20_semantic_runtime_fixed_point_or_tests": false
   },
   "nonclaims": [
     "NO_GENERAL_OPEN_WORLD_SEMANTIC_RELATION_COMPLETENESS",
@@ -85,5 +93,13 @@
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
   },
-  "terminal_authority": false
+  "terminal_authority": false,
+  "github_actions": {
+    "run_id": 37953060691,
+    "job_id": 113896538909,
+    "conclusion": "FAILURE_BEFORE_ANY_STEP_EXECUTED",
+    "runner_id": 0,
+    "steps": [],
+    "classification": "VERIFICATION_CARRIER_FAILURE_NOT_PYTHON_TEST_FAILURE"
+  }
 }
