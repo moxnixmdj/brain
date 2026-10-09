@@ -1083,6 +1083,19 @@
       },
       "note": "MECHANISM_ONLY__REAL_TARGET_RELEVANT_DEPENDENCY_PROVENANCE_RECEIPT_MISSING__ATOM_TRUTH_OPEN__ZERO_CREDIT"
     },
+    "cursorbench_source_coverage_semantic_atoms_mechanism_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_SOURCE_COVERAGE_MECHANISM_TERMINAL_RECONCILIATION_20261009_V1.json",
+      "git_blob_sha": "0eb9227b491c28cb6396de5a296e9d16913a7735",
+      "activation": {
+        "path": "canonical/governance/CURSORBENCH_SOURCE_COVERAGE_ATOMS_ACTIVATION_20261009_V1.json",
+        "git_blob_sha": "2008028041450cdba9a8ad291d56d64c6a1429bf"
+      },
+      "independent_verification": {
+        "path": "canonical/verification/CURSORBENCH_SOURCE_COVERAGE_ATOMS_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "cc0795464a18326643c11494bcc7a93144ccd9b9"
+      },
+      "note": "MECHANISM_ONLY__TYPED_SEMANTICS_AND_FAILURE_COMPLETENESS_CAN_BE_PROVED_FROM_REAL_LOSSLESS_SOURCE_COVERAGE_RECEIPT__REAL_RECEIPT_MISSING__ZERO_CREDIT"
+    },
     "r2_v52_v14_v15_authority_reconciliation_20261009_v1": {
       "path": "canonical/verification/R2_V52_V14_V15_AUTHORITY_RECONCILIATION_VERIFY_20261009_V1.json",
       "git_blob_sha": "0a4ea360fb8aa97b42383bf690001bb233ec32ca",
@@ -1750,6 +1763,14 @@
     "cursorbench_dependency_provenance_atom_truth_proved": false,
     "cursorbench_dependency_provenance_missing_binding_state": "OPEN_NOT_FALSE",
     "cursorbench_dependency_provenance_malformed_binding_state": "FAIL_CLOSED",
+    "cursorbench_source_coverage_semantic_atoms_mechanism_verified": true,
+    "cursorbench_typed_semantics_atom_mechanism_verified": true,
+    "cursorbench_failure_mode_completeness_atom_mechanism_verified": true,
+    "cursorbench_source_coverage_real_target_relevant_receipt_bound": false,
+    "cursorbench_typed_semantics_atom_truth_proved": false,
+    "cursorbench_failure_mode_completeness_atom_truth_proved": false,
+    "cursorbench_source_coverage_missing_binding_state": "OPEN_NOT_FALSE",
+    "cursorbench_source_coverage_malformed_binding_state": "FAIL_CLOSED",
     "r2_cross_document_effect_field_lattice_bound": true,
     "r2_bounded_coreference_ambiguity_control_bound": true,
     "r2_bounded_coreference_ambiguity_antecedent_identity_authority": false
@@ -2452,7 +2473,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 83,
+  "pointer_revision": 84,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
