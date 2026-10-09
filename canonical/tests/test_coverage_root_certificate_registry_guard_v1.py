@@ -10,7 +10,9 @@ from canonical.runtime.coverage_root_certificate_registry_guard_v1 import (
 
 ROOT = Path(__file__).resolve().parents[2]
 REGISTRY = ROOT / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json"
-MISSION_POINTER = json.loads((ROOT / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json").read_text(encoding="utf-8"))\nMISSION_AUTHORITY_BLOB_SHA = "13c470645b037bbb46245c687dd35197b420d51a"\n
+MISSION_POINTER = json.loads((ROOT / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json").read_text(encoding="utf-8"))
+MISSION_AUTHORITY_BLOB_SHA = "13c470645b037bbb46245c687dd35197b420d51a"
+
 
 def load():
     return json.loads(REGISTRY.read_text(encoding="utf-8"))
