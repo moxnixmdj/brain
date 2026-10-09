@@ -20,7 +20,13 @@
   "task_read": true,
   "task_started": true,
   "result_pending": true,
-  "latest_verified_journal_sequence": 19,
+  "journal_snapshot": {
+    "verified_sequence": 19,
+    "observed_at_utc": "2026-10-09T15:38:27Z",
+    "immutable_evidence_only": true
+  },
+  "journal_head_is_live_external_state": true,
+  "journal_head_must_be_rederived_before_any_result_claim": true,
   "replay_authority": false,
   "replacement_carrier_authority": false,
   "acceptance_credit_delta": 0,
