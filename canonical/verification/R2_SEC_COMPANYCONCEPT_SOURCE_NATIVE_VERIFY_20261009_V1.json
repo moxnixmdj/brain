@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_R2_SEC_COMPANYCONCEPT_SOURCE_NATIVE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_CODE_REPLAY_10_OF_10__FRESH_SEC_SOURCE_SNAPSHOT__INDEPENDENT_FULL_CONTRACT_REDERIVATION__ZERO_TERMINAL_CREDIT",
+  "exact_blobs": {
+    "producer": "679ab4ccf981445f7149082d91df7343be5eef57",
+    "verifier": "4281bf1212b518e08e5224625693d389810691bd",
+    "tests": "37a01aa9a1ab46eb07045399d8167ac04a5c6e04",
+    "semantic_ir": "cf40b0b4d8f71f15f0140f009b602ff913db6750"
+  },
+  "independent_execution": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "carrier_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "public_byte_carrier_commit": "7cfa38200c89c306ca87479965e1af6d228c4f8b",
+    "adversarial_result": "PASS__10_OF_10"
+  },
+  "fresh_source": {
+    "source": "SEC_DATA_GOV_COMPANYCONCEPT__CIK0000320193__US_GAAP__GROSSPROFIT",
+    "source_bytes": 50867,
+    "source_sha256": "1297419c2611393837d03a4fb5e1533e56b484dd4ff942ebb3bb68b5656d961f",
+    "cik": 320193,
+    "taxonomy": "us-gaap",
+    "tag": "GrossProfit",
+    "entity_name": "Apple Inc.",
+    "fact_row_count": 338,
+    "rows_missing_required_metadata": 0
+  },
+  "independent_snapshot_replay": {
+    "transport_substitution_only": true,
+    "semantic_logic_modified": false,
+    "verifier_logic_modified": false,
+    "verifier_status": "PASS__SEC_COMPANYCONCEPT_SOURCE_NATIVE_BYTES_MATCH_SEMANTIC_CONTRACT",
+    "full_contract_rederived_from_raw_bytes": true,
+    "semantic_ir_status": "COMPILED"
+  },
+  "authority": {
+    "verified_scope": "STANDARDIZED_SEC_XBRL_COMPANYCONCEPT_SOURCE_NATIVE_IDENTITY_AND_FACT_SEMANTICS__ONE_COMPANY_ONE_CONCEPT_PER_REQUEST__US_GAAP_IFRS_FULL_DEI_SRT",
+    "direct_route_count_delta": 0,
+    "bounded_decision_family_count_delta": 0,
+    "finance_tail_closed": false,
+    "terminal_credit_delta": 0
+  }
+}
