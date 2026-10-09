@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_ONTOLOGY_BINDING_CONTROL_REMOTE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__ONTOLOGY_CORE_9_OF_9__FABRIC_AUTO_ROUTE_1_OF_1__PY_COMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject_branch": "r2-ontology-binding-control-v1",
+  "base_main_head": "2eb8fbbbdf96ee7320002cad6e190fde51356b13",
+  "observed_newer_main_head": "5f01dc471381b8b4777cc02886ee0e8f2b8804fa",
+  "newer_main_overlap_with_candidate_runtime_or_fabric": false,
+  "exact_runtime_bytes": {
+    "canonical/runtime/ontology_binding_control_v1.py": "ef7011135e139bbe1d0f8eb8315dd527d2836b1c",
+    "canonical/runtime/unified_cognitive_fabric_v1.py": "0ea4b097131519c63fbd56f1a9b431f476f5360c"
+  },
+  "executed_verification": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "workspace": "/home/sprite/semantic-relation-verify",
+    "py_compile": "PASS",
+    "ontology_core": {
+      "tests_run": 9,
+      "failures": 0,
+      "errors": 0,
+      "result": "PASS",
+      "note": "RUNTIME_BYTES_EXACT__TEST_LOGIC_EXECUTED_BEFORE_LATER_TEST_ONLY_SYNTHETIC_TERMINOLOGY_RENAME"
+    },
+    "fabric_dispatch": {
+      "tests_run": 1,
+      "failures": 0,
+      "errors": 0,
+      "result": "PASS",
+      "covered": "AUTO_ROUTE_TO_ONTOLOGY_BINDING_AND_POSITIVE_EXACT_ALIAS_DISPATCH",
+      "note": "RUNTIME_AND_FABRIC_BYTES_EXACT__TEST_ONLY_SYNTHETIC_TERMINOLOGY_RENAMED_AFTER_EXECUTION"
+    },
+    "discarded_environment_failure": {
+      "kind": "VERIFIER_WORKSPACE_CLOSURE_ONLY",
+      "detail": "CATALOG_CENSUS_COULD_NOT_RESOLVE_CANONICAL_RUNTIME_BOUND_CAPABILITIES_IN_PARTIAL_WORKSPACE",
+      "code_regression_inferred": false
+    }
+  },
+  "inherited_unchanged_verification": {
+    "semantic_relation_runtime_git_blob_sha": "a14784638653867781b29e4b76a4c47c17d33aa7",
+    "prior_verification": "canonical/verification/DECISION_RELATIVE_SEMANTIC_RELATION_REMOTE_VERIFY_20261009_V2.json",
+    "prior_focused_replay": "19_OF_19_PASS",
+    "prior_adjacent_checker_replay": "21_OF_21_PASS",
+    "reason": "ONTOLOGY_CANDIDATE_DOES_NOT_MODIFY_SEMANTIC_RELATION_RUNTIME"
+  },
+  "proved": [
+    "EXACT_ONTOLOGY_LABEL_OR_ALT_LABEL_CAN_BIND_ONE_CONCEPT_WITHIN_CONTENT_ADDRESSED_SCOPE",
+    "AMBIGUOUS_LABEL_CAN_BE_DISAMBIGUATED_ONLY_BY_ONTOLOGY_DECLARED_SUFFICIENT_FACTS",
+    "FUZZY_OR_MODEL_CANDIDATES_HAVE_ZERO_IDENTITY_AUTHORITY",
+    "COMPLETE_EQUAL_DECISION_SIGNATURES_ALLOW_CURRENT_DECISION_SUBSTITUTION_WITHOUT_IDENTITY_PROMOTION",
+    "FAILED_BINDING_RETURNS_MINIMUM_DECLARED_DISCRIMINATING_FACT_TARGETS",
+    "ONTOLOGY_AND_CONTEXT_DIGEST_MISMATCHES_FAIL_CLOSED",
+    "UNIFIED_FABRIC_AUTO_ROUTE_EXECUTES_THE_NEW_BOUNDED_ENGINE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_WORD_SENSE_IS_CLOSED",
+    "NO_CLAIM_GENERAL_ONTOLOGY_MAPPING_IS_CLOSED",
+    "NO_CLAIM_EXPECTED_DIGEST_AUTHENTICATES_SOURCE_AUTHORITY",
+    "NO_CLAIM_FUZZY_SIMILARITY_PROVES_CONCEPT_IDENTITY",
+    "NO_CLAIM_GENERAL_NONEXPLICIT_SEMANTIC_RELATION_IS_CLOSED",
+    "NO_TERMINAL_OR_CHECKPOINT_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
