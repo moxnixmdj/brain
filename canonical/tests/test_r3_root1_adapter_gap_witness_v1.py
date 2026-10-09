@@ -100,11 +100,18 @@ class R3Root1AdapterGapWitnessV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             out["gap_evidence"]["admissible_repair_classes"],
-            [
-                "VERIFIER_PRESERVING_SUCCESS_ADAPTER",
-                "INDEPENDENT_READONLY_SUCCESS_VERIFIER",
-                "NEW_DISTINGUISHING_EVIDENCE",
-            ],
+            ["NEW_DISTINGUISHING_EVIDENCE"],
+        )
+        self.assertEqual(
+            out["gap_evidence"]["preferred_repair_order"],
+            ["NEW_DISTINGUISHING_EVIDENCE"],
+        )
+        self.assertTrue(
+            out["gap_evidence"]["must_acquire_new_distinguishing_evidence"]
+        )
+        self.assertEqual(
+            out["repair_class_reduction"]["retained_proof_class"],
+            "INSUFFICIENT_FOR_NONSELF_REFERENTIAL_VERIFICATION",
         )
         tx = out["root1_transaction"]
         self.assertTrue(tx["gate"]["root1_active"])
