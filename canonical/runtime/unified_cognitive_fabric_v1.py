@@ -31,6 +31,7 @@ from canonical.runtime import terminal_root_decision_gate_v1 as terminal_root
 from canonical.runtime import terminal_closure_reducer as terminal_closure
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 from canonical.runtime import semantic_ambiguity_control_v1 as semantic_ambiguity
+from canonical.runtime import decision_relative_semantic_relation_v1 as semantic_relation
 from canonical.runtime import semantic_relation_control_v1 as semantic_relation
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
@@ -59,6 +60,7 @@ ENGINE_DESCRIPTORS = {
     "LIVE_CAPABILITY": "live_capability_invoker_v1.invoke",
     "LIVE_COMPOSITION": "live_capability_composition_v1.execute",
     "SEMANTIC_AMBIGUITY": "semantic_ambiguity_control_v1.decide",
+    "SEMANTIC_RELATION": "decision_relative_semantic_relation_v1.prove",
     "SEMANTIC_RELATION": "semantic_relation_control_v1.resolve",
 }
 
@@ -153,6 +155,9 @@ def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
         "observations",
     } <= keys:
         return "SEMANTIC_AMBIGUITY"
+
+    if {"expression_a", "expression_b", "required_relation", "evidence"} <= keys:
+        return "SEMANTIC_RELATION"
 
     if {
         "left_id",
@@ -441,6 +446,8 @@ def run(
                 raise CognitiveFabricError("MYSTERY_OPERATION_INVALID:" + operation)
         elif mode == "SEMANTIC_AMBIGUITY":
             out = semantic_ambiguity.decide(payload)
+        elif mode == "SEMANTIC_RELATION":
+            out = semantic_relation.prove(payload)
         elif mode == "SEMANTIC_RELATION":
             out = semantic_relation.resolve(payload)
         elif mode == "CAPABILITY_SCHEDULER":
