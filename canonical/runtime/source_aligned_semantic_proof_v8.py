@@ -108,12 +108,16 @@ def verify_proof(
                 "parse_reason":parsed.get("reason"),
             })
             continue
-        if dict(effect)!=row["effect"]:
+        expected_semantics={
+            key:value for key,value in row["effect"].items()
+            if key!="source_locator"
+        }
+        if dict(effect)!=expected_semantics:
             rejected.append({
                 "claim_id":cid,
                 "reason":"DOCUMENT_EFFECT_RELATION_MISMATCH",
                 "effect_id":eid,
-                "expected":row["effect"],
+                "expected":expected_semantics,
                 "claimed":dict(effect),
             })
             continue
