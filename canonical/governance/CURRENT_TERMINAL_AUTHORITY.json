@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V36",
   "date": "2026-10-09",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V51_AND_CODING_V3_PROJECTION_BOUND",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V51_AND_CODING_V3_PROJECTION_BOUND__ONE_SHOT_AUTO_DEFAULT_CANDIDATE_RESEAL_PENDING",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -2297,7 +2297,8 @@
       "learnable": true,
       "reusable": true
     },
-    "capability_lifecycle_complete": true
+    "capability_lifecycle_complete": true,
+    "auto_one_shot_frontdoor_reseal_pending": true
   },
   "r1_universal_live_capability_invocation_20261008_v1": {
     "status": "ACTIVE_FAIL_CLOSED_UNIVERSAL_LIVE_CAPABILITY_INVOCATION__V3_FRONT_DOOR_BOUND",
@@ -2360,7 +2361,8 @@
       "reusable": true
     },
     "capability_lifecycle_complete": true,
-    "r1_drift_locked": false
+    "r1_drift_locked": false,
+    "auto_one_shot_frontdoor_reseal_pending": true
   },
   "current_option_preserving_optimization_20261008_v1": {
     "status": "ACTIVE_FAIL_CLOSED_OPTION_PRESERVATION_LAW",
@@ -2407,7 +2409,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 80,
+  "pointer_revision": 81,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
