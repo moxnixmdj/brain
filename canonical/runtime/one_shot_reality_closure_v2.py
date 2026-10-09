@@ -493,7 +493,7 @@ def run(
     verification_frontier_acquisition_provider=None,
     verification_frontier_acquisition_provider_id="ONE_SHOT_ROOT1_ACQUISITION_PROVIDER",
     failure_repair_provider=None,
-    information_theoretic_externality_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    externality_certificate_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     capability_synthesis_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     evidence_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     reality_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
@@ -521,8 +521,8 @@ def run(
                 verification_frontier_acquisition_provider_id
             ),
             "failure_repair_provider": failure_repair_provider,
-            "information_theoretic_externality_provider": (
-                information_theoretic_externality_provider
+            "externality_certificate_provider": (
+                externality_certificate_provider
             ),
             "max_rounds": v1_max_rounds,
             "max_actions_per_round": v1_max_actions_per_round,
