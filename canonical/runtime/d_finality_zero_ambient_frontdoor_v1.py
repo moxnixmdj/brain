@@ -311,13 +311,13 @@ def run(
     if row.get("physical_profile")!=PROFILE:
         raise ZeroAmbientDFinalError("PHYSICAL_PROFILE_NOT_PURE_ZERO_AMBIENT")
     cert=authority["certificate"]
-    contract=capability_contract(cid,row)
-    if str(cert.get("capability_contract_sha256") or "")!=d_epoch.sha256_json(contract):
-        raise ZeroAmbientDFinalError("CAPABILITY_CONTRACT_HASH_MISMATCH")
     if list(cert.get("allowed_knowledge_channels") or []):
         raise ZeroAmbientDFinalError("PURE_PROFILE_KNOWLEDGE_CHANNEL_NOT_EMPTY")
     if list(cert.get("allowed_effect_channels") or []):
         raise ZeroAmbientDFinalError("PURE_PROFILE_EFFECT_CHANNEL_NOT_EMPTY")
+    contract=capability_contract(cid,row)
+    if str(cert.get("capability_contract_sha256") or "")!=d_epoch.sha256_json(contract):
+        raise ZeroAmbientDFinalError("CAPABILITY_CONTRACT_HASH_MISMATCH")
 
     launcher_path=pathlib.Path(zero_ambient.__file__).resolve()
     launcher_blob=d_epoch.git_blob_sha_file(launcher_path)
