@@ -47,10 +47,18 @@ class R3RealStructuralCompoundingCycleV1Tests(unittest.TestCase):
         )
         TMP.mkdir(parents=True, exist_ok=True)
         self._checkpoint_paths: list[Path] = []
+        self._receipt_root = ROOT / independent.DEFAULT_RECEIPT_DIR
+        self._receipt_root.mkdir(parents=True, exist_ok=True)
+        self._receipt_files_before = set(self._receipt_root.glob("*.json"))
 
     def tearDown(self):
         RULES.write_bytes(self._rules)
         for path in self._checkpoint_paths:
+            try:
+                path.unlink()
+            except FileNotFoundError:
+                pass
+        for path in set(self._receipt_root.glob("*.json")) - self._receipt_files_before:
             try:
                 path.unlink()
             except FileNotFoundError:
@@ -224,7 +232,6 @@ class R3RealStructuralCompoundingCycleV1Tests(unittest.TestCase):
             parked = driver.advance_once(
                 state_path=state_path,
                 repo_root=ROOT,
-                **providers,
             )
             self.assertEqual(
                 parked["status"],
@@ -238,7 +245,6 @@ class R3RealStructuralCompoundingCycleV1Tests(unittest.TestCase):
             acquired = driver.advance_once(
                 state_path=state_path,
                 repo_root=ROOT,
-                **providers,
             )
             self.assertTrue(acquired["pass"], acquired)
             self.assertTrue(acquired["verification_authority_unchanged"], acquired)
@@ -266,7 +272,6 @@ class R3RealStructuralCompoundingCycleV1Tests(unittest.TestCase):
             verified_first = driver.advance_once(
                 state_path=state_path,
                 repo_root=ROOT,
-                **providers,
             )
             self.assertEqual(
                 verified_first["status"],
@@ -284,7 +289,6 @@ class R3RealStructuralCompoundingCycleV1Tests(unittest.TestCase):
             verified_second = driver.advance_once(
                 state_path=state_path,
                 repo_root=ROOT,
-                **providers,
             )
             self.assertEqual(
                 verified_second["status"],
@@ -294,7 +298,6 @@ class R3RealStructuralCompoundingCycleV1Tests(unittest.TestCase):
             promoted = driver.advance_once(
                 state_path=state_path,
                 repo_root=ROOT,
-                **providers,
             )
             self.assertEqual(
                 promoted["status"],
@@ -433,7 +436,6 @@ class R3RealStructuralCompoundingCycleV1Tests(unittest.TestCase):
             post_reuse = driver.advance_once(
                 state_path=state_path,
                 repo_root=ROOT,
-                **providers,
             )
             self.assertEqual(
                 post_reuse["status"],
