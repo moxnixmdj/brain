@@ -158,10 +158,34 @@ def _literal_sibling_loads(path: Path) -> tuple[list[Path], list[str]]:
                     value = node.args[0].value
                     if isinstance(value, str) and value.endswith(".py"):
                         target = path.with_name(value).resolve()
-                        if target.is_file():
-                            literal_targets.append(target)
-                        else:
-                            literal_targets.append(target)
+                        literal_targets.append(target)
+
+            # Bounded Project Brain helper pattern:
+            #   _load_runtime_module(root, "goal_compiler.py", "module_name")
+            # Resolve only exact literal filenames under canonical/runtime.
+            if (
+                isinstance(fn, ast.Name)
+                and fn.id == "_load_runtime_module"
+                and len(node.args) >= 2
+                and isinstance(node.args[1], ast.Constant)
+            ):
+                value = node.args[1].value
+                if (
+                    isinstance(value, str)
+                    and value.endswith(".py")
+                    and Path(value).name == value
+                ):
+                    repo_root = path
+                    while repo_root.name != "canonical" and repo_root != repo_root.parent:
+                        repo_root = repo_root.parent
+                    if repo_root.name == "canonical":
+                        target = (
+                            repo_root.parent
+                            / "canonical"
+                            / "runtime"
+                            / value
+                        ).resolve()
+                        literal_targets.append(target)
 
     unique = sorted(set(literal_targets), key=lambda p: p.as_posix())
     unresolved: list[str] = []
