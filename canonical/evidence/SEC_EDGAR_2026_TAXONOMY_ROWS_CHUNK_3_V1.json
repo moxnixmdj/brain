@@ -1,0 +1,186 @@
+{
+  "schema": "PROJECT_BRAIN_SEC_EDGAR_2026_TAXONOMY_ROWS_CHUNK_V1",
+  "chunk_index": 3,
+  "rows": [
+    {
+      "family": "OEF",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/oef/2026/oef-rr-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/oef-rr/2026"
+    },
+    {
+      "family": "OEF",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/oef/2026/oef-sr-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/oef-sr/2026"
+    },
+    {
+      "family": "RXP",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/rxp/2026/rxp-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/rxp/2026"
+    },
+    {
+      "family": "SBS",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/sbs/2026/sbs-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/sbs/2026"
+    },
+    {
+      "family": "SBS",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/sbs/2026/sbs-sbsef-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/sbs-sbsef/2026"
+    },
+    {
+      "family": "SBS",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/sbs/2026/sbs-sbsef-cco-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/sbs-sbsef-cco/2026"
+    },
+    {
+      "family": "SBS",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/sbs/2026/sbs-sbsef-com-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/sbs-sbsef-com/2026"
+    },
+    {
+      "family": "SBS",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/sbs/2026/sbs-sbsef-fex-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/sbs-sbsef-fex/2026"
+    },
+    {
+      "family": "SBS",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/sbs/2026/sbs-sbsef-fin-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/sbs-sbsef-fin/2026"
+    },
+    {
+      "family": "SBS",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/sbs/2026/sbs-sbsef-ocx-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/sbs-sbsef-ocx/2026"
+    },
+    {
+      "family": "SIC",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/sic/2026/sic-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/sic/2026"
+    },
+    {
+      "family": "SNJ",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/snj/2026/snj-2026_def.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/snj-def/2026"
+    },
+    {
+      "family": "SNJ",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/snj/2026/snj-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/snj/2026"
+    },
+    {
+      "family": "SPAC",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/spac/2026/spac-2026_lab.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/spac-lab/2026"
+    },
+    {
+      "family": "SPAC",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/spac/2026/spac-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/spac/2026"
+    },
+    {
+      "family": "SPAC",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/spac/2026/spac-com-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/spac-com/2026"
+    },
+    {
+      "family": "SPAC",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/spac/2026/spac-despac-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/spac-despac/2026"
+    },
+    {
+      "family": "SPAC",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/spac/2026/spac-proj-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/spac-proj/2026"
+    }
+  ]
+}
