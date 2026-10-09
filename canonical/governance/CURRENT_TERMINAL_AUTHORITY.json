@@ -1137,6 +1137,19 @@
       "path": "canonical/governance/CURSORBENCH_PREVERIFIER_INFORMATION_BOUNDARY_MINCUT_20261009_V1.json",
       "git_blob_sha": "a5c283e8e09f82ff10c9daaeea0951a304bd6e6d",
       "note": "NO_HIDDEN_VERIFIER_BUNDLE_REDUCED_TO_ONE_CURRENT_4_0_PROTOCOL_CONTINUITY_FACT_PLUS_PER_MODEL_BRAIN_INTERNAL_AUDIT__ATOM_TRUTH_STILL_OPEN__ZERO_CREDIT"
+    },
+    "cursorbench_wal_three_atom_exact_context_v2": {
+      "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_THREE_ATOM_EVIDENCE_RECONCILIATION_20261009_V2.json",
+      "git_blob_sha": "8c0620d8d00f9297bf6eaa3ac53d06ff9781a760",
+      "prior_local_reconciliation": {
+        "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_THREE_ATOM_EVIDENCE_RECONCILIATION_20261009_V1.json",
+        "git_blob_sha": "ed80bcbd499444a8cfd9a7940f02d2541e7e3bcd"
+      },
+      "committed_evidence_replay": {
+        "path": "canonical/verification/CURSORBENCH_WAL_RECOVERY_THREE_ATOM_BRANCH_REPLAY_20261009_V1.json",
+        "git_blob_sha": "2804b791aca93354e3465f7a01f56a6499996e26"
+      },
+      "note": "LOCAL_TERMINAL_BENCH_WAL_CONTEXT_ONLY__REUSABLE_AUDIT_TEMPLATE__DOES_NOT_DISCHARGE_CURSORBENCH_4_0_PROTOCOL_CONTINUITY_OR_TARGET_PER_MODEL_BOUNDARY"
     }
   },
   "live_truth": {
@@ -1699,7 +1712,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "ACQUIRE_THREE_REAL_SAME_MODEL_TARGET_RELEVANT_EVIDENCE_BUNDLES__SOURCE_COVERAGE__DEPENDENCY_PROVENANCE__PREVERIFIER_INFORMATION_BOUNDARY__DO_NOT_REPEAT_ROUTE_A_STATIC_PUBLIC_SEARCH_ABSENT_SOURCE_DELTA",
+    "cursorbench_next_proof_object": "PARALLEL_MINCUT__OWNER_OR_EQUIVALENT_PROOF_OF_CURRENT_CURSORBENCH_4_0_PRETERMINAL_INFORMATION_BOUNDARY_CONTINUITY__AND_ON_FIRST_REAL_CURSORBENCH_TARGET_CONTEXT_FREEZE_VISIBLE_INPUT_DIGESTS_THEN_REUSE_THE_LOSSLESS_SOURCE_AND_DEPENDENCY_PROVENANCE_AUDIT_TEMPLATE_PLUS_EXACT_BOUNDARY_AUDIT__NO_WAL_TRUTH_TRANSFER__NO_ROUTE_A_STATIC_RESEARCH_WITHOUT_SOURCE_DELTA",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -1835,7 +1848,30 @@
     "cursorbench_preverifier_information_boundary_external_protocol_unknown": "CURRENT_CURSORBENCH_4_0_USES_THE_PUBLISHED_PRODUCTION_HARNESS_PRETERMINAL_INFORMATION_BOUNDARY",
     "cursorbench_preverifier_information_boundary_per_model_internal_audit_required": true,
     "cursorbench_preverifier_information_boundary_per_model_internal_audit_external_benchmark_fact": false,
-    "cursorbench_preverifier_information_boundary_next_owner_fact": "EXPLICIT_CURRENT_CURSORBENCH_4_0_PRODUCTION_HARNESS_OR_PRETERMINAL_INPUT_BOUNDARY_CONTINUITY"
+    "cursorbench_preverifier_information_boundary_next_owner_fact": "EXPLICIT_CURRENT_CURSORBENCH_4_0_PRODUCTION_HARNESS_OR_PRETERMINAL_INPUT_BOUNDARY_CONTINUITY",
+    "cursorbench_wal_exact_context_evidence_verified": true,
+    "cursorbench_wal_exact_context_benchmark": "TERMINAL_BENCH_4_0",
+    "cursorbench_wal_exact_context_task": "wal-recovery-ordering",
+    "cursorbench_wal_exact_context_typed_model_sha256": "642157445ee9cf869fcfc9020c4ab18ed216844f78a2f72119b313eab9b706b6",
+    "cursorbench_wal_exact_context_proved_atom_ids": [
+      "SPEC_ACCEPT_SUPPORTED_TRANSFORM_KINDS_ONLY_V1",
+      "SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1",
+      "SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1",
+      "SPEC_ACCEPT_DEPENDENCY_PROVENANCE_TRUTH_V1"
+    ],
+    "cursorbench_wal_exact_context_open_atom_ids": [
+      "SPEC_ACCEPT_NO_HIDDEN_VERIFIER_ACCESS_V1"
+    ],
+    "cursorbench_wal_exact_context_independent_acceptance_pass": false,
+    "cursorbench_wal_exact_context_failed_requirement_ids": [
+      "R13_NO_TASK_SPECIFIC_CHEATING"
+    ],
+    "cursorbench_wal_exact_context_hidden_cursorbench_task_membership_proved": false,
+    "cursorbench_wal_exact_context_global_cursorbench_atom_truth_delta": 0,
+    "cursorbench_wal_audit_template_reusable_for_future_target_context": true,
+    "cursorbench_wal_satisfies_target_per_model_information_boundary_audit": false,
+    "cursorbench_wal_satisfies_current_4_0_protocol_continuity_fact": false,
+    "cursorbench_target_context_binding_required_before_atom_truth_transfer": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -3345,6 +3381,22 @@
     "atom_truth_delta": 0,
     "external_protocol_unknown_count": 1,
     "route_b_real_bundle_count_unchanged": 3,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_wal_three_atom_mincut_reconciliation_20261009_v2": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_THREE_ATOM_EVIDENCE_RECONCILIATION_20261009_V2.json",
+      "git_blob_sha": "8c0620d8d00f9297bf6eaa3ac53d06ff9781a760"
+    },
+    "result": "LOCAL_WAL_FOUR_OF_FIVE_ATOM_CONTEXT_VERIFIED__MINCUT_REUSABLE_INTERNAL_AUDIT_PATTERN_ESTABLISHED__CURRENT_4_0_PROTOCOL_CONTINUITY_AND_TARGET_PER_MODEL_BOUNDARY_STILL_OPEN",
+    "local_proved_atom_count": 4,
+    "local_open_atom_count": 1,
+    "current_4_0_protocol_continuity_fact_delta": 0,
+    "target_per_model_boundary_audit_delta": 0,
+    "global_cursorbench_atom_truth_delta": 0,
+    "global_cursorbench_remaining_external_membership_atom_count": 4,
+    "global_cursorbench_remaining_real_evidence_bundle_count": 3,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
