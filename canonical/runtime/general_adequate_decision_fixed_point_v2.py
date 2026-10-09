@@ -21,7 +21,7 @@ from typing import Any, Callable, Mapping
 from canonical.runtime.general_adequate_decision_controller_v1 import (
     run as run_controller,
 )
-from canonical.runtime import r2_direct_end_to_end_adequacy_v19 as direct_adequacy
+from canonical.runtime import r2_direct_end_to_end_adequacy_v20 as direct_adequacy
 from canonical.runtime.r2_existing_policy_adequacy_repair_v1 import (
     repair as repair_existing_adequacy,
 )
@@ -104,6 +104,29 @@ def _direct_semantic_open_hint(
         ),
         "query_relative_effect_semantics_finite": direct_preflight.get(
             "query_relative_effect_semantics_finite"
+        ),
+        "behavioral_world_count": direct_preflight.get(
+            "behavioral_world_count"
+        ),
+        "behavioral_outcome_signatures": deepcopy(
+            direct_preflight.get("behavioral_outcome_signatures") or []
+        ),
+        "minimum_behavioral_discriminator_variables": deepcopy(
+            direct_preflight.get("minimum_behavioral_discriminator_variables") or []
+        ),
+        "top_value_surviving_effect_ids": deepcopy(
+            direct_preflight.get("top_value_surviving_effect_ids") or []
+        ),
+        "ignored_top_fields": deepcopy(
+            direct_preflight.get("ignored_top_fields") or []
+        ),
+        "next_behavioral_obligations": deepcopy(
+            direct_preflight.get("next_behavioral_obligations") or []
+        ),
+        "behavioral_world_universe_complete_relative_to_v5_abstraction": (
+            direct_preflight.get(
+                "behavioral_world_universe_complete_relative_to_v5_abstraction"
+            )
         ),
         "semantic_truth_authority": False,
         "execution_authority": False,
