@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_TYPED_ACCEPTANCE_VALIDATION_CASE_SELECTION_V4",
+  "date": "2026-10-09",
+  "status": "FIRST_SOURCE_FAILURE_BUNDLE_PROVED__SELECT_NEXT_CLEAN_VALIDATION_CASE_WITH_COARSE_AGENT_VISIBLE_WORKSPACE_DEPENDENCY_BOUNDARY__ZERO_CREDIT",
+  "predecessor": {
+    "path": "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_SPENT_VALIDATION_CASE_SELECTION_CORRECTION_20261009_V3.json",
+    "git_blob_sha": "2743e68817b87012b9a31bf14a2d4a2938ca4567"
+  },
+  "prior_case_effect": {
+    "layout_source_failure_bundle": "PROVED",
+    "layout_dependency_provenance": "FALSIFIED_BY_UNDECLARED_BUILDER_DEPENDENCIES",
+    "layout_preverifier_boundary": "UNPROVED_NO_HISTORICAL_AUTHORIZATION"
+  },
+  "new_dependency_design_rule": {
+    "builder_boundary": "input:agent_visible_runtime_workspace",
+    "meaning": "ALL_FILES_PACKAGES_EXECUTABLES_AND_RUNTIME_STATE_AVAILABLE_TO_THE_AGENT_BEFORE_VERIFIER_DISCLOSURE_UNDER_THE_TASK_RUNTIME_CONTRACT",
+    "why": "A_COARSE_AUTHENTICATED_BOUNDARY_IS_COMPLETE_UNDER_ADDITIONAL_AGENT_VISIBLE_DEPENDENCIES_AND_AVOIDS_FALSE_OMISSION_FROM_LIBRARY_BY_LIBRARY_ENUMERATION",
+    "hidden_verifier_or_solution_bytes_included": false
+  },
+  "selected_case": {
+    "task_family": "nextjs",
+    "session_branch": "bridge/session-mini-swe-nextjs-final-20260930-v1",
+    "selection_basis": "UNINSPECTED_CASE_FAMILY_FROM_PREVIOUS_SESSION_BRANCH_INVENTORY__NO_TASK_INSTRUCTION_OR_VERIFIER_OUTCOME_READ_IN_THIS_SUCCESSOR_CONTEXT",
+    "task_instruction_read_before_selection": false,
+    "task_toml_read_before_selection": false,
+    "session_commands_or_observations_read_before_selection": false,
+    "final_verifier_or_reward_read_before_selection": false
+  },
+  "validation_episode_protocol": [
+    "READ_SESSION_METADATA_ONLY_TO_BIND_TASK_ID_AND_BENCHMARK_COMMIT",
+    "READ_AGENT_VISIBLE_INSTRUCTION_ONLY",
+    "FREEZE_LOSSLESS_SOURCE_CONTRACT",
+    "FREEZE_TYPED_ACCEPTANCE_MODEL",
+    "FREEZE_COARSE_AGENT_VISIBLE_WORKSPACE_DEPENDENCY_PROJECTION",
+    "FREEZE_EXPLICIT_VALIDATION_AUTHORIZATION",
+    "ONLY_THEN_READ_TASK_TOML_SESSION_TRACE_OR_HIDDEN_VERIFIER",
+    "POST_FREEZE_INFORMATION_MAY_FALSIFY_BUT_NOT_PATCH_AND_RECOUNT_THE_SAME_MODEL"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
